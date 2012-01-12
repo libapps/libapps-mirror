@@ -1,0 +1,33 @@
+--- config.h	2011-09-30 12:54:13.953678000 +0400
++++ config.h	2011-09-30 13:27:19.448627000 +0400
+@@ -364,7 +364,7 @@
+ /* #undef HAVE_FMT_SCALED */
+
+ /* Define to 1 if you have the `freeaddrinfo' function. */
++/* #define HAVE_FREEADDRINFO 1 */
+-#define HAVE_FREEADDRINFO 1
+
+ /* Define to 1 if the system has the type `fsblkcnt_t'. */
+ #define HAVE_FSBLKCNT_T 1
+@@ -379,10 +379,10 @@
+ #define HAVE_FUTIMES 1
+
+ /* Define to 1 if you have the `gai_strerror' function. */
++/* #define HAVE_GAI_STRERROR 1 */
+-#define HAVE_GAI_STRERROR 1
+
+ /* Define to 1 if you have the `getaddrinfo' function. */
++/* #define HAVE_GETADDRINFO 1 */
+-#define HAVE_GETADDRINFO 1
+
+ /* Define to 1 if you have the `getaudit' function. */
+ /* #undef HAVE_GETAUDIT */
+@@ -406,7 +406,7 @@
+ /* #undef HAVE_GETLUID */
+
+ /* Define to 1 if you have the `getnameinfo' function. */
++/* #define HAVE_GETNAMEINFO 1 */
+-#define HAVE_GETNAMEINFO 1
+
+ /* Define to 1 if you have the `getopt' function. */
+ #define HAVE_GETOPT 1

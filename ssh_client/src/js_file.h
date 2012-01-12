@@ -1,0 +1,92 @@
+// Copyright (c) 2011 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef JS_FILE_H
+#define JS_FILE_H
+
+#include <queue>
+#include <vector>
+
+#include "ppapi/cpp/completion_callback.h"
+
+#include "file_system.h"
+#include "pthread_helpers.h"
+
+class JsFile : public FileStream,
+               public InputInterface {
+ public:
+  JsFile(int fd, int oflag, OutputInterface* out);
+  virtual ~JsFile();
+
+  int fd() { return fd_; }
+  int oflag() { return oflag_; }
+  bool is_block() { return !(oflag_ & O_NONBLOCK); }
+  bool is_open() { return is_open_; }
+
+  virtual void OnOpen(bool success);
+  virtual void OnRead(const char* buf, size_t size);
+  virtual void OnClose();
+
+  virtual void addref();
+  virtual void release();
+
+  virtual void close();
+  virtual int read(char* buf, size_t count, size_t* nread);
+  virtual int write(const char* buf, size_t count, size_t* nwrote);
+  virtual int seek(nacl_abi_off_t offset, int whence,
+                   nacl_abi_off_t* new_offset);
+  virtual int fstat(nacl_abi_stat* out);
+  virtual FileStream* dup(int fd);
+  virtual int getdents(dirent* buf, size_t count, size_t* nread);
+
+  virtual int isatty();
+  virtual int fcntl(int cmd,  va_list ap);
+  virtual int ioctl(int request,  va_list ap);
+
+  virtual bool is_read_ready();
+  virtual bool is_write_ready();
+  virtual bool is_exception();
+
+ private:
+  void sendtask();
+
+  void Read(int32_t result, size_t size);
+  void Write(int32_t result);
+  void Close(int32_t result);
+
+  int ref_;
+  int fd_;
+  int oflag_;
+  OutputInterface* out_;
+  pp::CompletionCallbackFactory<JsFile, ThreadSafeRefCount> factory_;
+  std::deque<char> in_buf_;
+  std::vector<char> out_buf_;
+  bool out_task_sent_;
+  bool is_open_;
+
+  DISALLOW_COPY_AND_ASSIGN(JsFile);
+};
+
+class JsFileHandler : public PathHandler {
+ public:
+  explicit JsFileHandler(OutputInterface* out);
+  virtual ~JsFileHandler();
+
+  virtual void addref();
+  virtual void release();
+
+  void Open(int32_t result, JsFile* stream, const char* pathname);
+
+  virtual FileStream* open(int fd, const char* pathname, int oflag);
+  virtual int stat(const char* pathname, nacl_abi_stat* out);
+
+ private:
+  int ref_;
+  pp::CompletionCallbackFactory<JsFileHandler, ThreadSafeRefCount> factory_;
+  OutputInterface* out_;
+
+  DISALLOW_COPY_AND_ASSIGN(JsFileHandler);
+};
+
+#endif  // JS_FILE_H

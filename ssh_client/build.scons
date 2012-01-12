@@ -1,0 +1,94 @@
+#! -*- python -*-
+#
+# Copyright (c) 2011 The Native Client Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import make_nacl_env
+import nacl_utils
+import os
+
+AddOption('--build_type',
+          dest='build_type',
+          nargs=1, type='string',
+          action='store',
+          default='release',
+          help='Build type: debug or release')
+
+is_debug = GetOption('build_type') == 'debug'
+
+nacl_env = make_nacl_env.NaClEnvironment(
+  use_c_plus_plus_libs=True,
+  nacl_platform='.',
+  toolchain_variant='glibc',
+  toolchain_arch='x86',
+)
+
+sources = [
+    'src/dev_null.cc',
+    'src/dev_random.cc',
+    'src/dev_tty.cc',
+    'src/file_system.cc',
+    'src/js_file.cc',
+    'src/pepper_file.cc',
+    'src/ssh_plugin.cc',
+    'src/tcp_socket.cc',
+    'src/syscalls.cc',
+
+    'output/jsoncpp-src-0.5.0/src/lib_json/json_reader.cpp',
+    'output/jsoncpp-src-0.5.0/src/lib_json/json_value.cpp',
+    'output/jsoncpp-src-0.5.0/src/lib_json/json_writer.cpp',
+]
+
+nacl_env.Append(CPPPATH = [
+    'include',
+    'output/jsoncpp-src-0.5.0/include',
+])
+
+nacl_env.Append(LIBS = [
+    'util',
+    'crypto',
+    'z',
+    'resolv',
+    'dl',
+    'nsl',
+])
+
+nacl_env.Append(LIBPATH = [
+    'output',
+])
+
+if is_debug:
+  nacl_env.Append(CCFLAGS = [ '-DDEBUG' ])
+else:
+  nacl_env.Append(CCFLAGS = [ '-DNDEBUG' ])
+
+nacl_env32 = nacl_env.Clone()
+nacl_env32.Prepend(LIBS = [
+    'openssh32',
+    'ssh32',
+    'openbsd-compat32',
+])
+nacl_utils.MakeNaClModuleEnvironment(
+    nacl_env32,
+    sources,
+    module_name='output/ssh_client',
+    arch_spec=nacl_utils.ARCH_SPECS['x86-32'],
+    is_debug=is_debug,
+    build_dir_prefix='output/',
+)
+
+nacl_env64 = nacl_env.Clone()
+nacl_env64.Prepend(LIBS = [
+    'openssh64',
+    'ssh64',
+    'openbsd-compat64',
+])
+nacl_utils.MakeNaClModuleEnvironment(
+    nacl_env64,
+    sources,
+    module_name='output/ssh_client',
+    arch_spec=nacl_utils.ARCH_SPECS['x86-64'],
+    is_debug=is_debug,
+    build_dir_prefix='output/',
+)
