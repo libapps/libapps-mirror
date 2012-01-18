@@ -1,45 +1,34 @@
 #!/bin/bash
 set -x
 
-if [[! -d $NACL_SDK_ROOT ]]
-then
+if [[ ($NACL_SDK_ROOT == "") || !(-d $NACL_SDK_ROOT) ]]; then
   echo "NACL_SDK_ROOT is not set or doesn't exists!"
   exit 1
 fi
 
-if [[! -d $NACL_PORTS ]]
-then
+if [[ ($NACL_PORTS == "") || !(-d $NACL_PORTS) ]]; then
   echo "NACL_PORTS is not set or doesn't exists!"
   exit 1
 fi
 
 pushd $NACL_PORTS/src
 export NACL_GLIBC=1
-NACL_PACKAGES_BITSIZE=32 make openssl zlib || exit 1
-NACL_PACKAGES_BITSIZE=64 make openssl zlib || exit 1
+NACL_PACKAGES_BITSIZE=32 make openssl zlib jsoncpp || exit 1
+NACL_PACKAGES_BITSIZE=64 make openssl zlib jsoncpp || exit 1
 popd
 
 mkdir output
 pushd output
-if [[ ! -f libopenssh32.a ]]
-then
+if [[ ! -f libopenssh32.a ]]; then
   NACL_PACKAGES_BITSIZE=32 ../nacl-openssh-5.9p1.sh || exit 1
 fi
 
-if [[ ! -f libopenssh64.a ]]
-then
+if [[ ! -f libopenssh64.a ]]; then
   NACL_PACKAGES_BITSIZE=64 ../nacl-openssh-5.9p1.sh || exit 1
 fi
+popd
 
-if [[ ! -f jsoncpp-src-0.5.0.tar.gz ]]
-then
-  wget http://citylan.dl.sourceforge.net/project/jsoncpp/jsoncpp/0.5.0/jsoncpp-src-0.5.0.tar.gz -O jsoncpp-src-0.5.0.tar.gz || exit 1
-  tar xvzf jsoncpp-src-0.5.0.tar.gz
-fi
-pushd
-
-if [[ $1 = "--debug" ]]
-then
+if [[ $1 == "--debug" ]]; then
   BUILD_ARGS="--build_type=debug"
   BUILD_SUFFIX="_dbg"
 else
@@ -64,13 +53,11 @@ cp -f ssh_client_x86_64${BUILD_SUFFIX}.nexe hterm/plugin/ssh_client_x86_64.nexe 
 LIBS="runnable-ld.so libppapi_cpp.so libppapi_cpp.so libstdc++.so.6 \
       libgcc_s.so.1 libpthread.so.* libresolv.so.* libdl.so.* libnsl.so.* \
       libm.so.* libc.so.*"
-for i in $LIBS
-do
+for i in $LIBS; do
   cp -f $NACL_SDK_ROOT/toolchain/linux_x86/x86_64-nacl/lib32/$i hterm/plugin/lib32/
   cp -f $NACL_SDK_ROOT/toolchain/linux_x86/x86_64-nacl/lib64/$i hterm/plugin/lib64/
 done
 
-if [[ ! -f ../ssh_client.pem ]]
-then
+if [[ -f ../ssh_client.pem ]]; then
   /opt/google/chrome/chrome --pack-extension=hterm --pack-extension-key=../ssh_client.pem
 fi

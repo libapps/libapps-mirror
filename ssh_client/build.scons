@@ -34,15 +34,10 @@ sources = [
     'src/ssh_plugin.cc',
     'src/tcp_socket.cc',
     'src/syscalls.cc',
-
-    'output/jsoncpp-src-0.5.0/src/lib_json/json_reader.cpp',
-    'output/jsoncpp-src-0.5.0/src/lib_json/json_value.cpp',
-    'output/jsoncpp-src-0.5.0/src/lib_json/json_writer.cpp',
 ]
 
 nacl_env.Append(CPPPATH = [
-    'include',
-    'output/jsoncpp-src-0.5.0/include',
+    'include'
 ])
 
 nacl_env.Append(LIBS = [
@@ -52,6 +47,7 @@ nacl_env.Append(LIBS = [
     'resolv',
     'dl',
     'nsl',
+    'jsoncpp'
 ])
 
 nacl_env.Append(LIBPATH = [
