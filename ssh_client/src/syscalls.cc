@@ -1,8 +1,6 @@
-/*
- * Copyright (c) 2011 The Native Client Authors. All rights reserved.
- * Use of this source code is governed by a BSD-style license that can be
- * found in the LICENSE file.
- */
+// Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 #include <netdb.h>
 #include <pthread.h>
 #include <pwd.h>
@@ -233,7 +231,7 @@ int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen) {
 
 int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact) {
   LOG("sigaction: %d\n", signum);
-  return -1;
+  return FileSystem::GetFileSystem()->sigaction(signum, act, oldact);
 }
 
 int kill(pid_t pid, int sig) {

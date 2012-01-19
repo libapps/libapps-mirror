@@ -1,14 +1,30 @@
 #!/bin/bash
 set -x
+cd "$(dirname "$0")"
+mkdir output
 
 if [[ ($NACL_SDK_ROOT == "") || !(-d $NACL_SDK_ROOT) ]]; then
-  echo "NACL_SDK_ROOT is not set or doesn't exists!"
-  exit 1
+  pushd output
+  if [[ !(-f naclsdk_linux.tgz) || !(-d naclsdk) ]]; then
+    rm -rf naclsdk_linux.tgz nacl_sdk && mkdir naclsdk
+    wget --no-check-certificate https://commondatastorage.googleapis.com/nativeclient-mirror/nacl/nacl_sdk/17.0.963.40/naclsdk_linux.tgz || exit 1
+    tar xvzf naclsdk_linux.tgz -C naclsdk || exit 1
+  fi
+  export NACL_SDK_ROOT=$PWD/naclsdk
+  popd
 fi
 
 if [[ ($NACL_PORTS == "") || !(-d $NACL_PORTS) ]]; then
-  echo "NACL_PORTS is not set or doesn't exists!"
-  exit 1
+  pushd output
+  if [[ !(-d naclports/src) ]]; then
+    rm -rf naclports && mkdir naclports
+    cd naclports
+    gclient config http://naclports.googlecode.com/svn/trunk/src || exit 1
+    gclient sync --jobs=2 || exit 1
+    cd ..
+  fi
+  export NACL_PORTS=$PWD/naclports
+  popd
 fi
 
 pushd $NACL_PORTS/src
@@ -17,13 +33,12 @@ NACL_PACKAGES_BITSIZE=32 make openssl zlib jsoncpp || exit 1
 NACL_PACKAGES_BITSIZE=64 make openssl zlib jsoncpp || exit 1
 popd
 
-mkdir output
 pushd output
-if [[ ! -f libopenssh32.a ]]; then
+if [[ !(-f libopenssh32.a) ]]; then
   NACL_PACKAGES_BITSIZE=32 ../nacl-openssh-5.9p1.sh || exit 1
 fi
 
-if [[ ! -f libopenssh64.a ]]; then
+if [[ !(-f libopenssh64.a) ]]; then
   NACL_PACKAGES_BITSIZE=64 ../nacl-openssh-5.9p1.sh || exit 1
 fi
 popd
@@ -40,7 +55,7 @@ fi
 cd output
 mkdir -p hterm/plugin
 cp ../ssh_client.nmf hterm/plugin
-cp -R -f ../../hterm/{js,css,html,_locales,manifest.json} ./hterm
+cp -R -f ../../hterm/{css,html,images,js,_locales,manifest.json} ./hterm
 mkdir hterm/plugin/lib32
 mkdir hterm/plugin/lib64
 
@@ -58,6 +73,6 @@ for i in $LIBS; do
   cp -f $NACL_SDK_ROOT/toolchain/linux_x86/x86_64-nacl/lib64/$i hterm/plugin/lib64/
 done
 
-if [[ -f ../ssh_client.pem ]]; then
+if [[ -f../ssh_client.pem ]]; then
   /opt/google/chrome/chrome --pack-extension=hterm --pack-extension-key=../ssh_client.pem
 fi

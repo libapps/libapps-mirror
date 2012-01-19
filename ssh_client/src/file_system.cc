@@ -1,4 +1,4 @@
-// Copyright (c) 2011 The Chromium Authors. All rights reserved.
+// Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -6,6 +6,7 @@
 
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <signal.h>
 #include <string.h>
 #include <sys/socket.h>
 #include <sys/time.h>
@@ -31,7 +32,9 @@ FileSystem::FileSystem(pp::Instance* instance, OutputInterface* out)
       ppfs_(NULL),
       fs_initialized_(false),
       factory_(this),
-      first_unused_addr_(kFirstAddr) {
+      first_unused_addr_(kFirstAddr),
+      col_(80), row_(24),
+      is_resize_(false) {
   assert(!file_system_);
   file_system_ = this;
 
@@ -56,14 +59,18 @@ FileSystem::FileSystem(pp::Instance* instance, OutputInterface* out)
 
   AddPathHandler("/dev/null", new DevNullHandler());
   AddPathHandler("/dev/tty", new DevTtyHandler(stdin, stdout));
-  nacl_irt_random random;
-  if (nacl_interface_query(NACL_IRT_RANDOM_v0_1, &random, sizeof(random))) {
-    AddPathHandler("/dev/random",
-                   new DevRandomHandler(random.get_random_bytes));
-  } else {
-    LOG("Can't get " NACL_IRT_RANDOM_v0_1 " interface\n");
+
+  // NACL_IRT_RANDOM_v0_1 is available starting from M18. For testing purpose
+  // is JS path for all browsers.
+//  nacl_irt_random random;
+//  if (nacl_interface_query(NACL_IRT_RANDOM_v0_1, &random, sizeof(random))) {
+//    AddPathHandler("/dev/random",
+//                   new DevRandomHandler(random.get_random_bytes));
+//  } else {
+    // LOG("Can't get " NACL_IRT_RANDOM_v0_1 " interface\n");
     AddPathHandler("/dev/random", new JsFileHandler(out));
-  }
+//  }
+
   // Add localhost 127.0.0.1
   AddHostAddress("localhost", 0x7F000001);
 
@@ -340,6 +347,14 @@ int FileSystem::select(int nfds, fd_set* readfds, fd_set* writefds,
     } else {
       cond_.wait(mutex_);
     }
+    if (is_resize_) {
+      is_resize_ = false;
+      if (handler_sigwinch_ != SIG_IGN &&
+          handler_sigwinch_ != SIG_DFL &&
+          handler_sigwinch_ != SIG_ERR) {
+        handler_sigwinch_(SIGWINCH);
+      }
+    }
   }
 
   int nread = IsReady(nfds, readfds, &FileStream::is_read_ready, true);
@@ -425,6 +440,20 @@ int FileSystem::mkdir(const char* pathname, mode_t mode) {
   return (result == PP_OK) ? 0 : -1;
 }
 
+int FileSystem::sigaction(int signum,
+                          const struct sigaction *act,
+                          struct sigaction *oldact) {
+  if (signum == SIGWINCH) {
+    if (act)
+      handler_sigwinch_ = act->sa_handler;
+    if (oldact)
+      oldact->sa_handler = handler_sigwinch_;
+    return 0;
+  } else {
+    return -1;
+  }
+}
+
 void FileSystem::MakeDirectory(int32_t result, const char* pathname,
                                int32_t* pres) {
   Mutex::Lock lock(mutex_);
@@ -445,4 +474,20 @@ void FileSystem::OnMakeDirectory(int32_t result, pp::FileRef* file_ref,
   delete file_ref;
   *pres = result;
   cond_.broadcast();
+}
+
+void FileSystem::SetTerminalSize(unsigned short col, unsigned short row) {
+  Mutex::Lock lock(mutex_);
+  col_ = col;
+  row_ = row;
+  is_resize_ = true;
+  cond_.broadcast();
+}
+
+bool FileSystem::GetTerminalSize(unsigned short* col, unsigned short* row) {
+  Mutex::Lock lock(mutex_);
+  *col = col_;
+  *row = row_;
+  is_resize_ = false;
+  return true;
 }

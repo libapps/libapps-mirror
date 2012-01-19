@@ -1,4 +1,4 @@
-// // // Copyright (c) 2011 The Chromium Authors. All rights reserved.
+// Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -23,6 +23,7 @@ const char kStartSessionMethodId[] = "startSession";
 const char kOnOpenFileMethodId[] = "onOpenFile";
 const char kOnReadMethodId[] = "onRead";
 const char kOnCloseMethodId[] = "onClose";
+const char kOnResizeMethodId[] = "onResize";
 
 // Known startSession attributes.
 const char kUsernameAttr[] = "username";
@@ -81,6 +82,8 @@ void SshPluginInstance::Invoke(const std::string& function,
     OnRead(args);
   } else if (function == kOnCloseMethodId) {
     OnClose(args);
+  } else if (function == kOnResizeMethodId) {
+    OnResize(args);
   }
 }
 
@@ -165,19 +168,6 @@ bool SshPluginInstance::Close(int fd) {
   return true;
 }
 
-bool SshPluginInstance::GetTerminalSize(unsigned short* row,
-                                        unsigned short* col) {
-  if (!session_args_.isMember(kTerminalWidthAttr) ||
-      !session_args_[kTerminalWidthAttr].isNumeric() ||
-      !session_args_.isMember(kTerminalHeightAttr) ||
-      !session_args_[kTerminalHeightAttr].isNumeric()) {
-    return false;
-  }
-  *row = session_args_[kTerminalHeightAttr].asInt();
-  *col = session_args_[kTerminalWidthAttr].asInt();
-  return true;
-}
-
 void SshPluginInstance::SessionThreadImpl() {
   // Call renamed ssh main.
   std::string arg1 = session_args_[kUsernameAttr].asString() + "@" +
@@ -204,9 +194,16 @@ void* SshPluginInstance::SessionThread(void* arg) {
 }
 
 void SshPluginInstance::StartSession(const Json::Value& args) {
-  if (args[(size_t)0].isObject() && !openssh_thread_) {
+  if (args.size() == 1 && args[(size_t)0].isObject() && !openssh_thread_) {
     session_args_ = args[(size_t)0];
-    if (pthread_create(&openssh_thread_, NULL,
+  if (session_args_.isMember(kTerminalWidthAttr) &&
+      session_args_[kTerminalWidthAttr].isNumeric() &&
+      session_args_.isMember(kTerminalHeightAttr) &&
+      session_args_[kTerminalHeightAttr].isNumeric()) {
+    file_system_.SetTerminalSize(session_args_[kTerminalWidthAttr].asInt(),
+                                 session_args_[kTerminalHeightAttr].asInt());
+  }
+  if (pthread_create(&openssh_thread_, NULL,
                        &SshPluginInstance::SessionThread, this)) {
       SessionClosedImpl(0, -1);
     }
@@ -260,6 +257,11 @@ void SshPluginInstance::OnClose(const Json::Value& args) {
   } else {
     PrintLogImpl(0, "onClose: for unknown file descriptor\n");
   }
+}
+
+void SshPluginInstance::OnResize(const Json::Value& args) {
+  file_system_.SetTerminalSize(args[(size_t)0].asInt(),
+                               args[(size_t)1].asInt());
 }
 
 //------------------------------------------------------------------------------

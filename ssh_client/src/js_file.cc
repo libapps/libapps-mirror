@@ -1,4 +1,4 @@
-// Copyright (c) 2011 The Chromium Authors. All rights reserved.
+// Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -11,7 +11,6 @@
 
 #include "file_system.h"
 #include "proxy_stream.h"
-#include "ssh_plugin.h"
 
 JsFileHandler::JsFileHandler(OutputInterface* out)
     : ref_(1), factory_(this), out_(out) {
@@ -115,18 +114,15 @@ void JsFile::close() {
 
 int JsFile::read(char* buf, size_t count, size_t* nread) {
   if (is_open() && in_buf_.empty()) {
-    LOG("JsFile::read: %d - send read\n", fd_);
     pp::Module::Get()->core()->CallOnMainThread(0,
         factory_.NewRequiredCallback(&JsFile::Read, count));
   }
 
   FileSystem* sys = FileSystem::GetFileSystem();
   if (is_block()) {
-    LOG("JsFile::read: %d - wait data\n", fd_);
     while(is_open() && in_buf_.empty())
       sys->cond().wait(sys->mutex());
   }
-  LOG("JsFile::read: %d - wait done\n", fd_);
 
   *nread = 0;
   while (*nread < count) {
@@ -137,7 +133,6 @@ int JsFile::read(char* buf, size_t count, size_t* nread) {
     in_buf_.pop_front();
   }
 
-  LOG("JsFile::read: %d - done %d\n", fd_, *nread);
   if (*nread == 0) {
     if (!is_open()) {
       return 0;
@@ -196,9 +191,9 @@ int JsFile::fcntl(int cmd, va_list ap) {
 
 int JsFile::ioctl(int request, va_list ap) {
   if (request == TIOCGWINSZ) {
+    FileSystem* sys = FileSystem::GetFileSystem();
     winsize* argp = va_arg(ap, winsize*);
-    if (SshPluginInstance::GetInstance()->GetTerminalSize(
-            &argp->ws_row, &argp->ws_col)) {
+    if (sys->GetTerminalSize(&argp->ws_col, &argp->ws_row)) {
       argp->ws_xpixel = 0;
       argp->ws_ypixel = 0;
       return 0;

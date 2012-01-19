@@ -1,4 +1,4 @@
-// Copyright (c) 2011 The Chromium Authors. All rights reserved.
+// Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -39,8 +39,6 @@ class SshPluginInstance : public pp::Instance,
   virtual bool Read(int fd, size_t size);
   virtual bool Close(int fd);
 
-  bool GetTerminalSize(unsigned short* row, unsigned short* col);
-
  private:
   typedef std::map<int, InputInterface*> InputStreams;
 
@@ -48,6 +46,7 @@ class SshPluginInstance : public pp::Instance,
   void OnOpenFile(const Json::Value& args);
   void OnRead(const Json::Value& args);
   void OnClose(const Json::Value& args);
+  void OnResize(const Json::Value& args);
 
   void SessionThreadImpl();
   static void* SessionThread(void* arg);

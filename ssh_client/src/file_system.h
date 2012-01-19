@@ -1,4 +1,4 @@
-// Copyright (c) 2011 The Chromium Authors. All rights reserved.
+// Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -39,8 +39,11 @@ class FileSystem {
   Cond& cond() { return cond_; }
   Mutex& mutex() { return mutex_; }
   pp::Instance* instance() { return instance_; }
-  pp::FileSystem* ppfs() { return ppfs_; }
 
+  void SetTerminalSize(unsigned short col, unsigned short row);
+  bool GetTerminalSize(unsigned short* col, unsigned short* row);
+
+  // Syscall implementations.
   int open(const char* pathname, int oflag, mode_t cmode, int* newfd);
   int close(int fd);
   int read(int fd, char* buf, size_t count, size_t* nread);
@@ -64,6 +67,10 @@ class FileSystem {
   int connect(int fd, unsigned long addr, unsigned short port);
 
   int mkdir(const char* pathname, mode_t mode);
+
+  int sigaction(int signum,
+                const struct sigaction *act,
+                struct sigaction *oldact);
 
  private:
   typedef std::map<int, FileStream*> FileStreamMap;
@@ -108,6 +115,11 @@ class FileSystem {
   HostMap hosts_;
   AddressMap addrs_;
   unsigned long first_unused_addr_;
+
+  unsigned short col_;
+  unsigned short row_;
+  bool is_resize_;
+  void (*handler_sigwinch_)(int);
 
   DISALLOW_COPY_AND_ASSIGN(FileSystem);
 };
