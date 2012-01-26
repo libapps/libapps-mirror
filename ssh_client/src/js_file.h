@@ -1,4 +1,4 @@
-// Copyright (c) 2011 The Chromium Authors. All rights reserved.
+// Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -19,6 +19,8 @@ class JsFile : public FileStream,
   JsFile(int fd, int oflag, OutputInterface* out);
   virtual ~JsFile();
 
+  static void InitTerminal();
+
   int fd() { return fd_; }
   int oflag() { return oflag_; }
   bool is_block() { return !(oflag_ & O_NONBLOCK); }
@@ -30,23 +32,20 @@ class JsFile : public FileStream,
 
   virtual void addref();
   virtual void release();
+  virtual FileStream* dup(int fd);
 
   virtual void close();
   virtual int read(char* buf, size_t count, size_t* nread);
   virtual int write(const char* buf, size_t count, size_t* nwrote);
-  virtual int seek(nacl_abi_off_t offset, int whence,
-                   nacl_abi_off_t* new_offset);
   virtual int fstat(nacl_abi_stat* out);
-  virtual FileStream* dup(int fd);
-  virtual int getdents(dirent* buf, size_t count, size_t* nread);
 
   virtual int isatty();
+  virtual int tcgetattr(termios* termios_p);
+  virtual int tcsetattr(int optional_actions, const termios* termios_p);
   virtual int fcntl(int cmd,  va_list ap);
   virtual int ioctl(int request,  va_list ap);
 
   virtual bool is_read_ready();
-  virtual bool is_write_ready();
-  virtual bool is_exception();
 
  private:
   void sendtask();
@@ -64,6 +63,7 @@ class JsFile : public FileStream,
   std::vector<char> out_buf_;
   bool out_task_sent_;
   bool is_open_;
+  static termios tio_;
 
   DISALLOW_COPY_AND_ASSIGN(JsFile);
 };

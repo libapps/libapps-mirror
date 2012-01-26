@@ -289,14 +289,13 @@ int shutdown(int s, int how) {
 
 int tcgetattr(int fd, struct termios *termios_p) {
   LOG("tcgetattr: %d\n", fd);
-  memset(termios_p, 0, sizeof(*termios_p));
-  return 0;
+  return FileSystem::GetFileSystem()->tcgetattr(fd, termios_p);
 }
 
 int tcsetattr(int fd, int optional_actions, const struct termios *termios_p) {
   LOG("tcsetattr: %d\n", fd);
-  errno = ENOSYS;
-  return -1;
+  return FileSystem::GetFileSystem()->tcsetattr(
+      fd, optional_actions, termios_p);
 }
 
 char* getenv(const char* name) {

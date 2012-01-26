@@ -1,4 +1,4 @@
-// Copyright (c) 2011 The Chromium Authors. All rights reserved.
+// Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -29,6 +29,10 @@ void TCPSocket::addref() {
 void TCPSocket::release() {
   if (!--ref_)
     delete this;
+}
+
+FileStream* TCPSocket::dup(int fd) {
+  return NULL;
 }
 
 bool TCPSocket::connect(const char* host, uint16_t port) {
@@ -118,27 +122,6 @@ int TCPSocket::write(const char* buf, size_t count, size_t* nwrote) {
   }
 }
 
-int TCPSocket::seek(nacl_abi_off_t offset, int whence,
-                  nacl_abi_off_t* new_offset) {
-  return ESPIPE;
-}
-
-int TCPSocket::fstat(nacl_abi_stat* out) {
-  return EACCES;
-}
-
-FileStream* TCPSocket::dup(int fd) {
-  return NULL;
-}
-
-int TCPSocket::getdents(dirent* buf, size_t count, size_t* nread) {
-  return ENOTDIR;
-}
-
-int TCPSocket::isatty() {
-  return false;
-}
-
 int TCPSocket::fcntl(int cmd, va_list ap) {
   if (cmd == F_GETFL) {
     return oflag_;
@@ -153,10 +136,6 @@ int TCPSocket::fcntl(int cmd, va_list ap) {
   } else {
     return -1;
   }
-}
-
-int TCPSocket::ioctl(int request, va_list ap) {
-  return EINVAL;
 }
 
 bool TCPSocket::is_read_ready() {

@@ -1,4 +1,4 @@
-// Copyright (c) 2011 The Chromium Authors. All rights reserved.
+// Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -65,6 +65,11 @@ void PepperFile::addref() {
 void PepperFile::release() {
   if (!--ref_)
     delete this;
+}
+
+FileStream* PepperFile::dup(int fd) {
+  assert(0);
+  return NULL;
 }
 
 bool PepperFile::open(const char* pathname) {
@@ -189,19 +194,6 @@ int PepperFile::fstat(nacl_abi_stat* out) {
   return 0;
 }
 
-FileStream* PepperFile::dup(int fd) {
-  assert(0);
-  return NULL;
-}
-
-int PepperFile::getdents(dirent* buf, size_t count, size_t* nread) {
-  return ENOTDIR;
-}
-
-int PepperFile::isatty() {
-  return false;
-}
-
 int PepperFile::fcntl(int cmd, va_list ap) {
   if (cmd == F_GETFL) {
     return oflag_;
@@ -217,10 +209,6 @@ int PepperFile::fcntl(int cmd, va_list ap) {
   } else {
     return -1;
   }
-}
-
-int PepperFile::ioctl(int request, va_list ap) {
-  return EINVAL;
 }
 
 bool PepperFile::is_read_ready() {

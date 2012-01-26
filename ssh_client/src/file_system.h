@@ -57,6 +57,8 @@ class FileSystem {
   int getdents(int fd, dirent*, size_t count, size_t* nread);
 
   int isatty(int fd);
+  int tcgetattr(int fd, struct termios* termios_p);
+  int tcsetattr(int fd, int optional_actions, const struct termios *termios_p);
   int fcntl(int fd, int cmd, va_list ap);
   int ioctl(int fd, int request, va_list ap);
   int select(int nfds, fd_set *readfds, fd_set *writefds,

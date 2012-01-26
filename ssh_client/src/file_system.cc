@@ -47,6 +47,7 @@ FileSystem::FileSystem(pp::Instance* instance, OutputInterface* out)
     delete fs;
   }
 
+  JsFile::InitTerminal();
   JsFile* stdin = new JsFile(0, O_RDONLY, out);
   AddFileStream(0, stdin);
   out->OpenFile(0, NULL, O_WRONLY, stdin);
@@ -276,6 +277,29 @@ int FileSystem::isatty(int fd) {
   } else {
     errno = EBADF;
     return 0;
+  }
+}
+
+int FileSystem::tcgetattr(int fd, struct termios* termios_p) {
+  Mutex::Lock lock(mutex_);
+  FileStream* stream = GetStream(fd);
+  if (stream && stream != kBadFileStream) {
+    return stream->tcgetattr(termios_p);
+  } else {
+    errno = EBADF;
+    return -1;
+  }
+}
+
+int FileSystem::tcsetattr(int fd, int optional_actions,
+                          const termios* termios_p) {
+  Mutex::Lock lock(mutex_);
+  FileStream* stream = GetStream(fd);
+  if (stream && stream != kBadFileStream) {
+    return stream->tcsetattr(optional_actions, termios_p);
+  } else {
+    errno = EBADF;
+    return -1;
   }
 }
 

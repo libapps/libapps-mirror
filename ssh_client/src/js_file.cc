@@ -12,6 +12,8 @@
 #include "file_system.h"
 #include "proxy_stream.h"
 
+termios JsFile::tio_ = {};
+
 JsFileHandler::JsFileHandler(OutputInterface* out)
     : ref_(1), factory_(this), out_(out) {
 }
@@ -79,6 +81,9 @@ void JsFile::OnRead(const char* buf, size_t size) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
   in_buf_.insert(in_buf_.end(), buf, buf + size);
+  // TODO(dpolukhin): implement simple line editing.
+  if (isatty() && (tio_.c_lflag & ECHO))
+    ::write(1, buf, size);
   sys->cond().broadcast();
 }
 
@@ -96,6 +101,10 @@ void JsFile::addref() {
 void JsFile::release() {
   if (!--ref_)
     delete this;
+}
+
+FileStream* JsFile::dup(int fd) {
+  return new ProxyStream(fd, oflag_, this);
 }
 
 void JsFile::close() {
@@ -152,11 +161,6 @@ int JsFile::write(const char* buf, size_t count, size_t* nwrote) {
   return 0;
 }
 
-int JsFile::seek(nacl_abi_off_t offset, int whence,
-                  nacl_abi_off_t* new_offset) {
-  return ESPIPE;
-}
-
 int JsFile::fstat(nacl_abi_stat* out) {
   memset(out, 0, sizeof(nacl_abi_stat));
   // openssl uses st_ino and st_dev to distinguish random sources and doesn't
@@ -166,16 +170,47 @@ int JsFile::fstat(nacl_abi_stat* out) {
   return 0;
 }
 
-FileStream* JsFile::dup(int fd) {
-  return new ProxyStream(fd, oflag_, this);
-}
-
-int JsFile::getdents(dirent* buf, size_t count, size_t* nread) {
-  return ENOTDIR;
-}
-
 int JsFile::isatty() {
-  return fd_ == 0;
+  return fd_ < 3;
+}
+
+void JsFile::InitTerminal() {
+  // Some sane values that produce good result.
+  tio_.c_iflag = ICRNL | IXON | IXOFF | IUTF8;
+  tio_.c_oflag = OPOST | ONLCR;
+  tio_.c_cflag = CREAD | 077;
+  tio_.c_lflag =
+      ISIG | ICANON | ECHO | ECHOE | ECHOK | ECHOCTL | ECHOKE | IEXTEN;
+  tio_.c_cc[VINTR] = 3;
+  tio_.c_cc[VQUIT] = 28;
+  tio_.c_cc[VERASE] = 127;
+  tio_.c_cc[VKILL] = 21;
+  tio_.c_cc[VEOF] = 4;
+  tio_.c_cc[VTIME] = 0;
+  tio_.c_cc[VMIN] = 1;
+  tio_.c_cc[VSWTC] = 0;
+  tio_.c_cc[VSTART] = 17;
+  tio_.c_cc[VSTOP] = 19;
+  tio_.c_cc[VSUSP] = 26;
+  tio_.c_cc[VEOL] = 0;
+  tio_.c_cc[VREPRINT] = 18;
+  tio_.c_cc[VDISCARD] = 15;
+  tio_.c_cc[VWERASE] = 23;
+  tio_.c_cc[VLNEXT] = 22;
+  tio_.c_cc[VEOL2] = 0;
+}
+
+int JsFile::tcgetattr(termios* termios_p) {
+  *termios_p = tio_;
+  return 0;
+}
+
+int JsFile::tcsetattr(int optional_actions, const termios* termios_p) {
+  LOG("JsFile::tcsetattr: %d iflag=%x oflag=%x cflag=%x lflag=%x\n",
+      fd_, termios_p->c_iflag, termios_p->c_oflag, termios_p->c_cflag,
+      termios_p->c_lflag);
+  tio_ = *termios_p;
+  return 0;
 }
 
 int JsFile::fcntl(int cmd, va_list ap) {
@@ -206,14 +241,6 @@ bool JsFile::is_read_ready() {
   return fd_ != 0 || !in_buf_.empty();
 }
 
-bool JsFile::is_write_ready() {
-  return true;
-}
-
-bool JsFile::is_exception() {
-  return false;
-}
-
 void JsFile::sendtask() {
   if (!out_task_sent_) {
     pp::Module::Get()->core()->CallOnMainThread(
@@ -230,10 +257,19 @@ void JsFile::Write(int32_t result) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
   out_task_sent_ = false;
+  if (isatty() && (tio_.c_lflag & ICANON)) {
+    LOG("JsFile::Write: translate '\\n' to '\\r\\n' for %d\n", fd_);
+    // It could be performance issue to do this conversion in-place but
+    // fortunately it's used only for first few lines like password prompt.
+    for (size_t i = 0; i < out_buf_.size(); i++)
+      if (out_buf_[i] == '\n')
+        out_buf_.insert(out_buf_.begin() + i++, '\r');
+  }
   if (out_->Write(fd_, &out_buf_[0], out_buf_.size())) {
     out_buf_.clear();
     sys->cond().broadcast();
   } else {
+    assert(0);
     sendtask();
   }
 }

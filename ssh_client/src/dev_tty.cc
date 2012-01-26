@@ -1,4 +1,4 @@
-// Copyright (c) 2011 The Chromium Authors. All rights reserved.
+// Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -60,6 +60,10 @@ void DevTty::release() {
     delete this;
 }
 
+FileStream* DevTty::dup(int fd) {
+  return new DevTty(fd, oflag_, stdin_, stdout_);
+}
+
 void DevTty::close() {
   fd_ = 0;
 }
@@ -72,26 +76,16 @@ int DevTty::write(const char* buf, size_t count, size_t* nwrote) {
   return stdout_->write(buf, count, nwrote);
 }
 
-int DevTty::seek(nacl_abi_off_t offset, int whence,
-                  nacl_abi_off_t* new_offset) {
-  return ESPIPE;
-}
-
-int DevTty::fstat(nacl_abi_stat* out) {
-  memset(out, 0, sizeof(nacl_abi_stat));
-  return 0;
-}
-
-FileStream* DevTty::dup(int fd) {
-  return new DevTty(fd, oflag_, stdin_, stdout_);
-}
-
-int DevTty::getdents(dirent* buf, size_t count, size_t* nread) {
-  return ENOTDIR;
-}
-
 int DevTty::isatty() {
   return true;
+}
+
+int DevTty::tcgetattr(termios* termios_p) {
+  return stdin_->tcgetattr(termios_p);
+}
+
+int DevTty::tcsetattr(int optional_actions, const termios* termios_p) {
+  return stdin_->tcsetattr(optional_actions, termios_p);
 }
 
 int DevTty::fcntl(int cmd, va_list ap) {
@@ -106,18 +100,10 @@ int DevTty::fcntl(int cmd, va_list ap) {
   }
 }
 
-int DevTty::ioctl(int request, va_list ap) {
-  return EINVAL;
-}
-
 bool DevTty::is_read_ready() {
   return stdin_->is_read_ready();
 }
 
 bool DevTty::is_write_ready() {
   return stdout_->is_write_ready();
-}
-
-bool DevTty::is_exception() {
-  return false;
 }

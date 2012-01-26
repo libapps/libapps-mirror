@@ -1,4 +1,4 @@
-// Copyright (c) 2011 The Chromium Authors. All rights reserved.
+// Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -56,6 +56,10 @@ void DevRandom::release() {
     delete this;
 }
 
+FileStream* DevRandom::dup(int fd) {
+  return new DevRandom(fd, oflag_, get_random_bytes_);
+}
+
 void DevRandom::close() {
   fd_ = 0;
 }
@@ -68,11 +72,6 @@ int DevRandom::write(const char* buf, size_t count, size_t* nwrote) {
   return EPERM;
 }
 
-int DevRandom::seek(nacl_abi_off_t offset, int whence,
-                  nacl_abi_off_t* new_offset) {
-  return ESPIPE;
-}
-
 int DevRandom::fstat(nacl_abi_stat* out) {
   memset(out, 0, sizeof(nacl_abi_stat));
   // openssl uses st_ino and st_dev to distinguish random sources and doesn't
@@ -80,18 +79,6 @@ int DevRandom::fstat(nacl_abi_stat* out) {
   out->nacl_abi_st_ino = fd_;
   out->nacl_abi_st_dev = fd_;
   return 0;
-}
-
-FileStream* DevRandom::dup(int fd) {
-  return new DevRandom(fd, oflag_, get_random_bytes_);
-}
-
-int DevRandom::getdents(dirent* buf, size_t count, size_t* nread) {
-  return ENOTDIR;
-}
-
-int DevRandom::isatty() {
-  return false;
 }
 
 int DevRandom::fcntl(int cmd, va_list ap) {
@@ -103,20 +90,4 @@ int DevRandom::fcntl(int cmd, va_list ap) {
   } else {
     return -1;
   }
-}
-
-int DevRandom::ioctl(int request, va_list ap) {
-  return EINVAL;
-}
-
-bool DevRandom::is_read_ready() {
-  return true;
-}
-
-bool DevRandom::is_write_ready() {
-  return false;
-}
-
-bool DevRandom::is_exception() {
-  return false;
 }

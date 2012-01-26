@@ -1,4 +1,4 @@
-// Copyright (c) 2011 The Chromium Authors. All rights reserved.
+// Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -25,6 +25,9 @@ class ProxyStream : public FileStream {
     if (!--ref_)
       delete this;
   }
+  virtual FileStream* dup(int fd) {
+    return new ProxyStream(fd, oflag_, orig_);
+  }
 
   virtual void close() {
   }
@@ -42,15 +45,18 @@ class ProxyStream : public FileStream {
   virtual int fstat(nacl_abi_stat* out) {
     return orig_->fstat(out);
   }
-  virtual FileStream* dup(int fd) {
-    return new ProxyStream(fd, oflag_, orig_);
-  }
   virtual int getdents(dirent* buf, size_t count, size_t* nread) {
     return orig_->getdents(buf, count, nread);
   }
 
   virtual int isatty() {
     return orig_->isatty();
+  }
+  virtual int tcgetattr(termios* termios_p) {
+    return orig_->tcgetattr(termios_p);
+  }
+  virtual int tcsetattr(int optional_actions, const termios* termios_p) {
+    return orig_->tcsetattr(optional_actions, termios_p);
   }
   virtual int fcntl(int cmd,  va_list ap) {
     return orig_->fcntl(cmd, ap);
