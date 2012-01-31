@@ -43,6 +43,9 @@ class FileSystem {
   void SetTerminalSize(unsigned short col, unsigned short row);
   bool GetTerminalSize(unsigned short* col, unsigned short* row);
 
+  // Switch TCP sockets between JS and Pepper implementations.
+  void UseJsSocket(bool use_js);
+
   // Syscall implementations.
   int open(const char* pathname, int oflag, mode_t cmode, int* newfd);
   int close(int fd);
@@ -111,12 +114,14 @@ class FileSystem {
   PathHandlerMap paths_;
   FileStreamMap streams_;
   pp::FileSystem* ppfs_;
+  PathHandler* ppfs_path_handler_;
   bool fs_initialized_;
   pp::CompletionCallbackFactory<FileSystem, ThreadSafeRefCount> factory_;
 
   HostMap hosts_;
   AddressMap addrs_;
   unsigned long first_unused_addr_;
+  bool use_js_socket_;
 
   unsigned short col_;
   unsigned short row_;

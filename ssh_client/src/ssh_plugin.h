@@ -35,6 +35,8 @@ class SshPluginInstance : public pp::Instance,
   // Implements OutputInterface.
   virtual bool OpenFile(int fd, const char* name, int mode,
                         InputInterface* stream);
+  virtual bool OpenSocket(int fd, const char* host, uint16_t port,
+                          InputInterface* stream);
   virtual bool Write(int fd, const char* data, size_t size);
   virtual bool Read(int fd, size_t size);
   virtual bool Close(int fd);
@@ -43,7 +45,7 @@ class SshPluginInstance : public pp::Instance,
   typedef std::map<int, InputInterface*> InputStreams;
 
   void StartSession(const Json::Value& args);
-  void OnOpenFile(const Json::Value& args);
+  void OnOpen(const Json::Value& args);
   void OnRead(const Json::Value& args);
   void OnClose(const Json::Value& args);
   void OnResize(const Json::Value& args);

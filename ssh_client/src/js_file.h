@@ -47,7 +47,7 @@ class JsFile : public FileStream,
 
   virtual bool is_read_ready();
 
- private:
+ protected:
   void sendtask();
 
   void Read(int32_t result, size_t size);
@@ -87,6 +87,22 @@ class JsFileHandler : public PathHandler {
   OutputInterface* out_;
 
   DISALLOW_COPY_AND_ASSIGN(JsFileHandler);
+};
+
+class JsSocket : public JsFile {
+ public:
+  JsSocket(int fd, int oflag, OutputInterface* out);
+  virtual ~JsSocket();
+
+  bool connect(const char* host, uint16_t port);
+
+  bool is_read_ready();
+
+ private:
+  void Connect(int32_t result, const char* host, uint16_t port);
+
+  pp::CompletionCallbackFactory<JsSocket, ThreadSafeRefCount> factory_;
+  DISALLOW_COPY_AND_ASSIGN(JsSocket);
 };
 
 #endif  // JS_FILE_H

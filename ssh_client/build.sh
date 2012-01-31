@@ -1,4 +1,8 @@
 #!/bin/bash
+# Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
 set -x
 cd "$(dirname "$0")"
 mkdir output
@@ -54,8 +58,9 @@ fi
 
 cd output
 mkdir -p hterm/plugin
-cp ../ssh_client.nmf hterm/plugin
-cp -R -f ../../hterm/{css,html,images,js,_locales,manifest.json} ./hterm
+cp ../ssh_client.nmf hterm/plugin || exit 1
+cp -R -f ../../hterm/{css,html,images,js,_locales,ssh.html} ./hterm || exit 1
+cp -R -f ../../hterm/manifest-dev.json ./hterm/manifest.json || exit 1
 mkdir hterm/plugin/lib32
 mkdir hterm/plugin/lib64
 

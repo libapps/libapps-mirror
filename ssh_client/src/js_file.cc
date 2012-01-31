@@ -285,3 +285,35 @@ void JsFile::Write(int32_t result) {
 void JsFile::Close(int32_t result) {
   out_->Close(fd_);
 }
+
+//------------------------------------------------------------------------------
+
+JsSocket::JsSocket(int fd, int oflag, OutputInterface* out)
+  : JsFile(fd, oflag, out), factory_(this) {
+}
+
+JsSocket::~JsSocket() {
+}
+
+bool JsSocket::connect(const char* host, uint16_t port) {
+  pp::Module::Get()->core()->CallOnMainThread(0,
+      factory_.NewRequiredCallback(&JsSocket::Connect, host, port));
+  FileSystem* sys = FileSystem::GetFileSystem();
+  while(!is_open())
+    sys->cond().wait(sys->mutex());
+
+  if (fd() == -1)
+    return false;
+
+  return true;
+}
+
+bool JsSocket::is_read_ready() {
+  return !in_buf_.empty();
+}
+
+void JsSocket::Connect(int32_t result, const char* host, uint16_t port) {
+  FileSystem* sys = FileSystem::GetFileSystem();
+  Mutex::Lock lock(sys->mutex());
+  out_->OpenSocket(fd_, host, port, this);
+}

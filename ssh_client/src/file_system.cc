@@ -33,9 +33,11 @@ FileSystem::FileSystem(pp::Instance* instance, OutputInterface* out)
     : instance_(instance),
       output_(out),
       ppfs_(NULL),
+      ppfs_path_handler_(NULL),
       fs_initialized_(false),
       factory_(this),
       first_unused_addr_(kFirstAddr),
+      use_js_socket_(false),
       col_(80), row_(24),
       is_resize_(false) {
   assert(!file_system_);
@@ -88,6 +90,8 @@ FileSystem::~FileSystem() {
        ++it) {
     it->second->release();
   }
+  if (ppfs_path_handler_)
+    ppfs_path_handler_->release();
   delete ppfs_;
   file_system_ = NULL;
 }
@@ -95,7 +99,7 @@ FileSystem::~FileSystem() {
 void FileSystem::OnOpen(int32_t result, pp::FileSystem* fs) {
   if (result == PP_OK) {
     ppfs_ = fs;
-    AddPathHandler("/.ssh/known_hosts", new PepperFileHandler(fs));
+    ppfs_path_handler_ = new PepperFileHandler(fs);
   } else {
     delete fs;
   }
@@ -143,13 +147,14 @@ int FileSystem::open(const char* pathname, int oflag, mode_t cmode,
                      int* newfd) {
   Mutex::Lock lock(mutex_);
   PathHandlerMap::iterator it = paths_.find(pathname);
-  if (it == paths_.end())
+  PathHandler* handler = (it != paths_.end()) ? it->second : ppfs_path_handler_;
+  if (!handler)
     return ENOENT;
 
   int fd = GetFirstUnusedDescriptor();
   // mark descriptor as used
   AddFileStream(fd, NULL);
-  FileStream* stream = it->second->open(fd, pathname, oflag);
+  FileStream* stream = handler->open(fd, pathname, oflag);
   if (!stream) {
     RemoveFileStream(fd);
     return EACCES;
@@ -458,14 +463,26 @@ int FileSystem::connect(int fd, unsigned long addr, unsigned short port) {
     host = inet_ntoa(iaddr);
   }
 
-  TCPSocket* socket = new TCPSocket(fd, O_RDWR);
-  if (!socket->connect(host.c_str(), port)) {
-    errno = ECONNREFUSED;
-    socket->release();
-    return -1;
+  FileStream* stream = NULL;
+  if (use_js_socket_) {
+    JsSocket* socket = new JsSocket(fd, O_RDWR, output_);
+    if (!socket->connect(host.c_str(), port)) {
+      errno = ECONNREFUSED;
+      socket->release();
+      return -1;
+    }
+    stream = socket;
+  } else {
+    TCPSocket* socket = new TCPSocket(fd, O_RDWR);
+    if (!socket->connect(host.c_str(), port)) {
+      errno = ECONNREFUSED;
+      socket->release();
+      return -1;
+    }
+    stream = socket;
   }
 
-  AddFileStream(fd, socket);
+  AddFileStream(fd, stream);
   return 0;
 }
 
@@ -538,4 +555,8 @@ bool FileSystem::GetTerminalSize(unsigned short* col, unsigned short* row) {
   *row = row_;
   is_resize_ = false;
   return true;
+}
+
+void FileSystem::UseJsSocket(bool use_js) {
+  use_js_socket_ = use_js;
 }

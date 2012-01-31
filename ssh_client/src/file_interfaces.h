@@ -98,6 +98,8 @@ class OutputInterface {
 
   virtual bool OpenFile(int fd, const char* name, int mode,
                         InputInterface* stream) = 0;
+  virtual bool OpenSocket(int fd, const char* host, uint16_t port,
+                          InputInterface* stream) = 0;
   virtual bool Write(int fd, const char* data, size_t size) = 0;
   virtual bool Read(int fd, size_t size) = 0;
   virtual bool Close(int fd) = 0;
