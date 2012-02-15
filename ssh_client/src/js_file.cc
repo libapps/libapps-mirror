@@ -82,8 +82,15 @@ void JsFile::OnRead(const char* buf, size_t size) {
   Mutex::Lock lock(sys->mutex());
   in_buf_.insert(in_buf_.end(), buf, buf + size);
   // TODO(dpolukhin): implement simple line editing.
-  if (isatty() && (tio_.c_lflag & ECHO))
-    ::write(1, buf, size);
+  if (isatty() && (tio_.c_lflag & ECHO)) {
+    for (size_t i = 0; i < size; i++) {
+      if ((tio_.c_iflag & ICRNL) && buf[i] == '\r') {
+        ::write(1, "\n", 1);
+      } else {
+        ::write(1, &buf[i], 1);
+      }
+    }
+  }
   sys->cond().broadcast();
 }
 
@@ -206,9 +213,6 @@ int JsFile::tcgetattr(termios* termios_p) {
 }
 
 int JsFile::tcsetattr(int optional_actions, const termios* termios_p) {
-  LOG("JsFile::tcsetattr: %d iflag=%x oflag=%x cflag=%x lflag=%x\n",
-      fd_, termios_p->c_iflag, termios_p->c_oflag, termios_p->c_cflag,
-      termios_p->c_lflag);
   tio_ = *termios_p;
   return 0;
 }
@@ -238,6 +242,9 @@ int JsFile::ioctl(int request, va_list ap) {
 }
 
 bool JsFile::is_read_ready() {
+  // HACK: fd_ != 0 is required for reading /dev/random in openssl, it expects
+  // that /dev/random has some data ready to read. If there is no data,
+  // it won't call read at all.
   return fd_ != 0 || !in_buf_.empty();
 }
 
@@ -258,12 +265,13 @@ void JsFile::Write(int32_t result) {
   Mutex::Lock lock(sys->mutex());
   out_task_sent_ = false;
   if (isatty() && (tio_.c_lflag & ICANON)) {
-    LOG("JsFile::Write: translate '\\n' to '\\r\\n' for %d\n", fd_);
     // It could be performance issue to do this conversion in-place but
     // fortunately it's used only for first few lines like password prompt.
-    for (size_t i = 0; i < out_buf_.size(); i++)
-      if (out_buf_[i] == '\n')
+    for (size_t i = 0; i < out_buf_.size(); i++) {
+      if (out_buf_[i] == '\n') {
         out_buf_.insert(out_buf_.begin() + i++, '\r');
+      }
+    }
   }
   if (out_->Write(fd_, &out_buf_[0], out_buf_.size())) {
     out_buf_.clear();

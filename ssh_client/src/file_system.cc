@@ -23,6 +23,9 @@
 
 extern "C" void DoWrapSysCalls();
 
+static const int64_t kMicrosecondsPerSecond = 1000 * 1000;
+static const int64_t kNanosecondsPerMicrosecond = 1000;
+
 FileStream* const FileSystem::kBadFileStream = (FileStream*)-1;
 FileSystem* FileSystem::file_system_ = NULL;
 
@@ -354,15 +357,33 @@ int FileSystem::select(int nfds, fd_set* readfds, fd_set* writefds,
                        fd_set* exceptfds, struct timeval* timeout) {
   Mutex::Lock lock(mutex_);
 
-  timespec ts;
-  if (timeout)
+  timespec ts_abs;
+  if (timeout) {
+    timespec ts;
     TIMEVAL_TO_TIMESPEC(timeout, &ts);
+    timeval tv_now;
+    gettimeofday(&tv_now, NULL);
+    int64_t current_time_us =
+        tv_now.tv_sec * kMicrosecondsPerSecond + tv_now.tv_usec;
+    int64_t wakeup_time_us =
+        current_time_us +
+        timeout->tv_sec * kMicrosecondsPerSecond + timeout->tv_usec;
+     ts_abs.tv_sec = wakeup_time_us / kMicrosecondsPerSecond;
+     ts_abs.tv_nsec =
+        (wakeup_time_us - ts_abs.tv_sec * kMicrosecondsPerSecond) *
+        kNanosecondsPerMicrosecond;
+  }
 
   while(!(IsReady(nfds, readfds, &FileStream::is_read_ready, false) ||
           IsReady(nfds, writefds, &FileStream::is_write_ready, false) ||
-          IsReady(nfds, exceptfds, &FileStream::is_exception, false))) {
+          IsReady(nfds, exceptfds, &FileStream::is_exception, false) ||
+          is_resize_)) {
     if (timeout) {
-      if (cond_.timedwait(mutex_, &ts)) {
+      if (!timeout->tv_sec && !timeout->tv_usec)
+        break;
+
+      if (cond_.timedwait(mutex_, &ts_abs)) {
+        LOG("select: %d\n", errno);
         if (errno == ETIMEDOUT)
           break;
         else
@@ -371,13 +392,16 @@ int FileSystem::select(int nfds, fd_set* readfds, fd_set* writefds,
     } else {
       cond_.wait(mutex_);
     }
-    if (is_resize_) {
-      is_resize_ = false;
-      if (handler_sigwinch_ != SIG_IGN &&
-          handler_sigwinch_ != SIG_DFL &&
-          handler_sigwinch_ != SIG_ERR) {
-        handler_sigwinch_(SIGWINCH);
-      }
+  }
+
+  if (is_resize_) {
+    is_resize_ = false;
+    if (handler_sigwinch_ != SIG_IGN &&
+        handler_sigwinch_ != SIG_DFL &&
+        handler_sigwinch_ != SIG_ERR) {
+      handler_sigwinch_(SIGWINCH);
+      errno = EINTR;
+      return -1;
     }
   }
 

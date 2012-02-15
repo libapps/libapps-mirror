@@ -59,16 +59,9 @@ int TCPSocket::read(char* buf, size_t count, size_t* nread) {
     return EIO;
 
   FileSystem* sys = FileSystem::GetFileSystem();
-  if (is_block() && in_buf_.empty()) {
-    int32_t result = PP_OK_COMPLETIONPENDING;
-    pp::Module::Get()->core()->CallOnMainThread(0,
-        factory_.NewRequiredCallback(&TCPSocket::Read, &result));
-    while(result == PP_OK_COMPLETIONPENDING)
+  if (is_block()) {
+    while (in_buf_.empty() && is_open())
       sys->cond().wait(sys->mutex());
-    if (result < 0) {
-      *nread = -1;
-      return EIO;
-    }
   }
 
   *nread = 0;
@@ -126,12 +119,7 @@ int TCPSocket::fcntl(int cmd, va_list ap) {
   if (cmd == F_GETFL) {
     return oflag_;
   } else if (cmd == F_SETFL) {
-    int oflag = va_arg(ap, long);
-    if (is_block() && (oflag & O_NONBLOCK)) {
-      pp::Module::Get()->core()->CallOnMainThread(0,
-          factory_.NewRequiredCallback(&TCPSocket::Read, (int32_t*)NULL));
-    }
-    oflag_ = oflag;
+    oflag_ = va_arg(ap, long);
     return 0;
   } else {
     return -1;
@@ -166,8 +154,7 @@ void TCPSocket::OnConnect(int32_t result, int32_t* pres) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
   if (result == PP_OK) {
-    if (!is_block())
-      Read(PP_OK, NULL);
+    Read(PP_OK, NULL);
   } else {
     delete socket_;
     socket_ = NULL;
@@ -196,8 +183,7 @@ void TCPSocket::OnRead(int32_t result, int32_t* pres) {
   Mutex::Lock lock(sys->mutex());
   if (result > 0) {
     in_buf_.insert(in_buf_.end(), &read_buf_[0], &read_buf_[0]+result);
-    if (!is_block())
-      Read(PP_OK, NULL);
+    Read(PP_OK, NULL);
   } else {
     delete socket_;
     socket_ = NULL;
