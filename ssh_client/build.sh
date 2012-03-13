@@ -59,7 +59,7 @@ fi
 cd output
 mkdir -p hterm/plugin
 cp ../ssh_client.nmf hterm/plugin || exit 1
-cp -R -f ../../hterm/{css,html,images,js,_locales,ssh.html} ./hterm || exit 1
+cp -R -f ../../hterm/{audio,css,html,images,js,_locales} ./hterm || exit 1
 cp -R -f ../../hterm/manifest-dev.json ./hterm/manifest.json || exit 1
 mkdir hterm/plugin/lib32
 mkdir hterm/plugin/lib64

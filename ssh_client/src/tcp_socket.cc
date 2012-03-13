@@ -46,12 +46,14 @@ bool TCPSocket::connect(const char* host, uint16_t port) {
 }
 
 void TCPSocket::close() {
-  int32_t result = PP_OK_COMPLETIONPENDING;
-  pp::Module::Get()->core()->CallOnMainThread(0,
-      factory_.NewRequiredCallback(&TCPSocket::Close, &result));
-  FileSystem* sys = FileSystem::GetFileSystem();
-  while(result == PP_OK_COMPLETIONPENDING)
-    sys->cond().wait(sys->mutex());
+  if (socket_) {
+    int32_t result = PP_OK_COMPLETIONPENDING;
+    pp::Module::Get()->core()->CallOnMainThread(0,
+        factory_.NewRequiredCallback(&TCPSocket::Close, &result));
+    FileSystem* sys = FileSystem::GetFileSystem();
+    while(result == PP_OK_COMPLETIONPENDING)
+      sys->cond().wait(sys->mutex());
+  }
 }
 
 int TCPSocket::read(char* buf, size_t count, size_t* nread) {
@@ -127,11 +129,11 @@ int TCPSocket::fcntl(int cmd, va_list ap) {
 }
 
 bool TCPSocket::is_read_ready() {
-  return !in_buf_.empty();
+  return !is_open() || !in_buf_.empty();
 }
 
 bool TCPSocket::is_write_ready() {
-  return out_buf_.size() < kBufSize;
+  return !is_open() || out_buf_.size() < kBufSize;
 }
 
 bool TCPSocket::is_exception() {
@@ -208,6 +210,7 @@ void TCPSocket::Write(int32_t result, int32_t* pres) {
   result = socket_->Write(&write_buf_[0], write_buf_.size(),
       factory_.NewRequiredCallback(&TCPSocket::OnWrite, pres));
   if (result != PP_OK_COMPLETIONPENDING) {
+    LOG("TCPSocket::Write: failed %d %d %d\n", fd_, result, write_buf_.size());
     delete socket_;
     socket_ = NULL;
     if (pres)
@@ -220,9 +223,14 @@ void TCPSocket::Write(int32_t result, int32_t* pres) {
 void TCPSocket::OnWrite(int32_t result, int32_t* pres) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
-  if ((size_t)result != write_buf_.size()) {
+  if (result < 0 || (size_t)result > write_buf_.size()) {
+    // Write error.
+    LOG("TCPSocket::OnWrite: close socket %d\n", fd_);
     delete socket_;
     socket_ = NULL;
+  } else if ((size_t)result < write_buf_.size()) {
+    // Partial write. Insert remaining bytes at the beginning of out_buf_.
+    out_buf_.insert(out_buf_.begin(), &write_buf_[result], &*write_buf_.end());
   }
   if (pres)
     *pres = result;

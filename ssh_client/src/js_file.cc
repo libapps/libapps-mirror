@@ -115,17 +115,19 @@ FileStream* JsFile::dup(int fd) {
 }
 
 void JsFile::close() {
-  assert(fd_ >= 3);
-  pp::Module::Get()->core()->CallOnMainThread(0,
-      factory_.NewRequiredCallback(&JsFile::Close));
+  if (is_open()) {
+    assert(fd_ >= 3);
+    pp::Module::Get()->core()->CallOnMainThread(0,
+        factory_.NewRequiredCallback(&JsFile::Close));
 
-  FileSystem* sys = FileSystem::GetFileSystem();
-  while(out_task_sent_)
-    sys->cond().wait(sys->mutex());
-  while(is_open_)
-    sys->cond().wait(sys->mutex());
+    FileSystem* sys = FileSystem::GetFileSystem();
+    while(out_task_sent_)
+      sys->cond().wait(sys->mutex());
+    while(is_open_)
+      sys->cond().wait(sys->mutex());
 
-  fd_ = -1;
+    fd_ = -1;
+  }
 }
 
 int JsFile::read(char* buf, size_t count, size_t* nread) {

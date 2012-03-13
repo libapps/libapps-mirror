@@ -272,19 +272,20 @@ int listen(int sockfd, int backlog) {
 
 int setsockopt(int socket, int level, int option_name,
                const void *option_value, socklen_t option_len) {
-  LOG("setsockopt: %d\n", socket);
+  LOG("setsockopt: %d %d %d\n", socket, level, option_name);
   return 0;
 }
 
 int getsockopt(int socket, int level, int option_name,
                void * option_value, socklen_t * option_len) {
-  LOG("getsockopt: %d\n", socket);
-  return -1;
+  LOG("getsockopt: %d %d %d\n", socket, level, option_name);
+  memset(option_value, 0, *option_len);
+  return 0;
 }
 
 int shutdown(int s, int how) {
-  LOG("shutdown: %d\n", s);
-  return -1;
+  LOG("shutdown: %d %d\n", s, how);
+  return FileSystem::GetFileSystem()->shutdown(s, how);
 }
 
 int tcgetattr(int fd, struct termios *termios_p) {

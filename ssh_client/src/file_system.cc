@@ -316,6 +316,9 @@ int FileSystem::fcntl(int fd, int cmd, va_list ap) {
   FileStream* stream = GetStream(fd);
   if (stream && stream != kBadFileStream) {
     return stream->fcntl(cmd, ap);
+  } else if (IsKnowDescriptor(fd)) {
+    // Socket with reserved FD but not allocated yet, for now just ignore.
+    return 0;
   } else {
     errno = EBADF;
     return -1;
@@ -465,6 +468,9 @@ int FileSystem::connect(int fd, unsigned long addr, unsigned short port) {
 
   FileStream* stream = NULL;
   if (use_js_socket_) {
+    // Only first socket will use JS proxy, other sockets are created for
+    // connections made localhost so use Pepper sockets for them.
+    use_js_socket_ = false;
     JsSocket* socket = new JsSocket(fd, O_RDWR, output_);
     if (!socket->connect(host.c_str(), port)) {
       errno = ECONNREFUSED;
@@ -484,6 +490,20 @@ int FileSystem::connect(int fd, unsigned long addr, unsigned short port) {
 
   AddFileStream(fd, stream);
   return 0;
+}
+
+int FileSystem::shutdown(int fd, int how) {
+  Mutex::Lock lock(mutex_);
+  FileStream* stream = GetStream(fd);
+  if (stream && stream != kBadFileStream) {
+    // Actually shutdown should be something more complicated by for now
+    // it works. Method close can be called multiple time.
+    stream->close();
+    return 0;
+  } else {
+    errno = EBADF;
+    return -1;
+  }
 }
 
 int FileSystem::mkdir(const char* pathname, mode_t mode) {

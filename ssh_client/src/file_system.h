@@ -70,6 +70,7 @@ class FileSystem {
   unsigned long gethostbyname(const char* name);
   int socket(int socket_family, int socket_type, int protocol);
   int connect(int fd, unsigned long addr, unsigned short port);
+  int shutdown(int s, int how);
 
   int mkdir(const char* pathname, mode_t mode);
 
