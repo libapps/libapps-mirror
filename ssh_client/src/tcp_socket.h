@@ -25,6 +25,7 @@ class TCPSocket : public FileStream {
   bool is_open() { return socket_ != NULL; }
 
   bool connect(const char* host, uint16_t port);
+  bool accept(PP_Resource resource);
 
   virtual void addref();
   virtual void release();
@@ -53,6 +54,8 @@ class TCPSocket : public FileStream {
   void OnWrite(int32_t result, int32_t* pres);
 
   void Close(int32_t result, int32_t* pres);
+
+  bool Accept(int32_t result, PP_Resource resource, int32_t* pres);
 
   static const size_t kBufSize = 64 * 1024;
 

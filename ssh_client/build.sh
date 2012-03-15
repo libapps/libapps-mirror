@@ -9,12 +9,12 @@ mkdir output
 
 if [[ ($NACL_SDK_ROOT == "") || !(-d $NACL_SDK_ROOT) ]]; then
   pushd output
-  if [[ !(-f naclsdk_linux.tgz) || !(-d naclsdk) ]]; then
-    rm -rf naclsdk_linux.tgz nacl_sdk && mkdir naclsdk
-    wget --no-check-certificate https://commondatastorage.googleapis.com/nativeclient-mirror/nacl/nacl_sdk/17.0.963.40/naclsdk_linux.tgz || exit 1
-    tar xvzf naclsdk_linux.tgz -C naclsdk || exit 1
+  if [[ !(-f naclsdk_linux.bz2) || !(-d naclsdk) ]]; then
+    rm -rf naclsdk_linux.bz2 nacl_sdk && mkdir naclsdk
+    wget --no-check-certificate https://commondatastorage.googleapis.com/nativeclient-mirror/nacl/nacl_sdk/trunk.129818/naclsdk_linux.bz2
+    tar xvjf naclsdk_linux.bz2 -C naclsdk || exit 1
   fi
-  export NACL_SDK_ROOT=$PWD/naclsdk
+  export NACL_SDK_ROOT=$PWD/naclsdk/pepper_20
   popd
 fi
 
@@ -48,13 +48,11 @@ fi
 popd
 
 if [[ $1 == "--debug" ]]; then
-  BUILD_ARGS="--build_type=debug"
-  BUILD_SUFFIX="_dbg"
+  BUILD_ARGS="CXXFLAGS=-g -O0 -DDEBUG"
 else
-  BUILD_ARGS="--build_type=release"
-  BUILD_SUFFIX=""
+  BUILD_ARGS="CXXFLAGS=-g -O2 -DNDEBUG"
 fi
-./scons $BUILD_ARGS || exit 1
+make clean && make -j "$BUILD_ARGS" || exit 1
 
 cd output
 mkdir -p hterm/plugin
@@ -64,18 +62,18 @@ cp -R -f ../../hterm/manifest-dev.json ./hterm/manifest.json || exit 1
 mkdir hterm/plugin/lib32
 mkdir hterm/plugin/lib64
 
-export GLIBC_VERSION=`ls $NACL_SDK_ROOT/toolchain/linux_x86/x86_64-nacl/lib32/libc.so.* | sed s/.*libc.so.//`
+export GLIBC_VERSION=`ls $NACL_SDK_ROOT/toolchain/linux_x86_glibc/x86_64-nacl/lib32/libc.so.* | sed s/.*libc.so.//`
 sed -i s/xxxxxxxx/$GLIBC_VERSION/ hterm/plugin/ssh_client.nmf || exit 1
 
-cp -f ssh_client_x86_32${BUILD_SUFFIX}.nexe hterm/plugin/ssh_client_x86_32.nexe || exit 1
-cp -f ssh_client_x86_64${BUILD_SUFFIX}.nexe hterm/plugin/ssh_client_x86_64.nexe || exit 1
+cp -f ssh_client_x86_32.nexe hterm/plugin/ssh_client_x86_32.nexe || exit 1
+cp -f ssh_client_x86_64.nexe hterm/plugin/ssh_client_x86_64.nexe || exit 1
 
 LIBS="runnable-ld.so libppapi_cpp.so libppapi_cpp.so libstdc++.so.6 \
       libgcc_s.so.1 libpthread.so.* libresolv.so.* libdl.so.* libnsl.so.* \
       libm.so.* libc.so.*"
 for i in $LIBS; do
-  cp -f $NACL_SDK_ROOT/toolchain/linux_x86/x86_64-nacl/lib32/$i hterm/plugin/lib32/
-  cp -f $NACL_SDK_ROOT/toolchain/linux_x86/x86_64-nacl/lib64/$i hterm/plugin/lib64/
+  cp -f $NACL_SDK_ROOT/toolchain/linux_x86_glibc/x86_64-nacl/lib32/$i hterm/plugin/lib32/
+  cp -f $NACL_SDK_ROOT/toolchain/linux_x86_glibc/x86_64-nacl/lib64/$i hterm/plugin/lib64/
 done
 
 if [[ -f../ssh_client.pem ]]; then

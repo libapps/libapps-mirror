@@ -109,7 +109,7 @@ void SshPluginInstance::PrintLogImpl(int32_t result, const std::string& msg) {
 }
 
 void SshPluginInstance::PrintLog(const std::string& msg) {
-  core_->CallOnMainThread(0, factory_.NewRequiredCallback(
+  core_->CallOnMainThread(0, factory_.NewCallback(
       &SshPluginInstance::PrintLogImpl, msg));
 }
 
@@ -120,7 +120,7 @@ void SshPluginInstance::SessionClosedImpl(int32_t result, const int& error) {
 }
 
 void SshPluginInstance::SessionClosed(int error) {
-  core_->CallOnMainThread(0, factory_.NewRequiredCallback(
+  core_->CallOnMainThread(0, factory_.NewCallback(
       &SshPluginInstance::SessionClosedImpl, error));
   openssh_thread_ = NULL;
 }
@@ -162,7 +162,10 @@ bool SshPluginInstance::Write(int fd, const char* data, size_t size) {
                                                           : kMaxWriteSize;
     int res = b64_ntop((const unsigned char*)data + start, chunk_size,
                        &buf[0], buf.size());
-    assert(res >= 0);
+    if (res <= 0) {
+      assert(res > 0);
+      return false;
+    }
     call_args.append(&buf[0]);
     start += chunk_size;
     InvokeJS(kWriteMethodId, call_args);

@@ -8,7 +8,7 @@
 #include <deque>
 #include <vector>
 
-#include "ppapi/cpp/completion_callback.h"
+#include "ppapi/utility/completion_callback_factory.h"
 #include "ppapi/cpp/file_io.h"
 #include "ppapi/cpp/file_system.h"
 

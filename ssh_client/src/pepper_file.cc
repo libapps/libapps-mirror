@@ -75,7 +75,7 @@ FileStream* PepperFile::dup(int fd) {
 bool PepperFile::open(const char* pathname) {
   int32_t result = PP_OK_COMPLETIONPENDING;
   pp::Module::Get()->core()->CallOnMainThread(0,
-      factory_.NewRequiredCallback(&PepperFile::Open, pathname, &result));
+      factory_.NewCallback(&PepperFile::Open, pathname, &result));
   FileSystem* sys = FileSystem::GetFileSystem();
   while(result == PP_OK_COMPLETIONPENDING)
     sys->cond().wait(sys->mutex());
@@ -85,7 +85,7 @@ bool PepperFile::open(const char* pathname) {
 void PepperFile::close() {
   int32_t result = PP_OK_COMPLETIONPENDING;
   pp::Module::Get()->core()->CallOnMainThread(0,
-      factory_.NewRequiredCallback(&PepperFile::Close, &result));
+      factory_.NewCallback(&PepperFile::Close, &result));
   FileSystem* sys = FileSystem::GetFileSystem();
   while(result == PP_OK_COMPLETIONPENDING)
     sys->cond().wait(sys->mutex());
@@ -99,7 +99,7 @@ int PepperFile::read(char* buf, size_t count, size_t* nread) {
   if (is_block() && in_buf_.empty()) {
     int32_t result = PP_OK_COMPLETIONPENDING;
     pp::Module::Get()->core()->CallOnMainThread(0,
-        factory_.NewRequiredCallback(&PepperFile::Read, count, &result));
+        factory_.NewCallback(&PepperFile::Read, count, &result));
     while(result == PP_OK_COMPLETIONPENDING)
       sys->cond().wait(sys->mutex());
     if (result < 0) {
@@ -138,7 +138,7 @@ int PepperFile::write(const char* buf, size_t count, size_t* nwrote) {
   if (is_block()) {
     int32_t result = PP_OK_COMPLETIONPENDING;
     pp::Module::Get()->core()->CallOnMainThread(0,
-        factory_.NewRequiredCallback(&PepperFile::Write, &result));
+        factory_.NewCallback(&PepperFile::Write, &result));
     FileSystem* sys = FileSystem::GetFileSystem();
     while(result == PP_OK_COMPLETIONPENDING)
       sys->cond().wait(sys->mutex());
@@ -153,7 +153,7 @@ int PepperFile::write(const char* buf, size_t count, size_t* nwrote) {
     if (!write_sent_) {
       write_sent_ = true;
       pp::Module::Get()->core()->CallOnMainThread(0,
-        factory_.NewRequiredCallback(&PepperFile::Write, (int32_t*)NULL));
+        factory_.NewCallback(&PepperFile::Write, (int32_t*)NULL));
     }
     *nwrote = count;
     return 0;
@@ -201,7 +201,7 @@ int PepperFile::fcntl(int cmd, va_list ap) {
     int oflag = va_arg(ap, long);
     if (is_block() && (oflag & O_NONBLOCK)) {
       pp::Module::Get()->core()->CallOnMainThread(0,
-          factory_.NewRequiredCallback(&PepperFile::Read,
+          factory_.NewCallback(&PepperFile::Read,
                                        kBufSize, (int32_t*)NULL));
     }
     oflag_ = oflag;
@@ -240,7 +240,7 @@ void PepperFile::Open(int32_t result, const char* pathname, int32_t* pres) {
   if (oflag_ & O_TRUNC)
     open_flags |= PP_FILEOPENFLAG_TRUNCATE;
   *pres = file_io_->Open(file_ref, open_flags,
-      factory_.NewRequiredCallback(&PepperFile::OnOpen, pres));
+      factory_.NewCallback(&PepperFile::OnOpen, pres));
   if (*pres != PP_OK_COMPLETIONPENDING)
     sys->cond().broadcast();
 }
@@ -250,7 +250,7 @@ void PepperFile::OnOpen(int32_t result, int32_t* pres) {
   Mutex::Lock lock(sys->mutex());
   if (result == PP_OK) {
     result = file_io_->Query(&file_info_,
-        factory_.NewRequiredCallback(&PepperFile::OnQuery, pres));
+        factory_.NewCallback(&PepperFile::OnQuery, pres));
     if (result == PP_OK_COMPLETIONPENDING)
       return;
   }
@@ -284,7 +284,7 @@ void PepperFile::Read(int32_t result, size_t count, int32_t* pres) {
   assert(file_io_);
   read_buf_.resize(count);
   result = file_io_->Read(offset_, &read_buf_[0], read_buf_.size(),
-      factory_.NewRequiredCallback(&PepperFile::OnRead, pres));
+      factory_.NewCallback(&PepperFile::OnRead, pres));
   if (result != PP_OK_COMPLETIONPENDING) {
     delete file_io_;
     file_io_ = NULL;
@@ -318,13 +318,13 @@ void PepperFile::Write(int32_t result, int32_t* pres) {
     if (write_buf_.size()) {
       // Previous write operation is in progress.
       pp::Module::Get()->core()->CallOnMainThread(1,
-          factory_.NewRequiredCallback(&PepperFile::Write, &result));
+          factory_.NewCallback(&PepperFile::Write, &result));
       return;
     }
     assert(out_buf_.size());
     write_buf_.swap(out_buf_);
     result = file_io_->Write(offset_, &write_buf_[0], write_buf_.size(),
-        factory_.NewRequiredCallback(&PepperFile::OnWrite, pres));
+        factory_.NewCallback(&PepperFile::OnWrite, pres));
     write_sent_ = false;
   } else {
     result = PP_ERROR_FAILED;

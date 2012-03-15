@@ -19,6 +19,7 @@
 #include "dev_tty.h"
 #include "js_file.h"
 #include "pepper_file.h"
+#include "tcp_server_socket.h"
 #include "tcp_socket.h"
 
 extern "C" void DoWrapSysCalls();
@@ -46,7 +47,7 @@ FileSystem::FileSystem(pp::Instance* instance, OutputInterface* out)
   pp::FileSystem* fs = new pp::FileSystem(instance,
                                           PP_FILESYSTEMTYPE_LOCALPERSISTENT);
   int32_t result = fs->Open(100 * 1024,
-      factory_.NewRequiredCallback(&FileSystem::OnOpen, fs));
+      factory_.NewCallback(&FileSystem::OnOpen, fs));
   if (result != PP_OK_COMPLETIONPENDING) {
     fs_initialized_ = true;
     delete fs;
@@ -391,7 +392,6 @@ int FileSystem::select(int nfds, fd_set* readfds, fd_set* writefds,
         break;
 
       if (cond_.timedwait(mutex_, &ts_abs)) {
-        LOG("select: %d\n", errno);
         if (errno == ETIMEDOUT)
           break;
         else
@@ -506,6 +506,66 @@ int FileSystem::shutdown(int fd, int how) {
   }
 }
 
+int FileSystem::bind(int fd, unsigned long addr, unsigned short port) {
+  Mutex::Lock lock(mutex_);
+  if (streams_.find(fd) == streams_.end()) {
+    errno = EBADF;
+    return -1;
+  }
+
+  std::string host;
+  AddressMap::iterator it = addrs_.find(addr);
+  if (it != addrs_.end()) {
+    host = it->second;
+  } else {
+    in_addr iaddr;
+    iaddr.s_addr = addr;
+    host = inet_ntoa(iaddr);
+  }
+
+  AddFileStream(fd, new TCPServerSocket(fd, 0, host.c_str(), port));
+  return 0;
+}
+
+int FileSystem::listen(int sockfd, int backlog) {
+  Mutex::Lock lock(mutex_);
+  FileStream* stream = GetStream(sockfd);
+  if (stream && stream != kBadFileStream) {
+    if (static_cast<TCPServerSocket*>(stream)->listen(backlog)) {
+      return 0;
+    } else {
+      errno = EACCES;
+      return -1;
+    }
+  } else {
+    errno = EBADF;
+    return -1;
+  }
+}
+
+int FileSystem::accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen) {
+  Mutex::Lock lock(mutex_);
+  FileStream* stream = GetStream(sockfd);
+  if (stream && stream != kBadFileStream) {
+    PP_Resource resource = static_cast<TCPServerSocket*>(stream)->accept();
+    if (resource) {
+      int fd = GetFirstUnusedDescriptor();
+      TCPSocket* socket = new TCPSocket(fd, O_RDWR);
+      if (socket->accept(resource)) {
+        AddFileStream(fd, socket);
+        return fd;
+      } else {
+        socket->release();
+      }
+    }
+    errno = EINVAL;
+    return -1;
+  } else {
+    errno = EBADF;
+    return -1;
+  }
+}
+
 int FileSystem::mkdir(const char* pathname, mode_t mode) {
   Mutex::Lock lock(mutex_);
   while(!fs_initialized_)
@@ -518,7 +578,7 @@ int FileSystem::mkdir(const char* pathname, mode_t mode) {
 
   int32_t result = PP_OK_COMPLETIONPENDING;
   pp::Module::Get()->core()->CallOnMainThread(0,
-      factory_.NewRequiredCallback(&FileSystem::MakeDirectory,
+      factory_.NewCallback(&FileSystem::MakeDirectory,
                                    pathname, &result));
   while(result == PP_OK_COMPLETIONPENDING)
     cond_.wait(mutex_);
@@ -544,7 +604,7 @@ void FileSystem::MakeDirectory(int32_t result, const char* pathname,
   Mutex::Lock lock(mutex_);
   pp::FileRef* file_ref = new pp::FileRef(*ppfs_, pathname);
   result = file_ref->MakeDirectoryIncludingAncestors(
-      factory_.NewRequiredCallback(&FileSystem::OnMakeDirectory,
+      factory_.NewCallback(&FileSystem::OnMakeDirectory,
                                    file_ref, pres));
   if (result != PP_OK_COMPLETIONPENDING) {
     delete file_ref;

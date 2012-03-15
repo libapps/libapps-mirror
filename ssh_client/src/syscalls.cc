@@ -226,7 +226,7 @@ pid_t waitpid(pid_t pid, int *status, int options) {
 
 int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen) {
   LOG("accept: %d\n", sockfd);
-  return -1;
+  return FileSystem::GetFileSystem()->accept(sockfd, addr, addrlen);
 }
 
 int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact) {
@@ -250,8 +250,16 @@ pid_t getpid(void) {
 }
 
 int bind(int sockfd, const struct sockaddr *my_addr, socklen_t addrlen) {
-  LOG("bind: %d\n", sockfd);
-  return -1;
+  struct HostPort {
+    unsigned short port;
+    unsigned short laddr;
+    unsigned short haddr;
+  } __attribute__ ((aligned(1)));
+  HostPort* temp = (HostPort*)&my_addr->sa_data;
+  unsigned short port = ntohs(temp->port);
+  unsigned long addr = temp->laddr | (temp->haddr << 16);
+  LOG("bind: %d %x:%d\n", sockfd, addr, port);
+  return FileSystem::GetFileSystem()->bind(sockfd, addr, port);
 }
 
 int getpeername(int socket, struct sockaddr * address,
@@ -266,7 +274,8 @@ int getsockname(int s, struct sockaddr *name, socklen_t *namelen) {
 }
 
 int listen(int sockfd, int backlog) {
-  LOG("listen: %d\n", sockfd);
+  LOG("listen: %d %d\n", sockfd, backlog);
+  return FileSystem::GetFileSystem()->listen(sockfd, backlog);
   return -1;
 }
 

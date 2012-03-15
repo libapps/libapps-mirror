@@ -18,9 +18,9 @@
 #include <map>
 #include <string>
 
-#include "ppapi/cpp/completion_callback.h"
 #include "ppapi/cpp/file_ref.h"
 #include "ppapi/cpp/file_system.h"
+#include "ppapi/utility/completion_callback_factory.h"
 
 #include "file_interfaces.h"
 #include "pthread_helpers.h"
@@ -69,8 +69,11 @@ class FileSystem {
 
   unsigned long gethostbyname(const char* name);
   int socket(int socket_family, int socket_type, int protocol);
-  int connect(int fd, unsigned long addr, unsigned short port);
-  int shutdown(int s, int how);
+  int connect(int sockfd, unsigned long addr, unsigned short port);
+  int shutdown(int sockfd, int how);
+  int bind(int sockfd, unsigned long addr, unsigned short port);
+  int listen(int sockfd, int backlog);
+  int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
 
   int mkdir(const char* pathname, mode_t mode);
 

@@ -38,7 +38,7 @@ void JsFileHandler::Open(int32_t result, JsFile* stream, const char* pathname) {
 FileStream* JsFileHandler::open(int fd, const char* pathname, int oflag) {
   JsFile* stream = new JsFile(fd, (oflag & ~O_NONBLOCK), out_);
   pp::Module::Get()->core()->CallOnMainThread(0,
-      factory_.NewRequiredCallback(&JsFileHandler::Open, stream, pathname));
+      factory_.NewCallback(&JsFileHandler::Open, stream, pathname));
 
   FileSystem* sys = FileSystem::GetFileSystem();
   while(!stream->is_open())
@@ -118,7 +118,7 @@ void JsFile::close() {
   if (is_open()) {
     assert(fd_ >= 3);
     pp::Module::Get()->core()->CallOnMainThread(0,
-        factory_.NewRequiredCallback(&JsFile::Close));
+        factory_.NewCallback(&JsFile::Close));
 
     FileSystem* sys = FileSystem::GetFileSystem();
     while(out_task_sent_)
@@ -133,7 +133,7 @@ void JsFile::close() {
 int JsFile::read(char* buf, size_t count, size_t* nread) {
   if (is_open() && in_buf_.empty()) {
     pp::Module::Get()->core()->CallOnMainThread(0,
-        factory_.NewRequiredCallback(&JsFile::Read, count));
+        factory_.NewCallback(&JsFile::Read, count));
   }
 
   FileSystem* sys = FileSystem::GetFileSystem();
@@ -253,7 +253,7 @@ bool JsFile::is_read_ready() {
 void JsFile::sendtask() {
   if (!out_task_sent_) {
     pp::Module::Get()->core()->CallOnMainThread(
-        0, factory_.NewRequiredCallback(&JsFile::Write));
+        0, factory_.NewCallback(&JsFile::Write));
     out_task_sent_ = true;
   }
 }
@@ -299,7 +299,7 @@ JsSocket::~JsSocket() {
 
 bool JsSocket::connect(const char* host, uint16_t port) {
   pp::Module::Get()->core()->CallOnMainThread(0,
-      factory_.NewRequiredCallback(&JsSocket::Connect, host, port));
+      factory_.NewCallback(&JsSocket::Connect, host, port));
   FileSystem* sys = FileSystem::GetFileSystem();
   while(!is_open())
     sys->cond().wait(sys->mutex());

@@ -38,7 +38,17 @@ FileStream* TCPSocket::dup(int fd) {
 bool TCPSocket::connect(const char* host, uint16_t port) {
   int32_t result = PP_OK_COMPLETIONPENDING;
   pp::Module::Get()->core()->CallOnMainThread(0,
-      factory_.NewRequiredCallback(&TCPSocket::Connect, host, port, &result));
+      factory_.NewCallback(&TCPSocket::Connect, host, port, &result));
+  FileSystem* sys = FileSystem::GetFileSystem();
+  while(result == PP_OK_COMPLETIONPENDING)
+    sys->cond().wait(sys->mutex());
+  return result == PP_OK;
+}
+
+bool TCPSocket::accept(PP_Resource resource) {
+  int32_t result = PP_OK_COMPLETIONPENDING;
+  pp::Module::Get()->core()->CallOnMainThread(0,
+      factory_.NewCallback(&TCPSocket::Accept, resource, &result));
   FileSystem* sys = FileSystem::GetFileSystem();
   while(result == PP_OK_COMPLETIONPENDING)
     sys->cond().wait(sys->mutex());
@@ -49,7 +59,7 @@ void TCPSocket::close() {
   if (socket_) {
     int32_t result = PP_OK_COMPLETIONPENDING;
     pp::Module::Get()->core()->CallOnMainThread(0,
-        factory_.NewRequiredCallback(&TCPSocket::Close, &result));
+        factory_.NewCallback(&TCPSocket::Close, &result));
     FileSystem* sys = FileSystem::GetFileSystem();
     while(result == PP_OK_COMPLETIONPENDING)
       sys->cond().wait(sys->mutex());
@@ -95,7 +105,7 @@ int TCPSocket::write(const char* buf, size_t count, size_t* nwrote) {
   if (is_block()) {
     int32_t result = PP_OK_COMPLETIONPENDING;
     pp::Module::Get()->core()->CallOnMainThread(0,
-        factory_.NewRequiredCallback(&TCPSocket::Write, &result));
+        factory_.NewCallback(&TCPSocket::Write, &result));
     FileSystem* sys = FileSystem::GetFileSystem();
     while(result == PP_OK_COMPLETIONPENDING)
       sys->cond().wait(sys->mutex());
@@ -110,7 +120,7 @@ int TCPSocket::write(const char* buf, size_t count, size_t* nwrote) {
     if (!write_sent_) {
       write_sent_ = true;
       pp::Module::Get()->core()->CallOnMainThread(0,
-        factory_.NewRequiredCallback(&TCPSocket::Write, (int32_t*)NULL));
+        factory_.NewCallback(&TCPSocket::Write, (int32_t*)NULL));
     }
     *nwrote = count;
     return 0;
@@ -147,7 +157,7 @@ void TCPSocket::Connect(int32_t result, const char* host, uint16_t port,
   assert(!socket_);
   socket_ = new pp::TCPSocketPrivate(sys->instance());
   *pres = socket_->Connect(host, port,
-      factory_.NewRequiredCallback(&TCPSocket::OnConnect, pres));
+      factory_.NewCallback(&TCPSocket::OnConnect, pres));
   if (*pres != PP_OK_COMPLETIONPENDING)
     sys->cond().broadcast();
 }
@@ -168,9 +178,11 @@ void TCPSocket::OnConnect(int32_t result, int32_t* pres) {
 void TCPSocket::Read(int32_t result, int32_t* pres) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
-  assert(socket_);
+  if (!is_open())
+    return;
+
   result = socket_->Read(&read_buf_[0], read_buf_.size(),
-      factory_.NewRequiredCallback(&TCPSocket::OnRead, pres));
+      factory_.NewCallback(&TCPSocket::OnRead, pres));
   if (result != PP_OK_COMPLETIONPENDING) {
     delete socket_;
     socket_ = NULL;
@@ -183,6 +195,9 @@ void TCPSocket::Read(int32_t result, int32_t* pres) {
 void TCPSocket::OnRead(int32_t result, int32_t* pres) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
+  if (!is_open())
+    return;
+
   if (result > 0) {
     in_buf_.insert(in_buf_.end(), &read_buf_[0], &read_buf_[0]+result);
     Read(PP_OK, NULL);
@@ -198,17 +213,19 @@ void TCPSocket::OnRead(int32_t result, int32_t* pres) {
 void TCPSocket::Write(int32_t result, int32_t* pres) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
-  assert(socket_);
+  if (!is_open())
+    return;
+
   if (write_buf_.size()) {
     // Previous write operation is in progress.
     pp::Module::Get()->core()->CallOnMainThread(1,
-        factory_.NewRequiredCallback(&TCPSocket::Write, &result));
+        factory_.NewCallback(&TCPSocket::Write, &result));
     return;
   }
   assert(out_buf_.size());
   write_buf_.swap(out_buf_);
   result = socket_->Write(&write_buf_[0], write_buf_.size(),
-      factory_.NewRequiredCallback(&TCPSocket::OnWrite, pres));
+      factory_.NewCallback(&TCPSocket::OnWrite, pres));
   if (result != PP_OK_COMPLETIONPENDING) {
     LOG("TCPSocket::Write: failed %d %d %d\n", fd_, result, write_buf_.size());
     delete socket_;
@@ -223,6 +240,9 @@ void TCPSocket::Write(int32_t result, int32_t* pres) {
 void TCPSocket::OnWrite(int32_t result, int32_t* pres) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
+  if (!is_open())
+    return;
+
   if (result < 0 || (size_t)result > write_buf_.size()) {
     // Write error.
     LOG("TCPSocket::OnWrite: close socket %d\n", fd_);
@@ -246,4 +266,15 @@ void TCPSocket::Close(int32_t result, int32_t* pres) {
   if (pres)
     *pres = PP_OK;
   sys->cond().broadcast();
+}
+
+bool TCPSocket::Accept(int32_t result, PP_Resource resource, int32_t* pres) {
+  FileSystem* sys = FileSystem::GetFileSystem();
+  Mutex::Lock lock(sys->mutex());
+  assert(!socket_);
+  socket_ = new pp::TCPSocketPrivate(pp::PassRef(), resource);
+  Read(PP_OK, NULL);
+  *pres = PP_OK;
+  sys->cond().broadcast();
+  return true;
 }
