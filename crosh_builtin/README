@@ -1,0 +1,12 @@
+This directory contains a snapshot of the hterm extension built for use as
+a component extension in chromeos-chrome.  It is provided so that users
+can launch crosh without needing to install an extension from the app store.
+This makes it possible to diagnose connectivity problems, which are likely
+to make it impossible to get to the app store.
+
+The ssh portions of hterm, including the NaCl plugin and nassh.(html|js) are
+not included in the crosh_builtin extension.
+
+The zip file in this directory can be recreated with the package.sh
+script in this directory.
+
