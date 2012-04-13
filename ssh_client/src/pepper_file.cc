@@ -118,15 +118,6 @@ int PepperFile::read(char* buf, size_t count, size_t* nread) {
     in_buf_.pop_front();
   }
 
-  if (*nread == 0) {
-    if (!is_open()) {
-      return 0;
-    } else {
-      *nread = -1;
-      return EAGAIN;
-    }
-  }
-
   return 0;
 }
 

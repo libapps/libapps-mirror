@@ -263,10 +263,11 @@ int FileSystem::fstat(int fd, nacl_abi_stat* out) {
 int FileSystem::stat(const char *pathname, nacl_abi_stat* out) {
   Mutex::Lock lock(mutex_);
   PathHandlerMap::iterator it = paths_.find(pathname);
-  if (it == paths_.end())
+  PathHandler* handler = (it != paths_.end()) ? it->second : ppfs_path_handler_;
+  if (!handler)
     return ENOENT;
 
-  return it->second ? it->second->stat(pathname, out) : EBADF;
+  return handler->stat(pathname, out);
 }
 
 int FileSystem::getdents(int fd, dirent* buf, size_t count, size_t* nread) {
