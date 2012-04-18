@@ -310,9 +310,8 @@ int tcsetattr(int fd, int optional_actions, const struct termios *termios_p) {
 
 char* getenv(const char* name) {
   LOG("getenv: %s\n", name);
-  if (!strcmp(name, "TERM"))
-    return (char*)"xterm";
-  return NULL;
+  return const_cast<char *>(
+      SshPluginInstance::GetInstance()->GetEnvironmentVariable(name));
 }
 
 int mkdir(const char* pathname, mode_t mode) {
