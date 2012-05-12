@@ -8,6 +8,7 @@
 #include <assert.h>
 #include <errno.h>
 #include <memory.h>
+#include <netdb.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <sys/ioctl.h>
@@ -20,6 +21,7 @@
 
 #include "ppapi/cpp/file_ref.h"
 #include "ppapi/cpp/file_system.h"
+#include "ppapi/cpp/private/host_resolver_private.h"
 #include "ppapi/utility/completion_callback_factory.h"
 
 #include "file_interfaces.h"
@@ -67,13 +69,19 @@ class FileSystem {
   int select(int nfds, fd_set *readfds, fd_set *writefds,
              fd_set *exceptfds, struct timeval *timeout);
 
-  unsigned long gethostbyname(const char* name);
+  int getaddrinfo(const char* hostname, const char* servname,
+                  const addrinfo* hints, addrinfo** res);
+  void freeaddrinfo(addrinfo* ai);
+  int getnameinfo(const sockaddr* sa, socklen_t salen,
+                  char *host, size_t hostlen,
+                  char *serv, size_t servlen, int flags);
+
   int socket(int socket_family, int socket_type, int protocol);
-  int connect(int sockfd, unsigned long addr, unsigned short port);
+  int connect(int sockfd, const sockaddr* serv_addr, socklen_t addrlen);
   int shutdown(int sockfd, int how);
-  int bind(int sockfd, unsigned long addr, unsigned short port);
+  int bind(int sockfd, const sockaddr* serv_addr, socklen_t addrlen);
   int listen(int sockfd, int backlog);
-  int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
+  int accept(int sockfd, sockaddr* addr, socklen_t* addrlen);
 
   int mkdir(const char* pathname, mode_t mode);
 
@@ -87,6 +95,13 @@ class FileSystem {
   typedef std::map<std::string, unsigned long> HostMap;
   typedef std::map<unsigned long, std::string> AddressMap;
 
+  struct GetAddrInfoParams {
+    const char* hostname;
+    const char* servname;
+    const struct addrinfo* hints;
+    struct addrinfo** res;
+  };
+
   void AddPathHandler(const std::string& path, PathHandler* handler);
   void AddFileStream(int fd, FileStream* stream);
   void RemoveFileStream(int fd);
@@ -94,7 +109,16 @@ class FileSystem {
   bool IsKnowDescriptor(int fd);
   FileStream* GetStream(int fd);
 
-  void AddHostAddress(const char* name, unsigned long addr);
+  uint32_t AddHostAddress(const char* name, uint32_t addr);
+  addrinfo* CreateAddrInfo(const PP_NetAddress_Private& addr,
+                           const addrinfo* hints,
+                           const char* name);
+  addrinfo* GetFakeAddress(const char* hostname, uint16_t port,
+                           const addrinfo* hints);
+  bool GetHostPort(const sockaddr* serv_addr, socklen_t addrlen,
+                   std::string* hostname, uint16_t* port);
+  void Resolve(int32_t result, GetAddrInfoParams* params, int32_t* pres);
+  void OnResolve(int32_t result, GetAddrInfoParams* params, int32_t* pres);
 
   void OnOpen(int32_t result, pp::FileSystem* fs);
 
@@ -121,6 +145,8 @@ class FileSystem {
   PathHandler* ppfs_path_handler_;
   bool fs_initialized_;
   pp::CompletionCallbackFactory<FileSystem, ThreadSafeRefCount> factory_;
+
+  pp::HostResolverPrivate* host_resolver_;
 
   HostMap hosts_;
   AddressMap addrs_;

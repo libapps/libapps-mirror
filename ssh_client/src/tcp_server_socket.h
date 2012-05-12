@@ -5,6 +5,8 @@
 #ifndef TCP_SERVER_SOCKET_H
 #define TCP_SERVER_SOCKET_H
 
+#include <netdb.h>
+
 #include "ppapi/cpp/completion_callback.h"
 #include "ppapi/cpp/private/tcp_server_socket_private.h"
 
@@ -13,7 +15,8 @@
 
 class TCPServerSocket : public FileStream {
  public:
-  TCPServerSocket(int fd, int oflag, const char* host, uint16_t port);
+  TCPServerSocket(int fd, int oflag,
+      const sockaddr* saddr, socklen_t addrlen);
   virtual ~TCPServerSocket();
 
   int fd() { return fd_; }
@@ -37,6 +40,8 @@ class TCPServerSocket : public FileStream {
   PP_Resource accept();
 
  private:
+  bool CreateNetAddress(const sockaddr* saddr,
+                        PP_NetAddress_Private* addr);
   void Listen(int32_t result, int backlog, int32_t* pres);
   void Accept(int32_t result, int32_t* pres);
   void OnAccept(int32_t result);
@@ -47,8 +52,7 @@ class TCPServerSocket : public FileStream {
   int oflag_;
   pp::CompletionCallbackFactory<TCPServerSocket, ThreadSafeRefCount> factory_;
   pp::TCPServerSocketPrivate* socket_;
-  std::string host_;
-  uint16_t port_;
+  sockaddr_in6 sin6_;
   PP_Resource resource_;
 
   DISALLOW_COPY_AND_ASSIGN(TCPServerSocket);

@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-#ifndef DEV_NULL_H
-#define DEV_NULL_H
+#ifndef PROXY_STREAM_H
+#define PROXY_STREAM_H
 
 #include "file_system.h"
 #include "pthread_helpers.h"
@@ -84,4 +84,4 @@ class ProxyStream : public FileStream {
   DISALLOW_COPY_AND_ASSIGN(ProxyStream);
 };
 
-#endif  // DEV_NULL_H
+#endif  //  PROXY_STREAM_H

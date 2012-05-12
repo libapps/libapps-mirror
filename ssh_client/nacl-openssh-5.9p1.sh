@@ -14,7 +14,6 @@
 readonly PACKAGE_NAME=openssh-5.9p1
 readonly OPENSSH_MIRROR=http://ftp5.usa.openbsd.org/pub/OpenBSD/OpenSSH/portable
 readonly PATCH_FILE=$PWD/../${PACKAGE_NAME}.patch
-readonly CONFIG_PATCH_FILE=$PWD/../${PACKAGE_NAME}.config.patch
 
 source $NACL_PORTS/src/build_tools/common.sh
 
@@ -38,8 +37,6 @@ patch -p0 -i $PATCH_FILE || exit 1
 
 ./configure --host=nacl --prefix=${NACL_SDK_USR} \
     CFLAGS="-DHAVE_SIGACTION -DHAVE_TRUNCATE"  || exit 1
-
-patch -p0 -i $CONFIG_PATCH_FILE || exit 1
 
 # will fail on link stage due to missing reference to main - it is expected
 make ssh || echo "Ignore error."

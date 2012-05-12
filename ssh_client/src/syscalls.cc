@@ -185,19 +185,29 @@ struct passwd* getpwuid(uid_t uid) {
 
 int gethostname(char *name, size_t len) {
   const char* kHostname = "localhost";
-  strncpy(name, kHostname, strlen(kHostname));
+  strncpy(name, kHostname, len);
   return 0;
 }
 
-struct hostent* gethostbyname(const char* name) {
-  LOG("gethostbyname: %s\n", name);
-  static struct hostent he;
-  static struct in_addr addr;
-  static struct in_addr* paddr[2] = { &addr, NULL };
-  he.h_name = (char*)name;
-  addr.s_addr = FileSystem::GetFileSystem()->gethostbyname(name);
-  he.h_addr_list = (char**)paddr;
-  return &he;
+int getaddrinfo(const char* hostname, const char* servname,
+                const struct addrinfo* hints, struct addrinfo** res) {
+  LOG("getaddrinfo: %s %s\n",
+      hostname ? hostname : "", servname ? servname : "");
+  return FileSystem::GetFileSystem()->getaddrinfo(
+      hostname, servname, hints, res);
+}
+
+void freeaddrinfo(struct addrinfo* ai) {
+  LOG("freeaddrinfo\n");
+  return FileSystem::GetFileSystem()->freeaddrinfo(ai);
+}
+
+int getnameinfo(const struct sockaddr *sa, socklen_t salen,
+                char *host, socklen_t hostlen,
+                char *serv, socklen_t servlen, unsigned int flags) {
+  LOG("getnameinfo\n");
+  return FileSystem::GetFileSystem()->getnameinfo(
+      sa, salen, host, hostlen, serv, servlen, flags);
 }
 
 int socket(int socket_family, int socket_type, int protocol) {
@@ -207,16 +217,8 @@ int socket(int socket_family, int socket_type, int protocol) {
 }
 
 int connect(int sockfd, const struct sockaddr *serv_addr, socklen_t addrlen) {
-  struct HostPort {
-    unsigned short port;
-    unsigned short laddr;
-    unsigned short haddr;
-  } __attribute__ ((aligned(1)));
-  HostPort* temp = (HostPort*)&serv_addr->sa_data;
-  unsigned short port = ntohs(temp->port);
-  unsigned long addr = temp->laddr | (temp->haddr << 16);
-  LOG("connect: %d %x:%d\n", sockfd, addr, port);
-  return FileSystem::GetFileSystem()->connect(sockfd, addr, port);
+  LOG("connect: %d\n", sockfd);
+  return FileSystem::GetFileSystem()->connect(sockfd, serv_addr, addrlen);
 }
 
 pid_t waitpid(pid_t pid, int *status, int options) {
@@ -250,16 +252,8 @@ pid_t getpid(void) {
 }
 
 int bind(int sockfd, const struct sockaddr *my_addr, socklen_t addrlen) {
-  struct HostPort {
-    unsigned short port;
-    unsigned short laddr;
-    unsigned short haddr;
-  } __attribute__ ((aligned(1)));
-  HostPort* temp = (HostPort*)&my_addr->sa_data;
-  unsigned short port = ntohs(temp->port);
-  unsigned long addr = temp->laddr | (temp->haddr << 16);
-  LOG("bind: %d %x:%d\n", sockfd, addr, port);
-  return FileSystem::GetFileSystem()->bind(sockfd, addr, port);
+  LOG("bind: %d\n", sockfd);
+  return FileSystem::GetFileSystem()->bind(sockfd, my_addr, addrlen);
 }
 
 int getpeername(int socket, struct sockaddr * address,
@@ -310,7 +304,7 @@ int tcsetattr(int fd, int optional_actions, const struct termios *termios_p) {
 
 char* getenv(const char* name) {
   LOG("getenv: %s\n", name);
-  return const_cast<char *>(
+  return const_cast<char*>(
       SshPluginInstance::GetInstance()->GetEnvironmentVariable(name));
 }
 

@@ -5,6 +5,7 @@
 #include "file_system.h"
 
 #include <arpa/inet.h>
+#include <netdb.h>
 #include <netinet/in.h>
 #include <signal.h>
 #include <string.h>
@@ -13,6 +14,7 @@
 
 #include "irt/irt.h"
 #include "ppapi/cpp/file_ref.h"
+#include "ppapi/cpp/private/net_address_private.h"
 
 #include "dev_null.h"
 #include "dev_random.h"
@@ -37,6 +39,7 @@ FileSystem::FileSystem(pp::Instance* instance, OutputInterface* out)
       ppfs_path_handler_(NULL),
       fs_initialized_(false),
       factory_(this),
+      host_resolver_(NULL),
       first_unused_addr_(kFirstAddr),
       use_js_socket_(false),
       col_(80), row_(24),
@@ -424,22 +427,287 @@ int FileSystem::select(int nfds, fd_set* readfds, fd_set* writefds,
   return nread + nwrite + nexcpt;
 }
 
-void FileSystem::AddHostAddress(const char* name, unsigned long addr) {
+uint32_t FileSystem::AddHostAddress(const char* name, uint32_t addr) {
   addr = htonl(addr);
   hosts_[name] = addr;
   addrs_[addr] = name;
+  return addr;
 }
 
-unsigned long FileSystem::gethostbyname(const char* name) {
-  Mutex::Lock lock(mutex_);
-  HostMap::iterator it = hosts_.find(name);
-  if (it != hosts_.end())
-    return it->second;
+addrinfo* FileSystem::CreateAddrInfo(const PP_NetAddress_Private& netaddr,
+                                     const addrinfo* hints,
+                                     const char* name) {
+  addrinfo* ai = new addrinfo();
+  sockaddr_in6* addr = new sockaddr_in6();
 
-  int addr = htonl(first_unused_addr_++);
-  hosts_[name] = addr;
-  addrs_[addr] = name;
-  return addr;
+  ai->ai_addr = reinterpret_cast<sockaddr*>(addr);
+  ai->ai_addrlen = sizeof(*addr);
+
+  PP_NetAddressFamily_Private family =
+      pp::NetAddressPrivate::GetFamily(netaddr);
+  if (family == PP_NETADDRESSFAMILY_IPV4)
+    ai->ai_addr->sa_family = ai->ai_family = AF_INET;
+  else if (family == PP_NETADDRESSFAMILY_IPV6)
+    ai->ai_addr->sa_family = ai->ai_family = AF_INET6;
+
+  ai->ai_canonname = strdup(name);
+  addr->sin6_port = pp::NetAddressPrivate::GetPort(netaddr);
+  if (family == PP_NETADDRESSFAMILY_IPV6) {
+    pp::NetAddressPrivate::GetAddress(
+        netaddr, &addr->sin6_addr, sizeof(in6_addr));
+  } else {
+    pp::NetAddressPrivate::GetAddress(
+        netaddr, &((sockaddr_in*)addr)->sin_addr, sizeof(in_addr));
+  }
+
+  if(hints && hints->ai_socktype)
+    ai->ai_socktype = hints->ai_socktype;
+  else
+    ai->ai_socktype = SOCK_STREAM;
+
+  if (hints && hints->ai_protocol)
+    ai->ai_protocol = hints->ai_protocol;
+
+  return ai;
+}
+
+addrinfo* FileSystem::GetFakeAddress(const char* hostname, uint16_t port,
+                                     const addrinfo* hints) {
+  uint32_t addr;
+  HostMap::iterator it = hosts_.find(hostname);
+  if (it != hosts_.end())
+    addr = it->second;
+  else
+    addr = AddHostAddress(hostname, first_unused_addr_++);
+
+  addrinfo* ai = new addrinfo();
+  sockaddr_in* addr_in = new sockaddr_in();
+  ai->ai_addr = reinterpret_cast<sockaddr*>(addr_in);
+  ai->ai_addrlen = sizeof(sockaddr_in);
+  ai->ai_family = addr_in->sin_family = AF_INET;
+  addr_in->sin_port = port;
+  addr_in->sin_addr.s_addr = addr;
+
+  if(hints && hints->ai_socktype)
+    ai->ai_socktype = hints->ai_socktype;
+  else
+    ai->ai_socktype = SOCK_STREAM;
+
+  if (hints && hints->ai_protocol)
+    ai->ai_protocol = hints->ai_protocol;
+
+  return ai;
+}
+
+int FileSystem::getaddrinfo(const char* hostname, const char* servname,
+    const addrinfo* hints, addrinfo** res) {
+  Mutex::Lock lock(mutex_);
+  GetAddrInfoParams params;
+  params.hostname = hostname;
+  params.servname = servname;
+  params.hints = hints;
+  params.res = res;
+  int32_t result = PP_OK_COMPLETIONPENDING;
+  pp::Module::Get()->core()->CallOnMainThread(0, factory_.NewCallback(
+      &FileSystem::Resolve, &params, &result));
+  while(result == PP_OK_COMPLETIONPENDING)
+    cond_.wait(mutex_);
+  return result == PP_OK ? 0 : EAI_FAIL;
+}
+
+void FileSystem::Resolve(int32_t result, GetAddrInfoParams* params,
+                         int32_t* pres) {
+  Mutex::Lock lock(mutex_);
+  const char* hostname = params->hostname;
+  const char* servname = params->servname;
+  const addrinfo* hints = params->hints;
+  addrinfo** res = params->res;
+
+  if (hints && hints->ai_family != AF_UNSPEC &&
+      hints->ai_family != AF_INET &&
+      hints->ai_family != AF_INET6) {
+    *pres = PP_ERROR_FAILED;
+    cond_.broadcast();
+    return;
+  }
+
+  long port = 0;
+  if (servname != NULL) {
+    char* cp;
+    port = strtol(servname, &cp, 10);
+    if (port > 0 && port <= 65535 && *cp == '\0') {
+      port = htons(port);
+    } else {
+      LOG("Bad port number %s\n", servname);
+      port = 0;
+    }
+  }
+
+  bool is_ipv6 = hints ? hints->ai_family == AF_INET6 : false;
+  in6_addr in = {};
+  bool is_numeric = hostname &&
+      inet_pton(is_ipv6 ? AF_INET6 : AF_INET, hostname, &in);
+
+  if (is_numeric) {
+    PP_NetAddress_Private addr = {};
+    if (is_ipv6) {
+      // TODO: handle scope_id
+      if (!pp::NetAddressPrivate::CreateFromIPv6Address(
+              in.s6_addr, 0, port, &addr)) {
+        LOG("NetAddressPrivate::CreateFromIPv6Address failed!\n");
+        *pres = PP_ERROR_FAILED;
+        cond_.broadcast();
+        return;
+      }
+    } else {
+      if (!pp::NetAddressPrivate::CreateFromIPv4Address(
+              in.s6_addr, port, &addr)) {
+        LOG("NetAddressPrivate::CreateFromIPv4Address failed!\n");
+        *pres = PP_ERROR_FAILED;
+        cond_.broadcast();
+        return;
+      }
+    }
+    *res = CreateAddrInfo(addr, hints, "");
+    *pres = PP_OK;
+    cond_.broadcast();
+    return;
+  }
+
+  if (hints && hints->ai_flags & AI_PASSIVE) {
+    // Numeric case we considered above so the only remaining case is any.
+    PP_NetAddress_Private addr = {};
+    if (!pp::NetAddressPrivate::GetAnyAddress(is_ipv6, &addr)) {
+      LOG("NetAddressPrivate::GetAnyAddress failed!\n");
+      *pres = PP_ERROR_FAILED;
+      cond_.broadcast();
+      return;
+    }
+    *res = CreateAddrInfo(addr, hints, "");
+    *pres = PP_OK;
+    cond_.broadcast();
+    return;
+  }
+
+  if (!hostname) {
+    PP_NetAddress_Private localhost = {};
+    if (is_ipv6) {
+      uint8_t localhost_ip[16] = {};
+      localhost_ip[15] = 1;
+      // TODO: handle scope_id
+      if (!pp::NetAddressPrivate::CreateFromIPv6Address(
+              localhost_ip, 0, port, &localhost)) {
+        LOG("NetAddressPrivate::CreateFromIPv6Address failed!\n");
+        *pres = PP_ERROR_FAILED;
+        cond_.broadcast();
+        return;
+      }
+    } else {
+      uint8_t localhost_ip[4] = { 127, 0, 0, 1 };
+      if (!pp::NetAddressPrivate::CreateFromIPv4Address(
+              localhost_ip, port, &localhost)) {
+        LOG("NetAddressPrivate::CreateFromIPv4Address failed!\n");
+        *pres = PP_ERROR_FAILED;
+        cond_.broadcast();
+        return;
+      }
+    }
+    *res = CreateAddrInfo(localhost, hints, "");
+    *pres = PP_OK;
+    cond_.broadcast();
+    return;
+  }
+
+  if (hints && hints->ai_flags & AI_NUMERICHOST) {
+    *pres = PP_ERROR_FAILED;
+    cond_.broadcast();
+    return;
+  }
+
+  // In case of JS socket don't use local host resolver.
+  if (!use_js_socket_ && pp::HostResolverPrivate::IsAvailable()) {
+    PP_HostResolver_Private_Hint hint = { PP_NETADDRESSFAMILY_UNSPECIFIED, 0 };
+    if (hints) {
+      if (hints->ai_family == AF_INET)
+        hint.family = PP_NETADDRESSFAMILY_IPV4;
+      else if (hints->ai_family == AF_INET6)
+        hint.family = PP_NETADDRESSFAMILY_IPV6;
+      if (hints->ai_flags & AI_CANONNAME)
+        hint.flags = PP_HOST_RESOLVER_FLAGS_CANONNAME;
+    }
+
+    assert(host_resolver_ == NULL);
+    host_resolver_ = new pp::HostResolverPrivate(instance_);
+    *pres = host_resolver_->Resolve(hostname, port, hint,
+        factory_.NewCallback(&FileSystem::OnResolve, params, pres));
+    if (*pres != PP_OK_COMPLETIONPENDING) {
+      delete host_resolver_;
+      host_resolver_ = NULL;
+      cond_.broadcast();
+    }
+  } else {
+    *res = GetFakeAddress(hostname, port, hints);
+    *pres = PP_OK;
+    cond_.broadcast();
+    return;
+  }
+}
+
+void FileSystem::OnResolve(int32_t result, GetAddrInfoParams* params,
+                           int32_t* pres) {
+  Mutex::Lock lock(mutex_);
+  assert(host_resolver_);
+  const addrinfo* hints = params->hints;
+  addrinfo** res = params->res;
+  std::string host_name = host_resolver_->GetCanonicalName().AsString();
+  if (result == PP_OK) {
+    size_t size  = host_resolver_->GetSize();
+    for (size_t i = 0; i < size; i++) {
+      PP_NetAddress_Private address = {};
+      if (host_resolver_->GetNetAddress(i, &address)) {
+        *res = CreateAddrInfo(address, hints, host_name.c_str());
+        res = &(*res)->ai_next;
+      }
+    }
+  } else {
+    char* cp;
+    uint16_t port = htons(strtol(params->servname, &cp, 10));
+    *res = GetFakeAddress(params->hostname, port, hints);
+    result = PP_OK;
+  }
+  delete host_resolver_;
+  host_resolver_ = NULL;
+  *pres = result;
+  cond_.broadcast();
+}
+
+void FileSystem::freeaddrinfo(addrinfo* ai) {
+  while (ai != NULL) {
+    addrinfo* next = ai->ai_next;
+    free(ai->ai_canonname);
+    delete ai->ai_addr;
+    delete ai;
+    ai = next;
+  }
+}
+
+int FileSystem::getnameinfo(const sockaddr *sa, socklen_t salen,
+                            char *host, size_t hostlen,
+                            char *serv, size_t servlen, int flags) {
+  if (sa->sa_family != AF_INET && sa->sa_family != AF_INET6)
+    return EAI_FAMILY;
+
+  if (serv)
+    snprintf(serv, servlen, "%d", ntohs(((sockaddr_in*)sa)->sin_port));
+
+  if (host) {
+    if (sa->sa_family == AF_INET6)
+      inet_ntop(AF_INET6, &((sockaddr_in6*)sa)->sin6_addr, host, hostlen);
+    else
+      inet_ntop(AF_INET, &((sockaddr_in*)sa)->sin_addr, host, hostlen);
+  }
+
+  return 0;
 }
 
 int FileSystem::socket(int socket_family, int socket_type, int protocol) {
@@ -450,22 +718,43 @@ int FileSystem::socket(int socket_family, int socket_type, int protocol) {
   return fd;
 }
 
-int FileSystem::connect(int fd, unsigned long addr, unsigned short port) {
+bool FileSystem::GetHostPort(const sockaddr* serv_addr, socklen_t addrlen,
+                             std::string* hostname, uint16_t* port) {
+  if (serv_addr->sa_family == AF_INET) {
+    const sockaddr_in* sin4 = reinterpret_cast<const sockaddr_in*>(serv_addr);
+    *port = ntohs(sin4->sin_port);
+    AddressMap::iterator it = addrs_.find(sin4->sin_addr.s_addr);
+    if (it != addrs_.end()) {
+      *hostname = it->second;
+    } else {
+      char buf[NI_MAXHOST];
+      inet_ntop(AF_INET, &sin4->sin_addr, buf, sizeof(buf));
+      *hostname = buf;
+    }
+  } else {
+    const sockaddr_in6* sin6 = reinterpret_cast<const sockaddr_in6*>(serv_addr);
+    *port = ntohs(sin6->sin6_port);
+    char buf[NI_MAXHOST];
+    inet_ntop(AF_INET6, &sin6->sin6_addr, buf, sizeof(buf));
+    *hostname = buf;
+  }
+  return true;
+}
+
+int FileSystem::connect(int fd, const sockaddr* serv_addr, socklen_t addrlen) {
   Mutex::Lock lock(mutex_);
   if (streams_.find(fd) == streams_.end()) {
     errno = EBADF;
     return -1;
   }
 
-  std::string host;
-  AddressMap::iterator it = addrs_.find(addr);
-  if (it != addrs_.end()) {
-    host = it->second;
-  } else {
-    in_addr iaddr;
-    iaddr.s_addr = addr;
-    host = inet_ntoa(iaddr);
+  uint16_t port;
+  std::string hostname;
+  if (!GetHostPort(serv_addr, addrlen, &hostname, &port)) {
+    errno = EAFNOSUPPORT;
+    return -1;
   }
+  LOG("FileSystem::connect: [%s] port %d\n", hostname.c_str(), port);
 
   FileStream* stream = NULL;
   if (use_js_socket_) {
@@ -473,7 +762,7 @@ int FileSystem::connect(int fd, unsigned long addr, unsigned short port) {
     // connections made localhost so use Pepper sockets for them.
     use_js_socket_ = false;
     JsSocket* socket = new JsSocket(fd, O_RDWR, output_);
-    if (!socket->connect(host.c_str(), port)) {
+    if (!socket->connect(hostname.c_str(), port)) {
       errno = ECONNREFUSED;
       socket->release();
       return -1;
@@ -481,7 +770,7 @@ int FileSystem::connect(int fd, unsigned long addr, unsigned short port) {
     stream = socket;
   } else {
     TCPSocket* socket = new TCPSocket(fd, O_RDWR);
-    if (!socket->connect(host.c_str(), port)) {
+    if (!socket->connect(hostname.c_str(), port)) {
       errno = ECONNREFUSED;
       socket->release();
       return -1;
@@ -497,7 +786,7 @@ int FileSystem::shutdown(int fd, int how) {
   Mutex::Lock lock(mutex_);
   FileStream* stream = GetStream(fd);
   if (stream && stream != kBadFileStream) {
-    // Actually shutdown should be something more complicated by for now
+    // Actually shutdown should be something more complicated but for now
     // it works. Method close can be called multiple time.
     stream->close();
     return 0;
@@ -507,24 +796,13 @@ int FileSystem::shutdown(int fd, int how) {
   }
 }
 
-int FileSystem::bind(int fd, unsigned long addr, unsigned short port) {
+int FileSystem::bind(int fd, const sockaddr* addr, socklen_t addrlen) {
   Mutex::Lock lock(mutex_);
   if (streams_.find(fd) == streams_.end()) {
     errno = EBADF;
     return -1;
   }
-
-  std::string host;
-  AddressMap::iterator it = addrs_.find(addr);
-  if (it != addrs_.end()) {
-    host = it->second;
-  } else {
-    in_addr iaddr;
-    iaddr.s_addr = addr;
-    host = inet_ntoa(iaddr);
-  }
-
-  AddFileStream(fd, new TCPServerSocket(fd, 0, host.c_str(), port));
+  AddFileStream(fd, new TCPServerSocket(fd, 0, addr, addrlen));
   return 0;
 }
 
@@ -544,7 +822,7 @@ int FileSystem::listen(int sockfd, int backlog) {
   }
 }
 
-int FileSystem::accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen) {
+int FileSystem::accept(int sockfd, sockaddr* addr, socklen_t* addrlen) {
   Mutex::Lock lock(mutex_);
   FileStream* stream = GetStream(sockfd);
   if (stream && stream != kBadFileStream) {

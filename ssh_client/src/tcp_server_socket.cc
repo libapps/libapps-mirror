@@ -14,9 +14,11 @@
 #include "file_system.h"
 
 TCPServerSocket::TCPServerSocket(int fd, int oflag,
-                                 const char* host, uint16_t port)
+                                 const sockaddr* saddr, socklen_t addrlen)
   : ref_(1), fd_(fd), oflag_(oflag), factory_(this), socket_(NULL),
-    host_(host), port_(port), resource_(0) {
+    sin6_(), resource_(0) {
+  assert(sizeof(sin6_) >= addrlen);
+  memcpy(&sin6_, saddr, std::min(sizeof(sin6_), addrlen));
 }
 
 TCPServerSocket::~TCPServerSocket() {
@@ -102,20 +104,37 @@ PP_Resource TCPServerSocket::accept() {
   return ret;
 }
 
+bool TCPServerSocket::CreateNetAddress(const sockaddr* saddr,
+                                       PP_NetAddress_Private* addr) {
+  if (saddr->sa_family == AF_INET) {
+    const sockaddr_in* sin4 = reinterpret_cast<const sockaddr_in*>(saddr);
+    if (!pp::NetAddressPrivate::CreateFromIPv4Address(
+            reinterpret_cast<const uint8_t*>(&sin4->sin_addr),
+            ntohs(sin4->sin_port), addr)) {
+      return false;
+    }
+  } else {
+    const sockaddr_in6* sin6 = reinterpret_cast<const sockaddr_in6*>(saddr);
+    if (!pp::NetAddressPrivate::CreateFromIPv6Address(
+            reinterpret_cast<const uint8_t*>(&sin6->sin6_addr), 0,
+            ntohs(sin6->sin6_port), addr)) {
+      return false;
+    }
+  }
+  return true;
+}
+
 void TCPServerSocket::Listen(int32_t result, int backlog, int32_t* pres) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
   assert(!socket_);
   socket_ = new pp::TCPServerSocketPrivate(sys->instance());
 
-  // Ignore bind address and always bind to localhost.
-  uint8_t localhost_ip[4] = { 127, 0, 0, 1 };
-  PP_NetAddress_Private localhost = {};
-  if (pp::NetAddressPrivate::CreateFromIPv4Address(
-          localhost_ip, port_, &localhost)) {
+  PP_NetAddress_Private addr = {};
+  if (CreateNetAddress(reinterpret_cast<const sockaddr*>(&sin6_), &addr)) {
     LOG("TCPServerSocket::Listen: %s\n",
-        pp::NetAddressPrivate::Describe(localhost, true).c_str());
-    *pres = socket_->Listen(&localhost, backlog,
+        pp::NetAddressPrivate::Describe(addr, true).c_str());
+    *pres = socket_->Listen(&addr, backlog,
         factory_.NewCallback(&TCPServerSocket::Accept, pres));
   } else {
     *pres = PP_ERROR_FAILED;
