@@ -20,7 +20,6 @@ const char kMessageArgumentsAttr[] = "arguments";
 
 // These are C++ the method names as JavaScript sees them.
 const char kStartSessionMethodId[] = "startSession";
-const char kSetEnvironmentMethodId[] = "setEnvironment";
 const char kOnOpenFileMethodId[] = "onOpenFile";
 const char kOnOpenSocketMethodId[] = "onOpenSocket";
 const char kOnReadMethodId[] = "onRead";
@@ -34,6 +33,7 @@ const char kPortAttr[] = "port";
 const char kTerminalWidthAttr[] = "terminalWidth";
 const char kTerminalHeightAttr[] = "terminalHeight";
 const char kUseJsSocketAttr[] = "useJsSocket";
+const char kEnvironmentAttr[] = "environment";
 const char kArgumentsAttr[] = "arguments";
 
 // These are JavaScript method names as C++ code sees them.
@@ -81,8 +81,6 @@ void SshPluginInstance::Invoke(const std::string& function,
                                const Json::Value& args) {
   if (function == kStartSessionMethodId) {
     StartSession(args);
-  } else if (function == kSetEnvironmentMethodId) {
-    SetEnvironment(args);
   } else if (function == kOnOpenFileMethodId ||
              function == kOnOpenSocketMethodId) {
     OnOpen(args);
@@ -239,16 +237,12 @@ void* SshPluginInstance::SessionThread(void* arg) {
   return NULL;
 }
 
-void SshPluginInstance::SetEnvironment(const Json::Value& args) {
-  if (args.size() < 1 || !args[(size_t)0].isObject())
-    return;
-
-  environment_ = args[(size_t)0];
-}
-
 const char* SshPluginInstance::GetEnvironmentVariable(const char* name) {
-  if (environment_.isObject() && environment_.isMember(name))
-    return environment_[name].asCString();
+  if (session_args_.isMember(kEnvironmentAttr) &&
+      session_args_[kEnvironmentAttr].isObject() &&
+      session_args_[kEnvironmentAttr].isMember(name)) {
+    return session_args_[kEnvironmentAttr][name].asCString();
+  }
 
   return NULL;
 }

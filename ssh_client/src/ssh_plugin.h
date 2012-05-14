@@ -45,7 +45,6 @@ class SshPluginInstance : public pp::Instance,
  private:
   typedef std::map<int, InputInterface*> InputStreams;
 
-  void SetEnvironment(const Json::Value& args);
   void StartSession(const Json::Value& args);
   void OnOpen(const Json::Value& args);
   void OnRead(const Json::Value& args);
@@ -66,7 +65,6 @@ class SshPluginInstance : public pp::Instance,
   pp::Core* core_;
   pthread_t openssh_thread_;
   Json::Value session_args_;
-  Json::Value environment_;
   pp::CompletionCallbackFactory<SshPluginInstance, ThreadSafeRefCount> factory_;
   InputStreams streams_;
   FileSystem file_system_;
