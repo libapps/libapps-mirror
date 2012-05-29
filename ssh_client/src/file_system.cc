@@ -59,27 +59,32 @@ FileSystem::FileSystem(pp::Instance* instance, OutputInterface* out)
   JsFile::InitTerminal();
   JsFile* stdin = new JsFile(0, O_RDONLY, out);
   AddFileStream(0, stdin);
-  out->OpenFile(0, NULL, O_WRONLY, stdin);
+  out->OpenFile(0, NULL, O_RDONLY, stdin);
   stdin->OnOpen(true);
 
   JsFile* stdout = new JsFile(1, O_WRONLY, out);
   AddFileStream(1, stdout);
+  out->OpenFile(1, NULL, O_WRONLY, stdout);
+  stdout->OnOpen(true);
 
-  AddFileStream(2, new JsFile(2, O_WRONLY, out));
+  JsFile* stderr = new JsFile(2, O_WRONLY, out);
+  AddFileStream(2, stderr);
+  out->OpenFile(2, NULL, O_WRONLY, stderr);
+  stderr->OnOpen(true);
 
   AddPathHandler("/dev/null", new DevNullHandler());
   AddPathHandler("/dev/tty", new DevTtyHandler(stdin, stdout));
 
-  // NACL_IRT_RANDOM_v0_1 is available starting from M18. For testing purpose
-  // is JS path for all browsers.
-//  nacl_irt_random random;
-//  if (nacl_interface_query(NACL_IRT_RANDOM_v0_1, &random, sizeof(random))) {
-//    AddPathHandler("/dev/random",
-//                   new DevRandomHandler(random.get_random_bytes));
-//  } else {
-    // LOG("Can't get " NACL_IRT_RANDOM_v0_1 " interface\n");
+  // NACL_IRT_RANDOM_v0_1 is available starting from M18.
+  // TOOD(dpolukhin): remove JS /dev/random - it is not needed anymore.
+  nacl_irt_random random;
+  if (nacl_interface_query(NACL_IRT_RANDOM_v0_1, &random, sizeof(random))) {
+    AddPathHandler("/dev/random",
+                   new DevRandomHandler(random.get_random_bytes));
+  } else {
+    LOG("Can't get " NACL_IRT_RANDOM_v0_1 " interface\n");
     AddPathHandler("/dev/random", new JsFileHandler(out));
-//  }
+  }
 
   // Add localhost 127.0.0.1
   AddHostAddress("localhost", 0x7F000001);

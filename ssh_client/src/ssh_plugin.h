@@ -41,6 +41,7 @@ class SshPluginInstance : public pp::Instance,
   virtual bool Write(int fd, const char* data, size_t size);
   virtual bool Read(int fd, size_t size);
   virtual bool Close(int fd);
+  virtual size_t GetWriteWindow();
 
  private:
   typedef std::map<int, InputInterface*> InputStreams;
@@ -48,6 +49,7 @@ class SshPluginInstance : public pp::Instance,
   void StartSession(const Json::Value& args);
   void OnOpen(const Json::Value& args);
   void OnRead(const Json::Value& args);
+  void OnWriteAcknowledge(const Json::Value& args);
   void OnClose(const Json::Value& args);
   void OnResize(const Json::Value& args);
 

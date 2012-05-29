@@ -23,6 +23,7 @@ const char kStartSessionMethodId[] = "startSession";
 const char kOnOpenFileMethodId[] = "onOpenFile";
 const char kOnOpenSocketMethodId[] = "onOpenSocket";
 const char kOnReadMethodId[] = "onRead";
+const char kOnWriteAcknowledgeMethodId[] = "onWriteAcknowledge";
 const char kOnCloseMethodId[] = "onClose";
 const char kOnResizeMethodId[] = "onResize";
 
@@ -35,6 +36,7 @@ const char kTerminalHeightAttr[] = "terminalHeight";
 const char kUseJsSocketAttr[] = "useJsSocket";
 const char kEnvironmentAttr[] = "environment";
 const char kArgumentsAttr[] = "arguments";
+const char kWriteWindowAttr[] = "writeWindow";
 
 // These are JavaScript method names as C++ code sees them.
 const char kPrintLogMethodId[] = "printLog";
@@ -44,6 +46,8 @@ const char kOpenSocketMethodId[] = "openSocket";
 const char kWriteMethodId[] = "write";
 const char kReadMethodId[] = "read";
 const char kCloseMethodId[] = "close";
+
+const size_t kDefaultWriteWindow = 64 * 1024;
 
 extern "C" int ssh_main(int ac, const char **av);
 
@@ -86,6 +90,8 @@ void SshPluginInstance::Invoke(const std::string& function,
     OnOpen(args);
   } else if (function == kOnReadMethodId) {
     OnRead(args);
+  } else if (function == kOnWriteAcknowledgeMethodId) {
+    OnWriteAcknowledge(args);
   } else if (function == kOnCloseMethodId) {
     OnClose(args);
   } else if (function == kOnResizeMethodId) {
@@ -187,6 +193,14 @@ bool SshPluginInstance::Close(int fd) {
   call_args.append(fd);
   InvokeJS(kCloseMethodId, call_args);
   return true;
+}
+
+size_t SshPluginInstance::GetWriteWindow() {
+  if (session_args_.isMember(kWriteWindowAttr) &&
+      session_args_[kWriteWindowAttr].isNumeric()) {
+    return session_args_[kWriteWindowAttr].asInt();
+  }
+  return kDefaultWriteWindow;
 }
 
 void SshPluginInstance::SessionThreadImpl() {
@@ -303,6 +317,23 @@ void SshPluginInstance::OnRead(const Json::Value& args) {
     }
   } else {
     PrintLogImpl(0, "onRead: invalid arguments\n");
+  }
+}
+
+void SshPluginInstance::OnWriteAcknowledge(const Json::Value& args) {
+  const Json::Value& fd = args[(size_t)0];
+  const Json::Value& count = args[(size_t)1];
+  if (fd.isNumeric() && count.isNumeric()) {
+    InputStreams::iterator it = streams_.find(fd.asInt());
+    if (it != streams_.end()) {
+      // TODO(dpolukhin): UInt here is only 32-bit, current version of json lib
+      // don't support 64-bit integer numbers.
+      it->second->OnWriteAcknowledge(count.asUInt());
+    } else {
+      PrintLogImpl(0, "onWriteAcknowledge: for unknown file descriptor\n");
+    }
+  } else {
+    PrintLogImpl(0, "onWriteAcknowledge: invalid arguments\n");
   }
 }
 

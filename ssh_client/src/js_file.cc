@@ -61,7 +61,8 @@ int JsFileHandler::stat(const char* pathname, nacl_abi_stat* out) {
 
 JsFile::JsFile(int fd, int oflag, OutputInterface* out)
   : ref_(1), fd_(fd), oflag_(oflag), out_(out),
-    factory_(this), out_task_sent_(false), is_open_(false) {
+    factory_(this), out_task_sent_(false), is_open_(false),
+    write_sent_(0), write_acknowledged_(0) {
 }
 
 JsFile::~JsFile() {
@@ -91,6 +92,15 @@ void JsFile::OnRead(const char* buf, size_t size) {
       }
     }
   }
+  sys->cond().broadcast();
+}
+
+void JsFile::OnWriteAcknowledge(uint64_t count) {
+  FileSystem* sys = FileSystem::GetFileSystem();
+  Mutex::Lock lock(sys->mutex());
+  assert(write_acknowledged_ <= write_sent_);
+  write_acknowledged_ = count;
+  sendtask();
   sys->cond().broadcast();
 }
 
@@ -151,19 +161,18 @@ int JsFile::read(char* buf, size_t count, size_t* nread) {
     in_buf_.pop_front();
   }
 
-  if (*nread == 0) {
-    if (!is_open()) {
-      return 0;
-    } else {
-      *nread = -1;
-      return EAGAIN;
-    }
+  if (*nread == 0 && !is_block() && is_open()) {
+    *nread = -1;
+    return EAGAIN;
   }
 
   return 0;
 }
 
 int JsFile::write(const char* buf, size_t count, size_t* nwrote) {
+  if (!is_open())
+    return EIO;
+
   out_buf_.insert(out_buf_.end(), buf, buf + count);
   *nwrote = count;
   sendtask();
@@ -250,8 +259,12 @@ bool JsFile::is_read_ready() {
   return fd_ != 0 || !in_buf_.empty();
 }
 
+bool JsFile::is_write_ready() {
+  return (write_sent_ - write_acknowledged_) < out_->GetWriteWindow();
+}
+
 void JsFile::sendtask() {
-  if (!out_task_sent_) {
+  if (!out_task_sent_ && !out_buf_.empty()) {
     pp::Module::Get()->core()->CallOnMainThread(
         0, factory_.NewCallback(&JsFile::Write));
     out_task_sent_ = true;
@@ -266,6 +279,12 @@ void JsFile::Write(int32_t result) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
   out_task_sent_ = false;
+
+  if (!is_write_ready()) {
+    LOG("JsFile::Write: %d is not ready for write\n", fd_);
+    return;
+  }
+
   if (isatty() && (tio_.c_lflag & ICANON)) {
     // It could be performance issue to do this conversion in-place but
     // fortunately it's used only for first few lines like password prompt.
@@ -275,7 +294,9 @@ void JsFile::Write(int32_t result) {
       }
     }
   }
+
   if (out_->Write(fd_, &out_buf_[0], out_buf_.size())) {
+    write_sent_ += out_buf_.size();
     out_buf_.clear();
     sys->cond().broadcast();
   } else {

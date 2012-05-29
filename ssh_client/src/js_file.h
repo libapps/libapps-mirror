@@ -28,6 +28,7 @@ class JsFile : public FileStream,
 
   virtual void OnOpen(bool success);
   virtual void OnRead(const char* buf, size_t size);
+  virtual void OnWriteAcknowledge(uint64_t count);
   virtual void OnClose();
 
   virtual void addref();
@@ -46,6 +47,7 @@ class JsFile : public FileStream,
   virtual int ioctl(int request,  va_list ap);
 
   virtual bool is_read_ready();
+  virtual bool is_write_ready();
 
  protected:
   void sendtask();
@@ -63,6 +65,8 @@ class JsFile : public FileStream,
   std::vector<char> out_buf_;
   bool out_task_sent_;
   bool is_open_;
+  uint64_t write_sent_;
+  uint64_t write_acknowledged_;
   static termios tio_;
 
   DISALLOW_COPY_AND_ASSIGN(JsFile);
