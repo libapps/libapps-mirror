@@ -4,6 +4,8 @@
 
 #include "js_file.h"
 
+#include <algorithm>
+
 #include <assert.h>
 #include <string.h>
 
@@ -100,7 +102,7 @@ void JsFile::OnWriteAcknowledge(uint64_t count) {
   Mutex::Lock lock(sys->mutex());
   assert(write_acknowledged_ <= write_sent_);
   write_acknowledged_ = count;
-  sendtask();
+  PostWriteTask(false);
   sys->cond().broadcast();
 }
 
@@ -174,8 +176,19 @@ int JsFile::write(const char* buf, size_t count, size_t* nwrote) {
     return EIO;
 
   out_buf_.insert(out_buf_.end(), buf, buf + count);
+
+  if (isatty() && (tio_.c_lflag & ICANON)) {
+    // It could be performance issue to do this conversion in-place but
+    // fortunately it's used only for first few lines like password prompt.
+    for (size_t i = out_buf_.size() - count; i < out_buf_.size(); i++) {
+      if (out_buf_[i] == '\n') {
+        out_buf_.insert(out_buf_.begin() + i++, '\r');
+      }
+    }
+  }
+
   *nwrote = count;
-  sendtask();
+  PostWriteTask(true);
   return 0;
 }
 
@@ -260,14 +273,21 @@ bool JsFile::is_read_ready() {
 }
 
 bool JsFile::is_write_ready() {
-  return (write_sent_ - write_acknowledged_) < out_->GetWriteWindow();
+  size_t not_acknowledged = write_sent_ - write_acknowledged_;
+  return (not_acknowledged + out_buf_.size()) < out_->GetWriteWindow();
 }
 
-void JsFile::sendtask() {
-  if (!out_task_sent_ && !out_buf_.empty()) {
-    pp::Module::Get()->core()->CallOnMainThread(
-        0, factory_.NewCallback(&JsFile::Write));
-    out_task_sent_ = true;
+void JsFile::PostWriteTask(bool always_post) {
+  if (!out_task_sent_ && !out_buf_.empty() &&
+      (write_sent_ - write_acknowledged_) < out_->GetWriteWindow()) {
+    if (always_post || !pp::Module::Get()->core()->IsMainThread()) {
+      pp::Module::Get()->core()->CallOnMainThread(
+          0, factory_.NewCallback(&JsFile::Write));
+      out_task_sent_ = true;
+    } else {
+      // If on main Pepper thread and delay is not required call it directly.
+      Write(PP_OK);
+    }
   }
 }
 
@@ -280,28 +300,27 @@ void JsFile::Write(int32_t result) {
   Mutex::Lock lock(sys->mutex());
   out_task_sent_ = false;
 
-  if (!is_write_ready()) {
-    LOG("JsFile::Write: %d is not ready for write\n", fd_);
+  size_t count = std::min(
+      size_t(write_acknowledged_ + out_->GetWriteWindow() - write_sent_),
+      out_buf_.size());
+  if (count == 0) {
+    LOG("JsFile::Write: %d is not ready for write, cached %d\n",
+        fd_, out_buf_.size());
     return;
   }
 
-  if (isatty() && (tio_.c_lflag & ICANON)) {
-    // It could be performance issue to do this conversion in-place but
-    // fortunately it's used only for first few lines like password prompt.
-    for (size_t i = 0; i < out_buf_.size(); i++) {
-      if (out_buf_[i] == '\n') {
-        out_buf_.insert(out_buf_.begin() + i++, '\r');
-      }
-    }
-  }
-
-  if (out_->Write(fd_, &out_buf_[0], out_buf_.size())) {
-    write_sent_ += out_buf_.size();
-    out_buf_.clear();
+  // Use temporary buffer in vector because std::deque doesn't use continuous
+  // memory inside. Alternative solution is to use vector as out_buf_ but erase
+  // below will require copy for the whole remaining bytes (will be slow with
+  // small writeWindow).
+  std::vector<char> buf(out_buf_.begin(), out_buf_.begin() + count);
+  if (out_->Write(fd_, &buf[0], count)) {
+    write_sent_ += count;
+    out_buf_.erase(out_buf_.begin(), out_buf_.begin() + count);
     sys->cond().broadcast();
   } else {
     assert(0);
-    sendtask();
+    PostWriteTask(true);
   }
 }
 

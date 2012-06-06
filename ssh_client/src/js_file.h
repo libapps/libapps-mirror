@@ -6,7 +6,6 @@
 #define JS_FILE_H
 
 #include <queue>
-#include <vector>
 
 #include "ppapi/cpp/completion_callback.h"
 
@@ -50,7 +49,7 @@ class JsFile : public FileStream,
   virtual bool is_write_ready();
 
  protected:
-  void sendtask();
+  void PostWriteTask(bool always_post);
 
   void Read(int32_t result, size_t size);
   void Write(int32_t result);
@@ -62,7 +61,7 @@ class JsFile : public FileStream,
   OutputInterface* out_;
   pp::CompletionCallbackFactory<JsFile, ThreadSafeRefCount> factory_;
   std::deque<char> in_buf_;
-  std::vector<char> out_buf_;
+  std::deque<char> out_buf_;
   bool out_task_sent_;
   bool is_open_;
   uint64_t write_sent_;
