@@ -76,6 +76,6 @@ for i in $LIBS; do
   cp -f $NACL_SDK_ROOT/toolchain/linux_x86_glibc/x86_64-nacl/lib64/$i hterm/plugin/lib64/
 done
 
-if [[ -f../ssh_client.pem ]]; then
+if [[ -f ../ssh_client.pem ]]; then
   /opt/google/chrome/chrome --pack-extension=hterm --pack-extension-key=../ssh_client.pem
 fi
