@@ -1,4 +1,4 @@
-// Copyright (c) 2011 The Chromium Authors. All rights reserved.
+// Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -127,6 +127,13 @@ class ThreadSafeRefCount {
   debug_log(format , ## args)
 #else
 #define LOG(format, args...)
+#endif
+
+#ifdef DEBUG
+#define VLOG(format, args...) \
+  debug_log(format , ## args)
+#else
+#define VLOG(format, args...)
 #endif
 
 extern "C" void debug_log(const char* format, ...);

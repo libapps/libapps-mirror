@@ -4,6 +4,7 @@
 
 #include "tcp_socket.h"
 
+#include <algorithm>
 #include <assert.h>
 #include <string.h>
 
@@ -14,7 +15,7 @@
 
 TCPSocket::TCPSocket(int fd, int oflag)
   : ref_(1), fd_(fd), oflag_(oflag), factory_(this), socket_(NULL),
-    read_buf_(kBufSize), write_sent_(false) {
+    read_buf_(kBufSize), read_sent_(false), write_sent_(false) {
 }
 
 TCPSocket::~TCPSocket() {
@@ -67,22 +68,16 @@ void TCPSocket::close() {
 }
 
 int TCPSocket::read(char* buf, size_t count, size_t* nread) {
-  if (!is_open())
-    return EIO;
-
   FileSystem* sys = FileSystem::GetFileSystem();
   if (is_block()) {
     while (in_buf_.empty() && is_open())
       sys->cond().wait(sys->mutex());
   }
 
-  *nread = 0;
-  while (*nread < count) {
-    if (in_buf_.empty())
-      break;
-
-    buf[(*nread)++] = in_buf_.front();
-    in_buf_.pop_front();
+  *nread = std::min(count, in_buf_.size());
+  if (*nread) {
+    std::copy(in_buf_.begin(), in_buf_.begin() + *nread, buf);
+    in_buf_.erase(in_buf_.begin(), in_buf_.begin() + *nread);
   }
 
   if (*nread == 0) {
@@ -94,6 +89,8 @@ int TCPSocket::read(char* buf, size_t count, size_t* nread) {
     }
   }
 
+  PostReadTask();
+
   return 0;
 }
 
@@ -104,8 +101,7 @@ int TCPSocket::write(const char* buf, size_t count, size_t* nwrote) {
   out_buf_.insert(out_buf_.end(), buf, buf + count);
   if (is_block()) {
     int32_t result = PP_OK_COMPLETIONPENDING;
-    pp::Module::Get()->core()->CallOnMainThread(0,
-        factory_.NewCallback(&TCPSocket::Write, &result));
+    PostWriteTask(&result, true);
     FileSystem* sys = FileSystem::GetFileSystem();
     while(result == PP_OK_COMPLETIONPENDING)
       sys->cond().wait(sys->mutex());
@@ -117,11 +113,7 @@ int TCPSocket::write(const char* buf, size_t count, size_t* nwrote) {
       return 0;
     }
   } else {
-    if (!write_sent_) {
-      write_sent_ = true;
-      pp::Module::Get()->core()->CallOnMainThread(0,
-        factory_.NewCallback(&TCPSocket::Write, (int32_t*)NULL));
-    }
+    PostWriteTask(NULL, true);
     *nwrote = count;
     return 0;
   }
@@ -150,6 +142,32 @@ bool TCPSocket::is_exception() {
   return !is_open();
 }
 
+void TCPSocket::PostReadTask() {
+  if (!read_sent_ && in_buf_.size() < kBufSize / 2) {
+    read_sent_ = true;
+    if (!pp::Module::Get()->core()->IsMainThread()) {
+      pp::Module::Get()->core()->CallOnMainThread(
+          0, factory_.NewCallback(&TCPSocket::Read));
+    } else {
+      // If on main Pepper thread and delay is not required call it directly.
+      Read(PP_OK);
+    }
+  }
+}
+
+void TCPSocket::PostWriteTask(int32_t* pres, bool always_post) {
+  if (!write_sent_ && !out_buf_.empty()) {
+    write_sent_ = true;
+    if (always_post || !pp::Module::Get()->core()->IsMainThread()) {
+      pp::Module::Get()->core()->CallOnMainThread(0,
+          factory_.NewCallback(&TCPSocket::Write, pres));
+    } else {
+      // If on main Pepper thread and delay is not required call it directly.
+      Write(PP_OK, pres);
+    }
+  }
+}
+
 void TCPSocket::Connect(int32_t result, const char* host, uint16_t port,
                         int32_t* pres) {
   FileSystem* sys = FileSystem::GetFileSystem();
@@ -166,7 +184,7 @@ void TCPSocket::OnConnect(int32_t result, int32_t* pres) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
   if (result == PP_OK) {
-    Read(PP_OK, NULL);
+    PostReadTask();
   } else {
     delete socket_;
     socket_ = NULL;
@@ -175,51 +193,62 @@ void TCPSocket::OnConnect(int32_t result, int32_t* pres) {
   sys->cond().broadcast();
 }
 
-void TCPSocket::Read(int32_t result, int32_t* pres) {
+void TCPSocket::Read(int32_t result) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
-  if (!is_open())
+
+  if (!is_open()) {
+    read_sent_ = false;
+    sys->cond().broadcast();
     return;
+  }
 
   result = socket_->Read(&read_buf_[0], read_buf_.size(),
-      factory_.NewCallback(&TCPSocket::OnRead, pres));
+      factory_.NewCallback(&TCPSocket::OnRead));
   if (result != PP_OK_COMPLETIONPENDING) {
     delete socket_;
     socket_ = NULL;
-    if (pres)
-      *pres = result;
+    read_sent_ = false;
     sys->cond().broadcast();
   }
 }
 
-void TCPSocket::OnRead(int32_t result, int32_t* pres) {
+void TCPSocket::OnRead(int32_t result) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
-  if (!is_open())
+
+  read_sent_ = false;
+  if (!is_open()) {
+    sys->cond().broadcast();
     return;
+  }
 
   if (result > 0) {
-    in_buf_.insert(in_buf_.end(), &read_buf_[0], &read_buf_[0]+result);
-    Read(PP_OK, NULL);
+    in_buf_.insert(in_buf_.end(),
+                   read_buf_.begin(), read_buf_.begin() + result);
+    PostReadTask();
   } else {
     delete socket_;
     socket_ = NULL;
   }
-  if (pres)
-    *pres = result;
   sys->cond().broadcast();
 }
 
 void TCPSocket::Write(int32_t result, int32_t* pres) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
-  if (!is_open())
+
+  if (!is_open()) {
+    if (pres)
+      *pres = PP_ERROR_FAILED;
+    write_sent_ = false;
+    sys->cond().broadcast();
     return;
+  }
 
   if (write_buf_.size()) {
     // Previous write operation is in progress.
-    pp::Module::Get()->core()->CallOnMainThread(1,
-        factory_.NewCallback(&TCPSocket::Write, &result));
+    PostWriteTask(pres, true);
     return;
   }
   assert(out_buf_.size());
@@ -232,16 +261,22 @@ void TCPSocket::Write(int32_t result, int32_t* pres) {
     socket_ = NULL;
     if (pres)
       *pres = result;
+    write_sent_ = false;
     sys->cond().broadcast();
   }
-  write_sent_ = false;
 }
 
 void TCPSocket::OnWrite(int32_t result, int32_t* pres) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
-  if (!is_open())
+
+  write_sent_ = false;
+  if (!is_open()) {
+    if (pres)
+      *pres = PP_ERROR_FAILED;
+    sys->cond().broadcast();
     return;
+  }
 
   if (result < 0 || (size_t)result > write_buf_.size()) {
     // Write error.
@@ -256,6 +291,13 @@ void TCPSocket::OnWrite(int32_t result, int32_t* pres) {
     *pres = result;
   write_buf_.clear();
   sys->cond().broadcast();
+
+  if (!is_block()) {
+    // For async sockets some more data could be written while Pepper sends
+    // previous portion so check do we have some data to write. For sync case,
+    // we always wait write operation completion.
+    PostWriteTask(NULL, false);
+  }
 }
 
 void TCPSocket::Close(int32_t result, int32_t* pres) {
@@ -273,7 +315,7 @@ bool TCPSocket::Accept(int32_t result, PP_Resource resource, int32_t* pres) {
   Mutex::Lock lock(sys->mutex());
   assert(!socket_);
   socket_ = new pp::TCPSocketPrivate(pp::PassRef(), resource);
-  Read(PP_OK, NULL);
+  PostReadTask();
   *pres = PP_OK;
   sys->cond().broadcast();
   return true;

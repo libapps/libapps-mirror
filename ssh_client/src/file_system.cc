@@ -58,22 +58,25 @@ FileSystem::FileSystem(pp::Instance* instance, OutputInterface* out)
 
   JsFile::InitTerminal();
   JsFile* stdin = new JsFile(0, O_RDONLY, out);
-  AddFileStream(0, stdin);
-  out->OpenFile(0, NULL, O_RDONLY, stdin);
-  stdin->OnOpen(true);
+  if (out->OpenFile(0, NULL, O_RDONLY, stdin)) {
+    AddFileStream(0, stdin);
+    stdin->OnOpen(true);
+  }
 
   JsFile* stdout = new JsFile(1, O_WRONLY, out);
-  AddFileStream(1, stdout);
-  out->OpenFile(1, NULL, O_WRONLY, stdout);
-  stdout->OnOpen(true);
+  if (out->OpenFile(1, NULL, O_WRONLY, stdout)) {
+    AddFileStream(1, stdout);
+    stdout->OnOpen(true);
+    AddPathHandler("/dev/tty", new DevTtyHandler(stdin, stdout));
+  }
 
   JsFile* stderr = new JsFile(2, O_WRONLY, out);
-  AddFileStream(2, stderr);
-  out->OpenFile(2, NULL, O_WRONLY, stderr);
-  stderr->OnOpen(true);
+  if (out->OpenFile(2, NULL, O_WRONLY, stderr)) {
+    AddFileStream(2, stderr);
+    stderr->OnOpen(true);
+  }
 
   AddPathHandler("/dev/null", new DevNullHandler());
-  AddPathHandler("/dev/tty", new DevTtyHandler(stdin, stdout));
 
   // NACL_IRT_RANDOM_v0_1 is available starting from M18.
   // TOOD(dpolukhin): remove JS /dev/random - it is not needed anymore.
@@ -118,6 +121,10 @@ void FileSystem::OnOpen(int32_t result, pp::FileSystem* fs) {
 
 FileSystem* FileSystem::GetFileSystem() {
   assert(file_system_);
+  return FileSystem::GetFileSystemNoCrash();
+}
+
+FileSystem* FileSystem::GetFileSystemNoCrash() {
   return file_system_;
 }
 
@@ -881,6 +888,14 @@ int FileSystem::sigaction(int signum,
   } else {
     return -1;
   }
+}
+
+const char* FileSystem::getenv(const char* name) {
+  return output_->GetEnvironmentVariable(name);
+}
+
+void FileSystem::exit(int status) {
+  output_->SessionClosed(status);
 }
 
 void FileSystem::MakeDirectory(int32_t result, const char* pathname,

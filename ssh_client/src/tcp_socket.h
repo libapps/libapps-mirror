@@ -5,7 +5,6 @@
 #ifndef SOCKET_H
 #define SOCKET_H
 
-#include <queue>
 #include <vector>
 
 #include "ppapi/cpp/completion_callback.h"
@@ -42,13 +41,14 @@ class TCPSocket : public FileStream {
   virtual bool is_exception();
 
  private:
-  void sendtask();
+  void PostReadTask();
+  void PostWriteTask(int32_t* pres, bool always_post);
 
   void Connect(int32_t result, const char* host, uint16_t port, int32_t* pres);
   void OnConnect(int32_t result, int32_t* pres);
 
-  void Read(int32_t result, int32_t* pres);
-  void OnRead(int32_t result, int32_t* pres);
+  void Read(int32_t result);
+  void OnRead(int32_t result);
 
   void Write(int32_t result, int32_t* pres);
   void OnWrite(int32_t result, int32_t* pres);
@@ -64,10 +64,11 @@ class TCPSocket : public FileStream {
   int oflag_;
   pp::CompletionCallbackFactory<TCPSocket, ThreadSafeRefCount> factory_;
   pp::TCPSocketPrivate* socket_;
-  std::deque<char> in_buf_;
+  std::vector<char> in_buf_;
   std::vector<char> out_buf_;
   std::vector<char> read_buf_;
   std::vector<char> write_buf_;
+  bool read_sent_;
   bool write_sent_;
 
   DISALLOW_COPY_AND_ASSIGN(TCPSocket);

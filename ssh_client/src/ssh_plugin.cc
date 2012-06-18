@@ -130,6 +130,7 @@ void SshPluginInstance::SessionClosed(int error) {
   core_->CallOnMainThread(0, factory_.NewCallback(
       &SshPluginInstance::SessionClosedImpl, error));
   openssh_thread_ = NULL;
+  pthread_exit(NULL);
 }
 
 bool SshPluginInstance::OpenFile(int fd, const char* name, int mode,
@@ -372,3 +373,7 @@ Module* CreateModule() {
 }
 
 }  // namespace pp
+
+extern "C" {
+const char* __progname = "ssh";
+}

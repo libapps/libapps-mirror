@@ -29,10 +29,6 @@ class SshPluginInstance : public pp::Instance,
   pp::Core* core() { return core_; }
   pthread_t openssh_thread() { return openssh_thread_; }
 
-  const char* GetEnvironmentVariable(const char* name);
-  void PrintLog(const std::string& msg);
-  void SessionClosed(int error);
-
   // Implements OutputInterface.
   virtual bool OpenFile(int fd, const char* name, int mode,
                         InputInterface* stream);
@@ -42,6 +38,8 @@ class SshPluginInstance : public pp::Instance,
   virtual bool Read(int fd, size_t size);
   virtual bool Close(int fd);
   virtual size_t GetWriteWindow();
+  virtual const char* GetEnvironmentVariable(const char* name);
+  virtual void SessionClosed(int error);
 
  private:
   typedef std::map<int, InputInterface*> InputStreams;
@@ -59,7 +57,9 @@ class SshPluginInstance : public pp::Instance,
   void Invoke(const std::string& function, const Json::Value& args);
   void InvokeJS(const std::string& function, const Json::Value& args);
 
+  void PrintLog(const std::string& msg);
   void PrintLogImpl(int32_t result, const std::string& msg);
+
   void SessionClosedImpl(int32_t result, const int& error);
 
   static SshPluginInstance* instance_;

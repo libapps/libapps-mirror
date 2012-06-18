@@ -14,11 +14,11 @@
 #include "nacl-mounts/base/irt_syscalls.h"
 
 #include "file_system.h"
-#include "ssh_plugin.h"
 
 extern "C" {
 
-#define DECLARE(name) typeof(__nacl_irt_##name) __nacl_irt_##name##_real;
+#define DECLARE(name) static __typeof__(__nacl_irt_##name) \
+    __nacl_irt_##name##_real;
 #define DO_WRAP(name) do { \
     __nacl_irt_##name##_real = __nacl_irt_##name; \
     __nacl_irt_##name = __nacl_irt_##name##_wrap; \
@@ -37,8 +37,6 @@ DECLARE(stat);
 DECLARE(fstat);
 DECLARE(getdents);
 
-const char* __progname = "ssh";
-
 void debug_log(const char* format, ...) {
   va_list ap;
   va_start(ap, format);
@@ -46,24 +44,25 @@ void debug_log(const char* format, ...) {
   va_end(ap);
 }
 
-int WRAP(open)(const char *pathname, int oflag, mode_t cmode, int *newfd) {
+static int WRAP(open)(const char *pathname, int oflag, mode_t cmode,
+                      int *newfd) {
   LOG("open: %s\n", pathname);
   return FileSystem::GetFileSystem()->open(pathname, oflag, cmode, newfd);
 }
 
-int WRAP(close)(int fd) {
+static int WRAP(close)(int fd) {
   LOG("close: %d\n", fd);
   return FileSystem::GetFileSystem()->close(fd);
 }
 
-int WRAP(read)(int fd, void *buf, size_t count, size_t *nread) {
-  LOG("read: %d %d\n", fd, count);
+static int WRAP(read)(int fd, void *buf, size_t count, size_t *nread) {
+  VLOG("read: %d %d\n", fd, count);
   return FileSystem::GetFileSystem()->read(fd, (char*)buf, count, nread);
 }
 
-int WRAP(write)(int fd, const void *buf, size_t count, size_t *nwrote) {
+static int WRAP(write)(int fd, const void *buf, size_t count, size_t *nwrote) {
   if (fd != 1 && fd != 2)
-    LOG("write: %d %d\n", fd, count);
+    VLOG("write: %d %d\n", fd, count);
 #ifndef NDEBUG
   if (fd == 1 || fd == 2) {
     REAL(write)(fd, buf, count, nwrote);
@@ -74,33 +73,34 @@ int WRAP(write)(int fd, const void *buf, size_t count, size_t *nwrote) {
   return FileSystem::GetFileSystem()->write(fd, (const char*)buf, count, nwrote);
 }
 
-int WRAP(seek)(int fd, nacl_abi_off_t offset, int whence,
+static int WRAP(seek)(int fd, nacl_abi_off_t offset, int whence,
                nacl_abi_off_t* new_offset) {
   LOG("seek: %d %d %d\n", fd, (int)offset, whence);
   return FileSystem::GetFileSystem()->seek(fd, offset, whence, new_offset);
 }
 
-int WRAP(dup)(int fd, int* newfd) {
+static int WRAP(dup)(int fd, int* newfd) {
   LOG("dup: %d\n", fd);
   return FileSystem::GetFileSystem()->dup(fd, newfd);
 }
 
-int WRAP(dup2)(int fd, int newfd) {
+static int WRAP(dup2)(int fd, int newfd) {
   LOG("dup2: %d\n", fd);
   return FileSystem::GetFileSystem()->dup2(fd, newfd);
 }
 
-int WRAP(stat)(const char *pathname, struct nacl_abi_stat *buf) {
+static int WRAP(stat)(const char *pathname, struct nacl_abi_stat *buf) {
   LOG("stat: %s\n", pathname);
   return FileSystem::GetFileSystem()->stat(pathname, buf);
 }
 
-int WRAP(fstat)(int fd, struct nacl_abi_stat *buf) {
+static int WRAP(fstat)(int fd, struct nacl_abi_stat *buf) {
   LOG("fstat: %d\n", fd);
   return FileSystem::GetFileSystem()->fstat(fd, buf);
 }
 
-int WRAP(getdents)(int fd, dirent* nacl_buf, size_t nacl_count, size_t *nread) {
+static int WRAP(getdents)(int fd, dirent* nacl_buf, size_t nacl_count,
+                          size_t *nread) {
   LOG("getdents: %d\n", fd);
   return FileSystem::GetFileSystem()->getdents(fd, nacl_buf, nacl_count, nread);
 }
@@ -130,29 +130,29 @@ int ioctl(int fd, long unsigned request, ...) {
 
 int select(int nfds, fd_set *readfds, fd_set *writefds,
            fd_set *exceptfds, struct timeval *timeout) {
-  LOG("select: %d\n", nfds);
+  VLOG("select: %d\n", nfds);
   return FileSystem::GetFileSystem()->select(nfds, readfds, writefds, exceptfds,
-                                           timeout);
+                                             timeout);
 }
 
 //------------------------------------------------------------------------------
 
 void exit(int status) {
   LOG("exit: %d\n", status);
-  SshPluginInstance::GetInstance()->SessionClosed(status);
-  pthread_exit(NULL);
+  FileSystem::GetFileSystem()->exit(status);
+  assert(0);
 }
 
 void _exit(int status) {
   LOG("_exit: %d\n", status);
-  SshPluginInstance::GetInstance()->SessionClosed(status);
-  pthread_exit(NULL);
+  FileSystem::GetFileSystem()->exit(status);
+  assert(0);
 }
 
 void abort() {
   LOG("abort\n");
-  SshPluginInstance::GetInstance()->SessionClosed(-1);
-  pthread_exit(NULL);
+  FileSystem::GetFileSystem()->exit(-1);
+  assert(0);
 }
 
 int seteuid(uid_t euid) {
@@ -270,7 +270,6 @@ int getsockname(int s, struct sockaddr *name, socklen_t *namelen) {
 int listen(int sockfd, int backlog) {
   LOG("listen: %d %d\n", sockfd, backlog);
   return FileSystem::GetFileSystem()->listen(sockfd, backlog);
-  return -1;
 }
 
 int setsockopt(int socket, int level, int option_name,
@@ -291,21 +290,25 @@ int shutdown(int s, int how) {
   return FileSystem::GetFileSystem()->shutdown(s, how);
 }
 
-int tcgetattr(int fd, struct termios *termios_p) {
+int tcgetattr(int fd, struct termios* termios_p) {
   LOG("tcgetattr: %d\n", fd);
   return FileSystem::GetFileSystem()->tcgetattr(fd, termios_p);
 }
 
-int tcsetattr(int fd, int optional_actions, const struct termios *termios_p) {
+int tcsetattr(int fd, int optional_actions, const struct termios* termios_p) {
   LOG("tcsetattr: %d\n", fd);
   return FileSystem::GetFileSystem()->tcsetattr(
       fd, optional_actions, termios_p);
 }
 
 char* getenv(const char* name) {
-  char* value = const_cast<char*>(
-      SshPluginInstance::GetInstance()->GetEnvironmentVariable(name));
-  LOG("getenv: %s=%s\n", name, value ? value : "<NULL>");
+  LOG("getenv: %s\n", name);
+  FileSystem* sys = FileSystem::GetFileSystemNoCrash();
+  if (!sys)
+    return NULL;
+
+  char* value = const_cast<char*>(sys->getenv(name));
+  LOG("  ->ENV[%s]=%s\n", name, value ? value : "<NULL>");
   return value;
 }
 
@@ -313,6 +316,43 @@ int mkdir(const char* pathname, mode_t mode) {
   LOG("mkdir: %s\n", pathname);
   return FileSystem::GetFileSystem()->mkdir(pathname, mode);
 }
+
+int sched_setscheduler(pid_t pid, int policy,
+                       const struct sched_param *param) {
+  LOG("sched_setscheduler: %d %d\n", pid, policy);
+  return 0;
+}
+
+ssize_t send(int fd, const void* buf, size_t count, int flags) {
+  VLOG("send: %d %d\n", fd, count);
+  size_t sent = 0;
+  int rv = FileSystem::GetFileSystem()->write(fd, (const char*)buf,
+                                              count, &sent);
+  return rv == 0 ? sent : -1;
+}
+
+ssize_t recv(int fd, void *buf, size_t count, int flags) {
+  VLOG("recv: %d %d\n", fd, count);
+  size_t recvd = 0;
+  int rv = FileSystem::GetFileSystem()->read(fd, (char*)buf, count, &recvd);
+  return rv == 0 ? recvd : -1;
+}
+
+#if 0
+ssize_t sendto(int sockfd, const void* buf, size_t len, int flags,
+               const struct sockaddr* dest_addr, socklen_t addrlen) {
+  LOG("sendto: %d %d %d\n", sockfd, len, flags);
+  return FileSystem::GetFileSystem()->sendto(sockfd, buf, len, flags,
+                                             dest_addr, addrlen);
+}
+
+ssize_t recvfrom(int socket, void *restrict buffer, size_t len, int flags,
+                 struct sockaddr* restrict addr, socklen_t* restrict addrlen) {
+  LOG("recvfrom: %d %d %d\n", socket, len, flags);
+  return FileSystem::GetFileSystem()->recvfrom(socket, buffer, len, flags,
+                                               addr, addrlen);
+}
+#endif
 
 }
 
