@@ -259,9 +259,9 @@ int getpeername(int socket, struct sockaddr * address,
   return -1;
 }
 
-int getsockname(int s, struct sockaddr *name, socklen_t *namelen) {
+int getsockname(int s, struct sockaddr* name, socklen_t* namelen) {
   LOG("getsockname: %d\n", s);
-  return -1;
+  return FileSystem::GetFileSystem()->getsockname(s, name, namelen);
 }
 
 int listen(int sockfd, int backlog) {
@@ -335,21 +335,19 @@ ssize_t recv(int fd, void *buf, size_t count, int flags) {
   return rv == 0 ? recvd : -1;
 }
 
-#if 0
 ssize_t sendto(int sockfd, const void* buf, size_t len, int flags,
                const struct sockaddr* dest_addr, socklen_t addrlen) {
   LOG("sendto: %d %d %d\n", sockfd, len, flags);
-  return FileSystem::GetFileSystem()->sendto(sockfd, buf, len, flags,
+  return FileSystem::GetFileSystem()->sendto(sockfd, (char*)buf, len, flags,
                                              dest_addr, addrlen);
 }
 
-ssize_t recvfrom(int socket, void *restrict buffer, size_t len, int flags,
-                 struct sockaddr* restrict addr, socklen_t* restrict addrlen) {
+ssize_t recvfrom(int socket, void* buffer, size_t len, int flags,
+                 struct sockaddr* addr, socklen_t* addrlen) {
   LOG("recvfrom: %d %d %d\n", socket, len, flags);
-  return FileSystem::GetFileSystem()->recvfrom(socket, buffer, len, flags,
-                                               addr, addrlen);
+  return FileSystem::GetFileSystem()->recvfrom(socket, (char*)buffer, len,
+                                               flags, addr, addrlen);
 }
-#endif
 
 }
 

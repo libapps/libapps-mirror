@@ -50,6 +50,11 @@ class FileSystem {
   // Switch TCP sockets between JS and Pepper implementations.
   void UseJsSocket(bool use_js);
 
+  static bool CreateNetAddress(const sockaddr* saddr, socklen_t addrlen,
+                               PP_NetAddress_Private* addr);
+  static bool CreateSocketAddress(const PP_NetAddress_Private& addr,
+                                  sockaddr* saddr, socklen_t* addrlen);
+
   // Syscall implementations.
   int open(const char* pathname, int oflag, mode_t cmode, int* newfd);
   int close(int fd);
@@ -84,6 +89,11 @@ class FileSystem {
   int bind(int sockfd, const sockaddr* serv_addr, socklen_t addrlen);
   int listen(int sockfd, int backlog);
   int accept(int sockfd, sockaddr* addr, socklen_t* addrlen);
+  int getsockname(int s, sockaddr* name, socklen_t* namelen);
+  ssize_t sendto(int sockfd, const char* buf, size_t len, int flags,
+                 const sockaddr* dest_addr, socklen_t addrlen);
+  ssize_t recvfrom(int socket, char* buffer, size_t len, int flags,
+                   sockaddr* addr, socklen_t* addrlen);
 
   int mkdir(const char* pathname, mode_t mode);
 
@@ -100,6 +110,7 @@ class FileSystem {
   typedef std::map<std::string, PathHandler*> PathHandlerMap;
   typedef std::map<std::string, unsigned long> HostMap;
   typedef std::map<unsigned long, std::string> AddressMap;
+  typedef std::map<int, int> SocketTypesMap;
 
   struct GetAddrInfoParams {
     const char* hostname;
@@ -164,6 +175,10 @@ class FileSystem {
   unsigned short row_;
   bool is_resize_;
   void (*handler_sigwinch_)(int);
+
+  // TODO(dpolukhin): remove this map and put all socket related info into
+  // FileStream with type socket.
+  SocketTypesMap socket_types_;
 
   DISALLOW_COPY_AND_ASSIGN(FileSystem);
 };

@@ -104,26 +104,6 @@ PP_Resource TCPServerSocket::accept() {
   return ret;
 }
 
-bool TCPServerSocket::CreateNetAddress(const sockaddr* saddr,
-                                       PP_NetAddress_Private* addr) {
-  if (saddr->sa_family == AF_INET) {
-    const sockaddr_in* sin4 = reinterpret_cast<const sockaddr_in*>(saddr);
-    if (!pp::NetAddressPrivate::CreateFromIPv4Address(
-            reinterpret_cast<const uint8_t*>(&sin4->sin_addr),
-            ntohs(sin4->sin_port), addr)) {
-      return false;
-    }
-  } else {
-    const sockaddr_in6* sin6 = reinterpret_cast<const sockaddr_in6*>(saddr);
-    if (!pp::NetAddressPrivate::CreateFromIPv6Address(
-            reinterpret_cast<const uint8_t*>(&sin6->sin6_addr), 0,
-            ntohs(sin6->sin6_port), addr)) {
-      return false;
-    }
-  }
-  return true;
-}
-
 void TCPServerSocket::Listen(int32_t result, int backlog, int32_t* pres) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
@@ -131,7 +111,8 @@ void TCPServerSocket::Listen(int32_t result, int backlog, int32_t* pres) {
   socket_ = new pp::TCPServerSocketPrivate(sys->instance());
 
   PP_NetAddress_Private addr = {};
-  if (CreateNetAddress(reinterpret_cast<const sockaddr*>(&sin6_), &addr)) {
+  if (FileSystem::CreateNetAddress(reinterpret_cast<const sockaddr*>(&sin6_),
+                                   sizeof(sin6_), &addr)) {
     LOG("TCPServerSocket::Listen: %s\n",
         pp::NetAddressPrivate::Describe(addr, true).c_str());
     *pres = socket_->Listen(&addr, backlog,

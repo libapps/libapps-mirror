@@ -10,10 +10,11 @@ CXX_SOURCES:=\
 	src/file_system.cc \
 	src/js_file.cc \
 	src/pepper_file.cc \
+	src/syscalls.cc \
+	src/ssh_plugin.cc \
 	src/tcp_server_socket.cc \
 	src/tcp_socket.cc \
-	src/syscalls.cc \
-	src/ssh_plugin.cc
+	src/udp_socket.cc
 
 CXX_HEADERS:=\
 	src/dev_null.h \
@@ -27,7 +28,8 @@ CXX_HEADERS:=\
 	src/pthread_helpers.h \
 	src/ssh_plugin.h \
 	src/tcp_server_socket.h \
-	src/tcp_socket.h
+	src/tcp_socket.h \
+	src/udp_socket.h
 
 # Project Build flags
 override LDFLAGS+=-lppapi_cpp -lppapi -lutil -lcrypto -lz -lresolv -ldl -lnsl \

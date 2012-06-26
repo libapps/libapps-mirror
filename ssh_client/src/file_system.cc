@@ -23,6 +23,7 @@
 #include "pepper_file.h"
 #include "tcp_server_socket.h"
 #include "tcp_socket.h"
+#include "udp_socket.h"
 
 extern "C" void DoWrapSysCalls();
 
@@ -363,9 +364,7 @@ int FileSystem::IsReady(int nfds, fd_set* fds, bool (FileStream::*is_ready)(),
   for (int i = 0; i < nfds; i++) {
     if (FD_ISSET(i, fds)) {
       FileStream* stream = GetStream(i);
-      if (!stream)
-        return -1;
-      if ((stream->*is_ready)()) {
+      if (stream && (stream->*is_ready)()) {
         if (!apply)
           return 1;
         else
@@ -731,8 +730,14 @@ int FileSystem::getnameinfo(const sockaddr *sa, socklen_t salen,
 int FileSystem::socket(int socket_family, int socket_type, int protocol) {
   Mutex::Lock lock(mutex_);
   int fd = GetFirstUnusedDescriptor();
-  // mark descriptor as used
-  AddFileStream(fd, NULL);
+  socket_types_[fd] = socket_type;
+  if (socket_types_[fd] == SOCK_DGRAM) {
+    UDPSocket* socket = new UDPSocket(fd, 0);
+    AddFileStream(fd, socket);
+  } else {
+    // mark descriptor as used
+    AddFileStream(fd, NULL);
+  }
   return fd;
 }
 
@@ -816,12 +821,30 @@ int FileSystem::shutdown(int fd, int how) {
 
 int FileSystem::bind(int fd, const sockaddr* addr, socklen_t addrlen) {
   Mutex::Lock lock(mutex_);
-  if (streams_.find(fd) == streams_.end()) {
+  if (streams_.find(fd) == streams_.end() ||
+      socket_types_.find(fd) == socket_types_.end()) {
     errno = EBADF;
     return -1;
   }
-  AddFileStream(fd, new TCPServerSocket(fd, 0, addr, addrlen));
-  return 0;
+
+  switch(socket_types_[fd]) {
+    case SOCK_STREAM:
+      AddFileStream(fd, new TCPServerSocket(fd, 0, addr, addrlen));
+      return 0;
+
+    case SOCK_DGRAM: {
+      UDPSocket* socket = static_cast<UDPSocket*>(GetStream(fd));
+      if (socket && socket->bind(addr, addrlen)) {
+        return 0;
+      } else {
+        errno = EADDRINUSE;
+        return -1;
+      }
+    }
+
+    default:
+      return -1;
+  }
 }
 
 int FileSystem::listen(int sockfd, int backlog) {
@@ -857,6 +880,50 @@ int FileSystem::accept(int sockfd, sockaddr* addr, socklen_t* addrlen) {
     }
     errno = EINVAL;
     return -1;
+  } else {
+    errno = EBADF;
+    return -1;
+  }
+}
+
+int FileSystem::getsockname(int sockfd, sockaddr* name, socklen_t* namelen) {
+  Mutex::Lock lock(mutex_);
+  FileStream* stream = GetStream(sockfd);
+  if (stream && stream != kBadFileStream &&
+      socket_types_[sockfd] == SOCK_DGRAM) {
+    UDPSocket* socket = static_cast<UDPSocket*>(stream);
+    return socket->getsockname(name, namelen);
+  } else {
+    // TOOD(dpolukhin): implement getsockname for TCP sockets. Now it is
+    // impossible to implement for TCP server sockets because Pepper doesn't
+    // have method to get bound address.
+    errno = EBADF;
+    return -1;
+  }
+}
+
+ssize_t FileSystem::sendto(int sockfd, const char* buf, size_t len, int flags,
+                           const sockaddr* dest_addr, socklen_t addrlen) {
+  Mutex::Lock lock(mutex_);
+  FileStream* stream = GetStream(sockfd);
+  if (stream && stream != kBadFileStream &&
+      socket_types_[sockfd] == SOCK_DGRAM) {
+    UDPSocket* socket = static_cast<UDPSocket*>(stream);
+    return socket->sendto(buf, len, flags, dest_addr, addrlen);
+  } else {
+    errno = EBADF;
+    return -1;
+  }
+}
+
+ssize_t FileSystem::recvfrom(int sockfd, char* buffer, size_t len, int flags,
+                             sockaddr* addr, socklen_t* addrlen) {
+  Mutex::Lock lock(mutex_);
+  FileStream* stream = GetStream(sockfd);
+  if (stream && stream != kBadFileStream &&
+      socket_types_[sockfd] == SOCK_DGRAM) {
+    UDPSocket* socket = static_cast<UDPSocket*>(stream);
+    return socket->recvfrom(buffer, len, flags, addr, addrlen);
   } else {
     errno = EBADF;
     return -1;
@@ -953,4 +1020,49 @@ bool FileSystem::GetTerminalSize(unsigned short* col, unsigned short* row) {
 
 void FileSystem::UseJsSocket(bool use_js) {
   use_js_socket_ = use_js;
+}
+
+bool FileSystem::CreateNetAddress(const sockaddr* saddr, socklen_t addrlen,
+                                  PP_NetAddress_Private* addr) {
+  if (saddr->sa_family == AF_INET) {
+    const sockaddr_in* sin4 = reinterpret_cast<const sockaddr_in*>(saddr);
+    if (!pp::NetAddressPrivate::CreateFromIPv4Address(
+            reinterpret_cast<const uint8_t*>(&sin4->sin_addr),
+            ntohs(sin4->sin_port), addr)) {
+      return false;
+    }
+  } else if (saddr->sa_family == AF_INET6){
+    const sockaddr_in6* sin6 = reinterpret_cast<const sockaddr_in6*>(saddr);
+    if (!pp::NetAddressPrivate::CreateFromIPv6Address(
+            reinterpret_cast<const uint8_t*>(&sin6->sin6_addr), 0,
+            ntohs(sin6->sin6_port), addr)) {
+      return false;
+    }
+  } else {
+    return false;
+  }
+  return true;
+}
+
+bool FileSystem::CreateSocketAddress(const PP_NetAddress_Private& addr,
+                                     sockaddr* saddr, socklen_t* addrlen) {
+  PP_NetAddressFamily_Private family = pp::NetAddressPrivate::GetFamily(addr);
+  if (family == PP_NETADDRESSFAMILY_IPV4) {
+    *addrlen = sizeof(sockaddr_in);
+    sockaddr_in* sin4 = reinterpret_cast<sockaddr_in*>(saddr);
+    sin4->sin_family = AF_INET;
+    sin4->sin_port = htons(pp::NetAddressPrivate::GetPort(addr));
+    pp::NetAddressPrivate::GetAddress(addr, &sin4->sin_addr,
+                                      sizeof(sin4->sin_addr));
+    return true;
+  } else if (family == PP_NETADDRESSFAMILY_IPV6) {
+    *addrlen = sizeof(sockaddr_in6);
+    sockaddr_in6* sin6 = reinterpret_cast<sockaddr_in6*>(saddr);
+    sin6->sin6_family = AF_INET6;
+    sin6->sin6_port = htons(pp::NetAddressPrivate::GetPort(addr));
+    pp::NetAddressPrivate::GetAddress(addr, &sin6->sin6_addr,
+                                      sizeof(sin6->sin6_addr));
+    return true;
+  }
+  return false;
 }

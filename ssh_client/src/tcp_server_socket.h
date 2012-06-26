@@ -40,8 +40,6 @@ class TCPServerSocket : public FileStream {
   PP_Resource accept();
 
  private:
-  bool CreateNetAddress(const sockaddr* saddr,
-                        PP_NetAddress_Private* addr);
   void Listen(int32_t result, int backlog, int32_t* pres);
   void Accept(int32_t result, int32_t* pres);
   void OnAccept(int32_t result);

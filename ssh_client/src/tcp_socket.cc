@@ -68,8 +68,8 @@ void TCPSocket::close() {
 }
 
 int TCPSocket::read(char* buf, size_t count, size_t* nread) {
-  FileSystem* sys = FileSystem::GetFileSystem();
   if (is_block()) {
+    FileSystem* sys = FileSystem::GetFileSystem();
     while (in_buf_.empty() && is_open())
       sys->cond().wait(sys->mutex());
   }
@@ -143,7 +143,7 @@ bool TCPSocket::is_exception() {
 }
 
 void TCPSocket::PostReadTask() {
-  if (!read_sent_ && in_buf_.size() < kBufSize / 2) {
+  if (is_open() && !read_sent_ && in_buf_.size() < kBufSize / 2) {
     read_sent_ = true;
     if (!pp::Module::Get()->core()->IsMainThread()) {
       pp::Module::Get()->core()->CallOnMainThread(
@@ -156,7 +156,7 @@ void TCPSocket::PostReadTask() {
 }
 
 void TCPSocket::PostWriteTask(int32_t* pres, bool always_post) {
-  if (!write_sent_ && !out_buf_.empty()) {
+  if (is_open() && !write_sent_ && !out_buf_.empty()) {
     write_sent_ = true;
     if (always_post || !pp::Module::Get()->core()->IsMainThread()) {
       pp::Module::Get()->core()->CallOnMainThread(0,
