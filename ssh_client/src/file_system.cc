@@ -408,6 +408,11 @@ int FileSystem::select(int nfds, fd_set* readfds, fd_set* writefds,
         break;
 
       if (cond_.timedwait(mutex_, &ts_abs)) {
+        // Work around bug in pepper_20 SDK where pthread_cond_timedwait can
+        // return the negative of the error code. Specifically -EINTR.
+        //
+        // TODO(davidben): Remove this when we build against pepper_21.
+        if (errno < 0) errno = -errno;
         if (errno == ETIMEDOUT)
           break;
         else
