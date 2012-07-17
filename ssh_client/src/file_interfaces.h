@@ -106,7 +106,7 @@ class OutputInterface {
   virtual bool Close(int fd) = 0;
   virtual size_t GetWriteWindow() = 0;
   virtual const char* GetEnvironmentVariable(const char* name) = 0;
-  virtual void SessionClosed(int error) = 0;
+  virtual void SendExitCode(int error) = 0;
 };
 
 #endif  // FILE_INTERFACES_H

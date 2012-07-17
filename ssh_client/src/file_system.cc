@@ -109,6 +109,7 @@ FileSystem::~FileSystem() {
 }
 
 void FileSystem::OnOpen(int32_t result, pp::FileSystem* fs) {
+  Mutex::Lock lock(mutex_);
   if (result == PP_OK) {
     ppfs_ = fs;
     ppfs_path_handler_ = new PepperFileHandler(fs);
@@ -900,7 +901,16 @@ const char* FileSystem::getenv(const char* name) {
 }
 
 void FileSystem::exit(int status) {
-  output_->SessionClosed(status);
+  Mutex::Lock lock(mutex_);
+  output_->SendExitCode(status);
+  // Wait for the page to ACK it, so we can abort.
+  while (!exit_code_acked_)
+    cond_.wait(mutex_);
+}
+
+void FileSystem::ExitCodeAcked() {
+  Mutex::Lock lock(mutex_);
+  exit_code_acked_ = true;
 }
 
 void FileSystem::MakeDirectory(int32_t result, const char* pathname,

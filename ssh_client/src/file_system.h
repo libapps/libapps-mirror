@@ -93,6 +93,8 @@ class FileSystem {
   const char* getenv(const char* name);
   void exit(int status);
 
+  void ExitCodeAcked();
+
  private:
   typedef std::map<int, FileStream*> FileStreamMap;
   typedef std::map<std::string, PathHandler*> PathHandlerMap;
@@ -149,6 +151,7 @@ class FileSystem {
   PathHandler* ppfs_path_handler_;
   bool fs_initialized_;
   pp::CompletionCallbackFactory<FileSystem, ThreadSafeRefCount> factory_;
+  bool exit_code_acked_;
 
   pp::HostResolverPrivate* host_resolver_;
 

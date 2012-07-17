@@ -26,6 +26,7 @@ const char kOnReadMethodId[] = "onRead";
 const char kOnWriteAcknowledgeMethodId[] = "onWriteAcknowledge";
 const char kOnCloseMethodId[] = "onClose";
 const char kOnResizeMethodId[] = "onResize";
+const char kOnExitAcknowledgeMethodId[] = "onExitAcknowledge";
 
 // Known startSession attributes.
 const char kUsernameAttr[] = "username";
@@ -96,6 +97,8 @@ void SshPluginInstance::Invoke(const std::string& function,
     OnClose(args);
   } else if (function == kOnResizeMethodId) {
     OnResize(args);
+  } else if (function == kOnExitAcknowledgeMethodId) {
+    OnExitAcknowledge(args);
   }
 }
 
@@ -120,17 +123,16 @@ void SshPluginInstance::PrintLog(const std::string& msg) {
       &SshPluginInstance::PrintLogImpl, msg));
 }
 
-void SshPluginInstance::SessionClosedImpl(int32_t result, const int& error) {
+void SshPluginInstance::SendExitCodeImpl(int32_t result, int error) {
   Json::Value call_args(Json::arrayValue);
   call_args.append(error);
   InvokeJS(kExitMethodId, call_args);
 }
 
-void SshPluginInstance::SessionClosed(int error) {
+void SshPluginInstance::SendExitCode(int error) {
   core_->CallOnMainThread(0, factory_.NewCallback(
-      &SshPluginInstance::SessionClosedImpl, error));
+      &SshPluginInstance::SendExitCodeImpl, error));
   openssh_thread_ = NULL;
-  pthread_exit(NULL);
 }
 
 bool SshPluginInstance::OpenFile(int fd, const char* name, int mode,
@@ -243,7 +245,7 @@ void SshPluginInstance::SessionThreadImpl() {
   for (size_t i = 0; i < argv.size(); i++)
     LOG("  argv[%d] = %s\n", i, argv[i]);
 
-  SessionClosed(ssh_main(argv.size(), &argv[0]));
+  SendExitCode(ssh_main(argv.size(), &argv[0]));
 }
 
 void* SshPluginInstance::SessionThread(void* arg) {
@@ -265,20 +267,20 @@ const char* SshPluginInstance::GetEnvironmentVariable(const char* name) {
 void SshPluginInstance::StartSession(const Json::Value& args) {
   if (args.size() == 1 && args[(size_t)0].isObject() && !openssh_thread_) {
     session_args_ = args[(size_t)0];
-  if (session_args_.isMember(kTerminalWidthAttr) &&
-      session_args_[kTerminalWidthAttr].isNumeric() &&
-      session_args_.isMember(kTerminalHeightAttr) &&
-      session_args_[kTerminalHeightAttr].isNumeric()) {
-    file_system_.SetTerminalSize(session_args_[kTerminalWidthAttr].asInt(),
-                                 session_args_[kTerminalHeightAttr].asInt());
-  }
-  if (session_args_.isMember(kUseJsSocketAttr) &&
-      session_args_[kUseJsSocketAttr].isBool()) {
-    file_system_.UseJsSocket(session_args_[kUseJsSocketAttr].asBool());
-  }
-  if (pthread_create(&openssh_thread_, NULL,
+    if (session_args_.isMember(kTerminalWidthAttr) &&
+        session_args_[kTerminalWidthAttr].isNumeric() &&
+        session_args_.isMember(kTerminalHeightAttr) &&
+        session_args_[kTerminalHeightAttr].isNumeric()) {
+      file_system_.SetTerminalSize(session_args_[kTerminalWidthAttr].asInt(),
+                                   session_args_[kTerminalHeightAttr].asInt());
+    }
+    if (session_args_.isMember(kUseJsSocketAttr) &&
+        session_args_[kUseJsSocketAttr].isBool()) {
+      file_system_.UseJsSocket(session_args_[kUseJsSocketAttr].asBool());
+    }
+    if (pthread_create(&openssh_thread_, NULL,
                        &SshPluginInstance::SessionThread, this)) {
-      SessionClosedImpl(0, -1);
+      SendExitCodeImpl(0, -1);
     }
   } else {
     PrintLogImpl(0, "startSession: invalid arguments\n");
@@ -352,6 +354,10 @@ void SshPluginInstance::OnClose(const Json::Value& args) {
 void SshPluginInstance::OnResize(const Json::Value& args) {
   file_system_.SetTerminalSize(args[(size_t)0].asInt(),
                                args[(size_t)1].asInt());
+}
+
+void SshPluginInstance::OnExitAcknowledge(const Json::Value& args) {
+  file_system_.ExitCodeAcked();
 }
 
 //------------------------------------------------------------------------------

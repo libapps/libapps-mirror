@@ -39,7 +39,7 @@ class SshPluginInstance : public pp::Instance,
   virtual bool Close(int fd);
   virtual size_t GetWriteWindow();
   virtual const char* GetEnvironmentVariable(const char* name);
-  virtual void SessionClosed(int error);
+  virtual void SendExitCode(int error);
 
  private:
   typedef std::map<int, InputInterface*> InputStreams;
@@ -50,6 +50,7 @@ class SshPluginInstance : public pp::Instance,
   void OnWriteAcknowledge(const Json::Value& args);
   void OnClose(const Json::Value& args);
   void OnResize(const Json::Value& args);
+  void OnExitAcknowledge(const Json::Value& args);
 
   void SessionThreadImpl();
   static void* SessionThread(void* arg);
@@ -60,7 +61,7 @@ class SshPluginInstance : public pp::Instance,
   void PrintLog(const std::string& msg);
   void PrintLogImpl(int32_t result, const std::string& msg);
 
-  void SessionClosedImpl(int32_t result, const int& error);
+  void SendExitCodeImpl(int32_t result, int error);
 
   static SshPluginInstance* instance_;
 

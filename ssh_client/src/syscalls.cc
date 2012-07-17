@@ -137,22 +137,19 @@ int select(int nfds, fd_set *readfds, fd_set *writefds,
 
 //------------------------------------------------------------------------------
 
+// Wrap exit and _exit so JavaScript gets our exit code. We don't wrap
+// abort so that we have something to chain to, but abort has no exit
+// code to report anyway.
 void exit(int status) {
   LOG("exit: %d\n", status);
   FileSystem::GetFileSystem()->exit(status);
-  assert(0);
+  abort();  // Can we chain to the real exit?
 }
 
 void _exit(int status) {
   LOG("_exit: %d\n", status);
   FileSystem::GetFileSystem()->exit(status);
-  assert(0);
-}
-
-void abort() {
-  LOG("abort\n");
-  FileSystem::GetFileSystem()->exit(-1);
-  assert(0);
+  abort();  // Can we chain to the real _exit?
 }
 
 int seteuid(uid_t euid) {
