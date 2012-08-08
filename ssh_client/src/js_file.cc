@@ -83,16 +83,32 @@ void JsFile::OnOpen(bool success) {
 void JsFile::OnRead(const char* buf, size_t size) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
-  in_buf_.insert(in_buf_.end(), buf, buf + size);
-  // TODO(dpolukhin): implement simple line editing.
-  if (isatty() && (tio_.c_lflag & ECHO)) {
+  if (isatty()) {
     for (size_t i = 0; i < size; i++) {
-      if ((tio_.c_iflag & ICRNL) && buf[i] == '\r') {
-        ::write(1, "\n", 1);
-      } else {
-        ::write(1, &buf[i], 1);
+      if (tio_.c_lflag & ICANON) {
+        if ((tio_.c_lflag & ECHOE) && buf[i] == tio_.c_cc[VERASE]) {
+          // Remove previous character if any.
+          if (!in_buf_.empty()) {
+            in_buf_.pop_back();
+            if (tio_.c_lflag & ECHO)
+              ::write(1, "\b \b", 3);
+          }
+          continue;
+        } else if ((tio_.c_lflag & ECHO) ||
+                   ((tio_.c_lflag & ECHONL) && buf[i] == '\r')) {
+          if ((tio_.c_iflag & ICRNL) && buf[i] == '\r') {
+            in_buf_.push_back('\n');
+            ::write(1, "\n", 1);
+            continue;
+          } else {
+            ::write(1, &buf[i], 1);
+          }
+        }
       }
+      in_buf_.push_back(buf[i]);
     }
+  } else {
+    in_buf_.insert(in_buf_.end(), buf, buf + size);
   }
   sys->cond().broadcast();
 }
@@ -154,6 +170,18 @@ int JsFile::read(char* buf, size_t count, size_t* nread) {
       sys->cond().wait(sys->mutex());
   }
 
+  if (isatty() && (tio_.c_lflag & ICANON)) {
+    // Need to wait for the whole line. This code doesn't introduce performance
+    // issue because ICANON is used only during local ssh prompts, ssh session
+    // use raw TTY mode.
+    // TODO(dpolukhin): find better way to detect whole line.
+    while (is_open() &&
+           std::find(in_buf_.begin(), in_buf_.end(), '\r') == in_buf_.end() &&
+           std::find(in_buf_.begin(), in_buf_.end(), '\n') == in_buf_.end()) {
+      sys->cond().wait(sys->mutex());
+    }
+  }
+
   *nread = 0;
   while (*nread < count) {
     if (in_buf_.empty())
@@ -177,7 +205,7 @@ int JsFile::write(const char* buf, size_t count, size_t* nwrote) {
 
   out_buf_.insert(out_buf_.end(), buf, buf + count);
 
-  if (isatty() && (tio_.c_lflag & ICANON)) {
+  if (isatty() && (tio_.c_oflag & ONLCR)) {
     // It could be performance issue to do this conversion in-place but
     // fortunately it's used only for first few lines like password prompt.
     for (size_t i = out_buf_.size() - count; i < out_buf_.size(); i++) {
