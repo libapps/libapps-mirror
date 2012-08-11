@@ -85,27 +85,33 @@ void JsFile::OnRead(const char* buf, size_t size) {
   Mutex::Lock lock(sys->mutex());
   if (isatty()) {
     for (size_t i = 0; i < size; i++) {
+      char c = buf[i];
+      // Transform characters according to input flags.
+      if (c == '\r') {
+        if (tio_.c_iflag & IGNCR)
+          continue;
+        if (tio_.c_iflag & ICRNL)
+          c = '\n';
+      } else if (c == '\n') {
+        if (tio_.c_iflag & INLCR)
+          c = '\r';
+      }
       if (tio_.c_lflag & ICANON) {
-        if ((tio_.c_lflag & ECHOE) && buf[i] == tio_.c_cc[VERASE]) {
-          // Remove previous character if any.
-          if (!in_buf_.empty()) {
+        if ((tio_.c_lflag & ECHOE) && c == tio_.c_cc[VERASE]) {
+          // Remove previous character in the line if any.
+          // TODO(davidben): This should be IUTF8-aware.
+          if (!in_buf_.empty() && in_buf_.back() != '\n') {
             in_buf_.pop_back();
             if (tio_.c_lflag & ECHO)
               ::write(1, "\b \b", 3);
           }
           continue;
         } else if ((tio_.c_lflag & ECHO) ||
-                   ((tio_.c_lflag & ECHONL) && buf[i] == '\r')) {
-          if ((tio_.c_iflag & ICRNL) && buf[i] == '\r') {
-            in_buf_.push_back('\n');
-            ::write(1, "\n", 1);
-            continue;
-          } else {
-            ::write(1, &buf[i], 1);
-          }
+                   ((tio_.c_lflag & ECHONL) && c == '\n')) {
+          ::write(1, &c, 1);
         }
       }
-      in_buf_.push_back(buf[i]);
+      in_buf_.push_back(c);
     }
   } else {
     in_buf_.insert(in_buf_.end(), buf, buf + size);
@@ -176,7 +182,6 @@ int JsFile::read(char* buf, size_t count, size_t* nread) {
     // use raw TTY mode.
     // TODO(dpolukhin): find better way to detect whole line.
     while (is_open() &&
-           std::find(in_buf_.begin(), in_buf_.end(), '\r') == in_buf_.end() &&
            std::find(in_buf_.begin(), in_buf_.end(), '\n') == in_buf_.end()) {
       sys->cond().wait(sys->mutex());
     }
@@ -205,7 +210,7 @@ int JsFile::write(const char* buf, size_t count, size_t* nwrote) {
 
   out_buf_.insert(out_buf_.end(), buf, buf + count);
 
-  if (isatty() && (tio_.c_oflag & ONLCR)) {
+  if (isatty() && (tio_.c_oflag & OPOST) && (tio_.c_oflag & ONLCR)) {
     // It could be performance issue to do this conversion in-place but
     // fortunately it's used only for first few lines like password prompt.
     for (size_t i = out_buf_.size() - count; i < out_buf_.size(); i++) {
