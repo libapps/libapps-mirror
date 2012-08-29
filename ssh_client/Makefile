@@ -36,11 +36,19 @@ override LDFLAGS+=-lppapi_cpp -lppapi -lutil -lcrypto -lz -lresolv -ldl -lnsl \
 	-ljsoncpp -Loutput
 override WARNINGS+=-Wno-long-long -Wall -Wswitch-enum -Werror
 override CXXFLAGS+=-pthread -std=gnu++0x $(WARNINGS) -Iinclude
+override CFLAGS+=-pthread $(WARNINGS) -Iinclude
 
 OSNAME:=$(shell python $(NACL_SDK_ROOT)/tools/getos.py)
 TC_PATH:=$(abspath $(NACL_SDK_ROOT)/toolchain/$(OSNAME)_x86_glibc)
 CXX:=$(TC_PATH)/bin/i686-nacl-g++
-
+PNACL_TC_ROOT:=$(NACL_SDK_ROOT)/toolchain/$(OSNAME)_x86_pnacl/newlib/
+PNACL_CXX:=$(PNACL_TC_ROOT)/bin/pnacl-clang++
+PNACL_CC:=$(PNACL_TC_ROOT)/bin/pnacl-clang
+PNACL_AR:=$(PNACL_TC_ROOT)/bin/pnacl-ar
+PNACL_TRANSLATE=$(PNACL_TC_ROOT)/bin/pnacl-translate
+PNACL_LDFLAGS:=-lppapi_cpp -lppapi -lcrypto -lz -ljsoncpp -Loutput
+COMPAT_INC:=-I$(PNACL_TC_ROOT)/usr/include/glibc-compat
+PNACL_CXXFLAGS:=$(CXXFLAGS) -DUSE_NEWLIB -DDEBUG $(COMPAT_INC)
 THIS_MAKEFILE:=$(abspath $(lastword $(MAKEFILE_LIST)))
 
 # Declare the ALL target first, to make the 'all' target the default build
@@ -64,5 +72,23 @@ $(PROJECT)_x86_64.nexe : $(x86_64_OBJS)
 	$(CXX) -o $@ $^ -m64 -lopenssh64 -lssh64 -lopenbsd-compat64 \
 		$(CXXFLAGS) $(LDFLAGS)
 
+# Define PNaCl compile and link rules for C++ sources
+POBJS:=$(patsubst src/%.cc,output/%_p.o,$(CXX_SOURCES))
+$(POBJS) : output/%_p.o : src/%.cc $(THIS_MAKE)
+	$(PNACL_CXX) -o $@ -c $< $(PNACL_CXXFLAGS)
+
+$(PROJECT)_nl.pexe : $(POBJS)
+	$(PNACL_CXX) -o $@ $^ -lopensshpnacl -lsshpnacl -lopenbsd-compatpnacl \
+                              -lglibc-compat_pnacl $(PNACL_LDFLAGS)
+
+$(PROJECT)_nl_arm.nexe : $(PROJECT)_nl.pexe
+	$(PNACL_TRANSLATE) -arch arm -o $@ $(PROJECT)_nl.pexe
+
+$(PROJECT)_nl_x86_32.nexe : $(PROJECT)_nl.pexe
+	$(PNACL_TRANSLATE) -arch i686 -o $@ $(PROJECT)_nl.pexe
+
+$(PROJECT)_nl_x86_64.nexe : $(PROJECT)_nl.pexe
+	$(PNACL_TRANSLATE) -arch x86-64 -o $@ $(PROJECT)_nl.pexe
+
 clean:
-	rm -rf output/*.o $(PROJECT)*.nexe
+	rm -rf output/*.o $(PROJECT)*.nexe $(PROJECT).pexe
