@@ -68,7 +68,7 @@ class SshPluginInstance : public pp::Instance,
   pp::Core* core_;
   pthread_t openssh_thread_;
   Json::Value session_args_;
-  pp::CompletionCallbackFactory<SshPluginInstance, ThreadSafeRefCount> factory_;
+  pp::CompletionCallbackFactory<SshPluginInstance> factory_;
   InputStreams streams_;
   FileSystem file_system_;
 

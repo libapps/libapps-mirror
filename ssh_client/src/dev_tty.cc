@@ -7,8 +7,8 @@
 #include <assert.h>
 #include <string.h>
 
-DevTtyHandler::DevTtyHandler(FileStream* stdin, FileStream* stdout)
-    : ref_(1), stdin_(stdin), stdout_(stdout) {
+DevTtyHandler::DevTtyHandler(FileStream* stdin_fs, FileStream* stdout_fs)
+    : ref_(1), stdin_(stdin_fs), stdout_(stdout_fs) {
   stdin_->addref();
   stdout_->addref();
 }
@@ -39,8 +39,8 @@ int DevTtyHandler::stat(const char* pathname, nacl_abi_stat* out) {
 
 //------------------------------------------------------------------------------
 
-DevTty::DevTty(int fd, int oflag, FileStream* stdin, FileStream* stdout)
-  : ref_(1), fd_(fd), oflag_(oflag), stdin_(stdin), stdout_(stdout) {
+DevTty::DevTty(int fd, int oflag, FileStream* stdin_fs, FileStream* stdout_fs)
+  : ref_(1), fd_(fd), oflag_(oflag), stdin_(stdin_fs), stdout_(stdout_fs) {
   stdin_->addref();
   stdout_->addref();
 }

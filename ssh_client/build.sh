@@ -9,12 +9,12 @@ mkdir output
 
 if [[ ($NACL_SDK_ROOT == "") || !(-d $NACL_SDK_ROOT) ]]; then
   pushd output
-  if [[ !(-f naclsdk_linux.bz2) || !(-d naclsdk) ]]; then
-    rm -rf naclsdk_linux.bz2 nacl_sdk && mkdir naclsdk
-    wget --no-check-certificate https://commondatastorage.googleapis.com/nativeclient-mirror/nacl/nacl_sdk/trunk.129818/naclsdk_linux.bz2
-    tar xvjf naclsdk_linux.bz2 -C naclsdk || exit 1
+  if [[ !(-f naclsdk_linux.tar.bz2) || !(-d naclsdk) ]]; then
+    rm -rf naclsdk_linux.tar.bz2 nacl_sdk && mkdir naclsdk
+    wget --no-check-certificate https://commondatastorage.googleapis.com/nativeclient-mirror/nacl/nacl_sdk/22.0.1229.31/naclsdk_linux.tar.bz2
+    tar xvjf naclsdk_linux.tar.bz2 -C naclsdk || exit 1
   fi
-  export NACL_SDK_ROOT=$PWD/naclsdk/pepper_20
+  export NACL_SDK_ROOT=$PWD/naclsdk/pepper_22
   popd
 fi
 

@@ -79,7 +79,7 @@ class UDPSocket : public FileStream {
   int ref_;
   int fd_;
   int oflag_;
-  pp::CompletionCallbackFactory<UDPSocket, ThreadSafeRefCount> factory_;
+  pp::CompletionCallbackFactory<UDPSocket> factory_;
   pp::UDPSocketPrivate* socket_;
   MessageQueue in_queue_;
   MessageQueue out_queue_;

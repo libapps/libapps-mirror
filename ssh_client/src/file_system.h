@@ -161,7 +161,7 @@ class FileSystem {
   pp::FileSystem* ppfs_;
   PathHandler* ppfs_path_handler_;
   bool fs_initialized_;
-  pp::CompletionCallbackFactory<FileSystem, ThreadSafeRefCount> factory_;
+  pp::CompletionCallbackFactory<FileSystem> factory_;
   bool exit_code_acked_;
 
   pp::HostResolverPrivate* host_resolver_;

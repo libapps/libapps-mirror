@@ -10,7 +10,7 @@
 
 class DevTtyHandler : public PathHandler {
  public:
-  DevTtyHandler(FileStream* stdin, FileStream* stdout);
+  DevTtyHandler(FileStream* stdin_fs, FileStream* stdout_fs);
   virtual ~DevTtyHandler();
 
   virtual void addref();
@@ -29,7 +29,7 @@ class DevTtyHandler : public PathHandler {
 
 class DevTty : public FileStream {
  public:
-  DevTty(int fd, int oflag, FileStream* stdin, FileStream* stdout);
+  DevTty(int fd, int oflag, FileStream* stdin_fs, FileStream* stdout_fs);
   virtual ~DevTty();
 
   virtual void addref();

@@ -62,7 +62,7 @@ class TCPSocket : public FileStream {
   int ref_;
   int fd_;
   int oflag_;
-  pp::CompletionCallbackFactory<TCPSocket, ThreadSafeRefCount> factory_;
+  pp::CompletionCallbackFactory<TCPSocket> factory_;
   pp::TCPSocketPrivate* socket_;
   std::vector<char> in_buf_;
   std::vector<char> out_buf_;

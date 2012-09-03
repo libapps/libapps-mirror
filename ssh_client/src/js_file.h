@@ -59,7 +59,7 @@ class JsFile : public FileStream,
   int fd_;
   int oflag_;
   OutputInterface* out_;
-  pp::CompletionCallbackFactory<JsFile, ThreadSafeRefCount> factory_;
+  pp::CompletionCallbackFactory<JsFile> factory_;
   std::deque<char> in_buf_;
   std::deque<char> out_buf_;
   bool out_task_sent_;
@@ -86,7 +86,7 @@ class JsFileHandler : public PathHandler {
 
  private:
   int ref_;
-  pp::CompletionCallbackFactory<JsFileHandler, ThreadSafeRefCount> factory_;
+  pp::CompletionCallbackFactory<JsFileHandler> factory_;
   OutputInterface* out_;
 
   DISALLOW_COPY_AND_ASSIGN(JsFileHandler);
@@ -104,7 +104,7 @@ class JsSocket : public JsFile {
  private:
   void Connect(int32_t result, const char* host, uint16_t port);
 
-  pp::CompletionCallbackFactory<JsSocket, ThreadSafeRefCount> factory_;
+  pp::CompletionCallbackFactory<JsSocket> factory_;
   DISALLOW_COPY_AND_ASSIGN(JsSocket);
 };
 

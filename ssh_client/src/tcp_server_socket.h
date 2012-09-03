@@ -6,6 +6,7 @@
 #define TCP_SERVER_SOCKET_H
 
 #include <netdb.h>
+#include <netinet/in.h>
 
 #include "ppapi/cpp/completion_callback.h"
 #include "ppapi/cpp/private/tcp_server_socket_private.h"
@@ -48,7 +49,7 @@ class TCPServerSocket : public FileStream {
   int ref_;
   int fd_;
   int oflag_;
-  pp::CompletionCallbackFactory<TCPServerSocket, ThreadSafeRefCount> factory_;
+  pp::CompletionCallbackFactory<TCPServerSocket> factory_;
   pp::TCPServerSocketPrivate* socket_;
   sockaddr_in6 sin6_;
   PP_Resource resource_;

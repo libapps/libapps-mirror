@@ -101,27 +101,6 @@ class Cond {
   pthread_cond_t cond_;
 };
 
-class ThreadSafeRefCount {
- public:
-  ThreadSafeRefCount()
-      : ref_(0) {
-  }
-
-  int32_t AddRef() {
-    __sync_fetch_and_add(&ref_, 1);
-    return ref_;
-  }
-
-  int32_t Release() {
-    __sync_fetch_and_sub(&ref_, 1);
-    return ref_;
-  }
-
- private:
-  DISALLOW_COPY_AND_ASSIGN(ThreadSafeRefCount);
-  int32_t ref_;
-};
-
 #ifndef NDEBUG
 #define LOG(format, args...) \
   debug_log(format , ## args)

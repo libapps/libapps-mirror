@@ -78,7 +78,7 @@ class PepperFile : public FileStream {
   int ref_;
   int fd_;
   int oflag_;
-  pp::CompletionCallbackFactory<PepperFile, ThreadSafeRefCount> factory_;
+  pp::CompletionCallbackFactory<PepperFile> factory_;
   pp::FileSystem* file_system_;
   pp::FileIO* file_io_;
   int64_t offset_;

@@ -58,23 +58,23 @@ FileSystem::FileSystem(pp::Instance* instance, OutputInterface* out)
   }
 
   JsFile::InitTerminal();
-  JsFile* stdin = new JsFile(0, O_RDONLY, out);
-  if (out->OpenFile(0, NULL, O_RDONLY, stdin)) {
-    AddFileStream(0, stdin);
-    stdin->OnOpen(true);
+  JsFile* stdin_fs = new JsFile(0, O_RDONLY, out);
+  if (out->OpenFile(0, NULL, O_RDONLY, stdin_fs)) {
+    AddFileStream(0, stdin_fs);
+    stdin_fs->OnOpen(true);
   }
 
-  JsFile* stdout = new JsFile(1, O_WRONLY, out);
-  if (out->OpenFile(1, NULL, O_WRONLY, stdout)) {
-    AddFileStream(1, stdout);
-    stdout->OnOpen(true);
-    AddPathHandler("/dev/tty", new DevTtyHandler(stdin, stdout));
+  JsFile* stdout_fs = new JsFile(1, O_WRONLY, out);
+  if (out->OpenFile(1, NULL, O_WRONLY, stdout_fs)) {
+    AddFileStream(1, stdout_fs);
+    stdout_fs->OnOpen(true);
+    AddPathHandler("/dev/tty", new DevTtyHandler(stdin_fs, stdout_fs));
   }
 
-  JsFile* stderr = new JsFile(2, O_WRONLY, out);
-  if (out->OpenFile(2, NULL, O_WRONLY, stderr)) {
-    AddFileStream(2, stderr);
-    stderr->OnOpen(true);
+  JsFile* stderr_fs = new JsFile(2, O_WRONLY, out);
+  if (out->OpenFile(2, NULL, O_WRONLY, stderr_fs)) {
+    AddFileStream(2, stderr_fs);
+    stderr_fs->OnOpen(true);
   }
 
   AddPathHandler("/dev/null", new DevNullHandler());
