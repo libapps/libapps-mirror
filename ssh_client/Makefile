@@ -48,11 +48,14 @@ PNACL_AR:=$(PNACL_TC_ROOT)/bin/pnacl-ar
 PNACL_TRANSLATE=$(PNACL_TC_ROOT)/bin/pnacl-translate
 PNACL_LDFLAGS:=-lppapi_cpp -lppapi -lcrypto -lz -ljsoncpp -Loutput
 COMPAT_INC:=-I$(PNACL_TC_ROOT)/usr/include/glibc-compat
-PNACL_CXXFLAGS:=$(CXXFLAGS) -DUSE_NEWLIB -DDEBUG $(COMPAT_INC)
+PNACL_CXXFLAGS:=$(CXXFLAGS) -DUSE_NEWLIB $(COMPAT_INC)
 THIS_MAKEFILE:=$(abspath $(lastword $(MAKEFILE_LIST)))
 
 # Declare the ALL target first, to make the 'all' target the default build
-all: $(PROJECT)_x86_32.nexe $(PROJECT)_x86_64.nexe
+all_glibc: $(PROJECT)_x86_32.nexe $(PROJECT)_x86_64.nexe
+
+all_newlib: $(PROJECT)_nl_x86_32.nexe $(PROJECT)_nl_x86_64.nexe \
+	$(PROJECT)_nl_arm.nexe
 
 # Define 32 bit compile and link rules for C++ sources
 x86_32_OBJS:=$(patsubst src/%.cc,output/%_32.o,$(CXX_SOURCES))
@@ -79,7 +82,7 @@ $(POBJS) : output/%_p.o : src/%.cc $(THIS_MAKE)
 
 $(PROJECT)_nl.pexe : $(POBJS)
 	$(PNACL_CXX) -o $@ $^ -lopensshpnacl -lsshpnacl -lopenbsd-compatpnacl \
-                              -lglibc-compat_pnacl $(PNACL_LDFLAGS)
+                              -lglibc-compat $(PNACL_LDFLAGS)
 
 $(PROJECT)_nl_arm.nexe : $(PROJECT)_nl.pexe
 	$(PNACL_TRANSLATE) -arch arm -o $@ $(PROJECT)_nl.pexe

@@ -145,6 +145,7 @@ class FileSystem {
   int GetFirstUnusedDescriptor();
   int IsReady(int nfds, fd_set* fds, bool (FileStream::*is_ready)(),
               bool apply);
+  bool IsInterrupted();
 
   static const int kFileIDOffset = 100;
   static const unsigned long kFirstAddr = 0x00000000;

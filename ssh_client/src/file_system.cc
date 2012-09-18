@@ -44,7 +44,8 @@ FileSystem::FileSystem(pp::Instance* instance, OutputInterface* out)
       first_unused_addr_(kFirstAddr),
       use_js_socket_(false),
       col_(80), row_(24),
-      is_resize_(false) {
+      is_resize_(false),
+      handler_sigwinch_(SIG_DFL) {
   assert(!file_system_);
   file_system_ = this;
 
@@ -165,7 +166,14 @@ int FileSystem::open(const char* pathname, int oflag, mode_t cmode,
                      int* newfd) {
   Mutex::Lock lock(mutex_);
   PathHandlerMap::iterator it = paths_.find(pathname);
-  PathHandler* handler = (it != paths_.end()) ? it->second : ppfs_path_handler_;
+  PathHandler* handler = NULL;
+  if (it != paths_.end()) {
+    handler = it->second;
+  } else {
+    while(!fs_initialized_)
+      cond_.wait(mutex_);
+    handler = ppfs_path_handler_;
+  }
   if (!handler)
     return ENOENT;
 
@@ -378,6 +386,13 @@ int FileSystem::IsReady(int nfds, fd_set* fds, bool (FileStream::*is_ready)(),
   return nset;
 }
 
+bool FileSystem::IsInterrupted() {
+  bool has_handler_sigwinch = handler_sigwinch_ != SIG_IGN &&
+                              handler_sigwinch_ != SIG_DFL &&
+                              handler_sigwinch_ != SIG_ERR;
+  return has_handler_sigwinch && is_resize_;
+}
+
 int FileSystem::select(int nfds, fd_set* readfds, fd_set* writefds,
                        fd_set* exceptfds, struct timeval* timeout) {
   Mutex::Lock lock(mutex_);
@@ -399,20 +414,15 @@ int FileSystem::select(int nfds, fd_set* readfds, fd_set* writefds,
         kNanosecondsPerMicrosecond;
   }
 
-  while(!(IsReady(nfds, readfds, &FileStream::is_read_ready, false) ||
+  while(!(IsInterrupted() ||
+          IsReady(nfds, readfds, &FileStream::is_read_ready, false) ||
           IsReady(nfds, writefds, &FileStream::is_write_ready, false) ||
-          IsReady(nfds, exceptfds, &FileStream::is_exception, false) ||
-          is_resize_)) {
+          IsReady(nfds, exceptfds, &FileStream::is_exception, false))) {
     if (timeout) {
       if (!timeout->tv_sec && !timeout->tv_usec)
         break;
 
       if (cond_.timedwait(mutex_, &ts_abs)) {
-        // Work around bug in pepper_20 SDK where pthread_cond_timedwait can
-        // return the negative of the error code. Specifically -EINTR.
-        //
-        // TODO(davidben): Remove this when we build against pepper_21.
-        if (errno < 0) errno = -errno;
         if (errno == ETIMEDOUT)
           break;
         else
@@ -423,15 +433,11 @@ int FileSystem::select(int nfds, fd_set* readfds, fd_set* writefds,
     }
   }
 
-  if (is_resize_) {
+  if (IsInterrupted()) {
     is_resize_ = false;
-    if (handler_sigwinch_ != SIG_IGN &&
-        handler_sigwinch_ != SIG_DFL &&
-        handler_sigwinch_ != SIG_ERR) {
-      handler_sigwinch_(SIGWINCH);
-      errno = EINTR;
-      return -1;
-    }
+    handler_sigwinch_(SIGWINCH);
+    errno = EINTR;
+    return -1;
   }
 
   int nread = IsReady(nfds, readfds, &FileStream::is_read_ready, true);

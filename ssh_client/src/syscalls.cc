@@ -52,6 +52,8 @@ void debug_log(const char* format, ...) {
   va_end(ap);
 }
 
+static bool g_exit_called = false;
+
 static int WRAP(open)(const char *pathname, int oflag, mode_t cmode,
                       int *newfd) {
   LOG("open: %s\n", pathname);
@@ -263,12 +265,19 @@ int select(int nfds, fd_set *readfds, fd_set *writefds,
 // code to report anyway.
 void exit(int status) {
   LOG("exit: %d\n", status);
+  g_exit_called = true;
   FileSystem::GetFileSystem()->exit(status);
   abort();  // Can we chain to the real exit?
 }
 
 void _exit(int status) {
   LOG("_exit: %d\n", status);
+  if (g_exit_called) {
+    // Infinity exit loop detected. It happens in case of NewLib when abort
+    // calls exit inside. The only thing we can do is to stop this thread.
+    pthread_exit(NULL);
+  }
+  g_exit_called = true;
   FileSystem::GetFileSystem()->exit(status);
   abort();  // Can we chain to the real _exit?
 }

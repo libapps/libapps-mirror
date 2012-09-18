@@ -38,7 +38,7 @@ patch -p0 -i $PATCH_FILE || exit 1
 
 if [ ${NACL_PACKAGES_BITSIZE} = "pnacl" ] ; then
   export EXTRA_CFLAGS="-DHAVE_SETSID -DHAVE_GETNAMEINFO -DHAVE_GETADDRINFO \
-                       -I${NACL_SDK_USR_INCLUDE}/glibc-compat"
+                       -DHAVE_GETCWD -I${NACL_SDK_USR_INCLUDE}/glibc-compat"
   export EXTRA_CONFIGURE_FLAGS="--without-stackprotect"
   export EXTRA_LIBS="-lglibc-compat"
 else
