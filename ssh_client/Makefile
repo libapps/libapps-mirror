@@ -82,7 +82,7 @@ $(POBJS) : output/%_p.o : src/%.cc $(THIS_MAKE)
 
 $(PROJECT)_nl.pexe : $(POBJS)
 	$(PNACL_CXX) -o $@ $^ -lopensshpnacl -lsshpnacl -lopenbsd-compatpnacl \
-                              -lglibc-compat $(PNACL_LDFLAGS)
+                              -lglibc-compat $(PNACL_LDFLAGS) $(PNACL_CXXFLAGS)
 
 $(PROJECT)_nl_arm.nexe : $(PROJECT)_nl.pexe
 	$(PNACL_TRANSLATE) -arch arm -o $@ $(PROJECT)_nl.pexe
