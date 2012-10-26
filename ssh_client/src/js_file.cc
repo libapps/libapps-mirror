@@ -245,6 +245,8 @@ void JsFile::InitTerminal() {
   tio_.c_cflag = CREAD | 077;
   tio_.c_lflag =
       ISIG | ICANON | ECHO | ECHOE | ECHOK | ECHOCTL | ECHOKE | IEXTEN;
+  tio_.c_ispeed = B38400;
+  tio_.c_ospeed = B38400;
   tio_.c_cc[VINTR] = 3;
   tio_.c_cc[VQUIT] = 28;
   tio_.c_cc[VERASE] = 127;
