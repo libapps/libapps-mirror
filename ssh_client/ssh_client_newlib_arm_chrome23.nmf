@@ -1,0 +1,5 @@
+{
+  "program": {
+    "arm": { "url": "ssh_client_nl_arm_chrome23.nexe"}
+  }
+}
