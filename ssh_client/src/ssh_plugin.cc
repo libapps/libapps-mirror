@@ -254,16 +254,6 @@ void* SshPluginInstance::SessionThread(void* arg) {
   return NULL;
 }
 
-const char* SshPluginInstance::GetEnvironmentVariable(const char* name) {
-  if (session_args_.isMember(kEnvironmentAttr) &&
-      session_args_[kEnvironmentAttr].isObject() &&
-      session_args_[kEnvironmentAttr].isMember(name)) {
-    return session_args_[kEnvironmentAttr][name].asCString();
-  }
-
-  return NULL;
-}
-
 void SshPluginInstance::StartSession(const Json::Value& args) {
   if (args.size() == 1 && args[(size_t)0].isObject() && !openssh_thread_) {
     session_args_ = args[(size_t)0];
@@ -277,6 +267,17 @@ void SshPluginInstance::StartSession(const Json::Value& args) {
     if (session_args_.isMember(kUseJsSocketAttr) &&
         session_args_[kUseJsSocketAttr].isBool()) {
       file_system_.UseJsSocket(session_args_[kUseJsSocketAttr].asBool());
+    }
+    if (session_args_.isMember(kEnvironmentAttr) &&
+        session_args_[kEnvironmentAttr].isObject()) {
+      Json::Value::iterator end = session_args_[kEnvironmentAttr].end();
+      for (Json::Value::iterator it = session_args_[kEnvironmentAttr].begin();
+           it != end; ++it) {
+        if (it.key().isString() && (*it).isString()) {
+          LOG("env[%s] = %s\n", it.key().asCString(), (*it).asCString());
+          setenv(it.key().asCString(), (*it).asCString(), 1);
+        }
+      }
     }
     if (pthread_create(&openssh_thread_, NULL,
                        &SshPluginInstance::SessionThread, this)) {

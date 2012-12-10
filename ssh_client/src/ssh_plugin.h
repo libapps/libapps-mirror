@@ -38,7 +38,6 @@ class SshPluginInstance : public pp::Instance,
   virtual bool Read(int fd, size_t size);
   virtual bool Close(int fd);
   virtual size_t GetWriteWindow();
-  virtual const char* GetEnvironmentVariable(const char* name);
   virtual void SendExitCode(int error);
 
  private:

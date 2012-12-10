@@ -428,17 +428,6 @@ int tcsetattr(int fd, int optional_actions, const struct termios* termios_p) {
       fd, optional_actions, termios_p);
 }
 
-char* getenv(const char* name) {
-  LOG("getenv: %s\n", name);
-  FileSystem* sys = FileSystem::GetFileSystemNoCrash();
-  if (!sys)
-    return NULL;
-
-  char* value = const_cast<char*>(sys->getenv(name));
-  LOG("  ->ENV[%s]=%s\n", name, value ? value : "<NULL>");
-  return value;
-}
-
 int mkdir(const char* pathname, mode_t mode) {
   LOG("mkdir: %s\n", pathname);
   return FileSystem::GetFileSystem()->mkdir(pathname, mode);

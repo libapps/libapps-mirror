@@ -969,10 +969,6 @@ int FileSystem::sigaction(int signum,
   }
 }
 
-const char* FileSystem::getenv(const char* name) {
-  return output_->GetEnvironmentVariable(name);
-}
-
 void FileSystem::exit(int status) {
   Mutex::Lock lock(mutex_);
   output_->SendExitCode(status);

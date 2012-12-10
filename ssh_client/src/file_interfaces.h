@@ -105,7 +105,6 @@ class OutputInterface {
   virtual bool Read(int fd, size_t size) = 0;
   virtual bool Close(int fd) = 0;
   virtual size_t GetWriteWindow() = 0;
-  virtual const char* GetEnvironmentVariable(const char* name) = 0;
   virtual void SendExitCode(int error) = 0;
 };
 
