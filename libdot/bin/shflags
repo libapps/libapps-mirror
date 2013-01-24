@@ -277,9 +277,6 @@ _flags_define()
             true|t|0) _flags_default_=${FLAGS_TRUE} ;;
             false|f|1) _flags_default_=${FLAGS_FALSE} ;;
           esac
-        else
-          flags_error="invalid default flag value '${_flags_default_}'"
-          _flags_return_=${FLAGS_ERROR}
         fi
         ;;
 
