@@ -70,7 +70,7 @@ DEFINE_string source "" \
   "The source directory or zip file to package." s
 DEFINE_string tmpdir "" \
   "Temporary directory.  Will default to workdir/tmp if not specified." t
-DEFINE_string workdir ""
+DEFINE_string workdir "" \
   "Work directory.  Zip files will be created here." w
 
 FLAGS "$@" || exit $?
