@@ -213,7 +213,13 @@ function get_relative_path() {
 }
 
 function echo_suffix() {
-  echo "$1" | sed -e 's/^[^(]\+(//' -e 's/)[^)]*$//'
+  local name="$1"
+  local suffix=$(echo "$name" | sed -e 's/^[^(]\+(//' -e 's/)[^)]*$//')
+  if [ "$name" != "$suffix" ]; then
+    echo "$suffix"
+  else
+    echo ""
+  fi
 }
 
 function promote_name() {
@@ -353,7 +359,7 @@ function init_from_dir() {
   if [ "$FLAGS_promote" == "$FLAGS_TRUE" ]; then
     new_name="$(promote_name "$name")"
     local suffix="$(echo_suffix "$new_name")"
-    if [ "$suffix" == "" ]; then
+    if [ -z "$suffix" ]; then
       new_version="$(promote_version "$version")"
     else
       new_version="$version"
@@ -396,7 +402,7 @@ function init_from_zip() {
   local new_name="$(promote_name "$name")"
 
   local suffix="$(echo_suffix "$new_name")"
-  if [ "$suffix" == "" ]; then
+  if [ -z "$suffix" ]; then
     new_version="$(promote_version "$version")"
   else
     new_version="$version"
