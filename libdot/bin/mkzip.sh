@@ -280,14 +280,14 @@ function rewrite_manifest() {
   # Used in the regexp's below.
   local s="[[:space:]]"
 
-  local suffix="$(echo $new_name | sed -e 's/^[^\(]+//' -e 's/)[^\)]+$//')"
+  local suffix="$(echo_suffix "$new_name")"
 
   # Maybe change some image paths.
   local image_path_rule=""
-  if [ "$suffix" == "" ]; then
+  if [ -z "$suffix" ]; then
     image_path_rule="\
       /$s*\"([^\"]+)\"$s*:$s*\"images\/dev\/([^\"]+)\"$s*,?$s*$/ \
-        { sub(/\"images\/[^\/]\+/, \"\\\"images/stable/\") }"
+        { sub(/\"images\/dev\//, \"\\\"images/stable/\") }"
   fi
 
   # Maybe strip out the "key": "..." line.
