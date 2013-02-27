@@ -100,7 +100,7 @@ function echo_header() {
 }
 
 function echo_files() {
-  for f in "$@"; do
+  for f in $@; do
     append_comment "SOURCE FILE: $f"
     insist cat $f >> "$FLAGS_output"
   done
