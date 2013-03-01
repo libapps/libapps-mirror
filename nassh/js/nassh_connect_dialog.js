@@ -704,17 +704,6 @@ nassh.ConnectDialog.prototype.syncProfiles_ = function(opt_callback) {
 };
 
 /**
- * Called when the message manager finishes loading the translations.
- */
-nassh.ConnectDialog.prototype.onMessagesLoaded_ = function(mm, loaded, failed) {
-  this.mm_ = mm;
-  this.mm_.processI18nAttributes(document.body);
-  this.alignLabels_();
-  this.updateDetailPlaceholders_();
-  this.updateDescriptionPlaceholder_();
-};
-
-/**
  * Success callback for lib.fs.getFileSystem().
  *
  * Kick off the "Identity" dropdown now that we have access to the filesystem.
@@ -872,9 +861,11 @@ nassh.ConnectDialog.prototype.onMessageName_ = {};
  * termianl-info: The terminal introduces itself.
  */
 nassh.ConnectDialog.prototype.onMessageName_['terminal-info'] = function(info) {
-  var mm = new lib.MessageManager(info.acceptLanguages);
-  mm.findAndLoadMessages('/_locales/$1/messages.json',
-                         this.onMessagesLoaded_.bind(this, mm));
+  this.mm_ = new lib.MessageManager(info.acceptLanguages);
+  this.mm_.processI18nAttributes(document.body);
+  this.alignLabels_();
+  this.updateDetailPlaceholders_();
+  this.updateDescriptionPlaceholder_();
 
   document.body.style.fontFamily = info.fontFamily;
   document.body.style.fontSize = info.fontSize + 'px';

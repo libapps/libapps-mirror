@@ -4,7 +4,7 @@
   "manifest_version": 2,
   "content_security_policy": "script-src 'self'; object-src 'self'",
   "name": "Secure Shell (tot)",
-  "version": "0.8.15.1",
+  "version": "0.8.15.2",
   "default_locale": "en",
   "icons": {
     "128": "images/dev/icon-128.png",
@@ -13,7 +13,7 @@
   },
   "description": "Terminal emulator and SSH client.",
   "offline_enabled": true,
-  "options_page": "html/hterm_preferences_editor.html",
+  "options_page": "html/nassh_preferences_editor.html",
   "permissions": [
     "clipboardRead",
     "clipboardWrite",

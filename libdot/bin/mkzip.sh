@@ -58,8 +58,7 @@ This time you'll get ~/obj/pong/Pong-tot-12.1.zip, and its manifest will have
 the key and name intact.
 "
 
-# See <http://code.google.com/p/shflags/>.
-source "$(dirname "$0")/shflags"
+source "$(dirname "$0")/common.sh"
 
 DEFINE_string filename "" \
   "The new zip filename.  Computed from manifest.json if not specified." f
@@ -77,58 +76,18 @@ FLAGS "$@" || exit $?
 eval set -- "${FLAGS_ARGV}"
 
 # Whitelist of files to be included in the zip file.
-RSYNC_ARGS="           \
-    -qar               \
-    --relative         \
-    manifest.json      \
-    audio/*.ogg        \
-    css/*.css          \
-    html/*.html        \
-    images/*.png       \
-    images/**/*.png    \
-    js/*.js            \
-    _locales/*/*.json  \
-    plugin/*"
-
-function insist() {
-  local err=$?
-
-  if [ ! -z "$1" ]; then
-    "$@"
-    err=$?
-  fi
-
-  if [ $err != 0 ]; then
-    if [ -z "$1" ]; then
-      echo_err "Command returned exit code: $err"
-    else
-      echo_err "Command $* returned exit code: $err"
-    fi
-
-    exit $err
-  fi
-}
-
-#
-# Echo all arguments to stderr.
-#
-function echo_err() {
-  echo "-*- $*" 1>&2
-}
-
-#
-# Read a value from a manifest.json file.
-#
-#   get_key_value <key> <manifest_file>
-#
-# This only works on manifest files that have one key per line.
-#
-function get_key_value() {
-  local key="$1"
-  local file="$2"
-  local line="$(grep "\"$key\":" "$file")"
-  echo "$(expr match "$line" '.*\":\s*\"\([^\"]*\)')"
-}
+RSYNC_ARGS="                     \
+    -qar                         \
+    --relative                   \
+    manifest.json                \
+    --include audio/*.ogg        \
+    --include css/*.css          \
+    --include html/*.html        \
+    --include images/*.png       \
+    --include images/**/*.png    \
+    --include js/*.js            \
+    --include _locales/*/*.json  \
+    --include plugin/*"
 
 #
 # Echo "yes" if a string starts with the given substring, "no" otherwise.
@@ -144,72 +103,6 @@ function starts_with() {
   else
     echo "no"
   fi
-}
-
-#
-# Compute a relative path for a given absolute path.
-#
-#   get_relative_path <source_dir> [<pwd>]
-#
-# If <pwd> is not provided, the return value will be relative to the present
-# working directory.
-#
-function get_relative_path() {
-  local source_dir="$(readlink -fm "$1")"
-  local pwd="$(readlink -fm "$2")"
-
-  if [ -z "$pwd" ]; then
-    pwd="$(readlink -f "$(pwd)")/"
-  fi
-
-  # First, find the common prefix
-  local common_dirs="$source_dir"
-
-  # Keep removing directories from the end of the candidate until it is a
-  # prefix of the pwd.
-  while [[ "$common_dirs" != "/" && \
-    "$(starts_with "$pwd" "$common_dirs")" == "no" ]]; do
-    common_dirs="$(readlink -fm $common_dirs/..)"
-  done
-
-  if [ "$common_dirs" == "/" ]; then
-    # If the only shared directory is "/", then just return the source
-    # directory.
-    echo "$source_dir"
-    return
-  fi
-
-  # Return value starts with everything after the common directories.
-  local rv="${source_dir:$((${#common_dirs} + 1))}"
-
-  # Then prepend a "../" for every directory that we have to backtrack from
-  # pwd to get to the common directory.
-  local uncommon_dirs="${pwd:${#common_dirs}}"
-  uncommon_dirs="${uncommon_dirs##/}"
-  uncommon_dirs="${uncommon_dirs%%/}"
-
-  if [ ! -z "$uncommon_dirs" ]; then
-    while [[ "$uncommon_dirs" != "." && "$uncommon_dirs" != "/" ]]; do
-      rv="../$rv"
-      uncommon_dirs="$(dirname $uncommon_dirs)"
-    done
-  fi
-
-  if [ -z "$rv" ]; then
-    rv="$(pwd)"
-  fi
-
-  local home="$(readlink -fm "$HOME")"
-  if [ "$pwd" !=  "$home" ]; then
-    # Check to see if it's shorter to express the path relative to $HOME
-    local fromhome="~/$(get_relative_path "$source_dir" "$home")"
-    if [ $(expr length "$fromhome") -le $(expr length "$rv") ]; then
-      echo "$fromhome"
-      return
-    fi
-  fi
-
-  echo "$rv"
 }
 
 function echo_suffix() {
@@ -311,14 +204,14 @@ function rewrite_manifest() {
       {print}" > "$manifest.edited"
 
   # Sanity check that the whole awk mess worked.
-  local edited_version=$(get_key_value "version" "$manifest.edited")
+  local edited_version=$(get_manifest_key_value "version" "$manifest.edited")
 
   if [ "$edited_version" != "$new_version" ]; then
     echo_err "Failed to edit manifest version."
     exit 2
   fi
 
-  local edited_name=$(get_key_value "name" "$manifest.edited")
+  local edited_name=$(get_manifest_key_value "name" "$manifest.edited")
 
   if [ "$edited_name" != "$new_name" ]; then
     echo_err "Failed to edit manifest name."
@@ -350,8 +243,8 @@ function make_zipdir() {
 function init_from_dir() {
   local source="$1"
 
-  local name=$(get_key_value "name" "$source/manifest.json")
-  local version=$(get_key_value "version" "$source/manifest.json")
+  local name=$(get_manifest_key_value "name" "$source/manifest.json")
+  local version=$(get_manifest_key_value "version" "$source/manifest.json")
 
   local new_name
   local new_version
@@ -394,8 +287,8 @@ function init_from_zip() {
   unzip -qp $source manifest.json > "$tmp_manifest"
   insist
 
-  local name="$(get_key_value "name" "$tmp_manifest")"
-  local version="$(get_key_value "version" "$tmp_manifest")"
+  local name="$(get_manifest_key_value "name" "$tmp_manifest")"
+  local version="$(get_manifest_key_value "version" "$tmp_manifest")"
 
   insist rm -f "$tmp_manifest"
 

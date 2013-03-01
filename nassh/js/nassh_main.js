@@ -4,13 +4,16 @@
 
 'use strict';
 
-lib.rtdep('lib.f');
+lib.rtdep('lib.f', 'hterm');
 
 // CSP means that we can't kick off the initialization from the html file,
 // so we do it like this instead.
 window.onload = function() {
   function execNaSSH() {
     var profileName = lib.f.parseQuery(document.location.search)['profile'];
+
+    hterm.zoomWarningMessage = nassh.msg('ZOOM_WARNING');
+    hterm.notifyCopyMessage = nassh.msg('NOTIFY_COPY');
 
     var terminal = new hterm.Terminal(profileName);
     terminal.decorate(document.querySelector('#terminal'));

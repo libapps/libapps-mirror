@@ -165,7 +165,7 @@ nassh.Stream.GoogleRelay.prototype.requestError_ = function(isRead) {
     // the risk that a failed retry will redisplay this message just as its
     // fading away.  So we show the retry message for a little longer than we
     // expect to back off.
-    this.relay_.io.showOverlay(hterm.msg('RELAY_RETRY'), this.backoffMS_ + 500);
+    this.relay_.io.showOverlay(nassh.msg('RELAY_RETRY'), this.backoffMS_ + 500);
   }
 
   this.backoffTimeout_ =

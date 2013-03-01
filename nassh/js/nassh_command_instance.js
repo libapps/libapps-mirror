@@ -5,9 +5,6 @@
 'use strict';
 
 lib.rtdep('lib.f', 'lib.fs',
-          // TODO(rginda): Nassh should not depend directly on hterm.  These
-          // dependencies need to be refactored.
-          'hterm.msg',
           'nassh.CommandInstance', 'nassh.GoogleRelay',
           'nassh.PreferenceManager');
 
@@ -86,7 +83,7 @@ nassh.CommandInstance.prototype.run = function() {
       var ary = Array.apply(null, arguments);
       console.error(msg + ': ' + ary.join(', '));
 
-      this.io.println(hterm.msg('UNEXPECTED_ERROR'));
+      this.io.println(nassh.msg('UNEXPECTED_ERROR'));
       this.io.println(err);
     }.bind(this);
   }.bind(this);
@@ -103,18 +100,18 @@ nassh.CommandInstance.prototype.run = function() {
                     this.manifest_.version + '\x07');
 
     this.io.println(
-        hterm.msg('WELCOME_VERSION',
+        nassh.msg('WELCOME_VERSION',
                   ['\x1b[1m' + this.manifest_.name + '\x1b[m',
                    '\x1b[1m' + this.manifest_.version + '\x1b[m']));
     this.io.println(
-        hterm.msg('WELCOME_FAQ', ['\x1b[1mhttp://goo.gl/m6Nj8\x1b[m']));
+        nassh.msg('WELCOME_FAQ', ['\x1b[1mhttp://goo.gl/m6Nj8\x1b[m']));
 
     if (hterm.windowType != 'popup') {
       var osx = window.navigator.userAgent.match(/Mac OS X/);
       if (!osx) {
         this.io.println('');
         this.io.println(
-            hterm.msg('OPEN_AS_WINDOW_TIP',
+            nassh.msg('OPEN_AS_WINDOW_TIP',
                       ['\x1b[1mhttp://goo.gl/OeH3i\x1b[m']));
         this.io.println('');
       }
@@ -148,7 +145,7 @@ nassh.CommandInstance.prototype.run = function() {
       this.promptForDestination_();
     } else {
       if (!this.connectToArgString(argstr)) {
-        this.io.println(hterm.msg('BAD_DESTINATION', [this.argv_.argString]));
+        this.io.println(nassh.msg('BAD_DESTINATION', [this.argv_.argString]));
         this.exit(1);
       }
     }
@@ -360,7 +357,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     this.relay_ = new nassh.GoogleRelay(this.io,
                                         params.relayHost,
                                         params.relayOptions);
-    this.io.println(hterm.msg('INITIALIZING_RELAY', [params.relayHost]));
+    this.io.println(nassh.msg('INITIALIZING_RELAY', [params.relayHost]));
     if (!this.relay_.init()) {
       // A false return value means we have to redirect to complete
       // initialization.  Bail out of the connect for now.  We'll resume it
@@ -379,7 +376,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   // TODO(rginda): The "port" parameter was removed from the CONNECTING message
   // on May 9, 2012, however the translations haven't caught up yet.  We should
   // remove the port parameter here once they do.
-  this.io.println(hterm.msg('CONNECTING',
+  this.io.println(nassh.msg('CONNECTING',
                             [params.username + '@' + params.hostname,
                              (params.port || '??')]));
   this.io.onVTKeystroke = this.sendString_.bind(this);
@@ -445,11 +442,11 @@ nassh.CommandInstance.prototype.dispatchMessage_ = function(
 nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
   var self = this;
   function onPluginLoaded() {
-    self.io.println(hterm.msg('PLUGIN_LOADING_COMPLETE'));
+    self.io.println(nassh.msg('PLUGIN_LOADING_COMPLETE'));
     onComplete();
   };
 
-  this.io.print(hterm.msg('PLUGIN_LOADING'));
+  this.io.print(nassh.msg('PLUGIN_LOADING'));
 
   this.plugin_ = window.document.createElement('embed');
   this.plugin_.style.cssText =
@@ -519,8 +516,8 @@ nassh.CommandInstance.prototype.onTerminalResize_ = function(width, height) {
 nassh.CommandInstance.prototype.exit = function(code) {
   window.onbeforeunload = null;
 
-  this.io.println(hterm.msg('DISCONNECT_MESSAGE', [code]));
-  this.io.println(hterm.msg('RECONNECT_MESSAGE'));
+  this.io.println(nassh.msg('DISCONNECT_MESSAGE', [code]));
+  this.io.println(nassh.msg('RECONNECT_MESSAGE'));
   this.io.onVTKeystroke = function(string) {
     var ch = string.toLowerCase();
     if (ch == 'r' || ch == ' ' || ch == '\x0d' /* enter */)
@@ -546,7 +543,7 @@ nassh.CommandInstance.prototype.exit = function(code) {
 };
 
 nassh.CommandInstance.prototype.onBeforeUnload_ = function(e) {
-  var msg = hterm.msg('BEFORE_UNLOAD');
+  var msg = nassh.msg('BEFORE_UNLOAD');
   e.returnValue = msg;
   return msg;
 };

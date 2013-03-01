@@ -33,6 +33,23 @@ nassh.test = function() {
 };
 
 /**
+ * Return a formatted message in the current locale.
+ *
+ * @param {string} name The name of the message to return.
+ * @param {Array} opt_args The message arguments, if required.
+ */
+nassh.msg = function(name, opt_args) {
+  if (!chrome.i18n)
+    return name;
+
+  var rv = chrome.i18n.getMessage(name, opt_args);
+  if (!rv)
+    console.log('Missing message: ' + name);
+
+  return rv;
+};
+
+/**
  * Load and parse the manifest file for this extension.
  */
 nassh.loadManifest = function(onSuccess, opt_onError) {

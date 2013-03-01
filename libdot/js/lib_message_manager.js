@@ -119,11 +119,17 @@ lib.MessageManager.prototype.loadMessages = function(
  * @param {string} msg String containing the message and argument references.
  * @param {Array} args Array containing the argument values.
  */
-lib.MessageManager.prototype.replaceReferences = function(msg, args) {
+lib.MessageManager.replaceReferences = function(msg, args) {
   return msg.replace(/\$(\d+)/g, function (m, index) {
       return args[index - 1];
     });
 };
+
+/**
+ * Per-instance copy of replaceReferences.
+ */
+lib.MessageManager.prototype.replaceReferences =
+    lib.MessageManager.replaceReferences;
 
 /**
  * Get a message by name, optionally replacing arguments too.
@@ -134,18 +140,28 @@ lib.MessageManager.prototype.replaceReferences = function(msg, args) {
  *     found.  Returns the message name by default.
  */
 lib.MessageManager.prototype.get = function(msgname, opt_args, opt_default) {
-  if (!(msgname in this.messages)) {
-    console.warn('Unknown message: ' + msgname);
-    return (typeof opt_default == 'undefined') ? msgname : opt_default;
+  var message;
+
+  if (msgname in this.messages) {
+    message = this.messages[msgname];
+
+  } else {
+    if (chrome.i18n)
+      message = chrome.i18n.getMessage(msgname);
+
+    if (!message) {
+      console.warn('Unknown message: ' + msgname);
+      return (typeof opt_default == 'undefined') ? msgname : opt_default;
+    }
   }
 
   if (!opt_args)
-    return this.messages[msgname];
+    return message;
 
   if (!(opt_args instanceof Array))
     opt_args = [opt_args];
 
-  return this.replaceReferences(this.messages[msgname], opt_args);
+  return this.replaceReferences(message, opt_args);
 };
 
 /**
