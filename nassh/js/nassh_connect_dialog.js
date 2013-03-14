@@ -202,6 +202,11 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
 
   this.form_.addEventListener('keyup', this.onFormKeyUp_.bind(this));
 
+  this.connectButton_.addEventListener('keypress',
+                                       this.onButtonKeypress_.bind(this));
+  this.deleteButton_.addEventListener('keypress',
+                                      this.onButtonKeypress_.bind(this));
+
   this.connectButton_.addEventListener('click',
                                        this.onConnectClick_.bind(this));
   this.deleteButton_.addEventListener('click',
@@ -780,6 +785,14 @@ nassh.ConnectDialog.prototype.onProfileIndexChanged = function(e) {
 };
 
 /**
+ * Key press while a button has focus.
+ */
+nassh.ConnectDialog.prototype.onButtonKeypress_ = function(e) {
+  if (e.charCode == 13 || e.charCode == 32)
+    e.srcElement.click();
+};
+
+/**
  * Someone clicked on the connect button.
  */
 nassh.ConnectDialog.prototype.onConnectClick_ = function(e) {
@@ -796,7 +809,12 @@ nassh.ConnectDialog.prototype.onDeleteClick_ = function(e) {
   if (this.deleteButton_.getAttribute('disabled'))
     return;
 
-  this.deleteIdentity_(e.target.value);
+  if (document.activeElement.getAttribute('id') == 'field-identity') {
+    this.deleteIdentity_(e.target.value);
+  } else {
+    this.deleteProfile_(this.currentProfileRecord_.id);
+    this.shortcutList_.focus();
+  }
 };
 
 /**

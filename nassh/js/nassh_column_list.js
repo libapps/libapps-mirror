@@ -242,7 +242,7 @@ nassh.ColumnList.prototype.onItemClick_ = function(srcNode, e) {
 nassh.ColumnList.prototype.getColumnHeight_ = function(column) {
   var tallestColumn = Math.ceil(this.items_.length / this.columnCount);
 
-  if (column <= (this.columnCount % column))
+  if (column + 1 <= Math.floor(this.columnCount / column + 1))
     return tallestColumn;
 
   return tallestColumn - 1;

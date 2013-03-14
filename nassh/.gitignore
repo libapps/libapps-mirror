@@ -1,0 +1,8 @@
+# Concat results
+js/*.concat.js
+
+# Copy of the nacl plugin used when loading as an unpacked extension
+plugin
+
+# Stuff we build for distribution
+dist

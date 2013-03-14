@@ -1,3 +1,18 @@
+0.8.16.1, 2013-03-14, Grab bag of fixes
+
+* Update to libdot 1.1, hterm 1.1.
+* Add notice about the age of the hterm library on startup in TOT builds.
+* BUG=chromium-os:34460, can't delete connections with on-screen "[DEL] Delete"
+  button.
+* BUG=chromium-os:39287, col walking in connection manager doesn't work quite
+  right.
+* BUG=chromium-os:39594, When focused, Enter button does not respond to pressing
+  the Enter key.
+
+0.8.16, 2013-02-28, Stable release of 0.8.15.1
+
+* Stable release of 0.8.15.1.
+
 0.8.15.1, 2013-02-26, Improve character size precision.
 
 * Change hterm.ScrollPort..measureCharacterSize to average out 100 characters
