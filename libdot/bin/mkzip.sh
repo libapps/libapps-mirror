@@ -75,19 +75,17 @@ DEFINE_string workdir "" \
 FLAGS "$@" || exit $?
 eval set -- "${FLAGS_ARGV}"
 
-# Whitelist of files to be included in the zip file.
-RSYNC_ARGS="                     \
-    -qar                         \
-    --relative                   \
-    manifest.json                \
-    --include audio/*.ogg        \
-    --include css/*.css          \
-    --include html/*.html        \
-    --include images/*.png       \
-    --include images/**/*.png    \
-    --include js/*.js            \
-    --include _locales/*/*.json  \
-    --include plugin/*"
+# Whitelist of files to be included in the zip file as POSIX egrep expressions.
+FILE_PATTERNS='
+    \./manifest.json
+    \./audio/.*\.ogg
+    \./css/.*\.css
+    \./html/.*\.html
+    \./images/.*\.png
+    \./js/.*\.js
+    \./_locales/.*\.json
+    \./plugin/.*
+'
 
 #
 # Echo "yes" if a string starts with the given substring, "no" otherwise.
@@ -272,7 +270,18 @@ function init_from_dir() {
 
   echo_err "Copying from source: $(get_relative_path "$source")"
   cd "$FLAGS_source"
-  insist rsync $RSYNC_ARGS "$zipdir"
+
+  set -f  # Disable filename expansion.
+
+  local files=""
+  for pat in ${FILE_PATTERNS}; do
+    files="$files $(find . -regextype posix-egrep -iregex "$pat")"
+  done
+
+  set +f  # Re-enable expansion.
+
+  rsync -qa --relative $files "$zipdir"
+
   cd - >/dev/null
 
   if [ "$FLAGS_promote" == "$FLAGS_TRUE" ]; then

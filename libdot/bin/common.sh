@@ -134,3 +134,19 @@ function get_manifest_key_value() {
   local line="$(grep "\"$key\":" "$file")"
   echo "$(expr match "$line" '.*\":\s*\"\([^\"]*\)')"
 }
+
+function echo_changelog() {
+  local key="$1"
+  local file="${2:-../doc/changelog.txt}"
+
+  if [ -z "$key" ]; then
+    head -n1 "$file"
+  elif [ "$key" = "version" ]; then
+    head -n1 "$file" | cut -f1 -d',' | sed -e 's/ //g'
+  elif [ "$key" = "date" ]; then
+    head -n1 "$file" | cut -f2 -d',' | sed -e 's/ //g'
+  else
+    echo_err "Unknown key: $key"
+    return 1
+  fi
+}

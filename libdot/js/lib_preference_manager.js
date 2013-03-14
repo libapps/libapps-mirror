@@ -680,6 +680,16 @@ lib.PreferenceManager.prototype.set = function(name, newValue) {
     record.currentValue = this.DEFAULT_VALUE;
     this.storage.removeItem(this.prefix + name);
   }
+
+  // We need to manually send out the notification on this instance.  If we
+  // The storage event won't fire a notification because we've already changed
+  // the currentValue, so it won't see a difference.  If we delayed changing
+  // currentValue until the storage event, a pref read immediately after a write
+  // would return the previous value.
+  //
+  // The notification is in a timeout so clients don't accidentally depend on
+  // a synchronous notification.
+  setTimeout(this.notifyChange_.bind(this, name), 0);
 };
 
 /**
@@ -708,7 +718,7 @@ lib.PreferenceManager.prototype.onChildListChange_ = function(listName) {
 lib.PreferenceManager.prototype.onStorageChange_ = function(map) {
   for (var key in map) {
     if (this.prefix) {
-      if (key.lastIndexOf(this.prefix.length, 0) != 0)
+      if (key.lastIndexOf(this.prefix, 0) != 0)
         continue;
     }
 

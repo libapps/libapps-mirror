@@ -45,9 +45,8 @@ There are a few directives that can be specified in the input file.  They are...
 
     TYPE - If the resource type is 'raw' then the resource will be included
     without any munging.  Otherwise, the resource will be wrapped in a
-    JavaScript string.  If the resource type ends in ';base64' then it will be
-    base64 encoded.  If you specify the type as a valid mimetype then you'll be
-    able to get the resource as a 'data:' url easily from
+    JavaScript string. If you specify the type as a valid mimetype then you'll
+    be able to get the resource as a 'data:' url easily from
     lib.resource.getDataUrl(...).
 
     SOURCE - When specified as '< FILENAME' it is interpreted as a file from
@@ -149,14 +148,16 @@ function append_comment() {
     return
   fi
 
-  # Wrapping at 76 gives us 79 columns with the "// " and trailing escape.
-  # Testing at 77 ensures we've got something to wrap.
-  while [ ${#str} -gt 77 ]; do
-    append_output "// ${str:0:76}\\"
-    str="${str:76}"
-  done
+  append_output "$(echo -n "${str}" | awk -v WIDTH=76 '
+    {
+      while (length>WIDTH) {
+        print "// " substr($0,1,WIDTH);
+        $0=substr($0,WIDTH+1);
+      }
 
-  append_output "// $str"
+      print "// " $0;
+    }'
+  )"
 }
 
 # Append a JavaScript string to the pending output.
@@ -168,22 +169,16 @@ function append_comment() {
 function append_string() {
   local str=$*
 
-  str="${str//\'/\\\'}"
+  append_output "$(echo "${str//\'/\\\'}" | awk -v WIDTH=76 '
+    {
+      while (length>WIDTH) {
+        print "\047" substr($0,1,WIDTH) "\047 +";
+        $0=substr($0,WIDTH+1);
+      }
 
-  while [ ${#str} -gt 77 ]; do
-    local pos=76
-    if [ "${str:76:77}" = "\\" ]; then
-      # We don't want to break the string at an escape.  Yeah, this is brittle.
-      # It could fail if it runs into an escaped escape.  TODO(rginda): rewrite
-      # concat in a better tool :/
-      pos=$(( $pos - 1 ))
-    fi
-
-    append_output "'${str:0:$pos}' +"
-    str="${str:$pos}"
-  done
-
-  append_output "'$str'"
+      print "\047" $0 "\047";
+    }'
+  )"
 }
 
 # Convert data into a format that can be included in JavaScript and append it to
@@ -241,12 +236,7 @@ function append_resource() {
     append_outout "${data}"
 
   else
-    # Resource should be wrapped in a JS string, maybe base64 encoded.
-
-    if [ $(expr match "$type" ".*;base64\$") != 0 ]; then
-      data="$(echo "${data}" | base64 -w0)"
-    fi
-
+    # Resource should be wrapped in a JS string.
     append_string "${data}"
   fi
 
@@ -306,22 +296,34 @@ function process_concat_line() {
 function process_concat_fd() {
   local fd=$1
 
-  while read -r 0<&$fd LINE; do
-    LINE=${LINE##}  # Strip leading spaces.
-    if [ -z "$LINE" -o "${LINE:0:1}" = '#' ]; then
+  while read -r 0<&$fd READ_LINE; do
+    local line=""
+
+    READ_LINE=${READ_LINE##}  # Strip leading spaces.
+
+    # Handle trailing escape as line continuation.
+    while [ $(expr match "$READ_LINE" ".*\\\\$") != 0 ]; do
+      READ_LINE=${READ_LINE%\\}  # Strip trailing escape.
+      line="$line$READ_LINE"
+      insist read -r 0<&$fd READ_LINE
+    done
+
+    line="$line$READ_LINE"
+
+    if [ -z "$line" -o "${line:0:1}" = '#' ]; then
       # Skip blank lines and comments.
       continue
     fi
 
-    if [ "${LINE:0:9}" = "@include " ]; then
-      echo_err "$LINE"
+    if [ "${line:0:9}" = "@include " ]; then
+      echo_err "$line"
 
-      local relative_path="${LINE:9}"
+      local relative_path="${line:9}"
       local absolute_path=$(search_file "$relative_path")
 
       insist process_concat_file "$absolute_path"
     else
-      insist process_concat_line "$LINE"
+      insist process_concat_line "$line"
     fi
   done
 }
@@ -362,6 +364,8 @@ function main() {
   echo_results
 
   if [ "$FLAGS_forever" = "$FLAGS_TRUE" ]; then
+    echo -e '\a'
+
     inotifywait -qqe modify $0 $FLAGS_input_from $CONCAT_INOTIFY_FILES
     local err=$?
     if [[ $err != 0 && $err != 1 ]]; then

@@ -1,0 +1,19 @@
+1.1, 2013-03-14, Grab bag of changes.
+
+* Initial add of libdot changelog.
+* Fix file selection in libdot/bin/mkzip.sh.  rsync selection wasn't working
+  properly and I couldn't figure out how to fix it.  Instead, we build a file
+  list using patterns passed to the `find` utility, and feed the resulting
+  list to rsync.
+* Move echo_changelog function from hterm/bin into libdot/bin/common.sh so that
+  any concat script has access to it.
+* Remove base64 magic from bin/concat.sh, since bash can't handle the binary
+  data properly anyway.  Concat files need to manually encode to base64 when
+  appropriate.
+* Switch concat.sh line wrapping to awk, since the bash implementation was
+  super slow.
+* Allow line continuations with trailing "\" character in concat files.
+* Echo a bell character after rerunning "concat --forever" to indicate that
+  the concat is done.
+* lib.PreferenceManager..set() - Re-add the notifyChange_() call.
+* lib.PreferenceManager..onStorageChange_() - Fixed.
