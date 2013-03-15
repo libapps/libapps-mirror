@@ -8,10 +8,12 @@ set -x
 DEBUG=0
 PNACL=1
 
+NACLSDK_VERSION=26.0.1410.41
+NACLPORTS_REVISION=715
+
 CDS_ROOT="https://commondatastorage.googleapis.com"
 SDK_ROOT="$CDS_ROOT/nativeclient-mirror/nacl/nacl_sdk"
-PNACL_SDK="$SDK_ROOT/trunk.169649/naclsdk_linux.tar.bz2"
-NACL_SDK="$SDK_ROOT/trunk.157509/naclsdk_linux.tar.bz2"
+NACL_SDK="$SDK_ROOT/$NACLSDK_VERSION/naclsdk_linux.tar.bz2"
 
 for i in $@; do
   case $i in
@@ -35,21 +37,12 @@ mkdir output
 
 if [[ ($NACL_SDK_ROOT == "") || !(-d $NACL_SDK_ROOT) ]]; then
   pushd output
-  if [[ $PNACL == 1 ]]; then
-    if [[ !(-f naclsdk_linux.tar.bz2) || !(-d pnaclsdk) ]]; then
-      rm -rf naclsdk_linux.tar.bz2 pnacl_sdk && mkdir pnaclsdk
-      wget --no-check-certificate "$PNACL_SDK"
-      tar xvjf naclsdk_linux.tar.bz2 -C pnaclsdk || exit 1
-    fi
-    export NACL_SDK_ROOT=$PWD/pnaclsdk/pepper_25
-  else
-    if [[ !(-f naclsdk_linux.tar.bz2) || !(-d naclsdk) ]]; then
-      rm -rf naclsdk_linux.tar.bz2 nacl_sdk && mkdir naclsdk
-      wget --no-check-certificate "$NACL_SDK"
-      tar xvjf naclsdk_linux.tar.bz2 -C naclsdk || exit 1
-    fi
-    export NACL_SDK_ROOT=$PWD/naclsdk/pepper_23
+  if [[ !(-f naclsdk_linux.tar.bz2) || !(-d naclsdk) ]]; then
+    rm -rf naclsdk_linux.tar.bz2 nacl_sdk && mkdir naclsdk
+    wget --no-check-certificate "$NACL_SDK"
+    tar xvjf naclsdk_linux.tar.bz2 -C naclsdk || exit 1
   fi
+  export NACL_SDK_ROOT=$(echo $PWD/naclsdk/pepper_*)
   popd
 fi
 
@@ -59,7 +52,7 @@ if [[ ($NACL_PORTS == "") || !(-d $NACL_PORTS) ]]; then
     rm -rf naclports && mkdir naclports
     cd naclports
     gclient config http://naclports.googlecode.com/svn/trunk/src || exit 1
-    gclient sync --jobs=4 || exit 1
+    gclient sync --jobs=8 -r src@$NACLPORTS_REVISION || exit 1
     cd ..
   fi
   export NACL_PORTS=$PWD/naclports
@@ -68,12 +61,12 @@ fi
 
 build() {
   pushd $NACL_PORTS/src
-  NACL_PACKAGES_BITSIZE=$1 make openssl zlib jsoncpp || exit 1
+  NACL_ARCH=$1 make openssl zlib jsoncpp || exit 1
   popd
 
   pushd output
-  if [[ !(-f libopenssh$1.a) ]]; then
-    NACL_PACKAGES_BITSIZE=$1 ../nacl-openssh-5.9p1.sh || exit 1
+  if [[ !(-f libopenssh-$1.a) ]]; then
+    NACL_ARCH=$1 ../nacl-openssh-5.9p1.sh || exit 1
   fi
   popd
 }
@@ -82,8 +75,8 @@ if [[ $PNACL == 1 ]]; then
   build "pnacl"
 else
   export NACL_GLIBC=1
-  build "32"
-  build "64"
+  build "i686"
+  build "x86_64"
 fi
 
 if [[ $DEBUG == 1 ]]; then
@@ -99,13 +92,19 @@ else
 fi
 make clean && make -j "$BUILD_ARGS" $DEFAULT_TARGET || exit 1
 
+if [[ !(-f ../nassh/js/nassh_deps.concat.js) ]]; then
+  pushd ../nassh/
+  bin/mkdeps.sh || exit 1
+  popd
+fi
+
 cd output
 mkdir -p hterm/
 
-rm -f ./hterm/{audio,css,html,images,js,_locales} ./hterm/manifest.json
+rm -rf ./hterm/{audio,css,html,images,js,_locales} ./hterm/manifest.json
 
-cp -R -f ../../hterm/{audio,css,html,images,js,_locales} ./hterm || exit 1
-cp -R -f ../../hterm/manifest-dev.json ./hterm/manifest.json || exit 1
+cp -rf ../../nassh/{css,html,images,js,_locales} ./hterm || exit 1
+cp -rf ../../nassh/manifest.json ./hterm/manifest.json || exit 1
 
 if [[ $PNACL == 1 ]]; then
   rm -rf hterm/plugin/pnacl hterm/plugin/arm_23

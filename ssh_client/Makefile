@@ -35,8 +35,9 @@ CXX_HEADERS:=\
 override LDFLAGS+=-lppapi_cpp -lppapi -lutil -lcrypto -lz -lresolv -ldl -lnsl \
 	-ljsoncpp -Loutput
 override WARNINGS+=-Wno-long-long -Wall -Wswitch-enum -Werror
-override CXXFLAGS+=-pthread -std=gnu++0x $(WARNINGS) -Iinclude
-override CFLAGS+=-pthread $(WARNINGS) -Iinclude
+override CXXFLAGS+=-pthread -std=gnu++0x $(WARNINGS) -Iinclude \
+        -I$(NACL_SDK_ROOT)/include
+override CFLAGS+=-pthread $(WARNINGS) -Iinclude -I$(NACL_SDK_ROOT)/include
 
 # This monstrous flag is needed to work around an issue with the current
 # toolchain.  See http://code.google.com/p/nativeclient/issues/detail?id=3171
@@ -77,7 +78,7 @@ $(x86_32_OBJS) : output/%_32.o : src/%.cc $(THIS_MAKE) $(CXX_HEADERS)
 	$(CXX) -o $@ -c $< -m32 $(CXXFLAGS)
 
 $(PROJECT)_x86_32.nexe : $(x86_32_OBJS)
-	$(CXX) -o $@ $^ -m32 -lopenssh32 -lssh32 -lopenbsd-compat32 \
+	$(CXX) -o $@ $^ -m32 -lopenssh-i686 -lssh-i686 -lopenbsd-compat-i686 \
 		$(CXXFLAGS) $(LDFLAGS)
 
 # Define 64 bit compile and link rules for C++ sources
@@ -86,8 +87,8 @@ $(x86_64_OBJS) : output/%_64.o : src/%.cc $(THIS_MAKE)
 	$(CXX) -o $@ -c $< -m64 $(CXXFLAGS)
 
 $(PROJECT)_x86_64.nexe : $(x86_64_OBJS)
-	$(CXX) -o $@ $^ -m64 -lopenssh64 -lssh64 -lopenbsd-compat64 \
-		$(CXXFLAGS) $(LDFLAGS)
+	$(CXX) -o $@ $^ -m64 -lopenssh-x86_64 -lssh-x86_64 \
+		-lopenbsd-compat-x86_64 $(CXXFLAGS) $(LDFLAGS)
 
 # Define PNaCl compile and link rules for C++ sources
 POBJS:=$(patsubst src/%.cc,output/%_p.o,$(CXX_SOURCES))
@@ -95,8 +96,8 @@ $(POBJS) : output/%_p.o : src/%.cc $(THIS_MAKE)
 	$(PNACL_CXX) -o $@ -c $< $(PNACL_CXXFLAGS)
 
 $(PROJECT)_nl.pexe : $(POBJS)
-	$(PNACL_CXX) -o $@ $^ -lopensshpnacl -lsshpnacl \
-		-lopenbsd-compatpnacl -lglibc-compat \
+	$(PNACL_CXX) -o $@ $^ -lopenssh-pnacl -lssh-pnacl \
+		-lopenbsd-compat-pnacl -lglibc-compat \
 		$(PNACL_LDFLAGS) $(PNACL_CXXFLAGS)
 
 $(PROJECT)_nl_arm.nexe : $(PROJECT)_nl.pexe
