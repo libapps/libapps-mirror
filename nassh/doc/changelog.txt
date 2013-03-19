@@ -1,3 +1,7 @@
+0.8.16.3, 2013-03-19, Update to hterm 1.2
+
+* Update to hterm 1.2 to get terminal bell fix.
+
 0.8.16.2, 2013-03-18, Fix crosh/prefs pages
 
 * Fix script includes in nassh_preferences_editor.html and crosh.html pages.
