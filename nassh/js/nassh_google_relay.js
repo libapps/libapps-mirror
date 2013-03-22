@@ -68,9 +68,10 @@ lib.rtdep('lib.f');
  * 6. Writes are queued up and sent to /write.
  */
 
-nassh.GoogleRelay = function(io, proxy, options) {
+nassh.GoogleRelay = function(io, proxyHost, proxyPort, options) {
   this.io = io;
-  this.proxy = proxy;
+  this.proxyHost = proxyHost;
+  this.proxyPort = proxyPort || 8022;
   this.useSecure = options.search('--use-ssl') != -1;
   this.useWebsocket = !(options.search('--use-xhr') != -1);
   this.relayServer = null;
@@ -81,7 +82,7 @@ nassh.GoogleRelay = function(io, proxy, options) {
  * The pattern for the cookie server's url.
  */
 nassh.GoogleRelay.prototype.cookieServerPattern =
-    '%(protocol)://%(host):8022/cookie?ext=%encodeURIComponent(return_to)' +
+    '%(protocol)://%(host):%(port)/cookie?ext=%encodeURIComponent(return_to)' +
     '&path=html/nassh_google_relay.html';
 
 /**
@@ -90,13 +91,7 @@ nassh.GoogleRelay.prototype.cookieServerPattern =
  * We'll be appending 'proxy', 'read' and 'write' to this as necessary.
  */
 nassh.GoogleRelay.prototype.relayServerPattern =
-    '%(protocol)://%(host):8023/';
-
-/**
- * The pattern for WebSocket relay server's url.
- */
-nassh.GoogleRelay.prototype.relayServerSocketPattern =
-    '%(protocol)://%(host):8022/';
+    '%(protocol)://%(host):%(port)/';
 
 nassh.GoogleRelay.prototype.redirect = function(opt_resumePath) {
   var resumePath = opt_resumePath ||
@@ -108,7 +103,8 @@ nassh.GoogleRelay.prototype.redirect = function(opt_resumePath) {
 
   document.location = lib.f.replaceVars(
       this.cookieServerPattern,
-      { host: this.proxy,
+      { host: this.proxyHost,
+        port: this.proxyPort,
         protocol: this.useSecure ? 'https' : 'http',
         // This returns us to nassh_google_relay.html so we can pick the relay
         // host out of the reply.  From there we continue on to the resumePath.
@@ -131,15 +127,16 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
   // This session storage item is created by /html/nassh_google_relay.html
   // if we succeed at finding a relay host.
   var relayHost = sessionStorage.getItem('googleRelay.relayHost');
+  var relayPort = sessionStorage.getItem('googleRelay.relayPort') ||
+      (this.useWebSocket ?  8022 || 8023);
   if (relayHost) {
     var expectedResumePath =
         sessionStorage.getItem('googleRelay.resumePath');
     if (expectedResumePath == resumePath) {
       var protocol = this.useSecure ? 'https' : 'http';
-      var pattern = this.useWebsocket ? this.relayServerSocketPattern :
-                                        this.relayServerPattern;
+      var pattern = this.relayServerPattern;
       this.relayServer = lib.f.replaceVars(pattern,
-          {host: relayHost, protocol: protocol});
+          {host: relayHost, port: relayPort, protocol: protocol});
       if (this.useWebsocket) {
         protocol = this.useSecure ? 'wss' : 'ws';
         this.relayServerSocket = lib.f.replaceVars(pattern,
@@ -157,6 +154,7 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
   }
 
   sessionStorage.removeItem('googleRelay.relayHost');
+  sessionStorage.removeItem('googleRelay.relayPort');
   sessionStorage.removeItem('googleRelay.resumePath');
 
   if (this.relayServer)

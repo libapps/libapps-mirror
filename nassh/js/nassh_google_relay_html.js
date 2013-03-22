@@ -11,6 +11,8 @@
 window.onload = function() {
   var relayHost = document.location.hash.substr(1).split('@')[1];
   sessionStorage.setItem('googleRelay.relayHost', relayHost);
+  var relayPort = relayHost.split(':')[1];
+  sessionStorage.setItem('googleRelay.relayPort', relayPort);
 
   var path = sessionStorage.getItem('googleRelay.resumePath')
   if (!path) {

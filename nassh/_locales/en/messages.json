@@ -126,6 +126,16 @@
     "description": "Text use as the aria-label for the 'relay-host' field."
   },
 
+  "FIELD_RELAY_PORT_ARIA_LABEL": {
+    "message": "port",
+    "description": "Text use as the aria-label for the 'relay-port' field."
+  },
+
+  "FIELD_RELAY_PORT_PLACEHOLDER": {
+    "message": "port",
+    "description": "Text use as the placeholder for the 'relay-port' field."
+  },
+
   "IDENTITY_LABEL": {
     "message": "Identity",
     "description": "The label for the 'identity' field."

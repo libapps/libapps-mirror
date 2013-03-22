@@ -309,6 +309,7 @@ nassh.CommandInstance.prototype.connectToProfile = function(
       hostname: prefs.get('hostname'),
       port: prefs.get('port'),
       relayHost: prefs.get('relay-host'),
+      relayPort: prefs.get('relay-port'),
       relayOptions: prefs.get('relay-options'),
       identity: prefs.get('identity'),
       argstr: prefs.get('argstr'),
@@ -336,7 +337,9 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
     return true;
   }
 
-  var ary = destination.match(/^([^@]+)@([^:@]+)(?::(\d+))?(?:@(.+))?$/);
+  var ary = destination.match(
+      /^([^@]+)@([^:@]+)(?::(\d+))?(?:@([^:]+(?::(\d+))?))?$/);
+
   if (!ary)
     return false;
 
@@ -348,7 +351,8 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
       username: ary[1],
       hostname: ary[2],
       port: ary[3],
-      relayHost: ary[4]
+      relayHost: ary[4],
+      relayPort: ary[5]
   });
 };
 
@@ -368,6 +372,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   if (params.relayHost) {
     this.relay_ = new nassh.GoogleRelay(this.io,
                                         params.relayHost,
+                                        params.relayPort,
                                         params.relayOptions);
     this.io.println(nassh.msg('INITIALIZING_RELAY', [params.relayHost]));
     if (!this.relay_.init()) {

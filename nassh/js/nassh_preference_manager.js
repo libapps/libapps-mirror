@@ -73,6 +73,11 @@ nassh.ProfilePreferenceManager = function(parent, id) {
     ['relay-host', ''],
 
     /**
+     * The optional relay port.
+     */
+    ['relay-port', ''],
+
+    /**
      * Options string for relay.
      * Supported values: --use-xhr and --use-ssl.
      */
