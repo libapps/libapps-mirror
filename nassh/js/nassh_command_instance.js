@@ -338,7 +338,7 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
   }
 
   var ary = destination.match(
-      /^([^@]+)@([^:@]+)(?::(\d+))?(?:@([^:]+(?::(\d+))?))?$/);
+      /^([^@]+)@([^:@]+)(?::(\d+))?(?:@([^:]+)(?::(\d+))?)?$/);
 
   if (!ary)
     return false;
@@ -374,7 +374,10 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
                                         params.relayHost,
                                         params.relayPort,
                                         params.relayOptions);
-    this.io.println(nassh.msg('INITIALIZING_RELAY', [params.relayHost]));
+    this.io.println(nassh.msg(
+        'INITIALIZING_RELAY',
+        [this.relay_.proxyHost + ':' + this.relay_.proxyPort])
+
     if (!this.relay_.init()) {
       // A false return value means we have to redirect to complete
       // initialization.  Bail out of the connect for now.  We'll resume it
