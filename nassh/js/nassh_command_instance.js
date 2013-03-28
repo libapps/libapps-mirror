@@ -376,7 +376,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
                                         params.relayOptions);
     this.io.println(nassh.msg(
         'INITIALIZING_RELAY',
-        [this.relay_.proxyHost + ':' + this.relay_.proxyPort])
+        [this.relay_.proxyHost + ':' + this.relay_.proxyPort]));
 
     if (!this.relay_.init()) {
       // A false return value means we have to redirect to complete

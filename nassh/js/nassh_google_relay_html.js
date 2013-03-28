@@ -9,10 +9,9 @@
 // forbid it.
 
 window.onload = function() {
-  var relayHost = document.location.hash.substr(1).split('@')[1];
-  sessionStorage.setItem('googleRelay.relayHost', relayHost);
-  var relayPort = relayHost.split(':')[1];
-  sessionStorage.setItem('googleRelay.relayPort', relayPort);
+  var ary = document.location.hash.match(/@([^:]+)(?::(\d+))?/);
+  sessionStorage.setItem('googleRelay.relayHost', ary[1]);
+  sessionStorage.setItem('googleRelay.relayPort', ary[2] || '');
 
   var path = sessionStorage.getItem('googleRelay.resumePath')
   if (!path) {

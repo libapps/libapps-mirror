@@ -128,7 +128,8 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
   // if we succeed at finding a relay host.
   var relayHost = sessionStorage.getItem('googleRelay.relayHost');
   var relayPort = sessionStorage.getItem('googleRelay.relayPort') ||
-      (this.useWebSocket ?  8022 || 8023);
+    (this.useWebsocket ? 8022 : 8023);
+
   if (relayHost) {
     var expectedResumePath =
         sessionStorage.getItem('googleRelay.resumePath');
@@ -140,7 +141,7 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
       if (this.useWebsocket) {
         protocol = this.useSecure ? 'wss' : 'ws';
         this.relayServerSocket = lib.f.replaceVars(pattern,
-            {host: relayHost, protocol: protocol});
+            {host: relayHost, port: relayPort, protocol: protocol});
       }
     } else {
       // If everything is ok, this should be the second time we've been asked

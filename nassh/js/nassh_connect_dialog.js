@@ -422,7 +422,7 @@ nassh.ConnectDialog.prototype.maybeCopyPlaceholders_ = function() {
 nassh.ConnectDialog.prototype.maybeCopyPlaceholder_ = function(fieldName) {
   var field = this.$f(fieldName);
   var placeholder = field.getAttribute('placeholder');
-  if (!field.value && placeholder != this.msg('FIELD_' + fieldName
+  if (!field.value && placeholder != this.msg('FIELD_' + fieldName +
                                               '_PLACEHOLDER')) {
     field.value = placeholder;
   }

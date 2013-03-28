@@ -1,3 +1,8 @@
+0.8.17.1, 2013-03-28, Add relay port option, update nacl plugin
+
+* Update NaCl plugin to the latest source.
+* Add ability to specify relay port.
+
 0.8.16.3, 2013-03-19, Update to hterm 1.2
 
 * Update to hterm 1.2 to get terminal bell fix.
