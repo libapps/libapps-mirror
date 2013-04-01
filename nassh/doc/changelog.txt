@@ -1,3 +1,8 @@
+0.8.17.2, 2013-04-01, Rebuild nacl plugin with ixany fix.
+
+* Rebuild plugin with https://codereview.chromium.org/13008014/.
+  BUG=chromium:218361, ...ixany/tostop being set in termios
+
 0.8.17.1, 2013-03-28, Add relay port option, update nacl plugin
 
 * Update NaCl plugin to the latest source.
