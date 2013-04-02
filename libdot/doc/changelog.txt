@@ -1,3 +1,8 @@
+1.2, 2013-04-02, Add export/import methods to lib.PreferenceManager.
+
+* Add lib.PreferenceManager..exportAsJson/importFromJson methods to facilitate
+  backup or migration of preferences.
+
 1.1, 2013-03-14, Grab bag of changes.
 
 * Initial add of libdot changelog.

@@ -706,6 +706,58 @@ lib.PreferenceManager.prototype.get = function(name) {
 };
 
 /**
+ * Return all non-default preferences as a JSON onject.
+ *
+ * This includes any nested preference managers as well.
+ */
+lib.PreferenceManager.prototype.exportAsJson = function() {
+  var rv = {};
+
+  for (var name in this.prefRecords_) {
+    if (name in this.childLists_) {
+      rv[name] = [];
+      var childIds = this.get(name);
+      for (var i = 0; i < childIds.length; i++) {
+        var id = childIds[i];
+        rv[name].push({id: id, json: this.getChild(name, id).exportAsJson()});
+      }
+
+    } else {
+      var record = this.prefRecords_[name];
+      if (record.currentValue != this.DEFAULT_VALUE)
+        rv[name] = record.currentValue;
+    }
+  }
+
+  return rv;
+};
+
+/**
+ * Import a JSON blob of preferences previously generated with exportAsJson.
+ *
+ * This will create nested preference managers as well.
+ */
+lib.PreferenceManager.prototype.importFromJson = function(json) {
+  for (var name in json) {
+    if (name in this.childLists_) {
+      var childList = json[name];
+      for (var i = 0; i < childList.length; i++) {
+        var id = childList[i].id;
+
+        var childPrefManager = this.childLists_[name][id];
+        if (!childPrefManager)
+          childPrefManager = this.createChild(name, null, id);
+
+        childPrefManager.importFromJson(childList[i].json);
+      }
+
+    } else {
+      this.set(name, json[name]);
+    }
+  }
+};
+
+/**
  * Called when one of the child list preferences changes.
  */
 lib.PreferenceManager.prototype.onChildListChange_ = function(listName) {
