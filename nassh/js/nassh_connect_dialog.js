@@ -337,7 +337,7 @@ nassh.ConnectDialog.prototype.save = function() {
        var value = this.$f(name).value;
 
        if (name == 'port' || name == 'relay-port')
-         value = value ? parseInt(value) : null;
+         value = value ? parseInt(value) : '';
 
        if ((!prefs && !value) || (prefs && value == prefs.get(name)))
          return;
