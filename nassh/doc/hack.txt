@@ -180,7 +180,7 @@ Shell and Native Client ssh wrapper source code.
 
    This will download and install some Native Client support libraries and
    then build the NaCl wrapped ssh binary.  When the build is done, copy the
-   entire ssh_client/hterm/plugin directory into chromeapps/nassh.
+   entire ssh_client/output/hterm/plugin directory into chromeapps/nassh.
 
 
 4. Running the unit tests
