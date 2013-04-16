@@ -114,8 +114,9 @@ nassh.CommandInstance.prototype.run = function() {
            new Date(lib.resource.getData('hterm/concat/date'))) / 1000);
 
       this.io.println(
-          'hterm: ' + (htermAge / 60).toFixed(2) + ' minutes ago: ' +
-          lib.resource.getData('hterm/git/shortstat'));
+          'hterm ' + lib.resource.getData('hterm/changelog/version') + ': ' +
+          (htermAge / 60).toFixed(2) + ' minutes ago: ' +
+          (lib.resource.getData('hterm/git/shortstat') || 'no changes'));
     }
 
     this.io.println(
