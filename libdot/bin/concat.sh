@@ -169,14 +169,18 @@ function append_comment() {
 function append_string() {
   local str=$*
 
-  append_output "$(echo "${str//\'/\\\'}" | awk -v WIDTH=76 '
+  append_output "$(echo "${str//\'/\'}" | awk -v WIDTH=76 '
     {
       while (length>WIDTH) {
         print "\047" substr($0,1,WIDTH) "\047 +";
         $0=substr($0,WIDTH+1);
       }
 
-      print "\047" $0 "\047";
+      print "\047" $0 "\047 +";
+    }
+
+    END {
+      print "\047\047";
     }'
   )"
 }
