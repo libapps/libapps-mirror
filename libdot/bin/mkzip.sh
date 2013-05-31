@@ -87,6 +87,8 @@ FILE_PATTERNS='
     \./plugin/.*
 '
 
+FILE_PATTERNS="$FILE_PATTERNS$MORE_FILE_PATTERNS"
+
 #
 # Echo "yes" if a string starts with the given substring, "no" otherwise.
 #

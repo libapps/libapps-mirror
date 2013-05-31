@@ -1,0 +1,13 @@
+# Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+@include hterm/concat/hterm_deps.concat
+@include hterm/concat/hterm.concat
+
+@include wash/concat/lib_wa_deps.concat
+
+@file libdot/js/lib_f_sequence.js
+
+@file wash/js/lib_hterm.js
+@file wash/js/lib_hterm_termcap.js

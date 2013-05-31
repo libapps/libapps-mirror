@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        position: absolute;
+        padding: 0px;
+        margin: 0px;
+        height: 100%;
+        width: 100%;
+      }
+
+      #wash_window_outer {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      #wash_window_titlebar {
+        background-color: lightgrey;
+        height: 28px;
+        width: 100%;
+        border-bottom: grey;
+        -webkit-app-region: drag;
+      }
+
+      #wash_window_content {
+        position: absolute;
+        top: 28px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='wash_window_outer'>
+      <div id='wash_window_titlebar'></div>
+      <div id='wash_window_content'></div>
+    </div>
+  </body>
+</html>
