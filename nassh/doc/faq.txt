@@ -386,6 +386,17 @@ at <http://goo.gl/RYHiK>.
      term_.prefs_.reset('cursor-blink')
 
 
+> Why does hterm ignore the cursor blink escape sequence?
+
+  Most terminals ignore attempts by the host to change the blink-state of the
+  cursor.  This lets you choose between a blink/steady cursor via the
+  cursor-blink preference, without having the host change your setting.
+
+  By default, hterm also ignores this escape sequence.  To enable it, set the
+  'enable-dec12' preference to true.
+
+     term_.prefs_.set('enable-dec12', true)
+
 > How do I change the TERM environment variable?
 
   Open the JavaScript console and type...
@@ -521,8 +532,10 @@ at <http://goo.gl/RYHiK>.
 
 > Why does the cursor blink in emacs?
 
-  Do you normally use Terminal.app or xterm?  Those terminals (and probably
-  a few others) ignore the "ESC [ ? 12 h" and "ESC [ ? 12 l" sequences.
+  This answer only applies if you've set the 'enable-dec12' preference to true.
+
+  Do you normally use Terminal.app or xterm?  Those terminals (and many others)
+  ignore the "ESC [ ? 12 h" and "ESC [ ? 12 l" sequences (DEC Private Mode 12).
   Emacs uses these sequences (on purpose) to enable and disable cursor blink.
 
   If you prefer a steady cursor in emacs, set visible-cursor to nil as

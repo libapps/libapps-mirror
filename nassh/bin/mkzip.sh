@@ -12,7 +12,7 @@ fi
 source "../libdot/bin/common.sh"
 
 BUILT_HTERM_VERSION=$(grep -A1 "lib.resource.add('hterm/changelog/version'" \
-  ./js/nassh_deps.concat.js | tail -1 | tr -d \')
+  ./js/nassh_deps.concat.js | tail -1 | tr -d \'\+\ )
 
 if [ -z "$BUILT_HTERM_VERSION" ]; then
   echo_err "Error reading hterm version."

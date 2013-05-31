@@ -632,6 +632,9 @@ nassh.CommandInstance.prototype.exit = function(code) {
 };
 
 nassh.CommandInstance.prototype.onBeforeUnload_ = function(e) {
+  if (hterm.windowType == 'popup')
+    return;
+
   var msg = nassh.msg('BEFORE_UNLOAD');
   e.returnValue = msg;
   return msg;
