@@ -1,3 +1,7 @@
+0.8.19.1, 2013-06-19, Update to hterm 1.9.
+
+* Include Shift-Tab fixes from hterm 1.9.
+
 0.8.19, 2013-06-19, Stable release of 0.8.18.5
 
 * Stable release of 0.8.18.5.
