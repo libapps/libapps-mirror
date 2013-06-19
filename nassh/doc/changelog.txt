@@ -1,3 +1,7 @@
+0.8.19, 2013-06-19, Stable release of 0.8.18.5
+
+* Stable release of 0.8.18.5.
+
 0.8.18.5, 2013-05-31, Overscroll fix.
 
 * Update to hterm 1.8.
