@@ -1,3 +1,11 @@
+0.8.19.3, 2013-06-20, Update to hterm 1.11.
+
+* Include 'send-encoding'/'receive-encoding' preferences from hterm 1.11.
+
+0.8.19.2, 2013-06-20, Update to hterm 1.10.
+
+* Include 'characer-encoding' preference from hterm 1.10.
+
 0.8.19.1, 2013-06-19, Update to hterm 1.9.
 
 * Include Shift-Tab fixes from hterm 1.9.
