@@ -113,7 +113,7 @@ function get_relative_path() {
   if [ "$pwd" !=  "$home" ]; then
     # Check to see if it's shorter to express the path relative to $HOME
     local fromhome="~/$(get_relative_path "$source_dir" "$home")"
-    if [ $(expr length "$fromhome") -le $(expr length "$rv") ]; then
+    if [ ${#fromhome} -le ${#rv} ]; then
       echo "$fromhome"
       return
     fi
@@ -132,7 +132,7 @@ function get_manifest_key_value() {
   local key="$1"
   local file="$2"
   local line="$(grep "\"$key\":" "$file")"
-  echo "$(expr match "$line" '.*\":\s*\"\([^\"]*\)')"
+  echo "$(expr "$line" : '.*\":[[:space:]]*\"\([^\"]*\)')"
 }
 
 function echo_changelog() {

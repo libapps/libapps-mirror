@@ -306,7 +306,7 @@ function process_concat_fd() {
     READ_LINE=${READ_LINE##}  # Strip leading spaces.
 
     # Handle trailing escape as line continuation.
-    while [ $(expr match "$READ_LINE" ".*\\\\$") != 0 ]; do
+    while [ $(expr "$READ_LINE" : ".*\\\\$") != 0 ]; do
       READ_LINE=${READ_LINE%\\}  # Strip trailing escape.
       line="$line$READ_LINE"
       insist read -r 0<&$fd READ_LINE

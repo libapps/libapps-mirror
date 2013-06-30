@@ -64,7 +64,7 @@ DEFINE_string filename "" \
   "The new zip filename.  Computed from manifest.json if not specified." f
 DEFINE_boolean promote "$FLAGS_TRUE" \
   "If true, this will promote the suffix and version number of the extension \
-before packaging."
+before packaging." p
 DEFINE_string source "" \
   "The source directory or zip file to package." s
 DEFINE_string tmpdir "" \
@@ -105,7 +105,7 @@ function starts_with() {
 
 function echo_suffix() {
   local name="$1"
-  local suffix=$(echo "$name" | sed -e 's/^[^(]\+(//' -e 's/)[^)]*$//')
+  local suffix=$(echo "$name" | sed -e 's/^[^(]\{1,\}(//' -e 's/)[^)]*$//')
   if [ "$name" != "$suffix" ]; then
     echo "$suffix"
   else
@@ -129,7 +129,7 @@ function promote_name() {
     suffix=""
   fi
 
-  local new_name="$(echo $current_name | sed 's/\s\+([^)\]\+)\s*$//')"
+  local new_name="$(echo $current_name | sed 's/[[:space:]]\{1,\}([^)]*)[[:space:]]*$//')"
 
   if [ ! -z "$suffix" ]; then
     new_name="$new_name ($suffix)"
@@ -144,13 +144,13 @@ function promote_version() {
   local current_version="$1"
 
   # First remove the final decimal place.
-  local new_version="$(echo $current_version | sed 's/\.[0-9]\+$//')"
+  local new_version="$(echo $current_version | sed 's/\.[0-9]\{1,\}$//')"
 
   # Then find the (new) final decimal place.
-  local final="$(echo $new_version | sed 's/^\([0-9]\.\)*//')"
+  local final="$(echo $new_version | sed 's/^\([0-9]\{1,\}\.\)*//')"
 
   # Strip this final number, add one, then put it back.
-  new_version="$(echo $new_version | sed 's/\.[0-9]\+$//')"
+  new_version="$(echo $new_version | sed 's/\.[0-9]\{1,\}$//')"
   final=$(( $final + 1 ))
   new_version="$new_version.$final"
 
@@ -169,7 +169,7 @@ function rewrite_manifest() {
   echo_err "New version: $new_version"
 
   # Used in the regexp's below.
-  local s="[[:space:]]"
+  local s="[ \t]"
 
   local suffix="$(echo_suffix "$new_name")"
 
@@ -275,7 +275,7 @@ function init_from_dir() {
 
   local files=""
   for pat in ${FILE_PATTERNS}; do
-    files="$files $(find . -regextype posix-egrep -iregex "$pat")"
+    files="$files $(find . -iregex "$pat")"
   done
 
   set +f  # Re-enable expansion.
