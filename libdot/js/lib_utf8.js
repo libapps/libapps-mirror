@@ -99,6 +99,19 @@ lib.UTF8Decoder.prototype.decode = function(str) {
 };
 
 /**
+ * Decodes UTF-8 data. This is a convenience function for when all the
+ * data is already known.
+ *
+ * @param {String} str data to decode, represented as a JavaScript
+ *     String with each code unit representing a byte between 0x00 to
+ *     0xFF.
+ * @return {String} The data decoded into a JavaScript UTF-16 string.
+ */
+lib.decodeUTF8 = function(utf8) {
+  return (new lib.UTF8Decoder()).decode(utf8);
+};
+
+/**
  * Encodes a UTF-16 string into UTF-8.
  *
  * TODO(davidben): Do we need a stateful version of this that can
