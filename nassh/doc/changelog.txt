@@ -1,4 +1,8 @@
-0.8.20.1, 2013-07-08, Update to hterm 1.13.
+0.8.20.2, 2013-07-19, Update to hterm 1.14.
+
+* Update to hterm 1.14.
+
+0.8.20.1, 2013-07-18, Update to hterm 1.13.
 
 * Disable zoom warning on newer Chrome builds.
 
