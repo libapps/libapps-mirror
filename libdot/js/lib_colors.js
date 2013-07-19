@@ -253,7 +253,7 @@ lib.colors.mix = function(base, tint, percent) {
     ary1[i] += diff * percent;
   }
 
-  return lib.colors.arrayToRGBA(ary);
+  return lib.colors.arrayToRGBA(ary1);
 };
 
 /**

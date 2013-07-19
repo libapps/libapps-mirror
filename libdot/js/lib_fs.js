@@ -11,8 +11,10 @@ lib.rtdep('lib.f.getStack');
  */
 lib.fs = {};
 
-if (typeof addEventListener == 'function')
-  addEventListener('load', function() { lib.fs.installFileErrorToString() });
+if (window && typeof window.addEventListener == 'function') {
+  window.addEventListener('load',
+                          function() { lib.fs.installFileErrorToString() });
+}
 
 /**
  * Returns a function that console.log()'s its arguments, prefixed by |msg|.
