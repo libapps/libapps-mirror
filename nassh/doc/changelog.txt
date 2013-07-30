@@ -1,3 +1,15 @@
+0.8.22, 2013-07-30, Stable release of 0.8.21.1.
+
+* Stable release of 0.8.21.1.
+
+0.8.21.1, 2013-07-30, Actually update to hterm 1.17.
+
+* Forgot to mkdeps for 0.8.20.5 :/
+
+0.8.21, 2013-07-30, Stable release of 0.8.20.5.
+
+* Stable release of 0.8.20.5.
+
 0.8.20.5, 2013-07-27, Update to hterm 1.17.
 
 * Update to hterm 1.17.
