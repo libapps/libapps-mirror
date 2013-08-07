@@ -182,6 +182,7 @@ Shell and Native Client ssh wrapper source code.
    then build the NaCl wrapped ssh binary.  When the build is done, copy the
    entire ssh_client/output/hterm/plugin directory into chromeapps/nassh.
 
+      $ cp -r output/hterm/plugin ../nassh
 
 4. Running the unit tests
 
