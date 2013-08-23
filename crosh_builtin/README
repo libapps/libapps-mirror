@@ -7,6 +7,5 @@ to make it impossible to get to the app store.
 The ssh portions of hterm, including the NaCl plugin and nassh.(html|js) are
 not included in the crosh_builtin extension.
 
-The zip file in this directory can be recreated with the package.sh
+The zip file in this directory can be recreated with the rezip.sh
 script in this directory.
-
