@@ -371,7 +371,7 @@ BUG=chromium-os:34306, hterm shows wrong colors for bold colors 16 through 249
 0.8.7.1, 2012-09-20, Some keyboard fixes and pnacl
 
 * Recompile nacl plugin with --pnacl enabled.
-  (See https://gerrit.chromium.org/gerrit/#/c/33519/.)
+  (See https://chromium-review.googlesource.com/#/c/33519/.)
 * Changed hterm_keyboard.js to only add modifier munging to strings that
   came from the "default" action.  Other actions are assumed to already
   be appropriate for the in use modifier.

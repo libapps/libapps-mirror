@@ -31,7 +31,7 @@ Shell and Native Client ssh wrapper source code.
    <http://src.chromium.org/viewvc/chrome/trunk/src/LICENSE?view=markup>.
 
    The source code itself is in the Chromium OS "assets" repository, located
-   on git.chromium.org.  (The Secure Shell application works on recent
+   on chromium.googlesource.com. (The Secure Shell application works on recent
    Chromium based browsers on Windows, Mac and Linux platforms too.  The source
    just happens to live in a Chromium OS repository.)
 
@@ -71,7 +71,7 @@ Shell and Native Client ssh wrapper source code.
 
       $ mkdir chromiumos
       $ cd chromiumos
-      $ git clone http://git.chromium.org/chromiumos/platform/assets.git
+      $ git clone https://chromium.googlesource.com/chromiumos/platform/assets.git
 
    That's it.  Look under the chromeapps/ directory for the nassh/, hterm/
    and ssh_client/ directories.  Make your changes, use `git diff` to produce
@@ -94,7 +94,7 @@ Shell and Native Client ssh wrapper source code.
 
       $ mkdir chromiumos
       $ cd chromiumos
-      $ repo init -u https://git.chromium.org/chromiumos/manifest.git
+      $ repo init -u https://chromium.googlesource.com/chromiumos/manifest.git
       $ repo sync chromiumos/repohooks
       $ repo sync chromiumos/platform/assets
 
