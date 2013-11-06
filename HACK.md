@@ -16,7 +16,7 @@ to do a one-time setup to get things ready.
 
 2. From the root of your libapps/ repo, run the command:
 
-       $ scp -p -P 29418 gerrit.chromium.org:hooks/commit-msg .git/hooks/
+        $ scp -p -P 29418 gerrit.chromium.org:hooks/commit-msg .git/hooks/
 
    This will copy a commit-msg hook necessary for Gerrit.  The hook annotates
    your commit messages with Change-Id's.  It's important to leave these intact,
