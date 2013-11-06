@@ -7,7 +7,7 @@ The official copy of this repository is located on chromium.googlesource.com.
 You can `git clone https://chromium.googlesource.com/apps/libapps` to create a
 local copy.
 
-There is also a mirror on github at https://github.com/rginda/libapps-mirror.
+There is also a mirror on github at https://github.com/libapps-mirror/libapps.
 Keep in mind that this mirror may occasionally be behind the official
 repository.
 
