@@ -25,16 +25,6 @@
     "html/nassh_google_relay.html",
     "html/nassh_connect_dialog.html"
   ],
-  "background": {
-    "scripts": [
-      "js/nassh_deps.concat.js",
-      "js/nassh.js",
-      "js/nassh_app.js",
-      "js/nassh_background.js",
-      "js/nassh_commands.js",
-      "js/nassh_nassh.js"
-    ]
-  },
   "app": {
     "launch": {
       "local_path": "html/nassh.html"
