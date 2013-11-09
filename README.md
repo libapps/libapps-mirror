@@ -7,7 +7,7 @@ that make use of it.
 The official copy of this repository is hosted at
 https://chromium.googlesource.com/apps/libapps.
 
-There is also a mirror on github at https://github.com/libapps-mirror/libapps.
+There is also a mirror on github at https://github.com/libapps/libapps-mirror.
 Keep in mind that this mirror may occasionally be behind the official
 repository.
 
