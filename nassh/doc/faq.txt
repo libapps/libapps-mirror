@@ -115,7 +115,7 @@ at <http://goo.gl/RYHiK>.
 > What should I do if I notice a bug?
 
   First, please continue reading this FAQ to make sure your issue isn't
-  mentioned.  Then check the bug list at <http://goo.gl/hpqWk>.
+  mentioned.  Then check the bug list at <http://goo.gl/LR8mFR>.
 
   If you don't see the issue there, you can search the archives of the
   chromium-hterm mailing list here: <http://goo.gl/RYHiK>.
@@ -262,8 +262,9 @@ at <http://goo.gl/RYHiK>.
   take effect until the next time you reconnect.
 
   Some common preferences are listed in questions that follow.  For the full
-  list, you'll have to read through the "setProfile" function in terminal.js.
-  It's here: <http://goo.gl/FDEXb>, around line 130.
+  list, you'll have to read through the "definePreferences" call in
+  hterm_preference_manager.js.  It's here: <http://goo.gl/xZa38d>, around line
+  130.
 
 
 > How do I change the audible bell sound?
@@ -539,7 +540,7 @@ at <http://goo.gl/RYHiK>.
   Emacs uses these sequences (on purpose) to enable and disable cursor blink.
 
   If you prefer a steady cursor in emacs, set visible-cursor to nil as
-  described in <http://goo.gl/i9THb>.
+  described in <http://goo.gl/TK7876>.
 
 
 > Why does the color scheme look funny in emacs/vi/vim?
@@ -615,8 +616,7 @@ at <http://goo.gl/RYHiK>.
 
 > Can I synchronize my emacs selection with the system clipboard?
 
-  Yes, as long as you're not using tmux.  See ../etc/osc52.el (also,
-  <http://goo.gl/5vWiS>) for the details.
+  Yes, as long as you're not using tmux.  See ../etc/osc52.el for the details.
 
 
 > Is there a way to try early releases of Secure Shell?
@@ -632,11 +632,10 @@ at <http://goo.gl/RYHiK>.
 
 > Where is the source code?
 
-  The hterm source is here: <http://goo.gl/EqrV0>.  This includes the
+  The hterm source is here: <http://goo.gl/8qndhN>.  This includes the
   front-end code for Secure Shell.
 
-  The Native Client wrapper around ssh is here: <http://goo.gl/760JC>.
-
+  The Native Client wrapper around ssh is here: <http://goo.gl/4tZCMI>.
 
 > Is there a change log?
 
