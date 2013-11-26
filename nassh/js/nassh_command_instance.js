@@ -437,6 +437,13 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   if (!(params.username && params.hostname))
     return false;
 
+  if (params.hostname == '>crosh') {
+    // TODO: This will need to be done better.  document.location changes don't
+    // work in v2 apps.
+    document.location = 'crosh.html';
+    return;
+  }
+
   if (params.relayHost) {
     this.relay_ = new nassh.GoogleRelay(this.io,
                                         params.relayHost,

@@ -1,3 +1,10 @@
+0.8.22.1, 2013-11-25, Update hterm, add ">crosh" host.
+
+* Update to hterm 1.23.
+* Add special hostname ">crosh" to redirect to the crosh shell on Chrome OS,
+  so that it's possible to open crosh in an app window.  This is a temporary
+  fix that will have to change when Secure Shell moves to a v2 app.
+
 0.8.22, 2013-07-30, Stable release of 0.8.21.1.
 
 * Stable release of 0.8.21.1.

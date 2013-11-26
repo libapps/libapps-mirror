@@ -65,8 +65,8 @@ that it applies to Chromium OS as well.
    Once installed you should see a new "Secure Shell" icon in your application
    launcher.
 
-   You can get to crosh from Secure Shell by typing "crosh" when prompted for a
-   destination.  (This won't work on non-Chrome OS systems, of course.)
+   You can get to crosh from Secure Shell by typing ">crosh" as the host name.
+   (This won't work on non-Chrome OS systems, of course.)
 
    If Chrome OS notices that you have installed Secure Shell, it'll launch that
    instead of the built-in crosh command.  This allows you to upgrade the
