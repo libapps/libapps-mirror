@@ -30,6 +30,15 @@ function Crosh(argv) {
 };
 
 /**
+ * The extension id of "crosh_builtin", the version of crosh that ships with
+ * the Chromium OS system image.
+ *
+ * See https://chromium.googlesource.com/chromiumos/platform/assets/+/master/
+ * chromeapps/crosh_builtin/
+ */
+Crosh.croshBuiltinId = 'nkoccljplnhpfnfiajclkommnmllphnl';
+
+/**
  * Static initialier called from crosh.html.
  *
  * This constructs a new Terminal instance and instructs it to run the Crosh
@@ -38,6 +47,30 @@ function Crosh(argv) {
 Crosh.init = function() {
   var profileName = lib.f.parseQuery(document.location.search)['profile'];
   var terminal = new hterm.Terminal(profileName);
+
+  if (chrome.runtime.id != Crosh.croshBuiltinId) {
+    // We want to override the Ctrl-Shift-N keystroke so it opens nassh.html,
+    // and its connection dialog, rather than reloading crosh.html.
+    //
+    // The builtin version of crosh does not come with nassh, so it won't work
+    // from there.
+    terminal.onTerminalReady = function() {
+      var onCtrlMetaN = function(e) {
+        if (e.shiftKey) {
+          window.open('/html/nassh.html', '',
+                      'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
+                      'minimizable=yes,width=' + window.innerWidth +
+                      ',height=' + window.innerHeight);
+        }
+
+        return hterm.Keyboard.KeyActions.DEFAULT;
+      }
+
+      terminal.keyboard.keyMap.keyDefs[78].control = onCtrlMetaN;
+      terminal.keyboard.keyMap.keyDefs[78].meta = onCtrlMetaN;
+    };
+  }
+
   terminal.decorate(document.querySelector('#terminal'));
 
   // Useful for console debugging.
@@ -90,8 +123,7 @@ Crosh.prototype.run = function() {
   this.io = this.argv_.io.push();
 
   if (!chrome.terminalPrivate) {
-    this.io.println("Crosh is not supported on your version of Chrome :(");
-    this.io.println("Minimal version of Chrome needed to run crosh is 18.");
+    this.io.println("Crosh is not supported on this version of Chrome.");
     this.exit(1);
     return;
   }
@@ -182,9 +214,35 @@ Crosh.prototype.onTerminalResize_ = function(width, height) {
  */
 Crosh.prototype.exit = function(code) {
   this.close_();
-  this.io.pop();
   window.onbeforeunload = null;
 
-  if (this.argv_.onExit)
-    this.argv_.onExit(code);
+  if (code == 0) {
+    this.io.pop();
+    if (this.argv_.onExit)
+      this.argv_.onExit(code);
+    return;
+  }
+
+  this.io.println('crosh exited with code: ' + code);
+  this.io.println('(R)e-execute, (C)hoose another connection, or E(x)it?');
+  this.io.onVTKeystroke = function(string) {
+    var ch = string.toLowerCase();
+    if (ch == 'r' || ch == ' ' || ch == '\x0d' /* enter */ ||
+        ch == '\x12' /* ctrl-r */) {
+      document.location.reload();
+      return;
+    }
+
+    if (ch == 'c') {
+      document.location = '/html/nassh.html';
+      return;
+    }
+
+    if (ch == 'e' || ch == 'x' || ch == '\x1b' /* ESC */ ||
+        ch == '\x17' /* C-w */) {
+      this.io.pop();
+      if (this.argv_.onExit)
+        this.argv_.onExit(code);
+    }
+  }.bind(this);
 };

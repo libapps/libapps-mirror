@@ -1,3 +1,10 @@
+0.8.22.2, 2013-11-26, Crosh polish.
+
+* Display reconnect menu on non-zero exit status.
+* Override ctrl/meta-shift-n to load a new nassh.html window rather than
+  crosh.html, if available.
+* Add nassh.html/crosh.html to web_accessible_resources to allow linking.
+
 0.8.22.1, 2013-11-25, Update hterm, add ">crosh" host.
 
 * Update to hterm 1.23.

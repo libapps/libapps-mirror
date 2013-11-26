@@ -4,7 +4,7 @@
   "manifest_version": 2,
   "content_security_policy": "script-src 'self'; object-src 'self'",
   "name": "Secure Shell (tot)",
-  "version": "0.8.22.1",
+  "version": "0.8.22.2",
   "default_locale": "en",
   "icons": {
     "128": "images/dev/icon-128.png",
@@ -22,6 +22,8 @@
     "terminalPrivate"
   ],
   "web_accessible_resources": [
+    "html/crosh.html",
+    "html/nassh.html",
     "html/nassh_google_relay.html",
     "html/nassh_connect_dialog.html"
   ],
