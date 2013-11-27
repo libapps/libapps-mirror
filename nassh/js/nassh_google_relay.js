@@ -68,14 +68,51 @@ lib.rtdep('lib.f');
  * 6. Writes are queued up and sent to /write.
  */
 
-nassh.GoogleRelay = function(io, proxyHost, proxyPort, options) {
+nassh.GoogleRelay = function(io, optionString) {
   this.io = io;
-  this.proxyHost = proxyHost;
-  this.proxyPort = proxyPort || 8022;
-  this.useSecure = options.search('--use-ssl') != -1;
-  this.useWebsocket = !(options.search('--use-xhr') != -1);
+  this.options = nassh.GoogleRelay.parseOptionString(optionString);
+  this.proxyHost = this.options['--proxy-host'];
+  this.proxyPort = this.options['--proxy-port'] || 8022;
+  this.useSecure = this.options['--use-ssl'];
+  this.useWebsocket = !this.options['--use-xhr'];
   this.relayServer = null;
   this.relayServerSocket = null;
+};
+
+nassh.GoogleRelay.parseOptionString = function(optionString) {
+  var rv = {};
+
+  var optionList = optionString.split(/\s+/g);
+  for (var i = 0; i < optionList.length; i++) {
+    var option = optionList[i];
+    if (option.substr(0, 1) != '-') {
+      // Bare option overrides --host.
+      rv['--proxy-host'] = option;
+    } else {
+      var pos = option.indexOf('=');
+      if (pos != -1) {
+        rv[option.substr(0, pos)] = option.substr(pos + 1);
+      } else {
+        var ary = option.match(/--no-(.*)/);
+        if (ary) {
+          rv['--' + ary[1]] = false;
+        } else {
+          rv[option] = true;
+        }
+      }
+    }
+  }
+
+  if (rv['--config'] == 'google') {
+    if (!('--proxy-host' in rv))
+      rv['--proxy-host'] = 'spdy-proxy.ext.google.com';
+    if (!('--use-ssl' in rv))
+      rv['--use-ssl'] = true;
+    if (!('--relay-prefix-field' in rv))
+      rv['--relay-prefix-field'] = '2';
+  }
+
+  return rv;
 };
 
 /**
@@ -128,9 +165,32 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
   // if we succeed at finding a relay host.
   var relayHost = sessionStorage.getItem('googleRelay.relayHost');
   var relayPort = sessionStorage.getItem('googleRelay.relayPort') ||
-    (this.useWebsocket ? 8022 : 8023);
+    (this.useXHR ? 8023 : 8022);
 
   if (relayHost) {
+    var relayPrefixField = parseInt(this.options['--relay-prefix-field']);
+    if (relayPrefixField) {
+      // If this option is set, we're supposed to assume the relayHost is a
+      // '.' delimited list of fields (like a hostname), isolate the field
+      // at the 1-based relayPrefixField position, and create the actual
+      // relayHost by prepending this field to the original proxyHost.
+      //
+      // TODO(rginda): Yes, this is a kludge.  Returning the correct hostname
+      // from the proxy is sometimes difficult, for a reason unknown to me.
+      var relayPrefix = relayHost.split(/\./g)[relayPrefixField - 1];
+      if (relayPrefix) {
+        if (this.proxyHost.substr(0, relayPrefix.length + 1) !=
+            relayPrefix + '.') {
+          // Only add the prefix if the proxyHost doesn't already include it.
+          relayHost = relayPrefix + '.' + this.proxyHost;
+        }
+      } else {
+        console.warn('Error getting relay prefix field: ' + relayPrefixField +
+                     ' from: ' + relayHost);
+        this.relayHost = null;
+      }
+    }
+
     var expectedResumePath =
         sessionStorage.getItem('googleRelay.resumePath');
     if (expectedResumePath == resumePath) {
@@ -138,7 +198,7 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
       var pattern = this.relayServerPattern;
       this.relayServer = lib.f.replaceVars(pattern,
           {host: relayHost, port: relayPort, protocol: protocol});
-      if (this.useWebsocket) {
+      if (!this.useXHR) {
         protocol = this.useSecure ? 'wss' : 'ws';
         this.relayServerSocket = lib.f.replaceVars(pattern,
             {host: relayHost, port: relayPort, protocol: protocol});

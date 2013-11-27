@@ -116,24 +116,14 @@
     "description": "Text use as the aria-label for the 'port' field."
   },
 
-  "FIELD_RELAY_HOST_PLACEHOLDER": {
-    "message": "relay hostname",
-    "description": "Text use as the placeholder for the 'relay-host' field."
+  "FIELD_RELAY_OPTIONS_PLACEHOLDER": {
+    "message": "relay options",
+    "description": "Text use as the placeholder for the 'relay-options' field."
   },
 
-  "FIELD_RELAY_HOST_ARIA_LABEL": {
-    "message": "relay host",
-    "description": "Text use as the aria-label for the 'relay-host' field."
-  },
-
-  "FIELD_RELAY_PORT_ARIA_LABEL": {
-    "message": "port",
-    "description": "Text use as the aria-label for the 'relay-port' field."
-  },
-
-  "FIELD_RELAY_PORT_PLACEHOLDER": {
-    "message": "port",
-    "description": "Text use as the placeholder for the 'relay-port' field."
+  "FIELD_RELAY_OPTIONS_ARIA_LABEL": {
+    "message": "relay options",
+    "description": "Text use as the aria-label for the 'relay-options' field."
   },
 
   "IDENTITY_LABEL": {

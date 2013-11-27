@@ -218,7 +218,7 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
     });
 
   // These fields interact with each-other's placeholder text.
-  ['description', 'username', 'hostname', 'port', 'relay-host', 'relay-port'
+  ['description', 'username', 'hostname', 'port'
   ].forEach(function(name) {
       var field = this.$f(name);
 
@@ -243,7 +243,7 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
                    this.maybeDirty_.bind(this, name));
     }.bind(this));
 
-  ['description', 'username', 'hostname', 'port', 'relay-host', 'relay-port',
+  ['description', 'username', 'hostname', 'port', 'relay-options',
    'identity', 'argstr', 'terminal-profile'
   ].forEach(function(name) {
       addListeners(this.$f(name), ['focus', 'blur'],
@@ -329,14 +329,14 @@ nassh.ConnectDialog.prototype.save = function() {
 
   var prefs = this.currentProfileRecord_.prefs;
 
-  ['description', 'username', 'hostname', 'port', 'relay-host', 'relay-port',
+  ['description', 'username', 'hostname', 'port', 'relay-options',
    'identity', 'argstr', 'terminal-profile'].forEach(function(name) {
        if (name == 'identity' && this.$f('identity').selectedIndex === 0)
          return;
 
        var value = this.$f(name).value;
 
-       if (name == 'port' || name == 'relay-port')
+       if (name == 'port')
          value = value ? parseInt(value) : '';
 
        if ((!prefs && !value) || (prefs && value == prefs.get(name)))
@@ -410,7 +410,7 @@ nassh.ConnectDialog.prototype.maybeDirty_ = function(fieldName) {
  * to bulk-default.
  */
 nassh.ConnectDialog.prototype.maybeCopyPlaceholders_ = function() {
-  ['description', 'username', 'hostname', 'port', 'relay-host', 'relay-port'
+  ['description', 'username', 'hostname', 'port'
   ].forEach(this.maybeCopyPlaceholder_.bind(this));
   this.syncButtons_();
 };
@@ -458,7 +458,7 @@ nassh.ConnectDialog.prototype.updateDetailPlaceholders_ = function() {
   // Copy the remaining match elements into the appropriate placeholder
   // attribute.  Set the default placeholder text from this.str.placeholders
   // for any field that was not matched.
-  ['username', 'hostname', 'port', 'relay-host', 'relay-port',
+  ['username', 'hostname', 'port'
   ].forEach(function(name) {
       var value = ary.shift();
       if (!value) {
@@ -484,10 +484,6 @@ nassh.ConnectDialog.prototype.updateDescriptionPlaceholder_ = function() {
     var v = this.$f('port').value;
     if (v)
       placeholder += ':' + v;
-
-    v = this.$f('relay-host').value;
-    if (v)
-      placeholder += '@' + v;
   } else {
     placeholder = this.msg('FIELD_DESCRIPTION_PLACEHOLDER');
   }
@@ -499,8 +495,8 @@ nassh.ConnectDialog.prototype.updateDescriptionPlaceholder_ = function() {
  * Sync the form with the current profile record.
  */
 nassh.ConnectDialog.prototype.syncForm_ = function() {
-  ['description', 'username', 'hostname', 'port', 'argstr', 'relay-host',
-   'relay-port', 'identity', 'terminal-profile'
+  ['description', 'username', 'hostname', 'port', 'argstr', 'relay-options',
+   'identity', 'terminal-profile'
   ].forEach(function(n) {
       var emptyValue = '';
       if (n == 'identity')

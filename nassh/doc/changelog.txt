@@ -1,3 +1,9 @@
+0.8.22.3, 2013-11-26, Learn the new relay dance.
+
+* Update the google relay code to understand the new proxy front-end to the
+  relay servers.  Should be backwards compatible.  Googlers can now specify
+  the relay option "--config=google" to magically specify the correct config.
+
 0.8.22.2, 2013-11-26, Crosh polish.
 
 * Display reconnect menu on non-zero exit status.

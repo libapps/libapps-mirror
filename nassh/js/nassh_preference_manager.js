@@ -107,3 +107,37 @@ nassh.ProfilePreferenceManager = function(parent, id) {
 nassh.ProfilePreferenceManager.prototype = {
   __proto__: lib.PreferenceManager.prototype
 };
+
+nassh.ProfilePreferenceManager.prototype.readStorage = function(opt_callback) {
+  var appendOption = function(str) {
+    var options = this.get('relay-options');
+    if (options) {
+      options += ' ' + str;
+    } else {
+      options = str;
+    }
+
+    this.set('relay-option', options);
+  }.bind(this);
+
+  var onRead = function() {
+    var host = this.get('relay-host');
+    if (host) {
+      console.warn('Merging relay-host preference with relay-options');
+      this.reset('relay-host');
+      appendOption('--proxy-host=' + host);
+    }
+
+    var port = this.get('relay-port');
+    if (port) {
+      this.reset('relay-port');
+      console.warn('Merging relay-host preference with relay-options');
+      appendOption('--proxy-port=' + port);
+    }
+
+    if (opt_callback)
+      opt_callback();
+  }.bind(this);
+
+  lib.PreferenceManager.prototype.readStorage.call(this, onRead);
+};
