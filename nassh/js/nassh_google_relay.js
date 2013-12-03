@@ -183,6 +183,8 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
             relayPrefix + '.') {
           // Only add the prefix if the proxyHost doesn't already include it.
           relayHost = relayPrefix + '.' + this.proxyHost;
+        } else {
+          relayHost = this.proxyHost;
         }
       } else {
         console.warn('Error getting relay prefix field: ' + relayPrefixField +
