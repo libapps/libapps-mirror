@@ -55,19 +55,27 @@ Crosh.init = function() {
     // The builtin version of crosh does not come with nassh, so it won't work
     // from there.
     terminal.onTerminalReady = function() {
-      var onCtrlMetaN = function(e) {
-        if (e.shiftKey) {
+      var openSecureShell = function() {
           window.open('/html/nassh.html', '',
                       'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
                       'minimizable=yes,width=' + window.innerWidth +
                       ',height=' + window.innerHeight);
-        }
+          return hterm.Keyboard.KeyActions.CANCEL;
+      };
+
+      terminal.keyboard.keyMap.keyDefs[78].control = function(e) {
+        if (e.shiftKey)
+          return openSecureShell();
+
+        return '\x0e';
+      };
+
+      terminal.keyboard.keyMap.keyDefs[78].meta = function(e) {
+        if (e.shiftKey)
+          return openSecureShell();
 
         return hterm.Keyboard.KeyActions.DEFAULT;
-      }
-
-      terminal.keyboard.keyMap.keyDefs[78].control = onCtrlMetaN;
-      terminal.keyboard.keyMap.keyDefs[78].meta = onCtrlMetaN;
+      };
     };
   }
 

@@ -1,3 +1,7 @@
+0.8.23.1, 2013-12-10, Crosh Ctrl-N fix.
+
+* Fix the Ctrl-N handler in crosh.js.
+
 0.8.22.4, 2013-12-02, Relay fix.
 
 * Fix to use the correct relayHost in the event that the relayPrefixField is
