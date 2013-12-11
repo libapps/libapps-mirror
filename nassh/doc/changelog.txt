@@ -1,3 +1,7 @@
+0.8.23.2, 2013-12-11, Fix cursor height regression.
+
+* Update to hterm 1.24, which has a fix for cursor height troubles.
+
 0.8.23.1, 2013-12-10, Crosh Ctrl-N fix.
 
 * Fix the Ctrl-N handler in crosh.js.
