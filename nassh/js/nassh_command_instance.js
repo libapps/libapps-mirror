@@ -553,17 +553,7 @@ nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
        'width: 0;' +
        'height: 0;');
 
-  var ary = navigator.userAgent.match(/Chrom(e|ium)\/(\d\d)\./);
-  var chromeVersion = parseInt(ary[2]) || 24;
-  var isARM = (/arm/i).test(navigator.platform);
-
-  var pluginURL;
-  if (isARM && chromeVersion == 23) {
-    // TODO(rginda): Remove (ARM && Chrome 23) plugin once Chrome 23 is history.
-    pluginURL = '../plugin/arm_23/ssh_client.nmf';
-  } else {
-    pluginURL = '../plugin/pnacl/ssh_client.nmf';
-  }
+  var pluginURL = '../plugin/pnacl/ssh_client.nmf';
 
   this.plugin_.setAttribute('src', pluginURL);
   this.plugin_.setAttribute('type', 'application/x-nacl');
