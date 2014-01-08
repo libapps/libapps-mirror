@@ -1,3 +1,9 @@
+0.8.24.1, 2014-01-08, Update to libdot 1.5, hterm 1.25.
+
+* Update to libdot 1.5 for BlobBuilder fix.
+* Update to hterm 1.25 for Ctrl-V/Ctrl-Shift-V pref, DECSET 1002 fix.
+* Fix tristate fields in the options page.
+
 0.8.23.2, 2013-12-11, Fix cursor height regression.
 
 * Update to hterm 1.24, which has a fix for cursor height troubles.
