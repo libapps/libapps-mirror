@@ -121,9 +121,7 @@ lib.fs.overwriteFile = function(root, path, contents, onSuccess, opt_onError) {
     writer.onerror = lib.fs.log('Error writing to: ' + path, opt_onError);
 
     if (!(contents instanceof Blob)) {
-      var bb = new (window.BlobBuilder || window.WebKitBlobBuilder)();
-      bb.append(contents);
-      contents = bb.getBlob('text/plain');
+      contents = new Blob([contents], {type: 'text/plain'});
     }
 
     writer.write(contents);
