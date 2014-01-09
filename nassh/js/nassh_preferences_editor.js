@@ -200,6 +200,11 @@ nassh.PreferencesEditor.prototype.sync = function(input) {
   }
   switch (typeof pref) {
     case 'boolean':
+      if ('data' in input) {
+        // Handle tristate options.
+        input.indeterminate = false;
+        input.data = pref ? 2 : 0;
+      }
       input.checked = pref;
       break;
   }
