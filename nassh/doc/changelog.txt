@@ -1,3 +1,7 @@
+0.8.24.2, 2014-01-16, Update to hterm 1.26.
+
+* Update to hterm 1.26 for 'user-css' preference.
+
 0.8.24.1, 2014-01-08, Update to libdot 1.5, hterm 1.25.
 
 * Update to libdot 1.5 for BlobBuilder fix.
