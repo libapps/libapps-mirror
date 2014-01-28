@@ -1,3 +1,7 @@
+0.8.25.1, 2014-01-28, Update to hterm 1.27.
+
+* Update to hterm 1.27 for fullwidth support.
+
 0.8.24.2, 2014-01-16, Update to hterm 1.26.
 
 * Update to hterm 1.26 for 'user-css' preference.
