@@ -1,0 +1,67 @@
+# Hello
+
+This is wash.  It is yet-another shell environment for the web.  Wash's special
+trick is that it can "mount" virtual file systems using postMessage based IPC.
+
+It is accidentaly similar to Plan 9's file system, in that each origin comes
+with it's own virtual filesystem that can contain data and executables.
+
+The actual IPC messages are JSON, and can be serialized over any transport.
+
+The work consists of two parts.  Objects in the `lib.wa.*` namespace are part of
+shared library code, which all participating origins should use.  The `wash.*`
+namespace is a Chrome V2 app that combines the hterm terminal emulator with a
+bash-like read-eval-print interface that supports lots of readline commands and
+keybindings.
+
+## The files you'll find...
+
+The files matching `wash/js/lib_wa*.js` are intended to be "statically linked"
+ to JS apps that want to add lib.wa support.
+
+### General purposes messaging
+
+The first set of `lib_wa*.js` files is a general messaging layer...
+
+* `lib_wa.js` - Namespace and common utilities.
+* `lib_wa_direct_transport.js` - Transport for apps that want to talk
+    to themselves.  The terminal window uses this to run `wash` and,
+    wash uses it to run `readline`, for example.
+* `lib_wa_chrome_port_transport.js` - Transport to connect to other
+    chrome apps and extensions.
+* `lib_wa_channel.js` - Communication layer over the transport that provides
+    reply tracking and stuff.
+* `lib_wa_message.js` - Message implementation.
+
+### File system messaging
+
+The `lib_wa_fs*.js` files add file system primitives...
+
+* `lib_wa_fs.js` - Namespace, error definitions, etc.
+* `lib_wa_fs_entry.js` - Base class for things that can appear in a
+    filesystem.
+* `lib_wa_fs_directory.js` - A container for other lib.wa.fs.Entry objects.
+* `lib_wa_fs_executable.js` - An entry which can be executed.
+* `lib_wa_fs_remote.js` - An entry whose actual value lives on the other side
+    of a `lib.wa.Channel`.
+
+### Loose parts
+
+* `lib_wa_readline.js` - This is a readline clone that can be statically
+    linked or made available as a lib.wa.fs.Executable.  The current
+    codebase only uses it as an executable, from wash.Shell..repl().
+
+### The shell environment
+
+The files matching `wash/js/wash*.js` make up the shell implementation.  The
+shell is a Chrome v2 app that presents a command-line interface (in hterm, of
+course) to the lib.wa libraries.
+
+* `wash.js` - The namespace.
+* `wash_background.js` - The top-level script for the v2 app background page.
+* `wash_app.js` - A singleton object instantiated by the background page.
+* `wash_window_manager.js` - A barely-implemented manager of open terminal
+  windows.
+* `wash_terminal_window.js` - A visible terminal window.
+* `wash_shell.js` - The shell read-evel-print-loop.
+* `wash_commands.js` - The lib.wa.fs.Executables locally available to the shell.
