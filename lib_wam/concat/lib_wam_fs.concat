@@ -1,0 +1,13 @@
+# Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# Stuff needed to speak about lib.wam filesystems.
+
+@include lib_wam/concat/lib_wam.concat
+
+@file lib_wam/js/lib_wam_fs.js
+@file lib_wam/js/lib_wam_fs_entry.js
+@file lib_wam/js/lib_wam_fs_directory.js
+@file lib_wam/js/lib_wam_fs_remote.js
+@file lib_wam/js/lib_wam_fs_executable.js

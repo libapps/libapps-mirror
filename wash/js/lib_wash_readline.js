@@ -4,14 +4,14 @@
 
 'use strict';
 
-lib.rtdep('lib.hterm.Termcap');
+lib.rtdep('lib.wash.Termcap');
 
 /**
  * A partial clone of GNU readline.
  *
- * Can be called directly, or used as a lib.wa.fs.Executable.
+ * Can be called directly, or used as a lib.wam.fs.Executable.
  */
-lib.wa.Readline = function(onSend, opt_tc) {
+lib.wash.Readline = function(onSend, opt_tc) {
   this.onSendCallback_ = onSend;
 
   this.line = '';
@@ -42,34 +42,34 @@ lib.wa.Readline = function(onSend, opt_tc) {
 
   this.pendingESC_ = false;
 
-  this.tc_ = opt_tc || new lib.hterm.Termcap();
+  this.tc_ = opt_tc || new lib.wash.Termcap();
 
   this.rows = 0;
   this.columns = 0;
 
   this.bindings = {};
-  this.addBindings(lib.wa.Readline.defaultBindings);
+  this.addBindings(lib.wash.Readline.defaultBindings);
 };
 
-lib.wa.Readline.main = function(app, execMsg) {
+lib.wash.Readline.main = function(app, execMsg) {
   if (typeof execMsg.arg != 'object' ||
       !('promptString' in execMsg.arg.argv)) {
-    execMsg.closeError(lib.wa.error.MISSING_PARAM, 'promptString');
+    execMsg.closeError(lib.wam.error.MISSING_PARAM, 'promptString');
     return;
   }
 
-  if (!lib.wa.Readline.tc_)
-    lib.wa.Readline.tc_ = new lib.hterm.Termcap();
+  if (!lib.wash.Readline.tc_)
+    lib.wash.Readline.tc_ = new lib.wash.Termcap();
 
-  var rl = new lib.wa.Readline(execMsg.reply.bind(execMsg),
-                               lib.wa.Readline.tc_);
+  var rl = new lib.wash.Readline(execMsg.reply.bind(execMsg),
+                                 lib.wash.Readline.tc_);
 
   rl.setPrompt(execMsg.arg.argv.promptString || '', {});
 
   // TODO(rginda): better history management.
-  if (!lib.wa.Readline.history_)
-    lib.wa.Readline.history_ = [];
-  rl.history_ = lib.wa.Readline.history_;
+  if (!lib.wash.Readline.history_)
+    lib.wash.Readline.history_ = [];
+  rl.history_ = lib.wash.Readline.history_;
 
   execMsg.meta.onInput.addListener(function(msg) {
       rl.dispatchMessage(msg);
@@ -83,9 +83,9 @@ lib.wa.Readline.main = function(app, execMsg) {
 /**
  * Default mapping of key sequence to readline commands.
  *
- * Uses lib.hterm.Termcap syntax for the keys.
+ * Uses lib.wash.Termcap syntax for the keys.
  */
-lib.wa.Readline.defaultBindings = {
+lib.wash.Readline.defaultBindings = {
   '%(BACKSPACE)': 'backward-delete-char',
   '%(ENTER)': 'accept-line',
 
@@ -138,7 +138,7 @@ lib.wa.Readline.defaultBindings = {
  * @param {function(string)} onComplete The function to invoke when the user
  *     presses ENTER.
  */
-lib.wa.Readline.prototype.read = function(onComplete) {
+lib.wash.Readline.prototype.read = function(onComplete) {
   if (this.isBusy)
     throw new Error('read() already pending');
 
@@ -161,7 +161,7 @@ lib.wa.Readline.prototype.read = function(onComplete) {
       msg.parent.close();
 
       if (msg.name != 'ok') {
-        console.warn('lib.wa.Readline: Not connected to a tty');
+        console.warn('lib.wash.Readline: Not connected to a tty');
         onComplete(null);
         return;
       }
@@ -176,7 +176,7 @@ lib.wa.Readline.prototype.read = function(onComplete) {
 /**
  * Find the start of the word under linePosition in the given line.
  */
-lib.wa.Readline.getWordStart = function(line, linePosition) {
+lib.wash.Readline.getWordStart = function(line, linePosition) {
   var left = line.substr(0, linePosition);
 
   var searchEnd = left.search(/[a-z0-9][^a-z0-9]*$/i);
@@ -189,7 +189,7 @@ lib.wa.Readline.getWordStart = function(line, linePosition) {
 /**
  * Find the end of the word under linePosition in the given line.
  */
-lib.wa.Readline.getWordEnd = function(line, linePosition) {
+lib.wash.Readline.getWordEnd = function(line, linePosition) {
   var right = line.substr(linePosition);
 
   var searchStart = right.search(/[a-z0-9]/i);
@@ -206,7 +206,7 @@ lib.wa.Readline.getWordEnd = function(line, linePosition) {
 /**
  * Register multiple key bindings.
  */
-lib.wa.Readline.prototype.addBindings = function(obj) {
+lib.wash.Readline.prototype.addBindings = function(obj) {
   for (var key in obj) {
     this.addBinding(key, obj[key]);
   }
@@ -215,32 +215,32 @@ lib.wa.Readline.prototype.addBindings = function(obj) {
 /**
  * Register a single key binding.
  */
-lib.wa.Readline.prototype.addBinding = function(str, commandName) {
+lib.wash.Readline.prototype.addBinding = function(str, commandName) {
   this.addRawBinding(this.tc_.input(str), commandName);
 };
 
 /**
  * Register a binding without passing through termcap.
  */
-lib.wa.Readline.prototype.addRawBinding = function(bytes, commandName) {
+lib.wash.Readline.prototype.addRawBinding = function(bytes, commandName) {
   this.bindings[bytes] = commandName;
 };
 
-lib.wa.Readline.prototype.print = function(str, opt_vars) {
+lib.wash.Readline.prototype.print = function(str, opt_vars) {
   this.send('strout', this.tc_.output(str, opt_vars || {}));
 }
 
 /**
  * Send a message back to the thing that executed us.
  */
-lib.wa.Readline.prototype.send = function(name, arg, opt_onReply) {
+lib.wash.Readline.prototype.send = function(name, arg, opt_onReply) {
   if (!this.isBusy)
     throw new Error('Not busy');
 
   this.onSendCallback_(name, arg, opt_onReply);
 };
 
-lib.wa.Readline.prototype.setPrompt = function(str, vars) {
+lib.wash.Readline.prototype.setPrompt = function(str, vars) {
   this.promptString_ = str;
   this.promptVars_ = vars;
 
@@ -250,25 +250,25 @@ lib.wa.Readline.prototype.setPrompt = function(str, vars) {
     this.dispatch('redraw-line');
 };
 
-lib.wa.Readline.prototype.dispatch = function(name, arg) {
+lib.wash.Readline.prototype.dispatch = function(name, arg) {
   this.commands[name].call(this, arg);
 };
 
 /**
  * Instance method version of getWordStart.
  */
-lib.wa.Readline.prototype.getWordStart = function() {
-  return lib.wa.Readline.getWordStart(this.line, this.linePosition);
+lib.wash.Readline.prototype.getWordStart = function() {
+  return lib.wash.Readline.getWordStart(this.line, this.linePosition);
 };
 
 /**
  * Instance method version of getWordEnd.
  */
-lib.wa.Readline.prototype.getWordEnd = function() {
-  return lib.wa.Readline.getWordEnd(this.line, this.linePosition);
+lib.wash.Readline.prototype.getWordEnd = function() {
+  return lib.wash.Readline.getWordEnd(this.line, this.linePosition);
 };
 
-lib.wa.Readline.prototype.killSlice = function(start, length) {
+lib.wash.Readline.prototype.killSlice = function(start, length) {
   if (length == -1)
     length = this.line.length - start;
 
@@ -278,14 +278,14 @@ lib.wa.Readline.prototype.killSlice = function(start, length) {
   this.line = (this.line.substr(0, start) + this.line.substr(start + length));
 };
 
-lib.wa.Readline.prototype.dispatchMessage = function(msg) {
-  msg.dispatch(this, lib.wa.Readline.on);
+lib.wash.Readline.prototype.dispatchMessage = function(msg) {
+  msg.dispatch(this, lib.wash.Readline.on);
 };
 
 /**
  * Called when the terminal replys with the current cursor position.
  */
-lib.wa.Readline.prototype.onCursorReport = function(row, column) {
+lib.wash.Readline.prototype.onCursorReport = function(row, column) {
   if (!this.cursorHome_) {
     this.cursorHome_ = {row: row, column: column};
     this.dispatch('redraw-line');
@@ -316,14 +316,14 @@ lib.wa.Readline.prototype.onCursorReport = function(row, column) {
 /**
  * Messages we want to act on.
  */
-lib.wa.Readline.on = {};
+lib.wash.Readline.on = {};
 
-lib.wa.Readline.on['tty-resize'] = function(msg) {
+lib.wash.Readline.on['tty-resize'] = function(msg) {
   this.rows = msg.arg.rows;
   this.columns = msg.arg.columns;
 };
 
-lib.wa.Readline.on['strin'] = function(msg) {
+lib.wash.Readline.on['strin'] = function(msg) {
   var string = msg.arg;
 
   var ary = string.match(/^\x1b\[(\d+);(\d+)R$/);
@@ -372,9 +372,9 @@ lib.wa.Readline.on['strin'] = function(msg) {
   }
 };
 
-lib.wa.Readline.prototype.commands = {};
+lib.wash.Readline.prototype.commands = {};
 
-lib.wa.Readline.prototype.commands['redraw-line'] = function(string) {
+lib.wash.Readline.prototype.commands['redraw-line'] = function(string) {
   if (!this.cursorHome_) {
     console.warn('readline: Home cursor position unknown, won\'t redraw.');
     return;
@@ -444,7 +444,7 @@ lib.wa.Readline.prototype.commands['redraw-line'] = function(string) {
   this.dispatch('reposition-cursor');
 };
 
-lib.wa.Readline.prototype.commands['reposition-cursor'] = function(string) {
+lib.wash.Readline.prototype.commands['reposition-cursor'] = function(string) {
   // Count the number or rows it took to render the current line at the
   // current terminal width.
   var rowOffset = Math.floor((this.cursorPrompt_.column - 1 +
@@ -457,7 +457,7 @@ lib.wa.Readline.prototype.commands['reposition-cursor'] = function(string) {
              });
 };
 
-lib.wa.Readline.prototype.commands['self-insert'] = function(string) {
+lib.wash.Readline.prototype.commands['self-insert'] = function(string) {
   if (this.linePosition == this.line.length) {
     this.line += string;
   } else {
@@ -472,7 +472,7 @@ lib.wa.Readline.prototype.commands['self-insert'] = function(string) {
   this.dispatch('redraw-line');
 };
 
-lib.wa.Readline.prototype.commands['accept-line'] = function() {
+lib.wash.Readline.prototype.commands['accept-line'] = function() {
   this.historyIndex_ = 0;
   if (this.line && this.line != this.history_[1])
     this.history_.splice(1, 0, this.line);
@@ -480,7 +480,7 @@ lib.wa.Readline.prototype.commands['accept-line'] = function() {
   this.onComplete_();
 };
 
-lib.wa.Readline.prototype.commands['beginning-of-history'] = function() {
+lib.wash.Readline.prototype.commands['beginning-of-history'] = function() {
   this.historyIndex_ = this.history_.length - 1;
   this.line = this.history_[this.historyIndex_];
   this.linePosition = this.line.length;
@@ -488,7 +488,7 @@ lib.wa.Readline.prototype.commands['beginning-of-history'] = function() {
   this.dispatch('redraw-line');
 };
 
-lib.wa.Readline.prototype.commands['end-of-history'] = function() {
+lib.wash.Readline.prototype.commands['end-of-history'] = function() {
   this.historyIndex_ = this.history_.length - 1;
   this.line = this.history_[this.historyIndex_];
   this.linePosition = this.line.length;
@@ -496,7 +496,7 @@ lib.wa.Readline.prototype.commands['end-of-history'] = function() {
   this.dispatch('redraw-line');
 };
 
-lib.wa.Readline.prototype.commands['previous-history'] = function() {
+lib.wash.Readline.prototype.commands['previous-history'] = function() {
   if (this.historyIndex_ == this.history_.length - 1) {
     this.print('%bell()');
     return;
@@ -509,7 +509,7 @@ lib.wa.Readline.prototype.commands['previous-history'] = function() {
   this.dispatch('redraw-line');
 };
 
-lib.wa.Readline.prototype.commands['next-history'] = function() {
+lib.wash.Readline.prototype.commands['next-history'] = function() {
   if (this.historyIndex_ == 0) {
     this.print('%bell()');
     return;
@@ -522,7 +522,7 @@ lib.wa.Readline.prototype.commands['next-history'] = function() {
   this.dispatch('redraw-line');
 };
 
-lib.wa.Readline.prototype.commands['kill-word'] = function() {
+lib.wash.Readline.prototype.commands['kill-word'] = function() {
   var start = this.linePosition;
   var length =  this.getWordEnd() - start;
   this.killSlice(start, length);
@@ -530,7 +530,7 @@ lib.wa.Readline.prototype.commands['kill-word'] = function() {
   this.dispatch('redraw-line');
 };
 
-lib.wa.Readline.prototype.commands['backward-kill-word'] = function() {
+lib.wash.Readline.prototype.commands['backward-kill-word'] = function() {
   var start = this.getWordStart();
   var length = this.linePosition - start;
   this.killSlice(start, length);
@@ -539,13 +539,13 @@ lib.wa.Readline.prototype.commands['backward-kill-word'] = function() {
   this.dispatch('redraw-line');
 };
 
-lib.wa.Readline.prototype.commands['kill-line'] = function() {
+lib.wash.Readline.prototype.commands['kill-line'] = function() {
   this.killSlice(this.linePosition, -1);
 
   this.dispatch('redraw-line');
 };
 
-lib.wa.Readline.prototype.commands['yank'] = function() {
+lib.wash.Readline.prototype.commands['yank'] = function() {
   var text = this.killRing_[0];
   this.line = (this.line.substr(0, this.linePosition) +
                text +
@@ -555,17 +555,17 @@ lib.wa.Readline.prototype.commands['yank'] = function() {
   this.dispatch('redraw-line');
 };
 
-lib.wa.Readline.prototype.commands['yank-last-arg'] = function() {
+lib.wash.Readline.prototype.commands['yank-last-arg'] = function() {
   if (this.history_.length < 2)
     return;
 
   var last = this.history_[1];
-  var i = lib.wa.Readline.getWordStart(last, last.length - 1);
+  var i = lib.wash.Readline.getWordStart(last, last.length - 1);
   if (i != -1)
     this.dispatch('self-insert', last.substr(i));
 };
 
-lib.wa.Readline.prototype.commands['delete-char'] = function() {
+lib.wash.Readline.prototype.commands['delete-char'] = function() {
   if (this.linePosition < this.line.length) {
     this.line = (this.line.substr(0, this.linePosition) +
                  this.line.substr(this.linePosition + 1));
@@ -575,7 +575,7 @@ lib.wa.Readline.prototype.commands['delete-char'] = function() {
   }
 };
 
-lib.wa.Readline.prototype.commands['backward-delete-char'] = function() {
+lib.wash.Readline.prototype.commands['backward-delete-char'] = function() {
   if (this.linePosition > 0) {
     this.linePosition -= 1;
     this.line = (this.line.substr(0, this.linePosition) +
@@ -586,7 +586,7 @@ lib.wa.Readline.prototype.commands['backward-delete-char'] = function() {
   }
 };
 
-lib.wa.Readline.prototype.commands['backward-char'] = function() {
+lib.wash.Readline.prototype.commands['backward-char'] = function() {
   if (this.linePosition > 0) {
     this.linePosition -= 1;
     this.dispatch('reposition-cursor');
@@ -595,7 +595,7 @@ lib.wa.Readline.prototype.commands['backward-char'] = function() {
   }
 };
 
-lib.wa.Readline.prototype.commands['forward-char'] = function() {
+lib.wash.Readline.prototype.commands['forward-char'] = function() {
   if (this.linePosition < this.line.length) {
     this.linePosition += 1;
     this.dispatch('reposition-cursor');
@@ -604,18 +604,18 @@ lib.wa.Readline.prototype.commands['forward-char'] = function() {
   }
 };
 
-lib.wa.Readline.prototype.commands['backward-word'] = function() {
+lib.wash.Readline.prototype.commands['backward-word'] = function() {
   this.linePosition = this.getWordStart();
   this.dispatch('reposition-cursor');
 };
 
 
-lib.wa.Readline.prototype.commands['forward-word'] = function() {
+lib.wash.Readline.prototype.commands['forward-word'] = function() {
   this.linePosition = this.getWordEnd();
   this.dispatch('reposition-cursor');
 };
 
-lib.wa.Readline.prototype.commands['beginning-of-line'] = function() {
+lib.wash.Readline.prototype.commands['beginning-of-line'] = function() {
   if (this.linePosition == 0) {
     this.print('%bell()');
     return;
@@ -625,7 +625,7 @@ lib.wa.Readline.prototype.commands['beginning-of-line'] = function() {
   this.dispatch('reposition-cursor');
 };
 
-lib.wa.Readline.prototype.commands['end-of-line'] = function() {
+lib.wash.Readline.prototype.commands['end-of-line'] = function() {
   if (this.linePosition == this.line.length) {
     this.print('%bell()');
     return;
@@ -635,7 +635,7 @@ lib.wa.Readline.prototype.commands['end-of-line'] = function() {
   this.dispatch('reposition-cursor');
 };
 
-lib.wa.Readline.prototype.commands['undo'] = function() {
+lib.wash.Readline.prototype.commands['undo'] = function() {
   if ((this.nextUndoIndex_ == this.undo_.length)) {
     this.print('%bell()');
     return;
@@ -649,7 +649,7 @@ lib.wa.Readline.prototype.commands['undo'] = function() {
   this.nextUndoIndex_ += 2;
 };
 
-lib.wa.Readline.prototype.onComplete_ = function() {
+lib.wash.Readline.prototype.onComplete_ = function() {
   this.isBusy = false;
   var cb = this.onCompleteCallback_;
   this.onCompleteCallback_= null;

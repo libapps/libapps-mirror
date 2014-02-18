@@ -4,7 +4,7 @@
 
 'use strict';
 
-lib.wa.Message = function(channel) {
+lib.wam.Message = function(channel) {
   this.channel = channel;
 
   /**
@@ -14,9 +14,9 @@ lib.wa.Message = function(channel) {
   this.isOpen = null;
 
   /**
-   * @type {lib.wa.Message.status}.
+   * @type {lib.wam.Message.status}.
    */
-  this.status = lib.wa.Message.status.INIT;
+  this.status = lib.wam.Message.status.INIT;
 
   /**
    * A token conveying the meaning of the message.
@@ -64,7 +64,7 @@ lib.wa.Message = function(channel) {
    * This only applies to outbound replies.  The parent is ALWAYS an inbound
    * message.
    *
-   * @type {lib.wa.Message}
+   * @type {lib.wam.Message}
    */
   this.parent = null;
 
@@ -103,7 +103,7 @@ lib.wa.Message = function(channel) {
  * All messages start at INIT.  Outbound messages are always SENT, inbound
  * messages are always RECV.
  */
-lib.wa.Message.status = {
+lib.wam.Message.status = {
   /**
    * The message has not been initialized.
    */
@@ -123,11 +123,11 @@ lib.wa.Message.status = {
 /**
  * Create a new message for the given channel from the given JSON value.
  *
- * @param {lib.wa.Channel} channel The channel that received the value.
+ * @param {lib.wam.Channel} channel The channel that received the value.
  * @param {Object} value The value received on the channel.
  */
-lib.wa.Message.fromValue = function(channel, value) {
-  var msg = new lib.wa.Message();
+lib.wam.Message.fromValue = function(channel, value) {
+  var msg = new lib.wam.Message();
   msg.channel = channel;
   msg.name = value.name;
   msg.arg = value.arg;
@@ -137,7 +137,7 @@ lib.wa.Message.fromValue = function(channel, value) {
 
   msg.regarding = value.regarding || null;
   msg.isFinalReply = !!value.isFinalReply;
-  msg.status = lib.wa.Message.status.RECV;
+  msg.status = lib.wam.Message.status.RECV;
 
   return msg;
 };
@@ -187,18 +187,18 @@ lib.wa.Message.fromValue = function(channel, value) {
  *
  * This will also close the parent message on the final reply.
  *
- * @param {function(lib.wa.Message)} onReply The function to invoke for
+ * @param {function(lib.wam.Message)} onReply The function to invoke for
  *     reply.  This includes the initial 'ready' message, and the 'ok' or
  *     'error' message that eventually ends the handshake.
  *     If 'ready' is not received, this function will not be invoked.
- * @param {function(lib.wa.Message)} onError The function to invoke if
+ * @param {function(lib.wam.Message)} onError The function to invoke if
  *     the first reply is not 'ready'.  If this function is called, onReply
  *     will not be.  It is called only once if it is called at all.
  *
- * @return {function(lib.wa.Message)} A function that can be used as the
+ * @return {function(lib.wam.Message)} A function that can be used as the
  *     onReply callback of a message send.
  */
-lib.wa.Message.waitReady = function(onReply, onError) {
+lib.wam.Message.waitReady = function(onReply, onError) {
 
   // Local copy of the inbound 'ready' message.
   var readyMsg = null;
@@ -252,14 +252,14 @@ lib.wa.Message.waitReady = function(onReply, onError) {
  *
  * @return {Object} A serializable object representing this message.
  */
-lib.wa.Message.prototype.prepareSend = function() {
-  if (this.status != lib.wa.Message.status.INIT)
+lib.wam.Message.prototype.prepareSend = function() {
+  if (this.status != lib.wam.Message.status.INIT)
     throw new Error('Invalid message status: ' + this.status);
 
-  this.status = lib.wa.Message.status.SENT;
+  this.status = lib.wam.Message.status.SENT;
 
   if (this.onReply && !this.subject)
-    this.subject = lib.wa.guid();
+    this.subject = lib.wam.guid();
 
   var value = {
     name: this.name,
@@ -296,8 +296,8 @@ lib.wa.Message.prototype.prepareSend = function() {
  *     handlers.
  * @param {Object} handlers A map of message-name -> handler function.
  */
-lib.wa.Message.prototype.dispatch = function(obj, handlers) {
-  if (this.status != lib.wa.Message.status.RECV)
+lib.wam.Message.prototype.dispatch = function(obj, handlers) {
+  if (this.status != lib.wam.Message.status.RECV)
     throw 'Invalid message status: ' + this.status;
 
   var name = this.name;
@@ -317,7 +317,7 @@ lib.wa.Message.prototype.dispatch = function(obj, handlers) {
     } else {
       console.log('Unknown Message: ' + name);
       if (this.isOpen)
-        this.closeError(lib.wa.error.UNEXPECTED_MESSAGE, name);
+        this.closeError(lib.wam.error.UNEXPECTED_MESSAGE, name);
 
       return false;
     }
@@ -330,7 +330,7 @@ lib.wa.Message.prototype.dispatch = function(obj, handlers) {
 /**
  * Send this message.
  */
-lib.wa.Message.prototype.send = function() {
+lib.wam.Message.prototype.send = function() {
   this.channel.sendMessage(this);
   return this;
 };
@@ -340,13 +340,13 @@ lib.wa.Message.prototype.send = function() {
  *
  * @param {string} name The name of the reply message.
  * @param {*} arg The argument for the reply message.
- * @param {function(lib.wa.Message)} opt_onReply Optional callback for replies
+ * @param {function(lib.wam.Message)} opt_onReply Optional callback for replies
  *     to the reply.
  *
- * @return {lib.wa.Message} A message object representing the reply.
+ * @return {lib.wam.Message} A message object representing the reply.
  */
-lib.wa.Message.prototype.createReply_ = function(name, arg, opt_onReply) {
-  if (!this.status == lib.wa.Message.status.RECV)
+lib.wam.Message.prototype.createReply_ = function(name, arg, opt_onReply) {
+  if (!this.status == lib.wam.Message.status.RECV)
     throw new Error('Invalid message status: ' + this.status);
 
   if (!this.subject)
@@ -358,7 +358,7 @@ lib.wa.Message.prototype.createReply_ = function(name, arg, opt_onReply) {
   if (opt_onReply && typeof opt_onReply != 'function')
     throw new Error('Invalid onReply: ' + opt_onReply);
 
-  var msg = new lib.wa.Message(this.channel);
+  var msg = new lib.wam.Message(this.channel);
   msg.name = name;
   msg.arg = arg;
   msg.regarding = this.subject;
@@ -376,13 +376,13 @@ lib.wa.Message.prototype.createReply_ = function(name, arg, opt_onReply) {
  * given message.  This works over arbitrarily deep replies to the forwarded
  * message.
  */
-lib.wa.Message.prototype.forward = function(inMsg) {
+lib.wam.Message.prototype.forward = function(inMsg) {
   if (inMsg.isFinalReply) {
     this.isOpen = false;
     inMsg.parent.close();
   }
 
-  var outMsg = new lib.wa.Message(this.channel);
+  var outMsg = new lib.wam.Message(this.channel);
   outMsg.regarding = this.subject;
 
   outMsg.name = inMsg.name;
@@ -398,20 +398,20 @@ lib.wa.Message.prototype.forward = function(inMsg) {
 /**
  * Send a reply, and wait for the other end to reply 'ready'.
  *
- * See lib.wa.Message.waitReady.
+ * See lib.wam.Message.waitReady.
  *
  * @param {string} name The name of the outbound reply message.
  * @param {*} arg The argument of the outbound reply message.
- * @param {function(lib.wa.Message)} onReply The function to invoke for
+ * @param {function(lib.wam.Message)} onReply The function to invoke for
  *     reply.  This includes the initial 'ready' message, and the 'ok' or
  *     'error' message that eventually ends the handshake.
  *     If 'ready' is not received, this function will not be invoked.
- * @param {function(lib.wa.Message)} onError The function to invoke if
+ * @param {function(lib.wam.Message)} onError The function to invoke if
  *     the first reply is not 'ready'.  If this function is called, onReply
  *     will not be.  It is called only once if it is called at all.
  */
-lib.wa.Message.prototype.waitReady = function(name, arg, onReply, onError) {
-  return this.reply(name, arg, lib.wa.Message.waitReady(onReply, onError))
+lib.wam.Message.prototype.waitReady = function(name, arg, onReply, onError) {
+  return this.reply(name, arg, lib.wam.Message.waitReady(onReply, onError))
 };
 
 /**
@@ -424,9 +424,9 @@ lib.wa.Message.prototype.waitReady = function(name, arg, onReply, onError) {
  *
  * @param {*} arg The argument to the outbound 'ready' message.
  *
- * @return {lib.wa.Message} The outbound 'ready' message.
+ * @return {lib.wam.Message} The outbound 'ready' message.
  */
-lib.wa.Message.prototype.replyReady = function(arg) {
+lib.wam.Message.prototype.replyReady = function(arg) {
   var onInput = new lib.Event(function(msg) {
       if (msg.isFinalReply) {
         readyMsg.close();
@@ -467,11 +467,11 @@ lib.wa.Message.prototype.replyReady = function(arg) {
  *
  * @param {string} name The name of the outbound message.
  * @param {*} arg The argument of the outbound message.
- * @param {function(lib.wa.Message)} opt_onReply Optional callback for replies.
+ * @param {function(lib.wam.Message)} opt_onReply Optional callback for replies.
  *
- * @return {lib.wa.Message} The outbound message.
+ * @return {lib.wam.Message} The outbound message.
  */
-lib.wa.Message.prototype.reply = function(name, arg, opt_onReply) {
+lib.wam.Message.prototype.reply = function(name, arg, opt_onReply) {
   var msg = this.createReply_(name, arg, opt_onReply);
   return msg.send();
 };
@@ -482,12 +482,12 @@ lib.wa.Message.prototype.reply = function(name, arg, opt_onReply) {
  * This is analogous to stdout.
  *
  * @param {string} arg The string to send.
- * @param {function(lib.wa.Message)} opt_onReply Optional callback when the
+ * @param {function(lib.wam.Message)} opt_onReply Optional callback when the
  *     message is received.
  *
- * @return {lib.wa.Message} The outbound message.
+ * @return {lib.wam.Message} The outbound message.
  */
-lib.wa.Message.prototype.strout = function(arg, opt_onReply) {
+lib.wam.Message.prototype.strout = function(arg, opt_onReply) {
   var msg = this.createReply_('strout', arg, opt_onReply);
   return msg.send();
 };
@@ -499,12 +499,12 @@ lib.wa.Message.prototype.strout = function(arg, opt_onReply) {
  * This is analogous to stderr.
  *
  * @param {string} arg The string to send.
- * @param {function(lib.wa.Message)} opt_onReply Optional callback when the
+ * @param {function(lib.wam.Message)} opt_onReply Optional callback when the
  *     message is received.
  *
- * @return {lib.wa.Message} The outbound message.
+ * @return {lib.wam.Message} The outbound message.
  */
-lib.wa.Message.prototype.strerr = function(arg, opt_onReply) {
+lib.wam.Message.prototype.strerr = function(arg, opt_onReply) {
   var msg = this.createReply_('strerr', arg, opt_onReply);
   return msg.send();
 };
@@ -513,11 +513,11 @@ lib.wa.Message.prototype.strerr = function(arg, opt_onReply) {
  * An error reply that does not preclude further replies.
  *
  * @param {*} arg The argument of the outbound 'error' message.
- * @param {function(lib.wa.Message)} opt_onReply Optional callback for replies.
+ * @param {function(lib.wam.Message)} opt_onReply Optional callback for replies.
  *
- * @return {lib.wa.Message} The outbound message.
+ * @return {lib.wam.Message} The outbound message.
  */
-lib.wa.Message.prototype.replyError = function(name, arg, opt_onReply) {
+lib.wam.Message.prototype.replyError = function(name, arg, opt_onReply) {
   var msg = this.createReply_('error', {name: name, arg: arg}, opt_onReply);
   return msg.send();
 };
@@ -529,11 +529,11 @@ lib.wa.Message.prototype.replyError = function(name, arg, opt_onReply) {
  *
  * @param {string} name The name of the outbound 'error' message.
  * @param {*} arg The argument of the outbound 'error' message.
- * @param {function(lib.wa.Message)} opt_onReply Optional callback for replies.
+ * @param {function(lib.wam.Message)} opt_onReply Optional callback for replies.
  *
- * @return {lib.wa.Message} The outbound message.
+ * @return {lib.wam.Message} The outbound message.
  */
-lib.wa.Message.prototype.closeError = function(name, arg, opt_onReply) {
+lib.wam.Message.prototype.closeError = function(name, arg, opt_onReply) {
   if (this.channel.isConnected) {
     var msg = this.createReply_('error', {name: name, arg: arg}, opt_onReply);
     msg.isFinalReply = true;
@@ -554,11 +554,11 @@ lib.wa.Message.prototype.closeError = function(name, arg, opt_onReply) {
  * as well as expected.
  *
  * @param {*} arg The argument of the outbound 'ok' message.
- * @param {function(lib.wa.Message)} opt_onReply Optional callback for replies.
+ * @param {function(lib.wam.Message)} opt_onReply Optional callback for replies.
  *
- * @return {lib.wa.Message} The outbound message.
+ * @return {lib.wam.Message} The outbound message.
  */
-lib.wa.Message.prototype.closeOk = function(arg, opt_onReply) {
+lib.wam.Message.prototype.closeOk = function(arg, opt_onReply) {
   if (this.channel.isConnected) {
     var msg = this.createReply_('ok', arg, opt_onReply);
     msg.isFinalReply = true;
@@ -580,10 +580,10 @@ lib.wa.Message.prototype.closeOk = function(arg, opt_onReply) {
  * This doesn't cause an actual message to be sent, it ensures that the
  * last-reply has been received, or cleans up if it has not.
  *
- * See also lib.wa.Message..close().
+ * See also lib.wam.Message..close().
  */
-lib.wa.Message.prototype.forceClose = function() {
-  if (this.status != lib.wa.Message.status.SENT)
+lib.wam.Message.prototype.forceClose = function() {
+  if (this.status != lib.wam.Message.status.SENT)
     throw 'Invalid message status: ' + this.status;
 
   delete this.channel.openMessages[this.subject];
@@ -606,9 +606,9 @@ lib.wa.Message.prototype.forceClose = function() {
  *
  * This is here only to ensure that you and the sender agree on when the
  * final reply is expected.  If you don't use it, you'll see a "Parent was not
- * closed" message in the JS Console, sourced from lib.wa.Channel..onMessage_.
+ * closed" message in the JS Console, sourced from lib.wam.Channel..onMessage_.
  */
-lib.wa.Message.prototype.close = function() {
+lib.wam.Message.prototype.close = function() {
   if (this.subject in this.channel.openMessages) {
     console.warn('Abandoning replies for: ' + this.subject);
     console.log(lib.f.getStack());

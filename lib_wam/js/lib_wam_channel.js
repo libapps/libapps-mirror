@@ -7,8 +7,8 @@
 lib.rtdep('lib.Event');
 
 /**
- * lib.wa.Channel directs messages to a companion instance of lib.wa.Channel on
- * the other side of an abstract "transport".
+ * lib.wam.Channel directs messages to a companion instance of lib.wam.Channel
+ * on the other side of an abstract "transport".
  *
  *                      [application-code]
  *
@@ -32,13 +32,13 @@ lib.rtdep('lib.Event');
  *                      [application-code]
  *
  *
- * (See lib.wa.Message for the implementation of the message class.)
+ * (See lib.wam.Message for the implementation of the message class.)
  *
  * The transport typically moves messages between two web origins, though
  * the in-process transport can sometimes be useful too.
  *
- * NOTE(rginda): Only the in-process (lib.wa.DirectTransport) and
- *   chrome.runtime.Port (lib.wa.ChromePortTransport) transports are
+ * NOTE(rginda): Only the in-process (lib.wam.DirectTransport) and
+ *   chrome.runtime.Port (lib.wam.ChromePortTransport) transports are
  *   implemented.  In theory Web Worker, HTML5 MessagePort, or even
  *   WebSocket based transports are easy to add.
  *
@@ -55,9 +55,9 @@ lib.rtdep('lib.Event');
  *   or...
  *     {name: 'ok', ..., arg: null}
  *
- * Though application code will usually just call lib.wa.Channel..send()...
+ * Though application code will usually just call lib.wam.Channel..send()...
  *
- *     var channel = new lib.wa.Channel(transport);
+ *     var channel = new lib.wam.Channel(transport);
  *
  *     channel.send('strout', 'hello world');
  *     channel.send('ok', {type: 'EXE'});
@@ -70,7 +70,7 @@ lib.rtdep('lib.Event');
  *
  * Application code generally doesn't need to worry about the 'subject'
  * property.  When the optional onReply handler is provided to
- * lib.wa.Channel..send(), a message subject will be generated.
+ * lib.wam.Channel..send(), a message subject will be generated.
  *
  *     channel.send('open', {path: '/'}, function(msg) { ... });
  *
@@ -90,11 +90,11 @@ lib.rtdep('lib.Event');
  *      arg: null}
  *
  * Application code generally replies using the reply(), closeOk(), and
- * closeError() methods of lib.wa.Message.  These methods handle the
+ * closeError() methods of lib.wam.Message.  These methods handle the
  * 'regarding' property so that application code doesn't need to get into the
  * details.
  *
- *     lib.wa.Directory.on['open'] = function(msg) {
+ *     lib.wam.Directory.on['open'] = function(msg) {
  *         ...
  *         msg.reply('ready', null);
  *     };
@@ -109,13 +109,13 @@ lib.rtdep('lib.Event');
  *      arg: {name: 'NOT_FOUND', arg: '/'}}
  *
  * Application code can send final replies using the closeOk or closeError
- * methods of lib.wa.Message...
+ * methods of lib.wam.Message...
  *
  *     msg.closeOk(null);
  *   or...
- *     msg.closeError(lib.wa.error.NOT_FOUND, '/');
+ *     msg.closeError(lib.wam.error.NOT_FOUND, '/');
  *
- * The lib.wa.Channel object keeps track of outbound messages so that the
+ * The lib.wam.Channel object keeps track of outbound messages so that the
  * appropriate callback can be invoked when a reply is received.  If a
  * recipient forgets to send a final-reply, this callback will be leaked.
  *
@@ -126,7 +126,7 @@ lib.rtdep('lib.Event');
  *   {name: 'error', regarding: <your-subject>
  *    arg: {name: 'CHANNEL_DISCONNECT', arg: <channel-name>}}
  *
- * After a transport is established and given to a new lib.wa.Channel
+ * After a transport is established and given to a new lib.wam.Channel
  * instance one or both parties may initiate a handshake.  The 'handshake'
  * message establishes a context for subsequent communication.
  *
@@ -168,17 +168,17 @@ lib.rtdep('lib.Event');
  * Once a handshake is completed, the application code may send whatever
  * messages are implied by the handshake payload.  In the current code, the
  * handshake payload is always `null`, and that implies that the remote end
- * will dispatch all messages to a lib.wa.fs.Directory representing the root
+ * will dispatch all messages to a lib.wam.fs.Directory representing the root
  * of the exported filesystem.
  *
  * The only other message that can be sent over a raw channel is 'disconnect',
  * which terminates the connection and all active handshakes, and provides a
  * reason for the disconnect. See the disconnect() method for more information.
  *
- * @param {Object} A transport object.  See lib.wa.DirectTransport and
- *     lib.wa.ChromePortTransport for the de-facto interface.
+ * @param {Object} A transport object.  See lib.wam.DirectTransport and
+ *     lib.wam.ChromePortTransport for the de-facto interface.
  */
-lib.wa.Channel = function(transport) {
+lib.wam.Channel = function(transport) {
   if (!transport.isConnected)
     throw new Error('Transport is not connected.');
 
@@ -245,12 +245,12 @@ lib.wa.Channel = function(transport) {
 /**
  * Shared during the handshake message.
  */
-lib.wa.Channel.protocolName = 'lib.wa.Channel';
+lib.wam.Channel.protocolName = 'lib.wam.Channel';
 
 /**
  * Sources that could be responsible for a disconnect.
  */
-lib.wa.Channel.source = {
+lib.wam.Channel.source = {
   LOCAL: 'local',
   REMOTE: 'remote',
   TRANSPORT: 'transport'
@@ -259,14 +259,14 @@ lib.wa.Channel.source = {
 /**
  * Shared during the handshake message.
  */
-lib.wa.Channel.protocolVersion = '1.0';
+lib.wam.Channel.protocolVersion = '1.0';
 
 /**
- * Send an existing lib.wa.Message across the channel.
+ * Send an existing lib.wam.Message across the channel.
  *
- * @param {lib.wa.Message} msg The message to send.
+ * @param {lib.wam.Message} msg The message to send.
  */
-lib.wa.Channel.prototype.sendMessage = function(msg) {
+lib.wam.Channel.prototype.sendMessage = function(msg) {
   var value = msg.prepareSend();
 
   if (msg.onReply)
@@ -288,22 +288,22 @@ lib.wa.Channel.prototype.sendMessage = function(msg) {
  *     to help it decide whether or not to accept the handshake, and how to
  *     deal with subsequent messages.  The current implementation expects a
  *     `null` payload, and assumes that means you want to talk directly to
- *     a lib.wa.fs.Directory.
- * @param {function(lib.wa.Message)} onReply A function to invoke for EVERY
+ *     a lib.wam.fs.Directory.
+ * @param {function(lib.wam.Message)} onReply A function to invoke for EVERY
  *     reply.  This includes the initial 'ready' message, and the 'ok' or
  *     'error' message that eventually ends the handshake.
  *     If the handshake does not succeed, this method will not be invoked.
- * @param {function(lib.wa.Message)} onError A function to invoke if the
+ * @param {function(lib.wam.Message)} onError A function to invoke if the
  *     handshake fails due to the remote sending anything other than 'ready'
  *     as the first message.
  */
-lib.wa.Channel.prototype.offerHandshake = function(
+lib.wam.Channel.prototype.offerHandshake = function(
     payload, onReply, onError) {
   return this.waitReady
   ('handshake',
    { channelProtocol: {
-       name: lib.wa.Channel.protocolName,
-       version: lib.wa.Channel.protocolVersion
+       name: lib.wam.Channel.protocolName,
+       version: lib.wam.Channel.protocolVersion
      },
      payload: payload
    },
@@ -317,7 +317,7 @@ lib.wa.Channel.prototype.offerHandshake = function(
  *
  * NOTE(rginda): An earlier design used custom handshake payloads.  At the
  *   moment we only use `null` as the handshake payload, and that implies we're
- *   going to be talking directly to lib.wa.fs.Directory..dispatchMessage of
+ *   going to be talking directly to lib.wam.fs.Directory..dispatchMessage of
  *   whatever root directory the recipient wants to publish.
  *
  * You may overwrite this method if you want to customize the handling of
@@ -330,11 +330,11 @@ lib.wa.Channel.prototype.offerHandshake = function(
  * If you return null it's your responsibility to call acceptHandshake or
  * rejectHandshake to complete your end of the handshake process.
  *
- * @param {lib.wa.Message} msg The inbound handshake offer message.
+ * @param {lib.wam.Message} msg The inbound handshake offer message.
  *
  * @return {boolean} The result.
  */
-lib.wa.Channel.prototype.validateHandshakePayload = function(msg) {
+lib.wam.Channel.prototype.validateHandshakePayload = function(msg) {
   return msg.arg.payload === null;
 };
 
@@ -343,13 +343,13 @@ lib.wa.Channel.prototype.validateHandshakePayload = function(msg) {
  *
  * This accepts the offered handshake by replying with a 'ready' message.
  * The handshake offer message will gain a meta.onInput event (see
- * lib.wa.Message..replyReady) which you can subscribe to in order to
+ * lib.wam.Message..replyReady) which you can subscribe to in order to
  * receive further inbound messages relating to the handshake offer.
  *
  * @param {Object} msg The message containing the handshake offer.
  * @param {*} payload An arbitrary payload to include in our 'ready' message.
  */
-lib.wa.Channel.prototype.acceptHandshake = function(hsMsg, payload) {
+lib.wam.Channel.prototype.acceptHandshake = function(hsMsg, payload) {
   var readyMsg = hsMsg.replyReady({payload: payload});
   this.onHandshakeAccept(hsMsg, readyMsg);
 };
@@ -361,38 +361,38 @@ lib.wa.Channel.prototype.acceptHandshake = function(hsMsg, payload) {
  * @param {string} opt_reason An optional human-readable string explaining
  *     the reason for the rejection.
  */
-lib.wa.Channel.prototype.rejectHandshake = function(hsMsg, opt_reason) {
+lib.wam.Channel.prototype.rejectHandshake = function(hsMsg, opt_reason) {
   var reason = opt_reason || 'Handshake rejected.';
-  var rejectMsg = hsMsg.closeError(lib.wa.error.HANDSHAKE_REJECTED, reason);
+  var rejectMsg = hsMsg.closeError(lib.wam.error.HANDSHAKE_REJECTED, reason);
   this.onHandshakeReject(hsMsg, rejectMsg);
 };
 
 /**
  * A wrapper around send() which waits for a reply named 'ready'.
  *
- * See lib.wa.Message.waitReady for details.
+ * See lib.wam.Message.waitReady for details.
  *
  * @param {string} name The name of the message to send.
  * @param {*} arg The argument for the outbound message.
- * @param {function(lib.wa.Message)} onReply The function to invoke for
+ * @param {function(lib.wam.Message)} onReply The function to invoke for
  *     reply.  This includes the initial 'ready' message, and the 'ok' or
  *     'error' message that eventually ends the handshake.
  *     If 'ready' is not received, this function will not be invoked.
- * @param {function(lib.wa.Message)} onError The function to invoke if
+ * @param {function(lib.wam.Message)} onError The function to invoke if
  *     the first reply is not 'ready'.  If this function is called, onReply
  *     will not be.  It is called only once if it is called at all.
  *
- * @return {lib.wa.Message} The outbound message.
+ * @return {lib.wam.Message} The outbound message.
  */
-lib.wa.Channel.prototype.waitReady = function(name, arg, onReply, onError) {
-  return this.send(name, arg, lib.wa.Message.waitReady(onReply, onError));
+lib.wam.Channel.prototype.waitReady = function(name, arg, onReply, onError) {
+  return this.send(name, arg, lib.wam.Message.waitReady(onReply, onError));
 };
 
 /**
- * Construct a new lib.wa.Message with the given name, arg, and reply handler,
+ * Construct a new lib.wam.Message with the given name, arg, and reply handler,
  * and send it across the channel.
  *
- * Returns the new lib.wa.Message.
+ * Returns the new lib.wam.Message.
  *
  * @param {string} name The name of the message to send.
  * @param {*} arg Any JSON serializable object to pass as an argument.
@@ -400,10 +400,10 @@ lib.wa.Channel.prototype.waitReady = function(name, arg, onReply, onError) {
  *     provided, then the caller may send 0 or more 'reply' messages, and
  *     *must* send exactly one 'reply-close' message.
  *
- * @return {lib.wa.Message} The newly constructed message.
+ * @return {lib.wam.Message} The newly constructed message.
  */
-lib.wa.Channel.prototype.send = function(name, arg, opt_onReply) {
-  var msg = new lib.wa.Message(this);
+lib.wam.Channel.prototype.send = function(name, arg, opt_onReply) {
+  var msg = new lib.wam.Message(this);
   msg.name = name;
   msg.arg = arg;
   msg.onReply = opt_onReply;
@@ -421,7 +421,7 @@ lib.wa.Channel.prototype.send = function(name, arg, opt_onReply) {
  *
  * @param {*} arg The argument to send with the 'disconnect' message.
  */
-lib.wa.Channel.prototype.disconnect = function(arg) {
+lib.wam.Channel.prototype.disconnect = function(arg) {
   if (!this.isConnected) {
     console.warn(this.name + ': Already disconnected: ', lib.f.getStack());
     return;
@@ -433,7 +433,7 @@ lib.wa.Channel.prototype.disconnect = function(arg) {
   }
 
   this.send('disconnect', arg);
-  this.onDisconnect(lib.wa.Channel.source.LOCAL, arg);
+  this.onDisconnect(lib.wam.Channel.source.LOCAL, arg);
   this.isConnected = false;
 
   // TODO(rginda): Guarantee the send happens before the transport disconnect?
@@ -443,16 +443,16 @@ lib.wa.Channel.prototype.disconnect = function(arg) {
 /**
  * Handle a raw message from the transport object.
  */
-lib.wa.Channel.prototype.onMessage_ = function(value) {
+lib.wam.Channel.prototype.onMessage_ = function(value) {
   if (this.verbose)
     console.log('RECV: ' + this.name + ': ' + JSON.stringify(value));
 
-  var msg = lib.wa.Message.fromValue(this, value);
+  var msg = lib.wam.Message.fromValue(this, value);
 
   if (msg.regarding) {
     if (!(msg.regarding in this.openMessages)) {
       if (msg.subject)
-        msg.closeError(lib.wa.error.UNKNOWN_SUBJECT, msg.subject);
+        msg.closeError(lib.wam.error.UNKNOWN_SUBJECT, msg.subject);
 
       console.warn('Got message for unknown subject: ' + msg.regarding);
       console.log(msg);
@@ -472,21 +472,21 @@ lib.wa.Channel.prototype.onMessage_ = function(value) {
       msg.parent.close();
     }
   } else {
-    msg.dispatch(this, lib.wa.Channel.on);
+    msg.dispatch(this, lib.wam.Channel.on);
   }
 };
 
 /**
  * Internal bookkeeping for disconnect events.
  */
-lib.wa.Channel.prototype.onDisconnect_ = function(source, arg) {
+lib.wam.Channel.prototype.onDisconnect_ = function(source, arg) {
   this.isConnected = false;
 
   // Construct synthetic close messages for any orphans.
   for (var subject in this.openMessages) {
     var value = {
       name: 'error',
-      arg: {name: lib.wa.error.CHANNEL_DISCONNECT, arg: this.name},
+      arg: {name: lib.wam.error.CHANNEL_DISCONNECT, arg: this.name},
       isFinalReply: true,
       regarding: subject
     };
@@ -497,43 +497,43 @@ lib.wa.Channel.prototype.onDisconnect_ = function(source, arg) {
 /**
  * Handler for transport disconnects.
  */
-lib.wa.Channel.prototype.onTransportDisconnect_ = function() {
+lib.wam.Channel.prototype.onTransportDisconnect_ = function() {
   if (!this.isConnected)
     return;
 
-  this.onDisconnect(lib.wa.Channel.source.TRANSPORT,
+  this.onDisconnect(lib.wam.Channel.source.TRANSPORT,
                     {reason: 'Transport disconnected.'});
 };
 
 /**
- * Message handlers, bound to a lib.wa.Channel instance in the constructor.
+ * Message handlers, bound to a lib.wam.Channel instance in the constructor.
  *
- * All of these functions are invoked with an instance of lib.wa.fs.Channel
- * as `this`, in response to some inbound lib.wa.Message.
+ * All of these functions are invoked with an instance of lib.wam.fs.Channel
+ * as `this`, in response to some inbound lib.wam.Message.
  */
-lib.wa.Channel.on = {};
+lib.wam.Channel.on = {};
 
 /**
  * Remote end initiated a disconnect.
  */
-lib.wa.Channel.on['disconnect'] = function(msg) {
-  this.onDisconnect(lib.wa.Channel.source.REMOTE, msg.arg);
+lib.wam.Channel.on['disconnect'] = function(msg) {
+  this.onDisconnect(lib.wam.Channel.source.REMOTE, msg.arg);
 };
 
 /**
  * Remote end is offering a handshake.
  */
-lib.wa.Channel.on['handshake'] = function(msg) {
-  if (msg.arg.channelProtocol.name != lib.wa.Channel.protocolName) {
+lib.wam.Channel.on['handshake'] = function(msg) {
+  if (msg.arg.channelProtocol.name != lib.wam.Channel.protocolName) {
     this.rejectHandshake(msg, 'Protocol name mismatch, expected: ' +
-                         lib.wa.Channel.protocolName +
+                         lib.wam.Channel.protocolName +
                          ', got: ' + msg.arg.channelProtocol.name);
     return;
   }
 
-  if (msg.arg.channelProtocol.version != lib.wa.Channel.protocolVersion) {
+  if (msg.arg.channelProtocol.version != lib.wam.Channel.protocolVersion) {
     this.rejectHandshake(msg, 'Protocol version mismatch, expected: ' +
-                         lib.wa.Channel.protocolVersion +
+                         lib.wam.Channel.protocolVersion +
                          ', got: ' + msg.arg.protocolVersion);
     return;
   }

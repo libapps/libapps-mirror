@@ -10,5 +10,5 @@ fi
 
 cd "$(readlink -f "$(dirname "$0")/..")"
 
-../libdot/bin/concat.sh $1 -i ./concat/wash_deps.concat \
-  -o ./js/wash_deps.concat.js
+../libdot/bin/concat.sh $1 -i ./concat/lib_wam_deps.concat \
+  -o ./js/lib_wam_deps.concat.js

@@ -4,25 +4,25 @@
 
 'use strict';
 
-lib.rtdep('lib.wa.DirectTransport');
+lib.rtdep('lib.wam.DirectTransport');
 
 /**
- * A suite of tests covering lib.wa.Channel, using a lib.wa.DirectTransport.
+ * A suite of tests covering lib.wam.Channel, using a lib.wam.DirectTransport.
  */
-lib.wa.Channel.Tests = new lib.TestManager.Suite('lib.wa.Channel.Tests');
+lib.wam.Channel.Tests = new lib.TestManager.Suite('lib.wam.Channel.Tests');
 
 /**
  * Run before each test to reset the state.
  */
-lib.wa.Channel.Tests.prototype.preamble = function(cx) {
-    var ta = new lib.wa.DirectTransport('parent');
-    var tb = new lib.wa.DirectTransport('child');
+lib.wam.Channel.Tests.prototype.preamble = function(cx) {
+    var ta = new lib.wam.DirectTransport('parent');
+    var tb = new lib.wam.DirectTransport('child');
     ta.connect(tb);
 
-    window.parent = this.parent = new lib.wa.Channel(ta);
+    window.parent = this.parent = new lib.wam.Channel(ta);
     window.parent.name = 'parent';
 
-    window.child = this.child = new lib.wa.Channel(tb);
+    window.child = this.child = new lib.wam.Channel(tb);
     window.child.name = 'child';
 };
 
@@ -32,7 +32,7 @@ lib.wa.Channel.Tests.prototype.preamble = function(cx) {
  * The test will fail if the handshake does not succeed.
  *
  * The onHandshakeReady(hsOfferMsg, hsReadyMsg) callback happens when the
- * handshake completes, and is passed two lib.wa.Message objects:
+ * handshake completes, and is passed two lib.wam.Message objects:
  *
  *   hsOfferMsg: The handshake offer message ('handshake') as received by the
  *               client.
@@ -46,12 +46,12 @@ lib.wa.Channel.Tests.prototype.preamble = function(cx) {
  * @param {lib.TestManager.Result} result A pending test result object, used to
  *     fail the test if things don't go well.
  * @param {*} payload The payload value to send with the handshake offer.
- * @param {function(lib.wa.Message, lib.wa.Message)} onHandshakeReady The
+ * @param {function(lib.wam.Message, lib.wam.Message)} onHandshakeReady The
  *     callback to invoke once the handshake succeeds on both ends.
  * @param {function()} onAllClosed The callback to invoke when all of the
  *     handshake related messages have closed.
  */
-lib.wa.Channel.Tests.prototype.setupHandshake = function(
+lib.wam.Channel.Tests.prototype.setupHandshake = function(
     result, payload, onHandshakeReady, onAllClosed) {
 
   var hsMsg = null;
@@ -120,7 +120,7 @@ lib.wa.Channel.Tests.prototype.setupHandshake = function(
  * Test that a plain vanilla handshake succeeds on both sides, can be
  * closed from the parent side, and teardown does not leave open messages.
  */
-lib.wa.Channel.Tests.addTest('handshake', function(result, cx) {
+lib.wam.Channel.Tests.addTest('handshake', function(result, cx) {
     this.setupHandshake(
         result, null,
         function onHandshakeReady(hsOfferMsg, hsReadyMsg) {
@@ -137,7 +137,7 @@ lib.wa.Channel.Tests.addTest('handshake', function(result, cx) {
  * Test that a plain vanilla handshake succeeds on both sides, can be
  * closed from the *child* side, and teardown does not leave open messages.
  */
-lib.wa.Channel.Tests.addTest('handshake-child-close', function(result, cx) {
+lib.wam.Channel.Tests.addTest('handshake-child-close', function(result, cx) {
     this.setupHandshake(
         result, null,
         function onHandshakeReady(hsOfferMsg, hsReadyMsg) {
@@ -154,8 +154,8 @@ lib.wa.Channel.Tests.addTest('handshake-child-close', function(result, cx) {
  * Test that closing the parent transport causes both ends to see the
  * onDisconnect.
  */
-lib.wa.Channel.Tests.addTest('handshake-transport-close', function(result, cx)
-{
+lib.wam.Channel.Tests.addTest
+('handshake-transport-close', function(result, cx) {
   var allClosed = false;
 
   this.setupHandshake(
@@ -168,54 +168,55 @@ lib.wa.Channel.Tests.addTest('handshake-transport-close', function(result, cx)
       });
 
   this.parent.onDisconnect.addListener(function(source, arg) {
-      result.assertEQ(source, lib.wa.Channel.source.TRANSPORT);
+      result.assertEQ(source, lib.wam.Channel.source.TRANSPORT);
     }.bind(this));
 
   this.child.onDisconnect.addListener(function(source, reason) {
-      result.assertEQ(source, lib.wa.Channel.source.TRANSPORT);
+      result.assertEQ(source, lib.wam.Channel.source.TRANSPORT);
       result.assert(allClosed);
       result.pass();
     }.bind(this));
 
-    result.requestTime(1000);
+  result.requestTime(1000);
 });
 
 /**
  * Test that closing the child transport causes both ends to see the
  * onDisconnect with the correct source.
  */
-lib.wa.Channel.Tests.addTest('disconnect-child-transport', function(result, cx)
-{
+lib.wam.Channel.Tests.addTest
+('disconnect-child-transport', function(result, cx) {
   var allClosed = false;
 
   this.setupHandshake(
-        result, null,
-        function onHandshakeReady(hsOfferMsg, hsReadyMsg) {
-          this.child.transport_.disconnect();
-        }.bind(this),
-        function onAllClosed() {
-          allClosed = true;
-        });
-
-    this.parent.onDisconnect.addListener(function(source, arg) {
-        result.assertEQ(source, lib.wa.Channel.source.TRANSPORT);
-        result.assert(allClosed);
-        result.pass();
+      result, null,
+      function onHandshakeReady(hsOfferMsg, hsReadyMsg) {
+        this.child.transport_.disconnect();
+      }.bind(this),
+      function onAllClosed() {
+        allClosed = true;
       });
 
-    this.child.onDisconnect.addListener(function(source, reason) {
-        result.assertEQ(source, lib.wa.Channel.source.TRANSPORT);
-      });
+  this.parent.onDisconnect.addListener(function(source, arg) {
+      result.assertEQ(source, lib.wam.Channel.source.TRANSPORT);
+      result.assert(allClosed);
+      result.pass();
+    });
 
-    result.requestTime(1000);
-  });
+  this.child.onDisconnect.addListener(function(source, reason) {
+      result.assertEQ(source, lib.wam.Channel.source.TRANSPORT);
+    });
+
+  result.requestTime(1000);
+});
 
 /**
  * Test that closing the parent channel causes both ends to see the
  * onDisconnect with a the correct source and the expected reason string.
  */
-lib.wa.Channel.Tests.addTest('disconnect-parent-channel', function(result, cx) {
-    var discoReason = 'planned disconnect';
+lib.wam.Channel.Tests.addTest
+('disconnect-parent-channel', function(result, cx) {
+  var discoReason = 'planned disconnect';
     var allClosed = false;
 
     this.setupHandshake(
@@ -231,14 +232,14 @@ lib.wa.Channel.Tests.addTest('disconnect-parent-channel', function(result, cx) {
 
     var parentCount = 0;
     this.parent.onDisconnect.addListener(function(source, arg) {
-        result.assertEQ(source, lib.wa.Channel.source.LOCAL);
+        result.assertEQ(source, lib.wam.Channel.source.LOCAL);
         result.assertEQ(arg, discoReason);
         result.assertEQ(parentCount++, 0);
     }.bind(this));
 
     var childCount = 0;
     this.child.onDisconnect.addListener(function(source, arg) {
-        result.assertEQ(source, lib.wa.Channel.source.REMOTE);
+        result.assertEQ(source, lib.wam.Channel.source.REMOTE);
         result.assertEQ(arg, discoReason);
         result.assertEQ(childCount++, 0);
         result.assert(allClosed);
@@ -252,66 +253,68 @@ lib.wa.Channel.Tests.addTest('disconnect-parent-channel', function(result, cx) {
  * Test that closing the child channel causes both ends to see the
  * onDisconnect with a the correct source and the expected reason string.
  */
-lib.wa.Channel.Tests.addTest('disconnect-child-channel', function(result, cx) {
-    var discoReason = 'planned disconnect';
-    var allClosed = false;
+lib.wam.Channel.Tests.addTest
+('disconnect-child-channel', function(result, cx) {
+  var discoReason = 'planned disconnect';
+  var allClosed = false;
 
-    this.setupHandshake(
-        result, null,
-        function onHandshakeReady(hsOfferMsg, hsReadyMsg) {
-          setTimeout(function() {
-              this.child.disconnect(discoReason);
-            }.bind(this), 100);
-        }.bind(this),
-        function onAllClosed() {
-          allClosed = true;
-        });
+  this.setupHandshake(
+      result, null,
+      function onHandshakeReady(hsOfferMsg, hsReadyMsg) {
+        setTimeout(function() {
+            this.child.disconnect(discoReason);
+          }.bind(this), 100);
+      }.bind(this),
+      function onAllClosed() {
+        allClosed = true;
+      });
 
-    var parentCount = 0;
-    this.parent.onDisconnect.addListener(function(source, arg) {
-        result.assertEQ(source, lib.wa.Channel.source.REMOTE);
-        result.assertEQ(arg, discoReason);
-        result.assertEQ(parentCount++, 0);
-        result.assert(allClosed);
-        result.pass();
+  var parentCount = 0;
+  this.parent.onDisconnect.addListener(function(source, arg) {
+      result.assertEQ(source, lib.wam.Channel.source.REMOTE);
+      result.assertEQ(arg, discoReason);
+      result.assertEQ(parentCount++, 0);
+      result.assert(allClosed);
+      result.pass();
     }.bind(this));
 
-    var childCount = 0;
-    this.child.onDisconnect.addListener(function(source, arg) {
-        result.assertEQ(source, lib.wa.Channel.source.LOCAL);
-        result.assertEQ(arg, discoReason);
-        result.assertEQ(childCount++, 0);
+  var childCount = 0;
+  this.child.onDisconnect.addListener(function(source, arg) {
+      result.assertEQ(source, lib.wam.Channel.source.LOCAL);
+      result.assertEQ(arg, discoReason);
+      result.assertEQ(childCount++, 0);
     }.bind(this));
 
-    result.requestTime(1000);
-  });
+  result.requestTime(1000);
+});
 
 /**
  * Tests that a botched handshake offer fails on both sides.
  */
-lib.wa.Channel.Tests.addTest('handshake-fail', function(result, cx) {
-    var rejectMsg = null;
+lib.wam.Channel.Tests.addTest
+('handshake-fail', function(result, cx) {
+  var rejectMsg = null;
 
-    this.child.onHandshakeReject.addListener(function(hsMsg, msg) {
-        rejectMsg = msg;
-        result.assertEQ(hsMsg.subject, offerMsg.subject);
-        result.assertEQ(rejectMsg.regarding, offerMsg.subject);
+  this.child.onHandshakeReject.addListener(function(hsMsg, msg) {
+      rejectMsg = msg;
+      result.assertEQ(hsMsg.subject, offerMsg.subject);
+      result.assertEQ(rejectMsg.regarding, offerMsg.subject);
     }.bind(this));
 
-    this.child.onHandshakeAccept.addListener(function(hsMsg, msg) {
-        result.fail('Handshake accepted');
-      });
+  this.child.onHandshakeAccept.addListener(function(hsMsg, msg) {
+      result.fail('Handshake accepted');
+    });
 
-    var offerMsg = this.parent.offerHandshake(
-        'Bogus payload!',
-        function onReply(msg) {
-          result.fail('Handshake rejected');
-        },
-        function onError(msg) {
-          result.assertEQ(msg.subject, rejectMsg.subject);
-          result.pass();
-        }
-    );
+  var offerMsg = this.parent.offerHandshake(
+      'Bogus payload!',
+      function onReply(msg) {
+        result.fail('Handshake rejected');
+      },
+      function onError(msg) {
+        result.assertEQ(msg.subject, rejectMsg.subject);
+        result.pass();
+      }
+  );
 
-    result.requestTime(1000);
-  });
+  result.requestTime(1000);
+});

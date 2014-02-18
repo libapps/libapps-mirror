@@ -4,14 +4,27 @@
 
 'use strict';
 
-lib.wa.fs = {};
+lib.wam.fs = {};
+
+lib.wam.fs.error = {
+  NO_FILESYSTEM: 'NO_FILESYSTEM',
+  REMOTE_DISCONNECTED: 'REMOTE_DISCONNECTED',
+  NOT_FOUND: 'NOT_FOUND',
+  NOT_LOCAL: 'NOT_LOCAL',
+  NOT_A_DIRECTORY: 'NOT_A_DIRECTORY',
+  NOT_AN_EXECUTABLE: 'NOT_AN_EXECUTABLE',
+  INVALID_PATH: 'INVALID_PATH',
+  UNKNOWN_OPERATION: 'UNKNOWN_OPERATION',
+  INVALID_OPERATION: 'INVALID_OPERATION',
+  FILE_EXISTS: 'FILE_EXISTS'
+};
 
 /**
  * List of possible entry types.
  *
  * This would probably be better as capabilities rather than a hard category.
  */
-lib.wa.fs.entryType = {
+lib.wam.fs.entryType = {
   DIRECTORY: 'DIR',
   DATA: 'DATA',
   EXECUTABLE: 'EXE'
@@ -20,7 +33,7 @@ lib.wa.fs.entryType = {
 /**
  * Everything after the last slash.
  */
-lib.wa.fs.basename = function(path) {
+lib.wam.fs.basename = function(path) {
   var pos = path.lastIndexOf('/');
   if (pos >= 0)
     return path.substr(pos + 1);
@@ -31,7 +44,7 @@ lib.wa.fs.basename = function(path) {
 /**
  * Everything before the last slash.
  */
-lib.wa.fs.dirname = function(path) {
+lib.wam.fs.dirname = function(path) {
   var pos = path.lastIndexOf('/');
   if (pos >= 0)
     return path.substr(0, pos);

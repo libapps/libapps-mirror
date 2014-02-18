@@ -7,25 +7,25 @@
 /**
  * The base class for things that can live in the filesystem.
  */
-lib.wa.fs.Entry = function() {
+lib.wam.fs.Entry = function() {
   this.on = {};
 
-  this.registerMessages(lib.wa.fs.Entry.on);
+  this.registerMessages(lib.wam.fs.Entry.on);
 };
 
 /**
  * True if this entry represents a local resource, false if it's on the
- * other end of a lib.wa.Channel.
+ * other end of a lib.wam.Channel.
  */
-lib.wa.fs.Entry.prototype.isLocal = true;
+lib.wam.fs.Entry.prototype.isLocal = true;
 
 /**
  * Register a set of callbacks.
  *
- * This is how the lib.wa.fs.Entry.on functions get registered.  Subclasses
+ * This is how the lib.wam.fs.Entry.on functions get registered.  Subclasses
  * can use it too.
  */
-lib.wa.fs.Entry.prototype.registerMessages = function(obj) {
+lib.wam.fs.Entry.prototype.registerMessages = function(obj) {
   for (var key in obj) {
     if (!this.on.hasOwnProperty(key))
       this.on[key] = new lib.Event();
@@ -37,7 +37,7 @@ lib.wa.fs.Entry.prototype.registerMessages = function(obj) {
 /**
  * Take an incoming message and route it to one of the registered handlers.
  */
-lib.wa.fs.Entry.prototype.dispatchMessage = function(path, msg) {
+lib.wam.fs.Entry.prototype.dispatchMessage = function(path, msg) {
   msg.meta.path = path;
   msg.dispatch(this, this.on);
 };
@@ -45,4 +45,4 @@ lib.wa.fs.Entry.prototype.dispatchMessage = function(path, msg) {
 /**
  * Message handlers reachable via dispatchMessage.
  */
-lib.wa.fs.Entry.on = {};
+lib.wam.fs.Entry.on = {};

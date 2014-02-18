@@ -4,56 +4,57 @@
 
 'use strict';
 
-lib.rtdep('lib.wa.fs.Remote');
+lib.rtdep('lib.wam.fs.Remote');
 
 /**
  * A filesystem entry that contains other filesystem entries.
  */
-lib.wa.fs.Directory = function() {
-  lib.wa.fs.Entry.call(this);
-  this.registerMessages(lib.wa.fs.Directory.on);
+lib.wam.fs.Directory = function() {
+  lib.wam.fs.Entry.call(this);
+  this.registerMessages(lib.wam.fs.Directory.on);
 
   this.entries_ = {};
 };
 
-lib.wa.fs.Directory.prototype = {__proto__: lib.wa.fs.Entry.prototype};
+lib.wam.fs.Directory.prototype = {__proto__: lib.wam.fs.Entry.prototype};
 
-lib.wa.fs.Directory.prototype.type = lib.wa.fs.entryType.DIRECTORY;
+lib.wam.fs.Directory.prototype.type = lib.wam.fs.entryType.DIRECTORY;
 
 /**
- * Link a path to a given lib.wa.fs.Entry.
+ * Link a path to a given lib.wam.fs.Entry.
  *
  * @param {string} path The target path.
- * @param {lib.wa.fs.Entry} entry A lib.wa.fs.Entry subclass to link at the
+ * @param {lib.wam.fs.Entry} entry A lib.wam.fs.Entry subclass to link at the
  *     target path.
- * @param {function(lib.wa.fs.Entry)} onSuccess The function to invoke on
+ * @param {function(lib.wam.fs.Entry)} onSuccess The function to invoke on
  *     success.
  * @param {function(name, arg)} onSuccess The function to invoke on
  *     error.
  */
-lib.wa.fs.Directory.prototype.link = function(path, entry, onSuccess, onError) {
+lib.wam.fs.Directory.prototype.link = function(
+    path, entry, onSuccess, onError) {
   if (!onSuccess || !onError)
     throw new Error('Missing onSuccess or onError');
 
-  if (!(entry instanceof lib.wa.fs.Entry))
+  if (!(entry instanceof lib.wam.fs.Entry))
     throw new Error('Invalid entry: ' + entry);
 
-  var baseName = lib.wa.fs.basename(path);
-  var dirName = lib.wa.fs.dirname(path);
+  var baseName = lib.wam.fs.basename(path);
+  var dirName = lib.wam.fs.dirname(path);
 
   var onResolve = function(dirEntry) {
-    if (dirEntry.type != lib.wa.fs.entryType.DIRECTORY) {
-      onError(lib.wa.error.FS_NOT_A_DIRECTORY, path);
+    if (dirEntry.type != lib.wam.fs.entryType.DIRECTORY) {
+      onError(lib.wam.fs.error.NOT_A_DIRECTORY, path);
       return;
     }
 
     if (!dirEntry.isLocal) {
-      onError(lib.wa.error.FS_NOT_LOCAL, path);
+      onError(lib.wam.fs.error.NOT_LOCAL, path);
       return;
     }
 
     if (dirEntry.resolveName(baseName)) {
-      onError(lib.wa.error.FS_FILE_EXISTS, path);
+      onError(lib.wam.fs.error.FILE_EXISTS, path);
       return;
     }
 
@@ -68,21 +69,21 @@ lib.wa.fs.Directory.prototype.link = function(path, entry, onSuccess, onError) {
 /**
  * Mount a remote filesystem into this directory structure.
  *
- * @param {lib.wa.Message} readyMsg An inbound 'ready' message that in response
+ * @param {lib.wam.Message} readyMsg An inbound 'ready' message that in response
  *     to an 'open' or 'handshake' message.  This roots the remote filesystem.
  * @param {string} localPath The local path to the mount point.
  * @param {string} remotePath The sub-directory of the remote filesystem to
  *     base this Remote on.
- * @param {function(lib.wa.fs.Remote)} The function to call on success.
- * @param {function(lib.wa.Message)} The function to call on error.
+ * @param {function(lib.wam.fs.Remote)} The function to call on success.
+ * @param {function(lib.wam.Message)} The function to call on error.
  */
-lib.wa.fs.Directory.prototype.mount = function(
+lib.wam.fs.Directory.prototype.mount = function(
     readyMsg, localPath, remotePath, onSuccess, onError) {
 
   if (!onSuccess || !onError)
     throw new Error('Missing onSuccess or onError');
 
-  lib.wa.fs.Remote.create(
+  lib.wam.fs.Remote.create(
       readyMsg, remotePath,
       function (entry) {
         this.link(localPath, entry, onSuccess, onError);
@@ -93,7 +94,7 @@ lib.wa.fs.Directory.prototype.mount = function(
 /**
  * Resolve a entry of this directory.
  */
-lib.wa.fs.Directory.prototype.resolveName = function(name) {
+lib.wam.fs.Directory.prototype.resolveName = function(name) {
   if (!this.entries_.hasOwnProperty(name))
     return null;
 
@@ -105,7 +106,8 @@ lib.wa.fs.Directory.prototype.resolveName = function(name) {
  *
  * Recurses at each leaf of the path.
  */
-lib.wa.fs.Directory.prototype.resolvePath = function(path, onSuccess, onError) {
+lib.wam.fs.Directory.prototype.resolvePath = function(
+    path, onSuccess, onError) {
   var async = function(f, arg1, arg2) {
     setTimeout(f.bind(null, arg1, arg2), 0);
   };
@@ -120,48 +122,48 @@ lib.wa.fs.Directory.prototype.resolvePath = function(path, onSuccess, onError) {
 
   var ary = path.match(/^\/?([^/]+)(.*)/);
   if (!ary)
-    throw new Error(liv.wa.error.FS_INVALID_PATH, path);
+    throw new Error(liv.wa.fs.error.INVALID_PATH, path);
 
   var name = ary[1];
   var rest = ary[2];
 
   if (!this.entries_.hasOwnProperty(name))
-    return async(onError, lib.wa.error.FS_NOT_FOUND, name);
+    return async(onError, lib.wam.fs.error.NOT_FOUND, name);
 
   var entry = this.entries_[name];
 
   if (!rest)
     return async(onSuccess, entry);
 
-  if (entry.type != lib.wa.fs.entryType.DIRECTORY)
-    return async(onError, lib.wa.error.FS_NOT_A_DIRECTORY, name);
+  if (entry.type != lib.wam.fs.entryType.DIRECTORY)
+    return async(onError, lib.wam.fs.error.NOT_A_DIRECTORY, name);
 
   entry.resolvePath(rest, onSuccess, onError);
 };
 
 /**
- * Message handlers reachable via lib.wa.fs.Entry.prototype.dispatchMessage.
+ * Message handlers reachable via lib.wam.fs.Entry.prototype.dispatchMessage.
  *
- * All of these functions are invoked with an instance of lib.wa.fs.Directory
- * as `this`, in response to some inbound lib.wa.Message.
+ * All of these functions are invoked with an instance of lib.wam.fs.Directory
+ * as `this`, in response to some inbound lib.wam.Message.
  */
-lib.wa.fs.Directory.on = {};
+lib.wam.fs.Directory.on = {};
 
 /**
  * Execute an entry.
  *
- * If the resolved lib.wa.fs.Entry is an executable, the message is passed
+ * If the resolved lib.wam.fs.Entry is an executable, the message is passed
  * to the entry to handle.  Otherwise we raise an error.
  */
-lib.wa.fs.Directory.on['execute'] = function(execMsg) {
+lib.wam.fs.Directory.on['execute'] = function(execMsg) {
   if (!execMsg.arg.path) {
-    execMsg.closeError(lib.wa.error.MISSING_PARAM, 'path');
+    execMsg.closeError(lib.wam.error.MISSING_PARAM, 'path');
     return;
   }
 
   var onResolve = function(entry) {
-    if (entry.type != lib.wa.fs.entryType.EXECUTABLE) {
-      execMsg.closeError(lib.wa.error.FS_NOT_AN_EXECUTABLE, execMsg.arg.path);
+    if (entry.type != lib.wam.fs.entryType.EXECUTABLE) {
+      execMsg.closeError(lib.wam.fs.error.NOT_AN_EXECUTABLE, execMsg.arg.path);
       return;
     }
 
@@ -183,7 +185,7 @@ lib.wa.fs.Directory.on['execute'] = function(execMsg) {
  * This replies with an open-ended 'ready' message that allows the caller to
  * issue further messages targeted to the opened file.
  */
-lib.wa.fs.Directory.on['open'] = function(openMsg) {
+lib.wam.fs.Directory.on['open'] = function(openMsg) {
   var onResolve = function(entry) {
     var readyMsg = openMsg.replyReady({type: entry.type});
 
@@ -207,7 +209,7 @@ lib.wa.fs.Directory.on['open'] = function(openMsg) {
  * TODO(rginda) This should provide a path argument so that callers don't need
  * to 'open' before reading.
  */
-lib.wa.fs.Directory.on['read'] = function(msg) {
+lib.wam.fs.Directory.on['read'] = function(msg) {
   var entries = {};
   for (var key in this.entries_) {
     entries[key] = {

@@ -4,4 +4,4 @@
 
 'use strict';
 
-lib.hterm = {};
+lib.wash = {};

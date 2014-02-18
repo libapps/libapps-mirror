@@ -5,14 +5,14 @@
 'use strict';
 
 /**
- * A local stand-in for a filesystem entry located across a lib.wa.Channel.
+ * A local stand-in for a filesystem entry located across a lib.wam.Channel.
  *
  * You should not construct one of these by hand, instead use the static
- * lib.wa.fs.Remote.create() method.
+ * lib.wam.fs.Remote.create() method.
  */
-lib.wa.fs.Remote = function() {
-  lib.wa.fs.Entry.call(this);
-  this.registerMessages(lib.wa.fs.Remote.on);
+lib.wam.fs.Remote = function() {
+  lib.wam.fs.Entry.call(this);
+  this.registerMessages(lib.wam.fs.Remote.on);
 
   // Any ready reply that points to a remote directory ('handshake' ready, or
   // 'open' ready).
@@ -34,39 +34,39 @@ lib.wa.fs.Remote = function() {
 /**
  * Create a new Remote object.
  *
- * @param {lib.wa.Message} rootReadyMsg An inbound 'ready' message that in
+ * @param {lib.wam.Message} rootReadyMsg An inbound 'ready' message that in
  *     response to an 'open' or 'handshake' message.  This roots the remote
  *     filesystem.
  * @param {string} remotePath The sub-directory of the remote filesystem to
  *     base this Remote on.
- * @param {function(lib.wa.fs.Remote)} onSuccess The function to call on
+ * @param {function(lib.wam.fs.Remote)} onSuccess The function to call on
  *     success.
- * @param {function(lib.wa.Message)} onError The function to call on error.
+ * @param {function(lib.wam.Message)} onError The function to call on error.
  */
-lib.wa.fs.Remote.create = function(
+lib.wam.fs.Remote.create = function(
     rootReadyMsg, remotePath, onSuccess, onError) {
-  var remote = new lib.wa.fs.Remote();
+  var remote = new lib.wam.fs.Remote();
   remote.mount(rootReadyMsg, remotePath, onSuccess.bind(null, remote), onError);
 };
 
-lib.wa.fs.Remote.prototype = {__proto__: lib.wa.fs.Entry.prototype};
+lib.wam.fs.Remote.prototype = {__proto__: lib.wam.fs.Entry.prototype};
 
-lib.wa.fs.Remote.prototype.isLocal = false;
+lib.wam.fs.Remote.prototype.isLocal = false;
 
 /**
  * Using the rootReadyMsg as the remote root directory, make this
- * lib.wa.fs.Remote instance a stand-in for the path specified by remotePath.
+ * lib.wam.fs.Remote instance a stand-in for the path specified by remotePath.
  *
- * @param {lib.wa.Message} rootReadyMsg A 'ready' message that was the result of
- *     a 'handshake' or 'open' message.
+ * @param {lib.wam.Message} rootReadyMsg A 'ready' message that was the result
+ *     of a 'handshake' or 'open' message.
  * @param {string} remotePath The path under rootReadyMsg to mount.
  * @param {function()} onSuccess Called on success.
- * @param {function(lib.wa.Message)} onError Called on error.
+ * @param {function(lib.wam.Message)} onError Called on error.
  */
-lib.wa.fs.Remote.prototype.mount = function(
+lib.wam.fs.Remote.prototype.mount = function(
     rootReadyMsg, remotePath, onSuccess, onError) {
   if (this.readyMsg_ && !this.closeMsg_) {
-    onError({name: lib.wa.fs.FS_FILE_EXISTS, arg: remotePath});
+    onError({name: lib.wam.fs.error.FILE_EXISTS, arg: remotePath});
     return;
   }
 
@@ -95,26 +95,26 @@ lib.wa.fs.Remote.prototype.mount = function(
 };
 
 /**
- * Same effect as lib.wa.fs.Directory.
+ * Same effect as lib.wam.fs.Directory.
  */
-lib.wa.fs.Remote.prototype.resolvePath = function(path, onSuccess, onError) {
+lib.wam.fs.Remote.prototype.resolvePath = function(path, onSuccess, onError) {
   if (this.closeMsg_) {
     console.warn('Resolve on closed remote');
-    onError(lib.wa.error.FS_REMOTE_DISCONNECTED,
+    onError(lib.wam.fs.error.REMOTE_DISCONNECTED,
             {name: this.closeMsg_.name, arg: this.closeMsg_.arg});
   }
 
-  lib.wa.fs.Remote.create(this.rootReadyMsg_, path, onSuccess, onError);
+  lib.wam.fs.Remote.create(this.rootReadyMsg_, path, onSuccess, onError);
 };
 
 /**
  * Dispatch messages sent to this entry across the channel.
  */
-lib.wa.fs.Remote.prototype.dispatchMessage = function(path, msg) {
+lib.wam.fs.Remote.prototype.dispatchMessage = function(path, msg) {
   if (this.closeMsg_) {
     console.warn('Dispatch to closed remote');
     if (msg.isOpen) {
-      msg.closeError(lib.wa.error.FS_REMOTE_DISCONNECTED,
+      msg.closeError(lib.wam.fs.error.REMOTE_DISCONNECTED,
                      {name: this.closeMsg_.name, arg: this.closeMsg_.arg});
     }
 

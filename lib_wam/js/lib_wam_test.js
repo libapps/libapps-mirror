@@ -8,7 +8,7 @@ var testManager;
 var testRun;
 
 window.onload = function() {
-  lib.rtdep('lib.wa.Channel.Tests', 'lib.wa.fs.Tests');
+  lib.rtdep('lib.wam.Channel.Tests', 'lib.wam.fs.Tests');
 
   lib.init(lib.f.alarm(function() {
     testManager = new lib.TestManager();

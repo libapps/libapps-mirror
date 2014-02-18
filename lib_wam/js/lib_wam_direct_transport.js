@@ -6,7 +6,7 @@
 
 lib.rtdep('lib.Event');
 
-lib.wa.DirectTransport = function(name) {
+lib.wam.DirectTransport = function(name) {
   /**
    * An arbitrary name for this transport used for debugging.
    */
@@ -45,14 +45,14 @@ lib.wa.DirectTransport = function(name) {
  *
  * What could go wrong?
  */
-lib.wa.DirectTransport.createChannelPair = function(
+lib.wam.DirectTransport.createChannelPair = function(
     onHandshakeReady, onHandshakeError) {
-  var t1 = new lib.wa.DirectTransport();
-  var t2 = new lib.wa.DirectTransport();
+  var t1 = new lib.wam.DirectTransport();
+  var t2 = new lib.wam.DirectTransport();
   t1.connect(t2);
 
-  var channel1 = new lib.wa.Channel(t1);
-  var channel2 = new lib.wa.Channel(t2);
+  var channel1 = new lib.wam.Channel(t1);
+  var channel2 = new lib.wam.Channel(t2);
 
   var hsOfferMsg = null;
 
@@ -69,7 +69,7 @@ lib.wa.DirectTransport.createChannelPair = function(
       onHandshakeError);
 };
 
-lib.wa.DirectTransport.prototype.service_ = function() {
+lib.wam.DirectTransport.prototype.service_ = function() {
   this.queueTimeout_ = null;
 
   for (var i = 0; i < this.queue_.length; i++) {
@@ -81,7 +81,7 @@ lib.wa.DirectTransport.prototype.service_ = function() {
   this.queue_.length = 0;
 };
 
-lib.wa.DirectTransport.prototype.push_ = function(name, args) {
+lib.wam.DirectTransport.prototype.push_ = function(name, args) {
   this.queue_.push([name, [args]]);
   if (!this.queueTimeout_)
     this.queueTimeout_ = setTimeout(this.service_.bind(this), 0);
@@ -94,9 +94,9 @@ lib.wa.DirectTransport.prototype.push_ = function(name, args) {
  *
  * You do not need to call the connect() method of the remoteEnd.
  *
- * @param {lib.wa.DirectTransport}
+ * @param {lib.wam.DirectTransport}
  */
-lib.wa.DirectTransport.prototype.connect = function(remoteEnd) {
+lib.wam.DirectTransport.prototype.connect = function(remoteEnd) {
   if (this.remoteEnd_)
     throw 'Already Connected';
 
@@ -106,7 +106,7 @@ lib.wa.DirectTransport.prototype.connect = function(remoteEnd) {
   this.isConnected = remoteEnd.isConnected = true;
 };
 
-lib.wa.DirectTransport.prototype.disconnect = function() {
+lib.wam.DirectTransport.prototype.disconnect = function() {
   if (!this.remoteEnd_)
     return;
 
@@ -116,7 +116,7 @@ lib.wa.DirectTransport.prototype.disconnect = function() {
   this.onDisconnect();
 };
 
-lib.wa.DirectTransport.prototype.send = function(msg) {
+lib.wam.DirectTransport.prototype.send = function(msg) {
   if (!this.remoteEnd_)
     throw new Error('Not connected.');
 

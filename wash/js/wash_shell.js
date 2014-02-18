@@ -7,10 +7,10 @@
 /**
  * The shell read-eval-print loop.
  *
- * This is exposed as a lib.wa.fs.Executable from wash.Commands.
+ * This is exposed as a lib.wam.fs.Executable from wash.Commands.
  *
  * @param {wash.App} app The application that owns this object.
- * @param {lib.wa.Message} execMsg The 'execute' message that invoked the shell.
+ * @param {lib.wam.Message} execMsg The 'execute' message that invoked the shell.
  */
 wash.Shell = function(app, execMsg) {
   this.app = app;
@@ -33,7 +33,7 @@ wash.Shell = function(app, execMsg) {
    */
   this.onInit = new lib.Event(this.onInit_.bind(this));
 
-  this.tc_ = new lib.hterm.Termcap();
+  this.tc_ = new lib.wash.Termcap();
   this.promptString_ = this.tc_.output(
       '%set-attr(FG_BOLD, FG_CYAN)wash$ %set-attr()');
 
@@ -43,7 +43,7 @@ wash.Shell = function(app, execMsg) {
 };
 
 /**
- * The main entrypoint when invoked as a lib.wa.fs.Executable.
+ * The main entrypoint when invoked as a lib.wam.fs.Executable.
  */
 wash.Shell.main = function(app, execMsg) {
   var shell = new wash.Shell(app, execMsg);
@@ -144,14 +144,14 @@ wash.Shell.Job = function(argv, env) {
 /**
  * Create a new job and execute it.
  *
- * @param {string} path The path to the lib.wa.fs.Executable.
+ * @param {string} path The path to the lib.wam.fs.Executable.
  * @param {*} argv The argument value for the executable.
  * @param {*} env The environment value for the executable.
- * @param {function(lib.wa.Message)} opt_onReply The optional callback to invoke
- *     with messages sent by the executable.  This takes the place of the
+ * @param {function(lib.wam.Message)} opt_onReply The optional callback to
+ *     invoke with messages sent by the executable.  This takes the place of the
  *     shell's build-in onExecuteReply_.  Messages will not reach the terminal
  *     unless you explicitly send them.
- * @param {function(lib.wa.Message)} opt_onError The optional callback to
+ * @param {function(lib.wam.Message)} opt_onError The optional callback to
  *     invoke if the executable fails to start.
  */
 wash.Shell.prototype.execute = function(path, argv, env) {

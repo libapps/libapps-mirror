@@ -6,4 +6,4 @@
 
 var wash = {};
 
-wash.guid = lib.wa.guid;
+wash.guid = lib.wam.guid;

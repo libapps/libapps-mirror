@@ -13,7 +13,7 @@
  * Instances of this class are able to translate both outgoing strings and
  * incoming key sequences.
  */
-lib.hterm.Termcap = function() {};
+lib.wash.Termcap = function() {};
 
 /**
  * Replace %<function>(VAR,...) and %(VAR) patterns in the given string, using
@@ -24,7 +24,7 @@ lib.hterm.Termcap = function() {};
  *
  * See the outputVars and outputFunctions below for the list of valid stuff.
  */
-lib.hterm.Termcap.prototype.output = function(str, opt_vars) {
+lib.wash.Termcap.prototype.output = function(str, opt_vars) {
   var vars;
   if (opt_vars) {
     opt_vars.__proto__ = this.outputVars;
@@ -33,7 +33,7 @@ lib.hterm.Termcap.prototype.output = function(str, opt_vars) {
     vars = this.outputVars;
   }
 
-  return lib.hterm.Termcap.replaceVars_(str, vars, this.outputFunctions);
+  return lib.wash.Termcap.replaceVars_(str, vars, this.outputFunctions);
 };
 
 /**
@@ -54,7 +54,7 @@ lib.hterm.Termcap.prototype.output = function(str, opt_vars) {
  *
  * See the inputVars and inputFunctions below for the list of valid stuff.
  */
-lib.hterm.Termcap.prototype.input = function(str, opt_vars) {
+lib.wash.Termcap.prototype.input = function(str, opt_vars) {
   var vars;
   if (opt_vars) {
     opt_vars.__proto__ = this.inputVars;
@@ -63,13 +63,13 @@ lib.hterm.Termcap.prototype.input = function(str, opt_vars) {
     vars = this.inputVars;
   }
 
-  return lib.hterm.Termcap.replaceVars_(str, vars, this.inputFunctions);
+  return lib.wash.Termcap.replaceVars_(str, vars, this.inputFunctions);
 };
 
 /**
- * The valid variables for lib.hterm.Termcap..output()
+ * The valid variables for lib.wash.Termcap..output()
  */
-lib.hterm.Termcap.prototype.outputVars = {
+lib.wash.Termcap.prototype.outputVars = {
   'FG_BOLD': '1',
 
   'FG_BLACK': '30',
@@ -94,9 +94,9 @@ lib.hterm.Termcap.prototype.outputVars = {
 };
 
 /**
- * The valid functions for lib.hterm.Termcap..output()
+ * The valid functions for lib.wash.Termcap..output()
  */
-lib.hterm.Termcap.prototype.outputFunctions = {
+lib.wash.Termcap.prototype.outputFunctions = {
   'crlf': function(str) {
     return str.replace(/\n/g, '\r\n');
   },
@@ -151,9 +151,9 @@ lib.hterm.Termcap.prototype.outputFunctions = {
 };
 
 /**
- * The valid variables for lib.hterm.Termcap..input()
+ * The valid variables for lib.wash.Termcap..input()
  */
-lib.hterm.Termcap.prototype.inputVars = {
+lib.wash.Termcap.prototype.inputVars = {
   'BACKSPACE': '\x7f',
   'DELETE': '\x1b[3~',
   'DOWN': '\x1b[B',
@@ -171,12 +171,12 @@ lib.hterm.Termcap.prototype.inputVars = {
 
 
 /**
- * The valid functions for lib.hterm.Termcap..input()
+ * The valid functions for lib.wash.Termcap..input()
  */
-lib.hterm.Termcap.prototype.inputFunctions = {
+lib.wash.Termcap.prototype.inputFunctions = {
   'shift': function(seq) {
     if (/\x1b\[/.test(seq))
-      return lib.hterm.Termcap.modcsi(';2', seq);
+      return lib.wash.Termcap.modcsi(';2', seq);
 
     if (seq.length == 1)
       return seq.toUpperCase();
@@ -186,21 +186,21 @@ lib.hterm.Termcap.prototype.inputFunctions = {
 
   'meta': function(seq) {
     if (/\x1b\[/.test(seq))
-      return lib.hterm.Termcap.modcsi(';3', seq);
+      return lib.wash.Termcap.modcsi(';3', seq);
 
     return '\x1b' + seq;
   },
 
   'shift-meta': function(seq) {
     if (/\x1b\[/.test(seq))
-      return lib.hterm.Termcap.modcsi(';4', seq);
+      return lib.wash.Termcap.modcsi(';4', seq);
 
     return '\x1b' + seq.toUpperCase();
   },
 
   'ctrl': function(seq) {
     if (/\x1b\[/.test(seq))
-      return lib.hterm.Termcap.modcsi(';5', seq);
+      return lib.wash.Termcap.modcsi(';5', seq);
 
     if (seq.length == 1)
       return String.fromCharCode(seq.toUpperCase().charCodeAt(0) - 64);
@@ -210,7 +210,7 @@ lib.hterm.Termcap.prototype.inputFunctions = {
 
   'shift-ctrl': function(ch) {
     if (/\x1b\[/.test(seq))
-      return lib.hterm.Termcap.modcsi(';6', seq);
+      return lib.wash.Termcap.modcsi(';6', seq);
 
     if (seq.length == 1)
       return String.fromCharCode(seq.toUpperCase().charCodeAt(0) - 64);
@@ -220,7 +220,7 @@ lib.hterm.Termcap.prototype.inputFunctions = {
 
   'ctrl-meta': function(seq) {
     if (/\x1b\[/.test(seq))
-      return lib.hterm.Termcap.modcsi(';7', seq);
+      return lib.wash.Termcap.modcsi(';7', seq);
 
     if (seq.length == 1) {
       return '\x1b' + String.fromCharCode(
@@ -232,7 +232,7 @@ lib.hterm.Termcap.prototype.inputFunctions = {
 
   'shift-ctrl-meta': function(seq) {
     if (/\x1b\[/.test(seq))
-      return lib.hterm.Termcap.modcsi(';8', seq);
+      return lib.wash.Termcap.modcsi(';8', seq);
 
     if (seq.length == 1) {
       return '\x1b' + String.fromCharCode(
@@ -251,7 +251,7 @@ lib.hterm.Termcap.prototype.inputFunctions = {
  * and end with double-quotes.  Comma-splitting is also brittle, and strings
  * containing commas will cause trouble.
  */
-lib.hterm.Termcap.replaceVars_ = function(str, vars, functions) {
+lib.wash.Termcap.replaceVars_ = function(str, vars, functions) {
   var resolve = function(param, source) {
     if ((/^-?\d+$/.test(param)))
       return param;
@@ -295,7 +295,7 @@ lib.hterm.Termcap.replaceVars_ = function(str, vars, functions) {
   return str.replace(/%([a-z0-9+\-_]*)\(([^\)]*)\)/gi, doReplace);
 };
 
-lib.hterm.Termcap.modcsi = function(mod, seq) {
+lib.wash.Termcap.modcsi = function(mod, seq) {
   if (seq.length == 3) {
     // Some of the CSI sequences have zero parameters unless modified.
     return '\x1b[1' + mod + seq.substr(2, 1);

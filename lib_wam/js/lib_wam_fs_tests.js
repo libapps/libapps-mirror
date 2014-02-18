@@ -4,38 +4,38 @@
 
 'use strict';
 
-lib.rtdep('lib.wa.DirectTransport');
+lib.rtdep('lib.wam.DirectTransport');
 
 /**
  * A suite of tests covering lib.ipc.Channel, using a lib.ipc.DirectTransport.
  */
-lib.wa.fs.Tests = new lib.TestManager.Suite('lib.wa.fs.Tests');
+lib.wam.fs.Tests = new lib.TestManager.Suite('lib.wam.fs.Tests');
 
 /**
  * Run before each test to reset the state.
  */
-lib.wa.fs.Tests.prototype.preamble = function(cx) {
-    var ta = new lib.wa.DirectTransport('parent');
-    var tb = new lib.wa.DirectTransport('child');
+lib.wam.fs.Tests.prototype.preamble = function(cx) {
+    var ta = new lib.wam.DirectTransport('parent');
+    var tb = new lib.wam.DirectTransport('child');
     ta.connect(tb);
 
-    window.parent = this.parent = new lib.wa.Channel(ta);
+    window.parent = this.parent = new lib.wam.Channel(ta);
     window.parent.name = 'parent';
 
-    window.child = this.child = new lib.wa.Channel(tb);
+    window.child = this.child = new lib.wam.Channel(tb);
     window.child.name = 'child';
 
-    this.childFileSystem = new lib.wa.fs.Directory();
+    this.childFileSystem = new lib.wam.fs.Directory();
 };
 
 /**
- * Same as lib.wa.Channel.prototype.setupHandshake, except automatically
+ * Same as lib.wam.Channel.prototype.setupHandshake, except automatically
  * route handshake-ready replies to the this.childFileSystem.
  */
-lib.wa.fs.Tests.prototype.setupHandshake = function(
+lib.wam.fs.Tests.prototype.setupHandshake = function(
     result, payload, onHandshakeReady, onAllClosed) {
 
-  lib.wa.Channel.Tests.prototype.setupHandshake.call(
+  lib.wam.Channel.Tests.prototype.setupHandshake.call(
       this, result, payload,
       function(hsOfferMsg, hsReadyMsg) {
         // Route ready replies to the filesystem.
@@ -51,7 +51,7 @@ lib.wa.fs.Tests.prototype.setupHandshake = function(
 /**
  * Open a directory across a channel, read it, close it, verify teardown.
  */
-lib.wa.fs.Tests.addTest('open-read-close', function(result, cx) {
+lib.wam.fs.Tests.addTest('open-read-close', function(result, cx) {
     var readHappened = false;
 
     var onHandshakeReady = function(hsOfferMsg, hsReadyMsg) {
@@ -93,7 +93,7 @@ lib.wa.fs.Tests.addTest('open-read-close', function(result, cx) {
     }.bind(this);
 
     this.childFileSystem.link(
-        'test-directory', new lib.wa.fs.Directory,
+        'test-directory', new lib.wam.fs.Directory,
         onLinkSuccess,
         function onError() {
           result.fail('Link failed');
@@ -106,7 +106,7 @@ lib.wa.fs.Tests.addTest('open-read-close', function(result, cx) {
  * Execute a command across a channel, read some output, send some input,
  * watch it exit and verify the teardown.
  */
-lib.wa.fs.Tests.addTest('execute-and-stuff', function(result, cx) {
+lib.wam.fs.Tests.addTest('execute-and-stuff', function(result, cx) {
     var execClosed = false;
 
     // This is the function we're going to try to execute.
@@ -180,7 +180,7 @@ lib.wa.fs.Tests.addTest('execute-and-stuff', function(result, cx) {
 
     this.childFileSystem.link(
         '/test',
-        new lib.wa.fs.Executable(test),
+        new lib.wam.fs.Executable(test),
         onLinkSuccess,
         function onError(name, arg) {
           result.fail('Error linking executable: ' + name + ': ' + arg);

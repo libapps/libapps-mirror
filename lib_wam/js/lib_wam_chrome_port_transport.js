@@ -9,7 +9,7 @@ lib.rtdep('lib.Event');
 /**
  * This is the chrome message port based transport.
  */
-lib.wa.ChromePortTransport = function(port) {
+lib.wam.ChromePortTransport = function(port) {
   // The underlying Chrome "platform app" port.
   this.port_ = port;
 
@@ -42,17 +42,17 @@ lib.wa.ChromePortTransport = function(port) {
   this.port_.onDisconnect.addListener(this.onDisconnect);
 };
 
-lib.wa.ChromePortTransport.prototype.send = function(value) {
+lib.wam.ChromePortTransport.prototype.send = function(value) {
   this.port_.postMessage(value);
 };
 
-lib.wa.ChromePortTransport.prototype.disconnect = function() {
+lib.wam.ChromePortTransport.prototype.disconnect = function() {
   this.port_.disconnect();
 };
 
-lib.wa.ChromePortTransport.connect = function(extensionId, onComplete) {
+lib.wam.ChromePortTransport.connect = function(extensionId, onComplete) {
   var port = chrome.runtime.connect(
-      extensionId, {name: 'lib.wa.ChromePortTransport/1.0'});
+      extensionId, {name: 'lib.wam.ChromePortTransport/1.0'});
 
   window.p_ = port;
 
@@ -62,7 +62,7 @@ lib.wa.ChromePortTransport.connect = function(extensionId, onComplete) {
   }
 
   var onDisconnect = function(e) {
-    console.log('lib.wa.ChromePortTransport.connect: disconnect');
+    console.log('lib.wam.ChromePortTransport.connect: disconnect');
     port.onMessage.removeListener(onMessage);
     port.onDisconnect.removeListener(onDisconnect);
     onComplete(null);
@@ -73,7 +73,7 @@ lib.wa.ChromePortTransport.connect = function(extensionId, onComplete) {
     port.onDisconnect.removeListener(onDisconnect);
 
     if (msg == 'accepted') {
-      onComplete(new lib.wa.ChromePortTransport(port));
+      onComplete(new lib.wam.ChromePortTransport(port));
     } else {
       port.disconnect();
       onComplete(null);
@@ -89,29 +89,29 @@ lib.wa.ChromePortTransport.connect = function(extensionId, onComplete) {
  *
  * We invoke this whenever we hear a connection from port with the proper name.
  */
-lib.wa.ChromePortTransport.onConnectCallback_ = null;
+lib.wam.ChromePortTransport.onConnectCallback_ = null;
 
 /**
  * Invoked when an foreign extension attempts to connect while we're listening.
  */
-lib.wa.ChromePortTransport.onConnectExternal_ = function(port) {
-  console.log('lib.wa.ChromePortTransport.onConnectExternal_: connect');
+lib.wam.ChromePortTransport.onConnectExternal_ = function(port) {
+  console.log('lib.wam.ChromePortTransport.onConnectExternal_: connect');
 
-  var whitelist = lib.wa.ChromePortTransport.connectWhitelist_
+  var whitelist = lib.wam.ChromePortTransport.connectWhitelist_
   if (whitelist && whitelist.indexOf(port.sender.id) == -1) {
     console.log('Sender is not on the whitelist: ' + port.sender.id);
     port.disconnect();
     return;
   }
 
-  if (port.name != 'lib.wa.ChromePortTransport/1.0') {
+  if (port.name != 'lib.wam.ChromePortTransport/1.0') {
     console.log('Ignoring unknown connection: ' + port.name);
     port.disconnect();
     return;
   }
 
-  var transport = new lib.wa.ChromePortTransport(port);
-  lib.wa.ChromePortTransport.onListenCallback_(transport);
+  var transport = new lib.wam.ChromePortTransport(port);
+  lib.wam.ChromePortTransport.onListenCallback_(transport);
 
   transport.send('accepted');
 };
@@ -121,26 +121,26 @@ lib.wa.ChromePortTransport.onConnectExternal_ = function(port) {
  *
  * @param {Array<string>} whitelist A whitelist of extension ids that may
  *   connect.  Pass null to disable the whitelist and allow all connections.
- * @param {function(lib.wa.ChromePortTransport)} onConnect A callback to invoke
+ * @param {function(lib.wam.ChromePortTransport)} onConnect A callback to invoke
  *   when a new connection is made.
  */
-lib.wa.ChromePortTransport.listen = function(whitelist, onConnect) {
+lib.wam.ChromePortTransport.listen = function(whitelist, onConnect) {
   if (onConnect == null) {
-    if (!lib.wa.ChromePortTransport.onConnectCallback_)
-      throw 'lib.wa.ChromePortTransport is not listening.';
+    if (!lib.wam.ChromePortTransport.onConnectCallback_)
+      throw 'lib.wam.ChromePortTransport is not listening.';
 
-    lib.wa.ChromePortTransport.onListenCallback_ = null;
-    lib.wa.ChromePortTransport.connectWhitelist_ = null;
+    lib.wam.ChromePortTransport.onListenCallback_ = null;
+    lib.wam.ChromePortTransport.connectWhitelist_ = null;
     chrome.runtime.onConnectExternal.removeListener(
-        lib.wa.ChromePortTransport.onConnectExternal_);
+        lib.wam.ChromePortTransport.onConnectExternal_);
 
   } else {
-    if (lib.wa.ChromePortTransport.onConnectCallback_)
-      throw 'lib.wa.ChromePortTransport is already listening.';
+    if (lib.wam.ChromePortTransport.onConnectCallback_)
+      throw 'lib.wam.ChromePortTransport is already listening.';
 
-    lib.wa.ChromePortTransport.onListenCallback_ = onConnect;
-    lib.wa.ChromePortTransport.connectWhitelist_ = whitelist;
+    lib.wam.ChromePortTransport.onListenCallback_ = onConnect;
+    lib.wam.ChromePortTransport.connectWhitelist_ = whitelist;
     chrome.runtime.onConnectExternal.addListener(
-        lib.wa.ChromePortTransport.onConnectExternal_);
+        lib.wam.ChromePortTransport.onConnectExternal_);
   }
 };

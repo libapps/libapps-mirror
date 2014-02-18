@@ -18,7 +18,7 @@ wash.App = function(manifest) {
 
   this.commands = new wash.Commands(this);
 
-  this.fileSystem = new lib.wa.fs.Directory();
+  this.fileSystem = new lib.wam.fs.Directory();
   this.initFileSystem(this.onInit);
 
   // The handshake reply message received on the app channel.
@@ -26,7 +26,7 @@ wash.App = function(manifest) {
 };
 
 /**
- * Initialize the lib.wa.fs.Directory we plan on exporting.
+ * Initialize the lib.wam.fs.Directory we plan on exporting.
  */
 wash.App.prototype.initFileSystem = function(onInit) {
   var fs = this.fileSystem;
@@ -41,7 +41,7 @@ wash.App.prototype.initFileSystem = function(onInit) {
       initialDirs.forEach(function(path) {
           console.log('initFileSystem: Creating: ' + path);
           fs.link(
-              path, new lib.wa.fs.Directory(),
+              path, new lib.wam.fs.Directory(),
               cx.next,
               lib.fs.err('Initial directory failed:', cx.next));
         });
@@ -55,9 +55,9 @@ wash.App.prototype.initFileSystem = function(onInit) {
 
     function channels(cx) {
       // Create a channel between the app and our internal filesystem using
-      // a lib.wa.DirectTransport.
+      // a lib.wam.DirectTransport.
       console.log('initFileSystem: Creating channel.');
-      lib.wa.DirectTransport.createChannelPair(
+      lib.wam.DirectTransport.createChannelPair(
           function onHandshakeSuccess(hsOfferMsg, hsReplyMsg) {
             console.log('Channels are happy');
 

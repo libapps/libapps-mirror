@@ -6,7 +6,7 @@
 
 /**
  * A platform-app window containing an instance of hterm, running a
- * lib.wa.Executable ('/exe/wash' by default).
+ * lib.wam.Executable ('/exe/wash' by default).
  */
 wash.TerminalWindow = function(app) {
   this.app = app;

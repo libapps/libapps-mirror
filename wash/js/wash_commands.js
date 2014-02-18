@@ -5,7 +5,7 @@
 'use strict';
 
 /**
- * The list of commands we want to export as lib.wa.fs.Executables in our
+ * The list of commands we want to export as lib.wam.fs.Executables in our
  * '/exe' directory.
  *
  * See wash.App..initFileSystem.
@@ -25,8 +25,8 @@ wash.Commands = function(app) {
  */
 wash.Commands.prototype.install = function(path, onSuccess, onError) {
   var onResolveSuccess = function(entry) {
-    if (entry.type != lib.wa.fs.entryType.DIRECTORY) {
-      onError(lib.wa.error.FS_NOT_A_DIRECTORY, path);
+    if (entry.type != lib.wam.fs.entryType.DIRECTORY) {
+      onError(lib.wam.error.FS_NOT_A_DIRECTORY, path);
       return;
     }
 
@@ -36,7 +36,7 @@ wash.Commands.prototype.install = function(path, onSuccess, onError) {
         cx.expected = Object.keys(wash.Commands.on).length;
 
         for (var key in wash.Commands.on) {
-          var executable = new lib.wa.fs.Executable(
+          var executable = new lib.wam.fs.Executable(
               wash.Commands.on[key].bind(this));
 
           entry.link(key, executable, cx.next, cx.error);
@@ -64,7 +64,7 @@ wash.Commands.prototype.install = function(path, onSuccess, onError) {
  * that spawned it.
  *
  * The can communicate back to the shell with execMsg.strout/strerr/reply
- * and any other reply method from lib.wa.Message.prototype.
+ * and any other reply method from lib.wam.Message.prototype.
  *
  * They can subscribe to input from the shell via execMsg.meta.onInput, which
  * is a lib.Event instance.
@@ -85,11 +85,11 @@ wash.Commands.on['echo'] = function(execMsg) {
 };
 
 /**
- * Launch an instance of lib.wa.Readline, yay!
+ * Launch an instance of lib.wash.Readline, yay!
  */
 wash.Commands.on['readline'] = function(execMsg) {
-  if (!lib.wa.Readline.history_) {
-    lib.wa.Readline.history_ =
+  if (!lib.wash.Readline.history_) {
+    lib.wash.Readline.history_ =
     ['',
      ('/mnt/okddffdblfhhnmhodogpojmfkjmhinfp/exe/nassh ' +
       '["rginda@rginda-620.mtv"]'),
@@ -99,7 +99,7 @@ wash.Commands.on['readline'] = function(execMsg) {
      ];
   }
 
-  lib.wa.Readline.main(this.app, execMsg);
+  lib.wash.Readline.main(this.app, execMsg);
 };
 
 /**
@@ -120,7 +120,7 @@ wash.Commands.on['ls'] = function(execMsg) {
   var argv = execMsg.arg.argv;
   var path = (argv && argv.path) || '/';
   if (!path) {
-    msg.closeError(lib.wa.error.MISSING_PARAM, 'path');
+    msg.closeError(lib.wam.error.MISSING_PARAM, 'path');
     return;
   }
 
@@ -153,7 +153,7 @@ wash.Commands.on['ls'] = function(execMsg) {
 
 /**
  * Mount the filesystem exported chrome app or extension that happens to be
- * listening with lib.wa.ChromePortTransport.
+ * listening with lib.wam.ChromePortTransport.
  */
 wash.Commands.on['mount.chrome'] = function(execMsg) {
   var argv = execMsg.arg.argv;
@@ -161,7 +161,7 @@ wash.Commands.on['mount.chrome'] = function(execMsg) {
   var remotePath = argv.remotePath || '/';
 
   if (!argv.extensionId) {
-    execMsg.closeError(lib.wa.error.MISSING_PARAM, 'extensionId');
+    execMsg.closeError(lib.wam.error.MISSING_PARAM, 'extensionId');
     return;
   }
 
@@ -173,14 +173,14 @@ wash.Commands.on['mount.chrome'] = function(execMsg) {
   // Called when the transport connects to something.
   var onConnect = function(transport) {
     if (!transport) {
-      execMsg.closeError(lib.wa.error.UNEXPECTED_ERROR,
+      execMsg.closeError(lib.wam.error.UNEXPECTED_ERROR,
                          'Error establishing transport to ' + argv.extensionId);
       return;
     }
 
     verbose('Transport established.');
 
-    var channel = new lib.wa.Channel(transport);
+    var channel = new lib.wam.Channel(transport);
     channel.name = 'mount';
 
     channel.offerHandshake
@@ -198,18 +198,18 @@ wash.Commands.on['mount.chrome'] = function(execMsg) {
              execMsg.closeOk(null);
            },
            function(code, reason) {
-             execMsg.closeError(lib.wa.error.UNEXPECTED_ERROR,
+             execMsg.closeError(lib.wam.error.UNEXPECTED_ERROR,
                                 'Mount failed: ' + code + ': ' + reason);
            });
      }.bind(this),
      function onHandshakeError(msg) {
        transport.disconnect();
-       execMsg.closeError(lib.wa.error.UNEXPECTED_ERROR,
+       execMsg.closeError(lib.wam.error.UNEXPECTED_ERROR,
                           'Handshake failed: ' + reason);
        return;
      });
   }.bind(this);
 
   verbose('Mounting chrome app/extension: ' + argv.extensionId);
-  lib.wa.ChromePortTransport.connect(argv.extensionId, onConnect);
+  lib.wam.ChromePortTransport.connect(argv.extensionId, onConnect);
 };

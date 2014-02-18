@@ -5,9 +5,7 @@
 @include hterm/concat/hterm_deps.concat
 @include hterm/concat/hterm.concat
 
-@include wash/concat/lib_wa_deps.concat
+@include lib_wam/concat/lib_wam_deps.concat
+@include lib_wam/concat/lib_wam_fs.concat
 
 @file libdot/js/lib_f_sequence.js
-
-@file wash/js/lib_hterm.js
-@file wash/js/lib_hterm_termcap.js
