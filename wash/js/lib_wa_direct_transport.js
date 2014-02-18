@@ -72,16 +72,17 @@ lib.wa.DirectTransport.createChannelPair = function(
 lib.wa.DirectTransport.prototype.service_ = function() {
   this.queueTimeout_ = null;
 
-  while (this.queue_.length) {
-    var ary = this.queue_.shift();
+  for (var i = 0; i < this.queue_.length; i++) {
+    var ary = this.queue_[i];
     var method = ary[0];
-    ary.shift();
-    this[method].apply(this, ary);
+    this[method].apply(this, ary[1]);
   }
+
+  this.queue_.length = 0;
 };
 
 lib.wa.DirectTransport.prototype.push_ = function(name, args) {
-  this.queue_.push([name, args]);
+  this.queue_.push([name, [args]]);
   if (!this.queueTimeout_)
     this.queueTimeout_ = setTimeout(this.service_.bind(this), 0);
 };

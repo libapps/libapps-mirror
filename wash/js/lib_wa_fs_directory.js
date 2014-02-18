@@ -106,13 +106,17 @@ lib.wa.fs.Directory.prototype.resolveName = function(name) {
  * Recurses at each leaf of the path.
  */
 lib.wa.fs.Directory.prototype.resolvePath = function(path, onSuccess, onError) {
+  var async = function(f, arg1, arg2) {
+    setTimeout(f.bind(null, arg1, arg2), 0);
+  };
+
   if (!onSuccess || !onError) {
     console.log(lib.f.getStack());
     throw new Error('Missing onSuccess or onError');
   }
 
   if (!path || path == '/')
-    return onSuccess(this);
+    return async(onSuccess, this);
 
   var ary = path.match(/^\/?([^/]+)(.*)/);
   if (!ary)
@@ -122,15 +126,15 @@ lib.wa.fs.Directory.prototype.resolvePath = function(path, onSuccess, onError) {
   var rest = ary[2];
 
   if (!this.entries_.hasOwnProperty(name))
-    return onError(lib.wa.error.FS_NOT_FOUND, name);
+    return async(onError, lib.wa.error.FS_NOT_FOUND, name);
 
   var entry = this.entries_[name];
 
   if (!rest)
-    return onSuccess(entry);
+    return async(onSuccess, entry);
 
   if (entry.type != lib.wa.fs.entryType.DIRECTORY)
-    return onError(lib.wa.error.FS_NOT_A_DIRECTORY, name);
+    return async(onError, lib.wa.error.FS_NOT_A_DIRECTORY, name);
 
   entry.resolvePath(rest, onSuccess, onError);
 };

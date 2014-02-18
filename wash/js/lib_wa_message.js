@@ -91,6 +91,10 @@ lib.wa.Message = function(channel) {
    * Event fired when this message is closed.
    */
   this.onClose = new lib.Event();
+
+  // Stack trace that lead to the message close, only set in the case of
+  // a double close.  For debugging use.
+  this.closeStack_ = null;
 };
 
 /**
@@ -587,7 +591,6 @@ lib.wa.Message.prototype.forceClose = function() {
   if (this.isOpen) {
     this.isOpen = false;
     this.onClose();
-    this.closeStack_ = [lib.f.getStack()];
   } else {
     this.closeStack_.push(lib.f.getStack());
     console.warn(this.channel.name + ': Double close for: ' + this.subject);

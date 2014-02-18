@@ -63,8 +63,6 @@ wash.TerminalWindow.prototype.onWindowCreated_ = function(contentNode) {
 
   this.document_.defaultView.addEventListener(
       'keydown', this.onKeyDown_.bind(this));
-  this.term.keyboard.keyboardElement_.addEventListener(
-      'keydown', this.onKeyDown_.bind(this));
 
   this.onInit();
 };

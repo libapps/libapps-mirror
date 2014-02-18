@@ -88,6 +88,17 @@ wash.Commands.on['echo'] = function(execMsg) {
  * Launch an instance of lib.wa.Readline, yay!
  */
 wash.Commands.on['readline'] = function(execMsg) {
+  if (!lib.wa.Readline.history_) {
+    lib.wa.Readline.history_ =
+    ['',
+     ('/mnt/okddffdblfhhnmhodogpojmfkjmhinfp/exe/nassh ' +
+      '["rginda@rginda-620.mtv"]'),
+     'ls {"path": "/mnt/okddffdblfhhnmhodogpojmfkjmhinfp"}',
+     'ls {"path": "/mnt"}',
+     'mount.chrome {"extensionId": "okddffdblfhhnmhodogpojmfkjmhinfp"}'
+     ];
+  }
+
   lib.wa.Readline.main(this.app, execMsg);
 };
 
