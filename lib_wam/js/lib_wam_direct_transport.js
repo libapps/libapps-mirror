@@ -36,7 +36,8 @@ lib.wam.DirectTransport = function(name) {
     }.bind(this));
 
   this.queue_ = [];
-  this.queueTimeout_ = null;
+  this.boundServiceMethod_ = this.service_.bind(this);
+  this.servicePromise_ = new Promise(function(resolve) { resolve() });
 };
 
 /**
@@ -70,8 +71,6 @@ lib.wam.DirectTransport.createChannelPair = function(
 };
 
 lib.wam.DirectTransport.prototype.service_ = function() {
-  this.queueTimeout_ = null;
-
   for (var i = 0; i < this.queue_.length; i++) {
     var ary = this.queue_[i];
     var method = ary[0];
@@ -83,8 +82,7 @@ lib.wam.DirectTransport.prototype.service_ = function() {
 
 lib.wam.DirectTransport.prototype.push_ = function(name, args) {
   this.queue_.push([name, [args]]);
-  if (!this.queueTimeout_)
-    this.queueTimeout_ = setTimeout(this.service_.bind(this), 0);
+  this.servicePromise_.then(this.boundServiceMethod_);
 };
 
 /**
