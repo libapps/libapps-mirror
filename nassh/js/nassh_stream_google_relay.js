@@ -155,7 +155,7 @@ nassh.Stream.GoogleRelay.prototype.requestError_ = function(isRead) {
   } else {
     this.backoffMS_ = this.backoffMS_ * 2 + 13;
     if (this.backoffMS_ > 10000)
-      this.backoffMS_ = 10000 - (x % 9000);
+      this.backoffMS_ = 10000 - (this.backoffMS_ % 9000);
   }
 
   var requestType = isRead ? 'read' : 'write';
