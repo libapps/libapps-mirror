@@ -590,8 +590,8 @@ lib.PreferenceManager.prototype.resetAll = function() {
 /**
  * Return true if two values should be considered not-equal.
  *
- * If both values are the same scalar type and compare equal, this function
- * returns true, otherwise return false.
+ * If both values are the same scalar type and compare equal this function
+ * returns false (no difference), otherwise return true.
  *
  * This is used in places where we want to check if a preference has changed.
  * Rather than take the time to compare complex values we just consider them
@@ -601,11 +601,13 @@ lib.PreferenceManager.prototype.resetAll = function() {
  * @param {*} b A value to compare.
  */
 lib.PreferenceManager.prototype.diff = function(a, b) {
-  // If the types are different, or the type doesn't match this regexp.
-  if ((typeof a) != (typeof b) || !(/^(number|string)$/.test(typeof a)))
+  // If the types are different, or the type is not a simple primitive one.
+  if ((typeof a) !== (typeof b) ||
+      !(/^(undefined|boolean|number|string)$/.test(typeof a))) {
     return true;
+  }
 
-  return !(/^(number|string)$/.test(typeof a) && a == b);
+  return a !== b;
 };
 
 /**
@@ -784,7 +786,11 @@ lib.PreferenceManager.prototype.onStorageChange_ = function(map) {
     var record = this.prefRecords_[name];
 
     var newValue = map[key].newValue;
-    if (this.diff(record.currentValue, newValue)) {
+    var currentValue = record.currentValue;
+    if (currentValue === record.DEFAULT_VALUE)
+      currentValue = (void 0);
+
+    if (this.diff(currentValue, newValue)) {
       if (typeof newValue == 'undefined') {
         record.currentValue = record.DEFAULT_VALUE;
       } else {

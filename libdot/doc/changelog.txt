@@ -1,3 +1,10 @@
+1.6, 2014-02-24, lib.PreferenceManager fixes.
+
+* diff() and onStorageChanged had issues dealing with boolean prefs
+  and the change-to-default-value case.  The upshot was that
+  set(name, true/false/DEFAULT_VALUE) caused the notifyChange to be called
+  twice.
+
 1.5, 2014-01-09, Switch from BlobBuilder to Blob constructor.
 
 * BlobBuilder has been deprecated.  Switch over to the blob constructor instead.
