@@ -1,3 +1,9 @@
+0.8.26.1, 2014-02-25, Fix google relay, Update to hterm 1.30, libdot 1.6
+
+* Fix undefined var in nassh_stream_google_relay.js.
+* Update to hterm 1.30 for scrollport speedups.
+* Update to libdot 1.6 for pref manager fixes.
+
 0.8.25.3, 2014-02-14, Update to hterm 1.29.
 
 * Update to hterm 1.29 for auto-copy fix-fix.
