@@ -572,19 +572,7 @@ at <http://goo.gl/RYHiK>.
   allow you to position the cursor with a mouse click, and use the wheel
   (or two-finger scroll) to scroll the buffer.
 
-  In vi, use ":set mouse=a" to enable mouse mode.  Vi's mouse mode is slightly
-  different from emacs in that it manages your text selection.  Some people
-  prefer this, others may go crazy.
-
-  A quick way to get your native selection back is to set the
-  'mouse-cell-motion-trick' to true.  This will make vi's mouse support
-  essentially the same as emacs.
-
-  With the cell motion trick enabled, you lose the ability to select more
-  than one screenful of text with the mouse.  Instead of using this trick,
-  you may want to script vi so that it sends the current selection to
-  Secure Shell to be copied to the system clipboard.  See the next question
-  for some more information on this.
+  In vi, use ":set mouse=a" to enable mouse mode.
 
 
 > Does hterm support the "OSC 52", aka "clipboard operations" sequence?
