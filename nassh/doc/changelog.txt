@@ -1,3 +1,7 @@
+0.8.26.3, 2014-03-06, Update to hterm 1.32.
+
+* Update to hterm 1.32 for zoom warning and mouse selection fixes.
+
 0.8.26.2, 2014-03-05, Update to hterm 1.30.
 
 * Update to hterm 1.30 for "scrolling speedups" revert (fixes scrolling selected
