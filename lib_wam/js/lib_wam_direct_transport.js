@@ -81,8 +81,10 @@ lib.wam.DirectTransport.prototype.service_ = function() {
 };
 
 lib.wam.DirectTransport.prototype.push_ = function(name, args) {
+  if (!this.queue_.length)
+    this.servicePromise_.then(this.boundServiceMethod_);
+
   this.queue_.push([name, [args]]);
-  this.servicePromise_.then(this.boundServiceMethod_);
 };
 
 /**

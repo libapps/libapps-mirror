@@ -136,7 +136,7 @@ lib.wam.Message.fromValue = function(channel, value) {
     msg.isOpen = true;
 
   msg.regarding = value.regarding || null;
-  msg.isFinalReply = !!value.isFinalReply;
+  msg.isFinalReply = (msg.name == 'ok' || msg.name == 'error');
   msg.status = lib.wam.Message.status.RECV;
 
   return msg;
@@ -271,9 +271,6 @@ lib.wam.Message.prototype.prepareSend = function() {
     value.subject = this.subject;
   }
 
-  if (this.isFinalReply)
-    value.isFinalReply = true;
-
   if (this.regarding)
     value.regarding = this.regarding;
 
@@ -363,6 +360,8 @@ lib.wam.Message.prototype.createReply_ = function(name, arg, opt_onReply) {
   msg.arg = arg;
   msg.regarding = this.subject;
 
+  msg.isFinalReply = (name == 'ok' || name == 'error');
+
   msg.onReply = opt_onReply;
 
   return msg;
@@ -387,7 +386,6 @@ lib.wam.Message.prototype.forward = function(inMsg) {
 
   outMsg.name = inMsg.name;
   outMsg.arg = inMsg.arg;
-  outMsg.isFinalReply = inMsg.isFinalReply;
 
   if (inMsg.subject)
     outMsg.onReply = inMsg.forward.bind(inMsg);
@@ -510,19 +508,6 @@ lib.wam.Message.prototype.strerr = function(arg, opt_onReply) {
 };
 
 /**
- * An error reply that does not preclude further replies.
- *
- * @param {*} arg The argument of the outbound 'error' message.
- * @param {function(lib.wam.Message)} opt_onReply Optional callback for replies.
- *
- * @return {lib.wam.Message} The outbound message.
- */
-lib.wam.Message.prototype.replyError = function(name, arg, opt_onReply) {
-  var msg = this.createReply_('error', {name: name, arg: arg}, opt_onReply);
-  return msg.send();
-};
-
-/**
  * Reply with a message named 'error', marked as the last reply.
  *
  * Used to indicate that something went wrong, and you're done replying.
@@ -536,7 +521,6 @@ lib.wam.Message.prototype.replyError = function(name, arg, opt_onReply) {
 lib.wam.Message.prototype.closeError = function(name, arg, opt_onReply) {
   if (this.channel.isConnected) {
     var msg = this.createReply_('error', {name: name, arg: arg}, opt_onReply);
-    msg.isFinalReply = true;
     msg.send();
   } else {
     console.log('closeError on disconnected channel.');
@@ -561,7 +545,6 @@ lib.wam.Message.prototype.closeError = function(name, arg, opt_onReply) {
 lib.wam.Message.prototype.closeOk = function(arg, opt_onReply) {
   if (this.channel.isConnected) {
     var msg = this.createReply_('ok', arg, opt_onReply);
-    msg.isFinalReply = true;
     msg.send();
   } else {
     // This happens when trying to clean up after unexpected disconnects.
