@@ -1,3 +1,12 @@
+0.8.26.5, 2014-03-25, Update to hterm 1.35, new options page.
+
+* Update to hterm 1.35 for enable-bold-as-bright preference.
+* Rewrite options page to be more Chrome like.
+
+0.8.26.4, 2014-03-14, Update to hterm 1.34.
+
+* Update to hterm 1.34 for user-css and ctrl-plus-minus-zero-zoom prefs.
+
 0.8.26.3, 2014-03-06, Update to hterm 1.32.
 
 * Update to hterm 1.32 for zoom warning and mouse selection fixes.

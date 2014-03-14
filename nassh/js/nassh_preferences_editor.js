@@ -27,7 +27,7 @@ window.onload = function() {
     term.installKeyboard();
 
     // Useful for console debugging.
-    window.term_ = prefsEditor;
+    window.term_ = term;
 
     // Set up labels.
     var eles = document.querySelectorAll('[i18n-content]');
@@ -111,6 +111,7 @@ nassh.PreferencesEditor.debounce = function(input, callback, opt_timeout) {
  * @param {string} profileId The profile name to read settings from.
  */
 nassh.PreferencesEditor.prototype.selectProfile = function(profileId) {
+  term_.setProfile(profileId);
   var prefsEditor = this;
   var prefs = new hterm.PreferenceManager(profileId);
   this.prefs_ = prefs;
