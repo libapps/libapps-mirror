@@ -6,37 +6,76 @@
     <script src='../js/nassh_preferences_editor.js'></script>
 
     <link rel='stylesheet' href='../css/nassh_box.css'></link>
-    <link rel='stylesheet' href='../css/nassh_connect_dialog.css'></link>
-
+    <link rel='stylesheet' href='../css/chrome-bootstrap.css'></link>
     <style>
-      body {
-        position: absolute;
-        padding: 0;
-        margin: 0;
-        height: 100%;
+      #terminal {
+        height: 70px;
+        float: right;
+        position: relative;
         width: 100%;
-        overflow: hidden;
+        margin: 0px;
+        padding: 0px;
       }
-
-      input {
-        font-size: smaller;
+      span.profile-ui {
+        display: inline-block;
+        width: 200px;
+        padding-right: 10px;
+        text-align: right;
+        vertical-align: middle;
+      }
+      span.profile-ui input[type='text'],
+      span.profile-ui input[type='number'],
+      span.profile-ui textarea {
+        width: 100%;
       }
     </style>
   </head>
 
-  <body>
+  <body class="chrome-bootstrap">
+    <div class="frame">
 
-    <div id='label_header' align='center'></div>
-    <span align='center'>
-      <div>
-        <span id='label_profile'></span>
-        <input type='text' id='profile'>
+      <div class="navigation">
+        <h1><a href="#" i18n-content='manifest.name'></a></h1>
+        <ul class="menu">
+          <li class="selected">
+            <a href="#options" i18n-content='PREFERENCES_HEADER'>Preferences</a>
+          </li>
+        </ul>
+        <ul>
+          <li>&nbsp;<img id='icon'/></li>
+        </ul>
       </div>
-      <div><input type='reset' id='reset'></div>
-      <div id='label_status'>&nbsp;</div>
-    </span>
 
-    <table id='settings' cellpadding='0' cellspacing='0' align='center'></table>
+      <div class="mainview view">
 
+        <div id="options" class="selected">
+          <header>
+            <h1 i18n-content='PREFERENCES_HEADER'></h1>
+            <div id='terminal'></div>
+          </header>
+
+          <div class="content">
+            <!-- Create padding to match the generated terminal in the header -->
+            <div id='terminal'></div>
+
+            <section>
+              <h3 i18n-content='TERMINAL_PROFILE_LABEL'></h3>
+              <input type='text' id='profile'/>
+              <button type='reset' id='reset'>Reset</button>
+              <span id='label_status'>&nbsp;</span>
+            </section>
+
+            <section>
+              <h3 i18n-content='PREFERENCES_HEADER'></h3>
+              <span id='settings'/>
+              <table id='fsettings' cellpadding='0' cellspacing='0'></table>
+            </section>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
   </body>
 </html>

@@ -12,14 +12,41 @@ window.onload = function() {
   function setupPreferences() {
     var prefsEditor = new nassh.PreferencesEditor();
 
+    var manifest = chrome.runtime.getManifest();
+
+    // Create a local hterm instance so people can see their changes live.
+    var term = new hterm.Terminal();
+    term.onTerminalReady = function() {
+        var io = term.io.push();
+        io.onVTKeystroke = io.print;
+        io.println('# ' + nassh.msg('WELCOME_VERSION',
+                                    [manifest.name, manifest.version]));
+        io.print('$ ./configure && make && make install');
+      };
+    term.decorate(document.querySelector('#terminal'));
+    term.installKeyboard();
+
     // Useful for console debugging.
     window.term_ = prefsEditor;
 
     // Set up labels.
-    document.getElementById('label_header').innerText =
-        nassh.msg('PREFERENCES_HEADER');
-    document.getElementById('label_profile').innerText =
-        nassh.msg('TERMINAL_PROFILE_LABEL');
+    var eles = document.querySelectorAll('[i18n-content]');
+    for (var i = 0; i < eles.length; ++i) {
+      var ele = eles[i];
+      var attr = ele.getAttribute('i18n-content');
+      var text;
+      if (attr.substr(0, 8) == 'manifest') {
+        text = manifest[attr.substr(9)];
+      } else {
+        text = nassh.msg(attr);
+      }
+      if (text !== undefined) {
+        ele.innerText = text;
+      }
+    }
+
+    // Set up icon on the left side.
+    document.getElementById('icon').src = '../' + manifest.icons['128'];
 
     // Set up reset button.
     document.getElementById('reset').onclick = function() {
@@ -208,42 +235,6 @@ nassh.PreferencesEditor.prototype.sync = function(input) {
       input.checked = pref;
       break;
   }
-
-  // Now update the page to give more immediate feedback as to what
-  // the preferences will look like in the terminal.
-  var style = window.document.body.style;
-  switch (key) {
-    case 'background-color':
-      style.backgroundColor = rgba;
-      break;
-    case 'background-image':
-      style.backgroundImage = input.value;
-      break;
-    case 'background-size':
-      style.backgroundSize = input.value;
-      break;
-    case 'background-position':
-      style.backgroundPosition = input.value;
-      break;
-    case 'enable-bold':
-      style.fontWeight = (input.checked && !input.indeterminate) ? 'bold' : '';
-      break;
-    case 'font-family':
-      style.fontFamily = input.value;
-      break;
-    case 'font-size':
-      style.fontSize = input.value + 'px';
-      break;
-    case 'font-smoothing':
-      style.webkitFontSmoothing = input.value;
-      break;
-    case 'foreground-color':
-      style.color = rgba;
-      break;
-    case 'scrollbar-visible':
-      style.overflowY = input.checked ? 'scroll' : 'auto';
-      break;
-  }
 };
 
 /**
@@ -291,11 +282,11 @@ nassh.PreferencesEditor.prototype.onInputChangeTristate = function(input) {
 nassh.PreferencesEditor.prototype.syncPage = function() {
   var prefsEditor = this;
 
-  var tbl = document.getElementById('settings');
+  var eles = document.getElementById('settings');
 
   // Clear out existing settings table.
-  while (tbl.hasChildNodes()) {
-    tbl.removeChild(tbl.firstChild);
+  while (eles.hasChildNodes()) {
+    eles.removeChild(eles.firstChild);
   }
 
   // Create the table of settings.
@@ -360,10 +351,29 @@ nassh.PreferencesEditor.prototype.syncPage = function() {
     input.onchange = onchange;
     input.oninput = oninput;
 
-    var row = tbl.insertRow(-1);
-    row.insertCell(0).innerText = key;
-    var cell = row.insertCell(1);
-    cell.appendChild(input);
+    // We want this element structure when we're done:
+    // <div class='text'>
+    //  <label>
+    //    <span class='profile-ui'>
+    //      <input ...>
+    //    </span>
+    //    <span>this-preference-setting-name</span>
+    //  </label>
+    // </div>
+    var div = document.createElement('div');
+    var label = document.createElement('label');
+    var span_input = document.createElement('span');
+    var span_text = document.createElement('span');
+
+    div.className = input.type;
+    span_input.className = 'profile-ui';
+    span_text.innerText = key;
+
+    div.appendChild(label);
+    span_input.appendChild(input);
+    label.appendChild(span_input);
+    label.appendChild(span_text);
+    eles.appendChild(div);
 
     if (input.type == 'color') {
       // Since the HTML5 color picker does not support alpha,
@@ -376,7 +386,7 @@ nassh.PreferencesEditor.prototype.syncPage = function() {
       ainput.name = 'settings';
       ainput.onchange = onchange;
       ainput.oninput = oninput;
-      cell.appendChild(ainput);
+      span_input.appendChild(ainput);
     }
 
     this.sync(input);
