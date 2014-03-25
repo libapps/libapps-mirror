@@ -10,8 +10,6 @@ lib.rtdep('lib.colors', 'hterm.PreferenceManager');
 // so we do it like this instead.
 window.onload = function() {
   function setupPreferences() {
-    var prefsEditor = new nassh.PreferencesEditor();
-
     var manifest = chrome.runtime.getManifest();
 
     // Create a local hterm instance so people can see their changes live.
@@ -28,6 +26,8 @@ window.onload = function() {
 
     // Useful for console debugging.
     window.term_ = term;
+
+    var prefsEditor = new nassh.PreferencesEditor();
 
     // Set up labels.
     var eles = document.querySelectorAll('[i18n-content]');
