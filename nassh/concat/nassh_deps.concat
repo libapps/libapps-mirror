@@ -4,3 +4,5 @@
 
 @include hterm/concat/hterm_deps.concat
 @include hterm/concat/hterm.concat
+
+libdot/js/lib_fs.js
