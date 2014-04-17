@@ -468,9 +468,18 @@ ssize_t recvfrom(int socket, void* buffer, size_t len, int flags,
                                                flags, addr, addrlen);
 }
 
+int socketpair(int domain, int type, int protocol, int socket_vector[2]) {
+  LOG("socketpair: %d %d %d [%d, %d]\n",
+      domain, type, protocol, socket_vector[0], socket_vector[1]);
+  return EACCES;
 }
 
-extern "C" void DoWrapSysCalls() {
+int clock_gettime(clockid_t clk_id, struct timespec* tp) {
+  LOG("clock_gettime: %d\n", (int)clk_id);
+  return EINVAL;
+}
+
+void DoWrapSysCalls() {
   LOG("DoWrapSysCalls...\n");
   DO_WRAP(open);
   DO_WRAP(close);
@@ -484,3 +493,5 @@ extern "C" void DoWrapSysCalls() {
   DO_WRAP(getdents);
   LOG("DoWrapSysCalls done\n");
 }
+
+}  // extern "C"

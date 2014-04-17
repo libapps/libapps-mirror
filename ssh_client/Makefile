@@ -45,11 +45,6 @@ override CFLAGS+=-pthread $(WARNINGS) -Iinclude -I$(NACL_SDK_ROOT)/include
 PNACL_OPT_ARG=--pnacl-driver-append-LD_FLAGS=--pnacl-driver-append-OPT_FLAGS
 PNACL_LDFLAGS_HACK:=$(PNACL_OPT_ARG)=--use-new-sroa=false
 
-# These flags are used to create a nexe compatible with Chrome 23 on ARM.
-# TODO(rginda): Remove this when Chrome 23 is out of circulation.
-PNACL_TRANSLATE_ARM23_FLAGS=--noirtshim \
-	--pnacl-driver-append-LLC_FLAGS_ARM=-nacl-use-m23-arm-abi
-
 OSNAME:=$(shell python $(NACL_SDK_ROOT)/tools/getos.py)
 TC_PATH:=$(abspath $(NACL_SDK_ROOT)/toolchain/$(OSNAME)_x86_glibc)
 CXX:=$(TC_PATH)/bin/i686-nacl-g++
@@ -70,7 +65,7 @@ THIS_MAKEFILE:=$(abspath $(lastword $(MAKEFILE_LIST)))
 all_glibc: $(PROJECT)_x86_32.nexe $(PROJECT)_x86_64.nexe
 
 all_newlib: $(PROJECT)_nl_x86_32.nexe $(PROJECT)_nl_x86_64.nexe \
-	$(PROJECT)_nl_arm.nexe $(PROJECT)_nl_arm_chrome23.nexe
+	$(PROJECT)_nl_arm.nexe
 
 # Define 32 bit compile and link rules for C++ sources
 x86_32_OBJS:=$(patsubst src/%.cc,output/%_32.o,$(CXX_SOURCES))
@@ -102,11 +97,6 @@ $(PROJECT)_nl.pexe : $(POBJS)
 
 $(PROJECT)_nl_arm.nexe : $(PROJECT)_nl.pexe
 	$(PNACL_TRANSLATE) $(PNACL_TRANSLATE_FLAGS) -o $@ $(PROJECT)_nl.pexe \
-		-arch arm
-
-$(PROJECT)_nl_arm_chrome23.nexe : $(PROJECT)_nl.pexe
-	$(PNACL_TRANSLATE) $(PNACL_TRANSLATE_FLAGS) -o $@ $(PROJECT)_nl.pexe \
-		$(PNACL_TRANSLATE_ARM23_FLAGS) \
 		-arch arm
 
 $(PROJECT)_nl_x86_32.nexe : $(PROJECT)_nl.pexe

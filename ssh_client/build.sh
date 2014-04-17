@@ -66,7 +66,7 @@ build() {
 
   pushd output
   if [[ !(-f libopenssh-$1.a) ]]; then
-    NACL_ARCH=$1 ../nacl-openssh-5.9p1.sh || exit 1
+    NACL_ARCH=$1 ../nacl-openssh.sh || exit 1
   fi
   popd
 }
@@ -92,33 +92,17 @@ else
 fi
 make clean && make -j "$BUILD_ARGS" $DEFAULT_TARGET || exit 1
 
-if [[ !(-f ../nassh/js/nassh_deps.concat.js) ]]; then
-  pushd ../nassh/
-  bin/mkdeps.sh || exit 1
-  popd
-fi
-
 cd output
 mkdir -p hterm/
 
-rm -rf ./hterm/{audio,css,html,images,js,_locales} ./hterm/manifest.json
-
-cp -rf ../../nassh/{css,html,images,js,_locales} ./hterm || exit 1
-cp -rf ../../nassh/manifest.json ./hterm/manifest.json || exit 1
-
 if [[ $PNACL == 1 ]]; then
-  rm -rf hterm/plugin/pnacl hterm/plugin/arm_23
+  rm -rf hterm/plugin/pnacl
   mkdir -p hterm/plugin/pnacl
-  mkdir -p hterm/plugin/arm_23
 
   cp -f ../ssh_client_newlib.nmf hterm/plugin/pnacl/ssh_client.nmf || exit 1
   cp -f ssh_client_nl_x86_32.nexe hterm/plugin/pnacl/ || exit 1
   cp -f ssh_client_nl_x86_64.nexe hterm/plugin/pnacl/ || exit 1
   cp -f ssh_client_nl_arm.nexe hterm/plugin/pnacl/ || exit 1
-
-  cp -f ../ssh_client_newlib_arm_chrome23.nmf \
-    hterm/plugin/arm_23/ssh_client.nmf || exit 1
-  cp -f ssh_client_nl_arm_chrome23.nexe hterm/plugin/arm_23 || exit 1
 else
   rm -rf hterm/plugin/nacl
   mkdir -p hterm/plugin/nacl

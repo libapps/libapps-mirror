@@ -4,16 +4,16 @@
 # found in the LICENSE file.
 #
 
-# nacl-openssh-5.9p1.sh
+# nacl-openssh.sh
 #
-# usage: nacl-openssh-5.9p1.sh
+# usage: nacl-openssh.sh
 #
 # download, patch and build openssh for Native Client
 #
 
 set -x
 
-readonly PACKAGE_NAME=openssh-5.9p1
+readonly PACKAGE_NAME=openssh-6.6p1
 readonly OPENSSH_MIRROR=http://ftp5.usa.openbsd.org/pub/OpenBSD/OpenSSH/portable
 readonly ROOT=$PWD/..
 readonly PATCH_FILE=${ROOT}/${PACKAGE_NAME}.patch
@@ -36,12 +36,14 @@ fi
 tar xvzf ${PACKAGE_NAME}.tar.gz
 
 cd $PACKAGE_NAME
-patch -p0 -i $PATCH_FILE || exit 1
+patch -p2 -i $PATCH_FILE || exit 1
 
 if [ ${NACL_ARCH} = "pnacl" ] ; then
   export EXTRA_CFLAGS="-DHAVE_SETSID -DHAVE_GETNAMEINFO -DHAVE_GETADDRINFO \
-                       -DHAVE_GETCWD -I${NACLPORTS_INCLUDE}/glibc-compat"
-  export EXTRA_CONFIGURE_FLAGS="--without-stackprotect"
+                       -DHAVE_GETCWD -DHAVE_STATVFS -DHAVE_FSTATVFS \
+                       -DHAVE_ENDGRENT -DHAVE_FD_MASK -include sys/cdefs.h \
+                       -I${NACLPORTS_INCLUDE}/glibc-compat"
+  export EXTRA_CONFIGURE_FLAGS="--without-stackprotect --without-hardening"
   export EXTRA_LIBS="-lglibc-compat"
 else
   export EXTRA_CFLAGS=

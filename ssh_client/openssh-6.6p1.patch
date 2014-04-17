@@ -1,0 +1,64 @@
+diff -r -u output/openssh-6.6p1.bak/channels.h output/openssh-6.6p1/channels.h
+--- output/openssh-6.6p1.bak/channels.h	2014-04-16 13:14:43.674306588 -0700
++++ output/openssh-6.6p1/channels.h	2014-04-16 15:52:14.208761134 -0700
+@@ -168,9 +168,9 @@
+ 
+ /* default window/packet sizes for tcp/x11-fwd-channel */
+ #define CHAN_SES_PACKET_DEFAULT	(32*1024)
+-#define CHAN_SES_WINDOW_DEFAULT	(64*CHAN_SES_PACKET_DEFAULT)
++#define CHAN_SES_WINDOW_DEFAULT	(4*CHAN_SES_PACKET_DEFAULT)
+ #define CHAN_TCP_PACKET_DEFAULT	(32*1024)
+-#define CHAN_TCP_WINDOW_DEFAULT	(64*CHAN_TCP_PACKET_DEFAULT)
++#define CHAN_TCP_WINDOW_DEFAULT	(4*CHAN_TCP_PACKET_DEFAULT)
+ #define CHAN_X11_PACKET_DEFAULT	(16*1024)
+ #define CHAN_X11_WINDOW_DEFAULT	(4*CHAN_X11_PACKET_DEFAULT)
+ 
+diff -r -u output/openssh-6.6p1.bak/config.sub output/openssh-6.6p1/config.sub
+--- output/openssh-6.6p1.bak/config.sub	2014-04-16 13:14:43.674306588 -0700
++++ output/openssh-6.6p1/config.sub	2014-04-16 15:52:14.208761134 -0700
+@@ -1303,6 +1303,9 @@
+ 	pmac | pmac-mpw)
+ 		basic_machine=powerpc-apple
+ 		;;
++  nacl)
++    basic_machine=i686-pc
++    ;;
+ 	*-unknown)
+ 		# Make sure to match an already-canonicalized machine name.
+ 		;;
+diff -r -u output/openssh-6.6p1.bak/ge25519.h output/openssh-6.6p1/ge25519.h
+--- output/openssh-6.6p1.bak/ge25519.h	2014-04-16 13:14:43.664306382 -0700
++++ output/openssh-6.6p1/ge25519.h	2014-04-16 16:03:39.792894863 -0700
+@@ -28,7 +28,7 @@
+   fe25519 t;
+ } ge25519;
+ 
+-const ge25519 ge25519_base;
++extern const ge25519 ge25519_base;
+ 
+ int ge25519_unpackneg_vartime(ge25519 *r, const unsigned char p[32]);
+ 
+diff -r -u output/openssh-6.6p1.bak/ssh.c output/openssh-6.6p1/ssh.c
+--- output/openssh-6.6p1.bak/ssh.c	2014-04-16 13:14:43.664306382 -0700
++++ output/openssh-6.6p1/ssh.c	2014-04-16 15:52:14.208761134 -0700
+@@ -409,7 +409,7 @@
+  * Main program for the ssh client.
+  */
+ int
+-main(int ac, char **av)
++ssh_main(int ac, char **av)
+ {
+ 	int i, r, opt, exit_status, use_syslog;
+ 	char *p, *cp, *line, *argv0, buf[MAXPATHLEN], *host_arg, *logfile;
+diff -r -u output/openssh-6.6p1.bak/umac.c output/openssh-6.6p1/umac.c
+--- output/openssh-6.6p1.bak/umac.c	2014-04-16 13:14:43.674306588 -0700
++++ output/openssh-6.6p1/umac.c	2014-04-16 15:52:14.208761134 -0700
+@@ -1190,7 +1190,7 @@
+     uhash_ctx hash;          /* Hash function for message compression    */
+     pdf_ctx pdf;             /* PDF for hashed output                    */
+     void *free_ptr;          /* Address to free this struct via          */
+-} umac_ctx;
++};
+ 
+ /* ---------------------------------------------------------------------- */
+ 
