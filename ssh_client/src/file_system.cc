@@ -30,6 +30,12 @@ extern "C" void DoWrapSysCalls();
 static const int64_t kMicrosecondsPerSecond = 1000 * 1000;
 static const int64_t kNanosecondsPerMicrosecond = 1000;
 
+// Magic value; keep in sync with //secureshell/js/nassh_command_instance.js
+static const char kSshAgentFakeHostname[] = "./ssh-agent";
+
+// Magic value; keep in sync with //ssh_client/openssh/authfd.c
+static const uint32_t kSshAgentFakeIP = 0x7F010203;
+
 FileStream* const FileSystem::kBadFileStream = (FileStream*)-1;
 FileSystem* FileSystem::file_system_ = NULL;
 
@@ -93,6 +99,10 @@ FileSystem::FileSystem(pp::Instance* instance, OutputInterface* out)
 
   // Add localhost 127.0.0.1
   AddHostAddress("localhost", 0x7F000001);
+
+  // Add entry for ssh-agent.
+  // NaCl code uses this fake address to reach out to ssh-agent.
+  AddHostAddress(kSshAgentFakeHostname, kSshAgentFakeIP);
 
   DoWrapSysCalls();
 }
@@ -784,6 +794,12 @@ int FileSystem::connect(int fd, const sockaddr* serv_addr, socklen_t addrlen) {
     return -1;
   }
   LOG("FileSystem::connect: [%s] port %d\n", hostname.c_str(), port);
+
+  if (hostname == kSshAgentFakeHostname && port == 0) {
+    // The NaCl code wants to reach ssh-agent.
+    // Route this connect to our javascript layer.
+    use_js_socket_ = true;
+  }
 
   FileStream* stream = NULL;
   if (use_js_socket_) {

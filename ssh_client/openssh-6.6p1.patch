@@ -62,3 +62,48 @@ diff -r -u output/openssh-6.6p1.bak/umac.c output/openssh-6.6p1/umac.c
  
  /* ---------------------------------------------------------------------- */
  
+diff -r -u output/openssh-6.6p1.bak/authfd.c output/openssh-6.6p1/authfd.c
+--- output/openssh-6.6p1.bak/authfd.c	2014-04-17 14:18:49.185190725 -0700
++++ output/openssh-6.6p1/authfd.c	2014-04-17 14:37:33.155632179 -0700
+@@ -66,6 +66,9 @@
+ 
+ static int agent_present = 0;
+ 
++/* Magic value. Keep in sync with //ssh_client/src/file_system.cc */
++static const int kSshAgentFakeIP = 0x7F010203;
++
+ /* helper */
+ int	decode_reply(int type);
+ 
+@@ -96,17 +99,17 @@
+ {
+ 	const char *authsocket;
+ 	int sock;
+-	struct sockaddr_un sunaddr;
++	struct sockaddr_in sinaddr;
+ 
+ 	authsocket = getenv(SSH_AUTHSOCKET_ENV_NAME);
+ 	if (!authsocket)
+ 		return -1;
+ 
+-	memset(&sunaddr, 0, sizeof(sunaddr));
+-	sunaddr.sun_family = AF_UNIX;
+-	strlcpy(sunaddr.sun_path, authsocket, sizeof(sunaddr.sun_path));
++	memset(&sinaddr, 0, sizeof(sinaddr));
++	sinaddr.sin_family = AF_INET;
++	sinaddr.sin_addr.s_addr = htonl(kSshAgentFakeIP);
+ 
+-	sock = socket(AF_UNIX, SOCK_STREAM, 0);
++	sock = socket(AF_INET, SOCK_STREAM, 0);
+ 	if (sock < 0)
+ 		return -1;
+ 
+@@ -115,7 +118,7 @@
+ 		close(sock);
+ 		return -1;
+ 	}
+-	if (connect(sock, (struct sockaddr *)&sunaddr, sizeof sunaddr) < 0) {
++	if (connect(sock, (struct sockaddr *)&sinaddr, sizeof sinaddr) < 0) {
+ 		close(sock);
+ 		return -1;
+ 	}
