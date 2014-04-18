@@ -479,6 +479,28 @@ int clock_gettime(clockid_t clk_id, struct timespec* tp) {
   return EINVAL;
 }
 
+speed_t cfgetospeed(const struct termios *t)
+{
+  return t->c_ospeed;
+}
+
+speed_t cfgetispeed(const struct termios *t)
+{
+  return t->c_ispeed;
+}
+
+int cfsetospeed(struct termios *t, speed_t speed)
+{
+  t->c_ospeed = speed;
+  return 0;
+}
+
+int cfsetispeed(struct termios *t, speed_t speed)
+{
+  t->c_ispeed = speed;
+  return 0;
+}
+
 void DoWrapSysCalls() {
   LOG("DoWrapSysCalls...\n");
   DO_WRAP(open);

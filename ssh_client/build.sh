@@ -8,8 +8,8 @@ set -x
 DEBUG=0
 PNACL=1
 
-NACLSDK_VERSION=26.0.1410.41
-NACLPORTS_REVISION=718
+NACLSDK_VERSION=35.0.1916.54
+NACLPORTS_REVISION=1238
 
 CDS_ROOT="https://commondatastorage.googleapis.com"
 SDK_ROOT="$CDS_ROOT/nativeclient-mirror/nacl/nacl_sdk"
@@ -61,22 +61,21 @@ fi
 
 build() {
   pushd $NACL_PORTS/src
-  NACL_ARCH=$1 make openssl zlib jsoncpp || exit 1
+  NACL_ARCH=$1 TOOLCHAIN=$2 make openssl zlib jsoncpp || exit 1
   popd
 
   pushd output
   if [[ !(-f libopenssh-$1.a) ]]; then
-    NACL_ARCH=$1 ../nacl-openssh.sh || exit 1
+    NACL_ARCH=$1 TOOLCHAIN=$2 ../nacl-openssh.sh || exit 1
   fi
   popd
 }
 
 if [[ $PNACL == 1 ]]; then
-  build "pnacl"
+  build "pnacl" "pnacl"
 else
-  export NACL_GLIBC=1
-  build "i686"
-  build "x86_64"
+  build "i686" "glibc"
+  build "x86_64" "glibc"
 fi
 
 if [[ $DEBUG == 1 ]]; then
@@ -121,14 +120,29 @@ else
 
   mkdir hterm/plugin/nacl/lib32
   mkdir hterm/plugin/nacl/lib64
-  LIBS="runnable-ld.so libppapi_cpp.so libppapi_cpp.so libstdc++.so.6 \
-        libgcc_s.so.1 libpthread.so.* libresolv.so.* libdl.so.* libnsl.so.* \
-        libm.so.* libc.so.*"
+  LIBS="runnable-ld.so libstdc++.so.6 libgcc_s.so.1 libpthread.so.* \
+        libresolv.so.* libdl.so.* libnsl.so.* libm.so.* libc.so.*"
   for i in $LIBS; do
     cp -f $NACL_SDK_ROOT/toolchain/linux_x86_glibc/x86_64-nacl/lib32/$i \
-        hterm/plugin/nacl/lib32/
+        hterm/plugin/nacl/lib32/ || exit 1
     cp -f $NACL_SDK_ROOT/toolchain/linux_x86_glibc/x86_64-nacl/lib64/$i \
-        hterm/plugin/nacl/lib64/
+        hterm/plugin/nacl/lib64/ || exit 1
+  done
+
+  LIBS="libppapi_cpp.so libppapi_cpp_private.so libjsoncpp.so"
+  for i in $LIBS; do
+    cp -f $NACL_SDK_ROOT/lib/glibc_x86_32/Release/$i \
+        hterm/plugin/nacl/lib32/ || exit 1
+    cp -f $NACL_SDK_ROOT/lib/glibc_x86_64/Release/$i \
+        hterm/plugin/nacl/lib64/ || exit 1
+  done
+
+  LIBS="libz.so.1 libcrypto.so.1.0.0"
+  for i in $LIBS; do
+    cp -f $NACL_SDK_ROOT/toolchain/linux_x86_glibc/i686-nacl/usr/lib/$i \
+        hterm/plugin/nacl/lib32/ || exit 1
+    cp -f $NACL_SDK_ROOT/toolchain/linux_x86_glibc/x86_64-nacl/usr/lib/$i \
+        hterm/plugin/nacl/lib64/ || exit 1
   done
 fi
 

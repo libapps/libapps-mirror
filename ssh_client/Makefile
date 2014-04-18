@@ -32,30 +32,27 @@ CXX_HEADERS:=\
 	src/udp_socket.h
 
 # Project Build flags
-override LDFLAGS+=-lppapi_cpp -lppapi -lutil -lcrypto -lz -lresolv -ldl -lnsl \
-	-ljsoncpp -Loutput
+override LDFLAGS+=-lppapi_cpp -lppapi -lppapi_cpp_private -lutil -lcrypto -lz \
+        -lresolv -ldl -lnsl -ljsoncpp -Loutput
 override WARNINGS+=-Wno-long-long -Wall -Wswitch-enum -Werror
 override CXXFLAGS+=-pthread -std=gnu++0x $(WARNINGS) -Iinclude \
         -I$(NACL_SDK_ROOT)/include
 override CFLAGS+=-pthread $(WARNINGS) -Iinclude -I$(NACL_SDK_ROOT)/include
 
-# This monstrous flag is needed to work around an issue with the current
-# toolchain.  See http://code.google.com/p/nativeclient/issues/detail?id=3171
-# TODO(rginda): Remove this when the bug is fixed.
-PNACL_OPT_ARG=--pnacl-driver-append-LD_FLAGS=--pnacl-driver-append-OPT_FLAGS
-PNACL_LDFLAGS_HACK:=$(PNACL_OPT_ARG)=--use-new-sroa=false
-
 OSNAME:=$(shell python $(NACL_SDK_ROOT)/tools/getos.py)
 TC_PATH:=$(abspath $(NACL_SDK_ROOT)/toolchain/$(OSNAME)_x86_glibc)
 CXX:=$(TC_PATH)/bin/i686-nacl-g++
-PNACL_TC_ROOT:=$(NACL_SDK_ROOT)/toolchain/$(OSNAME)_x86_pnacl/newlib/
+PNACL_TC_ROOT:=$(NACL_SDK_ROOT)/toolchain/$(OSNAME)_pnacl
 PNACL_CXX:=$(PNACL_TC_ROOT)/bin/pnacl-clang++
 PNACL_CC:=$(PNACL_TC_ROOT)/bin/pnacl-clang
 PNACL_AR:=$(PNACL_TC_ROOT)/bin/pnacl-ar
 PNACL_TRANSLATE=$(PNACL_TC_ROOT)/bin/pnacl-translate
-PNACL_TRANSLATE_FLAGS=-fdata-sections -ffunction-sections --gc-sections
-PNACL_LDFLAGS:=-lppapi_cpp -lppapi -lcrypto -lz -ljsoncpp -Loutput \
-	$(PNACL_LDFLAGS_HACK)
+# --pnacl-disable-abi-check/--allow-llvm-bitcode-input were added to workaround
+# https://code.google.com/p/nativeclient/issues/detail?id=3714
+PNACL_TRANSLATE_FLAGS=-fdata-sections -ffunction-sections --gc-sections \
+        --allow-llvm-bitcode-input
+PNACL_LDFLAGS:=-lppapi_cpp -lppapi -lcrypto -lppapi_cpp_private -lz -ljsoncpp \
+        -Loutput -L$(NACL_SDK_ROOT)/lib/pnacl/Release --pnacl-disable-abi-check
 
 COMPAT_INC:=-I$(PNACL_TC_ROOT)/usr/include/glibc-compat
 PNACL_CXXFLAGS:=$(CXXFLAGS) -DUSE_NEWLIB $(COMPAT_INC)
@@ -74,6 +71,7 @@ $(x86_32_OBJS) : output/%_32.o : src/%.cc $(THIS_MAKE) $(CXX_HEADERS)
 
 $(PROJECT)_x86_32.nexe : $(x86_32_OBJS)
 	$(CXX) -o $@ $^ -m32 -lopenssh-i686 -lssh-i686 -lopenbsd-compat-i686 \
+		-L$(NACL_SDK_ROOT)/lib/glibc_x86_32/Release \
 		$(CXXFLAGS) $(LDFLAGS)
 
 # Define 64 bit compile and link rules for C++ sources
@@ -83,6 +81,7 @@ $(x86_64_OBJS) : output/%_64.o : src/%.cc $(THIS_MAKE)
 
 $(PROJECT)_x86_64.nexe : $(x86_64_OBJS)
 	$(CXX) -o $@ $^ -m64 -lopenssh-x86_64 -lssh-x86_64 \
+		-L$(NACL_SDK_ROOT)/lib/glibc_x86_64/Release \
 		-lopenbsd-compat-x86_64 $(CXXFLAGS) $(LDFLAGS)
 
 # Define PNaCl compile and link rules for C++ sources

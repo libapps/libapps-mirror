@@ -12,7 +12,7 @@
 #include <sys/socket.h>
 #include <sys/time.h>
 
-#include "irt/irt.h"
+#include "irt.h"
 #include "ppapi/cpp/file_ref.h"
 #include "ppapi/cpp/private/net_address_private.h"
 
@@ -471,14 +471,14 @@ addrinfo* FileSystem::CreateAddrInfo(const PP_NetAddress_Private& netaddr,
 
   PP_NetAddressFamily_Private family =
       pp::NetAddressPrivate::GetFamily(netaddr);
-  if (family == PP_NETADDRESSFAMILY_IPV4)
+  if (family == PP_NETADDRESSFAMILY_PRIVATE_IPV4)
     ai->ai_addr->sa_family = ai->ai_family = AF_INET;
-  else if (family == PP_NETADDRESSFAMILY_IPV6)
+  else if (family == PP_NETADDRESSFAMILY_PRIVATE_IPV6)
     ai->ai_addr->sa_family = ai->ai_family = AF_INET6;
 
   ai->ai_canonname = strdup(name);
   addr->sin6_port = pp::NetAddressPrivate::GetPort(netaddr);
-  if (family == PP_NETADDRESSFAMILY_IPV6) {
+  if (family == PP_NETADDRESSFAMILY_PRIVATE_IPV6) {
     pp::NetAddressPrivate::GetAddress(
         netaddr, &addr->sin6_addr, sizeof(in6_addr));
   } else {
@@ -652,14 +652,14 @@ void FileSystem::Resolve(int32_t result, GetAddrInfoParams* params,
 
   // In case of JS socket don't use local host resolver.
   if (!use_js_socket_ && pp::HostResolverPrivate::IsAvailable()) {
-    PP_HostResolver_Private_Hint hint = { PP_NETADDRESSFAMILY_UNSPECIFIED, 0 };
+    PP_HostResolver_Private_Hint hint = { PP_NETADDRESSFAMILY_PRIVATE_UNSPECIFIED, 0 };
     if (hints) {
       if (hints->ai_family == AF_INET)
-        hint.family = PP_NETADDRESSFAMILY_IPV4;
+        hint.family = PP_NETADDRESSFAMILY_PRIVATE_IPV4;
       else if (hints->ai_family == AF_INET6)
-        hint.family = PP_NETADDRESSFAMILY_IPV6;
+        hint.family = PP_NETADDRESSFAMILY_PRIVATE_IPV6;
       if (hints->ai_flags & AI_CANONNAME)
-        hint.flags = PP_HOST_RESOLVER_FLAGS_CANONNAME;
+        hint.flags = PP_HOST_RESOLVER_PRIVATE_FLAGS_CANONNAME;
     }
 
     assert(host_resolver_ == NULL);
@@ -1010,9 +1010,8 @@ void FileSystem::MakeDirectory(int32_t result, const char* pathname,
                                int32_t* pres) {
   Mutex::Lock lock(mutex_);
   pp::FileRef* file_ref = new pp::FileRef(*ppfs_, pathname);
-  result = file_ref->MakeDirectoryIncludingAncestors(
-      factory_.NewCallback(&FileSystem::OnMakeDirectory,
-                                   file_ref, pres));
+  result = file_ref->MakeDirectory(PP_MAKEDIRECTORYFLAG_WITH_ANCESTORS,
+      factory_.NewCallback(&FileSystem::OnMakeDirectory, file_ref, pres));
   if (result != PP_OK_COMPLETIONPENDING) {
     delete file_ref;
     *pres = result;
@@ -1073,7 +1072,7 @@ bool FileSystem::CreateNetAddress(const sockaddr* saddr, socklen_t addrlen,
 bool FileSystem::CreateSocketAddress(const PP_NetAddress_Private& addr,
                                      sockaddr* saddr, socklen_t* addrlen) {
   PP_NetAddressFamily_Private family = pp::NetAddressPrivate::GetFamily(addr);
-  if (family == PP_NETADDRESSFAMILY_IPV4) {
+  if (family == PP_NETADDRESSFAMILY_PRIVATE_IPV4) {
     *addrlen = sizeof(sockaddr_in);
     sockaddr_in* sin4 = reinterpret_cast<sockaddr_in*>(saddr);
     sin4->sin_family = AF_INET;
@@ -1081,7 +1080,7 @@ bool FileSystem::CreateSocketAddress(const PP_NetAddress_Private& addr,
     pp::NetAddressPrivate::GetAddress(addr, &sin4->sin_addr,
                                       sizeof(sin4->sin_addr));
     return true;
-  } else if (family == PP_NETADDRESSFAMILY_IPV6) {
+  } else if (family == PP_NETADDRESSFAMILY_PRIVATE_IPV6) {
     *addrlen = sizeof(sockaddr_in6);
     sockaddr_in6* sin6 = reinterpret_cast<sockaddr_in6*>(saddr);
     sin6->sin6_family = AF_INET6;

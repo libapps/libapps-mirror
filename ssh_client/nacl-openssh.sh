@@ -18,12 +18,24 @@ readonly OPENSSH_MIRROR=http://ftp5.usa.openbsd.org/pub/OpenBSD/OpenSSH/portable
 readonly ROOT=$PWD/..
 readonly PATCH_FILE=${ROOT}/${PACKAGE_NAME}.patch
 
-source $NACL_PORTS/src/build_tools/common.sh
+source $NACL_PORTS/src/build_tools/nacl_env.sh
 
 export CC=${NACLCC}
 export CXX=${NACLCXX}
 export AR=${NACLAR}
 export RANLIB=${NACLRANLIB}
+
+if [ "${NACL_ARCH}" = "pnacl" ]; then
+  readonly NACL_TOOLCHAIN_INSTALL=${NACL_TOOLCHAIN_ROOT}
+else
+  readonly NACL_TOOLCHAIN_INSTALL=${NACL_TOOLCHAIN_ROOT}/${NACL_CROSS_PREFIX}
+fi
+
+readonly NACLPORTS_PREFIX=${NACL_TOOLCHAIN_INSTALL}/usr
+readonly NACLPORTS_INCLUDE=${NACLPORTS_PREFIX}/include
+readonly NACLPORTS_LIBDIR=${NACLPORTS_PREFIX}/lib
+readonly NACLPORTS_BIN=${NACLPORTS_PREFIX}/bin
+
 export PKG_CONFIG_LIBDIR=${NACLPORTS_LIBDIR}
 export PKG_CONFIG_PATH=${PKG_CONFIG_LIBDIR}/pkgconfig
 export PATH=${NACL_BIN_PATH}:${PATH};
@@ -45,8 +57,11 @@ if [ ${NACL_ARCH} = "pnacl" ] ; then
                        -I${NACLPORTS_INCLUDE}/glibc-compat"
   export EXTRA_CONFIGURE_FLAGS="--without-stackprotect --without-hardening"
   export EXTRA_LIBS="-lglibc-compat"
+  export ac_cv_func_inet_aton=no
+  export ac_cv_func_inet_ntoa=no
+  export ac_cv_func_inet_ntop=no
 else
-  export EXTRA_CFLAGS=
+  export EXTRA_CFLAGS=-I${NACLPORTS_INCLUDE}
   export EXTRA_CONFIGURE_FLAGS=
   export EXTRA_LIBS=
 fi
@@ -57,7 +72,7 @@ fi
     ${EXTRA_CONFIGURE_FLAGS}  || exit 1
 
 # will fail on link stage due to missing reference to main - it is expected
-make ssh || echo "Ignore error."
+make ssh${NACL_EXEEXT} || echo "Ignore error."
 $AR rcs ../libopenssh-${NACL_ARCH}.a \
     ssh.o readconf.o clientloop.o sshtty.o sshconnect.o sshconnect1.o \
     sshconnect2.o mux.o roaming_common.o roaming_client.o
