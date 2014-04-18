@@ -43,6 +43,9 @@ nassh.CommandInstance = function(argv) {
   // An HTML5 DirectoryEntry for /.ssh/.
   this.sshDirectoryEntry_ = null;
 
+  // Application ID of auth agent.
+  this.authAgentAppID_ = null;
+
   // Root preference manager.
   this.prefs_ = new nassh.PreferenceManager();
 
@@ -379,7 +382,8 @@ nassh.CommandInstance.prototype.connectToProfile = function(
       relayOptions: prefs.get('relay-options'),
       identity: prefs.get('identity'),
       argstr: prefs.get('argstr'),
-      terminalProfile: prefs.get('terminal-profile')
+      terminalProfile: prefs.get('terminal-profile'),
+      authAgentAppID: prefs.get('auth-agent-appid')
     });
   }.bind(this);
 
@@ -469,6 +473,8 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     }
   }
 
+  this.authAgentAppID_ = params.authAgentAppID;
+
   this.io.setTerminalProfile(params.terminalProfile || 'default');
 
   // TODO(rginda): The "port" parameter was removed from the CONNECTING message
@@ -487,6 +493,9 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   argv.useJsSocket = !!this.relay_;
   argv.environment = this.environment_;
   argv.writeWindow = 8 * 1024;
+  if (params.authAgentAppID) {
+    argv.authAgentAppID = params.authAgentAppID;
+  }
 
   argv.arguments = ['-C'];  // enable compression
 
@@ -716,17 +725,29 @@ nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
 
 nassh.CommandInstance.prototype.onPlugin_.openSocket = function(
     fd, host, port) {
-  if (!this.relay_) {
-    this.sendToPlugin_('onOpenSocket', [fd, false]);
-    return;
-  }
-
   var self = this;
-  var stream = this.relay_.openSocket(
-      fd, host, port,
-      function onOpen(success) {
-        self.sendToPlugin_('onOpenSocket', [fd, success]);
-      });
+  var stream = null;
+
+  if (port == 0 && host == this.authAgentAppID_) {
+    // Request for auth-agent connection.
+    stream = nassh.Stream.openStream(nassh.Stream.SSHAgentRelay,
+        fd, {authAgentAppID: this.authAgentAppID_},
+        function onOpen(success) {
+          self.sendToPlugin_('onOpenSocket', [fd, success]);
+        });
+  } else {
+    // Regular relay connection request.
+    if (!this.relay_) {
+      this.sendToPlugin_('onOpenSocket', [fd, false]);
+      return;
+    }
+
+    stream = this.relay_.openSocket(
+        fd, host, port,
+        function onOpen(success) {
+          self.sendToPlugin_('onOpenSocket', [fd, success]);
+        });
+  }
 
   stream.onDataAvailable = function(data) {
     self.sendToPlugin_('onRead', [fd, data]);

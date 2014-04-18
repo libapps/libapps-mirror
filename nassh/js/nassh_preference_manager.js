@@ -101,6 +101,11 @@ nassh.ProfilePreferenceManager = function(parent, id) {
      * The terminal profile to use for this connection.
      */
     ['terminal-profile', ''],
+
+    /**
+     * The appid to which to pass auth-agent requests.
+     */
+    ['auth-agent-appid', null],
    ]);
 };
 
