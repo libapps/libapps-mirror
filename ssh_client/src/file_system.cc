@@ -30,9 +30,6 @@ extern "C" void DoWrapSysCalls();
 static const int64_t kMicrosecondsPerSecond = 1000 * 1000;
 static const int64_t kNanosecondsPerMicrosecond = 1000;
 
-// Magic value; keep in sync with //secureshell/js/nassh_command_instance.js
-static const char kSshAgentFakeHostname[] = "./ssh-agent";
-
 // Magic value; keep in sync with //ssh_client/openssh/authfd.c
 static const uint32_t kSshAgentFakeIP = 0x7F010203;
 
@@ -99,10 +96,6 @@ FileSystem::FileSystem(pp::Instance* instance, OutputInterface* out)
 
   // Add localhost 127.0.0.1
   AddHostAddress("localhost", 0x7F000001);
-
-  // Add entry for ssh-agent.
-  // NaCl code uses this fake address to reach out to ssh-agent.
-  AddHostAddress(kSshAgentFakeHostname, kSshAgentFakeIP);
 
   DoWrapSysCalls();
 }
@@ -780,6 +773,22 @@ bool FileSystem::GetHostPort(const sockaddr* serv_addr, socklen_t addrlen,
   return true;
 }
 
+bool FileSystem::IsAgentConnect(const sockaddr* serv_addr, socklen_t addrlen,
+                                std::string* hostname, uint16_t* port) {
+  if (addrlen >= sizeof(sockaddr_in) && serv_addr->sa_family == AF_INET) {
+    const sockaddr_in* sin4 = reinterpret_cast<const sockaddr_in*>(serv_addr);
+    const char* ssh_auth_sock = getenv("SSH_AUTH_SOCK");
+    if (ntohs(sin4->sin_port) == 0 &&
+        ntohl(sin4->sin_addr.s_addr) == kSshAgentFakeIP &&
+        ssh_auth_sock != NULL) {
+      *port = 0;
+      *hostname = ssh_auth_sock;
+      return true;
+    }
+  }
+  return false;
+}
+
 int FileSystem::connect(int fd, const sockaddr* serv_addr, socklen_t addrlen) {
   Mutex::Lock lock(mutex_);
   if (streams_.find(fd) == streams_.end()) {
@@ -789,22 +798,21 @@ int FileSystem::connect(int fd, const sockaddr* serv_addr, socklen_t addrlen) {
 
   uint16_t port;
   std::string hostname;
-  if (!GetHostPort(serv_addr, addrlen, &hostname, &port)) {
+
+  if (IsAgentConnect(serv_addr, addrlen, &hostname, &port)) {
+    // If the request is for the auth agent,
+    // make sure to punt request to JS proxy.
+    use_js_socket_ = true;
+  } else if (!GetHostPort(serv_addr, addrlen, &hostname, &port)) {
     errno = EAFNOSUPPORT;
     return -1;
   }
   LOG("FileSystem::connect: [%s] port %d\n", hostname.c_str(), port);
 
-  if (hostname == kSshAgentFakeHostname && port == 0) {
-    // The NaCl code wants to reach ssh-agent.
-    // Route this connect to our javascript layer.
-    use_js_socket_ = true;
-  }
-
   FileStream* stream = NULL;
   if (use_js_socket_) {
-    // Only first socket will use JS proxy, other sockets are created for
-    // connections made localhost so use Pepper sockets for them.
+    // Only first socket and auth sockets need JS proxy.
+    // Clear flag so other sockets will use Pepper by default.
     use_js_socket_ = false;
     JsSocket* socket = new JsSocket(fd, O_RDWR, output_);
     if (!socket->connect(hostname.c_str(), port)) {

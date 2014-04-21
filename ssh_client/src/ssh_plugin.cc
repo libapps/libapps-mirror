@@ -38,6 +38,7 @@ const char kUseJsSocketAttr[] = "useJsSocket";
 const char kEnvironmentAttr[] = "environment";
 const char kArgumentsAttr[] = "arguments";
 const char kWriteWindowAttr[] = "writeWindow";
+const char kAuthAgentAppID[] = "authAgentAppID";
 
 // These are JavaScript method names as C++ code sees them.
 const char kPrintLogMethodId[] = "printLog";
@@ -278,6 +279,10 @@ void SshPluginInstance::StartSession(const Json::Value& args) {
           setenv(it.key().asCString(), (*it).asCString(), 1);
         }
       }
+    }
+    if (session_args_.isMember(kAuthAgentAppID) &&
+        session_args_[kAuthAgentAppID].isString()) {
+      setenv("SSH_AUTH_SOCK", session_args_[kAuthAgentAppID].asCString(), 1);
     }
     if (pthread_create(&openssh_thread_, NULL,
                        &SshPluginInstance::SessionThread, this)) {

@@ -100,7 +100,6 @@ class FileSystem {
   int sigaction(int signum,
                 const struct sigaction *act,
                 struct sigaction *oldact);
-  const char* getenv(const char* name);
   void exit(int status);
 
   void ExitCodeAcked();
@@ -134,6 +133,8 @@ class FileSystem {
                            const addrinfo* hints);
   bool GetHostPort(const sockaddr* serv_addr, socklen_t addrlen,
                    std::string* hostname, uint16_t* port);
+  bool IsAgentConnect(const sockaddr* serv_addr, socklen_t addrlen,
+                      std::string* hostname, uint16_t* port);
   void Resolve(int32_t result, GetAddrInfoParams* params, int32_t* pres);
   void OnResolve(int32_t result, GetAddrInfoParams* params, int32_t* pres);
 
