@@ -75,6 +75,7 @@ nassh.GoogleRelay = function(io, optionString) {
   this.proxyPort = this.options['--proxy-port'] || 8022;
   this.useSecure = this.options['--use-ssl'];
   this.useWebsocket = !this.options['--use-xhr'];
+  this.reportAckLatency = this.options['--report-ack-latency'];
   this.relayServer = null;
   this.relayServerSocket = null;
 };
@@ -115,6 +116,8 @@ nassh.GoogleRelay.parseOptionString = function(optionString) {
       rv['--use-ssl'] = true;
     if (!('--relay-prefix-field' in rv))
       rv['--relay-prefix-field'] = '2';
+    if (!('--report-ack-latency' in rv))
+      rv['--report-ack-latency'] = true;
   }
 
   return rv;

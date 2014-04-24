@@ -356,6 +356,18 @@ nassh.Stream.GoogleRelayWS = function(fd) {
 
   // Amount of data in buffer that were sent but not acknowledged yet.
   this.sentCount_ = 0;
+
+  // Time when data was sent most recently.
+  this.ackTime_ = 0;
+
+  // Ack related to most recently sent data.
+  this.expectedAck_ = 0;
+
+  // Circular list of recently observed ack times.
+  this.ackTimes_ = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+  // Slot to record next ack time in.
+  this.ackTimesIndex_ = 0;
 };
 
 /**
@@ -399,6 +411,26 @@ nassh.Stream.GoogleRelayWS.prototype.onSocketOpen_ = function(e) {
   this.requestSuccess_(false);
 };
 
+nassh.Stream.GoogleRelayWS.prototype.recordAckTime_ = function(deltaTime) {
+  this.ackTimes_[this.ackTimesIndex_] = deltaTime;
+  this.ackTimesIndex_ = (this.ackTimesIndex_ + 1) % this.ackTimes_.length;
+
+  if (this.ackTimesIndex_ == 0) {
+    // Filled the cicular buffer; compute average.
+    var average = 0;
+    for (var i = 0; i < this.ackTimes_.length; ++i)
+      average += this.ackTimes_[i];
+    average /= this.ackTimes_.length;
+
+    if (this.relay_.reportAckLatency) {
+      // Report observed average to relay.
+      // Send this meta-data as string vs. the normal binary payloads.
+      var msg = 'A:' + Math.round(average);
+      this.socket_.send(msg);
+    }
+  }
+};
+
 nassh.Stream.GoogleRelayWS.prototype.onSocketData_ = function(e) {
   if (e.target !== this.socket_)
     return;
@@ -414,6 +446,12 @@ nassh.Stream.GoogleRelayWS.prototype.onSocketData_ = function(e) {
     this.close();
     this.sessionID_ = null;
     return;
+  }
+
+  // Track ack latency.
+  if (this.ackTime_ != 0 && ack == this.expectedAck_) {
+    this.recordAckTime_(Date.now() - this.ackTime_);
+    this.ackTime_ = 0;
   }
 
   // Unsigned 24 bits wrap-around delta.
@@ -473,6 +511,10 @@ nassh.Stream.GoogleRelayWS.prototype.sendWrite_ = function() {
   u8 = null;
   this.socket_.send(buf);
   this.sentCount_ += size;
+
+  // Track ack latency.
+  this.ackTime_ = Date.now();
+  this.expectedAck_ = (this.writeCount_ + this.sentCount_) & 0xffffff;
 
   if (typeof this.onWriteSuccess_ == 'function') {
     // Notify nassh that we are ready to consume more data.
