@@ -368,6 +368,9 @@ nassh.Stream.GoogleRelayWS = function(fd) {
 
   // Slot to record next ack time in.
   this.ackTimesIndex_ = 0;
+
+  // Number of connect attempts made.
+  this.connectCount_ = 0;
 };
 
 /**
@@ -390,10 +393,13 @@ nassh.Stream.GoogleRelayWS.prototype.resumeRead_ = function() {
   }
 
   if (this.sessionID_ && !this.socket_) {
-    this.socket_ = new WebSocket(this.relay_.relayServerSocket +
+    var uri = this.relay_.relayServerSocket +
         'connect?sid=' + this.sessionID_ +
         '&ack=' + (this.readCount_ & 0xffffff) +
-        '&pos=' + (this.writeCount_ & 0xffffff));
+        '&pos=' + (this.writeCount_ & 0xffffff);
+    if (this.relay_.reportConnectAttempts)
+      uri += '&try=' + ++this.connectCount_;
+    this.socket_ = new WebSocket(uri);
     this.socket_.binaryType = 'arraybuffer';
     this.socket_.onopen = this.onSocketOpen_.bind(this);
     this.socket_.onmessage = this.onSocketData_.bind(this);
@@ -408,6 +414,7 @@ nassh.Stream.GoogleRelayWS.prototype.onSocketOpen_ = function(e) {
   if (e.target !== this.socket_)
     return;
 
+  this.connectCount_ = 0;
   this.requestSuccess_(false);
 };
 
