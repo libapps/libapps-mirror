@@ -146,7 +146,7 @@ lib.MessageManager.prototype.get = function(msgname, opt_args, opt_default) {
     message = this.messages[msgname];
 
   } else {
-    if (chrome.i18n)
+    if (window.chrome.i18n)
       message = chrome.i18n.getMessage(msgname);
 
     if (!message) {

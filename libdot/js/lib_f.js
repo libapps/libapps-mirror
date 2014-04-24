@@ -67,7 +67,7 @@ lib.f.replaceVars.functions = {
  *     parameter is a list of locale names.
  */
 lib.f.getAcceptLanguages = function(callback) {
-  if (chrome && chrome.i18n) {
+  if (window.chrome && chrome.i18n) {
     chrome.i18n.getAcceptLanguages(callback);
   } else {
     setTimeout(function() {
@@ -106,7 +106,7 @@ lib.f.parseQuery = function(queryString) {
 };
 
 lib.f.getURL = function(path) {
-  if (chrome && chrome.extension && chrome.extension.getURL)
+  if (window.chrome && chrome.extension && chrome.extension.getURL)
     return chrome.extension.getURL(path);
 
   return path;
