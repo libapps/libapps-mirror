@@ -1,3 +1,9 @@
+0.8.27.1, 2014-04-28, Update hterm, openssh/openssl libs.
+
+* Update to ssh binary to "OpenSSH_6.6, OpenSSL 1.0.1g 7 Apr 2014"
+* Update to hterm 1.36.
+* Update to libdot 1.7.
+
 0.8.26.6, 2014-03-25, Options page initialization fix.
 
 * Reorder options page initialization so that it actually works.
