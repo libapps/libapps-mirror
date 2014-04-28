@@ -21,10 +21,13 @@ lib.Storage.Local.prototype.onStorage_ = function(e) {
   if (e.storageArea != this.storage_)
     return;
 
+  // IE throws an exception if JSON.parse is given an empty string.
+  var prevValue = e.oldValue ? JSON.parse(e.oldValue) : "";
+  var curValue = e.newValue ? JSON.parse(e.newValue) : "";
   var o = {};
   o[e.key] = {
-    oldValue: JSON.parse(e.oldValue),
-    newValue: JSON.parse(e.newValue)
+    oldValue: prevValue,
+    newValue: curValue
   };
 
   for (var i = 0; i < this.observers_.length; i++) {
