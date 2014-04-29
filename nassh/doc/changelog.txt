@@ -1,3 +1,7 @@
+0.8.27.2, 2014-04-29, Update hterm.
+
+* Update to hterm 1.37 for double-paste fix.
+
 0.8.27.1, 2014-04-28, Update hterm, openssh/openssl libs.
 
 * Update to ssh binary to "OpenSSH_6.6, OpenSSL 1.0.1g 7 Apr 2014"
