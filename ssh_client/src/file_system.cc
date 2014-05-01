@@ -927,8 +927,12 @@ int FileSystem::getsockname(int sockfd, sockaddr* name, socklen_t* namelen) {
     // TOOD(dpolukhin): implement getsockname for TCP sockets. Now it is
     // impossible to implement for TCP server sockets because Pepper doesn't
     // have method to get bound address.
-    errno = EBADF;
-    return -1;
+    sockaddr_in* sin4 = reinterpret_cast<sockaddr_in*>(name);
+    sin4->sin_family = AF_INET;
+    sin4->sin_port = htons(0);
+    inet_aton("127.0.0.1", &sin4->sin_addr);
+    *namelen = sizeof(sockaddr_in);
+    return 0;
   }
 }
 
