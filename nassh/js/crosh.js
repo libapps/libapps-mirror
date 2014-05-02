@@ -26,6 +26,7 @@ window.onload = function() {
 function Crosh(argv) {
   this.argv_ = argv;
   this.io = null;
+  this.keyboard_ = null;
   this.pid_ = -1;
 };
 
@@ -48,13 +49,14 @@ Crosh.init = function() {
   var profileName = lib.f.parseQuery(document.location.search)['profile'];
   var terminal = new hterm.Terminal(profileName);
 
-  if (chrome.runtime.id != Crosh.croshBuiltinId) {
+  terminal.decorate(document.querySelector('#terminal'));
+  terminal.onTerminalReady = function() {
     // We want to override the Ctrl-Shift-N keystroke so it opens nassh.html,
     // and its connection dialog, rather than reloading crosh.html.
     //
     // The builtin version of crosh does not come with nassh, so it won't work
     // from there.
-    terminal.onTerminalReady = function() {
+    if (chrome.runtime.id != Crosh.croshBuiltinId) {
       var openSecureShell = function() {
           window.open('/html/nassh.html', '',
                       'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
@@ -76,21 +78,17 @@ Crosh.init = function() {
 
         return hterm.Keyboard.KeyActions.DEFAULT;
       };
-    };
-  }
+    }
 
-  terminal.decorate(document.querySelector('#terminal'));
+    terminal.setCursorPosition(0, 0);
+    terminal.setCursorVisible(true);
+    terminal.runCommandClass(Crosh, document.location.hash.substr(1));
+
+    terminal.command.keyboard_ = terminal.keyboard;
+  };
 
   // Useful for console debugging.
   window.term_ = terminal;
-
-  // Looks like there is a race between this and terminal initialization, thus
-  // adding timeout.
-  setTimeout(function() {
-      terminal.setCursorPosition(0, 0);
-      terminal.setCursorVisible(true);
-      terminal.runCommandClass(Crosh, document.location.hash.substr(1));
-    }, 500);
   return true;
 };
 
@@ -136,8 +134,8 @@ Crosh.prototype.run = function() {
     return;
   }
 
-  this.io.onVTKeystroke = this.sendString_.bind(this);
-  this.io.sendString = this.sendString_.bind(this);
+  this.io.onVTKeystroke = this.sendString_.bind(this, true /* fromKeyboard */);
+  this.io.sendString = this.sendString_.bind(this, false /* fromKeyboard */);
 
   var self = this;
   this.io.onTerminalResize = this.onTerminalResize_.bind(this);
@@ -174,14 +172,40 @@ Crosh.prototype.onBeforeUnload_ = function(e) {
 };
 
 /**
+ * Used by {@code this.sendString_} to determine if a string should be UTF-8
+ * decoded to UTF-16 before sending it to {@code chrome.terminalPrivate}.
+ * The string should be decoded if it came from keyboard with 'utf-8' character
+ * encoding. The reason is that the extension system expects strings it handles
+ * to be UTF-16 encoded.
+ *
+ * @private
+ *
+ * @param {boolean} fromKeyboard Whether the string came from keyboard.
+ * @param {string} string A string that may be UTF-8 encoded.
+ *
+ * @return {string} If decoding is needed, the decoded string, otherwise the
+ *     original string.
+ */
+Crosh.prototype.decodeUTF8IfNeeded_ = function(fromKeyboard, string) {
+  if (fromKeyboard &&
+      this.keyboard_ && this.keyboard_.characterEncoding == 'utf-8') {
+    return lib.decodeUTF8(string);
+  }
+  return string;
+};
+
+/**
  * Send a string to the crosh process.
  *
+ * @param {boolean} fromKeyborad Whether the string originates from keyboard.
  * @param {string} string The string to send.
  */
-Crosh.prototype.sendString_ = function(string) {
+Crosh.prototype.sendString_ = function(fromKeyboard, string) {
   if (this.pid_ == -1)
     return;
-  chrome.terminalPrivate.sendInput(this.pid_, string);
+  chrome.terminalPrivate.sendInput(
+      this.pid_,
+      this.decodeUTF8IfNeeded_(fromKeyboard, string));
 };
 
 /**
