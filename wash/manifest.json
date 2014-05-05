@@ -24,10 +24,12 @@
         "js/lib_wash.js",
         "js/lib_wash_termcap.js",
         "js/lib_wash_readline.js",
+        "js/lib_wash_nacl.js",
         "js/wash.js",
         "js/wash_app.js",
         "js/wash_background.js",
-        "js/wash_commands.js",
+        "js/wash_builtins.js",
+        "js/wash_executables.js",
         "js/wash_shell.js",
         "js/wash_terminal_window.js",
         "js/wash_window_manager.js"

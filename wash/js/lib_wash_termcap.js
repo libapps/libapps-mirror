@@ -126,6 +126,8 @@ lib.wash.Termcap.prototype.outputFunctions = {
   },
 
   'set-row-column': function(row, column) {
+    if (isNaN(row) || isNaN(column))
+      throw new Error('Invalid row/column');
     return '\x1b[' + row + ';' + column + 'H';
   },
 

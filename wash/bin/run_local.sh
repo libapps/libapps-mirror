@@ -5,6 +5,10 @@
 
 cd "$(readlink -f "$(dirname "$0")/..")"
 
+if [ -z $DISPLAY ]; then
+  export DISPLAY=":0.0"
+fi
+
 if [ -z "$CHROME_TEST_PROFILE" ]; then
   CHROME_TEST_PROFILE=$HOME/.config/google-chrome-run_local
 fi
@@ -14,7 +18,5 @@ mkdir -p $CHROME_TEST_PROFILE
 ./bin/mkdeps.sh
 
 google-chrome --load-and-launch-app="$(pwd)" \
-  --enable-experimental-extension-apis \
-  --allow-file-access-from-files --unlimited-quota-for-files \
   --user-data-dir=$CHROME_TEST_PROFILE \
   &>/dev/null </dev/null &

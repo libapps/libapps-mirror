@@ -24,11 +24,9 @@ wash.TerminalWindow = function(app) {
    * Event we invoke when async init is complete.
    */
   this.onInit = new lib.Event(this.onInit_.bind(this));
-
-  // The 'ready' reply we get in reply to 'execute'.  Replies to 'ready' are
-  // used as input to the executed command.
-  this.readyMsg_ = null;
 };
+
+wash.TerminalWindow.prototype.defaultEnv = {TERM: 'xterm-256color'};
 
 /**
  * The command to execute at startup.
@@ -76,61 +74,55 @@ wash.TerminalWindow.prototype.println = function(str) {
 };
 
 /**
- * Handle for inbound messages from the default command.
+ * Window initialization is done.
  */
-wash.TerminalWindow.prototype.onExecuteReply_ = function(msg) {
-  if (msg.name == 'ready') {
-    this.readyMsg_ = msg;
+wash.TerminalWindow.prototype.onInit_ = function() {
+  this.executeContext = this.app.localFS.createExecuteContext();
+  this.executeContext.setEnvs(this.defaultEnv);
+  this.executeContext.onClose.addListener(this.onExecuteClose_, this);
+  this.executeContext.onStdOut.addListener(this.onStdOut_, this);
+  this.executeContext.onStdErr.addListener(this.onStdOut_, this);
+  this.executeContext.setTTY
+  ({rows: this.term.io.rowCount,
+    columns: this.term.io.columnCount
+   });
 
-  } else if (msg.name == 'isatty') {
-    msg.closeOk({columns: this.term.io.columnCount,
-                 rows: this.term.io.rowCount});
-  } else if (msg.name == 'strout' || msg.name == 'strerr') {
-    var arg = msg.arg;
-    if (typeof arg == 'string') {
-      arg = arg.replace(/\n/g, '\r\n');
-    } else {
-      arg = String(arg);
-    }
+  this.executeContext.onReady.addListener(function() {
+      console.log('TerminalWindow: execute ready');
+    });
 
-    this.print(arg);
+  this.executeContext.onClose.addListener(function(reason, value) {
+      console.log('TerminalWindow: execute closed: ' + reason +
+                  JSON.stringify(value));
+    });
 
-    if (msg.isOpen)
-      msg.closeOk(null);
-  } else if (msg.name == 'error') {
-    this.println('\x1b[37;41m ERROR \x1b[m ' + JSON.stringify(msg.arg));
-  } else {
-    console.log('Unknown message from terminal command: ' + msg.name);
-  }
-};
-
-/**
- * The default command failed to start.
- */
-wash.TerminalWindow.prototype.onExecuteError_ = function(msg) {
-  this.print('Error executing ' + this.commandPath + ': ' +
-             msg.name + ': ' + msg.arg);
+  console.log('TerminalWindow: execute: ' + this.commandPath);
+  this.executeContext.execute(this.commandPath, this.commandArg);
 };
 
 /**
  * The default command exited.
  */
-wash.TerminalWindow.prototype.onExecuteClosed_ = function(msg) {
-  this.println('terminal: Command exited.');
+wash.TerminalWindow.prototype.onExecuteClose_ = function(reason, value) {
+  if (reason == 'ok') {
+    this.println('terminal: Command exited.');
+  } else {
+    this.print('Error executing ' + this.commandPath + ': ' +
+               JSON.stringify(value));
+  }
 };
 
 /**
- * Window initialization is done.
+ * Handle for inbound messages from the default command.
  */
-wash.TerminalWindow.prototype.onInit_ = function() {
-  console.log('TerminalWindow: execute: ' + this.commandPath);
-  this.execMsg = this.app.waitReady(
-      'execute',
-      {path: this.commandPath, arg: this.commandArg},
-      this.onExecuteReply_.bind(this),
-      this.onExecuteError_.bind(this));
+wash.TerminalWindow.prototype.onStdOut_ = function(str) {
+  if (typeof str == 'string') {
+    str = str.replace(/\n/g, '\r\n');
+  } else {
+    str = JSON.stringify(str) + '\r\n';
+  }
 
-  this.execMsg.onClose.addListener(this.onExecuteClosed_.bind(this));
+  this.print(str);
 };
 
 /**
@@ -138,9 +130,19 @@ wash.TerminalWindow.prototype.onInit_ = function() {
  *
  * We just forward them on to the default command.
  */
-wash.TerminalWindow.prototype.onSendString_ = function(string) {
-  if (this.readyMsg_)
-    this.readyMsg_.reply('strin', string);
+wash.TerminalWindow.prototype.onSendString_ = function(str) {
+  if (this.executeContext.isReadyState('READY')) {
+    if (str == this.executeContext.getTTY().interrupt) {
+      console.log('interrupt');
+      wam.async(function() {
+          this.executeContext.signal('wam.FileSystem.Signal.Interrupt');
+        }, [this]);
+    } else {
+      wam.async(function() { this.executeContext.stdin(str) }, [this]);
+    }
+  } else {
+    console.warn('Execute not ready, ignoring input: ' + str);
+  }
 };
 
 /**
@@ -149,8 +151,8 @@ wash.TerminalWindow.prototype.onSendString_ = function(string) {
  * We just forward them on to the default command.
  */
 wash.TerminalWindow.prototype.onTerminalResize_ = function(columns, rows) {
-  if (this.readyMsg_)
-    this.readyMsg_.reply('tty-resize', {columns: columns, rows: rows});
+  if (this.executeContext && this.executeContext.isReadyState('READY'))
+    this.executeContext.setTTY({columns: columns, rows: rows});
 };
 
 /**
@@ -160,7 +162,7 @@ wash.TerminalWindow.prototype.onTerminalResize_ = function(columns, rows) {
  * way for apps to signal that they want to trap it.
  */
 wash.TerminalWindow.prototype.onKeyDown_ = function(e) {
-  if (e.ctrlKey && e.shiftKey && e.keyCode == ("R").charCodeAt())
+  if (e.ctrlKey && e.shiftKey && e.keyCode == ('R').charCodeAt())
     chrome.runtime.reload();
 };
 

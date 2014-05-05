@@ -5,5 +5,3 @@
 'use strict';
 
 var wash = {};
-
-wash.guid = lib.wam.guid;

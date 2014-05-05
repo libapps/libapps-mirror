@@ -7,89 +7,40 @@
 lib.rtdep('lib.f.Sequence');
 
 /**
- * The singleton app instance for the nassh packaged app, created by the
+ * The singleton app instance for the wash packaged app, created by the
  * background page.
  */
-wash.App = function(manifest) {
-  this.manifest = manifest;
+wash.App = function() {
   this.wm = new wash.WindowManager();
 
   this.onInit = new lib.Event(this.onInit_.bind(this));
 
-  this.commands = new wash.Commands(this);
+  this.localFS = new wam.binding.fs.FileSystem();
+  this.localFS.ready();
+  this.jsfs = new wam.jsfs.FileSystem();
+  this.jsfs.addBinding(this.localFS);
 
-  this.fileSystem = new lib.wam.fs.Directory();
   this.initFileSystem(this.onInit);
-
-  // The handshake reply message received on the app channel.
-  this.hsReplyMsg_ = null;
 };
 
 /**
  * Initialize the lib.wam.fs.Directory we plan on exporting.
  */
 wash.App.prototype.initFileSystem = function(onInit) {
-  var fs = this.fileSystem;
-
   var sequence = new lib.f.Sequence
   (this,
    [function mkdirs(cx) {
-      // Create these directories first.
-      var initialDirs = ['/mnt', '/tmp', '/exe'];
-      cx.expected = initialDirs.length;
-
-      initialDirs.forEach(function(path) {
-          console.log('initFileSystem: Creating: ' + path);
-          fs.link(
-              path, new lib.wam.fs.Directory(),
-              cx.next,
-              lib.fs.err('Initial directory failed:', cx.next));
-        });
+      this.jsfs.makePaths(['/mnt', '/exe'], cx.next, cx.error);
     },
 
     function commands(cx) {
-      // Install our wash.Commands into the /exe directory.
-      console.log('initFileSystem: Installing commands.');
-      this.commands.install('/exe', cx.next, cx.error);
-    },
-
-    function channels(cx) {
-      // Create a channel between the app and our internal filesystem using
-      // a lib.wam.DirectTransport.
-      console.log('initFileSystem: Creating channel.');
-      lib.wam.DirectTransport.createChannelPair(
-          function onHandshakeSuccess(hsOfferMsg, hsReplyMsg) {
-            console.log('Channels are happy');
-
-            hsOfferMsg.channel.name = 'filesystem';
-
-            hsReplyMsg.channel.name = 'wash-app';
-            // Uncomment for some debug logs.
-            // hsReplyMsg.channel.verbose = true;
-
-            this.hsReplyMsg_ = hsReplyMsg;
-
-            hsOfferMsg.meta.onInput.addListener(function(msg) {
-              this.fileSystem.dispatchMessage('/', msg);
-            }.bind(this));
-
-            cx.next();
-          }.bind(this),
-          function onHandshakeError(msg) {
-            console.warn('Handshake failed: ', msg);
-            cx.error();
-          });
+      wash.executables.install(this.jsfs, '/exe', cx.next, cx.error);
     }]);
 
-  sequence.run(onInit, lib.fs.err('initFileSystem: Error', onInit));
-};
-
-wash.App.prototype.send = function(msg, name, opt_onReply) {
-  return this.hsReplyMsg_.reply(msg, name, opt_onReply);
-};
-
-wash.App.prototype.waitReady = function(msg, name, onReply, onError) {
-  return this.hsReplyMsg_.waitReady(msg, name, onReply, onError);
+  sequence.run(onInit, function(value) {
+      console.log('initFileSystem: Error:', value);
+      onInit();
+    });
 };
 
 wash.App.prototype.installHandlers = function(runtime) {

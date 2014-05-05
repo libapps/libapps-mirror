@@ -8,11 +8,24 @@ lib.rtdep('lib.wash.Termcap');
 
 /**
  * A partial clone of GNU readline.
- *
- * Can be called directly, or used as a lib.wam.fs.Executable.
  */
-lib.wash.Readline = function(onSend, opt_tc) {
-  this.onSendCallback_ = onSend;
+lib.wash.Readline = function(executeContext) {
+  this.executeContext = executeContext;
+  this.executeContext.onStdIn.addListener(this.onStdIn_, this);
+  this.executeContext.ready();
+
+  this.promptString_ = executeContext.arg.promptString || '';
+  this.promptVars_ = null;
+
+  var inputHistory = executeContext.arg.inputHistory;
+  if (inputHistory && !(inputHistory instanceof Array)) {
+    this.executeContext.closeError('wam.FileSystem.Error.MissingOrBadArgument',
+                                   ['inputHistory', 'array']);
+    return;
+  }
+
+  this.history_ = [''].concat(inputHistory) || [];
+  this.historyIndex_ = 0;
 
   this.line = '';
   this.linePosition = 0;
@@ -23,8 +36,6 @@ lib.wash.Readline = function(onSend, opt_tc) {
   // Cursor position after printing the prompt.
   this.cursorPrompt_ = null;
 
-  this.onCompleteCallback_ = null;
-
   this.verbose = false;
 
   this.nextUndoIndex_ = 0;
@@ -32,52 +43,29 @@ lib.wash.Readline = function(onSend, opt_tc) {
 
   this.killRing_ = [];
 
-  this.historyIndex_ = 0;
-  this.history_ = [];
-
-  this.promptString_ = '';
-  this.promptVars_ = null;
-
   this.previousLineHeight_ = 0;
 
   this.pendingESC_ = false;
 
-  this.tc_ = opt_tc || new lib.wash.Termcap();
-
-  this.rows = 0;
-  this.columns = 0;
+  this.tc_ = new lib.wash.Termcap();
 
   this.bindings = {};
   this.addBindings(lib.wash.Readline.defaultBindings);
+
+  this.onComplete = new lib.Event(this.onComplete_.bind(this));
+
+  this.print('%get-row-column()');
+  this.read();
 };
 
-lib.wash.Readline.main = function(app, execMsg) {
-  if (typeof execMsg.arg != 'object' ||
-      !('promptString' in execMsg.arg.argv)) {
-    execMsg.closeError(lib.wam.error.MISSING_PARAM, 'promptString');
+lib.wash.Readline.main = function(executeContext) {
+  if (typeof executeContext.arg != 'object') {
+    executeContext.closeError('wam.FileSystem.Error.UnexpectedArgvType',
+                              ['object']);
     return;
   }
 
-  if (!lib.wash.Readline.tc_)
-    lib.wash.Readline.tc_ = new lib.wash.Termcap();
-
-  var rl = new lib.wash.Readline(execMsg.reply.bind(execMsg),
-                                 lib.wash.Readline.tc_);
-
-  rl.setPrompt(execMsg.arg.argv.promptString || '', {});
-
-  // TODO(rginda): better history management.
-  if (!lib.wash.Readline.history_)
-    lib.wash.Readline.history_ = [];
-  rl.history_ = lib.wash.Readline.history_;
-
-  execMsg.meta.onInput.addListener(function(msg) {
-      rl.dispatchMessage(msg);
-    });
-
-  rl.read(function(line) {
-      execMsg.closeOk(line);
-    });
+  return new lib.wash.Readline(executeContext);
 };
 
 /**
@@ -134,16 +122,8 @@ lib.wash.Readline.defaultBindings = {
  *
  * Prints the given prompt, and waits while the user edits a line of text.
  * Provides editing functionality through the keys specified in defaultBindings.
- *
- * @param {function(string)} onComplete The function to invoke when the user
- *     presses ENTER.
  */
-lib.wash.Readline.prototype.read = function(onComplete) {
-  if (this.isBusy)
-    throw new Error('read() already pending');
-
-  this.isBusy = true;
-
+lib.wash.Readline.prototype.read = function() {
   this.line = this.history_[0] = '';
   this.linePosition = 0;
 
@@ -154,23 +134,6 @@ lib.wash.Readline.prototype.read = function(onComplete) {
   this.cursorPrompt_ = null;
 
   this.previousLineHeight_ = 0;
-
-  this.onCompleteCallback_ = onComplete;
-
-  this.send('isatty', null, function(msg) {
-      msg.parent.close();
-
-      if (msg.name != 'ok') {
-        console.warn('lib.wash.Readline: Not connected to a tty');
-        onComplete(null);
-        return;
-      }
-
-      this.rows = msg.arg.rows;
-      this.columns = msg.arg.columns;
-
-      this.print('%get-row-column()');
-    }.bind(this));
 };
 
 /**
@@ -227,17 +190,7 @@ lib.wash.Readline.prototype.addRawBinding = function(bytes, commandName) {
 };
 
 lib.wash.Readline.prototype.print = function(str, opt_vars) {
-  this.send('strout', this.tc_.output(str, opt_vars || {}));
-}
-
-/**
- * Send a message back to the thing that executed us.
- */
-lib.wash.Readline.prototype.send = function(name, arg, opt_onReply) {
-  if (!this.isBusy)
-    throw new Error('Not busy');
-
-  this.onSendCallback_(name, arg, opt_onReply);
+  this.executeContext.stdout(this.tc_.output(str, opt_vars || {}));
 };
 
 lib.wash.Readline.prototype.setPrompt = function(str, vars) {
@@ -246,7 +199,7 @@ lib.wash.Readline.prototype.setPrompt = function(str, vars) {
 
   this.cursorPrompt_ = null;
 
-  if (this.isBusy)
+  if (this.executeContext.isReadyState('READY'))
     this.dispatch('redraw-line');
 };
 
@@ -313,18 +266,11 @@ lib.wash.Readline.prototype.onCursorReport = function(row, column) {
   return;
 };
 
-/**
- * Messages we want to act on.
- */
-lib.wash.Readline.on = {};
+lib.wash.Readline.prototype.onStdIn_ = function(value) {
+  if (typeof value != 'string')
+    return;
 
-lib.wash.Readline.on['tty-resize'] = function(msg) {
-  this.rows = msg.arg.rows;
-  this.columns = msg.arg.columns;
-};
-
-lib.wash.Readline.on['strin'] = function(msg) {
-  var string = msg.arg;
+  var string = value;
 
   var ary = string.match(/^\x1b\[(\d+);(\d+)R$/);
   if (ary) {
@@ -400,12 +346,14 @@ lib.wash.Readline.prototype.commands['redraw-line'] = function(string) {
                line: this.line
              });
 
+  var tty = this.executeContext.getTTY();
+
   var totalLineLength = this.cursorHome_.column - 1 + this.promptLength_ +
       this.line.length;
-  var totalLineHeight = Math.ceil(totalLineLength / this.columns);
+  var totalLineHeight = Math.ceil(totalLineLength / tty.columns);
   var additionalLineHeight = totalLineHeight - 1;
 
-  var lastRowFilled = !(totalLineLength % this.columns);
+  var lastRowFilled = !(totalLineLength % tty.columns);
   if (!lastRowFilled)
     this.print('%erase-right()');
 
@@ -424,15 +372,14 @@ lib.wash.Readline.prototype.commands['redraw-line'] = function(string) {
     // of the cursor home row.
     var scrollCount;
 
-    if (this.cursorHome_.row + additionalLineHeight == this.rows &&
+    if (this.cursorHome_.row + additionalLineHeight == tty.rows &&
         lastRowFilled) {
       // The line was exactly long enough to fill the terminal width and
       // and height.  Insert a newline to hold the new cursor position.
       this.print('\n');
       scrollCount = 1;
     } else {
-      scrollCount = this.cursorHome_.row + additionalLineHeight -
-          this.rows;
+      scrollCount = this.cursorHome_.row + additionalLineHeight - tty.rows;
     }
 
     if (scrollCount > 0) {
@@ -447,10 +394,11 @@ lib.wash.Readline.prototype.commands['redraw-line'] = function(string) {
 lib.wash.Readline.prototype.commands['reposition-cursor'] = function(string) {
   // Count the number or rows it took to render the current line at the
   // current terminal width.
+  var tty = this.executeContext.getTTY();
   var rowOffset = Math.floor((this.cursorPrompt_.column - 1 +
-                              this.linePosition) / this.columns);
+                              this.linePosition) / tty.columns);
   var column = (this.cursorPrompt_.column + this.linePosition -
-                (rowOffset * this.columns));
+                (rowOffset * tty.columns));
   this.print('%set-row-column(row, column)',
              { row: this.cursorPrompt_.row + rowOffset,
                column: column
@@ -477,7 +425,7 @@ lib.wash.Readline.prototype.commands['accept-line'] = function() {
   if (this.line && this.line != this.history_[1])
     this.history_.splice(1, 0, this.line);
   this.print('\r\n');
-  this.onComplete_();
+  this.onComplete(this.line);
 };
 
 lib.wash.Readline.prototype.commands['beginning-of-history'] = function() {
@@ -650,9 +598,6 @@ lib.wash.Readline.prototype.commands['undo'] = function() {
 };
 
 lib.wash.Readline.prototype.onComplete_ = function() {
-  this.isBusy = false;
-  var cb = this.onCompleteCallback_;
-  this.onCompleteCallback_= null;
-
-  cb(this.line);
+  if (this.executeContext.isOpen)
+    this.executeContext.closeOk(this.line);
 };
