@@ -1,3 +1,10 @@
+1.8, 2014-04-05, Remove option parameter from result.pass()
+
+* lib.TestManager.Result.prototype.pass took an optional parameter, a message
+  to log, which was never used, and made it awkward to use
+  result.pass.bind(result) as the value of an onSuccess callback, since any
+  parameter passed to the callback would show up in the test log.
+
 1.7, 2014-04-28, Firefox compatibility
 
 * Fix if `(chrome...)` tests to be `if (window.chrome...)`.
