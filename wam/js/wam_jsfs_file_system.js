@@ -164,12 +164,53 @@ wam.jsfs.FileSystem.prototype.partialResolve = function(
 };
 
 wam.jsfs.FileSystem.prototype.onStat_ = function(arg, onSuccess, onError) {
-  var onResolve = function(entry) { entry.getStat(onSuccess, onError) };
-  this.resolve(arg.path, onResolve, onError);
+  if (typeof arg.path != 'string') {
+    console.error('Missing argument: path');
+    wam.async(onError,
+              [null, wam.mkerr('wam.Error.MissingArgument', ['path'])]);
+    return;
+  }
+
+  var onPartialResolve = function(prefixList, pathList, entry) {
+    if (entry.can('FORWARD')) {
+      entry.forwardStat
+      ({fullPath: arg.path, forwardPath: pathList.join('/')},
+       onSuccess, onError);
+      return;
+    }
+
+    if (pathList.length) {
+      onError(wam.mkerr('wam.FileSystem.Error.NotFound', [arg.path]));
+      return;
+    }
+
+    onSuccess(entry);
+  };
+
+  this.partialResolve(arg.path, onPartialResolve, onError);
 };
 
 wam.jsfs.FileSystem.prototype.onList_ = function(arg, onSuccess, onError) {
-  var onResolve = function(entry) {
+  if (typeof arg.path != 'string') {
+    console.error('Missing argument: path');
+    wam.async(onError,
+              [null, wam.mkerr('wam.Error.MissingArgument', ['path'])]);
+    return;
+  }
+
+  var onPartialResolve = function(prefixList, pathList, entry) {
+      if (entry.can('FORWARD')) {
+        entry.forwardList
+        ({fullPath: arg.path, forwardPath: pathList.join('/')},
+         onSuccess, onError);
+        return;
+      }
+
+    if (pathList.length) {
+      onError(wam.mkerr('wam.FileSystem.Error.NotFound', [path]));
+      return;
+    }
+
     if (!entry.can('LIST')) {
       onError(wam.mkerr('wam.FileSystem.Error.NotListable', [arg.path]));
       return;
@@ -178,21 +219,11 @@ wam.jsfs.FileSystem.prototype.onList_ = function(arg, onSuccess, onError) {
     entry.listEntryStats(onSuccess);
   };
 
-  this.resolve(arg.path, onResolve, onError);
+  this.partialResolve(arg.path, onPartialResolve, onError);
 };
 
 wam.jsfs.FileSystem.prototype.onOpen_ = function(arg, onSuccess, onError) {
-  var onResolve = function(entry) {
-    if (!entry.can('OPEN')) {
-      executeResponse.closeError('wam.FileSystem.Error.NotOpenable',
-                                 executeResponse.path);
-      return;
-    }
-
-    entry.open(openResponse);
-  };
-
-  this.resolve(arg.path, onResolve, onError);
+  // TODO: implement.
 };
 
 wam.jsfs.FileSystem.prototype.onExecuteContextCreated_ = function(

@@ -14,7 +14,8 @@ wam.jsfs.Entry = function() {
 wam.jsfs.Entry.ops = {
   'LIST': ['addEntry', 'getStat', 'listEntryStats', 'partialResolve'],
   'OPEN': ['getStat', 'open'],
-  'EXECUTE': ['getStat', 'execute']
+  'EXECUTE': ['getStat', 'execute'],
+  'FORWARD': ['getStat', 'forwardStat', 'forwardList', 'forwardExecute']
 };
 
 wam.jsfs.Entry.subclass = function(opList) {

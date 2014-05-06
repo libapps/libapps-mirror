@@ -34,7 +34,7 @@ wam.jsfs.Tests.addTest
 
     var ec = this.remoteFS.createExecuteContext();
     ec.onClose.addListener(function(reason, value) {
-        result.assertEQ(reason, 'ok');
+        result.assertEQ(reason, 'ok', JSON.stringify(value));
         wam.async(result.pass, [result]);
       });
 

@@ -17,6 +17,7 @@ wam.errorManager.defineErrors
  ['wam.FileSystem.Error.NotListable', ['path']],
  ['wam.FileSystem.Error.NotOpenable', ['path']],
  ['wam.FileSystem.Error.OperationTimedOut', []],
+ ['wam.FileSystem.Error.OperationNotSupported', []],
  ['wam.FileSystem.Error.PermissionDenied', []],
  ['wam.FileSystem.Error.PluginCrash', ['code']],
  ['wam.FileSystem.Error.ReadyTimeout', []],

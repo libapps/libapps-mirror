@@ -82,6 +82,8 @@ wam.remote.fs.execute.Response = function(inMessage, executeContext) {
   this.inMessage = inMessage;
 
   this.executeContext = executeContext;
+  this.executeContext.onStdOut.addListener(this.onStdOut_, this);
+  this.executeContext.onStdErr.addListener(this.onStdErr_, this);
 
   this.readyResponse = new wam.remote.ready.Response(inMessage, executeContext);
   this.readyResponse.onMessage.addListener(this.onMessage_.bind(this));
@@ -97,7 +99,7 @@ wam.remote.fs.execute.Response.prototype.onMessage_ = function(inMessage) {
         };
       }
 
-      this.executeContext.stdin(inMessage.value, onAck);
+      this.executeContext.stdin(inMessage.arg, onAck);
       break;
 
     case 'tty-change':
@@ -110,14 +112,14 @@ wam.remote.fs.execute.Response.prototype.onMessage_ = function(inMessage) {
   }
 };
 
-wam.remote.fs.execute.Response.prototype.stdout = function(value, onAck) {
+wam.remote.fs.execute.Response.prototype.onStdOut_ = function(value, onAck) {
   this.readyResponse.send('stdout', value,
                           (onAck ?
                            function(inMessage) { onAck(inMessage.arg) } :
                            null));
 };
 
-wam.remote.fs.execute.Response.prototype.stderr = function(value, onAck) {
+wam.remote.fs.execute.Response.prototype.onStdErr_ = function(value, onAck) {
   this.readyResponse.send('stderr', value,
                           (onAck ?
                            function(inMessage) { onAck(inMessage.arg) } :

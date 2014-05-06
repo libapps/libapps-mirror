@@ -17,15 +17,26 @@ wam.jsfs.ExecuteContext.prototype.onExecute_ = function() {
     this.executeContextBinding.closeErrorValue(value);
   }.bind(this);
 
-  var onResolve = function(entry) {
+  var onPartialResolve = function(prefixList, pathList, entry) {
+    if (entry.can('FORWARD')) {
+      entry.forwardExecute
+      ({executeContext: this.executeContextBinding,
+        forwardPath: pathList.join('/')});
+      return;
+    }
+
+    if (pathList.length) {
+      onError(wam.mkerr('wam.FileSystem.Error.NotFound', [path]));
+      return;
+    }
+
     if (!entry.can('EXECUTE')) {
-      this.executeContextBinding.closeError(
-          'wam.FileSystem.Error.NotExecutable', [path]);
+      onError(wam.mkerr('wam.FileSystem.Error.NotExecutable', [path]));
       return;
     }
 
     entry.execute(this.executeContextBinding, this);
   }.bind(this);
 
-  this.jsfsFileSystem.resolve(path, onResolve, onError);
+  this.jsfsFileSystem.partialResolve(path, onPartialResolve, onError);
 };
