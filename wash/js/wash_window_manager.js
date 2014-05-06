@@ -48,6 +48,13 @@ wash.WindowManager.Window.prototype.createAppWindow_ = function(
       'html/wash_window_manager_window.html', params, onWindowCreated);
 };
 
+wash.WindowManager.Window.prototype.close = function() {
+  if (!this.appWindow_)
+    throw new Error('Window not open.');
+
+  this.appWindow_.close();
+};
+
 wash.WindowManager.Window.prototype.onClosed = function() { };
 
 wash.WindowManager.Window.prototype.onClosed_ = function() {

@@ -88,7 +88,7 @@ lib.wash.Readline.defaultBindings = {
   '%(DELETE)': 'delete-char',
 
   '%ctrl("A")': 'beginning-of-line',
-  '%ctrl("D")': 'delete-char',
+  '%ctrl("D")': 'delete-char-or-eof',
   '%ctrl("E")': 'end-of-line',
   '%ctrl("H")': 'backward-delete-char',
   '%ctrl("K")': 'kill-line',
@@ -391,6 +391,11 @@ lib.wash.Readline.prototype.commands['redraw-line'] = function(string) {
   this.dispatch('reposition-cursor');
 };
 
+lib.wash.Readline.prototype.commands['abort-line'] = function() {
+  this.line = null;
+  this.onComplete_();
+};
+
 lib.wash.Readline.prototype.commands['reposition-cursor'] = function(string) {
   // Count the number or rows it took to render the current line at the
   // current terminal width.
@@ -513,7 +518,12 @@ lib.wash.Readline.prototype.commands['yank-last-arg'] = function() {
     this.dispatch('self-insert', last.substr(i));
 };
 
-lib.wash.Readline.prototype.commands['delete-char'] = function() {
+lib.wash.Readline.prototype.commands['delete-char-or-eof'] = function() {
+  if (!this.line.length) {
+    this.dispatch('abort-line');
+    return;
+  }
+
   if (this.linePosition < this.line.length) {
     this.line = (this.line.substr(0, this.linePosition) +
                  this.line.substr(this.linePosition + 1));

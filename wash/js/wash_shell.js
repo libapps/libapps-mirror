@@ -107,6 +107,12 @@ wash.Shell.prototype.repl = function() {
       return;
     }
 
+    if (value == null) {
+      // EOF from readline.
+      this.executeContext.closeOk(null);
+      return;
+    }
+
     if (typeof value != 'string') {
       this.errorln('Unexpected type from readline: ' + (typeof value));
       setTimeout(this.repl.bind(this), 5000);

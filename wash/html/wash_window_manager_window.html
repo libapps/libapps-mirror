@@ -24,16 +24,35 @@
         -webkit-app-region: drag;
       }
 
+      #wash_window_close {
+        position: absolute;
+        top: 0;
+        right: 0px;
+        width: 28px;
+        height: 28px;
+        padding-top: 1px;
+        font-size: 20px;
+        color: #555;
+        text-align: center;
+        -webkit-app-region: no-drag;
+      }
+
       #wash_window_content {
         position: absolute;
         top: 28px;
         width: 100%;
+        box-sizing: border-box;
+        border-bottom: 1px black solid;
+        border-left: 1px black solid;
+        border-right: 1px black solid;
       }
     </style>
   </head>
   <body>
     <div id='wash_window_outer'>
-      <div id='wash_window_titlebar'></div>
+      <div id='wash_window_titlebar'>
+        <div id='wash_window_close'>&#x2A2F;</div>
+      </div>
       <div id='wash_window_content'></div>
     </div>
   </body>

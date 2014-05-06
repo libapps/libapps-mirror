@@ -6,7 +6,7 @@
 
 /**
  * A platform-app window containing an instance of hterm, running a
- * lib.wam.Executable ('/exe/wash' by default).
+ * wam executable ('/exe/wash' by default).
  */
 wash.TerminalWindow = function(app) {
   this.app = app;
@@ -47,8 +47,11 @@ wash.TerminalWindow.prototype.commandArg = null;
 wash.TerminalWindow.prototype.onWindowCreated_ = function(contentNode) {
   this.contentNode_ = contentNode;
   this.document_ = contentNode.ownerDocument;
-  this.document_.defaultView.addEventListener('resize',
-                                              this.onResize_.bind(this));
+  this.document_.defaultView.addEventListener
+  ('resize', this.onResize_.bind(this));
+  this.document_.querySelector('#wash_window_close').addEventListener
+  ('click', function() { this.executeContext.closeOk(null) }.bind(this));
+
   this.onResize_();
 
   this.term = new hterm.Terminal();
@@ -105,7 +108,8 @@ wash.TerminalWindow.prototype.onInit_ = function() {
  */
 wash.TerminalWindow.prototype.onExecuteClose_ = function(reason, value) {
   if (reason == 'ok') {
-    this.println('terminal: Command exited.');
+    this.wmWindow_.close();
+
   } else {
     this.print('Error executing ' + this.commandPath + ': ' +
                JSON.stringify(value));
@@ -157,9 +161,6 @@ wash.TerminalWindow.prototype.onTerminalResize_ = function(columns, rows) {
 
 /**
  * Our own keyboard accelerators.
- *
- * TODO(rginda): ^C handling should probably go here, but we'll need a
- * way for apps to signal that they want to trap it.
  */
 wash.TerminalWindow.prototype.onKeyDown_ = function(e) {
   if (e.ctrlKey && e.shiftKey && e.keyCode == ('R').charCodeAt())
