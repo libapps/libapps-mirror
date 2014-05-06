@@ -19,5 +19,6 @@ mkdir -p $CHROME_TEST_PROFILE
 
 google-chrome \
   "file:///$(pwd)/html/wam_test.html" \
+  --allow-file-access-from-files \
   --user-data-dir=$CHROME_TEST_PROFILE \
   &>/dev/null </dev/null &

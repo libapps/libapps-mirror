@@ -18,5 +18,6 @@ mkdir -p $CHROME_TEST_PROFILE
 ./bin/mkdeps.sh
 
 google-chrome --load-and-launch-app="$(pwd)" \
+  --allow-file-access-from-files \
   --user-data-dir=$CHROME_TEST_PROFILE \
   &>/dev/null </dev/null &
