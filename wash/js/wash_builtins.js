@@ -55,7 +55,10 @@ wash.builtins.callbacks['cd'] = function(shell, executeContext) {
        return;
      }
 
-     shell.executeContext.setEnv('PWD', path + '/');
+     if (!/\/$/.test(path))
+       path += '/';
+
+     shell.executeContext.setEnv('PWD', path);
      executeContext.closeOk(null);
    },
    function(value) {

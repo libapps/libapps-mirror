@@ -14,13 +14,16 @@ wash.Shell = function(executeContext) {
   executeContext.onClose.addListener(function() {
       var index = wash.Shell.instances.indexOf(this);
       wash.Shell.instances.splice(index, 1);
-    });
+    }.bind(this));
 
   wash.Shell.instances.push(this);
   window.s_ = this;
 
+  if (!this.executeContext.getEnv('PWD'))
+    this.executeContext.setEnv('PWD', '/')
+
   this.inputHistory = [];
-  this.searchPath = ['/exe'];
+  this.searchPath = ['/apps/wash/exe', '/apps/chrome/exe'];
 
   // The list of currently active jobs.
   this.executeContextList_ = [];
@@ -97,7 +100,7 @@ wash.Shell.prototype.findExecutable = function(path, onSuccess, onError) {
  */
 wash.Shell.prototype.repl = function() {
   var ec = this.executeContext.call(
-      '/exe/readline',
+      '/apps/wash/exe/readline',
       {promptString: this.promptString_, inputHistory: this.inputHistory});
 
   ec.onClose.addListener(function(reason, value) {
@@ -184,6 +187,7 @@ wash.Shell.prototype.dispatchExecuteContext = function(ec, path, argv) {
     }.bind(this));
 
   this.executeContext.setCallee(ec);
+
   ec.execute(path, argv);
 };
 

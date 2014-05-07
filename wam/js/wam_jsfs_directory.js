@@ -32,7 +32,7 @@ wam.jsfs.Directory.prototype.addEntry = function(
     }.bind(this));
 };
 
-wam.jsfs.Directory.prototype.listEntryStats = function(onSuccess, onError) {
+wam.jsfs.Directory.prototype.listEntryStats = function(onSuccess) {
   var statCount = Object.keys(this.entries_).length;
   var rv = {};
 

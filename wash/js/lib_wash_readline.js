@@ -521,9 +521,12 @@ lib.wash.Readline.prototype.commands['yank-last-arg'] = function() {
 lib.wash.Readline.prototype.commands['delete-char-or-eof'] = function() {
   if (!this.line.length) {
     this.dispatch('abort-line');
-    return;
+  } else {
+    this.dispatch('delete-char');
   }
+};
 
+lib.wash.Readline.prototype.commands['delete-char'] = function() {
   if (this.linePosition < this.line.length) {
     this.line = (this.line.substr(0, this.linePosition) +
                  this.line.substr(this.linePosition + 1));

@@ -49,17 +49,20 @@ wash.App = function() {
 wash.App.prototype.initFileSystem = function(onInit) {
   var sequence = new lib.f.Sequence
   (this,
-   [function mkdirs(cx) {
-      this.jsfs.makePaths(['/mnt', '/exe'], cx.next, cx.error);
+   [
+    function exes(cx) {
+      wash.executables.install(this.jsfs, '/apps/wash/exe',
+                               cx.next, cx.error);
     },
 
-    function commands(cx) {
-      wash.executables.install(this.jsfs, '/exe', cx.next, cx.error);
+    function exes_chrome(cx) {
+      wash.executables.chrome.install(this.jsfs, '/apps/chrome/exe',
+                                      cx.next, cx.error);
     },
 
     function loopback(cx) {
       this.jsfs.makeEntries(
-          '/mnt',
+          '/apps/wash',
           {'loopback': new wam.jsfs.RemoteFileSystem(this.loopbackChannelA)},
           cx.next, cx.error);
     }]);

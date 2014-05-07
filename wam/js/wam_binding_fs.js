@@ -22,6 +22,7 @@ wam.errorManager.defineErrors
  ['wam.FileSystem.Error.PluginCrash', ['code']],
  ['wam.FileSystem.Error.ReadyTimeout', []],
  ['wam.FileSystem.Error.ResultTooLarge', ['maxSize', 'resultSize']],
+ ['wam.FileSystem.Error.RuntimeError', ['diagnostic']],
  ['wam.FileSystem.Error.Interrupt', []],
  ['wam.FileSystem.Error.UnexpectedArgvType', ['expected']],
  ['wam.FileSystem.Error.EndOfFile', []]
@@ -30,6 +31,11 @@ wam.errorManager.defineErrors
 wam.binding.fs.baseName = function(path) {
   var lastSlash = path.lastIndexOf('/');
   return path.substr(lastSlash + 1);
+};
+
+wam.binding.fs.dirName = function(path) {
+  var lastSlash = path.lastIndexOf('/');
+  return path.substr(0, lastSlash);
 };
 
 wam.binding.fs.absPath = function(pwd, path) {

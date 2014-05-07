@@ -84,6 +84,15 @@ wam.jsfs.FileSystem.prototype.makePaths = function(
   makeNextPath(0, null);
 };
 
+wam.jsfs.FileSystem.prototype.makeEntry = function(
+    path, entry, onSuccess, onError) {
+  var dirName = wam.binding.fs.dirName(path);
+  var baseName = wam.binding.fs.baseName(path);
+  var map = {};
+  map[baseName] = entry;
+  this.makeEntries(dirName, map, onSuccess, onError);
+};
+
 /**
  * Ensure that the given path exists, then add the given entries to it.
  */
@@ -184,13 +193,16 @@ wam.jsfs.FileSystem.prototype.onStat_ = function(arg, onSuccess, onError) {
       return;
     }
 
-    onSuccess(entry);
+    entry.getStat(onSuccess, onError);
   };
 
   this.partialResolve(arg.path, onPartialResolve, onError);
 };
 
 wam.jsfs.FileSystem.prototype.onList_ = function(arg, onSuccess, onError) {
+  if (!onSuccess || !onError)
+    throw new Error('Missing callback', onSuccess, onError);
+
   if (typeof arg.path != 'string') {
     console.error('Missing argument: path');
     wam.async(onError,

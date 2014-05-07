@@ -13,10 +13,13 @@ wam.transport.ChromePort = function(port) {
 
   this.readyBinding = new wam.binding.Ready();
   this.readyBinding.onClose.addListener(this.onReadyBindingClose_.bind(this));
+  this.readyBinding.ready();
 
   this.verbose = false;
 
   this.isConnected = true;
+
+  port.onDisconnect.addListener(this.onPortDisconnect_.bind(this));
 
   /**
    * Subscribe to this event to listen in on inbound messages.
@@ -64,7 +67,6 @@ wam.transport.ChromePort.connect = function(extensionId, onComplete) {
     port.onDisconnect.removeListener(onDisconnect);
 
     if (msg == 'accepted') {
-      port.onDisconnect.addListener(this.onPortDisconnect_.bind(this));
       onComplete(new wam.transport.ChromePort(port));
     } else {
       port.disconnect();

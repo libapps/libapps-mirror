@@ -30,6 +30,7 @@
         "js/wash_background.js",
         "js/wash_builtins.js",
         "js/wash_executables.js",
+        "js/wash_executables_chrome.js",
         "js/wash_shell.js",
         "js/wash_terminal_window.js",
         "js/wash_window_manager.js"

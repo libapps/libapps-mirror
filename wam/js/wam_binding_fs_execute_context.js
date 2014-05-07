@@ -155,14 +155,14 @@ wam.binding.fs.ExecuteContext.prototype.signal = function(name, value) {
   }
 };
 
-wam.binding.fs.ExecuteContext.prototype.stdout = function(value) {
+wam.binding.fs.ExecuteContext.prototype.stdout = function(value, opt_onAck) {
   this.assertReady();
-  this.onStdOut(value);
+  this.onStdOut(value, opt_onAck);
 };
 
-wam.binding.fs.ExecuteContext.prototype.stderr = function(value) {
+wam.binding.fs.ExecuteContext.prototype.stderr = function(value, opt_onAck) {
   this.assertReady();
-  this.onStdErr(value);
+  this.onStdErr(value, opt_onAck);
 };
 
 wam.binding.fs.ExecuteContext.prototype.stdin = function(value) {

@@ -46,14 +46,6 @@ wash.executables.callbacks['wash'] = function(executeContext) {
   wash.Shell.main(executeContext);
 };
 
-wash.executables.callbacks['nacl'] = function(executeContext) {
-  lib.wash.NaCl.main(executeContext);
-};
-
-wash.executables.callbacks['pnacl'] = function(executeContext) {
-  lib.wash.NaCl.main(executeContext);
-};
-
 wash.executables.callbacks['stty'] = function(executeContext) {
   executeContext.ready();
   executeContext.stdout(JSON.stringify(executeContext.getTTY(), null, '  '));

@@ -6,7 +6,7 @@
 
 /**
  * A platform-app window containing an instance of hterm, running a
- * wam executable ('/exe/wash' by default).
+ * wam executable.
  */
 wash.TerminalWindow = function(app) {
   this.app = app;
@@ -34,7 +34,7 @@ wash.TerminalWindow.prototype.defaultEnv = {TERM: 'xterm-256color'};
  * This must exist in the app filesystem, since we can't have mounted any
  * remote filesystems yet.
  */
-wash.TerminalWindow.prototype.commandPath = '/exe/wash';
+wash.TerminalWindow.prototype.commandPath = '/apps/wash/exe/wash';
 
 /**
  * The arg for the default command.
@@ -55,6 +55,8 @@ wash.TerminalWindow.prototype.onWindowCreated_ = function(contentNode) {
   this.onResize_();
 
   this.term = new hterm.Terminal();
+  this.term.onTerminalReady = this.onInit;
+
   this.term.decorate(contentNode);
   this.term.installKeyboard();
 
@@ -64,8 +66,6 @@ wash.TerminalWindow.prototype.onWindowCreated_ = function(contentNode) {
 
   this.document_.defaultView.addEventListener(
       'keydown', this.onKeyDown_.bind(this));
-
-  this.onInit();
 };
 
 wash.TerminalWindow.prototype.print = function(str) {
@@ -119,7 +119,7 @@ wash.TerminalWindow.prototype.onExecuteClose_ = function(reason, value) {
 /**
  * Handle for inbound messages from the default command.
  */
-wash.TerminalWindow.prototype.onStdOut_ = function(str) {
+wash.TerminalWindow.prototype.onStdOut_ = function(str, opt_onAck) {
   if (typeof str == 'string') {
     str = str.replace(/\n/g, '\r\n');
   } else {
@@ -127,6 +127,8 @@ wash.TerminalWindow.prototype.onStdOut_ = function(str) {
   }
 
   this.print(str);
+  if (opt_onAck)
+    opt_onAck();
 };
 
 /**
