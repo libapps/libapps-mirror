@@ -21,6 +21,7 @@ wam.transport.Direct = function(name) {
         console.log(this.name + ' got: ' + JSON.stringify(msg));
     }.bind(this));
 
+  this.isConnected_ = false;
   this.remoteEnd_ = null;
 
   this.queue_ = [];
@@ -50,8 +51,7 @@ wam.transport.Direct.createPair = function(opt_namePrefix) {
         }, 0);
     });
 
-  a.readyBinding.ready();
-  b.readyBinding.ready();
+  a.reconnect();
 
   return [a, b];
 };
@@ -91,21 +91,30 @@ wam.transport.Direct.prototype.push_ = function(name, args, opt_onSend) {
   this.queue_.push([name, args, opt_onSend]);
 };
 
+wam.transport.Direct.prototype.reconnect = function() {
+  this.readyBinding.reset();
+  this.isConnected_ = true;
+  this.readyBinding.ready();
+
+  this.remoteEnd_.readyBinding.reset();
+  this.remoteEnd_.isConnected_ = true;
+  this.remoteEnd_.readyBinding.ready();
+};
+
 wam.transport.Direct.prototype.disconnect = function() {
   this.readyBinding.closeOk(null);
 };
 
 wam.transport.Direct.prototype.send = function(msg, opt_onSend) {
-  if (!this.remoteEnd_)
+  if (!this.isConnected_)
     throw new Error('Not connected.');
 
   this.remoteEnd_.push_('onMessage', msg, opt_onSend);
 };
 
 wam.transport.Direct.prototype.onReadyBindingClose_ = function(reason, value) {
-  if (!this.remoteEnd_)
+  if (!this.isConnected_)
     return;
-  this.remoteEnd_ = null;
 
-  this.isConnected = false;
+  this.isConnected_ = false;
 };

@@ -93,11 +93,6 @@ wam.remote.ready.Request.prototype.onReadyBindingClose_ = function(
                 this.outMessage.subject);
           }
         }.bind(this), wam.remote.closeTimeoutMs);
-    } else {
-      this.outMessage.channel.injectMessage(
-          'error',
-          wam.mkerr('wam.Error.ChannelDisconnect', ['Ready request lost']),
-          this.outMessage.subject);
     }
   }
 
@@ -222,11 +217,6 @@ wam.remote.ready.Response.prototype.onReadyBindingClose_ = function(
                 this.outReady.subject);
           }
         }.bind(this), wam.remote.closeTimeoutMs);
-    } else {
-      this.outReady.channel.injectMessage(
-          'error',
-          wam.mkerr('wam.Error.ChannelDisconnect', ['Ready response lost']),
-          this.outReady.subject);
     }
   }
 };

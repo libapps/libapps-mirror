@@ -19,7 +19,6 @@ wam.errorManager.defineErrors
  ['wam.FileSystem.Error.OperationTimedOut', []],
  ['wam.FileSystem.Error.OperationNotSupported', []],
  ['wam.FileSystem.Error.PermissionDenied', []],
- ['wam.FileSystem.Error.PluginCrash', ['code']],
  ['wam.FileSystem.Error.ReadyTimeout', []],
  ['wam.FileSystem.Error.ResultTooLarge', ['maxSize', 'resultSize']],
  ['wam.FileSystem.Error.RuntimeError', ['diagnostic']],

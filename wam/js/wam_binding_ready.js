@@ -72,6 +72,11 @@ wam.binding.Ready.prototype.dependsOn = function(otherReady) {
     }.bind(this));
 };
 
+wam.binding.Ready.prototype.reset = function() {
+  this.assertReadyState('WAIT', 'CLOSED', 'ERROR');
+  this.readyState = wam.binding.Ready.state['WAIT'];
+};
+
 wam.binding.Ready.prototype.ready = function(value) {
   this.assertReadyState('WAIT');
   this.onReady(value);

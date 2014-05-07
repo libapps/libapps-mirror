@@ -6,18 +6,23 @@
 
 wam.jsfs.RemoteFileSystem = function(channel) {
   wam.jsfs.Entry.call(this);
+
   this.channel = channel;
+  this.channel.readyBinding.onReady.addListener(this.onChannelReady_, this);
 
   this.handshakeRequest_ = null;
   this.remoteFileSystem_ = null;
 
   this.pendingOperations = [];
+
+  if (this.channel.readyBinding.isReadyState('READY'))
+    this.offerHandshake();
 };
 
 wam.jsfs.RemoteFileSystem.prototype = wam.jsfs.Entry.subclass(['FORWARD']);
 
 wam.jsfs.RemoteFileSystem.prototype.getStat = function(onSuccess, onError) {
-  var readyState = 'NOT-USED';
+  var readyState = 'UNEDFINED';
   if (this.remoteFileSystem_)
     readyState = this.remoteFileSystem_.readyState;
 
@@ -38,11 +43,30 @@ wam.jsfs.RemoteFileSystem.prototype.connect = function(onSuccess, onError) {
   if (this.remoteFileSystem_ && this.remoteFileSystem_.isReadyState('WAIT'))
     return;
 
+  if (this.channel.readyBinding.isReadyState('READY')) {
+    this.requestHandshake();
+  } else {
+    this.channel.reconnect();
+  }
+};
+
+wam.jsfs.RemoteFileSystem.prototype.offerHandshake = function() {
+  if (this.remoteFileSystem_) {
+    if (this.remoteFileSystem_.isReadyState('READY'))
+      throw new Error('Already ready.');
+
+    this.remoteFileSystem_.onReady.removeListener(
+        this.onFileSystemReady_, this);
+  }
+
   this.handshakeRequest_ = new wam.remote.fs.handshake.Request(this.channel);
   this.remoteFileSystem_ = this.handshakeRequest_.fileSystem;
   this.remoteFileSystem_.onReady.addListener(this.onFileSystemReady_, this);
-
   this.handshakeRequest_.sendRequest();
+};
+
+wam.jsfs.RemoteFileSystem.prototype.onChannelReady_ = function() {
+  this.offerHandshake();
 };
 
 wam.jsfs.RemoteFileSystem.prototype.onFileSystemReady_ = function() {

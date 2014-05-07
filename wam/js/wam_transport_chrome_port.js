@@ -7,35 +7,40 @@
 /**
  * This is the chrome message port based transport.
  */
-wam.transport.ChromePort = function(port) {
+wam.transport.ChromePort = function() {
   // The underlying Chrome "platform app" port.
-  this.port_ = port;
+  this.port_ = null;
+
+  this.extensionId_ = null;
 
   this.readyBinding = new wam.binding.Ready();
   this.readyBinding.onClose.addListener(this.onReadyBindingClose_.bind(this));
-  this.readyBinding.ready();
 
-  this.verbose = false;
+  this.onMessage = new wam.Event();
+};
 
-  this.isConnected = true;
+wam.transport.ChromePort.prototype.setPort_ = function(port) {
+  if (this.port_)
+    throw new Error('Port already set');
 
-  port.onDisconnect.addListener(this.onPortDisconnect_.bind(this));
+  this.port_ = port;
 
-  /**
-   * Subscribe to this event to listen in on inbound messages.
-   */
-  this.onMessage = new wam.Event(function(msg) {
-      if (this.verbose)
-        console.log(msg);
-    }.bind(this));
+  var thisOnMessage = function(msg) {
+    wam.async(this.onMessage, [this, msg]);
+  }.bind(this);
 
-  this.port_.onMessage.addListener(function(msg) {
-      // Chrome message ports eat exceptions, so we break them off into
-      // a setTimeout :/
+  var thisOnDisconnect = function() {
+    this.port_.onMessage.removeListener(thisOnMessage);
+    this.port_.onMessage.removeListener(thisOnDisconnect);
+    this.port_ = null;
+    if (this.readyBinding.isOpen) {
+      this.readyBinding.closeError('wam.Error.TransportDisconnect',
+                                   ['Transport disconnect.']);
+    }
+  }.bind(this);
 
-      setTimeout(this.onMessage.bind(this.onMessage, msg), 0);
-    }.bind(this));
-  this.port_.onDisconnect.addListener(this.onDisconnect);
+  this.port_.onMessage.addListener(thisOnMessage);
+  this.port_.onDisconnect.addListener(thisOnDisconnect);
 };
 
 wam.transport.ChromePort.prototype.send = function(value, opt_onSend) {
@@ -44,14 +49,32 @@ wam.transport.ChromePort.prototype.send = function(value, opt_onSend) {
     wam.async(opt_onSend);
 };
 
-wam.transport.ChromePort.connect = function(extensionId, onComplete) {
+wam.transport.ChromePort.prototype.accept = function(port) {
+  this.readyBinding.assertReadyState('WAIT');
+  this.setPort_(port);
+  this.send('accepted');
+  this.readyBinding.ready();
+  console.log('wam.transport.ChromePort: accept: ' + port.sender.id);
+};
+
+wam.transport.ChromePort.prototype.reconnect = function() {
+  if (!this.extensionId_)
+    throw new Error('Cannot reconnect.');
+
+  this.readyBinding.reset();
+  this.connect(this.extensionId_);
+};
+
+wam.transport.ChromePort.prototype.connect = function(extensionId) {
+  this.readyBinding.assertReadyState('WAIT');
+  this.extensionId_ = extensionId;
+
   var port = chrome.runtime.connect(
       extensionId, {name: 'x.wam.transport.ChromePort/1.0'});
 
-  window.p_ = port;
-
   if (!port) {
-    setTimeout(onComplete.bind(null, null));
+    this.readyBinding.closeError('wam.Error.TransportDisconnect',
+                                 ['Transport creation failed.']);
     return;
   }
 
@@ -59,20 +82,24 @@ wam.transport.ChromePort.connect = function(extensionId, onComplete) {
     console.log('transport.ChromePort.connect: disconnect');
     port.onMessage.removeListener(onMessage);
     port.onDisconnect.removeListener(onDisconnect);
-    onComplete(null);
-  };
+    this.readyBinding.closeError('wam.Error.TransportDisconnect',
+                                 ['Transport disconnected before accept.']);
+  }.bind(this);
 
   var onMessage = function(msg) {
     port.onMessage.removeListener(onMessage);
     port.onDisconnect.removeListener(onDisconnect);
 
-    if (msg == 'accepted') {
-      onComplete(new wam.transport.ChromePort(port));
-    } else {
+    if (msg != 'accepted') {
       port.disconnect();
-      onComplete(null);
+      this.readyBinding.closeError('wam.Error.TransportDisconnect',
+                                   ['Bad transport handshake.']);
+      return;
     }
-  };
+
+    this.setPort_(port);
+    this.readyBinding.ready();
+  }.bind(this);
 
   port.onDisconnect.addListener(onDisconnect);
   port.onMessage.addListener(onMessage);
@@ -86,37 +113,32 @@ wam.transport.ChromePort.connect = function(extensionId, onComplete) {
 wam.transport.ChromePort.onConnectCallback_ = null;
 
 wam.transport.ChromePort.prototype.onReadyBindingClose_ = function() {
-  this.port_.disconnect();
-};
-
-wam.transport.ChromePort.prototype.onPortDisconnect_ = function() {
-  if (!this.readyBinding.isOpen)
-    this.readyBinding.closeOk(null);
+  if (this.port_)
+    this.port_.disconnect();
 };
 
 /**
  * Invoked when an foreign extension attempts to connect while we're listening.
  */
 wam.transport.ChromePort.onConnectExternal_ = function(port) {
-  console.log('transport.ChromePort.onConnectExternal_: connect');
-
   var whitelist = wam.transport.ChromePort.connectWhitelist_
   if (whitelist && whitelist.indexOf(port.sender.id) == -1) {
-    console.log('Sender is not on the whitelist: ' + port.sender.id);
+    console.log('wam.transport.ChromePort: reject: ' +
+                'Sender is not on the whitelist: ' + port.sender.id);
     port.disconnect();
     return;
   }
 
   if (port.name != 'x.wam.transport.ChromePort/1.0') {
-    console.log('Ignoring unknown connection: ' + port.name);
+    console.log('wam.transport.ChromePort: ' +
+                'reject: Ignoring unknown connection: ' + port.name);
     port.disconnect();
     return;
   }
 
-  var transport = new wam.transport.ChromePort(port);
+  var transport = new wam.transport.ChromePort();
+  transport.accept(port);
   wam.transport.ChromePort.onListenCallback_(transport);
-
-  transport.send('accepted');
 };
 
 /**

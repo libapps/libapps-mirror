@@ -53,16 +53,16 @@ lib.wash.NaCl.prototype.run = function() {
 
   var plugin = document.createElement('object');
   this.plugin_ = plugin;
-  plugin.setAttribute('src', this.nmfURL_);
-  plugin.setAttribute('type', this.mimeType_);
-  plugin.setAttribute('width', 0);
-  plugin.setAttribute('height', 0);
   plugin.addEventListener('load', this.onPluginLoad_.bind(this));
   plugin.addEventListener('error', this.onPluginLoadError_.bind(this));
   plugin.addEventListener('abort', this.onPluginLoadAbort_.bind(this));
   plugin.addEventListener('progress', this.onPluginProgress_.bind(this));
   plugin.addEventListener('crash', this.onPluginCrash_.bind(this));
   plugin.addEventListener('message', this.onPluginMessage_.bind(this));
+  plugin.setAttribute('src', this.nmfURL_);
+  plugin.setAttribute('type', this.mimeType_);
+  plugin.setAttribute('width', 0);
+  plugin.setAttribute('height', 0);
 
   var tty = this.executeContext.getTTY();
 
@@ -103,6 +103,9 @@ lib.wash.NaCl.prototype.run = function() {
   this.executeContext.stdout('Loading.');
 
   document.body.appendChild(plugin);
+
+  // Set mimetype twice for http://crbug.com/371059
+  plugin.setAttribute('type', this.mimeType_);
 };
 
 lib.wash.NaCl.prototype.onPluginProgress_ = function(e) {
@@ -112,7 +115,7 @@ lib.wash.NaCl.prototype.onPluginProgress_ = function(e) {
     var percent = Math.round(e.loaded * 100 / e.total);
     var kbloaded = Math.round(e.loaded / 1024);
     var kbtotal = Math.round(e.total / 1024);
-    message = '\rLoading [' +
+    message = '\r\x1b[KLoading [' +
         kbloaded + ' KiB/' +
         kbtotal + ' KiB ' +
         percent + '%]';
@@ -124,25 +127,27 @@ lib.wash.NaCl.prototype.onPluginProgress_ = function(e) {
 };
 
 lib.wash.NaCl.prototype.onPluginLoad_ = function() {
-  this.executeContext.stdout('\r');
+  this.executeContext.stdout('\r\x1b[K');
 };
 
-lib.wash.NaCl.prototype.onPluginLoadError_ = function() {
+lib.wash.NaCl.prototype.onPluginLoadError_ = function(e) {
   this.executeContext.stdout(' ERROR.\n');
-  // TODO: better error classification.
-  this.executeContext.closeError('wam.FileSystem.Error.EndOfFile', []);
+  this.executeContext.closeError('wam.FileSystem.Error.RuntimeError',
+                                 ['Plugin load error.']);
 };
 
 lib.wash.NaCl.prototype.onPluginLoadAbort_ = function() {
   this.executeContext.stdout(' ABORT.\n');
-  // TODO: better error classification.
-  this.executeContext.closeError('wam.FileSystem.Error.EndOfFile', []);
+  this.executeContext.closeError('wam.FileSystem.Error.RuntimeError',
+                                 ['Plugin load abort.']);
 };
 
 lib.wash.NaCl.prototype.onPluginCrash_ = function() {
-  if (this.executeContext.isOpen)
-    this.executeContext.closeError('wam.FileSystem.Error.PluginCrash',
-                                   [this.plugin_.exitStatus]);
+  if (this.executeContext.isOpen) {
+    this.executeContext.closeError('wam.FileSystem.Error.RuntimeError',
+                                   ['Plugin crash: exit code: ' +
+                                    this.plugin_.exitStatus]);
+  }
 };
 
 lib.wash.NaCl.prototype.onPluginMessage_ = function(e) {

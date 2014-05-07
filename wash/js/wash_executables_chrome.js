@@ -48,31 +48,38 @@ wash.executables.chrome.callbacks['mount.chrome'] = function(
     return;
   }
 
-  wam.transport.ChromePort.connect(id, function(transport) {
-      if (!executeContext.isOpen) {
-        if (transport)
-          transport.disconnect();
-        return;
-      }
+  var onTransportClose = function(reason, value) {
+    transport.readyBinding.onClose.removeListener(onTransportClose);
+    transport.readyBinding.onReady.removeListener(onTransportReady);
 
-      if (!transport) {
-        executeContext.closeError('wam.FileSystem.Error.RuntimeError',
-                                  ['Transport connection failed.']);
-        return;
-      }
+    if (executeContext.isOpen) {
+      executeContext.closeError('wam.FileSystem.Error.RuntimeError',
+                                ['Transport connection failed.']);
+      return;
+    }
+  };
 
-      var channel = new wam.Channel(transport, 'chrome-extension:' + id);
-      //channel.verbose = wam.Channel.verbosity.ALL;
+  var onTransportReady = function(reason, value) {
+    transport.readyBinding.onClose.removeListener(onTransportClose);
+    transport.readyBinding.onReady.removeListener(onTransportReady);
 
-      jsfs.makeEntry(path, new wam.jsfs.RemoteFileSystem(channel),
-                     function() {
-                       executeContext.closeOk(null);
-                     },
-                     function(value) {
-                       transport.disconnect();
-                       executeContext.closeErrorValue(value);
-                     });
-    });
+    var channel = new wam.Channel(transport, id);
+    //channel.verbose = wam.Channel.verbosity.ALL;
+
+    jsfs.makeEntry(path, new wam.jsfs.RemoteFileSystem(channel),
+                   function() {
+                     executeContext.closeOk(null);
+                   },
+                   function(value) {
+                     transport.disconnect();
+                     executeContext.closeErrorValue(value);
+                   });
+  };
+
+  var transport = new wam.transport.ChromePort();
+  transport.readyBinding.onClose.addListener(onTransportClose);
+  transport.readyBinding.onReady.addListener(onTransportReady);
+  transport.connect(id);
 };
 
 wash.executables.chrome.callbacks['nacl'] = function(jsfs, executeContext) {

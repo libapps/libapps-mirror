@@ -18,10 +18,14 @@ wam.Channel = function(transport, opt_name) {
   this.transport_.onMessage.addListener(this.onTransportMessage_, this);
   this.transport_.readyBinding.onClose.addListener(
       this.onTransportClose_, this);
+  this.transport_.readyBinding.onReady.addListener(
+      this.onTransportReady_, this);
 
   this.readyBinding = new wam.binding.Ready();
   this.readyBinding.onClose.addListener(this.onReadyBindingClose_, this);
-  this.readyBinding.ready();
+
+  if (this.transport_.readyBinding.isReadyState('READY'))
+    this.readyBinding.ready();
 
   /**
    * Called when the remote end requests a handshake.
@@ -115,9 +119,18 @@ wam.Channel.prototype.summarize_ = function(message) {
   return rv;
 };
 
+wam.Channel.prototype.reconnect = function() {
+  if (this.transport_.readyBinding.isReadyState('READY'))
+    this.transport_.readyBinding.closeOk(null);
+
+  this.readyBinding.reset();
+  this.transport_.reconnect();
+};
+
 wam.Channel.prototype.disconnect = function(diagnostic) {
   var outMessage = new wam.OutMessage(
       this, 'disconnect', {diagnostic: diagnostic});
+
   outMessage.onSend.addListener(function() {
       if (this.readyBinding.isOpen)
         this.readyBinding.closeOk(null);
@@ -184,27 +197,14 @@ wam.Channel.prototype.createHandshakeMessage = function(payload) {
    });
 };
 
-/**
- * Initiate a disconnect.
- *
- * This should only be called by client code that intends to cause a disconnect.
- * It should never be called in reaction to a disconnect.
- *
- * @param {*} arg The argument to send with the 'disconnect' message.
- */
-wam.Channel.prototype.onReadyBindingClose_ = function(reason, value) {
-  if (this.transport_.readyBinding.isOpen)
-    this.transport_.readyBinding.closeOk(null);
-
-  setTimeout(function() {
-      // Construct synthetic 'error' messages to close out any orphans.
-      for (var subject in this.openOutMessages_) {
-        this.injectMessage('error',
-                           wam.mkerr('wam.Error.ChannelDisconnect',
-                                     ['Channel cleanup']),
-                           subject);
-      }
-    }.bind(this), 1000);
+wam.Channel.prototype.cleanup = function() {
+  // Construct synthetic 'error' messages to close out any orphans.
+  for (var subject in this.openOutMessages_) {
+    this.injectMessage('error',
+                       wam.mkerr('wam.Error.ChannelDisconnect',
+                                 ['Channel cleanup']),
+                       subject);
+  }
 };
 
 /**
@@ -297,11 +297,19 @@ wam.Channel.prototype.routeMessage_ = function(inMessage) {
   }
 };
 
+wam.Channel.prototype.onReadyBindingClose_ = function(reason, value) {
+  this.cleanup();
+};
+
 /**
  * Handle a raw message from the transport object.
  */
 wam.Channel.prototype.onTransportMessage_ = function(value) {
   this.routeMessage_(new wam.InMessage(this, value));
+};
+
+wam.Channel.prototype.onTransportReady_ = function() {
+  this.readyBinding.ready();
 };
 
 /**
@@ -312,7 +320,7 @@ wam.Channel.prototype.onTransportClose_ = function() {
     return;
 
   this.readyBinding.closeError('wam.Error.TransportDisconnect',
-                               [this.transport_.name]);
+                               ['Unexpected transport disconnect.']);
 };
 
 /**

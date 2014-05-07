@@ -62,8 +62,8 @@ wam.Channel.Tests.addTest
   setTimeout(function() {
       result.assert(didCloseChannelA);
       result.assert(didCloseChannelB);
-      result.assert(didCloseTransport0);
-      result.assert(didCloseTransport1);
+      result.assert(!didCloseTransport0);
+      result.assert(!didCloseTransport1);
       result.pass();
     }, 10);
 
@@ -109,8 +109,8 @@ wam.Channel.Tests.addTest
   setTimeout(function() {
       result.assert(didCloseChannelA);
       result.assert(didCloseChannelB);
-      result.assert(didCloseTransport0);
-      result.assert(didCloseTransport1);
+      result.assert(!didCloseTransport0);
+      result.assert(!didCloseTransport1);
       result.pass();
     }, 10);
 

@@ -219,7 +219,7 @@ wam.jsfs.FileSystem.prototype.onList_ = function(arg, onSuccess, onError) {
       }
 
     if (pathList.length) {
-      onError(wam.mkerr('wam.FileSystem.Error.NotFound', [path]));
+      onError(wam.mkerr('wam.FileSystem.Error.NotFound', [arg.path]));
       return;
     }
 

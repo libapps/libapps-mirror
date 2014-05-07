@@ -13,7 +13,7 @@ wam.errorManager.defineErrors
  ['wam.Error.ReadyAbort', ['abortErrorArg']],
  ['wam.Error.MissingArgument', ['name']],
  ['wam.Error.ParentClosed', ['name', 'arg']],
- ['wam.Error.TransportDisconnect', ['name']],
+ ['wam.Error.TransportDisconnect', ['diagnostic']],
  ['wam.Error.UnknownMessage', ['name']],
  ['wam.Error.UnexpectedMessage', ['name', 'arg']],
  ['wam.Error.UnknownPayload', []],
