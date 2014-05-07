@@ -5,4 +5,8 @@
 @include hterm/concat/hterm_deps.concat
 @include hterm/concat/hterm.concat
 
-libdot/js/lib_fs.js
+@include wam/concat/wam_fs.concat
+
+@file libdot/js/lib_event.js
+@file libdot/js/lib_fs.js
+@file libdot/js/lib_f_sequence.js

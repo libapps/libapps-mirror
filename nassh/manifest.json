@@ -4,7 +4,7 @@
   "manifest_version": 2,
   "content_security_policy": "script-src 'self'; object-src 'self'",
   "name": "Secure Shell (tot)",
-  "version": "0.8.27.2",
+  "version": "0.8.27.4",
   "default_locale": "en",
   "icons": {
     "128": "images/dev/icon-128.png",
@@ -27,6 +27,17 @@
     "html/nassh_google_relay.html",
     "html/nassh_connect_dialog.html"
   ],
+  "background": {
+    "scripts": [
+      "js/nassh_deps.concat.js",
+      "js/nassh_background.js",
+      "js/nassh.js",
+      "js/nassh_app.js",
+      "js/nassh_executables.js",
+      "js/nassh_preference_manager.js",
+      "js/nassh_nassh.js"
+    ]
+  },
   "app": {
     "launch": {
       "local_path": "html/nassh.html"
