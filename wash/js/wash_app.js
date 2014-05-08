@@ -15,24 +15,12 @@ wash.App = function() {
 
   this.onInit = new lib.Event(this.onInit_.bind(this));
 
-  this.localFS = new wam.binding.fs.FileSystem();
-  this.localFS.ready();
   this.jsfs = new wam.jsfs.FileSystem();
-  this.jsfs.addBinding(this.localFS);
 
   this.loopbackTransport = wam.transport.Direct.createPair();
   this.loopbackChannelA = new wam.Channel(this.loopbackTransport[0], 'A-to-B');
   this.loopbackChannelB = new wam.Channel(this.loopbackTransport[1], 'B-to-A');
-  this.loopbackChannelB.onHandshakeOffered.addListener(function(offerEvent) {
-      if (!wam.remote.fs.testOffer(offerEvent.inMessage))
-        return;
-
-      this.handshakeResponse = new wam.remote.fs.handshake.Response(
-          offerEvent.inMessage, this.localFS);
-
-      this.handshakeResponse.sendReady();
-      offerEvent.response = this.handshakeResponse;
-    }.bind(this));
+  this.jsfs.publishOn(this.loopbackChannelB);
 
   if (true) {
     this.loopbackChannelA.verbose =

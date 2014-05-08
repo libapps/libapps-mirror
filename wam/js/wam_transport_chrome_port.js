@@ -79,7 +79,7 @@ wam.transport.ChromePort.prototype.connect = function(extensionId) {
   }
 
   var onDisconnect = function(e) {
-    console.log('transport.ChromePort.connect: disconnect');
+    console.log('wam.transport.ChromePort.connect: disconnect');
     port.onMessage.removeListener(onMessage);
     port.onDisconnect.removeListener(onDisconnect);
     this.readyBinding.closeError('wam.Error.TransportDisconnect',
@@ -152,7 +152,9 @@ wam.transport.ChromePort.onConnectExternal_ = function(port) {
 wam.transport.ChromePort.listen = function(whitelist, onConnect) {
   if (onConnect == null) {
     if (!wam.transport.ChromePort.onConnectCallback_)
-      throw 'transport.ChromePort is not listening.';
+      throw 'wam.transport.ChromePort is not listening.';
+
+    console.log('wam.transport.ChromePort.connect: listen cancelled');
 
     wam.transport.ChromePort.onListenCallback_ = null;
     wam.transport.ChromePort.connectWhitelist_ = null;
@@ -161,7 +163,9 @@ wam.transport.ChromePort.listen = function(whitelist, onConnect) {
 
   } else {
     if (wam.transport.ChromePort.onConnectCallback_)
-      throw 'transport.ChromePort is already listening.';
+      throw 'wam.transport.ChromePort is already listening.';
+
+    console.log('wam.transport.ChromePort.connect: listen');
 
     wam.transport.ChromePort.onListenCallback_ = onConnect;
     wam.transport.ChromePort.connectWhitelist_ = whitelist;

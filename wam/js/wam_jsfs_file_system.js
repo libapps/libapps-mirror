@@ -6,6 +6,9 @@
 
 wam.jsfs.FileSystem = function(opt_rootDirectory) {
   this.rootDirectory_ = opt_rootDirectory || new wam.jsfs.Directory();
+  this.defaultBinding = new wam.binding.fs.FileSystem();
+  this.addBinding(this.defaultBinding);
+  this.defaultBinding.ready();
 };
 
 wam.jsfs.FileSystem.prototype.addBinding = function(binding) {
@@ -22,6 +25,19 @@ wam.jsfs.FileSystem.prototype.removeBinding = function(binding) {
   binding.onList.removeListener(this.onStat_, this);
   binding.onExecuteContextCreated.removeListener(
       this.onExecuteContextCreated_, this);
+};
+
+wam.jsfs.FileSystem.prototype.publishOn = function(channel) {
+  channel.onHandshakeOffered.addListener(function(offerEvent) {
+      if (!wam.remote.fs.testOffer(offerEvent.inMessage))
+        return;
+
+      this.handshakeResponse = new wam.remote.fs.handshake.Response(
+          offerEvent.inMessage, this.defaultBinding);
+
+      this.handshakeResponse.sendReady();
+      offerEvent.response = this.handshakeResponse;
+    }.bind(this));
 };
 
 /**

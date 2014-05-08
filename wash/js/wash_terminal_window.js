@@ -80,7 +80,7 @@ wash.TerminalWindow.prototype.println = function(str) {
  * Window initialization is done.
  */
 wash.TerminalWindow.prototype.onInit_ = function() {
-  this.executeContext = this.app.localFS.createExecuteContext();
+  this.executeContext = this.app.jsfs.defaultBinding.createExecuteContext();
   this.executeContext.setEnvs(this.defaultEnv);
   this.executeContext.onClose.addListener(this.onExecuteClose_, this);
   this.executeContext.onStdOut.addListener(this.onStdOut_, this);

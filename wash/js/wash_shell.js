@@ -152,6 +152,9 @@ wash.Shell.prototype.parseShellInput = function(str) {
     argv = '';
   }
 
+  if (path.substr(0, 2) == './')
+    path = this.executeContext.getEnv('PWD', '/') + path.substr(2);
+
   return [path, argv];
 };
 
