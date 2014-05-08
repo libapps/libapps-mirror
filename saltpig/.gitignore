@@ -1,0 +1,5 @@
+dist/
+js/*.concat.js
+*.nmf
+*.tar
+*.pexe

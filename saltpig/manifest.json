@@ -1,0 +1,27 @@
+{
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCg/FFEWalWaR2pG58BF6SjydOPsrbFNNQHK3FAw9wkExw/1GPceLxECxtIUaZ1ulOSKpJYCiPjMTs8FGCLji9uGGxcK7wyPhEHvRl7TchD3mUj7dHFoPXhay71JYXkxd8Z1S4oTwnDh0bGJfk9RpgdNSXr42I4jbpL8mAV3ThZKQIDAQAB",
+  "manifest_version": 2,
+  "name": "Salt Pig (tot)",
+  "version": "1.0",
+  "icons": {
+    "128": "images/dev/128.png"
+  },
+  "description": "You put your NaCl in it.",
+  "offline_enabled": true,
+  "sockets": {
+    "tcp": { "connect": "" },
+    "udp": { "send": "", "bind": "" },
+    "tcpServer": { "listen": "" }
+  },
+  "app": {
+    "background": {
+      "scripts": [
+        "js/sp_deps.concat.js",
+        "js/sp.js",
+        "js/sp_app.js",
+        "js/sp_nacl.js",
+        "js/sp_background.js"
+      ]
+    }
+  }
+}
