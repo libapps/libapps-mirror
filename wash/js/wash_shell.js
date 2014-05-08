@@ -149,7 +149,7 @@ wash.Shell.prototype.parseShellInput = function(str) {
       return null;
   } else {
     path = str;
-    argv = '';
+    argv = null;
   }
 
   if (path.substr(0, 2) == './')
@@ -195,6 +195,9 @@ wash.Shell.prototype.dispatchExecuteContext = function(ec, path, argv) {
 };
 
 wash.Shell.prototype.parseArgv = function(argv) {
+  if (!argv)
+    return null;
+
   if (/[\{\[\"\']/.test(argv.substr(0, 1))) {
     // argv starts with {, [, ", or '... parse it as JSON.
     try {
@@ -249,4 +252,6 @@ wash.Shell.prototype.onStdIn_ = function(value) {
 
 wash.Shell.prototype.onSignal_ = function(name) {
   console.log('Caught signal: ' + name);
+  if (name == 'wam.FileSystem.Signal.Interrupt')
+    this.repl();
 };

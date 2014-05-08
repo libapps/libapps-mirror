@@ -30,6 +30,8 @@ wam.transport.ChromePort.prototype.setPort_ = function(port) {
   }.bind(this);
 
   var thisOnDisconnect = function() {
+    console.log('wam.transport.ChromePort: disconnect: ' + port.sender.id);
+
     this.port_.onMessage.removeListener(thisOnMessage);
     this.port_.onMessage.removeListener(thisOnDisconnect);
     this.port_ = null;
