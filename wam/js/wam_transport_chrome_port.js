@@ -24,13 +24,14 @@ wam.transport.ChromePort.prototype.setPort_ = function(port) {
     throw new Error('Port already set');
 
   this.port_ = port;
+  var id = port.sender ? port.sender.id : 'anonymous';
 
   var thisOnMessage = function(msg) {
     wam.async(this.onMessage, [this, msg]);
   }.bind(this);
 
   var thisOnDisconnect = function() {
-    console.log('wam.transport.ChromePort: disconnect: ' + port.sender.id);
+    console.log('wam.transport.ChromePort: disconnect: ' + id);
 
     this.port_.onMessage.removeListener(thisOnMessage);
     this.port_.onMessage.removeListener(thisOnDisconnect);

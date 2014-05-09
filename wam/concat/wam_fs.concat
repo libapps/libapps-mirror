@@ -25,6 +25,7 @@ wam/js/wam_remote_fs_execute.js
 wam/js/wam_jsfs.js
 wam/js/wam_jsfs_file_system.js
 wam/js/wam_jsfs_entry.js
+wam/js/wam_jsfs_dom_file_system.js
 wam/js/wam_jsfs_remote_file_system.js
 wam/js/wam_jsfs_directory.js
 wam/js/wam_jsfs_execute_context.js

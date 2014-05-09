@@ -82,8 +82,8 @@ wam.remote.fs.handshake.Response = function(inMessage, fileSystem) {
   this.readyBinding = this.readyResponse.readyBinding;
 };
 
-wam.remote.fs.handshake.Response.prototype.sendReady = function() {
-  this.readyResponse.readyBinding.ready(null);
+wam.remote.fs.handshake.Response.prototype.sendReady = function(value) {
+  this.readyResponse.readyBinding.ready(value || null);
 };
 
 wam.remote.fs.handshake.Response.prototype.onMessage_ = function(inMessage) {

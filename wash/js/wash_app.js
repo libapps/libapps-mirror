@@ -18,9 +18,11 @@ wash.App = function() {
   this.jsfs = new wam.jsfs.FileSystem();
 
   this.loopbackTransport = wam.transport.Direct.createPair();
-  this.loopbackChannelA = new wam.Channel(this.loopbackTransport[0], 'A-to-B');
-  this.loopbackChannelB = new wam.Channel(this.loopbackTransport[1], 'B-to-A');
-  this.jsfs.publishOn(this.loopbackChannelB);
+  this.loopbackChannelA = new wam.Channel(
+      this.loopbackTransport[0], 'direct-A');
+  this.loopbackChannelB = new wam.Channel(
+      this.loopbackTransport[1], 'direct-B');
+  this.jsfs.publishOn(this.loopbackChannelB, 'wash');
 
   if (true) {
     this.loopbackChannelA.verbose =
@@ -48,11 +50,15 @@ wash.App.prototype.initFileSystem = function(onInit) {
                                       cx.next, cx.error);
     },
 
+    function domfs(cx) {
+      this.jsfs.makeEntry('/apps/wash/domfs', new wam.jsfs.DOMFileSystem(),
+                          cx.next, cx.error);
+    },
+
     function loopback(cx) {
-      this.jsfs.makeEntries(
-          '/apps/wash',
-          {'loopback': new wam.jsfs.RemoteFileSystem(this.loopbackChannelA)},
-          cx.next, cx.error);
+      this.jsfs.makeEntry('/apps/wash/loopback',
+                          new wam.jsfs.RemoteFileSystem(this.loopbackChannelA),
+                          cx.next, cx.error);
     }]);
 
   sequence.run(onInit, function(value) {

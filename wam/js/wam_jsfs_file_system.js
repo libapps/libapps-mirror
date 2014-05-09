@@ -27,15 +27,19 @@ wam.jsfs.FileSystem.prototype.removeBinding = function(binding) {
       this.onExecuteContextCreated_, this);
 };
 
-wam.jsfs.FileSystem.prototype.publishOn = function(channel) {
+wam.jsfs.FileSystem.prototype.publishOn = function(channel, name) {
+  var readyValue = name ? {name: name} : null;
+
   channel.onHandshakeOffered.addListener(function(offerEvent) {
-      if (!wam.remote.fs.testOffer(offerEvent.inMessage))
+      if (offerEvent.response ||
+          !wam.remote.fs.testOffer(offerEvent.inMessage)) {
         return;
+      }
 
       this.handshakeResponse = new wam.remote.fs.handshake.Response(
           offerEvent.inMessage, this.defaultBinding);
 
-      this.handshakeResponse.sendReady();
+      this.handshakeResponse.sendReady(readyValue);
       offerEvent.response = this.handshakeResponse;
     }.bind(this));
 };
@@ -227,12 +231,12 @@ wam.jsfs.FileSystem.prototype.onList_ = function(arg, onSuccess, onError) {
   }
 
   var onPartialResolve = function(prefixList, pathList, entry) {
-      if (entry.can('FORWARD')) {
-        entry.forwardList
-        ({fullPath: arg.path, forwardPath: pathList.join('/')},
-         onSuccess, onError);
-        return;
-      }
+    if (entry.can('FORWARD')) {
+      entry.forwardList
+      ({fullPath: arg.path, forwardPath: pathList.join('/')},
+       onSuccess, onError);
+      return;
+    }
 
     if (pathList.length) {
       onError(wam.mkerr('wam.FileSystem.Error.NotFound', [arg.path]));

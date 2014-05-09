@@ -7,10 +7,16 @@
 sp.App = function() {
   this.onInit = new lib.Event(this.onInit_.bind(this));
   this.jsfs = new wam.jsfs.FileSystem();
-  this.installExecutables(this.onInit,
-                          function(value) {
-                            console.log('install failed: ' + value);
-                          });
+  var onError = function(value) { console.log('install failed: ' + value) };
+  this.installExecutables(function() {
+      this.installDOMFS(this.onInit, onError);
+    }.bind(this),
+    onError);
+};
+
+sp.App.prototype.installDOMFS = function(onSuccess, onError) {
+  this.jsfs.makeEntry('domfs', new wam.jsfs.DOMFileSystem(),
+                      onSuccess, onError);
 };
 
 sp.App.prototype.installExecutables = function(onSuccess, onError) {
@@ -57,5 +63,5 @@ sp.App.prototype.onConnect_ = function(transport) {
   var channel = new wam.Channel(transport);
   //channel.verbose = wam.Channel.verbosity.ALL;
 
-  this.jsfs.publishOn(channel);
+  this.jsfs.publishOn(channel, 'saltpig');
 };

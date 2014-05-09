@@ -49,7 +49,7 @@ wash.builtins.callbacks['cd'] = function(shell, executeContext) {
   shell.executeContext.fileSystem.stat
   ({path: path},
    function(statResult) {
-     if (statResult.opList.indexOf('LIST') == -1) {
+     if (statResult.abilities.indexOf('LIST') == -1) {
        executeContext.closeError('wam.FileSystem.Error.NotListable',
                                  [path]);
        return;

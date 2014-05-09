@@ -10,16 +10,22 @@ wam.jsfs.RemoteFileSystem = function(channel) {
   this.channel = channel;
   this.channel.readyBinding.onReady.addListener(this.onChannelReady_, this);
 
+  this.remoteName = null;
+
   this.handshakeRequest_ = null;
   this.remoteFileSystem_ = null;
 
-  this.pendingOperations = [];
+  this.pendingOperations_ = [];
+
+  this.onReady = new lib.Event();
+  this.onClose = new lib.Event();
 
   if (this.channel.readyBinding.isReadyState('READY'))
     this.offerHandshake();
 };
 
-wam.jsfs.RemoteFileSystem.prototype = wam.jsfs.Entry.subclass(['FORWARD']);
+wam.jsfs.RemoteFileSystem.prototype = wam.jsfs.Entry.subclass(
+    ['FORWARD', 'LIST']);
 
 wam.jsfs.RemoteFileSystem.prototype.getStat = function(onSuccess, onError) {
   var readyState = 'UNEDFINED';
@@ -28,9 +34,10 @@ wam.jsfs.RemoteFileSystem.prototype.getStat = function(onSuccess, onError) {
 
   wam.async(onSuccess,
             [null,
-             {opList: this.opList,
-              readyState: readyState,
-              channelName: this.channel.name
+             {abilities: this.abilities,
+              state: readyState,
+              channel: this.channel.name,
+              source: 'wamfs'
              }]);
 };
 
@@ -38,7 +45,7 @@ wam.jsfs.RemoteFileSystem.prototype.connect = function(onSuccess, onError) {
   if (this.remoteFileSystem_ && this.remoteFileSystem_.isReadyState('READY'))
     throw new Error('Already connected');
 
-  this.pendingOperations.push([onSuccess, onError]);
+  this.pendingOperations_.push([onSuccess, onError]);
 
   if (this.remoteFileSystem_ && this.remoteFileSystem_.isReadyState('WAIT'))
     return;
@@ -62,6 +69,7 @@ wam.jsfs.RemoteFileSystem.prototype.offerHandshake = function() {
   this.handshakeRequest_ = new wam.remote.fs.handshake.Request(this.channel);
   this.remoteFileSystem_ = this.handshakeRequest_.fileSystem;
   this.remoteFileSystem_.onReady.addListener(this.onFileSystemReady_, this);
+  this.remoteFileSystem_.onClose.addListener(this.onFileSystemClose_, this);
   this.handshakeRequest_.sendRequest();
 };
 
@@ -69,24 +77,31 @@ wam.jsfs.RemoteFileSystem.prototype.onChannelReady_ = function() {
   this.offerHandshake();
 };
 
-wam.jsfs.RemoteFileSystem.prototype.onFileSystemReady_ = function() {
-  while (this.pendingOperations.length) {
-    var onSuccess = this.pendingOperations.shift()[0];
+wam.jsfs.RemoteFileSystem.prototype.onFileSystemReady_ = function(value) {
+  if (typeof value == 'object' && value.name)
+    this.remoteName = value.name;
+
+  while (this.pendingOperations_.length) {
+    var onSuccess = this.pendingOperations_.shift()[0];
     onSuccess();
   }
+
+  this.onReady(value);
 };
 
 wam.jsfs.RemoteFileSystem.prototype.onFileSystemClose_ = function(
     reason, value) {
   this.remoteFileSystem_.onReady.removeListener(this.onFileSystemReady_, this);
-  this.remoteFileSystem_.onClose.remoteListener(this.onFileSystemClose_, this);
+  this.remoteFileSystem_.onClose.removeListener(this.onFileSystemClose_, this);
+
+  this.onClose(reason, value);
 
   this.handshakeRequest_ = null;
   this.remoteFileSystem_ = null;
 
   if (reason == 'error') {
-    while (this.pendingOperations.length) {
-      var onError = this.pendingOperations.shift()[1];
+    while (this.pendingOperations_.length) {
+      var onError = this.pendingOperations_.shift()[1];
       onError();
     }
   }

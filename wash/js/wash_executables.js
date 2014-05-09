@@ -66,6 +66,35 @@ wash.executables.callbacks['ls'] = function(executeContext) {
   var path = arg[0] || '';
   path = wam.binding.fs.absPath(executeContext.getEnv('PWD', '/'), path);
 
+  var formatStat = function(stat) {
+    var prefix = stat.source || '';
+
+    if (stat.mtime) {
+      var d = new Date(stat.mtime);
+      stat.mtime = d.getFullYear() + '-' + lib.f.zpad(d.getMonth() + 1, 2) +
+          '-' + lib.f.zpad(d.getDay(), 2) + ' ' + d.toLocaleTimeString();
+    }
+
+    delete stat.source;
+    delete stat.abilities;
+    var keys = Object.keys(stat).sort();
+
+    var ary = [];
+    for (var i = 0; i < keys.length; i++) {
+      ary.push(keys[i] + ': ' + JSON.stringify(stat[keys[i]]));
+    }
+
+    var suffix = ary.join(', ');
+
+    if (!prefix && !suffix)
+      return '???';
+
+    if (prefix && !suffix)
+      return '[' + prefix + ']';
+
+    return (prefix ? '[' + prefix + '] ' : '') + suffix;
+  };
+
   executeContext.fileSystem.list
   ({path: path},
    function(listResult) {
@@ -82,11 +111,12 @@ wash.executables.callbacks['ls'] = function(executeContext) {
        names.forEach(function(name) {
            var stat = listResult[name].stat;
            rv += name;
-           rv += (stat.opList.indexOf('LIST') == -1) ? ' ' : '/';
+           rv += (stat.abilities.indexOf('LIST') == -1) ? ' ' : '/';
            for (var i = 0; i < longest - name.length; i++) {
              rv += ' ';
            }
-           rv += '   ' + JSON.stringify(listResult[name].stat) + '\n';
+
+           rv += '   ' + formatStat(stat) + '\n';
          });
      }
 
@@ -94,6 +124,19 @@ wash.executables.callbacks['ls'] = function(executeContext) {
      executeContext.closeOk(null);
    },
    function(value) {
-     executeContext.closeErrorValue(value);
+     if (value.errorName == 'wam.FileSystem.Error.NotListable') {
+       executeContext.fileSystem.stat
+           ({path: path},
+            function(stat) {
+              executeContext.stdout(wam.binding.fs.baseName(path) + '  ' +
+                                    formatStat(stat) + '\n');
+              executeContext.closeOk(null);
+            },
+            function(value) {
+              executeContext.closeErrorValue(value);
+            });
+     } else {
+       executeContext.closeErrorValue(value);
+     }
    });
 };

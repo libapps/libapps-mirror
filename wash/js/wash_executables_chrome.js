@@ -39,14 +39,38 @@ wash.executables.chrome.callbacks['mount.chrome'] = function(
   }
 
   var path = arg.path;
-  if (!path)
-    path = '/mnt/' + id;
-
-  if (typeof path != 'string') {
+  if (path && typeof path != 'string') {
     executeContext.closeError('wam.FileSystem.Error.MissingOrBadArgument',
                               ['id', 'string']);
     return;
   }
+
+  var rfs = null;
+
+  var onFileSystemReady = function() {
+    rfs.onReady.removeListener(onFileSystemReady);
+    rfs.onClose.removeListener(onFileSystemClose);
+
+    if (!path)
+      path = '/apps/' + (rfs.remoteName || id);
+
+    jsfs.makeEntry(
+        path, rfs,
+        function() {
+          executeContext.closeOk(null);
+        },
+        function(value) {
+          transport.disconnect();
+          executeContext.closeErrorValue(value);
+        });
+  };
+
+  var onFileSystemClose = function(value) {
+    rfs.onReady.removeListener(onFileSystemReady);
+    rfs.onClose.removeListener(onFileSystemClose);
+
+    executeContext.closeError(value);
+  };
 
   var onTransportClose = function(reason, value) {
     transport.readyBinding.onClose.removeListener(onTransportClose);
@@ -63,18 +87,12 @@ wash.executables.chrome.callbacks['mount.chrome'] = function(
     transport.readyBinding.onClose.removeListener(onTransportClose);
     transport.readyBinding.onReady.removeListener(onTransportReady);
 
-    var channel = new wam.Channel(transport, id);
+    var channel = new wam.Channel(transport, 'crx:' + id);
     //channel.verbose = wam.Channel.verbosity.ALL;
-
-    jsfs.makeEntry(path, new wam.jsfs.RemoteFileSystem(channel),
-                   function() {
-                     executeContext.closeOk(null);
-                   },
-                   function(value) {
-                     transport.disconnect();
-                     executeContext.closeErrorValue(value);
-                   });
-  };
+    rfs = new wam.jsfs.RemoteFileSystem(channel);
+    rfs.onReady.addListener(onFileSystemReady);
+    rfs.onClose.addListener(onFileSystemClose);
+ };
 
   var transport = new wam.transport.ChromePort();
   transport.readyBinding.onClose.addListener(onTransportClose);

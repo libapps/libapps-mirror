@@ -11,25 +11,31 @@ wam.jsfs.Entry = function() {
  * List of operation types that may be supported by a filesystem entry and the
  * methods they imply.
  */
-wam.jsfs.Entry.ops = {
+wam.jsfs.Entry.ability = {
   'LIST': ['addEntry', 'getStat', 'listEntryStats', 'partialResolve'],
   'OPEN': ['getStat', 'open'],
   'EXECUTE': ['getStat', 'execute'],
   'FORWARD': ['getStat', 'forwardStat', 'forwardList', 'forwardExecute']
 };
 
-wam.jsfs.Entry.subclass = function(opList) {
+wam.jsfs.Entry.subclass = function(abilities) {
   var proto = Object.create(wam.jsfs.Entry.prototype);
-  proto.opList = opList;
-  wam.async(wam.jsfs.Entry.checkOpMethods, [null, proto]);
+  proto.abilities = abilities;
+  wam.async(wam.jsfs.Entry.checkMethods, [null, proto]);
 
   return proto;
 };
 
-wam.jsfs.Entry.checkOpMethods = function(proto) {
-  var opList = proto.opList;
-  if (!opList || opList.length == 0)
-    throw new Error('Missing opList property');
+wam.jsfs.Entry.checkMethods = function(proto) {
+  var abilities = proto.abilities;
+  if (!abilities || abilities.length == 0)
+    throw new Error('Missing abilities property');
+
+  if (abilities.indexOf('FORWARD') != -1) {
+    // Entries marked for FORWARD only need to support the FORWARD methods.
+    // Additional abilities only advise what can be forwarded.
+    abilities = ['FORWARD'];
+  }
 
   var checkMethods = function(opname, nameList) {
     for (var i = 0; i < nameList.length; i++) {
@@ -38,15 +44,15 @@ wam.jsfs.Entry.checkOpMethods = function(proto) {
     }
   };
 
-  for (var i = 0; i < opList.length; i++) {
-    if (opList[i] in wam.jsfs.Entry.ops) {
-      checkMethods(opList[i], wam.jsfs.Entry.ops[opList[i]]);
+  for (var i = 0; i < abilities.length; i++) {
+    if (abilities[i] in wam.jsfs.Entry.ability) {
+      checkMethods(abilities[i], wam.jsfs.Entry.ability[abilities[i]]);
     } else {
-      throw new Error('Unknown operation: ' + opList[i]);
+      throw new Error('Unknown operation: ' + abilities[i]);
     }
   }
 };
 
 wam.jsfs.Entry.prototype.can = function(opname) {
-  return (this.opList.indexOf(opname) != -1);
+  return (this.abilities.indexOf(opname) != -1);
 };

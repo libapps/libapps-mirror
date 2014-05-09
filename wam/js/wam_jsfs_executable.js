@@ -16,7 +16,8 @@ wam.jsfs.Executable.prototype = wam.jsfs.Entry.subclass(['EXECUTE']);
 wam.jsfs.Executable.prototype.getStat = function(onSuccess, onError) {
   wam.async(onSuccess,
             [null,
-             { opList: this.opList }]);
+             { abilities: this.abilities,
+               source: 'jsfs'}]);
 };
 
 wam.jsfs.Executable.prototype.execute = function(executeContext, arg) {

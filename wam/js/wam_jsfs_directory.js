@@ -33,8 +33,11 @@ wam.jsfs.Directory.prototype.addEntry = function(
 };
 
 wam.jsfs.Directory.prototype.listEntryStats = function(onSuccess) {
-  var statCount = Object.keys(this.entries_).length;
   var rv = {};
+
+  var statCount = Object.keys(this.entries_).length;
+  if (statCount == 0)
+    wam.async(onSuccess, [null, rv]);
 
   var onStat = function(name, stat) {
     rv[name] = {stat: stat};
@@ -51,8 +54,9 @@ wam.jsfs.Directory.prototype.listEntryStats = function(onSuccess) {
 wam.jsfs.Directory.prototype.getStat = function(onSuccess, onError) {
   wam.async(onSuccess,
             [null,
-             { opList: this.opList,
-               entryCount: Object.keys(this.entries_).length
+             { abilities: this.abilities,
+               count: Object.keys(this.entries_).length,
+               source: 'jsfs'
              }]);
 };
 
@@ -70,7 +74,7 @@ wam.jsfs.Directory.prototype.partialResolve = function(
       // We've found the full path.
       wam.async(onSuccess, [null, prefixList, pathList, entry]);
 
-    } else if (entry.can('LIST')) {
+    } else if (entry.can('LIST') && !entry.can('FORWARD')) {
       // We're not done, descend into a child directory to look for more.
       entry.partialResolve(prefixList, pathList, onSuccess, onError);
     } else {
