@@ -85,6 +85,7 @@ wash.TerminalWindow.prototype.onInit_ = function() {
   this.executeContext.onClose.addListener(this.onExecuteClose_, this);
   this.executeContext.onStdOut.addListener(this.onStdOut_, this);
   this.executeContext.onStdErr.addListener(this.onStdOut_, this);
+  this.executeContext.onTTYRequest.addListener(this.onTTYRequest_, this);
   this.executeContext.setTTY
   ({rows: this.term.io.rowCount,
     columns: this.term.io.columnCount
@@ -116,6 +117,12 @@ wash.TerminalWindow.prototype.onExecuteClose_ = function(reason, value) {
   }
 };
 
+wash.TerminalWindow.prototype.onTTYRequest_ = function(request) {
+  console.log('tty request');
+  if (typeof request.interrupt == 'string')
+    this.executeContext.setTTY({interrupt: request.interrupt});
+};
+
 /**
  * Handle for inbound messages from the default command.
  */
@@ -138,7 +145,8 @@ wash.TerminalWindow.prototype.onStdOut_ = function(str, opt_onAck) {
  */
 wash.TerminalWindow.prototype.onSendString_ = function(str) {
   if (this.executeContext.isReadyState('READY')) {
-    if (str == this.executeContext.getTTY().interrupt) {
+    var interruptChar = this.executeContext.getTTY().interrupt;
+    if (interruptChar && str == interruptChar) {
       console.log('interrupt');
       wam.async(function() {
           this.executeContext.signal('wam.FileSystem.Signal.Interrupt');

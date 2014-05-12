@@ -76,7 +76,7 @@ wam.remote.ready.Request.prototype.send = function(name, arg, opt_onReply) {
 
 wam.remote.ready.Request.prototype.onReadyBindingClose_ = function(
     reason, value) {
-  if (this.outMessage.isOpen) {
+  if (this.outMessage && this.outMessage.isOpen) {
     // Upon receipt of our 'ok'/'error' reply the remote end is required to
     // acknowledge by sending a final reply to our outMessage (unless it has
     // already done so).  If the remotes final reply doesn't arrive within
@@ -194,7 +194,8 @@ wam.remote.ready.Response.prototype.onReadyBindingReady_ = function(value) {
 
 wam.remote.ready.Response.prototype.onReadyBindingClose_ = function(
     reason, value) {
-  if (this.inMessage.isOpen && this.inMessage.channel.readyBinding.isOpen) {
+  if (this.inMessage && this.inMessage.isOpen &&
+      this.inMessage.channel.readyBinding.isOpen) {
     if (reason == 'ok') {
       this.inMessage.replyOk(value);
     } else if (this.inFinal) {

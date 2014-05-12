@@ -109,6 +109,7 @@ sp.NaCl.prototype.onPluginProgress_ = function(e) {
 
 sp.NaCl.prototype.onPluginLoad_ = function() {
   this.executeContext.stdout('\r\x1b[K');
+  this.executeContext.requestTTY({interrupt: ''});
 };
 
 sp.NaCl.prototype.onPluginLoadError_ = function(e) {

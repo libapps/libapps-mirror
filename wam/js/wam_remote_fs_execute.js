@@ -64,6 +64,9 @@ wam.remote.fs.execute.Request.prototype.onMessage_ = function(inMessage) {
       this.executeContext.stderr(inMessage.arg, onAck);
     }
 
+  } else if (inMessage.name == 'tty-request') {
+    this.executeContext.requestTTY(inMessage.arg);
+
   } else if (inMessage.name != 'stdout' && inMessage.name != 'stderr' &&
              !inMessage.isFinalReply) {
     console.warn('remote execute request received unexpected message: ' +
@@ -84,6 +87,7 @@ wam.remote.fs.execute.Response = function(inMessage, executeContext) {
   this.executeContext = executeContext;
   this.executeContext.onStdOut.addListener(this.onStdOut_, this);
   this.executeContext.onStdErr.addListener(this.onStdErr_, this);
+  this.executeContext.onTTYRequest.addListener(this.onTTYRequest_.bind(this));
 
   this.readyResponse = new wam.remote.ready.Response(inMessage, executeContext);
   this.readyResponse.onMessage.addListener(this.onMessage_.bind(this));
@@ -110,6 +114,10 @@ wam.remote.fs.execute.Response.prototype.onMessage_ = function(inMessage) {
       this.executeContext.signal(inMessage.arg.name, inMessage.arg.value);
       break;
   }
+};
+
+wam.remote.fs.execute.Response.prototype.onTTYRequest_ = function(value) {
+  this.readyResponse.send('tty-request', value);
 };
 
 wam.remote.fs.execute.Response.prototype.onStdOut_ = function(value, onAck) {

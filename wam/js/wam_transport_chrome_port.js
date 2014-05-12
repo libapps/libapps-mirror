@@ -155,7 +155,7 @@ wam.transport.ChromePort.onConnectExternal_ = function(port) {
 wam.transport.ChromePort.listen = function(whitelist, onConnect) {
   if (onConnect == null) {
     if (!wam.transport.ChromePort.onConnectCallback_)
-      throw 'wam.transport.ChromePort is not listening.';
+      throw new Error('wam.transport.ChromePort is not listening.');
 
     console.log('wam.transport.ChromePort.connect: listen cancelled');
 
@@ -166,7 +166,7 @@ wam.transport.ChromePort.listen = function(whitelist, onConnect) {
 
   } else {
     if (wam.transport.ChromePort.onConnectCallback_)
-      throw 'wam.transport.ChromePort is already listening.';
+      throw new Error('wam.transport.ChromePort is already listening.');
 
     console.log('wam.transport.ChromePort.connect: listen');
 

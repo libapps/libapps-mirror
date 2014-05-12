@@ -23,6 +23,7 @@ wam.binding.fs.ExecuteContext = function(fileSystem, opt_parentContext) {
   this.onStdErr = new wam.Event();
   this.onStdIn = new wam.Event();
   this.onTTYChange = new wam.Event();
+  this.onTTYRequest = new wam.Event();
 
   this.didExecute = false;
 
@@ -46,17 +47,23 @@ wam.binding.fs.ExecuteContext.prototype.setCallee = function(executeContext) {
     throw new Error('Still waiting for call:', this.callee);
 
   this.callee = executeContext;
+  var previousInterruptChar = this.tty_.interrupt;
 
   var onClose = function() {
     this.callee.onClose.removeListener(onClose);
     this.callee.onStdOut.removeListener(this.onStdOut);
     this.callee.onStdOut.removeListener(this.onStdErr);
+    this.callee.onTTYRequest.removeListener(this.onTTYRequest);
     this.callee = null;
+
+    if (this.tty_.interrupt != previousInterruptChar)
+      this.requestTTY({interrupt: previousInterruptChar});
   }.bind(this);
 
   this.callee.onClose.addListener(onClose);
   this.callee.onStdOut.addListener(this.onStdOut);
   this.callee.onStdErr.addListener(this.onStdErr);
+  this.callee.onTTYRequest.addListener(this.onTTYRequest);
   this.callee.setEnvs(this.env_);
   this.callee.setTTY(this.tty_);
 };
@@ -104,6 +111,13 @@ wam.binding.fs.ExecuteContext.prototype.setTTY = function(tty) {
 
   if (this.callee)
     this.callee.setTTY(tty);
+};
+
+wam.binding.fs.ExecuteContext.prototype.requestTTY = function(tty) {
+  this.assertReadyState('READY');
+
+  if (typeof tty.interrupt == 'string')
+    this.onTTYRequest({interrupt: tty.interrupt});
 };
 
 wam.binding.fs.ExecuteContext.prototype.getEnvs = function() {
