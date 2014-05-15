@@ -5,13 +5,13 @@
 'use strict';
 
 wam.errorManager.defineErrors
-(['wam.Error.ChannelDisconnect', ['diagnostic']],
+(
+ ['wam.Error.ChannelDisconnect', ['diagnostic']],
  ['wam.Error.CloseTimeout', []],
  ['wam.Error.HandshakeDeclined', ['diagnostic']],
  ['wam.Error.InvalidChannelProtocol', ['channelProtocol']],
  ['wam.Error.InvalidChannelVersion', ['channelVersion']],
  ['wam.Error.ReadyAbort', ['abortErrorArg']],
- ['wam.Error.MissingArgument', ['name']],
  ['wam.Error.ParentClosed', ['name', 'arg']],
  ['wam.Error.TransportDisconnect', ['diagnostic']],
  ['wam.Error.UnknownMessage', ['name']],

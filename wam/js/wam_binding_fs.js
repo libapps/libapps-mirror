@@ -11,19 +11,21 @@ wam.binding.fs = {};
 
 wam.errorManager.defineErrors
 (
+ ['wam.FileSystem.Error.BadOrMissingArgument', ['name', 'expected']],
+ ['wam.FileSystem.Error.BeginningOfFile', []],
  ['wam.FileSystem.Error.EndOfFile', []],
- ['wam.FileSystem.Error.FileExists', ['path']],
  ['wam.FileSystem.Error.UnexpectedArgvType', ['expected']],
  ['wam.FileSystem.Error.Interrupt', []],
  ['wam.FileSystem.Error.InvalidPath', ['path']],
- ['wam.FileSystem.Error.MissingOrBadArgument', ['name', 'expected']],
  ['wam.FileSystem.Error.NotFound', ['path']],
  ['wam.FileSystem.Error.NotExecutable', ['path']],
  ['wam.FileSystem.Error.NotListable', ['path']],
  ['wam.FileSystem.Error.NotOpenable', ['path']],
  ['wam.FileSystem.Error.OperationTimedOut', []],
  ['wam.FileSystem.Error.OperationNotSupported', []],
+ ['wam.FileSystem.Error.PathExists', ['path']],
  ['wam.FileSystem.Error.PermissionDenied', []],
+ ['wam.FileSystem.Error.ReadError', ['diagnostic']],
  ['wam.FileSystem.Error.ReadyTimeout', []],
  ['wam.FileSystem.Error.ResultTooLarge', ['maxSize', 'resultSize']],
  ['wam.FileSystem.Error.RuntimeError', ['diagnostic']]

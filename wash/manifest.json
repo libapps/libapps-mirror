@@ -3,7 +3,7 @@
   "minimum_chrome_version": "23",
   "manifest_version": 2,
   "name": "Web Application Shell (tot)",
-  "version": "1.4",
+  "version": "1.5",
   "icons": {
     "128": "images/dev/128.png"
   },

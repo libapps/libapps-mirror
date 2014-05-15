@@ -51,7 +51,7 @@ wash.App.prototype.initFileSystem = function(onInit) {
     },
 
     function domfs(cx) {
-      this.jsfs.makeEntry('/apps/wash/domfs', new wam.jsfs.DOMFileSystem(),
+      this.jsfs.makeEntry('/apps/wash/domfs', new wam.jsfs.dom.FileSystem(),
                           cx.next, cx.error);
     },
 

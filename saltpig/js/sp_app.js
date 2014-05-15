@@ -15,7 +15,7 @@ sp.App = function() {
 };
 
 sp.App.prototype.installDOMFS = function(onSuccess, onError) {
-  this.jsfs.makeEntry('domfs', new wam.jsfs.DOMFileSystem(),
+  this.jsfs.makeEntry('domfs', new wam.jsfs.dom.FileSystem(),
                       onSuccess, onError);
 };
 

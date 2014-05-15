@@ -45,7 +45,7 @@ nassh.App.prototype.initFileSystem_ = function(onInit) {
     },
 
     function domfs(cx) {
-      this.jsfs.makeEntry('domfs', new wam.jsfs.DOMFileSystem(),
+      this.jsfs.makeEntry('domfs', new wam.jsfs.dom.FileSystem(),
                           cx.next, cx.error);
     },
 

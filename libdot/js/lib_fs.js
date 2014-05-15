@@ -70,7 +70,7 @@ lib.fs.err = function(msg, opt_callback) {
  */
 lib.fs.installFileErrorToString = function() {
   FileError.prototype.toString = function() {
-    return '[object FileError: ' + lib.fs.getFileErrorMnemonic(this.code) + ']';
+    return '[object FileError: ' + this.name + ']';
   }
 };
 

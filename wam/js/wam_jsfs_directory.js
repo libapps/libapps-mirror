@@ -4,14 +4,30 @@
 
 'use strict';
 
+/**
+ * A wam.jsfs.Entry subclass that represents a directory.
+ */
 wam.jsfs.Directory = function() {
   wam.jsfs.Entry.call(this);
   this.entries_ = {};
   this.mtime_ = 0;
 };
 
+/**
+ * We're an Entry subclass that is able to LIST.
+ */
 wam.jsfs.Directory.prototype = wam.jsfs.Entry.subclass(['LIST']);
 
+/**
+ * Add a new wam.jsfs.Entry to this directory.
+ *
+ * This is a jsfs.Entry method needed as part of the 'LIST' action.
+ *
+ * @param {string} name The name of the entry to add.
+ * @param {wam.jsfs.Entry} entry The Entry subclass to add.
+ * @param {function()} onSuccess
+ * @param {function(wam.Error)} onError
+ */
 wam.jsfs.Directory.prototype.addEntry = function(
     name, entry, onSuccess, onError) {
   if (!name) {
@@ -29,6 +45,26 @@ wam.jsfs.Directory.prototype.addEntry = function(
   wam.async(function() {
       this.entries_[name] = entry;
       onSuccess();
+    }.bind(this));
+};
+
+/**
+ * Remove an entry from this directory.
+ *
+ * This is a jsfs.Entry method needed as part of the 'LIST' action.
+ *
+ * @param {string} name The name of the entry to remove.
+ * @param {function()} onSuccess
+ * @param {function(wam.Error)} onError
+ */
+wam.jsfs.Directory.prototype.doUnlink = function(name, onSuccess, onError) {
+  wam.async(function() {
+      if (name in this.entries_) {
+        delete this.entries_[name];
+        onSuccess(null);
+      } else {
+        onError(wam.mkerror('wam.FileSystem.Error.NotFound', [name]));
+      }
     }.bind(this));
 };
 

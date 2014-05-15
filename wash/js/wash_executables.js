@@ -22,6 +22,146 @@ wash.executables.install = function(jsfs, path, onSuccess, onError) {
 wash.executables.callbacks = {};
 
 /**
+ * Usage: cat <path> ...
+ *
+ * Concatenate one or more files to stdout.
+ */
+wash.executables.callbacks['cat'] = function(executeContext) {
+  executeContext.ready();
+
+  var pwd = executeContext.getEnv('PWD', '/');
+  var path = null;
+  var arg = executeContext.arg;
+
+  if (!(arg instanceof Array)) {
+    executeContext.closeError('wam.FileSystem.Error.UnexpectedArgvType',
+                              ['array']);
+    return;
+  }
+
+  var onReadError = function(value) {
+    executeContext.stderr('cat: ' + path + ': ' + JSON.stringify(value) + '\n');
+    catNextArg();
+  };
+
+  var onReadSuccess = function(result) {
+    var output = result.data;
+    if (output.substr(output.length - 1) != '\n')
+      output += '\n';
+
+    executeContext.stdout(output);
+    catNextArg();
+  };
+
+  var catNextArg = function() {
+    if (!executeContext.arg.length) {
+      executeContext.closeOk(null);
+      return;
+    }
+
+    path = wam.binding.fs.absPath(pwd, arg.shift());
+    executeContext.readFile(path, {}, {dataType: 'utf8-string'},
+                            onReadSuccess, onReadError);
+  };
+
+  catNextArg();
+};
+
+/**
+ * Usage: cp <source> ... <target>
+ *
+ * Copy one or more source files to a target path.
+ *
+ * Does not handle recursive copies, each source must be a file.  If the target
+ * is a directory then the target will be copied with the source file name in
+ * the target directory.
+ */
+wash.executables.callbacks['cp'] = function(executeContext) {
+  executeContext.ready();
+
+  var arg = executeContext.arg;
+  if (!(arg instanceof Array)) {
+    executeContext.closeError('wam.FileSystem.Error.UnexpectedArgvType',
+                              ['array']);
+    return;
+  }
+
+  if (arg.length < 2) {
+    executeContext.closeError('wam.FileSystem.Error.RuntimeError',
+                              ['Usage: cp <source> ... <target>']);
+    return;
+  }
+
+  var pwd = executeContext.getEnv('PWD', '/');
+  var targetPath = wam.binding.fs.absPath(pwd, arg.pop());
+  var targetIsDirectory = false;
+
+  // Copy the next source file on the list.
+  var copyNextSource = function() {
+    if (arg.length == 0) {
+      executeContext.closeOk(null);
+      return;
+    }
+
+    var sourcePath = wam.binding.fs.absPath(pwd, arg.shift());
+    var path = (targetIsDirectory ?
+                targetPath + '/' + wam.binding.fs.baseName(sourcePath) :
+                targetPath);
+
+    executeContext.stdout('cp: ' + sourcePath + ' -> ' + path + '\n');
+    executeContext.copyFile(sourcePath,
+                            path,
+                            copyNextSource,
+                            function(value) {
+                              executeContext.closeErrorValue(value);
+                            });
+  };
+
+  // We've successfully stat'd the target path, so we know it exists.  This is
+  // ok if the target is a directory, or if we're going to overwrite the target
+  // with a single source file.
+  var onTargetStatSuccess = function(statResult) {
+    if (statResult.abilities.indexOf('LIST') != -1) {
+      targetIsDirectory = true;
+
+    } else if (statResult.abilities.indexOf('OPEN') != -1) {
+      if (arg.length > 1) {
+        executeContext.closeError(
+            'wam.FileSystem.Error.RuntimeError',
+            ['Multiple sources, but destination is not a directory']);
+        return;
+      }
+
+      targetIsDirectory = false;
+    }
+
+    copyNextSource();
+  };
+
+  // Some problem stat'ing the target.  This isn't a problem if the target path
+  // represents a new file in an existing directory.
+  var onTargetStatError = function(value) {
+    if (value.errorName != 'wam.FileSystem.Error.NotFound') {
+      executeContext.closeErrorValue(value);
+      return;
+    }
+
+    if (arg.length > 1) {
+      executeContext.closeError(
+          'wam.FileSystem.Error.RuntimeError',
+          ['Multiple sources, but destination is not a directory']);
+      return;
+    }
+
+    targetIsDirectory = false;
+    copyNextSource();
+  };
+
+  executeContext.fileSystem.stat({path: targetPath},
+                                 onTargetStatSuccess, onTargetStatError);
+};
+
+/**
  * Echo.
  *
  * echo.
@@ -30,27 +170,6 @@ wash.executables.callbacks['echo'] = function(executeContext) {
   executeContext.ready();
   executeContext.stdout(executeContext.arg);
   executeContext.closeOk(null);
-};
-
-/**
- * Launch an instance of lib.wash.Readline, yay!
- */
-wash.executables.callbacks['readline'] = function(executeContext) {
-  lib.wash.Readline.main(executeContext);
-};
-
-/**
- * Launch the shell.
- */
-wash.executables.callbacks['wash'] = function(executeContext) {
-  wash.Shell.main(executeContext);
-};
-
-wash.executables.callbacks['stty'] = function(executeContext) {
-  executeContext.ready();
-  executeContext.stdout(JSON.stringify(executeContext.getTTY(), null, '  '));
-  executeContext.stdout('\n');
-  executeContext.closeOk();
 };
 
 wash.executables.callbacks['ls'] = function(executeContext) {
@@ -139,4 +258,55 @@ wash.executables.callbacks['ls'] = function(executeContext) {
        executeContext.closeErrorValue(value);
      }
    });
+};
+
+/**
+ * Launch an instance of lib.wash.Readline, yay!
+ */
+wash.executables.callbacks['readline'] = function(executeContext) {
+  lib.wash.Readline.main(executeContext);
+};
+
+wash.executables.callbacks['rm'] = function(executeContext) {
+  executeContext.ready();
+
+  var arg = executeContext.arg || [];
+
+  if (!arg instanceof Array || arg.length == 0) {
+    executeContext.closeError('wam.FileSystem.Error.BadOrMissingArgument',
+                              ['argv', '[path, ...]']);
+    return;
+  }
+
+  var pwd = executeContext.getEnv('PWD', '/');
+
+  var unlinkNextFile = function() {
+    if (!arg.length) {
+      executeContext.closeOk(null);
+      return;
+    }
+
+    executeContext.fileSystem.unlink(
+        {path: wam.binding.fs.absPath(pwd, arg.shift())},
+        unlinkNextFile,
+        function(value) {
+          executeContext.closeErrorValue(value);
+        });
+  };
+
+  unlinkNextFile();
+};
+
+wash.executables.callbacks['stty'] = function(executeContext) {
+  executeContext.ready();
+  executeContext.stdout(JSON.stringify(executeContext.getTTY(), null, '  '));
+  executeContext.stdout('\n');
+  executeContext.closeOk();
+};
+
+/**
+ * Launch the shell.
+ */
+wash.executables.callbacks['wash'] = function(executeContext) {
+  wash.Shell.main(executeContext);
 };

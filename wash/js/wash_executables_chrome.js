@@ -33,14 +33,14 @@ wash.executables.chrome.callbacks['mount.chrome'] = function(
 
   var id = arg.id;
   if (!id || typeof id != 'string') {
-    executeContext.closeError('wam.FileSystem.Error.MissingOrBadArgument',
+    executeContext.closeError('wam.FileSystem.Error.BadOrMissingArgument',
                               ['id', 'string']);
     return;
   }
 
   var path = arg.path;
   if (path && typeof path != 'string') {
-    executeContext.closeError('wam.FileSystem.Error.MissingOrBadArgument',
+    executeContext.closeError('wam.FileSystem.Error.BadOrMissingArgument',
                               ['id', 'string']);
     return;
   }

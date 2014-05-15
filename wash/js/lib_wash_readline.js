@@ -19,7 +19,7 @@ lib.wash.Readline = function(executeContext) {
 
   var inputHistory = executeContext.arg.inputHistory;
   if (inputHistory && !(inputHistory instanceof Array)) {
-    this.executeContext.closeError('wam.FileSystem.Error.MissingOrBadArgument',
+    this.executeContext.closeError('wam.FileSystem.Error.BadOrMissingArgument',
                                    ['inputHistory', 'array']);
     return;
   }

@@ -16,17 +16,23 @@ wam/js/wam_binding_ready.js
 wam/js/wam_binding_fs.js
 wam/js/wam_binding_fs_file_system.js
 wam/js/wam_binding_fs_execute_context.js
+wam/js/wam_binding_fs_open_context.js
 
 wam/js/wam_remote_ready.js
 wam/js/wam_remote_fs.js
 wam/js/wam_remote_fs_handshake.js
 wam/js/wam_remote_fs_execute.js
+wam/js/wam_remote_fs_open.js
 
 wam/js/wam_jsfs.js
 wam/js/wam_jsfs_file_system.js
 wam/js/wam_jsfs_entry.js
-wam/js/wam_jsfs_dom_file_system.js
 wam/js/wam_jsfs_remote_file_system.js
 wam/js/wam_jsfs_directory.js
 wam/js/wam_jsfs_execute_context.js
+wam/js/wam_jsfs_open_context.js
 wam/js/wam_jsfs_executable.js
+
+wam/js/wam_jsfs_dom.js
+wam/js/wam_jsfs_dom_file_system.js
+wam/js/wam_jsfs_dom_open_context.js

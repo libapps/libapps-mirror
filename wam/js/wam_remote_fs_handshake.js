@@ -5,23 +5,35 @@
 'use strict';
 
 /**
- * Request/Response classes to marshal a wam.binding.fs.FileSystem over a wam
+ * Request/Response classes to connect a wam.binding.fs.FileSystem over a wam
  * channel.
  */
 wam.remote.fs.handshake = {};
 
 /**
- * Context for a wam.FileSystem handshake request.
+ * Back a wam.binding.fs.FileSystem binding with a wam.FileSystem handshake
+ * request.
+ *
+ * Events sourced by the wam.binding.fs.FileSystem will become messages sent
+ * regarding a wam.FileSystem handshake on the given channel.
  */
 wam.remote.fs.handshake.Request = function(channel) {
   this.channel = channel;
 
   this.fileSystem = new wam.binding.fs.FileSystem();
   this.fileSystem.dependsOn(channel.readyBinding);
-  this.fileSystem.onStat.addListener(this.onStat_.bind(this));
-  this.fileSystem.onList.addListener(this.onList_.bind(this));
+
+  this.fileSystem.onStat.addListener(
+      this.proxySingleMessage_.bind(this, 'stat'));
+  this.fileSystem.onUnlink.addListener(
+      this.proxySingleMessage_.bind(this, 'unlink'));
+  this.fileSystem.onList.addListener(
+      this.proxySingleMessage_.bind(this, 'list'));
+
   this.fileSystem.onExecuteContextCreated.addListener(
       this.onExecuteContextCreated_.bind(this));
+  this.fileSystem.onOpenContextCreated.addListener(
+      this.onOpenContextCreated_.bind(this));
 
   this.readyRequest = new wam.remote.ready.Request(this.fileSystem);
 };
@@ -38,20 +50,13 @@ wam.remote.fs.handshake.Request.prototype.sendRequest = function() {
   this.readyRequest.sendRequest(outMessage);
 };
 
-wam.remote.fs.handshake.Request.prototype.onStat_ = function(
-    arg, onSuccess, onError) {
-  this.readyRequest.send('stat', {path: arg.path}, function(inMessage) {
-      if (inMessage.name == 'ok') {
-        onSuccess(inMessage.arg);
-      } else {
-        onError(inMessage.arg);
-      }
-    });
-};
-
-wam.remote.fs.handshake.Request.prototype.onList_ = function(
-    arg, onSuccess, onError) {
-  this.readyRequest.send('list', {path: arg.path}, function(inMessage) {
+/**
+ * Proxy a wam.binding.fs.FileSystem event which maps to a single wam
+ * message that expects an immediate 'ok' or 'error' reply.
+ */
+wam.remote.fs.handshake.Request.prototype.proxySingleMessage_ = function(
+    name, arg, onSuccess, onError) {
+  this.readyRequest.send(name, {path: arg.path}, function(inMessage) {
       if (inMessage.name == 'ok') {
         onSuccess(inMessage.arg);
       } else {
@@ -61,7 +66,8 @@ wam.remote.fs.handshake.Request.prototype.onList_ = function(
 };
 
 /**
- *
+ * Create a wam.remote.fs.execute.Request instance to handle the proxying of an
+ * execute context.
  */
 wam.remote.fs.handshake.Request.prototype.onExecuteContextCreated_ = function(
     executeContext) {
@@ -69,7 +75,22 @@ wam.remote.fs.handshake.Request.prototype.onExecuteContextCreated_ = function(
 };
 
 /**
+ * Create a wam.remote.fs.open.Request instance to handle the proxying of an
+ * open context.
+ */
+wam.remote.fs.handshake.Request.prototype.onOpenContextCreated_ = function(
+    openContext) {
+  new wam.remote.fs.open.Request(this, openContext);
+};
+
+/**
+ * Front a wam.binding.fs.FileSystem binding with a wam.FileSystem handshake
+ * response.
  *
+ * Inbound messages to the handshake will raise events on the binding.
+ *
+ * @param {wam.InMessage} inMessage The inbound 'handshake' message.
+ * @param {wam.binding.fs.FileSystem} The binding to excite.
  */
 wam.remote.fs.handshake.Response = function(inMessage, fileSystem) {
   this.inMessage = inMessage;
@@ -82,14 +103,30 @@ wam.remote.fs.handshake.Response = function(inMessage, fileSystem) {
   this.readyBinding = this.readyResponse.readyBinding;
 };
 
+/**
+ * Mark the binding as ready.
+ *
+ * @param {Object} value The ready value to provide.  This may be an object
+ *   with a 'name' property, suggesting a short name for this file system.
+ */
 wam.remote.fs.handshake.Response.prototype.sendReady = function(value) {
   this.readyResponse.readyBinding.ready(value || null);
 };
 
+/**
+ * Handle inbound messages regarding the handshake.
+ */
 wam.remote.fs.handshake.Response.prototype.onMessage_ = function(inMessage) {
   switch (inMessage.name) {
     case 'stat':
       this.fileSystem.stat(
+          inMessage.arg,
+          function(value) { inMessage.replyOk(value) },
+          function(value) { inMessage.replyErrorValue(value) });
+      break;
+
+    case 'unlink':
+      this.fileSystem.unlink(
           inMessage.arg,
           function(value) { inMessage.replyOk(value) },
           function(value) { inMessage.replyErrorValue(value) });
@@ -109,6 +146,13 @@ wam.remote.fs.handshake.Response.prototype.onMessage_ = function(inMessage) {
       executeContext.setEnvs(inMessage.arg.execEnv);
       executeContext.setTTY(inMessage.arg.tty || {});
       executeContext.execute(inMessage.arg.path, inMessage.arg.execArg);
+      break;
+
+    case 'open':
+      var openContext = this.fileSystem.createOpenContext();
+      var openReply = new wam.remote.fs.open.Response(
+          inMessage, openContext);
+      openContext.open(inMessage.arg.path, inMessage.arg.openArg);
       break;
   }
 };

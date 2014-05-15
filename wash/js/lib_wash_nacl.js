@@ -9,7 +9,7 @@ lib.wash.NaCl = function(executeContext) {
   this.document_ = window.document;
 
   if (!executeContext.arg['url']) {
-    executeContext.closeError('wam.FileSystem.Error.MissingOrBadArgument',
+    executeContext.closeError('wam.FileSystem.Error.BadOrMissingArgument',
                               ['url', '[p]nacl manifest url']);
     return;
   }
@@ -19,7 +19,7 @@ lib.wash.NaCl = function(executeContext) {
   this.posixArgs_ = executeContext.arg['posixArgs'];
   if (!(this.posixArgs_ instanceof Array)) {
     if (this.posixArgs_) {
-      executeContext.closeError('wam.FileSystem.Error.MissingOrBadArgument',
+      executeContext.closeError('wam.FileSystem.Error.BadOrMissingArgument',
                                 ['posixArgs', 'array']);
       return;
     }
