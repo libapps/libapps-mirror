@@ -1,3 +1,17 @@
+0.8.27.5, 2014-04-29, Add wash support, update hterm.
+
+* Update to hterm 1.38 for 'ctrl-c-copy' and 'pass-meta-v' prefs and selection
+  collapse fixes.
+* Add wam/wash support.  Enabled by default in Secure shell (dev).  Toggle
+  the wam listener from the js console of the secure shell background page with:
+
+    app_.prefs_.set('enable-wam', true);   // enable
+    app_.prefs_.set('enable-wam', false);  // disable
+
+    // Array if chrome extension ids which are allowed to make wam connections
+    // to nassh.  Defaults to Wash (tot) and Wash (dev).
+    app_.prefs_.set('wam-whitelist', [...]);
+
 0.8.27.2, 2014-04-29, Update hterm.
 
 * Update to hterm 1.37 for double-paste fix.
