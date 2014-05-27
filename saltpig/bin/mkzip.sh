@@ -15,6 +15,10 @@ source "../libdot/bin/common.sh"
 
 mkdir -p ./dist/zip
 
-export MORE_FILE_PATTERNS='\./.*\.nmf \./.*\.pexe \./.*\.tar'
+export MORE_FILE_PATTERNS='
+  \./[^/]*\.nmf
+  \./[^/]*\.pexe
+  \./[^/]*\.tar
+'
 
 ../libdot/bin/mkzip.sh -s "." -w ./dist/zip/ "$@"
