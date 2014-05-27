@@ -4,3 +4,6 @@
 
 @file libdot/js/lib.js
 @file libdot/js/lib_test_manager.js
+
+@echo // Inserted by libdot/wam/concat/wam_test_deps.concat
+@eval echo "wam.changelogVersion = '$(echo_changelog version)';"

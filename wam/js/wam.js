@@ -7,6 +7,12 @@
 var wam = {};
 
 /**
+ * This is filled out during the concat process, either from
+ * concat/wam_test_deps.concat or concat/wam_fs.concat
+ */
+wam.changelogVersion = null;
+
+/**
  * Namespace for transport classes.
  */
 wam.transport = {};

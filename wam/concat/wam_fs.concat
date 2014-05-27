@@ -3,6 +3,10 @@
 # found in the LICENSE file.
 
 wam/js/wam.js
+
+@echo // Inserted by libdot/concat/wam_fs.concat
+@eval echo "wam.changelogVersion = '$(echo_changelog version)';"
+
 wam/js/wam_channel.js
 wam/js/wam_error_manager.js
 wam/js/wam_errors.js

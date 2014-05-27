@@ -4,10 +4,9 @@
 
 'use strict';
 
-wam.remote.fs = {
-  protocolName: 'x.wam.FileSystem',
-  protocolVersion: '1.0'
-};
+wam.remote.fs = {};
+
+wam.remote.fs.protocolName = 'x.wam.FileSystem';
 
 /**
  * Check to see of the given message is a wam.FileSystem handshake offer.
@@ -15,12 +14,23 @@ wam.remote.fs = {
  * @return {boolean}
  */
 wam.remote.fs.testOffer = function(inMessage) {
+  if (!wam.changelogVersion)
+    throw new Error('Unknown changelog version');
+
   if (!inMessage.arg.payload || typeof inMessage.arg.payload != 'object')
     return false;
 
   var payload = inMessage.arg.payload;
-  return (payload.protocol == wam.remote.fs.protocolName &&
-          payload.version == wam.remote.fs.protocolVersion);
+  if (payload.protocol != wam.remote.fs.protocolName)
+    return false;
+
+  var pos = wam.changelogVersion.indexOf('.');
+  var expectedMajor = wam.changelogVersion.substr(0, pos);
+
+  pos = payload.version.indexOf('.');
+  var offeredMajor = payload.version.substr(0, pos);
+
+  return (expectedMajor == offeredMajor);
 };
 
 /**

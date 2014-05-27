@@ -42,9 +42,12 @@ wam.remote.fs.handshake.Request = function(channel) {
  * Send the handshake offer message.
  */
 wam.remote.fs.handshake.Request.prototype.sendRequest = function() {
+  if (!wam.changelogVersion)
+    throw new Error('Unknown changelog version');
+
   var outMessage = this.channel.createHandshakeMessage
   ({ protocol: wam.remote.fs.protocolName,
-     version: wam.remote.fs.protocolVersion
+     version: wam.changelogVersion
    });
 
   this.readyRequest.sendRequest(outMessage);
