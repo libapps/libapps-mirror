@@ -284,6 +284,11 @@ function process_concat_line() {
   elif [ "${line:0:6}" = "@echo " ]; then
     append_output "${line:6}"
 
+  elif [ "${line:0:6}" = "@eval " ]; then
+    line=$(eval "${line:6}")
+    insist
+    append_output "$line"
+
   elif [ "${line:0:10}" = "@resource " ]; then
     local name="$(echo "${line:10}" | cut -d' ' -f1)"
     local type="$(echo "${line:10}" | cut -d' ' -f2)"

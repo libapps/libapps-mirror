@@ -1,3 +1,8 @@
+1.9, 2014-05-27, Add "@eval" directive to bin/concat.sh
+
+* Add an "@eval" directive which evaluates its operand with bash's eval
+  builtin, and appends the result to the concat output.
+
 1.8, 2014-04-05, Remove option parameter from result.pass()
 
 * lib.TestManager.Result.prototype.pass took an optional parameter, a message
