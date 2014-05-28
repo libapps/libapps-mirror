@@ -1,3 +1,7 @@
+0.8.27.7, 2014-05-27, Rebuild nacl ssh plugin.
+
+* Update to latest build of plugin to fix getsockname errors.
+
 0.8.27.6, 2014-05-27, Update to wam 1.1 for 'open' support.
 
 * Update to wam 1.1 for the latest changes.
