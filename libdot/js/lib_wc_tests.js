@@ -11,6 +11,7 @@ lib.wc.Tests.addTest('strWidth-test', function(result, cx) {
   var asciiString = 'an ascii string';
   var widecharOnechar = '\u4E2D';
   var widecharString = '\u4E2D\u6587\u5B57\u4E32';
+  var ambiguousOnechar = '\u2026'; // Horizontal ellipsis
   var mixedString = '\u4E2D\u6587 English';
   var nullChar = '\u0000';
   var controlChar = '\r';
@@ -20,9 +21,33 @@ lib.wc.Tests.addTest('strWidth-test', function(result, cx) {
   result.assertEQ(2, lib.wc.strWidth(widecharOnechar),
                   'Chinese char has width 2');
   result.assertEQ(8, lib.wc.strWidth(widecharString), 'Widechar string');
+  result.assertEQ(1, lib.wc.strWidth(ambiguousOnechar),
+                  'East Asian Ambiguous character has width 1');
   result.assertEQ(12, lib.wc.strWidth(mixedString), 'Mixed string');
   result.assertEQ(0, lib.wc.strWidth(nullChar), 'Null char has wcwdith 0');
   result.assertEQ(0, lib.wc.strWidth(controlChar),
+                  'Control char has width 0');
+
+  result.pass();
+});
+
+lib.wc.Tests.addTest('charWidthRegardAmbiguous-test', function(result, cs) {
+  var asciiChar = 'a';
+  var wideChar = '\u4E2D';
+  var ambiguousChar = '\u2026'; // Horizontal ellipsis
+  var nullChar = '\u0000';
+  var controlChar = '\r';
+
+  result.assertEQ(1, lib.wc.charWidthRegardAmbiguous(asciiChar.charCodeAt(0)),
+                  'ASCII char has width 1');
+  result.assertEQ(2, lib.wc.charWidthRegardAmbiguous(wideChar.charCodeAt(0)),
+                  'Chinese char has width 2');
+  result.assertEQ(2,
+                  lib.wc.charWidthRegardAmbiguous(ambiguousChar.charCodeAt(0)),
+                  'East Asian Ambiguous character has width 2');
+  result.assertEQ(0, lib.wc.charWidthRegardAmbiguous(nullChar.charCodeAt(0)),
+                  'Null char has wcwdith 0');
+  result.assertEQ(0, lib.wc.charWidthRegardAmbiguous(controlChar.charCodeAt(0)),
                   'Control char has width 0');
 
   result.pass();
