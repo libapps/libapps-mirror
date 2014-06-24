@@ -1,3 +1,12 @@
+0.8.27.9, 2014-06-25, Update to hterm 1.42.
+
+* Update to the latest hterm.
+* Add the "notifications" perimission.
+
+0.8.27.8, 2014-06-24, Update to hterm 1.41.
+
+* Update to the latest hterm.
+
 0.8.27.7, 2014-05-27, Rebuild nacl ssh plugin.
 
 * Update to latest build of plugin to fix getsockname errors.
