@@ -53,7 +53,13 @@ lib.rtdep = function(var_args) {
     throw new Error();
   } catch (ex) {
     var stackArray = ex.stack.split('\n');
-    source = stackArray[2].replace(/^\s*at\s+/, '');
+    // In Safari, the resulting stackArray will only have 2 elements and the
+    // individual strings are formatted differently.
+    if (stackArray.length >= 3) {
+      source = stackArray[2].replace(/^\s*at\s+/, '');
+    } else {
+      source = stackArray[1].replace(/^\s*global code@/, '');
+    }
   }
 
   for (var i = 0; i < arguments.length; i++) {
