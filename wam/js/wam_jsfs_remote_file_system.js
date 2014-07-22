@@ -23,8 +23,8 @@ wam.jsfs.RemoteFileSystem = function(channel) {
 
   this.pendingOperations_ = [];
 
-  this.onReady = new lib.Event();
-  this.onClose = new lib.Event();
+  this.onReady = new wam.Event();
+  this.onClose = new wam.Event();
 
   if (this.channel.readyBinding.isReadyState('READY'))
     this.offerHandshake();
@@ -42,7 +42,7 @@ wam.jsfs.RemoteFileSystem.prototype = wam.jsfs.Entry.subclass(
  * This is a jsfs.Entry method needed as part of the 'LIST' action.
  */
 wam.jsfs.RemoteFileSystem.prototype.getStat = function(onSuccess, onError) {
-  var readyState = 'UNEDFINED';
+  var readyState = 'UNDEFINED';
   if (this.remoteFileSystem_)
     readyState = this.remoteFileSystem_.readyState;
 
