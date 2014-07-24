@@ -1,3 +1,7 @@
+0.8.27.11, 2014-07-24, Update to hterm 1.46.
+
+* Update to the latest hterm.
+
 0.8.27.10, 2014-07-23, Update to hterm 1.44.
 
 * Update to the latest hterm.
