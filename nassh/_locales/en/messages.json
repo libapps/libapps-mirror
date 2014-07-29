@@ -36,6 +36,11 @@
     }
   },
 
+  "UPDATE_AVAILABLE_TOOLTIP": {
+    "message": "An update is available.  Please close all windows.",
+    "description": "A tooltip shown for the chip that indicates an update is available"
+  },
+
   "NOTIFY_COPY": {
     "message": "Selection Copied",
     "description": "Short status message displayed in a terminal overlay when text is automatically copied to the clipboard."

@@ -20,7 +20,8 @@
           console.log('background-page: init complete');
         });
 
-      // Exported for console debugging.
-      window.app_ = app;
+      // "Public" window.app will be retrieved by individual windows via
+      // chrome.getBackgroundPage().
+      window.app = app;
     }, console.log.bind(console));
 })();

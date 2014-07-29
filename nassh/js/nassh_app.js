@@ -11,7 +11,12 @@ lib.rtdep('lib.Event', 'lib.f.Sequence');
  * background page.
  */
 nassh.App = function(manifest) {
+  this.updateAvailable = false;
+
   this.onInit = new lib.Event();
+  this.onUpdateAvailable = new lib.Event(this.onUpdateAvailable_.bind(this));
+
+  chrome.runtime.onUpdateAvailable.addListener(this.onUpdateAvailable);
 
   this.prefs = new nassh.PreferenceManager();
   this.prefs.addObservers(null, {
@@ -77,6 +82,28 @@ nassh.App.prototype.onConnect = function(transport) {
   //channel.verbose = wam.Channel.verbosity.ALL;
 
   this.jsfs.publishOn(channel, 'nassh');
+};
+
+nassh.App.prototype.onUpdateAvailable_ = function(e) {
+  this.updateAvailable = true;
+
+  var onQuery = function(rv) {
+    if (!rv.length) {
+      console.log('Reloading for update.');
+      chrome.runtime.reload();
+    } else {
+      console.log('Not reloading for update, ' + rv.length +
+                  ' windows still open.');
+    }
+  };
+
+  var checkTabs = function() {
+    chrome.tabs.query({url: chrome.runtime.getURL('html/nassh.html')},
+                      onQuery);
+  };
+
+  chrome.tabs.onRemoved.addListener(checkTabs);
+  checkTabs();
 };
 
 /**
