@@ -1,3 +1,12 @@
+0.8.28.2, 2014-08-13, Update to hterm 1.48.
+
+* Update to the latest hterm.
+
+0.8.28.1, 2014-07-31, Add onUpdateAvailable handler.
+
+* Handle the chrome.runtime.onUpdateAvailable event so that we're
+  not automatically reloaded when there's a pending update.
+
 0.8.27.12, 2014-07-08, Update to hterm 1.47.
 
 * Update to the latest hterm.
