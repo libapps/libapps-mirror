@@ -106,8 +106,8 @@ lib.f.parseQuery = function(queryString) {
 };
 
 lib.f.getURL = function(path) {
-  if (window.chrome && chrome.extension && chrome.extension.getURL)
-    return chrome.extension.getURL(path);
+  if (window.chrome && chrome.runtime && chrome.runtime.getURL)
+    return chrome.runtime.getURL(path);
 
   return path;
 };
