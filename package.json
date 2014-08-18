@@ -1,0 +1,15 @@
+{
+  "name": "libapps",
+  "version": "1.0.0",
+  "description": "Grab bag of js, including hterm and its support library.",
+  "main": "libdot/js/lib.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/web-app-messaging/wam.js.git"
+  },
+  "author": "Chromium authors",
+  "licensce": "CHROMIUM",
+  "readmeFilename": "README.md",
+  "devDependencies": {},
+  "dependencies": {}
+}
