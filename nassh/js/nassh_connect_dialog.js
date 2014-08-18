@@ -100,11 +100,15 @@ nassh.ConnectDialog.prototype.onPreferencesReady_ = function() {
   } else {
     this.shortcutList_.focus();
 
-    var lastProfileId = window.localStorage.getItem(
-        '/nassh/connectDialog/lastProfileId');
+    var self = this;
+    chrome.storage.local.get('/nassh/connectDialog/lastProfileId', function(items) {
+      var lastProfileId = items['/nassh/connectDialog/lastProfileId'];
+      if (lastProfileId)
+        profileIndex = Math.max(0, self.getProfileIndex_(lastProfileId));
 
-    if (lastProfileId)
-      profileIndex = Math.max(0, this.getProfileIndex_(lastProfileId));
+      self.shortcutList_.setActiveIndex(profileIndex);
+      self.setCurrentProfileRecord(self.profileList_[profileIndex]);
+    });
   }
 
   this.shortcutList_.setActiveIndex(profileIndex);
@@ -375,8 +379,8 @@ nassh.ConnectDialog.prototype.connect = function(name, argv) {
   this.maybeCopyPlaceholders_();
   this.save();
 
-  window.localStorage.setItem('/nassh/connectDialog/lastProfileId',
-                              this.currentProfileRecord_.id);
+  var items = { '/nassh/connectDialog/lastProfileId': this.currentProfileRecord_.id };
+  chrome.storage.local.set(items);
 
   if (this.form_.checkValidity())
     this.postMessage('connectToProfile', [this.currentProfileRecord_.id]);
