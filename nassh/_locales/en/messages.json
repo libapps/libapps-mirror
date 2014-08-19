@@ -206,6 +206,11 @@
     "description": "The label for the connect button."
   },
 
+  "OPTIONS_BUTTON_LABEL": {
+    "message": "Options",
+    "description": "The label for the options button."
+  },
+
   "INITIALIZING_RELAY": {
     "message": "Looking up relay server using: $HOST$",
     "description": "Text displayed in the terminal when the user is connecting through a relay.",

@@ -58,6 +58,7 @@ nassh.ConnectDialog = function(messagePort) {
   this.form_ = document.querySelector('form');
   this.connectButton_ = document.querySelector('#connect');
   this.deleteButton_ = document.querySelector('#delete');
+  this.optionsButton_ = document.querySelector('#options');
 };
 
 /**
@@ -215,6 +216,8 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
                                        this.onConnectClick_.bind(this));
   this.deleteButton_.addEventListener('click',
                                       this.onDeleteClick_.bind(this));
+  this.optionsButton_.addEventListener('click',
+                                       this.onOptionsClick_.bind(this));
 
   this.$f('identity').addEventListener('select', function(e) {
       if (e.target.value == '')
@@ -816,6 +819,29 @@ nassh.ConnectDialog.prototype.onDeleteClick_ = function(e) {
     this.shortcutList_.focus();
   }
 };
+
+/**
+ * Someone clicked on the options button.
+ */
+nassh.ConnectDialog.prototype.onOptionsClick_ = function(e) {
+  if (nassh.v2) {
+    var optionsWindow = chrome.app.window.get('options_page');
+    // If the options window is not open, opens it, else brings it to the foreground.
+    if (!optionsWindow) {
+      chrome.app.window.create('/html/nassh_preferences_editor.html', {
+        'bounds': {
+          'width': 700,
+          'height': 800
+        },
+        'id': 'options_page'
+      });
+    } else {
+      optionsWindow.focus();
+    }
+  } else {
+    window.open('/html/nassh_preferences_editor.html');
+  }
+}
 
 /**
  * KeyUp on the form element.
