@@ -525,7 +525,9 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
 
   var self = this;
   this.initPlugin_(function() {
-      window.onbeforeunload = self.onBeforeUnload_.bind(self);
+      if (!nassh.v2)
+        window.onbeforeunload = self.onBeforeUnload_.bind(self);
+
       self.sendToPlugin_('startSession', [argv]);
     });
 
@@ -611,7 +613,8 @@ nassh.CommandInstance.prototype.onTerminalResize_ = function(width, height) {
  * Exit the nassh command.
  */
 nassh.CommandInstance.prototype.exit = function(code) {
-  window.onbeforeunload = null;
+  if (!nassh.v2)
+    window.onbeforeunload = null;
 
   this.io.println(nassh.msg('DISCONNECT_MESSAGE', [code]));
   this.io.println(nassh.msg('RECONNECT_MESSAGE'));

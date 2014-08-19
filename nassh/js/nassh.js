@@ -9,6 +9,11 @@ lib.rtdep('lib.fs');
 var nassh = {};
 
 /**
+ * True if nassh is running as a v2 app.
+ */
+nassh.v2 = !!chrome.app.window;
+
+/**
  * Register a static initializer for nassh.*.
  *
  * @param {function} onInit The function lib.init() wants us to invoke when
