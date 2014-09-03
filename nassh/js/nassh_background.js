@@ -5,6 +5,17 @@
 'use strict';
 
 (function() {
+  var didLaunch = false;
+
+  /**
+   * Used to watch for launch events that occur before we're ready to handle
+   * them. Only used when Secure Shell is running as a v2 app.
+   */
+  if (!!chrome.app.window) {
+    var onLaunched = function() { didLaunch = true };
+    chrome.app.runtime.onLaunched.addListener(onLaunched);
+  }
+
   /**
    * Perform any required async initialization, then create our app instance.
    *
@@ -17,7 +28,17 @@
       var app = new nassh.App(manifest);
 
       app.onInit.addListener(function() {
-          console.log('background-page: init complete');
+          if (!!chrome.app.window) {
+            // Ready to handle launch events, no need for special handling anymore.
+            chrome.app.runtime.onLaunched.removeListener(onLaunched);
+
+            app.installHandlers(chrome.app.runtime);
+
+            if (didLaunch)
+              app.onLaunched();
+          } else {
+            console.log('background-page: init complete');
+          }
         });
 
       // "Public" window.app will be retrieved by individual windows via

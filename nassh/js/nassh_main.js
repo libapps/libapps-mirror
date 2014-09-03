@@ -11,11 +11,13 @@ lib.rtdep('lib.f', 'hterm');
 window.onload = function() {
   var app;
 
-  var updateNotification = document.querySelector('#update-notification');
-  updateNotification.title = nassh.msg('UPDATE_AVAILABLE_TOOLTIP');
-  updateNotification.addEventListener('click', function() {
-      updateNotification.style.display = 'none';
-    });
+  if (!nassh.v2) {
+    var updateNotification = document.querySelector('#update-notification');
+    updateNotification.title = nassh.msg('UPDATE_AVAILABLE_TOOLTIP');
+    updateNotification.addEventListener('click', function() {
+        updateNotification.style.display = 'none';
+      });
+  }
 
   var execNaSSH = function() {
     var profileName = lib.f.parseQuery(document.location.search)['profile'];
@@ -36,28 +38,32 @@ window.onload = function() {
     window.term_ = terminal;
   }
 
-  var onUpdateAvailable = function() {
-    updateNotification.style.display = '';
-  };
+  if (!nassh.v2) {
+    var onUpdateAvailable = function() {
+      updateNotification.style.display = '';
+    };
 
-  window.onunload = function() {
-    if (app)
-      app.onUpdateAvailable.removeListener(onUpdateAvailable);
-  };
+    window.onunload = function() {
+      if (app)
+        app.onUpdateAvailable.removeListener(onUpdateAvailable);
+    };
+  }
 
   chrome.runtime.getBackgroundPage(function(bg) {
-      if (!bg)
-        return;
+    if (!bg)
+      return;
 
-      app = bg.app;
+    app = bg.app;
 
-      // Exported for console debugging.
-      window.app_ = app;
+    // Exported for console debugging.
+    window.app_ = app;
 
+    if (!nassh.v2) {
       app.onUpdateAvailable.addListener(onUpdateAvailable);
       if (app.updateAvailable)
         onUpdateAvailable();
+    }
 
-      lib.init(execNaSSH, console.log.bind(console));
-    });
+    lib.init(execNaSSH, console.log.bind(console));
+  });
 };

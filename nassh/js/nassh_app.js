@@ -38,6 +38,21 @@ nassh.App = function(manifest) {
     }.bind(this));
 };
 
+nassh.App.prototype.installHandlers = function(runtime) {
+  runtime.onLaunched.addListener(this.onLaunched.bind(this));
+  runtime.onRestarted.addListener(this.onLaunched.bind(this));
+}
+
+nassh.App.prototype.onLaunched = function(e) {
+  chrome.app.window.create('/html/nassh.html', {
+    'bounds': {
+      'width': 900,
+      'height': 600
+    },
+    'id': 'mainWindow'
+  });
+}
+
 /**
  * Initialize the lib.wam.fs.Directory we plan on exporting.
  */

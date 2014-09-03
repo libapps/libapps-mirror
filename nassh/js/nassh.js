@@ -121,3 +121,16 @@ nassh.importFiles = function(fileSystem, dest, fileList,
                                     opt_onError));
   }
 };
+
+nassh.reloadWindow = function() {
+  if (!nassh.v2) {
+    document.location.hash = '';
+    document.location.reload();
+  } else {
+    var appWindow = chrome.app.window.current();
+    var bounds = appWindow.getBounds();
+    var url = appWindow.contentWindow.location.pathname;
+    chrome.app.window.create(url, { 'bounds': bounds });
+    appWindow.close();
+  }
+}

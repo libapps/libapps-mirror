@@ -624,8 +624,7 @@ nassh.CommandInstance.prototype.exit = function(code) {
       this.reconnect(document.location.hash.substr(1));
 
     if (ch == 'c' || ch == '\x12' /* ctrl-r */) {
-      document.location.hash = '';
-      document.location.reload();
+      nassh.reloadWindow();
       return;
     }
 
