@@ -106,13 +106,8 @@ nassh.GoogleRelay.parseOptionString = function(optionString) {
   }
 
   if (rv['--config'] == 'google') {
-    if (!('--proxy-host' in rv)) {
-      rv['--proxy-host'] =
-          // Direct -dev to r.ext.
-          // TODO(mschilder): Punt all to r.ext when ready.
-          (chrome.runtime.id == 'okddffdblfhhnmhodogpojmfkjmhinfp') ?
-              'r.ext.google.com' : 'spdy-proxy.ext.google.com';
-    }
+    if (!('--proxy-host' in rv))
+      rv['--proxy-host'] = 'r.ext.google.com';
     if (!('--use-ssl' in rv))
       rv['--use-ssl'] = true;
     if (!('--relay-prefix-field' in rv))
