@@ -1,3 +1,10 @@
+0.9.29.1, 2014-09-23, Reorder background scripts.
+
+* Reorder the background scripts in the manifest file to account for a race
+  condition.  Before this change, the callback in nassh_background.js would
+  sometimes execute before the rest of the background scripts had loaded.
+* Change the proxy host used in --config=google.
+
 0.8.28.2, 2014-08-13, Update to hterm 1.48.
 
 * Update to the latest hterm.
