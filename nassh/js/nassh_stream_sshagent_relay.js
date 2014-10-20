@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+'use strict';
+
 /**
  * Relay ssh-agent messages to another app.
  *
@@ -10,6 +12,7 @@ nassh.Stream.SSHAgentRelay = function(fd) {
   nassh.Stream.apply(this, [fd]);
 
   this.authAgentAppID_ = null;
+  this.port_ = null;
   this.writeBuffer_ = [];
 };
 
@@ -25,30 +28,58 @@ nassh.Stream.SSHAgentRelay.prototype = {
  */
 nassh.Stream.SSHAgentRelay.prototype.asyncOpen_ = function(args, onComplete) {
   this.authAgentAppID_ = args.authAgentAppID;
+  this.port_ = chrome.runtime.connect(this.authAgentAppID_);
 
-  var onError = function() {
-    console.error('Failed to contact ' + this.authAgentAppID_);
+  var normalOnMessage = function(msg) {
+    if (msg.data) {
+      // Prepare header.
+      var size = msg.data.length;
+      var hdr = [(size >>> 24) & 255,
+                 (size >>> 16) & 255,
+                 (size >>> 8) & 255,
+                 (size >>> 0) & 255];
+      // Append body.
+      var bData = hdr.concat(msg.data);
+
+      // Report to client.
+      this.onDataAvailable(this.binaryToAscii(bData));
+
+      // Re-examine write buffer; there might be more data in it.
+      setTimeout(this.trySendPacket_.bind(this), 0);
+    }
+  }.bind(this);
+
+  var normalDisconnect = function() {
+    this.port_.onMessage.removeListener(normalOnMessage);
+    this.port_.onDisconnect.removeListener(normalDisconnect);
+    this.close();
+  }.bind(this);
+
+  var initialOnMessage = function(msg) {
+    this.port_.onMessage.removeListener(initialOnMessage);
+    this.port_.onDisconnect.removeListener(initialDisconnect);
+    this.port_.onMessage.addListener(normalOnMessage);
+    this.port_.onDisconnect.addListener(normalDisconnect);
+    onComplete(true);
+  }.bind(this);
+
+  var initialDisconnect = function() {
+    this.port_.onMessage.removeListener(initialOnMessage);
+    this.port_.onDisconnect.removeListener(initialDisconnect);
     onComplete(false);
   }.bind(this);
 
-  function onReady() {
-    onComplete(true);
-  }
+  this.port_.onMessage.addListener(initialOnMessage);
+  this.port_.onDisconnect.addListener(initialDisconnect);
+  this.port_.postMessage({'type':'auth-agent@openssh.com','data':[0]});
+};
 
-  // Send a test message to agent to verify its presence.
-  chrome.runtime.sendMessage(
-      this.authAgentAppID_,
-      {
-        'type': 'auth-agent@openssh.com',
-        'data': [0]
-      },
-      function(rsp) {
-        if (chrome.runtime.lastError) {
-          onError();
-        } else {
-          onReady();
-        }
-      });
+/**
+ * @Override
+ */
+nassh.Stream.SSHAgentRelay.prototype.close = function(reason) {
+  if (this.port_) this.port_.disconnect();
+  nassh.Stream.prototype.close.call(this, reason);
 };
 
 /**
@@ -88,32 +119,14 @@ nassh.Stream.SSHAgentRelay.prototype.trySendPacket_ = function() {
   this.writeBuffer_.splice(0, 4);  // Consume header.
   var reqData = this.writeBuffer_.splice(0, size);  // Consume body.
 
-  var processResponse = function(rsp) {
-    if (rsp.data && rsp.data.length) {
-      // Prepare header.
-      var size = rsp.data.length;
-      var hdr = [(size >>> 24) & 255,
-                 (size >>> 16) & 255,
-                 (size >>> 8) & 255,
-                 (size >>> 0) & 255];
-      // Append body.
-      var bData = hdr.concat(rsp.data);
-
-      // Report to client.
-      this.onDataAvailable(this.binaryToAscii(bData));
-
-      // Re-examine write buffer; there might be more data in it.
-      setTimeout(this.trySendPacket_.bind(this), 0);
-    }
-  }.bind(this);
-
-  chrome.runtime.sendMessage(
-    this.authAgentAppID_,
-    {
-      'type': 'auth-agent@openssh.com',
-      'data': reqData
-    },
-    processResponse);
+  try {
+    this.port_.postMessage({
+        'type': 'auth-agent@openssh.com',
+        'data': reqData
+    });
+  } catch (e) {
+    this.close();
+  }
 };
 
 /**
