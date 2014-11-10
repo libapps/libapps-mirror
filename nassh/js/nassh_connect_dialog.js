@@ -581,6 +581,8 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
         identitySelect.selectedIndex = i;
     }
 
+    this.syncForm_();
+
     if (opt_onSuccess)
       opt_onSuccess();
 
