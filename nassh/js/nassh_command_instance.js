@@ -454,23 +454,41 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   }
 
   if (params.relayOptions) {
-    this.relay_ = new nassh.GoogleRelay(this.io,
-                                        params.relayOptions);
-    this.io.println(nassh.msg(
-        'INITIALIZING_RELAY',
-        [this.relay_.proxyHost + ':' + this.relay_.proxyPort]));
+    var relay = new nassh.GoogleRelay(this.io, params.relayOptions);
 
-    if (!this.relay_.init()) {
-      // A false return value means we have to redirect to complete
-      // initialization.  Bail out of the connect for now.  We'll resume it
-      // when the relay is done with its redirect.
+    // TODO(rginda): The `if (relay.proxyHost)` test is part of a goofy hack
+    // to add the --ssh-agent param to the relay-options pref.  --ssh-agent has
+    // no business being a relay option, but it's the best of the bad options.
+    // In the future perfect world, 'relay-options' would probably be a generic
+    // 'nassh-options' value and the parsing code wouldn't be part of the relay
+    // class.
+    //
+    // For now, we let the relay code parse the options, and if the resulting
+    // options don't include a proxyHost then we don't have an actual relay.
+    // We may have a --ssh-agent argument though, which we'll pull out of
+    // the relay object later.
+    if (relay.proxyHost) {
+      this.relay_ = relay;
 
-      // If we're going to have to redirect for the relay then we should make
-      // sure not to re-prompt for the destination when we return.
-      sessionStorage.setItem('nassh.pendingRelay', 'yes');
-      this.relay_.redirect();
-      return true;
+      this.io.println(nassh.msg(
+          'INITIALIZING_RELAY',
+          [this.relay_.proxyHost + ':' + this.relay_.proxyPort]));
+
+      if (!this.relay_.init()) {
+        // A false return value means we have to redirect to complete
+        // initialization.  Bail out of the connect for now.  We'll resume it
+        // when the relay is done with its redirect.
+
+        // If we're going to have to redirect for the relay then we should make
+        // sure not to re-prompt for the destination when we return.
+        sessionStorage.setItem('nassh.pendingRelay', 'yes');
+        this.relay_.redirect();
+        return true;
+      }
     }
+
+    if (relay.options['--ssh-agent'])
+      params.authAgentAppID = relay.options['--ssh-agent'];
   }
 
   this.authAgentAppID_ = params.authAgentAppID;
@@ -493,11 +511,13 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   argv.useJsSocket = !!this.relay_;
   argv.environment = this.environment_;
   argv.writeWindow = 8 * 1024;
-  if (params.authAgentAppID) {
-    argv.authAgentAppID = params.authAgentAppID;
-  }
 
   argv.arguments = ['-C'];  // enable compression
+
+  if (params.authAgentAppID) {
+    argv.authAgentAppID = params.authAgentAppID;
+    argv.arguments.push('-A');  // Force agent forwarding.
+  }
 
   // Disable IP address check for connection through proxy.
   if (argv.useJsSocket)
@@ -507,7 +527,6 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   if (params.argstr) {
     var ary = params.argstr.match(/^(.*?)(?:(?:^|\s+)(?:--\s+(.*)))?$/);
     if (ary) {
-      console.log(ary);
       if (ary[1])
         argv.arguments = argv.arguments.concat(ary[1].split(/\s+/));
       commandArgs = ary[2];

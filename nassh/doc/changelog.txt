@@ -1,3 +1,10 @@
+0.9.31.1, 2014-11-11, Add --ssh-agent option, hterm 1.51.
+
+* Add "--ssh-agent" as a relay-option.  This can be set to a chrome app id
+  which will act as an ssh-agent over chrome app messaging.
+* Update --config=google to use the default Google key agent app.
+* Update to hterm 1.51 for 24-bit color support.
+
 0.9.30.1, 2014-10-07, Update to hterm 1.50
 
 * Update to hterm 1.50 for OSC 52 and HOME/END vs application cursor fixes.

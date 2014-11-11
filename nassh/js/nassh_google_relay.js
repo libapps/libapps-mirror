@@ -116,6 +116,8 @@ nassh.GoogleRelay.parseOptionString = function(optionString) {
       rv['--report-ack-latency'] = true;
     if (!('--report-connect-attempts' in rv))
       rv['--report-connect-attempts'] = true;
+    if (!('--default-agent' in rv))
+      rv['--ssh-agent'] = 'beknehfpfkghjoafdifaflglpjkojoco';
   }
 
   return rv;
