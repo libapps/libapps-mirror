@@ -1,3 +1,8 @@
+0.9.31.2, 2014-11-11, Include dialog sync fix.
+
+* Rebase and rebuild to include commit 458213... which fixed a race condition
+  in the connection dialog.
+
 0.9.31.1, 2014-11-11, Add --ssh-agent option, hterm 1.51.
 
 * Add "--ssh-agent" as a relay-option.  This can be set to a chrome app id
