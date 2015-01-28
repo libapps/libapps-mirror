@@ -282,3 +282,24 @@ lib.f.getStack = function(opt_ignoreFrames) {
 
   return stackObject;
 };
+
+/**
+ * Divides the two numbers and floors the results, unless the remainder is less
+ * than an incredibly small value, in which case it returns the ceiling.
+ * This is useful when the number are truncated approximations of longer
+ * values, and so doing division with these numbers yields a result incredibly
+ * close to a whole number.
+ *
+ * @param {number} numerator
+ * @param {number} denominator
+ * @return {number}
+ */
+lib.f.smartFloorDivide = function(numerator,  denominator) {
+  var val = numerator / denominator;
+  var ceiling = Math.ceil(val);
+  if (ceiling - val < .0001) {
+    return ceiling;
+  } else {
+    return Math.floor(val);
+  }
+};
