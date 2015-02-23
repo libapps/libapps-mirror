@@ -23,26 +23,25 @@
    * reached from the background page's JS console.
    */
   lib.init(function nassh_background() {
-      var manifest = chrome.runtime.getManifest();
+    var manifest = chrome.runtime.getManifest();
+    var app = new nassh.App(manifest);
 
-      var app = new nassh.App(manifest);
+    app.onInit.addListener(function() {
+      if (!!chrome.app.window) {
+        // Ready to handle launch events, no need for special handling anymore.
+        chrome.app.runtime.onLaunched.removeListener(onLaunched);
 
-      app.onInit.addListener(function() {
-          if (!!chrome.app.window) {
-            // Ready to handle launch events, no need for special handling anymore.
-            chrome.app.runtime.onLaunched.removeListener(onLaunched);
+        app.installHandlers(chrome.app.runtime);
 
-            app.installHandlers(chrome.app.runtime);
+        if (didLaunch)
+        app.onLaunched();
+      } else {
+        console.log('background-page: init complete');
+      }
+    });
 
-            if (didLaunch)
-              app.onLaunched();
-          } else {
-            console.log('background-page: init complete');
-          }
-        });
-
-      // "Public" window.app will be retrieved by individual windows via
-      // chrome.getBackgroundPage().
-      window.app = app;
-    }, console.log.bind(console));
+    // "Public" window.app will be retrieved by individual windows via
+    // chrome.getBackgroundPage().
+    window.app = app;
+  }, console.log.bind(console));
 })();
