@@ -11,6 +11,8 @@ lib.rtdep('lib.Event');
  * background page.
  */
 nassh.App = function(manifest) {
+  var DomFileSystem = axiom.fs.dom.file_system.DomFileSystem;
+
   this.updateAvailable = false;
 
   this.onInit = new lib.Event();
@@ -18,6 +20,45 @@ nassh.App = function(manifest) {
 
   chrome.runtime.onUpdateAvailable.addListener(this.onUpdateAvailable);
 
+  this.jsfs = new axiom.fs.js.file_system.JsFileSystem();
+
+  this.jsfs.rootDirectory.mkdir('exe').then(
+    function(jsdir) {
+      jsdir.install(wash.exe_modules.dir);
+      jsdir.install(nassh.exe);
+    }.bind(this))
+  .then(function() {
+    return this.jsfs.rootDirectory.mkdir('mnt')
+      .then(function(jsDir) {
+        DomFileSystem.mount('permanent', 'html5', jsDir);
+      });
+  }.bind(this))
+  .then(function() {
+    return DomFileSystem.mount('temporary', 'tmp', this.jsfs.rootDirectory);
+  }.bind(this))
+  .then(function() {
+    this.onInit();
+  }.bind(this));
+
+  this.defaultEnvironment = {
+    '@PATH': ['/exe/'],
+    '$HOME': '/mnt/html5',
+    '$HISTFILE': '/mnt/html5/.wash_history',
+    '$PWD': '/mnt/html5',
+    '$TERM': 'xterm-256color'
+  };
+};
+
+nassh.App.prototype.execute = function(pathSpec, arg, env) {
+  return this.jsfs.createExecuteContext(
+    new axiom.fs.path.Path(pathSpec), arg).then(
+      function(cx) {
+        cx.setEnvs(this.defaultEnvironment);
+        if (env)
+          cx.setEnvs(env);
+
+        return cx.execute();
+      }.bind(this));
 };
 
 nassh.App.prototype.installHandlers = function(runtime) {

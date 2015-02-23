@@ -403,7 +403,7 @@ nassh.CommandInstance.prototype.connectToProfile = function(
  */
 nassh.CommandInstance.prototype.connectToDestination = function(destination) {
   if (destination == 'crosh') {
-    document.location = 'crosh.html'
+    document.location = 'crosh.html';
     return true;
   }
 
@@ -450,6 +450,13 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     // TODO: This will need to be done better.  document.location changes don't
     // work in v2 apps.
     document.location = 'crosh.html';
+    return;
+  }
+
+  if (params.hostname == '>hterm') {
+    // TODO: This will need to be done better.  document.location changes don't
+    // work in v2 apps.
+    document.location = '/html/hterm.html';
     return;
   }
 
