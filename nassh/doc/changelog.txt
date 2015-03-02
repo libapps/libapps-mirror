@@ -1,3 +1,7 @@
+0.9.32.2, 2014-03-02, Update to hterm 1.53
+
+* Update to hterm 1.53.
+
 0.9.32.1, 2014-02-18, Update to hterm 1.52
 
 * Update to hterm 1.52.
