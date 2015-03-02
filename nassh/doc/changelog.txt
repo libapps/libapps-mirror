@@ -1,3 +1,7 @@
+0.9.32.3, 2014-03-02, Fix rtdep errror.
+
+* Remove bogus rtdep on lib.f.Sequence which cause the bg page to fail to start.
+
 0.9.32.2, 2014-03-02, Update to hterm 1.53
 
 * Update to hterm 1.53.
