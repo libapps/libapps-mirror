@@ -49,12 +49,11 @@ nassh.CommandInstance = function(argv) {
   // Root preference manager.
   this.prefs_ = new nassh.PreferenceManager();
 
-  // Counters used to acknowledge writes from the plugin.
-  this.stdoutAcknowledgeCount_ = 0;
-  this.stderrAcknowledgeCount_ = 0;
-
   // Prevent us from reporting an exit twice.
   this.exited_ = false;
+
+  // Buffer for data coming from the terminal.
+  this.inputBuffer_ = new nassh.InputBuffer();
 };
 
 /**
@@ -453,7 +452,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   this.io.println(nassh.msg('CONNECTING',
                             [params.username + '@' + params.hostname,
                              (params.port || '??')]));
-  this.io.onVTKeystroke = this.sendString_.bind(this);
+  this.io.onVTKeystroke = this.onVTKeystroke_.bind(this);
   this.io.sendString = this.sendString_.bind(this);
   this.io.onTerminalResize = this.onTerminalResize_.bind(this);
 
@@ -551,6 +550,55 @@ nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
 };
 
 /**
+ * Callback when the user types into the terminal.
+ *
+ * @param {string} data The input from the terminal.
+ */
+nassh.CommandInstance.prototype.onVTKeystroke_ = function(data) {
+  this.inputBuffer_.write(data);
+};
+
+/**
+ * Helper function to create a TTY stream.
+ *
+ * @param {integer} fd The file descriptor index.
+ * @param {boolean} allowRead True if this stream can be read from.
+ * @param {boolean} allowWrite True if this stream can be written to.
+ * @param {function} onOpen Callback to call when the stream is opened.
+ *
+ * @return {Object} The newly created stream.
+ */
+nassh.CommandInstance.prototype.createTtyStream = function(
+    fd, allowRead, allowWrite, onOpen) {
+  var self = this;
+  var arg = {
+    fd: fd,
+    allowRead: allowRead,
+    allowWrite: allowWrite,
+    inputBuffer: self.inputBuffer_,
+    io: self.io
+  };
+
+  var streamClass = nassh.Stream.Tty;
+  var stream = nassh.Stream.openStream(streamClass, fd, arg, onOpen);
+  if (allowRead) {
+    var onDataAvailable = function(isAvailable) {
+      // Send current read status to plugin.
+      self.sendToPlugin_('onReadReady', [fd, isAvailable]);
+    };
+
+    self.inputBuffer_.onDataAvailable.addListener(onDataAvailable);
+
+    stream.onClose = function(reason) {
+      self.inputBuffer_.onDataAvailable.removeListener(onDataAvailable);
+      self.sendToPlugin_('onClose', [fd, reason]);
+    };
+  }
+
+  return stream;
+};
+
+/**
  * Send a message to the nassh plugin.
  *
  * @param {string} name The name of the message to send.
@@ -587,6 +635,12 @@ nassh.CommandInstance.prototype.onTerminalResize_ = function(width, height) {
 nassh.CommandInstance.prototype.exit = function(code) {
   if (!nassh.v2)
     window.onbeforeunload = null;
+
+  // Close the std* files on exit. Without this, fd 0-2 are still referenced by
+  // nassh.Stream.
+  nassh.Stream.getStreamByFd(0).close();
+  nassh.Stream.getStreamByFd(1).close();
+  nassh.Stream.getStreamByFd(2).close();
 
   this.io.println(nassh.msg('DISCONNECT_MESSAGE', [code]));
   this.io.println(nassh.msg('RECONNECT_MESSAGE'));
@@ -682,9 +736,15 @@ nassh.CommandInstance.prototype.onPlugin_.exit = function(code) {
  */
 nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
   var self = this;
+  var isAtty = false;
   function onOpen(success) {
-    self.sendToPlugin_('onOpenFile', [fd, success]);
+    self.sendToPlugin_('onOpenFile', [fd, success, isAtty]);
   }
+
+  var DEV_TTY = '/dev/tty';
+  var DEV_STDIN = '/dev/stdin';
+  var DEV_STDOUT = '/dev/stdout';
+  var DEV_STDERR = '/dev/stderr';
 
   if (path == '/dev/random') {
     var streamClass = nassh.Stream.Random;
@@ -692,8 +752,14 @@ nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
     stream.onClose = function(reason) {
       self.sendToPlugin_('onClose', [fd, reason]);
     };
+  } else if (path == DEV_TTY || path == DEV_STDIN || path == DEV_STDOUT ||
+             path == DEV_STDERR) {
+    var allowRead = path == DEV_STDIN || path == DEV_TTY;
+    var allowWrite = path == DEV_STDOUT || path == DEV_STDERR || path == DEV_TTY;
+    var stream = self.createTtyStream(fd, allowRead, allowWrite, onOpen);
+    isAtty = true;
   } else {
-    self.sendToPlugin_('onOpenFile', [fd, false]);
+    self.sendToPlugin_('onOpenFile', [fd, false, false]);
   }
 };
 
@@ -740,21 +806,8 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(
  */
 nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
   var self = this;
-
-  if (fd == 1 || fd == 2) {
-    var string = atob(data);
-    var ackCount = (fd == 1 ?
-                    this.stdoutAcknowledgeCount_ += string.length :
-                    this.stderrAcknowledgeCount_ += string.length);
-    this.io.writeUTF8(string);
-
-    setTimeout(function() {
-        self.sendToPlugin_('onWriteAcknowledge', [fd, ackCount]);
-      }, 0);
-    return;
-  }
-
   var stream = nassh.Stream.getStreamByFd(fd);
+
   if (!stream) {
     console.warn('Attempt to write to unknown fd: ' + fd);
     return;
@@ -773,14 +826,29 @@ nassh.CommandInstance.prototype.onPlugin_.read = function(fd, size) {
   var stream = nassh.Stream.getStreamByFd(fd);
 
   if (!stream) {
-    if (fd)
-      console.warn('Attempt to read from unknown fd: ' + fd);
+    console.warn('Attempt to read from unknown fd: ' + fd);
     return;
   }
 
   stream.asyncRead(size, function(b64bytes) {
       self.sendToPlugin_('onRead', [fd, b64bytes]);
     });
+};
+
+/**
+ * Notify the plugin that data is available to read.
+ */
+nassh.CommandInstance.prototype.onPlugin_.isReadReady = function(fd) {
+  var self = this;
+  var stream = nassh.Stream.getStreamByFd(fd);
+
+  if (!stream) {
+    console.warn('Attempt to call isReadReady from unknown fd: ' + fd);
+    return;
+  }
+
+  var rv = stream.isReadReady();
+  self.sendToPlugin_('onIsReadReady', [fd, rv]);
 };
 
 /**

@@ -26,6 +26,8 @@ nassh.Stream.ERR_STREAM_CLOSED = 'Stream closed';
 nassh.Stream.ERR_STREAM_OPENED = 'Stream opened';
 nassh.Stream.ERR_FD_IN_USE = 'File descriptor in use';
 nassh.Stream.ERR_NOT_IMPLEMENTED = 'Not implemented';
+nassh.Stream.ERR_STREAM_CANT_READ = 'Stream has no read permission';
+nassh.Stream.ERR_STREAM_CANT_WRITE = 'Stream has no write permission';
 
 /**
  * Collection of currently open stream instances.
