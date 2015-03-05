@@ -6,7 +6,6 @@ PROJECT:=output/ssh_client
 CXX_SOURCES:=\
 	src/dev_null.cc \
 	src/dev_random.cc \
-	src/dev_tty.cc \
 	src/file_system.cc \
 	src/js_file.cc \
 	src/pepper_file.cc \
@@ -19,7 +18,6 @@ CXX_SOURCES:=\
 CXX_HEADERS:=\
 	src/dev_null.h \
 	src/dev_random.h \
-	src/dev_tty.h \
 	src/file_interfaces.h \
 	src/file_system.h \
 	src/js_file.h \

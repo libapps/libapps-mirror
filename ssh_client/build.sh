@@ -9,7 +9,7 @@ DEBUG=0
 PNACL=1
 
 NACLSDK_VERSION=35.0.1916.54
-NACLPORTS_REVISION=1238
+NACLPORTS_REVISION=1268
 
 CDS_ROOT="https://commondatastorage.googleapis.com"
 SDK_ROOT="$CDS_ROOT/nativeclient-mirror/nacl/nacl_sdk"

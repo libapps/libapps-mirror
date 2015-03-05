@@ -25,6 +25,7 @@ const char kOnOpenSocketMethodId[] = "onOpenSocket";
 const char kOnReadMethodId[] = "onRead";
 const char kOnWriteAcknowledgeMethodId[] = "onWriteAcknowledge";
 const char kOnCloseMethodId[] = "onClose";
+const char kOnReadReadyMethodId[] = "onReadReady";
 const char kOnResizeMethodId[] = "onResize";
 const char kOnExitAcknowledgeMethodId[] = "onExitAcknowledge";
 
@@ -96,6 +97,8 @@ void SshPluginInstance::Invoke(const std::string& function,
     OnWriteAcknowledge(args);
   } else if (function == kOnCloseMethodId) {
     OnClose(args);
+  } else if (function == kOnReadReadyMethodId) {
+    OnReadReady(args);
   } else if (function == kOnResizeMethodId) {
     OnResize(args);
   } else if (function == kOnExitAcknowledgeMethodId) {
@@ -208,6 +211,8 @@ size_t SshPluginInstance::GetWriteWindow() {
 }
 
 void SshPluginInstance::SessionThreadImpl() {
+  file_system_.WaitForStdFiles();
+
   // Call renamed ssh main.
   std::vector<const char*> argv;
   // argv[0]
@@ -295,12 +300,13 @@ void SshPluginInstance::StartSession(const Json::Value& args) {
 
 void SshPluginInstance::OnOpen(const Json::Value& args) {
   const Json::Value& fd = args[(size_t)0];
-  const Json::Value& result = args[(size_t)1];
-  if (fd.isNumeric() && result.isBool()) {
+  const Json::Value& success = args[(size_t)1];
+  const Json::Value& is_atty = args[(size_t)2];
+  if (fd.isNumeric() && success.isBool() && is_atty.isBool()) {
     InputStreams::iterator it = streams_.find(fd.asInt());
     if (it != streams_.end()) {
-      it->second->OnOpen(result.asBool());
-      if (!result.asBool())
+      it->second->OnOpen(success.asBool(), is_atty.asBool());
+      if (!success.asBool())
         streams_.erase(it);
     } else {
       PrintLogImpl(0, "onOpen: for unknown file descriptor\n");
@@ -354,6 +360,21 @@ void SshPluginInstance::OnClose(const Json::Value& args) {
     streams_.erase(it);
   } else {
     PrintLogImpl(0, "onClose: for unknown file descriptor\n");
+  }
+}
+
+void SshPluginInstance::OnReadReady(const Json::Value& args) {
+  const Json::Value& fd = args[(size_t)0];
+  const Json::Value& result = args[(size_t)1];
+  if (fd.isNumeric() && result.isBool()) {
+    InputStreams::iterator it = streams_.find(fd.asInt());
+    if (it != streams_.end()) {
+      it->second->OnReadReady(result.asBool());
+    } else {
+      PrintLogImpl(0, "onReadReady: for unknown file descriptor\n");
+    }
+  } else {
+    PrintLogImpl(0, "onReadReady: invalid arguments\n");
   }
 }
 

@@ -40,6 +40,8 @@ class FileSystem {
   // Same as above function but return NULL if FileSystem doesn't exist yet.
   static FileSystem* GetFileSystemNoCrash();
 
+  void WaitForStdFiles();
+
   Cond& cond() { return cond_; }
   Mutex& mutex() { return mutex_; }
   pp::Instance* instance() { return instance_; }

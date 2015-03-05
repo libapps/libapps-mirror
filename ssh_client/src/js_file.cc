@@ -64,17 +64,20 @@ int JsFileHandler::stat(const char* pathname, nacl_abi_stat* out) {
 JsFile::JsFile(int fd, int oflag, OutputInterface* out)
   : ref_(1), fd_(fd), oflag_(oflag), out_(out),
     factory_(this), out_task_sent_(false), is_open_(false),
-    write_sent_(0), write_acknowledged_(0) {
+    is_atty_(false), is_read_ready_(false),
+    write_sent_(0), write_acknowledged_(0),
+    on_read_call_count_(0) {
 }
 
 JsFile::~JsFile() {
   assert(!ref_);
 }
 
-void JsFile::OnOpen(bool success) {
+void JsFile::OnOpen(bool success, bool is_atty) {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
   is_open_ = true;
+  is_atty_ = is_atty;
   if (!success)
     fd_ = -1;
   sys->cond().broadcast();
@@ -116,6 +119,7 @@ void JsFile::OnRead(const char* buf, size_t size) {
   } else {
     in_buf_.insert(in_buf_.end(), buf, buf + size);
   }
+  on_read_call_count_++;
   sys->cond().broadcast();
 }
 
@@ -132,6 +136,13 @@ void JsFile::OnClose() {
   FileSystem* sys = FileSystem::GetFileSystem();
   Mutex::Lock lock(sys->mutex());
   is_open_ = false;
+  sys->cond().broadcast();
+}
+
+void JsFile::OnReadReady(bool is_read_ready) {
+  FileSystem* sys = FileSystem::GetFileSystem();
+  Mutex::Lock lock(sys->mutex());
+  is_read_ready_ = is_read_ready;
   sys->cond().broadcast();
 }
 
@@ -174,6 +185,15 @@ int JsFile::read(char* buf, size_t count, size_t* nread) {
   if (is_block()) {
     while(is_open() && in_buf_.empty())
       sys->cond().wait(sys->mutex());
+  } else if (is_read_ready_) {
+    // We will still "block" waiting for data from JavaScript if we believe
+    // that the data is readily available and just needs to be sent over. If
+    // is_read_ready_ becomes false while we're waiting (another reader gets
+    // the data first), we'll exit the loop with whatever data is available in
+    // in_buf_. If in_buf_ is still empty, the loop below will be exited and
+    // return -1, EAGAIN.
+    while(is_open() && in_buf_.empty() && is_read_ready_)
+      sys->cond().wait(sys->mutex());
   }
 
   if (isatty() && (tio_.c_lflag & ICANON)) {
@@ -181,9 +201,23 @@ int JsFile::read(char* buf, size_t count, size_t* nread) {
     // issue because ICANON is used only during local ssh prompts, ssh session
     // use raw TTY mode.
     // TODO(dpolukhin): find better way to detect whole line.
-    while (is_open() &&
-           std::find(in_buf_.begin(), in_buf_.end(), '\n') == in_buf_.end()) {
-      sys->cond().wait(sys->mutex());
+    while (true) {
+      if (!is_open())
+        break;
+
+      if (std::find(in_buf_.begin(), in_buf_.end(), '\n') != in_buf_.end()) {
+        break;
+      }
+
+      while (is_open() && !is_read_ready_)
+        sys->cond().wait(sys->mutex());
+
+      uint64_t old_on_read_call_count = on_read_call_count_;
+      pp::Module::Get()->core()->CallOnMainThread(
+          0, factory_.NewCallback(&JsFile::Read, 1));
+
+      while (is_open() && on_read_call_count_ == old_on_read_call_count)
+        sys->cond().wait(sys->mutex());
     }
   }
 
@@ -235,7 +269,7 @@ int JsFile::fstat(nacl_abi_stat* out) {
 }
 
 int JsFile::isatty() {
-  return fd_ < 3;
+  return is_atty_;
 }
 
 void JsFile::InitTerminal() {
@@ -301,10 +335,7 @@ int JsFile::ioctl(int request, va_list ap) {
 }
 
 bool JsFile::is_read_ready() {
-  // HACK: fd_ != 0 is required for reading /dev/random in openssl, it expects
-  // that /dev/random has some data ready to read. If there is no data,
-  // it won't call read at all.
-  return fd_ != 0 || !in_buf_.empty();
+  return is_read_ready_ || !in_buf_.empty();
 }
 
 bool JsFile::is_write_ready() {
@@ -383,6 +414,10 @@ bool JsSocket::connect(const char* host, uint16_t port) {
     return false;
 
   return true;
+}
+
+int JsSocket::isatty() {
+  return false;
 }
 
 bool JsSocket::is_read_ready() {

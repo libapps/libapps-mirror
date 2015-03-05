@@ -87,10 +87,11 @@ class InputInterface {
  public:
   virtual ~InputInterface() {}
 
-  virtual void OnOpen(bool success) = 0;
+  virtual void OnOpen(bool success, bool is_atty) = 0;
   virtual void OnRead(const char* buf, size_t size) = 0;
   virtual void OnWriteAcknowledge(uint64_t count) = 0;
   virtual void OnClose() = 0;
+  virtual void OnReadReady(bool is_read_ready) = 0;
 };
 
 class OutputInterface {

@@ -18,7 +18,6 @@
 
 #include "dev_null.h"
 #include "dev_random.h"
-#include "dev_tty.h"
 #include "js_file.h"
 #include "pepper_file.h"
 #include "tcp_server_socket.h"
@@ -63,24 +62,21 @@ FileSystem::FileSystem(pp::Instance* instance, OutputInterface* out)
 
   JsFile::InitTerminal();
   JsFile* stdin_fs = new JsFile(0, O_RDONLY, out);
-  if (out->OpenFile(0, NULL, O_RDONLY, stdin_fs)) {
+  if (out->OpenFile(0, "/dev/stdin", O_RDONLY, stdin_fs)) {
     AddFileStream(0, stdin_fs);
-    stdin_fs->OnOpen(true);
   }
 
   JsFile* stdout_fs = new JsFile(1, O_WRONLY, out);
-  if (out->OpenFile(1, NULL, O_WRONLY, stdout_fs)) {
+  if (out->OpenFile(1, "/dev/stdout", O_WRONLY, stdout_fs)) {
     AddFileStream(1, stdout_fs);
-    stdout_fs->OnOpen(true);
-    AddPathHandler("/dev/tty", new DevTtyHandler(stdin_fs, stdout_fs));
   }
 
   JsFile* stderr_fs = new JsFile(2, O_WRONLY, out);
-  if (out->OpenFile(2, NULL, O_WRONLY, stderr_fs)) {
+  if (out->OpenFile(2, "/dev/stderr", O_WRONLY, stderr_fs)) {
     AddFileStream(2, stderr_fs);
-    stderr_fs->OnOpen(true);
   }
 
+  AddPathHandler("/dev/tty", new JsFileHandler(out));
   AddPathHandler("/dev/null", new DevNullHandler());
 
   // NACL_IRT_RANDOM_v0_1 is available starting from M18.
@@ -132,6 +128,16 @@ FileSystem* FileSystem::GetFileSystem() {
 
 FileSystem* FileSystem::GetFileSystemNoCrash() {
   return file_system_;
+}
+
+void FileSystem::WaitForStdFiles() {
+  JsFile* stdin_fs = static_cast<JsFile*>(GetStream(0));
+  JsFile* stdout_fs = static_cast<JsFile*>(GetStream(1));
+  JsFile* stderr_fs = static_cast<JsFile*>(GetStream(2));
+
+  Mutex::Lock lock(mutex_);
+  while(!(stdin_fs->is_open() && stdout_fs->is_open() && stderr_fs->is_open()))
+    cond_.wait(mutex_);
 }
 
 void FileSystem::AddPathHandler(const std::string& path, PathHandler* handler) {

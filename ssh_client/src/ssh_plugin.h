@@ -48,6 +48,7 @@ class SshPluginInstance : public pp::Instance,
   void OnRead(const Json::Value& args);
   void OnWriteAcknowledge(const Json::Value& args);
   void OnClose(const Json::Value& args);
+  void OnReadReady(const Json::Value& args);
   void OnResize(const Json::Value& args);
   void OnExitAcknowledge(const Json::Value& args);
 

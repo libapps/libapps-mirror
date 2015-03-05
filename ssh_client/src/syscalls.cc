@@ -1,6 +1,7 @@
 // Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
+#include <errno.h>
 #include <netdb.h>
 #include <pthread.h>
 #include <pwd.h>
@@ -69,7 +70,8 @@ int open(const char *file, int oflag, ...) {
   va_start(ap, oflag);
   cmode = va_arg(ap, mode_t);
   va_end(ap);
-  return WRAP(open)(file, oflag, cmode, &newfd) == 0 ? newfd : -1;
+  errno = WRAP(open)(file, oflag, cmode, &newfd);
+  return errno == 0 ? newfd : -1;
 }
 #endif
 
@@ -80,7 +82,8 @@ static int WRAP(close)(int fd) {
 
 #ifdef USE_NEWLIB
 int close(int fd) {
-  return WRAP(close)(fd);
+  errno = WRAP(close)(fd);
+  return errno == 0 ? 0 : -1;
 }
 #endif
 
@@ -92,7 +95,8 @@ static int WRAP(read)(int fd, void *buf, size_t count, size_t *nread) {
 #ifdef USE_NEWLIB
 ssize_t read(int fd, void *buf, size_t count) {
   ssize_t rv;
-  return WRAP(read)(fd, buf, count, (size_t*)&rv) == 0 ? rv : -1;
+  errno = WRAP(read)(fd, buf, count, (size_t*)&rv);
+  return errno == 0 ? rv : -1;
 }
 #endif
 
@@ -133,7 +137,8 @@ static int WRAP(write)(int fd, const void *buf, size_t count, size_t *nwrote) {
 #ifdef USE_NEWLIB
 ssize_t write(int fd, const void *buf, size_t count) {
   ssize_t rv;
-  return WRAP(write)(fd, buf, count, (size_t*)&rv) == 0 ? rv : -1;
+  errno = WRAP(write)(fd, buf, count, (size_t*)&rv);
+  return errno == 0 ? rv : -1;
 }
 #endif
 
@@ -146,7 +151,8 @@ static int WRAP(seek)(int fd, nacl_abi_off_t offset, int whence,
 #ifdef USE_NEWLIB
 off_t lseek(int fd, off_t offset, int whence) {
   nacl_abi_off_t rv;
-  return WRAP(seek)(fd, offset, whence, &rv) == 0 ? (off_t)rv : -1;
+  errno = WRAP(seek)(fd, offset, whence, &rv);
+  return errno == 0 ? (off_t)rv : -1;
 }
 #endif
 
@@ -158,7 +164,8 @@ static int WRAP(dup)(int fd, int* newfd) {
 #ifdef USE_NEWLIB
 int dup(int oldfd) {
   int rv;
-  return WRAP(dup)(oldfd, &rv) == 0 ? rv : -1;
+  errno = WRAP(dup)(oldfd, &rv);
+  return errno == 0 ? rv : -1;
 }
 #endif
 
@@ -169,7 +176,8 @@ static int WRAP(dup2)(int fd, int newfd) {
 
 #ifdef USE_NEWLIB
 int dup2(int oldfd, int newfd) {
-  return WRAP(dup2)(oldfd, newfd);
+  errno = WRAP(dup2)(oldfd, newfd);
+  return errno == 0 ? newfd : -1;
 }
 #endif
 
@@ -197,10 +205,10 @@ static void stat_n2u(struct nacl_abi_stat* nacl_buf, struct stat *buf) {
 
 int stat(const char *path, struct stat *buf) {
   struct nacl_abi_stat nacl_buf;
-  int rv = WRAP(stat)(path, &nacl_buf);
-  if (rv == 0)
+  errno = WRAP(stat)(path, &nacl_buf);
+  if (errno == 0)
     stat_n2u(&nacl_buf, buf);
-  return rv;
+  return errno == 0 ? 0 : -1;
 }
 #endif
 
@@ -212,10 +220,10 @@ static int WRAP(fstat)(int fd, struct nacl_abi_stat *buf) {
 #ifdef USE_NEWLIB
 int fstat(int fd, struct stat *buf) {
   struct nacl_abi_stat nacl_buf;
-  int rv = WRAP(fstat)(fd, &nacl_buf);
-  if (rv == 0)
+  errno = WRAP(fstat)(fd, &nacl_buf);
+  if (errno == 0)
     stat_n2u(&nacl_buf, buf);
-  return rv;
+  return errno == 0 ? 0 : -1;
 }
 #endif
 

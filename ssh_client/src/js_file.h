@@ -25,10 +25,11 @@ class JsFile : public FileStream,
   bool is_block() { return !(oflag_ & O_NONBLOCK); }
   bool is_open() { return is_open_; }
 
-  virtual void OnOpen(bool success);
+  virtual void OnOpen(bool success, bool is_atty);
   virtual void OnRead(const char* buf, size_t size);
   virtual void OnWriteAcknowledge(uint64_t count);
   virtual void OnClose();
+  virtual void OnReadReady(bool is_read_ready);
 
   virtual void addref();
   virtual void release();
@@ -64,8 +65,11 @@ class JsFile : public FileStream,
   std::deque<char> out_buf_;
   bool out_task_sent_;
   bool is_open_;
+  bool is_atty_;
+  bool is_read_ready_;
   uint64_t write_sent_;
   uint64_t write_acknowledged_;
+  uint64_t on_read_call_count_;
   static termios tio_;
 
   DISALLOW_COPY_AND_ASSIGN(JsFile);
@@ -99,6 +103,7 @@ class JsSocket : public JsFile {
 
   bool connect(const char* host, uint16_t port);
 
+  int isatty();
   bool is_read_ready();
 
  private:
