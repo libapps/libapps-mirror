@@ -10,7 +10,7 @@
     terminal.installKeyboard();
 
     htermcx.fileSystem.createExecuteContext(
-        new axiom.fs.path.Path(htermcx.arg['command'] || '/exe/wash'),
+        new axiom.fs.path.Path(htermcx.arg['command'] || 'jsfs:/exe/wash'),
         htermcx.arg['arg'] || {}).then(
       function(spawncx) {
         spawncx.onClose.addListener(function(value) {
