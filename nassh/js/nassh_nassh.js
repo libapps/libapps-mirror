@@ -10,6 +10,7 @@
  * It's connected to the nassh filesystem in nassh_commands.js.
  */
 nassh.Nassh = function(executeContext) {
+  this.streamManager_ = new nassh.StreamManager();
   this.inputBuffer_ = new nassh.InputBuffer();
 
   this.executeContext = executeContext;
@@ -55,10 +56,6 @@ nassh.Nassh = function(executeContext) {
 
   this.plugin_ = null;
 
-  // Counters used to acknowledge writes from the plugin.
-  this.stdoutAcknowledgeCount_ = 0;
-  this.stderrAcknowledgeCount_ = 0;
-
   this.onInit = new lib.Event();
   this.initPlugin_(this.onInit);
 };
@@ -85,6 +82,7 @@ nassh.Nassh.STDERR = 2;
  * Perform final cleanup when it's time to exit this nassh session.
  */
 nassh.Nassh.prototype.exit = function(name, arg) {
+  // TODO(binji): is this not called?
   if (this.plugin_) {
     this.plugin_.parentNode.removeChild(this.plugin_);
     this.plugin_ = null;
@@ -151,7 +149,8 @@ nassh.Nassh.prototype.initPlugin_ = function(onComplete) {
 nassh.Nassh.prototype.sendToPlugin_ = function(name, args) {
   var str = JSON.stringify({name: name, arguments: args});
 
-  this.plugin_.postMessage(str);
+  if (this.plugin_)
+    this.plugin_.postMessage(str);
 };
 
 nassh.Nassh.prototype.onExecuteClose_ = function(reason, value) {
@@ -168,7 +167,7 @@ nassh.Nassh.prototype.onStdIn_ = function(value) {
   if (typeof value != 'string')
     return;
 
-  this.sendToPlugin_('onRead', [nassh.Nassh.STDIN, btoa(value)]);
+  this.inputBuffer_.write(value);
 };
 
 nassh.Nassh.prototype.onTTYChange_ = function() {
@@ -202,6 +201,74 @@ nassh.Nassh.prototype.onPlugin_.exit = function(code) {
 };
 
 /**
+ * Helper function to create a TTY stream.
+ *
+ * @param {integer} fd The file descriptor index.
+ * @param {boolean} allowRead True if this stream can be read from.
+ * @param {boolean} allowWrite True if this stream can be written to.
+ * @param {function} onOpen Callback to call when the stream is opened.
+ *
+ * @return {Object} The newly created stream.
+ */
+nassh.Nassh.prototype.createTtyStream = function(
+    fd, allowRead, allowWrite, onOpen) {
+  var self = this;
+  var arg = {
+    fd: fd,
+    allowRead: allowRead,
+    allowWrite: allowWrite,
+    inputBuffer: self.inputBuffer_,
+    onWrite: self.executeContext.stdout.bind(self.executeContext)
+  };
+
+  var streamClass = nassh.Stream.Tty;
+  var stream = self.streamManager_.openStream(streamClass, fd, arg, onOpen);
+  if (allowRead) {
+    var onDataAvailable = function(isAvailable) {
+      // Send current read status to plugin.
+      self.sendToPlugin_('onReadReady', [fd, isAvailable]);
+    };
+
+    self.inputBuffer_.onDataAvailable.addListener(onDataAvailable);
+
+    stream.onClose = function(reason) {
+      self.inputBuffer_.onDataAvailable.removeListener(onDataAvailable);
+      self.sendToPlugin_('onClose', [fd, reason]);
+    };
+  }
+
+  return stream;
+};
+
+/**
+ * Plugin wants to open a file.
+ *
+ * The only supported paths are /dev/stdin, /dev/stdout, /dev/stderr and
+ * /dev/tty.
+ */
+nassh.Nassh.prototype.onPlugin_.openFile = function(fd, path, mode) {
+  var self = this;
+  var isAtty = false;
+
+  var DEV_TTY = '/dev/tty';
+  var DEV_STDIN = '/dev/stdin';
+  var DEV_STDOUT = '/dev/stdout';
+  var DEV_STDERR = '/dev/stderr';
+
+  if (path == DEV_TTY || path == DEV_STDIN || path == DEV_STDOUT ||
+      path == DEV_STDERR) {
+    var allowRead = path == DEV_STDIN || path == DEV_TTY;
+    var allowWrite = path == DEV_STDOUT || path == DEV_STDERR || path == DEV_TTY;
+    var stream = self.createTtyStream(fd, allowRead, allowWrite, function(success) {
+      self.sendToPlugin_('onOpenFile', [fd, success, isAtty]);
+    });
+    isAtty = true;
+  } else {
+    self.sendToPlugin_('onOpenFile', [fd, false, false]);
+  }
+};
+
+/**
  * Plugin wants to write some data to a file descriptor.
  *
  * This is only used for stdout/stderr.  It used to be used as a conduit to
@@ -209,34 +276,45 @@ nassh.Nassh.prototype.onPlugin_.exit = function(code) {
  */
 nassh.Nassh.prototype.onPlugin_.write = function(fd, data) {
   var self = this;
+  var stream = self.streamManager_.getStreamByFd(fd);
 
-  if (fd != nassh.Nassh.STDOUT && fd != nassh.Nassh.STDERR) {
+  if (!stream) {
     console.warn('Attempt to write to unknown fd: ' + fd);
     return;
   }
 
-  var string = atob(data);
-  this.print(string, function() {
-      var ackCount = (fd == nassh.Nassh.STDOUT ?
-                      this.stdoutAcknowledgeCount_ += string.length :
-                      this.stderrAcknowledgeCount_ += string.length);
-      if (this.plugin_) {
-        // After exit, the last ack comes after the plugin has been destroyed.
-        self.sendToPlugin_('onWriteAcknowledge', [fd, ackCount]);
-      }
-    }.bind(this));
+  stream.asyncWrite(data, function(writeCount) {
+      self.sendToPlugin_('onWriteAcknowledge', [fd, writeCount]);
+    }, 100);
 };
 
 /**
  * Plugin wants to read from a file descriptor.
- *
- * This isn't necessary any more, though the NaCl plugin does seem to call it
- * a few times at startup with fd=0, size=1.  It can be safely ignored in
- * those cases.
  */
 nassh.Nassh.prototype.onPlugin_.read = function(fd, size) {
-  if (fd == nassh.Nassh.STDIN && size == 1)
-    return;
+  var self = this;
+  var stream = self.streamManager_.getStreamByFd(fd);
 
-  console.warn('Plugin send unexpected "read" message: ' + fd + ', ' + size);
+  if (!stream) {
+    console.warn('Attempt to read from unknown fd: ' + fd);
+    return;
+  }
+
+  stream.asyncRead(size, function(b64bytes) {
+      self.sendToPlugin_('onRead', [fd, b64bytes]);
+    });
+};
+
+/**
+ * Plugin wants to close a file descriptor.
+ */
+nassh.Nassh.prototype.onPlugin_.close = function(fd) {
+  var self = this;
+  var stream = self.streamManager_.getStreamByFd(fd);
+  if (!stream) {
+    console.warn('Attempt to close unknown fd: ' + fd);
+    return;
+  }
+
+  stream.close();
 };

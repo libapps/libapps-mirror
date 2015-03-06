@@ -40,7 +40,9 @@
       "js/nassh_exe_nassh.js",
       "js/nassh_preference_manager.js",
       "js/nassh_nassh.js",
-      "js/nassh_background.js"
+      "js/nassh_background.js",
+      "js/nassh_stream.js",
+      "js/nassh_stream_tty.js"
     ]
   },
   "app": {
