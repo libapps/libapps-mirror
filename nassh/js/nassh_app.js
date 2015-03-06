@@ -20,10 +20,7 @@ nassh.App = function(manifest) {
 
   chrome.runtime.onUpdateAvailable.addListener(this.onUpdateAvailable);
 
-  this.fsm = new axiom.fs.base.file_system_manager.FileSystemManager();
-  this.jsfs = new axiom.fs.js.file_system.JsFileSystem(this.fsm, 'jsfs');
-
-  this.fsm.mount(this.jsfs);
+  this.jsfs = new axiom.fs.js.file_system.JsFileSystem();
 
   this.jsfs.rootDirectory.mkdir('exe').then(
     function(jsdir) {
@@ -31,29 +28,29 @@ nassh.App = function(manifest) {
       jsdir.install(nassh.exe);
     }.bind(this))
   .then(function() {
-    return DomFileSystem.mount(this.fsm, 'html5', 'permanent')
-      .then(function() {
-        return DomFileSystem.mount(this.fsm, 'tmp', 'temporary');
-      }.bind(this))
-      .catch(function(e) {
-        console.log("Error mounting DomFileSystem", e);
-      }.bind(this));
-    }.bind(this))
+    return this.jsfs.rootDirectory.mkdir('mnt')
+      .then(function(jsDir) {
+        DomFileSystem.mount('permanent', 'html5', jsDir);
+      });
+  }.bind(this))
+  .then(function() {
+    return DomFileSystem.mount('temporary', 'tmp', this.jsfs.rootDirectory);
+  }.bind(this))
   .then(function() {
     this.onInit();
   }.bind(this));
 
   this.defaultEnvironment = {
-    '@PATH': ['jsfs:/exe/'],
-    '$HOME': 'jsfs:/',
-    '$HISTFILE': 'html5:/.wash_history',
-    '$PWD': 'jsfs:/',
+    '@PATH': ['/exe/'],
+    '$HOME': '/mnt/html5',
+    '$HISTFILE': '/mnt/html5/.wash_history',
+    '$PWD': '/mnt/html5',
     '$TERM': 'xterm-256color'
   };
 };
 
 nassh.App.prototype.execute = function(pathSpec, arg, env) {
-  return this.fsm.createExecuteContext(
+  return this.jsfs.createExecuteContext(
     new axiom.fs.path.Path(pathSpec), arg).then(
       function(cx) {
         cx.setEnvs(this.defaultEnvironment);

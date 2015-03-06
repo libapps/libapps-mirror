@@ -17,6 +17,6 @@ window.addEventListener('load', function() {
     // check should probably be relaxed.
     var arg = new bg.Object();
     arg['terminal-dom'] = document.querySelector('#terminal');
-    bg.app.execute('jsfs:/exe/hterm', arg);
+    bg.app.execute('/exe/hterm', arg);
   });
 });
