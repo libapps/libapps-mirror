@@ -54,6 +54,9 @@ nassh.CommandInstance = function(argv) {
 
   // Buffer for data coming from the terminal.
   this.inputBuffer_ = new nassh.InputBuffer();
+
+  // A manager of nassh.Stream objects, mapping fd to Stream.
+  this.streamManager_ = new nassh.StreamManager();
 };
 
 /**
@@ -630,11 +633,11 @@ nassh.CommandInstance.prototype.createTtyStream = function(
     allowRead: allowRead,
     allowWrite: allowWrite,
     inputBuffer: self.inputBuffer_,
-    io: self.io
+    onWrite: self.io.writeUTF8.bind(self.io),
   };
 
   var streamClass = nassh.Stream.Tty;
-  var stream = nassh.Stream.openStream(streamClass, fd, arg, onOpen);
+  var stream = self.streamManager_.openStream(streamClass, fd, arg, onOpen);
   if (allowRead) {
     var onDataAvailable = function(isAvailable) {
       // Send current read status to plugin.
@@ -690,11 +693,9 @@ nassh.CommandInstance.prototype.exit = function(code) {
   if (!nassh.v2)
     window.onbeforeunload = null;
 
-  // Close the std* files on exit. Without this, fd 0-2 are still referenced by
-  // nassh.Stream.
-  nassh.Stream.getStreamByFd(0).close();
-  nassh.Stream.getStreamByFd(1).close();
-  nassh.Stream.getStreamByFd(2).close();
+  // Close all files on exit. Most files will be closed by the plugin, but fd
+  // 0-2 will not.
+  this.streamManager_.closeAllStreams();
 
   this.io.println(nassh.msg('DISCONNECT_MESSAGE', [code]));
   this.io.println(nassh.msg('RECONNECT_MESSAGE'));
@@ -802,7 +803,7 @@ nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
 
   if (path == '/dev/random') {
     var streamClass = nassh.Stream.Random;
-    var stream = nassh.Stream.openStream(streamClass, fd, path, onOpen);
+    var stream = self.streamManager_.openStream(streamClass, fd, path, onOpen);
     stream.onClose = function(reason) {
       self.sendToPlugin_('onClose', [fd, reason]);
     };
@@ -824,7 +825,7 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(
 
   if (port == 0 && host == this.authAgentAppID_) {
     // Request for auth-agent connection.
-    stream = nassh.Stream.openStream(nassh.Stream.SSHAgentRelay,
+    stream = self.streamManager_.openStream(nassh.Stream.SSHAgentRelay,
         fd, {authAgentAppID: this.authAgentAppID_},
         function onOpen(success) {
           self.sendToPlugin_('onOpenSocket', [fd, success]);
@@ -860,7 +861,7 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(
  */
 nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
   var self = this;
-  var stream = nassh.Stream.getStreamByFd(fd);
+  var stream = self.streamManager_.getStreamByFd(fd);
 
   if (!stream) {
     console.warn('Attempt to write to unknown fd: ' + fd);
@@ -877,7 +878,7 @@ nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
  */
 nassh.CommandInstance.prototype.onPlugin_.read = function(fd, size) {
   var self = this;
-  var stream = nassh.Stream.getStreamByFd(fd);
+  var stream = self.streamManager_.getStreamByFd(fd);
 
   if (!stream) {
     console.warn('Attempt to read from unknown fd: ' + fd);
@@ -894,7 +895,7 @@ nassh.CommandInstance.prototype.onPlugin_.read = function(fd, size) {
  */
 nassh.CommandInstance.prototype.onPlugin_.isReadReady = function(fd) {
   var self = this;
-  var stream = nassh.Stream.getStreamByFd(fd);
+  var stream = self.streamManager_.getStreamByFd(fd);
 
   if (!stream) {
     console.warn('Attempt to call isReadReady from unknown fd: ' + fd);
@@ -910,7 +911,7 @@ nassh.CommandInstance.prototype.onPlugin_.isReadReady = function(fd) {
  */
 nassh.CommandInstance.prototype.onPlugin_.close = function(fd) {
   var self = this;
-  var stream = nassh.Stream.getStreamByFd(fd);
+  var stream = self.streamManager_.getStreamByFd(fd);
   if (!stream) {
     console.warn('Attempt to close unknown fd: ' + fd);
     return;

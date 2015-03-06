@@ -10,6 +10,8 @@
  * It's connected to the nassh filesystem in nassh_commands.js.
  */
 nassh.Nassh = function(executeContext) {
+  this.inputBuffer_ = new nassh.InputBuffer();
+
   this.executeContext = executeContext;
   this.executeContext.onStdIn.addListener(this.onStdIn_, this);
   this.executeContext.onTTYChange.addListener(this.onTTYChange_, this);

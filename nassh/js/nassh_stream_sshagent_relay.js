@@ -8,8 +8,8 @@
  * Relay ssh-agent messages to another app.
  *
  */
-nassh.Stream.SSHAgentRelay = function(fd) {
-  nassh.Stream.apply(this, [fd]);
+nassh.Stream.SSHAgentRelay = function(manager, fd) {
+  nassh.Stream.apply(this, [manager, fd]);
 
   this.authAgentAppID_ = null;
   this.port_ = null;

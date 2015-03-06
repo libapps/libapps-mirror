@@ -10,10 +10,70 @@
  * in the near future, so documentation in this file is a bit sparse.
  */
 
+
+/**
+ * Manage a collection of open streams, mapping them to file descriptors.
+ */
+nassh.StreamManager = function() {
+  this.openStreams_ = {};
+};
+
+/**
+ * Look up a stream instance.
+ */
+nassh.StreamManager.prototype.getStreamByFd = function(fd) {
+  return this.openStreams_[fd];
+};
+
+/**
+ * Open a new stream of a given class.
+ */
+nassh.StreamManager.prototype.openStream = function(streamClass, fd, arg,
+                                                    onOpen) {
+  var self = this;
+
+  if (fd in self.openStreams_)
+    throw nassh.Stream.ERR_FD_IN_USE;
+
+  var stream = new streamClass(self, fd, arg);
+
+  stream.asyncOpen_(arg, function(success) {
+      if (success) {
+        self.openStreams_[fd] = stream;
+        stream.open = true;
+      }
+
+      onOpen(success);
+    });
+
+  return stream;
+};
+
+
+/**
+ * Close all open streams.
+ */
+nassh.StreamManager.prototype.closeAllStreams = function() {
+  for (var fd in this.openStreams_) {
+    this.openStreams_[fd].close();
+  }
+};
+
+/**
+ * Close a stream, removing it from the fd map.
+ *
+ * This is only meant to be called by nassh.Stream instances.
+ */
+nassh.StreamManager.prototype.closeStream_ = function(stream) {
+  delete this.openStreams_[stream.fd_];
+};
+
+
 /**
  * Base class for streams required by the plugin.
  */
-nassh.Stream = function(fd, path) {
+nassh.Stream = function(manager, fd, path) {
+  this.manager_ = manager;
   this.fd_ = fd;
   this.path = path;
   this.open = false;
@@ -30,47 +90,11 @@ nassh.Stream.ERR_STREAM_CANT_READ = 'Stream has no read permission';
 nassh.Stream.ERR_STREAM_CANT_WRITE = 'Stream has no write permission';
 
 /**
- * Collection of currently open stream instances.
- */
-nassh.Stream.openStreams_ = {};
-
-/**
- * Look up a stream instance.
- */
-nassh.Stream.getStreamByFd = function(fd) {
-  return this.openStreams_[fd];
-};
-
-/**
- * Open a new stream of a given class.
- */
-nassh.Stream.openStream = function(streamClass, fd, arg, onOpen) {
-  if (fd in this.openStreams_)
-    throw nassh.Stream.ERR_FD_IN_USE;
-
-  var stream = new streamClass(fd, arg);
-  var self = this;
-
-  stream.asyncOpen_(arg, function(success) {
-      if (success) {
-        self.openStreams_[fd] = stream;
-        stream.open = true;
-      }
-
-      onOpen(success);
-    });
-
-  return stream;
-};
-
-/**
  * Clean up after a stream is closed.
  */
 nassh.Stream.onClose_ = function(stream) {
   if (stream.open)
     throw nassh.Stream.ERR_STREAM_OPENED;
-
-  delete this.openStreams_[stream.fd_];
 };
 
 /**
@@ -106,7 +130,7 @@ nassh.Stream.prototype.close = function(reason) {
   if (this.onClose)
     this.onClose(reason || 'closed');
 
-  nassh.Stream.onClose_(this);
+  this.manager_.closeStream_(this);
 };
 
 /**
@@ -114,8 +138,8 @@ nassh.Stream.prototype.close = function(reason) {
  *
  * This special case stream just returns random bytes when read.
  */
-nassh.Stream.Random = function(fd) {
-  nassh.Stream.apply(this, [fd]);
+nassh.Stream.Random = function(manager, fd) {
+  nassh.Stream.apply(this, [manager, fd]);
 };
 
 nassh.Stream.Random.prototype = {

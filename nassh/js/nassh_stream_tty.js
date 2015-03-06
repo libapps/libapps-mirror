@@ -102,8 +102,8 @@ nassh.InputBuffer.prototype.read = function(size, onRead) {
  * hterm.Terminal.IO). It is used for /dev/tty, as well as stdin, stdout and
  * stderr when they are reading from/writing to a terminal.
  */
-nassh.Stream.Tty = function(fd, info) {
-  nassh.Stream.apply(this, [fd]);
+nassh.Stream.Tty = function(manager, fd, info) {
+  nassh.Stream.apply(this, [manager, fd, info]);
 };
 
 nassh.Stream.Tty.prototype = {
@@ -114,7 +114,7 @@ nassh.Stream.Tty.prototype.asyncOpen_ = function(info, onOpen) {
   this.allowRead_ = info.allowRead;
   this.allowWrite_ = info.allowWrite;
   this.inputBuffer_ = info.inputBuffer;
-  this.io_ = info.io;
+  this.onWrite_ = info.onWrite;
   this.acknowledgeCount_ = 0;
 
   setTimeout(function() { onOpen(true) }, 0);
@@ -152,7 +152,7 @@ nassh.Stream.Tty.prototype.asyncWrite = function(data, onSuccess) {
   var string = atob(data);
   self.acknowledgeCount_ += string.length;
 
-  self.io_.writeUTF8(string);
+  self.onWrite_(string);
 
   setTimeout(function() { onSuccess(self.acknowledgeCount_); }, 0);
 };

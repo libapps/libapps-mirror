@@ -8,8 +8,8 @@
  * This class implements session initialization and back-off logic common for
  * both types of streams.
  */
-nassh.Stream.GoogleRelay = function(fd) {
-  nassh.Stream.apply(this, [fd]);
+nassh.Stream.GoogleRelay = function(manager, fd) {
+  nassh.Stream.apply(this, [manager, fd]);
 
   this.host_ = null;
   this.port_ = null;
