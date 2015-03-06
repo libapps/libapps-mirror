@@ -36,7 +36,7 @@ window.onload = function() {
 
     // Useful for console debugging.
     window.term_ = terminal;
-  };
+  }
 
   if (!nassh.v2) {
     var onUpdateAvailable = function() {

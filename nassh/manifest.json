@@ -30,14 +30,10 @@
   ],
   "background": {
     "scripts": [
-      "js/axiom_base.amd.concat.js",
-      "js/wash.amd.concat.js",
       "js/nassh_deps.concat.js",
       "js/nassh.js",
       "js/nassh_app.js",
-      "js/nassh_exe.js",
-      "js/nassh_exe_hterm.js",
-      "js/nassh_exe_nassh.js",
+      "js/nassh_executables.js",
       "js/nassh_preference_manager.js",
       "js/nassh_nassh.js",
       "js/nassh_background.js"

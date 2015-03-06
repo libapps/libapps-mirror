@@ -23,8 +23,8 @@ nassh.Nassh = function(executeContext) {
   if (ecArg instanceof Array) {
     ecArg = {argv: ecArg};
   } else if (!(ecArg instanceof Object)) {
-    executeContext.closeError(new axiom.core.error.AxiomError.TypeMismatch(
-        'argv: Expected Array or Object', typeof ecArg));
+    executeContext.closeError('wam.FileSystem.Error.UnexpectedArgvType',
+                              ['object']);
     return;
   }
 
@@ -39,12 +39,7 @@ nassh.Nassh = function(executeContext) {
     this.argv.arguments = [];
   }
 
-  var washEnv = this.executeContext.getEnvs();
-  this.argv.environment = {};
-  for (var key in washEnv) {
-    if (key.substr(0, 1) == '$')
-      this.argv.environment[key.substr(1)] = washEnv[key];
-  }
+  this.argv.environment = this.executeContext.getEnvs();
 
   var tty = executeContext.getTTY();
   this.argv.terminalWidth = tty.columns;
@@ -69,7 +64,6 @@ nassh.Nassh = function(executeContext) {
 nassh.Nassh.main = function(executeContext) {
   var session = new nassh.Nassh(executeContext);
   session.onInit.addListener(session.start.bind(session));
-  return executeContext.ephemeralPromise;
 };
 
 /**
@@ -170,9 +164,6 @@ nassh.Nassh.prototype.onStdIn_ = function(value) {
 };
 
 nassh.Nassh.prototype.onTTYChange_ = function() {
-  if (!this.plugin_)
-    return;
-
   var tty = this.executeContext.getTTY();
   this.sendToPlugin_('onResize', [Number(tty.columns), Number(tty.rows)]);
 };
@@ -195,7 +186,6 @@ nassh.Nassh.prototype.onPlugin_.printLog = function(str) {
 nassh.Nassh.prototype.onPlugin_.exit = function(code) {
   console.log('plugin exit: ' + code);
   this.sendToPlugin_('onExitAcknowledge', []);
-  this.executeContext.requestTTY({interrupt: null});
   this.executeContext.closeOk(code);
 };
 

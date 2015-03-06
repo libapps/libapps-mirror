@@ -4,10 +4,8 @@
 
 'use strict';
 
-(function(global) {
+(function() {
   var didLaunch = false;
-
-  __axiomExport__(global);
 
   /**
    * Used to watch for launch events that occur before we're ready to handle
@@ -46,4 +44,4 @@
     // chrome.getBackgroundPage().
     window.app = app;
   }, console.log.bind(console));
-})(this);
+})();
