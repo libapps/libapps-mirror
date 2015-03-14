@@ -249,8 +249,8 @@ lib.colors.mix = function(base, tint, percent) {
   var ary2 = lib.colors.crackRGB(tint);
 
   for (var i = 0; i < 4; ++i) {
-    var diff = ary1[i] - ary2[i];
-    ary1[i] += diff * percent;
+    var diff = ary2[i] - ary1[i];
+    ary1[i] = Math.round(parseInt(ary1[i]) + diff * percent);
   }
 
   return lib.colors.arrayToRGBA(ary1);
