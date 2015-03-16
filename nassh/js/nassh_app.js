@@ -45,16 +45,16 @@ nassh.App = function(manifest) {
 
   this.defaultEnvironment = {
     '@PATH': ['jsfs:/exe/'],
-    '$HOME': 'jsfs:/',
-    '$HISTFILE': 'html5:/.wash_history',
-    '$PWD': 'jsfs:/',
-    '$TERM': 'xterm-256color'
+    '$TERM': 'xterm-256color',
+    '$HOME': 'html5:/',
+    '$HISTFILE': 'html5:/.wash_history'
   };
 };
 
 nassh.App.prototype.execute = function(pathSpec, arg, env) {
+  var stdioSource = new axiom.fs.stdio_source.StdioSource();
   return this.fsm.createExecuteContext(
-    new axiom.fs.path.Path(pathSpec), arg).then(
+    new axiom.fs.path.Path(pathSpec), stdioSource.stdio, arg).then(
       function(cx) {
         cx.setEnvs(this.defaultEnvironment);
         if (env)

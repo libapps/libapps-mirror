@@ -6,28 +6,32 @@
   'use strict';
 
   var onTerminalReady = function(htermcx, terminal) {
+    var stdioSource = new axiom.fs.stdio_source.StdioSource();
     terminal.reset();
     terminal.installKeyboard();
 
-    htermcx.fileSystem.createExecuteContext(
-        new axiom.fs.path.Path(htermcx.arg['command'] || 'jsfs:/exe/wash'),
-        htermcx.arg['arg'] || {}).then(
+    htermcx.fileSystemManager.createExecuteContext(
+        new axiom.fs.path.Path(htermcx.getArg('command', 'jsfs:/exe/wash')),
+        stdioSource.stdio,
+        htermcx.getArg('arg', {})).then(
       function(spawncx) {
         spawncx.onClose.addListener(function(value) {
           terminal.uninstallKeyboard();
         });
 
-        spawncx.onStdOut.addListener(function(value, opt_onAck) {
+        stdioSource.stdout.onData.addListener(function(value, opt_onAck) {
           terminal.io.writeUTF8(value.replace(/\n/g, '\r\n'));
           if (opt_onAck)
             setTimeout(opt_onAck);
         });
+        stdioSource.stdout.resume();
 
-        spawncx.onStdErr.addListener(function(value, opt_onAck) {
+        stdioSource.stderr.onData.addListener(function(value, opt_onAck) {
           terminal.io.writeUTF8(value.replace(/\n/g, '\r\n'));
           if (opt_onAck)
             setTimeout(opt_onAck);
         });
+        stdioSource.stderr.resume();
 
         spawncx.onTTYRequest.addListener(function (e) {
           if ('interrupt' in e) {
@@ -37,15 +41,13 @@
           }
         });
 
-        terminal.io.onVTKeystroke = function(str) {
+        terminal.io.sendString = terminal.io.onVTKeystroke = function(str) {
           if (str == spawncx.getTTY().getInterrupt()) {
             spawncx.signal('interrupt', null);
           } else {
-            spawncx.stdin(str);
+            stdioSource.stdin.write(str);
           }
         };
-
-        terminal.io.sendString = spawncx.stdin.bind(spawncx);
 
         terminal.io.onTerminalResize = function() {
           var tty = new axiom.fs.tty_state.TTYState();
@@ -58,8 +60,8 @@
         terminal.io.onTerminalResize();
 
         spawncx.setEnvs(htermcx.getEnvs());
-        if (typeof htermcx.arg['envs'] == 'object')
-          spawncx.setEnvs(htermcx.arg['envs']);
+        if (typeof htermcx.getArg('envs') == 'object')
+          spawncx.setEnvs(htermcx.getArg('envs'));
 
         spawncx.execute();
       });
@@ -68,7 +70,8 @@
   };
 
   var onTerminalDom = function(htermcx, dom) {
-    var terminal = new hterm.Terminal(htermcx.arg['profile-name'] || 'default');
+    var terminal =
+        new hterm.Terminal(htermcx.getArg('profile-name', 'default'));
     terminal.decorate(dom);
     terminal.onTerminalReady = onTerminalReady.bind(null, htermcx, terminal);
   };
@@ -76,11 +79,11 @@
   nassh.exe.hterm = function(cx) {
     cx.ready();
     var win;
-    if (cx.arg['terminal-dom']) {
-      var dom = cx.arg['terminal-dom'];
+    if (cx.getArg('terminal-dom')) {
+      var dom = cx.getArg('terminal-dom');
       onTerminalDom(cx, dom);
-    } else if (cx.arg['terminal']) {
-      var terminal = cx.arg['terminal'];
+    } else if (cx.getArg('terminal')) {
+      var terminal = cx.getArg('terminal');
       onTerminalReady(cx, terminal);
     } else if (nassh.v2) {
       throw new Error('TODO');
@@ -96,5 +99,12 @@
     return cx.ephemeralPromise;
   };
 
-  nassh.exe.hterm.argSigil = '%';
+  nassh.exe.hterm.signature = {
+    'arg': '%',
+    'command': '$',
+    'envs': '%',
+    'profile-name': '$',
+    'terminal-dom': '%',
+    'terminal': '%',
+  };
 })();
