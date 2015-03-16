@@ -663,7 +663,6 @@ nassh.CommandInstance.prototype.createTtyStream = function(
  */
 nassh.CommandInstance.prototype.sendToPlugin_ = function(name, args) {
   var str = JSON.stringify({name: name, arguments: args});
-
   this.plugin_.postMessage(str);
 };
 
@@ -849,7 +848,6 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(
   };
 
   stream.onClose = function(reason) {
-    console.log('close: ' + fd);
     self.sendToPlugin_('onClose', [fd, reason]);
   };
 };
@@ -888,22 +886,6 @@ nassh.CommandInstance.prototype.onPlugin_.read = function(fd, size) {
   stream.asyncRead(size, function(b64bytes) {
       self.sendToPlugin_('onRead', [fd, b64bytes]);
     });
-};
-
-/**
- * Notify the plugin that data is available to read.
- */
-nassh.CommandInstance.prototype.onPlugin_.isReadReady = function(fd) {
-  var self = this;
-  var stream = self.streamManager_.getStreamByFd(fd);
-
-  if (!stream) {
-    console.warn('Attempt to call isReadReady from unknown fd: ' + fd);
-    return;
-  }
-
-  var rv = stream.isReadReady();
-  self.sendToPlugin_('onIsReadReady', [fd, rv]);
 };
 
 /**
