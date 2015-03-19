@@ -1,36 +1,36 @@
-0.9.32.4, 2015-03-19, Update to hterm 1.54.
+0.8.32.4, 2015-03-19, Update to hterm 1.54.
 
 * Update to hterm 1.54.
 
-0.9.32.3, 2015-03-02, Fix rtdep errror.
+0.8.32.3, 2015-03-02, Fix rtdep errror.
 
 * Remove bogus rtdep on lib.f.Sequence which cause the bg page to fail to start.
 
-0.9.32.2, 2015-03-02, Update to hterm 1.53
+0.8.32.2, 2015-03-02, Update to hterm 1.53
 
 * Update to hterm 1.53.
 
-0.9.32.1, 2015-02-18, Update to hterm 1.52
+0.8.32.1, 2015-02-18, Update to hterm 1.52
 
 * Update to hterm 1.52.
 
-0.9.31.2, 2014-11-11, Include dialog sync fix.
+0.8.31.2, 2014-11-11, Include dialog sync fix.
 
 * Rebase and rebuild to include commit 458213... which fixed a race condition
   in the connection dialog.
 
-0.9.31.1, 2014-11-11, Add --ssh-agent option, hterm 1.51.
+0.8.31.1, 2014-11-11, Add --ssh-agent option, hterm 1.51.
 
 * Add "--ssh-agent" as a relay-option.  This can be set to a chrome app id
   which will act as an ssh-agent over chrome app messaging.
 * Update --config=google to use the default Google key agent app.
 * Update to hterm 1.51 for 24-bit color support.
 
-0.9.30.1, 2014-10-07, Update to hterm 1.50
+0.8.30.1, 2014-10-07, Update to hterm 1.50
 
 * Update to hterm 1.50 for OSC 52 and HOME/END vs application cursor fixes.
 
-0.9.29.1, 2014-09-23, Reorder background scripts.
+0.8.29.1, 2014-09-23, Reorder background scripts.
 
 * Reorder the background scripts in the manifest file to account for a race
   condition.  Before this change, the callback in nassh_background.js would
