@@ -294,7 +294,7 @@ nassh.PreferencesEditor.prototype.syncPage = function() {
   var typeMap = {
     'boolean': 'checkbox',
     'number': 'number',
-    'object': 'text',
+    'object': 'textarea',
     'string': 'text',
   };
   for (var key in this.prefs_.prefRecords_) {
@@ -344,7 +344,8 @@ nassh.PreferencesEditor.prototype.syncPage = function() {
           onchange = null;
           break;
       }
-      input.type = typeMap[type];
+      if (input.type != typeMap[type])
+        input.type = typeMap[type];
     }
 
     input.name = 'settings';
