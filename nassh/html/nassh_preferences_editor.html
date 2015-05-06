@@ -3,6 +3,7 @@
   <head>
     <script src='../js/nassh_deps.concat.js'></script>
     <script src='../js/nassh.js'></script>
+    <script src='../js/nassh_preference_manager.js'></script>
     <script src='../js/nassh_preferences_editor.js'></script>
 
     <link rel='stylesheet' href='../css/nassh_box.css'></link>
@@ -45,8 +46,13 @@
             <a href="#options" i18n-content='PREFERENCES_HEADER'>Preferences</a>
           </li>
         </ul>
-        <ul>
-          <li>&nbsp;<img id='icon'/></li>
+        <ul style="margin-left: 1em">
+          <li><img id='icon'/></li>
+          <li><a id='backup' href='#backup' i18n-content='BACKUP_PREFS'
+                 >Save Backup</a></li>
+          <li><a id='restore' href='#restore' i18n-content='RESTORE_PREFS'
+                 >Restore Backup</a>
+            <input class='restore' type='file' style='visibility:hidden'></li>
         </ul>
       </div>
 

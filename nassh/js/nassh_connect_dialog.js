@@ -102,7 +102,8 @@ nassh.ConnectDialog.prototype.onPreferencesReady_ = function() {
     this.shortcutList_.focus();
 
     var self = this;
-    chrome.storage.local.get('/nassh/connectDialog/lastProfileId', function(items) {
+    chrome.storage.local.get('/nassh/connectDialog/lastProfileId',
+                             function(items) {
       var lastProfileId = items['/nassh/connectDialog/lastProfileId'];
       if (lastProfileId)
         profileIndex = Math.max(0, self.getProfileIndex_(lastProfileId));
@@ -382,7 +383,9 @@ nassh.ConnectDialog.prototype.connect = function(name, argv) {
   this.maybeCopyPlaceholders_();
   this.save();
 
-  var items = { '/nassh/connectDialog/lastProfileId': this.currentProfileRecord_.id };
+  var items = {
+    '/nassh/connectDialog/lastProfileId': this.currentProfileRecord_.id
+  };
   chrome.storage.local.set(items);
 
   if (this.form_.checkValidity())
@@ -828,7 +831,8 @@ nassh.ConnectDialog.prototype.onDeleteClick_ = function(e) {
 nassh.ConnectDialog.prototype.onOptionsClick_ = function(e) {
   if (nassh.v2) {
     var optionsWindow = chrome.app.window.get('options_page');
-    // If the options window is not open, opens it, else brings it to the foreground.
+    // If the options window is not open, opens it, else brings it to the
+    // foreground.
     if (!optionsWindow) {
       chrome.app.window.create('/html/nassh_preferences_editor.html', {
         'bounds': {

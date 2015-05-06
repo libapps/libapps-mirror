@@ -364,6 +364,21 @@
     "description": "Message displayed after options are reset"
   },
 
+  "BACKUP_PREFS": {
+    "message": "Save Backup",
+    "description": "Label for the link in the options page that lets the user save a backup copy of their prefs"
+  },
+
+  "RESTORE_PREFS": {
+    "message": "Restore Backup",
+    "description": "Label for the link in the options page that lets the user restore their prefs"
+  },
+
+  "PREF_BACKUP_FILENAME": {
+    "message": "Secure Shell Preferences Backup.json",
+    "description": "Default filename for the preferences backup file."
+  },
+
   "JSON_PARSE_ERROR": {
     "message": "Could not parse JSON in '$1'",
     "description": "Error message shown when parsing JSON input failed"

@@ -122,6 +122,94 @@ nassh.importFiles = function(fileSystem, dest, fileList,
   }
 };
 
+/**
+ * Export the current list of nassh connections, and any hterm profiles
+ * they reference.
+ *
+ * This is method must be given a completion callback because the hterm
+ * profiles need to be loaded asynchronously.
+ *
+ * @param {function(Object)} Callback to be invoked when export is complete.
+ *   The callback will receive a plan js object representing the state of
+ *   nassh preferences.  The object can be passed back to
+ *   nassh.importPreferences.
+ */
+nassh.exportPreferences = function(onComplete) {
+  var pendingReads = 0;
+  var rv = {};
+
+  var onReadStorage = function(terminalProfile, prefs) {
+    rv.hterm[terminalProfile] = prefs.exportAsJson();
+    if (--pendingReads < 1)
+      onComplete(rv);
+  };
+
+  rv.magic = 'nassh-prefs';
+  rv.version = 1;
+
+  var nasshPrefs = new nassh.PreferenceManager();
+  nasshPrefs.readStorage(function() {
+    rv.nassh = nasshPrefs.exportAsJson();
+    rv.hterm = {};
+
+    var profileIds = nasshPrefs.get('profile-ids');
+    if (profileIds.length == 0) {
+      onComplete(rv);
+      return;
+    }
+
+    for (var i = 0; i < profileIds.length; i++) {
+      var nasshProfilePrefs = nasshPrefs.getChild('profile-ids', profileIds[i]);
+      var terminalProfile = nasshProfilePrefs.get('terminal-profile');
+      if (!terminalProfile)
+        terminalProfile = 'default';
+
+      if (!(terminalProfile in rv.hterm)) {
+        rv.hterm[terminalProfile] = null;
+
+        var prefs = new hterm.PreferenceManager(terminalProfile);
+        prefs.readStorage(onReadStorage.bind(null, terminalProfile, prefs));
+        pendingReads++;
+      }
+    }
+  });
+};
+
+/**
+ * Import a preferences object.
+ *
+ * This will not overwrite any existing preferences.
+ *
+ * @param {Object} prefsObject A preferences object created with
+ *   nassh.exportPreferences.
+ * @param {function()} opt_onComplete An optional callback to be invoked when
+ *   the import is complete.
+ */
+nassh.importPreferences = function(prefsObject, opt_onComplete) {
+  var pendingReads = 0;
+
+  var onReadStorage = function(terminalProfile, prefs) {
+    prefs.importFromJson(prefsObject.hterm[terminalProfile]);
+    if (--pendingReads < 1 && opt_onComplete)
+      opt_onComplete();
+  };
+
+  if (prefsObject.magic != 'nassh-prefs')
+    throw new Error('Not a JSON object or bad value for \'magic\'.');
+
+  if (prefsObject.version != 1)
+    throw new Error('Bad version, expected 1, got: ' + prefsObject.version);
+
+  var nasshPrefs = new nassh.PreferenceManager();
+  nasshPrefs.importFromJson(prefsObject.nassh);
+
+  for (var terminalProfile in prefsObject.hterm) {
+    var prefs = new hterm.PreferenceManager(terminalProfile);
+    prefs.readStorage(onReadStorage.bind(null, terminalProfile, prefs));
+    pendingReads++;
+  }
+};
+
 nassh.reloadWindow = function() {
   if (!nassh.v2) {
     document.location.hash = '';
@@ -133,4 +221,4 @@ nassh.reloadWindow = function() {
     chrome.app.window.create(url, { 'bounds': bounds });
     appWindow.close();
   }
-}
+};

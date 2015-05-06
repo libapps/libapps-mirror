@@ -171,68 +171,20 @@ nassh.CommandInstance.prototype.run = function() {
 };
 
 /**
- * Export the current list of nassh connections, and any hterm profiles
- * they reference.
- *
- * This is method must be given a completion callback because the hterm
- * profiles need to be loaded asynchronously.
+ * This method moved off to be a static method on nassh, but remains here
+ * for js console users who expect to find it here.
  */
 nassh.CommandInstance.prototype.exportPreferences = function(onComplete) {
-  var pendingReads = 0;
-  var rv = {};
-
-  var onReadStorage = function(terminalProfile, prefs) {
-    rv.hterm[terminalProfile] = prefs.exportAsJson();
-    if (--pendingReads < 1)
-      onComplete(rv);
-  };
-
-  rv.magic = 'nassh-prefs';
-  rv.version = 1;
-
-  rv.nassh = this.prefs_.exportAsJson();
-  rv.hterm = {};
-
-  var profileIds = this.prefs_.get('profile-ids');
-  for (var i = 0; i < profileIds.length; i++) {
-    var nasshProfilePrefs = this.prefs_.getChild('profile-ids', profileIds[i]);
-    var terminalProfile = nasshProfilePrefs.get('terminal-profile');
-    if (!terminalProfile)
-      terminalProfile = 'default';
-
-    if (!(terminalProfile in rv.hterm)) {
-      rv.hterm[terminalProfile] = null;
-
-      var prefs = new hterm.PreferenceManager(terminalProfile);
-      prefs.readStorage(onReadStorage.bind(null, terminalProfile, prefs));
-      pendingReads++;
-    }
-  }
+  nassh.exportPreferences(onComplete);
 };
 
+/**
+ * This method moved off to be a static method on nassh, but remains here
+ * for js console users who expect to find it here.
+ */
 nassh.CommandInstance.prototype.importPreferences = function(
     json, opt_onComplete) {
-  var pendingReads = 0;
-
-  var onReadStorage = function(terminalProfile, prefs) {
-    prefs.importFromJson(json.hterm[terminalProfile]);
-    if (--pendingReads < 1 && opt_onComplete)
-      opt_onComplete(rv);
-  };
-
-  if (json.magic != 'nassh-prefs')
-    throw new Error('Not a JSON object or bad value for \'magic\'.');
-
-  if (json.version != 1)
-    throw new Error('Bad version');
-
-  this.prefs_.importFromJson(json.nassh);
-
-  for (var terminalProfile in json.hterm) {
-    var prefs = new hterm.PreferenceManager(terminalProfile);
-    prefs.readStorage(onReadStorage.bind(null, terminalProfile, prefs));
-    pendingReads++;
-  }
+  nassh.importPreferences(json, opt_onComplete);
 };
 
 /**
