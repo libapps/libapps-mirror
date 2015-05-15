@@ -84,7 +84,7 @@ nassh.GoogleRelay = function(io, optionString) {
 nassh.GoogleRelay.parseOptionString = function(optionString) {
   var rv = {};
 
-  var optionList = optionString.split(/\s+/g);
+  var optionList = optionString.trim().split(/\s+/g);
   for (var i = 0; i < optionList.length; i++) {
     var option = optionList[i];
     if (option.substr(0, 1) != '-') {
