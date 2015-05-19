@@ -1,3 +1,9 @@
+0.8.33.1, 2015-05-19, Update to hterm 1.55 plus fixes in nassh
+
+* Trim trailing spaces from ssh and relay arguments.
+* Add preference save/restore UI to the options page.
+* Fix preferences under strict mode.
+
 0.8.32.4, 2015-03-19, Update to hterm 1.54.
 
 * Update to hterm 1.54.
