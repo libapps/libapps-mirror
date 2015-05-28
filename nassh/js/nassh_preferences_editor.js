@@ -32,6 +32,7 @@ window.onload = function() {
     var a = document.querySelector('#backup');
     a.download = nassh.msg('PREF_BACKUP_FILENAME');
     a.onclick = prefsEditor.onBackupClick.bind(prefsEditor);
+    prefsEditor.updateBackupLink();
 
     a = document.querySelector('#restore');
     a.onclick = prefsEditor.onRestoreClick.bind(prefsEditor);
@@ -144,18 +145,13 @@ nassh.PreferencesEditor.prototype.onBackupClick = function(e) {
   if (e.synthetic)
     return;
 
-  // Otherwise, cancel the click, read prefs from storage, update the href,
-  // and then generate a synthetic click.
-  e.preventDefault();
-  var a = e.target;
-  nassh.exportPreferences(function(value) {
-    a.href = 'data:text/json,' + JSON.stringify(value);
-    var event = document.createEvent("MouseEvents");
-    event.initMouseEvent("click", true, false, window, 0, 0, 0, 0, 0,
-                         false, false, false, false, 0, null);
+  this.updateBackupLink(function(value) {
+    var event = new MouseEvent(e.type, e);
     event.synthetic = true;
-    a.dispatchEvent(event);
+    e.target.dispatchEvent(event);
   });
+
+  e.preventDefault();
 };
 
 /**
@@ -185,6 +181,15 @@ nassh.PreferencesEditor.prototype.onRestoreClick = function(e) {
   }.bind(this);
 
   input.click();
+};
+
+nassh.PreferencesEditor.prototype.updateBackupLink = function(opt_onComplete) {
+  nassh.exportPreferences(function(value) {
+    var a = document.querySelector('#backup');
+    a.href = 'data:text/json,' + JSON.stringify(value);
+    if (opt_onComplete)
+      opt_onComplete();
+  });
 };
 
 /**
@@ -247,6 +252,8 @@ nassh.PreferencesEditor.prototype.save = function(input) {
       prefs.set(key, value);
       break;
   }
+
+  this.updateBackupLink();
 };
 
 /**

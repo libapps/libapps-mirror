@@ -1,3 +1,9 @@
+0.8.33.2, 2015-05-28, Prefs backup/restore tweaks
+
+* Refresh the backup link at startup and after each pref change.
+* Use the new MouseEvent ctor instead of the deprecated
+  initMouseEvent function.
+
 0.8.33.1, 2015-05-19, Update to hterm 1.55 plus fixes in nassh
 
 * Trim trailing spaces from ssh and relay arguments.
