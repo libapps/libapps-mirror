@@ -6,38 +6,12 @@
     <script src='../js/nassh_preference_manager.js'></script>
     <script src='../js/nassh_preferences_editor.js'></script>
 
-    <link rel='stylesheet' href='../css/nassh_box.css'></link>
     <link rel='stylesheet' href='../css/chrome-bootstrap.css'></link>
-    <style>
-      #terminal {
-        height: 70px;
-        float: right;
-        position: relative;
-        width: 100%;
-        margin: 0px;
-        padding: 0px;
-      }
-      #options {
-        overflow: scroll;
-        height: 100%;
-      }
-      span.profile-ui {
-        display: inline-block;
-        width: 200px;
-        padding-right: 10px;
-        text-align: right;
-        vertical-align: middle;
-      }
-      span.profile-ui input[type='text'],
-      span.profile-ui input[type='number'],
-      span.profile-ui textarea {
-        width: 100%;
-      }
-    </style>
+    <link rel='stylesheet' href='../css/nassh_preferences_editor.css'></link>
   </head>
 
   <body class="chrome-bootstrap">
-    <div class="frame">
+    <div class="options-container hflex">
 
       <div class="navigation">
         <h1><a href="#" i18n-content='manifest.name'></a></h1>
@@ -52,38 +26,32 @@
                  >Save Backup</a></li>
           <li><a id='restore' href='#restore' i18n-content='RESTORE_PREFS'
                  >Restore Backup</a>
-            <input class='restore' type='file' style='visibility:hidden'></li>
+            <input class='restore' type='file'></li>
         </ul>
       </div>
 
-      <div class="mainview view">
+      <div id="options">
+        <header>
+          <h1 i18n-content='PREFERENCES_HEADER'></h1>
 
-        <div id="options" class="selected">
-          <header>
-            <h1 i18n-content='PREFERENCES_HEADER'></h1>
+          <div>
+            <h3 i18n-content='TERMINAL_PREVIEW_LABEL'></h3>
             <div id='terminal'></div>
-          </header>
+          </div>
 
-          <div class="content">
-            <!-- Create padding to match the generated terminal in the header -->
-            <div id='terminal'></div>
-
-            <section>
-              <h3 i18n-content='TERMINAL_PROFILE_LABEL'></h3>
+          <div>
+            <h3 i18n-content='TERMINAL_PROFILE_LABEL'></h3>
+            <div id='current-profile'>
               <input type='text' id='profile'/>
               <button type='reset' id='reset'>Reset</button>
               <span id='label_status'>&nbsp;</span>
-            </section>
-
-            <section>
-              <h3 i18n-content='PREFERENCES_HEADER'></h3>
-              <span id='settings'/>
-              <table id='fsettings' cellpadding='0' cellspacing='0'></table>
-            </section>
-
+            </div>
           </div>
-        </div>
+        </header>
 
+        <div id="options-settings-section" class="vflex">
+          <div id='settings'></div>
+        </div>
       </div>
 
     </div>

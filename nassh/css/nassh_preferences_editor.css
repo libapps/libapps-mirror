@@ -1,0 +1,165 @@
+/* Make body 100% height of page
+ * See http://stackoverflow.com/questions/6654958/make-body-have-100-of-the-browser-height
+ */
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  min-height: 100%;
+  overflow: auto;
+}
+
+/*
+ * Flexbox helper classes.
+ */
+.hflex {
+  display: flex;
+  flex-direction: row;
+}
+.vflex {
+  display: flex;
+  flex-direction: column;
+}
+.fixed-size-flex {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+/*
+ * The left navigation pane.
+ */
+.navigation {
+  background-image: -webkit-linear-gradient(#ffffff, #ffffff 40%, rgba(255, 255, 255, 0.92));
+  height: 100%;
+  width: 155px;
+  min-width: 155px;
+  position: fixed;
+  z-index: 3;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 15px;
+}
+
+/*
+ * Hidden restore input inside navigation bar.
+ */
+.restore {
+  visibility: hidden;
+  width: 1px;
+}
+
+/*
+ * The pane to the right of the navigation pane.
+ */
+#options {
+  width: 100%;
+  position: relative;
+  margin-left: 155px; /* Size of navigation pane */
+}
+
+/*
+ * The container of the terminal preview iframe.
+ */
+#terminal {
+  height: 70px;
+  min-height: 70px;
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+  margin: 0px;
+  padding: 0px;
+  margin-left: 18px;
+}
+
+#current-profile {
+  margin-left: 18px;
+}
+
+/*
+ * The area of the options pane containing settings.
+ */
+#options-settings-section {
+  padding-top: 260px;
+}
+
+/*
+ * Rules for elements inside #options container.
+ */
+
+#options section {
+  max-width: inherit;
+  margin-bottom: 0;
+  -webkit-user-select: none;
+}
+
+#options h1 {
+  -webkit-margin-start: 0;
+  -webkit-margin-after: 0;
+  padding-bottom: 20px;
+}
+
+#options header::after {
+  -webkit-margin-end: 20px;
+  background-color: #eee;
+  content: ' ';
+  display: block;
+  height: 1px;
+  position: relative;
+  top: 13px;
+}
+
+#options header {
+  -webkit-margin-start: 0;
+  -webkit-margin-after: 0;
+  position: fixed;
+  padding-bottom: 20px;
+}
+
+/*
+ * Rules for elements inside #settings container.
+ */
+
+#settings .setting-container {
+  margin-bottom: 4px;
+}
+
+#settings .category-details {
+  margin-bottom: 8px;
+}
+
+#settings .alpha-text {
+  padding-left: 10px;
+  padding-right: 2px;
+}
+
+#settings span.setting-label {
+  width: 200px;
+  padding-top: 4px;
+  padding-bottom: 5px;
+  padding-right: 8px;
+  text-align: right;
+  vertical-align: middle;
+}
+
+#settings span.setting-ui {
+  vertical-align: middle;
+}
+
+#settings span.setting-ui input[type='checkbox'] {
+  top: 3px;
+}
+
+#settings span.setting-ui input[type='text'],
+#settings span.setting-ui input[type='url'],
+#settings span.setting-ui input[type='number'] {
+  width: 100%;
+}
+
+#settings span.setting-ui textarea {
+  width: 30em;
+  height: 8em;
+}
+
+#settings span.setting-ui input {
+  vertical-align: middle;
+}

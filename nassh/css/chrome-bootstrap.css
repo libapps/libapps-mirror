@@ -498,6 +498,8 @@
   min-height: 2em;
   min-width: 4em;
 }
+.chrome-bootstrap textarea,
+.chrome-bootstrap input[type='url'],
 .chrome-bootstrap input[type='text'],
 .chrome-bootstrap input[type='number'],
 .chrome-bootstrap input[type='search'] {

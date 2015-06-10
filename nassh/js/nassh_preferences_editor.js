@@ -20,6 +20,7 @@ window.onload = function() {
         io.println('# ' + nassh.msg('WELCOME_VERSION',
                                     [manifest.name, manifest.version]));
         io.print('$ ./configure && make && make install');
+        term.setCursorVisible(true);
       };
     term.decorate(document.querySelector('#terminal'));
     term.installKeyboard();
@@ -223,36 +224,50 @@ nassh.PreferencesEditor.prototype.save = function(input) {
   var keys = input.id.split(':');
   var key = keys[0];
   var prefs = this.prefs_;
-  switch (input.type) {
-    case 'checkbox':
-      if (input.indeterminate) {
-        prefs.set(key, null);
-      } else {
-        prefs.set(key, input.checked);
-      }
+
+  switch(this.getPreferenceType(key)) {
+    case 'bool':
+      prefs.set(key, input.checked);
       break;
-    case 'number':
-      prefs.set(key, Number(input.value));
+
+    case 'int':
+      prefs.set(key, input.value);
       break;
-    case 'range':
+
+    case 'enum':
+      prefs.set(key, JSON.parse(input.value));
+      break;
+
+    case 'tristate':
+      prefs.set(key, JSON.parse(input.value));
+      break;
+
+    case 'string':
+      prefs.set(key, input.value);
+      break;
+
     case 'color':
       this.colorSave(key);
       break;
-    case 'text':
-    case 'textarea':
-      var value = input.value;
-      if (input.data == 'JSON') {
-        try {
-          value = JSON.parse(value);
-        } catch (err) {
-          this.notify(nassh.msg('JSON_PARSE_ERROR', key) + ': ' + err, 5000);
-          value = prefs.get(key);
-        }
+
+    case 'url':
+      prefs.set(key, input.value);
+      break;
+
+    case 'value':
+    default:
+      var value = input.value || 'null';
+      try {
+        value = JSON.parse(value);
+      } catch (err) {
+        this.notify(nassh.msg('JSON_PARSE_ERROR', key) + ': ' + err, 5000);
+        value = prefs.get(key);
       }
       prefs.set(key, value);
       break;
   }
 
+  console.log('New pref value for ' + key + ': ', prefs.get(key));
   this.updateBackupLink();
 };
 
@@ -290,23 +305,48 @@ nassh.PreferencesEditor.prototype.colorSync = function(key, pref) {
 nassh.PreferencesEditor.prototype.sync = function(input) {
   var keys = input.id.split(':');
   var key = keys[0];
-  var pref = this.prefs_.get(key);
+  var prefValue = this.prefs_.get(key);
+  switch(this.getPreferenceType(key)) {
+    case 'bool':
+      input.checked = prefValue;
+      break;
 
-  if (input.type == 'color' || input.type == 'range') {
-    var rgba = this.colorSync(key, pref);
-  } else if (input.data == 'JSON') {
-    input.value = JSON.stringify(pref);
-  } else {
-    input.value = pref;
-  }
-  switch (typeof pref) {
-    case 'boolean':
-      if ('data' in input) {
-        // Handle tristate options.
-        input.indeterminate = false;
-        input.data = pref ? 2 : 0;
-      }
-      input.checked = pref;
+    case 'int':
+      input.value = prefValue;
+      break;
+
+    case 'enum':
+      input.value = JSON.stringify(prefValue);
+      break;
+
+    case 'tristate':
+      input.value = JSON.stringify(prefValue);
+      break;
+
+    case 'string':
+      if (prefValue == null)
+        input.value = '';
+      else
+        input.value = prefValue;
+      break;
+
+    case 'color':
+      this.colorSync(key, prefValue);
+      break;
+
+    case 'url':
+      if (prefValue == null)
+        input.value = '';
+      else
+        input.value = prefValue;
+      break;
+
+    case 'value':
+    default:
+      if (prefValue == null)
+        input.value = '';
+      else
+        input.value = JSON.stringify(prefValue);
       break;
   }
 };
@@ -325,30 +365,6 @@ nassh.PreferencesEditor.prototype.onInputChange = function(input) {
 };
 
 /**
- * Update preferences from HTML checkbox input objects when the input changes.
- *
- * This is a helper that should be used in an event handler (e.g. onchange).
- * Used with checkboxes for tristate values (true/false/null).
- *
- * @param {Object} input An HTML checkbox input element to update from.
- */
-nassh.PreferencesEditor.prototype.onInputChangeTristate = function(input) {
-  switch (input.data % 3) {
-    case 0: // unchecked -> indeterminate
-       input.indeterminate = true;
-       break;
-    case 1: // indeterminate -> checked
-       input.checked = true;
-       break;
-    case 2: // checked -> unchecked
-       input.checked = false;
-       break;
-  }
-  ++input.data;
-  this.onInputChange(input);
-};
-
-/**
  * Update the preferences page to reflect current preference object.
  *
  * Will basically rewrite the displayed HTML code on the fly.
@@ -364,110 +380,233 @@ nassh.PreferencesEditor.prototype.syncPage = function() {
   }
 
   // Create the table of settings.
-  var typeMap = {
-    'boolean': 'checkbox',
-    'number': 'number',
-    'object': 'textarea',
-    'string': 'text'
-  };
+  for(var i = 0; i < hterm.PreferenceManager.categoryDefinitions.length; i++) {
+    var categoryDefinition = hterm.PreferenceManager.categoryDefinitions[i];
 
-  for (var key in this.prefs_.prefRecords_) {
-    var input = document.createElement('input');
-    var pref = this.prefs_.get(key);
+    var elem = this.addCategoryRow(categoryDefinition, eles);
 
-    var onchangeCursorReset = function() {
-        nassh.PreferencesEditor.debounce(this, function(input) {
-            // Chrome has a bug where it resets cursor position on us when
-            // we debounce the input.  So manually save & restore cursor.
-            var i = input.selectionStart;
-            prefsEditor.onInputChange(input);
-            if (document.activeElement === input)
-              input.setSelectionRange(i, i);
-          });
-      };
-    var onchange = function() {
-        nassh.PreferencesEditor.debounce(this, function(input) {
-            prefsEditor.onInputChange(input);
-          });
-      };
-    var oninput = null;
-
-    var keyParts = key.split('-');
-    if (key == 'enable-bold' ||
-        key == 'mouse-paste-button') {
-      input.indeterminate = true;
-      input.type = 'checkbox';
-      input.data = 1;
-      onchange = function() {
-          prefsEditor.onInputChangeTristate(this);
-        };
-    } else if (keyParts[keyParts.length - 1] == 'color') {
-      input.type = 'color';
-    } else {
-      var type = typeof pref;
-      switch (type) {
-        case 'object':
-          // We'll use JSON to go between object/user text.
-          input = document.createElement('textarea');
-          input.data = 'JSON';
-          onchange = onchangeCursorReset;
-          break;
-        case 'string':
-          // Save simple strings immediately.
-          oninput = onchangeCursorReset;
-          onchange = null;
-          break;
+    var category = categoryDefinition.id;
+    for (var key in this.prefs_.prefRecords_) {
+      if (this.getPreferenceCategory(key) == category) {
+        this.addInputRow(key, elem)
       }
-      if (input.type != typeMap[type])
-        input.type = typeMap[type];
     }
-
-    input.name = 'settings';
-    input.id = key;
-    input.onchange = onchange;
-    input.oninput = oninput;
-
-    // We want this element structure when we're done:
-    // <div class='text'>
-    //  <label>
-    //    <span class='profile-ui'>
-    //      <input ...>
-    //    </span>
-    //    <span>this-preference-setting-name</span>
-    //  </label>
-    // </div>
-    var div = document.createElement('div');
-    var label = document.createElement('label');
-    var span_input = document.createElement('span');
-    var span_text = document.createElement('span');
-
-    div.className = input.type;
-    span_input.className = 'profile-ui';
-    span_text.innerText = key;
-
-    div.appendChild(label);
-    span_input.appendChild(input);
-    label.appendChild(span_input);
-    label.appendChild(span_text);
-    eles.appendChild(div);
-
-    if (input.type == 'color') {
-      // Since the HTML5 color picker does not support alpha,
-      // we have to create a dedicated slider for it.
-      var ainput = document.createElement('input');
-      ainput.type = 'range';
-      ainput.id = key + ':alpha';
-      ainput.min = '0';
-      ainput.max = '100';
-      ainput.name = 'settings';
-      ainput.onchange = onchange;
-      ainput.oninput = oninput;
-      span_input.appendChild(ainput);
-    }
-
-    this.sync(input);
   }
 };
+
+/**
+ * Add a series of HTML elements to allow inputting the value of the given
+ * preference option.
+ */
+nassh.PreferencesEditor.prototype.addCategoryRow =
+    function(categoryDef, parent) {
+  var details = document.createElement('section');
+  details.className = 'category-details';
+
+  var summary = document.createElement('h3');
+  summary.innerText = categoryDef.text;
+
+  details.appendChild(summary);
+  parent.appendChild(details);
+
+  return details;
+};
+
+/**
+ * Add a series of HTML elements to allow inputting the value of the given
+ * preference option.
+ */
+nassh.PreferencesEditor.prototype.addInputRow = function(key, parent) {
+  var input = this.createInput(key);
+
+  // We want this element structure when we're done:
+  // <div class='text'>
+  //  <label>
+  //    <span class='setting-label'>this-preference-setting-name</span>
+  //    <span class='setting-ui'>
+  //      <input ...>
+  //    </span>
+  //  </label>
+  // </div>
+  var div = document.createElement('div');
+  var label = document.createElement('label');
+  var span_text = document.createElement('span');
+  var span_input = document.createElement('span');
+
+  label.title = this.getPreferenceDescription(key);
+  label.setAttribute('tabindex', '0');
+  label.className = 'hflex';
+  div.className = 'setting-container ' + input.type;
+  span_text.className = 'setting-label';
+  span_text.innerText = key;
+  span_input.className = 'setting-ui';
+
+  div.appendChild(label);
+  span_input.appendChild(input);
+  label.appendChild(span_text);
+  label.appendChild(span_input);
+  parent.appendChild(div);
+
+  if (input.type == 'color') {
+    var alabel = document.createElement('label');
+    alabel.innerText = 'Alpha';
+    alabel.className = 'alpha-text';
+    alabel.setAttribute('tabindex', '0');
+    span_input.appendChild(alabel);
+
+    // Since the HTML5 color picker does not support alpha,
+    // we have to create a dedicated slider for it.
+    var ainput = document.createElement('input');
+    ainput.type = 'range';
+    ainput.id = key + ':alpha';
+    ainput.min = '0';
+    ainput.max = '100';
+    ainput.name = 'settings';
+    ainput.onchange = input.onchange;
+    ainput.oninput = input.oninput;
+    span_input.appendChild(ainput);
+  }
+
+  this.sync(input);
+};
+
+nassh.PreferencesEditor.prototype.createInput = function(key) {
+  var prefsEditor = this;
+
+  var onchangeCursorReset = function() {
+      nassh.PreferencesEditor.debounce(this, function(input) {
+          // Chrome has a bug where it resets cursor position on us when
+          // we debounce the input.  So manually save & restore cursor.
+          var i = input.selectionStart;
+          prefsEditor.onInputChange(input);
+          if (document.activeElement === input)
+            input.setSelectionRange(i, i);
+        });
+    };
+  var onchange = function() {
+      nassh.PreferencesEditor.debounce(this, function(input) {
+          prefsEditor.onInputChange(input);
+        });
+    };
+  var oninput = null;
+
+  var addOption = function(parent, value) {
+    var option = document.createElement('option');
+    option.value = JSON.stringify(value);
+    option.innerText = (value === null ? "auto" : value);
+    parent.appendChild(option);
+  };
+
+  var input = document.createElement('input');
+  var prefValue = this.prefs_.get(key);
+  switch(this.getPreferenceType(key)) {
+    case 'bool':
+      input.type = 'checkbox';
+      break;
+
+    case 'int':
+      input.type = 'number';
+      break;
+
+    case 'enum':
+      input = document.createElement('select');
+      var prefValues = this.getPreferenceEnumValues(key);
+      for(var i = 0; i < prefValues.length; i++) {
+        addOption(input, prefValues[i]);
+      }
+      oninput = onchange;
+      onchange = null;
+      break;
+
+    case 'tristate':
+      input = document.createElement('select');
+      [null, true, false].forEach(function(value) {
+        addOption(input, value);
+      });
+      oninput = onchange;
+      onchange = null;
+      break;
+
+    case 'string':
+      input.type = 'text';
+      // Save simple strings immediately.
+      oninput = onchangeCursorReset;
+      onchange = null;
+      break;
+
+    case 'bool':
+      input.type = 'checkbox';
+      break;
+
+    case 'color':
+      input.type = 'color';
+      break;
+
+    case 'url':
+      input.type = 'url';
+      break;
+
+    case 'value':
+    default:
+      // We'll use JSON to go between object/user text.
+      input = document.createElement('textarea');
+      input.data = 'JSON';
+      onchange = onchangeCursorReset;
+      break;
+  }
+
+  input.name = 'settings';
+  input.id = key;
+  input.onchange = onchange;
+  input.oninput = oninput;
+
+  return input;
+};
+
+nassh.PreferencesEditor.prototype.getPreferenceDescription = function(key) {
+  var entry = hterm.PreferenceManager.defaultPreferences[key];
+  if (entry)
+    return entry[3];
+  return '';
+}
+
+nassh.PreferencesEditor.prototype.getPreferenceType = function(key) {
+  var entry = hterm.PreferenceManager.defaultPreferences[key];
+  if (entry) {
+    var prefType = entry[2];
+    if (Array.isArray(prefType))
+      return 'enum';
+    return prefType;
+  }
+
+  switch(typeof this.prefs_.get(key)) {
+    case 'boolean': return 'bool';
+    case 'string': return 'string';
+    case 'object': return 'value';
+    case 'number': return 'int';
+    default: return 'value';
+  }
+}
+
+nassh.PreferencesEditor.prototype.getPreferenceEnumValues = function(key) {
+  var entry = hterm.PreferenceManager.defaultPreferences[key];
+  if (entry) {
+    var prefType = entry[2];
+    if (Array.isArray(prefType))
+      return prefType;
+  }
+
+  console.warn('Pref. is not an enum', key);
+  return [];
+}
+
+nassh.PreferencesEditor.prototype.getPreferenceCategory = function(key) {
+  var entry = hterm.PreferenceManager.defaultPreferences[key];
+  if (entry)
+    return entry[0];
+
+  return hterm.PreferenceManager.categories.Miscellaneous;
+}
 
 /**
  * Reset all preferences to their default state and update the HTML objects.

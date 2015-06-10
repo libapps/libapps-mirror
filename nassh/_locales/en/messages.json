@@ -172,8 +172,13 @@
   },
 
   "TERMINAL_PROFILE_LABEL": {
-    "message": "Terminal Profile",
+    "message": "Current profile",
     "description": "Text use as the label for the 'terminal-profile' field."
+  },
+
+  "TERMINAL_PREVIEW_LABEL": {
+    "message": "Preview",
+    "description": "Text use as the label for the 'terminal-preview' field."
   },
 
   "FIELD_TERMINAL_PROFILE_PLACEHOLDER": {
