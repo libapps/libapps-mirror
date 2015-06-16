@@ -15,6 +15,8 @@ lib.wc.Tests.addTest('strWidth-test', function(result, cx) {
   var mixedString = '\u4E2D\u6587 English';
   var nullChar = '\u0000';
   var controlChar = '\r';
+  var musicalSign = '\uD834\uDD00';
+  var wideSurrogatePair = '\uD842\uDD9D';
 
   result.assertEQ(1, lib.wc.strWidth(asciiOnechar), 'ASCII char has wcwidth 1');
   result.assertEQ(15, lib.wc.strWidth(asciiString), 'ASCII string');
@@ -27,6 +29,10 @@ lib.wc.Tests.addTest('strWidth-test', function(result, cx) {
   result.assertEQ(0, lib.wc.strWidth(nullChar), 'Null char has wcwdith 0');
   result.assertEQ(0, lib.wc.strWidth(controlChar),
                   'Control char has width 0');
+  result.assertEQ(1, lib.wc.strWidth(musicalSign),
+                  'A surrogate pair is considered as a single character.');
+  result.assertEQ(2, lib.wc.strWidth(wideSurrogatePair),
+                  'A wide character represented in a surrogate pair.');
 
   result.pass();
 });

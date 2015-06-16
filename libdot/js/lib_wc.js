@@ -334,6 +334,8 @@ lib.wc.charWidthDisregardAmbiguous = function(ucs) {
       (ucs >= 0xffe0 && ucs <= 0xffe6) ||
       (ucs >= 0x20000 && ucs <= 0x2fffd) ||
       (ucs >= 0x30000 && ucs <= 0x3fffd)));
+  // TODO: emoji characters usually require space for wide characters although
+  // East Asian width spec says nothing. Should we add special cases for them?
 };
 
 /**
@@ -361,11 +363,13 @@ lib.wc.charWidthRegardAmbiguous = function(ucs) {
 lib.wc.strWidth = function(str) {
   var width, rv = 0;
 
-  for (var i = 0; i < str.length; i++) {
-    width = lib.wc.charWidth(str.charCodeAt(i));
+  for (var i = 0; i < str.length;) {
+    var codePoint = str.codePointAt(i);
+    width = lib.wc.charWidth(codePoint);
     if (width < 0)
       return -1;
     rv += width;
+    i += (codePoint <= 0xffff) ? 1 : 2;
   }
 
   return rv;
