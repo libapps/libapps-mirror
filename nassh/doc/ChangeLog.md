@@ -1,3 +1,9 @@
+# 0.8.34.1, 2015-06-16, hterm 1.56, freshen up the options page.
+
+* Update to hterm 1.56.
+* Use hterm's new pref category and data type data to improve the options
+  page.
+
 # 0.8.33.2, 2015-05-28, Prefs backup/restore tweaks
 
 * Refresh the backup link at startup and after each pref change.
