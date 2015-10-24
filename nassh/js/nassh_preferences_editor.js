@@ -544,6 +544,7 @@ nassh.PreferencesEditor.prototype.createInput = function(key) {
 
     case 'url':
       input.type = 'url';
+      input.placeholder = 'https://example.com/some/file';
       break;
 
     case 'value':
