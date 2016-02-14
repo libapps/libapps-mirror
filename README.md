@@ -28,9 +28,9 @@ Chrome platform applications so far.
 * [hterm/](/hterm/) is a JS library that provides a terminal emulator.  It is
 reasonably fast, reasonably correct, and reasonably portable across browsers.
 
-* [nassh/](/nassh/) is a Chrome App (currently a "v1.5" app, soon to become a
-"v2" or platform app) that combines hterm with a NaCl build of OpenSSH to
-provide a PuTTY-like app for Chrome users.
+* [nassh/](/nassh/) is the SecureShell Chrome App (currently a "v1.5" app,
+soon to become a "v2" or platform app) that combines hterm with a NaCl build
+of OpenSSH to provide a PuTTY-like app for Chrome users.
 
 * [wash/](/wash/) is a library for cross-origin virtual filsystems, similar to
 the Plan 9 filesystem.  This directory also contains a simple bash-like shell

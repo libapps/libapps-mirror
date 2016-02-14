@@ -1,93 +1,93 @@
-0.8.33.2, 2015-05-28, Prefs backup/restore tweaks
+# 0.8.33.2, 2015-05-28, Prefs backup/restore tweaks
 
 * Refresh the backup link at startup and after each pref change.
 * Use the new MouseEvent ctor instead of the deprecated
   initMouseEvent function.
 
-0.8.33.1, 2015-05-19, Update to hterm 1.55 plus fixes in nassh
+# 0.8.33.1, 2015-05-19, Update to hterm 1.55 plus fixes in nassh
 
 * Trim trailing spaces from ssh and relay arguments.
 * Add preference save/restore UI to the options page.
 * Fix preferences under strict mode.
 
-0.8.32.4, 2015-03-19, Update to hterm 1.54.
+# 0.8.32.4, 2015-03-19, Update to hterm 1.54.
 
 * Update to hterm 1.54.
 
-0.8.32.3, 2015-03-02, Fix rtdep errror.
+# 0.8.32.3, 2015-03-02, Fix rtdep errror.
 
 * Remove bogus rtdep on lib.f.Sequence which cause the bg page to fail to start.
 
-0.8.32.2, 2015-03-02, Update to hterm 1.53
+# 0.8.32.2, 2015-03-02, Update to hterm 1.53
 
 * Update to hterm 1.53.
 
-0.8.32.1, 2015-02-18, Update to hterm 1.52
+# 0.8.32.1, 2015-02-18, Update to hterm 1.52
 
 * Update to hterm 1.52.
 
-0.8.31.2, 2014-11-11, Include dialog sync fix.
+# 0.8.31.2, 2014-11-11, Include dialog sync fix.
 
 * Rebase and rebuild to include commit 458213... which fixed a race condition
   in the connection dialog.
 
-0.8.31.1, 2014-11-11, Add --ssh-agent option, hterm 1.51.
+# 0.8.31.1, 2014-11-11, Add --ssh-agent option, hterm 1.51.
 
 * Add "--ssh-agent" as a relay-option.  This can be set to a chrome app id
   which will act as an ssh-agent over chrome app messaging.
 * Update --config=google to use the default Google key agent app.
 * Update to hterm 1.51 for 24-bit color support.
 
-0.8.30.1, 2014-10-07, Update to hterm 1.50
+# 0.8.30.1, 2014-10-07, Update to hterm 1.50
 
 * Update to hterm 1.50 for OSC 52 and HOME/END vs application cursor fixes.
 
-0.8.29.1, 2014-09-23, Reorder background scripts.
+# 0.8.29.1, 2014-09-23, Reorder background scripts.
 
 * Reorder the background scripts in the manifest file to account for a race
   condition.  Before this change, the callback in nassh_background.js would
   sometimes execute before the rest of the background scripts had loaded.
 * Change the proxy host used in --config=google.
 
-0.8.28.2, 2014-08-13, Update to hterm 1.48.
+# 0.8.28.2, 2014-08-13, Update to hterm 1.48.
 
 * Update to the latest hterm.
 
-0.8.28.1, 2014-07-31, Add onUpdateAvailable handler.
+# 0.8.28.1, 2014-07-31, Add onUpdateAvailable handler.
 
 * Handle the chrome.runtime.onUpdateAvailable event so that we're
   not automatically reloaded when there's a pending update.
 
-0.8.27.12, 2014-07-08, Update to hterm 1.47.
+# 0.8.27.12, 2014-07-08, Update to hterm 1.47.
 
 * Update to the latest hterm.
 
-0.8.27.11, 2014-07-24, Update to hterm 1.46.
+# 0.8.27.11, 2014-07-24, Update to hterm 1.46.
 
 * Update to the latest hterm.
 
-0.8.27.10, 2014-07-23, Update to hterm 1.44.
+# 0.8.27.10, 2014-07-23, Update to hterm 1.44.
 
 * Update to the latest hterm.
 
-0.8.27.9, 2014-06-25, Update to hterm 1.42.
+# 0.8.27.9, 2014-06-25, Update to hterm 1.42.
 
 * Update to the latest hterm.
 * Add the "notifications" perimission.
 
-0.8.27.8, 2014-06-24, Update to hterm 1.41.
+# 0.8.27.8, 2014-06-24, Update to hterm 1.41.
 
 * Update to the latest hterm.
 
-0.8.27.7, 2014-05-27, Rebuild nacl ssh plugin.
+# 0.8.27.7, 2014-05-27, Rebuild nacl ssh plugin.
 
 * Update to latest build of plugin to fix getsockname errors.
 
-0.8.27.6, 2014-05-27, Update to wam 1.1 for 'open' support.
+# 0.8.27.6, 2014-05-27, Update to wam 1.1 for 'open' support.
 
 * Update to wam 1.1 for the latest changes.
 
-0.8.27.5, 2014-04-29, Add wash support, update hterm.
+# 0.8.27.5, 2014-04-29, Add wash support, update hterm.
 
 * Update to hterm 1.38 for 'ctrl-c-copy' and 'pass-meta-v' prefs and selection
   collapse fixes.
@@ -101,206 +101,206 @@
     // to nassh.  Defaults to Wash (tot) and Wash (dev).
     app_.prefs_.set('wam-whitelist', [...]);
 
-0.8.27.2, 2014-04-29, Update hterm.
+# 0.8.27.2, 2014-04-29, Update hterm.
 
 * Update to hterm 1.37 for double-paste fix.
 
-0.8.27.1, 2014-04-28, Update hterm, openssh/openssl libs.
+# 0.8.27.1, 2014-04-28, Update hterm, openssh/openssl libs.
 
 * Update to ssh binary to "OpenSSH_6.6, OpenSSL 1.0.1g 7 Apr 2014"
 * Update to hterm 1.36.
 * Update to libdot 1.7.
 
-0.8.26.6, 2014-03-25, Options page initialization fix.
+# 0.8.26.6, 2014-03-25, Options page initialization fix.
 
 * Reorder options page initialization so that it actually works.
 
-0.8.26.5, 2014-03-25, Update to hterm 1.35, new options page.
+# 0.8.26.5, 2014-03-25, Update to hterm 1.35, new options page.
 
 * Update to hterm 1.35 for enable-bold-as-bright preference.
 * Rewrite options page to be more Chrome like.
 
-0.8.26.4, 2014-03-14, Update to hterm 1.34.
+# 0.8.26.4, 2014-03-14, Update to hterm 1.34.
 
 * Update to hterm 1.34 for user-css and ctrl-plus-minus-zero-zoom prefs.
 
-0.8.26.3, 2014-03-06, Update to hterm 1.32.
+# 0.8.26.3, 2014-03-06, Update to hterm 1.32.
 
 * Update to hterm 1.32 for zoom warning and mouse selection fixes.
 
-0.8.26.2, 2014-03-05, Update to hterm 1.30.
+# 0.8.26.2, 2014-03-05, Update to hterm 1.30.
 
 * Update to hterm 1.30 for "scrolling speedups" revert (fixes scrolling selected
   text off screen), and copy/paste of wrapped lines fix.
 
-0.8.26.1, 2014-02-25, Fix google relay, Update to hterm 1.29+, libdot 1.6
+# 0.8.26.1, 2014-02-25, Fix google relay, Update to hterm 1.29+, libdot 1.6
 
 * Fix undefined var in nassh_stream_google_relay.js.
 * Update to hterm <unnamed version after 1.39> for scrollport speedups.
 * Update to libdot 1.6 for pref manager fixes.
 
-0.8.25.3, 2014-02-14, Update to hterm 1.29.
+# 0.8.25.3, 2014-02-14, Update to hterm 1.29.
 
 * Update to hterm 1.29 for auto-copy fix-fix.
 
-0.8.25.2, 2014-02-13, Update to hterm 1.28.
+# 0.8.25.2, 2014-02-13, Update to hterm 1.28.
 
 * Update to hterm 1.28 for auto-copy fix.
 
-0.8.25.1, 2014-01-28, Update to hterm 1.27.
+# 0.8.25.1, 2014-01-28, Update to hterm 1.27.
 
 * Update to hterm 1.27 for fullwidth support.
 
-0.8.24.2, 2014-01-16, Update to hterm 1.26.
+# 0.8.24.2, 2014-01-16, Update to hterm 1.26.
 
 * Update to hterm 1.26 for 'user-css' preference.
 
-0.8.24.1, 2014-01-08, Update to libdot 1.5, hterm 1.25.
+# 0.8.24.1, 2014-01-08, Update to libdot 1.5, hterm 1.25.
 
 * Update to libdot 1.5 for BlobBuilder fix.
 * Update to hterm 1.25 for Ctrl-V/Ctrl-Shift-V pref, DECSET 1002 fix.
 * Fix tristate fields in the options page.
 
-0.8.23.2, 2013-12-11, Fix cursor height regression.
+# 0.8.23.2, 2013-12-11, Fix cursor height regression.
 
 * Update to hterm 1.24, which has a fix for cursor height troubles.
 
-0.8.23.1, 2013-12-10, Crosh Ctrl-N fix.
+# 0.8.23.1, 2013-12-10, Crosh Ctrl-N fix.
 
 * Fix the Ctrl-N handler in crosh.js.
 
-0.8.22.4, 2013-12-02, Relay fix.
+# 0.8.22.4, 2013-12-02, Relay fix.
 
 * Fix to use the correct relayHost in the event that the relayPrefixField is
   in effect, but the prefix had already been included in the proxyHost.
 
-0.8.22.3, 2013-11-26, Learn the new relay dance.
+# 0.8.22.3, 2013-11-26, Learn the new relay dance.
 
 * Update the google relay code to understand the new proxy front-end to the
   relay servers.  Should be backwards compatible.  Googlers can now specify
   the relay option "--config=google" to magically specify the correct config.
 
-0.8.22.2, 2013-11-26, Crosh polish.
+# 0.8.22.2, 2013-11-26, Crosh polish.
 
 * Display reconnect menu on non-zero exit status.
 * Override ctrl/meta-shift-n to load a new nassh.html window rather than
   crosh.html, if available.
 * Add nassh.html/crosh.html to web_accessible_resources to allow linking.
 
-0.8.22.1, 2013-11-25, Update hterm, add ">crosh" host.
+# 0.8.22.1, 2013-11-25, Update hterm, add ">crosh" host.
 
 * Update to hterm 1.23.
 * Add special hostname ">crosh" to redirect to the crosh shell on Chrome OS,
   so that it's possible to open crosh in an app window.  This is a temporary
   fix that will have to change when Secure Shell moves to a v2 app.
 
-0.8.22, 2013-07-30, Stable release of 0.8.21.1.
+# 0.8.22, 2013-07-30, Stable release of 0.8.21.1.
 
 * Stable release of 0.8.21.1.
 
-0.8.21.1, 2013-07-30, Actually update to hterm 1.17.
+# 0.8.21.1, 2013-07-30, Actually update to hterm 1.17.
 
 * Forgot to mkdeps for 0.8.20.5 :/
 
-0.8.21, 2013-07-30, Stable release of 0.8.20.5.
+# 0.8.21, 2013-07-30, Stable release of 0.8.20.5.
 
 * Stable release of 0.8.20.5.
 
-0.8.20.5, 2013-07-27, Update to hterm 1.17.
+# 0.8.20.5, 2013-07-27, Update to hterm 1.17.
 
 * Update to hterm 1.17.
 
-0.8.20.4, 2013-07-25, Update to hterm 1.16.
+# 0.8.20.4, 2013-07-25, Update to hterm 1.16.
 
 * Update to hterm 1.16.
 
-0.8.20.3, 2013-07-25, Update to hterm 1.15.
+# 0.8.20.3, 2013-07-25, Update to hterm 1.15.
 
 * Update to hterm 1.15.
 
-0.8.20.2, 2013-07-19, Update to hterm 1.14.
+# 0.8.20.2, 2013-07-19, Update to hterm 1.14.
 
 * Update to hterm 1.14.
 
-0.8.20.1, 2013-07-18, Update to hterm 1.13.
+# 0.8.20.1, 2013-07-18, Update to hterm 1.13.
 
 * Disable zoom warning on newer Chrome builds.
 
-0.8.20, 2013-07-08, Stable release of 0.8.19.4
+# 0.8.20, 2013-07-08, Stable release of 0.8.19.4
 
 * Stable release of 0.8.19.4
 
-0.8.19.4, 2013-06-24, Update to hterm 1.12.
+# 0.8.19.4, 2013-06-24, Update to hterm 1.12.
 
 * Include zoom warning fix from hterm 1.12.
 
-0.8.19.3, 2013-06-20, Update to hterm 1.11.
+# 0.8.19.3, 2013-06-20, Update to hterm 1.11.
 
 * Include 'send-encoding'/'receive-encoding' preferences from hterm 1.11.
 
-0.8.19.2, 2013-06-20, Update to hterm 1.10.
+# 0.8.19.2, 2013-06-20, Update to hterm 1.10.
 
 * Include 'characer-encoding' preference from hterm 1.10.
 
-0.8.19.1, 2013-06-19, Update to hterm 1.9.
+# 0.8.19.1, 2013-06-19, Update to hterm 1.9.
 
 * Include Shift-Tab fixes from hterm 1.9.
 
-0.8.19, 2013-06-19, Stable release of 0.8.18.5
+# 0.8.19, 2013-06-19, Stable release of 0.8.18.5
 
 * Stable release of 0.8.18.5.
 
-0.8.18.5, 2013-05-31, Overscroll fix.
+# 0.8.18.5, 2013-05-31, Overscroll fix.
 
 * Update to hterm 1.8.
 
-0.8.18.4, 2013-05-31, Small fixes.
+# 0.8.18.4, 2013-05-31, Small fixes.
 
 * Update to hterm 1.7.
 * BUG=245459: Disable the "Are you sure?" before-unload dialog when open as a
   window.
 
-0.8.18.3, 2013-05-03, Update to libdot 1.3.
+# 0.8.18.3, 2013-05-03, Update to libdot 1.3.
 
 * Update to libdot 1.3.
 
-0.8.18.2, 2013-04-16, Update to hterm 1.4.
+# 0.8.18.2, 2013-04-16, Update to hterm 1.4.
 
 * Update to hterm 1.4.
 * Modify ./bin/mkzip.sh to warn if nassh_deps.concat.js is not current.
 
-0.8.18.1, 2013-04-08, Update to hterm 1.3.
+# 0.8.18.1, 2013-04-08, Update to hterm 1.3.
 
 * Update to hterm 1.3 to get clear screen, media key, and alt-backspace changes.
 
-0.8.18, 2014-04-08, Stable release of 0.8.17.3
+# 0.8.18, 2014-04-08, Stable release of 0.8.17.3
 
 * Stable release of 0.8.17.3.
 
-0.8.17.3, 2013-04-02, Add preferences export/import.
+# 0.8.17.3, 2013-04-02, Add preferences export/import.
 
 * Added some basic plumbing for preference import/export.  Must be driven from
   the command line console at the moment.
 
-0.8.17.2, 2013-04-01, Rebuild nacl plugin with ixany fix.
+# 0.8.17.2, 2013-04-01, Rebuild nacl plugin with ixany fix.
 
 * Rebuild plugin with https://codereview.chromium.org/13008014/.
   BUG=chromium:218361, ...ixany/tostop being set in termios
 
-0.8.17.1, 2013-03-28, Add relay port option, update nacl plugin
+# 0.8.17.1, 2013-03-28, Add relay port option, update nacl plugin
 
 * Update NaCl plugin to the latest source.
 * Add ability to specify relay port.
 
-0.8.16.3, 2013-03-19, Update to hterm 1.2
+# 0.8.16.3, 2013-03-19, Update to hterm 1.2
 
 * Update to hterm 1.2 to get terminal bell fix.
 
-0.8.16.2, 2013-03-18, Fix crosh/prefs pages
+# 0.8.16.2, 2013-03-18, Fix crosh/prefs pages
 
 * Fix script includes in nassh_preferences_editor.html and crosh.html pages.
 
-0.8.16.1, 2013-03-14, Grab bag of fixes
+# 0.8.16.1, 2013-03-14, Grab bag of fixes
 
 * Update to libdot 1.1, hterm 1.1.
 * Add notice about the age of the hterm library on startup in TOT builds.
@@ -311,11 +311,11 @@
 * BUG=chromium-os:39594, When focused, Enter button does not respond to pressing
   the Enter key.
 
-0.8.16, 2013-02-28, Stable release of 0.8.15.1
+# 0.8.16, 2013-02-28, Stable release of 0.8.15.1
 
 * Stable release of 0.8.15.1.
 
-0.8.15.1, 2013-02-26, Improve character size precision.
+# 0.8.15.1, 2013-02-26, Improve character size precision.
 
 * Change hterm.ScrollPort..measureCharacterSize to average out 100 characters
   rather than measuring just one.  The improved precision is necessary on
@@ -323,46 +323,46 @@
 * Fix a bug in measureCharacterSize that got the zoomFactor wrong (we never
   re-measured after disabling zoom adjustments.)
 
-0.8.15, 2013-02-25, Stable release of 0.8.14.1.
+# 0.8.15, 2013-02-25, Stable release of 0.8.14.1.
 
 * Stable release of 0.8.14.1.
 
-0.8.14.1, 2013-02-25, Fix column-list scrolling.
+# 0.8.14.1, 2013-02-25, Fix column-list scrolling.
 
 * Swap out the flexbox based listbox for an old skool table.  The flexbox
   version didn't scroll properly and didn't handle text-overflow: ellipsis.
 
-0.8.14, 2013-02-22, Stable release of 0.8.13.1.
+# 0.8.14, 2013-02-22, Stable release of 0.8.13.1.
 
 * Stable release of 0.8.13.1.
 
-0.8.13.1, 2013-02-22, Fix version detection regression.
+# 0.8.13.1, 2013-02-22, Fix version detection regression.
 
 * Fix version detection regression.
 
-0.8.13, 2013-02-22, Re-release of 0.8.13 with correct icon.
+# 0.8.13, 2013-02-22, Re-release of 0.8.13 with correct icon.
 
 * Re-release after fix to ../libdot/bin/mkzip.sh to use the correct app icon.
 
-0.8.12.1, 2013-02-22, Combine changelogs.
+# 0.8.12.1, 2013-02-22, Combine changelogs.
 
 * Combine doc/changelog-dev.txt and doc/changelog-stable.txt into
   doc/changelog.txt.
 * Unreleased No-op dev version bump so we can re-package 0.8.12 as 0.8.13, but
   with the correct icon.
 
-0.8.12, 2013-02-22, Stable release of 0.8.11.6
+# 0.8.12, 2013-02-22, Stable release of 0.8.11.6
 
 * Stable release of 0.8.11.6
 
-0.8.11.6, 2013-01-20, Address review comments, restrict to >=M23
+# 0.8.11.6, 2013-01-20, Address review comments, restrict to >=M23
 
 * Includes changes that were made during 0.8.11.5 code reviews.
 * Remove the nacl (not pnacl) plugin and the code to load it in Chrome 22 and
   lower.
 * Restrict to Chrome 23 and higher in manifest.json.
 
-0.8.11.5, 2013-01-06, Dialog cleanup, scrollbar fixes
+# 0.8.11.5, 2013-01-06, Dialog cleanup, scrollbar fixes
 
 * Fix size of rowNodes element in hterm.ScrollPort so that it doesn't cover
   the scrollbar.
@@ -371,19 +371,19 @@
 * Populate the username and hostname fields as soon as the description
   loses focus.
 
-0.8.11.4, 2013-01-05, More getBoundingClientRect fixes
+# 0.8.11.4, 2013-01-05, More getBoundingClientRect fixes
 
 * Fix remaining getBoundingClientRect issues so that all tests pass.
 
-0.8.11.3, 2013-01-05, Fix preferences page
+# 0.8.11.3, 2013-01-05, Fix preferences page
 
 * Fix preferences page.
 
-0.8.11.2, 2013-01-05, Fix crosh
+# 0.8.11.2, 2013-01-05, Fix crosh
 
 * Fix crosh init.
 
-0.8.11.1, 2013-01-04, libs and fixin's
+# 0.8.11.1, 2013-01-04, libs and fixin's
 
 * Removed "pattern" attribute on hostname input box.
   BUG=chromium-os:36832 host field doesn't accept IPv6 addresses.
@@ -425,16 +425,16 @@
 * Make lib.TestManager.Result..completeTest_ throw a TestComplete
   exception even for re-completes.  This ensures the test case is interrupted.
 
-0.8.9.2, 2013-01-03, Fix OSC 52 with UTF-8 text.
+# 0.8.9.2, 2013-01-03, Fix OSC 52 with UTF-8 text.
 
 * Convert UTF-8 strings to UTF-16 before copying to clipboard for OSC 52.
 
-0.8.9.1, 2012-12-12, Add Alt/Meta-0..9 handlers.
+# 0.8.9.1, 2012-12-12, Add Alt/Meta-0..9 handlers.
 
 * Add prefs to send Alt/Meta-1..9 to the host.  Preferences default to
   autodetect based on OS platform and window type.
 
-0.8.9.0, 2012-12-12, Add Ctrl-Shift-K and Ctrl-1..9 handlers.
+# 0.8.9.0, 2012-12-12, Add Ctrl-Shift-K and Ctrl-1..9 handlers.
 
 * Add Terminal.prototype.wipe() method to clear primary screen, alternate
   screen, and scrollback buffer.
@@ -449,31 +449,31 @@
 BUG=chromium-os:35507, Pass alt/ctrl 0..9
 BUG=chromium-os:32111, Add ability to clear scrollback buffer
 
-0.8.8, 2012-12-10, Stable release of 0.8.8.10.
+# 0.8.8, 2012-12-10, Stable release of 0.8.8.10.
 
 * Stable release of 0.8.8.10.
 
-0.8.8.10, 2012-11-30, Chrome 21 fixes.
+# 0.8.8.10, 2012-11-30, Chrome 21 fixes.
 
 * Fix to properly select lib.Storage.Local on Chrome 21.
 * Re-read from storage *before* trying to resolve selected the profile in
   connectToProfile().
 * Add lib.Storage.Memory for the test harness.
 
-0.8.8.9, 2012-11-28, Rebuild Pepper 25 binaries
+# 0.8.8.9, 2012-11-28, Rebuild Pepper 25 binaries
 
 * Tweak build scripts and rebuild Pepper 25 based nacl binaries.
 
-0.8.8.8, 2012-11-27, Pepper 25 changes
+# 0.8.8.8, 2012-11-27, Pepper 25 changes
 
 * Build pnacl binaries with Pepper 25.
 * Add Chrome >=24 plugin selection.
 
-0.8.8.7, 2012-10-31, Fix missing 'var' in preference manager.
+# 0.8.8.7, 2012-10-31, Fix missing 'var' in preference manager.
 
 * Add a missing 'var' keyword in lib_preference_manager.js.
 
-0.8.8.6, 2012-10-31, Fixes for options page and Chrome 21 storage
+# 0.8.8.6, 2012-10-31, Fixes for options page and Chrome 21 storage
 
 * Fix 'enable-bold' pref.
 * Fix non-text inputs in options page.
@@ -482,7 +482,7 @@ BUG=chromium-os:32111, Add ability to clear scrollback buffer
 
 BUG=chromium-os:35109, Disable bold fonts
 
-0.8.8.5, 2012-10-25, Options page, baud rate, c/p cleanup
+# 0.8.8.5, 2012-10-25, Options page, baud rate, c/p cleanup
 
 * Initial add of an options page, thanks to Mike Frysinger.
 * Tweak the nacl plugin to set a default baud rate for the tty.
@@ -499,7 +499,7 @@ BUG=chromium-os:35109, Disable bold fonts
 
 BUG=chromium-os:35643, Incorrect tty baud rate
 
-0.8.8.4, 2012-10-15, Reland 0.8.8.1 changes
+# 0.8.8.4, 2012-10-15, Reland 0.8.8.1 changes
 
 * Broke 0.8.8.1 changes into smaller CLs for easier review.  This commit marks
   the re-integration of the changes.
@@ -508,22 +508,22 @@ BUG=chromium-os:35643, Incorrect tty baud rate
 * Removed lib.f.alarm for now.  This function was released as part of 0.8.8.1
   but I'm holding off on landing it until later.
 
-0.8.8.3, 2012-10-15, Include pnacl binary.
+# 0.8.8.3, 2012-10-15, Include pnacl binary.
 
 * Actually include the pnacl binary in the package.
 
-0.8.8.2, 2012-10-14, Use pnacl on Chrome >= 23.
+# 0.8.8.2, 2012-10-14, Use pnacl on Chrome >= 23.
 
 * Add a pnacl version of the plugin which we load only in Chrome >= 23.
 
-0.8.8.1, 2012-10-14, Chrome stable vs storage.sync fix.
+# 0.8.8.1, 2012-10-14, Chrome stable vs storage.sync fix.
 
 * Fix nassh.PreferenceManager to degrade to window.localStorage if
   chrome.storage.sync is not available.
 * Add lib.f.alarm.
 * Fix scroll-on-output preference.
 
-0.8.8.0, 2012-10-08, Synchronized preferences.
+# 0.8.8.0, 2012-10-08, Synchronized preferences.
 
 * Add lib.Storage.Local and lib.Storage.Chrome classes to normalize the API
   between window.localStorage and chrome.storage.
@@ -531,20 +531,20 @@ BUG=chromium-os:35643, Incorrect tty baud rate
   lib.PreferenceManager so that other code can easily define child preferences.
 * Add preference to override the default color palette.
 
-0.8.7, 2012-10-08, Stable release of 0.8.7.5.
+# 0.8.7, 2012-10-08, Stable release of 0.8.7.5.
 
 * Stable release of 0.8.7.5.
 
-0.8.7.5, 2012-10-2, Text selection fix.
+# 0.8.7.5, 2012-10-2, Text selection fix.
 
 * Fix mouse-based text selection when the selection involves styled text.
 
-0.8.7.4, 2012-09-26, Insert lines fix.
+# 0.8.7.4, 2012-09-26, Insert lines fix.
 
 * Fix hterm.Terminal.insertLines to move the correct rows.  This fixes the
   Reverse Index (RI) sequence (and probably others) that depended on it.
 
-0.8.7.3, 2012-09-25, Styled holes
+# 0.8.7.3, 2012-09-25, Styled holes
 
 * Backfill holes created by Erase Characters (ECH) and Delete Characters (DCH)
   with spaces in the current text style.
@@ -554,7 +554,7 @@ BUG=chromium-os:35643, Incorrect tty baud rate
 BUG=chromium-os:30258, Text attributes not rendered for whitespace at the end
     of a line
 
-0.8.7.2, 2012-09-24, Fix regressions, disable pnacl
+# 0.8.7.2, 2012-09-24, Fix regressions, disable pnacl
 
 * Recompile nacl plugin without pnacl to avoid crashes on Mac and extreme
   slowness elsewhere.
@@ -564,7 +564,7 @@ BUG=chromium-os:30258, Text attributes not rendered for whitespace at the end
 
 BUG=chromium-os:34306, hterm shows wrong colors for bold colors 16 through 249
 
-0.8.7.1, 2012-09-20, Some keyboard fixes and pnacl
+# 0.8.7.1, 2012-09-20, Some keyboard fixes and pnacl
 
 * Recompile nacl plugin with --pnacl enabled.
   (See https://chromium-review.googlesource.com/#/c/33519/.)
@@ -578,7 +578,7 @@ BUG=chromium-os:34306, hterm shows wrong colors for bold colors 16 through 249
 BUG=chromium-os:30857, Shift+F6 doesn't work
 BUG=chromium-os:32608, Add extended function key (F13-24) support.
 
-0.8.7.0, 2012-09-13, Handle synthetic keystrokes on OS X.
+# 0.8.7.0, 2012-09-13, Handle synthetic keystrokes on OS X.
 
 * Added a "textInput" event handler to hterm_keyboard.js.  We're not actually
   supposed to get these, but we do on the Mac in the case where a third party
@@ -588,11 +588,11 @@ Internal bugs:
 6111077 Bluetooth OTP not working with hterm
 6838548 Bluetooth OTP is not able to make past SSHinaTab
 
-0.8.6, 2012-09-13, Stable release of 0.8.6.0.
+# 0.8.6, 2012-09-13, Stable release of 0.8.6.0.
 
 * Stable release of 0.8.6.0.
 
-0.8.6.0, 2012-09-11, Increase max-string-sequence, add enable-clipboard-notice
+# 0.8.6.0, 2012-09-11, Increase max-string-sequence, add enable-clipboard-notice
 
 * Increased the size of the max-string-sequence pref from 1,024 to 100,000, in
   order to support larger clipboard transfers via OSC 52.
@@ -602,11 +602,11 @@ Internal bugs:
   sync.  The script should also work for xterm and other OSC 52 compliant
   terminals.
 
-0.8.5, 2012-09-07, Stable release of 0.8.5.1.
+# 0.8.5, 2012-09-07, Stable release of 0.8.5.1.
 
 * Stable release of 0.8.5.1.
 
-0.8.5.1, 2012-09-07, Fix triple-click selection.
+# 0.8.5.1, 2012-09-07, Fix triple-click selection.
 
 * Another selection bug.  Triple clicks result in the selection of exactly one
   full row.  This means that the selection ends at the 0 offset of the following
@@ -614,7 +614,7 @@ Internal bugs:
   selected, only elements within the row could be.  You could also get into
   this state if you manually selected exactly to the end of a row.
 
-0.8.5.0, 2012-09-06, Fix selection bug.
+# 0.8.5.0, 2012-09-06, Fix selection bug.
 
 * The code that tried to determine which node came first in a single-line
   selection was busted.  It didn't work if the selection involved styled
@@ -626,20 +626,20 @@ Internal bugs:
 BUG=chromium-os:34003
 BUG=chromium-os:34149
 
-0.8.4, 2012-09-05, Stable release of 0.8.4.0
+# 0.8.4, 2012-09-05, Stable release of 0.8.4.0
 
 * Stable release of 0.8.4.0
 
-0.8.4.0, 2012-09-05, Fix another OSC 4 regression.
+# 0.8.4.0, 2012-09-05, Fix another OSC 4 regression.
 
 * We were mishandling hex X11 rgb values.  They weren't being translated into
   decimal, and would result in invalid CSS rgba(...) values.
 
-0.8.3, 2012-09-05, Stable release of 0.8.3.0
+# 0.8.3, 2012-09-05, Stable release of 0.8.3.0
 
 *  Stable release of 0.8.3.0
 
-0.8.3.0, 2012-09-04, Reject invalid resizes.
+# 0.8.3.0, 2012-09-04, Reject invalid resizes.
 
 * Reject attempts to resize or realize a row or column count <= 0.  This fixed
   a bug where new windows opened with ctrl-shift-n would usually hang if
@@ -647,37 +647,37 @@ BUG=chromium-os:34149
 
 BUG=chromium-os:34123
 
-0.8.2, 2012-08-27, Stable release of 0.8.2.11
+# 0.8.2, 2012-08-27, Stable release of 0.8.2.11
 
 * Stable release of 0.8.2.11.
 
-0.8.2.11, 2012-08-28, Fix OSC-4 regression.
+# 0.8.2.11, 2012-08-28, Fix OSC-4 regression.
 
 * Fixes a regression that broke OSC-4, color palette read/write, and adds a
   testcase to catch future regressions.
 
-0.8.2.10, 2012-08-24, Fix another missing-rows bug.
+# 0.8.2.10, 2012-08-24, Fix another missing-rows bug.
 
 * Fix a bug where we'd shift the rowNodes element up to offset hidden nodes
   before the top fold, but never compensated by making the rowNodes element
   taller.
 
-0.8.2.9, 2012-08-22, Don't clear selection for copy-on-select.
+# 0.8.2.9, 2012-08-22, Don't clear selection for copy-on-select.
 
 * Remove the delay and selection clearing from copy-on-select.  The copy now
   happens immediately, and the selection is not cleared.
 
 BUG=chromium-os:33786, hterm: double paste on right-click
 
-0.8.2.8, 2012-08-21, backout dialog resize CL.
+# 0.8.2.8, 2012-08-21, backout dialog resize CL.
 
 * Remove the dialog size CL, since it requires M21.
 
-0.8.2.7, 2012-08-21, writelnUTF16 fix.
+# 0.8.2.7, 2012-08-21, writelnUTF16 fix.
 
 * Actually append '\r\n' in hterm.Terminal.io.writelnUTF16.
 
-0.8.2.6, 2012-08-21, UTF8 fix, copy fix, dialog cleanup
+# 0.8.2.6, 2012-08-21, UTF8 fix, copy fix, dialog cleanup
 
 * Fix display of utf-8 data from translated messages.
 * connect dialog: Select the previous connection by default.
@@ -694,7 +694,7 @@ BUG=chromium-os:27974, Exit command does not close the hterm window
 BUG=chromium-os:27020, newlines added during clipboard copy
 BUG=chromium-os:29217, offer to reconnect after disconnect
 
-0.8.2.5, 2012-08-15, Misc cleanup.
+# 0.8.2.5, 2012-08-15, Misc cleanup.
 
 * Add 'enable-clipboard-write' preference to enable/disable the OSC 52
   (host write to system clipboard) sequence, on by default.
@@ -707,20 +707,20 @@ BUG=chromium-os:29217, offer to reconnect after disconnect
 
 BUG=30604, font face 'Lucida Console' Bold characters disabled
 
-0.8.2.4, 2012-08-13, Add missing dep to crosh.html.
+# 0.8.2.4, 2012-08-13, Add missing dep to crosh.html.
 
 * Fix missing lib_utf8.js in crosh.html.
 
-0.8.2.3, 2012-08-13, NaCl plugin fixes.
+# 0.8.2.3, 2012-08-13, NaCl plugin fixes.
 
 * Various termios fixes for input and output transformation. Fixes
   drawing issue with some ncurses applications.
 
-0.8.2.2, 2012-08-10, Add Ctrl-Shift-N to open new instance.
+# 0.8.2.2, 2012-08-10, Add Ctrl-Shift-N to open new instance.
 
 * Make Ctrl-Shift-N/Meta-Shift-N keyboard combinations open a new window.
 
-0.8.2.1, 2012-08-10, VT mouse, copy/paste work, and bug fixes.
+# 0.8.2.1, 2012-08-10, VT mouse, copy/paste work, and bug fixes.
 
 * Moved common libraries under the "lib" object.
 * Add "hterm_" prefix to the hterm source files.
@@ -756,14 +756,14 @@ BUG=chromium-os:30297, UTF-8 decoder does not conform to Unicode standard
 BUG=chromium-os:29490, Middle click should paste in the terminal
 BUG=chromium-os:26288, hterm: Add mouse support via DECSET 1000, 1002, 1003
 
-0.8.2.0, 2012-06-14, Localization and Accessibility for the connect dialog
+# 0.8.2.0, 2012-06-14, Localization and Accessibility for the connect dialog
 
 * Add message_manager.js to manage string bundles.
 * Add a bunch of new strings for the dialog.
 * Make nassh_connect_dialog.html/js use the new strings.
 * Fix minor issue with argument parsing.
 
-0.8.1.0, 2012-06-12, New connection dialog, flow control
+# 0.8.1.0, 2012-06-12, New connection dialog, flow control
 
 * New nassh binary:
   - Support for flow control (try aafire!)
@@ -852,25 +852,25 @@ BUG=chromium-os:25563, Support specifying imported keys files in hterm
 BUG=chromium-os:30103, Add a UI for port forwarding.
 BUG=chromium-os:30302, CSI K (erase in line) does not clear wrap-around flag
 
-0.8.0.6, 2012-05-14, rginda@chromium.org
+# 0.8.0.6, 2012-05-14, rginda@chromium.org
 
 * Add hterm.NaSSH..removeDirectory().
 
-0.8.0.5, 2012-05-11, rginda@chromium.org
+# 0.8.0.5, 2012-05-11, rginda@chromium.org
 
 * Fix double invocation of initialization code.  This also fixed the reload
   loop when connecting via a relay.
 * Minor faq and jsdoc cleanup.
 
-0.8.0.4, 2012-05-11, rginda@chromium.org
+# 0.8.0.4, 2012-05-11, rginda@chromium.org
 
 * Add hterm.NaSSH..removeFile().
 
-0.8.0.3, 2012-05-10, rginda@chromium.org
+# 0.8.0.3, 2012-05-10, rginda@chromium.org
 
 * Fix "parseState_" typo in 'ESC %' handler.
 
-0.8.0.2, 2012-05-10, rginda@chromium.org
+# 0.8.0.2, 2012-05-10, rginda@chromium.org
 
 * Remove trailing comma from messages.json.
 * Ensure that /.ssh directory exists before starting.
@@ -878,7 +878,7 @@ BUG=chromium-os:30302, CSI K (erase in line) does not clear wrap-around flag
 * Change manifest-dev.json and package.sh script to move dev version from
   internal home directory to public web store.
 
-0.8.0.1, 2012-05-10, rginda@chromium.org
+# 0.8.0.1, 2012-05-10, rginda@chromium.org
 
 * Add 'enable-8-bit-control' preference to enable eight bit control sequences.
   This is off by default (which matches xterm) in order to avoid accidental
@@ -921,25 +921,25 @@ Internal bug:
 BUG=chromium-os:30142,chromium-os:30303,chromium-os:30305,chromium-os:30345
 BUG=chromium-os:30105,chromium-os:29955,chromium-os:25563
 
-0.7.9.3, 2012-04-20, rginda@chromium.org
+# 0.7.9.3, 2012-04-20, rginda@chromium.org
 
 * Show app name and version number at startup.
 * Add cursor blink preference.
 * Add doc/faq.txt.
 
-0.7.9.2, 2012-04-19, rginda@chromium.org
+# 0.7.9.2, 2012-04-19, rginda@chromium.org
 
 * More sanitary handling of color names in the palette set/get sequence.
 * Added colors.js file to contain color utilities and palettes.
 * Remove old vt100.js file.
 
-0.7.9.1, 2012-04-18, rginda@chromium.org
+# 0.7.9.1, 2012-04-18, rginda@chromium.org
 
 * Allow Ctrl +/-/0 to control browser zoom when the browser zoom isn't already
   set to 100%.  This makes it possible to dismiss the new "zoom warning" using
   keyboard shortcuts.
 
-0.7.9.0, 2012-04-18, rginda@chromium.org
+# 0.7.9.0, 2012-04-18, rginda@chromium.org
 
 * Modify nassh plugin to accept a hash of environment variables.
 * Add 'environment' preference, set by default to { TERM: 'xterm-256color' }.
@@ -964,19 +964,19 @@ BUG=chromium-os:30105,chromium-os:29955,chromium-os:25563
 
 BUG=chromium-os:28050,chromium-os:25122
 
-0.7.8.3, 2012-04-11, rginda@chromium.org
+# 0.7.8.3, 2012-04-11, rginda@chromium.org
 
 * Fix 'home-keys-scroll' preference.
 
-0.7.8.2, 2012-04-11, rginda@chromium.org
+# 0.7.8.2, 2012-04-11, rginda@chromium.org
 
 * Fix google_relay.html CSP issues.
 
-0.7.8.1, 2012-04-10, rginda@chromium.org
+# 0.7.8.1, 2012-04-10, rginda@chromium.org
 
 * Fix update_url in manifest.
 
-0.7.8.0, 2012-04-10, rginda@chromium.org
+# 0.7.8.0, 2012-04-10, rginda@chromium.org
 
 * Replace 'alt-sends-escape' preference with 'alt-sends-what'.  The new pref
   can be set to 'escape', '8-bit', or 'browser-key'.  If set to 'escape' (the
@@ -988,14 +988,14 @@ BUG=chromium-os:28050,chromium-os:25122
   (requiring multiple keystrokes) aren't yet implemented.  'browser-key'
   shoudn't be used in cases where Chrome uses Alt sequences for the browser.
 
-0.7.7.1, 2012-04-10, rginda@chromium.org
+# 0.7.7.1, 2012-04-10, rginda@chromium.org
 
 * Fix crosh.html/js to work with CSP.
 
 BUG=chromium-os:29179
 TEST=Install on ChromeOS, press Ctrl-Alt-T.
 
-0.7.7.0, 2012-04-08, rginda@chromium.org
+# 0.7.7.0, 2012-04-08, rginda@chromium.org
 
 * Fix version number.  We should have gone to 0.7.7.0 rather than 0.7.6.4 :/
 * Renamed to "Secure Shell".
@@ -1003,11 +1003,11 @@ TEST=Install on ChromeOS, press Ctrl-Alt-T.
 
 BUG=chromium-os:29148
 
-0.7.6.6, 2012-04-06, rginda@chromium.org
+# 0.7.6.6, 2012-04-06, rginda@chromium.org
 
 * Update to the latest nassh binaries.
 
-0.7.6.5, 2012-04-06, rginda@chromium.org
+# 0.7.6.5, 2012-04-06, rginda@chromium.org
 
 * Fix Ctrl-\.
 * Added keyboard related preferences, 'home-keys-scroll', 'page-keys-scroll',
@@ -1035,7 +1035,7 @@ Internal bugs:
 
 BUG=chromium-os:28771,chromium-os:28611
 
-0.7.6.4, 2012-04-04, rginda@chromium.org
+# 0.7.6.4, 2012-04-04, rginda@chromium.org
 
 * Add 'manifest_version': 2 to manifest file, specify default
   Content Security Policy (CSP) policy.
@@ -1046,24 +1046,24 @@ BUG=chromium-os:28771,chromium-os:28611
 
 BUG=chromium-os:28561
 
-0.7.6.3, 2012-03-19, rginda@chromium.org
+# 0.7.6.3, 2012-03-19, rginda@chromium.org
 
 * Fix regression that caused hterm to fail to load if the chosen font was not
   "safe" for bold charcters.
 
 BUG=chromium-os:28020
 
-0.7.6.2, 2012-03-16, rginda@chromium.org
+# 0.7.6.2, 2012-03-16, rginda@chromium.org
 
 * Fix regression in terminal reset.
 
 BUG=chromium-os:27950
 
-0.7.6.1, 2012-03-15, rginda@chromium.org
+# 0.7.6.1, 2012-03-15, rginda@chromium.org
 
 * Make the relay code more resiliant to intermittent failures.
 
-0.7.6.0, 2012-03-14, rginda@chromium.org
+# 0.7.6.0, 2012-03-14, rginda@chromium.org
 
 * Refactor and clean up of the relay server code.
 * Add backoff logic to relay server code.
@@ -1071,16 +1071,16 @@ BUG=chromium-os:27950
 * PASS on handling Meta-~, since on Mac Meta is Cmd and Cmd-~ is the 'switch
   between windows of this app' sequence.
 
-0.7.5.2, 2102-03-07, rginda@chromium.org
+# 0.7.5.2, 2102-03-07, rginda@chromium.org
 
 * Re-add default tab width, add a testcase to catch future regressions.
 
-0.7.5.1, 2102-03-07, rginda@chromium.org
+# 0.7.5.1, 2102-03-07, rginda@chromium.org
 
 * Cached scroll-on-output and scroll-on-keystroke preferences to avoid the
   performance hit of reading a preference for each bit of output and keystroke.
 
-0.7.5.0, 2102-03-07, rginda@chromium.org
+# 0.7.5.0, 2102-03-07, rginda@chromium.org
 
 * Add preferences.  Preferences are persisted to localStorage.  Active hterm
   instances will respond to preference changes by listening to the 'storage'
@@ -1091,36 +1091,36 @@ BUG=chromium-os:27950
 * The preference profile can be selected at load-time by adding
   'profile=NAME' to the url used to load nassh.html or crosh.html.
 
-0.7.4.4, 2012-02-28, rginda@chromium.org
+# 0.7.4.4, 2012-02-28, rginda@chromium.org
 
 * Add ability to detect fonts with mismatched bold/normal sizes, and disable
   bold characters when that happens.
 
-0.7.4.3, 2012-02-28, rginda@chromium.org
+# 0.7.4.3, 2012-02-28, rginda@chromium.org
 
 * Switch out "Andale Mono" in favor of "Menlo" in the default font family list,
   since bold characters in Andale Mono are a different width than normal
   weight characters.
 
-0.7.4.2, 2012-02-28, rginda@chromium.org
+# 0.7.4.2, 2012-02-28, rginda@chromium.org
 
 * Fix CONNECTING message to take a single DESTINATION parameter rather
   than distinct USER and HOST parameters.  This avoids an issue in the
   chrome i18n code that chokes on the translated messages.
   http://crosbug.com/26620
 
-0.7.4.1, 2012-02-28, rginda@chromium.org
+# 0.7.4.1, 2012-02-28, rginda@chromium.org
 
 * Fix remaining issues with ESC 0x20 handler.
 
-0.7.4.0, 2012-02-28, rginda@chromium.org
+# 0.7.4.0, 2012-02-28, rginda@chromium.org
 
 * Fix permission issue in package.sh script.
 * Remove spash screen.
 * Fix syntax error in ESC 0x20 handler.
 * Warn before closing an active crosh tab.
 
-0.7.3.0, 2012-02-17, rginda@chromium.org
+# 0.7.3.0, 2012-02-17, rginda@chromium.org
 
 * Manifest files split into -dev and -stable versions.
 * Add an altIsMeta flag, on by default.

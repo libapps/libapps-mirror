@@ -1,5 +1,4 @@
-
-
+```
                             .--~~~~~~~~~~~~~------.
                            /--===============------\
                            | |```````````````|     |
@@ -14,13 +13,10 @@
                           [-------------------------]
                           \_________________________/
 
-
-                            hterm and  Secure Shell
+                            hterm and Secure Shell
                           Additional information  for
                          Chrom(e|ium) OS 'crosh' Users
-
-                                April 25,  2012
-
+```
 
 This document explains in a little more detail how hterm relates to and
 interacts with the "crosh" command on Chrome OS and Chromium OS.
@@ -29,7 +25,7 @@ From here on, this document will only mention Chrome OS.  You can assume
 that it applies to Chromium OS as well.
 
 
-1. The "crosh" shell
+## The "crosh" shell
 
    Chrome OS comes with a small set of command line commands accessible from
    the "crosh" shell.  You can open a new crosh instance with the Ctrl-Alt-T
@@ -44,14 +40,15 @@ that it applies to Chromium OS as well.
    This is critical for debugging network connectivity issues.  It also means
    we can avoid a "go install this tool" step from diagnostic procedures.
 
-   The crosh shell happens to include an "ssh" command.  Many people use this
-   on a daily basis for reasons other than Chrome OS diagnosis.  This was a
-   stop-gap solution that worked well for a while.  However, the crosh ssh
-   command is no longer recommended for use as a daily ssh client.  You should
-   migrate to the new "Secure Shell" application instead.
+
+## SSH command
+
+   The crosh shell used to include an "ssh" command.  For security and
+   stability reasons, you must use the "Secure Shell" application instead.
+   See below.
 
 
-2. The "Secure Shell" application.
+## The "Secure Shell" application.
 
    The Secure Shell application is a dedicated ssh client that works on Chrome
    OS as well as Chrome on other platforms.
@@ -60,12 +57,12 @@ that it applies to Chromium OS as well.
    Chrome OS.  You've got to manually install it from the Chrome Web Store
    from this link:
 
-    https://chrome.google.com/webstore/detail/pnhechapfaindjhompbnflcldabbghjo
+   https://chrome.google.com/webstore/detail/pnhechapfaindjhompbnflcldabbghjo
 
    Once installed you should see a new "Secure Shell" icon in your application
    launcher.
 
-   You can get to crosh from Secure Shell by typing ">crosh" as the host name.
+   You can get to crosh from Secure Shell by typing `>crosh` as the host name.
    (This won't work on non-Chrome OS systems, of course.)
 
    If Chrome OS notices that you have installed Secure Shell, it'll launch that

@@ -137,7 +137,7 @@ function get_manifest_key_value() {
 
 function echo_changelog() {
   local key="$1"
-  local file="${2:-../doc/changelog.txt}"
+  local file="${2:-../doc/ChangeLog.md}"
 
   if [ -z "$key" ]; then
     head -n1 "$file"

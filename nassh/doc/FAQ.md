@@ -1,5 +1,4 @@
-
-
+```
                             .--~~~~~~~~~~~~~------.
                            /--===============------\
                            | |```````````````|     |
@@ -14,21 +13,17 @@
                           [-------------------------]
                           \_________________________/
 
-
-
-                            hterm and  Secure Shell
-                          Frequently  Asked Questions
-
-                                 Version 0.8.2
-                                August 27, 2012
+                            hterm and Secure Shell
+                          Frequently Asked Questions
+```
 
 
 Hello World.  This is the hterm/Secure Shell FAQ.  If you have a question that
-is not answered here, please ask it on the chromium-hterm mailing list located
-at <http://goo.gl/RYHiK>.
+is not answered here, please ask it on the
+[chromium-hterm mailing list](https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-hterm).
 
 
-> What is "Secure Shell"?
+## What is "Secure Shell"?
 
   Secure Shell is a Chrome Application that combines the "ssh" command (see
   http://openssh.org/ for details) ported to NativeClient with the "hterm"
@@ -38,7 +33,7 @@ at <http://goo.gl/RYHiK>.
   systems, and the ssh command-line application on Mac OS X and Linux systems.
 
 
-> What is "hterm"?
+## What is "hterm"?
 
   "HTML Terminal", or hterm, is an xterm-compatible terminal emulator written
   entirely in JavaScript.
@@ -50,17 +45,16 @@ at <http://goo.gl/RYHiK>.
   other text-based command) on its own.
 
 
-> How do Secure Shell and hterm relate to the "crosh" (Ctrl-Alt-T) command in
-  Chrome OS?
+## How do Secure Shell and hterm relate to the "crosh" (Ctrl-Alt-T) command in Chrome OS?
 
-  See chromeos-crosh.txt in this directory for the details.
+  See [chromeos-crosh.md](chromeos-crosh.md) in this directory for the details.
 
   TL;DR - Don't use crosh for ssh any more, use the Secure Shell app instead.
   The crosh shell will use the newer terminal emulator from Secure Shell when
   possible.
 
 
-> How do hterm and Secure Shell differ from existing web terminals?
+## How do hterm and Secure Shell differ from existing web terminals?
 
   hterm stands out from many existing web terminals in that it was built from
   the start to match the performance and correctness of "native" terminals such
@@ -77,27 +71,27 @@ at <http://goo.gl/RYHiK>.
   are even required to hand the proxy your credentials in plain text.
 
 
-> Is my connection proxied in any way?
+## Is my connection proxied in any way?
 
   No.  By default all connections are made directly to the sshd server on the
   destination machine.
 
 
-> But, what if I *want* to ssh over HTTP?
+## But, what if I *want* to ssh over HTTP?
 
   Secure Shell also knows how to connect to an HTTP-to-ssh relay that was
   built inside Google.  Unfortunately that relay isn't open source, and Google
   doesn't maintain a public pool of relays.
 
   However, you're free to build one that works the same way.  There should be
-  enough documentation in nassh_google_relay.js to reverse engineer a
-  compatible relay.
+  enough documentation in [nassh_google_relay.js](/nassh/js/nassh_google_relay.js)
+  to reverse engineer a compatible relay.
 
   If you're interested in writing an alternative relay library, please mention
   it on the mailing list.
 
 
-> Is my connection really secure?
+## Is my connection really secure?
 
   The Secure Shell app uses ssh to manage the encrypted communication channels.
   This makes it about as secure as any other connection based on the ssh
@@ -112,7 +106,7 @@ at <http://goo.gl/RYHiK>.
   helps lower the risk that a terminal exploit could run arbitrary JavaScript.
 
 
-> What should I do if I notice a bug?
+## What should I do if I notice a bug?
 
   First, please continue reading this FAQ to make sure your issue isn't
   mentioned.  Then check the bug list at <http://goo.gl/LR8mFR>.
@@ -127,16 +121,16 @@ at <http://goo.gl/RYHiK>.
   to file a really useful bug report, then add in a recording of the
   session.  For bonus points, track down the troublesome sequence and
   include the offset into the log file.  For more information about how to
-  do this, see the "Debugging escape sequences" section in the hack.txt file
-  in this directory.
+  do this, see the "Debugging escape sequences" section in the
+  [hack.md](/nassh/doc/hack.md) file in this directory.
 
 
-> Is there a mailing list to discuss hterm or Secure Shell?
+## Is there a mailing list to discuss hterm or Secure Shell?
 
   Yes, the public chromium-hterm mailing list is here: <http://goo.gl/RYHiK>.
 
 
-> Can I connect using a public key pair or certificate?
+## Can I connect using a public key pair or certificate?
 
   You can import identity files from the connection dialog.  Select the
   "Import..." link to bring up a file picker.
@@ -152,17 +146,17 @@ at <http://goo.gl/RYHiK>.
   associated with Secure Shell.  There should be no way for another extension,
   app, or web page to access this sandboxed filesystem.
 
-  +-------------------------------------------------------------------------+
-  | Keep in mind that HTML5 filesystems are relatively new.  As always,     |
-  | it's possible that there are still exploits to be found or disclosed.   |
-  |                                                                         |
-  | Additionaly, Chrome stores HTML5 filesystems as normal files (with mode |
-  | 600, "-rw-------") under your profile directory.  Non-Chrome            |
-  | applications on your system may be able to access these files.          |
-  |                                                                         |
-  | For your own good, protect your important private keys with a strong    |
-  | passphrase.                                                             |
-  +-------------------------------------------------------------------------+
+*** note
+  Keep in mind that HTML5 filesystems are relatively new.  As always,
+  it's possible that there are still exploits to be found or disclosed.
+
+  Additionaly, Chrome stores HTML5 filesystems as normal files (with mode
+  600, "-rw-------") under your profile directory.  Non-Chrome
+  applications on your system may be able to access these files.
+
+  For your own good, protect your important private keys with a strong
+  passphrase.
+***
 
   You can also import a traditional ssh 'config' file using this dialog.
   Nearly anything that ssh might care about from your ~/.ssh directory can go
@@ -175,20 +169,20 @@ at <http://goo.gl/RYHiK>.
   syslog functionality, and anything that requires a domain socket.
 
 
-> Can Secure Shell use my ~/.ssh/config file?
+## Can Secure Shell use my `~/.ssh/config` file?
 
   Probably.  It depends on what it does.  See the answer to the previous
   question for more details.
 
 
-> How do I remove a key?
+## How do I remove a key?
 
   From the connection dialog, select an identity from the dropdown and press
   the DELETE key.  This will remove both the private and public key files from
   the HTML5 filesystem.
 
 
-> How do I remove ALL keys?
+## How do I remove ALL keys?
 
   Open the JavaScript console and type...
 
@@ -198,7 +192,7 @@ at <http://goo.gl/RYHiK>.
   *not* affect your preferences.
 
 
-> Does Secure Shell support a keychain of some sort?
+## Does Secure Shell support a keychain of some sort?
 
   Sorry, not yet.  This is a bit of a technical challenge given the nature
   of the NaCl sandbox.  We have a few options that we're exploring.  Feel
@@ -208,14 +202,14 @@ at <http://goo.gl/RYHiK>.
   certificate store.)
 
 
-> Can I use Secure Shell for port forwarding?
+## Can I use Secure Shell for port forwarding?
 
   Yes.  Enter your port forwarding options in the "SSH Arguments" field of
   the connect dialog.  The port forward will be active for the duration of
   the Secure Shell session.
 
 
-> What is the "Terminal Profile" field for?
+## What is the "Terminal Profile" field for?
 
   This is the last field in the connect dialog.  It allows you to select
   which set of terminal preferences to use for the connection.
@@ -231,12 +225,12 @@ at <http://goo.gl/RYHiK>.
   other saved connections.
 
 
-> How do I set terminal preferences?
+## How do I set terminal preferences?
 
-  The Secure Shell application does not currently have a preferences page.
-  It's in the works, and will be available before Secure Shell leaves
-  "beta" status.  For now, you need to open the JavaScript console to
-  change the user preferences.  Sorry about that.
+  You should manage your preferences under the Secure Shell Options page.
+  Just right click the app in Chrome, select Options, and see the Appearance
+  section.  The documentation below is meant for people hacking on the source
+  directly.
 
   In general, you open the JavaScript console and type something like...
 
@@ -267,7 +261,12 @@ at <http://goo.gl/RYHiK>.
   130.
 
 
-> How do I change the audible bell sound?
+## How do I change the audible bell sound?
+
+  You should manage your preferences under the Secure Shell Options page.
+  Just right click the app in Chrome, select Options, and see the Sounds
+  section.  The documentation below is meant for people hacking on the source
+  directly.
 
   Open the JavaScript console and type...
 
@@ -279,14 +278,24 @@ at <http://goo.gl/RYHiK>.
   that are beyond the scope of this FAQ.
 
 
-> How do I disable the audible bell?
+## How do I disable the audible bell?
+
+  You should manage your preferences under the Secure Shell Options page.
+  Just right click the app in Chrome, select Options, and see the Sounds
+  section.  The documentation below is meant for people hacking on the source
+  directly.
 
   Open the JavaScript console and type...
 
      term_.prefs_.set('audible-bell-sound', '')
 
 
-> How do I change the color scheme?
+## How do I change the color scheme?
+
+  You should manage your preferences under the Secure Shell Options page.
+  Just right click the app in Chrome, select Options, and see the Appearance
+  section.  The documentation below is meant for people hacking on the source
+  directly.
 
   You can change the foreground, background or cursor color preferences from
   the JavaScript console like this...
@@ -300,7 +309,12 @@ at <http://goo.gl/RYHiK>.
   for the cursor if you want to be able to see the character behind it.
 
 
-> How do I change the font face?
+## How do I change the font face?
+
+  You should manage your preferences under the Secure Shell Options page.
+  Just right click the app in Chrome, select Options, and see the Appearance
+  section.  The documentation below is meant for people hacking on the source
+  directly.
 
   Open the JavaScript console and type...
 
@@ -315,7 +329,12 @@ at <http://goo.gl/RYHiK>.
   colors to indicate bold.
 
 
-> How do I change the default font size?
+## How do I change the default font size?
+
+  You should manage your preferences under the Secure Shell Options page.
+  Just right click the app in Chrome, select Options, and see the Appearance
+  section.  The documentation below is meant for people hacking on the source
+  directly.
 
   Open the JavaScript console and type...
 
@@ -325,7 +344,7 @@ at <http://goo.gl/RYHiK>.
   you'll have to pick a different number to have any effect at all.
 
 
-> Can I quickly make temporarily changes to the font size?
+## Can I quickly make temporarily changes to the font size?
 
   Yes.  The Ctrl-Plus, Ctrl-Minus and Ctrl-Zero keys can increase, decrease,
   or reset the current font size.  This zoomed size is not remembered the
@@ -349,7 +368,7 @@ at <http://goo.gl/RYHiK>.
   own once your zoom setting is fixed.
 
 
-> Why do I get a warning about my browser zoom?
+## Why do I get a warning about my browser zoom?
 
   Because hterm requires you to set your browser to 100%, or 1:1 zoom.
   Try Ctrl-Zero or the Wrench->Zoom menu to reset your browser zoom.  The
@@ -358,7 +377,12 @@ at <http://goo.gl/RYHiK>.
   See the previous question for more information.
 
 
-> How do I disable anti-aliasing?
+## How do I disable anti-aliasing?
+
+  You should manage your preferences under the Secure Shell Options page.
+  Just right click the app in Chrome, select Options, and see the Appearance
+  section.  The documentation below is meant for people hacking on the source
+  directly.
 
   Open the JavaScript console and type...
 
@@ -371,7 +395,12 @@ at <http://goo.gl/RYHiK>.
   The default setting is 'antialiased'.
 
 
-> How do I make the cursor blink?
+## How do I make the cursor blink?
+
+  You should manage your preferences under the Secure Shell Options page.
+  Just right click the app in Chrome, select Options, and see the Appearance
+  section.  The documentation below is meant for people hacking on the source
+  directly.
 
   Open the JavaScript console and type...
 
@@ -387,7 +416,7 @@ at <http://goo.gl/RYHiK>.
      term_.prefs_.reset('cursor-blink')
 
 
-> Why does hterm ignore the cursor blink escape sequence?
+## Why does hterm ignore the cursor blink escape sequence?
 
   Most terminals ignore attempts by the host to change the blink-state of the
   cursor.  This lets you choose between a blink/steady cursor via the
@@ -398,7 +427,12 @@ at <http://goo.gl/RYHiK>.
 
      term_.prefs_.set('enable-dec12', true)
 
-> How do I change the TERM environment variable?
+## How do I change the TERM environment variable?
+
+  You should manage your preferences under the Secure Shell Options page.
+  Just right click the app in Chrome, select Options, and see the Misc
+  section.  The documentation below is meant for people hacking on the source
+  directly.
 
   Open the JavaScript console and type...
 
@@ -413,7 +447,12 @@ at <http://goo.gl/RYHiK>.
   You will have to reconnect for this setting to take effect.
 
 
-> How do I enter accented characters?
+## How do I enter accented characters?
+
+  You should manage your preferences under the Secure Shell Options page.
+  Just right click the app in Chrome, select Options, and see the Keyboard
+  section.  The documentation below is meant for people hacking on the source
+  directly.
 
   That depends on your platform and which accented characters you want to
   enter.
@@ -447,7 +486,12 @@ at <http://goo.gl/RYHiK>.
      term_.prefs_.set('alt-is-meta', true)
 
 
-> How do I make backspace send ^H?
+## How do I make backspace send ^H?
+
+  You should manage your preferences under the Secure Shell Options page.
+  Just right click the app in Chrome, select Options, and see the Keyboard
+  section.  The documentation below is meant for people hacking on the source
+  directly.
 
   By default, hterm sends a delete (DEL, '\x7f') character for the
   backspace key.  Sounds crazy, but it tends to be the right thing for
@@ -457,7 +501,7 @@ at <http://goo.gl/RYHiK>.
      term_.prefs_.set('backspace-sends-backspace', true)
 
 
-> How do I remove a known host fingerprint (aka known_hosts) entry?
+## How do I remove a known host fingerprint (aka known_hosts) entry?
 
   If you know the index of the offending host entry (it's usually reported
   by ssh if the connection fails) you can open the JavaScript console and
@@ -473,7 +517,7 @@ at <http://goo.gl/RYHiK>.
      term_.command.removeAllKnownHosts()
 
 
-> How do I send Ctrl-W, Ctrl-N or Ctrl-T to the terminal?
+## How do I send Ctrl-W, Ctrl-N or Ctrl-T to the terminal?
 
   Chrome blocks tab contents from getting access to these (and a few other)
   keys.  You can open Secure Shell in a dedicated window to get around
@@ -490,7 +534,7 @@ at <http://goo.gl/RYHiK>.
   provide a solution.
 
 
-> How do I copy text from the terminal?
+## How do I copy text from the terminal?
 
   By default, Secure Shell automatically copies your active selection to the
   clipboard.
@@ -512,7 +556,7 @@ at <http://goo.gl/RYHiK>.
     menu, when running Secure Shell in a browser tab.
 
 
-> How do I paste text to the terminal?
+## How do I paste text to the terminal?
 
   By default, Shift-Insert pastes the clipboard on all platforms.  If you'd
   prefer to be able to send Shift-Insert to the host, set the
@@ -531,7 +575,7 @@ at <http://goo.gl/RYHiK>.
     menu.
 
 
-> Why does the cursor blink in emacs?
+## Why does the cursor blink in emacs?
 
   This answer only applies if you've set the 'enable-dec12' preference to true.
 
@@ -543,7 +587,7 @@ at <http://goo.gl/RYHiK>.
   described in <http://goo.gl/TK7876>.
 
 
-> Why does the color scheme look funny in emacs/vi/vim?
+## Why does the color scheme look funny in emacs/vi/vim?
 
   hterm's default value for the TERM environment variable is
   'xterm-256color'.  This causes emacs, vi, and some other programs to
@@ -563,7 +607,7 @@ at <http://goo.gl/RYHiK>.
   Then restart Secure Shell.
 
 
-> Can I use my mouse with Secure Shell?
+## Can I use my mouse with Secure Shell?
 
   Sort of.  Both emacs and vi have mouse modes that are compatible with Secure
   Shell.
@@ -575,7 +619,7 @@ at <http://goo.gl/RYHiK>.
   In vi, use ":set mouse=a" to enable mouse mode.
 
 
-> Does hterm support the "OSC 52", aka "clipboard operations" sequence?
+## Does hterm support the "OSC 52", aka "clipboard operations" sequence?
 
   Clipboard writing is allowed by default, but you can disable it if you're
   paranoid.  Set the 'enable-clipboard-write' preference to false to disable
@@ -602,12 +646,12 @@ at <http://goo.gl/RYHiK>.
   the "c;" system clipboard.  Hterm treats them all as the system clipboard.
 
 
-> Can I synchronize my emacs selection with the system clipboard?
+## Can I synchronize my emacs selection with the system clipboard?
 
   Yes, as long as you're not using tmux.  See ../etc/osc52.el for the details.
 
 
-> Is there a way to try early releases of Secure Shell?
+## Is there a way to try early releases of Secure Shell?
 
   Yes.  First, you need to subscribe to the mailing list mentioned above.
   Subscribers have access to the "Dev" version in the Chrome Web Store, which
@@ -618,14 +662,14 @@ at <http://goo.gl/RYHiK>.
   to Beta if you have trouble with Dev.
 
 
-> Where is the source code?
+## Where is the source code?
 
   The hterm source is here: <http://goo.gl/8qndhN>.  This includes the
   front-end code for Secure Shell.
 
   The Native Client wrapper around ssh is here: <http://goo.gl/4tZCMI>.
 
-> Is there a change log?
+## Is there a change log?
 
   Yes.  Look under the doc/ directory of the hterm source.
 
@@ -637,6 +681,6 @@ at <http://goo.gl/RYHiK>.
   to SecureShell-0.7.2.
 
 
-> What if I want to make changes to the source?
+## What if I want to make changes to the source?
 
-  Read the hack.txt file in this directory.
+  Read the [hack.md](/nassh/doc/hack.md) file in this directory.

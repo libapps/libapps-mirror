@@ -20,7 +20,7 @@ if [ -z "$BUILT_HTERM_VERSION" ]; then
 fi
 
 AVAILABLE_HTERM_VERSION="$(echo_changelog \
-    "version" "../hterm/doc/changelog.txt")"
+    "version" "../hterm/doc/ChangeLog.md")"
 
 if [ "$BUILT_HTERM_VERSION" != "$AVAILABLE_HTERM_VERSION" ]; then
   echo_err "Warning: nassh_deps has hterm $BUILT_HTERM_VERSION but the" \
