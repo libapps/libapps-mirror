@@ -109,10 +109,10 @@ is not answered here, please ask it on the
 ## What should I do if I notice a bug?
 
   First, please continue reading this FAQ to make sure your issue isn't
-  mentioned.  Then check the bug list at <http://goo.gl/LR8mFR>.
+  mentioned.  Then check the bug list at <https://goo.gl/VkasRC>.
 
   If you don't see the issue there, you can search the archives of the
-  chromium-hterm mailing list here: <http://goo.gl/RYHiK>.
+  chromium-hterm mailing list here: <https://goo.gl/RYHiK>.
 
   If all else fails then join the chromium-hterm mailing list and post
   about what you've found.
@@ -127,7 +127,7 @@ is not answered here, please ask it on the
 
 ## Is there a mailing list to discuss hterm or Secure Shell?
 
-  Yes, the public chromium-hterm mailing list is here: <http://goo.gl/RYHiK>.
+  Yes, the public chromium-hterm mailing list is here: <https://goo.gl/RYHiK>.
 
 
 ## Can I connect using a public key pair or certificate?
@@ -257,7 +257,7 @@ is not answered here, please ask it on the
 
   Some common preferences are listed in questions that follow.  For the full
   list, you'll have to read through the "definePreferences" call in
-  hterm_preference_manager.js.  It's here: <http://goo.gl/xZa38d>, around line
+  hterm_preference_manager.js.  It's here: <https://goo.gl/xZa38d>, around line
   130.
 
 
@@ -584,7 +584,7 @@ is not answered here, please ask it on the
   Emacs uses these sequences (on purpose) to enable and disable cursor blink.
 
   If you prefer a steady cursor in emacs, set visible-cursor to nil as
-  described in <http://goo.gl/TK7876>.
+  described in <https://goo.gl/muppJj>.
 
 
 ## Why does the color scheme look funny in emacs/vi/vim?
@@ -655,7 +655,7 @@ is not answered here, please ask it on the
 
   Yes.  First, you need to subscribe to the mailing list mentioned above.
   Subscribers have access to the "Dev" version in the Chrome Web Store, which
-  is located here: <http://goo.gl/cFZlv>.
+  is located here: <https://goo.gl/cFZlv>.
 
   Please keep in mind that the Dev version has gone through significantly less
   testing than the Beta.  Fortunately, you can install both and switch back
@@ -664,10 +664,10 @@ is not answered here, please ask it on the
 
 ## Where is the source code?
 
-  The hterm source is here: <http://goo.gl/8qndhN>.  This includes the
+  The hterm source is here: <https://goo.gl/8qndhN>.  This includes the
   front-end code for Secure Shell.
 
-  The Native Client wrapper around ssh is here: <http://goo.gl/4tZCMI>.
+  The Native Client wrapper around ssh is here: <https://goo.gl/4tZCMI>.
 
 ## Is there a change log?
 

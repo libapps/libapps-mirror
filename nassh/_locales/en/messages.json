@@ -20,7 +20,7 @@
     "placeholders": {
       "url": {
         "content": "$1",
-        "example": "http://goo.gl/m6Nj8"
+        "example": "https://goo.gl/muppJj"
       }
     }
   },
@@ -31,7 +31,7 @@
     "placeholders": {
       "url": {
         "content": "$1",
-        "example": "http://goo.gl/OeH3i"
+        "example": "https://goo.gl/mHrbej"
       }
     }
   },

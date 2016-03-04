@@ -122,7 +122,7 @@ nassh.CommandInstance.prototype.run = function() {
     }
 
     this.io.println(
-        nassh.msg('WELCOME_FAQ', ['\x1b[1mhttp://goo.gl/TK7876\x1b[m']));
+        nassh.msg('WELCOME_FAQ', ['\x1b[1mhttps://goo.gl/muppJj\x1b[m']));
 
     if (hterm.windowType != 'popup') {
       var osx = window.navigator.userAgent.match(/Mac OS X/);
@@ -130,7 +130,7 @@ nassh.CommandInstance.prototype.run = function() {
         this.io.println('');
         this.io.println(
             nassh.msg('OPEN_AS_WINDOW_TIP',
-                      ['\x1b[1mhttp://goo.gl/TK7876\x1b[m']));
+                      ['\x1b[1mhttps://goo.gl/muppJj\x1b[m']));
         this.io.println('');
       }
     }
