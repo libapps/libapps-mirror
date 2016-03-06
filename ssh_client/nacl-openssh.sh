@@ -15,8 +15,8 @@ set -xe
 
 ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 
-readonly PACKAGE_NAME=openssh-6.6p1
-readonly OPENSSH_MIRROR=http://ftp5.usa.openbsd.org/pub/OpenBSD/OpenSSH/portable
+readonly PACKAGE_NAME=openssh-7.5p1
+readonly OPENSSH_MIRROR="https://commondatastorage.googleapis.com/chromeos-localmirror/secureshell"
 readonly ROOT=$PWD/..
 readonly PATCH_FILE=${ROOT}/${PACKAGE_NAME}.patch
 
@@ -68,13 +68,38 @@ fi
 tar xzf ${PACKAGE_NAME}.tar.gz
 
 cd $PACKAGE_NAME
-patch -p2 -i $PATCH_FILE
+patch -p1 -i $PATCH_FILE
 
 EXTRA_LIBS=()
 EXTRA_CFLAGS=(
   -DHAVE_SIGACTION -DHAVE_TRUNCATE
 )
-EXTRA_CONFIGURE_FLAGS=()
+EXTRA_CONFIGURE_FLAGS=(
+  # Log related settings.
+  --disable-lastlog
+  --disable-{u,w}tmp{,x}
+  --disable-putut{,x}line
+
+  # Various toolchain settings.
+  --without-rpath
+  --without-Werror
+
+  # Features we don't use.
+  --without-audit
+  --without-ldns
+  --without-libedit
+  --without-pam
+  --without-sandbox
+  --without-selinux
+  --without-shadow
+  --without-skey
+  --without-ssh1
+  --without-ssl-engine
+
+  # Features we want.
+  --with-openssl  # Needed for DSA/RSA key support.
+  --with-zlib --without-zlib-version-check
+)
 if [ ${NACL_ARCH} = "pnacl" ] ; then
   EXTRA_CFLAGS+=(
     -DHAVE_SETSID -DHAVE_GETNAMEINFO -DHAVE_GETADDRINFO
@@ -111,7 +136,7 @@ export PACKAGE_NAME
 # will fail on link stage due to missing reference to main - it is expected
 objects=(
     ssh.o readconf.o clientloop.o sshtty.o sshconnect.o sshconnect1.o
-    sshconnect2.o mux.o roaming_common.o roaming_client.o
+    sshconnect2.o mux.o
 )
 make -j${ncpus} \
     html \
