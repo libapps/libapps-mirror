@@ -70,27 +70,35 @@ tar xzf ${PACKAGE_NAME}.tar.gz
 cd $PACKAGE_NAME
 patch -p2 -i $PATCH_FILE
 
+EXTRA_LIBS=()
+EXTRA_CFLAGS=(
+  -DHAVE_SIGACTION -DHAVE_TRUNCATE
+)
+EXTRA_CONFIGURE_FLAGS=()
 if [ ${NACL_ARCH} = "pnacl" ] ; then
-  export EXTRA_CFLAGS="-DHAVE_SETSID -DHAVE_GETNAMEINFO -DHAVE_GETADDRINFO \
-                       -DHAVE_GETCWD -DHAVE_STATVFS -DHAVE_FSTATVFS \
-                       -DHAVE_ENDGRENT -DHAVE_FD_MASK -include sys/cdefs.h \
-                       ${NACL_CPPFLAGS} \
-                       -I${WEBPORTS_INCLUDE}/glibc-compat"
-  export EXTRA_CONFIGURE_FLAGS="--without-stackprotect --without-hardening"
-  export EXTRA_LIBS="-lglibc-compat"
+  EXTRA_CFLAGS+=(
+    -DHAVE_SETSID -DHAVE_GETNAMEINFO -DHAVE_GETADDRINFO
+    -DHAVE_GETCWD -DHAVE_STATVFS -DHAVE_FSTATVFS
+    -DHAVE_ENDGRENT -DHAVE_FD_MASK -include sys/cdefs.h
+    ${NACL_CPPFLAGS}
+    -I"${WEBPORTS_INCLUDE}/glibc-compat"
+  )
+  EXTRA_CONFIGURE_FLAGS+=(
+    --without-stackprotect
+    --without-hardening
+  )
+  EXTRA_LIBS+=( -lglibc-compat )
   export ac_cv_func_inet_aton=no
   export ac_cv_func_inet_ntoa=no
   export ac_cv_func_inet_ntop=no
 else
-  export EXTRA_CFLAGS=-I${WEBPORTS_INCLUDE}
-  export EXTRA_CONFIGURE_FLAGS=
-  export EXTRA_LIBS=
+  EXTRA_CFLAGS+=( -I"${WEBPORTS_INCLUDE}" )
 fi
 
-./configure --host=nacl --prefix=${WEBPORTS_PREFIX} \
-    CFLAGS="-DHAVE_SIGACTION -DHAVE_TRUNCATE $EXTRA_CFLAGS" \
-    LIBS=$EXTRA_LIBS \
-    ${EXTRA_CONFIGURE_FLAGS}
+./configure --host=nacl --prefix="${WEBPORTS_PREFIX}" \
+    CFLAGS="${EXTRA_CFLAGS[*]}" \
+    LIBS="${EXTRA_LIBS[*]}" \
+    "${EXTRA_CONFIGURE_FLAGS[@]}"
 
 # Build the html man pages.
 cat <<\EOF >>Makefile
