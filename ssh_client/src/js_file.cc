@@ -37,7 +37,7 @@ void JsFileHandler::Open(int32_t result, JsFile* stream, const char* pathname) {
   out_->OpenFile(stream->fd(), pathname, stream->oflag(), stream);
 }
 
-FileStream* JsFileHandler::open(int fd, const char* pathname, int oflag) {
+FileStream* JsFileHandler::open(int fd, const char* pathname, int oflag, int* err) {
   JsFile* stream = new JsFile(fd, (oflag & ~O_NONBLOCK), out_);
   pp::Module::Get()->core()->CallOnMainThread(0,
       factory_.NewCallback(&JsFileHandler::Open, stream, pathname));

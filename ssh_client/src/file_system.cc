@@ -186,13 +186,14 @@ int FileSystem::open(const char* pathname, int oflag, mode_t cmode,
   if (!handler)
     return ENOENT;
 
+  int err;
   int fd = GetFirstUnusedDescriptor();
   // mark descriptor as used
   AddFileStream(fd, NULL);
-  FileStream* stream = handler->open(fd, pathname, oflag);
+  FileStream* stream = handler->open(fd, pathname, oflag, &err);
   if (!stream) {
     RemoveFileStream(fd);
-    return EACCES;
+    return err;
   }
 
   AddFileStream(fd, stream);

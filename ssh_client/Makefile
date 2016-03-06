@@ -30,8 +30,8 @@ CXX_HEADERS:=\
 	src/udp_socket.h
 
 # Project Build flags
-override LDFLAGS+=-lppapi_cpp -lppapi -lppapi_cpp_private -lutil -lcrypto -lz \
-        -lresolv -ldl -lnsl -ljsoncpp -Loutput
+override LDFLAGS+=-lppapi_cpp -lppapi -lppapi_cpp_private -lnacl_io -lutil \
+        -lcrypto -lz -lresolv -ldl -lnsl -ljsoncpp -Loutput
 override WARNINGS+=-Wno-long-long -Wall -Wswitch-enum -Werror
 override CXXFLAGS+=-pthread -std=gnu++0x $(WARNINGS) -Iinclude \
         -I$(NACL_SDK_ROOT)/include -I$(NACL_SDK_ROOT)/le32-nacl/include
@@ -49,7 +49,8 @@ PNACL_TRANSLATE=$(PNACL_TC_ROOT)/bin/pnacl-translate
 # https://code.google.com/p/nativeclient/issues/detail?id=3714
 PNACL_TRANSLATE_FLAGS=-fdata-sections -ffunction-sections --gc-sections \
         --allow-llvm-bitcode-input
-PNACL_LDFLAGS:=-lppapi_cpp -lppapi -lcrypto -lppapi_cpp_private -lz -ljsoncpp \
+PNACL_LDFLAGS:=-lppapi_cpp -lppapi -lcrypto -lppapi_cpp_private -lnacl_io \
+        -lz -ljsoncpp \
         -Loutput -L$(NACL_SDK_ROOT)/lib/pnacl/Release --pnacl-disable-abi-check
 
 COMPAT_INC:=-I$(PNACL_TC_ROOT)/le32-nacl/usr/include/glibc-compat

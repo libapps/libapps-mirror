@@ -6,6 +6,7 @@
 
 #include <assert.h>
 
+#include "nacl_io/pepper_interface.h"
 #include "ppapi/c/pp_errors.h"
 #include "ppapi/c/ppb_file_io.h"
 #include "ppapi/cpp/file_ref.h"
@@ -32,11 +33,13 @@ void PepperFileHandler::release() {
     delete this;
 }
 
-FileStream* PepperFileHandler::open(int fd, const char* pathname, int oflag) {
+FileStream* PepperFileHandler::open(int fd, const char* pathname, int oflag, int* err) {
   PepperFile* file = new PepperFile(fd, oflag, file_system_);
-  if (file->open(pathname)) {
+  int32_t ret = file->open(pathname);
+  if (ret == 0) {
     return file;
   } else {
+    *err = nacl_io::PPErrorToErrno(ret);
     file->release();
     return NULL;
   }
@@ -72,14 +75,14 @@ FileStream* PepperFile::dup(int fd) {
   return NULL;
 }
 
-bool PepperFile::open(const char* pathname) {
+int32_t PepperFile::open(const char* pathname) {
   int32_t result = PP_OK_COMPLETIONPENDING;
   pp::Module::Get()->core()->CallOnMainThread(0,
       factory_.NewCallback(&PepperFile::Open, pathname, &result));
   FileSystem* sys = FileSystem::GetFileSystem();
   while(result == PP_OK_COMPLETIONPENDING)
     sys->cond().wait(sys->mutex());
-  return result == PP_OK;
+  return result;
 }
 
 void PepperFile::close() {

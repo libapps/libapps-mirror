@@ -27,7 +27,7 @@ void DevRandomHandler::release() {
     delete this;
 }
 
-FileStream* DevRandomHandler::open(int fd, const char* pathname, int oflag) {
+FileStream* DevRandomHandler::open(int fd, const char* pathname, int oflag, int* err) {
   return new DevRandom(fd, oflag, get_random_bytes_);
 }
 

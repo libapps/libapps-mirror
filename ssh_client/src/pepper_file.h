@@ -23,7 +23,7 @@ class PepperFileHandler : public PathHandler {
   virtual void addref();
   virtual void release();
 
-  virtual FileStream* open(int fd, const char* pathname, int oflag);
+  virtual FileStream* open(int fd, const char* pathname, int oflag, int *err);
   virtual int stat(const char* pathname, nacl_abi_stat* out);
 
  private:
@@ -41,7 +41,7 @@ class PepperFile : public FileStream {
   bool is_block() { return !(oflag_ & O_NONBLOCK); }
   bool is_open() { return file_io_ != NULL; }
 
-  bool open(const char* pathname);
+  int32_t open(const char* pathname);
 
   virtual void addref();
   virtual void release();

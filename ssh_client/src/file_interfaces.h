@@ -79,7 +79,7 @@ class PathHandler {
   virtual void addref() = 0;
   virtual void release() = 0;
 
-  virtual FileStream* open(int fd, const char* pathname, int oflag) = 0;
+  virtual FileStream* open(int fd, const char* pathname, int oflag, int *err) = 0;
   virtual int stat(const char* pathname, nacl_abi_stat* out) = 0;
 };
 

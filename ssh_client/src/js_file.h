@@ -85,7 +85,7 @@ class JsFileHandler : public PathHandler {
 
   void Open(int32_t result, JsFile* stream, const char* pathname);
 
-  virtual FileStream* open(int fd, const char* pathname, int oflag);
+  virtual FileStream* open(int fd, const char* pathname, int oflag, int* err);
   virtual int stat(const char* pathname, nacl_abi_stat* out);
 
  private:
