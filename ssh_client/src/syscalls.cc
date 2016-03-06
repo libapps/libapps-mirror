@@ -46,6 +46,22 @@ DECLARE(stat);
 DECLARE(fstat);
 DECLARE(getdents);
 
+/*
+ * Wrapped functions will return 0/errno on success, and pass back the real
+ * value via an argument.  Shuffle the values around to match standard C lib
+ * API where errors are set in errno.
+ */
+#define HANDLE_ERRNO(call, success) \
+  ({ \
+    __typeof(success) ret = (call); \
+    if (ret) { \
+      errno = ret; \
+      ret = -1; \
+    } else \
+      ret = (success); \
+    ret; \
+  })
+
 void debug_log(const char* format, ...) {
   va_list ap;
   va_start(ap, format);
@@ -70,8 +86,7 @@ int open(const char *file, int oflag, ...) {
   va_start(ap, oflag);
   cmode = va_arg(ap, mode_t);
   va_end(ap);
-  errno = WRAP(open)(file, oflag, cmode, &newfd);
-  return errno == 0 ? newfd : -1;
+  return HANDLE_ERRNO(WRAP(open)(file, oflag, cmode, &newfd), newfd);
 }
 #endif
 
@@ -82,8 +97,7 @@ static int WRAP(close)(int fd) {
 
 #ifdef USE_NEWLIB
 int close(int fd) {
-  errno = WRAP(close)(fd);
-  return errno == 0 ? 0 : -1;
+  return HANDLE_ERRNO(WRAP(close)(fd), 0);
 }
 #endif
 
@@ -95,8 +109,7 @@ static int WRAP(read)(int fd, void *buf, size_t count, size_t *nread) {
 #ifdef USE_NEWLIB
 ssize_t read(int fd, void *buf, size_t count) {
   ssize_t rv;
-  errno = WRAP(read)(fd, buf, count, (size_t*)&rv);
-  return errno == 0 ? rv : -1;
+  return HANDLE_ERRNO(WRAP(read)(fd, buf, count, (size_t*)&rv), rv);
 }
 #endif
 
@@ -137,8 +150,7 @@ static int WRAP(write)(int fd, const void *buf, size_t count, size_t *nwrote) {
 #ifdef USE_NEWLIB
 ssize_t write(int fd, const void *buf, size_t count) {
   ssize_t rv;
-  errno = WRAP(write)(fd, buf, count, (size_t*)&rv);
-  return errno == 0 ? rv : -1;
+  return HANDLE_ERRNO(WRAP(write)(fd, buf, count, (size_t*)&rv), rv);
 }
 #endif
 
@@ -151,8 +163,7 @@ static int WRAP(seek)(int fd, nacl_abi_off_t offset, int whence,
 #ifdef USE_NEWLIB
 off_t lseek(int fd, off_t offset, int whence) {
   nacl_abi_off_t rv;
-  errno = WRAP(seek)(fd, offset, whence, &rv);
-  return errno == 0 ? (off_t)rv : -1;
+  return HANDLE_ERRNO(WRAP(seek)(fd, offset, whence, &rv), rv);
 }
 #endif
 
@@ -164,8 +175,7 @@ static int WRAP(dup)(int fd, int* newfd) {
 #ifdef USE_NEWLIB
 int dup(int oldfd) {
   int rv;
-  errno = WRAP(dup)(oldfd, &rv);
-  return errno == 0 ? rv : -1;
+  return HANDLE_ERRNO(WRAP(dup)(oldfd, &rv), rv);
 }
 #endif
 
@@ -176,8 +186,7 @@ static int WRAP(dup2)(int fd, int newfd) {
 
 #ifdef USE_NEWLIB
 int dup2(int oldfd, int newfd) {
-  errno = WRAP(dup2)(oldfd, newfd);
-  return errno == 0 ? newfd : -1;
+  return HANDLE_ERRNO(WRAP(dup2)(oldfd, newfd), newfd);
 }
 #endif
 
@@ -205,10 +214,10 @@ static void stat_n2u(struct nacl_abi_stat* nacl_buf, struct stat *buf) {
 
 int stat(const char *path, struct stat *buf) {
   struct nacl_abi_stat nacl_buf;
-  errno = WRAP(stat)(path, &nacl_buf);
-  if (errno == 0)
+  int rv = WRAP(stat)(path, &nacl_buf);
+  if (rv == 0)
     stat_n2u(&nacl_buf, buf);
-  return errno == 0 ? 0 : -1;
+  return HANDLE_ERRNO(rv, 0);
 }
 #endif
 
@@ -220,10 +229,10 @@ static int WRAP(fstat)(int fd, struct nacl_abi_stat *buf) {
 #ifdef USE_NEWLIB
 int fstat(int fd, struct stat *buf) {
   struct nacl_abi_stat nacl_buf;
-  errno = WRAP(fstat)(fd, &nacl_buf);
-  if (errno == 0)
+  int rv = WRAP(fstat)(fd, &nacl_buf);
+  if (rv == 0)
     stat_n2u(&nacl_buf, buf);
-  return errno == 0 ? 0 : -1;
+  return HANDLE_ERRNO(rv, 0);
 }
 #endif
 
@@ -452,14 +461,14 @@ ssize_t send(int fd, const void* buf, size_t count, int flags) {
   size_t sent = 0;
   int rv = FileSystem::GetFileSystem()->write(fd, (const char*)buf,
                                               count, &sent);
-  return rv == 0 ? sent : -1;
+  return HANDLE_ERRNO(rv, sent);
 }
 
 ssize_t recv(int fd, void *buf, size_t count, int flags) {
   VLOG("recv: %d %d\n", fd, count);
   size_t recvd = 0;
   int rv = FileSystem::GetFileSystem()->read(fd, (char*)buf, count, &recvd);
-  return rv == 0 ? recvd : -1;
+  return HANDLE_ERRNO(rv, recvd);
 }
 
 ssize_t sendto(int sockfd, const void* buf, size_t len, int flags,
@@ -479,12 +488,14 @@ ssize_t recvfrom(int socket, void* buffer, size_t len, int flags,
 int socketpair(int domain, int type, int protocol, int socket_vector[2]) {
   LOG("socketpair: %d %d %d [%d, %d]\n",
       domain, type, protocol, socket_vector[0], socket_vector[1]);
-  return EACCES;
+  errno = EACCES;
+  return -1;
 }
 
 int clock_gettime(clockid_t clk_id, struct timespec* tp) {
   LOG("clock_gettime: %d\n", (int)clk_id);
-  return EINVAL;
+  errno = EINVAL;
+  return -1;
 }
 
 speed_t cfgetospeed(const struct termios *t)
