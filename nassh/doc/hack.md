@@ -28,9 +28,9 @@ control setup.
 
 # Building the dependencies.
 
-The Secure Shell app depends on some library code from `chromeapps/libdot/`
-and the hterm terminal emulator from in `chromeapps/hterm`.  To build these
-external dependencies, run...
+The Secure Shell app depends on some library code from
+[libapps/libdot/](/libdot/) and the hterm terminal emulator from in
+[libapps/hterm/](/hterm/).  To build these external dependencies, run...
 
     nassh$ ./bin/mkdeps.sh
 
@@ -62,4 +62,3 @@ The `./bin/run_local.sh` script can be used to launch a new instance of Chrome
 in an isolated profile, with the necessary command line arguments, and launch
 the Secure Shell app.  You can run this script again to rebuild dependencies
 and relaunch the Secure Shell app.
-
