@@ -87,8 +87,10 @@ is not answered here, please ask it on the
   enough documentation in [nassh_google_relay.js](/nassh/js/nassh_google_relay.js)
   to reverse engineer a compatible relay.
 
-  If you're interested in writing an alternative relay library, please mention
-  it on the mailing list.
+  The good news is that someone has built an
+  [open source relay](https://github.com/zyclonite/nassh-relay).  It is not
+  supported by us though, so please take any questions/concerns about it to
+  the author.
 
 
 ## Is my connection really secure?
