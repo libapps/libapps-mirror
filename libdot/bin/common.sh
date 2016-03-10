@@ -142,7 +142,7 @@ function echo_changelog() {
   if [ -z "$key" ]; then
     head -n1 "$file"
   elif [ "$key" = "version" ]; then
-    head -n1 "$file" | cut -f1 -d',' | sed -e 's/ //g'
+    head -n1 "$file" | cut -f1 -d',' | sed -e 's/[ #]//g'
   elif [ "$key" = "date" ]; then
     head -n1 "$file" | cut -f2 -d',' | sed -e 's/ //g'
   else

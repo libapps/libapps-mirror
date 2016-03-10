@@ -1,46 +1,46 @@
-1.9, 2014-05-27, Add "@eval" directive to bin/concat.sh
+# 1.9, 2014-05-27, Add "@eval" directive to bin/concat.sh
 
 * Add an "@eval" directive which evaluates its operand with bash's eval
   builtin, and appends the result to the concat output.
 
-1.8, 2014-04-05, Remove option parameter from result.pass()
+# 1.8, 2014-04-05, Remove option parameter from result.pass()
 
 * lib.TestManager.Result.prototype.pass took an optional parameter, a message
   to log, which was never used, and made it awkward to use
   result.pass.bind(result) as the value of an onSuccess callback, since any
   parameter passed to the callback would show up in the test log.
 
-1.7, 2014-04-28, Firefox compatibility
+# 1.7, 2014-04-28, Firefox compatibility
 
 * Fix if `(chrome...)` tests to be `if (window.chrome...)`.
 * Fix TextComplete exception detection.
 
-1.6, 2014-02-24, lib.PreferenceManager fixes.
+# 1.6, 2014-02-24, lib.PreferenceManager fixes.
 
 * diff() and onStorageChanged had issues dealing with boolean prefs
   and the change-to-default-value case.  The upshot was that
   set(name, true/false/DEFAULT_VALUE) caused the notifyChange to be called
   twice.
 
-1.5, 2014-01-09, Switch from BlobBuilder to Blob constructor.
+# 1.5, 2014-01-09, Switch from BlobBuilder to Blob constructor.
 
 * BlobBuilder has been deprecated.  Switch over to the blob constructor instead.
 
-1.4, 2013-07-17, Add test harness.
+# 1.4, 2013-07-17, Add test harness.
 
 * Add lib_test.html test harness.
 * Modify shell scripts to work on BSD.
 
-1.3, 2013-04-30, Fix concat.sh append_string
+# 1.3, 2013-04-30, Fix concat.sh append_string
 
 * Fix append_string to work with multi-line strings.
 
-1.2, 2013-04-02, Add export/import methods to lib.PreferenceManager.
+# 1.2, 2013-04-02, Add export/import methods to lib.PreferenceManager.
 
 * Add lib.PreferenceManager..exportAsJson/importFromJson methods to facilitate
   backup or migration of preferences.
 
-1.1, 2013-03-14, Grab bag of changes.
+# 1.1, 2013-03-14, Grab bag of changes.
 
 * Initial add of libdot changelog.
 * Fix file selection in libdot/bin/mkzip.sh.  rsync selection wasn't working
