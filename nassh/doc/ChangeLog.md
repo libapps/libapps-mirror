@@ -1,3 +1,9 @@
+# 0.8.34.2, 2016-04-06, hterm 1.57, minor polish.
+
+* Update to hterm 1.57.
+* Update various short URLs.
+* Try to fix blank page on startup problems.
+
 # 0.8.34.1, 2015-06-16, hterm 1.56, freshen up the options page.
 
 * Update to hterm 1.56.
