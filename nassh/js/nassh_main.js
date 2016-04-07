@@ -58,7 +58,9 @@ window.onload = function() {
     // Exported for console debugging.
     window.app_ = app;
 
-    if (!nassh.v2) {
+    // If the background page hasn't finished initializing yet (i.e. bg.app
+    // is undefined), just skip the update check.
+    if (!nassh.v2 && app) {
       app.onUpdateAvailable.addListener(onUpdateAvailable);
       if (app.updateAvailable)
         onUpdateAvailable();
