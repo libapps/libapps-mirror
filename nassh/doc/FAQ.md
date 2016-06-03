@@ -16,7 +16,7 @@
                             hterm and Secure Shell
                           Frequently Asked Questions
 ```
-
+[TOC]
 
 Hello World.  This is the hterm/Secure Shell FAQ.  If you have a question that
 is not answered here, please ask it on the
@@ -202,6 +202,56 @@ is not answered here, please ask it on the
 
   (And yes, we're already considering integrating with the Chrome NSS
   certificate store.)
+
+
+## Can I create bookmarks to specific sites?
+
+  Mostly.  You can create two types of bookmarks:
+  1. A connection specifying a user & host (and optionally a port).
+  2. A profile connection (which you already created/set up).
+
+*** aside
+If you're using the dev version of Secure Shell, you'll want to use the
+extension id `okddffdblfhhnmhodogpojmfkjmhinfp` in the examples below
+instead of `pnhechapfaindjhompbnflcldabbghjo`.
+***
+
+### Direct links
+
+  The first one takes the form of:
+
+  `chrome-extension://pnhechapfaindjhompbnflcldabbghjo/html/nassh.html#user@host[:port][@proxyhost[:proxyport]]`
+
+  The `user` and `host` fields are mandatory, but you can omit the `:port` if
+  you like (as well as the proxy settings).  There is no way to customize any
+  other field/connection property.
+
+  Here is an example for connecting to the server `cowfarm` as user `milkman`:
+
+  `chrome-extension://pnhechapfaindjhompbnflcldabbghjo/html/nassh.html#milkman@cowfarm`
+
+  And on port `2222`:
+
+  `chrome-extension://pnhechapfaindjhompbnflcldabbghjo/html/nassh.html#milkman@cowfarm:2222`
+
+### Profile links
+
+  The second method requires you to first create a new connection in the
+  connection dialog, and then you can bookmark that connection directly.
+  It then takes the form of:
+
+  `chrome-extension://pnhechapfaindjhompbnflcldabbghjo/html/nassh.html#profile-id:ID`
+
+  The `ID` part will need to be changed to match the unique id assigned to each
+  connection.  You can find it by loading Secure Shell into a tab, connecting
+  to the profile, then looking at the URL box.
+  This allows you to fully control the ssh parameters though: you may add
+  arguments or change the command line or relay settings.
+
+
+## Can I create links in webpages to autoconnect?
+
+  Mostly.  See the previous question about bookmarks.
 
 
 ## Can I use Secure Shell for port forwarding?
