@@ -155,10 +155,16 @@ lib.colors.x11ToCSS = function(v) {
  * @return {string|Array.<string>} The converted value or values.
  */
 lib.colors.hexToRGB = function(arg) {
+  var hex16 = lib.colors.re_.hex16;
+  var hex24 = lib.colors.re_.hex24;
+
   function convert(hex) {
-    var re = (hex.length == 4) ?
-        lib.colors.re_.hex16 : lib.colors.re_.hex24;
-    var ary = hex.match(re)
+    if (hex.length == 4) {
+      hex = hex.replace(hex16, function(h, r, g, b) {
+        return "#" + r + r + g + g + b + b;
+      });
+    }
+    var ary = hex.match(hex24);
     if (!ary)
       return null;
 
