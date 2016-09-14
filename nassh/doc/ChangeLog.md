@@ -1,3 +1,7 @@
+# 0.8.34.3, 2016-09-14, hterm 1.59.
+
+* Update to hterm 1.59.  This fixes loading errors under Chrome M54+.
+
 # 0.8.34.2, 2016-04-06, hterm 1.57, minor polish.
 
 * Update to hterm 1.57.
