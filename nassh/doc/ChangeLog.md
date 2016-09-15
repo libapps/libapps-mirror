@@ -1,3 +1,7 @@
+# 0.8.34.4, 2016-09-15, hterm 1.60.
+
+* Update to hterm 1.60.  This horizontal cursor position tracking.
+
 # 0.8.34.3, 2016-09-14, hterm 1.59.
 
 * Update to hterm 1.59.  This fixes loading errors under Chrome M54+.
