@@ -51,35 +51,6 @@ Crosh.init = function() {
 
   terminal.decorate(document.querySelector('#terminal'));
   terminal.onTerminalReady = function() {
-    // We want to override the Ctrl-Shift-N keystroke so it opens nassh.html,
-    // and its connection dialog, rather than reloading crosh.html.
-    //
-    // The builtin version of crosh does not come with nassh, so it won't work
-    // from there.
-    if (chrome.runtime.id != Crosh.croshBuiltinId) {
-      var openSecureShell = function() {
-          window.open('/html/nassh.html', '',
-                      'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-                      'minimizable=yes,width=' + window.innerWidth +
-                      ',height=' + window.innerHeight);
-          return hterm.Keyboard.KeyActions.CANCEL;
-      };
-
-      terminal.keyboard.keyMap.keyDefs[78].control = function(e) {
-        if (e.shiftKey)
-          return openSecureShell();
-
-        return '\x0e';
-      };
-
-      terminal.keyboard.keyMap.keyDefs[78].meta = function(e) {
-        if (e.shiftKey)
-          return openSecureShell();
-
-        return hterm.Keyboard.KeyActions.DEFAULT;
-      };
-    }
-
     terminal.setCursorPosition(0, 0);
     terminal.setCursorVisible(true);
     terminal.runCommandClass(Crosh, document.location.hash.substr(1));
