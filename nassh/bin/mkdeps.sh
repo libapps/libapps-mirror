@@ -3,11 +3,10 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-if [ -z "$LIBDOT_SEARCH_PATH" ]; then
-  export LIBDOT_SEARCH_PATH="$(readlink -f "$(dirname "$0")/../..")"
-fi
+LIBDOT_DIR="$(dirname -- "$0")/../../libdot"
+source "${LIBDOT_DIR}/bin/common.sh"
 
-cd "$(readlink -f "$(dirname "$0")/..")"
+cd "${BIN_DIR}/.."
 
-../libdot/bin/concat.sh -i ./concat/nassh_deps.concat \
-  -o ./js/nassh_deps.concat.js $@
+concat.sh -i ./concat/nassh_deps.concat \
+  -o ./js/nassh_deps.concat.js "$@"

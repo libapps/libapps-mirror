@@ -9,6 +9,20 @@ function echo_err() {
   echo "-*- $*" 1>&2
 }
 
+if [[ -z "${LIBDOT_DIR}" ]]; then
+  echo_err "LIBDOT_DIR: required variable not set"
+  exit 1
+fi
+
+READLINK="${LIBDOT_DIR}/bin/readlink"
+READLINK="$("${READLINK}" -f -- "${READLINK}")"
+LIBDOT_DIR="$("${READLINK}" -f -- "${LIBDOT_DIR}")"
+LIBDOT_BIN_DIR="${LIBDOT_DIR}/bin"
+LIBAPPS_DIR="$("${READLINK}" -f -- "${LIBDOT_DIR}/..")"
+BIN_DIR="$(dirname "$("${READLINK}" -f -- "$0")")"
+: "${LIBDOT_SEARCH_PATH:=${LIBAPPS_DIR}}"
+PATH="${LIBDOT_BIN_DIR}:${PATH}"
+
 # Find a file in the LIBDOT_SEARCH_PATH.
 function search_file() {
   local filename="$1"
@@ -25,11 +39,6 @@ function search_file() {
 
   echo_err "$filename not found in $LIBDOT_SEARCH_PATH"
 }
-
-if [ -z "$LIBDOT_SEARCH_PATH" ]; then
-  echo_err "LIBDOT_SEARCH_PATH is not defined."
-  exit 1
-fi
 
 # See <http://code.google.com/p/shflags/>.
 source "$(search_file "libdot/bin/shflags")"

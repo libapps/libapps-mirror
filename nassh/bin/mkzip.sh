@@ -3,13 +3,10 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-cd "$(readlink -f "$(dirname "$0")/..")"
+LIBDOT_DIR="$(dirname -- "$0")/../../libdot"
+source "${LIBDOT_DIR}/bin/common.sh"
 
-if [ -z "$LIBDOT_SEARCH_PATH" ]; then
-  export LIBDOT_SEARCH_PATH="$(readlink -f "../")"
-fi
-
-source "../libdot/bin/common.sh"
+cd "${BIN_DIR}/.."
 
 BUILT_HTERM_VERSION=$(grep -A1 "lib.resource.add('hterm/changelog/version'" \
   ./js/nassh_deps.concat.js | tail -1 | tr -d \'\+\ )
@@ -31,4 +28,4 @@ fi
 
 mkdir -p ./dist/zip
 
-../libdot/bin/mkzip.sh -s "." -w ./dist/zip/ "$@"
+mkzip.sh -s "." -w ./dist/zip/ "$@"

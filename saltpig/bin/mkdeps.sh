@@ -3,12 +3,10 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+LIBDOT_DIR="$(dirname -- "$0")/../../libdot"
+source "${LIBDOT_DIR}/bin/common.sh"
 
-if [ -z "$LIBDOT_SEARCH_PATH" ]; then
-  export LIBDOT_SEARCH_PATH="$(readlink -f "$(dirname "$0")/../..")"
-fi
+cd "${BIN_DIR}/.."
 
-cd "$(readlink -f "$(dirname "$0")/..")"
-
-../libdot/bin/concat.sh $1 -i ./concat/sp_deps.concat \
+concat.sh "$1" -i ./concat/sp_deps.concat \
   -o ./js/sp_deps.concat.js

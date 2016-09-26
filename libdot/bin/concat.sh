@@ -67,7 +67,8 @@ There are a few directives that can be specified in the input file.  They are...
   Echo's a static string to the output file.
 "
 
-source "$(dirname "$0")/common.sh"
+LIBDOT_DIR="$(dirname -- "$0")/../../libdot"
+source "${LIBDOT_DIR}/bin/common.sh"
 
 DEFINE_boolean forever "$FLAGS_FALSE" \
   "Recreate the output file whenever one of the inputs changes. " f

@@ -6,6 +6,11 @@
 # Pass this an existing Secure Shell zip from (made from ../nassh/bin/mkzip.sh)
 # and it'll turn it into a crosh_builtin.zip file.
 
+LIBDOT_DIR="$(dirname -- "$0")/../../libdot"
+source "${LIBDOT_DIR}/bin/common.sh"
+
+cd "${BIN_DIR}/.."
+
 if [ -z "$1" ]; then
   echo "Missing argument."
   exit 1
@@ -16,8 +21,6 @@ if [ ! -e "$SSZIP" ]; then
   echo "Not found: $SSZIP"
   exit 1
 fi
-
-cd "$(readlink -f "$(dirname "$0")")"
 
 # Fail on error.
 set -e

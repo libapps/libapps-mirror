@@ -3,8 +3,10 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+LIBDOT_DIR="$(dirname -- "$0")/../../libdot"
+source "${LIBDOT_DIR}/bin/common.sh"
 
-cd "$(readlink -f "$(dirname "$0")/..")"
+cd "${BIN_DIR}/.."
 
 VPATH="pepper_36/1260"
 BASE="http://gsdview.appspot.com/nativeclient-mirror/naclports/$VPATH/publish/"

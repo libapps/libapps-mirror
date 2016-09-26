@@ -58,7 +58,8 @@ This time you'll get ~/obj/pong/Pong-tot-12.1.zip, and its manifest will have
 the key and name intact.
 "
 
-source "$(dirname "$0")/common.sh"
+LIBDOT_DIR="$(dirname -- "$0")/../../libdot"
+source "${LIBDOT_DIR}/bin/common.sh"
 
 DEFINE_string filename "" \
   "The new zip filename.  Computed from manifest.json if not specified." f
