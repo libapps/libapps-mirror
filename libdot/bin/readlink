@@ -9,9 +9,15 @@
 # paths.
 
 
-if [ $(expr "$1" : "-.*f") -gt 0 ]
-then
-    exec python -c 'import os,sys;print os.path.realpath(sys.argv[1])' "$2"
+if [ "$1" = "-f" ]; then
+  if [ "$2" = "--" ]; then
+    shift
+  fi
+  if [ $# -ne 2 ]; then
+    echo "Usage: readlink -f [--] <path>" >&2
+    exit 1
+  fi
+  exec python -c 'import os,sys;print os.path.realpath(sys.argv[1])' "$2"
 else
-    exec /usr/bin/readlink "$@"
+  exec /usr/bin/readlink "$@"
 fi
