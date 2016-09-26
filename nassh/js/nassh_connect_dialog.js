@@ -828,26 +828,7 @@ nassh.ConnectDialog.prototype.onDeleteClick_ = function(e) {
 /**
  * Someone clicked on the options button.
  */
-nassh.ConnectDialog.prototype.onOptionsClick_ = function(e) {
-  if (nassh.v2) {
-    var optionsWindow = chrome.app.window.get('options_page');
-    // If the options window is not open, opens it, else brings it to the
-    // foreground.
-    if (!optionsWindow) {
-      chrome.app.window.create('/html/nassh_preferences_editor.html', {
-        'bounds': {
-          'width': 700,
-          'height': 800
-        },
-        'id': 'options_page'
-      });
-    } else {
-      optionsWindow.focus();
-    }
-  } else {
-    window.open('/html/nassh_preferences_editor.html');
-  }
-}
+nassh.ConnectDialog.prototype.onOptionsClick_ = nassh.openOptionsPage;
 
 /**
  * KeyUp on the form element.

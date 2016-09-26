@@ -51,6 +51,11 @@ Crosh.init = function() {
 
   terminal.decorate(document.querySelector('#terminal'));
   terminal.onTerminalReady = function() {
+    terminal.keyboard.bindings.addBinding('Ctrl-Shift-P', function() {
+      nassh.openOptionsPage();
+      return hterm.Keyboard.KeyActions.CANCEL;
+    });
+
     terminal.setCursorPosition(0, 0);
     terminal.setCursorVisible(true);
     terminal.runCommandClass(Crosh, document.location.hash.substr(1));
