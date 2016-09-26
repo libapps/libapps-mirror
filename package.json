@@ -5,11 +5,18 @@
   "main": "libdot/js/lib.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/web-app-messaging/wam.js.git"
+    "url": "https://chromium.googlesource.com/apps/libapps.git"
   },
   "author": "Chromium authors",
-  "licensce": "CHROMIUM",
-  "readmeFilename": "README.md",
+  "license": "BSD-3-Clause",
+  "files": [
+    "README.md"
+  ],
   "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {},
+  "bugs": {
+    "url": "https://crbug.com/new",
+    "email": "chromium-hterm@chromium.org"
+  },
+  "homepage": "https://chromium.googlesource.com/apps/libapps"
 }
