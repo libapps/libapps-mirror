@@ -9,8 +9,6 @@
 LIBDOT_DIR="$(dirname -- "$0")/../../libdot"
 source "${LIBDOT_DIR}/bin/common.sh"
 
-cd "${BIN_DIR}/.."
-
 if [ -z "$1" ]; then
   echo "Missing argument."
   exit 1
@@ -24,6 +22,8 @@ fi
 
 # Fail on error.
 set -e
+
+cd "${BIN_DIR}"
 
 # Remove previous work
 rm -f crosh_builtin.zip
