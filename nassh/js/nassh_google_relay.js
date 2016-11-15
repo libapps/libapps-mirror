@@ -173,7 +173,7 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
   // if we succeed at finding a relay host.
   var relayHost = sessionStorage.getItem('googleRelay.relayHost');
   var relayPort = sessionStorage.getItem('googleRelay.relayPort') ||
-    (this.useXHR ? 8023 : 8022);
+      this.proxyPort;
 
   if (relayHost) {
     var relayPrefixField = parseInt(this.options['--relay-prefix-field']);
