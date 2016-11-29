@@ -152,7 +152,7 @@ is not answered here, please ask it on the
   Keep in mind that HTML5 filesystems are relatively new.  As always,
   it's possible that there are still exploits to be found or disclosed.
 
-  Additionaly, Chrome stores HTML5 filesystems as normal files (with mode
+  Additionally, Chrome stores HTML5 filesystems as normal files (with mode
   600, "-rw-------") under your profile directory.  Non-Chrome
   applications on your system may be able to access these files.
 
