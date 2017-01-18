@@ -791,7 +791,7 @@ lib.PreferenceManager.prototype.onStorageChange_ = function(map) {
       currentValue = (void 0);
 
     if (this.diff(currentValue, newValue)) {
-      if (typeof newValue == 'undefined') {
+      if (typeof newValue == 'undefined' || newValue === null) {
         record.currentValue = record.DEFAULT_VALUE;
       } else {
         record.currentValue = newValue;

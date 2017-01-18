@@ -21,9 +21,11 @@ lib.Storage.Local.prototype.onStorage_ = function(e) {
   if (e.storageArea != this.storage_)
     return;
 
-  // IE throws an exception if JSON.parse is given an empty string.
-  var prevValue = e.oldValue ? JSON.parse(e.oldValue) : "";
-  var curValue = e.newValue ? JSON.parse(e.newValue) : "";
+  // JS throws an exception if JSON.parse is given an empty string. So here we
+  // only parse if the value is truthy. This mean the empty string, undefined
+  // and null will not be parsed.
+  var prevValue = e.oldValue ? JSON.parse(e.oldValue) : e.oldValue;
+  var curValue = e.newValue ? JSON.parse(e.newValue) : e.newValue;
   var o = {};
   o[e.key] = {
     oldValue: prevValue,
