@@ -54,6 +54,7 @@ if [ ${NACL_ARCH} = "pnacl" ] ; then
   export EXTRA_CFLAGS="-DHAVE_SETSID -DHAVE_GETNAMEINFO -DHAVE_GETADDRINFO \
                        -DHAVE_GETCWD -DHAVE_STATVFS -DHAVE_FSTATVFS \
                        -DHAVE_ENDGRENT -DHAVE_FD_MASK -include sys/cdefs.h \
+                       ${NACL_CPPFLAGS} \
                        -I${NACLPORTS_INCLUDE}/glibc-compat"
   export EXTRA_CONFIGURE_FLAGS="--without-stackprotect --without-hardening"
   export EXTRA_LIBS="-lglibc-compat"
