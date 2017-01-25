@@ -773,19 +773,19 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(
     stream = nassh.Stream.openStream(nassh.Stream.SSHAgentRelay,
         fd, {authAgentAppID: this.authAgentAppID_},
         function onOpen(success) {
-          self.sendToPlugin_('onOpenSocket', [fd, success]);
+          self.sendToPlugin_('onOpenSocket', [fd, success, false]);
         });
   } else {
     // Regular relay connection request.
     if (!this.relay_) {
-      this.sendToPlugin_('onOpenSocket', [fd, false]);
+      this.sendToPlugin_('onOpenSocket', [fd, false, false]);
       return;
     }
 
     stream = this.relay_.openSocket(
         fd, host, port,
         function onOpen(success) {
-          self.sendToPlugin_('onOpenSocket', [fd, success]);
+          self.sendToPlugin_('onOpenSocket', [fd, success, false]);
         });
   }
 
