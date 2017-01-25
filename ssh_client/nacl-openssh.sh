@@ -45,7 +45,7 @@ if [[ ! -f ${PACKAGE_NAME}.tar.gz ]]
 then
   wget $OPENSSH_MIRROR/${PACKAGE_NAME}.tar.gz -O ${PACKAGE_NAME}.tar.gz || exit 1
 fi
-tar xvzf ${PACKAGE_NAME}.tar.gz
+tar xzf ${PACKAGE_NAME}.tar.gz
 
 cd $PACKAGE_NAME
 patch -p2 -i $PATCH_FILE || exit 1
