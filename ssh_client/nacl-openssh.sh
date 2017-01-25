@@ -61,7 +61,6 @@ if [ ${NACL_ARCH} = "pnacl" ] ; then
   export ac_cv_func_inet_aton=no
   export ac_cv_func_inet_ntoa=no
   export ac_cv_func_inet_ntop=no
-  export ac_cv_func_poll=no
 else
   export EXTRA_CFLAGS=-I${NACLPORTS_INCLUDE}
   export EXTRA_CONFIGURE_FLAGS=
