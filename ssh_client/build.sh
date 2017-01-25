@@ -61,7 +61,7 @@ fi
 
 build() {
   pushd $NACL_PORTS/src
-  NACL_ARCH=$1 TOOLCHAIN=$2 make openssl zlib jsoncpp || exit 1
+  NACL_ARCH=$1 TOOLCHAIN=$2 make glibc-compat openssl zlib jsoncpp || exit 1
   popd
 
   pushd output
