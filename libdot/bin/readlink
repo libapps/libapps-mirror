@@ -19,5 +19,9 @@ if [ "$1" = "-f" ]; then
   fi
   exec python -c 'import os,sys;print os.path.realpath(sys.argv[1])' "$2"
 else
-  exec /usr/bin/readlink "$@"
+  if [ -x /bin/readlink ]; then
+    exec /bin/readlink "$@"
+  else
+    exec /usr/bin/readlink "$@"
+  fi
 fi
