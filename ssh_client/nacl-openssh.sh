@@ -74,9 +74,15 @@ fi
     ${EXTRA_CONFIGURE_FLAGS}  || exit 1
 
 # will fail on link stage due to missing reference to main - it is expected
-make ssh${NACL_EXEEXT} || echo "Ignore error."
-$AR rcs ../libopenssh-${NACL_ARCH}.a \
-    ssh.o readconf.o clientloop.o sshtty.o sshconnect.o sshconnect1.o \
+objects=(
+    ssh.o readconf.o clientloop.o sshtty.o sshconnect.o sshconnect1.o
     sshconnect2.o mux.o roaming_common.o roaming_client.o
-cp -f libssh.a ../libssh-${NACL_ARCH}.a
-cp -f openbsd-compat/libopenbsd-compat.a ../libopenbsd-compat-${NACL_ARCH}.a
+)
+make -j4 \
+    "${objects[@]}" \
+    libssh.a \
+    openbsd-compat/libopenbsd-compat.a \
+    || exit 1
+$AR rcs ../libopenssh-${NACL_ARCH}.a "${objects[@]}" || exit 1
+cp -f libssh.a ../libssh-${NACL_ARCH}.a || exit 1
+cp -f openbsd-compat/libopenbsd-compat.a ../libopenbsd-compat-${NACL_ARCH}.a || exit 1
