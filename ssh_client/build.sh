@@ -9,7 +9,7 @@ DEBUG=0
 PNACL=1
 
 NACLSDK_VERSION=35.0.1916.54
-NACLPORTS_REVISION=1268
+NACLPORTS_REVISION=feabf015fa87420ae670056709f32972b4d4acf6
 
 CDS_ROOT="https://commondatastorage.googleapis.com"
 SDK_ROOT="$CDS_ROOT/nativeclient-mirror/nacl/nacl_sdk"
@@ -51,7 +51,7 @@ if [[ ($NACL_PORTS == "") || !(-d $NACL_PORTS) ]]; then
   if [[ !(-d naclports/src) ]]; then
     rm -rf naclports && mkdir naclports
     cd naclports
-    gclient config http://naclports.googlecode.com/svn/trunk/src || exit 1
+    gclient config --name=src https://chromium.googlesource.com/webports.git || exit 1
     gclient sync --jobs=8 -r src@$NACLPORTS_REVISION || exit 1
     cd ..
   fi
