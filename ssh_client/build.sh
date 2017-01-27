@@ -5,6 +5,8 @@
 
 set -x
 
+ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
+
 DEBUG=0
 PNACL=1
 
@@ -33,7 +35,7 @@ for i in $@; do
 done
 
 cd "$(dirname "$0")"
-mkdir output
+mkdir -p output
 
 if [[ ($NACL_SDK_ROOT == "") || !(-d $NACL_SDK_ROOT) ]]; then
   pushd output
@@ -89,7 +91,7 @@ if [[ $PNACL == 1 ]]; then
 else
   readonly DEFAULT_TARGET=all_glibc
 fi
-make clean && make -j "$BUILD_ARGS" $DEFAULT_TARGET || exit 1
+make clean && make -j${ncpus} "$BUILD_ARGS" $DEFAULT_TARGET || exit 1
 
 cd output
 mkdir -p hterm/

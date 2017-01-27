@@ -13,6 +13,8 @@
 
 set -x
 
+ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
+
 readonly PACKAGE_NAME=openssh-6.6p1
 readonly OPENSSH_MIRROR=http://ftp5.usa.openbsd.org/pub/OpenBSD/OpenSSH/portable
 readonly ROOT=$PWD/..
@@ -77,7 +79,7 @@ objects=(
     ssh.o readconf.o clientloop.o sshtty.o sshconnect.o sshconnect1.o
     sshconnect2.o mux.o roaming_common.o roaming_client.o
 )
-make -j4 \
+make -j${ncpus} \
     "${objects[@]}" \
     libssh.a \
     openbsd-compat/libopenbsd-compat.a \
