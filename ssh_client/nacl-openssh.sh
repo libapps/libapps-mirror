@@ -42,6 +42,24 @@ export PKG_CONFIG_LIBDIR=${NACLPORTS_LIBDIR}
 export PKG_CONFIG_PATH=${PKG_CONFIG_LIBDIR}/pkgconfig
 export PATH=${NACL_BIN_PATH}:${PATH};
 
+# Tools for generating the html man pages.
+MANDOC_P="mdocml-1.13.4"
+if [[ ! -x ${MANDOC_P}/mandoc ]]; then
+  if [[ ! -f ${MANDOC_P}.tar.gz ]]; then
+    wget http://mdocml.bsd.lv/snapshots/${MANDOC_P}.tar.gz
+  fi
+  rm -rf "${MANDOC_P}"
+  tar xf ${MANDOC_P}.tar.gz
+  pushd "${MANDOC_P}" >/dev/null
+  (
+    unset AR CC CFLAGS CPPFLAGS LDFLAGS
+    ./configure
+  )
+  make -j${ncpus} mandoc
+  popd >/dev/null
+fi
+export MANDOC="${PWD}/${MANDOC_P}/mandoc"
+
 rm -rf $PACKAGE_NAME/
 if [[ ! -f ${PACKAGE_NAME}.tar.gz ]]
 then
@@ -74,12 +92,20 @@ fi
     LIBS=$EXTRA_LIBS \
     ${EXTRA_CONFIGURE_FLAGS}  || exit 1
 
+# Build the html man pages.
+cat <<\EOF >>Makefile
+html: $(MANPAGES_IN:%=%.html)
+%.html: %
+	$(MANDOC) -Thtml -O man=%N.%S.html $< > $@.tmp && mv $@.tmp $@
+EOF
+
 # will fail on link stage due to missing reference to main - it is expected
 objects=(
     ssh.o readconf.o clientloop.o sshtty.o sshconnect.o sshconnect1.o
     sshconnect2.o mux.o roaming_common.o roaming_client.o
 )
 make -j${ncpus} \
+    html \
     "${objects[@]}" \
     libssh.a \
     openbsd-compat/libopenbsd-compat.a \
@@ -87,3 +113,4 @@ make -j${ncpus} \
 $AR rcs ../libopenssh-${NACL_ARCH}.a "${objects[@]}" || exit 1
 cp -f libssh.a ../libssh-${NACL_ARCH}.a || exit 1
 cp -f openbsd-compat/libopenbsd-compat.a ../libopenbsd-compat-${NACL_ARCH}.a || exit 1
+cp -f *.[0-9].html ../

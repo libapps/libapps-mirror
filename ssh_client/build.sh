@@ -94,7 +94,8 @@ fi
 make clean && make -j${ncpus} "$BUILD_ARGS" $DEFAULT_TARGET || exit 1
 
 cd output
-mkdir -p hterm/
+mkdir -p hterm/docs/
+cp *.[0-9].html hterm/docs/
 
 if [[ $PNACL == 1 ]]; then
   rm -rf hterm/plugin/pnacl
