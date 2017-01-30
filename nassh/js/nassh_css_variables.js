@@ -87,21 +87,20 @@ nassh.CSSVariables.prototype.parse_ = function(source) {
     pos = nextBrace + 1;
 
     var ruleText = parseBlock(pos);
-    ruleText.split(';').forEach(function(pair) {
-        var colon = pair.indexOf(':');
-        if (colon == -1)
-          return;
+    ruleText.split(';').forEach((pair) => {
+      var colon = pair.indexOf(':');
+      if (colon == -1)
+        return;
 
-        var value = pair.substr(colon + 1).trim();
-        if (nassh.CSSVariables.reFindVar.test(value)) {
-          // This value mentions a variable, so we stash [rule, prop, value]
-          // for later use in this.sync().
-          var rule = this.styleSheet_.rules[ruleNumber];
-          var prop = pair.substr(0, colon).trim();
-          this.dynamicRules_.push([rule, prop, value]);
-        }
-
-      }.bind(this));
+      var value = pair.substr(colon + 1).trim();
+      if (nassh.CSSVariables.reFindVar.test(value)) {
+        // This value mentions a variable, so we stash [rule, prop, value]
+        // for later use in this.sync().
+        var rule = this.styleSheet_.rules[ruleNumber];
+        var prop = pair.substr(0, colon).trim();
+        this.dynamicRules_.push([rule, prop, value]);
+      }
+    });
 
     pos += ruleText.length + 1;
     ruleNumber++;
@@ -119,7 +118,7 @@ nassh.CSSVariables.prototype.loadSource_ = function() {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', this.styleSheet_.href);
 
-  xhr.onloadend = function() {
+  xhr.onloadend = () => {
     if (xhr.status != 200) {
       console.error('Error loading: ' + this.styleSheet_.href + ': ' +
                     xhr.status);
@@ -127,7 +126,7 @@ nassh.CSSVariables.prototype.loadSource_ = function() {
     }
 
     this.parse_(xhr.responseText);
-  }.bind(this);
+  };
 
   xhr.send();
 };
@@ -138,12 +137,12 @@ nassh.CSSVariables.prototype.loadSource_ = function() {
  * This directly modifies the associated styleSheet object.
  */
 nassh.CSSVariables.prototype.sync = function() {
-  var replaceVar = function(match, varname) {
+  var replaceVar = (match, varname) => {
     if (varname in this.variables_)
       return this.variables_[varname];
 
     return 'unknown-variable:' + varname;
-  }.bind(this);
+  };
 
   this.dynamicRules_.forEach(function(ary) {
       var rule = ary[0];

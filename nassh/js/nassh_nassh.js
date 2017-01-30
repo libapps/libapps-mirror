@@ -105,28 +105,28 @@ nassh.Nassh.prototype.initPlugin_ = function(onComplete) {
   this.plugin_.setAttribute('src', '../plugin/pnacl/ssh_client.nmf');
   this.plugin_.setAttribute('type', 'application/x-nacl');
 
-  this.plugin_.addEventListener('load', function() {
-      this.println(nassh.msg('PLUGIN_LOADING_COMPLETE'));
-      setTimeout(this.onTTYChange_.bind(this));
-      onComplete();
-    }.bind(this));
+  this.plugin_.addEventListener('load', () => {
+    this.println(nassh.msg('PLUGIN_LOADING_COMPLETE'));
+    setTimeout(this.onTTYChange_.bind(this));
+    onComplete();
+  });
 
-  this.plugin_.addEventListener('message', function(e) {
-      var msg = JSON.parse(e.data);
-      msg.argv = msg.arguments;
+  this.plugin_.addEventListener('message', (e) => {
+    var msg = JSON.parse(e.data);
+    msg.argv = msg.arguments;
 
-      if (msg.name in this.onPlugin_) {
-        this.onPlugin_[msg.name].apply(this, msg.arguments);
-      } else {
-        console.log('Unknown message from plugin: ' + JSON.stringify(msg));
-      }
-    }.bind(this));
+    if (msg.name in this.onPlugin_) {
+      this.onPlugin_[msg.name].apply(this, msg.arguments);
+    } else {
+      console.log('Unknown message from plugin: ' + JSON.stringify(msg));
+    }
+  };
 
-  this.plugin_.addEventListener('crash', function (e) {
-      console.log('plugin crashed');
-      this.executeContext.closeError('wam.FileSystem.Error.PluginCrash',
-                                     [this.plugin_.exitStatus]);
-    }.bind(this));
+  this.plugin_.addEventListener('crash', (e) => {
+    console.log('plugin crashed');
+    this.executeContext.closeError('wam.FileSystem.Error.PluginCrash',
+                                   [this.plugin_.exitStatus]);
+  };
 
   document.body.insertBefore(this.plugin_, document.body.firstChild);
 
@@ -196,23 +196,21 @@ nassh.Nassh.prototype.onPlugin_.exit = function(code) {
  * the HTML5 filesystem, but now NaCl can get there directly.
  */
 nassh.Nassh.prototype.onPlugin_.write = function(fd, data) {
-  var self = this;
-
   if (fd != nassh.Nassh.STDOUT && fd != nassh.Nassh.STDERR) {
     console.warn('Attempt to write to unknown fd: ' + fd);
     return;
   }
 
   var string = atob(data);
-  this.print(string, function() {
-      var ackCount = (fd == nassh.Nassh.STDOUT ?
-                      this.stdoutAcknowledgeCount_ += string.length :
-                      this.stderrAcknowledgeCount_ += string.length);
-      if (this.plugin_) {
-        // After exit, the last ack comes after the plugin has been destroyed.
-        self.sendToPlugin_('onWriteAcknowledge', [fd, ackCount]);
-      }
-    }.bind(this));
+  this.print(string, () => {
+    var ackCount = (fd == nassh.Nassh.STDOUT ?
+                    this.stdoutAcknowledgeCount_ += string.length :
+                    this.stderrAcknowledgeCount_ += string.length);
+    if (this.plugin_) {
+      // After exit, the last ack comes after the plugin has been destroyed.
+      this.sendToPlugin_('onWriteAcknowledge', [fd, ackCount]);
+    }
+  };
 };
 
 /**

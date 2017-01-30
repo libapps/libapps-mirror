@@ -13,3 +13,11 @@ can be used to contact other users and developers for questions.
 * [ChangeLog](/nassh/doc/ChangeLog.md) -- List of interesting changes in each release
 * [FAQ](/nassh/doc/FAQ.md) -- Frequently Asked Questions
 * [Hacking](/nassh/doc/hack.md) -- Developing the SecureShell source
+
+# Requirements
+
+This has only been tested with Chrome.  We know the following is needed:
+
+* Native Client (NaCl)
+* Pepper Plugin API (PPAPI)
+* ECMAScript 6 (ES6)

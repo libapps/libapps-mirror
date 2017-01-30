@@ -61,7 +61,6 @@ nassh.loadManifest = function(onSuccess, opt_onError) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', '/manifest.json');
 
-  var self = this;
   xhr.onloadend = function() {
     if (xhr.status == 200) {
       onSuccess(JSON.parse(xhr.responseText));

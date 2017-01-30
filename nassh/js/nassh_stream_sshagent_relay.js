@@ -30,7 +30,7 @@ nassh.Stream.SSHAgentRelay.prototype.asyncOpen_ = function(args, onComplete) {
   this.authAgentAppID_ = args.authAgentAppID;
   this.port_ = chrome.runtime.connect(this.authAgentAppID_);
 
-  var normalOnMessage = function(msg) {
+  var normalOnMessage = (msg) => {
     if (msg.data) {
       // Prepare header.
       var size = msg.data.length;
@@ -47,27 +47,27 @@ nassh.Stream.SSHAgentRelay.prototype.asyncOpen_ = function(args, onComplete) {
       // Re-examine write buffer; there might be more data in it.
       setTimeout(this.trySendPacket_.bind(this), 0);
     }
-  }.bind(this);
+  };
 
-  var normalDisconnect = function() {
+  var normalDisconnect = () => {
     this.port_.onMessage.removeListener(normalOnMessage);
     this.port_.onDisconnect.removeListener(normalDisconnect);
     this.close();
-  }.bind(this);
+  };
 
-  var initialOnMessage = function(msg) {
+  var initialOnMessage = (msg) => {
     this.port_.onMessage.removeListener(initialOnMessage);
     this.port_.onDisconnect.removeListener(initialDisconnect);
     this.port_.onMessage.addListener(normalOnMessage);
     this.port_.onDisconnect.addListener(normalDisconnect);
     onComplete(true);
-  }.bind(this);
+  };
 
-  var initialDisconnect = function() {
+  var initialDisconnect = () => {
     this.port_.onMessage.removeListener(initialOnMessage);
     this.port_.onDisconnect.removeListener(initialDisconnect);
     onComplete(false);
-  }.bind(this);
+  };
 
   this.port_.onMessage.addListener(initialOnMessage);
   this.port_.onDisconnect.addListener(initialDisconnect);

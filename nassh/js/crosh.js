@@ -113,32 +113,29 @@ Crosh.prototype.run = function() {
   this.io.onVTKeystroke = this.sendString_.bind(this, true /* fromKeyboard */);
   this.io.sendString = this.sendString_.bind(this, false /* fromKeyboard */);
 
-  var self = this;
   this.io.onTerminalResize = this.onTerminalResize_.bind(this);
   chrome.terminalPrivate.onProcessOutput.addListener(
       this.onProcessOutput_.bind(this));
   document.body.onunload = this.close_.bind(this);
-  chrome.terminalPrivate.openTerminalProcess(this.commandName,
-      function(pid) {
-        if (pid == undefined || pid == -1) {
-          self.io.println("Opening crosh process failed.");
-          self.exit(1);
-          return;
-        }
+  chrome.terminalPrivate.openTerminalProcess(this.commandName, (pid) => {
+    if (pid == undefined || pid == -1) {
+      this.io.println("Opening crosh process failed.");
+      this.exit(1);
+      return;
+    }
 
-        window.onbeforeunload = self.onBeforeUnload_.bind(self);
-        self.pid_ = pid;
+    window.onbeforeunload = this.onBeforeUnload_.bind(this);
+    this.pid_ = pid;
 
-        if (!chrome.terminalPrivate.onTerminalResize) {
-          console.warn("Terminal resizing not supported.");
-          return;
-        }
+    if (!chrome.terminalPrivate.onTerminalResize) {
+      console.warn("Terminal resizing not supported.");
+      return;
+    }
 
-        // Setup initial window size.
-        self.onTerminalResize_(self.io.terminal_.screenSize.width,
-                               self.io.terminal_.screenSize.height);
-      }
-  );
+    // Setup initial window size.
+    this.onTerminalResize_(this.io.terminal_.screenSize.width,
+                           this.io.terminal_.screenSize.height);
+  });
 };
 
 Crosh.prototype.onBeforeUnload_ = function(e) {
@@ -233,7 +230,7 @@ Crosh.prototype.exit = function(code) {
 
   this.io.println('crosh exited with code: ' + code);
   this.io.println('(R)e-execute, (C)hoose another connection, or E(x)it?');
-  this.io.onVTKeystroke = function(string) {
+  this.io.onVTKeystroke = (string) => {
     var ch = string.toLowerCase();
     if (ch == 'r' || ch == ' ' || ch == '\x0d' /* enter */ ||
         ch == '\x12' /* ctrl-r */) {
@@ -252,5 +249,5 @@ Crosh.prototype.exit = function(code) {
       if (this.argv_.onExit)
         this.argv_.onExit(code);
     }
-  }.bind(this);
+  };
 };

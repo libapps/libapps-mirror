@@ -78,10 +78,10 @@ nassh.ColumnList.prototype.scheduleRedraw = function() {
   if (this.redrawTimeout_)
     return;
 
-  this.redrawTimeout_ = setTimeout(function() {
-      this.redrawTimeout_ = null;
-      this.redraw();
-    }.bind(this), 100);
+  this.redrawTimeout_ = setTimeout(() => {
+    this.redrawTimeout_ = null;
+    this.redraw();
+  }, 100);
 };
 
 /**

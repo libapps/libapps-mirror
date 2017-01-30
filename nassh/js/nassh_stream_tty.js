@@ -121,16 +121,14 @@ nassh.Stream.Tty.prototype.asyncOpen_ = function(info, onOpen) {
 };
 
 nassh.Stream.Tty.prototype.asyncRead = function(size, onRead) {
-  var self = this;
-
-  if (!self.open)
+  if (!this.open)
     throw nassh.Stream.ERR_STREAM_CLOSED;
 
-  if (!self.allowRead_)
+  if (!this.allowRead_)
     throw nassh.Stream.ERR_STREAM_CANT_READ;
 
-  self.inputBuffer_.read(size, function(data) {
-    if (!self.open) {
+  this.inputBuffer_.read(size, (data) => {
+    if (!this.open) {
       return false;
     }
 
@@ -141,18 +139,16 @@ nassh.Stream.Tty.prototype.asyncRead = function(size, onRead) {
 };
 
 nassh.Stream.Tty.prototype.asyncWrite = function(data, onSuccess) {
-  var self = this;
-
-  if (!self.open)
+  if (!this.open)
     throw nassh.Stream.ERR_STREAM_CLOSED;
 
-  if (!self.allowWrite_)
+  if (!this.allowWrite_)
     throw nassh.Stream.ERR_STREAM_CANT_WRITE;
 
   var string = atob(data);
-  self.acknowledgeCount_ += string.length;
+  this.acknowledgeCount_ += string.length;
 
-  self.io_.writeUTF8(string);
+  this.io_.writeUTF8(string);
 
-  setTimeout(function() { onSuccess(self.acknowledgeCount_); }, 0);
+  setTimeout(() => { onSuccess(this.acknowledgeCount_); }, 0);
 };

@@ -86,21 +86,21 @@ nassh.CommandInstance.prototype.run = function() {
   this.io = this.argv_.io.push();
 
   // Similar to lib.fs.err, except this logs to the terminal too.
-  var ferr = function(msg) {
-    return function(err) {
+  var ferr = (msg) => {
+    return (err) => {
       var ary = Array.apply(null, arguments);
       console.error(msg + ': ' + ary.join(', '));
 
       this.io.println(nassh.msg('UNEXPECTED_ERROR'));
       this.io.println(err);
-    }.bind(this);
-  }.bind(this);
+    };
+  };
 
   this.prefs_.readStorage(function() {
     nassh.loadManifest(onManifestLoaded, ferr('Manifest load failed'));
   });
 
-  var onManifestLoaded = function(manifest) {
+  var onManifestLoaded = (manifest) => {
     this.manifest_ = manifest;
 
     // Set default window title.
@@ -138,9 +138,9 @@ nassh.CommandInstance.prototype.run = function() {
     }
 
     nassh.getFileSystem(onFileSystemFound, ferr('FileSystem init failed'));
-  }.bind(this);
+  };
 
-  var onFileSystemFound = function(fileSystem, sshDirectoryEntry) {
+  var onFileSystemFound = (fileSystem, sshDirectoryEntry) => {
     this.fileSystem_ = fileSystem;
     this.sshDirectoryEntry_ = sshDirectoryEntry;
 
@@ -163,13 +163,11 @@ nassh.CommandInstance.prototype.run = function() {
       window.sessionStorage.setItem('nassh.promptOnReload', 'yes');
 
       this.promptForDestination_();
-    } else {
-      if (!this.connectToArgString(argstr)) {
-        this.io.println(nassh.msg('BAD_DESTINATION', [this.argv_.argString]));
-        this.exit(1);
-      }
+    } else if (!this.connectToArgString(argstr)) {
+      this.io.println(nassh.msg('BAD_DESTINATION', [this.argv_.argString]));
+      this.exit(1);
     }
-  }.bind(this);
+  };
 };
 
 /**
@@ -274,28 +272,23 @@ nassh.CommandInstance.prototype.removeAllKnownHosts = function() {
  */
 nassh.CommandInstance.prototype.removeKnownHostByIndex = function(index) {
   var onError = lib.fs.log('Error accessing /.ssh/known_hosts');
-  var self = this;
 
-  lib.fs.readFile(
-      self.fileSystem_.root, '/.ssh/known_hosts',
-      function(contents) {
-        var ary = contents.split('\n');
-        ary.splice(index - 1, 1);
-        lib.fs.overwriteFile(self.fileSystem_.root, '/.ssh/known_hosts',
-                             ary.join('\n'),
-                             lib.fs.log('done'),
-                             onError);
-      }, onError);
+  lib.fs.readFile(this.fileSystem_.root, '/.ssh/known_hosts', (contents) => {
+    var ary = contents.split('\n');
+    ary.splice(index - 1, 1);
+    lib.fs.overwriteFile(this.fileSystem_.root, '/.ssh/known_hosts',
+                         ary.join('\n'), lib.fs.log('done'), onError);
+  }, onError);
 };
 
 nassh.CommandInstance.prototype.promptForDestination_ = function(opt_default) {
   var connectDialog = this.io.createFrame(
       lib.f.getURL('/html/nassh_connect_dialog.html'), null);
 
-  connectDialog.onMessage = function(event) {
+  connectDialog.onMessage = (event) => {
     event.data.argv.unshift(connectDialog);
     this.dispatchMessage_('connect-dialog', this.onConnectDialog_, event.data);
-  }.bind(this);
+  };
 
   connectDialog.show();
 };
@@ -318,7 +311,7 @@ nassh.CommandInstance.prototype.connectToArgString = function(argstr) {
 nassh.CommandInstance.prototype.connectToProfile = function(
     profileID, querystr) {
 
-  var onReadStorage = function() {
+  var onReadStorage = () => {
     // TODO(rginda): Soft fail on unknown profileID.
     var prefs = this.prefs_.getProfile(profileID);
 
@@ -339,7 +332,7 @@ nassh.CommandInstance.prototype.connectToProfile = function(
       terminalProfile: prefs.get('terminal-profile'),
       authAgentAppID: prefs.get('auth-agent-appid')
     });
-  }.bind(this);
+  };
 
   // Re-read prefs from storage in case they were just changed in the connect
   // dialog.
@@ -497,12 +490,11 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   if (commandArgs)
     argv.arguments.push(commandArgs);
 
-  var self = this;
-  this.initPlugin_(function() {
+  this.initPlugin_(() => {
       if (!nassh.v2)
-        window.onbeforeunload = self.onBeforeUnload_.bind(self);
+        window.onbeforeunload = this.onBeforeUnload_.bind(this);
 
-      self.sendToPlugin_('startSession', [argv]);
+      this.sendToPlugin_('startSession', [argv]);
     });
 
   document.querySelector('#terminal').focus();
@@ -523,9 +515,8 @@ nassh.CommandInstance.prototype.dispatchMessage_ = function(
 };
 
 nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
-  var self = this;
-  function onPluginLoaded() {
-    self.io.println(nassh.msg('PLUGIN_LOADING_COMPLETE'));
+  var onPluginLoaded = () => {
+    this.io.println(nassh.msg('PLUGIN_LOADING_COMPLETE'));
     onComplete();
   };
 
@@ -544,9 +535,9 @@ nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
   this.plugin_.setAttribute('type', 'application/x-nacl');
   this.plugin_.addEventListener('load', onPluginLoaded);
   this.plugin_.addEventListener('message', this.onPluginMessage_.bind(this));
-  this.plugin_.addEventListener('crash', function (ev) {
+  this.plugin_.addEventListener('crash', (ev) => {
     console.log('plugin crashed');
-    self.exit(-1);
+    this.exit(-1);
   });
 
   document.body.insertBefore(this.plugin_, document.body.firstChild);
@@ -573,27 +564,26 @@ nassh.CommandInstance.prototype.onVTKeystroke_ = function(data) {
  */
 nassh.CommandInstance.prototype.createTtyStream = function(
     fd, allowRead, allowWrite, onOpen) {
-  var self = this;
   var arg = {
     fd: fd,
     allowRead: allowRead,
     allowWrite: allowWrite,
-    inputBuffer: self.inputBuffer_,
-    io: self.io
+    inputBuffer: this.inputBuffer_,
+    io: this.io
   };
 
   var stream = this.streams_.openStream(nassh.Stream.Tty, fd, arg, onOpen);
   if (allowRead) {
-    var onDataAvailable = function(isAvailable) {
+    var onDataAvailable = (isAvailable) => {
       // Send current read status to plugin.
-      self.sendToPlugin_('onReadReady', [fd, isAvailable]);
+      this.sendToPlugin_('onReadReady', [fd, isAvailable]);
     };
 
-    self.inputBuffer_.onDataAvailable.addListener(onDataAvailable);
+    this.inputBuffer_.onDataAvailable.addListener(onDataAvailable);
 
-    stream.onClose = function(reason) {
-      self.inputBuffer_.onDataAvailable.removeListener(onDataAvailable);
-      self.sendToPlugin_('onClose', [fd, reason]);
+    stream.onClose = (reason) => {
+      this.inputBuffer_.onDataAvailable.removeListener(onDataAvailable);
+      this.sendToPlugin_('onClose', [fd, reason]);
     };
   }
 
@@ -643,7 +633,7 @@ nassh.CommandInstance.prototype.exit = function(code) {
 
   this.io.println(nassh.msg('DISCONNECT_MESSAGE', [code]));
   this.io.println(nassh.msg('RECONNECT_MESSAGE'));
-  this.io.onVTKeystroke = function(string) {
+  this.io.onVTKeystroke = (string) => {
     var ch = string.toLowerCase();
     if (ch == 'r' || ch == ' ' || ch == '\x0d' /* enter */)
       this.reconnect(document.location.hash.substr(1));
@@ -663,7 +653,7 @@ nassh.CommandInstance.prototype.exit = function(code) {
       if (this.argv_.onExit)
         this.argv_.onExit(code);
     }
-  }.bind(this);
+  };
 };
 
 nassh.CommandInstance.prototype.onBeforeUnload_ = function(e) {
@@ -734,10 +724,9 @@ nassh.CommandInstance.prototype.onPlugin_.exit = function(code) {
  * In the future, the plugin may handle its own files.
  */
 nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
-  var self = this;
   var isAtty = false;
-  function onOpen(success) {
-    self.sendToPlugin_('onOpenFile', [fd, success, isAtty]);
+  var onOpen = (success) => {
+    this.sendToPlugin_('onOpenFile', [fd, success, isAtty]);
   }
 
   var DEV_TTY = '/dev/tty';
@@ -748,31 +737,29 @@ nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
   if (path == '/dev/random') {
     var stream = this.streams_.openStream(nassh.Stream.Random,
       fd, path, onOpen);
-    stream.onClose = function(reason) {
-      self.sendToPlugin_('onClose', [fd, reason]);
+    stream.onClose = (reason) => {
+      this.sendToPlugin_('onClose', [fd, reason]);
     };
   } else if (path == DEV_TTY || path == DEV_STDIN || path == DEV_STDOUT ||
              path == DEV_STDERR) {
     var allowRead = path == DEV_STDIN || path == DEV_TTY;
     var allowWrite = path == DEV_STDOUT || path == DEV_STDERR || path == DEV_TTY;
     isAtty = true;
-    var stream = self.createTtyStream(fd, allowRead, allowWrite, onOpen);
+    var stream = this.createTtyStream(fd, allowRead, allowWrite, onOpen);
   } else {
-    self.sendToPlugin_('onOpenFile', [fd, false, false]);
+    this.sendToPlugin_('onOpenFile', [fd, false, false]);
   }
 };
 
 nassh.CommandInstance.prototype.onPlugin_.openSocket = function(fd, host, port) {
-  var self = this;
   var stream = null;
 
   if (port == 0 && host == this.authAgentAppID_) {
     // Request for auth-agent connection.
     stream = this.streams_.openStream(nassh.Stream.SSHAgentRelay, fd,
-      {authAgentAppID: this.authAgentAppID_},
-        function onOpen(success) {
-          self.sendToPlugin_('onOpenSocket', [fd, success, false]);
-        });
+      {authAgentAppID: this.authAgentAppID_}, (success) => {
+        this.sendToPlugin_('onOpenSocket', [fd, success, false]);
+      });
   } else {
     // Regular relay connection request.
     if (!this.relay_) {
@@ -780,18 +767,17 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(fd, host, port) 
       return;
     }
 
-    stream = this.relay_.openSocket(fd, host, port,
-        function onOpen(success) {
-          self.sendToPlugin_('onOpenSocket', [fd, success, false]);
-        });
+    stream = this.relay_.openSocket(fd, host, port, (success) => {
+      this.sendToPlugin_('onOpenSocket', [fd, success, false]);
+    });
   }
 
-  stream.onDataAvailable = function(data) {
-    self.sendToPlugin_('onRead', [fd, data]);
+  stream.onDataAvailable = (data) => {
+    this.sendToPlugin_('onRead', [fd, data]);
   };
 
-  stream.onClose = function(reason) {
-    self.sendToPlugin_('onClose', [fd, reason]);
+  stream.onClose = (reason) => {
+    this.sendToPlugin_('onClose', [fd, reason]);
   };
 };
 
@@ -801,7 +787,6 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(fd, host, port) 
  * This is used to write to HTML5 Filesystem files.
  */
 nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
-  var self = this;
   var stream = this.streams_.getStreamByFd(fd);
 
   if (!stream) {
@@ -809,16 +794,15 @@ nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
     return;
   }
 
-  stream.asyncWrite(data, function(writeCount) {
-      self.sendToPlugin_('onWriteAcknowledge', [fd, writeCount]);
-    }, 100);
+  stream.asyncWrite(data, (writeCount) => {
+    this.sendToPlugin_('onWriteAcknowledge', [fd, writeCount]);
+  }, 100);
 };
 
 /**
  * Plugin wants to read from a fd.
  */
 nassh.CommandInstance.prototype.onPlugin_.read = function(fd, size) {
-  var self = this;
   var stream = this.streams_.getStreamByFd(fd);
 
   if (!stream) {
@@ -826,9 +810,9 @@ nassh.CommandInstance.prototype.onPlugin_.read = function(fd, size) {
     return;
   }
 
-  stream.asyncRead(size, function(b64bytes) {
-      self.sendToPlugin_('onRead', [fd, b64bytes]);
-    });
+  stream.asyncRead(size, (b64bytes) => {
+    this.sendToPlugin_('onRead', [fd, b64bytes]);
+  });
 };
 
 /**

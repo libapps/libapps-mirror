@@ -117,7 +117,7 @@ nassh.ProfilePreferenceManager.prototype = {
 };
 
 nassh.ProfilePreferenceManager.prototype.readStorage = function(opt_callback) {
-  var appendOption = function(str) {
+  var appendOption = (str) => {
     var options = this.get('relay-options');
     if (options) {
       options += ' ' + str;
@@ -126,9 +126,9 @@ nassh.ProfilePreferenceManager.prototype.readStorage = function(opt_callback) {
     }
 
     this.set('relay-option', options);
-  }.bind(this);
+  };
 
-  var onRead = function() {
+  var onRead = () => {
     var host = this.get('relay-host');
     if (host) {
       console.warn('Merging relay-host preference with relay-options');
@@ -145,7 +145,7 @@ nassh.ProfilePreferenceManager.prototype.readStorage = function(opt_callback) {
 
     if (opt_callback)
       opt_callback();
-  }.bind(this);
+  };
 
   lib.PreferenceManager.prototype.readStorage.call(this, onRead);
 };
