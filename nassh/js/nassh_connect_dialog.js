@@ -56,6 +56,8 @@ nassh.ConnectDialog = function(messagePort) {
 
   // Cached DOM nodes.
   this.form_ = document.querySelector('form');
+  this.mountButton_ = document.querySelector('#mount');
+  this.unmountButton_ = document.querySelector('#unmount');
   this.connectButton_ = document.querySelector('#connect');
   this.deleteButton_ = document.querySelector('#delete');
   this.optionsButton_ = document.querySelector('#options');
@@ -211,6 +213,10 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
   this.deleteButton_.addEventListener('keypress',
                                       this.onButtonKeypress_.bind(this));
 
+  this.mountButton_.addEventListener('click',
+                                     this.onMountClick_.bind(this));
+  this.unmountButton_.addEventListener('click',
+                                     this.onUnmountClick_.bind(this));
   this.connectButton_.addEventListener('click',
                                        this.onConnectClick_.bind(this));
   this.deleteButton_.addEventListener('click',
@@ -324,6 +330,43 @@ nassh.ConnectDialog.prototype.enableButton_ = function(button, state) {
 };
 
 /**
+ * Change the display state of one of our <div role='button'> elements.
+ */
+nassh.ConnectDialog.prototype.displayButton_ = function(button, state) {
+  if (state) {
+    button.style.display = 'inline';
+    button.setAttribute('tabindex', '0');
+  } else {
+    button.style.display = 'none';
+    button.setAttribute('tabindex', '-1');
+  }
+};
+
+/**
+ * Change the mounted state of the mount button.
+ */
+nassh.ConnectDialog.prototype.displayMountButton_ = function(state) {
+  if (!state) {
+    this.displayButton_(this.mountButton_, false);
+    this.displayButton_(this.unmountButton_, false);
+    return;
+  }
+
+  chrome.fileSystemProvider.getAll((fileSystems) => {
+    for (var i in fileSystems) {
+      if (fileSystems[i].fileSystemId == this.currentProfileRecord_.id) {
+        this.displayButton_(this.mountButton_, false);
+        this.displayButton_(this.unmountButton_, true);
+        return;
+      }
+    }
+    this.displayButton_(this.mountButton_, true);
+    this.displayButton_(this.unmountButton_, false);
+    this.enableButton_(this.mountButton_, this.form_.checkValidity());
+  });
+};
+
+/**
  * Persist the current form to prefs, even if it's invalid.
  */
 nassh.ConnectDialog.prototype.save = function() {
@@ -372,6 +415,32 @@ nassh.ConnectDialog.prototype.save = function() {
       this.currentProfileRecord_.prefs.set(name, changedFields[name]);
     }
   }
+};
+
+/**
+ * Mount if the form validates.
+ */
+nassh.ConnectDialog.prototype.mount = function() {
+  this.maybeCopyPlaceholders_();
+  this.save();
+
+  var items = {
+    '/nassh/connectDialog/lastProfileId': this.currentProfileRecord_.id
+  };
+  chrome.storage.local.set(items);
+
+  if (this.form_.checkValidity())
+    this.postMessage('mountProfile', [this.currentProfileRecord_.id]);
+};
+
+/**
+ * Unmount the SFTP connection.
+ */
+nassh.ConnectDialog.prototype.unmount = function() {
+  var options = {fileSystemId: this.currentProfileRecord_.id};
+  chrome.extension.getBackgroundPage().onUnmountRequested(options,
+    (success) => { this.displayMountButton_(true); },
+    (error) => { /* do nothing */ });
 };
 
 /**
@@ -523,7 +592,15 @@ nassh.ConnectDialog.prototype.syncForm_ = function() {
 };
 
 /**
- * Sync the enable state of the buttons.
+ * Checks whether the current machine can use the File System Provider API, and
+ * thus be able to be mounted.
+ */
+nassh.ConnectDialog.prototype.checkMountable_ = function() {
+  return chrome.fileSystemProvider !== undefined;
+};
+
+/**
+ * Sync the states of the buttons.
  */
 nassh.ConnectDialog.prototype.syncButtons_ = function() {
   this.enableButton_(
@@ -531,7 +608,7 @@ nassh.ConnectDialog.prototype.syncButtons_ = function() {
       document.activeElement.getAttribute('id') == 'shortcut-list');
 
   this.enableButton_(this.connectButton_, this.form_.checkValidity());
-
+  this.displayMountButton_(this.checkMountable_());
 };
 
 /**
@@ -796,6 +873,20 @@ nassh.ConnectDialog.prototype.onProfileIndexChanged = function(e) {
 nassh.ConnectDialog.prototype.onButtonKeypress_ = function(e) {
   if (e.charCode == 13 || e.charCode == 32)
     e.srcElement.click();
+};
+
+/**
+ * Someone clicked on the mount button.
+ */
+nassh.ConnectDialog.prototype.onMountClick_ = function(e) {
+  this.mount();
+};
+
+/**
+ * Someone clicked on the unmount button.
+ */
+nassh.ConnectDialog.prototype.onUnmountClick_ = function(e) {
+  this.unmount();
 };
 
 /**

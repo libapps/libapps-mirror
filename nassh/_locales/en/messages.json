@@ -206,6 +206,16 @@
     "description": "The keycap for the enter key, displayed on the connect button."
   },
 
+  "MOUNT_BUTTON_LABEL": {
+    "message": "SFTP Mount",
+    "description": "The label for the mount button."
+  },
+
+  "UNMOUNT_BUTTON_LABEL": {
+    "message": "Unmount SFTP",
+    "description": "The label for the unmount button."
+  },
+
   "CONNECT_BUTTON_LABEL": {
     "message": "Connect",
     "description": "The label for the connect button."
@@ -357,6 +367,22 @@
   "RECONNECT_MESSAGE": {
     "message": "(R)econnect, (C)hoose another connection, or E(x)it?",
     "description": "Message displayed after a connection closes"
+  },
+
+  "CONNECT_OR_EXIT_MESSAGE": {
+    "message": "(C)hoose another connection or E(x)it?",
+    "description": "Message displayed after a connection closes and the user cannot reconnect"
+  },
+
+  "MOUNTED_MESSAGE": {
+    "message": "Mounted!",
+    "description": "Message displayed after a file system is mounted"
+  },
+
+
+  "ALREADY_MOUNTED_MESSAGE": {
+    "message": "File system is already mounted!",
+    "description": "Message displayed after an existing file system tries to mount again"
   },
 
   "PREFERENCES_HEADER": {

@@ -68,7 +68,7 @@ lib.rtdep('lib.f');
  * 6. Writes are queued up and sent to /write.
  */
 
-nassh.GoogleRelay = function(io, optionString) {
+nassh.GoogleRelay = function(io, optionString, relayLocation, relayStorage) {
   this.io = io;
   this.options = nassh.GoogleRelay.parseOptionString(optionString);
   this.proxyHost = this.options['--proxy-host'];
@@ -79,6 +79,8 @@ nassh.GoogleRelay = function(io, optionString) {
   this.reportConnectAttempts = this.options['--report-connect-attempts'];
   this.relayServer = null;
   this.relayServerSocket = null;
+  this.location = relayLocation;
+  this.storage = relayStorage;
 };
 
 nassh.GoogleRelay.parseOptionString = function(optionString) {
@@ -140,21 +142,21 @@ nassh.GoogleRelay.prototype.relayServerPattern =
 
 nassh.GoogleRelay.prototype.redirect = function(opt_resumePath) {
   var resumePath = opt_resumePath ||
-      document.location.href.substr(document.location.origin.length);
+    this.location.href.substr(this.location.origin.length);
 
   // Save off our destination in session storage before we leave for the
   // proxy page.
-  sessionStorage.setItem('googleRelay.resumePath', resumePath);
+  this.storage.setItem('googleRelay.resumePath', resumePath);
 
-  document.location = lib.f.replaceVars(
-      this.cookieServerPattern,
-      { host: this.proxyHost,
-        port: this.proxyPort,
-        protocol: this.useSecure ? 'https' : 'http',
-        // This returns us to nassh_google_relay.html so we can pick the relay
-        // host out of the reply.  From there we continue on to the resumePath.
-        return_to:  document.location.host
-      });
+  this.location.href = lib.f.replaceVars(
+    this.cookieServerPattern,
+    { host: this.proxyHost,
+      port: this.proxyPort,
+      protocol: this.useSecure ? 'https' : 'http',
+      // This returns us to nassh_google_relay.html so we can pick the relay
+      // host out of the reply.  From there we continue on to the resumePath.
+      return_to:  this.location.host
+    });
 };
 
 /**
@@ -167,12 +169,12 @@ nassh.GoogleRelay.prototype.redirect = function(opt_resumePath) {
  */
 nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
   var resumePath = opt_resumePath ||
-      document.location.href.substr(document.location.origin.length);
+      this.location.href.substr(this.location.origin.length);
 
   // This session storage item is created by /html/nassh_google_relay.html
   // if we succeed at finding a relay host.
-  var relayHost = sessionStorage.getItem('googleRelay.relayHost');
-  var relayPort = sessionStorage.getItem('googleRelay.relayPort') ||
+  var relayHost = this.storage.getItem('googleRelay.relayHost');
+  var relayPort = this.storage.getItem('googleRelay.relayPort') ||
       this.proxyPort;
 
   if (relayHost) {
@@ -202,7 +204,7 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
     }
 
     var expectedResumePath =
-        sessionStorage.getItem('googleRelay.resumePath');
+        this.storage.getItem('googleRelay.resumePath');
     if (expectedResumePath == resumePath) {
       var protocol = this.useSecure ? 'https' : 'http';
       var pattern = this.relayServerPattern;
@@ -224,9 +226,9 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
     }
   }
 
-  sessionStorage.removeItem('googleRelay.relayHost');
-  sessionStorage.removeItem('googleRelay.relayPort');
-  sessionStorage.removeItem('googleRelay.resumePath');
+  this.storage.removeItem('googleRelay.relayHost');
+  this.storage.removeItem('googleRelay.relayPort');
+  this.storage.removeItem('googleRelay.resumePath');
 
   if (this.relayServer)
     return true;

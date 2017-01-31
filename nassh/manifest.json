@@ -20,8 +20,14 @@
     "notifications",
     "storage",
     "terminalPrivate",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "fileSystemProvider"
   ],
+  "file_system_provider_capabilities": {
+    "source": "network",
+    "multiple_mounts": true,
+    "configurable": false
+  },
   "web_accessible_resources": [
     "html/crosh.html",
     "html/nassh.html",
@@ -35,7 +41,19 @@
       "js/nassh_app.js",
       "js/nassh_executables.js",
       "js/nassh_preference_manager.js",
+      "js/nassh_stream.js",
+      "js/nassh_stream_set.js",
+      "js/nassh_stream_tty.js",
+      "js/nassh_stream_sshagent_relay.js",
+      "js/nassh_stream_google_relay.js",
       "js/nassh_nassh.js",
+      "js/nassh_google_relay.js",
+      "js/nassh_sftp_client.js",
+      "js/nassh_sftp_packet.js",
+      "js/nassh_sftp_packet_types.js",
+      "js/nassh_sftp_status.js",
+      "js/nassh_sftp_fsp.js",
+      "js/nassh_command_instance.js",
       "js/nassh_background.js"
     ]
   },

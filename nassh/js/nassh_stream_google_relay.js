@@ -50,7 +50,7 @@ nassh.Stream.GoogleRelay.prototype.asyncOpen_ = function(args, onComplete) {
   var onError = () => {
     console.error('Failed to get session id:', sessionRequest);
     onComplete(false);
-  }
+  };
 
   var onReady = () => {
     if (sessionRequest.readyState != XMLHttpRequest.DONE)
@@ -62,7 +62,7 @@ nassh.Stream.GoogleRelay.prototype.asyncOpen_ = function(args, onComplete) {
     this.sessionID_ = sessionRequest.responseText;
     this.resumeRead_();
     onComplete(true);
-  }
+  };
 
   sessionRequest.open('GET', this.relay_.relayServer +
                       'proxy?host=' + this.host_ + '&port=' + this.port_,

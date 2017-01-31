@@ -13,7 +13,7 @@ window.onload = function() {
   sessionStorage.setItem('googleRelay.relayHost', ary[1]);
   sessionStorage.setItem('googleRelay.relayPort', ary[2] || '');
 
-  var path = sessionStorage.getItem('googleRelay.resumePath')
+  var path = sessionStorage.getItem('googleRelay.resumePath');
   if (!path) {
     console.error('Nowhere to resume to!');
     return;

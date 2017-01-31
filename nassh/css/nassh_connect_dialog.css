@@ -150,3 +150,8 @@ a:hover {
 #field-identity {
   min-width: 15em;
 }
+
+#mount,
+#unmount {
+  display: none;
+}

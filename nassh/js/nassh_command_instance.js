@@ -28,8 +28,8 @@ nassh.CommandInstance = function(argv) {
   // Command environment.
   this.environment_ = argv.environment || {};
 
-  // hterm.Terminal.IO instance.
-  this.io = null;
+  // hterm.Terminal.IO instance (can accept another hterm.Terminal.IO instance).
+  this.io = argv.terminalIO || null;
 
   // Relay manager.
   this.relay_ = null;
@@ -48,6 +48,24 @@ nassh.CommandInstance = function(argv) {
 
   // Application ID of auth agent.
   this.authAgentAppID_ = null;
+
+  // Whether the instance is a SFTP instance.
+  this.isSftp = argv.isSftp || false;
+
+  // SFTP Client for SFTP instances.
+  this.sftpClient = (this.isSftp) ? new nassh.sftp.Client() : null;
+
+  // Mount options for a SFTP instance.
+  this.mountOptions = argv.mountOptions || null;
+
+  // Session storage (can accept another hterm tab's sessionStorage).
+  this.storage = argv.terminalStorage || window.sessionStorage;
+
+  // Terminal Location reference (can accept another hterm tab's location).
+  this.terminalLocation = argv.terminalLocation || document.location;
+
+  // Terminal Window reference (can accept another hterm tab's window).
+  this.terminalWindow = argv.terminalWindow || window;
 
   // Root preference manager.
   this.prefs_ = new nassh.PreferenceManager();
@@ -148,10 +166,10 @@ nassh.CommandInstance.prototype.run = function() {
 
     // This item is set before we redirect away to login to a relay server.
     // If it's set now, it's the first time we're reloading after the redirect.
-    var pendingRelay = window.sessionStorage.getItem('nassh.pendingRelay');
-    window.sessionStorage.removeItem('nassh.pendingRelay');
+    var pendingRelay = this.storage.getItem('nassh.pendingRelay');
+    this.storage.removeItem('nassh.pendingRelay');
 
-    if (!argstr || (window.sessionStorage.getItem('nassh.promptOnReload') &&
+    if (!argstr || (this.storage.getItem('nassh.promptOnReload') &&
                     !pendingRelay)) {
       // If promptOnReload is set or we haven't gotten the destination
       // as an argument then we need to ask the user for the destination.
@@ -160,7 +178,7 @@ nassh.CommandInstance.prototype.run = function() {
       // displayed the dialog, so we can re-display it if the user reloads
       // the page.  (Items in sessionStorage are scoped to the tab, kept
       // between page reloads, and discarded when the tab goes away.)
-      window.sessionStorage.setItem('nassh.promptOnReload', 'yes');
+      this.storage.setItem('nassh.promptOnReload', 'yes');
 
       this.promptForDestination_();
     } else if (!this.connectToArgString(argstr)) {
@@ -294,15 +312,89 @@ nassh.CommandInstance.prototype.promptForDestination_ = function(opt_default) {
 };
 
 nassh.CommandInstance.prototype.connectToArgString = function(argstr) {
+  var isSftp = this.storage.getItem('nassh.isSftp');
+  this.storage.removeItem('nassh.isSftp');
+
   var ary = argstr.match(/^profile-id:([a-z0-9]+)(\?.*)?/i);
   var rv;
   if (ary) {
-    rv = this.connectToProfile(ary[1], ary[2]);
+
+    if (isSftp) {
+      rv = this.mountProfile(ary[1], ary[2]);
+    } else {
+      rv = this.connectToProfile(ary[1], ary[2]);
+    }
+
   } else {
-    rv = this.connectToDestination(argstr);
+
+    if (isSftp) {
+      rv = this.mountDestination(argstr);
+    } else {
+      rv = this.connectToDestination(argstr);
+    }
+
   }
 
   return rv;
+};
+
+/**
+ * Mount a remote host given a profile id. Creates a new SFTP CommandInstance
+ * that runs in the background page.
+ */
+nassh.CommandInstance.prototype.mountProfile = function(
+    profileID, querystr) {
+
+  var onReadStorage = () => {
+    // TODO(rginda): Soft fail on unknown profileID.
+    var prefs = this.prefs_.getProfile(profileID);
+
+    document.querySelector('#terminal').focus();
+
+    if (chrome.extension.getBackgroundPage()
+        .nassh.sftp.fsp.sftpInstances[prefs.id]) {
+      this.io.println(nassh.msg('ALREADY_MOUNTED_MESSAGE'));
+      this.exit(1, true);
+      return;
+    }
+
+    this.terminalLocation.hash = 'profile-id:' + profileID;
+    document.title = prefs.get('description') + ' - ' +
+      this.manifest_.name + ' ' + this.manifest_.version;
+
+    var args = {
+      argv: {
+        terminalIO: this.io,
+        terminalStorage: this.storage,
+        terminalLocation: this.terminalLocation,
+        terminalWindow: this.terminalWindow,
+        isSftp: true,
+        mountOptions: {
+          fileSystemId: prefs.id,
+          displayName: prefs.get('description'),
+          writable: true
+        }
+      },
+      connectOptions: {
+        username: prefs.get('username'),
+        hostname: prefs.get('hostname'),
+        port: prefs.get('port'),
+        relayOptions: prefs.get('relay-options'),
+        identity: prefs.get('identity'),
+        argstr: prefs.get('argstr'),
+        terminalProfile: prefs.get('terminal-profile'),
+        authAgentAppID: prefs.get('auth-agent-appid')
+      }
+    };
+
+    chrome.extension.getBackgroundPage()
+      .nassh.sftp.fsp.createSftpInstance(args);
+  };
+
+  // Re-read prefs from storage in case they were just changed in the connect
+  // dialog.
+  this.prefs_.readStorage(onReadStorage);
+  return true;
 };
 
 /**
@@ -315,9 +407,11 @@ nassh.CommandInstance.prototype.connectToProfile = function(
     // TODO(rginda): Soft fail on unknown profileID.
     var prefs = this.prefs_.getProfile(profileID);
 
+    document.querySelector('#terminal').focus();
+
     // We have to set the url here rather than in connectToArgString, because
     // some callers will come directly to connectToProfile.
-    document.location.hash = 'profile-id:' + profileID;
+    this.terminalLocation.hash = 'profile-id:' + profileID;
 
     document.title = prefs.get('description') + ' - ' +
       this.manifest_.name + ' ' + this.manifest_.version;
@@ -350,7 +444,7 @@ nassh.CommandInstance.prototype.connectToProfile = function(
  */
 nassh.CommandInstance.prototype.connectToDestination = function(destination) {
   if (destination == 'crosh') {
-    document.location = 'crosh.html'
+    this.terminalLocation = 'crosh.html';
     return true;
   }
 
@@ -362,7 +456,7 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
 
   // We have to set the url here rather than in connectToArgString, because
   // some callers may come directly to connectToDestination.
-  document.location.hash = destination;
+  this.terminalLocation.hash = destination;
 
   var relayOptions = '';
   if (ary[4]) {
@@ -381,6 +475,62 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
 };
 
 /**
+ * Mount a remote host given a destination string.
+ *
+ * @param {string} destination A string of the form username@host[:port].
+ * @return {boolean} True if we were able to parse the destination string,
+ *     false otherwise.
+ */
+nassh.CommandInstance.prototype.mountDestination = function(destination) {
+  if (destination == 'crosh') {
+    this.terminalLocation = 'crosh.html';
+    return true;
+  }
+
+  var ary = destination.match(
+      /^([^@]+)@([^:@]+)(?::(\d+))?(?:@([^:]+)(?::(\d+))?)?$/);
+
+  if (!ary)
+    return false;
+
+  // We have to set the url here rather than in connectToArgString, because
+  // some callers may come directly to connectToDestination.
+  this.terminalLocation.hash = destination;
+
+  var relayOptions = '';
+  if (ary[4]) {
+    relayOptions = '--proxy-host=' + ary[4];
+
+    if (ary[5])
+      relayOptions += ' --proxy-port=' + ary[5];
+  }
+
+  var args = {
+    argv: {
+      terminalIO: this.io,
+      terminalStorage: this.storage,
+      terminalLocation: this.terminalLocation,
+      terminalWindow: this.terminalWindow,
+      isSftp: true,
+      mountOptions: {
+        fileSystemId: ary[1] + ary[2],
+        displayName: ary[1] + ary[2],
+        writable: true
+      }
+    },
+    connectOptions: {
+      username: ary[1],
+      hostname: ary[2],
+      port: ary[3],
+      relayOptions: relayOptions
+    }
+  };
+
+  return chrome.extension.getBackgroundPage().
+    nassh.sftp.fsp.createSftpInstance(args);
+};
+
+/**
  * Initiate a connection to a remote host.
  *
  * @param {string} username The username to provide.
@@ -396,12 +546,14 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   if (params.hostname == '>crosh') {
     // TODO: This will need to be done better.  document.location changes don't
     // work in v2 apps.
-    document.location = 'crosh.html';
+    this.terminalLocation = 'crosh.html';
     return;
   }
 
   if (params.relayOptions) {
-    var relay = new nassh.GoogleRelay(this.io, params.relayOptions);
+    var relay = new nassh.GoogleRelay(this.io, params.relayOptions,
+                                      this.terminalLocation,
+                                      this.storage);
 
     // TODO(rginda): The `if (relay.proxyHost)` test is part of a goofy hack
     // to add the --ssh-agent param to the relay-options pref.  --ssh-agent has
@@ -428,7 +580,8 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
 
         // If we're going to have to redirect for the relay then we should make
         // sure not to re-prompt for the destination when we return.
-        sessionStorage.setItem('nassh.pendingRelay', 'yes');
+        this.storage.setItem('nassh.pendingRelay', 'yes');
+        this.storage.setItem('nassh.isSftp', 'yes');
         this.relay_.redirect();
         return true;
       }
@@ -468,7 +621,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
 
   // Disable IP address check for connection through proxy.
   if (argv.useJsSocket)
-    argv.arguments.push("-o CheckHostIP=no");
+    argv.arguments.push('-o CheckHostIP=no');
 
   var commandArgs;
   if (params.argstr) {
@@ -487,17 +640,23 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     argv.arguments.push('-p' + params.port);
 
   argv.arguments.push(params.username + '@' + params.hostname);
+
+  if (this.isSftp) {
+    argv.arguments.push('-s', 'sftp');
+  }
+
   if (commandArgs)
     argv.arguments.push(commandArgs);
 
   this.initPlugin_(() => {
       if (!nassh.v2)
-        window.onbeforeunload = this.onBeforeUnload_.bind(this);
+        this.terminalWindow.addEventListener('beforeunload', this.onBeforeUnload);
 
       this.sendToPlugin_('startSession', [argv]);
+      if (this.isSftp) {
+        this.sftpClient.initConnection(this.plugin_);
+      }
     });
-
-  document.querySelector('#terminal').focus();
 
   return true;
 };
@@ -624,34 +783,59 @@ nassh.CommandInstance.prototype.onTerminalResize_ = function(width, height) {
 /**
  * Exit the nassh command.
  */
-nassh.CommandInstance.prototype.exit = function(code) {
+nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
   if (!nassh.v2)
-    window.onbeforeunload = null;
+    this.terminalWindow.removeEventListener('beforeunload', this.onBeforeUnload_);
 
   // Close all streams upon exit.
   this.streams_.closeAllStreams();
 
-  this.io.println(nassh.msg('DISCONNECT_MESSAGE', [code]));
-  this.io.println(nassh.msg('RECONNECT_MESSAGE'));
-  this.io.onVTKeystroke = (string) => {
-    var ch = string.toLowerCase();
-    if (ch == 'r' || ch == ' ' || ch == '\x0d' /* enter */)
-      this.reconnect(document.location.hash.substr(1));
-
-    if (ch == 'c' || ch == '\x12' /* ctrl-r */) {
-      nassh.reloadWindow();
-      return;
+  if (this.isSftp) {
+    if (nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId]) {
+      delete nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId];
     }
 
-    if (ch == 'e' || ch == 'x' || ch == '\x1b' /* ESC */ ||
-        ch == '\x17' /* C-w */) {
-      if (this.exited_)
-        return;
+    console.log(nassh.msg('DISCONNECT_MESSAGE', [code]));
+    return;
+  } else {
+    this.io.println(nassh.msg('DISCONNECT_MESSAGE', [code]));
+  }
 
-      this.exited_ = true;
-      this.io.pop();
-      if (this.argv_.onExit)
-        this.argv_.onExit(code);
+  if (noReconnect) {
+    this.io.println(nassh.msg('CONNECT_OR_EXIT_MESSAGE'));
+  } else {
+    this.io.println(nassh.msg('RECONNECT_MESSAGE'));
+  }
+
+  this.io.onVTKeystroke = (string) => {
+    var ch = string.toLowerCase();
+    switch (ch) {
+      case 'c':
+      case '\x12': // ctrl-r
+        nassh.reloadWindow();
+        break;
+
+      case 'e':
+      case 'x':
+      case '\x1b': // ESC
+      case '\x17': // ctrl-w
+        if (this.exited_) {
+          return;
+        }
+
+        this.exited_ = true;
+        this.io.pop();
+        if (this.argv_.onExit) {
+          this.argv_.onExit(code);
+        }
+        break;
+
+      case 'r':
+      case ' ':
+      case '\x0d': // enter
+        if (!noReconnect) {
+          this.reconnect(this.terminalLocation.hash.substr(1));
+        }
     }
   };
 };
@@ -684,7 +868,19 @@ nassh.CommandInstance.prototype.onPluginMessage_ = function(e) {
 nassh.CommandInstance.prototype.onConnectDialog_ = {};
 
 /**
- * Sent from the dialog when the user chooses a profile.
+ * Sent from the dialog when the user chooses to mount a profile.
+ */
+nassh.CommandInstance.prototype.onConnectDialog_.mountProfile = function(
+    dialogFrame, profileID) {
+  dialogFrame.close();
+
+  if (!this.mountProfile(profileID)) {
+    this.promptForDestination_();
+  }
+};
+
+/**
+ * Sent from the dialog when the user chooses to connect to a profile.
  */
 nassh.CommandInstance.prototype.onConnectDialog_.connectToProfile = function(
     dialogFrame, profileID) {
@@ -724,7 +920,7 @@ nassh.CommandInstance.prototype.onPlugin_.exit = function(code) {
  * In the future, the plugin may handle its own files.
  */
 nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
-  var isAtty = false;
+  var isAtty = true;
   var onOpen = (success) => {
     this.sendToPlugin_('onOpenFile', [fd, success, isAtty]);
   }
@@ -744,7 +940,9 @@ nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
              path == DEV_STDERR) {
     var allowRead = path == DEV_STDIN || path == DEV_TTY;
     var allowWrite = path == DEV_STDOUT || path == DEV_STDERR || path == DEV_TTY;
-    isAtty = true;
+    if (this.isSftp && path != DEV_TTY) {
+      isAtty = false;
+    }
     var stream = this.createTtyStream(fd, allowRead, allowWrite, onOpen);
   } else {
     this.sendToPlugin_('onOpenFile', [fd, false, false]);
@@ -788,6 +986,11 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(fd, host, port) 
  * This is used to write to HTML5 Filesystem files.
  */
 nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
+  if (this.isSftp && !this.sftpClient.isInitialised
+      && isSftpInitResponse(data)) {
+    this.onSftpInitialised();
+  }
+
   var stream = this.streams_.getStreamByFd(fd);
 
   if (!stream) {
@@ -799,6 +1002,51 @@ nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
     this.sendToPlugin_('onWriteAcknowledge', [fd, writeCount]);
   }, 100);
 };
+
+/**
+ * Checks to see if the plugin responded with a VERSION SFTP packet.
+ */
+function isSftpInitResponse(data) {
+  var packet = new nassh.sftp.Packet(atob(data));
+  var byteArray = packet.toByteArray();
+
+  // returns true if the packet has a valid length and is of type VERSION (2).
+  return byteArray[3] == byteArray.length - 4 && byteArray[4] == 2;
+}
+
+/**
+ * SFTP Initlisation handler. Mounts the SFTP connection as a file system.
+ */
+nassh.CommandInstance.prototype.onSftpInitialised = function() {
+  // Mount file system.
+  chrome.fileSystemProvider.mount(this.mountOptions);
+
+  // Add this instance to list of SFTP instances.
+  nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId] = this;
+
+  // Update stdout stream to output to the SFTP Client.
+  this.streams_.getStreamByFd(1).setIo(this.sftpClient);
+
+  this.io.showOverlay(nassh.msg('MOUNTED_MESSAGE') + ' '
+                      + nassh.msg('CONNECT_OR_EXIT_MESSAGE'), null);
+
+  this.io.onVTKeystroke = (string) => {
+    var ch = string.toLowerCase();
+    switch (ch) {
+      case 'c':
+      case '\x12': // ctrl-r
+        this.terminalLocation.hash = '';
+        this.terminalLocation.reload();
+        break;
+
+      case 'e':
+      case 'x':
+      case '\x1b': // ESC
+      case '\x17': // ctrl-w
+        this.terminalWindow.close();
+    }
+  };
+}
 
 /**
  * Plugin wants to read from a fd.
