@@ -767,9 +767,10 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(fd, host, port) 
       return;
     }
 
-    stream = this.relay_.openSocket(fd, host, port, (success) => {
-      this.sendToPlugin_('onOpenSocket', [fd, success, false]);
-    });
+    stream = this.relay_.openSocket(fd, host, port, this.streams_,
+      (success) => {
+        this.sendToPlugin_('onOpenSocket', [fd, success, false]);
+      });
   }
 
   stream.onDataAvailable = (data) => {

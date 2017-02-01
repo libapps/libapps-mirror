@@ -238,9 +238,10 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
  * Return an nassh.Stream object that will handle the socket stream
  * for this relay.
  */
-nassh.GoogleRelay.prototype.openSocket = function(fd, host, port, onOpen) {
+nassh.GoogleRelay.prototype.openSocket = function(fd, host, port, streams,
+                                                  onOpen) {
   var streamClass = this.useWebsocket ? nassh.Stream.GoogleRelayWS :
                                         nassh.Stream.GoogleRelayXHR;
-  return nassh.Stream.openStream(streamClass,
+  return streams.openStream(streamClass,
       fd, {relay: this, host: host, port: port}, onOpen);
 };
