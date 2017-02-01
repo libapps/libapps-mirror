@@ -120,13 +120,13 @@ nassh.Nassh.prototype.initPlugin_ = function(onComplete) {
     } else {
       console.log('Unknown message from plugin: ' + JSON.stringify(msg));
     }
-  };
+  });
 
   this.plugin_.addEventListener('crash', (e) => {
     console.log('plugin crashed');
     this.executeContext.closeError('wam.FileSystem.Error.PluginCrash',
                                    [this.plugin_.exitStatus]);
-  };
+  });
 
   document.body.insertBefore(this.plugin_, document.body.firstChild);
 
@@ -210,7 +210,7 @@ nassh.Nassh.prototype.onPlugin_.write = function(fd, data) {
       // After exit, the last ack comes after the plugin has been destroyed.
       this.sendToPlugin_('onWriteAcknowledge', [fd, ackCount]);
     }
-  };
+  });
 };
 
 /**
