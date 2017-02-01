@@ -96,8 +96,9 @@ fi
 cat <<\EOF >>Makefile
 html: $(MANPAGES_IN:%=%.html)
 %.html: %
-	$(MANDOC) -Thtml -O man=%N.%S.html $< > $@.tmp && mv $@.tmp $@
+	$(MANDOC) -Thtml -I os='$(PACKAGE_NAME)' -O man=%N.%S.html $< > $@.tmp && mv $@.tmp $@
 EOF
+export PACKAGE_NAME
 
 # will fail on link stage due to missing reference to main - it is expected
 objects=(
