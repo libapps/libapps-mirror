@@ -59,7 +59,7 @@ nassh.Stream.GoogleRelay.prototype.asyncOpen_ = function(args, onComplete) {
     if (sessionRequest.status != 200)
       return onError();
 
-    this.sessionID_ = this.responseText;
+    this.sessionID_ = sessionRequest.responseText;
     this.resumeRead_();
     onComplete(true);
   }
