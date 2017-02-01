@@ -3,7 +3,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-set -x
+set -xe
 
 ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 
@@ -41,8 +41,8 @@ if [[ ($NACL_SDK_ROOT == "") || !(-d $NACL_SDK_ROOT) ]]; then
   pushd output
   if [[ !(-f naclsdk_linux.tar.bz2) || !(-d naclsdk) ]]; then
     rm -rf naclsdk_linux.tar.bz2 nacl_sdk && mkdir naclsdk
-    wget --no-check-certificate "$NACL_SDK"
-    tar xvjf naclsdk_linux.tar.bz2 -C naclsdk || exit 1
+    wget "$NACL_SDK"
+    tar xjf naclsdk_linux.tar.bz2 -C naclsdk
   fi
   export NACL_SDK_ROOT=$(echo $PWD/naclsdk/pepper_*)
   popd
@@ -53,8 +53,8 @@ if [[ ($NACL_PORTS == "") || !(-d $NACL_PORTS) ]]; then
   if [[ !(-d naclports/src) ]]; then
     rm -rf naclports && mkdir naclports
     cd naclports
-    gclient config --name=src https://chromium.googlesource.com/webports.git || exit 1
-    gclient sync --jobs=8 -r src@$NACLPORTS_REVISION || exit 1
+    gclient config --name=src https://chromium.googlesource.com/webports.git
+    gclient sync --jobs=8 -r src@$NACLPORTS_REVISION
     cd ..
   fi
   export NACL_PORTS=$PWD/naclports
@@ -63,12 +63,12 @@ fi
 
 build() {
   pushd $NACL_PORTS/src
-  NACL_ARCH=$1 TOOLCHAIN=$2 make glibc-compat openssl zlib jsoncpp || exit 1
+  NACL_ARCH=$1 TOOLCHAIN=$2 make glibc-compat openssl zlib jsoncpp
   popd
 
   pushd output
   if [[ !(-f libopenssh-$1.a) ]]; then
-    NACL_ARCH=$1 TOOLCHAIN=$2 ../nacl-openssh.sh || exit 1
+    NACL_ARCH=$1 TOOLCHAIN=$2 ../nacl-openssh.sh
   fi
   popd
 }
@@ -91,7 +91,7 @@ if [[ $PNACL == 1 ]]; then
 else
   readonly DEFAULT_TARGET=all_glibc
 fi
-make clean && make -j${ncpus} "$BUILD_ARGS" $DEFAULT_TARGET || exit 1
+make clean && make -j${ncpus} "$BUILD_ARGS" $DEFAULT_TARGET
 
 cd output
 mkdir -p hterm/plugin/docs/
@@ -101,25 +101,25 @@ if [[ $PNACL == 1 ]]; then
   rm -rf hterm/plugin/pnacl
   mkdir -p hterm/plugin/pnacl
 
-  cp -f ../ssh_client_newlib.nmf hterm/plugin/pnacl/ssh_client.nmf || exit 1
-  cp -f ssh_client_nl_x86_32.nexe hterm/plugin/pnacl/ || exit 1
-  cp -f ssh_client_nl_x86_64.nexe hterm/plugin/pnacl/ || exit 1
-  cp -f ssh_client_nl_arm.nexe hterm/plugin/pnacl/ || exit 1
+  cp -f ../ssh_client_newlib.nmf hterm/plugin/pnacl/ssh_client.nmf
+  cp -f ssh_client_nl_x86_32.nexe hterm/plugin/pnacl/
+  cp -f ssh_client_nl_x86_64.nexe hterm/plugin/pnacl/
+  cp -f ssh_client_nl_arm.nexe hterm/plugin/pnacl/
 else
   rm -rf hterm/plugin/nacl
   mkdir -p hterm/plugin/nacl
 
-  cp -f ../ssh_client.nmf hterm/plugin/nacl || exit 1
+  cp -f ../ssh_client.nmf hterm/plugin/nacl
 
   GLIBC_VERSION=`ls \
       $NACL_SDK_ROOT/toolchain/linux_x86_glibc/x86_64-nacl/lib32/libc.so.* \
           | sed s/.*libc.so.//`
-  sed -i s/xxxxxxxx/$GLIBC_VERSION/ hterm/plugin/nacl/ssh_client.nmf || exit 1
+  sed -i s/xxxxxxxx/$GLIBC_VERSION/ hterm/plugin/nacl/ssh_client.nmf
 
   cp -f ssh_client_x86_32.nexe \
-    hterm/plugin/nacl/ssh_client_x86_32.nexe || exit 1
+    hterm/plugin/nacl/ssh_client_x86_32.nexe
   cp -f ssh_client_x86_64.nexe \
-    hterm/plugin/nacl/ssh_client_x86_64.nexe || exit 1
+    hterm/plugin/nacl/ssh_client_x86_64.nexe
 
   mkdir hterm/plugin/nacl/lib32
   mkdir hterm/plugin/nacl/lib64
@@ -127,25 +127,25 @@ else
         libresolv.so.* libdl.so.* libnsl.so.* libm.so.* libc.so.*"
   for i in $LIBS; do
     cp -f $NACL_SDK_ROOT/toolchain/linux_x86_glibc/x86_64-nacl/lib32/$i \
-        hterm/plugin/nacl/lib32/ || exit 1
+        hterm/plugin/nacl/lib32/
     cp -f $NACL_SDK_ROOT/toolchain/linux_x86_glibc/x86_64-nacl/lib64/$i \
-        hterm/plugin/nacl/lib64/ || exit 1
+        hterm/plugin/nacl/lib64/
   done
 
   LIBS="libppapi_cpp.so libppapi_cpp_private.so libjsoncpp.so"
   for i in $LIBS; do
     cp -f $NACL_SDK_ROOT/lib/glibc_x86_32/Release/$i \
-        hterm/plugin/nacl/lib32/ || exit 1
+        hterm/plugin/nacl/lib32/
     cp -f $NACL_SDK_ROOT/lib/glibc_x86_64/Release/$i \
-        hterm/plugin/nacl/lib64/ || exit 1
+        hterm/plugin/nacl/lib64/
   done
 
   LIBS="libz.so.1 libcrypto.so.1.0.0"
   for i in $LIBS; do
     cp -f $NACL_SDK_ROOT/toolchain/linux_x86_glibc/i686-nacl/usr/lib/$i \
-        hterm/plugin/nacl/lib32/ || exit 1
+        hterm/plugin/nacl/lib32/
     cp -f $NACL_SDK_ROOT/toolchain/linux_x86_glibc/x86_64-nacl/usr/lib/$i \
-        hterm/plugin/nacl/lib64/ || exit 1
+        hterm/plugin/nacl/lib64/
   done
 fi
 

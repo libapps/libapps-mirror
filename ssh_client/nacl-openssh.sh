@@ -11,7 +11,7 @@
 # download, patch and build openssh for Native Client
 #
 
-set -x
+set -xe
 
 ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 
@@ -63,12 +63,12 @@ export MANDOC="${PWD}/${MANDOC_P}/mandoc"
 rm -rf $PACKAGE_NAME/
 if [[ ! -f ${PACKAGE_NAME}.tar.gz ]]
 then
-  wget $OPENSSH_MIRROR/${PACKAGE_NAME}.tar.gz -O ${PACKAGE_NAME}.tar.gz || exit 1
+  wget $OPENSSH_MIRROR/${PACKAGE_NAME}.tar.gz -O ${PACKAGE_NAME}.tar.gz
 fi
 tar xzf ${PACKAGE_NAME}.tar.gz
 
 cd $PACKAGE_NAME
-patch -p2 -i $PATCH_FILE || exit 1
+patch -p2 -i $PATCH_FILE
 
 if [ ${NACL_ARCH} = "pnacl" ] ; then
   export EXTRA_CFLAGS="-DHAVE_SETSID -DHAVE_GETNAMEINFO -DHAVE_GETADDRINFO \
@@ -90,7 +90,7 @@ fi
 ./configure --host=nacl --prefix=${NACLPORTS_PREFIX} \
     CFLAGS="-DHAVE_SIGACTION -DHAVE_TRUNCATE $EXTRA_CFLAGS" \
     LIBS=$EXTRA_LIBS \
-    ${EXTRA_CONFIGURE_FLAGS}  || exit 1
+    ${EXTRA_CONFIGURE_FLAGS}
 
 # Build the html man pages.
 cat <<\EOF >>Makefile
@@ -109,9 +109,8 @@ make -j${ncpus} \
     html \
     "${objects[@]}" \
     libssh.a \
-    openbsd-compat/libopenbsd-compat.a \
-    || exit 1
-$AR rcs ../libopenssh-${NACL_ARCH}.a "${objects[@]}" || exit 1
-cp -f libssh.a ../libssh-${NACL_ARCH}.a || exit 1
-cp -f openbsd-compat/libopenbsd-compat.a ../libopenbsd-compat-${NACL_ARCH}.a || exit 1
+    openbsd-compat/libopenbsd-compat.a
+$AR rcs ../libopenssh-${NACL_ARCH}.a "${objects[@]}"
+cp -f libssh.a ../libssh-${NACL_ARCH}.a
+cp -f openbsd-compat/libopenbsd-compat.a ../libopenbsd-compat-${NACL_ARCH}.a
 cp -f *.[0-9].html ../
