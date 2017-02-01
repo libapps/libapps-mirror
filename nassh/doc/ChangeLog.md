@@ -1,3 +1,13 @@
+# 0.8.35.0, 2017-01-31, hterm 1.61 + sftp prep.
+
+* Bump min Chrome version to 41 since we don't test on anything older.
+* Rebuilt ssh_client plugins to include some fd related changes.
+* Update to hterm 1.61.  Fixes missing last line, and adds clickable URLs.
+* Include ssh man pages in html form for users to read.
+* Fix --proxy-port passing for Google relays.
+* Add Ctrl-Shift-P shortcut in crosh for opening preferences.
+* Drop blocking of Ctrl-Shift-N shortcut in crosh.
+
 # 0.8.34.4, 2016-09-15, hterm 1.60.
 
 * Update to hterm 1.60.  This horizontal cursor position tracking.
