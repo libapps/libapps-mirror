@@ -1,3 +1,7 @@
+# 0.8.35.1, 2017-01-31, relay fixes.
+
+* Fix some logic bugs in stream reworking.
+
 # 0.8.35.0, 2017-01-31, hterm 1.61 + sftp prep.
 
 * Bump min Chrome version to 41 since we don't test on anything older.
