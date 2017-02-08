@@ -222,6 +222,8 @@ nassh.CommandInstance.prototype.reconnect = function(argstr) {
   this.stdoutAcknowledgeCount_ = 0;
   this.stderrAcknowledgeCount_ = 0;
 
+  this.exited_ = false;
+
   this.connectToArgString(argstr);
 };
 
@@ -784,6 +786,12 @@ nassh.CommandInstance.prototype.onTerminalResize_ = function(width, height) {
  * Exit the nassh command.
  */
 nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
+  if (this.exited_) {
+    return;
+  }
+
+  this.exited_ = true;
+
   if (!nassh.v2)
     this.terminalWindow.removeEventListener('beforeunload', this.onBeforeUnload_);
 
@@ -819,11 +827,6 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
       case 'x':
       case '\x1b': // ESC
       case '\x17': // ctrl-w
-        if (this.exited_) {
-          return;
-        }
-
-        this.exited_ = true;
         this.io.pop();
         if (this.argv_.onExit) {
           this.argv_.onExit(code);
