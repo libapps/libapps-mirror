@@ -583,7 +583,12 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
         // If we're going to have to redirect for the relay then we should make
         // sure not to re-prompt for the destination when we return.
         this.storage.setItem('nassh.pendingRelay', 'yes');
-        this.storage.setItem('nassh.isSftp', 'yes');
+
+        // If we're trying to mount an SFTP connection, remember it.
+        if (this.isSftp) {
+          this.storage.setItem('nassh.isSftp', 'yes');
+        }
+
         this.relay_.redirect();
         return true;
       }
