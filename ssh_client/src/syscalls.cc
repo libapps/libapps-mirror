@@ -250,7 +250,7 @@ int fcntl(int fd, int cmd, ...) {
   return ret;
 }
 
-int ioctl(int fd, long unsigned request, ...) {
+int ioctl(int fd, int request, ...) {
   LOG("ioctl: %d %d\n", fd, request);
   va_list ap;
   va_start(ap, request);

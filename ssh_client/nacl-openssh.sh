@@ -20,7 +20,7 @@ readonly OPENSSH_MIRROR=http://ftp5.usa.openbsd.org/pub/OpenBSD/OpenSSH/portable
 readonly ROOT=$PWD/..
 readonly PATCH_FILE=${ROOT}/${PACKAGE_NAME}.patch
 
-source $NACL_PORTS/src/build_tools/nacl_env.sh
+source $WEB_PORTS/src/build_tools/nacl-env.sh
 
 export CC=${NACLCC}
 export CXX=${NACLCXX}
@@ -28,17 +28,17 @@ export AR=${NACLAR}
 export RANLIB=${NACLRANLIB}
 
 if [ "${NACL_ARCH}" = "pnacl" ]; then
-  readonly NACL_TOOLCHAIN_INSTALL=${NACL_TOOLCHAIN_ROOT}
+  readonly NACL_TOOLCHAIN_INSTALL=${NACL_TOOLCHAIN_ROOT}/le32-nacl
 else
   readonly NACL_TOOLCHAIN_INSTALL=${NACL_TOOLCHAIN_ROOT}/${NACL_CROSS_PREFIX}
 fi
 
-readonly NACLPORTS_PREFIX=${NACL_TOOLCHAIN_INSTALL}/usr
-readonly NACLPORTS_INCLUDE=${NACLPORTS_PREFIX}/include
-readonly NACLPORTS_LIBDIR=${NACLPORTS_PREFIX}/lib
-readonly NACLPORTS_BIN=${NACLPORTS_PREFIX}/bin
+readonly WEBPORTS_PREFIX=${NACL_TOOLCHAIN_INSTALL}/usr
+readonly WEBPORTS_INCLUDE=${WEBPORTS_PREFIX}/include
+readonly WEBPORTS_LIBDIR=${WEBPORTS_PREFIX}/lib
+readonly WEBPORTS_BIN=${WEBPORTS_PREFIX}/bin
 
-export PKG_CONFIG_LIBDIR=${NACLPORTS_LIBDIR}
+export PKG_CONFIG_LIBDIR=${WEBPORTS_LIBDIR}
 export PKG_CONFIG_PATH=${PKG_CONFIG_LIBDIR}/pkgconfig
 export PATH=${NACL_BIN_PATH}:${PATH};
 
@@ -75,19 +75,19 @@ if [ ${NACL_ARCH} = "pnacl" ] ; then
                        -DHAVE_GETCWD -DHAVE_STATVFS -DHAVE_FSTATVFS \
                        -DHAVE_ENDGRENT -DHAVE_FD_MASK -include sys/cdefs.h \
                        ${NACL_CPPFLAGS} \
-                       -I${NACLPORTS_INCLUDE}/glibc-compat"
+                       -I${WEBPORTS_INCLUDE}/glibc-compat"
   export EXTRA_CONFIGURE_FLAGS="--without-stackprotect --without-hardening"
   export EXTRA_LIBS="-lglibc-compat"
   export ac_cv_func_inet_aton=no
   export ac_cv_func_inet_ntoa=no
   export ac_cv_func_inet_ntop=no
 else
-  export EXTRA_CFLAGS=-I${NACLPORTS_INCLUDE}
+  export EXTRA_CFLAGS=-I${WEBPORTS_INCLUDE}
   export EXTRA_CONFIGURE_FLAGS=
   export EXTRA_LIBS=
 fi
 
-./configure --host=nacl --prefix=${NACLPORTS_PREFIX} \
+./configure --host=nacl --prefix=${WEBPORTS_PREFIX} \
     CFLAGS="-DHAVE_SIGACTION -DHAVE_TRUNCATE $EXTRA_CFLAGS" \
     LIBS=$EXTRA_LIBS \
     ${EXTRA_CONFIGURE_FLAGS}

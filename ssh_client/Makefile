@@ -34,7 +34,7 @@ override LDFLAGS+=-lppapi_cpp -lppapi -lppapi_cpp_private -lutil -lcrypto -lz \
         -lresolv -ldl -lnsl -ljsoncpp -Loutput
 override WARNINGS+=-Wno-long-long -Wall -Wswitch-enum -Werror
 override CXXFLAGS+=-pthread -std=gnu++0x $(WARNINGS) -Iinclude \
-        -I$(NACL_SDK_ROOT)/include
+        -I$(NACL_SDK_ROOT)/include -I$(NACL_SDK_ROOT)/le32-nacl/include
 override CFLAGS+=-pthread $(WARNINGS) -Iinclude -I$(NACL_SDK_ROOT)/include
 
 OSNAME:=$(shell python $(NACL_SDK_ROOT)/tools/getos.py)
@@ -52,7 +52,7 @@ PNACL_TRANSLATE_FLAGS=-fdata-sections -ffunction-sections --gc-sections \
 PNACL_LDFLAGS:=-lppapi_cpp -lppapi -lcrypto -lppapi_cpp_private -lz -ljsoncpp \
         -Loutput -L$(NACL_SDK_ROOT)/lib/pnacl/Release --pnacl-disable-abi-check
 
-COMPAT_INC:=-I$(PNACL_TC_ROOT)/usr/include/glibc-compat
+COMPAT_INC:=-I$(PNACL_TC_ROOT)/le32-nacl/usr/include/glibc-compat
 PNACL_CXXFLAGS:=$(CXXFLAGS) -DUSE_NEWLIB $(COMPAT_INC)
 THIS_MAKEFILE:=$(abspath $(lastword $(MAKEFILE_LIST)))
 

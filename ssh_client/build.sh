@@ -10,8 +10,8 @@ ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 DEBUG=0
 PNACL=1
 
-NACLSDK_VERSION=35.0.1916.54
-NACLPORTS_REVISION=feabf015fa87420ae670056709f32972b4d4acf6
+NACLSDK_VERSION=49.0.2623.87
+WEBPORTS_REVISION=${NACLSDK_VERSION%%.*}
 
 CDS_ROOT="https://commondatastorage.googleapis.com"
 SDK_ROOT="$CDS_ROOT/nativeclient-mirror/nacl/nacl_sdk"
@@ -48,22 +48,22 @@ if [[ ($NACL_SDK_ROOT == "") || !(-d $NACL_SDK_ROOT) ]]; then
   popd
 fi
 
-if [[ ($NACL_PORTS == "") || !(-d $NACL_PORTS) ]]; then
+if [[ ($WEB_PORTS == "") || !(-d $WEB_PORTS) ]]; then
   pushd output
-  if [[ !(-d naclports/src) ]]; then
-    rm -rf naclports && mkdir naclports
-    cd naclports
+  if [[ !(-d webports/src) ]]; then
+    rm -rf webports && mkdir webports
+    cd webports
     gclient config --name=src https://chromium.googlesource.com/webports.git
-    gclient sync --jobs=8 -r src@$NACLPORTS_REVISION
+    gclient sync --jobs=8 -r src@pepper_$WEBPORTS_REVISION
     cd ..
   fi
-  export NACL_PORTS=$PWD/naclports
+  export WEB_PORTS=$PWD/webports
   popd
 fi
 
 build() {
-  pushd $NACL_PORTS/src
-  NACL_ARCH=$1 TOOLCHAIN=$2 make glibc-compat openssl zlib jsoncpp
+  pushd $WEB_PORTS/src
+  NACL_ARCH=$1 TOOLCHAIN=$2 make openssl zlib jsoncpp
   popd
 
   pushd output
