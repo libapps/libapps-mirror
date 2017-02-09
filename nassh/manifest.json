@@ -20,14 +20,8 @@
     "notifications",
     "storage",
     "terminalPrivate",
-    "unlimitedStorage",
-    "fileSystemProvider"
+    "unlimitedStorage"
   ],
-  "file_system_provider_capabilities": {
-    "source": "network",
-    "multiple_mounts": true,
-    "configurable": false
-  },
   "web_accessible_resources": [
     "html/crosh.html",
     "html/nassh.html",
