@@ -438,7 +438,8 @@ nassh.ConnectDialog.prototype.mount = function() {
  */
 nassh.ConnectDialog.prototype.unmount = function() {
   var options = {fileSystemId: this.currentProfileRecord_.id};
-  chrome.extension.getBackgroundPage().onUnmountRequested(options,
+  chrome.extension.getBackgroundPage().
+    nassh.sftp.fsp.onUnmountRequested(options,
     (success) => { this.displayMountButton_(true); },
     (error) => { /* do nothing */ });
 };

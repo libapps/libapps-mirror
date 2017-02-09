@@ -98,7 +98,9 @@ nassh.sftp.fsp.readDirectory = function(directoryHandle, client, sanitizeOptions
 
         for(var i = 0; i < response.fileCount; i++) {
           var file = response.files[i];
-          if (file.filename == '.' || file.filename == '..') {
+          // Skip over the file if it's a '.', '..' or link file
+          if (file.filename == '.' || file.filename == '..' ||
+              file.permissions & 0x2000) {
             continue;
           }
 
@@ -598,7 +600,7 @@ nassh.sftp.fsp.providerMethods = [
 
 // Loop over the provider methods and link them to their handlers.
 if (chrome.fileSystemProvider) {
-  nassh.sftp.fsp.providerMethods.forEach(function(item) {
-      chrome.fileSystemProvider[item].addListener(nassh.sftp.fsp[item]);
+  nassh.sftp.fsp.providerMethods.forEach(function(provider) {
+    chrome.fileSystemProvider[provider].addListener(nassh.sftp.fsp[provider]);
   });
 }
