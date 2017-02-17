@@ -1,3 +1,13 @@
+# 0.8.35.3, 2017-02-17, pre-sftp.
+
+* Rebuilt plugin again for working agent.
+* Initial sftp work for Chrome OS.  Not enabled in manifest.
+* Improve exit cleanup logic.
+
+# 0.8.35.2, 2017-02-02, rollback.
+
+* Not a real release.  Rolled back to 0.8.34.4 due to breakage with agents.
+
 # 0.8.35.1, 2017-01-31, relay fixes.
 
 * Fix some logic bugs in stream reworking.
