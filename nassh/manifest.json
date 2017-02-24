@@ -29,6 +29,7 @@
     "html/nassh_connect_dialog.html"
   ],
   "background": {
+    "persistent": false,
     "scripts": [
       "js/nassh_deps.concat.js",
       "js/nassh.js",
