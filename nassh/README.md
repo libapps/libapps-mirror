@@ -1,6 +1,6 @@
-# SecureShell (nassh)
+# Secure Shell (nassh)
 
-SecureShell (nassh) is a Chrome App that combines [hterm](/hterm/) with a NaCl
+Secure Shell (nassh) is a Chrome App that combines [hterm](/hterm/) with a NaCl
 build of OpenSSH to provide a PuTTY-like app for Chrome users.
 
 # Contact
@@ -10,9 +10,9 @@ can be used to contact other users and developers for questions.
 
 # Documentation
 
-* [ChangeLog](/nassh/doc/ChangeLog.md) -- List of interesting changes in each release
-* [FAQ](/nassh/doc/FAQ.md) -- Frequently Asked Questions
-* [Hacking](/nassh/doc/hack.md) -- Developing the SecureShell source
+* [ChangeLog](./doc/ChangeLog.md) -- List of interesting changes in each release
+* [FAQ](./doc/FAQ.md) -- Frequently Asked Questions
+* [Hacking](./doc/hack.md) -- Developing the Secure Shell source
 
 # Requirements
 

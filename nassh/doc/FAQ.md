@@ -84,7 +84,7 @@ is not answered here, please ask it on the
   doesn't maintain a public pool of relays.
 
   However, you're free to build one that works the same way.  There should be
-  enough documentation in [nassh_google_relay.js](/nassh/js/nassh_google_relay.js)
+  enough documentation in [nassh_google_relay.js](../js/nassh_google_relay.js)
   to reverse engineer a compatible relay.
 
   The good news is that someone has built an
@@ -124,7 +124,7 @@ is not answered here, please ask it on the
   session.  For bonus points, track down the troublesome sequence and
   include the offset into the log file.  For more information about how to
   do this, see the "Debugging escape sequences" section in the
-  [hack.md](/nassh/doc/hack.md) file in this directory.
+  [hack.md](hack.md) file in this directory.
 
 
 ## Is there a mailing list to discuss hterm or Secure Shell?
@@ -735,4 +735,4 @@ instead of `pnhechapfaindjhompbnflcldabbghjo`.
 
 ## What if I want to make changes to the source?
 
-  Read the [hack.md](/nassh/doc/hack.md) file in this directory.
+  Read the [hack.md](hack.md) file in this directory.
