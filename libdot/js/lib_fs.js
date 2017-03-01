@@ -11,11 +11,6 @@ lib.rtdep('lib.f.getStack');
  */
 lib.fs = {};
 
-if (window && typeof window.addEventListener == 'function') {
-  window.addEventListener('load',
-                          function() { lib.fs.installFileErrorToString() });
-}
-
 /**
  * Returns a function that console.log()'s its arguments, prefixed by |msg|.
  *
@@ -61,35 +56,6 @@ lib.fs.err = function(msg, opt_callback) {
 };
 
 /**
- * Install a sensible toString() on the FileError object.
- *
- * FileError.prototype.code is a numeric code describing the cause of the
- * error.  The FileError constructor has a named property for each possible
- * error code, but provides no way to map the code to the named property.
- * This toString() implementation fixes that.
- */
-lib.fs.installFileErrorToString = function() {
-  FileError.prototype.toString = function() {
-    return '[object FileError: ' + this.name + ']';
-  }
-};
-
-/**
- * Return a mnemonic code for a given FileError code.
- *
- * @param {integer} code A FileError code.
- * @return {string} The corresponding mnemonic value.
- */
-lib.fs.getFileErrorMnemonic = function(code) {
-  for (var key in FileError) {
-    if (key.search(/_ERR$/) != -1 && FileError[key] == code)
-      return key;
-  }
-
-  return code;
-};
-
-/**
  * Overwrite a file on an HTML5 filesystem.
  *
  * Replace the contents of a file with the string provided.  If the file
@@ -100,7 +66,7 @@ lib.fs.getFileErrorMnemonic = function(code) {
  * @param {string} path The path of the target file, relative to root.
  * @param {Blob|string} contents The new contents of the file.
  * @param {function()} onSuccess The function to invoke after success.
- * @param {function(FileError)} opt_onError Optional function to invoke if the
+ * @param {function(DOMError)} opt_onError Optional function to invoke if the
  *     operation fails.
  */
 lib.fs.overwriteFile = function(root, path, contents, onSuccess, opt_onError) {
@@ -142,7 +108,7 @@ lib.fs.overwriteFile = function(root, path, contents, onSuccess, opt_onError) {
  * @param {string} path The path of the target file, relative to root.
  * @param {function(string)} onSuccess The function to invoke after
  *     success.
- * @param {function(FileError)} opt_onError Optional function to invoke if the
+ * @param {function(DOMError)} opt_onError Optional function to invoke if the
  *     operation fails.
  */
 lib.fs.readFile = function(root, path, onSuccess, opt_onError) {
@@ -167,7 +133,7 @@ lib.fs.readFile = function(root, path, onSuccess, opt_onError) {
  * @param {string} path The path of the target file, relative to root.
  * @param {function(string)} opt_onSuccess Optional function to invoke after
  *     success.
- * @param {function(FileError)} opt_onError Optional function to invoke if the
+ * @param {function(DOMError)} opt_onError Optional function to invoke if the
  *     operation fails.
  */
 lib.fs.removeFile = function(root, path, opt_onSuccess, opt_onError) {
@@ -189,7 +155,7 @@ lib.fs.removeFile = function(root, path, opt_onSuccess, opt_onError) {
  * @param {string} path The path of the target file, relative to root.
  * @param {function(Object)} onSuccess The function to invoke after
  *     success.
- * @param {function(FileError)} opt_onError Optional function to invoke
+ * @param {function(DOMError)} opt_onError Optional function to invoke
  *     if the operation fails.
  */
 lib.fs.readDirectory = function(root, path, onSuccess, opt_onError) {
@@ -221,7 +187,7 @@ lib.fs.readDirectory = function(root, path, onSuccess, opt_onError) {
  * @param {string} path The path of the target file, relative to root.
  * @param {function(string)} onSuccess The function to invoke after
  *     success.
- * @param {function(FileError)} opt_onError Optional function to invoke if the
+ * @param {function(DOMError)} opt_onError Optional function to invoke if the
  *     operation fails.
  */
 lib.fs.getOrCreateFile = function(root, path, onSuccess, opt_onError) {
@@ -254,7 +220,7 @@ lib.fs.getOrCreateFile = function(root, path, onSuccess, opt_onError) {
  *     path.
  * @param {string} path The path of the target file, relative to root.
  * @param {function(string)} onSuccess The function to invoke after success.
- * @param {function(FileError)} opt_onError Optional function to invoke if the
+ * @param {function(DOMError)} opt_onError Optional function to invoke if the
  *     operation fails.
  */
 lib.fs.getOrCreateDirectory = function(root, path, onSuccess, opt_onError) {

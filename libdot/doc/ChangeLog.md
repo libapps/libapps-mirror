@@ -1,3 +1,17 @@
+# 1.10, 2017-03-01, Overdue release.
+
+* Since Chrome 53, the FileError interface has been removed.
+  All FS functions work with DOMError objects now.
+* Fix lib.colors.hexToRGB handling of FF fields.
+* Add Strings.prototype.codePointAt polyfill.
+* Improve surrogate pairs handling in lib.wc.strWidth.
+* Fix lib.colors.mix return value.
+* Fix lib.colors.rgbToHex handling of red values below 16.
+* Add lib.f.smartFloorDivide helper.
+* Update lib.f.getURL with newer Chrome versions.
+* Fix lib.rtdep behavior under Safari.
+* Add support for East Asian Ambigous characters in lib.wc.
+
 # 1.9, 2014-05-27, Add "@eval" directive to bin/concat.sh
 
 * Add an "@eval" directive which evaluates its operand with bash's eval
