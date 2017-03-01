@@ -446,7 +446,7 @@ nassh.CommandInstance.prototype.connectToProfile = function(
  */
 nassh.CommandInstance.prototype.connectToDestination = function(destination) {
   if (destination == 'crosh') {
-    this.terminalLocation = 'crosh.html';
+    this.terminalLocation.href = 'crosh.html';
     return true;
   }
 
@@ -485,7 +485,7 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
  */
 nassh.CommandInstance.prototype.mountDestination = function(destination) {
   if (destination == 'crosh') {
-    this.terminalLocation = 'crosh.html';
+    this.terminalLocation.href = 'crosh.html';
     return true;
   }
 
@@ -548,7 +548,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   if (params.hostname == '>crosh') {
     // TODO: This will need to be done better.  document.location changes don't
     // work in v2 apps.
-    this.terminalLocation = 'crosh.html';
+    this.terminalLocation.href = 'crosh.html';
     return;
   }
 
