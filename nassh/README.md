@@ -13,6 +13,7 @@ can be used to contact other users and developers for questions.
 * [ChangeLog](./doc/ChangeLog.md) -- List of interesting changes in each release
 * [FAQ](./doc/FAQ.md) -- Frequently Asked Questions
 * [Hacking](./doc/hack.md) -- Developing the Secure Shell source
+* [Options](./doc/options.md) -- Secure Shell command line options
 
 # Requirements
 
