@@ -1,3 +1,9 @@
+# 0.8.35.4, 2017-03-10, resource lite.
+
+* Switch background page to being non-persistent so it closes when not used.
+* Fix >crosh connection shortcut after sftp rework.
+* Update to libdot-1.10.  Fixes non-fatal, but annoying, FileError warnings.
+
 # 0.8.35.3, 2017-02-17, pre-sftp.
 
 * Rebuilt plugin again for working agent.
