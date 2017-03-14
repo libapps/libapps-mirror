@@ -24,10 +24,10 @@
  */
 
 /**
- * Root object in the unit test heirarchy, and keeper of the log object.
+ * Root object in the unit test hierarchy, and keeper of the log object.
  *
  * @param {lib.TestManager.Log} opt_log Optional lib.TestManager.Log object.
- *     Logs to the JavaScript console if ommitted.
+ *     Logs to the JavaScript console if omitted.
  */
 lib.TestManager = function(opt_log) {
   this.log = opt_log || new lib.TestManager.Log();
@@ -56,7 +56,7 @@ lib.TestManager.prototype.onTestRunComplete = function(testRun) {};
  * Destination for test case output.
  *
  * @param {function(string)} opt_logFunction Optional function to call to
- *     write a string to the log.  If ommitted, console.log is used.
+ *     write a string to the log.  If omitted, console.log is used.
  */
 lib.TestManager.Log = function(opt_logFunction) {
   this.logFunction_ = opt_logFunction || function(s) { console.log(s) };
@@ -476,7 +476,7 @@ lib.TestManager.TestRun = function(testManager, cx) {
 
   /**
    * Number of maximum failures.  The test run will stop when this number is
-   * reached.  If 0 or ommitted, the entire set of selected tests is run, even
+   * reached.  If 0 or omitted, the entire set of selected tests is run, even
    * if some fail.
    */
   this.maxFailures = 0;
@@ -980,7 +980,7 @@ lib.TestManager.Result.prototype.completeTest_ = function(status, opt_throw) {
  * @param {*} actual The actual measured value.
  * @param {*} expected The value expected.
  * @param {string} opt_name An optional name used to identify this
- *     assertion in the test log.  If ommitted it will be the file:line
+ *     assertion in the test log.  If omitted it will be the file:line
  *     of the caller.
  */
 lib.TestManager.Result.prototype.assertEQ = function(
@@ -1021,7 +1021,7 @@ lib.TestManager.Result.prototype.assertEQ = function(
  *
  * @param {boolean} actual The actual measured value.
  * @param {string} opt_name An optional name used to identify this
- *     assertion in the test log.  If ommitted it will be the file:line
+ *     assertion in the test log.  If omitted it will be the file:line
  *     of the caller.
  */
 lib.TestManager.Result.prototype.assert = function(actual, opt_name) {

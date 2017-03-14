@@ -18,7 +18,7 @@
  * @param {lib.Storage.*} storage The storage object to use as a backing
  *     store.
  * @param {string} opt_prefix The optional prefix to be used for all preference
- *     names.  The '/' character should be used to separate levels of heirarchy,
+ *     names.  The '/' character should be used to separate levels of hierarchy,
  *     if you're going to have that kind of thing.  If provided, the prefix
  *     should start with a '/'.  If not provided, it defaults to '/'.
  */
@@ -70,7 +70,7 @@ lib.PreferenceManager.prototype.DEFAULT_VALUE = new String('DEFAULT');
 /**
  * An individual preference.
  *
- * These objects are managed by the PreferenceManager, you shoudn't need to
+ * These objects are managed by the PreferenceManager, you shouldn't need to
  * handle them directly.
  */
 lib.PreferenceManager.Record = function(name, defaultValue) {
@@ -267,7 +267,7 @@ lib.PreferenceManager.prototype.definePreferences = function(defaults) {
  *     child ids.  It is also used in get/add/remove operations to identify the
  *     list of children to operate on.
  * @param {function} childFactory A function that will be used to generate
- *     instances of these childred.  The factory function will receive the
+ *     instances of these children.  The factory function will receive the
  *     parent lib.PreferenceManager object and a unique id for the new child
  *     preferences.
  */
@@ -708,7 +708,7 @@ lib.PreferenceManager.prototype.get = function(name) {
 };
 
 /**
- * Return all non-default preferences as a JSON onject.
+ * Return all non-default preferences as a JSON object.
  *
  * This includes any nested preference managers as well.
  */

@@ -422,7 +422,7 @@ nassh.Stream.GoogleRelayWS.prototype.recordAckTime_ = function(deltaTime) {
   this.ackTimesIndex_ = (this.ackTimesIndex_ + 1) % this.ackTimes_.length;
 
   if (this.ackTimesIndex_ == 0) {
-    // Filled the cicular buffer; compute average.
+    // Filled the circular buffer; compute average.
     var average = 0;
     for (var i = 0; i < this.ackTimes_.length; ++i)
       average += this.ackTimes_[i];

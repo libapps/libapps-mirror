@@ -5,7 +5,7 @@
 'use strict';
 
 /**
- * A general packet. Utilises an offset to keep track of data being read/written.
+ * A general packet. Utilizes an offset to keep track of data being read/written.
  */
 nassh.sftp.Packet = function(opt_packet) {
   this.offset_ = 0;

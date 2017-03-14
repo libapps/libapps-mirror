@@ -18,7 +18,7 @@ window.onload = function() {
  *
  * This class defines a command that can be run in an hterm.Terminal instance.
  * The Crosh command uses terminalPrivate extension API to create and use crosh
- * process on ChromeOS machine.
+ * process on Chrome OS machine.
  *
  *
  * @param {Object} argv The argument object passed in from the Terminal.
@@ -40,7 +40,7 @@ function Crosh(argv) {
 Crosh.croshBuiltinId = 'nkoccljplnhpfnfiajclkommnmllphnl';
 
 /**
- * Static initialier called from crosh.html.
+ * Static initializer called from crosh.html.
  *
  * This constructs a new Terminal instance and instructs it to run the Crosh
  * command.

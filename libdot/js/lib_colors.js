@@ -108,7 +108,7 @@ lib.colors.x11ToCSS = function(v) {
     // Pad out values with less than four digits.  This padding (probably)
     // matches xterm.  It's difficult to say for sure since xterm seems to
     // arrive at a padded value and then perform some combination of
-    // gamma correction, color space tranformation, and quantization.
+    // gamma correction, color space transformation, and quantization.
 
     if (v.length == 1) {
       // Single digits pad out to four by repeating the character.  "f" becomes

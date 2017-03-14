@@ -91,7 +91,7 @@
  *  - Spacing characters in the East Asian Wide (W) or East Asian Full-width (F)
  *    category as defined in Unicode Technical Report #11 have a column width of
  *    2.
- *  - East Asian Ambigous characters are taken into account if
+ *  - East Asian Ambiguous characters are taken into account if
  *    regardCjkAmbiguous flag is enabled. They have a column width of 2.
  *  - All remaining characters (including all printable ISO 8859-1 and WGL4
  *    characters, Unicode control characters, etc.) have a column width of 1.
@@ -101,7 +101,7 @@
 
 /**
  * This library relies on the use of codePointAt, which is not supported in
- * all browsers. Polyfil if not.  See
+ * all browsers. Polyfill if not.  See
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt#Polyfill
  */
 if (!String.prototype.codePointAt) {
@@ -154,7 +154,7 @@ lib.wc = {};
 // Width of a nul character.
 lib.wc.nulWidth = 0;
 
-// Width of a control charater.
+// Width of a control character.
 lib.wc.controlWidth = 0;
 
 // Flag whether to consider East Asian Ambiguous characters.
@@ -276,7 +276,7 @@ lib.wc.ambiguous = [
 /**
  * Binary search to check if the given unicode character is a space character.
  *
- * @param {interger} ucs A unicode character code.
+ * @param {integer} ucs A unicode character code.
  *
  * @return {boolean} True if the given character is a space character; false
  *     otherwise.
@@ -306,7 +306,7 @@ lib.wc.isSpace = function(ucs) {
  * Auxiliary function for checking if the given unicode character is a East
  * Asian Ambiguous character.
  *
- * @param {interger} ucs A unicode character code.
+ * @param {integer} ucs A unicode character code.
  *
  * @return {boolean} True if the given character is a East Asian Ambiguous
  * character.

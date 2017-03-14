@@ -1036,14 +1036,14 @@ BUG=chromium-os:28050,chromium-os:25122
   the keypress event, and sends whatever character code the browser thinks best.
   On Mac, this will depend on your keyboard locale.  Composed characters
   (requiring multiple keystrokes) aren't yet implemented.  'browser-key'
-  shoudn't be used in cases where Chrome uses Alt sequences for the browser.
+  shouldn't be used in cases where Chrome uses Alt sequences for the browser.
 
 # 0.7.7.1, 2012-04-10, rginda@chromium.org
 
 * Fix crosh.html/js to work with CSP.
 
 BUG=chromium-os:29179
-TEST=Install on ChromeOS, press Ctrl-Alt-T.
+TEST=Install on Chrome OS, press Ctrl-Alt-T.
 
 # 0.7.7.0, 2012-04-08, rginda@chromium.org
 

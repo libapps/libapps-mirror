@@ -104,7 +104,7 @@ wam.jsfs.dom.OpenContext.prototype.onDirError_ = function(error) {
 };
 
 /**
- * Called directly by the parent wam.jsfs.dom.FileSystem to initate the
+ * Called directly by the parent wam.jsfs.dom.FileSystem to initiate the
  * open.
  */
 wam.jsfs.dom.OpenContext.prototype.onOpen_ = function() {

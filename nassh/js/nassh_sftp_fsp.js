@@ -21,7 +21,7 @@ nassh.sftp.fsp.DATA_LIMIT = 32768;
 
 /**
  * Creates a new SFTP CommandInstance in the background page and connects to
- * the provided connection. Utilises the same hterm.Terminal.IO as the
+ * the provided connection. Utilizes the same hterm.Terminal.IO as the
  * foreground page to authenticate the user before commencing SFTP communication.
  */
 nassh.sftp.fsp.createSftpInstance = function(args) {
@@ -156,7 +156,7 @@ nassh.sftp.fsp.onWriteFileRequested = function(options, onSuccess, onError) {
 
   var writePromises = [];
   // Splits up the data to be written into nassh.sftp.fsp.DATA_LIMIT sized chunks
-  // and places them into multiple promises which will be resolved asyncronously.
+  // and places them into multiple promises which will be resolved asynchronously.
   for (var i = 0; i < options.data.byteLength; i += nassh.sftp.fsp.DATA_LIMIT) {
 
     var endSlice = i + nassh.sftp.fsp.DATA_LIMIT;
@@ -247,7 +247,7 @@ nassh.sftp.fsp.onTruncateRequested = function(options, onSuccess, onError) {
 };
 
 /**
- * Delte Entry Requested handler. Deletes the entry of the requested file path.
+ * Delete Entry Requested handler. Deletes the entry of the requested file path.
  * If the entry is a directory, deletes all sub-entries recursively.
  */
 nassh.sftp.fsp.onDeleteEntryRequested = function(options, onSuccess, onError) {
@@ -407,7 +407,7 @@ nassh.sftp.fsp.onReadFileRequested = function(options, onSuccess, onError) {
   var readPromises = [];
   var readLimit = options.offset + options.length;
   // Splits up the data to be read into nassh.sftp.fsp.DATA_LIMIT sized chunks
-  // and places them into multiple promises which will be resolved asyncronously.
+  // and places them into multiple promises which will be resolved asynchronously.
   for (var i = options.offset; i < readLimit; i += nassh.sftp.fsp.DATA_LIMIT) {
     readPromises.push(client.readFile(fileHandle, i, nassh.sftp.fsp.DATA_LIMIT));
   }
@@ -478,7 +478,7 @@ nassh.sftp.fsp.copyFile = function(sourcePath, targetPath, size, client) {
       var readWritePromises = [];
       // Splits up the data to be read and written into nassh.sftp.fsp.DATA_LIMIT
       // sized chunks and places them into multiple promises which will be
-      // resolved asyncronously.
+      // resolved asynchronously.
       for (var i = 0; i < size; i += nassh.sftp.fsp.DATA_LIMIT) {
         var offset = i;
         var readWritePromise = client.readFile(sourceHandle,

@@ -109,7 +109,7 @@ wam.InMessage.prototype.replyErrorValue = function(
 };
 
 /**
- * Internal bookeeping needed when the message is closed.
+ * Internal bookkeeping needed when the message is closed.
  */
 wam.InMessage.prototype.onClose_ = function() {
   if (!this.subject)

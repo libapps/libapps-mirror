@@ -9,8 +9,8 @@
  *
  * This tests the handling of UTF-8 encoded strings. By "UTF-8 encoded string"
  * it is meant a normal JS string where only the code points U+0000 through
- * U+00FF are used, and reprsent the byte values used in the UTF-8 encoding of
- * a Unicode string. For charcaters in the ASCII range, this is an identity
+ * U+00FF are used, and represent the byte values used in the UTF-8 encoding of
+ * a Unicode string. For characters in the ASCII range, this is an identity
  * encoding. For all others, this results in a series of Latin-1 characters
  * (U+0080 through U+00FF) for each.
  */

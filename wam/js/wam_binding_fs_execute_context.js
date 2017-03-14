@@ -65,7 +65,7 @@ wam.binding.fs.ExecuteContext = function(fileSystem) {
    */
   this.arg = null;
 
-  // The environtment variables for this execute context.
+  // The environment variables for this execute context.
   this.env_ = {};
 
   // The tty state for this execute context.

@@ -157,7 +157,7 @@ wam.transport.ChromePort.listen = function(whitelist, onConnect) {
     if (!wam.transport.ChromePort.onConnectCallback_)
       throw new Error('wam.transport.ChromePort is not listening.');
 
-    console.log('wam.transport.ChromePort.connect: listen cancelled');
+    console.log('wam.transport.ChromePort.connect: listen canceled');
 
     wam.transport.ChromePort.onListenCallback_ = null;
     wam.transport.ChromePort.connectWhitelist_ = null;

@@ -10,7 +10,7 @@
 * Add lib.f.smartFloorDivide helper.
 * Update lib.f.getURL with newer Chrome versions.
 * Fix lib.rtdep behavior under Safari.
-* Add support for East Asian Ambigous characters in lib.wc.
+* Add support for East Asian Ambiguous characters in lib.wc.
 
 # 1.9, 2014-05-27, Add "@eval" directive to bin/concat.sh
 

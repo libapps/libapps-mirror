@@ -72,7 +72,7 @@ wam.OutMessage.prototype.toValue = function() {
  * Prepare this message for sending, then send it.
  *
  * This is the correct way to cause a message to be sent.  Do not directly
- * call wam.Channel..sendMessage, as you'll end up skipping the bookeeping
+ * call wam.Channel..sendMessage, as you'll end up skipping the bookkeeping
  * done by this method.
  */
 wam.OutMessage.prototype.send = function() {
@@ -96,7 +96,7 @@ wam.OutMessage.prototype.send = function() {
 };
 
 /**
- * Internal bookeeping needed when the message is closed.
+ * Internal bookkeeping needed when the message is closed.
  */
 wam.OutMessage.prototype.onClose_ = function() {
   this.isOpen = false;

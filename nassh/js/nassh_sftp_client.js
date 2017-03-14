@@ -16,7 +16,7 @@ nassh.sftp = {};
   // The nacl plugin for communication.
   this.plugin_ = null;
 
-  // Whether the SFTP connection has been initialised
+  // Whether the SFTP connection has been initialized
   this.isInitialised = false;
 
   // The buffered packet data coming from the plugin.
@@ -81,7 +81,7 @@ nassh.sftp.Client.prototype.parseBuffer = function() {
  * onPacket handler. Will read the response packet's type and find the
  * requesting packet's callback. If the response packet is valid and has a valid
  * request id, it will be returned with the callback. Finding and executing
- * a callback will return true, else will return false if an error occured.
+ * a callback will return true, else will return false if an error occurred.
  */
 nassh.sftp.Client.prototype.onPacket = function(packet) {
   var packetType = packet.getUint8();
@@ -108,7 +108,7 @@ nassh.sftp.Client.prototype.onPacket = function(packet) {
 
 
 /**
- * Initialises SFTP connection.
+ * Initializes SFTP connection.
  */
 nassh.sftp.Client.prototype.initConnection = function(plugin) {
   this.plugin_ = plugin;
@@ -139,7 +139,7 @@ nassh.sftp.Client.prototype.sendToPlugin_ = function(name, args) {
 nassh.sftp.Client.prototype.sendRequest_ = function(type, data) {
   if (!this.isInitialised) {
     throw new Error('Tried sending a SFTP request before the connection had'
-                    + ' been initialised.');
+                    + ' been initialized.');
   }
 
   var requestId = this.requestId_++;

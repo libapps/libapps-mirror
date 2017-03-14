@@ -54,7 +54,7 @@ nassh.ColumnList.prototype.decorate = function(div) {
  */
 nassh.ColumnList.prototype.focus = function() {
   if (!this.div_)
-    throw 'Not intialized.';
+    throw 'Not initialized.';
 
   this.div_.focus();
 };
@@ -64,7 +64,7 @@ nassh.ColumnList.prototype.focus = function() {
  */
 nassh.ColumnList.prototype.addEventListener = function(var_args) {
   if (!this.div_)
-    throw 'Not intialized.';
+    throw 'Not initialized.';
 
   this.div_.addEventListener.apply(this.div_, arguments);
 };

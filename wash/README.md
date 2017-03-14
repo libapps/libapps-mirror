@@ -3,7 +3,7 @@
 This is wash.  It is yet-another shell environment for the web.  Wash's special
 trick is that it can "mount" virtual file systems using postMessage based IPC.
 
-It is accidentaly similar to Plan 9's file system, in that each origin comes
+It is accidentally similar to Plan 9's file system, in that each origin comes
 with it's own virtual filesystem that can contain data and executables.
 
 The actual IPC messages are JSON, and can be serialized over any transport.

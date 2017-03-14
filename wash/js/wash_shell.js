@@ -32,7 +32,7 @@ wash.Shell = function(executeContext) {
   this.foregroundContext_ = null;
 
   /**
-   * Fired when we're done with intialization.
+   * Fired when we're done with initialization.
    */
   this.onInit = new lib.Event(this.onInit_.bind(this));
 

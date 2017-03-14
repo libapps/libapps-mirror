@@ -13,7 +13,7 @@ var lib = {};
  * Map of "dependency" to ["source", ...].
  *
  * Each dependency is a object name, like "lib.fs", "source" is the url that
- * depdends on the object.
+ * depends on the object.
  */
 lib.runtimeDependencies_ = {};
 

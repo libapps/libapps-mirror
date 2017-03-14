@@ -484,7 +484,7 @@ nassh.ConnectDialog.prototype.maybeDirty_ = function(fieldName) {
 };
 
 /**
- * Invoke the mabyeCopyPlaceholder_ method for the fields we're willing
+ * Invoke the maybeCopyPlaceholder_ method for the fields we're willing
  * to bulk-default.
  */
 nassh.ConnectDialog.prototype.maybeCopyPlaceholders_ = function() {
@@ -810,7 +810,7 @@ nassh.ConnectDialog.prototype.onFileSystemFound_ = function(
 /**
  * User initiated file import.
  *
- * This is the onChange hander for the `input type="file"`
+ * This is the onChange handler for the `input type="file"`
  * (aka this.importFileInput_) control.
  */
 nassh.ConnectDialog.prototype.onImportFiles_ = function(e) {
@@ -979,7 +979,7 @@ nassh.ConnectDialog.prototype.onMessage_ = function(e) {
 nassh.ConnectDialog.prototype.onMessageName_ = {};
 
 /**
- * termianl-info: The terminal introduces itself.
+ * terminal-info: The terminal introduces itself.
  */
 nassh.ConnectDialog.prototype.onMessageName_['terminal-info'] = function(info) {
   this.mm_ = new lib.MessageManager(info.acceptLanguages);

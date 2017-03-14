@@ -4,7 +4,7 @@
 # found in the LICENSE file.
 
 # An alternate implementation of readlink that supports the non-standard -f
-# option. Note that this implemetnation of -f implies -m, but that shouldn't
+# option. Note that this implementation of -f implies -m, but that shouldn't
 # matter as readlink isn't used to find missing directories, only canonicize
 # paths.
 

@@ -238,7 +238,7 @@ function append_resource() {
   if [ "$type" = "raw" ]; then
     # The resource should be the raw contents of the file or command output.
     # Great for json data.
-    append_outout "${data}"
+    append_output "${data}"
 
   else
     # Resource should be wrapped in a JS string.

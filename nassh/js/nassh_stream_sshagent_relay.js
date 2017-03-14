@@ -101,7 +101,7 @@ nassh.Stream.SSHAgentRelay.prototype.asciiToBinary = function(a) {
 };
 
 /**
- * Check whether there is enough data in the write buffer to consitute a packet.
+ * Check whether there is enough data in the write buffer to constitute a packet.
  * If so, send packet and handle reply.
  */
 nassh.Stream.SSHAgentRelay.prototype.trySendPacket_ = function() {

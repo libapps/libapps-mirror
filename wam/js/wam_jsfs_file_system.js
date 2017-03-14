@@ -141,7 +141,7 @@ wam.jsfs.FileSystem.prototype.makePath = function(
  * @param {function()} onSuccess The function to invoke if all paths are created
  *   successfully.
  * @param {function(wam.Error)} onError The function to invoke if a path fails.
- *   Remaning paths will not be created.
+ *   Remaining paths will not be created.
  */
 wam.jsfs.FileSystem.prototype.makePaths = function(
     pathList, onSuccess, onError) {

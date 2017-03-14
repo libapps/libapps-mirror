@@ -1024,7 +1024,7 @@ function isSftpInitResponse(data) {
 }
 
 /**
- * SFTP Initlisation handler. Mounts the SFTP connection as a file system.
+ * SFTP Initialization handler. Mounts the SFTP connection as a file system.
  */
 nassh.CommandInstance.prototype.onSftpInitialised = function() {
   // Mount file system.
