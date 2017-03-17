@@ -77,6 +77,7 @@ nassh.GoogleRelay = function(io, optionString, relayLocation, relayStorage) {
   this.useWebsocket = !this.options['--use-xhr'];
   this.reportAckLatency = this.options['--report-ack-latency'];
   this.reportConnectAttempts = this.options['--report-connect-attempts'];
+  this.relayProtocol = this.options['--relay-protocol'];
   this.relayServer = null;
   this.relayServerSocket = null;
   this.location = relayLocation;
@@ -109,15 +110,17 @@ nassh.GoogleRelay.parseOptionString = function(optionString) {
 
   if (rv['--config'] == 'google') {
     if (!('--proxy-host' in rv))
-      rv['--proxy-host'] = 'r.ext.google.com';
+      rv['--proxy-host'] = 'ssh-relay.corp.google.com';
+    if (!('--proxy-port' in rv))
+      rv['--proxy-port'] = '443';
     if (!('--use-ssl' in rv))
       rv['--use-ssl'] = true;
-    if (!('--relay-prefix-field' in rv))
-      rv['--relay-prefix-field'] = '2';
     if (!('--report-ack-latency' in rv))
       rv['--report-ack-latency'] = true;
     if (!('--report-connect-attempts' in rv))
       rv['--report-connect-attempts'] = true;
+    if (!('--relay-protocol' in rv))
+      rv['--relay-protocol'] = 'v2';
     if (!('--default-agent' in rv))
       rv['--ssh-agent'] = 'beknehfpfkghjoafdifaflglpjkojoco';
   }
@@ -126,11 +129,17 @@ nassh.GoogleRelay.parseOptionString = function(optionString) {
 };
 
 /**
- * The pattern for the cookie server's url.
+ * Returns the pattern for the cookie server URL.
  */
-nassh.GoogleRelay.prototype.cookieServerPattern =
-    '%(protocol)://%(host):%(port)/cookie?ext=%encodeURIComponent(return_to)' +
-    '&path=html/nassh_google_relay.html';
+nassh.GoogleRelay.prototype.cookieServerPattern = function() {
+  var template = '%(protocol)://%(host):%(port)/cookie' +
+      '?ext=%encodeURIComponent(return_to)' +
+      '&path=html/nassh_google_relay.html';
+  if (this.relayProtocol == 'v2') {
+    template += '&version=2&method=js-redirect';
+  }
+  return template;
+};
 
 /**
  * The pattern for XHR relay server's url.
@@ -149,7 +158,7 @@ nassh.GoogleRelay.prototype.redirect = function(opt_resumePath) {
   this.storage.setItem('googleRelay.resumePath', resumePath);
 
   this.location.href = lib.f.replaceVars(
-    this.cookieServerPattern,
+    this.cookieServerPattern(),
     { host: this.proxyHost,
       port: this.proxyPort,
       protocol: this.useSecure ? 'https' : 'http',
