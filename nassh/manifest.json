@@ -1,6 +1,6 @@
 {
   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDixnK8f4AuZrV+QZx7iiONG/SAiU5VrjlXD2KxRGvI6tDJrLvUin+GpcuMH1d/Qrc0+PmCzJ1duAiD/9F2q8kiYwQ1C3gZmztYneAiVX+3/OvXHr/idyueNQ5XFvBnMCpKD0KqPEksP80utV417fuaHAY4NFjofLZyWUvu23XHRwIDAQAB",
-  "minimum_chrome_version": "41",
+  "minimum_chrome_version": "57",
   "manifest_version": 2,
   "content_security_policy": "script-src 'self'; object-src 'self'",
   "name": "Secure Shell (tot)",
@@ -20,8 +20,14 @@
     "notifications",
     "storage",
     "terminalPrivate",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "fileSystemProvider"
   ],
+  "file_system_provider_capabilities": {
+    "source": "network",
+    "multiple_mounts": true,
+    "configurable": false
+  },
   "web_accessible_resources": [
     "html/crosh.html",
     "html/nassh.html",
