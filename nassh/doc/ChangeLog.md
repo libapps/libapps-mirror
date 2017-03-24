@@ -1,3 +1,8 @@
+# 0.8.35.5, 2017-03-24, initial sftp.
+
+* Add v2 support for --config=google relays.
+* Enable sftp filesystem support for Chrome OS.  This requires Chrome 57+ now.
+
 # 0.8.35.4, 2017-03-10, resource lite.
 
 * Switch background page to being non-persistent so it closes when not used.
