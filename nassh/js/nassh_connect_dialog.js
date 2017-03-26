@@ -51,9 +51,6 @@ nassh.ConnectDialog = function(messagePort) {
   // Array of nassh.ConnectDialog.ProfileRecord instances in display order.
   this.profileList_ = [];
 
-  // We need this hack until CSS variables are supported on the stable channel.
-  this.cssVariables_ = new nassh.CSSVariables(document.styleSheets[1]);
-
   // Cached DOM nodes.
   this.form_ = document.querySelector('form');
   this.mountButton_ = document.querySelector('#mount');
@@ -999,16 +996,18 @@ nassh.ConnectDialog.prototype.onMessageName_['terminal-info'] = function(info) {
   var cursor = lib.colors.normalizeCSS(info.cursorColor);
 
   var vars = {
-    'background-color': bg,
-    'foreground-color': fg,
-    'cursor-color': cursor,
+    '--nassh-bg-color': bg,
+    '--nassh-fg-color': fg,
+    '--nassh-cursor-color': cursor,
   };
 
   for (var i = 10; i < 100; i += 5) {
-    vars['background-color-' + i] = lib.colors.setAlpha(bg, i / 100);
-    vars['foreground-color-' + i] = lib.colors.setAlpha(fg, i / 100);
-    vars['cursor-color-' + i] = lib.colors.setAlpha(cursor, i / 100);
+    vars['--nassh-bg-color-' + i] = lib.colors.setAlpha(bg, i / 100);
+    vars['--nassh-fg-color-' + i] = lib.colors.setAlpha(fg, i / 100);
+    vars['--nassh-cursor-color-' + i] = lib.colors.setAlpha(cursor, i / 100);
   }
 
-  this.cssVariables_.reset(vars);
+  for (var key in vars)
+    if (key.startsWith('--nassh-'))
+      document.documentElement.style.setProperty(key, vars[key]);
 };

@@ -8,15 +8,22 @@
  * Styles used by the connect dialog box.
  */
 
+/* Default colors here will be updated on the fly. */
+:root {
+  --nassh-bg-color: rgb(16, 16, 16);
+  --nassh-fg-color: rgb(240, 240, 240);
+  --nassh-cursor-color: rgba(255, 0, 0, 0.5);
+}
+
 body {
   margin: 0;
   padding: 0;
-  background-color: var(background-color);
-  color: var(foreground-color);
+  background-color: var(--nassh-bg-color);
+  color: var(--nassh-fg-color);
 }
 
 :focus {
-  outline: 2px var(cursor-color-50) solid;
+  outline: 2px var(--nassh-cursor-color-50) solid;
 }
 
 .dialog-body {
@@ -44,18 +51,18 @@ input[type="file"] {
 
 input:invalid {
   font-weight: bold;
-  color: var(cursor-color);
+  color: var(--nassh-cursor-color);
 }
 
 div[role="button"] {
-  border: 2px var(foreground-color-75) solid;
-  background-color: var(foreground-color-20);
+  border: 2px var(--nassh-fg-color-75) solid;
+  background-color: var(--nassh-fg-color-20);
   margin: 3px;
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
   padding-right: 5px;
-  color: var(foreground-color);
+  color: var(--nassh-fg-color);
   font-size: smaller;
   cursor: default;
   -webkit-user-select: none;
@@ -70,11 +77,11 @@ div[role="button"][disabled] {
 }
 
 .shortcut {
-  color: var(foreground-color);
+  color: var(--nassh-fg-color);
 }
 
 a {
-  color: var(foreground-color);
+  color: var(--nassh-fg-color);
   text-decoration: none;
   cursor: pointer;
 }
@@ -84,8 +91,8 @@ a:hover {
 }
 
 .column-list-item.active div {
-  background-color: var(foreground-color-75);
-  color: var(background-color);
+  background-color: var(--nassh-fg-color-75);
+  color: var(--nassh-bg-color);
   font-weight: bold;
 }
 
@@ -102,7 +109,7 @@ a:hover {
 }
 
 .column-list:focus .column-list-item.active div {
-  background-color: var(cursor-color-75);
+  background-color: var(--nassh-cursor-color-75);
   outline: none;
 }
 
@@ -112,12 +119,12 @@ a:hover {
 .dialog-billboard {
   -webkit-flex: 0 1 auto;
   padding: 1em;
-  background-color: var(foreground-color-20);
-  color: var(foreground-color);
+  background-color: var(--nassh-fg-color-20);
+  color: var(--nassh-fg-color);
   margin: 1em;
   box-shadow:
-    0 0 0 2px var(background-color),
-    0 0 0 4px var(foreground-color-75);
+    0 0 0 2px var(--nassh-bg-color),
+    0 0 0 4px var(--nassh-fg-color-75);
   overflow: auto;
 }
 
@@ -129,7 +136,7 @@ a:hover {
   margin: 1em;
   margin-bottom: 0;
   padding: 0.5em;
-  border: 1px var(foreground-color-75) dotted;
+  border: 1px var(--nassh-fg-color-75) dotted;
   background-color: rgba(255, 255, 255, 0.1);
   min-height: 5em;
   -webkit-user-select: none;
