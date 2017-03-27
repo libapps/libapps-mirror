@@ -48,25 +48,6 @@ nassh.msg = function(name, opt_args) {
 };
 
 /**
- * Load and parse the manifest file for this extension.
- */
-nassh.loadManifest = function(onSuccess, opt_onError) {
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', '/manifest.json');
-
-  xhr.onloadend = function() {
-    if (xhr.status == 200) {
-      onSuccess(JSON.parse(xhr.responseText));
-    } else {
-      if (opt_onError)
-        opt_onError(xhr.status);
-    }
-  };
-
-  xhr.send();
-};
-
-/**
  * Request the persistent HTML5 filesystem for this extension.
  *
  * This will also create the /.ssh/ directory if it does not exits.

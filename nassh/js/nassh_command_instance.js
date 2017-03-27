@@ -114,12 +114,8 @@ nassh.CommandInstance.prototype.run = function() {
     };
   };
 
-  this.prefs_.readStorage(function() {
-    nassh.loadManifest(onManifestLoaded, ferr('Manifest load failed'));
-  });
-
-  var onManifestLoaded = (manifest) => {
-    this.manifest_ = manifest;
+  this.prefs_.readStorage(() => {
+    this.manifest_ = chrome.runtime.getManifest();
 
     // Set default window title.
     this.io.print('\x1b]0;' + this.manifest_.name + ' ' +
@@ -156,7 +152,7 @@ nassh.CommandInstance.prototype.run = function() {
     }
 
     nassh.getFileSystem(onFileSystemFound, ferr('FileSystem init failed'));
-  };
+  });
 
   var onFileSystemFound = (fileSystem, sshDirectoryEntry) => {
     this.fileSystem_ = fileSystem;
