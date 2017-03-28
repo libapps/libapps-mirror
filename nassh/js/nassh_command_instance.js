@@ -774,7 +774,7 @@ nassh.CommandInstance.prototype.sendToPlugin_ = function(name, args) {
  * @param {string} string The string to send.
  */
 nassh.CommandInstance.prototype.sendString_ = function(string) {
-  this.sendToPlugin_('onRead', [0, btoa(string)]);
+  this.inputBuffer_.write(string);
 };
 
 /**
