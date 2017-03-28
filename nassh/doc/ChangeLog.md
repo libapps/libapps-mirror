@@ -1,3 +1,8 @@
+# 0.8.35.6, 2017-03-28, password paste fix.
+
+* Drop unused dialogs.css file.
+* Fix pasting text during initial password prompts.  This broke w/0.8.35.0.
+
 # 0.8.35.5, 2017-03-24, initial sftp.
 
 * Add v2 support for --config=google relays.
