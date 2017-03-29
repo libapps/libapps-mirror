@@ -245,3 +245,13 @@ nassh.reloadWindow = function() {
     appWindow.close();
   }
 };
+
+/**
+ * Register this extension to handle ssh:// URIs.
+ */
+nassh.registerProtocolHandler = function() {
+  navigator.registerProtocolHandler(
+    'ssh',
+    chrome.runtime.getURL('html/nassh.html#uri:%s'),
+    chrome.runtime.getManifest().name);
+};

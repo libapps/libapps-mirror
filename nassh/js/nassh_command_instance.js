@@ -317,6 +317,7 @@ nassh.CommandInstance.prototype.connectToArgString = function(argstr) {
   var isSftp = this.storage.getItem('nassh.isSftp');
   this.storage.removeItem('nassh.isSftp');
 
+  // Handle profile-id:XXX forms.  These are bookmarkable.
   var ary = argstr.match(/^profile-id:([a-z0-9]+)(\?.*)?/i);
   var rv;
   if (ary) {
@@ -448,6 +449,21 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
   if (destination == 'crosh') {
     this.terminalLocation.href = 'crosh.html';
     return true;
+  }
+
+  // Deal with ssh:// links.  They are encoded with % hexadecimal sequences.
+  // Note: These might be ssh: or ssh://, so have to deal with that.
+  if (destination.startsWith('uri:')) {
+    // Strip off the "uri:" before decoding it.
+    destination = unescape(destination.substr(4));
+    if (!destination.startsWith('ssh:'))
+      return false;
+
+    // Strip off the "ssh:" prefix.
+    destination = destination.substr(4);
+    // Strip off the "//" if it exists.
+    if (destination.startsWith('//'))
+      destination = destination.substr(2);
   }
 
   var ary = destination.match(

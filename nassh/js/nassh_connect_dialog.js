@@ -451,6 +451,9 @@ nassh.ConnectDialog.prototype.connect = function(name, argv) {
   this.maybeCopyPlaceholders_();
   this.save();
 
+  // Since the user has initiated this connection, register the protocol.
+  nassh.registerProtocolHandler();
+
   var items = {
     '/nassh/connectDialog/lastProfileId': this.currentProfileRecord_.id
   };

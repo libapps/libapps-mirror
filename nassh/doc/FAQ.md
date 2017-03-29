@@ -206,9 +206,10 @@ is not answered here, please ask it on the
 
 ## Can I create bookmarks to specific sites?
 
-  Mostly.  You can create two types of bookmarks:
+  Mostly.  You can create a few types of bookmarks:
   1. A connection specifying a user & host (and optionally a port).
   2. A profile connection (which you already created/set up).
+  3. A `ssh://` URL.
 
 *** aside
 If you're using the dev version of Secure Shell, you'll want to use the
@@ -247,6 +248,21 @@ instead of `pnhechapfaindjhompbnflcldabbghjo`.
   to the profile, then looking at the URL box.
   This allows you to fully control the ssh parameters though: you may add
   arguments or change the command line or relay settings.
+
+### ssh:// links
+
+  You can create `ssh://` links that will automatically open Secure Shell.
+  They take the same form as Direct links above.
+
+  `ssh://user@host[:port][@proxyhost[:proxyport]]`
+
+  This is mostly compliant with the [IANA spec](https://www.iana.org/assignments/uri-schemes/prov/ssh).
+  Future work ([user](https://crbug.com/609303) & [fingerprint](https://crbug.com/706536))
+  might bring this more into compliance.
+
+*** aside
+The protocol handler is registered upon first connect.
+***
 
 
 ## Can I create links in webpages to autoconnect?
