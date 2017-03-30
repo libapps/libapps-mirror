@@ -82,14 +82,21 @@ static int WRAP(open)(const char *pathname, int oflag, mode_t cmode,
 }
 
 #ifdef USE_NEWLIB
+# ifndef O_TMPFILE
+#  define O_TMPFILE 0
+# endif
 int open(const char *file, int oflag, ...) {
   int newfd;
-  va_list ap;
-  mode_t cmode;
+  mode_t cmode = 0;
 
-  va_start(ap, oflag);
-  cmode = va_arg(ap, mode_t);
-  va_end(ap);
+  // Only peel off the mode if the call requires it.  Otherwise we enter
+  // "undefined" territory and get garbage or a crash or ...
+  if (oflag & (O_CREAT | O_TMPFILE)) {
+    va_list ap;
+    va_start(ap, oflag);
+    cmode = va_arg(ap, mode_t);
+    va_end(ap);
+  }
   return HANDLE_ERRNO(WRAP(open)(file, oflag, cmode, &newfd), newfd);
 }
 #endif
