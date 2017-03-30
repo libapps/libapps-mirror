@@ -63,10 +63,14 @@ DECLARE(getdents);
   })
 
 void debug_log(const char* format, ...) {
+  // This shouldn't be necessary, but can't rely on the underlying C lib
+  // not messing with the errno value.
+  int saved = errno;
   va_list ap;
   va_start(ap, format);
   vfprintf(stderr, format, ap);
   va_end(ap);
+  errno = saved;
 }
 
 static bool g_exit_called = false;
