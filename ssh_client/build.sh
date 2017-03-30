@@ -82,8 +82,10 @@ fi
 
 if [[ $DEBUG == 1 ]]; then
   BUILD_ARGS="CXXFLAGS=-g -O0 -DDEBUG"
+  tarname="debug.tar"
 else
   BUILD_ARGS="CXXFLAGS=-g -O2 -DNDEBUG"
+  tarname="release.tar"
 fi
 
 if [[ $PNACL == 1 ]]; then
@@ -148,6 +150,7 @@ else
         hterm/plugin/nacl/lib64/
   done
 fi
+tar cf "${tarname}" hterm/plugin/ *.pexe *.dbg.nexe
 
 if [[ -f ../ssh_client.pem ]]; then
   /opt/google/chrome/chrome --pack-extension=hterm \
