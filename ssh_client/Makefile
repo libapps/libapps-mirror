@@ -44,6 +44,7 @@ PNACL_TC_ROOT:=$(NACL_SDK_ROOT)/toolchain/$(OSNAME)_pnacl
 PNACL_CXX:=$(PNACL_TC_ROOT)/bin/pnacl-clang++
 PNACL_CC:=$(PNACL_TC_ROOT)/bin/pnacl-clang
 PNACL_AR:=$(PNACL_TC_ROOT)/bin/pnacl-ar
+PNACL_STRIP:=$(PNACL_TC_ROOT)/bin/pnacl-strip
 PNACL_TRANSLATE=$(PNACL_TC_ROOT)/bin/pnacl-translate
 # --pnacl-disable-abi-check/--allow-llvm-bitcode-input were added to workaround
 # https://code.google.com/p/nativeclient/issues/detail?id=3714
@@ -93,17 +94,20 @@ $(PROJECT)_nl.pexe : $(POBJS)
 		-lopenbsd-compat-pnacl -lglibc-compat \
 		$(PNACL_LDFLAGS) $(PNACL_CXXFLAGS)
 
-$(PROJECT)_nl_arm.nexe : $(PROJECT)_nl.pexe
+$(PROJECT)_nl_arm.dbg.nexe : $(PROJECT)_nl.pexe
 	$(PNACL_TRANSLATE) $(PNACL_TRANSLATE_FLAGS) -o $@ $(PROJECT)_nl.pexe \
 		-arch arm
 
-$(PROJECT)_nl_x86_32.nexe : $(PROJECT)_nl.pexe
+$(PROJECT)_nl_x86_32.dbg.nexe : $(PROJECT)_nl.pexe
 	$(PNACL_TRANSLATE) $(PNACL_TRANSLATE_FLAGS) -o $@ $(PROJECT)_nl.pexe \
 		-arch i686
 
-$(PROJECT)_nl_x86_64.nexe : $(PROJECT)_nl.pexe
+$(PROJECT)_nl_x86_64.dbg.nexe : $(PROJECT)_nl.pexe
 	$(PNACL_TRANSLATE) $(PNACL_TRANSLATE_FLAGS) -o $@ $(PROJECT)_nl.pexe \
 		-arch x86-64
+
+%.nexe: %.dbg.nexe
+	$(PNACL_STRIP) $^ -o $@
 
 clean:
 	rm -rf output/*.o $(PROJECT)*.nexe $(PROJECT).pexe
