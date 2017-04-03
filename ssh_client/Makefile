@@ -2,6 +2,8 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+NACL_SDK_ROOT ?= $(wildcard $(CURDIR)/output/naclsdk/pepper_*)
+
 PROJECT:=output/ssh_client
 CXX_SOURCES:=\
 	src/dev_null.cc \
@@ -30,6 +32,11 @@ CXX_HEADERS:=\
 	src/udp_socket.h
 
 # Project Build flags
+ifeq ($(DEBUG),1)
+CXXFLAGS ?= -g -O0 -DDEBUG
+else
+CXXFLAGS ?= -g -O2 -DNDEBUG
+endif
 override LDFLAGS+=-lppapi_cpp -lppapi -lppapi_cpp_private -lnacl_io -lutil \
         -lcrypto -lz -lresolv -ldl -lnsl -ljsoncpp -Loutput
 override WARNINGS+=-Wno-long-long -Wall -Wswitch-enum -Werror
@@ -59,6 +66,8 @@ PNACL_CXXFLAGS:=$(CXXFLAGS) -DUSE_NEWLIB $(COMPAT_INC)
 THIS_MAKEFILE:=$(abspath $(lastword $(MAKEFILE_LIST)))
 
 # Declare the ALL target first, to make the 'all' target the default build
+all: all_newlib
+
 all_glibc: $(PROJECT)_x86_32.nexe $(PROJECT)_x86_64.nexe
 
 all_newlib: $(PROJECT)_nl_x86_32.nexe $(PROJECT)_nl_x86_64.nexe \

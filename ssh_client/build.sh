@@ -80,11 +80,11 @@ else
   build "x86_64" "glibc"
 fi
 
+BUILD_ARGS=()
 if [[ $DEBUG == 1 ]]; then
-  BUILD_ARGS="CXXFLAGS=-g -O0 -DDEBUG"
+  BUILD_ARGS+=( DEBUG=1 )
   tarname="debug.tar"
 else
-  BUILD_ARGS="CXXFLAGS=-g -O2 -DNDEBUG"
   tarname="release.tar"
 fi
 
@@ -93,7 +93,7 @@ if [[ $PNACL == 1 ]]; then
 else
   readonly DEFAULT_TARGET=all_glibc
 fi
-make clean && make -j${ncpus} "$BUILD_ARGS" $DEFAULT_TARGET
+make clean && make -j${ncpus} "${BUILD_ARGS[@]}" ${DEFAULT_TARGET}
 
 cd output
 mkdir -p hterm/plugin/docs/
