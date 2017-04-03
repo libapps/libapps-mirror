@@ -126,6 +126,7 @@ fi
 # The prefix path matches what is used at runtime.
 if [[ ! -e Makefile ]]; then
   ./configure --host=nacl --prefix="/" \
+      --cache-file="../config.cache" \
       CFLAGS="${EXTRA_CFLAGS[*]}" \
       LIBS="${EXTRA_LIBS[*]}" \
       "${EXTRA_CONFIGURE_FLAGS[@]}"
