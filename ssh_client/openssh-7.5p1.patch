@@ -77,3 +77,18 @@
  	return 1;
  }
 +#endif
+
+https://crbug.com/707941
+
+--- a/authfile.c
++++ b/authfile.c
+@@ -133,7 +133,8 @@ sshkey_load_file(int fd, struct sshbuf *blob)
+ 			goto out;
+ 		}
+ 	}
+-	if ((st.st_mode & (S_IFSOCK|S_IFCHR|S_IFIFO)) == 0 &&
++	if (dontmax == 0 &&
++	    (st.st_mode & (S_IFSOCK|S_IFCHR|S_IFIFO)) == 0 &&
+ 	    st.st_size != (off_t)sshbuf_len(blob)) {
+ 		r = SSH_ERR_FILE_CHANGED;
+ 		goto out;
