@@ -68,10 +68,14 @@ THIS_MAKEFILE:=$(abspath $(lastword $(MAKEFILE_LIST)))
 # Declare the ALL target first, to make the 'all' target the default build
 all: all_newlib
 
-all_glibc: $(PROJECT)_x86_32.nexe $(PROJECT)_x86_64.nexe
+all_glibc: glibc_x86_32 glibc_x86_64
+glibc_x86_32: $(PROJECT)_x86_32.nexe
+glibc_x86_64: $(PROJECT)_x86_64.nexe
 
-all_newlib: $(PROJECT)_nl_x86_32.nexe $(PROJECT)_nl_x86_64.nexe \
-	$(PROJECT)_nl_arm.nexe
+all_newlib: newlib_x86_32 newlib_x86_64 newlib_arm
+newlib_x86_32: $(PROJECT)_nl_x86_32.nexe
+newlib_x86_64: $(PROJECT)_nl_x86_64.nexe
+newlib_arm: $(PROJECT)_nl_arm.nexe
 
 # Define 32 bit compile and link rules for C++ sources
 x86_32_OBJS:=$(patsubst src/%.cc,output/%_32.o,$(CXX_SOURCES))
