@@ -120,7 +120,8 @@ else
   EXTRA_CFLAGS+=( -I"${WEBPORTS_INCLUDE}" )
 fi
 
-./configure --host=nacl --prefix="${WEBPORTS_PREFIX}" \
+# The prefix path matches what is used at runtime.
+./configure --host=nacl --prefix="/" \
     CFLAGS="${EXTRA_CFLAGS[*]}" \
     LIBS="${EXTRA_LIBS[*]}" \
     "${EXTRA_CONFIGURE_FLAGS[@]}"
