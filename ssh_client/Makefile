@@ -52,7 +52,8 @@ PNACL_CXX:=$(PNACL_TC_ROOT)/bin/pnacl-clang++
 PNACL_CC:=$(PNACL_TC_ROOT)/bin/pnacl-clang
 PNACL_AR:=$(PNACL_TC_ROOT)/bin/pnacl-ar
 PNACL_STRIP:=$(PNACL_TC_ROOT)/bin/pnacl-strip
-PNACL_TRANSLATE=$(PNACL_TC_ROOT)/bin/pnacl-translate
+PNACL_FINALIZE:=$(PNACL_TC_ROOT)/bin/pnacl-finalize
+PNACL_TRANSLATE:=$(PNACL_TC_ROOT)/bin/pnacl-translate
 # --pnacl-disable-abi-check/--allow-llvm-bitcode-input were added to workaround
 # https://code.google.com/p/nativeclient/issues/detail?id=3714
 PNACL_TRANSLATE_FLAGS=-fdata-sections -ffunction-sections --gc-sections \
@@ -121,6 +122,9 @@ $(PROJECT)_nl_x86_64.dbg.nexe : $(PROJECT)_nl.pexe
 
 %.nexe: %.dbg.nexe
 	$(PNACL_STRIP) $^ -o $@
+
+%.pexe: %.dbg.pexe
+	$(PNACL_FINALIZE) $^ -o $@
 
 clean:
 	rm -rf output/*.o $(PROJECT)*.[np]exe
