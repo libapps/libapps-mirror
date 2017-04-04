@@ -26,11 +26,13 @@
 
 extern "C" void DoWrapSysCalls();
 
-static const int64_t kMicrosecondsPerSecond = 1000 * 1000;
-static const int64_t kNanosecondsPerMicrosecond = 1000;
+namespace {
+const int64_t kMicrosecondsPerSecond = 1000 * 1000;
+const int64_t kNanosecondsPerMicrosecond = 1000;
 
 // Magic value; keep in sync with //ssh_client/openssh/authfd.c
-static const uint32_t kSshAgentFakeIP = 0x7F010203;
+const uint32_t kSshAgentFakeIP = 0x7F010203;
+}
 
 FileStream* const FileSystem::kBadFileStream = (FileStream*)-1;
 FileSystem* FileSystem::file_system_ = NULL;
