@@ -1,3 +1,9 @@
+# 0.8.36.1, 2017-04-03, openssh cleanups.
+
+* Strip openssh binaries to shrink considerably.
+* Set openssh --prefix to / instead of the build path.
+* Fix reading of local ssh keys.
+
 # 0.8.36.0, 2017-03-31, cleanup + openssh upgrade.
 
 * Upgraded openssh from 6.6p1 to 7.5p1.  Notably, support for ECDSA/ED25519.
