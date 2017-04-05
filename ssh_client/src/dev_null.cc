@@ -23,7 +23,8 @@ void DevNullHandler::release() {
     delete this;
 }
 
-FileStream* DevNullHandler::open(int fd, const char* pathname, int oflag, int* err) {
+FileStream* DevNullHandler::open(int fd, const char* pathname, int oflag,
+                                 int* err) {
   return new DevNull(fd, oflag);
 }
 

@@ -37,13 +37,14 @@ void JsFileHandler::Open(int32_t result, JsFile* stream, const char* pathname) {
   out_->OpenFile(stream->fd(), pathname, stream->oflag(), stream);
 }
 
-FileStream* JsFileHandler::open(int fd, const char* pathname, int oflag, int* err) {
+FileStream* JsFileHandler::open(int fd, const char* pathname, int oflag,
+                                int* err) {
   JsFile* stream = new JsFile(fd, (oflag & ~O_NONBLOCK), out_);
   pp::Module::Get()->core()->CallOnMainThread(0,
       factory_.NewCallback(&JsFileHandler::Open, stream, pathname));
 
   FileSystem* sys = FileSystem::GetFileSystem();
-  while(!stream->is_open())
+  while (!stream->is_open())
     sys->cond().wait(sys->mutex());
 
   if (stream->fd() == -1) {
@@ -166,9 +167,9 @@ void JsFile::close() {
         factory_.NewCallback(&JsFile::Close));
 
     FileSystem* sys = FileSystem::GetFileSystem();
-    while(out_task_sent_)
+    while (out_task_sent_)
       sys->cond().wait(sys->mutex());
-    while(is_open_)
+    while (is_open_)
       sys->cond().wait(sys->mutex());
 
     fd_ = -1;
@@ -183,7 +184,7 @@ int JsFile::read(char* buf, size_t count, size_t* nread) {
 
   FileSystem* sys = FileSystem::GetFileSystem();
   if (is_block()) {
-    while(is_open() && in_buf_.empty())
+    while (is_open() && in_buf_.empty())
       sys->cond().wait(sys->mutex());
   } else if (is_read_ready_) {
     // We will still "block" waiting for data from JavaScript if we believe
@@ -192,7 +193,7 @@ int JsFile::read(char* buf, size_t count, size_t* nread) {
     // the data first), we'll exit the loop with whatever data is available in
     // in_buf_. If in_buf_ is still empty, the loop below will be exited and
     // return -1, EAGAIN.
-    while(is_open() && in_buf_.empty() && is_read_ready_)
+    while (is_open() && in_buf_.empty() && is_read_ready_)
       sys->cond().wait(sys->mutex());
   }
 
@@ -407,7 +408,7 @@ bool JsSocket::connect(const char* host, uint16_t port) {
   pp::Module::Get()->core()->CallOnMainThread(0,
       factory_.NewCallback(&JsSocket::Connect, host, port));
   FileSystem* sys = FileSystem::GetFileSystem();
-  while(!is_open())
+  while (!is_open())
     sys->cond().wait(sys->mutex());
 
   if (fd() == -1)

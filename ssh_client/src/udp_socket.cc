@@ -42,7 +42,7 @@ bool UDPSocket::bind(const sockaddr* saddr, socklen_t addrlen) {
   pp::Module::Get()->core()->CallOnMainThread(0,
       factory_.NewCallback(&UDPSocket::Bind, saddr, addrlen, &result));
   FileSystem* sys = FileSystem::GetFileSystem();
-  while(result == PP_OK_COMPLETIONPENDING)
+  while (result == PP_OK_COMPLETIONPENDING)
     sys->cond().wait(sys->mutex());
   return result == PP_OK;
 }
@@ -53,7 +53,7 @@ int UDPSocket::getsockname(sockaddr* name, socklen_t* namelen) {
       factory_.NewCallback(&UDPSocket::GetBoundAddress,
                            name, namelen, &result));
   FileSystem* sys = FileSystem::GetFileSystem();
-  while(result == PP_OK_COMPLETIONPENDING)
+  while (result == PP_OK_COMPLETIONPENDING)
     sys->cond().wait(sys->mutex());
   return result == PP_OK ? 0 : -1;
 }
@@ -117,7 +117,7 @@ void UDPSocket::close() {
     pp::Module::Get()->core()->CallOnMainThread(0,
         factory_.NewCallback(&UDPSocket::Close, &result));
     FileSystem* sys = FileSystem::GetFileSystem();
-    while(result == PP_OK_COMPLETIONPENDING)
+    while (result == PP_OK_COMPLETIONPENDING)
       sys->cond().wait(sys->mutex());
   }
 }
@@ -261,7 +261,6 @@ void UDPSocket::OnRead(int32_t result) {
     socket_ = NULL;
   }
   sys->cond().broadcast();
-
 }
 
 void UDPSocket::Write(int32_t result) {

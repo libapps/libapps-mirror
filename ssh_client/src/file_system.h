@@ -64,26 +64,26 @@ class FileSystem {
   int write(int fd, const char* buf, size_t count, size_t* nwrote);
   int seek(int fd, nacl_abi_off_t offset, int whence,
            nacl_abi_off_t* new_offset);
-  int dup(int fd, int *newfd);
+  int dup(int fd, int* newfd);
   int dup2(int fd, int newfd);
   int fstat(int fd, nacl_abi_stat* out);
-  int stat(const char *pathname, nacl_abi_stat* out);
+  int stat(const char* pathname, nacl_abi_stat* out);
   int getdents(int fd, dirent*, size_t count, size_t* nread);
 
   int isatty(int fd);
   int tcgetattr(int fd, struct termios* termios_p);
-  int tcsetattr(int fd, int optional_actions, const struct termios *termios_p);
+  int tcsetattr(int fd, int optional_actions, const struct termios* termios_p);
   int fcntl(int fd, int cmd, va_list ap);
   int ioctl(int fd, int request, va_list ap);
-  int select(int nfds, fd_set *readfds, fd_set *writefds,
-             fd_set *exceptfds, struct timeval *timeout);
+  int select(int nfds, fd_set* readfds, fd_set* writefds,
+             fd_set* exceptfds, struct timeval* timeout);
 
   int getaddrinfo(const char* hostname, const char* servname,
                   const addrinfo* hints, addrinfo** res);
   void freeaddrinfo(addrinfo* ai);
   int getnameinfo(const sockaddr* sa, socklen_t salen,
-                  char *host, size_t hostlen,
-                  char *serv, size_t servlen, int flags);
+                  char* host, size_t hostlen,
+                  char* serv, size_t servlen, int flags);
 
   int socket(int socket_family, int socket_type, int protocol);
   int connect(int sockfd, const sockaddr* serv_addr, socklen_t addrlen);
@@ -100,8 +100,8 @@ class FileSystem {
   int mkdir(const char* pathname, mode_t mode);
 
   int sigaction(int signum,
-                const struct sigaction *act,
-                struct sigaction *oldact);
+                const struct sigaction* act,
+                struct sigaction* oldact);
   void exit(int status);
 
   void ExitCodeAcked();

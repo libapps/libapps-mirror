@@ -57,13 +57,13 @@ class Mutex {
     }
 
    private:
-    DISALLOW_COPY_AND_ASSIGN(Lock);
     Mutex& mutex_;
+    DISALLOW_COPY_AND_ASSIGN(Lock);
   };
 
  private:
-  DISALLOW_COPY_AND_ASSIGN(Mutex);
   pthread_mutex_t mutex_;
+  DISALLOW_COPY_AND_ASSIGN(Mutex);
 };
 
 class Cond {
@@ -97,8 +97,8 @@ class Cond {
   }
 
  private:
-  DISALLOW_COPY_AND_ASSIGN(Cond);
   pthread_cond_t cond_;
+  DISALLOW_COPY_AND_ASSIGN(Cond);
 };
 
 #ifndef NDEBUG

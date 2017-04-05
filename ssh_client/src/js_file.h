@@ -72,6 +72,7 @@ class JsFile : public FileStream,
   uint64_t on_read_call_count_;
   static termios tio_;
 
+ private:
   DISALLOW_COPY_AND_ASSIGN(JsFile);
 };
 

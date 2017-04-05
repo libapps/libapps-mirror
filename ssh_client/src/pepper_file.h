@@ -23,7 +23,7 @@ class PepperFileHandler : public PathHandler {
   virtual void addref();
   virtual void release();
 
-  virtual FileStream* open(int fd, const char* pathname, int oflag, int *err);
+  virtual FileStream* open(int fd, const char* pathname, int oflag, int* err);
   virtual int stat(const char* pathname, nacl_abi_stat* out);
 
  private:

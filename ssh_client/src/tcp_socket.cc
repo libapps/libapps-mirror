@@ -41,7 +41,7 @@ bool TCPSocket::connect(const char* host, uint16_t port) {
   pp::Module::Get()->core()->CallOnMainThread(0,
       factory_.NewCallback(&TCPSocket::Connect, host, port, &result));
   FileSystem* sys = FileSystem::GetFileSystem();
-  while(result == PP_OK_COMPLETIONPENDING)
+  while (result == PP_OK_COMPLETIONPENDING)
     sys->cond().wait(sys->mutex());
   return result == PP_OK;
 }
@@ -51,7 +51,7 @@ bool TCPSocket::accept(PP_Resource resource) {
   pp::Module::Get()->core()->CallOnMainThread(0,
       factory_.NewCallback(&TCPSocket::Accept, resource, &result));
   FileSystem* sys = FileSystem::GetFileSystem();
-  while(result == PP_OK_COMPLETIONPENDING)
+  while (result == PP_OK_COMPLETIONPENDING)
     sys->cond().wait(sys->mutex());
   return result == PP_OK;
 }
@@ -62,7 +62,7 @@ void TCPSocket::close() {
     pp::Module::Get()->core()->CallOnMainThread(0,
         factory_.NewCallback(&TCPSocket::Close, &result));
     FileSystem* sys = FileSystem::GetFileSystem();
-    while(result == PP_OK_COMPLETIONPENDING)
+    while (result == PP_OK_COMPLETIONPENDING)
       sys->cond().wait(sys->mutex());
   }
 }
@@ -103,7 +103,7 @@ int TCPSocket::write(const char* buf, size_t count, size_t* nwrote) {
     int32_t result = PP_OK_COMPLETIONPENDING;
     PostWriteTask(&result, true);
     FileSystem* sys = FileSystem::GetFileSystem();
-    while(result == PP_OK_COMPLETIONPENDING)
+    while (result == PP_OK_COMPLETIONPENDING)
       sys->cond().wait(sys->mutex());
     if ((size_t)result != count) {
       *nwrote = -1;

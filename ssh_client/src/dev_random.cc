@@ -9,7 +9,7 @@
 #include <string.h>
 
 DevRandomHandler::DevRandomHandler(
-    int (*get_random_bytes)(void *buf, size_t count, size_t *nread))
+    int (*get_random_bytes)(void* buf, size_t count, size_t* nread))
     : ref_(1), get_random_bytes_(get_random_bytes) {
   assert(get_random_bytes);
 }
@@ -27,7 +27,8 @@ void DevRandomHandler::release() {
     delete this;
 }
 
-FileStream* DevRandomHandler::open(int fd, const char* pathname, int oflag, int* err) {
+FileStream* DevRandomHandler::open(int fd, const char* pathname, int oflag,
+                                   int* err) {
   return new DevRandom(fd, oflag, get_random_bytes_);
 }
 
@@ -39,7 +40,7 @@ int DevRandomHandler::stat(const char* pathname, nacl_abi_stat* out) {
 //------------------------------------------------------------------------------
 
 DevRandom::DevRandom(int fd, int oflag,
-    int (*get_random_bytes)(void *buf, size_t count, size_t *nread))
+    int (*get_random_bytes)(void* buf, size_t count, size_t* nread))
   : fd_(fd), oflag_(oflag), ref_(1), get_random_bytes_(get_random_bytes) {
 }
 

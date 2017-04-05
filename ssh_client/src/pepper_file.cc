@@ -33,7 +33,8 @@ void PepperFileHandler::release() {
     delete this;
 }
 
-FileStream* PepperFileHandler::open(int fd, const char* pathname, int oflag, int* err) {
+FileStream* PepperFileHandler::open(int fd, const char* pathname, int oflag,
+                                    int* err) {
   PepperFile* file = new PepperFile(fd, oflag, file_system_);
   int32_t ret = file->open(pathname);
   if (ret == 0) {
@@ -80,7 +81,7 @@ int32_t PepperFile::open(const char* pathname) {
   pp::Module::Get()->core()->CallOnMainThread(0,
       factory_.NewCallback(&PepperFile::Open, pathname, &result));
   FileSystem* sys = FileSystem::GetFileSystem();
-  while(result == PP_OK_COMPLETIONPENDING)
+  while (result == PP_OK_COMPLETIONPENDING)
     sys->cond().wait(sys->mutex());
   return result;
 }
@@ -90,7 +91,7 @@ void PepperFile::close() {
   pp::Module::Get()->core()->CallOnMainThread(0,
       factory_.NewCallback(&PepperFile::Close, &result));
   FileSystem* sys = FileSystem::GetFileSystem();
-  while(result == PP_OK_COMPLETIONPENDING)
+  while (result == PP_OK_COMPLETIONPENDING)
     sys->cond().wait(sys->mutex());
 }
 
@@ -103,7 +104,7 @@ int PepperFile::read(char* buf, size_t count, size_t* nread) {
     int32_t result = PP_OK_COMPLETIONPENDING;
     pp::Module::Get()->core()->CallOnMainThread(0,
         factory_.NewCallback(&PepperFile::Read, count, &result));
-    while(result == PP_OK_COMPLETIONPENDING)
+    while (result == PP_OK_COMPLETIONPENDING)
       sys->cond().wait(sys->mutex());
     if (result < 0) {
       *nread = -1;
@@ -134,7 +135,7 @@ int PepperFile::write(const char* buf, size_t count, size_t* nwrote) {
     pp::Module::Get()->core()->CallOnMainThread(0,
         factory_.NewCallback(&PepperFile::Write, &result));
     FileSystem* sys = FileSystem::GetFileSystem();
-    while(result == PP_OK_COMPLETIONPENDING)
+    while (result == PP_OK_COMPLETIONPENDING)
       sys->cond().wait(sys->mutex());
     if ((size_t)result != count) {
       *nwrote = -1;

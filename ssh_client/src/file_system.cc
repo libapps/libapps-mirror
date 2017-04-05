@@ -136,7 +136,7 @@ void FileSystem::WaitForStdFiles() {
   JsFile* stderr_fs = static_cast<JsFile*>(GetStream(2));
 
   Mutex::Lock lock(mutex_);
-  while(!(stdin_fs->is_open() && stdout_fs->is_open() && stderr_fs->is_open()))
+  while (!(stdin_fs->is_open() && stdout_fs->is_open() && stderr_fs->is_open()))
     cond_.wait(mutex_);
 }
 
@@ -179,7 +179,7 @@ int FileSystem::open(const char* pathname, int oflag, mode_t cmode,
   if (it != paths_.end()) {
     handler = it->second;
   } else {
-    while(!fs_initialized_)
+    while (!fs_initialized_)
       cond_.wait(mutex_);
     handler = ppfs_path_handler_;
   }
@@ -243,7 +243,7 @@ int FileSystem::seek(int fd, nacl_abi_off_t offset, int whence,
     return EBADF;
 }
 
-int FileSystem::dup(int fd, int *newfd) {
+int FileSystem::dup(int fd, int* newfd) {
   Mutex::Lock lock(mutex_);
   FileStream* stream = GetStream(fd);
   if (!stream || stream == kBadFileStream)
@@ -295,7 +295,7 @@ int FileSystem::fstat(int fd, nacl_abi_stat* out) {
     return EBADF;
 }
 
-int FileSystem::stat(const char *pathname, nacl_abi_stat* out) {
+int FileSystem::stat(const char* pathname, nacl_abi_stat* out) {
   Mutex::Lock lock(mutex_);
   PathHandlerMap::iterator it = paths_.find(pathname);
   PathHandler* handler = (it != paths_.end()) ? it->second : ppfs_path_handler_;
@@ -424,10 +424,10 @@ int FileSystem::select(int nfds, fd_set* readfds, fd_set* writefds,
         kNanosecondsPerMicrosecond;
   }
 
-  while(!(IsInterrupted() ||
-          IsReady(nfds, readfds, &FileStream::is_read_ready, false) ||
-          IsReady(nfds, writefds, &FileStream::is_write_ready, false) ||
-          IsReady(nfds, exceptfds, &FileStream::is_exception, false))) {
+  while (!(IsInterrupted() ||
+           IsReady(nfds, readfds, &FileStream::is_read_ready, false) ||
+           IsReady(nfds, writefds, &FileStream::is_write_ready, false) ||
+           IsReady(nfds, exceptfds, &FileStream::is_exception, false))) {
     if (timeout) {
       if (!timeout->tv_sec && !timeout->tv_usec)
         break;
@@ -493,7 +493,7 @@ addrinfo* FileSystem::CreateAddrInfo(const PP_NetAddress_Private& netaddr,
         netaddr, &((sockaddr_in*)addr)->sin_addr, sizeof(in_addr));
   }
 
-  if(hints && hints->ai_socktype)
+  if (hints && hints->ai_socktype)
     ai->ai_socktype = hints->ai_socktype;
   else
     ai->ai_socktype = SOCK_STREAM;
@@ -521,7 +521,7 @@ addrinfo* FileSystem::GetFakeAddress(const char* hostname, uint16_t port,
   addr_in->sin_port = port;
   addr_in->sin_addr.s_addr = addr;
 
-  if(hints && hints->ai_socktype)
+  if (hints && hints->ai_socktype)
     ai->ai_socktype = hints->ai_socktype;
   else
     ai->ai_socktype = SOCK_STREAM;
@@ -543,7 +543,7 @@ int FileSystem::getaddrinfo(const char* hostname, const char* servname,
   int32_t result = PP_OK_COMPLETIONPENDING;
   pp::Module::Get()->core()->CallOnMainThread(0, factory_.NewCallback(
       &FileSystem::Resolve, &params, &result));
-  while(result == PP_OK_COMPLETIONPENDING)
+  while (result == PP_OK_COMPLETIONPENDING)
     cond_.wait(mutex_);
   return result == PP_OK ? 0 : EAI_FAIL;
 }
@@ -659,7 +659,9 @@ void FileSystem::Resolve(int32_t result, GetAddrInfoParams* params,
 
   // In case of JS socket don't use local host resolver.
   if (!use_js_socket_ && pp::HostResolverPrivate::IsAvailable()) {
-    PP_HostResolver_Private_Hint hint = { PP_NETADDRESSFAMILY_PRIVATE_UNSPECIFIED, 0 };
+    PP_HostResolver_Private_Hint hint = {
+        PP_NETADDRESSFAMILY_PRIVATE_UNSPECIFIED, 0,
+    };
     if (hints) {
       if (hints->ai_family == AF_INET)
         hint.family = PP_NETADDRESSFAMILY_PRIVATE_IPV4;
@@ -724,9 +726,9 @@ void FileSystem::freeaddrinfo(addrinfo* ai) {
   }
 }
 
-int FileSystem::getnameinfo(const sockaddr *sa, socklen_t salen,
-                            char *host, size_t hostlen,
-                            char *serv, size_t servlen, int flags) {
+int FileSystem::getnameinfo(const sockaddr* sa, socklen_t salen,
+                            char* host, size_t hostlen,
+                            char* serv, size_t servlen, int flags) {
   if (sa->sa_family != AF_INET && sa->sa_family != AF_INET6)
     return EAI_FAMILY;
 
@@ -864,7 +866,7 @@ int FileSystem::bind(int fd, const sockaddr* addr, socklen_t addrlen) {
     return -1;
   }
 
-  switch(socket_types_[fd]) {
+  switch (socket_types_[fd]) {
     case SOCK_STREAM:
       AddFileStream(fd, new TCPServerSocket(fd, 0, addr, addrlen));
       return 0;
@@ -973,7 +975,7 @@ ssize_t FileSystem::recvfrom(int sockfd, char* buffer, size_t len, int flags,
 
 int FileSystem::mkdir(const char* pathname, mode_t mode) {
   Mutex::Lock lock(mutex_);
-  while(!fs_initialized_)
+  while (!fs_initialized_)
     cond_.wait(mutex_);
 
   if (!ppfs_) {
@@ -985,14 +987,14 @@ int FileSystem::mkdir(const char* pathname, mode_t mode) {
   pp::Module::Get()->core()->CallOnMainThread(0,
       factory_.NewCallback(&FileSystem::MakeDirectory,
                                    pathname, &result));
-  while(result == PP_OK_COMPLETIONPENDING)
+  while (result == PP_OK_COMPLETIONPENDING)
     cond_.wait(mutex_);
   return (result == PP_OK) ? 0 : -1;
 }
 
 int FileSystem::sigaction(int signum,
-                          const struct sigaction *act,
-                          struct sigaction *oldact) {
+                          const struct sigaction* act,
+                          struct sigaction* oldact) {
   if (signum == SIGWINCH) {
     if (act)
       handler_sigwinch_ = act->sa_handler;
@@ -1067,7 +1069,7 @@ bool FileSystem::CreateNetAddress(const sockaddr* saddr, socklen_t addrlen,
             ntohs(sin4->sin_port), addr)) {
       return false;
     }
-  } else if (saddr->sa_family == AF_INET6){
+  } else if (saddr->sa_family == AF_INET6) {
     const sockaddr_in6* sin6 = reinterpret_cast<const sockaddr_in6*>(saddr);
     if (!pp::NetAddressPrivate::CreateFromIPv6Address(
             reinterpret_cast<const uint8_t*>(&sin6->sin6_addr), 0,

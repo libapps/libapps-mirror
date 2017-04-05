@@ -53,7 +53,7 @@ void TCPServerSocket::close() {
     pp::Module::Get()->core()->CallOnMainThread(0,
         factory_.NewCallback(&TCPServerSocket::Close, &result));
     FileSystem* sys = FileSystem::GetFileSystem();
-    while(result == PP_OK_COMPLETIONPENDING)
+    while (result == PP_OK_COMPLETIONPENDING)
       sys->cond().wait(sys->mutex());
   }
 }
@@ -86,7 +86,7 @@ bool TCPServerSocket::listen(int backlog) {
   pp::Module::Get()->core()->CallOnMainThread(0,
       factory_.NewCallback(&TCPServerSocket::Listen, backlog, &result));
   FileSystem* sys = FileSystem::GetFileSystem();
-  while(result == PP_OK_COMPLETIONPENDING)
+  while (result == PP_OK_COMPLETIONPENDING)
     sys->cond().wait(sys->mutex());
   return result == PP_OK;
 }

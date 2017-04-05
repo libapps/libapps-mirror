@@ -11,7 +11,7 @@
 class DevRandomHandler : public PathHandler {
  public:
   DevRandomHandler(
-      int (*get_random_bytes)(void *buf, size_t count, size_t *nread));
+      int (*get_random_bytes)(void* buf, size_t count, size_t* nread));
   virtual ~DevRandomHandler();
 
   virtual void addref();
@@ -22,7 +22,7 @@ class DevRandomHandler : public PathHandler {
 
  private:
   int ref_;
-  int (*get_random_bytes_)(void *buf, size_t count, size_t *nread);
+  int (*get_random_bytes_)(void* buf, size_t count, size_t* nread);
 
   DISALLOW_COPY_AND_ASSIGN(DevRandomHandler);
 };
@@ -30,7 +30,7 @@ class DevRandomHandler : public PathHandler {
 class DevRandom : public FileStream {
  public:
   DevRandom(int fd, int oflag,
-            int (*get_random_bytes)(void *buf, size_t count, size_t *nread));
+            int (*get_random_bytes)(void* buf, size_t count, size_t* nread));
   virtual ~DevRandom();
 
   virtual void addref();
@@ -48,7 +48,7 @@ class DevRandom : public FileStream {
   int fd_;
   int oflag_;
   int ref_;
-  int (*get_random_bytes_)(void *buf, size_t count, size_t *nread);
+  int (*get_random_bytes_)(void* buf, size_t count, size_t* nread);
 
   DISALLOW_COPY_AND_ASSIGN(DevRandom);
 };

@@ -57,8 +57,9 @@ DECLARE(getdents);
     if (ret) { \
       errno = ret; \
       ret = -1; \
-    } else \
+    } else { \
       ret = (success); \
+    } \
     ret; \
   })
 
@@ -75,8 +76,8 @@ void debug_log(const char* format, ...) {
 
 static bool g_exit_called = false;
 
-static int WRAP(open)(const char *pathname, int oflag, mode_t cmode,
-                      int *newfd) {
+static int WRAP(open)(const char* pathname, int oflag, mode_t cmode,
+                      int* newfd) {
   LOG("open: %s\n", pathname);
   return FileSystem::GetFileSystem()->open(pathname, oflag, cmode, newfd);
 }
@@ -85,7 +86,7 @@ static int WRAP(open)(const char *pathname, int oflag, mode_t cmode,
 # ifndef O_TMPFILE
 #  define O_TMPFILE 0
 # endif
-int open(const char *file, int oflag, ...) {
+int open(const char* file, int oflag, ...) {
   int newfd;
   mode_t cmode = 0;
 
@@ -112,13 +113,13 @@ int close(int fd) {
 }
 #endif
 
-static int WRAP(read)(int fd, void *buf, size_t count, size_t *nread) {
+static int WRAP(read)(int fd, void* buf, size_t count, size_t* nread) {
   VLOG("read: %d %d\n", fd, count);
   return FileSystem::GetFileSystem()->read(fd, (char*)buf, count, nread);
 }
 
 #ifdef USE_NEWLIB
-ssize_t read(int fd, void *buf, size_t count) {
+ssize_t read(int fd, void* buf, size_t count) {
   ssize_t rv;
   return HANDLE_ERRNO(WRAP(read)(fd, buf, count, (size_t*)&rv), rv);
 }
@@ -131,21 +132,21 @@ ssize_t read(int fd, void *buf, size_t count) {
 extern struct nacl_irt_fdio __libnacl_irt_fdio;
 struct nacl_irt_fdio {
   int (*close)(int fd);
-  int (*dup)(int fd, int *newfd);
+  int (*dup)(int fd, int* newfd);
   int (*dup2)(int fd, int newfd);
-  int (*read)(int fd, void *buf, size_t count, size_t *nread);
-  int (*write)(int fd, const void *buf, size_t count, size_t *nwrote);
-  int (*seek)(int fd, off_t offset, int whence, off_t *new_offset);
-  int (*fstat)(int fd, struct stat *);
-  int (*getdents)(int fd, struct dirent *, size_t count, size_t *nread);
+  int (*read)(int fd, void* buf, size_t count, size_t* nread);
+  int (*write)(int fd, const void* buf, size_t count, size_t* nwrote);
+  int (*seek)(int fd, off_t offset, int whence, off_t* new_offset);
+  int (*fstat)(int fd, struct stat* );
+  int (*getdents)(int fd, struct dirent* , size_t count, size_t* nread);
 };
 
-int libnacl_write(int fd, const void *buf, size_t count, size_t *nwrote) {
+int libnacl_write(int fd, const void* buf, size_t count, size_t* nwrote) {
   return __libnacl_irt_fdio.write(fd, buf, count, nwrote);
 }
 #endif
 
-static int WRAP(write)(int fd, const void *buf, size_t count, size_t *nwrote) {
+static int WRAP(write)(int fd, const void* buf, size_t count, size_t* nwrote) {
   if (fd != 1 && fd != 2)
     VLOG("write: %d %d\n", fd, count);
 #ifndef NDEBUG
@@ -155,11 +156,12 @@ static int WRAP(write)(int fd, const void *buf, size_t count, size_t *nwrote) {
       return 0;
   }
 #endif
-  return FileSystem::GetFileSystem()->write(fd, (const char*)buf, count, nwrote);
+  return FileSystem::GetFileSystem()->write(fd, (const char*)buf, count,
+                                            nwrote);
 }
 
 #ifdef USE_NEWLIB
-ssize_t write(int fd, const void *buf, size_t count) {
+ssize_t write(int fd, const void* buf, size_t count) {
   ssize_t rv;
   return HANDLE_ERRNO(WRAP(write)(fd, buf, count, (size_t*)&rv), rv);
 }
@@ -201,13 +203,13 @@ int dup2(int oldfd, int newfd) {
 }
 #endif
 
-static int WRAP(stat)(const char *pathname, struct nacl_abi_stat *buf) {
+static int WRAP(stat)(const char* pathname, struct nacl_abi_stat* buf) {
   LOG("stat: %s\n", pathname);
   return FileSystem::GetFileSystem()->stat(pathname, buf);
 }
 
 #ifdef USE_NEWLIB
-static void stat_n2u(struct nacl_abi_stat* nacl_buf, struct stat *buf) {
+static void stat_n2u(struct nacl_abi_stat* nacl_buf, struct stat* buf) {
   buf->st_dev = nacl_buf->nacl_abi_st_dev;
   buf->st_ino = nacl_buf->nacl_abi_st_ino;
   buf->st_mode = nacl_buf->nacl_abi_st_mode;
@@ -223,7 +225,7 @@ static void stat_n2u(struct nacl_abi_stat* nacl_buf, struct stat *buf) {
   buf->st_ctime = nacl_buf->nacl_abi_st_ctime;
 }
 
-int stat(const char *path, struct stat *buf) {
+int stat(const char* path, struct stat* buf) {
   struct nacl_abi_stat nacl_buf;
   int rv = WRAP(stat)(path, &nacl_buf);
   if (rv == 0)
@@ -232,13 +234,13 @@ int stat(const char *path, struct stat *buf) {
 }
 #endif
 
-static int WRAP(fstat)(int fd, struct nacl_abi_stat *buf) {
+static int WRAP(fstat)(int fd, struct nacl_abi_stat* buf) {
   LOG("fstat: %d\n", fd);
   return FileSystem::GetFileSystem()->fstat(fd, buf);
 }
 
 #ifdef USE_NEWLIB
-int fstat(int fd, struct stat *buf) {
+int fstat(int fd, struct stat* buf) {
   struct nacl_abi_stat nacl_buf;
   int rv = WRAP(fstat)(fd, &nacl_buf);
   if (rv == 0)
@@ -250,7 +252,7 @@ int fstat(int fd, struct stat *buf) {
 #ifndef USE_NEWLIB
 // TODO(olonho): what to wrap here for newlib?
 static int WRAP(getdents)(int fd, dirent* nacl_buf, size_t nacl_count,
-                          size_t *nread) {
+                          size_t* nread) {
   LOG("getdents: %d\n", fd);
   return FileSystem::GetFileSystem()->getdents(fd, nacl_buf, nacl_count, nread);
 }
@@ -279,8 +281,8 @@ int ioctl(int fd, int request, ...) {
   return ret;
 }
 
-int select(int nfds, fd_set *readfds, fd_set *writefds,
-           fd_set *exceptfds, struct timeval *timeout) {
+int select(int nfds, fd_set* readfds, fd_set* writefds,
+           fd_set* exceptfds, struct timeval* timeout) {
   VLOG("select: %d\n", nfds);
   return FileSystem::GetFileSystem()->select(nfds, readfds, writefds, exceptfds,
                                              timeout);
@@ -325,7 +327,9 @@ int setresuid(uid_t ruid, uid_t euid, uid_t suid) {
   return 0;
 }
 
-struct passwd* getpwuid(uid_t uid) {
+// We disable the threadsafe lint func here because it applies to the standard
+// C library versions, not our stub one here that is actually safe.
+struct passwd* getpwuid(uid_t uid) {  // NOLINT(runtime/threadsafe_fn)
   LOG("getpwuid: %d\n", uid);
   static struct passwd pwd;
   pwd.pw_name = (char*)"";
@@ -338,7 +342,7 @@ struct passwd* getpwuid(uid_t uid) {
   return &pwd;
 }
 
-int gethostname(char *name, size_t len) {
+int gethostname(char* name, size_t len) {
   const char* kHostname = "localhost";
   strncpy(name, kHostname, len);
   return 0;
@@ -357,9 +361,9 @@ void freeaddrinfo(struct addrinfo* ai) {
   return FileSystem::GetFileSystem()->freeaddrinfo(ai);
 }
 
-int getnameinfo(const struct sockaddr *sa, socklen_t salen,
-                char *host, socklen_t hostlen,
-                char *serv, socklen_t servlen, unsigned int flags) {
+int getnameinfo(const struct sockaddr* sa, socklen_t salen,
+                char* host, socklen_t hostlen,
+                char* serv, socklen_t servlen, unsigned int flags) {
   LOG("getnameinfo\n");
   return FileSystem::GetFileSystem()->getnameinfo(
       sa, salen, host, hostlen, serv, servlen, flags);
@@ -371,22 +375,23 @@ int socket(int socket_family, int socket_type, int protocol) {
       socket_family, socket_type, protocol);
 }
 
-int connect(int sockfd, const struct sockaddr *serv_addr, socklen_t addrlen) {
+int connect(int sockfd, const struct sockaddr* serv_addr, socklen_t addrlen) {
   LOG("connect: %d\n", sockfd);
   return FileSystem::GetFileSystem()->connect(sockfd, serv_addr, addrlen);
 }
 
-pid_t waitpid(pid_t pid, int *status, int options) {
+pid_t waitpid(pid_t pid, int* status, int options) {
   LOG("waitpid: %d\n", pid);
   return -1;
 }
 
-int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen) {
+int accept(int sockfd, struct sockaddr* addr, socklen_t* addrlen) {
   LOG("accept: %d\n", sockfd);
   return FileSystem::GetFileSystem()->accept(sockfd, addr, addrlen);
 }
 
-int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact) {
+int sigaction(int signum, const struct sigaction* act,
+              struct sigaction* oldact) {
   LOG("sigaction: %d\n", signum);
   return FileSystem::GetFileSystem()->sigaction(signum, act, oldact);
 }
@@ -406,13 +411,13 @@ pid_t getpid(void) {
   return 100;
 }
 
-int bind(int sockfd, const struct sockaddr *my_addr, socklen_t addrlen) {
+int bind(int sockfd, const struct sockaddr* my_addr, socklen_t addrlen) {
   LOG("bind: %d\n", sockfd);
   return FileSystem::GetFileSystem()->bind(sockfd, my_addr, addrlen);
 }
 
-int getpeername(int socket, struct sockaddr * address,
-                socklen_t * address_len) {
+int getpeername(int socket, struct sockaddr* address,
+                socklen_t* address_len) {
   LOG("getpeername: %d\n", socket);
   return -1;
 }
@@ -428,13 +433,13 @@ int listen(int sockfd, int backlog) {
 }
 
 int setsockopt(int socket, int level, int option_name,
-               const void *option_value, socklen_t option_len) {
+               const void* option_value, socklen_t option_len) {
   LOG("setsockopt: %d %d %d\n", socket, level, option_name);
   return 0;
 }
 
 int getsockopt(int socket, int level, int option_name,
-               void * option_value, socklen_t * option_len) {
+               void* option_value, socklen_t* option_len) {
   LOG("getsockopt: %d %d %d\n", socket, level, option_name);
   memset(option_value, 0, *option_len);
   return 0;
@@ -462,7 +467,7 @@ int mkdir(const char* pathname, mode_t mode) {
 }
 
 int sched_setscheduler(pid_t pid, int policy,
-                       const struct sched_param *param) {
+                       const struct sched_param* param) {
   LOG("sched_setscheduler: %d %d\n", pid, policy);
   return 0;
 }
@@ -475,7 +480,7 @@ ssize_t send(int fd, const void* buf, size_t count, int flags) {
   return HANDLE_ERRNO(rv, sent);
 }
 
-ssize_t recv(int fd, void *buf, size_t count, int flags) {
+ssize_t recv(int fd, void* buf, size_t count, int flags) {
   VLOG("recv: %d %d\n", fd, count);
   size_t recvd = 0;
   int rv = FileSystem::GetFileSystem()->read(fd, (char*)buf, count, &recvd);
@@ -509,24 +514,20 @@ int clock_gettime(clockid_t clk_id, struct timespec* tp) {
   return -1;
 }
 
-speed_t cfgetospeed(const struct termios *t)
-{
+speed_t cfgetospeed(const struct termios* t) {
   return t->c_ospeed;
 }
 
-speed_t cfgetispeed(const struct termios *t)
-{
+speed_t cfgetispeed(const struct termios* t) {
   return t->c_ispeed;
 }
 
-int cfsetospeed(struct termios *t, speed_t speed)
-{
+int cfsetospeed(struct termios* t, speed_t speed) {
   t->c_ospeed = speed;
   return 0;
 }
 
-int cfsetispeed(struct termios *t, speed_t speed)
-{
+int cfsetispeed(struct termios* t, speed_t speed) {
   t->c_ispeed = speed;
   return 0;
 }

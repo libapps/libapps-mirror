@@ -52,7 +52,7 @@ const char kCloseMethodId[] = "close";
 
 const size_t kDefaultWriteWindow = 64 * 1024;
 
-extern "C" int ssh_main(int ac, const char **av);
+extern "C" int ssh_main(int ac, const char** av);
 
 //------------------------------------------------------------------------------
 
@@ -169,7 +169,7 @@ bool SshPluginInstance::Write(int fd, const char* data, size_t size) {
   const size_t kMaxWriteSize = 24*1024;
   std::vector<char> buf(kMaxWriteSize * 4 / 3 + 4);
   size_t start = 0;
-  while(start < size) {
+  while (start < size) {
     Json::Value call_args(Json::arrayValue);
     call_args.append(fd);
     size_t chunk_size = ((size - start) <= kMaxWriteSize) ? (size - start)
