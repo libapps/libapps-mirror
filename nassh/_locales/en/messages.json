@@ -62,7 +62,7 @@
   },
 
   "ZOOM_WARNING": {
-    "message": "Please set Chome Menu->Zoom to 100%",
+    "message": "Please set Chrome Menu->Zoom to 100%",
     "description": "Shown in the top/right corner if the Zoom setting is not set to 100%."
   },
 
@@ -286,7 +286,7 @@
   },
 
   "UNEXPECTED_ERROR": {
-    "message": "An unexpected error occurred, please chech the JavaScript console for more details.",
+    "message": "An unexpected error occurred, please check the JavaScript console for more details.",
     "description": "Generic message displayed when we encounter an unexpected error."
   },
 
