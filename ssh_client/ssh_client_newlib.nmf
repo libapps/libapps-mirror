@@ -1,0 +1,7 @@
+{
+  "program": {
+    "x86-32": {"url": "ssh_client_nl_x86_32.nexe"},
+    "x86-64": {"url": "ssh_client_nl_x86_64.nexe"},
+    "arm": { "url": "ssh_client_nl_arm.nexe"}
+  }
+}

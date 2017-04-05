@@ -1,0 +1,68 @@
+{
+  "program": {
+    "x86-32": {"url": "lib32/runnable-ld.so"},
+    "x86-64": {"url": "lib64/runnable-ld.so"}
+  },
+  "files": {
+    "libpthread.so.xxxxxxxx" : {
+      "x86-32": {"url": "lib32/libpthread.so.xxxxxxxx"},
+      "x86-64": {"url": "lib64/libpthread.so.xxxxxxxx"}
+    },
+    "libppapi_cpp.so" : {
+      "x86-32": {"url": "lib32/libppapi_cpp.so"},
+      "x86-64": {"url": "lib64/libppapi_cpp.so"}
+    },
+    "libppapi_cpp_private.so" : {
+      "x86-32": {"url": "lib32/libppapi_cpp_private.so"},
+      "x86-64": {"url": "lib64/libppapi_cpp_private.so"}
+    },
+    "libutil.so.xxxxxxxx" : {
+      "x86-32": {"url": "lib32/libppapi_cpp.so"},
+      "x86-64": {"url": "lib64/libppapi_cpp.so"}
+    },
+    "libresolv.so.xxxxxxxx" : {
+      "x86-32": {"url": "lib32/libresolv.so.xxxxxxxx"},
+      "x86-64": {"url": "lib64/libresolv.so.xxxxxxxx"}
+    },
+    "libdl.so.xxxxxxxx" : {
+      "x86-32": {"url": "lib32/libdl.so.xxxxxxxx"},
+      "x86-64": {"url": "lib64/libdl.so.xxxxxxxx"}
+    },
+    "libnsl.so.xxxxxxxx" : {
+      "x86-32": {"url": "lib32/libnsl.so.xxxxxxxx"},
+      "x86-64": {"url": "lib64/libnsl.so.xxxxxxxx"}
+    },
+    "libstdc++.so.6" : {
+      "x86-32": {"url": "lib32/libstdc++.so.6"},
+      "x86-64": {"url": "lib64/libstdc++.so.6"}
+    },
+    "libm.so.xxxxxxxx" : {
+      "x86-32": {"url": "lib32/libm.so.xxxxxxxx"},
+      "x86-64": {"url": "lib64/libm.so.xxxxxxxx"}
+    },
+    "libgcc_s.so.1" : {
+      "x86-32": {"url": "lib32/libgcc_s.so.1"},
+      "x86-64": {"url": "lib64/libgcc_s.so.1"}
+    },
+    "libc.so.xxxxxxxx" : {
+      "x86-32": {"url": "lib32/libc.so.xxxxxxxx"},
+      "x86-64": {"url": "lib64/libc.so.xxxxxxxx"}
+    },
+    "libz.so.1" : {
+      "x86-32": {"url": "lib32/libz.so.1"},
+      "x86-64": {"url": "lib64/libz.so.1"}
+    },
+    "libcrypto.so.1.0.0": {
+      "x86-32": {"url": "lib32/libcrypto.so.1.0.0"},
+      "x86-64": {"url": "lib64/libcrypto.so.1.0.0"}
+    },
+    "libjsoncpp.so" : {
+      "x86-32": {"url": "lib32/libjsoncpp.so"},
+      "x86-64": {"url": "lib64/libjsoncpp.so"}
+    },
+    "main.nexe" : {
+      "x86-32": {"url": "ssh_client_x86_32.nexe"},
+      "x86-64": {"url": "ssh_client_x86_64.nexe"}
+    }
+  }
+}
