@@ -266,5 +266,5 @@ The `name` field can be any one of:
 [nassh_stream_tty.js]: ../js/nassh_stream_tty.js
 
 [gnubbyd]: https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco
-[ssh_client]: https://chromium.googlesource.com/chromiumos/platform/assets/+/master/chromeapps/ssh_client
+[ssh_client]: ../../ssh_client/
 [wash]: ../../wash/
