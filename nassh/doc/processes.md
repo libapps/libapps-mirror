@@ -133,6 +133,36 @@ concat/release-highlights.txt file to drop older entries.
 We don't currently have any.  We strive to keep the master branch stable.
 You should too!
 
+## Updating Translations
+
+*** note
+This process is meant for Googlers who are making new releases.
+***
+
+Once `_locales/en/messages.json` has updates that need translating:
+
+* Go into `//depot/google3/googleclient/chrome/extensions/samples/tc/hterm/`.
+* Make sure the locale list in `BUILD` is up to date.
+* Open `i18n_messages.js` for editing.
+* Run `../convert_json_messages.py < .../nassh/_locales/en/messages.json > i18n_messages.js`.
+* Upload & land the CL.
+  * If you need JavaScript readability approval, add readtome-javascript@.
+* If you want to make other changes, check with [CWS oncall](http://oncall/chrome-webstore-eng).
+* Talk to your TC contact about scheduling another run.
+  * Visit http://go/l10npms and use product "Chrome OS".
+* Wait for the translators to finish.
+* The updated files are at `//depot/google3/googledata/transconsole/xtb/ChromeExtensions/*.xtb`
+  but you won't use them directly.
+* Convert the xtb files to JS files (while under the `hterm` dir mentioned above):
+  `blaze build messages_fileset`
+* In the root of the checkout, the new JSON files will be under
+  `blaze-bin/googleclient/chrome/extensions/samples/tc/hterm/messages_fs/_locales/`.
+* Use the [import-translations.sh](../bin/import-translations.sh) script to import:
+  `.../nassh/bin/import-translations.sh .../google3/blaze-bin/googleclient/chrome/extensions/samples/tc/hterm/messages_fs/_locales/`
+* Upload & land the CL.
+
+See the [TC](http://tc/) page for more details.
+
 ## Calendar
 
 We don't have one.  Releases are made as changes roll in.
