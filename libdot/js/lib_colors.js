@@ -58,7 +58,7 @@ lib.colors.re_ = {
        '(?:,/s*(/d+(?:/./d+)?)/s*)?/)/s*$'
        ).replace(/\//g, '\\'), 'i'),
 
-  // An X11 "rgb:ddd/ddd/ddd" value.
+  // An X11 "rgb:dddd/dddd/dddd" value.
   x11rgb: /^\s*rgb:([a-f0-9]{1,4})\/([a-f0-9]{1,4})\/([a-f0-9]{1,4})\s*$/i,
 
   // English color name.
@@ -87,6 +87,48 @@ lib.colors.rgbToX11 = function(value) {
     return null;
 
   return 'rgb:' + scale(ary[1]) + '/' + scale(ary[2]) + '/' + scale(ary[3]);
+};
+
+/**
+ * Convert a legacy X11 colover value into an CSS rgb(...) color value.
+ *
+ * They take the form:
+ * 12 bit: #RGB          -> #R000G000B000
+ * 24 bit: #RRGGBB       -> #RR00GG00BB00
+ * 36 bit: #RRRGGGBBB    -> #RRR0GGG0BBB0
+ * 48 bit: #RRRRGGGGBBBB
+ * These are the most significant bits.
+ *
+ * Truncate values back down to 24 bit since that's all CSS supports.
+ */
+lib.colors.x11HexToCSS = function(v) {
+  if (!v.startsWith('#'))
+    return null;
+  // Strip the leading # off.
+  v = v.substr(1);
+
+  // Reject unknown sizes.
+  if ([3, 6, 9, 12].indexOf(v.length) == -1)
+    return null;
+
+  // Reject non-hex values.
+  if (v.match(/[^a-f0-9]/i))
+    return null;
+
+  // Split the colors out.
+  var size = v.length / 3;
+  var r = v.substr(0, size);
+  var g = v.substr(size, size);
+  var b = v.substr(size + size, size);
+
+  // Normalize to 16 bits.
+  function norm16(v) {
+    v = parseInt(v, 16);
+    return size == 2 ? v :         // 16 bit
+           size == 1 ? v << 4 :    // 8 bit
+           v >> (4 * (size - 2));  // 24 or 32 bit
+  }
+  return lib.colors.arrayToRGBA([r, g, b].map(norm16));
 };
 
 /**
@@ -133,8 +175,13 @@ lib.colors.x11ToCSS = function(v) {
   }
 
   var ary = v.match(lib.colors.re_.x11rgb);
-  if (!ary)
-    return lib.colors.nameToRGB(v);
+  if (!ary) {
+    // Handle the legacy format.
+    if (v.startsWith('#'))
+      return lib.colors.x11HexToCSS(v);
+    else
+      return lib.colors.nameToRGB(v);
+  }
 
   ary.splice(0, 1);
   return lib.colors.arrayToRGBA(ary.map(scale));

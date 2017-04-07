@@ -35,6 +35,30 @@ lib.colors.Tests.addTest('rgbToX11', function(result, cx) {
   result.pass();
 });
 
+lib.colors.Tests.addTest('x11HexToCSS', function(result, cx) {
+  var data = [
+    // Some bad data first.
+    ['', null],
+    ['foo', null],
+    ['#', null],
+    ['#12', null],
+    // Then some reasonable data.
+    ['#123', 'rgba(16, 32, 48, 1)'],
+    ['#010203', 'rgba(1, 2, 3, 1)'],
+    ['#001002003', 'rgba(0, 0, 0, 1)'],
+    ['#000100020003', 'rgba(0, 0, 0, 1)'],
+    ['#123456', 'rgba(18, 52, 86, 1)'],
+    ['#123456789', 'rgba(18, 69, 120, 1)'],
+    ['#123456789abc', 'rgba(18, 86, 154, 1)'],
+  ];
+
+  data.forEach((ele) => {
+    result.assertEQ(lib.colors.x11HexToCSS(ele[0]), ele[1], ele[0]);
+  });
+
+  result.pass();
+});
+
 lib.colors.Tests.addTest('x11ToCSS', function(result, cx) {
   var data = [
     // Some bad data first.
@@ -56,6 +80,8 @@ lib.colors.Tests.addTest('x11ToCSS', function(result, cx) {
     ['rgb:4000/4000/4000', 'rgba(64, 64, 64, 1)'],
     ['rgb:2/02/020',       'rgba(34, 2, 2, 1)'],
     ['rgb:2222/2020/0202', 'rgba(34, 32, 2, 1)'],
+    // Only nominally test hex formats as x11HexToCSS above covers more.
+    ['#000', 'rgba(0, 0, 0, 1)'],
   ];
 
   data.forEach((ele) => {
