@@ -59,7 +59,13 @@ lib.TestManager.prototype.onTestRunComplete = function(testRun) {};
  *     write a string to the log.  If omitted, console.log is used.
  */
 lib.TestManager.Log = function(opt_logFunction) {
-  this.logFunction_ = opt_logFunction || function(s) { console.log(s) };
+  this.save = false;
+  this.data = '';
+  this.logFunction_ = opt_logFunction || function(s) {
+    if (this.save)
+      this.data += s + '\n';
+    console.log(s);
+  };
   this.pending_ = '';
   this.prefix_ = '';
   this.prefixStack_ = [];

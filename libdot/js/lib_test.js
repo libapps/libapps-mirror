@@ -10,6 +10,24 @@ var testRun;
 window.onload = function() {
   lib.init(lib.f.alarm(function() {
     testManager = new lib.TestManager();
+    testManager.log.save = true;
+
+    testManager.onTestRunComplete = (testRun) => {
+      var status = document.querySelector('#status');
+      var passed = document.querySelector('#passed');
+      var failed = document.querySelector('#failed');
+
+      status.innerText = 'Finished.';
+      status.className = (testRun.failures.length == 0) ? 'good' : 'bad';
+
+      passed.innerText = testRun.passes.length + ' tests passed.';
+
+      if (testRun.failures.length != 0)
+        failed.innerText = 'ERROR: ' + testRun.failures.length + ' tests failed!';
+
+      document.querySelector('#log').innerText = testRun.testManager.log.data;
+    };
+
     testRun = testManager.createTestRun({window: window});
 
     // Stop after the first failure to make it easier to debug in the
