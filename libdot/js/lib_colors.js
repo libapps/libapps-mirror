@@ -196,6 +196,8 @@ lib.colors.hexToRGB = function(arg) {
 lib.colors.rgbToHex = function(arg) {
   function convert(rgb) {
     var ary = lib.colors.crackRGB(rgb);
+    if (!ary)
+      return null;
     return '#' + lib.f.zpad(((parseInt(ary[0]) << 16) |
                              (parseInt(ary[1]) <<  8) |
                              (parseInt(ary[2]) <<  0)).toString(16), 6);
