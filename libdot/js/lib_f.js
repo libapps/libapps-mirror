@@ -67,13 +67,17 @@ lib.f.replaceVars.functions = {
  *     parameter is a list of locale names.
  */
 lib.f.getAcceptLanguages = function(callback) {
-  if (window.chrome && chrome.i18n) {
+  if (lib.f.getAcceptLanguages.chromeSupported()) {
     chrome.i18n.getAcceptLanguages(callback);
   } else {
     setTimeout(function() {
         callback([navigator.language.replace(/-/g, '_')]);
       }, 0);
   }
+};
+
+lib.f.getAcceptLanguages.chromeSupported = function() {
+  return window.chrome && chrome.i18n;
 };
 
 /**
@@ -106,10 +110,14 @@ lib.f.parseQuery = function(queryString) {
 };
 
 lib.f.getURL = function(path) {
-  if (window.chrome && chrome.runtime && chrome.runtime.getURL)
+  if (lib.f.getURL.chromeSupported())
     return chrome.runtime.getURL(path);
 
   return path;
+};
+
+lib.f.getURL.chromeSupported = function() {
+  return window.chrome && chrome.runtime && chrome.runtime.getURL;
 };
 
 /**
@@ -167,7 +175,7 @@ lib.f.zpad = function(number, length) {
  * @param {string} A string of spaces of the requested length.
  */
 lib.f.getWhitespace = function(length) {
-  if (length == 0)
+  if (length <= 0)
     return '';
 
   var f = this.getWhitespace;
