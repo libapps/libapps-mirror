@@ -79,10 +79,7 @@ lib.colors.re_ = {
 lib.colors.rgbToX11 = function(value) {
   function scale(v) {
     v = (Math.min(v, 255) * 257).toString(16);
-    while (v.length < 4)
-      v = '0' + v;
-
-    return v;
+    return lib.f.zpad(v, 4);
   }
 
   var ary = value.match(lib.colors.re_.rgbx);
