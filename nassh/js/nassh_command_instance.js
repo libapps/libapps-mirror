@@ -435,18 +435,15 @@ nassh.CommandInstance.prototype.connectToProfile = function(
 };
 
 /**
- * Initiate a connection to a remote host given a destination string.
+ * Parse the destination string.
+ *
+ * This also handles ssh:// URIs.
  *
  * @param {string} destination A string of the form username@host[:port].
- * @return {boolean} True if we were able to parse the destination string,
- *     false otherwise.
+ * @return {boolean|Object} False if we couldn't parse the destination.
+ *     An object if we were able to parse out the connect settings.
  */
-nassh.CommandInstance.prototype.connectToDestination = function(destination) {
-  if (destination == 'crosh') {
-    this.terminalLocation.href = 'crosh.html';
-    return true;
-  }
-
+nassh.CommandInstance.prototype.parseDestination = function(destination) {
   // Deal with ssh:// links.  They are encoded with % hexadecimal sequences.
   // Note: These might be ssh: or ssh://, so have to deal with that.
   if (destination.startsWith('uri:')) {
@@ -468,10 +465,6 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
   if (!ary)
     return false;
 
-  // We have to set the url here rather than in connectToArgString, because
-  // some callers may come directly to connectToDestination.
-  this.terminalLocation.hash = destination;
-
   var relayOptions = '';
   if (ary[4]) {
     relayOptions = '--proxy-host=' + ary[4];
@@ -480,12 +473,37 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
       relayOptions += ' --proxy-port=' + ary[5];
   }
 
-  return this.connectTo({
+  return {
       username: ary[1],
       hostname: ary[2],
       port: ary[3],
-      relayOptions: relayOptions
-  });
+      relayOptions: relayOptions,
+      destination: destination,
+  };
+};
+
+/**
+ * Initiate a connection to a remote host given a destination string.
+ *
+ * @param {string} destination A string of the form username@host[:port].
+ * @return {boolean} True if we were able to parse the destination string,
+ *     false otherwise.
+ */
+nassh.CommandInstance.prototype.connectToDestination = function(destination) {
+  if (destination == 'crosh') {
+    this.terminalLocation.href = 'crosh.html';
+    return true;
+  }
+
+  var rv = this.parseDestination(destination);
+  if (rv === false)
+    return rv;
+
+  // We have to set the url here rather than in connectToArgString, because
+  // some callers may come directly to connectToDestination.
+  this.terminalLocation.hash = rv.destination;
+
+  return this.connectTo(rv);
 };
 
 /**
@@ -496,28 +514,13 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
  *     false otherwise.
  */
 nassh.CommandInstance.prototype.mountDestination = function(destination) {
-  if (destination == 'crosh') {
-    this.terminalLocation.href = 'crosh.html';
-    return true;
-  }
-
-  var ary = destination.match(
-      /^([^@]+)@([^:@]+)(?::(\d+))?(?:@([^:]+)(?::(\d+))?)?$/);
-
-  if (!ary)
-    return false;
+  var rv = this.parseDestination(destination);
+  if (rv === false)
+    return rv;
 
   // We have to set the url here rather than in connectToArgString, because
   // some callers may come directly to connectToDestination.
-  this.terminalLocation.hash = destination;
-
-  var relayOptions = '';
-  if (ary[4]) {
-    relayOptions = '--proxy-host=' + ary[4];
-
-    if (ary[5])
-      relayOptions += ' --proxy-port=' + ary[5];
-  }
+  this.terminalLocation.hash = rv.destination;
 
   var args = {
     argv: {
@@ -527,17 +530,12 @@ nassh.CommandInstance.prototype.mountDestination = function(destination) {
       terminalWindow: this.terminalWindow,
       isSftp: true,
       mountOptions: {
-        fileSystemId: ary[1] + ary[2],
-        displayName: ary[1] + ary[2],
+        fileSystemId: rv.username + rv.hostname,
+        displayName: rv.username + rv.hostname,
         writable: true
       }
     },
-    connectOptions: {
-      username: ary[1],
-      hostname: ary[2],
-      port: ary[3],
-      relayOptions: relayOptions
-    }
+    connectOptions: rv,
   };
 
   return chrome.extension.getBackgroundPage().
