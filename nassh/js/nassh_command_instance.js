@@ -459,11 +459,21 @@ nassh.CommandInstance.prototype.parseDestination = function(destination) {
       destination = destination.substr(2);
   }
 
+  // Parse the connection string.
   var ary = destination.match(
-      /^([^@]+)@([^:@]+)(?::(\d+))?(?:@([^:]+)(?::(\d+))?)?$/);
+      //|user |@| [  ipv6       %zoneid   ]| host |   :port      @ relay options
+      /^([^@]+)@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:@]+)(?::(\d+))?(?:@([^:]+)(?::(\d+))?)?$/);
 
   if (!ary)
     return false;
+
+  var username = ary[1];
+  var hostname = ary[2];
+  var port = ary[3];
+
+  // If it's IPv6, remove the brackets.
+  if (hostname.startsWith('[') && hostname.endsWith(']'))
+    hostname = hostname.substr(1, hostname.length - 2);
 
   var relayOptions = '';
   if (ary[4]) {
@@ -474,9 +484,10 @@ nassh.CommandInstance.prototype.parseDestination = function(destination) {
   }
 
   return {
-      username: ary[1],
-      hostname: ary[2],
-      port: ary[3],
+      username: username,
+      hostname: hostname,
+      port: port,
+      relayOptions: relayOptions
       relayOptions: relayOptions,
       destination: destination,
   };

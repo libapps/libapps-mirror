@@ -25,7 +25,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 ## What is "Secure Shell"?
 
   Secure Shell is a Chrome Application that combines the "ssh" command (see
-  http://openssh.org/ for details) ported to NativeClient with the "hterm"
+  https://www.openssh.com/ for details) ported to NativeClient with the "hterm"
   terminal emulator to provide a secure shell client for the Chrome browser.
 
   Secure Shell provides similar functionality to PuTTY on Microsoft Windows(c)
@@ -262,6 +262,19 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 
   (And yes, we're already considering integrating with the Chrome NSS
   certificate store.)
+
+
+## Is IPv6 supported?
+
+  Mostly.  You can connect to hostnames that resolve to IPv6 addresses, and
+  you can connect directly IPv6 addresses.  Enter them in the connection
+  manager like any other hostname or IPv4 address.
+
+  When using links (see the next section), you'll need to use the standard
+  bracket style such as `[::1]`.
+
+  However, [zone ids](https://tools.ietf.org/html/rfc4007#section-11) are not
+  yet supported.
 
 
 ## Can I create bookmarks to specific sites?
