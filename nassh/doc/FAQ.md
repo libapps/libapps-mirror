@@ -19,8 +19,7 @@
 [TOC]
 
 Hello World.  This is the hterm/Secure Shell FAQ.  If you have a question that
-is not answered here, please ask it on the
-[chromium-hterm mailing list](https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-hterm).
+is not answered here, please ask it on the [chromium-hterm mailing list].
 
 
 ## What is "Secure Shell"?
@@ -114,9 +113,9 @@ is not answered here, please ask it on the
   mentioned.  Then check the bug list at <https://goo.gl/VkasRC>.
 
   If you don't see the issue there, you can search the archives of the
-  chromium-hterm mailing list here: <https://goo.gl/RYHiK>.
+  [chromium-hterm mailing list].
 
-  If all else fails then join the chromium-hterm mailing list and post
+  If all else fails then join the [chromium-hterm mailing list] and post
   about what you've found.
 
   If your bug involves some mis-interpreted escape sequence and you want
@@ -175,6 +174,67 @@ is not answered here, please ask it on the
 
   Probably.  It depends on what it does.  See the answer to the previous
   question for more details.
+
+
+## Is the SSH-1.x protocol supported?
+
+  Not anymore.  The SSH-2.0 protocol has been available for over a decade.
+  If you need this, then try contacting the [chromium-hterm mailing list].
+  Your best bet though would be to upgrade the server, or find a different
+  system/client to connect to the old system.
+
+
+## Is 1024-bit diffie-hellman-group1-sha1 key exchange supported?
+
+  It is disabled by default at runtime.  You can enable it by adding
+  `-oKexAlgorithms=+diffie-hellman-group1-sha1` to your ssh command line in the
+  connection page.
+
+  However, these key types are insecure.  You should update your server to
+  newer key types like RSA or ED25519.  Future support for these key types is
+  not guaranteed.
+
+  See the [OpenSSH legacy options] page for more details.
+
+
+## Are ssh-dss and ssh-dss-cert-* keys supported?
+
+  It is disabled by default at runtime.  You can enable it by adding
+  `-oHostKeyAlgorithms=+ssh-dss` to your ssh command line in the connection
+  page.
+
+  However, these key types are insecure.  You should update your server to
+  newer key types like RSA or ED25519.  Future support for these key types is
+  not guaranteed.
+
+  See the [OpenSSH legacy options] page for more details.
+
+
+## Are legacy v00 cert formats supported?
+
+  Not anymore.  You'll need to use a different client to connect if those are
+  the only ciphers your server supports.
+
+
+## Are blowfish-cbc, cast128-cbc, arcfour variants, the rijndael-cbc AES aliases, and 3des-cbc ciphers supported?
+
+  Not anymore.  You'll need to use a different client to connect if those are
+  the only ciphers your server supports.
+
+
+## Are RSA keys smaller than 1024 bits supported?
+
+  Not anymore.  Keys smaller than 1024 bits are insecure.  You'll need to
+  generate new keys and use those instead.
+
+  If you still need to connect to such a system, you'll have to use a different
+  client to connect.
+
+
+## Are MD5-based HMAC algorithms supported?
+
+  Not anymore.  You'll need to use a different client to connect if those are
+  the only ciphers your server supports.
 
 
 ## How do I remove a key?
@@ -752,3 +812,7 @@ The protocol handler is registered upon first connect.
 ## What if I want to make changes to the source?
 
   Read the [hack.md](hack.md) file in this directory.
+
+
+[chromium-hterm mailing list]: https://goo.gl/RYHiK
+[OpenSSH legacy options]: https://www.openssh.com/legacy.html

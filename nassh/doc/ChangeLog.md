@@ -7,6 +7,8 @@
 # 0.8.36.0, 2017-03-31, cleanup + openssh upgrade.
 
 * Upgraded openssh from 6.6p1 to 7.5p1.  Notably, support for ECDSA/ED25519.
+  Multiple legacy options have been dropped or disabled; see the [FAQ](./FAQ.md)
+  for more details.
 * Fixed handling of errno values in NaCl plugin for clearer errors.
 * Auto register ourselves as ssh:// protocol handler.
 * Add protip for ctrl+clicking links to startup message.
