@@ -23,6 +23,13 @@ Our existing set of bugs/feature requests can be found at
 To file an actual report, you can use <https://goo.gl/vb94JY>.  This will route
 to the right people.
 
+# Mirrors & Packaging
+
+* https://chromium.googlesource.com/apps/libapps/+/master/libdot: Main project site.
+* https://github.com/libapps/libdot: Mirror of just the libdot/ subdir.
+  Updated from time to time by developers.
+* https://www.npmjs.com/package/libdot: Packaging for npm installs.
+
 # Documentation
 
 * [ChangeLog](./doc/ChangeLog.md) -- List of interesting changes in each release

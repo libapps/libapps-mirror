@@ -8,7 +8,8 @@ The official copy of this repository is hosted at
 https://chromium.googlesource.com/apps/libapps.
 
 There is also a mirror on github at https://github.com/libapps/libapps-mirror.
-Keep in mind that this mirror may occasionally be behind the official
+A few subprojects are also extracted out into their own git repo and mirrored.
+Keep in mind that these mirrors may occasionally be behind the official
 repository.
 
 All changes must go through the Gerrit code review server on
