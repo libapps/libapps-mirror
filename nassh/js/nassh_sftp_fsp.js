@@ -545,13 +545,17 @@ nassh.sftp.fsp.onMountRequested = function(options, onSuccess, onError) {
  * instance before unmounting the file system.
  */
 nassh.sftp.fsp.onUnmountRequested = function(options, onSuccess, onError) {
-  if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
-    return;
+  // We don't return immediately on errors.  If the caller is trying to unmount
+  // us, then usually it means they think we're mounted even if we don't think
+  // we are.  This can happen if the Secure Shell background page is killed, but
+  // the Files app remembers all the connections.  Either way, it's more robust
+  // for us to always unmount with the FSP layer.
+  if (nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+    // Only clear local state if we know about the mount.
+    var sftpInstance = nassh.sftp.fsp.sftpInstances[options.fileSystemId];
+    sftpInstance.exit(0); // exit NaCl plugin
+    delete nassh.sftp.fsp.sftpInstances[options.fileSystemId];
   }
-
-  var sftpInstance = nassh.sftp.fsp.sftpInstances[options.fileSystemId];
-  sftpInstance.exit(0); // exit NaCl plugin
-  delete nassh.sftp.fsp.sftpInstances[options.fileSystemId];
 
   chrome.fileSystemProvider.unmount(
     {fileSystemId: options.fileSystemId}, () => {
