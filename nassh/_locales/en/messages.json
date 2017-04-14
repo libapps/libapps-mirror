@@ -413,5 +413,10 @@
   "JSON_PARSE_ERROR": {
     "message": "Could not parse JSON in '$1'",
     "description": "Error message shown when parsing JSON input failed"
+  },
+
+  "OMNIBOX_DEFAULT": {
+    "message": "<url><match>user@hostname[:port]</match></url> Connect to a saved profile or a new ssh system",
+    "description": "Default help text as a tip in the omnibox.  Do not translate the <url> and <match> tags."
   }
 }

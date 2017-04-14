@@ -56,6 +56,9 @@
       "js/nassh_background.js"
     ]
   },
+  "omnibox": {
+    "keyword": "ssh"
+  },
   "app": {
     "launch": {
       "local_path": "html/nassh.html"

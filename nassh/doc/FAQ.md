@@ -345,6 +345,16 @@ different app, visit the chrome://settings/handlers page.
   Mostly.  See the previous question about bookmarks.
 
 
+## Can I connect to systems from the omnibox?
+
+  Yep!  Type "ssh" followed by a space to start a quick connection, then type
+  a match to an existing profile, or type a new connection using the format
+  defined in the Direct links section above.
+
+  You can open it in the existing tab by hitting enter, or opening it in a new
+  window by hitting alt+enter.
+
+
 ## Can I use Secure Shell for port forwarding?
 
   Yes.  Enter your port forwarding options in the "SSH Arguments" field of

@@ -39,6 +39,7 @@
         console.log('background-page: init complete');
       }
     });
+    app.installOmnibox(chrome.omnibox);
 
     // "Public" window.app will be retrieved by individual windows via
     // chrome.getBackgroundPage().
