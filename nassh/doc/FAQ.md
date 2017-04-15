@@ -321,7 +321,9 @@ instead of `pnhechapfaindjhompbnflcldabbghjo`.
   might bring this more into compliance.
 
 *** aside
-The protocol handler is registered upon first connect.
+The protocol handler is registered upon first connect.  If you want to change
+the selection (Allow or Block), or you want to change the default handler to a
+different app, visit the chrome://settings/handlers page.
 ***
 
 
