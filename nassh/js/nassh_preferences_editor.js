@@ -534,10 +534,6 @@ nassh.PreferencesEditor.prototype.createInput = function(key) {
       onchange = null;
       break;
 
-    case 'bool':
-      input.type = 'checkbox';
-      break;
-
     case 'color':
       input.type = 'color';
       break;
