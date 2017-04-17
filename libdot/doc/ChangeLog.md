@@ -1,3 +1,8 @@
+# 1.11, 2017-04-17, Test improvements.
+
+* Added a bunch more tests, and improve the UI.
+* Added support for legacy X11 RGB color encoding (#rrrrggggbbbb).
+
 # 1.10, 2017-03-01, Overdue release.
 
 * Since Chrome 53, the FileError interface has been removed.
