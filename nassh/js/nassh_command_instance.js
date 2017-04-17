@@ -487,7 +487,6 @@ nassh.CommandInstance.prototype.parseDestination = function(destination) {
       username: username,
       hostname: hostname,
       port: port,
-      relayOptions: relayOptions
       relayOptions: relayOptions,
       destination: destination,
   };
