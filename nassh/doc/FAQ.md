@@ -128,7 +128,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 
 ## Is there a mailing list to discuss hterm or Secure Shell?
 
-  Yes, the public chromium-hterm mailing list is here: <https://goo.gl/RYHiK>.
+  Yes, there is a public [chromium-hterm mailing list] anyone can join!
 
 
 ## Can I connect using a public key pair or certificate?
@@ -258,7 +258,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 
   Sorry, not yet.  This is a bit of a technical challenge given the nature
   of the NaCl sandbox.  We have a few options that we're exploring.  Feel
-  free to post your ideas to the mailing list.
+  free to post your ideas to the [chromium-hterm mailing list].
 
   (And yes, we're already considering integrating with the Chrome NSS
   certificate store.)
@@ -783,7 +783,7 @@ different app, visit the chrome://settings/handlers page.
 
 ## Is there a way to try early releases of Secure Shell?
 
-  Yes.  First, you need to subscribe to the mailing list mentioned above.
+  Yes.  First, you need to subscribe to the [chromium-hterm mailing list].
   Subscribers have access to the "Dev" version in the Chrome Web Store, which
   is located here: <https://goo.gl/cFZlv>.
 
