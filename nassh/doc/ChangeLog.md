@@ -1,3 +1,14 @@
+# 0.8.36.2, 2017-04-17, bumps + cleanups + bug fixes.
+
+* Update to libdot 1.11.  Adds support for legacy X11 RGB color formats.
+* Update to hterm 1.61.  Adds blink support and sticky alt key.
+* Fix some typos in UI strings.
+* Merge NaCl ssh_client into the libapps repo!
+* Clean up some dead legacy code in NaCl plugin.
+* Fix wedged sftp mounts in the Files app.
+* Add support IPv6 addresses in URIs (e.g. ssh://[::1]).
+* Add omnibox integration via the "ssh" keyword.
+
 # 0.8.36.1, 2017-04-03, openssh cleanups.
 
 * Strip openssh binaries to shrink considerably.
