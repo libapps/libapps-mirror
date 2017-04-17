@@ -123,4 +123,4 @@ $(PROJECT)_nl_x86_64.dbg.nexe : $(PROJECT)_nl.pexe
 	$(PNACL_STRIP) $^ -o $@
 
 clean:
-	rm -rf output/*.o $(PROJECT)*.nexe $(PROJECT).pexe
+	rm -rf output/*.o $(PROJECT)*.[np]exe
