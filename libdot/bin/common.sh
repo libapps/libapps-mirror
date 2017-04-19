@@ -40,7 +40,7 @@ function search_file() {
   echo_err "$filename not found in $LIBDOT_SEARCH_PATH"
 }
 
-# See <http://code.google.com/p/shflags/>.
+# See <https://github.com/kward/shflags>.
 source "$(search_file "libdot/bin/shflags")"
 
 # Run a command, exiting if it returns a non-zero exit code.

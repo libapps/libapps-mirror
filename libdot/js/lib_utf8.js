@@ -7,8 +7,8 @@
 // TODO(davidben): When the string encoding API is implemented,
 // replace this with the native in-browser implementation.
 //
-// http://wiki.whatwg.org/wiki/StringEncoding
-// http://dvcs.w3.org/hg/encoding/raw-file/tip/Overview.html
+// https://wiki.whatwg.org/wiki/StringEncoding
+// https://encoding.spec.whatwg.org/
 
 /**
  * A stateful UTF-8 decoder.

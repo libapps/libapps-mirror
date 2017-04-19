@@ -130,7 +130,7 @@ nassh.Nassh.prototype.initPlugin_ = function(onComplete) {
 
   document.body.insertBefore(this.plugin_, document.body.firstChild);
 
-  // Set mimetype twice for http://crbug.com/371059
+  // Set mimetype twice for https://crbug.com/371059
   this.plugin_.setAttribute('type', 'application/x-nacl');
 };
 

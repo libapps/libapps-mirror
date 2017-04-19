@@ -76,7 +76,7 @@ wam.binding.fs.OpenContext.dataTypes = [
      * data is expected to be an ArrayBuffer instance.
      *
      * NOTE(rginda): ArrayBuffer objects don't work over wam.transport.
-     * ChromePort, due to http://crbug.com/374454.
+     * ChromePort, due to <https://crbug.com/374454>.
      */
     'arraybuffer',
 

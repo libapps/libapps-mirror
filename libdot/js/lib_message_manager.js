@@ -9,7 +9,7 @@
  *
  * Note: chrome.i18n isn't sufficient because...
  *     1. There's a bug in chrome that makes it unavailable in iframes:
- *        http://crbug.com/130200
+ *        https://crbug.com/130200
  *     2. The client code may not be packaged in a Chrome extension.
  *     3. The client code may be part of a library packaged in a third-party
  *        Chrome extension.
@@ -32,7 +32,7 @@ lib.MessageManager = function(languages) {
  * Add message definitions to the message manager.
  *
  * This takes an object of the same format of a Chrome messages.json file.  See
- * <http://code.google.com/chrome/extensions/i18n-messages.html>.
+ * <https://developer.chrome.com/extensions/i18n-messages>.
  */
 lib.MessageManager.prototype.addMessages = function(defs) {
   for (var key in defs) {

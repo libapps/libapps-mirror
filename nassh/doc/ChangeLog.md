@@ -1196,7 +1196,7 @@ BUG=chromium-os:27950
 * Fix CONNECTING message to take a single DESTINATION parameter rather
   than distinct USER and HOST parameters.  This avoids an issue in the
   chrome i18n code that chokes on the translated messages.
-  http://crosbug.com/26620
+  https://crbug.com/209464
 
 # 0.7.4.1, 2012-02-28, rginda@chromium.org
 

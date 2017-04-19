@@ -12,7 +12,7 @@ Keep in mind that this mirror may occasionally be behind the official
 repository.
 
 All changes must go through the Gerrit code review server on
-http://chromium-review.googlesource.com.  Github pull requests cannot be
+https://chromium-review.googlesource.com.  Github pull requests cannot be
 accepted.  Please see the [HACK.md](./HACK.md) document in this directory for
 the details.
 

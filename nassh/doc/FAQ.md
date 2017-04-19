@@ -163,11 +163,11 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   Nearly anything that ssh might care about from your ~/.ssh directory can go
   here.
 
-  See <http://www.openbsd.org/cgi-bin/man.cgi?query=ssh_config> for more
-  information about the ssh configuration syntax.  Keep in mind that any
-  directives that would require access outside of the NaCl sandbox will not
-  function properly.  This includes (but is not limited to) X11 forwarding,
-  syslog functionality, and anything that requires a domain socket.
+  See <http://man.openbsd.org/ssh_config> for more information about the ssh
+  configuration syntax.  Keep in mind that any directives that would require
+  access outside of the NaCl sandbox will not function properly.  This includes
+  (but is not limited to) X11 forwarding,  syslog functionality, and anything
+  that requires a domain socket.
 
 
 ## Can Secure Shell use my `~/.ssh/config` file?

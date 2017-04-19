@@ -85,7 +85,7 @@ sp.NaCl.prototype.run = function() {
 
   document.body.appendChild(plugin);
 
-  // Set mimetype twice for http://crbug.com/371059
+  // Set mimetype twice for https://crbug.com/371059
   plugin.setAttribute('type', this.mimeType_);
 };
 
