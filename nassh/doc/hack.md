@@ -65,6 +65,42 @@ in an isolated profile, with the necessary command line arguments, and launch
 the Secure Shell app.  You can run this script again to rebuild dependencies
 and relaunch the Secure Shell app.
 
+# Loading Unpacked Extensions
+
+Loading directly from the checked out nassh directory is the normal way of
+testing.  It will use the dev extension id (`okddffdblfhhnmhodogpojmfkjmhinfp`)
+to avoid conflicts with the stable extension id, although it will still conflict
+if you have the dev version installed from the CWS.
+
+The extension id is controlled by the `key` field in the [manifest.json].  See
+the [manifest key docs](https://developer.chrome.com/extensions/manifest/key)
+for more details.
+
+## Whitelisted Permissions
+
+Using the dev extension id is necessary in order to access some APIs that are
+whitelisted only for Secure Shell.  If you don't need these features, you can
+get by with using a different id (and delete the settings from the
+[manifest.json] to avoid warnings at runtime).
+
+* Access to [crosh](chromeos-crosh.md) under Chrome OS (`terminalPrivate`).
+* Access to raw sockets under NaCl.  This allows connecting directly to SSH
+  servers (e.g. port 22).  Making connections over https using relay servers
+  will still work though.  See the FAQ for more details.
+* SFTP backend for Chrome OS (`fileSystemProvider` and
+  `file_system_provider_capabilities`).  Not exactly a whitelisted permission
+  as anyone can use it normally, but does throw runtime warnings.
+
+## Stable Extension
+
+If you try to load an unpacked extension using the stable extension id, you
+might run into problems if your administrator installs it via enterprise
+policy.  If you see the error below, you won't be able to bypass it.  Just
+use the dev extension id instead.
+```
+Secure Shell (extension ID "pnhechapfaindjhompbnflcldabbghjo") is blocked by the administrator.
+```
+
 # Source Layout
 
 Keep in mind that the NaCl [ssh_client] code does not live here.
