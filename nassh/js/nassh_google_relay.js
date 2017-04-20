@@ -239,8 +239,10 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
   this.storage.removeItem('googleRelay.relayPort');
   this.storage.removeItem('googleRelay.resumePath');
 
-  if (this.relayServer)
+  if (this.relayServer) {
+    this.io.println(nassh.msg('FOUND_RELAY', [this.relayServer]));
     return true;
+  }
 
   return false;
 };
