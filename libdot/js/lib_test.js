@@ -22,10 +22,20 @@ window.onload = function() {
 
       passed.innerText = testRun.passes.length + ' tests passed.';
 
-      if (testRun.failures.length != 0)
+      if (testRun.failures.length != 0) {
         failed.innerText = 'ERROR: ' + testRun.failures.length + ' tests failed!';
+        document.title = failed.innerText;
+      } else
+        document.title = passed.innerText;
 
       document.querySelector('#log').innerText = testRun.testManager.log.data;
+    };
+
+    testManager.testPreamble = (result, cx) => {
+      var testRun = result.testRun;
+      cx.window.document.title =
+          '[' + (testRun.passes.length + testRun.failures.length) + '] ' +
+          result.test.fullName;
     };
 
     testRun = testManager.createTestRun({window: window});

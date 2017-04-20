@@ -53,6 +53,24 @@ lib.TestManager.prototype.createTestRun = function(opt_cx) {
 lib.TestManager.prototype.onTestRunComplete = function(testRun) {};
 
 /**
+ * Called before a test associated with this test manager is run.
+ *
+ * @param {lib.TestManager.Result} result The result object for the upcoming
+ *     test.
+ * @param {Object} cx The context object for a test run.
+ */
+lib.TestManager.prototype.testPreamble = function(result, cx) {};
+
+/**
+ * Called after a test associated with this test manager finishes.
+ *
+ * @param {lib.TestManager.Result} result The result object for the finished
+ *     test.
+ * @param {Object} cx The context object for a test run.
+ */
+lib.TestManager.prototype.testPostamble = function(result, cx) {};
+
+/**
  * Destination for test case output.
  *
  * @param {function(string)} opt_logFunction Optional function to call to
@@ -352,7 +370,7 @@ lib.TestManager.Suite.prototype.preamble = function(result, cx) {};
  *
  * Any exception here will abort the remainder of the test run.
  *
- * @param {lib.TestManager.Result} result The result object for the upcoming
+ * @param {lib.TestManager.Result} result The result object for the finished
  *     test.
  * @param {Object} cx The context object for a test run.
  */
@@ -646,7 +664,8 @@ lib.TestManager.TestRun.prototype.onTestRunComplete_ = function(
  */
 lib.TestManager.TestRun.prototype.onResultComplete = function(result) {
   try {
-    result.suite.postamble();
+    this.testManager.testPostamble(result, this.cx);
+    result.suite.postamble(result, this.ctx);
   } catch (ex) {
     this.log.println('Unexpected exception in postamble: ' +
                      (ex.stack ? ex.stack : ex));
@@ -741,6 +760,7 @@ lib.TestManager.TestRun.prototype.runNextTest_ = function() {
     this.log.pushPrefix('  ');
 
     this.currentResult = new lib.TestManager.Result(this, suite, test);
+    this.testManager.testPreamble(this.currentResult, this.cx);
     suite.preamble(this.currentResult, this.cx);
 
     this.testQueue_.shift();
