@@ -22,7 +22,10 @@ Hello World.  This is the hterm/Secure Shell FAQ.  If you have a question that
 is not answered here, please ask it on the [chromium-hterm mailing list].
 
 
-## What is "Secure Shell"?
+## General Questions
+
+
+### What is "Secure Shell"?
 
   Secure Shell is a Chrome Application that combines the "ssh" command (see
   https://www.openssh.com/ for details) ported to NativeClient with the "hterm"
@@ -32,7 +35,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   systems, and the ssh command-line application on Mac OS X and Linux systems.
 
 
-## What is "hterm"?
+### What is "hterm"?
 
   "HTML Terminal", or hterm, is an xterm-compatible terminal emulator written
   entirely in JavaScript.
@@ -44,7 +47,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   other text-based command) on its own.
 
 
-## How do Secure Shell and hterm relate to the "crosh" (Ctrl-Alt-T) command in Chrome OS?
+### How do Secure Shell and hterm relate to the "crosh" (Ctrl-Alt-T) command in Chrome OS?
 
   See [chromeos-crosh.md](chromeos-crosh.md) in this directory for the details.
 
@@ -53,7 +56,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   possible.
 
 
-## How do hterm and Secure Shell differ from existing web terminals?
+### How do hterm and Secure Shell differ from existing web terminals?
 
   hterm stands out from many existing web terminals in that it was built from
   the start to match the performance and correctness of "native" terminals such
@@ -70,44 +73,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   are even required to hand the proxy your credentials in plain text.
 
 
-## Is my connection proxied in any way?
-
-  No.  By default all connections are made directly to the sshd server on the
-  destination machine.
-
-
-## But, what if I *want* to ssh over HTTP?
-
-  Secure Shell also knows how to connect to an HTTP-to-ssh relay that was
-  built inside Google.  Unfortunately that relay isn't open source, and Google
-  doesn't maintain a public pool of relays.
-
-  However, you're free to build one that works the same way.  There should be
-  enough documentation in [nassh_google_relay.js](../js/nassh_google_relay.js)
-  to reverse engineer a compatible relay.
-
-  The good news is that someone has built an
-  [open source relay](https://github.com/zyclonite/nassh-relay).  It is not
-  supported by us though, so please take any questions/concerns about it to
-  the author.
-
-
-## Is my connection really secure?
-
-  The Secure Shell app uses ssh to manage the encrypted communication channels.
-  This makes it about as secure as any other connection based on the ssh
-  command.
-
-  It does have the added advantage of running ssh as a sandboxed
-  Native Client plugin, which in theory makes it more secure than an
-  unsandboxed ssh connection.
-
-  Additionally, the Secure Shell application follows a strict Content Security
-  Policy that does not allow access to the JavaScript 'eval' function.  This
-  helps lower the risk that a terminal exploit could run arbitrary JavaScript.
-
-
-## What should I do if I notice a bug?
+### What should I do if I notice a bug?
 
   First, please continue reading this FAQ to make sure your issue isn't
   mentioned.  Then check the bug list at <https://goo.gl/VkasRC>.
@@ -126,12 +92,83 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   [hack.md](hack.md) file in this directory.
 
 
-## Is there a mailing list to discuss hterm or Secure Shell?
+### Is there a mailing list to discuss hterm or Secure Shell?
 
   Yes, there is a public [chromium-hterm mailing list] anyone can join!
 
 
-## Can I connect using a public key pair or certificate?
+### Is there a way to try early releases of Secure Shell?
+
+  Yes.  First, you need to subscribe to the [chromium-hterm mailing list].
+  Subscribers have access to the "Dev" version in the Chrome Web Store, which
+  is located here: <https://goo.gl/cFZlv>.
+
+  Please keep in mind that the Dev version has gone through significantly less
+  testing than the Beta.  Fortunately, you can install both and switch back
+  to Beta if you have trouble with Dev.
+
+
+### Where is the source code?
+
+  The hterm source is here: <https://goo.gl/8qndhN>.  This includes the
+  front-end code for Secure Shell.
+
+  The Native Client wrapper around ssh is here: <https://goo.gl/4tZCMI>.
+
+### Is there a changelog?
+
+  Yes.  Look under the doc/ directory for each project.
+
+  There is [one for hterm](../../hterm/doc/ChangeLog.md) and
+  [one for Secure Shell](./ChangeLog.md).
+
+
+### What if I want to make changes to the source?
+
+  Read the [hack.md](hack.md) file in this directory.
+
+
+## Secure Shell (ssh) Questions
+
+
+### Is my connection proxied in any way?
+
+  No.  By default all connections are made directly to the sshd server on the
+  destination machine.
+
+
+### But, what if I *want* to ssh over HTTP?
+
+  Secure Shell also knows how to connect to an HTTP-to-ssh relay that was
+  built inside Google.  Unfortunately that relay isn't open source, and Google
+  doesn't maintain a public pool of relays.
+
+  However, you're free to build one that works the same way.  There should be
+  enough documentation in [nassh_google_relay.js](../js/nassh_google_relay.js)
+  to reverse engineer a compatible relay.
+
+  The good news is that someone has built an
+  [open source relay](https://github.com/zyclonite/nassh-relay).  It is not
+  supported by us though, so please take any questions/concerns about it to
+  the author.
+
+
+### Is my connection really secure?
+
+  The Secure Shell app uses ssh to manage the encrypted communication channels.
+  This makes it about as secure as any other connection based on the ssh
+  command.
+
+  It does have the added advantage of running ssh as a sandboxed
+  Native Client plugin, which in theory makes it more secure than an
+  unsandboxed ssh connection.
+
+  Additionally, the Secure Shell application follows a strict Content Security
+  Policy that does not allow access to the JavaScript 'eval' function.  This
+  helps lower the risk that a terminal exploit could run arbitrary JavaScript.
+
+
+### Can I connect using a public key pair or certificate?
 
   You can import identity files from the connection dialog.  Select the
   "Import..." link to bring up a file picker.
@@ -170,13 +207,13 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   that requires a domain socket.
 
 
-## Can Secure Shell use my `~/.ssh/config` file?
+### Can I use my `~/.ssh/config` file?
 
   Probably.  It depends on what it does.  See the answer to the previous
   question for more details.
 
 
-## Is the SSH-1.x protocol supported?
+### Is the SSH-1.x protocol supported?
 
   Not anymore.  The SSH-2.0 protocol has been available for over a decade.
   If you need this, then try contacting the [chromium-hterm mailing list].
@@ -184,7 +221,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   system/client to connect to the old system.
 
 
-## Is 1024-bit diffie-hellman-group1-sha1 key exchange supported?
+### Is 1024-bit diffie-hellman-group1-sha1 key exchange supported?
 
   It is disabled by default at runtime.  You can enable it by adding
   `-oKexAlgorithms=+diffie-hellman-group1-sha1` to your ssh command line in the
@@ -197,7 +234,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   See the [OpenSSH legacy options] page for more details.
 
 
-## Are ssh-dss and ssh-dss-cert-* keys supported?
+### Are ssh-dss and ssh-dss-cert-* keys supported?
 
   It is disabled by default at runtime.  You can enable it by adding
   `-oHostKeyAlgorithms=+ssh-dss` to your ssh command line in the connection
@@ -210,19 +247,19 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   See the [OpenSSH legacy options] page for more details.
 
 
-## Are legacy v00 cert formats supported?
+### Are legacy v00 cert formats supported?
 
   Not anymore.  You'll need to use a different client to connect if those are
   the only ciphers your server supports.
 
 
-## Are blowfish-cbc, cast128-cbc, arcfour variants, the rijndael-cbc AES aliases, and 3des-cbc ciphers supported?
+### Are blowfish-cbc, cast128-cbc, arcfour variants, the rijndael-cbc AES aliases, and 3des-cbc ciphers supported?
 
   Not anymore.  You'll need to use a different client to connect if those are
   the only ciphers your server supports.
 
 
-## Are RSA keys smaller than 1024 bits supported?
+### Are RSA keys smaller than 1024 bits supported?
 
   Not anymore.  Keys smaller than 1024 bits are insecure.  You'll need to
   generate new keys and use those instead.
@@ -231,20 +268,20 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   client to connect.
 
 
-## Are MD5-based HMAC algorithms supported?
+### Are MD5-based HMAC algorithms supported?
 
   Not anymore.  You'll need to use a different client to connect if those are
   the only ciphers your server supports.
 
 
-## How do I remove a key?
+### How do I remove a key?
 
   From the connection dialog, select an identity from the dropdown and press
   the DELETE key.  This will remove both the private and public key files from
   the HTML5 filesystem.
 
 
-## How do I remove ALL keys?
+### How do I remove ALL keys?
 
   Open the JavaScript console and type...
 
@@ -254,7 +291,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   *not* affect your preferences.
 
 
-## Does Secure Shell support a keychain of some sort?
+### Is there support for keychains?
 
   Sorry, not yet.  This is a bit of a technical challenge given the nature
   of the NaCl sandbox.  We have a few options that we're exploring.  Feel
@@ -264,7 +301,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   certificate store.)
 
 
-## Is IPv6 supported?
+### Is IPv6 supported?
 
   Mostly.  You can connect to hostnames that resolve to IPv6 addresses, and
   you can connect directly IPv6 addresses.  Enter them in the connection
@@ -277,7 +314,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   yet supported.
 
 
-## Can I create bookmarks to specific sites?
+### Can I create bookmarks to specific sites?
 
   Mostly.  You can create a few types of bookmarks:
   1. A connection specifying a user & host (and optionally a port).
@@ -290,7 +327,7 @@ extension id `okddffdblfhhnmhodogpojmfkjmhinfp` in the examples below
 instead of `pnhechapfaindjhompbnflcldabbghjo`.
 ***
 
-### Direct links
+#### Direct links
 
   The first one takes the form of:
 
@@ -308,7 +345,7 @@ instead of `pnhechapfaindjhompbnflcldabbghjo`.
 
   `chrome-extension://pnhechapfaindjhompbnflcldabbghjo/html/nassh.html#milkman@cowfarm:2222`
 
-### Profile links
+#### Profile links
 
   The second method requires you to first create a new connection in the
   connection dialog, and then you can bookmark that connection directly.
@@ -322,7 +359,7 @@ instead of `pnhechapfaindjhompbnflcldabbghjo`.
   This allows you to fully control the ssh parameters though: you may add
   arguments or change the command line or relay settings.
 
-### ssh:// links
+#### ssh:// links
 
   You can create `ssh://` links that will automatically open Secure Shell.
   They take the same form as Direct links above.
@@ -340,12 +377,12 @@ different app, visit the chrome://settings/handlers page.
 ***
 
 
-## Can I create links in webpages to autoconnect?
+### Can I create links in webpages to autoconnect?
 
   Mostly.  See the previous question about bookmarks.
 
 
-## Can I connect to systems from the omnibox?
+### Can I connect to systems from the omnibox?
 
   Yep!  Type "ssh" followed by a space to start a quick connection, then type
   a match to an existing profile, or type a new connection using the format
@@ -355,14 +392,33 @@ different app, visit the chrome://settings/handlers page.
   window by hitting alt+enter.
 
 
-## Can I use Secure Shell for port forwarding?
+### Can I forward ports?
 
   Yes.  Enter your port forwarding options in the "SSH Arguments" field of
   the connect dialog.  The port forward will be active for the duration of
   the Secure Shell session.
 
 
-## What is the "Terminal Profile" field for?
+### How do I remove a known host fingerprint (aka known_hosts) entry?
+
+  If you know the index of the offending host entry (it's usually reported
+  by ssh if the connection fails) you can open the JavaScript console and
+  type...
+
+     term_.command.removeKnownHostByIndex(index)
+
+  Replace index with the numeric, one-based host index.
+
+  If you don't know the index, or you'd like to clear all known hosts,
+  type...
+
+     term_.command.removeAllKnownHosts()
+
+
+## Terminal (hterm) Questions
+
+
+### What is the "Terminal Profile" field for?
 
   This is the last field in the connect dialog.  It allows you to select
   which set of terminal preferences to use for the connection.
@@ -378,7 +434,7 @@ different app, visit the chrome://settings/handlers page.
   other saved connections.
 
 
-## How do I set terminal preferences?
+### How do I set terminal preferences?
 
   You should manage your preferences under the Secure Shell Options page.
   Just right click the app in Chrome, select Options, and see the Appearance
@@ -414,7 +470,7 @@ different app, visit the chrome://settings/handlers page.
   130.
 
 
-## How do I change the audible bell sound?
+### How do I change the audible bell sound?
 
   You should manage your preferences under the Secure Shell Options page.
   Just right click the app in Chrome, select Options, and see the Sounds
@@ -431,7 +487,7 @@ different app, visit the chrome://settings/handlers page.
   that are beyond the scope of this FAQ.
 
 
-## How do I disable the audible bell?
+### How do I disable the audible bell?
 
   You should manage your preferences under the Secure Shell Options page.
   Just right click the app in Chrome, select Options, and see the Sounds
@@ -443,7 +499,7 @@ different app, visit the chrome://settings/handlers page.
      term_.prefs_.set('audible-bell-sound', '')
 
 
-## How do I change the color scheme?
+### How do I change the color scheme?
 
   You should manage your preferences under the Secure Shell Options page.
   Just right click the app in Chrome, select Options, and see the Appearance
@@ -462,7 +518,7 @@ different app, visit the chrome://settings/handlers page.
   for the cursor if you want to be able to see the character behind it.
 
 
-## How do I change the font face?
+### How do I change the font face?
 
   You should manage your preferences under the Secure Shell Options page.
   Just right click the app in Chrome, select Options, and see the Appearance
@@ -482,7 +538,7 @@ different app, visit the chrome://settings/handlers page.
   colors to indicate bold.
 
 
-## How do I change the default font size?
+### How do I change the default font size?
 
   You should manage your preferences under the Secure Shell Options page.
   Just right click the app in Chrome, select Options, and see the Appearance
@@ -497,7 +553,7 @@ different app, visit the chrome://settings/handlers page.
   you'll have to pick a different number to have any effect at all.
 
 
-## Can I quickly make temporarily changes to the font size?
+### Can I quickly make temporarily changes to the font size?
 
   Yes.  The Ctrl-Plus, Ctrl-Minus and Ctrl-Zero keys can increase, decrease,
   or reset the current font size.  This zoomed size is not remembered the
@@ -521,7 +577,7 @@ different app, visit the chrome://settings/handlers page.
   own once your zoom setting is fixed.
 
 
-## Why do I get a warning about my browser zoom?
+### Why do I get a warning about my browser zoom?
 
   Because hterm requires you to set your browser to 100%, or 1:1 zoom.
   Try Ctrl-Zero or the Wrench->Zoom menu to reset your browser zoom.  The
@@ -530,7 +586,7 @@ different app, visit the chrome://settings/handlers page.
   See the previous question for more information.
 
 
-## How do I disable anti-aliasing?
+### How do I disable anti-aliasing?
 
   You should manage your preferences under the Secure Shell Options page.
   Just right click the app in Chrome, select Options, and see the Appearance
@@ -548,7 +604,7 @@ different app, visit the chrome://settings/handlers page.
   The default setting is 'antialiased'.
 
 
-## How do I make the cursor blink?
+### How do I make the cursor blink?
 
   You should manage your preferences under the Secure Shell Options page.
   Just right click the app in Chrome, select Options, and see the Appearance
@@ -569,7 +625,7 @@ different app, visit the chrome://settings/handlers page.
      term_.prefs_.reset('cursor-blink')
 
 
-## Why does hterm ignore the cursor blink escape sequence?
+### Why does hterm ignore the cursor blink escape sequence?
 
   Most terminals ignore attempts by the host to change the blink-state of the
   cursor.  This lets you choose between a blink/steady cursor via the
@@ -580,7 +636,7 @@ different app, visit the chrome://settings/handlers page.
 
      term_.prefs_.set('enable-dec12', true)
 
-## How do I change the TERM environment variable?
+### How do I change the TERM environment variable?
 
   You should manage your preferences under the Secure Shell Options page.
   Just right click the app in Chrome, select Options, and see the Misc
@@ -600,7 +656,7 @@ different app, visit the chrome://settings/handlers page.
   You will have to reconnect for this setting to take effect.
 
 
-## How do I enter accented characters?
+### How do I enter accented characters?
 
   You should manage your preferences under the Secure Shell Options page.
   Just right click the app in Chrome, select Options, and see the Keyboard
@@ -639,7 +695,7 @@ different app, visit the chrome://settings/handlers page.
      term_.prefs_.set('alt-is-meta', true)
 
 
-## How do I make backspace send ^H?
+### How do I make backspace send ^H?
 
   You should manage your preferences under the Secure Shell Options page.
   Just right click the app in Chrome, select Options, and see the Keyboard
@@ -654,23 +710,7 @@ different app, visit the chrome://settings/handlers page.
      term_.prefs_.set('backspace-sends-backspace', true)
 
 
-## How do I remove a known host fingerprint (aka known_hosts) entry?
-
-  If you know the index of the offending host entry (it's usually reported
-  by ssh if the connection fails) you can open the JavaScript console and
-  type...
-
-     term_.command.removeKnownHostByIndex(index)
-
-  Replace index with the numeric, one-based host index.
-
-  If you don't know the index, or you'd like to clear all known hosts,
-  type...
-
-     term_.command.removeAllKnownHosts()
-
-
-## How do I send Ctrl-W, Ctrl-N or Ctrl-T to the terminal?
+### How do I send Ctrl-W, Ctrl-N or Ctrl-T to the terminal?
 
   Chrome blocks tab contents from getting access to these (and a few other)
   keys.  You can open Secure Shell in a dedicated window to get around
@@ -687,7 +727,7 @@ different app, visit the chrome://settings/handlers page.
   provide a solution.
 
 
-## How do I copy text from the terminal?
+### How do I copy text from the terminal?
 
   By default, Secure Shell automatically copies your active selection to the
   clipboard.
@@ -709,7 +749,7 @@ different app, visit the chrome://settings/handlers page.
     menu, when running Secure Shell in a browser tab.
 
 
-## How do I paste text to the terminal?
+### How do I paste text to the terminal?
 
   By default, Shift-Insert pastes the clipboard on all platforms.  If you'd
   prefer to be able to send Shift-Insert to the host, set the
@@ -728,7 +768,7 @@ different app, visit the chrome://settings/handlers page.
     menu.
 
 
-## Why does the cursor blink in emacs?
+### Why does the cursor blink in emacs?
 
   This answer only applies if you've set the 'enable-dec12' preference to true.
 
@@ -740,7 +780,7 @@ different app, visit the chrome://settings/handlers page.
   described in <https://goo.gl/muppJj>.
 
 
-## Why does the color scheme look funny in emacs/vi/vim?
+### Why does the color scheme look funny in emacs/vi/vim?
 
   hterm's default value for the TERM environment variable is
   'xterm-256color'.  This causes emacs, vi, and some other programs to
@@ -760,7 +800,7 @@ different app, visit the chrome://settings/handlers page.
   Then restart Secure Shell.
 
 
-## Can I use my mouse with Secure Shell?
+### Can I use my mouse?
 
   Sort of.  Both emacs and vi have mouse modes that are compatible with Secure
   Shell.
@@ -772,7 +812,7 @@ different app, visit the chrome://settings/handlers page.
   In vi, use ":set mouse=a" to enable mouse mode.
 
 
-## Does hterm support the "OSC 52", aka "clipboard operations" sequence?
+### Is OSC 52 (aka "clipboard operations") supported?
 
   Clipboard writing is allowed by default, but you can disable it if you're
   paranoid.  Set the 'enable-clipboard-write' preference to false to disable
@@ -799,44 +839,9 @@ different app, visit the chrome://settings/handlers page.
   the "c;" system clipboard.  Hterm treats them all as the system clipboard.
 
 
-## Can I synchronize my emacs selection with the system clipboard?
+### Can I synchronize my emacs selection with the system clipboard?
 
   Yes, as long as you're not using tmux.  See ../etc/osc52.el for the details.
-
-
-## Is there a way to try early releases of Secure Shell?
-
-  Yes.  First, you need to subscribe to the [chromium-hterm mailing list].
-  Subscribers have access to the "Dev" version in the Chrome Web Store, which
-  is located here: <https://goo.gl/cFZlv>.
-
-  Please keep in mind that the Dev version has gone through significantly less
-  testing than the Beta.  Fortunately, you can install both and switch back
-  to Beta if you have trouble with Dev.
-
-
-## Where is the source code?
-
-  The hterm source is here: <https://goo.gl/8qndhN>.  This includes the
-  front-end code for Secure Shell.
-
-  The Native Client wrapper around ssh is here: <https://goo.gl/4tZCMI>.
-
-## Is there a change log?
-
-  Yes.  Look under the doc/ directory of the hterm source.
-
-  There are two change logs.  One shows changes to the development version
-  of Secure Shell.  The other shows stable releases.
-
-  In general, the dev series of the form 0.X.Y.Z becomes the stable
-  version 0.X.Y.  So SecureShell-dev-0.7.2.0, 0.7.2.1 and 0.7.2.2 all lead up
-  to SecureShell-0.7.2.
-
-
-## What if I want to make changes to the source?
-
-  Read the [hack.md](hack.md) file in this directory.
 
 
 [chromium-hterm mailing list]: https://goo.gl/RYHiK
