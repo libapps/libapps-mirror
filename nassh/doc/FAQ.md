@@ -1011,7 +1011,18 @@ different app, visit the chrome://settings/handlers page.
     $ hterm-notify.sh "Some Title" "Lots of text here."
 
 
+### How do I view images?
+
+  We support the iTerm2's OSC 1337 file transfer sequence.  The protocol is a
+  little bit complicated, so there's a [hterm-show-file.sh] helper script for
+  you.  iTerm2's "imgcat" script should also work.
+
+  For more details on the options available, see the
+  [specification](../../hterm/doc/ControlSequences.md#OSC-1337).
+
+
 [hterm-notify.sh]: ../../hterm/etc/hterm-notify.sh
+[hterm-show-file.sh]: ../../hterm/etc/hterm-show-file.sh
 [osc52.el]: ../../hterm/etc/osc52.el
 [osc52.sh]: ../../hterm/etc/osc52.sh
 [osc52.vim]: ../../hterm/etc/osc52.vim

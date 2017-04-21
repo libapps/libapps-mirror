@@ -215,6 +215,50 @@
 			}
 		}
 	},
+	"HTERM_BUTTON_ALLOW_ALWAYS": {
+		"description": "Button label for always allowing the requested feature.",
+		"message": "always allow"
+	},
+	"HTERM_BUTTON_ALLOW_SESSION": {
+		"description": "Button label for allowing the requested feature for this session only.",
+		"message": "allow this session"
+	},
+	"HTERM_BUTTON_BLOCK": {
+		"description": "Button label for blocking the requested feature.",
+		"message": "block"
+	},
+	"HTERM_LOADING_RESOURCE_FAILED": {
+		"description": "Message shown to the user when loading a resource (image, audio file, video, etc...) failed for any reason.",
+		"message": "Loading $RESOURCE$ failed ...",
+		"placeholders": {
+			"resource": {
+				"content": "$1",
+				"example": "some-image.gif"
+			}
+		}
+	},
+	"HTERM_LOADING_RESOURCE_START": {
+		"description": "Message shown to the user when loading a resource (image, audio file, video, etc...).",
+		"message": "Loading $RESOURCE$ ...",
+		"placeholders": {
+			"resource": {
+				"content": "$1",
+				"example": "some-image.gif"
+			}
+		}
+	},
+	"HTERM_POPUP_INLINE_IMAGE": {
+		"description": "Message shown when asking users how they want to display inline images.",
+		"message": "Inline Images"
+	},
+	"HTERM_POPUP_INLINE_IMAGE_DISABLED": {
+		"description": "Message shown to the user when trying to display an image but support is disabled.",
+		"message": "Inline Images Disabled"
+	},
+	"HTERM_PREF_ALLOW_IMAGES_INLINE": {
+		"description": "Help text shown for the hterm 'allow-images-inline' preference.",
+		"message": "Whether to allow the remote side to display images in the terminal.\n\nBy default, we prompt until a choice is made."
+	},
 	"HTERM_PREF_ALT_BACKSPACE_IS_META_BACKSPACE": {
 		"description": "Help text shown for the hterm 'alt-backspace-is-meta-backspace' preference.",
 		"message": "If set, undoes the Chrome OS Alt-Backspace->DEL remap, so that alt-backspace indeed is alt-backspace."
@@ -670,6 +714,10 @@
 	"TIP_12": {
 		"description": "Helpful tip shown to user advertising features. Do not translate 'Yubikeys' as it's a product name.",
 		"message": "Use Yubikeys and other smart cards for ssh auth: https://goo.gl/3ZEU1w"
+	},
+	"TIP_13": {
+		"description": "Helpful tip shown to user advertising features.",
+		"message": "Display images inline: https://goo.gl/MnSysj"
 	},
 	"TIP_2": {
 		"description": "Helpful tip shown to user advertising features. Do not translate 'hterm-notify' as it's the name of a program.",

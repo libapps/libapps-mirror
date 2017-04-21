@@ -163,7 +163,7 @@ nassh.CommandInstance.prototype.run = function() {
     }
 
     // Display a random tip every time they launch to advertise features.
-    var num = lib.f.randomInt(1, 12);
+    let num = lib.f.randomInt(1, 13);
     this.io.println('');
     this.io.println(nassh.msg('WELCOME_TIP_OF_DAY',
                               [num, nassh.msg(`TIP_${num}`)]));
