@@ -838,11 +838,19 @@ different app, visit the chrome://settings/handlers page.
   Note that the specification for OSC 52 mentions destinations other than
   the "c;" system clipboard.  Hterm treats them all as the system clipboard.
 
+  There is an [osc52.sh] helper script available as well:
 
-### Can I synchronize my emacs selection with the system clipboard?
-
-  Yes, as long as you're not using tmux.  See ../etc/osc52.el for the details.
+    $ echo "hello world" | osc52.sh
 
 
+### Can I synchronize my emacs/vim selection with the system clipboard?
+
+  Yes, as long as you're not using tmux.  For Emacs, see [osc52.el], and for
+  vim, see [osc52.vim].
+
+
+[osc52.el]: ../../hterm/etc/osc52.el
+[osc52.sh]: ../../hterm/etc/osc52.sh
+[osc52.vim]: ../../hterm/etc/osc52.vim
 [chromium-hterm mailing list]: https://goo.gl/RYHiK
 [OpenSSH legacy options]: https://www.openssh.com/legacy.html
