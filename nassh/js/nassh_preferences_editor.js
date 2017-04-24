@@ -529,6 +529,7 @@ nassh.PreferencesEditor.prototype.createInput = function(key) {
 
     case 'string':
       input.type = 'text';
+      input.size = '50';
       // Save simple strings immediately.
       oninput = onchangeCursorReset;
       onchange = null;
@@ -540,6 +541,7 @@ nassh.PreferencesEditor.prototype.createInput = function(key) {
 
     case 'url':
       input.type = 'url';
+      input.size = '50';
       input.placeholder = 'https://example.com/some/file';
       break;
 
