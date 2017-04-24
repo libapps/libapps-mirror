@@ -553,6 +553,27 @@ different app, visit the chrome://settings/handlers page.
   you'll have to pick a different number to have any effect at all.
 
 
+### How do I use web fonts?
+
+  You can define it in the CSS file loaded via the 'user-css' field, or you can
+  inline the content in 'user-css-text'.
+
+  Here is an example using [Google Web Fonts](https://fonts.google.com/).  Add
+  this line to your custom CSS, and add `"Roboto Mono"` to your 'font-family'
+  list.
+
+    @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+  Here is an example for [Powerline Fonts](https://github.com/powerline/fonts/).
+  Add this text to your custom CSS, and add `"Anonymous Pro"` to your
+  'font-family' list.
+
+    @font-face {
+      font-family: "Anonymous Pro";
+      src: url(https://cdn.rawgit.com/wernight/powerline-web-fonts/8040cf32c146c7cd4f776c1484d23dc40685c1bc/fonts/AnonymousPro.woff2) format("woff2");
+    }
+
+
 ### Can I quickly make temporarily changes to the font size?
 
   Yes.  The Ctrl-Plus, Ctrl-Minus and Ctrl-Zero keys can increase, decrease,

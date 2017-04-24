@@ -243,6 +243,7 @@ nassh.PreferencesEditor.prototype.save = function(input) {
       break;
 
     case 'string':
+    case 'multiline-string':
       prefs.set(key, input.value);
       break;
 
@@ -324,6 +325,7 @@ nassh.PreferencesEditor.prototype.sync = function(input) {
       break;
 
     case 'string':
+    case 'multiline-string':
       if (prefValue == null)
         input.value = '';
       else
@@ -530,6 +532,13 @@ nassh.PreferencesEditor.prototype.createInput = function(key) {
     case 'string':
       input.type = 'text';
       input.size = '50';
+      // Save simple strings immediately.
+      oninput = onchangeCursorReset;
+      onchange = null;
+      break;
+
+    case 'multiline-string':
+      input = document.createElement('textarea');
       // Save simple strings immediately.
       oninput = onchangeCursorReset;
       onchange = null;
