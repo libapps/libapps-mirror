@@ -101,7 +101,9 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 
   Yes.  First, you need to subscribe to the [chromium-hterm mailing list].
   Subscribers have access to the "Dev" version in the Chrome Web Store, which
-  is located here: <https://goo.gl/cFZlv>.
+  is located here: <https://goo.gl/cFZlv>.  Note: You'll also need to sign in
+  to the Chrome Web Store using the same account that joined the mailing list.
+  Otherwise, the link will result in a 404 error.
 
   Please keep in mind that the Dev version has gone through significantly less
   testing than the Beta.  Fortunately, you can install both and switch back
