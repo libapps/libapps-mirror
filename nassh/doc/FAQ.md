@@ -845,19 +845,19 @@ different app, visit the chrome://settings/handlers page.
   Clipboard writes are triggered by an escape sequence from the host.  Here's
   an example...
 
-    $ echo -e "\x1b]52;c;Y29weXBhc3RhIQ==\x07"
+    $ printf "\033]52;c;Y29weXBhc3RhIQ==\a\n"
 
-  The sequence "\x1b]52;" identifies this as a clipboard operation.  The "c;"
-  option selects the system clipboard.  "Y29weXBhc3RhIQ==" is the base64 encoded
+  The sequence `\003]52;` identifies this as a clipboard operation.  The `c;`
+  option selects the system clipboard.  `Y29weXBhc3RhIQ==` is the base64 encoded
   value to place on the clipboard, in this case it's the string "copypasta!".
-  Finally, "\x07" terminates the sequence.
+  Finally, `\a` terminates the sequence.
 
   If you execute this command when 'enable-clipboard-write' on you should see
   the "Selection Copied" message appear in the terminal, and your system
   clipboard should contain the text, "copypasta!".
 
   Note that the specification for OSC 52 mentions destinations other than
-  the "c;" system clipboard.  Hterm treats them all as the system clipboard.
+  the `c;` system clipboard.  Hterm treats them all as the system clipboard.
 
   There is an [osc52.sh] helper script available as well:
 
