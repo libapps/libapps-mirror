@@ -14,6 +14,7 @@ can be used to contact other users and developers for questions.
 * [FAQ](./doc/FAQ.md) -- Frequently Asked Questions
 * [Hacking](./doc/hack.md) -- Developing the Secure Shell source
 * [Options](./doc/options.md) -- Secure Shell command line options
+* [Processes](./doc/processes.md) -- Release processes and other mundane topics
 
 # Requirements
 
