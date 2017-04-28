@@ -668,12 +668,14 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
 
   argv.arguments.push(params.username + '@' + params.hostname);
 
+  // If this is a SFTP connection, the remote command args don't make sense,
+  // and will actually cause a problem.  Since it's easy to do, just ignore
+  // them here.
   if (this.isSftp) {
     argv.arguments.push('-s', 'sftp');
-  }
-
-  if (commandArgs)
+  } else if (commandArgs) {
     argv.arguments.push(commandArgs);
+  }
 
   this.initPlugin_(() => {
       if (!nassh.v2)
