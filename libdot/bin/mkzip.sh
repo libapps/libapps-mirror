@@ -63,9 +63,11 @@ source "${LIBDOT_DIR}/bin/common.sh"
 
 DEFINE_string filename "" \
   "The new zip filename.  Computed from manifest.json if not specified." f
-DEFINE_boolean promote "$FLAGS_TRUE" \
-  "If true, this will promote the suffix and version number of the extension \
-before packaging." p
+DEFINE_boolean promote_version "${FLAGS_FALSE}" \
+  "If true, this will promote the version number of the extension before \
+packaging."
+DEFINE_boolean promote_channel "${FLAGS_TRUE}" \
+  "If true, this will promote the suffix of the extension before packaging."
 DEFINE_string source "" \
   "The source directory or zip file to package." s
 DEFINE_string tmpdir "" \
@@ -231,7 +233,7 @@ function echo_filename() {
 }
 
 function make_zipdir() {
-  local zipdir="$FLAGS_tmpdir/$(basename $FLAGS_filename).d"
+  local zipdir="${FLAGS_tmpdir}/$(basename "${FLAGS_filename}").d"
 
   echo_err "Zip directory: $(get_relative_path "$zipdir")"
 
@@ -241,27 +243,31 @@ function make_zipdir() {
   echo "$zipdir"
 }
 
+init_promote() {
+  local name="$1" version="$2"
+
+  new_name="${name}"
+  if [[ "${FLAGS_promote_channel}" == "${FLAGS_TRUE}" ]]; then
+    new_name="$(promote_name "${name}")"
+  fi
+
+  new_version="${version}"
+  if [[ "${FLAGS_promote_version}" == "${FLAGS_TRUE}" ]]; then
+    local suffix="$(echo_suffix "${new_name}")"
+    if [[ -z "${suffix}" ]]; then
+      new_version="$(promote_version "${version}")"
+    fi
+  fi
+}
+
 function init_from_dir() {
   local source="$1"
 
   local name=$(get_manifest_key_value "name" "$source/manifest.json")
   local version=$(get_manifest_key_value "version" "$source/manifest.json")
 
-  local new_name
-  local new_version
-
-  if [ "$FLAGS_promote" == "$FLAGS_TRUE" ]; then
-    new_name="$(promote_name "$name")"
-    local suffix="$(echo_suffix "$new_name")"
-    if [ -z "$suffix" ]; then
-      new_version="$(promote_version "$version")"
-    else
-      new_version="$version"
-    fi
-  else
-    new_name="$name"
-    new_version="$version"
-  fi
+  local new_name new_version
+  init_promote "${name}" "${version}"
 
   if [ -z "$FLAGS_filename" ]; then
     FLAGS_filename="$(echo_filename "$new_name" "$new_version")"
@@ -287,7 +293,7 @@ function init_from_dir() {
 
   cd - >/dev/null
 
-  if [ "$FLAGS_promote" == "$FLAGS_TRUE" ]; then
+  if [[ "${name}" != "${new_name}" || "${version}" != "${new_version}" ]]; then
     insist rewrite_manifest "$zipdir/manifest.json" "$new_name" "$new_version"
   fi
 }
@@ -295,7 +301,7 @@ function init_from_dir() {
 function init_from_zip() {
   local source="$1"
 
-  local tmp_manifest="$FLAGS_tmpdir/$(basename $source)-manifest.json"
+  local tmp_manifest="${FLAGS_tmpdir}/$(basename "${source}")-manifest.json"
   unzip -qp $source manifest.json > "$tmp_manifest"
   insist
 
@@ -304,14 +310,8 @@ function init_from_zip() {
 
   insist rm -f "$tmp_manifest"
 
-  local new_name="$(promote_name "$name")"
-
-  local suffix="$(echo_suffix "$new_name")"
-  if [ -z "$suffix" ]; then
-    new_version="$(promote_version "$version")"
-  else
-    new_version="$version"
-  fi
+  local new_name new_version
+  init_promote "${name}" "${version}"
 
   if [ -z "$FLAGS_filename" ]; then
     FLAGS_filename="$(echo_filename "$new_name" "$new_version")"
@@ -326,7 +326,9 @@ function init_from_zip() {
   insist unzip -q "$FLAGS_source"
   cd - >/dev/null
 
-  insist rewrite_manifest "$zipdir/manifest.json" "$new_name" "$new_version"
+  if [[ "${name}" != "${new_name}" || "${version}" != "${new_version}" ]]; then
+    insist rewrite_manifest "$zipdir/manifest.json" "$new_name" "$new_version"
+  fi
 }
 
 function main() {
@@ -353,7 +355,6 @@ function main() {
   if [ -d "$FLAGS_source" ]; then
     insist init_from_dir "$FLAGS_source"
   else
-    FLAGS_promote="$FLAGS_TRUE"
     insist init_from_zip "$FLAGS_source"
   fi
 
