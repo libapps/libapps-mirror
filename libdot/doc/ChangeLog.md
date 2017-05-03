@@ -1,3 +1,9 @@
+# 1.12, 2017-05-03, Window pref sharing fix.
+
+* Fix notification of other windows when preferences are reset.
+* Allow mkzip to do channel & version promotion independently.
+* Update the test UI by showing progress in the title bar.
+
 # 1.11, 2017-04-17, Test improvements.
 
 * Added a bunch more tests, and improve the UI.
