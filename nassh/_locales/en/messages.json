@@ -48,8 +48,8 @@
   },
 
   "OPEN_AS_WINDOW_TIP": {
-    "message": "[Pro Tip] Use 'Open as Window' to keep Control-W from closing your terminal!\r\n[Pro Tip] See $URL$ for more information.",
-    "description": "Message displayed to users who are running Secure Shell in a tab.",
+    "message": "[Pro Tip] Use 'Open as Window' to prevent Control-W from closing your terminal!\r\n[Pro Tip] See $URL$ for more information.",
+    "description": "Message displayed to users who are running Secure Shell in a tab. The [Pro Tip] should be localized (it is slang in the computing world), but can be localized as just 'tip' if easier.",
     "placeholders": {
       "url": {
         "content": "$1",
@@ -59,7 +59,7 @@
   },
 
   "UPDATE_AVAILABLE_TOOLTIP": {
-    "message": "An update is available.  Please close all windows.",
+    "message": "An update is available. Please close all windows.",
     "description": "A tooltip shown for the chip that indicates an update is available"
   },
 
@@ -85,7 +85,7 @@
 
   "ZOOM_WARNING": {
     "message": "Please set Chrome Menu->Zoom to 100%",
-    "description": "Shown in the top/right corner if the Zoom setting is not set to 100%."
+    "description": "Shown in the top/right corner if the web browser zoom setting is not set to 100%. It's a tip to navigate the Chrome browser's menu."
   },
 
   "PLUGIN_LOADING": {
@@ -110,7 +110,7 @@
 
   "FIELD_DESCRIPTION_PLACEHOLDER": {
     "message": "username@hostname or free form text",
-    "description": "Text use as the placeholder for the 'description' field."
+    "description": "Placeholder text for the custom connection name. This string can be fully translated, but it should keep the 'username' and 'hostname' together with an @ sign."
   },
 
   "FIELD_DESCRIPTION_ARIA_LABEL": {
@@ -120,57 +120,57 @@
 
   "FIELD_USERNAME_PLACEHOLDER": {
     "message": "username",
-    "description": "Text use as the placeholder for the 'username' field."
+    "description": "Placeholder for the remote username for accessing the SSH server."
   },
 
   "FIELD_USERNAME_ARIA_LABEL": {
     "message": "username",
-    "description": "Text use as the aria-label for the 'username' field."
+    "description": "Label for the remote username for accessing the SSH server."
   },
 
   "FIELD_HOSTNAME_PLACEHOLDER": {
     "message": "hostname",
-    "description": "Text use as the placeholder for the 'hostname' field."
+    "description": "Placeholder for the SSH server hostname."
   },
 
   "FIELD_HOSTNAME_ARIA_LABEL": {
     "message": "hostname",
-    "description": "Text use as the aria-label for the 'hostname' field."
+    "description": "Label for the SSH server hostname."
   },
 
   "FIELD_PORT_PLACEHOLDER": {
     "message": "port",
-    "description": "Text use as the placeholder for the 'port' field."
+    "description": "Placeholder for the network port."
   },
 
   "FIELD_PORT_ARIA_LABEL": {
     "message": "port",
-    "description": "Text use as the aria-label for the 'port' field."
+    "description": "Label for the network port."
   },
 
   "FIELD_RELAY_OPTIONS_PLACEHOLDER": {
-    "message": "relay options",
-    "description": "Text use as the placeholder for the 'relay-options' field."
+    "message": "SSH relay server options",
+    "description": "Placeholder for command line options to the SSH relay server. The relay server is like a web proxy for connections."
   },
 
   "FIELD_RELAY_OPTIONS_ARIA_LABEL": {
     "message": "relay options",
-    "description": "Text use as the aria-label for the 'relay-options' field."
+    "description": "Label for command line options to the SSH relay server. The relay server is like a web proxy for connections."
   },
 
   "IDENTITY_LABEL": {
     "message": "Identity",
-    "description": "The label for the 'identity' field."
+    "description": "Label for the identity field. The identity is a SSH private key filename used to authenticate with servers."
   },
 
   "LOADING_LABEL": {
     "message": "Loading...",
-    "description": "The text displayed in the identity dropdown while we load identities."
+    "description": "The text displayed in the identity dropdown list while we load identities (which are SSH private key filenames used to authenticate with servers)."
   },
 
   "IMPORT_LINK_LABEL": {
     "message": "Import...",
-    "description": "The label for the 'identity' field."
+    "description": "Label for the identity import button. It will trigger an 'open file' dialog so users can select a file to import. The identity is a SSH private key file used to authenticate with servers."
   },
 
   "IMPORT_LINK_ARIA_LABEL": {
@@ -180,52 +180,52 @@
 
   "SSH_ARGSTR_LABEL": {
     "message": "SSH Arguments",
-    "description": "The label for the 'argstr' field."
+    "description": "Label for the optional ssh arguments field. These are command line flags to the ssh program itself."
   },
 
   "FIELD_ARGSTR_PLACEHOLDER": {
     "message": "extra command line arguments",
-    "description": "Text use as the placeholder for the 'argstr' field."
+    "description": "Placeholder text for the optional ssh arguments field. These are command line flags to the ssh program itself. Translators: the text does not need to be kept lowercase."
   },
 
   "TERMINAL_PROFILE_LABEL": {
     "message": "Current profile",
-    "description": "Text use as the label for the 'terminal-profile' field."
+    "description": "Label for the current terminal emulator profile name. Profiles are used to customize things like color and fonts."
   },
 
   "TERMINAL_PREVIEW_LABEL": {
     "message": "Preview",
-    "description": "Text use as the label for the 'terminal-preview' field."
+    "description": "Label for the preview window that allows users to preview their preferences (like color and font choices)."
   },
 
   "FIELD_TERMINAL_PROFILE_PLACEHOLDER": {
     "message": "default",
-    "description": "Text use as the placeholder for the 'terminal profile' field."
+    "description": "Placeholder text for the default terminal emulator profile name."
   },
 
   "DEL_KEYCAP": {
     "message": "[DEL]",
-    "description": "The keycap for the delete key, displayed on the delete button."
+    "description": "The keycap for the delete key, displayed on the delete button. It should be localized, but focus on the intent of it being a reference to the keyboard button."
   },
 
   "DELETE_BUTTON_LABEL": {
     "message": "Delete",
-    "description": "The label for the delete button."
+    "description": "The label for the delete button. Used to delete a specific SSH connection profile. It should be translated as a general term and not as a keyboard key reference."
   },
 
   "ENTER_KEYCAP": {
     "message": "[ENTER]",
-    "description": "The keycap for the enter key, displayed on the connect button."
+    "description": "The keycap for the enter key, displayed on the connect button. It should be localized, but focus on the intent of it being a reference to the keyboard button."
   },
 
   "MOUNT_BUTTON_LABEL": {
     "message": "SFTP Mount",
-    "description": "The label for the mount button."
+    "description": "The label for the mount button. Used to access (mount) remote directories over SSH."
   },
 
   "UNMOUNT_BUTTON_LABEL": {
     "message": "Unmount SFTP",
-    "description": "The label for the unmount button."
+    "description": "The label for the unmount button. Used to access (mount) remote directories over SSH."
   },
 
   "CONNECT_BUTTON_LABEL": {
@@ -240,7 +240,7 @@
 
   "INITIALIZING_RELAY": {
     "message": "Looking up relay server using: $HOST$",
-    "description": "Text displayed in the terminal when the user is connecting through a relay.",
+    "description": "Text displayed in the terminal when the user is connecting through a relay server (which is like a web proxy for connections). This shows the host used to look up the relay server system.",
     "placeholders": {
       "host": {
         "content": "$1",
@@ -251,7 +251,7 @@
 
   "FOUND_RELAY": {
     "message": "Found relay server: $URL$",
-    "description": "Text displayed in the terminal when the user is connecting through a relay.",
+    "description": "Text displayed in the terminal when the user is connecting through a relay server (which is like a web proxy for connections).",
     "placeholders": {
       "url": {
         "content": "$1",
@@ -262,7 +262,7 @@
 
   "RELAY_RETRY": {
     "message": "Retrying...",
-    "description": "Displayed in a text overlay when we experience an error talking to the relay server."
+    "description": "Displayed in a text overlay when we experience an error talking to the relay server (which is like a web proxy for connections)."
   },
 
   "CONNECT_BUTTON_LABEL": {
@@ -272,7 +272,7 @@
 
   "COMMAND_COMPLETE": {
     "message": "The command $NAME$ exited with status code $CODE$.",
-    "description": "Message displayed when the current command has completed.",
+    "description": "Message displayed when the current command has completed and the program has exited (quit running).",
     "placeholders": {
       "name": {
         "content": "$1",
@@ -288,7 +288,7 @@
 
   "CONNECTING": {
     "message": "Connecting to $DESTINATION$...",
-    "description": "Status message shown when connecting to a host.",
+    "description": "Status message shown when connecting to a SSH server.",
     "placeholders": {
       "destination": {
         "content": "$1",
@@ -308,7 +308,7 @@
     "placeholders": {
       "name": {
         "content": "$1",
-	"example": "username"
+        "example": "username"
       }
     }
   },
@@ -319,7 +319,7 @@
     "placeholders": {
       "dest": {
         "content": "$1",
-	"example": "invalid.destination"
+        "example": "invalid.destination"
       }
     }
   },
@@ -351,8 +351,8 @@
   },
 
   "CMD_SSH_HELP": {
-    "message": "The |username| and |hostname| parameters are required, |port| is optional.  If port is not specified it defaults to 22.",
-    "description": "Long form help text for this command.  Do not translate the parameter names in |pipes|."
+    "message": "The |username| and |hostname| parameters are required, |port| is optional. If port is not specified it defaults to 22.",
+    "description": "Long form help text for this command. Do not translate the parameter names in |pipes|."
   },
 
   "CMD_SSH_FORGET_HOST_TITLE": {
@@ -362,7 +362,7 @@
 
   "CMD_SSH_FORGET_HOST_HELP": {
     "message": "This command displays a menu of known hosts and prompts for the host to forget.",
-    "description": "Long form help text for this command.  Do not translate the parameter names in |pipes|."
+    "description": "Long form help text for this command."
   },
 
   "DISCONNECT_MESSAGE": {
@@ -378,12 +378,12 @@
 
   "RECONNECT_MESSAGE": {
     "message": "(R)econnect, (C)hoose another connection, or E(x)it?",
-    "description": "Message displayed after a connection closes"
+    "description": "Message displayed after a connection closes. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them after the word is OK like: Exit (X)."
   },
 
   "CONNECT_OR_EXIT_MESSAGE": {
     "message": "(C)hoose another connection or E(x)it?",
-    "description": "Message displayed after a connection closes and the user cannot reconnect"
+    "description": "Message displayed after a connection closes and the user cannot reconnect. Do not translate the (C) or (X) fields as they are keyboard shortcuts. Placing them after the word is OK like: Exit (X)."
   },
 
   "MOUNT_PATH_LABEL": {
@@ -401,7 +401,6 @@
     "description": "Message displayed after a file system is mounted"
   },
 
-
   "ALREADY_MOUNTED_MESSAGE": {
     "message": "File system is already mounted!",
     "description": "Message displayed after an existing file system tries to mount again"
@@ -409,37 +408,43 @@
 
   "PREFERENCES_HEADER": {
     "message": "Profile Settings",
-    "description": "Friendly message shown on options page"
+    "description": "Friendly message shown on the preferences (e.g. colors, fonts, etc...) editing page."
   },
 
   "PREFERENCES_RESET": {
     "message": "All preferences reset!",
-    "description": "Message displayed after options are reset"
+    "description": "Message displayed after all preferences (e.g. colors, fonts, etc...) are reset."
   },
 
   "BACKUP_PREFS": {
     "message": "Save Backup",
-    "description": "Label for the link in the options page that lets the user save a backup copy of their prefs"
+    "description": "Label for the link in the options page that lets the user save a backup copy of their preferences (e.g. colors, fonts, etc...)."
   },
 
   "RESTORE_PREFS": {
     "message": "Restore Backup",
-    "description": "Label for the link in the options page that lets the user restore their prefs"
+    "description": "Label for the link in the options page that lets the user restore their preferences (e.g. colors, font, etc...)."
   },
 
   "PREF_BACKUP_FILENAME": {
     "message": "Secure Shell Preferences Backup.json",
-    "description": "Default filename for the preferences backup file."
+    "description": "Default filename for the preferences backup file. The filename should be translated, but the '.json' suffix should be retained."
   },
 
   "JSON_PARSE_ERROR": {
-    "message": "Could not parse JSON in '$1'",
-    "description": "Error message shown when parsing JSON input failed"
+    "message": "Could not parse JSON in '$KEY$'",
+    "description": "Error message shown when parsing JSON data failed. The $KEY$ is a preference name, and the quote style may be changed as needed.",
+    "placeholders": {
+      "key": {
+        "content": "$1",
+        "example": "cursor-blink"
+      }
+    }
   },
 
   "OMNIBOX_DEFAULT": {
     "message": "<url><match>user@hostname[:port]</match></url> Connect to a saved profile or a new ssh system",
-    "description": "Default help text as a tip in the omnibox.  Do not translate the <url> and <match> tags."
+    "description": "Default help text as a tip in the omnibox. Do not translate the <url> and <match> tags."
   },
 
   "CONSOLE_CROSH_OPTIONS_NOTICE": {
