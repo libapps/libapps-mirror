@@ -1,7 +1,17 @@
+# 0.8.36.3, 2017-05-03, new features for users.
+
+* Update to libdot 1.12.  Fixes preference syncing between open windows.
+* Update to hterm 1.63.  Lots of little new features.
+* Log the actual relay we're connecting through.
+* Increase the field size in the options page for easier editing.
+* Add a user-css-text field for injecting custom CSS directly.
+  Simplifies use of webfonts.
+* Ignore custom ssh commands when creating a SFTP mount.
+
 # 0.8.36.2, 2017-04-17, bumps + cleanups + bug fixes.
 
 * Update to libdot 1.11.  Adds support for legacy X11 RGB color formats.
-* Update to hterm 1.61.  Adds blink support and sticky alt key.
+* Update to hterm 1.62.  Adds blink support and sticky alt key.
 * Fix some typos in UI strings.
 * Merge NaCl ssh_client into the libapps repo!
 * Clean up some dead legacy code in NaCl plugin.
