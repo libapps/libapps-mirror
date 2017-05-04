@@ -28,7 +28,7 @@
                  required pattern='^.+$'>
           <input x-box x-flex='1' id='field-hostname' type='text'
                  i18n='{"aria-label": "$id"}'
-                 required>
+                 required pattern='^(>crosh|[A-Za-z0-9-.:]+)$'>
           <input x-box id='field-port' type='number' min='1' max='65535'
                  i18n='{"aria-label": "$id"}'
                  min='1' max='65535'>
