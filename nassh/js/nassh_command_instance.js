@@ -4,7 +4,7 @@
 
 'use strict';
 
-lib.rtdep('lib.f', 'lib.fs',
+lib.rtdep('lib.f', 'lib.fs', 'lib.punycode',
           'nassh.CommandInstance', 'nassh.GoogleRelay',
           'nassh.PreferenceManager');
 
@@ -622,11 +622,19 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
 
   this.io.setTerminalProfile(params.terminalProfile || 'default');
 
+  // If they're using an internationalized domain name (IDN), then punycode
+  // will return a different ASCII name.  Include that in the display for the
+  // user so it's clear where we end up trying to connect to.
+  var idn_hostname = lib.punycode.toASCII(params.hostname);
+  var disp_hostname = params.hostname;
+  if (idn_hostname != params.hostname)
+    disp_hostname += ' (' + idn_hostname + ')';
+
   // TODO(rginda): The "port" parameter was removed from the CONNECTING message
   // on May 9, 2012, however the translations haven't caught up yet.  We should
   // remove the port parameter here once they do.
   this.io.println(nassh.msg('CONNECTING',
-                            [params.username + '@' + params.hostname,
+                            [params.username + '@' + disp_hostname,
                              (params.port || '??')]));
   this.io.onVTKeystroke = this.onVTKeystroke_.bind(this);
   this.io.sendString = this.sendString_.bind(this);
@@ -669,7 +677,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   // We split the username apart so people can use whatever random characters in
   // it they want w/out causing parsing troubles ("@" or leading "-" or " ").
   argv.arguments.push('-l' + params.username);
-  argv.arguments.push(params.hostname);
+  argv.arguments.push(idn_hostname);
 
   // If this is a SFTP connection, the remote command args don't make sense,
   // and will actually cause a problem.  Since it's easy to do, just ignore
