@@ -666,7 +666,10 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   if (params.port)
     argv.arguments.push('-p' + params.port);
 
-  argv.arguments.push(params.username + '@' + params.hostname);
+  // We split the username apart so people can use whatever random characters in
+  // it they want w/out causing parsing troubles ("@" or leading "-" or " ").
+  argv.arguments.push('-l' + params.username);
+  argv.arguments.push(params.hostname);
 
   // If this is a SFTP connection, the remote command args don't make sense,
   // and will actually cause a problem.  Since it's easy to do, just ignore
