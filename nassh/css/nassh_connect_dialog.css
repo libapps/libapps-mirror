@@ -34,7 +34,7 @@ body {
 }
 
 input, select {
-  border: none;
+  border: 1px solid;
   padding: 3px;
   line-height: 1.2;
   font-size: inherit;
@@ -51,7 +51,8 @@ input[type="file"] {
 
 input:invalid {
   font-weight: bold;
-  color: var(--nassh-cursor-color);
+  color: red;
+  border: 1px solid red;
 }
 
 div[role="button"] {
