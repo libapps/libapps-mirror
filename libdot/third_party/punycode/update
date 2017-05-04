@@ -1,0 +1,66 @@
+#!/bin/bash
+# Copyright 2017 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+FLAGS_HELP="
+usage: ./update [-v ver]
+
+Helper to sync lib_punycode.js with latest upstream version.
+"
+
+LIBDOT_DIR="$(dirname -- "$0")/../../../libdot"
+source "${LIBDOT_DIR}/bin/common.sh"
+
+DEFINE_string version "" \
+  "The version to pull down." v
+
+FLAGS "$@" || exit $?
+eval set -- "${FLAGS_ARGV}"
+
+GIT_URL="https://github.com/bestiejs/punycode.js"
+URL_BASE="https://raw.githubusercontent.com/bestiejs/punycode.js"
+
+latest_version() {
+  # The results should be sorted by age/version, so grab the last:
+  # 9aeca525bba478206c6e1b5501e063f3db7bda7f   refs/tags/v2.1.0
+  git ls-remote --tags "${GIT_URL}" | \
+    gawk '{ver = $NF} END {print gensub(/.*\//, "", "", ver)}'
+}
+
+main() {
+  if [[ -z "${FLAGS_version}" ]]; then
+    FLAGS_version=$(latest_version)
+    echo "latest version: ${FLAGS_version}"
+  fi
+
+  cd "${LIBDOT_DIR}/third_party/punycode"
+  set -e
+
+  # Grab the custom leading header.
+  sed -n '1,/AUTO-START/p' lib_punycode.js > lib_punycode.js.new
+
+  # Mark it so people know what this is.
+  printf '\n%s\n' "// This is ${FLAGS_version} from ${GIT_URL}" \
+    >> lib_punycode.js.new
+
+  # Pull down the latest upstream and scrub it a little.
+  echo "Downloading punycode.js"
+  curl "${URL_BASE}/${FLAGS_version}/punycode.js" | \
+    sed \
+      -e '/^.use strict/d' \
+      -e '/module.exports = punycode/d' \
+    >> lib_punycode.js.new
+
+  # Then add our custom footer.
+  sed -n '/AUTO-END/,$p' lib_punycode.js >> lib_punycode.js.new
+
+  mv lib_punycode.js.new lib_punycode.js
+  sed -i \
+    -e "/version:/s:\".*\":\"${FLAGS_version#v}\":" \
+    METADATA
+
+  echo "lib_punycode.js is now updated to ${FLAGS_version}!"
+}
+
+main "$@"
