@@ -84,6 +84,9 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   If all else fails then join the [chromium-hterm mailing list] and post
   about what you've found.
 
+  To file an actual report, you can use <https://goo.gl/vb94JY>.  This will
+  route to the right people.
+
   If your bug involves some mis-interpreted escape sequence and you want
   to file a really useful bug report, then add in a recording of the
   session.  For bonus points, track down the troublesome sequence and
