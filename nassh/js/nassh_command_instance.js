@@ -126,17 +126,6 @@ nassh.CommandInstance.prototype.run = function() {
                   ['\x1b[1m' + this.manifest_.name + '\x1b[m',
                    '\x1b[1m' + this.manifest_.version + '\x1b[m']));
 
-    if (this.manifest_.name.match(/\(tot\)/)) {
-      // If we're a tot version, show how old the hterm deps are.
-      var htermAge = Math.round(
-          (new Date() -
-           new Date(lib.resource.getData('hterm/concat/date'))) / 1000);
-
-      this.io.println(
-          'hterm ' + lib.resource.getData('hterm/changelog/version') + ': ' +
-          (htermAge / 60).toFixed(2) + ' minutes ago.');
-    }
-
     this.io.println(
         nassh.msg('WELCOME_FAQ', ['\x1b[1mhttps://goo.gl/muppJj\x1b[m']));
 
@@ -149,6 +138,17 @@ nassh.CommandInstance.prototype.run = function() {
                       ['\x1b[1mhttps://goo.gl/muppJj\x1b[m']));
         this.io.println('');
       }
+    }
+
+    if (this.manifest_.name.match(/\(tot\)/)) {
+      // If we're a tot version, show how old the hterm deps are.
+      var htermAge = Math.round(
+          (new Date() -
+           new Date(lib.resource.getData('hterm/concat/date'))) / 1000);
+
+      this.io.println(
+          '[TOT] hterm ' + lib.resource.getData('hterm/changelog/version') +
+          ': updated ' + (htermAge / 60).toFixed(2) + ' minutes ago.');
     }
 
     nassh.getFileSystem(onFileSystemFound, ferr('FileSystem init failed'));
