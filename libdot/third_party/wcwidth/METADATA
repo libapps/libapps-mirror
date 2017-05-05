@@ -1,0 +1,25 @@
+name: "wcwidth.js"
+description: "A JavaScript port of C's wcwidth() to libdot"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "http://code.woong.org/wcwidth.js"
+  }
+  url {
+    type: HOMEPAGE
+    value: "http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c"
+  }
+  url {
+    type: GIT
+    value: "https://github.com/mycoboco/wcwidth.js"
+  }
+  version: "0.0.3"
+  last_upgrade_date { year: 2013 month: 12 day: 30 }
+
+  local_modifications:
+      "This started out with wcwidth.js, but has been heavily customized and"
+      "extended since.  That includes new features, bug fixes, and integrating"
+      "with the libdot framework."
+      "At this point, the code base is very different from upstream."
+}
