@@ -345,10 +345,13 @@ nassh.PreferencesEditor.prototype.sync = function(input) {
 
     case 'value':
     default:
+      // Use an indent for the stringify so the output is formatted somewhat
+      // nicely.  Otherwise, the default output packs everything into a single
+      // line and strips out all whitespace making it an unreadable mess.
       if (prefValue == null)
         input.value = '';
       else
-        input.value = JSON.stringify(prefValue);
+        input.value = JSON.stringify(prefValue, null, '  ');
       break;
   }
 };
