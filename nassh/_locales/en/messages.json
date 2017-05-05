@@ -432,12 +432,16 @@
   },
 
   "JSON_PARSE_ERROR": {
-    "message": "Could not parse JSON in '$KEY$'",
-    "description": "Error message shown when parsing JSON data failed. The $KEY$ is a preference name, and the quote style may be changed as needed.",
+    "message": "Could not parse JSON in '$KEY$': $ERROR$",
+    "description": "Error message shown when parsing JSON data failed. The $KEY$ is a preference name, and the quote style may be changed as needed. $ERROR$ is the failure message. Neither are translated currently.",
     "placeholders": {
       "key": {
         "content": "$1",
         "example": "cursor-blink"
+      },
+      "error": {
+        "content": "$2",
+        "example": "SyntaxError: Unexpected end of JSON input"
       }
     }
   },

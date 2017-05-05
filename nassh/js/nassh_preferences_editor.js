@@ -262,7 +262,7 @@ nassh.PreferencesEditor.prototype.save = function(input) {
       try {
         value = JSON.parse(value);
       } catch (err) {
-        this.notify(nassh.msg('JSON_PARSE_ERROR', key) + ': ' + err, 5000);
+        this.notify(nassh.msg('JSON_PARSE_ERROR', [key, err]), 5000);
         value = prefs.get(key);
       }
       prefs.set(key, value);
