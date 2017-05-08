@@ -84,12 +84,34 @@ get by with using a different id (and delete the settings from the
 [manifest.json] to avoid warnings at runtime).
 
 * Access to [crosh](chromeos-crosh.md) under Chrome OS (`terminalPrivate`).
+  [(1)](https://cs.chromium.org/search/?q=terminalPrivate)
+  [(2)](https://cs.chromium.org/chromium/src/chrome/browser/extensions/api/terminal/terminal_extension_helper.cc)
 * Access to raw sockets under NaCl.  This allows connecting directly to SSH
-  servers (e.g. port 22).  Making connections over https using relay servers
-  will still work though.  See the FAQ for more details.
+  servers (e.g. port 22).
+  [(1)](https://cs.chromium.org/search/?q=kPredefinedAllowedSocketOrigins)
+  <br>
+  Note: Making connections over https using relay servers will still work
+  though.  See the FAQ for more details.
 * SFTP backend for Chrome OS (`fileSystemProvider` and
-  `file_system_provider_capabilities`).  Not exactly a whitelisted permission
-  as anyone can use it normally, but does throw runtime warnings.
+  `file_system_provider_capabilities`).
+  [(1)](https://cs.chromium.org/chromium/src/chrome/common/extensions/api/_permission_features.json)
+  <br>
+  Note: Normal extensions/apps can use these features, but since Secure Shell
+  is still a "legacy packaged app", we had to whitelist access.
+
+To double check what & where things are whitelisted, search the Chromium code
+base for out extension ids:
+
+* [pnhechapfaindjhompbnflcldabbghjo](https://cs.chromium.org/search/?q=pnhechapfaindjhompbnflcldabbghjo):
+  Stable ID
+* [okddffdblfhhnmhodogpojmfkjmhinfp](https://cs.chromium.org/search/?q=okddffdblfhhnmhodogpojmfkjmhinfp):
+  Dev ID
+* [nkoccljplnhpfnfiajclkommnmllphnl](https://cs.chromium.org/search/?q=nkoccljplnhpfnfiajclkommnmllphnl):
+  Crosh ID
+* [0EA6B717932AD64C469C1CCB6911457733295907](https://cs.chromium.org/search/?q=0EA6B717932AD64C469C1CCB6911457733295907):
+  Stable ID (in hex)
+* [58B0C2968C335964D5433E89CA4D86628A0E3D4B](https://cs.chromium.org/search/?q=58B0C2968C335964D5433E89CA4D86628A0E3D4B):
+  Dev ID (in hex)
 
 ## Stable Extension
 
