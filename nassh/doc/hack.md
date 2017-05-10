@@ -225,12 +225,13 @@ Secure Shell logic.
   * [nassh_google_relay_html.js]
 * Options page specific code
   * [nassh_preferences_editor.js]
-* SFTP specific code
-  * [nassh_sftp_client.js]
-  * [nassh_sftp_fsp.js]
-  * [nassh_sftp_packet.js]
-  * [nassh_sftp_packet_types.js]
-  * [nassh_sftp_status.js]
+* [SFTP specific code](#SFTP)
+  * [nassh_sftp_client.js]: High level API over SFTP.
+  * [nassh_sftp_fsp.js]: Glue layer between SFTP and
+    [Chrome's File System Provider (FSP) API](https://developer.chrome.com/apps/fileSystemProvider).
+  * [nassh_sftp_packet.js]: Basic nassh.sftp.Packet class.
+  * [nassh_sftp_packet_types.js]: Specific packet types.
+  * [nassh_sftp_status.js]: Status objects for SFTP code.
 
 # NaCl/JS Life cycle
 
@@ -316,6 +317,13 @@ The `name` field can be any one of:
 | `isReadReady` | Plugin wants to know read status. | (int `fd`) |
 | `exit`        | The plugin is exiting.            | (int `code`) |
 | `printLog`    | Send a string to `console.log`.   | (str `str`) |
+
+# SFTP Support {#SFTP}
+
+On Chrome OS, it is possible to mount remote paths via SFTP and the Files app.
+We currently support
+[version 3](https://tools.ietf.org/html/draft-ietf-secsh-filexfer-02) of the
+protocol.
 
 [bin/]: ../bin/
 [css/]: ../css/
