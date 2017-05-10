@@ -39,9 +39,10 @@
         </x-hbox>
         <br>
         <x-hbox x-align='baseline'>
-          <div x-box i18n='{"_": "IDENTITY_LABEL"}'>IDENTITY</div>:&nbsp;
+          <div x-box id='label-identity' i18n='{"_": "IDENTITY_LABEL"}'
+               >IDENTITY</div>:&nbsp;
           <select x-box id='field-identity' type='text'
-                  i18n='{"aria-label": "$id"}'>
+                  aria-labelledby='label-identity'>
             <option i18n='{"_": "LOADING_LABEL"}'>LOADING...</option>
           </select>
           <div x-box>&nbsp;</div>
@@ -51,17 +52,20 @@
           <input type="file" multiple id='import-file-input' tabindex="-1">
         </x-hbox>
         <x-hbox x-align='baseline'>
-          <a x-box href='../plugin/docs/ssh.1.html' target='_blank'
-             i18n='{"_": "SSH_ARGSTR_LABEL"}'
+          <a x-box id='label-argstr' href='../plugin/docs/ssh.1.html'
+             target='_blank' i18n='{"_": "SSH_ARGSTR_LABEL"}'
              >SSH ARGUMENTS</a>:&nbsp;
           <input x-box id='field-argstr' x-flex='1' type='text'
-                 i18n='{"aria-label": "$id", "placeholder": "$id"}'>
+                 aria-labelledby='label-argstr'
+                 i18n='{"placeholder": "$id"}'>
         </x-hbox>
         <x-hbox x-align='baseline'>
-          <div x-box i18n='{"_": "TERMINAL_PROFILE_LABEL"}'
+          <div x-box id='label-terminal-profile'
+               i18n='{"_": "TERMINAL_PROFILE_LABEL"}'
                >TERMINAL PROFILE</div>:&nbsp;
           <input x-box id='field-terminal-profile' type='text'
-                 i18n='{"aria-label": "$id", "placeholder": "$id"}'>
+                 aria-labelledby='label-terminal-profile'
+                 i18n='{"placeholder": "$id"}'>
         </x-hbox>
       </x-vbox>
     </form> <!-- .dialog-billboard -->
