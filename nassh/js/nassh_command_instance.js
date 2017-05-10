@@ -1052,8 +1052,9 @@ function isSftpInitResponse(data) {
   var packetLength = packet.getUint32();
   var packetType = packet.getUint8();
 
-  // returns true if the packet has a valid length and is of type VERSION (2).
-  return packetLength == packet.getLength() - 4 && packetType == 2;
+  // returns true if the packet has a valid length and is of type VERSION.
+  return packetLength == packet.getLength() - 4 &&
+         packetType == nassh.sftp.packets.RequestPackets.VERSION;
 }
 
 /**

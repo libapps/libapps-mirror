@@ -115,18 +115,26 @@ nassh.sftp.packets.getFileAttrs = function(packet) {
  * Possible SFTP Request Packet types
  */
 nassh.sftp.packets.RequestPackets = {
-  INIT_PACKET:    1,
-  OPEN_PACKET:    3,
-  CLOSE_PACKET:   4,
-  READ_PACKET:    5,
-  WRITE_PACKET:   6,
-  OPENDIR_PACKET: 11,
-  READDIR_PACKET: 12,
-  REMOVE_PACKET:  13,
-  MKDIR_PACKET:   14,
-  RMDIR_PACKET:   15,
-  STAT_PACKET:    17,
-  RENAME_PACKET:  18,
+  INIT:     1,
+  VERSION:  2,
+  OPEN:     3,
+  CLOSE:    4,
+  READ:     5,
+  WRITE:    6,
+  LSTAT:    7,
+  FSTAT:    8,
+  SETSTAT:  9,
+  FSETSTAT: 10,
+  OPENDIR:  11,
+  READDIR:  12,
+  REMOVE:   13,
+  MKDIR:    14,
+  RMDIR:    15,
+  REALPATH: 16,
+  STAT:     17,
+  RENAME:   18,
+  READLINK: 19,
+  SYMLINK:  20,
 };
 
 /**
