@@ -147,8 +147,8 @@ lib.f.lpad = function(str, length, opt_ch) {
   str = String(str);
   opt_ch = opt_ch || ' ';
 
-  while (str.length < length)
-    str = opt_ch + str;
+  if (str.length < length)
+    str = opt_ch.repeat(length - str.length) + str;
 
   return str;
 };
