@@ -45,5 +45,11 @@ lib.MessageManager.Tests.addTest('processI18nAttribute', function(result, cx) {
   mm.processI18nAttribute(node);
   result.assertEQ(node.textContent, 'THIS_IS_A_TEST');
 
+  // Test =attr handling.
+  node.setAttribute('i18n', '{"tattr": "CONTENT", "tind": "=tattr"}');
+  mm.processI18nAttribute(node);
+  result.assertEQ(node.getAttribute('tattr'), 'CONTENT');
+  result.assertEQ(node.getAttribute('tind'), 'CONTENT');
+
   result.pass();
 });

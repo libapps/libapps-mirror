@@ -212,15 +212,27 @@ lib.MessageManager.prototype.processI18nAttribute = function(node) {
     throw ex;
   }
 
+  // Load all the messages specified in the i18n attributes.
   for (var key in i18n) {
+    // The node attribute we'll be setting.
+    var attr = key;
+
     var msgname = i18n[key];
-    if (msgname.substr(0, 1) == '$')
+    // For "=foo", re-use the referenced message name.
+    if (msgname.startsWith('=')) {
+      key = msgname.substr(1);
+      msgname = i18n[key];
+    }
+
+    // For "$foo", calculate the message name.
+    if (msgname.startsWith('$'))
       msgname = thunk(node.getAttribute(msgname.substr(1)) + '_' + key);
 
+    // Finally load the message.
     var msg = this.get(msgname);
-    if (key == '_')
+    if (attr == '_')
       node.textContent = msg;
     else
-      node.setAttribute(key, msg);
+      node.setAttribute(attr, msg);
   }
 };
