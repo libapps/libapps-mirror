@@ -242,7 +242,7 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
       'blur', this.maybeCopyPlaceholders_.bind(this));
 
   // These fields are plain text with no fancy properties.
-  ['argstr', 'terminal-profile'
+  ['argstr', 'terminal-profile', 'mount-path',
   ].forEach((name) => {
       var field = this.$f(name)
       addListeners(field,
@@ -251,7 +251,7 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
     });
 
   ['description', 'username', 'hostname', 'port', 'relay-options',
-   'identity', 'argstr', 'terminal-profile'
+   'identity', 'argstr', 'terminal-profile', 'mount-path',
   ].forEach((name) => {
       addListeners(this.$f(name), ['focus', 'blur'],
                    this.onFormFocusChange_.bind(this, name));
@@ -341,6 +341,7 @@ nassh.ConnectDialog.prototype.displayButton_ = function(button, state) {
  * Change the mounted state of the mount button.
  */
 nassh.ConnectDialog.prototype.displayMountButton_ = function(state) {
+  this.displayButton_(document.querySelector('#mount-path'), state);
   if (!state) {
     this.displayButton_(this.mountButton_, false);
     this.displayButton_(this.unmountButton_, false);
@@ -374,7 +375,8 @@ nassh.ConnectDialog.prototype.save = function() {
   var prefs = this.currentProfileRecord_.prefs;
 
   ['description', 'username', 'hostname', 'port', 'relay-options',
-   'identity', 'argstr', 'terminal-profile'].forEach((name) => {
+   'identity', 'argstr', 'terminal-profile', 'mount-path',
+  ].forEach((name) => {
        if (name == 'identity' && this.$f('identity').selectedIndex === 0)
          return;
 
@@ -572,7 +574,7 @@ nassh.ConnectDialog.prototype.updateDescriptionPlaceholder_ = function() {
  */
 nassh.ConnectDialog.prototype.syncForm_ = function() {
   ['description', 'username', 'hostname', 'port', 'argstr', 'relay-options',
-   'identity', 'terminal-profile'
+   'identity', 'terminal-profile', 'mount-path',
   ].forEach((n) => {
       var emptyValue = '';
       if (n == 'identity')

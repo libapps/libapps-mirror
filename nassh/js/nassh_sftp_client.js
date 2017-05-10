@@ -8,8 +8,10 @@ nassh.sftp = {};
 
 /**
  * A SFTP Client that manages the sending and receiving of SFTP packets.
+ *
+ * @param {string} [opt_basePath] The base directory for client requests.
  */
- nassh.sftp.Client = function() {
+nassh.sftp.Client = function(opt_basePath='') {
   // The packet request id counter.
   this.requestId_ = 0;
 
@@ -18,6 +20,15 @@ nassh.sftp = {};
 
   // Whether the SFTP connection has been initialized
   this.isInitialised = false;
+
+  // Directory to prefix all path requests.
+  if (opt_basePath) {
+    // Make sure the path always ends with a slash.  This simplifies
+    // the path logic in the rest of the client.
+    if (!opt_basePath.endsWith('/'))
+      opt_basePath += '/';
+  }
+  this.basePath_ = opt_basePath;
 
   // The buffered packet data coming from the plugin.
   this.buffer_ = '';
@@ -218,7 +229,7 @@ nassh.sftp.Client.prototype.init = function() {
  */
 nassh.sftp.Client.prototype.fileStatus = function(path) {
   var packet = new nassh.sftp.Packet();
-  packet.setString(path);
+  packet.setString(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.STAT, packet)
     .then(response => this.isExpectedResponse_(response, nassh.sftp.packets.AttrsPacket, 'STAT'))
@@ -235,7 +246,7 @@ nassh.sftp.Client.prototype.fileStatus = function(path) {
  */
 nassh.sftp.Client.prototype.openDirectory = function(path) {
   var packet = new nassh.sftp.Packet();
-  packet.setString(path);
+  packet.setString(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.OPENDIR, packet)
     .then(response => this.isExpectedResponse_(response, nassh.sftp.packets.HandlePacket, 'OPENDIR'))
@@ -282,7 +293,7 @@ nassh.sftp.Client.prototype.readDirectory = function(handle) {
  */
 nassh.sftp.Client.prototype.removeDirectory = function(path) {
   var packet = new nassh.sftp.Packet();
-  packet.setString(path);
+  packet.setString(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.RMDIR, packet)
     .then(response => this.isSuccessResponse_(response, 'RMDIR'));
@@ -299,7 +310,7 @@ nassh.sftp.Client.prototype.removeDirectory = function(path) {
  */
 nassh.sftp.Client.prototype.openFile = function(path, pflags) {
   var packet = new nassh.sftp.Packet();
-  packet.setString(path);
+  packet.setString(this.basePath_ + path);
   packet.setUint32(pflags); // open flags
   packet.setUint32(0); // default attr values
 
@@ -368,7 +379,7 @@ nassh.sftp.Client.prototype.closeFile = function(handle) {
  */
 nassh.sftp.Client.prototype.removeFile = function(path) {
   var packet = new nassh.sftp.Packet();
-  packet.setString(path);
+  packet.setString(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.REMOVE, packet)
     .then(response => this.isSuccessResponse_(response, 'REMOVE'));
@@ -422,7 +433,7 @@ nassh.sftp.Client.prototype.writeFile = function(handle, offset, data) {
  */
 nassh.sftp.Client.prototype.makeDirectory = function(path) {
   var packet = new nassh.sftp.Packet();
-  packet.setString(path);
+  packet.setString(this.basePath_ + path);
   packet.setUint32(0); // flags, 0b0000, no modified attributes
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.MKDIR, packet)

@@ -386,6 +386,16 @@
     "description": "Message displayed after a connection closes and the user cannot reconnect"
   },
 
+  "MOUNT_PATH_LABEL": {
+    "message": "Mount Path",
+    "description": "Label for the mount path field. This is the remote directory used for SFTP mounts."
+  },
+
+  "FIELD_MOUNT_PATH_PLACEHOLDER": {
+    "message": "the default path is the user's home directory",
+    "description": "Placeholder text for the mount path field. This is the remote directory used for SFTP mounts."
+  },
+
   "MOUNTED_MESSAGE": {
     "message": "Mounted!",
     "description": "Message displayed after a file system is mounted"

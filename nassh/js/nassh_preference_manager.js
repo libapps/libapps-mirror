@@ -115,6 +115,11 @@ nassh.ProfilePreferenceManager = function(parent, id) {
     ['terminal-profile', ''],
 
     /**
+     * The base path used when mounting via SFTP.
+     */
+    ['mount-path', ''],
+
+    /**
      * The appid to which to pass auth-agent requests.
      */
     ['auth-agent-appid', null],

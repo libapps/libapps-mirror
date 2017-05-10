@@ -53,7 +53,7 @@ nassh.CommandInstance = function(argv) {
   this.isSftp = argv.isSftp || false;
 
   // SFTP Client for SFTP instances.
-  this.sftpClient = (this.isSftp) ? new nassh.sftp.Client() : null;
+  this.sftpClient = (this.isSftp) ? new nassh.sftp.Client(argv.basePath) : null;
 
   // Mount options for a SFTP instance.
   this.mountOptions = argv.mountOptions || null;
@@ -388,6 +388,9 @@ nassh.CommandInstance.prototype.mountProfile = function(
         terminalLocation: this.terminalLocation,
         terminalWindow: this.terminalWindow,
         isSftp: true,
+        basePath: prefs.get('mount-path'),
+        // Mount options are passed directly to chrome.fileSystemProvider.mount,
+        // so don't add fields here that would otherwise collide.
         mountOptions: {
           fileSystemId: prefs.id,
           displayName: prefs.get('description'),
@@ -559,6 +562,8 @@ nassh.CommandInstance.prototype.mountDestination = function(destination) {
       terminalLocation: this.terminalLocation,
       terminalWindow: this.terminalWindow,
       isSftp: true,
+      // Mount options are passed directly to chrome.fileSystemProvider.mount,
+      // so don't add fields here that would otherwise collide.
       mountOptions: {
         fileSystemId: rv.username + rv.hostname,
         displayName: rv.username + rv.hostname,

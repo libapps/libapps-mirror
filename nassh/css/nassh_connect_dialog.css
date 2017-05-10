@@ -160,6 +160,7 @@ a:hover {
 }
 
 #mount,
+#mount-path,
 #unmount {
   display: none;
 }
