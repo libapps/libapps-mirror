@@ -18,24 +18,24 @@
     <form x-vbox class='dialog-billboard'>
       <x-hbox>
         <input x-box x-flex='1' id='field-description' type='text'
-               i18n='{"aria-label": "$id"}' required>
+               i18n='{"aria-label": "$id", "title": "=aria-label"}' required>
       </x-hbox>
       <x-vbox>
         <br>
         <x-hbox>
           <input x-box id='field-username' type='text'
-                 i18n='{"aria-label": "$id"}'
+                 i18n='{"aria-label": "$id", "title": "=aria-label"}'
                  required pattern='^.+$'>
           <input x-box x-flex='1' id='field-hostname' type='text'
-                 i18n='{"aria-label": "$id"}'
+                 i18n='{"aria-label": "$id", "title": "=aria-label"}'
                  required pattern='^(>crosh|[A-Za-z0-9-.:\u0080-\uffff]+)$'>
           <input x-box id='field-port' type='number' min='1' max='65535'
-                 i18n='{"aria-label": "$id"}'
+                 i18n='{"aria-label": "$id", "title": "=aria-label"}'
                  min='1' max='65535'>
         </x-hbox>
         <x-hbox>
           <input x-box id='field-relay-options' x-flex='1' type='text'
-                 i18n='{"aria-label": "$id", "placeholder": "$id"}'>
+                 i18n='{"aria-label": "$id", "title": "=aria-label", "placeholder": "$id"}'>
         </x-hbox>
         <br>
         <x-hbox x-align='baseline'>
