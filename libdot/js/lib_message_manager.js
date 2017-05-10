@@ -167,10 +167,22 @@ lib.MessageManager.prototype.get = function(msgname, opt_args, opt_default) {
 /**
  * Process all of the "i18n" html attributes found in a given dom fragment.
  *
- * Each i18n attribute should contain a JSON object.  The keys are taken to
+ * The real work happens in processI18nAttribute.
+ */
+lib.MessageManager.prototype.processI18nAttributes = function(dom) {
+  var nodes = dom.querySelectorAll('[i18n]');
+
+  for (var i = 0; i < nodes.length; i++)
+    this.processI18nAttribute(nodes[i]);
+};
+
+/**
+ * Process the "i18n" attribute in the specified node.
+ *
+ * The i18n attribute should contain a JSON object.  The keys are taken to
  * be attribute names, and the values are message names.
  *
- * If the JSON object has a "_" (underscore) key, it's value is used as the
+ * If the JSON object has a "_" (underscore) key, its value is used as the
  * textContent of the element.
  *
  * Message names can refer to other attributes on the same element with by
@@ -184,39 +196,31 @@ lib.MessageManager.prototype.get = function(msgname, opt_args, opt_default) {
  * Notice that the "id" attribute was appended to the target attribute, and
  * the result converted to UPPER_AND_UNDER style.
  */
-lib.MessageManager.prototype.processI18nAttributes = function(dom) {
+lib.MessageManager.prototype.processI18nAttribute = function(node) {
   // Convert the "lower-and-dashes" attribute names into
   // "UPPER_AND_UNDER" style.
   function thunk(str) { return str.replace(/-/g, '_').toUpperCase() }
 
-  var nodes = dom.querySelectorAll('[i18n]');
+  var i18n = node.getAttribute('i18n');
+  if (!i18n)
+    return;
 
-  for (var i = 0; i < nodes.length; i++) {
-    var node = nodes[i];
-    var i18n = node.getAttribute('i18n');
+  try {
+    i18n = JSON.parse(i18n);
+  } catch (ex) {
+    console.error('Can\'t parse ' + node.tagName + '#' + node.id + ': ' + i18n);
+    throw ex;
+  }
 
-    if (!i18n)
-      continue;
+  for (var key in i18n) {
+    var msgname = i18n[key];
+    if (msgname.substr(0, 1) == '$')
+      msgname = thunk(node.getAttribute(msgname.substr(1)) + '_' + key);
 
-    try {
-      i18n = JSON.parse(i18n);
-    } catch (ex) {
-      console.error('Can\'t parse ' + node.tagName + '#' + node.id + ': ' +
-                    i18n);
-      throw ex;
-    }
-
-    for (var key in i18n) {
-      var msgname = i18n[key];
-      if (msgname.substr(0, 1) == '$')
-        msgname = thunk(node.getAttribute(msgname.substr(1)) + '_' + key);
-
-      var msg = this.get(msgname);
-      if (key == '_') {
-        node.textContent = msg;
-      } else {
-        node.setAttribute(key, msg);
-      }
-    }
+    var msg = this.get(msgname);
+    if (key == '_')
+      node.textContent = msg;
+    else
+      node.setAttribute(key, msg);
   }
 };
