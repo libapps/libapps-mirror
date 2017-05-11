@@ -148,14 +148,12 @@ nassh.ConnectDialog.prototype.msg = function(name, opt_args) {
  * the same length.
  */
 nassh.ConnectDialog.prototype.alignLabels_ = function() {
-  var labels = [
-      this.$f('identity').previousElementSibling,
-      this.$f('argstr').previousElementSibling,
-      this.$f('terminal-profile').previousElementSibling
-  ];
+  var labels = document.querySelectorAll('.aligned-dialog-labels');
 
-  var labelWidth = Math.max.apply(
-      null, labels.map(function(el) { return el.textContent.length }));
+  var labelWidth = 0;
+  labels.forEach(function(el) {
+    labelWidth = Math.max(labelWidth, el.textContent.length);
+  });
 
   labels.forEach(function(el) {
       el.textContent = lib.f.lpad(el.textContent, labelWidth, '\xa0');
