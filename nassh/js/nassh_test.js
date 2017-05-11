@@ -8,6 +8,7 @@
 const assert = chai.assert;
 
 window.onload = function() {
+  hterm.defaultStorage = new lib.Storage.Memory();
   nassh.defaultStorage = new lib.Storage.Memory();
 
   lib.init(() => {

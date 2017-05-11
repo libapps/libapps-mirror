@@ -53,6 +53,7 @@ nassh.ConnectDialog = function(messagePort) {
   this.form_ = document.querySelector('form');
   this.mountButton_ = document.querySelector('#mount');
   this.unmountButton_ = document.querySelector('#unmount');
+  this.sftpClientButton_ = document.querySelector('#sftp-client');
   this.connectButton_ = document.querySelector('#connect');
   this.deleteButton_ = document.querySelector('#delete');
   this.optionsButton_ = document.querySelector('#options');
@@ -202,6 +203,8 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
                                      this.onUnmountClick_.bind(this));
   this.connectButton_.addEventListener('click',
                                        this.onConnectClick_.bind(this));
+  this.sftpClientButton_.addEventListener('click',
+                                          this.onSftpClientClick_.bind(this));
   this.deleteButton_.addEventListener('click',
                                       this.onDeleteClick_.bind(this));
   this.optionsButton_.addEventListener('click',
@@ -462,6 +465,14 @@ nassh.ConnectDialog.prototype.unmount = function() {
 };
 
 /**
+ * Start a SFTP session with the selected profile.
+ */
+nassh.ConnectDialog.prototype.sftpConnect = function() {
+  // TODO: Switch to 'sftp' when available on the web.
+  this.startup_('sftpConnectToProfile', 'web+sftp');
+};
+
+/**
  * Connect to the selected profile.
  */
 nassh.ConnectDialog.prototype.connect = function() {
@@ -640,7 +651,9 @@ nassh.ConnectDialog.prototype.syncButtons_ = function() {
       this.deleteButton_,
       document.activeElement.getAttribute('id') == 'shortcut-list');
 
-  this.enableButton_(this.connectButton_, this.form_.checkValidity());
+  const validForm = this.form_.checkValidity();
+  this.enableButton_(this.connectButton_, validForm);
+  this.enableButton_(this.sftpClientButton_, validForm);
   this.displayMountButton_(this.checkMountable_());
 };
 
@@ -971,6 +984,16 @@ nassh.ConnectDialog.prototype.onConnectClick_ = function(e) {
     return;
 
   this.connect();
+};
+
+/**
+ * Someone clicked on the sftp client button.
+ */
+nassh.ConnectDialog.prototype.onSftpClientClick_ = function(e) {
+  if (this.sftpClientButton_.getAttribute('disabled'))
+    return;
+
+  this.sftpConnect();
 };
 
 /**

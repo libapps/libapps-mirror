@@ -921,6 +921,644 @@
 		"description": "Label for the mount path field. This is the remote directory used for SFTP mounts.",
 		"message": "Mount Path"
 	},
+	"NASFTP_CMD_CAT": {
+		"description": "Name of the 'cat' command which displays text files on the screen. This should be translated as one word.",
+		"message": "cat"
+	},
+	"NASFTP_CMD_CAT_HELP": {
+		"description": "Help text for the 'cat' command.",
+		"message": "Dump a file to the terminal"
+	},
+	"NASFTP_CMD_CHDIR": {
+		"description": "Name of the 'chdir' command which changes the current working directory. This should be translated as one word.",
+		"message": "chdir"
+	},
+	"NASFTP_CMD_CHDIR_HELP": {
+		"description": "Help text for the 'chdir' command.",
+		"message": "Change working directory"
+	},
+	"NASFTP_CMD_CHGRP": {
+		"description": "Name of the 'chgrp' command which changes the group ownership of paths. This should be translated as one word.",
+		"message": "chgrp"
+	},
+	"NASFTP_CMD_CHGRP_HELP": {
+		"description": "Help text for the 'chgrp' command.",
+		"message": "Change group of paths"
+	},
+	"NASFTP_CMD_CHMOD": {
+		"description": "Name of the 'chmod' command which changes permissions on paths. This should be translated as one word.",
+		"message": "chmod"
+	},
+	"NASFTP_CMD_CHMOD_HELP": {
+		"description": "Help text for the 'chmod' command.",
+		"message": "Change permissions on paths"
+	},
+	"NASFTP_CMD_CHOWN": {
+		"description": "Name of the 'chown' command which changes the user ownership of paths. This should be translated as one word.",
+		"message": "chown"
+	},
+	"NASFTP_CMD_CHOWN_HELP": {
+		"description": "Help text for the 'chown' command.",
+		"message": "Change owner of paths"
+	},
+	"NASFTP_CMD_CLEAR": {
+		"description": "Name of the 'clear' command which clears the current terminal. This should be translated as one word.",
+		"message": "clear"
+	},
+	"NASFTP_CMD_CLEAR_HELP": {
+		"description": "Help text for the 'clear' command.",
+		"message": "Clear the current terminal screen."
+	},
+	"NASFTP_CMD_CLIP": {
+		"description": "Name of the 'clip' command which copies text to the user's clipboard (for copying & pasting). This should be translated as one word.",
+		"message": "clip"
+	},
+	"NASFTP_CMD_CLIP_HELP": {
+		"description": "Help text for the 'clip' command.",
+		"message": "Copy a file to the clipboard (default: 10MiB at start)"
+	},
+	"NASFTP_CMD_CLIP_SUMMARY": {
+		"description": "Information shown to the user when the 'clip' command finishes.",
+		"message": "Copying $BYTES$ bytes to the clipboard",
+		"placeholders": {
+			"bytes": {
+				"content": "$1",
+				"example": "12345"
+			}
+		}
+	},
+	"NASFTP_CMD_COLOR": {
+		"description": "Name of the 'color' command which controls use of color in program output. This should be translated as one word.",
+		"message": "color"
+	},
+	"NASFTP_CMD_COLOR_HELP": {
+		"description": "Help text for the 'color' command.",
+		"message": "Toggle color usage"
+	},
+	"NASFTP_CMD_COPY": {
+		"description": "Name of the 'copy' command which remotely copies files (from one place on the server to another place on the server). This should be translated as one word.",
+		"message": "copy"
+	},
+	"NASFTP_CMD_COPY_HELP": {
+		"description": "Help text for the 'copy' command.",
+		"message": "Copy source to destination"
+	},
+	"NASFTP_CMD_DF": {
+		"description": "Name of the 'df' command which remotes disk statistics (free space/etc...). This should be translated as one word.",
+		"message": "df"
+	},
+	"NASFTP_CMD_DF_HELP": {
+		"description": "Help text for the 'df' command.",
+		"message": "Show disk statistics"
+	},
+	"NASFTP_CMD_DF_SUMMARY": {
+		"description": "Output shown to summarize filesystem metadata. Indentation need not be maintained, although fields should be kept aligned if possible. 'fsid' is short for 'filesystem id' and may be translated. 'Total' is the total number of bytes or inodes (disk metadata counters) in the filesystem. 'Avail' is short for 'available'. 'unprivileged users' refers to normal user accounts and may be translated. 'root' refers to the superuser/administrator account and may be translated.",
+		"message": "  Path: $PATH$\n  fsid: $FSID$\n Total: $TOTAL$\n  Used: $USED$ ($PERCENT$%)\n Avail: $UAVAIL$ (to unprivileged users)\n        $RAVAIL$ (to root)",
+		"placeholders": {
+			"fsid": {
+				"content": "$2",
+				"example": "eb3c844d17bcff26"
+			},
+			"path": {
+				"content": "$1",
+				"example": "/tmp"
+			},
+			"percent": {
+				"content": "$5",
+				"example": "35"
+			},
+			"ravail": {
+				"content": "$7",
+				"example": "38772795"
+			},
+			"total": {
+				"content": "$3",
+				"example": "1234"
+			},
+			"uavail": {
+				"content": "$6",
+				"example": "532018"
+			},
+			"used": {
+				"content": "$4",
+				"example": "1000"
+			}
+		}
+	},
+	"NASFTP_CMD_EXIT": {
+		"description": "Name of the 'exit' command which exits the program. This should be translated as one word.",
+		"message": "exit"
+	},
+	"NASFTP_CMD_EXIT_HELP": {
+		"description": "Help text for the 'exit' and 'quit' commands.",
+		"message": "Disconnect"
+	},
+	"NASFTP_CMD_GET": {
+		"description": "Name of the 'get' command which downloads files from the remote server. This should be translated as one word.",
+		"message": "get"
+	},
+	"NASFTP_CMD_GET_DOWNLOAD_FILE": {
+		"description": "Output for the 'get' command.",
+		"message": "Downloading file: $SRC$ as $DST$",
+		"placeholders": {
+			"dst": {
+				"content": "$2",
+				"example": "local_file.txt"
+			},
+			"src": {
+				"content": "$1",
+				"example": "remote_file.txt"
+			}
+		}
+	},
+	"NASFTP_CMD_GET_HELP": {
+		"description": "Help text for the 'get' command.",
+		"message": "Download files"
+	},
+	"NASFTP_CMD_HELP": {
+		"description": "Name of the 'help' command which shows help text for using the sftp program. This should be translated as one word.",
+		"message": "help"
+	},
+	"NASFTP_CMD_HELP_HELP": {
+		"description": "Help text for the 'help' command.",
+		"message": "This help screen"
+	},
+	"NASFTP_CMD_HELP_LHS": {
+		"description": "A short summary of the command and its arguments for the help screen. The fields will usually be other translations.",
+		"message": "$CMD$ $ARGUMENTS$",
+		"placeholders": {
+			"arguments": {
+				"content": "$2",
+				"example": "[-1aflrSt] [dir]"
+			},
+			"cmd": {
+				"content": "$1",
+				"example": "ls"
+			}
+		}
+	},
+	"NASFTP_CMD_HELP_LINE": {
+		"description": "A summary of the command's usage and the description of the command itself. The fields will usually be other translations.",
+		"message": "$CMD$   $DESCRIPTION$",
+		"placeholders": {
+			"cmd": {
+				"content": "$1",
+				"example": "ls"
+			},
+			"description": {
+				"content": "$2",
+				"example": "List directory details"
+			}
+		}
+	},
+	"NASFTP_CMD_LIST": {
+		"description": "Name of the 'list' command which lists details about paths on the remote server. This should be translated as one word.",
+		"message": "list"
+	},
+	"NASFTP_CMD_LIST_HELP": {
+		"description": "Help text for the 'list' command.",
+		"message": "List directory details"
+	},
+	"NASFTP_CMD_LN": {
+		"description": "Name of the 'ln' command which creates hard and soft links. This should be translated as one word.",
+		"message": "ln"
+	},
+	"NASFTP_CMD_LN_HELP": {
+		"description": "Help text for the 'ln' command.",
+		"message": "Create a link at path pointing to the target"
+	},
+	"NASFTP_CMD_MKDIR": {
+		"description": "Name of the 'mkdir' command which creaties directories on the remote server. This should be translated as one word.",
+		"message": "mkdir"
+	},
+	"NASFTP_CMD_MKDIR_HELP": {
+		"description": "Help text for the 'mkdir' command.",
+		"message": "Create directories"
+	},
+	"NASFTP_CMD_MOVE": {
+		"description": "Name of the 'move' command which renames files on the remote server. This should be translated as one word.",
+		"message": "move"
+	},
+	"NASFTP_CMD_MOVE_HELP": {
+		"description": "Help text for the 'move' and 'rename' commands.",
+		"message": "Rename a file"
+	},
+	"NASFTP_CMD_PROMPT": {
+		"description": "Name of the 'prompt' command which sets the user's interactive prompt string. This should be translated as one word.",
+		"message": "prompt"
+	},
+	"NASFTP_CMD_PROMPT_HELP": {
+		"description": "Help text for the 'prompt' command.",
+		"message": "Set the prompt string"
+	},
+	"NASFTP_CMD_PUT": {
+		"description": "Name of the 'put' command which uploads files. This should be translated as one word.",
+		"message": "put"
+	},
+	"NASFTP_CMD_PUT_HELP": {
+		"description": "Help text for the 'put' command.",
+		"message": "Upload files"
+	},
+	"NASFTP_CMD_PUT_UPLOAD_FILE": {
+		"description": "Output for the 'put' command.",
+		"message": "Uploading file: $SRC$ as $DST$ ($SIZE$)",
+		"placeholders": {
+			"dst": {
+				"content": "$2",
+				"example": "remote_file.txt"
+			},
+			"size": {
+				"content": "$3",
+				"example": "23 MiB"
+			},
+			"src": {
+				"content": "$1",
+				"example": "local_file.txt"
+			}
+		}
+	},
+	"NASFTP_CMD_PWD": {
+		"description": "Name of the 'pwd' command which displays the current working directory. This should be translated as one word.",
+		"message": "pwd"
+	},
+	"NASFTP_CMD_PWD_HELP": {
+		"description": "Help text for the 'pwd' command.",
+		"message": "Show current working directory"
+	},
+	"NASFTP_CMD_PWD_OUTPUT": {
+		"description": "Output for the 'pwd' command.",
+		"message": "Remote working directory: $CWD$",
+		"placeholders": {
+			"cwd": {
+				"content": "$1",
+				"example": "/home/vapier"
+			}
+		}
+	},
+	"NASFTP_CMD_QUIT": {
+		"description": "Name of the 'quit' command which exits the program. This should be translated as one word.",
+		"message": "quit"
+	},
+	"NASFTP_CMD_READLINK": {
+		"description": "Name of the 'readlink' command which reads symbolic links (i.e. shortcuts). This should be translated as one word.",
+		"message": "readlink"
+	},
+	"NASFTP_CMD_READLINK_HELP": {
+		"description": "Help text for the 'readlink' command.",
+		"message": "Read symlinks"
+	},
+	"NASFTP_CMD_REALPATH": {
+		"description": "Name of the 'realpath' command which normalizes filesystem paths & symbolic links. This should be translated as one word.",
+		"message": "realpath"
+	},
+	"NASFTP_CMD_REALPATH_HELP": {
+		"description": "Help text for the 'realpath' command.",
+		"message": "Canonicalize paths"
+	},
+	"NASFTP_CMD_RENAME": {
+		"description": "Name of the 'rename' command which renames files on the remote server. This should be translated as one word.",
+		"message": "rename"
+	},
+	"NASFTP_CMD_RM": {
+		"description": "Name of the 'rm' command which removes files on the remote server. This should be translated as one word.",
+		"message": "rm"
+	},
+	"NASFTP_CMD_RMDIR": {
+		"description": "Name of the 'rmdir' command which deletes empty directories on the remote server. This should be translated as one word.",
+		"message": "rmdir"
+	},
+	"NASFTP_CMD_RMDIR_HELP": {
+		"description": "Help text for the 'rmdir' command.",
+		"message": "Delete empty directories"
+	},
+	"NASFTP_CMD_RM_HELP": {
+		"description": "Help text for the 'rm' command.",
+		"message": "Delete files"
+	},
+	"NASFTP_CMD_SHOW": {
+		"description": "Name of the 'show' command which is used to display non-text files directly (i.e. display image files inline). This should be translated as one word.",
+		"message": "show"
+	},
+	"NASFTP_CMD_SHOW_HELP": {
+		"description": "Help text for the 'show' command.",
+		"message": "Show files inline"
+	},
+	"NASFTP_CMD_STAT": {
+		"description": "Name of the 'stat' command which shows extensive path metadata (e.g. size, ownership, timestamps). This should be translated as one word.",
+		"message": "stat"
+	},
+	"NASFTP_CMD_STAT_EXTENSIONS_HEADER": {
+		"description": "Header shown before the list of file metadata extensions. The following lines will be KEY=VALUE pairs.",
+		"message": "Extensions:"
+	},
+	"NASFTP_CMD_STAT_EXTENSIONS_LINE": {
+		"description": "Line shown for each file metadata extension (usually multiple ones). Indentation need not be maintained.",
+		"message": "  $FIELD$: $VALUE$",
+		"placeholders": {
+			"field": {
+				"content": "$1",
+				"example": "encrypted"
+			},
+			"value": {
+				"content": "$2",
+				"example": "yes"
+			}
+		}
+	},
+	"NASFTP_CMD_STAT_HELP": {
+		"description": "Help text for the 'stat' command.",
+		"message": "Show file status"
+	},
+	"NASFTP_CMD_STAT_SUMMARY": {
+		"description": "Output shown to summarize file metadata. Indentation need not be maintained, although fields should be kept aligned if possible. 'UID' and 'GID' refer to the 'user' and 'group' ids and may be translated. 'Access' refers to the read/write/execute permissions and may be translated. 'atime' and 'mtime' refer to the 'accessed' and 'modified' times and may be translated.",
+		"message": "  File: $FILE$\n  Size: $SIZE$ bytes\n   UID: $UID$\n   GID: $GID$\nAccess: $PERM$\n atime: $ATIME$\n mtime: $MTIME$",
+		"placeholders": {
+			"atime": {
+				"content": "$6",
+				"example": "1547532018"
+			},
+			"file": {
+				"content": "$1",
+				"example": "file.txt"
+			},
+			"gid": {
+				"content": "$4",
+				"example": "1000"
+			},
+			"mtime": {
+				"content": "$7",
+				"example": "1547532018"
+			},
+			"perm": {
+				"content": "$5",
+				"example": "00100644 (-rw-r--r--)"
+			},
+			"size": {
+				"content": "$2",
+				"example": "1234"
+			},
+			"uid": {
+				"content": "$3",
+				"example": "1000"
+			}
+		}
+	},
+	"NASFTP_CMD_SYMLINK": {
+		"description": "Name of the 'symlink' command which creates symbolic links on the remote server (i.e. shortcuts). This should be translated as one word.",
+		"message": "symlink"
+	},
+	"NASFTP_CMD_SYMLINK_HELP": {
+		"description": "Help text for the 'symlink' command.",
+		"message": "Create a symlink at path pointing to the target"
+	},
+	"NASFTP_CMD_TRUNCATE": {
+		"description": "Name of the 'truncate' command which truncates files to 0 bytes. This should be translated as one word.",
+		"message": "truncate"
+	},
+	"NASFTP_CMD_TRUNCATE_HELP": {
+		"description": "Help text for the 'truncate' command.",
+		"message": "Truncate paths to 0 bytes"
+	},
+	"NASFTP_CMD_VERSION": {
+		"description": "Name of the 'version' command which shows program and network protocol version information. This should be translated as one word.",
+		"message": "version"
+	},
+	"NASFTP_CMD_VERSION_EXTENSIONS_HEADER": {
+		"description": "Header shown before the list of protocol extensions. The following lines will be KEY=VALUE pairs. Indentation need not be maintained.",
+		"message": "  server extensions:"
+	},
+	"NASFTP_CMD_VERSION_EXTENSIONS_LINE": {
+		"description": "Line shown for each protocol extensions (usually multiple ones). Indentation need not be maintained.",
+		"message": "    $NAME$ = $VALUE$",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "fstatvfs@openssh.com"
+			},
+			"value": {
+				"content": "$2",
+				"example": "2"
+			}
+		}
+	},
+	"NASFTP_CMD_VERSION_HELP": {
+		"description": "Help text for the 'version' command.",
+		"message": "Show current protocol version"
+	},
+	"NASFTP_CMD_VERSION_SUMMARY": {
+		"description": "Main output from the SFTP 'version' command. 'SFTP' refers to the protocol and probably should not be translated if the language does not have a common replacement. Indentation need not be maintained.",
+		"message": "SFTP protocol version info:\n  local: $CLIENTVER$\n  server: $SERVERVER$",
+		"placeholders": {
+			"clientver": {
+				"content": "$1",
+				"example": "3"
+			},
+			"serverver": {
+				"content": "$1",
+				"example": "3"
+			}
+		}
+	},
+	"NASFTP_ERROR_END_OF_FILE": {
+		"description": "Error message shown when the end of a file is reached.",
+		"message": "$CMD$: end of file",
+		"placeholders": {
+			"cmd": {
+				"content": "$1",
+				"example": "cat"
+			}
+		}
+	},
+	"NASFTP_ERROR_FILE_NOT_FOUND": {
+		"description": "Error message shown when a file is not found.",
+		"message": "$CMD$: file not found",
+		"placeholders": {
+			"cmd": {
+				"content": "$1",
+				"example": "cat"
+			}
+		}
+	},
+	"NASFTP_ERROR_FILE_READING": {
+		"description": "Error message shown when reading a file fails.",
+		"message": "Reading $FILE$ failed: $MSG$",
+		"placeholders": {
+			"file": {
+				"content": "$1",
+				"example": "file.txt"
+			},
+			"msg": {
+				"content": "$2",
+				"example": "path not found"
+			}
+		}
+	},
+	"NASFTP_ERROR_INTERNAL": {
+		"description": "An error message shown to the user. The message itself will be generated by the browser or OS.",
+		"message": "Unhandled internal error; please file a bug: $MSG$",
+		"placeholders": {
+			"msg": {
+				"content": "$1",
+				"example": "path not found"
+			}
+		}
+	},
+	"NASFTP_ERROR_INVALID_NUMBER": {
+		"description": "Error message shown when a number was expected, but the user entered something else.",
+		"message": "$CMD$: $FIELD$: invalid number: $INPUT$",
+		"placeholders": {
+			"cmd": {
+				"content": "$1",
+				"example": "ls"
+			},
+			"field": {
+				"content": "$2",
+				"example": "offset"
+			},
+			"input": {
+				"content": "$3",
+				"example": "alsdjf"
+			}
+		}
+	},
+	"NASFTP_ERROR_MESSAGE": {
+		"description": "An error message shown to the user. The message itself will usually be another translation.",
+		"message": "ERROR: $MSG$",
+		"placeholders": {
+			"msg": {
+				"content": "$1",
+				"example": "ls: path not found"
+			}
+		}
+	},
+	"NASFTP_ERROR_MISSING_PROTOCOL_EXTENSION": {
+		"description": "Error message shown when a protocol extension is unavailable during this session.",
+		"message": "$CMD: '$EXT$' extension unavailable",
+		"placeholders": {
+			"cmd": {
+				"content": "$1",
+				"example": "cp"
+			},
+			"ext": {
+				"content": "$2",
+				"example": "copy-file"
+			}
+		}
+	},
+	"NASFTP_ERROR_NON_REG_FILE": {
+		"description": "Error message shown when a file is required but a different type is provided (directory, symlink, etc...).",
+		"message": "$CMD$: $FILE$: not a regular file",
+		"placeholders": {
+			"cmd": {
+				"content": "$1",
+				"example": "ls"
+			},
+			"file": {
+				"content": "$2",
+				"example": "dir"
+			}
+		}
+	},
+	"NASFTP_ERROR_NOT_ENOUGH_ARGS": {
+		"description": "Error message shown when the user entered fewer arguments than the command required.",
+		"message": "$CMD$: not enough arguments",
+		"placeholders": {
+			"cmd": {
+				"content": "$1",
+				"example": "ls"
+			}
+		}
+	},
+	"NASFTP_ERROR_PERMISSION_DENIED": {
+		"description": "Error message shown when access is denied.",
+		"message": "$CMD$: permission denied",
+		"placeholders": {
+			"cmd": {
+				"content": "$1",
+				"example": "cat"
+			}
+		}
+	},
+	"NASFTP_ERROR_SERVER_ERROR": {
+		"description": "An error message shown to the user. The message itself will be generated by the remote server.",
+		"message": "$CMD$: $MSG$",
+		"placeholders": {
+			"cmd": {
+				"content": "$1",
+				"example": "ls"
+			},
+			"msg": {
+				"content": "$2",
+				"example": "path not found"
+			}
+		}
+	},
+	"NASFTP_ERROR_TOO_MANY_ARGS": {
+		"description": "Error message shown when the user entered more arguments than the command allows.",
+		"message": "$CMD$: too many arguments",
+		"placeholders": {
+			"cmd": {
+				"content": "$1",
+				"example": "ls"
+			}
+		}
+	},
+	"NASFTP_ERROR_UNKNOWN_CMD": {
+		"description": "An error message shown to the user when they tried to run an unknown command.",
+		"message": "$CMD$: unknown command",
+		"placeholders": {
+			"cmd": {
+				"content": "$1",
+				"example": "ls"
+			}
+		}
+	},
+	"NASFTP_ERROR_UNKNOWN_OPTION": {
+		"description": "Error message shown to the user when they tried to use an invalid command option.",
+		"message": "$CMD$: unknown flag $OPT$",
+		"placeholders": {
+			"cmd": {
+				"content": "$1",
+				"example": "ls"
+			},
+			"opt": {
+				"content": "$2",
+				"example": "-x"
+			}
+		}
+	},
+	"NASFTP_FORCE_QUIT": {
+		"description": "Message shown when the user forces the current session to exit.",
+		"message": "Force quit"
+	},
+	"NASFTP_PROGRESS_SUMMARY": {
+		"description": "Message shown to the user after a data transfer.",
+		"message": "$TOTAL$ bytes transferred in $SEC$ seconds ($RATE$/s)",
+		"placeholders": {
+			"rate": {
+				"content": "$3",
+				"example": "55.1 KiB"
+			},
+			"sec": {
+				"content": "$2",
+				"example": "6"
+			},
+			"total": {
+				"content": "$1",
+				"example": "1245"
+			}
+		}
+	},
+	"NASFTP_PROMPT": {
+		"description": "The interactive prompt shown to the user to show the current program status. 'nasftp' is the name of the program and should not be translated. The '>' separates the prompt from the start of the user's input, so there should be some spacing.",
+		"message": "nasftp $CWD$ > ",
+		"placeholders": {
+			"cwd": {
+				"content": "$1",
+				"example": "/home/vapier"
+			}
+		}
+	},
 	"NASSH_OPTIONS_ERROR": {
 		"description": "Error message shown when a user specified option is invalid. All strings here should be translated.",
 		"message": "Unknown option: $OPTION$",
@@ -1014,6 +1652,10 @@
 	"RESTORE_PREFS": {
 		"description": "Label for the link in the options page that lets the user restore their preferences (e.g. colors, font, etc...).",
 		"message": "Restore Backup"
+	},
+	"SFTP_CLIENT_BUTTON_LABEL": {
+		"description": "The label for the SFTP client button. 'SFTP' refers to the protocol and probably should not be translated if the language does not have a common replacement.",
+		"message": "SFTP"
 	},
 	"SHORTCUT_LIST_ARIA_LABEL": {
 		"description": "Text use as the aria-label for the 'shortcut-list'.",

@@ -8,19 +8,20 @@
  * @fileoverview FileSystemProvider tests.
  */
 
-describe('nassh_sftp_fsp_tests.js', () => {
-
 /**
  * A mock SFTP client.
  */
 const MockSftpClient = function() {
+  this.protocolClientVersion = 3;
+  this.protocolServerVersion = null;
+  this.protocolServerExtensions = {};
   this.openedFiles = {};
 
   // Methods in nassh.sftp.Client that we mock.
   const methods = [
     'closeFile', 'fileStatus', 'makeDirectory', 'openDirectory', 'openFile',
-    'readDirectory', 'removeDirectory', 'removeFile', 'renameFile',
-    'scanDirectory',
+    'readDirectory', 'readLink', 'realPath', 'removeDirectory', 'removeFile',
+    'renameFile', 'scanDirectory', 'symLink',
   ];
   methods.forEach((method) => {
     this[method] = (...args) => this.automock_(method, ...args);
@@ -46,6 +47,8 @@ MockSftpClient.prototype.automock_ = function(method, ...args) {
     }, method);
   });
 };
+
+describe('nassh_sftp_fsp_tests.js', () => {
 
 /**
  * Reset any FSP state.

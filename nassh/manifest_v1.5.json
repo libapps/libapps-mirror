@@ -40,6 +40,8 @@
     "scripts": [
       "js/nassh_deps.concat.js",
       "third_party/google-smart-card/google-smart-card-client-library.js",
+      "js/nasftp.js",
+      "js/nasftp_cli.js",
       "js/nassh.js",
       "js/nassh_agent_message.js",
       "js/nassh_agent_message_types.js",

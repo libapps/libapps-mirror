@@ -330,6 +330,8 @@ Secure Shell logic.
 * Options page specific code
   * [nassh_preferences_editor.js]
 * [SFTP specific code](#SFTP)
+  * [nasftp.js]: Core nasftp code.
+  * [nasftp_cli.js]: The SFTP command line program.
   * [nassh_sftp_client.js]: High level API over SFTP.
   * [nassh_sftp_fsp.js]: Glue layer between SFTP and
     [Chrome's File System Provider (FSP) API](https://developer.chrome.com/apps/fileSystemProvider).

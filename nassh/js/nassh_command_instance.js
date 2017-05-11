@@ -386,19 +386,25 @@ nassh.CommandInstance.prototype.promptForDestination_ = function(opt_default) {
 
 nassh.CommandInstance.prototype.connectToArgString = function(argstr) {
   const isMount = (this.storage.getItem('nassh.isMount') == 'true');
+  const isSftp = (this.storage.getItem('nassh.isSftp') == 'true');
   this.storage.removeItem('nassh.isMount');
+  this.storage.removeItem('nassh.isSftp');
 
   // Handle profile-id:XXX forms.  These are bookmarkable.
   var ary = argstr.match(/^profile-id:([a-z0-9]+)(\?.*)?/i);
   if (ary) {
     if (isMount) {
       this.mountProfile(ary[1], ary[2]);
+    } else if (isSftp) {
+      this.sftpConnectToProfile(ary[1], ary[2]);
     } else {
       this.connectToProfile(ary[1], ary[2]);
     }
   } else {
     if (isMount) {
       this.mountDestination(argstr);
+    } else if (isSftp) {
+      this.sftpConnectToDestination(argstr);
     } else {
       this.connectToDestination(argstr);
     }
@@ -493,6 +499,22 @@ nassh.CommandInstance.prototype.mountProfile = function(profileID, querystr) {
   const onStartup = (prefs) => {
     nassh.getBackgroundPage()
       .then((bg) => onBackgroundPage(bg, prefs));
+  };
+
+  this.commonProfileSetup_(profileID, onStartup);
+};
+
+/**
+ * Creates a new SFTP CommandInstance that runs in the background page.
+ */
+nassh.CommandInstance.prototype.sftpConnectToProfile = function(
+    profileID, querystr) {
+
+  const onStartup = (prefs) => {
+    this.isSftp = true;
+    this.sftpClient = new nassh.sftp.Client();
+
+    this.connectTo(this.prefsToConnectParams_(prefs));
   };
 
   this.commonProfileSetup_(profileID, onStartup);
@@ -747,6 +769,40 @@ nassh.CommandInstance.splitCommandLine = function(argstr) {
 };
 
 /**
+ * Initiate a SFTP connection to a remote host.
+ *
+ * @param {string} destination A string of the form username@host[:port].
+ * @return {boolean} True if we were able to parse the destination string,
+ *     false otherwise.
+ */
+nassh.CommandInstance.prototype.sftpConnectToDestination = function(destination) {
+  const rv = nassh.CommandInstance.parseDestination(destination);
+  if (rv === false) {
+    this.io.println(nassh.msg('BAD_DESTINATION', [destination]));
+    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+    return;
+  }
+
+  // We have to set the url here rather than in connectToArgString, because
+  // some callers may come directly to connectToDestination.
+  this.terminalLocation.hash = rv.destination;
+
+  const args = {
+    argv: {
+      terminalIO: this.io,
+      terminalStorage: this.storage,
+      terminalLocation: this.terminalLocation,
+      terminalWindow: this.terminalWindow,
+      isSftp: true,
+    },
+    connectOptions: rv,
+  };
+
+  nassh.getBackgroundPage()
+    .then((bg) => bg.nassh.sftp.fsp.createSftpInstance(args));
+};
+
+/**
  * Initiate an asynchronous connection to a remote host.
  *
  * @param {Object} params The various connection settings setup via the
@@ -805,6 +861,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
 
       // If we're trying to mount the connection, remember it.
       this.storage.setItem('nassh.isMount', this.isMount);
+      this.storage.setItem('nassh.isSftp', this.isSftp);
 
       this.relay_.redirect();
       return;
@@ -1226,6 +1283,16 @@ nassh.CommandInstance.prototype.onConnectDialog_.mountProfile = function(
 };
 
 /**
+ * Sent from the dialog when the user chooses to connect to a profile via sftp.
+ */
+nassh.CommandInstance.prototype.onConnectDialog_.sftpConnectToProfile = function(
+    dialogFrame, profileID) {
+  dialogFrame.close();
+
+  this.sftpConnectToProfile(profileID);
+};
+
+/**
  * Sent from the dialog when the user chooses to connect to a profile.
  */
 nassh.CommandInstance.prototype.onConnectDialog_.connectToProfile = function(
@@ -1399,6 +1466,12 @@ nassh.CommandInstance.prototype.onSftpInitialised = function() {
           this.terminalWindow.close();
       }
     };
+  } else {
+    // Interactive SFTP client case.
+    this.sftpCli_ = new nasftp.Cli(this);
+
+    // Useful for console debugging.
+    this.terminalWindow.nasftp_ = this.sftpCli_;
   }
 };
 
