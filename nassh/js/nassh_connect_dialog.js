@@ -488,7 +488,7 @@ nassh.ConnectDialog.prototype.maybeDirty_ = function(fieldName) {
  * to bulk-default.
  */
 nassh.ConnectDialog.prototype.maybeCopyPlaceholders_ = function() {
-  ['description', 'username', 'hostname', 'port'
+  ['description', 'username', 'hostname', 'port', 'relay-options',
   ].forEach(this.maybeCopyPlaceholder_.bind(this));
   this.syncButtons_();
 };
@@ -545,6 +545,15 @@ nassh.ConnectDialog.prototype.updateDetailPlaceholders_ = function() {
 
     this.$f(name, 'placeholder', value);
   });
+
+  // Google-specific relay hack.  This feels dirty.  We can revert this once
+  // we support managed default configs.  http://b/28205376 & related docs.
+  if (!this.$f('relay-options').value &&
+      this.$f('hostname').placeholder.endsWith('.corp.google.com'))
+    this.$f('relay-options', 'placeholder', '--config=google');
+  else
+    this.$f('relay-options', 'placeholder',
+            this.msg('FIELD_RELAY_OPTIONS_PLACEHOLDER'));
 };
 
 /**
