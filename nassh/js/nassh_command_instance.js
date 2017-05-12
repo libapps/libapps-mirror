@@ -140,6 +140,26 @@ nassh.CommandInstance.prototype.run = function() {
       }
     }
 
+    // Show some release highlights the first couple of runs with a new version.
+    // We'll reset the counter when we upgrade.
+    this.io.println(nassh.msg('WELCOME_CHANGELOG',
+                              ['\x1b[1mhttps://goo.gl/YnmXOs\x1b[m']));
+    var notesLastVer = lib.resource.getData('nassh/release/lastver');
+    if (this.prefs_.get('welcome/notes-version') != notesLastVer) {
+      // They upgraded, so reset the counters.
+      this.prefs_.set('welcome/show-count', 0);
+      this.prefs_.set('welcome/notes-version', notesLastVer);
+    }
+    // Figure out how many times we've shown this.
+    var notesShowCount = this.prefs_.get('welcome/show-count');
+    if (notesShowCount < 10) {
+      // For new runs, show the highlights directly.
+      this.io.print(nassh.msg('WELCOME_RELEASE_HIGHLIGHTS', [notesLastVer]));
+      this.io.println(lib.resource.getData('nassh/release/highlights')
+                        .replace(/%/g, '\r\n \u00A4'));
+      this.prefs_.set('welcome/show-count', notesShowCount + 1);
+    }
+
     if (this.manifest_.name.match(/\(tot\)/)) {
       // If we're a tot version, show how old the hterm deps are.
       var htermAge = Math.round(

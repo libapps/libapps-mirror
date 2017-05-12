@@ -1,0 +1,17 @@
+0.8.35.6
+
+# The first line tracks the last version that went stable.
+# Only features added since then should be kept here.
+# When a new version has gone stable, update the version above,
+# and delete all the old release notes below.
+
+# The lines below that start with % will be the actual notes.
+# The % symbol is used to split lines.
+# Only list significant changes that matter to the user.
+# The more lines that we have here, the more cluttered the output.
+
+% SFTP mount support (Chrome OS only).
+% OpenSSH upgraded to 7.5p1 (ECDSA/ED25519 support, but older features deprecated).
+% Support for ssh:// links.
+% Omnibox integration for ssh keyword.
+% Add a user-css-text field for injecting custom CSS directly.

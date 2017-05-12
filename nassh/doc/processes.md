@@ -37,7 +37,8 @@ We don't currently use signed tags.
 
 Update the [ChangeLog.md](./ChangeLog.md) file with any relevant details since
 the last release, and update the version in the
-[manifest.json](../manifest.json).
+[manifest.json](../manifest.json).  Add any significant changes to
+concat/release-highlights.txt.
 
 See commit [6b11740fa3eb500ea07efc684af7e75543ea3448] and tag [nassh-0.8.36.2]
 as examples.
@@ -121,6 +122,11 @@ https://chrome.google.com/webstore/developer/edit/pnhechapfaindjhompbnflcldabbgh
 ### Announce!
 
 This is the same as [announcing the dev release](#announce).
+
+### Reset Release Highlights
+
+Now that we've promoted a stable version, you should refresh the
+concat/release-highlights.txt file to drop older entries.
 
 ## Branches
 

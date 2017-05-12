@@ -21,6 +21,18 @@ nassh.PreferenceManager = function(opt_storage) {
   this.defineChildren('profile-ids', function(parent, id) {
     return new nassh.ProfilePreferenceManager(parent, id);
   });
+
+  this.definePreferences([
+    /**
+     * The last version we showed release notes for.
+     */
+    ['welcome/notes-version', ''],
+
+    /**
+     * How many times we've shown the current release notes.
+     */
+    ['welcome/show-count', 0],
+  ]);
 };
 
 nassh.PreferenceManager.prototype = {

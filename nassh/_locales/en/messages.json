@@ -25,6 +25,28 @@
     }
   },
 
+  "WELCOME_CHANGELOG": {
+    "message": "ChangeLog/release notes: $URL$",
+    "description": "A link to the ChangeLog file, displayed at startup",
+    "placeholders": {
+      "url": {
+        "content": "$1",
+        "example": "https://goo.gl/YnmXOs"
+      }
+    }
+  },
+
+  "WELCOME_RELEASE_HIGHLIGHTS": {
+    "message": "Major changes since $VER$:",
+    "description": "A header for a list of important changes, displayed at startup",
+    "placeholders": {
+      "ver": {
+        "content": "$1",
+        "example": "0.8.35.6"
+      }
+    }
+  },
+
   "OPEN_AS_WINDOW_TIP": {
     "message": "[Pro Tip] Use 'Open as Window' to keep Control-W from closing your terminal!\r\n[Pro Tip] See $URL$ for more information.",
     "description": "Message displayed to users who are running Secure Shell in a tab.",
