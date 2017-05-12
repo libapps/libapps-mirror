@@ -76,6 +76,11 @@
     "description": "Appended to PLUGIN_LOADING message when loading is complete."
   },
 
+  "PLUGIN_LOADING_FAILED": {
+    "message": " failed! :(",
+    "description": "Appended to PLUGIN_LOADING message when loading has failed."
+  },
+
   "SHORTCUT_LIST_ARIA_LABEL": {
     "message": "saved connections",
     "description": "Text use as the aria-label for the 'shortcut-list'."

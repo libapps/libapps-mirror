@@ -734,10 +734,14 @@ nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
   this.plugin_.setAttribute('type', 'application/x-nacl');
   this.plugin_.addEventListener('load', onPluginLoaded);
   this.plugin_.addEventListener('message', this.onPluginMessage_.bind(this));
-  this.plugin_.addEventListener('crash', (ev) => {
-    console.log('plugin crashed');
+
+  var errorHandler = (ev) => {
+    this.io.println(nassh.msg('PLUGIN_LOADING_FAILED'));
+    console.error('loading plugin failed', ev);
     this.exit(-1);
-  });
+  };
+  this.plugin_.addEventListener('crash', errorHandler);
+  this.plugin_.addEventListener('error', errorHandler);
 
   document.body.insertBefore(this.plugin_, document.body.firstChild);
 };
