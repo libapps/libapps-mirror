@@ -15,9 +15,6 @@ nassh.PreferenceManager = function(opt_storage) {
   var storage = opt_storage || nassh.defaultStorage;
   lib.PreferenceManager.call(this, storage, '/nassh/');
 
-  // Wam enabled by default in "Secure Shell (dev)" only.
-  var enableWam = (chrome.runtime.id == 'okddffdblfhhnmhodogpojmfkjmhinfp');
-
   this.defineChildren('profile-ids', function(parent, id) {
     return new nassh.ProfilePreferenceManager(parent, id);
   });
