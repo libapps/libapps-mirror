@@ -204,6 +204,27 @@ nassh.sftp.Client.prototype.isSuccessResponse_ = function(responsePacket,
 
 
 /**
+ * Checks to see whether the response packet was a name packet.
+ */
+nassh.sftp.Client.prototype.isNameResponse_ = function(responsePacket,
+    requestType) {
+  if (responsePacket instanceof nassh.sftp.packets.StatusPacket) {
+    if (responsePacket.code != 1)
+      throw new nassh.sftp.StatusError(responsePacket, requestType);
+
+    // EOF
+    return responsePacket;
+  }
+
+  if (!(responsePacket instanceof nassh.sftp.packets.NamePacket))
+    throw new TypeError('Received unexpected response to '
+                        + requestType + ' packet: ' + responsePacket);
+
+  return responsePacket;
+};
+
+
+/**
  * Sends a SFTP init packet.
  */
 nassh.sftp.Client.prototype.init = function() {
@@ -238,6 +259,40 @@ nassh.sftp.Client.prototype.fileStatus = function(path) {
 
 
 /**
+ * Retrieves status information for a remote symlink.
+ *
+ * @param {string} path The path of the remote symlink
+ * @return {!Promise<!AttrsPacket>} A Promise that resolves with the remote
+ *    file attributes, or rejects (usually with an nassh.sftp.StatusError)
+ */
+nassh.sftp.Client.prototype.linkStatus = function(path) {
+  var packet = new nassh.sftp.Packet();
+  packet.setString(this.basePath_ + path);
+
+  return this.sendRequest_(nassh.sftp.packets.RequestPackets.LSTAT, packet)
+    .then(response => this.isExpectedResponse_(response, nassh.sftp.packets.AttrsPacket, 'LSTAT'))
+    .then(response => response.attrs);
+};
+
+
+/**
+ * Retrieves status information for a remote file handle.
+ *
+ * @param {string} handle The open file handle
+ * @return {!Promise<!AttrsPacket>} A Promise that resolves with the remote
+ *    file attributes, or rejects (usually with an nassh.sftp.StatusError)
+ */
+nassh.sftp.Client.prototype.fileHandleStatus = function(handle) {
+  var packet = new nassh.sftp.Packet();
+  packet.setString(handle);
+
+  return this.sendRequest_(nassh.sftp.packets.RequestPackets.FSTAT, packet)
+    .then(response => this.isExpectedResponse_(response, nassh.sftp.packets.AttrsPacket, 'FSTAT'))
+    .then(response => response.attrs);
+};
+
+
+/**
  * Opens a remote directory.
  *
  * @param {string} path The path of the remote directory
@@ -266,21 +321,7 @@ nassh.sftp.Client.prototype.readDirectory = function(handle) {
   packet.setString(handle);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.READDIR, packet)
-    .then(response => {
-      if (response instanceof nassh.sftp.packets.StatusPacket) {
-        if (response.code != 1) {
-          throw new nassh.sftp.StatusError(response, 'READDIR');
-        }
-        return response; // EOF
-      }
-
-      if (!(response instanceof nassh.sftp.packets.NamePacket)) {
-        throw new TypeError('Received unexpected response to READDIR packet: '
-                            + response);
-      }
-
-      return response;
-  });
+    .then(response => this.isNameResponse_(response, 'READDIR'));
 };
 
 
@@ -438,4 +479,54 @@ nassh.sftp.Client.prototype.makeDirectory = function(path) {
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.MKDIR, packet)
     .then(response => this.isSuccessResponse_(response, 'MKDIR'));
+};
+
+
+/**
+ * Canonicalize a path.
+ *
+ * @param {string} path The path to canonicalize.
+ * @return {!Promise<!StatusPacket>} A Promise that resolves with the remote
+ *    path, or rejects (usually with an nassh.sftp.StatusError)
+ */
+nassh.sftp.Client.prototype.realPath = function(path) {
+  var packet = new nassh.sftp.Packet();
+  packet.setString(this.basePath_ + path);
+
+  return this.sendRequest_(nassh.sftp.packets.RequestPackets.REALPATH, packet)
+    .then(response => this.isNameResponse_(response, 'REALPATH'));
+};
+
+
+/**
+ * Read a symlink.
+ *
+ * @param {string} path The symlink to read.
+ * @return {!Promise<!StatusPacket>} A Promise that resolves with the remote
+ *    path, or rejects (usually with an nassh.sftp.StatusError)
+ */
+nassh.sftp.Client.prototype.readLink = function(path) {
+  var packet = new nassh.sftp.Packet();
+  packet.setString(this.basePath_ + path);
+
+  return this.sendRequest_(nassh.sftp.packets.RequestPackets.READLINK, packet)
+    .then(response => this.isNameResponse_(response, 'READLINK'));
+};
+
+
+/**
+ * Create a symlink.
+ *
+ * @param {string} target The target of the symlink.
+ * @param {string} path The symlink to create.
+ * @return {!Promise<!StatusPacket>} A Promise that resolves with the remote
+ *    path, or rejects (usually with an nassh.sftp.StatusError)
+ */
+nassh.sftp.Client.prototype.symLink = function(target, path) {
+  var packet = new nassh.sftp.Packet();
+  packet.setString(target);
+  packet.setString(this.basePath_ + path);
+
+  return this.sendRequest_(nassh.sftp.packets.RequestPackets.SYMLINK, packet)
+    .then(response => this.isSuccessResponse_(response, 'SYMLINK'));
 };
