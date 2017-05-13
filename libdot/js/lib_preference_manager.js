@@ -32,7 +32,7 @@ lib.PreferenceManager = function(storage, opt_prefix) {
   this.trace = false;
 
   var prefix = opt_prefix || '/';
-  if (prefix.substr(prefix.length - 1) != '/')
+  if (!prefix.endsWith('/'))
     prefix += '/';
 
   this.prefix = prefix;

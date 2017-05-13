@@ -267,7 +267,7 @@ lib.colors.rgbToHex = function(arg) {
  * Returns null if the value could not be normalized.
  */
 lib.colors.normalizeCSS = function(def) {
-  if (def.substr(0, 1) == '#')
+  if (def.startsWith('#'))
     return lib.colors.hexToRGB(def);
 
   if (lib.colors.re_.rgbx.test(def))
@@ -315,7 +315,7 @@ lib.colors.mix = function(base, tint, percent) {
  * will be set to 1.
  */
 lib.colors.crackRGB = function(color) {
-  if (color.substr(0, 4) == 'rgba') {
+  if (color.startsWith('rgba')) {
     var ary = color.match(lib.colors.re_.rgba);
     if (ary) {
       ary.shift();

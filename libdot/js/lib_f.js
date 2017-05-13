@@ -95,7 +95,7 @@ lib.f.getAcceptLanguages.chromeSupported = function() {
  *     leading '?', the '?' will be ignored.
  */
 lib.f.parseQuery = function(queryString) {
-  if (queryString.substr(0, 1) == '?')
+  if (queryString.startsWith('?'))
     queryString = queryString.substr(1);
 
   var rv = {};
