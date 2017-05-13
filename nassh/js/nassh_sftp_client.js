@@ -293,6 +293,44 @@ nassh.sftp.Client.prototype.fileHandleStatus = function(handle) {
 
 
 /**
+ * Sets status information for a remote file.
+ *
+ * @param {string} path The path of the remote file
+ * @param {Object} attrs The file attributes to set (see the structure
+ *    nassh.sftp.packets.getFileAttrs sets up)
+ * @return {!Promise<!AttrsPacket>} A Promise that resolves with the remote
+ *    file attributes, or rejects (usually with an nassh.sftp.StatusError)
+ */
+nassh.sftp.Client.prototype.setFileStatus = function(path, attrs) {
+  var packet = new nassh.sftp.Packet();
+  packet.setString(path);
+  nassh.sftp.packets.setFileAttrs(packet, attrs);
+
+  return this.sendRequest_(nassh.sftp.packets.RequestPackets.SETSTAT, packet)
+    .then(response => this.isSuccessResponse_(response, 'SETSTAT'));
+};
+
+
+/**
+ * Sets status information for a remote file handle.
+ *
+ * @param {string} handle The open file handle
+ * @param {Object} attrs The file attributes to set (see the structure
+ *    nassh.sftp.packets.getFileAttrs sets up)
+ * @return {!Promise<!AttrsPacket>} A Promise that resolves with the remote
+ *    file attributes, or rejects (usually with an nassh.sftp.StatusError)
+ */
+nassh.sftp.Client.prototype.setFileHandleStatus = function(handle, attrs) {
+  var packet = new nassh.sftp.Packet();
+  packet.setString(handle);
+  nassh.sftp.packets.setFileAttrs(packet, attrs);
+
+  return this.sendRequest_(nassh.sftp.packets.RequestPackets.FSETSTAT, packet)
+    .then(response => this.isSuccessResponse_(response, 'FSETSTAT'));
+};
+
+
+/**
  * Opens a remote directory.
  *
  * @param {string} path The path of the remote directory

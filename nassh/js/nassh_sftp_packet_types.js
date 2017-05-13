@@ -73,27 +73,38 @@ nassh.sftp.packets.UnknownPacket = function(packet) {
 };
 
 /**
+ * Possible SFTP File Transfer flags attributes (SSH_FILEXFER_ATTR_XXX).
+ */
+nassh.sftp.packets.FileXferAttrs = {
+  SIZE:        0x00000001,
+  UIDGID:      0x00000002,
+  PERMISSIONS: 0x00000004,
+  ACMODTIME:   0x00000008,
+  EXTENDED:    0x10000000,
+};
+
+/**
  * Given a packet (at the correct offset), will read one file's attributes.
  */
 nassh.sftp.packets.getFileAttrs = function(packet) {
   var attrs = {};
 
   attrs.flags = packet.getUint32();
-  if (attrs.flags & 0x00000001) { // If SSH_FILEXFER_ATTR_SIZE is set.
+  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.SIZE) {
     attrs.size = packet.getUint64();
   }
-  if (attrs.flags & 0x00000002) { // If SSH_FILEXFER_ATTR_UIDGID is set.
+  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.UIDGID) {
     attrs.uid = packet.getUint32();
     attrs.gid = packet.getUint32();
   }
-  if (attrs.flags & 0x00000004) { // If SSH_FILEXFER_ATTR_PERMISSIONS is set.
+  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.PERMISSIONS) {
     attrs.permissions = packet.getUint32();
   }
-  if (attrs.flags & 0x00000008) { // If SSH_FILEXFER_ACMODTIME is set.
+  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.ACMODTIME) {
     attrs.last_accessed = packet.getUint32();
     attrs.last_modified = packet.getUint32();
   }
-  if (attrs.flags & 0x10000000) { // If SSH_FILEXFER_ATTR_EXTENDED is set.
+  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.EXTENDED) {
     var extendedCount = packet.getUint32();
     attrs.extendedCount = extendedCount;
     var extendedData = [];
@@ -109,7 +120,35 @@ nassh.sftp.packets.getFileAttrs = function(packet) {
   }
 
   return attrs;
-}
+};
+
+/**
+ * Serialize an attribute object back into a packet.
+ */
+nassh.sftp.packets.setFileAttrs = function(packet, attrs) {
+  // We only add fields we know how to handle.
+  packet.setUint32(attrs.flags & (
+    nassh.sftp.packets.FileXferAttrs.SIZE |
+    nassh.sftp.packets.FileXferAttrs.UIDGID |
+    nassh.sftp.packets.FileXferAttrs.PERMISSIONS |
+    nassh.sftp.packets.FileXferAttrs.ACMODTIME
+  ));
+
+  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.SIZE) {
+    packet.setUint64(attrs.size);
+  }
+  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.UIDGID) {
+    packet.setUint32(attrs.uid);
+    packet.setUint32(attrs.gid);
+  }
+  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.PERMISSIONS) {
+    packet.setUint32(attrs.permissions);
+  }
+  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.ACMODTIME) {
+    packet.setUint32(attrs.last_accessed);
+    packet.setUint32(attrs.last_modified);
+  }
+};
 
 /**
  * Possible SFTP Request Packet types
