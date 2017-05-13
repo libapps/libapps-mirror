@@ -12,6 +12,9 @@ nassh.sftp = {};
  * @param {string} [opt_basePath] The base directory for client requests.
  */
 nassh.sftp.Client = function(opt_basePath='') {
+  // The version of the protocol we're using.
+  this.protoVersion = 3;
+
   // The packet request id counter.
   this.requestId_ = 0;
 
@@ -231,7 +234,7 @@ nassh.sftp.Client.prototype.init = function() {
   var packet = new nassh.sftp.Packet();
   packet.setUint32(5); // length, 5 bytes for type and version fields
   packet.setUint8(nassh.sftp.packets.RequestPackets.INIT);
-  packet.setUint32(3); // SFTP protocol version 3
+  packet.setUint32(this.protoVersion);
 
   this.pendingRequests['init'] = () => {
     console.log('init: SFTP');
