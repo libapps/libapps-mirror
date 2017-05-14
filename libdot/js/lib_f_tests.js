@@ -73,6 +73,15 @@ lib.f.Tests.addTest('zpad', function(result, cx) {
   result.pass();
 });
 
+lib.f.Tests.addTest('rpad', function(result, cx) {
+  result.assertEQ(lib.f.rpad('', 0), '');
+  result.assertEQ(lib.f.rpad('', 5), '     ');
+  result.assertEQ(lib.f.rpad('abc', 1), 'abc');
+  result.assertEQ(lib.f.rpad('abc', 5), 'abc  ');
+  result.assertEQ(lib.f.rpad('abc', 5, '*'), 'abc**');
+  result.pass();
+});
+
 lib.f.Tests.addTest('getWhitespace', function(result, cx) {
   // Test growing first.
   result.assertEQ(lib.f.getWhitespace(0), '');

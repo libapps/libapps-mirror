@@ -140,15 +140,14 @@ lib.f.clamp = function(v, min, max) {
  *
  * @param {string} str The string to pad.
  * @param {integer} length The desired length.
- * @param {string} opt_ch The optional padding character, defaults to ' '.
+ * @param {string} ch The optional padding character, defaults to ' '.
  * @return {string} The padded string.
  */
-lib.f.lpad = function(str, length, opt_ch) {
+lib.f.lpad = function(str, length, ch=' ') {
   str = String(str);
-  opt_ch = opt_ch || ' ';
 
   if (str.length < length)
-    str = opt_ch.repeat(length - str.length) + str;
+    str = ch.repeat(length - str.length) + str;
 
   return str;
 };
@@ -162,6 +161,23 @@ lib.f.lpad = function(str, length, opt_ch) {
  */
 lib.f.zpad = function(number, length) {
   return lib.f.lpad(number, length, '0');
+};
+
+/**
+ * Right pad a string to a given length using a given character.
+ *
+ * @param {string} str The string to pad.
+ * @param {integer} length The desired length.
+ * @param {string} ch The optional padding character, defaults to ' '.
+ * @return {string} The padded string.
+ */
+lib.f.rpad = function(str, length, ch=' ') {
+  str = String(str);
+
+  if (str.length < length)
+    str += ch.repeat(length - str.length);
+
+  return str;
 };
 
 /**
