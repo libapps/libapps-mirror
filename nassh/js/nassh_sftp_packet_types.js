@@ -99,6 +99,80 @@ nassh.sftp.packets.FileXferAttrs = {
 };
 
 /**
+ * Possible SFTP permission bits.
+ *
+ * Note: The RFC says:
+ *   The `permissions' field contains a bit mask of file permissions as
+ *   defined by posix.
+ * Except that POSIX only defines the bit values for permissions (ones that
+ * start with S_Ixxx).  It does not define the bit values for file types
+ * (ones that start with S_IFxxx).  We use "common" Linux ones for that.
+ */
+nassh.sftp.packets.PermissionBits = {
+  SMODE:  0o007777,  // Mask for file mode bits.
+  ISVTX:  0o001000,  // Sticky directory.
+  ISGID:  0o002000,  // Setgid.
+  ISUID:  0o004000,  // Setuid.
+
+  IFMT:   0o170000,  // Mask for IFxxx fields below.
+  IFCHR:  0o020000,  // Character special.
+  IFDIR:  0o040000,  // Directory.
+  IFBLK:  0o060000,  // Block special.
+  IFREG:  0o100000,  // Regular file.
+  IFIFO:  0o010000,  // FIFO special.
+  IFLNK:  0o120000,  // Symbolic link.
+  IFSOCK: 0o140000,  // Socket.
+};
+
+/**
+ * Convert permission bits into a standard UNIX summary.
+ *
+ * Typically used in conjunction with AttrsPacket and the permissions field.
+ *
+ * The output will look similar to `ls -l`.  e.g. "drwxr-xr-x".
+ *
+ * @param {integer} bits The permission bits to convert.
+ * @return {string} The short `ls -l`-like summary.
+ */
+nassh.sftp.packets.bitsToUnixModeLine = function(bits) {
+  var ret = '';
+
+  // First handle the file type.
+  var ifmt = bits & nassh.sftp.packets.PermissionBits.IFMT;
+  var fmtMap = {
+    [nassh.sftp.packets.PermissionBits.IFCHR]: 'c',
+    [nassh.sftp.packets.PermissionBits.IFDIR]: 'd',
+    [nassh.sftp.packets.PermissionBits.IFBLK]: 'b',
+    [nassh.sftp.packets.PermissionBits.IFREG]: '-',
+    [nassh.sftp.packets.PermissionBits.IFIFO]: 'p',
+    [nassh.sftp.packets.PermissionBits.IFLNK]: 'l',
+    [nassh.sftp.packets.PermissionBits.IFSOCK]: 's',
+  };
+  if (fmtMap[ifmt] === null)
+    ret += '?';
+  else
+    ret += fmtMap[ifmt];
+
+  // Then handle user/group/other permissions.
+  function threebits(bits, sid, x, X) {
+    if (!sid)
+      x = 'x', X = '-';
+    return ((bits & 0o4) ? 'r' : '-') +
+           ((bits & 0o2) ? 'w' : '-') +
+           ((bits & 0o1) ? x : X);
+  }
+
+  ret += threebits(bits >> 6, (bits & nassh.sftp.packets.PermissionBits.ISUID),
+                   's', 'S');
+  ret += threebits(bits >> 3, (bits & nassh.sftp.packets.PermissionBits.IGUID),
+                   's', 'S');
+  ret += threebits(bits >> 0, (bits & nassh.sftp.packets.PermissionBits.ISVTX),
+                   't', 'T');
+
+  return ret;
+};
+
+/**
  * Given a packet (at the correct offset), will read one file's attributes.
  */
 nassh.sftp.packets.getFileAttrs = function(packet) {
@@ -163,6 +237,21 @@ nassh.sftp.packets.setFileAttrs = function(packet, attrs) {
     packet.setUint32(attrs.last_accessed);
     packet.setUint32(attrs.last_modified);
   }
+};
+
+/**
+ * Convert UTC epoch timestamps that we get from the server to local time.
+ *
+ * Typically used in conjunction with AttrsPacket and the last_accessed &
+ * last_modified fields.  This is the same thing as "UNIX time".
+ *
+ * @param {integer} epoch The epoch time to convert.
+ * @return {Date} A standard Date object.
+ */
+nassh.sftp.packets.epochToLocal = function(epoch) {
+  var date = new Date(0);
+  date.setUTCSeconds(epoch);
+  return date;
 };
 
 /**
