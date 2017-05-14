@@ -72,7 +72,8 @@ nassh.sftp.fsp.onGetMetadataRequested = function(options, onSuccess, onError) {
     .then(onSuccess)
     .catch(response => {
         // If file not found
-      if (response instanceof nassh.sftp.StatusError && response.code == 2) {
+      if (response instanceof nassh.sftp.StatusError &&
+          response.code == nassh.sftp.packets.StatusCodes.NO_SUCH_FILE) {
         onError('NOT_FOUND');
         return;
       }
@@ -92,7 +93,7 @@ nassh.sftp.fsp.readDirectory = function(directoryHandle, client, sanitizeOptions
       .then(response => {
         // If EOF, return all the directory entries
         if (response instanceof nassh.sftp.packets.StatusPacket
-            && response.code == 1) {
+            && response.code == nassh.sftp.packets.StatusCodes.EOF) {
           return metadataEntries;
         }
 
@@ -264,7 +265,8 @@ nassh.sftp.fsp.onDeleteEntryRequested = function(options, onSuccess, onError) {
       .then(onSuccess)
       .catch(response => {
         // If file not found
-        if (response instanceof nassh.sftp.StatusError && response.code == 2) {
+        if (response instanceof nassh.sftp.StatusError &&
+            response.code == nassh.sftp.packets.StatusCodes.NO_SUCH_FILE) {
           onError('NOT_FOUND');
           return;
         }
@@ -277,7 +279,8 @@ nassh.sftp.fsp.onDeleteEntryRequested = function(options, onSuccess, onError) {
       .then(onSuccess)
       .catch(response => {
         // If file not found
-        if (response instanceof nassh.sftp.StatusError && response.code == 2) {
+        if (response instanceof nassh.sftp.StatusError &&
+            response.code == nassh.sftp.packets.StatusCodes.NO_SUCH_FILE) {
           onError('NOT_FOUND');
           return;
         }

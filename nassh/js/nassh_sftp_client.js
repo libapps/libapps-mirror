@@ -198,7 +198,7 @@ nassh.sftp.Client.prototype.isSuccessResponse_ = function(responsePacket,
                             + requestType + ' packet: ' + responsePacket);
   }
 
-  if (responsePacket.code !== 0) {
+  if (responsePacket.code != nassh.sftp.packets.StatusCodes.OK) {
     throw new nassh.sftp.StatusError(responsePacket, requestType);
   }
 
@@ -212,7 +212,7 @@ nassh.sftp.Client.prototype.isSuccessResponse_ = function(responsePacket,
 nassh.sftp.Client.prototype.isNameResponse_ = function(responsePacket,
     requestType) {
   if (responsePacket instanceof nassh.sftp.packets.StatusPacket) {
-    if (responsePacket.code != 1)
+    if (responsePacket.code != nassh.sftp.packets.StatusCodes.EOF)
       throw new nassh.sftp.StatusError(responsePacket, requestType);
 
     // EOF
@@ -420,7 +420,7 @@ nassh.sftp.Client.prototype.readFile = function(handle, offset, len) {
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.READ, packet)
     .then(response => {
       if (response instanceof nassh.sftp.packets.StatusPacket) {
-        if (response.code != 1) {
+        if (response.code != nassh.sftp.packets.StatusCodes.EOF) {
           throw new nassh.sftp.StatusError(response, 'READ');
         }
         return ''; // EOF, return empty data string

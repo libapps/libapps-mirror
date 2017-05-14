@@ -7,6 +7,21 @@
 nassh.sftp.packets = {};
 
 /**
+ * Possible status code values.
+ */
+nassh.sftp.packets.StatusCodes = {
+  OK:                0,
+  EOF:               1,
+  NO_SUCH_FILE:      2,
+  PERMISSION_DENIED: 3,
+  FAILURE:           4,
+  BAD_MESSAGE:       5,
+  NO_CONNECTION:     6,
+  CONNECTION_LOST:   7,
+  OP_UNSUPPORTED:    8,
+};
+
+/**
  * SFTP Status Packet containing the request id, status codes, status message
  * and language.
  */
