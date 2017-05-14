@@ -186,3 +186,15 @@ nassh.sftp.packets.ResponsePackets = {
   104: nassh.sftp.packets.NamePacket,
   105: nassh.sftp.packets.AttrsPacket,
 };
+
+/**
+ * Possible bit flags with open packets.
+ */
+nassh.sftp.packets.OpenFlags = {
+  READ:   0x00000001,
+  WRITE:  0x00000002,
+  APPEND: 0x00000004,
+  CREAT:  0x00000008,
+  TRUNC:  0x00000010,
+  EXCL:   0x00000020,
+};

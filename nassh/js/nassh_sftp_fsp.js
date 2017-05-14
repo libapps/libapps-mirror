@@ -185,11 +185,11 @@ nassh.sftp.fsp.onOpenFileRequested = function(options, onSuccess, onError) {
   }
 
   var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
-  var pflags = 0x00000000;
+  var pflags = 0;
   if (options.mode == "READ") {
-    pflags |= 0x00000001; // read flag
+    pflags |= nassh.sftp.packets.OpenFlags.READ;
   } else if (options.mode == "WRITE") {
-    pflags |= 0x00000002; // write flag
+    pflags |= nassh.sftp.packets.OpenFlags.WRITE;
   }
 
   var path = '.' + options.filePath; // relative path
@@ -212,7 +212,8 @@ nassh.sftp.fsp.onCreateFileRequested = function(options, onSuccess, onError) {
   }
 
   var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
-  var pflags = 0x00000008 | 0x00000020; // create | exclusive flag
+  var pflags = nassh.sftp.packets.OpenFlags.CREAT |
+               nassh.sftp.packets.OpenFlags.EXCL;
 
   var path = '.' + options.filePath; // relative path
   client.openFile(path, pflags)
@@ -234,7 +235,8 @@ nassh.sftp.fsp.onTruncateRequested = function(options, onSuccess, onError) {
   }
 
   var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
-  var pflags = 0x00000008 | 0x00000010; // create | truncate flag
+  var pflags = nassh.sftp.packets.OpenFlags.CREAT |
+               nassh.sftp.packets.OpenFlags.TRUNC;
 
   var path = '.' + options.filePath; // relative path
   client.openFile(path, pflags)
@@ -467,8 +469,10 @@ nassh.sftp.fsp.copyFile = function(sourcePath, targetPath, size, client) {
     .then(handle => {
 
       sourceHandle = handle;
-      // write | append | create | exclusive flags
-      var pflags = 0x00000002 | 0x00000004 | 0x00000008 | 0x00000020;
+      var pflags = nassh.sftp.packets.OpenFlags.WRITE |
+                   nassh.sftp.packets.OpenFlags.APPEND |
+                   nassh.sftp.packets.OpenFlags.CREAT |
+                   nassh.sftp.packets.OpenFlags.EXCL;
       return client.openFile(targetPath, pflags);
 
     })
