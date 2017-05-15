@@ -61,6 +61,9 @@ nassh.CommandInstance = function(argv) {
   // SFTP Client for SFTP instances.
   this.sftpClient = (this.isSftp) ? new nassh.sftp.Client(argv.basePath) : null;
 
+  // Whether we're setting up the connection for mounting.
+  this.isMount = argv.isMount || false;
+
   // Mount options for a SFTP instance.
   this.mountOptions = argv.mountOptions || null;
 
@@ -384,19 +387,19 @@ nassh.CommandInstance.prototype.promptForDestination_ = function(opt_default) {
 };
 
 nassh.CommandInstance.prototype.connectToArgString = function(argstr) {
-  var isSftp = this.storage.getItem('nassh.isSftp');
-  this.storage.removeItem('nassh.isSftp');
+  const isMount = (this.storage.getItem('nassh.isMount') == 'true');
+  this.storage.removeItem('nassh.isMount');
 
   // Handle profile-id:XXX forms.  These are bookmarkable.
   var ary = argstr.match(/^profile-id:([a-z0-9]+)(\?.*)?/i);
   if (ary) {
-    if (isSftp) {
+    if (isMount) {
       this.mountProfile(ary[1], ary[2]);
     } else {
       this.connectToProfile(ary[1], ary[2]);
     }
   } else {
-    if (isSftp) {
+    if (isMount) {
       this.mountDestination(argstr);
     } else {
       this.connectToDestination(argstr);
@@ -475,6 +478,7 @@ nassh.CommandInstance.prototype.mountProfile = function(profileID, querystr) {
         terminalWindow: this.terminalWindow,
         isSftp: true,
         basePath: prefs.get('mount-path'),
+        isMount: true,
         // Mount options are passed directly to chrome.fileSystemProvider.mount,
         // so don't add fields here that would otherwise collide.
         mountOptions: {
@@ -677,6 +681,7 @@ nassh.CommandInstance.prototype.mountDestination = function(destination) {
       terminalLocation: this.terminalLocation,
       terminalWindow: this.terminalWindow,
       isSftp: true,
+      isMount: true,
       // Mount options are passed directly to chrome.fileSystemProvider.mount,
       // so don't add fields here that would otherwise collide.
       mountOptions: {
@@ -800,10 +805,8 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
         // sure not to re-prompt for the destination when we return.
         this.storage.setItem('nassh.pendingRelay', 'yes');
 
-        // If we're trying to mount an SFTP connection, remember it.
-        if (this.isSftp) {
-          this.storage.setItem('nassh.isSftp', 'yes');
-        }
+        // If we're trying to mount the connection, remember it.
+        this.storage.setItem('nassh.isMount', this.isMount);
 
         this.relay_.redirect();
         return;
@@ -1055,7 +1058,7 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
   // Close all streams upon exit.
   this.streams_.closeAllStreams();
 
-  if (this.isSftp) {
+  if (this.isMount) {
     if (nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId]) {
       delete nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId];
     }
@@ -1286,38 +1289,40 @@ function isSftpInitResponse(data) {
  * SFTP Initialization handler. Mounts the SFTP connection as a file system.
  */
 nassh.CommandInstance.prototype.onSftpInitialised = function() {
-  // Newer versions of Chrome support this API, but olders will error out.
-  if (lib.f.getChromeMilestone() >= 64)
-    this.mountOptions['persistent'] = false;
-
-  // Mount file system.
-  chrome.fileSystemProvider.mount(this.mountOptions);
-
-  // Add this instance to list of SFTP instances.
-  nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId] = this;
-
   // Update stdout stream to output to the SFTP Client.
   this.streams_.getStreamByFd(1).setIo(this.sftpClient);
 
-  this.io.showOverlay(nassh.msg('MOUNTED_MESSAGE') + ' '
-                      + nassh.msg('CONNECT_OR_EXIT_MESSAGE'), null);
+  if (this.isMount) {
+    // Newer versions of Chrome support this API, but olders will error out.
+    if (lib.f.getChromeMilestone() >= 64)
+      this.mountOptions['persistent'] = false;
 
-  this.io.onVTKeystroke = (string) => {
-    var ch = string.toLowerCase();
-    switch (ch) {
-      case 'c':
-      case '\x12': // ctrl-r
-        this.terminalLocation.hash = '';
-        this.terminalLocation.reload();
-        break;
+    // Mount file system.
+    chrome.fileSystemProvider.mount(this.mountOptions);
 
-      case 'e':
-      case 'x':
-      case '\x1b': // ESC
-      case '\x17': // ctrl-w
-        this.terminalWindow.close();
-    }
-  };
+    // Add this instance to list of SFTP instances.
+    nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId] = this;
+
+    this.io.showOverlay(nassh.msg('MOUNTED_MESSAGE') + ' '
+                        + nassh.msg('CONNECT_OR_EXIT_MESSAGE'), null);
+
+    this.io.onVTKeystroke = (string) => {
+      var ch = string.toLowerCase();
+      switch (ch) {
+        case 'c':
+        case '\x12': // ctrl-r
+          this.terminalLocation.hash = '';
+          this.terminalLocation.reload();
+          break;
+
+        case 'e':
+        case 'x':
+        case '\x1b': // ESC
+        case '\x17': // ctrl-w
+          this.terminalWindow.close();
+      }
+    };
+  }
 };
 
 /**
