@@ -407,6 +407,22 @@ nassh.CommandInstance.prototype.connectToArgString = function(argstr) {
 };
 
 /**
+ * Turn a prefs object into the params object connectTo expects.
+ */
+nassh.CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
+  return {
+    username: prefs.get('username'),
+    hostname: prefs.get('hostname'),
+    port: prefs.get('port'),
+    relayOptions: prefs.get('relay-options'),
+    identity: prefs.get('identity'),
+    argstr: prefs.get('argstr'),
+    terminalProfile: prefs.get('terminal-profile'),
+    authAgentAppID: prefs.get('auth-agent-appid'),
+  };
+};
+
+/**
  * Mount a remote host given a profile id. Creates a new SFTP CommandInstance
  * that runs in the background page.
  */
@@ -451,16 +467,7 @@ nassh.CommandInstance.prototype.mountProfile = function(
           writable: true
         }
       },
-      connectOptions: {
-        username: prefs.get('username'),
-        hostname: prefs.get('hostname'),
-        port: prefs.get('port'),
-        relayOptions: prefs.get('relay-options'),
-        identity: prefs.get('identity'),
-        argstr: prefs.get('argstr'),
-        terminalProfile: prefs.get('terminal-profile'),
-        authAgentAppID: prefs.get('auth-agent-appid')
-      }
+      connectOptions: this.prefsToConnectParams_(prefs),
     };
 
     chrome.extension.getBackgroundPage()
@@ -497,16 +504,7 @@ nassh.CommandInstance.prototype.connectToProfile = function(
     document.title = prefs.get('description') + ' - ' +
       this.manifest_.name + ' ' + this.manifest_.version;
 
-    this.connectTo({
-      username: prefs.get('username'),
-      hostname: prefs.get('hostname'),
-      port: prefs.get('port'),
-      relayOptions: prefs.get('relay-options'),
-      identity: prefs.get('identity'),
-      argstr: prefs.get('argstr'),
-      terminalProfile: prefs.get('terminal-profile'),
-      authAgentAppID: prefs.get('auth-agent-appid')
-    });
+    this.connectTo(this.prefsToConnectParams_(prefs));
   };
 
   // Re-read prefs from storage in case they were just changed in the connect
