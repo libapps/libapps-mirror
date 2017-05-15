@@ -405,6 +405,40 @@ nassh.CommandInstance.prototype.connectToArgString = function(argstr) {
 };
 
 /**
+ * Common phases that we run before making an actual connection.
+ *
+ * @param {string} profileID Terminal preference profile name.
+ * @param {function(nassh.PreferenceManager)} callback Callback when the prefs
+ *     have finished loading.
+ */
+nassh.CommandInstance.prototype.commonProfileSetup_ = function(
+    profileID, callback) {
+
+  const onReadStorage = () => {
+    let prefs;
+    try {
+      prefs = this.prefs_.getProfile(profileID);
+    } catch (e) {
+      this.io.println(nassh.msg('GET_PROFILE_ERROR', [profileID, e]));
+      this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+      return;
+    }
+
+    document.querySelector('#terminal').focus();
+
+    this.terminalLocation.hash = 'profile-id:' + profileID;
+    document.title = prefs.get('description') + ' - ' +
+      this.manifest_.name + ' ' + this.manifest_.version;
+
+    callback(prefs);
+  };
+
+  // Re-read prefs from storage in case they were just changed in the connect
+  // dialog.
+  this.prefs_.readStorage(onReadStorage);
+};
+
+/**
  * Turn a prefs object into the params object connectTo expects.
  */
 nassh.CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
@@ -424,30 +458,14 @@ nassh.CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
  * Mount a remote host given a profile id. Creates a new SFTP CommandInstance
  * that runs in the background page.
  */
-nassh.CommandInstance.prototype.mountProfile = function(
-    profileID, querystr) {
-
-  var onReadStorage = () => {
-    try {
-      var prefs = this.prefs_.getProfile(profileID);
-    } catch (e) {
-      this.io.println(nassh.msg('GET_PROFILE_ERROR', [profileID, e]));
-      this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
-      return;
-    }
-
-    document.querySelector('#terminal').focus();
-
+nassh.CommandInstance.prototype.mountProfile = function(profileID, querystr) {
+  const onStartup = (prefs) => {
     if (chrome.extension.getBackgroundPage()
         .nassh.sftp.fsp.sftpInstances[prefs.id]) {
       this.io.println(nassh.msg('ALREADY_MOUNTED_MESSAGE'));
       this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
       return;
     }
-
-    this.terminalLocation.hash = 'profile-id:' + profileID;
-    document.title = prefs.get('description') + ' - ' +
-      this.manifest_.name + ' ' + this.manifest_.version;
 
     var args = {
       argv: {
@@ -472,9 +490,7 @@ nassh.CommandInstance.prototype.mountProfile = function(
       .nassh.sftp.fsp.createSftpInstance(args);
   };
 
-  // Re-read prefs from storage in case they were just changed in the connect
-  // dialog.
-  this.prefs_.readStorage(onReadStorage);
+  this.commonProfileSetup_(profileID, onStartup);
 };
 
 /**
@@ -482,31 +498,11 @@ nassh.CommandInstance.prototype.mountProfile = function(
  */
 nassh.CommandInstance.prototype.connectToProfile = function(
     profileID, querystr) {
-
-  var onReadStorage = () => {
-    try {
-      var prefs = this.prefs_.getProfile(profileID);
-    } catch (e) {
-      this.io.println(nassh.msg('GET_PROFILE_ERROR', [profileID, e]));
-      this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
-      return;
-    }
-
-    document.querySelector('#terminal').focus();
-
-    // We have to set the url here rather than in connectToArgString, because
-    // some callers will come directly to connectToProfile.
-    this.terminalLocation.hash = 'profile-id:' + profileID;
-
-    document.title = prefs.get('description') + ' - ' +
-      this.manifest_.name + ' ' + this.manifest_.version;
-
+  const onStartup = (prefs) => {
     this.connectTo(this.prefsToConnectParams_(prefs));
   };
 
-  // Re-read prefs from storage in case they were just changed in the connect
-  // dialog.
-  this.prefs_.readStorage(onReadStorage);
+  this.commonProfileSetup_(profileID, onStartup);
 };
 
 /**
