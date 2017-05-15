@@ -901,7 +901,7 @@ nassh.ConnectDialog.prototype.onConnectClick_ = function(e) {
 };
 
 /**
- * Someone clicked on the connect button.
+ * Someone clicked on the delete button.
  */
 nassh.ConnectDialog.prototype.onDeleteClick_ = function(e) {
   if (this.deleteButton_.getAttribute('disabled'))
