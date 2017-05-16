@@ -20,7 +20,7 @@ lib.Storage.Local = function() {
 /**
  * Called by the storage implementation when the storage is modified.
  *
- * @param {!Event} e
+ * @param {!Event} e The setting that has changed.
  */
 lib.Storage.Local.prototype.onStorage_ = function(e) {
   if (e.storageArea != this.storage_)

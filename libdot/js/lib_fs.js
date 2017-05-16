@@ -26,7 +26,7 @@ lib.fs = {};
  * @template T
  * @param {string} msg The message prefix to use in the log.
  * @param {T=} opt_callback A function to invoke after logging.
- * @return {T}
+ * @return {T} The wrapper function to call.
  */
 lib.fs.log = function(msg, opt_callback) {
   return function(...args) {
@@ -45,7 +45,7 @@ lib.fs.log = function(msg, opt_callback) {
  * @template T
  * @param {string} msg The message prefix to use in the log.
  * @param {T=} opt_callback A function to invoke after logging.
- * @return {T}
+ * @return {T} The wrapper function to call.
  */
 lib.fs.err = function(msg, opt_callback) {
   return function(...args) {

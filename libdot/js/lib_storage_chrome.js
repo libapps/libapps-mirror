@@ -8,7 +8,7 @@
  * chrome.storage based class with an async interface that is interchangeable
  * with other lib.Storage.* implementations.
  *
- * @param {!StorageArea} storage
+ * @param {!StorageArea} storage The backing storage.
  * @implements {lib.Storage}
  * @constructor
  */
@@ -22,8 +22,10 @@ lib.Storage.Chrome = function(storage) {
 /**
  * Called by the storage implementation when the storage is modified.
  *
- * @param {!Array<*>} changes
- * @param {string} areaname
+ * @param {!Array<*>} changes Object mapping each key that changed to its
+ *     corresponding storage.StorageChange for that item.
+ * @param {string} areaname The name of the storage area ("sync", "local",
+ *     or "managed") the changes are for.
  */
 lib.Storage.Chrome.prototype.onChanged_ = function(changes, areaname) {
   if (chrome.storage[areaname] != this.storage_)

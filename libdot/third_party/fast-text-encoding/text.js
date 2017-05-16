@@ -53,7 +53,6 @@ FastTextEncoder.prototype.encode = function(string, options={stream: false}) {
 
   let pos = 0;
   const len = string.length;
-  const out = [];
 
   let at = 0;  // output position
   let tlen = Math.max(32, len + (len >> 1) + 7);  // 1.5x size
@@ -99,7 +98,7 @@ FastTextEncoder.prototype.encode = function(string, options={stream: false}) {
       target[at++] = ((value >> 12) & 0x3f) | 0x80;
       target[at++] = ((value >>  6) & 0x3f) | 0x80;
     } else {
-      // FIXME: do we care
+      // TODO: do we care
       continue;
     }
 
@@ -107,7 +106,7 @@ FastTextEncoder.prototype.encode = function(string, options={stream: false}) {
   }
 
   return target.slice(0, at);
-}
+};
 
 /**
  * @constructor
@@ -133,6 +132,7 @@ Object.defineProperty(FastTextDecoder.prototype, 'ignoreBOM', {value: false});
 /**
  * @param {(!ArrayBuffer|!ArrayBufferView)} buffer
  * @param {{stream: boolean}=} options
+ * @return {string}
  */
 FastTextDecoder.prototype.decode = function(buffer, options={stream: false}) {
   if (options['stream']) {
@@ -169,17 +169,17 @@ FastTextDecoder.prototype.decode = function(buffer, options={stream: false}) {
       if (codepoint > 0xffff) {
         // codepoint &= ~0x10000;
         codepoint -= 0x10000;
-        out.push((codepoint >>> 10) & 0x3ff | 0xd800)
+        out.push((codepoint >>> 10) & 0x3ff | 0xd800);
         codepoint = 0xdc00 | codepoint & 0x3ff;
       }
       out.push(codepoint);
     } else {
-      // FIXME: we're ignoring this
+      // TODO: we're ignoring this
     }
   }
 
   return String.fromCharCode.apply(null, out);
-}
+};
 
 scope['TextEncoder'] = FastTextEncoder;
 scope['TextDecoder'] = FastTextDecoder;

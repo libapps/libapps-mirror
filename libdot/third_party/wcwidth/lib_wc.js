@@ -5,6 +5,7 @@
 'use strict';
 
 /**
+ * @fileoverview
  * This JavaScript library is ported from the wcwidth.js module of node.js.
  * The original implementation can be found at:
  * https://npmjs.org/package/wcwidth.js
@@ -359,8 +360,8 @@ lib.wc.unambiguous = [
 /**
  * Binary search to check if the given unicode character is in the table.
  *
- * @param {integer} ucs A unicode character code.
- * @param {Object} table A sorted list of internals to match against.
+ * @param {number} ucs A unicode character code.
+ * @param {!Object} table A sorted list of internals to match against.
  * @return {boolean} True if the given character is in the table.
  */
 lib.wc.binaryTableSearch_ = function(ucs, table) {
@@ -386,8 +387,7 @@ lib.wc.binaryTableSearch_ = function(ucs, table) {
 /**
  * Binary search to check if the given unicode character is a space character.
  *
- * @param {integer} ucs A unicode character code.
- *
+ * @param {number} ucs A unicode character code.
  * @return {boolean} True if the given character is a space character; false
  *     otherwise.
  */
@@ -399,10 +399,9 @@ lib.wc.isSpace = function(ucs) {
  * Auxiliary function for checking if the given unicode character is a East
  * Asian Ambiguous character.
  *
- * @param {integer} ucs A unicode character code.
- *
+ * @param {number} ucs A unicode character code.
  * @return {boolean} True if the given character is a East Asian Ambiguous
- * character.
+ *     character.
  */
 lib.wc.isCjkAmbiguous = function(ucs) {
   return lib.wc.binaryTableSearch_(ucs, lib.wc.ambiguous);
@@ -411,9 +410,8 @@ lib.wc.isCjkAmbiguous = function(ucs) {
 /**
  * Determine the column width of the given character.
  *
- * @param {integer} ucs A unicode character code.
- *
- * @return {integer} The column width of the given character.
+ * @param {number} ucs A unicode character code.
+ * @return {number} The column width of the given character.
  */
 lib.wc.charWidth = function(ucs) {
   if (lib.wc.regardCjkAmbiguous) {
@@ -427,9 +425,8 @@ lib.wc.charWidth = function(ucs) {
  * Determine the column width of the given character without considering East
  * Asian Ambiguous characters.
  *
- * @param {integer} ucs A unicode character code.
- *
- * @return {integer} The column width of the given character.
+ * @param {number} ucs A unicode character code.
+ * @return {number} The column width of the given character.
  */
 lib.wc.charWidthDisregardAmbiguous = function(ucs) {
   // Optimize for ASCII characters.
@@ -458,9 +455,8 @@ lib.wc.charWidthDisregardAmbiguous = function(ucs) {
  * Determine the column width of the given character considering East Asian
  * Ambiguous characters.
  *
- * @param {integer} ucs A unicode character code.
- *
- * @return {integer} The column width of the given character.
+ * @param {number} ucs A unicode character code.
+ * @return {number} The column width of the given character.
  */
 lib.wc.charWidthRegardAmbiguous = function(ucs) {
   if (lib.wc.isCjkAmbiguous(ucs))
@@ -473,8 +469,7 @@ lib.wc.charWidthRegardAmbiguous = function(ucs) {
  * Determine the column width of the given string.
  *
  * @param {string} str A string.
- *
- * @return {integer} The column width of the given string.
+ * @return {number} The column width of the given string.
  */
 lib.wc.strWidth = function(str) {
   var width, rv = 0;
@@ -495,9 +490,8 @@ lib.wc.strWidth = function(str) {
  * Get the substring at the given column offset of the given column width.
  *
  * @param {string} str The string to get substring from.
- * @param {integer} start The starting column offset to get substring.
- * @param {integer} opt_width The column width of the substring.
- *
+ * @param {number} start The starting column offset to get substring.
+ * @param {number=} opt_width The column width of the substring.
  * @return {string} The substring.
  */
 lib.wc.substr = function(str, start, opt_width) {
@@ -538,9 +532,8 @@ lib.wc.substr = function(str, start, opt_width) {
  * Get substring at the given start and end column offset.
  *
  * @param {string} str The string to get substring from.
- * @param {integer} start The starting column offset.
- * @param {integer} end The ending column offset.
- *
+ * @param {number} start The starting column offset.
+ * @param {number} end The ending column offset.
  * @return {string} The substring.
  */
 lib.wc.substring = function(str, start, end) {

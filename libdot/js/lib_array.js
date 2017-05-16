@@ -36,8 +36,8 @@ lib.array.concatTyped = function(...arrays) {
  * Compare two array-like objects entrywise.
  *
  * @template ARRAY_LIKE
- * @param {?ARRAY_LIKE} a
- * @param {?ARRAY_LIKE} b
+ * @param {?ARRAY_LIKE} a The first array to compare.
+ * @param {?ARRAY_LIKE} b The second array to compare.
  * @return {boolean} true if both arrays are null or they agree entrywise;
  *     false otherwise.
  */

@@ -26,9 +26,9 @@ lib.resource.ResourceRecord;
  * Add a resource.
  *
  * @param {string} name A name for the resource.  You should prefix this to
- *   avoid collisions with resources from a shared library.
+ *     avoid collisions with resources from a shared library.
  * @param {string} type A mime type for the resource, or "raw" if not
- *   applicable.
+ *     applicable.
  * @param {*} data The value of the resource.
  */
 lib.resource.add = function(name, type, data) {

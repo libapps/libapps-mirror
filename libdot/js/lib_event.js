@@ -28,8 +28,6 @@ lib.Event = function() {
    * @param {function(...*)} callback The function to call back.
    */
   ep.addListener = function(callback) {
-    lib.assert(!!callback);
-
     ep.observers.push(callback);
   };
 

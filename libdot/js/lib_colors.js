@@ -199,7 +199,7 @@ lib.colors.x11ToCSS = function(v) {
  * replaced with null.
  *
  * @param {string} hex A single RGB value to convert.
- * @return {?string} The converted value
+ * @return {?string} The converted value.
  */
 lib.colors.hexToRGB = function(hex) {
   var hex16 = lib.colors.re_.hex16;
@@ -227,7 +227,7 @@ lib.colors.hexToRGB = function(hex) {
  * Arrays are converted in place. If a value cannot be converted, it is
  * replaced with null.
  *
- * @param {string} rgb A single rgb(...) value of rgb(...) values to convert.
+ * @param {string} rgb A single rgb(...) value to convert.
  * @return {?string} The converted value.
  */
 lib.colors.rgbToHex = function(rgb) {
@@ -243,8 +243,7 @@ lib.colors.rgbToHex = function(rgb) {
  * Take any valid css color definition and turn it into an rgb or rgba value.
  *
  * @param {string} def The CSS color spec to normalize.
- * @return {?string} The converted value or values.  Returns null if the value
- *     could not be normalized.
+ * @return {?string} The converted value.
  */
 lib.colors.normalizeCSS = function(def) {
   if (def.startsWith('#'))
