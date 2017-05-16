@@ -115,7 +115,7 @@ lib.fs.readFile = function(root, path, onSuccess, opt_onError) {
   function onFileFound(fileEntry) {
     fileEntry.file(function(file) {
         var reader = new FileReader();
-        reader.onloadend = function() { onSuccess(reader.result) };
+        reader.onloadend = () => onSuccess(reader.result);
 
         reader.readAsText(file);
       }, opt_onError);
@@ -206,8 +206,10 @@ lib.fs.getOrCreateFile = function(root, path, onSuccess, opt_onError) {
     basename = path;
   }
 
-  if (!dirname)
-    return onDirFound(root);
+  if (!dirname) {
+    onDirFound(root);
+    return;
+  }
 
   lib.fs.getOrCreateDirectory(root, dirname, onDirFound, opt_onError);
 };

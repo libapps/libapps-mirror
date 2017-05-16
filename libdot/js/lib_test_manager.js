@@ -31,7 +31,7 @@
  */
 lib.TestManager = function(opt_log) {
   this.log = opt_log || new lib.TestManager.Log();
-}
+};
 
 /**
  * Create a new test run object for this test manager.
@@ -651,7 +651,8 @@ lib.TestManager.TestRun.prototype.onResultComplete = function(result) {
   } else {
     this.log.error('Unknown result status: ' + result.test.fullName + ': ' +
                    result.status);
-    return this.panic = true;
+    this.panic = true;
+    return;
   }
 
   this.runNextTest_();
@@ -694,12 +695,15 @@ lib.TestManager.TestRun.prototype.onResultReComplete = function(
  * Run the next test in the queue.
  */
 lib.TestManager.TestRun.prototype.runNextTest_ = function() {
-  if (this.panic || !this.testQueue_.length)
-    return this.onTestRunComplete_();
+  if (this.panic || !this.testQueue_.length) {
+    this.onTestRunComplete_();
+    return;
+  }
 
   if (this.maxFailures && this.failures.length >= this.maxFailures) {
     this.log.error('Maximum failure count reached, aborting test run.');
-    return this.onTestRunComplete_();
+    this.onTestRunComplete_();
+    return;
   }
 
   // Peek at the top test first.  We remove it later just before it's about
@@ -873,7 +877,7 @@ lib.TestManager.Result.TestComplete = function(result) {
 lib.TestManager.Result.TestComplete.prototype.toString = function() {
   return 'lib.TestManager.Result.TestComplete: ' + this.result.test.fullName +
       ', status: ' + this.result.status;
-}
+};
 
 /**
  * Start the test associated with this result.
@@ -997,7 +1001,7 @@ lib.TestManager.Result.prototype.assertEQ = function(
       return value;
 
     var str = String(value);
-    var ary = str.split('\n').map(function (e) { return JSON.stringify(e) });
+    var ary = str.split('\n').map((e) => JSON.stringify(e));
     if (ary.length > 1) {
       // If the string has newlines, start it off on its own line so that
       // it's easier to compare against another string with newlines.

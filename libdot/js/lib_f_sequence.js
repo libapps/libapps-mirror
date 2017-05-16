@@ -115,7 +115,7 @@ lib.f.Sequence.prototype.run = function(onSuccess, onError, opt_arg) {
      * The onError handler will get any arguments you pass to this function.
      */
     error: function() {
-      onError.apply(null, arguments)
+      onError.apply(null, arguments);
     },
 
     /**

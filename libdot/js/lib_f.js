@@ -19,6 +19,7 @@ lib.f = {};
 lib.f.createEnum = function(name) {
   // We use a String object as nothing else should be using them -- we want to
   // use string primitives normally.  But debuggers will include our name.
+  // eslint-disable-next-line no-new-wrappers
   return new String(name);
 };
 
@@ -69,7 +70,7 @@ lib.f.replaceVars.functions = {
       "'": '&#39;'
     };
 
-    return str.replace(/[<>&\"\']/g, function(m) { return map[m] });
+    return str.replace(/[<>&\"\']/g, (m) => map[m]);
   }
 };
 
@@ -239,7 +240,7 @@ lib.f.alarm = function(callback, opt_ms) {
         }
 
         return callback.apply(null, arguments);
-      }
+      };
     };
 
     if (typeof callback == 'string')

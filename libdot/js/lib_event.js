@@ -36,11 +36,11 @@ lib.Event = function(opt_firstCallback, opt_finalCallback) {
     if (rv === false)
       return;
 
-    ep.observers.forEach(function(ary) { ary[0].apply(ary[1], args) });
+    ep.observers.forEach((ary) => ary[0].apply(ary[1], args));
 
     if (opt_finalCallback)
       opt_finalCallback.apply(null, args);
-  }
+  };
 
   /**
    * Add a callback function.

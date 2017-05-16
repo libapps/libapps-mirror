@@ -181,8 +181,7 @@ lib.PreferenceManager.prototype.readStorage = function(opt_callback) {
       opt_callback();
   }
 
-  var keys = Object.keys(this.prefRecords_).map(
-      function(el) { return this.prefix + el }.bind(this));
+  var keys = Object.keys(this.prefRecords_).map((el) => this.prefix + el);
 
   if (this.trace)
     console.log('Preferences read: ' + this.prefix);

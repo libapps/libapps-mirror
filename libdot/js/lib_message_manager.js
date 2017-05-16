@@ -19,8 +19,7 @@
  *     automatically added as the first language if it is not already present.
  */
 lib.MessageManager = function(languages) {
-  this.languages_ = languages.map(
-      function(el) { return el.replace(/-/g, '_') });
+  this.languages_ = languages.map((el) => el.replace(/-/g, '_'));
 
   if (this.languages_.indexOf('en') == -1)
     this.languages_.unshift('en');
@@ -199,7 +198,7 @@ lib.MessageManager.prototype.processI18nAttributes = function(dom) {
 lib.MessageManager.prototype.processI18nAttribute = function(node) {
   // Convert the "lower-and-dashes" attribute names into
   // "UPPER_AND_UNDER" style.
-  function thunk(str) { return str.replace(/-/g, '_').toUpperCase() }
+  const thunk = (str) => str.replace(/-/g, '_').toUpperCase();
 
   var i18n = node.getAttribute('i18n');
   if (!i18n)

@@ -94,7 +94,7 @@ lib.f.Tests.addTest('randomInt', function(result, cx) {
     seen[ret] = 1;
   }
 
-  result.assertEQ((max - min + 1), seen.reduce((sum, value) => sum + value);
+  result.assertEQ((max - min + 1), seen.reduce((sum, value) => sum + value));
 
   result.pass();
 });

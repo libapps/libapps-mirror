@@ -111,7 +111,7 @@ lib.UTF8.Tests.addTest('round-trip-blocks', function(result, cx) {
           str += String.fromCharCode(high) + String.fromCharCode(low);
         }
       }
-    };
+    }
 
     var enc = lib.encodeUTF8(str);
     var dec = lib.decodeUTF8(enc);
@@ -119,7 +119,7 @@ lib.UTF8.Tests.addTest('round-trip-blocks', function(result, cx) {
     result.assertEQ(dec, str,
       'Block ' + codepointString(blockStart)
       + ' ~ ' + codepointString(blockEnd));
-  }
+  };
 
   var testBlockRange = function(blockLow, blockHigh, blockSize) {
     var block;
