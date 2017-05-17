@@ -39,7 +39,7 @@ window.onload = function() {
     console.log(nassh.msg(
         'CONSOLE_NASSH_OPTIONS_NOTICE',
         [lib.f.getURL('/html/nassh_preferences_editor.html')]));
-  }
+  };
 
   if (!nassh.v2) {
     var onUpdateAvailable = function() {

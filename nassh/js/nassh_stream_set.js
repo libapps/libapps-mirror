@@ -48,11 +48,11 @@ nassh.StreamSet.prototype.closeAllStreams = function() {
   for (var fd in this.openStreams_) {
     this.closeStream(fd);
   }
-}
+};
 
 /**
  * Returns a stream instance.
  */
 nassh.StreamSet.prototype.getStreamByFd = function(fd) {
   return this.openStreams_[fd];
-}
+};

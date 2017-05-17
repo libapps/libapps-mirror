@@ -93,7 +93,7 @@ nassh.InputBuffer.prototype.read = function(size, onRead) {
   if (this.data_.length == 0) {
     this.onDataAvailable(false);
   }
-}
+};
 
 /**
  * The /dev/tty stream.
@@ -116,7 +116,7 @@ nassh.Stream.Tty.prototype.asyncOpen_ = function(info, onOpen) {
   this.io_ = info.io;
   this.acknowledgeCount_ = 0;
 
-  setTimeout(function() { onOpen(true) }, 0);
+  setTimeout(function() { onOpen(true); }, 0);
 };
 
 nassh.Stream.Tty.prototype.asyncRead = function(size, onRead) {

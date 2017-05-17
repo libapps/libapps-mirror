@@ -36,7 +36,7 @@ nassh.Stream.SSHAgent.constructor = nassh.Stream.SSHAgent;
  */
 nassh.Stream.SSHAgent.prototype.asyncOpen_ = function(args, onComplete) {
   try {
-    this.authAgent_.ping().then(() => onComplete(true))
+    this.authAgent_.ping().then(() => onComplete(true));
   } catch (e) {
     console.log(e);
     onComplete(false);

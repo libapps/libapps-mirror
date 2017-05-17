@@ -34,7 +34,7 @@ function Crosh(argv) {
   this.io = null;
   this.keyboard_ = null;
   this.pid_ = -1;
-};
+}
 
 /**
  * The extension id of "crosh_builtin", the version of crosh that ships with
@@ -105,7 +105,7 @@ Crosh.prototype.onProcessOutput_ = function(pid, type, text) {
     return;
   }
   this.io.print(text);
-}
+};
 
 /**
  * Start the crosh command.
@@ -207,7 +207,7 @@ Crosh.prototype.close_ = function() {
       return;
     chrome.terminalPrivate.closeTerminalProcess(this.pid_);
     this.pid_ = -1;
-}
+};
 
 /**
  * Notify process about new terminal size.

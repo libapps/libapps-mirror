@@ -12,7 +12,7 @@
    * them. Only used when Secure Shell is running as a v2 app.
    */
   if (!!chrome.app.window) {
-    var onLaunched = function() { didLaunch = true };
+    var onLaunched = function() { didLaunch = true; };
     chrome.app.runtime.onLaunched.addListener(onLaunched);
   }
 

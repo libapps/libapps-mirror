@@ -295,7 +295,7 @@ nassh.Stream.GoogleRelayXHR.prototype.onWriteDone_ = function(e) {
 
 nassh.Stream.GoogleRelayXHR.prototype.onRequestError_ = function(e) {
   this.requestError_(e.target == this.readRequest_);
-}
+};
 
 /**
  * Returns true if the given XHR is busy.

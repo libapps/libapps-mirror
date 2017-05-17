@@ -53,7 +53,7 @@ nassh.Stream.asciiToBinary = function(a) {
  * Open a stream, calling back when complete.
  */
 nassh.Stream.prototype.asyncOpen_ = function(path, onOpen) {
-  setTimeout(function() { onOpen(false) }, 0);
+  setTimeout(function() { onOpen(false); }, 0);
 };
 
 /**
@@ -106,7 +106,7 @@ nassh.Stream.Random.constructor = nassh.Stream.Random;
 
 nassh.Stream.Random.prototype.asyncOpen_ = function(path, onOpen) {
   this.path = path;
-  setTimeout(function() { onOpen(true) }, 0);
+  setTimeout(function() { onOpen(true); }, 0);
 };
 
 nassh.Stream.Random.prototype.asyncRead = function(size, onRead) {
@@ -116,9 +116,9 @@ nassh.Stream.Random.prototype.asyncRead = function(size, onRead) {
   var bytes = new Uint8Array(size);
   crypto.getRandomValues(bytes);
   Array.prototype.map.apply(
-      bytes, [function(el) { return String.fromCharCode(el) }]);
+      bytes, [function(el) { return String.fromCharCode(el); }]);
 
   var b64bytes = btoa(Array.prototype.join.apply(bytes, ['']));
 
-  setTimeout(function() { onRead(b64bytes) }, 0);
+  setTimeout(function() { onRead(b64bytes); }, 0);
 };

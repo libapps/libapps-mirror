@@ -297,7 +297,7 @@ nassh.CommandInstance.prototype.removeDirectory = function(fullPath) {
 nassh.CommandInstance.prototype.removeAllKnownHosts = function() {
   this.fileSystem_.root.getFile(
       '/.ssh/known_hosts', {create: false},
-      function(fileEntry) { fileEntry.remove(function() {}) });
+      function(fileEntry) { fileEntry.remove(function() {}); });
   /*
    * This isn't necessary, but it makes the user interface a little nicer as
    * most people don't realize that "undefined" is what you get from a void
@@ -1184,7 +1184,7 @@ nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
   var isAtty = true;
   var onOpen = (success) => {
     this.sendToPlugin_('onOpenFile', [fd, success, isAtty]);
-  }
+  };
 
   var DEV_TTY = '/dev/tty';
   var DEV_STDIN = '/dev/stdin';
@@ -1322,7 +1322,7 @@ nassh.CommandInstance.prototype.onSftpInitialised = function() {
         this.terminalWindow.close();
     }
   };
-}
+};
 
 /**
  * Plugin wants to read from a fd.

@@ -234,7 +234,7 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
   // These fields are plain text with no fancy properties.
   ['argstr', 'terminal-profile', 'mount-path',
   ].forEach((name) => {
-      var field = this.$f(name)
+      var field = this.$f(name);
       addListeners(field,
                    ['change', 'keypress', 'keyup'],
                    this.maybeDirty_.bind(this, name));
@@ -1004,7 +1004,7 @@ nassh.ConnectDialog.prototype.onFormFocusChange_ = function(e) {
  * Pref callback invoked when the global 'profile-ids' changed.
  */
 nassh.ConnectDialog.prototype.onProfileListChanged_ = function() {
-  this.syncProfiles_(() => { this.shortcutList_.redraw() });
+  this.syncProfiles_(() => { this.shortcutList_.redraw(); });
 };
 
 /**

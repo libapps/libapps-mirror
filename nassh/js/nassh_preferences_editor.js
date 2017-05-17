@@ -394,7 +394,7 @@ nassh.PreferencesEditor.prototype.syncPage = function() {
     var category = categoryDefinition.id;
     for (var key in this.prefs_.prefRecords_) {
       if (this.getPreferenceCategory(key) == category) {
-        this.addInputRow(key, elem)
+        this.addInputRow(key, elem);
       }
     }
   }
@@ -582,7 +582,7 @@ nassh.PreferencesEditor.prototype.getPreferenceDescription = function(key) {
 
   const id = 'PREF_' + key.replace(/-/g, '_').toUpperCase();
   return hterm.msg(id, [], entry[3]);
-}
+};
 
 nassh.PreferencesEditor.prototype.getPreferenceType = function(key) {
   var entry = hterm.PreferenceManager.defaultPreferences[key];
@@ -600,7 +600,7 @@ nassh.PreferencesEditor.prototype.getPreferenceType = function(key) {
     case 'number': return 'int';
     default: return 'value';
   }
-}
+};
 
 nassh.PreferencesEditor.prototype.getPreferenceEnumValues = function(key) {
   var entry = hterm.PreferenceManager.defaultPreferences[key];
@@ -612,7 +612,7 @@ nassh.PreferencesEditor.prototype.getPreferenceEnumValues = function(key) {
 
   console.warn('Pref. is not an enum', key);
   return [];
-}
+};
 
 nassh.PreferencesEditor.prototype.getPreferenceCategory = function(key) {
   var entry = hterm.PreferenceManager.defaultPreferences[key];
@@ -620,7 +620,7 @@ nassh.PreferencesEditor.prototype.getPreferenceCategory = function(key) {
     return entry[0];
 
   return hterm.PreferenceManager.categories.Miscellaneous;
-}
+};
 
 /**
  * Reset all preferences to their default state and update the HTML objects.
