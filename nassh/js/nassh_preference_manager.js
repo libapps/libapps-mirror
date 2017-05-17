@@ -9,11 +9,13 @@
  *
  * This is currently just an ordered list of known connection profiles.
  *
- * @param {!Storage=} opt_storage
+ * @param {!Storage=} storage
  * @constructor
  */
-nassh.PreferenceManager = function(opt_storage) {
-  var storage = opt_storage || nassh.defaultStorage;
+nassh.PreferenceManager = function(storage) {
+  if (!storage) {
+    storage = nassh.defaultStorage;
+  }
   lib.PreferenceManager.call(this, storage, '/nassh/');
 
   this.defineChildren('profile-ids', function(parent, id) {

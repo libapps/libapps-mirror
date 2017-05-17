@@ -39,11 +39,11 @@ lib.registerInit(
  * Return a formatted message in the current locale.
  *
  * @param {string} name The name of the message to return.
- * @param {!Array=} opt_args The message arguments, if required.
+ * @param {!Array=} args The message arguments, if required.
  * @return {string} The localized & formatted message.
  */
-nassh.msg = function(name, opt_args) {
-  const rv = lib.i18n.getMessage(name, opt_args, name);
+nassh.msg = function(name, args) {
+  const rv = lib.i18n.getMessage(name, args, name);
 
   // Since our translation process only preserves \n (and discards \r), we have
   // to manually insert them here ourselves.  Any place we display translations
@@ -134,17 +134,18 @@ nassh.exportPreferences = function(onComplete) {
  * This will not overwrite any existing preferences.
  *
  * @param {!Object} prefsObject A preferences object created with
- *   nassh.exportPreferences.
- * @param {function()=} opt_onComplete An optional callback to be invoked when
- *   the import is complete.
+ *     nassh.exportPreferences.
+ * @param {function()=} onComplete A callback to be invoked when the import is
+ *     complete.
  */
-nassh.importPreferences = function(prefsObject, opt_onComplete) {
+nassh.importPreferences = function(prefsObject, onComplete) {
   var pendingReads = 0;
 
   var onReadStorage = function(terminalProfile, prefs) {
     prefs.importFromJson(prefsObject.hterm[terminalProfile]);
-    if (--pendingReads < 1 && opt_onComplete)
-      opt_onComplete();
+    if (--pendingReads < 1 && onComplete) {
+      onComplete();
+    }
   };
 
   if (prefsObject.magic != 'nassh-prefs')

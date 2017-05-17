@@ -241,9 +241,8 @@ nassh.CommandInstance.prototype.exportPreferences = function(onComplete) {
  * This method moved off to be a static method on nassh, but remains here
  * for js console users who expect to find it here.
  */
-nassh.CommandInstance.prototype.importPreferences = function(
-    json, opt_onComplete) {
-  nassh.importPreferences(json, opt_onComplete);
+nassh.CommandInstance.prototype.importPreferences = function(json, onComplete) {
+  nassh.importPreferences(json, onComplete);
 };
 
 /**

@@ -11,12 +11,12 @@
  *
  * @param {!DivElement} div
  * @param {!Object} items
- * @param {number=} opt_columnCount
+ * @param {number=} columnCount
  */
-nassh.ColumnList = function(div, items, opt_columnCount) {
+nassh.ColumnList = function(div, items, columnCount = 2) {
   this.div_ = div || null;
   this.items_ = items;
-  this.columnCount = opt_columnCount || 2;
+  this.columnCount = columnCount;
   this.activeIndex = null;
 
   // List of callbacks to invoke after the next redraw().

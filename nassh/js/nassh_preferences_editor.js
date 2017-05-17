@@ -103,11 +103,10 @@ window.onload = function() {
 /**
  * Class for editing hterm profiles.
  *
- * @param {string=} opt_profileId Optional profile name to read settings from;
- *     defaults to the "default" profile.
+ * @param {string=} profileId Profile name to read settings from.
  */
-nassh.PreferencesEditor = function(opt_profileId) {
-  this.selectProfile(opt_profileId || 'default');
+nassh.PreferencesEditor = function(profileId = 'default') {
+  this.selectProfile(profileId);
 };
 
 /**
@@ -120,14 +119,14 @@ nassh.PreferencesEditor = function(opt_profileId) {
  *     callback.
  * @param {function()} callback Function to call after debouncing while passing
  *     it the input object.
- * @param {number=} opt_timeout Optional how long to debounce.
+ * @param {number=} timeout Optional how long to debounce.
  */
-nassh.PreferencesEditor.debounce = function(input, callback, opt_timeout) {
+nassh.PreferencesEditor.debounce = function(input, callback, timeout = 500) {
   clearTimeout(input.timeout);
   input.timeout = setTimeout(function() {
       callback(input);
       input.timeout = null;
-    }, opt_timeout || 500);
+    }, timeout);
 };
 
 /**
@@ -200,13 +199,14 @@ nassh.PreferencesEditor.prototype.onRestoreClick = function(e) {
   input.click();
 };
 
-/** @param {function()=} opt_onComplete */
-nassh.PreferencesEditor.prototype.updateBackupLink = function(opt_onComplete) {
+/** @param {function()=} onComplete */
+nassh.PreferencesEditor.prototype.updateBackupLink = function(onComplete) {
   nassh.exportPreferences(function(value) {
     var a = document.querySelector('#backup');
     a.href = `data:text/json,${encodeURIComponent(JSON.stringify(value))}`;
-    if (opt_onComplete)
-      opt_onComplete();
+    if (onComplete) {
+      onComplete();
+    }
   });
 };
 
@@ -718,14 +718,14 @@ nassh.PreferencesEditor.prototype.reset = function(input) {
  * Display a message to the user.
  *
  * @param {string} msg The string to show to the user.
- * @param {number=} opt_timeout Optional how long to show the message.
+ * @param {number=} timeout Optional how long to show the message.
  */
-nassh.PreferencesEditor.prototype.notify = function(msg, opt_timeout) {
+nassh.PreferencesEditor.prototype.notify = function(msg, timeout = 1000) {
   // Update status to let user know options were updated.
   clearTimeout(this.notifyTimeout_);
   var status = document.getElementById('label_status');
   status.innerText = msg;
   this.notifyTimeout_ = setTimeout(function() {
       status.innerHTML = '&nbsp;';
-    }, opt_timeout || 1000);
+    }, timeout);
 };

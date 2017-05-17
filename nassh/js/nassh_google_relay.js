@@ -57,12 +57,13 @@ nassh.GoogleRelay.prototype.relayServerPattern =
     '%(protocol)://%(host):%(port)/';
 
 /**
- * @param {string=} opt_resumePath
+ * @param {string=} resumePath
  * @return {boolean}
  */
-nassh.GoogleRelay.prototype.redirect = function(opt_resumePath) {
-  var resumePath = opt_resumePath ||
-    this.location.href.substr(this.location.origin.length);
+nassh.GoogleRelay.prototype.redirect = function(resumePath) {
+  if (!resumePath) {
+    resumePath = this.location.href.substr(this.location.origin.length);
+  }
 
   // Save off our destination in session storage before we leave for the
   // proxy page.
@@ -98,12 +99,13 @@ nassh.GoogleRelay.prototype.redirect = function(opt_resumePath) {
  *
  * If we have just come back from the cookie server, then we'll return true.
  *
- * @param {string=} opt_resumePath
+ * @param {string=} resumePath
  * @return {boolean}
  */
-nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
-  var resumePath = opt_resumePath ||
-      this.location.href.substr(this.location.origin.length);
+nassh.GoogleRelay.prototype.init = function(resumePath) {
+  if (!resumePath) {
+    resumePath = this.location.href.substr(this.location.origin.length);
+  }
 
   // This session storage item is created by /html/nassh_google_relay.html
   // if we succeed at finding a relay host.

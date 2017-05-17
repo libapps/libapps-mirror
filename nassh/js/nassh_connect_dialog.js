@@ -117,12 +117,12 @@ nassh.ConnectDialog.prototype.onPreferencesReady_ = function() {
  *
  * @param {string} id
  * @param {!Object} prefs
- * @param {string=} opt_textContent
+ * @param {string=} textContent
  */
-nassh.ConnectDialog.ProfileRecord = function(id, prefs, opt_textContent) {
+nassh.ConnectDialog.ProfileRecord = function(id, prefs, textContent) {
   this.id = id;
   this.prefs = prefs;
-  this.textContent = opt_textContent || prefs.get('description');
+  this.textContent = textContent || prefs.get('description');
 };
 
 /**
@@ -132,14 +132,14 @@ nassh.ConnectDialog.ProfileRecord = function(id, prefs, opt_textContent) {
  * pretty handy in the connect dialog.
  *
  * @param {string} name
- * @param {!Object=} opt_args
+ * @param {!Object=} args
  * @return {string}
  */
-nassh.ConnectDialog.prototype.msg = function(name, opt_args) {
+nassh.ConnectDialog.prototype.msg = function(name, args) {
   if (!this.mm_)
     return 'loading...';
 
-  return this.mm_.get(name.toUpperCase().replace(/-/g, '_'), opt_args);
+  return this.mm_.get(name.toUpperCase().replace(/-/g, '_'), args);
 };
 
 /**
@@ -275,23 +275,22 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
  * Quick way to ask for a '#field-' element from the dom.
  *
  * @param {string} name
- * @param {string=} opt_attrName
- * @param {string=} opt_attrValue
+ * @param {string=} attrName
+ * @param {string=} attrValue
  * @return {!Node|string|undefined}
  */
-nassh.ConnectDialog.prototype.$f = function(
-    name, opt_attrName, opt_attrValue) {
+nassh.ConnectDialog.prototype.$f = function(name, attrName, attrValue) {
   var node = document.querySelector('#field-' + name);
   if (!node)
     throw new Error('Can\'t find: #field-' + name);
 
-  if (!opt_attrName)
+  if (!attrName)
     return node;
 
-  if (typeof opt_attrValue == 'undefined')
-    return node.getAttribute(opt_attrName);
+  if (typeof attrValue == 'undefined')
+    return node.getAttribute(attrName);
 
-  node.setAttribute(opt_attrName, opt_attrValue);
+  node.setAttribute(attrName, attrValue);
 };
 
 /**
@@ -699,10 +698,10 @@ nassh.ConnectDialog.prototype.syncButtons_ = function() {
 /**
  * Sync the identity dropdown box with the filesystem.
  *
- * @param {function()=} opt_onSuccess
+ * @param {function()=} onSuccess
  * @return {!Promise}
  */
-nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
+nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(onSuccess) {
   const keyfileNames = new Set();
   var identitySelect = this.$f('identity');
 
@@ -757,8 +756,9 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
 
     this.syncForm_();
 
-    if (opt_onSuccess)
-      opt_onSuccess();
+    if (onSuccess) {
+      onSuccess();
+    }
   };
 
   return Promise.all([
@@ -848,9 +848,9 @@ nassh.ConnectDialog.prototype.getProfileIndex_ = function(id) {
 /**
  * Sync the ColumnList with the known profiles.
  *
- * @param {function()=} opt_callback
+ * @param {function()=} callback
  */
-nassh.ConnectDialog.prototype.syncProfiles_ = function(opt_callback) {
+nassh.ConnectDialog.prototype.syncProfiles_ = function(callback) {
   var ids = this.prefs_.get('profile-ids');
 
   this.profileList_.length = 0;
@@ -899,8 +899,9 @@ nassh.ConnectDialog.prototype.syncProfiles_ = function(opt_callback) {
   }
 
   if (this.profileList_.length == 1) {
-    if (opt_callback)
-      opt_callback();
+    if (callback) {
+      callback();
+    }
   }
 
   // Start at 1 for the "[New Connection]" profile.
@@ -909,8 +910,9 @@ nassh.ConnectDialog.prototype.syncProfiles_ = function(opt_callback) {
   var onRead = function(profile) {
     profile.textContent = profile.prefs.get('description');
 
-    if ((++initialized == this.profileList_.length) && opt_callback)
-        opt_callback();
+    if ((++initialized == this.profileList_.length) && callback) {
+      callback();
+    }
   };
 
   this.profileList_.forEach((profile) => {

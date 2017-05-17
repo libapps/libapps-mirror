@@ -9,9 +9,9 @@ nassh.sftp = {};
 /**
  * A SFTP Client that manages the sending and receiving of SFTP packets.
  *
- * @param {string=} opt_basePath The base directory for client requests.
+ * @param {string=} basePath The base directory for client requests.
  */
-nassh.sftp.Client = function(opt_basePath='') {
+nassh.sftp.Client = function(basePath = '') {
   // The version of the protocol we're using.
   this.protocolClientVersion = 3;
 
@@ -29,13 +29,14 @@ nassh.sftp.Client = function(opt_basePath='') {
   this.isInitialised = false;
 
   // Directory to prefix all path requests.
-  if (opt_basePath) {
+  if (basePath) {
     // Make sure the path always ends with a slash.  This simplifies
     // the path logic in the rest of the client.
-    if (!opt_basePath.endsWith('/'))
-      opt_basePath += '/';
+    if (!basePath.endsWith('/')) {
+      basePath += '/';
+    }
   }
-  this.basePath_ = opt_basePath;
+  this.basePath_ = basePath;
 
   // The buffered packet data coming from the plugin.
   this.pendingMessageSize_ = null;
