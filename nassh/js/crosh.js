@@ -65,6 +65,10 @@ Crosh.init = function() {
 
   // Useful for console debugging.
   window.term_ = terminal;
+  console.log(nassh.msg(
+      'CONSOLE_CROSH_OPTIONS_NOTICE',
+      ['Ctrl-Shift-P', lib.f.getURL('/html/nassh_preferences_editor.html')]));
+
   return true;
 };
 

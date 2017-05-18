@@ -440,5 +440,31 @@
   "OMNIBOX_DEFAULT": {
     "message": "<url><match>user@hostname[:port]</match></url> Connect to a saved profile or a new ssh system",
     "description": "Default help text as a tip in the omnibox.  Do not translate the <url> and <match> tags."
+  },
+
+  "CONSOLE_CROSH_OPTIONS_NOTICE": {
+    "message": "Did you know there is a dedicated options page?\nNo need to mess with term_ directly anymore!\nPress $SHORTCUT$ to open it, or click:\n$URL$",
+    "description": "Shown to users who open up the JavaScript developer console. Direct them to the options page instead.",
+    "placeholders": {
+      "shortcut": {
+        "content": "$1",
+        "example": "Ctrl-Shift-P"
+      },
+      "url": {
+        "content": "$2",
+        "example": "chrome-extension://okddffdblfhhnmhodogpojmfkjmhinfp/html/nassh_preferences_editor.html"
+      }
+    }
+  },
+
+  "CONSOLE_NASSH_OPTIONS_NOTICE": {
+    "message": "Did you know there is a dedicated options page?\nNo need to mess with term_ directly anymore!\n$URL$",
+    "description": "Shown to users who open up the JavaScript developer console. Direct them to the options page instead.",
+    "placeholders": {
+      "url": {
+        "content": "$1",
+        "example": "chrome-extension://okddffdblfhhnmhodogpojmfkjmhinfp/html/nassh_preferences_editor.html"
+      }
+    }
   }
 }
