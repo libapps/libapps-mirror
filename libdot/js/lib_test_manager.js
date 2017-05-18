@@ -519,7 +519,7 @@ lib.TestManager.TestRun = function(testManager, cx) {
  * This value can be passed to select() to indicate that all tests should
  * be selected.
  */
-lib.TestManager.TestRun.prototype.ALL_TESTS = new String('<all-tests>');
+lib.TestManager.TestRun.prototype.ALL_TESTS = lib.f.createEnum('<all-tests>');
 
 /**
  * Add a single test to the test run.

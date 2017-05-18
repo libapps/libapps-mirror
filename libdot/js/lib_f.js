@@ -10,6 +10,19 @@
 lib.f = {};
 
 /**
+ * Create a unique enum value.
+ *
+ * @suppress {lintChecks}
+ * @param {string} name A human friendly name for debugging.
+ * @return {Object} A unique enum that won't compare equal to anything else.
+ */
+lib.f.createEnum = function(name) {
+  // We use a String object as nothing else should be using them -- we want to
+  // use string primitives normally.  But debuggers will include our name.
+  return new String(name);
+};
+
+/**
  * Replace variable references in a string.
  *
  * Variables are of the form %FUNCTION(VARNAME).  FUNCTION is an optional

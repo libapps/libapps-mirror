@@ -65,7 +65,7 @@ lib.PreferenceManager = function(storage, opt_prefix) {
  *
  * Equality tests against this value MUST use '===' or '!==' to be accurate.
  */
-lib.PreferenceManager.prototype.DEFAULT_VALUE = new String('DEFAULT');
+lib.PreferenceManager.prototype.DEFAULT_VALUE = lib.f.createEnum('DEFAULT');
 
 /**
  * An individual preference.
