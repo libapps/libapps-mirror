@@ -1,3 +1,12 @@
+# 1.13, 2017-05-18, IDN support.
+
+* Relocate wcwidth module to third_party/ to follow Google practices.
+* Integrate punycode.js for IDN support.
+* Add MessageManager tests!
+* Allow i18n attributes to re-use themselves.
+* Use ES6 String.repeat & startsWith & endsWith helpers.
+* Add a lib.f.rpad helper for right padding strings.
+
 # 1.12, 2017-05-03, Window pref sharing fix.
 
 * Fix notification of other windows when preferences are reset.
