@@ -1,3 +1,20 @@
+# 0.8.36.4, 2017-05-18, IDN & UX improvements.
+
+* Start documenting tribal knowledge^W^W our release processes.
+* Highlight invalid fields in the connection manager better.
+* Pretty format JSON objects in the options page.
+* Support completely arbitrary usernames (spaces, dashes, etc...).
+* Expand our Chrome whitelisted features document.
+* Add basic hostname checking to the connection manager.
+* Add IDN support (to connect to international hostnames using Unicode).
+* Lots of internal SFTP API cleanups & improvements.
+* Set the title (tooltip) text of input fields in the connection manager.
+* Improve accessibility labels in the connection manager.
+* Catch NaCl plugin crashes in more places.
+* Support showing release highlights in the initial terminal.
+* Add an option for changing the base path with SFTP mounts in Chrome OS.
+* Upgrade zlib to 1.2.11.
+
 # 0.8.36.3, 2017-05-03, new features for users.
 
 * Update to libdot 1.12.  Fixes preference syncing between open windows.

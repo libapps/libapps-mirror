@@ -15,3 +15,5 @@
 % Support for ssh:// links.
 % Omnibox integration for ssh keyword.
 % Add a user-css-text field for injecting custom CSS directly.
+% IDN support for international domains.
+% Root path for SFTP mounts can be configured (Chrome OS only).
