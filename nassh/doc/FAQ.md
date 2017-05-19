@@ -576,6 +576,26 @@ different app, visit the chrome://settings/handlers page.
     }
 
 
+### Are font ligatures supported?
+
+  By default, we disable [ligatures].  Some fonts actively enable them like
+  macOS's Menlo (e.g. "ae" is rendered as "æ").  This messes up copying and
+  pasting and is, arguably, not terribly legible for a terminal.
+
+  If you're using a font that supports ligatures, and you want to use them,
+  you can enable them via the 'user-css-text' field:
+
+    x-row {
+      text-rendering: optimizeLegibility;
+      font-variant-ligatures: normal;
+    }
+
+  For more details, check out this [Ligatures & Coding] article.
+
+[ligatures]: https://en.wikipedia.org/wiki/Typographic_ligature
+[Ligatures & Coding]: https://medium.com/larsenwork-andreas-larsen/ligatures-coding-fonts-5375ab47ef8e
+
+
 ### Can I quickly make temporarily changes to the font size?
 
   Yes.  The Ctrl-Plus, Ctrl-Minus and Ctrl-Zero keys can increase, decrease,
