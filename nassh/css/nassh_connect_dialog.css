@@ -118,7 +118,7 @@ a:hover {
  * The billboard is the large area with the contrasting background.
  */
 .dialog-billboard {
-  -webkit-flex: 0 1 auto;
+  flex: 0 1 auto;
   padding: 1em;
   background-color: var(--nassh-fg-color-20);
   color: var(--nassh-fg-color);
