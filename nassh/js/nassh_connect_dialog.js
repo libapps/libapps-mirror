@@ -327,9 +327,10 @@ nassh.ConnectDialog.prototype.enableButton_ = function(button, state) {
 /**
  * Change the display state of one of our <div role='button'> elements.
  */
-nassh.ConnectDialog.prototype.displayButton_ = function(button, state) {
+nassh.ConnectDialog.prototype.displayButton_ = function(
+    button, state, style='inline') {
   if (state) {
-    button.style.display = 'inline';
+    button.style.display = style;
     button.setAttribute('tabindex', '0');
   } else {
     button.style.display = 'none';
@@ -341,7 +342,7 @@ nassh.ConnectDialog.prototype.displayButton_ = function(button, state) {
  * Change the mounted state of the mount button.
  */
 nassh.ConnectDialog.prototype.displayMountButton_ = function(state) {
-  this.displayButton_(document.querySelector('#mount-path'), state);
+  this.displayButton_(document.querySelector('#mount-path'), state, 'flex');
   if (!state) {
     this.displayButton_(this.mountButton_, false);
     this.displayButton_(this.unmountButton_, false);
