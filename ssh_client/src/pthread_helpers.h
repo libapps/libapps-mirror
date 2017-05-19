@@ -25,6 +25,24 @@
   TypeName();                                    \
   DISALLOW_COPY_AND_ASSIGN(TypeName)
 
+// The newlib pthreads library returns errors directly instead of via errno.
+// Take care of stuffing that into errno and setting return to -1 so callers
+// can assume sane POSIX semantics.  We might have to make wrappers in our
+// syscalls.c if OpenSSH itself ever starts using pthreads.
+#ifdef USE_NEWLIB
+# define _PTHREAD_HANDLE_ERRNO(call) \
+  ({ \
+    int ret = (call); \
+    if (ret) { \
+      errno = ret; \
+      ret = -1; \
+    } \
+    ret; \
+  })
+#else
+# define _PTHREAD_HANDLE_ERRNO(call) call
+#endif
+
 class Mutex {
  public:
   Mutex() {
@@ -89,11 +107,12 @@ class Cond {
   }
 
   int wait(Mutex& mutex) {
-    return pthread_cond_wait(&cond_, mutex.get());
+    return _PTHREAD_HANDLE_ERRNO(pthread_cond_wait(&cond_, mutex.get()));
   }
 
   int timedwait(Mutex& mutex, const timespec* abstime) {
-    return pthread_cond_timedwait(&cond_, mutex.get(), abstime);
+    return _PTHREAD_HANDLE_ERRNO(
+        pthread_cond_timedwait(&cond_, mutex.get(), abstime));
   }
 
  private:
