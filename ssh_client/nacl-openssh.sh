@@ -43,10 +43,10 @@ export PKG_CONFIG_PATH=${PKG_CONFIG_LIBDIR}/pkgconfig
 export PATH=${NACL_BIN_PATH}:${PATH};
 
 # Tools for generating the html man pages.
-MANDOC_P="mdocml-1.13.4"
+MANDOC_P="mdocml-1.14.1"
 if [[ ! -x ${MANDOC_P}/mandoc ]]; then
   if [[ ! -f ${MANDOC_P}.tar.gz ]]; then
-    wget http://mdocml.bsd.lv/snapshots/${MANDOC_P}.tar.gz
+    wget "${OPENSSH_MIRROR}/${MANDOC_P}.tar.gz"
   fi
   rm -rf "${MANDOC_P}"
   tar xf ${MANDOC_P}.tar.gz
