@@ -1010,4 +1010,7 @@ nassh.ConnectDialog.prototype.onMessageName_['terminal-info'] = function(info) {
   for (var key in vars)
     if (key.startsWith('--nassh-'))
       document.documentElement.style.setProperty(key, vars[key]);
+
+  // Tell the parent we've finished loading all the terminal details.
+  this.postMessage('terminal-info-ok');
 };
