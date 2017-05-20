@@ -19,9 +19,8 @@ nassh.Stream.SSHAgentRelay = function(fd) {
 /**
  * We are a subclass of nassh.Stream.
  */
-nassh.Stream.SSHAgentRelay.prototype = {
-  __proto__: nassh.Stream.prototype
-};
+nassh.Stream.SSHAgentRelay.prototype = Object.create(nassh.Stream.prototype);
+nassh.Stream.SSHAgentRelay.constructor = nassh.Stream.SSHAgentRelay;
 
 /**
  * Open a connection to agent.

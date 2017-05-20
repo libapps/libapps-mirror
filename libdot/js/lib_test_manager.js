@@ -234,7 +234,8 @@ lib.TestManager.Suite = function(suiteName) {
   ctor.getTestList = lib.TestManager.Suite.getTestList;
   ctor.testList_ = [];
   ctor.testMap_ = {};
-  ctor.prototype = { __proto__: lib.TestManager.Suite.prototype };
+  ctor.prototype = Object.create(lib.TestManager.Suite.prototype);
+  ctor.constructor = lib.TestManager.Suite;
 
   lib.TestManager.Suite.subclasses.push(ctor);
 

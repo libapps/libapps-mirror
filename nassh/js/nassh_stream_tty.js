@@ -106,9 +106,8 @@ nassh.Stream.Tty = function(fd, info) {
   nassh.Stream.apply(this, [fd]);
 };
 
-nassh.Stream.Tty.prototype = {
-  __proto__: nassh.Stream.prototype
-};
+nassh.Stream.Tty.prototype = Object.create(nassh.Stream.prototype);
+nassh.Stream.Tty.constructor = nassh.Stream.Tty;
 
 nassh.Stream.Tty.prototype.asyncOpen_ = function(info, onOpen) {
   this.allowRead_ = info.allowRead;

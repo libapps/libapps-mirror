@@ -32,9 +32,9 @@ nassh.PreferenceManager = function(opt_storage) {
   ]);
 };
 
-nassh.PreferenceManager.prototype = {
-  __proto__: lib.PreferenceManager.prototype
-};
+nassh.PreferenceManager.prototype =
+    Object.create(lib.PreferenceManager.prototype);
+nassh.PreferenceManager.constructor = nassh.PreferenceManager;
 
 nassh.PreferenceManager.prototype.createProfile = function() {
   return this.createChild('profile-ids');
@@ -126,9 +126,9 @@ nassh.ProfilePreferenceManager = function(parent, id) {
    ]);
 };
 
-nassh.ProfilePreferenceManager.prototype = {
-  __proto__: lib.PreferenceManager.prototype
-};
+nassh.ProfilePreferenceManager.prototype =
+    Object.create(lib.PreferenceManager.prototype);
+nassh.ProfilePreferenceManager.constructor = nassh.ProfilePreferenceManager;
 
 nassh.ProfilePreferenceManager.prototype.readStorage = function(opt_callback) {
   var appendOption = (str) => {

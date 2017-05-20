@@ -30,9 +30,8 @@ nassh.Stream.GoogleRelay = function(fd) {
 /**
  * We are a subclass of nassh.Stream.
  */
-nassh.Stream.GoogleRelay.prototype = {
-  __proto__: nassh.Stream.prototype
-};
+nassh.Stream.GoogleRelay.prototype = Object.create(nassh.Stream.prototype);
+nassh.Stream.GoogleRelay.constructor = nassh.Stream.GoogleRelay;
 
 /**
  * Open a relay socket.
@@ -198,9 +197,9 @@ nassh.Stream.GoogleRelayXHR = function(fd) {
 /**
  * We are a subclass of nassh.Stream.GoogleRelay.
  */
-nassh.Stream.GoogleRelayXHR.prototype = {
-  __proto__: nassh.Stream.GoogleRelay.prototype
-};
+nassh.Stream.GoogleRelayXHR.prototype =
+    Object.create(nassh.Stream.GoogleRelay.prototype);
+nassh.Stream.GoogleRelayXHR.constructor = nassh.Stream.GoogleRelayXHR;
 
 /**
  * Maximum length of message that can be sent to avoid request limits.
@@ -375,9 +374,9 @@ nassh.Stream.GoogleRelayWS = function(fd) {
 /**
  * We are a subclass of nassh.Stream.GoogleRelay.
  */
-nassh.Stream.GoogleRelayWS.prototype = {
-  __proto__: nassh.Stream.GoogleRelay.prototype
-};
+nassh.Stream.GoogleRelayWS.prototype =
+    Object.create(nassh.Stream.GoogleRelay.prototype);
+nassh.Stream.GoogleRelayWS.constructor = nassh.Stream.GoogleRelayWS;
 
 /**
  * Maximum length of message that can be sent to avoid request limits.

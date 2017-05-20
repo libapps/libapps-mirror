@@ -74,9 +74,8 @@ nassh.Stream.Random = function(fd) {
   nassh.Stream.apply(this, [fd]);
 };
 
-nassh.Stream.Random.prototype = {
-  __proto__: nassh.Stream.prototype
-};
+nassh.Stream.Random.prototype = Object.create(nassh.Stream.prototype);
+nassh.Stream.Random.constructor = nassh.Stream.Random;
 
 nassh.Stream.Random.prototype.asyncOpen_ = function(path, onOpen) {
   this.path = path;
