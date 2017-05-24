@@ -17,6 +17,7 @@ window.onload = function() {
     term.onTerminalReady = function() {
         var io = term.io.push();
         io.onVTKeystroke = io.print;
+        io.sendString = io.print;
         io.println('# ' + nassh.msg('WELCOME_VERSION',
                                     [manifest.name, manifest.version]));
         io.print('$ ./configure && make && make install');
