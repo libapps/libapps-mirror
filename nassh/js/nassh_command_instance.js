@@ -721,17 +721,6 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   if (argv.useJsSocket)
     argv.arguments.push('-o CheckHostIP=no');
 
-  var commandArgs;
-  if (params.argstr) {
-    var ary = params.argstr.match(/^(.*?)(?:(?:^|\s+)(?:--\s+(.*)))?$/);
-    if (ary) {
-      if (ary[1])
-        argv.arguments = argv.arguments.concat(ary[1].trim().split(/\s+/));
-      if (ary[2])
-        commandArgs = ary[2].trim();
-    }
-  }
-
   if (params.identity)
     argv.arguments.push('-i/.ssh/' + params.identity);
   if (params.port)
@@ -742,11 +731,16 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   argv.arguments.push('-l' + params.username);
   argv.arguments.push(idn_hostname);
 
-  // If this is a SFTP connection, the remote command args don't make sense,
-  // and will actually cause a problem.  Since it's easy to do, just ignore
-  // them here.
-  if (!this.isSftp && commandArgs) {
-    argv.arguments.push(commandArgs);
+  // Finally, we append the custom command line the user has constructed.
+  // This matches native `ssh` behavior and makes our lives simpler.
+  if (params.argstr) {
+    var ary = params.argstr.match(/^(.*?)(?:(?:^|\s+)(?:--\s+(.*)))?$/);
+    if (ary) {
+      if (ary[1])
+        argv.arguments = argv.arguments.concat(ary[1].trim().split(/\s+/));
+      if (ary[2])
+        argv.arguments.push(ary[2].trim());
+    }
   }
 
   this.initPlugin_(() => {
