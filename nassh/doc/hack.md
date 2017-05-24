@@ -253,6 +253,7 @@ The session object currently has these members:
 * array `arguments`: Extra command line options for ssh.
 * int `writeWindow`: Size of the write window.
 * str `authAgentAppID`: Extension id to use as the ssh-agent.
+* str `subsystem`: Which subsystem to launch.
 
 ## NaCl->JS API
 

@@ -706,6 +706,9 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   argv.environment = this.environment_;
   argv.writeWindow = 8 * 1024;
 
+  if (this.isSftp)
+    argv.subsystem = 'sftp';
+
   argv.arguments = ['-C'];  // enable compression
 
   if (params.authAgentAppID) {
@@ -742,9 +745,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   // If this is a SFTP connection, the remote command args don't make sense,
   // and will actually cause a problem.  Since it's easy to do, just ignore
   // them here.
-  if (this.isSftp) {
-    argv.arguments.push('-s', 'sftp');
-  } else if (commandArgs) {
+  if (!this.isSftp && commandArgs) {
     argv.arguments.push(commandArgs);
   }
 

@@ -19,10 +19,32 @@
   */
  int
 -main(int ac, char **av)
-+ssh_main(int ac, char **av)
++ssh_main(int ac, char **av, const char *subsystem)
  {
  	struct ssh *ssh = NULL;
  	int i, r, opt, exit_status, use_syslog, direct, config_test = 0;
+@@ -971,6 +971,21 @@
+ 	/* Initialize the command to execute on remote host. */
+ 	buffer_init(&command);
+ 
++	if (subsystem) {
++		/*
++		 * Hijack the codeflow now that we're done parsing the command line.
++		 * We want all the flags, but none of the command line.  Unless they
++		 * passed in -s themselves.
++		 */
++		if (!subsystem_flag) {
++			subsystem_flag = 1;
++			av = xcalloc(2, sizeof(*av));
++			av[0] = subsystem;
++			av[1] = NULL;
++			ac = 1;
++		}
++	}
++
+ 	/*
+ 	 * Save the command to execute on the remote host in a buffer. There
+ 	 * is no limit on the length of the command, except by the maximum
 --- a/umac.c
 +++ b/umac.c
 @@ -1179,7 +1179,7 @@ struct umac_ctx {
@@ -62,6 +84,10 @@
  		return SSH_ERR_SYSTEM_ERROR;
  
  	/* close on exec */
+
+daemonized() relies on funcs we don't implement (because we don't need them),
+and this func is only used in sshd.  disable it to avoid link failures.
+
 --- a/misc.c
 +++ b/misc.c
 @@ -1257,6 +1257,7 @@ bind_permitted(int port, uid_t uid)
