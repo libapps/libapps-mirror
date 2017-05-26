@@ -770,6 +770,14 @@ different app, visit the chrome://settings/handlers page.
   provide a solution.
 
 
+### Can I rebind keys/shortcuts?
+
+  Yes, all keys can be rebound.  Look for the 'keybindings' setting in the
+  Secure Shell Options page under the Keyboard section.
+
+  For more documentation on how the format, see the [Keyboard Bindings] doc.
+
+
 ### How do I copy text from the terminal?
 
   By default, Secure Shell automatically copies your active selection to the
@@ -897,3 +905,4 @@ different app, visit the chrome://settings/handlers page.
 [osc52.vim]: ../../hterm/etc/osc52.vim
 [chromium-hterm mailing list]: https://goo.gl/RYHiK
 [OpenSSH legacy options]: https://www.openssh.com/legacy.html
+[Keyboard Bindings]: ../../hterm/doc/KeyboardBindings.md
