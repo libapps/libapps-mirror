@@ -1,3 +1,8 @@
+# 1.14, 2017-05-30, Standards cleanup.
+
+* Add a lib.f.createEnum helper (largely for linting purposes).
+* Move from non-standard __proto__ to standard Object.create/prototype.
+
 # 1.13, 2017-05-18, IDN support.
 
 * Relocate wcwidth module to third_party/ to follow Google practices.
