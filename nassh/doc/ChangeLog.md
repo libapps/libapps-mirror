@@ -1,5 +1,22 @@
+# 0.8.36.5, 2017-05-30, New OpenSSL & UX improvements.
+
+* Update to libdot 1.14.  Some standards fixes.
+* Update to hterm 1.65.  Lots of keyboard/mouse fixes/improvements.
+* Add a console.log to point term_ hackers to the options page.
+* More internal SFTP API improvements.
+* Delay display of connection dialog until it's finished loading.
+* Add more FAQs about font ligatures & keyboard bindings.
+* Autopopulate --config=google for Google corporate domains.
+* Fix rendering of mount path in the connection dialog.
+* Improve options page terminal preview to handle paste events.
+* Fix ServerAliveInterval handling (and perhaps other configs).
+* Upgrade mdocml (used to generate ssh man pages).
+* Upgrade OpenSSL to 1.0.2k.
+
 # 0.8.36.4, 2017-05-18, IDN & UX improvements.
 
+* Update to libdot 1.13.  Brings in punycode (for IDN) support.
+* Update to hterm 1.64.  Adds shift+arrow key scrolling.
 * Start documenting tribal knowledge^W^W our release processes.
 * Highlight invalid fields in the connection manager better.
 * Pretty format JSON objects in the options page.

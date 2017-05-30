@@ -17,3 +17,5 @@
 % Add a user-css-text field for injecting custom CSS directly.
 % IDN support for international domains.
 % Root path for SFTP mounts can be configured (Chrome OS only).
+% OpenSSL upgraded to 1.0.2k.
+% Custom "mouse-paste-button" settings need to be manually updated.
