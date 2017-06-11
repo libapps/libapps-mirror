@@ -49,6 +49,9 @@ nassh.CommandInstance = function(argv) {
   // Application ID of auth agent.
   this.authAgentAppID_ = null;
 
+  // Internal SSH agent.
+  this.authAgent_ = null;
+
   // Whether the instance is a SFTP instance.
   this.isSftp = argv.isSftp || false;
 
@@ -733,6 +736,12 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   }
 
   this.authAgentAppID_ = params.authAgentAppID;
+  // If the agent app ID is not just an app ID, we parse it for the IDs of
+  // built-in agent backends based on nassh.agent.Backend.
+  if (this.authAgentAppID_ && !/^[a-z]{32}$/.test(this.authAgentAppID_)) {
+    const backendIDs = this.authAgentAppID_.split(',');
+    this.authAgent_ = new nassh.agent.Agent(backendIDs, this.io.terminal_);
+  }
 
   this.io.setTerminalProfile(params.terminalProfile || 'default');
 
@@ -1105,10 +1114,19 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(fd, host, port) 
 
   if (port == 0 && host == this.authAgentAppID_) {
     // Request for auth-agent connection.
-    stream = this.streams_.openStream(nassh.Stream.SSHAgentRelay, fd,
-      {authAgentAppID: this.authAgentAppID_}, (success) => {
-        this.sendToPlugin_('onOpenSocket', [fd, success, false]);
-      });
+    if (this.authAgent_) {
+      stream = this.streams_.openStream(
+          nassh.Stream.SSHAgent, fd, {authAgent: this.authAgent_},
+          (success) => {
+            this.sendToPlugin_('onOpenSocket', [fd, success, false]);
+          });
+    } else {
+      stream = this.streams_.openStream(
+          nassh.Stream.SSHAgentRelay, fd,
+          {authAgentAppID: this.authAgentAppID_}, (success) => {
+            this.sendToPlugin_('onOpenSocket', [fd, success, false]);
+          });
+    }
   } else {
     // Regular relay connection request.
     if (!this.relay_) {

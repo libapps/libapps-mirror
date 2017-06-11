@@ -32,7 +32,7 @@ nassh.Stream.ERR_STREAM_CANT_WRITE = 'Stream has no write permission';
 /**
  * Convert binary byte array into base64 ascii.
  *
- * @param {!Array<!number>} b - An array of bytes.
+ * @param {!Array<!number>} b An array of bytes.
  * @return {!string} The base64 encoding of the byte array.
  */
 nassh.Stream.binaryToAscii = function(b) {
@@ -42,7 +42,7 @@ nassh.Stream.binaryToAscii = function(b) {
 /**
  * Convert ascii base64 into binary byte array.
  *
- * @param {!string} a - A base64-encoded string.
+ * @param {!string} a A base64-encoded string.
  * @return {!Array<!number>} The array of byte values encoded in the string.
  */
 nassh.Stream.asciiToBinary = function(a) {

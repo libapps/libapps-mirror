@@ -44,6 +44,7 @@
       "js/nassh_stream.js",
       "js/nassh_stream_set.js",
       "js/nassh_stream_tty.js",
+      "js/nassh_stream_sshagent.js",
       "js/nassh_stream_sshagent_relay.js",
       "js/nassh_stream_google_relay.js",
       "js/nassh_google_relay.js",
@@ -52,6 +53,10 @@
       "js/nassh_sftp_packet_types.js",
       "js/nassh_sftp_status.js",
       "js/nassh_sftp_fsp.js",
+      "js/nassh_agent_message.js",
+      "js/nassh_agent_message_types.js",
+      "js/nassh_agent.js",
+      "js/nassh_agent_backend.js",
       "js/nassh_command_instance.js",
       "js/nassh_background.js"
     ]

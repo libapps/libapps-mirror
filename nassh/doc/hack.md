@@ -169,6 +169,9 @@ The vast majority of the code here lives under [js/].
   * [nassh_stream.js]: Basic class for implementing all `nassh.Stream` streams.
   * [nassh_stream_google_relay.js]: 
   * [nassh_stream_set.js]: 
+  * [nassh_stream_sshagent.js]:
+    SSH agent implementation using nassh.agent.Agent to relay requests to
+    backends.
   * [nassh_stream_sshagent_relay.js]:
     SSH Agent API for connecting to other extensions.  They provide key store
     backing (such as the [gnubbyd] extension).
@@ -178,6 +181,17 @@ The vast majority of the code here lives under [js/].
   * `*_tests.js`: Each module has a corresponding set of unittests.  The
     filename follows the convention of adding `_tests`.  e.g. `nassh_tests.js`
     contains the tests for `nassh.js`.
+* SSH agent code
+  * [nassh_agent.js]:
+    An SSH agent that aggregates responses from multiple dynamically loaded
+    backends.
+  * [nassh_agent_backend.js]:
+    A dummy backend for the SSH agent from which all other backends derive.
+  * [nassh_agent_message.js]:
+    General message handling in accordance with the SSH agent protocol.
+  * [nassh_agent_message_types.js]:
+    Code for dealing with the specific message types used in the SSH agent
+    protocol.
 
 There are a few specialized modules that are not relevant to the core
 Secure Shell logic.
@@ -306,6 +320,10 @@ The `name` field can be any one of:
 [nassh_preferences_editor.html]: ../html/nassh_preferences_editor.html
 
 [crosh.js]: ../js/crosh.js
+[nassh_agent.js]: ../js/nassh_agent.js
+[nassh_agent_backend.js]: ../js/nassh_agent_backend.js
+[nassh_agent_message.js]: ../js/nassh_agent_message.js
+[nassh_agent_message_types.js]: ../js/nassh_agent_message_types.js
 [nassh_app.js]: ../js/nassh_app.js
 [nassh_background.js]: ../js/nassh_background.js
 [nassh_column_list.js]: ../js/nassh_column_list.js
@@ -327,6 +345,7 @@ The `name` field can be any one of:
 [nassh_stream_google_relay.js]: ../js/nassh_stream_google_relay.js
 [nassh_stream.js]: ../js/nassh_stream.js
 [nassh_stream_set.js]: ../js/nassh_stream_set.js
+[nassh_stream_sshagent.js]: ../js/nassh_stream_sshagent.js
 [nassh_stream_sshagent_relay.js]: ../js/nassh_stream_sshagent_relay.js
 [nassh_stream_tty.js]: ../js/nassh_stream_tty.js
 

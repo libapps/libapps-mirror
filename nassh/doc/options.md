@@ -40,6 +40,16 @@ If you don't know what this is for, then just ignore it.
 Report connection attempt counts to the relay server.
 If you don't know what this is for, then just ignore it.
 
+## `--ssh-agent=<backend ID>,<backend ID>,...`
+
+A comma-separated list of IDs of backends to use with the builtin JS SSH agent.
+All agent requests are sent to all backends and their results are accumulated
+and relayed back to the client.
+
+The following backends are currently implemented:
+* `stub`:
+  A minimal implementation of a backend. Only used for testing purposes.
+
 ## `--ssh-agent=<extension id>`
 
 The extension to use as an ssh agent.  All auth requests will be forwarded
