@@ -641,6 +641,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
 
     if (relay.options['--ssh-agent'])
       params.authAgentAppID = relay.options['--ssh-agent'];
+    params.authAgentForward = relay.options['auth-agent-forward'];
   }
 
   this.authAgentAppID_ = params.authAgentAppID;
@@ -676,7 +677,8 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
 
   if (params.authAgentAppID) {
     argv.authAgentAppID = params.authAgentAppID;
-    argv.arguments.push('-A');  // Force agent forwarding.
+    if (params.authAgentForward)
+      argv.arguments.push('-A');
   }
 
   // Disable IP address check for connection through proxy.

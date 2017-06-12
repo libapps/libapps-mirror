@@ -109,6 +109,7 @@ nassh.GoogleRelay.parseOptionString = function(optionString) {
   }
 
   if (rv['--config'] == 'google') {
+    rv['auth-agent-forward'] = true;
     if (!('--proxy-host' in rv))
       rv['--proxy-host'] = 'ssh-relay.corp.google.com';
     if (!('--proxy-port' in rv))
