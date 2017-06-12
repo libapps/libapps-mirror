@@ -121,7 +121,7 @@ nassh.GoogleRelay.parseOptionString = function(optionString) {
       rv['--report-connect-attempts'] = true;
     if (!('--relay-protocol' in rv))
       rv['--relay-protocol'] = 'v2';
-    if (!('--default-agent' in rv))
+    if (!('--ssh-agent' in rv))
       rv['--ssh-agent'] = 'beknehfpfkghjoafdifaflglpjkojoco';
   }
 
