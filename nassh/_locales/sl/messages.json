@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"Cilja ni mogo\u010de raz\u010dleniti: $1","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"Prekli\u010di"},"cmd_ssh_forget_host_help":{"message":"Ta ukaz prika\u017ee meni znanih gostiteljev in vas vpra\u0161a, katerega naj pozabi."},"cmd_ssh_forget_host_title":{"message":"Pozabi znanega gostitelja ssh."},"cmd_ssh_help":{"message":"Parametra |uporabni\u0161ko ime| in |ime gostitelja| sta obvezna, |vrata| pa je izbiren. \u010ce ne navedete \u0161tevilke vrat, se privzeto uporabi 22."},"cmd_ssh_title":{"message":"Odpre novo sejo SSH."},"command_complete":{"message":"Ukaz $1 je kon\u010dal z izhodno kodo $2. To okno lahko kadar koli zaprete.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"Povezovanje z $1, vrata $2 ...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Vzpostavi povezavo"},"connect_message":{"message":"Vnesite cilj, s katerim \u017eelite vzpostaviti povezavo."},"destination_pattern":{"message":"uporabni\u0161koime@imegostitelja[:vrata]"},"known_hosts_empty":{"message":"Ni znanih gostiteljev, zato ni ni\u010desar za pozabiti."},"known_hosts_prompt":{"message":"Izberite gostitelja, ki ga \u017eelite pozabiti [1\u2013$1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"Znani gostitelji:"},"missing_param":{"message":"Manjka parameter: $1","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"V redu"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"Nepri\u010dakovana napaka. Podrobnosti najdete v konzoli za JavaScript."},"welcome":{"message":"Dobrodo\u0161li! Odprite novo povezavo ssh z ukazom \u00bbopen\u00ab."},"welcome_tip":{"message":"Nasvet strokovnjaka: to sejo lahko shranite kot zaznamek v brskalniku."}}
+{
+	"already_mounted_message": {
+		"message": "Datote\u010dni sistem je \u017ee vpet."
+	},
+	"backup_prefs": {
+		"message": "Shranjevanje varnostne kopije"
+	},
+	"bad_destination": {
+		"message": "Cilja ni mogo\u010de raz\u010dleniti: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "\u010ce zaprete ta zavihek, boste prekinili to sejo."
+	},
+	"cancel_button_label": {
+		"message": "Prekli\u010di"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Ta ukaz prika\u017ee meni znanih gostiteljev in vas vpra\u0161a, katerega naj pozabi."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "Pozabi znanega gostitelja ssh."
+	},
+	"cmd_ssh_help": {
+		"message": "Parametra |username| in |hostname| sta obvezna, |port| je izbiren. \u010ce ne navedete \u0161tevilke vrat, se privzeto uporabi 22."
+	},
+	"cmd_ssh_title": {
+		"message": "Odpre novo sejo SSH."
+	},
+	"command_complete": {
+		"message": "Ukaz $1 se je zaprl s kodo stanja $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Pove\u017ei"
+	},
+	"connect_or_exit_message": {
+		"message": "\u017delite izbrati drugo povezavo (C) ali zapreti (X)?"
+	},
+	"connecting": {
+		"message": "Vzpostavljanje povezave z gostiteljem $1 ...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "Izbri\u0161i"
+	},
+	"disconnect_message": {
+		"message": "Vti\u010dnik NaCl se je zaprl s kodo stanja $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_aria_label": {
+		"message": "dodatni argumenti ssh"
+	},
+	"field_argstr_placeholder": {
+		"message": "dodatni argumenti ukazne vrstice"
+	},
+	"field_description_aria_label": {
+		"message": "opis"
+	},
+	"field_description_placeholder": {
+		"message": "uporabniskoime@imegostitelja ali poljubno oblikovano besedilo"
+	},
+	"field_hostname_aria_label": {
+		"message": "ime gostitelja"
+	},
+	"field_hostname_placeholder": {
+		"message": "ime gostitelja"
+	},
+	"field_identity_aria_label": {
+		"message": "identiteta"
+	},
+	"field_port_aria_label": {
+		"message": "vrata"
+	},
+	"field_port_placeholder": {
+		"message": "vrata"
+	},
+	"field_relay_options_aria_label": {
+		"message": "mo\u017enosti posredovanja"
+	},
+	"field_relay_options_placeholder": {
+		"message": "mo\u017enosti posredovanja"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "ime terminalskega profila"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "privzeto"
+	},
+	"field_username_aria_label": {
+		"message": "uporabni\u0161ko ime"
+	},
+	"field_username_placeholder": {
+		"message": "uporabni\u0161ko ime"
+	},
+	"found_relay": {
+		"message": "Stre\u017enik za posredovanje je bil najden: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Identiteta"
+	},
+	"import_link_aria_label": {
+		"message": "uvoz datoteke"
+	},
+	"import_link_label": {
+		"message": "Uvozi ..."
+	},
+	"initializing_relay": {
+		"message": "Iskanje stre\u017enika za posredovanje s tem: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "JSON-a v \u00bb$1\u00ab ni bilo mogo\u010de raz\u010dleniti",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "Ni znanih gostiteljev, zato ni mogo\u010de ni\u010desar pozabiti."
+	},
+	"known_hosts_prompt": {
+		"message": "Izberite gostitelja, ki ga \u017eelite pozabiti [1\u2013$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "Znani gostitelji:"
+	},
+	"loading_label": {
+		"message": "Nalaganje ..."
+	},
+	"missing_param": {
+		"message": "Manjka parameter: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "Vpenjanje SFTP-ja"
+	},
+	"mounted_message": {
+		"message": "Vpeto."
+	},
+	"notify_copy": {
+		"message": "Kopiran izbor"
+	},
+	"ok_button_label": {
+		"message": "V redu"
+	},
+	"open_as_window_tip": {
+		"message": "[Nasvet strokovnjaka] \u00bbUporabite ukaz \u00bbOdpri kot okno\u00ab, \u010de \u017eelite, da se z bli\u017enjico \u00bbCTRL + W\u00ab ne zapre terminal.\n[Nasvet strokovnjaka] Na $1 poi\u0161\u010dite ve\u010d informacij.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Mo\u017enosti"
+	},
+	"plugin_loading": {
+		"message": "Nalaganje vti\u010dnika NaCl ..."
+	},
+	"plugin_loading_complete": {
+		"message": " kon\u010dano."
+	},
+	"pref_backup_filename": {
+		"message": "Varnostna kopija nastavitev varne lupine.json"
+	},
+	"preferences_header": {
+		"message": "Nastavitve profila"
+	},
+	"preferences_reset": {
+		"message": "Vse nastavitve so ponastavljene."
+	},
+	"reconnect_message": {
+		"message": "\u017delite znova vzpostaviti povezavo (R), izbrati drugo povezavo (C) ali zapreti (X)?"
+	},
+	"relay_retry": {
+		"message": "Vnovi\u010den poskus ..."
+	},
+	"restore_prefs": {
+		"message": "Obnovitev varnostne kopije"
+	},
+	"shortcut_list_aria_label": {
+		"message": "shranjene povezave"
+	},
+	"ssh_argstr_label": {
+		"message": "Argumenti SSH"
+	},
+	"terminal_preview_label": {
+		"message": "Predogled"
+	},
+	"terminal_profile_label": {
+		"message": "Trenutni profil"
+	},
+	"unexpected_error": {
+		"message": "Nepri\u010dakovana napaka. Podrobnosti najdete v konzoli za JavaScript."
+	},
+	"unmount_button_label": {
+		"message": "Izpetje SFTP-ja"
+	},
+	"update_available_tooltip": {
+		"message": "Na voljo je posodobitev. Zaprite vsa okna."
+	},
+	"welcome_faq": {
+		"message": "Odgovori na pogosta vpra\u0161anja: $1 (pritisnite tipko CTRL in kliknite povezave, \u010de jih \u017eelite odpreti)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "Pozdravljeni v aplikaciji $1 razli\u010dice $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "Nastavite pove\u010davo v Chromovem meniju na 100 %"
+	}
+}

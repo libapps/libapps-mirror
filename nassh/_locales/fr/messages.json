@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"Impossible d'analyser la destination $1.","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"Annuler"},"cmd_ssh_forget_host_help":{"message":"Cette commande permet d'afficher un menu r\u00e9pertoriant les invites et les h\u00f4tes connus que l'h\u00f4te doit supprimer."},"cmd_ssh_forget_host_title":{"message":"Supprimer un h\u00f4te SSH connu"},"cmd_ssh_help":{"message":"Les param\u00e8tres |username| et |hostname| sont obligatoires. Le param\u00e8tre |port| est facultatif. Si celui-ci n'est pas sp\u00e9cifi\u00e9, la valeur \"22\" est utilis\u00e9e par d\u00e9faut."},"cmd_ssh_title":{"message":"Ouvrir une nouvelle session SSH"},"command_complete":{"message":"Commande \"$1\" termin\u00e9e (code de sortie\u00a0: $2). Vous pouvez fermer cette fen\u00eatre \u00e0 tout moment.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"Connexion \u00e0 $1 via le port\u00a0$2 en cours\u2026","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Connexion"},"connect_message":{"message":"Veuillez indiquer une destination \u00e0 laquelle vous connecter."},"destination_pattern":{"message":"nomutilisateur@nomh\u00f4te[:port]"},"known_hosts_empty":{"message":"Aucun h\u00f4te connu. Il n'y a rien \u00e0 supprimer."},"known_hosts_prompt":{"message":"Veuillez s\u00e9lectionner un h\u00f4te \u00e0 supprimer [1-$1]\u00a0:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"H\u00f4tes connus\u00a0:"},"missing_param":{"message":"Param\u00e8tre manquant : $1.","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"OK"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"Une erreur inattendue s'est produite. Pour plus d'informations, veuillez consulter la console JavaScript."},"welcome":{"message":"Bienvenue\u00a0! Ouvrez une nouvelle connexion SSH \u00e0 l'aide de la commande \"open\"."},"welcome_tip":{"message":"Astuce\u00a0: Vous pouvez ajouter cette session aux favoris de votre navigateur."}}
+{
+	"already_mounted_message": {
+		"message": "Le syst\u00e8me de fichiers est d\u00e9j\u00e0 install\u00e9."
+	},
+	"backup_prefs": {
+		"message": "Enregistrer une sauvegarde"
+	},
+	"bad_destination": {
+		"message": "Impossible d'analyser la destination $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "La fermeture de cet onglet va mettre fin \u00e0 cette session."
+	},
+	"cancel_button_label": {
+		"message": "Annuler"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Cette commande permet d'afficher un menu r\u00e9pertoriant les invites et les h\u00f4tes connus que l'h\u00f4te doit supprimer."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "Supprimer un h\u00f4te SSH connu"
+	},
+	"cmd_ssh_help": {
+		"message": "Les param\u00e8tres |username| et |hostname| sont obligatoires. Le param\u00e8tre |port| est facultatif. Si celui-ci n'est pas sp\u00e9cifi\u00e9, la valeur \"22\" est utilis\u00e9e par d\u00e9faut."
+	},
+	"cmd_ssh_title": {
+		"message": "Ouvrir une nouvelle session SSH"
+	},
+	"command_complete": {
+		"message": "La commande \"$1\" s'est termin\u00e9e avec le code d'\u00e9tat $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Se connecter"
+	},
+	"connect_or_exit_message": {
+		"message": "S\u00e9lectionner (c) une autre connexion ou quitter (x)\u00a0?"
+	},
+	"connecting": {
+		"message": "Connexion \u00e0 $1\u2026",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[SUPPR]"
+	},
+	"delete_button_label": {
+		"message": "Supprimer"
+	},
+	"disconnect_message": {
+		"message": "Le plug-in NaCl s'est termin\u00e9 avec le code d'\u00e9tat $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[ENTR\u00c9E]"
+	},
+	"field_argstr_aria_label": {
+		"message": "arguments ssh suppl\u00e9mentaires"
+	},
+	"field_argstr_placeholder": {
+		"message": "arguments de ligne de commande suppl\u00e9mentaires"
+	},
+	"field_description_aria_label": {
+		"message": "description"
+	},
+	"field_description_placeholder": {
+		"message": "nomdutilisateur@nomdh\u00f4te ou texte libre"
+	},
+	"field_hostname_aria_label": {
+		"message": "nom d'h\u00f4te"
+	},
+	"field_hostname_placeholder": {
+		"message": "nom d'h\u00f4te"
+	},
+	"field_identity_aria_label": {
+		"message": "identit\u00e9"
+	},
+	"field_port_aria_label": {
+		"message": "port"
+	},
+	"field_port_placeholder": {
+		"message": "port"
+	},
+	"field_relay_options_aria_label": {
+		"message": "options de relais"
+	},
+	"field_relay_options_placeholder": {
+		"message": "options de relais"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "nom du profil de terminal"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "par d\u00e9faut"
+	},
+	"field_username_aria_label": {
+		"message": "nom d'utilisateur"
+	},
+	"field_username_placeholder": {
+		"message": "nom d'utilisateur"
+	},
+	"found_relay": {
+		"message": "Serveur de relais trouv\u00e9\u00a0: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Identit\u00e9"
+	},
+	"import_link_aria_label": {
+		"message": "importation de fichier"
+	},
+	"import_link_label": {
+		"message": "Importer\u2026"
+	},
+	"initializing_relay": {
+		"message": "Recherche du serveur de relais \u00e0 l'aide de l'h\u00f4te $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "Impossible d'analyser le fichier JSON dans \"$1\"",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "Impossible de proc\u00e9der \u00e0 la suppression, car il n'existe aucun h\u00f4te connu."
+	},
+	"known_hosts_prompt": {
+		"message": "Veuillez s\u00e9lectionner un h\u00f4te \u00e0 supprimer [1-$1]\u00a0:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "H\u00f4tes connus\u00a0:"
+	},
+	"loading_label": {
+		"message": "Chargement\u2026"
+	},
+	"missing_param": {
+		"message": "Param\u00e8tre manquant\u00a0: $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "Installation SFTP"
+	},
+	"mounted_message": {
+		"message": "Le syst\u00e8me de fichiers a bien \u00e9t\u00e9 install\u00e9."
+	},
+	"notify_copy": {
+		"message": "S\u00e9lection copi\u00e9e"
+	},
+	"ok_button_label": {
+		"message": "OK"
+	},
+	"open_as_window_tip": {
+		"message": "[Astuce] Utilisez l'option \"Ouvrir dans une fen\u00eatre\" pour emp\u00eacher Ctrl+W de fermer votre terminal.\n[Astuce] Pour en savoir plus, rendez-vous sur $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Options"
+	},
+	"plugin_loading": {
+		"message": "Chargement du plug-in NaCl en cours\u2026"
+	},
+	"plugin_loading_complete": {
+		"message": " termin\u00e9."
+	},
+	"pref_backup_filename": {
+		"message": "Fichier JSON de sauvegarde (Backup.json) des pr\u00e9f\u00e9rences Secure Shell"
+	},
+	"preferences_header": {
+		"message": "Param\u00e8tres du profil"
+	},
+	"preferences_reset": {
+		"message": "Toutes les pr\u00e9f\u00e9rences ont \u00e9t\u00e9 r\u00e9initialis\u00e9es."
+	},
+	"reconnect_message": {
+		"message": "Reconnecter (r), s\u00e9lectionner (c) une autre connexion ou quitter (x)\u00a0?"
+	},
+	"relay_retry": {
+		"message": "Nouvelle tentative\u2026"
+	},
+	"restore_prefs": {
+		"message": "Restaurer la sauvegarde"
+	},
+	"shortcut_list_aria_label": {
+		"message": "connexions enregistr\u00e9es"
+	},
+	"ssh_argstr_label": {
+		"message": "Arguments SSH"
+	},
+	"terminal_preview_label": {
+		"message": "Aper\u00e7u"
+	},
+	"terminal_profile_label": {
+		"message": "Profil actuel"
+	},
+	"unexpected_error": {
+		"message": "Une erreur inattendue s'est produite. Pour en savoir plus, veuillez consulter la console JavaScript."
+	},
+	"unmount_button_label": {
+		"message": "D\u00e9sinstaller SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "Une mise \u00e0 jour est disponible. Veuillez fermer toutes les fen\u00eatres."
+	},
+	"welcome_faq": {
+		"message": "R\u00e9ponses aux questions fr\u00e9quentes\u00a0: $1 (Ctrl+clic sur les liens pour les ouvrir)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "Bienvenue sur $1, version\u00a0$2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "Dans le menu Chrome, veuillez d\u00e9finir le zoom sur 100\u00a0%"
+	}
+}

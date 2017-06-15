@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"Nu se poate analiza destina\u0163ia: $1","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"Anula\u0163i"},"cmd_ssh_forget_host_help":{"message":"Aceast\u0103 comand\u0103 afi\u015feaz\u0103 un meniu cu gazde cunoscute \u015fi solicit\u0103 gazda de \u015fters."},"cmd_ssh_forget_host_title":{"message":"\u015eterge\u0163i o gazd\u0103 SSH cunoscut\u0103."},"cmd_ssh_help":{"message":"Parametrii |username| \u015fi |hostname| sunt obligatorii, dar parametrul |port| este op\u0163ional. Dac\u0103 portul nu este specificat, valoarea prestabilit\u0103 pentru acesta este 22."},"cmd_ssh_title":{"message":"Deschide o sesiune SSH nou\u0103."},"command_complete":{"message":"Comanda $1 s-a finalizat cu codul de ie\u015fire $2. Pute\u0163i \u00eenchide\u0163i aceast\u0103 fereastr\u0103 c\u00e2nd dori\u0163i.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"Se conecteaz\u0103 la $1, port $2...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Conecta\u0163i-v\u0103"},"connect_message":{"message":"Introduce\u0163i o destina\u0163ie la care s\u0103 v\u0103 conecta\u0163i."},"destination_pattern":{"message":"numeutilizator@numegazd\u0103[:port]"},"known_hosts_empty":{"message":"Nu exist\u0103 gazde cunoscute pe care s\u0103 le \u015fterge\u0163i."},"known_hosts_prompt":{"message":"Selecta\u0163i o gazd\u0103 pe care s\u0103 o \u015fterge\u0163i [1 \u2013 $1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"Gazde cunoscute:"},"missing_param":{"message":"Lipse\u015fte parametrul: $1","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"OK"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"A ap\u0103rut o eroare nea\u015fteptat\u0103. Consulta\u0163i consola JavaScript pentru mai multe detalii."},"welcome":{"message":"Bun venit! Deschide\u0163i o conexiune SSH nou\u0103 cu comanda \u201eopen\u201d."},"welcome_tip":{"message":"Sfat: pute\u0163i salva aceast\u0103 sesiune ca marcaj \u00een browser."}}
+{
+	"already_mounted_message": {
+		"message": "Sistemul de fi\u0219iere este montat deja!"
+	},
+	"backup_prefs": {
+		"message": "Salveaz\u0103 backupul"
+	},
+	"bad_destination": {
+		"message": "Nu se poate analiza destina\u021bia: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "\u00cenchiderea acestei file va deconecta aceast\u0103 sesiune."
+	},
+	"cancel_button_label": {
+		"message": "Anuleaz\u0103"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Aceast\u0103 comand\u0103 afi\u0219eaz\u0103 un meniu cu gazde cunoscute \u0219i solicit\u0103 gazda de \u0219ters."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "\u0218terge o gazd\u0103 SSH cunoscut\u0103."
+	},
+	"cmd_ssh_help": {
+		"message": "Parametrii |username| \u0219i |hostname| sunt obligatorii, dar parametrul |port| este op\u021bional. Dac\u0103 portul nu este specificat, valoarea prestabilit\u0103 pentru acesta este 22."
+	},
+	"cmd_ssh_title": {
+		"message": "Deschide o sesiune SSH nou\u0103."
+	},
+	"command_complete": {
+		"message": "Comanda $1 s-a \u00eencheiat cu codul de stare $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Conecteaz\u0103-te"
+	},
+	"connect_or_exit_message": {
+		"message": "Alegi o alt\u0103 conexiune (c) sau ie\u0219i (x)?"
+	},
+	"connecting": {
+		"message": "Se conecteaz\u0103 la $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "\u0218terge"
+	},
+	"disconnect_message": {
+		"message": "Pluginul NaCl s-a \u00eenchis cu codul de stare $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_aria_label": {
+		"message": "argumente suplimentare pentru ssh"
+	},
+	"field_argstr_placeholder": {
+		"message": "argumente suplimentare pentru linia de comand\u0103"
+	},
+	"field_description_aria_label": {
+		"message": "descriere"
+	},
+	"field_description_placeholder": {
+		"message": "numedeutilizator@numedegazd\u0103 sau text cu form\u0103 liber\u0103"
+	},
+	"field_hostname_aria_label": {
+		"message": "nume de gazd\u0103"
+	},
+	"field_hostname_placeholder": {
+		"message": "nume de gazd\u0103"
+	},
+	"field_identity_aria_label": {
+		"message": "identitate"
+	},
+	"field_port_aria_label": {
+		"message": "port"
+	},
+	"field_port_placeholder": {
+		"message": "port"
+	},
+	"field_relay_options_aria_label": {
+		"message": "op\u021biuni de retransmitere"
+	},
+	"field_relay_options_placeholder": {
+		"message": "op\u021biuni de retransmitere"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "nume de profil pentru terminal"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "prestabilit"
+	},
+	"field_username_aria_label": {
+		"message": "nume de utilizator"
+	},
+	"field_username_placeholder": {
+		"message": "nume de utilizator"
+	},
+	"found_relay": {
+		"message": "Server de retransmitere g\u0103sit: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Identitate"
+	},
+	"import_link_aria_label": {
+		"message": "import de fi\u0219iere"
+	},
+	"import_link_label": {
+		"message": "Import\u0103..."
+	},
+	"initializing_relay": {
+		"message": "Se caut\u0103 serverul de retransmitere folosind: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "Nu se poate analiza fi\u0219ierul JSON \u00een \u201e$1\u201d",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "Nu exist\u0103 gazde cunoscute pe care s\u0103 le \u0219tergi."
+	},
+	"known_hosts_prompt": {
+		"message": "Selecteaz\u0103 gazda de \u0219ters [1-$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "Gazde cunoscute:"
+	},
+	"loading_label": {
+		"message": "Se \u00eencarc\u0103..."
+	},
+	"missing_param": {
+		"message": "Lipse\u0219te parametrul $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "Montare SFTP"
+	},
+	"mounted_message": {
+		"message": "Montat!"
+	},
+	"notify_copy": {
+		"message": "Selec\u021bie copiat\u0103"
+	},
+	"ok_button_label": {
+		"message": "OK"
+	},
+	"open_as_window_tip": {
+		"message": "[Sfat profesionist] Folose\u0219te \u201eDeschide ca fereastr\u0103\u201d pentru a \u00eempiedica Control-W s\u0103 \u00eenchid\u0103 terminalul!\n[Sfat profesionist] Acceseaz\u0103 $1 pentru mai multe informa\u021bii.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Op\u021biuni"
+	},
+	"plugin_loading": {
+		"message": "Se \u00eencarc\u0103 pluginul NaCI..."
+	},
+	"plugin_loading_complete": {
+		"message": " terminat\u0103."
+	},
+	"pref_backup_filename": {
+		"message": "Backup preferin\u021be Secure Shell.json"
+	},
+	"preferences_header": {
+		"message": "Set\u0103ri pentru profil"
+	},
+	"preferences_reset": {
+		"message": "Toate preferin\u021bele au fost resetate!"
+	},
+	"reconnect_message": {
+		"message": "Te reconectezi (r), alegi o alt\u0103 conexiune (c) sau ie\u0219i (x)?"
+	},
+	"relay_retry": {
+		"message": "Se re\u00eencearc\u0103..."
+	},
+	"restore_prefs": {
+		"message": "Restabile\u0219te backupul"
+	},
+	"shortcut_list_aria_label": {
+		"message": "conexiuni salvate"
+	},
+	"ssh_argstr_label": {
+		"message": "Argumente SSH"
+	},
+	"terminal_preview_label": {
+		"message": "Previzualizare"
+	},
+	"terminal_profile_label": {
+		"message": "Profil actual"
+	},
+	"unexpected_error": {
+		"message": "A ap\u0103rut o eroare nea\u0219teptat\u0103. Consult\u0103 consola JavaScript pentru mai multe detalii."
+	},
+	"unmount_button_label": {
+		"message": "Demonteaz\u0103 SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "Este disponibil\u0103 o actualizare. \u00cenchide toate ferestrele."
+	},
+	"welcome_faq": {
+		"message": "R\u0103spunsuri la \u00eentreb\u0103ri frecvente: $1 (ctrl+clic pe linkuri pentru a se deschide)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "Bun venit la $1 versiunea $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "\u00cen meniul Chrome seteaz\u0103 Zoom la 100%"
+	}
+}

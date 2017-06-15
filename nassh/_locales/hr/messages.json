@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"Nije mogu\u0107e analizirati odredi\u0161te: $1","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"Odustani"},"cmd_ssh_forget_host_help":{"message":"Ova naredba prikazuje izbornik poznatih hostova i upita koje host treba zaboraviti."},"cmd_ssh_forget_host_title":{"message":"Zaboravi poznati host ssh."},"cmd_ssh_help":{"message":"Parametri |username| i |hostname| obavezni su, parametar |port| nije. Ako ne navedete priklju\u010dak, bit \u0107e navedena zadana vrijednost 22."},"cmd_ssh_title":{"message":"Otvaranje nove sesije SSH."},"command_complete":{"message":"Naredba $1 zavr\u0161ena je izlaznim kodom $2. Zatvorite ovaj prozor kad vam odgovara.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"Povezivanje na $1, priklju\u010dak $2...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Pove\u017ei se"},"connect_message":{"message":"Unesite odredi\u0161te za povezivanje."},"destination_pattern":{"message":"username@hostname[:port]"},"known_hosts_empty":{"message":"Nema poznatih hostova, nema ni\u010dega za zaboraviti."},"known_hosts_prompt":{"message":"Odaberite host za zaboravljanje [1-$1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"Poznati hostovi:"},"missing_param":{"message":"Nedostaje parametar: $1","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"U redu"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"Pojavila se neo\u010dekivana pogre\u0161ka, provjerite konzolu JavaScript kako biste saznali vi\u0161e."},"welcome":{"message":"Dobro do\u0161li! Otvorite novu vezu ssh naredbom \"otvori\"."},"welcome_tip":{"message":"Stru\u010dni savjet: mo\u017eete spremiti ovu sesiju kao knji\u017enu oznaku preglednika."}}
+{
+	"already_mounted_message": {
+		"message": "Datote\u010dni je sustav ve\u0107 u\u010ditan!"
+	},
+	"backup_prefs": {
+		"message": "Spremite sigurnosnu kopiju"
+	},
+	"bad_destination": {
+		"message": "Nije mogu\u0107e analizirati odredi\u0161te: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "Zatvaranjem ove kartice prekinut \u0107ete ovu sesiju."
+	},
+	"cancel_button_label": {
+		"message": "Odustani"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Ova naredba prikazuje izbornik poznatih glavnih ra\u010dunala i upita koje glavno ra\u010dunalo treba zaboraviti."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "Zaboravi poznato glavno ra\u010dunalo ssh."
+	},
+	"cmd_ssh_help": {
+		"message": "Parametri |username| i |hostname| obavezni su, a parametar |port| nije. Ako ne navedete parametar priklju\u010dka, bit \u0107e upotrijebljena zadana vrijednost 22."
+	},
+	"cmd_ssh_title": {
+		"message": "Otvara novu sesiju SSH."
+	},
+	"command_complete": {
+		"message": "Naredba $1 izvr\u0161ena je sa statusnim kodom $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Pove\u017ei"
+	},
+	"connect_or_exit_message": {
+		"message": "\u017delite li odabrati neku drugu vezu (C) ili napustiti povezivanje (x)?"
+	},
+	"connecting": {
+		"message": "Povezivanje s hostom $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "Izbri\u0161i"
+	},
+	"disconnect_message": {
+		"message": "Dodatak NaCl izvr\u0161en je sa statusnim kodom $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_aria_label": {
+		"message": "dodatni ssh argumenti"
+	},
+	"field_argstr_placeholder": {
+		"message": "dodatni argumenti naredbenog retka"
+	},
+	"field_description_aria_label": {
+		"message": "opis"
+	},
+	"field_description_placeholder": {
+		"message": "username@hostname ili tekst u slobodnom obliku"
+	},
+	"field_hostname_aria_label": {
+		"message": "naziv hosta"
+	},
+	"field_hostname_placeholder": {
+		"message": "naziv hosta"
+	},
+	"field_identity_aria_label": {
+		"message": "identitet"
+	},
+	"field_port_aria_label": {
+		"message": "priklju\u010dak"
+	},
+	"field_port_placeholder": {
+		"message": "priklju\u010dak"
+	},
+	"field_relay_options_aria_label": {
+		"message": "opcije releja"
+	},
+	"field_relay_options_placeholder": {
+		"message": "opcije releja"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "naziv profila za terminal"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "zadano"
+	},
+	"field_username_aria_label": {
+		"message": "korisni\u010dko ime"
+	},
+	"field_username_placeholder": {
+		"message": "korisni\u010dko ime"
+	},
+	"found_relay": {
+		"message": "Prona\u0111eni relejni poslu\u017eitelj: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Identitet"
+	},
+	"import_link_aria_label": {
+		"message": "uvoz datoteke"
+	},
+	"import_link_label": {
+		"message": "Uvezi..."
+	},
+	"initializing_relay": {
+		"message": "Tra\u017eenje relejnog poslu\u017eitelja pomo\u0107u: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "Nije mogu\u0107e ra\u0161\u010dlaniti JSON u stavci \"$1\"",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "Nema poznatih glavnih ra\u010dunala i ni\u010dega \u0161to treba zaboraviti."
+	},
+	"known_hosts_prompt": {
+		"message": "Odaberite glavno ra\u010dunalo koje treba zaboraviti [1-$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "Poznata glavna ra\u010dunala:"
+	},
+	"loading_label": {
+		"message": "U\u010ditavanje..."
+	},
+	"missing_param": {
+		"message": "Nedostaje parametar: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "U\u010ditavanje SFTP-a"
+	},
+	"mounted_message": {
+		"message": "U\u010ditano!"
+	},
+	"notify_copy": {
+		"message": "Odabir kopiran"
+	},
+	"ok_button_label": {
+		"message": "U redu"
+	},
+	"open_as_window_tip": {
+		"message": "[Profesionalni savjet] Upotrijebite \"Otvori kao prozor\" da pre\u010dac Control-W ne bi zatvarao va\u0161 terminal!\n[Profesionalni savjet] Vi\u0161e informacija potra\u017eite na web-lokaciji $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Opcije"
+	},
+	"plugin_loading": {
+		"message": "U\u010ditavanje dodatka NaCl..."
+	},
+	"plugin_loading_complete": {
+		"message": " gotovo."
+	},
+	"pref_backup_filename": {
+		"message": "Backup.json za postavke sigurne ljuske"
+	},
+	"preferences_header": {
+		"message": "Postavke profila"
+	},
+	"preferences_reset": {
+		"message": "Sve su postavke vra\u0107ene na zadano!"
+	},
+	"reconnect_message": {
+		"message": "\u017delite li se ponovo povezati (R), odabrati neku drugu vezu (C) ili napustiti povezivanje (x)?"
+	},
+	"relay_retry": {
+		"message": "Ponovni poku\u0161aj..."
+	},
+	"restore_prefs": {
+		"message": "Vratite sigurnosnu kopiju"
+	},
+	"shortcut_list_aria_label": {
+		"message": "spremljene veze"
+	},
+	"ssh_argstr_label": {
+		"message": "SSH argumenti"
+	},
+	"terminal_preview_label": {
+		"message": "Pregled"
+	},
+	"terminal_profile_label": {
+		"message": "Trenuta\u010dni profil"
+	},
+	"unexpected_error": {
+		"message": "Pojavila se neo\u010dekivana pogre\u0161ka. Vi\u0161e pojedinosti provjerite na konzoli JavaScripta."
+	},
+	"unmount_button_label": {
+		"message": "Isklju\u010di SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "Dostupno je a\u017euriranje. Zatvorite sve prozore."
+	},
+	"welcome_faq": {
+		"message": "Odgovori na \u010desta pitanja: $1 (pritisnite Ctrl i kliknite na vezama da biste ih otvorili)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "Dobro do\u0161li na $1 verziju $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "Zumiranje na Izborniku preglednika Chrome postavite na 100%"
+	}
+}

@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"Hedef ayr\u0131\u015ft\u0131r\u0131lam\u0131yor: $1","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"\u0130ptal"},"cmd_ssh_forget_host_help":{"message":"Bu komut bilinen ana makinelerin bulundu\u011fu bir men\u00fcy\u00fc g\u00f6r\u00fcnt\u00fcler ve unutulacak ana makinenin belirtilmesini ister."},"cmd_ssh_forget_host_title":{"message":"Bilinen bir ssh ana makinesini unut."},"cmd_ssh_help":{"message":"|kullaniciadi| ve |anabilgisayaradi| parametreleri gereklidir. |baglantinoktasi| iste\u011fe ba\u011fl\u0131d\u0131r. Ba\u011flant\u0131 noktas\u0131 belirtilmezse varsay\u0131lan olarak 22 kullan\u0131l\u0131r."},"cmd_ssh_title":{"message":"Yeni SSH oturumu a\u00e7ar."},"command_complete":{"message":"$1 komutu $2 \u00e7\u0131k\u0131\u015f koduyla tamamland\u0131. Bu pencereyi istedi\u011finiz zaman kapatabilirsiniz.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"$1, ba\u011flant\u0131 noktas\u0131 $2 adresine ba\u011flan\u0131l\u0131yor...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Ba\u011flan"},"connect_message":{"message":"L\u00fctfen ba\u011flan\u0131lacak hedefi girin."},"destination_pattern":{"message":"kullaniciadi@anamakineadi[:baglantinoktasi]"},"known_hosts_empty":{"message":"Hi\u00e7bir ana makine bilinmiyor, unutulacak bir \u015fey yok."},"known_hosts_prompt":{"message":"L\u00fctfen unutulacak ana makineyi se\u00e7in [1-$1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"Bilinen ana makineler:"},"missing_param":{"message":"Eksik parametre: $1","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"Tamam"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"Beklenmeyen bir hata olu\u015ftu, l\u00fctfen daha fazla ayr\u0131nt\u0131 i\u00e7in JavaScript konsolunu kontrol edin."},"welcome":{"message":"Ho\u015f geldiniz! 'open' komutuyla yeni bir ssh ba\u011flant\u0131s\u0131 a\u00e7\u0131n."},"welcome_tip":{"message":"Uzmandan \u0130pucu: Bu oturumu bir taray\u0131c\u0131 yer i\u015fareti olarak kaydedebilirsiniz."}}
+{
+	"already_mounted_message": {
+		"message": "Dosya sistemi zaten eklendi!"
+	},
+	"backup_prefs": {
+		"message": "Yede\u011fi Kaydet"
+	},
+	"bad_destination": {
+		"message": "Hedef ayr\u0131\u015ft\u0131r\u0131lam\u0131yor: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "Bu sekmenin kapat\u0131lmas\u0131 oturumun ba\u011flant\u0131s\u0131n\u0131 keser."
+	},
+	"cancel_button_label": {
+		"message": "\u0130ptal"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Bu komut bilinen ana makinelerin bulundu\u011fu bir men\u00fcy\u00fc g\u00f6r\u00fcnt\u00fcler ve unutulacak ana makinenin belirtilmesini ister."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "Bilinen bir ssh ana makinesini unut."
+	},
+	"cmd_ssh_help": {
+		"message": "|username| ve |hostname| parametreleri gereklidir, |port| iste\u011fe ba\u011fl\u0131d\u0131r. Ba\u011flant\u0131 noktas\u0131 belirtilmezse varsay\u0131lan olarak 22 kullan\u0131l\u0131r."
+	},
+	"cmd_ssh_title": {
+		"message": "Yeni SSH oturumu a\u00e7ar."
+	},
+	"command_complete": {
+		"message": "$1 komutu kullan\u0131larak $2 durum koduyla \u00e7\u0131k\u0131\u015f yap\u0131ld\u0131.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Ba\u011flan"
+	},
+	"connect_or_exit_message": {
+		"message": "(C) Ba\u015fka bir ba\u011flant\u0131 se\u00e7 veya (X) \u00c7\u0131k?"
+	},
+	"connecting": {
+		"message": "$1 ile ba\u011flant\u0131 kuruluyor...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "Sil"
+	},
+	"disconnect_message": {
+		"message": "NaCl eklentisinden $1 koduyla \u00e7\u0131k\u0131ld\u0131.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_aria_label": {
+		"message": "ek ssh ba\u011f\u0131ms\u0131z de\u011fi\u015fkenleri"
+	},
+	"field_argstr_placeholder": {
+		"message": "ekstra komut sat\u0131r\u0131 ba\u011f\u0131ms\u0131z de\u011fi\u015fkenleri"
+	},
+	"field_description_aria_label": {
+		"message": "a\u00e7\u0131klama"
+	},
+	"field_description_placeholder": {
+		"message": "kullan\u0131c\u0131ad\u0131@anamakinead\u0131 veya serbest bi\u00e7imli metin"
+	},
+	"field_hostname_aria_label": {
+		"message": "ana makine ad\u0131"
+	},
+	"field_hostname_placeholder": {
+		"message": "ana makine ad\u0131"
+	},
+	"field_identity_aria_label": {
+		"message": "kimlik"
+	},
+	"field_port_aria_label": {
+		"message": "ba\u011flant\u0131 noktas\u0131"
+	},
+	"field_port_placeholder": {
+		"message": "ba\u011flant\u0131 noktas\u0131"
+	},
+	"field_relay_options_aria_label": {
+		"message": "ge\u00e7i\u015f se\u00e7enekleri"
+	},
+	"field_relay_options_placeholder": {
+		"message": "ge\u00e7i\u015f se\u00e7enekleri"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "terminal profil ad\u0131"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "varsay\u0131lan"
+	},
+	"field_username_aria_label": {
+		"message": "kullan\u0131c\u0131 ad\u0131"
+	},
+	"field_username_placeholder": {
+		"message": "kullan\u0131c\u0131 ad\u0131"
+	},
+	"found_relay": {
+		"message": "Bulunan ge\u00e7i\u015f sunucusu: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Kimlik"
+	},
+	"import_link_aria_label": {
+		"message": "dosya i\u00e7e aktarma"
+	},
+	"import_link_label": {
+		"message": "\u0130\u00e7e aktar..."
+	},
+	"initializing_relay": {
+		"message": "\u015eu ana makine kullan\u0131larak ge\u00e7i\u015f sunucusu aran\u0131yor: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "\"$1\" i\u00e7indeki JSON ayr\u0131\u015ft\u0131r\u0131lamad\u0131",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "Hi\u00e7bir ana makine bilinmiyor, unutulacak bir \u015fey yok."
+	},
+	"known_hosts_prompt": {
+		"message": "L\u00fctfen unutulacak ana makineyi se\u00e7in [1-$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "Bilinen ana makineler:"
+	},
+	"loading_label": {
+		"message": "Y\u00fckleniyor..."
+	},
+	"missing_param": {
+		"message": "Eksik parametre: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "SFTP Ekle"
+	},
+	"mounted_message": {
+		"message": "Eklendi!"
+	},
+	"notify_copy": {
+		"message": "Se\u00e7im Kopyaland\u0131"
+	},
+	"ok_button_label": {
+		"message": "Tamam"
+	},
+	"open_as_window_tip": {
+		"message": "[Profesyoneller i\u00e7in \u0130pucu] Control-W tu\u015flar\u0131n\u0131n terminalinizi kapatmas\u0131n\u0131 \u00f6nlemek i\u00e7in \"Pencere Olarak A\u00e7\" se\u00e7ene\u011fini kullan\u0131n!\n[Profesyoneller i\u00e7in \u0130pucu] Daha fazla bilgi i\u00e7in $1 adresine bak\u0131n.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Se\u00e7enekler"
+	},
+	"plugin_loading": {
+		"message": "NaCl eklentisi y\u00fckleniyor..."
+	},
+	"plugin_loading_complete": {
+		"message": " tamamland\u0131."
+	},
+	"pref_backup_filename": {
+		"message": "G\u00fcvenli Kabuk Tercihleri Yede\u011fi.json"
+	},
+	"preferences_header": {
+		"message": "Profil Ayarlar\u0131"
+	},
+	"preferences_reset": {
+		"message": "T\u00fcm tercihler s\u0131f\u0131rland\u0131!"
+	},
+	"reconnect_message": {
+		"message": "(R) Yeniden ba\u011flan, (C) Ba\u015fka bir ba\u011flant\u0131 se\u00e7 veya (X) \u00c7\u0131k?"
+	},
+	"relay_retry": {
+		"message": "Yeniden deneniyor..."
+	},
+	"restore_prefs": {
+		"message": "Yede\u011fi Geri Y\u00fckle"
+	},
+	"shortcut_list_aria_label": {
+		"message": "kaydedilen ba\u011flant\u0131lar"
+	},
+	"ssh_argstr_label": {
+		"message": "SSH Ba\u011f\u0131ms\u0131z De\u011fi\u015fkenleri"
+	},
+	"terminal_preview_label": {
+		"message": "\u00d6nizleme"
+	},
+	"terminal_profile_label": {
+		"message": "Ge\u00e7erli profil"
+	},
+	"unexpected_error": {
+		"message": "Beklenmeyen bir hata olu\u015ftu, l\u00fctfen daha fazla ayr\u0131nt\u0131 i\u00e7in JavaScript konsolunu kontrol edin."
+	},
+	"unmount_button_label": {
+		"message": "SFTP Ba\u011flant\u0131s\u0131n\u0131 Kes"
+	},
+	"update_available_tooltip": {
+		"message": "Bir g\u00fcncelleme var. L\u00fctfen t\u00fcm pencereleri kapat\u0131n."
+	},
+	"welcome_faq": {
+		"message": "S\u0131k Sorulan Sorular\u0131n Yan\u0131tlar\u0131: $1 (a\u00e7mak i\u00e7in ctrl tu\u015funu bas\u0131l\u0131 tutarken ba\u011flant\u0131lar\u0131 t\u0131klay\u0131n)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "$1 $2 s\u00fcr\u00fcm\u00fcne ho\u015f geldiniz.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "L\u00fctfen Chrome Men\u00fcs\u00fc->%100'e Yak\u0131nla\u015ft\u0131r se\u00e7ene\u011fini ayarlay\u0131n"
+	}
+}

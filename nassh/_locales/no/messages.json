@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "Filsystemet er allerede tilsluttet."
+		"message": "Filsystemet er allerede tilkoblet."
 	},
 	"backup_prefs": {
-		"message": "Gem sikkerhedskopi"
+		"message": "Lagre en sikkerhetskopi"
 	},
 	"bad_destination": {
-		"message": "Destinationen kunne ikke parses: $1",
+		"message": "Kan ikke analysere destinasjonen: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,25 +14,25 @@
 		}
 	},
 	"before_unload": {
-		"message": "Hvis denne fane lukkes, afbrydes denne session."
+		"message": "Hvis du lukker denne fanen, avsluttes n\u00e5v\u00e6rende \u00f8kt."
 	},
 	"cancel_button_label": {
-		"message": "Annuller"
+		"message": "Avbryt"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "Denne kommando viser en menu med kendte v\u00e6rter og beskeder, som v\u00e6rten skal glemme."
+		"message": "Denne kommandoen viser en meny med kjente verter, og ber verten om \u00e5 glemme."
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "Glem en kendt SSH-v\u00e6rt."
+		"message": "Glem en kjent ssh-vert."
 	},
 	"cmd_ssh_help": {
-		"message": "Parametrene |username| og |hostname| er p\u00e5kr\u00e6vede, |port| er valgfri. Hvis porten ikke er angivet, s\u00e6ttes 22 som standard."
+		"message": "Parametrene for |username| og |hostname| er p\u00e5krevd, |port| er valgfritt. Hvis porten ikke er spesifisert, settes den til 22 som standard."
 	},
 	"cmd_ssh_title": {
-		"message": "\u00c5bner en ny SSH-session."
+		"message": "\u00c5pner en ny SSH-\u00f8kt."
 	},
 	"command_complete": {
-		"message": "Kommandoen $1 blev afsluttet med statuskoden $2.",
+		"message": "$1-kommandoen ble avsluttet med statuskoden $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -43,13 +43,13 @@
 		}
 	},
 	"connect_button_label": {
-		"message": "Opret forbindelse"
+		"message": "Koble til"
 	},
 	"connect_or_exit_message": {
-		"message": "Vil du v\u00e6lge (C) en anden forbindelse eller afslutte (X)?"
+		"message": "Vil du velge en annen tilkobling (C) eller avslutte (X)?"
 	},
 	"connecting": {
-		"message": "Opretter forbindelse til $1...",
+		"message": "Kobler til $1 \u2026",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -57,13 +57,13 @@
 		}
 	},
 	"del_keycap": {
-		"message": "[DELETE]"
+		"message": "[DEL]"
 	},
 	"delete_button_label": {
-		"message": "Slet"
+		"message": "Slett"
 	},
 	"disconnect_message": {
-		"message": "NaCl-pluginnet blev afsluttet med statuskoden $1.",
+		"message": "NaCl-programtillegget ble avsluttet med statuskoden $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -74,22 +74,22 @@
 		"message": "[ENTER]"
 	},
 	"field_argstr_aria_label": {
-		"message": "yderligere SSH-argumenter"
+		"message": "flere SSH-argumenter"
 	},
 	"field_argstr_placeholder": {
-		"message": "ekstra kommandolinjeargumenter"
+		"message": "ekstra argumenter for kommandolinjen"
 	},
 	"field_description_aria_label": {
 		"message": "beskrivelse"
 	},
 	"field_description_placeholder": {
-		"message": "brugernavn@hostname eller tekst i frit format"
+		"message": "brukernavn@vertsnavn eller tekst i et fritt format"
 	},
 	"field_hostname_aria_label": {
-		"message": "hostname"
+		"message": "vertsnavn"
 	},
 	"field_hostname_placeholder": {
-		"message": "hostname"
+		"message": "vertsnavn"
 	},
 	"field_identity_aria_label": {
 		"message": "identitet"
@@ -101,25 +101,25 @@
 		"message": "port"
 	},
 	"field_relay_options_aria_label": {
-		"message": "valgmuligheder for rel\u00e6server"
+		"message": "alternativer for rel\u00e9tjener"
 	},
 	"field_relay_options_placeholder": {
-		"message": "valgmuligheder for rel\u00e6server"
+		"message": "alternativer for rel\u00e9tjener"
 	},
 	"field_terminal_profile_aria_label": {
-		"message": "navn p\u00e5 terminalprofil"
+		"message": "navn p\u00e5 terminalprofilen"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "standard"
 	},
 	"field_username_aria_label": {
-		"message": "brugernavn"
+		"message": "brukernavn"
 	},
 	"field_username_placeholder": {
-		"message": "brugernavn"
+		"message": "brukernavn"
 	},
 	"found_relay": {
-		"message": "Registreret rel\u00e6server: $1",
+		"message": "Fant denne rel\u00e9tjeneren: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -133,10 +133,10 @@
 		"message": "filimport"
 	},
 	"import_link_label": {
-		"message": "Import\u00e9r..."
+		"message": "Import\u00e9r\u2026"
 	},
 	"initializing_relay": {
-		"message": "S\u00f8ger efter rel\u00e6server via: $1",
+		"message": "Ser etter rel\u00e9tjeneren via $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -144,7 +144,7 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "JSON kunne ikke parses i \"$1\"",
+		"message": "Kunne ikke analysere JSON-filen i '$1'",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "Ingen kendte v\u00e6rter, intet at glemme."
+		"message": "Ingen kjente verter, ingenting \u00e5 glemme."
 	},
 	"known_hosts_prompt": {
-		"message": "V\u00e6lg en v\u00e6rt, der skal glemmes [1-$1]:",
+		"message": "Velg en vert du kan glemme [1\u2013$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -163,10 +163,10 @@
 		}
 	},
 	"known_hosts_title": {
-		"message": "Kendte v\u00e6rter:"
+		"message": "Kjente verter:"
 	},
 	"loading_label": {
-		"message": "Indl\u00e6ser..."
+		"message": "Laster inn \u2026"
 	},
 	"missing_param": {
 		"message": "Manglende parameter: $1",
@@ -177,19 +177,19 @@
 		}
 	},
 	"mount_button_label": {
-		"message": "SFTP-tilslutning"
+		"message": "SFTP-tilkobling"
 	},
 	"mounted_message": {
-		"message": "Tilsluttet"
+		"message": "Tilkoblet."
 	},
 	"notify_copy": {
-		"message": "Markeringen blev kopieret"
+		"message": "Utvalget er kopiert"
 	},
 	"ok_button_label": {
 		"message": "OK"
 	},
 	"open_as_window_tip": {
-		"message": "[Pro Tip] Brug \"\u00c5bn som vindue\" for at undg\u00e5, at Control-W lukker din terminal.\n[Pro Tip] Se $1 for at f\u00e5 flere oplysninger.",
+		"message": "[Profftips] Bruk \u00ab\u00c5pne som vindu\u00bb for \u00e5 hindre at terminalen lukkes av CTRL + W.\n[Profftips] Se $1 for \u00e5 f\u00e5 mer informasjon.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -197,55 +197,55 @@
 		}
 	},
 	"options_button_label": {
-		"message": "Valgmuligheder"
+		"message": "Alternativer"
 	},
 	"plugin_loading": {
-		"message": "Indl\u00e6ser pluginnet NaCl..."
+		"message": "Laster inn NaCl-programtillegget \u2026"
 	},
 	"plugin_loading_complete": {
-		"message": " udf\u00f8rt."
+		"message": "ferdig."
 	},
 	"pref_backup_filename": {
-		"message": "Backup af Secure Shell-pr\u00e6ferencer.json"
+		"message": "Sikkerhetskopi av Secure Shell-innstillinger.json"
 	},
 	"preferences_header": {
-		"message": "Profilindstillinger"
+		"message": "Profilinnstillinger"
 	},
 	"preferences_reset": {
-		"message": "Alle pr\u00e6ferencer blev nulstillet"
+		"message": "Alle innstillingene er tilbakestilt."
 	},
 	"reconnect_message": {
-		"message": "Vil du genoprette forbindelsen (R), v\u00e6lge en anden forbindelse (C) eller afslutte (X)?"
+		"message": "Vil du koble til p\u00e5 nytt (R), velge en annen tilkobling (C) eller avslutte (X)?"
 	},
 	"relay_retry": {
-		"message": "Pr\u00f8ver igen\u2026"
+		"message": "Pr\u00f8ver p\u00e5 nytt \u2026"
 	},
 	"restore_prefs": {
-		"message": "Gendan sikkerhedskopi"
+		"message": "Gjenopprett fra sikkerhetskopi"
 	},
 	"shortcut_list_aria_label": {
-		"message": "gemte forbindelser"
+		"message": "lagrede tilkoblinger"
 	},
 	"ssh_argstr_label": {
 		"message": "SSH-argumenter"
 	},
 	"terminal_preview_label": {
-		"message": "Eksempelvisning"
+		"message": "Forh\u00e5ndsvisning"
 	},
 	"terminal_profile_label": {
-		"message": "Nuv\u00e6rende profil"
+		"message": "N\u00e5v\u00e6rende profil"
 	},
 	"unexpected_error": {
-		"message": "Der opstod en uventet fejl. Du kan f\u00e5 flere oplysninger i JavaScript-konsollen."
+		"message": "Det har oppst\u00e5tt en uventet feil. Du finner mer informasjon i JavaScript-konsollen."
 	},
 	"unmount_button_label": {
-		"message": "Fjern tilslutning til SFTP"
+		"message": "Koble fra SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "Der er en tilg\u00e6ngelig opdatering. Luk alle vinduer."
+		"message": "En oppdatering er tilgjengelig. Lukk alle vinduer."
 	},
 	"welcome_faq": {
-		"message": "Svar p\u00e5 ofte stillede sp\u00f8rgsm\u00e5l: $1 (tryk p\u00e5 ctrl, og hold knappen nede, mens du klikker p\u00e5 linket, for at \u00e5bne det)",
+		"message": "Svar p\u00e5 vanlige sp\u00f8rsm\u00e5l: $1 (Ctrl-klikk p\u00e5 linker for \u00e5 \u00e5pne dem)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -253,7 +253,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "Velkommen til version $2 af $1.",
+		"message": "Velkommen til versjon $2 av $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "Konfigurer Chrome-menuen -> V\u00e6lg 100 % zoom"
+		"message": "Sett Zoom til 100\u00a0% i Chrome-menyen"
 	}
 }

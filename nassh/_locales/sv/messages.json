@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"Det g\u00e5r inte att analysera destinationen: $1","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"Avbryt"},"cmd_ssh_forget_host_help":{"message":"Kommandot visar v\u00e4rdar som vi k\u00e4nner till i en meny och fr\u00e5gar vilken v\u00e4rd som ska gl\u00f6mmas bort."},"cmd_ssh_forget_host_title":{"message":"Gl\u00f6m en k\u00e4nd ssh-v\u00e4rd."},"cmd_ssh_help":{"message":"Parametrarna |username| och |hostname| \u00e4r obligatoriska, |port| \u00e4r valfri. Om du inte anger en port blir den automatiskt 22."},"cmd_ssh_title":{"message":"\u00d6ppnar en ny SSH-session."},"command_complete":{"message":"Kommandot $1 har slutf\u00f6rts med slutkoden $2. Du kan st\u00e4nga det h\u00e4r f\u00f6nstret.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"Ansluter till $1, port $2 ...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Anslut"},"connect_message":{"message":"Ange en destination som du vill ansluta till."},"destination_pattern":{"message":"anv\u00e4ndarnamn@v\u00e4rdnamn[:port]"},"known_hosts_empty":{"message":"Det finns inga k\u00e4nda v\u00e4rdar. Ingen information att gl\u00f6mma."},"known_hosts_prompt":{"message":"V\u00e4lj en v\u00e4rd som ska gl\u00f6mmas [1\u2013$1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"K\u00e4nda v\u00e4rdar:"},"missing_param":{"message":"Parametern $1 saknas","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"OK"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"Ett ov\u00e4ntat fel uppstod. Du hittar mer information i JavaScript-konsolen."},"welcome":{"message":"V\u00e4lkommen! \u00d6ppna en ny ssh-anslutning med kommandot \"\u00f6ppna\"."},"welcome_tip":{"message":"Tips! Du kan spara sessionen som ett bokm\u00e4rke i webbl\u00e4saren."}}
+{
+	"already_mounted_message": {
+		"message": "Filsystemet har redan monterats."
+	},
+	"backup_prefs": {
+		"message": "Spara s\u00e4kerhetskopia"
+	},
+	"bad_destination": {
+		"message": "Det g\u00e5r inte att analysera destinationen: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "Om du st\u00e4nger fliken avslutas sessionen."
+	},
+	"cancel_button_label": {
+		"message": "Avbryt"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Kommandot visar v\u00e4rdar som vi k\u00e4nner till i en meny och fr\u00e5gar vilken v\u00e4rd som ska gl\u00f6mmas bort."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "Gl\u00f6m en k\u00e4nd ssh-v\u00e4rd."
+	},
+	"cmd_ssh_help": {
+		"message": "Parametrarna |username| och |hostname| \u00e4r obligatoriska, |port| \u00e4r valfri. Om du inte anger en port blir den automatiskt 22."
+	},
+	"cmd_ssh_title": {
+		"message": "\u00d6ppnar en ny SSH-session."
+	},
+	"command_complete": {
+		"message": "Kommandot $1 avslutades med statuskoden $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Anslut"
+	},
+	"connect_or_exit_message": {
+		"message": "Vill du (v)\u00e4lja en annan anslutning eller a(v)sluta?"
+	},
+	"connecting": {
+		"message": "Ansluter till $1 \u2026",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "Radera"
+	},
+	"disconnect_message": {
+		"message": "NaCl-plugin avslutades med statuskoden $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_aria_label": {
+		"message": "ytterligare ssh-argument"
+	},
+	"field_argstr_placeholder": {
+		"message": "extra kommandoradsargument"
+	},
+	"field_description_aria_label": {
+		"message": "beskrivning"
+	},
+	"field_description_placeholder": {
+		"message": "anv\u00e4ndarnamn@v\u00e4rdnamn eller formaliafri text"
+	},
+	"field_hostname_aria_label": {
+		"message": "v\u00e4rdnamn"
+	},
+	"field_hostname_placeholder": {
+		"message": "v\u00e4rdnamn"
+	},
+	"field_identity_aria_label": {
+		"message": "identitet"
+	},
+	"field_port_aria_label": {
+		"message": "port"
+	},
+	"field_port_placeholder": {
+		"message": "port"
+	},
+	"field_relay_options_aria_label": {
+		"message": "rel\u00e4alternativ"
+	},
+	"field_relay_options_placeholder": {
+		"message": "rel\u00e4alternativ"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "terminalens profilnamn"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "standard"
+	},
+	"field_username_aria_label": {
+		"message": "anv\u00e4ndarnamn"
+	},
+	"field_username_placeholder": {
+		"message": "anv\u00e4ndarnamn"
+	},
+	"found_relay": {
+		"message": "Hittad rel\u00e4server: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Identitet"
+	},
+	"import_link_aria_label": {
+		"message": "filimport"
+	},
+	"import_link_label": {
+		"message": "Importera \u2026"
+	},
+	"initializing_relay": {
+		"message": "S\u00f6ker efter rel\u00e4server via $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "Det gick inte att analysera JSON i $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "Det finns inga k\u00e4nda v\u00e4rdar. Ingen information att gl\u00f6mma."
+	},
+	"known_hosts_prompt": {
+		"message": "V\u00e4lj en v\u00e4rd som ska gl\u00f6mmas [1\u2013$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "K\u00e4nda v\u00e4rdar:"
+	},
+	"loading_label": {
+		"message": "L\u00e4ser in \u2026"
+	},
+	"missing_param": {
+		"message": "Parametern $1 saknas",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "SFTP-montering"
+	},
+	"mounted_message": {
+		"message": "Filsystemet har monterats."
+	},
+	"notify_copy": {
+		"message": "Valet har kopierats"
+	},
+	"ok_button_label": {
+		"message": "OK"
+	},
+	"open_as_window_tip": {
+		"message": "[Pro Tip] Anv\u00e4nd \u00d6ppna som f\u00f6nster f\u00f6r att f\u00f6rhindra att terminalen st\u00e4ngs av Ctrl-W.\n[Pro Tip] Mer information finns p\u00e5 $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Alternativ"
+	},
+	"plugin_loading": {
+		"message": "L\u00e4ser in plugin-programmet NaCl ..."
+	},
+	"plugin_loading_complete": {
+		"message": " klart."
+	},
+	"pref_backup_filename": {
+		"message": "Secure Shell Preferences Backup.json"
+	},
+	"preferences_header": {
+		"message": "Profilinst\u00e4llningar"
+	},
+	"preferences_reset": {
+		"message": "Alla inst\u00e4llningar har \u00e5terst\u00e4llts."
+	},
+	"reconnect_message": {
+		"message": "Vill du (\u00e5)teransluta, (v)\u00e4lja en annan anslutning eller a(v)sluta?"
+	},
+	"relay_retry": {
+		"message": "F\u00f6rs\u00f6ker igen \u2026"
+	},
+	"restore_prefs": {
+		"message": "\u00c5terst\u00e4ll s\u00e4kerhetskopia"
+	},
+	"shortcut_list_aria_label": {
+		"message": "sparade anslutningar"
+	},
+	"ssh_argstr_label": {
+		"message": "SSH-argument"
+	},
+	"terminal_preview_label": {
+		"message": "F\u00f6rhandsgranska"
+	},
+	"terminal_profile_label": {
+		"message": "Aktuell profil"
+	},
+	"unexpected_error": {
+		"message": "Ett ov\u00e4ntat fel uppstod. Du hittar mer information i JavaScript-konsolen."
+	},
+	"unmount_button_label": {
+		"message": "Ta bort SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "En uppdatering finns tillg\u00e4nglig. St\u00e4ng alla f\u00f6nster."
+	},
+	"welcome_faq": {
+		"message": "Svar p\u00e5 vanliga fr\u00e5gor: $1 (Ctrl + klicka p\u00e5 l\u00e4nkarna f\u00f6r att \u00f6ppna dem)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "H\u00e4r \u00e4r $1-versionen $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "\u00d6ppna Chrome-menyn > st\u00e4ll in Zoom p\u00e5 100 %"
+	}
+}

@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"Nie mo\u017cna przeanalizowa\u0107 celu: $1","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"Anuluj"},"cmd_ssh_forget_host_help":{"message":"To polecenie powoduje wy\u015bwietlenie menu znanych host\u00f3w i monituje o podanie hosta, kt\u00f3ry ma zosta\u0107 zapomniany."},"cmd_ssh_forget_host_title":{"message":"Zapomnij znanego hosta ssh."},"cmd_ssh_help":{"message":"Parametry |username| i |hostname| s\u0105 wymagane, a |port| jest opcjonalny. Je\u015bli port nie jest okre\u015blony, stosowana jest warto\u015b\u0107 domy\u015blna 22."},"cmd_ssh_title":{"message":"Otwiera now\u0105 sesj\u0119 SSH."},"command_complete":{"message":"Polecenie $1 zosta\u0142o uko\u0144czone z kodem $2.  Zamknij to okno w dowolnej chwili.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"\u0141\u0105czenie z $1, port $2...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Po\u0142\u0105cz"},"connect_message":{"message":"Wprowad\u017a cel, z kt\u00f3rym chcesz si\u0119 po\u0142\u0105czy\u0107."},"destination_pattern":{"message":"username@hostname[:port]"},"known_hosts_empty":{"message":"Brak znanych host\u00f3w. Nie ma nic do zapomnienia."},"known_hosts_prompt":{"message":"Wybierz hosta do zapomnienia [1-$1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"Znane hosty:"},"missing_param":{"message":"Brak parametru: $1","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"OK"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"Wyst\u0105pi\u0142 niespodziewany b\u0142\u0105d. Aby uzyska\u0107 wi\u0119cej informacji, sprawd\u017a konsol\u0119 JavaScript."},"welcome":{"message":"Witaj. Otw\u00f3rz nowe po\u0142\u0105czenie ssh za pomoc\u0105 polecenia \u201eotw\u00f3rz\u201d."},"welcome_tip":{"message":"Wskaz\u00f3wka: mo\u017cesz zapisa\u0107 t\u0119 sesj\u0119 jako zak\u0142adk\u0119 w przegl\u0105darce."}}
+{
+	"already_mounted_message": {
+		"message": "System plik\u00f3w jest ju\u017c pod\u0142\u0105czony."
+	},
+	"backup_prefs": {
+		"message": "Zapisz kopi\u0119 zapasow\u0105"
+	},
+	"bad_destination": {
+		"message": "Nie mo\u017cna przeanalizowa\u0107 celu: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "Zamkni\u0119cie tej karty spowoduje od\u0142\u0105czenie bie\u017c\u0105cej sesji."
+	},
+	"cancel_button_label": {
+		"message": "Anuluj"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "To polecenie powoduje wy\u015bwietlenie menu znanych host\u00f3w i monituje o podanie hosta, kt\u00f3ry ma zosta\u0107 zapomniany."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "Zapomnij znanego hosta ssh."
+	},
+	"cmd_ssh_help": {
+		"message": "Parametry |username| i |hostname| s\u0105 wymagane, a |port| jest opcjonalny. Je\u015bli port nie jest okre\u015blony, stosowana jest warto\u015b\u0107 domy\u015blna 22."
+	},
+	"cmd_ssh_title": {
+		"message": "Otwiera now\u0105 sesj\u0119 SSH."
+	},
+	"command_complete": {
+		"message": "Polecenie $1 zosta\u0142o wykonane. Kod stanu: $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Po\u0142\u0105cz"
+	},
+	"connect_or_exit_message": {
+		"message": "Wybierz (C) inne po\u0142\u0105czenie lub Zako\u0144cz (X)."
+	},
+	"connecting": {
+		"message": "\u0141\u0105cz\u0119 z: $1\u2026",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "Usu\u0144"
+	},
+	"disconnect_message": {
+		"message": "Wtyczka NaCl zako\u0144czy\u0142a dzia\u0142anie. Kod stanu: $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_aria_label": {
+		"message": "dodatkowe argumenty ssh"
+	},
+	"field_argstr_placeholder": {
+		"message": "dodatkowe argumenty wiersza polece\u0144"
+	},
+	"field_description_aria_label": {
+		"message": "opis"
+	},
+	"field_description_placeholder": {
+		"message": "nazwa_u\u017cytkownika@nazwa_hosta lub dowolny tekst"
+	},
+	"field_hostname_aria_label": {
+		"message": "nazwa hosta"
+	},
+	"field_hostname_placeholder": {
+		"message": "nazwa hosta"
+	},
+	"field_identity_aria_label": {
+		"message": "to\u017csamo\u015b\u0107"
+	},
+	"field_port_aria_label": {
+		"message": "port"
+	},
+	"field_port_placeholder": {
+		"message": "port"
+	},
+	"field_relay_options_aria_label": {
+		"message": "opcje serwera przekazuj\u0105cego"
+	},
+	"field_relay_options_placeholder": {
+		"message": "opcje serwera przekazuj\u0105cego"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "nazwa profilu w terminalu"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "domy\u015blny"
+	},
+	"field_username_aria_label": {
+		"message": "nazwa u\u017cytkownika"
+	},
+	"field_username_placeholder": {
+		"message": "nazwa u\u017cytkownika"
+	},
+	"found_relay": {
+		"message": "Znaleziono serwer przekazuj\u0105cy: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "To\u017csamo\u015b\u0107"
+	},
+	"import_link_aria_label": {
+		"message": "import plik\u00f3w"
+	},
+	"import_link_label": {
+		"message": "Importuj\u2026"
+	},
+	"initializing_relay": {
+		"message": "Szukam serwera przekazuj\u0105cego przy u\u017cyciu: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "Nie uda\u0142o si\u0119 odczyta\u0107 elementu JSON w: \u201e$1\u201d",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "Brak znanych host\u00f3w. Nie ma nic do zapomnienia."
+	},
+	"known_hosts_prompt": {
+		"message": "Wybierz hosta do zapomnienia [1-$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "Znane hosty:"
+	},
+	"loading_label": {
+		"message": "Wczytuj\u0119\u2026"
+	},
+	"missing_param": {
+		"message": "Brak parametru: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "Pod\u0142\u0105cz SFTP"
+	},
+	"mounted_message": {
+		"message": "Pod\u0142\u0105czono."
+	},
+	"notify_copy": {
+		"message": "Wyb\u00f3r skopiowany"
+	},
+	"ok_button_label": {
+		"message": "OK"
+	},
+	"open_as_window_tip": {
+		"message": "[Wskaz\u00f3wka dla zaawansowanych] U\u017cyj opcji \u201eOtw\u00f3rz jako okno\u201d, by skr\u00f3t Control-W nie zamyka\u0142 terminala.\n[Wskaz\u00f3wka dla zaawansowanych] Wi\u0119cej informacji znajdziesz na $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Opcje"
+	},
+	"plugin_loading": {
+		"message": "\u0141aduj\u0119 wtyczk\u0119 NaCl..."
+	},
+	"plugin_loading_complete": {
+		"message": " gotowe."
+	},
+	"pref_backup_filename": {
+		"message": "Kopia_zapasowa_ustawie\u0144_bezpiecznej_pow\u0142oki.json"
+	},
+	"preferences_header": {
+		"message": "Ustawienia profilu"
+	},
+	"preferences_reset": {
+		"message": "Wszystkie ustawienia zosta\u0142y zresetowane."
+	},
+	"reconnect_message": {
+		"message": "Po\u0142\u0105cz ponownie (R), Wybierz inne po\u0142\u0105czenie (C) lub Zako\u0144cz (X)."
+	},
+	"relay_retry": {
+		"message": "Pr\u00f3buj\u0119 ponownie\u2026"
+	},
+	"restore_prefs": {
+		"message": "Przywr\u00f3\u0107 dane z kopii zapasowej"
+	},
+	"shortcut_list_aria_label": {
+		"message": "zapisane po\u0142\u0105czenia"
+	},
+	"ssh_argstr_label": {
+		"message": "Argumenty SSH"
+	},
+	"terminal_preview_label": {
+		"message": "Podgl\u0105d"
+	},
+	"terminal_profile_label": {
+		"message": "Bie\u017c\u0105cy profil"
+	},
+	"unexpected_error": {
+		"message": "Wyst\u0105pi\u0142 nieoczekiwany b\u0142\u0105d. Aby dowiedzie\u0107 si\u0119 wi\u0119cej, sprawd\u017a konsol\u0119 JavaScript."
+	},
+	"unmount_button_label": {
+		"message": "Od\u0142\u0105cz SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "Dost\u0119pna jest aktualizacja. Zamknij wszystkie okna."
+	},
+	"welcome_faq": {
+		"message": "Odpowiedzi na najcz\u0119stsze pytania: $1 (naci\u015bnij Ctrl i kliknij linki, by je otworzy\u0107)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "$1, wersja $2 \u2013 witamy.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "W menu Chrome ustaw powi\u0119kszenie na 100%"
+	}
+}

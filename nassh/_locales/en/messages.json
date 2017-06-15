@@ -1,479 +1,402 @@
 {
-  "WELCOME_VERSION": {
-    "message": "Welcome to $NAME$ version $VERSION$.",
-    "description": "Message displayed to the user when the application is first launched",
-    "placeholders": {
-      "name": {
-        "content": "$1",
-        "example": "Secure Shell"
-      },
-      "version": {
-        "content": "$2",
-        "example": "1.0"
-      }
-    }
-  },
-
-  "WELCOME_FAQ": {
-    "message": "Answers to Frequently Asked Questions: $URL$ (ctrl+click on links to open)",
-    "description": "A link to the frequently asked questions, displayed at startup",
-    "placeholders": {
-      "url": {
-        "content": "$1",
-        "example": "https://goo.gl/muppJj"
-      }
-    }
-  },
-
-  "WELCOME_CHANGELOG": {
-    "message": "ChangeLog/release notes: $URL$",
-    "description": "A link to the ChangeLog file, displayed at startup",
-    "placeholders": {
-      "url": {
-        "content": "$1",
-        "example": "https://goo.gl/YnmXOs"
-      }
-    }
-  },
-
-  "WELCOME_RELEASE_HIGHLIGHTS": {
-    "message": "Major changes since $VER$:",
-    "description": "A header for a list of important changes, displayed at startup",
-    "placeholders": {
-      "ver": {
-        "content": "$1",
-        "example": "0.8.35.6"
-      }
-    }
-  },
-
-  "OPEN_AS_WINDOW_TIP": {
-    "message": "[Pro Tip] Use 'Open as Window' to prevent Control-W from closing your terminal!\r\n[Pro Tip] See $URL$ for more information.",
-    "description": "Message displayed to users who are running Secure Shell in a tab. The [Pro Tip] should be localized (it is slang in the computing world), but can be localized as just 'tip' if easier.",
-    "placeholders": {
-      "url": {
-        "content": "$1",
-        "example": "https://goo.gl/mHrbej"
-      }
-    }
-  },
-
-  "UPDATE_AVAILABLE_TOOLTIP": {
-    "message": "An update is available. Please close all windows.",
-    "description": "A tooltip shown for the chip that indicates an update is available"
-  },
-
-  "NOTIFY_COPY": {
-    "message": "Selection Copied",
-    "description": "Short status message displayed in a terminal overlay when text is automatically copied to the clipboard."
-  },
-
-  "OK_BUTTON_LABEL": {
-    "message": "OK",
-    "description": "The label for the OK button in dialogs."
-  },
-
-  "CANCEL_BUTTON_LABEL": {
-    "message": "Cancel",
-    "description": "The label for the Cancel button in dialogs."
-  },
-
-  "BEFORE_UNLOAD": {
-    "message": "Closing this tab will disconnect this session.",
-    "description": "The message shown to a user when they try to close a tab with an open session."
-  },
-
-  "ZOOM_WARNING": {
-    "message": "Please set Chrome Menu->Zoom to 100%",
-    "description": "Shown in the top/right corner if the web browser zoom setting is not set to 100%. It's a tip to navigate the Chrome browser's menu."
-  },
-
-  "PLUGIN_LOADING": {
-    "message": "Loading NaCl plugin...",
-    "description": "Status message displayed while loading the plugin."
-  },
-
-  "PLUGIN_LOADING_COMPLETE": {
-    "message": " done.",
-    "description": "Appended to PLUGIN_LOADING message when loading is complete."
-  },
-
-  "PLUGIN_LOADING_FAILED": {
-    "message": " failed! :(",
-    "description": "Appended to PLUGIN_LOADING message when loading has failed."
-  },
-
-  "SHORTCUT_LIST_ARIA_LABEL": {
-    "message": "saved connections",
-    "description": "Text use as the aria-label for the 'shortcut-list'."
-  },
-
-  "FIELD_DESCRIPTION_PLACEHOLDER": {
-    "message": "username@hostname or free form text",
-    "description": "Placeholder text for the custom connection name. This string can be fully translated, but it should keep the 'username' and 'hostname' together with an @ sign."
-  },
-
-  "FIELD_DESCRIPTION_ARIA_LABEL": {
-    "message": "description",
-    "description": "Text use as the aria-label for the 'description' field."
-  },
-
-  "FIELD_USERNAME_PLACEHOLDER": {
-    "message": "username",
-    "description": "Placeholder for the remote username for accessing the SSH server."
-  },
-
-  "FIELD_USERNAME_ARIA_LABEL": {
-    "message": "username",
-    "description": "Label for the remote username for accessing the SSH server."
-  },
-
-  "FIELD_HOSTNAME_PLACEHOLDER": {
-    "message": "hostname",
-    "description": "Placeholder for the SSH server hostname."
-  },
-
-  "FIELD_HOSTNAME_ARIA_LABEL": {
-    "message": "hostname",
-    "description": "Label for the SSH server hostname."
-  },
-
-  "FIELD_PORT_PLACEHOLDER": {
-    "message": "port",
-    "description": "Placeholder for the network port."
-  },
-
-  "FIELD_PORT_ARIA_LABEL": {
-    "message": "port",
-    "description": "Label for the network port."
-  },
-
-  "FIELD_RELAY_OPTIONS_PLACEHOLDER": {
-    "message": "SSH relay server options",
-    "description": "Placeholder for command line options to the SSH relay server. The relay server is like a web proxy for connections."
-  },
-
-  "FIELD_RELAY_OPTIONS_ARIA_LABEL": {
-    "message": "relay options",
-    "description": "Label for command line options to the SSH relay server. The relay server is like a web proxy for connections."
-  },
-
-  "IDENTITY_LABEL": {
-    "message": "Identity",
-    "description": "Label for the identity field. The identity is a SSH private key filename used to authenticate with servers."
-  },
-
-  "LOADING_LABEL": {
-    "message": "Loading...",
-    "description": "The text displayed in the identity dropdown list while we load identities (which are SSH private key filenames used to authenticate with servers)."
-  },
-
-  "IMPORT_LINK_LABEL": {
-    "message": "Import...",
-    "description": "Label for the identity import button. It will trigger an 'open file' dialog so users can select a file to import. The identity is a SSH private key file used to authenticate with servers."
-  },
-
-  "IMPORT_LINK_ARIA_LABEL": {
-    "message": "file import",
-    "description": "The aria-label for the Import link."
-  },
-
-  "SSH_ARGSTR_LABEL": {
-    "message": "SSH Arguments",
-    "description": "Label for the optional ssh arguments field. These are command line flags to the ssh program itself."
-  },
-
-  "FIELD_ARGSTR_PLACEHOLDER": {
-    "message": "extra command line arguments",
-    "description": "Placeholder text for the optional ssh arguments field. These are command line flags to the ssh program itself. Translators: the text does not need to be kept lowercase."
-  },
-
-  "TERMINAL_PROFILE_LABEL": {
-    "message": "Current profile",
-    "description": "Label for the current terminal emulator profile name. Profiles are used to customize things like color and fonts."
-  },
-
-  "TERMINAL_PREVIEW_LABEL": {
-    "message": "Preview",
-    "description": "Label for the preview window that allows users to preview their preferences (like color and font choices)."
-  },
-
-  "FIELD_TERMINAL_PROFILE_PLACEHOLDER": {
-    "message": "default",
-    "description": "Placeholder text for the default terminal emulator profile name."
-  },
-
-  "DEL_KEYCAP": {
-    "message": "[DEL]",
-    "description": "The keycap for the delete key, displayed on the delete button. It should be localized, but focus on the intent of it being a reference to the keyboard button."
-  },
-
-  "DELETE_BUTTON_LABEL": {
-    "message": "Delete",
-    "description": "The label for the delete button. Used to delete a specific SSH connection profile. It should be translated as a general term and not as a keyboard key reference."
-  },
-
-  "ENTER_KEYCAP": {
-    "message": "[ENTER]",
-    "description": "The keycap for the enter key, displayed on the connect button. It should be localized, but focus on the intent of it being a reference to the keyboard button."
-  },
-
-  "MOUNT_BUTTON_LABEL": {
-    "message": "SFTP Mount",
-    "description": "The label for the mount button. Used to access (mount) remote directories over SSH."
-  },
-
-  "UNMOUNT_BUTTON_LABEL": {
-    "message": "Unmount SFTP",
-    "description": "The label for the unmount button. Used to access (mount) remote directories over SSH."
-  },
-
-  "CONNECT_BUTTON_LABEL": {
-    "message": "Connect",
-    "description": "The label for the connect button."
-  },
-
-  "OPTIONS_BUTTON_LABEL": {
-    "message": "Options",
-    "description": "The label for the options button."
-  },
-
-  "INITIALIZING_RELAY": {
-    "message": "Looking up relay server using: $HOST$",
-    "description": "Text displayed in the terminal when the user is connecting through a relay server (which is like a web proxy for connections). This shows the host used to look up the relay server system.",
-    "placeholders": {
-      "host": {
-        "content": "$1",
-        "example": "proxy.example.com"
-      }
-    }
-  },
-
-  "FOUND_RELAY": {
-    "message": "Found relay server: $URL$",
-    "description": "Text displayed in the terminal when the user is connecting through a relay server (which is like a web proxy for connections).",
-    "placeholders": {
-      "url": {
-        "content": "$1",
-        "example": "http://proxy.example.com:8023/"
-      }
-    }
-  },
-
-  "RELAY_RETRY": {
-    "message": "Retrying...",
-    "description": "Displayed in a text overlay when we experience an error talking to the relay server (which is like a web proxy for connections)."
-  },
-
-  "CONNECT_BUTTON_LABEL": {
-    "message": "Connect",
-    "description": "Label for the connect button."
-  },
-
-  "COMMAND_COMPLETE": {
-    "message": "The command $NAME$ exited with status code $CODE$.",
-    "description": "Message displayed when the current command has completed and the program has exited (quit running).",
-    "placeholders": {
-      "name": {
-        "content": "$1",
-        "example": "ssh"
-       },
-
-       "code": {
-         "content": "$2",
-         "example": "0"
-       }
-     }
-  },
-
-  "CONNECTING": {
-    "message": "Connecting to $DESTINATION$...",
-    "description": "Status message shown when connecting to a SSH server.",
-    "placeholders": {
-      "destination": {
-        "content": "$1",
-        "example": "username@example.com"
-      }
-    }
-  },
-
-  "UNEXPECTED_ERROR": {
-    "message": "An unexpected error occurred, please check the JavaScript console for more details.",
-    "description": "Generic message displayed when we encounter an unexpected error."
-  },
-
-  "MISSING_PARAM": {
-    "message": "Missing parameter: $NAME$",
-    "description": "Error message displayed when a command is missing a parameter.",
-    "placeholders": {
-      "name": {
-        "content": "$1",
-        "example": "username"
-      }
-    }
-  },
-
-  "BAD_DESTINATION": {
-    "message": "Unable to parse destination: $DEST$",
-    "description": "Error displayed when we can't parse the destination for the ssh command.",
-    "placeholders": {
-      "dest": {
-        "content": "$1",
-        "example": "invalid.destination"
-      }
-    }
-  },
-
-  "KNOWN_HOSTS_TITLE": {
-    "message": "Known hosts:",
-    "description": "Header text displayed before the list of known hosts."
-  },
-
-  "KNOWN_HOSTS_EMPTY": {
-    "message": "No known hosts, nothing to forget.",
-    "description": "Message displayed when there are no hosts to delete."
-  },
-
-  "KNOWN_HOSTS_PROMPT": {
-    "message": "Please select a host to forget [1-$COUNT$]: ",
-    "description": "Prompt displayed by the ssh-forget-host command",
-    "placeholders": {
-      "count": {
-        "content": "$1",
-        "example": "10"
-      }
-    }
-  },
-
-  "CMD_SSH_TITLE": {
-    "message": "Opens a new SSH session.",
-    "description": "One-sentence description for this command."
-  },
-
-  "CMD_SSH_HELP": {
-    "message": "The |username| and |hostname| parameters are required, |port| is optional. If port is not specified it defaults to 22.",
-    "description": "Long form help text for this command. Do not translate the parameter names in |pipes|."
-  },
-
-  "CMD_SSH_FORGET_HOST_TITLE": {
-    "message": "Forget a known ssh host.",
-    "description": "One-sentence description for this command."
-  },
-
-  "CMD_SSH_FORGET_HOST_HELP": {
-    "message": "This command displays a menu of known hosts and prompts for the host to forget.",
-    "description": "Long form help text for this command."
-  },
-
-  "DISCONNECT_MESSAGE": {
-    "message": "NaCl plugin exited with status code $CODE$.",
-    "description": "Message displayed after the plugin exits, but before the reconnect message.",
-    "placeholders": {
-      "code": {
-        "content": "$1",
-        "example": "0"
-      }
-    }
-  },
-
-  "RECONNECT_MESSAGE": {
-    "message": "(R)econnect, (C)hoose another connection, or E(x)it?",
-    "description": "Message displayed after a connection closes. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them after the word is OK like: Exit (X)."
-  },
-
-  "CONNECT_OR_EXIT_MESSAGE": {
-    "message": "(C)hoose another connection or E(x)it?",
-    "description": "Message displayed after a connection closes and the user cannot reconnect. Do not translate the (C) or (X) fields as they are keyboard shortcuts. Placing them after the word is OK like: Exit (X)."
-  },
-
-  "MOUNT_PATH_LABEL": {
-    "message": "Mount Path",
-    "description": "Label for the mount path field. This is the remote directory used for SFTP mounts."
-  },
-
-  "FIELD_MOUNT_PATH_PLACEHOLDER": {
-    "message": "the default path is the user's home directory",
-    "description": "Placeholder text for the mount path field. This is the remote directory used for SFTP mounts."
-  },
-
-  "MOUNTED_MESSAGE": {
-    "message": "Mounted!",
-    "description": "Message displayed after a file system is mounted"
-  },
-
-  "ALREADY_MOUNTED_MESSAGE": {
-    "message": "File system is already mounted!",
-    "description": "Message displayed after an existing file system tries to mount again"
-  },
-
-  "PREFERENCES_HEADER": {
-    "message": "Profile Settings",
-    "description": "Friendly message shown on the preferences (e.g. colors, fonts, etc...) editing page."
-  },
-
-  "PREFERENCES_RESET": {
-    "message": "All preferences reset!",
-    "description": "Message displayed after all preferences (e.g. colors, fonts, etc...) are reset."
-  },
-
-  "BACKUP_PREFS": {
-    "message": "Save Backup",
-    "description": "Label for the link in the options page that lets the user save a backup copy of their preferences (e.g. colors, fonts, etc...)."
-  },
-
-  "RESTORE_PREFS": {
-    "message": "Restore Backup",
-    "description": "Label for the link in the options page that lets the user restore their preferences (e.g. colors, font, etc...)."
-  },
-
-  "PREF_BACKUP_FILENAME": {
-    "message": "Secure Shell Preferences Backup.json",
-    "description": "Default filename for the preferences backup file. The filename should be translated, but the '.json' suffix should be retained."
-  },
-
-  "JSON_PARSE_ERROR": {
-    "message": "Could not parse JSON in '$KEY$': $ERROR$",
-    "description": "Error message shown when parsing JSON data failed. The $KEY$ is a preference name, and the quote style may be changed as needed. $ERROR$ is the failure message. Neither are translated currently.",
-    "placeholders": {
-      "key": {
-        "content": "$1",
-        "example": "cursor-blink"
-      },
-      "error": {
-        "content": "$2",
-        "example": "SyntaxError: Unexpected end of JSON input"
-      }
-    }
-  },
-
-  "OMNIBOX_DEFAULT": {
-    "message": "<url><match>user@hostname[:port]</match></url> Connect to a saved profile or a new ssh system",
-    "description": "Default help text as a tip in the omnibox. Do not translate the <url> and <match> tags."
-  },
-
-  "CONSOLE_CROSH_OPTIONS_NOTICE": {
-    "message": "Did you know there is a dedicated options page?\nNo need to mess with term_ directly anymore!\nPress $SHORTCUT$ to open it, or click:\n$URL$",
-    "description": "Shown to users who open up the JavaScript developer console. Direct them to the options page instead.",
-    "placeholders": {
-      "shortcut": {
-        "content": "$1",
-        "example": "Ctrl-Shift-P"
-      },
-      "url": {
-        "content": "$2",
-        "example": "chrome-extension://okddffdblfhhnmhodogpojmfkjmhinfp/html/nassh_preferences_editor.html"
-      }
-    }
-  },
-
-  "CONSOLE_NASSH_OPTIONS_NOTICE": {
-    "message": "Did you know there is a dedicated options page?\nNo need to mess with term_ directly anymore!\n$URL$",
-    "description": "Shown to users who open up the JavaScript developer console. Direct them to the options page instead.",
-    "placeholders": {
-      "url": {
-        "content": "$1",
-        "example": "chrome-extension://okddffdblfhhnmhodogpojmfkjmhinfp/html/nassh_preferences_editor.html"
-      }
-    }
-  }
+	"ALREADY_MOUNTED_MESSAGE": {
+		"description": "Message displayed after an existing file system tries to mount again",
+		"message": "File system is already mounted!"
+	},
+	"BACKUP_PREFS": {
+		"description": "Label for the link in the options page that lets the user save a backup copy of their preferences (e.g. colors, fonts, etc...).",
+		"message": "Save Backup"
+	},
+	"BAD_DESTINATION": {
+		"description": "Error displayed when we can't parse the destination for the ssh command.",
+		"message": "Unable to parse destination: $DEST$",
+		"placeholders": {
+			"dest": {
+				"content": "$1",
+				"example": "invalid.destination"
+			}
+		}
+	},
+	"BEFORE_UNLOAD": {
+		"description": "The message shown to a user when they try to close a tab with an open session.",
+		"message": "Closing this tab will disconnect this session."
+	},
+	"CANCEL_BUTTON_LABEL": {
+		"description": "The label for the Cancel button in dialogs.",
+		"message": "Cancel"
+	},
+	"CMD_SSH_FORGET_HOST_HELP": {
+		"description": "Long form help text for this command.",
+		"message": "This command displays a menu of known hosts and prompts for the host to forget."
+	},
+	"CMD_SSH_FORGET_HOST_TITLE": {
+		"description": "One-sentence description for this command.",
+		"message": "Forget a known ssh host."
+	},
+	"CMD_SSH_HELP": {
+		"description": "Long form help text for this command. Do not translate the parameter names in |pipes|.",
+		"message": "The |username| and |hostname| parameters are required, |port| is optional. If port is not specified it defaults to 22."
+	},
+	"CMD_SSH_TITLE": {
+		"description": "One-sentence description for this command.",
+		"message": "Opens a new SSH session."
+	},
+	"COMMAND_COMPLETE": {
+		"description": "Message displayed when the current command has completed and the program has exited (quit running).",
+		"message": "The command $NAME$ exited with status code $CODE$.",
+		"placeholders": {
+			"code": {
+				"content": "$2",
+				"example": "0"
+			},
+			"name": {
+				"content": "$1",
+				"example": "ssh"
+			}
+		}
+	},
+	"CONNECTING": {
+		"description": "Status message shown when connecting to a SSH server.",
+		"message": "Connecting to $DESTINATION$...",
+		"placeholders": {
+			"destination": {
+				"content": "$1",
+				"example": "username@example.com"
+			}
+		}
+	},
+	"CONNECT_BUTTON_LABEL": {
+		"description": "Label for the connect button.",
+		"message": "Connect"
+	},
+	"CONNECT_OR_EXIT_MESSAGE": {
+		"description": "Message displayed after a connection closes and the user cannot reconnect. Do not translate the (C) or (X) fields as they are keyboard shortcuts. Placing them after the word is OK like: Exit (X).",
+		"message": "(C)hoose another connection or E(x)it?"
+	},
+	"CONSOLE_CROSH_OPTIONS_NOTICE": {
+		"description": "Shown to users who open up the JavaScript developer console. Direct them to the options page instead.",
+		"message": "Did you know there is a dedicated options page?\nNo need to mess with term_ directly anymore!\nPress $SHORTCUT$ to open it, or click:\n$URL$",
+		"placeholders": {
+			"shortcut": {
+				"content": "$1",
+				"example": "Ctrl-Shift-P"
+			},
+			"url": {
+				"content": "$2",
+				"example": "chrome-extension://okddffdblfhhnmhodogpojmfkjmhinfp/html/nassh_preferences_editor.html"
+			}
+		}
+	},
+	"CONSOLE_NASSH_OPTIONS_NOTICE": {
+		"description": "Shown to users who open up the JavaScript developer console. Direct them to the options page instead.",
+		"message": "Did you know there is a dedicated options page?\nNo need to mess with term_ directly anymore!\n$URL$",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "chrome-extension://okddffdblfhhnmhodogpojmfkjmhinfp/html/nassh_preferences_editor.html"
+			}
+		}
+	},
+	"DELETE_BUTTON_LABEL": {
+		"description": "The label for the delete button. Used to delete a specific SSH connection profile. It should be translated as a general term and not as a keyboard key reference.",
+		"message": "Delete"
+	},
+	"DEL_KEYCAP": {
+		"description": "The keycap for the delete key, displayed on the delete button. It should be localized, but focus on the intent of it being a reference to the keyboard button.",
+		"message": "[DEL]"
+	},
+	"DISCONNECT_MESSAGE": {
+		"description": "Message displayed after the plugin exits, but before the reconnect message.",
+		"message": "NaCl plugin exited with status code $CODE$.",
+		"placeholders": {
+			"code": {
+				"content": "$1",
+				"example": "0"
+			}
+		}
+	},
+	"ENTER_KEYCAP": {
+		"description": "The keycap for the enter key, displayed on the connect button. It should be localized, but focus on the intent of it being a reference to the keyboard button.",
+		"message": "[ENTER]"
+	},
+	"FIELD_ARGSTR_PLACEHOLDER": {
+		"description": "Placeholder text for the optional ssh arguments field. These are command line flags to the ssh program itself. Translators: the text does not need to be kept lowercase.",
+		"message": "extra command line arguments"
+	},
+	"FIELD_DESCRIPTION_ARIA_LABEL": {
+		"description": "Text use as the aria-label for the 'description' field.",
+		"message": "description"
+	},
+	"FIELD_DESCRIPTION_PLACEHOLDER": {
+		"description": "Placeholder text for the custom connection name. This string can be fully translated, but it should keep the 'username' and 'hostname' together with an @ sign.",
+		"message": "username@hostname or free form text"
+	},
+	"FIELD_HOSTNAME_ARIA_LABEL": {
+		"description": "Label for the SSH server hostname.",
+		"message": "hostname"
+	},
+	"FIELD_HOSTNAME_PLACEHOLDER": {
+		"description": "Placeholder for the SSH server hostname.",
+		"message": "hostname"
+	},
+	"FIELD_MOUNT_PATH_PLACEHOLDER": {
+		"description": "Placeholder text for the mount path field. This is the remote directory used for SFTP mounts.",
+		"message": "the default path is the user's home directory"
+	},
+	"FIELD_PORT_ARIA_LABEL": {
+		"description": "Label for the network port.",
+		"message": "port"
+	},
+	"FIELD_PORT_PLACEHOLDER": {
+		"description": "Placeholder for the network port.",
+		"message": "port"
+	},
+	"FIELD_RELAY_OPTIONS_ARIA_LABEL": {
+		"description": "Label for command line options to the SSH relay server. The relay server is like a web proxy for connections.",
+		"message": "relay options"
+	},
+	"FIELD_RELAY_OPTIONS_PLACEHOLDER": {
+		"description": "Placeholder for command line options to the SSH relay server. The relay server is like a web proxy for connections.",
+		"message": "SSH relay server options"
+	},
+	"FIELD_TERMINAL_PROFILE_PLACEHOLDER": {
+		"description": "Placeholder text for the default terminal emulator profile name.",
+		"message": "default"
+	},
+	"FIELD_USERNAME_ARIA_LABEL": {
+		"description": "Label for the remote username for accessing the SSH server.",
+		"message": "username"
+	},
+	"FIELD_USERNAME_PLACEHOLDER": {
+		"description": "Placeholder for the remote username for accessing the SSH server.",
+		"message": "username"
+	},
+	"FOUND_RELAY": {
+		"description": "Text displayed in the terminal when the user is connecting through a relay server (which is like a web proxy for connections).",
+		"message": "Found relay server: $URL$",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "http://proxy.example.com:8023/"
+			}
+		}
+	},
+	"IDENTITY_LABEL": {
+		"description": "Label for the identity field. The identity is a SSH private key filename used to authenticate with servers.",
+		"message": "Identity"
+	},
+	"IMPORT_LINK_ARIA_LABEL": {
+		"description": "The aria-label for the Import link.",
+		"message": "file import"
+	},
+	"IMPORT_LINK_LABEL": {
+		"description": "Label for the identity import button. It will trigger an 'open file' dialog so users can select a file to import. The identity is a SSH private key file used to authenticate with servers.",
+		"message": "Import..."
+	},
+	"INITIALIZING_RELAY": {
+		"description": "Text displayed in the terminal when the user is connecting through a relay server (which is like a web proxy for connections). This shows the host used to look up the relay server system.",
+		"message": "Looking up relay server using: $HOST$",
+		"placeholders": {
+			"host": {
+				"content": "$1",
+				"example": "proxy.example.com"
+			}
+		}
+	},
+	"JSON_PARSE_ERROR": {
+		"description": "Error message shown when parsing JSON data failed. The $KEY$ is a preference name, and the quote style may be changed as needed. $ERROR$ is the failure message. Neither are translated currently.",
+		"message": "Could not parse JSON in '$KEY$': $ERROR$",
+		"placeholders": {
+			"error": {
+				"content": "$2",
+				"example": "SyntaxError: Unexpected end of JSON input"
+			},
+			"key": {
+				"content": "$1",
+				"example": "cursor-blink"
+			}
+		}
+	},
+	"KNOWN_HOSTS_EMPTY": {
+		"description": "Message displayed when there are no hosts to delete.",
+		"message": "No known hosts, nothing to forget."
+	},
+	"KNOWN_HOSTS_PROMPT": {
+		"description": "Prompt displayed by the ssh-forget-host command",
+		"message": "Please select a host to forget [1-$COUNT$]: ",
+		"placeholders": {
+			"count": {
+				"content": "$1",
+				"example": "10"
+			}
+		}
+	},
+	"KNOWN_HOSTS_TITLE": {
+		"description": "Header text displayed before the list of known hosts.",
+		"message": "Known hosts:"
+	},
+	"LOADING_LABEL": {
+		"description": "The text displayed in the identity dropdown list while we load identities (which are SSH private key filenames used to authenticate with servers).",
+		"message": "Loading..."
+	},
+	"MISSING_PARAM": {
+		"description": "Error message displayed when a command is missing a parameter.",
+		"message": "Missing parameter: $NAME$",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "username"
+			}
+		}
+	},
+	"MOUNTED_MESSAGE": {
+		"description": "Message displayed after a file system is mounted",
+		"message": "Mounted!"
+	},
+	"MOUNT_BUTTON_LABEL": {
+		"description": "The label for the mount button. Used to access (mount) remote directories over SSH.",
+		"message": "SFTP Mount"
+	},
+	"MOUNT_PATH_LABEL": {
+		"description": "Label for the mount path field. This is the remote directory used for SFTP mounts.",
+		"message": "Mount Path"
+	},
+	"NOTIFY_COPY": {
+		"description": "Short status message displayed in a terminal overlay when text is automatically copied to the clipboard.",
+		"message": "Selection Copied"
+	},
+	"OK_BUTTON_LABEL": {
+		"description": "The label for the OK button in dialogs.",
+		"message": "OK"
+	},
+	"OMNIBOX_DEFAULT": {
+		"description": "Default help text as a tip in the omnibox. Do not translate the <url> and <match> tags.",
+		"message": "<url><match>user@hostname[:port]</match></url> Connect to a saved profile or a new ssh system"
+	},
+	"OPEN_AS_WINDOW_TIP": {
+		"description": "Message displayed to users who are running Secure Shell in a tab. The [Pro Tip] should be localized (it is slang in the computing world), but can be localized as just 'tip' if easier.",
+		"message": "[Pro Tip] Use 'Open as Window' to prevent Control-W from closing your terminal!\r\n[Pro Tip] See $URL$ for more information.",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "https://goo.gl/mHrbej"
+			}
+		}
+	},
+	"OPTIONS_BUTTON_LABEL": {
+		"description": "The label for the options button.",
+		"message": "Options"
+	},
+	"PLUGIN_LOADING": {
+		"description": "Status message displayed while loading the plugin.",
+		"message": "Loading NaCl plugin..."
+	},
+	"PLUGIN_LOADING_COMPLETE": {
+		"description": "Appended to PLUGIN_LOADING message when loading is complete.",
+		"message": " done."
+	},
+	"PLUGIN_LOADING_FAILED": {
+		"description": "Appended to PLUGIN_LOADING message when loading has failed.",
+		"message": " failed! :("
+	},
+	"PREFERENCES_HEADER": {
+		"description": "Friendly message shown on the preferences (e.g. colors, fonts, etc...) editing page.",
+		"message": "Profile Settings"
+	},
+	"PREFERENCES_RESET": {
+		"description": "Message displayed after all preferences (e.g. colors, fonts, etc...) are reset.",
+		"message": "All preferences reset!"
+	},
+	"PREF_BACKUP_FILENAME": {
+		"description": "Default filename for the preferences backup file. The filename should be translated, but the '.json' suffix should be retained.",
+		"message": "Secure Shell Preferences Backup.json"
+	},
+	"RECONNECT_MESSAGE": {
+		"description": "Message displayed after a connection closes. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them after the word is OK like: Exit (X).",
+		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
+	},
+	"RELAY_RETRY": {
+		"description": "Displayed in a text overlay when we experience an error talking to the relay server (which is like a web proxy for connections).",
+		"message": "Retrying..."
+	},
+	"RESTORE_PREFS": {
+		"description": "Label for the link in the options page that lets the user restore their preferences (e.g. colors, font, etc...).",
+		"message": "Restore Backup"
+	},
+	"SHORTCUT_LIST_ARIA_LABEL": {
+		"description": "Text use as the aria-label for the 'shortcut-list'.",
+		"message": "saved connections"
+	},
+	"SSH_ARGSTR_LABEL": {
+		"description": "Label for the optional ssh arguments field. These are command line flags to the ssh program itself.",
+		"message": "SSH Arguments"
+	},
+	"TERMINAL_PREVIEW_LABEL": {
+		"description": "Label for the preview window that allows users to preview their preferences (like color and font choices).",
+		"message": "Preview"
+	},
+	"TERMINAL_PROFILE_LABEL": {
+		"description": "Label for the current terminal emulator profile name. Profiles are used to customize things like color and fonts.",
+		"message": "Current profile"
+	},
+	"UNEXPECTED_ERROR": {
+		"description": "Generic message displayed when we encounter an unexpected error.",
+		"message": "An unexpected error occurred, please check the JavaScript console for more details."
+	},
+	"UNMOUNT_BUTTON_LABEL": {
+		"description": "The label for the unmount button. Used to access (mount) remote directories over SSH.",
+		"message": "Unmount SFTP"
+	},
+	"UPDATE_AVAILABLE_TOOLTIP": {
+		"description": "A tooltip shown for the chip that indicates an update is available",
+		"message": "An update is available. Please close all windows."
+	},
+	"WELCOME_CHANGELOG": {
+		"description": "A link to the ChangeLog file, displayed at startup",
+		"message": "ChangeLog/release notes: $URL$",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "https://goo.gl/YnmXOs"
+			}
+		}
+	},
+	"WELCOME_FAQ": {
+		"description": "A link to the frequently asked questions, displayed at startup",
+		"message": "Answers to Frequently Asked Questions: $URL$ (ctrl+click on links to open)",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "https://goo.gl/muppJj"
+			}
+		}
+	},
+	"WELCOME_RELEASE_HIGHLIGHTS": {
+		"description": "A header for a list of important changes, displayed at startup",
+		"message": "Major changes since $VER$:",
+		"placeholders": {
+			"ver": {
+				"content": "$1",
+				"example": "0.8.35.6"
+			}
+		}
+	},
+	"WELCOME_VERSION": {
+		"description": "Message displayed to the user when the application is first launched",
+		"message": "Welcome to $NAME$ version $VERSION$.",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Secure Shell"
+			},
+			"version": {
+				"content": "$2",
+				"example": "1.0"
+			}
+		}
+	},
+	"ZOOM_WARNING": {
+		"description": "Shown in the top/right corner if the web browser zoom setting is not set to 100%. It's a tip to navigate the Chrome browser's menu.",
+		"message": "Please set Chrome Menu->Zoom to 100%"
+	}
 }

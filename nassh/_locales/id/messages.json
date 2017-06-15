@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"Tidak dapat mengurai tujuan: $1","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"Batal"},"cmd_ssh_forget_host_help":{"message":"Perintah ini menampilkan menu inang yang dikenali dan meminta inang untuk melupakannya."},"cmd_ssh_forget_host_title":{"message":"Melupakan inang ssh yang dikenali."},"cmd_ssh_help":{"message":"Parameter |username| dan |hostname] bersifat wajib, sedangkan parameter |port| bersifat opsional. Jika parameter porta tidak ditentukan, parameter bawaannya adalah 22."},"cmd_ssh_title":{"message":"Membuka sesi SSH baru."},"command_complete":{"message":"Perintah $1 diselesaikan dengan kode keluar $2. Tutup jendela ini kapan saja.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"Menyambung ke $1, porta $2...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Sambungkan"},"connect_message":{"message":"Masukkan tujuan penyambungan."},"destination_pattern":{"message":"namapengguna@namainang[:port]"},"known_hosts_empty":{"message":"Tidak ada inang yang dikenali, tidak ada yang akan dilupakan."},"known_hosts_prompt":{"message":"Pilih inang untuk dilupakan [1-$1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"Inang yang dikenali:"},"missing_param":{"message":"Parameter yang hilang: $1","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"OK"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"Terjadi galat tak terduga, periksa konsol JavaScript untuk detail selengkapnya."},"welcome":{"message":"Selamat datang! Buka sambungan ssh baru dengan perintah 'open'."},"welcome_tip":{"message":"Kiat Pro: Anda dapat menyimpan sesi ini sebagai bookmark peramban."}}
+{
+	"already_mounted_message": {
+		"message": "Sistem file sudah terpasang!"
+	},
+	"backup_prefs": {
+		"message": "Simpan Backup"
+	},
+	"bad_destination": {
+		"message": "Tidak dapat mengurai tujuan: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "Menutup tab ini akan memutus sesi ini."
+	},
+	"cancel_button_label": {
+		"message": "Batal"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Perintah ini menampilkan menu host dan meminta host melupakannya."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "Lupakan host ssh yang dikenali."
+	},
+	"cmd_ssh_help": {
+		"message": "Diperlukan parameter |username| dan |hostname|, sedangkan parameter |port| bersifat opsional. Jika parameter port tidak ditentukan, parameter bawaannya adalah 22."
+	},
+	"cmd_ssh_title": {
+		"message": "Buka sesi SSH baru."
+	},
+	"command_complete": {
+		"message": "Perintah $1 dihentikan dengan kode status $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Sambungkan"
+	},
+	"connect_or_exit_message": {
+		"message": "Pilih koneksi lainnya (C) atau Keluar (X)?"
+	},
+	"connecting": {
+		"message": "Menghubungkan ke $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "Hapus"
+	},
+	"disconnect_message": {
+		"message": "Plugin NaCl dihentikan dengan kode status $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_aria_label": {
+		"message": "argumen ssh tambahan"
+	},
+	"field_argstr_placeholder": {
+		"message": "argumen baris perintah tambahan"
+	},
+	"field_description_aria_label": {
+		"message": "deskripsi"
+	},
+	"field_description_placeholder": {
+		"message": "namapengguna@hostname atau teks bebas"
+	},
+	"field_hostname_aria_label": {
+		"message": "hostname"
+	},
+	"field_hostname_placeholder": {
+		"message": "hostname"
+	},
+	"field_identity_aria_label": {
+		"message": "identitas"
+	},
+	"field_port_aria_label": {
+		"message": "port"
+	},
+	"field_port_placeholder": {
+		"message": "port"
+	},
+	"field_relay_options_aria_label": {
+		"message": "opsi relay"
+	},
+	"field_relay_options_placeholder": {
+		"message": "opsi relay"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "nama profil terminal"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "default"
+	},
+	"field_username_aria_label": {
+		"message": "nama pengguna"
+	},
+	"field_username_placeholder": {
+		"message": "nama pengguna"
+	},
+	"found_relay": {
+		"message": "Ditemukan server relay: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Identitas"
+	},
+	"import_link_aria_label": {
+		"message": "impor file"
+	},
+	"import_link_label": {
+		"message": "Impor..."
+	},
+	"initializing_relay": {
+		"message": "Mencari server relay yang menggunakan: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "Tidak dapat menguraikan JSON dalam '$1'",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "Tidak ada host yang dikenal, tidak ada yang perlu dilupakan."
+	},
+	"known_hosts_prompt": {
+		"message": "Pilih host untuk dilupakan [1-$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "Host yang dikenali:"
+	},
+	"loading_label": {
+		"message": "Memuat..."
+	},
+	"missing_param": {
+		"message": "Parameter hilang: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "Pasang SFTP"
+	},
+	"mounted_message": {
+		"message": "Terpasang!"
+	},
+	"notify_copy": {
+		"message": "Pilihan Disalin"
+	},
+	"ok_button_label": {
+		"message": "Oke"
+	},
+	"open_as_window_tip": {
+		"message": "[Tips Pro] Gunakan 'Buka sebagai Jendela' agar Control-W tidak menutup terminal Anda.\n[Tips Pro] Lihat $1 untuk mendapatkan informasi selengkapnya.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Opsi"
+	},
+	"plugin_loading": {
+		"message": "Memuat plugin NaCl..."
+	},
+	"plugin_loading_complete": {
+		"message": " selesai."
+	},
+	"pref_backup_filename": {
+		"message": "Secure Shell Preferences Backup.json"
+	},
+	"preferences_header": {
+		"message": "Setelan Profil"
+	},
+	"preferences_reset": {
+		"message": "Semua preferensi disetel ulang."
+	},
+	"reconnect_message": {
+		"message": "Sambungkan ulang (R), Pilih koneksi lainnya (C), atau Keluar (X)?"
+	},
+	"relay_retry": {
+		"message": "Mencoba ulang..."
+	},
+	"restore_prefs": {
+		"message": "Pulihkan Backup"
+	},
+	"shortcut_list_aria_label": {
+		"message": "koneksi yang tersimpan"
+	},
+	"ssh_argstr_label": {
+		"message": "Argumen SSH"
+	},
+	"terminal_preview_label": {
+		"message": "Pratinjau"
+	},
+	"terminal_profile_label": {
+		"message": "Profil saat ini"
+	},
+	"unexpected_error": {
+		"message": "Terjadi error yang tidak terduga, harap periksa konsol JavaScript untuk info selengkapnya."
+	},
+	"unmount_button_label": {
+		"message": "Lepaskan SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "Update tersedia.  Harap tutup semua jendela."
+	},
+	"welcome_faq": {
+		"message": "Jawaban untuk Pertanyaan Umum (FAQ): $1 (ctrl+klik link untuk membuka)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "Selamat datang di $1 versi $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "Harap setel Menu Chrome->Perbesar ke 100%"
+	}
+}

@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"Nepavyko i\u0161analizuoti paskirties vietos: $1","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"At\u0161aukti"},"cmd_ssh_forget_host_help":{"message":"Taikant \u0161i\u0105 komand\u0105 pateikiamas \u017einom\u0173 prieglob\u0173 meniu ir raginama pamir\u0161ti prieglob\u0105."},"cmd_ssh_forget_host_title":{"message":"Pamir\u0161ti \u017einom\u0105 ssh prieglob\u0105."},"cmd_ssh_help":{"message":"B\u016btina pateikti |naudotojo vardo| ir |prieglobos serverio pavadinimo| parametrus; |prievado| parametras pasirenkamas. Jei prievado nenurodysite, jo numatytasis parametras bus 22."},"cmd_ssh_title":{"message":"Atidaroma nauja SSH sesija."},"command_complete":{"message":"Komanda \u201e$1\u201c u\u017ebaigta pateikiant i\u0161\u0117jimo kod\u0105 $2. Kai tur\u0117site laiko, u\u017edarykite \u0161\u012f lang\u0105.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"Prisijungiama prie $1; prievadas $2...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Prisijungti"},"connect_message":{"message":"\u012eveskite paskirties viet\u0105, prie kurios reikia prisijungti."},"destination_pattern":{"message":"naudotojovardas@prieglobosserveriopavadinimas[:prievadas]"},"known_hosts_empty":{"message":"N\u0117ra \u017einom\u0173 prieglob\u0173; n\u0117ra, k\u0105 pamir\u0161ti."},"known_hosts_prompt":{"message":"Pasirinkite prieglob\u0105, kuri\u0105 reikia pamir\u0161ti [1-$1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"\u017dinomos prieglobos:"},"missing_param":{"message":"Tr\u016bksta parametro: $1","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"Gerai"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"\u012evyko nenumatyta klaida; jei reikia daugiau i\u0161samios informacijos, patikrinkite \u201eJavaScript\u201c konsol\u0119."},"welcome":{"message":"Sveiki! U\u017emegzkite nauj\u0105 ssh ry\u0161\u012f taikydami komand\u0105 \u201eatidaryti\u201c."},"welcome_tip":{"message":"I\u0161ankstinis patarimas: \u0161i\u0105 sesij\u0105 galite i\u0161saugoti kaip nar\u0161ykl\u0117s \u017eym\u0119."}}
+{
+	"already_mounted_message": {
+		"message": "Fail\u0173 sistema jau \u012fd\u0117ta!"
+	},
+	"backup_prefs": {
+		"message": "I\u0161saugoti atsargin\u0119 kopij\u0105"
+	},
+	"bad_destination": {
+		"message": "Nepavyko i\u0161analizuoti paskirties vietos: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "U\u017edarius \u0161\u012f skirtuk\u0105, sesija bus nutraukta."
+	},
+	"cancel_button_label": {
+		"message": "At\u0161aukti"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Taikant \u0161i\u0105 komand\u0105 pateikiamas \u017einom\u0173 prieglob\u0173 meniu ir raginama i\u0161trinti prieglob\u0105."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "I\u0161trinama \u017einoma SSH priegloba."
+	},
+	"cmd_ssh_help": {
+		"message": "B\u016btina pateikti parametrus |username| ir |hostname|, parametras |port| neprivalomas. Jei prievado nenurodysite, jo numatytasis parametras bus 22."
+	},
+	"cmd_ssh_title": {
+		"message": "Atidaroma nauja SSH sesija."
+	},
+	"command_complete": {
+		"message": "Komanda \u201e$1\u201c atlikta su b\u016bsenos kodu $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Prisijungti"
+	},
+	"connect_or_exit_message": {
+		"message": "Pasirinkti (C) kit\u0105 ry\u0161\u012f ar i\u0161eiti (X)?"
+	},
+	"connecting": {
+		"message": "Prisijungiama prie $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "I\u0161trinti"
+	},
+	"disconnect_message": {
+		"message": "\u201eNaCl\u201c papildinys i\u0161jungtas su b\u016bsenos kodu $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_aria_label": {
+		"message": "papildomi \u201essh\u201c argumentai"
+	},
+	"field_argstr_placeholder": {
+		"message": "papildomi komandos eilut\u0117s argumentai"
+	},
+	"field_description_aria_label": {
+		"message": "apra\u0161as"
+	},
+	"field_description_placeholder": {
+		"message": "naudotojovardas@prieglobosserveriopavadinimas arba laisvos formos tekstas"
+	},
+	"field_hostname_aria_label": {
+		"message": "prieglobos serverio pavadinimas"
+	},
+	"field_hostname_placeholder": {
+		"message": "prieglobos serverio pavadinimas"
+	},
+	"field_identity_aria_label": {
+		"message": "tapatyb\u0117"
+	},
+	"field_port_aria_label": {
+		"message": "prievadas"
+	},
+	"field_port_placeholder": {
+		"message": "prievadas"
+	},
+	"field_relay_options_aria_label": {
+		"message": "perdavimo parinktys"
+	},
+	"field_relay_options_placeholder": {
+		"message": "perdavimo parinktys"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "terminalo profilio pavadinimas"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "numatytasis"
+	},
+	"field_username_aria_label": {
+		"message": "naudotojo vardas"
+	},
+	"field_username_placeholder": {
+		"message": "naudotojo vardas"
+	},
+	"found_relay": {
+		"message": "Rastas perdavimo serveris: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Tapatyb\u0117"
+	},
+	"import_link_aria_label": {
+		"message": "fail\u0173 importavimas"
+	},
+	"import_link_label": {
+		"message": "Importuoti..."
+	},
+	"initializing_relay": {
+		"message": "Ie\u0161koma perdavimo serverio naudojant: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "Nepavyko i\u0161analizuoti JSON (\u201e$1\u201c)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "N\u0117ra \u017einom\u0173 prieglob\u0173; n\u0117ra, k\u0105 i\u0161trinti."
+	},
+	"known_hosts_prompt": {
+		"message": "Pasirinkite prieglob\u0105, kuri\u0105 reikia i\u0161trinti [1\u2013$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "\u017dinomos prieglobos:"
+	},
+	"loading_label": {
+		"message": "\u012ekeliama..."
+	},
+	"missing_param": {
+		"message": "Tr\u016bksta parametro: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "\u012ed\u0117ti SFTP"
+	},
+	"mounted_message": {
+		"message": "\u012ed\u0117ta!"
+	},
+	"notify_copy": {
+		"message": "Pasirinkimas nukopijuotas"
+	},
+	"ok_button_label": {
+		"message": "GERAI"
+	},
+	"open_as_window_tip": {
+		"message": "[Pro Tip] Naudokite parinkt\u012f \u201eAtidaryti kaip lang\u0105\u201c, kad neu\u017edarytum\u0117te terminalo naudodami spart\u0173j\u012f klavi\u0161\u0105 \u201eControl\u201c + W.\n[Pro Tip] Jei reikia daugiau informacijos, \u017er. adresu $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Parinktys"
+	},
+	"plugin_loading": {
+		"message": "\u012ekeliamas papildinys \u201eNaCl\u201c..."
+	},
+	"plugin_loading_complete": {
+		"message": " atlikta."
+	},
+	"pref_backup_filename": {
+		"message": "Secure Shell Preferences Backup.json"
+	},
+	"preferences_header": {
+		"message": "Profilio nustatymai"
+	},
+	"preferences_reset": {
+		"message": "Visos nuostatos nustatytos i\u0161 naujo!"
+	},
+	"reconnect_message": {
+		"message": "(I)\u0161 naujo prisijungti, (p)asirinkti kit\u0105 ry\u0161\u012f ar i\u0161(e)iti?"
+	},
+	"relay_retry": {
+		"message": "Bandoma i\u0161 naujo..."
+	},
+	"restore_prefs": {
+		"message": "Atkurti atsargin\u0119 kopij\u0105"
+	},
+	"shortcut_list_aria_label": {
+		"message": "i\u0161saugoti ry\u0161iai"
+	},
+	"ssh_argstr_label": {
+		"message": "SSH argumentai"
+	},
+	"terminal_preview_label": {
+		"message": "Per\u017ei\u016bra"
+	},
+	"terminal_profile_label": {
+		"message": "Dabartinis profilis"
+	},
+	"unexpected_error": {
+		"message": "\u012evyko nenumatyta klaida. Jei reikia daugiau i\u0161samios informacijos, \u017er. \u201eJavaScript\u201c pult\u0105."
+	},
+	"unmount_button_label": {
+		"message": "I\u0161imti SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "Yra naujinys. U\u017edarykite visus langus."
+	},
+	"welcome_faq": {
+		"message": "Atsakymai \u012f da\u017eniausiai u\u017eduodamus klausimus: $1 (\u201eCtrl\u201c + spustel\u0117kite nuorodas, kad atidarytum\u0117te)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "Sveiki, tai \u2013 $2 versijos \u201e$1\u201c.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "Nustatykite \u201eChrome\u201c mastel\u012f \u012f 100 % pasirink\u0119 meniu -> \u201eKeisti mastel\u012f\u201c"
+	}
+}

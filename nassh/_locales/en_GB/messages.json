@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"Unable to parse destination: $1","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"Cancel"},"cmd_ssh_forget_host_help":{"message":"This command displays a menu of known hosts and prompts for the host to forget."},"cmd_ssh_forget_host_title":{"message":"Forget a known SSH host."},"cmd_ssh_help":{"message":"The |username| and |hostname| parameters are required; |port| is optional. If port is not specified, it defaults to 22."},"cmd_ssh_title":{"message":"Opens a new SSH session."},"command_complete":{"message":"The command $1 completed with exit code $2.  Please close this window at your leisure.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"Connecting to $1, port $2...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Connect"},"connect_message":{"message":"Please enter a destination to connect to."},"destination_pattern":{"message":"username@hostname[:port]"},"known_hosts_empty":{"message":"No known hosts, nothing to forget."},"known_hosts_prompt":{"message":"Please select a host to forget [1-$1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"Known hosts:"},"missing_param":{"message":"Missing parameter: $1","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"OK"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"An unexpected error occurred. Please check the JavaScript console for more details."},"welcome":{"message":"Welcome! Open a new SSH connection with the 'open' command."},"welcome_tip":{"message":"Pro Tip: You can save this session as a browser bookmark."}}
+{
+	"already_mounted_message": {
+		"message": "File system is already mounted!"
+	},
+	"backup_prefs": {
+		"message": "Save backup"
+	},
+	"bad_destination": {
+		"message": "Unable to parse destination: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "Closing this tab will disconnect this session."
+	},
+	"cancel_button_label": {
+		"message": "Cancel"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "This command displays a menu of known hosts and prompts for the host to forget."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "Forget a known SSH host."
+	},
+	"cmd_ssh_help": {
+		"message": "The |username| and |hostname| parameters are required, |port| is optional. If port is not specified it defaults to 22."
+	},
+	"cmd_ssh_title": {
+		"message": "Opens a new SSH session."
+	},
+	"command_complete": {
+		"message": "The command $1 exited with status code $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Connect"
+	},
+	"connect_or_exit_message": {
+		"message": "(C)hoose another connection or E(x)it?"
+	},
+	"connecting": {
+		"message": "Connecting to $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "Delete"
+	},
+	"disconnect_message": {
+		"message": "NaCl plug-in exited with status code $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_aria_label": {
+		"message": "additional ssh arguments"
+	},
+	"field_argstr_placeholder": {
+		"message": "extra command line arguments"
+	},
+	"field_description_aria_label": {
+		"message": "description"
+	},
+	"field_description_placeholder": {
+		"message": "username@hostname or free form text"
+	},
+	"field_hostname_aria_label": {
+		"message": "hostname"
+	},
+	"field_hostname_placeholder": {
+		"message": "hostname"
+	},
+	"field_identity_aria_label": {
+		"message": "identity"
+	},
+	"field_port_aria_label": {
+		"message": "port"
+	},
+	"field_port_placeholder": {
+		"message": "port"
+	},
+	"field_relay_options_aria_label": {
+		"message": "relay options"
+	},
+	"field_relay_options_placeholder": {
+		"message": "relay options"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "terminal profile name"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "default"
+	},
+	"field_username_aria_label": {
+		"message": "username"
+	},
+	"field_username_placeholder": {
+		"message": "username"
+	},
+	"found_relay": {
+		"message": "Found relay server: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Identity"
+	},
+	"import_link_aria_label": {
+		"message": "file import"
+	},
+	"import_link_label": {
+		"message": "Import..."
+	},
+	"initializing_relay": {
+		"message": "Looking up relay server using: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "Could not parse JSON in '$1'",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "No known hosts, nothing to forget."
+	},
+	"known_hosts_prompt": {
+		"message": "Please select a host to forget [1-$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "Known hosts:"
+	},
+	"loading_label": {
+		"message": "Loading..."
+	},
+	"missing_param": {
+		"message": "Missing parameter: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "SFTP mount"
+	},
+	"mounted_message": {
+		"message": "Mounted!"
+	},
+	"notify_copy": {
+		"message": "Selection copied"
+	},
+	"ok_button_label": {
+		"message": "OK"
+	},
+	"open_as_window_tip": {
+		"message": "[Pro Tip] Use 'Open as Window' to keep Control-W from closing your terminal!\n[Pro Tip] See $1 for more information.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Options"
+	},
+	"plugin_loading": {
+		"message": "Loading NaCl plug-in..."
+	},
+	"plugin_loading_complete": {
+		"message": " done."
+	},
+	"pref_backup_filename": {
+		"message": "Secure Shell Preferences Backup.json"
+	},
+	"preferences_header": {
+		"message": "Profile settings"
+	},
+	"preferences_reset": {
+		"message": "All preferences reset!"
+	},
+	"reconnect_message": {
+		"message": "(R)econnect, (C)hoose another connection or E(x)it?"
+	},
+	"relay_retry": {
+		"message": "Retrying..."
+	},
+	"restore_prefs": {
+		"message": "Restore backup"
+	},
+	"shortcut_list_aria_label": {
+		"message": "saved connections"
+	},
+	"ssh_argstr_label": {
+		"message": "SSH arguments"
+	},
+	"terminal_preview_label": {
+		"message": "Preview"
+	},
+	"terminal_profile_label": {
+		"message": "Current profile"
+	},
+	"unexpected_error": {
+		"message": "An unexpected error occurred; please check the JavaScript console for more details."
+	},
+	"unmount_button_label": {
+		"message": "Unmount SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "An update is available. Please close all windows."
+	},
+	"welcome_faq": {
+		"message": "Answers to frequently asked questions: $1 (ctrl+click on links to open)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "Welcome to $1 version $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "Please set Chrome Menu->Zoom to 100%"
+	}
+}

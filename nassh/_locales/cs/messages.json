@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"Nelze analyzovat c\u00edl: $1","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"Zru\u0161it"},"cmd_ssh_forget_host_help":{"message":"Tento p\u0159\u00edkaz zobrazuje nab\u00eddku zn\u00e1m\u00fdch hostitel\u016f a v\u00fdzvy k zapomenut\u00ed hostitel\u016f."},"cmd_ssh_forget_host_title":{"message":"Zapomenout zn\u00e1m\u00e9ho hostitele SSH."},"cmd_ssh_help":{"message":"Parametry |username| a |hostname| jsou povinn\u00e9, parametr |port| je voliteln\u00fd. Pokud nen\u00ed zad\u00e1n port, bude jeho v\u00fdchoz\u00ed hodnota nastavena na 22."},"cmd_ssh_title":{"message":"Zah\u00e1jen\u00ed nov\u00e9 relace SSH."},"command_complete":{"message":"P\u0159\u00edkaz $1 byl dokon\u010den s ukon\u010dovac\u00edm k\u00f3dem $2. Toto okno m\u016f\u017eete zav\u0159\u00edt.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"P\u0159ipojov\u00e1n\u00ed k hostiteli $1, port $2...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"P\u0159ipojit"},"connect_message":{"message":"Zadejte pros\u00edm c\u00edl, ke kter\u00e9mu se chcete p\u0159ipojit."},"destination_pattern":{"message":"uzivatelskejmeno@nazevhostitele[:port]"},"known_hosts_empty":{"message":"\u017d\u00e1dn\u00ed zn\u00e1m\u00ed hostitel\u00e9, kter\u00e9 by bylo mo\u017en\u00e9 zapomenout."},"known_hosts_prompt":{"message":"Vyberte hostitele, kter\u00e9ho chcete zapomenout [1\u2013$1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"Zn\u00e1m\u00ed hostitel\u00e9:"},"missing_param":{"message":"Chyb\u00ed parametr: $1","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"OK"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"Do\u0161lo k neo\u010dek\u00e1van\u00e9 chyb\u011b. Dal\u0161\u00ed informace naleznete v konzole JavaScriptu."},"welcome":{"message":"V\u00edtejte! Pomoc\u00ed p\u0159\u00edkazu 'open' spust\u00edte nov\u00e9 p\u0159ipojen\u00ed SSH."},"welcome_tip":{"message":"Tip pro profesion\u00e1ly: Tuto relaci m\u016f\u017eete ulo\u017eit jako z\u00e1lo\u017eku prohl\u00ed\u017ee\u010de."}}
+{
+	"already_mounted_message": {
+		"message": "Syst\u00e9m soubor\u016f je ji\u017e p\u0159ipojen."
+	},
+	"backup_prefs": {
+		"message": "Ulo\u017eit z\u00e1lohu"
+	},
+	"bad_destination": {
+		"message": "Nelze analyzovat c\u00edl: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "Pokud tuto kartu zav\u0159ete, bude tato relace odpojena."
+	},
+	"cancel_button_label": {
+		"message": "Zru\u0161it"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Tento p\u0159\u00edkaz zobrazuje nab\u00eddku zn\u00e1m\u00fdch hostitel\u016f a v\u00fdzvy k zapomenut\u00ed hostitel\u016f."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "Zapomenout zn\u00e1m\u00e9ho hostitele SSH."
+	},
+	"cmd_ssh_help": {
+		"message": "Parametry |uzivatelskejmeno| a |nazevhostitele| jsou povinn\u00e9, parametr |port| je voliteln\u00fd. Pokud nen\u00ed zad\u00e1n port, bude jeho v\u00fdchoz\u00ed hodnota nastavena na 22."
+	},
+	"cmd_ssh_title": {
+		"message": "Zah\u00e1jen\u00ed nov\u00e9 relace SSH."
+	},
+	"command_complete": {
+		"message": "P\u0159\u00edkaz $1 byl ukon\u010den se stavov\u00fdm\u00a0k\u00f3dem $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "P\u0159ipojit"
+	},
+	"connect_or_exit_message": {
+		"message": "(V)ybrat jin\u00e9 p\u0159ipojen\u00ed nebo (u)kon\u010dit?"
+	},
+	"connecting": {
+		"message": "P\u0159ipojov\u00e1n\u00ed k\u00a0hostiteli $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "Delete"
+	},
+	"disconnect_message": {
+		"message": "Plugin NaCl byl ukon\u010den se stavov\u00fdm k\u00f3dem $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_aria_label": {
+		"message": "dal\u0161\u00ed argumenty ssh"
+	},
+	"field_argstr_placeholder": {
+		"message": "dal\u0161\u00ed argumenty p\u0159\u00edkazov\u00e9ho \u0159\u00e1dku"
+	},
+	"field_description_aria_label": {
+		"message": "popis"
+	},
+	"field_description_placeholder": {
+		"message": "uzivatelske_jmeno@nazev_hostitele nebo voln\u011b upraviteln\u00fd text"
+	},
+	"field_hostname_aria_label": {
+		"message": "n\u00e1zev hostitele"
+	},
+	"field_hostname_placeholder": {
+		"message": "n\u00e1zev hostitele"
+	},
+	"field_identity_aria_label": {
+		"message": "identita"
+	},
+	"field_port_aria_label": {
+		"message": "port"
+	},
+	"field_port_placeholder": {
+		"message": "port"
+	},
+	"field_relay_options_aria_label": {
+		"message": "mo\u017enosti p\u0159enosu"
+	},
+	"field_relay_options_placeholder": {
+		"message": "mo\u017enosti p\u0159enosu"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "n\u00e1zev profilu termin\u00e1lu"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "v\u00fdchoz\u00ed"
+	},
+	"field_username_aria_label": {
+		"message": "u\u017eivatelsk\u00e9 jm\u00e9no"
+	},
+	"field_username_placeholder": {
+		"message": "u\u017eivatelsk\u00e9 jm\u00e9no"
+	},
+	"found_relay": {
+		"message": "Nalezen\u00fd p\u0159enosov\u00fd server: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Identita"
+	},
+	"import_link_aria_label": {
+		"message": "import souboru"
+	},
+	"import_link_label": {
+		"message": "Importovat..."
+	},
+	"initializing_relay": {
+		"message": "Vyhled\u00e1v\u00e1n\u00ed p\u0159enosov\u00e9ho serveru s\u00a0n\u00e1zvem hostitele $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "Data JSON v\u00a0souboru $1 nelze analyzovat",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "\u017d\u00e1dn\u00ed zn\u00e1m\u00ed hostitel\u00e9, kter\u00e9 by bylo mo\u017en\u00e9 zapomenout."
+	},
+	"known_hosts_prompt": {
+		"message": "Vyberte hostitele, kter\u00e9ho chcete zapomenout [1\u2013$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "Zn\u00e1m\u00ed hostitel\u00e9:"
+	},
+	"loading_label": {
+		"message": "Na\u010d\u00edt\u00e1n\u00ed..."
+	},
+	"missing_param": {
+		"message": "Chyb\u00ed parametr: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "P\u0159ipojen\u00ed SFTP"
+	},
+	"mounted_message": {
+		"message": "P\u0159ipojeno."
+	},
+	"notify_copy": {
+		"message": "V\u00fdb\u011br byl zkop\u00edrov\u00e1n"
+	},
+	"ok_button_label": {
+		"message": "OK"
+	},
+	"open_as_window_tip": {
+		"message": "[Tip pro experty] Aby se termin\u00e1l po stisknut\u00ed Ctrl+W nezav\u0159el, pou\u017eijte mo\u017enost Otev\u0159\u00edt jako okno.\n[Tip pro experty] Dal\u0161\u00ed informace naleznete na adrese $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Mo\u017enosti"
+	},
+	"plugin_loading": {
+		"message": "Na\u010d\u00edt\u00e1n\u00ed pluginu NaCl..."
+	},
+	"plugin_loading_complete": {
+		"message": " hotovo."
+	},
+	"pref_backup_filename": {
+		"message": "Secure Shell Preferences Backup.json"
+	},
+	"preferences_header": {
+		"message": "Nastaven\u00ed profilu"
+	},
+	"preferences_reset": {
+		"message": "V\u0161echny p\u0159edvolby byly resetov\u00e1ny."
+	},
+	"reconnect_message": {
+		"message": "(Z)novu se p\u0159ipojit, (v)ybrat jin\u00e9 p\u0159ipojen\u00ed nebo (u)kon\u010dit?"
+	},
+	"relay_retry": {
+		"message": "Dal\u0161\u00ed pokus..."
+	},
+	"restore_prefs": {
+		"message": "Obnovit ze z\u00e1lohy"
+	},
+	"shortcut_list_aria_label": {
+		"message": "ulo\u017een\u00e1 p\u0159ipojen\u00ed"
+	},
+	"ssh_argstr_label": {
+		"message": "Argumenty SSH"
+	},
+	"terminal_preview_label": {
+		"message": "N\u00e1hled"
+	},
+	"terminal_profile_label": {
+		"message": "Aktu\u00e1ln\u00ed profil"
+	},
+	"unexpected_error": {
+		"message": "Do\u0161lo k\u00a0neo\u010dek\u00e1van\u00e9 chyb\u011b. Dal\u0161\u00ed informace naleznete v\u00a0konzoli JavaScriptu."
+	},
+	"unmount_button_label": {
+		"message": "Odpojit SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "Je k\u00a0dispozici aktualizace. Zav\u0159ete v\u0161echna okna."
+	},
+	"welcome_faq": {
+		"message": "Odpov\u011bdi na \u010dast\u00e9 dotazy: $1 (odkaz otev\u0159ete kliknut\u00edm s\u00a0p\u0159idr\u017eenou kl\u00e1vesou Ctrl)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "V\u00edt\u00e1 v\u00e1s $1 verze $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "Otev\u0159ete nab\u00eddku Chrome a\u00a0nastavte lupu na 100\u00a0%."
+	}
+}

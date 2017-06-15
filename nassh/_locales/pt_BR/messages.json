@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"N\u00e3o foi poss\u00edvel analisar o destino: $1","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"Cancelar"},"cmd_ssh_forget_host_help":{"message":"Este comando exibe um menu de hosts conhecidos e solicita o host a esquecer."},"cmd_ssh_forget_host_title":{"message":"Esquecer um host ssh conhecido."},"cmd_ssh_help":{"message":"Os par\u00e2metros |username| e |hostname| s\u00e3o necess\u00e1rios, |port| \u00e9 opcional. Se a porta n\u00e3o for especificada, o padr\u00e3o ser\u00e1 22."},"cmd_ssh_title":{"message":"Abre uma nova sess\u00e3o SSH."},"command_complete":{"message":"Comando $1 conclu\u00eddo com o c\u00f3digo de sa\u00edda $2. Esta janela j\u00e1 pode ser fechada.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"Conectando a $1, porta $2...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Conectar"},"connect_message":{"message":"Digite um destino para se conectar."},"destination_pattern":{"message":"username@hostname[:port]"},"known_hosts_empty":{"message":"N\u00e3o h\u00e1 hosts conhecidos, nada a esquecer."},"known_hosts_prompt":{"message":"Selecione um host para esquecer [1-$1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"Hosts conhecidos:"},"missing_param":{"message":"Par\u00e2metro ausente: $1","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"OK"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"Ocorreu um erro inesperado. Verifique o console JavaScript para mais detalhes."},"welcome":{"message":"Bem-vindo. Abra uma nova conex\u00e3o ssh com o comando \"abrir\"."},"welcome_tip":{"message":"Dica: voc\u00ea pode salvar esta sess\u00e3o como favorito do navegador."}}
+{
+	"already_mounted_message": {
+		"message": "O sistema de arquivos j\u00e1 est\u00e1 ativado."
+	},
+	"backup_prefs": {
+		"message": "Salvar backup"
+	},
+	"bad_destination": {
+		"message": "N\u00e3o foi poss\u00edvel analisar o destino: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "Fechar esta guia ir\u00e1 desconectar esta sess\u00e3o."
+	},
+	"cancel_button_label": {
+		"message": "Cancelar"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Este comando exibe um menu de hosts conhecidos e solicita que o host seja esquecido."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "Esquecer um host ssh conhecido."
+	},
+	"cmd_ssh_help": {
+		"message": "Os par\u00e2metros |username| e |hostname| s\u00e3o obrigat\u00f3rios, |port| \u00e9 opcional. Se a porta n\u00e3o for especificada, o padr\u00e3o ser\u00e1 22."
+	},
+	"cmd_ssh_title": {
+		"message": "Abre uma nova sess\u00e3o SSH."
+	},
+	"command_complete": {
+		"message": "O comando $1 foi fechado com o c\u00f3digo de status $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Conectar"
+	},
+	"connect_or_exit_message": {
+		"message": "Es(c)olher outra conex\u00e3o ou (s)air?"
+	},
+	"connecting": {
+		"message": "Conectando-se a $1\u2026",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "Excluir"
+	},
+	"disconnect_message": {
+		"message": "Plug-in NaCl fechado com o c\u00f3digo de status $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_aria_label": {
+		"message": "argumentos ssh adicionais"
+	},
+	"field_argstr_placeholder": {
+		"message": "argumentos de linha de comando extra"
+	},
+	"field_description_aria_label": {
+		"message": "descri\u00e7\u00e3o"
+	},
+	"field_description_placeholder": {
+		"message": "nomedeusu\u00e1rio@nomedohost ou texto de forma livre"
+	},
+	"field_hostname_aria_label": {
+		"message": "nome do host"
+	},
+	"field_hostname_placeholder": {
+		"message": "nome do host"
+	},
+	"field_identity_aria_label": {
+		"message": "identidade"
+	},
+	"field_port_aria_label": {
+		"message": "porta"
+	},
+	"field_port_placeholder": {
+		"message": "porta"
+	},
+	"field_relay_options_aria_label": {
+		"message": "op\u00e7\u00f5es de relay"
+	},
+	"field_relay_options_placeholder": {
+		"message": "op\u00e7\u00f5es de relay"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "nome do perfil do terminal"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "padr\u00e3o"
+	},
+	"field_username_aria_label": {
+		"message": "nome de usu\u00e1rio"
+	},
+	"field_username_placeholder": {
+		"message": "nome de usu\u00e1rio"
+	},
+	"found_relay": {
+		"message": "Servidor relay encontrado: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Identidade"
+	},
+	"import_link_aria_label": {
+		"message": "importa\u00e7\u00e3o de arquivos"
+	},
+	"import_link_label": {
+		"message": "Importar..."
+	},
+	"initializing_relay": {
+		"message": "Pesquisando servidor relay usando: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "N\u00e3o foi poss\u00edvel analisar o JSON em \"$1\"",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "N\u00e3o h\u00e1 hosts conhecidos, nada a esquecer."
+	},
+	"known_hosts_prompt": {
+		"message": "Selecione um host para esquecer [1-$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "Hosts conhecidos:"
+	},
+	"loading_label": {
+		"message": "Carregando..."
+	},
+	"missing_param": {
+		"message": "Faltando par\u00e2metro: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "Ativar SFTP"
+	},
+	"mounted_message": {
+		"message": "Ativado."
+	},
+	"notify_copy": {
+		"message": "Sele\u00e7\u00e3o copiada"
+	},
+	"ok_button_label": {
+		"message": "OK"
+	},
+	"open_as_window_tip": {
+		"message": "[Dica profissional] Use \"Abrir como janela\" para impedir que Ctrl + W feche seu terminal.\n[Dica profissional] Consulte $1 para ver mais informa\u00e7\u00f5es.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Op\u00e7\u00f5es"
+	},
+	"plugin_loading": {
+		"message": "Carregando plugin NaCl ..."
+	},
+	"plugin_loading_complete": {
+		"message": " conclu\u00eddo."
+	},
+	"pref_backup_filename": {
+		"message": "Proteger prefer\u00eancias de Shell Backup.json"
+	},
+	"preferences_header": {
+		"message": "Configura\u00e7\u00f5es do perfil"
+	},
+	"preferences_reset": {
+		"message": "Todas as prefer\u00eancias foram redefinidas."
+	},
+	"reconnect_message": {
+		"message": "(R)econectar, es(c)olher outra conex\u00e3o ou (s)air?"
+	},
+	"relay_retry": {
+		"message": "Tentando novamente..."
+	},
+	"restore_prefs": {
+		"message": "Restaurar backup"
+	},
+	"shortcut_list_aria_label": {
+		"message": "conex\u00f5es salvas"
+	},
+	"ssh_argstr_label": {
+		"message": "Argumentos SSH"
+	},
+	"terminal_preview_label": {
+		"message": "Visualizar"
+	},
+	"terminal_profile_label": {
+		"message": "Perfil atual"
+	},
+	"unexpected_error": {
+		"message": "Ocorreu um erro inesperado. Verifique o Console JavaScript para saber mais detalhes."
+	},
+	"unmount_button_label": {
+		"message": "Desativar SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "Uma atualiza\u00e7\u00e3o est\u00e1 dispon\u00edvel. Feche todas as janelas."
+	},
+	"welcome_faq": {
+		"message": "Respostas a perguntas frequentes: $1 (pressione Ctrl e clique nos links para abrir)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "Bem-vindo \u00e0 vers\u00e3o $2 de $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "Defina o zoom no menu do Google Chrome para 100%"
+	}
+}

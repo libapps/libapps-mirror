@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"Impossibile analizzare la destinazione: $1","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"Annulla"},"cmd_ssh_forget_host_help":{"message":"Questo comando visualizza un menu di host noti e richiede l'host di cui annullare la memorizzazione."},"cmd_ssh_forget_host_title":{"message":"Annulla memorizzazione di un host ssh noto."},"cmd_ssh_help":{"message":"I parametri |username| e |hostname| sono obbligatori, |port| \u00e8 facoltativo. Se la porta non viene specificata, viene utilizzato il valore predefinito 22."},"cmd_ssh_title":{"message":"Consente di aprire una nuova sessione SSH."},"command_complete":{"message":"Comando $1 completato con il codice di uscita $2. Chiudi questa finestra quando preferisci.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"Collegamento a $1, porta $2...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Connetti"},"connect_message":{"message":"Specifica una destinazione a cui collegarsi."},"destination_pattern":{"message":"nomeutente@nomehost[:porta]"},"known_hosts_empty":{"message":"Nessun host noto, nulla di cui annullare la memorizzazione."},"known_hosts_prompt":{"message":"Seleziona un host di cui annullare memorizzazione [1-$1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"Host noti:"},"missing_param":{"message":"Parametro mancante: $1","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"OK"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"Si \u00e8 verificato un errore imprevisto. Per ulteriori informazioni, controlla la console JavaScript."},"welcome":{"message":"Benvenuto. Apri una nuova connessione ssh con il comando \"apri\"."},"welcome_tip":{"message":"Suggerimento per esperti. Puoi salvare questa sessione come preferito del browser."}}
+{
+	"already_mounted_message": {
+		"message": "Il file system \u00e8 gi\u00e0 stato montato."
+	},
+	"backup_prefs": {
+		"message": "Salva copia di backup"
+	},
+	"bad_destination": {
+		"message": "Impossibile analizzare la destinazione: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "La chiusura di questa scheda causer\u00e0 la disconnesione dalla sessione."
+	},
+	"cancel_button_label": {
+		"message": "Annulla"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Questo comando visualizza un menu di host noti e richiede l'host di cui annullare la memorizzazione."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "Annulla memorizzazione di un host ssh noto."
+	},
+	"cmd_ssh_help": {
+		"message": "I parametri |username| e |hostname| sono obbligatori, |port| \u00e8 facoltativo. Se la porta non viene specificata, viene utilizzato il valore predefinito 22."
+	},
+	"cmd_ssh_title": {
+		"message": "Consente di aprire una nuova sessione SSH."
+	},
+	"command_complete": {
+		"message": "Comando $1 completato con il codice di stato $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Connetti"
+	},
+	"connect_or_exit_message": {
+		"message": "Scegliere un'altra connessione (C) o Uscire (X)?"
+	},
+	"connecting": {
+		"message": "Collegamento a $1\u2026",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[CANC]"
+	},
+	"delete_button_label": {
+		"message": "Elimina"
+	},
+	"disconnect_message": {
+		"message": "Plugin di NaCl uscito con codice di stato $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[INVIO]"
+	},
+	"field_argstr_aria_label": {
+		"message": "ulteriori argomenti ssh"
+	},
+	"field_argstr_placeholder": {
+		"message": "argomenti della riga di comando extra"
+	},
+	"field_description_aria_label": {
+		"message": "descrizione"
+	},
+	"field_description_placeholder": {
+		"message": "nomeutente@nomehost o testo in formato libero"
+	},
+	"field_hostname_aria_label": {
+		"message": "nome host"
+	},
+	"field_hostname_placeholder": {
+		"message": "nome host"
+	},
+	"field_identity_aria_label": {
+		"message": "identit\u00e0"
+	},
+	"field_port_aria_label": {
+		"message": "porta"
+	},
+	"field_port_placeholder": {
+		"message": "porta"
+	},
+	"field_relay_options_aria_label": {
+		"message": "opzioni relay"
+	},
+	"field_relay_options_placeholder": {
+		"message": "opzioni relay"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "nome profilo terminale"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "predefinito"
+	},
+	"field_username_aria_label": {
+		"message": "nome utente"
+	},
+	"field_username_placeholder": {
+		"message": "nome utente"
+	},
+	"found_relay": {
+		"message": "Server relay trovato: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Identit\u00e0"
+	},
+	"import_link_aria_label": {
+		"message": "importazione file"
+	},
+	"import_link_label": {
+		"message": "Importa\u2026"
+	},
+	"initializing_relay": {
+		"message": "Ricerca server relay mediante: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "Impossibile analizzare elemento JSON in \"$1\"",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "Nessun host noto, nulla di cui annullare la memorizzazione."
+	},
+	"known_hosts_prompt": {
+		"message": "Seleziona un host di cui annullare memorizzazione [1-$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "Host noti:"
+	},
+	"loading_label": {
+		"message": "Caricamento\u2026"
+	},
+	"missing_param": {
+		"message": "Parametro mancante: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "Montaggio SFTP"
+	},
+	"mounted_message": {
+		"message": "Montato."
+	},
+	"notify_copy": {
+		"message": "Selezione copiata"
+	},
+	"ok_button_label": {
+		"message": "OK"
+	},
+	"open_as_window_tip": {
+		"message": "[Suggerimento per i professionisti] Utilizza \"Apri in una finestra\" per evitare che \"CTRL+W\" chiuda la finestra terminale.\n[Suggerimento per i professionisti] Consulta $1 per ulteriori informazioni.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Opzioni"
+	},
+	"plugin_loading": {
+		"message": "Caricamento del plugin di NaCl in corso..."
+	},
+	"plugin_loading_complete": {
+		"message": " operazione completata."
+	},
+	"pref_backup_filename": {
+		"message": "Backup preferenze Secure Shell.json"
+	},
+	"preferences_header": {
+		"message": "Impostazioni del profilo"
+	},
+	"preferences_reset": {
+		"message": "Tutte le preferenze sono state reimpostate."
+	},
+	"reconnect_message": {
+		"message": "Riconnettere (R), Scegliere un'altra connessione (C) o Uscire (X)?"
+	},
+	"relay_retry": {
+		"message": "Nuovo tentativo\u2026"
+	},
+	"restore_prefs": {
+		"message": "Ripristina backup"
+	},
+	"shortcut_list_aria_label": {
+		"message": "connessioni salvate"
+	},
+	"ssh_argstr_label": {
+		"message": "Argomenti SSH"
+	},
+	"terminal_preview_label": {
+		"message": "Anteprima"
+	},
+	"terminal_profile_label": {
+		"message": "Profilo corrente"
+	},
+	"unexpected_error": {
+		"message": "Si \u00e8 verificato un errore imprevisto. Per ulteriori informazioni, controlla la console JavaScript."
+	},
+	"unmount_button_label": {
+		"message": "Smonta SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "\u00c8 disponibile un aggiornamento. Chiudi tutte le finestre."
+	},
+	"welcome_faq": {
+		"message": "Risposte alle Domande frequenti: $1 (CTRL+clic sui link per aprirli)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "Benvenuto in $1 versione $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "Nel menu Chrome imposta Zoom su 100%"
+	}
+}

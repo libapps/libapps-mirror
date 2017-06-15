@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"Ziel kann nicht geparst werden: $1.","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"Abbrechen"},"cmd_ssh_forget_host_help":{"message":"Mit diesem Befehl wird ein Men\u00fc mit bekannten Hosts eingeblendet, in dem Sie den zu l\u00f6schenden Host ausw\u00e4hlen k\u00f6nnen."},"cmd_ssh_forget_host_title":{"message":"Einen bekannten SSH-Host l\u00f6schen"},"cmd_ssh_help":{"message":"Die Parameter |username| und |hostname| sind erforderlich, |port| ist optional.  Ist kein Port angegeben, wird standardm\u00e4\u00dfig Port 22 verwendet."},"cmd_ssh_title":{"message":"\u00d6ffnet eine neue SSH-Sitzung"},"command_complete":{"message":"Der Befehl $1 wurde mit dem Beendigungscode $2 abgeschlossen. Bitte schlie\u00dfen Sie dieses Fenster.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"Verbindung mit $1, Port $2 wird hergestellt...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Verbinden"},"connect_message":{"message":"Geben Sie ein Ziel f\u00fcr die Verbindung ein."},"destination_pattern":{"message":"username@hostname[:port]"},"known_hosts_empty":{"message":"Keine bekannten Hosts zum L\u00f6schen vorhanden"},"known_hosts_prompt":{"message":"W\u00e4hlen Sie den zu l\u00f6schenden Host aus [1-$1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"Bekannte Hosts:"},"missing_param":{"message":"Parameter $1 fehlt.","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"OK"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"Es ist ein unerwarteter Fehler aufgetreten, bitte \u00fcberpr\u00fcfen Sie die JavaScript-Konsole auf n\u00e4here Informationen."},"welcome":{"message":"Willkommen! \u00d6ffnen Sie mit dem Befehl \"open\" eine neue SSH-Verbindung."},"welcome_tip":{"message":"Profi-Tipp: Sie k\u00f6nnen diese Sitzung als Browser-Lesezeichen speichern."}}
+{
+	"already_mounted_message": {
+		"message": "Das Dateisystem wird schon bereitgestellt."
+	},
+	"backup_prefs": {
+		"message": "Sicherung speichern"
+	},
+	"bad_destination": {
+		"message": "Ziel kann nicht geparst werden: $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "Das Schlie\u00dfen dieses Tabs beendet diese Sitzung."
+	},
+	"cancel_button_label": {
+		"message": "Abbrechen"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Mit diesem Befehl wird ein Men\u00fc mit bekannten Hosts eingeblendet, in dem Sie den zu l\u00f6schenden Host ausw\u00e4hlen k\u00f6nnen."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "L\u00f6scht einen bekannten SSH-Host"
+	},
+	"cmd_ssh_help": {
+		"message": "Die Parameter |username| und |hostname| sind erforderlich, |port| ist optional. Ist kein Port angegeben, wird standardm\u00e4\u00dfig Port 22 verwendet."
+	},
+	"cmd_ssh_title": {
+		"message": "\u00d6ffnet eine neue SSH-Sitzung"
+	},
+	"command_complete": {
+		"message": "Der Befehl \"$1\" wurde mit dem Statuscode \"$2\" beendet.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Verbinden"
+	},
+	"connect_or_exit_message": {
+		"message": "Eine andere Verbindung w\u00e4hlen (c) oder den Vorgang beenden (x)?"
+	},
+	"connecting": {
+		"message": "Verbindung mit $1 wird hergestellt\u2026",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[ENTF]"
+	},
+	"delete_button_label": {
+		"message": "L\u00f6schen"
+	},
+	"disconnect_message": {
+		"message": "NaCl-Plug-in wurde mit dem Statuscode \"$1\" beendet.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[EINGABE]"
+	},
+	"field_argstr_aria_label": {
+		"message": "Zus\u00e4tzliche SSH-Argumente"
+	},
+	"field_argstr_placeholder": {
+		"message": "Zus\u00e4tzliche Argumente \u00fcber die Eingabeaufforderung"
+	},
+	"field_description_aria_label": {
+		"message": "Beschreibung"
+	},
+	"field_description_placeholder": {
+		"message": "ihrnutzername@ihrhostname oder Freitext"
+	},
+	"field_hostname_aria_label": {
+		"message": "Hostname"
+	},
+	"field_hostname_placeholder": {
+		"message": "Hostname"
+	},
+	"field_identity_aria_label": {
+		"message": "Identit\u00e4t"
+	},
+	"field_port_aria_label": {
+		"message": "Port"
+	},
+	"field_port_placeholder": {
+		"message": "Port"
+	},
+	"field_relay_options_aria_label": {
+		"message": "Relay-Optionen"
+	},
+	"field_relay_options_placeholder": {
+		"message": "Relay-Optionen"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "Name des Terminalprofils"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "Standard"
+	},
+	"field_username_aria_label": {
+		"message": "Nutzername"
+	},
+	"field_username_placeholder": {
+		"message": "Nutzername"
+	},
+	"found_relay": {
+		"message": "Gefundener Relay-Server: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Identit\u00e4t"
+	},
+	"import_link_aria_label": {
+		"message": "Dateiimport"
+	},
+	"import_link_label": {
+		"message": "Importieren\u2026"
+	},
+	"initializing_relay": {
+		"message": "Relay-Server wird \u00fcber $1 gesucht",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "JSON-Daten konnten nicht in \"$1\" geparst werden",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "Keine bekannten Hosts zum L\u00f6schen vorhanden"
+	},
+	"known_hosts_prompt": {
+		"message": "W\u00e4hlen Sie den zu l\u00f6schenden Host aus [1-$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "Bekannte Hosts:"
+	},
+	"loading_label": {
+		"message": "Wird geladen\u2026"
+	},
+	"missing_param": {
+		"message": "Parameter $1 fehlt.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "SFTP-Bereitstellung"
+	},
+	"mounted_message": {
+		"message": "Wird schon bereitgestellt."
+	},
+	"notify_copy": {
+		"message": "Auswahl wurde kopiert"
+	},
+	"ok_button_label": {
+		"message": "OK"
+	},
+	"open_as_window_tip": {
+		"message": "[Profi-Tipp] Mit der Option \"In Fenster \u00f6ffnen\" wird Ihr Terminal nicht geschlossen, wenn Sie die Tastenkombination Strg\u00a0+\u00a0W verwenden.\n[Profi-Tipp] Weitere Informationen finden Sie unter $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Optionen"
+	},
+	"plugin_loading": {
+		"message": "NaCl-Plug-in wird geladen..."
+	},
+	"plugin_loading_complete": {
+		"message": " Fertig"
+	},
+	"pref_backup_filename": {
+		"message": "Sicherung f\u00fcr Secure Shell-Einstellungen.json"
+	},
+	"preferences_header": {
+		"message": "Profileinstellungen"
+	},
+	"preferences_reset": {
+		"message": "Alle Einstellungen wurden zur\u00fcckgesetzt."
+	},
+	"reconnect_message": {
+		"message": "Verbindung wiederherstellen (r), eine andere Verbindung w\u00e4hlen (c) oder den Vorgang beenden (x)?"
+	},
+	"relay_retry": {
+		"message": "Wird erneut versucht..."
+	},
+	"restore_prefs": {
+		"message": "Sicherung wiederherstellen"
+	},
+	"shortcut_list_aria_label": {
+		"message": "Gespeicherte Verbindungen"
+	},
+	"ssh_argstr_label": {
+		"message": "SSH-Argumente"
+	},
+	"terminal_preview_label": {
+		"message": "Vorschau"
+	},
+	"terminal_profile_label": {
+		"message": "Aktuelles Profil"
+	},
+	"unexpected_error": {
+		"message": "Ein unerwarteter Fehler ist aufgetreten. Weitere Informationen finden Sie in der JavaScript-Konsole."
+	},
+	"unmount_button_label": {
+		"message": "SFTP-Bereitstellung beenden"
+	},
+	"update_available_tooltip": {
+		"message": "Ein Update ist verf\u00fcgbar. Bitte schlie\u00dfen Sie alle Fenster."
+	},
+	"welcome_faq": {
+		"message": "Antworten auf h\u00e4ufig gestellte Fragen: $1 (Strg + zum \u00d6ffnen von Links klicken)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "Willkommen bei $1 Version\u00a0$2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "Bitte stellen Sie im Chrome-Men\u00fc die Zoomeinstellungen auf 100\u00a0% ein"
+	}
+}

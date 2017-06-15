@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"Hindi magawang i-parse ang patutunguhan: $1","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"Kanselahin"},"cmd_ssh_forget_host_help":{"message":"Nagpapakita ang command na ito ng menu ng mga kilalang host at prompt na kakalimutan ng host."},"cmd_ssh_forget_host_title":{"message":"Kalimutan ang isang kilalang ssh host."},"cmd_ssh_help":{"message":"Kinakailangan ang mga parameter na |username| at |hostname|, opsyonal ang |port|.  Kung hindi tinutukoy ang port, nagde-default ito sa 22."},"cmd_ssh_title":{"message":"Nagbubukas ng bagong sesyon ng SSH."},"command_complete":{"message":"Nakumpleto ang command na $1 na may exit code na $2.  Pakisara ang window na ito kung kailan mo gusto.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"Kumokonekta sa $1, port $2...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Kumonekta"},"connect_message":{"message":"Mangyaring maglagay ng patutunguhan kung saan kokonekta."},"destination_pattern":{"message":"username@hostname[:port]"},"known_hosts_empty":{"message":"Walang mga kilalang host, walang kakalimutan."},"known_hosts_prompt":{"message":"Mangyaring pumili ng host na kakalimutan [1-$1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"Mga kilalang host:"},"missing_param":{"message":"Nawawalang parameter: $1","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"OK"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"May naganap na hindi inaasahang error, pakitingnan ang console ng JavaScript para sa higit pang mga detalye."},"welcome":{"message":"Maligayang pagdating! Magbukas ng bagong koneksyon ng ssh gamit ang command na 'buksan'."},"welcome_tip":{"message":"Pro na Tip: Mase-save mo ang session na ito bilang bookmark ng browser."}}
+{
+	"already_mounted_message": {
+		"message": "Naka-mount na ang system ng file!"
+	},
+	"backup_prefs": {
+		"message": "Mag-save ng Backup"
+	},
+	"bad_destination": {
+		"message": "Hindi ma-parse ang patutunguhan: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "Ang pagsasara sa tab na ito ay mag-aalis sa pagkakakonekta ng session na ito."
+	},
+	"cancel_button_label": {
+		"message": "Kanselahin"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Nagpapakita ang command na ito ng menu ng mga kilalang host at nagpa-prompt upang makalimot ang host."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "Kalimutan ang isang kilalang ssh host."
+	},
+	"cmd_ssh_help": {
+		"message": "Kinakailangan ang mga parameter ng |username| at |hostname|, opsyonal ang |port|.  Kung hindi tinukoy ang port, nagde-default ito sa 22."
+	},
+	"cmd_ssh_title": {
+		"message": "Nagbubukas ng bagong session ng SSH."
+	},
+	"command_complete": {
+		"message": "Nakumpleto na ang command na $1 nang may status code na $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Kumonekta"
+	},
+	"connect_or_exit_message": {
+		"message": "(P)umili ng ibang koneksyon o L(u)mabas?"
+	},
+	"connecting": {
+		"message": "Kumokonekta sa $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "I-delete"
+	},
+	"disconnect_message": {
+		"message": "Nakumpleto na ang NaCl plugin nang may status code na $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_aria_label": {
+		"message": "mga karagdagang argument ng ssh"
+	},
+	"field_argstr_placeholder": {
+		"message": "mga karagdagang command line na argument"
+	},
+	"field_description_aria_label": {
+		"message": "paglalarawan"
+	},
+	"field_description_placeholder": {
+		"message": "username@hostname o free form text"
+	},
+	"field_hostname_aria_label": {
+		"message": "hostname"
+	},
+	"field_hostname_placeholder": {
+		"message": "hostname"
+	},
+	"field_identity_aria_label": {
+		"message": "pagkakakilanlan"
+	},
+	"field_port_aria_label": {
+		"message": "port"
+	},
+	"field_port_placeholder": {
+		"message": "port"
+	},
+	"field_relay_options_aria_label": {
+		"message": "mga opsyon ng pag-relay"
+	},
+	"field_relay_options_placeholder": {
+		"message": "mga opsyon ng pag-relay"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "pangalan sa profile ng terminal"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "default"
+	},
+	"field_username_aria_label": {
+		"message": "username"
+	},
+	"field_username_placeholder": {
+		"message": "username"
+	},
+	"found_relay": {
+		"message": "Nakitang relay server: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Pagkakakilanlan"
+	},
+	"import_link_aria_label": {
+		"message": "pag-import ng file"
+	},
+	"import_link_label": {
+		"message": "I-import..."
+	},
+	"initializing_relay": {
+		"message": "Naghahanap ng relay server gamit ang: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "Hindi ma-parse ang JSON sa '$1'",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "Walang mga kilalang host, walang kakalimutan."
+	},
+	"known_hosts_prompt": {
+		"message": "Mangyaring pumili ng host na kakalimutan [1-$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "Mga kilalang host:"
+	},
+	"loading_label": {
+		"message": "Naglo-load..."
+	},
+	"missing_param": {
+		"message": "Nawawalang parameter: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "I-mount ang SFTP"
+	},
+	"mounted_message": {
+		"message": "Na-mount na!"
+	},
+	"notify_copy": {
+		"message": "Nakopya ang Pinili"
+	},
+	"ok_button_label": {
+		"message": "OK"
+	},
+	"open_as_window_tip": {
+		"message": "[Pro Tip] Gamitin ang 'Buksan bilang Window' upang pigilan ang Control-W na isara ang iyong terminal!\n[Pro Tip] Tingnan ang $1 para sa higit pang impormasyon.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Mga Opsyon"
+	},
+	"plugin_loading": {
+		"message": "Nilo-load ang NaCl plugin..."
+	},
+	"plugin_loading_complete": {
+		"message": " tapos na."
+	},
+	"pref_backup_filename": {
+		"message": "Backup.json ng Mga Kagustuhan ng Secure Shell"
+	},
+	"preferences_header": {
+		"message": "Mga Setting ng Profile"
+	},
+	"preferences_reset": {
+		"message": "Na-reset na ang lahat ng kagustuhan!"
+	},
+	"reconnect_message": {
+		"message": "(M)uling Kumonekta, (P)umili ng ibang konesyon, o L(u)mabas?"
+	},
+	"relay_retry": {
+		"message": "Muling sinusubukan..."
+	},
+	"restore_prefs": {
+		"message": "I-restore ang Backup"
+	},
+	"shortcut_list_aria_label": {
+		"message": "mga naka-save na koneksyon"
+	},
+	"ssh_argstr_label": {
+		"message": "Mga Argument ng SSH"
+	},
+	"terminal_preview_label": {
+		"message": "I-preview"
+	},
+	"terminal_profile_label": {
+		"message": "Kasalukuyang profile"
+	},
+	"unexpected_error": {
+		"message": "Nagkaroon ng hindi inaasahang error, pakitingnan ang JavaScript console para sa higit pang detalye."
+	},
+	"unmount_button_label": {
+		"message": "I-unmount ang SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "May available na update.  Pakisara ang lahat ng window."
+	},
+	"welcome_faq": {
+		"message": "Mga Sagot sa Mga Madalas Itanong: $1 (mag-ctrl+click sa mga link upang buksan)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "Welcome sa $1, bersyon $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "Pakitakda ang Chrome Menu->Zoom sa 100%"
+	}
+}

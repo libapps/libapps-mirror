@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"N\u00e3o \u00e9 poss\u00edvel analisar o destino: $1","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"Cancelar"},"cmd_ssh_forget_host_help":{"message":"Este comando apresenta um menu de anfitri\u00f5es conhecidos e solicita ao anfitri\u00e3o que esque\u00e7a."},"cmd_ssh_forget_host_title":{"message":"Esquecer um anfitri\u00e3o SSH conhecido."},"cmd_ssh_help":{"message":"Os par\u00e2metros |username| e |hostname| s\u00e3o obrigat\u00f3rios, |port| \u00e9 opcional. Se a porta n\u00e3o for especificada, \u00e9 aplicada a predefini\u00e7\u00e3o de 22."},"cmd_ssh_title":{"message":"Abre uma nova sess\u00e3o SSH."},"command_complete":{"message":"O comando $1 foi conclu\u00eddo com o c\u00f3digo de sa\u00edda $2. Feche esta janela quando pretender.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"A ligar a $1, porta $2...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Ligar"},"connect_message":{"message":"Introduza um destino para a liga\u00e7\u00e3o."},"destination_pattern":{"message":"username@hostname[:porta]"},"known_hosts_empty":{"message":"Sem anfitri\u00f5es conhecidos, nada a esquecer."},"known_hosts_prompt":{"message":"Selecione um anfitri\u00e3o a esquecer [1-$1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"Anfitri\u00f5es conhecidos:"},"missing_param":{"message":"Par\u00e2metro em falta: $1","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"OK"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"Ocorreu um erro inesperado, verifique a consola de JavaScript para obter mais detalhes."},"welcome":{"message":"Bem-vindo! Abra uma nova liga\u00e7\u00e3o ssh com o comando \"abrir\""},"welcome_tip":{"message":"Sugest\u00e3o Pro: pode guardar esta sess\u00e3o como marcador do navegador."}}
+{
+	"already_mounted_message": {
+		"message": "O sistema de ficheiros j\u00e1 est\u00e1 montado!"
+	},
+	"backup_prefs": {
+		"message": "Guardar c\u00f3pia de seguran\u00e7a"
+	},
+	"bad_destination": {
+		"message": "N\u00e3o \u00e9 poss\u00edvel analisar o destino: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "Se fechar este separador, ir\u00e1 encerrar a sess\u00e3o."
+	},
+	"cancel_button_label": {
+		"message": "Cancelar"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Este comando apresenta um menu de anfitri\u00f5es conhecidos e solicita ao anfitri\u00e3o que esque\u00e7a."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "Esquecer um anfitri\u00e3o SSH conhecido."
+	},
+	"cmd_ssh_help": {
+		"message": "Os par\u00e2metros |username| e |hostname| s\u00e3o obrigat\u00f3rios, |port| \u00e9 opcional. Se a porta n\u00e3o for especificada, \u00e9 aplicada a predefini\u00e7\u00e3o de 22."
+	},
+	"cmd_ssh_title": {
+		"message": "Abre uma nova sess\u00e3o SSH."
+	},
+	"command_complete": {
+		"message": "A instru\u00e7\u00e3o $1 foi conclu\u00edda com o c\u00f3digo de estado $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Ligar"
+	},
+	"connect_or_exit_message": {
+		"message": "Pretende es(c)olher outra liga\u00e7\u00e3o ou sair (x)?"
+	},
+	"connecting": {
+		"message": "A ligar a $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "Eliminar"
+	},
+	"disconnect_message": {
+		"message": "O plug-in NaCl foi conclu\u00eddo com o c\u00f3digo de estado $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_aria_label": {
+		"message": "argumentos ssh adicionais"
+	},
+	"field_argstr_placeholder": {
+		"message": "argumentos adicionais da linha de comandos"
+	},
+	"field_description_aria_label": {
+		"message": "descri\u00e7\u00e3o"
+	},
+	"field_description_placeholder": {
+		"message": "username@hostname ou texto livre"
+	},
+	"field_hostname_aria_label": {
+		"message": "nome do anfitri\u00e3o"
+	},
+	"field_hostname_placeholder": {
+		"message": "nome do anfitri\u00e3o"
+	},
+	"field_identity_aria_label": {
+		"message": "identidade"
+	},
+	"field_port_aria_label": {
+		"message": "porta"
+	},
+	"field_port_placeholder": {
+		"message": "porta"
+	},
+	"field_relay_options_aria_label": {
+		"message": "op\u00e7\u00f5es de retransmiss\u00e3o"
+	},
+	"field_relay_options_placeholder": {
+		"message": "op\u00e7\u00f5es de retransmiss\u00e3o"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "nome do perfil do terminal"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "predefini\u00e7\u00e3o"
+	},
+	"field_username_aria_label": {
+		"message": "nome de utilizador"
+	},
+	"field_username_placeholder": {
+		"message": "nome de utilizador"
+	},
+	"found_relay": {
+		"message": "Foi encontrado o servidor de retransmiss\u00e3o: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Identidade"
+	},
+	"import_link_aria_label": {
+		"message": "importa\u00e7\u00e3o de ficheiro"
+	},
+	"import_link_label": {
+		"message": "Importar..."
+	},
+	"initializing_relay": {
+		"message": "A procurar o servidor de retransmiss\u00e3o atrav\u00e9s de: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "N\u00e3o foi poss\u00edvel analisar o ficheiro JSON em '$1'",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "Sem anfitri\u00f5es conhecidos, nada a esquecer."
+	},
+	"known_hosts_prompt": {
+		"message": "Selecione um anfitri\u00e3o a esquecer [1-$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "Anfitri\u00f5es conhecidos:"
+	},
+	"loading_label": {
+		"message": "A carregar..."
+	},
+	"missing_param": {
+		"message": "Par\u00e2metro em falta: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "Montar SFTP"
+	},
+	"mounted_message": {
+		"message": "Montado"
+	},
+	"notify_copy": {
+		"message": "Sele\u00e7\u00e3o copiada"
+	},
+	"ok_button_label": {
+		"message": "OK"
+	},
+	"open_as_window_tip": {
+		"message": "[Sugest\u00e3o] Utilize a op\u00e7\u00e3o \"Abrir como janela\" para evitar que o comando Control-W feche o terminal!\n[Sugest\u00e3o] Consulte $1 para obter mais informa\u00e7\u00f5es.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Op\u00e7\u00f5es"
+	},
+	"plugin_loading": {
+		"message": "A carregar o plug-in NaCl..."
+	},
+	"plugin_loading_complete": {
+		"message": " conclu\u00eddo."
+	},
+	"pref_backup_filename": {
+		"message": "Proteger prefer\u00eancias de c\u00f3pia de seguran\u00e7a de shell.json"
+	},
+	"preferences_header": {
+		"message": "Defini\u00e7\u00f5es do perfil"
+	},
+	"preferences_reset": {
+		"message": "Todas as prefer\u00eancias repostas!"
+	},
+	"reconnect_message": {
+		"message": "Pretende (v)oltar a ligar, (e)scolher outra liga\u00e7\u00e3o ou (s)air?"
+	},
+	"relay_retry": {
+		"message": "A tentar novamente..."
+	},
+	"restore_prefs": {
+		"message": "Restaurar c\u00f3pia de seguran\u00e7a"
+	},
+	"shortcut_list_aria_label": {
+		"message": "liga\u00e7\u00f5es guardadas"
+	},
+	"ssh_argstr_label": {
+		"message": "Argumentos SSH"
+	},
+	"terminal_preview_label": {
+		"message": "Pr\u00e9-visualiza\u00e7\u00e3o"
+	},
+	"terminal_profile_label": {
+		"message": "Perfil atual"
+	},
+	"unexpected_error": {
+		"message": "Ocorreu um erro inesperado. Verifique a Consola de JavaScript para obter mais detalhes."
+	},
+	"unmount_button_label": {
+		"message": "Desmontar SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "Est\u00e1 dispon\u00edvel uma atualiza\u00e7\u00e3o. Feche todas as janelas"
+	},
+	"welcome_faq": {
+		"message": "Respostas a Perguntas frequentes: $1 (utilize a combina\u00e7\u00e3o ctrl + clique nos links para os abrir)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "Bem-vindo \u00e0 vers\u00e3o $2 do $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "Defina o menu do Chrome->Zoom para 100%"
+	}
+}

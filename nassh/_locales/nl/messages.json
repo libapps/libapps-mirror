@@ -1,1 +1,269 @@
-{"bad_destination":{"message":"Kan bestemming niet parseren: $1","placeholders":{"1":{"content":"$1"}}},"before_unload":{"message":"Closing this tab will disconnect this session."},"cancel_button_label":{"message":"Annuleren"},"cmd_ssh_forget_host_help":{"message":"Met deze opdracht wordt een menu weergegeven met bekende hosts en prompts om de host te vergeten."},"cmd_ssh_forget_host_title":{"message":"Een bekende SSH-host vergeten."},"cmd_ssh_help":{"message":"De parameters |username| en |hostname| zijn vereist en |port| is optioneel. Als de poort niet wordt opgegeven, wordt standaard poort 22 gebruikt."},"cmd_ssh_title":{"message":"Een nieuwe SSH-sessie openen."},"command_complete":{"message":"De opdracht $1 is voltooid met afsluitcode $2. Sluit dit venster wanneer u dit wilt.","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connecting":{"message":"Verbinden met $1, poort $2...","placeholders":{"1":{"content":"$1"},"2":{"content":"$2"}}},"connect_button_label":{"message":"Verbinden"},"connect_message":{"message":"Geef een bestemming op om verbinding mee te maken."},"destination_pattern":{"message":"gebruikersnaam@hostnaam[:poort]"},"known_hosts_empty":{"message":"Geen bekende hosts, niets te vergeten."},"known_hosts_prompt":{"message":"Selecteer een host om te vergeten [1-$1]:","placeholders":{"1":{"content":"$1"}}},"known_hosts_title":{"message":"Bekende hosts:"},"missing_param":{"message":"Ontbrekende parameter: $1","placeholders":{"1":{"content":"$1"}}},"ok_button_label":{"message":"OK"},"plugin_loading":{"message":"Loading NaCl plugin..."},"plugin_loading_complete":{"message":" done."},"unexpected_error":{"message":"Er is een onverwachte fout opgetreden. Controleer de JavaScript-console voor meer informatie."},"welcome":{"message":"Welkom! Open een nieuwe SSH-verbinding met de opdracht 'openen'."},"welcome_tip":{"message":"Professionele tip: u kunt deze sessie opslaan als browserbladwijzer."}}
+{
+	"already_mounted_message": {
+		"message": "Bestandssysteem is al gekoppeld."
+	},
+	"backup_prefs": {
+		"message": "Back-up opslaan"
+	},
+	"bad_destination": {
+		"message": "Kan bestemming niet parseren: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"before_unload": {
+		"message": "Als u dit tabblad sluit, wordt deze sessie be\u00ebindigd."
+	},
+	"cancel_button_label": {
+		"message": "Annuleren"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Met deze opdracht wordt een menu weergegeven met bekende hosts en prompts die de host moet vergeten."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "Een bekende SSH-host vergeten."
+	},
+	"cmd_ssh_help": {
+		"message": "De parameters |username| en |hostname| zijn vereist en |port| is optioneel. Als de poort niet wordt opgegeven, wordt standaard poort 22 gebruikt."
+	},
+	"cmd_ssh_title": {
+		"message": "Een nieuwe SSH-sessie openen."
+	},
+	"command_complete": {
+		"message": "De opdracht $1 is afgesloten met statuscode $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"connect_button_label": {
+		"message": "Verbinden"
+	},
+	"connect_or_exit_message": {
+		"message": "Een andere verbinding kiezen of afsluiten?"
+	},
+	"connecting": {
+		"message": "Verbinding maken met $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "Verwijderen"
+	},
+	"disconnect_message": {
+		"message": "NaCl-plug-in afgesloten met statuscode $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_aria_label": {
+		"message": "aanvullende ssh-argumenten"
+	},
+	"field_argstr_placeholder": {
+		"message": "extra opdrachtregelargumenten"
+	},
+	"field_description_aria_label": {
+		"message": "beschrijving"
+	},
+	"field_description_placeholder": {
+		"message": "gebruikersnaam@hostnaam of vrije tekst"
+	},
+	"field_hostname_aria_label": {
+		"message": "hostnaam"
+	},
+	"field_hostname_placeholder": {
+		"message": "hostnaam"
+	},
+	"field_identity_aria_label": {
+		"message": "identiteit"
+	},
+	"field_port_aria_label": {
+		"message": "poort"
+	},
+	"field_port_placeholder": {
+		"message": "poort"
+	},
+	"field_relay_options_aria_label": {
+		"message": "relayopties"
+	},
+	"field_relay_options_placeholder": {
+		"message": "relayopties"
+	},
+	"field_terminal_profile_aria_label": {
+		"message": "naam van terminalprofiel"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "standaard"
+	},
+	"field_username_aria_label": {
+		"message": "gebruikersnaam"
+	},
+	"field_username_placeholder": {
+		"message": "gebruikersnaam"
+	},
+	"found_relay": {
+		"message": "Relayserver gevonden: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"identity_label": {
+		"message": "Identiteit"
+	},
+	"import_link_aria_label": {
+		"message": "bestand importeren"
+	},
+	"import_link_label": {
+		"message": "Importeren..."
+	},
+	"initializing_relay": {
+		"message": "Relayserver opzoeken met: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"json_parse_error": {
+		"message": "Kan JSON niet parseren in '$1'",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_empty": {
+		"message": "Geen bekende hosts, niets te vergeten."
+	},
+	"known_hosts_prompt": {
+		"message": "Selecteer een host om te vergeten [1-$1]:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"known_hosts_title": {
+		"message": "Bekende hosts:"
+	},
+	"loading_label": {
+		"message": "Bezig met laden..."
+	},
+	"missing_param": {
+		"message": "Ontbrekende parameter: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"mount_button_label": {
+		"message": "SFTP koppelen"
+	},
+	"mounted_message": {
+		"message": "Gekoppeld."
+	},
+	"notify_copy": {
+		"message": "Selectie gekopieerd"
+	},
+	"ok_button_label": {
+		"message": "OK"
+	},
+	"open_as_window_tip": {
+		"message": "[Tip voor geavanceerde gebruikers] Gebruik 'Openen als venster' om te voorkomen dat de terminal kan worden gesloten via Ctrl-W.\n[Tip voor geavanceerde gebruikers] Zie $1 voor meer informatie.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"options_button_label": {
+		"message": "Opties"
+	},
+	"plugin_loading": {
+		"message": "NaCl-plug-in laden..."
+	},
+	"plugin_loading_complete": {
+		"message": " gereed."
+	},
+	"pref_backup_filename": {
+		"message": "Secure Shell Preferences Backup.json"
+	},
+	"preferences_header": {
+		"message": "Profielinstellingen"
+	},
+	"preferences_reset": {
+		"message": "Alle voorkeuren zijn gereset."
+	},
+	"reconnect_message": {
+		"message": "Opnieuw verbinden, een andere verbinding kiezen of afsluiten?"
+	},
+	"relay_retry": {
+		"message": "Opnieuw proberen\u2026"
+	},
+	"restore_prefs": {
+		"message": "Back-up terugzetten"
+	},
+	"shortcut_list_aria_label": {
+		"message": "opgeslagen verbindingen"
+	},
+	"ssh_argstr_label": {
+		"message": "SSH-argumenten"
+	},
+	"terminal_preview_label": {
+		"message": "Voorbeeld"
+	},
+	"terminal_profile_label": {
+		"message": "Huidig profiel"
+	},
+	"unexpected_error": {
+		"message": "Er is een onverwachte fout opgetreden. Controleer de JavaScript-console voor meer informatie."
+	},
+	"unmount_button_label": {
+		"message": "SFTP ontkoppelen"
+	},
+	"update_available_tooltip": {
+		"message": "Er is een update beschikbaar. Sluit alle vensters."
+	},
+	"welcome_faq": {
+		"message": "Antwoorden op veelgestelde vragen: $1 (Ctrl+klik op links om ze te openen)",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_version": {
+		"message": "Welkom bij $1-versie $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"zoom_warning": {
+		"message": "Stel Chrome-menu -> Zoom in op 100%"
+	}
+}
