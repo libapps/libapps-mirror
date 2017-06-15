@@ -770,12 +770,28 @@ different app, visit the chrome://settings/handlers page.
   provide a solution.
 
 
-### Can I rebind keys/shortcuts?
+### How do I change input methods?
+
+  In Chrome OS, Ctrl-Shift-Space and Ctrl-Space are used to cycle through
+  keyboard input methods.  By default, hterm will capture these.  You can
+  add custom bindings for these in the 'keybindings' settings to pass them
+  along to the OS instead.
+
+     {
+       "Ctrl-Shift-Space": "PASS",
+       "Ctrl-Space": "PASS"
+     }
+
+  For more details, see the [Can I rebind keys/shortcuts](#keybindings)
+  section below.
+
+
+### Can I rebind keys/shortcuts? {#keybindings}
 
   Yes, all keys can be rebound.  Look for the 'keybindings' setting in the
   Secure Shell Options page under the Keyboard section.
 
-  For more documentation on how the format, see the [Keyboard Bindings] doc.
+  For more documentation on the format, see the [Keyboard Bindings] doc.
 
 
 ### How do I copy text from the terminal?
