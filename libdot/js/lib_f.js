@@ -149,23 +149,6 @@ lib.f.clamp = function(v, min, max) {
 };
 
 /**
- * Left pad a string to a given length using a given character.
- *
- * @param {string} str The string to pad.
- * @param {integer} length The desired length.
- * @param {string} ch The optional padding character, defaults to ' '.
- * @return {string} The padded string.
- */
-lib.f.lpad = function(str, length, ch=' ') {
-  str = String(str);
-
-  if (str.length < length)
-    str = ch.repeat(length - str.length) + str;
-
-  return str;
-};
-
-/**
  * Left pad a number to a given length with leading zeros.
  *
  * @param {string|integer} number The number to pad.
@@ -173,24 +156,7 @@ lib.f.lpad = function(str, length, ch=' ') {
  * @return {string} The padded number as a string.
  */
 lib.f.zpad = function(number, length) {
-  return lib.f.lpad(number, length, '0');
-};
-
-/**
- * Right pad a string to a given length using a given character.
- *
- * @param {string} str The string to pad.
- * @param {integer} length The desired length.
- * @param {string} ch The optional padding character, defaults to ' '.
- * @return {string} The padded string.
- */
-lib.f.rpad = function(str, length, ch=' ') {
-  str = String(str);
-
-  if (str.length < length)
-    str += ch.repeat(length - str.length);
-
-  return str;
+  return String(number).padStart(length, '0');
 };
 
 /**

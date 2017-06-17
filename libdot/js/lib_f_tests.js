@@ -57,28 +57,10 @@ lib.f.Tests.addTest('clamp', function(result, cx) {
   result.pass();
 });
 
-lib.f.Tests.addTest('lpad', function(result, cx) {
-  result.assertEQ(lib.f.lpad('', 0), '');
-  result.assertEQ(lib.f.lpad('', 5), '     ');
-  result.assertEQ(lib.f.lpad('abc', 1), 'abc');
-  result.assertEQ(lib.f.lpad('abc', 5), '  abc');
-  result.assertEQ(lib.f.lpad('abc', 5, '*'), '**abc');
-  result.pass();
-});
-
 lib.f.Tests.addTest('zpad', function(result, cx) {
   result.assertEQ(lib.f.zpad(0, 0), '0');
   result.assertEQ(lib.f.zpad(0, 5), '00000');
   result.assertEQ(lib.f.zpad(123, 5), '00123');
-  result.pass();
-});
-
-lib.f.Tests.addTest('rpad', function(result, cx) {
-  result.assertEQ(lib.f.rpad('', 0), '');
-  result.assertEQ(lib.f.rpad('', 5), '     ');
-  result.assertEQ(lib.f.rpad('abc', 1), 'abc');
-  result.assertEQ(lib.f.rpad('abc', 5), 'abc  ');
-  result.assertEQ(lib.f.rpad('abc', 5, '*'), 'abc**');
   result.pass();
 });
 

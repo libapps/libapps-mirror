@@ -156,7 +156,7 @@ nassh.ConnectDialog.prototype.alignLabels_ = function() {
   });
 
   labels.forEach(function(el) {
-      el.textContent = lib.f.lpad(el.textContent, labelWidth, '\xa0');
+      el.textContent = el.textContent.padStart(labelWidth, '\xa0');
     });
 };
 
