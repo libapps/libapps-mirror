@@ -20,7 +20,25 @@ The port to connect to on the relay server.
 
 ## `--use-ssl=<bool>`
 
-Whether to use HTTPS (the default) or HTTP.
+Whether to use HTTPS (the default) or HTTP when communicating with the relay
+server.
+
+Even if you use HTTP, the actual ssh session will still be encrypted.
+
+## `--use-xhr`
+
+Use XML HTTP requests (XHR) when communicating with the relay server instead of
+WebSockets.  Use of this depends on your relay server implementation.
+
+## `--report-ack-latency`
+
+Report ACK latency to the relay server.
+If you don't know what this is for, then just ignore it.
+
+## `--report-connect-attempts`
+
+Report connection attempt counts to the relay server.
+If you don't know what this is for, then just ignore it.
 
 ## `--ssh-agent=<extension id>`
 
