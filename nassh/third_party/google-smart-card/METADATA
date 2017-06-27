@@ -1,0 +1,15 @@
+name: "google-smart-card-client-library"
+description: "Client library for the Smart Card Connector App for Chrome OS"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://github.com/GoogleChrome/chromeos_smart_card_connector/tree/master/example_js_standalone_smart_card_client_library"
+  }
+  url {
+    type: GIT
+    value: "https://github.com/GoogleChrome/chromeos_smart_card_connector"
+  }
+  version: "1.2.10.0"
+  last_upgrade_date { year: 2017 month: 6 day: 22 }
+}

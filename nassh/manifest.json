@@ -37,6 +37,7 @@
   "background": {
     "persistent": false,
     "scripts": [
+      "third_party/google-smart-card/google-smart-card-client-library.js",
       "js/nassh_deps.concat.js",
       "js/nassh.js",
       "js/nassh_app.js",
