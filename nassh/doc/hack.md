@@ -138,6 +138,10 @@ use the dev extension id instead.
 Secure Shell (extension ID "pnhechapfaindjhompbnflcldabbghjo") is blocked by the administrator.
 ```
 
+# Coding Style
+
+See the [libapps hacking document](../../HACK.md) for details.
+
 # Source Layout
 
 Keep in mind that the NaCl [ssh_client] code does not live here.

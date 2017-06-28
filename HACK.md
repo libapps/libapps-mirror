@@ -24,6 +24,63 @@ us first through the [chromium-hterm mailing list] with your idea so that we can
 help out and possibly guide you.  Coordinating up front makes it much easier to
 avoid frustration later on.
 
+# Coding Style
+
+We follow the [Chromium style guide] (which in turn follows the
+[Google style guide]).  You might find code in the tree that doesn't follow
+those, but it's most likely due to lack of tools automatically checking and
+enforcing rather than being done on purpose.
+
+[Chromium style guide]: https://chromium.googlesource.com/chromium/src/+/master/styleguide/web/web.md#JavaScript
+[Google style guide]: https://google.github.io/styleguide/jsguide.html
+
+* Do not one-line if statements.
+* When wrapping function arguments, wrap them all, or keep them aligned.
+
+## Automatic Formatting
+
+If you want to see suggestions for how to format your code, you can use the
+`clang-format` tool.  Note that clang-format can sometimes reformat code that
+is acceptable according to the style guide, and it cannot catch everything!
+Make sure to use your best judgment when going through its proposed changes.
+
+```
+# Write the formatted output to stdout.
+$ clang-format -style=file foo.js
+
+# Update the file in-place.
+$ clang-format -i -style=file foo.js
+```
+
+## Linting
+
+You can use [eslint](https://eslint.org/) to quickly check code, or
+[closure compiler](https://developers.google.com/closure/compiler/).
+
+The [bin/lint.sh](./libdot/bin/lint.sh) helper script will run both for you.
+
+The [.eslintrc.js](./.eslintrc.js) is copied from the
+[Chromium project](https://chromium.googlesource.com/chromium/src/+/master/.eslintrc.js).
+
+## Console Logging
+
+The `console.log` functions have a variety of function signatures.  We like to
+stick to a few forms though.
+
+* A single string when we expect everything to be strings:
+
+      console.log('The field "' + name + '" is invalid: ' + val);
+
+* A string followed by objects when dealing with more than strings, and we want
+  to be able to easily explore the object in the debugging console:
+
+      console.log('The field "' + name + '" is invalid:', val);
+
+* Or you can use ES6 template literals/strings:
+
+      console.log(`The field "${name}" is invalid: ${val}`);
+      console.log(`The field "${name}" is invalid:`, val);
+
 # Submitting patches
 
 This repository only accepts commits that are submitted through "Gerrit", the

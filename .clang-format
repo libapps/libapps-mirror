@@ -1,0 +1,11 @@
+# Defines the Chromium style for automatic reformatting.
+# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+BasedOnStyle: Chromium
+
+Language: JavaScript
+
+# A few tweaks where the guides permit.
+AlignOperands: true
+AllowShortFunctionsOnASingleLine: Inline
+BinPackArguments: false
+MaxEmptyLinesToKeep: 1
