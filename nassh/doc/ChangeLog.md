@@ -1,3 +1,14 @@
+# 0.8.36.6, 2017-06-29, Bug fixes & more features!
+
+* Update to libdot 1.15.  Some standards fixes.
+* Update to hterm 1.66.  Unicode rendering fixes, mouse fixes, custom
+  notification support, and character map robustification.
+* Fix handling of custom --ssh-agent when using --config=google.
+* Stop enabling ssh-agent forwarding by default for non-google configs.
+* Document support for cycling input methods (in CrOS).
+* Refresh translations everywhere!
+* Document more relay options.
+
 # 0.8.36.5, 2017-05-30, New OpenSSL & UX improvements.
 
 * Update to libdot 1.14.  Some standards fixes.

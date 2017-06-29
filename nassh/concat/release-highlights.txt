@@ -19,3 +19,7 @@
 % Root path for SFTP mounts can be configured (Chrome OS only).
 % OpenSSL upgraded to 1.0.2k.
 % Custom "mouse-paste-button" settings need to be manually updated.
+% Mouse wheel sends up/down arrow keys on the alt screen in DECCKM mode.
+% Support for iTerm2 OSC-9 growl notifications.
+% Support for URxvt OSC-777:notify module notifications.
+% Ctrl+V/Ctrl+Shift+V now pastes directly (fixes at least macOS).
