@@ -1,3 +1,10 @@
+# 1.15, 2017-06-29, Standards improvements.
+
+* Drop old String.prototype.codePointAt polyfill.
+* Drop lib.f.{l,r}pad in favor of String.pad{Start,End}.
+  API breakage warning: Users of these funcs will need to update to use the
+  new funcs, and include the new libdot polyfill library.
+
 # 1.14, 2017-05-30, Standards cleanup.
 
 * Add a lib.f.createEnum helper (largely for linting purposes).
