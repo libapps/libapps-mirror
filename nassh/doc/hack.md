@@ -192,6 +192,9 @@ The vast majority of the code here lives under [js/].
   * [nassh_agent_message_types.js]:
     Code for dealing with the specific message types used in the SSH agent
     protocol.
+  * [nassh_agent_backend_gsc.js]:
+    An SSH agent backend that supports private keys stored on smart cards,
+    using the Google Smart Card Connector app.
 
 There are a few specialized modules that are not relevant to the core
 Secure Shell logic.
@@ -322,6 +325,7 @@ The `name` field can be any one of:
 [crosh.js]: ../js/crosh.js
 [nassh_agent.js]: ../js/nassh_agent.js
 [nassh_agent_backend.js]: ../js/nassh_agent_backend.js
+[nassh_agent_backend_gsc.js]: ../js/nassh_agent_backend_gsc.js
 [nassh_agent_message.js]: ../js/nassh_agent_message.js
 [nassh_agent_message_types.js]: ../js/nassh_agent_message_types.js
 [nassh_app.js]: ../js/nassh_app.js

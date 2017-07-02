@@ -49,6 +49,9 @@ and relayed back to the client.
 The following backends are currently implemented:
 * `stub`:
   A minimal implementation of a backend. Only used for testing purposes.
+* `gsc`:
+  Supports SSH authentication using private keys stored on
+  OpenPGP-enabled smart cards.
 
 ## `--ssh-agent=<extension id>`
 

@@ -58,6 +58,7 @@
       "js/nassh_agent_message_types.js",
       "js/nassh_agent.js",
       "js/nassh_agent_backend.js",
+      "js/nassh_agent_backend_gsc.js",
       "js/nassh_command_instance.js",
       "js/nassh_background.js"
     ]
