@@ -549,12 +549,15 @@ nassh.ConnectDialog.prototype.updateDetailPlaceholders_ = function() {
 
   // Google-specific relay hack.  This feels dirty.  We can revert this once
   // we support managed default configs.  http://b/28205376 & related docs.
-  if (!this.$f('relay-options').value &&
-      this.$f('hostname').placeholder.endsWith('.corp.google.com'))
-    this.$f('relay-options', 'placeholder', '--config=google');
-  else
-    this.$f('relay-options', 'placeholder',
-            this.msg('FIELD_RELAY_OPTIONS_PLACEHOLDER'));
+  let value = this.msg('FIELD_RELAY_OPTIONS_PLACEHOLDER');
+  if (!this.$f('relay-options').value) {
+    let hostname = this.$f('hostname').placeholder;
+    if (hostname.endsWith('.corp.google.com'))
+      value = '--config=google';
+    else if (hostname.endsWith('.c.googlers.com'))
+      value = '--config=google --proxy-host=sup-ssh-relay.corp.google.com';
+  }
+  this.$f('relay-options', 'placeholder', value);
 };
 
 /**
