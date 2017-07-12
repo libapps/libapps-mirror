@@ -963,23 +963,6 @@ lib.TestManager.Result.prototype.completeTest_ = function(status, opt_throw) {
 };
 
 /**
- * Check that two arrays are equal.
- */
-lib.TestManager.Result.prototype.arrayEQ_ = function(actual, expected) {
-  if (!actual || !expected)
-    return (!actual && !expected);
-
-  if (actual.length != expected.length)
-    return false;
-
-  for (var i = 0; i < actual.length; ++i)
-    if (actual[i] != expected[i])
-      return false;
-
-  return true;
-};
-
-/**
  * Assert that an actual value is exactly equal to the expected value.
  *
  * This uses the JavaScript '===' operator in order to avoid type coercion.
@@ -1016,7 +999,7 @@ lib.TestManager.Result.prototype.assertEQ = function(
 
   // Deal with common object types since JavaScript can't.
   if (expected instanceof Array)
-    if (this.arrayEQ_(actual, expected))
+    if (lib.array.compare(actual, expected))
       return;
 
   var name = opt_name ? '[' + opt_name + ']' : '';

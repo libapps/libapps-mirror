@@ -33,10 +33,7 @@ nassh.Stream.SSHAgentRelay.prototype.asyncOpen_ = function(args, onComplete) {
     if (msg.data) {
       // Prepare header.
       var size = msg.data.length;
-      var hdr = [(size >>> 24) & 255,
-                 (size >>> 16) & 255,
-                 (size >>> 8) & 255,
-                 (size >>> 0) & 255];
+      var hdr = lib.array.uint32ToArrayBigEndian(size);
       // Append body.
       var bData = hdr.concat(msg.data);
 
@@ -89,10 +86,7 @@ nassh.Stream.SSHAgentRelay.prototype.trySendPacket_ = function() {
   // Message header, 4 bytes of length.
   if (this.writeBuffer_.length < 4) return;
 
-  var size = ((this.writeBuffer_[0] & 255) << 24) +
-             ((this.writeBuffer_[1] & 255) << 16) +
-             ((this.writeBuffer_[2] & 255) << 8) +
-             ((this.writeBuffer_[3] & 255) << 0);
+  var size = lib.array.arrayBigEndianToUint32(this.writeBuffer_);
 
   // Message body.
   if (this.writeBuffer_.length < 4 + size) return;

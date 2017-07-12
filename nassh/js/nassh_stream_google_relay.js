@@ -432,10 +432,7 @@ nassh.Stream.GoogleRelayWS.prototype.onSocketData_ = function(e) {
     return;
 
   var u8 = new Uint8Array(e.data);
-  var ack = (u8[0] << 24) |
-            (u8[1] << 16) |
-            (u8[2] <<  8) |
-            (u8[3] <<  0);
+  var ack = lib.array.arrayBigEndianToUint32(u8);
 
   // Acks are unsigned 24 bits. Negative means error.
   if (ack < 0) {

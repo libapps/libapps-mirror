@@ -193,8 +193,8 @@ lib.colors.Tests.addTest('crackRGB', function(result, cx) {
     ['blah', null],
     ['rgb(1, 2)', null],
     // Then some reasonable data.
-    ['rgb(1,2,3)', [1, 2, 3, 1]],
-    ['rgba(0, 255, 10, 0)', [0, 255, 10, 0]],
+    ['rgb(1,2,3)', ['1', '2', '3', '1']],
+    ['rgba(0, 255, 10, 0)', ['0', '255', '10', '0']],
   ];
 
   data.forEach((ele) => {
