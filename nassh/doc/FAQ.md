@@ -882,6 +882,25 @@ different app, visit the chrome://settings/handlers page.
   In vi, use ":set mouse=a" to enable mouse mode.
 
 
+### How do I make the mouse wheel always scroll the buffer?
+
+  When using the alternative screen buffer, and DECCKM (Application Cursor Keys)
+  is active, mouse wheel scroll events will emulate arrow keys.  That means when
+  you scroll the wheel up, it will behave like you pressed the up arrow key a
+  few times instead.
+
+  This often shows up when using programs like pagers (less) or reading man
+  pages or using text editors (vi/nano) or using screen/tmux (which you might
+  see as scrolling through command history in the shell).
+
+  You can disable this feature temporarily by holding the shift key.  This way
+  you can scroll the buffer in some cases (like screen) while still supporting
+  emulation in programs where it's more useful (like pagers and man).
+
+  You can disable this feature permanently via the
+  `scroll-wheel-may-send-arrow-keys` preference.
+
+
 ### Is OSC 52 (aka "clipboard operations") supported?
 
   Clipboard writing is allowed by default, but you can disable it if you're
