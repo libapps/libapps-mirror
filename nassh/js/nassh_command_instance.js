@@ -141,22 +141,22 @@ nassh.CommandInstance.prototype.run = function() {
     }
 
     // Show some release highlights the first couple of runs with a new version.
-    // We'll reset the counter when we upgrade.
+    // We'll reset the counter when the release notes change.
     this.io.println(nassh.msg('WELCOME_CHANGELOG',
                               ['\x1b[1mhttps://goo.gl/YnmXOs\x1b[m']));
-    var notesLastVer = lib.resource.getData('nassh/release/lastver');
-    if (this.prefs_.get('welcome/notes-version') != notesLastVer) {
+    let notes = lib.resource.getData('nassh/release/highlights');
+    if (this.prefs_.get('welcome/notes-version') != notes.length) {
       // They upgraded, so reset the counters.
       this.prefs_.set('welcome/show-count', 0);
-      this.prefs_.set('welcome/notes-version', notesLastVer);
+      this.prefs_.set('welcome/notes-version', notes.length);
     }
     // Figure out how many times we've shown this.
     var notesShowCount = this.prefs_.get('welcome/show-count');
     if (notesShowCount < 10) {
       // For new runs, show the highlights directly.
-      this.io.print(nassh.msg('WELCOME_RELEASE_HIGHLIGHTS', [notesLastVer]));
-      this.io.println(lib.resource.getData('nassh/release/highlights')
-                        .replace(/%/g, '\r\n \u00A4'));
+      this.io.print(nassh.msg('WELCOME_RELEASE_HIGHLIGHTS',
+                              [lib.resource.getData('nassh/release/lastver')]));
+      this.io.println(notes.replace(/%/g, '\r\n \u00A4'));
       this.prefs_.set('welcome/show-count', notesShowCount + 1);
     }
 
