@@ -1,3 +1,8 @@
+# 0.8.36.7, 2017-07-17, New feature polish.
+
+* Update to hterm 1.67.  Various fixes for new features.
+* Tweak relay options for .c.googlers.com domains.
+
 # 0.8.36.6, 2017-06-29, Bug fixes & more features!
 
 * Update to libdot 1.15.  Some standards fixes.
