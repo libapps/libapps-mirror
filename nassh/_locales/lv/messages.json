@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "Failu sist\u0113ma jau ir iek\u013cauta!"
+		"message": "Failu sistēma jau ir iekļauta!"
 	},
 	"backup_prefs": {
-		"message": "Saglab\u0101t dubl\u0113jumu"
+		"message": "Saglabāt dublējumu"
 	},
 	"bad_destination": {
-		"message": "Nevar pars\u0113t m\u0113r\u0137i: $1",
+		"message": "Nevar parsēt mērķi: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,25 +14,25 @@
 		}
 	},
 	"before_unload": {
-		"message": "Aizverot \u0161o cilni, sesija tiks p\u0101rtraukta."
+		"message": "Aizverot šo cilni, sesija tiks pārtraukta."
 	},
 	"cancel_button_label": {
 		"message": "Atcelt"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "\u0160\u012b komanda par\u0101da zin\u0101mo saimniekdatoru sarakstu un pieprasa nor\u0101d\u012bt saimniekdatoru, kas j\u0101aizmirst."
+		"message": "Šī komanda parāda zināmo saimniekdatoru sarakstu un pieprasa norādīt saimniekdatoru, kas jāaizmirst."
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "Aizmirst zin\u0101mo ssh saimniekdatoru."
+		"message": "Aizmirst zināmo ssh saimniekdatoru."
 	},
 	"cmd_ssh_help": {
-		"message": "Parametri |username| un |hostname| ir oblig\u0101ti, |port| ir izv\u0113les. Ja piesl\u0113gvieta netiek nor\u0101d\u012bta, t\u0101s noklus\u0113jums ir 22."
+		"message": "Parametri |username| un |hostname| ir obligāti, |port| ir izvēles. Ja pieslēgvieta netiek norādīta, tās noklusējums ir 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Atver jaunu SSH sesiju."
 	},
 	"command_complete": {
-		"message": "Komanda \u201c$1\u201d tika aizv\u0113rta ar statusa kodu\u00a0$2.",
+		"message": "Komanda “$1” tika aizvērta ar statusa kodu $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -46,7 +46,7 @@
 		"message": "Izveidot savienojumu"
 	},
 	"connect_or_exit_message": {
-		"message": "Vai izv\u0113l\u0113ties (c)itu savienojumu vai i(z)iet?"
+		"message": "Vai izvēlēties (c)itu savienojumu vai i(z)iet?"
 	},
 	"connecting": {
 		"message": "Notiek savienojuma izveide ar $1...",
@@ -57,13 +57,13 @@
 		}
 	},
 	"del_keycap": {
-		"message": "[DZ\u0112ST]"
+		"message": "[DZĒST]"
 	},
 	"delete_button_label": {
-		"message": "Dz\u0113st"
+		"message": "Dzēst"
 	},
 	"disconnect_message": {
-		"message": "NaCl spraudnis tika aizv\u0113rts ar statusa kodu\u00a0$1.",
+		"message": "NaCl spraudnis tika aizvērts ar statusa kodu $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -71,7 +71,7 @@
 		}
 	},
 	"enter_keycap": {
-		"message": "[IEVAD\u012aT]"
+		"message": "[IEVADĪT]"
 	},
 	"field_argstr_aria_label": {
 		"message": "papildu ssh argumenti"
@@ -83,7 +83,7 @@
 		"message": "apraksts"
 	},
 	"field_description_placeholder": {
-		"message": "lietot\u0101jv\u0101rds@saimniekdatoranosaukums vai br\u012bvas formas teksts"
+		"message": "lietotājvārds@saimniekdatoranosaukums vai brīvas formas teksts"
 	},
 	"field_hostname_aria_label": {
 		"message": "saimniekdatora nosaukums"
@@ -92,7 +92,7 @@
 		"message": "saimniekdatora nosaukums"
 	},
 	"field_identity_aria_label": {
-		"message": "identit\u0101te"
+		"message": "identitāte"
 	},
 	"field_port_aria_label": {
 		"message": "ports"
@@ -101,25 +101,25 @@
 		"message": "ports"
 	},
 	"field_relay_options_aria_label": {
-		"message": "p\u0101rraides opcijas"
+		"message": "pārraides opcijas"
 	},
 	"field_relay_options_placeholder": {
-		"message": "p\u0101rraides opcijas"
+		"message": "pārraides opcijas"
 	},
 	"field_terminal_profile_aria_label": {
-		"message": "termin\u0101\u013ca profila nosaukums"
+		"message": "termināļa profila nosaukums"
 	},
 	"field_terminal_profile_placeholder": {
-		"message": "noklus\u0113jums"
+		"message": "noklusējums"
 	},
 	"field_username_aria_label": {
-		"message": "lietot\u0101jv\u0101rds"
+		"message": "lietotājvārds"
 	},
 	"field_username_placeholder": {
-		"message": "lietot\u0101jv\u0101rds"
+		"message": "lietotājvārds"
 	},
 	"found_relay": {
-		"message": "Atrasts p\u0101rraides serveris: $1",
+		"message": "Atrasts pārraides serveris: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -127,16 +127,16 @@
 		}
 	},
 	"identity_label": {
-		"message": "Identit\u0101te"
+		"message": "Identitāte"
 	},
 	"import_link_aria_label": {
-		"message": "faila import\u0113\u0161ana"
+		"message": "faila importēšana"
 	},
 	"import_link_label": {
-		"message": "Import\u0113t..."
+		"message": "Importēt..."
 	},
 	"initializing_relay": {
-		"message": "Tiek mekl\u0113ts p\u0101rraides serveris, kas izmanto: $1",
+		"message": "Tiek meklēts pārraides serveris, kas izmanto: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -144,7 +144,7 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Nevar\u0113ja pars\u0113t JSON ievad\u0113 \u201c$1\u201d",
+		"message": "Nevarēja parsēt JSON ievadē “$1”",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "Nav neviena zin\u0101ma saimniekdatora; nav, ko aizmirst."
+		"message": "Nav neviena zināma saimniekdatora; nav, ko aizmirst."
 	},
 	"known_hosts_prompt": {
-		"message": "Atlasiet saimniekdatoru, kas j\u0101aizmirst [1-$1]:",
+		"message": "Atlasiet saimniekdatoru, kas jāaizmirst [1-$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -163,13 +163,13 @@
 		}
 	},
 	"known_hosts_title": {
-		"message": "Zin\u0101mie saimniekdatori:"
+		"message": "Zināmie saimniekdatori:"
 	},
 	"loading_label": {
-		"message": "Notiek iel\u0101de..."
+		"message": "Notiek ielāde..."
 	},
 	"missing_param": {
-		"message": "Tr\u016bksto\u0161ais parametrs: $1",
+		"message": "Trūkstošais parametrs: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -177,19 +177,19 @@
 		}
 	},
 	"mount_button_label": {
-		"message": "Iek\u013caut SFTP"
+		"message": "Iekļaut SFTP"
 	},
 	"mounted_message": {
-		"message": "Iek\u013cauta!"
+		"message": "Iekļauta!"
 	},
 	"notify_copy": {
-		"message": "Atlase nokop\u0113ta"
+		"message": "Atlase nokopēta"
 	},
 	"ok_button_label": {
 		"message": "Labi"
 	},
 	"open_as_window_tip": {
-		"message": "[Profesion\u0101ls padoms] Izmantojiet \u201cAtv\u0113rt k\u0101 logu\u201d, lai ar vad\u012b\u0161anas tausti\u0146a un tausti\u0146a\u00a0W kombin\u0101ciju (Control-W) neaizv\u0113rtu termin\u0101li.\n[Profesion\u0101ls padoms] Pla\u0161\u0101ku inform\u0101ciju skatiet vietn\u0113 $1.",
+		"message": "[Profesionāls padoms] Izmantojiet “Atvērt kā logu”, lai ar vadīšanas taustiņa un taustiņa W kombināciju (Control-W) neaizvērtu termināli.\n[Profesionāls padoms] Plašāku informāciju skatiet vietnē $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -200,52 +200,52 @@
 		"message": "Opcijas"
 	},
 	"plugin_loading": {
-		"message": "Notiek NaCl spraud\u0146a iel\u0101de..."
+		"message": "Notiek NaCl spraudņa ielāde..."
 	},
 	"plugin_loading_complete": {
 		"message": " pabeigta."
 	},
 	"pref_backup_filename": {
-		"message": "Dro\u0161\u0101s \u010daulas preferen\u010du dubl\u0113juma fails Backup.json"
+		"message": "Drošās čaulas preferenču dublējuma fails Backup.json"
 	},
 	"preferences_header": {
-		"message": "Profila iestat\u012bjumi"
+		"message": "Profila iestatījumi"
 	},
 	"preferences_reset": {
-		"message": "Visas preferences atiestat\u012btas!"
+		"message": "Visas preferences atiestatītas!"
 	},
 	"reconnect_message": {
-		"message": "Vai atk\u0101(r)toti izveidot savienojumu, izv\u0113l\u0113ties (c)itu savienojumu vai i(z)iet?"
+		"message": "Vai atkā(r)toti izveidot savienojumu, izvēlēties (c)itu savienojumu vai i(z)iet?"
 	},
 	"relay_retry": {
-		"message": "Notiek atk\u0101rtots m\u0113\u0123in\u0101jums..."
+		"message": "Notiek atkārtots mēģinājums..."
 	},
 	"restore_prefs": {
-		"message": "Atjaunot dubl\u0113jumu"
+		"message": "Atjaunot dublējumu"
 	},
 	"shortcut_list_aria_label": {
-		"message": "saglab\u0101tie savienojumi"
+		"message": "saglabātie savienojumi"
 	},
 	"ssh_argstr_label": {
 		"message": "SSH argumenti"
 	},
 	"terminal_preview_label": {
-		"message": "Priek\u0161skat\u012bjums"
+		"message": "Priekšskatījums"
 	},
 	"terminal_profile_label": {
-		"message": "Pa\u0161reiz\u0113jais profils"
+		"message": "Pašreizējais profils"
 	},
 	"unexpected_error": {
-		"message": "Rad\u0101s neparedz\u0113ta k\u013c\u016bda. Pla\u0161\u0101ku inform\u0101ciju, l\u016bdzu, skatiet JavaScript\u00a0konsol\u0113."
+		"message": "Radās neparedzēta kļūda. Plašāku informāciju, lūdzu, skatiet JavaScript konsolē."
 	},
 	"unmount_button_label": {
-		"message": "Neiek\u013caut SFTP"
+		"message": "Neiekļaut SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "Ir pieejams atjaunin\u0101jums. L\u016bdzu, aizveriet visus logus."
+		"message": "Ir pieejams atjauninājums. Lūdzu, aizveriet visus logus."
 	},
 	"welcome_faq": {
-		"message": "Atbildes uz bie\u017ei uzdotajiem jaut\u0101jumiem: $1 (nospiediet vad\u012b\u0161anas tausti\u0146u (Ctrl) un noklik\u0161\u0137iniet uz sait\u0113m, kuras v\u0113laties atv\u0113rt)",
+		"message": "Atbildes uz bieži uzdotajiem jautājumiem: $1 (nospiediet vadīšanas taustiņu (Ctrl) un noklikšķiniet uz saitēm, kuras vēlaties atvērt)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -253,7 +253,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "Laipni l\u016bdzam $1 versij\u0101\u00a0$2!",
+		"message": "Laipni lūdzam $1 versijā $2!",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "L\u016bdzu, iestatiet vienumu Chrome izv\u0113lne\u00a0-> T\u0101lummai\u0146a l\u012bdz\u00a0100%."
+		"message": "Lūdzu, iestatiet vienumu Chrome izvēlne -> Tālummaiņa līdz 100%."
 	}
 }

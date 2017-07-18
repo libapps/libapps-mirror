@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "Syst\u00e9m s\u00faborov je u\u017e pripojen\u00fd!"
+		"message": "Systém súborov je už pripojený!"
 	},
 	"backup_prefs": {
-		"message": "Ulo\u017ei\u0165 z\u00e1lohu"
+		"message": "Uložiť zálohu"
 	},
 	"bad_destination": {
-		"message": "Nie je mo\u017en\u00e9 analyzova\u0165 cie\u013e: $1",
+		"message": "Nie je možné analyzovať cieľ: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,25 +14,25 @@
 		}
 	},
 	"before_unload": {
-		"message": "Ak t\u00fato kartu zavriete, t\u00e1to rel\u00e1cia sa odpoj\u00ed."
+		"message": "Ak túto kartu zavriete, táto relácia sa odpojí."
 	},
 	"cancel_button_label": {
-		"message": "Zru\u0161i\u0165"
+		"message": "Zrušiť"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "Tento pr\u00edkaz zobraz\u00ed ponuku zn\u00e1mych hostite\u013eov a pr\u00edkazy pre hostite\u013ea, ktor\u00e9 chcete odstr\u00e1ni\u0165."
+		"message": "Tento príkaz zobrazí ponuku známych hostiteľov a príkazy pre hostiteľa, ktoré chcete odstrániť."
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "Odstr\u00e1ni\u0165 zn\u00e1meho hostite\u013ea ssh."
+		"message": "Odstrániť známeho hostiteľa ssh."
 	},
 	"cmd_ssh_help": {
-		"message": "Parametre |username| a |hostname| s\u00fa povinn\u00e9, parameter |port| je volite\u013en\u00fd. Ak port nie je uveden\u00fd, predvolen\u00e1 hodnota je 22."
+		"message": "Parametre |username| a |hostname| sú povinné, parameter |port| je voliteľný. Ak port nie je uvedený, predvolená hodnota je 22."
 	},
 	"cmd_ssh_title": {
-		"message": "Otvor\u00ed nov\u00fa rel\u00e1ciu SSH."
+		"message": "Otvorí novú reláciu SSH."
 	},
 	"command_complete": {
-		"message": "Pr\u00edkaz $1 bol ukon\u010den\u00fd s\u00a0k\u00f3dom stavu $2.",
+		"message": "Príkaz $1 bol ukončený s kódom stavu $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -43,13 +43,13 @@
 		}
 	},
 	"connect_button_label": {
-		"message": "Pripoji\u0165"
+		"message": "Pripojiť"
 	},
 	"connect_or_exit_message": {
-		"message": "Vybra\u0165 in\u00e9 pripojenie (C) alebo ukon\u010di\u0165 (X)?"
+		"message": "Vybrať iné pripojenie (C) alebo ukončiť (X)?"
 	},
 	"connecting": {
-		"message": "Prip\u00e1ja sa k\u00a0hostite\u013eovi $1...",
+		"message": "Pripája sa k hostiteľovi $1...",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -60,10 +60,10 @@
 		"message": "[DEL]"
 	},
 	"delete_button_label": {
-		"message": "Odstr\u00e1ni\u0165"
+		"message": "Odstrániť"
 	},
 	"disconnect_message": {
-		"message": "Doplnok NaCl bol ukon\u010den\u00fd s\u00a0k\u00f3dom stavu $1.",
+		"message": "Doplnok NaCl bol ukončený s kódom stavu $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -74,22 +74,22 @@
 		"message": "[ENTER]"
 	},
 	"field_argstr_aria_label": {
-		"message": "\u010fal\u0161ie argumenty ssh"
+		"message": "ďalšie argumenty ssh"
 	},
 	"field_argstr_placeholder": {
-		"message": "\u010fal\u0161ie argumenty v\u00a0pr\u00edkazovom riadku"
+		"message": "ďalšie argumenty v príkazovom riadku"
 	},
 	"field_description_aria_label": {
 		"message": "popis"
 	},
 	"field_description_placeholder": {
-		"message": "pou\u017e\u00edvate\u013esk\u00e9meno@n\u00e1zovhostite\u013ea alebo vo\u013en\u00fd text"
+		"message": "používateľskémeno@názovhostiteľa alebo voľný text"
 	},
 	"field_hostname_aria_label": {
-		"message": "n\u00e1zov hostite\u013ea"
+		"message": "názov hostiteľa"
 	},
 	"field_hostname_placeholder": {
-		"message": "n\u00e1zov hostite\u013ea"
+		"message": "názov hostiteľa"
 	},
 	"field_identity_aria_label": {
 		"message": "identita"
@@ -101,25 +101,25 @@
 		"message": "port"
 	},
 	"field_relay_options_aria_label": {
-		"message": "mo\u017enosti servera typu relay"
+		"message": "možnosti servera typu relay"
 	},
 	"field_relay_options_placeholder": {
-		"message": "mo\u017enosti servera typu relay"
+		"message": "možnosti servera typu relay"
 	},
 	"field_terminal_profile_aria_label": {
-		"message": "n\u00e1zov profilu termin\u00e1lu"
+		"message": "názov profilu terminálu"
 	},
 	"field_terminal_profile_placeholder": {
-		"message": "predvolen\u00e9"
+		"message": "predvolené"
 	},
 	"field_username_aria_label": {
-		"message": "pou\u017e\u00edvate\u013esk\u00e9 meno"
+		"message": "používateľské meno"
 	},
 	"field_username_placeholder": {
-		"message": "pou\u017e\u00edvate\u013esk\u00e9 meno"
+		"message": "používateľské meno"
 	},
 	"found_relay": {
-		"message": "Na\u0161iel sa server typu relay: $1",
+		"message": "Našiel sa server typu relay: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -130,13 +130,13 @@
 		"message": "Identita"
 	},
 	"import_link_aria_label": {
-		"message": "importova\u0165 s\u00fabor"
+		"message": "importovať súbor"
 	},
 	"import_link_label": {
-		"message": "Importova\u0165..."
+		"message": "Importovať..."
 	},
 	"initializing_relay": {
-		"message": "Vyh\u013ead\u00e1va sa server typu relay pomocou hostite\u013ea: $1",
+		"message": "Vyhľadáva sa server typu relay pomocou hostiteľa: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -144,7 +144,7 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Nepodarilo sa analyzova\u0165 form\u00e1t JSON v\u00a0'$1'",
+		"message": "Nepodarilo sa analyzovať formát JSON v '$1'",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "\u017diadni zn\u00e1mi hostitelia, nie je \u010do odstr\u00e1ni\u0165."
+		"message": "Žiadni známi hostitelia, nie je čo odstrániť."
 	},
 	"known_hosts_prompt": {
-		"message": "Vyberte hostite\u013ea, ktor\u00e9ho chcete odstr\u00e1ni\u0165 [1-$1]:",
+		"message": "Vyberte hostiteľa, ktorého chcete odstrániť [1-$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -163,13 +163,13 @@
 		}
 	},
 	"known_hosts_title": {
-		"message": "Zn\u00e1mi hostitelia:"
+		"message": "Známi hostitelia:"
 	},
 	"loading_label": {
-		"message": "Na\u010d\u00edtava sa..."
+		"message": "Načítava sa..."
 	},
 	"missing_param": {
-		"message": "Ch\u00fdbaj\u00faci parameter: $1",
+		"message": "Chýbajúci parameter: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -180,16 +180,16 @@
 		"message": "Pripojenie protokolu SFTP"
 	},
 	"mounted_message": {
-		"message": "Pripojen\u00fd!"
+		"message": "Pripojený!"
 	},
 	"notify_copy": {
-		"message": "V\u00fdber bol skop\u00edrovan\u00fd"
+		"message": "Výber bol skopírovaný"
 	},
 	"ok_button_label": {
 		"message": "OK"
 	},
 	"open_as_window_tip": {
-		"message": "[Tip pre profesion\u00e1lov] Ak chcete zabr\u00e1ni\u0165, aby kombin\u00e1cia kl\u00e1vesov Control a\u00a0W zatvorila termin\u00e1l, pou\u017eite mo\u017enos\u0165 Otvori\u0165 ako okno.\n[Tip pre profesion\u00e1lov] \u010eal\u0161ie inform\u00e1cie n\u00e1jdete na adrese $1.",
+		"message": "[Tip pre profesionálov] Ak chcete zabrániť, aby kombinácia klávesov Control a W zatvorila terminál, použite možnosť Otvoriť ako okno.\n[Tip pre profesionálov] Ďalšie informácie nájdete na adrese $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -197,55 +197,55 @@
 		}
 	},
 	"options_button_label": {
-		"message": "Mo\u017enosti"
+		"message": "Možnosti"
 	},
 	"plugin_loading": {
-		"message": "Prebieha na\u010d\u00edtavanie doplnku NaCl..."
+		"message": "Prebieha načítavanie doplnku NaCl..."
 	},
 	"plugin_loading_complete": {
 		"message": " hotovo."
 	},
 	"pref_backup_filename": {
-		"message": "Z\u00e1loha predvolieb zabezpe\u010den\u00e9ho pr\u00edstupu.json"
+		"message": "Záloha predvolieb zabezpečeného prístupu.json"
 	},
 	"preferences_header": {
 		"message": "Nastavenia profilu"
 	},
 	"preferences_reset": {
-		"message": "V\u0161etky predvo\u013eby boli obnoven\u00e9."
+		"message": "Všetky predvoľby boli obnovené."
 	},
 	"reconnect_message": {
-		"message": "Znova pripoji\u0165 (R), vybra\u0165 in\u00e9 pripojenie (C) alebo ukon\u010di\u0165 (X)?"
+		"message": "Znova pripojiť (R), vybrať iné pripojenie (C) alebo ukončiť (X)?"
 	},
 	"relay_retry": {
-		"message": "Prebieha \u010fal\u0161\u00ed pokus..."
+		"message": "Prebieha ďalší pokus..."
 	},
 	"restore_prefs": {
-		"message": "Obnovi\u0165 zo z\u00e1lohy"
+		"message": "Obnoviť zo zálohy"
 	},
 	"shortcut_list_aria_label": {
-		"message": "ulo\u017een\u00e9 pripojenia"
+		"message": "uložené pripojenia"
 	},
 	"ssh_argstr_label": {
 		"message": "Argumenty SSH"
 	},
 	"terminal_preview_label": {
-		"message": "Uk\u00e1\u017eka"
+		"message": "Ukážka"
 	},
 	"terminal_profile_label": {
-		"message": "Aktu\u00e1lny profil"
+		"message": "Aktuálny profil"
 	},
 	"unexpected_error": {
-		"message": "Vyskytla sa neo\u010dak\u00e1van\u00e1 chyba. \u010eal\u0161ie podrobnosti n\u00e1jdete v\u00a0konzole JavaScript."
+		"message": "Vyskytla sa neočakávaná chyba. Ďalšie podrobnosti nájdete v konzole JavaScript."
 	},
 	"unmount_button_label": {
-		"message": "Odpoji\u0165 protokol SFTP"
+		"message": "Odpojiť protokol SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "K\u00a0dispoz\u00edcii je aktualiz\u00e1cia. Zavrite v\u0161etky okn\u00e1."
+		"message": "K dispozícii je aktualizácia. Zavrite všetky okná."
 	},
 	"welcome_faq": {
-		"message": "Odpovede na \u010dast\u00e9 ot\u00e1zky: $1 (odkazy otvor\u00edte pomocou kl\u00e1vesa ctrl a kliknutia)",
+		"message": "Odpovede na časté otázky: $1 (odkazy otvoríte pomocou klávesa ctrl a kliknutia)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "Nastavte pribl\u00ed\u017eenie/oddialenie v\u00a0Ponuke Chrome na 100\u00a0%"
+		"message": "Nastavte priblíženie/oddialenie v Ponuke Chrome na 100 %"
 	}
 }

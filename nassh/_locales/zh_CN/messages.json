@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "\u6587\u4ef6\u7cfb\u7edf\u5df2\u5b89\u88c5\uff01"
+		"message": "文件系统已安装！"
 	},
 	"backup_prefs": {
-		"message": "\u4fdd\u5b58\u5907\u4efd\u526f\u672c"
+		"message": "保存备份副本"
 	},
 	"bad_destination": {
-		"message": "\u65e0\u6cd5\u89e3\u6790\u76ee\u6807\uff1a$1",
+		"message": "无法解析目标：$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,25 +14,25 @@
 		}
 	},
 	"before_unload": {
-		"message": "\u5173\u95ed\u6b64\u9009\u9879\u5361\u5c06\u4f1a\u65ad\u5f00\u672c\u6b21\u4f1a\u8bdd\u3002"
+		"message": "关闭此选项卡将会断开本次会话。"
 	},
 	"cancel_button_label": {
-		"message": "\u53d6\u6d88"
+		"message": "取消"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "\u6b64\u547d\u4ee4\u7528\u4e8e\u663e\u793a\u5df2\u77e5\u4e3b\u673a\u7684\u83dc\u5355\u5e76\u63d0\u793a\u60a8\u8981\u5220\u9664\u7684\u4e3b\u673a\u3002"
+		"message": "此命令用于显示已知主机的菜单并提示您要删除的主机。"
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "\u5220\u9664\u5df2\u77e5 SSH \u4e3b\u673a\u3002"
+		"message": "删除已知 SSH 主机。"
 	},
 	"cmd_ssh_help": {
-		"message": "|username| \u548c |hostname| \u4e3a\u5fc5\u9700\u53c2\u6570\uff0c|port| \u4e3a\u53ef\u9009\u53c2\u6570\u3002\u5982\u679c\u672a\u6307\u5b9a\u7aef\u53e3\uff0c\u7cfb\u7edf\u4f1a\u4f7f\u7528\u9ed8\u8ba4\u503c (22)\u3002"
+		"message": "|username| 和 |hostname| 为必需参数，|port| 为可选参数。如果未指定端口，系统会使用默认值 (22)。"
 	},
 	"cmd_ssh_title": {
-		"message": "\u6253\u5f00\u65b0\u7684 SSH \u4f1a\u8bdd\u3002"
+		"message": "打开新的 SSH 会话。"
 	},
 	"command_complete": {
-		"message": "\u547d\u4ee4\u201c$1\u201d\u5df2\u5b8c\u6210\uff0c\u72b6\u6001\u4ee3\u7801\u4e3a\uff1a$2\u3002",
+		"message": "命令“$1”已完成，状态代码为：$2。",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -43,13 +43,13 @@
 		}
 	},
 	"connect_button_label": {
-		"message": "\u8fde\u63a5"
+		"message": "连接"
 	},
 	"connect_or_exit_message": {
-		"message": "\u9009\u62e9\u5176\u4ed6\u8fde\u63a5(&C)\u6216\u9000\u51fa(&E)\uff1f"
+		"message": "选择其他连接(&C)或退出(&E)？"
 	},
 	"connecting": {
-		"message": "\u6b63\u5728\u8fde\u63a5\u5230 $1\u2026",
+		"message": "正在连接到 $1…",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -60,10 +60,10 @@
 		"message": "[DEL]"
 	},
 	"delete_button_label": {
-		"message": "\u5220\u9664"
+		"message": "删除"
 	},
 	"disconnect_message": {
-		"message": "NaCl \u63d2\u4ef6\u5df2\u9000\u51fa\uff0c\u72b6\u6001\u4ee3\u7801\u4e3a\uff1a$1\u3002",
+		"message": "NaCl 插件已退出，状态代码为：$1。",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -74,52 +74,52 @@
 		"message": "[ENTER]"
 	},
 	"field_argstr_aria_label": {
-		"message": "\u5176\u4ed6 ssh \u53c2\u6570"
+		"message": "其他 ssh 参数"
 	},
 	"field_argstr_placeholder": {
-		"message": "\u5176\u4ed6\u547d\u4ee4\u884c\u53c2\u6570"
+		"message": "其他命令行参数"
 	},
 	"field_description_aria_label": {
-		"message": "\u8bf4\u660e"
+		"message": "说明"
 	},
 	"field_description_placeholder": {
-		"message": "username@hostname \u6216\u81ea\u7531\u683c\u5f0f\u6587\u672c"
+		"message": "username@hostname 或自由格式文本"
 	},
 	"field_hostname_aria_label": {
-		"message": "\u4e3b\u673a\u540d"
+		"message": "主机名"
 	},
 	"field_hostname_placeholder": {
-		"message": "\u4e3b\u673a\u540d"
+		"message": "主机名"
 	},
 	"field_identity_aria_label": {
-		"message": "\u8eab\u4efd"
+		"message": "身份"
 	},
 	"field_port_aria_label": {
-		"message": "\u7aef\u53e3"
+		"message": "端口"
 	},
 	"field_port_placeholder": {
-		"message": "\u7aef\u53e3"
+		"message": "端口"
 	},
 	"field_relay_options_aria_label": {
-		"message": "\u4e2d\u7ee7\u9009\u9879"
+		"message": "中继选项"
 	},
 	"field_relay_options_placeholder": {
-		"message": "\u4e2d\u7ee7\u9009\u9879"
+		"message": "中继选项"
 	},
 	"field_terminal_profile_aria_label": {
-		"message": "\u7ec8\u7aef\u914d\u7f6e\u6587\u4ef6\u540d\u79f0"
+		"message": "终端配置文件名称"
 	},
 	"field_terminal_profile_placeholder": {
-		"message": "\u9ed8\u8ba4"
+		"message": "默认"
 	},
 	"field_username_aria_label": {
-		"message": "\u7528\u6237\u540d"
+		"message": "用户名"
 	},
 	"field_username_placeholder": {
-		"message": "\u7528\u6237\u540d"
+		"message": "用户名"
 	},
 	"found_relay": {
-		"message": "\u53d1\u73b0\u4ee5\u4e0b\u4e2d\u7ee7\u670d\u52a1\u5668\uff1a$1",
+		"message": "发现以下中继服务器：$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -127,16 +127,16 @@
 		}
 	},
 	"identity_label": {
-		"message": "\u8eab\u4efd"
+		"message": "身份"
 	},
 	"import_link_aria_label": {
-		"message": "\u6587\u4ef6\u5bfc\u5165"
+		"message": "文件导入"
 	},
 	"import_link_label": {
-		"message": "\u5bfc\u5165\u2026"
+		"message": "导入…"
 	},
 	"initializing_relay": {
-		"message": "\u6b63\u5728\u4f7f\u7528\u201c$1\u201d\u67e5\u627e\u4e2d\u7ee7\u670d\u52a1\u5668",
+		"message": "正在使用“$1”查找中继服务器",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -144,7 +144,7 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "\u65e0\u6cd5\u89e3\u6790\u201c$1\u201d\u4e2d\u7684 JSON",
+		"message": "无法解析“$1”中的 JSON",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "\u65e0\u5df2\u77e5\u4e3b\u673a\uff0c\u56e0\u6b64\u6ca1\u6709\u4e3b\u673a\u53ef\u5220\u9664\u3002"
+		"message": "无已知主机，因此没有主机可删除。"
 	},
 	"known_hosts_prompt": {
-		"message": "\u8bf7\u9009\u62e9\u8981\u5220\u9664\u7684\u4e3b\u673a [1-$1]\uff1a",
+		"message": "请选择要删除的主机 [1-$1]：",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -163,13 +163,13 @@
 		}
 	},
 	"known_hosts_title": {
-		"message": "\u5df2\u77e5\u4e3b\u673a\uff1a"
+		"message": "已知主机："
 	},
 	"loading_label": {
-		"message": "\u6b63\u5728\u52a0\u8f7d\u2026"
+		"message": "正在加载…"
 	},
 	"missing_param": {
-		"message": "\u7f3a\u5c11\u53c2\u6570\uff1a$1",
+		"message": "缺少参数：$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -177,19 +177,19 @@
 		}
 	},
 	"mount_button_label": {
-		"message": "\u5b89\u88c5 SFTP"
+		"message": "安装 SFTP"
 	},
 	"mounted_message": {
-		"message": "\u5df2\u5b89\u88c5\uff01"
+		"message": "已安装！"
 	},
 	"notify_copy": {
-		"message": "\u6240\u9009\u6587\u672c\u5df2\u590d\u5236"
+		"message": "所选文本已复制"
 	},
 	"ok_button_label": {
-		"message": "\u786e\u5b9a"
+		"message": "确定"
 	},
 	"open_as_window_tip": {
-		"message": "[\u4e13\u4e1a\u63d0\u793a] \u4f7f\u7528\u201c\u5728\u7a97\u53e3\u4e2d\u6253\u5f00\u201d\u53ef\u786e\u4fdd\u6309\u4e0b Ctrl + W \u7ec4\u5408\u952e\u65f6\u4e0d\u4f1a\u5173\u95ed\u7ec8\u7aef\uff01\n[\u4e13\u4e1a\u63d0\u793a] \u8bf7\u8bbf\u95ee $1 \u4e86\u89e3\u8be6\u60c5\u3002",
+		"message": "[专业提示] 使用“在窗口中打开”可确保按下 Ctrl + W 组合键时不会关闭终端！\n[专业提示] 请访问 $1 了解详情。",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -197,55 +197,55 @@
 		}
 	},
 	"options_button_label": {
-		"message": "\u9009\u9879"
+		"message": "选项"
 	},
 	"plugin_loading": {
-		"message": "\u6b63\u5728\u52a0\u8f7d NaCl \u63d2\u4ef6..."
+		"message": "正在加载 NaCl 插件..."
 	},
 	"plugin_loading_complete": {
-		"message": "\u5b8c\u6210\u3002"
+		"message": "完成。"
 	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
 	"preferences_header": {
-		"message": "\u914d\u7f6e\u6587\u4ef6\u8bbe\u7f6e"
+		"message": "配置文件设置"
 	},
 	"preferences_reset": {
-		"message": "\u6240\u6709\u504f\u597d\u8bbe\u7f6e\u5747\u5df2\u91cd\u7f6e\uff01"
+		"message": "所有偏好设置均已重置！"
 	},
 	"reconnect_message": {
-		"message": "\u91cd\u65b0\u8fde\u63a5(&R)\u3001\u9009\u62e9\u5176\u4ed6\u8fde\u63a5(&C)\u6216\u9000\u51fa(&E)\uff1f"
+		"message": "重新连接(&R)、选择其他连接(&C)或退出(&E)？"
 	},
 	"relay_retry": {
-		"message": "\u6b63\u5728\u91cd\u8bd5\u2026"
+		"message": "正在重试…"
 	},
 	"restore_prefs": {
-		"message": "\u6062\u590d\u5907\u4efd\u526f\u672c"
+		"message": "恢复备份副本"
 	},
 	"shortcut_list_aria_label": {
-		"message": "\u5df2\u4fdd\u5b58\u7684\u8fde\u63a5"
+		"message": "已保存的连接"
 	},
 	"ssh_argstr_label": {
-		"message": "SSH \u53c2\u6570"
+		"message": "SSH 参数"
 	},
 	"terminal_preview_label": {
-		"message": "\u9884\u89c8"
+		"message": "预览"
 	},
 	"terminal_profile_label": {
-		"message": "\u5f53\u524d\u914d\u7f6e\u6587\u4ef6"
+		"message": "当前配置文件"
 	},
 	"unexpected_error": {
-		"message": "\u53d1\u751f\u4e86\u610f\u5916\u9519\u8bef\u3002\u6709\u5173\u8be6\u60c5\uff0c\u8bf7\u67e5\u770b JavaScript \u63a7\u5236\u53f0\u3002"
+		"message": "发生了意外错误。有关详情，请查看 JavaScript 控制台。"
 	},
 	"unmount_button_label": {
-		"message": "\u5378\u8f7d SFTP"
+		"message": "卸载 SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "\u6709\u53ef\u7528\u66f4\u65b0\u3002\u8bf7\u5173\u95ed\u6240\u6709\u7a97\u53e3\u3002"
+		"message": "有可用更新。请关闭所有窗口。"
 	},
 	"welcome_faq": {
-		"message": "\u5e38\u89c1\u95ee\u9898\u89e3\u7b54\uff1a$1\uff08\u6309\u4f4f Ctrl \u952e\u7684\u540c\u65f6\u70b9\u51fb\u94fe\u63a5\u5373\u53ef\u6253\u5f00\uff09",
+		"message": "常见问题解答：$1（按住 Ctrl 键的同时点击链接即可打开）",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -253,7 +253,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "\u6b22\u8fce\u4f7f\u7528$1\uff08\u7248\u672c\uff1a$2\uff09\u3002",
+		"message": "欢迎使用$1（版本：$2）。",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "\u8bf7\u8f6c\u5230 Chrome \u83dc\u5355\uff0c\u5e76\u7f29\u653e\u81f3 100%"
+		"message": "请转到 Chrome 菜单，并缩放至 100%"
 	}
 }

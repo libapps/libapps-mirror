@@ -226,16 +226,19 @@
 			"fingerprint": {
 				"content": "$1"
 			},
-			"reader": {
-				"content": "$2"
-			},
 			"num_tries": {
 				"content": "$3"
+			},
+			"reader": {
+				"content": "$2"
 			}
 		}
 	},
 	"restore_prefs": {
 		"message": "Restore backup"
+	},
+	"shortcut_list_aria_label": {
+		"message": "saved connections"
 	},
 	"smart_card_connector_not_installed": {
 		"message": "Please install the Smart Card Connector app: $URL$",
@@ -244,9 +247,6 @@
 				"content": "$1"
 			}
 		}
-	},
-	"shortcut_list_aria_label": {
-		"message": "saved connections"
 	},
 	"ssh_argstr_label": {
 		"message": "SSH arguments"

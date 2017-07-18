@@ -1,6 +1,6 @@
 {
 	"already_mounted_message": {
-		"message": "El sistema de archivos ya est\u00e1 activado."
+		"message": "El sistema de archivos ya está activado."
 	},
 	"backup_prefs": {
 		"message": "Guardar copia de seguridad"
@@ -14,25 +14,25 @@
 		}
 	},
 	"before_unload": {
-		"message": "La sesi\u00f3n finalizar\u00e1 si cierras esta pesta\u00f1a."
+		"message": "La sesión finalizará si cierras esta pestaña."
 	},
 	"cancel_button_label": {
 		"message": "Cancelar"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "Este comando muestra un men\u00fa de hosts conocidos y pide que se indique el host que se quiere eliminar."
+		"message": "Este comando muestra un menú de hosts conocidos y pide que se indique el host que se quiere eliminar."
 	},
 	"cmd_ssh_forget_host_title": {
 		"message": "Elimina un host SSH del registro de hosts conocidos."
 	},
 	"cmd_ssh_help": {
-		"message": "Los par\u00e1metros |username| y |hostname| son obligatorios, mientras que el par\u00e1metro |port| es opcional. Si no se especifica el puerto, se utilizar\u00e1 de forma predeterminada el puerto 22."
+		"message": "Los parámetros |username| y |hostname| son obligatorios, mientras que el parámetro |port| es opcional. Si no se especifica el puerto, se utilizará de forma predeterminada el puerto 22."
 	},
 	"cmd_ssh_title": {
-		"message": "Abre una nueva sesi\u00f3n SSH."
+		"message": "Abre una nueva sesión SSH."
 	},
 	"command_complete": {
-		"message": "El comando $1 se ha cerrado con el c\u00f3digo de estado $2.",
+		"message": "El comando $1 se ha cerrado con el código de estado $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -46,7 +46,7 @@
 		"message": "Conectar"
 	},
 	"connect_or_exit_message": {
-		"message": "\u00bfQuieres elegir otra conexi\u00f3n (C) o salir (X)?"
+		"message": "¿Quieres elegir otra conexión (C) o salir (X)?"
 	},
 	"connecting": {
 		"message": "Conectando a $1...",
@@ -63,7 +63,7 @@
 		"message": "Eliminar"
 	},
 	"disconnect_message": {
-		"message": "El complemento NaCl se ha cerrado con el c\u00f3digo de estado $1.",
+		"message": "El complemento NaCl se ha cerrado con el código de estado $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -77,10 +77,10 @@
 		"message": "argumentos ssh adicionales"
 	},
 	"field_argstr_placeholder": {
-		"message": "argumentos de l\u00ednea de comandos adicionales"
+		"message": "argumentos de línea de comandos adicionales"
 	},
 	"field_description_aria_label": {
-		"message": "descripci\u00f3n"
+		"message": "descripción"
 	},
 	"field_description_placeholder": {
 		"message": "nombredeusuario@nombredehost o cualquier otro texto"
@@ -101,10 +101,10 @@
 		"message": "puerto"
 	},
 	"field_relay_options_aria_label": {
-		"message": "opciones de transmisi\u00f3n"
+		"message": "opciones de transmisión"
 	},
 	"field_relay_options_placeholder": {
-		"message": "opciones de transmisi\u00f3n"
+		"message": "opciones de transmisión"
 	},
 	"field_terminal_profile_aria_label": {
 		"message": "nombre de perfil del terminal"
@@ -119,7 +119,7 @@
 		"message": "nombre de usuario"
 	},
 	"found_relay": {
-		"message": "Se ha encontrado un servidor de transmisi\u00f3n: $1",
+		"message": "Se ha encontrado un servidor de transmisión: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -130,13 +130,13 @@
 		"message": "Identidad"
 	},
 	"import_link_aria_label": {
-		"message": "importaci\u00f3n de archivos"
+		"message": "importación de archivos"
 	},
 	"import_link_label": {
 		"message": "Importar..."
 	},
 	"initializing_relay": {
-		"message": "Se est\u00e1 buscando el servidor de transmisi\u00f3n con: $1",
+		"message": "Se está buscando el servidor de transmisión con: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -169,7 +169,7 @@
 		"message": "Cargando..."
 	},
 	"missing_param": {
-		"message": "Falta el siguiente par\u00e1metro: $1",
+		"message": "Falta el siguiente parámetro: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -177,19 +177,19 @@
 		}
 	},
 	"mount_button_label": {
-		"message": "Activaci\u00f3n de SFTP"
+		"message": "Activación de SFTP"
 	},
 	"mounted_message": {
 		"message": "Activado."
 	},
 	"notify_copy": {
-		"message": "Selecci\u00f3n copiada"
+		"message": "Selección copiada"
 	},
 	"ok_button_label": {
 		"message": "Aceptar"
 	},
 	"open_as_window_tip": {
-		"message": "[Consejo] Utiliza la opci\u00f3n Abrir como ventana para evitar que la ventana de terminal se cierre al pulsar Ctrl\u00a0+\u00a0W.\n[Consejo] Consulta la p\u00e1gina $1 para obtener m\u00e1s informaci\u00f3n.",
+		"message": "[Consejo] Utiliza la opción Abrir como ventana para evitar que la ventana de terminal se cierre al pulsar Ctrl + W.\n[Consejo] Consulta la página $1 para obtener más información.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -209,13 +209,13 @@
 		"message": "preferencias de copia de seguridad.json"
 	},
 	"preferences_header": {
-		"message": "Configuraci\u00f3n del perfil"
+		"message": "Configuración del perfil"
 	},
 	"preferences_reset": {
 		"message": "Se han recuperado todas las preferencias."
 	},
 	"reconnect_message": {
-		"message": "\u00bfQuieres volver a establecer conexi\u00f3n (R), elegir otra conexi\u00f3n (C) o salir (X)?"
+		"message": "¿Quieres volver a establecer conexión (R), elegir otra conexión (C) o salir (X)?"
 	},
 	"relay_retry": {
 		"message": "Reintentando..."
@@ -236,16 +236,16 @@
 		"message": "Perfil actual"
 	},
 	"unexpected_error": {
-		"message": "Se ha producido un error inesperado. Para obtener m\u00e1s informaci\u00f3n, accede a la consola de JavaScript."
+		"message": "Se ha producido un error inesperado. Para obtener más información, accede a la consola de JavaScript."
 	},
 	"unmount_button_label": {
 		"message": "Desactivar SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "Hay una actualizaci\u00f3n disponible. Cierra todas las ventanas."
+		"message": "Hay una actualización disponible. Cierra todas las ventanas."
 	},
 	"welcome_faq": {
-		"message": "Respuestas a preguntas frecuentes: $1 (Ctrl\u00a0+\u00a0hacer clic en los enlaces para abrirlos)",
+		"message": "Respuestas a preguntas frecuentes: $1 (Ctrl + hacer clic en los enlaces para abrirlos)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -253,7 +253,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "Te damos la bienvenida a la versi\u00f3n\u00a0$2 de $1.",
+		"message": "Te damos la bienvenida a la versión $2 de $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "Ve al men\u00fa de Chrome y fija el zoom al 100%"
+		"message": "Ve al menú de Chrome y fija el zoom al 100%"
 	}
 }

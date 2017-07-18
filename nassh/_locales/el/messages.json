@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "\u03a4\u03bf \u03c3\u03cd\u03c3\u03c4\u03b7\u03bc\u03b1 \u03b1\u03c1\u03c7\u03b5\u03af\u03c9\u03bd \u03c0\u03c1\u03bf\u03c3\u03b1\u03c1\u03c4\u03ae\u03b8\u03b7\u03ba\u03b5 \u03ae\u03b4\u03b7!"
+		"message": "Το σύστημα αρχείων προσαρτήθηκε ήδη!"
 	},
 	"backup_prefs": {
-		"message": "\u0391\u03c0\u03bf\u03b8\u03ae\u03ba\u03b5\u03c5\u03c3\u03b7 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03bf\u03c5 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2"
+		"message": "Αποθήκευση αντιγράφου ασφαλείας"
 	},
 	"bad_destination": {
-		"message": "\u0394\u03b5\u03bd \u03b5\u03af\u03bd\u03b1\u03b9 \u03b4\u03c5\u03bd\u03b1\u03c4\u03ae \u03b7 \u03b1\u03bd\u03ac\u03bb\u03c5\u03c3\u03b7 \u03c4\u03bf\u03c5 \u03c0\u03c1\u03bf\u03bf\u03c1\u03b9\u03c3\u03bc\u03bf\u03cd: $1",
+		"message": "Δεν είναι δυνατή η ανάλυση του προορισμού: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,25 +14,25 @@
 		}
 	},
 	"before_unload": {
-		"message": "\u0391\u03bd \u03ba\u03bb\u03b5\u03af\u03c3\u03b5\u03c4\u03b5 \u03b1\u03c5\u03c4\u03ae\u03bd \u03c4\u03b7\u03bd \u03ba\u03b1\u03c1\u03c4\u03ad\u03bb\u03b1, \u03b8\u03b1 \u03c4\u03b5\u03c1\u03bc\u03b1\u03c4\u03b9\u03c3\u03c4\u03b5\u03af \u03b7 \u03c0\u03b5\u03c1\u03af\u03bf\u03b4\u03bf\u03c2 \u03c3\u03cd\u03bd\u03b4\u03b5\u03c3\u03b7\u03c2."
+		"message": "Αν κλείσετε αυτήν την καρτέλα, θα τερματιστεί η περίοδος σύνδεσης."
 	},
 	"cancel_button_label": {
-		"message": "\u0391\u03ba\u03cd\u03c1\u03c9\u03c3\u03b7"
+		"message": "Ακύρωση"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "\u0391\u03c5\u03c4\u03ae \u03b7 \u03b5\u03bd\u03c4\u03bf\u03bb\u03ae \u03b5\u03bc\u03c6\u03b1\u03bd\u03af\u03b6\u03b5\u03b9 \u03ad\u03bd\u03b1 \u03bc\u03b5\u03bd\u03bf\u03cd \u03bc\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bd\u03c9\u03c3\u03c4\u03bf\u03cd\u03c2 \u03ba\u03b5\u03bd\u03c4\u03c1\u03b9\u03ba\u03bf\u03cd\u03c2 \u03c5\u03c0\u03bf\u03bb\u03bf\u03b3\u03b9\u03c3\u03c4\u03ad\u03c2 \u03ba\u03b1\u03b9 \u03c0\u03c1\u03bf\u03c4\u03ac\u03c3\u03b5\u03b9\u03c2 \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03b4\u03b9\u03b1\u03b3\u03c1\u03b1\u03c6\u03bf\u03cd\u03bd \u03b1\u03c0\u03cc \u03c4\u03b7 \u03bc\u03bd\u03ae\u03bc\u03b7 \u03c4\u03bf\u03c5 \u03ba\u03b5\u03bd\u03c4\u03c1\u03b9\u03ba\u03bf\u03cd \u03c5\u03c0\u03bf\u03bb\u03bf\u03b3\u03b9\u03c3\u03c4\u03ae."
+		"message": "Αυτή η εντολή εμφανίζει ένα μενού με τους γνωστούς κεντρικούς υπολογιστές και προτάσεις για να διαγραφούν από τη μνήμη του κεντρικού υπολογιστή."
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "\u0394\u03b9\u03b1\u03b3\u03c1\u03b1\u03c6\u03ae \u03b1\u03c0\u03cc \u03c4\u03b7 \u03bc\u03bd\u03ae\u03bc\u03b7 \u03b5\u03bd\u03cc\u03c2 \u03b3\u03bd\u03c9\u03c3\u03c4\u03bf\u03cd \u03ba\u03b5\u03bd\u03c4\u03c1\u03b9\u03ba\u03bf\u03cd \u03c5\u03c0\u03bf\u03bb\u03bf\u03b3\u03b9\u03c3\u03c4\u03ae ssh."
+		"message": "Διαγραφή από τη μνήμη ενός γνωστού κεντρικού υπολογιστή ssh."
 	},
 	"cmd_ssh_help": {
-		"message": "\u039f\u03b9 \u03c0\u03b1\u03c1\u03ac\u03bc\u03b5\u03c4\u03c1\u03bf\u03b9 |username| \u03ba\u03b1\u03b9 |hostname| \u03b5\u03af\u03bd\u03b1\u03b9 \u03c5\u03c0\u03bf\u03c7\u03c1\u03b5\u03c9\u03c4\u03b9\u03ba\u03ad\u03c2, \u03b5\u03bd\u03ce \u03b7 \u03c0\u03b1\u03c1\u03ac\u03bc\u03b5\u03c4\u03c1\u03bf\u03c2 |port| \u03b5\u03af\u03bd\u03b1\u03b9 \u03c0\u03c1\u03bf\u03b1\u03b9\u03c1\u03b5\u03c4\u03b9\u03ba\u03ae.  \u03a3\u03b5 \u03c0\u03b5\u03c1\u03af\u03c0\u03c4\u03c9\u03c3\u03b7 \u03c0\u03bf\u03c5 \u03b4\u03b5\u03bd \u03c0\u03c1\u03bf\u03c3\u03b4\u03b9\u03bf\u03c1\u03b9\u03c3\u03c4\u03b5\u03af \u03b7 \u03b8\u03cd\u03c1\u03b1, \u03c0\u03c1\u03bf\u03b5\u03c0\u03b9\u03bb\u03b5\u03b3\u03bc\u03ad\u03bd\u03b7 \u03b5\u03af\u03bd\u03b1\u03b9 \u03b7 22."
+		"message": "Οι παράμετροι |username| και |hostname| είναι υποχρεωτικές, ενώ η παράμετρος |port| είναι προαιρετική.  Σε περίπτωση που δεν προσδιοριστεί η θύρα, προεπιλεγμένη είναι η 22."
 	},
 	"cmd_ssh_title": {
-		"message": "\u0391\u03bd\u03bf\u03af\u03b3\u03b5\u03b9 \u03bc\u03b9\u03b1 \u03bd\u03ad\u03b1 \u03c3\u03c5\u03bd\u03b5\u03b4\u03c1\u03af\u03b1 SSH."
+		"message": "Ανοίγει μια νέα συνεδρία SSH."
 	},
 	"command_complete": {
-		"message": "\u0397 \u03b5\u03bd\u03c4\u03bf\u03bb\u03ae $1 \u03c0\u03c1\u03b1\u03b3\u03bc\u03b1\u03c4\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b5 \u03ad\u03be\u03bf\u03b4\u03bf \u03bc\u03b5 \u03ba\u03c9\u03b4\u03b9\u03ba\u03cc \u03ba\u03b1\u03c4\u03ac\u03c3\u03c4\u03b1\u03c3\u03b7\u03c2 $2.",
+		"message": "Η εντολή $1 πραγματοποίησε έξοδο με κωδικό κατάστασης $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -43,13 +43,13 @@
 		}
 	},
 	"connect_button_label": {
-		"message": "\u03a3\u03cd\u03bd\u03b4\u03b5\u03c3\u03b7"
+		"message": "Σύνδεση"
 	},
 	"connect_or_exit_message": {
-		"message": "\u0398\u03ad\u03bb\u03b5\u03c4\u03b5 \u03bd\u03b1 (\u03b5)\u03c0\u03b9\u03bb\u03ad\u03be\u03b5\u03c4\u03b5 \u03ac\u03bb\u03bb\u03b7 \u03c3\u03cd\u03bd\u03b4\u03b5\u03c3\u03b7 \u03ae \u03bd\u03b1 \u03c0\u03c1\u03b1\u03b3\u03bc\u03b1\u03c4\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03c4\u03b5 \u03ad(\u03be)\u03bf\u03b4\u03bf;"
+		"message": "Θέλετε να (ε)πιλέξετε άλλη σύνδεση ή να πραγματοποιήσετε έ(ξ)οδο;"
 	},
 	"connecting": {
-		"message": "\u03a3\u03cd\u03bd\u03b4\u03b5\u03c3\u03b7 \u03c3\u03c4\u03bf $1\u2026",
+		"message": "Σύνδεση στο $1…",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -60,10 +60,10 @@
 		"message": "[DEL]"
 	},
 	"delete_button_label": {
-		"message": "\u0394\u03b9\u03b1\u03b3\u03c1\u03b1\u03c6\u03ae"
+		"message": "Διαγραφή"
 	},
 	"disconnect_message": {
-		"message": "\u0397 \u03c0\u03c1\u03bf\u03c3\u03b8\u03ae\u03ba\u03b7 NaCl \u03c0\u03c1\u03b1\u03b3\u03bc\u03b1\u03c4\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b5 \u03ad\u03be\u03bf\u03b4\u03bf \u03bc\u03b5 \u03ba\u03c9\u03b4\u03b9\u03ba\u03cc \u03ba\u03b1\u03c4\u03ac\u03c3\u03c4\u03b1\u03c3\u03b7\u03c2 $1.",
+		"message": "Η προσθήκη NaCl πραγματοποίησε έξοδο με κωδικό κατάστασης $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -74,52 +74,52 @@
 		"message": "[ENTER]"
 	},
 	"field_argstr_aria_label": {
-		"message": "\u03c0\u03c1\u03cc\u03c3\u03b8\u03b5\u03c4\u03b1 \u03bf\u03c1\u03af\u03c3\u03bc\u03b1\u03c4\u03b1 ssh"
+		"message": "πρόσθετα ορίσματα ssh"
 	},
 	"field_argstr_placeholder": {
-		"message": "\u03b5\u03c0\u03b9\u03c0\u03bb\u03ad\u03bf\u03bd \u03bf\u03c1\u03af\u03c3\u03bc\u03b1\u03c4\u03b1 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ae\u03c2 \u03b5\u03bd\u03c4\u03bf\u03bb\u03ce\u03bd"
+		"message": "επιπλέον ορίσματα γραμμής εντολών"
 	},
 	"field_description_aria_label": {
-		"message": "\u03c0\u03b5\u03c1\u03b9\u03b3\u03c1\u03b1\u03c6\u03ae"
+		"message": "περιγραφή"
 	},
 	"field_description_placeholder": {
-		"message": "username@hostname \u03ae \u03ba\u03b5\u03af\u03bc\u03b5\u03bd\u03bf \u03b5\u03bb\u03b5\u03cd\u03b8\u03b5\u03c1\u03b7\u03c2 \u03bc\u03bf\u03c1\u03c6\u03ae\u03c2"
+		"message": "username@hostname ή κείμενο ελεύθερης μορφής"
 	},
 	"field_hostname_aria_label": {
-		"message": "\u03cc\u03bd\u03bf\u03bc\u03b1 \u03ba\u03b5\u03bd\u03c4\u03c1\u03b9\u03ba\u03bf\u03cd \u03c5\u03c0\u03bf\u03bb\u03bf\u03b3\u03b9\u03c3\u03c4\u03ae"
+		"message": "όνομα κεντρικού υπολογιστή"
 	},
 	"field_hostname_placeholder": {
-		"message": "\u03cc\u03bd\u03bf\u03bc\u03b1 \u03ba\u03b5\u03bd\u03c4\u03c1\u03b9\u03ba\u03bf\u03cd \u03c5\u03c0\u03bf\u03bb\u03bf\u03b3\u03b9\u03c3\u03c4\u03ae"
+		"message": "όνομα κεντρικού υπολογιστή"
 	},
 	"field_identity_aria_label": {
-		"message": "\u03c4\u03b1\u03c5\u03c4\u03cc\u03c4\u03b7\u03c4\u03b1"
+		"message": "ταυτότητα"
 	},
 	"field_port_aria_label": {
-		"message": "\u03b8\u03cd\u03c1\u03b1"
+		"message": "θύρα"
 	},
 	"field_port_placeholder": {
-		"message": "\u03b8\u03cd\u03c1\u03b1"
+		"message": "θύρα"
 	},
 	"field_relay_options_aria_label": {
-		"message": "\u03b5\u03c0\u03b9\u03bb\u03bf\u03b3\u03ad\u03c2 \u03b1\u03bd\u03b1\u03bc\u03b5\u03c4\u03ac\u03b4\u03bf\u03c3\u03b7\u03c2"
+		"message": "επιλογές αναμετάδοσης"
 	},
 	"field_relay_options_placeholder": {
-		"message": "\u03b5\u03c0\u03b9\u03bb\u03bf\u03b3\u03ad\u03c2 \u03b1\u03bd\u03b1\u03bc\u03b5\u03c4\u03ac\u03b4\u03bf\u03c3\u03b7\u03c2"
+		"message": "επιλογές αναμετάδοσης"
 	},
 	"field_terminal_profile_aria_label": {
-		"message": "\u03cc\u03bd\u03bf\u03bc\u03b1 \u03c0\u03c1\u03bf\u03c6\u03af\u03bb \u03c4\u03b5\u03c1\u03bc\u03b1\u03c4\u03b9\u03ba\u03bf\u03cd"
+		"message": "όνομα προφίλ τερματικού"
 	},
 	"field_terminal_profile_placeholder": {
-		"message": "\u03c0\u03c1\u03bf\u03b5\u03c0\u03b9\u03bb\u03bf\u03b3\u03ae"
+		"message": "προεπιλογή"
 	},
 	"field_username_aria_label": {
-		"message": "\u03cc\u03bd\u03bf\u03bc\u03b1 \u03c7\u03c1\u03ae\u03c3\u03c4\u03b7"
+		"message": "όνομα χρήστη"
 	},
 	"field_username_placeholder": {
-		"message": "\u03cc\u03bd\u03bf\u03bc\u03b1 \u03c7\u03c1\u03ae\u03c3\u03c4\u03b7"
+		"message": "όνομα χρήστη"
 	},
 	"found_relay": {
-		"message": "\u0392\u03c1\u03ad\u03b8\u03b7\u03ba\u03b5 \u03b4\u03b9\u03b1\u03ba\u03bf\u03bc\u03b9\u03c3\u03c4\u03ae\u03c2 \u03b1\u03bd\u03b1\u03bc\u03b5\u03c4\u03ac\u03b4\u03bf\u03c3\u03b7\u03c2: $1",
+		"message": "Βρέθηκε διακομιστής αναμετάδοσης: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -127,16 +127,16 @@
 		}
 	},
 	"identity_label": {
-		"message": "\u03a4\u03b1\u03c5\u03c4\u03cc\u03c4\u03b7\u03c4\u03b1"
+		"message": "Ταυτότητα"
 	},
 	"import_link_aria_label": {
-		"message": "\u03b5\u03b9\u03c3\u03b1\u03b3\u03c9\u03b3\u03ae \u03b1\u03c1\u03c7\u03b5\u03af\u03bf\u03c5"
+		"message": "εισαγωγή αρχείου"
 	},
 	"import_link_label": {
-		"message": "\u0395\u03b9\u03c3\u03b1\u03b3\u03c9\u03b3\u03ae\u2026"
+		"message": "Εισαγωγή…"
 	},
 	"initializing_relay": {
-		"message": "\u0391\u03bd\u03b1\u03b6\u03ae\u03c4\u03b7\u03c3\u03b7 \u03c3\u03c4\u03bf\u03bd \u03b4\u03b9\u03b1\u03ba\u03bf\u03bc\u03b9\u03c3\u03c4\u03ae \u03b1\u03bd\u03b1\u03bc\u03b5\u03c4\u03ac\u03b4\u03bf\u03c3\u03b7\u03c2 \u03bc\u03ad\u03c3\u03c9: $1",
+		"message": "Αναζήτηση στον διακομιστή αναμετάδοσης μέσω: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -144,7 +144,7 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "\u0394\u03b5\u03bd \u03ae\u03c4\u03b1\u03bd \u03b4\u03c5\u03bd\u03b1\u03c4\u03ae \u03b7 \u03b1\u03bd\u03ac\u03bb\u03c5\u03c3\u03b7 \u03c4\u03bf\u03c5 JSON \u03c3\u03b5 '$1'",
+		"message": "Δεν ήταν δυνατή η ανάλυση του JSON σε '$1'",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "\u0394\u03b5\u03bd \u03c5\u03c0\u03ac\u03c1\u03c7\u03bf\u03c5\u03bd \u03b3\u03bd\u03c9\u03c3\u03c4\u03bf\u03af \u03ba\u03b5\u03bd\u03c4\u03c1\u03b9\u03ba\u03bf\u03af \u03c5\u03c0\u03bf\u03bb\u03bf\u03b3\u03b9\u03c3\u03c4\u03ad\u03c2, \u03b4\u03b5\u03bd \u03bc\u03c0\u03bf\u03c1\u03b5\u03af \u03bd\u03b1 \u03b4\u03b9\u03b1\u03b3\u03c1\u03b1\u03c6\u03b5\u03af \u03ba\u03ac\u03c4\u03b9 \u03b1\u03c0\u03cc \u03c4\u03b7 \u03bc\u03bd\u03ae\u03bc\u03b7."
+		"message": "Δεν υπάρχουν γνωστοί κεντρικοί υπολογιστές, δεν μπορεί να διαγραφεί κάτι από τη μνήμη."
 	},
 	"known_hosts_prompt": {
-		"message": "\u0395\u03c0\u03b9\u03bb\u03ad\u03be\u03c4\u03b5 \u03ad\u03bd\u03b1\u03bd \u03ba\u03b5\u03bd\u03c4\u03c1\u03b9\u03ba\u03cc \u03c5\u03c0\u03bf\u03bb\u03bf\u03b3\u03b9\u03c3\u03c4\u03ae \u03b3\u03b9\u03b1 \u03b4\u03b9\u03b1\u03b3\u03c1\u03b1\u03c6\u03ae \u03b1\u03c0\u03cc \u03c4\u03b7 \u03bc\u03bd\u03ae\u03bc\u03b7[1-$1]:",
+		"message": "Επιλέξτε έναν κεντρικό υπολογιστή για διαγραφή από τη μνήμη[1-$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -163,13 +163,13 @@
 		}
 	},
 	"known_hosts_title": {
-		"message": "\u0393\u03bd\u03c9\u03c3\u03c4\u03bf\u03af \u03ba\u03b5\u03bd\u03c4\u03c1\u03b9\u03ba\u03bf\u03af \u03c5\u03c0\u03bf\u03bb\u03bf\u03b3\u03b9\u03c3\u03c4\u03ad\u03c2:"
+		"message": "Γνωστοί κεντρικοί υπολογιστές:"
 	},
 	"loading_label": {
-		"message": "\u03a6\u03cc\u03c1\u03c4\u03c9\u03c3\u03b7\u2026"
+		"message": "Φόρτωση…"
 	},
 	"missing_param": {
-		"message": "\u039b\u03b5\u03af\u03c0\u03b5\u03b9 \u03b7 \u03c0\u03b1\u03c1\u03ac\u03bc\u03b5\u03c4\u03c1\u03bf\u03c2: $1",
+		"message": "Λείπει η παράμετρος: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -177,19 +177,19 @@
 		}
 	},
 	"mount_button_label": {
-		"message": "\u03a0\u03c1\u03bf\u03c3\u03ac\u03c1\u03c4\u03b7\u03c3\u03b7 SFTP"
+		"message": "Προσάρτηση SFTP"
 	},
 	"mounted_message": {
-		"message": "\u03a0\u03c1\u03bf\u03c3\u03b1\u03c1\u03c4\u03ae\u03b8\u03b7\u03ba\u03b5!"
+		"message": "Προσαρτήθηκε!"
 	},
 	"notify_copy": {
-		"message": "\u0397 \u03b5\u03c0\u03b9\u03bb\u03bf\u03b3\u03ae \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03b7\u03ba\u03b5"
+		"message": "Η επιλογή αντιγράφηκε"
 	},
 	"ok_button_label": {
 		"message": "OK"
 	},
 	"open_as_window_tip": {
-		"message": "[Pro Tip] \u03a7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03b5\u03c0\u03b9\u03bb\u03bf\u03b3\u03ae \"\u0386\u03bd\u03bf\u03b9\u03b3\u03bc\u03b1 \u03c3\u03b5 \u03c0\u03b1\u03c1\u03ac\u03b8\u03c5\u03c1\u03bf\" \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03b1\u03c0\u03bf\u03c4\u03c1\u03ad\u03c8\u03b5\u03c4\u03b5 \u03c4\u03bf \u03ba\u03bb\u03b5\u03af\u03c3\u03b9\u03bc\u03bf \u03c4\u03bf\u03c5 \u03c4\u03b5\u03c1\u03bc\u03b1\u03c4\u03b9\u03ba\u03bf\u03cd \u03c3\u03b1\u03c2 \u03b1\u03c0\u03cc \u03c4\u03bf Control-W!\n[Pro Tip] \u0393\u03b9\u03b1 \u03c0\u03b5\u03c1\u03b9\u03c3\u03c3\u03cc\u03c4\u03b5\u03c1\u03b5\u03c2 \u03c0\u03bb\u03b7\u03c1\u03bf\u03c6\u03bf\u03c1\u03af\u03b5\u03c2, \u03b1\u03bd\u03b1\u03c4\u03c1\u03ad\u03be\u03c4\u03b5 \u03c3\u03c4\u03b7 \u03b4\u03b9\u03b5\u03cd\u03b8\u03c5\u03bd\u03c3\u03b7 $1.",
+		"message": "[Pro Tip] Χρησιμοποιήστε την επιλογή \"Άνοιγμα σε παράθυρο\" για να αποτρέψετε το κλείσιμο του τερματικού σας από το Control-W!\n[Pro Tip] Για περισσότερες πληροφορίες, ανατρέξτε στη διεύθυνση $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -197,55 +197,55 @@
 		}
 	},
 	"options_button_label": {
-		"message": "\u0395\u03c0\u03b9\u03bb\u03bf\u03b3\u03ad\u03c2"
+		"message": "Επιλογές"
 	},
 	"plugin_loading": {
-		"message": "\u03a6\u03cc\u03c1\u03c4\u03c9\u03c3\u03b7 \u03c4\u03b7\u03c2 \u03c0\u03c1\u03bf\u03c3\u03b8\u03ae\u03ba\u03b7\u03c2 NaCl..."
+		"message": "Φόρτωση της προσθήκης NaCl..."
 	},
 	"plugin_loading_complete": {
-		"message": "\u03a4\u03ad\u03bb\u03bf\u03c2"
+		"message": "Τέλος"
 	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
 	"preferences_header": {
-		"message": "\u03a1\u03c5\u03b8\u03bc\u03af\u03c3\u03b5\u03b9\u03c2 \u03c0\u03c1\u03bf\u03c6\u03af\u03bb"
+		"message": "Ρυθμίσεις προφίλ"
 	},
 	"preferences_reset": {
-		"message": "\u0388\u03b3\u03b9\u03bd\u03b5 \u03b5\u03c0\u03b1\u03bd\u03b1\u03c6\u03bf\u03c1\u03ac \u03cc\u03bb\u03c9\u03bd \u03c4\u03c9\u03bd \u03c0\u03c1\u03bf\u03c4\u03b9\u03bc\u03ae\u03c3\u03b5\u03c9\u03bd!"
+		"message": "Έγινε επαναφορά όλων των προτιμήσεων!"
 	},
 	"reconnect_message": {
-		"message": "\u0398\u03ad\u03bb\u03b5\u03c4\u03b5 \u03bd\u03b1 \u03ba\u03ac\u03bd\u03b5\u03c4\u03b5 \u03b5(\u03c0)\u03b1\u03bd\u03b1\u03c3\u03cd\u03bd\u03b4\u03b5\u03c3\u03b7, \u03bd\u03b1 (\u03b5)\u03c0\u03b9\u03bb\u03ad\u03be\u03b5\u03c4\u03b5 \u03ac\u03bb\u03bb\u03b7 \u03c3\u03cd\u03bd\u03b4\u03b5\u03c3\u03b7 \u03ae \u03bd\u03b1 \u03c0\u03c1\u03b1\u03b3\u03bc\u03b1\u03c4\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03c4\u03b5 \u03ad(\u03be)\u03bf\u03b4\u03bf;"
+		"message": "Θέλετε να κάνετε ε(π)ανασύνδεση, να (ε)πιλέξετε άλλη σύνδεση ή να πραγματοποιήσετε έ(ξ)οδο;"
 	},
 	"relay_retry": {
-		"message": "\u0395\u03c0\u03b1\u03bd\u03ac\u03bb\u03b7\u03c8\u03b7\u2026"
+		"message": "Επανάληψη…"
 	},
 	"restore_prefs": {
-		"message": "\u0395\u03c0\u03b1\u03bd\u03b1\u03c6\u03bf\u03c1\u03ac \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03bf\u03c5 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2"
+		"message": "Επαναφορά αντιγράφου ασφαλείας"
 	},
 	"shortcut_list_aria_label": {
-		"message": "\u03b1\u03c0\u03bf\u03b8\u03b7\u03ba\u03b5\u03c5\u03bc\u03ad\u03bd\u03b5\u03c2 \u03c3\u03c5\u03bd\u03b4\u03ad\u03c3\u03b5\u03b9\u03c2"
+		"message": "αποθηκευμένες συνδέσεις"
 	},
 	"ssh_argstr_label": {
-		"message": "\u039f\u03c1\u03af\u03c3\u03bc\u03b1\u03c4\u03b1 SSH"
+		"message": "Ορίσματα SSH"
 	},
 	"terminal_preview_label": {
-		"message": "\u03a0\u03c1\u03bf\u03b5\u03c0\u03b9\u03c3\u03ba\u03cc\u03c0\u03b7\u03c3\u03b7"
+		"message": "Προεπισκόπηση"
 	},
 	"terminal_profile_label": {
-		"message": "\u03a4\u03c1\u03ad\u03c7\u03bf\u03bd \u03c0\u03c1\u03bf\u03c6\u03af\u03bb"
+		"message": "Τρέχον προφίλ"
 	},
 	"unexpected_error": {
-		"message": "\u03a0\u03b1\u03c1\u03bf\u03c5\u03c3\u03b9\u03ac\u03c3\u03c4\u03b7\u03ba\u03b5 \u03bc\u03b7 \u03b1\u03bd\u03b1\u03bc\u03b5\u03bd\u03cc\u03bc\u03b5\u03bd\u03bf \u03c3\u03c6\u03ac\u03bb\u03bc\u03b1, \u03b5\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ba\u03bf\u03bd\u03c3\u03cc\u03bb\u03b1 JavaScript \u03b3\u03b9\u03b1 \u03c0\u03b5\u03c1\u03b9\u03c3\u03c3\u03cc\u03c4\u03b5\u03c1\u03b5\u03c2 \u03bb\u03b5\u03c0\u03c4\u03bf\u03bc\u03ad\u03c1\u03b5\u03b9\u03b5\u03c2."
+		"message": "Παρουσιάστηκε μη αναμενόμενο σφάλμα, ελέγξτε την κονσόλα JavaScript για περισσότερες λεπτομέρειες."
 	},
 	"unmount_button_label": {
-		"message": "\u0391\u03c0\u03bf\u03c0\u03c1\u03bf\u03c3\u03ac\u03c1\u03c4\u03b7\u03c3\u03b7 SFTP"
+		"message": "Αποπροσάρτηση SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "\u03a5\u03c0\u03ac\u03c1\u03c7\u03b5\u03b9 \u03b4\u03b9\u03b1\u03b8\u03ad\u03c3\u03b9\u03bc\u03b7 \u03b5\u03bd\u03b7\u03bc\u03ad\u03c1\u03c9\u03c3\u03b7.  \u039a\u03bb\u03b5\u03af\u03c3\u03c4\u03b5 \u03cc\u03bb\u03b1 \u03c4\u03b1 \u03c0\u03b1\u03c1\u03ac\u03b8\u03c5\u03c1\u03b1."
+		"message": "Υπάρχει διαθέσιμη ενημέρωση.  Κλείστε όλα τα παράθυρα."
 	},
 	"welcome_faq": {
-		"message": "\u0391\u03c0\u03b1\u03bd\u03c4\u03ae\u03c3\u03b5\u03b9\u03c2 \u03c3\u03b5 \u03a3\u03c5\u03bd\u03ae\u03b8\u03b5\u03b9\u03c2 \u03b5\u03c1\u03c9\u03c4\u03ae\u03c3\u03b5\u03b9\u03c2: $1 (\u03ba\u03ac\u03bd\u03c4\u03b5 ctrl+click \u03c3\u03c4\u03bf\u03c5\u03c2 \u03c3\u03c5\u03bd\u03b4\u03ad\u03c3\u03bc\u03bf\u03c5\u03c2 \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03bd\u03bf\u03af\u03be\u03b5\u03c4\u03b5)",
+		"message": "Απαντήσεις σε Συνήθεις ερωτήσεις: $1 (κάντε ctrl+click στους συνδέσμους για να τους ανοίξετε)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -253,7 +253,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "\u039a\u03b1\u03bb\u03ce\u03c2 \u03ae\u03c1\u03b8\u03b1\u03c4\u03b5 \u03c3\u03c4\u03bf $1, \u03ad\u03ba\u03b4\u03bf\u03c3\u03b7 $2.",
+		"message": "Καλώς ήρθατε στο $1, έκδοση $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "\u03a1\u03c5\u03b8\u03bc\u03af\u03c3\u03c4\u03b5 \u03c4\u03bf \u039c\u03b5\u03bd\u03bf\u03cd Chrome->\u0395\u03c3\u03c4\u03af\u03b1\u03c3\u03b7 \u03c3\u03b5 100%"
+		"message": "Ρυθμίστε το Μενού Chrome->Εστίαση σε 100%"
 	}
 }

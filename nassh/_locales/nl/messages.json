@@ -14,7 +14,7 @@
 		}
 	},
 	"before_unload": {
-		"message": "Als u dit tabblad sluit, wordt deze sessie be\u00ebindigd."
+		"message": "Als u dit tabblad sluit, wordt deze sessie beëindigd."
 	},
 	"cancel_button_label": {
 		"message": "Annuleren"
@@ -218,7 +218,7 @@
 		"message": "Opnieuw verbinden, een andere verbinding kiezen of afsluiten?"
 	},
 	"relay_retry": {
-		"message": "Opnieuw proberen\u2026"
+		"message": "Opnieuw proberen…"
 	},
 	"restore_prefs": {
 		"message": "Back-up terugzetten"

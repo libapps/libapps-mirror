@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "\u0e15\u0e48\u0e2d\u0e40\u0e0a\u0e37\u0e48\u0e2d\u0e21\u0e23\u0e30\u0e1a\u0e1a\u0e44\u0e1f\u0e25\u0e4c\u0e44\u0e27\u0e49\u0e41\u0e25\u0e49\u0e27!"
+		"message": "ต่อเชื่อมระบบไฟล์ไว้แล้ว!"
 	},
 	"backup_prefs": {
-		"message": "\u0e1a\u0e31\u0e19\u0e17\u0e36\u0e01\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2a\u0e33\u0e23\u0e2d\u0e07"
+		"message": "บันทึกข้อมูลสำรอง"
 	},
 	"bad_destination": {
-		"message": "\u0e44\u0e21\u0e48\u0e2a\u0e32\u0e21\u0e32\u0e23\u0e16\u0e41\u0e22\u0e01\u0e27\u0e34\u0e40\u0e04\u0e23\u0e32\u0e30\u0e2b\u0e4c\u0e1b\u0e25\u0e32\u0e22\u0e17\u0e32\u0e07: $1",
+		"message": "ไม่สามารถแยกวิเคราะห์ปลายทาง: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,25 +14,25 @@
 		}
 	},
 	"before_unload": {
-		"message": "\u0e01\u0e32\u0e23\u0e1b\u0e34\u0e14\u0e41\u0e17\u0e47\u0e1a\u0e19\u0e35\u0e49\u0e08\u0e30\u0e22\u0e01\u0e40\u0e25\u0e34\u0e01\u0e01\u0e32\u0e23\u0e40\u0e0a\u0e37\u0e48\u0e2d\u0e21\u0e15\u0e48\u0e2d\u0e40\u0e0b\u0e2a\u0e0a\u0e31\u0e19\u0e19\u0e35\u0e49"
+		"message": "การปิดแท็บนี้จะยกเลิกการเชื่อมต่อเซสชันนี้"
 	},
 	"cancel_button_label": {
-		"message": "\u0e22\u0e01\u0e40\u0e25\u0e34\u0e01"
+		"message": "ยกเลิก"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "\u0e04\u0e33\u0e2a\u0e31\u0e48\u0e07\u0e19\u0e35\u0e49\u0e08\u0e30\u0e41\u0e2a\u0e14\u0e07\u0e40\u0e21\u0e19\u0e39\u0e02\u0e2d\u0e07\u0e42\u0e2e\u0e2a\u0e15\u0e4c\u0e17\u0e35\u0e48\u0e23\u0e39\u0e49\u0e08\u0e31\u0e01\u0e41\u0e25\u0e30\u0e41\u0e08\u0e49\u0e07\u0e43\u0e2b\u0e49\u0e23\u0e30\u0e1a\u0e38\u0e42\u0e2e\u0e2a\u0e15\u0e4c\u0e17\u0e35\u0e48\u0e08\u0e30\u0e44\u0e21\u0e48\u0e08\u0e14\u0e08\u0e33"
+		"message": "คำสั่งนี้จะแสดงเมนูของโฮสต์ที่รู้จักและแจ้งให้ระบุโฮสต์ที่จะไม่จดจำ"
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "\u0e44\u0e21\u0e48\u0e08\u0e33\u0e42\u0e2e\u0e2a\u0e15\u0e4c SSH \u0e17\u0e35\u0e48\u0e23\u0e39\u0e49\u0e08\u0e31\u0e01"
+		"message": "ไม่จำโฮสต์ SSH ที่รู้จัก"
 	},
 	"cmd_ssh_help": {
-		"message": "\u0e15\u0e49\u0e2d\u0e07\u0e21\u0e35\u0e1e\u0e32\u0e23\u0e32\u0e21\u0e34\u0e40\u0e15\u0e2d\u0e23\u0e4c |username| \u0e41\u0e25\u0e30 |hostname| \u0e08\u0e30\u0e23\u0e30\u0e1a\u0e38 |port| \u0e2b\u0e23\u0e37\u0e2d\u0e44\u0e21\u0e48\u0e01\u0e47\u0e44\u0e14\u0e49 \u0e16\u0e49\u0e32\u0e44\u0e21\u0e48\u0e23\u0e30\u0e1a\u0e38\u0e1e\u0e2d\u0e23\u0e4c\u0e15 \u0e04\u0e48\u0e32\u0e40\u0e23\u0e34\u0e48\u0e21\u0e15\u0e49\u0e19\u0e08\u0e30\u0e40\u0e1b\u0e47\u0e19 22"
+		"message": "ต้องมีพารามิเตอร์ |username| และ |hostname| จะระบุ |port| หรือไม่ก็ได้ ถ้าไม่ระบุพอร์ต ค่าเริ่มต้นจะเป็น 22"
 	},
 	"cmd_ssh_title": {
-		"message": "\u0e40\u0e1b\u0e34\u0e14\u0e40\u0e0b\u0e2a\u0e0a\u0e31\u0e19 SSH \u0e43\u0e2b\u0e21\u0e48"
+		"message": "เปิดเซสชัน SSH ใหม่"
 	},
 	"command_complete": {
-		"message": "\u0e2d\u0e2d\u0e01\u0e08\u0e32\u0e01\u0e04\u0e33\u0e2a\u0e31\u0e48\u0e07 $1 \u0e41\u0e25\u0e49\u0e27\u0e42\u0e14\u0e22\u0e21\u0e35\u0e23\u0e2b\u0e31\u0e2a\u0e2a\u0e16\u0e32\u0e19\u0e30 $2",
+		"message": "ออกจากคำสั่ง $1 แล้วโดยมีรหัสสถานะ $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -43,13 +43,13 @@
 		}
 	},
 	"connect_button_label": {
-		"message": "\u0e40\u0e0a\u0e37\u0e48\u0e2d\u0e21\u0e15\u0e48\u0e2d"
+		"message": "เชื่อมต่อ"
 	},
 	"connect_or_exit_message": {
-		"message": "\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23(\u0e40)\u0e25\u0e37\u0e2d\u0e01\u0e01\u0e32\u0e23\u0e40\u0e0a\u0e37\u0e48\u0e2d\u0e21\u0e15\u0e48\u0e2d\u0e2d\u0e37\u0e48\u0e19\u0e2b\u0e23\u0e37\u0e2d(\u0e2d)\u0e2d\u0e01"
+		"message": "ต้องการ(เ)ลือกการเชื่อมต่ออื่นหรือ(อ)อก"
 	},
 	"connecting": {
-		"message": "\u0e01\u0e33\u0e25\u0e31\u0e07\u0e40\u0e0a\u0e37\u0e48\u0e2d\u0e21\u0e15\u0e48\u0e2d $1...",
+		"message": "กำลังเชื่อมต่อ $1...",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -57,13 +57,13 @@
 		}
 	},
 	"del_keycap": {
-		"message": "[\u0e25\u0e1a]"
+		"message": "[ลบ]"
 	},
 	"delete_button_label": {
-		"message": "\u0e25\u0e1a"
+		"message": "ลบ"
 	},
 	"disconnect_message": {
-		"message": "\u0e2d\u0e2d\u0e01\u0e08\u0e32\u0e01\u0e1b\u0e25\u0e31\u0e4a\u0e01\u0e2d\u0e34\u0e19 NaCl \u0e41\u0e25\u0e49\u0e27\u0e42\u0e14\u0e22\u0e21\u0e35\u0e23\u0e2b\u0e31\u0e2a\u0e2a\u0e16\u0e32\u0e19\u0e30 $1",
+		"message": "ออกจากปลั๊กอิน NaCl แล้วโดยมีรหัสสถานะ $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -74,52 +74,52 @@
 		"message": "[ENTER]"
 	},
 	"field_argstr_aria_label": {
-		"message": "\u0e2d\u0e32\u0e23\u0e4c\u0e01\u0e34\u0e27\u0e40\u0e21\u0e19\u0e15\u0e4c ssh \u0e40\u0e1e\u0e34\u0e48\u0e21\u0e40\u0e15\u0e34\u0e21"
+		"message": "อาร์กิวเมนต์ ssh เพิ่มเติม"
 	},
 	"field_argstr_placeholder": {
-		"message": "\u0e2d\u0e32\u0e23\u0e4c\u0e01\u0e34\u0e27\u0e40\u0e21\u0e19\u0e15\u0e4c\u0e1a\u0e23\u0e23\u0e17\u0e31\u0e14\u0e04\u0e33\u0e2a\u0e31\u0e48\u0e07\u0e1e\u0e34\u0e40\u0e28\u0e29"
+		"message": "อาร์กิวเมนต์บรรทัดคำสั่งพิเศษ"
 	},
 	"field_description_aria_label": {
-		"message": "\u0e23\u0e32\u0e22\u0e25\u0e30\u0e40\u0e2d\u0e35\u0e22\u0e14"
+		"message": "รายละเอียด"
 	},
 	"field_description_placeholder": {
-		"message": "username@hostname \u0e2b\u0e23\u0e37\u0e2d\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e23\u0e39\u0e1b\u0e41\u0e1a\u0e1a\u0e2d\u0e34\u0e2a\u0e23\u0e30"
+		"message": "username@hostname หรือข้อความรูปแบบอิสระ"
 	},
 	"field_hostname_aria_label": {
-		"message": "\u0e0a\u0e37\u0e48\u0e2d\u0e42\u0e2e\u0e2a\u0e15\u0e4c"
+		"message": "ชื่อโฮสต์"
 	},
 	"field_hostname_placeholder": {
-		"message": "\u0e0a\u0e37\u0e48\u0e2d\u0e42\u0e2e\u0e2a\u0e15\u0e4c"
+		"message": "ชื่อโฮสต์"
 	},
 	"field_identity_aria_label": {
-		"message": "\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e1b\u0e23\u0e30\u0e08\u0e33\u0e15\u0e31\u0e27"
+		"message": "ข้อมูลประจำตัว"
 	},
 	"field_port_aria_label": {
-		"message": "\u0e1e\u0e2d\u0e23\u0e4c\u0e15"
+		"message": "พอร์ต"
 	},
 	"field_port_placeholder": {
-		"message": "\u0e1e\u0e2d\u0e23\u0e4c\u0e15"
+		"message": "พอร์ต"
 	},
 	"field_relay_options_aria_label": {
-		"message": "\u0e15\u0e31\u0e27\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e02\u0e2d\u0e07\u0e23\u0e35\u0e40\u0e25\u0e22\u0e4c"
+		"message": "ตัวเลือกของรีเลย์"
 	},
 	"field_relay_options_placeholder": {
-		"message": "\u0e15\u0e31\u0e27\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e02\u0e2d\u0e07\u0e23\u0e35\u0e40\u0e25\u0e22\u0e4c"
+		"message": "ตัวเลือกของรีเลย์"
 	},
 	"field_terminal_profile_aria_label": {
-		"message": "\u0e0a\u0e37\u0e48\u0e2d\u0e42\u0e1b\u0e23\u0e44\u0e1f\u0e25\u0e4c\u0e02\u0e2d\u0e07\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e21\u0e34\u0e19\u0e31\u0e25"
+		"message": "ชื่อโปรไฟล์ของเทอร์มินัล"
 	},
 	"field_terminal_profile_placeholder": {
-		"message": "\u0e04\u0e48\u0e32\u0e40\u0e23\u0e34\u0e48\u0e21\u0e15\u0e49\u0e19"
+		"message": "ค่าเริ่มต้น"
 	},
 	"field_username_aria_label": {
-		"message": "\u0e0a\u0e37\u0e48\u0e2d\u0e1c\u0e39\u0e49\u0e43\u0e0a\u0e49"
+		"message": "ชื่อผู้ใช้"
 	},
 	"field_username_placeholder": {
-		"message": "\u0e0a\u0e37\u0e48\u0e2d\u0e1c\u0e39\u0e49\u0e43\u0e0a\u0e49"
+		"message": "ชื่อผู้ใช้"
 	},
 	"found_relay": {
-		"message": "\u0e23\u0e35\u0e40\u0e25\u0e22\u0e4c\u0e40\u0e0b\u0e34\u0e23\u0e4c\u0e1f\u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e17\u0e35\u0e48\u0e1e\u0e1a: $1",
+		"message": "รีเลย์เซิร์ฟเวอร์ที่พบ: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -127,16 +127,16 @@
 		}
 	},
 	"identity_label": {
-		"message": "\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e1b\u0e23\u0e30\u0e08\u0e33\u0e15\u0e31\u0e27"
+		"message": "ข้อมูลประจำตัว"
 	},
 	"import_link_aria_label": {
-		"message": "\u0e19\u0e33\u0e40\u0e02\u0e49\u0e32\u0e44\u0e1f\u0e25\u0e4c"
+		"message": "นำเข้าไฟล์"
 	},
 	"import_link_label": {
-		"message": "\u0e19\u0e33\u0e40\u0e02\u0e49\u0e32..."
+		"message": "นำเข้า..."
 	},
 	"initializing_relay": {
-		"message": "\u0e01\u0e33\u0e25\u0e31\u0e07\u0e04\u0e49\u0e19\u0e2b\u0e32\u0e23\u0e35\u0e40\u0e25\u0e22\u0e4c\u0e40\u0e0b\u0e34\u0e23\u0e4c\u0e1f\u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e42\u0e14\u0e22\u0e43\u0e0a\u0e49 $1",
+		"message": "กำลังค้นหารีเลย์เซิร์ฟเวอร์โดยใช้ $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -144,7 +144,7 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "\u0e44\u0e21\u0e48\u0e2a\u0e32\u0e21\u0e32\u0e23\u0e16\u0e41\u0e22\u0e01\u0e27\u0e34\u0e40\u0e04\u0e23\u0e32\u0e30\u0e2b\u0e4c JSON \u0e43\u0e19 \"$1\"",
+		"message": "ไม่สามารถแยกวิเคราะห์ JSON ใน \"$1\"",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "\u0e44\u0e21\u0e48\u0e21\u0e35\u0e42\u0e2e\u0e2a\u0e15\u0e4c\u0e17\u0e35\u0e48\u0e23\u0e39\u0e49\u0e08\u0e31\u0e01 \u0e44\u0e21\u0e48\u0e21\u0e35\u0e42\u0e2e\u0e2a\u0e15\u0e4c\u0e43\u0e14\u0e17\u0e35\u0e48\u0e08\u0e30\u0e44\u0e21\u0e48\u0e08\u0e33"
+		"message": "ไม่มีโฮสต์ที่รู้จัก ไม่มีโฮสต์ใดที่จะไม่จำ"
 	},
 	"known_hosts_prompt": {
-		"message": "\u0e42\u0e1b\u0e23\u0e14\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e42\u0e2e\u0e2a\u0e15\u0e4c\u0e17\u0e35\u0e48\u0e08\u0e30\u0e44\u0e21\u0e48\u0e08\u0e33 [1-$1]:",
+		"message": "โปรดเลือกโฮสต์ที่จะไม่จำ [1-$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -163,13 +163,13 @@
 		}
 	},
 	"known_hosts_title": {
-		"message": "\u0e42\u0e2e\u0e2a\u0e15\u0e4c\u0e17\u0e35\u0e48\u0e23\u0e39\u0e49\u0e08\u0e31\u0e01:"
+		"message": "โฮสต์ที่รู้จัก:"
 	},
 	"loading_label": {
-		"message": "\u0e01\u0e33\u0e25\u0e31\u0e07\u0e42\u0e2b\u0e25\u0e14..."
+		"message": "กำลังโหลด..."
 	},
 	"missing_param": {
-		"message": "\u0e1e\u0e32\u0e23\u0e32\u0e21\u0e34\u0e40\u0e15\u0e2d\u0e23\u0e4c\u0e17\u0e35\u0e48\u0e02\u0e32\u0e14: $1",
+		"message": "พารามิเตอร์ที่ขาด: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -177,19 +177,19 @@
 		}
 	},
 	"mount_button_label": {
-		"message": "\u0e15\u0e48\u0e2d\u0e40\u0e0a\u0e37\u0e48\u0e2d\u0e21 SFTP"
+		"message": "ต่อเชื่อม SFTP"
 	},
 	"mounted_message": {
-		"message": "\u0e15\u0e48\u0e2d\u0e40\u0e0a\u0e37\u0e48\u0e2d\u0e21\u0e41\u0e25\u0e49\u0e27!"
+		"message": "ต่อเชื่อมแล้ว!"
 	},
 	"notify_copy": {
-		"message": "\u0e04\u0e31\u0e14\u0e25\u0e2d\u0e01\u0e2a\u0e34\u0e48\u0e07\u0e17\u0e35\u0e48\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e41\u0e25\u0e49\u0e27"
+		"message": "คัดลอกสิ่งที่เลือกแล้ว"
 	},
 	"ok_button_label": {
-		"message": "\u0e15\u0e01\u0e25\u0e07"
+		"message": "ตกลง"
 	},
 	"open_as_window_tip": {
-		"message": "[\u0e40\u0e04\u0e25\u0e47\u0e14\u0e25\u0e31\u0e1a\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a\u0e21\u0e37\u0e2d\u0e42\u0e1b\u0e23] \u0e43\u0e0a\u0e49 \"\u0e40\u0e1b\u0e34\u0e14\u0e40\u0e1b\u0e47\u0e19\u0e2b\u0e19\u0e49\u0e32\u0e15\u0e48\u0e32\u0e07\" \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e1b\u0e49\u0e2d\u0e07\u0e01\u0e31\u0e19\u0e44\u0e21\u0e48\u0e43\u0e2b\u0e49 Control-W \u0e1b\u0e34\u0e14\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e21\u0e34\u0e19\u0e31\u0e25!\n[\u0e40\u0e04\u0e25\u0e47\u0e14\u0e25\u0e31\u0e1a\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a\u0e21\u0e37\u0e2d\u0e42\u0e1b\u0e23] \u0e14\u0e39\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e40\u0e1e\u0e34\u0e48\u0e21\u0e40\u0e15\u0e34\u0e21\u0e43\u0e19 $1",
+		"message": "[เคล็ดลับสำหรับมือโปร] ใช้ \"เปิดเป็นหน้าต่าง\" เพื่อป้องกันไม่ให้ Control-W ปิดเทอร์มินัล!\n[เคล็ดลับสำหรับมือโปร] ดูข้อมูลเพิ่มเติมใน $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -197,55 +197,55 @@
 		}
 	},
 	"options_button_label": {
-		"message": "\u0e15\u0e31\u0e27\u0e40\u0e25\u0e37\u0e2d\u0e01"
+		"message": "ตัวเลือก"
 	},
 	"plugin_loading": {
-		"message": "\u0e01\u0e33\u0e25\u0e31\u0e07\u0e42\u0e2b\u0e25\u0e14\u0e1b\u0e25\u0e31\u0e4a\u0e01\u0e2d\u0e34\u0e19 NaCl..."
+		"message": "กำลังโหลดปลั๊กอิน NaCl..."
 	},
 	"plugin_loading_complete": {
-		"message": " \u0e40\u0e2a\u0e23\u0e47\u0e08\u0e2a\u0e34\u0e49\u0e19"
+		"message": " เสร็จสิ้น"
 	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
 	"preferences_header": {
-		"message": "\u0e01\u0e32\u0e23\u0e15\u0e31\u0e49\u0e07\u0e04\u0e48\u0e32\u0e42\u0e1b\u0e23\u0e44\u0e1f\u0e25\u0e4c"
+		"message": "การตั้งค่าโปรไฟล์"
 	},
 	"preferences_reset": {
-		"message": "\u0e23\u0e35\u0e40\u0e0b\u0e47\u0e15\u0e04\u0e48\u0e32\u0e01\u0e33\u0e2b\u0e19\u0e14\u0e17\u0e31\u0e49\u0e07\u0e2b\u0e21\u0e14\u0e41\u0e25\u0e49\u0e27!"
+		"message": "รีเซ็ตค่ากำหนดทั้งหมดแล้ว!"
 	},
 	"reconnect_message": {
-		"message": "\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e40\u0e0a\u0e37\u0e48\u0e2d(\u0e21)\u0e15\u0e48\u0e2d\u0e2d\u0e35\u0e01\u0e04\u0e23\u0e31\u0e49\u0e07 (\u0e40)\u0e25\u0e37\u0e2d\u0e01\u0e01\u0e32\u0e23\u0e40\u0e0a\u0e37\u0e48\u0e2d\u0e21\u0e15\u0e48\u0e2d\u0e2d\u0e37\u0e48\u0e19 \u0e2b\u0e23\u0e37\u0e2d(\u0e2d)\u0e2d\u0e01"
+		"message": "ต้องการเชื่อ(ม)ต่ออีกครั้ง (เ)ลือกการเชื่อมต่ออื่น หรือ(อ)อก"
 	},
 	"relay_retry": {
-		"message": "\u0e01\u0e33\u0e25\u0e31\u0e07\u0e25\u0e2d\u0e07\u0e43\u0e2b\u0e21\u0e48..."
+		"message": "กำลังลองใหม่..."
 	},
 	"restore_prefs": {
-		"message": "\u0e04\u0e37\u0e19\u0e04\u0e48\u0e32\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2a\u0e33\u0e23\u0e2d\u0e07"
+		"message": "คืนค่าข้อมูลสำรอง"
 	},
 	"shortcut_list_aria_label": {
-		"message": "\u0e01\u0e32\u0e23\u0e40\u0e0a\u0e37\u0e48\u0e2d\u0e21\u0e15\u0e48\u0e2d\u0e17\u0e35\u0e48\u0e1a\u0e31\u0e19\u0e17\u0e36\u0e01\u0e44\u0e27\u0e49"
+		"message": "การเชื่อมต่อที่บันทึกไว้"
 	},
 	"ssh_argstr_label": {
-		"message": "\u0e2d\u0e32\u0e23\u0e4c\u0e01\u0e34\u0e27\u0e40\u0e21\u0e19\u0e15\u0e4c SSH"
+		"message": "อาร์กิวเมนต์ SSH"
 	},
 	"terminal_preview_label": {
-		"message": "\u0e41\u0e2a\u0e14\u0e07\u0e15\u0e31\u0e27\u0e2d\u0e22\u0e48\u0e32\u0e07"
+		"message": "แสดงตัวอย่าง"
 	},
 	"terminal_profile_label": {
-		"message": "\u0e42\u0e1b\u0e23\u0e44\u0e1f\u0e25\u0e4c\u0e1b\u0e31\u0e08\u0e08\u0e38\u0e1a\u0e31\u0e19"
+		"message": "โปรไฟล์ปัจจุบัน"
 	},
 	"unexpected_error": {
-		"message": "\u0e40\u0e01\u0e34\u0e14\u0e02\u0e49\u0e2d\u0e1c\u0e34\u0e14\u0e1e\u0e25\u0e32\u0e14\u0e17\u0e35\u0e48\u0e44\u0e21\u0e48\u0e04\u0e32\u0e14\u0e04\u0e34\u0e14 \u0e42\u0e1b\u0e23\u0e14\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e04\u0e2d\u0e19\u0e42\u0e0b\u0e25 JavaScript \u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a\u0e23\u0e32\u0e22\u0e25\u0e30\u0e40\u0e2d\u0e35\u0e22\u0e14\u0e40\u0e1e\u0e34\u0e48\u0e21\u0e40\u0e15\u0e34\u0e21"
+		"message": "เกิดข้อผิดพลาดที่ไม่คาดคิด โปรดตรวจสอบคอนโซล JavaScript สำหรับรายละเอียดเพิ่มเติม"
 	},
 	"unmount_button_label": {
-		"message": "\u0e22\u0e01\u0e40\u0e25\u0e34\u0e01\u0e01\u0e32\u0e23\u0e15\u0e48\u0e2d\u0e40\u0e0a\u0e37\u0e48\u0e2d\u0e21 SFTP"
+		"message": "ยกเลิกการต่อเชื่อม SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "\u0e21\u0e35\u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15\u0e43\u0e2b\u0e49\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19 \u0e42\u0e1b\u0e23\u0e14\u0e1b\u0e34\u0e14\u0e2b\u0e19\u0e49\u0e32\u0e15\u0e48\u0e32\u0e07\u0e17\u0e31\u0e49\u0e07\u0e2b\u0e21\u0e14"
+		"message": "มีอัปเดตให้ใช้งาน โปรดปิดหน้าต่างทั้งหมด"
 	},
 	"welcome_faq": {
-		"message": "\u0e04\u0e33\u0e15\u0e2d\u0e1a\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a\u0e04\u0e33\u0e16\u0e32\u0e21\u0e17\u0e35\u0e48\u0e1e\u0e1a\u0e1a\u0e48\u0e2d\u0e22: $1 (\u0e01\u0e14 Ctrl \u0e04\u0e49\u0e32\u0e07\u0e44\u0e27\u0e49\u0e41\u0e25\u0e49\u0e27\u0e04\u0e25\u0e34\u0e01\u0e1a\u0e19\u0e25\u0e34\u0e07\u0e01\u0e4c\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e40\u0e1b\u0e34\u0e14)",
+		"message": "คำตอบสำหรับคำถามที่พบบ่อย: $1 (กด Ctrl ค้างไว้แล้วคลิกบนลิงก์เพื่อเปิด)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -253,7 +253,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "\u0e22\u0e34\u0e19\u0e14\u0e35\u0e15\u0e49\u0e2d\u0e19\u0e23\u0e31\u0e1a\u0e2a\u0e39\u0e48 $1 \u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e0a\u0e31\u0e19 $2",
+		"message": "ยินดีต้อนรับสู่ $1 เวอร์ชัน $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "\u0e42\u0e1b\u0e23\u0e14\u0e15\u0e31\u0e49\u0e07\u0e04\u0e48\u0e32\u0e40\u0e21\u0e19\u0e39 Chrome->\u0e0b\u0e39\u0e21\u0e40\u0e1b\u0e47\u0e19 100%"
+		"message": "โปรดตั้งค่าเมนู Chrome->ซูมเป็น 100%"
 	}
 }

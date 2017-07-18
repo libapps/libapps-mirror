@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "Fail\u0173 sistema jau \u012fd\u0117ta!"
+		"message": "Failų sistema jau įdėta!"
 	},
 	"backup_prefs": {
-		"message": "I\u0161saugoti atsargin\u0119 kopij\u0105"
+		"message": "Išsaugoti atsarginę kopiją"
 	},
 	"bad_destination": {
-		"message": "Nepavyko i\u0161analizuoti paskirties vietos: $1",
+		"message": "Nepavyko išanalizuoti paskirties vietos: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,25 +14,25 @@
 		}
 	},
 	"before_unload": {
-		"message": "U\u017edarius \u0161\u012f skirtuk\u0105, sesija bus nutraukta."
+		"message": "Uždarius šį skirtuką, sesija bus nutraukta."
 	},
 	"cancel_button_label": {
-		"message": "At\u0161aukti"
+		"message": "Atšaukti"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "Taikant \u0161i\u0105 komand\u0105 pateikiamas \u017einom\u0173 prieglob\u0173 meniu ir raginama i\u0161trinti prieglob\u0105."
+		"message": "Taikant šią komandą pateikiamas žinomų prieglobų meniu ir raginama ištrinti prieglobą."
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "I\u0161trinama \u017einoma SSH priegloba."
+		"message": "Ištrinama žinoma SSH priegloba."
 	},
 	"cmd_ssh_help": {
-		"message": "B\u016btina pateikti parametrus |username| ir |hostname|, parametras |port| neprivalomas. Jei prievado nenurodysite, jo numatytasis parametras bus 22."
+		"message": "Būtina pateikti parametrus |username| ir |hostname|, parametras |port| neprivalomas. Jei prievado nenurodysite, jo numatytasis parametras bus 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Atidaroma nauja SSH sesija."
 	},
 	"command_complete": {
-		"message": "Komanda \u201e$1\u201c atlikta su b\u016bsenos kodu $2.",
+		"message": "Komanda „$1“ atlikta su būsenos kodu $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -46,7 +46,7 @@
 		"message": "Prisijungti"
 	},
 	"connect_or_exit_message": {
-		"message": "Pasirinkti (C) kit\u0105 ry\u0161\u012f ar i\u0161eiti (X)?"
+		"message": "Pasirinkti (C) kitą ryšį ar išeiti (X)?"
 	},
 	"connecting": {
 		"message": "Prisijungiama prie $1...",
@@ -60,10 +60,10 @@
 		"message": "[DEL]"
 	},
 	"delete_button_label": {
-		"message": "I\u0161trinti"
+		"message": "Ištrinti"
 	},
 	"disconnect_message": {
-		"message": "\u201eNaCl\u201c papildinys i\u0161jungtas su b\u016bsenos kodu $1.",
+		"message": "„NaCl“ papildinys išjungtas su būsenos kodu $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -74,13 +74,13 @@
 		"message": "[ENTER]"
 	},
 	"field_argstr_aria_label": {
-		"message": "papildomi \u201essh\u201c argumentai"
+		"message": "papildomi „ssh“ argumentai"
 	},
 	"field_argstr_placeholder": {
-		"message": "papildomi komandos eilut\u0117s argumentai"
+		"message": "papildomi komandos eilutės argumentai"
 	},
 	"field_description_aria_label": {
-		"message": "apra\u0161as"
+		"message": "aprašas"
 	},
 	"field_description_placeholder": {
 		"message": "naudotojovardas@prieglobosserveriopavadinimas arba laisvos formos tekstas"
@@ -92,7 +92,7 @@
 		"message": "prieglobos serverio pavadinimas"
 	},
 	"field_identity_aria_label": {
-		"message": "tapatyb\u0117"
+		"message": "tapatybė"
 	},
 	"field_port_aria_label": {
 		"message": "prievadas"
@@ -127,16 +127,16 @@
 		}
 	},
 	"identity_label": {
-		"message": "Tapatyb\u0117"
+		"message": "Tapatybė"
 	},
 	"import_link_aria_label": {
-		"message": "fail\u0173 importavimas"
+		"message": "failų importavimas"
 	},
 	"import_link_label": {
 		"message": "Importuoti..."
 	},
 	"initializing_relay": {
-		"message": "Ie\u0161koma perdavimo serverio naudojant: $1",
+		"message": "Ieškoma perdavimo serverio naudojant: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -144,7 +144,7 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Nepavyko i\u0161analizuoti JSON (\u201e$1\u201c)",
+		"message": "Nepavyko išanalizuoti JSON („$1“)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "N\u0117ra \u017einom\u0173 prieglob\u0173; n\u0117ra, k\u0105 i\u0161trinti."
+		"message": "Nėra žinomų prieglobų; nėra, ką ištrinti."
 	},
 	"known_hosts_prompt": {
-		"message": "Pasirinkite prieglob\u0105, kuri\u0105 reikia i\u0161trinti [1\u2013$1]:",
+		"message": "Pasirinkite prieglobą, kurią reikia ištrinti [1–$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -163,13 +163,13 @@
 		}
 	},
 	"known_hosts_title": {
-		"message": "\u017dinomos prieglobos:"
+		"message": "Žinomos prieglobos:"
 	},
 	"loading_label": {
-		"message": "\u012ekeliama..."
+		"message": "Įkeliama..."
 	},
 	"missing_param": {
-		"message": "Tr\u016bksta parametro: $1",
+		"message": "Trūksta parametro: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -177,10 +177,10 @@
 		}
 	},
 	"mount_button_label": {
-		"message": "\u012ed\u0117ti SFTP"
+		"message": "Įdėti SFTP"
 	},
 	"mounted_message": {
-		"message": "\u012ed\u0117ta!"
+		"message": "Įdėta!"
 	},
 	"notify_copy": {
 		"message": "Pasirinkimas nukopijuotas"
@@ -189,7 +189,7 @@
 		"message": "GERAI"
 	},
 	"open_as_window_tip": {
-		"message": "[Pro Tip] Naudokite parinkt\u012f \u201eAtidaryti kaip lang\u0105\u201c, kad neu\u017edarytum\u0117te terminalo naudodami spart\u0173j\u012f klavi\u0161\u0105 \u201eControl\u201c + W.\n[Pro Tip] Jei reikia daugiau informacijos, \u017er. adresu $1.",
+		"message": "[Pro Tip] Naudokite parinktį „Atidaryti kaip langą“, kad neuždarytumėte terminalo naudodami spartųjį klavišą „Control“ + W.\n[Pro Tip] Jei reikia daugiau informacijos, žr. adresu $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -200,7 +200,7 @@
 		"message": "Parinktys"
 	},
 	"plugin_loading": {
-		"message": "\u012ekeliamas papildinys \u201eNaCl\u201c..."
+		"message": "Įkeliamas papildinys „NaCl“..."
 	},
 	"plugin_loading_complete": {
 		"message": " atlikta."
@@ -212,40 +212,40 @@
 		"message": "Profilio nustatymai"
 	},
 	"preferences_reset": {
-		"message": "Visos nuostatos nustatytos i\u0161 naujo!"
+		"message": "Visos nuostatos nustatytos iš naujo!"
 	},
 	"reconnect_message": {
-		"message": "(I)\u0161 naujo prisijungti, (p)asirinkti kit\u0105 ry\u0161\u012f ar i\u0161(e)iti?"
+		"message": "(I)š naujo prisijungti, (p)asirinkti kitą ryšį ar iš(e)iti?"
 	},
 	"relay_retry": {
-		"message": "Bandoma i\u0161 naujo..."
+		"message": "Bandoma iš naujo..."
 	},
 	"restore_prefs": {
-		"message": "Atkurti atsargin\u0119 kopij\u0105"
+		"message": "Atkurti atsarginę kopiją"
 	},
 	"shortcut_list_aria_label": {
-		"message": "i\u0161saugoti ry\u0161iai"
+		"message": "išsaugoti ryšiai"
 	},
 	"ssh_argstr_label": {
 		"message": "SSH argumentai"
 	},
 	"terminal_preview_label": {
-		"message": "Per\u017ei\u016bra"
+		"message": "Peržiūra"
 	},
 	"terminal_profile_label": {
 		"message": "Dabartinis profilis"
 	},
 	"unexpected_error": {
-		"message": "\u012evyko nenumatyta klaida. Jei reikia daugiau i\u0161samios informacijos, \u017er. \u201eJavaScript\u201c pult\u0105."
+		"message": "Įvyko nenumatyta klaida. Jei reikia daugiau išsamios informacijos, žr. „JavaScript“ pultą."
 	},
 	"unmount_button_label": {
-		"message": "I\u0161imti SFTP"
+		"message": "Išimti SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "Yra naujinys. U\u017edarykite visus langus."
+		"message": "Yra naujinys. Uždarykite visus langus."
 	},
 	"welcome_faq": {
-		"message": "Atsakymai \u012f da\u017eniausiai u\u017eduodamus klausimus: $1 (\u201eCtrl\u201c + spustel\u0117kite nuorodas, kad atidarytum\u0117te)",
+		"message": "Atsakymai į dažniausiai užduodamus klausimus: $1 („Ctrl“ + spustelėkite nuorodas, kad atidarytumėte)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -253,7 +253,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "Sveiki, tai \u2013 $2 versijos \u201e$1\u201c.",
+		"message": "Sveiki, tai – $2 versijos „$1“.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "Nustatykite \u201eChrome\u201c mastel\u012f \u012f 100 % pasirink\u0119 meniu -> \u201eKeisti mastel\u012f\u201c"
+		"message": "Nustatykite „Chrome“ mastelį į 100 % pasirinkę meniu -> „Keisti mastelį“"
 	}
 }

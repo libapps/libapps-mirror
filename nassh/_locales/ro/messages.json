@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "Sistemul de fi\u0219iere este montat deja!"
+		"message": "Sistemul de fișiere este montat deja!"
 	},
 	"backup_prefs": {
-		"message": "Salveaz\u0103 backupul"
+		"message": "Salvează backupul"
 	},
 	"bad_destination": {
-		"message": "Nu se poate analiza destina\u021bia: $1",
+		"message": "Nu se poate analiza destinația: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,25 +14,25 @@
 		}
 	},
 	"before_unload": {
-		"message": "\u00cenchiderea acestei file va deconecta aceast\u0103 sesiune."
+		"message": "Închiderea acestei file va deconecta această sesiune."
 	},
 	"cancel_button_label": {
-		"message": "Anuleaz\u0103"
+		"message": "Anulează"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "Aceast\u0103 comand\u0103 afi\u0219eaz\u0103 un meniu cu gazde cunoscute \u0219i solicit\u0103 gazda de \u0219ters."
+		"message": "Această comandă afișează un meniu cu gazde cunoscute și solicită gazda de șters."
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "\u0218terge o gazd\u0103 SSH cunoscut\u0103."
+		"message": "Șterge o gazdă SSH cunoscută."
 	},
 	"cmd_ssh_help": {
-		"message": "Parametrii |username| \u0219i |hostname| sunt obligatorii, dar parametrul |port| este op\u021bional. Dac\u0103 portul nu este specificat, valoarea prestabilit\u0103 pentru acesta este 22."
+		"message": "Parametrii |username| și |hostname| sunt obligatorii, dar parametrul |port| este opțional. Dacă portul nu este specificat, valoarea prestabilită pentru acesta este 22."
 	},
 	"cmd_ssh_title": {
-		"message": "Deschide o sesiune SSH nou\u0103."
+		"message": "Deschide o sesiune SSH nouă."
 	},
 	"command_complete": {
-		"message": "Comanda $1 s-a \u00eencheiat cu codul de stare $2.",
+		"message": "Comanda $1 s-a încheiat cu codul de stare $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -43,13 +43,13 @@
 		}
 	},
 	"connect_button_label": {
-		"message": "Conecteaz\u0103-te"
+		"message": "Conectează-te"
 	},
 	"connect_or_exit_message": {
-		"message": "Alegi o alt\u0103 conexiune (c) sau ie\u0219i (x)?"
+		"message": "Alegi o altă conexiune (c) sau ieși (x)?"
 	},
 	"connecting": {
-		"message": "Se conecteaz\u0103 la $1...",
+		"message": "Se conectează la $1...",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -60,10 +60,10 @@
 		"message": "[DEL]"
 	},
 	"delete_button_label": {
-		"message": "\u0218terge"
+		"message": "Șterge"
 	},
 	"disconnect_message": {
-		"message": "Pluginul NaCl s-a \u00eenchis cu codul de stare $1.",
+		"message": "Pluginul NaCl s-a închis cu codul de stare $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -77,19 +77,19 @@
 		"message": "argumente suplimentare pentru ssh"
 	},
 	"field_argstr_placeholder": {
-		"message": "argumente suplimentare pentru linia de comand\u0103"
+		"message": "argumente suplimentare pentru linia de comandă"
 	},
 	"field_description_aria_label": {
 		"message": "descriere"
 	},
 	"field_description_placeholder": {
-		"message": "numedeutilizator@numedegazd\u0103 sau text cu form\u0103 liber\u0103"
+		"message": "numedeutilizator@numedegazdă sau text cu formă liberă"
 	},
 	"field_hostname_aria_label": {
-		"message": "nume de gazd\u0103"
+		"message": "nume de gazdă"
 	},
 	"field_hostname_placeholder": {
-		"message": "nume de gazd\u0103"
+		"message": "nume de gazdă"
 	},
 	"field_identity_aria_label": {
 		"message": "identitate"
@@ -101,10 +101,10 @@
 		"message": "port"
 	},
 	"field_relay_options_aria_label": {
-		"message": "op\u021biuni de retransmitere"
+		"message": "opțiuni de retransmitere"
 	},
 	"field_relay_options_placeholder": {
-		"message": "op\u021biuni de retransmitere"
+		"message": "opțiuni de retransmitere"
 	},
 	"field_terminal_profile_aria_label": {
 		"message": "nume de profil pentru terminal"
@@ -119,7 +119,7 @@
 		"message": "nume de utilizator"
 	},
 	"found_relay": {
-		"message": "Server de retransmitere g\u0103sit: $1",
+		"message": "Server de retransmitere găsit: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -130,13 +130,13 @@
 		"message": "Identitate"
 	},
 	"import_link_aria_label": {
-		"message": "import de fi\u0219iere"
+		"message": "import de fișiere"
 	},
 	"import_link_label": {
-		"message": "Import\u0103..."
+		"message": "Importă..."
 	},
 	"initializing_relay": {
-		"message": "Se caut\u0103 serverul de retransmitere folosind: $1",
+		"message": "Se caută serverul de retransmitere folosind: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -144,7 +144,7 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Nu se poate analiza fi\u0219ierul JSON \u00een \u201e$1\u201d",
+		"message": "Nu se poate analiza fișierul JSON în „$1”",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "Nu exist\u0103 gazde cunoscute pe care s\u0103 le \u0219tergi."
+		"message": "Nu există gazde cunoscute pe care să le ștergi."
 	},
 	"known_hosts_prompt": {
-		"message": "Selecteaz\u0103 gazda de \u0219ters [1-$1]:",
+		"message": "Selectează gazda de șters [1-$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -166,10 +166,10 @@
 		"message": "Gazde cunoscute:"
 	},
 	"loading_label": {
-		"message": "Se \u00eencarc\u0103..."
+		"message": "Se încarcă..."
 	},
 	"missing_param": {
-		"message": "Lipse\u0219te parametrul $1",
+		"message": "Lipsește parametrul $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -183,13 +183,13 @@
 		"message": "Montat!"
 	},
 	"notify_copy": {
-		"message": "Selec\u021bie copiat\u0103"
+		"message": "Selecție copiată"
 	},
 	"ok_button_label": {
 		"message": "OK"
 	},
 	"open_as_window_tip": {
-		"message": "[Sfat profesionist] Folose\u0219te \u201eDeschide ca fereastr\u0103\u201d pentru a \u00eempiedica Control-W s\u0103 \u00eenchid\u0103 terminalul!\n[Sfat profesionist] Acceseaz\u0103 $1 pentru mai multe informa\u021bii.",
+		"message": "[Sfat profesionist] Folosește „Deschide ca fereastră” pentru a împiedica Control-W să închidă terminalul!\n[Sfat profesionist] Accesează $1 pentru mai multe informații.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -197,31 +197,31 @@
 		}
 	},
 	"options_button_label": {
-		"message": "Op\u021biuni"
+		"message": "Opțiuni"
 	},
 	"plugin_loading": {
-		"message": "Se \u00eencarc\u0103 pluginul NaCI..."
+		"message": "Se încarcă pluginul NaCI..."
 	},
 	"plugin_loading_complete": {
-		"message": " terminat\u0103."
+		"message": " terminată."
 	},
 	"pref_backup_filename": {
-		"message": "Backup preferin\u021be Secure Shell.json"
+		"message": "Backup preferințe Secure Shell.json"
 	},
 	"preferences_header": {
-		"message": "Set\u0103ri pentru profil"
+		"message": "Setări pentru profil"
 	},
 	"preferences_reset": {
-		"message": "Toate preferin\u021bele au fost resetate!"
+		"message": "Toate preferințele au fost resetate!"
 	},
 	"reconnect_message": {
-		"message": "Te reconectezi (r), alegi o alt\u0103 conexiune (c) sau ie\u0219i (x)?"
+		"message": "Te reconectezi (r), alegi o altă conexiune (c) sau ieși (x)?"
 	},
 	"relay_retry": {
-		"message": "Se re\u00eencearc\u0103..."
+		"message": "Se reîncearcă..."
 	},
 	"restore_prefs": {
-		"message": "Restabile\u0219te backupul"
+		"message": "Restabilește backupul"
 	},
 	"shortcut_list_aria_label": {
 		"message": "conexiuni salvate"
@@ -236,16 +236,16 @@
 		"message": "Profil actual"
 	},
 	"unexpected_error": {
-		"message": "A ap\u0103rut o eroare nea\u0219teptat\u0103. Consult\u0103 consola JavaScript pentru mai multe detalii."
+		"message": "A apărut o eroare neașteptată. Consultă consola JavaScript pentru mai multe detalii."
 	},
 	"unmount_button_label": {
-		"message": "Demonteaz\u0103 SFTP"
+		"message": "Demontează SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "Este disponibil\u0103 o actualizare. \u00cenchide toate ferestrele."
+		"message": "Este disponibilă o actualizare. Închide toate ferestrele."
 	},
 	"welcome_faq": {
-		"message": "R\u0103spunsuri la \u00eentreb\u0103ri frecvente: $1 (ctrl+clic pe linkuri pentru a se deschide)",
+		"message": "Răspunsuri la întrebări frecvente: $1 (ctrl+clic pe linkuri pentru a se deschide)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "\u00cen meniul Chrome seteaz\u0103 Zoom la 100%"
+		"message": "În meniul Chrome setează Zoom la 100%"
 	}
 }

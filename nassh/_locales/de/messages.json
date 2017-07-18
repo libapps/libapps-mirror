@@ -14,22 +14,22 @@
 		}
 	},
 	"before_unload": {
-		"message": "Das Schlie\u00dfen dieses Tabs beendet diese Sitzung."
+		"message": "Das Schließen dieses Tabs beendet diese Sitzung."
 	},
 	"cancel_button_label": {
 		"message": "Abbrechen"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "Mit diesem Befehl wird ein Men\u00fc mit bekannten Hosts eingeblendet, in dem Sie den zu l\u00f6schenden Host ausw\u00e4hlen k\u00f6nnen."
+		"message": "Mit diesem Befehl wird ein Menü mit bekannten Hosts eingeblendet, in dem Sie den zu löschenden Host auswählen können."
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "L\u00f6scht einen bekannten SSH-Host"
+		"message": "Löscht einen bekannten SSH-Host"
 	},
 	"cmd_ssh_help": {
-		"message": "Die Parameter |username| und |hostname| sind erforderlich, |port| ist optional. Ist kein Port angegeben, wird standardm\u00e4\u00dfig Port 22 verwendet."
+		"message": "Die Parameter |username| und |hostname| sind erforderlich, |port| ist optional. Ist kein Port angegeben, wird standardmäßig Port 22 verwendet."
 	},
 	"cmd_ssh_title": {
-		"message": "\u00d6ffnet eine neue SSH-Sitzung"
+		"message": "Öffnet eine neue SSH-Sitzung"
 	},
 	"command_complete": {
 		"message": "Der Befehl \"$1\" wurde mit dem Statuscode \"$2\" beendet.",
@@ -46,10 +46,10 @@
 		"message": "Verbinden"
 	},
 	"connect_or_exit_message": {
-		"message": "Eine andere Verbindung w\u00e4hlen (c) oder den Vorgang beenden (x)?"
+		"message": "Eine andere Verbindung wählen (c) oder den Vorgang beenden (x)?"
 	},
 	"connecting": {
-		"message": "Verbindung mit $1 wird hergestellt\u2026",
+		"message": "Verbindung mit $1 wird hergestellt…",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -60,7 +60,7 @@
 		"message": "[ENTF]"
 	},
 	"delete_button_label": {
-		"message": "L\u00f6schen"
+		"message": "Löschen"
 	},
 	"disconnect_message": {
 		"message": "NaCl-Plug-in wurde mit dem Statuscode \"$1\" beendet.",
@@ -74,10 +74,10 @@
 		"message": "[EINGABE]"
 	},
 	"field_argstr_aria_label": {
-		"message": "Zus\u00e4tzliche SSH-Argumente"
+		"message": "Zusätzliche SSH-Argumente"
 	},
 	"field_argstr_placeholder": {
-		"message": "Zus\u00e4tzliche Argumente \u00fcber die Eingabeaufforderung"
+		"message": "Zusätzliche Argumente über die Eingabeaufforderung"
 	},
 	"field_description_aria_label": {
 		"message": "Beschreibung"
@@ -92,7 +92,7 @@
 		"message": "Hostname"
 	},
 	"field_identity_aria_label": {
-		"message": "Identit\u00e4t"
+		"message": "Identität"
 	},
 	"field_port_aria_label": {
 		"message": "Port"
@@ -127,16 +127,16 @@
 		}
 	},
 	"identity_label": {
-		"message": "Identit\u00e4t"
+		"message": "Identität"
 	},
 	"import_link_aria_label": {
 		"message": "Dateiimport"
 	},
 	"import_link_label": {
-		"message": "Importieren\u2026"
+		"message": "Importieren…"
 	},
 	"initializing_relay": {
-		"message": "Relay-Server wird \u00fcber $1 gesucht",
+		"message": "Relay-Server wird über $1 gesucht",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "Keine bekannten Hosts zum L\u00f6schen vorhanden"
+		"message": "Keine bekannten Hosts zum Löschen vorhanden"
 	},
 	"known_hosts_prompt": {
-		"message": "W\u00e4hlen Sie den zu l\u00f6schenden Host aus [1-$1]:",
+		"message": "Wählen Sie den zu löschenden Host aus [1-$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -166,7 +166,7 @@
 		"message": "Bekannte Hosts:"
 	},
 	"loading_label": {
-		"message": "Wird geladen\u2026"
+		"message": "Wird geladen…"
 	},
 	"missing_param": {
 		"message": "Parameter $1 fehlt.",
@@ -189,7 +189,7 @@
 		"message": "OK"
 	},
 	"open_as_window_tip": {
-		"message": "[Profi-Tipp] Mit der Option \"In Fenster \u00f6ffnen\" wird Ihr Terminal nicht geschlossen, wenn Sie die Tastenkombination Strg\u00a0+\u00a0W verwenden.\n[Profi-Tipp] Weitere Informationen finden Sie unter $1.",
+		"message": "[Profi-Tipp] Mit der Option \"In Fenster öffnen\" wird Ihr Terminal nicht geschlossen, wenn Sie die Tastenkombination Strg + W verwenden.\n[Profi-Tipp] Weitere Informationen finden Sie unter $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -206,36 +206,39 @@
 		"message": " Fertig"
 	},
 	"pref_backup_filename": {
-		"message": "Sicherung f\u00fcr Secure Shell-Einstellungen.json"
+		"message": "Sicherung für Secure Shell-Einstellungen.json"
 	},
 	"preferences_header": {
 		"message": "Profileinstellungen"
 	},
 	"preferences_reset": {
-		"message": "Alle Einstellungen wurden zur\u00fcckgesetzt."
+		"message": "Alle Einstellungen wurden zurückgesetzt."
 	},
 	"reconnect_message": {
-		"message": "Verbindung wiederherstellen (r), eine andere Verbindung w\u00e4hlen (c) oder den Vorgang beenden (x)?"
+		"message": "Verbindung wiederherstellen (r), eine andere Verbindung wählen (c) oder den Vorgang beenden (x)?"
 	},
 	"relay_retry": {
 		"message": "Wird erneut versucht..."
 	},
 	"request_pin_prompt": {
-		"message": "PIN zur Entsperrung von Schl\u00fcssel $FINGERPRINT$ auf '$READER$' eingeben ($NUM_TRIES$ Versuche verbleiben): ",
+		"message": "PIN zur Entsperrung von Schlüssel $FINGERPRINT$ auf '$READER$' eingeben ($NUM_TRIES$ Versuche verbleiben): ",
 		"placeholders": {
 			"fingerprint": {
 				"content": "$1"
 			},
-			"reader": {
-				"content": "$2"
-			},
 			"num_tries": {
 				"content": "$3"
+			},
+			"reader": {
+				"content": "$2"
 			}
 		}
 	},
 	"restore_prefs": {
 		"message": "Sicherung wiederherstellen"
+	},
+	"shortcut_list_aria_label": {
+		"message": "Gespeicherte Verbindungen"
 	},
 	"smart_card_connector_not_installed": {
 		"message": "Bitte installieren Sie den Smart Card Connector: $URL$",
@@ -244,9 +247,6 @@
 				"content": "$1"
 			}
 		}
-	},
-	"shortcut_list_aria_label": {
-		"message": "Gespeicherte Verbindungen"
 	},
 	"ssh_argstr_label": {
 		"message": "SSH-Argumente"
@@ -264,10 +264,10 @@
 		"message": "SFTP-Bereitstellung beenden"
 	},
 	"update_available_tooltip": {
-		"message": "Ein Update ist verf\u00fcgbar. Bitte schlie\u00dfen Sie alle Fenster."
+		"message": "Ein Update ist verfügbar. Bitte schließen Sie alle Fenster."
 	},
 	"welcome_faq": {
-		"message": "Antworten auf h\u00e4ufig gestellte Fragen: $1 (Strg + zum \u00d6ffnen von Links klicken)",
+		"message": "Antworten auf häufig gestellte Fragen: $1 (Strg + zum Öffnen von Links klicken)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -275,7 +275,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "Willkommen bei $1 Version\u00a0$2.",
+		"message": "Willkommen bei $1 Version $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -286,6 +286,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "Bitte stellen Sie im Chrome-Men\u00fc die Zoomeinstellungen auf 100\u00a0% ein"
+		"message": "Bitte stellen Sie im Chrome-Menü die Zoomeinstellungen auf 100 % ein"
 	}
 }

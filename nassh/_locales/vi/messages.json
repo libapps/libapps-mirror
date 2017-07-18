@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "H\u1ec7 th\u1ed1ng t\u1ec7p \u0111\u00e3 \u0111\u01b0\u1ee3c k\u1ebft n\u1ed1i!"
+		"message": "Hệ thống tệp đã được kết nối!"
 	},
 	"backup_prefs": {
-		"message": "L\u01b0u b\u1ea3n sao l\u01b0u"
+		"message": "Lưu bản sao lưu"
 	},
 	"bad_destination": {
-		"message": "Kh\u00f4ng th\u1ec3 ph\u00e2n t\u00edch c\u00fa ph\u00e1p \u0111\u00edch: $1",
+		"message": "Không thể phân tích cú pháp đích: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,25 +14,25 @@
 		}
 	},
 	"before_unload": {
-		"message": "\u0110\u00f3ng tab n\u00e0y s\u1ebd ng\u1eaft k\u1ebft n\u1ed1i phi\u00ean n\u00e0y."
+		"message": "Đóng tab này sẽ ngắt kết nối phiên này."
 	},
 	"cancel_button_label": {
-		"message": "H\u1ee7y"
+		"message": "Hủy"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "L\u1ec7nh n\u00e0y hi\u1ec3n th\u1ecb menu c\u00e1c m\u00e1y ch\u1ee7 \u0111\u00e3 bi\u1ebft v\u00e0 l\u1eddi nh\u1eafc m\u00e1y ch\u1ee7 c\u1ea7n b\u1ecf qua."
+		"message": "Lệnh này hiển thị menu các máy chủ đã biết và lời nhắc máy chủ cần bỏ qua."
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "B\u1ecf qua m\u00e1y ch\u1ee7 ssh \u0111\u00e3 bi\u1ebft."
+		"message": "Bỏ qua máy chủ ssh đã biết."
 	},
 	"cmd_ssh_help": {
-		"message": "C\u00e1c tham s\u1ed1 |username| v\u00e0 |hostname| l\u00e0 b\u1eaft bu\u1ed9c, |port| l\u00e0 t\u00f9y ch\u1ecdn.  N\u1ebfu kh\u00f4ng \u0111\u01b0\u1ee3c ch\u1ec9 \u0111\u1ecbnh, c\u1ed5ng s\u1ebd \u0111\u01b0\u1ee3c m\u1eb7c \u0111\u1ecbnh l\u00e0 22."
+		"message": "Các tham số |username| và |hostname| là bắt buộc, |port| là tùy chọn.  Nếu không được chỉ định, cổng sẽ được mặc định là 22."
 	},
 	"cmd_ssh_title": {
-		"message": "M\u1edf phi\u00ean SSH m\u1edbi."
+		"message": "Mở phiên SSH mới."
 	},
 	"command_complete": {
-		"message": "L\u1ec7nh $1 \u0111\u00e3 tho\u00e1t v\u1edbi m\u00e3 tr\u1ea1ng th\u00e1i $2.",
+		"message": "Lệnh $1 đã thoát với mã trạng thái $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -43,13 +43,13 @@
 		}
 	},
 	"connect_button_label": {
-		"message": "K\u1ebft n\u1ed1i"
+		"message": "Kết nối"
 	},
 	"connect_or_exit_message": {
-		"message": "(C)h\u1ecdn m\u1ed9t k\u1ebft n\u1ed1i kh\u00e1c ho\u1eb7c T(h)o\u00e1t?"
+		"message": "(C)họn một kết nối khác hoặc T(h)oát?"
 	},
 	"connecting": {
-		"message": "\u0110ang k\u1ebft n\u1ed1i v\u1edbi $1...",
+		"message": "Đang kết nối với $1...",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -60,10 +60,10 @@
 		"message": "[DEL]"
 	},
 	"delete_button_label": {
-		"message": "X\u00f3a"
+		"message": "Xóa"
 	},
 	"disconnect_message": {
-		"message": "Plugin NaCl \u0111\u00e3 tho\u00e1t v\u1edbi m\u00e3 tr\u1ea1ng th\u00e1i $1.",
+		"message": "Plugin NaCl đã thoát với mã trạng thái $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -74,52 +74,52 @@
 		"message": "[ENTER]"
 	},
 	"field_argstr_aria_label": {
-		"message": "\u0111\u1ed1i s\u1ed1 ssh b\u1ed5 sung"
+		"message": "đối số ssh bổ sung"
 	},
 	"field_argstr_placeholder": {
-		"message": "\u0111\u1ed1i s\u1ed1 d\u00f2ng l\u1ec7nh b\u1ed5 sung"
+		"message": "đối số dòng lệnh bổ sung"
 	},
 	"field_description_aria_label": {
-		"message": "m\u00f4 ta\u0309"
+		"message": "mô tả"
 	},
 	"field_description_placeholder": {
-		"message": "username@hostname ho\u1eb7c v\u0103n b\u1ea3n d\u1ea1ng t\u1ef1 do"
+		"message": "username@hostname hoặc văn bản dạng tự do"
 	},
 	"field_hostname_aria_label": {
-		"message": "t\u00ean m\u00e1y ch\u1ee7"
+		"message": "tên máy chủ"
 	},
 	"field_hostname_placeholder": {
-		"message": "t\u00ean m\u00e1y ch\u1ee7"
+		"message": "tên máy chủ"
 	},
 	"field_identity_aria_label": {
-		"message": "nh\u1eadn d\u1ea1ng"
+		"message": "nhận dạng"
 	},
 	"field_port_aria_label": {
-		"message": "c\u1ed5ng"
+		"message": "cổng"
 	},
 	"field_port_placeholder": {
-		"message": "c\u1ed5ng"
+		"message": "cổng"
 	},
 	"field_relay_options_aria_label": {
-		"message": "t\u00f9y ch\u1ecdn chuy\u1ec3n ti\u1ebfp"
+		"message": "tùy chọn chuyển tiếp"
 	},
 	"field_relay_options_placeholder": {
-		"message": "t\u00f9y ch\u1ecdn chuy\u1ec3n ti\u1ebfp"
+		"message": "tùy chọn chuyển tiếp"
 	},
 	"field_terminal_profile_aria_label": {
-		"message": "t\u00ean c\u1ea5u h\u00ecnh thi\u1ebft b\u1ecb \u0111\u1ea7u cu\u1ed1i"
+		"message": "tên cấu hình thiết bị đầu cuối"
 	},
 	"field_terminal_profile_placeholder": {
-		"message": "m\u1eb7c \u0111\u1ecbnh"
+		"message": "mặc định"
 	},
 	"field_username_aria_label": {
-		"message": "t\u00ean ng\u01b0\u1eddi d\u00f9ng"
+		"message": "tên người dùng"
 	},
 	"field_username_placeholder": {
-		"message": "t\u00ean ng\u01b0\u1eddi d\u00f9ng"
+		"message": "tên người dùng"
 	},
 	"found_relay": {
-		"message": "\u0110\u00e3 t\u00ecm th\u1ea5y m\u00e1y ch\u1ee7 chuy\u1ec3n ti\u1ebfp: $1",
+		"message": "Đã tìm thấy máy chủ chuyển tiếp: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -127,16 +127,16 @@
 		}
 	},
 	"identity_label": {
-		"message": "Nh\u1eadn d\u1ea1ng"
+		"message": "Nhận dạng"
 	},
 	"import_link_aria_label": {
-		"message": "nh\u1eadp t\u1ec7p"
+		"message": "nhập tệp"
 	},
 	"import_link_label": {
-		"message": "Nh\u1eadp..."
+		"message": "Nhập..."
 	},
 	"initializing_relay": {
-		"message": "\u0110ang t\u00ecm m\u00e1y ch\u1ee7 chuy\u1ec3n ti\u1ebfp b\u1eb1ng: $1",
+		"message": "Đang tìm máy chủ chuyển tiếp bằng: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -144,7 +144,7 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Kh\u00f4ng th\u1ec3 ph\u00e2n t\u00edch c\u00fa ph\u00e1p JSON trong '$1'",
+		"message": "Không thể phân tích cú pháp JSON trong '$1'",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "Kh\u00f4ng c\u00f3 m\u00e1y ch\u1ee7 \u0111\u00e3 bi\u1ebft n\u00e0o \u0111\u1ec3 b\u1ecf qua."
+		"message": "Không có máy chủ đã biết nào để bỏ qua."
 	},
 	"known_hosts_prompt": {
-		"message": "Vui l\u00f2ng ch\u1ecdn m\u00e1y ch\u1ee7 c\u1ea7n b\u1ecf qua [1-$1]:",
+		"message": "Vui lòng chọn máy chủ cần bỏ qua [1-$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -163,13 +163,13 @@
 		}
 	},
 	"known_hosts_title": {
-		"message": "M\u00e1y ch\u1ee7 \u0111\u00e3 bi\u1ebft:"
+		"message": "Máy chủ đã biết:"
 	},
 	"loading_label": {
-		"message": "\u0110ang t\u1ea3i..."
+		"message": "Đang tải..."
 	},
 	"missing_param": {
-		"message": "Thi\u1ebfu tham s\u1ed1: $1",
+		"message": "Thiếu tham số: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -177,19 +177,19 @@
 		}
 	},
 	"mount_button_label": {
-		"message": "K\u1ebft n\u1ed1i SFTP"
+		"message": "Kết nối SFTP"
 	},
 	"mounted_message": {
-		"message": "\u0110\u00e3 k\u1ebft n\u1ed1i!"
+		"message": "Đã kết nối!"
 	},
 	"notify_copy": {
-		"message": "\u0110\u00e3 sao ch\u00e9p v\u0103n b\u1ea3n l\u1ef1a ch\u1ecdn"
+		"message": "Đã sao chép văn bản lựa chọn"
 	},
 	"ok_button_label": {
 		"message": "OK"
 	},
 	"open_as_window_tip": {
-		"message": "[Pro Tip] S\u1eed d\u1ee5ng 'M\u1edf d\u01b0\u1edbi d\u1ea1ng c\u1eeda s\u1ed5' \u0111\u1ec3 ng\u0103n Control-W \u0111\u00f3ng thi\u1ebft b\u1ecb \u0111\u1ea7u cu\u1ed1i c\u1ee7a b\u1ea1n!\n[Pro Tip] Xem $1 \u0111\u1ec3 bi\u1ebft th\u00eam th\u00f4ng tin.",
+		"message": "[Pro Tip] Sử dụng 'Mở dưới dạng cửa sổ' để ngăn Control-W đóng thiết bị đầu cuối của bạn!\n[Pro Tip] Xem $1 để biết thêm thông tin.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -197,10 +197,10 @@
 		}
 	},
 	"options_button_label": {
-		"message": "T\u00f9y ch\u1ecdn"
+		"message": "Tùy chọn"
 	},
 	"plugin_loading": {
-		"message": "\u0110ang t\u1ea3i plugin NaCl..."
+		"message": "Đang tải plugin NaCl..."
 	},
 	"plugin_loading_complete": {
 		"message": " xong."
@@ -209,43 +209,43 @@
 		"message": "Secure Shell Preferences Backup.json"
 	},
 	"preferences_header": {
-		"message": "C\u00e0i \u0111\u1eb7t c\u1ea5u h\u00ecnh"
+		"message": "Cài đặt cấu hình"
 	},
 	"preferences_reset": {
-		"message": "T\u1ea5t c\u1ea3 t\u00f9y ch\u1ecdn \u0111\u00e3 \u0111\u01b0\u1ee3c \u0111\u1eb7t l\u1ea1i!"
+		"message": "Tất cả tùy chọn đã được đặt lại!"
 	},
 	"reconnect_message": {
-		"message": "(K)\u1ebft n\u1ed1i l\u1ea1i, (C)h\u1ecdn m\u1ed9t k\u1ebft n\u1ed1i kh\u00e1c ho\u1eb7c T(h)o\u00e1t?"
+		"message": "(K)ết nối lại, (C)họn một kết nối khác hoặc T(h)oát?"
 	},
 	"relay_retry": {
-		"message": "\u0110ang th\u1eed l\u1ea1i..."
+		"message": "Đang thử lại..."
 	},
 	"restore_prefs": {
-		"message": "Kh\u00f4i ph\u1ee5c b\u1ea3n sao l\u01b0u"
+		"message": "Khôi phục bản sao lưu"
 	},
 	"shortcut_list_aria_label": {
-		"message": "k\u1ebft n\u1ed1i \u0111\u00e3 l\u01b0u"
+		"message": "kết nối đã lưu"
 	},
 	"ssh_argstr_label": {
-		"message": "\u0110\u1ed1i s\u1ed1 SSH"
+		"message": "Đối số SSH"
 	},
 	"terminal_preview_label": {
-		"message": "Xem tr\u01b0\u1edbc"
+		"message": "Xem trước"
 	},
 	"terminal_profile_label": {
-		"message": "C\u1ea5u h\u00ecnh hi\u1ec7n t\u1ea1i"
+		"message": "Cấu hình hiện tại"
 	},
 	"unexpected_error": {
-		"message": "\u0110\u00e3 x\u1ea3y ra l\u1ed7i kh\u00f4ng mong mu\u1ed1n, vui l\u00f2ng ki\u1ec3m tra b\u1ea3ng \u0111i\u1ec1u khi\u1ec3n JavaScript \u0111\u1ec3 bi\u1ebft th\u00eam chi ti\u1ebft."
+		"message": "Đã xảy ra lỗi không mong muốn, vui lòng kiểm tra bảng điều khiển JavaScript để biết thêm chi tiết."
 	},
 	"unmount_button_label": {
-		"message": "Ng\u1eaft k\u1ebft n\u1ed1i SFTP"
+		"message": "Ngắt kết nối SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "C\u00f3 b\u1ea3n c\u1eadp nh\u1eadt. H\u00e3y \u0111\u00f3ng t\u1ea5t c\u1ea3 c\u1eeda s\u1ed5."
+		"message": "Có bản cập nhật. Hãy đóng tất cả cửa sổ."
 	},
 	"welcome_faq": {
-		"message": "C\u00e2u tr\u1ea3 l\u1eddi cho c\u00e2u h\u1ecfi th\u01b0\u1eddng g\u1eb7p: $1 (ctrl+nh\u1ea5p v\u00e0o li\u00ean k\u1ebft \u0111\u1ec3 m\u1edf)",
+		"message": "Câu trả lời cho câu hỏi thường gặp: $1 (ctrl+nhấp vào liên kết để mở)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -253,7 +253,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "Ch\u00e0o m\u1eebng b\u1ea1n \u0111\u1ebfn v\u1edbi $1 phi\u00ean b\u1ea3n $2.",
+		"message": "Chào mừng bạn đến với $1 phiên bản $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "H\u00e3y \u0111\u1eb7t Menu Chrome->Thu ph\u00f3ng th\u00e0nh 100%"
+		"message": "Hãy đặt Menu Chrome->Thu phóng thành 100%"
 	}
 }

@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "El sistema de fitxers ja est\u00e0 activat."
+		"message": "El sistema de fitxers ja està activat."
 	},
 	"backup_prefs": {
-		"message": "Desa la c\u00f2pia de seguretat"
+		"message": "Desa la còpia de seguretat"
 	},
 	"bad_destination": {
-		"message": "No es pot analitzar la destinaci\u00f3: $1",
+		"message": "No es pot analitzar la destinació: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,22 +14,22 @@
 		}
 	},
 	"before_unload": {
-		"message": "Si tanqueu aquesta pestanya es desconnectar\u00e0 la sessi\u00f3."
+		"message": "Si tanqueu aquesta pestanya es desconnectarà la sessió."
 	},
 	"cancel_button_label": {
-		"message": "Cancel\u00b7la"
+		"message": "Cancel·la"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "Aquesta comanda mostra un men\u00fa d'amfitrions coneguts i sol\u00b7licita l'amfitri\u00f3 que s'ha d'oblidar."
+		"message": "Aquesta comanda mostra un menú d'amfitrions coneguts i sol·licita l'amfitrió que s'ha d'oblidar."
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "Oblida un amfitri\u00f3 SSH conegut."
+		"message": "Oblida un amfitrió SSH conegut."
 	},
 	"cmd_ssh_help": {
-		"message": "Els par\u00e0metres |username| i |hostname| s\u00f3n obligatoris, |port| \u00e9s opcional. Si port no s'especifica, el valor predeterminat \u00e9s 22."
+		"message": "Els paràmetres |username| i |hostname| són obligatoris, |port| és opcional. Si port no s'especifica, el valor predeterminat és 22."
 	},
 	"cmd_ssh_title": {
-		"message": "Obre una sessi\u00f3 de SSH nova."
+		"message": "Obre una sessió de SSH nova."
 	},
 	"command_complete": {
 		"message": "S'ha sortit de l'ordre $1 amb el codi d'estat $2.",
@@ -46,10 +46,10 @@
 		"message": "Connecta"
 	},
 	"connect_or_exit_message": {
-		"message": "Vols triar (c) una altra connexi\u00f3 o sortir (x)?"
+		"message": "Vols triar (c) una altra connexió o sortir (x)?"
 	},
 	"connecting": {
-		"message": "S'est\u00e0 connectant amb $1...",
+		"message": "S'està connectant amb $1...",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -77,19 +77,19 @@
 		"message": "altres arguments d'SSH"
 	},
 	"field_argstr_placeholder": {
-		"message": "arguments addicionals de la l\u00ednia d'ordres"
+		"message": "arguments addicionals de la línia d'ordres"
 	},
 	"field_description_aria_label": {
-		"message": "descripci\u00f3"
+		"message": "descripció"
 	},
 	"field_description_placeholder": {
 		"message": "nomdusuari@nomdamfitrio o text sense format"
 	},
 	"field_hostname_aria_label": {
-		"message": "nom d'amfitri\u00f3"
+		"message": "nom d'amfitrió"
 	},
 	"field_hostname_placeholder": {
-		"message": "nom d'amfitri\u00f3"
+		"message": "nom d'amfitrió"
 	},
 	"field_identity_aria_label": {
 		"message": "identitat"
@@ -110,7 +110,7 @@
 		"message": "nom de perfil del terminal"
 	},
 	"field_terminal_profile_placeholder": {
-		"message": "opci\u00f3 predeterminada"
+		"message": "opció predeterminada"
 	},
 	"field_username_aria_label": {
 		"message": "nom d'usuari"
@@ -136,7 +136,7 @@
 		"message": "Importa..."
 	},
 	"initializing_relay": {
-		"message": "S'est\u00e0 cercant el servidor de tramesa mitjan\u00e7ant: $1",
+		"message": "S'està cercant el servidor de tramesa mitjançant: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -155,7 +155,7 @@
 		"message": "No hi ha amfitrions coneguts; res per oblidar."
 	},
 	"known_hosts_prompt": {
-		"message": "Seleccioneu un amfitri\u00f3 per oblidar [1-$1]:",
+		"message": "Seleccioneu un amfitrió per oblidar [1-$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -166,10 +166,10 @@
 		"message": "Amfitrions coneguts:"
 	},
 	"loading_label": {
-		"message": "S'est\u00e0 carregant..."
+		"message": "S'està carregant..."
 	},
 	"missing_param": {
-		"message": "Falta el par\u00e0metre: $1",
+		"message": "Falta el paràmetre: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -183,13 +183,13 @@
 		"message": "S'ha activat."
 	},
 	"notify_copy": {
-		"message": "S'ha copiat la selecci\u00f3"
+		"message": "S'ha copiat la selecció"
 	},
 	"ok_button_label": {
 		"message": "D'acord"
 	},
 	"open_as_window_tip": {
-		"message": "[Consell professional] Utilitza Obre com a finestra perqu\u00e8 no s'apagui el terminal amb les tecles Control-W.\n[Consell professional] Consulta $1 per obtenir m\u00e9s informaci\u00f3.",
+		"message": "[Consell professional] Utilitza Obre com a finestra perquè no s'apagui el terminal amb les tecles Control-W.\n[Consell professional] Consulta $1 per obtenir més informació.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -200,28 +200,28 @@
 		"message": "Opcions"
 	},
 	"plugin_loading": {
-		"message": "S'est\u00e0 carregant el connector NaCl..."
+		"message": "S'està carregant el connector NaCl..."
 	},
 	"plugin_loading_complete": {
 		"message": " fet."
 	},
 	"pref_backup_filename": {
-		"message": "C\u00f2pia de seguretat de les prefer\u00e8ncies de Secure Shell.json"
+		"message": "Còpia de seguretat de les preferències de Secure Shell.json"
 	},
 	"preferences_header": {
-		"message": "Configuraci\u00f3 del perfil"
+		"message": "Configuració del perfil"
 	},
 	"preferences_reset": {
-		"message": "S'han restablert totes les prefer\u00e8ncies."
+		"message": "S'han restablert totes les preferències."
 	},
 	"reconnect_message": {
-		"message": "Vols torna(r) a connectar, triar una altra (c)onnexi\u00f3 o sortir (x)?"
+		"message": "Vols torna(r) a connectar, triar una altra (c)onnexió o sortir (x)?"
 	},
 	"relay_retry": {
-		"message": "S'est\u00e0 tornant a provar..."
+		"message": "S'està tornant a provar..."
 	},
 	"restore_prefs": {
-		"message": "Restaura la c\u00f2pia de seguretat"
+		"message": "Restaura la còpia de seguretat"
 	},
 	"shortcut_list_aria_label": {
 		"message": "s'han desat les connexions"
@@ -230,22 +230,22 @@
 		"message": "Arguments SSH"
 	},
 	"terminal_preview_label": {
-		"message": "Previsualitzaci\u00f3"
+		"message": "Previsualització"
 	},
 	"terminal_profile_label": {
 		"message": "Perfil actual"
 	},
 	"unexpected_error": {
-		"message": "S'ha produ\u00eft un error inesperat. Consulta la Consola de JavaScript per obtenir m\u00e9s detalls."
+		"message": "S'ha produït un error inesperat. Consulta la Consola de JavaScript per obtenir més detalls."
 	},
 	"unmount_button_label": {
 		"message": "Desactiva l'SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "Hi ha una actualitzaci\u00f3 disponible. Tanca totes les finestres."
+		"message": "Hi ha una actualització disponible. Tanca totes les finestres."
 	},
 	"welcome_faq": {
-		"message": "Respostes a preguntes freq\u00fcents: $1 (fes Ctrl+clic en els enlla\u00e7os per obrir-los)",
+		"message": "Respostes a preguntes freqüents: $1 (fes Ctrl+clic en els enllaços per obrir-los)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -253,7 +253,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "Et donem la benvinguda a $1 versi\u00f3 $2.",
+		"message": "Et donem la benvinguda a $1 versió $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "Al men\u00fa de Chrome, estableix l'opci\u00f3 Zoom al 100%"
+		"message": "Al menú de Chrome, estableix l'opció Zoom al 100%"
 	}
 }

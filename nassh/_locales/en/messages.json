@@ -351,19 +351,23 @@
 				"content": "$1",
 				"example": "1234ABCD"
 			},
-			"reader": {
-				"content": "$2",
-				"example": "OpenPGP card reader"
-			},
 			"num_tries": {
 				"content": "$3",
 				"example": "3"
+			},
+			"reader": {
+				"content": "$2",
+				"example": "OpenPGP card reader"
 			}
 		}
 	},
 	"RESTORE_PREFS": {
 		"description": "Label for the link in the options page that lets the user restore their preferences (e.g. colors, font, etc...).",
 		"message": "Restore Backup"
+	},
+	"SHORTCUT_LIST_ARIA_LABEL": {
+		"description": "Text use as the aria-label for the 'shortcut-list'.",
+		"message": "saved connections"
 	},
 	"SMART_CARD_CONNECTOR_NOT_INSTALLED": {
 		"description": "Error message shown when 'gsc' SSH agent backend is used but the Smart Card Connector app is not installed.",
@@ -374,10 +378,6 @@
 				"example": "https://chrome.google.com/webstore/detail/khpfeaanjngmcnplbdlpegiifgpfgdco"
 			}
 		}
-	},
-	"SHORTCUT_LIST_ARIA_LABEL": {
-		"description": "Text use as the aria-label for the 'shortcut-list'.",
-		"message": "saved connections"
 	},
 	"SSH_ARGSTR_LABEL": {
 		"description": "Label for the optional ssh arguments field. These are command line flags to the ssh program itself.",
@@ -394,6 +394,18 @@
 	"TIP_1": {
 		"description": "Helpful tip shown to user advertising features",
 		"message": "You can hold Ctrl (Cmd on macOS) while clicking on links to open them!"
+	},
+	"TIP_10": {
+		"description": "Helpful tip shown to user advertising features",
+		"message": "When running in a window, Ctrl-Shift-N can open another session."
+	},
+	"TIP_11": {
+		"description": "Helpful tip shown to user advertising features",
+		"message": "You can rebind keys/shortcuts: https://goo.gl/LWRndr"
+	},
+	"TIP_12": {
+		"description": "Helpful tip shown to user advertising features",
+		"message": "Use Yubikeys and other smart cards for ssh auth: https://goo.gl/3ZEU1w"
 	},
 	"TIP_2": {
 		"description": "Helpful tip shown to user advertising features",
@@ -426,18 +438,6 @@
 	"TIP_9": {
 		"description": "Helpful tip shown to user advertising features",
 		"message": "Found a bug?  Request a new feature?  Let us know: https://goo.gl/vb94JY"
-	},
-	"TIP_10": {
-		"description": "Helpful tip shown to user advertising features",
-		"message": "When running in a window, Ctrl-Shift-N can open another session."
-	},
-	"TIP_11": {
-		"description": "Helpful tip shown to user advertising features",
-		"message": "You can rebind keys/shortcuts: https://goo.gl/LWRndr"
-	},
-	"TIP_12": {
-		"description": "Helpful tip shown to user advertising features",
-		"message": "Use Yubikeys and other smart cards for ssh auth: https://goo.gl/3ZEU1w"
 	},
 	"UNEXPECTED_ERROR": {
 		"description": "Generic message displayed when we encounter an unexpected error.",

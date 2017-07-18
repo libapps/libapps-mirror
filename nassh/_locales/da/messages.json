@@ -20,16 +20,16 @@
 		"message": "Annuller"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "Denne kommando viser en menu med kendte v\u00e6rter og beskeder, som v\u00e6rten skal glemme."
+		"message": "Denne kommando viser en menu med kendte værter og beskeder, som værten skal glemme."
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "Glem en kendt SSH-v\u00e6rt."
+		"message": "Glem en kendt SSH-vært."
 	},
 	"cmd_ssh_help": {
-		"message": "Parametrene |username| og |hostname| er p\u00e5kr\u00e6vede, |port| er valgfri. Hvis porten ikke er angivet, s\u00e6ttes 22 som standard."
+		"message": "Parametrene |username| og |hostname| er påkrævede, |port| er valgfri. Hvis porten ikke er angivet, sættes 22 som standard."
 	},
 	"cmd_ssh_title": {
-		"message": "\u00c5bner en ny SSH-session."
+		"message": "Åbner en ny SSH-session."
 	},
 	"command_complete": {
 		"message": "Kommandoen $1 blev afsluttet med statuskoden $2.",
@@ -46,7 +46,7 @@
 		"message": "Opret forbindelse"
 	},
 	"connect_or_exit_message": {
-		"message": "Vil du v\u00e6lge (C) en anden forbindelse eller afslutte (X)?"
+		"message": "Vil du vælge (C) en anden forbindelse eller afslutte (X)?"
 	},
 	"connecting": {
 		"message": "Opretter forbindelse til $1...",
@@ -101,13 +101,13 @@
 		"message": "port"
 	},
 	"field_relay_options_aria_label": {
-		"message": "valgmuligheder for rel\u00e6server"
+		"message": "valgmuligheder for relæserver"
 	},
 	"field_relay_options_placeholder": {
-		"message": "valgmuligheder for rel\u00e6server"
+		"message": "valgmuligheder for relæserver"
 	},
 	"field_terminal_profile_aria_label": {
-		"message": "navn p\u00e5 terminalprofil"
+		"message": "navn på terminalprofil"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "standard"
@@ -119,7 +119,7 @@
 		"message": "brugernavn"
 	},
 	"found_relay": {
-		"message": "Registreret rel\u00e6server: $1",
+		"message": "Registreret relæserver: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -133,10 +133,10 @@
 		"message": "filimport"
 	},
 	"import_link_label": {
-		"message": "Import\u00e9r..."
+		"message": "Importér..."
 	},
 	"initializing_relay": {
-		"message": "S\u00f8ger efter rel\u00e6server via: $1",
+		"message": "Søger efter relæserver via: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "Ingen kendte v\u00e6rter, intet at glemme."
+		"message": "Ingen kendte værter, intet at glemme."
 	},
 	"known_hosts_prompt": {
-		"message": "V\u00e6lg en v\u00e6rt, der skal glemmes [1-$1]:",
+		"message": "Vælg en vært, der skal glemmes [1-$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -163,10 +163,10 @@
 		}
 	},
 	"known_hosts_title": {
-		"message": "Kendte v\u00e6rter:"
+		"message": "Kendte værter:"
 	},
 	"loading_label": {
-		"message": "Indl\u00e6ser..."
+		"message": "Indlæser..."
 	},
 	"missing_param": {
 		"message": "Manglende parameter: $1",
@@ -189,7 +189,7 @@
 		"message": "OK"
 	},
 	"open_as_window_tip": {
-		"message": "[Pro Tip] Brug \"\u00c5bn som vindue\" for at undg\u00e5, at Control-W lukker din terminal.\n[Pro Tip] Se $1 for at f\u00e5 flere oplysninger.",
+		"message": "[Pro Tip] Brug \"Åbn som vindue\" for at undgå, at Control-W lukker din terminal.\n[Pro Tip] Se $1 for at få flere oplysninger.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -200,25 +200,25 @@
 		"message": "Valgmuligheder"
 	},
 	"plugin_loading": {
-		"message": "Indl\u00e6ser pluginnet NaCl..."
+		"message": "Indlæser pluginnet NaCl..."
 	},
 	"plugin_loading_complete": {
-		"message": " udf\u00f8rt."
+		"message": " udført."
 	},
 	"pref_backup_filename": {
-		"message": "Backup af Secure Shell-pr\u00e6ferencer.json"
+		"message": "Backup af Secure Shell-præferencer.json"
 	},
 	"preferences_header": {
 		"message": "Profilindstillinger"
 	},
 	"preferences_reset": {
-		"message": "Alle pr\u00e6ferencer blev nulstillet"
+		"message": "Alle præferencer blev nulstillet"
 	},
 	"reconnect_message": {
-		"message": "Vil du genoprette forbindelsen (R), v\u00e6lge en anden forbindelse (C) eller afslutte (X)?"
+		"message": "Vil du genoprette forbindelsen (R), vælge en anden forbindelse (C) eller afslutte (X)?"
 	},
 	"relay_retry": {
-		"message": "Pr\u00f8ver igen\u2026"
+		"message": "Prøver igen…"
 	},
 	"restore_prefs": {
 		"message": "Gendan sikkerhedskopi"
@@ -233,19 +233,19 @@
 		"message": "Eksempelvisning"
 	},
 	"terminal_profile_label": {
-		"message": "Nuv\u00e6rende profil"
+		"message": "Nuværende profil"
 	},
 	"unexpected_error": {
-		"message": "Der opstod en uventet fejl. Du kan f\u00e5 flere oplysninger i JavaScript-konsollen."
+		"message": "Der opstod en uventet fejl. Du kan få flere oplysninger i JavaScript-konsollen."
 	},
 	"unmount_button_label": {
 		"message": "Fjern tilslutning til SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "Der er en tilg\u00e6ngelig opdatering. Luk alle vinduer."
+		"message": "Der er en tilgængelig opdatering. Luk alle vinduer."
 	},
 	"welcome_faq": {
-		"message": "Svar p\u00e5 ofte stillede sp\u00f8rgsm\u00e5l: $1 (tryk p\u00e5 ctrl, og hold knappen nede, mens du klikker p\u00e5 linket, for at \u00e5bne det)",
+		"message": "Svar på ofte stillede spørgsmål: $1 (tryk på ctrl, og hold knappen nede, mens du klikker på linket, for at åbne det)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "Konfigurer Chrome-menuen -> V\u00e6lg 100 % zoom"
+		"message": "Konfigurer Chrome-menuen -> Vælg 100 % zoom"
 	}
 }

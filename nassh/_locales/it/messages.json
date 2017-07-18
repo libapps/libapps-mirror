@@ -1,6 +1,6 @@
 {
 	"already_mounted_message": {
-		"message": "Il file system \u00e8 gi\u00e0 stato montato."
+		"message": "Il file system è già stato montato."
 	},
 	"backup_prefs": {
 		"message": "Salva copia di backup"
@@ -14,7 +14,7 @@
 		}
 	},
 	"before_unload": {
-		"message": "La chiusura di questa scheda causer\u00e0 la disconnesione dalla sessione."
+		"message": "La chiusura di questa scheda causerà la disconnesione dalla sessione."
 	},
 	"cancel_button_label": {
 		"message": "Annulla"
@@ -26,7 +26,7 @@
 		"message": "Annulla memorizzazione di un host ssh noto."
 	},
 	"cmd_ssh_help": {
-		"message": "I parametri |username| e |hostname| sono obbligatori, |port| \u00e8 facoltativo. Se la porta non viene specificata, viene utilizzato il valore predefinito 22."
+		"message": "I parametri |username| e |hostname| sono obbligatori, |port| è facoltativo. Se la porta non viene specificata, viene utilizzato il valore predefinito 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Consente di aprire una nuova sessione SSH."
@@ -49,7 +49,7 @@
 		"message": "Scegliere un'altra connessione (C) o Uscire (X)?"
 	},
 	"connecting": {
-		"message": "Collegamento a $1\u2026",
+		"message": "Collegamento a $1…",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -92,7 +92,7 @@
 		"message": "nome host"
 	},
 	"field_identity_aria_label": {
-		"message": "identit\u00e0"
+		"message": "identità"
 	},
 	"field_port_aria_label": {
 		"message": "porta"
@@ -127,13 +127,13 @@
 		}
 	},
 	"identity_label": {
-		"message": "Identit\u00e0"
+		"message": "Identità"
 	},
 	"import_link_aria_label": {
 		"message": "importazione file"
 	},
 	"import_link_label": {
-		"message": "Importa\u2026"
+		"message": "Importa…"
 	},
 	"initializing_relay": {
 		"message": "Ricerca server relay mediante: $1",
@@ -166,7 +166,7 @@
 		"message": "Host noti:"
 	},
 	"loading_label": {
-		"message": "Caricamento\u2026"
+		"message": "Caricamento…"
 	},
 	"missing_param": {
 		"message": "Parametro mancante: $1",
@@ -218,7 +218,7 @@
 		"message": "Riconnettere (R), Scegliere un'altra connessione (C) o Uscire (X)?"
 	},
 	"relay_retry": {
-		"message": "Nuovo tentativo\u2026"
+		"message": "Nuovo tentativo…"
 	},
 	"restore_prefs": {
 		"message": "Ripristina backup"
@@ -236,13 +236,13 @@
 		"message": "Profilo corrente"
 	},
 	"unexpected_error": {
-		"message": "Si \u00e8 verificato un errore imprevisto. Per ulteriori informazioni, controlla la console JavaScript."
+		"message": "Si è verificato un errore imprevisto. Per ulteriori informazioni, controlla la console JavaScript."
 	},
 	"unmount_button_label": {
 		"message": "Smonta SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "\u00c8 disponibile un aggiornamento. Chiudi tutte le finestre."
+		"message": "È disponibile un aggiornamento. Chiudi tutte le finestre."
 	},
 	"welcome_faq": {
 		"message": "Risposte alle Domande frequenti: $1 (CTRL+clic sui link per aprirli)",

@@ -3,10 +3,10 @@
 		"message": "Filsystemet har redan monterats."
 	},
 	"backup_prefs": {
-		"message": "Spara s\u00e4kerhetskopia"
+		"message": "Spara säkerhetskopia"
 	},
 	"bad_destination": {
-		"message": "Det g\u00e5r inte att analysera destinationen: $1",
+		"message": "Det går inte att analysera destinationen: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,22 +14,22 @@
 		}
 	},
 	"before_unload": {
-		"message": "Om du st\u00e4nger fliken avslutas sessionen."
+		"message": "Om du stänger fliken avslutas sessionen."
 	},
 	"cancel_button_label": {
 		"message": "Avbryt"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "Kommandot visar v\u00e4rdar som vi k\u00e4nner till i en meny och fr\u00e5gar vilken v\u00e4rd som ska gl\u00f6mmas bort."
+		"message": "Kommandot visar värdar som vi känner till i en meny och frågar vilken värd som ska glömmas bort."
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "Gl\u00f6m en k\u00e4nd ssh-v\u00e4rd."
+		"message": "Glöm en känd ssh-värd."
 	},
 	"cmd_ssh_help": {
-		"message": "Parametrarna |username| och |hostname| \u00e4r obligatoriska, |port| \u00e4r valfri. Om du inte anger en port blir den automatiskt 22."
+		"message": "Parametrarna |username| och |hostname| är obligatoriska, |port| är valfri. Om du inte anger en port blir den automatiskt 22."
 	},
 	"cmd_ssh_title": {
-		"message": "\u00d6ppnar en ny SSH-session."
+		"message": "Öppnar en ny SSH-session."
 	},
 	"command_complete": {
 		"message": "Kommandot $1 avslutades med statuskoden $2.",
@@ -46,10 +46,10 @@
 		"message": "Anslut"
 	},
 	"connect_or_exit_message": {
-		"message": "Vill du (v)\u00e4lja en annan anslutning eller a(v)sluta?"
+		"message": "Vill du (v)älja en annan anslutning eller a(v)sluta?"
 	},
 	"connecting": {
-		"message": "Ansluter till $1 \u2026",
+		"message": "Ansluter till $1 …",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -83,13 +83,13 @@
 		"message": "beskrivning"
 	},
 	"field_description_placeholder": {
-		"message": "anv\u00e4ndarnamn@v\u00e4rdnamn eller formaliafri text"
+		"message": "användarnamn@värdnamn eller formaliafri text"
 	},
 	"field_hostname_aria_label": {
-		"message": "v\u00e4rdnamn"
+		"message": "värdnamn"
 	},
 	"field_hostname_placeholder": {
-		"message": "v\u00e4rdnamn"
+		"message": "värdnamn"
 	},
 	"field_identity_aria_label": {
 		"message": "identitet"
@@ -101,10 +101,10 @@
 		"message": "port"
 	},
 	"field_relay_options_aria_label": {
-		"message": "rel\u00e4alternativ"
+		"message": "reläalternativ"
 	},
 	"field_relay_options_placeholder": {
-		"message": "rel\u00e4alternativ"
+		"message": "reläalternativ"
 	},
 	"field_terminal_profile_aria_label": {
 		"message": "terminalens profilnamn"
@@ -113,13 +113,13 @@
 		"message": "standard"
 	},
 	"field_username_aria_label": {
-		"message": "anv\u00e4ndarnamn"
+		"message": "användarnamn"
 	},
 	"field_username_placeholder": {
-		"message": "anv\u00e4ndarnamn"
+		"message": "användarnamn"
 	},
 	"found_relay": {
-		"message": "Hittad rel\u00e4server: $1",
+		"message": "Hittad reläserver: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -133,10 +133,10 @@
 		"message": "filimport"
 	},
 	"import_link_label": {
-		"message": "Importera \u2026"
+		"message": "Importera …"
 	},
 	"initializing_relay": {
-		"message": "S\u00f6ker efter rel\u00e4server via $1",
+		"message": "Söker efter reläserver via $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "Det finns inga k\u00e4nda v\u00e4rdar. Ingen information att gl\u00f6mma."
+		"message": "Det finns inga kända värdar. Ingen information att glömma."
 	},
 	"known_hosts_prompt": {
-		"message": "V\u00e4lj en v\u00e4rd som ska gl\u00f6mmas [1\u2013$1]:",
+		"message": "Välj en värd som ska glömmas [1–$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -163,10 +163,10 @@
 		}
 	},
 	"known_hosts_title": {
-		"message": "K\u00e4nda v\u00e4rdar:"
+		"message": "Kända värdar:"
 	},
 	"loading_label": {
-		"message": "L\u00e4ser in \u2026"
+		"message": "Läser in …"
 	},
 	"missing_param": {
 		"message": "Parametern $1 saknas",
@@ -189,7 +189,7 @@
 		"message": "OK"
 	},
 	"open_as_window_tip": {
-		"message": "[Pro Tip] Anv\u00e4nd \u00d6ppna som f\u00f6nster f\u00f6r att f\u00f6rhindra att terminalen st\u00e4ngs av Ctrl-W.\n[Pro Tip] Mer information finns p\u00e5 $1.",
+		"message": "[Pro Tip] Använd Öppna som fönster för att förhindra att terminalen stängs av Ctrl-W.\n[Pro Tip] Mer information finns på $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -200,7 +200,7 @@
 		"message": "Alternativ"
 	},
 	"plugin_loading": {
-		"message": "L\u00e4ser in plugin-programmet NaCl ..."
+		"message": "Läser in plugin-programmet NaCl ..."
 	},
 	"plugin_loading_complete": {
 		"message": " klart."
@@ -209,19 +209,19 @@
 		"message": "Secure Shell Preferences Backup.json"
 	},
 	"preferences_header": {
-		"message": "Profilinst\u00e4llningar"
+		"message": "Profilinställningar"
 	},
 	"preferences_reset": {
-		"message": "Alla inst\u00e4llningar har \u00e5terst\u00e4llts."
+		"message": "Alla inställningar har återställts."
 	},
 	"reconnect_message": {
-		"message": "Vill du (\u00e5)teransluta, (v)\u00e4lja en annan anslutning eller a(v)sluta?"
+		"message": "Vill du (å)teransluta, (v)älja en annan anslutning eller a(v)sluta?"
 	},
 	"relay_retry": {
-		"message": "F\u00f6rs\u00f6ker igen \u2026"
+		"message": "Försöker igen …"
 	},
 	"restore_prefs": {
-		"message": "\u00c5terst\u00e4ll s\u00e4kerhetskopia"
+		"message": "Återställ säkerhetskopia"
 	},
 	"shortcut_list_aria_label": {
 		"message": "sparade anslutningar"
@@ -230,22 +230,22 @@
 		"message": "SSH-argument"
 	},
 	"terminal_preview_label": {
-		"message": "F\u00f6rhandsgranska"
+		"message": "Förhandsgranska"
 	},
 	"terminal_profile_label": {
 		"message": "Aktuell profil"
 	},
 	"unexpected_error": {
-		"message": "Ett ov\u00e4ntat fel uppstod. Du hittar mer information i JavaScript-konsolen."
+		"message": "Ett oväntat fel uppstod. Du hittar mer information i JavaScript-konsolen."
 	},
 	"unmount_button_label": {
 		"message": "Ta bort SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "En uppdatering finns tillg\u00e4nglig. St\u00e4ng alla f\u00f6nster."
+		"message": "En uppdatering finns tillgänglig. Stäng alla fönster."
 	},
 	"welcome_faq": {
-		"message": "Svar p\u00e5 vanliga fr\u00e5gor: $1 (Ctrl + klicka p\u00e5 l\u00e4nkarna f\u00f6r att \u00f6ppna dem)",
+		"message": "Svar på vanliga frågor: $1 (Ctrl + klicka på länkarna för att öppna dem)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -253,7 +253,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "H\u00e4r \u00e4r $1-versionen $2.",
+		"message": "Här är $1-versionen $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "\u00d6ppna Chrome-menyn > st\u00e4ll in Zoom p\u00e5 100 %"
+		"message": "Öppna Chrome-menyn > ställ in Zoom på 100 %"
 	}
 }

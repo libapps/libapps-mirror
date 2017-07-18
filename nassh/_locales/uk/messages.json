@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "\u0424\u0430\u0439\u043b\u043e\u0432\u0443 \u0441\u0438\u0441\u0442\u0435\u043c\u0443 \u0432\u0436\u0435 \u0432\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043e."
+		"message": "Файлову систему вже встановлено."
 	},
 	"backup_prefs": {
-		"message": "\u0417\u0431\u0435\u0440\u0435\u0433\u0442\u0438 \u0440\u0435\u0437\u0435\u0440\u0432\u043d\u0443 \u043a\u043e\u043f\u0456\u044e"
+		"message": "Зберегти резервну копію"
 	},
 	"bad_destination": {
-		"message": "\u041d\u0435\u043c\u043e\u0436\u043b\u0438\u0432\u043e \u043f\u0440\u043e\u0430\u043d\u0430\u043b\u0456\u0437\u0443\u0432\u0430\u0442\u0438 \u043c\u0456\u0441\u0446\u0435 \u043f\u0440\u0438\u0437\u043d\u0430\u0447\u0435\u043d\u043d\u044f: $1",
+		"message": "Неможливо проаналізувати місце призначення: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,25 +14,25 @@
 		}
 	},
 	"before_unload": {
-		"message": "\u042f\u043a\u0449\u043e \u0437\u0430\u043a\u0440\u0438\u0442\u0438 \u0446\u044e \u0432\u043a\u043b\u0430\u0434\u043a\u0443, \u043f\u043e\u0442\u043e\u0447\u043d\u0438\u0439 \u0441\u0435\u0430\u043d\u0441 \u0431\u0443\u0434\u0435 \u043f\u0440\u0438\u043f\u0438\u043d\u0435\u043d\u043e."
+		"message": "Якщо закрити цю вкладку, поточний сеанс буде припинено."
 	},
 	"cancel_button_label": {
-		"message": "\u0421\u043a\u0430\u0441\u0443\u0432\u0430\u0442\u0438"
+		"message": "Скасувати"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "\u0426\u044f \u043a\u043e\u043c\u0430\u043d\u0434\u0430 \u0432\u0456\u0434\u043e\u0431\u0440\u0430\u0436\u0430\u0454 \u043c\u0435\u043d\u044e \u0432\u0456\u0434\u043e\u043c\u0438\u0445 \u0445\u043e\u0441\u0442\u0456\u0432 \u0456 \u0437\u0430\u043f\u0438\u0442\u0443\u0454, \u044f\u043a\u0456 \u0445\u043e\u0441\u0442\u0438 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u0456\u0433\u043d\u043e\u0440\u0443\u0432\u0430\u0442\u0438."
+		"message": "Ця команда відображає меню відомих хостів і запитує, які хости потрібно ігнорувати."
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "\u0406\u0433\u043d\u043e\u0440\u0443\u0432\u0430\u0442\u0438 \u0432\u0456\u0434\u043e\u043c\u0438\u0439 \u0445\u043e\u0441\u0442 SSH."
+		"message": "Ігнорувати відомий хост SSH."
 	},
 	"cmd_ssh_help": {
-		"message": "\u041f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0438 |username| \u0456 |hostname| \u2013 \u043e\u0431\u043e\u0432\u2019\u044f\u0437\u043a\u043e\u0432\u0456, \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440 |port| \u2013 \u043d\u0435\u043e\u0431\u043e\u0432\u2019\u044f\u0437\u043a\u043e\u0432\u0438\u0439. \u042f\u043a\u0449\u043e \u043f\u043e\u0440\u0442 \u043d\u0435 \u0432\u043a\u0430\u0437\u0430\u043d\u043e, \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u044e\u0454\u0442\u044c\u0441\u044f \u0437\u043d\u0430\u0447\u0435\u043d\u043d\u044f \u0437\u0430 \u0443\u043c\u043e\u0432\u0447\u0430\u043d\u043d\u044f\u043c \u2013 22."
+		"message": "Параметри |username| і |hostname| – обов’язкові, параметр |port| – необов’язковий. Якщо порт не вказано, установлюється значення за умовчанням – 22."
 	},
 	"cmd_ssh_title": {
-		"message": "\u0412\u0456\u0434\u043a\u0440\u0438\u0432\u0430\u0454 \u043d\u043e\u0432\u0438\u0439 \u0441\u0435\u0430\u043d\u0441 SSH."
+		"message": "Відкриває новий сеанс SSH."
 	},
 	"command_complete": {
-		"message": "\u041a\u043e\u043c\u0430\u043d\u0434\u0430 $1 \u0437\u0430\u0432\u0435\u0440\u0448\u0438\u043b\u0430 \u0440\u043e\u0431\u043e\u0442\u0443 \u0437 \u043a\u043e\u0434\u043e\u043c \u0441\u0442\u0430\u0442\u0443\u0441\u0443 $2.",
+		"message": "Команда $1 завершила роботу з кодом статусу $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -43,13 +43,13 @@
 		}
 	},
 	"connect_button_label": {
-		"message": "\u0417\u2019\u0454\u0434\u043d\u0430\u0442\u0438\u0441\u044f"
+		"message": "З’єднатися"
 	},
 	"connect_or_exit_message": {
-		"message": "\u0412\u0438\u0431\u0440\u0430\u0442\u0438 \u0456\u043d\u0448\u0435 \u043f\u0456\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u043d\u044f \u0447\u0438 \u0432\u0438\u0439\u0442\u0438?"
+		"message": "Вибрати інше підключення чи вийти?"
 	},
 	"connecting": {
-		"message": "\u041f\u0456\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u043d\u044f \u0434\u043e \u0445\u043e\u0441\u0442\u0443 $1\u2026",
+		"message": "Підключення до хосту $1…",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -60,10 +60,10 @@
 		"message": "[DEL]"
 	},
 	"delete_button_label": {
-		"message": "\u0412\u0438\u0434\u0430\u043b\u0438\u0442\u0438"
+		"message": "Видалити"
 	},
 	"disconnect_message": {
-		"message": "\u041f\u043b\u0430\u0433\u0456\u043d NaCl \u0437\u0430\u0432\u0435\u0440\u0448\u0438\u0432 \u0440\u043e\u0431\u043e\u0442\u0443 \u0437 \u043a\u043e\u0434\u043e\u043c \u0441\u0442\u0430\u0442\u0443\u0441\u0443 $1.",
+		"message": "Плагін NaCl завершив роботу з кодом статусу $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -74,52 +74,52 @@
 		"message": "[ENTER]"
 	},
 	"field_argstr_aria_label": {
-		"message": "\u0434\u043e\u0434\u0430\u0442\u043a\u043e\u0432\u0456 \u0430\u0440\u0433\u0443\u043c\u0435\u043d\u0442\u0438 ssh"
+		"message": "додаткові аргументи ssh"
 	},
 	"field_argstr_placeholder": {
-		"message": "\u0434\u043e\u0434\u0430\u0442\u043a\u043e\u0432\u0456 \u0430\u0440\u0433\u0443\u043c\u0435\u043d\u0442\u0438 \u043a\u043e\u043c\u0430\u043d\u0434\u043d\u043e\u0433\u043e \u0440\u044f\u0434\u043a\u0430"
+		"message": "додаткові аргументи командного рядка"
 	},
 	"field_description_aria_label": {
-		"message": "\u043e\u043f\u0438\u0441"
+		"message": "опис"
 	},
 	"field_description_placeholder": {
-		"message": "imyakorystuvacha@imyakhostu \u0430\u0431\u043e \u0431\u0435\u0437 \u0442\u0435\u043a\u0441\u0442\u0443"
+		"message": "imyakorystuvacha@imyakhostu або без тексту"
 	},
 	"field_hostname_aria_label": {
-		"message": "\u0456\u043c\u2019\u044f \u0445\u043e\u0441\u0442\u0443"
+		"message": "ім’я хосту"
 	},
 	"field_hostname_placeholder": {
-		"message": "\u0456\u043c\u2019\u044f \u0445\u043e\u0441\u0442\u0443"
+		"message": "ім’я хосту"
 	},
 	"field_identity_aria_label": {
-		"message": "\u0456\u0434\u0435\u043d\u0442\u0438\u0444\u0456\u043a\u0430\u0442\u043e\u0440"
+		"message": "ідентифікатор"
 	},
 	"field_port_aria_label": {
-		"message": "\u043f\u043e\u0440\u0442"
+		"message": "порт"
 	},
 	"field_port_placeholder": {
-		"message": "\u043f\u043e\u0440\u0442"
+		"message": "порт"
 	},
 	"field_relay_options_aria_label": {
-		"message": "\u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0438 \u043f\u0435\u0440\u0435\u0434\u0430\u0432\u0430\u043d\u043d\u044f"
+		"message": "параметри передавання"
 	},
 	"field_relay_options_placeholder": {
-		"message": "\u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0438 \u043f\u0435\u0440\u0435\u0434\u0430\u0432\u0430\u043d\u043d\u044f"
+		"message": "параметри передавання"
 	},
 	"field_terminal_profile_aria_label": {
-		"message": "\u043d\u0430\u0437\u0432\u0430 \u043f\u0440\u043e\u0444\u0456\u043b\u044e \u0442\u0435\u0440\u043c\u0456\u043d\u0430\u043b\u0430"
+		"message": "назва профілю термінала"
 	},
 	"field_terminal_profile_placeholder": {
-		"message": "\u0437\u0430 \u0443\u043c\u043e\u0432\u0447\u0430\u043d\u043d\u044f\u043c"
+		"message": "за умовчанням"
 	},
 	"field_username_aria_label": {
-		"message": "\u0456\u043c\u2019\u044f \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430"
+		"message": "ім’я користувача"
 	},
 	"field_username_placeholder": {
-		"message": "\u0456\u043c\u2019\u044f \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430"
+		"message": "ім’я користувача"
 	},
 	"found_relay": {
-		"message": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u0435\u0440\u0432\u0435\u0440 \u043f\u0435\u0440\u0435\u0434\u0430\u0432\u0430\u043d\u043d\u044f: $1",
+		"message": "Знайдено сервер передавання: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -127,16 +127,16 @@
 		}
 	},
 	"identity_label": {
-		"message": "\u0406\u0434\u0435\u043d\u0442\u0438\u0444\u0456\u043a\u0430\u0442\u043e\u0440"
+		"message": "Ідентифікатор"
 	},
 	"import_link_aria_label": {
-		"message": "\u0456\u043c\u043f\u043e\u0440\u0442 \u0444\u0430\u0439\u043b\u0443"
+		"message": "імпорт файлу"
 	},
 	"import_link_label": {
-		"message": "\u0406\u043c\u043f\u043e\u0440\u0442\u2026"
+		"message": "Імпорт…"
 	},
 	"initializing_relay": {
-		"message": "\u041f\u043e\u0448\u0443\u043a \u0441\u0435\u0440\u0432\u0435\u0440\u0430 \u043f\u0435\u0440\u0435\u0434\u0430\u0432\u0430\u043d\u043d\u044f \u0437 \u0445\u043e\u0441\u0442\u043e\u043c $1",
+		"message": "Пошук сервера передавання з хостом $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -144,7 +144,7 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "\u041d\u0435 \u0432\u0434\u0430\u043b\u043e\u0441\u044f \u0432\u0438\u043a\u043e\u043d\u0430\u0442\u0438 \u0441\u0438\u043d\u0442\u0430\u043a\u0441\u0438\u0447\u043d\u0438\u0439 \u0430\u043d\u0430\u043b\u0456\u0437 \u0444\u0430\u0439\u043b\u0443 JSON \u0443 \u043f\u0430\u043a\u0435\u0442\u0456 $1",
+		"message": "Не вдалося виконати синтаксичний аналіз файлу JSON у пакеті $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "\u0416\u043e\u0434\u043d\u043e\u0433\u043e \u0432\u0456\u0434\u043e\u043c\u043e\u0433\u043e \u0445\u043e\u0441\u0442\u0443. \u041d\u0435\u043c\u0430\u0454 \u0449\u043e \u0456\u0433\u043d\u043e\u0440\u0443\u0432\u0430\u0442\u0438."
+		"message": "Жодного відомого хосту. Немає що ігнорувати."
 	},
 	"known_hosts_prompt": {
-		"message": "\u0412\u0438\u0431\u0435\u0440\u0456\u0442\u044c \u0445\u043e\u0441\u0442, \u044f\u043a\u0438\u0439 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u0456\u0433\u043d\u043e\u0440\u0443\u0432\u0430\u0442\u0438 [1\u2013$1]:",
+		"message": "Виберіть хост, який потрібно ігнорувати [1–$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -163,13 +163,13 @@
 		}
 	},
 	"known_hosts_title": {
-		"message": "\u0412\u0456\u0434\u043e\u043c\u0456 \u0445\u043e\u0441\u0442\u0438:"
+		"message": "Відомі хости:"
 	},
 	"loading_label": {
-		"message": "\u0417\u0430\u0432\u0430\u043d\u0442\u0430\u0436\u0435\u043d\u043d\u044f\u2026"
+		"message": "Завантаження…"
 	},
 	"missing_param": {
-		"message": "\u0412\u0456\u0434\u0441\u0443\u0442\u043d\u0456\u0439 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440: $1",
+		"message": "Відсутній параметр: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -177,19 +177,19 @@
 		}
 	},
 	"mount_button_label": {
-		"message": "\u041f\u0456\u0434\u043a\u043b\u044e\u0447\u0438\u0442\u0438 \u043f\u0440\u043e\u0442\u043e\u043a\u043e\u043b SFTP"
+		"message": "Підключити протокол SFTP"
 	},
 	"mounted_message": {
-		"message": "\u041f\u0456\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u043e"
+		"message": "Підключено"
 	},
 	"notify_copy": {
-		"message": "\u0412\u0438\u0434\u0456\u043b\u0435\u043d\u0438\u0439 \u0442\u0435\u043a\u0441\u0442 \u0441\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e"
+		"message": "Виділений текст скопійовано"
 	},
 	"ok_button_label": {
-		"message": "\u041e\u041a"
+		"message": "ОК"
 	},
 	"open_as_window_tip": {
-		"message": "[\u041f\u043e\u0440\u0430\u0434\u0430 \u0441\u043f\u0435\u0446\u0456\u0430\u043b\u0456\u0441\u0442\u0430] \u0412\u0438\u0431\u0438\u0440\u0430\u0439\u0442\u0435 \u043e\u043f\u0446\u0456\u044e \"\u0412\u0456\u0434\u043a\u0440\u0438\u0442\u0438 \u044f\u043a \u0432\u0456\u043a\u043d\u043e\", \u0449\u043e\u0431 \u043a\u043e\u043c\u0430\u043d\u0434\u0430 Control-W \u043d\u0435 \u0437\u0430\u043a\u0440\u0438\u0432\u0430\u043b\u0430 \u0442\u0435\u0440\u043c\u0456\u043d\u0430\u043b.\n[\u041f\u043e\u0440\u0430\u0434\u0430 \u0441\u043f\u0435\u0446\u0456\u0430\u043b\u0456\u0441\u0442\u0430] \u0414\u0456\u0437\u043d\u0430\u0439\u0442\u0435\u0441\u044f \u0431\u0456\u043b\u044c\u0448\u0435 \u043d\u0430 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456 $1.",
+		"message": "[Порада спеціаліста] Вибирайте опцію \"Відкрити як вікно\", щоб команда Control-W не закривала термінал.\n[Порада спеціаліста] Дізнайтеся більше на сторінці $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -197,55 +197,55 @@
 		}
 	},
 	"options_button_label": {
-		"message": "\u041f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0438"
+		"message": "Параметри"
 	},
 	"plugin_loading": {
-		"message": "\u0417\u0430\u0432\u0430\u043d\u0442\u0430\u0436\u0435\u043d\u043d\u044f \u043f\u043b\u0430\u0433\u0456\u043d\u0430 NaCl..."
+		"message": "Завантаження плагіна NaCl..."
 	},
 	"plugin_loading_complete": {
-		"message": " \u0433\u043e\u0442\u043e\u0432\u043e."
+		"message": " готово."
 	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
 	"preferences_header": {
-		"message": "\u041d\u0430\u043b\u0430\u0448\u0442\u0443\u0432\u0430\u043d\u043d\u044f \u043f\u0440\u043e\u0444\u0456\u043b\u044e"
+		"message": "Налаштування профілю"
 	},
 	"preferences_reset": {
-		"message": "\u0423\u0441\u0456 \u043d\u0430\u043b\u0430\u0448\u0442\u0443\u0432\u0430\u043d\u043d\u044f \u0441\u043a\u0438\u043d\u0443\u0442\u043e."
+		"message": "Усі налаштування скинуто."
 	},
 	"reconnect_message": {
-		"message": "\u0429\u0435 \u0440\u0430\u0437 \u043f\u0456\u0434\u043a\u043b\u044e\u0447\u0438\u0442\u0438\u0441\u044f, \u0432\u0438\u0431\u0440\u0430\u0442\u0438 \u0456\u043d\u0448\u0435 \u043f\u0456\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u043d\u044f \u0447\u0438 \u0432\u0438\u0439\u0442\u0438?"
+		"message": "Ще раз підключитися, вибрати інше підключення чи вийти?"
 	},
 	"relay_retry": {
-		"message": "\u041f\u043e\u0432\u0442\u043e\u0440\u043d\u0430 \u0441\u043f\u0440\u043e\u0431\u0430\u2026"
+		"message": "Повторна спроба…"
 	},
 	"restore_prefs": {
-		"message": "\u0412\u0456\u0434\u043d\u043e\u0432\u0438\u0442\u0438 \u0440\u0435\u0437\u0435\u0440\u0432\u043d\u0443 \u043a\u043e\u043f\u0456\u044e"
+		"message": "Відновити резервну копію"
 	},
 	"shortcut_list_aria_label": {
-		"message": "\u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043d\u0456 \u043f\u0456\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u043d\u044f"
+		"message": "збережені підключення"
 	},
 	"ssh_argstr_label": {
-		"message": "\u0410\u0440\u0433\u0443\u043c\u0435\u043d\u0442\u0438 SSH"
+		"message": "Аргументи SSH"
 	},
 	"terminal_preview_label": {
-		"message": "\u041f\u043e\u043f\u0435\u0440\u0435\u0434\u043d\u0456\u0439 \u043f\u0435\u0440\u0435\u0433\u043b\u044f\u0434"
+		"message": "Попередній перегляд"
 	},
 	"terminal_profile_label": {
-		"message": "\u041f\u043e\u0442\u043e\u0447\u043d\u0438\u0439 \u043f\u0440\u043e\u0444\u0456\u043b\u044c"
+		"message": "Поточний профіль"
 	},
 	"unexpected_error": {
-		"message": "\u0421\u0442\u0430\u043b\u0430\u0441\u044f \u043d\u0435\u043e\u0447\u0456\u043a\u0443\u0432\u0430\u043d\u0430 \u043f\u043e\u043c\u0438\u043b\u043a\u0430. \u0429\u043e\u0431 \u0434\u0456\u0437\u043d\u0430\u0442\u0438\u0441\u044f \u0431\u0456\u043b\u044c\u0448\u0435, \u043f\u0435\u0440\u0435\u0433\u043b\u044f\u043d\u044c\u0442\u0435 \u043a\u043e\u043d\u0441\u043e\u043b\u044c JavaScript."
+		"message": "Сталася неочікувана помилка. Щоб дізнатися більше, перегляньте консоль JavaScript."
 	},
 	"unmount_button_label": {
-		"message": "\u0412\u0456\u0434\u043a\u043b\u044e\u0447\u0438\u0442\u0438 \u043f\u0440\u043e\u0442\u043e\u043a\u043e\u043b SFTP"
+		"message": "Відключити протокол SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "\u0404 \u043e\u043d\u043e\u0432\u043b\u0435\u043d\u043d\u044f. \u0417\u0430\u043a\u0440\u0438\u0439\u0442\u0435 \u0432\u0441\u0456 \u0432\u0456\u043a\u043d\u0430."
+		"message": "Є оновлення. Закрийте всі вікна."
 	},
 	"welcome_faq": {
-		"message": "\u0412\u0456\u0434\u043f\u043e\u0432\u0456\u0434\u0456 \u043d\u0430 \u043f\u043e\u0448\u0438\u0440\u0435\u043d\u0456 \u0437\u0430\u043f\u0438\u0442\u0430\u043d\u043d\u044f: $1 (\u0449\u043e\u0431 \u0432\u0456\u0434\u043a\u0440\u0438\u0442\u0438 \u043f\u043e\u0441\u0438\u043b\u0430\u043d\u043d\u044f, \u043d\u0430\u0442\u0438\u0441\u043d\u0456\u0442\u044c \u0439\u043e\u0433\u043e, \u0443\u0442\u0440\u0438\u043c\u0443\u044e\u0447\u0438 \u043a\u043b\u0430\u0432\u0456\u0448\u0443 ctrl)",
+		"message": "Відповіді на поширені запитання: $1 (щоб відкрити посилання, натисніть його, утримуючи клавішу ctrl)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -253,7 +253,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "\u0412\u0456\u0442\u0430\u0454\u043c\u043e \u0432 \u0434\u043e\u0434\u0430\u0442\u043a\u0443 $1 \u0432\u0435\u0440\u0441\u0456\u0457 $2.",
+		"message": "Вітаємо в додатку $1 версії $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "\u0412\u0438\u0431\u0435\u0440\u0456\u0442\u044c \u043c\u0435\u043d\u044e Chrome -> \u041c\u0430\u0441\u0448\u0442\u0430\u0431 100%"
+		"message": "Виберіть меню Chrome -> Масштаб 100%"
 	}
 }

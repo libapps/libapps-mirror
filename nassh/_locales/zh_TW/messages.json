@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "\u9019\u500b\u6a94\u6848\u7cfb\u7d71\u5df2\u7d93\u639b\u63a5\u3002"
+		"message": "這個檔案系統已經掛接。"
 	},
 	"backup_prefs": {
-		"message": "\u5132\u5b58\u5099\u4efd"
+		"message": "儲存備份"
 	},
 	"bad_destination": {
-		"message": "\u7121\u6cd5\u5256\u6790\u76ee\u7684\u5730\uff1a$1",
+		"message": "無法剖析目的地：$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,25 +14,25 @@
 		}
 	},
 	"before_unload": {
-		"message": "\u95dc\u9589\u9019\u500b\u5206\u9801\u6703\u4f7f\u9019\u500b\u5de5\u4f5c\u968e\u6bb5\u4e2d\u65b7\u9023\u7dda\u3002"
+		"message": "關閉這個分頁會使這個工作階段中斷連線。"
 	},
 	"cancel_button_label": {
-		"message": "\u53d6\u6d88"
+		"message": "取消"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "\u9019\u500b\u6307\u4ee4\u6703\u986f\u793a\u5df2\u77e5\u4e3b\u6a5f\u9078\u55ae\u548c\u8981\u522a\u9664\u7684\u4e3b\u6a5f\u63d0\u793a\u3002"
+		"message": "這個指令會顯示已知主機選單和要刪除的主機提示。"
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "\u522a\u9664\u5df2\u77e5\u7684 SSH \u4e3b\u6a5f\u3002"
+		"message": "刪除已知的 SSH 主機。"
 	},
 	"cmd_ssh_help": {
-		"message": "|username| \u548c |hostname| \u662f\u5fc5\u8981\u53c3\u6578\uff0c|port| \u70ba\u9078\u7528\u53c3\u6578\u3002\u5982\u672a\u6307\u5b9a\u901a\u8a0a\u57e0\uff0c\u5247\u901a\u8a0a\u57e0\u6703\u9810\u8a2d\u70ba 22\u3002"
+		"message": "|username| 和 |hostname| 是必要參數，|port| 為選用參數。如未指定通訊埠，則通訊埠會預設為 22。"
 	},
 	"cmd_ssh_title": {
-		"message": "\u958b\u555f\u65b0\u7684 SSH \u5de5\u4f5c\u968e\u6bb5\u3002"
+		"message": "開啟新的 SSH 工作階段。"
 	},
 	"command_complete": {
-		"message": "$1 \u6307\u4ee4\u7d50\u675f\uff0c\u50b3\u56de $2 \u72c0\u614b\u78bc\u3002",
+		"message": "$1 指令結束，傳回 $2 狀態碼。",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -43,13 +43,13 @@
 		}
 	},
 	"connect_button_label": {
-		"message": "\u9023\u7dda"
+		"message": "連線"
 	},
 	"connect_or_exit_message": {
-		"message": "\u9078\u64c7\u5176\u4ed6\u9023\u7dda(C)\u6216\u7d50\u675f(X)\uff1f"
+		"message": "選擇其他連線(C)或結束(X)？"
 	},
 	"connecting": {
-		"message": "\u6b63\u5728\u9023\u7dda\u81f3 $1...",
+		"message": "正在連線至 $1...",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -60,10 +60,10 @@
 		"message": "[DEL]"
 	},
 	"delete_button_label": {
-		"message": "\u522a\u9664"
+		"message": "刪除"
 	},
 	"disconnect_message": {
-		"message": "NaCl \u5916\u639b\u7a0b\u5f0f\u7d50\u675f\uff0c\u50b3\u56de $1 \u72c0\u614b\u78bc\u3002",
+		"message": "NaCl 外掛程式結束，傳回 $1 狀態碼。",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -74,52 +74,52 @@
 		"message": "[ENTER]"
 	},
 	"field_argstr_aria_label": {
-		"message": "\u5176\u4ed6 ssh \u5f15\u6578"
+		"message": "其他 ssh 引數"
 	},
 	"field_argstr_placeholder": {
-		"message": "\u5176\u4ed6\u547d\u4ee4\u5217\u5f15\u6578"
+		"message": "其他命令列引數"
 	},
 	"field_description_aria_label": {
-		"message": "\u8aaa\u660e"
+		"message": "說明"
 	},
 	"field_description_placeholder": {
-		"message": "<\u4f7f\u7528\u8005\u540d\u7a31>@<\u4e3b\u6a5f\u540d\u7a31> \u6216\u5f62\u5f0f\u4e0d\u62d8\u7684\u6587\u5b57"
+		"message": "<使用者名稱>@<主機名稱> 或形式不拘的文字"
 	},
 	"field_hostname_aria_label": {
-		"message": "\u4e3b\u6a5f\u540d\u7a31"
+		"message": "主機名稱"
 	},
 	"field_hostname_placeholder": {
-		"message": "\u4e3b\u6a5f\u540d\u7a31"
+		"message": "主機名稱"
 	},
 	"field_identity_aria_label": {
-		"message": "\u8eab\u5206"
+		"message": "身分"
 	},
 	"field_port_aria_label": {
-		"message": "\u901a\u8a0a\u57e0"
+		"message": "通訊埠"
 	},
 	"field_port_placeholder": {
-		"message": "\u901a\u8a0a\u57e0"
+		"message": "通訊埠"
 	},
 	"field_relay_options_aria_label": {
-		"message": "\u8f49\u9001\u9078\u9805"
+		"message": "轉送選項"
 	},
 	"field_relay_options_placeholder": {
-		"message": "\u8f49\u9001\u9078\u9805"
+		"message": "轉送選項"
 	},
 	"field_terminal_profile_aria_label": {
-		"message": "\u7d42\u7aef\u6a5f\u8a2d\u5b9a\u6a94\u540d\u7a31"
+		"message": "終端機設定檔名稱"
 	},
 	"field_terminal_profile_placeholder": {
-		"message": "\u9810\u8a2d"
+		"message": "預設"
 	},
 	"field_username_aria_label": {
-		"message": "\u4f7f\u7528\u8005\u540d\u7a31"
+		"message": "使用者名稱"
 	},
 	"field_username_placeholder": {
-		"message": "\u4f7f\u7528\u8005\u540d\u7a31"
+		"message": "使用者名稱"
 	},
 	"found_relay": {
-		"message": "\u627e\u5230\u8f49\u9001\u4f3a\u670d\u5668\uff1a$1",
+		"message": "找到轉送伺服器：$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -127,16 +127,16 @@
 		}
 	},
 	"identity_label": {
-		"message": "\u8eab\u5206"
+		"message": "身分"
 	},
 	"import_link_aria_label": {
-		"message": "\u532f\u5165\u6a94\u6848"
+		"message": "匯入檔案"
 	},
 	"import_link_label": {
-		"message": "\u532f\u5165..."
+		"message": "匯入..."
 	},
 	"initializing_relay": {
-		"message": "\u4f7f\u7528 $1 \u67e5\u8a62\u8f49\u9001\u4f3a\u670d\u5668",
+		"message": "使用 $1 查詢轉送伺服器",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -144,7 +144,7 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "\u7121\u6cd5\u5256\u6790\u300c$1\u300d\u4e2d\u7684 JSON",
+		"message": "無法剖析「$1」中的 JSON",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "\u6c92\u6709\u4efb\u4f55\u53ef\u522a\u9664\u7684\u5df2\u77e5\u4e3b\u6a5f\u3002"
+		"message": "沒有任何可刪除的已知主機。"
 	},
 	"known_hosts_prompt": {
-		"message": "\u8acb\u9078\u53d6\u8981\u522a\u9664\u7684\u4e3b\u6a5f [1-$1]\uff1a",
+		"message": "請選取要刪除的主機 [1-$1]：",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -163,13 +163,13 @@
 		}
 	},
 	"known_hosts_title": {
-		"message": "\u5df2\u77e5\u7684\u4e3b\u6a5f\uff1a"
+		"message": "已知的主機："
 	},
 	"loading_label": {
-		"message": "\u8f09\u5165\u4e2d\u2026"
+		"message": "載入中…"
 	},
 	"missing_param": {
-		"message": "\u627e\u4e0d\u5230\u4e0b\u5217\u53c3\u6578\uff1a$1",
+		"message": "找不到下列參數：$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -177,19 +177,19 @@
 		}
 	},
 	"mount_button_label": {
-		"message": "SFTP \u639b\u63a5"
+		"message": "SFTP 掛接"
 	},
 	"mounted_message": {
-		"message": "\u5df2\u639b\u63a5\uff01"
+		"message": "已掛接！"
 	},
 	"notify_copy": {
-		"message": "\u5df2\u8907\u88fd\u6240\u9078\u5167\u5bb9"
+		"message": "已複製所選內容"
 	},
 	"ok_button_label": {
-		"message": "\u78ba\u5b9a"
+		"message": "確定"
 	},
 	"open_as_window_tip": {
-		"message": "[\u5be6\u7528\u79d8\u8a23] \u4f7f\u7528 [\u5728\u8996\u7a97\u4e2d\u958b\u555f] \u53ef\u78ba\u4fdd\u6309\u4e0b Ctrl + W \u9375\u6642\u4e0d\u6703\u95dc\u9589\u7d42\u7aef\u6a5f\uff01\n[\u5be6\u7528\u79d8\u8a23] \u8a73\u60c5\u8acb\u53c3\u95b1 $1\u3002",
+		"message": "[實用秘訣] 使用 [在視窗中開啟] 可確保按下 Ctrl + W 鍵時不會關閉終端機！\n[實用秘訣] 詳情請參閱 $1。",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -197,55 +197,55 @@
 		}
 	},
 	"options_button_label": {
-		"message": "\u9078\u9805"
+		"message": "選項"
 	},
 	"plugin_loading": {
-		"message": "\u6b63\u5728\u8f09\u5165 NaCl \u5916\u639b\u7a0b\u5f0f..."
+		"message": "正在載入 NaCl 外掛程式..."
 	},
 	"plugin_loading_complete": {
-		"message": "\u5b8c\u6210\u3002"
+		"message": "完成。"
 	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
 	"preferences_header": {
-		"message": "\u8a2d\u5b9a\u6a94\u8a2d\u5b9a"
+		"message": "設定檔設定"
 	},
 	"preferences_reset": {
-		"message": "\u91cd\u8a2d\u6240\u6709\u504f\u597d\u8a2d\u5b9a\uff01"
+		"message": "重設所有偏好設定！"
 	},
 	"reconnect_message": {
-		"message": "\u91cd\u65b0\u9023\u7dda(R)\u3001\u9078\u64c7\u5176\u4ed6\u9023\u7dda(C)\u6216\u7d50\u675f(X)\uff1f"
+		"message": "重新連線(R)、選擇其他連線(C)或結束(X)？"
 	},
 	"relay_retry": {
-		"message": "\u91cd\u8a66\u4e2d..."
+		"message": "重試中..."
 	},
 	"restore_prefs": {
-		"message": "\u9084\u539f\u5099\u4efd\u5167\u5bb9"
+		"message": "還原備份內容"
 	},
 	"shortcut_list_aria_label": {
-		"message": "\u5df2\u5132\u5b58\u7684\u9023\u7dda"
+		"message": "已儲存的連線"
 	},
 	"ssh_argstr_label": {
-		"message": "SSH \u5f15\u6578"
+		"message": "SSH 引數"
 	},
 	"terminal_preview_label": {
-		"message": "\u9810\u89bd"
+		"message": "預覽"
 	},
 	"terminal_profile_label": {
-		"message": "\u76ee\u524d\u7684\u8a2d\u5b9a\u6a94"
+		"message": "目前的設定檔"
 	},
 	"unexpected_error": {
-		"message": "\u767c\u751f\u672a\u9810\u671f\u7684\u932f\u8aa4\uff0c\u8acb\u67e5\u770b JavaScript \u63a7\u5236\u53f0\u77ad\u89e3\u8a73\u60c5\u3002"
+		"message": "發生未預期的錯誤，請查看 JavaScript 控制台瞭解詳情。"
 	},
 	"unmount_button_label": {
-		"message": "\u5378\u8f09 SFTP"
+		"message": "卸載 SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "\u6709\u53ef\u7528\u7684\u66f4\u65b0\uff0c\u8acb\u95dc\u9589\u6240\u6709\u8996\u7a97\u3002"
+		"message": "有可用的更新，請關閉所有視窗。"
 	},
 	"welcome_faq": {
-		"message": "\u5e38\u898b\u554f\u984c\u89e3\u7b54\uff1a$1 (\u6309\u4f4f Ctrl \u9375\u4e26\u9ede\u9078\u9023\u7d50\u5373\u53ef\u958b\u555f\u7db2\u5740)",
+		"message": "常見問題解答：$1 (按住 Ctrl 鍵並點選連結即可開啟網址)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -253,7 +253,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "\u6b61\u8fce\u4f7f\u7528 $1 $2 \u7248\u3002",
+		"message": "歡迎使用 $1 $2 版。",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "\u8acb\u8a2d\u5b9a Chrome \u9078\u55ae -> [\u7e2e\u653e\u5230 100%]"
+		"message": "請設定 Chrome 選單 -> [縮放到 100%]"
 	}
 }

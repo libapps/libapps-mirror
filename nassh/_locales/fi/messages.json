@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "Tiedostoj\u00e4rjestelm\u00e4 on jo k\u00e4yt\u00f6ss\u00e4."
+		"message": "Tiedostojärjestelmä on jo käytössä."
 	},
 	"backup_prefs": {
 		"message": "Tallenna varmuuskopio"
 	},
 	"bad_destination": {
-		"message": "Kohteen $1 j\u00e4sent\u00e4minen ep\u00e4onnistui.",
+		"message": "Kohteen $1 jäsentäminen epäonnistui.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,19 +14,19 @@
 		}
 	},
 	"before_unload": {
-		"message": "Jos suljet t\u00e4m\u00e4n v\u00e4lilehden, k\u00e4ytt\u00f6kerta p\u00e4\u00e4ttyy."
+		"message": "Jos suljet tämän välilehden, käyttökerta päättyy."
 	},
 	"cancel_button_label": {
 		"message": "Peruuta"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "T\u00e4m\u00e4 komento n\u00e4ytt\u00e4\u00e4 tunnettujen is\u00e4ntien luettelon ja kysyy unohtamista is\u00e4nn\u00e4lt\u00e4."
+		"message": "Tämä komento näyttää tunnettujen isäntien luettelon ja kysyy unohtamista isännältä."
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "Unohda tunnettu ssh-is\u00e4nt\u00e4."
+		"message": "Unohda tunnettu ssh-isäntä."
 	},
 	"cmd_ssh_help": {
-		"message": "|username|- ja |hostname|-parametrit ovat pakollisia, |port| on valinnainen. Jos porttia ei ole m\u00e4\u00e4ritetty, k\u00e4ytet\u00e4\u00e4n oletusporttia 22."
+		"message": "|username|- ja |hostname|-parametrit ovat pakollisia, |port| on valinnainen. Jos porttia ei ole määritetty, käytetään oletusporttia 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Avaa uuden SSH-istunnon."
@@ -43,13 +43,13 @@
 		}
 	},
 	"connect_button_label": {
-		"message": "Yhdist\u00e4"
+		"message": "Yhdistä"
 	},
 	"connect_or_exit_message": {
 		"message": "Haluatko valita toisen yhteystavan (c) vai poistua (x)?"
 	},
 	"connecting": {
-		"message": "Yhdistet\u00e4\u00e4n kohteeseen $1\u2026",
+		"message": "Yhdistetään kohteeseen $1…",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -83,13 +83,13 @@
 		"message": "kuvaus"
 	},
 	"field_description_placeholder": {
-		"message": "k\u00e4ytt\u00e4j\u00e4tunnus@is\u00e4nt\u00e4nimi tai vapaamuotoinen teksti"
+		"message": "käyttäjätunnus@isäntänimi tai vapaamuotoinen teksti"
 	},
 	"field_hostname_aria_label": {
-		"message": "is\u00e4nt\u00e4nimi"
+		"message": "isäntänimi"
 	},
 	"field_hostname_placeholder": {
-		"message": "is\u00e4nt\u00e4nimi"
+		"message": "isäntänimi"
 	},
 	"field_identity_aria_label": {
 		"message": "identiteetti"
@@ -101,10 +101,10 @@
 		"message": "portti"
 	},
 	"field_relay_options_aria_label": {
-		"message": "v\u00e4litysvaihtoehdot"
+		"message": "välitysvaihtoehdot"
 	},
 	"field_relay_options_placeholder": {
-		"message": "v\u00e4litysvaihtoehdot"
+		"message": "välitysvaihtoehdot"
 	},
 	"field_terminal_profile_aria_label": {
 		"message": "terminaalin profiilinimi"
@@ -113,13 +113,13 @@
 		"message": "oletus"
 	},
 	"field_username_aria_label": {
-		"message": "k\u00e4ytt\u00e4j\u00e4nimi"
+		"message": "käyttäjänimi"
 	},
 	"field_username_placeholder": {
-		"message": "k\u00e4ytt\u00e4j\u00e4nimi"
+		"message": "käyttäjänimi"
 	},
 	"found_relay": {
-		"message": "L\u00f6ydetty v\u00e4lityspalvelin: $1",
+		"message": "Löydetty välityspalvelin: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -133,10 +133,10 @@
 		"message": "tiedostojen tuonti"
 	},
 	"import_link_label": {
-		"message": "Tuo\u2026"
+		"message": "Tuo…"
 	},
 	"initializing_relay": {
-		"message": "$1 etsii v\u00e4lityspalvelinta",
+		"message": "$1 etsii välityspalvelinta",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -144,7 +144,7 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "JSON-tiedoston j\u00e4sent\u00e4minen kohteessa $1 ep\u00e4onnistui.",
+		"message": "JSON-tiedoston jäsentäminen kohteessa $1 epäonnistui.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "Ei tunnettuja is\u00e4nti\u00e4."
+		"message": "Ei tunnettuja isäntiä."
 	},
 	"known_hosts_prompt": {
-		"message": "Valitse unohdettava is\u00e4nt\u00e4 [1\u2013$1]:",
+		"message": "Valitse unohdettava isäntä [1–$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -163,10 +163,10 @@
 		}
 	},
 	"known_hosts_title": {
-		"message": "Tunnetut is\u00e4nn\u00e4t:"
+		"message": "Tunnetut isännät:"
 	},
 	"loading_label": {
-		"message": "Ladataan\u2026"
+		"message": "Ladataan…"
 	},
 	"missing_param": {
 		"message": "Puuttuva parametri: $1",
@@ -177,10 +177,10 @@
 		}
 	},
 	"mount_button_label": {
-		"message": "SFTP-k\u00e4ytt\u00f6\u00f6notto"
+		"message": "SFTP-käyttöönotto"
 	},
 	"mounted_message": {
-		"message": "K\u00e4yt\u00f6ss\u00e4"
+		"message": "Käytössä"
 	},
 	"notify_copy": {
 		"message": "Valinta kopioitu"
@@ -189,7 +189,7 @@
 		"message": "OK"
 	},
 	"open_as_window_tip": {
-		"message": "[Pro-vinkki] Kun k\u00e4yt\u00e4t Avaa ikkunassa \u2011toimintoa, Control-W ei sulje terminaalia.\n[Pro-vinkki] Lue lis\u00e4\u00e4 osoitteessa $1.",
+		"message": "[Pro-vinkki] Kun käytät Avaa ikkunassa ‑toimintoa, Control-W ei sulje terminaalia.\n[Pro-vinkki] Lue lisää osoitteessa $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -215,10 +215,10 @@
 		"message": "Asetukset nollattu"
 	},
 	"reconnect_message": {
-		"message": "Haluatko yhdist\u00e4\u00e4 uudelleen (r), valita toisen yhteystavan (c) vai poistua (x)?"
+		"message": "Haluatko yhdistää uudelleen (r), valita toisen yhteystavan (c) vai poistua (x)?"
 	},
 	"relay_retry": {
-		"message": "Yritet\u00e4\u00e4n uudelleen\u2026"
+		"message": "Yritetään uudelleen…"
 	},
 	"restore_prefs": {
 		"message": "Palauta varmuuskopiosta"
@@ -236,13 +236,13 @@
 		"message": "Nykyinen profiili"
 	},
 	"unexpected_error": {
-		"message": "Tapahtui odottamaton virhe. Katso lis\u00e4tietoja JavaScript-konsolista."
+		"message": "Tapahtui odottamaton virhe. Katso lisätietoja JavaScript-konsolista."
 	},
 	"unmount_button_label": {
-		"message": "Poista SFTP k\u00e4yt\u00f6st\u00e4"
+		"message": "Poista SFTP käytöstä"
 	},
 	"update_available_tooltip": {
-		"message": "P\u00e4ivitys on saatavilla. Sulje kaikki ikkunat."
+		"message": "Päivitys on saatavilla. Sulje kaikki ikkunat."
 	},
 	"welcome_faq": {
 		"message": "Vastauksia usein kysyttyihin kysymyksiin: $1 (Avaa linkit Ctrl-klikkaamalla)",
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "Aseta Chrome-valikossa zoomin arvoksi 100\u00a0%."
+		"message": "Aseta Chrome-valikossa zoomin arvoksi 100 %."
 	}
 }

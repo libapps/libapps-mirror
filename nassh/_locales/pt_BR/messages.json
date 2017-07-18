@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "O sistema de arquivos j\u00e1 est\u00e1 ativado."
+		"message": "O sistema de arquivos já está ativado."
 	},
 	"backup_prefs": {
 		"message": "Salvar backup"
 	},
 	"bad_destination": {
-		"message": "N\u00e3o foi poss\u00edvel analisar o destino: $1",
+		"message": "Não foi possível analisar o destino: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,7 +14,7 @@
 		}
 	},
 	"before_unload": {
-		"message": "Fechar esta guia ir\u00e1 desconectar esta sess\u00e3o."
+		"message": "Fechar esta guia irá desconectar esta sessão."
 	},
 	"cancel_button_label": {
 		"message": "Cancelar"
@@ -26,13 +26,13 @@
 		"message": "Esquecer um host ssh conhecido."
 	},
 	"cmd_ssh_help": {
-		"message": "Os par\u00e2metros |username| e |hostname| s\u00e3o obrigat\u00f3rios, |port| \u00e9 opcional. Se a porta n\u00e3o for especificada, o padr\u00e3o ser\u00e1 22."
+		"message": "Os parâmetros |username| e |hostname| são obrigatórios, |port| é opcional. Se a porta não for especificada, o padrão será 22."
 	},
 	"cmd_ssh_title": {
-		"message": "Abre uma nova sess\u00e3o SSH."
+		"message": "Abre uma nova sessão SSH."
 	},
 	"command_complete": {
-		"message": "O comando $1 foi fechado com o c\u00f3digo de status $2.",
+		"message": "O comando $1 foi fechado com o código de status $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -46,10 +46,10 @@
 		"message": "Conectar"
 	},
 	"connect_or_exit_message": {
-		"message": "Es(c)olher outra conex\u00e3o ou (s)air?"
+		"message": "Es(c)olher outra conexão ou (s)air?"
 	},
 	"connecting": {
-		"message": "Conectando-se a $1\u2026",
+		"message": "Conectando-se a $1…",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -63,7 +63,7 @@
 		"message": "Excluir"
 	},
 	"disconnect_message": {
-		"message": "Plug-in NaCl fechado com o c\u00f3digo de status $1.",
+		"message": "Plug-in NaCl fechado com o código de status $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -80,10 +80,10 @@
 		"message": "argumentos de linha de comando extra"
 	},
 	"field_description_aria_label": {
-		"message": "descri\u00e7\u00e3o"
+		"message": "descrição"
 	},
 	"field_description_placeholder": {
-		"message": "nomedeusu\u00e1rio@nomedohost ou texto de forma livre"
+		"message": "nomedeusuário@nomedohost ou texto de forma livre"
 	},
 	"field_hostname_aria_label": {
 		"message": "nome do host"
@@ -101,22 +101,22 @@
 		"message": "porta"
 	},
 	"field_relay_options_aria_label": {
-		"message": "op\u00e7\u00f5es de relay"
+		"message": "opções de relay"
 	},
 	"field_relay_options_placeholder": {
-		"message": "op\u00e7\u00f5es de relay"
+		"message": "opções de relay"
 	},
 	"field_terminal_profile_aria_label": {
 		"message": "nome do perfil do terminal"
 	},
 	"field_terminal_profile_placeholder": {
-		"message": "padr\u00e3o"
+		"message": "padrão"
 	},
 	"field_username_aria_label": {
-		"message": "nome de usu\u00e1rio"
+		"message": "nome de usuário"
 	},
 	"field_username_placeholder": {
-		"message": "nome de usu\u00e1rio"
+		"message": "nome de usuário"
 	},
 	"found_relay": {
 		"message": "Servidor relay encontrado: $1",
@@ -130,7 +130,7 @@
 		"message": "Identidade"
 	},
 	"import_link_aria_label": {
-		"message": "importa\u00e7\u00e3o de arquivos"
+		"message": "importação de arquivos"
 	},
 	"import_link_label": {
 		"message": "Importar..."
@@ -144,7 +144,7 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "N\u00e3o foi poss\u00edvel analisar o JSON em \"$1\"",
+		"message": "Não foi possível analisar o JSON em \"$1\"",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,7 +152,7 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "N\u00e3o h\u00e1 hosts conhecidos, nada a esquecer."
+		"message": "Não há hosts conhecidos, nada a esquecer."
 	},
 	"known_hosts_prompt": {
 		"message": "Selecione um host para esquecer [1-$1]:",
@@ -169,7 +169,7 @@
 		"message": "Carregando..."
 	},
 	"missing_param": {
-		"message": "Faltando par\u00e2metro: $1",
+		"message": "Faltando parâmetro: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -183,13 +183,13 @@
 		"message": "Ativado."
 	},
 	"notify_copy": {
-		"message": "Sele\u00e7\u00e3o copiada"
+		"message": "Seleção copiada"
 	},
 	"ok_button_label": {
 		"message": "OK"
 	},
 	"open_as_window_tip": {
-		"message": "[Dica profissional] Use \"Abrir como janela\" para impedir que Ctrl + W feche seu terminal.\n[Dica profissional] Consulte $1 para ver mais informa\u00e7\u00f5es.",
+		"message": "[Dica profissional] Use \"Abrir como janela\" para impedir que Ctrl + W feche seu terminal.\n[Dica profissional] Consulte $1 para ver mais informações.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -197,25 +197,25 @@
 		}
 	},
 	"options_button_label": {
-		"message": "Op\u00e7\u00f5es"
+		"message": "Opções"
 	},
 	"plugin_loading": {
 		"message": "Carregando plugin NaCl ..."
 	},
 	"plugin_loading_complete": {
-		"message": " conclu\u00eddo."
+		"message": " concluído."
 	},
 	"pref_backup_filename": {
-		"message": "Proteger prefer\u00eancias de Shell Backup.json"
+		"message": "Proteger preferências de Shell Backup.json"
 	},
 	"preferences_header": {
-		"message": "Configura\u00e7\u00f5es do perfil"
+		"message": "Configurações do perfil"
 	},
 	"preferences_reset": {
-		"message": "Todas as prefer\u00eancias foram redefinidas."
+		"message": "Todas as preferências foram redefinidas."
 	},
 	"reconnect_message": {
-		"message": "(R)econectar, es(c)olher outra conex\u00e3o ou (s)air?"
+		"message": "(R)econectar, es(c)olher outra conexão ou (s)air?"
 	},
 	"relay_retry": {
 		"message": "Tentando novamente..."
@@ -224,7 +224,7 @@
 		"message": "Restaurar backup"
 	},
 	"shortcut_list_aria_label": {
-		"message": "conex\u00f5es salvas"
+		"message": "conexões salvas"
 	},
 	"ssh_argstr_label": {
 		"message": "Argumentos SSH"
@@ -242,7 +242,7 @@
 		"message": "Desativar SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "Uma atualiza\u00e7\u00e3o est\u00e1 dispon\u00edvel. Feche todas as janelas."
+		"message": "Uma atualização está disponível. Feche todas as janelas."
 	},
 	"welcome_faq": {
 		"message": "Respostas a perguntas frequentes: $1 (pressione Ctrl e clique nos links para abrir)",
@@ -253,7 +253,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "Bem-vindo \u00e0 vers\u00e3o $2 de $1.",
+		"message": "Bem-vindo à versão $2 de $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"

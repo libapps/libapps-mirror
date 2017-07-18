@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "Datote\u010dni sistem je \u017ee vpet."
+		"message": "Datotečni sistem je že vpet."
 	},
 	"backup_prefs": {
 		"message": "Shranjevanje varnostne kopije"
 	},
 	"bad_destination": {
-		"message": "Cilja ni mogo\u010de raz\u010dleniti: $1",
+		"message": "Cilja ni mogoče razčleniti: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,19 +14,19 @@
 		}
 	},
 	"before_unload": {
-		"message": "\u010ce zaprete ta zavihek, boste prekinili to sejo."
+		"message": "Če zaprete ta zavihek, boste prekinili to sejo."
 	},
 	"cancel_button_label": {
-		"message": "Prekli\u010di"
+		"message": "Prekliči"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "Ta ukaz prika\u017ee meni znanih gostiteljev in vas vpra\u0161a, katerega naj pozabi."
+		"message": "Ta ukaz prikaže meni znanih gostiteljev in vas vpraša, katerega naj pozabi."
 	},
 	"cmd_ssh_forget_host_title": {
 		"message": "Pozabi znanega gostitelja ssh."
 	},
 	"cmd_ssh_help": {
-		"message": "Parametra |username| in |hostname| sta obvezna, |port| je izbiren. \u010ce ne navedete \u0161tevilke vrat, se privzeto uporabi 22."
+		"message": "Parametra |username| in |hostname| sta obvezna, |port| je izbiren. Če ne navedete številke vrat, se privzeto uporabi 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Odpre novo sejo SSH."
@@ -43,10 +43,10 @@
 		}
 	},
 	"connect_button_label": {
-		"message": "Pove\u017ei"
+		"message": "Poveži"
 	},
 	"connect_or_exit_message": {
-		"message": "\u017delite izbrati drugo povezavo (C) ali zapreti (X)?"
+		"message": "Želite izbrati drugo povezavo (C) ali zapreti (X)?"
 	},
 	"connecting": {
 		"message": "Vzpostavljanje povezave z gostiteljem $1 ...",
@@ -60,10 +60,10 @@
 		"message": "[DEL]"
 	},
 	"delete_button_label": {
-		"message": "Izbri\u0161i"
+		"message": "Izbriši"
 	},
 	"disconnect_message": {
-		"message": "Vti\u010dnik NaCl se je zaprl s kodo stanja $1.",
+		"message": "Vtičnik NaCl se je zaprl s kodo stanja $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -101,10 +101,10 @@
 		"message": "vrata"
 	},
 	"field_relay_options_aria_label": {
-		"message": "mo\u017enosti posredovanja"
+		"message": "možnosti posredovanja"
 	},
 	"field_relay_options_placeholder": {
-		"message": "mo\u017enosti posredovanja"
+		"message": "možnosti posredovanja"
 	},
 	"field_terminal_profile_aria_label": {
 		"message": "ime terminalskega profila"
@@ -113,13 +113,13 @@
 		"message": "privzeto"
 	},
 	"field_username_aria_label": {
-		"message": "uporabni\u0161ko ime"
+		"message": "uporabniško ime"
 	},
 	"field_username_placeholder": {
-		"message": "uporabni\u0161ko ime"
+		"message": "uporabniško ime"
 	},
 	"found_relay": {
-		"message": "Stre\u017enik za posredovanje je bil najden: $1",
+		"message": "Strežnik za posredovanje je bil najden: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -136,7 +136,7 @@
 		"message": "Uvozi ..."
 	},
 	"initializing_relay": {
-		"message": "Iskanje stre\u017enika za posredovanje s tem: $1",
+		"message": "Iskanje strežnika za posredovanje s tem: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -144,7 +144,7 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "JSON-a v \u00bb$1\u00ab ni bilo mogo\u010de raz\u010dleniti",
+		"message": "JSON-a v »$1« ni bilo mogoče razčleniti",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "Ni znanih gostiteljev, zato ni mogo\u010de ni\u010desar pozabiti."
+		"message": "Ni znanih gostiteljev, zato ni mogoče ničesar pozabiti."
 	},
 	"known_hosts_prompt": {
-		"message": "Izberite gostitelja, ki ga \u017eelite pozabiti [1\u2013$1]:",
+		"message": "Izberite gostitelja, ki ga želite pozabiti [1–$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -189,7 +189,7 @@
 		"message": "V redu"
 	},
 	"open_as_window_tip": {
-		"message": "[Nasvet strokovnjaka] \u00bbUporabite ukaz \u00bbOdpri kot okno\u00ab, \u010de \u017eelite, da se z bli\u017enjico \u00bbCTRL + W\u00ab ne zapre terminal.\n[Nasvet strokovnjaka] Na $1 poi\u0161\u010dite ve\u010d informacij.",
+		"message": "[Nasvet strokovnjaka] »Uporabite ukaz »Odpri kot okno«, če želite, da se z bližnjico »CTRL + W« ne zapre terminal.\n[Nasvet strokovnjaka] Na $1 poiščite več informacij.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -197,13 +197,13 @@
 		}
 	},
 	"options_button_label": {
-		"message": "Mo\u017enosti"
+		"message": "Možnosti"
 	},
 	"plugin_loading": {
-		"message": "Nalaganje vti\u010dnika NaCl ..."
+		"message": "Nalaganje vtičnika NaCl ..."
 	},
 	"plugin_loading_complete": {
-		"message": " kon\u010dano."
+		"message": " končano."
 	},
 	"pref_backup_filename": {
 		"message": "Varnostna kopija nastavitev varne lupine.json"
@@ -215,10 +215,10 @@
 		"message": "Vse nastavitve so ponastavljene."
 	},
 	"reconnect_message": {
-		"message": "\u017delite znova vzpostaviti povezavo (R), izbrati drugo povezavo (C) ali zapreti (X)?"
+		"message": "Želite znova vzpostaviti povezavo (R), izbrati drugo povezavo (C) ali zapreti (X)?"
 	},
 	"relay_retry": {
-		"message": "Vnovi\u010den poskus ..."
+		"message": "Vnovičen poskus ..."
 	},
 	"restore_prefs": {
 		"message": "Obnovitev varnostne kopije"
@@ -236,7 +236,7 @@
 		"message": "Trenutni profil"
 	},
 	"unexpected_error": {
-		"message": "Nepri\u010dakovana napaka. Podrobnosti najdete v konzoli za JavaScript."
+		"message": "Nepričakovana napaka. Podrobnosti najdete v konzoli za JavaScript."
 	},
 	"unmount_button_label": {
 		"message": "Izpetje SFTP-ja"
@@ -245,7 +245,7 @@
 		"message": "Na voljo je posodobitev. Zaprite vsa okna."
 	},
 	"welcome_faq": {
-		"message": "Odgovori na pogosta vpra\u0161anja: $1 (pritisnite tipko CTRL in kliknite povezave, \u010de jih \u017eelite odpreti)",
+		"message": "Odgovori na pogosta vprašanja: $1 (pritisnite tipko CTRL in kliknite povezave, če jih želite odpreti)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -253,7 +253,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "Pozdravljeni v aplikaciji $1 razli\u010dice $2.",
+		"message": "Pozdravljeni v aplikaciji $1 različice $2.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "Nastavite pove\u010davo v Chromovem meniju na 100 %"
+		"message": "Nastavite povečavo v Chromovem meniju na 100 %"
 	}
 }

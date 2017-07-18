@@ -1,12 +1,12 @@
 {
 	"already_mounted_message": {
-		"message": "\u092b\u093c\u093e\u0907\u0932 \u0938\u093f\u0938\u094d\u091f\u092e \u092a\u0939\u0932\u0947 \u0938\u0947 \u092e\u093e\u0909\u0902\u091f \u0915\u093f\u092f\u093e \u0939\u0941\u0906 \u0939\u0948!"
+		"message": "फ़ाइल सिस्टम पहले से माउंट किया हुआ है!"
 	},
 	"backup_prefs": {
-		"message": "\u092c\u0948\u0915\u0905\u092a \u0938\u0939\u0947\u091c\u0947\u0902"
+		"message": "बैकअप सहेजें"
 	},
 	"bad_destination": {
-		"message": "\u0917\u0902\u0924\u0935\u094d\u092f \u0915\u094b \u092a\u093e\u0930\u094d\u0938 \u0915\u0930\u0928\u0947 \u092e\u0947\u0902 \u0905\u0938\u092e\u0930\u094d\u0925: $1",
+		"message": "गंतव्य को पार्स करने में असमर्थ: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -14,25 +14,25 @@
 		}
 	},
 	"before_unload": {
-		"message": "\u0907\u0938 \u091f\u0948\u092c \u0915\u094b \u092c\u0902\u0926 \u0915\u0930\u0928\u0947 \u0938\u0947 \u092f\u0939 \u0938\u0924\u094d\u0930 \u092c\u093e\u0927\u093f\u0924 \u0939\u094b \u091c\u093e\u090f\u0917\u093e."
+		"message": "इस टैब को बंद करने से यह सत्र बाधित हो जाएगा."
 	},
 	"cancel_button_label": {
-		"message": "\u0905\u092d\u0940 \u0928\u0939\u0940\u0902"
+		"message": "अभी नहीं"
 	},
 	"cmd_ssh_forget_host_help": {
-		"message": "\u092f\u200d\u0939 \u0906\u0926\u0947\u0936 \u092d\u0942\u0932\u0928\u0947 \u0935\u093e\u0932\u0947 \u0939\u094b\u0938\u094d\u200d\u091f \u0915\u0947 \u0932\u093f\u090f \u091c\u094d\u091e\u093e\u0924 \u0939\u094b\u0938\u094d\u200d\u091f \u0914\u0930 \u0938\u0902\u0915\u0947\u0924\u094b\u0902 \u0915\u093e \u090f\u0915 \u092e\u0947\u0928\u0942 \u092a\u094d\u0930\u0926\u0930\u094d\u0936\u093f\u0924 \u0915\u0930\u0924\u093e \u0939\u0948."
+		"message": "य‍ह आदेश भूलने वाले होस्‍ट के लिए ज्ञात होस्‍ट और संकेतों का एक मेनू प्रदर्शित करता है."
 	},
 	"cmd_ssh_forget_host_title": {
-		"message": "\u091c\u094d\u091e\u093e\u0924 ssh \u0939\u094b\u0938\u094d\u091f \u0915\u094b \u092d\u0942\u0932\u0947\u0902."
+		"message": "ज्ञात ssh होस्ट को भूलें."
 	},
 	"cmd_ssh_help": {
-		"message": "|username| \u0914\u0930 |hostname| \u092a\u0948\u0930\u093e\u092e\u0940\u091f\u0930 \u0906\u0935\u0936\u094d\u200d\u092f\u0915 \u0939\u0948\u0902, |port| \u0935\u0948\u0915\u0932\u094d\u092a\u093f\u0915 \u0939\u0948. \u092f\u0926\u093f \u092a\u094b\u0930\u094d\u091f \u0928\u093f\u0930\u094d\u0926\u093f\u0937\u094d\u091f \u0928 \u0915\u093f\u092f\u093e \u0917\u092f\u093e \u0939\u094b \u0924\u094b \u092f\u0939 \u0921\u093f\u092b\u093c\u0949\u0932\u094d\u200d\u091f \u0930\u0942\u092a \u0938\u0947 22 \u0939\u094b\u0924\u093e \u0939\u0948."
+		"message": "|username| और |hostname| पैरामीटर आवश्‍यक हैं, |port| वैकल्पिक है. यदि पोर्ट निर्दिष्ट न किया गया हो तो यह डिफ़ॉल्‍ट रूप से 22 होता है."
 	},
 	"cmd_ssh_title": {
-		"message": "\u0928\u092f\u093e SSH \u0938\u0924\u094d\u0930 \u0916\u094b\u0932\u0924\u093e \u0939\u0948."
+		"message": "नया SSH सत्र खोलता है."
 	},
 	"command_complete": {
-		"message": "\u0906\u0926\u0947\u0936 $1 \u0938\u094d\u0925\u093f\u0924\u093f \u0915\u094b\u0921 $2 \u0915\u0947 \u0938\u093e\u0925 \u092c\u093e\u0939\u0930 \u0939\u094b \u0917\u092f\u093e.",
+		"message": "आदेश $1 स्थिति कोड $2 के साथ बाहर हो गया.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -43,13 +43,13 @@
 		}
 	},
 	"connect_button_label": {
-		"message": "\u0915\u0928\u0947\u0915\u094d\u091f \u0915\u0930\u0947\u0902"
+		"message": "कनेक्ट करें"
 	},
 	"connect_or_exit_message": {
-		"message": "\u0915\u094b\u0908 \u0926\u0942\u0938\u0930\u093e \u0915\u0928\u0947\u0915\u094d\u0936\u0928 \u091a\u0941\u0928\u0947\u0902 \u092f\u093e \u092c\u093e\u0939\u0930 \u0928\u093f\u0915\u0932\u0947\u0902?"
+		"message": "कोई दूसरा कनेक्शन चुनें या बाहर निकलें?"
 	},
 	"connecting": {
-		"message": "$1 \u0938\u0947 \u0915\u0928\u0947\u0915\u094d\u091f \u0915\u093f\u092f\u093e \u091c\u093e \u0930\u0939\u093e \u0939\u0948...",
+		"message": "$1 से कनेक्ट किया जा रहा है...",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -60,10 +60,10 @@
 		"message": "[DEL]"
 	},
 	"delete_button_label": {
-		"message": "\u0939\u091f\u093e\u090f\u0902"
+		"message": "हटाएं"
 	},
 	"disconnect_message": {
-		"message": "NaCl \u092a\u094d\u0932\u0917 \u0907\u0928 \u0938\u094d\u0925\u093f\u0924\u093f \u0915\u094b\u0921 $1 \u0915\u0947 \u0938\u093e\u0925 \u092c\u093e\u0939\u0930 \u0939\u094b \u0917\u092f\u093e.",
+		"message": "NaCl प्लग इन स्थिति कोड $1 के साथ बाहर हो गया.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -74,52 +74,52 @@
 		"message": "[ENTER]"
 	},
 	"field_argstr_aria_label": {
-		"message": "\u0905\u0924\u093f\u0930\u093f\u0915\u094d\u0924 ssh \u0924\u0930\u094d\u0915"
+		"message": "अतिरिक्त ssh तर्क"
 	},
 	"field_argstr_placeholder": {
-		"message": "\u0905\u0924\u093f\u0930\u093f\u0915\u094d\u0924 \u0906\u0926\u0947\u0936 \u0932\u093e\u0907\u0928 \u0924\u0930\u094d\u0915"
+		"message": "अतिरिक्त आदेश लाइन तर्क"
 	},
 	"field_description_aria_label": {
-		"message": "\u0935\u0930\u094d\u0923\u0928"
+		"message": "वर्णन"
 	},
 	"field_description_placeholder": {
-		"message": "username@hostname \u092f\u093e \u092e\u0941\u0915\u094d\u0924 \u092a\u094d\u0930\u093e\u0930\u0942\u092a \u0932\u0947\u0916"
+		"message": "username@hostname या मुक्त प्रारूप लेख"
 	},
 	"field_hostname_aria_label": {
-		"message": "\u0939\u094b\u0938\u094d\u091f\u0928\u093e\u092e"
+		"message": "होस्टनाम"
 	},
 	"field_hostname_placeholder": {
-		"message": "\u0939\u094b\u0938\u094d\u091f\u0928\u093e\u092e"
+		"message": "होस्टनाम"
 	},
 	"field_identity_aria_label": {
-		"message": "\u092a\u0939\u091a\u093e\u0928"
+		"message": "पहचान"
 	},
 	"field_port_aria_label": {
-		"message": "\u092a\u094b\u0930\u094d\u091f"
+		"message": "पोर्ट"
 	},
 	"field_port_placeholder": {
-		"message": "\u092a\u094b\u0930\u094d\u091f"
+		"message": "पोर्ट"
 	},
 	"field_relay_options_aria_label": {
-		"message": "\u0930\u093f\u0932\u0947 \u0935\u093f\u0915\u0932\u094d\u092a"
+		"message": "रिले विकल्प"
 	},
 	"field_relay_options_placeholder": {
-		"message": "\u0930\u093f\u0932\u0947 \u0935\u093f\u0915\u0932\u094d\u092a"
+		"message": "रिले विकल्प"
 	},
 	"field_terminal_profile_aria_label": {
-		"message": "\u091f\u0930\u094d\u092e\u093f\u0928\u0932 \u092a\u094d\u0930\u094b\u092b\u093c\u093e\u0907\u0932 \u0928\u093e\u092e"
+		"message": "टर्मिनल प्रोफ़ाइल नाम"
 	},
 	"field_terminal_profile_placeholder": {
-		"message": "\u0921\u093f\u092b\u093c\u0949\u0932\u094d\u091f"
+		"message": "डिफ़ॉल्ट"
 	},
 	"field_username_aria_label": {
-		"message": "\u0909\u092a\u092f\u094b\u0917\u0915\u0930\u094d\u0924\u093e \u0928\u093e\u092e"
+		"message": "उपयोगकर्ता नाम"
 	},
 	"field_username_placeholder": {
-		"message": "\u0909\u092a\u092f\u094b\u0917\u0915\u0930\u094d\u0924\u093e \u0928\u093e\u092e"
+		"message": "उपयोगकर्ता नाम"
 	},
 	"found_relay": {
-		"message": "\u0930\u093f\u0932\u0947 \u0938\u0930\u094d\u0935\u0930 \u092e\u093f\u0932\u093e: $1",
+		"message": "रिले सर्वर मिला: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -127,16 +127,16 @@
 		}
 	},
 	"identity_label": {
-		"message": "\u092a\u0939\u091a\u093e\u0928"
+		"message": "पहचान"
 	},
 	"import_link_aria_label": {
-		"message": "\u092b\u093c\u093e\u0907\u0932 \u0906\u092f\u093e\u0924"
+		"message": "फ़ाइल आयात"
 	},
 	"import_link_label": {
-		"message": "\u0906\u092f\u093e\u0924 \u0915\u0930\u0947\u0902..."
+		"message": "आयात करें..."
 	},
 	"initializing_relay": {
-		"message": "$1 \u0915\u093e \u0909\u092a\u092f\u094b\u0917 \u0915\u0930\u0915\u0947 \u0930\u093f\u0932\u0947 \u0938\u0930\u094d\u0935\u0930 \u0916\u094b\u091c\u093e \u091c\u093e \u0930\u0939\u093e \u0939\u0948",
+		"message": "$1 का उपयोग करके रिले सर्वर खोजा जा रहा है",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -144,7 +144,7 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "'$1' \u092e\u0947\u0902 JSON \u0915\u094b \u092a\u093e\u0930\u094d\u0938 \u0928\u0939\u0940\u0902 \u0915\u093f\u092f\u093e \u091c\u093e \u0938\u0915\u093e",
+		"message": "'$1' में JSON को पार्स नहीं किया जा सका",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -152,10 +152,10 @@
 		}
 	},
 	"known_hosts_empty": {
-		"message": "\u0915\u094b\u0908 \u091c\u094d\u091e\u093e\u0924 \u0939\u094b\u0938\u094d\u091f \u0928\u0939\u0940\u0902, \u092d\u0942\u0932\u0928\u0947 \u0915\u0947 \u0932\u093f\u090f \u0915\u0941\u091b \u0928\u0939\u0940\u0902."
+		"message": "कोई ज्ञात होस्ट नहीं, भूलने के लिए कुछ नहीं."
 	},
 	"known_hosts_prompt": {
-		"message": "\u0915\u0943\u092a\u092f\u093e \u092d\u0942\u0932\u0928\u0947 \u0915\u0947 \u0932\u093f\u090f \u090f\u0915 \u0939\u094b\u0938\u094d\u091f \u0915\u094b \u091a\u0941\u0928\u0947\u0902 [1-$1]:",
+		"message": "कृपया भूलने के लिए एक होस्ट को चुनें [1-$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -163,13 +163,13 @@
 		}
 	},
 	"known_hosts_title": {
-		"message": "\u091c\u094d\u091e\u093e\u0924 \u0939\u094b\u0938\u094d\u091f:"
+		"message": "ज्ञात होस्ट:"
 	},
 	"loading_label": {
-		"message": "\u0932\u094b\u0921 \u0939\u094b \u0930\u0939\u0940 \u0939\u0948\u0902..."
+		"message": "लोड हो रही हैं..."
 	},
 	"missing_param": {
-		"message": "\u0917\u0941\u092e \u092a\u0948\u0930\u093e\u092e\u0940\u091f\u0930: $1",
+		"message": "गुम पैरामीटर: $1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -177,19 +177,19 @@
 		}
 	},
 	"mount_button_label": {
-		"message": "SFTP \u092e\u093e\u0909\u0902\u091f"
+		"message": "SFTP माउंट"
 	},
 	"mounted_message": {
-		"message": "\u092e\u093e\u0909\u0902\u091f \u0915\u093f\u092f\u093e \u0917\u092f\u093e!"
+		"message": "माउंट किया गया!"
 	},
 	"notify_copy": {
-		"message": "\u091a\u092f\u0928 \u0915\u0940 \u0915\u0949\u092a\u0940 \u0915\u0940 \u0917\u0908"
+		"message": "चयन की कॉपी की गई"
 	},
 	"ok_button_label": {
-		"message": "\u0920\u0940\u0915"
+		"message": "ठीक"
 	},
 	"open_as_window_tip": {
-		"message": "[\u092a\u094d\u0930\u094b \u091f\u093f\u092a\u094d\u0938] Control-W \u0915\u094b \u0905\u092a\u0928\u093e \u091f\u0930\u094d\u092e\u093f\u0928\u0932 \u092c\u0902\u0926 \u0915\u0930\u0928\u0947 \u0926\u0947\u0928\u0947 \u0938\u0947 \u0930\u094b\u0915\u0928\u0947 \u0915\u0947 \u0932\u093f\u090f '\u0935\u093f\u0902\u0921\u094b \u0915\u0947 \u0930\u0942\u092a \u092e\u0947\u0902 \u0916\u094b\u0932\u0947\u0902' \u0915\u093e \u0909\u092a\u092f\u094b\u0917 \u0915\u0930\u0947\u0902!\n[\u092a\u094d\u0930\u094b \u091f\u093f\u092a\u094d\u0938] \u0905\u0927\u093f\u0915 \u091c\u093e\u0928\u0915\u093e\u0930\u0940 \u0915\u0947 \u0932\u093f\u090f $1 \u0926\u0947\u0916\u0947\u0902.",
+		"message": "[प्रो टिप्स] Control-W को अपना टर्मिनल बंद करने देने से रोकने के लिए 'विंडो के रूप में खोलें' का उपयोग करें!\n[प्रो टिप्स] अधिक जानकारी के लिए $1 देखें.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -197,55 +197,55 @@
 		}
 	},
 	"options_button_label": {
-		"message": "\u0935\u093f\u0915\u0932\u094d\u092a"
+		"message": "विकल्प"
 	},
 	"plugin_loading": {
-		"message": "NaCl \u092a\u094d\u0932\u0917\u0907\u0928 \u0932\u094b\u0921 \u0939\u094b \u0930\u0939\u093e \u0939\u0948..."
+		"message": "NaCl प्लगइन लोड हो रहा है..."
 	},
 	"plugin_loading_complete": {
-		"message": " \u0938\u0902\u092a\u0928\u094d\u0928."
+		"message": " संपन्न."
 	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
 	"preferences_header": {
-		"message": "\u092a\u094d\u0930\u094b\u092b\u093c\u093e\u0907\u0932 \u0938\u0947\u091f\u093f\u0902\u0917"
+		"message": "प्रोफ़ाइल सेटिंग"
 	},
 	"preferences_reset": {
-		"message": "\u0938\u092d\u0940 \u092a\u094d\u0930\u093e\u0925\u092e\u093f\u0915\u0924\u093e\u090f\u0902 \u0930\u0940\u0938\u0947\u091f \u0915\u0940 \u0917\u0908\u0902!"
+		"message": "सभी प्राथमिकताएं रीसेट की गईं!"
 	},
 	"reconnect_message": {
-		"message": "\u092b\u093f\u0930 \u0938\u0947 \u0915\u0928\u0947\u0915\u094d\u091f \u0915\u0930\u0947\u0902, \u0915\u094b\u0908 \u0926\u0942\u0938\u0930\u093e \u0915\u0928\u0947\u0915\u094d\u0936\u0928 \u091a\u0941\u0928\u0947\u0902 \u092f\u093e \u092c\u093e\u0939\u0930 \u0928\u093f\u0915\u0932\u0947\u0947\u0902?"
+		"message": "फिर से कनेक्ट करें, कोई दूसरा कनेक्शन चुनें या बाहर निकलेें?"
 	},
 	"relay_retry": {
-		"message": "\u092b\u093f\u0930 \u0938\u0947 \u0915\u094b\u0936\u093f\u0936 \u0915\u0940 \u091c\u093e \u0930\u0939\u0940 \u0939\u0948..."
+		"message": "फिर से कोशिश की जा रही है..."
 	},
 	"restore_prefs": {
-		"message": "\u092c\u0948\u0915\u0905\u092a \u092c\u0939\u093e\u0932 \u0915\u0930\u0947\u0902"
+		"message": "बैकअप बहाल करें"
 	},
 	"shortcut_list_aria_label": {
-		"message": "\u0938\u0939\u0947\u091c\u0947 \u0917\u090f \u0915\u0928\u0947\u0915\u094d\u0936\u0928"
+		"message": "सहेजे गए कनेक्शन"
 	},
 	"ssh_argstr_label": {
-		"message": "SSH \u0924\u0930\u094d\u0915"
+		"message": "SSH तर्क"
 	},
 	"terminal_preview_label": {
-		"message": "\u092a\u0942\u0930\u094d\u0935\u093e\u0935\u0932\u094b\u0915\u0928"
+		"message": "पूर्वावलोकन"
 	},
 	"terminal_profile_label": {
-		"message": "\u0905\u092d\u0940 \u0935\u093e\u0932\u0940 \u092a\u094d\u0930\u094b\u092b\u093c\u093e\u0907\u0932"
+		"message": "अभी वाली प्रोफ़ाइल"
 	},
 	"unexpected_error": {
-		"message": "\u090f\u0915 \u0905\u0928\u0947\u092a\u0915\u094d\u0937\u093f\u0924 \u0917\u0921\u093c\u092c\u0921\u093c\u0940 \u0939\u0941\u0908, \u0915\u0943\u092a\u092f\u093e \u0905\u0927\u093f\u0915 \u0935\u093f\u0935\u0930\u0923 \u0915\u0947 \u0932\u093f\u090f JavaScript \u092a\u0948\u0928\u0932 \u0926\u0947\u0916\u0947\u0902."
+		"message": "एक अनेपक्षित गड़बड़ी हुई, कृपया अधिक विवरण के लिए JavaScript पैनल देखें."
 	},
 	"unmount_button_label": {
-		"message": "SFTP \u0915\u094b \u0905\u0928\u092e\u093e\u0909\u0902\u091f \u0915\u0930\u0947\u0902"
+		"message": "SFTP को अनमाउंट करें"
 	},
 	"update_available_tooltip": {
-		"message": "\u090f\u0915 \u0905\u092a\u0921\u0947\u091f \u0909\u092a\u0932\u092c\u094d\u0927 \u0939\u0948. \u0915\u0943\u092a\u092f\u093e \u0938\u092d\u0940 \u0935\u093f\u0902\u0921\u094b \u092c\u0902\u0926 \u0915\u0930\u0947\u0902."
+		"message": "एक अपडेट उपलब्ध है. कृपया सभी विंडो बंद करें."
 	},
 	"welcome_faq": {
-		"message": "\u0905\u0915\u094d\u0938\u0930 \u092a\u0942\u091b\u0947 \u091c\u093e\u0928\u0947 \u0935\u093e\u0932\u0947 \u092a\u094d\u0930\u0936\u094d\u0928\u094b\u0902 \u0915\u0947 \u0909\u0924\u094d\u0924\u0930: $1 (\u0932\u093f\u0902\u0915 \u0916\u094b\u0932\u0928\u0947 \u0915\u0947 \u0932\u093f\u090f \u0909\u0928 \u092a\u0930 ctrl+\u0915\u094d\u0932\u093f\u0915 \u0915\u0930\u0947\u0902)",
+		"message": "अक्सर पूछे जाने वाले प्रश्नों के उत्तर: $1 (लिंक खोलने के लिए उन पर ctrl+क्लिक करें)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -253,7 +253,7 @@
 		}
 	},
 	"welcome_version": {
-		"message": "$1 \u0915\u0947 \u0935\u0930\u094d\u0936\u0928 $2 \u092e\u0947\u0902 \u0906\u092a\u0915\u093e \u0938\u094d\u0935\u093e\u0917\u0924 \u0939\u0948.",
+		"message": "$1 के वर्शन $2 में आपका स्वागत है.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -264,6 +264,6 @@
 		}
 	},
 	"zoom_warning": {
-		"message": "\u0915\u0943\u092a\u092f\u093e Chrome \u092e\u0947\u0928\u0942->\u091c\u093c\u0942\u092e \u0915\u094b 100% \u092a\u0930 \u0938\u0947\u091f \u0915\u0930\u0947\u0902"
+		"message": "कृपया Chrome मेनू->ज़ूम को 100% पर सेट करें"
 	}
 }

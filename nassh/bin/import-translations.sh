@@ -37,9 +37,8 @@ rmdir */
 
 for loc in "${LOCALES[@]}"; do
   mkdir "${loc}"
-  python -mjson.tool < "${SRC}/${loc}/messages.json" | \
-    sed 's:    :\t:g' \
-    > "${loc}"/messages.json
+  "${BIN_DIR}"/filter-translations.py \
+    "${SRC}/${loc}/messages.json" > "${loc}"/messages.json
 done
 
 git checkout -f en/
