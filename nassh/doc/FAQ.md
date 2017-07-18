@@ -789,6 +789,19 @@ different app, visit the chrome://settings/handlers page.
   section below.
 
 
+### Why doesn't autorepeat work under macOS?
+
+  In newer versions of macOS, holding down many keys (like `a`) won't repeat
+  the key.  Instead, you'll get a pop up with an accent menu so you can select
+  between à, á, â, ä, æ, etc...  This is a macOS feature that cannot be disabled
+  on a per-application basis.
+
+  If you don't like this behavior, you can disable it globally by opening a
+  terminal and running:
+
+    defaults write -g ApplePressAndHoldEnabled -bool false
+
+
 ### Can I rebind keys/shortcuts? {#keybindings}
 
   Yes, all keys can be rebound.  Look for the 'keybindings' setting in the
