@@ -143,12 +143,3 @@ nassh.Stream.SSHAgentRelay.prototype.asyncWrite = function(data, onSuccess) {
   // Note: report binary length written.
   onSuccess(bData.length);
 };
-
-/**
- * The asyncRead method is a no-op for this class.
- *
- * Instead we push data to the client using the onDataAvailable event.
- */
-nassh.Stream.SSHAgentRelay.prototype.asyncRead = function(size, onRead) {
-  setTimeout(function() { onRead('') }, 0);
-};

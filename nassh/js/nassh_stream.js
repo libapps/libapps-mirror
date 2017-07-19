@@ -38,9 +38,16 @@ nassh.Stream.prototype.asyncOpen_ = function(path, onOpen) {
 
 /**
  * Read from a stream, calling back with the result.
+ *
+ * The default implementation does not actually send data to the client, but
+ * assumes that it is instead pushed to the client using the
+ * onDataAvailable event.
  */
 nassh.Stream.prototype.asyncRead = function(size, onRead) {
-  throw nassh.Stream.ERR_NOT_IMPLEMENTED;
+  if (this.onDataAvailable === undefined)
+    throw nassh.Stream.ERR_NOT_IMPLEMENTED;
+
+  setTimeout(() => onRead(''), 0);
 };
 
 /**

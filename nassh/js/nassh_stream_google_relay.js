@@ -99,15 +99,6 @@ nassh.Stream.GoogleRelay.prototype.sendWrite_ = function() {
 };
 
 /**
- * The asyncRead method is a no-op for this class.
- *
- * Instead we push data to the client using the onDataAvailable event.
- */
-nassh.Stream.GoogleRelay.prototype.asyncRead = function(size, onRead) {
-  setTimeout(function() { onRead('') }, 0);
-};
-
-/**
  * Indicates that the backoff timer has expired and we can try again.
  *
  * This does not guarantee that communications have been restored, only
