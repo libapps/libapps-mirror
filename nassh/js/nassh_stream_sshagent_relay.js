@@ -41,7 +41,7 @@ nassh.Stream.SSHAgentRelay.prototype.asyncOpen_ = function(args, onComplete) {
       var bData = hdr.concat(msg.data);
 
       // Report to client.
-      this.onDataAvailable(this.binaryToAscii(bData));
+      this.onDataAvailable(nassh.Stream.binaryToAscii(bData));
 
       // Re-examine write buffer; there might be more data in it.
       setTimeout(this.trySendPacket_.bind(this), 0);
@@ -82,24 +82,6 @@ nassh.Stream.SSHAgentRelay.prototype.close = function(reason) {
 };
 
 /**
- * Convert binary byte array into base64 ascii.
- */
-nassh.Stream.SSHAgentRelay.prototype.binaryToAscii = function(b) {
-  function x(y) { return String.fromCharCode(y); }
-
-  return btoa(Array.prototype.map.call(b, x).join(''));
-};
-
-/**
- * Convert ascii base64 into binary byte array.
- */
-nassh.Stream.SSHAgentRelay.prototype.asciiToBinary = function(a) {
-  function x(y) { return y.charCodeAt(0); }
-
-  return Array.prototype.map.call(atob(a), x);
-};
-
-/**
  * Check whether there is enough data in the write buffer to constitute a packet.
  * If so, send packet and handle reply.
  */
@@ -135,7 +117,7 @@ nassh.Stream.SSHAgentRelay.prototype.asyncWrite = function(data, onSuccess) {
   if (!data.length)
     return;
 
-  var bData = this.asciiToBinary(data);
+  var bData = nassh.Stream.asciiToBinary(data);
   this.writeBuffer_ = this.writeBuffer_.concat(bData);
 
   setTimeout(this.trySendPacket_.bind(this), 0);
