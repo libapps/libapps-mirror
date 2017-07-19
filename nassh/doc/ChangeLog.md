@@ -1,3 +1,7 @@
+# 0.8.36.8, 2017-07-19, New feature polish.
+
+* Fix identity dropdown list display.
+
 # 0.8.36.7, 2017-07-17, New feature polish.
 
 * Update to hterm 1.67.  Various fixes for new features.
