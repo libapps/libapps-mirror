@@ -758,6 +758,13 @@ different app, visit the chrome://settings/handlers page.
 
 ### How do I send Ctrl-W, Ctrl-N or Ctrl-T to the terminal?
 
+*** note
+  This section does not apply to macOS.  That platform has no "Open as Window"
+  option, but macOS also does not capture any Ctrl based shortcuts.  If want to
+  capture Cmd-W, etc..., then unfortunately there currently is no way of doing
+  that.  Sorry.
+***
+
   Chrome blocks tab contents from getting access to these (and a few other)
   keys.  You can open Secure Shell in a dedicated window to get around
   this limitation.  Just right-click on the Secure Shell icon and enable
