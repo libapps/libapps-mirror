@@ -326,6 +326,39 @@ nassh.CommandInstance.prototype.promptForDestination_ = function(opt_default) {
     this.dispatchMessage_('connect-dialog', this.onConnectDialog_, event.data);
   };
 
+  // Resize the connection dialog iframe to try and fit all the content,
+  // but not more.  This way we don't end up with a lot of empty space.
+  function resize() {
+    let body = this.iframe_.contentWindow.document.body;
+    let shortcutList = body.querySelector('#shortcut-list');
+    let dialogBillboard = body.querySelector('.dialog-billboard');
+    let dialogButtons = body.querySelector('.dialog-buttons');
+
+    this.container_.style.height = '0px';
+    let height = shortcutList.scrollHeight +
+                 dialogBillboard.scrollHeight +
+                 dialogButtons.scrollHeight;
+    // Since the document has a bit of border/padding, fudge the height
+    // slightly higher than the few main elements we calculated above.
+    height *= 1.15;
+
+    // We don't have to worry about this being too big or too small as the
+    // frame CSS has set min/max height attributes.
+    this.container_.style.height = height + 'px';
+  }
+
+  // Once the dialog has finished loading all of its data, resize it.
+  connectDialog.onLoad = function() {
+    // Shift the dialog to be relative to the bottom so the notices/links we
+    // show at the top of the are more readily visible.
+    this.container_.style.top = '';
+    this.container_.style.bottom = '10%';
+
+    var resize_ = resize.bind(this);
+    resize_();
+    window.addEventListener('resize', resize_);
+  };
+
   connectDialog.show();
 };
 
