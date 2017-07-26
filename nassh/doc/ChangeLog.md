@@ -1,3 +1,10 @@
+# 0.8.36.9, 2017-07-26, New feature polish.
+
+* Update to hterm 1.68.  Various fixes for new features, and make accidental
+  character map transitions more robust.
+* Shrink & shift connection dialog to not take up so much space.
+* Rework passing of subsystem down to the OpenSSH NaCl.
+
 # 0.8.36.8, 2017-07-19, New feature polish.
 
 * Fix identity dropdown list display.
