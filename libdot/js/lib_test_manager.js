@@ -73,89 +73,56 @@ lib.TestManager.prototype.testPostamble = function(result, cx) {};
 /**
  * Destination for test case output.
  *
- * @param {function(string)} opt_logFunction Optional function to call to
- *     write a string to the log.  If omitted, console.log is used.
+ * Thw API will be the same as the console object.  e.g. We support info(),
+ * warn(), error(), etc... just like console.info(), etc...
+ *
+ * @param {Object} opt_console The console object to route all logging through.
+ *     Should provide saome API as the standard console API.
  */
-lib.TestManager.Log = function(opt_logFunction) {
+lib.TestManager.Log = function(opt_console=console) {
   this.save = false;
   this.data = '';
-  this.logFunction_ = opt_logFunction || function(s) {
-    if (this.save)
-      this.data += s + '\n';
-    console.log(s);
-  };
-  this.pending_ = '';
   this.prefix_ = '';
-  this.prefixStack_ = [];
-};
+  this.prefixStack_ = 0;
 
-/**
- * Add a prefix to log messages.
- *
- * This only affects log messages that are added after the prefix is pushed.
- *
- * @param {string} str The prefix to prepend to future log messages.
- */
-lib.TestManager.Log.prototype.pushPrefix = function(str) {
-  this.prefixStack_.push(str);
-  this.prefix_ = this.prefixStack_.join('');
-};
+  // Capture all the console entry points in case code at runtime calls these
+  // directly.  We want to be able to still see things.
+  // We also expose the direct API to our callers (e.g. we provide warn()).
+  this.console_ = opt_console;
+  ['log', 'debug', 'info', 'warn', 'error'].forEach((level) => {
+    let msgPrefix = '';
+    switch (level) {
+      case 'debug':
+      case 'warn':
+      case 'error':
+        msgPrefix = level.toUpperCase() + ': ';
+        break;
+    }
 
-/**
- * Remove the most recently added message prefix.
- */
-lib.TestManager.Log.prototype.popPrefix = function() {
-  this.prefixStack_.pop();
-  this.prefix_ = this.prefixStack_.join('');
-};
+    const oLog = this.console_[level];
+    this[level] = this.console_[level] = (...args) => {
+      if (this.save)
+        this.data += this.prefix_ + msgPrefix + args.join(' ') + '\n';
+      oLog.apply(this.console_, args);
+    };
+  });
 
-/**
- * Queue up a string to print to the log.
- *
- * If a line is already pending, this string is added to it.
- *
- * The string is not actually printed to the log until flush() or println()
- * is called.  The following call sequence will result in TWO lines in the
- * log...
- *
- *   log.print('hello');
- *   log.print(' ');
- *   log.println('world');
- *
- * While a typical stream-like thing would result in 'hello world\n', this one
- * results in 'hello \nworld\n'.
- *
- * @param {string} str The string to add to the log.
- */
-lib.TestManager.Log.prototype.print = function(str) {
-  if (this.pending_) {
-    this.pending_ += str;
-  } else {
-    this.pending_ = this.prefix_ + str;
-  }
-};
+  // Wrap/bind the group functions.
+  ['group', 'groupCollapsed'].forEach((group) => {
+    const oGroup = this.console_[group];
+    this[group] = this.console_[group] = (label='') => {
+      oGroup(label);
+      if (this.save)
+        this.data += this.prefix_ + label + '\n';
+      this.prefix_ = '  '.repeat(++this.prefixStack_);
+    };
+  });
 
-/**
- * Print a line to the log and flush it immediately.
- *
- * @param {string} str The string to add to the log.
- */
-lib.TestManager.Log.prototype.println = function(str) {
-  if (this.pending_)
-    this.flush();
-
-  this.logFunction_(this.prefix_ + str);
-};
-
-/**
- * Flush any pending log message.
- */
-lib.TestManager.Log.prototype.flush = function() {
-  if (!this.pending_)
-    return;
-
-  this.logFunction_(this.pending_);
-  this.pending_ = '';
+  const oGroupEnd = this.console_.groupEnd;
+  this.groupEnd = this.console_.groupEnd = () => {
+    oGroupEnd();
+    this.prefix_ = '  '.repeat(--this.prefixStack_);
+  };
 };
 
 /**
@@ -577,7 +544,7 @@ lib.TestManager.TestRun.prototype.selectPattern = function(pattern) {
   }
 
   if (!selectCount) {
-    this.log.println('No tests matched selection criteria: ' + pattern);
+    this.log.warn('No tests matched selection criteria: ' + pattern);
   }
 
   return selectCount;
@@ -611,9 +578,9 @@ lib.TestManager.TestRun.prototype.onUncaughtException_ = function(
   if (this.currentResult.status != this.currentResult.PENDING)
     when = 'after';
 
-  this.log.println('Uncaught exception ' + when + ' test case: ' +
-                   this.currentResult.test.fullName);
-  this.log.println(message + ', ' + file + ':' + line);
+  this.log.error('Uncaught exception ' + when + ' test case: ' +
+                 this.currentResult.test.fullName);
+  this.log.error(message + ', ' + file + ':' + line);
 
   this.currentResult.completeTest_(this.currentResult.FAILED, false);
 
@@ -644,11 +611,10 @@ lib.TestManager.TestRun.prototype.onTestRunComplete_ = function(
 
   this.duration = (new Date()) - this.startDate;
 
-  this.log.popPrefix();
-  this.log.println('} ' + this.passes.length + ' passed, ' +
-                   this.failures.length + ' failed, '  +
-                   this.msToSeconds_(this.duration));
-  this.log.println('');
+  this.log.groupEnd();
+  this.log.info(this.passes.length + ' passed, ' +
+                this.failures.length + ' failed, '  +
+                this.msToSeconds_(this.duration));
 
   this.summarize();
 
@@ -668,15 +634,16 @@ lib.TestManager.TestRun.prototype.onResultComplete = function(result) {
     this.testManager.testPostamble(result, this.cx);
     result.suite.postamble(result, this.ctx);
   } catch (ex) {
-    this.log.println('Unexpected exception in postamble: ' +
-                     (ex.stack ? ex.stack : ex));
+    this.log.error('Unexpected exception in postamble: ' +
+                   (ex.stack ? ex.stack : ex));
     this.panic = true;
   }
 
-  this.log.popPrefix();
-  this.log.print('} ' + result.status + ', ' +
-                 this.msToSeconds_(result.duration));
-  this.log.flush();
+  if (result.status != result.PASSED)
+    this.log.error(result.status);
+  else if (result.duration > 500)
+    this.log.warn('Slow test took ' + this.msToSeconds_(result.duration));
+  this.log.groupEnd();
 
   if (result.status == result.FAILED) {
     this.failures.push(result);
@@ -684,8 +651,8 @@ lib.TestManager.TestRun.prototype.onResultComplete = function(result) {
   } else if (result.status == result.PASSED) {
     this.passes.push(result);
   } else {
-    this.log.println('Unknown result status: ' + result.test.fullName + ': ' +
-                     result.status);
+    this.log.error('Unknown result status: ' + result.test.fullName + ': ' +
+                   result.status);
     return this.panic = true;
   }
 
@@ -713,8 +680,8 @@ lib.TestManager.TestRun.prototype.onResultComplete = function(result) {
  */
 lib.TestManager.TestRun.prototype.onResultReComplete = function(
     result, lateStatus) {
-  this.log.println('Late complete for test: ' + result.test.fullName + ': ' +
-                   lateStatus);
+  this.log.error('Late complete for test: ' + result.test.fullName + ': ' +
+                 lateStatus);
 
   // Consider any late completion a failure, even if it's a double-pass, since
   // it's a misuse of the testing API.
@@ -733,7 +700,7 @@ lib.TestManager.TestRun.prototype.runNextTest_ = function() {
     return this.onTestRunComplete_();
 
   if (this.maxFailures && this.failures.length >= this.maxFailures) {
-    this.log.println('Maximum failure count reached, aborting test run.');
+    this.log.error('Maximum failure count reached, aborting test run.');
     return this.onTestRunComplete_();
   }
 
@@ -745,20 +712,21 @@ lib.TestManager.TestRun.prototype.runNextTest_ = function() {
 
   try {
     if (!suite || !(suite instanceof test.suiteClass)) {
-      this.log.println('Initializing suite: ' + test.suiteClass.suiteName);
+      if (suite)
+        this.log.groupEnd();
+      this.log.group(test.suiteClass.suiteName);
       suite = new test.suiteClass(this.testManager, this.cx);
     }
   } catch (ex) {
     // If test suite setup fails we're not even going to try to run the tests.
-    this.log.println('Exception during setup: ' + (ex.stack ? ex.stack : ex));
+    this.log.error('Exception during setup: ' + (ex.stack ? ex.stack : ex));
     this.panic = true;
     this.onTestRunComplete_();
     return;
   }
 
   try {
-    this.log.print('Test: ' + test.fullName + ' {');
-    this.log.pushPrefix('  ');
+    this.log.group(test.testName);
 
     this.currentResult = new lib.TestManager.Result(this, suite, test);
     this.testManager.testPreamble(this.currentResult, this.cx);
@@ -766,10 +734,9 @@ lib.TestManager.TestRun.prototype.runNextTest_ = function() {
 
     this.testQueue_.shift();
   } catch (ex) {
-    this.log.println('Unexpected exception during test preamble: ' +
-                     (ex.stack ? ex.stack : ex));
-    this.log.popPrefix();
-    this.log.println('}');
+    this.log.error('Unexpected exception during test preamble: ' +
+                   (ex.stack ? ex.stack : ex));
+    this.log.groupEnd();
 
     this.panic = true;
     this.onTestRunComplete_();
@@ -781,8 +748,8 @@ lib.TestManager.TestRun.prototype.runNextTest_ = function() {
   } catch (ex) {
     // Result.run() should catch test exceptions and turn them into failures.
     // If we got here, it means there is trouble in the testing framework.
-    this.log.println('Unexpected exception during test run: ' +
-                     (ex.stack ? ex.stack : ex));
+    this.log.error('Unexpected exception during test run: ' +
+                   (ex.stack ? ex.stack : ex));
     this.panic = true;
   }
 };
@@ -806,8 +773,7 @@ lib.TestManager.TestRun.prototype.runNextTest_ = function() {
  * preamble will cause the test run to abort.
  */
 lib.TestManager.TestRun.prototype.run = function() {
-  this.log.println('Running ' + this.testQueue_.length + ' test(s) {');
-  this.log.pushPrefix('  ');
+  this.log.info('Running ' + this.testQueue_.length + ' test(s)');
 
   window.onerror = this.onUncaughtException_.bind(this);
   this.startDate = new Date();
@@ -828,13 +794,13 @@ lib.TestManager.TestRun.prototype.msToSeconds_ = function(ms) {
 lib.TestManager.TestRun.prototype.summarize = function() {
   if (this.failures.length) {
     for (var i = 0; i < this.failures.length; i++) {
-      this.log.println('FAILED: ' + this.failures[i].test.fullName);
+      this.log.error('FAILED: ' + this.failures[i].test.fullName);
     }
   }
 
   if (this.testQueue_.length) {
-    this.log.println('Test run incomplete: ' + this.testQueue_.length +
-                     ' test(s) were not run.');
+    this.log.warn('Test run incomplete: ' + this.testQueue_.length +
+                  ' test(s) were not run.');
   }
 };
 
@@ -1107,7 +1073,7 @@ lib.TestManager.Result.prototype.getCallerLocation_ = function(frameIndex) {
  * Write a message to the result log.
  */
 lib.TestManager.Result.prototype.println = function(message) {
-  this.testRun.log.println(message);
+  this.testRun.log.info(message);
 };
 
 /**
