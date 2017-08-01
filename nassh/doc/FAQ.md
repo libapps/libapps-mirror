@@ -397,6 +397,23 @@ different app, visit the chrome://settings/handlers page.
   window by hitting alt+enter.
 
 
+### How do I disable omnibox integration?
+
+  When trying to search for "ssh" via the omnibox, it might trigger the app
+  when you actually want to perform a search.  Here are some alternatives:
+
+  * Instead of pressing Ctrl-L to select the omnibox, press Ctrl-K.
+    That'll force a search every time regardless of other omnibox integration.
+  * Prefix your query with an explicit `?` to force a search.
+    i.e. Use `?ssh ...` instead of `ssh ...`.
+
+  If you want to always disable this integration, you can do so in the standard
+  search engine management page.  It'll be at the very bottom under "Search
+  engines added by extensions".
+  See the [Google Chrome Help](https://support.google.com/chrome/answer/95426)
+  page for more details.
+
+
 ### Can I forward ports?
 
   Yes.  Enter your port forwarding options in the "SSH Arguments" field of
