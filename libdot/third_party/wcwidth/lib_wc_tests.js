@@ -17,6 +17,7 @@ lib.wc.Tests.addTest('strWidth-test', function(result, cx) {
   var controlChar = '\r';
   var musicalSign = '\uD834\uDD00';
   var wideSurrogatePair = '\uD842\uDD9D';
+  var combiningChar = 'A\u030A';
 
   result.assertEQ(1, lib.wc.strWidth(asciiOnechar), 'ASCII char has wcwidth 1');
   result.assertEQ(15, lib.wc.strWidth(asciiString), 'ASCII string');
@@ -33,6 +34,8 @@ lib.wc.Tests.addTest('strWidth-test', function(result, cx) {
                   'A surrogate pair is considered as a single character.');
   result.assertEQ(2, lib.wc.strWidth(wideSurrogatePair),
                   'A wide character represented in a surrogate pair.');
+  result.assertEQ(1, lib.wc.strWidth(combiningChar),
+                  'A combining character.');
 
   result.pass();
 });
@@ -65,6 +68,7 @@ lib.wc.Tests.addTest('substr-test', function(result, cx) {
   var widecharOnechar = '\u4E2D';
   var widecharString = '\u4E2D\u6587\u5B57\u4E32\u4E2D\u6587\u5B57\u4E32';
   var mixedString = '12345\u4E2D\u6587\u5B57\u4E3267890';
+  var combiningString = '123A\u030A456';
 
   result.assertEQ('1', lib.wc.substr(asciiOnechar, 0, 1));
   result.assertEQ('1', lib.wc.substr(asciiOnechar, 0, 2));
@@ -103,6 +107,13 @@ lib.wc.Tests.addTest('substr-test', function(result, cx) {
   result.assertEQ('12345\u4E2D', lib.wc.substr(mixedString, 0, 7));
   result.assertEQ(mixedString, lib.wc.substr(mixedString, 0));
   result.assertEQ(mixedString, lib.wc.substr(mixedString, 0, 20));
+
+  result.assertEQ('123A\u030a456', lib.wc.substr(combiningString, 0, 7));
+  result.assertEQ('123A\u030a', lib.wc.substr(combiningString, 0, 4));
+  result.assertEQ('123', lib.wc.substr(combiningString, 0, 3));
+  result.assertEQ('3A\u030a', lib.wc.substr(combiningString, 2, 2));
+  result.assertEQ('A\u030a4', lib.wc.substr(combiningString, 3, 2));
+  result.assertEQ('A\u030a', lib.wc.substr(combiningString, 3, 1));
 
   result.pass();
 });

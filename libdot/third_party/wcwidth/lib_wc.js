@@ -395,7 +395,7 @@ lib.wc.substr = function(str, start, opt_width) {
 
   if (opt_width != undefined) {
     for (endIndex = startIndex, width = 0;
-         endIndex < str.length && width < opt_width;
+         endIndex < str.length && width <= opt_width;
          width += lib.wc.charWidth(str.charCodeAt(endIndex)), endIndex++);
     if (width > opt_width)
       endIndex--;
