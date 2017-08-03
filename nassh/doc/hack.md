@@ -144,6 +144,7 @@ The vast majority of the code here lives under [js/].
   * [nassh_google_relay.html]: Stub page when redirecting with external relay.
   * [nassh.html]: The main ssh terminal page.
   * [nassh_preferences_editor.html]: The extensions options page.
+  * [nassh_test.html]: Run all available unittests.
 * [images/]: Various extension images.
 * [js/]: The majority of relevant code for this extension.
   * `*.concat.js`: Compiled JS output of other projects we use.
@@ -172,6 +173,11 @@ The vast majority of the code here lives under [js/].
     SSH Agent API for connecting to other extensions.  They provide key store
     backing (such as the [gnubbyd] extension).
   * [nassh_stream_tty.js]: Basic input/output tty streams.
+* Testing related code
+  * [nassh_test.js]: Main unittest runner logic.  Locates & runs all tests.
+  * `*_tests.js`: Each module has a corresponding set of unittests.  The
+    filename follows the convention of adding `_tests`.  e.g. `nassh_tests.js`
+    contains the tests for `nassh.js`.
 
 There are a few specialized modules that are not relevant to the core
 Secure Shell logic.

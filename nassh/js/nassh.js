@@ -26,10 +26,6 @@ lib.registerInit('nassh', function(onInit) {
   onInit();
 });
 
-nassh.test = function() {
-  window.open(chrome.extension.getURL('html/nassh_test.html'));
-};
-
 /**
  * Return a formatted message in the current locale.
  *

@@ -92,6 +92,8 @@ FILE_PATTERNS='
 
 FILE_PATTERNS="$FILE_PATTERNS$MORE_FILE_PATTERNS"
 
+FILE_PATTERNS_EXCLUDE="$MORE_FILE_PATTERNS_EXCLUDE"
+
 #
 # Echo "yes" if a string starts with the given substring, "no" otherwise.
 #
@@ -290,6 +292,14 @@ function init_from_dir() {
   set +f  # Re-enable expansion.
 
   rsync -qa --relative $files "$zipdir"
+
+  set -f  # Disable filename expansion.
+
+  for pat in ${FILE_PATTERNS_EXCLUDE}; do
+    find "${zipdir}" -iregex "${pat}" -delete
+  done
+
+  set +f  # Re-enable expansion.
 
   cd - >/dev/null
 

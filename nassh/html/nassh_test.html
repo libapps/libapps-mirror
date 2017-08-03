@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src='../js/nassh_deps.concat.js'></script>
+
+    <script src='../js/nassh.js'></script>
+    <script src='../js/nassh_column_list.js'></script>
+    <script src='../js/nassh_command_instance.js'></script>
+    <script src='../js/nassh_connect_dialog.js'></script>
+    <script src='../js/nassh_google_relay.js'></script>
+    <script src='../js/nassh_preference_manager.js'></script>
+    <script src='../js/nassh_stream.js'></script>
+    <script src='../js/nassh_stream_set.js'></script>
+    <script src='../js/nassh_stream_tty.js'></script>
+    <script src='../js/nassh_stream_google_relay.js'></script>
+    <script src='../js/nassh_stream_sshagent_relay.js'></script>
+    <script src='../js/nassh_sftp_client.js'></script>
+    <script src='../js/nassh_sftp_packet.js'></script>
+    <script src='../js/nassh_sftp_packet_types.js'></script>
+    <script src='../js/nassh_sftp_status.js'></script>
+
+    <script src='../../libdot/js/lib_test_manager.js'></script>
+
+    <script src='../js/nassh_test.js'></script>
+    <script src='../js/nassh_tests.js'></script>
+
+    <style>
+      body {
+        position: absolute;
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+      .good {
+        color: green;
+      }
+      .bad {
+        color: red;
+      }
+      pre#log {
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>Check JavaScript console for test log/status.</p>
+    <p id='status'>Running...</p>
+    <p id='passed' class='good'></p>
+    <p id='failed' class='bad'></p>
+    <pre id='log'></pre>
+  </body>
+</html>
