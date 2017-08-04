@@ -611,6 +611,54 @@ nassh.CommandInstance.prototype.mountDestination = function(destination) {
 };
 
 /**
+ * Split the ssh command line string up into its components.
+ *
+ * We currently only support simple quoting -- no nested or escaped.
+ * That would require a proper lexer in here and not utilize regex.
+ * See https://crbug.com/725625 for details.
+ *
+ * @param {string} argstr The full ssh command line.
+ * @return {Object} The various components.
+ */
+nassh.CommandInstance.splitCommandLine = function(argstr) {
+  var args = argstr;
+  var command = '';
+
+  // Tokenize the string first.
+  var i;
+  var ary = argstr.match(/("[^"]*"|\S+)/g);
+  if (ary) {
+    // If there is a -- separator in here, we split that off and leave the
+    // command line untouched (other than normalizing of whitespace between
+    // any arguments, and unused leading/trailing whitespace).
+    i = ary.indexOf('--');
+    if (i != -1) {
+      command = ary.splice(i + 1).join(' ').trim();
+      // Remove the -- delimiter.
+      ary.pop();
+    }
+
+    // Now we have to dequote the remaining arguments.  The regex above did:
+    // '-o "foo bar"' -> ['-o', '"foo bar"']
+    // Based on our (simple) rules, there shouldn't be any other quotes.
+    ary = ary.map((x) => x.replace(/(^"|"$)/g, ''));
+  } else {
+    // Strip out any whitespace.  There shouldn't be anything left that the
+    // regex wouldn't have matched, but let's be paranoid.
+    argstr = argstr.trim();
+    if (argstr)
+      ary = [argstr];
+    else
+      ary = [];
+  }
+
+  return {
+    args: ary,
+    command: command,
+  };
+};
+
+/**
  * Initiate a connection to a remote host.
  *
  * @param {string} username The username to provide.
@@ -733,15 +781,11 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
 
   // Finally, we append the custom command line the user has constructed.
   // This matches native `ssh` behavior and makes our lives simpler.
-  if (params.argstr) {
-    var ary = params.argstr.match(/^(.*?)(?:(?:^|\s+)(?:--\s+(.*)))?$/);
-    if (ary) {
-      if (ary[1])
-        argv.arguments = argv.arguments.concat(ary[1].trim().split(/\s+/));
-      if (ary[2])
-        argv.arguments.push(ary[2].trim());
-    }
-  }
+  var extraArgs = nassh.CommandInstance.splitCommandLine(params.argstr);
+  if (extraArgs.args)
+    argv.arguments = argv.arguments.concat(args);
+  if (extraArgs.command)
+    argv.arguments.push('--', extraArgs.command);
 
   this.initPlugin_(() => {
       if (!nassh.v2)
