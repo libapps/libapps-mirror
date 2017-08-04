@@ -975,6 +975,40 @@ different app, visit the chrome://settings/handlers page.
   vim, see [osc52.vim].
 
 
+### How do I talk to hterm from inside screen/tmux?
+
+  Since screen/tmux create their own terminals to capture and process output
+  even when you aren't connected, they end up processing all the control
+  sequences and then mangling/passing on only the ones they understand.  That
+  means if you try to use a sequence that only hterm understands, it will get
+  silently swallowed/discarded.  However, these systems usually provide a way
+  to pass thru content directly to the active terminal.
+
+  Under [screen](https://www.gnu.org/software/screen/manual/html_node/Control-Sequences.html),
+  you can use a DCS sequence (ESC+P).  Replace the `...` part with what you want
+  to send (and remember to escape the escapes).
+
+    # A DCS sequence terminated by a ST.
+    $ printf '\eP...\e\\'
+    # Send a notification straight to hterm.
+    $ printf '\eP\e\e]777;notify;title;body\a\e\\'
+
+  Under [tmux](https://github.com/tmux/tmux/blob/master/tools/ansicode.txt),
+  you can use a DCS sequence too, but using the `tmux` subcommand.  Replace
+  the `...` part with what you want to send (and remember to escape the
+  escapes).
+
+    # A DCS sequence terminated by a ST.
+    $ printf '\ePtmux;...\e\\'
+    # Send a notification straight to hterm.
+    $ printf '\ePtmux;\e\e]777;notify;title;body\a\e\\'
+
+  There is an [hterm-notify.sh] helper script available as well:
+
+    $ hterm-notify.sh "Some Title" "Lots of text here."
+
+
+[hterm-notify.sh]: ../../hterm/etc/hterm-notify.sh
 [osc52.el]: ../../hterm/etc/osc52.el
 [osc52.sh]: ../../hterm/etc/osc52.sh
 [osc52.vim]: ../../hterm/etc/osc52.vim
