@@ -1,3 +1,9 @@
+# 0.8.36.10, 2017-08-08, Minor improvements.
+
+* Update to hterm 1.69.  Improve cursor tracking and add pref for default
+  encoding.
+* Rework user ssh command line processing.
+
 # 0.8.36.9, 2017-07-26, New feature polish.
 
 * Update to hterm 1.68.  Various fixes for new features, and make accidental
