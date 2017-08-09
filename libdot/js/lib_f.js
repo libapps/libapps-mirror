@@ -306,3 +306,14 @@ lib.f.smartFloorDivide = function(numerator,  denominator) {
     return Math.floor(val);
   }
 };
+
+/**
+ * Get a random integer in a range (inclusive).
+ *
+ * @param {number} min The lowest integer in the range.
+ * @param {number} max The highest integer in the range.
+ * @return {number} A random number between min & max.
+ */
+lib.f.randomInt = function(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};

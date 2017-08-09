@@ -366,7 +366,7 @@ lib.PreferenceManager.prototype.createChild = function(listName, opt_hint,
   } else {
     // Pick a random, unique 4-digit hex identifier for the new profile.
     while (!id || ids.indexOf(id) != -1) {
-      id = Math.floor(Math.random() * 0xffff + 1).toString(16);
+      id = lib.f.randomInt(1, 0xffff).toString(16);
       id = lib.f.zpad(id, 4);
       if (opt_hint)
         id = opt_hint + ':' + id;

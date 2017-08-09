@@ -79,3 +79,22 @@ lib.f.Tests.addTest('getWhitespace', function(result, cx) {
 
   result.pass();
 });
+
+lib.f.Tests.addTest('randomInt', function(result, cx) {
+  // How many extra samples to grab.  It's random, so hope for the best.
+  var maxSamples = 1000;
+  var i, ret;
+  var seen = [];
+  var min = 0;
+  var max = 10;
+
+  for (i = 0; i < maxSamples; ++i) {
+    ret = lib.f.randomInt(min, max);
+    result.assertEQ(true, (ret >= min && ret <= max));
+    seen[ret] = 1;
+  }
+
+  result.assertEQ((max - min + 1), seen.reduce((sum, value) => sum + value);
+
+  result.pass();
+});
