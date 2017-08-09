@@ -160,6 +160,13 @@ nassh.CommandInstance.prototype.run = function() {
       this.prefs_.set('welcome/show-count', notesShowCount + 1);
     }
 
+    // Display a random tip every time they launch to advertise features.
+    var num = lib.f.randomInt(1, 11);
+    this.io.println('');
+    this.io.println(nassh.msg('WELCOME_TIP_OF_DAY',
+                              [num, nassh.msg(`TIP_${num}`)]));
+    this.io.println('');
+
     if (this.manifest_.name.match(/\(tot\)/)) {
       // If we're a tot version, show how old the hterm deps are.
       var htermAge = Math.round(

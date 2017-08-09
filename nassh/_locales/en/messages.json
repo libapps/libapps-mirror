@@ -339,6 +339,50 @@
 		"description": "Label for the current terminal emulator profile name. Profiles are used to customize things like color and fonts.",
 		"message": "Current profile"
 	},
+	"TIP_1": {
+		"description": "Helpful tip shown to user advertising features",
+		"message": "You can hold Ctrl (Cmd on macOS) while clicking on links to open them!"
+	},
+	"TIP_2": {
+		"description": "Helpful tip shown to user advertising features",
+		"message": "Display notifications in the browser using hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"TIP_3": {
+		"description": "Helpful tip shown to user advertising features",
+		"message": "Connect from the omnibox by typing 'ssh <profile name>': https://goo.gl/V7o8ki"
+	},
+	"TIP_4": {
+		"description": "Helpful tip shown to user advertising features",
+		"message": "Chrome OS can mount filesystems via SFTP and browse via the Files app.  Use 'SFTP Mount' instead of 'Connect'."
+	},
+	"TIP_5": {
+		"description": "Helpful tip shown to user advertising features",
+		"message": "Connect using ssh:// links in web pages, or save a bookmark: https://goo.gl/zS8EZD"
+	},
+	"TIP_6": {
+		"description": "Helpful tip shown to user advertising features",
+		"message": "Color your output/prompt using basic 16 colors & 256 colors & full 24-bit colors: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"TIP_7": {
+		"description": "Helpful tip shown to user advertising features",
+		"message": "Copy to your clipboard from emacs/vim/etc... using OSC-52: https://goo.gl/XSnyLo"
+	},
+	"TIP_8": {
+		"description": "Helpful tip shown to user advertising features",
+		"message": "Chat with fellow hterm/Secure Shell users via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"TIP_9": {
+		"description": "Helpful tip shown to user advertising features",
+		"message": "Found a bug?  Request a new feature?  Let us know: https://goo.gl/vb94JY"
+	},
+	"TIP_10": {
+		"description": "Helpful tip shown to user advertising features",
+		"message": "When running in a window, Ctrl-Shift-N can open another session."
+	},
+	"TIP_11": {
+		"description": "Helpful tip shown to user advertising features",
+		"message": "You can rebind keys/shortcuts: https://goo.gl/LWRndr"
+	},
 	"UNEXPECTED_ERROR": {
 		"description": "Generic message displayed when we encounter an unexpected error.",
 		"message": "An unexpected error occurred, please check the JavaScript console for more details."
@@ -378,6 +422,20 @@
 			"ver": {
 				"content": "$1",
 				"example": "0.8.35.6"
+			}
+		}
+	},
+	"WELCOME_TIP_OF_DAY": {
+		"description": "Random useful tip displayed to the user at startup",
+		"message": "Random Pro Tip #$NUM$: $TIP$",
+		"placeholders": {
+			"num": {
+				"content": "$1",
+				"example": "22"
+			},
+			"tip": {
+				"content": "$2",
+				"example": "Did you know you can resize the window?"
 			}
 		}
 	},
