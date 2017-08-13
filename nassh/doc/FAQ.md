@@ -989,9 +989,9 @@ different app, visit the chrome://settings/handlers page.
   to send (and remember to escape the escapes).
 
     # A DCS sequence terminated by a ST.
-    $ printf '\eP...\e\\'
+    $ printf '\033P...\033\\'
     # Send a notification straight to hterm.
-    $ printf '\eP\e\e]777;notify;title;body\a\e\\'
+    $ printf '\033P\033\033]777;notify;title;body\a\033\\'
 
   Under [tmux](https://github.com/tmux/tmux/blob/master/tools/ansicode.txt),
   you can use a DCS sequence too, but using the `tmux` subcommand.  Replace
@@ -999,9 +999,9 @@ different app, visit the chrome://settings/handlers page.
   escapes).
 
     # A DCS sequence terminated by a ST.
-    $ printf '\ePtmux;...\e\\'
+    $ printf '\033Ptmux;...\033\\'
     # Send a notification straight to hterm.
-    $ printf '\ePtmux;\e\e]777;notify;title;body\a\e\\'
+    $ printf '\033Ptmux;\033\033]777;notify;title;body\a\033\\'
 
   There is an [hterm-notify.sh] helper script available as well:
 
