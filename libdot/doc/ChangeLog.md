@@ -1,3 +1,10 @@
+# 1.16, 2017-08-16, Improve Unicode handling.
+
+* lib.TestManager.Log completely rewritten for better capturing & use.
+* Add a bin/load_tests.sh helper for quickly launching the tests.
+* New lib.f.randomInt helper for integer ranges.
+* lib.wc.substr now includes trailing combining characters.
+
 # 1.15, 2017-06-29, Standards improvements.
 
 * Drop old String.prototype.codePointAt polyfill.
