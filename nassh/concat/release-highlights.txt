@@ -27,6 +27,10 @@
 % Support for URxvt OSC-777:notify module notifications.
 % Ctrl+V/Ctrl+Shift+V now pastes directly (fixes at least macOS).
 
-# release: 0.8.36.9
+# release: 0.8.36.9 (stable August 3)
 % Support DOCS (ESC+percent) sequences to put into UTF8 mode.
 %   Can be used to disable graphics maps permanently.
+
+# release: 0.8.36.11
+% The SSH command line can handle basic quoting rules (e.g. -o "Feature yes").
+% Unicode combining character processing has been overhauled.
