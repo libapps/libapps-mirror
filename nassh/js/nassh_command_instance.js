@@ -790,7 +790,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   // This matches native `ssh` behavior and makes our lives simpler.
   var extraArgs = nassh.CommandInstance.splitCommandLine(params.argstr);
   if (extraArgs.args)
-    argv.arguments = argv.arguments.concat(args);
+    argv.arguments = argv.arguments.concat(extraArgs.args);
   if (extraArgs.command)
     argv.arguments.push('--', extraArgs.command);
 
