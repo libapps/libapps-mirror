@@ -164,10 +164,8 @@ lib.TestManager.Log = function(opt_console=console) {
  *
  *   // Sample asynchronous test case.
  *   MyTests.addTest('async-pop-length', function(result, cx) {
- *       var self = this;
- *
- *       var callback = function() {
- *           result.assertEQ(self.list.length, self.size - 1);
+ *       var callback = () => {
+ *           result.assertEQ(this.list.length, this.size - 1);
  *           result.pass();
  *       };
  *
@@ -881,8 +879,6 @@ lib.TestManager.Result.TestComplete.prototype.toString = function() {
  * Start the test associated with this result.
  */
 lib.TestManager.Result.prototype.run = function() {
-  var self = this;
-
   this.startDate = new Date();
   this.test.run(this);
 
