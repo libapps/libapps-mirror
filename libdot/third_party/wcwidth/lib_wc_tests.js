@@ -16,7 +16,8 @@ lib.wc.Tests.addTest('strWidth-test', function(result, cx) {
   var nullChar = '\u0000';
   var controlChar = '\r';
   var musicalSign = '\uD834\uDD00';
-  var wideSurrogatePair = '\uD842\uDD9D';
+  var wideSurrogatePair = '\uD842\uDD9D';  // U+2099d 𠦝
+  var narrowSurrogatePair = '\uD83D\uDE0E';  // U+1f60e 😎
   var combiningChar = 'A\u030A';
 
   result.assertEQ(1, lib.wc.strWidth(asciiOnechar), 'ASCII char has wcwidth 1');
@@ -34,6 +35,8 @@ lib.wc.Tests.addTest('strWidth-test', function(result, cx) {
                   'A surrogate pair is considered as a single character.');
   result.assertEQ(2, lib.wc.strWidth(wideSurrogatePair),
                   'A wide character represented in a surrogate pair.');
+  result.assertEQ(1, lib.wc.strWidth(narrowSurrogatePair),
+                  'A narrow character represented in a surrogate pair.');
   result.assertEQ(1, lib.wc.strWidth(combiningChar),
                   'A combining character.');
 
@@ -114,6 +117,46 @@ lib.wc.Tests.addTest('substr-test', function(result, cx) {
   result.assertEQ('3A\u030a', lib.wc.substr(combiningString, 2, 2));
   result.assertEQ('A\u030a4', lib.wc.substr(combiningString, 3, 2));
   result.assertEQ('A\u030a', lib.wc.substr(combiningString, 3, 1));
+
+  result.pass();
+});
+
+lib.wc.Tests.addTest('substr-wide-surrogate-test', function(result, cx) {
+  const string = '12\u{2099d}34';
+
+  // Sanity check this string actually contains a surrogate pair.
+  result.assertEQ(6, string.length);
+
+  result.assertEQ(string, lib.wc.substr(string, 0));
+  result.assertEQ('12', lib.wc.substr(string, 0, 2));
+  result.assertEQ('2', lib.wc.substr(string, 1, 2));
+  result.assertEQ('2\u{D842}\u{DD9D}', lib.wc.substr(string, 1, 3));
+  result.assertEQ('2\u{D842}\u{DD9D}3', lib.wc.substr(string, 1, 4));
+  result.assertEQ('', lib.wc.substr(string, 2, 1));
+  result.assertEQ('\u{D842}\u{DD9D}', lib.wc.substr(string, 2, 2));
+  result.assertEQ('\u{D842}\u{DD9D}3', lib.wc.substr(string, 2, 3));
+  // We don't test column 3 here as it's unclear what the right answer is.
+  // That'll be in the middle of the wide character (column wise).
+  result.assertEQ('3', lib.wc.substr(string, 4, 1));
+  result.assertEQ('34', lib.wc.substr(string, 4));
+
+  result.pass();
+});
+
+lib.wc.Tests.addTest('substr-narrow-surrogate-test', function(result, cx) {
+  const string = '12\u{1f60e}34';
+
+  // Sanity check this string actually contains a surrogate pair.
+  result.assertEQ(6, string.length);
+
+  result.assertEQ(string, lib.wc.substr(string, 0));
+  result.assertEQ('12', lib.wc.substr(string, 0, 2));
+  result.assertEQ('2\u{1f60e}', lib.wc.substr(string, 1, 2));
+  result.assertEQ('2\u{1f60e}3', lib.wc.substr(string, 1, 3));
+  result.assertEQ('\u{1f60e}', lib.wc.substr(string, 2, 1));
+  result.assertEQ('\u{1f60e}3', lib.wc.substr(string, 2, 2));
+  result.assertEQ('3', lib.wc.substr(string, 3, 1));
+  result.assertEQ('34', lib.wc.substr(string, 3));
 
   result.pass();
 });

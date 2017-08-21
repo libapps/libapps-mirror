@@ -387,18 +387,22 @@ lib.wc.strWidth = function(str) {
 lib.wc.substr = function(str, start, opt_width) {
   var startIndex, endIndex, width;
 
-  for (startIndex = 0, width = 0; startIndex < str.length; startIndex++) {
-    width += lib.wc.charWidth(str.charCodeAt(startIndex));
+  for (startIndex = 0, width = 0; startIndex < str.length;) {
+    const codePoint = str.codePointAt(startIndex);
+    width += lib.wc.charWidth(codePoint);
     if (width > start)
       break;
+    startIndex += (codePoint <= 0xffff) ? 1 : 2;
   }
 
   if (opt_width != undefined) {
-    for (endIndex = startIndex, width = 0;
-         endIndex < str.length && width <= opt_width;
-         width += lib.wc.charWidth(str.charCodeAt(endIndex)), endIndex++);
-    if (width > opt_width)
-      endIndex--;
+    for (endIndex = startIndex, width = 0; endIndex < str.length;) {
+      const codePoint = str.codePointAt(endIndex);
+      width += lib.wc.charWidth(codePoint);
+      if (width > opt_width)
+        break;
+      endIndex += (codePoint <= 0xffff) ? 1 : 2;
+    }
     return str.substring(startIndex, endIndex);
   }
 
