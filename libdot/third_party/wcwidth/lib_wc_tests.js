@@ -72,6 +72,7 @@ lib.wc.Tests.addTest('substr-test', function(result, cx) {
   var widecharString = '\u4E2D\u6587\u5B57\u4E32\u4E2D\u6587\u5B57\u4E32';
   var mixedString = '12345\u4E2D\u6587\u5B57\u4E3267890';
   var combiningString = '123A\u030A456';
+  var leadingCombiningString = '\u{30a}x';
 
   result.assertEQ('1', lib.wc.substr(asciiOnechar, 0, 1));
   result.assertEQ('1', lib.wc.substr(asciiOnechar, 0, 2));
@@ -117,6 +118,9 @@ lib.wc.Tests.addTest('substr-test', function(result, cx) {
   result.assertEQ('3A\u030a', lib.wc.substr(combiningString, 2, 2));
   result.assertEQ('A\u030a4', lib.wc.substr(combiningString, 3, 2));
   result.assertEQ('A\u030a', lib.wc.substr(combiningString, 3, 1));
+
+  result.assertEQ(leadingCombiningString,
+                  lib.wc.substr(leadingCombiningString, 0));
 
   result.pass();
 });

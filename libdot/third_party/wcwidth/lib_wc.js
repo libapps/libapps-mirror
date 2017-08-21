@@ -385,14 +385,23 @@ lib.wc.strWidth = function(str) {
  * @return {string} The substring.
  */
 lib.wc.substr = function(str, start, opt_width) {
-  var startIndex, endIndex, width;
+  var startIndex = 0;
+  var endIndex, width;
 
-  for (startIndex = 0, width = 0; startIndex < str.length;) {
-    const codePoint = str.codePointAt(startIndex);
-    width += lib.wc.charWidth(codePoint);
-    if (width > start)
-      break;
-    startIndex += (codePoint <= 0xffff) ? 1 : 2;
+  // Fun edge case: Normally we associate zero width codepoints (like combining
+  // characters) with the previous codepoint, so we skip any leading ones while
+  // including trailing ones.  However, if there are zero width codepoints at
+  // the start of the string, and the substring starts at 0, lets include them
+  // in the result.  This also makes for a simple optimization for a common
+  // request.
+  if (start) {
+    for (width = 0; startIndex < str.length;) {
+      const codePoint = str.codePointAt(startIndex);
+      width += lib.wc.charWidth(codePoint);
+      if (width > start)
+        break;
+      startIndex += (codePoint <= 0xffff) ? 1 : 2;
+    }
   }
 
   if (opt_width != undefined) {
