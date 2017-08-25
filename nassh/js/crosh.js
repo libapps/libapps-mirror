@@ -114,8 +114,7 @@ Crosh.prototype.run = function() {
     return;
   }
 
-  this.io.onVTKeystroke = this.sendString_.bind(this, true /* fromKeyboard */);
-  this.io.sendString = this.sendString_.bind(this, false /* fromKeyboard */);
+  this.io.onVTKeystroke = this.io.sendString = this.sendString_.bind(this);
 
   this.io.onTerminalResize = this.onTerminalResize_.bind(this);
   chrome.terminalPrivate.onProcessOutput.addListener(
@@ -157,32 +156,29 @@ Crosh.prototype.onBeforeUnload_ = function(e) {
  *
  * @private
  *
- * @param {boolean} fromKeyboard Whether the string came from keyboard.
  * @param {string} string A string that may be UTF-8 encoded.
  *
  * @return {string} If decoding is needed, the decoded string, otherwise the
  *     original string.
  */
-Crosh.prototype.decodeUTF8IfNeeded_ = function(fromKeyboard, string) {
-  if (fromKeyboard &&
-      this.keyboard_ && this.keyboard_.characterEncoding == 'utf-8') {
+Crosh.prototype.decodeUTF8IfNeeded_ = function(string) {
+  if (this.keyboard_ && this.keyboard_.characterEncoding == 'utf-8')
     return lib.decodeUTF8(string);
-  }
-  return string;
+  else
+    return string;
 };
 
 /**
  * Send a string to the crosh process.
  *
- * @param {boolean} fromKeyborad Whether the string originates from keyboard.
  * @param {string} string The string to send.
  */
-Crosh.prototype.sendString_ = function(fromKeyboard, string) {
+Crosh.prototype.sendString_ = function(string) {
   if (this.pid_ == -1)
     return;
   chrome.terminalPrivate.sendInput(
       this.pid_,
-      this.decodeUTF8IfNeeded_(fromKeyboard, string));
+      this.decodeUTF8IfNeeded_(string));
 };
 
 /**
