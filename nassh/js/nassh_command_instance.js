@@ -408,8 +408,13 @@ nassh.CommandInstance.prototype.mountProfile = function(
     profileID, querystr) {
 
   var onReadStorage = () => {
-    // TODO(rginda): Soft fail on unknown profileID.
-    var prefs = this.prefs_.getProfile(profileID);
+    try {
+      var prefs = this.prefs_.getProfile(profileID);
+    } catch (e) {
+      this.io.println(nassh.msg('GET_PROFILE_ERROR', [profileID, e]));
+      this.exit(1, true);
+      return;
+    }
 
     document.querySelector('#terminal').focus();
 
@@ -469,8 +474,13 @@ nassh.CommandInstance.prototype.connectToProfile = function(
     profileID, querystr) {
 
   var onReadStorage = () => {
-    // TODO(rginda): Soft fail on unknown profileID.
-    var prefs = this.prefs_.getProfile(profileID);
+    try {
+      var prefs = this.prefs_.getProfile(profileID);
+    } catch (e) {
+      this.io.println(nassh.msg('GET_PROFILE_ERROR', [profileID, e]));
+      this.exit(1, true);
+      return;
+    }
 
     document.querySelector('#terminal').focus();
 

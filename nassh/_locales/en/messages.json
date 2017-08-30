@@ -181,6 +181,20 @@
 			}
 		}
 	},
+	"GET_PROFILE_ERROR": {
+		"description": "Error message shown when trying to load an unknown/invalid connection profile.",
+		"message": "ERROR: Could not load profile $ID$:\n\r$MSG$",
+		"placeholders": {
+			"id": {
+				"content": "$1",
+				"example": "3dc8"
+			},
+			"msg": {
+				"content": "$2",
+				"example": "Unknown profile-ids: 3dc8"
+			}
+		}
+	},
 	"IDENTITY_LABEL": {
 		"description": "Label for the identity field. The identity is a SSH private key filename used to authenticate with servers.",
 		"message": "Identity"
