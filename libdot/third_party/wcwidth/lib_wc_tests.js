@@ -17,7 +17,7 @@ lib.wc.Tests.addTest('strWidth-test', function(result, cx) {
   var controlChar = '\r';
   var musicalSign = '\uD834\uDD00';
   var wideSurrogatePair = '\uD842\uDD9D';  // U+2099d 𠦝
-  var narrowSurrogatePair = '\uD83D\uDE0E';  // U+1f60e 😎
+  var narrowSurrogatePair = '\uD83D\uDE6B';  // U+1f66b 🙫
   var combiningChar = 'A\u030A';
 
   result.assertEQ(1, lib.wc.strWidth(asciiOnechar), 'ASCII char has wcwidth 1');
@@ -167,17 +167,17 @@ lib.wc.Tests.addTest('substr-wide-surrogate-test', function(result, cx) {
 });
 
 lib.wc.Tests.addTest('substr-narrow-surrogate-test', function(result, cx) {
-  const string = '12\u{1f60e}34';
+  const string = '12\u{1f66b}34';
 
   // Sanity check this string actually contains a surrogate pair.
   result.assertEQ(6, string.length);
 
   result.assertEQ(string, lib.wc.substr(string, 0));
   result.assertEQ('12', lib.wc.substr(string, 0, 2));
-  result.assertEQ('2\u{1f60e}', lib.wc.substr(string, 1, 2));
-  result.assertEQ('2\u{1f60e}3', lib.wc.substr(string, 1, 3));
-  result.assertEQ('\u{1f60e}', lib.wc.substr(string, 2, 1));
-  result.assertEQ('\u{1f60e}3', lib.wc.substr(string, 2, 2));
+  result.assertEQ('2\u{1f66b}', lib.wc.substr(string, 1, 2));
+  result.assertEQ('2\u{1f66b}3', lib.wc.substr(string, 1, 3));
+  result.assertEQ('\u{1f66b}', lib.wc.substr(string, 2, 1));
+  result.assertEQ('\u{1f66b}3', lib.wc.substr(string, 2, 2));
   result.assertEQ('3', lib.wc.substr(string, 3, 1));
   result.assertEQ('34', lib.wc.substr(string, 3));
 
