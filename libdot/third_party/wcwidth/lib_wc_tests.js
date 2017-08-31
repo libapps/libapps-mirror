@@ -43,6 +43,25 @@ lib.wc.Tests.addTest('strWidth-test', function(result, cx) {
   result.pass();
 });
 
+/**
+ * Verify behavior for all codepoints below 0xa0.  It's quick & easy to do so,
+ * and this func has optimizations for them specifically.
+ */
+lib.wc.Tests.addTest('charWidthDisregardAmbiguous-low', function(result, cs) {
+  var i;
+
+  for (i = 0; i < 0x20; ++i)
+    result.assertEQ(0, lib.wc.charWidthDisregardAmbiguous(i));
+
+  for (i = 0x20; i < 0x7f; ++i)
+    result.assertEQ(1, lib.wc.charWidthDisregardAmbiguous(i));
+
+  for (i = 0x7f; i < 0xa0; ++i)
+    result.assertEQ(0, lib.wc.charWidthDisregardAmbiguous(i));
+
+  result.pass();
+});
+
 lib.wc.Tests.addTest('charWidthRegardAmbiguous-test', function(result, cs) {
   var asciiChar = 'a';
   var wideChar = '\u4E2D';
