@@ -224,6 +224,33 @@ lib.wc.ambiguous = [
 ];
 
 /**
+ * Binary search to check if the given unicode character is in the table.
+ *
+ * @param {integer} ucs A unicode character code.
+ * @param {Object} table A sorted list of internals to match against.
+ * @return {boolean} True if the given character is in the table.
+ */
+lib.wc.binaryTableSearch_ = function(ucs, table) {
+  var min = 0, max = table.length - 1;
+  var mid;
+
+  if (ucs < table[min][0] || ucs > table[max][1])
+    return false;
+  while (max >= min) {
+    mid = Math.floor((min + max) / 2);
+    if (ucs > table[mid][1]) {
+      min = mid + 1;
+    } else if (ucs < table[mid][0]) {
+      max = mid - 1;
+    } else {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+/**
  * Binary search to check if the given unicode character is a space character.
  *
  * @param {integer} ucs A unicode character code.
@@ -232,24 +259,7 @@ lib.wc.ambiguous = [
  *     otherwise.
  */
 lib.wc.isSpace = function(ucs) {
-  // Auxiliary function for binary search in interval table.
-  var min = 0, max = lib.wc.combining.length - 1;
-  var mid;
-
-  if (ucs < lib.wc.combining[0][0] || ucs > lib.wc.combining[max][1])
-    return false;
-  while (max >= min) {
-    mid = Math.floor((min + max) / 2);
-    if (ucs > lib.wc.combining[mid][1]) {
-      min = mid + 1;
-    } else if (ucs < lib.wc.combining[mid][0]) {
-      max = mid - 1;
-    } else {
-      return true;
-    }
-  }
-
-  return false;
+  return lib.wc.binaryTableSearch_(ucs, lib.wc.combining);
 };
 
 /**
@@ -262,23 +272,7 @@ lib.wc.isSpace = function(ucs) {
  * character.
  */
 lib.wc.isCjkAmbiguous = function(ucs) {
-  var min = 0, max = lib.wc.ambiguous.length - 1;
-  var mid;
-
-  if (ucs < lib.wc.ambiguous[0][0] || ucs > lib.wc.ambiguous[max][1])
-    return false;
-  while (max >= min) {
-    mid = Math.floor((min + max) / 2);
-    if (ucs > lib.wc.ambiguous[mid][1]) {
-      min = mid + 1;
-    } else if (ucs < lib.wc.ambiguous[mid][0]) {
-      max = mid - 1;
-    } else {
-      return true;
-    }
-  }
-
-  return false;
+  return lib.wc.binaryTableSearch_(ucs, lib.wc.ambiguous);
 };
 
 /**
