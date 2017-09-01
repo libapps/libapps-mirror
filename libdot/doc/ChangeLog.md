@@ -1,3 +1,11 @@
+# 1.17, 2017-09-01, Unicode fixes and array helpers.
+
+* Start a lib.array API for low level array/bit operations.
+* Tidy up code a bit to please linters.
+* lib.wc.substr now includes leading combining characters.
+* lib.wc.substr fix handling of surrogate pairs.
+* Use arrow functions instead of "self" references.
+
 # 1.16, 2017-08-16, Improve Unicode handling.
 
 * lib.TestManager.Log completely rewritten for better capturing & use.
