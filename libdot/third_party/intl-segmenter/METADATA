@@ -1,0 +1,10 @@
+name: "proposal-intl-segmenter"
+description: "Polyfill for Intl.Segmenter"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://github.com/tc39/proposal-intl-segmenter"
+  }
+  last_upgrade_date { year: 2019 month: 1 day: 1 }
+}
