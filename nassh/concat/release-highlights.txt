@@ -1,4 +1,4 @@
-0.8.35.6
+0.8.35.9
 
 # The first line tracks the last version that went stable.
 # Only features added since then should be kept here.
@@ -10,27 +10,10 @@
 # Only list significant changes that matter to the user.
 # The more lines that we have here, the more cluttered the output.
 
-# release: 0.8.36.6 (stable July 12)
-% SFTP mount support (Chrome OS only).
-% OpenSSH upgraded to 7.5p1 (ECDSA/ED25519 support, but older features deprecated).
-% Support for ssh:// links.
-% Omnibox integration for ssh keyword.
-% Add a user-css-text field for injecting custom CSS directly.
-% IDN support for international domains.
-% Root path for SFTP mounts can be configured (Chrome OS only).
-% OpenSSL upgraded to 1.0.2k.
-% Custom "mouse-paste-button" settings need to be manually updated.
-% Mouse wheel sends up/down arrow keys on the alt screen in DECCKM mode.
-%   Hold shift to disable temporarily.
-%   New scroll-wheel-may-send-arrow-keys preference to enable.
-% Support for iTerm2 OSC-9 growl notifications.
-% Support for URxvt OSC-777:notify module notifications.
-% Ctrl+V/Ctrl+Shift+V now pastes directly (fixes at least macOS).
-
 # release: 0.8.36.9 (stable August 3)
 % Support DOCS (ESC+percent) sequences to put into UTF8 mode.
 %   Can be used to disable graphics maps permanently.
 
-# release: 0.8.36.11
+# release: 0.8.36.11 (stable August 29)
 % The SSH command line can handle basic quoting rules (e.g. -o "Feature yes").
 % Unicode combining character processing has been overhauled.

@@ -1,6 +1,15 @@
-# 0.8.36.11, 2017-08-16, Improve Unicode handling.
+# 0.8.36.12, 2017-09-01, Bugfixes galore.
 
 * Update to libdot 1.17.  Better handling for Unicode combining characters.
+* Update to hterm 1.71.  Better handling for Unicode combining characters.
+* Improve startup display to not flash so much white.
+* Promote some array helpers to new lib.array API.
+* Promote binary<->base64 helpers for all stream classes.
+* Refactor Stream.asyncRead API to unify duplicate implementations.
+
+# 0.8.36.11, 2017-08-16, Improve Unicode handling.
+
+* Update to libdot 1.16.  Better handling for Unicode combining characters.
 * Update to hterm 1.70.  Better handling for Unicode combining characters.
 * Use new lib.f.randomInt helper.
 * Fix helper scripts/docs to use POSIX portable \033 instead of \e with printf.
