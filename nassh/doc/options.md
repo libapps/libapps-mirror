@@ -51,7 +51,9 @@ The following backends are currently implemented:
   A minimal implementation of a backend. Only used for testing purposes.
 * `gsc`:
   Supports SSH authentication using private keys stored on
-  OpenPGP-enabled smart cards.
+  OpenPGP-enabled smart cards. **Note:** Requires the
+  [Smart Card Connector app](https://chrome.google.com/webstore/detail/khpfeaanjngmcnplbdlpegiifgpfgdco)
+  to be installed.
 
 ## `--ssh-agent=<extension id>`
 
