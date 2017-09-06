@@ -17,19 +17,13 @@
  * An SSH agent backend that uses the Google Smart Card Connector library to
  * perform SSH authentication using private keys stored on smart cards.
  *
- * @param {!nassh.agent.Agent.UserIO} userIO Used to prompt the user for the
- *     smart card PIN.
+ * @param {!nassh.agent.Agent.UserIO} userIO Reference to object with terminal
+ *     IO functions.
  * @constructor
  * @implements nassh.agent.Backend
  */
 nassh.agent.backends.GSC = function(userIO) {
-  /**
-   * Reference to object with terminal IO functions.
-   *
-   * @member {!nassh.agent.Agent.UserIO}
-   * @private
-   */
-  this.userIO_ = userIO;
+  nassh.agent.Backend.apply(this, [userIO]);
 
   /**
    * Map a string representation of an identity's key blob to the reader that
@@ -51,7 +45,7 @@ nassh.agent.backends.GSC.constructor = nassh.agent.backends.GSC;
  * @readonly
  * @const {!string}
  */
-nassh.agent.backends.GSC.BACKEND_ID = 'gsc';
+nassh.agent.backends.GSC.prototype.BACKEND_ID = 'gsc';
 
 // Register the backend for use by nassh.agent.Agent.
 nassh.agent.registerBackend(nassh.agent.backends.GSC);
@@ -254,10 +248,8 @@ nassh.agent.backends.GSC.prototype.requestPIN =
   // Show 8 hex character (4 byte) fingerprint to the user.
   const shortFingerprint =
       nassh.agent.backends.GSC.arrayToHexString(readerKeyId.slice(-4));
-  return this.userIO_.promptUser(
-      nassh.agent.backends.GSC.BACKEND_ID,
-      `Enter PIN to unlock key ${shortFingerprint} on '${reader}' ` +
-          `(${numTries} tries remaining): `);
+  return this.promptUser(
+      nassh.msg('REQUEST_PIN_PROMPT', [shortFingerprint, reader, numTries]));
 };
 
 /**

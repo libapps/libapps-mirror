@@ -220,6 +220,20 @@
 	"relay_retry": {
 		"message": "Retrying..."
 	},
+	"request_pin_prompt": {
+		"message": "Enter PIN to unlock key $FINGERPRINT$ on '$READER$' ($NUM_TRIES$ tries remaining): ",
+		"placeholders": {
+			"fingerprint": {
+				"content": "$1"
+			},
+			"reader": {
+				"content": "$2"
+			},
+			"num_tries": {
+				"content": "$3"
+			}
+		}
+	},
 	"restore_prefs": {
 		"message": "Restore backup"
 	},

@@ -24,7 +24,8 @@ nassh.agent.registeredBackends_ = {};
  * @param {!function(new:nassh.agent.Backend)} backendClass
  */
 nassh.agent.registerBackend = function(backendClass) {
-  nassh.agent.registeredBackends_[backendClass.BACKEND_ID] = backendClass;
+  nassh.agent.registeredBackends_[backendClass.prototype.BACKEND_ID] =
+      backendClass;
 };
 
 /**

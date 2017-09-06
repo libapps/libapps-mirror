@@ -319,6 +319,24 @@
 		"description": "Displayed in a text overlay when we experience an error talking to the relay server (which is like a web proxy for connections).",
 		"message": "Retrying..."
 	},
+	"REQUEST_PIN_PROMPT": {
+		"description": "Prompt shown when the user is requested to enter a smart card's PIN.",
+		"message": "Enter PIN to unlock key $FINGERPRINT$ on '$READER$' ($NUM_TRIES$ tries remaining): ",
+		"placeholders": {
+			"fingerprint": {
+				"content": "$1",
+				"example": "1234ABCD"
+			},
+			"reader": {
+				"content": "$2",
+				"example": "OpenPGP card reader"
+			},
+			"num_tries": {
+				"content": "$3",
+				"example": "3"
+			}
+		}
+	},
 	"RESTORE_PREFS": {
 		"description": "Label for the link in the options page that lets the user restore their preferences (e.g. colors, font, etc...).",
 		"message": "Restore Backup"

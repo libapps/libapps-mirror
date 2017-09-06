@@ -18,7 +18,15 @@ nassh.agent.backends = {};
  * @constructor
  * @interface
  */
-nassh.agent.Backend = function(userIO) {};
+nassh.agent.Backend = function(userIO) {
+  /**
+   * Reference to object with terminal IO functions.
+   *
+   * @member {!nassh.agent.Agent.UserIO}
+   * @private
+   */
+  this.userIO_ = userIO;
+};
 
 /**
  * The unique ID of the backend. This is used to reference the backend in the
@@ -27,7 +35,7 @@ nassh.agent.Backend = function(userIO) {};
  * @readonly
  * @const {!string}
  */
-nassh.agent.Backend.BACKEND_ID = 'stub';
+nassh.agent.Backend.prototype.BACKEND_ID = 'stub';
 
 /**
  *  Generic response for request types that are not implemented.
@@ -79,4 +87,18 @@ nassh.agent.Backend.prototype.requestIdentities = function() {
  */
 nassh.agent.Backend.prototype.signRequest = function(keyBlob, data, flags) {
   return Promise.reject(nassh.agent.Backend.ERR_NOT_IMPLEMENTED);
+};
+
+/**
+ * Show a message in the terminal window and prompt the user for a string.
+ *
+ * @param {!string} promptMessage The message that should precede the prompt.
+ *     Note: The message should consist of a localized string obtained via
+ *     nassh.msg.
+ * @returns {!Promise<!string>|!Promise<void>} A promise resolving to the input
+ *     if the user confirms it by pressing enter; a rejecting promise if the
+ *     user cancels the prompt by pressing ESC.
+ */
+nassh.agent.Backend.prototype.promptUser = async function(promptMessage) {
+  return this.userIO_.promptUser(this.BACKEND_ID, promptMessage);
 };

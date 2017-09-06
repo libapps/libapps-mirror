@@ -220,6 +220,20 @@
 	"relay_retry": {
 		"message": "Wird erneut versucht..."
 	},
+	"request_pin_prompt": {
+		"message": "PIN zur Entsperrung von Schl\u00fcssel $FINGERPRINT$ auf '$READER$' eingeben ($NUM_TRIES$ Versuche verbleiben): ",
+		"placeholders": {
+			"fingerprint": {
+				"content": "$1"
+			},
+			"reader": {
+				"content": "$2"
+			},
+			"num_tries": {
+				"content": "$3"
+			}
+		}
+	},
 	"restore_prefs": {
 		"message": "Sicherung wiederherstellen"
 	},
