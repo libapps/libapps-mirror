@@ -90,6 +90,16 @@ nassh.agent.Backend.prototype.signRequest = function(keyBlob, data, flags) {
 };
 
 /**
+ * Show a message in the terminal window.
+ *
+ * @param {!string} message The message to be shown. Note: The message should
+ *     consist of a localized string obtained via nassh.msg.
+ */
+nassh.agent.Backend.prototype.showMessage = function(message) {
+  this.userIO_.showMessage(this.BACKEND_ID, message);
+};
+
+/**
  * Show a message in the terminal window and prompt the user for a string.
  *
  * @param {!string} promptMessage The message that should precede the prompt.

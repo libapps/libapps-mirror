@@ -234,6 +234,17 @@ nassh.agent.Agent.UserIO = function(term) {
 };
 
 /**
+ * Show a message in the terminal window.
+ *
+ * @param {!string} backendID The ID of the backend that wants to show the
+ *     message.
+ * @param {!string} message The message to be shown.
+ */
+nassh.agent.Agent.UserIO.prototype.showMessage = function(backendID, message) {
+  this.term_.io.println(`[agent '${backendID}'] ${message}`);
+};
+
+/**
  * Show a message in the terminal window and prompt the user for a string.
  *
  * @param {!string} backendID The ID of the backend prompting the user.

@@ -237,6 +237,14 @@
 	"restore_prefs": {
 		"message": "Sicherung wiederherstellen"
 	},
+	"smart_card_connector_not_installed": {
+		"message": "Bitte installieren Sie den Smart Card Connector: $URL$",
+		"placeholders": {
+			"url": {
+				"content": "$1"
+			}
+		}
+	},
 	"shortcut_list_aria_label": {
 		"message": "Gespeicherte Verbindungen"
 	},

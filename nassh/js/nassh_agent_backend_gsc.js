@@ -144,7 +144,14 @@ nassh.agent.backends.GSC.BYTES_SSH_RSA =
  *     initialization succeeded; a rejecting Promise otherwise.
  */
 nassh.agent.backends.GSC.prototype.ping = async function() {
-  return nassh.agent.backends.GSC.initializeAPIContext();
+  try {
+    await nassh.agent.backends.GSC.initializeAPIContext();
+  } catch (e) {
+    this.showMessage(nassh.msg(
+        'SMART_CARD_CONNECTOR_NOT_INSTALLED',
+        'https://chrome.google.com/webstore/detail/khpfeaanjngmcnplbdlpegiifgpfgdco'));
+    throw e;
+  }
 };
 
 /**

@@ -341,6 +341,16 @@
 		"description": "Label for the link in the options page that lets the user restore their preferences (e.g. colors, font, etc...).",
 		"message": "Restore Backup"
 	},
+	"SMART_CARD_CONNECTOR_NOT_INSTALLED": {
+		"description": "Error message shown when 'gsc' SSH agent backend is used but the Smart Card Connector app is not installed.",
+		"message": "Please install the Smart Card Connector app: $URL$",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "https://chrome.google.com/webstore/detail/khpfeaanjngmcnplbdlpegiifgpfgdco"
+			}
+		}
+	},
 	"SHORTCUT_LIST_ARIA_LABEL": {
 		"description": "Text use as the aria-label for the 'shortcut-list'.",
 		"message": "saved connections"
