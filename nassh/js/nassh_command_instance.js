@@ -641,12 +641,12 @@ nassh.CommandInstance.prototype.mountDestination = function(destination) {
  * @return {Object} The various components.
  */
 nassh.CommandInstance.splitCommandLine = function(argstr) {
-  var args = argstr;
+  var args = argstr || '';
   var command = '';
 
   // Tokenize the string first.
   var i;
-  var ary = argstr.match(/("[^"]*"|\S+)/g);
+  var ary = args.match(/("[^"]*"|\S+)/g);
   if (ary) {
     // If there is a -- separator in here, we split that off and leave the
     // command line untouched (other than normalizing of whitespace between
@@ -665,9 +665,9 @@ nassh.CommandInstance.splitCommandLine = function(argstr) {
   } else {
     // Strip out any whitespace.  There shouldn't be anything left that the
     // regex wouldn't have matched, but let's be paranoid.
-    argstr = argstr.trim();
-    if (argstr)
-      ary = [argstr];
+    args = args.trim();
+    if (args)
+      ary = [args];
     else
       ary = [];
   }

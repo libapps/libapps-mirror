@@ -15,6 +15,9 @@ nassh.CommandInstance.Tests = new lib.TestManager.Suite('nassh.CommandInstance.T
  */
 nassh.CommandInstance.Tests.addTest('splitCommandLine', function(result, cx) {
   const data = [
+    // JS API.
+    [undefined, [], ''],
+
     // Various unquoted scenarios.
     ['', [], ''],
     ['    ', [], ''],
