@@ -145,14 +145,17 @@ nassh.App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
       chrome.tabs.create({url: url, active: false});
       break;
     case 'newForegroundTab':
+      // Close the active tab.  We need to do this before opening a new window
+      // in case Chrome selects that as the new active tab.  It won't kill us
+      // right away though as the JS execution model guarantees we'll finish
+      // running this func before the callback runs.
+      chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.remove(tabs[0].id);
+      });
       // We'll abuse this to open a window instead of a tab.
       window.open(url, '',
                   'chrome=no,close=yes,resize=yes,minimizable=yes,' +
                   'scrollbars=yes,width=900,height=600,noopener');
-      // Close the active tab.
-      chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.tabs.remove(tabs[0].id);
-      });
       break;
   }
 };
