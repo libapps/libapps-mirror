@@ -517,32 +517,34 @@ nassh.CommandInstance.prototype.connectToProfile = function(
 };
 
 /**
- * Parse the destination string.
+ * Parse ssh:// URIs.
  *
- * This also handles ssh:// URIs.
+ * This supports most of the IANA spec:
+ *   https://www.iana.org/assignments/uri-schemes/prov/ssh
+ *   ssh://[<user>@]<host>[:<port>]
  *
- * @param {string} destination A string of the form username@host[:port].
+ * It also supports Secure Shell extensions to the protocol:
+ *   ssh://[<user>@]<host>[:<port>][@<relay-host>[:<relay-port>]]
+ *
+ * Note: We don't do IPv4/IPv6/hostname validation.  That's a DNS/connectivity
+ * problem and user error.
+ *
+ * @param {string} uri The URI to parse.
+ * @param {boolean} stripSchema Whether to strip off ssh:// at the start.
  * @return {boolean|Object} False if we couldn't parse the destination.
  *     An object if we were able to parse out the connect settings.
  */
-nassh.CommandInstance.prototype.parseDestination = function(destination) {
-  // Deal with ssh:// links.  They are encoded with % hexadecimal sequences.
-  // Note: These might be ssh: or ssh://, so have to deal with that.
-  if (destination.startsWith('uri:')) {
-    // Strip off the "uri:" before decoding it.
-    destination = unescape(destination.substr(4));
-    if (!destination.startsWith('ssh:'))
-      return false;
-
+nassh.CommandInstance.parseURI = function(uri, stripSchema=true) {
+  if (stripSchema && uri.startsWith('ssh:')) {
     // Strip off the "ssh:" prefix.
-    destination = destination.substr(4);
+    uri = uri.substr(4);
     // Strip off the "//" if it exists.
-    if (destination.startsWith('//'))
-      destination = destination.substr(2);
+    if (uri.startsWith('//'))
+      uri = uri.substr(2);
   }
 
   // Parse the connection string.
-  var ary = destination.match(
+  var ary = uri.match(
       //|user |@| [  ipv6       %zoneid   ]| host |   :port      @ relay options
       /^([^@]+)@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:@]+)(?::(\d+))?(?:@([^:]+)(?::(\d+))?)?$/);
 
@@ -557,21 +559,62 @@ nassh.CommandInstance.prototype.parseDestination = function(destination) {
   if (hostname.startsWith('[') && hostname.endsWith(']'))
     hostname = hostname.substr(1, hostname.length - 2);
 
-  var relayOptions = '';
+  var relayHostname, relayPort;
   if (ary[4]) {
-    relayOptions = '--proxy-host=' + ary[4];
-
+    relayHostname = ary[4];
     if (ary[5])
-      relayOptions += ' --proxy-port=' + ary[5];
+      relayPort = ary[5];
   }
 
   return {
-      username: username,
-      hostname: hostname,
-      port: port,
-      relayOptions: relayOptions,
-      destination: destination,
+    username: username,
+    hostname: hostname,
+    port: port,
+    relayHostname: relayHostname,
+    relayPort: relayPort,
+    uri: uri,
   };
+};
+
+/**
+ * Parse the destination string.
+ *
+ * These are strings that we get from the browser bar.  It's mostly ssh://
+ * URIs, but it might have more stuff sprinkled in to smooth communication
+ * with various entry points into Secure Shell.
+ *
+ * @param {string} destination The string to connect to.
+ * @return {boolean|Object} False if we couldn't parse the destination.
+ *     An object if we were able to parse out the connect settings.
+ */
+nassh.CommandInstance.parseDestination = function(destination) {
+  let stripSchema = false;
+
+  // Deal with ssh:// links.  They are encoded with % hexadecimal sequences.
+  // Note: These might be ssh: or ssh://, so have to deal with that.
+  if (destination.startsWith('uri:')) {
+    // Strip off the "uri:" before decoding it.
+    destination = unescape(destination.substr(4));
+    if (!destination.startsWith('ssh:'))
+      return false;
+
+    stripSchema = true;
+  }
+
+  const rv = nassh.CommandInstance.parseURI(destination, stripSchema);
+  if (rv === false)
+    return rv;
+
+  // Turn the relay URI settings into nassh command line options.
+  let relayOptions;
+  if (rv.relayHostname !== undefined) {
+    relayOptions = '--proxy-host=' + rv.relayHostname;
+    if (rv.relayPort !== undefined)
+      relayOptions += ' --proxy-port=' + rv.relayPort;
+  }
+  rv.relayOptions = relayOptions;
+
+  return rv;
 };
 
 /**
@@ -587,13 +630,13 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
     return true;
   }
 
-  var rv = this.parseDestination(destination);
+  var rv = nassh.CommandInstance.parseDestination(destination);
   if (rv === false)
     return rv;
 
   // We have to set the url here rather than in connectToArgString, because
   // some callers may come directly to connectToDestination.
-  this.terminalLocation.hash = rv.destination;
+  this.terminalLocation.hash = rv.uri;
 
   return this.connectTo(rv);
 };
@@ -606,13 +649,13 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
  *     false otherwise.
  */
 nassh.CommandInstance.prototype.mountDestination = function(destination) {
-  var rv = this.parseDestination(destination);
+  var rv = nassh.CommandInstance.parseDestination(destination);
   if (rv === false)
     return rv;
 
   // We have to set the url here rather than in connectToArgString, because
   // some callers may come directly to connectToDestination.
-  this.terminalLocation.hash = rv.destination;
+  this.terminalLocation.hash = rv.uri;
 
   var args = {
     argv: {
