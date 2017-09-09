@@ -84,6 +84,39 @@ lib.f.Tests.addTest('getWhitespace', function(result, cx) {
   result.pass();
 });
 
+/**
+ * Check basic getStack behavior.
+ */
+lib.f.Tests.addTest('getStack', function(result, cx) {
+  // Set up some actual functions to check.
+  let stack;
+  const f1 = (...args) => lib.f.getStack(...args);
+  const f2 = (...args) => f1(...args);
+  const f3 = (...args) => f2(...args);
+
+  // First an empty result test.
+  result.assertEQ([], f3(100000));
+  result.assertEQ([], f3(undefined, 0));
+  result.assertEQ(1, f3(0, 1).length);
+
+  stack = f3();
+  result.assert(stack[0].indexOf('f1') != -1);
+  result.assert(stack[1].indexOf('f2') != -1);
+  result.assert(stack[2].indexOf('f3') != -1);
+  result.assert(stack.length > 3);
+
+  stack = f3(1);
+  result.assert(stack[0].indexOf('f2') != -1);
+  result.assert(stack[1].indexOf('f3') != -1);
+  result.assert(stack.length > 2);
+
+  stack = f3(2, 1);
+  result.assertEQ(stack.length, 1);
+  result.assert(stack[0].indexOf('f3') != -1);
+
+  result.pass();
+});
+
 lib.f.Tests.addTest('randomInt', function(result, cx) {
   // How many extra samples to grab.  It's random, so hope for the best.
   var maxSamples = 1000;

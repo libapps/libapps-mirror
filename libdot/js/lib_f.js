@@ -259,24 +259,29 @@ lib.f.alarm = function(callback, opt_ms) {
  * This would print the message to the js console, followed by an object
  * which can be clicked to reveal the stack.
  *
- * @param {number} opt_ignoreFrames The optional number of stack frames to
- *     ignore.  The actual 'getStack' call is always ignored.
+ * @param {number=} ignoreFrames How many inner stack frames to ignore.  The
+ *     innermost 'getStack' call is always ignored.
+ * @param {number=} count How many frames to return.
  */
-lib.f.getStack = function(opt_ignoreFrames) {
-  var ignoreFrames = opt_ignoreFrames ? opt_ignoreFrames + 2 : 2;
+lib.f.getStack = function(ignoreFrames = 0, count = undefined) {
+  const stackArray = (new Error()).stack.split('\n');
 
-  var stackArray;
+  // Always ignore the Error() object and getStack call itself.
+  // [0] = 'Error'
+  // [1] = '    at Object.lib.f.getStack (file:///.../lib_f.js:267:23)'
+  ignoreFrames += 2;
 
-  try {
-    throw new Error();
-  } catch (ex) {
-    stackArray = ex.stack.split('\n');
-  }
+  const max = stackArray.length - ignoreFrames;
+  if (count === undefined)
+    count = max;
+  else
+    count = lib.f.clamp(count, 0, max);
 
-  var stackObject = {};
-  for (var i = ignoreFrames; i < stackArray.length; i++) {
-    stackObject[i - ignoreFrames] = stackArray[i].replace(/^\s*at\s+/, '');
-  }
+  // Remove the leading spaces and "at" from each line:
+  // '    at window.onload (file:///.../lib_test.js:11:18)'
+  const stackObject = new Array();
+  for (let i = ignoreFrames; i < count + ignoreFrames; ++i)
+    stackObject.push(stackArray[i].replace(/^\s*at\s+/, ''));
 
   return stackObject;
 };
