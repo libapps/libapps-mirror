@@ -66,6 +66,7 @@ describe('parseURI', () => {
     'relayHostname': undefined,
     'relayPort': undefined,
     'schema': undefined,
+    'username': undefined,
   };
 
   // List the fields that each test requires or deviates from the default.
@@ -85,6 +86,7 @@ describe('parseURI', () => {
       'uri': 'root@localhost'}],
 
     // Basic forms.
+    ['localhost', {'hostname': 'localhost'}],
     ['root@localhost', {'username': 'root', 'hostname': 'localhost'}],
     ['u@h:2222', {'username': 'u', 'hostname': 'h', 'port': '2222'}],
 
@@ -202,7 +204,7 @@ describe('parseURI', () => {
  * Check parsing of Secure Shell destinations.
  * Most test logic is in parseURI, so we focus on the little bit that isn't.
  */
-it('parseDestination', () => {
+describe('parseDestination', () => {
   const data = [
     // Registered protocol handler.
     ['uri:ssh://root@localhost',
@@ -247,20 +249,23 @@ it('parseDestination', () => {
     ['u@h@host:1234', {'user': 'u', 'host': 'h',
                        'nasshOptions': '--proxy-host=host --proxy-port=1234'}],
 
-    // Reject missing usernames.
-    ['localhost', null],
+    // Missing usernames get prompted.
+    ['@localhost', {'user': '', 'host': 'localhost'}],
+    ['localhost', {'host': 'localhost'}],
   ];
 
   data.forEach((dataSet) => {
-    const rv = nassh.CommandInstance.parseDestination(dataSet[0]);
-    if (rv === null) {
-      assert.isNull(dataSet[1], dataSet[0]);
-    } else {
-      assert.equal(dataSet[1].user, rv.username, dataSet[0]);
-      assert.equal(dataSet[1].host, rv.hostname, dataSet[0]);
-      assert.equal(dataSet[1].schema, rv.schema, dataSet[0]);
-      assert.equal(dataSet[1].nasshOptions, rv.nasshOptions, dataSet[0]);
-    }
+    it(dataSet[0], () => {
+      const rv = nassh.CommandInstance.parseDestination(dataSet[0]);
+      if (rv === null) {
+        assert.isNull(dataSet[1], dataSet[0]);
+      } else {
+        assert.equal(dataSet[1].user, rv.username, dataSet[0]);
+        assert.equal(dataSet[1].host, rv.hostname, dataSet[0]);
+        assert.equal(dataSet[1].schema, rv.schema, dataSet[0]);
+        assert.equal(dataSet[1].nasshOptions, rv.nasshOptions, dataSet[0]);
+      }
+    });
   });
 });
 

@@ -642,8 +642,8 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema = true,
   /* eslint-disable max-len,spaced-comment */
   // Parse the connection string.
   const ary = uri.match(
-      //|user |@| [  ipv6       %zoneid   ]| host |   :port     |@| [  ipv6       %zoneid   ]|relay|   :relay port |
-      /^([^@]+)@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:@]+)(?::(\d+))?(?:@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:]+)(?::(\d+))?)?$/);
+      //|user    |@|   [  ipv6       %zoneid   ]| host |   :port     |@| [  ipv6       %zoneid   ]|relay|   :relay port |
+      /^(?:([^@]*)@)?(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:@]+)(?::(\d+))?(?:@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:]+)(?::(\d+))?)?$/);
   /* eslint-enable max-len,spaced-comment */
 
   if (!ary) {
@@ -907,9 +907,39 @@ nassh.CommandInstance.prototype.connectTo = function(params, finalize) {
     return;
   }
 
-  if (!(params.username && params.hostname)) {
-    this.io.println(nassh.msg('MISSING_PARAM', ['username/hostname']));
-    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+  // If no username was specified, prompt the user for one.
+  if (params.username === undefined) {
+    const io = this.io.push();
+
+    const container = document.createElement('div');
+    const prompt = document.createElement('p');
+    prompt.textContent = 'Please enter username:';
+    container.appendChild(prompt);
+    const input = document.createElement('input');
+    container.appendChild(input);
+    io.showOverlay(container, null);
+
+    // Force focus after the browser has a chance to render things.
+    setTimeout(() => input.focus());
+
+    // Keep accepting input until they press Enter.
+    input.addEventListener('keydown', (e) => {
+      e.stopPropagation();
+      if (e.key === 'Enter') {
+        params.username = input.value;
+        io.hideOverlay();
+        io.pop();
+        this.connectTo(params, finalize);
+      }
+    }, true);
+    // The terminal will eat all key events, so make sure we stop that.
+    input.addEventListener('keyup', (e) => e.stopPropagation(), true);
+    input.addEventListener('keypress', (e) => e.stopPropagation(), true);
+
+    // If the terminal becomes active for some reason, force back to the input.
+    io.onVTKeystroke = io.sendString = (string) => {
+      input.focus();
+    };
     return;
   }
 
