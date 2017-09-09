@@ -929,7 +929,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.readerShort = function() {
 nassh.agent.backends.GSC.SmartCardManager.prototype.execute_ = function(
     sCardPromise) {
   // Retain call stack for logging purposes.
-  const stack = new Error().stack;
+  const stack = lib.f.getStack();
   return sCardPromise.then(
       (result) =>
           new Promise(function(resolve, reject) {

@@ -14,7 +14,7 @@ nassh.sftp.StatusError = function(statusPacket, expectedPacketType) {
   this.code = statusPacket.code;
   this.message = 'Received StatusPacket error in response to '
                  + expectedPacketType + ' packet: ' + statusPacket.message;
-  this.stack = (new Error()).stack;
+  this.stack = lib.f.getStack();
 };
 
 nassh.sftp.StatusError.prototype = Object.create(Error.prototype);
