@@ -243,7 +243,7 @@
 		"message": "Ja ir iestatīta vērtība “true”, ar taustiņiem Home/End tiek vadīta termināļa ritjosla, bet ar taustiņiem Shift un Home/End tiek nosūtīti VT taustiņu kodi. Ja ir iestatīta vērtība “false”, ar taustiņiem Home/End tiek nosūtīti VT kodi, bet ar taustiņiem Shift un Home/End notiek ritināšana."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Karte ar taustiņu kombināciju veiktajām taustiņu darbībām. Taustiņu kombinācijās ir ietverts nulles taustiņš vai citi modificētājtaustiņi un taustiņa kods. Taustiņu kodi var būt decimāli vai heksadecimāli skaitļi vai taustiņa identifikators. Taustiņu darbības var būt norādītas kā virkne, ko sūtīt saimniekdatoram, vai kā darbības identifikators. Visu formāta skaidrojumu skatiet vietnē https://goo.gl/LWRndr.\n\nSaistīto taustiņu piemēri\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Karte ar taustiņu kombināciju veiktajām taustiņu darbībām. Taustiņu kombinācijās ir ietverts nulles taustiņš vai citi modificētājtaustiņi un taustiņa kods. Taustiņu kodi var būt decimāli vai heksadecimāli skaitļi vai taustiņa identifikators. Taustiņu darbības var būt norādītas kā virkne, ko sūtīt saimniekdatoram, vai kā darbības identifikators. Visu formāta skaidrojumu skatiet vietnē https://goo.gl/LWRndr.\n\nSaistīto taustiņu piemēri\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ja ir iestatīta vērtība “true”, multivides taustiņi tiek mainīti uz to funkciju taustiņu ekvivalentiem. Ja ir iestatīta vērtība “false”, pārlūkam tiek ļauts apstrādāt taustiņus."

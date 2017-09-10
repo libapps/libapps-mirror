@@ -243,7 +243,7 @@
 		"message": "Jeśli wybrano opcję prawda, klawisze Home/End będą przewijać terminal, a kombinacje Shift+Home/End będą wysyłać kody klawiszy VT. Jeśli wybrano opcję fałsz, klawisze Home/End będą wysyłać kody VT, a kombinacje Shift+Home/End będą przewijać."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Mapowanie sekwencji klawiszy na działania. Sekwencje klawiszy zawierają zero lub więcej klawiszy modyfikujących, a po nich kod klawisza. Kody klawiszy mogą mieć postać liczb dziesiętnych lub szesnastkowych albo identyfikatorów klawiszy. Działania mogą mieć postać ciągu znaków, który jest wysyłany do hosta, albo identyfikatora działania. Pełny opis formatu znajdziesz na https://goo.gl/LWRndr\n\n\n\nPrzykładowe powiązania klawiszy:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Mapowanie sekwencji klawiszy na działania. Sekwencje klawiszy zawierają zero lub więcej klawiszy modyfikujących, a po nich kod klawisza. Kody klawiszy mogą mieć postać liczb dziesiętnych lub szesnastkowych albo identyfikatorów klawiszy. Działania mogą mieć postać ciągu znaków, który jest wysyłany do hosta, albo identyfikatora działania. Pełny opis formatu znajdziesz na https://goo.gl/LWRndr\n\n\n\nPrzykładowe powiązania klawiszy:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Jeśli wybrano opcję true, klawisze multimedialne będą traktowane jako odpowiadające im klawisze funkcyjne. Jeśli wybrano opcję false, naciśnięcia tych klawiszy będzie obsługiwać przeglądarka."

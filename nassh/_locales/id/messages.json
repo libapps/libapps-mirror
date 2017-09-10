@@ -243,7 +243,7 @@
 		"message": "Jika true, Home/End akan mengontrol scrollbar terminal dan Shift-Home/End akan mengirim kode tombol VT. Jika false, maka Home/End mengirim kode VT dan Shift-Home/End melakukan scroll."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Peta berisi urutan tombol untuk tindakan tombol. Urutan tombol mencakup nol atau kunci pengubah lainnya yang diikuti oleh kode tombol. Kode tombol dapat berupa angka desimal atau heksadesimal, atau ID tombol. Tindakan tombol diberikan string untuk dikirim ke host, atau ID tindakan. Untuk penjelasan selengkapnya mengenai format, lihat https://goo.gl/LWRndr.\n\nContoh kombinasi tombol:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Peta berisi urutan tombol untuk tindakan tombol. Urutan tombol mencakup nol atau kunci pengubah lainnya yang diikuti oleh kode tombol. Kode tombol dapat berupa angka desimal atau heksadesimal, atau ID tombol. Tindakan tombol diberikan string untuk dikirim ke host, atau ID tindakan. Untuk penjelasan selengkapnya mengenai format, lihat https://goo.gl/LWRndr.\n\nContoh kombinasi tombol:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Jika true, mengonversi tombol media ke yang setara Fkey. Jika false, mengizinkan browser menangani tombol."

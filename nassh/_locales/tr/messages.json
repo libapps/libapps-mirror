@@ -243,7 +243,7 @@
 		"message": "Doğru değerine ayarlanırsa, Home/End tuşu, terminal kaydırma çubuğunu kontrol eder ve Üst Karakter-Home/End, VT tuş kodlarını gönderir. Yanlış değerine ayarlanırsa Home/End, VT kodlarını gönderir ve Üst Karakter-Home/End kaydırır."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Tuş işlemleri için tuş sırasının bir haritası. Tuş sıraları, sıfır veya daha fazla değiştirici tuş ile ardından gelen bir tuş kodundan oluşur. Tuş kodları ondalık veya onaltılık sayılar ya da bir tuş tanımlayıcı olabilir. Tuş işlemlerine, ana makineye gönderilecek bir dize ya da işlem tanımlayıcı belirlenebilir. Biçimin tam açıklaması için https://goo.gl/LWRndr adresine bakın.\n\nÖrnek tuş ilişkilendirmeleri:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Üst Karakter-L\": \"BAŞARILI\",\n  \"Ctrl-H\": \"'MERHABA\\n'\"\n}"
+		"message": "Tuş işlemleri için tuş sırasının bir haritası. Tuş sıraları, sıfır veya daha fazla değiştirici tuş ile ardından gelen bir tuş kodundan oluşur. Tuş kodları ondalık veya onaltılık sayılar ya da bir tuş tanımlayıcı olabilir. Tuş işlemlerine, ana makineye gönderilecek bir dize ya da işlem tanımlayıcı belirlenebilir. Biçimin tam açıklaması için https://goo.gl/LWRndr adresine bakın.\n\nÖrnek tuş ilişkilendirmeleri:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Üst Karakter-L\": \"BAŞARILI\",\n  \"Ctrl-H\": \"'MERHABA\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Doğru değerine ayarlanırsa, medya tuşlarını Fkey eşdeğerlerine dönüştürür. Yanlış değerine ayarlanırsa tarayıcının tuşları ele almasına izin verir."

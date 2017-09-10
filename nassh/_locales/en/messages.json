@@ -439,7 +439,7 @@
 	},
 	"HTERM_PREF_KEYBINDINGS": {
 		"description": "Help text shown for the hterm 'keybindings' preference. The example keybindings should not be translated; you can translate the 'Hello World' text, but you must not change the quote style.",
-		"message": "A map of key sequence to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers, or a key identifier. Key actions can be specified as a string to send to the host, or an action identifier. For a full explanation of the format, see https://goo.gl/LWRndr.\n\nSample keybindings:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "A map of key sequence to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers, or a key identifier. Key actions can be specified as a string to send to the host, or an action identifier. For a full explanation of the format, see https://goo.gl/LWRndr.\n\nSample keybindings:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
 	},
 	"HTERM_PREF_MEDIA_KEYS_ARE_FKEYS": {
 		"description": "Help text shown for the hterm 'media-keys-are-fkeys' preference. The true/false words may be translated.",

@@ -243,7 +243,7 @@
 		"message": "När detta är inställt på sant styr tangenterna Home/End terminalens rullningslist och Skift + Home/End skickar tangentkoderna till den virtuella terminalen. Med inställningen falskt skickas tangentkoderna med Home/End och rullning sker med Skift + Home/End."
 	},
 	"hterm_pref_keybindings": {
-		"message": "En koppling mellan tangentsekvenser och motsvarande åtgärder. Tangentsekvenserna består av noll eller flera specialtangenter åtföljda av en tangentkod. Tangentkoden kan bestå av decimala eller hexadecimala siffror eller en tangentidentifierare. Tangentåtgärderna kan vara en sträng som skickas till värden eller en åtgärdsidentifierare. En fullständig förklaring av formatet finns på https://goo.gl/LWRndr.\n\nExempel på tangentbindningar:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "En koppling mellan tangentsekvenser och motsvarande åtgärder. Tangentsekvenserna består av noll eller flera specialtangenter åtföljda av en tangentkod. Tangentkoden kan bestå av decimala eller hexadecimala siffror eller en tangentidentifierare. Tangentåtgärderna kan vara en sträng som skickas till värden eller en åtgärdsidentifierare. En fullständig förklaring av formatet finns på https://goo.gl/LWRndr.\n\nExempel på tangentbindningar:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "När detta är inställt på sant konverteras medietangenter till motsvarande funktionstangent. Med inställningen falskt hanterar webbläsaren tangenterna."

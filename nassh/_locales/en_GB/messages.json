@@ -243,7 +243,7 @@
 		"message": "If true, Home/End will control the terminal scrollbar and Shift-Home/End will send the VT key codes. If false, then Home/End sends VT codes and Shift-Home/End scrolls."
 	},
 	"hterm_pref_keybindings": {
-		"message": "A map of key sequences to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers, or a key identifier. Key actions can be specified a string to send to the host, or an action identifier. For a full explanation of the format, see https://goo.gl/LWRndr.\n\nSample keybindings:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "A map of key sequences to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers, or a key identifier. Key actions can be specified a string to send to the host, or an action identifier. For a full explanation of the format, see https://goo.gl/LWRndr.\n\nSample keybindings:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "If true, convert media keys to their Fkey equivalent. If false, let the browser handle the keys."

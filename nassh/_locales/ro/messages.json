@@ -243,7 +243,7 @@
 		"message": "Dacă preferința este activată, tastele Home/End vor controla bara de derulare a terminalului, iar combinațiile Shift Home/End vor trimite codurile de taste VT. Dacă este dezactivată, tastele Home/End trimit codurile VT, iar combinațiile Shift Home/End vor derula."
 	},
 	"hterm_pref_keybindings": {
-		"message": "O mapare a secvenței de taste la acțiunea corespunzătoare. Secvențele de taste includ zero sau mai multe taste de modificare, urmate de un cod de tastă. Codurile de taste pot include numere zecimale sau hexazecimale ori un identificator de tastă. Acțiunile pot fi specificate cu un șir de trimis gazdei sau printr-un identificator de acțiune. Pentru o explicație completă a formatului, accesează https://goo.gl/LWRndr.\n\nExemple de corespondențe:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "O mapare a secvenței de taste la acțiunea corespunzătoare. Secvențele de taste includ zero sau mai multe taste de modificare, urmate de un cod de tastă. Codurile de taste pot include numere zecimale sau hexazecimale ori un identificator de tastă. Acțiunile pot fi specificate cu un șir de trimis gazdei sau printr-un identificator de acțiune. Pentru o explicație completă a formatului, accesează https://goo.gl/LWRndr.\n\nExemple de corespondențe:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Dacă preferința este activată, transformă tastele media în echivalentul lor Fkey. Dacă este dezactivată, lasă browserul să trateze tastele."

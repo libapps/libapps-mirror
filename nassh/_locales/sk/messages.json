@@ -243,7 +243,7 @@
 		"message": "V prípade hodnoty True budú klávesy Home a End ovládať posúvač terminálu a kombinácia klávesov Shift+Home/End bude odosielať kódy klávesov VT. V prípade hodnoty False budú klávesy Home a End odosielať kódy VT a kombinácia klávesov Shift+Home/End bude ovládať posúvač."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Mapovanie kombinácie klávesov na akcie. Kombinácia klávesov zahŕňa nula alebo viac modifikačných klávesov nasledovaných kódom klávesa. Kódy klávesov môžu byť decimálne alebo hexadecimálne čísla alebo identifikátory klávesov. Akcie klávesov je možné zadať ako reťazec, ktorý sa má odoslať na hostiteľský server, alebo ako identifikátor akcie. Úplné vysvetlenie formátu nájdete na adrese https://goo.gl/LWRndr.\n\nUkážka mapovania klávesov:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Mapovanie kombinácie klávesov na akcie. Kombinácia klávesov zahŕňa nula alebo viac modifikačných klávesov nasledovaných kódom klávesa. Kódy klávesov môžu byť decimálne alebo hexadecimálne čísla alebo identifikátory klávesov. Akcie klávesov je možné zadať ako reťazec, ktorý sa má odoslať na hostiteľský server, alebo ako identifikátor akcie. Úplné vysvetlenie formátu nájdete na adrese https://goo.gl/LWRndr.\n\nUkážka mapovania klávesov:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ak je nastavená hodnota True, mediálne klávesy sa budú premieňať na ekvivalenty Fkey. Ak je nastavená hodnota False, klávesy bude spracovávať prehliadač."

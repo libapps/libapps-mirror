@@ -243,7 +243,7 @@
 		"message": "Nếu là true, phím Home/End sẽ điều khiển thanh cuộn của thiết bị đầu cuối và phím Shift-Home/End sẽ gửi mã phím VT. Nếu là false, phím Home/End sẽ gửi các mã VT còn tổ hợp phím Shift-Home/End sẽ cuộn."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Một bản đồ chuỗi phím cho các thao tác do phím thực hiện. Chuỗi phím không bao gồm hoặc bao gồm nhiều phím bổ trợ, theo sau là một mã phím. Các mã phím có thể là số thập phân hoặc thập lục phân hoặc một giá trị nhận dạng phím. Các thao tác do phím thực hiện có thể là một chuỗi được chỉ định để gửi đến máy chủ hoặc là một giá trị nhận dạng thao tác. Để biết giải thích đầy đủ về định dạng, hãy truy cập vào https://goo.gl/LWRndr.\n\nCác liên kết phím mẫu:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Một bản đồ chuỗi phím cho các thao tác do phím thực hiện. Chuỗi phím không bao gồm hoặc bao gồm nhiều phím bổ trợ, theo sau là một mã phím. Các mã phím có thể là số thập phân hoặc thập lục phân hoặc một giá trị nhận dạng phím. Các thao tác do phím thực hiện có thể là một chuỗi được chỉ định để gửi đến máy chủ hoặc là một giá trị nhận dạng thao tác. Để biết giải thích đầy đủ về định dạng, hãy truy cập vào https://goo.gl/LWRndr.\n\nCác liên kết phím mẫu:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Nếu true, chuyển đổi các phím phương tiện thành các phím chức năng tương đương. Nếu false, để trình duyệt xử lý các phím."

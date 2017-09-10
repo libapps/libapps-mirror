@@ -243,7 +243,7 @@
 		"message": "Als true (waar) is ingesteld, wordt met Home/End de scrollbalk van de terminal bediend en worden met Shift + Home/End de VT-toetscodes verzonden. Als false (onwaar) is ingesteld, worden met Home/End de VT-codes verzonden en wordt er met Shift + Home/End gescrolld."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Een toetsencombinatie toewijzen aan toetsacties. Toetsencombinaties bestaan uit nul of meer functietoetsen gevolgd door een toetscode. Toetscodes kunnen bestaan uit decimale of hexadecimale getallen of een toets-ID. Een toetsactie kan een opgegeven tekenreeks zijn die wordt verzonden naar de host, of een actie-ID. Zie https://goo.gl/LWRndr voor een volledige uitleg van de indeling.\n\nVoorbeelden van sneltoetsen:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Een toetsencombinatie toewijzen aan toetsacties. Toetsencombinaties bestaan uit nul of meer functietoetsen gevolgd door een toetscode. Toetscodes kunnen bestaan uit decimale of hexadecimale getallen of een toets-ID. Een toetsactie kan een opgegeven tekenreeks zijn die wordt verzonden naar de host, of een actie-ID. Zie https://goo.gl/LWRndr voor een volledige uitleg van de indeling.\n\nVoorbeelden van sneltoetsen:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Als true (waar) is ingesteld, worden mediatoetsen geconverteerd naar de equivalente functietoets. Als false (onwaar) is ingesteld, wordt de functie van de toetsen door de browser bepaald."

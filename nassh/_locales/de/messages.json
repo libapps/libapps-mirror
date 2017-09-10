@@ -243,7 +243,7 @@
 		"message": "Wenn \"true\" eingestellt ist, wird mit Pos1/Ende die Bildlaufleiste des Terminals gesteuert und mit Umschalttaste + Pos1/Ende werden die VT-Keycodes gesendet. Wenn \"false\" eingestellt ist, werden mit Pos1/Ende VT-Codes gesendet und mit Umschalttaste + Pos1/Ende wird gescrollt."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Eine Karte mit Tastenkombinationen für Funktionen. Tastenkombinationen bestehen aus einer Null oder mehreren Modifikatortasten, gefolgt von einem Tastencode. Tastencodes können Dezimal- oder Hexadezimalzahlen oder eine Schlüsselkennung sein. Schlüsselfunktionen können als String definiert sein, der an den Host gesendet wird, oder als eine Aktionskennzeichnung. Eine vollständige Erklärung des Formats finden Sie unter https://goo.gl/LWRndr.\n\nBeispiele für Tastenbelegungen:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HALLO\\n'\"\n}"
+		"message": "Eine Karte mit Tastenkombinationen für Funktionen. Tastenkombinationen bestehen aus einer Null oder mehreren Modifikatortasten, gefolgt von einem Tastencode. Tastencodes können Dezimal- oder Hexadezimalzahlen oder eine Schlüsselkennung sein. Schlüsselfunktionen können als String definiert sein, der an den Host gesendet wird, oder als eine Aktionskennzeichnung. Eine vollständige Erklärung des Formats finden Sie unter https://goo.gl/LWRndr.\n\nBeispiele für Tastenbelegungen:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HALLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Wenn \"true\" eingestellt ist, werden die Medientasten in ihr F-Tasten-Äquivalent umgewandelt. Wenn \"false\" eingestellt ist, werden die Tasten vom Browser gesteuert."

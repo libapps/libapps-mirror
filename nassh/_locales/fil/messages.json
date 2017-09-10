@@ -243,7 +243,7 @@
 		"message": "Kung true, ang Home/End ang kokontrol sa terminal scrollbar at ang Shift-Home/End ang magpapadala ng mga VT keycode. Kung false, ang Home/End ang magpapadala ng mga VT code at ang Shift-Home/End ang magso-scroll."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Isang mapa ng key sequence sa mga pagkilos ng key. Kabilang sa mga key sequence ang zero o higit pang modifier key na sinusundan ng key code. Ang mga key code ay maaaring maging mga decimal o hexadecimal number, o isang key identifier. Matutukoy ang mga pagkilos ng key bilang string na ipapadala sa host, o isang action identifier. Para sa kumpletong paliwanag ng format, tingnan ang https://goo.gl/LWRndr.\n\nMga sample na keybinding:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Isang mapa ng key sequence sa mga pagkilos ng key. Kabilang sa mga key sequence ang zero o higit pang modifier key na sinusundan ng key code. Ang mga key code ay maaaring maging mga decimal o hexadecimal number, o isang key identifier. Matutukoy ang mga pagkilos ng key bilang string na ipapadala sa host, o isang action identifier. Para sa kumpletong paliwanag ng format, tingnan ang https://goo.gl/LWRndr.\n\nMga sample na keybinding:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Kung true, i-convert ang mga media key sa kanilang katumbas na Fkey. Kung false, hayaan ang browser na mangasiwa sa mga key."

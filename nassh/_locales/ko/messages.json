@@ -243,7 +243,7 @@
 		"message": "True로 설정하면 Home/End 키를 사용해 터미널 스크롤바를 제어하고, Shift 키와 Home/End 키를 함께 누르면 VT 키 코드가 전송됩니다. False로 설정한 경우에는 Home/End 키를 누르면 VT 코드가 전송되고, Shift 키와 Home/End 키를 함께 누르면 스크롤됩니다."
 	},
 	"hterm_pref_keybindings": {
-		"message": "주요 동작의 키 조합 맵입니다. 키 조합에는 0개 이상의 특수키 및 키 코드가 포함됩니다. 키 코드에는 십진수 또는 16진수 숫자 또는 키 식별자를 사용할 수 있습니다. 주요 동작은 호스트에 전송할 문자열 또는 동작 식별자로 지정할 수 있습니다. https://goo.gl/LWRndr 페이지에서 형식에 관해 자세히 알아볼 수 있습니다.\n\n샘플 키 바인딩:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "주요 동작의 키 조합 맵입니다. 키 조합에는 0개 이상의 특수키 및 키 코드가 포함됩니다. 키 코드에는 십진수 또는 16진수 숫자 또는 키 식별자를 사용할 수 있습니다. 주요 동작은 호스트에 전송할 문자열 또는 동작 식별자로 지정할 수 있습니다. https://goo.gl/LWRndr 페이지에서 형식에 관해 자세히 알아볼 수 있습니다.\n\n샘플 키 바인딩:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "True로 설정하면 미디어 키가 Fkey와 동등한 키로 전환됩니다. False로 설정하면 브라우저에서 키를 처리합니다."

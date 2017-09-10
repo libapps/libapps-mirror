@@ -243,7 +243,7 @@
 		"message": "Hvis den angives som sand, bruges Home/End til at styre terminalens rullepanel, og Shift + Home/End bruges til at sende VT-tastekoderne. Hvis den angives som falsk, bruges Home/End til at sende VT-koder, og Shift + Home/End bruges til at rulle."
 	},
 	"hterm_pref_keybindings": {
-		"message": "En oversigt over tasterækkefølgen for tastehandlinger. Tasterækkefølgen omfatter nul eller flere ændringstaster efterfulgt af en tastekode. Tastekoder kan være decimaltal eller hexadecimaltal eller en tastidentifikator. Tastehandlinger kan specificeres som en streng, der skal sendes til hosten, eller en handlingsidentifikator. Se en fuld forklaring af formatet på https://goo.gl/LWRndr.\n\nEksempel på tastbindinger:\n{\n  \"Ctrl + Alt + K\": \"clearScrollback\",\n  \"Ctrl + Shift + L\": \"PASS\",\n  \"Ctrl + H\": \"'HELLO\\n'\"\n}"
+		"message": "En oversigt over tasterækkefølgen for tastehandlinger. Tasterækkefølgen omfatter nul eller flere ændringstaster efterfulgt af en tastekode. Tastekoder kan være decimaltal eller hexadecimaltal eller en tastidentifikator. Tastehandlinger kan specificeres som en streng, der skal sendes til hosten, eller en handlingsidentifikator. Se en fuld forklaring af formatet på https://goo.gl/LWRndr.\n\nEksempel på tastbindinger:\n{\n  \"Ctrl + Alt + K\": \"clearTerminal\",\n  \"Ctrl + Shift + L\": \"PASS\",\n  \"Ctrl + H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Hvis angivet til sand, skal medietasterne konverteres til deres tilsvarende F-taster. Hvis angivet til falsk, skal browseren styre tasterne."

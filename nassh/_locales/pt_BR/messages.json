@@ -243,7 +243,7 @@
 		"message": "Se definida como verdadeira, as teclas Home e End controlarão a barra de rolagem terminal, e Shift-Home e Shift-End enviarão os códigos de tecla VT. Se definida como falsa, as teclas Home e End enviarão os códigos VT, e Shift-Home e Shift-End rolarão a tela."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Um mapa de sequência de teclas para ações de teclas. Sequências de teclas incluem zero ou mais teclas modificadoras seguidas por um código de tecla. Códigos de tecla podem ser números decimais, hexadecimais ou um identificador de tecla. Ações de teclas podem ser especificadas por uma string enviada ao host ou um identificador de ação. Para ver uma explicação completa do formato, visite https://goo.gl/LWRndr.\n\nExemplos de mapeamento de teclas:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Um mapa de sequência de teclas para ações de teclas. Sequências de teclas incluem zero ou mais teclas modificadoras seguidas por um código de tecla. Códigos de tecla podem ser números decimais, hexadecimais ou um identificador de tecla. Ações de teclas podem ser especificadas por uma string enviada ao host ou um identificador de ação. Para ver uma explicação completa do formato, visite https://goo.gl/LWRndr.\n\nExemplos de mapeamento de teclas:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Se definida como verdadeira, converterá as teclas de mídia nas teclas F equivalentes. Se definida como falsa, deixará o navegador controlar as teclas."

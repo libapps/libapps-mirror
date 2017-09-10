@@ -243,7 +243,7 @@
 		"message": "Jos tosi, Home- ja End-näppäimiä käytetään terminaalin vierityspalkin ohjaamiseen ja yhdistelmää Vaihto-Home tai Vaihto-End VT-näppäinkoodien lähettämiseen. Jos epätosi, Home ja End lähettävät VT-koodit ja Vaihto-Home tai Vaihto‑End vierittää näkymää."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Näppäinyhdistelmien ja niihin liittyvien näppäintoimintojen kartta. Näppäinyhdistelmä sisältää muokkausnäppäimen painalluksia (nolla tai useampia) sekä niitä seuraavan näppäinkoodin. Näppäinkoodit voivat olla desimaali- tai heksadesimaalilukuja tai näppäintunnisteita. Näppäintoiminnot voidaan määrittää isännälle lähetettäväksi merkkijonoksi tai toimintotunnisteeksi. Voit lukea kattavan esittelyn täältä: https://goo.gl/LWRndr.\n\nEsimerkkejä:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Näppäinyhdistelmien ja niihin liittyvien näppäintoimintojen kartta. Näppäinyhdistelmä sisältää muokkausnäppäimen painalluksia (nolla tai useampia) sekä niitä seuraavan näppäinkoodin. Näppäinkoodit voivat olla desimaali- tai heksadesimaalilukuja tai näppäintunnisteita. Näppäintoiminnot voidaan määrittää isännälle lähetettäväksi merkkijonoksi tai toimintotunnisteeksi. Voit lukea kattavan esittelyn täältä: https://goo.gl/LWRndr.\n\nEsimerkkejä:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Jos arvo on tosi, medianäppäimet muunnetaan niitä vastaaviksi F-näppäimiksi. Jos arvo on epätosi, selain käsittelee näppäimet."

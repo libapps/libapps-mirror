@@ -243,7 +243,7 @@
 		"message": "Ha igaz, a Home/End a terminál görgetősávját irányítja, a Shift+Home/End pedig a VT-billentyűkódokat küldi el. Ha hamis, akkor a Home/End küldi el a VT-kódokat, míg a Shift+Home/End görget."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Billentyűkombinációk hozzárendelése a billentyűműveletekhez. A billentyűkombinációk nulla vagy több módosító billentyűt tartalmaznak, melyeket billentyűkód követ. A billentyűkódok decimális vagy hexadecimális számok, illetve billentyűazonosítók lehetnek. A billentyűműveletek a gazdagép számára küldendő karakterláncokként vagy műveletazonosítókként határozhatók meg. A formátum teljes leírásának megtekintéséhez látogasson el a https://goo.gl/LWRndr címre.\n\nPéldák billentyűkombinációkra:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Billentyűkombinációk hozzárendelése a billentyűműveletekhez. A billentyűkombinációk nulla vagy több módosító billentyűt tartalmaznak, melyeket billentyűkód követ. A billentyűkódok decimális vagy hexadecimális számok, illetve billentyűazonosítók lehetnek. A billentyűműveletek a gazdagép számára küldendő karakterláncokként vagy műveletazonosítókként határozhatók meg. A formátum teljes leírásának megtekintéséhez látogasson el a https://goo.gl/LWRndr címre.\n\nPéldák billentyűkombinációkra:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ha igaz, átalakítja a médiabillentyűket a megfelelő F-billentyűkké. Ha hamis, a böngésző kezeli a billentyűket."

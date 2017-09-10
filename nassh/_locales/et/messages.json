@@ -243,7 +243,7 @@
 		"message": "Kui see on tõene, juhivad klahvid Home/End terminali kerimisriba ja kombinatsioon tõstuklahv + Home/End saadab VT-klahvikoodid. Kui see on väär, saadavad klahvid Home/End VT-koodid ja kombinatsioon tõstuklahv + klahv Home/End võimaldab kerida."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Vastendatud klahvikombinatsioonide ja klahvitoimingute kaart. Klahvikombinatsioonid võivad (aga ei pruugi) sisaldada üht või mitut muuteklahvi, millele järgneb klahvikood. Klahvikoodid võivad olla kümnend- või kuueteistkümnendarvud või klahvi identifikaatorid. Klahvitoimingud saab määrata hostile saadetava stringi või toimingu identifikaatorina. Vormingu täieliku selgituse leiate siit: https://goo.gl/LWRndr.\n\nKlahvikombinatsioonide näited:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Vastendatud klahvikombinatsioonide ja klahvitoimingute kaart. Klahvikombinatsioonid võivad (aga ei pruugi) sisaldada üht või mitut muuteklahvi, millele järgneb klahvikood. Klahvikoodid võivad olla kümnend- või kuueteistkümnendarvud või klahvi identifikaatorid. Klahvitoimingud saab määrata hostile saadetava stringi või toimingu identifikaatorina. Vormingu täieliku selgituse leiate siit: https://goo.gl/LWRndr.\n\nKlahvikombinatsioonide näited:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Kui see on Tõene, teisendatakse meediaklahvid F-klahvi ekvivalendiks. Kui see on Väär, lastakse brauseril klahve käsitleda."

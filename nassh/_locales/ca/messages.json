@@ -243,7 +243,7 @@
 		"message": "Si s'estableix en \"true\", les tecles Inici i Fi controlen la barra de desplaçament del terminal i Maj+Inici/Fi envien els codis de tecla del terminal de vídeo. Si s'estableix en \"false\", les funcions d'aquestes tecles s'intercanvien."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Mapa entre la seqüència i les accions de les tecles. Les seqüències de tecles inclouen zero o més tecles modificadores seguides d'un codi de tecla. Els codis de tecla poden ser nombres decimals o hexadecimals, o bé un identificador de tecla. Les accions de tecles es poden especificar com a cadena, a fi d'enviar-la a l'amfitrió, o bé com a identificador d'acció. Per veure l'explicació completa del format, consulta https://goo.gl/LWRndr.\n\nExemples de tecles de drecera:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HOLA\\n'\"\n}"
+		"message": "Mapa entre la seqüència i les accions de les tecles. Les seqüències de tecles inclouen zero o més tecles modificadores seguides d'un codi de tecla. Els codis de tecla poden ser nombres decimals o hexadecimals, o bé un identificador de tecla. Les accions de tecles es poden especificar com a cadena, a fi d'enviar-la a l'amfitrió, o bé com a identificador d'acció. Per veure l'explicació completa del format, consulta https://goo.gl/LWRndr.\n\nExemples de tecles de drecera:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HOLA\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Si s'estableix en \"true\", converteix les tecles multimèdia en la tecla de funció equivalent. Si s'estableix en \"false\", permet que el navegador gestioni les tecles."

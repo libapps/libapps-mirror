@@ -243,7 +243,7 @@
 		"message": "如果为 true，Home/End 键会控制终端滚动条，Shift-Home/End 会传送 VT 键码。如果为 false，Home/End 键会传送 VT 键码，Shift-Home/End 则会控制滚动。"
 	},
 	"hterm_pref_keybindings": {
-		"message": "按键序列与按键操作的对应关系。按键序列包含零个或多个辅助键，后跟一个键码。键码可以是十进制或十六进制数字，也可以是按键标识符。按键操作可被指定为要向主机传送的字符串，也可被指定为操作标识符。如需获取完整的格式说明，请访问 https://goo.gl/LWRndr。\n\n按键绑定关系示例：\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "按键序列与按键操作的对应关系。按键序列包含零个或多个辅助键，后跟一个键码。键码可以是十进制或十六进制数字，也可以是按键标识符。按键操作可被指定为要向主机传送的字符串，也可被指定为操作标识符。如需获取完整的格式说明，请访问 https://goo.gl/LWRndr。\n\n按键绑定关系示例：\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "如果为 true，则将媒体键转换为与其对应的功能键。如果为 false，则让浏览器处理这些键。"

@@ -243,7 +243,7 @@
 		"message": "Če je omogočeno, tipki Home/End upravljata drsno vrstico terminala, kombinaciji Shift-Home/End pa pošljeta kode tipk VT. Če je onemogočeno, tipki Home/End pošljeta kode VT, kombinaciji Shift-Home/End pa upravljata drsenje."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Preslikava zaporedij tipk na dejanja tipk. Zaporedja tipk vključujejo nič ali več modifikatorskih tipk in kodo tipke. Kode tipk so lahko desetiške ali šestnajstiške številke oziroma identifikator tipke. Dejanja tipk so lahko določena kot niz, ki se pošlje gostitelju, ali identifikator dejanja. Celotno pojasnilo oblike zapisa je na voljo tukaj: https://goo.gl/LWRndr.\n\nPrimer povezav tipk:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Preslikava zaporedij tipk na dejanja tipk. Zaporedja tipk vključujejo nič ali več modifikatorskih tipk in kodo tipke. Kode tipk so lahko desetiške ali šestnajstiške številke oziroma identifikator tipke. Dejanja tipk so lahko določena kot niz, ki se pošlje gostitelju, ali identifikator dejanja. Celotno pojasnilo oblike zapisa je na voljo tukaj: https://goo.gl/LWRndr.\n\nPrimer povezav tipk:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Če je omogočeno, pretvori predstavnostne tipke v enakovredne za Fkey. Če je onemogočeno, tipke obdela brskalnik."

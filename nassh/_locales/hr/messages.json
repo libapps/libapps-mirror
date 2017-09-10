@@ -243,7 +243,7 @@
 		"message": "Ako je postavljeno na \"true\", tipke Home/End kontroliraju klizač terminala, a Shift – Home/End šalje VT kodove tipki. Ako je postavljeno na \"false\", onda Home/End šalje VT kodove, a Shift – Home/End služi za pomicanje."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Karta sljedova tipki za radnje tipki. Sljedovi tipki uključuju nula ili više modifikatorskih tipki iza kojih slijedi kôd tipke. Kodovi tipki mogu biti decimalni ili heksadecimalni brojevi, odnosno identifikator tipke. Radnje tipki mogu se odrediti kao niz koji se šalje hostu ili kao identifikator radnje. Potpuno objašnjenje formata dostupno je na https://goo.gl/LWRndr.\n\nPrimjeri povezivanja tipki:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Karta sljedova tipki za radnje tipki. Sljedovi tipki uključuju nula ili više modifikatorskih tipki iza kojih slijedi kôd tipke. Kodovi tipki mogu biti decimalni ili heksadecimalni brojevi, odnosno identifikator tipke. Radnje tipki mogu se odrediti kao niz koji se šalje hostu ili kao identifikator radnje. Potpuno objašnjenje formata dostupno je na https://goo.gl/LWRndr.\n\nPrimjeri povezivanja tipki:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ako je vrijednost \"točno\", medijske tipke pretvaraju se u svoje odgovarajuće funkcijske tipke. Ako je \"netočno\", tipke obrađuje preglednik."
