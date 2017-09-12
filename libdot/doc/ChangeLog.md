@@ -1,3 +1,10 @@
+# 1.18, 2017-09-12, Unicode 10.0.0 updates.
+
+* Add Object.values and Object.entries polyfills.
+* wcwidth: Merge duplicate binary search funcs.
+* wcwidth: Move east asian chars into a lookup table.
+* wcwidth: Update lookup tables to Unicode 10.0.0.
+
 # 1.17, 2017-09-01, Unicode fixes and array helpers.
 
 * Start a lib.array API for low level array/bit operations.
