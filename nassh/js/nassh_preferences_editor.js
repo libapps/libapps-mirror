@@ -25,6 +25,12 @@ window.onload = function() {
       };
     term.decorate(document.querySelector('#terminal'));
     term.installKeyboard();
+    term.contextMenu.setItems([
+      [nassh.msg('TERMINAL_CLEAR_MENU_LABEL'),
+       function() { term.wipeContents(); }],
+      [nassh.msg('TERMINAL_RESET_MENU_LABEL'),
+       function() { term.reset(); }],
+    ]);
 
     // Useful for console debugging.
     window.term_ = term;

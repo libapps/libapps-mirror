@@ -40,9 +40,6 @@ function Crosh(argv) {
 /**
  * The extension id of "crosh_builtin", the version of crosh that ships with
  * the Chromium OS system image.
- *
- * See https://chromium.googlesource.com/chromiumos/platform/assets/+/master/
- * chromeapps/crosh_builtin/
  */
 Crosh.croshBuiltinId = 'nkoccljplnhpfnfiajclkommnmllphnl';
 
@@ -83,6 +80,24 @@ Crosh.init = function() {
       runCrosh();
     }
   };
+
+  terminal.contextMenu.setItems([
+    [nassh.msg('TERMINAL_CLEAR_MENU_LABEL'),
+     function() { terminal.wipeContents(); }],
+    [nassh.msg('TERMINAL_RESET_MENU_LABEL'),
+     function() { terminal.reset(); }],
+    [nassh.msg('NEW_WINDOW_MENU_LABEL'),
+     function() {
+       window.open(lib.f.getURL('/html/nassh.html'), '',
+                   'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
+                   `minimizable=yes,width=${window.innerWidth},` +
+                   `height=${window.innerHeight}`);
+     }],
+    [nassh.msg('FAQ_MENU_LABEL'),
+     function() { window.open('https://goo.gl/muppJj', '_blank'); }],
+    [nassh.msg('OPTIONS_BUTTON_LABEL'),
+     function() { nassh.openOptionsPage(); }],
+  ]);
 
   // Useful for console debugging.
   window.term_ = terminal;

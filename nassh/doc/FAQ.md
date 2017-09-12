@@ -547,6 +547,9 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   'Inspect', then picking `<top>` from the drop down menu in the JavaScript
   console.
 
+  You can also hold Ctrl while right clicking the terminal to bring up a context
+  menu.  Under that is an option to clear all SSH known hosts.
+
 
 ## Terminal (hterm) Questions
 

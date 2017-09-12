@@ -29,6 +29,10 @@
 		"description": "The label for the Cancel button in dialogs.",
 		"message": "Cancel"
 	},
+	"CLEAR_KNOWN_HOSTS_MENU_LABEL": {
+		"description": "The menu label to clear the list of SSH known host keys.",
+		"message": "Clear SSH known_hosts"
+	},
 	"CMD_SSH_FORGET_HOST_HELP": {
 		"description": "Long form help text for this command.",
 		"message": "This command displays a menu of known hosts and prompts for the host to forget."
@@ -150,6 +154,10 @@
 	"ENTER_KEYCAP": {
 		"description": "The keycap for the enter key, displayed on the connect button. It should be localized, but focus on the intent of it being a reference to the keyboard button.",
 		"message": "[ENTER]"
+	},
+	"FAQ_MENU_LABEL": {
+		"description": "The menu label to open the FAQ (frequently asked questions) documentation.",
+		"message": "FAQ"
 	},
 	"FIELD_ARGSTR_PLACEHOLDER": {
 		"description": "Placeholder text for the optional ssh arguments field. These are command line flags to the ssh program itself. Translators: the text does not need to be kept lowercase.",
@@ -653,6 +661,10 @@
 		"description": "Label for the mount path field. This is the remote directory used for SFTP mounts.",
 		"message": "Mount Path"
 	},
+	"NEW_WINDOW_MENU_LABEL": {
+		"description": "The menu label to open a new window for a new secure shell session.",
+		"message": "New Window"
+	},
 	"NOTIFY_COPY": {
 		"description": "Short status message displayed in a terminal overlay when text is automatically copied to the clipboard.",
 		"message": "Selection Copied"
@@ -761,6 +773,10 @@
 		"description": "Label for the optional ssh arguments field. These are command line flags to the ssh program itself.",
 		"message": "SSH Arguments"
 	},
+	"TERMINAL_CLEAR_MENU_LABEL": {
+		"description": "The menu label to clear the terminal screen.",
+		"message": "Terminal Clear"
+	},
 	"TERMINAL_PREVIEW_LABEL": {
 		"description": "Label for the preview window that allows users to preview their preferences (like color and font choices).",
 		"message": "Preview"
@@ -768,6 +784,10 @@
 	"TERMINAL_PROFILE_LABEL": {
 		"description": "Label for the current terminal emulator profile name. Profiles are used to customize things like color and fonts.",
 		"message": "Current profile"
+	},
+	"TERMINAL_RESET_MENU_LABEL": {
+		"description": "The menu label to reset the active terminal settings.",
+		"message": "Terminal Reset"
 	},
 	"TIP_1": {
 		"description": "Helpful tip shown to user advertising features",
@@ -788,6 +808,10 @@
 	"TIP_13": {
 		"description": "Helpful tip shown to user advertising features.",
 		"message": "Display images inline: https://goo.gl/MnSysj"
+	},
+	"TIP_14": {
+		"description": "Helpful tip shown to user advertising features.",
+		"message": "Holding Ctrl (Cmd on macOS) while right clicking brings up a context menu."
 	},
 	"TIP_2": {
 		"description": "Helpful tip shown to user advertising features. Do not translate 'hterm-notify' as it's the name of a program.",
