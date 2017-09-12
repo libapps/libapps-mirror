@@ -1,3 +1,16 @@
+# 0.8.37, 2017-09-12, Unicode updates and ssh-agent frameworks.
+
+* Update to libdot 1.18.  Unicode 10.0.0 updates (from Unicode 5).
+* Update to hterm 1.72.  Misc bugfixes.
+* Implement an extensible SSH agent (stub backend).
+* Integrate Google Smart Card Connector client.
+* Add an agent backend for smart card keys.
+* Also set relay page to black background.
+* Fail gracefully when loading an unknown profile.
+* Fix argstr parsing when connecting via URIs.
+* Fix opening a new window from the omnibox.
+* Use lib.f.getStack helper in more places.
+
 # 0.8.36.12, 2017-09-01, Bugfixes galore.
 
 * Update to libdot 1.17.  Better handling for Unicode combining characters.

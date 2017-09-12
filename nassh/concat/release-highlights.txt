@@ -17,3 +17,7 @@
 # release: 0.8.36.11 (stable August 29)
 % The SSH command line can handle basic quoting rules (e.g. -o "Feature yes").
 % Unicode combining character processing has been overhauled.
+
+# release: 0.8.37
+% Unicode tables updated to 10.0.0 release.
+% Use Yubikeys and other smart cards for ssh auth: https://goo.gl/3ZEU1w

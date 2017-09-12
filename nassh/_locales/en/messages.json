@@ -425,6 +425,10 @@
 		"description": "Helpful tip shown to user advertising features",
 		"message": "You can rebind keys/shortcuts: https://goo.gl/LWRndr"
 	},
+	"TIP_12": {
+		"description": "Helpful tip shown to user advertising features",
+		"message": "Use Yubikeys and other smart cards for ssh auth: https://goo.gl/3ZEU1w"
+	},
 	"UNEXPECTED_ERROR": {
 		"description": "Generic message displayed when we encounter an unexpected error.",
 		"message": "An unexpected error occurred, please check the JavaScript console for more details."
