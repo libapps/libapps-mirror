@@ -37,6 +37,10 @@ lib.PreferenceManager = function(storage, opt_prefix) {
 
   this.prefix = prefix;
 
+  // Internal state for when we're doing a bulk import from JSON and we want
+  // to elide redundant storage writes (for quota reasons).
+  this.isImportingJson_ = false;
+
   this.prefRecords_ = {};
   this.globalObservers_ = [];
 
@@ -379,7 +383,7 @@ lib.PreferenceManager.prototype.createChild = function(listName, opt_hint,
   this.childLists_[listName][id] = childManager;
 
   ids.push(id);
-  this.set(listName, ids);
+  this.set(listName, ids, undefined, !this.isImportingJson_);
 
   return childManager;
 };
@@ -401,7 +405,7 @@ lib.PreferenceManager.prototype.removeChild = function(listName, id) {
   var i = ids.indexOf(id);
   if (i != -1) {
     ids.splice(i, 1);
-    this.set(listName, ids);
+    this.set(listName, ids, undefined, !this.isImportingJson_);
   }
 
   delete this.childLists_[listName][id];
@@ -660,11 +664,15 @@ lib.PreferenceManager.prototype.changeDefaults = function(map) {
  * This will dispatch the onChange handler if the preference value actually
  * changes.
  *
- * @param {string} key The preference to set.
- * @param {*} value The value to set.  Anything that can be represented in
+ * @param {string} name The preference to set.
+ * @param {*} newValue The value to set.  Anything that can be represented in
  *     JSON is a valid value.
+ * @param {function()=} onComplete Callback when the set call completes.
+ * @param {boolean=} saveToStorage Whether to commit the change to the backing
+ *     storage or only the in-memory record copy.
  */
-lib.PreferenceManager.prototype.set = function(name, newValue) {
+lib.PreferenceManager.prototype.set = function(
+    name, newValue, onComplete=undefined, saveToStorage=true) {
   var record = this.prefRecords_[name];
   if (!record)
     throw new Error('Unknown preference: ' + name);
@@ -676,10 +684,12 @@ lib.PreferenceManager.prototype.set = function(name, newValue) {
 
   if (this.diff(record.defaultValue, newValue)) {
     record.currentValue = newValue;
-    this.storage.setItem(this.prefix + name, newValue);
+    if (saveToStorage)
+      this.storage.setItem(this.prefix + name, newValue, onComplete);
   } else {
     record.currentValue = this.DEFAULT_VALUE;
-    this.storage.removeItem(this.prefix + name);
+    if (saveToStorage)
+      this.storage.removeItem(this.prefix + name, onComplete);
   }
 
   // We need to manually send out the notification on this instance.  If we
@@ -739,10 +749,21 @@ lib.PreferenceManager.prototype.exportAsJson = function() {
  * This will create nested preference managers as well.
  */
 lib.PreferenceManager.prototype.importFromJson = function(json, opt_onComplete) {
+  this.isImportingJson_ = true;
+
   let pendingWrites = 0;
   const onWriteStorage = () => {
-    if (--pendingWrites < 1 && opt_onComplete)
-      opt_onComplete();
+    if (--pendingWrites < 1) {
+      if (opt_onComplete)
+        opt_onComplete();
+
+      // We've delayed updates to the child arrays, so flush them now.
+      for (let name in json)
+        if (name in this.childLists_)
+          this.set(name, this.get(name));
+
+      this.isImportingJson_ = false;
+    }
   };
 
   for (var name in json) {
