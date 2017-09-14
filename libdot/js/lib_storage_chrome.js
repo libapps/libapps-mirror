@@ -94,9 +94,27 @@ lib.Storage.Chrome.prototype.getItems = function(keys, callback) {
  *     to read the value, since the local cache is updated synchronously.
  */
 lib.Storage.Chrome.prototype.setItem = function(key, value, opt_callback) {
+  const onComplete = () => {
+    if (chrome.runtime.lastError) {
+      // Doesn't seem to be any better way of handling this.
+      // https://crbug.com/764759
+      if (chrome.runtime.lastError.message.indexOf('MAX_WRITE_OPERATIONS')) {
+        console.warn(`Will retry save of ${key} after exceeding quota`,
+                     chrome.runtime.lastError);
+        setTimeout(() => this.setItem(key, value, onComplete), 1000);
+        return;
+      } else {
+        console.error('Unknown runtime error', chrome.runtime.lastError);
+      }
+    }
+
+    if (opt_callback)
+      opt_callback();
+  };
+
   var obj = {};
   obj[key] = value;
-  this.storage_.set(obj, opt_callback);
+  this.storage_.set(obj, onComplete);
 };
 
 /**

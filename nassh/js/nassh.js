@@ -170,13 +170,13 @@ nassh.importPreferences = function(prefsObject, opt_onComplete) {
     throw new Error('Bad version, expected 1, got: ' + prefsObject.version);
 
   var nasshPrefs = new nassh.PreferenceManager();
-  nasshPrefs.importFromJson(prefsObject.nassh);
-
-  for (var terminalProfile in prefsObject.hterm) {
-    var prefs = new hterm.PreferenceManager(terminalProfile);
-    prefs.readStorage(onReadStorage.bind(null, terminalProfile, prefs));
-    pendingReads++;
-  }
+  nasshPrefs.importFromJson(prefsObject.nassh, () => {
+    for (var terminalProfile in prefsObject.hterm) {
+      var prefs = new hterm.PreferenceManager(terminalProfile);
+      prefs.readStorage(onReadStorage.bind(null, terminalProfile, prefs));
+      pendingReads++;
+    }
+  });
 };
 
 /**

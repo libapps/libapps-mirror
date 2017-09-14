@@ -738,7 +738,13 @@ lib.PreferenceManager.prototype.exportAsJson = function() {
  *
  * This will create nested preference managers as well.
  */
-lib.PreferenceManager.prototype.importFromJson = function(json) {
+lib.PreferenceManager.prototype.importFromJson = function(json, opt_onComplete) {
+  let pendingWrites = 0;
+  const onWriteStorage = () => {
+    if (--pendingWrites < 1 && opt_onComplete)
+      opt_onComplete();
+  };
+
   for (var name in json) {
     if (name in this.childLists_) {
       var childList = json[name];
@@ -749,11 +755,13 @@ lib.PreferenceManager.prototype.importFromJson = function(json) {
         if (!childPrefManager)
           childPrefManager = this.createChild(name, null, id);
 
-        childPrefManager.importFromJson(childList[i].json);
+        childPrefManager.importFromJson(childList[i].json, onWriteStorage);
+        pendingWrites++;
       }
 
     } else {
-      this.set(name, json[name]);
+      this.set(name, json[name], onWriteStorage);
+      pendingWrites++;
     }
   }
 };
