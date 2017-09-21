@@ -31,6 +31,32 @@ const base64urlTobase64 = function(data) {
   return data.replace(/[-_]/g, (ch) => ch == '-' ? '+' : '/');
 };
 
+/**
+ * Show an error message.
+ *
+ * @param {string} id The base id for this error.
+ * @param {string} msg The error message to display to the user.
+ */
+const showError = function(id, msg) {
+  console.error(msg);
+  document.getElementById(id).style.display = 'block';
+  document.getElementById(`${id}-message`).innerText = msg;
+};
+
+/**
+ * Show an error message originating from the Secure Shell app.
+ */
+const showNasshError = function(msg) {
+  showError('nassh', msg);
+};
+
+/**
+ * Show an error message originating from the relay server.
+ */
+const showRelayError = function(msg) {
+  showError('relay', msg);
+};
+
 window.onload = function() {
   var hash = document.location.hash.substr(1);
 
@@ -43,16 +69,21 @@ window.onload = function() {
     // URLs not containing '@' are assumed to be v2 URL safe Base64 JSON blobs.
     var blob = atob(base64urlTobase64(hash));
     var params = JSON.parse(blob);
+
     if (params['endpoint']) {
       var [host, port] = params['endpoint'].split(':');
       sessionStorage.setItem('googleRelay.relayHost', host);
       sessionStorage.setItem('googleRelay.relayPort', port || '');
     }
+
+    if (params['error']) {
+      showRelayError(params['error']);
+    }
   }
 
   var path = sessionStorage.getItem('googleRelay.resumePath');
   if (!path) {
-    console.error('Nowhere to resume to!');
+    showNasshError('Nowhere to resume to!');
     return;
   }
 

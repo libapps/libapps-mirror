@@ -10,10 +10,39 @@
   <head>
     <style>
       body {
+        color: white;
         background-color: black;
+        font-family: monospace;
+      }
+
+      message-container {
+        display: none;
+      }
+
+      span.header {
+        border-bottom: 1px solid white;
       }
     </style>
     <script src='../js/nassh_google_relay_html.js'></script>
   </head>
-  <body></body>
+  <body>
+
+    <message-container id='nassh'>
+      <span class='header' id='nassh-header'>
+        Internal Secure Shell error.
+      </span>
+      <div id='nassh-message'></div>
+    </message-container>
+
+    <br>
+
+    <message-container id='relay'>
+      <span class='header' id='relay-header'>
+        Relay server error.
+        Please contact your relay server administrator for assistance.
+      </span>
+      <div id='relay-message'></div>
+    </message-container>
+
+  </body>
 </html>
