@@ -89,5 +89,18 @@ window.onload = function() {
 
   var url = chrome.extension.getURL(path);
   console.log(url);
+
+  // Avoid infinite loops when the relay server rejects us and we redirect
+  // back and forth.
+  let count = parseInt(sessionStorage.getItem('googleRelay.redirectCount'));
+  if (isNaN(count))
+    count = 0;
+  if (++count > 3) {
+    showNasshError('Redirected by relay too many times, so giving up.  Sorry.');
+    sessionStorage.removeItem('googleRelay.redirectCount');
+    return;
+  }
+  sessionStorage.setItem('googleRelay.redirectCount', count);
+
   document.location = url;
 };
