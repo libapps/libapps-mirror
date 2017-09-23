@@ -545,14 +545,16 @@ nassh.agent.backends.GSC.DATA_OBJECT_TAG_CLASS = {
 nassh.agent.backends.GSC.DataObject = function() {};
 
 /**
- * Recursively parse the byte representation of a TLV-encoded data object into
- * a DataObject object, starting from a given position.
+ * Recursively parse (a range of) the byte representation of a TLV-encoded data
+ * object into a DataObject object.
  * @see http://www.cardwerk.com/smartcards/smartcard_standard_ISO7816-4_annex-d.aspx
  *
  * @constructs nassh.agent.backends.GSC.DataObject
  * @param {!Uint8Array} bytes The raw bytes of the data object.
- * @param {!number} start The position in bytes at which the parsing should
+ * @param {!number} [start=0] The position in bytes at which the parsing should
  *     start.
+ * @param {!number} [end=bytes.length] The position in bytes until which to
+ *     parse.
  * @throws Will throw if the raw data does not follow the specification for
  *     TLV-encoded data objects.
  * @returns {[?nassh.agent.backends.GSC.DataObject, !number]} A pair of
@@ -560,10 +562,14 @@ nassh.agent.backends.GSC.DataObject = function() {};
  *     the input byte array which points to the end of the part consumed so
  *     far.
  */
-nassh.agent.backends.GSC.DataObject.fromBytesWithStart = function(
-    bytes, start) {
+nassh.agent.backends.GSC.DataObject.fromBytesInRange = function(
+    bytes, start = 0, end = bytes.length) {
   let pos = start;
-  if (pos >= bytes.length) {
+  // Skip 0x00 and 0xFF bytes before and between tags.
+  while (pos < end && (bytes[pos] === 0x00 || bytes[pos] === 0xFF)) {
+    ++pos;
+  }
+  if (pos >= end) {
     return [null, start];
   }
 
@@ -614,17 +620,14 @@ nassh.agent.backends.GSC.DataObject.fromBytesWithStart = function(
 
   if (isConstructed) {
     dataObject.children = [];
-    while (pos < valueEnd) {
-      // Skip zero bytes between tags.
-      if (!bytes[pos]) {
-        ++pos;
-        continue;
+    let child;
+    do {
+      [child, pos] = nassh.agent.backends.GSC.DataObject.fromBytesInRange(
+          bytes, pos, valueEnd);
+      if (child) {
+        dataObject.children.push(child);
       }
-      let child;
-      [child, pos] =
-          nassh.agent.backends.GSC.DataObject.fromBytesWithStart(bytes, pos);
-      dataObject.children.push(child);
-    }
+    } while (child);
   } else {
     dataObject.value = value;
   }
@@ -632,19 +635,48 @@ nassh.agent.backends.GSC.DataObject.fromBytesWithStart = function(
 };
 
 /**
- * Parse the byte representation of a TLV-encoded data object into a DataObject
- * object.
+ * Parse the byte representation of one or multiple TLV-encoded data objects
+ * into a DataObject.
+ *
+ * Some smart cards return constructed data objects with their tags and
+ * lengths, other cards return a list of subtags. In the latter case, this
+ * function creates an artificial root object which contains all the subtags
+ * in the list as children.
  * @see http://www.cardwerk.com/smartcards/smartcard_standard_ISO7816-4_annex-d.aspx
  *
  * @constructs nassh.agent.backends.GSC.DataObject
  * @param {!Uint8Array} bytes The raw bytes of the data object.
  * @throws Will throw if the raw data does not follow the specification for
  *     TLV-encoded data objects.
- * @returns {?nassh.agent.backends.GSC.DataObject} A DataObject object
- *     that is the result of the parsing.
+ * @returns {?nassh.agent.backends.GSC.DataObject} A DataObject that is the
+ *     result of the parsing.
  */
 nassh.agent.backends.GSC.DataObject.fromBytes = function(bytes) {
-  return nassh.agent.backends.GSC.DataObject.fromBytesWithStart(bytes, 0)[0];
+  let dataObjects = [];
+  let pos = 0;
+  let dataObject;
+  do {
+    [dataObject, pos] = nassh.agent.backends.GSC.DataObject.fromBytesInRange(
+        bytes, pos);
+    if (dataObject) {
+      dataObjects.push(dataObject);
+    }
+  } while(dataObject);
+
+  if (dataObjects.length === 0) {
+    return null;
+  }
+  if (dataObjects.length === 1) {
+    return dataObjects[0];
+  }
+
+  // Create an artificial root object under which all tags of a top-level
+  // tag list are subsumed. This ensures a consistent structure of replies
+  // to GET DATA command among different smart card brands.
+  const artificialRootObject = new nassh.agent.backends.GSC.DataObject();
+  artificialRootObject.isConstructed = true;
+  artificialRootObject.children = dataObjects;
+  return artificialRootObject;
 };
 
 /**
