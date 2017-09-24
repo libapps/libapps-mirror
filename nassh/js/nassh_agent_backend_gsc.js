@@ -441,47 +441,101 @@ nassh.agent.backends.GSC.arrayToHexString = function(array) {
  * @param {!number} ins The INS byte.
  * @param {!number} p1 The P1 byte.
  * @param {!number} p2 The P2 byte.
- * @param {!Uint8Array} [data]
+ * @param {!Uint8Array=} [data]
+ * @param {!boolean} [expectResponse=true] If true, expect a response from the
+ *     smart card.
  * @constructor
  */
-nassh.agent.backends.GSC.CommandAPDU = function(cla, ins, p1, p2, data) {
+nassh.agent.backends.GSC.CommandAPDU =
+    function(
+        cla, ins, p1, p2, data = new Uint8Array([]), expectResponse = true) {
   /**
-   * The raw commands to be sent to the smart card.
-   * Command chaining is used for long data blocks.
+   * The header of an APDU, consisting of the CLA, INS, P1 and P2 byte in order.
    *
-   * @member {!Array<!Uint8Array>}
+   * @member {!Uint8Array}
    * @private
    */
-  this.commands_ = [];
+  this.header_ = new Uint8Array([cla, ins, p1, p2]);
 
-  if (!data) {
-    this.commands_.push(new Uint8Array([cla, ins, p1, p2, 0x00]));
-    return;
-  }
+  /**
+   * The data to be sent in the body of the APDU.
+   *
+   * @member {!Uint8Array}
+   * @private
+   */
+  this.data_ = data;
 
-  let remainingBytes = data.length;
-  while (remainingBytes > 0xFF) {
-    const header = new Uint8Array([cla | 1 << 4, ins, p1, p2, 0xFF]);
-    const body = data.subarray(
-        data.length - remainingBytes, data.length - remainingBytes + 0xFF);
-    const footer = new Uint8Array([0x00]);
-    this.commands_.push(lib.array.concatTyped(header, body, footer));
-    remainingBytes -= 0xFF;
-  }
-
-  const header = new Uint8Array([cla, ins, p1, p2, remainingBytes]);
-  const body = data.subarray(data.length - remainingBytes);
-  const footer = new Uint8Array([0x00]);
-  this.commands_.push(lib.array.concatTyped(header, body, footer));
+  /**
+   * If true, a response from the smart card will be expected.
+   *
+   * @member {!boolean}
+   * @private
+   */
+  this.expectResponse_ = expectResponse;
 };
 
 /**
  * Get the raw commands.
  *
- * @returns {!Array<!Uint8Array>}
+ * In order to simplify the command logic, we always expect the maximum amount
+ * of bytes in the response (256 for normal length, 65536 for extended length).
+ *
+ * @param {!boolean} supportsChaining Set to true if command chaining can be
+ *     used with the card.
+ * @param {!boolean} supportsExtendedLength Set to true if extended lengths
+ *     (Lc and Le) can be used with the card.
+ * @returns {!Array<!Uint8Array>} The raw response.
  */
-nassh.agent.backends.GSC.CommandAPDU.prototype.commands = function() {
-  return this.commands_;
+nassh.agent.backends.GSC.CommandAPDU.prototype.commands = function(
+    supportsChaining, supportsExtendedLength) {
+  const MAX_LC = 255;
+  const MAX_EXTENDED_LC = 65535;
+
+  if (this.data_.length === 0 && supportsExtendedLength) {
+      const extendedLe = this.expectResponse_ ?
+          new Uint8Array([0x00, 0x00, 0x00]) : new Uint8Array([]);
+      return [lib.array.concatTyped(this.header_, extendedLe)];
+  }
+  if (this.data_.length === 0) {
+    const le = this.expectResponse_ ?
+        new Uint8Array([0x00]) : new Uint8Array([]);
+    return [lib.array.concatTyped(this.header_, le)];
+  }
+  if (this.data_.length <= MAX_EXTENDED_LC && supportsExtendedLength) {
+    const extendedLc = new Uint8Array(
+        [0x00, this.data_.length >> 8, this.data_.length & 0xFF]);
+    const extendedLe = this.expectResponse_ ?
+        new Uint8Array([0x00, 0x00]) : new Uint8Array([]);
+    return [
+      lib.array.concatTyped(this.header_, extendedLc, this.data_, extendedLe),
+    ];
+  }
+  if (this.data_.length <= MAX_LC || supportsChaining) {
+    let commands = [];
+    let remainingBytes = this.data_.length;
+    while (remainingBytes > MAX_LC) {
+      let header = new Uint8Array(this.header_);
+      // Set continuation bit in CLA byte.
+      header[0] |= 1 << 4;
+      const lc = new Uint8Array([MAX_LC]);
+      const data = this.data_.subarray(
+          this.data_.length - remainingBytes,
+          this.data_.length - remainingBytes + MAX_LC);
+      const le =
+          this.expectResponse_ ? new Uint8Array([0x00]) : new Uint8Array([]);
+      commands.push(lib.array.concatTyped(header, lc, data, le));
+      remainingBytes -= MAX_LC;
+    }
+    const lc = new Uint8Array([remainingBytes]);
+    const data = this.data_.subarray(this.data_.length - remainingBytes);
+    const le =
+        this.expectResponse_ ? new Uint8Array([0x00]) : new Uint8Array([]);
+    commands.push(lib.array.concatTyped(this.header_, lc, data, le));
+    return commands;
+  }
+  throw new Error(
+      `CommandAPDU.commands: data field too long (${this.data_.length} ` +
+      ` > ${MAX_LC}) and no support for chaining`);
 };
 
 /**
@@ -790,6 +844,21 @@ nassh.agent.backends.GSC.SmartCardManager = function() {
    */
   this.appletSelected_ =
       nassh.agent.backends.GSC.SmartCardManager.CardApplets.NONE;
+
+  /**
+   * True if the card is known to support command chaining.
+   *
+   * @member {!boolean}
+   * @private
+   */
+  this.supportsChaining_ = false;
+
+  /**
+   * True if the card is known to support extended lengths (Lc and Le).
+   * @member {!boolean}
+   * @private
+   */
+  this.supportsExtendedLength_ = false;
 };
 
 /**
@@ -878,6 +947,20 @@ nassh.agent.backends.GSC.SmartCardManager.FETCH_APPLICATION_RELATED_DATA_APDU =
     new nassh.agent.backends.GSC.CommandAPDU(0x00, 0xCA, 0x00, 0x6E);
 
 /**
+ * Command APDU for the 'GET DATA' command with the identifier of the
+ * 'Historical Bytes' data object as data.
+ *
+ * Used to retrieve the 'Historical Bytes", which contain information on the
+ * communication capabilities of the card.
+ * @see https://g10code.com/docs/openpgp-card-2.0.pdf
+ *
+ * @readonly
+ * @const {!nassh.agent.backends.GSC.CommandAPDU}
+ */
+nassh.agent.backends.GSC.SmartCardManager.FETCH_HISTORICAL_BYTES_APDU =
+    new nassh.agent.backends.GSC.CommandAPDU(0x00, 0xCA, 0x5F, 0x52);
+
+/**
  * Command APDU for the 'GENERATE ASYMMETRIC KEY PAIR' command in 'reading' mode
  * with the identifier of the authentication subkey as data.
  *
@@ -900,7 +983,7 @@ nassh.agent.backends.GSC.SmartCardManager.READ_AUTHENTICATION_PUBLIC_KEY_APDU =
  * @readonly
  * @const {!Array<!number>}
  */
-nassh.agent.backends.GSC.SmartCardManager.VERIFY_PIN_APDU_RAW =
+nassh.agent.backends.GSC.SmartCardManager.VERIFY_PIN_APDU_HEADER =
     [0x00, 0x20, 0x00, 0x82];
 
 /**
@@ -913,7 +996,7 @@ nassh.agent.backends.GSC.SmartCardManager.VERIFY_PIN_APDU_RAW =
  * @readonly
  * @const {!Array<!number>}
  */
-nassh.agent.backends.GSC.SmartCardManager.INTERNAL_AUTHENTICATE_APDU_RAW =
+nassh.agent.backends.GSC.SmartCardManager.INTERNAL_AUTHENTICATE_APDU_HEADER =
     [0x00, 0x88, 0x00, 0x00];
 
 /**
@@ -1071,7 +1154,8 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.transmit =
     throw new Error('SmartCardManager.transmit: not connected');
   }
   let data;
-  for (const command of commandAPDU.commands()) {
+  for (const command of commandAPDU.commands(
+      this.supportsChaining_, this.supportsExtendedLength_)) {
     const result =
         await this.execute_(nassh.agent.backends.GSC.API.SCardTransmit(
             this.cardHandle_, GoogleSmartCard.PcscLiteClient.API.SCARD_PCI_T1,
@@ -1140,6 +1224,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
     case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP:
       await this.transmit(
           nassh.agent.backends.GSC.SmartCardManager.SELECT_APPLET_OPENPGP_APDU);
+      await this.determineOpenPGPCardCapabilities();
       break;
     default:
       throw new Error(
@@ -1150,6 +1235,32 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
     throw new Error(
       'SmartCardManager.selectApplet: applet already selected (race)');
   this.appletSelected_ = applet;
+};
+
+/**
+ * Encode an unsigned integer as an mpint.
+ * @see https://tools.ietf.org/html/rfc4251#section-5
+ *
+ * @param {!Uint8Array} bytes Raw bytes of an unsigned integer.
+ * @returns {!Uint8Array} Wire encoding of an mpint
+ */
+nassh.agent.backends.GSC.SmartCardManager.encodeUnsignedMpint =
+    function(bytes) {
+  let mpint = new Uint8Array(bytes);
+  let pos = 0;
+
+  // Strip leading zeros.
+  while (pos < mpint.length && !mpint[pos]) {
+    ++pos;
+  }
+  mpint = mpint.slice(pos);
+
+  // Add a leading zero if the positive result would otherwise be treated as a
+  // signed mpint.
+  if (mpint.length && (mpint[0] & (1 << 7))) {
+    mpint = lib.array.concatTyped(new Uint8Array([0]), mpint);
+  }
+  return mpint;
 };
 
 /**
@@ -1168,11 +1279,12 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchPublicKeyBlob =
       const publicKeyTemplate = nassh.agent.backends.GSC.DataObject.fromBytes(
           await this.transmit(nassh.agent.backends.GSC.SmartCardManager
                                   .READ_AUTHENTICATION_PUBLIC_KEY_APDU));
-      let modulus = publicKeyTemplate.lookup(0x81);
-      if (modulus[0] & (1 << 7)) {
-        modulus = lib.array.concatTyped(new Uint8Array([0]), modulus);
-      }
-      const exponent = publicKeyTemplate.lookup(0x82);
+      let modulus =
+          nassh.agent.backends.GSC.SmartCardManager.encodeUnsignedMpint(
+              publicKeyTemplate.lookup(0x81));
+      const exponent =
+          nassh.agent.backends.GSC.SmartCardManager.encodeUnsignedMpint(
+              publicKeyTemplate.lookup(0x82));
       return lib.array.concatTyped(
           new Uint8Array(lib.array.uint32ToArrayBigEndian(7)),
           // 'ssh-rsa'
@@ -1237,6 +1349,43 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
 };
 
 /**
+ * Determine the card capabilities of an OpenPGP card. This includes support for
+ * command chaining and extended lengths.
+ *
+ * @returns {!Promise.<void>}
+ */
+nassh.agent.backends.GSC.SmartCardManager.prototype
+    .determineOpenPGPCardCapabilities =
+    async function() {
+  const historicalBytes = await this.transmit(
+      nassh.agent.backends.GSC.SmartCardManager.FETCH_HISTORICAL_BYTES_APDU);
+  // Parse data objects in COMPACT-TLV.
+  // First byte is assumed to be 0x00, last three bytes are status bytes.
+  const compactTLVData = historicalBytes.slice(1, -3);
+  let pos = 0;
+  let capabilitiesBytes = null;
+  while (pos < compactTLVData.length) {
+    const tag = compactTLVData[pos];
+    if (tag === 0x73) {
+      capabilitiesBytes = compactTLVData.slice(pos + 1, pos + 4);
+      break;
+    } else {
+      // The length of the tag is encoded in the second nibble.
+      pos += 1 + (tag & 0x0F);
+    }
+  }
+
+  if (capabilitiesBytes) {
+    this.supportsChaining_ = capabilitiesBytes[2] & (1 << 7);
+    this.supportsExtendedLength_ = capabilitiesBytes[2] & (1 << 6);
+  } else {
+    console.error(
+        'SmartCardManager.determineOpenPGPCardCapabilities: ' +
+        'capabilities tag not found');
+  }
+};
+
+/**
  * Verify the smart card PIN to unlock private key operations.
  *
  * @param {!string} pin A UTF-8 string.
@@ -1253,8 +1402,9 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.verifyPIN =
     case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP:
       try {
         await this.transmit(new nassh.agent.backends.GSC.CommandAPDU(
-            ...nassh.agent.backends.GSC.SmartCardManager.VERIFY_PIN_APDU_RAW,
-            pinBytes));
+            ...nassh.agent.backends.GSC.SmartCardManager.VERIFY_PIN_APDU_HEADER,
+            pinBytes,
+            false /* expectResponse */));
         return true;
       } catch (error) {
         if (error instanceof nassh.agent.backends.GSC.StatusBytes) {
@@ -1299,7 +1449,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.authenticate =
     case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP:
       return this.transmit(new nassh.agent.backends.GSC.CommandAPDU(
           ...nassh.agent.backends.GSC.SmartCardManager
-              .INTERNAL_AUTHENTICATE_APDU_RAW,
+              .INTERNAL_AUTHENTICATE_APDU_HEADER,
           data));
     default:
       throw new Error(
