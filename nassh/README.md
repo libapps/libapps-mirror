@@ -26,6 +26,7 @@ to the right people.
 * [ChangeLog](./doc/ChangeLog.md) -- List of interesting changes in each release
 * [FAQ](./doc/FAQ.md) -- Frequently Asked Questions
 * [Hacking](./doc/hack.md) -- Developing the Secure Shell source
+* [Hardware keys](./doc/hardware-keys.md) -- Using smart cards and hardware tokens with Secure Shell
 * [Options](./doc/options.md) -- Secure Shell command line options
 * [Processes](./doc/processes.md) -- Release processes and other mundane topics
 
