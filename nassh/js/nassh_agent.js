@@ -151,6 +151,19 @@ nassh.agent.Agent.prototype.handleRequest_ = function(request) {
 };
 
 /**
+ * Convert a raw SSH key blob to the format used in authorized_keys files.
+ * @param {!Uint8Array} keyBlob The raw key blob.
+ * @returns {!string}
+ */
+nassh.agent.Agent.keyBlobToAuthorizedKeysFormat = function(keyBlob) {
+  const keyBlobBase64 = btoa(String.fromCharCode(...keyBlob));
+  // Extract and prepend key type prefix.
+  const prefixLength = lib.array.arrayBigEndianToUint32(keyBlob);
+  const prefix = String.fromCharCode(...keyBlob.slice(4, 4 + prefixLength));
+  return `${prefix} ${keyBlobBase64}`;
+};
+
+/**
  * Handle an AGENTC_REQUEST_IDENTITIES request by responding with an
  * AGENT_IDENTITIES_ANSWER.
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
@@ -175,6 +188,15 @@ nassh.agent.Agent.prototype
                                const keyBlobStr =
                                    new TextDecoder('utf-8').decode(
                                        identity.keyBlob);
+                               // Print the public key blob (in the format used
+                               // for ~/.authorized_keys) to the console as a
+                               // courtesy to the user.
+                               console.log(
+                                   'Public key to be added as a new line to ' +
+                                   '~/.ssh/authorized_keys on the server:\n' +
+                                   nassh.agent.Agent
+                                   .keyBlobToAuthorizedKeysFormat(
+                                       identity.keyBlob));
                                // Remember the backend the identity was
                                // requested from.
                                this.identityToBackendID_[keyBlobStr] =
