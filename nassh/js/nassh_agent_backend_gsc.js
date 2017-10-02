@@ -873,7 +873,8 @@ nassh.agent.backends.GSC.SmartCardManager.CardApplets = {
 };
 
 /**
- * A list of the most descriptive parts of the names for popular "smart cards".
+ * A list of the most descriptive parts of the names for popular smart card
+ * readers and hardware tokens.
  *
  * If a reader name contains a string from the list, it is replaced by this
  * string. The strings are processed in order, thus substrings of other strings
@@ -890,6 +891,8 @@ nassh.agent.backends.GSC.SmartCardManager.READER_SHORT_NAMES = [
   'Nitrokey Start',
   'Nitrokey Pro',
   'Nitrokey Storage',
+  'Gemalto PC Twin Reader',
+  'Gemalto USB Shell Token',
 ];
 
 /**
