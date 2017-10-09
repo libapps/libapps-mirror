@@ -329,6 +329,16 @@
 		"description": "Message displayed after a connection closes. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them after the word is OK like: Exit (X).",
 		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
 	},
+	"RELAY_OPTIONS_ERROR": {
+		"description": "Error message shown when a user specified option is invalid.",
+		"message": "Unknown relay option: $OPTION$",
+		"placeholders": {
+			"option": {
+				"content": "$1",
+				"example": "--foobar"
+			}
+		}
+	},
 	"RELAY_RETRY": {
 		"description": "Displayed in a text overlay when we experience an error talking to the relay server (which is like a web proxy for connections).",
 		"message": "Retrying..."

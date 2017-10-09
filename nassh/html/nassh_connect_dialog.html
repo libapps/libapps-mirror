@@ -35,7 +35,8 @@
         </x-hbox>
         <x-hbox>
           <input x-box id='field-relay-options' x-flex='1' type='text'
-                 i18n='{"aria-label": "$id", "title": "=aria-label", "placeholder": "$id"}'>
+                 i18n='{"aria-label": "$id", "title": "=aria-label", "placeholder": "$id"}'
+                 pattern='^\s*(--(no-)?(config|proxy-host|proxy-port|relay-prefix-field|relay-protocol|report-ack-latency|report-connect-attempts|ssh-agent|use-ssl|use-xhr)(=[^\s]+)?(\s+|$))*$'>
         </x-hbox>
         <br>
         <x-hbox x-align='baseline'>

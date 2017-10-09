@@ -242,7 +242,8 @@ nassh.CommandInstance.prototype.reconnect = function(argstr) {
 
   this.io = this.argv_.io.push();
 
-  this.plugin_.parentNode.removeChild(this.plugin_);
+  if (this.plugin_)
+    this.plugin_.parentNode.removeChild(this.plugin_);
   this.plugin_ = null;
 
   this.stdoutAcknowledgeCount_ = 0;
@@ -699,9 +700,15 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   }
 
   if (params.relayOptions) {
-    var relay = new nassh.GoogleRelay(this.io, params.relayOptions,
-                                      this.terminalLocation,
-                                      this.storage);
+    try {
+      var relay = new nassh.GoogleRelay(this.io, params.relayOptions,
+                                        this.terminalLocation,
+                                        this.storage);
+    } catch (e) {
+      this.io.println(nassh.msg('RELAY_OPTIONS_ERROR', [e]));
+      this.exit(-1);
+      return false;
+    }
 
     // TODO(rginda): The `if (relay.proxyHost)` test is part of a goofy hack
     // to add the --ssh-agent param to the relay-options pref.  --ssh-agent has

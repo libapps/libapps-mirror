@@ -89,23 +89,28 @@ nassh.GoogleRelay.parseOptionString = function(optionString) {
 
   var optionList = optionString.trim().split(/\s+/g);
   for (var i = 0; i < optionList.length; i++) {
-    var option = optionList[i];
-    if (option.substr(0, 1) != '-') {
-      // Bare option overrides --host.
-      rv['--proxy-host'] = option;
+    // Make sure it's a long option first.
+    const option = optionList[i];
+    if (!option.startsWith('--'))
+      throw Error(option);
+
+    // Split apart the option if there is an = in it.
+    let flag, value;
+    const pos = option.indexOf('=');
+    if (pos == -1) {
+      // If there is no = then it's a boolean flag (which --no- disables).
+      value = !option.startsWith('--no-');
+      flag = option.slice(value ? 2 : 5);
     } else {
-      var pos = option.indexOf('=');
-      if (pos != -1) {
-        rv[option.substr(0, pos)] = option.substr(pos + 1);
-      } else {
-        var ary = option.match(/--no-(.*)/);
-        if (ary) {
-          rv['--' + ary[1]] = false;
-        } else {
-          rv[option] = true;
-        }
-      }
+      flag = option.slice(2, pos);
+      value = option.slice(pos + 1);
     }
+
+    // Verify it's an option we support.
+    if (!nassh.GoogleRelay.parseOptionString.validOptions_.includes(flag))
+      throw Error(option);
+
+    rv[`--${flag}`] = value;
   }
 
   if (rv['--config'] == 'google') {
@@ -128,6 +133,25 @@ nassh.GoogleRelay.parseOptionString = function(optionString) {
 
   return rv;
 };
+
+/**
+ * All possible flags that may show up in the relay options.
+ * Currently this covers all options even non-Google relay ones.
+ *
+ * Note: Keep this in sync with nassh_connect_dialog.html.
+ */
+nassh.GoogleRelay.parseOptionString.validOptions_ = [
+  'config',
+  'proxy-host',
+  'proxy-port',
+  'relay-prefix-field',
+  'relay-protocol',
+  'report-ack-latency',
+  'report-connect-attempts',
+  'ssh-agent',
+  'use-ssl',
+  'use-xhr',
+];
 
 /**
  * Returns the pattern for the cookie server URL.
