@@ -370,6 +370,9 @@ nassh.CommandInstance.prototype.promptForDestination_ = function(opt_default) {
     window.addEventListener('resize', resize_);
   };
 
+  // Clear retry count whenever we show the dialog.
+  sessionStorage.removeItem('googleRelay.redirectCount');
+
   connectDialog.show();
 };
 

@@ -249,6 +249,9 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
         this.relayServerSocket = lib.f.replaceVars(pattern,
             {host: relayHost, port: relayPort, protocol: protocol});
       }
+
+      // If we made it this far, we're probably not stuck in a redirect loop.
+      sessionStorage.removeItem('googleRelay.redirectCount');
     } else {
       // If everything is ok, this should be the second time we've been asked
       // to do the same init.  (The first time would have redirected.)  If this
