@@ -75,7 +75,7 @@
 	},
 	"CONSOLE_CROSH_OPTIONS_NOTICE": {
 		"description": "Shown to users who open up the JavaScript developer console. Direct them to the options page instead.",
-		"message": "Did you know there is a dedicated options page?\nNo need to mess with term_ directly anymore!\nPress $SHORTCUT$ to open it, or click:\n$URL$",
+		"message": "Did you know there is a dedicated options page?\nNo need to modify term_ directly anymore!\nPress $SHORTCUT$ to open it, or click:\n$URL$",
 		"placeholders": {
 			"shortcut": {
 				"content": "$1",
@@ -152,11 +152,11 @@
 		"message": "port"
 	},
 	"FIELD_RELAY_OPTIONS_ARIA_LABEL": {
-		"description": "Label for command line options to the SSH relay server. The relay server is like a web proxy for connections.",
-		"message": "relay options"
+		"description": "Label for command line options to the SSH relay server. The relay server is like a web proxy for connections. 'SSH' refers to the protocol and probably should not be translated if the language does not have a common replacement.",
+		"message": "SSH relay server options"
 	},
 	"FIELD_RELAY_OPTIONS_PLACEHOLDER": {
-		"description": "Placeholder for command line options to the SSH relay server. The relay server is like a web proxy for connections.",
+		"description": "Placeholder for command line options to the SSH relay server. The relay server is like a web proxy for connections. 'SSH' refers to the protocol and probably should not be translated if the language does not have a common replacement.",
 		"message": "SSH relay server options"
 	},
 	"FIELD_TERMINAL_PROFILE_PLACEHOLDER": {
@@ -284,7 +284,7 @@
 		"message": "OK"
 	},
 	"OMNIBOX_DEFAULT": {
-		"description": "Default help text as a tip in the omnibox. Do not translate the <url> and <match> tags.",
+		"description": "Default help text as a tip in the omnibox. Do not translate the <url> and <match> tags. The 'user@hostname[:port]' may be translated, but it should keep the 'username' and 'hostname' together with an @ sign, and the : before the 'port'.",
 		"message": "<url><match>user@hostname[:port]</match></url> Connect to a saved profile or a new ssh system"
 	},
 	"OPEN_AS_WINDOW_TIP": {
@@ -400,27 +400,27 @@
 		"message": "When running in a window, Ctrl-Shift-N can open another session."
 	},
 	"TIP_11": {
-		"description": "Helpful tip shown to user advertising features",
+		"description": "Helpful tip shown to user advertising features. 'rebind' means changing the behavior of a specific shortcut.",
 		"message": "You can rebind keys/shortcuts: https://goo.gl/LWRndr"
 	},
 	"TIP_12": {
-		"description": "Helpful tip shown to user advertising features",
+		"description": "Helpful tip shown to user advertising features. Do not translate 'Yubikeys' as it's a product name.",
 		"message": "Use Yubikeys and other smart cards for ssh auth: https://goo.gl/3ZEU1w"
 	},
 	"TIP_2": {
-		"description": "Helpful tip shown to user advertising features",
+		"description": "Helpful tip shown to user advertising features. Do not translate 'hterm-notify' as it's the name of a program.",
 		"message": "Display notifications in the browser using hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"TIP_3": {
-		"description": "Helpful tip shown to user advertising features",
+		"description": "Helpful tip shown to user advertising features. Do not translate the 'ssh' string, but '<profile name>' can be. It is a user-defined description for their saved connections.",
 		"message": "Connect from the omnibox by typing 'ssh <profile name>': https://goo.gl/V7o8ki"
 	},
 	"TIP_4": {
-		"description": "Helpful tip shown to user advertising features",
-		"message": "Chrome OS can mount filesystems via SFTP and browse via the Files app.  Use 'SFTP Mount' instead of 'Connect'."
+		"description": "Helpful tip shown to user advertising features. 'SFTP Mount' and 'Connect' refer to button labels and should be translated using the same text as the MOUNT_BUTTON_LABEL and CONNECT_BUTTON_LABEL messages.",
+		"message": "Chrome OS can mount file systems via SFTP and browse via the Files app. Use 'SFTP Mount' instead of 'Connect'."
 	},
 	"TIP_5": {
-		"description": "Helpful tip shown to user advertising features",
+		"description": "Helpful tip shown to user advertising features. Do not translate the 'ssh://' part as it refers to a web link.",
 		"message": "Connect using ssh:// links in web pages, or save a bookmark: https://goo.gl/zS8EZD"
 	},
 	"TIP_6": {
@@ -428,7 +428,7 @@
 		"message": "Color your output/prompt using basic 16 colors & 256 colors & full 24-bit colors: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"TIP_7": {
-		"description": "Helpful tip shown to user advertising features",
+		"description": "Helpful tip shown to user advertising features. Do not translate 'emacs' or 'vim' (they are the names of text editors), and do not translate 'OSC-52' (it refers to a terminal specification).",
 		"message": "Copy to your clipboard from emacs/vim/etc... using OSC-52: https://goo.gl/XSnyLo"
 	},
 	"TIP_8": {
@@ -452,7 +452,7 @@
 		"message": "An update is available. Please close all windows."
 	},
 	"WELCOME_CHANGELOG": {
-		"description": "A link to the ChangeLog file, displayed at startup",
+		"description": "A link to the ChangeLog file, displayed at startup. All the text here may be localized as makes sense.",
 		"message": "ChangeLog/release notes: $URL$",
 		"placeholders": {
 			"url": {
