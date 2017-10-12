@@ -189,6 +189,9 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
     }
   }
 
+  // Watch for keypresses sent anywhere in this frame.
+  document.addEventListener('keydown', this.onDocumentKeyDown_.bind(this));
+
   // Watch for selection changes on the ColumnList so we can keep the
   // 'billboard' updated.
   this.shortcutList_.onActiveIndexChanged =
@@ -842,6 +845,47 @@ nassh.ConnectDialog.prototype.onImportFiles_ = function(e) {
   nassh.importFiles(this.fileSystem_, '/.ssh/', input.files, onImportSuccess);
 
   return false;
+};
+
+/**
+ * Keydown event anywhere in this frame.
+ *
+ * @param {KeyboardEvent} e The user keydown event to process.
+ * @return {bool} Whether to keep processing the event.
+ */
+nassh.ConnectDialog.prototype.onDocumentKeyDown_ = function(e) {
+  const key = String.fromCharCode(e.keyCode);
+  const lowerKey = key.toLowerCase();
+  let cancel = false;
+
+  // Swallow common shortcuts that don't make sense in this app.
+  switch (lowerKey) {
+    // Shortcuts where we kill both the non-shift and shift variants.
+    case 'n':  // New window (!shift) and new incognito window (shift).
+    case 'p':  // Chrome print (!shift) and OS print (shift).
+    case 'o':  // Open (!shift) and bookmark manager (shift).
+    case 't':  // New tab (!shift) and new incognito tab (shift).
+      if (e.ctrlKey && !e.altKey && !e.metaKey)
+        cancel = true;
+      break;
+
+    // Shortcuts where we only kill non-shift variants (and allow shift).
+    case 'j':  // Downloads.
+    case 'h':  // History.
+    case 's':  // Save.
+    case 'u':  // View source.
+      if (e.ctrlKey && !e.altKey && !e.metaKey && !e.shiftKey)
+        cancel = true;
+      break;
+  }
+
+  if (cancel) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  }
+
+  return true;
 };
 
 /**
