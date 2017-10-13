@@ -128,6 +128,18 @@ nassh.App.prototype.omniboxOnInputChanged_ = function(text, suggest) {
  * @param {string} disposition Mode the user wants us to open as.
  */
 nassh.App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
+  // If the user types out the profile name exactly, connect to it.  It might
+  // overlap with a valid URI, but if that's a problem, they can change the
+  // description to something else.
+  for (let i = 0; i < this.omniMatches_.length; ++i) {
+    const match = this.omniMatches_[i];
+
+    if (match.desc == text) {
+      text = 'profile-id:' + match.id;
+      break;
+    }
+  }
+
   var url = chrome.runtime.getURL('html/nassh.html#' + text);
   switch (disposition) {
     default:
