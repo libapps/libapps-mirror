@@ -1,3 +1,20 @@
+# 0.8.38, 2017-10-16, Bugfixes galore.
+
+* Update to libdot 1.19.  Bug fixes.
+* Update to hterm 1.73.  Various bugfixes and minor features.
+* crosh: Fix pasting Unicode content.
+* Fix base64url encoding translation with relays.
+* Display relay error messages to the user.
+* Detect relay loops.
+* agent: Print SSH public key blobs to the console.
+* Add a guide for setting up smart card backed ssh keys.
+* agent: Improve TLV handling with smart cards.
+* agent: Take OpenPGP card capabilities into account.
+* agent: Add short names for Gemalto readers.
+* Validate relay options.
+* Ignore common browser shortcuts in connection dialog.
+* omnibox: Allow matching saved profile names.
+
 # 0.8.37, 2017-09-12, Unicode updates and ssh-agent frameworks.
 
 * Update to libdot 1.18.  Unicode 10.0.0 updates (from Unicode 5).
