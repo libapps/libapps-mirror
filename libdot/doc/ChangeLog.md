@@ -1,3 +1,8 @@
+# 1.19, 2017-10-16, Bug fixes.
+
+* Fix message lookup on non-Chrome browsers.
+* Retry storage write failures like exceeding bandwidth quotas.
+
 # 1.18, 2017-09-12, Unicode 10.0.0 updates.
 
 * Add Object.values and Object.entries polyfills.
