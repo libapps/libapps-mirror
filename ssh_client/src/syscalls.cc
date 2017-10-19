@@ -150,10 +150,11 @@ static int WRAP(write)(int fd, const void* buf, size_t count, size_t* nwrote) {
   if (fd != 1 && fd != 2)
     VLOG("write: %d %d\n", fd, count);
 #ifndef NDEBUG
+  // Have debug builds write stdout/stderr to the program's stdout/stderr too.
+  // This helps when debugging on Linux systems.  We also pass it back to the
+  // JS layer as CrOS doesn't have a way of viewing the program's stdout/stderr.
   if (fd == 1 || fd == 2) {
     REAL(write)(fd, buf, count, nwrote);
-    if (fd == 2)
-      return 0;
   }
 #endif
   return FileSystem::GetFileSystem()->write(fd, (const char*)buf, count,

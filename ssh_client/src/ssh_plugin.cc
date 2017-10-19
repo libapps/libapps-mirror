@@ -218,9 +218,6 @@ void SshPluginInstance::SessionThreadImpl() {
   std::vector<const char*> argv;
   // argv[0]
   argv.push_back("ssh");
-#ifdef DEBUG
-  argv.push_back("-vvv");
-#endif
   if (session_args_.isMember(kArgumentsAttr) &&
       session_args_[kArgumentsAttr].isArray()) {
     const Json::Value& args = session_args_[kArgumentsAttr];
