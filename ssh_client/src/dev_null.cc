@@ -61,8 +61,7 @@ void DevNull::close() {
 }
 
 int DevNull::read(char* buf, size_t count, size_t* nread) {
-  memset(buf, 0, count);
-  *nread = count;
+  *nread = 0;
   return 0;
 }
 
