@@ -41,7 +41,7 @@ If you're hacking on the source, here are the files you most likely care about:
 * [Makefile]: Used only to compile the plugin code under [src/].
 * [nacl-openssh.sh]: Script used to download & build OpenSSH specifically.
   Do not try to run this directly as it relies on settings in [build.sh].
-* [openssh-7.5p1.patch]: Minor changes needed to make OpenSSH work under NaCl.
+* [openssh-7.6p1.patch]: Minor changes needed to make OpenSSH work under NaCl.
 * `output/`: All download & compiled objects are saved here.
   * `hterm/plugin/`: The final output of the build process for [nassh].
 * [src/]: The NaCl plugin code that glues the JavaScript and OpenSSH worlds.
@@ -187,7 +187,7 @@ Breakpoint 1, PepperFile::Open (this=<optimized out>, result=<optimized out>, pa
 [include/]: ./include/
 [Makefile]: ./Makefile
 [nacl-openssh.sh]: ./nacl-openssh.sh
-[openssh-7.5p1.patch]: ./openssh-7.5p1.patch
+[openssh-7.6p1.patch]: ./openssh-7.6p1.patch
 [src/]: ./src/
 [ssh_client_newlib.nmf]: ./ssh_client_newlib.nmf
 [ssh_client.nmf]: ./ssh_client.nmf

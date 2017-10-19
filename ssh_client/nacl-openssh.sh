@@ -15,7 +15,7 @@ set -xe
 
 ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 
-readonly PACKAGE_NAME=openssh-7.5p1
+readonly PACKAGE_NAME=openssh-7.6p1
 readonly OPENSSH_MIRROR="https://commondatastorage.googleapis.com/chromeos-localmirror/secureshell"
 readonly ROOT=$PWD/..
 readonly PATCH_FILE=${ROOT}/${PACKAGE_NAME}.patch
@@ -60,15 +60,19 @@ if [[ ! -x ${MANDOC_P}/mandoc ]]; then
 fi
 export MANDOC="${PWD}/${MANDOC_P}/mandoc"
 
-rm -rf $PACKAGE_NAME/
-if [[ ! -f ${PACKAGE_NAME}.tar.gz ]]
-then
-  wget $OPENSSH_MIRROR/${PACKAGE_NAME}.tar.gz -O ${PACKAGE_NAME}.tar.gz
+if [[ ! -f ${PACKAGE_NAME}.tar.gz ]]; then
+  wget "${OPENSSH_MIRROR}/${PACKAGE_NAME}.tar.gz" -O "${PACKAGE_NAME}.tar.gz"
 fi
-tar xzf ${PACKAGE_NAME}.tar.gz
 
-cd $PACKAGE_NAME
-patch -p1 -i $PATCH_FILE
+# If we haven't gotten past `./configure`, start over.
+if [[ ! -e ${PACKAGE_NAME}/Makefile ]]; then
+  rm -rf "${PACKAGE_NAME}"
+  tar xzf ${PACKAGE_NAME}.tar.gz
+  cd "${PACKAGE_NAME}"
+  patch -p1 -i "${PATCH_FILE}"
+else
+  cd "${PACKAGE_NAME}"
+fi
 
 EXTRA_LIBS=()
 EXTRA_CFLAGS=(
@@ -93,7 +97,6 @@ EXTRA_CONFIGURE_FLAGS=(
   --without-selinux
   --without-shadow
   --without-skey
-  --without-ssh1
   --without-ssl-engine
 
   # Features we want.
@@ -121,10 +124,12 @@ else
 fi
 
 # The prefix path matches what is used at runtime.
-./configure --host=nacl --prefix="/" \
-    CFLAGS="${EXTRA_CFLAGS[*]}" \
-    LIBS="${EXTRA_LIBS[*]}" \
-    "${EXTRA_CONFIGURE_FLAGS[@]}"
+if [[ ! -e Makefile ]]; then
+  ./configure --host=nacl --prefix="/" \
+      CFLAGS="${EXTRA_CFLAGS[*]}" \
+      LIBS="${EXTRA_LIBS[*]}" \
+      "${EXTRA_CONFIGURE_FLAGS[@]}"
+fi
 
 # Build the html man pages.
 cat <<\EOF >>Makefile
@@ -136,8 +141,7 @@ export PACKAGE_NAME
 
 # will fail on link stage due to missing reference to main - it is expected
 objects=(
-    ssh.o readconf.o clientloop.o sshtty.o sshconnect.o sshconnect1.o
-    sshconnect2.o mux.o
+    ssh.o readconf.o clientloop.o sshtty.o sshconnect.o sshconnect2.o mux.o
 )
 make -j${ncpus} \
     html \
