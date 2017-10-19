@@ -32,7 +32,24 @@ const int64_t kNanosecondsPerMicrosecond = 1000;
 
 // Magic value; keep in sync with //ssh_client/openssh/authfd.c
 const uint32_t kSshAgentFakeIP = 0x7F010203;
+
+// Convert a numeric string to a port number.
+uint16_t strtoport(const char* servname) {
+  long port = 0;
+
+  if (servname != NULL) {
+    char* cp;
+    port = strtol(servname, &cp, 10);  // NOLINT(runtime/deprecated_fn)
+    if (port <= 0 || port > 65535 || *cp != '\0') {
+      LOG("Bad port number %s\n", servname);
+      port = 0;
+    }
+  }
+
+  return port;
 }
+
+}  // namespace
 
 FileStream* const FileSystem::kBadFileStream = (FileStream*)-1;
 FileSystem* FileSystem::file_system_ = NULL;
@@ -564,17 +581,7 @@ void FileSystem::Resolve(int32_t result, GetAddrInfoParams* params,
     return;
   }
 
-  long port = 0;
-  if (servname != NULL) {
-    char* cp;
-    port = strtol(servname, &cp, 10);
-    if (port > 0 && port <= 65535 && *cp == '\0') {
-      port = htons(port);
-    } else {
-      LOG("Bad port number %s\n", servname);
-      port = 0;
-    }
-  }
+  uint16_t port = htons(strtoport(servname));
 
   bool is_ipv6 = hints ? hints->ai_family == AF_INET6 : false;
   in6_addr in = {};
@@ -705,8 +712,7 @@ void FileSystem::OnResolve(int32_t result, GetAddrInfoParams* params,
       }
     }
   } else {
-    char* cp;
-    uint16_t port = htons(strtol(params->servname, &cp, 10));
+    uint16_t port = htons(strtoport(params->servname));
     *res = GetFakeAddress(params->hostname, port, hints);
     result = PP_OK;
   }
