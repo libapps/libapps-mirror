@@ -521,6 +521,10 @@ nassh.ConnectDialog.prototype.updatePlaceholders_ = function(fieldName) {
     // Otherwise update the description placeholder.
     this.updateDescriptionPlaceholder_();
   }
+
+  // In either case, the hostname might have changed, so cascade updates into
+  // the relay options.
+  this.updateRelayOptionsPlaceholder_();
 };
 
 /**
@@ -549,12 +553,20 @@ nassh.ConnectDialog.prototype.updateDetailPlaceholders_ = function() {
 
     this.$f(name, 'placeholder', value);
   });
+};
 
+/**
+ * Update the relay-options placeholder.
+ */
+nassh.ConnectDialog.prototype.updateRelayOptionsPlaceholder_ = function() {
   // Google-specific relay hack.  This feels dirty.  We can revert this once
   // we support managed default configs.  http://b/28205376 & related docs.
   let value = this.msg('FIELD_RELAY_OPTIONS_PLACEHOLDER');
   if (!this.$f('relay-options').value) {
-    let hostname = this.$f('hostname').placeholder;
+    let hostname = this.$f('hostname').value;
+    if (!hostname)
+      hostname = this.$f('hostname').placeholder;
+
     if (hostname.endsWith('.corp.google.com'))
       value = '--config=google';
     else if (hostname.endsWith('.c.googlers.com'))
