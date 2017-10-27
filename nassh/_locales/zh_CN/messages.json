@@ -26,7 +26,7 @@
 		"message": "删除已知 SSH 主机。"
 	},
 	"cmd_ssh_help": {
-		"message": "|username| 和 |hostname| 为必需参数，|port| 为可选参数。如果未指定端口，系统会使用默认值 (22)。"
+		"message": "|username| 和 |hostname| 是必需参数，|port| 是可选参数。如果未指定端口，系统会使用默认值 (22)。"
 	},
 	"cmd_ssh_title": {
 		"message": "打开新的 SSH 会话。"
@@ -46,10 +46,29 @@
 		"message": "连接"
 	},
 	"connect_or_exit_message": {
-		"message": "选择其他连接(&C)或退出(&E)？"
+		"message": "选择其他连接(C)或退出(E)？"
 	},
 	"connecting": {
 		"message": "正在连接到 $1…",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"console_crosh_options_notice": {
+		"message": "您知道吗？我们提供了一个专用的选项页面。\n您再也不必直接修改 term_ 了！\n要想打开此页面，请按 $1 或点击：\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "您知道吗？我们提供了一个专用的选项页面。\n您再也不必直接修改 term_ 了！\n$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "其他 ssh 参数"
-	},
 	"field_argstr_placeholder": {
 		"message": "其他命令行参数"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "主机名"
 	},
-	"field_identity_aria_label": {
-		"message": "身份"
+	"field_mount_path_placeholder": {
+		"message": "默认路径是用户的主目录"
 	},
 	"field_port_aria_label": {
 		"message": "端口"
@@ -104,10 +120,7 @@
 		"message": "中继选项"
 	},
 	"field_relay_options_placeholder": {
-		"message": "中继选项"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "终端配置文件名称"
+		"message": "SSH 中继服务器选项"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "默认"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "无法解析“$1”中的 JSON",
+		"message": "无法解析“$1”中的 JSON：$2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "安装 SFTP"
 	},
+	"mount_path_label": {
+		"message": "安装路径"
+	},
 	"mounted_message": {
 		"message": "已安装！"
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "确定"
 	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> 连接到一份已保存的个人资料或一个新的 ssh 系统"
+	},
 	"open_as_window_tip": {
-		"message": "[专业提示] 使用“在窗口中打开”可确保按下 Ctrl + W 组合键时不会关闭终端！\n[专业提示] 请访问 $1 了解详情。",
+		"message": "[专业提示] 使用“在窗口中打开”可确保按下 Ctrl+W 组合键时不会关闭终端！\n[专业提示] 请访问 $1 了解详情。",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -205,6 +227,9 @@
 	"plugin_loading_complete": {
 		"message": "完成。"
 	},
+	"plugin_loading_failed": {
+		"message": " 上传失败！:("
+	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
@@ -215,7 +240,7 @@
 		"message": "所有偏好设置均已重置！"
 	},
 	"reconnect_message": {
-		"message": "重新连接(&R)、选择其他连接(&C)或退出(&E)？"
+		"message": "重新连接(R)、选择其他连接(C)或退出(E)？"
 	},
 	"relay_retry": {
 		"message": "正在重试…"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "当前配置文件"
 	},
+	"tip_1": {
+		"message": "在按住 Ctrl 键（如果是 macOS，则请按住 Cmd 键）的同时点击链接，即可将其打开！"
+	},
+	"tip_10": {
+		"message": "在窗口中运行时，按 Ctrl+Shift+N 组合键可以再打开一个会话。"
+	},
+	"tip_11": {
+		"message": "您可以重新绑定组合键/快捷键：https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "借助 hterm-notify 在浏览器中显示通知：https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "通过输入“ssh <个人资料名称>”从多功能框中进行连接：https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome 操作系统可通过 SFTP 安装文件系统，并通过“文件”应用进行浏览。请使用“安装 SFTP”而非“连接”。"
+	},
+	"tip_5": {
+		"message": "在网页中使用 ssh:// 链接进行连接，或者保存书签：https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "使用基本的 16 色和 256 色以及完整的 24 位色为您的输出内容/提示填充颜色：http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "使用 OSC-52 从 emacs 或 vim 等编辑器中复制到剪贴板：https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "通过 chromium-hterm@chromium.org 与其他 hterm/Secure Shell 用户聊天：https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "发现了错误？想请求新功能？请告诉我们：https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "发生了意外错误。有关详情，请查看 JavaScript 控制台。"
 	},
@@ -242,13 +300,40 @@
 		"message": "卸载 SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "有可用更新。请关闭所有窗口。"
+		"message": "有一项可用的更新。请关闭所有窗口。"
+	},
+	"welcome_changelog": {
+		"message": "ChangeLog/版本说明：$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
 	},
 	"welcome_faq": {
 		"message": "常见问题解答：$1（按住 Ctrl 键的同时点击链接即可打开）",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "自版本 $1 发布以来的重大变化：",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "随机专业提示 #$1：$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

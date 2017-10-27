@@ -26,7 +26,7 @@
 		"message": "Odstrániť známeho hostiteľa ssh."
 	},
 	"cmd_ssh_help": {
-		"message": "Parametre |username| a |hostname| sú povinné, parameter |port| je voliteľný. Ak port nie je uvedený, predvolená hodnota je 22."
+		"message": "Parametre |username| a |hostname| sú povinné, parameter |port| je voliteľný. Ak port nie je uvedený, predvolená hodnota je 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Otvorí novú reláciu SSH."
@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "Vedeli ste, že existuje vyhradená stránka pre možnosti?\nUž nemusíte používať priamo parameter term_!\nStlačením skratky $1 ho otvorte alebo kliknite na adresu:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Vedeli ste, že existuje vyhradená stránka pre možnosti?\nUž nemusíte používať priamo parameter term_!\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "ďalšie argumenty ssh"
-	},
 	"field_argstr_placeholder": {
 		"message": "ďalšie argumenty v príkazovom riadku"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "názov hostiteľa"
 	},
-	"field_identity_aria_label": {
-		"message": "identita"
+	"field_mount_path_placeholder": {
+		"message": "predvolená cesta je domovský adresár používateľa"
 	},
 	"field_port_aria_label": {
 		"message": "port"
@@ -104,10 +120,7 @@
 		"message": "možnosti servera typu relay"
 	},
 	"field_relay_options_placeholder": {
-		"message": "možnosti servera typu relay"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "názov profilu terminálu"
+		"message": "Možnosti servera typu relay SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "predvolené"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Nepodarilo sa analyzovať formát JSON v '$1'",
+		"message": "Nepodarilo sa analyzovať JSON v predvoľbe '$1': $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "Pripojenie protokolu SFTP"
 	},
+	"mount_path_label": {
+		"message": "Cesta pripojenia"
+	},
 	"mounted_message": {
 		"message": "Pripojený!"
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "OK"
 	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Pripojte sa k uloženému profilu alebo novému systému ssh"
+	},
 	"open_as_window_tip": {
-		"message": "[Tip pre profesionálov] Ak chcete zabrániť, aby kombinácia klávesov Control a W zatvorila terminál, použite možnosť Otvoriť ako okno.\n[Tip pre profesionálov] Ďalšie informácie nájdete na adrese $1.",
+		"message": "[Profi tip] Ak chcete zabrániť, aby kombinácia klávesov Control a W zatvorila terminál, použite možnosť Otvoriť ako okno.\n[Profi tip] Ďalšie informácie nájdete na adrese $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -204,6 +226,9 @@
 	},
 	"plugin_loading_complete": {
 		"message": " hotovo."
+	},
+	"plugin_loading_failed": {
+		"message": " zlyhanie! :("
 	},
 	"pref_backup_filename": {
 		"message": "Záloha predvolieb zabezpečeného prístupu.json"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Aktuálny profil"
 	},
+	"tip_1": {
+		"message": "Ak pridržíte kláves Ctrl (Cmd v systéme macOS) a kliknete na odkaz, otvorí sa."
+	},
+	"tip_10": {
+		"message": "Stlačením kombinácie klávesov Ctrl-Shift-N počas zobrazenia v okne otvoríte novú reláciu."
+	},
+	"tip_11": {
+		"message": "Klávesom alebo skratkám môžete priradiť nové funkcie: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Ak chcete zobrazovať upozornenia v prehliadači, použite parameter hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Pripojte sa zo všeobecného poľa zadaním dopytu „ssh <profile name>“: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS môže pripájať systémy súborov prostredníctvom protokolu SFTP a prehliadať ich prostredníctvom aplikácie Súbory. Použite parameter „SFTP Mount“ namiesto „Connect“."
+	},
+	"tip_5": {
+		"message": "Pripojte sa pomocou odkazov ssh:// na webových stránkach alebo si uložte záložku: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Zafarbite si výstup alebo príkazový riadok základnými 16 a 256 farbami a úplnými 24-bitovými farbami: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Kopírujte schránku z editorov emacs/vim/atď... pomocou OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Četujte so spriaznenými používateľmi hterm / Secure Shell prostredníctvom funkcie chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Našli ste chybu? Požadujete novú funkciu? Dajte nám vedieť: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Vyskytla sa neočakávaná chyba. Ďalšie podrobnosti nájdete v konzole JavaScript."
 	},
@@ -244,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "K dispozícii je aktualizácia. Zavrite všetky okná."
 	},
+	"welcome_changelog": {
+		"message": "Denník zmien / poznámky k vydaniu: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "Odpovede na časté otázky: $1 (odkazy otvoríte pomocou klávesa ctrl a kliknutia)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Veľké zmeny od verzie $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Náhodný profi tip č. $1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

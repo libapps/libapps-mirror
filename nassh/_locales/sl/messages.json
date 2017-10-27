@@ -26,7 +26,7 @@
 		"message": "Pozabi znanega gostitelja ssh."
 	},
 	"cmd_ssh_help": {
-		"message": "Parametra |username| in |hostname| sta obvezna, |port| je izbiren. Če ne navedete številke vrat, se privzeto uporabi 22."
+		"message": "Parametra |username| (uporabniško ime) in |hostname| (ime gostitelja) sta obvezna, |port| (vrata) pa je izbiren. Če ne navedete številke vrat, se privzeto uporabi 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Odpre novo sejo SSH."
@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "Ali ste vedeli, da je na voljo namenska stran z možnostmi?\nNi se vam več treba ubadati neposredno z operatorjem »term_«.\nPritisnite $1, če jo želite odpreti, ali kliknite:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Ali ste vedeli, da je na voljo namenska stran z možnostmi?\nNi se vam več treba ubadati neposredno z operatorjem »term_«.\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "dodatni argumenti ssh"
-	},
 	"field_argstr_placeholder": {
 		"message": "dodatni argumenti ukazne vrstice"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "ime gostitelja"
 	},
-	"field_identity_aria_label": {
-		"message": "identiteta"
+	"field_mount_path_placeholder": {
+		"message": "privzeta pot je uporabnikov domači imenik"
 	},
 	"field_port_aria_label": {
 		"message": "vrata"
@@ -104,10 +120,7 @@
 		"message": "možnosti posredovanja"
 	},
 	"field_relay_options_placeholder": {
-		"message": "možnosti posredovanja"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "ime terminalskega profila"
+		"message": "možnosti strežnika za posredovanje SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "privzeto"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "JSON-a v »$1« ni bilo mogoče razčleniti",
+		"message": "JSON-a v »$1« ni bilo mogoče razčleniti: $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "Vpenjanje SFTP-ja"
 	},
+	"mount_path_label": {
+		"message": "Pot za vpetje"
+	},
 	"mounted_message": {
 		"message": "Vpeto."
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "V redu"
 	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Vzpostavite povezavo s shranjenim profilom ali novim sistemom ssh"
+	},
 	"open_as_window_tip": {
-		"message": "[Nasvet strokovnjaka] »Uporabite ukaz »Odpri kot okno«, če želite, da se z bližnjico »CTRL + W« ne zapre terminal.\n[Nasvet strokovnjaka] Na $1 poiščite več informacij.",
+		"message": "[Nasvet strokovnjaka] Uporabite ukaz »Odpri kot okno«, če želite, da se z bližnjico »CTRL + W« ne zapre terminal.\n[Nasvet strokovnjaka] Na $1 poiščite več informacij.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -204,6 +226,9 @@
 	},
 	"plugin_loading_complete": {
 		"message": " končano."
+	},
+	"plugin_loading_failed": {
+		"message": " Ni uspelo :("
 	},
 	"pref_backup_filename": {
 		"message": "Varnostna kopija nastavitev varne lupine.json"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Trenutni profil"
 	},
+	"tip_1": {
+		"message": "Če želite odpreti povezave, medtem ko jih kliknete, lahko pridržite tipko Ctrl (tipko Cmd v sistemu macOS)."
+	},
+	"tip_10": {
+		"message": "Med izvajanjem v oknu lahko s kombinacijo tipk Ctrl, Shift in N odprete novo sejo."
+	},
+	"tip_11": {
+		"message": "Tipke/bližnjice lahko znova povežete: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Obvestila v brskalniku lahko prikažete z možnostjo hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Povezavo lahko vzpostavite v naslovni vrstici, tako da vnesete »ssh <ime profila>«: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "OS Chrome omogoča vpetje datotečnih sistemov prek SFTP-ja in brskanje z aplikacijo Datoteke. Namesto možnosti »Poveži« uporabite »Vpenjanje SFTP-ja«."
+	},
+	"tip_5": {
+		"message": "Povežite se s povezavami ssh:// na spletnih straneh ali dodajte zaznamek: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Pobarvajte izhodne nize/pozive z osnovnimi 16 barvami, 256 barvami in polnimi 24-bitni barvami: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Kopirajte v odložišče iz urejevalnikov besedila emac/vim/ipd. z nizom OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Klepetajte z drugimi uporabniki hterma/varne lupine prek naslova chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Ste našli napako?  Zahtevate novo funkcijo?  Pišite nam: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Nepričakovana napaka. Podrobnosti najdete v konzoli za JavaScript."
 	},
@@ -244,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "Na voljo je posodobitev. Zaprite vsa okna."
 	},
+	"welcome_changelog": {
+		"message": "Dnevnik sprememb/opombe ob izdaji: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "Odgovori na pogosta vprašanja: $1 (pritisnite tipko CTRL in kliknite povezave, če jih želite odpreti)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Pomembne spremembe v primerjavi z različico $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Naključni nasvet strokovnjaka št. $1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

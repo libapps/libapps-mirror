@@ -26,7 +26,7 @@
 		"message": "Zaboravi poznato glavno računalo ssh."
 	},
 	"cmd_ssh_help": {
-		"message": "Parametri |username| i |hostname| obavezni su, a parametar |port| nije. Ako ne navedete parametar priključka, bit će upotrijebljena zadana vrijednost 22."
+		"message": "Parametri |username| i |hostname| obavezni su, a parametar |port| nije. Ako ne navedete parametar priključka, koristit će se zadana vrijednost 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Otvara novu sesiju SSH."
@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "Znate li da postoji posebna stranica s opcijama?\nViše ne morate izravno određivati term_.\nPritisnite $1 da biste je otvorili ili kliknite:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Znate li da postoji posebna stranica s opcijama?\nViše ne morate izravno određivati term_.\n\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "dodatni ssh argumenti"
-	},
 	"field_argstr_placeholder": {
 		"message": "dodatni argumenti naredbenog retka"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "naziv hosta"
 	},
-	"field_identity_aria_label": {
-		"message": "identitet"
+	"field_mount_path_placeholder": {
+		"message": "zadani put početni je direktorij korisnika"
 	},
 	"field_port_aria_label": {
 		"message": "priključak"
@@ -104,10 +120,7 @@
 		"message": "opcije releja"
 	},
 	"field_relay_options_placeholder": {
-		"message": "opcije releja"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "naziv profila za terminal"
+		"message": "Opcije SSH relejnog poslužitelja"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "zadano"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Nije moguće raščlaniti JSON u stavci \"$1\"",
+		"message": "Nije moguće raščlaniti JSON u stavci \"$1\": $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "Učitavanje SFTP-a"
 	},
+	"mount_path_label": {
+		"message": "Put učitavanja"
+	},
 	"mounted_message": {
 		"message": "Učitano!"
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "U redu"
 	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Povežite se sa spremljenim profilom ili novim SSH sustavom"
+	},
 	"open_as_window_tip": {
-		"message": "[Profesionalni savjet] Upotrijebite \"Otvori kao prozor\" da prečac Control-W ne bi zatvarao vaš terminal!\n[Profesionalni savjet] Više informacija potražite na web-lokaciji $1.",
+		"message": "[Profesionalni savjet] Upotrijebite \"Otvori kao prozor\" da biste spriječili zatvaranje terminala prečacem Control-W.\n[Profesionalni savjet] Više informacija potražite na web-lokaciji $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -204,6 +226,9 @@
 	},
 	"plugin_loading_complete": {
 		"message": " gotovo."
+	},
+	"plugin_loading_failed": {
+		"message": " nije uspjelo! :("
 	},
 	"pref_backup_filename": {
 		"message": "Backup.json za postavke sigurne ljuske"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Trenutačni profil"
 	},
+	"tip_1": {
+		"message": "Veze možete otvoriti tako da prilikom klika zadržite tipku Ctrl (Cmd na macOS-u)."
+	},
+	"tip_10": {
+		"message": "Kada se izvodi u novom prozoru, prečac Ctrl – Shift – N može otvoriti drugu sesiju."
+	},
+	"tip_11": {
+		"message": "Tipke/prečace možete ponovo povezati: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Za prikaz obavijesti u pregledniku upotrijebite skriptu hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Za povezivanje iz višenamjenskog okvira unesite \"ssh <profile name>\": https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "OS Chrome može učitati datotečne sustave putem SFTP-a i pregledavati ga putem aplikacije Datoteke. Upotrijebite \"Učitavanje SFTP-a\" umjesto \"Poveži\"."
+	},
+	"tip_5": {
+		"message": "Povežite se putem ssh:// veza u web-stranicama ili spremite oznaku: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Obojite svoj izlaz/upit pomoću osnovnih 16 boja, 256 boja i potpune 24-bitne palete: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Kopirajte u međuspremnik iz uređivača emacs/vim/itd. pomoću naredbe OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Chatajte s drugima koji koriste hterm/Secure Shell putem chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Pronašli ste pogrešku? Želite zatražiti novu značajku? Javite nam se: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Pojavila se neočekivana pogreška. Više pojedinosti provjerite na konzoli JavaScripta."
 	},
@@ -244,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "Dostupno je ažuriranje. Zatvorite sve prozore."
 	},
+	"welcome_changelog": {
+		"message": "Zapisnik izmjena/napomene o izdanju: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "Odgovori na česta pitanja: $1 (pritisnite Ctrl i kliknite na vezama da biste ih otvorili)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Važne izmjene od verzije $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Nasumični profesionalni savjet br. $1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

@@ -46,10 +46,29 @@
 		"message": "เชื่อมต่อ"
 	},
 	"connect_or_exit_message": {
-		"message": "ต้องการ(เ)ลือกการเชื่อมต่ออื่นหรือ(อ)อก"
+		"message": "ต้องการเลือกการเชื่อมต่ออื่น (C) หรือออก (X)"
 	},
 	"connecting": {
 		"message": "กำลังเชื่อมต่อ $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"console_crosh_options_notice": {
+		"message": "คุณทราบไหมว่ามีหน้าสำหรับตัวเลือกโดยเฉพาะ\nไม่ต้องจัดการกับ term_ โดยตรงให้ยุ่งยากอีกต่อไป!\nกด $1 เพื่อเปิด หรือคลิก\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "คุณทราบไหมว่ามีหน้าสำหรับตัวเลือกโดยเฉพาะ\nไม่ต้องจัดการกับ term_ โดยตรงให้ยุ่งยากอีกต่อไป!\n$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "อาร์กิวเมนต์ ssh เพิ่มเติม"
-	},
 	"field_argstr_placeholder": {
 		"message": "อาร์กิวเมนต์บรรทัดคำสั่งพิเศษ"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "ชื่อโฮสต์"
 	},
-	"field_identity_aria_label": {
-		"message": "ข้อมูลประจำตัว"
+	"field_mount_path_placeholder": {
+		"message": "เส้นทางเริ่มต้นคือไดเรกทอรีหลักของผู้ใช้"
 	},
 	"field_port_aria_label": {
 		"message": "พอร์ต"
@@ -104,10 +120,7 @@
 		"message": "ตัวเลือกของรีเลย์"
 	},
 	"field_relay_options_placeholder": {
-		"message": "ตัวเลือกของรีเลย์"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "ชื่อโปรไฟล์ของเทอร์มินัล"
+		"message": "ตัวเลือกรีเลย์เซิร์ฟเวอร์ SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "ค่าเริ่มต้น"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "ไม่สามารถแยกวิเคราะห์ JSON ใน \"$1\"",
+		"message": "ไม่สามารถแยกวิเคราะห์ JSON ใน \"$1\": $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "ต่อเชื่อม SFTP"
 	},
+	"mount_path_label": {
+		"message": "เส้นทางต่อเชื่อม"
+	},
 	"mounted_message": {
 		"message": "ต่อเชื่อมแล้ว!"
 	},
@@ -187,6 +206,9 @@
 	},
 	"ok_button_label": {
 		"message": "ตกลง"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> เชื่อมต่อกับโปรไฟล์ที่บันทึกไว้หรือระบบ SSH ใหม่"
 	},
 	"open_as_window_tip": {
 		"message": "[เคล็ดลับสำหรับมือโปร] ใช้ \"เปิดเป็นหน้าต่าง\" เพื่อป้องกันไม่ให้ Control-W ปิดเทอร์มินัล!\n[เคล็ดลับสำหรับมือโปร] ดูข้อมูลเพิ่มเติมใน $1",
@@ -205,6 +227,9 @@
 	"plugin_loading_complete": {
 		"message": " เสร็จสิ้น"
 	},
+	"plugin_loading_failed": {
+		"message": " ล้มเหลว! :("
+	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
@@ -215,7 +240,7 @@
 		"message": "รีเซ็ตค่ากำหนดทั้งหมดแล้ว!"
 	},
 	"reconnect_message": {
-		"message": "ต้องการเชื่อ(ม)ต่ออีกครั้ง (เ)ลือกการเชื่อมต่ออื่น หรือ(อ)อก"
+		"message": "ต้องการเชื่อมต่ออีกครั้ง (R) เลือกการเชื่อมต่ออื่น (C) หรือออก (X)"
 	},
 	"relay_retry": {
 		"message": "กำลังลองใหม่..."
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "โปรไฟล์ปัจจุบัน"
 	},
+	"tip_1": {
+		"message": "คุณสามารถกด Ctrl (Cmd ใน macOS) พร้อมคลิกลิงก์เพื่อเปิดลิงก์นั้นได้"
+	},
+	"tip_10": {
+		"message": "เมื่อเรียกใช้ในหน้าต่าง การกดปุ่ม Ctrl-Shift-N จะเปิดอีกเซสชันหนึ่งขึ้นมา"
+	},
+	"tip_11": {
+		"message": "คุณสามารถรวมคีย์/แป้นพิมพ์ลัดอีกครั้งได้ที่ https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "แสดงการแจ้งเตือนในเบราว์เซอร์โดยใช้ hterm-notify ได้ที่ https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "เชื่อมต่อจากแถบอเนกประสงค์ด้วยการพิมพ์ \"ssh <profile name>\": https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS ต่อเชื่อมระบบไฟล์ได้ผ่าน SFTP และเรียกดูได้ผ่านแอปไฟล์ ใช้ \"ต่อเชื่อม SFTP\" แทน \"เชื่อมต่อ\""
+	},
+	"tip_5": {
+		"message": "เชื่อมต่อโดยใช้ลิงก์ ssh:// ในหน้าเว็บ หรือบันทึกบุ๊กมาร์กที่ https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "ให้สีเอาต์พุต/ข้อความแจ้งโดยใช้สีหลัก 16 สี 256 สี และสี 24 บิตแบบเต็มได้ที่ http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "คัดลอกจาก emacs/vim/ฯลฯ ไปที่คลิปบอร์ด... โดยใช้ OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "แชทกับผู้ใช้ hterm/Secure Shell ผ่าน chromium-hterm@chromium.org ได้ที่ https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "หากพบข้อบกพร่องหรือต้องการส่งคำขอฟีเจอร์ใหม่ บอกเราได้ที่ https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "เกิดข้อผิดพลาดที่ไม่คาดคิด โปรดตรวจสอบคอนโซล JavaScript สำหรับรายละเอียดเพิ่มเติม"
 	},
@@ -244,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "มีอัปเดตให้ใช้งาน โปรดปิดหน้าต่างทั้งหมด"
 	},
+	"welcome_changelog": {
+		"message": "บันทึกการเปลี่ยนแปลง/บันทึกประจำรุ่น: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "คำตอบสำหรับคำถามที่พบบ่อย: $1 (กด Ctrl ค้างไว้แล้วคลิกบนลิงก์เพื่อเปิด)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "การเปลี่ยนแปลงที่สำคัญตั้งแต่ $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "เคล็ดลับสำหรับมือโปร #$1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

@@ -26,7 +26,7 @@
 		"message": "Glöm en känd ssh-värd."
 	},
 	"cmd_ssh_help": {
-		"message": "Parametrarna |username| och |hostname| är obligatoriska, |port| är valfri. Om du inte anger en port blir den automatiskt 22."
+		"message": "Parametrarna |username| och |hostname| är obligatoriska. |port| är valfri. Om du inte anger en port blir den automatiskt 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Öppnar en ny SSH-session."
@@ -46,10 +46,29 @@
 		"message": "Anslut"
 	},
 	"connect_or_exit_message": {
-		"message": "Vill du (v)älja en annan anslutning eller a(v)sluta?"
+		"message": "Vill du välja en annan anslutning (C) eller avsluta (X)?"
 	},
 	"connecting": {
 		"message": "Ansluter till $1 …",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"console_crosh_options_notice": {
+		"message": "Visste du att det finns en särskild alternativsida?\nNu behöver du inte krångla med term_ direkt längre.\nTryck på $1 om du vill öppna den, eller klicka på:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Visste du att det finns en särskild alternativsida?\nNu behöver du inte krångla med term_ direkt längre.\n$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "ytterligare ssh-argument"
-	},
 	"field_argstr_placeholder": {
 		"message": "extra kommandoradsargument"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "värdnamn"
 	},
-	"field_identity_aria_label": {
-		"message": "identitet"
+	"field_mount_path_placeholder": {
+		"message": "sökvägen är användarens home-katalog som standard"
 	},
 	"field_port_aria_label": {
 		"message": "port"
@@ -104,10 +120,7 @@
 		"message": "reläalternativ"
 	},
 	"field_relay_options_placeholder": {
-		"message": "reläalternativ"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "terminalens profilnamn"
+		"message": "Alternativ för SSH-reläserver"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "standard"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Det gick inte att analysera JSON i $1",
+		"message": "Det gick inte att analysera JSON i $1: $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "SFTP-montering"
 	},
+	"mount_path_label": {
+		"message": "Sökväg för montering"
+	},
 	"mounted_message": {
 		"message": "Filsystemet har monterats."
 	},
@@ -187,6 +206,9 @@
 	},
 	"ok_button_label": {
 		"message": "OK"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Anslut till en sparad profil eller ett nytt ssh-system"
 	},
 	"open_as_window_tip": {
 		"message": "[Pro Tip] Använd Öppna som fönster för att förhindra att terminalen stängs av Ctrl-W.\n[Pro Tip] Mer information finns på $1.",
@@ -205,6 +227,9 @@
 	"plugin_loading_complete": {
 		"message": " klart."
 	},
+	"plugin_loading_failed": {
+		"message": " misslyckades :("
+	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
@@ -215,7 +240,7 @@
 		"message": "Alla inställningar har återställts."
 	},
 	"reconnect_message": {
-		"message": "Vill du (å)teransluta, (v)älja en annan anslutning eller a(v)sluta?"
+		"message": "Vill du återansluta (R), välja en annan anslutning (C) eller avsluta (X)?"
 	},
 	"relay_retry": {
 		"message": "Försöker igen …"
@@ -235,20 +260,80 @@
 	"terminal_profile_label": {
 		"message": "Aktuell profil"
 	},
+	"tip_1": {
+		"message": "Du kan hålla ned Ctrl (Cmd på macOS) när du klickar på länkar för att öppna dem."
+	},
+	"tip_10": {
+		"message": "När du kör via ett fönster kan du öppna en ny session med Ctrl-Skift-N."
+	},
+	"tip_11": {
+		"message": "Du kan ändra funktionen för tangenter/kortkommandon: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Du kan visa aviseringar i webbläsaen med hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Du kan ansluta från adressfältet genom att skriva ssh <profile name>: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "I Chrome OS kan du montera filsystem via SFTP och bläddra via appen Filer. Använd SFTP Mount i stället för Connect."
+	},
+	"tip_5": {
+		"message": "Anslut med ssh://-länkar på webbsidor eller spara ett bokmärke: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Färglägg utdata/meddelanden med 16 grundläggande färger, 256 färger och fullständiga 24-bitarsfärger: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Kopiera till urklipp från emacs/vim/osv … med hjälp av OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Chatta med andra användare av hterm/Secure Shell via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Har du hittat ett fel? Har du förslag på nya funktioner? Hör av dig: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Ett oväntat fel uppstod. Du hittar mer information i JavaScript-konsolen."
 	},
 	"unmount_button_label": {
-		"message": "Ta bort SFTP"
+		"message": "Avmontera SFTP"
 	},
 	"update_available_tooltip": {
 		"message": "En uppdatering finns tillgänglig. Stäng alla fönster."
+	},
+	"welcome_changelog": {
+		"message": "ChangeLog/viktig information: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
 	},
 	"welcome_faq": {
 		"message": "Svar på vanliga frågor: $1 (Ctrl + klicka på länkarna för att öppna dem)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Större ändringar sedan $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Slumpmässigt proffstips #$1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

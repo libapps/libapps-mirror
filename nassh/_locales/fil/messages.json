@@ -26,7 +26,7 @@
 		"message": "Kalimutan ang isang kilalang ssh host."
 	},
 	"cmd_ssh_help": {
-		"message": "Kinakailangan ang mga parameter ng |username| at |hostname|, opsyonal ang |port|.  Kung hindi tinukoy ang port, nagde-default ito sa 22."
+		"message": "Kinakailangan ang mga parameter ng |username| at |hostname|, opsyonal ang |port|. Kung hindi tinukoy ang port, nagde-default ito sa 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Nagbubukas ng bagong session ng SSH."
@@ -46,10 +46,29 @@
 		"message": "Kumonekta"
 	},
 	"connect_or_exit_message": {
-		"message": "(P)umili ng ibang koneksyon o L(u)mabas?"
+		"message": "Pumili ng ibang koneksyon (C) o Lumabas (X)?"
 	},
 	"connecting": {
 		"message": "Kumokonekta sa $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"console_crosh_options_notice": {
+		"message": "Alam mo bang may nakalaang page ng mga opsyon?\nHindi na kailangang makigulo pa nang direkta sa term_ \nPindutin ang $1 upang buksan ito, o i-click ang:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Alam mo bang may nakalaang page ng mga opsyon?\nHindi na kailangang makigulo pa nang direkta sa term_!\n$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "mga karagdagang argument ng ssh"
-	},
 	"field_argstr_placeholder": {
 		"message": "mga karagdagang command line na argument"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "hostname"
 	},
-	"field_identity_aria_label": {
-		"message": "pagkakakilanlan"
+	"field_mount_path_placeholder": {
+		"message": "ang default na path ay ang home directory ng user"
 	},
 	"field_port_aria_label": {
 		"message": "port"
@@ -104,10 +120,7 @@
 		"message": "mga opsyon ng pag-relay"
 	},
 	"field_relay_options_placeholder": {
-		"message": "mga opsyon ng pag-relay"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "pangalan sa profile ng terminal"
+		"message": "Mga opsyon ng SSH relay server"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "default"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Hindi ma-parse ang JSON sa '$1'",
+		"message": "Hindi ma-parse ang JSON sa '$1': $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "I-mount ang SFTP"
 	},
+	"mount_path_label": {
+		"message": "I-mount ang Path"
+	},
 	"mounted_message": {
 		"message": "Na-mount na!"
 	},
@@ -187,6 +206,9 @@
 	},
 	"ok_button_label": {
 		"message": "OK"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Kumonekta sa isang naka-save na profile o sa isang bagong ssh system"
 	},
 	"open_as_window_tip": {
 		"message": "[Pro Tip] Gamitin ang 'Buksan bilang Window' upang pigilan ang Control-W na isara ang iyong terminal!\n[Pro Tip] Tingnan ang $1 para sa higit pang impormasyon.",
@@ -205,6 +227,9 @@
 	"plugin_loading_complete": {
 		"message": " tapos na."
 	},
+	"plugin_loading_failed": {
+		"message": " hindi nagtagumpay! :("
+	},
 	"pref_backup_filename": {
 		"message": "Backup.json ng Mga Kagustuhan ng Secure Shell"
 	},
@@ -215,7 +240,7 @@
 		"message": "Na-reset na ang lahat ng kagustuhan!"
 	},
 	"reconnect_message": {
-		"message": "(M)uling Kumonekta, (P)umili ng ibang konesyon, o L(u)mabas?"
+		"message": "Muling Kumonekta (R), Pumili ng ibang konesyon (C), o Lumabas (X)?"
 	},
 	"relay_retry": {
 		"message": "Muling sinusubukan..."
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Kasalukuyang profile"
 	},
+	"tip_1": {
+		"message": "Maaari mong pindutin nang matagal ang Ctrl (Cmd sa macOS) habang nagki-click sa mga link upang buksan ang mga ito!"
+	},
+	"tip_10": {
+		"message": "Kapag nagpapatakbo sa isang window, maaaring magbukas ang Ctrl-Shift-N ng isa pang session."
+	},
+	"tip_11": {
+		"message": "Maaari mong i-rebind ang mga key/shortcut sa: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Ipakita ang mga notification sa browser gamit ang hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Kumonekta mula sa omnibox sa pamamagitan ng pag-type ng 'ssh <profile name>': https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Maaaring i-mount ng Chrome OS ang filesystems sa pamamagitan ng SFTP at mag-browse gamit ang Files app. Gamitin ang 'SFTP Mount' sa halip na 'Kumonekta'."
+	},
+	"tip_5": {
+		"message": "Kumonekta gamit ang mga ssh:// link sa mga web page, o mag-save ng bookmark: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Lagyan ng kulay ang iyong output/prompt gamit ang mga pangunahing 16 at 256 na kulay at ang buong 24-bit na mga kulay: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Kopyahin sa iyong clipboard mula sa emacs/vim/etc... gamit ang OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Makipag-chat sa mga kapwa user ng hterm/Secure Shell sa pamamagitan ng chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "May nakitang bug?  Humiling ng bagong feature?  Ipagbigay-alam sa amin: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Nagkaroon ng hindi inaasahang error, pakitingnan ang JavaScript console para sa higit pang detalye."
 	},
@@ -242,13 +300,40 @@
 		"message": "I-unmount ang SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "May available na update.  Pakisara ang lahat ng window."
+		"message": "May available na update. Pakisara ang lahat ng window."
+	},
+	"welcome_changelog": {
+		"message": "ChangeLog/mga tala sa paglabas: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
 	},
 	"welcome_faq": {
 		"message": "Mga Sagot sa Mga Madalas Itanong: $1 (mag-ctrl+click sa mga link upang buksan)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Mga pangunahing pagbabago simula noong $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Random na Pro Tip #$1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

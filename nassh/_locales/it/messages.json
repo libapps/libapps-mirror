@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "Sapevi che esiste una pagina delle opzioni dedicata?\nNon c'è più bisogno di utilizzare term_ direttamente.\nPremi $1 per aprirla oppure fai clic qui di seguito:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Sapevi che esiste una pagina delle opzioni dedicata?\nNon c'è più bisogno di utilizzare term_ direttamente.\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[CANC]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[INVIO]"
 	},
-	"field_argstr_aria_label": {
-		"message": "ulteriori argomenti ssh"
-	},
 	"field_argstr_placeholder": {
 		"message": "argomenti della riga di comando extra"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "nome host"
 	},
-	"field_identity_aria_label": {
-		"message": "identità"
+	"field_mount_path_placeholder": {
+		"message": "il percorso predefinito è la home directory dell'utente"
 	},
 	"field_port_aria_label": {
 		"message": "porta"
@@ -104,10 +120,7 @@
 		"message": "opzioni relay"
 	},
 	"field_relay_options_placeholder": {
-		"message": "opzioni relay"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "nome profilo terminale"
+		"message": "Opzioni server relay SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "predefinito"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Impossibile analizzare elemento JSON in \"$1\"",
+		"message": "Impossibile analizzare elemento JSON in \"$1\": $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "Montaggio SFTP"
 	},
+	"mount_path_label": {
+		"message": "Percorso di montaggio"
+	},
 	"mounted_message": {
 		"message": "Montato."
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "OK"
 	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Connettiti a un profilo salvato o a un nuovo sistema ssh"
+	},
 	"open_as_window_tip": {
-		"message": "[Suggerimento per i professionisti] Utilizza \"Apri in una finestra\" per evitare che \"CTRL+W\" chiuda la finestra terminale.\n[Suggerimento per i professionisti] Consulta $1 per ulteriori informazioni.",
+		"message": "[Suggerimento avanzato] Utilizza \"Apri in una finestra\" per evitare che \"CTRL+W\" chiuda la finestra del terminale.\n[Suggerimento avanzato] Consulta $1 per ulteriori informazioni.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -204,6 +226,9 @@
 	},
 	"plugin_loading_complete": {
 		"message": " operazione completata."
+	},
+	"plugin_loading_failed": {
+		"message": " Non riuscito"
 	},
 	"pref_backup_filename": {
 		"message": "Backup preferenze Secure Shell.json"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Profilo corrente"
 	},
+	"tip_1": {
+		"message": "Tieni premuto CTRL (CMD su macOS) facendo clic sui link per aprirli."
+	},
+	"tip_10": {
+		"message": "All'interno di una finestra premi CTRL-MAIUSC-N per aprire un'altra sessione."
+	},
+	"tip_11": {
+		"message": "Riassocia tasti/scorciatoie: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Visualizza le notifiche nel browser utilizzando hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Connettiti dalla omnibox digitando \"ssh <nome profilo>\": https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS consente di montare file system tramite SFTP e sfogliare tramite l'app Files. Utilizza \"Montaggio SFTP\" anziché \"Connetti\"."
+	},
+	"tip_5": {
+		"message": "Connettiti utilizzando link ssh:// nelle pagine web oppure salva un segnalibro: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Colora il tuo output/messaggio con i 16 colori di base, 256 colori e i colori completi a 24 bit: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Copia negli appunti da emacs/vim/ecc… utilizzando OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Chatta con altri utenti hterm/Secure Shell tramite l'indirizzo chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Hai trovato un bug? Vuoi richiedere una nuova funzionalità? Contattaci: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Si è verificato un errore imprevisto. Per ulteriori informazioni, controlla la console JavaScript."
 	},
@@ -244,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "È disponibile un aggiornamento. Chiudi tutte le finestre."
 	},
+	"welcome_changelog": {
+		"message": "Registro modifiche/note sulla versione: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "Risposte alle Domande frequenti: $1 (CTRL+clic sui link per aprirli)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Modifiche importanti rispetto alla versione $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Suggerimento avanzato casuale n. $1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

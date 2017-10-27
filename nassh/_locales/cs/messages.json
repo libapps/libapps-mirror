@@ -26,7 +26,7 @@
 		"message": "Zapomenout známého hostitele SSH."
 	},
 	"cmd_ssh_help": {
-		"message": "Parametry |uzivatelskejmeno| a |nazevhostitele| jsou povinné, parametr |port| je volitelný. Pokud není zadán port, bude jeho výchozí hodnota nastavena na 22."
+		"message": "Parametry |username| a |hostname| jsou povinné, parametr |port| je volitelný. Pokud port není zadán, použije se výchozí hodnota 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Zahájení nové relace SSH."
@@ -46,10 +46,29 @@
 		"message": "Připojit"
 	},
 	"connect_or_exit_message": {
-		"message": "(V)ybrat jiné připojení nebo (u)končit?"
+		"message": "Vybrat jiné připojení (C) nebo ukončit (X)?"
 	},
 	"connecting": {
 		"message": "Připojování k hostiteli $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"console_crosh_options_notice": {
+		"message": "Víte, že je k dispozici samostatná stránka možností?\nUž není potřeba ručně upravovat objekt term_.\nStránku možností otevřete stisknutím $1 nebo kliknutím na tento odkaz:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Víte, že je k dispozici samostatná stránka možností?\nUž není potřeba ručně upravovat objekt term_.\n$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "další argumenty ssh"
-	},
 	"field_argstr_placeholder": {
 		"message": "další argumenty příkazového řádku"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "název hostitele"
 	},
-	"field_identity_aria_label": {
-		"message": "identita"
+	"field_mount_path_placeholder": {
+		"message": "výchozí cestou je domovský adresář uživatele"
 	},
 	"field_port_aria_label": {
 		"message": "port"
@@ -104,10 +120,7 @@
 		"message": "možnosti přenosu"
 	},
 	"field_relay_options_placeholder": {
-		"message": "možnosti přenosu"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "název profilu terminálu"
+		"message": "Možnosti přenosového serveru SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "výchozí"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Data JSON v souboru $1 nelze analyzovat",
+		"message": "Analýza objektu JSON selhala u klíče „$1“: $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "Připojení SFTP"
 	},
+	"mount_path_label": {
+		"message": "Cesta připojené jednotky"
+	},
 	"mounted_message": {
 		"message": "Připojeno."
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "OK"
 	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Připojte se k uloženému profilu nebo novému systému SSH"
+	},
 	"open_as_window_tip": {
-		"message": "[Tip pro experty] Aby se terminál po stisknutí Ctrl+W nezavřel, použijte možnost Otevřít jako okno.\n[Tip pro experty] Další informace naleznete na adrese $1.",
+		"message": "[Tip] Aby se terminál po stisknutí Ctrl+W nezavřel, použijte možnost Otevřít jako okno.\n[Tip] Další informace najdete na stránce $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -205,6 +227,9 @@
 	"plugin_loading_complete": {
 		"message": " hotovo."
 	},
+	"plugin_loading_failed": {
+		"message": " nezdařilo se. :-("
+	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
@@ -215,7 +240,7 @@
 		"message": "Všechny předvolby byly resetovány."
 	},
 	"reconnect_message": {
-		"message": "(Z)novu se připojit, (v)ybrat jiné připojení nebo (u)končit?"
+		"message": "Znovu se připojit (R), vybrat jiné připojení (C) nebo ukončit (X)?"
 	},
 	"relay_retry": {
 		"message": "Další pokus..."
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Aktuální profil"
 	},
+	"tip_1": {
+		"message": "Chcete-li otevřít odkaz, podržte klávesu Ctrl (v macOS klávesu Cmd) a klikněte na něj."
+	},
+	"tip_10": {
+		"message": "Při spuštění v okně stisknutím Ctrl+Shift+N otevřete další relaci."
+	},
+	"tip_11": {
+		"message": "Přiřazení kláves a zkratek můžete změnit: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Pomocí funkce hterm-notify můžete v prohlížeči zobrazovat oznámení: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Zadáním adresy „ssh <název profilu>“ se můžete připojit z omniboxu: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS umožňuje připojit systémy souborů pomocí SFTP a procházet je v aplikaci Soubory. Namísto tlačítka „Připojit“ použijte tlačítko „Připojení SFTP“."
+	},
+	"tip_5": {
+		"message": "Připojujte se pomocí odkazů ssh:// na webových stránkách, nebo si uložte záložku: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Obarvěte si výstup a příkazový řádek 16 či 256 barvami nebo úplnými 24bitovými barvami: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Kopírujte do schránky z emacs/vim/etc... pomocí OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Chatujte s dalšími uživateli terminálu hterm / Secure Shell v diskusní skupině chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Našli jste chybu? Chcete požádat o novou funkci? Dejte nám vědět: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Došlo k neočekávané chybě. Další informace naleznete v konzoli JavaScriptu."
 	},
@@ -244,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "Je k dispozici aktualizace. Zavřete všechna okna."
 	},
+	"welcome_changelog": {
+		"message": "ChangeLog / poznámky k vydání: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "Odpovědi na časté dotazy: $1 (odkaz otevřete kliknutím s přidrženou klávesou Ctrl)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Hlavní změny oproti verzi $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Náhodný tip č. $1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

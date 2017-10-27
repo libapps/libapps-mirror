@@ -26,7 +26,7 @@
 		"message": "Oblida un amfitrió SSH conegut."
 	},
 	"cmd_ssh_help": {
-		"message": "Els paràmetres |username| i |hostname| són obligatoris, |port| és opcional. Si port no s'especifica, el valor predeterminat és 22."
+		"message": "Els paràmetres |username| i |hostname| són obligatoris, |port| és opcional. Si no s'especifica el port, el valor predeterminat és 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Obre una sessió de SSH nova."
@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "Sabies que hi ha una pàgina d'opcions dedicada?\nJa no caldrà modificar term_ directament.\nPrem $1 per obrir-la o fes clic a:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Sabies que hi ha una pàgina d'opcions dedicada?\nJa no caldrà modificar term_ directament.\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[SUPR]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[RETORN]"
 	},
-	"field_argstr_aria_label": {
-		"message": "altres arguments d'SSH"
-	},
 	"field_argstr_placeholder": {
 		"message": "arguments addicionals de la línia d'ordres"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "nom d'amfitrió"
 	},
-	"field_identity_aria_label": {
-		"message": "identitat"
+	"field_mount_path_placeholder": {
+		"message": "la ruta predeterminada és el directori d'inici de l'usuari"
 	},
 	"field_port_aria_label": {
 		"message": "port"
@@ -104,10 +120,7 @@
 		"message": "opcions de tramesa"
 	},
 	"field_relay_options_placeholder": {
-		"message": "opcions de tramesa"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "nom de perfil del terminal"
+		"message": "Opcions del servidor de tramesa SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "opció predeterminada"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "No s'ha pogut analitzar JSON a '$1'",
+		"message": "No s'han pogut analitzar les dades JSON a '$1': $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "Activa l'SFTP"
 	},
+	"mount_path_label": {
+		"message": "Activa el camí"
+	},
 	"mounted_message": {
 		"message": "S'ha activat."
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "D'acord"
 	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Connecta't a un perfil desat o a un sistema ssh nou"
+	},
 	"open_as_window_tip": {
-		"message": "[Consell professional] Utilitza Obre com a finestra perquè no s'apagui el terminal amb les tecles Control-W.\n[Consell professional] Consulta $1 per obtenir més informació.",
+		"message": "[Consell professional] Utilitza Obre com a finestra per evitar que s'apagui el terminal amb les tecles Control+W.\n[Consell professional] Consulta $1 per obtenir més informació.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -204,6 +226,9 @@
 	},
 	"plugin_loading_complete": {
 		"message": " fet."
+	},
+	"plugin_loading_failed": {
+		"message": " S'ha produït un error."
 	},
 	"pref_backup_filename": {
 		"message": "Còpia de seguretat de les preferències de Secure Shell.json"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Perfil actual"
 	},
+	"tip_1": {
+		"message": "Pots prémer Ctrl (Cmd a macOS) i alhora fer clic als enllaços perquè s'obrin."
+	},
+	"tip_10": {
+		"message": "Quan s'executi en una finestra, la combinació de tecles Ctrl+Maj+N pot obrir una altra sessió."
+	},
+	"tip_11": {
+		"message": "Pots reassignar les tecles o dreceres: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Utilitza hterm-notify per mostrar notificacions al navegador: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Escriu \"ssh <nom del perfil>\" per connectar-te des de l'omnibox: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS pot activar sistemes de fitxers a través de SFTP i navegar a través de l'aplicació Fitxers. Utilitza Activa l'SFTP en lloc de Connecta."
+	},
+	"tip_5": {
+		"message": "Connecta't utilitzant enllaços ssh:// a les pàgines web, o desa una adreça d'interès: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Dona-li color a la sortida o els advertiments amb els 16 colors bàsics, 256 colors addicionals i els colors de 24 bits: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Utilitza OSC-52 per copiar al porta-retalls des d'emacs/vim/etc.: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Xateja amb altres usuaris hterm i Secure Shell a través de chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Has trobat un error? Vols una nova funció? Fes-nos-ho saber: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "S'ha produït un error inesperat. Consulta la Consola de JavaScript per obtenir més detalls."
 	},
@@ -244,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "Hi ha una actualització disponible. Tanca totes les finestres."
 	},
+	"welcome_changelog": {
+		"message": "Registre de canvis i notes de la versió: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "Respostes a preguntes freqüents: $1 (fes Ctrl+clic en els enllaços per obrir-los)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Canvis importants des de la versió $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Consell aleatori núm. $1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

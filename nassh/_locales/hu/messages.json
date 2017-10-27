@@ -26,7 +26,7 @@
 		"message": "Egy megjegyzett ssh-gazdagép adatainak az elfelejtése."
 	},
 	"cmd_ssh_help": {
-		"message": "A |felhasznalonev| és |tarhelyszolgaltato| paramétereket kötelező, a |port| értékét nem kötelező megadni. Ha a port nincs meghatározva, akkor alapbeállítás szerint 22 lesz az értéke."
+		"message": "A |username| és |hostname| paramétereket kötelező, a |port| értékét nem kötelező megadni. Ha a port nincs meghatározva, akkor alapbeállítás szerint 22 lesz az értéke."
 	},
 	"cmd_ssh_title": {
 		"message": "Új SSH-munkamenet megnyitása."
@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "Tudta, hogy van egy külön oldal a beállításoknak?\nTöbbé nem kell közvetlenül a term_ parancsokat használni!\nA megnyitásához nyomja meg a $1 billentyűparancsot, vagy kattintson a következő linkre:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Tudta, hogy van egy külön oldal a beállításoknak?\nTöbbé nem kell közvetlenül a term_ parancsokat használni!\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "további ssh-argumentumok"
-	},
 	"field_argstr_placeholder": {
 		"message": "extra parancssori argumentumok"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "tárhelyszolgáltató"
 	},
-	"field_identity_aria_label": {
-		"message": "azonosság"
+	"field_mount_path_placeholder": {
+		"message": "az alapértelmezett elérési út a felhasználó kezdőkönyvtára"
 	},
 	"field_port_aria_label": {
 		"message": "port"
@@ -104,10 +120,7 @@
 		"message": "továbbítási lehetőségek"
 	},
 	"field_relay_options_placeholder": {
-		"message": "továbbítási lehetőségek"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "terminál profilneve"
+		"message": "SSH-továbbítószerver beállításai"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "alapbeállítás"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Nem értelmezhető a JSON a következőben: $1",
+		"message": "A(z) „$1” kulcsban lévő JSON-adatok elemzése nem sikerült: $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "SFTP csatlakoztatása"
 	},
+	"mount_path_label": {
+		"message": "Csatolási útvonal"
+	},
 	"mounted_message": {
 		"message": "Csatlakoztatva!"
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "OK"
 	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Csatlakozás mentett profilhoz vagy új SSH-rendszerhez"
+	},
 	"open_as_window_tip": {
-		"message": "[Profi tipp] Használja a „Megnyitás ablakként” lehetőséget, hogy a Control-W ne zárja be a terminált!\n[Profi tipp] További információt a következő URL-en talál: $1.",
+		"message": "[Profi tipp] Használja a „Megnyitás ablakként” lehetőséget, hogy a Ctrl+W ne zárja be a terminált!\n[Profi tipp] További információt a következő URL-en talál: $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -204,6 +226,9 @@
 	},
 	"plugin_loading_complete": {
 		"message": " kész."
+	},
+	"plugin_loading_failed": {
+		"message": " nem sikerült. :("
 	},
 	"pref_backup_filename": {
 		"message": "Biztonságos héj beállításainak biztonsági másolata.json"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Aktuális profil"
 	},
+	"tip_1": {
+		"message": "A linkek megnyitásához a Ctrl (Mac OS rendszeren Cmd) billentyűt is lenyomhatja, miközben rájuk kattint!"
+	},
+	"tip_10": {
+		"message": "Amikor ablakban fut, a Ctrl+Shift+N billentyűparanccsal lehet új munkamenetet indítani."
+	},
+	"tip_11": {
+		"message": "Módosíthatja a billentyűket/billentyűparancsokat: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Értesítések megjelenítése a böngészőben a hterm-notify szkripttel: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Ha a cím- és keresősávból szeretne csatlakozni, írja be az „ssh <profilnév>” parancsot: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "A Chrome OS képes fájlrendszerek csatolására SFTP használatával, ezt követően pedig a Fájlok alkalmazással lehet tallózni. A „Connect” parancs helyett használja az „SFTP Mount” lehetőséget."
+	},
+	"tip_5": {
+		"message": "Csatlakozás a weboldalakon lévő ssh:// linkek használatával, illetve könyvjelző mentése: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "A kimenet/kérdés színezése 16 alapszín, 256 szín vagy a teljes 24 bites színskála használatával: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "A vágólap tartalmának másolása az emacs/vim/etc… elérési útról OSC-52 használatával: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Csevegés hterm/Secure Shell felhasználókkal a chromium-hterm@chromium.org fórumon: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Programhibát talált?  Új funkció megvalósítását szeretné kérni?  Tudassa velünk: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Váratlan hiba történt. Ha további részletekre kíváncsi, nézze meg a JavaScript-konzolt."
 	},
@@ -242,13 +300,40 @@
 		"message": "SFTP leválasztása"
 	},
 	"update_available_tooltip": {
-		"message": "Frissítés áll rendelkezésre. Zárjon be minden ablakot."
+		"message": "Frissítés áll rendelkezésre. Zárja be az összes ablakot."
+	},
+	"welcome_changelog": {
+		"message": "Módosításnapló/kibocsátási megjegyzések: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
 	},
 	"welcome_faq": {
 		"message": "Válaszok a Gyakran Ismételt Kérdésekre: $1 (Ctrl+kattintás a hivatkozásra a megnyitáshoz)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Fontosabb változtatások a(z) $1 verzió óta:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Véletlenszerűen kiválasztott profi tipp – $1.: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

@@ -26,7 +26,7 @@
 		"message": "Bỏ qua máy chủ ssh đã biết."
 	},
 	"cmd_ssh_help": {
-		"message": "Các tham số |username| và |hostname| là bắt buộc, |port| là tùy chọn.  Nếu không được chỉ định, cổng sẽ được mặc định là 22."
+		"message": "Các tham số |username| và |hostname| là bắt buộc, |port| là tùy chọn. Nếu không được chỉ định, cổng sẽ được mặc định là 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Mở phiên SSH mới."
@@ -46,10 +46,29 @@
 		"message": "Kết nối"
 	},
 	"connect_or_exit_message": {
-		"message": "(C)họn một kết nối khác hoặc T(h)oát?"
+		"message": "Chọn một kết nối khác (C) hoặc Thoát (X)?"
 	},
 	"connecting": {
 		"message": "Đang kết nối với $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"console_crosh_options_notice": {
+		"message": "Bạn có biết rằng có một trang tùy chọn chuyên dụng không?\nBạn sẽ không cần phải chỉnh sửa term_directly nữa!\nHãy nhấn phím $1 để mở hoặc nhấp vào:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Bạn có biết rằng có một trang tùy chọn chuyên dụng không?\nBạn sẽ không cần phải chỉnh sửa term_ directly nữa!\n$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "đối số ssh bổ sung"
-	},
 	"field_argstr_placeholder": {
 		"message": "đối số dòng lệnh bổ sung"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "tên máy chủ"
 	},
-	"field_identity_aria_label": {
-		"message": "nhận dạng"
+	"field_mount_path_placeholder": {
+		"message": "đường dẫn mặc định là thư mục gốc của người dùng"
 	},
 	"field_port_aria_label": {
 		"message": "cổng"
@@ -104,10 +120,7 @@
 		"message": "tùy chọn chuyển tiếp"
 	},
 	"field_relay_options_placeholder": {
-		"message": "tùy chọn chuyển tiếp"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "tên cấu hình thiết bị đầu cuối"
+		"message": "Tùy chọn về máy chủ chuyển tiếp SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "mặc định"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Không thể phân tích cú pháp JSON trong '$1'",
+		"message": "Không thể phân tích cú pháp JSON trong '$1': $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "Kết nối SFTP"
 	},
+	"mount_path_label": {
+		"message": "Đính kèm đường dẫn"
+	},
 	"mounted_message": {
 		"message": "Đã kết nối!"
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "OK"
 	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Kết nối với một hồ sơ đã lưu hoặc hệ thống SSH mới"
+	},
 	"open_as_window_tip": {
-		"message": "[Pro Tip] Sử dụng 'Mở dưới dạng cửa sổ' để ngăn Control-W đóng thiết bị đầu cuối của bạn!\n[Pro Tip] Xem $1 để biết thêm thông tin.",
+		"message": "[Mẹo chuyên nghiệp] Sử dụng tùy chọn 'Mở dưới dạng cửa sổ' để không cho Control-W đóng thiết bị đầu cuối của bạn!\n[Mẹo chuyên nghiệp] Xem $1 để biết thêm thông tin.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -205,6 +227,9 @@
 	"plugin_loading_complete": {
 		"message": " xong."
 	},
+	"plugin_loading_failed": {
+		"message": " Không tải được! :("
+	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
@@ -215,7 +240,7 @@
 		"message": "Tất cả tùy chọn đã được đặt lại!"
 	},
 	"reconnect_message": {
-		"message": "(K)ết nối lại, (C)họn một kết nối khác hoặc T(h)oát?"
+		"message": "Kết nối lại (R), Chọn một kết nối khác (C) hoặc Thoát (X)?"
 	},
 	"relay_retry": {
 		"message": "Đang thử lại..."
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Cấu hình hiện tại"
 	},
+	"tip_1": {
+		"message": "Bạn có thể giữ phím Ctrl (Cmd trên macOS) trong khi nhấp vào các liên kết để mở!"
+	},
+	"tip_10": {
+		"message": "Khi chạy trong một cửa sổ, bạn có thể nhấn tổ hợp phím Ctrl-Shift-N để mở một phiên khác."
+	},
+	"tip_11": {
+		"message": "Bạn có thể ràng buộc lại phím/phím tắt: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Hiển thị thông báo trong trình duyệt bằng hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Kết nối từ thanh địa chỉ bằng cách nhập 'ssh <tên hồ sơ>': https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS có thể kết nối các hệ thống tệp thông qua SFTP và duyệt qua ứng dụng Tệp. Hãy sử dụng 'Kết nối SFTP' thay vì 'Kết nối'."
+	},
+	"tip_5": {
+		"message": "Kết nối bằng liên kết ssh:// trong các trang web hoặc lưu dấu trang: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Hiển thị màu cho dữ liệu đầu ra/lời nhắc của bạn bằng 16 màu cơ bản và 256 màu cùng với toàn bộ màu 24 bit: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Sao chép vào khay nhớ tạm nội dung từ emacs/vim/etc... bằng OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Trò chuyện với người dùng hterm/Secure Shell thông qua chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Bạn gặp phải lỗi? Bạn muốn yêu cầu tính năng mới? Hãy cho chúng tôi biết: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Đã xảy ra lỗi không mong muốn, vui lòng kiểm tra bảng điều khiển JavaScript để biết thêm chi tiết."
 	},
@@ -242,13 +300,40 @@
 		"message": "Ngắt kết nối SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "Có bản cập nhật. Hãy đóng tất cả cửa sổ."
+		"message": "Đã có bản cập nhật. Vui lòng đóng tất cả cửa sổ."
+	},
+	"welcome_changelog": {
+		"message": "ChangeLog/ghi chú phát hành: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
 	},
 	"welcome_faq": {
 		"message": "Câu trả lời cho câu hỏi thường gặp: $1 (ctrl+nhấp vào liên kết để mở)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Thay đổi lớn kể từ $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Mẹo chuyên nghiệp ngẫu nhiên số $1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

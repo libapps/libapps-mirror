@@ -26,7 +26,7 @@
 		"message": "‏שכח מארח ssh ידוע."
 	},
 	"cmd_ssh_help": {
-		"message": "הפרמטרים |שם משתמש| ו|שם מארח| נדרשים, הפרמטר |יציאה| הוא אופציונלי. אם היציאה אינה מצוינת, היא מוגדרת ל-22 כברירת מחדל."
+		"message": "‏הפרמטרים |username| ו-|hostname| נדרשים. הפרמטר |port| אופציונלי. אם היציאה לא מצוינת, ברירת המחדל היא 22."
 	},
 	"cmd_ssh_title": {
 		"message": "‏פותח הפעלת SSH חדשה."
@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "‏ידעת שיש דף אפשרויות ייעודי?\nכבר אין צורך להסתבך עם term_ directly!\nיש להקיש על $1 כדי לפתוח אותו, או ללחוץ על:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "‏ידעת שיש דף אפשרויות ייעודי?\nכבר אין צורך להסתבך עם term_ directly!\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "‏ארגומנטים נוספים ל-ssh"
-	},
 	"field_argstr_placeholder": {
 		"message": "ארגומנטים נוספים לשורת הפקודה"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "שם מארח"
 	},
-	"field_identity_aria_label": {
-		"message": "זהות"
+	"field_mount_path_placeholder": {
+		"message": "נתיב ברירת המחדל הוא ספריית הבית של המשתמש"
 	},
 	"field_port_aria_label": {
 		"message": "יציאה"
@@ -104,10 +120,7 @@
 		"message": "אפשרויות של שרתי ממסר"
 	},
 	"field_relay_options_placeholder": {
-		"message": "אפשרויות של שרתי ממסר"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "שם הפרופיל של המסוף"
+		"message": "‏אפשרויות של שרת ממסר SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "ברירת מחדל"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "‏לא ניתן היה לנתח את קובץ ה-JSON ב-$1",
+		"message": "‏לא ניתן היה לנתח נתוני JSON ב-'$1': $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "‏טעינת SFTP"
 	},
+	"mount_path_label": {
+		"message": "נתיב טעינה"
+	},
 	"mounted_message": {
 		"message": "נטען!"
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "אישור"
 	},
+	"omnibox_default": {
+		"message": "‏<url><match>user@hostname[:port]</match></url> יש להתחבר אל פרופיל שמור או אל מערכת SSH חדשה."
+	},
 	"open_as_window_tip": {
-		"message": "‏[טיפ למתקדמים] כדי שלחיצה על Control+W לא תסגור את המסוף, השתמש באפשרות 'פתח כחלון'.\n[טיפ למתקדמים] עבור אל $1 לקבלת מידע נוסף.",
+		"message": "‏[טיפ למתקדמים] האפשרות 'פתח כחלון' מונעת מהקשה על Control-W לסגור את המסוף.\n[טיפ למתקדמים] אפשר לקרוא מידע נוסף בכתובת $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -204,6 +226,9 @@
 	},
 	"plugin_loading_complete": {
 		"message": " בוצע."
+	},
+	"plugin_loading_failed": {
+		"message": " הטעינה נכשלה :("
 	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "הפרופיל הנוכחי"
 	},
+	"tip_1": {
+		"message": "‏כדי לפתוח קישורים אפשר להקיש הקשה ארוכה על Ctrl (המקש Cmd ב-macOS) תוך כדי לחיצה עליהם."
+	},
+	"tip_10": {
+		"message": "‏כשהיישום פועל בחלון, אפשר להקיש על Ctrl-Shift-N כדי לפתוח הפעלה חדשה."
+	},
+	"tip_11": {
+		"message": "‏אפשר לקשר מחדש מקשים/מקשי קיצור: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "‏אפשר להציג הודעות בדפדפן בעזרת hterm-notify‏: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "‏כדי להתחבר מסרגל הכתובות יש להקליד ‎'ssh <profile name>': https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "‏Chrome OS יכול לטעון מערכות קבצים דרך SFTP ולאפשר עיון דרך היישום 'קבצים'. יש להשתמש ב-'SFTP Mount' במקום ב-'Connect'."
+	},
+	"tip_5": {
+		"message": "‏יש להתחבר בעזרת קישורי ssh://‎ בדפי אינטרנט או לשמור סימניה: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "‏אפשר לצבוע את הפלט/הודעה ב-16 צבעים בסיסיים, 256 צבעים וצבעי 24 סיביות מלאים: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "‏אפשר להעתיק אל הלוח מ-emacs/vim/etc... בעזרת OSC-52‏: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "‏אפשר לשוחח בצ'אט עם משתמשי hterm/Secure Shell אחרים דרך  chromium-hterm@chromium.org‏: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "‏מצאת באג? רוצה לבקש תכונה חדשה? נשמח לשמוע: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "‏אירעה שגיאה לא צפויה, בדוק בלוח Javascript לקבלת פרטים נוספים."
 	},
@@ -242,13 +300,40 @@
 		"message": "‏בטל את הטעינה של SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "יש עדכון זמין. סגור את כל החלונות."
+		"message": "יש עדכון זמין. עליך לסגור את כל החלונות."
+	},
+	"welcome_changelog": {
+		"message": "‏ChangeLog/נתוני גירסה: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
 	},
 	"welcome_faq": {
 		"message": "‏תשובות לשאלות נפוצות. $1 (הקש על ctrl ולחץ על קישור כדי לפתוח אותו)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "שינויים משמעותיים מאז $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "טיפ אקראי למתקדמים מס' $1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

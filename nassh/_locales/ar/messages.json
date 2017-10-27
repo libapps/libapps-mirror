@@ -26,7 +26,7 @@
 		"message": "‏حذف مضيف ssh معروف."
 	},
 	"cmd_ssh_help": {
-		"message": "‏المعلمتان |username| و|hostname| مطلوبتان، وتكون المعلمة |port| اختيارية. إذا لم يتم تحديد المنفذ، فإنه يتم تعيينه على 22 افتراضيًا."
+		"message": "‏المعلمتان |username| و|hostname| مطلوبتان، وتكون المعلمة |port| اختيارية. إذا لم يتم تحديد المنفذ، يتم تعيينه على 22 تلقائيًا."
 	},
 	"cmd_ssh_title": {
 		"message": "‏لفتح جلسة SSH جديدة."
@@ -46,10 +46,29 @@
 		"message": "اتصال"
 	},
 	"connect_or_exit_message": {
-		"message": "هل تريد اختيار اتصال آخر أم الخروج؟"
+		"message": "‏هل تريد اختيار اتصال (C) آخر أم الخروج (x)؟"
 	},
 	"connecting": {
 		"message": "جارٍ الاتصال بـ $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"console_crosh_options_notice": {
+		"message": "‏هل تعلم أن هناك صفحة مخصصة للخيارات؟\nليست هناك حاجة للعبث بـ term_ directly بعد الآن!\nاضغط على $1 لفتحه، أو انقر على:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "‏هل تعلم أن هناك صفحة مخصصة للخيارات؟\nليست هناك حاجة للعبث بـ term_ directly بعد الآن!\n$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "‏وسيطات ssh إضافية"
-	},
 	"field_argstr_placeholder": {
 		"message": "وسيطات سطور أوامر إضافية"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "اسم المضيف"
 	},
-	"field_identity_aria_label": {
-		"message": "الهوية"
+	"field_mount_path_placeholder": {
+		"message": "يتمثل المسار التلقائي في دليل الصفحة الرئيسية للمستخدم"
 	},
 	"field_port_aria_label": {
 		"message": "المنفذ"
@@ -104,10 +120,7 @@
 		"message": "خيارات الترحيل"
 	},
 	"field_relay_options_placeholder": {
-		"message": "خيارات الترحيل"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "اسم الملف الشخصي الطرفي"
+		"message": "‏خيارات خادم ترحيل SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "افتراضي"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "‏تعذر تحليل JSON في '$1'",
+		"message": "‏تعذر تحليل JSON في '$1': $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -155,7 +171,7 @@
 		"message": "ليس هناك أجهزة مضيفة معروفة، ليس هناك مضيف لحذفه."
 	},
 	"known_hosts_prompt": {
-		"message": "الرجاء تحديد مضيف لحذفه [1-$1]:",
+		"message": "يُرجى تحديد مضيف لحذفه [1-$1]:",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "‏تحميل SFTP"
 	},
+	"mount_path_label": {
+		"message": "مسار التحميل"
+	},
 	"mounted_message": {
 		"message": "تم التحميل!"
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "موافق"
 	},
+	"omnibox_default": {
+		"message": "‏<url><match>user@hostname[:port]</match></url> الربط بملف شخصي محفوظ أو نظام ssh جديد"
+	},
 	"open_as_window_tip": {
-		"message": "‏[نصيحة للمحترفين] استخدم 'فتح كنافذة' لمنع Control-W من إغلاق النافذة الطرفية!\n[نصيحة للمحترفين] اطلع على $1 للتعرّف على مزيد من المعلومات.",
+		"message": "‏[نصيحة للمحترفين] استخدم 'فتح كنافذة' لمنع Control-W من إغلاق النافذة الطرفية!\n[نصيحة للمحترفين] اطلع على $1 لمزيد من المعلومات.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -205,6 +227,9 @@
 	"plugin_loading_complete": {
 		"message": " تم."
 	},
+	"plugin_loading_failed": {
+		"message": " أخفق التحميل! :("
+	},
 	"pref_backup_filename": {
 		"message": "‏نسخة احتياطية لتفضيلات Secure Shell‏.json"
 	},
@@ -215,7 +240,7 @@
 		"message": "تمت إعادة تعيين جميع التفضيلات!"
 	},
 	"reconnect_message": {
-		"message": "هل تريد إعادة الاتصال أم اختيار اتصال آخر أم الخروج؟"
+		"message": "‏هل تريد إعادة الاتصال (R) أم اختيار اتصال آخر أم الخروج (X)؟"
 	},
 	"relay_retry": {
 		"message": "جارٍ إعادة المحاولة..."
@@ -235,20 +260,80 @@
 	"terminal_profile_label": {
 		"message": "الملف الشخصي الحالي"
 	},
+	"tip_1": {
+		"message": "‏يمكنك الضغط مع الاستمرار على مفتاح Ctrl‏ (Cmd على نظام التشغيل macOS) أثناء النقر على الروابط لفتحها!"
+	},
+	"tip_10": {
+		"message": "‏عند تشغيل نافذة، يمكن أن يؤدي Ctrl-Shift-N إلى فتح جلسة أخرى."
+	},
+	"tip_11": {
+		"message": "‏يمكنك إعادة ربط المفاتيح/الاختصارات: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "‏عرض الإشعارات في المتصفح باستخدام hterm-notify‏: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "‏الربط من خلال المربع متعدد الاستخدامات عن طريق كتابة 'ssh <profile name>‏': https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "‏يمكن لنظام التشغيل Chrome تحميل أنظمة الملفات عبر SFTP والتصفح عبر تطبيق \"الملفات\". استخدم 'تحميل SFTP' بدلاً من 'الربط'."
+	},
+	"tip_5": {
+		"message": "‏الربط عبر روابط ssh:// في صفحات الويب، أو حفظ إشارة مرجعية: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "‏منح الناتج/المطالبة لونًا باستخدام 16 لونًا أساسيًا و256 لونًا وألوان 24 بت كاملة: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "‏نسخ إلى الحافظة من emacs/vim/etc... باستخدام OSC-52‏: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "‏الدردشة مع مستخدمي hterm/Secure Shell عبر chromium-hterm@chromium.org‏: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "‏هل وجدت خللاً؟  هل ترغب في طلب ميزة جديدة؟  يُرجى إخبارنا بذلك: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
-		"message": "حدث خطأ غير متوقع، الرجاء التحقق من وحدة تحكم جافا سكريبت للحصول على المزيد من التفاصيل."
+		"message": "حدث خطأ غير متوقع، يُرجى التحقق من وحدة تحكم جافا سكريبت للحصول على المزيد من التفاصيل."
 	},
 	"unmount_button_label": {
 		"message": "‏إلغاء تحميل SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "يتوفر تحديث.  يُرجى إغلاق جميع النوافذ."
+		"message": "يتوفر تحديث. يُرجى إغلاق جميع النوافذ."
+	},
+	"welcome_changelog": {
+		"message": "ملاحظات الإصدار/سجل التغييرات: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
 	},
 	"welcome_faq": {
 		"message": "‏إجابات الأسئلة الشائعة: $1 (ctrl+النقر على الروابط لفتحها)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "التغييرات الرئيسية منذ $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "نصيحة عشوائية رقم $1 للمحترفين: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

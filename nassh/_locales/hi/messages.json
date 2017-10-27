@@ -26,7 +26,7 @@
 		"message": "ज्ञात ssh होस्ट को भूलें."
 	},
 	"cmd_ssh_help": {
-		"message": "|username| और |hostname| पैरामीटर आवश्‍यक हैं, |port| वैकल्पिक है. यदि पोर्ट निर्दिष्ट न किया गया हो तो यह डिफ़ॉल्‍ट रूप से 22 होता है."
+		"message": "|username| और |hostname| पैरामीटर ज़रूरी हैं, |port| वैकल्पिक है. अगर पोर्ट नहीं बताया जाता है तो यह डिफ़ॉल्‍ट रूप से 22 होता है."
 	},
 	"cmd_ssh_title": {
 		"message": "नया SSH सत्र खोलता है."
@@ -46,10 +46,29 @@
 		"message": "कनेक्ट करें"
 	},
 	"connect_or_exit_message": {
-		"message": "कोई दूसरा कनेक्शन चुनें या बाहर निकलें?"
+		"message": "कोई दूसरा कनेक्शन चुनें (C) या बाहर निकलें (x)?"
 	},
 	"connecting": {
 		"message": "$1 से कनेक्ट किया जा रहा है...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"console_crosh_options_notice": {
+		"message": "क्‍या आप जानते हैं कि एक खास विकल्प पेज मौजूद है?\nअब term_ directly में उलझने की कोई ज़रूरत नहीं है!\nउसे खोलने के लिए $1 दबाएं या इस पर क्लिक करें:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "क्‍या आप जानते हैं कि एक खास विकल्प पेज मौजूद है?\nअब term_ directly में उलझने की कोई ज़रूरत नहीं है!\n$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "अतिरिक्त ssh तर्क"
-	},
 	"field_argstr_placeholder": {
 		"message": "अतिरिक्त आदेश लाइन तर्क"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "होस्टनाम"
 	},
-	"field_identity_aria_label": {
-		"message": "पहचान"
+	"field_mount_path_placeholder": {
+		"message": "उपयोगकर्ता की होम निर्देशिका डिफ़ॉल्ट पाथ है"
 	},
 	"field_port_aria_label": {
 		"message": "पोर्ट"
@@ -104,10 +120,7 @@
 		"message": "रिले विकल्प"
 	},
 	"field_relay_options_placeholder": {
-		"message": "रिले विकल्प"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "टर्मिनल प्रोफ़ाइल नाम"
+		"message": "SSH रिले सर्वर के विकल्प"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "डिफ़ॉल्ट"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "'$1' में JSON को पार्स नहीं किया जा सका",
+		"message": "'$1' में JSON को पार्स नहीं किया जा सका: $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "SFTP माउंट"
 	},
+	"mount_path_label": {
+		"message": "माउंट करने का पाथ"
+	},
 	"mounted_message": {
 		"message": "माउंट किया गया!"
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "ठीक"
 	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> सेव की गई प्रोफ़ाइल या नए ssh सिस्टम से कनेक्ट करें"
+	},
 	"open_as_window_tip": {
-		"message": "[प्रो टिप्स] Control-W को अपना टर्मिनल बंद करने देने से रोकने के लिए 'विंडो के रूप में खोलें' का उपयोग करें!\n[प्रो टिप्स] अधिक जानकारी के लिए $1 देखें.",
+		"message": "[प्रो टिप] Control-W को अपना टर्मिनल बंद करने देने से रोकने के लिए 'विंडो के रूप में खोलें' का इस्तेमाल करें!\n[प्रो टिप] अधिक जानकारी के लिए $1 देखें.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -205,6 +227,9 @@
 	"plugin_loading_complete": {
 		"message": " संपन्न."
 	},
+	"plugin_loading_failed": {
+		"message": " नहीं किया जा सका! :("
+	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
@@ -215,7 +240,7 @@
 		"message": "सभी प्राथमिकताएं रीसेट की गईं!"
 	},
 	"reconnect_message": {
-		"message": "फिर से कनेक्ट करें, कोई दूसरा कनेक्शन चुनें या बाहर निकलेें?"
+		"message": "फिर से कनेक्ट करें (R), कोई दूसरा कनेक्शन चुनें (C) या बाहर निकलेें (x)?"
 	},
 	"relay_retry": {
 		"message": "फिर से कोशिश की जा रही है..."
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "अभी वाली प्रोफ़ाइल"
 	},
+	"tip_1": {
+		"message": "आप लिंक खोलने के लिए उन पर क्लिक करते समय Ctrl (macOS पर Cmd) दबाए रख सकते हैं!"
+	},
+	"tip_10": {
+		"message": "जब किसी विंडो में विज्ञापन चल रहा हो, तो Ctrl-Shift-N से दूसरा सत्र खुल सकता है."
+	},
+	"tip_11": {
+		"message": "आप कुंजियां/शॉर्टकट फिर से आबद्ध कर सकते हैं: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "hterm-notify का इस्तेमाल करके ब्राउज़र में सूचनाएं दिखाएं: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "'ssh <profile name>': https://goo.gl/V7o8ki लिखकर ऑम्निबॉक्स से कनेक्ट करें"
+	},
+	"tip_4": {
+		"message": "Chrome OS, फ़ाइल सिस्टम को SFTP के ज़रिए माउंट कर सकता है और फ़ाइल ऐप के ज़रिए ब्राउज़ कर सकता है. 'कनेक्ट करें' के बजाय 'SFTP माउंट' का इस्तेमाल करें."
+	},
+	"tip_5": {
+		"message": "वेब पेज में ssh:// लिंक का इस्तेमाल करके कनेक्ट करें या बुकमार्क सेव करें: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "बुनियादी 16 रंगों और 256 रंगों और पूरे 24-बिट रंगों का इस्तेमाल करके अपने आउटपुट/संकेत को रंगें: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "OSC-52 का इस्तेमाल करके emacs/vim/etc... से अपने क्‍लिपबोर्ड पर कॉपी करें: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "क्रोमियम के ज़रिए साथी hterm/सुरक्षित शेल उपयोगकर्ताओं से चैट करें- hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "गड़बड़ी मिली?  कोई नई सुविधा मांगना है?  हमें बताएं: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "एक अनेपक्षित गड़बड़ी हुई, कृपया अधिक विवरण के लिए JavaScript पैनल देखें."
 	},
@@ -244,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "एक अपडेट उपलब्ध है. कृपया सभी विंडो बंद करें."
 	},
+	"welcome_changelog": {
+		"message": "बदलाव का लॉग/उत्पाद की जानकारी: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "अक्सर पूछे जाने वाले प्रश्नों के उत्तर: $1 (लिंक खोलने के लिए उन पर ctrl+क्लिक करें)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "$1 के बाद के खास बदलाव:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "बिना क्रम के दिए गए प्रो टिप #$1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

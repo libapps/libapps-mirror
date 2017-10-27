@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "Știai că există o pagină de opțiuni dedicată?\nNu mai e nevoie să folosești term_ direct!\nApasă $1 pentru a-l deschide sau dă clic:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Știai că există o pagină de opțiuni dedicată?\nNu mai e nevoie să folosești term_ direct!\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "argumente suplimentare pentru ssh"
-	},
 	"field_argstr_placeholder": {
 		"message": "argumente suplimentare pentru linia de comandă"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "nume de gazdă"
 	},
-	"field_identity_aria_label": {
-		"message": "identitate"
+	"field_mount_path_placeholder": {
+		"message": "calea prestabilită este directorul principal al utilizatorului"
 	},
 	"field_port_aria_label": {
 		"message": "port"
@@ -104,10 +120,7 @@
 		"message": "opțiuni de retransmitere"
 	},
 	"field_relay_options_placeholder": {
-		"message": "opțiuni de retransmitere"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "nume de profil pentru terminal"
+		"message": "Opțiunile serverului de retransmitere SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "prestabilit"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Nu se poate analiza fișierul JSON în „$1”",
+		"message": "Nu s-a putut analiza fișierul JSON în „$1”: $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "Montare SFTP"
 	},
+	"mount_path_label": {
+		"message": "Cale de montare"
+	},
 	"mounted_message": {
 		"message": "Montat!"
 	},
@@ -187,6 +206,9 @@
 	},
 	"ok_button_label": {
 		"message": "OK"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Conectează-te la un profil salvat sau la un nou sistem SSH"
 	},
 	"open_as_window_tip": {
 		"message": "[Sfat profesionist] Folosește „Deschide ca fereastră” pentru a împiedica Control-W să închidă terminalul!\n[Sfat profesionist] Accesează $1 pentru mai multe informații.",
@@ -204,6 +226,9 @@
 	},
 	"plugin_loading_complete": {
 		"message": " terminată."
+	},
+	"plugin_loading_failed": {
+		"message": " eșuat! :("
 	},
 	"pref_backup_filename": {
 		"message": "Backup preferințe Secure Shell.json"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Profil actual"
 	},
+	"tip_1": {
+		"message": "Poți să ții apăsată tasta Ctrl (Cmd pe macOS) în timp ce dai clic pe linkuri pentru a le deschide!"
+	},
+	"tip_10": {
+		"message": "Când rulează într-o fereastră, Ctrl-Shift-N poate deschide o altă sesiune."
+	},
+	"tip_11": {
+		"message": "Poți să asociezi din nou tastele/comenzile rapide: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Afișează notificările în browser folosind hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Conectează-te din caseta polivalentă introducând „ssh <profile name>”: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "În sistemul de operare Chrome poți să montezi sisteme de fișiere prin SFTP și să răsfoiești cu aplicația Fișiere. Folosește „Montare SFTP” în loc de „Conectează”."
+	},
+	"tip_5": {
+		"message": "Conectează-te folosind linkurile ssh:// în paginile web sau salvează un marcaj: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Colorează ieșirea/solicitarea folosind 16 culori de bază, 256 de culori și culori complete pe 24 de biți: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Copiază în clipboard din emacs/vim/etc... folosind OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Discută cu alți utilizatori hterm/Secure Shell pe chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Ai găsit o eroare?  Soliciți o funcție nouă?  Anunță-ne: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "A apărut o eroare neașteptată. Consultă consola JavaScript pentru mai multe detalii."
 	},
@@ -244,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "Este disponibilă o actualizare. Închide toate ferestrele."
 	},
+	"welcome_changelog": {
+		"message": "Jurnal de modificări/Note despre versiune: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "Răspunsuri la întrebări frecvente: $1 (ctrl+clic pe linkuri pentru a se deschide)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Modificări majore de la $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Sfat profesionist aleatoriu nr. $1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

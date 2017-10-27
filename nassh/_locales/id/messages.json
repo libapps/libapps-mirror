@@ -26,7 +26,7 @@
 		"message": "Lupakan host ssh yang dikenali."
 	},
 	"cmd_ssh_help": {
-		"message": "Diperlukan parameter |username| dan |hostname|, sedangkan parameter |port| bersifat opsional. Jika parameter port tidak ditentukan, parameter bawaannya adalah 22."
+		"message": "Parameter |username| dan |hostname] bersifat wajib, sedangkan parameter |port| bersifat opsional. Jika parameter port tidak ditentukan, parameter defaultnya adalah 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Buka sesi SSH baru."
@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "Tahukah Anda jika ada halaman opsi khusus?\nTidak perlu repot lagi dengan istilah_ secara langsung!\nTekan $1 untuk membukanya, atau klik:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Tahukah Anda jika ada halaman opsi khusus?\nTidak perlu repot lagi dengan istilah_ secara langsung!\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "argumen ssh tambahan"
-	},
 	"field_argstr_placeholder": {
 		"message": "argumen baris perintah tambahan"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "hostname"
 	},
-	"field_identity_aria_label": {
-		"message": "identitas"
+	"field_mount_path_placeholder": {
+		"message": "lokasi defaultnya adalah direktori beranda pengguna"
 	},
 	"field_port_aria_label": {
 		"message": "port"
@@ -104,10 +120,7 @@
 		"message": "opsi relay"
 	},
 	"field_relay_options_placeholder": {
-		"message": "opsi relay"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "nama profil terminal"
+		"message": "Opsi server relay SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "default"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Tidak dapat menguraikan JSON dalam '$1'",
+		"message": "Tidak dapat menguraikan JSON dalam '$1': $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "Pasang SFTP"
 	},
+	"mount_path_label": {
+		"message": "Lokasi Pemasangan"
+	},
 	"mounted_message": {
 		"message": "Terpasang!"
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "Oke"
 	},
+	"omnibox_default": {
+		"message": "<url><match>pengguna@hostname[:port]</match></url> Hubungkan ke profil yang disimpan atau sistem ssh baru"
+	},
 	"open_as_window_tip": {
-		"message": "[Tips Pro] Gunakan 'Buka sebagai Jendela' agar Control-W tidak menutup terminal Anda.\n[Tips Pro] Lihat $1 untuk mendapatkan informasi selengkapnya.",
+		"message": "[Tips Profesional] Gunakan 'Buka sebagai Jendela' agar Control-W tidak menutup terminal Anda.\n[Tips Profesional] Lihat $1 untuk mendapatkan informasi selengkapnya.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -204,6 +226,9 @@
 	},
 	"plugin_loading_complete": {
 		"message": " selesai."
+	},
+	"plugin_loading_failed": {
+		"message": " gagal! :("
 	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Profil saat ini"
 	},
+	"tip_1": {
+		"message": "Anda dapat menekan tombol Ctrl (Cmd di macOS) sambil mengklik link untuk membukanya."
+	},
+	"tip_10": {
+		"message": "Saat dijalankan di jendela, menekan tombol Ctrl-Shift-N dapat membuka sesi lainnya."
+	},
+	"tip_11": {
+		"message": "Anda dapat mengembalikan kunci/pintasan: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Tampilkan notifikasi di browser menggunakan hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Hubungkan dari omnibox dengan mengetik 'ssh <profile name>': https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS dapat memasang sistem file melalui SFTP dan browsing melalui aplikasi File. Gunakan 'Pasang SFTP', bukan 'Hubungkan'."
+	},
+	"tip_5": {
+		"message": "Hubungkan menggunakan link ssh:// di halaman, atau simpan bookmark: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Beri warna masukan/permintaan Anda menggunakan warna 16 & 256 dasar & warna 24-bit lengkap: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Salin ke clipboard dari emacs/vim/etc... menggunakan OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Chatting dengan sesama pengguna hterm/Secure Shell melalui chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Menemukan bug?  Ingin meminta fitur baru?  Beri tahu kami di: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Terjadi error yang tidak terduga, harap periksa konsol JavaScript untuk info selengkapnya."
 	},
@@ -242,13 +300,40 @@
 		"message": "Lepaskan SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "Update tersedia.  Harap tutup semua jendela."
+		"message": "Update tersedia. Harap tutup semua jendela."
+	},
+	"welcome_changelog": {
+		"message": "Log perubahan/catatan rilis: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
 	},
 	"welcome_faq": {
 		"message": "Jawaban untuk Pertanyaan Umum (FAQ): $1 (ctrl+klik link untuk membuka)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Perubahan besar sejak $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Tips Profesional Acak #$1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

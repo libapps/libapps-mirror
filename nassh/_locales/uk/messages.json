@@ -46,10 +46,29 @@
 		"message": "З’єднатися"
 	},
 	"connect_or_exit_message": {
-		"message": "Вибрати інше підключення чи вийти?"
+		"message": "Вибрати інше підключення (C) чи вийти (X)?"
 	},
 	"connecting": {
 		"message": "Підключення до хосту $1…",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"console_crosh_options_notice": {
+		"message": "Чи знали ви про сторінку з виділеними параметрами?\nБільше не потрібно безпосередньо застосовувати параметр term_.\nЩоб відкрити цю сторінку, натисніть $1 або\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Чи знали ви про сторінку з виділеними параметрами?\nБільше не потрібно безпосередньо застосовувати параметр term_.\n$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "додаткові аргументи ssh"
-	},
 	"field_argstr_placeholder": {
 		"message": "додаткові аргументи командного рядка"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "ім’я хосту"
 	},
-	"field_identity_aria_label": {
-		"message": "ідентифікатор"
+	"field_mount_path_placeholder": {
+		"message": "шлях за умовчанням – це домашній каталог користувача"
 	},
 	"field_port_aria_label": {
 		"message": "порт"
@@ -104,10 +120,7 @@
 		"message": "параметри передавання"
 	},
 	"field_relay_options_placeholder": {
-		"message": "параметри передавання"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "назва профілю термінала"
+		"message": "Параметри сервера передавання SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "за умовчанням"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Не вдалося виконати синтаксичний аналіз файлу JSON у пакеті $1",
+		"message": "Не вдалося виконати синтаксичний аналіз файлу JSON у параметрі \"$1\": $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "Підключити протокол SFTP"
 	},
+	"mount_path_label": {
+		"message": "Шлях підключення"
+	},
 	"mounted_message": {
 		"message": "Підключено"
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "ОК"
 	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Під’єднайтеся до збереженого профілю чи нової системи SSH"
+	},
 	"open_as_window_tip": {
-		"message": "[Порада спеціаліста] Вибирайте опцію \"Відкрити як вікно\", щоб команда Control-W не закривала термінал.\n[Порада спеціаліста] Дізнайтеся більше на сторінці $1.",
+		"message": "[Порада професіонала] Вибирайте опцію \"Відкрити як вікно\", щоб команда Control-W не закривала термінал.\n[Порада професіонала] Дізнайтеся більше на сторінці $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -205,6 +227,9 @@
 	"plugin_loading_complete": {
 		"message": " готово."
 	},
+	"plugin_loading_failed": {
+		"message": " помилка"
+	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
@@ -215,7 +240,7 @@
 		"message": "Усі налаштування скинуто."
 	},
 	"reconnect_message": {
-		"message": "Ще раз підключитися, вибрати інше підключення чи вийти?"
+		"message": "Ще раз підключитися (R), вибрати інше підключення (C) чи вийти (X)?"
 	},
 	"relay_retry": {
 		"message": "Повторна спроба…"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Поточний профіль"
 	},
+	"tip_1": {
+		"message": "Утримуйте клавішу Ctrl (Cmd в ОС Mac) і натискайте посилання, щоб відкрити їх."
+	},
+	"tip_10": {
+		"message": "Коли завдання виконується у вікні, комбінацією клавіш Ctrl-Shift-N можна почати новий сеанс."
+	},
+	"tip_11": {
+		"message": "Ви можете повторно зв’язувати ключі або комбінації клавіш: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Увімкніть сповіщення у веб-переглядачі командою hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Під’єднуйтеся з універсального вікна пошуку, ввівши команду \"ssh <profile name>\": https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "ОС Chrome може підключити файлові системи через протокол SFTP та переглядати їх через додаток Файли. Натисніть \"Підключити через SFTP\" замість \"Під’єднатися\"."
+	},
+	"tip_5": {
+		"message": "Під’єднуйтеся за допомогою посилань ssh:// на веб-сторінках або збережіть закладку: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Позначайте вихідні дані та запити основними 16 чи 256 кольорами або повними 24-бітовими кольорами: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Скопіюйте в буфер обміну з ресурсу emacs/vim/etc... за допомогою послідовності OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Спілкуйтеся в чаті з іншими користувачами hterm/Secure Shell на сторінці chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Виявили помилку? Хочете запропонувати нову функцію? Повідомте нас: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Сталася неочікувана помилка. Щоб дізнатися більше, перегляньте консоль JavaScript."
 	},
@@ -242,13 +300,40 @@
 		"message": "Відключити протокол SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "Є оновлення. Закрийте всі вікна."
+		"message": "Доступне оновлення. Закрийте всі вікна."
+	},
+	"welcome_changelog": {
+		"message": "ChangeLog/примітки до випуску: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
 	},
 	"welcome_faq": {
 		"message": "Відповіді на поширені запитання: $1 (щоб відкрити посилання, натисніть його, утримуючи клавішу ctrl)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Основні зміни після випуску версії $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Випадкова порада професіонала №$1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

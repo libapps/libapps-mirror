@@ -46,10 +46,29 @@
 		"message": "Prisijungti"
 	},
 	"connect_or_exit_message": {
-		"message": "Pasirinkti (C) kitą ryšį ar išeiti (X)?"
+		"message": "Pasirinkti kitą ryšį (C) ar išeiti (X)?"
 	},
 	"connecting": {
 		"message": "Prisijungiama prie $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"console_crosh_options_notice": {
+		"message": "Ar žinote, kad yra paskirtas parinkčių puslapis?\nNebereikia atlikti veiksmų tiesiogiai su terminu!\nPaspauskite $1, kad atidarytumėte, arba spustelėkite\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Ar žinote, kad yra paskirtas parinkčių puslapis?\nNebereikia atlikti veiksmų tiesiogiai su terminu!\n$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "papildomi „ssh“ argumentai"
-	},
 	"field_argstr_placeholder": {
 		"message": "papildomi komandos eilutės argumentai"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "prieglobos serverio pavadinimas"
 	},
-	"field_identity_aria_label": {
-		"message": "tapatybė"
+	"field_mount_path_placeholder": {
+		"message": "numatytasis kelias yra naudotojo pagrindinis katalogas"
 	},
 	"field_port_aria_label": {
 		"message": "prievadas"
@@ -104,10 +120,7 @@
 		"message": "perdavimo parinktys"
 	},
 	"field_relay_options_placeholder": {
-		"message": "perdavimo parinktys"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "terminalo profilio pavadinimas"
+		"message": "SSH perdavimo serverio parinktys"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "numatytasis"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Nepavyko išanalizuoti JSON („$1“)",
+		"message": "Nepavyko išanalizuoti JSON „$1“: $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "Įdėti SFTP"
 	},
+	"mount_path_label": {
+		"message": "Įdėtasis kelias"
+	},
 	"mounted_message": {
 		"message": "Įdėta!"
 	},
@@ -187,6 +206,9 @@
 	},
 	"ok_button_label": {
 		"message": "GERAI"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Prisijunkite prie išsaugoto profilio arba naujos SSH sistemos."
 	},
 	"open_as_window_tip": {
 		"message": "[Pro Tip] Naudokite parinktį „Atidaryti kaip langą“, kad neuždarytumėte terminalo naudodami spartųjį klavišą „Control“ + W.\n[Pro Tip] Jei reikia daugiau informacijos, žr. adresu $1.",
@@ -205,6 +227,9 @@
 	"plugin_loading_complete": {
 		"message": " atlikta."
 	},
+	"plugin_loading_failed": {
+		"message": " nepavyko! :("
+	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
@@ -215,7 +240,7 @@
 		"message": "Visos nuostatos nustatytos iš naujo!"
 	},
 	"reconnect_message": {
-		"message": "(I)š naujo prisijungti, (p)asirinkti kitą ryšį ar iš(e)iti?"
+		"message": "Iš naujo prisijungti (R), pasirinkti kitą ryšį (C) ar išeiti (X)?"
 	},
 	"relay_retry": {
 		"message": "Bandoma iš naujo..."
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Dabartinis profilis"
 	},
+	"tip_1": {
+		"message": "Galite laikyti paspaudę „Ctrl“ („Cmd“, jei naudojate „Mac“ OS) ir spustelėti nuorodas, kad jas atidarytumėte!"
+	},
+	"tip_10": {
+		"message": "Vykdant lange paspaudus „Ctrl“ + „Shift“ + N gali būti atidaryta kita sesija."
+	},
+	"tip_11": {
+		"message": "Galite pakartotinai susieti raktus / sparčiuosius klavišus: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Pateikite pranešimus naršyklėje naudodami „hterm-notify“: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Prisijunkite iš „omnibox“ įvesdami „ssh <profile name>“: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "„Chrome“ OS gali įdėti failų sistemas per SFTP ir naršyti naudodama Failų programą. Naudokite „SFTP įdėjimas“ vietoje „Prisijungti“."
+	},
+	"tip_5": {
+		"message": "Prisijunkite naudodami nuorodas ssh:// tinklalapiuose arba išsaugokite žymę: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Nuspalvinkite išvestį / raginimą naudodami 16 pagrindinių spalvų ir 256 spalvas bei 24 bitų spalvas: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Nukopijuokite į iškarpinę iš „emacs/vim/etc...“ naudodami OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Kalbėkite su kitais „hterm“ / „Secure Shell“ naudotojais naudodami adresą chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Radote riktą? Norite pateikti naujos funkcijos užklausą? Praneškite mums: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Įvyko nenumatyta klaida. Jei reikia daugiau išsamios informacijos, žr. „JavaScript“ pultą."
 	},
@@ -242,13 +300,40 @@
 		"message": "Išimti SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "Yra naujinys. Uždarykite visus langus."
+		"message": "Pasiekiamas naujinys. Uždarykite visus langus."
+	},
+	"welcome_changelog": {
+		"message": "Pakeitimų žurnalas / laidos informacija: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
 	},
 	"welcome_faq": {
 		"message": "Atsakymai į dažniausiai užduodamus klausimus: $1 („Ctrl“ + spustelėkite nuorodas, kad atidarytumėte)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Pagrindiniai pakeitimai, palyginti su $1 versija:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Atsitiktinis profesionalų patarimas Nr. $1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

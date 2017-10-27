@@ -26,7 +26,7 @@
 		"message": "Elimina un host SSH conocido."
 	},
 	"cmd_ssh_help": {
-		"message": "Los parámetros [username] y [hostname] son obligatorios; en cambio, el parámetro [port] es opcional. Si no se especifica el puerto, este se establece en 22 de forma predeterminada."
+		"message": "Los parámetros [username] y [hostname] son obligatorios; el parámetro [port] es opcional. Si no se especifica el puerto, este se establece en 22 de forma predeterminada."
 	},
 	"cmd_ssh_title": {
 		"message": "Abre una nueva sesión SSH."
@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "¿Sabías que existe una página de opciones dedicada?\n¡Ya no es necesario modificar term_ directamente!\nPresiona $1 para abrirla o haz clic en:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "¿Sabías que existe una página de opciones dedicada?\n¡Ya no es necesario modificar term_ directamente!\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[SUPR]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[INTRO]"
 	},
-	"field_argstr_aria_label": {
-		"message": "argumentos ssh adicionales"
-	},
 	"field_argstr_placeholder": {
 		"message": "argumentos de línea de comandos adicionales"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "nombredehost"
 	},
-	"field_identity_aria_label": {
-		"message": "identidad"
+	"field_mount_path_placeholder": {
+		"message": "la ruta predeterminada es el directorio principal del usuario"
 	},
 	"field_port_aria_label": {
 		"message": "puerto"
@@ -104,10 +120,7 @@
 		"message": "opciones de retransmisión"
 	},
 	"field_relay_options_placeholder": {
-		"message": "opciones de retransmisión"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "nombre de perfil del terminal"
+		"message": "Opciones del servidor SSH de retransmisión"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "predeterminado"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "No se pudo analizar el archivo JSON en \"$1\"",
+		"message": "No se pudo analizar el archivo JSON en \"$1\": $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "Activación de SFTP"
 	},
+	"mount_path_label": {
+		"message": "Activar ruta"
+	},
 	"mounted_message": {
 		"message": "Se activó correctamente."
 	},
@@ -187,6 +206,9 @@
 	},
 	"ok_button_label": {
 		"message": "Aceptar"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Conéctate a un perfil guardado o un sistema ssh nuevo"
 	},
 	"open_as_window_tip": {
 		"message": "[Sugerencia profesional] Usa \"Abrir como ventana\" para evitar que la combinación de teclas Ctrl+W cierre tu terminal.\n[Sugerencia profesional] Para obtener más información, consulta $1.",
@@ -205,6 +227,9 @@
 	"plugin_loading_complete": {
 		"message": " Listo"
 	},
+	"plugin_loading_failed": {
+		"message": " Ocurrió un error."
+	},
 	"pref_backup_filename": {
 		"message": "Copia de seguridad de las preferencias para Secure Shell.json"
 	},
@@ -215,7 +240,7 @@
 		"message": "Se restablecieron todas las preferencias."
 	},
 	"reconnect_message": {
-		"message": "¿Reconectar (R), Elegir (C) otra conexión o Salir (E)?"
+		"message": "¿Reconectar (R), Elegir (C) otra conexión o Salir (X)?"
 	},
 	"relay_retry": {
 		"message": "Reintentando…"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Perfil actual"
 	},
+	"tip_1": {
+		"message": "¡Puedes mantener presionado Ctrl (Cmd en macOS) mientras haces clic en los vínculos para abrirlos!"
+	},
+	"tip_10": {
+		"message": "Cuando se ejecuta en una ventana, Ctrl-mayúscula-N puede abrir otra sesión."
+	},
+	"tip_11": {
+		"message": "Puedes reasignar las teclas o las combinaciones de teclas: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Muestra notificaciones en el navegador con hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Para conectarte desde el cuadro multifunción, escribe \"ssh <nombre de perfil>\": https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "El Sistema operativo Chrome puede activar sistemas de archivos mediante SFTP y navegar mediante la app de Archivos. Usa \"SFTP Mount\" en lugar de \"Connect\"."
+	},
+	"tip_5": {
+		"message": "Para conectarte, usa vínculos ssh:// en páginas web o guarda un favorito: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Colorea los resultados o mensajes con 16 colores básicos, 256 colores y colores completos en 24 bits: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Copia a tu portapapeles desde emacs/vim/etc... usando OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Chatea con otros usuarios de hterm/Secure Shell mediante chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "¿Encontraste un error? ¿Quieres una función nueva? Envía un comentario: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Se produjo un error inesperado. Consulta la Consola de JavaScript para obtener más detalles."
 	},
@@ -244,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "Hay una actualización disponible. Cierra todas las ventanas."
 	},
+	"welcome_changelog": {
+		"message": "Notas de la versión/ChangeLog: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "Respuestas a las preguntas frecuentes: $1 (presiona ctrl+clic en los vínculos para abrirlos)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Cambios importantes desde $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Sugerencia profesional aleatoria n.º $1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

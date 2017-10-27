@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "専用のオプション ページがあることをご存知でしたか？\nterm_ を直接指定する必要がなくなります。\nページを開くには $1 キーを押すか、次のリンクをクリックしてください:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "専用のオプション ページがあることをご存知でしたか？\nterm_ を直接指定する必要がなくなります。\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "その他の SSH 引数"
-	},
 	"field_argstr_placeholder": {
 		"message": "その他のコマンドライン引数"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "ホスト名"
 	},
-	"field_identity_aria_label": {
-		"message": "ID"
+	"field_mount_path_placeholder": {
+		"message": "デフォルトのパスはユーザーのホーム ディレクトリです"
 	},
 	"field_port_aria_label": {
 		"message": "ポート"
@@ -104,10 +120,7 @@
 		"message": "中継オプション"
 	},
 	"field_relay_options_placeholder": {
-		"message": "中継オプション"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "ターミナルのプロファイル名"
+		"message": "SSH 中継サーバーのオプション"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "デフォルト"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "「$1」の JSON を解析できませんでした",
+		"message": "「$1」の JSON を解析できませんでした: $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "SFTP マウント"
 	},
+	"mount_path_label": {
+		"message": "マウントパス"
+	},
 	"mounted_message": {
 		"message": "マウント完了。"
 	},
@@ -187,6 +206,9 @@
 	},
 	"ok_button_label": {
 		"message": "OK"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> 保存されているプロファイルまたは新しい SSH システムに接続します"
 	},
 	"open_as_window_tip": {
 		"message": "上級者向けヒント: Ctrl+W キーを押してもターミナルが閉じられないようにするには、[ウィンドウとして開く] を使用します。\n上級者向けヒント: 詳しくは、$1 をご覧ください。",
@@ -204,6 +226,9 @@
 	},
 	"plugin_loading_complete": {
 		"message": "完了しました。"
+	},
+	"plugin_loading_failed": {
+		"message": " 失敗しました"
 	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "現在のプロファイル"
 	},
+	"tip_1": {
+		"message": "リンクを開くには、Ctrl キー（Mac OS の場合は Cmd キー）を押しながらリンクをクリックします。"
+	},
+	"tip_10": {
+		"message": "ウィンドウでの実行中に、Ctrl+Shift+N キーを使って別のセッションを開くことができます。"
+	},
+	"tip_11": {
+		"message": "キーやショートカットをバインドし直すことができます: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "ブラウザに通知を表示するには hterm-notify を使用します: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "アドレスバーから接続するには「ssh <プロファイル名>」と入力します: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS では、SFTP 経由でファイルシステムをマウントし、ファイルアプリを使って閲覧することができます。その際は、[接続] ではなく [SFTP マウント] を使用してください。"
+	},
+	"tip_5": {
+		"message": "ウェブページ上の ssh:// リンクを使って接続するか、ブックマークを保存します: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "基本の 16 色、256 色、24 ビット フルカラーを使って出力またはメッセージを表示できます: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "emacs、vim などからクリップボードにコピーするには OSC-52 を使用します: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "chromium-hterm@chromium.org を使って hterm ユーザーや Secure Shell ユーザーとチャットできます: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "バグを見つけた場合や新機能の要望がある場合は、ぜひご報告ください: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "予期しないエラーが発生しました。詳しくは JavaScript コンソールをご確認ください。"
 	},
@@ -244,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "アップデートを利用できます。すべてのウィンドウを閉じてください。"
 	},
+	"welcome_changelog": {
+		"message": "変更ログ、リリースノート: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "よくある質問とその回答: $1（Ctrl キーを押しながらリンクをクリックして開きます）",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "$1 以降の主な変更:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Random Pro のヒント #$1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

@@ -26,7 +26,7 @@
 		"message": "Забравяне на известен ssh хост."
 	},
 	"cmd_ssh_help": {
-		"message": "Параметрите |username| и |hostname| са задължителни, а |port| е по избор.  Ако портът не е посочен, по подразбиране се задава 22."
+		"message": "Параметрите |username| и |hostname| са задължителни, а |port| е по избор. Ако портът не е посочен, по подразбиране се задава 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Отваря нова SSH сесия."
@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "Знаете ли, че има отделна страница за опциите?\nВече няма нужда да използвате term_ директно!\nНатиснете $1, за да я отворите, или кликнете върху:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Знаете ли, че има отделна страница за опциите?\nВече няма нужда да използвате term_ директно!\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "допълнителни аргументи за ssh"
-	},
 	"field_argstr_placeholder": {
 		"message": "допълнителни аргументи за командния ред"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "име на хост"
 	},
-	"field_identity_aria_label": {
-		"message": "идентификационни данни"
+	"field_mount_path_placeholder": {
+		"message": "стандартният път е основната директория на потребителя"
 	},
 	"field_port_aria_label": {
 		"message": "порт"
@@ -104,10 +120,7 @@
 		"message": "опции за предаващия сървър"
 	},
 	"field_relay_options_placeholder": {
-		"message": "опции за предаващия сървър"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "име на потребителския профил за терминала"
+		"message": "Опции за предаващия SSH сървър"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "по подразбиране"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "JSON кодът от „$1“ не можа да бъде анализиран синтактично",
+		"message": "JSON кодът от „$1“ не можа да бъде анализиран синтактично: $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "Свързване през SFTP"
 	},
+	"mount_path_label": {
+		"message": "Път за свързване"
+	},
 	"mounted_message": {
 		"message": "Свързването бе успешно!"
 	},
@@ -187,6 +206,9 @@
 	},
 	"ok_button_label": {
 		"message": "ОК"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Свържете се със запазен потребителски профил или нова SSH система"
 	},
 	"open_as_window_tip": {
 		"message": "[Експертен съвет] Използвайте „Отваряне като прозорец“, така че терминалът да не се затваря с Control-W.\n[Експертен съвет] За повече информация вижте $1.",
@@ -204,6 +226,9 @@
 	},
 	"plugin_loading_complete": {
 		"message": " готово."
+	},
+	"plugin_loading_failed": {
+		"message": " Неуспешно! :("
 	},
 	"pref_backup_filename": {
 		"message": "Резервно копие на предпочитанията за Secure Shell.json"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Текущ потребителски профил"
 	},
+	"tip_1": {
+		"message": "Можете да задържите Ctrl (Cmd под macOS) при кликване върху връзка, за да я отворите!"
+	},
+	"tip_10": {
+		"message": "При работа в прозорец можете да отворите нов посредством Ctrl-Shift-N."
+	},
+	"tip_11": {
+		"message": "Можете да преконфигурирате клавиши/клавишни комбинации: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Задайте известията да се показват в браузъра посредством hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Свържете се от полето за всичко, като въведете „ssh <име на потребителския профил>“: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Под Chrome OS можете да свържете файлова система през SFTP и да разгледате съдържанието й посредством приложението Файлове. Използвайте „Свързване през SFTP“ вместо „Свързване“."
+	},
+	"tip_5": {
+		"message": "Свързвайте се посредством връзки с ssh:// в уеб страниците или запазвайте отметки: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Оцветете извежданите данни/командния ред посредством основните 16 цвята, 256 цвята или пълната 24-битова цветова гама: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Копирайте в буферната памет от emacs, vim и др. посредством OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Разговаряйте с други потребители на hterm/Secure Shell чрез chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Открили сте програмна грешка? Искате да въведем нова функция? Уведомете ни: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Възникна неочаквана грешка. Mоля, проверете конзолата на JavaScript за още подробности."
 	},
@@ -244,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "Налице е актуализация. Моля, затворете всички прозорци."
 	},
+	"welcome_changelog": {
+		"message": "ChangeLog/бележки по версията: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "Отговори на често задавани въпроси: $1 (връзките се отварят чрез задържане на ctrl + кликване)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Основни промени след версия $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Произволен експертен съвет №$1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

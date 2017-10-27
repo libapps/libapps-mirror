@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "Vidste du, at der er en dedikeret side med indstillinger?\nDu behøver ikke længere at rode direkte med term_.\nTryk på $1 for at åben den, eller klik på:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Vidste du, at der er en dedikeret side med indstillinger?\nDu behøver ikke længere at rode direkte med term_.\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[DELETE]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "yderligere SSH-argumenter"
-	},
 	"field_argstr_placeholder": {
 		"message": "ekstra kommandolinjeargumenter"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "hostname"
 	},
-	"field_identity_aria_label": {
-		"message": "identitet"
+	"field_mount_path_placeholder": {
+		"message": "standardstien er brugerens hjemmeindeks"
 	},
 	"field_port_aria_label": {
 		"message": "port"
@@ -104,10 +120,7 @@
 		"message": "valgmuligheder for relæserver"
 	},
 	"field_relay_options_placeholder": {
-		"message": "valgmuligheder for relæserver"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "navn på terminalprofil"
+		"message": "Indstillinger for SSH-relæserver"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "standard"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "JSON kunne ikke parses i \"$1\"",
+		"message": "JSON kunne ikke parses i \"$1\": $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "SFTP-tilslutning"
 	},
+	"mount_path_label": {
+		"message": "Isæt sti"
+	},
 	"mounted_message": {
 		"message": "Tilsluttet"
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "OK"
 	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Opret forbindelse til en gemt profil eller et nyt SSH-system"
+	},
 	"open_as_window_tip": {
-		"message": "[Pro Tip] Brug \"Åbn som vindue\" for at undgå, at Control-W lukker din terminal.\n[Pro Tip] Se $1 for at få flere oplysninger.",
+		"message": "[Proftip] Brug \"Åbn som vindue\" for at undgå, at Control-W lukker din terminal.\n[Proftip] Se $1 for at få flere oplysninger.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -204,6 +226,9 @@
 	},
 	"plugin_loading_complete": {
 		"message": " udført."
+	},
+	"plugin_loading_failed": {
+		"message": " mislykkedes"
 	},
 	"pref_backup_filename": {
 		"message": "Backup af Secure Shell-præferencer.json"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Nuværende profil"
 	},
+	"tip_1": {
+		"message": "Du kan holde Ctrl (Cmd på macOS) nede, mens du klikker på links, for at åben dem."
+	},
+	"tip_10": {
+		"message": "Ved kørsel i et andet vindue kan du trykke Ctrl-Shift-N for at åbne en ny session."
+	},
+	"tip_11": {
+		"message": "Du kan ændre tilknytningen mellem taster og genveje: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Vis underretninger i browseren ved hjælp af hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Opret forbindelse fra omnifeltet ved at skrive \"ssh <profilnavn>\": https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS kan isætte filsystemer via SFTP og browse via appen Filer. Brug \"SFTP Mount\" i stedet for \"Connect\"."
+	},
+	"tip_5": {
+		"message": "Opret forbindelse ved hjælp af ssh://-links på websider, eller gem et bogmærke: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Sæt kulør på dit output/din meddelelse med 16 farver, 256 farver og 24-bit farver: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Kopiér til udklipsholderen fra emacs/vim/etc... ved hjælp af OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Chat med andre hterm/Secure Shell-brugere via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Har du fundet en fejl?  Ønsker du en ny funktion?  Giv os besked: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Der opstod en uventet fejl. Du kan få flere oplysninger i JavaScript-konsollen."
 	},
@@ -244,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "Der er en tilgængelig opdatering. Luk alle vinduer."
 	},
+	"welcome_changelog": {
+		"message": "ChangeLog/produktbemærkninger: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "Svar på ofte stillede spørgsmål: $1 (tryk på ctrl, og hold knappen nede, mens du klikker på linket, for at åbne det)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Større ændringer siden $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Tilfældigt Proftip nr. $1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

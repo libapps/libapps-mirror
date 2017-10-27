@@ -26,7 +26,7 @@
 		"message": "Удаление хоста SSH."
 	},
 	"cmd_ssh_help": {
-		"message": "Параметры |username| и |hostname| являются обязательными, а |port| – дополнительным. Если порт не указан, то по умолчанию ставится значение 22."
+		"message": "Параметры |username| и |hostname| являются обязательными, а |port| – факультативным. Если порт не указан, то по умолчанию ставится значение 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Открытие SSH-сеанса."
@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "Теперь вы можете управлять настройками term_ на специальной странице.\nЧтобы открыть ее, нажмите $1 или перейдите по ссылке $2.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Теперь вы можете управлять настройками term_ на специальной странице.\nОна доступна по ссылке $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ВВОД]"
 	},
-	"field_argstr_aria_label": {
-		"message": "дополнительные SSH-аргументы"
-	},
 	"field_argstr_placeholder": {
 		"message": "дополнительные аргументы командной строки"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "имя хоста"
 	},
-	"field_identity_aria_label": {
-		"message": "идентификационные данные"
+	"field_mount_path_placeholder": {
+		"message": "по умолчанию используется путь к домашнему каталогу"
 	},
 	"field_port_aria_label": {
 		"message": "порт"
@@ -104,10 +120,7 @@
 		"message": "параметры ретрансляции"
 	},
 	"field_relay_options_placeholder": {
-		"message": "параметры ретрансляции"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "название профиля терминала"
+		"message": "параметры SSH-сервера ретрансляции"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "по умолчанию"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Не удалось обработать JSON-файл в \"$1\"",
+		"message": "Не удалось обработать данные JSON в параметре $1. $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "Подключить SFTP"
 	},
+	"mount_path_label": {
+		"message": "Путь подключения"
+	},
 	"mounted_message": {
 		"message": "Файловая система подключена."
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "ОК"
 	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Подключитесь к сохраненному профилю или создайте SSH-соединение."
+	},
 	"open_as_window_tip": {
-		"message": "[Совет] Используйте параметр \"Открыть в отдельном окне\", чтобы терминал нельзя было закрыть, нажав CTRL + W.\n[Совет] Подробная информация представлена на странице $1.",
+		"message": "[Совет] Используйте параметр \"Открыть в отдельном окне\", чтобы терминал нельзя было закрыть нажатием CTRL + W.\n[Совет] Подробная информация представлена на странице $1.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -204,6 +226,9 @@
 	},
 	"plugin_loading_complete": {
 		"message": " Готово"
+	},
+	"plugin_loading_failed": {
+		"message": " Не удалось выполнить загрузку."
 	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Текущий профиль"
 	},
+	"tip_1": {
+		"message": "Чтобы открыть ссылку, нажмите на нее, удерживая клавишу CTRL (CMD в Mac OS)."
+	},
+	"tip_10": {
+		"message": "Чтобы начать новый сеанс, нажмите CTRL + SHIFT + N в открытом окне программы."
+	},
+	"tip_11": {
+		"message": "О том, как изменить быстрые клавиши, рассказано на странице https://goo.gl/LWRndr."
+	},
+	"tip_2": {
+		"message": "О том, как настроить уведомления в браузере с помощью hterm-notify, рассказано на странице https://goo.gl/ZNxGdF."
+	},
+	"tip_3": {
+		"message": "Чтобы установить соединение из омнибокса, введите \"ssh <название профиля>\". Подробнее: https://goo.gl/V7o8ki."
+	},
+	"tip_4": {
+		"message": "В Chrome OS можно подключать файловые системы по SFTP и просматривать их через приложение \"Файлы\". Для этого выберите \"Подключить SFTP\" вместо \"Подключить\"."
+	},
+	"tip_5": {
+		"message": "Подключайтесь по ссылкам, которые начинаются с ssh://, или сохраняйте сайты в закладки. Подробнее: https://goo.gl/zS8EZD."
+	},
+	"tip_6": {
+		"message": "Вы можете изменить цвет строки приглашения и текста, который вы вводите. Доступны палитры из 16 и 256 цветов, а также 24-битные цвета. Подробнее: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html."
+	},
+	"tip_7": {
+		"message": "Копируйте данные в буфер обмена из emacs/vim/etc… с помощью OSC-52. Подробнее: https://goo.gl/XSnyLo."
+	},
+	"tip_8": {
+		"message": "Общайтесь с другими пользователями hterm/Secure Shell на форуме chromium-hterm@chromium.org (https://goo.gl/RYHiK)."
+	},
+	"tip_9": {
+		"message": "Нашли ошибку? Не хватает какой-то функции? Напишите нам, заполнив эту форму: https://goo.gl/vb94JY."
+	},
 	"unexpected_error": {
 		"message": "Произошла ошибка. Дополнительную информацию можно найти в консоли JavaScript."
 	},
@@ -244,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "Доступно обновление. Закройте все окна."
 	},
+	"welcome_changelog": {
+		"message": "Примечания к выпуску ChangeLog: $1.",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "Ответы на часто задаваемые вопросы: $1. Чтобы открыть ссылку, нажмите на нее левой кнопкой мыши, удерживая клавишу CTRL.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Основные отличия от версии $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Совет № $1. $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

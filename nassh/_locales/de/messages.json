@@ -26,7 +26,7 @@
 		"message": "Löscht einen bekannten SSH-Host"
 	},
 	"cmd_ssh_help": {
-		"message": "Die Parameter |username| und |hostname| sind erforderlich, |port| ist optional. Ist kein Port angegeben, wird standardmäßig Port 22 verwendet."
+		"message": "Die Parameter |username| und |hostname| sind erforderlich, |port| ist optional. Ist kein Port angegeben, wird standardmäßig Port 22 verwendet."
 	},
 	"cmd_ssh_title": {
 		"message": "Öffnet eine neue SSH-Sitzung"
@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "Wussten Sie, dass es eine spezielle Optionsseite gibt?\nDas macht eine Modifizierung von \"term_directly\" überflüssig!\nDrücken Sie $1, um sie zu öffnen, oder klicken Sie auf:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Wussten Sie, dass es eine spezielle Optionsseite gibt?\nDas macht eine Modifizierung von \"term_directly\" überflüssig!\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[ENTF]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[EINGABE]"
 	},
-	"field_argstr_aria_label": {
-		"message": "Zusätzliche SSH-Argumente"
-	},
 	"field_argstr_placeholder": {
 		"message": "Zusätzliche Argumente über die Eingabeaufforderung"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "Hostname"
 	},
-	"field_identity_aria_label": {
-		"message": "Identität"
+	"field_mount_path_placeholder": {
+		"message": "der Standardpfad ist das Basisverzeichnis des Nutzers"
 	},
 	"field_port_aria_label": {
 		"message": "Port"
@@ -104,10 +120,7 @@
 		"message": "Relay-Optionen"
 	},
 	"field_relay_options_placeholder": {
-		"message": "Relay-Optionen"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "Name des Terminalprofils"
+		"message": "SSH-Relay-Server-Optionen"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "Standard"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "JSON-Daten konnten nicht in \"$1\" geparst werden",
+		"message": "JSON-Datei konnte nicht in \"$1\" geparst werden: $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "SFTP-Bereitstellung"
 	},
+	"mount_path_label": {
+		"message": "Bereitstellungspfad"
+	},
 	"mounted_message": {
 		"message": "Wird schon bereitgestellt."
 	},
@@ -187,6 +206,9 @@
 	},
 	"ok_button_label": {
 		"message": "OK"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Sie können sich mit einem gespeicherten Profil oder einem neuen SSH-System verbinden"
 	},
 	"open_as_window_tip": {
 		"message": "[Profi-Tipp] Mit der Option \"In Fenster öffnen\" wird Ihr Terminal nicht geschlossen, wenn Sie die Tastenkombination Strg + W verwenden.\n[Profi-Tipp] Weitere Informationen finden Sie unter $1.",
@@ -205,6 +227,9 @@
 	"plugin_loading_complete": {
 		"message": " Fertig"
 	},
+	"plugin_loading_failed": {
+		"message": " fehlgeschlagen! :("
+	},
 	"pref_backup_filename": {
 		"message": "Sicherung für Secure Shell-Einstellungen.json"
 	},
@@ -220,33 +245,11 @@
 	"relay_retry": {
 		"message": "Wird erneut versucht..."
 	},
-	"request_pin_prompt": {
-		"message": "PIN zur Entsperrung von Schlüssel $FINGERPRINT$ auf '$READER$' eingeben ($NUM_TRIES$ Versuche verbleiben): ",
-		"placeholders": {
-			"fingerprint": {
-				"content": "$1"
-			},
-			"num_tries": {
-				"content": "$3"
-			},
-			"reader": {
-				"content": "$2"
-			}
-		}
-	},
 	"restore_prefs": {
 		"message": "Sicherung wiederherstellen"
 	},
 	"shortcut_list_aria_label": {
 		"message": "Gespeicherte Verbindungen"
-	},
-	"smart_card_connector_not_installed": {
-		"message": "Bitte installieren Sie den Smart Card Connector: $URL$",
-		"placeholders": {
-			"url": {
-				"content": "$1"
-			}
-		}
 	},
 	"ssh_argstr_label": {
 		"message": "SSH-Argumente"
@@ -257,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Aktuelles Profil"
 	},
+	"tip_1": {
+		"message": "Sie können die Strg-Taste gedrückt halten (Befehlstaste bei Mac OS) und gleichzeitig auf Links klicken, um sie zu öffnen."
+	},
+	"tip_10": {
+		"message": "Wenn ein Fenster geöffnet ist, kann durch Strg + Shift + N eine weitere Sitzung geöffnet werden."
+	},
+	"tip_11": {
+		"message": "Sie können Tasten/Tastenkürzel neu zuweisen: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Benachrichtigungen können mithilfe von \"hterm-notify\" im Browser angezeigt werden: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Sie können sich über die Omnibox verbinden, indem Sie \"ssh <Profilname>\" eingeben: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS kann Dateisysteme über SFTP bereitstellen und über die App \"Dateien\" suchen. Verwenden Sie \"SFTP Mount\" statt \"Connect\"."
+	},
+	"tip_5": {
+		"message": "Verbinden Sie sich mithilfe von \"ssh://\"-Links in Webseiten oder speichern Sie ein Lesezeichen: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Färben Sie Ihre Ausgabe/Eingabeaufforderung mithilfe von 16 Farben & 256 Farben & 24-Bit-Vollfarben: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Kopieren Sie Inhalte in Ihre Zwischenablage beispielsweise von Emacs oder Vim und verwenden Sie OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Chatten Sie mit anderen hterm-/Secure Shell-Nutzern über chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Haben Sie einen Fehler gefunden? Möchten Sie eine neue Funktion anfragen? Lassen Sie es uns wissen: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Ein unerwarteter Fehler ist aufgetreten. Weitere Informationen finden Sie in der JavaScript-Konsole."
 	},
@@ -266,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "Ein Update ist verfügbar. Bitte schließen Sie alle Fenster."
 	},
+	"welcome_changelog": {
+		"message": "Änderungsprotokoll/Versionshinweise: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "Antworten auf häufig gestellte Fragen: $1 (Strg + zum Öffnen von Links klicken)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Größere Änderungen seit $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Zufälliger Profi-Tipp Nr. $1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

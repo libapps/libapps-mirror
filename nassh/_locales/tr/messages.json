@@ -26,7 +26,7 @@
 		"message": "Bilinen bir ssh ana makinesini unut."
 	},
 	"cmd_ssh_help": {
-		"message": "|username| ve |hostname| parametreleri gereklidir, |port| isteğe bağlıdır. Bağlantı noktası belirtilmezse varsayılan olarak 22 kullanılır."
+		"message": "|kullanıcıadı| ve |anabilgisayaradı| parametreleri gereklidir. |bağlantınoktası| isteğe bağlıdır. Bağlantı noktası belirtilmezse varsayılan olarak 22 kullanılır."
 	},
 	"cmd_ssh_title": {
 		"message": "Yeni SSH oturumu açar."
@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "Seçenekler için özel bir sayfa olduğunu biliyor muydunuz?\nArtık doğrudan term_ ile uğraşmanıza gerek yok!\nAçmak için $1 tuşuna basın veya şu adresi tıklayın:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Seçenekler için özel bir sayfa olduğunu biliyor muydunuz?\nArtık doğrudan term_ ile uğraşmanıza gerek yok!\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "ek ssh bağımsız değişkenleri"
-	},
 	"field_argstr_placeholder": {
 		"message": "ekstra komut satırı bağımsız değişkenleri"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "ana makine adı"
 	},
-	"field_identity_aria_label": {
-		"message": "kimlik"
+	"field_mount_path_placeholder": {
+		"message": "varsayılan yol, kullanıcının ana dizinidir"
 	},
 	"field_port_aria_label": {
 		"message": "bağlantı noktası"
@@ -104,10 +120,7 @@
 		"message": "geçiş seçenekleri"
 	},
 	"field_relay_options_placeholder": {
-		"message": "geçiş seçenekleri"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "terminal profil adı"
+		"message": "SSH geçiş sunucusu seçenekleri"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "varsayılan"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "\"$1\" içindeki JSON ayrıştırılamadı",
+		"message": "\"$1\" içindeki JSON ayrıştırılamadı: $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "SFTP Ekle"
 	},
+	"mount_path_label": {
+		"message": "Ekleme Yolu"
+	},
 	"mounted_message": {
 		"message": "Eklendi!"
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "Tamam"
 	},
+	"omnibox_default": {
+		"message": "<url><match>kullanıcı@anamakineadı[:bağlantinoktasi]</match></url> Kayıtlı bir profile veya yeni bir ssh sistemine bağlan"
+	},
 	"open_as_window_tip": {
-		"message": "[Profesyoneller için İpucu] Control-W tuşlarının terminalinizi kapatmasını önlemek için \"Pencere Olarak Aç\" seçeneğini kullanın!\n[Profesyoneller için İpucu] Daha fazla bilgi için $1 adresine bakın.",
+		"message": "[Uzmandan İpucu] Control-W tuşlarının terminalinizi kapatmasını önlemek için \"Pencere Olarak Aç\" seçeneğini kullanın!\n[Uzmandan İpucu] Daha fazla bilgi için $1 adresine bakın.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -204,6 +226,9 @@
 	},
 	"plugin_loading_complete": {
 		"message": " tamamlandı."
+	},
+	"plugin_loading_failed": {
+		"message": " başarısız oldu! :("
 	},
 	"pref_backup_filename": {
 		"message": "Güvenli Kabuk Tercihleri Yedeği.json"
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Geçerli profil"
 	},
+	"tip_1": {
+		"message": "Bağlantıları açmak için, tıklarken Ctrl tuşunu (macOS'de Cmd tuşu) basılı tutabilirsiniz!"
+	},
+	"tip_10": {
+		"message": "Bir pencerede çalışırken, Ctrl-ÜstKrkt-N tuşlarını kullanarak başka bir oturum açabilirsiniz."
+	},
+	"tip_11": {
+		"message": "Tuşları/kısayolları yeniden birleştirebilirsiniz: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "hterm-notify kullanarak tarayıcıda bildirimleri gösterin: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "\"ssh <profil adı>\" yazarak çok amaçlı adres çubuğundan bağlanın: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS, dosya sistemlerini SFTP aracılığıyla ekleyebilir ve Dosyalar uygulaması üzerinden göz atabilir. \"Bağlan\" yerine \"SFTP Ekle\"yi kullanın."
+	},
+	"tip_5": {
+		"message": "Web sayfalarında ssh:// bağlantılarını kullanarak bağlanın veya yer işareti kaydedin: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Temel 16 rengi, 256 rengi ve tam 24 bit renkleri kullanarak çıktınızı/isteminizi renklendirin: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "OSC-52 kullanarak emacs/vim/vb.den panonuza kopyalayın: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Diğer hterm/Secure Shell kullanıcılarıyla chromium-hterm@chromium.org üzerinden sohbet edin: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Hata mı buldunuz? Yeni bir özellik mi istiyorsunuz? Bize bildirin: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Beklenmeyen bir hata oluştu, lütfen daha fazla ayrıntı için JavaScript konsolunu kontrol edin."
 	},
@@ -244,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "Bir güncelleme var. Lütfen tüm pencereleri kapatın."
 	},
+	"welcome_changelog": {
+		"message": "Değişiklik Günlüğü/sürüm notları: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "Sık Sorulan Soruların Yanıtları: $1 (açmak için ctrl tuşunu basılı tutarken bağlantıları tıklayın)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "$1 sürümünden beri yapılan önemli değişiklikler:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Uzmandan Rastgele İpucu No. $1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

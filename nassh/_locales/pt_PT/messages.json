@@ -46,10 +46,29 @@
 		"message": "Ligar"
 	},
 	"connect_or_exit_message": {
-		"message": "Pretende es(c)olher outra ligação ou sair (x)?"
+		"message": "Pretende escolher outra ligação (C) ou sair (X)?"
 	},
 	"connecting": {
 		"message": "A ligar a $1...",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"console_crosh_options_notice": {
+		"message": "Sabia que existe uma página de opções dedicada?\nJá não precisa de trabalhar diretamente com term_!\nPrima $1 para abrir ou clique no seguinte link:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Sabia que existe uma página de opções dedicada?\nJá não precisa de trabalhar diretamente com term_!\n$1",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "argumentos ssh adicionais"
-	},
 	"field_argstr_placeholder": {
 		"message": "argumentos adicionais da linha de comandos"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "nome do anfitrião"
 	},
-	"field_identity_aria_label": {
-		"message": "identidade"
+	"field_mount_path_placeholder": {
+		"message": "o caminho predefinido é o diretório principal do utilizador"
 	},
 	"field_port_aria_label": {
 		"message": "porta"
@@ -104,10 +120,7 @@
 		"message": "opções de retransmissão"
 	},
 	"field_relay_options_placeholder": {
-		"message": "opções de retransmissão"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "nome do perfil do terminal"
+		"message": "Opções do servidor de retransmissão SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "predefinição"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Não foi possível analisar o ficheiro JSON em '$1'",
+		"message": "Não foi possível analisar os dados JSON em \"$1\": $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "Montar SFTP"
 	},
+	"mount_path_label": {
+		"message": "Caminho de montagem"
+	},
 	"mounted_message": {
 		"message": "Montado"
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "OK"
 	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Estabeleça ligação a um perfil guardado ou a um novo sistema SSH"
+	},
 	"open_as_window_tip": {
-		"message": "[Sugestão] Utilize a opção \"Abrir como janela\" para evitar que o comando Control-W feche o terminal!\n[Sugestão] Consulte $1 para obter mais informações.",
+		"message": "[Sugestão] Utilize a opção \"Abrir como janela\" para evitar que o comando Control-W feche o terminal!\n[Sugestão] Consulte $1 para mais informações.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -205,6 +227,9 @@
 	"plugin_loading_complete": {
 		"message": " concluído."
 	},
+	"plugin_loading_failed": {
+		"message": " Falhou! :("
+	},
 	"pref_backup_filename": {
 		"message": "Proteger preferências de cópia de segurança de shell.json"
 	},
@@ -215,7 +240,7 @@
 		"message": "Todas as preferências repostas!"
 	},
 	"reconnect_message": {
-		"message": "Pretende (v)oltar a ligar, (e)scolher outra ligação ou (s)air?"
+		"message": "Pretende voltar a ligar (R), escolher outra ligação (C) ou sair (X)?"
 	},
 	"relay_retry": {
 		"message": "A tentar novamente..."
@@ -235,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Perfil atual"
 	},
+	"tip_1": {
+		"message": "Pode premir sem soltar Ctrl (Cmd no macOS) enquanto clica nos links para os abrir."
+	},
+	"tip_10": {
+		"message": "Quando estiver em execução numa janela, premir Ctrl-Shift-N pode abrir outra sessão."
+	},
+	"tip_11": {
+		"message": "Pode voltar a vincular teclas/atalhos: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Apresente notificações no navegador através de hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Estabeleça ligação a partir da caixa geral ao introduzir \"ssh <profile name>\": https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "O Chrome OS pode montar sistemas de ficheiros através de SFTP e procurar através da aplicação Ficheiros. Utilize \"Montar SFTP\" em vez de \"Ligar\"."
+	},
+	"tip_5": {
+		"message": "Estabeleça ligação através de links ssh:// em páginas Web ou guarde um marcador: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Dê cor à saída/pedido com 16 cores básicas, 256 cores e cores completas de 24 bits: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Copie para a área de transferência a partir de emacs/vim/etc. com OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Converse no chat com outros utilizadores de hterm/Secure Shell através de chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Encontrou um erro? Pretende solicitar uma nova funcionalidade? Informe-nos: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "Ocorreu um erro inesperado. Verifique a Consola de JavaScript para obter mais detalhes."
 	},
@@ -242,13 +300,40 @@
 		"message": "Desmontar SFTP"
 	},
 	"update_available_tooltip": {
-		"message": "Está disponível uma atualização. Feche todas as janelas"
+		"message": "Está disponível uma atualização. Feche todas as janelas."
+	},
+	"welcome_changelog": {
+		"message": "Registo de alterações/notas de lançamento: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
 	},
 	"welcome_faq": {
 		"message": "Respostas a Perguntas frequentes: $1 (utilize a combinação ctrl + clique nos links para os abrir)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Grandes alterações desde a versão $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Sugestão aleatória n.º $1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},

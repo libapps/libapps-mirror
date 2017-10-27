@@ -26,7 +26,7 @@
 		"message": "Forget a known SSH host."
 	},
 	"cmd_ssh_help": {
-		"message": "The |username| and |hostname| parameters are required, |port| is optional. If port is not specified it defaults to 22."
+		"message": "The |username| and |hostname| parameters are required; |port| is optional. If port is not specified, it defaults to 22."
 	},
 	"cmd_ssh_title": {
 		"message": "Opens a new SSH session."
@@ -56,6 +56,25 @@
 			}
 		}
 	},
+	"console_crosh_options_notice": {
+		"message": "Did you know that there is a dedicated options page?\nNo need to mess with term_ directly anymore!\nPress $1 to open it, or click:\n$2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
+			}
+		}
+	},
+	"console_nassh_options_notice": {
+		"message": "Did you know that there is a dedicated options page?\nNo need to mess with term_ directly anymore!\n$1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},
@@ -73,9 +92,6 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
-	"field_argstr_aria_label": {
-		"message": "additional ssh arguments"
-	},
 	"field_argstr_placeholder": {
 		"message": "extra command line arguments"
 	},
@@ -91,8 +107,8 @@
 	"field_hostname_placeholder": {
 		"message": "hostname"
 	},
-	"field_identity_aria_label": {
-		"message": "identity"
+	"field_mount_path_placeholder": {
+		"message": "the default path is the user's home directory"
 	},
 	"field_port_aria_label": {
 		"message": "port"
@@ -104,10 +120,7 @@
 		"message": "relay options"
 	},
 	"field_relay_options_placeholder": {
-		"message": "relay options"
-	},
-	"field_terminal_profile_aria_label": {
-		"message": "terminal profile name"
+		"message": "SSH relay server options"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "default"
@@ -144,10 +157,13 @@
 		}
 	},
 	"json_parse_error": {
-		"message": "Could not parse JSON in '$1'",
+		"message": "Could not parse JSON in '$1': $2",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
@@ -179,6 +195,9 @@
 	"mount_button_label": {
 		"message": "SFTP mount"
 	},
+	"mount_path_label": {
+		"message": "Mount Path"
+	},
 	"mounted_message": {
 		"message": "Mounted!"
 	},
@@ -188,8 +207,11 @@
 	"ok_button_label": {
 		"message": "OK"
 	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Connect to a saved profile or a new ssh system"
+	},
 	"open_as_window_tip": {
-		"message": "[Pro Tip] Use 'Open as Window' to keep Control-W from closing your terminal!\n[Pro Tip] See $1 for more information.",
+		"message": "[Pro Tip] Use 'Open as Window' to prevent Control-W from closing your terminal!\n[Pro Tip] See $1 for more information.",
 		"placeholders": {
 			"1": {
 				"content": "$1"
@@ -204,6 +226,9 @@
 	},
 	"plugin_loading_complete": {
 		"message": " done."
+	},
+	"plugin_loading_failed": {
+		"message": " failed! :("
 	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
@@ -220,33 +245,11 @@
 	"relay_retry": {
 		"message": "Retrying..."
 	},
-	"request_pin_prompt": {
-		"message": "Enter PIN to unlock key $FINGERPRINT$ on '$READER$' ($NUM_TRIES$ tries remaining): ",
-		"placeholders": {
-			"fingerprint": {
-				"content": "$1"
-			},
-			"num_tries": {
-				"content": "$3"
-			},
-			"reader": {
-				"content": "$2"
-			}
-		}
-	},
 	"restore_prefs": {
 		"message": "Restore backup"
 	},
 	"shortcut_list_aria_label": {
 		"message": "saved connections"
-	},
-	"smart_card_connector_not_installed": {
-		"message": "Please install the Smart Card Connector app: $URL$",
-		"placeholders": {
-			"url": {
-				"content": "$1"
-			}
-		}
 	},
 	"ssh_argstr_label": {
 		"message": "SSH arguments"
@@ -257,6 +260,39 @@
 	"terminal_profile_label": {
 		"message": "Current profile"
 	},
+	"tip_1": {
+		"message": "You can hold Ctrl (Cmd on macOS) while clicking on links to open them!"
+	},
+	"tip_10": {
+		"message": "When running in a window, Ctrl-Shift-N can open another session."
+	},
+	"tip_11": {
+		"message": "You can rebind keys/shortcuts: https://goo.gl/LWRndr"
+	},
+	"tip_2": {
+		"message": "Display notifications in the browser using hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Connect from the omnibox by typing 'ssh <profile name>': https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS can mount filesystems via SFTP and browse via the Files app. Use 'SFTP Mount' instead of 'Connect'."
+	},
+	"tip_5": {
+		"message": "Connect using ssh:// links in web pages, or save a bookmark: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Colour your output/prompt using basic 16 colours & 256 colours & full 24-bit colours: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Copy to your clipboard from emacs/vim/etc... using OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Chat with fellow hterm/Secure Shell users via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Found a bug? Request a new feature? Let us know: https://goo.gl/vb94JY"
+	},
 	"unexpected_error": {
 		"message": "An unexpected error occurred; please check the JavaScript console for more details."
 	},
@@ -266,11 +302,38 @@
 	"update_available_tooltip": {
 		"message": "An update is available. Please close all windows."
 	},
+	"welcome_changelog": {
+		"message": "ChangeLog/release notes: $1",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
 	"welcome_faq": {
 		"message": "Answers to frequently asked questions: $1 (ctrl+click on links to open)",
 		"placeholders": {
 			"1": {
 				"content": "$1"
+			}
+		}
+	},
+	"welcome_release_highlights": {
+		"message": "Major changes since $1:",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			}
+		}
+	},
+	"welcome_tip_of_day": {
+		"message": "Random Pro Tip #$1: $2",
+		"placeholders": {
+			"1": {
+				"content": "$1"
+			},
+			"2": {
+				"content": "$2"
 			}
 		}
 	},
