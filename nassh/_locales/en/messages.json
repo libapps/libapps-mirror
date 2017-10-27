@@ -75,7 +75,7 @@
 	},
 	"CONSOLE_CROSH_OPTIONS_NOTICE": {
 		"description": "Shown to users who open up the JavaScript developer console. Direct them to the options page instead.",
-		"message": "Did you know there is a dedicated options page?\nNo need to modify term_ directly anymore!\nPress $SHORTCUT$ to open it, or click:\n$URL$",
+		"message": "Did you know there is a dedicated options page?\nNo need to modify 'term_' directly anymore!\nPress $SHORTCUT$ to open it, or click:\n$URL$",
 		"placeholders": {
 			"shortcut": {
 				"content": "$1",
@@ -89,7 +89,7 @@
 	},
 	"CONSOLE_NASSH_OPTIONS_NOTICE": {
 		"description": "Shown to users who open up the JavaScript developer console. Direct them to the options page instead.",
-		"message": "Did you know there is a dedicated options page?\nNo need to mess with term_ directly anymore!\n$URL$",
+		"message": "Did you know there is a dedicated options page?\nNo need to mess with 'term_' directly anymore!\n$URL$",
 		"placeholders": {
 			"url": {
 				"content": "$1",
@@ -183,7 +183,7 @@
 	},
 	"GET_PROFILE_ERROR": {
 		"description": "Error message shown when trying to load an unknown/invalid connection profile.",
-		"message": "ERROR: Could not load profile $ID$:\n\r$MSG$",
+		"message": "ERROR: Could not load profile $ID$:\n$MSG$",
 		"placeholders": {
 			"id": {
 				"content": "$1",
@@ -289,7 +289,7 @@
 	},
 	"OPEN_AS_WINDOW_TIP": {
 		"description": "Message displayed to users who are running Secure Shell in a tab. The [Pro Tip] should be localized (it is slang in the computing world), but can be localized as just 'tip' if easier.",
-		"message": "[Pro Tip] Use 'Open as Window' to prevent Control-W from closing your terminal!\r\n[Pro Tip] See $URL$ for more information.",
+		"message": "[Pro Tip] Use 'Open as Window' to prevent Control-W from closing your terminal!\n[Pro Tip] See $URL$ for more information.",
 		"placeholders": {
 			"url": {
 				"content": "$1",

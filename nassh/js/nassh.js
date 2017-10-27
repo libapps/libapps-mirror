@@ -40,7 +40,12 @@ nassh.msg = function(name, opt_args) {
   if (!rv)
     console.log('Missing message: ' + name);
 
-  return rv;
+  // Since our translation process only preserves \n (and discards \r), we have
+  // to manually insert them here ourselves.  Any place we display translations
+  // should be able to handle \r correctly, and keeps us from having to remember
+  // to do it whenever we need to.  If a situation comes up where we don't want
+  // the \r, we can reevaluate this decision then.
+  return rv.replace(/\n/g, '\n\r');
 };
 
 /**
