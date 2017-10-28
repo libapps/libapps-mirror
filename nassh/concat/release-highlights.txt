@@ -1,4 +1,4 @@
-0.8.35.9
+0.8.36.11
 
 # The first line tracks the last version that went stable.
 # Only features added since then should be kept here.
@@ -10,10 +10,6 @@
 # Only list significant changes that matter to the user.
 # The more lines that we have here, the more cluttered the output.
 
-# release: 0.8.36.9 (stable August 3)
-% Support DOCS (ESC+percent) sequences to put into UTF8 mode.
-%   Can be used to disable graphics maps permanently.
-
 # release: 0.8.36.11 (stable August 29)
 % The SSH command line can handle basic quoting rules (e.g. -o "Feature yes").
 % Unicode combining character processing has been overhauled.
@@ -22,5 +18,8 @@
 % Unicode tables updated to 10.0.0 release.
 % Use Yubikeys and other smart cards for ssh auth: https://goo.gl/3ZEU1w
 
-# release: 0.8.38
+# release: 0.8.38 (stable October 27)
 % Omnibox entries now match saved profile names first.
+
+# release: 0.8.39
+% OpenSSH upgraded to 7.6p1 (some older features dropped).

@@ -1,3 +1,15 @@
+# 0.8.39, 2017-10-27, OpenSSH upgrade.
+
+* Update to hterm 1.74.  Minor improvements.
+* Upgrade to OpenSSH 7.6p1.
+* Update mdocml to latest release.
+* Fix /dev/null pseudo file reads.
+* Update relay options if the hostname changes.
+* Rewrite translations in pure UTF-8.
+* Update translation help text.
+* Update translations.
+* Fix newline handling in translations.
+
 # 0.8.38, 2017-10-16, Bugfixes galore.
 
 * Update to libdot 1.19.  Bug fixes.
