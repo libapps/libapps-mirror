@@ -178,3 +178,91 @@ nassh.agent.messages
   message.writeString(signature);
   return message;
 };
+
+/**
+ * Types of SSH identity key blobs.
+ *
+ * @readonly
+ * @enum {!number}
+ */
+nassh.agent.messages.KeyBlobTypes = {
+  SSH_RSA: 1,
+};
+
+/**
+ * Map key blob types to generator function.
+ *
+ * @type {Object<!nassh.agent.messages.KeyBlobTypes,
+ *     function(...[*]): !Uint8Arrays>}
+ * @private
+ */
+nassh.agent.messages.keyBlobGenerators_ = {};
+
+/**
+ * Generate a key blob of a given type.
+ *
+ * @param {!nassh.agent.messages.KeyBlobTypes} type
+ * @param {...*} args Any number of arguments dictated by the key blob type.
+ * @returns {!Uint8Array} A key blob for use in the SSH agent protocol.
+ */
+nassh.agent.messages.generateKeyBlob = function(keyBlobType, ...args) {
+  if (nassh.agent.messages.keyBlobGenerators_.hasOwnProperty(keyBlobType)) {
+    return nassh.agent.messages.keyBlobGenerators_[keyBlobType](...args);
+  } else {
+    throw new Error(
+        `messages.generateKeyBlob: key blob type ${keyBlobType} not supported`);
+  }
+};
+
+/**
+ * Encode an unsigned integer as an mpint.
+ * @see https://tools.ietf.org/html/rfc4251#section-5
+ *
+ * @param {!Uint8Array} bytes Raw bytes of an unsigned integer.
+ * @returns {!Uint8Array} Wire encoding of an mpint
+ */
+nassh.agent.messages.encodeUnsignedMpint = function(bytes) {
+  let mpint = new Uint8Array(bytes);
+  let pos = 0;
+
+  // Strip leading zeros.
+  while (pos < mpint.length && !mpint[pos]) {
+    ++pos;
+  }
+  mpint = mpint.slice(pos);
+
+  // Add a leading zero if the positive result would otherwise be treated as a
+  // signed mpint.
+  if (mpint.length && (mpint[0] & (1 << 7))) {
+    mpint = lib.array.concatTyped(new Uint8Array([0]), mpint);
+  }
+  return mpint;
+};
+
+/**
+ * Generate a key blob for a public key of type 'ssh-rsa'.
+ * @see https://www.ietf.org/rfc/rfc4253
+ *
+ * @param {!Uint8Array} exponent The public exponent as an unsigned integer
+ *     (big endian).
+ * @param {!Uint8Array} modulus The modulus as an unsigned integer (big
+ *     endian).
+ * @returns {!Uint8Array} A key blob for use in the SSH agent protocol.
+ */
+nassh.agent.messages
+    .keyBlobGenerators_[nassh.agent.messages.KeyBlobTypes.SSH_RSA] = function(
+    exponent, modulus) {
+  const exponentMpint = nassh.agent.messages.encodeUnsignedMpint(exponent);
+  const modulusMpint = nassh.agent.messages.encodeUnsignedMpint(modulus);
+  // Byte representation of the string 'ssh-rsa'.
+  const BYTES_SSH_RSA =
+      new Uint8Array([0x73, 0x73, 0x68, 0x2D, 0x72, 0x73, 0x61]);
+  return lib.array.concatTyped(
+      new Uint8Array(lib.array.uint32ToArrayBigEndian(7)),
+      BYTES_SSH_RSA,
+      new Uint8Array(lib.array.uint32ToArrayBigEndian(exponentMpint.length)),
+      exponentMpint,
+      new Uint8Array(lib.array.uint32ToArrayBigEndian(modulusMpint.length)),
+      modulusMpint,
+  );
+};
