@@ -114,14 +114,33 @@ $ ./bin/promote.sh ./SecureShell-dev-0.8.36.2.zip
 
 Now the zip file under `dist/zip/` is ready for release.
 
-### Upload the (stable) Release
+### Upload the (stable) Release for Googlers
 
 Visit the [CWS] dashboard to upload your new zip file:<br>
 https://chrome.google.com/webstore/developer/edit/pnhechapfaindjhompbnflcldabbghjo
 
-### Announce!
+Look for "Upload Dogfood Version".  This will post the update only for Googlers
+to get some last minute feedback before releasing to the world.  If you want to
+control the release more, you can set the percentage field, but usually we leave
+it unset (i.e. 100%).
 
-This is the same as [announcing the dev release](#announce).
+### Internal Announce!
+
+This is the same as [announcing the dev release](#announce), except you'll only
+send to the [chrome-hterm group].
+
+### Upload the (stable) Release for Everyone
+
+Visit the [CWS] dashboard to upload your new zip file:<br>
+https://chrome.google.com/webstore/developer/edit/pnhechapfaindjhompbnflcldabbghjo
+
+This time use the "Upload Updated Package" option.  Once that's done, use
+"Remove" on the dogfood version so the display doesn't get confusing.
+
+### Public Announce!
+
+This is the same as [announcing the dev release](#announce), except you'll only
+send to the [chromium-hterm group].
 
 ### Reset Release Highlights
 
