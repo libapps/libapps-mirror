@@ -188,24 +188,10 @@ nassh.importPreferences = function(prefsObject, opt_onComplete) {
  * Create a new window to the options page for customizing preferences.
  */
 nassh.openOptionsPage = function() {
-  if (nassh.v2) {
-    var optionsWindow = chrome.app.window.get('options_page');
-    // If the options window is not open, opens it, else brings it to the
-    // foreground.
-    if (!optionsWindow) {
-      chrome.app.window.create('/html/nassh_preferences_editor.html', {
-        'bounds': {
-          'width': 700,
-          'height': 800
-        },
-        'id': 'options_page'
-      });
-    } else {
-      optionsWindow.focus();
-    }
-  } else {
+  if (window.chrome && chrome.runtime && chrome.runtime.openOptionsPage)
+    chrome.runtime.openOptionsPage();
+  else
     window.open('/html/nassh_preferences_editor.html');
-  }
 };
 
 nassh.reloadWindow = function() {
