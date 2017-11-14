@@ -234,7 +234,15 @@ def gen_table(codepoints):
         else:
             last = codepoint
     ranges.append([start, last])
+    return ranges
 
+
+def js_dumps(ranges):
+    """Dump a binary search table |ranges| as a Javascript object.
+
+    This is currently ad-hoc code but could easily use the json
+    module.  We do this to have better control over output format.
+    """
     ret = '[\n'
     i = 0
     for r in ranges:
@@ -302,17 +310,17 @@ def gen_combining(db, prob_db):
     # https://sourceware.org/bugzilla/show_bug.cgi?id=22074
     combining_chars |= set(range(0x1160, 0x11FF + 1))
 
-    return ('lib.wc.combining', gen_table(combining_chars))
+    return gen_table(combining_chars)
 
 
 def gen_east_asian(db):
     """Generate the table of all explicitly wide east asian characters."""
-    return ('lib.wc.unambiguous', gen_table(db['W'] | db['F']))
+    return gen_table(db['W'] | db['F'])
 
 
 def gen_east_asian_ambiguous(db):
     """Generate the table of explicit & ambiguous wide east asian characters."""
-    return ('lib.wc.ambiguous', gen_table(db['W'] | db['F'] | db['A']))
+    return gen_table(db['W'] | db['F'] | db['A'])
 
 
 def find_js(js):
@@ -343,9 +351,9 @@ def main(argv):
     cjk_db = load_east_asian()
 
     tables = (
-        gen_combining(uni_db, prop_db),
-        gen_east_asian(cjk_db),
-        gen_east_asian_ambiguous(cjk_db),
+        ('lib.wc.combining', js_dumps(gen_combining(uni_db, prop_db))),
+        ('lib.wc.unambiguous', js_dumps(gen_east_asian(cjk_db))),
+        ('lib.wc.ambiguous', js_dumps(gen_east_asian_ambiguous(cjk_db))),
     )
 
     if opts.action == 'print':
