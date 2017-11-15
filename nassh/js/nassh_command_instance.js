@@ -46,6 +46,9 @@ nassh.CommandInstance = function(argv) {
   // An HTML5 DirectoryEntry for /.ssh/.
   this.sshDirectoryEntry_ = null;
 
+  // The version of the ssh client to load.
+  this.sshClientVersion_ = 'pnacl';
+
   // Application ID of auth agent.
   this.authAgentAppID_ = null;
 
@@ -753,6 +756,16 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     if (relay.options['--ssh-agent'])
       params.authAgentAppID = relay.options['--ssh-agent'];
     params.authAgentForward = relay.options['auth-agent-forward'];
+
+    if (relay.options['--ssh-client-version'])
+      this.sshClientVersion_ = relay.options['--ssh-client-version'];
+  }
+
+  if (!this.sshClientVersion_.match(/^[a-zA-Z0-9.-]+$/)) {
+    this.io.println(nassh.msg('UNKNOWN_SSH_CLIENT_VERSION',
+                              [this.sshClientVersion_]));
+    this.exit(127);
+    return false;
   }
 
   this.authAgentAppID_ = params.authAgentAppID;
@@ -863,7 +876,7 @@ nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
        'width: 0;' +
        'height: 0;');
 
-  var pluginURL = '../plugin/pnacl/ssh_client.nmf';
+  const pluginURL = `../plugin/${this.sshClientVersion_}/ssh_client.nmf`;
 
   this.plugin_.setAttribute('src', pluginURL);
   this.plugin_.setAttribute('type', 'application/x-nacl');

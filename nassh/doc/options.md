@@ -64,3 +64,18 @@ manage keys or certificates or anything else an ssh agent can.
 Here's a list of known agents:
 
 * [gnubbyd beknehfpfkghjoafdifaflglpjkojoco](https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco)
+
+## `--ssh-client-version=<version>`
+
+The version of the ssh client to use.  Intended for mitigating regressions with
+newer versions of the plugin and quick version comparison.
+
+Support for older versions is not permanent and there is no guarantee that newer
+releases will continue to bundle them.  If you encounter problems with the
+default version and selecting a previous version makes things work, you need to
+[report a bug](https://goo.gl/vb94JY).
+
+Here are some versions that might be available:
+
+* `pnacl`: The default OpenSSH version built for NaCl most people should use.
+* `pnacl-openssh-7.5p1`: An older OpenSSH release.

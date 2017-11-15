@@ -443,6 +443,16 @@
 		"description": "Generic message displayed when we encounter an unexpected error.",
 		"message": "An unexpected error occurred, please check the JavaScript console for more details."
 	},
+	"UNKNOWN_SSH_CLIENT_VERSION": {
+		"description": "Displayed when the version requested by the user is not supported.",
+		"message": "Unknown SSH version: $VER$",
+		"placeholders": {
+			"ver": {
+				"content": "$1",
+				"example": "pnacl-openssh-7.4p1"
+			}
+		}
+	},
 	"UNMOUNT_BUTTON_LABEL": {
 		"description": "The label for the unmount button. Used to access (mount) remote directories over SSH.",
 		"message": "Unmount SFTP"

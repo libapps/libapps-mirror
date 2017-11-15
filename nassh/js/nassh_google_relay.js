@@ -149,6 +149,7 @@ nassh.GoogleRelay.parseOptionString.validOptions_ = [
   'report-ack-latency',
   'report-connect-attempts',
   'ssh-agent',
+  'ssh-client-version',
   'use-ssl',
   'use-xhr',
 ];
