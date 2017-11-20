@@ -1,3 +1,7 @@
+# 0.8.40.1, 2017-11-20, Multiple plugin support.
+
+* Add option to select different ssh client plugin versions.
+
 # 0.8.40, 2017-11-20, Pull in hterm fixes.
 
 * Update to hterm 1.75.  Many color/style/mouse fixes & features.
