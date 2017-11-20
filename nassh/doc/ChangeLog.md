@@ -1,3 +1,8 @@
+# 0.8.40, 2017-11-20, Pull in hterm fixes.
+
+* Update to hterm 1.75.  Many color/style/mouse fixes & features.
+* Use chrome.runtime.openOptionsPage helper.
+
 # 0.8.39, 2017-10-27, OpenSSH upgrade.
 
 * Update to hterm 1.74.  Minor improvements.
