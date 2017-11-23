@@ -571,10 +571,8 @@ nassh.ConnectDialog.prototype.updateNasshOptionsPlaceholder_ = function() {
     if (!hostname)
       hostname = this.$f('hostname').placeholder;
 
-    if (hostname.endsWith('.corp.google.com'))
+    if (hostname.match(/(\.corp\.google\.com|\.c\.googlers\.com)$/))
       value = '--config=google';
-    else if (hostname.endsWith('.c.googlers.com'))
-      value = '--config=google --proxy-host=sup-ssh-relay.corp.google.com';
   }
   this.$f('nassh-options', 'placeholder', value);
 };

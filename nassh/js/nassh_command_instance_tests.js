@@ -192,3 +192,36 @@ nassh.CommandInstance.Tests.addTest('tokenizeOptions', function(result, cx) {
 
   result.pass();
 });
+
+/**
+ * Verify default proxy-host settings.
+ */
+nassh.CommandInstance.Tests.addTest('defaultRelays', function(result, cx) {
+  let rv;
+
+  // Proxy host unrelated to Google.
+  rv = nassh.CommandInstance.tokenizeOptions(
+      '--proxy-host=proxy.example.com', 'example.com');
+  result.assertEQ('proxy.example.com', rv['--proxy-host']);
+  result.assertEQ(undefined, rv['--proxy-port']);
+
+  // Default Google settings.
+  rv = nassh.CommandInstance.tokenizeOptions(
+      '--config=google', 'example.com');
+  result.assertEQ('443', rv['--proxy-port']);
+  result.assertEQ('ssh-relay.corp.google.com', rv['--proxy-host']);
+
+  // Default cloudtop Google settings.
+  rv = nassh.CommandInstance.tokenizeOptions(
+      '--config=google', 'example.c.googlers.com');
+  result.assertEQ('443', rv['--proxy-port']);
+  result.assertEQ('sup-ssh-relay.corp.google.com', rv['--proxy-host']);
+
+  // Explicit proxy settings override defaults.
+  rv = nassh.CommandInstance.tokenizeOptions(
+      '--config=google --proxy-host=example.com', 'example.c.googlers.com');
+  result.assertEQ('443', rv['--proxy-port']);
+  result.assertEQ('example.com', rv['--proxy-host']);
+
+  result.pass();
+});

@@ -774,7 +774,8 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   // First tokenize the options into an object we can work with more easily.
   let options = {};
   try {
-    options = nassh.CommandInstance.tokenizeOptions(params.nasshOptions);
+    options = nassh.CommandInstance.tokenizeOptions(params.nasshOptions,
+                                                    params.hostname);
   } catch (e) {
     this.io.println(nassh.msg('NASSH_OPTIONS_ERROR', [e]));
     this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
@@ -935,9 +936,10 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
  * Turn the nassh option string into an object.
  *
  * @param {string=} optionString The set of --long options to parse.
+ * @param {string=} hostname The hostname we're connecting to.
  * @return {Object} A map of --option to its value.
  */
-nassh.CommandInstance.tokenizeOptions = function(optionString='') {
+nassh.CommandInstance.tokenizeOptions = function(optionString='', hostname='') {
   let rv = {};
 
   // If it's empty, return right away else the regex split below will create
@@ -972,9 +974,11 @@ nassh.CommandInstance.tokenizeOptions = function(optionString='') {
 
   // Handle various named "configs" we have.
   if (rv['--config'] == 'google') {
+    const proxyHost = hostname.endsWith('.c.googlers.com') ?
+        'sup-ssh-relay.corp.google.com' : 'ssh-relay.corp.google.com';
     rv = Object.assign({
       'auth-agent-forward': true,
-      '--proxy-host': 'ssh-relay.corp.google.com',
+      '--proxy-host': proxyHost,
       '--proxy-port': '443',
       '--use-ssl': true,
       '--report-ack-latency': true,
