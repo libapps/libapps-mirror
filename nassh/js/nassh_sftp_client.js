@@ -306,7 +306,7 @@ nassh.sftp.Client.prototype.fileHandleStatus = function(handle) {
  */
 nassh.sftp.Client.prototype.setFileStatus = function(path, attrs) {
   var packet = new nassh.sftp.Packet();
-  packet.setString(path);
+  packet.setString(this.basePath_ + path);
   nassh.sftp.packets.setFileAttrs(packet, attrs);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.SETSTAT, packet)
@@ -478,8 +478,8 @@ nassh.sftp.Client.prototype.removeFile = function(path) {
  */
 nassh.sftp.Client.prototype.renameFile = function(sourcePath, targetPath) {
   var packet = new nassh.sftp.Packet();
-  packet.setString(sourcePath);
-  packet.setString(targetPath);
+  packet.setString(this.basePath_ + sourcePath);
+  packet.setString(this.basePath_ + targetPath);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.RENAME, packet)
     .then(response => this.isSuccessResponse_(response, 'RENAME'));
