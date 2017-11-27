@@ -1,7 +1,22 @@
+# Copyright 2017 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
 # Defines the Chromium style for automatic reformatting.
 # https://clang.llvm.org/docs/ClangFormatStyleOptions.html
 BasedOnStyle: Chromium
 
+# Please keep all directives after this one sorted alphabetically.
+
+# C++ settings.
+---
+Language: Cpp
+
+# This is permitted by the Google and Chromium style guides.
+AllowAllParametersOfDeclarationOnNextLine: true
+
+# JavaScript settings.
+---
 Language: JavaScript
 
 # A few tweaks where the guides permit.
