@@ -121,7 +121,8 @@ lib.TestManager.Log = function(opt_console=console) {
   const oGroupEnd = this.console_.groupEnd;
   this.groupEnd = this.console_.groupEnd = () => {
     oGroupEnd();
-    this.prefix_ = '  '.repeat(--this.prefixStack_);
+    if (this.prefixStack_)
+      this.prefix_ = '  '.repeat(--this.prefixStack_);
   };
 };
 
