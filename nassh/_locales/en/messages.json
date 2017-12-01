@@ -55,6 +55,26 @@
 			}
 		}
 	},
+	"COMMAND_NOT_SUPPORTED": {
+		"description": "When a command is not supported on the current operating system.",
+		"message": "$COMMAND$ is not supported on this version of Chrome",
+		"placeholders": {
+			"command": {
+				"content": "$1",
+				"example": "crosh"
+			}
+		}
+	},
+	"COMMAND_STARTUP_FAILED": {
+		"description": "When running a command (e.g. ssh or crosh) failed to start.",
+		"message": "Launching $COMMAND$ failed.",
+		"placeholders": {
+			"command": {
+				"content": "$1",
+				"example": "crosh"
+			}
+		}
+	},
 	"CONNECTING": {
 		"description": "Status message shown when connecting to a SSH server.",
 		"message": "Connecting to $DESTINATION$...",

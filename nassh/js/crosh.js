@@ -109,7 +109,7 @@ Crosh.prototype.run = function() {
   this.io = this.argv_.io.push();
 
   if (!chrome.terminalPrivate) {
-    this.io.println("Crosh is not supported on this version of Chrome.");
+    this.io.println(nassh.msg('COMMAND_NOT_SUPPORTED', [this.commandName]));
     this.exit(1);
     return;
   }
@@ -122,7 +122,7 @@ Crosh.prototype.run = function() {
   document.body.onunload = this.close_.bind(this);
   chrome.terminalPrivate.openTerminalProcess(this.commandName, (pid) => {
     if (pid == undefined || pid == -1) {
-      this.io.println("Opening crosh process failed.");
+      this.io.println(nassh.msg('COMMAND_STARTUP_FAILED', [this.commandName]));
       this.exit(1);
       return;
     }
@@ -142,7 +142,8 @@ Crosh.prototype.run = function() {
 };
 
 Crosh.prototype.onBeforeUnload_ = function(e) {
-  var msg = 'Closing this tab will exit crosh.';
+  // Note: This message doesn't seem to be shown by browsers.
+  const msg = `Closing this tab will exit ${this.commandName}.`;
   e.returnValue = msg;
   return msg;
 };
@@ -228,8 +229,8 @@ Crosh.prototype.exit = function(code) {
     return;
   }
 
-  this.io.println('crosh exited with code: ' + code);
-  this.io.println('(R)e-execute, (C)hoose another connection, or E(x)it?');
+  this.io.println(nassh.msg('COMMAND_COMPLETE', [this.commandName, code]));
+  this.io.println(nassh.msg('RECONNECT_MESSAGE'));
   this.io.onVTKeystroke = (string) => {
     var ch = string.toLowerCase();
     if (ch == 'r' || ch == ' ' || ch == '\x0d' /* enter */ ||
