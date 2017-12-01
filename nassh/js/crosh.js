@@ -10,6 +10,12 @@ lib.rtdep('lib.f',
 // CSP means that we can't kick off the initialization from the html file,
 // so we do it like this instead.
 window.onload = function() {
+  const qs = lib.f.parseQuery(document.location.search);
+
+  if (qs['command'])
+    Crosh.prototype.commandName = qs['command'];
+  window.document.title = Crosh.prototype.commandName;
+
   lib.init(Crosh.init);
 };
 
