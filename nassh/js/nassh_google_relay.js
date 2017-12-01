@@ -128,7 +128,7 @@ nassh.GoogleRelay.parseOptionString = function(optionString) {
     if (!('--relay-protocol' in rv))
       rv['--relay-protocol'] = 'v2';
     if (!('--ssh-agent' in rv))
-      rv['--ssh-agent'] = 'beknehfpfkghjoafdifaflglpjkojoco';
+      rv['--ssh-agent'] = nassh.GoogleRelay.defaultGnubbyExtension;
   }
 
   return rv;
@@ -287,3 +287,44 @@ nassh.GoogleRelay.prototype.openSocket = function(fd, host, port, streams,
   return streams.openStream(streamClass,
       fd, {relay: this, host: host, port: port}, onOpen);
 };
+
+/**
+ * Find a usable gnubby extension.
+ */
+nassh.GoogleRelay.findGnubbyExtension = function() {
+  const appId = 'beknehfpfkghjoafdifaflglpjkojoco';
+  const extId = 'lkjlajklkdhaneeelolkfgbpikkgnkpk';
+
+  // Ping the extension to see if it's alive.
+  const check = (id) => new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage(id, {'type': 'HELLO'}, (result) => {
+      if (result !== undefined && result['rc'] == 0)
+        resolve(id);
+    });
+  });
+
+  // Pick a default in case neither is installed.
+  nassh.GoogleRelay.defaultGnubbyExtension = extId;
+
+  // We don't care which one is available, so go with the first response.
+  Promise.race([
+    check(appId),
+    check(extId),
+    new Promise((resolve, reject) => setTimeout(resolve, 1000)),
+  ]).then((foundId) => {
+    if (foundId)
+      nassh.GoogleRelay.defaultGnubbyExtension = foundId;
+  });
+};
+
+/**
+ * Register gnubby extension probing.
+ *
+ * This could take time to resolve, so do it as part of start up.
+ * It resolves using promises in the background, so this is OK.
+ */
+lib.registerInit('gnubby probe', function(onInit) {
+  nassh.GoogleRelay.findGnubbyExtension();
+
+  onInit();
+});
