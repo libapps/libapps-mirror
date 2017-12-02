@@ -33,10 +33,14 @@ lib.f.Tests.addTest('replaceVars', function(result, cx) {
 
 lib.f.Tests.addTest('parseQuery', function(result, cx) {
   // Can't use assertEQ directly because JS can't compare objects easily.
-  var ret = lib.f.parseQuery('var=value&foo=blah&cow=milky');
+  var ret = lib.f.parseQuery('var=value&foo=blah&cow=milky&clob=a&clob=b&' +
+                             'arr[]=1&arr[]=2&clobarr=x&clobarr[]=3');
   result.assertEQ(ret['var'], 'value');
   result.assertEQ(ret['foo'], 'blah');
   result.assertEQ(ret['cow'], 'milky');
+  result.assertEQ(ret['clob'], 'b');
+  result.assertEQ(ret['arr'], ['1', '2']);
+  result.assertEQ(ret['clobarr'], ['3']);
   result.pass();
 });
 

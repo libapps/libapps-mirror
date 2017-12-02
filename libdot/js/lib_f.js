@@ -100,7 +100,8 @@ lib.f.getAcceptLanguages.chromeSupported = function() {
  * This takes a url query string in the form 'name1=value&name2=value' and
  * converts it into an object of the form { name1: 'value', name2: 'value' }.
  * If a given name appears multiple times in the query string, only the
- * last value will appear in the result.
+ * last value will appear in the result.  If the name ends with [], it is
+ * turned into an array.
  *
  * Names and values are passed through decodeURIComponent before being added
  * to the result object.
@@ -117,7 +118,20 @@ lib.f.parseQuery = function(queryString) {
   var pairs = queryString.split('&');
   for (var i = 0; i < pairs.length; i++) {
     var pair = pairs[i].split('=');
-    rv[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+    let key = decodeURIComponent(pair[0]);
+    let val = decodeURIComponent(pair[1]);
+
+    if (key.endsWith('[]')) {
+      // It's an array.
+      key = key.slice(0, -2);
+      // The key doesn't exist, or wasn't an array before.
+      if (!(rv[key] instanceof Array))
+        rv[key] = [];
+      rv[key].push(val);
+    } else {
+      // It's a plain string.
+      rv[key] = val;
+    }
   }
 
   return rv;
