@@ -820,11 +820,14 @@ different app, visit the chrome://settings/handlers page.
   between à, á, â, ä, æ, etc...  This is a macOS feature that cannot be disabled
   on a per-application basis.
 
-  If you don't like this behavior, you can disable it globally by opening a
+  If you don't like this behavior, you can disable it in Chrome by opening a
   terminal and running:
 
-    defaults write -g ApplePressAndHoldEnabled -bool false
+    defaults write com.google.Chrome ApplePressAndHoldEnabled -bool false
 
+  Or disable it globally by running:
+
+    defaults write -g ApplePressAndHoldEnabled -bool false
 
 ### Can I rebind keys/shortcuts? {#keybindings}
 
