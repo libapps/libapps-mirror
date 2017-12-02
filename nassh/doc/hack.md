@@ -113,7 +113,8 @@ are already removed from the [manifest_ext.json] for the extension.
 
 * Access to [crosh](chromeos-crosh.md) under Chrome OS (`terminalPrivate`).
   [(1)](https://cs.chromium.org/search/?q=terminalPrivate)
-  [(2)](https://cs.chromium.org/chromium/src/chrome/browser/extensions/api/terminal/terminal_extension_helper.cc)
+  [(2)](https://cs.chromium.org/chromium/src/chrome/common/extensions/api/terminal_private.json)
+  [(3)](https://cs.chromium.org/chromium/src/chrome/browser/extensions/api/terminal/terminal_extension_helper.cc)
 * Access to raw sockets under NaCl.  This allows connecting directly to SSH
   servers (e.g. port 22).
   [(1)](https://cs.chromium.org/search/?q=kPredefinedAllowedSocketOrigins)

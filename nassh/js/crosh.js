@@ -52,7 +52,8 @@ Crosh.croshBuiltinId = 'nkoccljplnhpfnfiajclkommnmllphnl';
  * command.
  */
 Crosh.init = function() {
-  var profileName = lib.f.parseQuery(document.location.search)['profile'];
+  const qs = lib.f.parseQuery(document.location.search);
+  const profileName = qs['profile'];
   var terminal = new hterm.Terminal(profileName);
 
   terminal.decorate(document.querySelector('#terminal'));
@@ -64,7 +65,7 @@ Crosh.init = function() {
 
     terminal.setCursorPosition(0, 0);
     terminal.setCursorVisible(true);
-    terminal.runCommandClass(Crosh, document.location.hash.substr(1));
+    terminal.runCommandClass(Crosh, qs['args'] || []);
 
     terminal.command.keyboard_ = terminal.keyboard;
   };
@@ -126,7 +127,8 @@ Crosh.prototype.run = function() {
   chrome.terminalPrivate.onProcessOutput.addListener(
       this.onProcessOutput_.bind(this));
   document.body.onunload = this.close_.bind(this);
-  chrome.terminalPrivate.openTerminalProcess(this.commandName, (pid) => {
+
+  const pidInit = (pid) => {
     if (pid == undefined || pid == -1) {
       this.io.println(nassh.msg('COMMAND_STARTUP_FAILED', [this.commandName]));
       this.exit(1);
@@ -144,7 +146,15 @@ Crosh.prototype.run = function() {
     // Setup initial window size.
     this.onTerminalResize_(this.io.terminal_.screenSize.width,
                            this.io.terminal_.screenSize.height);
-  });
+  };
+
+  // The optional arguments field is new to Chrome M65.  Once that goes stable
+  // everywhere, we can drop this fallback logic.
+  const args = this.argv_.argString;
+  if (args.length)
+    chrome.terminalPrivate.openTerminalProcess(this.commandName, args, pidInit);
+  else
+    chrome.terminalPrivate.openTerminalProcess(this.commandName, pidInit);
 };
 
 Crosh.prototype.onBeforeUnload_ = function(e) {
