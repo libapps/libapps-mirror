@@ -519,9 +519,9 @@ nassh.CommandInstance.prototype.connectToProfile = function(
 /**
  * Parse ssh:// URIs.
  *
- * This supports most of the IANA spec:
+ * This supports the IANA spec:
  *   https://www.iana.org/assignments/uri-schemes/prov/ssh
- *   ssh://[<user>@]<host>[:<port>]
+ *   ssh://[<user>[;fingerprint=<hash>]@]<host>[:<port>]
  *
  * It also supports Secure Shell extensions to the protocol:
  *   ssh://[<user>@]<host>[:<port>][@<relay-host>[:<relay-port>]]
@@ -551,6 +551,7 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true) {
   if (!ary)
     return false;
 
+  let fingerprint;
   var username = ary[1];
   var hostname = ary[2];
   var port = ary[3];
@@ -566,9 +567,20 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true) {
       relayPort = ary[5];
   }
 
+  // See if the username has an embedded fingerprint.
+  if (username) {
+    ary = username.match(/^(.*);fingerprint=(.+)$/);
+    if (ary) {
+      username = ary[1];
+      // Should we parse the format here?
+      fingerprint = ary[2];
+    }
+  }
+
   return {
     username: username,
     hostname: hostname,
+    fingerprint: fingerprint,
     port: port,
     relayHostname: relayHostname,
     relayPort: relayPort,
@@ -613,6 +625,8 @@ nassh.CommandInstance.parseDestination = function(destination) {
       relayOptions += ' --proxy-port=' + rv.relayPort;
   }
   rv.relayOptions = relayOptions;
+
+  // If the fingerprint is set, maybe add it to the known keys list.
 
   return rv;
 };

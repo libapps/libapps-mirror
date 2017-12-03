@@ -86,6 +86,9 @@ nassh.CommandInstance.Tests.addTest('parseURI', function(result, cx) {
     ['u@h@relay', {'user': 'u', 'host': 'h', 'relay': 'relay'}],
     ['u@h@relay:2234', {'user': 'u', 'host': 'h', 'relay': 'relay',
                         'relayPort': '2234'}],
+
+    // Fingerprints.
+    ['u;fingerprint=foo@h', {'user': 'u', 'host': 'h', 'fingerprint': 'foo'}],
   ];
 
   let dataSet;
