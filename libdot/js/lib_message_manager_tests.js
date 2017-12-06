@@ -53,3 +53,49 @@ lib.MessageManager.Tests.addTest('processI18nAttribute', function(result, cx) {
 
   result.pass();
 });
+
+/**
+ * Check addMessages behavior.
+ */
+lib.MessageManager.Tests.addTest('add-messages', function(result, cx) {
+  const mm = new lib.MessageManager([]);
+
+  mm.addMessages({
+    'SOME_ID': {
+      'description': 'This is goodness',
+      'message': 'text',
+    },
+    'ID_REPLACE': {
+      'message': 'foo $1 bar $2',
+    },
+  });
+  result.assertEQ('text', mm.messages['SOME_ID']);
+  result.assertEQ('foo $1 bar $2', mm.messages['ID_REPLACE']);
+
+  result.pass();
+});
+
+/**
+ * Verify get with registered messages work.
+ */
+lib.MessageManager.Tests.addTest('get-local', function(result, cx) {
+  const mm = new lib.MessageManager([]);
+
+  mm.addMessages({
+    'SOME_ID': {
+      'description': 'This is goodness',
+      'message': 'text',
+    },
+    'ID_REPLACE': {
+      'message': 'foo $1 bar $2',
+    },
+  });
+
+  result.assertEQ('text', mm.get('SOME_ID'));
+  result.assertEQ('text', mm.get('SOME_ID', []));
+  result.assertEQ('text', mm.get('SOME_ID', [], 'not used'));
+  result.assertEQ('foo', mm.get('UNKNOWN', [], 'foo'));
+  result.assertEQ('foo X bar Y', mm.get('ID_REPLACE', ['X', 'Y']));
+
+  result.pass();
+});

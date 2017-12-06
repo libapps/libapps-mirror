@@ -150,7 +150,9 @@ lib.MessageManager.prototype.get = function(msgname, opt_args, opt_default) {
 
     if (!message) {
       console.warn('Unknown message: ' + msgname);
-      return (typeof opt_default == 'undefined') ? msgname : opt_default;
+      message = opt_default === undefined ? msgname : opt_default;
+      // Register the message with the default to avoid multiple warnings.
+      this.messages[msgname] = message;
     }
   }
 
