@@ -577,9 +577,11 @@ nassh.PreferencesEditor.prototype.createInput = function(key) {
 
 nassh.PreferencesEditor.prototype.getPreferenceDescription = function(key) {
   var entry = hterm.PreferenceManager.defaultPreferences[key];
-  if (entry)
-    return entry[3];
-  return '';
+  if (entry === undefined)
+    return '';
+
+  const id = 'PREF_' + key.replace(/-/g, '_').toUpperCase();
+  return hterm.msg(id, [], entry[3]);
 }
 
 nassh.PreferencesEditor.prototype.getPreferenceType = function(key) {

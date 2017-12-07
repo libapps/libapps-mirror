@@ -215,6 +215,250 @@
 			}
 		}
 	},
+	"HTERM_PREF_ALT_BACKSPACE_IS_META_BACKSPACE": {
+		"description": "Help text shown for the hterm 'alt-backspace-is-meta-backspace' preference.",
+		"message": "If set, undoes the Chrome OS Alt-Backspace->DEL remap, so that alt-backspace indeed is alt-backspace."
+	},
+	"HTERM_PREF_ALT_GR_MODE": {
+		"description": "Help text shown for the hterm 'alt-gr-mode' preference.",
+		"message": "Select an AltGr detection hack^Wheuristic.\n\n'null': Autodetect based on navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Disable any AltGr related munging.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
+	},
+	"HTERM_PREF_ALT_IS_META": {
+		"description": "Help text shown for the hterm 'alt-is-meta' preference.",
+		"message": "Set whether the alt key acts as a meta key or as a distinct alt key."
+	},
+	"HTERM_PREF_ALT_SENDS_WHAT": {
+		"description": "Help text shown for the hterm 'alt-sends-what' preference.",
+		"message": "Controls how the alt key is handled.\n\n  escape....... Send an ESC prefix.\n  8-bit........ Add 128 to the unshifted character as in xterm.\n  browser-key.. Wait for the keypress event and see what the browser\n                says.  (This won't work well on platforms where the\n                browser performs a default action for some alt sequences.)"
+	},
+	"HTERM_PREF_AUDIBLE_BELL_SOUND": {
+		"description": "Help text shown for the hterm 'audible-bell-sound' preference.",
+		"message": "URL of the terminal bell sound.  Empty string for no audible bell."
+	},
+	"HTERM_PREF_BACKGROUND_COLOR": {
+		"description": "Help text shown for the hterm 'background-color' preference.",
+		"message": "The background color for text with no other color attributes."
+	},
+	"HTERM_PREF_BACKGROUND_IMAGE": {
+		"description": "Help text shown for the hterm 'background-image' preference.",
+		"message": "CSS value of the background image.  Empty string for no image.\n\nFor example:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"HTERM_PREF_BACKGROUND_POSITION": {
+		"description": "Help text shown for the hterm 'background-position' preference.",
+		"message": "CSS value of the background image position.\n\nFor example:\n  10% 10%\n  center"
+	},
+	"HTERM_PREF_BACKGROUND_SIZE": {
+		"description": "Help text shown for the hterm 'background-size' preference.",
+		"message": "CSS value of the background image size.  Defaults to none."
+	},
+	"HTERM_PREF_BACKSPACE_SENDS_BACKSPACE": {
+		"description": "Help text shown for the hterm 'backspace-sends-backspace' preference.",
+		"message": "If true, the backspace should send BS ('\\x08', aka ^H).  Otherwise the backspace key should send '\\x7f'."
+	},
+	"HTERM_PREF_CHARACTER_MAP_OVERRIDES": {
+		"description": "Help text shown for the hterm 'character-map-overrides' preference.",
+		"message": "This is specified as an object. It is a sparse array, where each property is the character set code and the value is an object that is a sparse array itself. In that sparse array, each property is the received character and the value is the displayed character.\n\nFor example:\n  {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+	},
+	"HTERM_PREF_CLEAR_SELECTION_AFTER_COPY": {
+		"description": "Help text shown for the hterm 'clear-selection-after-copy' preference.",
+		"message": "Whether to clear the selection after copying."
+	},
+	"HTERM_PREF_CLOSE_ON_EXIT": {
+		"description": "Help text shown for the hterm 'close-on-exit' preference.",
+		"message": "Whether or not to close the window when the command exits."
+	},
+	"HTERM_PREF_COLOR_PALETTE_OVERRIDES": {
+		"description": "Help text shown for the hterm 'color-palette-overrides' preference.",
+		"message": "Override colors in the default palette.\n\nThis can be specified as an array or an object.  If specified as an object it is assumed to be a sparse array, where each property is a numeric index into the color palette.\n\nValues can be specified as almost any css color value.  This includes #RGB, #RRGGBB, rgb(...), rgba(...), and any color names that are also part of the stock X11 rgb.txt file.\n\nYou can use 'null' to specify that the default value should be not be changed.  This is useful for skipping a small number of indices when the value is specified as an array."
+	},
+	"HTERM_PREF_COPY_ON_SELECT": {
+		"description": "Help text shown for the hterm 'copy-on-select' preference.",
+		"message": "Automatically copy mouse selection to the clipboard."
+	},
+	"HTERM_PREF_CTRL_C_COPY": {
+		"description": "Help text shown for the hterm 'ctrl-c-copy' preference.",
+		"message": "Ctrl+C copies if true, send ^C to host if false.\nCtrl+Shift+C sends ^C to host if true, copies if false."
+	},
+	"HTERM_PREF_CTRL_PLUS_MINUS_ZERO_ZOOM": {
+		"description": "Help text shown for the hterm 'ctrl-plus-minus-zero-zoom' preference.",
+		"message": "If true, Ctrl-Plus/Minus/Zero controls zoom.\nIf false, Ctrl-Shift-Plus/Minus/Zero controls zoom, Ctrl-Minus sends ^_, Ctrl-Plus/Zero do nothing."
+	},
+	"HTERM_PREF_CTRL_V_PASTE": {
+		"description": "Help text shown for the hterm 'ctrl-v-paste' preference.",
+		"message": "Ctrl+V pastes if true, send ^V to host if false.\nCtrl+Shift+V sends ^V to host if true, pastes if false."
+	},
+	"HTERM_PREF_CURSOR_BLINK": {
+		"description": "Help text shown for the hterm 'cursor-blink' preference.",
+		"message": "Whether or not to blink the cursor by default."
+	},
+	"HTERM_PREF_CURSOR_BLINK_CYCLE": {
+		"description": "Help text shown for the hterm 'cursor-blink-cycle' preference.",
+		"message": "The cursor blink rate in milliseconds.\n\nA two element array, the first of which is how long the cursor should be on, second is how long it should be off."
+	},
+	"HTERM_PREF_CURSOR_COLOR": {
+		"description": "Help text shown for the hterm 'cursor-color' preference.",
+		"message": "The color of the visible cursor."
+	},
+	"HTERM_PREF_DESKTOP_NOTIFICATION_BELL": {
+		"description": "Help text shown for the hterm 'desktop-notification-bell' preference.",
+		"message": "If true, terminal bells in the background will create a Web Notification. https://www.w3.org/TR/notifications/\n\nDisplaying notifications requires permission from the user. When this option is set to true, hterm will attempt to ask the user for permission if necessary. Note browsers may not show this permission request if it did not originate from a user action.\n\nChrome extensions with the \"notifications\" permission have permission to display notifications."
+	},
+	"HTERM_PREF_EAST_ASIAN_AMBIGUOUS_AS_TWO_COLUMN": {
+		"description": "Help text shown for the hterm 'east-asian-ambiguous-as-two-column' preference.",
+		"message": "Set whether East Asian Ambiguous characters have two column width."
+	},
+	"HTERM_PREF_ENABLE_8_BIT_CONTROL": {
+		"description": "Help text shown for the hterm 'enable-8-bit-control' preference.",
+		"message": "True to enable 8-bit control characters, false to ignore them.\n\nWe'll respect the two-byte versions of these control characters regardless of this setting."
+	},
+	"HTERM_PREF_ENABLE_BLINK": {
+		"description": "Help text shown for the hterm 'enable-blink' preference.",
+		"message": "True if we should respect the blink attribute.  False to ignore it.  "
+	},
+	"HTERM_PREF_ENABLE_BOLD": {
+		"description": "Help text shown for the hterm 'enable-bold' preference.",
+		"message": "True if we should use bold weight font for text with the bold/bright attribute.  False to use the normal weight font.  Null to autodetect."
+	},
+	"HTERM_PREF_ENABLE_BOLD_AS_BRIGHT": {
+		"description": "Help text shown for the hterm 'enable-bold-as-bright' preference.",
+		"message": "True if we should use bright colors (8-15 on a 16 color palette) for any text with the bold attribute.  False otherwise."
+	},
+	"HTERM_PREF_ENABLE_CLIPBOARD_NOTICE": {
+		"description": "Help text shown for the hterm 'enable-clipboard-notice' preference.",
+		"message": "Show a message in the terminal when the host writes to the clipboard."
+	},
+	"HTERM_PREF_ENABLE_CLIPBOARD_WRITE": {
+		"description": "Help text shown for the hterm 'enable-clipboard-write' preference.",
+		"message": "Allow the remote host to write directly to the local system clipboard.\nRead access is never granted regardless of this setting.\n\nThis is used to control access to features like OSC-52."
+	},
+	"HTERM_PREF_ENABLE_DEC12": {
+		"description": "Help text shown for the hterm 'enable-dec12' preference.",
+		"message": "Respect the host's attempt to change the cursor blink status using DEC Private Mode 12."
+	},
+	"HTERM_PREF_ENVIRONMENT": {
+		"description": "Help text shown for the hterm 'environment' preference.",
+		"message": "The default environment variables, as an object."
+	},
+	"HTERM_PREF_FONT_FAMILY": {
+		"description": "Help text shown for the hterm 'font-family' preference.",
+		"message": "Default font family for the terminal text."
+	},
+	"HTERM_PREF_FONT_SIZE": {
+		"description": "Help text shown for the hterm 'font-size' preference.",
+		"message": "The default font size in pixels."
+	},
+	"HTERM_PREF_FONT_SMOOTHING": {
+		"description": "Help text shown for the hterm 'font-smoothing' preference.",
+		"message": "CSS font-smoothing property."
+	},
+	"HTERM_PREF_FOREGROUND_COLOR": {
+		"description": "Help text shown for the hterm 'foreground-color' preference.",
+		"message": "The foreground color for text with no other color attributes."
+	},
+	"HTERM_PREF_HOME_KEYS_SCROLL": {
+		"description": "Help text shown for the hterm 'home-keys-scroll' preference.",
+		"message": "If true, home/end will control the terminal scrollbar and shift home/end will send the VT keycodes.  If false then home/end sends VT codes and shift home/end scrolls."
+	},
+	"HTERM_PREF_KEYBINDINGS": {
+		"description": "Help text shown for the hterm 'keybindings' preference.",
+		"message": "A map of key sequence to key actions.  Key sequences include zero or more modifier keys followed by a key code.  Key codes can be decimal or hexadecimal numbers, or a key identifier.  Key actions can be specified a string to send to the host, or an action identifier.  For a full explanation of the format, see https://goo.gl/LWRndr.\n\nSample keybindings:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+	},
+	"HTERM_PREF_MEDIA_KEYS_ARE_FKEYS": {
+		"description": "Help text shown for the hterm 'media-keys-are-fkeys' preference.",
+		"message": "If true, convert media keys to their Fkey equivalent. If false, let the browser handle the keys."
+	},
+	"HTERM_PREF_META_SENDS_ESCAPE": {
+		"description": "Help text shown for the hterm 'meta-sends-escape' preference.",
+		"message": "Set whether the meta key sends a leading escape or not."
+	},
+	"HTERM_PREF_MOUSE_PASTE_BUTTON": {
+		"description": "Help text shown for the hterm 'mouse-paste-button' preference.",
+		"message": "Mouse paste button, or null to autodetect.\n\nFor autodetect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS).  On X11, we'll use the right mouse button (since the native window manager should paste via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is activate independent of the \"mouse-right-click-paste\" setting.\n\nNote: This will handle left & right handed mice correctly."
+	},
+	"HTERM_PREF_MOUSE_RIGHT_CLICK_PASTE": {
+		"description": "Help text shown for the hterm 'mouse-right-click-paste' preference.",
+		"message": "Paste on right mouse button clicks.\n\nThis option is activate independent of the \"mouse-paste-button\" setting.\n\nNote: This will handle left & right handed mice correctly."
+	},
+	"HTERM_PREF_PAGE_KEYS_SCROLL": {
+		"description": "Help text shown for the hterm 'page-keys-scroll' preference.",
+		"message": "If true, page up/down will control the terminal scrollbar and shift page up/down will send the VT keycodes.  If false then page up/down sends VT codes and shift page up/down scrolls."
+	},
+	"HTERM_PREF_PASS_ALT_NUMBER": {
+		"description": "Help text shown for the hterm 'pass-alt-number' preference.",
+		"message": "Set whether we should pass Alt-1..9 to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard accelerators.  When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Alt-1..9 will be handled by the browser.  If false, Alt-1..9 will be sent to the host.  If null, autodetect based on browser platform and window type."
+	},
+	"HTERM_PREF_PASS_CTRL_NUMBER": {
+		"description": "Help text shown for the hterm 'pass-ctrl-number' preference.",
+		"message": "Set whether we should pass Ctrl-1..9 to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard accelerators.  When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Ctrl-1..9 will be handled by the browser.  If false, Ctrl-1..9 will be sent to the host.  If null, autodetect based on browser platform and window type."
+	},
+	"HTERM_PREF_PASS_META_NUMBER": {
+		"description": "Help text shown for the hterm 'pass-meta-number' preference.",
+		"message": "Set whether we should pass Meta-1..9 to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard accelerators.  When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Meta-1..9 will be handled by the browser.  If false, Meta-1..9 will be sent to the host.  If null, autodetect based on browser platform and window type."
+	},
+	"HTERM_PREF_PASS_META_V": {
+		"description": "Help text shown for the hterm 'pass-meta-v' preference.",
+		"message": "Set whether meta-V gets passed to host."
+	},
+	"HTERM_PREF_RECEIVE_ENCODING": {
+		"description": "Help text shown for the hterm 'receive-encoding' preference.",
+		"message": "Set the expected encoding for data received from the host.\n\nValid values are 'utf-8' and 'raw'."
+	},
+	"HTERM_PREF_SCROLLBAR_VISIBLE": {
+		"description": "Help text shown for the hterm 'scrollbar-visible' preference.",
+		"message": "The vertical scrollbar mode."
+	},
+	"HTERM_PREF_SCROLL_ON_KEYSTROKE": {
+		"description": "Help text shown for the hterm 'scroll-on-keystroke' preference.",
+		"message": "If true, scroll to the bottom on any keystroke."
+	},
+	"HTERM_PREF_SCROLL_ON_OUTPUT": {
+		"description": "Help text shown for the hterm 'scroll-on-output' preference.",
+		"message": "If true, scroll to the bottom on terminal output."
+	},
+	"HTERM_PREF_SCROLL_WHEEL_MAY_SEND_ARROW_KEYS": {
+		"description": "Help text shown for the hterm 'scroll-wheel-may-send-arrow-keys' preference.",
+		"message": "When using the alternative screen buffer, and DECCKM (Application Cursor Keys) is active, mouse wheel scroll events will emulate arrow keys.\n\nIt can be temporarily disabled by holding the shift key.\n\nThis frequently comes up when using pagers (less) or reading man pages or text editors (vi/nano) or using screen/tmux."
+	},
+	"HTERM_PREF_SCROLL_WHEEL_MOVE_MULTIPLIER": {
+		"description": "Help text shown for the hterm 'scroll-wheel-move-multiplier' preference.",
+		"message": "The multiplier for the pixel delta in wheel events caused by the scroll wheel. Alters how fast the page scrolls."
+	},
+	"HTERM_PREF_SEND_ENCODING": {
+		"description": "Help text shown for the hterm 'send-encoding' preference.",
+		"message": "Set the encoding for data sent to host."
+	},
+	"HTERM_PREF_SHIFT_INSERT_PASTE": {
+		"description": "Help text shown for the hterm 'shift-insert-paste' preference.",
+		"message": "Shift + Insert pastes if true, sent to host if false."
+	},
+	"HTERM_PREF_TERMINAL_ENCODING": {
+		"description": "Help text shown for the hterm 'terminal-encoding' preference.",
+		"message": "The default terminal encoding (DOCS).\n\nISO-2022 enables character map translations (like graphics maps).\nUTF-8 disables support for those.\n\nThe locked variant means the encoding cannot be changed at runtime via terminal escape sequences.\n\nYou should stick with UTF-8 unless you notice broken rendering with legacy applications."
+	},
+	"HTERM_PREF_USER_CSS": {
+		"description": "Help text shown for the hterm 'user-css' preference.",
+		"message": "URL of user stylesheet to include in the terminal document."
+	},
+	"HTERM_PREF_USER_CSS_TEXT": {
+		"description": "Help text shown for the hterm 'user-css-text' preference.",
+		"message": "Custom CSS text for styling the terminal."
+	},
+	"HTERM_PREF_USE_DEFAULT_WINDOW_COPY": {
+		"description": "Help text shown for the hterm 'use-default-window-copy' preference.",
+		"message": "Whether to use the default window copy behavior"
+	},
+	"HTERM_PREF_WORD_BREAK_MATCH_LEFT": {
+		"description": "Help text shown for the hterm 'word-break-match-left' preference.",
+		"message": "Regular expression to halt matching to the left (start) of a selection.\n\nNormally this is a character class to reject specific characters.\nWe allow \"~\" and \".\" by default as paths frequently start with those."
+	},
+	"HTERM_PREF_WORD_BREAK_MATCH_MIDDLE": {
+		"description": "Help text shown for the hterm 'word-break-match-middle' preference.",
+		"message": "Regular expression to match all the characters in the middle.\n\nNormally this is a character class to reject specific characters.\n\nUsed to expand the selection surrounding the starting point."
+	},
+	"HTERM_PREF_WORD_BREAK_MATCH_RIGHT": {
+		"description": "Help text shown for the hterm 'word-break-match-right' preference.",
+		"message": "Regular expression to halt matching to the right (end) of a selection.\n\nNormally this is a character class to reject specific characters."
+	},
 	"IDENTITY_LABEL": {
 		"description": "Label for the identity field. The identity is a SSH private key filename used to authenticate with servers.",
 		"message": "Identity"
