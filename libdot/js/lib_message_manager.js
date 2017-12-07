@@ -96,17 +96,12 @@ lib.MessageManager.prototype.loadMessages = function(
     url, onSuccess, opt_onError) {
   var xhr = new XMLHttpRequest();
 
-  xhr.onloadend = function() {
-    if (xhr.status != 200) {
-      if (opt_onError)
-        opt_onError(xhr.status);
-
-      return;
-    }
-
+  xhr.onload = () => {
     this.addMessages(JSON.parse(xhr.responseText));
     onSuccess();
-  }.bind(this);
+  };
+  if (opt_onError)
+    xhr.onerror = () => opt_onError(xhr);
 
   xhr.open('GET', url);
   xhr.send();
