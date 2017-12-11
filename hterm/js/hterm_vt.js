@@ -722,6 +722,87 @@ hterm.VT.prototype.parseCSI_ = function(parseState) {
 };
 
 /**
+ * Parse a Device Control String and dispatch it.
+ *
+ * See [DCS] for some useful information about these codes.
+ *
+ * @param {!hterm.VT.ParseState} parseState The current parse state.
+ */
+hterm.VT.prototype.parseDCS_ = function(parseState) {
+  const ch = parseState.peekChar();
+  const args = parseState.args;
+
+  const finishParsing = () => {
+    // Resetting the arguments isn't strictly necessary, but it makes debugging
+    // less confusing (otherwise args will stick around until the next sequence
+    // that needs arguments).
+    parseState.resetArguments();
+    parseState.resetParseFunction();
+  };
+
+  if (ch >= '@' && ch <= '~') {
+    // This is the final character.
+    parseState.advance(1);
+    this.dispatch('DCS', this.leadingModifier_ + this.trailingModifier_ + ch,
+                  parseState);
+
+    // Don't reset the parser function if it's being handled.
+    // The dispatched method must handle ST termination itself.
+    if (parseState.func === this.parseDCS_) {
+      parseState.func = this.parseUntilStringTerminator_;
+    }
+    return;
+
+  } else if (ch === ';') {
+    // Parameter delimiter.
+    if (this.trailingModifier_) {
+      // Parameter delimiter after the trailing modifier.  Abort parsing.
+      finishParsing();
+
+    } else {
+      if (!args.length) {
+        // They omitted the first param, we need to supply it.
+        args.push('');
+      }
+
+      args.push('');
+    }
+
+  } else if (ch >= '0' && ch <= '9') {
+    // Next byte in the current parameter.
+
+    if (this.trailingModifier_) {
+      // Numeric parameter after the trailing modifier.  Abort parsing.
+      finishParsing();
+    } else {
+      if (!args.length) {
+        args[0] = ch;
+      } else {
+        args[args.length - 1] += ch;
+      }
+    }
+
+  } else if (ch >= ' ' && ch <= '?') {
+    // Modifier character.
+    if (!args.length) {
+      this.leadingModifier_ += ch;
+    } else {
+      this.trailingModifier_ += ch;
+    }
+
+  } else if (this.cc1Pattern_.test(ch)) {
+    // Control character.
+    this.dispatch('CC1', ch, parseState);
+
+  } else {
+    // Unexpected character in sequence, bail out.
+    finishParsing();
+  }
+
+  parseState.advance(1);
+};
+
+/**
  * Skip over the string until the next String Terminator (ST, 'ESC \') or
  * Bell (BEL, '\x07').
  *
@@ -1070,6 +1151,15 @@ hterm.VT.ESC = {};
 hterm.VT.CSI = {};
 
 /**
+ * Collection of DCS (Device Control String) sequences.
+ *
+ * These sequences begin with 'ESC P', may take zero or more arguments, and are
+ * normally terminated by ST.  Registered handlers have to consume the ST if
+ * they change the active parser func.
+ */
+hterm.VT.DCS = {};
+
+/**
  * Collection of OSC (Operating System Control) sequences.
  *
  * These sequences begin with 'ESC ]', followed by a function number and a
@@ -1340,7 +1430,6 @@ hterm.VT.ESC['O'] = hterm.VT.ignore;
  * Device Control String (DCS).
  *
  * Indicate a DCS sequence.  See Device-Control functions in [XTERM].
- * Not currently implemented.
  *
  * TODO(rginda): Consider implementing DECRQSS, the rest don't seem applicable.
  *
@@ -1350,7 +1439,9 @@ hterm.VT.ESC['O'] = hterm.VT.ignore;
 hterm.VT.CC1['\x90'] =
 hterm.VT.ESC['P'] = function(parseState) {
   parseState.resetArguments();
-  parseState.func = this.parseUntilStringTerminator_;
+  this.leadingModifier_ = '';
+  this.trailingModifier_ = '';
+  parseState.func = this.parseDCS_;
 };
 
 /**

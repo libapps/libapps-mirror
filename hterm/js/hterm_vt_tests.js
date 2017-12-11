@@ -3495,4 +3495,45 @@ it('scroll-region', function() {
   });
 });
 
+/**
+ * Verify DCS with no arguments works.
+ */
+it('dcs-nop', function() {
+  const terminal = this.terminal;
+  const dcs = '\x1bP';
+  const st = '\x1b\\';
+
+  // DCS start and then immediate ST.
+  this.terminal.interpret(dcs + st);
+  assert.equal(0, terminal.getCursorRow());
+  assert.equal(0, terminal.getCursorColumn());
+  assert.equal('', terminal.getRowText(0));
+  assert(terminal.vt.parseState_.isComplete());
+
+  // Find a command that isn't registered.
+  const cmd = 'X';
+  assert.isUndefined(hterm.VT.DCS[cmd]);
+
+  // DCS start, then an unknown command, then ST.
+  this.terminal.interpret(dcs + cmd + st);
+  assert.equal(0, terminal.getCursorRow());
+  assert.equal(0, terminal.getCursorColumn());
+  assert.equal('', terminal.getRowText(0));
+  assert(terminal.vt.parseState_.isComplete());
+
+  // DCS start, then some arguments, then an unknown command, then ST.
+  this.terminal.interpret(dcs + '0;1;2;3;999' + cmd + st);
+  assert.equal(0, terminal.getCursorRow());
+  assert.equal(0, terminal.getCursorColumn());
+  assert.equal('', terminal.getRowText(0));
+  assert(terminal.vt.parseState_.isComplete());
+
+  // DCS start, then arguments, then an unknown command, then data, then ST.
+  this.terminal.interpret(dcs + '0;1;2;3;999' + cmd + 'asdf' + st);
+  assert.equal(0, terminal.getCursorRow());
+  assert.equal(0, terminal.getCursorColumn());
+  assert.equal('', terminal.getRowText(0));
+  assert(terminal.vt.parseState_.isComplete());
+});
+
 });
