@@ -25,14 +25,15 @@ lib.fs = {};
  *
  * @template T
  * @param {string} msg The message prefix to use in the log.
- * @param {T=} opt_callback A function to invoke after logging.
+ * @param {T=} callback A function to invoke after logging.
  * @return {T} The wrapper function to call.
  */
-lib.fs.log = function(msg, opt_callback) {
+lib.fs.log = function(msg, callback) {
   return function(...args) {
     console.log(msg + ': ' + args.join(', '));
-    if (opt_callback)
-      opt_callback.apply(null, args);
+    if (callback) {
+      callback.apply(null, args);
+    }
   };
 };
 
@@ -44,14 +45,15 @@ lib.fs.log = function(msg, opt_callback) {
  *
  * @template T
  * @param {string} msg The message prefix to use in the log.
- * @param {T=} opt_callback A function to invoke after logging.
+ * @param {T=} callback A function to invoke after logging.
  * @return {T} The wrapper function to call.
  */
-lib.fs.err = function(msg, opt_callback) {
+lib.fs.err = function(msg, callback) {
   return function(...args) {
     console.error(msg + ': ' + args.join(', '), lib.f.getStack());
-    if (opt_callback)
-      opt_callback.apply(null, args);
+    if (callback) {
+      callback.apply(null, args);
+    }
   };
 };
 

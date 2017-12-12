@@ -45,16 +45,14 @@ lib.resource.add = function(name, type, data) {
  * The resource data is stored on the "data" property of the returned object.
  *
  * @param {string} name The name of the resource to get.
- * @param {!lib.resource.ResourceRecord=} opt_defaultValue The optional value
- *     to return if the resource is not defined.
+ * @param {!lib.resource.ResourceRecord=} defaultValue The value to return if
+ *     the resource is not defined.
  * @return {!lib.resource.ResourceRecord} The matching resource if it exists.
  */
-lib.resource.get = function(name, opt_defaultValue) {
+lib.resource.get = function(name, defaultValue) {
   if (!(name in lib.resource.resources_)) {
-    if (typeof opt_defaultValue == 'undefined')
-      throw 'Unknown resource: ' + name;
-
-    return opt_defaultValue;
+    lib.assert(defaultValue !== undefined);
+    return defaultValue;
   }
 
   return lib.resource.resources_[name];
@@ -64,16 +62,12 @@ lib.resource.get = function(name, opt_defaultValue) {
  * Retrieve resource data.
  *
  * @param {string} name The name of the resource to get.
- * @param {*=} opt_defaultValue The optional value to return if the resource is
- *   not defined.
+ * @param {*=} defaultValue The value to return if the resource is not defined.
  * @return {*} The resource data.
  */
-lib.resource.getData = function(name, opt_defaultValue) {
+lib.resource.getData = function(name, defaultValue) {
   if (!(name in lib.resource.resources_)) {
-    if (typeof opt_defaultValue == 'undefined')
-      throw 'Unknown resource: ' + name;
-
-    return opt_defaultValue;
+    return defaultValue;
   }
 
   return lib.resource.resources_[name].data;
@@ -83,11 +77,11 @@ lib.resource.getData = function(name, opt_defaultValue) {
  * Retrieve resource as a data: url.
  *
  * @param {string} name The name of the resource to get.
- * @param {!lib.resource.ResourceRecord=} opt_defaultValue The optional value
- *     to return if the resource is not defined.
+ * @param {!lib.resource.ResourceRecord=} defaultValue The value to return if
+ *     the resource is not defined.
  * @return {string} A data: url encoded version of the resource.
  */
-lib.resource.getDataUrl = function(name, opt_defaultValue) {
-  var resource = lib.resource.get(name, opt_defaultValue);
+lib.resource.getDataUrl = function(name, defaultValue) {
+  var resource = lib.resource.get(name, defaultValue);
   return 'data:' + resource.type + ',' + resource.data;
 };

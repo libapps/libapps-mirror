@@ -127,26 +127,25 @@ lib.MessageManager.prototype.loadMessages = function(url) {
  * Get a message by name, optionally replacing arguments too.
  *
  * @param {string} msgname String containing the name of the message to get.
- * @param {!Array<string>=} opt_args Optional array containing the argument
- *     values.
- * @param {string=} opt_default Optional value to return if the msgname is not
+ * @param {!Array<string>=} args Optional array containing the argument values.
+ * @param {string=} fallback Optional value to return if the msgname is not
  *     found.  Returns the message name by default.
  * @return {string} The formatted translation.
  */
-lib.MessageManager.prototype.get = function(msgname, opt_args, opt_default) {
+lib.MessageManager.prototype.get = function(msgname, args, fallback) {
   // First try the integrated browser getMessage.  We prefer that over any
   // registered messages as only the browser supports translations.
-  let message = lib.i18n.getMessage(msgname, opt_args);
+  let message = lib.i18n.getMessage(msgname, args);
   if (!message) {
     // Look it up in the registered cache next.
     message = this.messages_[msgname];
     if (!message) {
       console.warn('Unknown message: ' + msgname);
-      message = opt_default === undefined ? msgname : opt_default;
+      message = fallback === undefined ? msgname : fallback;
       // Register the message with the default to avoid multiple warnings.
       this.messages_[msgname] = message;
     }
-    message = lib.i18n.replaceReferences(message, opt_args);
+    message = lib.i18n.replaceReferences(message, args);
   }
   if (this.useCrlf) {
     message = message.replace(/\n/g, '\r\n');

@@ -17,13 +17,13 @@
  *
  * @param {!lib.Storage} storage The storage object to use as a backing
  *     store.
- * @param {string=} opt_prefix The optional prefix to be used for all preference
+ * @param {string=} prefix The optional prefix to be used for all preference
  *     names.  The '/' character should be used to separate levels of hierarchy,
  *     if you're going to have that kind of thing.  If provided, the prefix
  *     should start with a '/'.  If not provided, it defaults to '/'.
  * @constructor
  */
-lib.PreferenceManager = function(storage, opt_prefix) {
+lib.PreferenceManager = function(storage, prefix = '/') {
   this.storage = storage;
   this.storageObserver_ = this.onStorageChange_.bind(this);
 
@@ -32,7 +32,6 @@ lib.PreferenceManager = function(storage, opt_prefix) {
 
   this.trace = false;
 
-  var prefix = opt_prefix || '/';
   if (!prefix.endsWith('/'))
     prefix += '/';
 
@@ -777,16 +776,17 @@ lib.PreferenceManager.prototype.exportAsJson = function() {
  * This will create nested preference managers as well.
  *
  * @param {!Object} json The JSON settings to import.
- * @param {function()=} opt_onComplete
+ * @param {function()=} onComplete Callback when all imports have finished.
  */
-lib.PreferenceManager.prototype.importFromJson = function(json, opt_onComplete) {
+lib.PreferenceManager.prototype.importFromJson = function(json, onComplete) {
   this.isImportingJson_ = true;
 
   let pendingWrites = 0;
   const onWriteStorage = () => {
     if (--pendingWrites < 1) {
-      if (opt_onComplete)
-        opt_onComplete();
+      if (onComplete) {
+        onComplete();
+      }
 
       // We've delayed updates to the child arrays, so flush them now.
       for (let name in json)
@@ -819,8 +819,9 @@ lib.PreferenceManager.prototype.importFromJson = function(json, opt_onComplete) 
 
   // If we didn't update any children, no async work has been queued, so make
   // the completion callback directly.
-  if (pendingWrites == 0 && opt_onComplete)
-    opt_onComplete();
+  if (pendingWrites == 0 && onComplete) {
+    onComplete();
+  }
 };
 
 /**

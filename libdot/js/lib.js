@@ -44,17 +44,18 @@ lib.registerInit = function(name, callback) {
  *
  * @param {function()} onInit The function to invoke when initialization is
  *     complete.
- * @param {function(*)=} opt_logFunction An optional function to send
- *     initialization related log messages to.
+ * @param {function(*)=} logFunction An optional function to send initialization
+ *     related log messages to.
  */
-lib.init = function(onInit, opt_logFunction) {
+lib.init = function(onInit, logFunction) {
   var ary = lib.initCallbacks_;
 
   var initNext = function() {
     if (ary.length) {
       var rec = ary.shift();
-      if (opt_logFunction)
-        opt_logFunction('init: ' + rec[0]);
+      if (logFunction) {
+        logFunction(`init: ${rec[0]}`);
+      }
       rec[1](initNext);
     } else {
       onInit();
