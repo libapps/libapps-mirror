@@ -369,3 +369,19 @@ lib.f.getOs = function() {
   // Still here?  No idea.
   return Promise.reject(null);
 };
+
+/**
+ * Get the current Chrome milestone version.
+ *
+ * @return {number} The milestone number if we're running on Chrome, else NaN.
+ */
+lib.f.getChromeMilestone = function() {
+  if (window.navigator && navigator.userAgent) {
+    const ary = navigator.userAgent.match(/\sChrome\/(\d+)/);
+    if (ary)
+      return parseInt(ary[1]);
+  }
+
+  // Returning NaN will make all number comparisons fail.
+  return NaN;
+};

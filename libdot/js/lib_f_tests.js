@@ -115,3 +115,15 @@ lib.f.Tests.addTest('getOs', function(result, cx) {
 
   result.requestTime(200);
 });
+
+/**
+ * Simple smoke test.
+ */
+lib.f.Tests.addTest('getChromeMilestone', function(result, cx) {
+  const milestone = lib.f.getChromeMilestone();
+  if (window.chrome)
+    result.assert(milestone > 30);
+  else
+    result.assert(isNaN(milestone));
+  result.pass();
+});
