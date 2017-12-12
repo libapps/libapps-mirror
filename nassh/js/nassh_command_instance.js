@@ -1218,6 +1218,10 @@ function isSftpInitResponse(data) {
  * SFTP Initialization handler. Mounts the SFTP connection as a file system.
  */
 nassh.CommandInstance.prototype.onSftpInitialised = function() {
+  // Newer versions of Chrome support this API, but olders will error out.
+  if (lib.f.getChromeMilestone() >= 64)
+    this.mountOptions['persistent'] = false;
+
   // Mount file system.
   chrome.fileSystemProvider.mount(this.mountOptions);
 
