@@ -332,3 +332,40 @@ lib.f.smartFloorDivide = function(numerator,  denominator) {
 lib.f.randomInt = function(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
+
+/**
+ * Get the current OS.
+ *
+ * @return {Promise<string>} A promise that resolves to a constant in
+ *     runtime.PlatformOs.
+ */
+lib.f.getOs = function() {
+  // Try the brower extensions API.
+  if (window.browser && browser.runtime && browser.runtime.getPlatformInfo)
+    return browser.runtime.getPlatformInfo().then((info) => info.os);
+
+  // Use the native Chrome API if available.
+  if (window.chrome && chrome.runtime && chrome.runtime.getPlatformInfo) {
+    return new Promise((resolve, reject) =>
+        chrome.runtime.getPlatformInfo((info) => resolve(info.os)));
+  }
+
+  // Fallback logic.  Capture the major OS's.  The rest should support the
+  // browser API above.
+  if (window.navigator && navigator.userAgent) {
+    const ua = navigator.userAgent;
+    if (ua.includes('Mac OS X'))
+      return Promise.resolve('mac');
+    else if (ua.includes('CrOS'))
+      return Promise.resolve('cros');
+    else if (ua.includes('Linux'))
+      return Promise.resolve('linux');
+    else if (ua.includes('Android'))
+      return Promise.resolve('android');
+    else if (ua.includes('Windows'))
+      return Promise.resolve('windows');
+  }
+
+  // Still here?  No idea.
+  return Promise.reject(null);
+};

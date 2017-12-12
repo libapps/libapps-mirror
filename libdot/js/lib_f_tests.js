@@ -102,3 +102,16 @@ lib.f.Tests.addTest('randomInt', function(result, cx) {
 
   result.pass();
 });
+
+/**
+ * Simple smoke test.  Relies on a lot on current runtime as we don't mock
+ * out all the runtime APIs that this code uses.
+ */
+lib.f.Tests.addTest('getOs', function(result, cx) {
+  lib.f.getOs().then((os) => {
+    result.assert(os.length > 0);
+    result.pass();
+  });
+
+  result.requestTime(200);
+});
