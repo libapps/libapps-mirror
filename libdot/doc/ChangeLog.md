@@ -1,3 +1,13 @@
+# 1.20, 2017-12-13, Features & fixes.
+
+* refactor ranges.py for better modularity
+* add sanity check for empty test selection
+* parseQuery: support arrays
+* run replacements on default messages too
+* fix loadMessages callback
+* add a lib.f.getOs helper
+* add a lib.f.getChromeMilestone helper
+
 # 1.19, 2017-10-16, Bug fixes.
 
 * Fix message lookup on non-Chrome browsers.
