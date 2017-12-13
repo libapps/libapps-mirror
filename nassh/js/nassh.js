@@ -112,8 +112,8 @@ nassh.exportPreferences = function(onComplete) {
   var pendingReads = 0;
   var rv = {};
 
-  var onReadStorage = function(terminalProfile, prefs) {
-    rv.hterm[terminalProfile] = prefs.exportAsJson();
+  var onReadStorage = function(profile, prefs) {
+    rv.hterm[profile] = prefs.exportAsJson();
     if (--pendingReads < 1)
       onComplete(rv);
   };
@@ -123,29 +123,22 @@ nassh.exportPreferences = function(onComplete) {
 
   var nasshPrefs = new nassh.PreferenceManager();
   nasshPrefs.readStorage(function() {
+    // Export all the connection settings.
     rv.nassh = nasshPrefs.exportAsJson();
+
+    // Save all the profiles.
     rv.hterm = {};
-
-    var profileIds = nasshPrefs.get('profile-ids');
-    if (profileIds.length == 0) {
-      onComplete(rv);
-      return;
-    }
-
-    for (var i = 0; i < profileIds.length; i++) {
-      var nasshProfilePrefs = nasshPrefs.getChild('profile-ids', profileIds[i]);
-      var terminalProfile = nasshProfilePrefs.get('terminal-profile');
-      if (!terminalProfile)
-        terminalProfile = 'default';
-
-      if (!(terminalProfile in rv.hterm)) {
-        rv.hterm[terminalProfile] = null;
-
-        var prefs = new hterm.PreferenceManager(terminalProfile);
-        prefs.readStorage(onReadStorage.bind(null, terminalProfile, prefs));
+    hterm.PreferenceManager.listProfiles((profiles) => {
+      profiles.forEach((profile) => {
+        rv.hterm[profile] = null;
+        const prefs = new hterm.PreferenceManager(profile);
+        prefs.readStorage(onReadStorage.bind(null, profile, prefs));
         pendingReads++;
-      }
-    }
+      });
+
+      if (profiles.length == 0)
+        onComplete(rv);
+    });
   });
 };
 
