@@ -1,3 +1,18 @@
+# 0.8.41, 2017-12-13, Features & fixes galore.
+
+* Update to libdot 1.20.  Features & fixes.
+* Update to hterm 1.76.  Standards/compatibility fixes & OSC-8 links & OSC-1337 image features.
+* Refactor and reformat before adding PIV.
+* Set base path for SFTP RENAME and SETSTAT packets.
+* support multiple gnubby extensions.
+* crosh: finish localizing messages.
+* crosh: set default background color to black.
+* FAQ: extend the macOS auto-repeat entry.
+* support translating all the hterm preferences.
+* add a lib.f.getOs helper.
+* mark sftp mounts as non-persistent across logouts.
+* include all profiles all the time when backing up.
+
 # 0.8.40.1, 2017-11-20, Multiple plugin support.
 
 * Add option to select different ssh client plugin versions.
