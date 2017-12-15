@@ -760,10 +760,15 @@ lib.PreferenceManager.prototype.importFromJson = function(json, opt_onComplete) 
       }
 
     } else {
-      this.set(name, json[name], onWriteStorage);
-      pendingWrites++;
+      // The set is synchronous.
+      this.set(name, json[name]);
     }
   }
+
+  // If we didn't update any children, no async work has been queued, so make
+  // the completion callback directly.
+  if (pendingWrites == 0 && opt_onComplete)
+    opt_onComplete();
 };
 
 /**
