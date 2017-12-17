@@ -74,13 +74,14 @@ DEFINE_string tmpdir "" \
   "Temporary directory.  Will default to workdir/tmp if not specified." t
 DEFINE_string workdir "" \
   "Work directory.  Zip files will be created here." w
+DEFINE_string manifest "manifest.json" \
+  "The manifest file to use." m
 
 FLAGS "$@" || exit $?
 eval set -- "${FLAGS_ARGV}"
 
 # Whitelist of files to be included in the zip file as POSIX egrep expressions.
 FILE_PATTERNS='
-    \./manifest.json
     \./audio/.*\.ogg
     \./css/.*\.css
     \./html/.*\.html
@@ -267,8 +268,8 @@ init_promote() {
 function init_from_dir() {
   local source="$1"
 
-  local name=$(get_manifest_key_value "name" "$source/manifest.json")
-  local version=$(get_manifest_key_value "version" "$source/manifest.json")
+  local name=$(get_manifest_key_value "name" "$source/${FLAGS_manifest}")
+  local version=$(get_manifest_key_value "version" "$source/${FLAGS_manifest}")
 
   local new_name new_version
   init_promote "${name}" "${version}"
@@ -294,6 +295,7 @@ function init_from_dir() {
   set +f  # Re-enable expansion.
 
   rsync -qa --relative $files "$zipdir"
+  cp "${FLAGS_manifest}" "${zipdir}/manifest.json"
 
   set -f  # Disable filename expansion.
 

@@ -85,6 +85,10 @@
 			}
 		}
 	},
+	"CONNECTION_DIALOG_NAME": {
+		"description": "Name for the main connection dialog when shown in lists.",
+		"message": "Connection Dialog"
+	},
 	"CONNECT_BUTTON_LABEL": {
 		"description": "Label for the connect button.",
 		"message": "Connect"

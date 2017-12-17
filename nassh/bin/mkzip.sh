@@ -33,4 +33,6 @@ export MORE_FILE_PATTERNS_EXCLUDE='
   .*/images/\(promo\|screenshot\)-.*\.\(jpg\|png\)$
 '
 
-mkzip.sh -s "." -w ./dist/zip/ "$@"
+for manifest in manifest_*.json; do
+  mkzip.sh -s "." -w ./dist/zip/ -m "${manifest}" "$@"
+done

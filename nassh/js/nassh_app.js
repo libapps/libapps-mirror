@@ -197,6 +197,16 @@ nassh.App.prototype.installOmnibox = function(omnibox) {
 };
 
 /**
+ * Bind our callbacks to the browser action button (for extensions).
+ */
+nassh.App.prototype.installBrowserAction = function() {
+  if (!nassh.browserAction)
+    return;
+
+  nassh.browserAction.onClicked.addListener(this.onLaunched.bind(this));
+};
+
+/**
  * Bind our callbacks to the runtime.
  *
  * @param {object} runtime The runtime instance to bind to.
@@ -207,13 +217,21 @@ nassh.App.prototype.installHandlers = function(runtime) {
 };
 
 nassh.App.prototype.onLaunched = function(e) {
-  chrome.app.window.create('/html/nassh.html', {
-    'bounds': {
-      'width': 900,
-      'height': 600
-    },
-    'id': 'mainWindow'
-  });
+  const width = 900;
+  const height = 600;
+  if (chrome.app.window) {
+    chrome.app.window.create('/html/nassh.html', {
+      'bounds': {
+        'width': width,
+        'height': height,
+      },
+      'id': 'mainWindow',
+    });
+  } else {
+    window.open(lib.f.getURL('/html/nassh.html'), '',
+                'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
+                `minimizable=yes,width=${width},height=${height}`);
+  }
 };
 
 nassh.App.prototype.onUpdateAvailable_ = function(e) {

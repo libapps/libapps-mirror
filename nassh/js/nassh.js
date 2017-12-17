@@ -14,6 +14,14 @@ var nassh = {};
 nassh.v2 = !!chrome.app.window;
 
 /**
+ * Non-null if nassh is running as an extension.
+ */
+nassh.browserAction =
+    window.browser && browser.browserAction ? browser.browserAction :
+    window.chrome && chrome.browserAction ? chrome.browserAction :
+    null;
+
+/**
  * Register a static initializer for nassh.*.
  *
  * @param {function} onInit The function lib.init() wants us to invoke when

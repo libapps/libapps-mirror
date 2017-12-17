@@ -68,20 +68,48 @@ and relaunch the Secure Shell app.
 # Loading Unpacked Extensions
 
 Loading directly from the checked out nassh directory is the normal way of
-testing.  It will use the dev extension id (`okddffdblfhhnmhodogpojmfkjmhinfp`)
-to avoid conflicts with the stable extension id, although it will still conflict
-if you have the dev version installed from the CWS.
+testing.  It will use the dev extension id to avoid conflicts with the stable
+extension id, although it will still conflict if you have the dev version
+installed from the CWS.
 
-The extension id is controlled by the `key` field in the [manifest.json].  See
+You will need to manually select the variant you want to work on.  The extension
+is defined by the [manifest_ext.json] file while the app is defined by the
+[manifest_v1.5.json] file.  Simply symlink it to manifest.json:
+
+    nassh$ ln -s manifest_v1.5.json manifest.json
+
+The extension id is controlled by the `key` field in the manifest.json.  See
 the [manifest key docs](https://developer.chrome.com/extensions/manifest/key)
 for more details.
+
+## Manifests
+
+There are three manifest files in here currently.  The [manifest_v1.5.json] is
+used to build the Secure Shell App and has been what we've used for the longest
+time, but is largely for Chrome OS only now.  The [manifest_ext.json] is used to
+build the Secure Shell Extension which works on all platforms (but lacks any
+Chrome OS specific features).
+
+The [manifest_v2.json] is not used currently.  Some day we might finish the
+migration and replace [manifest_v1.5.json] with it so we only have one app
+manifest.  Today it is not often tested.
+
+The "v1.5" and "v2" app formats should not be confused with the "v1" and "v2"
+manifest formats.  Secure Shell uses the legacy/deprecated "v1.5" app style to
+launch itself rather than the "v2" style.  It means that, in many ways, the
+"v1.5" app behaves more like an extension (e.g. it shares cookies with your main
+browser instance and can run inside a tab) rather than an app (e.g. it doesn't
+get access to many newer `chrome.app.*` APIs).
+
+See the [FAQ] for more details on the differences between the extension & app.
 
 ## Whitelisted Permissions
 
 Using the dev extension id is necessary in order to access some APIs that are
 whitelisted only for Secure Shell.  If you don't need these features, you can
 get by with using a different id (and delete the settings from the
-[manifest.json] to avoid warnings at runtime).
+[manifest_v1.5.json] for the app to avoid warnings at runtime).  These settings
+are already removed from the [manifest_ext.json] for the extension.
 
 * Access to [crosh](chromeos-crosh.md) under Chrome OS (`terminalPrivate`).
   [(1)](https://cs.chromium.org/search/?q=terminalPrivate)
@@ -91,7 +119,7 @@ get by with using a different id (and delete the settings from the
   [(1)](https://cs.chromium.org/search/?q=kPredefinedAllowedSocketOrigins)
   <br>
   Note: Making connections over https using relay servers will still work
-  though.  See the FAQ for more details.
+  though.  See the [FAQ] for more details.
 * SFTP backend for Chrome OS (`fileSystemProvider` and
   `file_system_provider_capabilities`).
   [(1)](https://cs.chromium.org/chromium/src/chrome/common/extensions/api/_permission_features.json)
@@ -100,12 +128,16 @@ get by with using a different id (and delete the settings from the
   is still a "legacy packaged app", we had to whitelist access.
 
 To double check what & where things are whitelisted, search the Chromium code
-base for out extension ids:
+base for our extension ids:
 
 * [pnhechapfaindjhompbnflcldabbghjo](https://cs.chromium.org/search/?q=pnhechapfaindjhompbnflcldabbghjo):
-  Stable ID
+  Stable App ID
 * [okddffdblfhhnmhodogpojmfkjmhinfp](https://cs.chromium.org/search/?q=okddffdblfhhnmhodogpojmfkjmhinfp):
-  Dev ID
+  Dev App ID
+* [iodihamcpbpeioajjeobimgagajmlibd](https://cs.chromium.org/search/?q=iodihamcpbpeioajjeobimgagajmlibd):
+  Stable Extension ID
+* [algkcnfjnajfhgimadimbjhmpaeohhln](https://cs.chromium.org/search/?q=algkcnfjnajfhgimadimbjhmpaeohhln):
+  Dev Extension ID
 * [nkoccljplnhpfnfiajclkommnmllphnl](https://cs.chromium.org/search/?q=nkoccljplnhpfnfiajclkommnmllphnl):
   Crosh ID
 * [0EA6B717932AD64C469C1CCB6911457733295907](https://cs.chromium.org/search/?q=0EA6B717932AD64C469C1CCB6911457733295907):
@@ -159,10 +191,11 @@ The vast majority of the code here lives under [js/].
 * [doc/]: Documentation files.
 * [html/]: The main UI objects.
   * [crosh.html]: Chrome OS developer shell.  Not used outside of Chrome OS.
+  * [nassh.html]: The main ssh terminal page.
   * [nassh_connect_dialog.html]: The main connection dialog.
   * [nassh_google_relay.html]: Stub page when redirecting with external relay.
-  * [nassh.html]: The main ssh terminal page.
-  * [nassh_preferences_editor.html]: The extensions options page.
+  * [nassh_preferences_editor.html]: The options page.
+  * [nassh_popup.html]: The small popup when using the extension (not the app).
   * [nassh_test.html]: Run all available unittests.
 * [images/]: Various extension images.
 * [js/]: The majority of relevant code for this extension.
@@ -170,7 +203,9 @@ The vast majority of the code here lives under [js/].
   * See the section below.
 * [_locales/]: [Translations](https://developer.chrome.com/extensions/i18n) of strings shown to the user.
 * plugin/: Compiled NaCl & output from [ssh_client]
-* [manifest.json]: The Chrome extension manifest.
+* [manifest_ext.json]: The Chrome manifest for the extension.
+* [manifest_v1.5.json]: The Chrome manifest for the "v1.5" app.
+* [manifest_v2.json]: The Chrome manifest for the "v2" app.
 
 ## JavaScript Source Layout
 
@@ -222,9 +257,11 @@ Secure Shell logic.
 * Code for hooking into [wash].  Only used with that.
   * [nassh_executables.js]
   * [nassh_nassh.js]
-* Connections page specific code
-  * [nassh_column_list.js]
-  * [nassh_connect_dialog.js]
+* Connections page specific code (i.e. [nassh_connect_dialog.html]).
+  * [nassh_column_list.js]: Utility code for showing things in columns.
+  * [nassh_connect_dialog.js]: The main connection dialog page.
+* Extension popup specific code (i.e. [nassh_popup.html]).
+  * [nassh_extension_popup.js]: The extension popup startup logic.
 * Redirection page specific code
   * [nassh_google_relay_html.js]
 * Options page specific code
@@ -336,7 +373,10 @@ protocol.
 [images/]: ../images/
 [js/]: ../js/
 [_locales/]: ../_locales/
-[manifest.json]: ../manifest.json
+
+[manifest_ext.json]: ../manifest_ext.json
+[manifest_v1.5.json]: ../manifest_v1.5.json
+[manifest_v2.json]: ../manifest_v2.json
 
 [chrome-bootstrap.css]: ../css/chrome-bootstrap.css
 [nassh_box.css]: ../css/nassh_box.css
@@ -344,12 +384,15 @@ protocol.
 [nassh_preferences_editor.css]: ../css/nassh_preferences_editor.css
 
 [crosh.html]: ../html/crosh.html
+[nassh.html]: ../html/nassh.html
 [nassh_connect_dialog.html]: ../html/nassh_connect_dialog.html
 [nassh_google_relay.html]: ../html/nassh_google_relay.html
-[nassh.html]: ../html/nassh.html
+[nassh_popup.html]: ../html/nassh_popup.html
 [nassh_preferences_editor.html]: ../html/nassh_preferences_editor.html
+[nassh_test.html]: ../html/nassh_test.html
 
 [crosh.js]: ../js/crosh.js
+[nassh.js]: ../js/nassh.js
 [nassh_agent.js]: ../js/nassh_agent.js
 [nassh_agent_backend.js]: ../js/nassh_agent_backend.js
 [nassh_agent_backend_gsc.js]: ../js/nassh_agent_backend_gsc.js
@@ -361,9 +404,9 @@ protocol.
 [nassh_command_instance.js]: ../js/nassh_command_instance.js
 [nassh_connect_dialog.js]: ../js/nassh_connect_dialog.js
 [nassh_executables.js]: ../js/nassh_executables.js
+[nassh_extension_popup.js]: ../js/nassh_extension_popup.js
 [nassh_google_relay_html.js]: ../js/nassh_google_relay_html.js
 [nassh_google_relay.js]: ../js/nassh_google_relay.js
-[nassh.js]: ../js/nassh.js
 [nassh_main.js]: ../js/nassh_main.js
 [nassh_nassh.js]: ../js/nassh_nassh.js
 [nassh_preference_manager.js]: ../js/nassh_preference_manager.js
@@ -379,6 +422,8 @@ protocol.
 [nassh_stream_sshagent.js]: ../js/nassh_stream_sshagent.js
 [nassh_stream_sshagent_relay.js]: ../js/nassh_stream_sshagent_relay.js
 [nassh_stream_tty.js]: ../js/nassh_stream_tty.js
+
+[FAQ]: FAQ.md
 
 [gnubbyd]: https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco
 [ssh_client]: ../../ssh_client/

@@ -10,7 +10,8 @@ All new releases first go through the dev version of the extension.  This way
 we can get early feedback from testers on obvious issues without breaking the
 (much larger) stable user base.
 
-https://chrome.google.com/webstore/developer/detail/okddffdblfhhnmhodogpojmfkjmhinfp
+https://chrome.google.com/webstore/developer/detail/okddffdblfhhnmhodogpojmfkjmhinfp<br>
+https://chrome.google.com/webstore/developer/detail/algkcnfjnajfhgimadimbjhmpaeohhln
 
 ### Updating Dependencies
 
@@ -36,9 +37,8 @@ We don't currently use signed tags.
 ### Source Prepare
 
 Update the [ChangeLog.md](./ChangeLog.md) file with any relevant details since
-the last release, and update the version in the
-[manifest.json](../manifest.json).  Add any significant changes to
-concat/release-highlights.txt.
+the last release, and update the version in all of the manifest_*.json files.
+Add any significant changes to concat/release-highlights.txt.
 
 See commit [6b11740fa3eb500ea07efc684af7e75543ea3448] and tag [nassh-0.8.36.2]
 as examples.
@@ -65,7 +65,8 @@ so make sure it's clean!
 ### Upload the (dev) Release
 
 Visit the [CWS] dashboard to upload the new zip file:<br>
-https://chrome.google.com/webstore/developer/edit/okddffdblfhhnmhodogpojmfkjmhinfp
+https://chrome.google.com/webstore/developer/edit/okddffdblfhhnmhodogpojmfkjmhinfp<br>
+https://chrome.google.com/webstore/developer/edit/algkcnfjnajfhgimadimbjhmpaeohhln
 
 ### Announce! {#announce}
 
@@ -93,7 +94,8 @@ You can use this extension:<br>
 https://chrome.google.com/webstore/detail/dijpllakibenlejkbajahncialkbdkjc
 
 Then visit the dev page:<br>
-https://chrome.google.com/webstore/detail/okddffdblfhhnmhodogpojmfkjmhinfp
+https://chrome.google.com/webstore/detail/okddffdblfhhnmhodogpojmfkjmhinfp<br>
+https://chrome.google.com/webstore/detail/algkcnfjnajfhgimadimbjhmpaeohhln
 
 Then download the CRX using that extension.
 
@@ -117,7 +119,8 @@ Now the zip file under `dist/zip/` is ready for release.
 ### Upload the (stable) Release for Googlers
 
 Visit the [CWS] dashboard to upload your new zip file:<br>
-https://chrome.google.com/webstore/developer/edit/pnhechapfaindjhompbnflcldabbghjo
+https://chrome.google.com/webstore/developer/edit/pnhechapfaindjhompbnflcldabbghjo<br>
+https://chrome.google.com/webstore/developer/edit/iodihamcpbpeioajjeobimgagajmlibd
 
 Look for "Upload Dogfood Version".  This will post the update only for Googlers
 to get some last minute feedback before releasing to the world.  If you want to
@@ -132,7 +135,8 @@ send to the [chrome-hterm group].
 ### Upload the (stable) Release for Everyone
 
 Visit the [CWS] dashboard to upload your new zip file:<br>
-https://chrome.google.com/webstore/developer/edit/pnhechapfaindjhompbnflcldabbghjo
+https://chrome.google.com/webstore/developer/edit/pnhechapfaindjhompbnflcldabbghjo<br>
+https://chrome.google.com/webstore/developer/edit/iodihamcpbpeioajjeobimgagajmlibd
 
 This time use the "Upload Updated Package" option.  Once that's done, use
 "Remove" on the dogfood version so the display doesn't get confusing.

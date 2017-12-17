@@ -7,7 +7,8 @@ build of OpenSSH to provide a PuTTY-like app for Chrome users.
 
 You can install via the Chrome Web Store (CWS):
 
-https://chrome.google.com/webstore/detail/pnhechapfaindjhompbnflcldabbghjo
+* All platforms: [Extension](https://chrome.google.com/webstore/detail/iodihamcpbpeioajjeobimgagajmlibd)
+* Chrome OS: [Application](https://chrome.google.com/webstore/detail/pnhechapfaindjhompbnflcldabbghjo)
 
 # Contact
 

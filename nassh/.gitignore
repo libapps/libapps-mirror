@@ -7,3 +7,6 @@ js/*.concat.js
 
 # Stuff we build for distribution
 dist
+
+# Local dev files.
+/manifest.json

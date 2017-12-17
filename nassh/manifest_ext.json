@@ -1,10 +1,10 @@
 {
-  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDixnK8f4AuZrV+QZx7iiONG/SAiU5VrjlXD2KxRGvI6tDJrLvUin+GpcuMH1d/Qrc0+PmCzJ1duAiD/9F2q8kiYwQ1C3gZmztYneAiVX+3/OvXHr/idyueNQ5XFvBnMCpKD0KqPEksP80utV417fuaHAY4NFjofLZyWUvu23XHRwIDAQAB",
-  "minimum_chrome_version": "57",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl8sdzpPbCg8pDh/1zrwU17WdrQROlsJsuxGA0RkMX0T0+b/Tarh4YcSA5NDhAqVO3hA8acmYnjkCCOMpP0roceVLBUOag9WxhpXak4A0ZPrwZi2bLPjx+gxkccyAp8bXwskSvjaL+vF/+zN8PT9yDz/Np7WJmfakksDPAZSoCnbykVbaEtpG8qbbUPgmjndrHkgV9cMjpNLAd+GnlARyQ/DceBPtA27z06N/nV+hS7TRIQJTx7XwH6rGKSJ1gn61/wtBWqZQyL3PA6997++55GYtWVB4pmLPXa0vog3GF2wFYf3geD9v2jfP4t9PhPZy9zESr6fP4nqd1HXd6pzamwIDAQAB",
+  "minimum_chrome_version": "65",
   "manifest_version": 2,
   "content_security_policy": "script-src 'self'; object-src 'self'",
-  "name": "Secure Shell (tot)",
-  "version": "0.8.42",
+  "name": "Secure Shell Extension (tot)",
+  "version": "0.1.7",
   "default_locale": "en",
   "icons": {
     "128": "images/dev/icon-128.png",
@@ -19,17 +19,9 @@
     "clipboardWrite",
     "notifications",
     "storage",
-    "terminalPrivate",
-    "unlimitedStorage",
-    "fileSystemProvider"
+    "unlimitedStorage"
   ],
-  "file_system_provider_capabilities": {
-    "source": "network",
-    "multiple_mounts": true,
-    "configurable": false
-  },
   "web_accessible_resources": [
-    "html/crosh.html",
     "html/nassh.html",
     "html/nassh_google_relay.html",
     "html/nassh_connect_dialog.html"
@@ -42,24 +34,11 @@
       "js/nassh.js",
       "js/nassh_app.js",
       "js/nassh_preference_manager.js",
-      "js/nassh_stream.js",
-      "js/nassh_stream_set.js",
-      "js/nassh_stream_tty.js",
-      "js/nassh_stream_sshagent.js",
-      "js/nassh_stream_sshagent_relay.js",
-      "js/nassh_stream_google_relay.js",
-      "js/nassh_google_relay.js",
-      "js/nassh_sftp_client.js",
-      "js/nassh_sftp_packet.js",
-      "js/nassh_sftp_packet_types.js",
-      "js/nassh_sftp_status.js",
-      "js/nassh_sftp_fsp.js",
       "js/nassh_agent_message.js",
       "js/nassh_agent_message_types.js",
       "js/nassh_agent.js",
       "js/nassh_agent_backend.js",
       "js/nassh_agent_backend_gsc.js",
-      "js/nassh_command_instance.js",
       "js/nassh_background.js"
     ]
   },
@@ -80,9 +59,12 @@
   "omnibox": {
     "keyword": "ssh"
   },
-  "app": {
-    "launch": {
-      "local_path": "html/nassh.html"
+  "browser_action": {
+    "default_popup": "html/nassh_popup.html",
+    "default_icon": {
+      "128": "images/dev/icon-128.png",
+      "32": "images/dev/icon-32.png",
+      "16": "images/dev/icon-16.png"
     }
   }
 }

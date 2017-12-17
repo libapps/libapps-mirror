@@ -56,6 +56,35 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   possible.
 
 
+### What's the difference between the Secure Shell App and Extension? {#app-vs-ext}
+
+  [Chrome Apps](https://developer.chrome.com/apps/about_apps)
+  [were launched](https://blog.chromium.org/2013/02/chrome-app-launcher-developer-preview.html)
+  to create applications using web technology that would work like native apps
+  on any platform Chrome runs on.  Secure Shell was built on that technology.
+
+  Fast forward a few years and
+  [Chrome Apps were deprecated](https://blog.chromium.org/2016/08/from-chrome-apps-to-web.html)
+  on all non-Chrome OS platforms.  That means the Secure Shell App would only
+  be available on Chrome OS.
+
+  In order to work on non-Chrome OS platforms, we need to migrate it to an
+  extension.  Unfortunately, doing so means we'd lose access to some APIs that
+  we use on Chrome OS specifically.  The only option we're left with is to
+  maintain both an extension and an app at the same time.
+
+  If you do not care about the Chrome OS specific features, then the two
+  versions are equivalent.  Here are the few features available in the App:
+
+  * SFTP mounting
+  * Access to [crosh](chromeos-crosh.md)
+  * Icon shows up in the chrome://apps list (vs in the extension bar)
+
+  That is why we have a "Secure Shell App" and a "Secure Shell Extension" in
+  the store (as well as "dev" versions of each).  You can safely have any of
+  them installed simultaneously.
+
+
 ### How do hterm and Secure Shell differ from existing web terminals?
 
   hterm stands out from many existing web terminals in that it was built from
@@ -103,14 +132,19 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 ### Is there a way to try early releases of Secure Shell?
 
   Yes.  First, you need to subscribe to the [chromium-hterm mailing list].
-  Subscribers have access to the "Dev" version in the Chrome Web Store, which
-  is located here: <https://goo.gl/cFZlv>.  Note: You'll also need to sign in
-  to the Chrome Web Store using the same account that joined the mailing list.
-  Otherwise, the link will result in a 404 error.
+  Subscribers have access to the "Dev" versions in the Chrome Web Store, which
+  are located here:
+
+  * [App for Chrome OS](https://goo.gl/cFZlv)
+  * [Extension for all systems](https://goo.gl/9NCCZQ)
+
+  Note: You'll also need to sign in to the Chrome Web Store using the same
+  account that joined the mailing list.  Otherwise, the link will result in a
+  404 error.
 
   Please keep in mind that the Dev version has gone through significantly less
-  testing than the Beta.  Fortunately, you can install both and switch back
-  to Beta if you have trouble with Dev.
+  testing than the stable versions.  Fortunately, you can install both and
+  switch back to stable if you have trouble with Dev.
 
 
 ### Where is the source code?
@@ -327,16 +361,20 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   3. A `ssh://` URL.
 
 *** aside
-If you're using the dev version of Secure Shell, you'll want to use the
-extension id `okddffdblfhhnmhodogpojmfkjmhinfp` in the examples below
-instead of `pnhechapfaindjhompbnflcldabbghjo`.
+In the examples below, the *[ID]* field will need adjusting based on the
+version you have installed:
+
+* `pnhechapfaindjhompbnflcldabbghjo`: Secure Shell App (stable)
+* `okddffdblfhhnmhodogpojmfkjmhinfp`: Secure Shell App (dev)
+* `iodihamcpbpeioajjeobimgagajmlibd`: Secure Shell Extension (stable)
+* `algkcnfjnajfhgimadimbjhmpaeohhln`: Secure Shell Extension (dev)
 ***
 
 #### Direct links
 
   The first one takes the form of:
 
-  `chrome-extension://pnhechapfaindjhompbnflcldabbghjo/html/nassh.html#user@host[:port][@proxyhost[:proxyport]]`
+  `chrome-extension://[ID]/html/nassh.html#user@host[:port][@proxyhost[:proxyport]]`
 
   The `user` and `host` fields are mandatory, but you can omit the `:port` if
   you like (as well as the proxy settings).  There is no way to customize any
@@ -344,11 +382,11 @@ instead of `pnhechapfaindjhompbnflcldabbghjo`.
 
   Here is an example for connecting to the server `cowfarm` as user `milkman`:
 
-  `chrome-extension://pnhechapfaindjhompbnflcldabbghjo/html/nassh.html#milkman@cowfarm`
+  `chrome-extension://[ID]/html/nassh.html#milkman@cowfarm`
 
   And on port `2222`:
 
-  `chrome-extension://pnhechapfaindjhompbnflcldabbghjo/html/nassh.html#milkman@cowfarm:2222`
+  `chrome-extension://[ID]/html/nassh.html#milkman@cowfarm:2222`
 
 #### Profile links
 
@@ -356,7 +394,7 @@ instead of `pnhechapfaindjhompbnflcldabbghjo`.
   connection dialog, and then you can bookmark that connection directly.
   It then takes the form of:
 
-  `chrome-extension://pnhechapfaindjhompbnflcldabbghjo/html/nassh.html#profile-id:ID`
+  `chrome-extension://[ID]/html/nassh.html#profile-id:ID`
 
   The `ID` part will need to be changed to match the unique id assigned to each
   connection.  You can find it by loading Secure Shell into a tab, connecting
