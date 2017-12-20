@@ -597,7 +597,7 @@
 	},
 	"OPEN_AS_WINDOW_TIP": {
 		"description": "Message displayed to users who are running Secure Shell in a tab. The [Pro Tip] should be localized (it is slang in the computing world), but can be localized as just 'tip' if easier.",
-		"message": "[Pro Tip] Use 'Open as Window' to prevent Control-W from closing your terminal!\n[Pro Tip] See $URL$ for more information.",
+		"message": "[Pro Tip] Use 'Open as Window' or 'Fullscreen' to prevent Ctrl-W from closing your terminal!\n[Pro Tip] See $URL$ for more information.",
 		"placeholders": {
 			"url": {
 				"content": "$1",

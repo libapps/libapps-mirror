@@ -775,26 +775,32 @@ different app, visit the chrome://settings/handlers page.
 
 ### How do I send Ctrl-W, Ctrl-N or Ctrl-T to the terminal?
 
-*** note
-  This section does not apply to macOS.  That platform has no "Open as Window"
-  option, but macOS also does not capture any Ctrl based shortcuts.  If want to
-  capture Cmd-W, etc..., then unfortunately there currently is no way of doing
-  that.  Sorry.
-***
-
   Chrome blocks tab contents from getting access to these (and a few other)
-  keys.  You can open Secure Shell in a dedicated window to get around
-  this limitation.  Just right-click on the Secure Shell icon and enable
-  "Open as Window".
+  shortcuts.  You can open Secure Shell in a dedicated window to get around
+  this limitation.  The exact method depends on a few factors.
 
-  After that, any time you launch Secure Shell it will open in a new window
-  and respond properly to these accelerator keys.
+  If you're running the app ([not the extension](#app-vs-ext)), right-click on
+  the Secure Shell icon and enable "Open as Window".  After that, any time you
+  launch Secure Shell it will open in a new window and handle these directly.
+  This feature is not available on macOS however (see below).
 
-  Note that the "Open as Window" option is not available on the Mac.  However,
-  Mac keyboards typically have distinct Control, Alt, and Command keys, so it's
-  less of an issue on that platform.  Secure Shell cannot treat Command as
-  Control or Meta, but there are some third party keyboard utilities that may
-  provide a solution.
+  If you're running the extension, Secure Shell opens as a window normally, and
+  the shortcuts should be caught automatically.
+
+  If you want to run Secure Shell in a tab, then unfortunately Chrome offers no
+  option currently to capture these keystrokes.  See <https://crbug.com/671774>
+  for more details.  You could run it in fullscreen mode (by pressing F11), but
+  that isn't a great option if you want to leverage tabs.  You could press F11,
+  then Ctrl-N, then F11 again, but that also is not great.
+
+  If you want to open another Secure Shell session, use Ctrl-Shift-N.
+
+  On macOS, most shortcuts are initiated via the Cmd key, so Ctrl shortcuts are
+  passed regardless of the mode (window or tab), so this is generally less of an
+  issue on this platform.  If you want to capture Cmd-W, etc..., then currently
+  there is no way to do so.  If you're OK with changing system wide settings,
+  there are some third party keyboard utilities that may help, or try searching
+  for [changing keyboard shortcuts](https://www.google.com/search?q=macOS+changing+keyboard+shortcuts).
 
 
 ### How do I change input methods?
