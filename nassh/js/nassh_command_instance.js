@@ -367,6 +367,9 @@ nassh.CommandInstance.prototype.promptForDestination_ = function(opt_default) {
     var resize_ = resize.bind(this);
     resize_();
     window.addEventListener('resize', resize_);
+    this.onClose = () => {
+      window.removeEventListener('resize', resize_);
+    };
   };
 
   // Clear retry count whenever we show the dialog.
