@@ -2,7 +2,8 @@
 js/*.concat.js
 
 # Copy of the nacl plugin used when loading as an unpacked extension
-plugin
+/_platform_specific/
+/plugin/
 
 # Stuff we build for distribution
 dist

@@ -88,6 +88,7 @@ FILE_PATTERNS='
     \./js/.*\.js
     \./third_party/.*\.js
     \./_locales/.*\.json
+    \./_platform_specific/.*
     \./plugin/.*
 '
 
@@ -303,6 +304,11 @@ function init_from_dir() {
   set +f  # Re-enable expansion.
 
   cd - >/dev/null
+
+  if [[ -d "${zipdir}/plugin" ]]; then
+    echo_err "Rewriting plugin manifests for CWS"
+    plugin-to-platform-specific.py -q --base "${zipdir}" || exit 1
+  fi
 
   if [[ "${name}" != "${new_name}" || "${version}" != "${new_version}" ]]; then
     insist rewrite_manifest "$zipdir/manifest.json" "$new_name" "$new_version"
