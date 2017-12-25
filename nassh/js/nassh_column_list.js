@@ -297,6 +297,13 @@ nassh.ColumnList.prototype.onKeyDown_ = function(e) {
       } else {
         // DOWN from anywhere else, move down a row.
         i = this.getIndexByRowCol_(rc.row + 1, rc.column);
+        // If the next row is incomplete, warp to top of the next.
+        if (i > this.items_.length - 1) {
+          if (rc.column >= this.columnCount - 1)
+            i = 0;
+          else
+            i = this.getIndexByRowCol_(0, rc.column + 1);
+        }
       }
       break;
 
