@@ -5,6 +5,25 @@ The official copy of this repository is located on chromium.googlesource.com.
 Use `git clone https://chromium.googlesource.com/apps/libapps` to create a
 local copy.
 
+# Before Contributing
+
+## CLAs
+
+Before we can use your code, you must sign the
+[Google Individual Contributor License Agreement](https://developers.google.com/open-source/cla/individual?csw=1)
+(CLA), which you can do online.  The CLA is necessary mainly because you own the
+copyright to your changes, even after your contribution becomes part of our
+codebase, so we need your permission to use and distribute your code.  We also
+need to be sure of various other things -- for instance that you'll tell us if
+you know that your code infringes on other people's patents.
+
+## Coordination
+
+Before you start working on a larger contribution, you should get in touch with
+us first through the [chromium-hterm mailing list] with your idea so that we can
+help out and possibly guide you.  Coordinating up front makes it much easier to
+avoid frustration later on.
+
 # Submitting patches
 
 This repository only accepts commits that are submitted through "Gerrit", the
@@ -52,3 +71,5 @@ And then re-base any branches with work-in-progress.
 
 Sometimes this rebase will fail due to merge conflicts which will have to be
 resolved by hand.
+
+[chromium-hterm mailing list]: https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-hterm
