@@ -21,6 +21,10 @@
 		"description": "The message shown to a user when they try to close a tab with an open session.",
 		"message": "Closing this tab will disconnect this session."
 	},
+	"CACHE_PIN_PROMPT": {
+		"description": "Prompt asking whether the smart card PIN should be saved for the session. The '(y/N)' should not be translated and indicates that the PIN is cached if the user replies with either 'y' or 'Y', otherwise it is not cached.",
+		"message": "Cache the PIN for this session? (y/N): "
+	},
 	"CANCEL_BUTTON_LABEL": {
 		"description": "The label for the Cancel button in dialogs.",
 		"message": "Cancel"

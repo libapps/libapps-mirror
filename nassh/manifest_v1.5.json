@@ -17,6 +17,7 @@
   "permissions": [
     "clipboardRead",
     "clipboardWrite",
+    "idle",
     "notifications",
     "storage",
     "terminalPrivate",

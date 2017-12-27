@@ -33,6 +33,14 @@ nassh.agent.backends.GSC = function(userIO) {
    * @private
    */
   this.keyBlobToReader_ = {};
+
+  /**
+   * The cache used to offer smart card PIN caching to the user.
+   *
+   * @member {!lib.CredentialCache}
+   * @private
+   */
+  this.pinCache_ = new lib.CredentialCache();
 };
 
 nassh.agent.backends.GSC.prototype =
@@ -252,7 +260,7 @@ nassh.agent.backends.GSC.prototype.requestPIN =
 
 /**
  * Unlock a key on a connected smart card reader and request the PIN from
- * the user.
+ * the user (or the cache).
  *
  * @param {!nassh.agent.backends.GSC.SmartCardManager} manager A
  *     SmartCardManager object connected to the reader on which the specified
@@ -263,20 +271,44 @@ nassh.agent.backends.GSC.prototype.requestPIN =
  * @private
  */
 nassh.agent.backends.GSC.prototype.unlockKey_ = async function(manager, keyId) {
-  let pin;
+  let pinBytes;
+  let triedCache = false;
   do {
+    pinBytes = null;
     const currentKeyId = await manager.fetchAuthenticationPublicKeyId();
     if (!lib.array.compare(keyId, currentKeyId)) {
       throw new Error(
           `GSC.unlockKey_: key ID changed for reader ${manager.reader}`);
     }
     const numTries = await manager.fetchPINVerificationTriesRemaining();
-    try {
-      pin = await this.requestPIN(manager.readerShort(), keyId, numTries);
-    } catch (e) {
-      throw new Error('GSC.signRequest: authentication canceled by user');
+    // Only try once and only if there is no chance we block the smart card.
+    if (this.pinCache_.isEnabled() && !triedCache && numTries > 1) {
+      triedCache = true;
+      pinBytes = await this.pinCache_.retrieve(
+          `${manager.reader()}|${new TextDecoder('utf-8').decode(keyId)}`);
     }
-  } while (!await manager.verifyPIN(pin));
+    if (!pinBytes) {
+      try {
+        const pin = await this.requestPIN(
+            manager.readerShort(), keyId, numTries);
+        pinBytes = new TextEncoder('utf-8').encode(pin);
+      } catch (e) {
+        throw new Error('GSC.signRequest: authentication canceled by user');
+      }
+    }
+  } while (!await manager.verifyPIN(pinBytes));
+
+  if (this.pinCache_.isEnabled() === null) {
+    const reply = await this.promptUser(nassh.msg('CACHE_PIN_PROMPT'));
+    this.pinCache_.setEnabled(reply.toLowerCase() === 'y');
+  }
+  if (this.pinCache_.isEnabled()) {
+    await this.pinCache_.store(
+        `${manager.reader()}|${new TextDecoder('utf-8').decode(keyId)}`,
+        pinBytes);
+  }
+
+  pinBytes.fill(0);
 };
 
 /**
@@ -1312,7 +1344,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
 /**
  * Verify the smart card PIN to unlock private key operations.
  *
- * @param {!string} pin A UTF-8 string.
+ * @param {!Uint8Array} pinBytes The PIN encoded as UTF-8.
  * @returns {!Promise<!boolean>|!Promise<!Error>} A Promise resolving to true
  *     if the supplied PIN was correct; a Promise resolving to false if the
  *     supplied PIN was incorrect; a rejecting Promise if the device is
@@ -1320,8 +1352,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
  *     is not supported.
  */
 nassh.agent.backends.GSC.SmartCardManager.prototype.verifyPIN =
-    async function(pin) {
-  const pinBytes = new TextEncoder('utf-8').encode(pin);
+    async function(pinBytes) {
   switch (this.appletSelected_) {
     case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP:
       /**
