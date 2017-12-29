@@ -531,10 +531,12 @@ nassh.CommandInstance.prototype.connectToProfile = function(
  *
  * @param {string} uri The URI to parse.
  * @param {boolean} stripSchema Whether to strip off ssh:// at the start.
+ * @param {boolean=} decodeComponents Whether to unescape percent encodings.
  * @return {boolean|Object} False if we couldn't parse the destination.
  *     An object if we were able to parse out the connect settings.
  */
-nassh.CommandInstance.parseURI = function(uri, stripSchema=true) {
+nassh.CommandInstance.parseURI = function(uri, stripSchema=true,
+                                          decodeComponents=false) {
   if (stripSchema && uri.startsWith('ssh:')) {
     // Strip off the "ssh:" prefix.
     uri = uri.substr(4);
@@ -577,10 +579,13 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true) {
     }
   }
 
+  // We don't decode the hostname or port.  Valid values for both shouldn't
+  // need it, and probably could be abused.
+  const decode = (x) => decodeComponents ? unescape(x) : x;
   return {
-    username: username,
+    username: decode(username),
     hostname: hostname,
-    fingerprint: fingerprint,
+    fingerprint: decode(fingerprint),
     port: port,
     relayHostname: relayHostname,
     relayPort: relayPort,
@@ -601,6 +606,7 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true) {
  */
 nassh.CommandInstance.parseDestination = function(destination) {
   let stripSchema = false;
+  let decodeComponents = false;
 
   // Deal with ssh:// links.  They are encoded with % hexadecimal sequences.
   // Note: These might be ssh: or ssh://, so have to deal with that.
@@ -611,9 +617,11 @@ nassh.CommandInstance.parseDestination = function(destination) {
       return false;
 
     stripSchema = true;
+    decodeComponents = true;
   }
 
-  const rv = nassh.CommandInstance.parseURI(destination, stripSchema);
+  const rv = nassh.CommandInstance.parseURI(destination, stripSchema,
+                                            decodeComponents);
   if (rv === false)
     return rv;
 

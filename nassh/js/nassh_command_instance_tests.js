@@ -87,13 +87,20 @@ nassh.CommandInstance.Tests.addTest('parseURI', function(result, cx) {
     ['u@h@relay:2234', {'user': 'u', 'host': 'h', 'relay': 'relay',
                         'relayPort': '2234'}],
 
+    // Accpetable escaped forms.
+    ['u%40g@h', {'user': 'u@g', 'host': 'h'}],
+
+    // Unaccpetable escaped forms.
+    ['u@h%6eg', {'user': 'u', 'host': 'h%6eg'}],
+    ['u@h:1%302', false],
+
     // Fingerprints.
     ['u;fingerprint=foo@h', {'user': 'u', 'host': 'h', 'fingerprint': 'foo'}],
   ];
 
   let dataSet;
   data.forEach((dataSet) => {
-    const rv = nassh.CommandInstance.parseURI(dataSet[0]);
+    const rv = nassh.CommandInstance.parseURI(dataSet[0], true, true);
     if (rv === false) {
       result.assertEQ(dataSet[1], rv, dataSet[0]);
     } else {
