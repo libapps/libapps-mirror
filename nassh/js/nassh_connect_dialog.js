@@ -142,22 +142,15 @@ nassh.ConnectDialog.prototype.msg = function(name, opt_args) {
 /**
  * Align the bottom fields.
  *
- * We want a grid-like layout for these fields.  This is not easily done
- * with box layout, but since we're using a fixed width font it's a simple
- * hack.  We just left-pad all of the labels with &nbsp; so they're all
- * the same length.
+ * We want a grid-like layout for these fields.  This is not easily done with
+ * box layout, but since we're using a fixed width font it's a simple hack.
  */
 nassh.ConnectDialog.prototype.alignLabels_ = function() {
   var labels = document.querySelectorAll('.aligned-dialog-labels');
 
-  var labelWidth = 0;
-  labels.forEach(function(el) {
-    labelWidth = Math.max(labelWidth, el.textContent.length);
-  });
-
-  labels.forEach(function(el) {
-      el.textContent = el.textContent.padStart(labelWidth, '\xa0');
-    });
+  let maxWidth = 0;
+  labels.forEach((el) => maxWidth = Math.max(maxWidth, el.clientWidth));
+  labels.forEach((el) => el.style.width = `${maxWidth}px`);
 };
 
 /**
@@ -1053,12 +1046,14 @@ nassh.ConnectDialog.prototype.onMessageName_ = {};
 nassh.ConnectDialog.prototype.onMessageName_['terminal-info'] = function(info) {
   this.mm_ = new lib.MessageManager(info.acceptLanguages);
   this.mm_.processI18nAttributes(document.body);
-  this.alignLabels_();
   this.updateDetailPlaceholders_();
   this.updateDescriptionPlaceholder_();
 
   document.body.style.fontFamily = info.fontFamily;
   document.body.style.fontSize = info.fontSize + 'px';
+
+  // Now that we've set the font sizes, align the labels.
+  this.alignLabels_();
 
   var fg = lib.colors.normalizeCSS(info.foregroundColor);
   var bg = lib.colors.normalizeCSS(info.backgroundColor);

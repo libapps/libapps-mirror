@@ -114,6 +114,12 @@ a:hover {
   outline: none;
 }
 
+.aligned-dialog-labels {
+  text-align: right;
+  display: block;
+  white-space: nowrap;
+}
+
 /**
  * The billboard is the large area with the contrasting background.
  */
