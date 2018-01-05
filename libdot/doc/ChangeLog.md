@@ -1,3 +1,9 @@
+# 1.21, 2018-01-05, Minor fixes.
+
+* Fix storage write callbacks with shallow prefs.
+* Add helper script for filtering NaCl plugins for distribution.
+* Set charset=utf-8 in html files.
+
 # 1.20, 2017-12-13, Features & fixes.
 
 * refactor ranges.py for better modularity
