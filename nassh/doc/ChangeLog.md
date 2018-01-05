@@ -1,3 +1,16 @@
+# 0.8.42, 2018-01-05, Bug fixes & smaller extension downloads.
+
+* Update to libdot 1.21.  Minor fixes.
+* Update to hterm 1.77.  Various bug fixes.
+* Remove screenshots from releases.
+* Document F11 when running in a tab for fullscreen for keyboard shortcuts.
+* Shuffle nacl plugin paths for CWS filtering for smaller downloads for users.
+* Fix resize errors after connect.
+* Fix minor dialog error w/unbalanced rows.
+* Set charset=utf-8 in html files.
+* Refactor URI parsing into helper functions.
+* Parse out fingerprint from ssh:// URIs.
+
 # 0.8.41, 2017-12-13, Features & fixes galore.
 
 * Update to libdot 1.20.  Features & fixes.
