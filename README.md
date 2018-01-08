@@ -19,11 +19,7 @@ the details.
 # Top level directories
 
 * [libdot/](./libdot/) is a small set of JS libraries initially developed as
-part of hterm, now available as shared code.  It provides a base layer for web
-applications.  The code is intended to work in any modern browser, in either a
-plain web page or a "privileged" environment such as a Chrome platform
-application or Firefox extension.  In practice, it's only been put to use in
-Chrome platform applications so far.
+part of hterm, now available as shared code.
 
 * [hterm/](./hterm/) is a JS library that provides a terminal emulator.  It is
 reasonably fast, reasonably correct, and reasonably portable across browsers.
