@@ -113,6 +113,21 @@ base for out extension ids:
 * [58B0C2968C335964D5433E89CA4D86628A0E3D4B](https://cs.chromium.org/search/?q=58B0C2968C335964D5433E89CA4D86628A0E3D4B):
   Dev ID (in hex)
 
+## Partner Extensions
+
+There are a few extensions we talk to for various services at runtime which need
+to whitelist our extension ids (for source verification).  If you don't need any
+of these services, then you can ignore it.
+
+* [gnubbyd app beknehfpfkghjoafdifaflglpjkojoco](https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco)
+  * Optional SSH Agent backend (mostly for internal Google use).
+  * See http://cl/180966847 as an example.
+* [gnubbyd extension lkjlajklkdhaneeelolkfgbpikkgnkpk](https://chrome.google.com/webstore/detail/lkjlajklkdhaneeelolkfgbpikkgnkpk)
+  * Same as above.
+* [Smart Card Connector khpfeaanjngmcnplbdlpegiifgpfgdco](https://chrome.google.com/webstore/detail/khpfeaanjngmcnplbdlpegiifgpfgdco)
+  * Optional SSH Agent backend built for [hardware keys](./hardware-keys.md).
+  * See https://github.com/GoogleChromeLabs/chromeos_smart_card_connector/pull/54 as an example.
+
 ## Stable Extension
 
 If you try to load an unpacked extension using the stable extension id, you
