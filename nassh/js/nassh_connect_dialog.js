@@ -93,13 +93,7 @@ nassh.ConnectDialog.prototype.onPreferencesReady_ = function() {
 
   var profileIndex = 0;
 
-  if (this.profileList_.length == 1) {
-    // Just one profile record?  It's the "New..." profile, focus the form.
-    this.$f('description').focus();
-
-  } else {
-    this.shortcutList_.focus();
-
+  if (this.profileList_.length > 1) {
     chrome.storage.local.get('/nassh/connectDialog/lastProfileId', (items) => {
       var lastProfileId = items['/nassh/connectDialog/lastProfileId'];
       if (lastProfileId)
@@ -1052,9 +1046,6 @@ nassh.ConnectDialog.prototype.onMessageName_['terminal-info'] = function(info) {
   document.body.style.fontFamily = info.fontFamily;
   document.body.style.fontSize = info.fontSize + 'px';
 
-  // Now that we've set the font sizes, align the labels.
-  this.alignLabels_();
-
   var fg = lib.colors.normalizeCSS(info.foregroundColor);
   var bg = lib.colors.normalizeCSS(info.backgroundColor);
   var cursor = lib.colors.normalizeCSS(info.cursorColor);
@@ -1077,4 +1068,20 @@ nassh.ConnectDialog.prototype.onMessageName_['terminal-info'] = function(info) {
 
   // Tell the parent we've finished loading all the terminal details.
   this.postMessage('terminal-info-ok');
+};
+
+/**
+ * We're now visible, so do all the things that require visibility.
+ */
+nassh.ConnectDialog.prototype.onMessageName_['visible'] = function() {
+  // Focus the connection dialog.
+  if (this.profileList_.length == 1) {
+    // Just one profile record?  It's the "New..." profile, focus the form.
+    this.$f('description').focus();
+  } else {
+    this.shortcutList_.focus();
+  }
+
+  // Now that we're visible and can calculate font metrics, align the labels.
+  this.alignLabels_();
 };
