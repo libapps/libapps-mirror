@@ -166,24 +166,37 @@ function append_comment() {
 # The output is surrounded in single quote ("'") characters and wrapped to 79
 # columns.  Wrapped lines are joined with a plus ("+").
 #
+# Newlines in the input are stripped.
+#
+# Lines with embedded escapes won't be wrapped at all.
+#
 # Single quotes found in the input are escaped.
 function append_string() {
   local str=$*
 
-  append_output "$(echo "${str//\'/\'}" | awk -v WIDTH=76 '
-    {
-      while (length>WIDTH) {
-        print "\047" substr($0,1,WIDTH) "\047 +";
-        $0=substr($0,WIDTH+1);
+  str=$(echo "${str}" | awk -v WIDTH=76 '
+    function wrap(str) {
+      while (length(str) > WIDTH) {
+        print "\047" esc(substr(str, 1, WIDTH)) "\047 +";
+        str = substr(str, WIDTH + 1);
       }
-
-      print "\047" $0 "\047 +";
+      print "\047" esc(str) "\047 +";
     }
 
-    END {
-      print "\047\047";
-    }'
-  )"
+    function esc(str) {
+      gsub(/\047/, "\\\047", str);
+      return str;
+    }
+
+    {
+      if ($0 ~ /\\/)
+        print "\047" esc($0) "\047 +";
+      else
+        wrap($0);
+    }
+  ')
+
+  append_output "${str% +}"
 }
 
 # Convert data into a format that can be included in JavaScript and append it to
