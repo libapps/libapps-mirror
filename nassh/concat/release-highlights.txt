@@ -1,4 +1,4 @@
-0.8.38
+0.8.39
 
 # The first line tracks the last version that went stable.
 # Only features added since then should be kept here.
@@ -10,14 +10,13 @@
 # Only list significant changes that matter to the user.
 # The more lines that we have here, the more cluttered the output.
 
-# release: 0.8.38 (stable October 27)
-% Omnibox entries now match saved profile names first.
-% You can drag & drop text based content into the session now.
-
 # release: 0.8.39 (stable November 13)
 % OpenSSH upgraded to 7.6p1 (some older features dropped).
 
-# release: 0.8.41
+# release: 0.8.41 (stable January 3)
 % \x1b]8;;https://chromium.googlesource.com/apps/libapps/+/master/hterm/doc/ControlSequences.md#DOCS\x07The default terminal encoding has changed to UTF-8.\x1b]8;;\x07
 % \x1b]8;;https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda\x07Support for hyperlinking text via OSC-8.\x1b]8;;\x07
 % Support for iTerm2 OSC-1337 inline image display: \x1b]8;;https://goo.gl/MnSysj\x07https://goo.gl/MnSysj\x1b]8;;\x07
+
+# release: 0.8.43
+% Support for \x1b]8;;https://chromium.googlesource.com/apps/libapps/+/master/hterm/doc/ControlSequences.md#SGR-underline\x07extended SGR+4 underlining\x1b]8;;\x07

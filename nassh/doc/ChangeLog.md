@@ -1,3 +1,15 @@
+# 0.8.43, 2018-01-26, Few new features and support for Chrome Extensions.
+
+* Update to hterm 1.78.  Extended underlying support.
+* Rework label alignment logic.
+* Accept URI escapes in usernames & fingerprints.
+* Document extensions that whitelist us.
+* sftp: document the source a bit more
+* Delay some connection dialog work until visibility.
+* Unify params object setup.
+* Document expected coding style.
+* Support running as an extension.
+
 # 0.8.42, 2018-01-05, Bug fixes & smaller extension downloads.
 
 * Update to libdot 1.21.  Minor fixes.
