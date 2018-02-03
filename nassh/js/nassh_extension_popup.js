@@ -35,9 +35,18 @@ function popup() {
  */
 popup.prototype.openLink_ = function(e) {
   const id = e.target.id;
+
   let url = lib.f.getURL('/html/nassh.html');
-  if (id != 'connect-dialog')
-    url += `#profile-id:${id}`;
+  switch (id) {
+    case 'connect-dialog':
+      break;
+    case 'options':
+      nassh.openOptionsPage();
+      return;
+    default:
+      url += `#profile-id:${id}`;
+      break;
+  }
 
   // Figure out whether to open a window or a tab.
   let mode;
@@ -69,6 +78,7 @@ popup.prototype.openLink_ = function(e) {
 popup.prototype.populateList_ = function() {
   const ids = this.prefs_.get('profile-ids');
   ids.unshift('connect-dialog');
+  ids.push('options');
 
   for (let i = 0; i < ids.length; i++) {
     const id = ids[i];
@@ -78,13 +88,20 @@ popup.prototype.populateList_ = function() {
     link.className = 'links';
     link.addEventListener('click', this.openLink_.bind(this));
 
-    if (i == 0) {
-      link.textContent = nassh.msg('CONNECTION_DIALOG_NAME');
-      link.style.textAlign = 'center';
-    } else {
-      const profile = this.prefs_.getProfile(id);
-      const desc = profile.get('description');
-      link.textContent = desc;
+    switch (id) {
+      case 'connect-dialog':
+        link.textContent = nassh.msg('CONNECTION_DIALOG_NAME');
+        link.style.textAlign = 'center';
+        break;
+      case 'options':
+        link.textContent = nassh.msg('OPTIONS_BUTTON_LABEL');
+        link.style.textAlign = 'center';
+        break;
+      default:
+        const profile = this.prefs_.getProfile(id);
+        const desc = profile.get('description');
+        link.textContent = desc;
+        break;
     }
 
     document.body.appendChild(link);
