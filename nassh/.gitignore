@@ -8,5 +8,8 @@ js/*.concat.js
 # Stuff we build for distribution
 dist
 
+# npm related dirs.
+node_modules
+
 # Local dev files.
 /manifest.json
