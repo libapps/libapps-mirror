@@ -298,7 +298,7 @@ nassh.sftp.fsp.removeDirectory = function(path, client) {
   var directoryHandle;
   return client.openDirectory(path)
     .then(handle => { directoryHandle = handle; })
-    .then(() => readDirectory(directoryHandle, client))
+    .then(() => nassh.sftp.fsp.readDirectory(directoryHandle, client))
     .then(entries => {
       var removePromises = [];
 
@@ -313,7 +313,7 @@ nassh.sftp.fsp.removeDirectory = function(path, client) {
 
         filename = path + '/' + filename;
         if (file.permissions & 0x4000) {
-          removePromises.push(removeDirectory(filename, client));
+          removePromises.push(nassh.sftp.fsp.removeDirectory(filename, client));
         } else {
           removePromises.push(client.removeFile(filename));
         }
@@ -510,7 +510,7 @@ nassh.sftp.fsp.copyDirectory = function(sourcePath, targetPath, client) {
   return client.openDirectory(sourcePath)
     .then(handle => { sourceHandle = handle; })
     .then(() => client.makeDirectory(targetPath))
-    .then(() => readDirectory(sourceHandle, client))
+    .then(() => nassh.sftp.fsp.readDirectory(sourceHandle, client))
     .then(entries => {
 
       var copyPromises = [];
