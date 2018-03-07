@@ -3,7 +3,7 @@
 This is part of the Chromium OS project.
 
 Please do not use this list to contact authors.  We have a mailing list for
-discussions.  See the [README.md](./README.md#Contact) file for details.
+discussions.  See the [README.md](../README.md#Contact) file for details.
 
 ## Maintainers
 

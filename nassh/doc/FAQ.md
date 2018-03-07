@@ -474,6 +474,11 @@ different app, visit the chrome://settings/handlers page.
 
      term_.command.removeAllKnownHosts()
 
+  Make sure that you are typing these commands in the top frame of the app.  You
+  can access it by right-clicking on the new connection dialog, choosing
+  'Inspect', then picking `<top>` from the drop down menu in the JavaScript
+  console.
+
 
 ## Terminal (hterm) Questions
 
