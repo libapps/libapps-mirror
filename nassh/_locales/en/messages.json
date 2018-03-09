@@ -269,7 +269,7 @@
 	},
 	"HTERM_PREF_ALT_GR_MODE": {
 		"description": "Help text shown for the hterm 'alt-gr-mode' preference.",
-		"message": "Select an AltGr detection hack^Wheuristic.\n\n'null': Autodetect based on navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Disable any AltGr related munging.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
+		"message": "Select an AltGr detection heuristic.\n\n'null': Autodetect based on navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Disable any AltGr related munging.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
 	},
 	"HTERM_PREF_ALT_IS_META": {
 		"description": "Help text shown for the hterm 'alt-is-meta' preference.",
