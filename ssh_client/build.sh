@@ -51,6 +51,12 @@ fi
 if [[ ($WEB_PORTS == "") || !(-d $WEB_PORTS) ]]; then
   pushd output
   if [[ !(-d webports/src) ]]; then
+    # Get own copy of depot_tools for gclient.
+    if [[ ! -d depot_tools ]]; then
+      git clone --depth=1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
+    fi
+    PATH="${PWD}/depot_tools:${PATH}"
+
     rm -rf webports && mkdir webports
     cd webports
     gclient config --name=src https://chromium.googlesource.com/webports.git
