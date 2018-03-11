@@ -43,44 +43,74 @@ script with the "--forever" (aka -f) option.  When run in this manner it will
 automatically re-create nassh_deps.concat.js file whenever one of the source
 files is changed.
 
-# The NaCl plugin dependency
+## The NaCl plugin dependency
 
 Secure Shell depends on a NaCl (Native Client) plugin to function.  This plugin
 is a port of OpenSSH.  You'll have to find or create a version of this plugin,
 and copy it into `libapps/nassh/plugin/`.
 
-Your options are:
+Your options are (pick one):
 
-1. Build it yourself from [ssh_client].
+1. Build it yourself from [ssh_client].  This can take some time, but once it's
+finished:
+```
+# In the ssh_client/ directory.
+$ cp -a output/hterm/plugin/ ../nassh/
+```
 
-2. Copy it from `plugin/` directory of the latest version of Secure Shell.
+2. Grab an existing release.  For example:
+```
+# In the nassh/ directory.
+$ wget https://commondatastorage.googleapis.com/chromeos-localmirror/secureshell/releases/0.8.39.tar.xz
+$ tar --strip-components=1 -xf 0.8.39.tar.xz hterm/plugin
+```
+
+3. Copy the `plugin/` directory from the latest version of Secure Shell.
 If you have Secure Shell installed, the plugin can be found in your profile
 directory, under
 `Default/Extensions/pnhechapfaindjhompbnflcldabbghjo/<version>/plugin/`.
 
 # Dev-Test cycle
 
-The `./bin/run_local.sh` script can be used to launch a new instance of Chrome
-in an isolated profile, with the necessary command line arguments, and launch
-the Secure Shell app.  You can run this script again to rebuild dependencies
-and relaunch the Secure Shell app.
-
-# Loading Unpacked Extensions
+## Loading Unpacked Extensions
 
 Loading directly from the checked out nassh directory is the normal way of
 testing.  It will use the dev extension id to avoid conflicts with the stable
 extension id, although it will still conflict if you have the dev version
-installed from the CWS.
+installed from the Chrome Web Store (CWS).
 
 You will need to manually select the variant you want to work on.  The extension
 is defined by the [manifest_ext.json] file while the app is defined by the
 [manifest_v1.5.json] file.  Simply symlink it to manifest.json:
 
-    nassh$ ln -s manifest_v1.5.json manifest.json
+    nassh$ ln -s manifest_ext.json manifest.json
+
+For details on the different manifests and modes, see the next section (and the
+[FAQ]).  You probably want to start with the extension version if you're not
+going to be hacking on Chrome OS features.
 
 The extension id is controlled by the `key` field in the manifest.json.  See
 the [manifest key docs](https://developer.chrome.com/extensions/manifest/key)
 for more details.
+
+### Adding To Chrome
+
+Now that your checkout is ready, you can load it into Chrome.
+
+1. Navigate to the `chrome://extensions` page.
+2. Turn on *Developer Mode* (look for the toggle in the upper right or bottom
+   right of the page depending on Chrome version).
+3. Click *Load Unpacked Extension* and navigate to the `nassh/` directory.
+
+If you're not running on Chrome OS device, and loading the app, you might see
+warnings right away about certain permissions (see the whitelisted sections
+below).  You can ignore those.  It's unfortunate they show up with the same
+level/color as legitmate errors.
+```
+* 'file_system_provider_capabilities' is only allowed for extensions and packaged apps, but this is a legacy packaged app.
+* 'terminalPrivate' is not allowed for specified platform.
+* 'fileSystemProvider' is not allowed for specified platform.
+```
 
 ## Manifests
 
@@ -367,6 +397,19 @@ We currently support
 [version 3](https://tools.ietf.org/html/draft-ietf-secsh-filexfer-02) of the
 protocol.
 
+# References
+
+Here's a random list of documents which would be useful to people.
+
+* [OpenSSH]: The ssh client we use
+* [NaCl]: Chrome's Native Client that we build using (including the PPAPI plugin)
+* [RFC 4251 - The Secure Shell (SSH) Protocol Architecture](https://tools.ietf.org/html/rfc4251)
+* [RFC 4252 - The Secure Shell (SSH) Authentication Protocol](https://tools.ietf.org/html/rfc4252)
+* [RFC 4253 - The Secure Shell (SSH) Transport Layer Protocol](https://tools.ietf.org/html/rfc4253)
+* [RFC 4254 - The Secure Shell (SSH) Connection Protocol](https://tools.ietf.org/html/rfc4254)
+* [RFC 4716 - The Secure Shell (SSH) Public Key File Format](https://tools.ietf.org/html/rfc4716)
+* [SFTP (SSH File Transfer Protocol)](https://tools.ietf.org/html/draft-ietf-secsh-filexfer)
+
 [bin/]: ../bin/
 [css/]: ../css/
 [doc/]: ../doc/
@@ -423,6 +466,8 @@ protocol.
 [nassh_stream_sshagent.js]: ../js/nassh_stream_sshagent.js
 [nassh_stream_sshagent_relay.js]: ../js/nassh_stream_sshagent_relay.js
 [nassh_stream_tty.js]: ../js/nassh_stream_tty.js
+[nassh_test.js]: ../js/nassh_test.js
+[nassh_tests.js]: ../js/nassh_tests.js
 
 [FAQ]: FAQ.md
 

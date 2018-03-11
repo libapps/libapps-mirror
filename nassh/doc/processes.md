@@ -59,8 +59,8 @@ on acquiring those files.
 ### Making the ZIP
 
 The [bin/mkzip.sh](../bin/mkzip.sh) helper script is used to create the zip
-file for uploading to the [CWS].  It operates on the current checked out repo,
-so make sure it's clean!
+file for uploading to the Chrome Web Store ([CWS]).  It operates on the current
+checked out repo, so make sure it's clean!
 
 ### Upload the (dev) Release
 
