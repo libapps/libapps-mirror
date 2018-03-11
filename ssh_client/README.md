@@ -1,6 +1,8 @@
+[TOC]
+
 # OpenSSH NaCl port
 
-This is the port of OpenSSH to NaCl (which is then integrated into [nassh]).
+This is the port of [OpenSSH] to [NaCl] (which is then integrated into [nassh]).
 
 Most people who want to hack on the Secure Shell app do not need to make changes
 here.  Typically this will be built once and copied into the [nassh] tree.  You
@@ -12,12 +14,15 @@ binaries out of that.
 The [chromium-hterm mailing list](https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-hterm)
 can be used to contact other users and developers for questions.
 
-# Building
+# Native Client
 
-To compile, you just have to run `./build.sh`.  It should take care of
-downloading the NaCl SDK and webports code for you.  When it's finished,
-the `output/` directory will hold all the compiled objects, and the
-`output/hterm/plugin/` directory can be copied over to [nassh].
+We currently use Chrome's Native Client [NaCl] project to compile C/C++ code
+in a way that the browser can execute directly.  This is a restricted/secure
+runtime so that the native code can't break out and attack other processes.
+More details can be found in the NaCl documentation.
+
+We plan on migrating to [WebAssembly (WASM)](http://webassembly.org/) at some
+point, but requires more planning.
 
 ## glibc (NaCl) vs newlib (PNaCl)
 
@@ -31,6 +36,24 @@ Also, even though we build using PNaCl by default, we still translate the pexe
 (the PNaCl executable) into nexe's (NaCl executables) for release.  There might
 be room for improvement here, but it's a low priority atm as we haven't had any
 requests to support any arch other than x86/x86_64/arm.
+
+# Building
+
+## Development Tools
+
+You'll need some extra packages to compile.  Adjust these for your distro.
+```
+$ sudo apt-get install git make cmake python libglib2.0-0:i386 zlib1g-dev
+```
+
+## Build Script
+
+To compile, you just have to run `./build.sh`.  It should take care of
+downloading the NaCl SDK and [webports] code for you (which takes care of
+building all the required dependencies).
+
+When it's finished, the `output/` directory will hold all the compiled objects,
+and the `output/hterm/plugin/` directory can be copied over to [nassh].
 
 # Source Layout
 
@@ -181,7 +204,23 @@ Breakpoint 1, PepperFile::Open (this=<optimized out>, result=<optimized out>, pa
 (gdb)
 ```
 
+# References
+
+Here's a random list of documents which would be useful to people.
+
+* [OpenSSH]: The ssh client we use
+* [NaCl]: Chrome's Native Client that we build using (including the PPAPI plugin)
+* [RFC 4251 - The Secure Shell (SSH) Protocol Architecture](https://tools.ietf.org/html/rfc4251)
+* [RFC 4252 - The Secure Shell (SSH) Authentication Protocol](https://tools.ietf.org/html/rfc4252)
+* [RFC 4253 - The Secure Shell (SSH) Transport Layer Protocol](https://tools.ietf.org/html/rfc4253)
+* [RFC 4254 - The Secure Shell (SSH) Connection Protocol](https://tools.ietf.org/html/rfc4254)
+* [RFC 4716 - The Secure Shell (SSH) Public Key File Format](https://tools.ietf.org/html/rfc4716)
+* [SFTP (SSH File Transfer Protocol)](https://tools.ietf.org/html/draft-ietf-secsh-filexfer)
+
+[NaCl]: https://developer.chrome.com/native-client
 [nassh]: ../nassh/
+[OpenSSH]: https://www.openssh.com/
+[webports]: https://chromium.googlesource.com/webports/
 
 [build.sh]: ./build.sh
 [include/]: ./include/
