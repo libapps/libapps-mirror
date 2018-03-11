@@ -1,9 +1,12 @@
+[TOC]
 
 # Getting the source
 
 The official copy of this repository is located on chromium.googlesource.com.
-Use `git clone https://chromium.googlesource.com/apps/libapps` to create a
-local copy.
+You can create a local copy by running:
+```
+git clone https://chromium.googlesource.com/apps/libapps
+```
 
 # Before Contributing
 
@@ -83,7 +86,7 @@ stick to a few forms though.
 
 # Submitting patches
 
-This repository only accepts commits that are submitted through "Gerrit", the
+This repository only accepts commits that are submitted through [Gerrit], the
 code-review software.  In order to submit a patch through Gerrit, you'll need
 to do a one-time setup to get things ready.
 
@@ -112,8 +115,33 @@ passed review it will be cherry-picked onto the master branch of the official
 repository.
 
 The output of this command should include a url to Gerrit web page for the
-review.  Add one or more reviewers using the "Add Reviewer" button on that web
-page.
+review.  From there, review largely happens via the web interface.
+
+## Review Flow
+
+Once the CL (ChangeList, aka patch or git commit) has been uploaded, the review
+process starts.
+
+If you want to get feedback from other developers, look through the recent git
+log to find some people who are likely to help.  Then click the "REPLY" button
+and type their names/e-mail addresses under the "Reviewers" field.  Finally
+click the "SEND" button to save/publish your changes.
+
+The developers will then provide feedback and eventually you should end up
+with a Code-Review+2 tag.  This is an approval.  You might see Code-Review+1
+in which case the reviewer is OK with the code, but would rather have someone
+else give the actual approval.
+
+At this point, it's not yet ready for submitting until it's been marked
+Verified+1.  This is typically left up to the person uploading the CL to add
+to indicate they've finished testing.
+
+The final merge into the tree is often left to the developer who approved the
+CL, although this isn't strictly required.
+
+If in doubt about any of these steps, feel free to ask on the CL/review itself.
+
+## Keeping In Sync
 
 If the official repository changes, you can fetch the new commits using...
 
@@ -129,4 +157,5 @@ And then re-base any branches with work-in-progress.
 Sometimes this rebase will fail due to merge conflicts which will have to be
 resolved by hand.
 
+[Gerrit]: https://www.gerritcodereview.com/
 [chromium-hterm mailing list]: https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-hterm
