@@ -95,16 +95,16 @@ lib.Storage.Chrome.prototype.getItems = function(keys, callback) {
  */
 lib.Storage.Chrome.prototype.setItem = function(key, value, opt_callback) {
   const onComplete = () => {
-    if (chrome.runtime.lastError) {
+    const err = lib.f.lastError();
+    if (err) {
       // Doesn't seem to be any better way of handling this.
       // https://crbug.com/764759
-      if (chrome.runtime.lastError.message.indexOf('MAX_WRITE_OPERATIONS')) {
-        console.warn(`Will retry save of ${key} after exceeding quota`,
-                     chrome.runtime.lastError);
+      if (err.indexOf('MAX_WRITE_OPERATIONS')) {
+        console.warn(`Will retry save of ${key} after exceeding quota: ${err}`);
         setTimeout(() => this.setItem(key, value, onComplete), 1000);
         return;
       } else {
-        console.error('Unknown runtime error', chrome.runtime.lastError);
+        console.error(`Unknown runtime error: ${err}`);
       }
     }
 

@@ -127,3 +127,14 @@ lib.f.Tests.addTest('getChromeMilestone', function(result, cx) {
     result.assert(isNaN(milestone));
   result.pass();
 });
+
+/**
+ * Simple smoke test.  It gets set by async funcs, so it's not trivial to
+ * trigger and then test for it.
+ */
+lib.f.Tests.addTest('lastError', function(result, cx) {
+  // Initially there should be no errors.
+  result.assertEQ(null, lib.f.lastError());
+
+  result.pass();
+});

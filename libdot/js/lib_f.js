@@ -385,3 +385,25 @@ lib.f.getChromeMilestone = function() {
   // Returning NaN will make all number comparisons fail.
   return NaN;
 };
+
+/**
+ * Return the lastError string in the browser.
+ *
+ * This object might live in different locations, and it isn't always defined
+ * (if there hasn't been a "last error").  Wrap all that ugliness here.
+ *
+ * @param {string=} defaultMsg The default message if no error is found.
+ * @return {string} The last error message from the browser.
+ */
+lib.f.lastError = function(defaultMsg = null) {
+  let lastError;
+  if (window.browser && browser.runtime)
+    lastError = browser.runtime.lastError;
+  else if (window.chrome && chrome.runtime)
+    lastError = chrome.runtime.lastError;
+
+  if (lastError && lastError.message)
+    return lastError.message;
+  else
+    return defaultMsg;
+};

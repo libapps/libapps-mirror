@@ -566,13 +566,12 @@ nassh.sftp.fsp.onUnmountRequested = function(options, onSuccess, onError) {
 
   chrome.fileSystemProvider.unmount(
     {fileSystemId: options.fileSystemId}, () => {
-      if (chrome.runtime.lastError) {
-        console.warn(chrome.runtime.lastError.message);
+      const err = lib.f.lastError();
+      if (err) {
+        console.warn(err);
         onError('FAILED');
       } else {
         onSuccess();
-        if (chrome.runtime.lastError) {} //HACK: catches silly lastError (bug?)
-                                         //TODO(mcdermottm): talk to mtomasz@
       }
     });
 };
