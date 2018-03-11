@@ -67,11 +67,15 @@
 	},
 	"COMMAND_STARTUP_FAILED": {
 		"description": "When running a command (e.g. ssh or crosh) failed to start.",
-		"message": "Launching $COMMAND$ failed.",
+		"message": "Launching $COMMAND$ failed: $ERROR$",
 		"placeholders": {
 			"command": {
 				"content": "$1",
 				"example": "crosh"
+			},
+			"error": {
+				"content": "$2",
+				"example": "Invalid process name."
 			}
 		}
 	},

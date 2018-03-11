@@ -130,7 +130,8 @@ Crosh.prototype.run = function() {
 
   const pidInit = (pid) => {
     if (pid == undefined || pid == -1) {
-      this.io.println(nassh.msg('COMMAND_STARTUP_FAILED', [this.commandName]));
+      this.io.println(nassh.msg('COMMAND_STARTUP_FAILED',
+                                [this.commandName, lib.f.lastError('')]));
       this.exit(1);
       return;
     }
