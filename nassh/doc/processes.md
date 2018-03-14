@@ -62,6 +62,11 @@ The [bin/mkzip.sh](../bin/mkzip.sh) helper script is used to create the zip
 file for uploading to the Chrome Web Store ([CWS]).  It operates on the current
 checked out repo, so make sure it's clean!
 
+### CWS Access
+
+You'll need to be part of the [chrome-secure-shell-publishers group] in order to
+manage things via the [CWS].
+
 ### Upload the (dev) Release
 
 Visit the [CWS] dashboard to upload the new zip file:<br>
@@ -75,9 +80,6 @@ Here's an example posting:<br>
 https://groups.google.com/a/chromium.org/d/msg/chromium-hterm/_AcmwvdGFCc/Cne7Q8B3CQAJ
 
 Then forward that to the internal [chrome-hterm group].
-
-[chromium-hterm group]: https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-hterm
-[chrome-hterm group]: http://g/chrome-hterm
 
 ## Promoting a Stable Release
 
@@ -199,3 +201,6 @@ We don't have one.  Releases are made as changes roll in.
 
 
 [CWS]: https://chrome.google.com/webstore
+[chrome-hterm group]: http://g/chrome-hterm
+[chrome-secure-shell-publishers group]: http://g/chrome-secure-shell-publishers
+[chromium-hterm group]: https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-hterm
