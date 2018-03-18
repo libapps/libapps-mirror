@@ -63,7 +63,8 @@ manage keys or certificates or anything else an ssh agent can.
 
 Here's a list of known agents:
 
-* [gnubbyd beknehfpfkghjoafdifaflglpjkojoco](https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco)
+* [gnubbyd app (beknehfpfkghjoafdifaflglpjkojoco)](https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco)
+* [gnubbyd ext (lkjlajklkdhaneeelolkfgbpikkgnkpk)](https://chrome.google.com/webstore/detail/lkjlajklkdhaneeelolkfgbpikkgnkpk)
 
 ## `--ssh-client-version=<version>`
 
