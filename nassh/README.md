@@ -25,6 +25,7 @@ to the right people.
 
 * [Authors](./doc/AUTHORS.md) -- List of people who have contributed
 * [ChangeLog](./doc/ChangeLog.md) -- List of interesting changes in each release
+* [Crosh (Chrome OS shell)](./doc/chromeos-crosh.md) -- Interactions with the crosh command on Chrome OS
 * [FAQ](./doc/FAQ.md) -- Frequently Asked Questions
 * [Hacking](./doc/hack.md) -- Developing the Secure Shell source
 * [Hardware keys](./doc/hardware-keys.md) -- Using smart cards and hardware tokens with Secure Shell
