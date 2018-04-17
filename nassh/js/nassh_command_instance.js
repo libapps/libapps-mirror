@@ -264,7 +264,7 @@ nassh.CommandInstance.prototype.reconnect = function(argstr) {
  * @param {string} fullPath The full path to the file to remove.
  */
 nassh.CommandInstance.prototype.removeFile = function(fullPath) {
-  lib.fs.removeFile(this.fileSystem_.root, '/.ssh/' + identityName);
+  lib.fs.removeFile(this.fileSystem_.root, '/.ssh/' + fullPath);
 };
 
 /**
