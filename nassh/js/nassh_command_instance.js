@@ -932,11 +932,14 @@ nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
   this.io.print(nassh.msg('PLUGIN_LOADING'));
 
   this.plugin_ = window.document.createElement('embed');
+  // Height starts at 1px, and is changed to 0 below after inserting into body.
+  // This modification to the plugin ensures that the 'load' event fires
+  // when it is running in the background page.
   this.plugin_.style.cssText =
       ('position: absolute;' +
        'top: -99px' +
        'width: 0;' +
-       'height: 0;');
+       'height: 1px;');
 
   const pluginURL = `../plugin/${this.sshClientVersion_}/ssh_client.nmf`;
 
@@ -954,6 +957,9 @@ nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
   this.plugin_.addEventListener('error', errorHandler);
 
   document.body.insertBefore(this.plugin_, document.body.firstChild);
+  // Force a relayout. Workaround for load event not being called on <embed>
+  // for a NaCl module. https://crbug.com/699930
+  this.plugin_.style.height = '0';
 };
 
 /**

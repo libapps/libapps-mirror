@@ -408,6 +408,32 @@ We currently support
 [version 3](https://tools.ietf.org/html/draft-ietf-secsh-filexfer-02) of the
 protocol.
 
+# External API
+
+The extension provides an external API to allow other apps/extensions to
+invoke SFTP mount using [Chrome messaging](https://developer.chrome.com/apps/messaging).
+The nassh background page adds a listener for
+[`chrome.runtime.onMessageExternal`](https://developer.chrome.com/apps/runtime#event-onMessageExternal)
+which can be invoked by other apps / extensions by calling
+[`chrome.runtime.sendMessage`](https://developer.chrome.com/extensions/runtime#method-sendMessage)
+with the following fields in message:
+
+| Field name     | Type    | Description |
+|----------------|---------|-------------|
+| `command`      | !string | Command to run.  Currently only `mount` supported |
+
+## Mount
+
+| Field name     | Type    | Description |
+|----------------|---------|-------------|
+| `knownHosts`   | !string | File contents of known_hosts to be used for connection.  e.g. output from `ssh-keyscan <ssh-server>` |
+| `identityFile` | !string | File contents of private key identity_file (e.g. contents of id_rsa file `-----BEGIN RSA PRIVATE KEY----- ...`) |
+| `username`     | !string | Username for connection |
+| `hostname`     | !string | Hostname or IP address for connection |
+| `port`         | number  | (optional) Port, default is 22 |
+| `fileSystemId` | !string | ID used for Chrome OS mounted filesystem |
+| `displayName`  | !string | Display name in Chrome OS Files.app for mounted filesystem |
+
 # References
 
 Here's a random list of documents which would be useful to people.
