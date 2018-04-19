@@ -17,7 +17,7 @@ if [ "$1" = "-f" ]; then
     echo "Usage: readlink -f [--] <path>" >&2
     exit 1
   fi
-  exec python -c 'import os,sys;print os.path.realpath(sys.argv[1])' "$2"
+  exec python -c 'import os,sys; print(os.path.realpath(sys.argv[1]))' "$2"
 else
   if [ -x /bin/readlink ]; then
     exec /bin/readlink "$@"
