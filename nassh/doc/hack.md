@@ -172,9 +172,22 @@ base for our extension ids:
 * [nkoccljplnhpfnfiajclkommnmllphnl](https://cs.chromium.org/search/?q=nkoccljplnhpfnfiajclkommnmllphnl):
   Crosh ID
 * [0EA6B717932AD64C469C1CCB6911457733295907](https://cs.chromium.org/search/?q=0EA6B717932AD64C469C1CCB6911457733295907):
-  Stable ID (in hex)
+  Stable App ID (hash)
 * [58B0C2968C335964D5433E89CA4D86628A0E3D4B](https://cs.chromium.org/search/?q=58B0C2968C335964D5433E89CA4D86628A0E3D4B):
-  Dev ID (in hex)
+  Dev App ID (hash)
+* [3BC1ED0B3E6EFDC7BD4D3D1D75D44B52DEE0A226](https://cs.chromium.org/search/?q=3BC1ED0B3E6EFDC7BD4D3D1D75D44B52DEE0A226):
+  Stable Extension ID (hash)
+* [38C361D4A0726CE45D3572D65071B6BDB3092371](https://cs.chromium.org/search/?q=38C361D4A0726CE45D3572D65071B6BDB3092371):
+  Dev Extension ID (hash)
+* [505FEAE9DD5B27637DCF72045ECA2D5D7F66D2FD](https://cs.chromium.org/search/?q=505FEAE9DD5B27637DCF72045ECA2D5D7F66D2FD):
+  Crosh ID (hash)
+
+The hashes are the SHA1's of the (lower case) extension id.
+```sh
+$ ext_id_hash() { printf "$1" | tr '[:upper:]' '[:lower:]' | sha1sum | tr '[:lower:]' '[:upper:]'; }
+$ ext_id_hash pnhechapfaindjhompbnflcldabbghjo
+0EA6B717932AD64C469C1CCB6911457733295907
+```
 
 ## Partner Extensions
 
