@@ -246,10 +246,35 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   that requires a domain socket.
 
 
-### Can I use my `~/.ssh/config` file?
+### Can I use my ~/.ssh/config file?
 
   Probably.  It depends on what it does.  See the answer to the previous
   question for more details.
+
+
+### Is X/X11 forwarding supported?
+
+  Not at this time, and most likely won't be supported.
+
+  If you were able to run an existing X client locally (like [XWayland]), and
+  tell it to listen on a local TCP/IP port, you could add SSH forwarding options
+  so the remote side would be able to export their clients to that instance.
+
+  For context, this is referring to the [X Window System], the method for
+  displaying graphics on many UNIX systems like Linux and BSDs.
+
+  Since Secure Shell runs in a sandbox (by design), it doesn't have direct
+  access to host paths such as the UNIX socket that X listens on.  That means
+  it can't forward access to it to the remote system.
+
+  Even if it did have such access, it would only work when the local system
+  was also running X.  Chrome OS long ago stopped using X (instead, it switched
+  to "freon" which is a native graphics stack like [Wayland]), and many Linux
+  distros are also switching away from X.  That means the userbase is shrinking.
+
+  We're not going to implement a custom protocol parser for X so the client
+  would be able to handle/render everything itself.  The amount of code to do
+  so would be significant.
 
 
 ### Is the SSH-1.x protocol supported?
@@ -1078,3 +1103,6 @@ different app, visit the chrome://settings/handlers page.
 [chromium-hterm mailing list]: https://goo.gl/RYHiK
 [OpenSSH legacy options]: https://www.openssh.com/legacy.html
 [Keyboard Bindings]: ../../hterm/doc/KeyboardBindings.md
+[Wayland]: https://wayland.freedesktop.org/
+[X Window System]: https://en.wikipedia.org/wiki/X_Window_System
+[XWayland]: https://wayland.freedesktop.org/xserver.html
