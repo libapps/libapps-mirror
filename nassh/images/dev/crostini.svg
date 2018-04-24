@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 384 384" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <radialGradient id="b" cy="1.686%" r="98.314%" fx="50%" fy="1.686%">
+      <stop stop-color="#FFFFFF" stop-opacity=".08" offset="0%"/>
+      <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"/>
+    </radialGradient>
+    <circle id="a" cx="160" cy="160" r="160"/>
+    <filter id="c" width="101.2%" height="101.2%" x="-.6%" y="-.6%" filterUnits="objectBoundingBox">
+      <feOffset dy="4" in="SourceAlpha" result="shadowOffsetInner1"/>
+      <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"/>
+      <feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.2 0" in="shadowInnerInner1" result="shadowMatrixInner1"/>
+      <feOffset dy="-4" in="SourceAlpha" result="shadowOffsetInner2"/>
+      <feComposite in="shadowOffsetInner2" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner2"/>
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0" in="shadowInnerInner2" result="shadowMatrixInner2"/>
+      <feMerge>
+        <feMergeNode in="shadowMatrixInner1"/>
+        <feMergeNode in="shadowMatrixInner2"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="d" x1="18.469%" x2="46.232%" y1="11.354%" y2="43.161%">
+      <stop stop-color="#000000" stop-opacity=".2" offset="0%"/>
+      <stop stop-color="#000000" stop-opacity=".02" offset="100%"/>
+    </linearGradient>
+    <linearGradient id="f" x1="18.469%" x2="73.397%" y1="11.354%" y2="89.538%">
+      <stop stop-color="#000000" stop-opacity=".2" offset="0%"/>
+      <stop stop-color="#000000" stop-opacity=".02" offset="100%"/>
+    </linearGradient>
+    <path id="h" d="M72,125.5 L72,103 L152,138.974359 L152,156.931624 L72,192 L72,169.717949 L125.7514,149.692308 L131.574468,147.811966 L125.7514,145.837607 L72,125.5 Z M248,216 L168,216 L168,200 L248,200 L248,216 Z"/>
+    <filter id="g" width="131.8%" height="149.6%" x="-13.6%" y="-17.7%" filterUnits="objectBoundingBox">
+      <feOffset dx="4" dy="8" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur stdDeviation="8" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0" in="shadowBlurOuter1"/>
+    </filter>
+    <filter id="i" width="120.5%" height="131.9%" x="-8%" y="-8.8%" filterUnits="objectBoundingBox">
+      <feOffset dy="4" in="SourceAlpha" result="shadowOffsetInner1"/>
+      <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"/>
+      <feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.4 0" in="shadowInnerInner1"/>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(32 32)">
+    <mask id="e" fill="white">
+      <use xlink:href="#a"/>
+    </mask>
+    <use fill="#4B4B4B" xlink:href="#a"/>
+    <use fill="url(#b)" xlink:href="#a"/>
+    <use fill="black" filter="url(#c)" xlink:href="#a"/>
+    <path fill="url(#d)" d="M279.616587,266.26581 C258.093088,290.475885 229.330878,308.107314 196.724739,315.765318 L72,192 L152,139.5 L279.616587,266.26581 Z" mask="url(#e)"/>
+    <path fill="url(#f)" d="M294.698128,246.386807 C282.294926,265.686418 265.857226,282.146616 246.576214,294.576214 L168,216 L248,200 L294.698128,246.386807 Z" opacity=".37" mask="url(#e)"/>
+    <g mask="url(#e)">
+      <use fill="black" filter="url(#g)" xlink:href="#h"/>
+      <use fill="#FAFAFA" xlink:href="#h"/>
+      <use fill="black" filter="url(#i)" xlink:href="#h"/>
+    </g>
+    <path fill="#000000" fill-opacity=".1" d="M72,122 L125.7514,141.837607 L136.5,146 L131.544778,147.801899 L125.7514,145.837607 L72,126 L72,122 Z M152,152.931624 L152,156.931624 L72,192 L72,188 L152,152.931624 Z M130.88804,148.033622 L131.062156,147.977398 L131,148 L130.88804,148.033622 Z" mask="url(#e)"/>
+    <rect width="80" height="4" x="168" y="212" fill="#000000" fill-opacity=".1" mask="url(#e)"/>
+  </g>
+</svg>
