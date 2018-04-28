@@ -460,6 +460,19 @@ different app, visit the chrome://settings/handlers page.
   window by hitting alt+enter.
 
 
+### How do multiple extensions/apps work with the omnibox?
+
+  Since every Secure Shell instance registers the "ssh" keyword, Chrome has to
+  pick one.  Chrome goes by the order they were installed, so whichever version
+  was installed first, that's the default.
+
+  If you want to change the default, you'll have to delete the others from the
+  search engine list.  Chrome currently doesn't have a way to re-add them if you
+  change your mind short of uninstalling & reinstalling extensions.
+
+  See the next question for more details.
+
+
 ### How do I disable omnibox integration?
 
   When trying to search for "ssh" via the omnibox, it might trigger the app
@@ -471,8 +484,8 @@ different app, visit the chrome://settings/handlers page.
     i.e. Use `?ssh ...` instead of `ssh ...`.
 
   If you want to always disable this integration, you can do so in the standard
-  search engine management page.  It'll be at the very bottom under "Search
-  engines added by extensions".
+  search engine management settings page.   It'll be at the very bottom under
+  "Search engines added by extensions".
   See the [Google Chrome Help](https://support.google.com/chrome/answer/95426)
   page for more details.
 
