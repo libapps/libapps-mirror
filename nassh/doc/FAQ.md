@@ -467,10 +467,11 @@ different app, visit the chrome://settings/handlers page.
   was installed first, that's the default.
 
   If you want to change the default, you'll have to delete the others from the
-  search engine list.  Chrome currently doesn't have a way to re-add them if you
-  change your mind short of uninstalling & reinstalling extensions.
+  search engine list.  See the next question for more details.
 
-  See the next question for more details.
+  Chrome currently doesn't have a way to re-add them if you change your mind
+  other than uninstalling & reinstalling extensions.  Make sure to back up your
+  settings so you can restore them.
 
 
 ### How do I disable omnibox integration?
@@ -488,6 +489,14 @@ different app, visit the chrome://settings/handlers page.
   "Search engines added by extensions".
   See the [Google Chrome Help](https://support.google.com/chrome/answer/95426)
   page for more details.
+
+*** note
+If the extension is force installed via Enterprise policy, you probably won't be
+able to disable it.
+Unfortunately, in this scenario, Chrome offers no alternatives either to
+extension authors or users.
+You'll have to adjust your keyboard/muscle memory accordingly.
+***
 
 
 ### Can I forward ports?
