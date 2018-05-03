@@ -509,5 +509,7 @@ Here's a random list of documents which would be useful to people.
 [FAQ]: FAQ.md
 
 [gnubbyd]: https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco
+[NaCl]: https://developer.chrome.com/native-client
+[OpenSSH]: https://www.openssh.com/
 [ssh_client]: ../../ssh_client/
 [wash]: ../../wash/
