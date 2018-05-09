@@ -28,6 +28,7 @@ The list is sorted alphabetically by last name.
 * Brandon Gilmore <varz@>
 * Connor Hegarty <cjhegarty@>
 * Fabian Henneke <https://hen.ne.ke>: SSH agent & OpenPGP card support
+* Joel Hockey <joelhockey@>
 * Nikolay Igotti <olonho@>
 * Mitchell McDermott <mcdermottm@>: SFTP mounting/integration
 * Renaud Paquay <rpaquay@>
