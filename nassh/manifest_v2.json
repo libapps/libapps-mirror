@@ -21,8 +21,7 @@
     "storage",
     "terminalPrivate",
     "unlimitedStorage",
-    "fileSystemProvider",
-    "accessibilityFeatures.read"
+    "fileSystemProvider"
   ],
   "file_system_provider_capabilities": {
     "source": "network",

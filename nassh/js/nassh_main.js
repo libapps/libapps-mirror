@@ -27,21 +27,11 @@ window.onload = function() {
 
     var terminal = new hterm.Terminal(profileName);
     terminal.decorate(document.querySelector('#terminal'));
-    const runNassh = function() {
-      terminal.setCursorPosition(0, 0);
-      terminal.setCursorVisible(true);
-      terminal.runCommandClass(nassh.CommandInstance,
-                               document.location.hash.substr(1));
-    };
     terminal.onTerminalReady = function() {
-      if (window.chrome && chrome.accessibilityFeatures) {
-        chrome.accessibilityFeatures.spokenFeedback.get({}, function(details) {
-          terminal.setLiveOutputForAccessibility(details.value);
-          runNassh();
-        });
-      } else {
-        runNassh();
-      }
+        terminal.setCursorPosition(0, 0);
+        terminal.setCursorVisible(true);
+        terminal.runCommandClass(nassh.CommandInstance,
+                                 document.location.hash.substr(1));
     };
 
     // Useful for console debugging.

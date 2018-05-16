@@ -19,8 +19,7 @@
     "clipboardWrite",
     "notifications",
     "storage",
-    "unlimitedStorage",
-    "accessibilityFeatures.read"
+    "unlimitedStorage"
   ],
   "web_accessible_resources": [
     "html/nassh.html",
