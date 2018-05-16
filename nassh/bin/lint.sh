@@ -13,5 +13,5 @@ eslint "$@"
 exec closure-compiler \
   --checks-only \
   --jscomp_warning=lintChecks \
-  --language_in=ECMASCRIPT8 \
+  --language_in=ECMASCRIPT_2017 \
   "$@"
