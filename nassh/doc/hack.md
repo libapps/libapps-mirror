@@ -133,6 +133,9 @@ get access to many newer `chrome.app.*` APIs).
 
 See the [FAQ] for more details on the differences between the extension & app.
 
+If you're updating these files, you'll sometimes also need to update the
+[manifest][manifest_crosh.json] for [crosh] which lives in the Chromium tree.
+
 ## Whitelisted Permissions
 
 Using the dev extension id is necessary in order to access some APIs that are
@@ -141,7 +144,7 @@ get by with using a different id (and delete the settings from the
 [manifest_v1.5.json] for the app to avoid warnings at runtime).  These settings
 are already removed from the [manifest_ext.json] for the extension.
 
-* Access to [crosh](chromeos-crosh.md) under Chrome OS (`terminalPrivate`).
+* Access to [crosh] under Chrome OS (`terminalPrivate`).
   [(1)](https://cs.chromium.org/search/?q=terminalPrivate)
   [(2)](https://cs.chromium.org/chromium/src/chrome/common/extensions/api/terminal_private.json)
   [(3)](https://cs.chromium.org/chromium/src/chrome/browser/extensions/api/terminal/terminal_extension_helper.cc)
@@ -211,6 +214,22 @@ use the dev extension id instead.
 ```
 Secure Shell (extension ID "pnhechapfaindjhompbnflcldabbghjo") is blocked by the administrator.
 ```
+
+## Crosh
+
+While most of the UI code for [crosh] lives here (e.g. HTML/CSS/JS), the backend
+code and manifest lives in Chrome.
+
+* [chrome/common/extensions/api/](https://cs.chromium.org/chromium/src/chrome/common/extensions/api/):
+  * [terminal_private.json](https://cs.chromium.org/chromium/src/chrome/common/extensions/api/terminal_private.json):
+    Defines the `chrome.terminalPrivate` JavaScript API.
+* [chrome/browser/extensions/api/terminal/](https://cs.chromium.org/chromium/src/chrome/browser/extensions/api/terminal/):
+  Implements the `chrome.terminalPrivate` JavaScript API.
+* [chrome/browser/resources/chromeos/crosh_builtin/](https://cs.chromium.org/chromium/src/chrome/browser/resources/chromeos/crosh_builtin/)
+  * [manifest.json][manifest_crosh.json]: Manifest for the [crosh] extension.
+* [chromeos/process_proxy/](https://cs.chromium.org/chromium/src/chromeos/process_proxy/):
+  * Utility classes to manage processes and input/output for commands invoked
+    by the `api/terminal/` code.
 
 # Coding Style
 
@@ -458,6 +477,7 @@ Here's a random list of documents which would be useful to people.
 [manifest_ext.json]: ../manifest_ext.json
 [manifest_v1.5.json]: ../manifest_v1.5.json
 [manifest_v2.json]: ../manifest_v2.json
+[manifest_crosh.json]: https://cs.chromium.org/chromium/src/chrome/browser/resources/chromeos/crosh_builtin/manifest.json
 
 [chrome-bootstrap.css]: ../css/chrome-bootstrap.css
 [nassh_box.css]: ../css/nassh_box.css
@@ -508,6 +528,7 @@ Here's a random list of documents which would be useful to people.
 
 [FAQ]: FAQ.md
 
+[crosh]: chromeos-crosh.md
 [gnubbyd]: https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco
 [NaCl]: https://developer.chrome.com/native-client
 [OpenSSH]: https://www.openssh.com/
