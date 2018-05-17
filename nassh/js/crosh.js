@@ -57,7 +57,7 @@ Crosh.init = function() {
   var terminal = new hterm.Terminal(profileName);
 
   terminal.decorate(document.querySelector('#terminal'));
-  terminal.onTerminalReady = function() {
+  const runCrosh = function() {
     terminal.keyboard.bindings.addBinding('Ctrl-Shift-P', function() {
       nassh.openOptionsPage();
       return hterm.Keyboard.KeyActions.CANCEL;
@@ -68,6 +68,16 @@ Crosh.init = function() {
     terminal.runCommandClass(Crosh, qs['args'] || []);
 
     terminal.command.keyboard_ = terminal.keyboard;
+  };
+  terminal.onTerminalReady = function() {
+    if (chrome.accessibilityFeatures) {
+      chrome.accessibilityFeatures.spokenFeedback.get({}, function(details) {
+        terminal.setLiveOutputForAccessibility(details.value);
+        runCrosh();
+      });
+    } else {
+      runCrosh();
+    }
   };
 
   // Useful for console debugging.
