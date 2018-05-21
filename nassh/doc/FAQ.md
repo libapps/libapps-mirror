@@ -120,8 +120,8 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   to file a really useful bug report, then add in a recording of the
   session.  For bonus points, track down the troublesome sequence and
   include the offset into the log file.  For more information about how to
-  do this, see the "Debugging escape sequences" section in the
-  [hack.md](hack.md) file in this directory.
+  do this, see [hterm's "Debugging escape sequences"
+  section](../../hterm/doc/hack.md#Debugging-escape-sequences).
 
 
 ### Is there a mailing list to discuss hterm or Secure Shell?
