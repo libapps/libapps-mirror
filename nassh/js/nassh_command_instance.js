@@ -763,7 +763,8 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   if (params.hostname == '>crosh') {
     // TODO: This will need to be done better.  document.location changes don't
     // work in v2 apps.
-    this.terminalLocation.href = 'crosh.html';
+    const template = 'crosh.html?profile=%encodeURIComponent(terminalProfile)';
+    this.terminalLocation.href = lib.f.replaceVars(template, params);
     return;
   }
 
