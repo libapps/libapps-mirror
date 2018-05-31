@@ -292,28 +292,40 @@ nassh.GoogleRelay.prototype.openSocket = function(fd, host, port, streams,
  * Find a usable gnubby extension.
  */
 nassh.GoogleRelay.findGnubbyExtension = function() {
-  const appId = 'beknehfpfkghjoafdifaflglpjkojoco';
-  const extId = 'lkjlajklkdhaneeelolkfgbpikkgnkpk';
+  // The possible gnubby extensions.
+  const stableAppId = 'beknehfpfkghjoafdifaflglpjkojoco';
+  const stableExtId = 'lkjlajklkdhaneeelolkfgbpikkgnkpk';
+  const extensions = [
+    stableExtId,                         // extension (stable)
+    'klnjmillfildbbimkincljmfoepfhjjj',  // extension (dev)
+    stableAppId,                         // app (stable)
+    'dlfcjilkjfhdnfiecknlnddkmmiofjbg',  // app (dev)
+    'kmendfapggjehodndflmmgagdbamhnfd',  // component
+  ];
 
-  // Ping the extension to see if it's alive.
+  // Ping the extension to see if it's installed/enabled/alive.
   const check = (id) => new Promise((resolve, reject) => {
     chrome.runtime.sendMessage(id, {'type': 'HELLO'}, (result) => {
+      // If the probe worked, return the id, else return nothing so we can
+      // clear out all the pending promises.
       if (result !== undefined && result['rc'] == 0)
         resolve(id);
+      else
+        resolve();
     });
   });
 
-  // Pick a default in case neither is installed.
-  nassh.GoogleRelay.defaultGnubbyExtension = extId;
+  // Guess a reasonable default based on the OS.
+  nassh.GoogleRelay.defaultGnubbyExtension =
+      (hterm.os == 'cros' ? stableAppId : stableExtId);
 
   // We don't care which one is available, so go with the first response.
-  Promise.race([
-    check(appId),
-    check(extId),
-    new Promise((resolve, reject) => setTimeout(resolve, 1000)),
-  ]).then((foundId) => {
-    if (foundId)
-      nassh.GoogleRelay.defaultGnubbyExtension = foundId;
+  // We don't set a timeout here as it doesn't block overall execution.
+  Promise.all(extensions.map((id) => check(id))).then((results) => {
+    results = results.filter((id) => id);
+    console.log(`gnubby probe results: ${results}`);
+    if (results.length)
+      nassh.GoogleRelay.defaultGnubbyExtension = results[0];
   });
 };
 
