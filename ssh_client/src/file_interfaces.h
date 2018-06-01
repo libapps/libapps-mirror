@@ -15,7 +15,7 @@
 #include <termios.h>
 #include <unistd.h>
 
-#include "nacl-mounts/base/nacl_dirent.h"
+#include "nacl-mounts/base/nacl_stat.h"
 
 class FileStream {
  public:
@@ -35,9 +35,6 @@ class FileStream {
   virtual int fstat(nacl_abi_stat* out) {
     memset(out, 0, sizeof(nacl_abi_stat));
     return 0;
-  }
-  virtual int getdents(dirent* buf, size_t count, size_t* nread) {
-    return ENOTDIR;
   }
 
   virtual int isatty() {

@@ -24,8 +24,6 @@
 #include "tcp_socket.h"
 #include "udp_socket.h"
 
-extern "C" void DoWrapSysCalls();
-
 namespace {
 const int64_t kMicrosecondsPerSecond = 1000 * 1000;
 const int64_t kNanosecondsPerMicrosecond = 1000;
@@ -109,8 +107,6 @@ FileSystem::FileSystem(pp::Instance* instance, OutputInterface* out)
 
   // Add localhost 127.0.0.1
   AddHostAddress("localhost", 0x7F000001);
-
-  DoWrapSysCalls();
 }
 
 FileSystem::~FileSystem() {
@@ -320,15 +316,6 @@ int FileSystem::stat(const char* pathname, nacl_abi_stat* out) {
     return ENOENT;
 
   return handler->stat(pathname, out);
-}
-
-int FileSystem::getdents(int fd, dirent* buf, size_t count, size_t* nread) {
-  Mutex::Lock lock(mutex_);
-  FileStream* stream = GetStream(fd);
-  if (stream && stream != kBadFileStream)
-    return stream->getdents(buf, count, nread);
-  else
-    return EBADF;
 }
 
 int FileSystem::isatty(int fd) {

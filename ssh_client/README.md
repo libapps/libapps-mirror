@@ -26,16 +26,16 @@ point, but requires more planning.
 
 ## glibc (NaCl) vs newlib (PNaCl)
 
-The build currently supports building against glibc and newlib which means it
-supports building using the NaCl and the PNaCl toolchain.  Historically, the
-focus was on glibc & NaCl (because PNaCl didn't exist or wasn't stable), but
-now the focus is on newlib & PNaCl.  The glibc build might still work, but we
-don't test it anymore.
+The build only supports building against newlib which means it only supports
+building using the PNaCl toolchain.  Previously, the focus was on glibc & NaCl
+(because PNaCl didn't exist or wasn't stable), but now the focus is on newlib
+& PNaCl.  Since the glibc build wasn't used anywhere, we dropped support for it
+entirely.
 
-Also, even though we build using PNaCl by default, we still translate the pexe
-(the PNaCl executable) into nexe's (NaCl executables) for release.  There might
-be room for improvement here, but it's a low priority atm as we haven't had any
-requests to support any arch other than x86/x86_64/arm.
+Also, even though we build using PNaCl, we still translate the pexe (the PNaCl
+executable) into nexe's (NaCl executables) for release.  There might be room
+for improvement here, but it's a low priority atm as we haven't had any requests
+to support any arch other than x86/x86_64/arm.
 
 # Building
 
@@ -74,10 +74,8 @@ If you're hacking on the source, here are the files you most likely care about:
 Here are the rest of the files, but most likely you don't need to touch these:
 
 * [include/]: Some shim headers for gluing our plugin code to the NaCl runtime.
-* [ssh_client_newlib.nmf]: Chrome manifest file for loading NaCl files.
-  Used by PNaCl builds which use newlib.
 * [ssh_client.nmf]: Chrome manifest file for loading NaCl files.
-  Used by NaCl builds which use glibc.
+  Used by PNaCl builds which use newlib.
 
 ## NaCl Plugin Layout
 
@@ -187,7 +185,7 @@ $ ./output/naclsdk/pepper_49/toolchain/linux_x86_glibc/bin/x86_64-nacl-gdb -q
 (gdb) target remote localhost:4014
 Remote debugging using localhost:4014
 0x000000000fddbc60 in ?? ()
-(gdb) nacl-manifest ssh_client_newlib.dbg.nmf
+(gdb) nacl-manifest ssh_client.dbg.nmf
 (gdb) remote get irt output/irt
 (gdb) nacl-irt output/irt
 (gdb) b PepperFile::Open
@@ -229,7 +227,6 @@ Here's a random list of documents which would be useful to people.
 [nacl-openssh.sh]: ./nacl-openssh.sh
 [openssh-7.6p1.patch]: ./openssh-7.6p1.patch
 [src/]: ./src/
-[ssh_client_newlib.nmf]: ./ssh_client_newlib.nmf
 [ssh_client.nmf]: ./ssh_client.nmf
 
 [dev_null.cc]: ./src/dev_null.cc

@@ -45,9 +45,6 @@ class ProxyStream : public FileStream {
   virtual int fstat(nacl_abi_stat* out) {
     return orig_->fstat(out);
   }
-  virtual int getdents(dirent* buf, size_t count, size_t* nread) {
-    return orig_->getdents(buf, count, nread);
-  }
 
   virtual int isatty() {
     return orig_->isatty();

@@ -27,11 +27,9 @@ export CXX=${NACLCXX}
 export AR=${NACLAR}
 export RANLIB=${NACLRANLIB}
 
-if [ "${NACL_ARCH}" = "pnacl" ]; then
-  readonly NACL_TOOLCHAIN_INSTALL=${NACL_TOOLCHAIN_ROOT}/le32-nacl
-else
-  readonly NACL_TOOLCHAIN_INSTALL=${NACL_TOOLCHAIN_ROOT}/${NACL_CROSS_PREFIX}
-fi
+# Assume PNaCl toolchain.
+readonly NACL_ARCH="pnacl"
+readonly NACL_TOOLCHAIN_INSTALL=${NACL_TOOLCHAIN_ROOT}/le32-nacl
 
 readonly WEBPORTS_PREFIX=${NACL_TOOLCHAIN_INSTALL}/usr
 readonly WEBPORTS_INCLUDE=${WEBPORTS_PREFIX}/include
@@ -74,9 +72,14 @@ else
   cd "${PACKAGE_NAME}"
 fi
 
-EXTRA_LIBS=()
+EXTRA_LIBS=( -lglibc-compat )
 EXTRA_CFLAGS=(
   -DHAVE_SIGACTION -DHAVE_TRUNCATE
+  -DHAVE_SETSID -DHAVE_GETNAMEINFO -DHAVE_GETADDRINFO
+  -DHAVE_GETCWD -DHAVE_STATVFS -DHAVE_FSTATVFS
+  -DHAVE_ENDGRENT -DHAVE_FD_MASK -include sys/cdefs.h
+  ${NACL_CPPFLAGS}
+  -I"${WEBPORTS_INCLUDE}/glibc-compat"
 )
 EXTRA_CONFIGURE_FLAGS=(
   # Log related settings.
@@ -102,26 +105,14 @@ EXTRA_CONFIGURE_FLAGS=(
   # Features we want.
   --with-openssl  # Needed for DSA/RSA key support.
   --with-zlib --without-zlib-version-check
+
+  # These don't work with newlib (used in PNaCl).
+  --without-stackprotect
+  --without-hardening
 )
-if [ ${NACL_ARCH} = "pnacl" ] ; then
-  EXTRA_CFLAGS+=(
-    -DHAVE_SETSID -DHAVE_GETNAMEINFO -DHAVE_GETADDRINFO
-    -DHAVE_GETCWD -DHAVE_STATVFS -DHAVE_FSTATVFS
-    -DHAVE_ENDGRENT -DHAVE_FD_MASK -include sys/cdefs.h
-    ${NACL_CPPFLAGS}
-    -I"${WEBPORTS_INCLUDE}/glibc-compat"
-  )
-  EXTRA_CONFIGURE_FLAGS+=(
-    --without-stackprotect
-    --without-hardening
-  )
-  EXTRA_LIBS+=( -lglibc-compat )
-  export ac_cv_func_inet_aton=no
-  export ac_cv_func_inet_ntoa=no
-  export ac_cv_func_inet_ntop=no
-else
-  EXTRA_CFLAGS+=( -I"${WEBPORTS_INCLUDE}" )
-fi
+export ac_cv_func_inet_aton=no
+export ac_cv_func_inet_ntoa=no
+export ac_cv_func_inet_ntop=no
 
 # The prefix path matches what is used at runtime.
 if [[ ! -e Makefile ]]; then

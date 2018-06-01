@@ -29,8 +29,7 @@
 // Take care of stuffing that into errno and setting return to -1 so callers
 // can assume sane POSIX semantics.  We might have to make wrappers in our
 // syscalls.c if OpenSSH itself ever starts using pthreads.
-#ifdef USE_NEWLIB
-# define _PTHREAD_HANDLE_ERRNO(call) \
+#define _PTHREAD_HANDLE_ERRNO(call) \
   ({ \
     int ret = (call); \
     if (ret) { \
@@ -39,9 +38,6 @@
     } \
     ret; \
   })
-#else
-# define _PTHREAD_HANDLE_ERRNO(call) call
-#endif
 
 class Mutex {
  public:

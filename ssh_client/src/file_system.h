@@ -68,7 +68,6 @@ class FileSystem {
   int dup2(int fd, int newfd);
   int fstat(int fd, nacl_abi_stat* out);
   int stat(const char* pathname, nacl_abi_stat* out);
-  int getdents(int fd, dirent*, size_t count, size_t* nread);
 
   int isatty(int fd);
   int tcgetattr(int fd, struct termios* termios_p);

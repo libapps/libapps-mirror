@@ -19,32 +19,8 @@
 
 extern "C" {
 
-#ifndef USE_NEWLIB
-#define DECLARE(name) static __typeof__(__nacl_irt_##name) \
-    __nacl_irt_##name##_real;
-#define DO_WRAP(name) do { \
-    __nacl_irt_##name##_real = __nacl_irt_##name; \
-    __nacl_irt_##name = __nacl_irt_##name##_wrap; \
-  } while (0)
-#define WRAP(name) __nacl_irt_##name##_wrap
-#define REAL(name) __nacl_irt_##name##_real
-#else
-#define DECLARE(name)
 #define WRAP(name) __user_irt_##name
-#define DO_WRAP(name)
 #define REAL(name) libnacl_##name
-#endif
-
-DECLARE(open);
-DECLARE(close);
-DECLARE(read);
-DECLARE(write);
-DECLARE(seek);
-DECLARE(dup);
-DECLARE(dup2);
-DECLARE(stat);
-DECLARE(fstat);
-DECLARE(getdents);
 
 /*
  * Wrapped functions will return 0/errno on success, and pass back the real
@@ -82,10 +58,9 @@ static int WRAP(open)(const char* pathname, int oflag, mode_t cmode,
   return FileSystem::GetFileSystem()->open(pathname, oflag, cmode, newfd);
 }
 
-#ifdef USE_NEWLIB
-# ifndef O_TMPFILE
-#  define O_TMPFILE 0
-# endif
+#ifndef O_TMPFILE
+# define O_TMPFILE 0
+#endif
 int open(const char* file, int oflag, ...) {
   int newfd;
   mode_t cmode = 0;
@@ -100,32 +75,26 @@ int open(const char* file, int oflag, ...) {
   }
   return HANDLE_ERRNO(WRAP(open)(file, oflag, cmode, &newfd), newfd);
 }
-#endif
 
 static int WRAP(close)(int fd) {
   LOG("close: %d\n", fd);
   return FileSystem::GetFileSystem()->close(fd);
 }
 
-#ifdef USE_NEWLIB
 int close(int fd) {
   return HANDLE_ERRNO(WRAP(close)(fd), 0);
 }
-#endif
 
 static int WRAP(read)(int fd, void* buf, size_t count, size_t* nread) {
   VLOG("read: %d %d\n", fd, count);
   return FileSystem::GetFileSystem()->read(fd, (char*)buf, count, nread);
 }
 
-#ifdef USE_NEWLIB
 ssize_t read(int fd, void* buf, size_t count) {
   ssize_t rv;
   return HANDLE_ERRNO(WRAP(read)(fd, buf, count, (size_t*)&rv), rv);
 }
-#endif
 
-#ifdef USE_NEWLIB
 /* TODO(olonho): ugly hack to get access to the real write(). Fortunately,
    NaCl library ABI is pretty stable.*/
 #define NACL_IRT_FDIO_v0_1      "nacl-irt-fdio-0.1"
@@ -138,13 +107,11 @@ struct nacl_irt_fdio {
   int (*write)(int fd, const void* buf, size_t count, size_t* nwrote);
   int (*seek)(int fd, off_t offset, int whence, off_t* new_offset);
   int (*fstat)(int fd, struct stat* );
-  int (*getdents)(int fd, struct dirent* , size_t count, size_t* nread);
 };
 
 int libnacl_write(int fd, const void* buf, size_t count, size_t* nwrote) {
   return __libnacl_irt_fdio.write(fd, buf, count, nwrote);
 }
-#endif
 
 static int WRAP(write)(int fd, const void* buf, size_t count, size_t* nwrote) {
   if (fd != 1 && fd != 2)
@@ -161,12 +128,10 @@ static int WRAP(write)(int fd, const void* buf, size_t count, size_t* nwrote) {
                                             nwrote);
 }
 
-#ifdef USE_NEWLIB
 ssize_t write(int fd, const void* buf, size_t count) {
   ssize_t rv;
   return HANDLE_ERRNO(WRAP(write)(fd, buf, count, (size_t*)&rv), rv);
 }
-#endif
 
 static int WRAP(seek)(int fd, nacl_abi_off_t offset, int whence,
                nacl_abi_off_t* new_offset) {
@@ -174,42 +139,35 @@ static int WRAP(seek)(int fd, nacl_abi_off_t offset, int whence,
   return FileSystem::GetFileSystem()->seek(fd, offset, whence, new_offset);
 }
 
-#ifdef USE_NEWLIB
 off_t lseek(int fd, off_t offset, int whence) {
   nacl_abi_off_t rv;
   return HANDLE_ERRNO(WRAP(seek)(fd, offset, whence, &rv), rv);
 }
-#endif
 
 static int WRAP(dup)(int fd, int* newfd) {
   LOG("dup: %d\n", fd);
   return FileSystem::GetFileSystem()->dup(fd, newfd);
 }
 
-#ifdef USE_NEWLIB
 int dup(int oldfd) {
   int rv;
   return HANDLE_ERRNO(WRAP(dup)(oldfd, &rv), rv);
 }
-#endif
 
 static int WRAP(dup2)(int fd, int newfd) {
   LOG("dup2: %d\n", fd);
   return FileSystem::GetFileSystem()->dup2(fd, newfd);
 }
 
-#ifdef USE_NEWLIB
 int dup2(int oldfd, int newfd) {
   return HANDLE_ERRNO(WRAP(dup2)(oldfd, newfd), newfd);
 }
-#endif
 
 static int WRAP(stat)(const char* pathname, struct nacl_abi_stat* buf) {
   LOG("stat: %s\n", pathname);
   return FileSystem::GetFileSystem()->stat(pathname, buf);
 }
 
-#ifdef USE_NEWLIB
 static void stat_n2u(struct nacl_abi_stat* nacl_buf, struct stat* buf) {
   buf->st_dev = nacl_buf->nacl_abi_st_dev;
   buf->st_ino = nacl_buf->nacl_abi_st_ino;
@@ -233,14 +191,12 @@ int stat(const char* path, struct stat* buf) {
     stat_n2u(&nacl_buf, buf);
   return HANDLE_ERRNO(rv, 0);
 }
-#endif
 
 static int WRAP(fstat)(int fd, struct nacl_abi_stat* buf) {
   LOG("fstat: %d\n", fd);
   return FileSystem::GetFileSystem()->fstat(fd, buf);
 }
 
-#ifdef USE_NEWLIB
 int fstat(int fd, struct stat* buf) {
   struct nacl_abi_stat nacl_buf;
   int rv = WRAP(fstat)(fd, &nacl_buf);
@@ -248,16 +204,6 @@ int fstat(int fd, struct stat* buf) {
     stat_n2u(&nacl_buf, buf);
   return HANDLE_ERRNO(rv, 0);
 }
-#endif
-
-#ifndef USE_NEWLIB
-// TODO(olonho): what to wrap here for newlib?
-static int WRAP(getdents)(int fd, dirent* nacl_buf, size_t nacl_count,
-                          size_t* nread) {
-  LOG("getdents: %d\n", fd);
-  return FileSystem::GetFileSystem()->getdents(fd, nacl_buf, nacl_count, nread);
-}
-#endif
 
 int isatty(int fd) {
   LOG("isatty: %d\n", fd);
@@ -531,21 +477,6 @@ int cfsetospeed(struct termios* t, speed_t speed) {
 int cfsetispeed(struct termios* t, speed_t speed) {
   t->c_ispeed = speed;
   return 0;
-}
-
-void DoWrapSysCalls() {
-  LOG("DoWrapSysCalls...\n");
-  DO_WRAP(open);
-  DO_WRAP(close);
-  DO_WRAP(read);
-  DO_WRAP(write);
-  DO_WRAP(seek);
-  DO_WRAP(dup);
-  DO_WRAP(dup2);
-  DO_WRAP(stat);
-  DO_WRAP(fstat);
-  DO_WRAP(getdents);
-  LOG("DoWrapSysCalls done\n");
 }
 
 }  // extern "C"
