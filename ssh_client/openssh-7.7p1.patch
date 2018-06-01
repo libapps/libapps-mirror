@@ -79,12 +79,20 @@ have to hack up OpenSSH.
  
  	/* close on exec */
 
+the bind_permitted() check doesn't work well in the nacl env.  leave it to the
+host os to do the actual check and deny/permit as makes sense.
+
 daemonized() relies on funcs we don't implement (because we don't need them),
 and this func is only used in sshd.  disable it to avoid link failures.
 
 --- a/misc.c
 +++ b/misc.c
-@@ -1268,6 +1268,7 @@ bind_permitted(int port, uid_t uid)
+@@ -1586,11 +1586,10 @@ forward_equals(const struct Forward *a, const struct Forward *b)
+ int
+ bind_permitted(int port, uid_t uid)
+ {
+-	if (port < IPPORT_RESERVED && uid != 0)
+-		return 0;
  	return 1;
  }
  
@@ -92,7 +100,7 @@ and this func is only used in sshd.  disable it to avoid link failures.
  /* returns 1 if process is already daemonized, 0 otherwise */
  int
  daemonized(void)
-@@ -1285,6 +1286,7 @@ daemonized(void)
+@@ -1600,6 +1600,7 @@ daemonized(void)
  	debug3("already daemonized");
  	return 1;
  }
