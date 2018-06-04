@@ -1,5 +1,6 @@
-# Concat results
+# Bundled dependencies
 js/*.concat.js
+js/*.rollup.js
 
 # Concatenated licenses of dependencies
 html/licenses.html

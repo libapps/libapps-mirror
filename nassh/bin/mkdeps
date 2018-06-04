@@ -29,6 +29,7 @@ def mkdeps():
     """Build the dependencies."""
     concat.concat(os.path.join(nassh.DIR, 'concat', 'nassh_deps.concat'),
                   os.path.join(nassh.DIR, 'js', 'nassh_deps.concat.js'))
+    libdot.run(['rollup', '-c'], cwd=nassh.DIR)
 
 
 def concat_local_deps():

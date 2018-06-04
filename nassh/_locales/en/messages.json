@@ -1649,19 +1649,23 @@
 	},
 	"REQUEST_PIN_PROMPT": {
 		"description": "Prompt shown when the user is requested to enter a smart card's PIN (i.e. a password) to unlock a specific stored key.",
-		"message": "Enter PIN to unlock key $FINGERPRINT$ on '$READER$' ($NUM_TRIES$ tries remaining):",
+		"message": "Enter PIN to unlock key $FINGERPRINT$ on '$READER$ ($APPLET$)' ($NUM_TRIES$ tries remaining):",
 		"placeholders": {
 			"fingerprint": {
 				"content": "$1",
 				"example": "1234ABCD"
 			},
-			"num_tries": {
-				"content": "$3",
-				"example": "3"
-			},
 			"reader": {
 				"content": "$2",
 				"example": "OpenPGP card reader"
+			},
+			"applet": {
+				"content": "$3",
+				"example": "OpenPGP"
+			},
+			"num_tries": {
+				"content": "$4",
+				"example": "3"
 			}
 		}
 	},
