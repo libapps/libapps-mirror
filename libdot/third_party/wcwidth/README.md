@@ -9,8 +9,7 @@ Licensing details can be found in the LICENSE.md file.
 
 When a new [Unicode release](http://www.unicode.org/versions/latest/) is made,
 it might contain new combining and wide characters, so we'll need to update our
-tables.  The [uniset utility](./uniset) can be used in some cases to generate
-lookup tables.
+tables.
 
 You'll first want to grab the latest Unicode release.  It's easiest to grab
 the entire archive (it's small) and then extract the few files you want.
