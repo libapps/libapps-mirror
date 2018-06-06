@@ -36,7 +36,7 @@ window.onload = function() {
     terminal.onTerminalReady = function() {
       if (window.chrome && chrome.accessibilityFeatures) {
         chrome.accessibilityFeatures.spokenFeedback.get({}, function(details) {
-          terminal.setLiveOutputForAccessibility(details.value);
+          terminal.setAccessibilityEnabled(details.value);
           runNassh();
         });
       } else {

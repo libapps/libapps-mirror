@@ -72,7 +72,7 @@ Crosh.init = function() {
   terminal.onTerminalReady = function() {
     if (chrome.accessibilityFeatures) {
       chrome.accessibilityFeatures.spokenFeedback.get({}, function(details) {
-        terminal.setLiveOutputForAccessibility(details.value);
+        terminal.setAccessibilityEnabled(details.value);
         runCrosh();
       });
     } else {
