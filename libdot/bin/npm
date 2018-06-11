@@ -6,14 +6,5 @@
 LIBDOT_DIR="$(dirname -- "$0")/../../libdot"
 source "${LIBDOT_DIR}/bin/common.sh"
 
-if [[ $# -eq 0 ]]; then
-  cd "$(dirname "$0")"/..
-  set -- js/*.js
-fi
-
-eslint "$@"
-exec closure-compiler \
-  --checks-only \
-  --jscomp_warning=lintChecks \
-  --language_in=ECMASCRIPT6_STRICT \
-  "$@"
+# The common.sh script makes sure our copy is first in the $PATH.
+exec npm "$@"

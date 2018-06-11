@@ -1,2 +1,8 @@
 # Cached scripts
 /bin/.png.crusher.*
+
+# Stuff we build for distribution
+dist
+
+# npm related dirs.
+node_modules

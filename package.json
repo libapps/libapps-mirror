@@ -13,7 +13,16 @@
     "README.md"
   ],
   "devDependencies": {},
-  "dependencies": {},
+  "dependencies": {
+    "asn1js": "~2",
+    "csso": ">=3",
+    "csso-cli": ">=1",
+    "eslint": "~5",
+    "pkijs": "~2.1",
+    "rollup": ">=0.60",
+    "rollup-plugin-node-resolve": ">=3.3",
+    "uglify-js": "~3"
+  },
   "bugs": {
     "url": "https://crbug.com/new",
     "email": "chromium-hterm@chromium.org"

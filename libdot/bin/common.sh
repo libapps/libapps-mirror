@@ -159,3 +159,5 @@ function echo_changelog() {
     return 1
   fi
 }
+
+source "${LIBDOT_BIN_DIR}/node.sh"

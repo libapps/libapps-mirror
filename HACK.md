@@ -84,10 +84,84 @@ stick to a few forms though.
       console.log(`The field "${name}" is invalid: ${val}`);
       console.log(`The field "${name}" is invalid:`, val);
 
-## Images
+## Minification
+
+We follow the recommendations listed at
+[PageSpeed Insights](https://developers.google.com/speed/docs/insights/MinifyResources).
+
+### JavaScript
+
+We don't currently minify our JavaScript files.
+Research is on going to support this either via the [Closure Compiler] or
+[UglifyJS] tools.
+
+We need to make sure live debugging in Secure Shell is still smooth.
+
+[Closure Compiler]: https://developers.google.com/closure/compiler/
+[UglifyJS]: http://lisperator.net/uglifyjs/
+
+### CSS
+
+We don't have a lot of CSS files in these projects, and they tend to be small
+already, so we don't need a perfect solution.
+
+We go with [csso] because the installed footprint (in node_modules/) is slightly
+smaller, and the CLI usage is simpler than [cssnano].
+
+Otherwise, we want support for source maps and generally smaller files.
+
+[csso]: https://github.com/css/csso
+[cssnano]: https://cssnano.co/
+
+### Images
 
 When adding images, make sure to crush them first.
 You can use [libdot/bin/imgcrush](./libdot/bin/imgcrush) to do so losslessly.
+
+# Node/npm Usage
+
+We bundle our own node/npm binaries and sets of node_modules so that we do not
+rely on the respective infrastructures being up, as well as the various npm
+packages being unchanged (e.g. deleting versions, changing their contents,
+etc...).
+We want our builds to be as hermetic as possible.
+
+For node/npm, we use the versions the Chromium project snapshots in their
+gs://chromium-nodejs/ bucket.
+See the node/npm scripts in [libdot/bin/](./libdot/bin/) for more details.
+
+Using these tools are all transparent to libdot users -- the libdot/bin/node
+and libdot/bin/npm wrappers take care of downloading everything and setting
+up the $PATH to include the tools.
+
+## node_modules
+
+We roll our own tarballs of the node_modules directory (rather than re-use
+the one Chromium creates) since we have our own set of packages we care about.
+
+Our dependencies are maintained in the top level [package.json](./package.json).
+
+The tarball can be created with the libdot/bin/node_modules_create_bundle script
+and then uploaded to the gs://chromeos-localmirror/secureshell/distfiles/ site.
+Then update the NODE_MODULES_HASH setting in libdot/bin/node.sh.
+
+For example, to update it, run the script and follow its directions.
+You'll want to create & upload a new gerrit commit for the node.sh file too.
+```sh
+# Create the bundle.  This will also prune & upgrade modules.
+$ ./libdot/bin/node_modules_create_bundle
+-*- Removing modules not listed in package.json
+...
+-*- Updating modules from package.json
+...
+-*- Creating tarball
+-*- Compressing tarball
+7.4M    node_modules-bef2e594c44731d96ba28d0ce1df789a4611b5bbae70666cbef13f069155a44b.tar.xz
+-*- To update the hash, run:
+sed -i "/^NODE_MODULES_HASH=/s:=.*:='bef2e594c44731d96ba28d0ce1df789a4611b5bbae70666cbef13f069155a44b':" './libdot/bin/node.sh'
+-*- To upload the new modules:
+gsutil cp -a public-read node_modules-bef2e594c44731d96ba28d0ce1df789a4611b5bbae70666cbef13f069155a44b.tar.xz gs://chromeos-localmirror/secureshell/distfiles/
+```
 
 # Submitting patches
 
