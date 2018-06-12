@@ -84,6 +84,11 @@ stick to a few forms though.
       console.log(`The field "${name}" is invalid: ${val}`);
       console.log(`The field "${name}" is invalid:`, val);
 
+## Images
+
+When adding images, make sure to crush them first.
+You can use [libdot/bin/imgcrush](./libdot/bin/imgcrush) to do so losslessly.
+
 # Submitting patches
 
 This repository only accepts commits that are submitted through [Gerrit], the

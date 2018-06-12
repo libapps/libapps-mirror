@@ -1,0 +1,144 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Crush image files.
+
+We try to shrink the image files by reencoding/stripping data losslessly.
+
+We currently support png and jpg files.
+"""
+
+from __future__ import print_function
+
+import argparse
+import base64
+import glob
+import logging
+import logging.handlers
+import multiprocessing
+import os
+import requests
+import subprocess
+import sys
+import time
+
+
+LIBDOT_BIN_DIR = os.path.dirname(os.path.realpath(__file__))
+LIBDOT_DIR = os.path.dirname(LIBDOT_BIN_DIR)
+
+
+# We pick a recent Chromium commit.  It doesn't change much so shouldn't matter.
+# Updating to the latest version shouldn't cause problems.
+CHROMIUM_REF = '69.0.3460.0'
+
+# Full path to Chromium's png crush script.
+PNG_CRUSHER_URL = 'https://chromium.googlesource.com/chromium/src/+/%s/tools/resources/optimize-png-files.sh' % (CHROMIUM_REF,)
+
+# Our local cache of the script.
+PNG_CRUSHER = os.path.join(LIBDOT_BIN_DIR, '.png.crusher.%s' % (CHROMIUM_REF,))
+
+# The tool used to crush jpeg images.
+JPG_CRUSHER = 'jpegoptim'
+
+
+def update_png_crusher():
+    """Update our local cache of Chromium's png optimizer script."""
+    if os.path.exists(PNG_CRUSHER):
+        return
+
+    for path in glob.glob(os.path.join(LIBDOT_BIN_DIR, '.png.crusher.*')):
+        os.unlink(path)
+
+    r = requests.get(PNG_CRUSHER_URL + '?format=TEXT')
+    with open(PNG_CRUSHER, 'wb') as fp:
+        fp.write(base64.b64decode(r.text))
+
+    os.chmod(PNG_CRUSHER, 0o755)
+
+
+def run(path, cmd):
+    logging.info('Processing %s', path)
+    logging.debug('Running: %s', ' '.join(cmd))
+    subprocess.call(cmd)
+
+
+def process_file(pool, path):
+    """Crush |path| as makes sense.
+
+    Jobs are thrown into the |pool|, but we don't currently bother checking
+    their return values.  General life cycle management is handled by the pool.
+    """
+    _, ext = os.path.splitext(path)
+    if ext in ('.png',):
+        update_png_crusher()
+        pool.apply_async(run, (path, [PNG_CRUSHER, path]))
+    elif ext in ('.jpg', '.jpeg'):
+        pool.apply_async(run, (path, [JPG_CRUSHER, path]))
+
+
+def process_dir(pool, path):
+    """Process all the paths under |path|."""
+    for root, dirs, files in os.walk(path):
+        # Not really needed, but makes things consistent.
+        dirs.sort()
+        files.sort()
+
+        for path in files:
+            process_file(pool, os.path.join(root, path))
+
+
+def setup_logging(debug=False):
+    """Setup the logging module."""
+    fmt = u'%(asctime)s: %(levelname)-7s: '
+    if debug:
+        fmt += u'%(filename)s:%(funcName)s: '
+    fmt += u'%(message)s'
+
+    # 'Sat, 05 Oct 2013 18:58:50 -0400 (EST)'
+    tzname = time.strftime('%Z', time.localtime())
+    datefmt = u'%a, %d %b %Y %H:%M:%S ' + tzname
+
+    level = logging.DEBUG if debug else logging.INFO
+
+    formatter = logging.Formatter(fmt, datefmt)
+    handler = logging.StreamHandler(stream=sys.stdout)
+    handler.setFormatter(formatter)
+
+    logger = logging.getLogger()
+    logger.addHandler(handler)
+    logger.setLevel(level)
+
+
+def get_parser():
+    """Get a command line parser."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('-d', '--debug', action='store_true',
+                        help='Run with debug output.')
+    parser.add_argument('paths', nargs='+',
+                        help='Image files or directories to crush.')
+    return parser
+
+
+def main(argv):
+    parser = get_parser()
+    opts = parser.parse_args(argv)
+    setup_logging(debug=opts.debug)
+
+    pool = multiprocessing.Pool()
+
+    # We walk the top set of args by hand to deref links.
+    for path in opts.paths:
+        if os.path.isdir(path):
+            process_dir(pool, path)
+        elif os.path.isfile(path):
+            process_file(pool, path)
+
+    pool.close()
+    pool.join()
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))
