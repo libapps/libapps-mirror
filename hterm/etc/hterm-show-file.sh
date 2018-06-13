@@ -27,23 +27,21 @@ screen_dcs() {
 print_seq() {
   local seq="$1"
 
-  case ${TERM-} in
-  screen*)
-    # Since tmux defaults to setting TERM=screen (ugh), we need to detect
-    # it here specially.
-    if [ -n "${TMUX-}" ]; then
-      tmux_dcs "${seq}"
-    else
-      screen_dcs "${seq}"
-    fi
-    ;;
-  tmux*)
+  if [ -n "${TMUX-}" ]; then
     tmux_dcs "${seq}"
-    ;;
-  *)
-    echo "${seq}"
-    ;;
-  esac
+  else
+    case ${TERM-} in
+    screen*)
+      screen_dcs "${seq}"
+      ;;
+    tmux*)
+      tmux_dcs "${seq}"
+      ;;
+    *)
+      echo "${seq}"
+      ;;
+    esac
+  fi
 }
 
 # Base64 encode stdin.
