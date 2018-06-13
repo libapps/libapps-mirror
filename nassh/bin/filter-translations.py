@@ -21,7 +21,11 @@ import sys
 def reformat(path, inplace=False):
     """Reformat translation."""
     with open(path) as fp:
-        data = json.loads(fp.read())
+        try:
+            data = json.loads(fp.read())
+        except ValueError as e:
+            print('ERROR: Processing %s: %s' % (path, e), file=sys.stderr)
+            return False
 
     format_spaces = json.dumps(data, ensure_ascii=False, indent=4,
                                sort_keys=True)
@@ -34,6 +38,8 @@ def reformat(path, inplace=False):
             fp.write(format_tabs + '\n')
     else:
         sys.stdout.write(format_tabs + '\n')
+
+    return True
 
 
 def get_parser():
@@ -50,8 +56,11 @@ def main(argv):
     parser = get_parser()
     opts = parser.parse_args(argv)
 
+    ret = 0
     for path in opts.files:
-        reformat(path, opts.inplace)
+        if not reformat(path, opts.inplace):
+            ret = 1
+    return ret
 
 
 if __name__ == '__main__':

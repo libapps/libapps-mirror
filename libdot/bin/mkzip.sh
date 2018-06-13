@@ -305,6 +305,11 @@ function init_from_dir() {
 
   set +f  # Re-enable expansion.
 
+  while read -d $'\0' -r pat; do
+    echo_err "Minifying translations"
+    find "${pat}" -name messages.json -exec minify-translations.py -i {} +
+  done < <(find "${zipdir}" -name _locales -print0)
+
   cd - >/dev/null
 
   if [[ -d "${zipdir}/plugin" ]]; then
