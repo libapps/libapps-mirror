@@ -6,12 +6,7 @@
 		"message": "Saglabāt dublējumu"
 	},
 	"bad_destination": {
-		"message": "Nevar parsēt mērķi: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Nevar parsēt mērķi: $1"
 	},
 	"before_unload": {
 		"message": "Aizverot šo cilni, sesija tiks pārtraukta."
@@ -32,15 +27,13 @@
 		"message": "Atver jaunu SSH sesiju."
 	},
 	"command_complete": {
-		"message": "Komanda “$1” tika aizvērta ar statusa kodu $2.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Komanda “$1” tika aizvērta ar statusa kodu $2."
+	},
+	"command_not_supported": {
+		"message": "Komanda $1 netiek atbalstīta šajā Chrome versijā."
+	},
+	"command_startup_failed": {
+		"message": "Komandas $1 palaišana neizdevās: $2"
 	},
 	"connect_button_label": {
 		"message": "Izveidot savienojumu"
@@ -49,31 +42,16 @@
 		"message": "Vai izvēlēties citu savienojumu (C) vai iziet (X)?"
 	},
 	"connecting": {
-		"message": "Notiek savienojuma izveide ar $1...",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Notiek savienojuma izveide ar $1..."
+	},
+	"connection_dialog_name": {
+		"message": "Savienojuma dialoglodziņš"
 	},
 	"console_crosh_options_notice": {
-		"message": "Vai zinājāt, ka ir pieejama atsevišķa opciju lapa?\nVairs nav jāveic tiešas darbības ar parametru term_.\nNospiediet $1, lai atvērtu lapu, vai noklikšķiniet uz šīs saites:\n$2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Vai zinājāt, ka ir pieejama atsevišķa opciju lapa?\nVairs nav tieši jāpārveido parametrs term_.\nNospiediet $1, lai atvērtu lapu, vai noklikšķiniet uz šīs saites:\n$2."
 	},
 	"console_nassh_options_notice": {
-		"message": "Vai zinājāt, ka ir pieejama atsevišķa opciju lapa?\nVairs nav jāveic tiešas darbības ar parametru term_.\n$1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Vai zinājāt, ka ir pieejama atsevišķa opciju lapa?\nVairs nav jāveic tiešas darbības ar parametru term_.\n$1"
 	},
 	"del_keycap": {
 		"message": "[DZĒST]"
@@ -82,12 +60,7 @@
 		"message": "Dzēst"
 	},
 	"disconnect_message": {
-		"message": "NaCl spraudnis tika aizvērts ar statusa kodu $1.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "NaCl spraudnis tika aizvērts ar statusa kodu $1."
 	},
 	"enter_keycap": {
 		"message": "[IEVADĪT]"
@@ -117,7 +90,7 @@
 		"message": "ports"
 	},
 	"field_relay_options_aria_label": {
-		"message": "pārraides opcijas"
+		"message": "SSH pārraides servera opcijas"
 	},
 	"field_relay_options_placeholder": {
 		"message": "SSH pārraides servera opcijas"
@@ -132,12 +105,217 @@
 		"message": "lietotājvārds"
 	},
 	"found_relay": {
-		"message": "Atrasts pārraides serveris: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Atrasts pārraides serveris: $1"
+	},
+	"get_profile_error": {
+		"message": "KĻŪDA. Nevarēja ielādēt profilu $1:\n$2"
+	},
+	"hterm_button_allow_always": {
+		"message": "Vienmēr atļaut"
+	},
+	"hterm_button_allow_session": {
+		"message": "Atļaut šajā sesijā"
+	},
+	"hterm_button_block": {
+		"message": "Bloķēt"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "Neizdevās ielādēt šādu resursu: $1"
+	},
+	"hterm_loading_resource_start": {
+		"message": "Notiek $1 ielāde..."
+	},
+	"hterm_popup_inline_image": {
+		"message": "Iekļautie attēli"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "Iekļautie attēli atspējoti"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "Vai atļaut rādīt terminālī attēlus no attālā saimniekdatora.\n\nPēc noklusējuma uzvedne tiek rādīta, līdz tiek veikta izvēle."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "Ja šī politika ir iestatīta, tiek atcelta Chrome OS taustiņu Alt-Backspace->DEL pārkartēšana, lai taustiņu kombinācija Alt-Backspace nozīmētu Alt-Backspace."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "Atlasiet AltGr noteikšanas heiristikas metodi.\n\n'null': automātiskās noteikšanas pamatā ir navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': atspējot jebkādas ar AltGr saistītas kaitīgas izmaiņas.\n'ctrl- alt': pieņemt, ka Ctrl+Alt nozīmē AltGr.\n'left-alt': pieņemt, ka kreisais Alt taustiņš nozīmē AltGr.\n'right-alt': pieņemt, ka labais Alt taustiņš nozīmē AltGr."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Iestatiet, vai taustiņš Alt darbojas kā taustiņš Meta vai kā atsevišķs taustiņš Alt."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Nosaka, kā tiek izmantots taustiņš Alt.\n\n  escape: sūtīt ESC prefiksu.\n  8-bit: pievienot 128 ievadītajai rakstzīmei kā programmā xterm.\n  browser-key: gaidīt taustiņa nospiešanu un pārlūkprogrammas\nreakciju. (Šis iestatījums nedarbosies pareizi platformās, kurās pārlūkprogramma veic noklusējuma darbību noteiktos Alt izmantošanas gadījumos.)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "Termināļa zvana skaņas URL. Tukša virkne zvanam bez skaņas."
+	},
+	"hterm_pref_background_color": {
+		"message": "Fona krāsa tekstam bez citiem krāsu atribūtiem"
+	},
+	"hterm_pref_background_image": {
+		"message": "Fona attēla CSS vērtība. Ja nav attēla, virkne ir tukša.\n\nPiemērs:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "Fona attēla pozīcijas CSS vērtība.\n\nPiemērs:\n  10% 10%\n  center"
+	},
+	"hterm_pref_background_size": {
+		"message": "Fona attēla lieluma CSS vērtība."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "Ja ir iestatīta vērtība “true”, nospiežot atkāpšanās taustiņu, nosūtīt BS ('\\x08' jeb ^H). Pretējā gadījumā atkāpšanās taustiņš nosūtīs '\\x7f'."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "Tas ir norādīts kā objekts. Tas ir retināts masīvs, kurā katrs rekvizīts ir rakstzīmju kopas kods un vērtība ir objekts, kas arī ir retināts masīvs. Šajā retinātajā masīvā katrs rekvizīts ir saņemtā rakstzīme un vērtība ir attēlotā rakstzīme.\n\nPiemērs:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "Vai notīrīt atlasīto saturu pēc kopēšanas"
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "Vai aizvērt logu, kad tiek pabeigta komandas izpilde."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "Ignorēt krāsas noklusējuma paletē.\n\nTo var norādīt kā masīvu vai objektu. Ja tas ir norādīts kā objekts, tiek pieņemts, ka tas ir retināts masīvs, kurā katrs rekvizīts ir skaitļu rādītājs krāsu paletē.\n\nVērtības var norādīt kā gandrīz jebkuru CSS krāsas vērtību. Tas attiecas arī uz #RGB, #RRGGBB, rgb(...), rgba(...) un jebkuriem krāsu nosaukumiem, kas ir arī daļa no krājuma X11 faila rgb.txt.\n\nVarat izmantot vērtību “null”, lai norādītu, ka noklusējuma vērtība nav jāmaina. Tas ir noderīgi, lai izlaistu nelielu skaitu rādītāju, ja vērtība ir norādīta kā masīvs.\n\nPiemēram, tālāk norādītās vērtības 1. rādītājam iestata zilo krāsu.\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "Automātiski kopēt ar peli atlasīto saturu starpliktuvē"
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Ctrl+C: kopēt, ja ir iestatīta vērtība “true”; sūtīt ^C saimniekdatoram, ja ir iestatīta vērtība “false”.\nCtrl+Shift+C: sūtīt ^C saimniekdatoram, ja ir iestatīta vērtība “true”; kopēt, ja ir iestatīta vērtība “false”."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ja ir iestatīta vērtība “true”, nospiežot Ctrl un plusa/mīnusa/nulles taustiņu, tiek kontrolēta tālummaiņa.\nJa ir iestatīta vērtība “false”, nospiežot Ctrl+Shift un plusa/mīnusa/nulles taustiņu, tiek kontrolēta tālummaiņa, nospiežot Ctrl un mīnusa taustiņu, tiek sūtīts ^_, bet, nospiežot Ctrl un plusa vai nulles taustiņu, netiek veikta nekāda darbība."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Ctrl+V: ielīmēt, ja ir iestatīta vērtība “true”; sūtīt ^V saimniekdatoram, ja ir iestatīta vērtība “false”.\nCtrl+Shift+V: sūtīt ^V saimniekdatoram, ja ir iestatīta vērtība “true”; ielīmēt, ja ir iestatīta vērtība “false”."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "Vai mirgot teksta kursoram pēc noklusējuma. Šo komandu var pārslēgt izpildlaikā, terminālī izmantojot kombinācijas ar taustiņu escape."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "Teksta kursora mirgošanas ātrums milisekundēs.\n\nDivu elementu masīvs: pirmais elements nosaka, cik ilgi kursoram ir jābūt ieslēgtam, otrais elements — cik ilgi tam jābūt izslēgtam."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "Redzamā kursora krāsa"
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "Ja ir iestatīta vērtība “true”, termināļa zvani fonā izveidos tīmekļa paziņojumu. https://www.w3.org/TR/notifications/\n\nPaziņojumu rādīšanai ir nepieciešama lietotāja atļauja. Ja šai opcijai ir iestatīta vērtība “true”, hterm mēģinās prasīt lietotājam atļauju (ja nepieciešams). Pārlūkprogrammās var netikt rādīts šis atļaujas pieprasījums, ja tas netika aktivizēts ar lietotāja darbību.\n\nChrome paplašinājumiem ar atļauju “paziņojumi” ir atļauja rādīt paziņojumus."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Iestatīt, vai austrumāziešu neskaidrajām rakstzīmēm ir divu kolonnu platums"
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "Vērtība “true”, lai iespējotu 8 bitu krāsu rakstzīmes, “false” — lai tās ignorētu.\n\nNeatkarīgi no šī iestatījuma tiks ievērotas šo vadības rakstzīmju divu baitu versijas."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "Vērtība “true”, lai tiktu ievērots mirgošanas atribūts. Vērtība “false”, lai ignorētu šo atribūtu."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "Vērtība “true”, lai tekstam ar atribūtu treknraksts/spilgtums izmantotu treknraksta fontu. Vērtība “false”, lai izmantotu normālu fontu. Vērtība “null”, lai veiktu automātisku noteikšanu."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "Vērtība “true”, lai izmantotu spilgtas krāsas (8–15 16 krāsu paletē) jebkuram tekstam ar treknraksta atribūtu. Pretējā gadījumā — vērtība “false”."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "Vai rādīt ziņojumu terminālī, kad no saimniekdatora tiek rakstīts starpliktuvē."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "Atļaut attālajam saimniekdatoram rakstīt tieši lokālās sistēmas starpliktuvē.\nLasīšanas piekļuve nekad netiek piešķirta neatkarīgi no šī iestatījuma.\n\nTiek izmantots, lai kontrolētu piekļuvi tādām funkcijām kā OSC-52."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "Ievērot saimniekdatora mēģinājumu mainīt teksta kursora mirgošanas statusu, izmantojot DEC 12. privāto režīmu."
+	},
+	"hterm_pref_environment": {
+		"message": "Vides mainīgo sākotnējā kopa, kā objekts."
+	},
+	"hterm_pref_font_family": {
+		"message": "Noklusējuma fontu saime termināļa tekstam"
+	},
+	"hterm_pref_font_size": {
+		"message": "Noklusējuma fonta lielums pikseļos"
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "CSS fonta izlīdzināšanas rekvizīts"
+	},
+	"hterm_pref_foreground_color": {
+		"message": "Priekšplāna krāsa tekstam bez citiem krāsu atribūtiem"
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "Ja ir iestatīta vērtība “true”, ar taustiņiem Home/End tiek vadīta termināļa ritjosla, bet ar taustiņiem Shift un Home/End tiek nosūtīti VT taustiņu kodi. Ja ir iestatīta vērtība “false”, ar taustiņiem Home/End tiek nosūtīti VT kodi, bet ar taustiņiem Shift un Home/End notiek ritināšana."
+	},
+	"hterm_pref_keybindings": {
+		"message": "Karte ar taustiņu kombināciju veiktajām taustiņu darbībām. Taustiņu kombinācijās ir ietverts nulles taustiņš vai citi modificētājtaustiņi un taustiņa kods. Taustiņu kodi var būt decimāli vai heksadecimāli skaitļi vai taustiņa identifikators. Taustiņu darbības var būt norādītas kā virkne, ko sūtīt saimniekdatoram, vai kā darbības identifikators. Visu formāta skaidrojumu skatiet vietnē https://goo.gl/LWRndr.\n\nSaistīto taustiņu piemēri\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "Ja ir iestatīta vērtība “true”, multivides taustiņi tiek mainīti uz to funkciju taustiņu ekvivalentiem. Ja ir iestatīta vērtība “false”, pārlūkam tiek ļauts apstrādāt taustiņus."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Iestatiet, vai taustiņš meta sūta pirms elementa novietotu atsoļa simbolu."
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "Ielīmēšanai izmantojamā peles poga; vērtība “null” automātiskai noteikšanai.\n\nAutomātiskai noteikšanai platformās, kas nav X11 platformas (tostarp Chrome OS), tiek izmantota peles vidējā poga. X11 platformā tiek izmantota peles labā poga (jo vietējam logu pārvaldniekam ir jāveic ielīmēšana, izmantojot peles vidējo pogu).\n\n0 == kreisā (galvenā) poga.\n1 == vidējā (palīga) poga.\n2 == labā (sekundārā) poga.\n\nŠī opcija ir aktivizēta neatkarīgi no iestatījuma “mouse-right-click-paste”.\n\nPiezīme. Šis iestatījums tiek pareizi lietots kreiļiem un labročiem paredzētām pelēm."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "Ielīmēšana, noklikšķinot ar peles labo pogu.\n\nŠī opcija ir aktivizēta neatkarīgi no iestatījuma “mouse-paste-button”.\n\nPiezīme. Šis iestatījums tiek pareizi lietots kreiļiem un labročiem paredzētām pelēm."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "Ja ir iestatīta vērtība “true”, ar taustiņiem Page up/Page down tiek vadīta termināļa ritjosla, bet ar taustiņiem Shift un Page up/Page down tiek nosūtīti VT taustiņu kodi. Ja ir iestatīta vērtība “false”, ar taustiņiem Page up/Page down tiek nosūtīti VT kodi, bet ar taustiņiem Shift un Page up/Page down notiek ritināšana."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Iestatiet, vai nosūtīt taustiņus Alt-1–9 pārlūkam.\n\nŠis iestatījums ir noderīgs, izpildot hterm pārlūka cilnē, lai nepazaudētu Chrome tastatūras darbības paātrinātājus ciļņu pārslēgšanai. Ja nenotiek izpildīšana cilnē, vēlams nosūtīt šos taustiņus saimniekdatoram, lai tos varētu izmantot teksta redaktorā vim vai emacs.\n\nJa ir iestatīta vērtība “true”, taustiņi Alt-1–9 tiek apstrādāti pārlūkā. Ja ir iestatīta vērtība “false”, taustiņi Alt-1–9 tiek nosūtīti saimniekdatoram. Ja ir iestatīta vērtība “null”, notiek automātiska noteikšana, pamatojoties uz pārlūka platformu un loga veidu."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Iestatiet, vai nosūtīt taustiņus Ctrl-1–9 pārlūkam.\n\nŠis iestatījums ir noderīgs, izpildot hterm pārlūka cilnē, lai nepazaudētu Chrome tastatūras darbības paātrinātājus ciļņu pārslēgšanai. Ja nenotiek izpildīšana cilnē, vēlams nosūtīt šos taustiņus saimniekdatoram, lai tos varētu izmantot teksta redaktorā vim vai emacs.\n\nJa ir iestatīta vērtība “true”, taustiņi Ctrl-1–9 tiek apstrādāti pārlūkā. Ja ir iestatīta vērtība “false”, taustiņi Ctrl-1–9 tiek nosūtīti saimniekdatoram. Ja ir iestatīta vērtība “null”, notiek automātiska noteikšana, pamatojoties uz pārlūka platformu un loga veidu."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Iestatiet, vai nosūtīt taustiņus Meta-1–9 pārlūkam.\n\nŠis iestatījums ir noderīgs, izpildot hterm pārlūka cilnē, lai nepazaudētu Chrome tastatūras darbības paātrinātājus ciļņu pārslēgšanai. Ja nenotiek izpildīšana cilnē, vēlams nosūtīt šos taustiņus saimniekdatoram, lai tos varētu izmantot teksta redaktorā vim vai emacs.\n\nJa ir iestatīta vērtība “true”, taustiņi Meta-1–9 tiek apstrādāti pārlūkā. Ja ir iestatīta vērtība “false”, taustiņi Meta-1–9 tiek nosūtīti saimniekdatoram. Ja ir iestatīta vērtība “null”, notiek automātiska noteikšana, pamatojoties uz pārlūka platformu un loga veidu."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Iestatiet, vai saimniekdatoram tiek nosūtīta taustiņu kombinācija Meta-V."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "Iestatiet paredzamo kodējumu no saimnienkdatora saņemtajiem datiem.\n\nDerīgas vērtības ir “utf-8” un “raw”."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "Vai ritināšana lejup notiek, nospiežot jebkuru taustiņu."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "Vai termināļa izvaddatos notiek ritināšana lejup."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Ja tiek izmantots alternatīvs ekrāna buferis un ir aktīva funkcija DECCKM (lietojumprogrammas kursora taustiņi), ritinot ar peli, tiek imitētas bulttaustiņu darbības.\n\nŠo iestatījumu var īslaicīgi atspējot, turot nospiestu taustiņu Shift.\n\nTas tiek izmantots, lietojot lapu programmas (less), lasot manuāli veidotas lapas vai teksta redaktorus (vi/nano) vai lietojot screen vai tmux."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "Peles ritenīša kustību izraisītu darbību pikseļu delta vērtību reizinātājs. Maina lapas ritināšanas ātrumu."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "Vertikālās ritjoslas režīms."
+	},
+	"hterm_pref_send_encoding": {
+		"message": "Iestatiet kodējumu saimniekdatoram nosūtītajiem datiem."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Ja ir iestatīta vērtība “true”, nospiežot taustiņu kombināciju Shift+Insert, notiek ielīmēšana. Ja ir iestatīta vērtība “false”, notiek nosūtīšana saimniekdatoram."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "Noklusējuma termināļa kodējums (DOCS).\n\nISO-2022 iespējo rakstzīmju kartes tulkojumus (piemēram, grafisko karšu tulkojumus).\nUTF-8 atspējo šo tulkojum atbalstu.\n\nBloķētais variants nozīmē, ka kodējumu nevar mainīt izpildlaikā, terminālī izmantojot kombinācijas ar taustiņu escape.\n\nIzmantojiet UTF-8, ja vien neesat pamanījis bojātu atveidi mantotajās lietojumprogrammās."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "Vai izmantot noklusējuma loga kopēšanas darbības."
+	},
+	"hterm_pref_user_css": {
+		"message": "Lietotāja stila lapas URL, kas jānorāda termināļa dokumentā."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "Pielāgots CSS teksts termināļa stila iestatīšanai."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "Regulārā izteiksme, lai apturētu atlasītā satura atbilstību veidošanu pa kreisi (sākumā).\n\nParasti šī ir rakstzīmju klase konkrētu rakstzīmju noraidīšanai.\nPēc noklusējuma ir atļautas rakstzīmes “~” un “.”, jo ceļi bieži sākas ar šīm rakstzīmēm."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "Regulārā izteiksme, lai veidotu atbilstību visām vidū esošajām rakstzīmēm.\n\nParasti šī ir rakstzīmju klase konkrētu rakstzīmju noraidīšanai.\n\nTiek izmantota, lai izvērstu atlasi ap sākumpunktu."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "Regulārā izteiksme, lai apturētu atlasītā satura atbilstību veidošanu pa labi (beigās).\n\nParasti šī ir rakstzīmju klase konkrētu rakstzīmju noraidīšanai."
 	},
 	"identity_label": {
 		"message": "Identitāte"
@@ -149,34 +327,16 @@
 		"message": "Importēt..."
 	},
 	"initializing_relay": {
-		"message": "Tiek meklēts pārraides serveris, kas izmanto: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Tiek meklēts pārraides serveris, kas izmanto: $1"
 	},
 	"json_parse_error": {
-		"message": "Nevarēja parsēt JSON ievadē “$1”: $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Nevarēja parsēt JSON ievadē “$1”: $2"
 	},
 	"known_hosts_empty": {
 		"message": "Nav neviena zināma saimniekdatora; nav, ko aizmirst."
 	},
 	"known_hosts_prompt": {
-		"message": "Atlasiet saimniekdatoru, kas jāaizmirst [1-$1]:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Atlasiet saimniekdatoru, kas jāaizmirst [1-$1]:"
 	},
 	"known_hosts_title": {
 		"message": "Zināmie saimniekdatori:"
@@ -185,12 +345,7 @@
 		"message": "Notiek ielāde..."
 	},
 	"missing_param": {
-		"message": "Trūkstošais parametrs: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Trūkstošais parametrs: $1"
 	},
 	"mount_button_label": {
 		"message": "Iekļaut SFTP"
@@ -211,12 +366,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Izveidojiet savienojumu ar saglabātu profilu vai jaunu SSH sistēmu."
 	},
 	"open_as_window_tip": {
-		"message": "[Profesionāļa padoms] Izmantojiet “Atvērt kā logu”, lai ar vadīšanas taustiņa un taustiņa W kombināciju (Control-W) neaizvērtu termināli.\n[Profesionāļa padoms] Plašāku informāciju skatiet vietnē $1.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "[Profesionāļa padoms] Izmantojiet “Atvērt kā logu” vai “Pilnekrāns”, lai ar taustiņu kombināciju Ctrl-W neaizvērtu termināli.\n[Profesionāļa padoms] Plašāku informāciju skatiet vietnē $1."
 	},
 	"options_button_label": {
 		"message": "Opcijas"
@@ -242,14 +392,23 @@
 	"reconnect_message": {
 		"message": "Vai atkārtoti izveidot savienojumu (R), izvēlēties citu savienojumu (C) vai iziet (X)?"
 	},
+	"relay_options_error": {
+		"message": "Nezināma pārraides opcija: $1"
+	},
 	"relay_retry": {
 		"message": "Notiek atkārtots mēģinājums..."
+	},
+	"request_pin_prompt": {
+		"message": "Ievadiet PIN, lai atbloķētu taustiņu $1 šeit: $2. (Atlikuši $3 mēģinājumi)."
 	},
 	"restore_prefs": {
 		"message": "Atjaunot dublējumu"
 	},
 	"shortcut_list_aria_label": {
 		"message": "saglabātie savienojumi"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "Lūdzu, instalējiet lietotni Smart Card Connector: $1"
 	},
 	"ssh_argstr_label": {
 		"message": "SSH argumenti"
@@ -268,6 +427,12 @@
 	},
 	"tip_11": {
 		"message": "Varat atkārtoti saistīt īsinājumtaustiņus šeit: https://goo.gl/LWRndr."
+	},
+	"tip_12": {
+		"message": "Izmantojiet Yubikeys un citas viedkartes SSH autentifikācijai: https://goo.gl/3ZEU1w"
+	},
+	"tip_13": {
+		"message": "Rādīt iekļautus attēlus: https://goo.gl/MnSysj"
 	},
 	"tip_2": {
 		"message": "Rādiet paziņojumus pārlūkprogrammā, izmantojot hterm-notify: https://goo.gl/ZNxGdF."
@@ -288,13 +453,16 @@
 		"message": "Kopējiet saturu starpliktuvē no emacs/vim/etc..., izmantojot OSC-52: https://goo.gl/XSnyLo."
 	},
 	"tip_8": {
-		"message": "Tērzējiet ar citiem hterm/Secure Shell lietotājiem, izmantojot chromium-hterm@chromium.org: https://goo.gl/RYHiK."
+		"message": "Tērzējiet ar citiem hterm/Secure Shell lietotājiem, izmantojot chromium-hterm@chromium.org: https://goo.gl/RYHiK."
 	},
 	"tip_9": {
 		"message": "Vai atradāt kļūdu? Vai vēlaties pieprasīt jaunu funkciju? Informējiet mūs: https://goo.gl/vb94JY."
 	},
 	"unexpected_error": {
 		"message": "Radās neparedzēta kļūda. Plašāku informāciju, lūdzu, skatiet JavaScript konsolē."
+	},
+	"unknown_ssh_client_version": {
+		"message": "Nezināma SSH versija: $1"
 	},
 	"unmount_button_label": {
 		"message": "Neiekļaut SFTP"
@@ -303,50 +471,19 @@
 		"message": "Ir pieejams atjauninājums. Lūdzu, aizveriet visus logus."
 	},
 	"welcome_changelog": {
-		"message": "ChangeLog/piezīmes par izdevumu: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "ChangeLog/piezīmes par izdevumu: $1"
 	},
 	"welcome_faq": {
-		"message": "Atbildes uz bieži uzdotajiem jautājumiem: $1 (nospiediet vadīšanas taustiņu (Ctrl) un noklikšķiniet uz saitēm, kuras vēlaties atvērt)",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Atbildes uz bieži uzdotajiem jautājumiem: $1 (nospiediet vadīšanas taustiņu (Ctrl) un noklikšķiniet uz saitēm, kuras vēlaties atvērt)"
 	},
 	"welcome_release_highlights": {
-		"message": "Ievērojamas izmaiņas kopš versijas $1:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Ievērojamas izmaiņas kopš versijas $1:"
 	},
 	"welcome_tip_of_day": {
-		"message": "$1. nejauši izvēlēts profesionāļa padoms. $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "$1. nejauši izvēlēts profesionāļa padoms. $2"
 	},
 	"welcome_version": {
-		"message": "Laipni lūdzam $1 versijā $2!",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Laipni lūdzam $1 versijā $2!"
 	},
 	"zoom_warning": {
 		"message": "Lūdzu, iestatiet vienumu Chrome izvēlne -> Tālummaiņa līdz 100%."

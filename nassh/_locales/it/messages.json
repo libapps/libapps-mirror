@@ -6,12 +6,7 @@
 		"message": "Salva copia di backup"
 	},
 	"bad_destination": {
-		"message": "Impossibile analizzare la destinazione: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Impossibile analizzare la destinazione: $1"
 	},
 	"before_unload": {
 		"message": "La chiusura di questa scheda causerà la disconnesione dalla sessione."
@@ -32,15 +27,13 @@
 		"message": "Consente di aprire una nuova sessione SSH."
 	},
 	"command_complete": {
-		"message": "Comando $1 completato con il codice di stato $2.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Comando $1 completato con il codice di stato $2."
+	},
+	"command_not_supported": {
+		"message": "$1 non è supportato su questa versione di Chrome"
+	},
+	"command_startup_failed": {
+		"message": "Avvio del comando $1 non riuscito: $2"
 	},
 	"connect_button_label": {
 		"message": "Connetti"
@@ -49,31 +42,16 @@
 		"message": "Scegliere un'altra connessione (C) o Uscire (X)?"
 	},
 	"connecting": {
-		"message": "Collegamento a $1…",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Collegamento a $1…"
+	},
+	"connection_dialog_name": {
+		"message": "Finestra di dialogo di connessione"
 	},
 	"console_crosh_options_notice": {
-		"message": "Sapevi che esiste una pagina delle opzioni dedicata?\nNon c'è più bisogno di utilizzare term_ direttamente.\nPremi $1 per aprirla oppure fai clic qui di seguito:\n$2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Sapevi che esiste una pagina delle opzioni dedicata?\nNon c'è più bisogno di modificare 'term_' direttamente.\nPremi $1 per aprirla oppure fai clic qui di seguito:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Sapevi che esiste una pagina delle opzioni dedicata?\nNon c'è più bisogno di utilizzare term_ direttamente.\n$1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Sapevi che esiste una pagina delle opzioni dedicata?\nNon c'è più bisogno di utilizzare 'term_' direttamente.\n$1"
 	},
 	"del_keycap": {
 		"message": "[CANC]"
@@ -82,12 +60,7 @@
 		"message": "Elimina"
 	},
 	"disconnect_message": {
-		"message": "Plugin di NaCl uscito con codice di stato $1.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Plugin di NaCl uscito con codice di stato $1."
 	},
 	"enter_keycap": {
 		"message": "[INVIO]"
@@ -117,7 +90,7 @@
 		"message": "porta"
 	},
 	"field_relay_options_aria_label": {
-		"message": "opzioni relay"
+		"message": "Opzioni server relay SSH"
 	},
 	"field_relay_options_placeholder": {
 		"message": "Opzioni server relay SSH"
@@ -132,12 +105,217 @@
 		"message": "nome utente"
 	},
 	"found_relay": {
-		"message": "Server relay trovato: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Server relay trovato: $1"
+	},
+	"get_profile_error": {
+		"message": "ERRORE: impossibile caricare il profilo $1:\n$2"
+	},
+	"hterm_button_allow_always": {
+		"message": "Consenti sempre"
+	},
+	"hterm_button_allow_session": {
+		"message": "Consenti in questa sessione"
+	},
+	"hterm_button_block": {
+		"message": "Blocca"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "Caricamento di $1 non riuscito"
+	},
+	"hterm_loading_resource_start": {
+		"message": "Caricamento di $1..."
+	},
+	"hterm_popup_inline_image": {
+		"message": "Immagini incorporate"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "Immagini incorporate disabilitate"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "Permette di stabilire se consentire o meno all'host remoto di visualizzare immagini nel terminale.\n\nPer impostazione predefinita, viene richiesta una conferma finché non viene fatta una scelta."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "Se viene impostata questa preferenza, viene annullata la rimappatura della combinazione ALT + BACKSPACE -> CANC in Chrome OS, in modo che ALT + BACKSPACE corrisponda di fatto ad ALT + BACKSPACE."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "Consente di selezionare una funzione euristica per il rilevamento di ALT GR.\n\n\"null\": consente di attivare il rilevamento automatico in base a navigator.language:\n      \"en-us\" => \"none\", altro => \"right-alt\"\n\"none\": consente di disattivare le manipolazioni correlate ad ALT GR.\n\"ctrl-alt\": consente di presupporre che CTRL + ALT corrisponda ad ALT GR.\n\"left-alt\": consente di presupporre che il tasto ALT di sinistra corrisponda ad ALT GR.\n\"right-alt\": consente di presupporre che il tasto ALT di destra corrisponda ad ALT GR."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Consente di stabilire se il tasto ALT deve avere la stessa funzione di un tasto meta o la funzione di un tasto ALT distinto."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Consente di stabilire il funzionamento del tasto ALT.\n\n  escape: consente di inviare un prefisso ESC.\n  8-bit: consente di aggiungere 128 al carattere digitato, come in xterm.\n browser-key: consente di attendere la pressione di un tasto e vedere la risposta del browser (non funziona bene sulle piattaforme in cui il browser esegue un'azione predefinita per alcune sequenze con ALT)."
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "URL della suoneria del terminale. Se la stringa è vuota, non è attiva alcuna suoneria."
+	},
+	"hterm_pref_background_color": {
+		"message": "Il colore di sfondo di un testo senza altri attributi di colore."
+	},
+	"hterm_pref_background_image": {
+		"message": "Valore CSS dell'immagine di sfondo. Se la stringa è vuota, non è presente alcuna immagine.\n\nAd esempio:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "Valore CSS della posizione dell'immagine di sfondo.\n\nAd esempio:\n  10% 10%\n  center"
+	},
+	"hterm_pref_background_size": {
+		"message": "Valore CSS delle dimensioni dell'immagine di sfondo."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "Se il valore è true, il tasto BACKSPACE deve inviare BS (\"\\x08\", ossia ^H). In caso contrario deve inviare \"\\x7f\"."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "Questa preferenza viene specificata come oggetto. Si tratta di una matrice sparsa, dove ogni proprietà è un codice del set di caratteri e il valore è un oggetto che a sua volta è una matrice sparsa. In tale matrice sparsa, ogni proprietà corrisponde al carattere ricevuto e il valore equivale al carattere visualizzato.\n\nAd esempio:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "Consente di specificare se la selezione deve essere annullata dopo la copia."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "Consente di stabilire se la finestra deve essere chiusa o meno al termine dell'esecuzione del comando."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "Consente di sostituire i colori nella tavolozza predefinita.\n\nQuesta preferenza può essere specificata come oggetto o matrice. Se viene specificata come oggetto, viene considerata come matrice sparsa in cui ogni proprietà corrisponde a un indice numerico nella tavolozza dei colori.\n\nI valori possono essere specificati come qualsiasi altro valore CSS dei colori, inclusi #RGB, #RRGGBB, rgb(...), rgba(...) e tutti i nomi dei colori che fanno parte anche del file rgb.txt X11 standard.\n\nÈ possibile usare \"null\" per indicare che il valore predefinito non deve essere modificato. Questa opzione è utile per ignorare un numero ridotto di indici quando il valore è specificato come matrice.\n\nAd esempio, entrambi i seguenti valori consentono di impostare il blu per l'indice colore 1:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "Copia automaticamente la selezione del mouse negli appunti."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Se il valore è true, la combinazione di tasti CTRL + C consente di eseguire la copia. Se il valore è false, viene inviato ^C all'host.\nSe il valore è true, la combinazione di tasti CTRL + MAIUSC + C consente di inviare ^C all'host. Se il valore è false, consente di eseguire la copia."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Se il valore è true, la combinazione di tasti CTRL + più/meno/zero consente di controllare lo zoom.\nSe il valore è false, la combinazione di tasti CTRL + MAIUSC + più/meno/zero consente di controllare lo zoom, CTRL + meno consente di inviare ^_, mentre CTRL + più/zero non consente di compiere alcuna azione."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Se il valore è true, la combinazione di tasti CTRL + V consente di incollare. Se il valore è false, viene inviato ^V all'host.\nSe il valore è true, la combinazione di tasti CTRL + MAIUSC + V consente di inviare ^V all'host. Se il valore è false, consente di incollare."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "Consente di impostare o meno l'intermittenza del cursore di testo per impostazione predefinita. È possibile attivare e disattivare questa preferenza in fase di runtime tramite sequenze di escape nel terminale."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "La velocità di intermittenza del cursore di testo in millisecondi.\n\nSi tratta di una matrice di due elementi: il primo indica per quanto tempo il cursore deve essere visibile, il secondo indica per quanto tempo il cursore deve essere invisibile."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "Il colore del cursore di testo visibile."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "Se il valore è true, la suoneria del terminale sullo sfondo crea una notifica web. https://www.w3.org/TR/notifications/\n\nPer la visualizzazione delle notifiche è richiesta l'autorizzazione dell'utente. Se questa opzione viene impostata su true, hterm tenterà di chiedere l'autorizzazione dell'utente ove necessaria. La richiesta di autorizzazione potrebbe non essere visualizzata da alcuni browser se non è stata attivata dall'azione di un utente.\n\nLe estensioni di Chrome con l'autorizzazione \"notifiche\" sono autorizzate a visualizzare le notifiche."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Consente di specificare se i caratteri ambigui delle lingue dell'Asia orientale devono avere una larghezza di due colonne."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "Se il valore è true, i caratteri di controllo a 8 bit sono consentiti. Se il valore è false, vengono ignorati.\n\nLe versioni a due byte dei caratteri di controllo sono rispettate indipendentemente da questa impostazione."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "Se il valore è true, l'attributo blink viene rispettato. Se il valore è false, viene ignorato."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "Se il valore è true, deve essere utilizzato un carattere in grassetto per il testo con l'attributo \"bold/bright\". Se il valore è false, deve essere utilizzato un carattere normale. Se il valore è null, il carattere viene rilevato automaticamente."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "Se il valore è true, devono essere utilizzati colori chiari (8-15 in una tavolozza di 16 colori) per qualsiasi testo con l'attributo \"bold\". Se il valore è false, avviene il contrario."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "Consente di stabilire se visualizzare o meno un messaggio nel terminale quando l'host scrive negli appunti."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "Consente all'host remoto di scrivere direttamente negli appunti del sistema locale.\nIndipendentemente da questa opzione, non è mai consentito l'accesso in lettura.\n\nQuesta preferenza serve per controllare l'accesso a funzioni quali OSC-52."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "Consente di rispettare il tentativo dell'host di modificare lo stato di intermittenza del cursore di testo tramite DEC Private Mode 12."
+	},
+	"hterm_pref_environment": {
+		"message": "L'insieme iniziale di variabili d'ambiente, specificate come oggetto."
+	},
+	"hterm_pref_font_family": {
+		"message": "La famiglia di caratteri predefinita per il testo del terminale."
+	},
+	"hterm_pref_font_size": {
+		"message": "Le dimensioni predefinite del carattere in pixel."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "Proprietà di smussamento dei caratteri CSS."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "Il colore di primo piano di un testo senza altri attributi di colore."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "Se il valore è true, con i tasti HOME/FINE è possibile controllare la barra di scorrimento del terminale, mentre con i tasti HOME/FINE e MAIUSC è possibile inviare i codici dei tasti VT. Se il valore è false, i tasti HOME/FINE consentono di inviare i codici VT, mentre i tasti HOME/FINE e MAIUSC consentono di scorrere."
+	},
+	"hterm_pref_keybindings": {
+		"message": "Un'associazione di sequenze di tasti ad azioni dei tasti. Le sequenze di tasti includono zero o più tasti di modifica seguiti dal codice di un tasto. I codici dei tasti possono essere numeri decimali o esadecimali oppure identificatori di tasti. Per le azioni dei tasti è possibile specificare una stringa da inviare all'host oppure identificatori di azioni. Per avere una spiegazione completa del formato, visita la pagina https://goo.gl/LWRndr.\n\nEsempi di associazioni di tasti:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "Se il valore è true, i tasti multimediali vengono convertiti nei tasti funzione equivalenti. Se il valore è false, i tasti vengono gestiti dal browser."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Consente di stabilire se inviare o meno un prefisso ESC per il tasto meta."
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "Consente di stabilire quale pulsante del mouse usare per incollare oppure di impostare null per attivare il rilevamento automatico.\n\nPer il rilevamento automatico verrà usato il pulsante centrale del mouse sulle piattaforme diverse da X11 (incluso Chrome OS). Su X11 verrà usato il pulsante destro del mouse (dato che la funzione nativa per la gestione delle finestre dovrebbe usare il pulsante centrale del mouse per incollare).\n\n0 == pulsante (principale) sinistro.\n1 == pulsante (ausiliario) centrale.\n2 == pulsante (secondario) destro.\n\nQuesta opzione è attiva indipendentemente dall'impostazione \"mouse-right-click-paste\".\n\nNota: verranno gestiti correttamente tutti i mouse, per utenti destri e mancini."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "Consente di incollare premendo il pulsante destro del mouse.\n\nQuesta opzione è attiva indipendentemente dall'impostazione \"mouse-paste-button\".\n\nNota: verranno gestiti correttamente tutti i mouse, per utenti destri e mancini."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "Se il valore è true, con i tasti PagSu/PagGiù è possibile controllare la barra di scorrimento del terminale, mentre con i tasti PagSu/PagGiù e MAIUSC è possibile inviare i codici dei tasti VT. Se il valore è false, i tasti PagSu/PagGiù consentono di inviare i codici VT, mentre i tasti PagSu/PagGiù e MAIUSC consentono di scorrere."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Consente di stabilire se passare o meno la gestione di ALT + 1..9 al browser.\n\nQuesta soluzione è pratica se viene eseguito hterm in una scheda del browser perché non si perdono gli acceleratori da tastiera di Chrome per \"passare alla scheda\". Se non viene eseguito in una scheda, è meglio inviare questi tasti all'host per poterli usare in vim o emacs.\n\nSe il valore è true, la gestione di ALT + 1..9 viene affidata al browser. Se il valore è false, i tasti ALT + 1..9 vengono inviati all'host. Se il valore è null, viene attivato il rilevamento automatico in base al tipo di finestra e alla piattaforma del browser."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Consente di stabilire se passare o meno la gestione di CTRL + 1..9 al browser.\n\nQuesta soluzione è pratica se viene eseguito hterm in una scheda del browser perché non si perdono gli acceleratori da tastiera di Chrome per \"passare alla scheda\". Se non viene eseguito in una scheda, è meglio inviare questi tasti all'host per poterli usare in vim o emacs.\n\nSe il valore è true, la gestione di CTRL + 1..9 viene affidata al browser. Se il valore è false, i tasti CTRL + 1..9 vengono inviati all'host. Se il valore è null, viene attivato il rilevamento automatico in base al tipo di finestra e alla piattaforma del browser."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Consente di stabilire se passare o meno la gestione di tasto meta + 1..9 al browser.\n\nQuesta soluzione è pratica se viene eseguito hterm in una scheda del browser perché non si perdono gli acceleratori da tastiera di Chrome per \"passare alla scheda\". Se non viene eseguito in una scheda, è meglio inviare questi tasti all'host per poterli usare in vim o emacs.\n\nSe il valore è true, la gestione di tasto meta + 1..9 viene affidata al browser. Se il valore è false, i tasti meta + 1..9 vengono inviati all'host. Se il valore è null, viene attivato il rilevamento automatico in base al tipo di finestra e alla piattaforma del browser."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Consente di stabilire se passare o meno tasto meta + V all'host."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "Consente di impostare la codifica prevista per i dati ricevuti dall'host.\n\nI valori validi sono \"utf-8\" e \"raw\"."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "Consente di stabilire se scorrere o meno fino in fondo con qualsiasi tasto."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "Consente di stabilire se scorrere o meno fino in fondo nell'output del terminale."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Se viene usato il buffer dello schermo alternativo ed è attiva la funzione DECCKM (tasti cursore applicazione), gli eventi di scorrimento con la rotellina del mouse emuleranno i tasti freccia.\n\nÈ possibile disattivare temporaneamente la funzionalità tenendo premuto il tasto MAIUSC.\n\nAvviene spesso quando vengono usati pager (less), vengono letti editor di testo o pagine man (vi/nano) oppure viene usato screen/tmux."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "Il moltiplicatore per pixel delta in eventi rotellina causati dalla rotellina del mouse. Consente di modificare la velocità di scorrimento della pagina."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "La modalità verticale della barra di scorrimento."
+	},
+	"hterm_pref_send_encoding": {
+		"message": "Consente di impostare la codifica dei dati inviati all'host."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Se il valore è true è possibile incollare usando i tasti MAIUSC + INS. Se il valore è false, i tasti vengono inviati all'host."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "La codifica predefinita della finestra terminale (DOCS).\n\nISO-2022 consente di attivare le traduzioni della mappe di caratteri (come le mappe grafiche).\nUTF-8 consente di disattivarne il supporto.\n\nLa variante bloccata non consente di modificare la codifica in fase di runtime tramite sequenze di escape della finestra terminale.\n\nDovresti usare UTF-8, a meno che rilevi che il rendering non funziona con le applicazioni precedenti."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "Consente di stabilire se usare o meno il comportamento di copia nelle finestre predefinito."
+	},
+	"hterm_pref_user_css": {
+		"message": "URL del foglio di stile dell'utente da includere nel documento della finestra terminale."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "Testo CSS personalizzato per applicare gli stili alla finestra terminale."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "Espressione regolare per interrompere la corrispondenza con la parte sinistra di una selezione (iniziale).\n\nGeneralmente si tratta di una classe di caratteri per rifiutare caratteri specifici.\nSono consentiti per impostazione predefinita i caratteri \"~\" e \".\", perché sono spesso i caratteri iniziali dei percorsi."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "Espressione regolare che rappresenta tutti i caratteri al centro.\n\nGeneralmente si tratta di una classe di caratteri per rifiutare caratteri specifici.\n\nConsente di espandere la selezione intorno al punto iniziale."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "Espressione regolare per interrompere la corrispondenza con la parte destra di una selezione (finale).\n\nGeneralmente si tratta di una classe di caratteri per rifiutare caratteri specifici."
 	},
 	"identity_label": {
 		"message": "Identità"
@@ -149,34 +327,16 @@
 		"message": "Importa…"
 	},
 	"initializing_relay": {
-		"message": "Ricerca server relay mediante: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Ricerca server relay mediante: $1"
 	},
 	"json_parse_error": {
-		"message": "Impossibile analizzare elemento JSON in \"$1\": $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Impossibile analizzare elemento JSON in \"$1\": $2"
 	},
 	"known_hosts_empty": {
 		"message": "Nessun host noto, nulla di cui annullare la memorizzazione."
 	},
 	"known_hosts_prompt": {
-		"message": "Seleziona un host di cui annullare memorizzazione [1-$1]:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Seleziona un host di cui annullare memorizzazione [1-$1]:"
 	},
 	"known_hosts_title": {
 		"message": "Host noti:"
@@ -185,12 +345,7 @@
 		"message": "Caricamento…"
 	},
 	"missing_param": {
-		"message": "Parametro mancante: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Parametro mancante: $1"
 	},
 	"mount_button_label": {
 		"message": "Montaggio SFTP"
@@ -211,12 +366,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Connettiti a un profilo salvato o a un nuovo sistema ssh"
 	},
 	"open_as_window_tip": {
-		"message": "[Suggerimento avanzato] Utilizza \"Apri in una finestra\" per evitare che \"CTRL+W\" chiuda la finestra del terminale.\n[Suggerimento avanzato] Consulta $1 per ulteriori informazioni.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "[Suggerimento per i professionisti] Utilizza \"Apri in una finestra\" o \"Schermo intero\" per evitare che CTRL + W chiuda la finestra terminale.\n[Suggerimento per i professionisti] Visita la pagina $1 per ulteriori informazioni."
 	},
 	"options_button_label": {
 		"message": "Opzioni"
@@ -242,14 +392,23 @@
 	"reconnect_message": {
 		"message": "Riconnettere (R), Scegliere un'altra connessione (C) o Uscire (X)?"
 	},
+	"relay_options_error": {
+		"message": "Opzione relay sconosciuta: $1"
+	},
 	"relay_retry": {
 		"message": "Nuovo tentativo…"
+	},
+	"request_pin_prompt": {
+		"message": "Inserisci il PIN per sbloccare la chiave $1 su \"$2\" ($3 tentativi ancora a disposizione):"
 	},
 	"restore_prefs": {
 		"message": "Ripristina backup"
 	},
 	"shortcut_list_aria_label": {
 		"message": "connessioni salvate"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "Installa l'app Smart Card Connector: $1"
 	},
 	"ssh_argstr_label": {
 		"message": "Argomenti SSH"
@@ -269,6 +428,12 @@
 	"tip_11": {
 		"message": "Riassocia tasti/scorciatoie: https://goo.gl/LWRndr"
 	},
+	"tip_12": {
+		"message": "Usa Yubikeys e altre smart card per l'autenticazione ssh: https://goo.gl/3ZEU1w"
+	},
+	"tip_13": {
+		"message": "Visualizza le immagini incorporate: https://goo.gl/MnSysj"
+	},
 	"tip_2": {
 		"message": "Visualizza le notifiche nel browser utilizzando hterm-notify: https://goo.gl/ZNxGdF"
 	},
@@ -276,7 +441,7 @@
 		"message": "Connettiti dalla omnibox digitando \"ssh <nome profilo>\": https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS consente di montare file system tramite SFTP e sfogliare tramite l'app Files. Utilizza \"Montaggio SFTP\" anziché \"Connetti\"."
+		"message": "Chrome OS consente di montare file system tramite SFTP e sfogliare tramite l'app File. Utilizza \"Montaggio SFTP\" anziché \"Connetti\"."
 	},
 	"tip_5": {
 		"message": "Connettiti utilizzando link ssh:// nelle pagine web oppure salva un segnalibro: https://goo.gl/zS8EZD"
@@ -288,13 +453,16 @@
 		"message": "Copia negli appunti da emacs/vim/ecc… utilizzando OSC-52: https://goo.gl/XSnyLo"
 	},
 	"tip_8": {
-		"message": "Chatta con altri utenti hterm/Secure Shell tramite l'indirizzo chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Chatta con altri utenti hterm/Secure Shell tramite chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
 		"message": "Hai trovato un bug? Vuoi richiedere una nuova funzionalità? Contattaci: https://goo.gl/vb94JY"
 	},
 	"unexpected_error": {
 		"message": "Si è verificato un errore imprevisto. Per ulteriori informazioni, controlla la console JavaScript."
+	},
+	"unknown_ssh_client_version": {
+		"message": "Versione SSH sconosciuta: $1"
 	},
 	"unmount_button_label": {
 		"message": "Smonta SFTP"
@@ -303,50 +471,19 @@
 		"message": "È disponibile un aggiornamento. Chiudi tutte le finestre."
 	},
 	"welcome_changelog": {
-		"message": "Registro modifiche/note sulla versione: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Registro modifiche/note sulla versione: $1"
 	},
 	"welcome_faq": {
-		"message": "Risposte alle Domande frequenti: $1 (CTRL+clic sui link per aprirli)",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Risposte alle Domande frequenti: $1 (CTRL+clic sui link per aprirli)"
 	},
 	"welcome_release_highlights": {
-		"message": "Modifiche importanti rispetto alla versione $1:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Modifiche importanti rispetto alla versione $1:"
 	},
 	"welcome_tip_of_day": {
-		"message": "Suggerimento avanzato casuale n. $1: $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Suggerimento avanzato casuale n. $1: $2"
 	},
 	"welcome_version": {
-		"message": "Benvenuto in $1 versione $2.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Benvenuto in $1 versione $2."
 	},
 	"zoom_warning": {
 		"message": "Nel menu Chrome imposta Zoom su 100%"

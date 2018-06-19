@@ -6,12 +6,7 @@
 		"message": "Simpan Backup"
 	},
 	"bad_destination": {
-		"message": "Tidak dapat mengurai tujuan: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Tidak dapat mengurai tujuan: $1"
 	},
 	"before_unload": {
 		"message": "Menutup tab ini akan memutus sesi ini."
@@ -32,15 +27,13 @@
 		"message": "Buka sesi SSH baru."
 	},
 	"command_complete": {
-		"message": "Perintah $1 dihentikan dengan kode status $2.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Perintah $1 dihentikan dengan kode status $2."
+	},
+	"command_not_supported": {
+		"message": "$1 tidak didukung di Chrome versi ini"
+	},
+	"command_startup_failed": {
+		"message": "Gagal meluncurkan $1: $2"
 	},
 	"connect_button_label": {
 		"message": "Sambungkan"
@@ -49,31 +42,16 @@
 		"message": "Pilih koneksi lainnya (C) atau Keluar (X)?"
 	},
 	"connecting": {
-		"message": "Menghubungkan ke $1...",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Menghubungkan ke $1..."
+	},
+	"connection_dialog_name": {
+		"message": "Dialog Koneksi"
 	},
 	"console_crosh_options_notice": {
-		"message": "Tahukah Anda jika ada halaman opsi khusus?\nTidak perlu repot lagi dengan istilah_ secara langsung!\nTekan $1 untuk membukanya, atau klik:\n$2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Tahukah Anda ada halaman opsi khusus?\nTidak perlu lagi mengubah 'term_' secara langsung!\nTekan $1 untuk membukanya, atau klik:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Tahukah Anda jika ada halaman opsi khusus?\nTidak perlu repot lagi dengan istilah_ secara langsung!\n$1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Tahukah Anda ada halaman opsi khusus?\nTidak perlu repot lagi dengan 'term_' secara langsung!\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -82,12 +60,7 @@
 		"message": "Hapus"
 	},
 	"disconnect_message": {
-		"message": "Plugin NaCl dihentikan dengan kode status $1.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Plugin NaCl dihentikan dengan kode status $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -117,7 +90,7 @@
 		"message": "port"
 	},
 	"field_relay_options_aria_label": {
-		"message": "opsi relay"
+		"message": "Opsi server relay SSH"
 	},
 	"field_relay_options_placeholder": {
 		"message": "Opsi server relay SSH"
@@ -132,12 +105,217 @@
 		"message": "nama pengguna"
 	},
 	"found_relay": {
-		"message": "Ditemukan server relay: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Ditemukan server relay: $1"
+	},
+	"get_profile_error": {
+		"message": "ERROR: Tidak dapat memuat profil $1:\n$2"
+	},
+	"hterm_button_allow_always": {
+		"message": "Selalu izinkan"
+	},
+	"hterm_button_allow_session": {
+		"message": "Izinkan sesi ini"
+	},
+	"hterm_button_block": {
+		"message": "Blokir"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "Gagal memuat $1"
+	},
+	"hterm_loading_resource_start": {
+		"message": "Memuat $1 ..."
+	},
+	"hterm_popup_inline_image": {
+		"message": "Gambar Inline"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "Gambar Inline Dinonaktifkan"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "Apakah mengizinkan host remote untuk menampilkan gambar di terminal.\n\nSecara default, kami meminta hingga pilihan dibuat."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "Jika disetel, pemetaan ulang Chrome OS Alt-Backspace->DEL akan diurungkan, sehingga Alt-Backspace memang Alt-Backspace."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "Memilih heuristik deteksi AltGr.\n\n'null': Mendeteksi otomatis berdasarkan navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Menonaktifkan semua proses munging yang terkait dengan AltGr.\n'ctrl-alt': Mengasumsikan Ctrl+Alt berarti AltGr.\n'left-alt': Mengasumsikan Alt kiri berarti AltGr.\n'right-alt': Mengasumsikan Alt kanan berarti AltGr."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Menyetel apakah tombol Alt berfungsi sebagai tombol Meta atau sebagai tombol Alt yang berbeda."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Mengontrol cara tombol Alt ditangani.\n\n  escape: Mengirim awalan ESC.\n  8-bit: Menambahkan 128 ke karakter yang diketik seperti di xterm.\n browser-key: Menunggu peristiwa menekan tombol dan melihat respons\n browser. (Tidak akan berfungsi di platform tempat\n browser melakukan tindakan default untuk beberapa urutan Alt.)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "URL bunyi bel terminal. String kosong jika tidak ada bel yang bersuara."
+	},
+	"hterm_pref_background_color": {
+		"message": "Warna latar belakang untuk teks tanpa atribut warna lainnya."
+	},
+	"hterm_pref_background_image": {
+		"message": "Nilai CSS gambar latar. String kosong untuk tanpa gambar.\n\nMisalnya:\n  url(https://goo.gl/anedTK)\n  linear-gradient(atas bawah, biru, merah)"
+	},
+	"hterm_pref_background_position": {
+		"message": "Nilai CSS posisi gambar latar.\n\nMisalnya:\n  10% 10%\n  tengah"
+	},
+	"hterm_pref_background_size": {
+		"message": "Nilai CSS ukuran gambar latar."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "Jika true, backspace akan mengirim BS ('\\x08', atau ^H). Jika tidak, tombol backspace akan mengirim '\\x7f'."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "Ini ditentukan sebagai objek. Ini merupakan deret yang jarang, dengan tiap properti sebagai kode kumpulan karakter dan nilainya adalah objek yang merupakan deret yang jarang. Di deret yang jarang tersebut, tiap properti adalah karakter yang diterima dan nilainya adalah karakter yang ditampilkan.\n\nMisalnya:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "Apakah menghapus pilihan setelah menyalin."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "Apakah menutup jendela saat perintah menyelesaikan eksekusi."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "Mengganti warna di palet default.\n\nIni dapat ditentukan sebagai deret atau objek. Jika ditentukan sebagai objek, dianggap sebagai deret jarang, dengan tiap properti sebagai indeks numerik ke dalam palet warna.\n\nNilai dapat ditentukan sebagai nilai warna CSS mana pun. Ini mencakup #RGB, #RRGGBB, rgb(...), rgba(...), dan nama warna yang juga merupakan bagian dari file X11 rgb.txt.\n\nAnda dapat menggunakan 'null' untuk menentukan agar nilai default tidak boleh diubah. Ini berguna untuk melewati sejumlah kecil indeks jika nilai ditentukan sebagai deret.\n\nMisalnya, indeks warna 1 disetel ke biru untuk kedua nilai berikut:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "Otomatis menyalin pilihan mouse ke papan klip."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Ctrl+C melakukan copy jika true, mengirimkan ^C ke host jika false.\nCtrl-Shift-C mengirimkan ^C ke host jika true, melakukan jika false."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Jika true, Ctrl-Plus/Minus/Zero mengontrol zoom.\nJika false, Ctrl-Shift-Plus/Minus/Zero mengontrol zoom, Ctrl-Minus mengirim ^_, Ctrl-Plus/Zero tidak melakukan apa pun."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Ctrl-V melakukan paste jika true, mengirimkan ^V ke host jika false.\nCtrl-Shift-V mengirimkan ^V ke host jika true, melakukan paste jika false."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "Apakah kursor teks berkedip secara default. Ini dapat dialihkan saat waktu proses melalui urutan escape terminal."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "Laju kedipan kursor teks dalam milidetik.\n\nSebuah deret berisi 2 elemen, dengan elemen pertama menunjukkan durasi aktif kursor teks dan elemen kedua menunjukkan durasi nonaktif kursor teks."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "Warna kursor teks yang terlihat."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "Jika true, bel terminal di latar belakang akan membuat Notifikasi Web. https://www.w3.org/TR/notifications/\n\nPerlu izin dari pengguna untuk menampilkan notifikasi. Jika opsi ini disetel ke true, hterm akan berupaya meminta izin pengguna jika perlu. Browser mungkin tidak menampilkan permintaan izin ini jika tidak dipicu oleh tindakan pengguna.\n\nEkstensi Chrome dengan izin \"notifikasi\" memiliki izin untuk menampilkan notifikasi."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Menyetel apakah Karakter ambigu Asia Timur memiliki lebar dua kolom."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "True untuk mengaktifkan karakter kontrol 8-bit, false untuk mengabaikannya.\n\nKami akan menerapkan karakter kontrol versi dua-byte, terlepas dari setelan ini."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "True jika kami harus menerapkan atribut kedip. False untuk mengabaikannya."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "True jika kami harus menggunakan font bobot tebal untuk teks beratribut tebal/terang. False untuk menggunakan font bobot normal. Null untuk deteksi otomatis."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "True jika kami harus menggunakan warna terang (8-15 pada palet 16 warna) untuk teks beratribut tebal. False untuk sebaliknya."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "Apakah akan menampilkan pesan di terminal jika host menulis ke papan klip."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "Memungkinkan host remote untuk menulis langsung ke papan klip sistem lokal.\nAkses baca tidak diberikan, terlepas dari setelan ini.\n\nIni digunakan untuk mengontrol akses ke fitur seperti OSC-52."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "Menerapkan upaya host untuk mengubah status kedip kursor teks menggunakan DEC Private Mode 12."
+	},
+	"hterm_pref_environment": {
+		"message": "Serangkaian awal dari variabel lingkungan, sebagai objek."
+	},
+	"hterm_pref_font_family": {
+		"message": "Jenis font default untuk teks terminal."
+	},
+	"hterm_pref_font_size": {
+		"message": "Ukuran font default dalam piksel."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "Properti penghalusan font CSS."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "Warna latar depan untuk teks tanpa atribut warna lainnya."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "Jika true, Home/End akan mengontrol scrollbar terminal dan Shift-Home/End akan mengirim kode tombol VT. Jika false, maka Home/End mengirim kode VT dan Shift-Home/End melakukan scroll."
+	},
+	"hterm_pref_keybindings": {
+		"message": "Peta berisi urutan tombol untuk tindakan tombol. Urutan tombol mencakup nol atau kunci pengubah lainnya yang diikuti oleh kode tombol. Kode tombol dapat berupa angka desimal atau heksadesimal, atau ID tombol. Tindakan tombol diberikan string untuk dikirim ke host, atau ID tindakan. Untuk penjelasan selengkapnya mengenai format, lihat https://goo.gl/LWRndr.\n\nContoh kombinasi tombol:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "Jika true, mengonversi tombol media ke yang setara Fkey. Jika false, mengizinkan browser menangani tombol."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Menyetel apakah tombol Meta mengirim prefiks Escape atau tidak."
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "Tombol paste mouse, atau null untuk deteksi otomatis.\n\nUntuk deteksi otomatis, kami akan menggunakan tombol mouse tengah untuk platform non-X11 (termasuk Chrome OS). Di X11, kami akan menggunakan tombol mouse kanan (karena pengelola jendela asli akan melakukan paste melalui tombol mouse tengah).\n\n0 == tombol (utama) kiri.\n1 == tombol (auxiliary) tengah.\n2 == tombol (sekunder) kanan.\n\nOpsi ini aktif, terlepas dari setelan \"mouse-klik-kanan-paste\".\n\nCatatan: Opsi ini akan menangani mouse tangan kiri & kanan dengan tepat."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "Menempel saat mengklik tombol mouse kanan.\n\nOpsi ini aktif, terlepas dari setelan \"tombol-menempel-mouse\".\n\nCatatan: Opsi ini akan menangani mouse tangan kiri & kanan dengan tepat."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "Jika true, Page Up/Down akan mengontrol scrollbar terminal dan Shift-Page Up/Down akan mengirim kode tombol VT. Jika false, maka Page up/Down mengirim kode VT dan Shift-Page Up/Down melakukan scroll."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Menyetel apakah kami harus meneruskan Alt-1..9 ke browser.\n\nIni berguna saat menjalankan hterm di tab browser, agar Anda tidak kehilangan akselerator keyboard \"beralih ke tab\" pada Chrome. Saat tidak berjalan di tab, sebaiknya kirimkan tombol ini ke host agar dapat digunakan di vim atau emacs.\n\nJika true, Alt-1..9 akan ditangani oleh browser. Jika false, Alt-1..9 akan dikirimkan ke host. Jika null, deteksi otomatis berdasarkan platform browser dan jenis jendela."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Menyetel apakah kami harus meneruskan Ctrl-1..9 ke browser.\n\nIni berguna saat menjalankan hterm di tab browser, agar Anda tidak kehilangan akselerator keyboard \"beralih ke tab\" pada Chrome. Saat tidak berjalan di tab, sebaiknya kirimkan tombol ini ke host agar dapat digunakan di vim atau emacs.\n\nJika true, Ctrl-1..9 akan ditangani oleh browser. Jika false, Ctrl-1..9 akan dikirimkan ke host. Jika null, deteksi otomatis berdasarkan platform browser dan jenis jendela."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Menyetel apakah kami harus meneruskan Meta-1..9 ke browser.\n\nIni berguna saat menjalankan hterm di tab browser, agar Anda tidak kehilangan akselerator keyboard \"beralih ke tab\" pada Chrome. Saat tidak berjalan di tab, sebaiknya kirimkan tombol ini ke host agar dapat digunakan di vim atau emacs.\n\nJika true, Meta-1..9 akan ditangani oleh browser. Jika false, Meta-1..9 akan dikirimkan ke host. Jika null, deteksi otomatis berdasarkan platform browser dan jenis jendela."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Menyetel apakah Meta-V diteruskan ke host."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "Menyetel encoding yang diharapkan untuk data yang diterima dari host.\n\nNilai valid adalah 'utf-8' dan 'raw'."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "Apakah melakukan scroll ke bawah saat tombol apa pun diketuk."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "Apakah melakukan scroll ke bawah pada output terminal."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Saat menggunakan buffering layar alternatif, dan DECCKM (Tombol Kursor Aplikasi) aktif, peristiwa scroll roda mouse akan meniru tombol panah.\n\nIni dapat dinonaktifkan sementara dengan menahan tombol Shift.\n\nIni sering muncul saat menggunakan pager (lebih sedikit) atau membaca halaman manual atau editor teks (vi/nano) atau menggunakan screen/tmux."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "Pengali untuk delta piksel di peristiwa roda yang disebabkan oleh roda scroll. Mengubah seberapa cepat halaman di-scroll."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "Mode scroll bar vertikal."
+	},
+	"hterm_pref_send_encoding": {
+		"message": "Menyetel encoding untuk data yang dikirimkan ke host."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Shift-Insert melakukan paste jika true, dikirimkan ke host jika false."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "Encoding terminal default (DOCS).\n\nISO-2022 mengaktifkan terjemahan peta karakter (seperti peta grafik).\nUTF-8 menonaktifkan dukungan untuk itu.\n\nVariasi yang terkunci artinya encoding tidak dapat diubah saat waktu proses melalui urutan escape terminal.\n\nSebaiknya tetap gunakan UTF-8, kecuali Anda menemukan rendering rusak dengan aplikasi lama."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "Apakah menggunakan perilaku copy jendela default."
+	},
+	"hterm_pref_user_css": {
+		"message": "URL lembar gaya pengguna yang akan disertakan di dokumen terminal."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "Teks CSS khusus untuk mengatur gaya terminal."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "Ekspresi reguler untuk menghentikan pencocokan ke sebelah kiri (awal) pilihan.\n\nBiasanya, ini merupakan kelas karakter untuk menolak karakter tertentu.\nKami mengizinkan \"~\" dan \".\" secara default karena lokasi biasanya dimulai dengan ini."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "Ekspresi reguler untuk mencocokkan semua karakter di tengah.\n\nBiasanya, ini merupakan kelas karakter untuk menolak karakter tertentu.\n\nDigunakan untuk meluaskan pilihan yang mengelilingi titik awal."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "Ekspresi reguler untuk menhentikan pencocokan ke sebelah kanan (akhir) pilihan.\n\nBiasanya, ini merupakan karakter kelas untuk menolak karakter tertentu."
 	},
 	"identity_label": {
 		"message": "Identitas"
@@ -149,34 +327,16 @@
 		"message": "Impor..."
 	},
 	"initializing_relay": {
-		"message": "Mencari server relay yang menggunakan: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Mencari server relay yang menggunakan: $1"
 	},
 	"json_parse_error": {
-		"message": "Tidak dapat menguraikan JSON dalam '$1': $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Tidak dapat menguraikan JSON dalam '$1': $2"
 	},
 	"known_hosts_empty": {
 		"message": "Tidak ada host yang dikenal, tidak ada yang perlu dilupakan."
 	},
 	"known_hosts_prompt": {
-		"message": "Pilih host untuk dilupakan [1-$1]:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Pilih host untuk dilupakan [1-$1]:"
 	},
 	"known_hosts_title": {
 		"message": "Host yang dikenali:"
@@ -185,12 +345,7 @@
 		"message": "Memuat..."
 	},
 	"missing_param": {
-		"message": "Parameter hilang: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Parameter hilang: $1"
 	},
 	"mount_button_label": {
 		"message": "Pasang SFTP"
@@ -211,12 +366,7 @@
 		"message": "<url><match>pengguna@hostname[:port]</match></url> Hubungkan ke profil yang disimpan atau sistem ssh baru"
 	},
 	"open_as_window_tip": {
-		"message": "[Tips Profesional] Gunakan 'Buka sebagai Jendela' agar Control-W tidak menutup terminal Anda.\n[Tips Profesional] Lihat $1 untuk mendapatkan informasi selengkapnya.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "[Tips Pro] Gunakan 'Buka sebagai Jendela' atau 'Layar penuh' agar Ctrl-W tidak menutup terminal!\n[Tips Pro] Lihat $1 untuk informasi selengkapnya."
 	},
 	"options_button_label": {
 		"message": "Opsi"
@@ -242,14 +392,23 @@
 	"reconnect_message": {
 		"message": "Sambungkan ulang (R), Pilih koneksi lainnya (C), atau Keluar (X)?"
 	},
+	"relay_options_error": {
+		"message": "Opsi relay tak dikenal: $1"
+	},
 	"relay_retry": {
 		"message": "Mencoba ulang..."
+	},
+	"request_pin_prompt": {
+		"message": "Masukkan PIN untuk membuka kunci tombol $1 di '$2' (Sisa $3 kali coba):"
 	},
 	"restore_prefs": {
 		"message": "Pulihkan Backup"
 	},
 	"shortcut_list_aria_label": {
 		"message": "koneksi yang tersimpan"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "Harap instal aplikasi Smart Card Connector: $1"
 	},
 	"ssh_argstr_label": {
 		"message": "Argumen SSH"
@@ -268,6 +427,12 @@
 	},
 	"tip_11": {
 		"message": "Anda dapat mengembalikan kunci/pintasan: https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "Gunakan Yubikeys dan kartu smart lain untuk autentikasi ssh: https://goo.gl/3ZEU1w"
+	},
+	"tip_13": {
+		"message": "Tampilkan gambar inline: https://goo.gl/MnSysj"
 	},
 	"tip_2": {
 		"message": "Tampilkan notifikasi di browser menggunakan hterm-notify: https://goo.gl/ZNxGdF"
@@ -296,6 +461,9 @@
 	"unexpected_error": {
 		"message": "Terjadi error yang tidak terduga, harap periksa konsol JavaScript untuk info selengkapnya."
 	},
+	"unknown_ssh_client_version": {
+		"message": "Versi SSH tak dikenal: $1"
+	},
 	"unmount_button_label": {
 		"message": "Lepaskan SFTP"
 	},
@@ -303,50 +471,19 @@
 		"message": "Update tersedia. Harap tutup semua jendela."
 	},
 	"welcome_changelog": {
-		"message": "Log perubahan/catatan rilis: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Log perubahan/catatan rilis: $1"
 	},
 	"welcome_faq": {
-		"message": "Jawaban untuk Pertanyaan Umum (FAQ): $1 (ctrl+klik link untuk membuka)",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Jawaban untuk Pertanyaan Umum (FAQ): $1 (ctrl+klik link untuk membuka)"
 	},
 	"welcome_release_highlights": {
-		"message": "Perubahan besar sejak $1:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Perubahan besar sejak $1:"
 	},
 	"welcome_tip_of_day": {
-		"message": "Tips Profesional Acak #$1: $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Tips Profesional Acak #$1: $2"
 	},
 	"welcome_version": {
-		"message": "Selamat datang di $1 versi $2.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Selamat datang di $1 versi $2."
 	},
 	"zoom_warning": {
 		"message": "Harap setel Menu Chrome->Perbesar ke 100%"

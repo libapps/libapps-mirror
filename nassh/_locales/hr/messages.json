@@ -6,12 +6,7 @@
 		"message": "Spremite sigurnosnu kopiju"
 	},
 	"bad_destination": {
-		"message": "Nije moguće analizirati odredište: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Nije moguće analizirati odredište: $1"
 	},
 	"before_unload": {
 		"message": "Zatvaranjem ove kartice prekinut ćete ovu sesiju."
@@ -32,15 +27,13 @@
 		"message": "Otvara novu sesiju SSH."
 	},
 	"command_complete": {
-		"message": "Naredba $1 izvršena je sa statusnim kodom $2.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Naredba $1 izvršena je sa statusnim kodom $2."
+	},
+	"command_not_supported": {
+		"message": "Naredba $1 nije podržana u ovoj verziji Chromea"
+	},
+	"command_startup_failed": {
+		"message": "Pokretanje naredbe $1 nije uspjelo: $2"
 	},
 	"connect_button_label": {
 		"message": "Poveži"
@@ -49,31 +42,16 @@
 		"message": "Želite li odabrati neku drugu vezu (C) ili napustiti povezivanje (x)?"
 	},
 	"connecting": {
-		"message": "Povezivanje s hostom $1...",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Povezivanje s hostom $1..."
+	},
+	"connection_dialog_name": {
+		"message": "Dijalog za povezivanje"
 	},
 	"console_crosh_options_notice": {
-		"message": "Znate li da postoji posebna stranica s opcijama?\nViše ne morate izravno određivati term_.\nPritisnite $1 da biste je otvorili ili kliknite:\n$2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Znate li da postoji posebna stranica s opcijama?\nViše ne morate izravno mijenjati \"term_\".\nPritisnite $1 da biste je otvorili ili kliknite:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Znate li da postoji posebna stranica s opcijama?\nViše ne morate izravno određivati term_.\n\n$1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Znate li da postoji posebna stranica s opcijama?\nViše ne morate izravno mijenjati \"term_\".\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -82,12 +60,7 @@
 		"message": "Izbriši"
 	},
 	"disconnect_message": {
-		"message": "Dodatak NaCl izvršen je sa statusnim kodom $1.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Dodatak NaCl izvršen je sa statusnim kodom $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -117,7 +90,7 @@
 		"message": "priključak"
 	},
 	"field_relay_options_aria_label": {
-		"message": "opcije releja"
+		"message": "Opcije SSH relejnog poslužitelja"
 	},
 	"field_relay_options_placeholder": {
 		"message": "Opcije SSH relejnog poslužitelja"
@@ -132,12 +105,217 @@
 		"message": "korisničko ime"
 	},
 	"found_relay": {
-		"message": "Pronađeni relejni poslužitelj: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Pronađeni relejni poslužitelj: $1"
+	},
+	"get_profile_error": {
+		"message": "POGREŠKA: nije uspjelo učitavanje profila $1:\n$2"
+	},
+	"hterm_button_allow_always": {
+		"message": "Dopusti uvijek"
+	},
+	"hterm_button_allow_session": {
+		"message": "Dopusti ovu sesiju"
+	},
+	"hterm_button_block": {
+		"message": "Blokiraj"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "Učitavanje resursa $1 nije uspjelo"
+	},
+	"hterm_loading_resource_start": {
+		"message": "Učitavanje resursa $1..."
+	},
+	"hterm_popup_inline_image": {
+		"message": "Ugrađene slike"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "Ugrađene su slike onemogućene"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "Određuje hoće li se udaljenom hostu dopustiti prikazivanje slika na terminalu.\n\nPrema zadanim postavkama upiti se prikazuju dok se nešto ne odabere."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "Ako se postavi, poništava se ponovno mapiranje za Alt – backspace – DEL u OS-u Chrome, tako da je Alt – backspace zapravo Alt – backspace."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "Odabir heuristike za otkrivanje načina rada tipke AltGr.\n\n\"null\": automatsko otkrivanje na temelju entiteta navigator.language:\n      \"en-us\" => \"none\", inače => \"right-alt\"\n\"none\": onemogućuje svaku izmjenu vezanu uz AltGr.\n\"ctrl- alt\": pretpostavlja da Ctrl + Alt znači AltGr.\n\"left-alt\": pretpostavlja da Alt znači AltGr.\n\"right-alt\": pretpostavlja da desni Alt znači AltGr."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Određuje hoće li tipka Alt djelovati kao meta tipka ili kao zasebna Alt tipka."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Kontrolira načina postupanja s tipkom Alt.\n\n  escape: šalje se prefiks ESC.\n  8-bit: znaku tipke dodaje se 128 kao u xtermu.\n browser-key: čeka se događaj pritiska tipke i reakcija preglednika.\n (To neće dobro funkcionirati na platformama na kojima\n preglednik izvodi zadanu radnju za neke kombinacije s tipkom Alt.)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "URL zvuka upozorenja terminala. Prazan niz ako nema čujnog upozorenja."
+	},
+	"hterm_pref_background_color": {
+		"message": "Boja pozadine za tekst bez drugih atributa boje."
+	},
+	"hterm_pref_background_image": {
+		"message": "CSS vrijednost pozadinske slike. Prazan niz ako nema slike.\n\nNa primjer:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "CSS vrijednost položaja pozadinske slike.\n\nNa primjer:\n  10% 10%\n  center"
+	},
+	"hterm_pref_background_size": {
+		"message": "CSS vrijednost veličine pozadinske slike."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "Ako je vrijednost \"true\", tipka backspace treba slati BS (\"\\x08\" odnosno ^H). U protivnom tipka backspace treba slati \"\\x7f\"."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "Navodi se kao objekt. To je rijetki niz u kojem je svaki entitet kôd skupa znakova, a vrijednost objekt koji je i sam rijetki niz. U tom rijetkom nizu svaki entitet predstavlja primljeni znak, a vrijednost prikazani znak.\n\nNa primjer:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "Određuje treba li se izbrisati odabir nakon kopiranja."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "Određuje hoće li se zatvoriti prozor kada naredba završi izvršavanje."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "Nadjačava boje u zadanoj paleti.\n\nTo se može navesti kao niz ili kao objekt. Ako se navede kao objekt, pretpostavlja se da je to rijetki niz u kojem je svaki entitet numerički indeks u paleti boja.\n\nVrijednosti se mogu navesti kao i skoro svaka druga CSS vrijednost boje. To uključuje #RGB, #RRGGBB, rgb(...), rgba(...) i sve nazive boja koji su ujedno dio temeljne X11 rgb.txt datoteke.\n\nPomoću \"null\" možete odrediti da se zadana vrijednost ne smije promijeniti. To je korisno za preskakanje malog broja indeksa kada je vrijednost određena kao niz.\n\nU oba ova primjera indeks boja 1 određuje se kao plava:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "Automatski kopira odabir miša u međuspremnik."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Ctrl + C kopira odabir ako je vrijednost postavljena na \"true\", a hostu šalje ^C ako je postavljena na \"false\".\nCtrl + Shift + C hostu šalje ^C ako je vrijednost \"true\", a kopira odabir ako je \"false\"."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ako je vrijednost postavljena na \"true\", Ctrl – plus/minus/nula kontrolira zumiranje.\nAko je postavljena na \"false\", Ctrl – Shift – plus/minus/nula kontrolira zumiranje, Ctrl – minus šalje ^_, a Ctrl – plus/nula ne radi ništa."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Ctrl + V zaljepljuje odabir ako je vrijednost postavljena na \"true\", a hostu šalje ^V ako je postavljena na \"false\".\nCtrl + Shift + V hostu šalje ^V ako je vrijednost postavljena na \"true\", a lijepi odabir ako je postavljena na \"false\"."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "Hoće li pokazivač teksta treperiti prema zadanim postavkama. To se može promijeniti za vrijeme izvođenja putem izlaznih sljedova terminala"
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "Brzina treptanja pokazivača teksta izražena u milisekundama.\n\nNiz od dva elementa u kojem prvi označava koliko dugo pokazivač treba biti uključen, a drugi koliko dugo treba biti isključen."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "Boja vidljivog pokazivača teksta."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "Ako je vrijednost \"true\", upozorenja terminala u pozadini izrađivat će web-obavijesti. https://www.w3.org/TR/notifications/\n\nZa prikazivanje obavijesti potrebno je dopuštenje korisnika. Kada je ta opcija postavljena na \"true\", hterm će pokušati tražiti dopuštenje od korisnika ako je potrebno. Preglednici možda neće prikazati zahtjev za dopuštenje ako on nije aktiviran radnjom korisnika.\n\nChromeova proširenja s dopuštenjem za obavijesti smjet će prikazivati obavijesti."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Određuje hoće li istočnoazijski višeznačni znakovi imati širinu od dva stupca."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "Vrijednost \"true\" znači omogućivanje 8-bitnih kontrolnih znakova, a \"false\" njihovo zanemarivanje.\n\nDvobajtne verzije tih kontrolnih znakova uvažavat ćemo neovisno o ovoj postavci."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "Postavite na \"true\" ako trebamo uvažavati atribut treperenja, a na \"false\" ako ga trebamo zanemariti."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "Postavite na \"true\" ako trebamo upotrebljavati podebljani font za tekst s atributom za podebljano/jarko, na \"false\" za font normalne debljine i \"null\" za automatsko otkrivanje."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "Postavite na \"true\" ako trebamo upotrebljavati jarke boje (8 – 15 na paleti od 16 boja) za bilo koji tekst s atributom \"bold\", a u suprotnom upotrijebite \"false\"."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "Treba li se prikazati poruka na terminalu kada host zapisuje u međuspremnik."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "Dopušta udaljenom hostu izravno zapisivanje u lokalni međuspremnik sustava.\nPristup za čitanje ne daje se nikada neovisno o ovoj postavci.\n\nTo se upotrebljava za kontrolu pristupa značajkama kao što su OSC-52."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "Uvažava pokušaj hosta za promjenu statusa treperenja pokazivača pomoću DEC privatnog načina 12."
+	},
+	"hterm_pref_environment": {
+		"message": "Inicijalni set varijabli okruženja, kao objekt."
+	},
+	"hterm_pref_font_family": {
+		"message": "Zadana skupina fontova za tekst terminala."
+	},
+	"hterm_pref_font_size": {
+		"message": "Zadana veličina fonta u pikselima."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "CSS entitet za izglađivanje fonta."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "Boja prednjeg plana za tekst bez drugih atributa boje."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "Ako je postavljeno na \"true\", tipke Home/End kontroliraju klizač terminala, a Shift – Home/End šalje VT kodove tipki. Ako je postavljeno na \"false\", onda Home/End šalje VT kodove, a Shift – Home/End služi za pomicanje."
+	},
+	"hterm_pref_keybindings": {
+		"message": "Karta sljedova tipki za radnje tipki. Sljedovi tipki uključuju nula ili više modifikatorskih tipki iza kojih slijedi kôd tipke. Kodovi tipki mogu biti decimalni ili heksadecimalni brojevi, odnosno identifikator tipke. Radnje tipki mogu se odrediti kao niz koji se šalje hostu ili kao identifikator radnje. Potpuno objašnjenje formata dostupno je na https://goo.gl/LWRndr.\n\nPrimjeri povezivanja tipki:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "Ako je vrijednost \"točno\", medijske tipke pretvaraju se u svoje odgovarajuće funkcijske tipke. Ako je \"netočno\", tipke obrađuje preglednik."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Određuje hoće li meta tipka slati prefiks Escape."
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "Tipka miša za lijepljenje ili nula za automatsko otkrivanje.\n\nZa automatsko otkrivanje upotrebljavamo srednju tipku miša za sve platforme osim X11 (uključujući OS Chrome). Na platformi X11 upotrebljavamo desnu tipku miša (jer upravitelj nativnog prozora treba zalijepiti srednjom tipkom miša).\n\n0 == lijeva tipka (primarna).\n1 == srednja tipka (pomoćna).\n2 == desna tipka (sekundarna).\n\nOva se opcija aktivira neovisno o postavci \"mouse-right-click-paste\" (desn – klik – miša – lijepljenje).\n\nNapomena: postavka ispravno funkcionira za miševe za ljevoruke i za desnoruke osobe."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "Zalijepi na desni klik miša.\n\nOva se opcija aktivira neovisno o postavci \"mouse-paste-button\" (desni-klik-miša-lijepljenje).\n\nNapomena: postavka ispravno funkcionira za miševe za ljevoruke i za desnoruke osobe."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "Ako je postavljeno na \"true\", tipke stranica prema gore/dolje kontroliraju klizač terminala, a Shift –  stranica prema gore/dolje šalju VT kodove tipki. Ako je postavljeno na \"false\", onda tipke stranica prema gore/dolje šalju VT kodove, a Shift –  stranica prema gore/dolje služe za pomicanje."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Određuje treba li se \"Alt-1..9\" prosljeđivati pregledniku.\n\nTo je praktično kada se hterm izvodi na kartici preglednika, tako da se ne izgube Chromeovi prečaci za prebacivanje na karticu. Kada se ne izvodi na kartici, bolje je te tipke slati hostu kako bi se mogle upotrebljavati u Vimu ili Emacsu.\n\nAko je vrijednost \"true\", \"Alt-1..9\" obrađuje preglednik. Ako je \"false\", \"Alt-1..9\" šalje se hostu. Ako nije postavljeno, otkriva se automatski na temelju platforme preglednika i vrste prozora."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Određuje treba li se \"Ctrl-1..9\" prosljeđivati pregledniku.\n\nTo je praktično kada se hterm izvodi na kartici preglednika, tako da se ne izgube Chromeovi prečaci za prebacivanje na karticu. Kada se ne izvodi na kartici, bolje je te tipke slati hostu kako bi se mogle upotrebljavati u Vimu ili Emacsu.\n\nAko je vrijednost \"true\", \"Ctrl-1..9\" obrađuje preglednik. Ako je \"false\", \"Ctrl-1..9\" šalje se hostu. Ako nije postavljeno, otkriva se automatski na temelju platforme preglednika i vrste prozora."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Određuje treba li se \"Meta-1..9\" prosljeđivati pregledniku.\n\nTo je praktično kada se hterm izvodi na kartici preglednika, tako da se ne izgube Chromeovi prečaci za prebacivanje na karticu. Kada se ne izvodi na kartici, bolje je te tipke slati hostu kako bi se mogle upotrebljavati u Vimu ili Emacsu.\n\nAko je vrijednost \"true\", \"Meta-1..9\" obrađuje preglednik. Ako je \"false\", \"Meta-1..9\" šalje se hostu. Ako nije postavljeno, otkriva se automatski na temelju platforme preglednika i vrste prozora."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Određuje hoće li se \"Meta-V\" prosljeđivati hostu."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "Određuje očekivano kodiranje za podatke primljene s hosta.\n\nVažeće su vrijednosti \"utf-8\" i \"raw\"."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "Hoće li se klizač pomaknuti na dno pritiskom bilo koje tipke."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "Hoće li se klizač pomaknuti na dno na izlaz terminala."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Kada se upotrebljava međuspremnik zamjenskog zaslona, a DECCKM (tipke pokazivača aplikacije) je aktivan, događaji kotačića miša emuliraju tipke strelica.\n\nTo se može privremeno onemogućiti držanjem tipke Shift.\n\nTo se često pojavljuje pri upotrebi programa za prikaz stranice (less), čitanju man stranica, upotrebi uređivača teksta (vi/nano) ili kada se upotrebljava screen/tmux."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "Množitelj za delta vrijednost u pikselima pri događajima kotačića uzrokovanih njegovim pomicanjem. Mijenja brzinu pomicanja stranice."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "Način rada vertikalnog klizača."
+	},
+	"hterm_pref_send_encoding": {
+		"message": "Postavlja kodiranje za podatke koji se šalju hostu."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Shift – Insert lijepi odabir ako je vrijednost \"true\", a šalje hostu ako je \"false\"."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "Zadano kodiranje terminala (DOCS).\n\nISO-2022 omogućuje prijevode karte znakova (kao što su grafičke karte).\nUTF-8 onemogućuje takvu podršku.\n\nZaključana varijanta znači da se kodiranje ne može promijeniti za vrijeme izvođenja putem izlaznih slijedova terminala.\n\nZadržite opciju UTF-8, osim ako primijetite pogreške u generiranju kod starih aplikacija."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "Hoće li se upotrebljavati zadano ponašanje kopiranja prozora."
+	},
+	"hterm_pref_user_css": {
+		"message": "URL korisničkog lista stilova koji se treba uključiti u dokument terminala."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "Prilagođeni CSS tekst za stiliziranje terminala."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "Regularni izraz za zaustavljanje podudaranja s lijeve strane (početka) odabira.\n\nTo je obično klasa znakova za odbacivanje određenih znakova.\nPrema zadanim postavkama dopuštamo \"~\" i \".\" jer putovi često započinju tim znakovima."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "Regularni izraz za podudaranje svih znakova u sredini.\n\nTo je obično klasa znakova za odbacivanje određenih znakova.\n\nUpotrebljava se za širenje odabira oko početne točke."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "Regularni izraz za zaustavljanje podudaranja s desne strane (kraja) odabira.\n\nTo je obično klasa znakova za odbacivanje određenih znakova."
 	},
 	"identity_label": {
 		"message": "Identitet"
@@ -149,34 +327,16 @@
 		"message": "Uvezi..."
 	},
 	"initializing_relay": {
-		"message": "Traženje relejnog poslužitelja pomoću: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Traženje relejnog poslužitelja pomoću: $1"
 	},
 	"json_parse_error": {
-		"message": "Nije moguće raščlaniti JSON u stavci \"$1\": $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Nije moguće raščlaniti JSON u stavci \"$1\": $2"
 	},
 	"known_hosts_empty": {
 		"message": "Nema poznatih glavnih računala i ničega što treba zaboraviti."
 	},
 	"known_hosts_prompt": {
-		"message": "Odaberite glavno računalo koje treba zaboraviti [1-$1]:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Odaberite glavno računalo koje treba zaboraviti [1-$1]:"
 	},
 	"known_hosts_title": {
 		"message": "Poznata glavna računala:"
@@ -185,12 +345,7 @@
 		"message": "Učitavanje..."
 	},
 	"missing_param": {
-		"message": "Nedostaje parametar: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Nedostaje parametar: $1"
 	},
 	"mount_button_label": {
 		"message": "Učitavanje SFTP-a"
@@ -211,12 +366,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Povežite se sa spremljenim profilom ili novim SSH sustavom"
 	},
 	"open_as_window_tip": {
-		"message": "[Profesionalni savjet] Upotrijebite \"Otvori kao prozor\" da biste spriječili zatvaranje terminala prečacem Control-W.\n[Profesionalni savjet] Više informacija potražite na web-lokaciji $1.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "[Profesionalni savjet] Upotrijebite \"Otvori kao prozor\" ili \"Cijeli zaslon\" da biste spriječili zatvaranje terminala prečacem Ctrl-W.\n[Profesionalni savjet] Više informacija dostupno je na $1."
 	},
 	"options_button_label": {
 		"message": "Opcije"
@@ -242,14 +392,23 @@
 	"reconnect_message": {
 		"message": "Želite li se ponovo povezati (R), odabrati neku drugu vezu (C) ili napustiti povezivanje (x)?"
 	},
+	"relay_options_error": {
+		"message": "Nepoznata opcija releja: $1"
+	},
 	"relay_retry": {
 		"message": "Ponovni pokušaj..."
+	},
+	"request_pin_prompt": {
+		"message": "Unesite PIN za otključavanje ključa $1 na čitaču \"$2\" (preostalih pokušaja: $3):"
 	},
 	"restore_prefs": {
 		"message": "Vratite sigurnosnu kopiju"
 	},
 	"shortcut_list_aria_label": {
 		"message": "spremljene veze"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "Instalirajte aplikaciju Smart Card Connector: $1"
 	},
 	"ssh_argstr_label": {
 		"message": "SSH argumenti"
@@ -269,6 +428,12 @@
 	"tip_11": {
 		"message": "Tipke/prečace možete ponovo povezati: https://goo.gl/LWRndr"
 	},
+	"tip_12": {
+		"message": "Za SSH autentifikaciju koristite Yubikeys i druge pametne kartice: https://goo.gl/3ZEU1w"
+	},
+	"tip_13": {
+		"message": "Za prikaz ugrađenih slika: https://goo.gl/MnSysj"
+	},
 	"tip_2": {
 		"message": "Za prikaz obavijesti u pregledniku upotrijebite skriptu hterm-notify: https://goo.gl/ZNxGdF"
 	},
@@ -276,7 +441,7 @@
 		"message": "Za povezivanje iz višenamjenskog okvira unesite \"ssh <profile name>\": https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "OS Chrome može učitati datotečne sustave putem SFTP-a i pregledavati ga putem aplikacije Datoteke. Upotrijebite \"Učitavanje SFTP-a\" umjesto \"Poveži\"."
+		"message": "OS Chrome može učitati datotečne sustave putem SFTP-a i pregledavati ih putem aplikacije Datoteke. Upotrijebite \"Učitavanje SFTP-a\" umjesto \"Poveži\"."
 	},
 	"tip_5": {
 		"message": "Povežite se putem ssh:// veza u web-stranicama ili spremite oznaku: https://goo.gl/zS8EZD"
@@ -288,13 +453,16 @@
 		"message": "Kopirajte u međuspremnik iz uređivača emacs/vim/itd. pomoću naredbe OSC-52: https://goo.gl/XSnyLo"
 	},
 	"tip_8": {
-		"message": "Chatajte s drugima koji koriste hterm/Secure Shell putem chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Chatajte s drugima koji koriste hterm/Secure Shell putem chromium-hterm@chromium.org: https://goo.gl/RYHiK."
 	},
 	"tip_9": {
 		"message": "Pronašli ste pogrešku? Želite zatražiti novu značajku? Javite nam se: https://goo.gl/vb94JY"
 	},
 	"unexpected_error": {
 		"message": "Pojavila se neočekivana pogreška. Više pojedinosti provjerite na konzoli JavaScripta."
+	},
+	"unknown_ssh_client_version": {
+		"message": "Nepoznata verzija SSH-a: $1"
 	},
 	"unmount_button_label": {
 		"message": "Isključi SFTP"
@@ -303,50 +471,19 @@
 		"message": "Dostupno je ažuriranje. Zatvorite sve prozore."
 	},
 	"welcome_changelog": {
-		"message": "Zapisnik izmjena/napomene o izdanju: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Zapisnik izmjena/napomene o izdanju: $1"
 	},
 	"welcome_faq": {
-		"message": "Odgovori na česta pitanja: $1 (pritisnite Ctrl i kliknite na vezama da biste ih otvorili)",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Odgovori na česta pitanja: $1 (pritisnite Ctrl i kliknite na vezama da biste ih otvorili)"
 	},
 	"welcome_release_highlights": {
-		"message": "Važne izmjene od verzije $1:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Važne izmjene od verzije $1:"
 	},
 	"welcome_tip_of_day": {
-		"message": "Nasumični profesionalni savjet br. $1: $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Nasumični profesionalni savjet br. $1: $2"
 	},
 	"welcome_version": {
-		"message": "Dobro došli na $1 verziju $2.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Dobro došli na $1 verziju $2."
 	},
 	"zoom_warning": {
 		"message": "Zumiranje na Izborniku preglednika Chrome postavite na 100%"

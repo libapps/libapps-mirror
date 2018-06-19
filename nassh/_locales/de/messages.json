@@ -6,12 +6,7 @@
 		"message": "Sicherung speichern"
 	},
 	"bad_destination": {
-		"message": "Ziel kann nicht geparst werden: $1.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Ziel kann nicht geparst werden: $1."
 	},
 	"before_unload": {
 		"message": "Das Schließen dieses Tabs beendet diese Sitzung."
@@ -32,15 +27,13 @@
 		"message": "Öffnet eine neue SSH-Sitzung"
 	},
 	"command_complete": {
-		"message": "Der Befehl \"$1\" wurde mit dem Statuscode \"$2\" beendet.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Der Befehl \"$1\" wurde mit dem Statuscode \"$2\" beendet."
+	},
+	"command_not_supported": {
+		"message": "$1 wird in dieser Version von Chrome nicht unterstützt"
+	},
+	"command_startup_failed": {
+		"message": "$1 konnte nicht gestartet werden: $2"
 	},
 	"connect_button_label": {
 		"message": "Verbinden"
@@ -49,31 +42,16 @@
 		"message": "Eine andere Verbindung wählen (c) oder den Vorgang beenden (x)?"
 	},
 	"connecting": {
-		"message": "Verbindung mit $1 wird hergestellt…",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Verbindung mit $1 wird hergestellt…"
+	},
+	"connection_dialog_name": {
+		"message": "Dialogfeld für die Verbindung"
 	},
 	"console_crosh_options_notice": {
-		"message": "Wussten Sie, dass es eine spezielle Optionsseite gibt?\nDas macht eine Modifizierung von \"term_directly\" überflüssig!\nDrücken Sie $1, um sie zu öffnen, oder klicken Sie auf:\n$2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Wussten Sie, dass es eine spezielle Optionsseite gibt?\nDas macht eine direkte Modifizierung von \"term_\" überflüssig.\nDrücken Sie $1, um sie zu öffnen, oder klicken Sie auf:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Wussten Sie, dass es eine spezielle Optionsseite gibt?\nDas macht eine Modifizierung von \"term_directly\" überflüssig!\n$1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Wussten Sie, dass es eine spezielle Optionsseite gibt?\nDas macht eine direkte Modifizierung von \"term_\" überflüssig.\n$1"
 	},
 	"del_keycap": {
 		"message": "[ENTF]"
@@ -82,12 +60,7 @@
 		"message": "Löschen"
 	},
 	"disconnect_message": {
-		"message": "NaCl-Plug-in wurde mit dem Statuscode \"$1\" beendet.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "NaCl-Plug-in wurde mit dem Statuscode \"$1\" beendet."
 	},
 	"enter_keycap": {
 		"message": "[EINGABE]"
@@ -117,7 +90,7 @@
 		"message": "Port"
 	},
 	"field_relay_options_aria_label": {
-		"message": "Relay-Optionen"
+		"message": "SSH-Relay-Server-Optionen"
 	},
 	"field_relay_options_placeholder": {
 		"message": "SSH-Relay-Server-Optionen"
@@ -132,12 +105,217 @@
 		"message": "Nutzername"
 	},
 	"found_relay": {
-		"message": "Gefundener Relay-Server: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Gefundener Relay-Server: $1"
+	},
+	"get_profile_error": {
+		"message": "FEHLER: Profil $1 konnte nicht geladen werden:\n$2"
+	},
+	"hterm_button_allow_always": {
+		"message": "Immer zulassen"
+	},
+	"hterm_button_allow_session": {
+		"message": "Nur für diese Sitzung zulassen"
+	},
+	"hterm_button_block": {
+		"message": "Blockieren"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "$1 konnte nicht geladen werden"
+	},
+	"hterm_loading_resource_start": {
+		"message": "$1 wird geladen…"
+	},
+	"hterm_popup_inline_image": {
+		"message": "Inline-Bilder"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "Inline-Bilder deaktiviert"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "Legt fest, ob bei dem Remote-Host Bilder im Terminal angezeigt werden.\n\nStandardmäßig erfolgt eine Aufforderung, bis eine Wahl getroffen wurde."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "Durch diese Einstellung wird die Zuordnung von \"Alt + Rücktaste -> ENTF\" in Chrome OS aufgehoben, sodass über die Tastenkombination tatsächlich die Funktion \"Alt + Rücktaste\" ausführt wird."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "Wählen Sie eine AltGr-Erkennungsheuristik.\n\n\"null\": Automatische Erkennung basiert auf navigator.language:\n      \"en-us\" => \"none\", sonst => \"right-alt\"\n\"none\": Deaktiviert jegliche AltGr-Manipulation.\n\"ctrl-alt\": Es wird angenommen, dass \"Strg + Alt\" für \"AltGr\" steht.\n\"left-alt\": Es wird angenommen, dass \"Alt\" für \"AltGr\" steht.\n\"right-alt\": Es wird angenommen, dass \"Alt\" für \"AltGr\" steht."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Legt fest, ob die Alt-Taste als Meta- oder als Alt-Taste dient."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Steuert die Funktion der Alt-Taste.\n\n  escape: ESC-Präfix senden.\n  8-bit: Dem eingegebenen Zeichen 128 hinzufügen, wie in xterm.\n browser-key: Das Drücken der Taste und die Reaktion des Browsers\n abwarten. Dies funktioniert nicht einwandfrei auf Plattformen, auf denen der\n Browser bei bestimmten Alt-Sequenzen eine Standardaktion ausführt."
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "URL des Terminaltons. Ein leerer String gibt an, dass kein hörbarer Ton vorhanden ist."
+	},
+	"hterm_pref_background_color": {
+		"message": "Hintergrundfarbe für Text ohne weitere Farbattribute."
+	},
+	"hterm_pref_background_image": {
+		"message": "CSS-Wert des Hintergrundbildes. Ein leerer String gibt an, dass kein Hintergrundbild vorhanden ist.\n\nZum Beispiel:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "CSS-Wert der Position des Hintergrundbildes.\n\nZum Beispiel:\n  10% 10%\n  center"
+	},
+	"hterm_pref_background_size": {
+		"message": "CSS-Wert der Größe des Hintergrundbildes."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "Ist der Wert \"true\", sendet die Rücktaste BS (\"\\x08\" oder \"^H\"). Sonst sollte die Rücktaste \"\\x7f\" senden."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "Dieser Wert ist als Objekt angegeben. Es handelt sich um eine dünnbesetzte Matrix, d. h. bei jeder Eigenschaft handelt es sich um den für das Zeichen festgelegten Code, und der Wert ist ein Objekt, bei dem es sich auch um eine dünnbesetzte Matrix handelt. In dieser dünnbesetzten Matrix ist jede Eigenschaft das ausgegebene Zeichen und der Wert ist das abgebildete Zeichen.\n\nZum Beispiel:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "Legt fest, ob die Auswahl nach dem Kopieren gelöscht werden soll."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "Legt fest, ob das Fenster geschlossen wird, wenn der Befehl ausgeführt ist."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "Überschreibt Farben in der Standardpalette.\n\nDieser Wert wird entweder als Matrix oder als Objekt angegeben. Wenn er als Objekt angegeben wurde, wird angenommen, dass es sich um eine dünnbesetzte Matrix handelt, d. h., jede Eigenschaft ist ein numerischer Index in der Farbpalette.\n\nWerte können fast beliebig als CSS-Farbwerte angegeben werden. Dazu gehören #RGB, #RRGGBB, rgb(…), rgba(…) und alle Farbbezeichnungen, die auch Teil der Datei \"stock X11 rgb.txt\" sind.\n\nMit dem Wert \"null\" kann angegeben werden, dass der Standardwert nicht geändert werden soll. Dies ist besonders hilfreich, um eine gewisse Anzahl von Indizes zu überspringen, wenn der Wert als Matrix angegeben ist.\n\nMit diesen beiden wird Farbindex 1 beispielsweise als blau festgelegt:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "Mausauswahl automatisch in die Zwischenablage kopieren."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Kopieren mit \"Strg + C\" bei der Einstellung \"true\", den Wert \"^C\" an Host senden bei der Einstellung \"false\".\nMit \"Strg + Umschalttaste + C\" den Wert \"^C\" an Host senden bei der Einstellung \"true\", bei der Einstellung \"false\" die Funktion \"Kopieren\" ausführen."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Bei der Einstellung \"true\" steuert \"Strg + Plustaste/Minustaste/Null\" den Zoom.\nBei \"false\" steuert \"Strg + Umschalttaste + Plustaste/Minustaste/Null\" den Zoom, \"Strg + Minustaste\" sendet \"^_\", \"Strg + Plustaste/Null\" hat keine Funktion."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Einfügen mit \"Strg + V\" bei der Einstellung \"true\", den Wert \"^V\" an Host senden bei der Einstellung \"false\".\nMit \"Strg + Umschalttaste + V\" den Wert \"^V\" an Host senden bei der Einstellung \"true\", bei der Einstellung \"false\" die Funktion \"Einfügen\" ausführen."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "Legt fest, ob der Textcursor standardmäßig blinkt. Diese Einstellung kann zur Laufzeit über Escapesequenzen des Terminals geändert werden."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "Die Blinkgeschwindigkeit des Textcursors in Millisekunden.\n\nEine Matrix, die aus zwei Elementen besteht. Mit dem ersten wird festgelegt, wie lange der Textcursor aktiviert bleibt, mit dem zweiten, wie lange er deaktiviert bleibt."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "Die Farbe des sichtbaren Textcursors."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "Wenn die Einstellung \"true\" lautet, erstellt der Terminalton im Hintergrund eine Webbenachrichtigung. https://www.w3.org/TR/notifications/\n\nDamit Benachrichtigungen angezeigt werden können, muss der Nutzer die entsprechende Berechtigung erteilen. Wenn diese Option auf \"true\" festgelegt ist, erhält der Nutzer bei Bedarf über hterm eine Berechtigungsanfrage. In einigen Browsern wird diese Berechtigungsanfrage möglicherweise nicht angezeigt, wenn sie nicht durch eine Nutzeraktion ausgelöst wird.\n\nChrome-Erweiterungen mit der Berechtigung \"Benachrichtigungen\" dürfen Benachrichtigungen einblenden."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Legt fest, ob East Asian Ambiguous-Zeichen eine Breite von zwei Spalten einnehmen."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "Einstellung \"True\", um 8-Bit-Steuerungszeichen zu aktivieren, Einstellung \"false\", um sie zu ignorieren.\n\nDie Zwei-Byte-Version dieser Steuerungszeichen wird unabhängig von dieser Einstellung beachtet."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "Einstellung \"true\", wenn das Attribut \"blinken\" beachtet werden soll. Einstellung \"false\", um es zu ignorieren."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "Einstellung \"true\", wenn für Text mit dem Attribut \"fett/hell\" ein fett formatierter Schriftstil verwendet werden soll. Einstellung \"false\", wenn der normale Schriftstil verwendet werden soll. Der Wert \"null\" zur automatischen Erkennung."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "Einstellung \"true\", wenn für Text mit dem Attribut \"fett\" helle Farben verwendet werden sollen (8 bis 15 auf einer Palette mit 16 Farben). Sonst \"false\"."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "Legt fest, ob im Terminal eine Nachricht angezeigt wird, wenn der Host in die Zwischenablage schreibt."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "Erlaubt es dem Remote-Host, direkt in die Zwischenablage des Systems zu schreiben.\nLesezugriff wird unabhängig von dieser Einstellung nie gewährt.\n\nDie Einstellung wird zur Zugriffssteuerung auf Funktionen wie OSC-52 verwendet."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "Der Versuch des Hosts, den Status des Textcursorblinkens mit DEC-Inkognitomodus 12 zu ändern, wird beachtet."
+	},
+	"hterm_pref_environment": {
+		"message": "Der erste Satz Umgebungsvariablen als Objekt."
+	},
+	"hterm_pref_font_family": {
+		"message": "Standardmäßige Schriftfamilie für den Terminaltext."
+	},
+	"hterm_pref_font_size": {
+		"message": "Standardmäßige Schriftgröße in Pixeln."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "Eigenschaft zur CSS-Schriftglättung."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "Vordergrundfarbe für Text ohne weitere Farbattribute."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "Wenn \"true\" eingestellt ist, wird mit Pos1/Ende die Bildlaufleiste des Terminals gesteuert und mit Umschalttaste + Pos1/Ende werden die VT-Keycodes gesendet. Wenn \"false\" eingestellt ist, werden mit Pos1/Ende VT-Codes gesendet und mit Umschalttaste + Pos1/Ende wird gescrollt."
+	},
+	"hterm_pref_keybindings": {
+		"message": "Eine Karte mit Tastenkombinationen für Funktionen. Tastenkombinationen bestehen aus einer Null oder mehreren Modifikatortasten, gefolgt von einem Tastencode. Tastencodes können Dezimal- oder Hexadezimalzahlen oder eine Schlüsselkennung sein. Schlüsselfunktionen können als String definiert sein, der an den Host gesendet wird, oder als eine Aktionskennzeichnung. Eine vollständige Erklärung des Formats finden Sie unter https://goo.gl/LWRndr.\n\nBeispiele für Tastenbelegungen:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HALLO\\n'\"\n}"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "Wenn \"true\" eingestellt ist, werden die Medientasten in ihr F-Tasten-Äquivalent umgewandelt. Wenn \"false\" eingestellt ist, werden die Tasten vom Browser gesteuert."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Legt fest, ob die Metataste ein vorangestelltes Escapezeichen sendet oder nicht."
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "\"mouse-paste-button\" oder Null für automatische Erkennung.\n\nFür die automatische Erkennung verwenden wir die mittlere Maustaste in Nicht-X11-Plattformen (einschließlich Chrome OS). Unter X11 verwenden wir die rechte Maustaste (da die mittlere Maustaste vom nativen Fenstermanager zum Einfügen verwendet werden sollte).\n\n0 == linke (primäre) Taste.\n1 == mittlere (Hilfs-)Taste.\n2 == rechte (sekundäre) Taste.\n\nDiese Option ist unabhängig von der Einstellung \"mouse-right-click-paste\" aktiviert.\n\nHinweis: Damit können Mäuse für Rechts- und Linkshänder korrekt verwendet werden."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "Einfügen beim Klicken auf die rechte Maustaste.\n\nDiese Option ist unabhängig von der Einstellung \"mouse-paste-button\" aktiviert.\n\nHinweis: Damit können Mäuse für Rechts- und Linkshänder korrekt verwendet werden."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "Wenn \"true\" eingestellt ist, wird mit \"Bild auf/ab\" die Bildlaufleiste des Terminals gesteuert und mit Umschalttaste und \"Bild auf/ab\" werden die VT-Keycodes gesendet. Wenn \"false\" eingestellt ist, werden mit \"Bild auf/ab\" VT-Codes gesendet und mit Umschalttaste und \"Bild auf/ab\" wird gescrollt."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Hier wird festgelegt, ob wir Alt + 1–9 zum Browser übertragen sollen.\n\nDies ist praktisch, wenn HTerm in einem Browsertab ausgeführt wird, sodass Sie nicht die Tastatur-Accelerators \"Zu folgendem Tab wechseln:\" von Chrome verlieren. Wird HTerm nicht in einem Tab ausgeführt, ist es besser, diese Tasten an den Host zu senden, damit sie in Vim oder Emacs verwendet werden können.\n\nWenn \"true\" eingestellt ist, wird Alt + 1–9 vom Browser verarbeitet. Wenn \"false\" eingestellt ist, wird Alt + 1–9 an den Host gesendet. Ist er null, basiert die automatische Erkennung auf der Browserplattform und dem Fenstertyp."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Hier wird festgelegt, ob wir Strg + 1–9 an den Browser senden sollen.\n\nDies ist praktisch, wenn HTerm in einem Browsertab ausgeführt wird, sodass Sie nicht die Tastatur-Accelerators \"Zu folgendem Tab wechseln:\" von Chrome verlieren. Wird HTerm nicht in einem Tab ausgeführt, ist es besser, diese Tasten an den Host zu senden, damit sie in Vim oder Emacs verwendet werden können.\n\nWenn \"true\" eingestellt ist, wird Strg + 1–9 vom Browser verarbeitet. Wenn \"false\" eingestellt ist, wird Strg + 1–9 an den Host gesendet. Ist er null, basiert die automatische Erkennung auf der Browserplattform und dem Fenstertyp."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Hier wird festgelegt, ob wir Meta + 1–9 an den Browser senden sollen.\n\nDies ist praktisch, wenn HTerm in einem Browsertab ausgeführt wird, sodass Sie nicht die Tastatur-Accelerators \"Zu folgendem Tab wechseln:\" von Chrome verlieren. Wird HTerm nicht in einem Tab ausgeführt, ist es besser, diese Tasten an den Host zu senden, damit sie in Vim oder Emacs verwendet werden können.\n\nWenn \"true\" eingestellt ist, wird Meta + 1–9 vom Browser verarbeitet. Wenn \"false\" eingestellt ist, wird Meta + 1–9 an den Host gesendet. Ist er null, basiert die automatische Erkennung auf der Browserplattform und dem Fenstertyp."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Legt fest, ob Meta-V an den Host weitergeleitet wird."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "Hier wird die erwartete Codierung für vom Host empfangene Daten festgelegt.\n\nGültige Werte sind \"utf-8\" und \"raw\"."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "Legt fest, ob bei einem Tastenanschlag bis zum unteren Ende gescrollt wird."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "Legt fest, ob bei einer Terminalausgabe bis zum unteren Ende gescrollt wird."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Wenn der alternative Bild-Zwischenspeicher verwendet wird und DECCKM (Application Cursor Keys) aktiv ist, werden beim Scrollen mit dem Scrollrad die Pfeiltasten imitiert.\n\nDiese Einstellung kann vorübergehend deaktiviert werden, indem die Umschalttaste gedrückt gehalten wird.\n\nZu dieser Situation kommt es häufig, wenn Pager (less) verwendet, man-Seiten oder Texteditoren (vi/nano) gelesen werden oder screen/tmux verwendet wird."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "Der Multiplikator für das Pixeldelta bei vom Scrollrad verursachten Ereignissen. Hiermit kann verändert werden, wie schnell die Seite gescrollt wird."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "Der vertikale Bildlaufleisten-Modus."
+	},
+	"hterm_pref_send_encoding": {
+		"message": "Hiermit wird die Codierung der an den Host gesendeten Daten definiert."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Wenn \"true\" eingestellt ist, werden mit der Umschalttaste + \"Einfügen\" Inhalte eingefügt. Wenn \"false\" eingestellt ist, werden Inhalte an den Host gesendet."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "Die Standardcodierung des Terminals (DOCS).\n\nMit ISO-2022 werden Zeichenzuordnungen aktiviert (ähnlich wie Grafikkarten).\nMit UTF-8 wird deren Unterstützung deaktiviert.\n\nDie gesperrte Variante bedeutet, dass die Codierung zur Laufzeit nicht über Escapesequenzen des Terminals geändert werden kann.\n\nBehalten Sie UTF-8 bei, außer Sie bemerken fehlerhaftes Rendering bei älteren Anwendungen."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "Legt fest, ob das standardmäßige Fensterkopierverhalten verwendet wird."
+	},
+	"hterm_pref_user_css": {
+		"message": "URL des Nutzer-Stylesheets, das im Dokument des Terminals eingefügt wird."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "Benutzerdefinierter CSS-Text zum Anpassen des Terminalstils."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "Regulärer Ausdruck zum Beenden der Angleichung an die linke Seite (Start) einer Auswahl.\n\nNormalerweise ist dies eine Zeichenklasse, mit der bestimmte Zeichen abgelehnt werden.\nWir erlauben standardmäßig \"~\" und \".\", da Pfade häufig mit ihnen beginnen."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "Regulärer Ausdruck, um alle Zeichen an die Mitte anzugleichen.\n\nNormalerweise ist dies eine Zeichenklasse, mit der bestimmte Zeichen abgelehnt werden.\n\nDies wird verwendet, um die Auswahl rund um den Startpunkt zu erweitern."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "Regulärer Ausdruck zum Beenden der Angleichung an die rechte Seite (Ende) einer Auswahl.\n\nNormalerweise ist dies eine Zeichenklasse, mit der bestimmte Zeichen abgelehnt werden."
 	},
 	"identity_label": {
 		"message": "Identität"
@@ -149,34 +327,16 @@
 		"message": "Importieren…"
 	},
 	"initializing_relay": {
-		"message": "Relay-Server wird über $1 gesucht",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Relay-Server wird über $1 gesucht"
 	},
 	"json_parse_error": {
-		"message": "JSON-Datei konnte nicht in \"$1\" geparst werden: $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "JSON-Datei konnte nicht in \"$1\" geparst werden: $2"
 	},
 	"known_hosts_empty": {
 		"message": "Keine bekannten Hosts zum Löschen vorhanden"
 	},
 	"known_hosts_prompt": {
-		"message": "Wählen Sie den zu löschenden Host aus [1-$1]:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Wählen Sie den zu löschenden Host aus [1-$1]:"
 	},
 	"known_hosts_title": {
 		"message": "Bekannte Hosts:"
@@ -185,12 +345,7 @@
 		"message": "Wird geladen…"
 	},
 	"missing_param": {
-		"message": "Parameter $1 fehlt.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Parameter $1 fehlt."
 	},
 	"mount_button_label": {
 		"message": "SFTP-Bereitstellung"
@@ -211,12 +366,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Sie können sich mit einem gespeicherten Profil oder einem neuen SSH-System verbinden"
 	},
 	"open_as_window_tip": {
-		"message": "[Profi-Tipp] Mit der Option \"In Fenster öffnen\" wird Ihr Terminal nicht geschlossen, wenn Sie die Tastenkombination Strg + W verwenden.\n[Profi-Tipp] Weitere Informationen finden Sie unter $1.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "[Profi-Tipp] Mit \"In Fenster öffnen\" oder \"Vollbild\" wird verhindert, dass mit Strg + W Ihr Terminal geschlossen wird!\n[Profi-Tipp] Siehe $1 für weitere Informationen."
 	},
 	"options_button_label": {
 		"message": "Optionen"
@@ -242,14 +392,23 @@
 	"reconnect_message": {
 		"message": "Verbindung wiederherstellen (r), eine andere Verbindung wählen (c) oder den Vorgang beenden (x)?"
 	},
+	"relay_options_error": {
+		"message": "Unbekannte Relay-Option: $1"
+	},
 	"relay_retry": {
 		"message": "Wird erneut versucht..."
+	},
+	"request_pin_prompt": {
+		"message": "Geben Sie die PIN ein, um den Schlüssel $1 auf \"$2\" zu entsperren (noch $3 Versuche übrig):"
 	},
 	"restore_prefs": {
 		"message": "Sicherung wiederherstellen"
 	},
 	"shortcut_list_aria_label": {
 		"message": "Gespeicherte Verbindungen"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "Installieren Sie die Smart Card Connector-App: $1"
 	},
 	"ssh_argstr_label": {
 		"message": "SSH-Argumente"
@@ -264,10 +423,16 @@
 		"message": "Sie können die Strg-Taste gedrückt halten (Befehlstaste bei Mac OS) und gleichzeitig auf Links klicken, um sie zu öffnen."
 	},
 	"tip_10": {
-		"message": "Wenn ein Fenster geöffnet ist, kann durch Strg + Shift + N eine weitere Sitzung geöffnet werden."
+		"message": "Wenn ein Fenster geöffnet ist, kann durch Strg + Umschalttaste + N eine weitere Sitzung geöffnet werden."
 	},
 	"tip_11": {
 		"message": "Sie können Tasten/Tastenkürzel neu zuweisen: https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "Verwenden Sie Yubikeys und andere Smartcards für die SSH-Auth: https://goo.gl/3ZEU1w"
+	},
+	"tip_13": {
+		"message": "Bilder inline anzeigen: https://goo.gl/MnSysj"
 	},
 	"tip_2": {
 		"message": "Benachrichtigungen können mithilfe von \"hterm-notify\" im Browser angezeigt werden: https://goo.gl/ZNxGdF"
@@ -276,7 +441,7 @@
 		"message": "Sie können sich über die Omnibox verbinden, indem Sie \"ssh <Profilname>\" eingeben: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS kann Dateisysteme über SFTP bereitstellen und über die App \"Dateien\" suchen. Verwenden Sie \"SFTP Mount\" statt \"Connect\"."
+		"message": "Chrome OS kann Dateisysteme über SFTP bereitstellen und über die App \"Dateien\" suchen. Verwenden Sie \"SFTP-Bereitstellung\" statt \"Verbinden\"."
 	},
 	"tip_5": {
 		"message": "Verbinden Sie sich mithilfe von \"ssh://\"-Links in Webseiten oder speichern Sie ein Lesezeichen: https://goo.gl/zS8EZD"
@@ -288,13 +453,16 @@
 		"message": "Kopieren Sie Inhalte in Ihre Zwischenablage beispielsweise von Emacs oder Vim und verwenden Sie OSC-52: https://goo.gl/XSnyLo"
 	},
 	"tip_8": {
-		"message": "Chatten Sie mit anderen hterm-/Secure Shell-Nutzern über chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Über chromium-hterm@chromium.org mit anderen hterm-/Secure Shell-Nutzern chatten: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
 		"message": "Haben Sie einen Fehler gefunden? Möchten Sie eine neue Funktion anfragen? Lassen Sie es uns wissen: https://goo.gl/vb94JY"
 	},
 	"unexpected_error": {
 		"message": "Ein unerwarteter Fehler ist aufgetreten. Weitere Informationen finden Sie in der JavaScript-Konsole."
+	},
+	"unknown_ssh_client_version": {
+		"message": "Unbekannte SSH-Version: $1"
 	},
 	"unmount_button_label": {
 		"message": "SFTP-Bereitstellung beenden"
@@ -303,50 +471,19 @@
 		"message": "Ein Update ist verfügbar. Bitte schließen Sie alle Fenster."
 	},
 	"welcome_changelog": {
-		"message": "Änderungsprotokoll/Versionshinweise: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Änderungsprotokoll/Versionshinweise: $1"
 	},
 	"welcome_faq": {
-		"message": "Antworten auf häufig gestellte Fragen: $1 (Strg + zum Öffnen von Links klicken)",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Antworten auf häufig gestellte Fragen: $1 (Strg + zum Öffnen von Links klicken)"
 	},
 	"welcome_release_highlights": {
-		"message": "Größere Änderungen seit $1:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Größere Änderungen seit $1:"
 	},
 	"welcome_tip_of_day": {
-		"message": "Zufälliger Profi-Tipp Nr. $1: $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Zufälliger Profi-Tipp Nr. $1: $2"
 	},
 	"welcome_version": {
-		"message": "Willkommen bei $1 Version $2.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Willkommen bei $1 Version $2."
 	},
 	"zoom_warning": {
 		"message": "Bitte stellen Sie im Chrome-Menü die Zoomeinstellungen auf 100 % ein"

@@ -6,12 +6,7 @@
 		"message": "Lưu bản sao lưu"
 	},
 	"bad_destination": {
-		"message": "Không thể phân tích cú pháp đích: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Không thể phân tích cú pháp đích: $1"
 	},
 	"before_unload": {
 		"message": "Đóng tab này sẽ ngắt kết nối phiên này."
@@ -32,15 +27,13 @@
 		"message": "Mở phiên SSH mới."
 	},
 	"command_complete": {
-		"message": "Lệnh $1 đã thoát với mã trạng thái $2.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Lệnh $1 đã thoát với mã trạng thái $2."
+	},
+	"command_not_supported": {
+		"message": "Phiên bản Chrome này không hỗ trợ $1"
+	},
+	"command_startup_failed": {
+		"message": "Không chạy được $1: $2"
 	},
 	"connect_button_label": {
 		"message": "Kết nối"
@@ -49,31 +42,16 @@
 		"message": "Chọn một kết nối khác (C) hoặc Thoát (X)?"
 	},
 	"connecting": {
-		"message": "Đang kết nối với $1...",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Đang kết nối với $1..."
+	},
+	"connection_dialog_name": {
+		"message": "Hộp thoại kết nối"
 	},
 	"console_crosh_options_notice": {
-		"message": "Bạn có biết rằng có một trang tùy chọn chuyên dụng không?\nBạn sẽ không cần phải chỉnh sửa term_directly nữa!\nHãy nhấn phím $1 để mở hoặc nhấp vào:\n$2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Bạn có biết rằng chúng tôi cung cấp một trang chuyên về tùy chọn không?\nBạn sẽ không cần sửa đổi 'term_directly' nữa!\nĐể mở trang này, hãy nhấn phím $1 hoặc nhấp vào:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Bạn có biết rằng có một trang tùy chọn chuyên dụng không?\nBạn sẽ không cần phải chỉnh sửa term_ directly nữa!\n$1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Bạn có biết rằng chúng tôi cung cấp một trang chuyên về tùy chọn không?\nBạn sẽ không cần chỉnh sửa 'term_directly' nữa!\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -82,12 +60,7 @@
 		"message": "Xóa"
 	},
 	"disconnect_message": {
-		"message": "Plugin NaCl đã thoát với mã trạng thái $1.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Plugin NaCl đã thoát với mã trạng thái $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -117,7 +90,7 @@
 		"message": "cổng"
 	},
 	"field_relay_options_aria_label": {
-		"message": "tùy chọn chuyển tiếp"
+		"message": "Tùy chọn về máy chủ chuyển tiếp SSH"
 	},
 	"field_relay_options_placeholder": {
 		"message": "Tùy chọn về máy chủ chuyển tiếp SSH"
@@ -132,12 +105,217 @@
 		"message": "tên người dùng"
 	},
 	"found_relay": {
-		"message": "Đã tìm thấy máy chủ chuyển tiếp: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Đã tìm thấy máy chủ chuyển tiếp: $1"
+	},
+	"get_profile_error": {
+		"message": "ERROR: Không thể tải cấu hình $1:\n$2"
+	},
+	"hterm_button_allow_always": {
+		"message": "Luôn cho phép"
+	},
+	"hterm_button_allow_session": {
+		"message": "Cho phép phiên này"
+	},
+	"hterm_button_block": {
+		"message": "Chặn"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "Không tải được $1"
+	},
+	"hterm_loading_resource_start": {
+		"message": "Đang tải $1 ..."
+	},
+	"hterm_popup_inline_image": {
+		"message": "Hình ảnh nội dòng"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "Đã tắt hình ảnh nội dòng"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "Xem có cho phép máy chủ từ xa hiển thị hình ảnh trong thiết bị đầu cuối hay không.\n\nTheo mặc định, chúng tôi sẽ nhắc cho đến khi bạn lựa chọn."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "Nếu đã đặt, hãy hoàn tác Chrome OS Alt-Backspace về DEL remap, để Alt-Backspace cũng chính là Alt-Backspace."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "Chọn phương pháp phỏng đoán phát hiện AltGr.\n\n'null': Tự động phát hiện dựa trên navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Tắt bất kỳ thay đổi định dạng nào có liên quan đến AltGr.\n'ctrl-alt': Giả sử Ctrl+Alt có nghĩa là AltGr.\n'left-alt': Giả sử phím Alt bên trái có nghĩa là AltGr.\n'right-alt': Giả sử phím Alt bên phải có nghĩa là AltGr."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Đặt xem phím Alt có vai trò giống phím Meta hay phím Alt riêng biệt."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Điều khiển cách sử dụng phím Alt.\n\n  escape: Gửi tiền tố ESC.\n  8 bit: Thêm 128 vào ký tự đã nhập như trong xterm.\n browser-key: Chờ sự kiện nhấn phím và xem nội dung trình duyệt hiển thị. (Việc này sẽ hoạt động không hiệu quả trên các nền tảng mà trình duyệt thực hiện hành động mặc định cho một số chuỗi Alt.)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "URL của âm thanh chuông trên thiết bị đầu cuối. Chuỗi trống khi không có âm thanh chuông."
+	},
+	"hterm_pref_background_color": {
+		"message": "Màu nền của văn bản không có các thuộc tính màu khác."
+	},
+	"hterm_pref_background_image": {
+		"message": "Giá trị CSS của hình nền. Chuỗi trống khi không có hình ảnh.\n\nVí dụ:\n  url(https://goo.gl/anedTK)\n  tô chuyển tiếp dạng đường thẳng (trên dưới, xanh lam, đỏ)"
+	},
+	"hterm_pref_background_position": {
+		"message": "Giá trị CSS của vị trí hình nền.\n\nVí dụ:\n  10% 10%\n  center"
+	},
+	"hterm_pref_background_size": {
+		"message": "Giá trị CSS của kích thước hình nền."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "Nếu giá trị là true, phím backspace (phím xóa lùi) sẽ gửi BS ('\\x08', còn gọi là ^H).  Nếu không, phím backspace (phím xóa lùi) sẽ gửi ''\\x7f'."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "Giá trị này được chỉ định làm đối tượng. Đây là một mảng thưa, trong đó mỗi thuộc tính chính là mã của bộ ký tự và giá trị chính là đối tượng mà bản thân là một mảng thưa. Trong mảng thưa đó, mỗi thuộc tính chính là ký tự nhận được còn giá trị là ký tự được hiển thị.\n\nVí dụ:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "Chọn xem có xóa lựa chọn sau khi sao chép hay không."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "Xem có đóng cửa sổ khi kết thúc thực hiện lệnh hay không."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "Ghi đè màu trong bảng màu mặc định.\n\nCó thể chỉ định thao tác này dưới dạng mảng hoặc đối tượng. Khi được chỉ định dưới dạng đối tượng, đối tượng đó sẽ được coi là mảng thưa, trong đó mỗi thuộc tính chính là một chỉ mục dạng số trong bảng màu.\n\nCó thể chỉ định các giá trị giống nhau như hầu hết các giá trị màu CSS. Giá trị này bao gồm #RGB, #RRGGBB, rgb(...), rgba(...) và bất kỳ tên màu nào cũng nằm trong tệp X11 rgb.txt chuẩn.\n\nBạn có thể sử dụng giá trị \"null\" để nêu rõ rằng không được thay đổi giá trị mặc định. Điều này sẽ hữu ích nếu muốn bỏ qua một số nhỏ các chỉ mục khi chỉ định giá trị này dưới dạng mảng.\n\nChẳng hạn như cả hai giá trị này đặt chỉ mục màu 1 thành màu xanh lam:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "Tự động sao chép vùng chọn bằng chuột vào khay nhớ tạm."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Tổ hợp phím Ctrl-C sẽ sao chép nếu giá trị là true, sẽ gửi ^C đến máy chủ nếu giá trị là false.\nTổ hợp phím Ctrl-Shift-C sẽ gửi ^C đến máy chủ nếu giá trị là true, sẽ sao chép nếu giá trị là false."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Nếu là true, tổ hợp phím Ctrl-+/-/0 sẽ điều khiển thao tác thu phóng.\nNếu là false, tổ hợp phím Ctrl-Shift- +/-/0 sẽ điều khiển thao tác thu phóng, tổ hợp phím Ctrl-- sẽ gửi ^_, tổ hợp phím Ctrl-+/0 sẽ không thực hiện thao tác nào."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Tổ hợp phím Ctrl-V sẽ dán nếu là true, sẽ gửi ^V đến máy chủ nếu là false.\nTổ hợp phím Ctrl-Shift-V sẽ gửi ^V đến máy chủ nếu là true, sẽ dán nếu là false."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "Xem con trỏ văn bản có nhấp nháy theo mặc định hay không. Bạn có thể bật/tắt tùy chọn này vào thời điểm chạy thông qua chuỗi ký tự thoát của thiết bị đầu cuối."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "Tốc độ nhấp nháy của con trỏ văn bản tính bằng mili giây.\n\nĐây là một mảng gồm 2 phần tử, phần tử đầu tiên biểu thị thời gian con trỏ văn bản sẽ bật và phần tử thứ hai biểu thị thời gian con trỏ sẽ tắt."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "Màu hiển thị của con trỏ văn bản."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "Nếu là true, chuông trong nền của thiết bị đầu cuối sẽ tạo Thông báo web. https://www.w3.org/TR/notifications/\n\nViệc hiển thị thông báo yêu cầu quyền từ người dùng. Khi bạn đặt tùy chọn này thành true, hterm sẽ tìm cách yêu cầu người dùng cấp quyền nếu cần thiết. Các trình duyệt có thể không hiển thị yêu cầu quyền này nếu yêu cầu không được kích hoạt bằng hành động của người dùng.\n\nCác tiện ích của Chrome được cấp quyền về \"thông báo\" sẽ có quyền hiển thị thông báo."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Đặt xem các ký tự ngôn ngữ Đông Á không xác định có chiều rộng hai cột hay không."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "True để bật các ký tự điều khiển 8 bit, false để bỏ qua các ký tự đó.\n\nChúng tôi sẽ sử dụng các phiên bản hai byte của các ký tự điều khiển này cho dù cài đặt này là gì."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "Là true nếu chúng tôi phải dùng thuộc tính nhấp nháy. Là false để bỏ qua thuộc tính đó."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "Là true nếu chúng tôi phải dùng phông chữ có độ đậm cho văn bản có thuộc tính về độ đậm/độ sáng. Là false để sử dụng phông chữ có độ đậm thông thường. Là null để tự động phát hiện."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "Là true nếu chúng tôi phải sử dụng các màu sáng (8-15 trên bảng màu gồm 16 màu) cho mọi văn bản có thuộc tính về độ đậm. Nếu không, chúng tôi sẽ sử dụng tùy chọn false."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "Xem có hiển thị thông báo trong thiết bị đầu cuối khi máy chủ ghi vào khay nhớ tạm hay không."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "Cho phép máy chủ từ xa ghi trực tiếp vào khay nhớ tạm của hệ thống cục bộ.\nTuyệt đối không cấp quyền đọc bất kể cài đặt này là gì.\n\nCài đặt này dùng để kiểm soát quyền truy cập vào các tính năng như OSC-52."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "Áp dụng lần thay đổi trạng thái nhấp nháy con trỏ văn bản của máy chủ bằng cách sử dụng Chế độ riêng tư DEC 12."
+	},
+	"hterm_pref_environment": {
+		"message": "Nhóm các biến môi trường ban đầu, dưới dạng đối tượng."
+	},
+	"hterm_pref_font_family": {
+		"message": "Họ phông chữ mặc định cho văn bản trên thiết bị đầu cuối."
+	},
+	"hterm_pref_font_size": {
+		"message": "Kích thước phông chữ mặc định tính bằng pixel."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "Thuộc tính làm mịn phông chữ CSS."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "Màu mặt nổi cho văn bản không có các thuộc tính màu khác."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "Nếu là true, phím Home/End sẽ điều khiển thanh cuộn của thiết bị đầu cuối và phím Shift-Home/End sẽ gửi mã phím VT. Nếu là false, phím Home/End sẽ gửi các mã VT còn tổ hợp phím Shift-Home/End sẽ cuộn."
+	},
+	"hterm_pref_keybindings": {
+		"message": "Một bản đồ chuỗi phím cho các thao tác do phím thực hiện. Chuỗi phím không bao gồm hoặc bao gồm nhiều phím bổ trợ, theo sau là một mã phím. Các mã phím có thể là số thập phân hoặc thập lục phân hoặc một giá trị nhận dạng phím. Các thao tác do phím thực hiện có thể là một chuỗi được chỉ định để gửi đến máy chủ hoặc là một giá trị nhận dạng thao tác. Để biết giải thích đầy đủ về định dạng, hãy truy cập vào https://goo.gl/LWRndr.\n\nCác liên kết phím mẫu:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "Nếu true, chuyển đổi các phím phương tiện thành các phím chức năng tương đương. Nếu false, để trình duyệt xử lý các phím."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Đặt xem phím Meta có gửi tiền tố ký tự thoát hay không."
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "Nút dán của chuột hoặc null để tự động phát hiện.\n\nĐể tự động phát hiện, chúng tôi sẽ sử dụng nút chuột giữa cho các nền tảng không phải nền tảng X11 (bao gồm cả Chrome OS). Trên nền tảng X11, chúng tôi sẽ sử dụng nút chuột phải (vì trình quản lý cửa sổ gốc sẽ dán bằng nút chuột giữa).\n\n0 == nút trái (chính).\n1 == nút giữa (bổ trợ).\n2 == nút phải (phụ).\n\nTùy chọn này được kích hoạt độc lập với cài đặt \"mouse-right-click-paste\".\n\nLưu ý: Tùy chọn này sẽ xử lý chuột trái và phải một cách chính xác."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "Dán bằng các lần nhấp vào nút chuột phải.\n\nTùy chọn này được kích hoạt độc lập với cài đặt \"mouse-paste-button\".\n\nLưu ý: Tùy chọn này sẽ xử lý chuột trái và phải chính xác."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "Nếu là true, phím Page Up/Down sẽ điều khiển thanh cuộn của thiết bị đầu cuối và tổ hợp phím Shift-Page Up/Down sẽ gửi các mã phím VT. Nếu là false thì phím Page Up/Down sẽ gửi mã VT và tổ hợp phím Shift-Page Up/Down sẽ cuộn."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Đặt xem chúng tôi có chuyển Alt-1..9 đến trình duyệt này hay không.\n\nCài đặt này hữu ích khi chạy hterm trong tab trình duyệt, nhờ đó bạn sẽ không mất các trình tăng tốc bàn phím \"chuyển tab\" của Chrome. Khi không chạy trong tab, bạn nên gửi các phím này tới máy chủ để có thể dùng trong vim hoặc emacs.\n\nNếu là true, Alt-1..9 sẽ do trình duyệt xử lý. Nếu là false, Alt-1..9 sẽ được gửi đến máy chủ. Nếu là null thì sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Đặt xem chúng tôi có chuyển Ctrl-1..9 đến trình duyệt này hay không.\n\nCài đặt này hữu ích khi chạy hterm trong tab trình duyệt, nhờ đó bạn sẽ không mất các trình tăng tốc bàn phím \"chuyển tab\" của Chrome. Khi không chạy trong tab, bạn nên gửi các phím này tới máy chủ để có thể dùng trong vim hoặc emacs.\n\nNếu là true, Alt-1..9 sẽ do trình duyệt xử lý. Nếu là false, Alt-1..9 sẽ được gửi đến máy chủ. Nếu là null thì sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Đặt xem chúng tôi có chuyển Meta-1..9 đến trình duyệt này hay không.\n\nCài đặt này hữu ích khi chạy hterm trong tab trình duyệt, nhờ đó bạn sẽ không mất các trình tăng tốc bàn phím \"chuyển tab\" của Chrome. Khi không chạy trong tab, bạn nên gửi các phím này tới máy chủ để có thể dùng trong vim hoặc emacs.\n\nNếu là true, Meta-1..9 sẽ do trình duyệt xử lý. Nếu là false, Meta-1..9 sẽ được gửi tới máy chủ. Nếu là null thì sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Đặt xem Meta-V có được chuyển đến máy chủ hay không."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "Đặt mã hóa mong muốn cho dữ liệu nhận được từ máy chủ.\n\nCác giá trị hợp lệ là 'utf-8' và 'raw'."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "Xem có cuộn xuống cuối khi nhấn vào tổ hợp phím bất kỳ hay không."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "Xem có cuộn xuống cuối trên thiết bị ra đầu cuối hay không."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Khi sử dụng vùng đệm màn hình thay thế, đồng thời DECCKM (Các phím con trỏ của ứng dụng) đang hoạt động, thao tác cuộn con lăn chuột sẽ có chức năng giống phím mũi tên.\n\nBạn có thể tạm thời vô hiệu hóa cài đặt này bằng cách giữ phím Shift.\n\nCài đặt này thường gặp khi sử dụng các chương trình trợ giúp đọc (less) hoặc khi đọc các trang hướng dẫn hay các trình chỉnh sửa văn bản (vi/nano) hoặc khi sử dụng screen/tmux."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "Bội số cho vùng pixel trong các sự kiện con lăn do thao tác cuộn con lăn chuột tạo ra. Thay đổi tốc độ cuộn trang."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "Chế độ thanh cuộn dọc."
+	},
+	"hterm_pref_send_encoding": {
+		"message": "Thiết lập mã hóa cho dữ liệu gửi tới máy chủ."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Tổ hợp phím Shift-Insert sẽ thực hiện thao tác dán nếu giá trị là true, còn nếu giá trị là false thì sẽ gửi đến máy chủ."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "Mã hóa thiết bị đầu cuối mặc định (DOCS).\n\nISO-2022 bật các bản dịch ánh xạ ký tự (chẳng hạn như các ánh xạ đồ họa).\nUTF-8 tắt hỗ trợ cho các bản dịch đó.\n\nBiến bị khóa có nghĩa là không thể thay đổi mã hóa vào thời gian chạy thông qua chuỗi ký tự thoát của thiết bị đầu cuối.\n\nBạn nên luôn sử dụng UTF-8 trừ khi nhận thấy có sự cố hiển thị với các ứng dụng cũ."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "Xem có sử dụng hành vi mặc định sao chép cửa sổ hay không."
+	},
+	"hterm_pref_user_css": {
+		"message": "URL của biểu định kiểu người dùng sẽ bao gồm trong tài liệu của thiết bị đầu cuối."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "Văn bản CSS tùy chỉnh để định kiểu thiết bị đầu cuối."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "Biểu thức chính quy dùng để dừng khớp phần bên trái (bắt đầu) của nội dung đã chọn.\n\nThông thường, đây là lớp ký tự dùng để từ chối các ký tự cụ thể.\nTheo mặc định, chúng tôi cho phép ký tự \"~\" và \".\" vì các đường dẫn thường bắt đầu bằng các ký tự đó."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "Biểu thức chính quy dùng để khớp tất cả các ký tự ở giữa.\n\nThông thường, đây là lớp ký tự dùng để từ chối các ký tự cụ thể.\n\nDùng để mở rộng nội dung đã chọn xung quanh điểm bắt đầu."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "Biểu thức chính quy dùng để dừng khớp phần bên phải (kết thúc) của nội dung đã chọn.\n\nThông thường, đây là lớp ký tự dùng để từ chối các ký tự cụ thể."
 	},
 	"identity_label": {
 		"message": "Nhận dạng"
@@ -149,34 +327,16 @@
 		"message": "Nhập..."
 	},
 	"initializing_relay": {
-		"message": "Đang tìm máy chủ chuyển tiếp bằng: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Đang tìm máy chủ chuyển tiếp bằng: $1"
 	},
 	"json_parse_error": {
-		"message": "Không thể phân tích cú pháp JSON trong '$1': $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Không thể phân tích cú pháp JSON trong '$1': $2"
 	},
 	"known_hosts_empty": {
 		"message": "Không có máy chủ đã biết nào để bỏ qua."
 	},
 	"known_hosts_prompt": {
-		"message": "Vui lòng chọn máy chủ cần bỏ qua [1-$1]:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Vui lòng chọn máy chủ cần bỏ qua [1-$1]:"
 	},
 	"known_hosts_title": {
 		"message": "Máy chủ đã biết:"
@@ -185,12 +345,7 @@
 		"message": "Đang tải..."
 	},
 	"missing_param": {
-		"message": "Thiếu tham số: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Thiếu tham số: $1"
 	},
 	"mount_button_label": {
 		"message": "Kết nối SFTP"
@@ -211,12 +366,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Kết nối với một hồ sơ đã lưu hoặc hệ thống SSH mới"
 	},
 	"open_as_window_tip": {
-		"message": "[Mẹo chuyên nghiệp] Sử dụng tùy chọn 'Mở dưới dạng cửa sổ' để không cho Control-W đóng thiết bị đầu cuối của bạn!\n[Mẹo chuyên nghiệp] Xem $1 để biết thêm thông tin.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "[Mẹo chuyên nghiệp] Hãy sử dụng 'Open as Window' (Mở dưới dạng cửa sổ) hoặc 'Fullscreen' (Toàn màn hình) để ngăn tổ hợp phím Ctrl-W đóng thiết bị đầu cuối của bạn!\n[Mẹo chuyên nghiệp] Xem $1 để biết thêm thông tin."
 	},
 	"options_button_label": {
 		"message": "Tùy chọn"
@@ -242,14 +392,23 @@
 	"reconnect_message": {
 		"message": "Kết nối lại (R), Chọn một kết nối khác (C) hoặc Thoát (X)?"
 	},
+	"relay_options_error": {
+		"message": "Tùy chọn chuyển tiếp không xác định: $1"
+	},
 	"relay_retry": {
 		"message": "Đang thử lại..."
+	},
+	"request_pin_prompt": {
+		"message": "Nhập mã PIN để mở khóa phím $1 trên '$2' (còn lại $3 lần thử):"
 	},
 	"restore_prefs": {
 		"message": "Khôi phục bản sao lưu"
 	},
 	"shortcut_list_aria_label": {
 		"message": "kết nối đã lưu"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "Vui lòng cài đặt ứng dụng Trình kết nối thẻ thông minh: $1"
 	},
 	"ssh_argstr_label": {
 		"message": "Đối số SSH"
@@ -269,6 +428,12 @@
 	"tip_11": {
 		"message": "Bạn có thể ràng buộc lại phím/phím tắt: https://goo.gl/LWRndr"
 	},
+	"tip_12": {
+		"message": "Sử dụng Yubikey và các thẻ thông minh khác để xác thực ssh: https://goo.gl/3ZEU1w"
+	},
+	"tip_13": {
+		"message": "Hiển thị hình ảnh nội dòng: https://goo.gl/MnSysj"
+	},
 	"tip_2": {
 		"message": "Hiển thị thông báo trong trình duyệt bằng hterm-notify: https://goo.gl/ZNxGdF"
 	},
@@ -276,7 +441,7 @@
 		"message": "Kết nối từ thanh địa chỉ bằng cách nhập 'ssh <tên hồ sơ>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS có thể kết nối các hệ thống tệp thông qua SFTP và duyệt qua ứng dụng Tệp. Hãy sử dụng 'Kết nối SFTP' thay vì 'Kết nối'."
+		"message": "Chrome OS có thể kết nối các hệ thống tệp thông qua SFTP và duyệt qua ứng dụng Tệp. Hãy sử dụng 'SFTP Mount' (kết nối SFTP) thay vì 'Connect' (kết nối)."
 	},
 	"tip_5": {
 		"message": "Kết nối bằng liên kết ssh:// trong các trang web hoặc lưu dấu trang: https://goo.gl/zS8EZD"
@@ -296,6 +461,9 @@
 	"unexpected_error": {
 		"message": "Đã xảy ra lỗi không mong muốn, vui lòng kiểm tra bảng điều khiển JavaScript để biết thêm chi tiết."
 	},
+	"unknown_ssh_client_version": {
+		"message": "Phiên bản SSH không xác định: $1"
+	},
 	"unmount_button_label": {
 		"message": "Ngắt kết nối SFTP"
 	},
@@ -303,50 +471,19 @@
 		"message": "Đã có bản cập nhật. Vui lòng đóng tất cả cửa sổ."
 	},
 	"welcome_changelog": {
-		"message": "ChangeLog/ghi chú phát hành: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "ChangeLog/ghi chú phát hành: $1"
 	},
 	"welcome_faq": {
-		"message": "Câu trả lời cho câu hỏi thường gặp: $1 (ctrl+nhấp vào liên kết để mở)",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Câu trả lời cho câu hỏi thường gặp: $1 (ctrl+nhấp vào liên kết để mở)"
 	},
 	"welcome_release_highlights": {
-		"message": "Thay đổi lớn kể từ $1:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Thay đổi lớn kể từ $1:"
 	},
 	"welcome_tip_of_day": {
-		"message": "Mẹo chuyên nghiệp ngẫu nhiên số $1: $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Mẹo chuyên nghiệp ngẫu nhiên số $1: $2"
 	},
 	"welcome_version": {
-		"message": "Chào mừng bạn đến với $1 phiên bản $2.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Chào mừng bạn đến với $1 phiên bản $2."
 	},
 	"zoom_warning": {
 		"message": "Hãy đặt Menu Chrome->Thu phóng thành 100%"

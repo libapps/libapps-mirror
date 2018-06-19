@@ -6,12 +6,7 @@
 		"message": "バックアップを保存"
 	},
 	"bad_destination": {
-		"message": "送信先を解析できません: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "送信先を解析できません: $1"
 	},
 	"before_unload": {
 		"message": "このタブを閉じるとこのセッションは切断されます。"
@@ -32,15 +27,13 @@
 		"message": "新しい SSH セッションを開きます。"
 	},
 	"command_complete": {
-		"message": "コマンド $1 が終了しました（ステータス コード $2）。",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "コマンド $1 が終了しました（ステータス コード $2）。"
+	},
+	"command_not_supported": {
+		"message": "$1 はこのバージョンの Chrome ではサポートされていません"
+	},
+	"command_startup_failed": {
+		"message": "$1 を起動できませんでした: $2"
 	},
 	"connect_button_label": {
 		"message": "接続"
@@ -49,31 +42,16 @@
 		"message": "別の接続を選択(&C)、または終了(&X)"
 	},
 	"connecting": {
-		"message": "$1 に接続しています...",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "$1 に接続しています..."
+	},
+	"connection_dialog_name": {
+		"message": "接続ダイアログ"
 	},
 	"console_crosh_options_notice": {
-		"message": "専用のオプション ページがあることをご存知でしたか？\nterm_ を直接指定する必要がなくなります。\nページを開くには $1 キーを押すか、次のリンクをクリックしてください:\n$2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "「term_」を直接編集しなくても、専用のオプション ページを使用できます。\nページを開くには $1 キーを押すか、次のリンクをクリックしてください:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "専用のオプション ページがあることをご存知でしたか？\nterm_ を直接指定する必要がなくなります。\n$1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "「term_」を直接編集しなくても、専用のオプション ページを使用できます。\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -82,12 +60,7 @@
 		"message": "削除"
 	},
 	"disconnect_message": {
-		"message": "NaCl プラグインが終了しました（ステータス コード $1）。",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "NaCl プラグインが終了しました（ステータス コード $1）。"
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -117,7 +90,7 @@
 		"message": "ポート"
 	},
 	"field_relay_options_aria_label": {
-		"message": "中継オプション"
+		"message": "SSH 中継サーバーのオプション"
 	},
 	"field_relay_options_placeholder": {
 		"message": "SSH 中継サーバーのオプション"
@@ -132,12 +105,217 @@
 		"message": "ユーザー名"
 	},
 	"found_relay": {
-		"message": "中継サーバーが見つかりました: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "中継サーバーが見つかりました: $1"
+	},
+	"get_profile_error": {
+		"message": "エラー: プロファイル「$1」を読み込めませんでした:\n$2"
+	},
+	"hterm_button_allow_always": {
+		"message": "常に許可"
+	},
+	"hterm_button_allow_session": {
+		"message": "このセッションでのみ許可"
+	},
+	"hterm_button_block": {
+		"message": "ブロック"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "$1 を読み込めませんでした"
+	},
+	"hterm_loading_resource_start": {
+		"message": "$1 を読み込んでいます..."
+	},
+	"hterm_popup_inline_image": {
+		"message": "インライン画像"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "インライン画像は無効になっています"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "リモートホストに対して、ターミナルへの画像表示を許可するかどうかを設定します。\n\nデフォルトでは、選択を行うまで確認メッセージが表示されます。"
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "この設定を行うと、Chrome OS での Alt+Backspace キーから DEL キーへの再マッピングは取り消され、Alt+Backspace キーは従来どおり動作します。"
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "AltGr キー検出のヒューリスティックを選択します。\n\n'null': navigator.language に基づいて自動検出します。\n      「en-us」の場合は「none」、その他の場合は「right-alt」と判定されます。\n'none': AltGr キーに関連する変更をすべて無効にします。\n'ctrl-alt': Ctrl+Alt キーを AltGr キーと見なします。\n'left-alt': 左側の Alt キーを AltGr キーと見なします。\n'right-alt': 右側の Alt キーを AltGr キーと見なします。"
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Alt キーをメタキーとして使用するか、単独の Alt キーとして使用するかを設定します。"
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Alt キーの処理方法を制御します。\n\n  escape: ESC プレフィックスを送信します。\n  8-bit: xterm と同様に、入力された文字に 128 を追加します。\n browser-key: キー押下イベントの発生を待ってブラウザからの指示を\n 確認します（一部の Alt シーケンスに対してブラウザでデフォルト操作が\n 行われるプラットフォームでは、このオプションは適切に機能しません）。"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "ターミナルのベル音の URL です。オーディオベルを使用しない場合は空の文字列にします。"
+	},
+	"hterm_pref_background_color": {
+		"message": "他の色属性が指定されていない場合のテキストの背景色です。"
+	},
+	"hterm_pref_background_image": {
+		"message": "背景画像を表す CSS 値です。画像を使用しない場合は空の文字列にします。\n\n例: \n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "背景画像の位置を表す CSS 値です。\n\n例:\n  10% 10%\n  center"
+	},
+	"hterm_pref_background_size": {
+		"message": "背景画像のサイズを表す CSS 値です。"
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "true の場合は、Backspace キーで BS（「\\x08」、^H とも言います）を送信します。それ以外の場合は、Backspace キーで「\\x7f」を送信します。"
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "オブジェクトとして指定される疎行列です。各プロパティは文字セットのコードを、値はオブジェクト（疎行列自体）を表します。この疎行列内では、各プロパティは受け取った文字を、値は表示される文字を表します。\n\n例:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "コピー後に選択内容をクリアするかどうかを設定します。"
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "コマンドの実行完了時にウィンドウを閉じるかどうかを設定します。"
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "デフォルトのパレットの色をオーバーライドします。\n\nこれは配列またはオブジェクトとして指定できます。オブジェクトとして指定した場合は疎行列として処理されます。この場合、各プロパティはカラーパレット内の色を表す数字インデックスです。\n\n値は、CSS のほぼすべての色値を使って指定できます。これには #RGB、#RRGGBB、rgb(...)、rgba(...) のほか、X11 の標準の rgb.txt ファイルにもある色名称が含まれます。\n\nデフォルト値を変更しないよう指定する場合は「null」を使用します。これは、値を配列として指定していて、少数のインデックスを省略する場合に便利です。\n\nたとえば、次の例はどちらもカラー インデックス 1 を青に設定します。\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "マウスで選択された内容をクリップボードに自動的にコピーします。"
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Ctrl+C キー: true の場合はコピーし、false の場合は ^C をホストに送信します。\nCtrl+Shift+C キー: true の場合は ^C をホストに送信し、false の場合はコピーします。"
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "true の場合、Ctrl キーと同時にプラス、マイナス、ゼロのいずれかのキーを押して拡大縮小を制御できます。\nfalse の場合、Ctrl+Shift キーと同時にプラス、マイナス、ゼロのいずれかのキーを押して拡大縮小を制御できます。また、Ctrl キーと同時にマイナスキーを押した場合は ^_ を送信し、Ctrl キーと同時にプラスキーまたはゼロキーを押した場合は何も処理を行いません。"
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Ctrl+V キー: true の場合は貼り付けを行い、false の場合は ^V をホストに送信します。\nCtrl+Shift+V キー: true の場合は ^V をホストに送信し、false の場合は貼り付けを行います。"
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "デフォルトでテキスト カーソルを点滅させるかどうかを設定します。この設定は、実行時にターミナルのエスケープ シーケンスを使用して切り替えることができます。"
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "テキスト カーソルの点滅速度（ミリ秒単位）です。\n\nこれは 2 つの要素からなる配列で、1 つ目の要素はカーソルを表示する時間、2 つ目の要素はテキスト カーソルを表示しない時間を表します。"
+	},
+	"hterm_pref_cursor_color": {
+		"message": "テキスト カーソルを表示するときの色です。"
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "true の場合、ターミナルの背景のベルによりウェブ通知が作成されます。https://www.w3.org/TR/notifications/\n\n通知を表示するにはユーザーの許可が必要です。このオプションが true に設定されている場合は、hterm により必要に応じてユーザーに許可を求めるメッセージが表示されます。この許可のリクエストがユーザー操作でトリガーされたものでなかった場合、ブラウザではこのメッセージが表示されないことがあります。\n\nChrome 拡張機能に対して「通知」が許可されている場合、その拡張機能には通知の表示も許可されています。"
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "東アジアの曖昧幅文字を 2 桁幅にするかどうかを設定します。"
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "8 ビット制御文字を有効にする場合は true を、無視する場合は false を指定します。\n\nこの設定に関係なく、この制御文字の 2 バイト版がある場合はそちらが適用されます。"
+	},
+	"hterm_pref_enable_blink": {
+		"message": "点滅属性を適用する場合は true を、無視する場合は false を指定します。"
+	},
+	"hterm_pref_enable_bold": {
+		"message": "テキストにボールドまたは明るい色の属性が設定されている場合に、ボールドの太さのフォントを使用する場合は true を、標準の太さのフォントを使用する場合は false を指定します。自動検出する場合は null を指定します。"
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "ボールド属性が設定されているテキストに明るい色（16 カラーパレットの 8～15 番）を使用する場合は true を、明るい色を使用しない場合は false を指定します。"
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "ホストによるクリップボードへの書き込みが行われたときに、ターミナルにメッセージを表示するかどうかを設定します。"
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "リモートホストに対し、ローカル システムのクリップボードに直接書き込みを行うことを許可します。\nこの設定に関係なく、読み取りアクセスは付与されません。\n\nこの設定は、OSC-52 などの機能へのアクセスを制御する目的で使用します。"
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "ホストから DEC プライベート モード 12 を使用してテキスト カーソルの点滅ステータスの変更が指定された場合に、その指定を受け入れます。"
+	},
+	"hterm_pref_environment": {
+		"message": "オブジェクトとしての環境変数の初期セットです。"
+	},
+	"hterm_pref_font_family": {
+		"message": "ターミナルのテキストに使用されるデフォルトのフォント ファミリーです。"
+	},
+	"hterm_pref_font_size": {
+		"message": "デフォルトのフォントサイズ（ピクセル単位）です。"
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "CSS の font-smoothing プロパティです。"
+	},
+	"hterm_pref_foreground_color": {
+		"message": "他の色属性が指定されていない場合のテキストの前景色です。"
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "true の場合、Home / End キーでターミナルのスクロールバーを制御し、Shift+Home / End キーで VT キーコードを送信します。false の場合、Home / End キーで VT コードを送信し、Shift+Home / End キーでスクロールします。"
+	},
+	"hterm_pref_keybindings": {
+		"message": "キー シーケンスとキー アクションをマッピングします。キー シーケンスは、0 個以上の修飾キーと、それに続く 1 つのキーコードで構成されます。キーコードには 10 進数または 16 進数、あるいはキーの識別子を指定します。キー アクションには、ホストに送信する文字列、またはアクションの識別子を指定します。形式について詳しくは https://goo.gl/LWRndr をご覧ください。\n\nキーバインディングの例:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "true の場合、メディアキーを同等のファンクション キーに変換します。false の場合、キーはブラウザの処理に従います。"
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Meta キーで ESC プレフィックスを送信するかどうかを設定します。"
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "貼り付けに使用するマウスボタンを指定します。または、自動検出するには null を指定します。\n\n自動検出の場合、X11 以外のプラットフォーム（Chrome OS など）ではマウスの中央ボタンを使用し、X11 ではマウスの右ボタンを使用します（ネイティブのウィンドウ マネージャではマウスの中央ボタンを使って貼り付けるため）。\n\n0 == 左（メイン）ボタン\n1 == 中央（予備）ボタン\n2 == 右（補助）ボタン\n\nこのオプションは、mouse-right-click-paste の設定に関係なく動作します。\n\n注: 左利き用マウス、右利き用マウスに応じて適切な処理が行われます。"
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "マウスの右ボタンのクリックで貼り付けを行います。\n\nこのオプションは、mouse-paste-button の設定に関係なく動作します。\n\n注: 左利き用マウス、右利き用マウスに応じて適切な処理が行われます。"
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "true の場合、PageUp / PageDown キーでターミナルのスクロールバーを制御し、Shift+PageUp / PageDown キーで VT キーコードを送信します。false の場合、PageUp / PageDown キーで VT コードを送信し、Shift+PageUp / PageDown キーでスクロールします。"
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Alt+1～9 キーをブラウザに渡すかどうかを設定します。\n\nhterm をブラウザのタブで実行している場合は、これらのキーをブラウザに渡すよう設定すると、Chrome の「タブを切り替え」キーボード アクセラレータを引き続き使用できるので便利です。hterm をタブで実行していない場合は、これらのキーをホストに送信して、vim や emacs で使用できるようにすることをおすすめします。\n\ntrue の場合、Alt+1～9 キーはブラウザによって処理されます。false の場合、Alt+1～9 キーはホストに送信されます。null の場合は、ブラウザのプラットフォームやウィンドウの種類に基づく自動検出が行われます。"
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Ctrl+1～9 キーをブラウザに渡すかどうかを設定します。\n\nhterm をブラウザのタブで実行している場合は、これらのキーをブラウザに渡すよう設定すると、Chrome の「タブを切り替え」キーボード アクセラレータを引き続き使用できるので便利です。hterm をタブで実行していない場合は、これらのキーをホストに送信して、vim や emacs で使用できるようにすることをおすすめします。\n\ntrue の場合、Ctrl+1～9 キーはブラウザによって処理されます。false の場合、Ctrl+1～9 キーはホストに送信されます。null の場合は、ブラウザのプラットフォームやウィンドウの種類に基づく自動検出が行われます。"
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Meta+1～9 キーをブラウザに渡すかどうかを設定します。\n\nhterm をブラウザのタブで実行している場合は、これらのキーをブラウザに渡すよう設定すると、Chrome の「タブを切り替え」キーボード アクセラレータを引き続き使用できるので便利です。hterm をタブで実行していない場合は、これらのキーをホストに送信して、vim や emacs で使用できるようにすることをおすすめします。\n\ntrue の場合、Meta+1～9 キーはブラウザによって処理されます。false の場合、Meta+1～9 キーはホストに送信されます。null の場合は、ブラウザのプラットフォームやウィンドウの種類に基づく自動検出が行われます。"
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Meta+V キーをホストに渡すかどうかを設定します。"
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "ホストからの受信データに対して想定するエンコード方法を設定します。\n\n有効な値は「utf-8」と「raw」（エンコードなし）です。"
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "任意のキーで下にスクロールするかどうかを設定します。"
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "ターミナル出力で下にスクロールするかどうかを設定します。"
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "代替画面バッファを使用していて、DECCKM（アプリケーション カーソル キー）が有効な場合、マウスホイールによるスクロール イベントで矢印キーをエミュレートします。\n\nこのオプションを一時的に無効にするには、Shift キーを押し続けます。\n\nこれはページャ（less）を使用している場合のほか、man ページやテキスト エディタ（vi / nano）を読み取る場合、または Screen や tmux を使用している場合によく使われます。"
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "スクロール ホイールによって発生するホイール イベントでのピクセルの差分を調整し、ページのスクロール速度を変更します。"
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "縦方向のスクロールバーのモードです。"
+	},
+	"hterm_pref_send_encoding": {
+		"message": "ホストに送信されるデータのエンコード方法を設定します。"
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Shift+Insert キーの動作として、true の場合は貼り付けを行い、false の場合はホストに送信します。"
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "ターミナルのデフォルトのエンコード方法です（DOCS）。\n\nISO-2022 を指定すると、文字マッピング変換（グラフィックス マッピングなど）が有効になります。\nUTF-8 を指定すると、文字マッピング変換のサポートは無効になります。\n\nバリエーションをロックすると、ランタイムにターミナルのエスケープ シーケンスによってエンコードを変更することはできなくなります。\n\n古いアプリケーションでレンダリングが崩れる場合以外は、UTF-8 を使用してください。"
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "ウィンドウのデフォルトのコピー動作を使用するかどうかを設定します。"
+	},
+	"hterm_pref_user_css": {
+		"message": "ターミナルのドキュメントに含める、ユーザーのスタイルシートの URL です。"
+	},
+	"hterm_pref_user_css_text": {
+		"message": "ターミナルのスタイルを設定するカスタム CSS テキストです。"
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "選択項目の左側（開始位置まで）はマッチングを行わないことを示す正規表現です。\n\n通常、これは特定の文字を拒否する文字クラスです。\n「~」と「.」は、パスの先頭に指定されることも多いため、デフォルトで許可されます。"
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "中間のすべての文字に一致する正規表現です。\n\n通常、これは特定の文字を拒否する文字クラスです。\n\n選択項目を開始位置まで広げるために使用します。"
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "選択項目の右側（終了位置まで）はマッチングを行わないことを示す正規表現です。\n\n通常、これは特定の文字を拒否する文字クラスです。"
 	},
 	"identity_label": {
 		"message": "ID"
@@ -149,34 +327,16 @@
 		"message": "インポート..."
 	},
 	"initializing_relay": {
-		"message": "次を使用して中継サーバーを検索しています: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "次を使用して中継サーバーを検索しています: $1"
 	},
 	"json_parse_error": {
-		"message": "「$1」の JSON を解析できませんでした: $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "「$1」の JSON を解析できませんでした: $2"
 	},
 	"known_hosts_empty": {
 		"message": "削除対象となる既知のホストがありません。"
 	},
 	"known_hosts_prompt": {
-		"message": "削除するホストを選択してください（1～$1）:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "削除するホストを選択してください（1～$1）:"
 	},
 	"known_hosts_title": {
 		"message": "既知のホスト:"
@@ -185,12 +345,7 @@
 		"message": "読み込んでいます..."
 	},
 	"missing_param": {
-		"message": "次のパラメータがありません: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "次のパラメータがありません: $1"
 	},
 	"mount_button_label": {
 		"message": "SFTP マウント"
@@ -211,12 +366,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> 保存されているプロファイルまたは新しい SSH システムに接続します"
 	},
 	"open_as_window_tip": {
-		"message": "上級者向けヒント: Ctrl+W キーを押してもターミナルが閉じられないようにするには、[ウィンドウとして開く] を使用します。\n上級者向けヒント: 詳しくは、$1 をご覧ください。",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "[上級者向けのヒント] Ctrl+W キーを押してもターミナルが閉じられないようにするには、[ウィンドウとして開く] または [全画面表示] を使用します。\n[上級者向けのヒント] 詳しくは、$1 をご覧ください。"
 	},
 	"options_button_label": {
 		"message": "オプション"
@@ -242,14 +392,23 @@
 	"reconnect_message": {
 		"message": "再接続(&R)、別の接続を選択(&C)、または終了(&X)"
 	},
+	"relay_options_error": {
+		"message": "不明な中継オプション: $1"
+	},
 	"relay_retry": {
 		"message": "再試行しています..."
+	},
+	"request_pin_prompt": {
+		"message": "「$2」でキー「$1」のロックを解除する PIN を入力してください（あと $3 回入力できます）:"
 	},
 	"restore_prefs": {
 		"message": "バックアップを復元"
 	},
 	"shortcut_list_aria_label": {
 		"message": "保存された接続"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "Smart Card Connector アプリをインストールしてください: $1"
 	},
 	"ssh_argstr_label": {
 		"message": "SSH 引数"
@@ -269,6 +428,12 @@
 	"tip_11": {
 		"message": "キーやショートカットをバインドし直すことができます: https://goo.gl/LWRndr"
 	},
+	"tip_12": {
+		"message": "YubiKey や他のスマートカードを使用して SSH 認証を行います: https://goo.gl/3ZEU1w"
+	},
+	"tip_13": {
+		"message": "画像をインライン表示します: https://goo.gl/MnSysj"
+	},
 	"tip_2": {
 		"message": "ブラウザに通知を表示するには hterm-notify を使用します: https://goo.gl/ZNxGdF"
 	},
@@ -276,7 +441,7 @@
 		"message": "アドレスバーから接続するには「ssh <プロファイル名>」と入力します: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS では、SFTP 経由でファイルシステムをマウントし、ファイルアプリを使って閲覧することができます。その際は、[接続] ではなく [SFTP マウント] を使用してください。"
+		"message": "Chrome OS では、ファイル システムを SFTP 経由でマウントし、ファイルアプリを使って閲覧できます。この方法を使用する場合は、[接続] ではなく [SFTP マウント] を使用してください。"
 	},
 	"tip_5": {
 		"message": "ウェブページ上の ssh:// リンクを使って接続するか、ブックマークを保存します: https://goo.gl/zS8EZD"
@@ -296,6 +461,9 @@
 	"unexpected_error": {
 		"message": "予期しないエラーが発生しました。詳しくは JavaScript コンソールをご確認ください。"
 	},
+	"unknown_ssh_client_version": {
+		"message": "不明な SSH バージョン: $1"
+	},
 	"unmount_button_label": {
 		"message": "SFTP のマウントを解除"
 	},
@@ -303,50 +471,19 @@
 		"message": "アップデートを利用できます。すべてのウィンドウを閉じてください。"
 	},
 	"welcome_changelog": {
-		"message": "変更ログ、リリースノート: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "変更ログ、リリースノート: $1"
 	},
 	"welcome_faq": {
-		"message": "よくある質問とその回答: $1（Ctrl キーを押しながらリンクをクリックして開きます）",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "よくある質問とその回答: $1（Ctrl キーを押しながらリンクをクリックして開きます）"
 	},
 	"welcome_release_highlights": {
-		"message": "$1 以降の主な変更:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "$1 以降の主な変更:"
 	},
 	"welcome_tip_of_day": {
-		"message": "Random Pro のヒント #$1: $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "ヒント #$1: $2"
 	},
 	"welcome_version": {
-		"message": "$1 バージョン $2 へようこそ。",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "$1 バージョン $2 へようこそ。"
 	},
 	"zoom_warning": {
 		"message": "Chrome メニューで、[ズーム] を 100% に設定してください"

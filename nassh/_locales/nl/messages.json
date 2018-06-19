@@ -6,15 +6,10 @@
 		"message": "Back-up opslaan"
 	},
 	"bad_destination": {
-		"message": "Kan bestemming niet parseren: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Kan bestemming niet parseren: $1"
 	},
 	"before_unload": {
-		"message": "Als u dit tabblad sluit, wordt deze sessie beëindigd."
+		"message": "Als je dit tabblad sluit, wordt deze sessie beëindigd."
 	},
 	"cancel_button_label": {
 		"message": "Annuleren"
@@ -32,15 +27,13 @@
 		"message": "Een nieuwe SSH-sessie openen."
 	},
 	"command_complete": {
-		"message": "De opdracht $1 is afgesloten met statuscode $2.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "De opdracht $1 is afgesloten met statuscode $2."
+	},
+	"command_not_supported": {
+		"message": "$1 wordt niet ondersteund door deze versie van Chrome"
+	},
+	"command_startup_failed": {
+		"message": "Starten van $1 is mislukt: $2"
 	},
 	"connect_button_label": {
 		"message": "Verbinden"
@@ -49,31 +42,16 @@
 		"message": "Een andere verbinding kiezen (C) of afsluiten (X)?"
 	},
 	"connecting": {
-		"message": "Verbinding maken met $1...",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Verbinding maken met $1..."
+	},
+	"connection_dialog_name": {
+		"message": "Dialoogvenster Verbinding"
 	},
 	"console_crosh_options_notice": {
-		"message": "Wist je dat er een speciale optiepagina is?\nJe hoeft term_ niet meer rechtstreeks te wijzigen.\nDruk op $1 om de pagina te openen of klik op:\n$2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Wist je dat er een speciale optiepagina is?\nJe hoeft 'term_' niet meer rechtstreeks te wijzigen.\nDruk op $1 om de pagina te openen of klik op:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Wist je dat er een speciale optiepagina is?\nJe hoeft term_ niet meer rechtstreeks te wijzigen.\n$1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Wist je dat er een speciale optiepagina is?\nJe hoeft 'term_' niet meer rechtstreeks te wijzigen.\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -82,12 +60,7 @@
 		"message": "Verwijderen"
 	},
 	"disconnect_message": {
-		"message": "NaCl-plug-in afgesloten met statuscode $1.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "NaCl-plug-in afgesloten met statuscode $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -117,7 +90,7 @@
 		"message": "poort"
 	},
 	"field_relay_options_aria_label": {
-		"message": "relayopties"
+		"message": "Opties voor SSH-relayserver"
 	},
 	"field_relay_options_placeholder": {
 		"message": "Opties voor SSH-relayserver"
@@ -132,12 +105,217 @@
 		"message": "gebruikersnaam"
 	},
 	"found_relay": {
-		"message": "Relayserver gevonden: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Relayserver gevonden: $1"
+	},
+	"get_profile_error": {
+		"message": "FOUT: Kan het profiel $1 niet laden:\n$2"
+	},
+	"hterm_button_allow_always": {
+		"message": "Altijd toestaan"
+	},
+	"hterm_button_allow_session": {
+		"message": "Deze sessie toestaan"
+	},
+	"hterm_button_block": {
+		"message": "Blokkeren"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "Laden van $1 is mislukt"
+	},
+	"hterm_loading_resource_start": {
+		"message": "$1 laden..."
+	},
+	"hterm_popup_inline_image": {
+		"message": "Inline afbeeldingen"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "Inline afbeeldingen uitgeschakeld"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "Hiermee wordt bepaald of de externe host afbeeldingen mag weergeven in de terminal.\n\nStandaard vragen we hiernaar totdat een keuze wordt gemaakt."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "Als deze optie wordt ingesteld, wordt de toewijzing van Alt + Backspace->DEL in Chrome OS ongedaan gemaakt, zodat Alt + Backspace daadwerkelijk Alt +Backspace is."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "Selecteer een AltGr-detectieheuristiek.\n\n'null': automatische detectie op basis van navigator.language:\n      'en-us' => 'none', anders => 'right-alt'\n'none': schakelt schadelijke wijzigingen voor AltGr uit.\n'ctrl-alt': veronderstelt dat Ctrl + Alt eigenlijk AltGr betekent.\n'left-alt': veronderstelt dat de linker-Alt eigenlijk AltGr betekent.\n'right-alt': veronderstelt dat de rechter-Alt eigenlijk AltGr betekent."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Hiermee kun je instellen of de Alt-toets als metatoets of specifiek als Alt-toets fungeert."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Hiermee wordt de functie van de Alt-toets bepaald.\n\n  escape: een ESC-voorvoegsel verzenden.\n  8-bit: 128 aan het teken toevoegen zonder Shift, zoals in xterm.\nbrowser-key: Wachten tot een toets wordt ingedrukt om te zien wat de browser doet. (Dit werkt niet goed op platforms waarin de browser een standaardactie uitvoert bij bepaalde Alt-toetscombinaties.)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "De URL van het geluid van de terminalbel. Een lege tekenreeks betekent dat er geen hoorbare bel is."
+	},
+	"hterm_pref_background_color": {
+		"message": "De achtergrondkleur voor tekst zonder andere kleurkenmerken."
+	},
+	"hterm_pref_background_image": {
+		"message": "CSS-waarde van de achtergrondafbeelding. Een lege tekenreeks betekent dat er geen afbeelding is.\n\nBijvoorbeeld:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "CSS-waarde van de positie van de achtergrondafbeelding.\n\nBijvoorbeeld:\n  10% 10%\n  center"
+	},
+	"hterm_pref_background_size": {
+		"message": "CSS-waarde van de grootte van de achtergrondafbeelding."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "Als je true (waar) hebt ingesteld, verzendt Backspace-toets BS ('\\x08', aka ^H). Anders verzendt de Backspace-toets '\\x7f'."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "Dit is gespecificeerd als een object. Het is een ijle matrix waarbij elke eigenschap de tekensetcode is en de waarde een object is dat zelf ook een ijle matrix is. In die ijle matrix is elke eigenschap het ontvangen teken en is de waarde het weergegeven teken.\n\nBijvoorbeeld:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "Bepaalt of de selectie moet worden gewist nadat deze is gekopieerd."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "Hiermee wordt bepaald of het venster wordt gesloten zodra de opdracht is uitgevoerd."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "De kleuren in het standaardpalet overschrijven.\n\nDit kan worden opgegeven als een matrix of als een object. Als het wordt opgegeven als een object, wordt verondersteld dat het een ijle matrix is, waarbij elke eigenschap een numerieke index in het kleurenpalet is.\n\nWaarden kunnen worden opgegeven als vrijwel elke CSS-kleurwaarde. Dit omvat #RGB, #RRGGBB, rgb(...), rgba(...) en alle kleurnamen die ook deel uitmaken van het standaard X11 rgb.txt-bestand.\n\nMet 'null' kun je opgeven dat de standaardwaarde niet moet worden gewijzigd. Dit is handig om een klein aantal indices over te slaan wanneer de waarde is opgegeven als een matrix.\n\nAls bijvoorbeeld beide onderstaande waarden worden opgegeven, wordt 1 blauw weergegeven:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "Kopieert de selectie van de muis automatisch naar het klembord."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Ctrl + C kopieert als deze voorkeur is ingesteld op true (waar), en verzendt ^C naar host als ingesteld op false (onwaar).\nCtrl + Shift + C verzendt ^C naar host als deze voorkeur is ingesteld op true (waar), en kopieert als ingesteld op false (onwaar)."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Als true (waar) is ingesteld voor deze voorkeur, wordt met Ctrl + plus/min/nul de zoomfactor bediend.\nAls false (onwaar) is ingesteld, wordt met Ctrl + Shift +plus/min/nul de zoomfactor bediend en wordt met Ctrl + min ^_ verzonden en gebeurt er niks met Ctrl + plus/nul."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Ctrl + V plakt als deze voorkeur is ingesteld op true (waar), en verzendt ^V naar host als ingesteld op false (onwaar).\nCtrl + Shift + V verzendt ^V naar host als deze voorkeur is ingesteld op true (waar), en plakt als ingesteld op false (onwaar)."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "Hiermee wordt bepaald of de tekstcursor standaard knippert. Dit kan tijdens runtime via terminal-escapereeksen in en uit worden geschakeld."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "De knipperfrequentie van de cursor in milliseconden.\n\nDe matrix bestaat uit twee elementen. Het eerste element geeft aan hoelang de cursor aan is, en het tweede hoelang de cursor uit is."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "De kleur van de zichtbare tekstcursor."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "Als true (waar) is ingesteld voor deze voorkeur, wordt bij terminalbellen op de achtergrond een webmelding gegenereerd. https://www.w3.org/TR/notifications/\n\nDe gebruiker moet toestemming geven voor de weergave van meldingen. Als deze optie is ingesteld op true (waar), probeert hterm de gebruiker indien nodig om toestemming te vragen. Browsers laten dit verzoek om toestemming mogelijk niet zien als het niet het gevolg is van een actie van de gebruiker.\n\nChrome-extensies met een machtiging voor meldingen hebben toestemming om meldingen weer te geven."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Bepaalt of ambigue Oost-Aziatische karakters twee kolommen breed zijn."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "Met 'waar' (true) worden 8-bits stuurcodes ingeschakeld, en met 'onwaar' (false) worden ze genegeerd.\n\nDe twee-byteversies van deze stuurcodes zijn bruikbaar, ongeacht deze instelling."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "Met true (waar) wordt het knipperkenmerk gerespecteerd. Met false (onwaar) wordt het kenmerk genegeerd."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "Met true (waar) wordt een vet lettertype gebruikt voor tekst met het kenmerk vet/helder. Met false (onwaar) wordt het lettertype met een normaal gewicht gebruikt. Met null (leeg) wordt automatische detectie gebruikt."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "Met true (waar) worden heldere kleuren gebruikt (acht tot vijftien in een palet met zestien kleuren) voor alle tekst met het kenmerk vet. Anders false (onwaar)."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "Hiermee wordt bepaald of een bericht in de terminal moet worden weergegeven wanneer de host iets op het klembord zet."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "Staat de externe host toe rechtstreeks op het klembord van het lokale systeem te schrijven.\nLeestoegang wordt nooit verleend, ongeacht deze instelling.\n\nWordt gebruikt om toegang tot functies zoals OSC-52 te beheren."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "Geeft toestemming als de host probeert de knipperstatus van de tekstcursor te wijzigen via DEC Private Mode 12."
+	},
+	"hterm_pref_environment": {
+		"message": "De aanvankelijke omgevingsvariabelen, als een object."
+	},
+	"hterm_pref_font_family": {
+		"message": "Standaard lettertypefamilie voor de terminaltekst."
+	},
+	"hterm_pref_font_size": {
+		"message": "De standaard lettergrootte in pixels."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "CSS-eigenschap voor lettertype-afvlakking."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "De voorgrondkleur voor tekst zonder andere kleurkenmerken."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "Als true (waar) is ingesteld, wordt met Home/End de scrollbalk van de terminal bediend en worden met Shift + Home/End de VT-toetscodes verzonden. Als false (onwaar) is ingesteld, worden met Home/End de VT-codes verzonden en wordt er met Shift + Home/End gescrolld."
+	},
+	"hterm_pref_keybindings": {
+		"message": "Een toetsencombinatie toewijzen aan toetsacties. Toetsencombinaties bestaan uit nul of meer functietoetsen gevolgd door een toetscode. Toetscodes kunnen bestaan uit decimale of hexadecimale getallen of een toets-ID. Een toetsactie kan een opgegeven tekenreeks zijn die wordt verzonden naar de host, of een actie-ID. Zie https://goo.gl/LWRndr voor een volledige uitleg van de indeling.\n\nVoorbeelden van sneltoetsen:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "Als true (waar) is ingesteld, worden mediatoetsen geconverteerd naar de equivalente functietoets. Als false (onwaar) is ingesteld, wordt de functie van de toetsen door de browser bepaald."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Hiermee kun je instellen of er met de metatoets een voorafgaande escape moet worden verzonden."
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "Plakken met muisknop of null (leeg) voor automatische detectie.\n\nOp niet-X11-platforms (inclusief Chrome OS) gebruiken we de middelste muisknop voor automatisch detecteren. Op X11 gebruiken we de rechtermuisknop (aangezien in de systeemeigen functie voor vensterbeheer de plakbewerking wordt uitgevoerd met de middelste muisknop).\n\n0 == linkerknop (primair).\n1 == middelste knop (supplementair).\n2 == rechtermuisknop (secundair).\n\nDeze optie wordt onafhankelijk van de instelling mouse-right-click-paste geactiveerd.\n\nOpmerking: Geschikt voor links- en rechtshandige muizen."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "Plakken door op de rechtermuisknop te klikken.\n\nDe optie wordt onafhankelijk van de instelling mouse-paste-button geactiveerd.\n\nOpmerking: Geschikt voor links- en rechtshandige muizen."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "Als true (waar) is ingesteld, wordt met Page Up/Down de scrollbalk van de terminal beheerd en verzend je met Shift + Page Up/Down de VT-toetscodes. Als false (onwaar) is ingesteld, verzend je met Page Up/Down de VT-codes en scroll je met Shift + Page Up/Down."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Instellen of Alt + 1..9 moet worden doorgegeven aan de browser.\n\nDit is handig wanneer hterm wordt uitgevoerd in een browsertabblad, zodat de toetsenbordversnellers van Chrome voor 'Overschakelen naar tabblad' niet verloren gaan. Wanneer hterm niet wordt uitgevoerd op een tabblad, kun je deze toetsen het beste naar een host verzenden, zodat ze kunnen worden gebruikt in vim of emacs.\n\nAls true (waar) is ingesteld, wordt Alt + 1..9 verwerkt door de browser. Als false (onwaar) is ingesteld, wordt Alt + 1..9 verzonden naar de host. Als null (leeg) is ingesteld, wordt op basis van het browserplatform en het venstertype de functie voor automatisch detecteren uitgevoerd."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Instellen of Ctrl + 1..9 moet worden doorgegeven aan de browser.\n\nDit is handig wanneer hterm wordt uitgevoerd in een browsertabblad, zodat de toetsenbordversnellers van Chrome voor 'Overschakelen naar tabblad' niet verloren gaan. Wanneer hterm niet wordt uitgevoerd op een tabblad, kun je deze toetsen het beste naar een host verzenden, zodat ze kunnen worden gebruikt in vim of emacs.\n\nAls true (waar) is ingesteld, wordt Ctrl + 1..9 verwerkt door de browser. Als false (onwaar) is ingesteld, wordt Ctrl + 1..9 verzonden naar de host. Als null (leeg) is ingesteld, wordt op basis van het browserplatform en het venstertype de functie voor automatisch detecteren uitgevoerd."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Instellen of Meta + 1..9 moet worden doorgegeven aan de browser.\n\nDit is handig wanneer hterm wordt uitgevoerd in een browsertabblad, zodat de toetsenbordversnellers van Chrome voor 'Overschakelen naar tabblad' niet verloren gaan. Wanneer hterm niet wordt uitgevoerd in een tabblad, kun je deze toetsen het beste naar een host verzenden, zodat ze kunnen worden gebruikt in vim of emacs.\n\nAls true (waar) is ingesteld, wordt Meta + 1..9 verwerkt door de browser. Als false (onwaar) is ingesteld, wordt Meta + 1..9 verzonden naar de host. Als null is ingesteld, wordt op basis van het browserplatform en het venstertype de functie voor automatisch detecteren uitgevoerd."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Instellen of meta-V wordt doorgegeven aan de host."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "Hiermee wordt verwachte versleuteling ingesteld voor gegevens die worden ontvangen van de host.\n\nGeldige waarden zijn utf-8 en raw."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "Hiermee wordt bepaald of er met elke willekeurige toetsaanslag naar beneden wordt gescrolld."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "Hiermee wordt bepaald of naar de onderzijde van de terminaluitvoer wordt gescrolld."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Wanneer de alternatieve schermbuffer wordt gebruikt en DECCKM (Application Cursor Keys) actief is, emuleren scrollgebeurtenissen met het muiswiel de pijltoetsen.\n\nDit kan tijdelijk worden uitgeschakeld door de Shift-toets ingedrukt te houden.\n\nDit komt regelmatig voor wanneer je pagers (less) gebruikt, documentatie of tekst in teksteditors (vi/nano) leest of screen/tmux gebruikt."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "De multiplier voor de pixeldelta in wielgebeurtenissen die worden veroorzaakt door het scrollwiel. Hiermee wijzig je hoe snel de pagina wordt gescrolld."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "De verticale scrollbalkmodus."
+	},
+	"hterm_pref_send_encoding": {
+		"message": "Hiermee stel je de versleuteling in voor gegevens die worden verzonden naar de host."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Indien true (waar) is ingesteld, kun je Shift + Insert gebruiken om te plakken. Als false (onwaar) is ingesteld, worden gegevens naar de host verzonden."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "De standaard terminalcodering (DOCS).\n\nMet ISO-2022 kunnen speciale tekens worden omgezet (zoals het toewijzen van afbeeldingen).\nUTF-8 biedt hier geen ondersteuning voor.\n\nMet de vergrendelde variant kan de codering niet tijdens runtime via terminalescapereeksen worden gewijzigd.\n\nGebruik UTF-8, tenzij er problemen optreden met de weergave van verouderde toepassingen."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "Of het standaardgedrag voor kopiëren moet worden gebruikt in het venster."
+	},
+	"hterm_pref_user_css": {
+		"message": "URL van de stylesheet van de gebruiker die moet worden opgenomen in het terminaldocument."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "Aangepaste CSS-tekst voor de vormgeving van de terminal."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "Reguliere expressie om geen overeenkomsten links (begin) van een selectie te zoeken.\n\nDoorgaans is dit een tekenklasse om bepaalde tekens uit te sluiten.\nDe tekens ~ en . zijn standaard toegestaan, aangezien deze tekens vaak aan het begin van paden staan."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "Reguliere expressie voor overeenkomende tekens in het midden.\n\nDoorgaans is dit een tekenklasse om bepaalde tekens uit te sluiten.\n\nWordt gebruikt om de omgeving van de selectie uit te breiden naar het startpunt."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "Reguliere expressie om geen overeenkomsten rechts (einde) van een selectie te zoeken.\n\nDoorgaans is dit een tekenklasse om bepaalde tekens uit te sluiten."
 	},
 	"identity_label": {
 		"message": "Identiteit"
@@ -149,34 +327,16 @@
 		"message": "Importeren..."
 	},
 	"initializing_relay": {
-		"message": "Relayserver opzoeken met: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Relayserver opzoeken met: $1"
 	},
 	"json_parse_error": {
-		"message": "Kan JSON in '$1' niet parseren: $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Kan JSON in '$1' niet parseren: $2"
 	},
 	"known_hosts_empty": {
 		"message": "Geen bekende hosts, niets te vergeten."
 	},
 	"known_hosts_prompt": {
-		"message": "Selecteer een host om te vergeten [1-$1]:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Selecteer een host om te vergeten [1-$1]:"
 	},
 	"known_hosts_title": {
 		"message": "Bekende hosts:"
@@ -185,12 +345,7 @@
 		"message": "Bezig met laden..."
 	},
 	"missing_param": {
-		"message": "Ontbrekende parameter: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Ontbrekende parameter: $1"
 	},
 	"mount_button_label": {
 		"message": "SFTP koppelen"
@@ -211,12 +366,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Verbinding maken met een opgeslagen profiel of een nieuw SSH-systeem"
 	},
 	"open_as_window_tip": {
-		"message": "[Pro-tip] Gebruik 'Openen als venster' om te voorkomen dat de terminal kan worden gesloten via Ctrl-W.\n[Pro-tip] Ga naar $1 voor meer informatie.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "[Pro-tip] Gebruik 'Openen als venster' of 'Volledig scherm' om te voorkomen dat de terminal wordt gesloten met Ctrl + W.\n[Pro Tip] Zie $1 voor meer informatie."
 	},
 	"options_button_label": {
 		"message": "Opties"
@@ -242,14 +392,23 @@
 	"reconnect_message": {
 		"message": "Opnieuw verbinden (R), een andere verbinding kiezen (C) of afsluiten (X)?"
 	},
+	"relay_options_error": {
+		"message": "Onbekende relayoptie: $1"
+	},
 	"relay_retry": {
 		"message": "Opnieuw proberen…"
+	},
+	"request_pin_prompt": {
+		"message": "Voer een pincode in om de $1 voor de sleutel van de $2 te ontgrendelen ($3 pogingen resterend):"
 	},
 	"restore_prefs": {
 		"message": "Back-up terugzetten"
 	},
 	"shortcut_list_aria_label": {
 		"message": "opgeslagen verbindingen"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "Installeer de Smart Card Connector-app: $1"
 	},
 	"ssh_argstr_label": {
 		"message": "SSH-argumenten"
@@ -268,6 +427,12 @@
 	},
 	"tip_11": {
 		"message": "Je kunt de functionaliteit van toetsen/sneltoetsen aanpassen: https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "Gebruik Yubikeys en andere smartcards voor ssh auth: https://goo.gl/3ZEU1w"
+	},
+	"tip_13": {
+		"message": "Afbeeldingen inline weergeven: https://goo.gl/MnSysj"
 	},
 	"tip_2": {
 		"message": "Geef meldingen in de browser weer met hterm-notify: https://goo.gl/ZNxGdF"
@@ -296,6 +461,9 @@
 	"unexpected_error": {
 		"message": "Er is een onverwachte fout opgetreden. Controleer de JavaScript-console voor meer informatie."
 	},
+	"unknown_ssh_client_version": {
+		"message": "Onbekende SSH-versie: $1"
+	},
 	"unmount_button_label": {
 		"message": "SFTP ontkoppelen"
 	},
@@ -303,50 +471,19 @@
 		"message": "Er is een update beschikbaar. Sluit alle vensters."
 	},
 	"welcome_changelog": {
-		"message": "ChangeLog/release-opmerkingen: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "ChangeLog/release-opmerkingen: $1"
 	},
 	"welcome_faq": {
-		"message": "Antwoorden op veelgestelde vragen: $1 (Ctrl+klik op links om ze te openen)",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Antwoorden op veelgestelde vragen: $1 (Ctrl+klik op links om ze te openen)"
 	},
 	"welcome_release_highlights": {
-		"message": "Grote wijzigingen sinds $1:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Grote wijzigingen sinds $1:"
 	},
 	"welcome_tip_of_day": {
-		"message": "Willekeurige Pro-tip #$1: $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Willekeurige Pro-tip #$1: $2"
 	},
 	"welcome_version": {
-		"message": "Welkom bij $1-versie $2.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Welkom bij $1-versie $2."
 	},
 	"zoom_warning": {
 		"message": "Stel Chrome-menu -> Zoom in op 100%"

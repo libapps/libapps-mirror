@@ -6,12 +6,7 @@
 		"message": "Lagre en sikkerhetskopi"
 	},
 	"bad_destination": {
-		"message": "Kan ikke analysere destinasjonen: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Kan ikke analysere destinasjonen: $1"
 	},
 	"before_unload": {
 		"message": "Hvis du lukker denne fanen, avsluttes nåværende økt."
@@ -32,15 +27,13 @@
 		"message": "Åpner en ny SSH-økt."
 	},
 	"command_complete": {
-		"message": "$1-kommandoen ble avsluttet med statuskoden $2.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "$1-kommandoen ble avsluttet med statuskoden $2."
+	},
+	"command_not_supported": {
+		"message": "$1 støttes ikke i denne Chrome-versjonen"
+	},
+	"command_startup_failed": {
+		"message": "Kunne ikke starte $1: $2"
 	},
 	"connect_button_label": {
 		"message": "Koble til"
@@ -49,31 +42,16 @@
 		"message": "Vil du velge en annen tilkobling (C) eller avslutte (X)?"
 	},
 	"connecting": {
-		"message": "Kobler til $1 …",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Kobler til $1 …"
+	},
+	"connection_dialog_name": {
+		"message": "Tilkoblingsdialogboks"
 	},
 	"console_crosh_options_notice": {
-		"message": "Visste du at det finnes en dedikert side for alternativer?\nDu trenger ikke å fikle med term_ direkte lenger!\nTrykk på $1 for å åpne den, eller klikk på:\n$2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Visste du at det finnes en egen altarnativsside?\nDet betyr at du ikke trenger å endre «term_» direkte lenger.\nTrykk på $1 for å åpne den, eller klikk på\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Visste du at det finnes en dedikert side for alternativer?\nDu trenger ikke å fikle med term_ direkte lenger!\n$1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Visste du at det finnes en egen altarnativsside?\nDet betyr at du ikke trenger å styre med «term_» direkte lenger.\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -82,12 +60,7 @@
 		"message": "Slett"
 	},
 	"disconnect_message": {
-		"message": "NaCl-programtillegget ble avsluttet med statuskoden $1.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "NaCl-programtillegget ble avsluttet med statuskoden $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -117,7 +90,7 @@
 		"message": "port"
 	},
 	"field_relay_options_aria_label": {
-		"message": "alternativer for relétjener"
+		"message": "Alternativer for SSH-relétjeneren"
 	},
 	"field_relay_options_placeholder": {
 		"message": "Alternativer for SSH-relétjener"
@@ -132,12 +105,217 @@
 		"message": "brukernavn"
 	},
 	"found_relay": {
-		"message": "Fant denne relétjeneren: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Fant denne relétjeneren: $1"
+	},
+	"get_profile_error": {
+		"message": "FEIL: Kunne ikke laste inn profilen $1:\n$2"
+	},
+	"hterm_button_allow_always": {
+		"message": "Tillat alltid"
+	},
+	"hterm_button_allow_session": {
+		"message": "Tillat denne økten"
+	},
+	"hterm_button_block": {
+		"message": "Blokkér"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "Kunne ikke laste inn $1"
+	},
+	"hterm_loading_resource_start": {
+		"message": "Laster inn $1 …"
+	},
+	"hterm_popup_inline_image": {
+		"message": "Innebygde bilder"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "Innebygde bilder er slått av"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "Om den eksterne verten skal kunne vise bilder i terminalen.\n\nSom standard viser vi en melding til noe er valgt."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "Hvis dette er angitt, oppheves tilordningen av Alt + tilbaketasten som DEL i Chrome OS, slik at Alt + tilbaketasten faktisk fungerer som Alt + tilbaketasten."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "Velg en heuristisk algoritme for gjenkjenning av AltGr.\n\n«null»: automatisk gjenkjenning basert på navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n«none»: Slår av eventuell AltGr-relatert arrangering.\n«ctrl-alt»: Antar at Ctrl+Alt betyr AltGr.\n«left-alt»: Antar at venstre Alt betyr AltGr.\n«right-alt»: Antar at høyre Alt betyr AltGr."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Angir om Alt-tasten skal fungere som en meta-tast eller en unik Alt-tast."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Kontrollerer hvordan Alt-tasten håndteres.\n\n  escape: Send et ESC-prefiks.\n  8-bit: Legg 128 til det angitte tegnet, som i xterm.\n browser-key: Vent på et tastetrykk, og se hva nettleseren\n sier. (Dette fungerer ikke godt på plattformer hvor nettleseren\n utfører en standardhandling for noen Alt-sekvenser.)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "Nettadresse for terminalbjellelyd. Strengen er tom når det ikke høres noen bjelle."
+	},
+	"hterm_pref_background_color": {
+		"message": "Bakgrunnsfargen for tekst uten andre fargeattributter."
+	},
+	"hterm_pref_background_image": {
+		"message": "CSS-verdien for bakgrunnsbildet. Strengen er tom når det ikke brukes noe bilde.\n\nEksempel:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "CSS-verdien for bakgrunnsbildets posisjon.\n\nEkseempel:\n  10% 10 %\n  center"
+	},
+	"hterm_pref_background_size": {
+		"message": "CSS-verdien for bakgrunnsbildets størrelse."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "Hvis dette er «true» (sant), skal tilbaketasten sende BS («\\x08», dvs. ^H). Ellers skal tilbaketasten sende «\\x7f»."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "Dette er spesifisert som et objekt. Det er en spredt matrise hvor hvert område er tegnsettkoden, og verdien er et objekt som selv er en spredt matrise. I den spredte matrisen er hvert område det mottatte tegnet, og verdien er det viste tegnet.\n\nEksempel:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "Om hele utvalget skal fjernes etter kopiering."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "Om hele vinduet skal lukkes når kommandoen avsluttes."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "Overstyr fargene i standardpaletten.\n\nDette kan spesifiseres som en matrise («array») eller et objekt. Hvis det er spesifisert som objekt, antas det å være en spredt matrise, der hvert område er en numerisk indeks i fargepaletten.\n\nVerdiene kan spesifiseres som nesten hvilken som helst CSS-fargeverdi. Dette inkluderer #RGB, #RRGGBB, rgb(…), rgba(…) og eventuelle andre fargenavn som også er en del av standardfilen X11 rgb.txt.\n\nDu kan bruke «null» for å spesifisere at standardverdien ikke skal endres. Dette er nyttig for å hoppe over et lite antall indekser når verdien er spesifisert som en matrise.\n\nBegge disse setter for eksempel fargeindeksen 1 til blå:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "Kopier automatisk det som merkes med musen, til utklippstavlen."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Ctrl + C kopierer hvis verdien er «true» (sann), og sender ^C til verten hvis den er «false» (usann).\nCtrl + Shift + C sender ^C til verten hvis verdien er «true» (sann), og kopierer hvis den er «false» (usann)."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Hvis verdien er «true» (sann), kontrollerer Ctrl + pluss/minus/null zoomnivået.\nHvis den er «false» (usann), kontrollerer Ctrl + Shift + pluss/minus/null zoomnivået. Ctrl + minus sender i så fall ^_, og Ctrl + pluss/null gjør ingenting."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Ctrl + V limer inn hvis verdien er «true» (sann), og sender ^V til verten hvis den er «false» (usann).\nCtrl + Shift + V sender ^V til verten hvis verdien er «true» (sann), og limer inn hvis den er «false» (usann)."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "Angir om tekstmarkøren blinker som standard. Dette kan slås av og på under kjøring via escape-sekvenser i terminalen."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "Blinkehastigheten for markøren i millisekunder.\n\nDette er en matrise («array») med to elementer. Det første bestemmer hvor lenge markøren skal være på, og det andre bestemmer hvor lenge den skal være av."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "Fargen på den synlige markøren."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "Hvis verdien er «true» (sann), danner terminalbjeller i bakgrunnen et nettvarsel. https://www.w3.org/TR/notifications/\n\nBrukeren må gi tillatelse før varsler kan vises. Når dette alternativet er angitt som «true» (sant), prøver hterm ved behov å be brukeren om tillatelse. Vær oppmerksom på at det ikke er sikkert at nettlesere viser denne tillatelsesforespørselen hvis den ikke kommer som følge av en brukerhandling.\n\nChrome-utvidelser med «notifications»-tillatelsen (varsler) har tillatelse til å vise varsler."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Angir om østasiatiske tvetydige tegn har bredde på to kolonner."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "Bruk «true» (sant) for å aktivere 8-biters kontrolltegn og «false» (usann) for å ignorere dem.\n\nVi respekterer 2-byte-versjonene av disse kontrolltegnene uavhengig av denne innstillingen."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "Bruk «true» (sant) hvis vi skal respektere «blink»-attributtet, og «false» (usant) hvis vi kan ignorere det."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "Bruk «true» (sant) hvis vi skal bruke fet skrift for tekst med «bold»- eller «bright»-attributtet. Velg «false» (usant) hvis vi skal bruke vanlig skrift, og velg «null» for å bruke automatisk gjenkjenning."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "Bruk «true» (sant) hvis vi skal bruke lyse farger (8–15 på en 16-fargers fargepalett) for tekst med «bold»-attributtet. Velg «false» (usant) ellers."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "Angir om en melding skal vises i terminalen når verten skriver til utklippstavlen."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "Tillat at den eksterne verten skriver direkte til utklippstavlen på det lokale systemet.\nLesetilgang blir aldri gitt uavhengig av denne innstillingen.\n\nDette brukes til å kontrollere tilgangen til funksjoner som OSC-52."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "Respektér vertens forsøk på å endre statusen for tekstmarkørblinking ved hjelp av DEC-privatmodus 12."
+	},
+	"hterm_pref_environment": {
+		"message": "Den innledende konfigureringen av miljøvariabler, som et objekt."
+	},
+	"hterm_pref_font_family": {
+		"message": "Standard skriftfamilie for terminaltekst."
+	},
+	"hterm_pref_font_size": {
+		"message": "Standard skriftstørrelse i piksler."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "CSS-egenskap for skriftutjevning."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "Forgrunnsfargen for tekst uten andre fargeattributter."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "Hvis «true» (sann) er valgt, kontrollerer Home/End terminalens rullefelt, og Shift + Home/End sender VT-kodene. Hvis «false» (usann) er valgt, sender Home/End VT-kodene, og Shift + Home/End ruller."
+	},
+	"hterm_pref_keybindings": {
+		"message": "En oversikt over tastesekvenser for tastehandlinger. Tastesekvensene har null eller flere modifikatortaster som etterfølges av en tastekode. Tastekoder kan være desimaltall, heksadesimaltall eller tasteidentifikatorer. Tastehandlinger kan angis som strenger som sendes til verten, eller som funksjonsidentifikatorer. Du kan se en fullstendig forklaring av formatet ved å gå til https://goo.gl/LWRndr.\n\nEksempler på tastekombinasjoner:\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HEI\\n'\"\n}"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "Hvis «true» (sann) er valgt, konverteres medietastene til de tilsvarende funksjonstastene. Hvis «false» (usann) er valgt, håndteres tastene av nettleseren."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Angir om Meta-tasten skal sende et innledende Escape-signal eller ikke."
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "Musens innlimingsknapp (null for automatisk gjenkjenning).\n\nVed automatisk gjenkjenning bruker vi den midtre museknappen på ikke-X11-plattformer (inkludert Chrome OS). På X11 bruker vi den høyre museknappen (siden den innebygde vindusbehandleren bør lime inn med den midtre museknappen).\n\n0 == venstre (primær) knapp.\n1 == midtre (ekstra) knapp.\n2 == høyre (sekundær) knapp.\n\nDette alternativet aktiveres uavhengig av «mouse-right-click-paste»-innstillingen.\n\nMerk: Dette håndterer både høyrehendte og venstrehendte mus riktig."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "Lim inn med høyreklikk.\n\nDette alternativet aktiveres uavhengig av «mouse-paste-button»-innstillingen.\n\nMerk: Dette håndterer både høyrehendte og venstrehendte mus riktig."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "Hvis «true» (sann) er valgt, kontrollerer Page up/down terminalens rullefelt, og Shift + Page up/down sender VT-tastekodene. Hvis «false» (usann) er valgt, sender Page up/down VT-kodene, og Shift + Page up/down ruller."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Angi om vi skal sende Alt + 1…9 til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sann) er valgt, håndteres Alt + 1…9 av nettleseren. Hvis «false» (usann) er valgt, sendes Alt + 1…9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Angi om vi skal sende Ctrl + 1…9 til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sann) er valgt, håndteres Ctrl + 1…9 av nettleseren. Hvis «false» (usann) er valgt, sendes Ctrl + 1…9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Angi om vi skal sende Meta + 1…9 til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sann) er valgt, håndteres Meta + 1…9 av nettleseren. Hvis «false» (usann) er valgt, sendes Meta + 1…9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Angi om Meta + V skal sendes til verten."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "Angi forventet koding for data som mottas fra verten.\n\nGyldige verdier er «utf-8» og «raw»."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "Angir om det skal rulles til bunnen ved alle tastetrykk."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "Angir om det skal rulles til bunnen ved terminalutdata."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Når du bruker den alternative skjermbufferen og DECCKM (appmarkørtaster) er aktivert, emulerer rulling på musehjulet piltastene.\n\nDu kan deaktivere dette midlertidig ved å trykke og holde på Shift-tasten.\n\nDette kommer ofte opp når du bruker sidevekslingskontroller (less), leser man-sider eller tekstredigeringsprogrammer (vi/nano) eller bruker screen/tmux."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "Multiplikatoren for pikseldelta i hjulhendelser som skapes av rulling med hjulet. Endrer hvor raskt siden ruller."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "Vertikalt rullefelt-modus."
+	},
+	"hterm_pref_send_encoding": {
+		"message": "Angi kodingen for data som sendes til verten."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Shift + Insert limer inn hvis «true» (sann) er valgt eller sender til verten hvis «false» (usann) er valgt."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "Standard terminalkoding (DOCS).\n\nISO-2022 aktiverer oversettinger av tegntilordninger (som grafikktilordninger).\nUTF-8 deaktiverer støtte for slike.\n\nDen låste varianten betyr at kodingen ikke kan endres under kjøring via escape-sekvenser i terminalen.\n\nDu bør holde deg til UTF-8 med mindre du merker at eldre apper ikke gjengis skikkelig."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "Angir om standard kopieringsfunksjon for vinduet skal brukes."
+	},
+	"hterm_pref_user_css": {
+		"message": "Nettadresse for brukerstilark som skal være med i terminaldokumentet."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "Egendefinert CSS-tekst for terminalens stil."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "Regulært uttrykk for å stoppe matching med den venstre siden (starten) av et utvalg.\n\nVanligvis er dette en tegnklasse for å avvise spesifikke tegn.\nVi tillater som standard «~» og «.», ettersom baner ofte starter med disse."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "Regulært uttrykk som matcher alle tegnene i midten.\n\nVanligvis er dette en tegnklasse for å avvise spesifikke tegn.\n\nBrukes til å utvide utvalget rundt startpunktet."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "Regulært uttrykk for å stoppe matching med den høyre siden (enden) av et utvalg.\n\nVanligvis er dette en tegnklasse for å avvise spesifikke tegn."
 	},
 	"identity_label": {
 		"message": "Identitet"
@@ -149,34 +327,16 @@
 		"message": "Importér…"
 	},
 	"initializing_relay": {
-		"message": "Ser etter relétjeneren via $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Ser etter relétjeneren via $1"
 	},
 	"json_parse_error": {
-		"message": "Kunne ikke parse JSON i «$1»: $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Kunne ikke parse JSON i «$1»: $2"
 	},
 	"known_hosts_empty": {
 		"message": "Ingen kjente verter, ingenting å glemme."
 	},
 	"known_hosts_prompt": {
-		"message": "Velg en vert du kan glemme [1–$1]:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Velg en vert du kan glemme [1–$1]:"
 	},
 	"known_hosts_title": {
 		"message": "Kjente verter:"
@@ -185,12 +345,7 @@
 		"message": "Laster inn …"
 	},
 	"missing_param": {
-		"message": "Manglende parameter: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Manglende parameter: $1"
 	},
 	"mount_button_label": {
 		"message": "SFTP-tilkobling"
@@ -211,12 +366,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Koble til en lagret profil eller et nytt SSH-system"
 	},
 	"open_as_window_tip": {
-		"message": "[Profftips] Bruk «Åpne som vindu» for å hindre at terminalen lukkes av Ctrl+W.\n[Profftips] Se $1 for å få mer informasjon.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "[Profftips] Bruk «Åpne som vindu» eller «Fullskjerm» for å hindre at terminalen lukkes med Crtl + W.\n[Profftips] Du kan finne mer informasjon ved å gå til $1."
 	},
 	"options_button_label": {
 		"message": "Alternativer"
@@ -242,14 +392,23 @@
 	"reconnect_message": {
 		"message": "Vil du koble til på nytt (R), velge en annen tilkobling (C) eller avslutte (X)?"
 	},
+	"relay_options_error": {
+		"message": "Ukjent reléalternativ: $1"
+	},
 	"relay_retry": {
 		"message": "Prøver på nytt …"
+	},
+	"request_pin_prompt": {
+		"message": "Skriv inn PIN-koden for å låse opp nøkkelen «$1» på $2 ($3 forsøk igjen):"
 	},
 	"restore_prefs": {
 		"message": "Gjenopprett fra sikkerhetskopi"
 	},
 	"shortcut_list_aria_label": {
 		"message": "lagrede tilkoblinger"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "Installer Smart Card Connector-appen: $1"
 	},
 	"ssh_argstr_label": {
 		"message": "SSH-argumenter"
@@ -268,6 +427,12 @@
 	},
 	"tip_11": {
 		"message": "Du kan binde taster/hurtigtaster på nytt: https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "Bruk Yubikeys og andre smartkort for ssh-autorisering: https://goo.gl/3ZEU1w"
+	},
+	"tip_13": {
+		"message": "Vis bilder innebygd: https://goo.gl/MnSysj"
 	},
 	"tip_2": {
 		"message": "Vis varsler i nettleseren med hterm-notify: https://goo.gl/ZNxGdF"
@@ -288,13 +453,16 @@
 		"message": "Kopiér fra Emacs/Vim/osv. til utklippstavlen med OSC-52: https://goo.gl/XSnyLo"
 	},
 	"tip_8": {
-		"message": "Chat med andre hterm/SSH-brukere via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Chat med andre hterm / Secure Shell-brukere via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
 		"message": "Funnet en feil? Vil du be oss om å legge til en ny funksjon? Si fra til oss: https://goo.gl/vb94JY"
 	},
 	"unexpected_error": {
 		"message": "Det har oppstått en uventet feil. Du finner mer informasjon i JavaScript-konsollen."
+	},
+	"unknown_ssh_client_version": {
+		"message": "Ukjent SSH-versjon: $1"
 	},
 	"unmount_button_label": {
 		"message": "Koble fra SFTP"
@@ -303,50 +471,19 @@
 		"message": "En oppdatering er tilgjengelig. Lukk alle vinduer."
 	},
 	"welcome_changelog": {
-		"message": "Endringslogg/versjonsnotater: $1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Endringslogg/versjonsnotater: $1"
 	},
 	"welcome_faq": {
-		"message": "Svar på vanlige spørsmål: $1 (Ctrl-klikk på linker for å åpne dem)",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Svar på vanlige spørsmål: $1 (Ctrl-klikk på linker for å åpne dem)"
 	},
 	"welcome_release_highlights": {
-		"message": "Betydelige endringer siden $1:",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "Betydelige endringer siden $1:"
 	},
 	"welcome_tip_of_day": {
-		"message": "Tilfeldig profftips $1: $2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Tilfeldig profftips $1: $2"
 	},
 	"welcome_version": {
-		"message": "Velkommen til versjon $2 av $1.",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "Velkommen til versjon $2 av $1."
 	},
 	"zoom_warning": {
 		"message": "Sett Zoom til 100 % i Chrome-menyen"

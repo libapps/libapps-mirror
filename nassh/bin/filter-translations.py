@@ -18,6 +18,36 @@ import re
 import sys
 
 
+def trim_redundant_placeholders(data):
+    """Remove redundant placeholders entries.
+
+    For messages that look like:
+      "command_complete": {
+        "message": "The command $1 exited with status code $2.",
+        "placeholders": {
+          "1": {
+            "content": "$1"
+          },
+          "2": {
+            "content": "$2"
+          }
+        }
+      },
+
+    We can delete the placeholders entirely.
+    """
+    for msg in data.values():
+        for key, settings in list(msg.get('placeholders', {}).items()):
+            if (re.match(r'^[0-9]+$', key) and
+                re.match(r'^[$][0-9]+$', settings['content'])):
+                msg['placeholders'].pop(key)
+
+        # Remove the placeholders setting if it's empty now.
+        placeholders = msg.get('placeholders', {})
+        if not placeholders:
+            msg.pop('placeholders', None)
+
+
 def reformat(path, inplace=False):
     """Reformat translation."""
     with open(path) as fp:
@@ -26,6 +56,8 @@ def reformat(path, inplace=False):
         except ValueError as e:
             print('ERROR: Processing %s: %s' % (path, e), file=sys.stderr)
             return False
+
+    trim_redundant_placeholders(data)
 
     format_spaces = json.dumps(data, ensure_ascii=False, indent=4,
                                sort_keys=True)

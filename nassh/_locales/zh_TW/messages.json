@@ -6,12 +6,7 @@
 		"message": "儲存備份"
 	},
 	"bad_destination": {
-		"message": "無法剖析目的地：$1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "無法剖析目的地：$1"
 	},
 	"before_unload": {
 		"message": "關閉這個分頁會使這個工作階段中斷連線。"
@@ -32,15 +27,13 @@
 		"message": "開啟新的 SSH 工作階段。"
 	},
 	"command_complete": {
-		"message": "$1 指令結束，傳回 $2 狀態碼。",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "$1 指令結束，傳回 $2 狀態碼。"
+	},
+	"command_not_supported": {
+		"message": "這個 Chrome 版本不支援 $1"
+	},
+	"command_startup_failed": {
+		"message": "$1 啟動失敗：$2"
 	},
 	"connect_button_label": {
 		"message": "連線"
@@ -49,31 +42,16 @@
 		"message": "選擇其他連線(C)或結束(X)？"
 	},
 	"connecting": {
-		"message": "正在連線至 $1...",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "正在連線至 $1..."
+	},
+	"connection_dialog_name": {
+		"message": "連線對話方塊"
 	},
 	"console_crosh_options_notice": {
-		"message": "你知道嗎？我們提供了專用的選項頁面。\n所有選項一目瞭然，不必再直接指定 term_！\n按下 $1 或點選以下連結即可開啟：\n$2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "你知道嗎？我們提供了專用的選項頁面。\n所有選項一目瞭然，不必再直接指定「term_」！\n按下 $1 或點選以下連結即可開啟：\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "你知道嗎？我們提供了專用的選項頁面。\n所有選項一目瞭然，不必再直接指定 term_！\n$1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "你知道嗎？我們提供了專用的選項頁面。\n所有選項一目瞭然，不必再直接指定「term_」！\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -82,12 +60,7 @@
 		"message": "刪除"
 	},
 	"disconnect_message": {
-		"message": "NaCl 外掛程式結束，傳回 $1 狀態碼。",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "NaCl 外掛程式結束，傳回 $1 狀態碼。"
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -117,7 +90,7 @@
 		"message": "通訊埠"
 	},
 	"field_relay_options_aria_label": {
-		"message": "轉送選項"
+		"message": "SSH 轉送伺服器選項"
 	},
 	"field_relay_options_placeholder": {
 		"message": "SSH 轉送伺服器選項"
@@ -132,12 +105,217 @@
 		"message": "使用者名稱"
 	},
 	"found_relay": {
-		"message": "找到轉送伺服器：$1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "找到轉送伺服器：$1"
+	},
+	"get_profile_error": {
+		"message": "錯誤：無法載入設定檔 $1：\n$2"
+	},
+	"hterm_button_allow_always": {
+		"message": "一律允許"
+	},
+	"hterm_button_allow_session": {
+		"message": "允許這個工作階段"
+	},
+	"hterm_button_block": {
+		"message": "封鎖"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "$1 載入失敗"
+	},
+	"hterm_loading_resource_start": {
+		"message": "正在載入 $1…"
+	},
+	"hterm_popup_inline_image": {
+		"message": "內置圖片"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "內置圖片已停用"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "是否允許遠端主機在終端機顯示圖片。\n\n根據預設，我們會在未選擇時持續提示。"
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "設定後將復原 Chrome 作業系統 Alt+Backspace->DEL 重新對應，讓 Alt+Backspace 確實為 Alt+Backspace。"
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "選取 AltGr 偵測試誤法。\n\n「null」：根據 navigator.language 自動偵測：\n      「en-us」=>「none」，其他 =>「right-alt」\n「none」：禁止任何 AltGr 相關改寫。\n「ctrl-alt」：假設 Ctrl+Alt 鍵表示 AltGr。\n「left-alt」：假設向左鍵+Alt 鍵表示 AltGr。\n「right-alt」：假設向右鍵+Alt 鍵表示 AltGr。"
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "將 Alt 鍵的功能設為 Meta 鍵或獨特的 Alt 鍵。"
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "控制 Alt 鍵的處理方式。\n\n  escape：傳送 ESC 前置詞。\n  8-bit：將 128 新增至輸入的字元 (如同在 xterm 中)。\n browser-key：等待按鍵事件，觀察瀏覽器\n 如何回應 (在瀏覽器會針對某些 Alt 序列\n 執行預設動作的平台上無法順利運作)。"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "終端機提示音的網址。空白字串表示不發出提示音。"
+	},
+	"hterm_pref_background_color": {
+		"message": "無其他色彩屬性的文字的背景顏色。"
+	},
+	"hterm_pref_background_image": {
+		"message": "背景圖片的 CSS 值。空白字串表示沒有圖片。\n\n例如：\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "背景圖片位置的 CSS 值。\n\n例如：\n  10% 10%\n  center"
+	},
+	"hterm_pref_background_size": {
+		"message": "背景圖片大小的 CSS 值。"
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "如果為 true，Backspace 鍵應傳送 BS (「\\x08」，又稱 ^H)，否則應傳送「\\x7f」。"
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "以物件形式指定。屬於疏鬆陣列，各屬性為字元集代碼，值則是物件 (本身為疏鬆陣列)。在該疏鬆陣列中，各屬性為接收的字元，值則是顯示的字元。\n\n例如：\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "複製後是否清除所選內容。"
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "指令執行完畢後是否關閉視窗。"
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "覆寫預設調色盤中的色彩。\n\n可選擇以陣列或物件形式指定。選擇後者時會假設為疏鬆陣列，其中各屬性為調色盤中色彩的數字索引。\n\n指定值時可使用幾乎任何 CSS 色彩值，包括  #RGB、#RRGGBB、rgb(...)、rgba(...)，以及同屬標準 X11 rgb.txt 檔案一部分的任何色彩名稱。\n\n可使用「null」指定禁止變更預設值。以陣列形式指定值時，如要略過少數索引，可善用這種做法。\n\n舉例來說，以下兩者皆可將色彩索引 1 設為藍色：\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "自動將滑鼠所選內容複製到剪貼簿。"
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "如果為 true，Ctrl+C 鍵會執行複製動作；如果為 false，則會將 ^C 傳送至主機。\n如果為 true，Ctrl+Shift+C 鍵會將 ^C 傳送至主機；如果為 false，則會執行複製動作。"
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "如果為 true，Ctrl+加號鍵/減號鍵/0 鍵可控制縮放設定。\n如果為 false，Ctrl+Shift+加號鍵/減號鍵/0 鍵可控制縮放設定，Ctrl+減號鍵會傳送 ^_，Ctrl+加號鍵/0 鍵則不會執行任何動作。"
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "如果為 true，Ctrl+V 鍵會執行貼上動作；如果為 false，則會將 ^V 傳送至主機。\n如果為 true，Ctrl+Shift+V 鍵會將 ^V 傳送至主機；如果為 false，則會執行貼上動作。"
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "文字游標是否預設為閃爍狀態。可在執行階段透過終端機逸出序列切換這項設定。"
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "文字游標閃爍速率 (以毫秒為單位)。\n\n雙元素陣列，第一個元素為文字游標顯示時間長度，第二個元素為滑鼠游標隱藏時間長度。"
+	},
+	"hterm_pref_cursor_color": {
+		"message": "文字游標的顯示顏色。"
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "如果為 true，背景終端機提示音會建立網路通知。https://www.w3.org/TR/notifications/\n\n必須經使用者授權才能顯示通知。當這個選項設為 true 時，hterm 會視需要嘗試要求使用者授權。如果這項權限要求不是因使用者動作而觸發，則可能不會顯示在瀏覽器中。\n\n擁有「通知」權限的 Chrome 擴充功能可顯示通知。"
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "設定中東歧義字元是否佔兩欄寬度。"
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "設為 true 時會啟用 8 位元控制字元，設為 false 時則予以忽略。\n\n無論這項設定為何，都會採用這些字元的雙位元組版本。"
+	},
+	"hterm_pref_enable_blink": {
+		"message": "設為 true 時會採用閃爍屬性，設為 false 時則予以忽略。"
+	},
+	"hterm_pref_enable_bold": {
+		"message": "設為 true 時會針對有粗體/亮色屬性的文字使用粗體字型，設為 false 時使用一般字型，設為 null 時則會自動偵測。"
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "設為 true 時會針對有粗體屬性的任何文字使用亮色 (16 色調色盤中的 8-15)，設為 false 時則不會。"
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "當主機寫入剪貼簿時，是否要在終端機顯示訊息。"
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "允許遠端主機直接寫入本機系統剪貼簿。\n無論這項設定為何，一律不授予讀取權限。\n\n用於控制 OSC-52 這類功能的存取權。"
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "允許主機嘗試使用 DEC 私密模式 12 變更文字游標閃爍狀態。"
+	},
+	"hterm_pref_environment": {
+		"message": "初始環境變數集 (做為物件)。"
+	},
+	"hterm_pref_font_family": {
+		"message": "終端機文字的預設字型系列。"
+	},
+	"hterm_pref_font_size": {
+		"message": "預設字型大小 (以像素為單位)。"
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "CSS font-smoothing 屬性。"
+	},
+	"hterm_pref_foreground_color": {
+		"message": "無其他色彩屬性的文字的前景顏色。"
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "如果為 true，Home/End 鍵可操控終端機捲軸，Shift+Home/End 鍵則會傳送 VT 按鍵碼。如果為 false，Home/End 鍵會傳送 VT 按鍵碼，Shift+Home/End 鍵則可捲動。"
+	},
+	"hterm_pref_keybindings": {
+		"message": "按鍵序列與按鍵動作的對應。按鍵序列包含 0 或多個輔助鍵加上按鍵碼。按鍵碼可以是十進位/十六進位數字或按鍵識別碼。按鍵動作可以是要傳送至主機的指定字串，也可以是動作識別碼。如需完整的格式說明，請參閱 https://goo.gl/LWRndr。\n\n按鍵繫結關係範例：\n{\n  \"Ctrl-Alt-K\": \"clearScrollback\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "如果為 true，會將媒體鍵轉換成對應的 F- 鍵。如果為 false，則讓瀏覽器處理按鍵。"
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "設定 Meta 鍵是否傳送前置 Esc 鍵。"
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "滑鼠的貼上按鈕，如果為 null 則會自動偵測。\n\n在自動偵測情況下，如果是非 X11 平台 (包括 Chrome 作業系統)，我們會使用滑鼠中鍵。在 X11 平台上，則會使用滑鼠右鍵 (因內建視窗管理員會透過滑鼠中鍵執行貼上動作)。\n\n0 == 左 (主要) 鍵。\n1 == 中 (輔助) 鍵。\n2 == 右 (次要) 鍵。\n\n這個選項可獨立啟用，不受「mouse-right-click-paste」設定影響。\n\n注意：左/右手用滑鼠皆可正確處理。"
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "按一下滑鼠右鍵時執行貼上動作。\n\n這個選項可獨立啟用，不受「mouse-paste-button」設定影響。\n\n注意：左/右手用滑鼠皆可正確處理。"
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "如果為 true，Page Up/Page Down 鍵可操控終端機捲軸，Shift+Page Up/Page Down 鍵則會傳送 VT 按鍵碼。如果為 false，Page Up/Page Down 鍵會傳送 VT 按鍵碼，Shift+Page Up/Page Down 鍵則可捲動。"
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "設定是否將 Alt+1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，這樣就仍可使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 Vim 或 Emacs 中使用。\n\n如果為 true，Alt+1..9 鍵將由瀏覽器處理。如果為 false，Alt+1..9 鍵會傳送至主機。如果為 null，則根據瀏覽器平台和視窗類型自動偵測。"
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "設定是否將 Ctrl+1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，這樣就仍可使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 Vim 或 Emacs 中使用。\n\n如果為 true，Ctrl+1..9 鍵將由瀏覽器處理。如果為 false，Ctrl+1..9 鍵會傳送至主機。如果為 null，則根據瀏覽器平台和視窗類型自動偵測。"
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "設定是否將 Meta+1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，這樣就仍可使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 Vim 或 Emacs 中使用。\n\n如果為 true，Meta+1..9 鍵將由瀏覽器處理。如果為 false，Meta+1..9 鍵會傳送至主機。如果為 null，則根據瀏覽器平台和視窗類型自動偵測。"
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "設定是否將 Meta+V 鍵傳送至主機。"
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "針對從主機接收的資料設定預期的編碼。\n\n有效的值為「utf-8」和「raw」。"
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "是否任何按鍵行為都會捲動到畫面底部。"
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "終端機輸出時是否會捲動到畫面底部。"
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "使用替代螢幕緩衝區且 DECCKM (應用程式游標鍵) 啟用時，滑鼠滾輪捲動事件會模擬方向鍵。\n\n按住 Shift 鍵可暫時停用。\n\n這種情形常見於使用呼叫器 (less)、讀取手冊頁或文字編輯器 (vi/nano)，或是使用 screen/tmux 時。"
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "滾輪事件 (由滑鼠滾輪觸發) 中像素差異的調節係數，可調整頁面捲動速度。"
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "縱向捲軸模式。"
+	},
+	"hterm_pref_send_encoding": {
+		"message": "針對傳送至主機的資料設定編碼。"
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "如果為 true，Shift+Insert 鍵會執行貼上動作；如果為 false，則會傳送至主機。"
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "預設的終端機編碼 (DOCS)。\n\nISO-2022 會啟用字元對應轉譯功能 (例如圖形對應)。\nUTF-8 會停用這類支援功能。\n\n鎖定的變體表示無法在執行階段透過終端機逸出序列變更編碼。\n\n除非舊應用程式發生無法順利轉譯的情形，否則建議一律使用 UTF-8。"
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "是否使用預設的視窗複製行為。"
+	},
+	"hterm_pref_user_css": {
+		"message": "要包含在終端機文件中的使用者樣式表網址。"
+	},
+	"hterm_pref_user_css_text": {
+		"message": "用於設定終端機樣式的自訂 CSS 文字。"
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "可停止比對所選字元左端 (起始) 的規則運算式。\n\n通常這是用於拒絕特定字元的字元類別。\n根據預設，我們接受「~」和「.」，因為這是常見的路徑起始字元。"
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "可比對中間所有字元的規則運算式。\n\n通常這是用於拒絕特定字元的字元類別。\n\n可用於擴大起始點周圍所選範圍。"
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "可停止比對所選字元右端 (結束) 的規則運算式。\n\n通常這是用於拒絕特定字元的字元類別。"
 	},
 	"identity_label": {
 		"message": "身分"
@@ -149,34 +327,16 @@
 		"message": "匯入..."
 	},
 	"initializing_relay": {
-		"message": "使用 $1 查詢轉送伺服器",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "使用 $1 查詢轉送伺服器"
 	},
 	"json_parse_error": {
-		"message": "無法剖析「$1」中的 JSON：$2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "無法剖析「$1」中的 JSON：$2"
 	},
 	"known_hosts_empty": {
 		"message": "沒有任何可刪除的已知主機。"
 	},
 	"known_hosts_prompt": {
-		"message": "請選取要刪除的主機 [1-$1]：",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "請選取要刪除的主機 [1-$1]："
 	},
 	"known_hosts_title": {
 		"message": "已知的主機："
@@ -185,12 +345,7 @@
 		"message": "載入中…"
 	},
 	"missing_param": {
-		"message": "找不到下列參數：$1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "找不到下列參數：$1"
 	},
 	"mount_button_label": {
 		"message": "SFTP 掛接"
@@ -211,12 +366,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> 連線至已儲存的設定檔或新的 SSH 系統"
 	},
 	"open_as_window_tip": {
-		"message": "[實用秘訣] 使用 [在視窗中開啟] 可確保按下 Ctrl + W 鍵時不會關閉終端機！\n[實用秘訣] 詳情請參閱 $1。",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "[PRO 提示] 使用「在視窗中開啟」或「全螢幕」防止 Ctrl + W 鍵關閉終端機！\n[PRO 提示] 詳情請見 $1。"
 	},
 	"options_button_label": {
 		"message": "選項"
@@ -242,14 +392,23 @@
 	"reconnect_message": {
 		"message": "重新連線(R)、選擇其他連線(C)或結束(X)？"
 	},
+	"relay_options_error": {
+		"message": "未知的轉送選項：$1"
+	},
 	"relay_retry": {
 		"message": "重試中..."
+	},
+	"request_pin_prompt": {
+		"message": "請在「$2」輸入 PIN 碼來解鎖金鑰 $1 (還剩 $3 次嘗試機會)："
 	},
 	"restore_prefs": {
 		"message": "還原備份內容"
 	},
 	"shortcut_list_aria_label": {
 		"message": "已儲存的連線"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "請安裝 Smart Card Connector 應用程式：$1"
 	},
 	"ssh_argstr_label": {
 		"message": "SSH 引數"
@@ -269,6 +428,12 @@
 	"tip_11": {
 		"message": "你可以重新繫結金鑰/快速鍵：https://goo.gl/LWRndr"
 	},
+	"tip_12": {
+		"message": "使用 Yubikeys 和其他智慧型卡片進行 SSH 驗證：https://goo.gl/3ZEU1w"
+	},
+	"tip_13": {
+		"message": "顯示內嵌圖片：https://goo.gl/MnSysj"
+	},
 	"tip_2": {
 		"message": "使用 hterm-notify 在瀏覽器中顯示通知：https://goo.gl/ZNxGdF"
 	},
@@ -276,7 +441,7 @@
 		"message": "輸入「ssh <profile name>」，從網址列連線：https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome 作業系統可經由 SFTP 掛接檔案系統並透過「檔案」應用程式瀏覽。請改為使用「SFTP 掛接」，而不要使用「連線」。"
+		"message": "Chrome 作業系統可經由 SFTP 掛接檔案系統並透過「檔案」應用程式瀏覽。請改為使用 [SFTP 掛接]，而不要使用 [連線]。"
 	},
 	"tip_5": {
 		"message": "在網頁中使用 ssh:// 連結進行連線，或儲存為書籤：https://goo.gl/zS8EZD"
@@ -288,13 +453,16 @@
 		"message": "使用 OSC-52 從 emacs、vim 等來源複製內容到剪貼簿：https://goo.gl/XSnyLo"
 	},
 	"tip_8": {
-		"message": "透過 chromium-hterm@chromium.org 與其他 hterm/安全殼層使用者進行即時通訊：https://goo.gl/RYHiK"
+		"message": "透過 chromium-hterm@chromium.org 與其他 hterm/Secure Shell 使用者進行即時通訊：https://goo.gl/RYHiK"
 	},
 	"tip_9": {
 		"message": "發現錯誤或想提出新功能建議嗎？歡迎隨時與我們聯絡：https://goo.gl/vb94JY"
 	},
 	"unexpected_error": {
 		"message": "發生未預期的錯誤，請查看 JavaScript 控制台瞭解詳情。"
+	},
+	"unknown_ssh_client_version": {
+		"message": "未知的 SSH 版本：$1"
 	},
 	"unmount_button_label": {
 		"message": "卸載 SFTP"
@@ -303,50 +471,19 @@
 		"message": "有可用的更新，請關閉所有視窗。"
 	},
 	"welcome_changelog": {
-		"message": "ChangeLog/版本資訊：$1",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "ChangeLog/版本資訊：$1"
 	},
 	"welcome_faq": {
-		"message": "常見問題解答：$1 (按住 Ctrl 鍵並點選連結即可開啟網址)",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "常見問題解答：$1 (按住 Ctrl 鍵並點選連結即可開啟網址)"
 	},
 	"welcome_release_highlights": {
-		"message": "$1 起的重大更新：",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			}
-		}
+		"message": "$1 起的重大更新："
 	},
 	"welcome_tip_of_day": {
-		"message": "隨機實用秘訣 #$1：$2",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "隨機實用秘訣 #$1：$2"
 	},
 	"welcome_version": {
-		"message": "歡迎使用 $1 $2 版。",
-		"placeholders": {
-			"1": {
-				"content": "$1"
-			},
-			"2": {
-				"content": "$2"
-			}
-		}
+		"message": "歡迎使用 $1 $2 版。"
 	},
 	"zoom_warning": {
 		"message": "請設定 Chrome 選單 -> [縮放到 100%]"
