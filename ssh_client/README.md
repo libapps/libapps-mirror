@@ -43,7 +43,8 @@ requests to support any arch other than x86/x86_64/arm.
 
 You'll need some extra packages to compile.  Adjust these for your distro.
 ```
-$ sudo apt-get install git make cmake python libglib2.0-0:i386 zlib1g-dev
+$ sudo apt-get install libstdc++6:i386 libglib2.0-0:i386 git make cmake \
+    python python-dev wget curl zlib1g-dev
 ```
 
 ## Build Script
