@@ -56,7 +56,17 @@ window.onload = function() {
     }
 
     // Set up icon on the left side.
-    document.getElementById('icon').src = '../' + manifest.icons['128'];
+    // Start with 128px, but if it's not available, scale the highest available.
+    const icon = document.getElementById('icon');
+    let size = '128';
+    icon.style.width = `${size}px`;
+    if (!manifest.icons.hasOwnProperty(size)) {
+      // Sort the keys in descending numeric order.
+      const keys = Object.keys(manifest.icons).map((x) => parseInt(x, 10)).sort(
+          (a, b) => a < b);
+      size = keys[0];
+    }
+    icon.src = lib.f.getURL(`${manifest.icons[size]}`);
 
     // Set up reset button.
     document.getElementById('reset').onclick = function() {
