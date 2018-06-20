@@ -18,7 +18,6 @@ from __future__ import print_function
 import argparse
 import json
 import os
-import re
 import sys
 
 
@@ -30,7 +29,6 @@ def process_manifest(opts, manifest_path, srcroot, dstroot):
     if 'program' not in manifest:
         return
 
-    srcdir = os.path.dirname(manifest_path)
     srcsubpath = os.path.dirname(os.path.relpath(manifest_path, srcroot))
 
     update = False
