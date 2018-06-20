@@ -1,3 +1,37 @@
+# 0.8.44, 2018-06-20, OpenSSH 7.7p1, Unicode 11.0.0, and bug fixes.
+
+* Update to libdot 1.22.  Unicode 11.0.0 updates and new helpers.
+* Update to hterm 1.79.  A11y (screen reader) improvements & keyboard/mouse fixes.
+* crosh: Extend for arbitrary commands.
+* crosh: Support passing command line args down.
+* sftp: Fix directory deletion and copying.
+* docs: Improve building/reference documentation.
+* extension: Add a link to the options page at the bottom.
+* Use new lib.f.lastError helper.
+* crosh: Display errors from terminalPrivate if available.
+* removeFile: Fix param typo.
+* docs: Update the hex ids info.
+* terminal: Adds the crostini terminal icon to use with crosh.
+* ssh_client: Update to openssh-7.7p1.
+* FAQ: Add a X11 forwarding answer.
+* FAQ: Add omnibox with multiple extensions.
+* API: Add onSendMessageExternal to allow FilesApp to sftp mount.
+* lint: Clean up semi-colon usage.
+* a11y: Add basic support for announcing command output to AT.
+* Handle option page loading failures.
+* docs: Document the crosh code on the Chrome side.
+* gsc: Implement a PIN cache for GSC agent.
+* a11y: Preserve selection when scrolling collapsed selections.
+* crosh: Pass the selected profile over.
+* ssh_client: Stub out permission check.
+* agent: Improve gnubby extension probing.
+* Crush all images.
+* release: Automatically minimize translations.
+* ssh_client: Add a echosshd utility.
+* l10n: Improve pref descriptions and translation tips.
+* l10n: Import updated translations.
+* prefs: Auto-select icon for preferences page.
+
 # 0.8.43, 2018-01-26, Few new features and support for Chrome Extensions.
 
 * Update to hterm 1.78.  Extended underlying support.
