@@ -877,6 +877,12 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
       argv.arguments.push('-A');
   }
 
+  // Automatically send any env vars the user has set.  This does not guarantee
+  // the remote side will accept it, but we can always hope.
+  Array.prototype.push.apply(
+      argv.arguments,
+      Object.keys(argv.environment).map((x) => `-oSendEnv=${x}`));
+
   // Disable IP address check for connection through proxy.
   if (argv.useJsSocket)
     argv.arguments.push('-o CheckHostIP=no');
