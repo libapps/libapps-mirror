@@ -1,3 +1,15 @@
+# 1.22, 2018-06-20, Unicode 11.0.0 updates and new helpers.
+
+* Start a dedicated README file.
+* lint: Add some linting script helpers.
+* concat: Improve handling of escapes with string embedding.
+* lib.f.lastError: New helper.
+* readlink: Fix python-3 print func handling.
+* lib.CredentialCache: New cache helper.
+* wcwidth: Update lookup tables to Unicode 11.0.0.
+* imgcrush: New helper script for crushing images.
+* mkzip: Automatically minimize translations.
+
 # 1.21, 2018-01-05, Minor fixes.
 
 * Fix storage write callbacks with shallow prefs.
