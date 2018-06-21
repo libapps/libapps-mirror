@@ -515,6 +515,38 @@
 		"description": "Help text shown for the hterm 'word-break-match-right' preference.",
 		"message": "Regular expression to halt matching to the right (end) of a selection.\n\nNormally this is a character class to reject specific characters."
 	},
+	"HTERM_TITLE_PREF_APPEARANCE": {
+		"description": "Header for the hterm Appearance preference category. Shown above all appearance/theme related settings.",
+		"message": "Appearance (fonts, colors, images)"
+	},
+	"HTERM_TITLE_PREF_COPYPASTE": {
+		"description": "Header for the hterm Copy & Paste preference category. Shown above all copying/pasting related settings.",
+		"message": "Copy & Paste"
+	},
+	"HTERM_TITLE_PREF_ENCODING": {
+		"description": "Header for the hterm Encoding preference category. Shown above all sending/receiving/input/output encoding (UTF-8/raw) related settings.",
+		"message": "Encoding"
+	},
+	"HTERM_TITLE_PREF_EXTENSIONS": {
+		"description": "Header for the hterm Extensions preference category. Shown above all settings related to custom terminal protocol extensions.",
+		"message": "Extensions"
+	},
+	"HTERM_TITLE_PREF_KEYBOARD": {
+		"description": "Header for the hterm Keyboard preference category. Shown above all keyboard related settings.",
+		"message": "Keyboard"
+	},
+	"HTERM_TITLE_PREF_MISCELLANEOUS": {
+		"description": "Header for the hterm Miscellaneous preference category. Shown above the settings that don't fit into other categories.",
+		"message": "Miscellaneous"
+	},
+	"HTERM_TITLE_PREF_SCROLLING": {
+		"description": "Header for the hterm Scrolling preference category. Shown above all screen/text scrolling related settings.",
+		"message": "Scrolling"
+	},
+	"HTERM_TITLE_PREF_SOUNDS": {
+		"description": "Header for the hterm Sounds preference category. Shown above all audio/sound related settings.",
+		"message": "Sounds"
+	},
 	"IDENTITY_LABEL": {
 		"description": "Label for the identity field. The identity is a SSH private key filename used to authenticate with servers.",
 		"message": "Identity"

@@ -420,7 +420,7 @@ nassh.PreferencesEditor.prototype.addCategoryRow =
   details.className = 'category-details';
 
   var summary = document.createElement('h3');
-  summary.innerText = categoryDef.text;
+  summary.innerText = this.getCategoryDescription(categoryDef);
 
   details.appendChild(summary);
   parent.appendChild(details);
@@ -592,6 +592,17 @@ nassh.PreferencesEditor.prototype.getPreferenceDescription = function(key) {
 
   const id = 'PREF_' + key.replace(/-/g, '_').toUpperCase();
   return hterm.msg(id, [], entry[3]);
+};
+
+/**
+ * Get the translated hterm category.
+ *
+ * @param {Object} def The hterm preference category object.
+ * @return {string} The translated category text.
+ */
+nassh.PreferencesEditor.prototype.getCategoryDescription = function(def) {
+  const id = `TITLE_PREF_${def.id.toUpperCase()}`;
+  return hterm.msg(id, [], def.text);
 };
 
 nassh.PreferencesEditor.prototype.getPreferenceType = function(key) {
