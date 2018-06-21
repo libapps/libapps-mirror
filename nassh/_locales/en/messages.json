@@ -413,7 +413,7 @@
 	},
 	"HTERM_PREF_HIDE_MOUSE_WHILE_TYPING": {
 		"description": "Help text shown for the hterm 'hide-mouse-while-typing' preference.",
-		"message": "Whether to automatically hide the mouse cursor when typing.\n\nNote: Some operating systems may override this setting and thus you might not be able to always disable it."
+		"message": "Whether to automatically hide the mouse cursor when typing. By default, autodetect whether the platform/OS handles this.\n\nNote: Some operating systems may override this setting and thus you might not be able to always disable it."
 	},
 	"HTERM_PREF_HOME_KEYS_SCROLL": {
 		"description": "Help text shown for the hterm 'home-keys-scroll' preference. 'Home', 'End', and 'Shift' are the keyboard buttons and may be translated as makes sense.",
