@@ -34,7 +34,8 @@ window.onload = function() {
                                document.location.hash.substr(1));
     };
     terminal.onTerminalReady = function() {
-      if (window.chrome && chrome.accessibilityFeatures) {
+      if (window.chrome && chrome.accessibilityFeatures &&
+          chrome.accessibilityFeatures.spokenFeedback) {
         chrome.accessibilityFeatures.spokenFeedback.get({}, function(details) {
           terminal.setAccessibilityEnabled(details.value);
           runNassh();

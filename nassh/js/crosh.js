@@ -70,7 +70,8 @@ Crosh.init = function() {
     terminal.command.keyboard_ = terminal.keyboard;
   };
   terminal.onTerminalReady = function() {
-    if (chrome.accessibilityFeatures) {
+    if (window.chrome && chrome.accessibilityFeatures &&
+        chrome.accessibilityFeatures.spokenFeedback) {
       chrome.accessibilityFeatures.spokenFeedback.get({}, function(details) {
         terminal.setAccessibilityEnabled(details.value);
         runCrosh();
