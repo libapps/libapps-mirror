@@ -411,6 +411,10 @@
 		"description": "Help text shown for the hterm 'foreground-color' preference.",
 		"message": "The foreground color for text with no other color attributes."
 	},
+	"HTERM_PREF_HIDE_MOUSE_WHILE_TYPING": {
+		"description": "Help text shown for the hterm 'hide-mouse-while-typing' preference.",
+		"message": "Whether to automatically hide the mouse cursor when typing.\n\nNote: Some operating systems may override this setting and thus you might not be able to always disable it."
+	},
 	"HTERM_PREF_HOME_KEYS_SCROLL": {
 		"description": "Help text shown for the hterm 'home-keys-scroll' preference. 'Home', 'End', and 'Shift' are the keyboard buttons and may be translated as makes sense.",
 		"message": "If true, Home/End controls the terminal scrollbar and Shift-Home/Shift-End are sent to the remote host. If false, then Home/End are sent to the remote host and Shift-Home/Shift-End scrolls."
