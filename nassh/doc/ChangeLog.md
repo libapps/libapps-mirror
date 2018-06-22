@@ -1,3 +1,11 @@
+# 0.8.44.1, 2018-06-22, Extension startup fix.
+
+* Update to hterm 1.80.  Minor tweaks.
+* prefs: Support translating hterm categories.
+* Automatically add -oSendEnv args for hterm env vars.
+* Fix a11y crash in extension on non-CrOS systems.
+* FAQ: Document mouse cursor customization.
+
 # 0.8.44, 2018-06-20, OpenSSH 7.7p1, Unicode 11.0.0, and bug fixes.
 
 * Update to libdot 1.22.  Unicode 11.0.0 updates and new helpers.
