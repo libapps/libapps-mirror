@@ -757,6 +757,30 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   The default setting is 'antialiased'.
 
 
+### How do I customize the mouse pointer?
+
+  You can customize these via the 'user-css' or 'user-css-text' fields.
+
+  There are two mouse styles you will encounter: text and pointer.
+  The 'text' style is the one you'll see most of the time and is the "i-beam"
+  by default.
+  The 'pointer' style is used when the terminal is in "mouse mode".
+
+  Here's an example to change them:
+
+    :root {
+      --hterm-mouse-cursor-text: url("https://developer.mozilla.org/files/3809/text.gif") 14 13;
+      --hterm-mouse-cursor-pointer: url("https://developer.mozilla.org/@api/deki/files/3449/=pointer.gif") 14 13;
+    }
+
+  The two numbers after the `url(...)` are optional.
+  They are pixel offsets to control the center/focus of the cursor.
+  Feel free to adjust them until the mouse cursor feels natural.
+
+  For more details on the syntax, consult the
+  [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor).
+
+
 ### How do I make the cursor blink?
 
   You should manage your preferences under the Secure Shell Options page.
