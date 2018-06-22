@@ -769,13 +769,16 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   Here's an example to change them:
 
     :root {
-      --hterm-mouse-cursor-text: url("https://developer.mozilla.org/files/3809/text.gif") 14 13;
-      --hterm-mouse-cursor-pointer: url("https://developer.mozilla.org/@api/deki/files/3449/=pointer.gif") 14 13;
+      --hterm-mouse-cursor-text: url("https://developer.mozilla.org/files/3809/text.gif") 14 13, text;
+      --hterm-mouse-cursor-pointer: url("https://developer.mozilla.org/@api/deki/files/3449/=pointer.gif") 14 13, pointer;
     }
 
   The two numbers after the `url(...)` are optional.
   They are pixel offsets to control the center/focus of the cursor.
   Feel free to adjust them until the mouse cursor feels natural.
+
+  Remember to specify a fallback keyword (`text` and `pointer` in the example)
+  when using `url(...)`, otherwise the browser will silently ignore the setting.
 
   For more details on the syntax, consult the
   [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor).
