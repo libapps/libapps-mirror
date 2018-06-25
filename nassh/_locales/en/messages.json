@@ -239,6 +239,14 @@
 		"description": "Button label for blocking the requested feature.",
 		"message": "Block"
 	},
+	"HTERM_BUTTON_PAGE_DOWN": {
+		"description": "Button label for scrolling down one page in the terminal output history.",
+		"message": "Page down"
+	},
+	"HTERM_BUTTON_PAGE_UP": {
+		"description": "Button label for scrolling up one page in the terminal output history.",
+		"message": "Page up"
+	},
 	"HTERM_LOADING_RESOURCE_FAILED": {
 		"description": "Message shown to the user when loading a resource (image, audio file, video, etc...) failed for any reason.",
 		"message": "Loading $RESOURCE$ failed",
