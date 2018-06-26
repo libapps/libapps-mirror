@@ -227,6 +227,16 @@
 			}
 		}
 	},
+	"HTERM_ANNOUNCE_CURRENT_SCREEN_HEADER": {
+		"description": "Message spoken to a user through Assistive Technology when they page up/down through the scrollport. It describes the current position in the document.",
+		"message": "$PERCENT$% scrolled,",
+		"placeholders": {
+			"percent": {
+				"content": "$1",
+				"example": "15"
+			}
+		}
+	},
 	"HTERM_BUTTON_ALLOW_ALWAYS": {
 		"description": "Button label for always allowing the requested feature.",
 		"message": "Always allow"
