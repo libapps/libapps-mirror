@@ -72,6 +72,8 @@ Crosh.init = function() {
   terminal.onTerminalReady = function() {
     if (window.chrome && chrome.accessibilityFeatures &&
         chrome.accessibilityFeatures.spokenFeedback) {
+      chrome.accessibilityFeatures.spokenFeedback.onChange.addListener(
+          (details) => terminal.setAccessibilityEnabled(details.value));
       chrome.accessibilityFeatures.spokenFeedback.get({}, function(details) {
         terminal.setAccessibilityEnabled(details.value);
         runCrosh();
