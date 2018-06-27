@@ -22,7 +22,7 @@ if [[ "$1" == "-h" || "$1" == "--help" ]]; then
   usage 0
 fi
 
-zip="$(realpath "$1")"
+zip="$(readlink -f "$1")"
 if [[ ! -e "${zip}" ]]; then
   echo_err "ZIP file does not exist: ${zip}"
   exit 1
