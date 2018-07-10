@@ -124,6 +124,9 @@ nassh.App.prototype.omniboxOnInputChanged_ = function(text, suggest) {
 /**
  * Callback when the user has finish entering text.
  *
+ * See the omnibox source for what key strokes generate which dispositions.
+ * https://chromium.googlesource.com/chromium/src/+/69.0.3487.1/chrome/browser/ui/views/omnibox/omnibox_view_views.cc#1188
+ *
  * @param {string} text The text to operate on.
  * @param {string} disposition Mode the user wants us to open as.
  */
@@ -145,6 +148,7 @@ nassh.App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
     default:
       console.warn('unknown disposition: ' + disposition);
     case 'currentTab':
+      // Fired when pressing Enter.
       // Ideally we'd just call chrome.tabs.update, but that won't focus the
       // new ssh session.  We close the current tab and then open a new one
       // right away -- Chrome will focus the content for us.
@@ -154,9 +158,11 @@ nassh.App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
       chrome.tabs.create({url: url, active: true});
       break;
     case 'newBackgroundTab':
+      // Fired when pressing Meta-Enter/Command-Enter.
       chrome.tabs.create({url: url, active: false});
       break;
     case 'newForegroundTab':
+      // Fired when pressing Alt-Enter.
       // Close the active tab.  We need to do this before opening a new window
       // in case Chrome selects that as the new active tab.  It won't kill us
       // right away though as the JS execution model guarantees we'll finish

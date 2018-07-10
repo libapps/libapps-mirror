@@ -456,8 +456,9 @@ different app, visit the chrome://settings/handlers page.
   a match to an existing profile, or type a new connection using the format
   defined in the Direct links section above.
 
-  You can open it in the existing tab by hitting enter, or opening it in a new
-  window by hitting alt+enter.
+  You can open it in the existing tab by pressing Enter, or opening it in a new
+  window by pressing Alt-Enter, or opening it in a new background tab by
+  pressing Command-Enter/Meta-Enter.
 
 
 ### How do multiple extensions/apps work with the omnibox?
