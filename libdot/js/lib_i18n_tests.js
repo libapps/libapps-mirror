@@ -24,6 +24,19 @@ lib.i18n.Tests.addTest('getAcceptLanguages', function(result, cx) {
 });
 
 /**
+ * Basic sanity test.  Hard to validate real values here.
+ */
+lib.i18n.Tests.addTest('getMessage', function(result, cx) {
+  // There shouldn't be any registered messages.
+  result.assertEQ('', lib.i18n.getMessage('ID'));
+
+  // Check fallback message.
+  result.assertEQ('yes', lib.i18n.getMessage('ID', null, 'yes'));
+
+  result.pass();
+});
+
+/**
  * Check replacements happen as expected.
  *
  * We don't bother checking lib.i18n.getMessage.

@@ -38,6 +38,28 @@ lib.i18n.getAcceptLanguages = function(callback) {
 };
 
 /**
+ * Get a message by name, optionally replacing arguments too.
+ *
+ * https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/i18n/getMessage
+ *
+ * @param {string} msgname The id for this localized string.
+ * @param {string[]=} substitutions Any replacements in the string.
+ * @param {string=} fallback Translation if the message wasn't found.
+ * @return {string} The translated message.
+ */
+lib.i18n.getMessage = function(msgname, substitutions = [], fallback = '') {
+  // First let the native browser APIs handle everything for us.
+  if (lib.i18n.browser_) {
+    const message = lib.i18n.browser_.getMessage(msgname, substitutions);
+    if (message)
+      return message;
+  }
+
+  // Do our best to get something reasonable.
+  return lib.i18n.replaceReferences(fallback, substitutions);
+};
+
+/**
  * Replace $1...$n references with the elements of the args array.
  *
  * This largely behaves like Chrome's getMessage helper.  The $# references are

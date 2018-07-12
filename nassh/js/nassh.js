@@ -41,12 +41,7 @@ lib.registerInit('nassh', function(onInit) {
  * @param {Array} opt_args The message arguments, if required.
  */
 nassh.msg = function(name, opt_args) {
-  if (!chrome.i18n)
-    return name;
-
-  var rv = chrome.i18n.getMessage(name, opt_args);
-  if (!rv)
-    console.log('Missing message: ' + name);
+  const rv = lib.i18n.getMessage(name, opt_args, name);
 
   // Since our translation process only preserves \n (and discards \r), we have
   // to manually insert them here ourselves.  Any place we display translations

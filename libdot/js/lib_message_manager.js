@@ -127,10 +127,11 @@ lib.MessageManager.prototype.get = function(msgname, opt_args, opt_default) {
     message = this.messages[msgname];
 
   } else {
-    if (window.chrome && window.chrome.i18n)
-      message = chrome.i18n.getMessage(msgname);
-
-    if (!message) {
+    // First try the integrated browser getMessage.
+    message = lib.i18n.getMessage(msgname, opt_args);
+    if (message) {
+      return message;
+    } else {
       console.warn('Unknown message: ' + msgname);
       message = opt_default === undefined ? msgname : opt_default;
       // Register the message with the default to avoid multiple warnings.
