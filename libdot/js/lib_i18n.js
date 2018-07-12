@@ -36,3 +36,27 @@ lib.i18n.getAcceptLanguages = function(callback) {
       }, 0);
   }
 };
+
+/**
+ * Replace $1...$n references with the elements of the args array.
+ *
+ * This largely behaves like Chrome's getMessage helper.  The $# references are
+ * always replaced/removed regardless of the specified substitutions.
+ *
+ * @param {string} msg String containing the message and argument references.
+ * @param {string[]=} args Array containing the argument values.
+ * @return {string} The message with replacements expanded.
+ */
+lib.i18n.replaceReferences = function(msg, args = []) {
+  // The Chrome API allows a single substitution as a string rather than array.
+  if (args === null) {
+    args = [];
+  }
+  if (!(args instanceof Array)) {
+    args = [args];
+  }
+
+  return msg.replace(/\$(\d+)/g, (m, index) => {
+    return index <= args.length ? args[index - 1] : '');
+  });
+};

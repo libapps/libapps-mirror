@@ -22,3 +22,20 @@ lib.i18n.Tests.addTest('getAcceptLanguages', function(result, cx) {
 
   result.requestTime(1000);
 });
+
+/**
+ * Check replacements happen as expected.
+ *
+ * We don't bother checking lib.i18n.getMessage.
+ */
+lib.i18n.Tests.addTest('replaceReferences', function(result, cx) {
+  // Empty substitutions.
+  result.assertEQ('foba', lib.i18n.replaceReferences('fo$1ba', null));
+  result.assertEQ('foba', lib.i18n.replaceReferences('fo$1ba', undefined));
+  result.assertEQ('foba', lib.i18n.replaceReferences('fo$1ba', []));
+
+  // Too few substitutions.
+  result.assertEQ('foXbar', lib.i18n.replaceReferences('fo$1ba$2r', ['X']));
+
+  result.pass();
+});

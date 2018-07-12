@@ -108,22 +108,9 @@ lib.MessageManager.prototype.loadMessages = function(
 };
 
 /**
- * Replace $1...$n references with the elements of the args array.
- *
- * @param {string} msg String containing the message and argument references.
- * @param {Array} args Array containing the argument values.
- */
-lib.MessageManager.replaceReferences = function(msg, args) {
-  return msg.replace(/\$(\d+)/g, function (m, index) {
-      return args[index - 1];
-    });
-};
-
-/**
  * Per-instance copy of replaceReferences.
  */
-lib.MessageManager.prototype.replaceReferences =
-    lib.MessageManager.replaceReferences;
+lib.MessageManager.prototype.replaceReferences = lib.i18n.replaceReferences;
 
 /**
  * Get a message by name, optionally replacing arguments too.
@@ -150,12 +137,6 @@ lib.MessageManager.prototype.get = function(msgname, opt_args, opt_default) {
       this.messages[msgname] = message;
     }
   }
-
-  if (!opt_args)
-    return message;
-
-  if (!(opt_args instanceof Array))
-    opt_args = [opt_args];
 
   return this.replaceReferences(message, opt_args);
 };
