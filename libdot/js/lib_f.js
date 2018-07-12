@@ -75,26 +75,6 @@ lib.f.replaceVars.functions = {
 };
 
 /**
- * Get the list of accepted UI languages.
- *
- * @param {function(Array)} callback Function to invoke with the results.  The
- *     parameter is a list of locale names.
- */
-lib.f.getAcceptLanguages = function(callback) {
-  if (lib.f.getAcceptLanguages.chromeSupported()) {
-    chrome.i18n.getAcceptLanguages(callback);
-  } else {
-    setTimeout(function() {
-        callback([navigator.language.replace(/-/g, '_')]);
-      }, 0);
-  }
-};
-
-lib.f.getAcceptLanguages.chromeSupported = function() {
-  return window.chrome && chrome.i18n;
-};
-
-/**
  * Parse a query string into a hash.
  *
  * This takes a url query string in the form 'name1=value&name2=value' and
