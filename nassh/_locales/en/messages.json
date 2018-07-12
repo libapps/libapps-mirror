@@ -537,6 +537,10 @@
 		"description": "Help text shown for the hterm 'word-break-match-right' preference.",
 		"message": "Regular expression to halt matching to the right (end) of a selection.\n\nNormally this is a character class to reject specific characters."
 	},
+	"HTERM_SPACE_CHARACTER": {
+		"description": "The word describing the space character (' '). That is, the character entered when space bar is pressed. Used for accessibility announcements.",
+		"message": "Space"
+	},
 	"HTERM_TITLE_PREF_APPEARANCE": {
 		"description": "Header for the hterm Appearance preference category. Shown above all appearance/theme related settings.",
 		"message": "Appearance (fonts, colors, images)"
