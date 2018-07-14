@@ -57,6 +57,6 @@ lib.i18n.replaceReferences = function(msg, args = []) {
   }
 
   return msg.replace(/\$(\d+)/g, (m, index) => {
-    return index <= args.length ? args[index - 1] : '');
+    return index <= args.length ? args[index - 1] : '';
   });
 };
