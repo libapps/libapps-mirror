@@ -121,22 +121,19 @@ lib.MessageManager.prototype.replaceReferences = lib.i18n.replaceReferences;
  *     found.  Returns the message name by default.
  */
 lib.MessageManager.prototype.get = function(msgname, opt_args, opt_default) {
-  var message;
+  // First try the integrated browser getMessage.  We prefer that over any
+  // registered messages as only the browser supports translations.
+  let message = lib.i18n.getMessage(msgname, opt_args);
+  if (message)
+    return message;
 
-  if (msgname in this.messages) {
-    message = this.messages[msgname];
-
-  } else {
-    // First try the integrated browser getMessage.
-    message = lib.i18n.getMessage(msgname, opt_args);
-    if (message) {
-      return message;
-    } else {
-      console.warn('Unknown message: ' + msgname);
-      message = opt_default === undefined ? msgname : opt_default;
-      // Register the message with the default to avoid multiple warnings.
-      this.messages[msgname] = message;
-    }
+  // Look it up in the registered cache next.
+  message = this.messages[msgname];
+  if (!message) {
+    console.warn('Unknown message: ' + msgname);
+    message = opt_default === undefined ? msgname : opt_default;
+    // Register the message with the default to avoid multiple warnings.
+    this.messages[msgname] = message;
   }
 
   return this.replaceReferences(message, opt_args);
