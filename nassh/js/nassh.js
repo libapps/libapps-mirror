@@ -214,11 +214,18 @@ nassh.reloadWindow = function() {
 };
 
 /**
- * Register this extension to handle ssh:// URIs.
+ * Register this extension to handle URIs like ssh://.
+ *
+ * The protocol should be one allowed by the specifications:
+ * https://html.spec.whatwg.org/multipage/webappapis.html#webappapis
+ * https://chromium.googlesource.com/chromium/src/+blame/master/third_party/WebKit/Source/modules/navigatorcontentutils/NavigatorContentUtils.cpp
+ * https://www.iana.org/assignments/uri-schemes/prov/sftp
+ *
+ * @param {string} proto The protocol name to register.
  */
-nassh.registerProtocolHandler = function() {
+nassh.registerProtocolHandler = function(proto) {
   navigator.registerProtocolHandler(
-    'ssh',
+    proto,
     chrome.runtime.getURL('html/nassh.html#uri:%s'),
     chrome.runtime.getManifest().name);
 };

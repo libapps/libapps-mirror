@@ -440,7 +440,7 @@ nassh.ConnectDialog.prototype.connect = function(name, argv) {
   this.save();
 
   // Since the user has initiated this connection, register the protocol.
-  nassh.registerProtocolHandler();
+  nassh.registerProtocolHandler('ssh');
 
   var items = {
     '/nassh/connectDialog/lastProfileId': this.currentProfileRecord_.id
