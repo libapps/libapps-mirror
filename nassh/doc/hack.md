@@ -353,6 +353,12 @@ or mounting), a message is sent to [nassh_command_instance.js].  There the
 connection dialog is closed, the NaCl plugin is loaded, and the streams are
 connected to hterm.
 
+## Exit Codes
+
+Since the ssh program uses positive exit statuses, we tend to use -1 for
+internal exit states in the JS code.
+It doesn't matter too much as the exit values are purely for showing the user.
+
 ## JS->NaCl API
 
 Here is the API that the JS code uses to communicate with the NaCl [ssh_client]

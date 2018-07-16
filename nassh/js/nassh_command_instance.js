@@ -99,6 +99,12 @@ nassh.CommandInstance.run = function(argv) {
 };
 
 /**
+ * When the command exit is from nassh instead of ssh_client.  The ssh module
+ * can only ever exit with positive values, so negative values are reserved.
+ */
+nassh.CommandInstance.EXIT_INTERNAL_ERROR = -1;
+
+/**
  * Start the nassh command.
  *
  * Instance run method invoked by the nassh.CommandInstance ctor.
@@ -208,7 +214,7 @@ nassh.CommandInstance.prototype.run = function() {
       this.promptForDestination_();
     } else if (!this.connectToArgString(argstr)) {
       this.io.println(nassh.msg('BAD_DESTINATION', [this.argv_.argString]));
-      this.exit(1);
+      this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR);
     }
   };
 };
@@ -434,7 +440,7 @@ nassh.CommandInstance.prototype.mountProfile = function(
       var prefs = this.prefs_.getProfile(profileID);
     } catch (e) {
       this.io.println(nassh.msg('GET_PROFILE_ERROR', [profileID, e]));
-      this.exit(1, true);
+      this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
       return;
     }
 
@@ -443,7 +449,7 @@ nassh.CommandInstance.prototype.mountProfile = function(
     if (chrome.extension.getBackgroundPage()
         .nassh.sftp.fsp.sftpInstances[prefs.id]) {
       this.io.println(nassh.msg('ALREADY_MOUNTED_MESSAGE'));
-      this.exit(1, true);
+      this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
       return;
     }
 
@@ -491,7 +497,7 @@ nassh.CommandInstance.prototype.connectToProfile = function(
       var prefs = this.prefs_.getProfile(profileID);
     } catch (e) {
       this.io.println(nassh.msg('GET_PROFILE_ERROR', [profileID, e]));
-      this.exit(1, true);
+      this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
       return;
     }
 
@@ -775,7 +781,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
                                         this.storage);
     } catch (e) {
       this.io.println(nassh.msg('RELAY_OPTIONS_ERROR', [e]));
-      this.exit(-1);
+      this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR);
       return false;
     }
 
@@ -958,7 +964,7 @@ nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
   var errorHandler = (ev) => {
     this.io.println(nassh.msg('PLUGIN_LOADING_FAILED'));
     console.error('loading plugin failed', ev);
-    this.exit(-1);
+    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR);
   };
   this.plugin_.addEventListener('crash', errorHandler);
   this.plugin_.addEventListener('error', errorHandler);
