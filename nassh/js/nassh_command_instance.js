@@ -212,9 +212,8 @@ nassh.CommandInstance.prototype.run = function() {
       this.storage.setItem('nassh.promptOnReload', 'yes');
 
       this.promptForDestination_();
-    } else if (!this.connectToArgString(argstr)) {
-      this.io.println(nassh.msg('BAD_DESTINATION', [this.argv_.argString]));
-      this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR);
+    } else {
+      this.connectToArgString(argstr);
     }
   };
 };
@@ -390,26 +389,19 @@ nassh.CommandInstance.prototype.connectToArgString = function(argstr) {
 
   // Handle profile-id:XXX forms.  These are bookmarkable.
   var ary = argstr.match(/^profile-id:([a-z0-9]+)(\?.*)?/i);
-  var rv;
   if (ary) {
-
     if (isSftp) {
-      rv = this.mountProfile(ary[1], ary[2]);
+      this.mountProfile(ary[1], ary[2]);
     } else {
-      rv = this.connectToProfile(ary[1], ary[2]);
+      this.connectToProfile(ary[1], ary[2]);
     }
-
   } else {
-
     if (isSftp) {
-      rv = this.mountDestination(argstr);
+      this.mountDestination(argstr);
     } else {
-      rv = this.connectToDestination(argstr);
+      this.connectToDestination(argstr);
     }
-
   }
-
-  return rv;
 };
 
 /**
@@ -483,7 +475,6 @@ nassh.CommandInstance.prototype.mountProfile = function(
   // Re-read prefs from storage in case they were just changed in the connect
   // dialog.
   this.prefs_.readStorage(onReadStorage);
-  return true;
 };
 
 /**
@@ -516,8 +507,6 @@ nassh.CommandInstance.prototype.connectToProfile = function(
   // Re-read prefs from storage in case they were just changed in the connect
   // dialog.
   this.prefs_.readStorage(onReadStorage);
-
-  return true;
 };
 
 /**
@@ -647,37 +636,39 @@ nassh.CommandInstance.parseDestination = function(destination) {
  * Initiate a connection to a remote host given a destination string.
  *
  * @param {string} destination A string of the form username@host[:port].
- * @return {boolean} True if we were able to parse the destination string,
- *     false otherwise.
  */
 nassh.CommandInstance.prototype.connectToDestination = function(destination) {
   if (destination == 'crosh') {
     this.terminalLocation.href = 'crosh.html';
-    return true;
+    return;
   }
 
   var rv = nassh.CommandInstance.parseDestination(destination);
-  if (rv === false)
-    return rv;
+  if (rv === false) {
+    this.io.println(nassh.msg('BAD_DESTINATION', [destination]));
+    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+    return;
+  }
 
   // We have to set the url here rather than in connectToArgString, because
   // some callers may come directly to connectToDestination.
   this.terminalLocation.hash = rv.uri;
 
-  return this.connectTo(rv);
+  this.connectTo(rv);
 };
 
 /**
  * Mount a remote host given a destination string.
  *
  * @param {string} destination A string of the form username@host[:port].
- * @return {boolean} True if we were able to parse the destination string,
- *     false otherwise.
  */
 nassh.CommandInstance.prototype.mountDestination = function(destination) {
   var rv = nassh.CommandInstance.parseDestination(destination);
-  if (rv === false)
-    return rv;
+  if (rv === false) {
+    this.io.println(nassh.msg('BAD_DESTINATION', [destination]));
+    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+    return;
+  }
 
   // We have to set the url here rather than in connectToArgString, because
   // some callers may come directly to connectToDestination.
@@ -701,7 +692,7 @@ nassh.CommandInstance.prototype.mountDestination = function(destination) {
     connectOptions: rv,
   };
 
-  return chrome.extension.getBackgroundPage().
+  chrome.extension.getBackgroundPage().
     nassh.sftp.fsp.createSftpInstance(args);
 };
 
@@ -759,12 +750,13 @@ nassh.CommandInstance.splitCommandLine = function(argstr) {
  * @param {string} username The username to provide.
  * @param {string} hostname The hostname or IP address to connect to.
  * @param {string|integer} opt_port The optional port number to connect to.
- * @return {boolean} False if there was some trouble with the parameters, true
- *     otherwise.
  */
 nassh.CommandInstance.prototype.connectTo = function(params) {
-  if (!(params.username && params.hostname))
-    return false;
+  if (!(params.username && params.hostname)) {
+    this.io.println(nassh.msg('MISSING_PARAM', ['username/hostname']));
+    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+    return;
+  }
 
   if (params.hostname == '>crosh') {
     // TODO: This will need to be done better.  document.location changes don't
@@ -781,8 +773,8 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
                                         this.storage);
     } catch (e) {
       this.io.println(nassh.msg('RELAY_OPTIONS_ERROR', [e]));
-      this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR);
-      return false;
+      this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+      return;
     }
 
     // TODO(rginda): The `if (relay.proxyHost)` test is part of a goofy hack
@@ -818,7 +810,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
         }
 
         this.relay_.redirect();
-        return true;
+        return;
       }
     }
 
@@ -833,8 +825,8 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   if (!this.sshClientVersion_.match(/^[a-zA-Z0-9.-]+$/)) {
     this.io.println(nassh.msg('UNKNOWN_SSH_CLIENT_VERSION',
                               [this.sshClientVersion_]));
-    this.exit(127);
-    return false;
+    this.exit(127, true);
+    return;
   }
 
   this.authAgentAppID_ = params.authAgentAppID;
@@ -920,8 +912,6 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
         this.sftpClient.initConnection(this.plugin_);
       }
     });
-
-  return true;
 };
 
 /**
@@ -964,7 +954,7 @@ nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
   var errorHandler = (ev) => {
     this.io.println(nassh.msg('PLUGIN_LOADING_FAILED'));
     console.error('loading plugin failed', ev);
-    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR);
+    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
   };
   this.plugin_.addEventListener('crash', errorHandler);
   this.plugin_.addEventListener('error', errorHandler);
@@ -1148,9 +1138,7 @@ nassh.CommandInstance.prototype.onConnectDialog_.mountProfile = function(
     dialogFrame, profileID) {
   dialogFrame.close();
 
-  if (!this.mountProfile(profileID)) {
-    this.promptForDestination_();
-  }
+  this.mountProfile(profileID);
 };
 
 /**
@@ -1160,8 +1148,7 @@ nassh.CommandInstance.prototype.onConnectDialog_.connectToProfile = function(
     dialogFrame, profileID) {
   dialogFrame.close();
 
-  if (!this.connectToProfile(profileID))
-    this.promptForDestination_();
+  this.connectToProfile(profileID);
 };
 
 /**

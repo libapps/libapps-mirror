@@ -26,7 +26,7 @@ nassh.sftp.fsp.DATA_LIMIT = 32768;
  */
 nassh.sftp.fsp.createSftpInstance = function(args) {
   var sftpInstance = new nassh.CommandInstance(args.argv);
-  return sftpInstance.connectTo(args.connectOptions);
+  sftpInstance.connectTo(args.connectOptions);
 };
 
 /**
