@@ -160,4 +160,7 @@ function echo_changelog() {
   fi
 }
 
-source "${LIBDOT_BIN_DIR}/node.sh"
+# TODO: Remove this $PN hack once we have a better solution for crosh.
+if [[ "${PN}" != "crosh" ]]; then
+  source "${LIBDOT_BIN_DIR}/node.sh"
+fi
