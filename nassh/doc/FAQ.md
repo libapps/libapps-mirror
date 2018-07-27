@@ -319,8 +319,19 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 
 ### Are blowfish-cbc, cast128-cbc, arcfour variants, the rijndael-cbc AES aliases, and 3des-cbc ciphers supported?
 
-  Not anymore.  You'll need to use a different client to connect if those are
-  the only ciphers your server supports.
+  Secure Shell uses [OpenSSH], and [OpenSSH] has deprecated or dropped these as
+  they are legacy and weak or insecure.
+
+  You can find out what ciphers are still supported by adding `-Q ciphers` to
+  the ssh command line.
+  If the cipher you want is listed there, you can use the `-c` option on the ssh
+  command line to enable it.
+
+  If the cipher you want is not listed there, then it isn't supported.
+  You'll need to use a different client to connect if those are the only ciphers
+  your server supports.
+
+  See the [OpenSSH legacy options] page for more details.
 
 
 ### Are RSA keys smaller than 1024 bits supported?
@@ -336,6 +347,8 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 
   Not anymore.  You'll need to use a different client to connect if those are
   the only ciphers your server supports.
+
+  See the [OpenSSH legacy options] page for more details.
 
 
 ### How do I remove a key?
@@ -1158,6 +1171,7 @@ You'll have to adjust your keyboard/muscle memory accordingly.
 [osc52.sh]: ../../hterm/etc/osc52.sh
 [osc52.vim]: ../../hterm/etc/osc52.vim
 [chromium-hterm mailing list]: https://goo.gl/RYHiK
+[OpenSSH]: https://www.openssh.com/
 [OpenSSH legacy options]: https://www.openssh.com/legacy.html
 [Keyboard Bindings]: ../../hterm/doc/KeyboardBindings.md
 [Wayland]: https://wayland.freedesktop.org/
