@@ -367,15 +367,22 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 
 ### Is IPv6 supported?
 
-  Mostly.  You can connect to hostnames that resolve to IPv6 addresses, and
-  you can connect directly IPv6 addresses.  Enter them in the connection
-  manager like any other hostname or IPv4 address.
+  Yes (although see next section on zone ids).
+  You can connect to hostnames that resolve to IPv6 addresses,
+  and you can connect directly to IPv6 addresses.
+  Enter them in the connection manager like any other hostname or IPv4 address.
 
-  When using links (see the next section), you'll need to use the standard
-  bracket style such as `[::1]`.
+  When using links (see the bookmark section below), you'll need to use the
+  standard bracket style such as `[::1]`.
 
-  However, [zone ids](https://tools.ietf.org/html/rfc4007#section-11) are not
-  yet supported.
+
+### Are IPv6 zone ids supported?
+
+  Unfortunately, we can only support what the browser supports, and Chrome
+  [does not currently support zone ids](https://crbug.com/70762).
+
+  Note: [Zone ids](https://tools.ietf.org/html/rfc4007#section-11) are
+  sometimes incorrectly referred to as scope ids.
 
 
 ### Can I create bookmarks to specific sites?
