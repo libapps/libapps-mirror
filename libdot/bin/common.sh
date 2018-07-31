@@ -144,22 +144,6 @@ function get_manifest_key_value() {
   echo "$(expr "$line" : '.*\":[[:space:]]*\"\([^\"]*\)')"
 }
 
-function echo_changelog() {
-  local key="$1"
-  local file="${2:-../doc/ChangeLog.md}"
-
-  if [ -z "$key" ]; then
-    head -n1 "$file"
-  elif [ "$key" = "version" ]; then
-    head -n1 "$file" | cut -f1 -d',' | sed -e 's/[ #]//g'
-  elif [ "$key" = "date" ]; then
-    head -n1 "$file" | cut -f2 -d',' | sed -e 's/ //g'
-  else
-    echo_err "Unknown key: $key"
-    return 1
-  fi
-}
-
 # TODO: Remove this $PN hack once we have a better solution for crosh.
 if [[ "${PN}" != "crosh"* ]]; then
   source "${LIBDOT_BIN_DIR}/node.sh"

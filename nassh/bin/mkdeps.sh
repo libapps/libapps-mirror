@@ -8,5 +8,5 @@ source "${LIBDOT_DIR}/bin/common.sh"
 
 cd "${BIN_DIR}/.."
 
-concat.sh -i ./concat/nassh_deps.concat \
+concat -i ./concat/nassh_deps.concat \
   -o ./js/nassh_deps.concat.js "$@"

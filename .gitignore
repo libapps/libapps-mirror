@@ -1,6 +1,7 @@
 *~
 \#*
 .#*
+__pycache__/
 
 # Stuff we build for distribution
 dist

@@ -9,7 +9,7 @@
  *
  * These are usually non-JavaScript things that are collected during a build
  * step and converted into a series of 'lib.resource.add(...)' calls.  See
- * the "@resource" directive from libdot/bin/concat.sh for the canonical use
+ * the "@resource" directive from libdot/bin/concat for the canonical use
  * case.
  *
  * This is global storage, so you should prefix your resource names to avoid

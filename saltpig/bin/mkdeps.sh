@@ -8,5 +8,5 @@ source "${LIBDOT_DIR}/bin/common.sh"
 
 cd "${BIN_DIR}/.."
 
-concat.sh "$1" -i ./concat/sp_deps.concat \
+concat "$@" -i ./concat/sp_deps.concat \
   -o ./js/sp_deps.concat.js

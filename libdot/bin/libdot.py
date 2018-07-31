@@ -17,6 +17,7 @@ import time
 
 BIN_DIR = os.path.dirname(os.path.realpath(__file__))
 DIR = os.path.dirname(BIN_DIR)
+LIBAPPS_DIR = os.path.dirname(DIR)
 
 
 def setup_logging(debug=False):
