@@ -65,6 +65,9 @@ The [bin/lint.sh](./libdot/bin/lint.sh) helper script will run both for you.
 The [.eslintrc.js](./.eslintrc.js) is copied from the
 [Chromium project](https://chromium.googlesource.com/chromium/src/+/master/.eslintrc.js).
 
+For build tools writtin in Python, you can use [bin/pylint](./libdot/bin/pylint)
+to run [pylint](https://www.pylint.org/) with the right settings.
+
 ## Console Logging
 
 The `console.log` functions have a variety of function signatures.  We like to

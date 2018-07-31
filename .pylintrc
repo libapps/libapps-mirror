@@ -1,0 +1,40 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+[MESSAGES CONTROL]
+
+# not-callable throws a lot of false positives with pylint-1.6.
+disable=
+    fixme,
+    invalid-name,
+    locally-enabled,
+    locally-disabled,
+    not-callable,
+    relative-import,
+    too-few-public-methods,
+    too-many-arguments,
+    too-many-branches,
+    too-many-instance-attributes,
+    too-many-lines,
+    too-many-locals,
+    too-many-public-methods,
+    too-many-statements,
+
+
+[REPORTS]
+
+# Disable verbose reports.
+reports = no
+
+
+[SIMILARITIES]
+
+# Minimum lines number of a similarity.
+min-similarity-lines = 8
+
+
+[IMPORTS]
+
+# Deprecated modules which should not be used, separated by a comma.
+deprecated-modules = regsub,TERMIOS,Bastion,rexec,optparse
