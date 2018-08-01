@@ -306,6 +306,10 @@ nassh.GoogleRelay.findGnubbyExtension = function() {
   // Ping the extension to see if it's installed/enabled/alive.
   const check = (id) => new Promise((resolve, reject) => {
     chrome.runtime.sendMessage(id, {'type': 'HELLO'}, (result) => {
+      // If the remote side doesn't exist (which is normal), Chrome complains
+      // if we don't read the lastError.  Clear that here.
+      lib.f.lastError();
+
       // If the probe worked, return the id, else return nothing so we can
       // clear out all the pending promises.
       if (result !== undefined && result['rc'] == 0)
