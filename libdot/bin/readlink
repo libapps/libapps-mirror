@@ -1,27 +1,39 @@
-#!/bin/sh
-# Copyright (c) 2013 The Chromium OS Authors. All rights reserved.
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-# An alternate implementation of readlink that supports the non-standard -f
-# option. Note that this implementation of -f implies -m, but that shouldn't
-# matter as readlink isn't used to find missing directories, only canonicize
-# paths.
+"""An alternate implementation of readlink that supports the non-standard -f.
+
+Note that this implementation of -f implies -m, but that shouldn't matter as
+readlink isn't used to find missing directories, only canonicalize paths.
+"""
+
+from __future__ import print_function
+
+import argparse
+import os
+import sys
 
 
-if [ "$1" = "-f" ]; then
-  if [ "$2" = "--" ]; then
-    shift
-  fi
-  if [ $# -ne 2 ]; then
-    echo "Usage: readlink -f [--] <path>" >&2
-    exit 1
-  fi
-  exec python -c 'import os,sys; print(os.path.realpath(sys.argv[1]))' "$2"
-else
-  if [ -x /bin/readlink ]; then
-    exec /bin/readlink "$@"
-  else
-    exec /usr/bin/readlink "$@"
-  fi
-fi
+def get_parser():
+    """Get a command line parser."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('-f', '--canonicalize', action='store_true',
+                        help='Canonicalize the paths.')
+    parser.add_argument('paths', nargs='+',
+                        help='Paths to process.')
+    return parser
+
+
+def main(argv):
+    """The main func!"""
+    parser = get_parser()
+    opts = parser.parse_args(argv)
+    for path in opts.paths:
+        print(os.path.realpath(path))
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))
