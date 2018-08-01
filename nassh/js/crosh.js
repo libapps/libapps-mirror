@@ -16,6 +16,7 @@ window.onload = function() {
     Crosh.prototype.commandName = qs['command'];
   window.document.title = Crosh.prototype.commandName;
 
+  nassh.disableTabDiscarding();
   lib.init(Crosh.init);
 };
 

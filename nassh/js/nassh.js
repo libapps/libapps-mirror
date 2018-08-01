@@ -229,3 +229,20 @@ nassh.registerProtocolHandler = function(proto) {
     chrome.runtime.getURL('html/nassh.html#uri:%s'),
     chrome.runtime.getManifest().name);
 };
+
+/**
+ * Disable automatic tab discarding for our windows.
+ *
+ * Newer versions of Chrome are a bit more proactive in discarding tabs.  Signal
+ * that we shouldn't be discarded as restarting crosh/ssh sessions is not easy
+ * for users.
+ * https://crbug.com/868155
+ *
+ * Note: This code updates tab properties asynchronously, but that should be
+ * fine for our usage as we don't generally create windows/tabs on the fly.
+ */
+nassh.disableTabDiscarding = function() {
+  chrome.tabs.query({currentWindow: true}, (tabs) => {
+    tabs.forEach((tab) => chrome.tabs.update(tab.id, {autoDiscardable: false}));
+  });
+};

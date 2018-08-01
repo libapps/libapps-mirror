@@ -82,6 +82,7 @@ window.onload = function() {
         onUpdateAvailable();
     }
 
+    nassh.disableTabDiscarding();
     lib.init(execNaSSH, console.log.bind(console));
   });
 };
