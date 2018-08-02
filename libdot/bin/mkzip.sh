@@ -60,6 +60,7 @@ the key and name intact.
 
 LIBDOT_DIR="$(dirname -- "$0")/../../libdot"
 source "${LIBDOT_DIR}/bin/common.sh"
+source "${LIBDOT_BIN_DIR}/shflags"
 
 DEFINE_string filename "" \
   "The new zip filename.  Computed from manifest.json if not specified." f
@@ -96,22 +97,6 @@ FILE_PATTERNS='
 FILE_PATTERNS="$FILE_PATTERNS$MORE_FILE_PATTERNS"
 
 FILE_PATTERNS_EXCLUDE="$MORE_FILE_PATTERNS_EXCLUDE"
-
-#
-# Echo "yes" if a string starts with the given substring, "no" otherwise.
-#
-#   starts_with <str> <substr>
-#
-function starts_with() {
-  local str="$1"
-  local substr="$2"
-
-  if [ "${str:0:${#substr}}" == "$substr" ]; then
-    echo "yes"
-  else
-    echo "no"
-  fi
-}
 
 function echo_suffix() {
   local name="$1"

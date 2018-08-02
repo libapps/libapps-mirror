@@ -20,28 +20,7 @@ LIBDOT_DIR="$("${READLINK}" -f -- "${LIBDOT_DIR}")"
 LIBDOT_BIN_DIR="${LIBDOT_DIR}/bin"
 LIBAPPS_DIR="$("${READLINK}" -f -- "${LIBDOT_DIR}/..")"
 BIN_DIR="$(dirname "$("${READLINK}" -f -- "$0")")"
-: "${LIBDOT_SEARCH_PATH:=${LIBAPPS_DIR}}"
 PATH="${LIBDOT_BIN_DIR}:${PATH}"
-
-# Find a file in the LIBDOT_SEARCH_PATH.
-function search_file() {
-  local filename="$1"
-
-  local IFS=":"
-
-  for dir in $LIBDOT_SEARCH_PATH; do
-    local dir=$(eval "echo $dir")
-    if [ -e "$dir/$filename" ]; then
-      echo "$dir/$filename"
-      return
-    fi
-  done
-
-  echo_err "$filename not found in $LIBDOT_SEARCH_PATH"
-}
-
-# See <https://github.com/kward/shflags>.
-source "$(search_file "libdot/bin/shflags")"
 
 # Run a command, exiting if it returns a non-zero exit code.
 #

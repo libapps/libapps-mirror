@@ -11,6 +11,7 @@ Helper to sync lib_punycode.js with latest upstream version.
 
 LIBDOT_DIR="$(dirname -- "$0")/../../../libdot"
 source "${LIBDOT_DIR}/bin/common.sh"
+source "${LIBDOT_BIN_DIR}/shflags"
 
 DEFINE_string version "" \
   "The version to pull down." v
