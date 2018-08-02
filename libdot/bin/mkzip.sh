@@ -376,6 +376,7 @@ function main() {
   local srcdir="$FLAGS_tmpdir/$FLAGS_filename.d"
   chmod -R a+r "$srcdir"/*
   echo_err "Creating: $(get_relative_path "$zipfile")"
+  find "$srcdir/" -type d -depth -exec rmdir {} + 2>/dev/null || :
   (cd "$srcdir"; zip -rq "$zipfile" * 1>&2)
   insist
 

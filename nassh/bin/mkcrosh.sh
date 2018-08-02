@@ -9,49 +9,45 @@
 LIBDOT_DIR="$(dirname -- "$0")/../../libdot"
 source "${LIBDOT_DIR}/bin/common.sh"
 
-if [ -z "$1" ]; then
-  echo "Missing argument."
-  exit 1
-fi
-
-SSZIP="$(readlink -f "$1")"
-if [ ! -e "$SSZIP" ]; then
-  echo "Not found: $SSZIP"
-  exit 1
-fi
-
 # Fail on error.
 set -e
 
-cd "${BIN_DIR}"
+cd "${BIN_DIR}/.."
 
-# Remove previous work
-rm -f crosh_builtin.zip
-rm -rf tmp
+mkdir -p ./dist/zip/tmp
 
-# Unzip the given Secure Shell zip
-mkdir -p tmp
-(cd tmp; unzip -q "$SSZIP")
-
-# Save the manifest file.  You'll need to convert this to a crosh manifest
-# file and check it into src/chrome/browser/resources/chromeos/crosh_builtin/
-# manifest.json
-mv tmp/manifest.json .
+"${BIN_DIR}"/mkdeps.sh
 
 # Remove things we don't need for crosh.
-rm -rf tmp/html/nassh.html tmp/plugin/
+export MORE_FILE_PATTERNS_EXCLUDE='
+  .*/manifest\.json$
+  .*/css/nassh_\(box\|connect_dialog\)\.css$
+  .*/html/nassh\(_\(connect_dialog\|google_relay\|popup\)\)?\.html$
+  .*/js/nassh_\(agent\|google_relay\|sftp\|stream\).*\.js$
+  .*/plugin/.*$
+  .*/third_party/google-smart-card/.*$
+  .*_tests?\.\(js\|html\)$
+  .*/images/.*/icon-fullsize\.png$
+  .*/images/\(promo\|screenshot\)-.*\.\(jpg\|png\)$
+'
 
-# Fix permissions.
-chmod -R a+r tmp/
-chmod a+x $(find tmp/ -type d)
+# Create a stub manifest for crosh.
+cat <<EOF >./dist/zip/tmp/crosh.json
+{
+  "name": "crosh",
+  "version": "0"
+}
+EOF
+rm -f ./dist/zip/crosh-0.zip
+mkzip.sh \
+  --nopromote_version --nopromote_channel \
+  -s "." -w ./dist/zip/ -m "./dist/zip/tmp/crosh.json"
+rm ./dist/zip/tmp/crosh.json
 
-# Remake the zip.
-(cd tmp; zip -qr ../crosh_builtin.zip .)
-
-# Echo the zip file listing to the terminal for verification.
-unzip -l crosh_builtin.zip
+# For legacy ebuild reasons, we move this.  We'll clean it up later.
+cp ./dist/zip/crosh-0.zip ./bin/crosh_builtin.zip
 
 echo
 echo "HEY!"
-echo "You'll need to convert ./manifest.json to crosh and commit it to"
+echo "You should update the builtin manifest.json as needed:"
 echo "src/chrome/browser/resources/chromeos/crosh_builtin/manifest.json"
