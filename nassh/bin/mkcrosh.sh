@@ -44,9 +44,6 @@ mkzip.sh \
   -s "." -w ./dist/zip/ -m "./dist/zip/tmp/crosh.json"
 rm ./dist/zip/tmp/crosh.json
 
-# For legacy ebuild reasons, we move this.  We'll clean it up later.
-cp ./dist/zip/crosh-0.zip ./bin/crosh_builtin.zip
-
 echo
 echo "HEY!"
 echo "You should update the builtin manifest.json as needed:"
