@@ -1054,6 +1054,41 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   Then restart Secure Shell.
 
 
+### Why do curses apps display x/q/etc... instead of "|" and "-" and other graphics?
+
+  The default terminal encoding used by hterm is UTF-8.
+  Historically, and in other terminals, it was [ISO 2022].
+  That means support for changing character sets to e.g. graphics sets is
+  disabled by default.
+  This makes the terminal more robust as you no longer have to worry about
+  accidentally running `cat` on a binary file corrupting your terminal output.
+
+  Unfortunately, ncurses insists on using these legacy encodings by default
+  instead of using modern UTF-8 in its output.
+  So until ncurses fixes its behavior, things can easily get out of sync.
+
+  One way to work around this is to instruct ncurses to stick to pure UTF-8
+  output by adding to your shell's startup script (e.g. `~/.bashrc`):
+  ```sh
+  export NCURSES_NO_UTF8_ACS=1
+  ```
+
+  Another option is to change the terminal encoding on the fly via the standard
+  [DOCS] escape sequence:
+  ```sh
+  printf '\x1b%%@'
+  ```
+
+  You could work around it by changing the default encoding back to [ISO 2022]
+  in your preferences.
+  Look for the `terminal-encoding` option and change it to `iso-2022`.
+
+  For more technical details, check out the
+  [mosh docs](https://mosh.org/#techinfo), Markus Kuhn's [UTF-8 terminal
+  emulator issues](https://www.cl.cam.ac.uk/~mgk25/unicode.html#term), and
+  hterm's [DOCS] and [SCS] documentation.
+
+
 ### Can I use my mouse?
 
   Sort of.  Both emacs and vi have mouse modes that are compatible with Secure
@@ -1165,15 +1200,20 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   [specification](../../hterm/doc/ControlSequences.md#OSC-1337).
 
 
+[DOCS]: ../../hterm/doc/ControlSequences.md#DOCS
+[SCS]: ../../hterm/doc/ControlSequences.md#SCS
+[Keyboard Bindings]: ../../hterm/doc/KeyboardBindings.md
+
 [hterm-notify.sh]: ../../hterm/etc/hterm-notify.sh
 [hterm-show-file.sh]: ../../hterm/etc/hterm-show-file.sh
 [osc52.el]: ../../hterm/etc/osc52.el
 [osc52.sh]: ../../hterm/etc/osc52.sh
 [osc52.vim]: ../../hterm/etc/osc52.vim
+
 [chromium-hterm mailing list]: https://goo.gl/RYHiK
+[ISO 2022]: https://www.iso.org/standard/22747.html
 [OpenSSH]: https://www.openssh.com/
 [OpenSSH legacy options]: https://www.openssh.com/legacy.html
-[Keyboard Bindings]: ../../hterm/doc/KeyboardBindings.md
 [Wayland]: https://wayland.freedesktop.org/
 [X Window System]: https://en.wikipedia.org/wiki/X_Window_System
 [XWayland]: https://wayland.freedesktop.org/xserver.html
