@@ -904,7 +904,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
 
   this.initPlugin_(() => {
       if (!nassh.v2)
-        this.terminalWindow.addEventListener('beforeunload', this.onBeforeUnload);
+        this.terminalWindow.addEventListener('beforeunload', this.onBeforeUnload_);
 
       this.sendToPlugin_('startSession', [argv]);
       if (this.isSftp) {
