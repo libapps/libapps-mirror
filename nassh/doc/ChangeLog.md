@@ -1,3 +1,25 @@
+# 0.8.45, 2018-08-29, A11y improvements, and handle tab discarding.
+
+* Update to hterm 1.81.  A11y improvements, and keyboard/mouse tweaks.
+* Update to libdot 1.23.  Build improvements, i18n helpers, and npm support.
+* nassh: Warn before closing open SSH connection.
+* FAQ: Add a section about terminal encoding.
+* mkcrosh: Rewrite to simplify the build.
+* Disable Automatic tab discarding.
+* build: Convert concat to a python script.
+* nassh: Drop nonexistent file.
+* gnubby: Clear lastError from gnubby probe.
+* FAQ: Add more details to the legacy cipher/mac questions.
+* FAQ: Expand IPv6 zone id docs.
+* fsp: Split mount logic into sep knob.
+* nassh: Unify profile based connection setup.
+* nassh: Make connectToArgString fully async.
+* nassh: Use -1 exit status for internal JS errors.
+* nassh: Make registerProtocolHandler a bit more flexible.
+* FAQ: Improve omnibox docs with different launch modes.
+* build: Use readlink instead of realpath in promote script.
+* a11y: Make it possible to enable/disable accessibility at runtime.
+
 # 0.8.44.1, 2018-06-22, Extension startup fix.
 
 * Update to hterm 1.80.  Minor tweaks.
