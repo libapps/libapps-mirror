@@ -1,3 +1,21 @@
+# 1.23, 2018-08-29, Build improvements, i18n helpers, and npm support.
+
+* mkzip: trim empty directories.
+* build: push shflags usage to leaf scripts.
+* readlink: convert to python.
+* get_relative_path: convert to python.
+* pylint: new helper.
+* concat: convert to a python script.
+* build: start a common libdot.py module.
+* build: disable node download logic for crosh builds for now.
+* build: add support for using npm in builds.
+* stack: rewrite and add tests.
+* MessageManager: prefer browser translations over local ones.
+* i18n: move getMessage helper here.
+* i18n: move replaceReferences helper here.
+* i18n: start a new file to hold i18n/l10n related funcs.
+* plugin-to-platform-specific: delete unused vars.
+
 # 1.22, 2018-06-20, Unicode 11.0.0 updates and new helpers.
 
 * Start a dedicated README file.
