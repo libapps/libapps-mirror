@@ -1,0 +1,491 @@
+{
+	"already_mounted_message": {
+		"message": "File system is already mounted!"
+	},
+	"backup_prefs": {
+		"message": "Save Backup"
+	},
+	"bad_destination": {
+		"message": "বিশ্লেষণের গন্তব্যস্থলে অক্ষম: $1"
+	},
+	"before_unload": {
+		"message": "এই ট্যাবটি বন্ধ করলে এই অধিবেশনর সংযোগ বিচ্ছিন্ন হবে।"
+	},
+	"cancel_button_label": {
+		"message": "বাতিল করুন"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "এই কম্যান্ড একটি পরিচিত হোস্টের তালিকা দেখায় এবং পছন্দের হোস্ট বেছে নিতে দেয়৷"
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "একটু পরিচিত ssh হোস্ট ভুলে গেছেন৷"
+	},
+	"cmd_ssh_help": {
+		"message": "|username| এবং |hostname| প্যারামিটার প্রয়োজন, |port| অপশনাল। পোর্ট নির্দিষ্ট না করা হলে, ডিফল্ট হিসেবে ২২ ব্যবহার করা হবে।"
+	},
+	"cmd_ssh_title": {
+		"message": "একটি নতুন ssh সেশন খুলুন৷"
+	},
+	"command_complete": {
+		"message": "$1 এই কম্যান্ড $2 এই স্ট্যাটাস কোড দেখিয়ে বন্ধ হয়েছে।"
+	},
+	"command_not_supported": {
+		"message": "Chrome-এর এই ভার্সনে $1 কাজ করে না"
+	},
+	"command_startup_failed": {
+		"message": "$1 লঞ্চ করা যায়নি: $2"
+	},
+	"connect_button_label": {
+		"message": "সংযুক্ত হন"
+	},
+	"connect_or_exit_message": {
+		"message": "(C)hoose another connection or E(x)it?"
+	},
+	"connecting": {
+		"message": "Connecting to $1..."
+	},
+	"connection_dialog_name": {
+		"message": "কানেকশন ডায়ালগ"
+	},
+	"console_crosh_options_notice": {
+		"message": "আপনি কি জানেন এখানে এক বিশেষ পৃষ্ঠা আছে?\nআর 'term_' directly সংশোধন করতে হবে না!\nএটি খুলতে $1 টিপুন অথবা ক্লিক করুন:\n$2"
+	},
+	"console_nassh_options_notice": {
+		"message": "আপনি কি জানেন এখানে একটি বিশেষ পৃষ্ঠা রয়েছে?\nterm_ directly নিয়ে আর ঝামেলায় পড়তে হবে না!\n$1"
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "Delete"
+	},
+	"disconnect_message": {
+		"message": "NaCl plugin exited with status code $1."
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_placeholder": {
+		"message": "অতিরিক্ত কম্যান্ড লাইন আর্গুমেন্ট"
+	},
+	"field_description_aria_label": {
+		"message": "description"
+	},
+	"field_description_placeholder": {
+		"message": "username@hostname অথবা সাধারণ টেক্সট"
+	},
+	"field_hostname_aria_label": {
+		"message": "hostname"
+	},
+	"field_hostname_placeholder": {
+		"message": "hostname"
+	},
+	"field_mount_path_placeholder": {
+		"message": "ডিফল্ট পাথ হল ব্যবহারকারীর হোম ডিরেক্টরি"
+	},
+	"field_port_aria_label": {
+		"message": "port"
+	},
+	"field_port_placeholder": {
+		"message": "port"
+	},
+	"field_relay_options_aria_label": {
+		"message": "SSH রিলে সার্ভার বিকল্প"
+	},
+	"field_relay_options_placeholder": {
+		"message": "SSH রিলে সার্ভার বিকল্প"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "default"
+	},
+	"field_username_aria_label": {
+		"message": "ইউজারনেম"
+	},
+	"field_username_placeholder": {
+		"message": "ইউজারনেম"
+	},
+	"found_relay": {
+		"message": "Found relay server: $1"
+	},
+	"get_profile_error": {
+		"message": "সমস্যা: প্রোফাইল $1 লোড করা যায়নি:\n$2"
+	},
+	"hterm_button_allow_always": {
+		"message": "সর্বদা অনুমতি দিন"
+	},
+	"hterm_button_allow_session": {
+		"message": "সেশনটির জন্য অনুমতি দিন"
+	},
+	"hterm_button_block": {
+		"message": "ব্লক করুন"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "$1 লোড করা যায়নি"
+	},
+	"hterm_loading_resource_start": {
+		"message": "$1 লোড করা হচ্ছে ..."
+	},
+	"hterm_popup_inline_image": {
+		"message": "ইনলাইন ছবি"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "ইনলাইন ছবি বন্ধ করা হয়েছে"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "টার্মিনালে ছবি দেখানোর জন্য রিমোট হোস্টকে অনুমতি দেওয়া হবে কিনা।\n\nডিফল্টরূপে যতক্ষণ না কোনও বিকল্প বেছে নেওয়া হচ্ছে আমরা ততক্ষণ পর্যন্ত ইঙ্গিত দিতে থাকি।"
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "এটি সেট করা হলে Chrome OS-এ Alt-Backspace->DEL রিম্যাপকে আগের অবস্থায় ফিরিয়ে দেওয়া হয়, যাতে alt- backspace এ সত্যিই alt-backspace-এর কাজ হয়।"
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "একটি AltGr detection heuristic বেছে নিন।\n\n'null': নেভিগেটর ভাষার উপর ভিত্তি করে নিজে থেকে শনাক্তকরণ:\n      'en-us' => 'none', else => 'right-alt'\n'none': যেকোনও AltGr সম্পর্কিত মাঙ্গিং বন্ধ করুন।\n'ctrl- alt': মনে করুন যে Ctrl+Alt মানে AltGr।\n'left-alt': মনে করুন বাঁ Alt মানে AltGr।\n'right-alt': মনে করুন ডান Alt মানে AltGr।"
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Alt কী একটি Meta কী অথবা স্বতন্ত্র Alt কী হিসেবে কাজ করে কিনা তা সেট করুন।"
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "কীভাবে Alt বোতাম পরিচালনা করা হয় তা নিয়ন্ত্রণ করে।\n\n  escape: একটি ESC প্রিফিক্স পাঠাবে।\n  ৮-বিট: xterm অক্ষরের মতো, টাইপ করা অক্ষরের সাথে ১২৮ যোগ করুন।\n ব্রাউজার-কী: বোতামটি যতক্ষণ না টেপা হচ্ছে ততক্ষণ অপেক্ষা করুন এবং দেখুন ব্রাউজার কি \n উত্তর দেয়। (যে প্ল্যাটফর্মে Alt সিকোয়েন্সের জন্য ব্রাউজার ডিফল্ট অ্যাকশন নেয়\n সেখানে এটি ভালভাবে কাজ করবে না।)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "টার্মিনাল বেল সাউন্ডের URL। অডিওবিহীন বেলের জন্য কোনও স্ট্রিং নেই।"
+	},
+	"hterm_pref_background_color": {
+		"message": "অন্য কোনও কালার অ্যাট্রিবিউট ছাড়া টেক্সটের জন্য ব্যাকগ্রাউন্ডের রং।"
+	},
+	"hterm_pref_background_image": {
+		"message": "ব্যাকগ্রাউন্ড ছবির জন্য CSS মান। কোনও ছবি না থাকলে তার জন্য কোনও স্ট্রিং নেই।\n\nযেমন:\n  url(https://goo.gl/anedTK)\n  রৈখিক-গ্রেডিয়েন্ট(উপরে নিচে, নীল, লাল)"
+	},
+	"hterm_pref_background_position": {
+		"message": "ব্যাকগ্রাউন্ডে ছবির অবস্থানের CSS মান।\n\nউদাহরণস্বরূপ:\n  10% 10%\n  কেন্দ্রে"
+	},
+	"hterm_pref_background_size": {
+		"message": "ব্যাকগ্রাউন্ড ছবির মাপের CSS মান।"
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "'ট্রু' হলে, ব্যাকস্পেস বোতাম টিপলে BS ('\\x08', aka ^H) হবে। তা না হলে ব্যাকস্পেস বোতাম টিপলে '\\x7f' হবে।"
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "এটি একটি অবজেক্ট হিসেবে নির্দিষ্ট করা আছে। এটি একটি স্পার্স অ্যারে, যার প্রতিটি বৈশিষ্ট্য হল একটি ক্যারেক্টার সেট কোড এবং মান হল এমন একটি অবজেক্ট যা নিজেই একটি স্পার্স অ্যারে। সেই স্পার্স অ্যারেতে প্রতিটি বৈশিষ্ট্য হল ইনপুট দেওয়া অক্ষর এবং মান হল সেই অক্ষর যেগুলি ডিসপ্লে করা হবে।\n\nউদাহরণস্বরূপ:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "কপি করার পর টেক্সটটি মুছে ফেলতে হবে কিনা।"
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "কম্যান্ডের কাজ শেষ হলে উইন্ডো বন্ধ হবে কি না।"
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "ডিফল্ট প্যালেটে থাকা রঙগুলি ওভাররাইড করুন।\n\nএগুলিকে কোনও অ্যারে বা অবজেক্ট হিসেবে উল্লেখ করা যেতে পারে। যদি অবজেক্ট হিসেবে উল্লেখ করা হয় তাহলে সেটিকে স্পেয়ার্স অ্যারে হিসেবে ধরে নেওয়া হয়, যেখানে প্রতিটি প্রপার্টি হল রঙয়ের প্যালেটের একটি সাংখ্যিক ইনডেক্স।\n\nমানগুলিকে আনুমানিক যেকোনও CSS রঙয়ের মানে সেট করা যেতে পারে। এতে অন্তর্ভুক্ত রয়েছে #RGB, #RRGGBB, rgb(...), rgba(...) এবং যেকোনও রঙের নাম যেগুলি স্ট্যান্ডার্ড X11 rgb.txt ফাইলেরও অংশ।\n\nআপনি 'null' ব্যবহার করে উল্লেখ করতে পারেন যে ডিফল্ট মানটি পরিবর্তন করা যাবে না। যখন মানটি একটি অ্যারে হিসেবে উল্লেখ করা থাকে তখন আমরা কোনও স্বল্প সংখ্যার ইনডেক্স ছেড়ে যাওয়ার জন্য এটি উপযোগী।\n\nযেমন, এই দুটি থেকেই রঙয়ের ইন্ডেক্স ১-কে নীল রঙে সেট করা হয়:\n{1: \"#0000ff\"}\n[null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "মাউস বেছে নেওয়ার বিকল্পটি নিজে থেকেই ক্লিপবোর্ডে কপি করুন।"
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "'ট্রু' হলে Ctrl+C কপি করা হবে, 'ফল্স' হলে হোস্টে ^C পাঠানো হবে।\n'ট্রু' হলে Ctrl+Shift+C হোস্টে ^C পাঠাবে, 'ফল্স' হলে কপি করা হবে।"
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "'ট্রু' হলে Ctrl-Plus/Minus/Zero জুম নিয়ন্ত্রণ করবে।\n'ফল্স' হলে Ctrl-Shift- Plus/Minus/Zero জুম নিয়ন্ত্রণ করবে, Ctrl-Minus বোতাম টিপলে ^_ পাঠানো হবে, Ctrl-Plus/Zero টিপলে কিছু হবে না।"
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "'ট্রু' হলে Ctrl+V পেস্ট করা হবে, 'ফল্স' হলে হোস্টে ^V পাঠানো হবে।\n'ট্রু' হলে Ctrl+Shift+V হোস্টে ^V পাঠাবে, 'ফল্স' হলে পেস্ট করা হবে।"
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "টেক্সট কার্সারটি ডিফল্টভাবে ব্লিঙ্ক করবে কিনা। টার্মিনাল এস্কেপ সিকোয়েন্সগুলির মাধ্যমে এটি রানটাইমের সময় টগল করা যেতে পারে।"
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "মিলিসেকেন্ডের হিসেবে টেক্সট কার্সার ব্লিঙ্কের হার।\n\nদুটি উপাদানের অ্যারে, প্রথমটি হল কার্সারটি কতক্ষণ দেখা যাবে, দ্বিতীয়টি হল কার্সারটি কতক্ষণ দেখা যাবে না।"
+	},
+	"hterm_pref_cursor_color": {
+		"message": "দৃশ্যমান টেক্সট কার্সারের রঙ।"
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "'ট্রু' হলে ব্যাকগ্রাউন্ডে টার্মিনাল বেল একটি ওয়েব বিজ্ঞপ্তি তৈরি করবে। https://www.w3.org/TR/notifications/\n\nবিজ্ঞপ্তিগুলি ডিসপ্লে করার জন্য ব্যবহারকারীর থেকে অনুমতি প্রয়োজন। এই বিকল্পটি 'ট্রু' হিসেবে সেট করা হলে ব্যবহারকারীর অনুমতির জন্য hterm অনুমতি চাইতে পারে। যদি অনুমতিটি ব্যবহারকারীর অ্যাকশনের থেকে না ট্রিগার না হয়ে থাকে তাহলে ব্রাউজার এই অনুমতির প্রদর্শন নাও করতে পারে।\n\n\"বিজ্ঞপ্তি\" অনুমতি থাকা Chrome এক্সটেনশনের বিজ্ঞপ্তি প্রদর্শনের অনুমতি আছে।"
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "ইস্ট এশিয়ান অ্যাম্বিগুয়াস ক্যারেক্টারের দুটি কলামের প্রস্থ আছে কিনা তা সেট করুন।"
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "৮-বিট কন্ট্রোল ক্যারেক্টার চালু করলে 'ট্রু' হবে, চালু না করলে 'ফল্স' হবে।\n\nএই সেটিংস যাই হোক না কেন এই কন্ট্রোল ক্যারেক্টারের টু-বাইট ভার্সন আমরা ব্যবহার করব।"
+	},
+	"hterm_pref_enable_blink": {
+		"message": "ব্লিঙ্ক অ্যাট্রিবিউট মেনে নিলে 'ট্রু' হবে। মেনে না নিলে 'ফল্স' হবে।"
+	},
+	"hterm_pref_enable_bold": {
+		"message": "বোল্ড/উজ্জ্বল অ্যাট্রিবিউট সহ টেক্সটের জন্য বোল্ড ফন্ট ব্যবহার করলে \"ট্রু\" হবে। সাধারণ ফন্টের ক্ষেত্রে 'ফল্স' হবে। নিজে থেকে শনাক্ত করার জন্য এর মান 'কিছুই না' হিসেবে সেট করতে হবে।"
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "বোল্ড অ্যাট্রিবিউট সহ কোনও টেক্সটের জন্য উজ্জ্বল রং (১৬টি কালার প্যালেটে ৮-১৫) ব্যবহার করলে 'ট্রু' হবে। তা না হলে মিথ্যা হবে।"
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "হোস্ট যখন ক্লিপবোর্ডে মেসেজ লিখবেন তখন টার্মিনালে মেসেজ দেখুন।"
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "লোকাল সিস্টেম ক্লিপবোর্ডে সরাসরি লেখার জন্য দূরবর্তী হোস্টকে অনুমতি দিন।\nএই সেটিংসটি পড়ার জন্য অ্যাক্সেস নেই।\n\nএটি OSC-52 মতো বৈশিষ্ট্য অ্যাক্সেস সীমিত করতে ব্যবহার করা হয়।"
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "হোস্টকে DEC প্রাইভেট মোড 12 ব্যবহার করে টেক্সট কার্সারের ব্লিঙ্ক স্ট্যাটাস পরিবর্তন করতে দিন।"
+	},
+	"hterm_pref_environment": {
+		"message": "ডিফল্ট এনভায়রনমেন্ট ভেরিয়েবলের প্রারম্ভিক সেট, অবজেক্ট হিসেবে।"
+	},
+	"hterm_pref_font_family": {
+		"message": "টার্মিনাল টেক্সটের জন্য ডিফল্ট ফন্ট ফ্যামিলি।"
+	},
+	"hterm_pref_font_size": {
+		"message": "Pixel এ ডিফল্ট ফন্ট সাইজ।"
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "CSS ফন্ট-স্মুদিং প্রপার্টি।"
+	},
+	"hterm_pref_foreground_color": {
+		"message": "অন্য কোনও কালার অ্যাট্রিবিউট ছাড়া টেক্সটের জন্য ফোরগ্রাউন্ডের রং।"
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "'ট্রু' হলে, Home/End বোতাম দিয়ে টার্মিনাল স্ক্রোলবার নিয়ন্ত্রণ করা হয় এবং Shift Home/End বোতাম দিয়ে VT কী-কোড পাঠানো হয়। 'ফল্স' হলে, Home/End বোতাম দিয়ে VT কোড পাঠানো হয় এবং Shift Home/End বোতাম দিয়ে স্ক্রোল করা হয়।"
+	},
+	"hterm_pref_keybindings": {
+		"message": "বোতামের ক্রম ও বোতাম থেকে হওয়া অ্যাকশনের ম্যাপিং। বোতামের ক্রমে কোনও পরিবর্তক থাকে না অথবা এক বা একাধিক পরিবর্তক থাকে ও তারপর একটি কী-কোড থাকে। কী-কোডটি কোনও ডেসিমেল বা হেক্সাডেসিমেল নম্বর অথবা কোনও বোতাম শনাক্তকারী হতে পারে। কী-অ্যাকশন হোস্টের কাছে পাঠানোর জন্য স্ট্রিং বা অ্যাকশন শনাক্তকারী হিসেবে উল্লেখ করা যেতে পারে। ফর্ম্যাটের সম্পূর্ণ ব্যাখ্যার জন্য https://goo.gl/LWRndr দেখুন।\n\nকী-বাইন্ডিংয়ের নমুনা:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "'ট্রু' হলে মিডিয়া বোতামকে তাদের সমতূল্য ফাংশন বোতামে পরিবর্তিত করে। 'ফল্স' হলে ব্রাউজারকে তা পরিচালনা করতে দেয়।"
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Meta বোতামটি আগে একটি 'Escape' পাঠাবে কিনা তা সেট করা হয়।"
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "মাউস দিয়ে পেস্ট করার বোতাম বা অটো-ডিটেক্টের ফাঁকা থাকবে।\n\nঅটো-ডিটেক্টের ক্ষেত্রে, অ-X11 প্ল্যাটফর্মের জন্য (Chrome OS সহ) আমরা মাঝখানের মাউস বোতামটি ব্যবহার করব। X11প্ল্যাটফর্মের জন্য ডান-পাশের (দ্বিতীয়) বোতামটি ব্যবহার করব (কারণ নেটিভ উইন্ডো ম্যানেজার হলে মাঝখানের মাউস বোতাম দিয়ে পেস্ট করা হবে)।\n\n0 == বাঁ-পাশের (প্রাথমিক) বোতাম।\n1 == মাঝখানের (অতিরিক্ত) বোতাম।\n2 == ডান-পাশের (দ্বিতীয়) বোতাম।\n\n\"mouse-right-click-paste\" এর সেটিং যাই থাকুক না কেন এই বিকল্পটি অ্যাক্টিভেট হবে।\n\nদ্রষ্টব্য: এর ফলে বাঁ-হাতি ও ডান-হাতি মাউস সঠিকভাবে ব্যবহার করা যাবে।"
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "মাউসের ডান-পাশের বোতাম ক্লিক করলে পেস্ট হবে।\n\n\"mouse-paste-button\" এর সেটিং যাই থাকুক না কেন এই বিকল্পটি অ্যাক্টিভেট হবে।\n\nদ্রষ্টব্য: এর ফলে বাঁ-হাতি ও ডান-হাতি মাউস সঠিকভাবে ব্যবহার করা যাবে।"
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "'ট্রু' হলে, Page Up/Down বোতাম দিয়ে টার্মিনাল স্ক্রোলবার নিয়ন্ত্রণ করা হয় এবং Shift Page Up/Down বোতাম দিয়ে VT কী-কোড পাঠানো হয়। 'ফল্স' হলে, Page Up/Down বোতাম দিয়ে VT কোড পাঠানো হয় এবং Shift Page Up/Down বোতাম দিয়ে স্ক্রোল করা হয়।"
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "আমরা Alt-1..9 বোতাম টিপলে সেটি ব্রাউজারে পাঠানো হবে কিনা সেট করুন।\n\nব্রাউজারে hterm চালানোর সময় এটি বেশ উপযোগী হয়ে থাকে, যাতে Chrome-এর “ট্যাবে যান” কী-বোর্ড অ্যাক্সিলারেটর হারিয়ে না যায়। যখন ট্যাবের মধ্যে চালানো হচ্ছে না তখন এই বোতামগুলিকে হোস্ট-এ পাঠিয়ে দেওয়া ভাল যাতে সেগুলি vim বা emacs-এ ব্যবহার করা যেতে পারে।\n\n'ট্রু' হলে, Alt-1..9 বোতামকে ব্রাউজার থেকে পরিচালনা করা হবে। 'ফল্স' হলে, Alt-1..9 বোতামকে হোস্ট-এ পাঠিয়ে দেওয়া হবে। যদি ফাঁকা মান হয় তাহলে ব্রাউজারের প্ল্যাটফর্ম ও উইন্ডো-এর প্রকারের ভিত্তিতে অটো-ডিটেক্ট হয়।"
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "আমরা Ctrl-1..9 বোতাম টিপলে সেটি ব্রাউজারে পাঠানো হবে কিনা সেট করুন।\n\nব্রাউজারে hterm চালানোর সময় এটি বেশ উপযোগী হয়ে থাকে, যাতে Chrome-এর “ট্যাবে যান” কী-বোর্ড অ্যাক্সিলারেটর হারিয়ে না যায়। যখন ট্যাবের মধ্যে চালানো হচ্ছে না তখন এই বোতামগুলিকে হোস্ট-এ পাঠিয়ে দেওয়া ভাল যাতে সেগুলি vim বা emacs-এ ব্যবহার করা যেতে পারে।\n\n'ট্রু' হলে, Ctrl-1..9 বোতামকে ব্রাউজার থেকে পরিচালনা করা হবে। 'ফল্স' হলে, Ctrl-1..9 বোতামকে হোস্ট-এ পাঠিয়ে দেওয়া হবে। যদি ফাঁকা মান হয় তাহলে ব্রাউজারের প্ল্যাটফর্ম ও উইন্ডো-এর প্রকারের ভিত্তিতে অটো-ডিটেক্ট হয়।"
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "আমরা Meta-1..9 বোতাম টিপলে সেটি ব্রাউজারে পাঠানো হবে কিনা সেট করুন।\n\nব্রাউজারে hterm চালানোর সময় এটি বেশ উপযোগী হয়ে থাকে, যাতে Chrome-এর “ট্যাবে যান” কী-বোর্ড অ্যাক্সিলারেটর হারিয়ে না যায়। যখন ট্যাবের মধ্যে চালানো হচ্ছে না তখন এই বোতামগুলিকে হোস্টে পাঠিয়ে দেওয়া ভাল যাতে সেগুলি vim বা emacs-এ ব্যবহার করা যেতে পারে।\n\n'ট্রু' হলে, Meta-1..9 বোতামকে ব্রাউজার থেকে পরিচালনা করা হবে। 'ফল্স' হলে, Meta-1..9 বোতামকে হোস্ট-এ পাঠিয়ে দেওয়া হবে। যদি ফাঁকা মান হয় তাহলে ব্রাউজারের প্ল্যাটফর্ম ও উইন্ডোর প্রকারের ভিত্তিতে অটো-ডিটেক্ট হয়।"
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Meta-V হোস্টে পাঠানো হবে কিনা সেট করুন।"
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "হোস্ট থেকে ডেটা পাওয়ার জন্য প্রত্যাশিত এনকোডিং সেট করুন।\n\nসঠিক মানগুলি হল 'utf-8' এবং 'raw'।"
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "যেকোনও বোতাম টেপার ক্ষেত্রে নিচে স্ক্রোল করা হবে কিনা।"
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "টার্মিনাল আউটপুটের ক্ষেত্রে নিচে স্ক্রোল করা হবে কিনা।"
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "বিকল্প স্ক্রিন বাফার ব্যবহার করার সময় ও DECCKM (অ্যাপ্লিকেশন কার্সার বোতাম) অ্যাক্টিভ থাকে তখন মাউসের চাকা স্ক্রোল করলে সেটি তীর বোতামের মতো কাজ করবে।\n\nShift বোতাম টিপে রাখলে এটি অস্থায়ীভাবে বন্ধ হয়ে যায়।\n\nপেজার ব্যবহার করার সময় (কম) অথবা man pages বা টেক্সট এডিটর (vi/nano) ব্যবহার করার সময় অথবা screen/tmux ব্যবহার করার সময় প্রায়ই এরকম হয়।"
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "চাকা স্ক্রোল করা থেকে সৃষ্ট চাকা ইভেন্টের পিক্সেল ডেল্টার জন্য গুণক। পৃষ্ঠা কত দ্রুত স্ক্রোল করবে তা পরিবর্তন করে।"
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "উল্লম্ব স্ক্রলবার মোড।"
+	},
+	"hterm_pref_send_encoding": {
+		"message": "হোস্টে ডেটা পাঠানোর জন্য এনকোডিং সেট করা হয়।"
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "'ট্রু' হলে Shift + Insert পেস্ট করা হয়, 'ফল্স' হলে হোস্টে পাঠানো হয়।"
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "ডিফল্ট টার্মিনাল এনকোডিং (DOCS)।\n\nISO-2022এ ক্যারেক্টার ম্যাপ ট্রান্সলেশন চালু হয় (যেমন গ্রাফিক ম্যাপ)।\nUTF-8 সেগুলির জন্য সমর্থন বন্ধ করে দেয়।\n\n'লক করা' ভ্যারিয়েন্টের অর্থ টার্মিনাল এস্কেপ সিকোয়েন্সের মাধ্যমে রানটাইমের সময় এনকোডিং পরিবর্তন করা যাবে না।\n\nপুরনো অ্যাপ্লিকেশনের ক্ষেত্রে রেন্ডারিং না ভাঙলে আপনার UTF-8 ব্যবহার করা উচিত।"
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "ডিফল্ট উইন্ডো কপি আচরণ ব্যবহার করা হবে কিনা।"
+	},
+	"hterm_pref_user_css": {
+		"message": "ব্যবহারকারীর স্টাইলশিটের URL যেটি টার্মিনাল ডকুমেন্টে অন্তর্ভুক্ত করতে হবে।"
+	},
+	"hterm_pref_user_css_text": {
+		"message": "টার্মিনালে স্টাইল দেওয়ার জন্য কাস্টম CSS টেক্সট।"
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "বাঁ-পাশের (শুরুতে) থাকা সব অক্ষরকে মিল করানোর জন্য গতানুগতিক অভিব্যক্তি।\n\n\nসাধারণত এটি হল নির্দিষ্ট অক্ষরকে বাতিল করার জন্য একটি অক্ষরের শ্রেণী।\nআমরা ডিফল্টভাবে \"~\" এবং \".\" কে অনুমোদন করি কারণ সচরাচর এই অক্ষরগুলি দিয়ে পাথ শুরু হয়।"
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "মাঝখানে থাকা সব অক্ষরকে মিল করানোর জন্য গতানুগতিক অভিব্যক্তি।\n\nসাধারণত এটি হল নির্দিষ্ট অক্ষরকে বাতিল করার জন্য একটি অক্ষরের শ্রেণী।\n\nশুরুর জায়গার বেছে নেওয়া অংশ চারপাশে আরও বিস্তৃত করতে এটি ব্যবহার করা হয়।"
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "ডান-পাশে থাকা সব অক্ষরকে মিল করানোর জন্য গতানুগতিক অভিব্যক্তি।\n\nসাধারণত এটি হল নির্দিষ্ট অক্ষরকে বাতিল করার জন্য একটি অক্ষরের শ্রেণী।"
+	},
+	"identity_label": {
+		"message": "Identity"
+	},
+	"import_link_aria_label": {
+		"message": "file import"
+	},
+	"import_link_label": {
+		"message": "Import..."
+	},
+	"initializing_relay": {
+		"message": "Looking up relay server using: $1"
+	},
+	"json_parse_error": {
+		"message": "JSON কে '$1' এ পার্স করা যায়নি: $2"
+	},
+	"known_hosts_empty": {
+		"message": "কোনো জানা হোস্ট নেই, ভোলার কিছু নেই৷"
+	},
+	"known_hosts_prompt": {
+		"message": "দয়া করে ভুলতে একটি হোস্ট বেছে নিন [1-$1]:"
+	},
+	"known_hosts_title": {
+		"message": "পরিচিত হোস্ট:"
+	},
+	"loading_label": {
+		"message": "Loading..."
+	},
+	"missing_param": {
+		"message": "নিখোঁজ স্থিতিমাপ: $1"
+	},
+	"mount_button_label": {
+		"message": "SFTP Mount"
+	},
+	"mount_path_label": {
+		"message": "পাথ মাউন্ট করুন"
+	},
+	"mounted_message": {
+		"message": "Mounted!"
+	},
+	"notify_copy": {
+		"message": "Selection Copied"
+	},
+	"ok_button_label": {
+		"message": "ঠিক আছে"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> সেভ করা প্রোফাইলের সাথে বা নতুন ssh সিস্টেমে সংযুক্ত করুন"
+	},
+	"open_as_window_tip": {
+		"message": "[পরামর্শ] Control-W টিপলে যাতে আপনার টার্মিনাল বন্ধ না হয়ে যায়, সেইজন্য 'উইন্ডো হিসেবে খুলুন' বা 'পূর্ণ স্ক্রিন' বিকল্পটি বেছে নিন!\n[পরামর্শ] আরও জানতে $1 দেখুন।"
+	},
+	"options_button_label": {
+		"message": "Options"
+	},
+	"plugin_loading": {
+		"message": "NaCl প্লাগইন লোড করছে..."
+	},
+	"plugin_loading_complete": {
+		"message": " সম্পন্ন।"
+	},
+	"plugin_loading_failed": {
+		"message": " করা যায়নি! :("
+	},
+	"pref_backup_filename": {
+		"message": "Secure Shell Preferences Backup.json"
+	},
+	"preferences_header": {
+		"message": "Profile Settings"
+	},
+	"preferences_reset": {
+		"message": "All preferences reset!"
+	},
+	"reconnect_message": {
+		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
+	},
+	"relay_options_error": {
+		"message": "অজানা রিলে বিকল্প: $1"
+	},
+	"relay_retry": {
+		"message": "Retrying..."
+	},
+	"request_pin_prompt": {
+		"message": "'$2'-এ $1 কী আনলক করতে পিন লিখুন (আর $3 বার চেষ্টা করতে পারবেন):"
+	},
+	"restore_prefs": {
+		"message": "Restore Backup"
+	},
+	"shortcut_list_aria_label": {
+		"message": "saved connections"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "স্মার্ট কার্ড কানেক্টর অ্যাপ ইনস্টল করুন: $1"
+	},
+	"ssh_argstr_label": {
+		"message": "SSH Arguments"
+	},
+	"terminal_preview_label": {
+		"message": "Preview"
+	},
+	"terminal_profile_label": {
+		"message": "Current profile"
+	},
+	"tip_1": {
+		"message": "লিঙ্কে ক্লিক করে খোলার জন্য Ctrl (macOS এ Cmd) টিপে ধরে রেখে লিঙ্কে ক্লিক করুন!"
+	},
+	"tip_10": {
+		"message": "একটি উইন্ডোতে চলার সময়, Ctrl-Shift-N করলে নতুন সেশন খুলে যায়।"
+	},
+	"tip_11": {
+		"message": "আপনি কী/শর্টকাট আবার নির্ধারণ করতে পারবেন: https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "ssh auth এর জন্য Yubikeys বা অন্যান্য স্মার্ট কার্ড ব্যবহার করুন: https://goo.gl/3ZEU1w"
+	},
+	"tip_13": {
+		"message": "ছবিগুলি ইনলাইনে দেখানো হবে: https://goo.gl/MnSysj"
+	},
+	"tip_2": {
+		"message": "ব্রাউজারে hterm-notify ব্যবহার করে বিজ্ঞপ্তি দেখান: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "'ssh <profile name>' লিখে omnibox থেকে সংযুক্ত হন: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "SFTP এর মাধ্যমে Chrome OS থেকে মাউন্ট করতে এবং ফাইল অ্যাপের মাধ্যমে ব্রাউজ করতে পারবে। 'Connect' এর বদলে 'SFTP Mount' ব্যবহার করুন।"
+	},
+	"tip_5": {
+		"message": "ওয়েব পৃষ্ঠায় ssh:// লিঙ্ক ব্যবহার করে সংযুক্ত হন, বা বুকমার্ক হিসাবে সেভ করুন: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "১৬ রঙ, ২৫৬ রঙ এবং পুরো ২৪-বিট রঙ ব্যবহার করে আপনার আউটপুট/প্রম্পট রঙ করুন: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "OSC-52 ব্যবহার করে emacs/vim/etc... থেকে আপনার ক্লিপবোর্ডে কপি করুন: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "chromium-hterm@chromium.org এর মাধ্যমে hterm/Secure Shell ব্যবহারকারী সহযোগীর সাথে চ্যাট করুন: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "কোনও ত্রুটি পাওয়া গেছে?  নতুন ফিচারের অনুরোধ করছেন?  আমাদের জানান: https://goo.gl/vb94JY"
+	},
+	"unexpected_error": {
+		"message": "একটি অপ্রত্যাশিত সমস্যা হয়েছে, বিশদ বিবরণের জন্য অনুগ্রহ করে JavaScript কনসোল দেখুন।"
+	},
+	"unknown_ssh_client_version": {
+		"message": "অজানা SSH ভার্সন: $1"
+	},
+	"unmount_button_label": {
+		"message": "Unmount SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "আপডেট রয়েছে। অনুগ্রহ করে সব উইন্ডো বন্ধ করুন।"
+	},
+	"welcome_changelog": {
+		"message": "পরিবর্তনের তথ্য/প্রকাশের তথ্য: $1"
+	},
+	"welcome_faq": {
+		"message": "Answers to Frequently Asked Questions: $1 (ctrl+click on links to open)"
+	},
+	"welcome_release_highlights": {
+		"message": "$1 থেকে করা গুরুত্বপূর্ণ পরিবর্তনগুলি:"
+	},
+	"welcome_tip_of_day": {
+		"message": "#$1 নং পরামর্শ: $2"
+	},
+	"welcome_version": {
+		"message": "Welcome to $1 version $2."
+	},
+	"zoom_warning": {
+		"message": "অনুগ্রহ করে Chrome মেনু->জুম ১০০%-এ সেট করুন"
+	}
+}

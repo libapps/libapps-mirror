@@ -471,7 +471,7 @@
 		"message": "È disponibile un aggiornamento. Chiudi tutte le finestre."
 	},
 	"welcome_changelog": {
-		"message": "Registro modifiche/note sulla versione: $1"
+		"message": "Registro modifiche/note di rilascio: $1"
 	},
 	"welcome_faq": {
 		"message": "Risposte alle Domande frequenti: $1 (CTRL+clic sui link per aprirli)"

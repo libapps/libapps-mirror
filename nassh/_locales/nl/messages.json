@@ -132,7 +132,7 @@
 		"message": "Inline afbeeldingen uitgeschakeld"
 	},
 	"hterm_pref_allow_images_inline": {
-		"message": "Hiermee wordt bepaald of de externe host afbeeldingen mag weergeven in de terminal.\n\nStandaard vragen we hiernaar totdat een keuze wordt gemaakt."
+		"message": "Hiermee wordt bepaald of de externe host afbeeldingen mag bekijken in de terminal.\n\nStandaard vragen we hiernaar totdat een keuze wordt gemaakt."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
 		"message": "Als deze optie wordt ingesteld, wordt de toewijzing van Alt + Backspace->DEL in Chrome OS ongedaan gemaakt, zodat Alt + Backspace daadwerkelijk Alt +Backspace is."

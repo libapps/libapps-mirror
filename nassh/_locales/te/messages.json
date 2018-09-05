@@ -1,0 +1,491 @@
+{
+	"already_mounted_message": {
+		"message": "File system is already mounted!"
+	},
+	"backup_prefs": {
+		"message": "Save Backup"
+	},
+	"bad_destination": {
+		"message": "గమ్యాన్ని అన్వయించడం సాధ్యం కాలేదు: $1"
+	},
+	"before_unload": {
+		"message": "ఈ ట్యాబ్‌ను మూసివేయడం వలన ఈ సెషన్ డిస్‌కనెక్ట్ అవుతుంది."
+	},
+	"cancel_button_label": {
+		"message": "రద్దు చేయి"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "ఈ ఆదేశం తెలిసిన హోస్ట్‌ల యొక్క మెనుని ప్రదర్శిస్తుంది మరియు మర్చిపోవడానికి హోస్ట్ కోసం ప్రాంప్ట్ చేస్తుంది."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "తెలిసిన ssh హోస్ట్‌ని మర్చిపోయారు."
+	},
+	"cmd_ssh_help": {
+		"message": "|username| మరియు |hostname| పరామితులు అవసరం, |port| ఐచ్ఛికం. పోర్ట్ పేర్కొనబడకుంటే, ఇది 22కు డిఫాల్ట్ చేస్తుంది."
+	},
+	"cmd_ssh_title": {
+		"message": "క్రొత్త SSH సెషన్‌ని తెరుస్తుంది."
+	},
+	"command_complete": {
+		"message": "ఆదేశం $1 స్థితి కోడ్ $2తో నిష్క్రమించింది."
+	},
+	"command_not_supported": {
+		"message": "Chrome యొక్క ఈ వెర్షన్‌లో $1కి మద్దతు లేదు"
+	},
+	"command_startup_failed": {
+		"message": "$1ని ప్రారంభించడం విఫలమైంది: $2"
+	},
+	"connect_button_label": {
+		"message": "కనెక్ట్ చేయి"
+	},
+	"connect_or_exit_message": {
+		"message": "(C)hoose another connection or E(x)it?"
+	},
+	"connecting": {
+		"message": "Connecting to $1..."
+	},
+	"connection_dialog_name": {
+		"message": "కనెక్షన్ డైలాగ్"
+	},
+	"console_crosh_options_notice": {
+		"message": "ప్రత్యేకమైన ఎంపికల పేజీ ఉందని మీకు తెలుసా?\nఇకపైన నేరుగా 'term_'ని సవరించాల్సిన అవసరం లేదు!\nదీనిని తెరవడం కోసం $1ని నొక్కండి లేదా దీనిని క్లిక్ చేయండి:\n$2"
+	},
+	"console_nassh_options_notice": {
+		"message": "ప్రత్యేకమైన ఎంపికల పేజీ ఉందని మీకు తెలుసా?\nఇకపై నేరుగా 'term_'తో ఎటువంటి గందరగోళం ఉండదు!\n$1"
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "Delete"
+	},
+	"disconnect_message": {
+		"message": "NaCl plugin exited with status code $1."
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_placeholder": {
+		"message": "అదనపు ఆదేశ పంక్తి తర్కాలు"
+	},
+	"field_description_aria_label": {
+		"message": "description"
+	},
+	"field_description_placeholder": {
+		"message": "username@hostname or free form text"
+	},
+	"field_hostname_aria_label": {
+		"message": "hostname"
+	},
+	"field_hostname_placeholder": {
+		"message": "hostname"
+	},
+	"field_mount_path_placeholder": {
+		"message": "డిఫాల్ట్ పథం వినియోగదారు యొక్క హోమ్ డైరెక్టరీ"
+	},
+	"field_port_aria_label": {
+		"message": "port"
+	},
+	"field_port_placeholder": {
+		"message": "port"
+	},
+	"field_relay_options_aria_label": {
+		"message": "SSH రిలే సర్వర్ ఎంపికలు"
+	},
+	"field_relay_options_placeholder": {
+		"message": "SSH రిలే సర్వర్ ఎంపికలు"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "default"
+	},
+	"field_username_aria_label": {
+		"message": "username"
+	},
+	"field_username_placeholder": {
+		"message": "username"
+	},
+	"found_relay": {
+		"message": "Found relay server: $1"
+	},
+	"get_profile_error": {
+		"message": "ఎర్రర్: ప్రొఫైల్ $1ని లోడ్ చేయడం సాధ్యం కాలేదు:\n$2"
+	},
+	"hterm_button_allow_always": {
+		"message": "ఎల్లప్పుడూ అనుమతించు"
+	},
+	"hterm_button_allow_session": {
+		"message": "ఈ సెషన్‌ని అనుమతించు"
+	},
+	"hterm_button_block": {
+		"message": "బ్లాక్ చేయి"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "$1ని లోడ్ చేయడం విఫలమైంది"
+	},
+	"hterm_loading_resource_start": {
+		"message": "$1ని లోడ్ చేస్తోంది ..."
+	},
+	"hterm_popup_inline_image": {
+		"message": "సందేశంలో చిత్రాలు"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "సందేశంలో చిత్రాలు నిలిపివేయబడ్డాయి"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "టెర్మినల్‌లో చిత్రాలను ప్రదర్శించడానికి రిమోట్ హోస్ట్‌ని అనుమతించాలో లేదో ఎంపిక.\n\nడిఫాల్ట్‌గా, ఏదో ఒక ఎంపికను ఎంచుకునే వరకు మేము ప్రాంప్ట్ చేస్తాము."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "సెట్ చేసినట్లయితే, Chrome OS Alt-Backspace->DEL రీమ్యాప్‌ని చర్యరద్దు చేస్తుంది, కనుక Alt-Backspace అంటే Alt-Backspace."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "AltGr గుర్తింపు అన్వేషణను ఎంచుకోండి.\n\n'null': Autodetect based on navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Disable any AltGr related munging.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Alt కీ అనేది Meta కీ వలె పని చేయాలో లేదా విశిష్ట Alt కీ వలె పని చేయాలో సెట్ చేయండి."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Alt కీని ఎలా నిర్వహించాలో నియంత్రిస్తుంది.\n\n  escape: ESC ఆదిప్రత్యయాన్ని పంపుతుంది.\n  8-బిట్: xterm వలె టైప్ చేసిన అక్షరానికి 128 జోడిస్తుంది .\n బ్రౌజర్-కీ: కీని నొక్కే వరకు వేచి ఉంటుంది మరియు బ్రౌజర్ ఏమి చెబుతుందో చూపుతుంది.\n (కొన్ని Alt శ్రేణుల కోసం బ్రౌజర్ డిఫాల్ట్ చర్యలను అమలు చేసే\nప్లాట్‌ఫారమ్‌లలో ఇది అంత సక్రమంగా పని చేయదు.)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "టెర్మినల్ గంట శబ్దం యొక్క URL. వినిపించని గంట కోసం ఖాళీ వాక్యం."
+	},
+	"hterm_pref_background_color": {
+		"message": "మరే ఇతర రంగు విశేషణాలు లేని వచనానికి నేపథ్య రంగు."
+	},
+	"hterm_pref_background_image": {
+		"message": "నేపథ్య చిత్రం యొక్క CSS విలువ. చిత్రం లేకుంటే ఖాళీ వాక్యం.\n\nఉదాహరణకు:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "నేపథ్య చిత్ర స్థానం యొక్క CSS విలువ.\n\nఉదాహరణకు:\n  10% 10%\n  మధ్యన"
+	},
+	"hterm_pref_background_size": {
+		"message": "నేపథ్య చిత్ర పరిమాణం యొక్క CSS విలువ."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "ఒప్పు అయితే, backspace అనేది BS ('\\x08', aka ^H) పంపాలి. లేదంటే, backspace కీ అనేది '\\x7f' పంపాలి."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "ఇది ఆబ్జెక్ట్‌గా పేర్కొనబడి ఉంటుంది. ఇది ఒక సన్నని శ్రేణి, దీనిలో ప్రతి ఒక్క లక్షణం అక్షర సమితి కోడ్ మరియు విలువగా ఆ సన్నని శ్రేణి లాంటి ఆబ్జెక్ట్ ఉంటుంది. ఆ సన్నని శ్రేణిలో, ప్రతి లక్షణం అందించబడే అక్షరం మరియు విలువ అనేది ప్రదర్శిత అక్షరం.\n\nఉదాహరణకు:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "కాపీ చేసిన తర్వాత ఎంపికను తీసివేయాలో లేదో నిర్ధారిస్తుంది."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "ఆదేశం అమలు పూర్తయిన తర్వాత విండోని మూసివేయాలో లేదో ఎంపిక."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "డిఫాల్ట్ పాలెట్‌లో రంగులను భర్తీ చేస్తుంది.\n\nదీనిని శ్రేణి లేదా ఆబ్జెక్ట్ వలె పేర్కొనవచ్చు. ఒకవేళ ఆబ్జెక్ట్ వలె పేర్కొన్నట్లయితే, అది కొద్దికొద్దిగా ఉండే శ్రేణిగా భావించబడుతుంది, ప్రతి లక్షణం రంగుల పాలెట్‌లో సంఖ్యా సూచికతో ఉంటుంది.\n\nవిలువలను దాదాపు ఏ CSS రంగు విలువతోనైనా పేర్కొనవచ్చు. దీనిలో #RGB, #RRGGBB, rgb(...), rgba(...) ఉంటాయి మరియు ప్రామాణిక X11 rgb.txt ఫైల్‌లో కూడా భాగమైన ఏ రంగు పేర్లు అయినా ఉంటాయి.\n\nడిఫాల్ట్ విలువ మార్చకుండా ఉండేలా పేర్కొనడానికి మీరు 'null' ఉపయోగించవచ్చు. ఒకవేళ విలువను శ్రేణి వలె పేర్కొన్నప్పుడు చిన్న సంఖ్యలోని సూచికలను దాటవేయడానికి ఇది ఉపయోగకరంగా ఉంటుంది.\n\nఉదాహరణకు, ఇవి రెండూ రంగు సూచిక 1ని నీలానికి సెట్ చేస్తాయి:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "మౌస్ ద్వారా ఎంపిక చేసిన భాగాన్ని ఆటోమేటిక్‌గా క్లిప్‌బోర్డ్‌కి కాపీ చేస్తుంది."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "ఒప్పు అయితే Ctrl-C కాపీ చేస్తుంది, తప్పు అయితే ^Cని హోస్ట్‌కి పంపుతుంది.\nఒప్పు అయితే Ctrl-Shift-C అనేది ^Cని హోస్ట్‌కి పంపుతుంది, తప్పు అయితే కాపీ చేస్తుంది."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "ఒప్పు అయితే, Ctrl-Plus/Minus/Zero జూమ్‌ని నియంత్రిస్తుంది.\nతప్పు అయితే, Ctrl-Shift-Plus/Minus/Zero జూమ్‌ని నియంత్రిస్తుంది, Ctrl-Minus ^_ని పంపుతుంది, Ctrl-Plus/Zero ఏదీ చేయదు."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "ఒప్పు అయితే Ctrl-V అతికిస్తుంది, తప్పు అయితే హోస్ట్‌కి ^Vని పంపుతుంది.\nఒప్పు అయితే Ctrl-Shift-V అనేది ^Vని హోస్ట్‌కి పంపుతుంది, తప్పు అయితే అతికిస్తుంది."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "డిఫాల్ట్‌గా వచన కర్సర్ మిణుమిణుకుమని వెలగాలో లేదో ఎంపిక. అమలు చేసే సమయంలో టెర్మినల్ ఎస్కేప్ శ్రేణుల ద్వారా దీనిని టోగుల్ చేయవచ్చు."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "వచన కర్సర్ బ్లింక్ రేటు మిల్లీసెకన్లలో ఉంటుంది.\n\nరెండు మూలకాల శ్రేణి, దీనిలో మొదటిది కర్సర్ ఎంతసేపు ఆన్‌లో ఉండాలి, రెండవది కర్సర్ ఎంతసేపు ఆఫ్‌లో ఉండాలి అనేవి సూచిస్తుంది."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "కనిపించే వచన కర్సర్ యొక్క రంగు."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "ఒప్పు అయితే, నేపథ్యంలోని టెర్మినల్ గంటలు ఒక వెబ్ నోటిఫికేషన్‌ను రూపొందిస్తాయి. https://www.w3.org/TR/notifications/\n\nనోటిఫికేషన్‌లను ప్రదర్శించడానికి వినియోగదారు నుండి అనుమతి అవసరం. ఈ ఎంపికను ఒప్పుకు సెట్ చేసినప్పుడు, hterm అవసరమైతే వినియోగదారును అనుమతి కోసం అడగడానికి ప్రయత్నిస్తుంది. ఈ అనుమతి అభ్యర్థన వినియోగదారు చర్య మూలంగా ట్రిగ్గర్ చేయబడి ఉండకపోతే బ్రౌజర్‌లు దీనిని చూపకపోవచ్చు.\n\n\"నోటిఫికేషన్‌లు\" అనుమతి కలిగి ఉన్న Chrome ఎక్స్‌టెన్షన్‌లు నోటిఫికేషన్‌లను ప్రదర్శించడానికి అనుమతి కలిగి ఉంటాయి."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "తూర్పు ఆసియా అస్పష్ట అక్షరాలు రెండు నిలువు వరుసల వెడల్పు కలిగి ఉండాలో లేదో నిర్ధారిస్తుంది."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "8-బిట్ నియంత్రణ అక్షరాలను ప్రారంభించడానికి ఒప్పు ఉండాలి, వాటిని విస్మరించడానికి తప్పు ఉండాలి.\n\nఈ సెట్టింగ్‌తో సంబంధం లేకుండా మేము ఈ నియంత్రణ అక్షరాల యొక్క రెండు బైట్‌ల వెర్షన్‍లను గౌరవిస్తాము."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "మేము బ్లింక్ విశేషణాన్ని గౌరవించాలనే సందర్భంలో ఒప్పు ఉండాలి. దానిని విస్మరించాలనే సందర్భంలో తప్పు ఉండాలి."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "బోల్డ్/ప్రకాశం విశేషణంతో ఉన్న వచనం కోసం మేము బోల్డ్ బరువు గల ఫాంట్ ఉపయోగించాలంటే ఒప్పు ఉండాలి. సాధారణ బరువు ఫాంట్ ఉపయోగించాలంటే తప్పు ఉండాలి. ఆటోడిటెక్ట్ చేయాలంటే శూన్యం ఉండాలి."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "బోల్డ్ విశేషణాన్ని కలిగి ఉండే ఏదైనా వచనం కోసం మేము ప్రకాశవంతమైన రంగులు (16 రంగుల పాలెట్‌లోని 8-15) ఉపయోగించాలంటే ఒప్పు ఉండాలి. లేదంటే తప్పు ఉండాలి."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "హోస్ట్ క్లిప్‌బోర్డ్‌లో వ్రాసినప్పుడు టెర్మినల్‌లో సందేశాన్ని చూపాలో లేదో ఎంపిక."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "రిమోట్ హోస్ట్ నేరుగా స్థానిక సిస్టమ్ క్లిప్‌బోర్డ్‌లో వ్రాయడానికి అనుమతిస్తుంది.\nఈ సెట్టింగ్ ఏ విధంగా ఉన్నప్పటికీ ఎన్నటికీ పఠన యాక్సెస్ మంజూరు చేయబడదు.\n\nఇది OSC-52 వంటి ఫీచర్‌లకు యాక్సెస్‌ను నియంత్రించడానికి ఉపయోగించబడుతుంది."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "వచన కర్సర్ బ్లింక్ స్థితిని DEC ప్రైవేట్ మోడ్ 12 ఉపయోగించి మార్చడానికి హోస్ట్ చేసే ప్రయత్నాన్ని పరిగణిస్తుంది."
+	},
+	"hterm_pref_environment": {
+		"message": "ఆబ్జెక్ట్‌గా ఆవరణ వేరియబుల్‌ల ప్రాథమిక సెట్."
+	},
+	"hterm_pref_font_family": {
+		"message": "టెర్మినల్ వచనం కోసం డిఫాల్ట్ ఫాంట్ కుటుంబం."
+	},
+	"hterm_pref_font_size": {
+		"message": "పిక్సెల్‌లలో డిఫాల్ట్ ఫాంట్ పరిమాణం."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "CSS ఫాంట్ మృదుత్వ లక్షణం."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "మరే ఇతర రంగు విశేషణాలు లేని వచనానికి ముందుభాగం రంగు."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "ఒప్పు అయితే, Home/End కీలు టెర్మినల్ స్క్రోల్‌బార్‌ని నియంత్రిస్తాయి మరియు Shift-Home/End కీలు VT కీ కోడ్‌లను పంపుతాయి. తప్పు అయితే, Home/End కీలు VT కోడ్‌లను పంపుతాయి మరియు Shift-Home/End స్క్రోల్‌లు చేస్తాయి."
+	},
+	"hterm_pref_keybindings": {
+		"message": "కీ చర్యల కోసం కీల యొక్క శ్రేణి మ్యాప్.  కీ శ్రేణుల్లో సున్నా లేదా మరిన్ని మోడిఫైయర్ కీలు, వాటి ప్రక్కన కీ కోడ్ ఉంటాయి.  కీ కోడ్‌లలో డెసిమల్ లేదా హెక్సాడెసిమల్ సంఖ్యలు లేదా కీ ఐడెంటిఫైయర్ ఉంటాయి.  కీ చర్యలను హోస్ట్‌కు పంపాల్సిన వాక్యంగా లేదా చర్య ఐడెంటిఫైయర్‌గా పేర్కొనవచ్చు. ఫార్మాట్ గురించిన పూర్తి వివరణ కోసం, https://goo.gl/LWRndr చూడండి.\n\nకీ బైండింగ్‌లకు ఉదాహరణ:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "ఒప్పు అయితే, మీడియా కీలను వాటి Fkey సమానమైన వాటికి మార్పిడి చేస్తుంది. తప్పు అయితే, కీలను నిర్వహించే సామర్థ్యం బ్రౌజర్‌కి ఇవ్వబడుతుంది."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Meta కీ లీడింగ్ Escapeని పంపాలో లేదో సెట్ చేయండి."
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "మౌస్‌లోని అతికించే బటన్ లేదా ఆటోడిటెక్ట్ చేయడానికి శూన్యం.\n\nఆటోడిటెక్ట్ చేయడం కోసం, మేము (Chrome OSతో సహా) X11 యేతర ప్లాట్‌ఫారమ్‌లలో మధ్య మౌస్ బటన్‌ని ఉపయోగిస్తాము. X11లో, కుడి మౌస్ బటన్‌ని ఉపయోగిస్తాము (ఎందుకంటే, మధ్య మౌస్ బటన్ ద్వారా స్థానిక విండో నిర్వాహికిని అతికించాలి).\n\n0 == ఎడమ (ప్రాథమిక) బటన్.\n1 == మధ్య (సహాయక) బటన్.\n2 == కుడి (రెండవ) బటన్.\n\nఈ ఎంపిక \"మౌస్-కుడి-క్లిక్-అతికించడం\" సెట్టింగ్ యొక్క క్రియాత్మక స్వతంత్ర అంశం.\n\nగమనిక: ఇది ఎడమ & కుడి చేతి వాటం ఉన్న మౌస్‌లను సక్రమంగా నిర్వహిస్తుంది."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "కుడి మౌస్ బటన్‌ని క్లిక్ చేసినప్పుడు అతికిస్తుంది.\n\nఈ ఎంపిక \"మౌస్-అతికించే-బటన్\" సెట్టింగ్ యొక్క క్రియాత్మక స్వతంత్ర అంశం.\n\nగమనిక: ఇది ఎడమ & కుడి చేతి వాటం ఉన్న మౌస్‌లను సక్రమంగా నిర్వహిస్తుంది."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "ఒప్పు అయితే, Page Up/Down కీలు టెర్మినల్ స్క్రోల్‌బార్‌ని నియంత్రిస్తాయి మరియు Shift-Page Up/Down కీలు VT కీ కోడ్‌లను పంపుతాయి. తప్పు అయితే, Page Up/Down VT కోడ్‌లను పంపుతాయి మరియు Shift-Page Up/Down స్క్రోల్‌లు చేస్తాయి."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "మేము Alt-1..9ని బ్రౌజర్‌కి పంపాలో లేదో సెట్ చేస్తుంది.\n\nఇది బ్రౌజర్ ట్యాబ్‌లో hterm అమలు చేస్తున్నప్పుడు నిర్వహించగలిగేది, కాబట్టి మీరు Chrome \"ట్యాబ్‌కి మార్చు\" కీబోర్డ్ యాక్సిలిరేటర్‌లను కోల్పోరు. ట్యాబ్‌లో అమలు చేయనప్పుడు, ఈ కీలను హోస్ట్‌కి పంపడం ఉత్తమం, దీని వలన వీటిని vim లేదా emacsలో వినియోగించగలరు.\n\nఒప్పు అయితే, Alt-1..9 బ్రౌజర్ ద్వారా నిర్వహించబడతాయి. తప్పు అయితే, Alt-1..9 హోస్ట్‌కి పంపబడతాయి. శూన్యం అయితే, బ్రౌజర్ ప్లాట్‌ఫారమ్ మరియు విండో రకం ఆధారంగా ఆటోడిటెక్ట్ అవుతాయి."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "మేము Ctrl-1..9ని బ్రౌజర్‌కి పంపాలో లేదో సెట్ చేస్తుంది.\n\nఇది బ్రౌజర్ ట్యాబ్‌లో hterm అమలు చేస్తున్నప్పుడు నిర్వహించగలిగేది, కాబట్టి మీరు Chrome \"ట్యాబ్‌కి మార్చు\" కీబోర్డ్ యాక్సిలిరేటర్‌లను కోల్పోరు. ట్యాబ్‌లో అమలు చేయనప్పుడు, ఈ కీలను హోస్ట్‌కి పంపడం ఉత్తమం, దీని వలన వీటిని vim లేదా emacsలో వినియోగించగలరు.\n\nఒప్పు అయితే, Ctrl-1..9 బ్రౌజర్ ద్వారా నిర్వహించబడతాయి. తప్పు అయితే, Ctrl-1..9 హోస్ట్‌కి పంపబడతాయి. శూన్యం అయితే, బ్రౌజర్ ప్లాట్‌ఫారమ్ మరియు విండో రకం ఆధారంగా ఆటోడిటెక్ట్ అవుతాయి."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "మేము Meta-1..9ని బ్రౌజర్‌కి పంపాలో లేదో సెట్ చేస్తుంది.\n\nఇది బ్రౌజర్ ట్యాబ్‌లో hterm అమలు చేస్తున్నప్పుడు నిర్వహించగలిగేది, కాబట్టి మీరు Chrome \"ట్యాబ్‌కి మార్చు\" కీబోర్డ్ యాక్సిలిరేటర్‌లను కోల్పోరు. ట్యాబ్‌లో అమలు చేయనప్పుడు, ఈ కీలను హోస్ట్‌కి పంపడం ఉత్తమం, దీని వలన వీటిని vim లేదా emacsలో వినియోగించగలరు.\n\nఒప్పు అయితే, Meta-1..9 బ్రౌజర్ ద్వారా నిర్వహించబడతాయి. తప్పు అయితే, Meta-1..9 హోస్ట్‌కి పంపబడతాయి. శూన్యం అయితే, బ్రౌజర్ ప్లాట్‌ఫారమ్ మరియు విండో రకం ఆధారంగా ఆటోడిటెక్ట్ అవుతాయి."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Meta-Vని హోస్ట్‌కి పంపాలో లేదో సెట్ చేయండి."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "హోస్ట్ నుండి అందుకునే డేటా కోసం ఆశించే ఎన్‌కోడింగ్‌ని సెట్ చేయండి.\n\n'utf-8' మరియు 'raw' అనేవి చెల్లుబాటు అయ్యే విలువలు."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "ఏ కీ స్ట్రోక్‌లో అయినా దిగువకు స్క్రోల్ చేయాలో లేదో ఎంపిక."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "టెర్మినల్ అవుట్‌పుట్‌లో దిగువకు స్క్రోల్ చేయాలో లేదో ఎంపిక."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "ప్రత్యామ్నాయ స్క్రీన్ బఫర్ ఉపయోగిస్తున్నప్పుడు మరియు DECCKM (అప్లికేషన్ కర్సర్ కీలు) యాక్టివ్‌గా ఉన్నప్పుడు, మౌస్ వీల్ స్క్రోల్ ఈవెంట్‌లు బాణం కీల వలె పని చేస్తాయి.\n\nShift కీని నొక్కి ఉంచడం ద్వారా దీనిని తాత్కాలికంగా నిలిపివేయవచ్చు.\n\nపేజర్‌లను (తక్కువగా) ఉపయోగిస్తున్నప్పుడు లేదా మాన్యువల్ పేజీలు లేదా టెక్స్ట్ ఎడిటర్‌లలో (vi/nano) చదువుతున్నప్పుడు లేదా screen/tmux ఉపయోగిస్తున్నప్పుడు ఇది తరచుగా సంభవిస్తుంటుంది."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "స్క్రోల్ వీల్ ద్వారా సంభవించే వీల్ ఈవెంట్‌లలోని పిక్సెల్ డెల్టా కోసం గుణకం. పేజీ ఎంత వేగంగా స్క్రోల్ చేయాలనేది మారుస్తుంది."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "నిలువు స్క్రోల్‌బార్ మోడ్"
+	},
+	"hterm_pref_send_encoding": {
+		"message": "హోస్ట్‌కి పంపబడే డేటా కోసం ఎన్‌కోడింగ్‌ని సెట్ చేయండి."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "ఒప్పు అయితే Shift-Insert అతికిస్తుంది, తప్పు అయితే హోస్ట్‌కి పంపబడుతుంది."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "డిఫాల్ట్ టెర్మినల్ ఎన్‌కోడింగ్ (DOCS).\n\nISO-2022 అక్షరాల మ్యాపింగ్ అనువాదాలను (గ్రాఫిక్స్ మ్యాప్‌ల వంటివి) ప్రారంభిస్తుంది.\nUTF-8 వాటికి మద్దతును నిలిపివేస్తుంది.\n\nలాక్ చేయబడిన చరాంశం అంటే అమలు సమయంలో టెర్మినల్ ఎస్కేప్ శ్రేణుల ద్వారా ఎన్‌కోడింగ్ మార్చబడదని సూచిక.\n\nమీరు లెగసీ అప్లికేషన్‌లలో విచ్ఛిన్న అమలు ప్రక్రియను గమనిస్తే మినహా UTF-8కి లోబడి ఉండాలి."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "డిఫాల్ట్ విండో కాపీ ప్రవర్తనను ఉపయోగించాలో లేదో పేర్కొనండి"
+	},
+	"hterm_pref_user_css": {
+		"message": "టెర్మినల్ పత్రంలో చేర్చాల్సిన వినియోగదారు స్టైల్‌షీట్ యొక్క URL."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "టెర్మినల్‌ని శైలీకరించడం కోసం అనుకూల CSS వచనం."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "ఎంపికలోని ఎడమవైపు (ప్రారంభం)కి విరామ సరిపోలికకు రెగ్యులర్ ఎక్స్‌ప్రెషన్.\n\nసాధారణంగా ఇది నిర్దిష్ట అక్షరాలను తిరస్కరించే అక్షరాల శ్రేణి.\nమేము డిఫాల్ట్‌గా \"~\" మరియు \".\"ని తరచుగా వాటితో ప్రారంభించే పాత్‌లుగా అనుమతిస్తాము."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "మధ్యలో ఉన్న అన్ని అక్షరాలకు సరిపోల్చే రెగ్యులర్ ఎక్స్‌ప్రెషన్.\n\nసాధారణంగా ఇది నిర్దిష్ట అక్షరాలను తిరస్కరించే అక్షరాల శ్రేణి.\n\nప్రారంభ స్థానం చుట్టూ ఎంపికను విస్తృతపరచడానికి ఉపయోగించబడుతుంది."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "ఎంపికలోని కుడివైపు (ముగింపు)కి విరామ సరిపోలికకు రెగ్యులర్ ఎక్స్‌ప్రెషన్.\n\nసాధారణంగా ఇది నిర్దిష్ట అక్షరాలను తిరస్కరించే అక్షరాల శ్రేణి."
+	},
+	"identity_label": {
+		"message": "Identity"
+	},
+	"import_link_aria_label": {
+		"message": "file import"
+	},
+	"import_link_label": {
+		"message": "Import..."
+	},
+	"initializing_relay": {
+		"message": "Looking up relay server using: $1"
+	},
+	"json_parse_error": {
+		"message": "'$1'లో JSON అన్వయం సాధ్యపడలేదు: $2"
+	},
+	"known_hosts_empty": {
+		"message": "తెలిసిన హోస్ట్‌లు లేవు, మర్చిపోవడానికి ఏమీ లేదు."
+	},
+	"known_hosts_prompt": {
+		"message": "దయచేసి మర్చిపోవడానికి హోస్ట్‌ని ఎంచుకోండి [1-$1]:"
+	},
+	"known_hosts_title": {
+		"message": "తెలిసిన హోస్ట్‌లు:"
+	},
+	"loading_label": {
+		"message": "Loading..."
+	},
+	"missing_param": {
+		"message": "లేని పరామితి: $1"
+	},
+	"mount_button_label": {
+		"message": "SFTP Mount"
+	},
+	"mount_path_label": {
+		"message": "మౌంట్ చేయాల్సిన పథం"
+	},
+	"mounted_message": {
+		"message": "Mounted!"
+	},
+	"notify_copy": {
+		"message": "Selection Copied"
+	},
+	"ok_button_label": {
+		"message": "సరే"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> సేవ్ చేసిన ప్రొఫైల్‌కు లేదా కొత్త ssh సిస్టమ్‌కు కనెక్ట్ చేయండి"
+	},
+	"open_as_window_tip": {
+		"message": "[చిట్కా] మీ టెర్మినల్‌ని మూసివేయకుండా Ctrl-Wని నిరోధించడానికి 'విండో వలె తెరువు' లేదా 'పూర్తి స్క్రీన్' ఎంపికలను ఉపయోగించండి!\n[చిట్కా] మరింత సమాచారం కోసం $1ని చూడండి."
+	},
+	"options_button_label": {
+		"message": "Options"
+	},
+	"plugin_loading": {
+		"message": "NaCl ప్లగిన్‌ను లోడ్ చేస్తోంది..."
+	},
+	"plugin_loading_complete": {
+		"message": " పూర్తయింది."
+	},
+	"plugin_loading_failed": {
+		"message": " విఫలమైంది! :("
+	},
+	"pref_backup_filename": {
+		"message": "Secure Shell Preferences Backup.json"
+	},
+	"preferences_header": {
+		"message": "Profile Settings"
+	},
+	"preferences_reset": {
+		"message": "All preferences reset!"
+	},
+	"reconnect_message": {
+		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
+	},
+	"relay_options_error": {
+		"message": "తెలియని రిలే ఎంపిక: $1"
+	},
+	"relay_retry": {
+		"message": "Retrying..."
+	},
+	"request_pin_prompt": {
+		"message": "'$2'లో కీ $1 అన్‌లాక్ చేయడానికి పిన్‌ని నమోదు చేయండి ($3 ప్రయత్నాలు మిగిలి ఉన్నాయి):"
+	},
+	"restore_prefs": {
+		"message": "Restore Backup"
+	},
+	"shortcut_list_aria_label": {
+		"message": "saved connections"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "దయచేసి స్మార్ట్ కార్డ్ కనెక్టర్ యాప్‌ని ఇన్‌స్టాల్ చేయండి: $1"
+	},
+	"ssh_argstr_label": {
+		"message": "SSH Arguments"
+	},
+	"terminal_preview_label": {
+		"message": "Preview"
+	},
+	"terminal_profile_label": {
+		"message": "Current profile"
+	},
+	"tip_1": {
+		"message": "మీరు లింక్‌లపై క్లిక్ చేసేటప్పుడు Ctrl (macOSలో అయితే, Cmd) నొక్కి ఉంచడం ద్వారా వాటిని తెరవవచ్చు!"
+	},
+	"tip_10": {
+		"message": "విండోలో పని చేస్తున్నప్పుడు, Ctrl-Shift-N నొక్కడం ద్వారా మరొక సెషన్‌ను తెరవవచ్చు."
+	},
+	"tip_11": {
+		"message": "మీరు ఈ లింక్‌లో కీలు/సత్వర మార్గాలను పునర్నిర్వచించవచ్చు: https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "ssh auth కోసం Yubikeys మరియు ఇతర స్మార్ట్ కార్డ్‌లను ఉపయోగించండి: https://goo.gl/3ZEU1w"
+	},
+	"tip_13": {
+		"message": "రేఖాకృతికి అనుగుణమైన ప్రదర్శన చిత్రాలు: https://goo.gl/MnSysj"
+	},
+	"tip_2": {
+		"message": "hterm-notify ఉపయోగించే బ్రౌజర్‌లోని ప్రదర్శన నోటిఫికేషన్‌లు: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "'ssh <profile name>' అని టైప్ చేయడం ద్వారా ఓమ్నిపెట్టె నుండి కనెక్ట్ చేయండి: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS SFTP ద్వారా ఫైల్ సిస్టమ్‌లను మౌంట్ చేయగలదు మరియు ఫైల్‌లు యాప్ ద్వారా బ్రౌజ్ చేయగలదు. 'కనెక్ట్'కి బదులుగా 'SFTP మౌంట్'ని ఉపయోగించండి."
+	},
+	"tip_5": {
+		"message": "వెబ్ పేజీలలో ssh:// links ఉపయోగించి కనెక్ట్ చేయండి లేదా బుక్‌మార్క్‌ను సేవ్ చేయండి: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "ప్రాథమిక 16 రంగులు & 256 రంగులు & పూర్తి 24-బిట్ రంగులు ఉపయోగించి మీ అవుట్‌పుట్/ప్రాంప్ట్‌కు రంగు అద్దండి: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "OSC-52 ఉపయోగించి emacs/vim/మొ... నుండి మీ క్లిప్‌బోర్డ్‌కు కాపీ చేయండి: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "సహకార hterm/Secure Shell వినియోగదారులతో chromium-hterm@chromium.org ద్వారా చాట్ చేయండి: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "బగ్ కనుగొన్నారా?  కొత్త ఫీచర్ అభ్యర్థించారా?  మాకు తెలియజేయండి: https://goo.gl/vb94JY"
+	},
+	"unexpected_error": {
+		"message": "ఊహించని లోపం సంభవించింది, దయచేసి మరిన్ని వివరాల కోసం JavaScript కన్సోల్‌ను తనిఖీ చేయండి."
+	},
+	"unknown_ssh_client_version": {
+		"message": "తెలియని SSH వెర్షన్: $1"
+	},
+	"unmount_button_label": {
+		"message": "Unmount SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "ఒక అప్‌డేట్ అందుబాటులో ఉంది. దయచేసి విండోలన్నీ మూసివేయండి."
+	},
+	"welcome_changelog": {
+		"message": "మార్పుల విశ్లేషణ నివేదిక/విడుదల గమనికలు: $1"
+	},
+	"welcome_faq": {
+		"message": "Answers to Frequently Asked Questions: $1 (ctrl+click on links to open)"
+	},
+	"welcome_release_highlights": {
+		"message": "$1 నుండి ముఖ్యమైన మార్పులు:"
+	},
+	"welcome_tip_of_day": {
+		"message": "యాదృచ్ఛిక ప్రచార చిట్కా #$1: $2"
+	},
+	"welcome_version": {
+		"message": "Welcome to $1 version $2."
+	},
+	"zoom_warning": {
+		"message": "Please set Chrome Menu->Zoom to 100%"
+	}
+}

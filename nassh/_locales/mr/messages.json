@@ -1,0 +1,491 @@
+{
+	"already_mounted_message": {
+		"message": "File system is already mounted!"
+	},
+	"backup_prefs": {
+		"message": "Save Backup"
+	},
+	"bad_destination": {
+		"message": "गंतव्‍याचे विश्लेषण करण्‍यात अक्षम: $1"
+	},
+	"before_unload": {
+		"message": "हा टॅब बंद केल्याने हे सत्र डिसकनेक्ट होईल."
+	},
+	"cancel_button_label": {
+		"message": "रद्द करा"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "हा आदेश ज्ञात होस्‍ट आणि सूचनांचा एक मेनू होस्‍टने विसरावे यासाठी प्रदर्शित करतो."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "एक ज्ञात ssh होस्‍ट विसरा."
+	},
+	"cmd_ssh_help": {
+		"message": "|username| आणि |hostname| मापदंड आवश्‍यक आहेत, |port| पर्यायी आहे. पोर्ट निर्दिष्‍ट केले नसल्‍यास ते बाय डीफॉल्ट 22 असते."
+	},
+	"cmd_ssh_title": {
+		"message": "एक नवीन SSH सत्र उघडते."
+	},
+	"command_complete": {
+		"message": "The command $1 exited with status code $2."
+	},
+	"command_not_supported": {
+		"message": "Chrome च्या या आवृत्तीला $1 सपोर्ट करत नाही"
+	},
+	"command_startup_failed": {
+		"message": "$1 लॉंंच करता आले नाही: $2"
+	},
+	"connect_button_label": {
+		"message": "कनेक्‍ट करा"
+	},
+	"connect_or_exit_message": {
+		"message": "(C)hoose another connection or E(x)it?"
+	},
+	"connecting": {
+		"message": "Connecting to $1..."
+	},
+	"connection_dialog_name": {
+		"message": "कनेक्शन डायलॉग"
+	},
+	"console_crosh_options_notice": {
+		"message": "त्यामध्ये समर्पित पर्याय पेज आहे हे तुम्हाला माहित आहे का?\nआता term_ मध्ये थेट बदल करण्याची गरज नाही!\nते उघडण्यासाठी $1 दाबा किंवा यावर क्लिक करा:\n$2"
+	},
+	"console_nassh_options_notice": {
+		"message": "समर्पित पर्याय पेज आहे हे तुम्हाला माहित आहे का?\nआता term_ मध्ये थेट बदल करण्याची गरज नाही!\n$1"
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "Delete"
+	},
+	"disconnect_message": {
+		"message": "NaCl plugin exited with status code $1."
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_placeholder": {
+		"message": "extra command line arguments"
+	},
+	"field_description_aria_label": {
+		"message": "description"
+	},
+	"field_description_placeholder": {
+		"message": "username@hostname or free form text"
+	},
+	"field_hostname_aria_label": {
+		"message": "hostname"
+	},
+	"field_hostname_placeholder": {
+		"message": "hostname"
+	},
+	"field_mount_path_placeholder": {
+		"message": "वापरकर्त्याची होम डिरेक्टरी हा डीफॉल्ट पाथ आहे"
+	},
+	"field_port_aria_label": {
+		"message": "port"
+	},
+	"field_port_placeholder": {
+		"message": "port"
+	},
+	"field_relay_options_aria_label": {
+		"message": "SSH रिले सर्व्हर पर्याय"
+	},
+	"field_relay_options_placeholder": {
+		"message": "SSH रिले सर्व्हर पर्याय"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "default"
+	},
+	"field_username_aria_label": {
+		"message": "username"
+	},
+	"field_username_placeholder": {
+		"message": "username"
+	},
+	"found_relay": {
+		"message": "Found relay server: $1"
+	},
+	"get_profile_error": {
+		"message": "एरर: प्रोफाइल $1 लोड करता आला नाही:\n$2"
+	},
+	"hterm_button_allow_always": {
+		"message": "नेहमी अनुमती द्या"
+	},
+	"hterm_button_allow_session": {
+		"message": "या सेशनला अनुमती द्या"
+	},
+	"hterm_button_block": {
+		"message": "ब्लॉक करा"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "$1 लोड करता आले नाही"
+	},
+	"hterm_loading_resource_start": {
+		"message": "$1 लोड करत आहे ..."
+	},
+	"hterm_popup_inline_image": {
+		"message": "इनलाइन इमेज"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "इनलाइन इमेज बंद केल्या"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "रिमोट होस्टला टर्मिनलमधील इमेज दाखवण्याची अनुमती द्यायची की नाही.\n\nबाय डीफॉल्ट, निवड करेपर्यंत आम्ही सूचित करू."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "सेट केले असल्यास, Chrome OS Alt-Backspace->DEL रीमॅप पहिल्यासारखे केले जाते, जेणेकरून alt- backspace निश्चितच alt-backspace असेल."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "AltGr शोध hack^Wheuristic निवडा.\n\n'null': नेव्हिगेशन भाषेवर आधारित स्वयंशोध:\n      'en-us' => 'none', नाहीतर => 'right-alt'\n'none': AltGr संबंधित मंगिंग बंद करा.\n'ctrl- alt': Ctrl+Alt म्हणजे AltGr असे गृहित धरा.\n'left-alt': डावे Alt म्हणजे AltGr असे गृहित धरा.\n'right-alt': उजवे Alt म्हणजे AltGr असे गृहित धरा."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Alt की मेटा की प्रमाणे कार्य करते की, विशिष्ट Alt की प्रमाणे, ते सेट करा."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Alt की कशी हाताळली जाते ते नियंत्रित करा.\n\n  एस्केप: ESC उपसर्ग पाठवा.\n  8-बिट: xterm मध्ये टाइप केलेले १२८ वर्ण जोडा\n ब्राउझर की दाबण्याच्या इव्हेंटची वाट बघा आणि ब्राउझर काय म्हणतो ते पहा. (काही Alt क्रमांसाठी ब्राउझर डीफॉल्ट क्रिया करतो त्या प्लॅटफॉर्मवर हे काम करणार नाही.)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "टर्मिनल बेल आवाजाची URL. ऐकू येत नसलेल्या बेलसाठी रिक्त स्ट्रिंग."
+	},
+	"hterm_pref_background_color": {
+		"message": "कोणतेही अन्य रंग विशेषता नसलेल्या मजकूरासाठी बॅकग्राउंड रंग."
+	},
+	"hterm_pref_background_image": {
+		"message": "बॅकग्राउंड इमेजचे CSS मूल्य.  इमेज नसल्यास रिक्त स्ट्रिंग.\n\nउदाहरणार्थ:\nurl(https://goo.gl/anedTK)\nरेषीय ग्रेडियंट(वर तळाशी, निळा, लाल)"
+	},
+	"hterm_pref_background_position": {
+		"message": "बॅकग्राउंड इमेज स्थितीचे CSS मूल्य\n\nउदाहरणार्थ:\n  १०% १०%\n  केंद्र"
+	},
+	"hterm_pref_background_size": {
+		"message": "बॅकग्राउंड इमेज आकाराचे CSS मूल्य."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "सत्य असल्यास, बॅकस्पेसने BS ('\\x08', aka ^H) पाठवणे अपेक्षित आहे. अन्यथा बॅकस्पेस कीने '\\x7f' पाठवणे अपेक्षित आहे."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "हे ऑब्जेक्ट म्हणून नेमून दिलेले आहे. हा स्पार्स अ‍ॅरे आहे, ज्यात प्रत्येक प्रॉपर्टी ही वर्ण संच कोड आहे आणि मूल्य हे ऑब्जेक्ट आहे जो एक स्पार्स अ‍ॅरे आहे. त्या स्पार्स अ‍ॅरेमध्ये, प्रत्येक प्रॉपर्टी म्हणजे मिळवलेला वर्ण आहे आणि मूल्य म्हणजे दाखवलेला प्रदर्शित वर्ण आहे.\n\nउदाहरणार्थ:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "कॉपी केल्यानंतर निवड साफ करायची की नाही."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "कमांडने अंमलात आणणे पूर्ण केल्यावर विंडो बंद करायची का नाही."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "डीफॉल्ट पॅलेटमध्ये रंग अधिशून्य करा.\n\n हे अ‍ॅरे किंवा ऑब्जेक्ट म्हणून निर्दिष्ट केले जाऊ शकते. ऑब्जेक्ट म्हणून निर्दिष्ट केले असल्यास त्याला स्पार्स अ‍ॅरे मानले जाते, ज्यात प्रत्येक प्रॉपर्टी ही अंकीय अनुक्रमणिका गुणिले कलर पॅलेट आहे.\n\nजवळजवळ कोणतेही css रंग मूल्य म्हणून मूल्ये निर्दिष्ट केली जाऊ शकतात. यामध्ये #RGB, #RRGGBB, rgb(...), rgba(...) आणि स्टॉक X11 rgb.txt फाइलचा एक भाग असलेल्या कोणत्याही रंग नावांचा समावेश आहे.\n\nडीफॉल्ट मूल्य बदलले जाऊ नये असे निर्दिष्ट करण्यासाठी तुम्ही 'रिक्त' वापरू शकता. मूल्य अ‍ॅरे म्हणून निर्दिष्ट केलेले असताना निर्देशांकांची लहान संख्या वगळण्यासाठी हे उपयुक्त आहे.\n\nउदाहरणार्थ, हे दोन्ही रंग इंडेक्स एकला निळ्यावर सेट करतात:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "माउस निवड क्लिपबोर्डवर आपोआप कॉपी करा."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "सत्य असल्यास Ctrl+C कॉपी करते, असत्य असल्यास होस्टला ^C पाठवा.\nसत्य असल्यास Ctrl+Shift+C होस्टला ^C पाठवतो, असत्य असल्यास कॉपी करतो."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "सत्य असल्यास, Ctrl-Plus/Minus/Zero झूम नियंत्रित करतो.\nअसत्य असल्यास, Ctrl-Shift- Plus/Minus/Zero झूम नियंत्रित करतो, Ctrl-Minus हे ^_ पाठवतो, Ctrl-Plus/Zero काही करत नाही."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "सत्य असल्यास Ctrl+V पेस्ट करतो, असत्य असल्यास होस्टला ^V पाठवतो\nसत्य असल्यास Ctrl+Shift+V होस्टला ^V पाठवतो, असत्य असल्यास पेस्ट करतो."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "मजकूर कर्स्ल बाय डीफॉल्ट ब्लिंक होतो का. हे टर्मिनल एस्केप क्रमानुसार रनटाइमच्या वेळी टॉगल केले जाऊ शकते."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "कर्सर ब्लिंक रेट मिलिसेकंदांमध्ये आहे.\n\nदोन घटकांचा अ‍ॅरे, पहिला अॅरे कर्सर किती वेळ चालू ठेवावा याबद्दल आहे आणि दुसरा तो किती वेळ बंद ठेवावा याबद्दल आहे."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "दृश्यमान मजकूर कर्सरचा रंग."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "सत्य असल्यास, बॅकग्राउंडमधील टर्मिनल बेल वेब सूचना तयार करतील. https://www.w3.org/TR/notifications/\n\nसूचना दाखवण्यासाठी वापरकर्त्याकडून परवानगी आवश्यक आहे. हा पर्याय सत्य वर सेट केलेला असेल तेव्हा hterm आवश्यक असल्यास वापरकर्त्याकडून परवानगी मागेल. परवानगी विनंती वापरकर्ता क्रियेमधून ट्रिगर झालेली नसल्यास ब्राउझर ही परवानगी विनंती कदाचित दाखवणार नाही.\n\n \"सूचना\" परवानगी असलेल्या Chrome एक्स्टेंशनना सूचना डिस्प्ले करण्याची परवानगी आहे."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian Ambiguous वर्णांमध्ये दोन स्तंभ रूंदी आहे की नाही ते सेट करा."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "८-बिट नियंत्रण वर्ण सुरू करण्यासाठी सत्य, त्यांना दुर्लक्षित करण्यासाठी असत्य.\n\nहे सेटिंग कसेही असू देत, आम्ही या नियंत्रण वर्णांच्या दोन-बाइट आवृत्तींचा आदर करू."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "आम्ही ब्लिंक विशेषणे ठेवणे आवश्यक असल्यास सत्य. ते दुर्लक्षित करायचे असल्यास असत्य."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "ठळक/चमकदार विशेषतेसह मजकूरासाठी आम्ही बोल्ड वेट फॉन्ट वापरणे आवश्यक असल्यास सत्य. नॉर्मल वेट फॉन्ट वापरायचे असल्यास असत्य. अॉटोडिटेक्ट असल्यास रिक्त."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "ठळक विशेषतेसह कोणत्याही मजकूरासाठी आम्ही ठळक रंग (१६ कलर पॅलेटवर ८-१५) वापरायचे असल्यास सत्य. अन्यथा असत्य."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "होस्टने क्लिपबोर्डवर लिहिल्यावर टर्मिनलमध्ये संदेश दाखवायचा का."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "स्थानिक सिस्टम क्लिपबोर्डवर थेट लिहिण्यासाठी रिमोट होस्टला अनुमती द्या.\nया सेटिंग व्यतिरिक्त रीड अ‍ॅक्सेस कधीही दिला जात नाही.\n\nहे OSC-५२ सारख्या वैशिष्ट्यांचा अ‍ॅक्सेस नियंत्रित करण्यासाठी वापरले जाते."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "DEC खाजगी मोड १२ वापरून कर्सर ब्लिंक स्थिती बदलण्याच्या होस्टच्या प्रयत्नाला मान्यता द्या."
+	},
+	"hterm_pref_environment": {
+		"message": "ऑब्जेक्टच्या रुपातील पर्यावरण व्हेरिएबलचा सुरूवातीचा संच"
+	},
+	"hterm_pref_font_family": {
+		"message": "टर्मिनल मजकूरासाठी डीफॉल्ट फॉन्ट फॅमिली."
+	},
+	"hterm_pref_font_size": {
+		"message": "पिक्सेलमध्ये डीफॉल्ट फॉन्ट आकार."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "CSS फॉन्ट-स्मूदिंग गुणधर्म."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "कोणतेही अन्य रंग विशेषता नसलेल्या मजकूरासाठी फोरग्राउंड रंग."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "सत्य असल्यास, home/end टर्मिनल स्क्रोलबार नियंत्रित करेल आणि shift home/end VT कीकोड पाठवेल. असत्य असल्यास, home/end VT कीकोड पाठवेल आणि shift home/end स्क्रोल करेल."
+	},
+	"hterm_pref_keybindings": {
+		"message": "की क्रियांसाठी की अनुक्रमांचा नकाशा. की अनुक्रमांमध्ये शून्य किंवा अधिक मॉडिफायर की चा की कोडसह समावेश असतो. की कोड दशांश किंवा हेक्साडेसिमल क्रमांक किंवा की आयडेंटिफायर असू शकतात. की क्रिया, होस्टला पाठवलेल्या स्ट्रिंग किंवा क्रिया आयडेंटिफायर असू शकतात. फॉरमॅटच्या पूर्ण स्पष्टीकरणासाठी, https://goo.gl/LWRndr पहा\n\nनमुना कीबाइंडिंग:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "सत्य असल्यास, मीडिया की चे Fkey सममूल्यांमध्ये रुपांतर करा.असत्य असल्यास, ब्राउझरला की हाताळू द्या."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "मेटा की लीडिंग एस्केप पाठवते की नाही ते सेट करा."
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "माउस पेस्ट बटण, किंवा अॉटोडिटेक्ट असल्यास रिक्त.\n\nअॉटोडिटेक्टसाठी, नॉन- X११ प्लॅटफॉर्मसाठी (Chrome OS सह) आम्ही मधले माऊस बटण वापरू. X११ वर, (मुळ विंडो व्यवस्थापकाला उजवे माउस बटण वापरून पेस्ट करणे आवश्यक असल्यामुळे) आम्ही उजवे माउस बटण वापरू.\n\n0 == डावे (प्राथमिक) बटण.\n१ == मधले (अतिरिक्त) बटण.\n२ == उजवे (दुय्यम) बटण.\n\nहा पर्याय \"माउस-उजवे-क्लिक-पेस्ट\" सेटिंगपासून स्वतंत्र आहे.\n\nटीप: हे डाव्या आणि उजव्या हाताचे माउस योग्यरीत्या हाताळू शकेल."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "उजवे माउस बटण क्लिक करुन पेस्ट करा.\n\nहा पर्याय \"माउस-पेस्ट-बटण\" सेटिंगपासून स्वतंत्रपणे सक्रिय आहे\n\nटीप: हे डाव्या आणि उजव्या हाताचे माउस योग्यरीत्या हाताळू शकेल."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "सत्य असल्यास, पेज up/down टर्मिनल स्क्रोलबार नियंत्रित करेल आणि shift पेज up/down व्हीटी कीकोड पाठवेल. असत्य असल्यास पेज up/down VT कीकोड पाठवेल आणि shift पेज up/down स्क्रोल करेल."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "ब्राउझरला Alt १. ९ पाठवायची का ते सेट करा.\n\nहे ब्राउझर टॅबमध्ये hterm रन करणे सोयीस्कर करते, जेणेकरून तुम्हाला Chrome चे \"टॅबवर स्विच करा\" कीबोर्ड अॅक्सिलरेटर गमवावे लागणार नाही. टॅबमध्ये रन होत नसते, तेव्हा या की होस्टवर पाठवणे चांंगले जेणेकरून त्या vim किंवा emacs मध्ये वापरल्या जाऊ शकतात.\n\nसत्य असल्यास, Alt १..९ ब्राउझरद्वारे हाताळली जाईल. असत्य असल्यास, Alt १. ९ होस्टवर पाठवली जाईल. रिक्त असल्यास, ब्राउझर प्लॅटफॉर्म आणि विंडो प्रकारावर आधारीत अॉटोडिटेक्टचा वापर करा."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "ब्राउझरला Ctrl १..९ पाठवायची का ते सेट करा.\n\nहे ब्राउझर टॅबमध्ये hterm रन करणे सोयीस्कर करते, जेणेकरून तुम्हाला Chrome च्‍या \"टॅबवर स्विच करा\" कीबोर्ड अॅक्सिलरेटर गमवावे लागणार नाही. टॅबमध्ये रन होत नसते, तेव्हा या की होस्टवर पाठवणे चांंगले जेणेकरून त्या vim किंवा emacs मध्ये वापरल्या जाऊ शकतात.\n\nसत्य असल्यास, Ctrl १..९ ब्राउझरद्वारे हाताळली जाईल. असत्य असल्यास, Alt १..९ होस्टवर पाठवली जाईल. रिक्त असल्यास, ब्राउझर प्लॅटफॉर्म आणि विंडो प्रकारावर आधारीत अॉटोडिटेक्टचा वापर करा."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "ब्राउझरला मेटा १..९ पास करायची का ते सेट करा.\n\nहे ब्राउझर टॅबमध्ये hterm रन करणे सोयीस्कर करते, जेणेकरून तुम्हाला Chrome चे \"टॅबवर स्विच करा\" कीबोर्ड अॅक्सिलरेटर गमवावे लागणार नाही. टॅबमध्ये रन होत नसते, तेव्हा या की होस्टवर पाठवणे चांंगले जेणेकरून त्या vim किंवा emacs मध्ये वापरल्या जाऊ शकतात.\n\nसत्य असल्यास, मेटा १..९ ब्राउझर द्वारे हाताळली जाईल. असत्य असल्यास, Alt १..९ होस्टवर पाठवली जाईल. रिक्त असल्यास, ब्राउझर प्लॅटफॉर्म आणि विंडो प्रकारावर आधारीत अॉटोडिटेक्टचा वापर करा."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "मेटा V होस्टवर पास केले जाईल का ते सेट करा."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "होस्टवरून मिळालेल्या डेटासाठी अपेक्षित एंकोडिंग सेट करा\n\n 'utf-८' आणि 'raw' ही वैध मूल्ये आहेत."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "कोणताही किस्ट्रोक वापरून तळाशी स्क्रोल करायचे का."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "टर्मिनल आउटपुटवर तळाशी स्क्रोल करायचे का."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "DECCKM (अॅप्लिकेशन कर्सर की) सक्रिय असताना पर्यायी स्क्रीन बफर वापरल्यास, माउस व्हील स्क्रोल इव्हेंट अ‍ॅरो की चे अनुकरण करेल.\n\nShift की धरून ठेवल्याने ते तात्पुरते बंद केले जाऊ शकते.\n\nहे पेजर (कमी) किंवा मुख्य पेज किंवा टेक्स्ट एडिटर (vi / nano) वाचताना किंवा स्क्रीन/tmux वापरताना वारंवार येते."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "स्क्रोल व्‍हीलमुळे घडलेल्या व्हील इव्हेंटमधील पिक्सेल डेल्टाचे गुणक. पेज किती जलद स्क्रोल होते ते बदलते."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "व्हर्टिकल स्क्रोलबार मोड."
+	},
+	"hterm_pref_send_encoding": {
+		"message": "होस्टला पाठवलेल्या डेटासाठी एंकोडिंग सेट करा"
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "सत्य असल्यास Shift + Insert पेस्ट करते, असत्य असल्यास होस्टला पाठवा."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "डीफॉल्ट टर्मिनल एंकोडिंग (दस्तऐवज).\n\nISO २0२२ वर्ण नकाशाचे अनुवाद सुरू करते (जसे की ग्राफिक्स नकाशे).\nUTF ८ त्यांच्यासाठी सपोर्ट बंद करते.\n\nलॉक केलेला प्रकार म्हणजे टर्मिनल एस्केप अनुक्रमांच्याद्वारे रनटाइमच्या वेळी एंकोडिंग बदलता येणार नाही. \n\nलेगसी अॅप्लिकेशनसह तुम्हाला तुटलेली रेंडरिंग न आढळल्यास तुम्हाला UTF ८ वापरणे आवश्यक आहे."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "डीफॉल्ट विंडो कॉपी वर्तन वापरायचे का."
+	},
+	"hterm_pref_user_css": {
+		"message": "टर्मिनल दस्तऐवजात समावेश केला जाणाऱ्या वापरकर्ता स्टाइलशीटची URL"
+	},
+	"hterm_pref_user_css_text": {
+		"message": "टर्मिनल स्टाइल साठीचा कस्टम CSS टेक्स्ट."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "निवडीच्या डावीकडील (सुरू) जुळणी थांबवण्यासाठी रेग्युलर एक्स्प्रेशन.\n\nसामान्यतः विशिष्ट वर्ण नाकारण्यासाठी हा एक वर्ण वर्ग आहे\nआम्ही \"~\" आणि \".\" वापरायची बाय डीफॉल्ट अनुमती देतो, कारण पथ वारंवार यांच्यापासुन सुरू होतात."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "मध्य भागातील सर्व वर्ण जुळवण्यासाठी रेग्युलर एक्स्प्रेशन.\n\nसामान्यतः विशिष्ट वर्ण नाकारण्यासाठी हा एक वर्ण वर्ग आहे.\n\nसुरुवात बिंदूभोवतीची निवड विस्तृत करण्यासाठी वापरला जातो."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "निवडीच्या उजवीडील (शेवट) जुळणी थांबविण्यासाठी रेग्युलर एक्स्प्रेशन.\n\nसामान्यतः विशिष्ट वर्ण नाकारण्यासाठी हा एक वर्ण वर्ग आहे."
+	},
+	"identity_label": {
+		"message": "Identity"
+	},
+	"import_link_aria_label": {
+		"message": "file import"
+	},
+	"import_link_label": {
+		"message": "Import..."
+	},
+	"initializing_relay": {
+		"message": "Looking up relay server using: $1"
+	},
+	"json_parse_error": {
+		"message": "'$1' मध्ये JSON पार्स करता आले नाही: $2"
+	},
+	"known_hosts_empty": {
+		"message": "कोणतेही ज्ञात होस्‍ट नाही, विसरण्‍यासाठी काही नाही."
+	},
+	"known_hosts_prompt": {
+		"message": "[1-$1] विसरण्‍यासाठी कृपया एक होस्‍ट निवडा:"
+	},
+	"known_hosts_title": {
+		"message": "ज्ञात होस्‍ट:"
+	},
+	"loading_label": {
+		"message": "Loading..."
+	},
+	"missing_param": {
+		"message": "गहाळ मापदंड: $1"
+	},
+	"mount_button_label": {
+		"message": "SFTP Mount"
+	},
+	"mount_path_label": {
+		"message": "माउंट पाथ"
+	},
+	"mounted_message": {
+		"message": "Mounted!"
+	},
+	"notify_copy": {
+		"message": "Selection Copied"
+	},
+	"ok_button_label": {
+		"message": "ठीक आहे"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> सेव्ह केलेल्या प्रोफाइलशी किंवा नवीन ssh सिस्टमशी कनेक्ट करा"
+	},
+	"open_as_window_tip": {
+		"message": "[प्रो टीप] Ctrl-W ला तुमचे टर्मिनल बंद करण्यापासून रोखण्यासाठी 'विंडो म्हणून उघडा' किंवा 'क्षेत्रे' वापरा!\n[प्रो टीप] अधिक माहितीसाठी $1 पहा."
+	},
+	"options_button_label": {
+		"message": "Options"
+	},
+	"plugin_loading": {
+		"message": "NaCl प्लग इन लोड करीत आहे..."
+	},
+	"plugin_loading_complete": {
+		"message": " पूर्ण झाले"
+	},
+	"plugin_loading_failed": {
+		"message": " अयशस्वी झाले! :("
+	},
+	"pref_backup_filename": {
+		"message": "Secure Shell Preferences Backup.json"
+	},
+	"preferences_header": {
+		"message": "Profile Settings"
+	},
+	"preferences_reset": {
+		"message": "All preferences reset!"
+	},
+	"reconnect_message": {
+		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
+	},
+	"relay_options_error": {
+		"message": "अज्ञात रीले पर्याय: $1"
+	},
+	"relay_retry": {
+		"message": "Retrying..."
+	},
+	"request_pin_prompt": {
+		"message": "'$2' वरील $1 की अनलॉक करण्यासाठी पिन एंटर करा ($3 प्रयत्न शिल्लक):"
+	},
+	"restore_prefs": {
+		"message": "Restore Backup"
+	},
+	"shortcut_list_aria_label": {
+		"message": "saved connections"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "कृपया स्मार्ट कार्ड कनेक्टर अॅप इंस्टॉल करा: $1"
+	},
+	"ssh_argstr_label": {
+		"message": "SSH Arguments"
+	},
+	"terminal_preview_label": {
+		"message": "Preview"
+	},
+	"terminal_profile_label": {
+		"message": "Current profile"
+	},
+	"tip_1": {
+		"message": "लिंक उघडण्यासाठी त्यांवर क्लिक करताना तुम्ही Ctrl (macOS वर Cmd) धरून ठेवू शकता!"
+	},
+	"tip_10": {
+		"message": "विंडोमध्ये रन करत असताना, Ctrl-Shift-N दुसरे सेशन उघडू शकते."
+	},
+	"tip_11": {
+		"message": "तुम्ही की/शॉर्टकट रिबाइंड करू शकता: https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "ssh auth साठी Yubikeys आणि इतर स्मार्ट कार्डचा वापर करा: https://goo.gl/3ZEU1w"
+	},
+	"tip_13": {
+		"message": "इमेज इनलाइन डिस्प्ले करा: https://goo.gl/MnSysj"
+	},
+	"tip_2": {
+		"message": "hterm-notify वापरून ब्राउझरमध्ये सूचना डिस्प्ले करा: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "'ssh <profile name>' टाइप करून ऑम्निबॉक्सवरून कनेक्ट करा: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS SFTP द्वारे फाइल सिस्टम माउंट करू शकते आणि फायली अ‍ॅपद्वारे ब्राउझ करू शकते. 'कनेक्ट' ऐवजी 'SFTP माउंट' वापरा."
+	},
+	"tip_5": {
+		"message": "वेब पेजमध्ये ssh:// लिंक वापरून कनेक्ट करा किंवा बुकमार्क सेव्ह करा: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "तुमच्या आउटपुट/सूचनेला प्राथमिक 16 रंग आणि 256 रंग आणि संपूर्ण 24-बिट रंग वापरून रंग द्या: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "emacs/vim/etc वरून तुमच्या क्लिपबोर्डवर कॉपी करा... OSC-52 वापरून: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "chromium-hterm@chromium.org द्वारे सोबती hterm/Secure Shell वापरकर्त्यांसोबत चॅट करा- https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "बग आढळला?  नवीन वैशिष्ट्याची विनंती करायची?  आम्हाला कळवा: https://goo.gl/vb94JY"
+	},
+	"unexpected_error": {
+		"message": "एक अनपेक्षित एरर आढळली, कृपया अधिक तपशीलांसाठी JavaScript कन्सोल तपासा."
+	},
+	"unknown_ssh_client_version": {
+		"message": "अज्ञात SSH आवृत्ती: $1"
+	},
+	"unmount_button_label": {
+		"message": "Unmount SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "अपडेट उपलब्ध आहे. कृपया सर्व विंडो बंद करा."
+	},
+	"welcome_changelog": {
+		"message": "ChangeLog/माहितीपत्रक: $1"
+	},
+	"welcome_faq": {
+		"message": "Answers to Frequently Asked Questions: $1 (ctrl+click on links to open)"
+	},
+	"welcome_release_highlights": {
+		"message": "$1 पासून मोठे बदल:"
+	},
+	"welcome_tip_of_day": {
+		"message": "रँडम प्रो टीप #$1: $2"
+	},
+	"welcome_version": {
+		"message": "Welcome to $1 version $2."
+	},
+	"zoom_warning": {
+		"message": "Please set Chrome Menu->Zoom to 100%"
+	}
+}

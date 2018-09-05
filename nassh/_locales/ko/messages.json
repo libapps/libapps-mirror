@@ -27,7 +27,7 @@
 		"message": "새로운 ssh 세션을 엽니다."
 	},
 	"command_complete": {
-		"message": "{name} 명령어가 상태 코드 {code}(으)로 종료되었습니다."
+		"message": "$1 명령어가 상태 코드 $2(으)로 종료되었습니다."
 	},
 	"command_not_supported": {
 		"message": "$1은(는) 이 버전의 Chrome에서 지원되지 않습니다"

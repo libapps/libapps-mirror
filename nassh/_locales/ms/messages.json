@@ -1,0 +1,491 @@
+{
+	"already_mounted_message": {
+		"message": "Sistem fail sudah dilekapkan!"
+	},
+	"backup_prefs": {
+		"message": "Simpan Sandaran"
+	},
+	"bad_destination": {
+		"message": "Tidak dapat menghuraikan destinasi: $1"
+	},
+	"before_unload": {
+		"message": "Tindakan menutup tab ini akan memutuskan sambungan sesi ini."
+	},
+	"cancel_button_label": {
+		"message": "Batal"
+	},
+	"cmd_ssh_forget_host_help": {
+		"message": "Arahan ini memaparkan menu hos yang diketahui dan menggesa hos untuk melupakan."
+	},
+	"cmd_ssh_forget_host_title": {
+		"message": "Lupakan hos ssh yang diketahui."
+	},
+	"cmd_ssh_help": {
+		"message": "Parameter |username| dan |hostname| diperlukan, |port| adalah pilihan. Jika port tidak ditentukan, nilai lalainya ialah 22."
+	},
+	"cmd_ssh_title": {
+		"message": "Membuka sesi SSH baharu."
+	},
+	"command_complete": {
+		"message": "Perintah $1 telah keluar dengan kod status $2."
+	},
+	"command_not_supported": {
+		"message": "$1 tidak disokong pada versi Chrome ini"
+	},
+	"command_startup_failed": {
+		"message": "Pelancaran $1 gagal: $2"
+	},
+	"connect_button_label": {
+		"message": "Sambung"
+	},
+	"connect_or_exit_message": {
+		"message": "Pilih sambungan lain (C) atau Keluar (x)?"
+	},
+	"connecting": {
+		"message": "Menyambung ke $1..."
+	},
+	"connection_dialog_name": {
+		"message": "Dialog Sambungan"
+	},
+	"console_crosh_options_notice": {
+		"message": "Adakah anda tahu terdapat halaman pilihan khusus?\nTidak perlu mengubah suai 'term_' secara langsung lagi!\nTekan $1 untuk membukanya atau klik:\n$2"
+	},
+	"console_nassh_options_notice": {
+		"message": "Adakah anda tahu terdapat halaman pilihan khusus?\nTidak perlu menggunakan 'term_' secara langsung lagi!\n$1"
+	},
+	"del_keycap": {
+		"message": "[DEL]"
+	},
+	"delete_button_label": {
+		"message": "Padam"
+	},
+	"disconnect_message": {
+		"message": "Pemalam NaCl telah keluar dengan kod status $1."
+	},
+	"enter_keycap": {
+		"message": "[ENTER]"
+	},
+	"field_argstr_placeholder": {
+		"message": "argumen baris perintah tambahan"
+	},
+	"field_description_aria_label": {
+		"message": "huraian"
+	},
+	"field_description_placeholder": {
+		"message": "username@hostname atau teks bentuk bebas"
+	},
+	"field_hostname_aria_label": {
+		"message": "nama hos"
+	},
+	"field_hostname_placeholder": {
+		"message": "nama hos"
+	},
+	"field_mount_path_placeholder": {
+		"message": "laluan lalai ialah direktori laman utama pengguna"
+	},
+	"field_port_aria_label": {
+		"message": "port"
+	},
+	"field_port_placeholder": {
+		"message": "port"
+	},
+	"field_relay_options_aria_label": {
+		"message": "Pilihan pelayan geganti SSH"
+	},
+	"field_relay_options_placeholder": {
+		"message": "Pilihan pelayan geganti SSH"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "lalai"
+	},
+	"field_username_aria_label": {
+		"message": "nama pengguna"
+	},
+	"field_username_placeholder": {
+		"message": "nama pengguna"
+	},
+	"found_relay": {
+		"message": "Pelayan geganti yang ditemui: $1"
+	},
+	"get_profile_error": {
+		"message": "RALAT: Tidak dapat memuatkan profil $1: $2"
+	},
+	"hterm_button_allow_always": {
+		"message": "Sentiasa benarkan"
+	},
+	"hterm_button_allow_session": {
+		"message": "Benarkan sesi ini"
+	},
+	"hterm_button_block": {
+		"message": "Sekat"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "$1 gagal dimuatkan..."
+	},
+	"hterm_loading_resource_start": {
+		"message": "Memuatkan $1 ..."
+	},
+	"hterm_popup_inline_image": {
+		"message": "Imej Sebaris"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "Imej Sebaris Dilumpuhkan"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "Sama ada mahu membenarkan hos jauh memaparkan imej dalam terminal.\n\nSecara lalai, kami akan menggesa sehingga pilihan dibuat."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "Jika ditetapkan, buat asal pemetaan semula Alt-Backspace->DEL OS Chrome, supaya Alt-Backspace benar-benar Alt-Backspace."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "Pilih swakaji pengesanan AltGr.\n\n'null': Autokesan berdasarkan navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Lumpuhkan sebarang manipulasi berkaitan AltGr.\n'ctrl-alt': Anggap Ctrl+Alt bermakna AltGr.\n'left-alt': Anggap Alt kiri bermakna AltGr.\n'right-alt': Anggap Alt kanan bermakna AltGr."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Tetapkan sama ada kekunci Alt bertindak sebagai kekunci Meta atau sebagai kekunci Alt berbeza."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Mengawal cara kekunci alt dikendalikan.\n\n  escape: Hantar awalan ESC.\n  8-bit: Tambahkan 128 pada aksara yang ditaip seperti dalam xterm.\n browser-key: Tunggu peristiwa tekanan kekunci dan lihat tindak balas penyemak imbas. (Ciri ini tidak berfungsi dengan baik pada platform yang penyemak imbasnya melakukan tindakan lalai bagi sesetengah jujukan Alt.)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "URL bunyi loceng terminal. Rentetan kosong jika tiada loceng yang boleh didengar."
+	},
+	"hterm_pref_background_color": {
+		"message": "Warna latar belakang untuk teks yang tiada atribut warna yang lain."
+	},
+	"hterm_pref_background_image": {
+		"message": "Nilai CSS imej latar belakang. Rentetan kosong jika tiada imej.\n\nContohnya:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "Nilai CSS kedudukan imej latar belakang.\n\nContohnya:\n  10% 10%\n  center"
+	},
+	"hterm_pref_background_size": {
+		"message": "Nilai CSS saiz imej latar belakang."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "Jika benar, backspace akan menghantar BS ('\\x08', aka ^H). Jika sebaliknya, kekunci backspace akan menghantar '\\x7f'."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "Item ini dinyatakan sebagai objek. Item ini merupakan tatasusunan jarang dengan setiap sifat ialah kod set aksara dan nilainya ialah objek yang merupakan tatasusunan jarang itu sendiri. Dalam tatasusunan jarang itu, setiap sifat ialah aksara yang diterima dan nilainya ialah aksara yang dipaparkan.\n\nContohnya:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "Sama ada hendak memadam bersih pilihan selepas menyalin."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "Sama ada hendak menutup tetingkap apabila perintah menyelesaikan pelaksanaan."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "Batalkan warna dalam palet lalai.\n\nItem ini boleh dinyatakan sebagai tatasusunan atau objek. Jika dinyatakan sebagai objek, objek ini dianggap sebagai tatasusunan jarang dengan setiap sifat ialah indeks bernombor dalam palet warna.\n\nNilai boleh dinyatakan sebagai hampir sebarang nilai warna CSS. Nilai ini merangkumi #RGB, #RRGGBB, rgb(...), rgba(...) dan sebarang nama warna yang juga sebahagian daripada fail X11 rgb.txt standard.\n\nAnda boleh menggunakan 'null' untuk menyatakan bahawa nilai lalai tidak boleh diubah. Langkah ini berguna untuk melangkau sebilangan kecil indeks apabila nilai dinyatakan sebagai tatasusunan.\n\nSebagai contoh, kedua-dua yang berikut menetapkan indeks warna 1 kepada biru:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "Menyalin pilihan tetikus secara automatik ke papan keratan."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Ctrl-C menyalin jika benar, menghantar ^C kepada hos jika palsu.\nCtrl-Shift-C menghantar ^C kepada hos jika benar, menyalin jika palsu."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Jika benar, Ctrl-Plus/Minus/Zero mengawal zum.\nJika palsu, Ctrl-Shift-Plus/Minus/Zero mengawal zum, Ctrl-Minus menghantar ^_, Ctrl-Plus/Zero tiada fungsi."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Ctrl-V menampal jika benar, menghantar ^V kepada hos jika palsu.\nCtrl-Shift-V menghantar ^V kepada hos jika benar, menampal jika palsu."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "Sama ada kursor teks berkelip secara lalai. Ini boleh ditogol pada waktu jalan melalui jujukan keluar terminal."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "Kadar kursor teks berkelip dalam milisaat.\n\nTatasusunan dua unsur, yang pertama ialah tempoh kursor teks perlu dihidupkan, yang kedua ialah tempoh kursor teks perlu dimatikan."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "Warna kursor teks yang kelihatan."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "Jika benar, loceng terminal di latar belakang akan menghasilkan Pemberitahuan Web. https://www.w3.org/TR/notifications/\n\nPemaparan pemberitahuan memerlukan kebenaran daripada pengguna. Apabila pilihan ini ditetapkan kepada benar, hterm akan cuba meminta kebenaran daripada pengguna jika perlu. Penyemak imbas mungkin tidak menunjukkan permintaan kebenaran jika tidak dicetuskan oleh tindakan pengguna.\n\nSambungan Chrome dengan kebenaran \"pemberitahuan\" dibenarkan untuk memaparkan pemberitahuan."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Tetapkan sama ada aksara Taksa Asia Timur mempunyai kelebaran dua lajur."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "Benar untuk mendayakan aksara kawalan 8 bit, palsu untuk mengabaikannya.\n\nKami akan menggunakan versi dua bait aksara kawalan ini tanpa mengambil kira tetapan ini."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "Benar jika kami harus menerima atribut kelip. Palsu untuk mengabaikannya."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "Benar jika kami harus menggunakan fon berat tebal untuk teks dengan atribut tebal/terang. Palsu untuk menggunakan fon berat normal. Nol untuk mengesan secara automatik."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "Benar jika kami harus menggunakan warna terang (8-15 pada palet 16 warna) untuk sebarang teks dengan atribut tebal. Palsu jika sebaliknya."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "Sama ada untuk menunjukkan mesej di terminal apabila hos menulis pada papan keratan."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "Benarkan hos jauh untuk menulis terus ke papan keratan sistem setempat.\nAkses Baca tidak sekali-kali diberikan tanpa mengambil kira tetapan ini.\n\nTetapan ini digunakan untuk mengawal akses kepada ciri seperti OSC-52."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "Hormati percubaan hos untuk menukar status kelip kursor teks menggunakan Mod Peribadi 12 DEC."
+	},
+	"hterm_pref_environment": {
+		"message": "Set awal pemboleh ubah persekitaran, sebagai objek."
+	},
+	"hterm_pref_font_family": {
+		"message": "Kumpulan fon lalai untuk teks terminal."
+	},
+	"hterm_pref_font_size": {
+		"message": "Saiz fon lalai dalam piksel."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "Sifat pelicinan fon CSS."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "Warna latar depan untuk teks yang tiada atribut warna yang lain."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "Jika benar, Home/End akan mengawal bar tatal terminal dan Shift-Home/End akan menghantar kod kunci VT.  Jika palsu, maka Home/End akan menghantar kod VT dan Shift-Home/End akan menatal."
+	},
+	"hterm_pref_keybindings": {
+		"message": "Peta jujukan kekunci kepada tindakan kekunci. Jujukan kekunci termasuk sifar atau beberapa kekunci pengubah suai yang diikuti oleh kod kunci. Kod kunci boleh terdiri daripada nombor perpuluhan atau perenambelasan atau pengecam kekunci. Tindakan kekunci boleh menentukan rentetan untuk dihantar kepada hos atau pengecam tindakan. Untuk mendapatkan penjelasan lengkap berkenaan format ini, lihat https://goo.gl/LWRndr.\n\nContoh pengikatan kekunci:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "Jika benar, tukarkan kekunci media kepada persamaan Fkey kekunci media. Jika palsu, biarkan penyemak imbas mengendalikan kekunci tersebut."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Tetapkan sama ada kekunci Meta menghantar Escape permulaan atau tidak."
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "Butang tampal tetikus atau nol untuk autokesan.\n\nUntuk autokesan, kami akan menggunakan butang tengah tetikus untuk platform bukan X11 (termasuk OS Chrome). Pada platform X11, kami akan menggunakan butang kanan tetikus (memandangkan pengurus tetingkap natif harus menampal melalui butang tengah tetikus).\n\n0 == butang kiri (utama).\n1 == butang tengah (tambahan).\n2 == butang kanan (kedua).\n\nPilihan ini diaktifkan secara bebas daripada tetapan \"klik-kanan-tetikus-tampal\".\n\nNota: Ini akan mengendalikan tetikus kiri & kanan dengan betul."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "Tampal pada klikan butang kanan tetikus.\n\nPilihan ini diaktifkan secara bebas daripada tetapan \"butang-tampal-tetikus\".\n\nNota: Ini akan mengendalikan tetikus kiri & kanan dengan betul."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "Jika benar, Page Up/Down akan mengawal bar tatal terminal dan Shift-Page Up/Down akan menghantar kod kunci VT. Jika palsu, maka Page Up/Down akan menghantar kod VT dan Shift-Page Up/Down akan menatal."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Tetapkan sama ada kami harus melepaskan Alt-1..9 kepada penyemak imbas.\n\nIni berguna apabila menjalankan hterm dalam tab penyemak imbas, supaya anda tidak akan kehilangan pemecut papan kekunci \"beralih kepada tab\" Chrome. Apabila tidak dijalankan dalam tab, adalah lebih baik jika kunci ini dihantar kepada hos supaya dapat digunakan dalam vim atau emacs.\n\nJika benar, Alt-1..9 akan dikendalikan oleh penyemak imbas. Jika palsu, Alt-1..9 akan dihantar kepada hos. Jika nol, autokesan berdasarkan platform penyemak imbas dan jenis tetingkap."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Tetapkan sama ada kami harus melepaskan Ctrl-1..9 kepada penyemak imbas.\n\nIni berguna apabila menjalankan hterm dalam tab penyemak imbas, supaya anda tidak kehilangan pemecut papan kekunci \"beralih kepada tab\" Chrome. Apabila tidak dijalankan dalam tab, adalah lebih baik jika kunci ini dihantar kepada hos supaya dapat digunakan dalam vim atau emacs.\n\nJika benar, Ctrl-1..9 akan dikendalikan oleh penyemak imbas. Jika palsu, Ctrl-1..9 akan dihantar kepada hos. Jika nol, autokesan berdasarkan platform penyemak imbas dan jenis tetingkap."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Tetapkan sama ada kami harus melepaskan Meta-1..9 kepada penyemak imbas.\n\nIni berguna apabila menjalankan hterm dalam tab penyemak imbas, supaya anda tidak kehilangan pemecut papan kekunci \"beralih kepada tab\" Chrome. Apabila tidak dijalankan dalam tab, adalah lebih baik jika kunci ini dihantar kepada hos supaya dapat digunakan dalam vim atau emacs.\n\nJika benar, Meta-1..9 akan dikendalikan oleh penyemak imbas. Jika palsu, Meta-1..9 akan dihantar kepada hos. Jika nol, autokesan berdasarkan platform penyemak imbas dan jenis tetingkap."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Tetapkan sama ada Meta-V dilepaskan kepada hos."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "Tetapkan pengekodan yang dijangkakan untuk data yang diterima daripada hos.\n\nNilai sah ialah 'utf-8' dan 'raw'."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "Sama ada perlu menatal ke bahagian bawah pada mana-mana ketukan kekunci."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "Sama ada perlu menatal ke bahagian bawah pada output terminal."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Semasa menggunakan penimbal skrin alternatif dan DECCKM (Kekunci Kursor Aplikasi) diaktifkan, peristiwa tatal roda tetikus akan mengikut kekunci anak panah.\n\nPeristiwa ini boleh dilumpuhkan sementara dengan menekan kekunci Shift.\n\nHal ini kerap berlaku semasa menggunakan alat kelui (less) atau membaca halaman man atau penyunting teks (vi/nano) atau semasa menggunakan skrin/tmux."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "Pengganda untuk delta piksel dalam acara roda yang berpunca daripada roda tatal. Ubah tahap kelajuan tatal halaman."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "Mod bar tatal menegak."
+	},
+	"hterm_pref_send_encoding": {
+		"message": "Tetapkan pengekodan untuk data yang dihantar kepada hos."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Shift-Insert akan menampal jika benar, dihantar kepada hos jika palsu."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "Pengekodan terminal lalai (DOCS).\n\nISO-2022 mendayakan terjemahan peta aksara (seperti peta grafik).\nUTF-8 melumpuhkan sokongan terjemahan.\n\nVarian yang terkunci bermakna pengekodan tidak boleh ditukar pada masa waktu jalan melalui jujukan keluar terminal.\n\nAnda harus terus menggunakan UTF-8 melainkan anda perhatikan terdapat pemaparan yang rosak dengan aplikasi lama."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "Sama ada perlu menggunakan tingkah laku penyalinan tetingkap lalai."
+	},
+	"hterm_pref_user_css": {
+		"message": "URL helaian gaya pengguna akan dimasukkan ke dalam dokumen terminal."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "Teks CSS tersuai untuk menggayakan terminal."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "Ungkapan nalar untuk berhenti memadankan ke kiri (mula) pemilihan.\n\nBiasanya ini ialah kelas aksara untuk menolak aksara tertentu.\nKami benarkan \"~\" dan \".\" secara lalai kerana laluan lazimnya bermula dengan aksara ini."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "Ungkapan nalar untuk dipadankan dengan semua aksara di bahagian tengah.\n\nBiasanya ini ialah kelas aksara untuk menolak aksara tertentu.\n\nDigunakan untuk meluaskan pemilihan di sekitar titik permulaan."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "Ungkapan nalar untuk berhenti memadankan ke kanan (akhir) pemilihan.\n\nBiasanya ini ialah kelas aksara untuk menolak aksara tertentu."
+	},
+	"identity_label": {
+		"message": "Identiti"
+	},
+	"import_link_aria_label": {
+		"message": "import fail"
+	},
+	"import_link_label": {
+		"message": "Import..."
+	},
+	"initializing_relay": {
+		"message": "Mencari pelayan geganti menggunakan: $1"
+	},
+	"json_parse_error": {
+		"message": "Tidak dapat menghuraikan JSON dalam '$1': $2"
+	},
+	"known_hosts_empty": {
+		"message": "Tiada hos yang diketahui, tiada apa untuk dilupakan."
+	},
+	"known_hosts_prompt": {
+		"message": "Sila pilih hos untuk dilupakan [1-$1]:"
+	},
+	"known_hosts_title": {
+		"message": "Hos yang diketahui:"
+	},
+	"loading_label": {
+		"message": "Memuatkan..."
+	},
+	"missing_param": {
+		"message": "Parameter tiada: $1"
+	},
+	"mount_button_label": {
+		"message": "Lekap SFTP"
+	},
+	"mount_path_label": {
+		"message": "Laluan Lekapan"
+	},
+	"mounted_message": {
+		"message": "Dilekapkan!"
+	},
+	"notify_copy": {
+		"message": "Pilihan Disalin"
+	},
+	"ok_button_label": {
+		"message": "OK"
+	},
+	"omnibox_default": {
+		"message": "<url><match>pengguna@namahos[:port]</match></url> Sambung ke profil yang disimpan atau sistem ssh baharu"
+	},
+	"open_as_window_tip": {
+		"message": "[Petua Pro] Gunakan 'Buka sebagai Tetingkap' atau 'Skrin penuh' untuk mengelakkan Control-W daripada menutup terminal anda!\n[Petua Pro] Lihat $1 untuk mendapatkan maklumat lanjut."
+	},
+	"options_button_label": {
+		"message": "Pilihan"
+	},
+	"plugin_loading": {
+		"message": "Memuatkan pemalam NaCl..."
+	},
+	"plugin_loading_complete": {
+		"message": " selesai."
+	},
+	"plugin_loading_failed": {
+		"message": " gagal! :("
+	},
+	"pref_backup_filename": {
+		"message": "Secure Shell Preferences Backup.json"
+	},
+	"preferences_header": {
+		"message": "Tetapan Profil"
+	},
+	"preferences_reset": {
+		"message": "Semua pilihan ditetapkan semula!"
+	},
+	"reconnect_message": {
+		"message": "Sambung semula (R), Pilih sambungan lain (C) atau Keluar (x)?"
+	},
+	"relay_options_error": {
+		"message": "Pilihan geganti tidak diketahui: $1"
+	},
+	"relay_retry": {
+		"message": "Mencuba semula..."
+	},
+	"request_pin_prompt": {
+		"message": "Masukkan PIN untuk membuka kunci kekunci $1 pada '$2' (berbaki $3 percubaan):"
+	},
+	"restore_prefs": {
+		"message": "Pulihkan Sandaran"
+	},
+	"shortcut_list_aria_label": {
+		"message": "sambungan disimpan"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "Sila pasang apl Penyambung Kad Pintar: $1"
+	},
+	"ssh_argstr_label": {
+		"message": "Argumen SSH"
+	},
+	"terminal_preview_label": {
+		"message": "Pratonton"
+	},
+	"terminal_profile_label": {
+		"message": "Profil semasa"
+	},
+	"tip_1": {
+		"message": "Anda boleh menahan Ctrl (Cmd pada macOS) sambil mengklik pautan untuk membukanya!"
+	},
+	"tip_10": {
+		"message": "Apabila dijalankan dalam tetingkap, Ctrl-Shift-N boleh membuka sesi lain."
+	},
+	"tip_11": {
+		"message": "Anda boleh mengikat semula kekunci/pintasan: https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "Gunakan Yubikeys dan kad pintar lain untuk ssh auth: https://goo.gl/3ZEU1w"
+	},
+	"tip_13": {
+		"message": "Paparkan imej dalam baris: https://goo.gl/MnSysj"
+	},
+	"tip_2": {
+		"message": "Paparkan pemberitahuan dalam penyemak imbas dengan menggunakan hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Sambung daripada kotak omni dengan menaip 'ssh <profile name>': https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "OS Chrome boleh melekapkan sistem fail melalui SFTP dan menyemak imbas melalui apl Fail. Gunakan 'Lekapan SFTP' dan bukannya 'Sambung'."
+	},
+	"tip_5": {
+		"message": "Sambung menggunakan pautan ssh:// dalam halaman web atau simpan penanda halaman: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Warnakan output/gesaan anda menggunakan warna asas 16 warna & 256 warna & warna 24 bit penuh: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Salin ke papan klip anda daripada emacs/vim/etc... menggunakan OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Sembang dengan sesama pengguna hterm/Secure Shell melalui chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Menemui pepijat?  Meminta ciri baharu?  Beritahu kami: https://goo.gl/vb94JY"
+	},
+	"unexpected_error": {
+		"message": "Ralat tidak dijangka telah berlaku, sila semak konsol JavaScript untuk mendapatkan butiran lanjut."
+	},
+	"unknown_ssh_client_version": {
+		"message": "Versi SSH tidak diketahui: $1"
+	},
+	"unmount_button_label": {
+		"message": "Nyahlekap SFTP"
+	},
+	"update_available_tooltip": {
+		"message": "Kemas kini tersedia. Sila tutup semua tetingkap."
+	},
+	"welcome_changelog": {
+		"message": "ChangeLog/nota keluaran: $1"
+	},
+	"welcome_faq": {
+		"message": "Jawapan kepada Soalan Lazim: $1 (ctrl+klik pada pautan untuk membuka)"
+	},
+	"welcome_release_highlights": {
+		"message": "Perubahan besar sejak $1:"
+	},
+	"welcome_tip_of_day": {
+		"message": "Petua Pro Rawak #$1: $2"
+	},
+	"welcome_version": {
+		"message": "Selamat datang ke $1 versi $2."
+	},
+	"zoom_warning": {
+		"message": "Sila tetapkan Menu Chrome->Zum kepada 100%"
+	}
+}
