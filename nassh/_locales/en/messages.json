@@ -413,6 +413,10 @@
 		"description": "Help text shown for the hterm 'enable-clipboard-write' preference. 'OSC-52' should not be translated.",
 		"message": "Allow the remote host to write directly to the local system clipboard.\nRead access is never granted regardless of this setting.\n\nThis is used to control access to features like OSC-52."
 	},
+	"HTERM_PREF_ENABLE_CSI_J_3": {
+		"description": "Help text shown for the hterm 'enable-csi-j-3' preference. 'CSI-J' should not be be translated, but 'Erase Display' may be. The scrollback buffer is the screen history.",
+		"message": "Whether CSI-J (Erase Display) mode 3 may clear the terminal scrollback buffer.\n\nEnabling this by default is safe."
+	},
 	"HTERM_PREF_ENABLE_DEC12": {
 		"description": "Help text shown for the hterm 'enable-dec12' preference. 'DEC' should not be translated, but 'Private Mode' may be.",
 		"message": "Respect the host's attempt to change the text cursor blink status using DEC Private Mode 12."
