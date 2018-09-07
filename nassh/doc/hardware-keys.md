@@ -9,7 +9,7 @@ at least the following:
 * [Nitrokey](https://www.nitrokey.com/)
 * [Yubico YubiKeys](https://www.yubico.com/products/yubikey-hardware/)
 
-## Steps
+## Setup
 
 1. Ensure that your smart card/hardware token is properly set up and loaded
    with at least an authentication key.
@@ -64,8 +64,27 @@ at least the following:
    will show a dialog asking you whether to grant Secure Shell access to the
    Smart Card Connector app. Accept and you should get logged in to the server.
 
+## Caching the smart card PIN (optional)
+
+After the correct smart card PIN is entered for the first time during an SSH
+session, the user has the option to cache it. The PIN will remain in the cache
+until either the SSH session is disconnected or the screen is locked.
+
+As the PIN will not be preserved through reconnects, this feature is mostly
+meant to make agent forwarding (SSH Arguments: `-A`) a more pleasant experience.
+Note however that using agent forwarding with a smart card that does not require
+physical confirmation for every connection attempt may pose a security risk when
+connected to a malicious server.
+
+The PIN cache is encrypted with a random [WebCrypto] AES key that is marked as
+non-extractable. While this might mean that it cannot be exfiltrated by e.g.
+an arbitrary read vulnerability on machines with hardware-backed WebCrypto key
+storage, the nature of JavaScript makes it so that no definite security
+guarantees can be given. If in doubt, do not use this feature.
+
 [OpenPGP card specification]: https://gnupg.org/ftp/specs/OpenPGP-smart-card-application-2.0.pdf
 [PC/SC API]: https://en.wikipedia.org/wiki/PC/SC
 [Secure Shell]: https://chrome.google.com/webstore/detail/pnhechapfaindjhompbnflcldabbghjo
 [Smart Card Connector app]: https://chrome.google.com/webstore/detail/khpfeaanjngmcnplbdlpegiifgpfgdco
 [Yubico]: https://www.yubico.com/support/knowledge-base/categories/articles/use-yubikey-openpgp/
+[WebCrypto]: https://en.wikipedia.org/wiki/Web_cryptography_API
