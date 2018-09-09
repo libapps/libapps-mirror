@@ -460,7 +460,7 @@ nassh.PreferencesEditor.prototype.addInputRow = function(key, parent) {
   label.className = 'hflex';
   div.className = 'setting-container ' + input.type;
   span_text.className = 'setting-label';
-  span_text.innerText = key;
+  span_text.innerText = this.getPreferenceName(key);
   span_input.className = 'setting-ui';
 
   div.appendChild(label);
@@ -598,6 +598,22 @@ nassh.PreferencesEditor.prototype.getPreferenceDescription = function(key) {
 
   const id = 'PREF_' + key.replace(/-/g, '_').toUpperCase();
   return hterm.msg(id, [], entry['help']);
+};
+
+/**
+ * Get the translated hterm preference name.
+ *
+ * @param {string} def The hterm preference category object.
+ * @return {string} The translated category text.
+ */
+nassh.PreferencesEditor.prototype.getPreferenceName = function(key) {
+  const entry = hterm.PreferenceManager.defaultPreferences[key];
+  if (entry === undefined) {
+    return '';
+  }
+
+  const id = 'NAME_PREF_' + key.replace(/-/g, '_').toUpperCase();
+  return hterm.msg(id, [], entry['name'] || key);
 };
 
 /**

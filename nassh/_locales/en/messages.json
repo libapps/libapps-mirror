@@ -285,6 +285,266 @@
 			}
 		}
 	},
+	"HTERM_NAME_PREF_ALLOW_IMAGES_INLINE": {
+		"description": "Label text shown for the hterm 'allow-images-inline' preference.",
+		"message": "Allow inline image display"
+	},
+	"HTERM_NAME_PREF_ALT_BACKSPACE_IS_META_BACKSPACE": {
+		"description": "Label text shown for the hterm 'alt-backspace-is-meta-backspace' preference.",
+		"message": "Alt-Backspace is Meta-Backspace"
+	},
+	"HTERM_NAME_PREF_ALT_GR_MODE": {
+		"description": "Label text shown for the hterm 'alt-gr-mode' preference.",
+		"message": "AltGr key mode"
+	},
+	"HTERM_NAME_PREF_ALT_IS_META": {
+		"description": "Label text shown for the hterm 'alt-is-meta' preference.",
+		"message": "Treat Alt key as Meta key"
+	},
+	"HTERM_NAME_PREF_ALT_SENDS_WHAT": {
+		"description": "Label text shown for the hterm 'alt-sends-what' preference.",
+		"message": "Alt key modifier handling"
+	},
+	"HTERM_NAME_PREF_AUDIBLE_BELL_SOUND": {
+		"description": "Label text shown for the hterm 'audible-bell-sound' preference.",
+		"message": "Alert bell sound (URI)"
+	},
+	"HTERM_NAME_PREF_BACKGROUND_COLOR": {
+		"description": "Label text shown for the hterm 'background-color' preference.",
+		"message": "Background color"
+	},
+	"HTERM_NAME_PREF_BACKGROUND_IMAGE": {
+		"description": "Label text shown for the hterm 'background-image' preference.",
+		"message": "Background image"
+	},
+	"HTERM_NAME_PREF_BACKGROUND_POSITION": {
+		"description": "Label text shown for the hterm 'background-position' preference.",
+		"message": "Background image position"
+	},
+	"HTERM_NAME_PREF_BACKGROUND_SIZE": {
+		"description": "Label text shown for the hterm 'background-size' preference.",
+		"message": "Background image size"
+	},
+	"HTERM_NAME_PREF_BACKSPACE_SENDS_BACKSPACE": {
+		"description": "Label text shown for the hterm 'backspace-sends-backspace' preference.",
+		"message": "Backspace key behavior"
+	},
+	"HTERM_NAME_PREF_CHARACTER_MAP_OVERRIDES": {
+		"description": "Label text shown for the hterm 'character-map-overrides' preference.",
+		"message": "Character map overrides"
+	},
+	"HTERM_NAME_PREF_CLEAR_SELECTION_AFTER_COPY": {
+		"description": "Label text shown for the hterm 'clear-selection-after-copy' preference.",
+		"message": "Automatically clear text selection"
+	},
+	"HTERM_NAME_PREF_CLOSE_ON_EXIT": {
+		"description": "Label text shown for the hterm 'close-on-exit' preference.",
+		"message": "Close window on exit"
+	},
+	"HTERM_NAME_PREF_COLOR_PALETTE_OVERRIDES": {
+		"description": "Label text shown for the hterm 'color-palette-overrides' preference.",
+		"message": "Initial color palette"
+	},
+	"HTERM_NAME_PREF_COPY_ON_SELECT": {
+		"description": "Label text shown for the hterm 'copy-on-select' preference.",
+		"message": "Automatically copy selected content"
+	},
+	"HTERM_NAME_PREF_CTRL_C_COPY": {
+		"description": "Label text shown for the hterm 'ctrl-c-copy' preference.",
+		"message": "Ctrl-C copy behavior"
+	},
+	"HTERM_NAME_PREF_CTRL_PLUS_MINUS_ZERO_ZOOM": {
+		"description": "Label text shown for the hterm 'ctrl-plus-minus-zero-zoom' preference.",
+		"message": "Ctrl-+/-/0 zoom behavior"
+	},
+	"HTERM_NAME_PREF_CTRL_V_PASTE": {
+		"description": "Label text shown for the hterm 'ctrl-v-paste' preference.",
+		"message": "Ctrl-V paste behavior"
+	},
+	"HTERM_NAME_PREF_CURSOR_BLINK": {
+		"description": "Label text shown for the hterm 'cursor-blink' preference.",
+		"message": "Cursor blink"
+	},
+	"HTERM_NAME_PREF_CURSOR_BLINK_CYCLE": {
+		"description": "Label text shown for the hterm 'cursor-blink-cycle' preference.",
+		"message": "Cursor blink rate"
+	},
+	"HTERM_NAME_PREF_CURSOR_COLOR": {
+		"description": "Label text shown for the hterm 'cursor-color' preference.",
+		"message": "Text cursor color"
+	},
+	"HTERM_NAME_PREF_DESKTOP_NOTIFICATION_BELL": {
+		"description": "Label text shown for the hterm 'desktop-notification-bell' preference.",
+		"message": "Create desktop notifications for alert bells"
+	},
+	"HTERM_NAME_PREF_EAST_ASIAN_AMBIGUOUS_AS_TWO_COLUMN": {
+		"description": "Label text shown for the hterm 'east-asian-ambiguous-as-two-column' preference.",
+		"message": "East Asian Ambiguous use two columns"
+	},
+	"HTERM_NAME_PREF_ENABLE_8_BIT_CONTROL": {
+		"description": "Label text shown for the hterm 'enable-8-bit-control' preference.",
+		"message": "Support non-UTF-8 C1 control characters"
+	},
+	"HTERM_NAME_PREF_ENABLE_BLINK": {
+		"description": "Label text shown for the hterm 'enable-blink' preference.",
+		"message": "Enable blinking text"
+	},
+	"HTERM_NAME_PREF_ENABLE_BOLD": {
+		"description": "Label text shown for the hterm 'enable-bold' preference.",
+		"message": "Bold text behavior"
+	},
+	"HTERM_NAME_PREF_ENABLE_BOLD_AS_BRIGHT": {
+		"description": "Label text shown for the hterm 'enable-bold-as-bright' preference.",
+		"message": "Use bright colors with bold text"
+	},
+	"HTERM_NAME_PREF_ENABLE_CLIPBOARD_NOTICE": {
+		"description": "Label text shown for the hterm 'enable-clipboard-notice' preference.",
+		"message": "Show notification when copying content"
+	},
+	"HTERM_NAME_PREF_ENABLE_CLIPBOARD_WRITE": {
+		"description": "Label text shown for the hterm 'enable-clipboard-write' preference.",
+		"message": "Allow remote clipboard writes"
+	},
+	"HTERM_NAME_PREF_ENABLE_CSI_J_3": {
+		"description": "Label text shown for the hterm 'enable-csi-j-3' preference.",
+		"message": "Allow clearing of scrollback buffer (CSI-J-3)"
+	},
+	"HTERM_NAME_PREF_ENABLE_DEC12": {
+		"description": "Label text shown for the hterm 'enable-dec12' preference.",
+		"message": "Allow changing of text cursor blinking"
+	},
+	"HTERM_NAME_PREF_ENVIRONMENT": {
+		"description": "Label text shown for the hterm 'environment' preference.",
+		"message": "Environment variables"
+	},
+	"HTERM_NAME_PREF_FONT_FAMILY": {
+		"description": "Label text shown for the hterm 'font-family' preference.",
+		"message": "Text font family"
+	},
+	"HTERM_NAME_PREF_FONT_SIZE": {
+		"description": "Label text shown for the hterm 'font-size' preference.",
+		"message": "Text font size"
+	},
+	"HTERM_NAME_PREF_FONT_SMOOTHING": {
+		"description": "Label text shown for the hterm 'font-smoothing' preference.",
+		"message": "Text font smoothing"
+	},
+	"HTERM_NAME_PREF_FOREGROUND_COLOR": {
+		"description": "Label text shown for the hterm 'foreground-color' preference.",
+		"message": "Text color"
+	},
+	"HTERM_NAME_PREF_HIDE_MOUSE_WHILE_TYPING": {
+		"description": "Label text shown for the hterm 'hide-mouse-while-typing' preference.",
+		"message": "Hide mouse cursor while typing"
+	},
+	"HTERM_NAME_PREF_HOME_KEYS_SCROLL": {
+		"description": "Label text shown for the hterm 'home-keys-scroll' preference.",
+		"message": "Home/End key scroll behavior"
+	},
+	"HTERM_NAME_PREF_KEYBINDINGS": {
+		"description": "Label text shown for the hterm 'keybindings' preference.",
+		"message": "Keyboard bindings/shortcuts"
+	},
+	"HTERM_NAME_PREF_MEDIA_KEYS_ARE_FKEYS": {
+		"description": "Label text shown for the hterm 'media-keys-are-fkeys' preference.",
+		"message": "Media keys are Fkeys"
+	},
+	"HTERM_NAME_PREF_META_SENDS_ESCAPE": {
+		"description": "Label text shown for the hterm 'meta-sends-escape' preference.",
+		"message": "Meta key modifier handling"
+	},
+	"HTERM_NAME_PREF_MOUSE_PASTE_BUTTON": {
+		"description": "Label text shown for the hterm 'mouse-paste-button' preference.",
+		"message": "Mouse button paste"
+	},
+	"HTERM_NAME_PREF_MOUSE_RIGHT_CLICK_PASTE": {
+		"description": "Label text shown for the hterm 'mouse-right-click-paste' preference.",
+		"message": "Mouse right clicks paste content"
+	},
+	"HTERM_NAME_PREF_PAGE_KEYS_SCROLL": {
+		"description": "Label text shown for the hterm 'page-keys-scroll' preference.",
+		"message": "Page Up/Down key scroll behavior"
+	},
+	"HTERM_NAME_PREF_PASS_ALT_NUMBER": {
+		"description": "Label text shown for the hterm 'pass-alt-number' preference.",
+		"message": "Pass Alt-1..9 key behavior"
+	},
+	"HTERM_NAME_PREF_PASS_CTRL_NUMBER": {
+		"description": "Label text shown for the hterm 'pass-ctrl-number' preference.",
+		"message": "Pass Ctrl-1..9 key behavior"
+	},
+	"HTERM_NAME_PREF_PASS_META_NUMBER": {
+		"description": "Label text shown for the hterm 'pass-meta-number' preference.",
+		"message": "Pass Meta-1..9 key behavior"
+	},
+	"HTERM_NAME_PREF_PASS_META_V": {
+		"description": "Label text shown for the hterm 'pass-meta-v' preference.",
+		"message": "Pass Meta-V key behavior"
+	},
+	"HTERM_NAME_PREF_PASTE_ON_DROP": {
+		"description": "Label text shown for the hterm 'paste-on-drop' preference.",
+		"message": "Allow drag & drop to paste"
+	},
+	"HTERM_NAME_PREF_RECEIVE_ENCODING": {
+		"description": "Label text shown for the hterm 'receive-encoding' preference.",
+		"message": "Receive encoding"
+	},
+	"HTERM_NAME_PREF_SCROLLBAR_VISIBLE": {
+		"description": "Label text shown for the hterm 'scrollbar-visible' preference.",
+		"message": "Scrollbar visibility"
+	},
+	"HTERM_NAME_PREF_SCROLL_ON_KEYSTROKE": {
+		"description": "Label text shown for the hterm 'scroll-on-keystroke' preference.",
+		"message": "Scroll to bottom after keystroke"
+	},
+	"HTERM_NAME_PREF_SCROLL_ON_OUTPUT": {
+		"description": "Label text shown for the hterm 'scroll-on-output' preference.",
+		"message": "Scroll to bottom after new output"
+	},
+	"HTERM_NAME_PREF_SCROLL_WHEEL_MAY_SEND_ARROW_KEYS": {
+		"description": "Label text shown for the hterm 'scroll-wheel-may-send-arrow-keys' preference.",
+		"message": "Emulate arrow keys with scroll wheel"
+	},
+	"HTERM_NAME_PREF_SCROLL_WHEEL_MOVE_MULTIPLIER": {
+		"description": "Label text shown for the hterm 'scroll-wheel-move-multiplier' preference.",
+		"message": "Mouse scroll wheel multiplier"
+	},
+	"HTERM_NAME_PREF_SEND_ENCODING": {
+		"description": "Label text shown for the hterm 'send-encoding' preference.",
+		"message": "Transmit encoding"
+	},
+	"HTERM_NAME_PREF_SHIFT_INSERT_PASTE": {
+		"description": "Label text shown for the hterm 'shift-insert-paste' preference.",
+		"message": "Shift-Insert paste"
+	},
+	"HTERM_NAME_PREF_TERMINAL_ENCODING": {
+		"description": "Label text shown for the hterm 'terminal-encoding' preference.",
+		"message": "Terminal encoding"
+	},
+	"HTERM_NAME_PREF_USER_CSS": {
+		"description": "Label text shown for the hterm 'user-css' preference.",
+		"message": "Custom CSS (URI)"
+	},
+	"HTERM_NAME_PREF_USER_CSS_TEXT": {
+		"description": "Label text shown for the hterm 'user-css-text' preference.",
+		"message": "Custom CSS (inline text)"
+	},
+	"HTERM_NAME_PREF_USE_DEFAULT_WINDOW_COPY": {
+		"description": "Label text shown for the hterm 'use-default-window-copy' preference.",
+		"message": "Let the browser handle text copying"
+	},
+	"HTERM_NAME_PREF_WORD_BREAK_MATCH_LEFT": {
+		"description": "Label text shown for the hterm 'word-break-match-left' preference.",
+		"message": "Automatic selection halting (to the left)"
+	},
+	"HTERM_NAME_PREF_WORD_BREAK_MATCH_MIDDLE": {
+		"description": "Label text shown for the hterm 'word-break-match-middle' preference.",
+		"message": "Word break characters"
+	},
+	"HTERM_NAME_PREF_WORD_BREAK_MATCH_RIGHT": {
+		"description": "Label text shown for the hterm 'word-break-match-right' preference.",
+		"message": "Automatic selection halting (to the right)"
+	},
 	"HTERM_POPUP_INLINE_IMAGE": {
 		"description": "Message shown when asking users how they want to display inline images.",
 		"message": "Inline Images"
@@ -489,9 +749,10 @@
 		"description": "Help text shown for the hterm 'pass-meta-v' preference. 'Meta-V' is the keyboard button combo and may be translated as makes sense.",
 		"message": "Whether Meta-V gets passed to host."
 	},
-	"HTERM_PREF_PASTE_ON_DROP":{
+	"HTERM_PREF_PASTE_ON_DROP": {
 		"description": "Help text shown for the hterm 'paste-on-drop' preference.",
-		"message": "If true, Drag and dropped text will paste into terminal.\nIf false, dropped text will be ignored."},
+		"message": "If true, Drag and dropped text will paste into terminal.\nIf false, dropped text will be ignored."
+	},
 	"HTERM_PREF_RECEIVE_ENCODING": {
 		"description": "Help text shown for the hterm 'receive-encoding' preference. 'utf-8' and 'raw' should not be translated. The quote style may be changed as needed.",
 		"message": "Set the expected encoding for data received from the host.\nIf the encodings do not match, visual bugs are likely to be observed.\n\nValid values are 'utf-8' and 'raw'."

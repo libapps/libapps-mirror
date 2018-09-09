@@ -133,11 +133,12 @@ body {
 }
 
 #settings span.setting-label {
-  width: 200px;
+  width: 20%;
+  min-width: 150px;
   padding-top: 4px;
   padding-bottom: 5px;
   padding-right: 8px;
-  text-align: right;
+  text-align: left;
   vertical-align: middle;
 }
 
