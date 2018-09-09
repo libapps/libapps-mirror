@@ -597,7 +597,7 @@ nassh.PreferencesEditor.prototype.getPreferenceDescription = function(key) {
     return '';
 
   const id = 'PREF_' + key.replace(/-/g, '_').toUpperCase();
-  return hterm.msg(id, [], entry[3]);
+  return hterm.msg(id, [], entry['help']);
 };
 
 /**
@@ -614,7 +614,7 @@ nassh.PreferencesEditor.prototype.getCategoryDescription = function(def) {
 nassh.PreferencesEditor.prototype.getPreferenceType = function(key) {
   var entry = hterm.PreferenceManager.defaultPreferences[key];
   if (entry) {
-    var prefType = entry[2];
+    const prefType = entry['type'];
     if (Array.isArray(prefType))
       return 'enum';
     return prefType;
@@ -632,7 +632,7 @@ nassh.PreferencesEditor.prototype.getPreferenceType = function(key) {
 nassh.PreferencesEditor.prototype.getPreferenceEnumValues = function(key) {
   var entry = hterm.PreferenceManager.defaultPreferences[key];
   if (entry) {
-    var prefType = entry[2];
+    const prefType = entry['type'];
     if (Array.isArray(prefType))
       return prefType;
   }
@@ -644,7 +644,7 @@ nassh.PreferencesEditor.prototype.getPreferenceEnumValues = function(key) {
 nassh.PreferencesEditor.prototype.getPreferenceCategory = function(key) {
   var entry = hterm.PreferenceManager.defaultPreferences[key];
   if (entry)
-    return entry[0];
+    return entry['category'];
 
   return hterm.PreferenceManager.categories.Miscellaneous;
 };
