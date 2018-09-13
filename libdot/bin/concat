@@ -92,6 +92,9 @@ def echo_results(output_to, data, header_files):
     for f in header_files:
         header += '// %s\n' % (f,)
 
+    # Insert the strict directive for the whole file.
+    header += "\n'use strict';\n"
+
     data = header + '\n' + data
 
     if not output_to:
@@ -237,7 +240,19 @@ def process_concat_line(line, seen_files, header_files):
 
         ret += '// SOURCE FILE: %s\n' % (arg,)
         with open(path) as f:
-            ret += f.read()
+            lines = f.readlines()
+
+            # Strip out the 'use strict' directive as we add it ourselves and
+            # a lot of tools get confused when it shows up more than once.
+            try:
+                i = lines[0:10].index("'use strict';\n")
+                lines.pop(i)
+                while lines[i] == '\n':
+                    lines.pop(i)
+            except ValueError:
+                pass
+
+            ret += ''.join(lines)
 
     elif mode == '@echo':
         ret += arg + '\n'
