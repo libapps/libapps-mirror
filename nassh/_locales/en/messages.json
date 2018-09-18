@@ -26,36 +26,20 @@
 		"message": "Cache the PIN for this SSH session? (y/N): "
 	},
 	"CANCEL_BUTTON_LABEL": {
-		"description": "The label for the Cancel button in dialogs.",
+		"description": "The label for the Cancel button in dialogs when confirming user input. It will be shown along with an 'OK' button.",
 		"message": "Cancel"
 	},
 	"CHANGELOG": {
-		"description": "A link to the list of recent commits (ChangeLog).",
+		"description": "A link to the list of recent commits (ChangeLog). This may be translated, but prefer to keep it short as it refers to a filename.",
 		"message": "ChangeLog"
 	},
 	"CLEAR_KNOWN_HOSTS_MENU_LABEL": {
-		"description": "The menu label to clear the list of SSH known host keys.",
-		"message": "Clear SSH known_hosts"
+		"description": "The menu label to clear the list of known SSH host keys. The whole string may be translated.",
+		"message": "Clear SSH known hosts"
 	},
 	"CLEAR_LABEL": {
 		"description": "Label for clearing the user's input in a text field.",
 		"message": "Clear"
-	},
-	"CMD_SSH_FORGET_HOST_HELP": {
-		"description": "Long form help text for this command.",
-		"message": "This command displays a menu of known hosts and prompts for the host to forget."
-	},
-	"CMD_SSH_FORGET_HOST_TITLE": {
-		"description": "One-sentence description for this command.",
-		"message": "Forget a known ssh host."
-	},
-	"CMD_SSH_HELP": {
-		"description": "Long form help text for this command. Do not translate the parameter names in |pipes|.",
-		"message": "The |username| and |hostname| parameters are required, |port| is optional. If port is not specified it defaults to 22."
-	},
-	"CMD_SSH_TITLE": {
-		"description": "One-sentence description for this command.",
-		"message": "Opens a new SSH session."
 	},
 	"COMMAND_COMPLETE": {
 		"description": "Message displayed when the current command has completed and the program has exited (quit running).",
@@ -110,7 +94,7 @@
 		"message": "Connection Dialog"
 	},
 	"CONNECT_BUTTON_LABEL": {
-		"description": "Label for the connect button.",
+		"description": "Label for the connect button. This is used to initiate a new SSH connection to a remote system.",
 		"message": "Connect"
 	},
 	"CONNECT_OR_EXIT_MESSAGE": {
@@ -118,7 +102,7 @@
 		"message": "(C)hoose another connection or E(x)it?"
 	},
 	"CONSOLE_CROSH_OPTIONS_NOTICE": {
-		"description": "Shown to users who open up the JavaScript developer console. Direct them to the options page instead. Do not translate 'term_', but the quote style may be changed as makes sense for the language.",
+		"description": "Message shown to users who open the internal Chrome DevTools (JavaScript Developer Console). It is meant to direct them to the options page instead of having to write custom code themselves. Do not translate 'term_', but the quote style may be changed as makes sense for the language.",
 		"message": "Did you know there is a dedicated options page?\nNo need to modify 'term_' directly anymore!\nPress $SHORTCUT$ to open it, or click:\n$URL$",
 		"placeholders": {
 			"SHORTCUT": {
@@ -132,7 +116,7 @@
 		}
 	},
 	"CONSOLE_NASSH_OPTIONS_NOTICE": {
-		"description": "Shown to users who open up the JavaScript developer console. Direct them to the options page instead. Do not translate 'term_', but the quote style may be changed as makes sense for the language.",
+		"description": "Message shown to users who open the internal Chrome DevTools (JavaScript Developer Console). It is meant to direct them to the options page instead of having to write custom code themselves. Do not translate 'term_', but the quote style may be changed as makes sense for the language.",
 		"message": "Did you know there is a dedicated options page?\nNo need to modify 'term_' directly anymore!\n$URL$",
 		"placeholders": {
 			"URL": {
@@ -172,7 +156,7 @@
 		"message": "extra command line arguments"
 	},
 	"FIELD_DESCRIPTION_ARIA_LABEL": {
-		"description": "Text use as the aria-label for the 'description' field. This is a field users fill in to describe the specific ssh connection profile they've created.",
+		"description": "Text use as the aria-label for the 'description' field. This is a field users fill in to describe the specific ssh connection profile they've created. This text will be used by Assistive Technology to provide more information to the user (e.g. it will be spoken aloud). It may be translated in whatever way makes sense for that use.",
 		"message": "description"
 	},
 	"FIELD_DESCRIPTION_PLACEHOLDER": {
@@ -180,19 +164,19 @@
 		"message": "username@hostname or free form text"
 	},
 	"FIELD_HOSTNAME_ARIA_LABEL": {
-		"description": "Label for the SSH server hostname.",
+		"description": "Label for the SSH server hostname. This text will be used by Assistive Technology to provide more information to the user (e.g. it will be spoken aloud). It may be translated in whatever way makes sense for that use.",
 		"message": "hostname"
 	},
 	"FIELD_HOSTNAME_PLACEHOLDER": {
-		"description": "Placeholder for the SSH server hostname.",
+		"description": "Placeholder for the SSH server hostname. It may be reformatted & translated however makes sense.",
 		"message": "hostname"
 	},
 	"FIELD_MOUNT_PATH_PLACEHOLDER": {
-		"description": "Placeholder text for the mount path field. This is the remote directory used for SFTP mounts.",
+		"description": "Placeholder text for the mount path field. This is the remote directory used for SFTP mounts. It may be reformatted & translated however makes sense.",
 		"message": "the default path is the user's home directory"
 	},
 	"FIELD_NASSH_OPTIONS_ARIA_LABEL": {
-		"description": "Label for command line options to the SSH relay server. The relay server is like a web proxy for connections. 'SSH' refers to the protocol and probably should not be translated if the language does not have a common replacement.",
+		"description": "Label for command line options to the SSH relay server. The relay server is like a web proxy for connections. 'SSH' refers to the protocol and probably should not be translated if the language does not have a common replacement. This text will be used by Assistive Technology to provide more information to the user (e.g.  it will be spoken aloud). It may be translated in whatever way makes sense for that use.",
 		"message": "SSH relay server options"
 	},
 	"FIELD_NASSH_OPTIONS_PLACEHOLDER": {
@@ -200,7 +184,7 @@
 		"message": "SSH relay server options"
 	},
 	"FIELD_PORT_ARIA_LABEL": {
-		"description": "Label for the network port.",
+		"description": "Label for the network port. This text will be used by Assistive Technology to provide more information to the user (e.g. it will be spoken aloud). It may be translated in whatever way makes sense for that use.",
 		"message": "port"
 	},
 	"FIELD_PORT_PLACEHOLDER": {
@@ -212,7 +196,7 @@
 		"message": "default"
 	},
 	"FIELD_USERNAME_ARIA_LABEL": {
-		"description": "Label for the remote username for accessing the SSH server.",
+		"description": "Label for the remote username for accessing the SSH server. This text will be used by Assistive Technology to provide more information to the user (e.g. it will be spoken aloud). It may be translated in whatever way makes sense for that use.",
 		"message": "username"
 	},
 	"FIELD_USERNAME_PLACEHOLDER": {
@@ -220,7 +204,7 @@
 		"message": "username"
 	},
 	"FOUND_RELAY": {
-		"description": "Text displayed in the terminal when the user is connecting through a relay server (which is like a web proxy for connections).",
+		"description": "Text displayed in the terminal when the user is connecting through a relay server (which is like a web proxy for connections). This shows the user the relay server that was found and will be used.",
 		"message": "Found relay server: $URL$",
 		"placeholders": {
 			"URL": {
@@ -244,7 +228,7 @@
 		}
 	},
 	"HTERM_ANNOUNCE_CURRENT_SCREEN_HEADER": {
-		"description": "Message spoken to a user through Assistive Technology when they page up/down through the scrollport. The percentage of the document that has been scrolled is read out, followed by the text that is currently visible on screen.",
+		"description": "Message spoken to a user through Assistive Technology when they page up/down through the scrollport. The percentage of the document that has been scrolled is read out, followed by the text that is currently visible on screen. The trailing comma is used to help the listener by inserting a slight pause rather than using a period which would add a longer pause.",
 		"message": "$PERCENT$% scrolled,",
 		"placeholders": {
 			"PERCENT": {
@@ -294,7 +278,7 @@
 		}
 	},
 	"HTERM_NAME_PREF_ALLOW_IMAGES_INLINE": {
-		"description": "Label text shown for the hterm 'allow-images-inline' preference.",
+		"description": "Label text shown for the hterm 'allow-images-inline' preference. 'inline' means the images will be displayed directly instead of being downloaded.",
 		"message": "Allow inline image display"
 	},
 	"HTERM_NAME_PREF_ALT_BACKSPACE_IS_META_BACKSPACE": {
@@ -314,7 +298,7 @@
 		"message": "Alt key modifier handling"
 	},
 	"HTERM_NAME_PREF_AUDIBLE_BELL_SOUND": {
-		"description": "Label text shown for the hterm 'audible-bell-sound' preference.",
+		"description": "Label text shown for the hterm 'audible-bell-sound' preference. The terminal will play this sound to get the user's attention. It is specified by the user as a URL/URI.",
 		"message": "Alert bell sound (URI)"
 	},
 	"HTERM_NAME_PREF_BACKGROUND_COLOR": {
@@ -338,7 +322,7 @@
 		"message": "Backspace key behavior"
 	},
 	"HTERM_NAME_PREF_CHARACTER_MAP_OVERRIDES": {
-		"description": "Label text shown for the hterm 'character-map-overrides' preference.",
+		"description": "Label text shown for the hterm 'character-map-overrides' preference. This maps input characters to different output characters as the user chooses. For example, they can change every 'f' character to be displayed as 'k' instead by providing a 'f'->'k' mapping. This only maps ASCII characters.",
 		"message": "Character map overrides"
 	},
 	"HTERM_NAME_PREF_CLEAR_SELECTION_AFTER_COPY": {
@@ -358,15 +342,15 @@
 		"message": "Automatically copy selected content"
 	},
 	"HTERM_NAME_PREF_CTRL_C_COPY": {
-		"description": "Label text shown for the hterm 'ctrl-c-copy' preference.",
+		"description": "Label text shown for the hterm 'ctrl-c-copy' preference. 'Ctrl' and 'C' refer to keys on the keyboard and may be translated accordingly.",
 		"message": "Ctrl+C copy behavior"
 	},
 	"HTERM_NAME_PREF_CTRL_PLUS_MINUS_ZERO_ZOOM": {
-		"description": "Label text shown for the hterm 'ctrl-plus-minus-zero-zoom' preference.",
+		"description": "Label text shown for the hterm 'ctrl-plus-minus-zero-zoom' preference. 'Ctrl', '+', '-', and '0' refer to keys on the keyboard and may be translated accordingly",
 		"message": "Ctrl++/-/0 zoom behavior"
 	},
 	"HTERM_NAME_PREF_CTRL_V_PASTE": {
-		"description": "Label text shown for the hterm 'ctrl-v-paste' preference.",
+		"description": "Label text shown for the hterm 'ctrl-v-paste' preference. 'Ctrl' and 'V' refer to keys on the keyboard and may be translated accordingly",
 		"message": "Ctrl+V paste behavior"
 	},
 	"HTERM_NAME_PREF_CURSOR_BLINK": {
@@ -390,11 +374,11 @@
 		"message": "Create desktop notifications for alert bells"
 	},
 	"HTERM_NAME_PREF_EAST_ASIAN_AMBIGUOUS_AS_TWO_COLUMN": {
-		"description": "Label text shown for the hterm 'east-asian-ambiguous-as-two-column' preference.",
+		"description": "Label text shown for the hterm 'east-asian-ambiguous-as-two-column' preference. 'East Asian Ambiguous' should not be translated as it refers to a specific Unicode standard: https://unicode.org/reports/tr11/. These are a set of characters that might take up one or two cells/columns.",
 		"message": "East Asian Ambiguous use two columns"
 	},
 	"HTERM_NAME_PREF_ENABLE_8_BIT_CONTROL": {
-		"description": "Label text shown for the hterm 'enable-8-bit-control' preference.",
+		"description": "Label text shown for the hterm 'enable-8-bit-control' preference. 'C1' refers to a specification that documents data streams, and 'control characters' are a set of bytes in that specification that control the runtime behavior. 'C1' should not be translated, but 'UTF-8' may be translated as makes sense.",
 		"message": "Support non-UTF-8 C1 control characters"
 	},
 	"HTERM_NAME_PREF_ENABLE_BLINK": {
@@ -414,11 +398,11 @@
 		"message": "Show notification when copying content"
 	},
 	"HTERM_NAME_PREF_ENABLE_CLIPBOARD_WRITE": {
-		"description": "Label text shown for the hterm 'enable-clipboard-write' preference.",
+		"description": "Label text shown for the hterm 'enable-clipboard-write' preference. This allows remote systems to write directly to the user's local clipboard.",
 		"message": "Allow remote clipboard writes"
 	},
 	"HTERM_NAME_PREF_ENABLE_CSI_J_3": {
-		"description": "Label text shown for the hterm 'enable-csi-j-3' preference.",
+		"description": "Label text shown for the hterm 'enable-csi-j-3' preference. 'CSI-J-3' should not be be translated, but everything else may be.",
 		"message": "Allow clearing of scrollback buffer (CSI-J-3)"
 	},
 	"HTERM_NAME_PREF_ENABLE_DEC12": {
@@ -466,7 +450,7 @@
 		"message": "Use default OS Keyboard bindings/shortcuts"
 	},
 	"HTERM_NAME_PREF_MEDIA_KEYS_ARE_FKEYS": {
-		"description": "Label text shown for the hterm 'media-keys-are-fkeys' preference.",
+		"description": "Label text shown for the hterm 'media-keys-are-fkeys' preference. 'Media keys' are the keyboard buttons that allow the user to control things like volume & screen brightness. 'Fkeys' refer to function keys which are the keyboard buttons F1/F2/F3/etc... Everything may be translated as makes sense.",
 		"message": "Media keys are Fkeys"
 	},
 	"HTERM_NAME_PREF_META_SENDS_ESCAPE": {
@@ -474,19 +458,19 @@
 		"message": "Meta key modifier handling"
 	},
 	"HTERM_NAME_PREF_MOUSE_PASTE_BUTTON": {
-		"description": "Label text shown for the hterm 'mouse-paste-button' preference.",
+		"description": "Label text shown for the hterm 'mouse-paste-button' preference. This allows the user to pick which mouse button they want to use to paste content from the clipboard when clicking.",
 		"message": "Mouse button paste"
 	},
 	"HTERM_NAME_PREF_MOUSE_RIGHT_CLICK_PASTE": {
-		"description": "Label text shown for the hterm 'mouse-right-click-paste' preference.",
+		"description": "Label text shown for the hterm 'mouse-right-click-paste' preference. This refers to the user action of right clicking with their mouse so that they can paste content from the clipboard.",
 		"message": "Mouse right clicks paste content"
 	},
 	"HTERM_NAME_PREF_PAGE_KEYS_SCROLL": {
-		"description": "Label text shown for the hterm 'page-keys-scroll' preference.",
+		"description": "Label text shown for the hterm 'page-keys-scroll' preference. 'Page Up' and 'Page Down' refer to keyboard buttons and may be translated accordingly.",
 		"message": "Page Up/Down key scroll behavior"
 	},
 	"HTERM_NAME_PREF_PASS_ALT_NUMBER": {
-		"description": "Label text shown for the hterm 'pass-alt-number' preference.",
+		"description": "Label text shown for the hterm 'pass-alt-number' preference. 'Alt' is the name of the keyboard button and may be translated as makes sense.",
 		"message": "Alt+1..9 switch tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_N": {
@@ -494,7 +478,7 @@
 		"message": "Ctrl+N new window behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_NUMBER": {
-		"description": "Label text shown for the hterm 'pass-ctrl-number' preference.",
+		"description": "Label text shown for the hterm 'pass-ctrl-number' preference. 'Ctrl' (Control) is the name of the keyboard button and may be translated as makes sense.",
 		"message": "Ctrl+1..9 switch tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_T": {
@@ -510,7 +494,7 @@
 		"message": "Ctrl+W close tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_META_NUMBER": {
-		"description": "Label text shown for the hterm 'pass-meta-number' preference.",
+		"description": "Label text shown for the hterm 'pass-meta-number' preference. 'Meta' is the name of the keyboard button and may be translated as makes sense.",
 		"message": "Meta+1..9 switch tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_META_V": {
@@ -526,7 +510,7 @@
 		"message": "Receive encoding"
 	},
 	"HTERM_NAME_PREF_SCROLLBAR_VISIBLE": {
-		"description": "Label text shown for the hterm 'scrollbar-visible' preference.",
+		"description": "Label text shown for the hterm 'scrollbar-visible' preference. This is a short description for controlling whether the scrollbar is always shown, or only shown on demand.",
 		"message": "Scrollbar visibility"
 	},
 	"HTERM_NAME_PREF_SCROLL_ON_KEYSTROKE": {
@@ -534,7 +518,7 @@
 		"message": "Scroll to bottom after keystroke"
 	},
 	"HTERM_NAME_PREF_SCROLL_ON_OUTPUT": {
-		"description": "Label text shown for the hterm 'scroll-on-output' preference.",
+		"description": "Label text shown for the hterm 'scroll-on-output' preference. This is a short description for the behavior when new output is displayed in the terminal: should it automatically scroll to the bottom to show it, or should it stay in its current position in the scrollback/history buffer.",
 		"message": "Scroll to bottom after new output"
 	},
 	"HTERM_NAME_PREF_SCROLL_WHEEL_MAY_SEND_ARROW_KEYS": {
@@ -542,23 +526,23 @@
 		"message": "Emulate arrow keys with scroll wheel"
 	},
 	"HTERM_NAME_PREF_SCROLL_WHEEL_MOVE_MULTIPLIER": {
-		"description": "Label text shown for the hterm 'scroll-wheel-move-multiplier' preference.",
+		"description": "Label text shown for the hterm 'scroll-wheel-move-multiplier' preference. This is a numeric value the user enters and is used as a multiplier to control how fast the page scrolls. 'scroll wheel' refers to the normal computing terms, so everything here may be translated as makes sense.",
 		"message": "Mouse scroll wheel multiplier"
 	},
 	"HTERM_NAME_PREF_SHIFT_INSERT_PASTE": {
-		"description": "Label text shown for the hterm 'shift-insert-paste' preference.",
+		"description": "Label text shown for the hterm 'shift-insert-paste' preference. Shift+Insert refers to the keyboard shortcut used to trigger a paste operation (like pressing Ctrl+V). Both are keys on the keyboard and may be translated accordingly.",
 		"message": "Shift+Insert paste"
 	},
 	"HTERM_NAME_PREF_TERMINAL_ENCODING": {
-		"description": "Label text shown for the hterm 'terminal-encoding' preference.",
+		"description": "Label text shown for the hterm 'terminal-encoding' preference. 'Terminal encoding' refers to the encoding the terminal uses when displaying user content.",
 		"message": "Terminal encoding"
 	},
 	"HTERM_NAME_PREF_USER_CSS": {
-		"description": "Label text shown for the hterm 'user-css' preference.",
+		"description": "Label text shown for the hterm 'user-css' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible.",
 		"message": "Custom CSS (URI)"
 	},
 	"HTERM_NAME_PREF_USER_CSS_TEXT": {
-		"description": "Label text shown for the hterm 'user-css-text' preference.",
+		"description": "Label text shown for the hterm 'user-css-text' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. 'inline text' refers to the content the user enters directly into a text field.",
 		"message": "Custom CSS (inline text)"
 	},
 	"HTERM_NAME_PREF_USE_DEFAULT_WINDOW_COPY": {
@@ -566,23 +550,23 @@
 		"message": "Let the browser handle text copying"
 	},
 	"HTERM_NAME_PREF_WORD_BREAK_MATCH_LEFT": {
-		"description": "Label text shown for the hterm 'word-break-match-left' preference.",
+		"description": "Label text shown for the hterm 'word-break-match-left' preference. When automatically expanding the user's selection, this controls when to stop expanding the selection to the left of content. This will be used when double clicking text and deciding how much text to the left of he cursor to automatically select.",
 		"message": "Automatic selection halting (to the left)"
 	},
 	"HTERM_NAME_PREF_WORD_BREAK_MATCH_MIDDLE": {
-		"description": "Label text shown for the hterm 'word-break-match-middle' preference.",
+		"description": "Label text shown for the hterm 'word-break-match-middle' preference. When automatically expanding the user's selection, this determines what characters are used to separate words.",
 		"message": "Word break characters"
 	},
 	"HTERM_NAME_PREF_WORD_BREAK_MATCH_RIGHT": {
-		"description": "Label text shown for the hterm 'word-break-match-right' preference.",
+		"description": "Label text shown for the hterm 'word-break-match-right' preference. When automatically expanding the user's selection, this controls when to stop expanding the selection to the right of content. This will be used when double clicking text and deciding how much text to the right of he cursor to automatically select.",
 		"message": "Automatic selection halting (to the right)"
 	},
 	"HTERM_POPUP_INLINE_IMAGE": {
-		"description": "Message shown when asking users how they want to display inline images.",
+		"description": "Message shown when asking users how they want to display inline images. 'inline' means the images will be displayed directly instead of being downloaded.",
 		"message": "Inline Images"
 	},
 	"HTERM_POPUP_INLINE_IMAGE_DISABLED": {
-		"description": "Message shown to the user when trying to display an image but support is disabled.",
+		"description": "Message shown to the user when trying to display an image but support is disabled. 'inline' means the images will be displayed directly instead of being downloaded.",
 		"message": "Inline Images Disabled"
 	},
 	"HTERM_PREF_ALLOW_IMAGES_INLINE": {
@@ -590,8 +574,8 @@
 		"message": "Whether to allow the remote host to display images in the terminal.\n\nBy default, we prompt until a choice is made."
 	},
 	"HTERM_PREF_ALT_BACKSPACE_IS_META_BACKSPACE": {
-		"description": "Help text shown for the hterm 'alt-backspace-is-meta-backspace' preference. 'Alt', 'Backspace', and 'DEL' are the names of the keyboard buttons and may be translated as makes sense.",
-		"message": "If set, undoes the Chrome OS Alt+Backspace->DEL remap, so that Alt+Backspace indeed is Alt+Backspace."
+		"description": "Help text shown for the hterm 'alt-backspace-is-meta-backspace' preference. 'Alt', 'Backspace', and 'Delete' are the names of the keyboard buttons and may be translated as makes sense. By default, Chrome OS has a Alt+Backspace keyboard shortcut to behave like the Delete key, so this setting reverts that behavior.",
+		"message": "If set, undoes the Chrome OS Alt+Backspace->Delete remap, so that Alt+Backspace indeed is Alt+Backspace."
 	},
 	"HTERM_PREF_ALT_GR_MODE": {
 		"description": "Help text shown for the hterm 'alt-gr-mode' preference. 'Alt' and 'AltGR' are the names of the keyboard buttons and may be translated as makes sense. Do not translate 'navigator.language' or anything else in quotes here. The quote style may be changed as makes sense for the language. The 'else' keyword here should be translated with its normal meaning.",
@@ -602,36 +586,36 @@
 		"message": "Whether the Alt key acts as a Meta key or as a distinct Alt key."
 	},
 	"HTERM_PREF_ALT_SENDS_WHAT": {
-		"description": "Help text shown for the hterm 'alt-sends-what' preference. 'Alt' and 'ESC' are the keyboard buttons and may be translated as makes sense. 'escape', '8-bit', and 'browser-key' are user selectable values and should not be translated. 'xterm' is the name of a program and should not be translated.",
+		"description": "Help text shown for the hterm 'alt-sends-what' preference. 'Alt' and 'ESC' (Escape) are the keyboard buttons and may be translated as makes sense. 'escape', '8-bit', and 'browser-key' are user selectable values and should not be translated. 'xterm' is the name of a program and should not be translated.",
 		"message": "Controls how the Alt key is handled.\n\n  escape: Send an ESC prefix.\n  8-bit: Add 128 to the typed character as in xterm.\n  browser-key: Wait for the keypress event and see what the browser\n    says. (This won't work well on platforms where the browser\n    performs a default action for some Alt sequences.)"
 	},
 	"HTERM_PREF_AUDIBLE_BELL_SOUND": {
-		"description": "Help text shown for the hterm 'audible-bell-sound' preference.",
-		"message": "URL of the terminal bell sound. Empty string for no audible bell."
+		"description": "Help text shown for the hterm 'audible-bell-sound' preference. The terminal will play this sound to get the user's attention.",
+		"message": "URL of the terminal bell sound. Leave it blank for no audible bell."
 	},
 	"HTERM_PREF_BACKGROUND_COLOR": {
 		"description": "Help text shown for the hterm 'background-color' preference.",
 		"message": "The background color for text with no other color attributes."
 	},
 	"HTERM_PREF_BACKGROUND_IMAGE": {
-		"description": "Help text shown for the hterm 'background-image' preference. The example code should not be translated.",
-		"message": "CSS value of the background image. Empty string for no image.\n\nFor example:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"description": "Help text shown for the hterm 'background-image' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. The example code should not be translated.",
+		"message": "CSS value of the background image. Leave it blank for no image.\n\nFor example:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"HTERM_PREF_BACKGROUND_POSITION": {
-		"description": "Help text shown for the hterm 'background-position' preference. The example code should not be translated.",
+		"description": "Help text shown for the hterm 'background-position' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. The example code should not be translated.",
 		"message": "CSS value of the background image position.\n\nFor example:\n  10% 10%\n  center"
 	},
 	"HTERM_PREF_BACKGROUND_SIZE": {
-		"description": "Help text shown for the hterm 'background-size' preference.",
+		"description": "Help text shown for the hterm 'background-size' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible.",
 		"message": "CSS value of the background image size."
 	},
 	"HTERM_PREF_BACKSPACE_SENDS_BACKSPACE": {
-		"description": "Help text shown for the hterm 'backspace-sends-backspace' preference.",
-		"message": "If true, the backspace should send BS ('\\x08', aka ^H). Otherwise the backspace key should send '\\x7f'."
+		"description": "Help text shown for the hterm 'backspace-sends-backspace' preference. 'Backspace' refers to the keyboard button and may be translated as makes sense. The quoting style around the escape sequences may be freely changed. 'aka' is short for 'also known as' and should be translated accordingly. '^H' should be left as-is.",
+		"message": "If true, the Backspace key will send BS ('\\x08', aka ^H). Otherwise the Backspace key will send '\\x7f'."
 	},
 	"HTERM_PREF_CHARACTER_MAP_OVERRIDES": {
-		"description": "Help text shown for the hterm 'character-map-overrides' preference.",
-		"message": "This is specified as an object. It is a sparse array, where each property is the character set code and the value is an object that is a sparse array itself. In that sparse array, each property is the received character and the value is the displayed character.\n\nFor example:\n  {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"description": "Help text shown for the hterm 'character-map-overrides' preference. Do not translate the example at all.",
+		"message": "This is specified as an object. It is a sparse array, where each property is the character set code and the value is an object that is a sparse array itself. In that sparse array, each property is the received character and the value is the displayed character.\n\nFor example:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"HTERM_PREF_CLEAR_SELECTION_AFTER_COPY": {
 		"description": "Help text shown for the hterm 'clear-selection-after-copy' preference.",
@@ -642,7 +626,7 @@
 		"message": "Whether to close the window when the command finishes executing."
 	},
 	"HTERM_PREF_COLOR_PALETTE_OVERRIDES": {
-		"description": "Help text shown for the hterm 'color-palette-overrides' preference. Do not translate CSS, 'null', X11, rgb.txt, the #RGB/#RRGGBB/rgb()/rgba() code, or the example code. The quote style around 'null' may be changed as needed.",
+		"description": "Help text shown for the hterm 'color-palette-overrides' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. Do not translate 'null', X11, rgb.txt, the #RGB/#RRGGBB/rgb()/rgba() code, or the example code. The quote style around 'null' may be changed as needed.",
 		"message": "Override colors in the default palette.\n\nThis can be specified as an array or an object. If specified as an object it is assumed to be a sparse array, where each property is a numeric index into the color palette.\n\nValues can be specified as almost any CSS color value. This includes #RGB, #RRGGBB, rgb(...), rgba(...), and any color names that are also part of the standard X11 rgb.txt file.\n\nYou can use 'null' to specify that the default value should be not be changed. This is useful for skipping a small number of indices when the value is specified as an array.\n\nFor example, these both set color index 1 to blue:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"HTERM_PREF_COPY_ON_SELECT": {
@@ -675,14 +659,14 @@
 	},
 	"HTERM_PREF_CURSOR_SHAPE": {
 		"description": "Help text shown for the hterm 'cursor-shape' preference.",
-		"message": "The shape of the visible text cursor. This can be toggled at runtime via terminal escape sequences."
+		"message": "The shape of the visible text cursor. This can be changed at runtime via terminal escape sequences."
 	},
 	"HTERM_PREF_DESKTOP_NOTIFICATION_BELL": {
-		"description": "Help text shown for the hterm 'desktop-notification-bell' preference. The true/false words may be translated. The quote style may be changed as needed.",
+		"description": "Help text shown for the hterm 'desktop-notification-bell' preference. 'bells' are alerts generated by the terminal. The true/false words may be translated. The quote style may be changed as needed.",
 		"message": "If true, terminal bells in the background will create a Web Notification. https://www.w3.org/TR/notifications/\n\nDisplaying notifications requires permission from the user. When this option is set to true, hterm will attempt to ask the user for permission if necessary. Browsers may not show this permission request if it was not triggered by a user action.\n\nChrome extensions with the \"notifications\" permission have permission to display notifications."
 	},
 	"HTERM_PREF_EAST_ASIAN_AMBIGUOUS_AS_TWO_COLUMN": {
-		"description": "Help text shown for the hterm 'east-asian-ambiguous-as-two-column' preference. East Asian Ambiguous should not be translated as it refers to a specific Unicode standard: http://unicode.org/reports/tr11/",
+		"description": "Help text shown for the hterm 'east-asian-ambiguous-as-two-column' preference. 'East Asian Ambiguous' should not be translated as it refers to a specific Unicode standard: https://unicode.org/reports/tr11/. These are a set of characters that might take up one or two cells/columns.",
 		"message": "Whether East Asian Ambiguous characters have two column width."
 	},
 	"HTERM_PREF_ENABLE_8_BIT_CONTROL": {
@@ -710,8 +694,8 @@
 		"message": "Allow the remote host to write directly to the local system clipboard.\nRead access is never granted regardless of this setting.\n\nThis is used to control access to features like OSC-52."
 	},
 	"HTERM_PREF_ENABLE_CSI_J_3": {
-		"description": "Help text shown for the hterm 'enable-csi-j-3' preference. 'CSI-J' should not be be translated, but 'Erase Display' may be. The scrollback buffer is the screen history.",
-		"message": "Whether CSI-J (Erase Display) mode 3 may clear the terminal scrollback buffer.\n\nEnabling this by default is safe."
+		"description": "Help text shown for the hterm 'enable-csi-j-3' preference. 'CSI-J' should not be be translated, but 'Erase Saved Lines' and 'Erase Display' may be. 'mode 3' refers to the specific subfunction (Erase Saved Lines) of the CSI-J command and may be translated accordingly (as a function, mode of operation, etc...). The scrollback buffer is the screen history and may be translated accordingly. We describe this as 'is safe' as a clue to the user that, even if they don't understand what this feature does or how it's used, they can safely enable it and not worry if it will cause problems with their system.",
+		"message": "Whether the Erase Saved Lines function (mode 3) of the Erase Display command (CSI-J) may clear the terminal scrollback buffer.\n\nEnabling this by default is safe."
 	},
 	"HTERM_PREF_ENABLE_DEC12": {
 		"description": "Help text shown for the hterm 'enable-dec12' preference. 'DEC' should not be translated, but 'Private Mode' may be.",
@@ -734,7 +718,7 @@
 		"message": "The default font size in pixels."
 	},
 	"HTERM_PREF_FONT_SMOOTHING": {
-		"description": "Help text shown for the hterm 'font-smoothing' preference. Do not translate 'font-smoothing'.",
+		"description": "Help text shown for the hterm 'font-smoothing' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. Do not translate 'font-smoothing'.",
 		"message": "CSS font-smoothing property."
 	},
 	"HTERM_PREF_FOREGROUND_COLOR": {
@@ -754,20 +738,20 @@
 		"message": "A map of key sequence to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers, or a key identifier. Key actions can be specified as a string to send to the host, or an action identifier. For a full explanation of the format, see https://goo.gl/LWRndr.\n\nSample keybindings:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"HTERM_PREF_KEYBINDINGS_OS_DEFAULTS": {
-		"description": "Help text shown for the hterm 'keybindings-os-defaults' preference.",
+		"description": "Help text shown for the hterm 'keybindings-os-defaults' preference. 'OS' is 'operating system' and may be translated accordingly. 'hterm' should not be translated. 'own use' means that the program will capture & process the keyboard shortcuts itself and prevent the OS from doing anything.",
 		"message": "Whether common OS keyboard bindings should be respected instead of always capturing for hterm's own use."
 	},
 	"HTERM_PREF_MEDIA_KEYS_ARE_FKEYS": {
-		"description": "Help text shown for the hterm 'media-keys-are-fkeys' preference. The true/false words may be translated.",
+		"description": "Help text shown for the hterm 'media-keys-are-fkeys' preference. 'Media keys' are the keyboard buttons that allow the user to control things like volume & screen brightness. 'Fkeys' refer to function keys which are the keyboard buttons F1/F2/F3/etc... Everything (including the true/false words) may be translated as makes sense.",
 		"message": "If true, convert media keys to their Fkey equivalent. If false, let the browser handle the keys."
 	},
 	"HTERM_PREF_META_SENDS_ESCAPE": {
-		"description": "Help text shown for the hterm 'meta-sends-escape' preference. 'ESC', 'Meta', 'Escape', and 'k' are the keyboard buttons and may be translated as makes sense.",
+		"description": "Help text shown for the hterm 'meta-sends-escape' preference. 'ESC'/'Escape', 'Meta', and 'k' are the keyboard buttons and may be translated as makes sense.",
 		"message": "Send an ESC prefix when pressing a key while holding the Meta key.\n\nFor example, when enabled, pressing Meta+K will send ^[k as if you typed Escape then k. When disabled, only k will be sent."
 	},
 	"HTERM_PREF_MOUSE_PASTE_BUTTON": {
 		"description": "Help text shown for the hterm 'mouse-paste-button' preference. Do not translate 'X11'.",
-		"message": "Mouse paste button, or null to autodetect.\n\nFor autodetect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the native window manager should paste via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: This will handle left & right handed mice correctly."
+		"message": "The mouse button to use for pasting.\n\nFor autodetect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the native window manager should paste via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: This will handle left & right handed mice correctly."
 	},
 	"HTERM_PREF_MOUSE_RIGHT_CLICK_PASTE": {
 		"description": "Help text shown for the hterm 'mouse-right-click-paste' preference. The quote style may be changed as needed. Do not translate 'mouse-paste-button'.",
@@ -779,38 +763,38 @@
 	},
 	"HTERM_PREF_PASS_ALT_NUMBER": {
 		"description": "Help text shown for the hterm 'pass-alt-number' preference. 'Alt' is the name of the keyboard button and may be translated as makes sense.",
-		"message": "Whether Alt+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard accelerators. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Alt+1..9 will be handled by the browser. If false, Alt+1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
+		"message": "Whether Alt+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard shortcuts. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Alt+1..9 will be handled by the browser. If false, Alt+1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
 	},
 	"HTERM_PREF_PASS_CTRL_N": {
 		"description": "Help text shown for the hterm 'pass-ctrl-n' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
-		"message": "Whether Ctrl+N is passed to the browser.\n\nIf true, Ctrl+N will be handled by the browser as the \"new window\" keyboard accelerator. If false, Ctrl+N will be sent to the host."
+		"message": "Whether Ctrl+N is passed to the browser.\n\nIf true, Ctrl+N will be handled by the browser as the \"new window\" keyboard shortcut. If false, Ctrl+N will be sent to the host."
 	},
 	"HTERM_PREF_PASS_CTRL_NUMBER": {
 		"description": "Help text shown for the hterm 'pass-ctrl-number' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
-		"message": "Whether Ctrl+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard accelerators. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Ctrl+1..9 will be handled by the browser. If false, Ctrl+1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
+		"message": "Whether Ctrl+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard shortcuts. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Ctrl+1..9 will be handled by the browser. If false, Ctrl+1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
 	},
 	"HTERM_PREF_PASS_CTRL_T": {
-		"description": "Help text shown for the hterm 'pass-ctrl-t' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
-		"message": "Whether Ctrl+T is passed to the browser.\n\nIf true, Ctrl+T will be handled by the browser as the \"new tab\" keyboard accelerator. If false, Ctrl+T will be sent to the host."
+		"description": "Help text shown for the hterm 'pass-ctrl-t' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense. This controls whether the browser opens a new tab, or data is sent to the remote system.",
+		"message": "Whether Ctrl+T is passed to the browser.\n\nIf true, Ctrl+T will be handled by the browser as the \"new tab\" keyboard shortcut. If false, Ctrl+T will be sent to the host."
 	},
 	"HTERM_PREF_PASS_CTRL_TAB": {
 		"description": "Help text shown for the hterm 'pass-ctrl-tab' preference. 'Ctrl' and 'Shift' are the names of the keyboard buttons and may be translated as makes sense.",
-		"message": "Whether Ctrl+Tab and Ctrl+Shift+Tab are passed to the browser.\n\nIf true, Ctrl+Tab and Ctrl+Shift+Tab will be handled by the browser as the \"next/previous tab\" keyboard accelerator. If false, the Tab key is sent to the host without Ctrl or Shift."
+		"message": "Whether Ctrl+Tab and Ctrl+Shift+Tab are passed to the browser.\n\nIf true, Ctrl+Tab and Ctrl+Shift+Tab will be handled by the browser as the \"next/previous tab\" keyboard shortcut. If false, the Tab key is sent to the host without Ctrl or Shift."
 	},
 	"HTERM_PREF_PASS_CTRL_W": {
 		"description": "Help text shown for the hterm 'pass-ctrl-w' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
-		"message": "Whether Ctrl+W is passed to the browser.\n\nIf true, Ctrl+W will be handled by the browser as the \"close tab\" keyboard accelerator. If false, Ctrl+W will be sent to the host."
+		"message": "Whether Ctrl+W is passed to the browser.\n\nIf true, Ctrl+W will be handled by the browser as the \"close tab\" keyboard shortcut. If false, Ctrl+W will be sent to the host."
 	},
 	"HTERM_PREF_PASS_META_NUMBER": {
 		"description": "Help text shown for the hterm 'pass-meta-number' preference. 'Meta' is the name of the keyboard button and may be translated as makes sense.",
-		"message": "Whether Meta+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard accelerators. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Meta+1..9 will be handled by the browser. If false, Meta+1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
+		"message": "Whether Meta+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard shortcuts. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Meta+1..9 will be handled by the browser. If false, Meta+1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
 	},
 	"HTERM_PREF_PASS_META_V": {
 		"description": "Help text shown for the hterm 'pass-meta-v' preference. 'Meta+V' is the keyboard button combo and may be translated as makes sense.",
 		"message": "Whether Meta+V gets passed to host."
 	},
 	"HTERM_PREF_PASTE_ON_DROP": {
-		"description": "Help text shown for the hterm 'paste-on-drop' preference.",
+		"description": "Help text shown for the hterm 'paste-on-drop' preference. 'Drag and drop' refers to the operation where users select content, then click on the selection to start a 'drag' operation by 'grabbing' it, then move that text somewhere else and release the mouse button to 'drop' it.",
 		"message": "If true, Drag and dropped text will paste into terminal.\nIf false, dropped text will be ignored."
 	},
 	"HTERM_PREF_RECEIVE_ENCODING": {
@@ -834,7 +818,7 @@
 		"message": "When using the alternative screen buffer, and DECCKM (Application Cursor Keys) is active, mouse wheel scroll events will emulate arrow keys.\n\nIt can be temporarily disabled by holding the Shift key.\n\nThis frequently comes up when using pagers (less) or reading man pages or text editors (vi/nano) or using screen/tmux."
 	},
 	"HTERM_PREF_SCROLL_WHEEL_MOVE_MULTIPLIER": {
-		"description": "Help text shown for the hterm 'scroll-wheel-move-multiplier' preference. 'scroll wheel' and 'pixels' refer to the normal computing terms, so everything here may be translated as makes sense.",
+		"description": "Help text shown for the hterm 'scroll-wheel-move-multiplier' preference. This is a numeric value the user enters and is used as a multiplier. 'scroll wheel' and 'pixels' refer to the normal computing terms, so everything here may be translated as makes sense.",
 		"message": "The multiplier for scroll wheel events when measured in pixels.\n\nAlters how fast the page scrolls."
 	},
 	"HTERM_PREF_SHIFT_INSERT_PASTE": {
@@ -842,15 +826,15 @@
 		"message": "Whether Shift+Insert is used for pasting or is sent to the remote host."
 	},
 	"HTERM_PREF_TERMINAL_ENCODING": {
-		"description": "Help text shown for the hterm 'terminal-encoding' preference. 'DOCS' and 'ISO-2022' should not be translated, and 'UTF-8' may be translated as makes sense.",
+		"description": "Help text shown for the hterm 'terminal-encoding' preference. 'Terminal encoding' refers to the encoding the terminal uses when displaying user content. 'DOCS' and 'ISO-2022' should not be translated, and 'UTF-8' may be translated as makes sense.",
 		"message": "The default terminal encoding (DOCS).\n\nISO-2022 enables character map translations (like graphics maps).\nUTF-8 disables support for those.\n\nThe locked variant means the encoding cannot be changed at runtime via terminal escape sequences.\n\nYou should stick with UTF-8 unless you notice broken rendering with legacy applications."
 	},
 	"HTERM_PREF_USER_CSS": {
-		"description": "Help text shown for the hterm 'user-css' preference.",
+		"description": "Help text shown for the hterm 'user-css' preference. 'stylesheet' is a technical term in the CSS (Cascading Style Sheets) standard and may be translated if possible. 'terminal document' refers to the web page containing the terminal program.",
 		"message": "URL of user stylesheet to include in the terminal document."
 	},
 	"HTERM_PREF_USER_CSS_TEXT": {
-		"description": "Help text shown for the hterm 'user-css-text' preference.",
+		"description": "Help text shown for the hterm 'user-css-text' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible.",
 		"message": "Custom CSS text for styling the terminal."
 	},
 	"HTERM_PREF_USE_DEFAULT_WINDOW_COPY": {
@@ -858,15 +842,15 @@
 		"message": "Whether to use the default browser/OS's copy behavior.\n\nAllow the browser/OS to handle the copy event directly which might improve compatibility with some systems (where copying doesn't work at all), but makes the text selection less robust.\n\nFor example, long lines that were automatically line wrapped will be copied with the newlines still in them."
 	},
 	"HTERM_PREF_WORD_BREAK_MATCH_LEFT": {
-		"description": "Help text shown for the hterm 'word-break-match-left' preference. The quote style may be changed as needed.",
+		"description": "Help text shown for the hterm 'word-break-match-left' preference. When automatically expanding the user's selection, this controls when to stop expanding the selection to the left of content. This will be used when double clicking text and deciding how much text to the left of he cursor to automatically select. 'Regular expression' and 'character class' are computing terms referring to the syntax used by the preference. The quote style may be changed as needed.",
 		"message": "Regular expression to halt matching to the left (start) of a selection.\n\nNormally this is a character class to reject specific characters.\nWe allow \"~\" and \".\" by default as paths frequently start with those."
 	},
 	"HTERM_PREF_WORD_BREAK_MATCH_MIDDLE": {
-		"description": "Help text shown for the hterm 'word-break-match-middle' preference.",
+		"description": "Help text shown for the hterm 'word-break-match-middle' preference. When automatically expanding the user's selection, this determines what characters are used to separate words. 'Regular expression' and 'character class' are computing terms referring to the syntax used by the preference.",
 		"message": "Regular expression to match all the characters in the middle.\n\nNormally this is a character class to reject specific characters.\n\nUsed to expand the selection surrounding the starting point."
 	},
 	"HTERM_PREF_WORD_BREAK_MATCH_RIGHT": {
-		"description": "Help text shown for the hterm 'word-break-match-right' preference.",
+		"description": "Help text shown for the hterm 'word-break-match-right' preference. When automatically expanding the user's selection, this controls when to stop expanding the selection to the right of content. This will be used when double clicking text and deciding how much text to the right of the cursor to automatically select. 'Regular expression' and 'character class' are computing terms referring to the syntax used by the preference. The quote style may be changed as needed.",
 		"message": "Regular expression to halt matching to the right (end) of a selection.\n\nNormally this is a character class to reject specific characters."
 	},
 	"HTERM_SPACE_CHARACTER": {
@@ -910,7 +894,7 @@
 		"message": "Identity"
 	},
 	"IMPORT_LINK_ARIA_LABEL": {
-		"description": "The aria-label for the Import link.",
+		"description": "The aria-label for the Import link. This text will be used by Assistive Technology to provide more information to the user (e.g. it will be spoken aloud). It may be translated in whatever way makes sense for that use.",
 		"message": "file import"
 	},
 	"IMPORT_LINK_LABEL": {
@@ -956,15 +940,15 @@
 		}
 	},
 	"KNOWN_HOSTS_TITLE": {
-		"description": "Header text displayed before the list of known hosts.",
+		"description": "Header text displayed before the list of known hosts. These are systems that the user has connected to before.",
 		"message": "Known hosts:"
 	},
 	"LICENSES": {
-		"description": "A link to the licenses of open source dependencies.",
+		"description": "A link to the page of all the licenses the project uses.",
 		"message": "Licenses"
 	},
 	"LICENSES_EXPAND_LINK": {
-		"description": "Link that shows the extended details for a specific license.",
+		"description": "Link that shows the extended details for a specific license. It may be reformatted (including case) at translator's discretion.",
 		"message": "show license"
 	},
 	"LICENSES_TITLE": {
@@ -1012,64 +996,68 @@
 		"message": "Mount Path"
 	},
 	"NASFTP_CMD_CAT": {
-		"description": "Name of the 'cat' command which displays text files on the screen. This should be translated as one word.",
+		"description": "Name of the 'cat' command which displays text files on the screen. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "cat"
 	},
 	"NASFTP_CMD_CAT_HELP": {
 		"description": "Help text for the 'cat' command.",
 		"message": "Dump a file to the terminal"
 	},
+	"NASFTP_CMD_CD": {
+		"description": "Name of the 'cd' ('change directory') command which changes the current working directory. This is the directory where files will be accessed. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"message": "cd"
+	},
 	"NASFTP_CMD_CHDIR": {
-		"description": "Name of the 'chdir' command which changes the current working directory. This should be translated as one word.",
+		"description": "Name of the 'chdir' ('change directory') command which changes the current working directory. This is the directory where files will be accessed. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "chdir"
 	},
 	"NASFTP_CMD_CHDIR_HELP": {
-		"description": "Help text for the 'chdir' command.",
+		"description": "Help text for the 'chdir' command. This is the directory where files will be accessed.",
 		"message": "Change working directory"
 	},
 	"NASFTP_CMD_CHGRP": {
-		"description": "Name of the 'chgrp' command which changes the group ownership of paths. This should be translated as one word.",
+		"description": "Name of the 'chgrp' ('change group') command which changes the group ownership of paths. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "chgrp"
 	},
 	"NASFTP_CMD_CHGRP_HELP": {
-		"description": "Help text for the 'chgrp' command.",
+		"description": "Help text for the 'chgrp' ('change group') command which changes the group ownership of paths.",
 		"message": "Change group of paths"
 	},
 	"NASFTP_CMD_CHMOD": {
-		"description": "Name of the 'chmod' command which changes permissions on paths. This should be translated as one word.",
+		"description": "Name of the 'chmod' ('change mode') command which changes permissions (reading, writing, executing) on paths. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "chmod"
 	},
 	"NASFTP_CMD_CHMOD_HELP": {
-		"description": "Help text for the 'chmod' command.",
+		"description": "Help text for the 'chmod' ('change mode') command which changes permissions (reading, writing, executing) on paths.",
 		"message": "Change permissions on paths"
 	},
 	"NASFTP_CMD_CHOWN": {
-		"description": "Name of the 'chown' command which changes the user ownership of paths. This should be translated as one word.",
+		"description": "Name of the 'chown' ('change owner') command which changes the user ownership of paths. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "chown"
 	},
 	"NASFTP_CMD_CHOWN_HELP": {
-		"description": "Help text for the 'chown' command.",
+		"description": "Help text for the 'chown' ('change owner') command which changes the user ownership of paths.",
 		"message": "Change owner of paths"
 	},
 	"NASFTP_CMD_CLEAR": {
-		"description": "Name of the 'clear' command which clears the current terminal. This should be translated as one word.",
+		"description": "Name of the 'clear' command which clears the current terminal. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "clear"
 	},
 	"NASFTP_CMD_CLEAR_HELP": {
-		"description": "Help text for the 'clear' command.",
+		"description": "Help text for the 'clear' command. This is used to clear all content from the screen.",
 		"message": "Clear the current terminal screen."
 	},
 	"NASFTP_CMD_CLIP": {
-		"description": "Name of the 'clip' command which copies text to the user's clipboard (for copying & pasting). This should be translated as one word.",
+		"description": "Name of the 'clip' command which copies text to the user's clipboard (for copying & pasting). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "clip"
 	},
 	"NASFTP_CMD_CLIP_HELP": {
-		"description": "Help text for the 'clip' command.",
-		"message": "Copy a file to the clipboard (default: 10MiB at start)"
+		"description": "Help text for the 'clip' command. 'clipboard' is the user's clipboard which is used for copying & pasting. '10MiB from the start' means the first 10MiB of the file will be copied.",
+		"message": "Copy a file to the clipboard (default: 10MiB from the start)"
 	},
 	"NASFTP_CMD_CLIP_SUMMARY": {
-		"description": "Information shown to the user when the 'clip' command finishes.",
-		"message": "Copying $BYTES$ bytes to the clipboard",
+		"description": "Information shown to the user when the 'clip' command finishes. Everything may be translated as makes sense.",
+		"message": "Copied $BYTES$ bytes to the clipboard",
 		"placeholders": {
 			"BYTES": {
 				"content": "$1",
@@ -1078,7 +1066,7 @@
 		}
 	},
 	"NASFTP_CMD_COLOR": {
-		"description": "Name of the 'color' command which controls use of color in program output. This should be translated as one word.",
+		"description": "Name of the 'color' command which controls use of color in program output. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "color"
 	},
 	"NASFTP_CMD_COLOR_HELP": {
@@ -1086,15 +1074,23 @@
 		"message": "Toggle color usage"
 	},
 	"NASFTP_CMD_COPY": {
-		"description": "Name of the 'copy' command which remotely copies files (from one place on the server to another place on the server). This should be translated as one word.",
+		"description": "Name of the 'copy' command which remotely copies files (from one place on the server to another place on the server). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "copy"
 	},
 	"NASFTP_CMD_COPY_HELP": {
 		"description": "Help text for the 'copy' command.",
 		"message": "Copy source to destination"
 	},
+	"NASFTP_CMD_DEL": {
+		"description": "Name of the 'del' command which deletes files on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"message": "del"
+	},
+	"NASFTP_CMD_DEL_HELP": {
+		"description": "Help text for the 'del' command.",
+		"message": "Delete files"
+	},
 	"NASFTP_CMD_DF": {
-		"description": "Name of the 'df' command which remotes disk statistics (free space/etc...). This should be translated as one word.",
+		"description": "Name of the 'df' command which remotes disk statistics (free space/etc...). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "df"
 	},
 	"NASFTP_CMD_DF_HELP": {
@@ -1136,7 +1132,7 @@
 		}
 	},
 	"NASFTP_CMD_EXIT": {
-		"description": "Name of the 'exit' command which exits the program. This should be translated as one word.",
+		"description": "Name of the 'exit' command which exits the program. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "exit"
 	},
 	"NASFTP_CMD_EXIT_HELP": {
@@ -1144,11 +1140,11 @@
 		"message": "Disconnect"
 	},
 	"NASFTP_CMD_GET": {
-		"description": "Name of the 'get' command which downloads files from the remote server. This should be translated as one word.",
+		"description": "Name of the 'get' command which downloads files from the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "get"
 	},
 	"NASFTP_CMD_GET_DOWNLOAD_FILE": {
-		"description": "Output for the 'get' command.",
+		"description": "Output for the 'get' command. The first argument is the filename on the remote server, while the second argument is the filename that is used when saving the file to the user's computer. The user may choose to save the file locally using a different name.",
 		"message": "Downloading file: $SRC$ as $DST$",
 		"placeholders": {
 			"DST": {
@@ -1166,7 +1162,7 @@
 		"message": "Download files"
 	},
 	"NASFTP_CMD_HELP": {
-		"description": "Name of the 'help' command which shows help text for using the sftp program. This should be translated as one word.",
+		"description": "Name of the 'help' command which shows help text for using the program. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "help"
 	},
 	"NASFTP_CMD_HELP_HELP": {
@@ -1174,7 +1170,7 @@
 		"message": "This help screen"
 	},
 	"NASFTP_CMD_HELP_LHS": {
-		"description": "A short summary of the command and its arguments for the help screen. The fields will usually be other translations.",
+		"description": "A short summary of the command and its arguments for the help screen. The fields will usually be other translations. The first will be the name of the command while the second will be the arguments to the command.",
 		"message": "$CMD$ $ARGUMENTS$",
 		"placeholders": {
 			"ARGUMENTS": {
@@ -1202,23 +1198,23 @@
 		}
 	},
 	"NASFTP_CMD_LIST": {
-		"description": "Name of the 'list' command which lists details about paths on the remote server. This should be translated as one word.",
+		"description": "Name of the 'list' command which displays (lists) details about paths on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "list"
 	},
 	"NASFTP_CMD_LIST_HELP": {
-		"description": "Help text for the 'list' command.",
+		"description": "Help text for the 'list' command which displays (lists) details about paths on the remote server.",
 		"message": "List directory details"
 	},
 	"NASFTP_CMD_LN": {
-		"description": "Name of the 'ln' command which creates hard and soft links. This should be translated as one word.",
+		"description": "Name of the 'ln' command which creates hard and soft links. Links are computing terms for 'shortcuts'. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "ln"
 	},
 	"NASFTP_CMD_LN_HELP": {
-		"description": "Help text for the 'ln' command.",
+		"description": "Help text for the 'ln' command. 'link' is a computing term for 'shortcut'. 'path' and 'target' are file system paths the user will be entering as arguments where the path will be a hard link bound to the target.",
 		"message": "Create a link at path pointing to the target"
 	},
 	"NASFTP_CMD_MKDIR": {
-		"description": "Name of the 'mkdir' command which creaties directories on the remote server. This should be translated as one word.",
+		"description": "Name of the 'mkdir' command which creaties directories on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "mkdir"
 	},
 	"NASFTP_CMD_MKDIR_HELP": {
@@ -1226,7 +1222,7 @@
 		"message": "Create directories"
 	},
 	"NASFTP_CMD_MOVE": {
-		"description": "Name of the 'move' command which renames files on the remote server. This should be translated as one word.",
+		"description": "Name of the 'move' command which renames files on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "move"
 	},
 	"NASFTP_CMD_MOVE_HELP": {
@@ -1234,7 +1230,7 @@
 		"message": "Rename a file"
 	},
 	"NASFTP_CMD_PROMPT": {
-		"description": "Name of the 'prompt' command which sets the user's interactive prompt string. This should be translated as one word.",
+		"description": "Name of the 'prompt' command which sets the user's interactive prompt string. This is the status message shown whenever the program prompts the user to enter a command. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "prompt"
 	},
 	"NASFTP_CMD_PROMPT_HELP": {
@@ -1242,7 +1238,7 @@
 		"message": "Set the prompt string"
 	},
 	"NASFTP_CMD_PUT": {
-		"description": "Name of the 'put' command which uploads files. This should be translated as one word.",
+		"description": "Name of the 'put' command which uploads files. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "put"
 	},
 	"NASFTP_CMD_PUT_HELP": {
@@ -1268,7 +1264,7 @@
 		}
 	},
 	"NASFTP_CMD_PWD": {
-		"description": "Name of the 'pwd' command which displays the current working directory. This should be translated as one word.",
+		"description": "Name of the 'pwd' command which displays the current working directory. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "pwd"
 	},
 	"NASFTP_CMD_PWD_HELP": {
@@ -1286,11 +1282,11 @@
 		}
 	},
 	"NASFTP_CMD_QUIT": {
-		"description": "Name of the 'quit' command which exits the program. This should be translated as one word.",
+		"description": "Name of the 'quit' command which exits the program. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "quit"
 	},
 	"NASFTP_CMD_READLINK": {
-		"description": "Name of the 'readlink' command which reads symbolic links (i.e. shortcuts). This should be translated as one word.",
+		"description": "Name of the 'readlink' command which reads symbolic links (i.e. shortcuts). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "readlink"
 	},
 	"NASFTP_CMD_READLINK_HELP": {
@@ -1298,7 +1294,7 @@
 		"message": "Read symlinks"
 	},
 	"NASFTP_CMD_REALPATH": {
-		"description": "Name of the 'realpath' command which normalizes filesystem paths & symbolic links. This should be translated as one word.",
+		"description": "Name of the 'realpath' command which normalizes filesystem paths & symbolic links. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "realpath"
 	},
 	"NASFTP_CMD_REALPATH_HELP": {
@@ -1306,11 +1302,11 @@
 		"message": "Canonicalize paths"
 	},
 	"NASFTP_CMD_RENAME": {
-		"description": "Name of the 'rename' command which renames files on the remote server. This should be translated as one word.",
+		"description": "Name of the 'rename' command which renames files on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "rename"
 	},
 	"NASFTP_CMD_REPUT": {
-		"description": "Name of the 'reput' command which resumes file uploads. This should be translated as one word.",
+		"description": "Name of the 'reput' command which resumes file uploads. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "reput"
 	},
 	"NASFTP_CMD_REPUT_HELP": {
@@ -1318,11 +1314,11 @@
 		"message": "Resume uploading files"
 	},
 	"NASFTP_CMD_RM": {
-		"description": "Name of the 'rm' command which removes files on the remote server. This should be translated as one word.",
+		"description": "Name of the 'rm' command which removes files on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "rm"
 	},
 	"NASFTP_CMD_RMDIR": {
-		"description": "Name of the 'rmdir' command which deletes empty directories on the remote server. This should be translated as one word.",
+		"description": "Name of the 'rmdir' command which deletes empty directories on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "rmdir"
 	},
 	"NASFTP_CMD_RMDIR_HELP": {
@@ -1331,22 +1327,22 @@
 	},
 	"NASFTP_CMD_RM_HELP": {
 		"description": "Help text for the 'rm' command.",
-		"message": "Delete files"
+		"message": "Remove files"
 	},
 	"NASFTP_CMD_SHOW": {
-		"description": "Name of the 'show' command which is used to display non-text files directly (i.e. display image files inline). This should be translated as one word.",
+		"description": "Name of the 'show' command which is used to display non-text files directly (i.e. display image files inline instead of downloading). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "show"
 	},
 	"NASFTP_CMD_SHOW_HELP": {
-		"description": "Help text for the 'show' command.",
+		"description": "Help text for the 'show' command. 'inline' means the images will be displayed directly instead of being downloaded.",
 		"message": "Show files inline"
 	},
 	"NASFTP_CMD_STAT": {
-		"description": "Name of the 'stat' command which shows extensive path metadata (e.g. size, ownership, timestamps). This should be translated as one word.",
+		"description": "Name of the 'stat' command which shows extensive path metadata (e.g. size, ownership, timestamps). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "stat"
 	},
 	"NASFTP_CMD_STAT_EXTENSIONS_HEADER": {
-		"description": "Header shown before the list of file metadata extensions. The following lines will be KEY=VALUE pairs.",
+		"description": "Standalone header shown before the list of protocol extensions. The following lines will be KEY=VALUE pairs. Indentation need not be maintained. It may be reformatted (including case) at translator's discretion.",
 		"message": "Extensions:"
 	},
 	"NASFTP_CMD_STAT_EXTENSIONS_LINE": {
@@ -1368,7 +1364,7 @@
 		"message": "Show file status"
 	},
 	"NASFTP_CMD_STAT_SUMMARY": {
-		"description": "Output shown to summarize file metadata. Indentation need not be maintained, although fields should be kept aligned if possible. 'UID' and 'GID' refer to the 'user' and 'group' ids and may be translated. 'Access' refers to the read/write/execute permissions and may be translated. 'atime' and 'mtime' refer to the 'accessed' and 'modified' times and may be translated.",
+		"description": "Output shown to summarize file metadata. Indentation need not be maintained, although fields should be kept aligned if possible. 'UID' and 'GID' refer to the 'user' and 'group' ids and may be translated. 'Access' refers to the read/write/execute permissions and may be translated. 'atime' and 'mtime' refer to the 'accessed' and 'modified' times and may be translated. It is preferred to keep aach field/term short, but may be written in whatever form (including multiple words) is necessary for clarity.",
 		"message": "  File: $FILE$\n  Size: $SIZE$ bytes\n   UID: $USERID$\n   GID: $GROUPID$\nAccess: $PERM$\n atime: $ATIME$\n mtime: $MTIME$",
 		"placeholders": {
 			"ATIME": {
@@ -1402,15 +1398,15 @@
 		}
 	},
 	"NASFTP_CMD_SYMLINK": {
-		"description": "Name of the 'symlink' command which creates symbolic links on the remote server (i.e. shortcuts). This should be translated as one word.",
+		"description": "Name of the 'symlink' command which creates symbolic links on the remote server (i.e. shortcuts). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "symlink"
 	},
 	"NASFTP_CMD_SYMLINK_HELP": {
-		"description": "Help text for the 'symlink' command.",
+		"description": "Help text for the 'symlink' command. 'symlink' ('symbolic link') is a computing term for 'shortcut'. 'path' and 'target' are file system paths the user will be entering as arguments where 'path' will be the symlink pointing at 'target'.",
 		"message": "Create a symlink at path pointing to the target"
 	},
 	"NASFTP_CMD_TRUNCATE": {
-		"description": "Name of the 'truncate' command which truncates files to 0 bytes. This should be translated as one word.",
+		"description": "Name of the 'truncate' command which truncates files to 0 bytes. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "truncate"
 	},
 	"NASFTP_CMD_TRUNCATE_HELP": {
@@ -1418,11 +1414,11 @@
 		"message": "Truncate paths to 0 bytes"
 	},
 	"NASFTP_CMD_VERSION": {
-		"description": "Name of the 'version' command which shows program and network protocol version information. This should be translated as one word.",
+		"description": "Name of the 'version' command which shows program and network protocol version information. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "version"
 	},
 	"NASFTP_CMD_VERSION_EXTENSIONS_HEADER": {
-		"description": "Header shown before the list of protocol extensions. The following lines will be KEY=VALUE pairs. Indentation need not be maintained.",
+		"description": "Standalone header shown before the list of protocol extensions. The following lines will be KEY=VALUE pairs. Indentation need not be maintained. It may be reformatted (including case) at translator's discretion.",
 		"message": "  server extensions:"
 	},
 	"NASFTP_CMD_VERSION_EXTENSIONS_LINE": {
@@ -1502,7 +1498,7 @@
 		}
 	},
 	"NASFTP_ERROR_INVALID_NUMBER": {
-		"description": "Error message shown when a number was expected, but the user entered something else.",
+		"description": "Error message shown when a number was expected, but the user entered something else. The command will be whatever command the user entered (which might be translated), while the field will always be a short untranslated code.",
 		"message": "$CMD$: $FIELD$: invalid number: $INPUT$",
 		"placeholders": {
 			"CMD": {
@@ -1530,7 +1526,7 @@
 		}
 	},
 	"NASFTP_ERROR_MISSING_PROTOCOL_EXTENSION": {
-		"description": "Error message shown when a protocol extension is unavailable during this session.",
+		"description": "Error message shown when a protocol extension is unavailable during this session. The extension shown is the internet standards identifier that the client/server used to communicate.",
 		"message": "$CMD$: '$EXT$' extension unavailable",
 		"placeholders": {
 			"CMD": {
@@ -1539,7 +1535,7 @@
 			},
 			"EXT": {
 				"content": "$2",
-				"example": "copy-file"
+				"example": "copy-file@openssh.com-2"
 			}
 		}
 	},
@@ -1648,7 +1644,7 @@
 		}
 	},
 	"NASFTP_PROMPT": {
-		"description": "The interactive prompt shown to the user to show the current program status. 'nasftp' is the name of the program and should not be translated. The '>' separates the prompt from the start of the user's input, so there should be some spacing.",
+		"description": "The interactive prompt shown to the user to show the current program status. 'nasftp' is the name of the program and should not be translated. The '>' separates the prompt from the start of the user's input which will all be on the same line, so there should be some spacing. It is meant to 'point' at the user's input, so it may be flipped for RTL languages. The cwd is the current directory that the user has open.",
 		"message": "nasftp $CWD$ > ",
 		"placeholders": {
 			"CWD": {
@@ -1672,7 +1668,7 @@
 		"message": "Secure Shell"
 	},
 	"NEW_WINDOW_MENU_LABEL": {
-		"description": "The menu label to open a new window for a new secure shell session.",
+		"description": "The menu label to open a new window for a new Secure Shell session.",
 		"message": "New Window"
 	},
 	"NOTIFY_COPY": {
@@ -1680,11 +1676,11 @@
 		"message": "Selection Copied"
 	},
 	"OK_BUTTON_LABEL": {
-		"description": "The label for the OK button in dialogs.",
+		"description": "The label for the OK button in dialogs when confirming user input. It will be shown along with a 'Cancel' button.",
 		"message": "OK"
 	},
 	"OMNIBOX_DEFAULT": {
-		"description": "Default help text as a tip in the omnibox. Do not translate the <url> and <match> tags. The 'user@hostname[:port]' may be translated, but it should keep the 'username' and 'hostname' together with an @ sign, and the : before the 'port'.",
+		"description": "Default help text as a tip in the omnibox. Do not translate the 'url' and 'match' tags. The 'user@hostname[:port]' may be translated, but it should keep the 'username' and 'hostname' together with an '@' sign, and keep the ':' colon before the 'port'. The [] brackets indicate the ':port' is optional and may be changed as makes sense for the language.",
 		"message": "<url><match>user@hostname[:port]</match></url> Connect to a saved profile or a new ssh system"
 	},
 	"OPEN_AS_WINDOW_TIP": {
@@ -1698,7 +1694,7 @@
 		}
 	},
 	"OPTIONS_BUTTON_LABEL": {
-		"description": "The label for the options button.",
+		"description": "The label for the options button. This opens the program's settings/options/preferences page.",
 		"message": "Options"
 	},
 	"PLUGIN_LOADING": {
@@ -1706,11 +1702,11 @@
 		"message": "Loading NaCl plugin..."
 	},
 	"PLUGIN_LOADING_COMPLETE": {
-		"description": "Appended to PLUGIN_LOADING message when loading is complete.",
+		"description": "Appended to PLUGIN_LOADING message when loading is complete. The spacing should be retained, but it is not required.",
 		"message": " done."
 	},
 	"PLUGIN_LOADING_FAILED": {
-		"description": "Appended to PLUGIN_LOADING message when loading has failed.",
+		"description": "Appended to PLUGIN_LOADING message when loading has failed. The spacing should be retained, but it is not required.",
 		"message": " failed! :("
 	},
 	"POPUP_CONNECT_TOOLTIP": {
@@ -1734,27 +1730,27 @@
 		"message": "All preferences reset!"
 	},
 	"PREF_BACKUP_FILENAME": {
-		"description": "Default filename for the preferences backup file. The filename should be translated, but the '.json' suffix should be retained.",
+		"description": "Default filename for the preferences backup file. The filename should be translated if possible, but the '.json' extension must be retained.",
 		"message": "Secure Shell Preferences Backup.json"
 	},
 	"PROTOCOL_REGISTER_BUTTON": {
-		"description": "Label for the button that triggers dialogs that try to register ourselves to handle ssh:// URIs.",
+		"description": "Label for the button that triggers dialogs that try to register ourselves to handle ssh:// URIs. Please see the chrome://settings/handlers page for more details.",
 		"message": "Register protocol handlers"
 	},
 	"PROTOCOL_REGISTER_EXPLAIN": {
-		"description": "Text explaining what the protocolr registration process is for and what the UX looks like.",
+		"description": "Text explaining what the protocol registration process is for and what the UX looks like. Please see the chrome://settings/handlers page for more details.",
 		"message": "The button below will attempt to register handlers for all protocols we support. For example, this allows us to handle ssh:// links directly. A prompt will be displayed by the browser for each protocol, so please confirm/accept each one as it is shown. If no prompts are shown, then please see the next section for troubleshooting tips."
 	},
 	"PROTOCOL_REGISTER_EXPLAIN_SETTINGS": {
-		"description": "Text explaining how to troubleshoot registration errors, and how to navigate the Chrome settings page.",
-		"message": "If we've already registered handlers, or previous registration attempts were denied, then no further prompts will be displayed. Please open the dialog below, then check the registered handler settings in the ssh/sftp/etc... sections. If they're blocked, you can delete them. If they're registered, but this isn't set as the default, you can change that too."
+		"description": "Text explaining how to troubleshoot registration errors, and how to navigate the Chrome settings page. Please see the chrome://settings/handlers page for more details.",
+		"message": "If we've already registered handlers, or previous registration attempts were denied, then no further prompts will be displayed. Please open the dialog below, then check the registered handler settings in the ssh/sftp/etc... sections. If this program is blocked, you can delete those settings which will allow you to retry registration. If this program is already registered, but it isn't set as the default handler, you can change the default handler too."
 	},
 	"PROTOCOL_REGISTER_OPTIONS_LINK": {
-		"description": "Link text to open the URI protocol registration page.",
+		"description": "Link text to open the URI protocol registration page. Please see the chrome://settings/handlers page for more details.",
 		"message": "Protocol Register"
 	},
 	"PROTOCOL_REGISTER_SETTINGS_BUTTON": {
-		"description": "Label for the button that opens a Chrome settings page.",
+		"description": "Label for the button that opens a Chrome settings page. This is where the user can control all of the handlers that they've previously registered. Handlers are programs that will process requests for specific URIs.",
 		"message": "Open registered handlers settings"
 	},
 	"PROTOCOL_REGISTER_TITLE": {
@@ -1762,11 +1758,11 @@
 		"message": "Secure Shell protocol handler registration helper"
 	},
 	"READ_SIZE_LABEL": {
-		"description": "Label for the read size (in kilobytes) field.",
+		"description": "Label for the read size (in kibibytes) field. When reading large files, this is the smaller block size used when reading the file in pieces.",
 		"message": "Read Size (KiB)"
 	},
 	"RECONNECT_MESSAGE": {
-		"description": "Message displayed after a connection closes. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them after the word is OK like: Exit (X).",
+		"description": "Message displayed after a connection closes. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them relative to the word is OK as long as it's clear what action will be taken when the keyboard button is pressed. Similarly, using parentheses is not required other than for clarity. For example, these are OK: 'Exit (X)' or '[X]Exit' or whatever makes the most sense for the language.",
 		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
 	},
 	"RELAY_RETRY": {
@@ -1808,7 +1804,7 @@
 		"message": "SFTP"
 	},
 	"SHORTCUT_LIST_ARIA_LABEL": {
-		"description": "Text use as the aria-label for the 'shortcut-list'.",
+		"description": "Text use as the aria-label for the 'shortcut-list'. This text will be used by Assistive Technology to provide more information to the user (e.g. it will be spoken aloud). It may be translated in whatever way makes sense for that use.",
 		"message": "saved connections"
 	},
 	"SMART_CARD_CONNECTOR_NOT_INSTALLED": {
@@ -1826,7 +1822,7 @@
 		"message": "SSH Arguments"
 	},
 	"STREAM_OPEN_ERROR": {
-		"description": "Error message displayed when opening a stream (e.g. a file or a network connection) fails.",
+		"description": "Error message displayed when opening a stream (e.g. a file or a network connection) fails. The stream will be a short internal identifier code (always lower case), while the error message will be an error message from the operating system itself (whose translation will be left to the OS if available). Everything may be translated.",
 		"message": "Opening stream $ID$ failed: $ERROR$",
 		"placeholders": {
 			"ERROR": {
@@ -1888,7 +1884,7 @@
 		"message": "Set colors for the default palette."
 	},
 	"TERMINAL_PREF_BELL": {
-		"description": "Help text shown for the terminal 'audible-bell-sound' preference.",
+		"description": "Help text shown for the terminal 'audible-bell-sound' preference. This toggles whether the terminal will play a sound to get the user's attention.",
 		"message": "Audible terminal bell."
 	},
 	"TERMINAL_PREVIEW_LABEL": {
@@ -1905,7 +1901,7 @@
 	},
 	"TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP": {
 		"description": "Help text shown for the terminal 'background-image' preference.",
-		"message": "Background image URL. Must start with 'http://' or 'https://'. Empty string for no image.\n\nFor example:\n  https://goo.gl/anedTK"
+		"message": "Background image URL. Must start with 'http://' or 'https://'. Leave it blank for no image.\n\nFor example:\n  https://goo.gl/anedTK"
 	},
 	"TERMINAL_SETTINGS_DROPDOWN_ALT_GR_MODE_AUTO": {
 		"description": "Label for AltGr key mode 'Auto' option. See TERMINAL_PREF_ALT_GR_MODE.",
@@ -2072,7 +2068,7 @@
 		"message": "Theme"
 	},
 	"TIP_1": {
-		"description": "Helpful tip shown to user advertising features",
+		"description": "Helpful tip shown to user advertising features. 'macOS' is Apple's operating system also known as 'Mac OS X' and should only be translated if an official translation exists.",
 		"message": "You can hold Ctrl (Cmd on macOS) while clicking on links to open them!"
 	},
 	"TIP_10": {
@@ -2088,11 +2084,11 @@
 		"message": "Use Yubikeys and other smart cards for ssh authentication: https://goo.gl/Hu2o3v"
 	},
 	"TIP_13": {
-		"description": "Helpful tip shown to user advertising features.",
+		"description": "Helpful tip shown to user advertising features. 'inline' means the images will be displayed directly instead of being downloaded.",
 		"message": "Display images inline: https://goo.gl/MnSysj"
 	},
 	"TIP_14": {
-		"description": "Helpful tip shown to user advertising features.",
+		"description": "Helpful tip shown to user advertising features. Ctrl/Cmd refer to keyboard buttons. 'macOS' is Apple's operating system also known as 'Mac OS X' and should only be translated if an official translation exists. 'Right clicking' refers to clicking with the mouse. 'Context menu' is the popup menu with items for the user to pick from. Everything may be translated as makes sense.",
 		"message": "Holding Ctrl (Cmd on macOS) while right clicking brings up a context menu."
 	},
 	"TIP_2": {
@@ -2100,7 +2096,7 @@
 		"message": "Display notifications in the browser using hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"TIP_3": {
-		"description": "Helpful tip shown to user advertising features. Do not translate the 'ssh' string, but '<profile name>' can be. It is a user-defined description for their saved connections.",
+		"description": "Helpful tip shown to user advertising features. Do not translate the 'ssh' string. 'profile name' may be translated, but make it clear that the 'profile name' is something the user needs to enter/replace (like the angle brackets do in the English string). It is a user-defined description for their saved connections.",
 		"message": "Connect from the omnibox by typing 'ssh <profile name>': https://goo.gl/V7o8ki"
 	},
 	"TIP_4": {
@@ -2146,7 +2142,7 @@
 		"message": "Unmount SFTP"
 	},
 	"WELCOME_CHANGELOG": {
-		"description": "A link to the ChangeLog file, displayed at startup. All the text here may be localized as makes sense.",
+		"description": "A link to the ChangeLog file, displayed at startup. All the text here may be translated as makes sense.",
 		"message": "ChangeLog/release notes: $URL$",
 		"placeholders": {
 			"URL": {
@@ -2156,8 +2152,8 @@
 		}
 	},
 	"WELCOME_FAQ": {
-		"description": "A link to the frequently asked questions, displayed at startup",
-		"message": "Answers to Frequently Asked Questions: $URL$ (ctrl+click on links to open)",
+		"description": "A link to the frequently asked questions documentation displayed at startup. 'Ctrl+Click' refers to holding the keyboard Control button while clicking with the mouse. 'links' refer to website URL links. Everything may be translated.",
+		"message": "Answers to Frequently Asked Questions: $URL$ (Ctrl+Click on links to open)",
 		"placeholders": {
 			"URL": {
 				"content": "$1",
@@ -2204,7 +2200,7 @@
 		}
 	},
 	"WRITE_SIZE_LABEL": {
-		"description": "Label for the write size (in kilobytes) field.",
+		"description": "Label for the write size (in kibibytes) field. When writing large files, this is the smaller block size used when writing the file in pieces.",
 		"message": "Write Size (KiB)"
 	},
 	"ZOOM_WARNING": {
