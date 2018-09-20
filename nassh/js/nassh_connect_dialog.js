@@ -519,8 +519,10 @@ nassh.ConnectDialog.prototype.updatePlaceholders_ = function(fieldName) {
  */
 nassh.ConnectDialog.prototype.updateDetailPlaceholders_ = function() {
   // Try to split the description up into the sub-fields.
+  // This supports basic user[@hostname[:port]] strings, and the hostname match
+  // is a best effort will remaining simple.
   var ary = this.$f('description').value.match(
-      /^([^@]+)@([^:@]+)?(?::(\d+)?)?(?:@(.*))?$/);
+      /^([^@]+)@([^:@\s]+)?(?:(?::)(\d+))?/);
 
   // Set a blank array if the match failed.
   ary = ary || [];
