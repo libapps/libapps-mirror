@@ -64,9 +64,6 @@ source "${LIBDOT_BIN_DIR}/shflags"
 
 DEFINE_string filename "" \
   "The new zip filename.  Computed from manifest.json if not specified." f
-DEFINE_boolean promote_version "${FLAGS_FALSE}" \
-  "If true, this will promote the version number of the extension before \
-packaging."
 DEFINE_boolean promote_channel "${FLAGS_TRUE}" \
   "If true, this will promote the suffix of the extension before packaging."
 DEFINE_string source "" \
@@ -133,25 +130,6 @@ function promote_name() {
   echo_err "Name \"$current_name\" promoted to \"$new_name\""
 
   echo "$new_name"
-}
-
-function promote_version() {
-  local current_version="$1"
-
-  # First remove the final decimal place.
-  local new_version="$(echo $current_version | sed 's/\.[0-9]\{1,\}$//')"
-
-  # Then find the (new) final decimal place.
-  local final="$(echo $new_version | sed 's/^\([0-9]\{1,\}\.\)*//')"
-
-  # Strip this final number, add one, then put it back.
-  new_version="$(echo $new_version | sed 's/\.[0-9]\{1,\}$//')"
-  final=$(( $final + 1 ))
-  new_version="$new_version.$final"
-
-  echo_err "Version \"$current_version\" promoted to \"$new_version\""
-
-  echo "$new_version"
 }
 
 function rewrite_manifest() {
@@ -242,12 +220,6 @@ init_promote() {
   fi
 
   new_version="${version}"
-  if [[ "${FLAGS_promote_version}" == "${FLAGS_TRUE}" ]]; then
-    local suffix="$(echo_suffix "${new_name}")"
-    if [[ -z "${suffix}" ]]; then
-      new_version="$(promote_version "${version}")"
-    fi
-  fi
 }
 
 function init_from_dir() {

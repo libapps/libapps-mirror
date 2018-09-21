@@ -40,7 +40,7 @@ cat <<EOF >./dist/zip/tmp/crosh.json
 EOF
 rm -f ./dist/zip/crosh-0.zip
 mkzip.sh \
-  --nopromote_version --nopromote_channel \
+  --nopromote_channel \
   -s "." -w ./dist/zip/ -m "./dist/zip/tmp/crosh.json"
 rm ./dist/zip/tmp/crosh.json
 
