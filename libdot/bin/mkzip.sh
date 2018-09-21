@@ -64,6 +64,10 @@ source "${LIBDOT_BIN_DIR}/shflags"
 
 DEFINE_string filename "" \
   "The new zip filename.  Computed from manifest.json if not specified." f
+DEFINE_string append_version "" \
+  "If set, append this dotted version."
+DEFINE_integer keep_version_components 0 \
+  "How many leading version dotted fields to keep."
 DEFINE_boolean promote_channel "${FLAGS_TRUE}" \
   "If true, this will promote the suffix of the extension before packaging."
 DEFINE_string source "" \
@@ -220,6 +224,13 @@ init_promote() {
   fi
 
   new_version="${version}"
+  if [[ ${FLAGS_keep_version_components} -gt 0 ]]; then
+    new_version="$(echo "${new_version}" | \
+      cut -d. -f1-${FLAGS_keep_version_components})"
+  fi
+  if [[ -n "${FLAGS_append_version}" ]]; then
+    new_version+=".${FLAGS_append_version}"
+  fi
 }
 
 function init_from_dir() {
