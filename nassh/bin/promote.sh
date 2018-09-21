@@ -31,4 +31,4 @@ fi
 cd "${BIN_DIR}/.."
 
 mkdir -p ./dist/zip/
-mkzip.sh -s "${zip}" -w ./dist/zip/
+mkzip.sh --keep_version_components 2 -s "${zip}" -w ./dist/zip/

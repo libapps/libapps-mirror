@@ -17,6 +17,8 @@ export MORE_FILE_PATTERNS_EXCLUDE='
   .*/images/\(promo\|screenshot\)-.*\.\(jpg\|png\)$
 '
 
+stamp="$(date +%Y%m%d.%H%M%S)"
 for manifest in manifest_*.json; do
-  mkzip.sh -s "." -w ./dist/zip/ -m "${manifest}" "$@"
+  mkzip.sh --append_version "${stamp}" \
+    -s "." -w ./dist/zip/ -m "${manifest}" "$@"
 done
