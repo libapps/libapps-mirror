@@ -88,7 +88,8 @@ Crosh.init = function() {
      function() { terminal.reset(); }],
     [nassh.msg('NEW_WINDOW_MENU_LABEL'),
      function() {
-       window.open(lib.f.getURL('/html/nassh.html'), '',
+       // Preserve the full URI in case it has args like for vmshell.
+       window.open(document.location.href, '',
                    'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
                    `minimizable=yes,width=${window.innerWidth},` +
                    `height=${window.innerHeight}`);
