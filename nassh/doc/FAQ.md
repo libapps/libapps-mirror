@@ -192,6 +192,18 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   the author.
 
 
+### When I use a relay server, the IP address is always 0.0.0.0?
+
+  When using a relay server, Secure Shell only sends the hostname to the remote
+  side that has been specified in the connection settings.  The relay server is
+  then responsible for resolving that to an actual IP address (since the name is
+  often unresolvable locally by design!).  But the relay server has no way of
+  communicating that IP address back to the client, so Secure Shell just stubs
+  it out with `0.0.0.0`.  This is harmless and may be safely ignored.
+
+  When it comes to the known hosts database, the name will be used instead.
+
+
 ### Is my connection really secure?
 
   The Secure Shell app uses ssh to manage the encrypted communication channels.
