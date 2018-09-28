@@ -144,7 +144,6 @@ nassh.GoogleRelay.parseOptionString.validOptions_ = [
   'config',
   'proxy-host',
   'proxy-port',
-  'relay-prefix-field',
   'relay-protocol',
   'report-ack-latency',
   'report-connect-attempts',
@@ -213,31 +212,6 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
       this.proxyPort;
 
   if (relayHost) {
-    var relayPrefixField = parseInt(this.options['--relay-prefix-field']);
-    if (relayPrefixField) {
-      // If this option is set, we're supposed to assume the relayHost is a
-      // '.' delimited list of fields (like a hostname), isolate the field
-      // at the 1-based relayPrefixField position, and create the actual
-      // relayHost by prepending this field to the original proxyHost.
-      //
-      // TODO(rginda): Yes, this is a kludge.  Returning the correct hostname
-      // from the proxy is sometimes difficult, for a reason unknown to me.
-      var relayPrefix = relayHost.split(/\./g)[relayPrefixField - 1];
-      if (relayPrefix) {
-        if (this.proxyHost.substr(0, relayPrefix.length + 1) !=
-            relayPrefix + '.') {
-          // Only add the prefix if the proxyHost doesn't already include it.
-          relayHost = relayPrefix + '.' + this.proxyHost;
-        } else {
-          relayHost = this.proxyHost;
-        }
-      } else {
-        console.warn('Error getting relay prefix field: ' + relayPrefixField +
-                     ' from: ' + relayHost);
-        this.relayHost = null;
-      }
-    }
-
     var expectedResumePath =
         this.storage.getItem('googleRelay.resumePath');
     if (expectedResumePath == resumePath) {
