@@ -78,6 +78,8 @@ DEFINE_string workdir "" \
   "Work directory.  Zip files will be created here." w
 DEFINE_string manifest "manifest.json" \
   "The manifest file to use." m
+DEFINE_boolean use_manifest_platforms "${FLAGS_TRUE}" \
+  "If true, rewrite the manifest to use _platform_specific."
 
 FLAGS "$@" || exit $?
 eval set -- "${FLAGS_ARGV}"
@@ -280,9 +282,11 @@ function init_from_dir() {
 
   cd - >/dev/null
 
-  if [[ -d "${zipdir}/plugin" ]]; then
-    echo_err "Rewriting plugin manifests for CWS"
-    plugin-to-platform-specific.py -q --base "${zipdir}" || exit 1
+  if [[ "${FLAGS_use_manifest_platforms}" -eq "${FLAGS_TRUE}" ]]; then
+    if [[ -d "${zipdir}/plugin" ]]; then
+      echo_err "Rewriting plugin manifests for CWS"
+      plugin-to-platform-specific.py -q --base "${zipdir}" || exit 1
+    fi
   fi
 
   if [[ "${name}" != "${new_name}" || "${version}" != "${new_version}" ]]; then
