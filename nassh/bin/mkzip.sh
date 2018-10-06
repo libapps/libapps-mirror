@@ -4,7 +4,7 @@
 # found in the LICENSE file.
 
 LIBDOT_DIR="$(dirname -- "$0")/../../libdot"
-source "${LIBDOT_DIR}/bin/common.sh"
+. "${LIBDOT_DIR}/bin/common.sh"
 
 cd "${BIN_DIR}/.."
 
