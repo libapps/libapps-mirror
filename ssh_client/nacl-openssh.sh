@@ -15,7 +15,7 @@ set -xe
 
 ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 
-readonly PACKAGE_NAME=openssh-7.7p1
+readonly PACKAGE_NAME=openssh-7.8p1
 readonly OPENSSH_MIRROR="https://commondatastorage.googleapis.com/chromeos-localmirror/secureshell"
 readonly ROOT=$PWD/..
 readonly PATCH_FILE=${ROOT}/${PACKAGE_NAME}.patch
@@ -82,7 +82,6 @@ EXTRA_CONFIGURE_FLAGS=(
   --without-sandbox
   --without-selinux
   --without-shadow
-  --without-skey
   --without-ssl-engine
 
   # Features we want.
