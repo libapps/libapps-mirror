@@ -39,24 +39,7 @@ readonly WEBPORTS_BIN=${WEBPORTS_PREFIX}/bin
 export PKG_CONFIG_LIBDIR=${WEBPORTS_LIBDIR}
 export PKG_CONFIG_PATH=${PKG_CONFIG_LIBDIR}/pkgconfig
 export PATH=${NACL_BIN_PATH}:${PATH};
-
-# Tools for generating the html man pages.
-MANDOC_P="mandoc-1.14.3"
-if [[ ! -x ${MANDOC_P}/mandoc ]]; then
-  if [[ ! -f ${MANDOC_P}.tar.gz ]]; then
-    wget "${OPENSSH_MIRROR}/${MANDOC_P}.tar.gz"
-  fi
-  rm -rf "${MANDOC_P}"
-  tar xf ${MANDOC_P}.tar.gz
-  pushd "${MANDOC_P}" >/dev/null
-  (
-    unset AR CC CFLAGS CPPFLAGS LDFLAGS
-    ./configure
-  )
-  make -j${ncpus} mandoc
-  popd >/dev/null
-fi
-export MANDOC="${PWD}/${MANDOC_P}/mandoc"
+export MANDOC="${PWD}/mandoc"
 
 if [[ ! -f ${PACKAGE_NAME}.tar.gz ]]; then
   wget "${OPENSSH_MIRROR}/${PACKAGE_NAME}.tar.gz" -O "${PACKAGE_NAME}.tar.gz"

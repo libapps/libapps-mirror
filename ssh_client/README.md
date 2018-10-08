@@ -70,6 +70,9 @@ If you're hacking on the source, here are the files you most likely care about:
   * `hterm/plugin/`: The final output of the build process for [nassh].
 * [src/]: The NaCl plugin code that glues the JavaScript and OpenSSH worlds.
   See the next section for more in-depth coverage.
+* [third_party/]: All third party projects have a unique subdir.
+  Do not try to run these directly as they rely on settings in [build.sh].
+  * [mandoc/]: Tools to generate html from man pages.
 
 Here are the rest of the files, but most likely you don't need to touch these:
 
@@ -228,6 +231,9 @@ Here's a random list of documents which would be useful to people.
 [openssh-7.6p1.patch]: ./openssh-7.6p1.patch
 [src/]: ./src/
 [ssh_client.nmf]: ./ssh_client.nmf
+[third_party/]: ./third_party/
+
+[mandoc/]: ./third_party/mandoc/
 
 [dev_null.cc]: ./src/dev_null.cc
 [dev_null.h]: ./src/dev_null.h

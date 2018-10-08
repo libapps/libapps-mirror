@@ -65,6 +65,8 @@ if [[ ($WEB_PORTS == "") || !(-d $WEB_PORTS) ]]; then
   popd
 fi
 
+./third_party/mandoc/build.sh
+
 build() {
   pushd $WEB_PORTS/src
   make openssl zlib jsoncpp
