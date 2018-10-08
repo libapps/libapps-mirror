@@ -9,12 +9,6 @@ ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 
 DEBUG=0
 
-NACLSDK_VERSION=49.0.2623.87
-
-CDS_ROOT="https://commondatastorage.googleapis.com"
-SDK_ROOT="$CDS_ROOT/nativeclient-mirror/nacl/nacl_sdk"
-NACL_SDK="$SDK_ROOT/$NACLSDK_VERSION/naclsdk_linux.tar.bz2"
-
 # We only support PNaCl builds now.
 export NACL_ARCH=pnacl
 
@@ -34,16 +28,8 @@ done
 cd "$(dirname "$0")"
 mkdir -p output
 
-if [[ ($NACL_SDK_ROOT == "") || !(-d $NACL_SDK_ROOT) ]]; then
-  pushd output
-  if [[ !(-f naclsdk_linux.tar.bz2) || !(-d naclsdk) ]]; then
-    rm -rf naclsdk_linux.tar.bz2 nacl_sdk && mkdir naclsdk
-    wget "$NACL_SDK"
-    tar xjf naclsdk_linux.tar.bz2 -C naclsdk
-  fi
-  export NACL_SDK_ROOT=$(echo $PWD/naclsdk/pepper_*)
-  popd
-fi
+./third_party/naclsdk/build.sh
+export NACL_SDK_ROOT=$(echo "${PWD}/output/naclsdk"/pepper_*)
 
 ./third_party/webports/build.sh
 export WEB_PORTS="${PWD}/output/webports"

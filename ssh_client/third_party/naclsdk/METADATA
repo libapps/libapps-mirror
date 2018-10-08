@@ -1,0 +1,10 @@
+name: "naclsdk"
+description: "SDK for building code for Native Client"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://developer.chrome.com/native-client"
+  }
+  version: "49.0.2623.87"
+}
