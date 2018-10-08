@@ -45,7 +45,7 @@ else
   tarname="release.tar"
 fi
 
-make clean && make -j${ncpus} "${BUILD_ARGS[@]}"
+make -C src clean && make -C src -j${ncpus} "${BUILD_ARGS[@]}"
 
 cd output
 mkdir -p hterm/plugin/docs/

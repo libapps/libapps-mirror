@@ -2,34 +2,36 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-NACL_SDK_ROOT ?= $(wildcard $(CURDIR)/output/naclsdk/pepper_*)
+TOPDIR = $(CURDIR)/..
+OUTPUT ?= $(TOPDIR)/output
+NACL_SDK_ROOT ?= $(wildcard $(OUTPUT)/naclsdk/pepper_*)
 
-PROJECT:=output/ssh_client
-CXX_SOURCES:=\
-	src/dev_null.cc \
-	src/dev_random.cc \
-	src/file_system.cc \
-	src/js_file.cc \
-	src/pepper_file.cc \
-	src/syscalls.cc \
-	src/ssh_plugin.cc \
-	src/tcp_server_socket.cc \
-	src/tcp_socket.cc \
-	src/udp_socket.cc
+PROJECT := $(OUTPUT)/ssh_client
+CXX_SOURCES := \
+	dev_null.cc \
+	dev_random.cc \
+	file_system.cc \
+	js_file.cc \
+	pepper_file.cc \
+	syscalls.cc \
+	ssh_plugin.cc \
+	tcp_server_socket.cc \
+	tcp_socket.cc \
+	udp_socket.cc
 
-CXX_HEADERS:=\
-	src/dev_null.h \
-	src/dev_random.h \
-	src/file_interfaces.h \
-	src/file_system.h \
-	src/js_file.h \
-	src/pepper_file.h \
-	src/proxy_stream.h \
-	src/pthread_helpers.h \
-	src/ssh_plugin.h \
-	src/tcp_server_socket.h \
-	src/tcp_socket.h \
-	src/udp_socket.h
+CXX_HEADERS := \
+	dev_null.h \
+	dev_random.h \
+	file_interfaces.h \
+	file_system.h \
+	js_file.h \
+	pepper_file.h \
+	proxy_stream.h \
+	pthread_helpers.h \
+	ssh_plugin.h \
+	tcp_server_socket.h \
+	tcp_socket.h \
+	udp_socket.h
 
 # Project Build flags
 ifeq ($(DEBUG),1)
@@ -38,9 +40,9 @@ else
 CXXFLAGS ?= -g -O2 -DNDEBUG
 endif
 override WARNINGS+=-Wno-long-long -Wall -Wswitch-enum -Werror
-override CXXFLAGS+=-pthread -std=gnu++0x $(WARNINGS) -Iinclude \
+override CXXFLAGS+=-pthread -std=gnu++0x $(WARNINGS) -I$(TOPDIR)/include \
         -I$(NACL_SDK_ROOT)/include -I$(NACL_SDK_ROOT)/le32-nacl/include
-override CFLAGS+=-pthread $(WARNINGS) -Iinclude -I$(NACL_SDK_ROOT)/include
+override CFLAGS+=-pthread $(WARNINGS) -I$(TOPDIR)/include -I$(NACL_SDK_ROOT)/include
 
 OSNAME:=$(shell python $(NACL_SDK_ROOT)/tools/getos.py)
 PNACL_TC_ROOT:=$(NACL_SDK_ROOT)/toolchain/$(OSNAME)_pnacl
@@ -56,7 +58,7 @@ PNACL_TRANSLATE_FLAGS=-fdata-sections -ffunction-sections --gc-sections \
         --allow-llvm-bitcode-input
 PNACL_LDFLAGS:=-lppapi_cpp -lppapi -lcrypto -lppapi_cpp_private -lnacl_io \
         -lz -ljsoncpp \
-        -Loutput -L$(NACL_SDK_ROOT)/lib/pnacl/Release --pnacl-disable-abi-check
+        -L$(OUTPUT) -L$(NACL_SDK_ROOT)/lib/pnacl/Release --pnacl-disable-abi-check
 
 COMPAT_INC:=-I$(PNACL_TC_ROOT)/le32-nacl/usr/include/glibc-compat
 PNACL_CXXFLAGS:=$(CXXFLAGS) $(COMPAT_INC)
@@ -70,8 +72,8 @@ newlib_x86_64: $(PROJECT)_nl_x86_64.nexe
 newlib_arm: $(PROJECT)_nl_arm.nexe
 
 # Define PNaCl compile and link rules for C++ sources
-POBJS:=$(patsubst src/%.cc,output/%_p.o,$(CXX_SOURCES))
-$(POBJS) : output/%_p.o : src/%.cc
+POBJS := $(patsubst %.cc,$(OUTPUT)/%_p.o,$(CXX_SOURCES))
+$(POBJS): $(OUTPUT)/%_p.o : $(CURDIR)/%.cc
 	$(PNACL_CXX) -o $@ -c $< $(PNACL_CXXFLAGS)
 
 $(PROJECT)_nl.pexe : $(POBJS)
@@ -98,4 +100,4 @@ $(PROJECT)_nl_x86_64.dbg.nexe : $(PROJECT)_nl.pexe
 	$(PNACL_FINALIZE) $^ -o $@
 
 clean:
-	rm -rf output/*.o $(PROJECT)*.[np]exe
+	rm -rf $(OUTPUT)/*.o $(PROJECT)*.[np]exe

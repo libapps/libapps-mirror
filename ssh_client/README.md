@@ -62,11 +62,11 @@ If you're hacking on the source, here are the files you most likely care about:
 
 * [build.sh]: The main compile script.  Takes care of downloading & compiling
   NaCl, webports, OpenSSH, and any other software.  Run it and forget!
-* [Makefile]: Used only to compile the plugin code under [src/].
 * `output/`: All download & compiled objects are saved here.
   * `hterm/plugin/`: The final output of the build process for [nassh].
 * [src/]: The NaCl plugin code that glues the JavaScript and OpenSSH worlds.
   See the next section for more in-depth coverage.
+  * [Makefile][src/Makefile]: Used only to compile the plugin code.
 * [third_party/]: All third party projects have a unique subdir.
   Do not try to run these directly as they rely on settings in [build.sh].
   * [depot_tools/]: Tools used by webports.
@@ -260,3 +260,4 @@ Here's a random list of documents which would be useful to people.
 [tcp_socket.h]: ./src/tcp_socket.h
 [udp_socket.cc]: ./src/udp_socket.cc
 [udp_socket.h]: ./src/udp_socket.h
+[src/Makefile]: ./src/Makefile
