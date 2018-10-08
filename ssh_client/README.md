@@ -63,9 +63,6 @@ If you're hacking on the source, here are the files you most likely care about:
 * [build.sh]: The main compile script.  Takes care of downloading & compiling
   NaCl, webports, OpenSSH, and any other software.  Run it and forget!
 * [Makefile]: Used only to compile the plugin code under [src/].
-* [nacl-openssh.sh]: Script used to download & build OpenSSH specifically.
-  Do not try to run this directly as it relies on settings in [build.sh].
-* [openssh-7.6p1.patch]: Minor changes needed to make OpenSSH work under NaCl.
 * `output/`: All download & compiled objects are saved here.
   * `hterm/plugin/`: The final output of the build process for [nassh].
 * [src/]: The NaCl plugin code that glues the JavaScript and OpenSSH worlds.
@@ -75,6 +72,7 @@ If you're hacking on the source, here are the files you most likely care about:
   * [depot_tools/]: Tools used by webports.
   * [mandoc/]: Tools to generate html from man pages.
   * [naclsdk/]: NaCl SDK/toolchain for cross-compiling to Native Client.
+  * [openssh-7.8/]: Code to download & build OpenSSH specifically.
   * [webports/]: SDK for cross-compiling some third party libs for NaCl.
 
 Here are the rest of the files, but most likely you don't need to touch these:
@@ -230,8 +228,6 @@ Here's a random list of documents which would be useful to people.
 [build.sh]: ./build.sh
 [include/]: ./include/
 [Makefile]: ./Makefile
-[nacl-openssh.sh]: ./nacl-openssh.sh
-[openssh-7.6p1.patch]: ./openssh-7.6p1.patch
 [src/]: ./src/
 [ssh_client.nmf]: ./ssh_client.nmf
 [third_party/]: ./third_party/
@@ -239,6 +235,7 @@ Here's a random list of documents which would be useful to people.
 [depot_tools/]: ./third_party/depot_tools/
 [mandoc/]: ./third_party/mandoc/
 [naclsdk/]: ./third_party/naclsdk/
+[openssh-7.8/]: ./third_party/openssh-7.8/
 [webports/]: ./third_party/webports/
 
 [dev_null.cc]: ./src/dev_null.cc

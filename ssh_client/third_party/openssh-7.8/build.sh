@@ -17,8 +17,14 @@ ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 
 readonly PACKAGE_NAME=openssh-7.8p1
 readonly OPENSSH_MIRROR="https://commondatastorage.googleapis.com/chromeos-localmirror/secureshell"
-readonly ROOT=$PWD/..
-readonly PATCH_FILE=${ROOT}/${PACKAGE_NAME}.patch
+readonly FILESDIR=$(readlink -f "$(dirname "$0")")
+readonly PATCH_FILE=$(echo "${FILESDIR}"/*.patch)
+
+pushd output >/dev/null
+
+if [[ -f libopenssh-pnacl.a ]]; then
+  exit 0
+fi
 
 source $WEB_PORTS/src/build_tools/nacl-env.sh
 
@@ -126,3 +132,5 @@ $AR rcs ../libopenssh-${NACL_ARCH}.a "${objects[@]}"
 cp -f libssh.a ../libssh-${NACL_ARCH}.a
 cp -f openbsd-compat/libopenbsd-compat.a ../libopenbsd-compat-${NACL_ARCH}.a
 cp -f *.[0-9].html ../
+
+popd >/dev/null
