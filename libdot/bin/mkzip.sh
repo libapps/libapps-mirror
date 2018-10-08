@@ -147,56 +147,40 @@ function rewrite_manifest() {
   echo_err "New name: $new_name"
   echo_err "New version: $new_version"
 
-  # Used in the regexp's below.
-  local s="[ \t]"
-
   local suffix="$(echo_suffix "$new_name")"
 
   # Maybe change some image paths.
-  local image_path_rule=""
   if [ -z "$suffix" ]; then
-    image_path_rule="\
-      /$s*\"([^\"]+)\"$s*:$s*\"images\/dev\/([^\"]+)\"$s*,?$s*$/ \
-        { sub(/\"images\/dev\//, \"\\\"images/stable/\") }"
+    local s="[ \t]"
+    insist cat "${manifest}" | \
+      awk "/$s*\"([^\"]+)\"$s*:$s*\"images\/dev\/([^\"]+)\"$s*,?$s*$/ \
+           { sub(/\"images\/dev\//, \"\\\"images/stable/\") } \
+           { print }" > "${manifest}.edited"
+    insist mv "${manifest}.edited" "${manifest}"
   fi
 
   # Maybe strip out the "key": "..." line.
-  local strip_key_rule=""
   if [ "$suffix" != "tot" ]; then
-    strip_key_rule="/$s*\"key\"$s*:$s*\"[^\"]+\"$s*,?$s*$/ { next }"
+    delete_manifest_key "key" "${manifest}"
   fi
 
-  insist cat "$manifest" |                                          \
-    awk "                                                           \
-      $strip_key_rule                                               \
-      $image_path_rule                                              \
-                                                                    \
-      /$s*\"version\"$s*:$s*\"[^\"]+\"$s*,$s*$/                     \
-        { sub(/\"[^\"]+\"$s*,$s*$/, \"\\\"$new_version\\\",\") }    \
-                                                                    \
-      /$s*\"name\"$s*:$s*\"[^\"]+\"$s*,$s*$/                        \
-        { sub(/\"[^\"]+\"$s*,$s*$/, \"\\\"$new_name\\\",\") }       \
-                                                                    \
-                                                                    \
-      {print}" > "$manifest.edited"
+  set_manifest_key_value "name" "${new_name}" "${manifest}"
+  set_manifest_key_value "version" "${new_version}" "${manifest}"
 
   # Sanity check that the whole awk mess worked.
-  local edited_version=$(get_manifest_key_value "version" "$manifest.edited")
+  local edited_version=$(get_manifest_key_value "version" "${manifest}")
 
   if [ "$edited_version" != "$new_version" ]; then
     echo_err "Failed to edit manifest version."
     exit 2
   fi
 
-  local edited_name=$(get_manifest_key_value "name" "$manifest.edited")
+  local edited_name=$(get_manifest_key_value "name" "${manifest}")
 
   if [ "$edited_name" != "$new_name" ]; then
     echo_err "Failed to edit manifest name."
     exit 2
   fi
-
-  # Install the edited manifest.
-  insist mv "$manifest.edited" "$manifest"
 }
 
 # Convert the name and version into an appropriate filename.
@@ -287,6 +271,9 @@ function init_from_dir() {
       echo_err "Rewriting plugin manifests for CWS"
       plugin-to-platform-specific.py -q --base "${zipdir}" || exit 1
     fi
+  else
+    # Strip out the "platforms" section since it's unused.
+    delete_manifest_key "platforms" "${zipdir}/manifest.json"
   fi
 
   if [[ "${name}" != "${new_name}" || "${version}" != "${new_version}" ]]; then

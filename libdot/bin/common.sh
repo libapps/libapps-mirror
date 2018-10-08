@@ -47,15 +47,36 @@ function insist() {
 
 # Read a value from a manifest.json file.
 #
-#   get_key_value <key> <manifest_file>
-#
-# This only works on manifest files that have one key per line.
-#
+#   get_manifest_key_value <key> <manifest_file>
 function get_manifest_key_value() {
   local key="$1"
   local file="$2"
-  local line="$(grep "\"$key\":" "$file")"
-  echo "$(expr "$line" : '.*\":[[:space:]]*\"\([^\"]*\)')"
+  python \
+    -c 'import json, sys; d = json.load(open(sys.argv[1])); print(d[sys.argv[2]]);' \
+    "${file}" "${key}"
+}
+
+# Delete a key from a manifest.json file.
+#
+#   delete_manifest_key <key> <manifest_file>
+delete_manifest_key() {
+  local key="$1"
+  local file="$2"
+  python \
+    -c 'import json, sys; d = json.load(open(sys.argv[1])); d.pop(sys.argv[2], None); json.dump(d, open(sys.argv[1], "w"), indent=2);' \
+    "${file}" "${key}"
+}
+
+# Set a key to a value in a manifest.json file.
+#
+#   set_manifest_key_value <key> <value> <manifest_file>
+set_manifest_key_value() {
+  local key="$1"
+  local value="$2"
+  local file="$3"
+  python \
+    -c 'import json, sys; d = json.load(open(sys.argv[1])); d[sys.argv[2]] = sys.argv[3]; json.dump(d, open(sys.argv[1], "w"), indent=2);' \
+    "${file}" "${key}" "${value}"
 }
 
 # TODO: Remove this $PN hack once we have a better solution for crosh.
