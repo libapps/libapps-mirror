@@ -72,7 +72,9 @@ If you're hacking on the source, here are the files you most likely care about:
   See the next section for more in-depth coverage.
 * [third_party/]: All third party projects have a unique subdir.
   Do not try to run these directly as they rely on settings in [build.sh].
+  * [depot_tools/]: Tools used by webports.
   * [mandoc/]: Tools to generate html from man pages.
+  * [webports/]: SDK for cross-compiling some third party libs for NaCl.
 
 Here are the rest of the files, but most likely you don't need to touch these:
 
@@ -233,7 +235,9 @@ Here's a random list of documents which would be useful to people.
 [ssh_client.nmf]: ./ssh_client.nmf
 [third_party/]: ./third_party/
 
+[depot_tools/]: ./third_party/depot_tools/
 [mandoc/]: ./third_party/mandoc/
+[webports/]: ./third_party/webports/
 
 [dev_null.cc]: ./src/dev_null.cc
 [dev_null.h]: ./src/dev_null.h

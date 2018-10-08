@@ -10,7 +10,6 @@ ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 DEBUG=0
 
 NACLSDK_VERSION=49.0.2623.87
-WEBPORTS_REVISION=${NACLSDK_VERSION%%.*}
 
 CDS_ROOT="https://commondatastorage.googleapis.com"
 SDK_ROOT="$CDS_ROOT/nativeclient-mirror/nacl/nacl_sdk"
@@ -46,32 +45,12 @@ if [[ ($NACL_SDK_ROOT == "") || !(-d $NACL_SDK_ROOT) ]]; then
   popd
 fi
 
-if [[ ($WEB_PORTS == "") || !(-d $WEB_PORTS) ]]; then
-  pushd output
-  if [[ !(-d webports/src) ]]; then
-    # Get own copy of depot_tools for gclient.
-    if [[ ! -d depot_tools ]]; then
-      git clone --depth=1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
-    fi
-    PATH="${PWD}/depot_tools:${PATH}"
-
-    rm -rf webports && mkdir webports
-    cd webports
-    gclient config --name=src https://chromium.googlesource.com/webports.git
-    gclient sync --jobs=8 -r src@pepper_$WEBPORTS_REVISION
-    cd ..
-  fi
-  export WEB_PORTS=$PWD/webports
-  popd
-fi
+./third_party/webports/build.sh
+export WEB_PORTS="${PWD}/output/webports"
 
 ./third_party/mandoc/build.sh
 
 build() {
-  pushd $WEB_PORTS/src
-  make openssl zlib jsoncpp
-  popd
-
   pushd output
   if [[ ! -f libopenssh-pnacl.a ]]; then
     ../nacl-openssh.sh
