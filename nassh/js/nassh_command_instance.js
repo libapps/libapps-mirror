@@ -1204,6 +1204,10 @@ nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
       isAtty = false;
     }
     var stream = this.createTtyStream(fd, allowRead, allowWrite, onOpen);
+    if (this.isSftp && path == DEV_STDOUT) {
+      // Update stdout stream to output to the SFTP Client.
+      stream.setIo(this.sftpClient);
+    }
   } else {
     this.sendToPlugin_('onOpenFile', [fd, false, false]);
   }
@@ -1289,9 +1293,6 @@ function isSftpInitResponse(data) {
  * SFTP Initialization handler. Mounts the SFTP connection as a file system.
  */
 nassh.CommandInstance.prototype.onSftpInitialised = function() {
-  // Update stdout stream to output to the SFTP Client.
-  this.streams_.getStreamByFd(1).setIo(this.sftpClient);
-
   if (this.isMount) {
     // Newer versions of Chrome support this API, but olders will error out.
     if (lib.f.getChromeMilestone() >= 64)
