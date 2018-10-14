@@ -38,7 +38,7 @@ nassh.sftp.Client = function(opt_basePath='') {
 
   // A map of pending packet requests.
   // Takes a requestId for a key and a Promise as a value.
-  this.pendingRequests = {};
+  this.pendingRequests_ = {};
 
   // A map of currently opened files.
   // Takes a openRequestId for a key and a file handle as a value.
@@ -100,7 +100,7 @@ nassh.sftp.Client.prototype.parseBuffer = function() {
 nassh.sftp.Client.prototype.onPacket = function(packet) {
   var packetType = packet.getUint8();
   if (packetType == nassh.sftp.packets.RequestPackets.VERSION) {
-    this.pendingRequests['init']();
+    this.pendingRequests_['init']();
     return true;
   }
 
@@ -111,9 +111,9 @@ nassh.sftp.Client.prototype.onPacket = function(packet) {
 
   // get request id and execute the callback (if found)
   var requestId = responsePacket.requestId;
-  if(this.pendingRequests.hasOwnProperty(requestId)) {
-    this.pendingRequests[requestId](responsePacket);
-    delete this.pendingRequests[requestId];
+  if (this.pendingRequests_.hasOwnProperty(requestId)) {
+    this.pendingRequests_[requestId](responsePacket);
+    delete this.pendingRequests_[requestId];
   } else {
     throw new TypeError('Received reply to unknown request:', requestId);
   }
@@ -164,7 +164,7 @@ nassh.sftp.Client.prototype.sendRequest_ = function(type, data) {
   packet.setData(data);
 
   return new Promise(resolve => {
-    this.pendingRequests[requestId] = resolve;
+    this.pendingRequests_[requestId] = resolve;
     this.sendToPlugin_('onRead', [0, btoa(packet.toString())]);
   });
 };
@@ -236,7 +236,7 @@ nassh.sftp.Client.prototype.init = function() {
   packet.setUint8(nassh.sftp.packets.RequestPackets.INIT);
   packet.setUint32(this.protoVersion);
 
-  this.pendingRequests['init'] = () => {
+  this.pendingRequests_['init'] = () => {
     console.log('init: SFTP');
     this.isInitialised = true;
   };
