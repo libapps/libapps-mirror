@@ -846,12 +846,6 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   if (idn_hostname != params.hostname)
     disp_hostname += ' (' + idn_hostname + ')';
 
-  // TODO(rginda): The "port" parameter was removed from the CONNECTING message
-  // on May 9, 2012, however the translations haven't caught up yet.  We should
-  // remove the port parameter here once they do.
-  this.io.println(nassh.msg('CONNECTING',
-                            [params.username + '@' + disp_hostname,
-                             (params.port || '??')]));
   this.io.onVTKeystroke = this.onVTKeystroke_.bind(this);
   this.io.sendString = this.sendString_.bind(this);
   this.io.onTerminalResize = this.onTerminalResize_.bind(this);
@@ -903,15 +897,18 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     argv.arguments.push('--', extraArgs.command);
 
   this.initPlugin_(() => {
-      if (!nassh.v2)
-        this.terminalWindow.addEventListener('beforeunload', this.onBeforeUnload_);
+    if (!nassh.v2)
+      this.terminalWindow.addEventListener('beforeunload', this.onBeforeUnload_);
 
-      this.sendToPlugin_('startSession', [argv]);
-      if (this.isSftp) {
-        this.sftpClient.initConnection(this.plugin_);
-        this.sftpClient.onInit = this.onSftpInitialised.bind(this);
-      }
-    });
+    this.io.println(nassh.msg('CONNECTING',
+                              [`${params.username}@${disp_hostname}`]));
+
+    this.sendToPlugin_('startSession', [argv]);
+    if (this.isSftp) {
+      this.sftpClient.initConnection(this.plugin_);
+      this.sftpClient.onInit = this.onSftpInitialised.bind(this);
+    }
+  });
 };
 
 /**
