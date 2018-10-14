@@ -238,10 +238,17 @@ nassh.sftp.Client.prototype.init = function() {
 
   this.pendingRequests_['init'] = () => {
     console.log('init: SFTP');
+    this.onInit();
     this.isInitialised = true;
   };
   this.sendToPlugin_('onRead', [0, btoa(packet.toString())]);
 };
+
+
+/**
+ * Callback for users when we finished initialization.
+ */
+nassh.sftp.Client.prototype.onInit = function() {};
 
 
 /**

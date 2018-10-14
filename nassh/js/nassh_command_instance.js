@@ -909,6 +909,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
       this.sendToPlugin_('startSession', [argv]);
       if (this.isSftp) {
         this.sftpClient.initConnection(this.plugin_);
+        this.sftpClient.onInit = this.onSftpInitialised.bind(this);
       }
     });
 };
@@ -1259,11 +1260,6 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(fd, host, port) 
  * This is used to write to HTML5 Filesystem files.
  */
 nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
-  if (this.isSftp && !this.sftpClient.isInitialised
-      && isSftpInitResponse(data)) {
-    this.onSftpInitialised();
-  }
-
   var stream = this.streams_.getStreamByFd(fd);
 
   if (!stream) {
@@ -1273,21 +1269,8 @@ nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
 
   stream.asyncWrite(data, (writeCount) => {
     this.sendToPlugin_('onWriteAcknowledge', [fd, writeCount]);
-  }, 100);
+  });
 };
-
-/**
- * Checks to see if the plugin responded with a VERSION SFTP packet.
- */
-function isSftpInitResponse(data) {
-  var packet = new nassh.sftp.Packet(atob(data));
-  var packetLength = packet.getUint32();
-  var packetType = packet.getUint8();
-
-  // returns true if the packet has a valid length and is of type VERSION.
-  return packetLength == packet.getLength() - 4 &&
-         packetType == nassh.sftp.packets.RequestPackets.VERSION;
-}
 
 /**
  * SFTP Initialization handler. Mounts the SFTP connection as a file system.
