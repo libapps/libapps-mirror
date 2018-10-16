@@ -258,6 +258,14 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   that requires a domain socket.
 
 
+### Do my preferences and private keys get synced to Google?
+
+Connection and preference information are synced to the cloud according to your
+Chrome sync settings.  SSH private keys are only stored locally and not placed
+in sync storage.  If you delete your Chrome profile or switch machines, you'll
+have to re-import them.
+
+
 ### Can I use my ~/.ssh/config file?
 
   Probably.  It depends on what it does.  See the answer to the previous
