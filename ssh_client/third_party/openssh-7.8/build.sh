@@ -22,7 +22,7 @@ readonly PATCH_FILE=$(echo "${FILESDIR}"/*.patch)
 
 pushd output >/dev/null
 
-if [[ -f libopenssh-pnacl.a ]]; then
+if [[ -f libopenssh.a ]]; then
   exit 0
 fi
 
@@ -34,13 +34,11 @@ export AR=${NACLAR}
 export RANLIB=${NACLRANLIB}
 
 # Assume PNaCl toolchain.
-readonly NACL_ARCH="pnacl"
 readonly NACL_TOOLCHAIN_INSTALL=${NACL_TOOLCHAIN_ROOT}/le32-nacl
 
 readonly WEBPORTS_PREFIX=${NACL_TOOLCHAIN_INSTALL}/usr
 readonly WEBPORTS_INCLUDE=${WEBPORTS_PREFIX}/include
 readonly WEBPORTS_LIBDIR=${WEBPORTS_PREFIX}/lib
-readonly WEBPORTS_BIN=${WEBPORTS_PREFIX}/bin
 
 export PKG_CONFIG_LIBDIR=${WEBPORTS_LIBDIR}
 export PKG_CONFIG_PATH=${PKG_CONFIG_LIBDIR}/pkgconfig
@@ -97,10 +95,11 @@ EXTRA_CONFIGURE_FLAGS=(
   # These don't work with newlib (used in PNaCl).
   --without-stackprotect
   --without-hardening
+
+  ac_cv_func_inet_aton=no
+  ac_cv_func_inet_ntoa=no
+  ac_cv_func_inet_ntop=no
 )
-export ac_cv_func_inet_aton=no
-export ac_cv_func_inet_ntoa=no
-export ac_cv_func_inet_ntop=no
 
 # The prefix path matches what is used at runtime.
 if [[ ! -e Makefile ]]; then
@@ -128,9 +127,9 @@ make -j${ncpus} \
     "${objects[@]}" \
     libssh.a \
     openbsd-compat/libopenbsd-compat.a
-$AR rcs ../libopenssh-${NACL_ARCH}.a "${objects[@]}"
-cp -f libssh.a ../libssh-${NACL_ARCH}.a
-cp -f openbsd-compat/libopenbsd-compat.a ../libopenbsd-compat-${NACL_ARCH}.a
+$AR rcs ../libopenssh.a "${objects[@]}"
+cp -f libssh.a ../libssh.a
+cp -f openbsd-compat/libopenbsd-compat.a ../libopenbsd-compat.a
 cp -f *.[0-9].html ../
 
 popd >/dev/null

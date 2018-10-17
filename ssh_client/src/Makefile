@@ -77,8 +77,8 @@ $(POBJS): $(OUTPUT)/%_p.o : $(CURDIR)/%.cc
 	$(PNACL_CXX) -o $@ -c $< $(PNACL_CXXFLAGS)
 
 $(PROJECT)_nl.pexe : $(POBJS)
-	$(PNACL_CXX) -o $@ $^ -lopenssh-pnacl -lssh-pnacl \
-		-lopenbsd-compat-pnacl -lglibc-compat \
+	$(PNACL_CXX) -o $@ $^ -lopenssh -lssh \
+		-lopenbsd-compat -lglibc-compat \
 		$(PNACL_LDFLAGS) $(PNACL_CXXFLAGS)
 
 $(PROJECT)_nl_arm.dbg.nexe : $(PROJECT)_nl.pexe
