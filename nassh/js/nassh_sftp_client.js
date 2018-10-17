@@ -13,7 +13,11 @@ nassh.sftp = {};
  */
 nassh.sftp.Client = function(opt_basePath='') {
   // The version of the protocol we're using.
-  this.protoVersion = 3;
+  this.protocolClientVersion = 3;
+
+  // Extensions that the server supports.
+  this.protocolServerVersion = null;
+  this.protocolServerExtensions = {};
 
   // The packet request id counter.
   this.requestId_ = 0;
@@ -99,10 +103,6 @@ nassh.sftp.Client.prototype.parseBuffer = function() {
  */
 nassh.sftp.Client.prototype.onPacket = function(packet) {
   var packetType = packet.getUint8();
-  if (packetType == nassh.sftp.packets.RequestPackets.VERSION) {
-    this.pendingRequests_['init']();
-    return true;
-  }
 
   // Obtain the response packet's constructor and create it.
   var ResponseType = nassh.sftp.packets.ResponsePackets[packetType]
@@ -234,11 +234,13 @@ nassh.sftp.Client.prototype.init = function() {
   var packet = new nassh.sftp.Packet();
   packet.setUint32(5); // length, 5 bytes for type and version fields
   packet.setUint8(nassh.sftp.packets.RequestPackets.INIT);
-  packet.setUint32(this.protoVersion);
+  packet.setUint32(this.protocolClientVersion);
 
-  this.pendingRequests_['init'] = () => {
+  this.pendingRequests_['init'] = (packet) => {
     console.log('init: SFTP');
     this.onInit();
+    this.protocolServerVersion = packet.version;
+    this.protocolServerExtensions = packet.extensions;
     this.isInitialised = true;
   };
   this.sendToPlugin_('onRead', [0, btoa(packet.toString())]);

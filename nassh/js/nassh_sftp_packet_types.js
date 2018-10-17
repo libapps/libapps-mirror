@@ -79,6 +79,73 @@ nassh.sftp.packets.AttrsPacket = function(packet) {
 };
 
 /**
+ * Make sure the name conforms to the specification.
+ *
+ * The SFTP RFC defines the extension-name format:
+ * https://tools.ietf.org/html/draft-ietf-secsh-filexfer-13#section-4.2
+ *
+ * Which says to follow the SSH "Algorithm and Method Naming" RFC format:
+ * https://tools.ietf.org/html/rfc4251#section-6
+ *
+ * Really we just need this func to filter out extensions that we don't care
+ * about in our implementation.  If another one shows up, we can revisit.
+ *
+ * @param {string} name The protocol name to check.
+ * @return {boolean} True if the name is valid.
+ */
+nassh.sftp.packets.ValidExtension = function(ext) {
+  // The RFC is a little ambiguous, but it uses "name" to refer to the entire
+  // extension name, not just sub-components (when using the @ form).
+  if (ext.length > 64) {
+    return false;
+  }
+
+  // Split apart the extension@domain format.
+  const ary = ext.split('@');
+  if (ary.length > 2) {
+    return false;
+  }
+  const [name, domain] = ary;
+
+  // Names cannot contain control chars or whitespace (0x00-0x20), "@" (0x40),
+  // "," (0x2c), or DEL (0x7f).  So remove all valid chars and make sure the
+  // result is an empty string.
+  if (name.length == 0 ||
+      name.replace(/[\x21-\x2b\x2d-\x3f\x41-\x7e]/g, '').length != 0) {
+    return false;
+  }
+
+  // The domain part is supposed to be a bit more strict ("a valid domain"),
+  // but using the same form as above should be good enough.
+  if (domain !== undefined) {
+    if (domain.replace(/[\x21-\x2b\x2d-\x3f\x41-\x7e]/g, '').length != 0) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+/**
+ * SFTP Version Packet containing the version and possible extensions.
+ */
+nassh.sftp.packets.VersionPacket = function(packet) {
+  this.requestId = 'init';
+  this.version = packet.getUint32();
+
+  // Pull out all the extensions that might exist.
+  this.extensions = {};
+  while (!packet.eod()) {
+    const name = packet.getString();
+    const data = packet.getString();
+    // The SFTP RFC says we should silently ignore unknown/invalid entries.
+    if (nassh.sftp.packets.ValidExtension(name)) {
+      this.extensions[name] = data;
+    }
+  }
+};
+
+/**
  * Unknown Packet containing the request id (potentially garbage) and associated
  * data (also potentially garbage).
  */
@@ -284,6 +351,7 @@ nassh.sftp.packets.RequestPackets = {
  * Possible SFTP Response Packet types
  */
 nassh.sftp.packets.ResponsePackets = {
+  2: nassh.sftp.packets.VersionPacket,
   101: nassh.sftp.packets.StatusPacket,
   102: nassh.sftp.packets.HandlePacket,
   103: nassh.sftp.packets.DataPacket,

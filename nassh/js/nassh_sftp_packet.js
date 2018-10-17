@@ -160,6 +160,15 @@ nassh.sftp.Packet.prototype.getLength = function() {
 };
 
 /**
+ * Check whether the end of the packet data has been reached.
+ *
+ * @returns {!boolean} true If the end of the packet data has been reached.
+ */
+nassh.sftp.Packet.prototype.eod = function() {
+  return this.offset_ === this.packet_.length;
+};
+
+/**
  * Converts a byte array string to an int
  */
 nassh.sftp.Packet.byteArrayStringToInt = function(byteArray) {
