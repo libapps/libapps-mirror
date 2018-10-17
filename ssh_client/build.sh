@@ -48,14 +48,4 @@ fi
 make -C src clean && make -C src -j${ncpus} "${BUILD_ARGS[@]}"
 
 cd output
-mkdir -p hterm/plugin/docs/
-cp *.[0-9].html hterm/plugin/docs/
-
-rm -rf hterm/plugin/pnacl
-mkdir -p hterm/plugin/pnacl
-
-cp -f ../ssh_client.nmf hterm/plugin/pnacl/
-cp -f ssh_client_nl_x86_32.nexe hterm/plugin/pnacl/
-cp -f ssh_client_nl_x86_64.nexe hterm/plugin/pnacl/
-cp -f ssh_client_nl_arm.nexe hterm/plugin/pnacl/
-tar cf "${tarname}" hterm/plugin/ *.pexe *.dbg.nexe
+tar cf "${tarname}" plugin/ *.pexe *.dbg.nexe

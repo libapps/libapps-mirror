@@ -54,7 +54,7 @@ downloading the NaCl SDK and [webports] code for you (which takes care of
 building all the required dependencies).
 
 When it's finished, the `output/` directory will hold all the compiled objects,
-and the `output/hterm/plugin/` directory can be copied over to [nassh].
+and the `output/plugin/` directory can be copied over to [nassh].
 
 # Source Layout
 
@@ -63,7 +63,7 @@ If you're hacking on the source, here are the files you most likely care about:
 * [build.sh]: The main compile script.  Takes care of downloading & compiling
   NaCl, webports, OpenSSH, and any other software.  Run it and forget!
 * `output/`: All download & compiled objects are saved here.
-  * `hterm/plugin/`: The final output of the build process for [nassh].
+  * `plugin/`: The final output of the build process for [nassh].
 * [src/]: The NaCl plugin code that glues the JavaScript and OpenSSH worlds.
   See the next section for more in-depth coverage.
   * [Makefile][src/Makefile]: Used only to compile the plugin code.

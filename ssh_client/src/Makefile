@@ -4,9 +4,13 @@
 
 TOPDIR = $(CURDIR)/..
 OUTPUT ?= $(TOPDIR)/output
+BUILD_NAME = pnacl
+D = $(OUTPUT)/plugin/$(BUILD_NAME)
+
+$(shell mkdir -p $(D))
 NACL_SDK_ROOT ?= $(wildcard $(OUTPUT)/naclsdk/pepper_*)
 
-PROJECT := $(OUTPUT)/ssh_client
+PROJECT := ssh_client
 CXX_SOURCES := \
 	dev_null.cc \
 	dev_random.cc \
@@ -66,32 +70,42 @@ PNACL_CXXFLAGS:=$(CXXFLAGS) $(COMPAT_INC)
 # Declare the ALL target first, to make the 'all' target the default build
 all: all_newlib
 
-all_newlib: newlib_x86_32 newlib_x86_64 newlib_arm
-newlib_x86_32: $(PROJECT)_nl_x86_32.nexe
-newlib_x86_64: $(PROJECT)_nl_x86_64.nexe
-newlib_arm: $(PROJECT)_nl_arm.nexe
+newlib_pexe = $(PROJECT)_nl.pexe
+newlib_x86_32 = $(PROJECT)_nl_x86_32.nexe
+newlib_x86_64 = $(PROJECT)_nl_x86_64.nexe
+newlib_arm = $(PROJECT)_nl_arm.nexe
+all_newlib: \
+	$(D)/$(newlib_x86_32) \
+	$(D)/$(newlib_x86_64) \
+	$(D)/$(newlib_arm) \
+	$(D)/ssh_client.nmf
+$(D)/ssh_client.nmf: $(TOPDIR)/ssh_client.nmf
+	cp $< $@
+$(D)/%: $(OUTPUT)/%
+	cp $< $@
+newlib_pexe: $(OUTPUT)/$(newlib_pexe)
+newlib_x86_32: $(OUTPUT)/$(newlib_x86_32)
+newlib_x86_64: $(OUTPUT)/$(newlib_x86_64)
+newlib_arm: $(OUTPUT)/$(newlib_arm)
 
 # Define PNaCl compile and link rules for C++ sources
 POBJS := $(patsubst %.cc,$(OUTPUT)/%_p.o,$(CXX_SOURCES))
 $(POBJS): $(OUTPUT)/%_p.o : $(CURDIR)/%.cc
 	$(PNACL_CXX) -o $@ -c $< $(PNACL_CXXFLAGS)
 
-$(PROJECT)_nl.pexe : $(POBJS)
+$(OUTPUT)/$(newlib_pexe): $(POBJS)
 	$(PNACL_CXX) -o $@ $^ -lopenssh -lssh \
 		-lopenbsd-compat -lglibc-compat \
 		$(PNACL_LDFLAGS) $(PNACL_CXXFLAGS)
 
-$(PROJECT)_nl_arm.dbg.nexe : $(PROJECT)_nl.pexe
-	$(PNACL_TRANSLATE) $(PNACL_TRANSLATE_FLAGS) -o $@ $(PROJECT)_nl.pexe \
-		-arch arm
+$(OUTPUT)/$(PROJECT)_nl_arm.dbg.nexe: $(OUTPUT)/$(newlib_pexe)
+	$(PNACL_TRANSLATE) $(PNACL_TRANSLATE_FLAGS) -o $@ $< -arch arm
 
-$(PROJECT)_nl_x86_32.dbg.nexe : $(PROJECT)_nl.pexe
-	$(PNACL_TRANSLATE) $(PNACL_TRANSLATE_FLAGS) -o $@ $(PROJECT)_nl.pexe \
-		-arch i686
+$(OUTPUT)/$(PROJECT)_nl_x86_32.dbg.nexe: $(OUTPUT)/$(newlib_pexe)
+	$(PNACL_TRANSLATE) $(PNACL_TRANSLATE_FLAGS) -o $@ $< -arch i686
 
-$(PROJECT)_nl_x86_64.dbg.nexe : $(PROJECT)_nl.pexe
-	$(PNACL_TRANSLATE) $(PNACL_TRANSLATE_FLAGS) -o $@ $(PROJECT)_nl.pexe \
-		-arch x86-64
+$(OUTPUT)/$(PROJECT)_nl_x86_64.dbg.nexe: $(OUTPUT)/$(newlib_pexe)
+	$(PNACL_TRANSLATE) $(PNACL_TRANSLATE_FLAGS) -o $@ $< -arch x86-64
 
 %.nexe: %.dbg.nexe
 	$(PNACL_STRIP) $^ -o $@
@@ -100,4 +114,4 @@ $(PROJECT)_nl_x86_64.dbg.nexe : $(PROJECT)_nl.pexe
 	$(PNACL_FINALIZE) $^ -o $@
 
 clean:
-	rm -rf $(OUTPUT)/*.o $(PROJECT)*.[np]exe
+	rm -rf $(OUTPUT)/*.o $(OUTPUT)/*.[np]exe

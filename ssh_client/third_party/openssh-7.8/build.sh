@@ -130,6 +130,7 @@ make -j${ncpus} \
 $AR rcs ../libopenssh.a "${objects[@]}"
 cp -f libssh.a ../libssh.a
 cp -f openbsd-compat/libopenbsd-compat.a ../libopenbsd-compat.a
-cp -f *.[0-9].html ../
+mkdir -p ../plugin/docs
+cp -f *.[0-9].html ../plugin/docs/
 
 popd >/dev/null
