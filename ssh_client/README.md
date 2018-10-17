@@ -60,10 +60,18 @@ and the `output/plugin/` directory can be copied over to [nassh].
 
 If you're hacking on the source, here are the files you most likely care about:
 
+* [bin/]: Tools for building/testing ssh_client.
+  * [pylint]: Helper tool for linting various Python code.
+  * [ssh_client.py]: Utility library for Python build code.
 * [build.sh]: The main compile script.  Takes care of downloading & compiling
   NaCl, webports, OpenSSH, and any other software.  Run it and forget!
 * `output/`: All download & compiled objects are saved here.
+  * `bin/`: Various helper tools used at build time.
+  * `build/`: All subprojects get an individual build directory.
+  * `distfiles/`: All downloaded archives are cached here.
+  * `home/`: Scratch dir used as $HOME when building projects.
   * `plugin/`: The final output of the build process for [nassh].
+  * `sysroot/`: Headers & libs for building the plugin & ssh code.
 * [src/]: The NaCl plugin code that glues the JavaScript and OpenSSH worlds.
   See the next section for more in-depth coverage.
   * [Makefile][src/Makefile]: Used only to compile the plugin code.
@@ -225,12 +233,16 @@ Here's a random list of documents which would be useful to people.
 [OpenSSH]: https://www.openssh.com/
 [webports]: https://chromium.googlesource.com/webports/
 
+[bin/]: ./bin
 [build.sh]: ./build.sh
 [include/]: ./include/
 [Makefile]: ./Makefile
 [src/]: ./src/
 [ssh_client.nmf]: ./ssh_client.nmf
 [third_party/]: ./third_party/
+
+[pylint]: ./bin/pylint
+[ssh_client.py]: ./bin/ssh_client.py
 
 [depot_tools/]: ./third_party/depot_tools/
 [mandoc/]: ./third_party/mandoc/
