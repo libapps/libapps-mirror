@@ -1,7 +1,9 @@
+# Various temp files.
 *~
 \#*
 .#*
 __pycache__/
+*.swp
 
 # Stuff we build for distribution
 dist
