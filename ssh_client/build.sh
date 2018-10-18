@@ -31,7 +31,8 @@ mkdir -p output
 ./third_party/naclsdk/build
 export NACL_SDK_ROOT=$(echo "${PWD}/output/naclsdk"/pepper_*)
 
-./third_party/webports/build.sh
+./third_party/depot_tools/build
+./third_party/webports/build
 export WEB_PORTS="${PWD}/output/webports"
 
 ./third_party/mandoc/build.sh
