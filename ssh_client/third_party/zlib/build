@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Build zlib package."""
+
+from __future__ import print_function
+
+import os
+import sys
+
+FILESDIR = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
+
+import ssh_client  # pylint: disable=wrong-import-position
+
+
+ARCHIVES = ('%(P)s.tar.gz',)
+
+
+def src_configure(_metadata):
+    """Configure the source."""
+    if os.path.exists('configure.log'):
+        return
+
+    env = ssh_client.pnacl_env()
+    try:
+        ssh_client.run(['./configure', '--static', '--prefix=/'], env=env)
+    except Exception:
+        ssh_client.run(['cat', 'configure.log'])
+        ssh_client.unlink('configure.log')
+        raise
+
+
+def src_compile(_metadata):
+    """Compile the source."""
+    ssh_client.emake('libz.a')
+
+
+def src_install(_metadata):
+    """Install the package."""
+    env = ssh_client.pnacl_env()
+
+    ssh_client.copy('libz.a', os.path.join(env['SYSROOT_LIBDIR'], 'libz.a'))
+    ssh_client.copy('zlib.pc', os.path.join(env['PKG_CONFIG_PATH'], 'zlib.pc'))
+    for header in ('zconf.h', 'zlib.h'):
+        target = os.path.join(env['SYSROOT_INCDIR'], header)
+        ssh_client.copy(header, target)
+
+
+ssh_client.build_package(sys.modules[__name__])

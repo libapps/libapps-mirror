@@ -1,0 +1,11 @@
+name: "zlib"
+description: "Standard compression library"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "http://www.zlib.net/"
+  }
+  version: "1.2.11"
+  last_upgrade_date { year: 2017 month: 1 day: 15 }
+}

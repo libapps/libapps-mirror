@@ -29,6 +29,7 @@ mkdir -p output
 
 ./third_party/depot_tools/build
 ./third_party/webports/build
+./third_party/zlib/build
 
 ./third_party/mandoc/build
 ./third_party/openssh-7.9/build

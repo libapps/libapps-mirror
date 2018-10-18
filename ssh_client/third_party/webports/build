@@ -50,7 +50,7 @@ def src_configure(_metadata):
 def src_compile(_metadata):
     """Compile the source."""
     env = ssh_client.pnacl_env()
-    ssh_client.emake('-C', 'src', 'openssl', 'zlib', 'jsoncpp', jobs=1, env=env)
+    ssh_client.emake('-C', 'src', 'openssl', 'jsoncpp', jobs=1, env=env)
 
 
 def src_install(_metadata):
