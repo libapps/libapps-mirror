@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Simpler helper to run cpplint on source files."""
+
+from __future__ import print_function
+
+import glob
+import os
+import sys
+
+import ssh_client
+
+
+def main(argv):
+    """The main func!"""
+    # We don't parse argv on purpose -- pass everything down to cpplint.
+    if not argv:
+        os.chdir(ssh_client.DIR)
+        argv = glob.glob('src/*.cc') + glob.glob('src/*.h')
+
+    # TODO: Should prob sort out the /int and /casting warnings.
+    cmd = ['cpplint.py',
+           ('--filter=-build/header_guard,-build/include,-runtime/int,'
+            '-readability/casting,-readability/todo')] + argv
+
+    os.execvp(cmd[0], cmd)
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))
