@@ -26,14 +26,21 @@ if [[ -f libopenssh.a ]]; then
   exit 0
 fi
 
-source $WEB_PORTS/src/build_tools/nacl-env.sh
+# Assume PNaCl toolchain.
+readonly NACL_TOOLCHAIN_ROOT="${NACL_SDK_ROOT}/toolchain/linux_pnacl"
+readonly NACL_BIN_PATH="${NACL_TOOLCHAIN_ROOT}/bin"
+readonly NACL_CROSS_PREFIX="pnacl"
+readonly NACLCC="${NACL_BIN_PATH}/${NACL_CROSS_PREFIX}-clang"
+readonly NACLCXX="${NACL_BIN_PATH}/${NACL_CROSS_PREFIX}-clang++"
+readonly NACLAR="${NACL_BIN_PATH}/${NACL_CROSS_PREFIX}-ar"
+readonly NACLRANLIB="${NACL_BIN_PATH}/${NACL_CROSS_PREFIX}-ranlib"
+readonly NACLSTRIP="${NACL_BIN_PATH}/${NACL_CROSS_PREFIX}-strip"
 
 export CC=${NACLCC}
 export CXX=${NACLCXX}
 export AR=${NACLAR}
 export RANLIB=${NACLRANLIB}
 
-# Assume PNaCl toolchain.
 readonly NACL_TOOLCHAIN_INSTALL=${NACL_TOOLCHAIN_ROOT}/le32-nacl
 
 readonly WEBPORTS_PREFIX=${NACL_TOOLCHAIN_INSTALL}/usr
@@ -65,7 +72,6 @@ EXTRA_CFLAGS=(
   -DHAVE_SETSID -DHAVE_GETNAMEINFO -DHAVE_GETADDRINFO
   -DHAVE_GETCWD -DHAVE_STATVFS -DHAVE_FSTATVFS
   -DHAVE_ENDGRENT -DHAVE_FD_MASK -include sys/cdefs.h
-  ${NACL_CPPFLAGS}
   -I"${WEBPORTS_INCLUDE}/glibc-compat"
 )
 EXTRA_CONFIGURE_FLAGS=(
