@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Build openssh package."""
+
+from __future__ import print_function
+
+import glob
+import logging
+import os
+import sys
+
+FILESDIR = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
+
+import ssh_client  # pylint: disable=wrong-import-position
+
+
+ARCHIVES = ('%(p)s.tar.gz',)
+PATCHES = ('%(p)s.patch',)
+
+
+MANDOC = os.path.join(ssh_client.OUTPUT, 'mandoc')
+
+
+def src_configure(metadata):
+    """Configure the source."""
+    if os.path.exists('Makefile'):
+        logging.info('Makefile exists; skipping ./configure step')
+        return
+
+    env = ssh_client.pnacl_env()
+
+    EXTRA_LIBS = ['-lglibc-compat']
+    EXTRA_CFLAGS = [
+        '-DHAVE_SIGACTION',
+        '-DHAVE_TRUNCATE',
+        '-DHAVE_SETSID',
+        '-DHAVE_GETNAMEINFO',
+        '-DHAVE_GETADDRINFO',
+        '-DHAVE_GETCWD',
+        '-DHAVE_STATVFS',
+        '-DHAVE_FSTATVFS',
+        '-DHAVE_ENDGRENT',
+        '-DHAVE_FD_MASK',
+        '-include', 'sys/cdefs.h',
+        '-I%s' % (os.path.join(env['SYSROOT_INCDIR'], 'glibc-compat'),),
+    ]
+
+    EXTRA_CONFIGURE_FLAGS = [
+        # Log related settings.
+        '--disable-lastlog',
+        '--disable-utmp',
+        '--disable-utmpx',
+        '--disable-wtmp',
+        '--disable-wtmpx',
+        '--disable-pututline',
+        '--disable-pututxline',
+
+        # Various toolchain settings.
+        '--without-rpath',
+        '--without-Werror',
+
+        # Features we don't use.
+        '--without-audit',
+        '--without-ldns',
+        '--without-libedit',
+        '--without-pam',
+        '--without-sandbox',
+        '--without-selinux',
+        '--without-shadow',
+        '--without-ssl-engine',
+
+        # Features we want.
+        # OpenSSL is needed for DSA/RSA key support.
+        '--with-openssl',
+        '--with-zlib',
+        '--without-zlib-version-check',
+
+        # These don't work with newlib (used in PNaCl).
+        '--without-stackprotect',
+        '--without-hardening',
+
+        # Disable inet funcs we don't rely upon.
+        'ac_cv_func_inet_aton=no',
+        'ac_cv_func_inet_ntoa=no',
+        'ac_cv_func_inet_ntop=no',
+    ]
+
+    cmd = [
+        './configure',
+        '--host=nacl',
+        # The prefix path matches what is used at runtime.
+        '--prefix=/',
+        '--cache-file=../config.cache',
+        'CFLAGS=%s' % (' '.join(EXTRA_CFLAGS),),
+        'LIBS=%s' % (' '.join(EXTRA_LIBS),),
+    ]
+    ssh_client.run(cmd + EXTRA_CONFIGURE_FLAGS, env=env)
+
+    # Build the html man pages.  Since we're hooking the Makefile, we need can
+    # do this only after we've run configure.
+    with open('Makefile', 'ab') as f:
+        f.writelines([
+            b'html: $(MANPAGES_IN:%=%.html)\n',
+            b'%.html: %\n',
+            (b'\t' + MANDOC.encode('utf-8') +
+             b' -Thtml -I os=' + metadata['p'].encode('utf-8') +
+             b' -O man=%N.%S.html $< >$@.tmp\n'),
+            b'\tmv $@.tmp $@\n',
+        ])
+
+
+def src_compile(_metadata):
+    """Compile the source."""
+    # These are the few objects we care about for our tools.
+    objects = [
+        'ssh.o', 'readconf.o', 'clientloop.o', 'sshtty.o', 'sshconnect.o',
+        'sshconnect2.o', 'mux.o',
+    ]
+
+    targets = objects + [
+        # These are internal ssh libs that the objects above might use.
+        'libssh.a',
+        'openbsd-compat/libopenbsd-compat.a',
+
+        # The documentation we'll ship later on.
+        'html',
+    ]
+
+    env = ssh_client.pnacl_env()
+    ssh_client.emake(*targets, env=env)
+    ssh_client.run([env['AR'], 'rcs', 'libopenssh.a'] + objects)
+
+
+def src_install(_metadata):
+    """Install the package."""
+    for lib in ('libopenssh.a', 'libssh.a',
+                'openbsd-compat/libopenbsd-compat.a'):
+        ssh_client.copy(lib,
+                        os.path.join(ssh_client.OUTPUT, os.path.basename(lib)))
+
+    plugin_docs = os.path.join(ssh_client.OUTPUT, 'plugin', 'docs')
+    os.makedirs(plugin_docs, exist_ok=True)
+    for path in glob.glob('*.[0-9].html'):
+        ssh_client.copy(path, os.path.join(plugin_docs, path))
+
+
+ssh_client.build_package(sys.modules[__name__])

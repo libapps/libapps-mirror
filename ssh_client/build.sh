@@ -9,9 +9,6 @@ ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 
 DEBUG=0
 
-# We only support PNaCl builds now.
-export NACL_ARCH=pnacl
-
 for i in $@; do
   case $i in
     "--debug")
@@ -29,13 +26,12 @@ cd "$(dirname "$0")"
 mkdir -p output
 
 ./third_party/naclsdk/build
-export NACL_SDK_ROOT=$(echo "${PWD}/output/naclsdk"/pepper_*)
 
 ./third_party/depot_tools/build
 ./third_party/webports/build
 
 ./third_party/mandoc/build
-./third_party/openssh-7.9/build.sh
+./third_party/openssh-7.9/build
 
 BUILD_ARGS=()
 if [[ $DEBUG == 1 ]]; then
