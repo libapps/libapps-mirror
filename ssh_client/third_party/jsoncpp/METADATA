@@ -1,0 +1,11 @@
+name: "JsonCpp"
+description: "A C++ library for working with JSON"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://github.com/open-source-parsers/jsoncpp"
+  }
+  version: "1.6.1"
+  last_upgrade_date { year: 2015 month: 3 day: 31 }
+}
