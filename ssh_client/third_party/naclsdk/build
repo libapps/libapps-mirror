@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Build naclsdk package."""
+
+from __future__ import print_function
+
+import os
+import sys
+
+FILESDIR = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
+
+import ssh_client  # pylint: disable=wrong-import-position
+
+
+NACL_URI = ('https://commondatastorage.googleapis.com/nativeclient-mirror/'
+            'nacl/nacl_sdk/%(PV)s/naclsdk_linux.tar.bz2')
+S = '%(workdir)s'
+
+
+def src_unpack(metadata):
+    """Unpack the source."""
+    uri = NACL_URI % metadata
+    tarball = '%(p)s.tar.bz2' % metadata
+    ssh_client.fetch(uri, tarball)
+    ssh_client.unpack(tarball, workdir=metadata['workdir'])
+
+
+def src_install(metadata):
+    """Install the package."""
+    path = os.path.join(ssh_client.OUTPUT, 'naclsdk')
+    ssh_client.symlink(metadata['S'], path)
+
+
+ssh_client.build_package(sys.modules[__name__])

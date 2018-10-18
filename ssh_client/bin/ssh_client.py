@@ -9,6 +9,7 @@
 from __future__ import print_function
 
 import argparse
+import glob
 import logging
 import multiprocessing
 import os
@@ -185,6 +186,43 @@ def parse_metadata(metadata):
                 ret[m.group(1)] = m.group(2)
 
     return ret
+
+
+def pnacl_env():
+    """Get custom env to build using PNaCl toolchain."""
+    env = os.environ.copy()
+
+    nacl_sdk = os.path.join(OUTPUT, 'naclsdk')
+    nacl_sdk_root = glob.glob(os.path.join(nacl_sdk, '*'))[0]
+
+    toolchain_root = os.path.join(nacl_sdk_root, 'toolchain', 'linux_pnacl')
+    bin_dir = os.path.join(toolchain_root, 'bin')
+    compiler_prefix = os.path.join(bin_dir, 'pnacl-')
+    sysroot = os.path.join(toolchain_root, 'le32-nacl')
+    sysroot_incdir = os.path.join(sysroot, 'usr', 'include')
+    sysroot_libdir = os.path.join(sysroot, 'usr', 'lib')
+    pkgconfig_dir = os.path.join(sysroot_libdir, 'pkgconfig')
+
+    env.update({
+        'NACL_ARCH': 'pnacl',
+        'NACL_SDK_ROOT': nacl_sdk_root,
+        'PATH': '%s:%s' % (bin_dir, env['PATH']),
+        'CC': compiler_prefix + 'clang',
+        'CXX': compiler_prefix + 'clang++',
+        'AR': compiler_prefix + 'ar',
+        'RANLIB': compiler_prefix + 'ranlib',
+        'STRIP': compiler_prefix + 'strip',
+        'PKG_CONFIG_PATH': pkgconfig_dir,
+        'PKG_CONFIG_LIBDIR': sysroot_libdir,
+        'SYSROOT': sysroot,
+        'SYSROOT_INCDIR': sysroot_incdir,
+        'SYSROOT_LIBDIR': sysroot_libdir,
+        'CPPFLAGS': '-I%s' % (os.path.join(nacl_sdk_root, 'include'),),
+        'LDFLAGS': '-L%s' % (os.path.join(nacl_sdk_root, 'lib', 'pnacl',
+                                          'Release'),),
+    })
+
+    return env
 
 
 def default_src_unpack(metadata):

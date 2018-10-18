@@ -28,7 +28,7 @@ done
 cd "$(dirname "$0")"
 mkdir -p output
 
-./third_party/naclsdk/build.sh
+./third_party/naclsdk/build
 export NACL_SDK_ROOT=$(echo "${PWD}/output/naclsdk"/pepper_*)
 
 ./third_party/webports/build.sh
