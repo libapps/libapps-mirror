@@ -52,6 +52,10 @@ SRC_URI_MIRROR = ('https://commondatastorage.googleapis.com/'
                   'chromeos-localmirror/secureshell')
 
 
+# Number of jobs for parallel operations.
+JOBS = multiprocessing.cpu_count()
+
+
 def touch(path):
     """Touch (and truncate) |path|."""
     open(path, 'w').close()
@@ -104,7 +108,7 @@ def run(cmd, check=True, cwd=None, **kwargs):
 
 def emake(*args, **kwargs):
     """Run `make` with |args| and automatic -j."""
-    jobs = kwargs.pop('jobs', multiprocessing.cpu_count())
+    jobs = kwargs.pop('jobs', JOBS)
     run(['make', '-j%s' % (jobs,)] + list(args), **kwargs)
 
 
@@ -270,6 +274,8 @@ def get_parser(desc):
     parser = argparse.ArgumentParser(description=desc)
     parser.add_argument('-d', '--debug', action='store_true',
                         help='Run with debug output.')
+    parser.add_argument('-j', '--jobs', type=int,
+                        help='Number of jobs to use in parallel.')
     return parser
 
 
@@ -287,6 +293,10 @@ def build_package(module):
     parser = get_parser(module.__doc__)
     opts = parser.parse_args()
     libdot.setup_logging(debug=opts.debug)
+
+    if opts.jobs:
+        global JOBS  # pylint: disable=global-statement
+        JOBS = opts.jobs
 
     # Create a metadata object from the METADATA file and other settings.
     # This object will be used throughout the build to pass around vars.
