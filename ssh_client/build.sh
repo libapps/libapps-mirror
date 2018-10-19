@@ -27,8 +27,7 @@ mkdir -p output
 
 ./third_party/naclsdk/build
 
-./third_party/depot_tools/build
-./third_party/webports/build
+./third_party/glibc-compat/build
 ./third_party/zlib/build
 ./third_party/openssl/build
 ./third_party/ldns/build

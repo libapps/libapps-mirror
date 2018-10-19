@@ -219,8 +219,8 @@ int fcntl(int fd, int cmd, ...) {
   return ret;
 }
 
-int ioctl(int fd, int request, ...) {
-  LOG("ioctl: %d %d\n", fd, request);
+int ioctl(int fd, unsigned long request, ...) {
+  LOG("ioctl: %d %lu\n", fd, request);
   va_list ap;
   va_start(ap, request);
   int ret = FileSystem::GetFileSystem()->ioctl(fd, request, ap);

@@ -33,6 +33,17 @@ def src_unpack(metadata):
 def src_install(metadata):
     """Install the package."""
     pepper = 'pepper_%s' % (metadata['PV'].split('.')[0],)
+
+    # This is what the webports did historically.
+    srcdir = os.path.join(pepper, 'include', 'pnacl')
+    dstdir = os.path.join(pepper, 'toolchain', 'linux_pnacl', 'le32-nacl',
+                          'usr', 'include')
+    for root, _, files in os.walk(srcdir):
+        for header in files:
+            relpath = os.path.join(os.path.relpath(root, srcdir), header)
+            ssh_client.copy(os.path.join(srcdir, relpath),
+                            os.path.join(dstdir, relpath))
+
     path = os.path.join(ssh_client.OUTPUT, 'naclsdk')
     ssh_client.symlink(os.path.join(metadata['S'], pepper), path)
 

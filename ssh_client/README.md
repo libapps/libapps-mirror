@@ -78,12 +78,14 @@ If you're hacking on the source, here are the files you most likely care about:
 * [third_party/]: All third party projects have a unique subdir.
   Do not try to run these directly as they rely on settings in [build.sh].
   * [depot_tools/]: Tools used by webports.
+  * [glibc-compat/]: Various C library shims (mostly network/resolver).
   * [ldns/]: DNS library supporting DNSSEC and such.
   * [mandoc/]: Tools to generate html from man pages.
   * [naclsdk/]: NaCl SDK/toolchain for cross-compiling to Native Client.
   * `openssh-*/`: Code to download & build [OpenSSH].
   * [openssl/]: Code to download & build [OpenSSL] (the crypto lib).
   * [webports/]: SDK for cross-compiling some third party libs for NaCl.
+  * [zlib/]: Standard compression library.
 
 Here are the rest of the files, but most likely you don't need to touch these:
 
@@ -248,11 +250,13 @@ Here's a random list of documents which would be useful to people.
 [ssh_client.py]: ./bin/ssh_client.py
 
 [depot_tools/]: ./third_party/depot_tools/
+[glibc-compat/]: ./third_party/glibc-compat/
 [ldns/]: ./third_party/ldns/
 [mandoc/]: ./third_party/mandoc/
 [naclsdk/]: ./third_party/naclsdk/
 [openssl/]: ./third_party/openssl/
 [webports/]: ./third_party/webports/
+[zlib/]: ./third_party/zlib/
 
 [dev_null.cc]: ./src/dev_null.cc
 [dev_null.h]: ./src/dev_null.h

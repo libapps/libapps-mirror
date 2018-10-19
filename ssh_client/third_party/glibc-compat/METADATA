@@ -1,0 +1,11 @@
+name: "glibc-compat"
+description: "Random C library compatibility headers"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://sourceware.org/newlib/"
+  }
+  version: "0.1"
+  last_upgrade_date { year: 2012 month: 9 day: 5 }
+}
