@@ -164,7 +164,7 @@ nassh.sftp.fsp.onWriteFileRequested = function(options, onSuccess, onError) {
     var dataChunk = String.fromCharCode.apply(null, array);
     var offset = options.offset + i;
 
-    var writePromise = client.writeFile(fileHandle, offset, dataChunk);
+    var writePromise = client.writeChunk(fileHandle, offset, dataChunk);
     writePromises.push(writePromise);
   }
 
@@ -413,7 +413,7 @@ nassh.sftp.fsp.onReadFileRequested = function(options, onSuccess, onError) {
   // Splits up the data to be read into nassh.sftp.fsp.DATA_LIMIT sized chunks
   // and places them into multiple promises which will be resolved asynchronously.
   for (var i = options.offset; i < readLimit; i += nassh.sftp.fsp.DATA_LIMIT) {
-    readPromises.push(client.readFile(fileHandle, i, nassh.sftp.fsp.DATA_LIMIT));
+    readPromises.push(client.readChunk(fileHandle, i, nassh.sftp.fsp.DATA_LIMIT));
   }
 
   Promise.all(readPromises)
@@ -486,9 +486,9 @@ nassh.sftp.fsp.copyFile = function(sourcePath, targetPath, size, client) {
       // resolved asynchronously.
       for (var i = 0; i < size; i += nassh.sftp.fsp.DATA_LIMIT) {
         var offset = i;
-        var readWritePromise = client.readFile(sourceHandle,
+        var readWritePromise = client.readChunk(sourceHandle,
                                                offset, nassh.sftp.fsp.DATA_LIMIT)
-          .then(data => client.writeFile(targetHandle, offset, data));
+          .then(data => client.writeChunk(targetHandle, offset, data));
 
         readWritePromises.push(readWritePromise);
       }

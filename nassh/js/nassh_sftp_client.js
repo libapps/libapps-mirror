@@ -425,7 +425,9 @@ nassh.sftp.Client.prototype.openFile = function(path, pflags) {
 
 
 /**
- * Reads a remote file.
+ * Read a chunk in a remote file.
+ *
+ * Note: The data returned might be smaller than the requested length.
  *
  * @param {string} handle The handle of the remote file
  * @param {number} offset The offset to start reading from
@@ -433,7 +435,7 @@ nassh.sftp.Client.prototype.openFile = function(path, pflags) {
  * @return {!Promise<!DataPacket>} A Promise that resolves with the remote
  *    file data, or rejects (usually with an nassh.sftp.StatusError)
  */
-nassh.sftp.Client.prototype.readFile = function(handle, offset, len) {
+nassh.sftp.Client.prototype.readChunk = function(handle, offset, len) {
   var packet = new nassh.sftp.Packet();
   packet.setString(handle);
   packet.setUint64(offset); //offset
@@ -516,7 +518,9 @@ nassh.sftp.Client.prototype.renameFile = function(sourcePath, targetPath) {
 
 
 /**
- * Writes to a remote file.
+ * Write a chunk in a remote file.
+ *
+ * Note: The data returned might be smaller than the requested length.
  *
  * @param {string} handle The handle of the remote file
  * @param {number} offset The offset to start writing from
@@ -524,7 +528,7 @@ nassh.sftp.Client.prototype.renameFile = function(sourcePath, targetPath) {
  * @return {!Promise<!StatusPacket>} A Promise that resolves or rejects with
  *    a nassh.sftp.StatusError
  */
-nassh.sftp.Client.prototype.writeFile = function(handle, offset, data) {
+nassh.sftp.Client.prototype.writeChunk = function(handle, offset, data) {
   var packet = new nassh.sftp.Packet();
   packet.setString(handle);
   packet.setUint64(offset);
