@@ -255,6 +255,14 @@ nassh.sftp.packets.getFileAttrs = function(packet) {
   }
   if (attrs.flags & nassh.sftp.packets.FileXferAttrs.PERMISSIONS) {
     attrs.permissions = packet.getUint32();
+    const fmt = attrs.permissions & nassh.sftp.packets.PermissionBits.IFMT;
+    attrs.isCharacterDevice = (fmt == nassh.sftp.packets.PermissionBits.IFCHR);
+    attrs.isDirectory = (fmt == nassh.sftp.packets.PermissionBits.IFDIR);
+    attrs.isBlockDevice = (fmt == nassh.sftp.packets.PermissionBits.IFBLK);
+    attrs.isRegularFile = (fmt == nassh.sftp.packets.PermissionBits.IFREG);
+    attrs.isFifo = (fmt == nassh.sftp.packets.PermissionBits.IFIFO);
+    attrs.isLink = (fmt == nassh.sftp.packets.PermissionBits.IFLNK);
+    attrs.isSocket = (fmt == nassh.sftp.packets.PermissionBits.IFSOCK);
   }
   if (attrs.flags & nassh.sftp.packets.FileXferAttrs.ACMODTIME) {
     attrs.last_accessed = packet.getUint32();

@@ -45,7 +45,7 @@ nassh.sftp.fsp.sanitizeMetadata = function(file, options) {
     }
   }
   if (options.isDirectory) {
-    metadata.isDirectory = (file.permissions & 0x4000) == 0x4000;
+    metadata.isDirectory = file.isDirectory;
   }
   if (options.size) {
     metadata.size = file.size;
@@ -100,8 +100,7 @@ nassh.sftp.fsp.readDirectory = function(directoryHandle, client, sanitizeOptions
         for(var i = 0; i < response.fileCount; i++) {
           var file = response.files[i];
           // Skip over the file if it's a '.', '..' or link file
-          if (file.filename == '.' || file.filename == '..' ||
-              file.permissions & 0x2000) {
+          if (file.filename == '.' || file.filename == '..' || file.isLink) {
             continue;
           }
 
@@ -312,7 +311,7 @@ nassh.sftp.fsp.removeDirectory = function(path, client) {
         }
 
         filename = path + '/' + filename;
-        if (file.permissions & 0x4000) {
+        if (file.isDirectory) {
           removePromises.push(nassh.sftp.fsp.removeDirectory(filename, client));
         } else {
           removePromises.push(client.removeFile(filename));
@@ -448,8 +447,7 @@ nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
   var targetPath = '.' + options.targetPath; // relative path
   client.fileStatus(sourcePath)
     .then(metadata => {
-      // if the file has the 0x4000 permission flag set, it's a directory
-      if (metadata.permissions & 0x4000) {
+      if (metadata.isDirectory) {
         return nassh.sftp.fsp.copyDirectory(sourcePath, targetPath, client);
       } else {
         return nassh.sftp.fsp.copyFile(sourcePath, targetPath, metadata.size, client);
@@ -522,7 +520,7 @@ nassh.sftp.fsp.copyDirectory = function(sourcePath, targetPath, client) {
 
         var fileSourcePath = sourcePath + '/' + file.filename;
         var fileTargetPath = targetPath + '/' + file.filename;
-        if (file.permissions & 0x4000) {
+        if (file.isDirectory) {
           copyPromises.push(nassh.sftp.fsp.copyDirectory(fileSourcePath,
                                                fileTargetPath, client));
         } else {
