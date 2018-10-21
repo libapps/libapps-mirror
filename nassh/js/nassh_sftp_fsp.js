@@ -468,7 +468,7 @@ nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
 nassh.sftp.fsp.copyFile = function(sourcePath, targetPath, size, client) {
   var sourceHandle;
   var targetHandle;
-  return client.openFile(sourcePath)
+  return client.openFile(sourcePath, nassh.sftp.packets.OpenFlags.READ)
     .then(handle => {
 
       sourceHandle = handle;
