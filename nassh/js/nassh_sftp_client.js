@@ -50,6 +50,57 @@ nassh.sftp.Client = function(opt_basePath='') {
 };
 
 /**
+ * Maximum data size that is guaranteed to work (read or write).
+ *
+ * This is used in scenarios where we need the packet to not be split up.
+ * Otherwise, people should use the other {read,write}ChunkSize settings.
+ *
+ * This is not the same as the maximum protocol packet size which is slightly
+ * larger (34000 bytes) which includes lower level framing (e.g. the various
+ * SFTP packet lengths and headers).
+ *
+ * We only use these constants when doing data transfers where we strongly
+ * care about throughput.
+ */
+nassh.sftp.Client.prototype.protocolChunkSize = 32 * 1024;
+
+/**
+ * Default data size with read packets.
+ *
+ * The server might support larger transfer sizes, so clients could request
+ * really large sizes and see what the server responds with.  We stick to
+ * smaller known sizes to keep code simpler.
+ *
+ * OpenSSH has supported 64KiB as its max read packet data size since at least
+ * 2.3.0 released in Nov 2000.  Should be long enough to assume it works, so
+ * we'll upgrade to that once we're confident we're talking to OpenSSH.
+ *
+ * As with protocolChunkSize, note that this size does not cover the entire
+ * SFTP packet (e.g. headers and such), only the |len| field of SSH_FXP_READ
+ * packets, and the length of the |data| string in the SSH_FXP_DATA response.
+ */
+nassh.sftp.Client.prototype.readChunkSize =
+    nassh.sftp.Client.prototype.protocolChunkSize;
+
+/**
+ * Default data size with write packets.
+ *
+ * Unlike read requests where the server can respond with shorter sizes, the
+ * server can't stop clients from trying to send really large packets.  The
+ * RFC says people should limit themselves to 32KiB.  If a request is too large
+ * for the server to process, it will simply break/kill the connection.
+ *
+ * OpenSSH has supported 256KiB as its max packet size since at least 2.3.0
+ * released in Nov 2000.  Should be long enough to assume it works, so we'll
+ * upgrade to that once we're confident we're talking to OpenSSH.
+ *
+ * Note that the 256KiB limit is for the entire packet, not just the length of
+ * the |data| field in SSH_FXP_WRITE packets, so we use 255KiB here.
+ */
+nassh.sftp.Client.prototype.writeChunkSize =
+    nassh.sftp.Client.prototype.protocolChunkSize;
+
+/**
  * Stream wants to write some packet data to the client.
  */
 nassh.sftp.Client.prototype.writeUTF8 = function(data) {
@@ -427,7 +478,8 @@ nassh.sftp.Client.prototype.openFile = function(path, pflags) {
 /**
  * Read a chunk in a remote file.
  *
- * Note: The data returned might be smaller than the requested length.
+ * Note: The data returned might be smaller than the requested length when the
+ * server caps the max per-chunk size.
  *
  * @param {string} handle The handle of the remote file
  * @param {number} offset The offset to start reading from
@@ -520,7 +572,8 @@ nassh.sftp.Client.prototype.renameFile = function(sourcePath, targetPath) {
 /**
  * Write a chunk in a remote file.
  *
- * Note: The data returned might be smaller than the requested length.
+ * Note: The data written must not exceed writeChunkSize lest the server abort
+ * the connection.
  *
  * @param {string} handle The handle of the remote file
  * @param {number} offset The offset to start writing from
