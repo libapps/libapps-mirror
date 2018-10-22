@@ -511,6 +511,100 @@ nassh.sftp.Client.prototype.readChunk = function(handle, offset, len) {
   });
 };
 
+/**
+ * Read all chunks in a remote file.
+ *
+ * Helper to read all the chunks of a file and pass each chunk to the user's
+ * callback as they're read.
+ *
+ * TODO: This could be faster if we pipelined more by issuing lots of read
+ * requests and processing the results in the background.  That would make
+ * the code a lot more complicated and we'd have to deal with reassembling
+ * the fragments.
+ *
+ * @param {string} handle The handle of the remote file.
+ * @param {function(string)} callback The function called on every chunk.
+ * @param {number?} offset The offset to start reading from.
+ * @param {number?} length The maximum number of bytes to read.
+ */
+nassh.sftp.Client.prototype.readChunks = function(handle, callback,
+                                                  {offset=0, length}={}) {
+  // How many bytes we've read so far.
+  let bytesRead = 0;
+
+  // Whether the callback has canceled further reads.
+  let canceled = false;
+
+  // Send a read request for the next chunk of data in the open handle.
+  const doRead = () => {
+    // How many bytes to try to read in this chunk.
+    let bytesToRead = this.readChunkSize;
+
+    // Check any size limits the caller has requested.
+    if (length !== undefined) {
+      if (bytesRead >= length) {
+        return Promise.resolve();
+      }
+
+      const remaining = length - bytesRead;
+      if (remaining < bytesToRead) {
+        bytesToRead = remaining;
+      }
+    }
+
+    return this.readChunk(handle, offset, bytesToRead)
+      .then(processChunk);
+  };
+
+  // Process the resulting chunk of data.
+  const processChunk = (chunk) => {
+    // See if we've reached the end of the file.
+    if (chunk.length == 0) {
+      return;
+    }
+
+    // Issue a new read request in the background.  If we end up getting
+    // canceled before it returns, that's OK.  We assume the best and get
+    // better performance most of the time.
+    if (canceled) {
+      return;
+    }
+    let ret = doRead();
+
+    // Update our counters and let the caller process this chunk.
+    offset += chunk.length;
+    bytesRead += chunk.length;
+    if (callback(chunk) === false) {
+      canceled = true;
+      return Promise.reject();
+    }
+
+    return ret;
+  };
+
+  // Kick off the process.
+  return doRead();
+};
+
+/**
+ * Open+read+close a file in its entirety.
+ *
+ * Helper to handle opening/closing a file, and processing all the chunks
+ * automatically by calling the user's callback.
+ *
+ * @param {string} handle The handle of the remote file.
+ * @param {function(string)} callback The function called on every chunk.
+ * @param {number?} offset The offset to start reading from.
+ * @param {number?} length The maximum number of bytes to read.
+ */
+nassh.sftp.Client.prototype.readFile = function(path, callback,
+                                                {offset=0, length}={}) {
+  return this.openFile(path, nassh.sftp.packets.OpenFlags.READ)
+    .then((handle) => {
+      return this.readChunks(handle, callback, {offset: offset, length: length})
+        .finally(() => this.closeFile(handle));
+    });
+};
 
 /**
  * Closes a remote file handle.
