@@ -305,6 +305,15 @@ nassh.sftp.Client.prototype.init = function() {
     this.onInit();
     this.protocolServerVersion = packet.version;
     this.protocolServerExtensions = packet.extensions;
+
+    // See if the server is OpenSSH.  Checking for this particular protocol
+    // extension isn't an exact match, but should be good enough for now.
+    if (this.protocolServerExtensions['fstatvfs@openssh.com'] == '2') {
+      // See the comments for this class constant for details.
+      this.readChunkSize = 64 * 1024;
+      this.writeChunkSize = 255 * 1024;
+    }
+
     this.isInitialised = true;
   };
   this.sendToPlugin_('onRead', [0, btoa(packet.toString())]);
