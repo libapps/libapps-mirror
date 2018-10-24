@@ -35,7 +35,7 @@ export NACL_SDK_ROOT=$(echo "${PWD}/output/naclsdk"/pepper_*)
 export WEB_PORTS="${PWD}/output/webports"
 
 ./third_party/mandoc/build.sh
-./third_party/openssh-7.8/build.sh
+./third_party/openssh-7.9/build.sh
 
 BUILD_ARGS=()
 if [[ $DEBUG == 1 ]]; then

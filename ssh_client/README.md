@@ -72,7 +72,7 @@ If you're hacking on the source, here are the files you most likely care about:
   * [depot_tools/]: Tools used by webports.
   * [mandoc/]: Tools to generate html from man pages.
   * [naclsdk/]: NaCl SDK/toolchain for cross-compiling to Native Client.
-  * [openssh-7.8/]: Code to download & build OpenSSH specifically.
+  * `openssh-*/`: Code to download & build OpenSSH.
   * [webports/]: SDK for cross-compiling some third party libs for NaCl.
 
 Here are the rest of the files, but most likely you don't need to touch these:
@@ -235,7 +235,6 @@ Here's a random list of documents which would be useful to people.
 [depot_tools/]: ./third_party/depot_tools/
 [mandoc/]: ./third_party/mandoc/
 [naclsdk/]: ./third_party/naclsdk/
-[openssh-7.8/]: ./third_party/openssh-7.8/
 [webports/]: ./third_party/webports/
 
 [dev_null.cc]: ./src/dev_null.cc
