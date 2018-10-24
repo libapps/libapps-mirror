@@ -1,3 +1,25 @@
+# 0.9, 2018-10-24, OpenSSH 7.8p1 and a context menu.
+
+* Update to hterm 1.82.  New context menu.
+* Update to libdot 1.24.  Tool improvements for supporting nightly builds.
+* crosh: Drop legacy build code.
+* nassh/crosh: Add context menu support.
+* Update translations.
+* agent: Improve documentation for the PIN cache.
+* nassh: Restrict the automatic description expansion in connection screen.
+* build: Support nightly timestamped builds.
+* FAQ: Add an entry about relay servers & 0.0.0.0 addresses.
+* relay: Delete unused --relay-prefix-field support.
+* sftp: Move pendingRequests internally.
+* sftp: Bind stdout to sftp immediately.
+* sftp: Move init logic into a callback.
+* nassh: Move connecting message after plugin loading.
+* FAQ: Note what is sync'ed to the cloud.
+* sftp: Improve server version packet parsing.
+* ssh_client: Drop NaCl support.
+* ssh_client: Update to OpenSSH 7.8p1.
+* ssh_client: Rework build layout a bit.
+
 # 0.8.45, 2018-08-29, A11y improvements, and handle tab discarding.
 
 * Update to hterm 1.81.  A11y improvements, and keyboard/mouse tweaks.

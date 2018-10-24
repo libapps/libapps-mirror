@@ -1,4 +1,4 @@
-0.8.43
+0.8.45
 
 # The first line tracks the last version that went stable.
 # Only features added since then should be kept here.
@@ -10,11 +10,7 @@
 # Only list significant changes that matter to the user.
 # The more lines that we have here, the more cluttered the output.
 
-# release: 0.8.43 (stable March 27)
-% Support for \x1b]8;;https://chromium.googlesource.com/apps/libapps/+/master/hterm/doc/ControlSequences.md#SGR-underline\x07extended SGR+4 underlining\x1b]8;;\x07
-
-# release: 0.8.44 (stable July 31)
-% Unicode tables updated to 11.0.0 release.
-% Noto Sans Mono added to the default font list.
-% Bracketed paste now strips most control chars.
-% OpenSSH upgraded to 7.7p1.
+# release: 0.9
+% Context menu available via Ctrl-Right Click.
+% \x1b]8;;https://www.openssh.com/txt/release-7.8\x07OpenSSH upgraded to 7.8p1\x1b]8;;\x07.
+% \x1b]8;;https://goo.gl/muppJj#Is-there-a-way-to-try-early-releases-of-Secure-Shell\x07Secure Shell dev channel\x1b]8;;\x07 changed to nightly builds.
