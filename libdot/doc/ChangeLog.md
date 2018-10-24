@@ -1,3 +1,12 @@
+# 1.24, 2018-10-24, Tool improvements for supporting nightly builds.
+
+* concat: specify subprocess args
+* concat: merge redundant strict directives
+* mkzip: drop unused promote_version flag
+* mkzip: add support for adding/removing version timestamps
+* mkzip: add flag to disable plugin/manifest rewrite
+* mkzip: improve manifest handling
+
 # 1.23, 2018-08-29, Build improvements, i18n helpers, and npm support.
 
 * mkzip: trim empty directories.
