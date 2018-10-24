@@ -15,10 +15,6 @@ nassh.sftp.fsp = {};
 // Map of file system ids to their SFTP instances
 nassh.sftp.fsp.sftpInstances = {};
 
-// Maximum amount of bytes of data transferred in read/write data packets.
-// SFTP v3 supports a max of 32768 bytes.
-nassh.sftp.fsp.DATA_LIMIT = 32768;
-
 /**
  * Creates a new SFTP CommandInstance in the background page and connects to
  * the provided connection. Utilizes the same hterm.Terminal.IO as the
@@ -155,11 +151,11 @@ nassh.sftp.fsp.onWriteFileRequested = function(options, onSuccess, onError) {
   }
 
   var writePromises = [];
-  // Splits up the data to be written into nassh.sftp.fsp.DATA_LIMIT sized chunks
+  // Splits up the data to be written into chunks that the server can handle
   // and places them into multiple promises which will be resolved asynchronously.
-  for (var i = 0; i < options.data.byteLength; i += nassh.sftp.fsp.DATA_LIMIT) {
+  for (var i = 0; i < options.data.byteLength; i += client.writeChunkSize) {
 
-    var endSlice = i + nassh.sftp.fsp.DATA_LIMIT;
+    var endSlice = i + client.writeChunkSize;
     var array = new Uint8Array(options.data.slice(i, endSlice));
     var dataChunk = String.fromCharCode.apply(null, array);
     var offset = options.offset + i;
@@ -410,10 +406,10 @@ nassh.sftp.fsp.onReadFileRequested = function(options, onSuccess, onError) {
 
   var readPromises = [];
   var readLimit = options.offset + options.length;
-  // Splits up the data to be read into nassh.sftp.fsp.DATA_LIMIT sized chunks
+  // Splits up the data to be read into chunks that the server can handle
   // and places them into multiple promises which will be resolved asynchronously.
-  for (var i = options.offset; i < readLimit; i += nassh.sftp.fsp.DATA_LIMIT) {
-    readPromises.push(client.readChunk(fileHandle, i, nassh.sftp.fsp.DATA_LIMIT));
+  for (var i = options.offset; i < readLimit; i += client.readChunkSize) {
+    readPromises.push(client.readChunk(fileHandle, i, client.readChunkSize));
   }
 
   Promise.all(readPromises)
@@ -481,13 +477,14 @@ nassh.sftp.fsp.copyFile = function(sourcePath, targetPath, size, client) {
 
       targetHandle = handle;
       var readWritePromises = [];
-      // Splits up the data to be read and written into nassh.sftp.fsp.DATA_LIMIT
-      // sized chunks and places them into multiple promises which will be
+      // Splits up the data to be read and written into chunks that the server
+      // can handle and places them into multiple promises which will be
       // resolved asynchronously.
-      for (var i = 0; i < size; i += nassh.sftp.fsp.DATA_LIMIT) {
+      const chunkSize = Math.min(client.readChunkSize, client.writeChunkSize);
+      for (var i = 0; i < size; i += chunkSize) {
         var offset = i;
-        var readWritePromise = client.readChunk(sourceHandle,
-                                               offset, nassh.sftp.fsp.DATA_LIMIT)
+        var readWritePromise = client.readChunk(sourceHandle, offset,
+                                                chunkSize);
           .then(data => client.writeChunk(targetHandle, offset, data));
 
         readWritePromises.push(readWritePromise);
