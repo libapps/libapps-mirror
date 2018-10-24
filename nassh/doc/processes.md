@@ -1,10 +1,10 @@
-[TOC]
-
 # Processes
 
 Here we document the various release processes and other boring topics.
 
-## Creating a (dev) Release
+[TOC]
+
+## Creating a (nightly dev) Release
 
 All new releases first go through the dev version of the extension.  This way
 we can get early feedback from testers on obvious issues without breaking the
@@ -13,14 +13,62 @@ we can get early feedback from testers on obvious issues without breaking the
 https://chrome.google.com/webstore/developer/detail/okddffdblfhhnmhodogpojmfkjmhinfp<br>
 https://chrome.google.com/webstore/developer/detail/algkcnfjnajfhgimadimbjhmpaeohhln
 
+### Nightly Build Process
+
+New developer builds are created and signed automatically by internal Google
+tools from the latest git revisions in the tree.
+That means the actual creation of the CRX archive is not run by local developers
+(anymore) as the [CWS] will block unsigned archives.
+
+### Getting the CRX
+
+Googlers use `mpm` to download the CRX files.
+
+Locate the CRX from the [mpm browser].
+Drill down into the `app-dev` and `extension-dev` packages.
+Find a version id like `1-146602e4_5ab126a6_44d22cda_e4a5aa8c_570775fd`.
+It will be different for each package.
+
+With those versions in hand, run something like:
+
+```sh
+$ cd ~
+$ mpm fetch -v 1-40368fdb_e541d43a_d1d0bd16_daf53a44_69d74102 security/nassh/app-dev app
+$ cp app.mpm/versions/*/extension.crx ./app.crx
+$ mpm fetch -v 1-2d440ada_27f741e4_ef8b2b81_719b289e_79809584 security/nassh/extension-dev ext
+$ cp ext.mpm/versions/*/extension.crx ./ext.crx
+$ rm -rf app.mpm ext.mpm
+```
+
+Now you'll have the `app.crx` and `ext.crx` archives to upload to the [CWS].
+
+### CWS Access
+
+You'll need to be part of the [chrome-secure-shell-publishers group] in order to
+manage things via the [CWS].
+
+### Upload the (dev) Release
+
+Visit the [CWS] dashboard to upload the new CRX archives:<br>
+https://chrome.google.com/webstore/developer/edit/okddffdblfhhnmhodogpojmfkjmhinfp<br>
+https://chrome.google.com/webstore/developer/edit/algkcnfjnajfhgimadimbjhmpaeohhln
+
+We no longer announce dev releases since we switched to automated builds.
+
+## Preparing a Stable Release
+
+Since the dev release process is less formal now, the flow for preparing a
+stable release requires a bit more effort.
+
 ### Updating Dependencies
 
 Now would be a good time to go through and do sub-releases of other projects.
-e.g. See if hterm or libdot has had any changes.  If so, update their respective
-ChangeLog files and create a new git tag for each of them.
+e.g. See if hterm or libdot have had any changes.
+If so, update their respective ChangeLog files and create a new git tag for each
+of them.
 
 If you look at the ChangeLogs and `git tag -l`, it should be obvious how to do
-this.  If you're still unsure, consult these as examples:
+this.  If you're still unsure, consult these examples:
 
 * hterm: commit [118578e0fe18c18cea5a5c2da61cc05cd0ce5038] and tag [hterm-1.62]
 * libdot: commit [17eba88e555c7e2478c9cac2689af4d2e993e915] and tag [libdot-1.11]
@@ -37,90 +85,66 @@ We don't currently use signed tags.
 ### Source Prepare
 
 Update the [ChangeLog.md](./ChangeLog.md) file with any relevant details since
-the last release, and update the version in all of the manifest_*.json files.
-Add any significant changes to concat/release-highlights.txt.
+the last release.
 
-See commit [6b11740fa3eb500ea07efc684af7e75543ea3448] and tag [nassh-0.8.36.2]
-as examples.
+Add any significant changes to concat/release-highlights.txt, and prune any old
+entries in here (see the comments in the file for details).
 
-Don't forget to push the tag once you've created it locally!
+See commit [e992bb2c819188421b010a7c4fdc96cfae48db31] and tag [nassh-0.9] as
+examples, but don't create a tag yet!
+
+The version should remain unchanged in the `manifest_*.json` files as we'll
+update that after we create a git tag.
+
+[e992bb2c819188421b010a7c4fdc96cfae48db31]: https://chromium.googlesource.com/apps/libapps/+/e992bb2c819188421b010a7c4fdc96cfae48db31^!
+[nassh-0.9]: https://chromium.googlesource.com/apps/libapps/+/nassh-0.9
+
+### Wait For Dev Release
+
+Once all the release files look OK, we wait for the internal builders to produce
+the signed CRX files which we upload again.
+Then we do a sanity check to make sure the release works in the dev channel.
+
+If there's a problem, go through the steps above again (landing fixes and
+updating ChangeLogs) until the dev CRX is stable.
+
+### Tag the Release
+
+Now that we have a commit we want to actually promote to stable, it's time to
+create a git tag and push it to the server.
 
 We don't currently use signed tags.
 
-[6b11740fa3eb500ea07efc684af7e75543ea3448]: https://chromium.googlesource.com/apps/libapps/+/6b11740fa3eb500ea07efc684af7e75543ea3448^!
-[nassh-0.8.36.2]: https://chromium.googlesource.com/apps/libapps/+/nassh-0.8.36.2
+### Update the manifest.json Versions
 
-### Check ssh_client (plugins/)
+Now that we've tagged the release and pushed it out, the version should be
+updated in the `manifest_*.json` files to point to the next one.
 
-You will need to make sure you have the current ssh_client release files under
-the plugins/ directory.  Consult the [hack.md](./hack.md) document for details
-on acquiring those files.
+See commit [ddb21ccd39010f4c537da2a104f1a8869fe1ee6c] as an example.
 
-### Making the ZIP
-
-The [bin/mkzip.sh](../bin/mkzip.sh) helper script is used to create the zip
-file for uploading to the Chrome Web Store ([CWS]).  It operates on the current
-checked out repo, so make sure it's clean!
-
-### CWS Access
-
-You'll need to be part of the [chrome-secure-shell-publishers group] in order to
-manage things via the [CWS].
-
-### Upload the (dev) Release
-
-Visit the [CWS] dashboard to upload the new zip file:<br>
-https://chrome.google.com/webstore/developer/edit/okddffdblfhhnmhodogpojmfkjmhinfp<br>
-https://chrome.google.com/webstore/developer/edit/algkcnfjnajfhgimadimbjhmpaeohhln
-
-### Announce! {#announce}
-
-Send an e-mail to the public [chromium-hterm group] announcing the new release.
-Here's an example posting:<br>
-https://groups.google.com/a/chromium.org/d/msg/chromium-hterm/_AcmwvdGFCc/Cne7Q8B3CQAJ
-
-Then forward that to the internal [chrome-hterm group].
+[ddb21ccd39010f4c537da2a104f1a8869fe1ee6c]: https://chromium.googlesource.com/apps/libapps/+/ddb21ccd39010f4c537da2a104f1a8869fe1ee6c^!
 
 ## Promoting a Stable Release
 
-After some time, life will be great and everyone loves the new version.  That
-means it's time to promote the dev version to stable.  The process basically
-takes the existing dev CRX, updating the manifest.json slightly, and then
-uploading it to the stable version.
+After some time, life will be great and everyone loves the new version.
+That means it's time to promote the dev version to stable.
+The process basically grabs the stable CRX already created at the same time as
+the dev CRX by our infrastructure.
+
+There are only minimal differences between the dev & stable CRX's -- settings
+in the `manifest.json` like the version, name, and icon paths.
+That's why we can use the dev CRX to validate before taking the stable CRX and
+uploading it directly to the [CWS] without explicitly testing it first.
 
 ### Get Existing Release
 
-If you still have the ZIP file that you uploaded previously, you can use that.
-Otherwise, it'll be easiest to just download the CRX directly from the [CWS].
-You can use this extension:<br>
-https://chrome.google.com/webstore/detail/dijpllakibenlejkbajahncialkbdkjc
-
-Then visit the dev page:<br>
-https://chrome.google.com/webstore/detail/okddffdblfhhnmhodogpojmfkjmhinfp<br>
-https://chrome.google.com/webstore/detail/algkcnfjnajfhgimadimbjhmpaeohhln
-
-Then download the CRX using that extension.
-
-### Update the Manifest
-
-You can run the `promote.sh` script to do the channel promotion for you.
-```
-$ ./bin/promote.sh ./SecureShell-dev-0.8.36.2.zip
--*- Name "Secure Shell (dev)" promoted to "Secure Shell"
--*- Zip directory: dist/zip/tmp/SecureShell-0.8.36.2.zip.d
--*- Unzipping from: SecureShell-dev-0.8.36.2.zip
--*- Rewrite dist/zip/tmp/SecureShell-0.8.36.2.zip.d/manifest.json
--*- New name: Secure Shell
--*- New version: 0.8.36.2
--*- Creating: dist/zip/SecureShell-0.8.36.2.zip
--*- Done: 161 files, 3.5M
-```
-
-Now the zip file under `dist/zip/` is ready for release.
+Visit the [mpm browser] again, but this time look at the `app-stable` and
+`extension-stable` packages.
+Use the same `mpm` flow as the dev step above to pull out the stable CRX's.
 
 ### Upload the (stable) Release for Googlers
 
-Visit the [CWS] dashboard to upload your new zip file:<br>
+Visit the [CWS] dashboard to upload the new CRX archives:<br>
 https://chrome.google.com/webstore/developer/edit/pnhechapfaindjhompbnflcldabbghjo<br>
 https://chrome.google.com/webstore/developer/edit/iodihamcpbpeioajjeobimgagajmlibd
 
@@ -131,12 +155,13 @@ it unset (i.e. 100%).
 
 ### Internal Announce!
 
-This is the same as [announcing the dev release](#announce), except you'll only
-send to the [chrome-hterm group].
+Send an e-mail to the internal [chrome-hterm group] announcing the new release.
+Here's an example posting:<br>
+https://groups.google.com/a/chromium.org/d/msg/chromium-hterm/_AcmwvdGFCc/Cne7Q8B3CQAJ
 
 ### Upload the (stable) Release for Everyone
 
-Visit the [CWS] dashboard to upload your new zip file:<br>
+Visit the [CWS] dashboard to upload the new CRX file:<br>
 https://chrome.google.com/webstore/developer/edit/pnhechapfaindjhompbnflcldabbghjo<br>
 https://chrome.google.com/webstore/developer/edit/iodihamcpbpeioajjeobimgagajmlibd
 
@@ -145,13 +170,8 @@ This time use the "Upload Updated Package" option.  Once that's done, use
 
 ### Public Announce!
 
-This is the same as [announcing the dev release](#announce), except you'll only
-send to the [chromium-hterm group].
-
-### Reset Release Highlights
-
-Now that we've promoted a stable version, you should refresh the
-concat/release-highlights.txt file to drop older entries.
+Send the same announcement as before but to the the public
+[chromium-hterm group].
 
 ## Branches
 
@@ -204,3 +224,4 @@ We don't have one.  Releases are made as changes roll in.
 [chrome-hterm group]: http://g/chrome-hterm
 [chrome-secure-shell-publishers group]: http://g/chrome-secure-shell-publishers
 [chromium-hterm group]: https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-hterm
+[mpm browser]: https://mpmbrowse.corp.google.com/packagez?package=security%2Fnassh
