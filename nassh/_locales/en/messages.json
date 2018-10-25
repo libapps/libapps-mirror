@@ -489,6 +489,9 @@
 		"description": "Help text shown for the hterm 'pass-meta-v' preference. 'Meta-V' is the keyboard button combo and may be translated as makes sense.",
 		"message": "Whether Meta-V gets passed to host."
 	},
+	"HTERM_PREF_PASTE_ON_DROP":{
+		"description": "Help text shown for the hterm 'paste-on-drop' preference.",
+		"message": "If true, Drag and dropped text will paste into terminal.\nIf false, dropped text will be ignored."},
 	"HTERM_PREF_RECEIVE_ENCODING": {
 		"description": "Help text shown for the hterm 'receive-encoding' preference. 'utf-8' and 'raw' should not be translated. The quote style may be changed as needed.",
 		"message": "Set the expected encoding for data received from the host.\nIf the encodings do not match, visual bugs are likely to be observed.\n\nValid values are 'utf-8' and 'raw'."
