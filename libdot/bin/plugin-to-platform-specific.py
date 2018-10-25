@@ -25,6 +25,7 @@ ARCHES = set(('arm', 'x86-32', 'x86-64'))
 
 
 def process_manifest(opts, manifest_path, srcroot, dstroot):
+    """Rewrite the manifest to use the _platform_specific feature."""
     manifest = json.load(open(manifest_path))
     if 'program' not in manifest:
         return
@@ -77,6 +78,7 @@ def get_parser():
 
 
 def main(argv):
+    """The main func!"""
     parser = get_parser()
     opts = parser.parse_args(argv)
 

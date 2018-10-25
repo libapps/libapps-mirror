@@ -32,7 +32,8 @@ import libdot
 CHROMIUM_REF = '69.0.3460.0'
 
 # Full path to Chromium's png crush script.
-PNG_CRUSHER_URL = 'https://chromium.googlesource.com/chromium/src/+/%s/tools/resources/optimize-png-files.sh' % (CHROMIUM_REF,)
+PNG_CRUSHER_URL = ('https://chromium.googlesource.com/chromium/src/+/%s/tools/'
+                   'resources/optimize-png-files.sh' % (CHROMIUM_REF,))
 
 # Our local cache of the script.
 PNG_CRUSHER = os.path.join(libdot.BIN_DIR, '.png.crusher.%s' % (CHROMIUM_REF,))
@@ -57,6 +58,7 @@ def update_png_crusher():
 
 
 def run(path, cmd):
+    """Run the |cmd| for the |path| file."""
     logging.info('Processing %s', path)
     logging.debug('Running: %s', ' '.join(cmd))
     subprocess.call(cmd)
@@ -98,6 +100,7 @@ def get_parser():
 
 
 def main(argv):
+    """The main func!"""
     parser = get_parser()
     opts = parser.parse_args(argv)
     libdot.setup_logging(debug=opts.debug)

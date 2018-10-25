@@ -28,6 +28,12 @@ disable=
 reports = no
 
 
+[FORMAT]
+
+# Maximum number of characters on a single line.
+max-line-length = 80
+
+
 [SIMILARITIES]
 
 # Minimum lines number of a similarity.

@@ -105,6 +105,7 @@ def get_parser():
 
 
 def main(argv):
+    """The main func!"""
     parser = get_parser()
     opts = parser.parse_args(argv)
 
