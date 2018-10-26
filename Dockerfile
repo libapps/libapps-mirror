@@ -13,11 +13,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 # Keep this in sync with the README.md's Development Tools section.
 RUN apt-get --assume-yes install \
     libstdc++6:i386 libglib2.0-0:i386 git make cmake \
-    python python-dev wget curl zlib1g-dev
+    python python-dev python3 wget curl zlib1g-dev
 
 # Set git config to dummy values for webports patch to work.
 # When patches are applied, webports generates local git repos & commits.
-RUN git config --global user.email "secureshelldummyemail@google.com"
-RUN git config --global user.name "Secure Shell Dummy Name"
+RUN git config --system user.email "secureshelldummyemail@google.com"
+RUN git config --system user.name "Secure Shell Dummy Name"
 
 CMD /ssh_client/build.sh
