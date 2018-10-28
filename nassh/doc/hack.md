@@ -463,6 +463,11 @@ Otherwise, the default rename operation can be a bit buggy/racy.
 
 We use this extension when available, or fallback to `SSH_FXP_RENAME` if not.
 
+### copy-data
+
+The [copy-data] extension is great for speeding up remote copies as it avoids
+having to download data from one file and uploading to a different one.
+
 # External API
 
 The extension provides an external API to allow other apps/extensions make
@@ -590,6 +595,7 @@ Here's a random list of documents which would be useful to people.
 
 [FAQ]: FAQ.md
 
+[copy-data]: https://tools.ietf.org/html/draft-ietf-secsh-filexfer-extensions-00#section-7
 [crosh]: chromeos-crosh.md
 [gnubbyd]: https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco
 [NaCl]: https://developer.chrome.com/native-client

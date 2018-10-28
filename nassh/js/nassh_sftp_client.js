@@ -630,6 +630,32 @@ nassh.sftp.Client.prototype.closeFile = function(handle) {
     .then(response => this.isSuccessResponse_(response, 'CLOSE'));
 };
 
+/**
+ * Copy data between two handles.
+ *
+ * Note: This requires the copy-data extension.  Callers should check for it
+ * before trying to use.
+ *
+ * @param {string} readHandle The handle of the remote file to read.
+ * @param {string} writeHandle The handle of the remote file to write.
+ * @param {number=} length How many bytes to copy.
+ * @param {number=} readOffset Offset into the read handle.
+ * @param {number=} writeOffset Offset into the write handle.
+ * @return {!Promise<!StatusPacket>} A Promise that resolves or rejects with
+ *    a nassh.sftp.StatusError
+ */
+nassh.sftp.Client.prototype.copyData =
+    function(readHandle, writeHandle, length=0, readOffset=0, writeOffset=0) {
+  const packet = new nassh.sftp.Packet();
+  packet.setString(readHandle);
+  packet.setUint64(readOffset);
+  packet.setUint64(length);
+  packet.setString(writeHandle);
+  packet.setUint64(writeOffset);
+
+  return this.client.sendRequest_('copy-data', packet)
+    .then((response) => this.client.isSuccessResponse_(response, 'copy-data'));
+};
 
 /**
  * Removes a remote file.

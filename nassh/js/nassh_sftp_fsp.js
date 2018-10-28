@@ -476,6 +476,12 @@ nassh.sftp.fsp.copyFile = function(sourcePath, targetPath, size, client) {
     .then(handle => {
 
       targetHandle = handle;
+
+      // If the server can do the copy, let it do it directly.
+      if (this.protocolServerExtensions['copy-data'] !== undefined) {
+        return client.copyData(sourceHandle, 0, size, targetHandle, 0);
+      }
+
       var readWritePromises = [];
       // Splits up the data to be read and written into chunks that the server
       // can handle and places them into multiple promises which will be
