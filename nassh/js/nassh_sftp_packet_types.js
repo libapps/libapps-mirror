@@ -353,6 +353,7 @@ nassh.sftp.packets.RequestPackets = {
   RENAME:   18,
   READLINK: 19,
   SYMLINK:  20,
+  EXTENDED: 200,
 };
 
 /**

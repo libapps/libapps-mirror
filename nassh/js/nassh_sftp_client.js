@@ -145,7 +145,7 @@ nassh.sftp.Client.prototype.sendToPlugin_ = function(name, args) {
 /**
  * Sends a SFTP request and awaits the response.
  *
- * @param {number} type SFTP packet type of outgoing request
+ * @param {number|string} type SFTP packet type of outgoing request.
  * @param {!nassh.sftp.Packet} data The body of the request (not including
  *    length, type and requestId)
  * @return {!Promise} A Promise that resolves with the response packet
@@ -156,11 +156,25 @@ nassh.sftp.Client.prototype.sendRequest_ = function(type, data) {
                     + ' been initialized.');
   }
 
+  // First construct the packet type portion of the packet header.
   var requestId = this.requestId_++;
-  var packet = new nassh.sftp.Packet();
-  packet.setUint32(data.getLength() + 5);
-  packet.setUint8(type);
-  packet.setUint32(requestId);
+  const packetType = new nassh.sftp.Packet();
+  if (typeof type == 'string') {
+    // Handle extended packets.
+    packetType.setUint8(nassh.sftp.packets.RequestPackets.EXTENDED);
+    packetType.setUint32(requestId);
+    packetType.setString(type);
+  } else {
+    // Handle protocol defined packets.
+    packetType.setUint8(type);
+    packetType.setUint32(requestId);
+  }
+
+  // Now create a packet with the total length, followed by the packet type,
+  // followed by the payload.  A bit backwards.
+  const packet = new nassh.sftp.Packet();
+  packet.setUint32(data.getLength() + packetType.getLength());
+  packet.setData(packetType.toString());
   packet.setData(data);
 
   return new Promise(resolve => {
