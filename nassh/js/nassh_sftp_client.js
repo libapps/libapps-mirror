@@ -501,10 +501,17 @@ nassh.sftp.Client.prototype.removeFile = function(path) {
  */
 nassh.sftp.Client.prototype.renameFile = function(sourcePath, targetPath) {
   var packet = new nassh.sftp.Packet();
+
+  let type;
+  if (this.protocolServerExtensions['posix-rename@openssh.com'] == '1') {
+    type = 'posix-rename@openssh.com';
+  } else {
+    type = nassh.sftp.packets.RequestPackets.RENAME;
+  }
   packet.setString(this.basePath_ + sourcePath);
   packet.setString(this.basePath_ + targetPath);
 
-  return this.sendRequest_(nassh.sftp.packets.RequestPackets.RENAME, packet)
+  return this.sendRequest_(type, packet)
     .then(response => this.isSuccessResponse_(response, 'RENAME'));
 };
 
