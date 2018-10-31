@@ -426,12 +426,42 @@ The `name` field can be any one of:
 | `exit`        | The plugin is exiting.            | (int `code`) |
 | `printLog`    | Send a string to `console.log`.   | (str `str`) |
 
-# SFTP Support {#SFTP}
+# SFTP {#SFTP}
 
 On Chrome OS, it is possible to mount remote paths via SFTP and the Files app.
-We currently support
-[version 3](https://tools.ietf.org/html/draft-ietf-secsh-filexfer-02) of the
-protocol.
+We currently support [version 3][SFTPv3] of the protocol.
+We don't support newer standards because the most popular implementation is
+[OpenSSH]'s which only supports SFTPv3, and for the majority of Secure Shell
+users, they only interact with [OpenSSH].
+
+We could support newer versions, but they wouldn't be well tested, and not a
+lot of people would even use it, and it's not like we'd see any performance
+improvements (as our operations tend to be basic open/read/write/close).
+
+## Extensions
+
+We support a few optional extensions to improve behavior or performance.
+
+### SSH_FXP_SYMLINK arguments
+
+The [SFTPv3] protocol says the argument order should be linkpath then the
+targetpath, but OpenSSH made a mistake and reversed the order.
+They can't change the order without breaking existing clients or servers, so
+they document it and leave it as-is.
+
+We follow the [OpenSSH SFTP Protocol] here, as do many other clients.
+
+[SFTPv6] noted this desync between implementations and the specification and
+replaced the `SSH_FXP_SYMLINK` packet type with a new `SSH_FXP_LINK`.
+
+### posix-rename@openssh.com (v1)
+
+The [OpenSSH SFTP Protocol] defines a `posix-rename@openssh.com` extension with
+the same API as `SSH_FXP_RENAME`, but uses the simple `rename(2)` semantics on
+the server.
+Otherwise, the default rename operation can be a bit buggy/racy.
+
+We use this extension when available, or fallback to `SSH_FXP_RENAME` if not.
 
 # External API
 
@@ -470,7 +500,11 @@ Here's a random list of documents which would be useful to people.
 * [RFC 4253 - The Secure Shell (SSH) Transport Layer Protocol](https://tools.ietf.org/html/rfc4253)
 * [RFC 4254 - The Secure Shell (SSH) Connection Protocol](https://tools.ietf.org/html/rfc4254)
 * [RFC 4716 - The Secure Shell (SSH) Public Key File Format](https://tools.ietf.org/html/rfc4716)
-* [SFTP (SSH File Transfer Protocol)](https://tools.ietf.org/html/draft-ietf-secsh-filexfer)
+* [SFTP (SSH File Transfer Protocol) version 3][SFTPv3]
+  (Note: We focus on SFTPv3 as defined in the v02 RFC draft and not any of the newer ones)
+* [OpenSSH SFTP Protocol]
+* [SFTP Optional Extensions](https://tools.ietf.org/html/draft-ietf-secsh-filexfer-extensions-00)
+
 
 [bin/]: ../bin/
 [css/]: ../css/
@@ -538,5 +572,8 @@ Here's a random list of documents which would be useful to people.
 [gnubbyd]: https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco
 [NaCl]: https://developer.chrome.com/native-client
 [OpenSSH]: https://www.openssh.com/
+[OpenSSH SFTP Protocol]: https://github.com/openssh/openssh-portable/blob/master/PROTOCOL
+[SFTPv3]: https://tools.ietf.org/html/draft-ietf-secsh-filexfer-02
+[SFTPv6]: https://tools.ietf.org/html/draft-ietf-secsh-filexfer-13
 [ssh_client]: ../../ssh_client/
 [wash]: ../../wash/

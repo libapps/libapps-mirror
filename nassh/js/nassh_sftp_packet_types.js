@@ -82,6 +82,7 @@ nassh.sftp.packets.AttrsPacket = function(packet) {
  * Make sure the name conforms to the specification.
  *
  * The SFTP RFC defines the extension-name format:
+ * https://tools.ietf.org/html/draft-ietf-secsh-filexfer-02#section-8
  * https://tools.ietf.org/html/draft-ietf-secsh-filexfer-13#section-4.2
  *
  * Which says to follow the SSH "Algorithm and Method Naming" RFC format:

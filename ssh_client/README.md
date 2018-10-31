@@ -227,7 +227,7 @@ Here's a random list of documents which would be useful to people.
 * [RFC 4253 - The Secure Shell (SSH) Transport Layer Protocol](https://tools.ietf.org/html/rfc4253)
 * [RFC 4254 - The Secure Shell (SSH) Connection Protocol](https://tools.ietf.org/html/rfc4254)
 * [RFC 4716 - The Secure Shell (SSH) Public Key File Format](https://tools.ietf.org/html/rfc4716)
-* [SFTP (SSH File Transfer Protocol)](https://tools.ietf.org/html/draft-ietf-secsh-filexfer)
+
 
 [NaCl]: https://developer.chrome.com/native-client
 [nassh]: ../nassh/
