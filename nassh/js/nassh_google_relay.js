@@ -269,11 +269,13 @@ nassh.GoogleRelay.findGnubbyExtension = function() {
   // The possible gnubby extensions.
   const stableAppId = 'beknehfpfkghjoafdifaflglpjkojoco';
   const stableExtId = 'lkjlajklkdhaneeelolkfgbpikkgnkpk';
+  // The order matches the gnubby team preferences: https://crbug.com/902588
+  // Prefer the extension over the app, and dev over stable.
   const extensions = [
-    stableExtId,                         // extension (stable)
     'klnjmillfildbbimkincljmfoepfhjjj',  // extension (dev)
-    stableAppId,                         // app (stable)
+    stableExtId,                         // extension (stable)
     'dlfcjilkjfhdnfiecknlnddkmmiofjbg',  // app (dev)
+    stableAppId,                         // app (stable)
     'kmendfapggjehodndflmmgagdbamhnfd',  // component
   ];
 
@@ -297,13 +299,16 @@ nassh.GoogleRelay.findGnubbyExtension = function() {
   nassh.GoogleRelay.defaultGnubbyExtension =
       (hterm.os == 'cros' ? stableAppId : stableExtId);
 
-  // We don't care which one is available, so go with the first response.
   // We don't set a timeout here as it doesn't block overall execution.
   Promise.all(extensions.map((id) => check(id))).then((results) => {
-    results = results.filter((id) => id);
     console.log(`gnubby probe results: ${results}`);
-    if (results.length)
-      nassh.GoogleRelay.defaultGnubbyExtension = results[0];
+    for (let i = 0; i < extensions.length; ++i) {
+      const extId = extensions[i];
+      if (results.includes(extId)) {
+        nassh.GoogleRelay.defaultGnubbyExtension = extId;
+        break;
+      }
+    }
   });
 };
 
