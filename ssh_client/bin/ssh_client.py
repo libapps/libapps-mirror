@@ -77,6 +77,7 @@ def symlink(target, path):
 def copy(source, dest):
     """Always copy |source| to |dest|."""
     logging.info('Copying %s -> %s', source, dest)
+    os.makedirs(os.path.dirname(dest), exist_ok=True)
     shutil.copy(source, dest)
 
 

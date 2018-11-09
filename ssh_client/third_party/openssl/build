@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Build openssl package."""
+
+from __future__ import print_function
+
+import glob
+import logging
+import os
+import sys
+
+FILESDIR = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
+
+import ssh_client  # pylint: disable=wrong-import-position
+
+
+ARCHIVES = ('%(p)s.tar.gz',)
+PATCHES = (
+    'nacl.patch',
+    'openssl-1.0.0a-ldflags.patch',
+    'openssl-1.0.2i-parallel-build.patch',
+    'openssl-1.0.2a-parallel-obj-headers.patch',
+    'openssl-1.0.2a-parallel-install-dirs.patch',
+    'openssl-1.0.2a-parallel-symlinking.patch',
+)
+
+
+def src_configure(metadata):
+    """Configure the source."""
+    # See if configure passed.
+    with open('Makefile') as fp:
+        if 'nacl-le32newlib' in fp.read():
+            logging.info('Makefile exists; skipping ./configure step')
+            return
+
+    env = ssh_client.pnacl_env()
+    env.update({
+        'SYSTEM': 'nacl',
+        'RELEASE': '0',
+        'MACHINE': 'le32newlib',
+    })
+
+    cmd = [
+        './config',
+        '--prefix=/',
+        'no-asm',
+        'no-dso',
+        'no-hw',
+        'no-krb5',
+        '-fgnu-inline-asm',
+        '-D_GNU_SOURCE',
+        '-DNO_SYSLOG',
+        '-I%s' % (os.path.join(env['SYSROOT_INCDIR'], 'glibc-compat'),),
+    ]
+    ssh_client.run(cmd, env=env)
+
+
+def src_compile(_metadata):
+    """Compile the source."""
+    # Stub out libs we don't care about.
+    ssh_client.touch('libssl.pc')
+    ssh_client.touch('openssl.pc')
+
+    # Just build libcrypto which OpenSSH wants.
+    ssh_client.emake('build_crypto', 'libcrypto.pc', 'DIRS=crypto')
+
+
+def src_install(_metadata):
+    """Install the package."""
+    env = ssh_client.pnacl_env()
+    ssh_client.emake('install_sw', 'INSTALL_PREFIX=%s' % (env['SYSROOT'],),
+                     'DIRS=crypto', 'LIBS=libcrypto.a', env=env)
+
+
+ssh_client.build_package(sys.modules[__name__])

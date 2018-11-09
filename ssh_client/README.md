@@ -80,7 +80,8 @@ If you're hacking on the source, here are the files you most likely care about:
   * [depot_tools/]: Tools used by webports.
   * [mandoc/]: Tools to generate html from man pages.
   * [naclsdk/]: NaCl SDK/toolchain for cross-compiling to Native Client.
-  * `openssh-*/`: Code to download & build OpenSSH.
+  * `openssh-*/`: Code to download & build [OpenSSH].
+  * [openssl/]: Code to download & build [OpenSSL] (the crypto lib).
   * [webports/]: SDK for cross-compiling some third party libs for NaCl.
 
 Here are the rest of the files, but most likely you don't need to touch these:
@@ -231,6 +232,7 @@ Here's a random list of documents which would be useful to people.
 [NaCl]: https://developer.chrome.com/native-client
 [nassh]: ../nassh/
 [OpenSSH]: https://www.openssh.com/
+[OpenSSL]: https://www.openssl.com/
 [webports]: https://chromium.googlesource.com/webports/
 
 [bin/]: ./bin
@@ -247,6 +249,7 @@ Here's a random list of documents which would be useful to people.
 [depot_tools/]: ./third_party/depot_tools/
 [mandoc/]: ./third_party/mandoc/
 [naclsdk/]: ./third_party/naclsdk/
+[openssl/]: ./third_party/openssl/
 [webports/]: ./third_party/webports/
 
 [dev_null.cc]: ./src/dev_null.cc
