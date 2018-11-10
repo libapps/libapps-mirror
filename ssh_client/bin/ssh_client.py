@@ -135,15 +135,6 @@ def fetch(uri=None, name=None):
     os.rename(tmpfile, distfile)
 
 
-def git_fetch(uri, output):
-    """Clone |uri| into the |output| dir."""
-    logging.info('Syncing %s repo', uri)
-    if os.path.exists(output):
-        run(['git', 'pull'], cwd=output)
-    else:
-        run(['git', 'clone', '--depth=1', uri, output])
-
-
 def stamp_name(workdir, phase, unique):
     """Get a unique name for this particular step.
 

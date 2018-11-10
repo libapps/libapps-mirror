@@ -50,8 +50,7 @@ $ sudo apt-get install libstdc++6:i386 libglib2.0-0:i386 git make cmake \
 ## Build Script
 
 To compile, you just have to run `./build.sh`.  It should take care of
-downloading the NaCl SDK and [webports] code for you (which takes care of
-building all the required dependencies).
+downloading the NaCl SDK and building all the required dependencies.
 
 When it's finished, the `output/` directory will hold all the compiled objects,
 and the `output/plugin/` directory can be copied over to [nassh].
@@ -64,7 +63,7 @@ If you're hacking on the source, here are the files you most likely care about:
   * [pylint]: Helper tool for linting various Python code.
   * [ssh_client.py]: Utility library for Python build code.
 * [build.sh]: The main compile script.  Takes care of downloading & compiling
-  NaCl, webports, OpenSSH, and any other software.  Run it and forget!
+  NaCl, OpenSSH, and any other software.  Run it and forget!
 * `output/`: All download & compiled objects are saved here.
   * `bin/`: Various helper tools used at build time.
   * `build/`: All subprojects get an individual build directory.
@@ -77,14 +76,12 @@ If you're hacking on the source, here are the files you most likely care about:
   * [Makefile][src/Makefile]: Used only to compile the plugin code.
 * [third_party/]: All third party projects have a unique subdir.
   Do not try to run these directly as they rely on settings in [build.sh].
-  * [depot_tools/]: Tools used by webports.
   * [glibc-compat/]: Various C library shims (mostly network/resolver).
   * [ldns/]: DNS library supporting DNSSEC and such.
   * [mandoc/]: Tools to generate html from man pages.
   * [naclsdk/]: NaCl SDK/toolchain for cross-compiling to Native Client.
   * `openssh-*/`: Code to download & build [OpenSSH].
   * [openssl/]: Code to download & build [OpenSSL] (the crypto lib).
-  * [webports/]: SDK for cross-compiling some third party libs for NaCl.
   * [zlib/]: Standard compression library.
 
 Here are the rest of the files, but most likely you don't need to touch these:
@@ -236,7 +233,6 @@ Here's a random list of documents which would be useful to people.
 [nassh]: ../nassh/
 [OpenSSH]: https://www.openssh.com/
 [OpenSSL]: https://www.openssl.com/
-[webports]: https://chromium.googlesource.com/webports/
 
 [bin/]: ./bin
 [build.sh]: ./build.sh
@@ -249,13 +245,11 @@ Here's a random list of documents which would be useful to people.
 [pylint]: ./bin/pylint
 [ssh_client.py]: ./bin/ssh_client.py
 
-[depot_tools/]: ./third_party/depot_tools/
 [glibc-compat/]: ./third_party/glibc-compat/
 [ldns/]: ./third_party/ldns/
 [mandoc/]: ./third_party/mandoc/
 [naclsdk/]: ./third_party/naclsdk/
 [openssl/]: ./third_party/openssl/
-[webports/]: ./third_party/webports/
 [zlib/]: ./third_party/zlib/
 
 [dev_null.cc]: ./src/dev_null.cc
