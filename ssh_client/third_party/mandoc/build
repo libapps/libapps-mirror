@@ -33,10 +33,10 @@ def src_compile(_metadata):
     ssh_client.emake('mandoc')
 
 
-def src_install(_metadata):
+def src_install(metadata):
     """Install the package."""
-    target = os.path.join(os.getcwd(), 'mandoc')
-    path = os.path.join(ssh_client.OUTPUT, 'mandoc')
+    target = os.path.join(metadata['S'], 'mandoc')
+    path = os.path.join(ssh_client.BUILD_BINDIR, 'mandoc')
     ssh_client.symlink(target, path)
 
 

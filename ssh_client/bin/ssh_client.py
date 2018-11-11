@@ -74,7 +74,7 @@ def symlink(target, path):
     unlink(path)
     path = os.path.realpath(path)
     target = os.path.relpath(os.path.realpath(target), os.path.dirname(path))
-    logging.info('Symlinking %s -> %s', path, target)
+    logging.info('Symlinking %s -> %s', os.path.relpath(path, OUTPUT), target)
     os.symlink(target, path)
 
 
@@ -338,6 +338,7 @@ def build_package(module):
         os.makedirs(path, exist_ok=True)
 
     os.environ['HOME'] = HOME
+    os.environ['PATH'] = '%s:%s' % (BUILD_BINDIR, os.environ['PATH'])
 
     # Run all the source phases now to build it.
     common_module = sys.modules[__name__]
