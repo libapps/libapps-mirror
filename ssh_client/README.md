@@ -193,7 +193,7 @@ Now you want to connect gdb.
 ## GDB Setup
 
 ```
-$ ./output/naclsdk/pepper_49/toolchain/linux_x86_glibc/bin/x86_64-nacl-gdb -q
+$ ./output/naclsdk/toolchain/linux_x86_glibc/bin/x86_64-nacl-gdb -q
 (gdb) file output/ssh_client_nl_x86_64.dbg.nexe
 (gdb) target remote localhost:4014
 Remote debugging using localhost:4014

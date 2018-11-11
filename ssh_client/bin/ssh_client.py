@@ -9,7 +9,6 @@
 from __future__ import print_function
 
 import argparse
-import glob
 import logging
 import multiprocessing
 import os
@@ -197,8 +196,7 @@ def pnacl_env():
     """Get custom env to build using PNaCl toolchain."""
     env = os.environ.copy()
 
-    nacl_sdk = os.path.join(OUTPUT, 'naclsdk')
-    nacl_sdk_root = glob.glob(os.path.join(nacl_sdk, '*'))[0]
+    nacl_sdk_root = os.path.join(OUTPUT, 'naclsdk')
 
     toolchain_root = os.path.join(nacl_sdk_root, 'toolchain', 'linux_pnacl')
     bin_dir = os.path.join(toolchain_root, 'bin')

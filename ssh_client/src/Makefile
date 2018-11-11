@@ -8,7 +8,7 @@ BUILD_NAME = pnacl
 D = $(OUTPUT)/plugin/$(BUILD_NAME)
 
 $(shell mkdir -p $(D))
-NACL_SDK_ROOT ?= $(wildcard $(OUTPUT)/naclsdk/pepper_*)
+NACL_SDK_ROOT ?= $(OUTPUT)/naclsdk
 
 PROJECT := ssh_client
 CXX_SOURCES := \
