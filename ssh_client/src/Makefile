@@ -2,12 +2,20 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+ifeq ($(DEBUG),1)
+RELEASE = dbg
+else
+RELEASE = rel
+endif
+
 TOPDIR = $(CURDIR)/..
 OUTPUT ?= $(TOPDIR)/output
 BUILD_NAME = pnacl
+WORKDIR = $(OUTPUT)/build/$(BUILD_NAME)/$(RELEASE)
+EXEDIR = $(WORKDIR)
 D = $(OUTPUT)/plugin/$(BUILD_NAME)
 
-$(shell mkdir -p $(D))
+$(shell mkdir -p $(WORKDIR) $(EXEDIR) $(D))
 NACL_SDK_ROOT ?= $(OUTPUT)/naclsdk
 
 PROJECT := ssh_client
@@ -81,30 +89,30 @@ all_newlib: \
 	$(D)/ssh_client.nmf
 $(D)/ssh_client.nmf: $(TOPDIR)/ssh_client.nmf
 	cp $< $@
-$(D)/%: $(OUTPUT)/%
+$(D)/%: $(EXEDIR)/%
 	cp $< $@
-newlib_pexe: $(OUTPUT)/$(newlib_pexe)
-newlib_x86_32: $(OUTPUT)/$(newlib_x86_32)
-newlib_x86_64: $(OUTPUT)/$(newlib_x86_64)
-newlib_arm: $(OUTPUT)/$(newlib_arm)
+newlib_pexe: $(EXEDIR)/$(newlib_pexe)
+newlib_x86_32: $(EXEDIR)/$(newlib_x86_32)
+newlib_x86_64: $(EXEDIR)/$(newlib_x86_64)
+newlib_arm: $(EXEDIR)/$(newlib_arm)
 
 # Define PNaCl compile and link rules for C++ sources
-POBJS := $(patsubst %.cc,$(OUTPUT)/%_p.o,$(CXX_SOURCES))
-$(POBJS): $(OUTPUT)/%_p.o : $(CURDIR)/%.cc
+POBJS := $(patsubst %.cc,$(WORKDIR)/%_p.o,$(CXX_SOURCES))
+$(POBJS): $(WORKDIR)/%_p.o : $(CURDIR)/%.cc
 	$(PNACL_CXX) -o $@ -c $< $(PNACL_CXXFLAGS)
 
-$(OUTPUT)/$(newlib_pexe): $(POBJS)
+$(EXEDIR)/$(newlib_pexe): $(POBJS)
 	$(PNACL_CXX) -o $@ $^ -lopenssh -lssh \
 		-lopenbsd-compat -lglibc-compat \
 		$(PNACL_LDFLAGS) $(PNACL_CXXFLAGS)
 
-$(OUTPUT)/$(PROJECT)_nl_arm.dbg.nexe: $(OUTPUT)/$(newlib_pexe)
+$(EXEDIR)/$(PROJECT)_nl_arm.dbg.nexe: $(EXEDIR)/$(newlib_pexe)
 	$(PNACL_TRANSLATE) $(PNACL_TRANSLATE_FLAGS) -o $@ $< -arch arm
 
-$(OUTPUT)/$(PROJECT)_nl_x86_32.dbg.nexe: $(OUTPUT)/$(newlib_pexe)
+$(EXEDIR)/$(PROJECT)_nl_x86_32.dbg.nexe: $(EXEDIR)/$(newlib_pexe)
 	$(PNACL_TRANSLATE) $(PNACL_TRANSLATE_FLAGS) -o $@ $< -arch i686
 
-$(OUTPUT)/$(PROJECT)_nl_x86_64.dbg.nexe: $(OUTPUT)/$(newlib_pexe)
+$(EXEDIR)/$(PROJECT)_nl_x86_64.dbg.nexe: $(EXEDIR)/$(newlib_pexe)
 	$(PNACL_TRANSLATE) $(PNACL_TRANSLATE_FLAGS) -o $@ $< -arch x86-64
 
 %.nexe: %.dbg.nexe
@@ -114,4 +122,4 @@ $(OUTPUT)/$(PROJECT)_nl_x86_64.dbg.nexe: $(OUTPUT)/$(newlib_pexe)
 	$(PNACL_FINALIZE) $^ -o $@
 
 clean:
-	rm -rf $(OUTPUT)/*.o $(OUTPUT)/*.[np]exe
+	rm -rf $(WORKDIR)
