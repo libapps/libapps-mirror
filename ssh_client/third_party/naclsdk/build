@@ -32,6 +32,7 @@ def src_unpack(metadata):
 
 def src_install(metadata):
     """Install the package."""
+    pepper = 'pepper_%s' % (metadata['PV'].split('.')[0],)
     path = os.path.join(ssh_client.OUTPUT, 'naclsdk')
     ssh_client.symlink(os.path.join(metadata['S'], pepper), path)
 
