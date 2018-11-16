@@ -119,7 +119,11 @@ nassh.sftp.fsp.onReadDirectoryRequested = function(options, onSuccess, onError) 
       console.warn(response.name + ': ' + response.message);
       onError('FAILED');
     })
-    .then(() => client.closeFile(directoryHandle));
+    .finally(() => {
+      if (directoryHandle !== undefined) {
+        return client.closeFile(directoryHandle);
+      }
+    });
 };
 
 /**
@@ -431,8 +435,16 @@ nassh.sftp.fsp.copyFile = function(sourcePath, targetPath, size, client) {
       return Promise.all(readWritePromises);
 
     })
-    .then(() => client.closeFile(sourceHandle))
-    .then(() => client.closeFile(targetHandle));
+    .finally(() => {
+      if (sourceHandle !== undefined) {
+        return client.closeFile(sourceHandle);
+      }
+    })
+    .finally(() => {
+      if (targetHandle !== undefined) {
+        return client.closeFile(targetHandle);
+      }
+    });
 };
 
 /**
@@ -463,7 +475,11 @@ nassh.sftp.fsp.copyDirectory = function(sourcePath, targetPath, client) {
 
       return Promise.all(copyPromises);
     })
-    .then(() => client.closeFile(sourceHandle));
+    .finally(() => {
+      if (sourceHandle !== undefined) {
+        return client.closeFile(sourceHandle);
+      }
+    });
 };
 
 /**
