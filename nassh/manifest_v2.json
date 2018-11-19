@@ -31,7 +31,6 @@
     "configurable": false
   },
   "web_accessible_resources": [
-    "html/crosh.html",
     "html/nassh.html",
     "html/nassh_google_relay.html",
     "html/nassh_connect_dialog.html"

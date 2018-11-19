@@ -75,6 +75,47 @@ nassh.External.COMMANDS.mount = (request, sender, sendResponse) => {
 };
 
 /**
+ * Opens a new crosh window.
+ *
+ * @param {{width: number=, height: number=}} request Customize the new window
+ *     behavior.
+ * @param {{id: !string}} sender chrome.runtime.MessageSender
+ * @param {function(Object=)} sendResponse called to send response.
+ */
+nassh.External.COMMANDS.crosh = (request, sender, sendResponse) => {
+  // Set up some default values.
+  request = Object.assign({
+    width: 735,
+    height: 440,
+  }, request);
+
+  const checkNumber = (field) => {
+    const number = request[field];
+    if (typeof number == 'number') {
+      return number;
+    } else {
+      sendResponse({error: true, message: `${field}: invalid number: ${number}`});
+      return false;
+    }
+  };
+
+  let width = checkNumber('width');
+  if (width === false) {
+    return;
+  }
+
+  let height = checkNumber('height');
+  if (height === false) {
+    return;
+  }
+
+  window.open(lib.f.getURL('/html/crosh.html'), '',
+              'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
+              `minimizable=yes,width=${width},height=${height}`);
+  sendResponse({error: false, message: 'openCrosh'});
+};
+
+/**
  * Invoked when external app/extension calls chrome.remote.sendMessage.
  * https://developer.chrome.com/apps/runtime#event-onMessageExternal.
  * @private
