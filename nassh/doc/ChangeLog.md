@@ -1,3 +1,37 @@
+# 0.10, 2018-12-02, OpenSSH 7.9p1 and sftp/build improvements.
+
+* Update to hterm 1.83.  Minor improvements.
+* Update to libdot 1.25.  Minor improvements.
+* prefs: Fix handling of default port settings.
+* prefs: Drop old relay-host/relay-port migration.
+* sftp: Simplify intToNByteArrayString a bit.
+* gnubby: Skip check on the web platform.
+* nassh: Show hterm debug info for dev versions too.
+* api: Add an API for opening crosh windows.
+* sftp: Improve protocol documentation.
+* sftp: Use posix-rename@openssh.com if available.
+* sftp: Support sending extended packets.
+* gnubby: Prefer certain versions of gnubbyd.
+* doc: processes: Update docs to cover new signed workflow.
+* sftp: Improve permission bit parsing.
+* fsp: Add missing open flags.
+* ssh_client: Move plugin outputs to build/ subdir.
+* ssh_client: Link the naclsdk version directly.
+* ssh_client: Move mandoc to common bin dir.
+* ssh_client: Add a --jobs build flag.
+* ssh_client: openssl: Split out of webports.
+* ssh_client: jsoncpp: Split out of webports.
+* ssh_client: zlib: Split out of webports.
+* ssh_client: openssh: Convert to new Python build system.
+* ssh_client: Change dev packages to install python3.
+* ssh_client: Move cpplint to bin/.
+* ssh_client: mandoc: Convert to new Python framework.
+* ssh_client: depot_tools/webports: Convert to new Python framework.
+* ssh_client: naclsdk: Convert to new Python framework.
+* ssh_client: Start a new build system in Python.
+* ssh_client: Rework plugin/ install steps.
+* ssh_client: Update OpenSSH to 7.9p1.
+
 # 0.9, 2018-10-24, OpenSSH 7.8p1 and a context menu.
 
 * Update to hterm 1.82.  New context menu.
