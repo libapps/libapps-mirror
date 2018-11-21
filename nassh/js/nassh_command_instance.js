@@ -178,15 +178,17 @@ nassh.CommandInstance.prototype.run = function() {
                               [num, nassh.msg(`TIP_${num}`)]));
     this.io.println('');
 
-    if (this.manifest_.name.match(/\(tot\)/)) {
-      // If we're a tot version, show how old the hterm deps are.
-      var htermAge = Math.round(
-          (new Date() -
-           new Date(lib.resource.getData('hterm/concat/date'))) / 1000);
+    if (this.manifest_.name.match(/\((dev|tot)\)/)) {
+      // If we're a development version, show hterm details.
+      const htermDate = lib.resource.getData('hterm/concat/date');
+      const htermVer = lib.resource.getData('hterm/changelog/version');
+      const htermRev = lib.resource.getData('hterm/git/HEAD');
+      const htermAgeMinutes =
+          Math.round((new Date() - new Date(htermDate)) / 1000 / 60);
 
-      this.io.println(
-          '[TOT] hterm ' + lib.resource.getData('hterm/changelog/version') +
-          ': updated ' + (htermAge / 60).toFixed(2) + ' minutes ago.');
+      this.io.println(`[dev] hterm v${htermVer} (git ${htermRev})`);
+      this.io.println(`[dev] built on ${htermDate} ` +
+                      `(${htermAgeMinutes} minutes ago)`);
     }
 
     nassh.getFileSystem(onFileSystemFound, ferr('FileSystem init failed'));
