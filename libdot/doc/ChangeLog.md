@@ -1,3 +1,12 @@
+# 1.25, 2018-12-02, Minor improvements.
+
+* prefs: Fix handling of null defaults.
+* assertEQ: Handle typed arrays too.
+* concat: Fix date/version swap.
+* polyfill: Add Promise.finally.
+* prefs: Coalesce writes when importing json files.
+* pylint: Set 80 col limits.
+
 # 1.24, 2018-10-24, Tool improvements for supporting nightly builds.
 
 * concat: specify subprocess args
