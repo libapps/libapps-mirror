@@ -58,8 +58,8 @@ nassh.sftp.packets.NamePacket = function(packet) {
   this.files = [];
 
   for(var i = 0; i < this.fileCount; i++) {
-    var fileName = packet.getString();
-    var longFileName = packet.getString();
+    const fileName = lib.decodeUTF8(packet.getString());
+    const longFileName = lib.decodeUTF8(packet.getString());
 
     var fileData = nassh.sftp.packets.getFileAttrs(packet);
 
