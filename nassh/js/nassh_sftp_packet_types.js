@@ -216,7 +216,7 @@ nassh.sftp.packets.bitsToUnixModeLine = function(bits) {
     [nassh.sftp.packets.PermissionBits.IFLNK]: 'l',
     [nassh.sftp.packets.PermissionBits.IFSOCK]: 's',
   };
-  if (fmtMap[ifmt] === null)
+  if (fmtMap[ifmt] === undefined)
     ret += '?';
   else
     ret += fmtMap[ifmt];
@@ -232,7 +232,7 @@ nassh.sftp.packets.bitsToUnixModeLine = function(bits) {
 
   ret += threebits(bits >> 6, (bits & nassh.sftp.packets.PermissionBits.ISUID),
                    's', 'S');
-  ret += threebits(bits >> 3, (bits & nassh.sftp.packets.PermissionBits.IGUID),
+  ret += threebits(bits >> 3, (bits & nassh.sftp.packets.PermissionBits.ISGID),
                    's', 'S');
   ret += threebits(bits >> 0, (bits & nassh.sftp.packets.PermissionBits.ISVTX),
                    't', 'T');
