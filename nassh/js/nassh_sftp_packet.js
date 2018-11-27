@@ -30,6 +30,9 @@ nassh.sftp.Packet.prototype.setUint32 = function(uint32) {
 
 /**
  * Sets a uint64 at the current offset.
+ *
+ * Note: Because JavaScript lacks a native 64-bit interger type, the argument
+ * is actually limited to 53 bits.
  */
 nassh.sftp.Packet.prototype.setUint64 = function(uint64) {
   this.packet_ += nassh.sftp.Packet.intToNByteArrayString(uint64, 8);
@@ -86,6 +89,10 @@ nassh.sftp.Packet.prototype.getUint32 = function() {
 
 /**
  * Gets a uint64 from the current offset, if possible.
+ *
+ * Note: Because JavaScript lacks a native 64-bit interger type, the return is
+ * actually limited to 53 bits.  The byteArrayStringToInt function will enforce
+ * that limit for us.
  */
 nassh.sftp.Packet.prototype.getUint64 = function() {
   if (this.offset_ + 8 > this.packet_.length) {
@@ -169,12 +176,14 @@ nassh.sftp.Packet.prototype.eod = function() {
 };
 
 /**
- * Converts a byte array string to an int
+ * Converts a byte array string to an int.
+ *
+ * This expects a big endian input.
  */
 nassh.sftp.Packet.byteArrayStringToInt = function(byteArray) {
   var int = 0;
 
-  // converts the byte array into its int form
+  // We can't use bitwise shifts because that creates a signed 32-bit int.
   for (var i = 0; i < byteArray.length; i++) {
     int = (int * 256) + byteArray.charCodeAt(i);
   }
@@ -189,22 +198,22 @@ nassh.sftp.Packet.byteArrayStringToInt = function(byteArray) {
 
 /**
  * Converts an int to an n byte array string.
+ *
+ * This produces a big endian array.
  */
 nassh.sftp.Packet.intToNByteArrayString = function(int, n) {
-  var byteArray = [];
+  // Creates an n byte long array.  We don't have to zero-fill it because the
+  // loop below will take care of writing zeros as needed.
+  const byteArray = new Array(n);
 
-  // creates a n byte long array
-  for (var i = 0; i < n; i++) {
-    byteArray.push(0);
+  // Converts the int into its byte array form.
+  for (let i = n - 1; i >= 0; --i) {
+    const byte = int & 0xff;
+    byteArray[i] = byte;
+    // We can't use bitwise shifts because that creates a signed 32-bit int.
+    int = (int - byte) / 256;
   }
 
-  // converts the int into its byte array form
-  for (var i = n-1; i >= 0; i--) {
-      var byte = int & 0xff;
-      byteArray[i] = byte;
-      int = (int - byte) / 256;
-  }
-
-  // return the byte array represented as a string
+  // Return the byte array represented as a string.
   return String.fromCharCode.apply(String, byteArray);
 };
