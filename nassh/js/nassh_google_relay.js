@@ -266,6 +266,11 @@ nassh.GoogleRelay.prototype.openSocket = function(fd, host, port, streams,
  * Find a usable gnubby extension.
  */
 nassh.GoogleRelay.findGnubbyExtension = function() {
+  // If we're not in an extension context, nothing to do.
+  if (!window.chrome || !chrome.runtime) {
+    return;
+  }
+
   // The possible gnubby extensions.
   const stableAppId = 'beknehfpfkghjoafdifaflglpjkojoco';
   const stableExtId = 'lkjlajklkdhaneeelolkfgbpikkgnkpk';
