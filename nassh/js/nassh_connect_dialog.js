@@ -373,8 +373,13 @@ nassh.ConnectDialog.prototype.save = function() {
 
        var value = this.$f(name).value;
 
-       if (name == 'port')
-         value = value ? parseInt(value) : '';
+       if (name == 'port') {
+         value = parseInt(value);
+         if (!value) {
+           // If parsing failed for any reason, reset it to the default.
+           value = null;
+         }
+       }
 
        if ((!prefs && !value) || (prefs && value == prefs.get(name)))
          return;
