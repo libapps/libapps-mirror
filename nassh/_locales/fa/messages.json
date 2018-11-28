@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "درگاه"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "‏گزینه‌های سرور رله SSH"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "‏گزینه‌های سرور رله SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "‏دوباره متصل شود(R)، اتصال دیگری انتخاب شود(C) یا خارج می‌شوید(E)؟"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "گزینه رله نامشخص: $1"
 	},
 	"relay_retry": {

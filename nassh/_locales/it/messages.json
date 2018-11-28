@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "porta"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "Opzioni server relay SSH"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "Opzioni server relay SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "Riconnettere (R), Scegliere un'altra connessione (C) o Uscire (X)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "Opzione relay sconosciuta: $1"
 	},
 	"relay_retry": {

@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "Indstillinger for SSH-relæserver"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "Indstillinger for SSH-relæserver"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "Vil du genoprette forbindelsen (R), vælge en anden forbindelse (C) eller afslutte (X)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "Ukendt relæmulighed: $1"
 	},
 	"relay_retry": {

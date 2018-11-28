@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "ポート"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "SSH 中継サーバーのオプション"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "SSH 中継サーバーのオプション"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "再接続(&R)、別の接続を選択(&C)、または終了(&X)"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "不明な中継オプション: $1"
 	},
 	"relay_retry": {

@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "Alternativer for SSH-relétjeneren"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "Alternativer for SSH-relétjener"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "Vil du koble til på nytt (R), velge en annen tilkobling (C) eller avslutte (X)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "Ukjent reléalternativ: $1"
 	},
 	"relay_retry": {

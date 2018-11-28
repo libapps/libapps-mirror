@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "porta"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "Opções de servidor relay SSH"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "Opções de servidor relay SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "Reconectar (R), escolher outra conexão (C) ou sair (X)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "Opção de relé desconhecida: $1"
 	},
 	"relay_retry": {

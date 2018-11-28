@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "порт"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "Параметри сервера передавання SSH"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "Параметри сервера передавання SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "Ще раз підключитися (R), вибрати інше підключення (C) чи вийти (X)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "Невідома опція ретрансляції: $1"
 	},
 	"relay_retry": {

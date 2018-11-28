@@ -183,6 +183,14 @@
 		"description": "Placeholder text for the mount path field. This is the remote directory used for SFTP mounts.",
 		"message": "the default path is the user's home directory"
 	},
+	"FIELD_NASSH_OPTIONS_ARIA_LABEL": {
+		"description": "Label for command line options to the SSH relay server. The relay server is like a web proxy for connections. 'SSH' refers to the protocol and probably should not be translated if the language does not have a common replacement.",
+		"message": "SSH relay server options"
+	},
+	"FIELD_NASSH_OPTIONS_PLACEHOLDER": {
+		"description": "Placeholder for command line options to the SSH relay server. The relay server is like a web proxy for connections. 'SSH' refers to the protocol and probably should not be translated if the language does not have a common replacement.",
+		"message": "SSH relay server options"
+	},
 	"FIELD_PORT_ARIA_LABEL": {
 		"description": "Label for the network port.",
 		"message": "port"
@@ -190,14 +198,6 @@
 	"FIELD_PORT_PLACEHOLDER": {
 		"description": "Placeholder for the network port.",
 		"message": "port"
-	},
-	"FIELD_RELAY_OPTIONS_ARIA_LABEL": {
-		"description": "Label for command line options to the SSH relay server. The relay server is like a web proxy for connections. 'SSH' refers to the protocol and probably should not be translated if the language does not have a common replacement.",
-		"message": "SSH relay server options"
-	},
-	"FIELD_RELAY_OPTIONS_PLACEHOLDER": {
-		"description": "Placeholder for command line options to the SSH relay server. The relay server is like a web proxy for connections. 'SSH' refers to the protocol and probably should not be translated if the language does not have a common replacement.",
-		"message": "SSH relay server options"
 	},
 	"FIELD_TERMINAL_PROFILE_PLACEHOLDER": {
 		"description": "Placeholder text for the default terminal emulator profile name.",
@@ -668,6 +668,16 @@
 		"description": "Label for the mount path field. This is the remote directory used for SFTP mounts.",
 		"message": "Mount Path"
 	},
+	"NASSH_OPTIONS_ERROR": {
+		"description": "Error message shown when a user specified option is invalid. All strings here should be translated.",
+		"message": "Unknown option: $OPTION$",
+		"placeholders": {
+			"option": {
+				"content": "$1",
+				"example": "--foobar"
+			}
+		}
+	},
 	"NEW_WINDOW_MENU_LABEL": {
 		"description": "The menu label to open a new window for a new secure shell session.",
 		"message": "New Window"
@@ -725,16 +735,6 @@
 	"RECONNECT_MESSAGE": {
 		"description": "Message displayed after a connection closes. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them after the word is OK like: Exit (X).",
 		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
-	},
-	"RELAY_OPTIONS_ERROR": {
-		"description": "Error message shown when a user specified option is invalid.",
-		"message": "Unknown relay option: $OPTION$",
-		"placeholders": {
-			"option": {
-				"content": "$1",
-				"example": "--foobar"
-			}
-		}
 	},
 	"RELAY_RETRY": {
 		"description": "Displayed in a text overlay when we experience an error talking to the relay server (which is like a web proxy for connections).",

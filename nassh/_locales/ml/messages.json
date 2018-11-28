@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "SSH റിലേ സെർവർ ഓപ്ഷനുകൾ"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "SSH റിലേ സെർവർ ഓപ്ഷനുകൾ"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "തിരിച്ചറിയാനാകാത്ത റിലേ ഓപ്ഷൻ: $1"
 	},
 	"relay_retry": {

@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "ወደብ"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "የSSH አቀባይ አገልጋይ አማራጮች"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "የSSH አቀባይ አገልጋይ አማራጮች"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "ዳግም(R) ይገናኝ፣ ሌላ ግንኙነት ይምረጡ(C) ወይም ይውጡ(X)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "ያልታወቀ የማበያያ አማራጭ፦ $1"
 	},
 	"relay_retry": {

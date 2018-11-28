@@ -36,6 +36,35 @@ nassh.PreferenceManager.prototype =
     Object.create(lib.PreferenceManager.prototype);
 nassh.PreferenceManager.constructor = nassh.PreferenceManager;
 
+/**
+ * Entry point when loading the nassh preferences.
+ *
+ * @param {function()=} callback Callback when the storage is loaded.
+ */
+nassh.PreferenceManager.prototype.readStorage = function(callback=undefined) {
+  // Handle renaming the "relay-options" field to "nassh-options".
+  // We can probably delete this migration by Dec 2019.
+  const onRead = () => {
+    const profiles = this.get('profile-ids');
+    profiles.forEach((id) => {
+      const profile = this.getProfile(id);
+      const oldName = `${profile.prefix}relay-options`;
+      profile.storage.getItems([oldName], (items) => {
+        if (oldName in items) {
+          profile.set('nassh-options', items[oldName]);
+          profile.storage.removeItem(oldName);
+        }
+      });
+    });
+
+    if (callback) {
+      callback();
+    }
+  };
+
+  lib.PreferenceManager.prototype.readStorage.call(this, onRead);
+};
+
 nassh.PreferenceManager.prototype.createProfile = function() {
   return this.createChild('profile-ids');
 };
@@ -80,10 +109,9 @@ nassh.ProfilePreferenceManager = function(parent, id) {
     ['port', null],
 
     /**
-     * Options string for relay.
-     * Supported values: --use-xhr and --use-ssl.
+     * Options string for nassh itself (e.g. relay settings).
      */
-    ['relay-options', ''],
+    ['nassh-options', ''],
 
     /**
      * The private key file to use as the identity for this extension.

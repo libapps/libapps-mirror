@@ -133,9 +133,9 @@ nassh.CommandInstance.Tests.addTest('parseDestination', function(result, cx) {
 
     // Handle relay settings.
     ['u@h@host', {'user': 'u', 'host': 'h',
-                  'relayOptions': '--proxy-host=host'}],
+                  'nasshOptions': '--proxy-host=host'}],
     ['u@h@host:1234', {'user': 'u', 'host': 'h',
-                       'relayOptions': '--proxy-host=host --proxy-port=1234'}],
+                       'nasshOptions': '--proxy-host=host --proxy-port=1234'}],
 
     // Reject missing usernames.
     ['localhost', false],
@@ -149,7 +149,7 @@ nassh.CommandInstance.Tests.addTest('parseDestination', function(result, cx) {
     } else {
       result.assertEQ(dataSet[1].user, rv.username, dataSet[0]);
       result.assertEQ(dataSet[1].host, rv.hostname, dataSet[0]);
-      result.assertEQ(dataSet[1].relayOptions, rv.relayOptions, dataSet[0]);
+      result.assertEQ(dataSet[1].nasshOptions, rv.nasshOptions, dataSet[0]);
     }
   });
 

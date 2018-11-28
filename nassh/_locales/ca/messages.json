@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "Opcions del servidor de tramesa SSH"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "Opcions del servidor de tramesa SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "Vols torna(r) a connectar, triar una altra (c)onnexió o sortir (x)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "Opció de tramesa desconeguda: $1"
 	},
 	"relay_retry": {

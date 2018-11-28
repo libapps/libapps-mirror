@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "θύρα"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "Επιλογές διακομιστή αναμετάδοσης SSH"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "Επιλογές διακομιστή αναμετάδοσης SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "Θέλετε να κάνετε επανασύνδεση(R), να επιλέξετε(C) άλλη σύνδεση ή να πραγματοποιήσετε έξοδο(X);"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "Άγνωστη επιλογή αναμετάδοσης: $1"
 	},
 	"relay_retry": {

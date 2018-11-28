@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "पोर्ट"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "SSH रिले सर्वर के विकल्प"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "SSH रिले सर्वर के विकल्प"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "फिर से कनेक्ट करें (R), कोई दूसरा कनेक्शन चुनें (C) या बाहर निकलेें (x)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "अज्ञात रिले विकल्प: $1"
 	},
 	"relay_retry": {

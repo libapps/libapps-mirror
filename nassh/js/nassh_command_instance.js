@@ -451,7 +451,7 @@ nassh.CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
     username: prefs.get('username'),
     hostname: prefs.get('hostname'),
     port: prefs.get('port'),
-    relayOptions: prefs.get('relay-options'),
+    nasshOptions: prefs.get('nassh-options'),
     identity: prefs.get('identity'),
     argstr: prefs.get('argstr'),
     terminalProfile: prefs.get('terminal-profile'),
@@ -621,13 +621,13 @@ nassh.CommandInstance.parseDestination = function(destination) {
     return rv;
 
   // Turn the relay URI settings into nassh command line options.
-  let relayOptions;
+  let nasshOptions;
   if (rv.relayHostname !== undefined) {
-    relayOptions = '--proxy-host=' + rv.relayHostname;
+    nasshOptions = '--proxy-host=' + rv.relayHostname;
     if (rv.relayPort !== undefined)
-      relayOptions += ' --proxy-port=' + rv.relayPort;
+      nasshOptions += ' --proxy-port=' + rv.relayPort;
   }
-  rv.relayOptions = relayOptions;
+  rv.nasshOptions = nasshOptions;
 
   // If the fingerprint is set, maybe add it to the known keys list.
 
@@ -769,21 +769,21 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     return;
   }
 
-  if (params.relayOptions) {
+  if (params.nasshOptions) {
     try {
-      var relay = new nassh.GoogleRelay(this.io, params.relayOptions,
+      var relay = new nassh.GoogleRelay(this.io, params.nasshOptions,
                                         this.terminalLocation,
                                         this.storage);
     } catch (e) {
-      this.io.println(nassh.msg('RELAY_OPTIONS_ERROR', [e]));
+      this.io.println(nassh.msg('NASSH_OPTIONS_ERROR', [e]));
       this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
       return;
     }
 
     // TODO(rginda): The `if (relay.proxyHost)` test is part of a goofy hack
-    // to add the --ssh-agent param to the relay-options pref.  --ssh-agent has
+    // to add the --ssh-agent param to the nassh-options pref.  --ssh-agent has
     // no business being a relay option, but it's the best of the bad options.
-    // In the future perfect world, 'relay-options' would probably be a generic
+    // In the future perfect world, 'nassh-options' would probably be a generic
     // 'nassh-options' value and the parsing code wouldn't be part of the relay
     // class.
     //

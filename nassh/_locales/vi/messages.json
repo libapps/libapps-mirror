@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "cổng"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "Tùy chọn về máy chủ chuyển tiếp SSH"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "Tùy chọn về máy chủ chuyển tiếp SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "Kết nối lại (R), Chọn một kết nối khác (C) hoặc Thoát (X)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "Tùy chọn chuyển tiếp không xác định: $1"
 	},
 	"relay_retry": {

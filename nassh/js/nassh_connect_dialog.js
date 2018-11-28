@@ -240,7 +240,7 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
                    this.maybeDirty_.bind(this, name));
     });
 
-  ['description', 'username', 'hostname', 'port', 'relay-options',
+  ['description', 'username', 'hostname', 'port', 'nassh-options',
    'identity', 'argstr', 'terminal-profile', 'mount-path',
   ].forEach((name) => {
       addListeners(this.$f(name), ['focus', 'blur'],
@@ -365,7 +365,7 @@ nassh.ConnectDialog.prototype.save = function() {
 
   var prefs = this.currentProfileRecord_.prefs;
 
-  ['description', 'username', 'hostname', 'port', 'relay-options',
+  ['description', 'username', 'hostname', 'port', 'nassh-options',
    'identity', 'argstr', 'terminal-profile', 'mount-path',
   ].forEach((name) => {
        if (name == 'identity' && this.$f('identity').selectedIndex === 0)
@@ -484,7 +484,7 @@ nassh.ConnectDialog.prototype.maybeDirty_ = function(fieldName) {
  * to bulk-default.
  */
 nassh.ConnectDialog.prototype.maybeCopyPlaceholders_ = function() {
-  ['description', 'username', 'hostname', 'port', 'relay-options',
+  ['description', 'username', 'hostname', 'port', 'nassh-options',
   ].forEach(this.maybeCopyPlaceholder_.bind(this));
   this.syncButtons_();
 };
@@ -515,8 +515,8 @@ nassh.ConnectDialog.prototype.updatePlaceholders_ = function(fieldName) {
   }
 
   // In either case, the hostname might have changed, so cascade updates into
-  // the relay options.
-  this.updateRelayOptionsPlaceholder_();
+  // the nassh options.
+  this.updateNasshOptionsPlaceholder_();
 };
 
 /**
@@ -550,13 +550,13 @@ nassh.ConnectDialog.prototype.updateDetailPlaceholders_ = function() {
 };
 
 /**
- * Update the relay-options placeholder.
+ * Update the nassh-options placeholder.
  */
-nassh.ConnectDialog.prototype.updateRelayOptionsPlaceholder_ = function() {
+nassh.ConnectDialog.prototype.updateNasshOptionsPlaceholder_ = function() {
   // Google-specific relay hack.  This feels dirty.  We can revert this once
   // we support managed default configs.  http://b/28205376 & related docs.
-  let value = this.msg('FIELD_RELAY_OPTIONS_PLACEHOLDER');
-  if (!this.$f('relay-options').value) {
+  let value = this.msg('FIELD_NASSH_OPTIONS_PLACEHOLDER');
+  if (!this.$f('nassh-options').value) {
     let hostname = this.$f('hostname').value;
     if (!hostname)
       hostname = this.$f('hostname').placeholder;
@@ -566,7 +566,7 @@ nassh.ConnectDialog.prototype.updateRelayOptionsPlaceholder_ = function() {
     else if (hostname.endsWith('.c.googlers.com'))
       value = '--config=google --proxy-host=sup-ssh-relay.corp.google.com';
   }
-  this.$f('relay-options', 'placeholder', value);
+  this.$f('nassh-options', 'placeholder', value);
 };
 
 /**
@@ -595,7 +595,7 @@ nassh.ConnectDialog.prototype.updateDescriptionPlaceholder_ = function() {
  * Sync the form with the current profile record.
  */
 nassh.ConnectDialog.prototype.syncForm_ = function() {
-  ['description', 'username', 'hostname', 'port', 'argstr', 'relay-options',
+  ['description', 'username', 'hostname', 'port', 'argstr', 'nassh-options',
    'identity', 'terminal-profile', 'mount-path',
   ].forEach((n) => {
       var emptyValue = '';

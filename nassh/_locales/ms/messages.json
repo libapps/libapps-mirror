@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "Pilihan pelayan geganti SSH"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "Pilihan pelayan geganti SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "Sambung semula (R), Pilih sambungan lain (C) atau Keluar (x)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "Pilihan geganti tidak diketahui: $1"
 	},
 	"relay_retry": {

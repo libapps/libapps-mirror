@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "SSH రిలే సర్వర్ ఎంపికలు"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "SSH రిలే సర్వర్ ఎంపికలు"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "తెలియని రిలే ఎంపిక: $1"
 	},
 	"relay_retry": {

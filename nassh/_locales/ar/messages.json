@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "المنفذ"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "‏خيارات خادم ترحيل SSH"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "‏خيارات خادم ترحيل SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "‏هل تريد إعادة الاتصال (R) أم اختيار اتصال آخر أم الخروج (X)؟"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "خيار ترحيل غير معروف: $1"
 	},
 	"relay_retry": {

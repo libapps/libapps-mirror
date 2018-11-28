@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "Možnosti servera typu relay SSH"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "Možnosti servera typu relay SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "Znova pripojiť (R), vybrať iné pripojenie (C) alebo ukončiť (X)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "Neznáma možnosť prenosu: $1"
 	},
 	"relay_retry": {

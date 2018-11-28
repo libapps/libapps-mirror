@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "போர்ட்"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "SSH ரிலே சேவையக விருப்பங்கள்"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "SSH ரிலே சேவையக விருப்பங்கள்"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "மீண்டும் இணைக்கவா(R), வேறு இணைப்பைத் தேர்வு செய்யவா(C) அல்லது வெளியேறவா(x)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "தெரியாத ரிலே விருப்பம்: $1"
 	},
 	"relay_retry": {

@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "bağlantı noktası"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "SSH geçiş sunucusu seçenekleri"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "SSH geçiş sunucusu seçenekleri"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "(R) Yeniden bağlan, (C) Başka bir bağlantı seç veya (X) Çık?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "Bilinmeyen geçiş seçeneği: $1"
 	},
 	"relay_retry": {

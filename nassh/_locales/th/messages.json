@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "พอร์ต"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "ตัวเลือกรีเลย์เซิร์ฟเวอร์ SSH"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "ตัวเลือกรีเลย์เซิร์ฟเวอร์ SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "ต้องการเชื่อมต่ออีกครั้ง (R) เลือกการเชื่อมต่ออื่น (C) หรือออก (X)"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "ตัวเลือกรีเลย์ที่ไม่รู้จัก: $1"
 	},
 	"relay_retry": {

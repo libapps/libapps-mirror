@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "puerto"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "Opciones del servidor de transmisión SSH"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "Opciones del servidor de transmisión SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "¿Quieres volver a establecer conexión (R), elegir otra conexión (C) o salir (X)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "Opción de transmisión desconocida: $1"
 	},
 	"relay_retry": {

@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "Mga opsyon ng SSH relay server"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "Mga opsyon ng SSH relay server"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "Muling Kumonekta (R), Pumili ng ibang konesyon (C), o Lumabas (X)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "Hindi kilalang opsyon ng pag-relay: $1"
 	},
 	"relay_retry": {

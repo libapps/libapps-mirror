@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "prievadas"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "SSH perdavimo serverio parinktys"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "SSH perdavimo serverio parinktys"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "Iš naujo prisijungti (R), pasirinkti kitą ryšį (C) ar išeiti (X)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "Nežinoma perdavimo parinktis: $1"
 	},
 	"relay_retry": {

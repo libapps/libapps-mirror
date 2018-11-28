@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "порт"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "Опције SSH сервера за прослеђивање"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "Опције SSH сервера за прослеђивање"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "Желите ли поново да се повежете (R), да изаберете неку другу везу (C) или да изађете из процеса (x)?"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "Непозната опција прослеђивања: $1"
 	},
 	"relay_retry": {

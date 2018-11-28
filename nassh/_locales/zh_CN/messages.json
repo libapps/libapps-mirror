@@ -89,10 +89,10 @@
 	"field_port_placeholder": {
 		"message": "端口"
 	},
-	"field_relay_options_aria_label": {
+	"field_nassh_options_aria_label": {
 		"message": "SSH 中继服务器选项"
 	},
-	"field_relay_options_placeholder": {
+	"field_nassh_options_placeholder": {
 		"message": "SSH 中继服务器选项"
 	},
 	"field_terminal_profile_placeholder": {
@@ -392,7 +392,7 @@
 	"reconnect_message": {
 		"message": "重新连接(R)、选择其他连接(C)或退出(E)？"
 	},
-	"relay_options_error": {
+	"nassh_options_error": {
 		"message": "未知的中继选项：$1"
 	},
 	"relay_retry": {
