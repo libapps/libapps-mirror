@@ -769,60 +769,46 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     return;
   }
 
-  if (params.nasshOptions) {
-    try {
-      var relay = new nassh.GoogleRelay(this.io, params.nasshOptions,
-                                        this.terminalLocation,
-                                        this.storage);
-    } catch (e) {
-      this.io.println(nassh.msg('NASSH_OPTIONS_ERROR', [e]));
-      this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
-      return;
-    }
-
-    // TODO(rginda): The `if (relay.proxyHost)` test is part of a goofy hack
-    // to add the --ssh-agent param to the nassh-options pref.  --ssh-agent has
-    // no business being a relay option, but it's the best of the bad options.
-    // In the future perfect world, 'nassh-options' would probably be a generic
-    // 'nassh-options' value and the parsing code wouldn't be part of the relay
-    // class.
-    //
-    // For now, we let the relay code parse the options, and if the resulting
-    // options don't include a proxyHost then we don't have an actual relay.
-    // We may have a --ssh-agent argument though, which we'll pull out of
-    // the relay object later.
-    if (relay.proxyHost) {
-      this.relay_ = relay;
-
-      this.io.println(nassh.msg(
-          'INITIALIZING_RELAY',
-          [this.relay_.proxyHost + ':' + this.relay_.proxyPort]));
-
-      if (!this.relay_.init()) {
-        // A false return value means we have to redirect to complete
-        // initialization.  Bail out of the connect for now.  We'll resume it
-        // when the relay is done with its redirect.
-
-        // If we're going to have to redirect for the relay then we should make
-        // sure not to re-prompt for the destination when we return.
-        this.storage.setItem('nassh.pendingRelay', 'yes');
-
-        // If we're trying to mount the connection, remember it.
-        this.storage.setItem('nassh.isMount', this.isMount);
-
-        this.relay_.redirect();
-        return;
-      }
-    }
-
-    if (relay.options['--ssh-agent'])
-      params.authAgentAppID = relay.options['--ssh-agent'];
-    params.authAgentForward = relay.options['auth-agent-forward'];
-
-    if (relay.options['--ssh-client-version'])
-      this.sshClientVersion_ = relay.options['--ssh-client-version'];
+  // First tokenize the options into an object we can work with more easily.
+  let options = {};
+  try {
+    options = nassh.CommandInstance.tokenizeOptions(params.nasshOptions);
+  } catch (e) {
+    this.io.println(nassh.msg('NASSH_OPTIONS_ERROR', [e]));
+    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+    return;
   }
 
+  // If the user has requested a proxy relay, load it up.
+  if (options['--proxy-host']) {
+    this.relay_ = new nassh.GoogleRelay(this.io, options,
+                                        this.terminalLocation,
+                                        this.storage);
+
+    this.io.println(nassh.msg(
+        'INITIALIZING_RELAY',
+        [this.relay_.proxyHost + ':' + this.relay_.proxyPort]));
+
+    if (!this.relay_.init()) {
+      // A false return value means we have to redirect to complete
+      // initialization.  Bail out of the connect for now.  We'll resume it
+      // when the relay is done with its redirect.
+
+      // If we're going to have to redirect for the relay then we should make
+      // sure not to re-prompt for the destination when we return.
+      this.storage.setItem('nassh.pendingRelay', 'yes');
+
+      // If we're trying to mount the connection, remember it.
+      this.storage.setItem('nassh.isMount', this.isMount);
+
+      this.relay_.redirect();
+      return;
+    }
+  }
+
+  if (options['--ssh-client-version']) {
+    this.sshClientVersion_ = options['--ssh-client-version'];
+  }
   if (!this.sshClientVersion_.match(/^[a-zA-Z0-9.-]+$/)) {
     this.io.println(nassh.msg('UNKNOWN_SSH_CLIENT_VERSION',
                               [this.sshClientVersion_]));
@@ -830,6 +816,9 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     return;
   }
 
+  if (options['--ssh-agent']) {
+    params.authAgentAppID = options['--ssh-agent'];
+  }
   this.authAgentAppID_ = params.authAgentAppID;
   // If the agent app ID is not just an app ID, we parse it for the IDs of
   // built-in agent backends based on nassh.agent.Backend.
@@ -866,8 +855,9 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
 
   if (params.authAgentAppID) {
     argv.authAgentAppID = params.authAgentAppID;
-    if (params.authAgentForward)
+    if (options['auth-agent-forward']) {
       argv.arguments.push('-A');
+    }
   }
 
   // Automatically send any env vars the user has set.  This does not guarantee
@@ -911,6 +901,55 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
       this.sftpClient.onInit = this.onSftpInitialised.bind(this);
     }
   });
+};
+
+/**
+ * Turn the nassh option string into an object.
+ *
+ * @param {string} optionString The set of --long options to parse.
+ * @return {Object} A map of --option to its value.
+ */
+nassh.CommandInstance.tokenizeOptions = function(optionString) {
+  let rv = {};
+
+  const optionList = optionString.trim().split(/\s+/g);
+  for (let i = 0; i < optionList.length; ++i) {
+    // Make sure it's a long option first.
+    const option = optionList[i];
+    if (!option.startsWith('--')) {
+      throw Error(option);
+    }
+
+    // Split apart the option if there is an = in it.
+    let flag, value;
+    const pos = option.indexOf('=');
+    if (pos == -1) {
+      // If there is no = then it's a boolean flag (which --no- disables).
+      value = !option.startsWith('--no-');
+      flag = option.slice(value ? 2 : 5);
+    } else {
+      flag = option.slice(2, pos);
+      value = option.slice(pos + 1);
+    }
+
+    rv[`--${flag}`] = value;
+  }
+
+  // Handle various named "configs" we have.
+  if (rv['--config'] == 'google') {
+    rv = Object.assign({
+      'auth-agent-forward': true,
+      '--proxy-host': 'ssh-relay.corp.google.com',
+      '--proxy-port': '443',
+      '--use-ssl': true,
+      '--report-ack-latency': true,
+      '--report-connect-attempts': true,
+      '--relay-protocol': 'v2',
+      '--ssh-agent': nassh.GoogleRelay.defaultGnubbyExtension,
+    }, rv);
+  }
+
+  return rv;
 };
 
 /**

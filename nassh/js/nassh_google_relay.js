@@ -68,90 +68,20 @@ lib.rtdep('lib.f');
  * 6. Writes are queued up and sent to /write.
  */
 
-nassh.GoogleRelay = function(io, optionString, relayLocation, relayStorage) {
+nassh.GoogleRelay = function(io, options, relayLocation, relayStorage) {
   this.io = io;
-  this.options = nassh.GoogleRelay.parseOptionString(optionString);
-  this.proxyHost = this.options['--proxy-host'];
-  this.proxyPort = this.options['--proxy-port'] || 8022;
-  this.useSecure = this.options['--use-ssl'];
-  this.useWebsocket = !this.options['--use-xhr'];
-  this.reportAckLatency = this.options['--report-ack-latency'];
-  this.reportConnectAttempts = this.options['--report-connect-attempts'];
-  this.relayProtocol = this.options['--relay-protocol'];
+  this.proxyHost = options['--proxy-host'];
+  this.proxyPort = options['--proxy-port'] || 8022;
+  this.useSecure = options['--use-ssl'];
+  this.useWebsocket = !options['--use-xhr'];
+  this.reportAckLatency = options['--report-ack-latency'];
+  this.reportConnectAttempts = options['--report-connect-attempts'];
+  this.relayProtocol = options['--relay-protocol'];
   this.relayServer = null;
   this.relayServerSocket = null;
   this.location = relayLocation;
   this.storage = relayStorage;
 };
-
-nassh.GoogleRelay.parseOptionString = function(optionString) {
-  var rv = {};
-
-  var optionList = optionString.trim().split(/\s+/g);
-  for (var i = 0; i < optionList.length; i++) {
-    // Make sure it's a long option first.
-    const option = optionList[i];
-    if (!option.startsWith('--'))
-      throw Error(option);
-
-    // Split apart the option if there is an = in it.
-    let flag, value;
-    const pos = option.indexOf('=');
-    if (pos == -1) {
-      // If there is no = then it's a boolean flag (which --no- disables).
-      value = !option.startsWith('--no-');
-      flag = option.slice(value ? 2 : 5);
-    } else {
-      flag = option.slice(2, pos);
-      value = option.slice(pos + 1);
-    }
-
-    // Verify it's an option we support.
-    if (!nassh.GoogleRelay.parseOptionString.validOptions_.includes(flag))
-      throw Error(option);
-
-    rv[`--${flag}`] = value;
-  }
-
-  if (rv['--config'] == 'google') {
-    rv['auth-agent-forward'] = true;
-    if (!('--proxy-host' in rv))
-      rv['--proxy-host'] = 'ssh-relay.corp.google.com';
-    if (!('--proxy-port' in rv))
-      rv['--proxy-port'] = '443';
-    if (!('--use-ssl' in rv))
-      rv['--use-ssl'] = true;
-    if (!('--report-ack-latency' in rv))
-      rv['--report-ack-latency'] = true;
-    if (!('--report-connect-attempts' in rv))
-      rv['--report-connect-attempts'] = true;
-    if (!('--relay-protocol' in rv))
-      rv['--relay-protocol'] = 'v2';
-    if (!('--ssh-agent' in rv))
-      rv['--ssh-agent'] = nassh.GoogleRelay.defaultGnubbyExtension;
-  }
-
-  return rv;
-};
-
-/**
- * All possible flags that may show up in the relay options.
- * Currently this covers all options even non-Google relay ones.
- *
- * Note: Keep this in sync with nassh_connect_dialog.html.
- */
-nassh.GoogleRelay.parseOptionString.validOptions_ = [
-  'config',
-  'proxy-host',
-  'proxy-port',
-  'relay-protocol',
-  'report-ack-latency',
-  'report-connect-attempts',
-  'ssh-agent',
-  'ssh-client-version',
-  'use-ssl',
-  'use-xhr',
-];
 
 /**
  * Returns the pattern for the cookie server URL.

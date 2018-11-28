@@ -155,3 +155,26 @@ nassh.CommandInstance.Tests.addTest('parseDestination', function(result, cx) {
 
   result.pass();
 });
+
+/**
+ * Verify parsing of command lines.
+ */
+nassh.CommandInstance.Tests.addTest('tokenizeOptions', function(result, cx) {
+  let rv;
+
+  // Check the meaning of the options.
+  rv = nassh.CommandInstance.tokenizeOptions(
+      // Check plain options.
+      '--report-ack-latency ' +
+      // Check options w/values.
+      '--config=google ' +
+      // Check off options.
+      '--no-use-xhr '
+  );
+  result.assertEQ('object', typeof rv);
+  result.assertEQ(true, rv['--report-ack-latency']);
+  result.assertEQ('google', rv['--config']);
+  result.assertEQ(false, rv['--use-xhr']);
+
+  result.pass();
+});
