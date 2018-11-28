@@ -604,12 +604,22 @@ lib.PreferenceManager.prototype.resetAll = function() {
  * @param {*} b A value to compare.
  */
 lib.PreferenceManager.prototype.diff = function(a, b) {
-  // If the types are different, or the type is not a simple primitive one.
-  if ((typeof a) !== (typeof b) ||
-      !(/^(undefined|boolean|number|string)$/.test(typeof a))) {
+  // If the types are different.
+  if ((typeof a) !== (typeof b)) {
     return true;
   }
 
+  // Or if the type is not a simple primitive one.
+  if (!(/^(undefined|boolean|number|string)$/.test(typeof a))) {
+    // Special case the null object.
+    if (a === null && b === null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  // Do a normal compare for primitive types.
   return a !== b;
 };
 
