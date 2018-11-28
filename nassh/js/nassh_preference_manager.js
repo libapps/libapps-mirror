@@ -80,16 +80,6 @@ nassh.ProfilePreferenceManager = function(parent, id) {
     ['port', null],
 
     /**
-     * The relay host, hardcoded to use nassh.GoogleRelay at the moment.
-     */
-    ['relay-host', ''],
-
-    /**
-     * The optional relay port.
-     */
-    ['relay-port', ''],
-
-    /**
      * Options string for relay.
      * Supported values: --use-xhr and --use-ssl.
      */
@@ -129,37 +119,3 @@ nassh.ProfilePreferenceManager = function(parent, id) {
 nassh.ProfilePreferenceManager.prototype =
     Object.create(lib.PreferenceManager.prototype);
 nassh.ProfilePreferenceManager.constructor = nassh.ProfilePreferenceManager;
-
-nassh.ProfilePreferenceManager.prototype.readStorage = function(opt_callback) {
-  var appendOption = (str) => {
-    var options = this.get('relay-options');
-    if (options) {
-      options += ' ' + str;
-    } else {
-      options = str;
-    }
-
-    this.set('relay-option', options);
-  };
-
-  var onRead = () => {
-    var host = this.get('relay-host');
-    if (host) {
-      console.warn('Merging relay-host preference with relay-options');
-      this.reset('relay-host');
-      appendOption('--proxy-host=' + host);
-    }
-
-    var port = this.get('relay-port');
-    if (port) {
-      this.reset('relay-port');
-      console.warn('Merging relay-host preference with relay-options');
-      appendOption('--proxy-port=' + port);
-    }
-
-    if (opt_callback)
-      opt_callback();
-  };
-
-  lib.PreferenceManager.prototype.readStorage.call(this, onRead);
-};
