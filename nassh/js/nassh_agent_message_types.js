@@ -26,6 +26,7 @@ nassh.agent.messages.Numbers = {
   AGENT_IDENTITIES_ANSWER: 12,
   AGENTC_SIGN_REQUEST: 13,
   AGENT_SIGN_RESPONSE: 14,
+  AGENT_PUBLIC_KEY_RESPONSE: 114,
 };
 
 /**
@@ -105,6 +106,62 @@ nassh.agent.messages
 };
 
 /**
+ * Read an AGENT_PUBLIC_KEY_RESPONSE request.
+ *
+ * This is a Google extension.
+ *
+ * @param {!nassh.agent.Message} message A message of type AGENT_PUBLIC_KEY_RESPONSE.
+ */
+nassh.agent.messages
+    .readers_[nassh.agent.messages.Numbers.AGENT_PUBLIC_KEY_RESPONSE] =
+    function(message) {
+  // SSH_AGENTC_PUBLIC_KEY_RESPONSE packet format.
+  //   byte    code
+  //   uint32  num_records
+  //   string  challenge
+  //   string  publickey
+  //   string  ecdh
+  //   string  devicekey
+  //   string  devicefp
+  //   string  signature_format
+  //   string  signature_blob
+  //   string  meta
+
+  message.fields.numRecords = message.readUint32();
+  message.fields.challenge = message.readString();
+  message.fields.publicKeyRaw = message.readString();
+  message.fields.ecdh = message.readString();
+  message.fields.deviceKey = message.readString();
+  message.fields.deviceFp = message.readString();
+  message.fields.signature = message.readString();
+  if (!message.eom()) {
+    message.fields.meta = message.readString();
+  } else {
+    message.fields.meta = [];
+  }
+  if (!message.eom()) {
+    throw new Error(
+        'AGENT_PUBLIC_KEY_RESPONSE: message body longer than expected');
+  }
+
+  const pk = new nassh.agent.Message(0, message.fields.publicKeyRaw);
+  message.fields.publicKeyAlgo =
+      lib.codec.codeUnitArrayToString(pk.readString());
+  if (message.fields.publicKeyAlgo.startsWith('ecdsa')) {
+    message.fields.publicKeyCurve =
+        lib.codec.codeUnitArrayToString(pk.readString());
+    message.fields.publicKeyBytes = pk.readString();
+    if (message.fields.publicKeyCurve == 'nistp256') {
+      const p256 = new nassh.agent.Message(0, message.fields.publicKeyBytes);
+      message.fields.publicKeyX = message.fields.publicKeyBytes.slice(1, 33);
+      message.fields.publicKeyY = message.fields.publicKeyBytes.slice(33);
+    }
+  }
+
+  return message;
+};
+
+/**
  * Map message types to writer function.
  *
  * @type {Object<!nassh.agent.messages.Numbers, function(...[*]):
@@ -176,6 +233,26 @@ nassh.agent.messages
   const message =
       new nassh.agent.Message(nassh.agent.messages.Numbers.AGENT_SIGN_RESPONSE);
   message.writeString(signature);
+  return message;
+};
+
+/**
+ * Write an AGENTC_SIGN_REQUEST response.
+ * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.5
+ *
+ * @param {!Uint8Array} keyBlob The public key.
+ * @param {!Uint8Array} data The data to sign.
+ * @param {number=} flags Command flags.
+ * @returns {!nassh.agent.Message}
+ */
+nassh.agent.messages
+    .writers_[nassh.agent.messages.Numbers.AGENTC_SIGN_REQUEST] = function(
+    keyBlob, data, flags=0) {
+  const message =
+      new nassh.agent.Message(nassh.agent.messages.Numbers.AGENTC_SIGN_REQUEST);
+  message.writeString(keyBlob);
+  message.writeString(data);
+  message.writeUint32(flags);
   return message;
 };
 

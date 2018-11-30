@@ -298,6 +298,12 @@ All other HTTP errors are ignored.
 Data will continue to be sent via new `/write` requests until [HTTP 410] is
 returned.
 
+## SSH-FE
+
+This uses the id `ssh-fe@google.com` (e.g. when using `--proxy-mode=`).
+
+TODO
+
 
 [method field]: #corp-relay-method
 [/connect]: #corp-relay-connect

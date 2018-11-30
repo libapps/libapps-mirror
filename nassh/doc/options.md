@@ -20,6 +20,7 @@ are extensions designed by Google rather than IETF standards.
 Do not confuse them with e-mail addresses.
 
 The default value is `corp-relay@google.com`.
+You can also specify `ssh-fe@google.com`.
 
 ## `--proxy-host=<host>`
 
