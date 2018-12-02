@@ -62,9 +62,9 @@ popup.prototype.openLink_ = function(e) {
     // Should we offer a way to open tabs in the background?
     chrome.tabs.create({url: url, active: true});
   } else {
-    window.open(url, '',
-                'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-                'minimizable=yes,width=900,height=600');
+    lib.f.openWindow(url, '',
+                     'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
+                     'minimizable=yes,width=900,height=600');
   }
 
   // Close the popup.  It happens automatically on some systems (e.g. Linux),

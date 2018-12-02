@@ -54,13 +54,13 @@ window.onload = function() {
        function() { terminal.reset(); }],
       [nassh.msg('NEW_WINDOW_MENU_LABEL'),
        function() {
-         window.open(lib.f.getURL('/html/nassh.html'), '',
-                     'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-                     `minimizable=yes,width=${window.innerWidth},` +
-                     `height=${window.innerHeight}`);
+         lib.f.openWindow(lib.f.getURL('/html/nassh.html'), '',
+                          'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
+                          `minimizable=yes,width=${window.innerWidth},` +
+                          `height=${window.innerHeight}`);
        }],
       [nassh.msg('FAQ_MENU_LABEL'),
-       function() { window.open('https://goo.gl/muppJj', '_blank'); }],
+       function() { lib.f.openWindow('https://goo.gl/muppJj', '_blank'); }],
       [nassh.msg('CLEAR_KNOWN_HOSTS_MENU_LABEL'),
        function() { terminal.command.removeAllKnownHosts(); }],
       [nassh.msg('OPTIONS_BUTTON_LABEL'),

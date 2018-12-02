@@ -109,9 +109,9 @@ nassh.External.COMMANDS.crosh = (request, sender, sendResponse) => {
     return;
   }
 
-  window.open(lib.f.getURL('/html/crosh.html'), '',
-              'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-              `minimizable=yes,width=${width},height=${height}`);
+  lib.f.openWindow(lib.f.getURL('/html/crosh.html'), '',
+                   'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
+                   `minimizable=yes,width=${width},height=${height}`);
   sendResponse({error: false, message: 'openCrosh'});
 };
 

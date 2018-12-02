@@ -171,9 +171,9 @@ nassh.App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
         chrome.tabs.remove(tabs[0].id);
       });
       // We'll abuse this to open a window instead of a tab.
-      window.open(url, '',
-                  'chrome=no,close=yes,resize=yes,minimizable=yes,' +
-                  'scrollbars=yes,width=900,height=600,noopener');
+      lib.f.openWindow(url, '',
+                       'chrome=no,close=yes,resize=yes,minimizable=yes,' +
+                       'scrollbars=yes,width=900,height=600,noopener');
       break;
   }
 };
@@ -234,9 +234,9 @@ nassh.App.prototype.onLaunched = function(e) {
       'id': 'mainWindow',
     });
   } else {
-    window.open(lib.f.getURL('/html/nassh.html'), '',
-                'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-                `minimizable=yes,width=${width},height=${height}`);
+    lib.f.openWindow(lib.f.getURL('/html/nassh.html'), '',
+                     'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
+                     `minimizable=yes,width=${width},height=${height}`);
   }
 };
 

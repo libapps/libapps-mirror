@@ -184,7 +184,9 @@ nassh.importPreferences = function(prefsObject, opt_onComplete) {
  * Create a new window to the options page for customizing preferences.
  */
 nassh.openOptionsPage = function() {
-  const fallback = () => window.open('/html/nassh_preferences_editor.html');
+  const fallback = () => {
+    lib.f.openWindow('/html/nassh_preferences_editor.html');
+  };
 
   if (window.chrome && chrome.runtime && chrome.runtime.openOptionsPage) {
     // This is a bit convoluted because, in some scenarios (e.g. crosh), the

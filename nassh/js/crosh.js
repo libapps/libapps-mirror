@@ -89,13 +89,13 @@ Crosh.init = function() {
     [nassh.msg('NEW_WINDOW_MENU_LABEL'),
      function() {
        // Preserve the full URI in case it has args like for vmshell.
-       window.open(document.location.href, '',
-                   'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-                   `minimizable=yes,width=${window.innerWidth},` +
-                   `height=${window.innerHeight}`);
+       lib.f.openWindow(document.location.href, '',
+                        'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
+                        `minimizable=yes,width=${window.innerWidth},` +
+                        `height=${window.innerHeight}`);
      }],
     [nassh.msg('FAQ_MENU_LABEL'),
-     function() { window.open('https://goo.gl/muppJj', '_blank'); }],
+     function() { lib.f.openWindow('https://goo.gl/muppJj', '_blank'); }],
     [nassh.msg('OPTIONS_BUTTON_LABEL'),
      function() { nassh.openOptionsPage(); }],
   ]);

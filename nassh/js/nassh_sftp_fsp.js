@@ -542,7 +542,7 @@ nassh.sftp.fsp.copyDirectory = function(sourcePath, targetPath, client) {
  * the user clicks "Add New Service" from the File App.
  */
 nassh.sftp.fsp.onMountRequested = function(options, onSuccess, onError) {
-  window.open('html/nassh.html');
+  lib.f.openWindow('html/nassh.html');
 };
 
 /**
