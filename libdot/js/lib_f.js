@@ -392,3 +392,34 @@ lib.f.lastError = function(defaultMsg = null) {
   else
     return defaultMsg;
 };
+
+/**
+ * Just like window.open, but enforce noopener.
+ *
+ * If we're not careful, the website we open will have access to use via its
+ * window.opener field.  Newer browser support putting 'noopener' into the
+ * features argument, but there are many which still don't.  So hack it.
+ *
+ * @param {string=} url The URL to point the new window to.
+ * @param {string=} name The name of the new window.
+ * @param {string=} features The window features to enable.
+ * @return {Window} The newly opened window.
+ */
+lib.f.openWindow = function(url, name=undefined, features=undefined) {
+  // We create the window first without the URL loaded.
+  const win = window.open(undefined, name, features);
+
+  // If the system is blocking window.open, don't crash.
+  if (win !== null) {
+    // Clear the opener setting before redirecting.
+    win.opener = null;
+
+    // Now it's safe to redirect.  Skip this step if the url is not set so we
+    // mimic the window.open behavior more precisely.
+    if (url) {
+      win.location = url;
+    }
+  }
+
+  return win;
+};

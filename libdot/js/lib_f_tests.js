@@ -171,3 +171,14 @@ lib.f.Tests.addTest('lastError', function(result, cx) {
 
   result.pass();
 });
+
+/**
+ * Simple smoke test.  The runtime seems to block any attempts to open windows
+ * (probably because the code wasn't triggered by user interaction), so we can't
+ * actually test too much behavior here :/.
+ */
+lib.f.Tests.addTest('openWindow', function(result, cx) {
+  const win = lib.f.openWindow();
+  result.assertEQ(null, win);
+  result.pass();
+});
