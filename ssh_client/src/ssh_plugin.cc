@@ -9,6 +9,7 @@
 #include <resolv.h>
 
 #include "ppapi/cpp/module.h"
+#include "ppapi/cpp/var_array_buffer.h"
 
 #include "file_system.h"
 
@@ -372,6 +373,17 @@ void SshPluginInstance::OnRead(const pp::VarArray& args) {
     int res = b64_pton(str.c_str(), (unsigned char*)&buf[0], buf.size());
     assert(res >= 0);
     it->second->OnRead(&buf[0], res);
+  } else if (data.is_array()) {
+    const pp::VarArray arr(data);
+    std::vector<char> buf(arr.GetLength());
+    for (size_t i = 0; i < buf.size(); ++i)
+      buf[i] = arr.Get(i).AsInt();
+    it->second->OnRead(&buf[0], buf.size());
+  } else if (data.is_array_buffer()) {
+    pp::VarArrayBuffer arr(data);
+    const char* buf = static_cast<char*>(arr.Map());
+    it->second->OnRead(buf, arr.ByteLength());
+    arr.Unmap();
   } else {
     PrintLogImpl(0, "onRead: invalid data argument (not string or array)\n");
   }
