@@ -851,7 +851,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   if (this.isSftp)
     argv.subsystem = 'sftp';
 
-  argv.arguments = ['-C'];  // enable compression
+  argv.arguments = [];
 
   if (params.authAgentAppID) {
     argv.authAgentAppID = params.authAgentAppID;
