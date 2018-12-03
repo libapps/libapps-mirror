@@ -11,8 +11,8 @@
 #include "ppapi/cpp/completion_callback.h"
 #include "ppapi/cpp/instance.h"
 #include "ppapi/cpp/var.h"
-
-#include "json/value.h"
+#include "ppapi/cpp/var_array.h"
+#include "ppapi/cpp/var_dictionary.h"
 
 #include "pthread_helpers.h"
 #include "file_system.h"
@@ -43,20 +43,20 @@ class SshPluginInstance : public pp::Instance,
  private:
   typedef std::map<int, InputInterface*> InputStreams;
 
-  void StartSession(const Json::Value& args);
-  void OnOpen(const Json::Value& args);
-  void OnRead(const Json::Value& args);
-  void OnWriteAcknowledge(const Json::Value& args);
-  void OnClose(const Json::Value& args);
-  void OnReadReady(const Json::Value& args);
-  void OnResize(const Json::Value& args);
-  void OnExitAcknowledge(const Json::Value& args);
+  void StartSession(const pp::VarArray& args);
+  void OnOpen(const pp::VarArray& args);
+  void OnRead(const pp::VarArray& args);
+  void OnWriteAcknowledge(const pp::VarArray& args);
+  void OnClose(const pp::VarArray& args);
+  void OnReadReady(const pp::VarArray& args);
+  void OnResize(const pp::VarArray& args);
+  void OnExitAcknowledge(const pp::VarArray& args);
 
   void SessionThreadImpl();
   static void* SessionThread(void* arg);
 
-  void Invoke(const std::string& function, const Json::Value& args);
-  void InvokeJS(const std::string& function, const Json::Value& args);
+  void Invoke(const std::string& function, const pp::VarArray& args);
+  void InvokeJS(const std::string& function, const pp::VarArray& args);
 
   void PrintLog(const std::string& msg);
   void PrintLogImpl(int32_t result, const std::string& msg);
@@ -67,7 +67,7 @@ class SshPluginInstance : public pp::Instance,
 
   pp::Core* core_;
   pthread_t openssh_thread_;
-  Json::Value session_args_;
+  pp::VarDictionary session_args_;
   pp::CompletionCallbackFactory<SshPluginInstance> factory_;
   InputStreams streams_;
   FileSystem file_system_;

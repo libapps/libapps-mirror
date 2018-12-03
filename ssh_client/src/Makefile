@@ -68,8 +68,7 @@ PNACL_TRANSLATE:=$(PNACL_TC_ROOT)/bin/pnacl-translate
 # https://code.google.com/p/nativeclient/issues/detail?id=3714
 PNACL_TRANSLATE_FLAGS=-fdata-sections -ffunction-sections --gc-sections \
         --allow-llvm-bitcode-input
-PNACL_LDFLAGS:=-lppapi_cpp -lppapi -lcrypto -lppapi_cpp_private -lnacl_io \
-        -lz -ljsoncpp \
+PNACL_LDFLAGS:=-lppapi_cpp -lppapi -lcrypto -lppapi_cpp_private -lnacl_io -lz \
         -L$(OUTPUT) -L$(NACL_SDK_ROOT)/lib/pnacl/Release --pnacl-disable-abi-check
 
 COMPAT_INC:=-I$(PNACL_TC_ROOT)/le32-nacl/usr/include/glibc-compat

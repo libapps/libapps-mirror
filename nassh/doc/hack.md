@@ -368,7 +368,7 @@ The `nassh.CommandInstance.prototype.sendToPlugin_` function in
 [nassh_command_instance.js] is used to package up and make all the calls.
 Helper functions are also provided in that file to avoid a JS API to callers.
 
-At the lowest level, we pass a JSON string to the plugin.  It has two fields,
+At the lowest level, we pass a dictionary to the plugin.  It has two fields,
 both of which must be specified (even if `arguments` is just `[]`).
 
 * `name`: The function we want to call (as a string).
@@ -407,7 +407,7 @@ The session object currently has these members:
 Here is the API that the NaCl [ssh_client] code uses to communicate with the
 JS layers.
 
-At the lowest level, we pass a JSON string to the JS code.  It has two fields,
+At the lowest level, we pass a dictionary to the JS code.  It has two fields,
 both of which must be specified (even if `arguments` is just `[]`).
 
 * `name`: The function we want to call (as a string).

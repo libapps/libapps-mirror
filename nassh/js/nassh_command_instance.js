@@ -1057,9 +1057,7 @@ nassh.CommandInstance.prototype.createTtyStream = function(
  * @param {Array} arguments The message arguments.
  */
 nassh.CommandInstance.prototype.sendToPlugin_ = function(name, args) {
-  var str = JSON.stringify({name: name, arguments: args});
-
-  this.plugin_.postMessage(str);
+  this.plugin_.postMessage({name: name, arguments: args});
 };
 
 /**
@@ -1159,9 +1157,9 @@ nassh.CommandInstance.prototype.onBeforeUnload_ = function(e) {
  * plugin message into something dispatchMessage_ can digest.
  */
 nassh.CommandInstance.prototype.onPluginMessage_ = function(e) {
-  var msg = JSON.parse(e.data);
-  msg.argv = msg.arguments;
-  this.dispatchMessage_('plugin', this.onPlugin_, msg);
+  // TODO: We should adjust all our callees to avoid this.
+  e.data.argv = e.data.arguments;
+  this.dispatchMessage_('plugin', this.onPlugin_, e.data);
 };
 
 /**

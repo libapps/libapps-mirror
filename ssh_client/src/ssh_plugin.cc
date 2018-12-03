@@ -10,9 +10,6 @@
 
 #include "ppapi/cpp/module.h"
 
-#include "json/reader.h"
-#include "json/writer.h"
-
 #include "file_system.h"
 
 const char kMessageNameAttr[] = "name";
@@ -73,20 +70,23 @@ SshPluginInstance::~SshPluginInstance() {
 }
 
 void SshPluginInstance::HandleMessage(const pp::Var& message_data) {
-  if (message_data.is_string()) {
-    Json::Value root;
-    if (Json::Reader().parse(message_data.AsString(), root) &&
-        root.isObject()) {
-      std::string function = root[kMessageNameAttr].asString();
-      const Json::Value& args = root[kMessageArgumentsAttr];
-      if (!function.empty() && args.isArray())
+  if (message_data.is_dictionary()) {
+    pp::VarDictionary message(message_data);
+    pp::Var function_var = message.Get(kMessageNameAttr);
+    pp::Var args_var = message.Get(kMessageArgumentsAttr);
+
+    if (function_var.is_string() && args_var.is_array()) {
+      const std::string function = function_var.AsString();
+      if (!function.empty()) {
+        const pp::VarArray args(args_var);
         Invoke(function, args);
+      }
     }
   }
 }
 
 void SshPluginInstance::Invoke(const std::string& function,
-                               const Json::Value& args) {
+                               const pp::VarArray& args) {
   if (function == kStartSessionMethodId) {
     StartSession(args);
   } else if (function == kOnOpenFileMethodId ||
@@ -108,18 +108,17 @@ void SshPluginInstance::Invoke(const std::string& function,
 }
 
 void SshPluginInstance::InvokeJS(const std::string& function,
-                                 const Json::Value& args) {
-  Json::Value root;
-  root[kMessageNameAttr] = Json::Value(function);
-  root[kMessageArgumentsAttr] = args;
-  Json::FastWriter writer;
-  std::string json = writer.write(root);
-  PostMessage(pp::Var(json));
+                                 const pp::VarArray& args) {
+  pp::VarDictionary dict;
+  dict.Set(kMessageNameAttr, pp::Var(function));
+  dict.Set(kMessageArgumentsAttr, args);
+  PostMessage(dict);
 }
 
 void SshPluginInstance::PrintLogImpl(int32_t result, const std::string& msg) {
-  Json::Value call_args(Json::arrayValue);
-  call_args.append(msg);
+  pp::VarArray call_args;
+  call_args.SetLength(1);
+  call_args.Set(0, msg);
   InvokeJS(kPrintLogMethodId, call_args);
 }
 
@@ -129,8 +128,9 @@ void SshPluginInstance::PrintLog(const std::string& msg) {
 }
 
 void SshPluginInstance::SendExitCodeImpl(int32_t result, int error) {
-  Json::Value call_args(Json::arrayValue);
-  call_args.append(error);
+  pp::VarArray call_args;
+  call_args.SetLength(1);
+  call_args.Set(0, error);
   InvokeJS(kExitMethodId, call_args);
 }
 
@@ -143,10 +143,11 @@ void SshPluginInstance::SendExitCode(int error) {
 bool SshPluginInstance::OpenFile(int fd, const char* name, int mode,
                                  InputInterface* stream) {
   if (name) {
-    Json::Value call_args(Json::arrayValue);
-    call_args.append(fd);
-    call_args.append(std::string(name));
-    call_args.append(mode);
+    pp::VarArray call_args;
+    call_args.SetLength(3);
+    call_args.Set(0, fd);
+    call_args.Set(1, name);
+    call_args.Set(2, mode);
     InvokeJS(kOpenFileMethodId, call_args);
   }
   assert(streams_.find(fd) == streams_.end());
@@ -156,10 +157,11 @@ bool SshPluginInstance::OpenFile(int fd, const char* name, int mode,
 
 bool SshPluginInstance::OpenSocket(int fd, const char* host, uint16_t port,
                                    InputInterface* stream) {
-  Json::Value call_args(Json::arrayValue);
-  call_args.append(fd);
-  call_args.append(std::string(host));
-  call_args.append(port);
+  pp::VarArray call_args;
+  call_args.SetLength(3);
+  call_args.Set(0, fd);
+  call_args.Set(1, host);
+  call_args.Set(2, port);
   InvokeJS(kOpenSocketMethodId, call_args);
   assert(streams_.find(fd) == streams_.end());
   streams_[fd] = stream;
@@ -168,20 +170,26 @@ bool SshPluginInstance::OpenSocket(int fd, const char* host, uint16_t port,
 
 bool SshPluginInstance::Write(int fd, const char* data, size_t size) {
   const size_t kMaxWriteSize = 24*1024;
-  std::vector<char> buf(kMaxWriteSize * 4 / 3 + 4);
+  pp::VarArray call_args;
+  char buf[kMaxWriteSize * 4 / 3 + 4];
   size_t start = 0;
+
+  call_args.SetLength(2);
+  call_args.Set(0, fd);
+
   while (start < size) {
-    Json::Value call_args(Json::arrayValue);
-    call_args.append(fd);
     size_t chunk_size = ((size - start) <= kMaxWriteSize) ? (size - start)
                                                           : kMaxWriteSize;
+
     int res = b64_ntop((const unsigned char*)data + start, chunk_size,
-                       &buf[0], buf.size());
+                       &buf[0], sizeof(buf));
     if (res <= 0) {
       assert(res > 0);
       return false;
     }
-    call_args.append(&buf[0]);
+    const pp::Var b64(buf);
+    call_args.Set(1, b64);
+
     start += chunk_size;
     InvokeJS(kWriteMethodId, call_args);
   }
@@ -189,24 +197,27 @@ bool SshPluginInstance::Write(int fd, const char* data, size_t size) {
 }
 
 bool SshPluginInstance::Read(int fd, size_t size) {
-  Json::Value call_args(Json::arrayValue);
-  call_args.append(fd);
-  call_args.append(size);
+  pp::VarArray call_args;
+  call_args.SetLength(2);
+  call_args.Set(0, fd);
+  call_args.Set(1, (int32_t)size);
   InvokeJS(kReadMethodId, call_args);
   return true;
 }
 
 bool SshPluginInstance::Close(int fd) {
-  Json::Value call_args(Json::arrayValue);
-  call_args.append(fd);
+  pp::VarArray call_args;
+  call_args.SetLength(1);
+  call_args.Set(0, fd);
   InvokeJS(kCloseMethodId, call_args);
   return true;
 }
 
 size_t SshPluginInstance::GetWriteWindow() {
-  if (session_args_.isMember(kWriteWindowAttr) &&
-      session_args_[kWriteWindowAttr].isNumeric()) {
-    return session_args_[kWriteWindowAttr].asInt();
+  if (session_args_.HasKey(kWriteWindowAttr)) {
+    const pp::Var arg = session_args_.Get(kWriteWindowAttr);
+    if (arg.is_number())
+      return arg.AsInt();
   }
   return kDefaultWriteWindow;
 }
@@ -215,40 +226,42 @@ void SshPluginInstance::SessionThreadImpl() {
   file_system_.WaitForStdFiles();
 
   // Call renamed ssh main.
-  std::vector<const char*> argv;
+  std::vector<const std::string> argv;
   // argv[0]
   argv.push_back("ssh");
-  if (session_args_.isMember(kArgumentsAttr) &&
-      session_args_[kArgumentsAttr].isArray()) {
-    const Json::Value& args = session_args_[kArgumentsAttr];
-    for (size_t i = 0; i < args.size(); i++) {
-      if (args[i].isString())
-        argv.push_back(args[i].asCString());
-      else
-        PrintLog("startSession: invalid argument\n");
+  if (session_args_.HasKey(kArgumentsAttr)) {
+    const pp::Var arg = session_args_.Get(kArgumentsAttr);
+    if (arg.is_array()) {
+      const pp::VarArray args(arg);
+      for (size_t i = 0; i < args.GetLength(); i++) {
+        if (args.Get(i).is_string())
+          argv.push_back(args.Get(i).AsString());
+        else
+          PrintLog("startSession: invalid argument\n");
+      }
     }
   }
 
   std::string port;
-  if (session_args_.isMember(kPortAttr)) {
+  if (session_args_.HasKey(kPortAttr)) {
     char buf[64];
-    snprintf(buf, sizeof(buf), "-p%d", session_args_[kPortAttr].asInt());
+    snprintf(buf, sizeof(buf), "-p%d", session_args_.Get(kPortAttr).AsInt());
     port = buf;
     argv.push_back(port.c_str());
   }
 
   std::string username_hostname;
-  if (session_args_.isMember(kUsernameAttr) &&
-      session_args_.isMember(kHostAttr)) {
-    username_hostname = session_args_[kUsernameAttr].asString() + "@" +
-        session_args_[kHostAttr].asString();
+  if (session_args_.HasKey(kUsernameAttr) &&
+      session_args_.HasKey(kHostAttr)) {
+    username_hostname = session_args_.Get(kUsernameAttr).AsString() + "@" +
+        session_args_.Get(kHostAttr).AsString();
     argv.push_back(username_hostname.c_str());
   }
 
   std::string subsystem;
   const char *csubsystem = NULL;
-  if (session_args_.isMember(kSubsystemAttr)) {
-    subsystem = session_args_[kSubsystemAttr].asString();
+  if (session_args_.HasKey(kSubsystemAttr)) {
+    subsystem = session_args_.Get(kSubsystemAttr).AsString();
     csubsystem = subsystem.c_str();
   }
 
@@ -256,7 +269,10 @@ void SshPluginInstance::SessionThreadImpl() {
   for (size_t i = 0; i < argv.size(); i++)
     LOG("  argv[%d] = %s\n", i, argv[i]);
 
-  SendExitCode(ssh_main(argv.size(), &argv[0], csubsystem));
+  std::vector<const char *> cargv;
+  for (auto it = argv.begin(); it != argv.end(); ++it)
+    cargv.push_back(it->c_str());
+  SendExitCode(ssh_main(cargv.size(), &cargv[0], csubsystem));
 }
 
 void* SshPluginInstance::SessionThread(void* arg) {
@@ -265,53 +281,67 @@ void* SshPluginInstance::SessionThread(void* arg) {
   return NULL;
 }
 
-void SshPluginInstance::StartSession(const Json::Value& args) {
-  if (args.size() == 1 && args[(size_t)0].isObject() && !openssh_thread_) {
-    session_args_ = args[(size_t)0];
-    if (session_args_.isMember(kTerminalWidthAttr) &&
-        session_args_[kTerminalWidthAttr].isNumeric() &&
-        session_args_.isMember(kTerminalHeightAttr) &&
-        session_args_[kTerminalHeightAttr].isNumeric()) {
-      file_system_.SetTerminalSize(session_args_[kTerminalWidthAttr].asInt(),
-                                   session_args_[kTerminalHeightAttr].asInt());
+void SshPluginInstance::StartSession(const pp::VarArray& args) {
+  if (openssh_thread_) {
+    PrintLogImpl(0, "startSession: session already started!\n");
+    return;
+  }
+
+  if (args.GetLength() != 1) {
+    PrintLogImpl(0, "startSession: args must be one element only\n");
+    return;
+  }
+
+  const pp::Var session_arg = args.Get(0);
+  if (!session_arg.is_dictionary()) {
+    PrintLogImpl(0, "startSession: args[0] must be a dictionary of settings\n");
+    return;
+  }
+
+  session_args_ = pp::VarDictionary(session_arg);
+
+  if (session_args_.HasKey(kTerminalWidthAttr) &&
+      session_args_.Get(kTerminalWidthAttr).is_number() &&
+      session_args_.HasKey(kTerminalHeightAttr) &&
+      session_args_.Get(kTerminalHeightAttr).is_number()) {
+    file_system_.SetTerminalSize(session_args_.Get(kTerminalWidthAttr).AsInt(),
+                                 session_args_.Get(kTerminalHeightAttr).AsInt());
+  }
+  if (session_args_.HasKey(kUseJsSocketAttr) &&
+      session_args_.Get(kUseJsSocketAttr).is_bool()) {
+    file_system_.UseJsSocket(session_args_.Get(kUseJsSocketAttr).AsBool());
+  }
+  if (session_args_.HasKey(kEnvironmentAttr) &&
+      session_args_.Get(kEnvironmentAttr).is_dictionary()) {
+    const pp::VarDictionary env(session_args_.Get(kEnvironmentAttr));
+    const pp::VarArray keys = env.GetKeys();
+    for (size_t i = 0; i < keys.GetLength(); ++i) {
+      const pp::Var key(keys.Get(i));
+      const pp::Var value(env.Get(key));
+      if (key.is_string() && value.is_string())
+        setenv(key.AsString().c_str(), value.AsString().c_str(), 1);
     }
-    if (session_args_.isMember(kUseJsSocketAttr) &&
-        session_args_[kUseJsSocketAttr].isBool()) {
-      file_system_.UseJsSocket(session_args_[kUseJsSocketAttr].asBool());
-    }
-    if (session_args_.isMember(kEnvironmentAttr) &&
-        session_args_[kEnvironmentAttr].isObject()) {
-      Json::Value::iterator end = session_args_[kEnvironmentAttr].end();
-      for (Json::Value::iterator it = session_args_[kEnvironmentAttr].begin();
-           it != end; ++it) {
-        if (it.key().isString() && (*it).isString()) {
-          LOG("env[%s] = %s\n", it.key().asCString(), (*it).asCString());
-          setenv(it.key().asCString(), (*it).asCString(), 1);
-        }
-      }
-    }
-    if (session_args_.isMember(kAuthAgentAppID) &&
-        session_args_[kAuthAgentAppID].isString()) {
-      setenv("SSH_AUTH_SOCK", session_args_[kAuthAgentAppID].asCString(), 1);
-    }
-    if (pthread_create(&openssh_thread_, NULL,
-                       &SshPluginInstance::SessionThread, this)) {
-      SendExitCodeImpl(0, -1);
-    }
-  } else {
-    PrintLogImpl(0, "startSession: invalid arguments\n");
+  }
+  if (session_args_.HasKey(kAuthAgentAppID) &&
+      session_args_.Get(kAuthAgentAppID).is_string()) {
+    const pp::Var agent(session_args_.Get(kAuthAgentAppID));
+    setenv("SSH_AUTH_SOCK", agent.AsString().c_str(), 1);
+  }
+  if (pthread_create(&openssh_thread_, NULL,
+                     &SshPluginInstance::SessionThread, this)) {
+    SendExitCodeImpl(0, -1);
   }
 }
 
-void SshPluginInstance::OnOpen(const Json::Value& args) {
-  const Json::Value& fd = args[(size_t)0];
-  const Json::Value& success = args[(size_t)1];
-  const Json::Value& is_atty = args[(size_t)2];
-  if (fd.isNumeric() && success.isBool() && is_atty.isBool()) {
-    InputStreams::iterator it = streams_.find(fd.asInt());
+void SshPluginInstance::OnOpen(const pp::VarArray& args) {
+  const pp::Var fd = args.Get(0);
+  const pp::Var success = args.Get(1);
+  const pp::Var is_atty = args.Get(2);
+  if (fd.is_number() && success.is_bool() && is_atty.is_bool()) {
+    InputStreams::iterator it = streams_.find(fd.AsInt());
     if (it != streams_.end()) {
-      it->second->OnOpen(success.asBool(), is_atty.asBool());
-      if (!success.asBool())
+      it->second->OnOpen(success.AsBool(), is_atty.AsBool());
+      if (!success.AsBool())
         streams_.erase(it);
     } else {
       PrintLogImpl(0, "onOpen: for unknown file descriptor\n");
@@ -321,34 +351,41 @@ void SshPluginInstance::OnOpen(const Json::Value& args) {
   }
 }
 
-void SshPluginInstance::OnRead(const Json::Value& args) {
-  const Json::Value& fd = args[(size_t)0];
-  const Json::Value& data = args[(size_t)1];
-  if (fd.isNumeric() && data.isString()) {
-    InputStreams::iterator it = streams_.find(fd.asInt());
-    if (it != streams_.end()) {
-      const std::string& str = data.asString();
-      std::vector<char> buf(str.size() * 3 / 4);
-      int res = b64_pton(str.c_str(), (unsigned char*)&buf[0], buf.size());
-      assert(res >= 0);
-      it->second->OnRead(&buf[0], res);
-    } else {
-      PrintLogImpl(0, "onRead: for unknown file descriptor\n");
-    }
+void SshPluginInstance::OnRead(const pp::VarArray& args) {
+  const pp::Var fd = args.Get(0);
+  const pp::Var data = args.Get(1);
+
+  if (!fd.is_number()) {
+    PrintLogImpl(0, "onRead: bad fd argument (non-numeric)\n");
+    return;
+  }
+
+  InputStreams::iterator it = streams_.find(fd.AsInt());
+  if (it == streams_.end()) {
+    PrintLogImpl(0, "onRead: for unknown file descriptor\n");
+    return;
+  }
+
+  if (data.is_string()) {
+    const std::string& str = data.AsString();
+    std::vector<char> buf(str.size() * 3 / 4);
+    int res = b64_pton(str.c_str(), (unsigned char*)&buf[0], buf.size());
+    assert(res >= 0);
+    it->second->OnRead(&buf[0], res);
   } else {
-    PrintLogImpl(0, "onRead: invalid arguments\n");
+    PrintLogImpl(0, "onRead: invalid data argument (not string or array)\n");
   }
 }
 
-void SshPluginInstance::OnWriteAcknowledge(const Json::Value& args) {
-  const Json::Value& fd = args[(size_t)0];
-  const Json::Value& count = args[(size_t)1];
-  if (fd.isNumeric() && count.isNumeric()) {
-    InputStreams::iterator it = streams_.find(fd.asInt());
+void SshPluginInstance::OnWriteAcknowledge(const pp::VarArray& args) {
+  const pp::Var fd = args.Get(0);
+  const pp::Var count = args.Get(1);
+  if (fd.is_number() && count.is_number()) {
+    InputStreams::iterator it = streams_.find(fd.AsInt());
     if (it != streams_.end()) {
-      // TODO(dpolukhin): UInt here is only 32-bit, current version of json lib
+      // TODO(dpolukhin): UInt here is only 32-bit, current version of API
       // don't support 64-bit integer numbers.
-      it->second->OnWriteAcknowledge(count.asUInt());
+      it->second->OnWriteAcknowledge(count.AsInt());
     } else {
       PrintLogImpl(0, "onWriteAcknowledge: for unknown file descriptor\n");
     }
@@ -357,9 +394,9 @@ void SshPluginInstance::OnWriteAcknowledge(const Json::Value& args) {
   }
 }
 
-void SshPluginInstance::OnClose(const Json::Value& args) {
-  const Json::Value& fd = args[(size_t)0];
-  InputStreams::iterator it = streams_.find(fd.asInt());
+void SshPluginInstance::OnClose(const pp::VarArray& args) {
+  const pp::Var fd = args.Get(0);
+  InputStreams::iterator it = streams_.find(fd.AsInt());
   if (it != streams_.end()) {
     it->second->OnClose();
     streams_.erase(it);
@@ -368,13 +405,13 @@ void SshPluginInstance::OnClose(const Json::Value& args) {
   }
 }
 
-void SshPluginInstance::OnReadReady(const Json::Value& args) {
-  const Json::Value& fd = args[(size_t)0];
-  const Json::Value& result = args[(size_t)1];
-  if (fd.isNumeric() && result.isBool()) {
-    InputStreams::iterator it = streams_.find(fd.asInt());
+void SshPluginInstance::OnReadReady(const pp::VarArray& args) {
+  const pp::Var fd = args.Get(0);
+  const pp::Var result = args.Get(1);
+  if (fd.is_number() && result.is_bool()) {
+    InputStreams::iterator it = streams_.find(fd.AsInt());
     if (it != streams_.end()) {
-      it->second->OnReadReady(result.asBool());
+      it->second->OnReadReady(result.AsBool());
     } else {
       PrintLogImpl(0, "onReadReady: for unknown file descriptor\n");
     }
@@ -383,12 +420,12 @@ void SshPluginInstance::OnReadReady(const Json::Value& args) {
   }
 }
 
-void SshPluginInstance::OnResize(const Json::Value& args) {
-  file_system_.SetTerminalSize(args[(size_t)0].asInt(),
-                               args[(size_t)1].asInt());
+void SshPluginInstance::OnResize(const pp::VarArray& args) {
+  file_system_.SetTerminalSize(args.Get(0).AsInt(),
+                               args.Get(1).AsInt());
 }
 
-void SshPluginInstance::OnExitAcknowledge(const Json::Value& args) {
+void SshPluginInstance::OnExitAcknowledge(const pp::VarArray& args) {
   file_system_.ExitCodeAcked();
 }
 
