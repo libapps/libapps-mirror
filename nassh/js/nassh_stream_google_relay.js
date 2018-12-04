@@ -405,10 +405,11 @@ nassh.Stream.GoogleRelayWS.prototype.onSocketData_ = function(e) {
     return;
 
   var u8 = new Uint8Array(e.data);
-  var ack = lib.array.arrayBigEndianToUint32(u8);
+  const dv = new DataView(e.data);
+  const ack = dv.getUint32(0);
 
   // Acks are unsigned 24 bits. Negative means error.
-  if (ack < 0) {
+  if (ack > 0xffffff) {
     this.close();
     this.sessionID_ = null;
     return;
@@ -463,18 +464,15 @@ nassh.Stream.GoogleRelayWS.prototype.sendWrite_ = function() {
                       this.writeBuffer_.length - this.sentCount_);
   var buf = new ArrayBuffer(size + 4);
   var u8 = new Uint8Array(buf);
+  const dv = new DataView(buf);
 
   // Every ws.send() maps to a Websocket frame on wire.
   // Use first 4 bytes to send ack.
-  u8[0] = (((this.readCount_ & 0xffffff) >> 24) & 255);
-  u8[1] = (((this.readCount_ & 0xffffff) >> 16) & 255);
-  u8[2] = (((this.readCount_ & 0xffffff) >>  8) & 255);
-  u8[3] = (((this.readCount_ & 0xffffff) >>  0) & 255);
+  dv.setUint32(0, this.readCount_ & 0xffffff);
 
   for (var i = 0; i < size; ++i)
     u8[i + 4] = this.writeBuffer_.charCodeAt(this.sentCount_ + i);
 
-  u8 = null;
   this.socket_.send(buf);
   this.sentCount_ += size;
 
