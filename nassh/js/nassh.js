@@ -248,3 +248,56 @@ nassh.disableTabDiscarding = function() {
     tabs.forEach((tab) => chrome.tabs.update(tab.id, {autoDiscardable: false}));
   });
 };
+
+/**
+ * Convert a base64url encoded string to the base64 encoding.
+ *
+ * The difference here is in the last two characters of the alphabet.
+ * So converting between them is easy.
+ *
+ * base64: https://tools.ietf.org/html/rfc4648#section-4
+ *   62 +
+ *   63 /
+ * base64url: https://tools.ietf.org/html/rfc4648#section-5
+ *   62 -
+ *   63 _
+ *
+ * We re-add any trailing = padding characters.
+ *
+ * @param {string} data The base64url encoded data.
+ * @returns {string} The data in base64 encoding.
+ */
+nassh.base64UrlToBase64 = function(data) {
+  const replacements = {'-': '+', '_': '/'};
+  let ret = data.replace(/[-_]/g, (ch) => replacements[ch]);
+
+  switch (ret.length % 4) {
+    case 1:
+      throw new Error(`Invalid base64url length: ${ret.length}`);
+
+    case 2:
+      ret += '==';
+      break;
+
+    case 3:
+      ret += '=';
+      break;
+  }
+
+  return ret;
+};
+
+/**
+ * Convert a base64 encoded string to the base64url encoding.
+ *
+ * This is the inverse of nassh.base64UrlToBase64.
+ *
+ * We strip off any = padding characters too.
+ *
+ * @param {string} data The base64 encoded data.
+ * @returns {string} The data in base64url encoding.
+ */
+nassh.base64ToBase64Url = function(data) {
+  const replacements = {'+': '-', '/': '_', '=': ''};
+  return data.replace(/[+/=]/g, (ch) => replacements[ch]);
+};

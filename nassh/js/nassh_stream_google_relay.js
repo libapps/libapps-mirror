@@ -229,7 +229,7 @@ nassh.Stream.GoogleRelayXHR.prototype.sendWrite_ = function() {
 
   var size = Math.min(this.writeBuffer_.length, this.maxMessageLength);
   var data = this.writeBuffer_.substr(0, size);
-  data = this.base64ToWebSafe_(btoa(data));
+  data = nassh.base64ToBase64Url(btoa(data));
   this.writeRequest_.open('GET', this.relay_.relayServer +
                           'write?sid=' + this.sessionID_ +
                           '&wcnt=' + this.writeCount_ + '&data=' + data, true);
@@ -259,7 +259,7 @@ nassh.Stream.GoogleRelayXHR.prototype.onReadReady_ = function(e) {
 
   this.readCount_ += Math.floor(
       this.readRequest_.responseText.length * 3 / 4);
-  var data = this.webSafeToBase64_(this.readRequest_.responseText);
+  var data = nassh.base64UrlToBase64(this.readRequest_.responseText);
   this.onDataAvailable(data);
 
   this.requestSuccess_(true);
@@ -303,33 +303,6 @@ nassh.Stream.GoogleRelayXHR.prototype.onRequestError_ = function(e) {
 nassh.Stream.GoogleRelayXHR.prototype.isRequestBusy_ = function(r) {
   return (r.readyState != XMLHttpRequest.DONE &&
           r.readyState != XMLHttpRequest.UNSENT);
-};
-
-nassh.Stream.GoogleRelayXHR.prototype.webSafeToBase64_ = function(s) {
-  s = s.replace(/[-_]/g, function(ch) { return (ch == '-' ? '+' : '/'); });
-
-  var mod4 = s.length % 4;
-
-  if (mod4 == 2) {
-    s = s + '==';
-  } else if (mod4 == 3) {
-    s = s + '=';
-  } else if (mod4 != 0) {
-    this.close();
-    throw 'Invalid web safe base64 string length: ' + s.length;
-  }
-
-  return s;
-};
-
-nassh.Stream.GoogleRelayXHR.prototype.base64ToWebSafe_ = function(s) {
-  return s.replace(/[+/=]/g, function(ch) {
-      if (ch == '+')
-        return '-';
-      if (ch == '/')
-        return '_';
-      return '';
-  });
 };
 
 /**
