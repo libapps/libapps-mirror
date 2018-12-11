@@ -50,6 +50,7 @@ def src_configure(metadata):
         '--prefix=/',
         'no-asm',
         'no-dso',
+        'no-gost',
         'no-hw',
         'no-krb5',
         '-fgnu-inline-asm',
@@ -62,19 +63,14 @@ def src_configure(metadata):
 
 def src_compile(_metadata):
     """Compile the source."""
-    # Stub out libs we don't care about.
-    ssh_client.touch('libssl.pc')
-    ssh_client.touch('openssl.pc')
-
-    # Just build libcrypto which OpenSSH wants.
-    ssh_client.emake('build_crypto', 'libcrypto.pc', 'DIRS=crypto')
+    ssh_client.emake('build_libs', 'DIRS=crypto ssl')
 
 
 def src_install(_metadata):
     """Install the package."""
     env = ssh_client.pnacl_env()
     ssh_client.emake('install_sw', 'INSTALL_PREFIX=%s' % (env['SYSROOT'],),
-                     'DIRS=crypto', 'LIBS=libcrypto.a', env=env)
+                     'DIRS=crypto ssl', 'LIBS=libcrypto.a libssl.a', env=env)
 
 
 ssh_client.build_package(sys.modules[__name__])
