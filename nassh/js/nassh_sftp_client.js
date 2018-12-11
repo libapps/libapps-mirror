@@ -137,8 +137,7 @@ nassh.sftp.Client.prototype.initConnection = function(plugin) {
  * @param {Array} arguments The message arguments.
  */
 nassh.sftp.Client.prototype.sendToPlugin_ = function(name, args) {
-  var str = JSON.stringify({name: name, arguments: args});
-  this.plugin_.postMessage(str);
+  this.plugin_.postMessage({name: name, arguments: args});
 };
 
 

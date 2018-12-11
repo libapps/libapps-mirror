@@ -112,13 +112,13 @@ nassh.Nassh.prototype.initPlugin_ = function(onComplete) {
   });
 
   this.plugin_.addEventListener('message', (e) => {
-    var msg = JSON.parse(e.data);
-    msg.argv = msg.arguments;
+    const name = e.data.name;
+    const arguments = e.data.arguments;
 
-    if (msg.name in this.onPlugin_) {
-      this.onPlugin_[msg.name].apply(this, msg.arguments);
+    if (name in this.onPlugin_) {
+      this.onPlugin_[name].apply(this, arguments);
     } else {
-      console.log('Unknown message from plugin: ' + JSON.stringify(msg));
+      console.log('Unknown message from plugin', e.data);
     }
   });
 
@@ -141,9 +141,7 @@ nassh.Nassh.prototype.initPlugin_ = function(onComplete) {
  * @param {Array} arguments The message arguments.
  */
 nassh.Nassh.prototype.sendToPlugin_ = function(name, args) {
-  var str = JSON.stringify({name: name, arguments: args});
-
-  this.plugin_.postMessage(str);
+  this.plugin_.postMessage({name: name, arguments: args});
 };
 
 nassh.Nassh.prototype.onExecuteClose_ = function(reason, value) {
