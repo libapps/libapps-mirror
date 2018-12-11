@@ -182,14 +182,13 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   built inside Google.  Unfortunately that relay isn't open source, and Google
   doesn't maintain a public pool of relays.
 
-  However, you're free to build one that works the same way.  There should be
-  enough documentation in [nassh_google_relay.js](../js/nassh_google_relay.js)
-  to reverse engineer a compatible relay.
-
   The good news is that someone has built an
   [open source relay](https://github.com/zyclonite/nassh-relay).  It is not
   supported by us though, so please take any questions/concerns about it to
   the author.
+
+  For more details on the relay protocol that Secure Shell supports, see the
+  [Relay Protocol](./relay-protocol.md) document.
 
 
 ### When I use a relay server, the IP address is always 0.0.0.0?
