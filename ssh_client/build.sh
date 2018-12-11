@@ -31,6 +31,7 @@ mkdir -p output
 ./third_party/webports/build
 ./third_party/zlib/build
 ./third_party/openssl/build
+./third_party/ldns/build
 
 ./third_party/mandoc/build
 ./third_party/openssh-7.9/build

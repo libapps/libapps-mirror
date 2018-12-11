@@ -1,0 +1,14 @@
+name: "ldns"
+description: "DNS library"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://nlnetlabs.nl/projects/ldns/"
+  }
+  version: "1.7.0"
+  last_upgrade_date { year: 2016 month: 12 day: 20 }
+
+  local_modifications:
+      "See the patches in this directory for more details."
+}

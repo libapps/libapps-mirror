@@ -1,0 +1,26 @@
+We don't offer these two funcs in the C library, so disable them.  The code
+already fallsback to treating things as numbers which works for everything
+we care about already.
+
+--- a/host2str.c
++++ b/host2str.c
+@@ -808,7 +808,7 @@ ldns_rdf2buffer_str_wks(ldns_buffer *output, const ldns_rdf *rdf)
+                 return LDNS_STATUS_WIRE_RDATA_ERR;
+         }
+ 	protocol_nr = ldns_rdf_data(rdf)[0];
+-	protocol = getprotobynumber((int) protocol_nr);
++	protocol = NULL;
+ 	if (protocol && (protocol->p_name != NULL)) {
+ 		proto_name = protocol->p_name;
+ 		ldns_buffer_printf(output, "%s ", protocol->p_name);
+--- a/str2host.c
++++ b/str2host.c
+@@ -1155,7 +1155,7 @@ ldns_str2rdf_wks(ldns_rdf **rd, const char *str)
+ 	        return LDNS_STATUS_INVALID_STR;
+         }
+     if (proto_str)
+-		proto = getprotobyname(proto_str);
++		proto = NULL;
+ 	if (proto) {
+ 		data[0] = (uint8_t) proto->p_proto;
+ 	} else if (proto_str) {
