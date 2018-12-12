@@ -102,7 +102,7 @@ $(POBJS): $(WORKDIR)/%_p.o : $(CURDIR)/%.cc
 
 $(EXEDIR)/$(newlib_pexe): $(POBJS)
 	$(PNACL_CXX) -o $@ $^ -lopenssh -lssh \
-		-lopenbsd-compat -lglibc-compat \
+		-lopenbsd-compat -lldns \
 		$(PNACL_LDFLAGS) $(PNACL_CXXFLAGS)
 
 $(EXEDIR)/$(PROJECT)_nl_arm.dbg.nexe: $(EXEDIR)/$(newlib_pexe)

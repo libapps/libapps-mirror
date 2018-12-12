@@ -31,7 +31,7 @@ def src_configure(metadata):
 
     env = ssh_client.pnacl_env()
 
-    EXTRA_LIBS = ['-lglibc-compat']
+    EXTRA_LIBS = ['-lcrypto']
     EXTRA_CFLAGS = [
         '-DHAVE_SIGACTION',
         '-DHAVE_TRUNCATE',
@@ -63,7 +63,6 @@ def src_configure(metadata):
 
         # Features we don't use.
         '--without-audit',
-        '--without-ldns',
         '--without-libedit',
         '--without-pam',
         '--without-sandbox',
@@ -74,6 +73,7 @@ def src_configure(metadata):
         # Features we want.
         # OpenSSL is needed for DSA/RSA key support.
         '--with-openssl',
+        '--with-ldns',
         '--with-zlib',
         '--without-zlib-version-check',
 
