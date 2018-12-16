@@ -43,6 +43,9 @@ def src_configure(metadata):
         '--cache-file=../config.cache',
         'CFLAGS=%s' % (' '.join(EXTRA_CFLAGS),),
         '--disable-dane-verify',
+        # The ldns configure logic is quite poor and searches the filesystem
+        # instead of querying the compiler.  Force it to our sysroot.
+        '--with-ssl=%s' % (env['SYSROOT'],),
     ]
     ssh_client.run(cmd, env=env)
 
