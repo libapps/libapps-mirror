@@ -244,8 +244,8 @@ nassh.registerProtocolHandler = function(proto) {
  * fine for our usage as we don't generally create windows/tabs on the fly.
  */
 nassh.disableTabDiscarding = function() {
-  chrome.tabs.query({currentWindow: true}, (tabs) => {
-    tabs.forEach((tab) => chrome.tabs.update(tab.id, {autoDiscardable: false}));
+  chrome.tabs.getCurrent((tab) => {
+    chrome.tabs.update(tab.id, {autoDiscardable: false});
   });
 };
 
