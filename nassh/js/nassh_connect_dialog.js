@@ -373,6 +373,14 @@ nassh.ConnectDialog.prototype.save = function() {
 
        var value = this.$f(name).value;
 
+       // Most fields don't make sense with leading or trailing whitespace, so
+       // trim them automatically.  This could cause confusion in some fields
+       // like the ssh argstr.  We leave it in username since it is technically
+       // valid even if most users would get confused by it.
+       if (name != 'username') {
+         value = value.trim();
+       }
+
        if (name == 'port') {
          value = parseInt(value);
          if (!value) {
