@@ -27,7 +27,7 @@ nassh.StreamSet.prototype.openStream = function(streamClass, fd, arg, onOpen) {
         stream.open = true;
       }
 
-      onOpen(success, stream);
+      onOpen(success);
     });
 
   return stream;
