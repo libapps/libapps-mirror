@@ -36,7 +36,7 @@ nassh.Stream.ERR_STREAM_CANT_WRITE = 'Stream has no write permission';
  * @return {!string} The base64 encoding of the byte array.
  */
 nassh.Stream.binaryToAscii = function(b) {
-  return btoa(b.map((byte) => String.fromCharCode(byte)).join(''));
+  return btoa(lib.codec.codeUnitArrayToString(b));
 };
 
 /**
@@ -46,7 +46,7 @@ nassh.Stream.binaryToAscii = function(b) {
  * @return {!Array<!number>} The array of byte values encoded in the string.
  */
 nassh.Stream.asciiToBinary = function(a) {
-  return Array.prototype.map.call(atob(a), (char) => char.charCodeAt(0));
+  return lib.codec.stringToCodeUnitArray(atob(a));
 };
 
 /**

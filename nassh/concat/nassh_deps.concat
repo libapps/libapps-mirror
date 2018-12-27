@@ -5,6 +5,7 @@
 @include hterm/concat/hterm_deps.concat
 @include hterm/concat/hterm.concat
 
+@file libdot/js/lib_codec.js
 @file libdot/js/lib_credential_cache.js
 @file libdot/js/lib_event.js
 @file libdot/js/lib_fs.js
