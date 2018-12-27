@@ -53,7 +53,7 @@ nassh.Stream.asciiToBinary = function(a) {
  * Open a stream, calling back when complete.
  */
 nassh.Stream.prototype.asyncOpen_ = function(path, onOpen) {
-  setTimeout(function() { onOpen(false); }, 0);
+  setTimeout(() => onOpen(false, 'nassh.Stream.ERR_NOT_IMPLEMENTED'), 0);
 };
 
 /**

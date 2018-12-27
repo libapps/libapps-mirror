@@ -62,7 +62,7 @@ nassh.Stream.SSHAgentRelay.prototype.asyncOpen_ = function(args, onComplete) {
   var initialDisconnect = () => {
     this.port_.onMessage.removeListener(initialOnMessage);
     this.port_.onDisconnect.removeListener(initialDisconnect);
-    onComplete(false);
+    onComplete(false, lib.f.lastError());
   };
 
   this.port_.onMessage.addListener(initialOnMessage);

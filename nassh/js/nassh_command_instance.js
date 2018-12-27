@@ -1278,32 +1278,31 @@ nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
 nassh.CommandInstance.prototype.onPlugin_.openSocket = function(fd, host, port) {
   var stream = null;
 
+  const onOpen = (success, error) => {
+    if (!success) {
+      this.io.println(nassh.msg('STREAM_OPEN_ERROR', ['socket', error]))
+    }
+    this.sendToPlugin_('onOpenSocket', [fd, success, false]);
+  };
+
   if (port == 0 && host == this.authAgentAppID_) {
     // Request for auth-agent connection.
     if (this.authAgent_) {
       stream = this.streams_.openStream(
-          nassh.Stream.SSHAgent, fd, {authAgent: this.authAgent_},
-          (success) => {
-            this.sendToPlugin_('onOpenSocket', [fd, success, false]);
-          });
+          nassh.Stream.SSHAgent, fd, {authAgent: this.authAgent_}, onOpen);
     } else {
       stream = this.streams_.openStream(
           nassh.Stream.SSHAgentRelay, fd,
-          {authAgentAppID: this.authAgentAppID_}, (success) => {
-            this.sendToPlugin_('onOpenSocket', [fd, success, false]);
-          });
+          {authAgentAppID: this.authAgentAppID_}, onOpen);
     }
   } else {
     // Regular relay connection request.
     if (!this.relay_) {
-      this.sendToPlugin_('onOpenSocket', [fd, false, false]);
+      onOpen(false, '!this.relay_');
       return;
     }
 
-    stream = this.relay_.openSocket(fd, host, port, this.streams_,
-      (success) => {
-        this.sendToPlugin_('onOpenSocket', [fd, success, false]);
-      });
+    stream = this.relay_.openSocket(fd, host, port, this.streams_, onOpen);
   }
 
   stream.onDataAvailable = (data) => {

@@ -780,6 +780,20 @@
 		"description": "Label for the optional ssh arguments field. These are command line flags to the ssh program itself.",
 		"message": "SSH Arguments"
 	},
+	"STREAM_OPEN_ERROR": {
+		"description": "Error message displayed when opening a stream (e.g. a file or a network connection) fails.",
+		"message": "Opening stream $ID$ failed: $ERROR$",
+		"placeholders": {
+			"error": {
+				"content": "$2",
+				"example": "unable to connect"
+			},
+			"id": {
+				"content": "$1",
+				"example": "relay"
+			}
+		}
+	},
 	"TERMINAL_CLEAR_MENU_LABEL": {
 		"description": "The menu label to clear the terminal screen.",
 		"message": "Terminal Clear"

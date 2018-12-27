@@ -48,7 +48,7 @@ nassh.Stream.GoogleRelay.prototype.asyncOpen_ = function(args, onComplete) {
 
   var onError = () => {
     console.error('Failed to get session id:', sessionRequest);
-    onComplete(false);
+    onComplete(false, `${sessionRequest.status}: ${sessionRequest.statusText}`);
   };
 
   var onReady = () => {

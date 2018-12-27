@@ -21,13 +21,13 @@ nassh.StreamSet.prototype.openStream = function(streamClass, fd, arg, onOpen) {
 
   var stream = new streamClass(fd, arg);
 
-  stream.asyncOpen_(arg, (success) => {
+  stream.asyncOpen_(arg, (success, errorMessage) => {
       if (success) {
         this.openStreams_[fd] = stream;
         stream.open = true;
       }
 
-      onOpen(success);
+      onOpen(success, errorMessage);
     });
 
   return stream;
