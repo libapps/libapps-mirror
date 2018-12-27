@@ -19,7 +19,12 @@ lib.codec = {};
  * @return {string} A UTF-16 encoded string.
  */
 lib.codec.codeUnitArrayToString = function(array) {
-  return array.map((byte) => String.fromCharCode(byte)).join('');
+  // String concat is faster than Array.join.
+  let ret = '';
+  for (let i = 0; i < array.length; ++i) {
+    ret += String.fromCharCode(array[i]);
+  }
+  return ret;
 };
 
 /**
@@ -29,5 +34,10 @@ lib.codec.codeUnitArrayToString = function(array) {
  * @return {Array<number>} The array of code units.
  */
 lib.codec.stringToCodeUnitArray = function(str) {
-  return Array.prototype.map.call(str, (char) => char.charCodeAt(0));
+  // Indexing string directly is faster than Array.map.
+  const ret = new Array(str.length);
+  for (let i = 0; i < str.length; ++i) {
+    ret[i] = str.charCodeAt(i);
+  }
+  return ret;
 };
