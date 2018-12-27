@@ -748,11 +748,10 @@ nassh.CommandInstance.splitCommandLine = function(argstr) {
 };
 
 /**
- * Initiate a connection to a remote host.
+ * Initiate an asynchronous connection to a remote host.
  *
- * @param {string} username The username to provide.
- * @param {string} hostname The hostname or IP address to connect to.
- * @param {string|integer} opt_port The optional port number to connect to.
+ * @param {Object} params The various connection settings setup via the
+ *    prefsToConnectParams_ helper.
  */
 nassh.CommandInstance.prototype.connectTo = function(params) {
   if (!(params.username && params.hostname)) {
@@ -806,6 +805,20 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     }
   }
 
+  this.connectToFinalize_(params, options);
+};
+
+/**
+ * Finish the connection setup.
+ *
+ * This is called after any relay setup is completed.
+ *
+ * @param {Object} params The various connection settings setup via the
+ *    prefsToConnectParams_ helper.
+ * @param {Object} options The nassh specific options.
+ */
+nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
+  // Make sure the selected ssh-client version is somewhat valid.
   if (options['--ssh-client-version']) {
     this.sshClientVersion_ = options['--ssh-client-version'];
   }
