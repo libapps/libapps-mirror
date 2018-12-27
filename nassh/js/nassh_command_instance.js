@@ -779,7 +779,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   }
 
   // If the user has requested a proxy relay, load it up.
-  if (options['--proxy-host']) {
+  if (options['--proxy-mode'] == 'corp-relay@google.com') {
     this.relay_ = new nassh.GoogleRelay(this.io, options,
                                         this.terminalLocation,
                                         this.storage);
@@ -803,6 +803,12 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
       this.relay_.redirect();
       return;
     }
+  } else if (options['--proxy-mode']) {
+    // Unknown proxy mode.
+    this.io.println(nassh.msg('NASSH_OPTIONS_ERROR',
+                              [`--proxy-mode=${options['--proxy-mode']}`]));
+    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+    return;
   }
 
   this.connectToFinalize_(params, options);
@@ -960,6 +966,12 @@ nassh.CommandInstance.tokenizeOptions = function(optionString) {
       '--relay-protocol': 'v2',
       '--ssh-agent': nassh.GoogleRelay.defaultGnubbyExtension,
     }, rv);
+  }
+
+  // If a proxy server is requested but no mode selected, default to the one
+  // we've had for years, and what the public uses currently.
+  if (rv['--proxy-host'] && !rv['--proxy-mode']) {
+    rv['--proxy-mode'] = 'corp-relay@google.com';
   }
 
   return rv;

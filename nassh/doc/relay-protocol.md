@@ -18,6 +18,8 @@ See the [Options] document for those details.
 
 ## Corp Relay
 
+This uses the id `corp-relay@google.com` (e.g. when using `--proxy-mode=`).
+
 The main implementation for this can be found in [nassh_google_relay.js] with
 supporting stream logic in [nassh_stream_google_relay.js].
 

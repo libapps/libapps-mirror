@@ -9,6 +9,18 @@ various terminal preferences (like colors or fonts).
 This is a shortcut for setting other options so people don't have to remember
 the full list.  At the moment, the only config supported is `google`.
 
+## `--proxy-mode=<implementation>`
+
+Select the relay server implementation.
+For more details, see the [Relay Protocol] document.
+
+For naming, we follow the convention laid out in [Section 6 of RFC4251].
+Specifically, we add a `@google.com` suffix to the names to make it clear these
+are extensions designed by Google rather than IETF standards.
+Do not confuse them with e-mail addresses.
+
+The default value is `corp-relay@google.com`.
+
 ## `--proxy-host=<host>`
 
 The host to use as a relay server.  All connections will be made via this
@@ -80,3 +92,7 @@ Here are some versions that might be available:
 
 * `pnacl`: The default OpenSSH version built for NaCl most people should use.
 * `pnacl-openssh-7.5p1`: An older OpenSSH release.
+
+
+[Relay Protocol]: relay-protocol.md
+[Section 6 of RFC4251]: https://tools.ietf.org/html/rfc4251#section-6
