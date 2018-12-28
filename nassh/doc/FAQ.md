@@ -962,6 +962,10 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   there are some third party keyboard utilities that may help, or try searching
   for [changing keyboard shortcuts](https://www.google.com/search?q=macOS+changing+keyboard+shortcuts).
 
+  If you want to launch Secure Shell directly from the command line (or an OS
+  desktop shortcut), you can use the `--app=...` option.  For example:
+  `chrome --app=chrome-extension://iodihamcpbpeioajjeobimgagajmlibd/html/nassh.html#profile-id:e431 ...`
+
 
 ### How do I change input methods?
 
