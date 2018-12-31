@@ -1348,6 +1348,12 @@ nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
     return;
   }
 
+  // The plugin API has been base64 strings.  If it returns something else,
+  // convert it to a string until we've updated the stream APIs to cope.
+  if (data instanceof ArrayBuffer) {
+    data = btoa(lib.codec.codeUnitArrayToString(new Uint8Array(data)));
+  }
+
   stream.asyncWrite(data, (writeCount) => {
     this.sendToPlugin_('onWriteAcknowledge', [fd, writeCount]);
   });

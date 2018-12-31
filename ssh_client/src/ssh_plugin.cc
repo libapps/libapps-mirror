@@ -170,9 +170,8 @@ bool SshPluginInstance::OpenSocket(int fd, const char* host, uint16_t port,
 }
 
 bool SshPluginInstance::Write(int fd, const char* data, size_t size) {
-  const size_t kMaxWriteSize = 24*1024;
+  const size_t kMaxWriteSize = 32 * 1024;
   pp::VarArray call_args;
-  char buf[kMaxWriteSize * 4 / 3 + 4];
   size_t start = 0;
 
   call_args.SetLength(2);
@@ -182,14 +181,12 @@ bool SshPluginInstance::Write(int fd, const char* data, size_t size) {
     size_t chunk_size = ((size - start) <= kMaxWriteSize) ? (size - start)
                                                           : kMaxWriteSize;
 
-    int res = b64_ntop((const unsigned char*)data + start, chunk_size,
-                       &buf[0], sizeof(buf));
-    if (res <= 0) {
-      assert(res > 0);
-      return false;
-    }
-    const pp::Var b64(buf);
-    call_args.Set(1, b64);
+    pp::VarArrayBuffer arr(chunk_size);
+    char* buf = static_cast<char*>(arr.Map());
+    memcpy(buf, data + start, chunk_size);
+    arr.Unmap();
+
+    call_args.Set(1, arr);
 
     start += chunk_size;
     InvokeJS(kWriteMethodId, call_args);
