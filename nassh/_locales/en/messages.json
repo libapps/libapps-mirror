@@ -509,10 +509,6 @@
 		"description": "Label text shown for the hterm 'scroll-wheel-move-multiplier' preference.",
 		"message": "Mouse scroll wheel multiplier"
 	},
-	"HTERM_NAME_PREF_SEND_ENCODING": {
-		"description": "Label text shown for the hterm 'send-encoding' preference.",
-		"message": "Transmit encoding"
-	},
 	"HTERM_NAME_PREF_SHIFT_INSERT_PASTE": {
 		"description": "Label text shown for the hterm 'shift-insert-paste' preference.",
 		"message": "Shift-Insert paste"
@@ -776,10 +772,6 @@
 	"HTERM_PREF_SCROLL_WHEEL_MOVE_MULTIPLIER": {
 		"description": "Help text shown for the hterm 'scroll-wheel-move-multiplier' preference. 'scroll wheel' and 'pixels' refer to the normal computing terms, so everything here may be translated as makes sense.",
 		"message": "The multiplier for scroll wheel events when measured in pixels.\n\nAlters how fast the page scrolls."
-	},
-	"HTERM_PREF_SEND_ENCODING": {
-		"description": "Help text shown for the hterm 'send-encoding' preference.",
-		"message": "Set the encoding for data sent to host."
 	},
 	"HTERM_PREF_SHIFT_INSERT_PASTE": {
 		"description": "Help text shown for the hterm 'shift-insert-paste' preference. 'Shift' and 'Insert' are the names of keyboard buttons and may be translated as makes sense.",

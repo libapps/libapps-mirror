@@ -104,6 +104,8 @@ nassh.InputBuffer.prototype.read = function(size, onRead) {
  */
 nassh.Stream.Tty = function(fd, info) {
   nassh.Stream.apply(this, [fd]);
+
+  this.encoder_ = new TextEncoder();
 };
 
 nassh.Stream.Tty.prototype = Object.create(nassh.Stream.prototype);
@@ -131,8 +133,9 @@ nassh.Stream.Tty.prototype.asyncRead = function(size, onRead) {
       return false;
     }
 
-    var b64bytes = btoa(data);
-    setTimeout(function() { onRead(b64bytes); }, 0);
+    // Turn the UTF-16 JavaScript string into a UTF-8 array buffer.
+    const buf = this.encoder_.encode(data).buffer;
+    setTimeout(() => onRead(buf), 0);
     return true;
   });
 };

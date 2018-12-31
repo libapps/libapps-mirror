@@ -196,27 +196,6 @@ Crosh.prototype.onBeforeUnload_ = function(e) {
 };
 
 /**
- * Used by {@code this.sendString_} to determine if a string should be UTF-8
- * decoded to UTF-16 before sending it to {@code chrome.terminalPrivate}.
- * The string should be decoded if it came from keyboard with 'utf-8' character
- * encoding. The reason is that the extension system expects strings it handles
- * to be UTF-16 encoded.
- *
- * @private
- *
- * @param {string} string A string that may be UTF-8 encoded.
- *
- * @return {string} If decoding is needed, the decoded string, otherwise the
- *     original string.
- */
-Crosh.prototype.decodeUTF8IfNeeded_ = function(string) {
-  if (this.keyboard_ && this.keyboard_.characterEncoding == 'utf-8')
-    return lib.decodeUTF8(string);
-  else
-    return string;
-};
-
-/**
  * Send a string to the crosh process.
  *
  * @param {string} string The string to send.
@@ -224,9 +203,7 @@ Crosh.prototype.decodeUTF8IfNeeded_ = function(string) {
 Crosh.prototype.sendString_ = function(string) {
   if (this.pid_ == -1)
     return;
-  chrome.terminalPrivate.sendInput(
-      this.pid_,
-      this.decodeUTF8IfNeeded_(string));
+  chrome.terminalPrivate.sendInput(this.pid_, string);
 };
 
 /**
