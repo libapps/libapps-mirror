@@ -156,7 +156,7 @@ nassh.sftp.Packet.prototype.toByteArray = function() {
     array[i] = this.packet_.charCodeAt(i);
   }
 
-  return array;
+  return array.buffer;
 };
 
 /**

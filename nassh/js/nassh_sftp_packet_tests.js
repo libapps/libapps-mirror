@@ -19,7 +19,9 @@ nassh.sftp.packets.Tests.addTest('sftpPacket', function(result, cx) {
   result.assertEQ(0, packet.getLength());
   result.assertEQ('', packet.packet_);
   result.assertEQ('', packet.toString());
-  result.assertEQ([], packet.toByteArray());
+  let ret = packet.toByteArray();
+  result.assert(ret instanceof ArrayBuffer);
+  result.assertEQ([], new Uint8Array(ret));
   result.assertEQ(true, packet.eod());
 
   packet = new nassh.sftp.Packet('abc');
@@ -27,7 +29,7 @@ nassh.sftp.packets.Tests.addTest('sftpPacket', function(result, cx) {
   result.assertEQ(3, packet.getLength());
   result.assertEQ('abc', packet.packet_);
   result.assertEQ('abc', packet.toString());
-  result.assertEQ([97, 98, 99], packet.toByteArray());
+  result.assertEQ([97, 98, 99], new Uint8Array(packet.toByteArray()));
   result.assertEQ(false, packet.eod());
 
   result.pass();
