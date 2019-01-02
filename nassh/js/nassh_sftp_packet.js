@@ -150,13 +150,7 @@ nassh.sftp.Packet.prototype.toString = function() {
  * Returns the byteArray representation of the packet.
  */
 nassh.sftp.Packet.prototype.toByteArray = function() {
-  var array = new Uint8Array(this.packet_.length);
-
-  for (var i = 0; i < array.length; i++) {
-    array[i] = this.packet_.charCodeAt(i);
-  }
-
-  return array.buffer;
+  return lib.codec.stringToCodeUnitArray(this.packet_, Uint8Array).buffer;
 };
 
 /**

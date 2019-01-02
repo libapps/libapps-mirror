@@ -416,11 +416,7 @@ nassh.sftp.fsp.onReadFileRequested = function(options, onSuccess, onError) {
     .then(dataChunks => {
       // join all resolved data chunks together and return them as an ArrayBuffer
       var data = dataChunks.join('');
-      var array = new Uint8Array(data.length);
-      for (var i = 0; i < array.length; i++) {
-        array[i] = data.charCodeAt(i);
-      }
-      return array.buffer;
+      return lib.codec.stringToCodeUnitArray(data, Uint8Array).buffer;
     })
     .then(data => { onSuccess(data, false); } )
     .catch(response => {
