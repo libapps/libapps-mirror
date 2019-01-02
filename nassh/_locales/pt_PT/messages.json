@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "Se fechar este separador, irá encerrar a sessão."
 	},
+	"cache_pin_prompt": {
+		"message": "Pretende colocar o PIN em cache para esta sessão? (s/N):"
+	},
 	"cancel_button_label": {
 		"message": "Cancelar"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Apagar anfitriões conhecidos de SSH"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "Este comando apresenta um menu de anfitriões conhecidos e solicita ao anfitrião que esqueça."
@@ -51,7 +57,7 @@
 		"message": "Sabia que existe uma página de opções dedicada?\nJá não precisa de modificar diretamente \"term_\".\nPrima $1 para o abrir ou clique em:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Sabia que existe uma página de opções dedicada?\nJá não precisa de trabalhar diretamente com \"term_\".\n$1"
+		"message": "Sabia que existe uma página de opções dedicada?\nJá não precisa de trabalhar diretamente com \"term_\"!\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -64,6 +70,9 @@
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
+	},
+	"faq_menu_label": {
+		"message": "Perguntas frequentes"
 	},
 	"field_argstr_placeholder": {
 		"message": "argumentos adicionais da linha de comandos"
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "porta"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "Opções do servidor de retransmissão SSH"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "Opções do servidor de retransmissão SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "ERRO: não foi possível carregar o perfil $1:\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "$1% deslocado,"
+	},
 	"hterm_button_allow_always": {
 		"message": "Permitir sempre"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "Bloquear"
+	},
+	"hterm_button_page_down": {
+		"message": "Página para baixo"
+	},
+	"hterm_button_page_up": {
+		"message": "Página para cima"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Falha ao carregar o recurso $1."
@@ -141,7 +159,7 @@
 		"message": "Selecione um algoritmo de deteção de AltGr.\n\n'null': detetar automaticamente com base em navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': desativar qualquer \"munging\" relacionado com AltGr.\n'ctrl-alt': assumir que Ctrl+Alt significa AltGr.\n'left-alt': assumir que Alt da esquerda significa AltGr.\n'right-alt': assumir que Alt da direita significa AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Defina se a tecla Alt funciona como uma tecla Meta ou como uma tecla Alt distinta."
+		"message": "Se a tecla Alt funciona como uma tecla Meta ou como uma tecla Alt distinta."
 	},
 	"hterm_pref_alt_sends_what": {
 		"message": "Controla como é processada a tecla Alt.\n\n  escape: envie um prefixo ESC.\n  8 bits: adicione 128 ao caráter introduzido como no xterm.\n chave para navegador: aguarde o evento de premir as teclas e veja o que o navegador\n indica. (Isto não funciona corretamente nas plataformas em que o navegador\nexecuta uma ação predefinida para algumas sequências de Alt.)"
@@ -201,19 +219,19 @@
 		"message": "Se for verdadeiro, as campainhas do terminal em segundo plano criam uma notificação Web. https://www.w3.org/TR/notifications/\n\nA apresentação de notificações requer a autorização do utilizador. Quando esta opção está definida como verdadeira, hterm tenta pedir autorização ao utilizador, se necessário. Os navegadores podem não apresentar este pedido de autorização se não tiver tido origem numa ação do utilizador.\n\nAs extensões do Chrome com a autorização \"notificações\" têm autorização para apresentar notificações."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Defina se os carateres ambíguos do sudeste asiático têm uma largura de duas colunas."
+		"message": "Se os carateres ambíguos do sudeste asiático têm uma largura de duas colunas."
 	},
 	"hterm_pref_enable_8_bit_control": {
 		"message": "Defina como verdadeiro para ativar os carateres de controlo de 8 bits e como falso para os ignorar.\n\nRespeitamos as versões de dois bytes destes carateres de controlo independentemente desta definição."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "Defina como verdadeiro para respeitarmos o atributo da intermitência. Defina como falso para o ignorar."
+		"message": "Se definido como verdadeiro, respeita o atributo da intermitência. Defina como falso para o ignorar."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Defina como verdadeiro para utilizarmos um tipo de letra a negrito para o texto com o atributo a negrito/brilhante. Defina como falso para utilizarmos o tipo de letra normal. Defina como null para detetarmos automaticamente."
+		"message": "Se definido como verdadeiro, utilizamos um tipo de letra a negrito para o texto com o atributo a negrito/brilhante. Defina como falso para utilizar o tipo de letra normal. Defina como null para detetar automaticamente."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "Defina como verdadeiro para utilizarmos cores brilhantes (8-15 numa paleta de 16 cores) em qualquer texto com o atributo de negrito. Defina como falso em qualquer outro caso."
+		"message": "Se definido como verdadeiro, utilizamos cores brilhantes (8-15 numa paleta de 16 cores) em qualquer texto com o atributo de negrito. Defina como falso em qualquer outro caso."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Se é apresentada uma mensagem no terminal quando o anfitrião escrever na área de transferência."
@@ -239,41 +257,44 @@
 	"hterm_pref_foreground_color": {
 		"message": "A cor de fundo para o texto sem outro atributo de cor."
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Se pretender ocultar automaticamente o cursor do rato ao digitar. Por predefinição, detetar automaticamente se a plataforma/o SO processa isto.\n\nNota: alguns sistemas operativos podem substituir esta definição, pelo que nem sempre a poderá desativar."
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Se for definida como verdadeira, as teclas Home/End controlam a barra de deslocamento do terminal e o comando Shift-Home/End envia os códigos de tecla VT. Se for definida como falsa, as teclas Home/End enviam os códigos VT e o comando Shift-Home/End efetua o deslocamento."
+		"message": "Se definido como verdadeiro, as teclas Home/End controlam a barra de deslocamento do terminal e o comando Shift-Home/End é enviado para o anfitrião remoto. Se definido como falso, as teclas Home/End são enviadas para o anfitrião remoto e o comando Shift-Home/End efetua o deslocamento."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Um mapa da sequência de teclas para as ações das teclas. As sequências de teclas incluem zero ou mais teclas de modificação seguidas de um código de teclas. Os códigos de teclas podem ser números decimais ou hexadecimais, ou um identificador de teclas. As ações das teclas podem ser especificadas por uma string a enviar ao anfitrião ou um identificador de ações. Para obter uma explicação completa do formato, aceda a https://goo.gl/LWRndr.\n\nExemplos de associações de teclas:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Um mapa da sequência de teclas para as ações das teclas. As sequências de teclas incluem zero ou mais teclas de modificação seguidas de um código de teclas. Os códigos de teclas podem ser números decimais ou hexadecimais, ou um identificador de teclas. As ações das teclas podem ser especificadas por uma string a enviar ao anfitrião ou um identificador de ações. Para obter uma explicação completa do formato, aceda a https://goo.gl/LWRndr.\n\n\n\nExemplos de associações de teclas:\n:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Se for definida como verdadeira, deve converter as teclas multimédia nas respetivas teclas F equivalentes. Se for definida como falsa, permita que o navegador processe as teclas."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Definir se a tecla Meta envia ou não um caráter de escape inicial."
+		"message": "Envie um prefixo ESC ao premir uma tecla enquanto mantém premida a tecla Meta.\n\nPor exemplo, se estiver ativado, premir Meta-K envia ^[k como se tivesse digitado Escape, seguido de k. Se estiver desativado, apenas k é enviado."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Botão para colar do rato ou definição nula para a deteção automática.\n\nPara a deteção automática, vamos utilizar o botão do meio do rato para outras plataformas que não o X11 (incluindo o Chrome OS). No X11, vamos utilizar o botão direito do rato (uma vez que o gestor de janela nativo deverá utilizar o botão do meio do rato para colar).\n\n0 == botão esquerdo (principal).\n1 == botão do meio (auxiliar).\n2 == botão direito (secundário).\n\nEsta opção está ativa independentemente da definição \"mouse-right-click-paste\".\n\nNota: esta opção processa corretamente os ratos para utilizadores canhotos e destros."
+		"message": "Botão para colar do rato ou definição nula para a deteção automática.\n\nPara a deteção automática, vamos utilizar o botão do meio do rato para outras plataformas que não o X11 (incluindo o Chrome OS). No X11, vamos utilizar o botão direito do rato (uma vez que o gestor de janela nativo deverá utilizar o botão do meio do rato para colar).\n\n0 == botão esquerdo (principal).\n1 == botão do meio (auxiliar).\n2 == botão direito (secundário).\n\nEsta opção é independente da definição para colar ao clicar no botão direito.\n\nNota: esta opção processa corretamente os ratos para utilizadores canhotos e destros."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Colar ao clicar no botão do lado direito do rato.\n\nEsta opção está ativa independentemente da definição \"mouse-paste-button\".\n\nNota: esta opção processa corretamente os ratos para utilizadores canhotos e destros."
+		"message": "Colar ao clicar no botão do lado direito do rato.\n\nEsta opção é independente da definição para colar ao clicar no botão direito.\n\nNota: esta opção processa corretamente os ratos para utilizadores canhotos e destros."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Se for definida como verdadeira, as teclas Page Up/Down controlam a barra de deslocamento do terminal e o comando Shift-Page Up/Down envia os códigos de tecla VT. Se for definida como falsa, as teclas Page Up/Down enviam os códigos VT e o comando Shift-Page Up/Down efetua o deslocamento."
+		"message": "Se definido como verdadeiro, as teclas Page Up/Page Down controlam a barra de deslocamento do terminal e o comando Shift-Page Up/Shift-Page Down é enviado para o anfitrião remoto. Se definido como falso, as teclas Page Up/Page Down são enviadas para o anfitrião remoto e o comando Shift-Page Up/Shift-Page Down efetua o deslocamento."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Definir se devemos atribuir o comando Alt-1..9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os aceleradores do teclado \"mudar para o separador\" do Chrome. Quando não estiver a executar num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou no Emacs.\n\nSe for definida como verdadeira, o comando Alt-1..9 é processado pelo navegador. Se for definida como falsa, o comando é enviado ao anfitrião. Se for definida como nula, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
+		"message": "Se devemos atribuir o comando Alt-1 a 9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os aceleradores do teclado \"mudar para o separador\" do Chrome. Quando não estiver a executar num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou no Emacs.\n\nSe for definida como verdadeira, o comando Alt-1 a 9 é processado pelo navegador. Se for definida como falsa, o comando é enviado ao anfitrião. Se for definida como nula, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Definir se devemos atribuir o comando Ctrl-1..9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os aceleradores do teclado \"mudar para o separador\" do Chrome. Quando não estiver a ser executada num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou no Emacs.\n\nSe for definida como verdadeira, o comando Ctrl-1..9 é processado pelo navegador. Se for definida como falsa, o comando é enviado ao anfitrião. Se for definida como nula, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
+		"message": "Se devemos atribuir o comando Ctrl-1 a 9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os aceleradores do teclado \"mudar para o separador\" do Chrome. Quando não estiver a ser executada num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou no Emacs.\n\nSe for definida como verdadeira, o comando Ctrl-1 a 9 é processado pelo navegador. Se for definida como falsa, o comando é enviado ao anfitrião. Se for definida como nula, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Definir se devemos atribuir o comando Meta-1..9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os aceleradores do teclado \"mudar para o separador\" do Chrome. Quando não estiver a executar num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou no Emacs.\n\nSe for definida como verdadeira, o comando Meta-1..9 é processado pelo navegador. Se for definida como falsa, o comando é enviado ao anfitrião. Se for definida como nula, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
+		"message": "Se devemos atribuir o comando Meta-1 a 9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os aceleradores do teclado \"mudar para o separador\" do Chrome. Quando não estiver a executar num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou no Emacs.\n\nSe for definida como verdadeira, o comando Meta-1 a 9 é processado pelo navegador. Se for definida como falsa, o comando é enviado ao anfitrião. Se for definida como nula, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Definir se o comando Meta-V é atribuído ao anfitrião."
+		"message": "Se o comando Meta-V é atribuído ao anfitrião."
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "Definir a codificação esperada para os dados recebidos do anfitrião.\n\nOs valores válidos são \"utf-8\" e \"raw\"."
+		"message": "Definir a codificação esperada para os dados recebidos do anfitrião.\nSe as codificações não corresponderem, é provável que sejam observados erros visuais.\n\nOs valores válidos são \"utf-8\" e \"raw\"."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Se há deslocamento até à parte inferior ao premir qualquer tecla."
@@ -285,7 +306,7 @@
 		"message": "Se utilizar o buffer do ecrã alternativo e as DECCKM (teclas do cursor da aplicação) estiverem ativas, os eventos de deslocamento da roda do rato emulam as teclas de seta.\n\nÉ possível desativar temporariamente esta opção ao premir sem soltar a tecla Shift.\n\nNormalmente, isto acontece ao utilizar pagers (less), ao ler páginas do manual ou ao utilizar editores de texto (vi/nano) ou screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "O multiplicador para o delta de píxeis em eventos da roda desencadeados pela roda de deslocamento. Altera a velocidade de deslocamento da página."
+		"message": "O multiplicador para eventos da roda de deslocamento quando medido em píxeis.\n\nAltera a velocidade de deslocamento da página."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "O modo de barra de deslocamento vertical."
@@ -294,13 +315,13 @@
 		"message": "Definir a codificação para os dados enviados ao anfitrião."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Se for definida como verdadeira, Shift-Insert cola. Se for definida como falsa, efetua o envio ao anfitrião."
+		"message": "Se o comando Shift-Insert é utilizado para colar ou é enviado para o anfitrião remoto."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "A codificação do terminal predefinida (DOCS).\n\nA ISO-2022 ativa as traduções dos mapas de carateres (tais como mapas de gráficos).\nA UTF-8 desativa o suporte para as mesmas.\n\nA variante de bloqueio significa que não é possível alterar a codificação no tempo de execução através de sequências de escape do terminal.\n\nDeve utilizar a UTF-8, a menos que se depare com uma renderização danificada das aplicações antigas."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Se deve ser utilizado o comportamento de copiar a janela predefinido."
+		"message": "Se pretende utilizar o comportamento de cópia do navegador/SO padrão.\n\nPermitir ao navegador/SO processar o evento de cópia diretamente, o que pode melhorar a compatibilidade com alguns sistemas (onde a cópia não funciona), mas torna a seleção de texto menos robusta.\n\nPor exemplo, linhas compridas que tenham sido automaticamente agrupadas serão copiadas com as novas linhas nas mesmas."
 	},
 	"hterm_pref_user_css": {
 		"message": "O URL da folha de estilos do utilizador a incluir no documento do terminal."
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Expressão regular para parar a correspondência à direita (no fim) de uma seleção.\n\nNormalmente, trata-se de uma classe de carateres para rejeitar carateres específicos."
+	},
+	"hterm_space_character": {
+		"message": "Espaço"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Aspeto (tipos de letra, cores, imagens)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Copiar e colar"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Codificação"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Extensões"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Teclado"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Diversas"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Deslocamento"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Sons"
 	},
 	"identity_label": {
 		"message": "Identidade"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "Montado"
 	},
+	"new_window_menu_label": {
+		"message": "Nova janela"
+	},
 	"notify_copy": {
 		"message": "Seleção copiada"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "Pretende voltar a ligar (R), escolher outra ligação (C) ou sair (X)?"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "Opção de retransmissão desconhecida: $1."
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "Argumentos SSH"
 	},
+	"terminal_clear_menu_label": {
+		"message": "Apagar terminal"
+	},
 	"terminal_preview_label": {
 		"message": "Pré-visualização"
 	},
 	"terminal_profile_label": {
 		"message": "Perfil atual"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Repor terminal"
 	},
 	"tip_1": {
 		"message": "Pode premir sem soltar Ctrl (Cmd no macOS) enquanto clica nos links para os abrir."
@@ -429,10 +486,13 @@
 		"message": "Pode voltar a vincular teclas/atalhos: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Utilizar Yubikeys e outros cartões inteligentes para ssh auth: https://goo.gl/3ZEU1w"
+		"message": "Utilizar Yubikeys e outros cartões inteligentes para autenticação ssh: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Apresentar imagens inline: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Premir sem soltar Ctrl (Cmd em macOS) enquanto clica com o botão direito apresenta um menu de contexto."
 	},
 	"tip_2": {
 		"message": "Apresente notificações no navegador através de hterm-notify: https://goo.gl/ZNxGdF"

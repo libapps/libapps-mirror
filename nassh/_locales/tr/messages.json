@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "Bu sekmenin kapatılması oturumun bağlantısını keser."
 	},
+	"cache_pin_prompt": {
+		"message": "Bu oturuma ait PIN bilgisi önbelleğe alınsın mı? (e/H):"
+	},
 	"cancel_button_label": {
 		"message": "İptal"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "SSH bilinen_ana_makinelerini temizle"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "Bu komut bilinen ana makinelerin bulunduğu bir menüyü görüntüler ve unutulacak ana makinenin belirtilmesini ister."
@@ -51,7 +57,7 @@
 		"message": "Seçenekler için özel bir sayfa olduğunu biliyor muydunuz?\nArtık doğrudan \"term_\" öğesini değiştirmenize gerek yok!\nAçmak için $1 tuşuna basın veya şu adresi tıklayın:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Seçenekler için özel bir sayfa olduğunu biliyor muydunuz?\nArtık doğrudan \"term_\" ile uğraşmanıza gerek yok!\n$1"
+		"message": "Seçenekler için özel bir sayfa olduğunu biliyor muydunuz?\nArtık \"term_\" ifadesini doğrudan değiştirmeniz gerekmiyor!\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -64,6 +70,9 @@
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
+	},
+	"faq_menu_label": {
+		"message": "SSS"
 	},
 	"field_argstr_placeholder": {
 		"message": "ekstra komut satırı bağımsız değişkenleri"
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "bağlantı noktası"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "SSH geçiş sunucusu seçenekleri"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "SSH geçiş sunucusu seçenekleri"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "HATA: Profil $1 yüklenemedi:\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "%$1 kaydırıldı,"
+	},
 	"hterm_button_allow_always": {
 		"message": "Her zaman izin ver"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "Engelle"
+	},
+	"hterm_button_page_down": {
+		"message": "Bir sayfa aşağı"
+	},
+	"hterm_button_page_up": {
+		"message": "Bir sayfa yukarı"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "$1 yüklenemedi"
@@ -141,7 +159,7 @@
 		"message": "AltGr sezgisel algılama seçin.\n\n'null': navigator.language ayarına dayalı olarak otomatik algılama:\n      'en-us' => 'none', else => 'right-alt'\n'none': AltGr ile alakalı değişiklikler devre dışıdır.\n'ctrl-alt': Ctrl+Alt, AltGr demektir.\n'left-alt': Sol Alt, AltGr demektir.\n'right-alt': Sağ Alt, AltGr demektir."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Alt tuşunun Meta tuş olarak mı yoksa ayrı bir Alt tuşu olarak mı kullanılacağını belirler."
+		"message": "Alt tuşunun Meta tuş olarak mı yoksa ayrı bir Alt tuşu olarak mı kullanılacağı."
 	},
 	"hterm_pref_alt_sends_what": {
 		"message": "Alt tuşunun nasıl kullanıldığını kontrol eder.\n\n  escape: ESC ön eki gönderin.\n  8-bit: xterm'de olduğu gibi yazılan karaktere 128 ekleyin.\n browser-key: Tuşa basıldığında ne olacağını bekleyin ve tarayıcının\n ne dediğini görün. (Bu yöntem, tarayıcının bazı Alt dizileri için varsayılan\n işlem gerçekleştirdiği platformlarda fazla işe yaramaz.)"
@@ -171,7 +189,7 @@
 		"message": "Kopyaladıktan sonra seçimin temizlenip temizlenmeyeceğini belirler."
 	},
 	"hterm_pref_close_on_exit": {
-		"message": "Komutun yürütülmesi bittiğinde pencerenin kapatılıp kapatılmayacağını belirler."
+		"message": "Komutun yürütülmesi bittiğinde pencerenin kapatılıp kapatılmayacağı."
 	},
 	"hterm_pref_color_palette_overrides": {
 		"message": "Varsayılan paletteki renkleri geçersiz kılar.\n\nBu bir dizi veya nesne olarak belirtilebilir. Nesne olarak belirtilirse, her özelliğin renk paletinde bir sayısal dizin olduğu seyrek dizin olarak kabul edilir.\n\nDeğerler, neredeyse her CSS renk değeri olarak belirtilebilir. #RGB, #RRGGBB, rgb(...), rgba(...) ve standart X11 rgb.txt dosyasının bir parçası olan tüm renk adları buna dahildir.\n\nVarsayılan değerin değiştirilmemesi gerektiğini belirtmek için \"null\" değerini kullanabilirsiniz. Bu işlem, değer bir dizi olarak belirtildiğinde az sayıda dizinin atlanması açısından kullanışlıdır.\n\nÖrneğin, aşağıdakilerin her ikisi de renk dizini 1'i mavi olarak ayarlar:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
@@ -201,19 +219,19 @@
 		"message": "Doğru değerine ayarlanırsa arka plandaki terminal zilleri bir Web Bildirimi oluşturur. https://www.w3.org/TR/notifications/\n\nBildirimlerin görüntülenmesi için kullanıcının izin vermesi gerekir. Bu seçenek doğru değerine ayarlandığında hterm, gerektiğinde kullanıcıdan izin ister. Bu izin isteği bir kullanıcı işlemi tarafından tetiklenmediğinde tarayıcılar bunu göstermeyebilir.\n\n\"Bildirim\" iznine sahip olan Chrome uzantılarının bildirim görüntüleme izni vardır."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Doğu Asya Belirsiz karakterlerinin iki sütun genişliğinde olup olmayacağını belirler."
+		"message": "Doğu Asya Belirsiz karakterlerinin iki sütun genişliğinde olup olmayacağı."
 	},
 	"hterm_pref_enable_8_bit_control": {
 		"message": "Doğru değerine ayarlandığında 8 bit kontrol karakterlerini etkinleştirir, yanlış değerine ayarlandığında bunları yoksayar.\n\nBu ayara bakılmaksızın bu kontrol karakterlerinin iki baytlık sürümlerini geçerli kabul ederiz."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "Doğru değerine ayarlandığında yanıp sönme özelliğini geçerli kabul ederiz. Yanlış değerine ayarlandığında bu özelliği yoksayarız."
+		"message": "True (Doğru) değeri ayarlanırsa yanıp sönme özelliğine dikkat edin. False (Yanlış) değeri ayarlanırsa bunu göz ardı edin."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Doğru değerine ayarlandığında kalın/parlak özelliğine sahip olan metin için kalın yazı tipini kullanırız. Yanlış değerine ayarlandığında normal yazı tipini kullanırız. Boş değerine ayarlandığında otomatik olarak algılanır."
+		"message": "True (Doğru) değerine ayarlandığında kalın/parlak özellikli metin için kalın yazı tipi kullanılır. False (Yanlış) değerine ayarlandığında normal yazı tipi kullanılır. Boş değerine ayarlandığında otomatik olarak algılanır."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "Doğru değerine ayarlandığında kalın özelliğe sahip olan metinler için parlak renkler (16'lı renk paletinde 8-15) kullanırız. Yanlış değerine ayarlandığında ise tam tersini yaparız."
+		"message": "True (Doğru) değerine ayarlandığında kalın özelliğe sahip olan metinler için parlak renkler (16'lı renk paletinde 8-15) kullanılır. False (Yanlış) değerine ayarlandığında ise tam tersi yapılır."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Ana makine, panoya yazdığında terminalde bir mesaj gösterilip gösterilmeyeceğini belirler."
@@ -239,8 +257,11 @@
 	"hterm_pref_foreground_color": {
 		"message": "Başka renk özelliği olmayan metin için ön plan rengi."
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Yazı yazarken fare imlecinin otomatik olarak gizlenip gizlenmeyeceğini belirler. Varsayılan değer, platform/OS'nin bunu uygulayıp uygulamadığının otomatik olarak algılanmasıdır.\n\nNot: Bu ayarı bazı işletim sistemleri geçersiz kılabilir ve her zaman devre dışı bırakamayabilirsiniz."
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Doğru değerine ayarlanırsa, Home/End tuşu, terminal kaydırma çubuğunu kontrol eder ve Üst Karakter-Home/End, VT tuş kodlarını gönderir. Yanlış değerine ayarlanırsa Home/End, VT kodlarını gönderir ve Üst Karakter-Home/End kaydırır."
+		"message": "True (Doğru) değerine ayarlanırsa Home/End denetimleri terminal kaydırma çubuğunu kontrol eder ve Üst Karakter-Home/Üst Karakter-End denetimleri uzak ana makineye gönderilir. False (Yanlış) değerine ayarlanırsa Home/End denetimleri uzak ana makineye gönderilir, Üst Karakter-Home/Üst Karakter-End denetimleri kaydırma yapar."
 	},
 	"hterm_pref_keybindings": {
 		"message": "Tuş işlemleri için tuş sırasının bir haritası. Tuş sıraları, sıfır veya daha fazla değiştirici tuş ile ardından gelen bir tuş kodundan oluşur. Tuş kodları ondalık veya onaltılık sayılar ya da bir tuş tanımlayıcı olabilir. Tuş işlemlerine, ana makineye gönderilecek bir dize ya da işlem tanımlayıcı belirlenebilir. Biçimin tam açıklaması için https://goo.gl/LWRndr adresine bakın.\n\nÖrnek tuş ilişkilendirmeleri:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Üst Karakter-L\": \"BAŞARILI\",\n  \"Ctrl-H\": \"'MERHABA\\n'\"\n}"
@@ -249,31 +270,31 @@
 		"message": "Doğru değerine ayarlanırsa, medya tuşlarını Fkey eşdeğerlerine dönüştürür. Yanlış değerine ayarlanırsa tarayıcının tuşları ele almasına izin verir."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Meta tuşun önde gelen bir Kod Dışı Bırakma gönderip göndermeyeceğini belirler."
+		"message": "Meta tuşunu basılı tutarken bir tuşa bastığınızda bir ESC öneki gönderir.\n\nÖrneğin, tercih etkinleştirildiğinde Meta-K tuşlarına basılması, Escape'in ardından k tuşuna basmışsınız gibi ^[k değerini gönderir. Devre dışı bırakıldığında yalnızca k gönderilir."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Fare ile yapıştırma düğmesi. Boş değerine ayarlanırsa otomatik olarak algılanır.\n\nOtomatik algılama için, X11 dışındaki platformlarda (Chrome OS de dahil olmak üzere) orta fare düğmesini kullanacağız. X11'de sağ fare tuşunu kullanacağız (yerel pencere yöneticisi, orta fare tuşuyla yapıştıracağı için).\n\n0 == sol (birincil) düğme.\n1 == orta (yardımcı) düğme.\n2 == sağ (ikincil) düğme.\n\nBu seçenek \"sağ tıklayıp yapıştırma\" ayarından bağımsız olarak etkinleştirilir.\n\nNot: Bu, sol ve sağ elli kullanım için ayarlanmış farelerde doğru şekilde kullanılacaktır."
+		"message": "Fare ile yapıştırma düğmesi. Boş değerine ayarlanırsa otomatik olarak algılanır.\n\nOtomatik algılama için, X11 dışındaki platformlarda (Chrome OS de dahil olmak üzere) orta fare düğmesini kullanacağız. X11'de sağ fare tuşunu kullanacağız (yerel pencere yöneticisi, orta fare tuşuyla yapıştıracağı için).\n\n0 == sol (birincil) düğme.\n1 == orta (yardımcı) düğme.\n2 == sağ (ikincil) düğme.\n\nBu seçenek \"sağ tıklayıp yapıştırma\" ayarından bağımsızdır.\n\nNot: Bu, sol ve sağ elli kullanım için ayarlanmış farelerde doğru şekilde kullanılacaktır."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Sağ fare düğmesi tıklandığında yapıştırır.\n\nBu seçenek, \"yapıştırma düğmesi\" ayarından bağımsız olarak etkinleştirilir.\n\nNot: Bu, sol ve sağ elli kullanım için ayarlanmış farelerde doğru şekilde kullanılacaktır."
+		"message": "Sağ fare düğmesi tıklandığında yapıştırır.\n\nBu seçenek, \"yapıştırma düğmesi\" ayarından bağımsızdır.\n\nNot: Bu, sol ve sağ elli kullanım için ayarlanmış farelerde doğru şekilde kullanılacaktır."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Doğru değerine ayarlanırsa, Page Up/Down, terminal kaydırma çubuğunu kontrol eder ve Üst Karakter-Page Up/Down, VT tuş kodlarını gönderir. Yanlış değerine ayarlanırsa, Page Up/Down, VT kodlarını gönderir ve Üst Karakter-Page Up/Down kaydırır."
+		"message": "True (Doğru) değerine ayarlanırsa Page Up/Page Down denetimleri terminal araç çubuğunu kontrol eder, Üst Karakter-Page Up/Üst Karakter-Page Down denetimleri uzak ana makineye gönderilir. False (Yanlış) değerine ayarlanırsa Page Up/Page Down denetimleri uzak ana makineye gönderilir, Üst Karakter-Page Up/Üst Karakter-Page Down denetimleri kaydırma yapar."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Alt-1..9'u tarayıcıya aktarıp aktarmayacağımızı belirler.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye hızlandırıcılarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nDoğru değerine ayarlanırsa, Alt-1..9 tarayıcı tarafından ele alınır. Yanlış değerine ayarlanırsa, Alt-1..9 ana makineye gönderilir. Boş değerine ayarlanırsa, tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
+		"message": "Alt-1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye hızlandırıcılarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nDoğru değerine ayarlanırsa, Alt-1..9 tarayıcı tarafından ele alınır. Yanlış değerine ayarlanırsa, Alt-1..9 ana makineye gönderilir. Boş değerine ayarlanırsa, tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Ctrl-1..9'u tarayıcıya aktarıp aktarmayacağımızı belirler.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye hızlandırıcılarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nDoğru değerine ayarlanırsa, Ctrl-1..9 tarayıcı tarafından ele alınır. Yanlış değerine ayarlanırsa, Ctrl-1..9 ana makineye gönderilir. Boş değerine ayarlanırsa, tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
+		"message": "Ctrl-1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye hızlandırıcılarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nDoğru değerine ayarlanırsa, Ctrl-1..9 tarayıcı tarafından ele alınır. Yanlış değerine ayarlanırsa, Ctrl-1..9 ana makineye gönderilir. Boş değerine ayarlanırsa, tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Meta-1..9'u tarayıcıya aktarıp aktarmayacağımızı belirler.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye hızlandırıcılarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nDoğru değerine ayarlanırsa, Meta-1..9 tarayıcı tarafından ele alınır. Yanlış değerine ayarlanırsa, Meta-1..9 ana makineye gönderilir. Boş değerine ayarlanırsa, tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
+		"message": "Meta-1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye hızlandırıcılarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nDoğru değerine ayarlanırsa, Meta-1..9 tarayıcı tarafından ele alınır. Yanlış değerine ayarlanırsa, Meta-1..9 ana makineye gönderilir. Boş değerine ayarlanırsa, tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Meta-V'nin ana makineye aktarılıp aktarılmayacağını belirler."
+		"message": "Meta-V'nin ana makineye aktarılıp aktarılmayacağı."
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "Ana makineden alınan veriler için beklenen kodlamayı belirler.\n\nGeçerli değerler \"utf-8\" ve \"raw\" şeklindedir."
+		"message": "Ana makineden alınan veriler için beklenen kodlamayı belirler.\nKodlamalar eşleşmezse görsel hataların gözlemlenme olasılığı artar.\n\nGeçerli değerler \"utf-8\" ve \"raw\" değerleridir."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Herhangi bir tuş vuruşunda görünümün en alta kaydırılıp kaydırılmayacağını belirler."
@@ -285,7 +306,7 @@
 		"message": "Alternatif ekran arabelleğini kullanırken DECCKM (Uygulama İmleç Tuşları) etkinse, fare tekerleği kaydırma etkinlikleri, ok tuşlarını taklit eder.\n\nÜst Karakter tuşunu basılı tutarak bunu geçici bir süreliğine devre dışı bırakabilirsiniz.\n\nBu durum, çağrı cihazları kullanılırken (daha az), kılavuz sayfaları veya metin düzenleyiciler (vi/nano) okunurken ya da ekran/tmux kullanılırken sıklıkla ortaya çıkar."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Kaydırma tekerleğinden kaynaklanan, tekerlek etkinliklerindeki piksel delta çarpanı. Sayfanın kaydırılma hızını değiştirir."
+		"message": "Piksel cinsinden ölçüldüğünde kaydırma tekerleği etkinliklerinin katsayısı.\n\nSayfanın kaydırma hızını değiştirir."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Dikey kaydırma çubuğu modu."
@@ -294,13 +315,13 @@
 		"message": "Ana makineye gönderilen verilerin kodlamasını belirler."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Doğru değerine ayarlanırsa Üst Karakter-Insert tuşları yapıştırır, yanlış değerine ayarlanırsa ana makineye gönderilir."
+		"message": "Üst Karakter-Insert kombinasyonunun yapıştırma için mi kullanıldığı yoksa uzak ana makineye mi gönderildiği."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Varsayılan terminal kodlaması (DOCS).\n\nISO-2022, karakter haritası çevirilerini (grafik haritaları gibi) etkinleştirir.\nUTF-8 bunlar için desteği devre dışı bırakır.\n\nKilitli değişken, kodlamanın çalışma zamanında terminal kod dışı bırakma sıraları aracılığıyla değiştirilemeyeceği anlamına gelir.\n\nEski uygulamalarda bozuk oluşturma fark etmediğiniz sürece UTF-8'i kullanmalısınız."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Varsayılan pencere kopyalama davranışının kullanılıp kullanılmayacağını belirler."
+		"message": "Varsayılan tarayıcı/OS kopyalama davranışının kullanılıp kullanılmayacağı.\n\nTarayıcının/OS'nin kopyalama etkinliğini doğrudan işlemesine olanak tanır. Bu, (kopyalamanın hiç çalışmadığı) bazı sistemlerle uyumluluğunu iyileştirebilir ancak metin seçiminin doğruluğunu azaltır.\n\nÖrneğin, otomatik satır kaydırmanın kullanıldığı uzun satırlar, yeni satırlar içinde olacak şekilde kopyalanır."
 	},
 	"hterm_pref_user_css": {
 		"message": "Terminal dokümanına dahil edilecek kullanıcı stil sayfasının URL'si."
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Bir seçimin sağ tarafıyla (bitişiyle) eşleştirmenin durdurulması için kullanılan normal ifade.\n\nNormalde bu, belirli karakterleri reddetmek için kullanılan bir karakter sınıfıdır."
+	},
+	"hterm_space_character": {
+		"message": "Boşluk"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Görünüm (yazı tipleri, renkler, resimler)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Kopyalama ve Yapıştırma"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Kodlama"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Uzantılar"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Klavye"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Çeşitli"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Kaydırma"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Sesler"
 	},
 	"identity_label": {
 		"message": "Kimlik"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "Eklendi!"
 	},
+	"new_window_menu_label": {
+		"message": "Yeni Pencere"
+	},
 	"notify_copy": {
 		"message": "Seçim Kopyalandı"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "(R) Yeniden bağlan, (C) Başka bir bağlantı seç veya (X) Çık?"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "Bilinmeyen geçiş seçeneği: $1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "SSH Bağımsız Değişkenleri"
 	},
+	"terminal_clear_menu_label": {
+		"message": "Terminali Temizle"
+	},
 	"terminal_preview_label": {
 		"message": "Önizleme"
 	},
 	"terminal_profile_label": {
 		"message": "Geçerli profil"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Terminali Sıfırla"
 	},
 	"tip_1": {
 		"message": "Bağlantıları açmak için, tıklarken Ctrl tuşunu (macOS'de Cmd tuşu) basılı tutabilirsiniz!"
@@ -429,10 +486,13 @@
 		"message": "Tuşları/kısayolları yeniden birleştirebilirsiniz: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "ssh kimlik doğrulaması için Yubikeys'i ve diğer akıllı kartları kullanın: https://goo.gl/3ZEU1w"
+		"message": "ssh kimlik doğrulaması için Yubikeys'i ve diğer akıllı kartları kullanın: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Resimleri satır içinde görüntüleyin: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Ctrl (macOS'ta Cmd) tuşunu basılı tutarken sağ tıklama bir içerik menüsünün görüntülenmesini sağlar."
 	},
 	"tip_2": {
 		"message": "hterm-notify kullanarak tarayıcıda bildirimleri gösterin: https://goo.gl/ZNxGdF"

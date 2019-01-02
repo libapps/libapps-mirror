@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "Als je dit tabblad sluit, wordt deze sessie beëindigd."
 	},
+	"cache_pin_prompt": {
+		"message": "De pincode voor deze sessie opslaan in het cachegeheugen? (J/N):"
+	},
 	"cancel_button_label": {
 		"message": "Annuleren"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Bekende SSH-hosts wissen"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "Met deze opdracht wordt een menu weergegeven met bekende hosts en prompts die de host moet vergeten."
@@ -65,6 +71,9 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
+	"faq_menu_label": {
+		"message": "Veelgestelde vragen"
+	},
 	"field_argstr_placeholder": {
 		"message": "extra opdrachtregelargumenten"
 	},
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "poort"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "Opties voor SSH-relayserver"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "Opties voor SSH-relayserver"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "FOUT: Kan het profiel $1 niet laden:\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "$1% gescrolld,"
+	},
 	"hterm_button_allow_always": {
 		"message": "Altijd toestaan"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "Blokkeren"
+	},
+	"hterm_button_page_down": {
+		"message": "Pagina omlaag"
+	},
+	"hterm_button_page_up": {
+		"message": "Pagina omhoog"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Laden van $1 is mislukt"
@@ -141,7 +159,7 @@
 		"message": "Selecteer een AltGr-detectieheuristiek.\n\n'null': automatische detectie op basis van navigator.language:\n      'en-us' => 'none', anders => 'right-alt'\n'none': schakelt schadelijke wijzigingen voor AltGr uit.\n'ctrl-alt': veronderstelt dat Ctrl + Alt eigenlijk AltGr betekent.\n'left-alt': veronderstelt dat de linker-Alt eigenlijk AltGr betekent.\n'right-alt': veronderstelt dat de rechter-Alt eigenlijk AltGr betekent."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Hiermee kun je instellen of de Alt-toets als metatoets of specifiek als Alt-toets fungeert."
+		"message": "Hiermee kun je instellen of de Alt-toets als Meta-toets of specifiek als Alt-toets fungeert."
 	},
 	"hterm_pref_alt_sends_what": {
 		"message": "Hiermee wordt de functie van de Alt-toets bepaald.\n\n  escape: een ESC-voorvoegsel verzenden.\n  8-bit: 128 aan het teken toevoegen zonder Shift, zoals in xterm.\nbrowser-key: Wachten tot een toets wordt ingedrukt om te zien wat de browser doet. (Dit werkt niet goed op platforms waarin de browser een standaardactie uitvoert bij bepaalde Alt-toetscombinaties.)"
@@ -162,7 +180,7 @@
 		"message": "CSS-waarde van de grootte van de achtergrondafbeelding."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Als je true (waar) hebt ingesteld, verzendt Backspace-toets BS ('\\x08', aka ^H). Anders verzendt de Backspace-toets '\\x7f'."
+		"message": "Als je 'true' hebt ingesteld, verzendt Backspace-toets BS ('\\x08', aka ^H). Anders verzendt de Backspace-toets '\\x7f'."
 	},
 	"hterm_pref_character_map_overrides": {
 		"message": "Dit is gespecificeerd als een object. Het is een ijle matrix waarbij elke eigenschap de tekensetcode is en de waarde een object is dat zelf ook een ijle matrix is. In die ijle matrix is elke eigenschap het ontvangen teken en is de waarde het weergegeven teken.\n\nBijvoorbeeld:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
@@ -171,7 +189,7 @@
 		"message": "Bepaalt of de selectie moet worden gewist nadat deze is gekopieerd."
 	},
 	"hterm_pref_close_on_exit": {
-		"message": "Hiermee wordt bepaald of het venster wordt gesloten zodra de opdracht is uitgevoerd."
+		"message": "Hiermee bepaal je of het venster wordt gesloten zodra de opdracht is uitgevoerd."
 	},
 	"hterm_pref_color_palette_overrides": {
 		"message": "De kleuren in het standaardpalet overschrijven.\n\nDit kan worden opgegeven als een matrix of als een object. Als het wordt opgegeven als een object, wordt verondersteld dat het een ijle matrix is, waarbij elke eigenschap een numerieke index in het kleurenpalet is.\n\nWaarden kunnen worden opgegeven als vrijwel elke CSS-kleurwaarde. Dit omvat #RGB, #RRGGBB, rgb(...), rgba(...) en alle kleurnamen die ook deel uitmaken van het standaard X11 rgb.txt-bestand.\n\nMet 'null' kun je opgeven dat de standaardwaarde niet moet worden gewijzigd. Dit is handig om een klein aantal indices over te slaan wanneer de waarde is opgegeven als een matrix.\n\nAls bijvoorbeeld beide onderstaande waarden worden opgegeven, wordt 1 blauw weergegeven:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
@@ -180,13 +198,13 @@
 		"message": "Kopieert de selectie van de muis automatisch naar het klembord."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl + C kopieert als deze voorkeur is ingesteld op true (waar), en verzendt ^C naar host als ingesteld op false (onwaar).\nCtrl + Shift + C verzendt ^C naar host als deze voorkeur is ingesteld op true (waar), en kopieert als ingesteld op false (onwaar)."
+		"message": "Ctrl + C kopieert als deze voorkeur is ingesteld op 'True', en verzendt ^C naar host als ingesteld op 'False'.\nCtrl + Shift + C verzendt ^C naar host als deze voorkeur is ingesteld op 'True', en kopieert als ingesteld op 'False'."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Als true (waar) is ingesteld voor deze voorkeur, wordt met Ctrl + plus/min/nul de zoomfactor bediend.\nAls false (onwaar) is ingesteld, wordt met Ctrl + Shift +plus/min/nul de zoomfactor bediend en wordt met Ctrl + min ^_ verzonden en gebeurt er niks met Ctrl + plus/nul."
+		"message": "Als 'true' is ingesteld voor deze voorkeur, wordt met Ctrl + plus/min/nul de zoomfactor bediend.\nAls 'false' is ingesteld, wordt met Ctrl + Shift +plus/min/nul de zoomfactor bediend en wordt met Ctrl + min ^_ verzonden en gebeurt er niks met Ctrl + plus/nul."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl + V plakt als deze voorkeur is ingesteld op true (waar), en verzendt ^V naar host als ingesteld op false (onwaar).\nCtrl + Shift + V verzendt ^V naar host als deze voorkeur is ingesteld op true (waar), en plakt als ingesteld op false (onwaar)."
+		"message": "Ctrl + V plakt als deze voorkeur is ingesteld op 'true', en verzendt ^V naar host als ingesteld op 'false'.\nCtrl + Shift + V verzendt ^V naar host als deze voorkeur is ingesteld op 'true', en plakt als ingesteld op 'false'."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Hiermee wordt bepaald of de tekstcursor standaard knippert. Dit kan tijdens runtime via terminal-escapereeksen in en uit worden geschakeld."
@@ -198,22 +216,22 @@
 		"message": "De kleur van de zichtbare tekstcursor."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "Als true (waar) is ingesteld voor deze voorkeur, wordt bij terminalbellen op de achtergrond een webmelding gegenereerd. https://www.w3.org/TR/notifications/\n\nDe gebruiker moet toestemming geven voor de weergave van meldingen. Als deze optie is ingesteld op true (waar), probeert hterm de gebruiker indien nodig om toestemming te vragen. Browsers laten dit verzoek om toestemming mogelijk niet zien als het niet het gevolg is van een actie van de gebruiker.\n\nChrome-extensies met een machtiging voor meldingen hebben toestemming om meldingen weer te geven."
+		"message": "Als 'true' is ingesteld voor deze voorkeur, wordt bij terminalbellen op de achtergrond een webmelding gegenereerd. https://www.w3.org/TR/notifications/\n\nDe gebruiker moet toestemming geven voor de weergave van meldingen. Als deze optie is ingesteld op 'true', probeert hterm de gebruiker indien nodig om toestemming te vragen. Browsers laten dit verzoek om toestemming mogelijk niet zien als het niet het gevolg is van een actie van de gebruiker.\n\nChrome-extensies met een machtiging voor meldingen hebben toestemming om meldingen weer te geven."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Bepaalt of ambigue Oost-Aziatische karakters twee kolommen breed zijn."
+		"message": "Hiermee bepaal je of ambigue Oost-Aziatische tekens twee kolommen breed zijn."
 	},
 	"hterm_pref_enable_8_bit_control": {
-		"message": "Met 'waar' (true) worden 8-bits stuurcodes ingeschakeld, en met 'onwaar' (false) worden ze genegeerd.\n\nDe twee-byteversies van deze stuurcodes zijn bruikbaar, ongeacht deze instelling."
+		"message": "Met 'true' worden 8-bits stuurcodes ingeschakeld, en met 'false' worden ze genegeerd.\n\nDe twee-byteversies van deze stuurcodes zijn bruikbaar, ongeacht deze instelling."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "Met true (waar) wordt het knipperkenmerk gerespecteerd. Met false (onwaar) wordt het kenmerk genegeerd."
+		"message": "Als 'true' is ingesteld, wordt het knipperkenmerk gerespecteerd. Als 'false' is ingesteld, wordt het kenmerk genegeerd."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Met true (waar) wordt een vet lettertype gebruikt voor tekst met het kenmerk vet/helder. Met false (onwaar) wordt het lettertype met een normaal gewicht gebruikt. Met null (leeg) wordt automatische detectie gebruikt."
+		"message": "Als 'true' is ingesteld, wordt er een vet lettertype gebruikt voor tekst met het kenmerk vet/helder. Als 'false' is ingesteld, wordt het lettertype met een normaal gewicht gebruikt. Als 'null' is ingesteld, wordt automatische detectie gebruikt."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "Met true (waar) worden heldere kleuren gebruikt (acht tot vijftien in een palet met zestien kleuren) voor alle tekst met het kenmerk vet. Anders false (onwaar)."
+		"message": "Als 'true' is ingesteld, worden er heldere kleuren gebruikt (acht tot vijftien in een palet met zestien kleuren) voor alle tekst met het kenmerk vet. Anders 'false'."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Hiermee wordt bepaald of een bericht in de terminal moet worden weergegeven wanneer de host iets op het klembord zet."
@@ -239,41 +257,44 @@
 	"hterm_pref_foreground_color": {
 		"message": "De voorgrondkleur voor tekst zonder andere kleurkenmerken."
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Of de muisaanwijzer automatisch moet worden verborgen wanneer je typt. Standaard wordt automatisch gedetecteerd of dit door het platform/OS wordt afgehandeld.\n\nOpmerking: Mogelijk wordt deze instelling door bepaalde besturingssystemen overschreven, waardoor je deze instelling niet altijd kunt uitschakelen."
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Als true (waar) is ingesteld, wordt met Home/End de scrollbalk van de terminal bediend en worden met Shift + Home/End de VT-toetscodes verzonden. Als false (onwaar) is ingesteld, worden met Home/End de VT-codes verzonden en wordt er met Shift + Home/End gescrolld."
+		"message": "Als 'true' is ingesteld, wordt met Home/End de scrollbalk van de terminal bediend en worden Shift + Home/Shift + End naar de externe host verzonden. Als 'false' is ingesteld, worden Home/End naar de externe host verzonden en wordt er met Shift + Home/Shift + End gescrolld."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Een toetsencombinatie toewijzen aan toetsacties. Toetsencombinaties bestaan uit nul of meer functietoetsen gevolgd door een toetscode. Toetscodes kunnen bestaan uit decimale of hexadecimale getallen of een toets-ID. Een toetsactie kan een opgegeven tekenreeks zijn die wordt verzonden naar de host, of een actie-ID. Zie https://goo.gl/LWRndr voor een volledige uitleg van de indeling.\n\nVoorbeelden van sneltoetsen:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Een toetsencombinatie toewijzen aan toetsacties. Toetsencombinaties bestaan uit nul of meer functietoetsen gevolgd door een toetscode. Toetscodes kunnen bestaan uit decimale of hexadecimale getallen of een toets-ID. Een toetsactie kan een opgegeven tekenreeks zijn die wordt verzonden naar de host, of een actie-ID. Zie https://goo.gl/LWRndr voor een volledige uitleg van de indeling.\n\nVoorbeelden van sneltoetsen:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
-		"message": "Als true (waar) is ingesteld, worden mediatoetsen geconverteerd naar de equivalente functietoets. Als false (onwaar) is ingesteld, wordt de functie van de toetsen door de browser bepaald."
+		"message": "Als dit is ingesteld op 'True', worden mediatoetsen geconverteerd naar de equivalente functietoets. Als dit is ingesteld op 'False', wordt de functie van de toetsen door de browser bepaald."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Hiermee kun je instellen of er met de metatoets een voorafgaande escape moet worden verzonden."
+		"message": "Hiermee verzend je een ESC-voorvoegsel als je een toets indrukt terwijl je de Meta-toets ingedrukt houdt.\n\nAls deze optie is ingeschakeld en je bijvoorbeeld op Meta + K drukt, wordt ^[k verzonden alsof je Escape en vervolgens k typt. Als de optie is uitgeschakeld, wordt alleen k verzonden."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Plakken met muisknop of null (leeg) voor automatische detectie.\n\nOp niet-X11-platforms (inclusief Chrome OS) gebruiken we de middelste muisknop voor automatisch detecteren. Op X11 gebruiken we de rechtermuisknop (aangezien in de systeemeigen functie voor vensterbeheer de plakbewerking wordt uitgevoerd met de middelste muisknop).\n\n0 == linkerknop (primair).\n1 == middelste knop (supplementair).\n2 == rechtermuisknop (secundair).\n\nDeze optie wordt onafhankelijk van de instelling mouse-right-click-paste geactiveerd.\n\nOpmerking: Geschikt voor links- en rechtshandige muizen."
+		"message": "Plakken met muisknop of 'null' (leeg) voor automatische detectie.\n\nOp niet-X11-platforms (inclusief Chrome OS) gebruiken we de middelste muisknop voor automatisch detecteren. Op X11 gebruiken we de rechtermuisknop (aangezien in de systeemeigen functie voor vensterbeheer de plakbewerking wordt uitgevoerd met de middelste muisknop).\n\n0 == linkermuisknop (primair).\n1 == middelste knop (supplementair).\n2 == rechtermuisknop (secundair).\n\nDeze optie is onafhankelijk van de instelling voor plakken met de rechtermuisknop.\n\nOpmerking: Geschikt voor links- en rechtshandige muizen."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Plakken door op de rechtermuisknop te klikken.\n\nDe optie wordt onafhankelijk van de instelling mouse-paste-button geactiveerd.\n\nOpmerking: Geschikt voor links- en rechtshandige muizen."
+		"message": "Plakken door op de rechtermuisknop te klikken.\n\nDe is onafhankelijk van de instelling mouse-paste-button.\n\nOpmerking: Geschikt voor links- en rechtshandige muizen."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Als true (waar) is ingesteld, wordt met Page Up/Down de scrollbalk van de terminal beheerd en verzend je met Shift + Page Up/Down de VT-toetscodes. Als false (onwaar) is ingesteld, verzend je met Page Up/Down de VT-codes en scroll je met Shift + Page Up/Down."
+		"message": "Als 'true' is ingesteld, wordt met Page Up/Down de scrollbalk van de terminal beheerd en worden Shift + Page Up/Shift + Page Down naar de externe host verzonden. Als 'false' is ingesteld, worden Page Up/Page Down naar de externe host verzonden en wordt er met Shift + Page Up/Shift + Page Down gescrolld."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Instellen of Alt + 1..9 moet worden doorgegeven aan de browser.\n\nDit is handig wanneer hterm wordt uitgevoerd in een browsertabblad, zodat de toetsenbordversnellers van Chrome voor 'Overschakelen naar tabblad' niet verloren gaan. Wanneer hterm niet wordt uitgevoerd op een tabblad, kun je deze toetsen het beste naar een host verzenden, zodat ze kunnen worden gebruikt in vim of emacs.\n\nAls true (waar) is ingesteld, wordt Alt + 1..9 verwerkt door de browser. Als false (onwaar) is ingesteld, wordt Alt + 1..9 verzonden naar de host. Als null (leeg) is ingesteld, wordt op basis van het browserplatform en het venstertype de functie voor automatisch detecteren uitgevoerd."
+		"message": "Hiermee kun je instellen of Alt + 1..9 moet worden doorgegeven aan de browser.\n\nDit is handig wanneer hterm wordt uitgevoerd in een browsertabblad, zodat de toetsenbordversnellers van Chrome voor 'Overschakelen naar tabblad' niet verloren gaan. Wanneer hterm niet wordt uitgevoerd op een tabblad, kun je deze toetsen het beste naar een host verzenden, zodat ze kunnen worden gebruikt in vim of emacs.\n\nAls 'true' is ingesteld, wordt Alt + 1..9 verwerkt door de browser. Als 'false' is ingesteld, wordt Alt + 1..9 verzonden naar de host. Als 'null' is ingesteld, wordt op basis van het browserplatform en het venstertype de functie voor automatisch detecteren uitgevoerd."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Instellen of Ctrl + 1..9 moet worden doorgegeven aan de browser.\n\nDit is handig wanneer hterm wordt uitgevoerd in een browsertabblad, zodat de toetsenbordversnellers van Chrome voor 'Overschakelen naar tabblad' niet verloren gaan. Wanneer hterm niet wordt uitgevoerd op een tabblad, kun je deze toetsen het beste naar een host verzenden, zodat ze kunnen worden gebruikt in vim of emacs.\n\nAls true (waar) is ingesteld, wordt Ctrl + 1..9 verwerkt door de browser. Als false (onwaar) is ingesteld, wordt Ctrl + 1..9 verzonden naar de host. Als null (leeg) is ingesteld, wordt op basis van het browserplatform en het venstertype de functie voor automatisch detecteren uitgevoerd."
+		"message": "Hiermee kun je instellen of Ctrl + 1..9 moet worden doorgegeven aan de browser.\n\nDit is handig wanneer hterm wordt uitgevoerd in een browsertabblad, zodat de toetsenbordversnellers van Chrome voor 'Overschakelen naar tabblad' niet verloren gaan. Wanneer hterm niet wordt uitgevoerd op een tabblad, kun je deze toetsen het beste naar een host verzenden, zodat ze kunnen worden gebruikt in vim of emacs.\n\nAls 'true' is ingesteld, wordt Ctrl + 1..9 verwerkt door de browser. Als 'false' is ingesteld, wordt Ctrl + 1..9 verzonden naar de host. Als 'null' is ingesteld, wordt op basis van het browserplatform en het venstertype de functie voor automatisch detecteren uitgevoerd."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Instellen of Meta + 1..9 moet worden doorgegeven aan de browser.\n\nDit is handig wanneer hterm wordt uitgevoerd in een browsertabblad, zodat de toetsenbordversnellers van Chrome voor 'Overschakelen naar tabblad' niet verloren gaan. Wanneer hterm niet wordt uitgevoerd in een tabblad, kun je deze toetsen het beste naar een host verzenden, zodat ze kunnen worden gebruikt in vim of emacs.\n\nAls true (waar) is ingesteld, wordt Meta + 1..9 verwerkt door de browser. Als false (onwaar) is ingesteld, wordt Meta + 1..9 verzonden naar de host. Als null is ingesteld, wordt op basis van het browserplatform en het venstertype de functie voor automatisch detecteren uitgevoerd."
+		"message": "Hiermee kunnen instellen of Meta + 1..9 moet worden doorgegeven aan de browser.\n\nDit is handig wanneer hterm wordt uitgevoerd in een browsertabblad, zodat de toetsenbordversnellers van Chrome voor 'Overschakelen naar tabblad' niet verloren gaan. Wanneer hterm niet wordt uitgevoerd in een tabblad, kun je deze toetsen het beste naar een host verzenden, zodat ze kunnen worden gebruikt in vim of emacs.\n\nAls 'true' is ingesteld, wordt Meta + 1..9 verwerkt door de browser. Als 'false' is ingesteld, wordt Meta + 1..9 verzonden naar de host. Als 'null' is ingesteld, wordt op basis van het browserplatform en het venstertype de functie voor automatisch detecteren uitgevoerd."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Instellen of meta-V wordt doorgegeven aan de host."
+		"message": "Hiermee kun je instellen of Meta + V wordt doorgegeven aan de host."
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "Hiermee wordt verwachte versleuteling ingesteld voor gegevens die worden ontvangen van de host.\n\nGeldige waarden zijn utf-8 en raw."
+		"message": "Hiermee wordt verwachte codering ingesteld voor gegevens die worden ontvangen van de host.\nAls de coderingen niet overeenkomen, zie je waarschijnlijke visuele bugs.\n\nGeldige waarden zijn utf-8 en raw."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Hiermee wordt bepaald of er met elke willekeurige toetsaanslag naar beneden wordt gescrolld."
@@ -285,7 +306,7 @@
 		"message": "Wanneer de alternatieve schermbuffer wordt gebruikt en DECCKM (Application Cursor Keys) actief is, emuleren scrollgebeurtenissen met het muiswiel de pijltoetsen.\n\nDit kan tijdelijk worden uitgeschakeld door de Shift-toets ingedrukt te houden.\n\nDit komt regelmatig voor wanneer je pagers (less) gebruikt, documentatie of tekst in teksteditors (vi/nano) leest of screen/tmux gebruikt."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "De multiplier voor de pixeldelta in wielgebeurtenissen die worden veroorzaakt door het scrollwiel. Hiermee wijzig je hoe snel de pagina wordt gescrolld."
+		"message": "De multiplier voor scrollwielgebeurtenissen wanneer wordt gemeten in pixels.\n\nHiermee wijzig je hoe snel de pagina wordt gescrolld."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "De verticale scrollbalkmodus."
@@ -294,13 +315,13 @@
 		"message": "Hiermee stel je de versleuteling in voor gegevens die worden verzonden naar de host."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Indien true (waar) is ingesteld, kun je Shift + Insert gebruiken om te plakken. Als false (onwaar) is ingesteld, worden gegevens naar de host verzonden."
+		"message": "Of Shift + Insert wordt gebruikt om te plakken of wordt verzonden naar de externe host."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "De standaard terminalcodering (DOCS).\n\nMet ISO-2022 kunnen speciale tekens worden omgezet (zoals het toewijzen van afbeeldingen).\nUTF-8 biedt hier geen ondersteuning voor.\n\nMet de vergrendelde variant kan de codering niet tijdens runtime via terminalescapereeksen worden gewijzigd.\n\nGebruik UTF-8, tenzij er problemen optreden met de weergave van verouderde toepassingen."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Of het standaardgedrag voor kopiëren moet worden gebruikt in het venster."
+		"message": "Of het standaardgedrag van de browser/het OS voor kopiëren moet worden gebruikt.\n\nSta de browser/het OS toe om de kopieergebeurtenis rechtstreeks te verwerken. Dit kan de compatibiliteit met bepaalde systemen (waar de kopieerfunctie helemaal niet werkt) verbeteren, maar maakt de tekstselectie minder robuust.\n\nLange regels die automatisch zijn afgebroken, worden bijvoorbeeld gekopieerd inclusief de nieuwe regels."
 	},
 	"hterm_pref_user_css": {
 		"message": "URL van de stylesheet van de gebruiker die moet worden opgenomen in het terminaldocument."
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Reguliere expressie om geen overeenkomsten rechts (einde) van een selectie te zoeken.\n\nDoorgaans is dit een tekenklasse om bepaalde tekens uit te sluiten."
+	},
+	"hterm_space_character": {
+		"message": "Spatie"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Uiterlijk (lettertypen, kleuren, afbeeldingen)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Kopiëren en plakken"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Codering"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Extensies"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Toetsenbord"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Overig"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Scrollen"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Geluiden"
 	},
 	"identity_label": {
 		"message": "Identiteit"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "Gekoppeld."
 	},
+	"new_window_menu_label": {
+		"message": "Nieuw venster"
+	},
 	"notify_copy": {
 		"message": "Selectie gekopieerd"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "Opnieuw verbinden (R), een andere verbinding kiezen (C) of afsluiten (X)?"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "Onbekende relayoptie: $1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "SSH-argumenten"
 	},
+	"terminal_clear_menu_label": {
+		"message": "Terminal wissen"
+	},
 	"terminal_preview_label": {
 		"message": "Voorbeeld"
 	},
 	"terminal_profile_label": {
 		"message": "Huidig profiel"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Terminal resetten"
 	},
 	"tip_1": {
 		"message": "Je kunt Ctrl (Cmd op macOS) ingedrukt houden terwijl je op links klikt om ze te openen."
@@ -429,10 +486,13 @@
 		"message": "Je kunt de functionaliteit van toetsen/sneltoetsen aanpassen: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Gebruik Yubikeys en andere smartcards voor ssh auth: https://goo.gl/3ZEU1w"
+		"message": "Gebruik Yubikeys en andere smartcards voor SSH-verificatie: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Afbeeldingen inline weergeven: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Als je met de rechtermuisknop klikt terwijl je de Ctrl-toets (Cmd op macOS) ingedrukt houdt, wordt er een contextmenu weergegeven."
 	},
 	"tip_2": {
 		"message": "Geef meldingen in de browser weer met hterm-notify: https://goo.gl/ZNxGdF"

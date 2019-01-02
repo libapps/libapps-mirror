@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "Închiderea acestei file va deconecta această sesiune."
 	},
+	"cache_pin_prompt": {
+		"message": "Memorezi în cache codul PIN pentru această sesiune? (y/N):"
+	},
 	"cancel_button_label": {
 		"message": "Anulează"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Golește known_hosts SSH"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "Această comandă afișează un meniu cu gazde cunoscute și solicită gazda de șters."
@@ -51,7 +57,7 @@
 		"message": "Știai că există o pagină de opțiuni dedicată?\nNu mai e nevoie să modifici „term_” direct!\nApasă $1 pentru a-l deschide sau dă clic pe:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Știai că există o pagină de opțiuni dedicată?\nNu mai e nevoie să folosești „term_” direct!\n$1"
+		"message": "Știai că există o pagină de opțiuni dedicată?\nNu mai e nevoie să modifici „term_” direct!\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -64,6 +70,9 @@
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
+	},
+	"faq_menu_label": {
+		"message": "Întrebări frecvente"
 	},
 	"field_argstr_placeholder": {
 		"message": "argumente suplimentare pentru linia de comandă"
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "Opțiunile serverului de retransmitere SSH"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "Opțiunile serverului de retransmitere SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "EROARE: Profilul $1 nu poate fi încărcat:\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "S-a derulat $1%,"
+	},
 	"hterm_button_allow_always": {
 		"message": "Permite întotdeauna"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "Blochează"
+	},
+	"hterm_button_page_down": {
+		"message": "O pagină mai jos"
+	},
+	"hterm_button_page_up": {
+		"message": "O pagină mai sus"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "$1 nu s-a încărcat"
@@ -141,7 +159,7 @@
 		"message": "Selectează o euristică de detectare AltGr.\n\n„null”: detectează automat în funcție de navigator.language:\n      „en-us” => „none”, altfel => „right-alt”\n„none”: dezactivează reinterpretarea caracterelor în funcție de AltGr.\n„ctrl-alt”: presupune că Ctrl+Alt înseamnă AltGr.\n„left-alt”: presupune că Alt stânga înseamnă AltGr.\n„right-alt”: presupune că Alt dreapta înseamnă AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Setează dacă tasta Alt acționează ca tastă Meta sau ca tastă Alt distinctă."
+		"message": "Dacă tasta Alt acționează ca tastă Meta sau ca tastă Alt distinctă."
 	},
 	"hterm_pref_alt_sends_what": {
 		"message": "Controlează cum este tratată tasta Alt.\n\n  escape: trimite un prefix ESC.\n  8-bit: adaugă 128 la caracterul propriu-zis, ca în xterm.\n browser-key: așteaptă apăsarea tastei și vezi ce spune browserul. \n(Acest lucru nu va funcționa bine pe platformele pe care browserul face o acțiune prestabilită pentru unele secvențe Alt.)"
@@ -201,19 +219,19 @@
 		"message": "Dacă preferința este activată, clopoțeii din fundal ai terminalului vor crea o Notificare web. https://www.w3.org/TR/notifications/\n\nAfișarea notificărilor necesită permisiunea utilizatorului. Atunci când această preferință este activată, hterm va încerca să solicite permisiunea utilizatorului, dacă este necesar. Browserele pot să nu afișeze această solicitare de permisiune dacă ea nu este determinată de acțiunea unui utilizator.\n\nExtensiile Chrome cu permisiunea „notificări” au permisiunea de a afișa notificări."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Setează dacă caracterele ambigue pentru limbile din Asia de Est au lățimea de două coloane."
+		"message": "Dacă caracterele ambigue pentru limbile din Asia de Est au lățimea de două coloane."
 	},
 	"hterm_pref_enable_8_bit_control": {
 		"message": "„True” pentru a activa caracterele de control pe 8 biți, „false” pentru a le ignora.\n\nVom respecta versiunile pe doi byți ale acestor caractere de control indiferent de această setare."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "„True” dacă trebuie respectat atributul de clipire. „False” dacă trebuie ignorat."
+		"message": "Dacă este „true” se respectă atributul de clipire. Dacă este „false” se ignoră."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "„True” dacă trebuie să folosim grosimea de font aldin pentru textul cu atributul aldin/deschis. „False” pentru a folosi grosime de font normală. „Null” pentru detectare automată."
+		"message": "Dacă este „true” se folosește grosimea de font aldin pentru textul cu atributul aldin/deschis. „False” pentru a folosi grosime de font normală. „Null” pentru detectare automată."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "„True” dacă trebuie să folosim culori deschise (8-15 într-o paletă de 16 culori) pentru orice text cu atributul aldin. „False” în caz contrar."
+		"message": "Dacă este „true” se folosesc culori deschise (8-15 într-o paletă de 16 culori) pentru orice text cu atributul aldin. „False” în caz contrar."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Dacă se afișează un mesaj în terminal atunci când gazda scrie în clipboard."
@@ -239,41 +257,44 @@
 	"hterm_pref_foreground_color": {
 		"message": "Culoarea de prim-plan pentru textul fără alte atribute de culoare."
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Dacă se ascunde automat cursorul mouse-ului când se tastează. În mod prestabilit, se autodetectează dacă platforma/sistemul de operare se ocupă de aceasta. \n\nNotă: unele sisteme de operare pot modifica această setare și, astfel, este posibil să n-o poți dezactiva întotdeauna."
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Dacă preferința este activată, tastele Home/End vor controla bara de derulare a terminalului, iar combinațiile Shift Home/End vor trimite codurile de taste VT. Dacă este dezactivată, tastele Home/End trimit codurile VT, iar combinațiile Shift Home/End vor derula."
+		"message": "Dacă este „true” tastele Home/End controlează bara de derulare a terminalului, iar Shift-Home/Shift-End sunt trimise gazdei la distanță. Dacă este „false” tastele Home/End sunt trimise gazdei de la distanță și Shift-Home/Shift-End derulează."
 	},
 	"hterm_pref_keybindings": {
-		"message": "O mapare a secvenței de taste la acțiunea corespunzătoare. Secvențele de taste includ zero sau mai multe taste de modificare, urmate de un cod de tastă. Codurile de taste pot include numere zecimale sau hexazecimale ori un identificator de tastă. Acțiunile pot fi specificate cu un șir de trimis gazdei sau printr-un identificator de acțiune. Pentru o explicație completă a formatului, accesează https://goo.gl/LWRndr.\n\nExemple de corespondențe:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "O mapare a secvenței de taste la acțiunea corespunzătoare. Secvențele de taste includ zero sau mai multe taste de modificare, urmate de un cod de tastă. Codurile de taste pot include numere zecimale sau hexazecimale ori un identificator de tastă. Acțiunile pot fi specificate cu un șir de trimis gazdei sau printr-un identificator de acțiune. Pentru o explicație completă a formatului, accesează https://goo.gl/LWRndr.\n\nExemple de corespondențe:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Dacă preferința este activată, transformă tastele media în echivalentul lor Fkey. Dacă este dezactivată, lasă browserul să trateze tastele."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Setează dacă tasta Meta trimite sau nu un caracter Escape inițial."
+		"message": "Trimite un prefix ESC când apeși o tastă și apeși lung tasta Meta.\n\nDe exemplu, atunci când este activată, apăsarea Meta-K va trimite ^[k la fel ca atunci când tastezi Escape, apoi k. Atunci când este dezactivată, se va trimite doar k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Butonul de inserare al mouse-ului sau „Null” pentru detectare automată.\n\nPentru detectare automată, vom folosi butonul din mijloc al mouse-ului pentru platforme non-X11 (inclusiv sistemul de operare Chrome). În X11, vom folosi butonul drept al mouse-ului (deoarece managerul de ferestre nativ trebuie să insereze prin butonul din mijloc al mouse-ului).\n\n0 == butonul stâng (principal).\n1 == butonul din mijloc (auxiliar).\n2 == butonul drept (secundar).\n\nAceastă opțiune este activată indiferent de setarea „mouse-right-click-paste”.\n\nNotă: această preferință va trata corect mouse-urile pentru persoane dreptace și stângace."
+		"message": "Butonul de inserare al mouse-ului sau „Null” pentru detectare automată.\n\nPentru detectare automată, vom folosi butonul din mijloc al mouse-ului pentru platforme non-X11 (inclusiv sistemul de operare Chrome). În X11, vom folosi butonul drept al mouse-ului (deoarece managerul de ferestre nativ trebuie să insereze prin butonul din mijloc al mouse-ului).\n\n0 == butonul stâng (principal).\n1 == butonul din mijloc (auxiliar).\n2 == butonul drept (secundar).\n\nAceastă opțiune este independentă de setarea pentru inserare prin clic dreapta.\n\nNotă: această preferință va trata corect mouse-urile pentru persoane dreptace și stângace."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Inserează la clicurile pe butonul drept al mouse-ului.\n\nAceastă opțiune este activată indiferent de setarea „mouse-paste-button”.\n\nNotă: această preferință va trata corect mouse-urile pentru persoane dreptace și stângace."
+		"message": "Inserează la clicurile pe butonul drept al mouse-ului.\n\nAceastă opțiune este independentă de setarea „mouse-paste-button”.\n\nNotă: această preferință va trata corect mouse-urile pentru persoane dreptace și stângace."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Dacă preferința este activată, tastele Page Up/Down vor controla bara de derulare a terminalului, iar combinațiile Shift Page Up/Down vor trimite codurile de taste VT. Dacă preferința este dezactivată, tastele Page Up/Down vor trimite codurile VT, iar combinațiile Shift Page Up/Down vor derula."
+		"message": "Dacă preferința este activată, tastele Page Up/Page Down vor controla bara de derulare a terminalului, iar combinațiile Shift-Page Up/Shift-Page Down sunt trimise gazdei de la distanță. Dacă preferința este dezactivată, tastele Page Up/Page Down sunt trimise gazdei de la distanță, iar combinațiile Shift-Page Up/Shift-Page Down derulează."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Setează dacă trebuie să trimitem Alt-1..9 la browser.\n\nPreferința este utilă atunci când rulezi hterm într-o filă de browser, pentru a nu pierde acceleratorii din tastatură pentru comanda „Comută la fila\" din Chrome. Atunci când nu rulezi într-o filă, este mai bine să trimiți aceste taste la gazdă, pentru a putea fi folosite în vim sau emacs.\n\nDacă preferința este activată, combinațiile Alt-1..9 vor fi tratate de browser. Dacă este dezactivată, Alt-1..9 vor fi trimise la gazdă. Dacă este „Null”, se detectează automat pe baza platformei de browser și a tipului de fereastră."
+		"message": "Dacă se trimite Alt-1..9 la browser.\n\nPreferința este utilă atunci când rulezi hterm într-o filă de browser, pentru a nu pierde acceleratorii din tastatură pentru comanda „Comută la fila\" din Chrome. Atunci când nu rulezi într-o filă, este mai bine să trimiți aceste taste la gazdă, pentru a putea fi folosite în vim sau emacs.\n\nDacă preferința este activată, combinațiile Alt-1..9 vor fi tratate de browser. Dacă este dezactivată, Alt-1..9 vor fi trimise la gazdă. Dacă este „Null”, se detectează automat pe baza platformei de browser și a tipului de fereastră."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Setează dacă trebuie să trimitem Ctrl-1..9 la browser.\n\nPreferința este utilă atunci când rulezi hterm într-o filă de browser, pentru a nu pierde acceleratorii din tastatură pentru comanda „Comută la fila\" din Chrome. Atunci când nu rulezi într-o filă, este mai bine să trimiți aceste taste la gazdă, pentru a putea fi folosite în vim sau emacs.\n\nDacă preferința este activată, combinațiile Ctrl-1..9 vor fi tratate de browser. Dacă este dezactivată, Ctrl-1..9 vor fi trimise la gazdă. Dacă este „Null”, se detectează automat pe baza platformei de browser și a tipului de fereastră."
+		"message": "Dacă se trimite Ctrl-1..9 la browser.\n\nPreferința este utilă atunci când rulezi hterm într-o filă de browser, pentru a nu pierde acceleratorii din tastatură pentru comanda „Comută la fila\" din Chrome. Atunci când nu rulezi într-o filă, este mai bine să trimiți aceste taste la gazdă, pentru a putea fi folosite în vim sau emacs.\n\nDacă preferința este activată, combinațiile Ctrl-1..9 vor fi tratate de browser. Dacă este dezactivată, Ctrl-1..9 vor fi trimise la gazdă. Dacă este „Null”, se detectează automat pe baza platformei de browser și a tipului de fereastră."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Setează dacă trebuie să trimitem Meta-1..9 la browser.\n\nPreferința este utilă atunci când rulezi hterm într-o filă de browser, pentru a nu pierde acceleratorii din tastatură pentru comanda „Comută la fila\" din Chrome. Atunci când nu rulezi într-o filă, este mai bine să trimiți aceste taste la gazdă, pentru a putea fi folosite în vim sau emacs.\n\nDacă preferința este activată, combinațiile Meta-1..9 vor fi tratate de browser. Dacă este dezactivată, Meta-1..9 vor fi trimise la gazdă. Dacă este „Null”, se detectează automat pe baza platformei de browser și a tipului de fereastră."
+		"message": "Dacă se trimite Meta-1..9 la browser.\n\nPreferința este utilă atunci când rulezi hterm într-o filă de browser, pentru a nu pierde acceleratorii din tastatură pentru comanda „Comută la fila\" din Chrome. Atunci când nu rulezi într-o filă, este mai bine să trimiți aceste taste la gazdă, pentru a putea fi folosite în vim sau emacs.\n\nDacă preferința este activată, combinațiile Meta-1..9 vor fi tratate de browser. Dacă este dezactivată, Meta-1..9 vor fi trimise la gazdă. Dacă este „Null”, se detectează automat pe baza platformei de browser și a tipului de fereastră."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Setează dacă Meta-V se trimite la gazdă."
+		"message": "Dacă Meta-V se trimite la gazdă."
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "Setează codificarea așteptată pentru datele primite de la gazdă.\n\nValorile valide sunt „utf-8” și „raw”."
+		"message": "Setează codificarea așteptată pentru datele primite de la gazdă.\nDacă codificările nu se potrivesc, probabil că vor apărea erori vizuale.\n\nValorile valide sunt „utf-8” și „raw”."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Dacă apăsarea tastelor provoacă derulare în jos."
@@ -285,7 +306,7 @@
 		"message": "Atunci când folosești memoria temporară de ecran alternativă, iar DECCKM (Taste cursor ale aplicației) este activ, evenimentele de derulare folosind rotița mouse-ului vor imita tastele săgeată.\n\nPreferința poate fi dezactivată temporar dacă ții apăsată tasta Shift.\n\nAceastă situație apare frecvent atunci când folosești pagere (less), când citești pagini man sau editoare de text (vi/nano) sau când folosești screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Multiplicatorul pentru pixel delta din evenimentele determinate de rotița mouse-ului. Modifică viteza cu care se derulează pagina."
+		"message": "Multiplicatorul pentru evenimentele determinate de rotița mouse-ului măsurate în pixeli.\n\nModifică viteza cu care se derulează pagina."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Modul bară de derulare verticală."
@@ -294,13 +315,13 @@
 		"message": "Setează codificarea pentru datele trimise gazdei."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Shift-Insert inserează dacă preferința este activată, trimite la gazdă dacă este dezactivată."
+		"message": "Dacă Shift-Insert se folosește pentru inserare sau se trimite gazdei la distanță."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Codificarea prestabilită a terminalului (DOCS).\n\nISO-2022 permite traducerile hărților de caractere (cum sunt hărțile grafice).\nUTF-8 dezactivează suportul pentru acestea.\n\nÎn varianta blocată, codificarea nu poate fi schimbată la momentul execuției prin secvențe de escape ale terminalului.\n\nSe recomandă să rămâi la UTF-8, dacă nu observi probleme de redare cu aplicațiile vechi."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Dacă se folosește comportamentul prestabilit de copiere în fereastră."
+		"message": "Dacă se folosește comportamentul prestabilit de copiere în browser/sistemul de operare.\n\nPermite browserului/sistemului de operare să trateze evenimentul de copiere direct, fapt care ar putea îmbunătăți compatibilitatea cu unele sisteme (în care copierea nu funcționează deloc), dar face selectarea textului mai puțin robustă.\n\nDe exemplu, liniile lungi care erau automat încadrate vor fi copiate, păstrând liniile noi."
 	},
 	"hterm_pref_user_css": {
 		"message": "Adresa URL a foii de stil de utilizator, care trebuie inclusă în documentul terminalului."
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Expresia regulată pentru a opri căutarea de corespondențe spre dreapta (sfârșitul) unei selecții.\n\nÎn mod normal, aceasta este o clasă de caractere menită să respingă anumite caractere."
+	},
+	"hterm_space_character": {
+		"message": "Spațiu"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Aspect (fonturi, culori, imagini)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Copiază și inserează"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Codificare"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Extensii"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Tastatură"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Diverse"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Derulare"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Sunete"
 	},
 	"identity_label": {
 		"message": "Identitate"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "Montat!"
 	},
+	"new_window_menu_label": {
+		"message": "Fereastră nouă"
+	},
 	"notify_copy": {
 		"message": "Selecție copiată"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "Te reconectezi (r), alegi o altă conexiune (c) sau ieși (x)?"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "Opțiune de retransmitere necunoscută: $1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "Argumente SSH"
 	},
+	"terminal_clear_menu_label": {
+		"message": "Golire a terminalului"
+	},
 	"terminal_preview_label": {
 		"message": "Previzualizare"
 	},
 	"terminal_profile_label": {
 		"message": "Profil actual"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Resetare a terminalului"
 	},
 	"tip_1": {
 		"message": "Poți să ții apăsată tasta Ctrl (Cmd pe macOS) în timp ce dai clic pe linkuri pentru a le deschide!"
@@ -429,10 +486,13 @@
 		"message": "Poți să asociezi din nou tastele/comenzile rapide: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Folosește Yubikeys și alte carduri inteligente pentru autentificare ssh: https://goo.gl/3ZEU1w"
+		"message": "Folosește Yubikeys și alte carduri inteligente pentru autentificare ssh: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Afișează imaginile inline: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Dacă ții apăsată tasta Ctrl (Cmd pe macOS) și dai clic dreapta, vei afișa un meniu contextual."
 	},
 	"tip_2": {
 		"message": "Afișează notificările în browser folosind hterm-notify: https://goo.gl/ZNxGdF"

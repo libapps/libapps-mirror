@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "Tindakan menutup tab ini akan memutuskan sambungan sesi ini."
 	},
+	"cache_pin_prompt": {
+		"message": "Cache PIN untuk sesi ini? (y/N):"
+	},
 	"cancel_button_label": {
 		"message": "Batal"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Kosongkan known_hosts SSH"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "Arahan ini memaparkan menu hos yang diketahui dan menggesa hos untuk melupakan."
@@ -51,7 +57,7 @@
 		"message": "Adakah anda tahu terdapat halaman pilihan khusus?\nTidak perlu mengubah suai 'term_' secara langsung lagi!\nTekan $1 untuk membukanya atau klik:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Adakah anda tahu terdapat halaman pilihan khusus?\nTidak perlu menggunakan 'term_' secara langsung lagi!\n$1"
+		"message": "Adakah anda tahu terdapat halaman pilihan khusus?\nTidak perlu mengubah suai 'term_' secara langsung lagi!\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -64,6 +70,9 @@
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
+	},
+	"faq_menu_label": {
+		"message": "Soalan Lazim"
 	},
 	"field_argstr_placeholder": {
 		"message": "argumen baris perintah tambahan"
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "Pilihan pelayan geganti SSH"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "Pilihan pelayan geganti SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "RALAT: Tidak dapat memuatkan profil $1: $2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "$1% ditatal,"
+	},
 	"hterm_button_allow_always": {
 		"message": "Sentiasa benarkan"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "Sekat"
+	},
+	"hterm_button_page_down": {
+		"message": "Page down"
+	},
+	"hterm_button_page_up": {
+		"message": "Page up"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "$1 gagal dimuatkan..."
@@ -141,7 +159,7 @@
 		"message": "Pilih swakaji pengesanan AltGr.\n\n'null': Autokesan berdasarkan navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Lumpuhkan sebarang manipulasi berkaitan AltGr.\n'ctrl-alt': Anggap Ctrl+Alt bermakna AltGr.\n'left-alt': Anggap Alt kiri bermakna AltGr.\n'right-alt': Anggap Alt kanan bermakna AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Tetapkan sama ada kekunci Alt bertindak sebagai kekunci Meta atau sebagai kekunci Alt berbeza."
+		"message": "Sama ada kekunci Alt bertindak sebagai kekunci Meta atau sebagai kekunci Alt berbeza."
 	},
 	"hterm_pref_alt_sends_what": {
 		"message": "Mengawal cara kekunci alt dikendalikan.\n\n  escape: Hantar awalan ESC.\n  8-bit: Tambahkan 128 pada aksara yang ditaip seperti dalam xterm.\n browser-key: Tunggu peristiwa tekanan kekunci dan lihat tindak balas penyemak imbas. (Ciri ini tidak berfungsi dengan baik pada platform yang penyemak imbasnya melakukan tindakan lalai bagi sesetengah jujukan Alt.)"
@@ -201,19 +219,19 @@
 		"message": "Jika benar, loceng terminal di latar belakang akan menghasilkan Pemberitahuan Web. https://www.w3.org/TR/notifications/\n\nPemaparan pemberitahuan memerlukan kebenaran daripada pengguna. Apabila pilihan ini ditetapkan kepada benar, hterm akan cuba meminta kebenaran daripada pengguna jika perlu. Penyemak imbas mungkin tidak menunjukkan permintaan kebenaran jika tidak dicetuskan oleh tindakan pengguna.\n\nSambungan Chrome dengan kebenaran \"pemberitahuan\" dibenarkan untuk memaparkan pemberitahuan."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Tetapkan sama ada aksara Taksa Asia Timur mempunyai kelebaran dua lajur."
+		"message": "Sama ada aksara Taksa Asia Timur mempunyai kelebaran dua lajur."
 	},
 	"hterm_pref_enable_8_bit_control": {
 		"message": "Benar untuk mendayakan aksara kawalan 8 bit, palsu untuk mengabaikannya.\n\nKami akan menggunakan versi dua bait aksara kawalan ini tanpa mengambil kira tetapan ini."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "Benar jika kami harus menerima atribut kelip. Palsu untuk mengabaikannya."
+		"message": "Jika benar, terima atribut kelip. Palsu untuk mengabaikannya."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Benar jika kami harus menggunakan fon berat tebal untuk teks dengan atribut tebal/terang. Palsu untuk menggunakan fon berat normal. Nol untuk mengesan secara automatik."
+		"message": "Jka benar, gunakan fon berat tebal untuk teks dengan atribut tebal/terang. Palsu untuk menggunakan fon berat normal. Nol untuk mengesan secara automatik."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "Benar jika kami harus menggunakan warna terang (8-15 pada palet 16 warna) untuk sebarang teks dengan atribut tebal. Palsu jika sebaliknya."
+		"message": "Jika benar, gunakan warna terang (8-15 pada palet 16 warna) untuk sebarang teks dengan atribut tebal. Palsu jika sebaliknya."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Sama ada untuk menunjukkan mesej di terminal apabila hos menulis pada papan keratan."
@@ -239,41 +257,44 @@
 	"hterm_pref_foreground_color": {
 		"message": "Warna latar depan untuk teks yang tiada atribut warna yang lain."
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Sama ada hendak menyembunyikan kursor tetikus secara automatik semasa menaip. Secara lalai, mengesan secara autoamtik sama ada platform/OS mengendalikan hal ini.\n\nNota: Sesetengah sistem pengendalian boleh mengatasi tetapan ini, justeru anda mungkin tidak dapat melumpuhkannya sepanjang masa."
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Jika benar, Home/End akan mengawal bar tatal terminal dan Shift-Home/End akan menghantar kod kunci VT.  Jika palsu, maka Home/End akan menghantar kod VT dan Shift-Home/End akan menatal."
+		"message": "Jika benar, Home/End mengawal bar tatal terminal dan Shift-Home/Shift-End akan dihantar kepada hos jauh. Jika palsu, maka Home/End akan dihantar kepada hos jauh dan Shift-Home/Shift-End akan menatal."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Peta jujukan kekunci kepada tindakan kekunci. Jujukan kekunci termasuk sifar atau beberapa kekunci pengubah suai yang diikuti oleh kod kunci. Kod kunci boleh terdiri daripada nombor perpuluhan atau perenambelasan atau pengecam kekunci. Tindakan kekunci boleh menentukan rentetan untuk dihantar kepada hos atau pengecam tindakan. Untuk mendapatkan penjelasan lengkap berkenaan format ini, lihat https://goo.gl/LWRndr.\n\nContoh pengikatan kekunci:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Peta jujukan kekunci kepada tindakan kekunci. Jujukan kekunci termasuk sifar atau beberapa kekunci pengubah suai yang diikuti oleh kod kunci. Kod kunci boleh terdiri daripada nombor perpuluhan atau perenambelasan atau pengecam kekunci. Tindakan kekunci boleh ditetapkan sebagai rentetan untuk dihantar kepada hos atau sebagai pengecam tindakan. Untuk mendapatkan penjelasan lengkap berkenaan format ini, lihat https://goo.gl/LWRndr.\n\nContoh pengikatan kekunci:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Jika benar, tukarkan kekunci media kepada persamaan Fkey kekunci media. Jika palsu, biarkan penyemak imbas mengendalikan kekunci tersebut."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Tetapkan sama ada kekunci Meta menghantar Escape permulaan atau tidak."
+		"message": "Hantar awalan ESC apabila menekan kekunci semasa menahan kekunci Meta.\n\nMisalnya, apabila didayakan, tindakan menekan Meta-K akan menghantar ^[k seolah-olah anda menaip Escape kemudian k. Apabila dilumpuhkan, hanya k akan dihantar."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Butang tampal tetikus atau nol untuk autokesan.\n\nUntuk autokesan, kami akan menggunakan butang tengah tetikus untuk platform bukan X11 (termasuk OS Chrome). Pada platform X11, kami akan menggunakan butang kanan tetikus (memandangkan pengurus tetingkap natif harus menampal melalui butang tengah tetikus).\n\n0 == butang kiri (utama).\n1 == butang tengah (tambahan).\n2 == butang kanan (kedua).\n\nPilihan ini diaktifkan secara bebas daripada tetapan \"klik-kanan-tetikus-tampal\".\n\nNota: Ini akan mengendalikan tetikus kiri & kanan dengan betul."
+		"message": "Butang tampal tetikus atau nol untuk autokesan.\n\nUntuk autokesan, kami akan menggunakan butang tengah tetikus untuk platform bukan X11 (termasuk OS Chrome). Pada platform X11, kami akan menggunakan butang kanan tetikus (memandangkan pengurus tetingkap natif harus menampal melalui butang tengah tetikus).\n\n0 == butang kiri (utama).\n1 == butang tengah (tambahan).\n2 == butang kanan (kedua).\n\nPilihan ini bebas daripada tetapan tampal klik kanan.\n\nNota: Pilihan ini akan mengendalikan tetikus tangan kiri & kanan dengan betul."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Tampal pada klikan butang kanan tetikus.\n\nPilihan ini diaktifkan secara bebas daripada tetapan \"butang-tampal-tetikus\".\n\nNota: Ini akan mengendalikan tetikus kiri & kanan dengan betul."
+		"message": "Tampal pada klikan butang kanan tetikus.\n\nPilihan ini bebas daripada tetapan \"butang-tampal-tetikus\".\n\nNota: Pilihan ini akan mengendalikan tetikus tangan kiri & kanan dengan betul."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Jika benar, Page Up/Down akan mengawal bar tatal terminal dan Shift-Page Up/Down akan menghantar kod kunci VT. Jika palsu, maka Page Up/Down akan menghantar kod VT dan Shift-Page Up/Down akan menatal."
+		"message": "Jika benar, Page up/Page Down mengawal bar tatal terminal dan Shift-Page Up/Shift-Page Down akan dihantar kepada hos jauh. Jika palsu, maka Page Up/Page Down akan dihantar kepada hos jauh dan Shift-Page Up/Shift-Page Down akan menatal."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Tetapkan sama ada kami harus melepaskan Alt-1..9 kepada penyemak imbas.\n\nIni berguna apabila menjalankan hterm dalam tab penyemak imbas, supaya anda tidak akan kehilangan pemecut papan kekunci \"beralih kepada tab\" Chrome. Apabila tidak dijalankan dalam tab, adalah lebih baik jika kunci ini dihantar kepada hos supaya dapat digunakan dalam vim atau emacs.\n\nJika benar, Alt-1..9 akan dikendalikan oleh penyemak imbas. Jika palsu, Alt-1..9 akan dihantar kepada hos. Jika nol, autokesan berdasarkan platform penyemak imbas dan jenis tetingkap."
+		"message": "Sama ada Alt-1..9 dilepaskan kepada penyemak imbas.\n\nPilihan ini berguna apabila menjalankan hterm dalam tab penyemak imbas, supaya anda tidak kehilangan pemecut papan kekunci \"beralih kepada tab\" Chrome. Apabila tidak dijalankan dalam tab, sebaik-baiknya kunci ini dihantar kepada hos supaya dapat digunakan dalam vim atau emacs.\n\nJika benar, Alt-1..9 akan dikendalikan oleh penyemak imbas. Jika palsu, Alt-1..9 akan dihantar kepada hos. Jika nol, autokesan berdasarkan platform penyemak imbas dan jenis tetingkap."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Tetapkan sama ada kami harus melepaskan Ctrl-1..9 kepada penyemak imbas.\n\nIni berguna apabila menjalankan hterm dalam tab penyemak imbas, supaya anda tidak kehilangan pemecut papan kekunci \"beralih kepada tab\" Chrome. Apabila tidak dijalankan dalam tab, adalah lebih baik jika kunci ini dihantar kepada hos supaya dapat digunakan dalam vim atau emacs.\n\nJika benar, Ctrl-1..9 akan dikendalikan oleh penyemak imbas. Jika palsu, Ctrl-1..9 akan dihantar kepada hos. Jika nol, autokesan berdasarkan platform penyemak imbas dan jenis tetingkap."
+		"message": "Sama ada Ctrl-1..9 dilepaskan kepada penyemak imbas.\n\nPilihan ini berguna apabila menjalankan hterm dalam tab penyemak imbas, supaya anda tidak kehilangan pemecut papan kekunci \"beralih kepada tab\" Chrome. Apabila tidak dijalankan dalam tab, sebaik-baiknya kunci ini dihantar kepada hos supaya dapat digunakan dalam vim atau emacs.\n\nJika benar, Ctrl-1..9 akan dikendalikan oleh penyemak imbas. Jika palsu, Ctrl-1..9 akan dihantar kepada hos. Jika nol, autokesan berdasarkan platform penyemak imbas dan jenis tetingkap."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Tetapkan sama ada kami harus melepaskan Meta-1..9 kepada penyemak imbas.\n\nIni berguna apabila menjalankan hterm dalam tab penyemak imbas, supaya anda tidak kehilangan pemecut papan kekunci \"beralih kepada tab\" Chrome. Apabila tidak dijalankan dalam tab, adalah lebih baik jika kunci ini dihantar kepada hos supaya dapat digunakan dalam vim atau emacs.\n\nJika benar, Meta-1..9 akan dikendalikan oleh penyemak imbas. Jika palsu, Meta-1..9 akan dihantar kepada hos. Jika nol, autokesan berdasarkan platform penyemak imbas dan jenis tetingkap."
+		"message": "Sama ada Meta-1..9 dilepaskan kepada penyemak imbas.\n\nPilihan berguna apabila menjalankan hterm dalam tab penyemak imbas, supaya anda tidak kehilangan pemecut papan kekunci \"beralih kepada tab\" Chrome. Apabila tidak dijalankan dalam tab, adalah lebih baik jika kunci ini dihantar kepada hos supaya dapat digunakan dalam vim atau emacs.\n\nJika benar, Meta-1..9 akan dikendalikan oleh penyemak imbas. Jika palsu, Meta-1..9 akan dihantar kepada hos. Jika nol, autokesan berdasarkan platform penyemak imbas dan jenis tetingkap."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Tetapkan sama ada Meta-V dilepaskan kepada hos."
+		"message": "Sama ada Meta-V dilepaskan kepada hos."
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "Tetapkan pengekodan yang dijangkakan untuk data yang diterima daripada hos.\n\nNilai sah ialah 'utf-8' dan 'raw'."
+		"message": "Tetapkan pengekodan yang dijangkakan untuk data yang diterima daripada hos.\nJika pengekodan tidak sepadan, pepijat visual mungkin akan kelihatan.\n\nNilai sah ialah 'utf-8' dan 'raw'."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Sama ada perlu menatal ke bahagian bawah pada mana-mana ketukan kekunci."
@@ -285,7 +306,7 @@
 		"message": "Semasa menggunakan penimbal skrin alternatif dan DECCKM (Kekunci Kursor Aplikasi) diaktifkan, peristiwa tatal roda tetikus akan mengikut kekunci anak panah.\n\nPeristiwa ini boleh dilumpuhkan sementara dengan menekan kekunci Shift.\n\nHal ini kerap berlaku semasa menggunakan alat kelui (less) atau membaca halaman man atau penyunting teks (vi/nano) atau semasa menggunakan skrin/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Pengganda untuk delta piksel dalam acara roda yang berpunca daripada roda tatal. Ubah tahap kelajuan tatal halaman."
+		"message": "Pengganda untuk acara roda tatal apabila diukur dalam piksel.\n\nMengubah tahap kelajuan penatalan halaman."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Mod bar tatal menegak."
@@ -294,13 +315,13 @@
 		"message": "Tetapkan pengekodan untuk data yang dihantar kepada hos."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Shift-Insert akan menampal jika benar, dihantar kepada hos jika palsu."
+		"message": "Sama ada Shift-Insert digunakan untuk menampal atau dihantar kepada hos jauh."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Pengekodan terminal lalai (DOCS).\n\nISO-2022 mendayakan terjemahan peta aksara (seperti peta grafik).\nUTF-8 melumpuhkan sokongan terjemahan.\n\nVarian yang terkunci bermakna pengekodan tidak boleh ditukar pada masa waktu jalan melalui jujukan keluar terminal.\n\nAnda harus terus menggunakan UTF-8 melainkan anda perhatikan terdapat pemaparan yang rosak dengan aplikasi lama."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Sama ada perlu menggunakan tingkah laku penyalinan tetingkap lalai."
+		"message": "Sama ada hendak menggunakan penyemak imbas lalai/gelagat penyalinan OS.\n\nBenarkan penyemak imbas/OS mengendalikan acara penyalinan secara langsung yang mungkin meningkatkan keserasian dengan sesetengah sistem (sekiranya penyalinan tidak berfungsi langsung), tetapi menjadikan pemilihan teks kurang kukuh.\n\nMisalnya, baris panjang yang dibalut secara automatik akan disalin dengan baris baharu masih terkandung di dalamnya."
 	},
 	"hterm_pref_user_css": {
 		"message": "URL helaian gaya pengguna akan dimasukkan ke dalam dokumen terminal."
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Ungkapan nalar untuk berhenti memadankan ke kanan (akhir) pemilihan.\n\nBiasanya ini ialah kelas aksara untuk menolak aksara tertentu."
+	},
+	"hterm_space_character": {
+		"message": "Ruang"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Penampilan (fon, warna, imej)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Salin & Tampal"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Pengekodan"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Sambungan"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Papan kekunci"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Pelbagai"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Penatalan"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Bunyi"
 	},
 	"identity_label": {
 		"message": "Identiti"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "Dilekapkan!"
 	},
+	"new_window_menu_label": {
+		"message": "Tetingkap Baharu"
+	},
 	"notify_copy": {
 		"message": "Pilihan Disalin"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "Sambung semula (R), Pilih sambungan lain (C) atau Keluar (x)?"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "Pilihan geganti tidak diketahui: $1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "Argumen SSH"
 	},
+	"terminal_clear_menu_label": {
+		"message": "Pengosongan Terminal"
+	},
 	"terminal_preview_label": {
 		"message": "Pratonton"
 	},
 	"terminal_profile_label": {
 		"message": "Profil semasa"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Penetapan Semula Terminal"
 	},
 	"tip_1": {
 		"message": "Anda boleh menahan Ctrl (Cmd pada macOS) sambil mengklik pautan untuk membukanya!"
@@ -429,10 +486,13 @@
 		"message": "Anda boleh mengikat semula kekunci/pintasan: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Gunakan Yubikeys dan kad pintar lain untuk ssh auth: https://goo.gl/3ZEU1w"
+		"message": "Gunakan Yubikey dan kad pintar lain untuk pengesahan ssh: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Paparkan imej dalam baris: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Tindakan menahan Ctrl (Cmd pada macOS) semasa mengklik kanan akan memaparkan menu konteks."
 	},
 	"tip_2": {
 		"message": "Paparkan pemberitahuan dalam penyemak imbas dengan menggunakan hterm-notify: https://goo.gl/ZNxGdF"

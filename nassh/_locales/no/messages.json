@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "Hvis du lukker denne fanen, avsluttes nåværende økt."
 	},
+	"cache_pin_prompt": {
+		"message": "Vil du bufre PIN-koden for denne økten? (y/N):"
+	},
 	"cancel_button_label": {
 		"message": "Avbryt"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Fjern SSH known_hosts"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "Denne kommandoen viser en meny med kjente verter, og ber verten om å glemme."
@@ -51,7 +57,7 @@
 		"message": "Visste du at det finnes en egen altarnativsside?\nDet betyr at du ikke trenger å endre «term_» direkte lenger.\nTrykk på $1 for å åpne den, eller klikk på\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Visste du at det finnes en egen altarnativsside?\nDet betyr at du ikke trenger å styre med «term_» direkte lenger.\n$1"
+		"message": "Visste du at det finnes en egen alternativside?\nDet betyr at du ikke trenger å endre «term_» direkte lenger.\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -64,6 +70,9 @@
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
+	},
+	"faq_menu_label": {
+		"message": "Vanlige spørsmål"
 	},
 	"field_argstr_placeholder": {
 		"message": "ekstra argumenter for kommandolinjen"
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "Alternativer for SSH-relétjeneren"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "Alternativer for SSH-relétjener"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "FEIL: Kunne ikke laste inn profilen $1:\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "$1 % rullet ned,"
+	},
 	"hterm_button_allow_always": {
 		"message": "Tillat alltid"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "Blokkér"
+	},
+	"hterm_button_page_down": {
+		"message": "Ned en side"
+	},
+	"hterm_button_page_up": {
+		"message": "Opp en side"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Kunne ikke laste inn $1"
@@ -141,7 +159,7 @@
 		"message": "Velg en heuristisk algoritme for gjenkjenning av AltGr.\n\n«null»: automatisk gjenkjenning basert på navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n«none»: Slår av eventuell AltGr-relatert arrangering.\n«ctrl-alt»: Antar at Ctrl+Alt betyr AltGr.\n«left-alt»: Antar at venstre Alt betyr AltGr.\n«right-alt»: Antar at høyre Alt betyr AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Angir om Alt-tasten skal fungere som en meta-tast eller en unik Alt-tast."
+		"message": "Om Alt-tasten skal fungere som en Meta-tast eller en unik Alt-tast."
 	},
 	"hterm_pref_alt_sends_what": {
 		"message": "Kontrollerer hvordan Alt-tasten håndteres.\n\n  escape: Send et ESC-prefiks.\n  8-bit: Legg 128 til det angitte tegnet, som i xterm.\n browser-key: Vent på et tastetrykk, og se hva nettleseren\n sier. (Dette fungerer ikke godt på plattformer hvor nettleseren\n utfører en standardhandling for noen Alt-sekvenser.)"
@@ -171,7 +189,7 @@
 		"message": "Om hele utvalget skal fjernes etter kopiering."
 	},
 	"hterm_pref_close_on_exit": {
-		"message": "Om hele vinduet skal lukkes når kommandoen avsluttes."
+		"message": "Om vinduet skal lukkes når kommandoen fullføres."
 	},
 	"hterm_pref_color_palette_overrides": {
 		"message": "Overstyr fargene i standardpaletten.\n\nDette kan spesifiseres som en matrise («array») eller et objekt. Hvis det er spesifisert som objekt, antas det å være en spredt matrise, der hvert område er en numerisk indeks i fargepaletten.\n\nVerdiene kan spesifiseres som nesten hvilken som helst CSS-fargeverdi. Dette inkluderer #RGB, #RRGGBB, rgb(…), rgba(…) og eventuelle andre fargenavn som også er en del av standardfilen X11 rgb.txt.\n\nDu kan bruke «null» for å spesifisere at standardverdien ikke skal endres. Dette er nyttig for å hoppe over et lite antall indekser når verdien er spesifisert som en matrise.\n\nBegge disse setter for eksempel fargeindeksen 1 til blå:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
@@ -201,19 +219,19 @@
 		"message": "Hvis verdien er «true» (sann), danner terminalbjeller i bakgrunnen et nettvarsel. https://www.w3.org/TR/notifications/\n\nBrukeren må gi tillatelse før varsler kan vises. Når dette alternativet er angitt som «true» (sant), prøver hterm ved behov å be brukeren om tillatelse. Vær oppmerksom på at det ikke er sikkert at nettlesere viser denne tillatelsesforespørselen hvis den ikke kommer som følge av en brukerhandling.\n\nChrome-utvidelser med «notifications»-tillatelsen (varsler) har tillatelse til å vise varsler."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Angir om østasiatiske tvetydige tegn har bredde på to kolonner."
+		"message": "Om østasiatiske tvetydige tegn har bredde på to kolonner."
 	},
 	"hterm_pref_enable_8_bit_control": {
 		"message": "Bruk «true» (sant) for å aktivere 8-biters kontrolltegn og «false» (usann) for å ignorere dem.\n\nVi respekterer 2-byte-versjonene av disse kontrolltegnene uavhengig av denne innstillingen."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "Bruk «true» (sant) hvis vi skal respektere «blink»-attributtet, og «false» (usant) hvis vi kan ignorere det."
+		"message": "Velg «true» (sant) hvis «blink»-attributtet skal respekteres. Velg «false» (usant) hvis det skal ignoreres."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Bruk «true» (sant) hvis vi skal bruke fet skrift for tekst med «bold»- eller «bright»-attributtet. Velg «false» (usant) hvis vi skal bruke vanlig skrift, og velg «null» for å bruke automatisk gjenkjenning."
+		"message": "Bruk «true» (sant) for bruk av fet skrift for tekst med «bold»- eller «bright»-attributtet. Velg «false» (usant) for å bruke «normal» skrift, og velg «null» for å bruke automatisk gjenkjenning."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "Bruk «true» (sant) hvis vi skal bruke lyse farger (8–15 på en 16-fargers fargepalett) for tekst med «bold»-attributtet. Velg «false» (usant) ellers."
+		"message": "Bruk «true» (sant) for bruk av lyse farger (8–15 på en 16-fargers fargepalett) for tekst med «bold»-attributtet. Velg «false» (usant) ellers."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Angir om en melding skal vises i terminalen når verten skriver til utklippstavlen."
@@ -239,41 +257,44 @@
 	"hterm_pref_foreground_color": {
 		"message": "Forgrunnsfargen for tekst uten andre fargeattributter."
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Om musepilen skal skjules automatisk når du skriver. Som standard gjenkjennes det automatisk om plattformen/OS-et kan håndtere dette.\n\nMerk: Enkelte operativsystemer kan overstyre denne innstillingen, og i noen tilfeller kan den ikke slås av."
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Hvis «true» (sann) er valgt, kontrollerer Home/End terminalens rullefelt, og Shift + Home/End sender VT-kodene. Hvis «false» (usann) er valgt, sender Home/End VT-kodene, og Shift + Home/End ruller."
+		"message": "Hvis «true» (sant) er valgt, kontrollerer Home/End terminalens rullefelt, og Shift-Home/Shift-End sendes til den eksterne verten. Hvis «false» (usant) er valgt, sendes Home/End til den eksterne verten, og Shift-Home/Shift-End ruller."
 	},
 	"hterm_pref_keybindings": {
-		"message": "En oversikt over tastesekvenser for tastehandlinger. Tastesekvensene har null eller flere modifikatortaster som etterfølges av en tastekode. Tastekoder kan være desimaltall, heksadesimaltall eller tasteidentifikatorer. Tastehandlinger kan angis som strenger som sendes til verten, eller som funksjonsidentifikatorer. Du kan se en fullstendig forklaring av formatet ved å gå til https://goo.gl/LWRndr.\n\nEksempler på tastekombinasjoner:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HEI\\n'\"\n}"
+		"message": "En oversikt over tastesekvenser for tastehandlinger. Tastesekvensene har null eller flere modifikatortaster som etterfølges av en tastekode. Tastekoder kan være desimaltall, heksadesimaltall eller tasteidentifikatorer. Tastehandlinger kan angis som strenger som sendes til verten, eller som funksjonsidentifikatorer. Du kan se en fullstendig forklaring av formatet ved å gå til https://goo.gl/LWRndr.\n\nEksempler på tastekombinasjoner:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Hvis «true» (sann) er valgt, konverteres medietastene til de tilsvarende funksjonstastene. Hvis «false» (usann) er valgt, håndteres tastene av nettleseren."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Angir om Meta-tasten skal sende et innledende Escape-signal eller ikke."
+		"message": "Sender et ESC-prefiks når du trykker på en tast samtidig som du holder inne Meta-tasten.\n\nNår innstillingen er slått på og du trykker på Meta-K, sendes ^[k som om du hadde skrevet ESC-K. Når innstillingen er slått av, sendes bare K-tasten."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Musens innlimingsknapp (null for automatisk gjenkjenning).\n\nVed automatisk gjenkjenning bruker vi den midtre museknappen på ikke-X11-plattformer (inkludert Chrome OS). På X11 bruker vi den høyre museknappen (siden den innebygde vindusbehandleren bør lime inn med den midtre museknappen).\n\n0 == venstre (primær) knapp.\n1 == midtre (ekstra) knapp.\n2 == høyre (sekundær) knapp.\n\nDette alternativet aktiveres uavhengig av «mouse-right-click-paste»-innstillingen.\n\nMerk: Dette håndterer både høyrehendte og venstrehendte mus riktig."
+		"message": "Musens innlimingsknapp (null for automatisk gjenkjenning).\n\nVed automatisk gjenkjenning bruker vi den midtre museknappen på ikke-X11-plattformer (inkludert Chrome OS). På X11 bruker vi den høyre museknappen (siden den innebygde vindusbehandleren bør lime inn med den midtre museknappen).\n\n0 == venstre (primær) knapp.\n1 == midtre (ekstra) knapp.\n2 == høyre (sekundær) knapp.\n\nDette alternativet er uavhengig av «right-click-paste»-innstillingen.\n\nMerk: Dette håndterer både høyrehendte og venstrehendte mus riktig."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Lim inn med høyreklikk.\n\nDette alternativet aktiveres uavhengig av «mouse-paste-button»-innstillingen.\n\nMerk: Dette håndterer både høyrehendte og venstrehendte mus riktig."
+		"message": "Lim inn med høyreklikk.\n\nDette alternativet er uavhengig av «mouse-paste-button»-innstillingen.\n\nMerk: Dette håndterer både høyrehendte og venstrehendte mus riktig."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Hvis «true» (sann) er valgt, kontrollerer Page up/down terminalens rullefelt, og Shift + Page up/down sender VT-tastekodene. Hvis «false» (usann) er valgt, sender Page up/down VT-kodene, og Shift + Page up/down ruller."
+		"message": "Hvis «true» (sant) er valgt, kontrollerer PageUp/PageDown terminalens rullefelt, og Shift-PageUp/Shift-PageDown sendes til den eksterne verten. Hvis «false» (usant) er valgt, sendes PageUp/PageDown til den eksterne verten, og Shift-PageUp/Shift-PageDown ruller."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Angi om vi skal sende Alt + 1…9 til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sann) er valgt, håndteres Alt + 1…9 av nettleseren. Hvis «false» (usann) er valgt, sendes Alt + 1…9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
+		"message": "Om Alt-1..9 skal sendes til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sant) er valgt, håndteres Alt-1..9 av nettleseren. Hvis «false» (usant) er valgt, sendes Alt-1..9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Angi om vi skal sende Ctrl + 1…9 til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sann) er valgt, håndteres Ctrl + 1…9 av nettleseren. Hvis «false» (usann) er valgt, sendes Ctrl + 1…9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
+		"message": "Om Ctrl-1..9 skal sendes til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sant) er valgt, håndteres Ctrl-1..9 av nettleseren. Hvis «false» (usant) er valgt, sendes Ctrl-1..9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Angi om vi skal sende Meta + 1…9 til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sann) er valgt, håndteres Meta + 1…9 av nettleseren. Hvis «false» (usann) er valgt, sendes Meta + 1…9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
+		"message": "Om Meta-1..9 skal sendes til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sant) er valgt, håndteres Meta-1..9 av nettleseren. Hvis «false» (usant) er valgt, sendes Meta-1..9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Angi om Meta + V skal sendes til verten."
+		"message": "Om Meta-V skal sendes til verten."
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "Angi forventet koding for data som mottas fra verten.\n\nGyldige verdier er «utf-8» og «raw»."
+		"message": "Angi forventet koding for data som mottas fra verten. \nHvis kodingene ikke samsvarer, er det sannsynlig at visuelle feil oppstår.\n\nGyldige verdier er «utf-8» og «raw»."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Angir om det skal rulles til bunnen ved alle tastetrykk."
@@ -285,7 +306,7 @@
 		"message": "Når du bruker den alternative skjermbufferen og DECCKM (appmarkørtaster) er aktivert, emulerer rulling på musehjulet piltastene.\n\nDu kan deaktivere dette midlertidig ved å trykke og holde på Shift-tasten.\n\nDette kommer ofte opp når du bruker sidevekslingskontroller (less), leser man-sider eller tekstredigeringsprogrammer (vi/nano) eller bruker screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Multiplikatoren for pikseldelta i hjulhendelser som skapes av rulling med hjulet. Endrer hvor raskt siden ruller."
+		"message": "Multiplikatoren for rullehjulhendelser, målt i piksler.\n\nEndrer hvor raskt du kan rulle på siden."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Vertikalt rullefelt-modus."
@@ -294,13 +315,13 @@
 		"message": "Angi kodingen for data som sendes til verten."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Shift + Insert limer inn hvis «true» (sann) er valgt eller sender til verten hvis «false» (usann) er valgt."
+		"message": "Om Shift-Ins brukes for innliming, eller om det sendes til den eksterne verten."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Standard terminalkoding (DOCS).\n\nISO-2022 aktiverer oversettinger av tegntilordninger (som grafikktilordninger).\nUTF-8 deaktiverer støtte for slike.\n\nDen låste varianten betyr at kodingen ikke kan endres under kjøring via escape-sekvenser i terminalen.\n\nDu bør holde deg til UTF-8 med mindre du merker at eldre apper ikke gjengis skikkelig."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Angir om standard kopieringsfunksjon for vinduet skal brukes."
+		"message": "Om standardnettleserens/OS-ets funksjonalitet for kopiering skal brukes.\n\nTillat at nettleseren/OS-et kan behandle kopiering direkte, noe som kan forbedre kompatibilitet med enkelte systemer (hvor kopiering ikke er mulig), men som resultat blir merking av tekst mindre robust.\n\nFor eksempel kan dette innebære at lange tekstlinjer der automatisk tekstbryting er slått på, kopieres med harde linjeskift (selv om de ikke er der)."
 	},
 	"hterm_pref_user_css": {
 		"message": "Nettadresse for brukerstilark som skal være med i terminaldokumentet."
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Regulært uttrykk for å stoppe matching med den høyre siden (enden) av et utvalg.\n\nVanligvis er dette en tegnklasse for å avvise spesifikke tegn."
+	},
+	"hterm_space_character": {
+		"message": "Mellomrom"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Utseende (skrifttyper, farger, bilder)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Kopiering og innliming"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Omgjøring til kode"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Utvidelser"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Tastatur"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Diverse"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Rulling"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Lyder"
 	},
 	"identity_label": {
 		"message": "Identitet"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "Tilkoblet."
 	},
+	"new_window_menu_label": {
+		"message": "Nytt vindu"
+	},
 	"notify_copy": {
 		"message": "Utvalget er kopiert"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "Vil du koble til på nytt (R), velge en annen tilkobling (C) eller avslutte (X)?"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "Ukjent reléalternativ: $1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "SSH-argumenter"
 	},
+	"terminal_clear_menu_label": {
+		"message": "Tøm terminalen"
+	},
 	"terminal_preview_label": {
 		"message": "Forhåndsvisning"
 	},
 	"terminal_profile_label": {
 		"message": "Nåværende profil"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Tilbakestill terminalen"
 	},
 	"tip_1": {
 		"message": "Du kan holde inne Ctrl (Cmd på macOS) mens du klikker på linkene for å åpne dem."
@@ -429,10 +486,13 @@
 		"message": "Du kan binde taster/hurtigtaster på nytt: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Bruk Yubikeys og andre smartkort for ssh-autorisering: https://goo.gl/3ZEU1w"
+		"message": "Bruk Yubikeys og andre smartkort for ssh-autentisering: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Vis bilder innebygd: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Hvis du holder inne Ctrl (Cmd på macOS) samtidig som du høyreklikker, får du opp en kontekstuell meny."
 	},
 	"tip_2": {
 		"message": "Vis varsler i nettleseren med hterm-notify: https://goo.gl/ZNxGdF"

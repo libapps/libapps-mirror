@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "關閉這個分頁會使這個工作階段中斷連線。"
 	},
+	"cache_pin_prompt": {
+		"message": "是否要快取 PIN 碼以供這個工作階段使用？(y/N)："
+	},
 	"cancel_button_label": {
 		"message": "取消"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "清除已知的 SSH 主機"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "這個指令會顯示已知主機選單和要刪除的主機提示。"
@@ -51,7 +57,7 @@
 		"message": "你知道嗎？我們提供了專用的選項頁面。\n所有選項一目瞭然，不必再直接指定「term_」！\n按下 $1 或點選以下連結即可開啟：\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "你知道嗎？我們提供了專用的選項頁面。\n所有選項一目瞭然，不必再直接指定「term_」！\n$1"
+		"message": "你知道嗎？我們提供了專用的選項頁面。\n所有選項一目瞭然，不必再直接修改「term_」！\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -64,6 +70,9 @@
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
+	},
+	"faq_menu_label": {
+		"message": "常見問題"
 	},
 	"field_argstr_placeholder": {
 		"message": "其他命令列引數"
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "通訊埠"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "SSH 轉送伺服器選項"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "SSH 轉送伺服器選項"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "錯誤：無法載入設定檔 $1：\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "已捲動 $1%。"
+	},
 	"hterm_button_allow_always": {
 		"message": "一律允許"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "封鎖"
+	},
+	"hterm_button_page_down": {
+		"message": "下一頁"
+	},
+	"hterm_button_page_up": {
+		"message": "上一頁"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "$1 載入失敗"
@@ -141,7 +159,7 @@
 		"message": "選取 AltGr 偵測試誤法。\n\n「null」：根據 navigator.language 自動偵測：\n      「en-us」=>「none」，其他 =>「right-alt」\n「none」：禁止任何 AltGr 相關改寫。\n「ctrl-alt」：假設 Ctrl+Alt 鍵表示 AltGr。\n「left-alt」：假設向左鍵+Alt 鍵表示 AltGr。\n「right-alt」：假設向右鍵+Alt 鍵表示 AltGr。"
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "將 Alt 鍵的功能設為 Meta 鍵或獨特的 Alt 鍵。"
+		"message": "設定是否將 Alt 鍵的功能設為 Meta 鍵或獨特的 Alt 鍵。"
 	},
 	"hterm_pref_alt_sends_what": {
 		"message": "控制 Alt 鍵的處理方式。\n\n  escape：傳送 ESC 前置詞。\n  8-bit：將 128 新增至輸入的字元 (如同在 xterm 中)。\n browser-key：等待按鍵事件，觀察瀏覽器\n 如何回應 (在瀏覽器會針對某些 Alt 序列\n 執行預設動作的平台上無法順利運作)。"
@@ -239,41 +257,44 @@
 	"hterm_pref_foreground_color": {
 		"message": "無其他色彩屬性的文字的前景顏色。"
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "設定輸入時是否要隱藏滑鼠游標。根據預設，系統會自動偵測平台/作業系統的處理方式。\n\n注意：部分作業系統會覆寫這項設定，因此你可能無法予以停用。"
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "如果為 true，Home/End 鍵可操控終端機捲軸，Shift+Home/End 鍵則會傳送 VT 按鍵碼。如果為 false，Home/End 鍵會傳送 VT 按鍵碼，Shift+Home/End 鍵則可捲動。"
+		"message": "如果為 true，Home/End 鍵可操控終端機捲軸，Shift + Home/Shift + End 鍵則會傳送至遠端主機。如果為 false，Home/End 鍵會傳送至遠端主機，Shift + Home/Shift + End 鍵則可捲動。"
 	},
 	"hterm_pref_keybindings": {
-		"message": "按鍵序列與按鍵動作的對應。按鍵序列包含 0 或多個輔助鍵加上按鍵碼。按鍵碼可以是十進位/十六進位數字或按鍵識別碼。按鍵動作可以是要傳送至主機的指定字串，也可以是動作識別碼。如需完整的格式說明，請參閱 https://goo.gl/LWRndr。\n\n按鍵繫結關係範例：\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "按鍵序列與按鍵動作的對應。按鍵序列包含 0 或多個輔助鍵加上按鍵碼。按鍵碼可以是十進位/十六進位數字或按鍵識別碼。按鍵動作可以是要傳送至主機的指定字串，也可以是動作識別碼。如需完整的格式說明，請參閱 https://goo.gl/LWRndr。\n\n按鍵繫結關係範例：\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "如果為 true，會將媒體鍵轉換成對應的 F- 鍵。如果為 false，則讓瀏覽器處理按鍵。"
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "設定 Meta 鍵是否傳送前置 Esc 鍵。"
+		"message": "按住 Meta 鍵並按下另一個鍵，會傳送 ESC 前置詞。\n\n舉例來說，在啟用這項設定的情況下，如果按下 Meta + K 鍵，就會傳送 ^[k，效果等同於依序按下 Escape 鍵和 K 鍵。如果停用這項設定，則只會傳送 K。"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "滑鼠的貼上按鈕，如果為 null 則會自動偵測。\n\n在自動偵測情況下，如果是非 X11 平台 (包括 Chrome 作業系統)，我們會使用滑鼠中鍵。在 X11 平台上，則會使用滑鼠右鍵 (因內建視窗管理員會透過滑鼠中鍵執行貼上動作)。\n\n0 == 左 (主要) 鍵。\n1 == 中 (輔助) 鍵。\n2 == 右 (次要) 鍵。\n\n這個選項可獨立啟用，不受「mouse-right-click-paste」設定影響。\n\n注意：左/右手用滑鼠皆可正確處理。"
+		"message": "滑鼠的貼上按鈕，如果為 null 則會自動偵測。\n\n在自動偵測情況下，如果是非 X11 平台 (包括 Chrome 作業系統)，我們會使用滑鼠中鍵。在 X11 平台上，則會使用滑鼠右鍵 (因內建視窗管理員會透過滑鼠中鍵執行貼上動作)。\n\n0 == 左 (主要) 鍵。\n1 == 中 (輔助) 鍵。\n2 == 右 (次要) 鍵。\n\n這個選項可獨立啟用，不受點擊右鍵貼上的設定影響。\n\n注意：左/右手用滑鼠皆可正確處理。"
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "按一下滑鼠右鍵時執行貼上動作。\n\n這個選項可獨立啟用，不受「mouse-paste-button」設定影響。\n\n注意：左/右手用滑鼠皆可正確處理。"
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "如果為 true，Page Up/Page Down 鍵可操控終端機捲軸，Shift+Page Up/Page Down 鍵則會傳送 VT 按鍵碼。如果為 false，Page Up/Page Down 鍵會傳送 VT 按鍵碼，Shift+Page Up/Page Down 鍵則可捲動。"
+		"message": "如果為 true，Page Up/Page Down 鍵可操控終端機捲軸，Shift + Page Up/Shift + Page Down 鍵則會傳送至遠端主機。如果為 false，Page Up/Page Down 鍵會傳送至遠端主機，Shift + Page Up/Shift + Page Down 鍵則可捲動。"
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "設定是否將 Alt+1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，這樣就仍可使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 Vim 或 Emacs 中使用。\n\n如果為 true，Alt+1..9 鍵將由瀏覽器處理。如果為 false，Alt+1..9 鍵會傳送至主機。如果為 null，則根據瀏覽器平台和視窗類型自動偵測。"
+		"message": "設定是否將 Alt + 1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，這樣就仍可使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 Vim 或 Emacs 中使用。\n\n如果為 true，Alt+1..9 鍵將由瀏覽器處理。如果為 false，Alt + 1..9 鍵會傳送至主機。如果為 null，則根據瀏覽器平台和視窗類型自動偵測。"
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "設定是否將 Ctrl+1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，這樣就仍可使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 Vim 或 Emacs 中使用。\n\n如果為 true，Ctrl+1..9 鍵將由瀏覽器處理。如果為 false，Ctrl+1..9 鍵會傳送至主機。如果為 null，則根據瀏覽器平台和視窗類型自動偵測。"
+		"message": "設定是否將 Ctrl + 1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，這樣就仍可使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 Vim 或 Emacs 中使用。\n\n如果為 true，Ctrl + 1..9 鍵將由瀏覽器處理。如果為 false，Ctrl + 1..9 鍵會傳送至主機。如果為 null，則根據瀏覽器平台和視窗類型自動偵測。"
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "設定是否將 Meta+1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，這樣就仍可使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 Vim 或 Emacs 中使用。\n\n如果為 true，Meta+1..9 鍵將由瀏覽器處理。如果為 false，Meta+1..9 鍵會傳送至主機。如果為 null，則根據瀏覽器平台和視窗類型自動偵測。"
+		"message": "設定是否將 Meta + 1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，這樣就仍可使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 Vim 或 Emacs 中使用。\n\n如果為 true，Meta+1..9 鍵將由瀏覽器處理。如果為 false，Meta+1..9 鍵會傳送至主機。如果為 null，則根據瀏覽器平台和視窗類型自動偵測。"
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "設定是否將 Meta+V 鍵傳送至主機。"
+		"message": "設定是否將 Meta + V 鍵傳送至主機。"
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "針對從主機接收的資料設定預期的編碼。\n\n有效的值為「utf-8」和「raw」。"
+		"message": "針對從主機接收的資料設定預期的編碼。\n如果編碼不符，可能會出現明顯可見的錯誤。\n\n有效的值為「utf-8」和「raw」。"
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "是否任何按鍵行為都會捲動到畫面底部。"
@@ -285,7 +306,7 @@
 		"message": "使用替代螢幕緩衝區且 DECCKM (應用程式游標鍵) 啟用時，滑鼠滾輪捲動事件會模擬方向鍵。\n\n按住 Shift 鍵可暫時停用。\n\n這種情形常見於使用呼叫器 (less)、讀取手冊頁或文字編輯器 (vi/nano)，或是使用 screen/tmux 時。"
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "滾輪事件 (由滑鼠滾輪觸發) 中像素差異的調節係數，可調整頁面捲動速度。"
+		"message": "滑鼠滾輪事件的調節係數 (以像素為單位)。\n\n可調整頁面捲動速度。"
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "縱向捲軸模式。"
@@ -294,13 +315,13 @@
 		"message": "針對傳送至主機的資料設定編碼。"
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "如果為 true，Shift+Insert 鍵會執行貼上動作；如果為 false，則會傳送至主機。"
+		"message": "設定 Shift + Insert 鍵會執行貼上動作還是傳送至遠端主機。"
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "預設的終端機編碼 (DOCS)。\n\nISO-2022 會啟用字元對應轉譯功能 (例如圖形對應)。\nUTF-8 會停用這類支援功能。\n\n鎖定的變體表示無法在執行階段透過終端機逸出序列變更編碼。\n\n除非舊應用程式發生無法順利轉譯的情形，否則建議一律使用 UTF-8。"
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "是否使用預設的視窗複製行為。"
+		"message": "設定是否使用預設瀏覽器/OS 的複製行為。\n\n允許瀏覽器/OS 直接處理可能會改善某些系統相容性的複製事件 (在複製操作完全無法執行時)，但會降低文字選取功能的完善度。\n\n舉例來說，原本是自動換行的長句，在複製後會出現斷行。"
 	},
 	"hterm_pref_user_css": {
 		"message": "要包含在終端機文件中的使用者樣式表網址。"
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "可停止比對所選字元右端 (結束) 的規則運算式。\n\n通常這是用於拒絕特定字元的字元類別。"
+	},
+	"hterm_space_character": {
+		"message": "空格"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "外觀 (字型、色彩、圖片)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "複製和貼上"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "編碼方式"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "擴充功能"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "鍵盤"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "其他"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "捲動"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "音效"
 	},
 	"identity_label": {
 		"message": "身分"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "已掛接！"
 	},
+	"new_window_menu_label": {
+		"message": "開新視窗"
+	},
 	"notify_copy": {
 		"message": "已複製所選內容"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "重新連線(R)、選擇其他連線(C)或結束(X)？"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "未知的轉送選項：$1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "SSH 引數"
 	},
+	"terminal_clear_menu_label": {
+		"message": "清除終端機"
+	},
 	"terminal_preview_label": {
 		"message": "預覽"
 	},
 	"terminal_profile_label": {
 		"message": "目前的設定檔"
+	},
+	"terminal_reset_menu_label": {
+		"message": "重設終端機"
 	},
 	"tip_1": {
 		"message": "點選連結時按住 Ctrl 鍵 (Mac OS 則為 Cmd 鍵) 即可開啟連結！"
@@ -429,10 +486,13 @@
 		"message": "你可以重新繫結金鑰/快速鍵：https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "使用 Yubikeys 和其他智慧型卡片進行 SSH 驗證：https://goo.gl/3ZEU1w"
+		"message": "使用 Yubikeys 和其他智慧型卡片進行 SSH 驗證：https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "顯示內嵌圖片：https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "按住 Ctrl 鍵 (Mac OS 則為 Cmd 鍵) 並按一下滑鼠右鍵，即可顯示內容選單。"
 	},
 	"tip_2": {
 		"message": "使用 hterm-notify 在瀏覽器中顯示通知：https://goo.gl/ZNxGdF"

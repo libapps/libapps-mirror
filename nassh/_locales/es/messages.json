@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "La sesión finalizará si cierras esta pestaña."
 	},
+	"cache_pin_prompt": {
+		"message": "¿Quieres almacenar el PIN en caché durante esta sesión? (y/N):"
+	},
 	"cancel_button_label": {
 		"message": "Cancelar"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Borrar known_hosts de SSH"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "Este comando muestra un menú de hosts conocidos y pide que se indique el host que se quiere eliminar."
@@ -51,7 +57,7 @@
 		"message": "¿Sabías que hay una página dedicada a las opciones?\nYa no es necesario modificar \"term_\" directamente.\nPulsa $1 o haz clic en el siguiente enlace para abrirla:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "¿Sabías que hay una página dedicada a las opciones?\nYa no es necesario utilizar \"term_\" directamente.\n$1"
+		"message": "¿Sabías que hay una página dedicada a las opciones?\nYa no es necesario modificar \"term_\" directamente.\n$1"
 	},
 	"del_keycap": {
 		"message": "[Supr]"
@@ -64,6 +70,9 @@
 	},
 	"enter_keycap": {
 		"message": "[INTRO]"
+	},
+	"faq_menu_label": {
+		"message": "Preguntas frecuentes"
 	},
 	"field_argstr_placeholder": {
 		"message": "argumentos de línea de comandos adicionales"
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "puerto"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "Opciones del servidor de transmisión SSH"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "Opciones del servidor de transmisión SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "ERROR: No se ha podido cargar el perfil $1:\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "Te has desplazado un $1 %"
+	},
 	"hterm_button_allow_always": {
 		"message": "Permitir siempre"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "Bloquear"
+	},
+	"hterm_button_page_down": {
+		"message": "Avanzar página"
+	},
+	"hterm_button_page_up": {
+		"message": "Retroceder página"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "No se ha podido cargar $1"
@@ -201,19 +219,19 @@
 		"message": "Si se le asigna el valor \"true\", el timbre del terminal en segundo plano creará una notificación web. https://www.w3.org/TR/notifications/\n\nSe necesita permiso del usuario para mostrar las notificaciones. Cuando se le asigna el valor \"true\" a esta opción, hterm intentará solicitar permiso al usuario si es necesario. Es posible que los navegadores no muestren la solicitud de permiso si no la provoca una acción del usuario.\n\nLas extensiones de Chrome con permiso de notificaciones pueden mostrar notificaciones."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Define si los caracteres ambiguos de Asia Oriental tienen el ancho de dos columnas."
+		"message": "Define si los caracteres ambiguos de Asia Oriental tienen dos columnas de ancho."
 	},
 	"hterm_pref_enable_8_bit_control": {
 		"message": "Si se le asigna el valor \"true\", se habilitan los caracteres de control de 8 bits, Si se le asigna el valor \"false\", se ignoran.\n\nRespetaremos las versiones de 2 bytes de los caracteres de control independientemente de cómo se configure esta opción."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "Si se le asigna el valor \"true\", respetaremos el atributo de parpadeo. Si se le asigna el valor \"False\", lo ignoraremos."
+		"message": "Si se le asigna el valor \"True\", respeta el atributo de parpadeo. Si se le asigna el valor \"False\", lo ignora."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Si se le asigna el valor \"true\", utilizaremos fuentes en negrita para el texto con el atributo \"bold/bright\". Si se le asigna el valor \"False\", se utilizará la fuente normal. Si se le asigna el valor \"null\", se detectará automáticamente."
+		"message": "Si se le asigna el valor \"True\", usa fuentes en negrita para marcar el texto con el atributo \"bold/bright\". Si se le asigna el valor \"False\", usa la fuente normal. Si se le asigna el valor \"null\", lo detecta automáticamente."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "Si se le asigna el valor \"true\", utilizaremos colores brillantes (entre 8 y 15 en las paletas de 16 colores) para cualquier texto con el atributo \"bold\". Si se le asigna el valor \"false\", se hará lo contrario."
+		"message": "Si se le asigna el valor \"True\", usa colores brillantes (entre 8 y 15 en las paletas de 16 colores) para marcar cualquier texto con el atributo \"bold\". Si no quieres que ocurra, asigna el valor \"False\"."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Define si se muestra un mensaje en el terminal cuando el host añade contenido al portapapeles."
@@ -239,41 +257,44 @@
 	"hterm_pref_foreground_color": {
 		"message": "El color de primer plano del texto que no tiene otros atributos de color."
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Define si ocultar el cursor del ratón automáticamente al escribir. Se detecta automáticamente si la plataforma o el SO lo gestiona de forma predeterminada.\n\nNota: Es posible que algunos sistemas operativos anulen este ajuste, por lo que quizá no puedas inhabilitarlo en algunas ocasiones."
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Si se le asigna el valor \"true\", las teclas Inicio/Fin controlarán la barra de desplazamiento del terminal y Mayús + Inicio/Fin enviará los códigos de teclas del terminal virtual. Si se le asigna el valor \"False\", las teclas Inicio/Fin envían códigos del terminal virtual y Mayús + Inicio/Fin se utiliza para desplazarse."
+		"message": "Si se le asigna el valor \"True\", las teclas Inicio/Fin controlan la barra de desplazamiento lateral y Mayús + Inicio/Fin se envían al host remoto. Si se le asigna el valor \"False\", las teclas Inicio/Fin se envían al host remoto y Mayús + Inicio/Fin controlan la barra de desplazamiento."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Una asignación de secuencia de teclas a acciones de teclas. Las secuencias incluyen cero o más teclas modificadoras seguidas de un código de teclas. Los códigos de teclas pueden ser números decimales o hexadecimales, o bien identificadores de teclas. Se pueden especificar acciones de las teclas en forma de cadena o identificadores de acciones que se envían al host. Accede a https://goo.gl/LWRndr para consultar una explicación completa del formato.\n\nCombinaciones de teclas de muestra:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HOLA\\n'\"\n}"
+		"message": "Una asignación de secuencia de teclas a acciones de teclas. Las secuencias pueden estar vacías o incluir teclas modificadoras seguidas de un código de teclas. Los códigos de teclas pueden ser números decimales o hexadecimales, o bien identificadores de teclas. Se pueden especificar acciones de teclas en forma de cadena que se envía al host o de identificadores de acciones . Para consultar una explicación completa del formato, ve a https://goo.gl/LWRndr.\n\nEjemplos de combinaciones de teclas:\n{\n  \"Ctrl + Alt + K\": \"clearTerminal\",\n  \"Ctrl +Mayús + L\": \"PASS\",\n  \"Ctrl + H\": \"'¡Hola, mundo!'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Si se le asigna el valor \"True\", las teclas multimedia funcionarán como su tecla F equivalente. Si se le asigna el valor \"False\", el navegador gestionará las teclas."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Define si la tecla meta inserta un prefijo Esc o no."
+		"message": "Envía un prefijo ESC al pulsar una tecla mientras se mantiene pulsada la tecla meta.\n\nPor ejemplo, si este ajuste está habilitado, al pulsar la tecla meta + K se envía ^[k como si hubieras pulsado Escape y después K. Si está inhabilitado, solo se envía la K."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Botón del ratón para pegar, o nada para habilitar la autodetección.\n\nPara habilitar la autodetección, usaremos el botón central del ratón en las plataformas que no sean X11 (incluido Chrome OS). En X11 se usa el botón derecho, ya que el administrador de ventanas nativo debería pegar con el botón central del ratón.\n\n0 == botón izquierdo (principal).\n1 == botón central (auxiliar).\n2 == botón derecho (secundario).\n\nEsta opción está habilitada independientemente de la opción para pegar con el botón derecho.\n\nNota: Esta función gestiona los ratones para diestros y zurdos correctamente."
+		"message": "Botón del ratón para pegar, o ningún valor para autodetectar.\n\nPara autodetectar, usaremos el botón central del ratón en las plataformas que no sean X11 (incluido Chrome OS). En X11 se usa el botón derecho, ya que el administrador de ventanas nativo debería pegar con el botón central del ratón.\n\n0 == botón izquierdo (principal).\n1 == botón central (auxiliar).\n2 == botón derecho (secundario).\n\nEsta opción es independiente de la opción para pegar con el botón derecho.\n\nNota: Esta función controla los ratones para diestros y zurdos correctamente."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Pegar con clics con el botón derecho del ratón.\n\nEsta opción está habilitada independientemente de la opción del botón para pegar del ratón.\n\nNota: Esta función gestiona los ratones para diestros y zurdos correctamente."
+		"message": "Pegar haciendo clic con el botón derecho del ratón.\n\nEsta opción es independiente de la opción del botón del ratón para pegar.\n\nNota: Esta función controla los ratones para diestros y zurdos correctamente."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Si se le asigna el valor \"true\", las teclas para subir/bajar en la página controlarán la barra de desplazamiento del terminal y Mayús + teclas para subir/bajar en la página enviará los códigos de teclas del terminal virtual. Si se le asigna el valor \"False\", las teclas para subir/bajar en la página envían códigos del terminal virtual y Mayús + teclas para subir/bajar en la página se utiliza para desplazarse."
+		"message": "Si se le asigna el valor \"True\", las teclas Re Pág/Av Pág controlan la barra de desplazamiento lateral y Mayús + Re Pág/Av Pág se envían al host remoto. Si se le asigna el valor \"False\", las teclas Re Pág/Av Pág se envían al host remoto y Mayús + Re Pág/Av Pág controlan la barra de desplazamiento."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Define si se debe transferir Alt + teclas del 1 al 9 al navegador.\n\nEs útil al ejecutar hterm en una pestaña del navegador para no perder los aceleradores del teclado de Chrome para cambiar a la pestaña. Cuando no se está ejecutando en una pestaña, es mejor enviar estas teclas al host para que se puedan usar en vim o emacs.\n\nSi se le asigna el valor \"true\", el navegador gestionará Alt + teclas del 1 al 9. Si se le asigna el valor \"False\", estas combinaciones se enviarán al host. Si no se le asigna nada, se habilitará la autodetección en función de la plataforma del navegador y el tipo de ventana."
+		"message": "Define si la combinación Alt + teclas del 1 al 9 se transfiere al navegador.\n\nEs útil al ejecutar hterm en una pestaña del navegador para no perder los aceleradores \"cambiar a pestaña\" del teclado de Chrome. Cuando no se está ejecutando en una pestaña, es mejor enviar estas teclas al host para que se puedan usar en vim o emacs.\n\nSi se le asigna el valor \"True\", el navegador controlará la combinación Alt + teclas del 1 al 9. Si se le asigna el valor \"False\", estas combinaciones se enviarán al host. Si no se le asigna ningún valor, se habilitará la autodetección en función de la plataforma del navegador y el tipo de ventana."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Define si se debe transferir Ctrl + teclas del 1 al 9 al navegador.\n\nEs útil al ejecutar hterm en una pestaña del navegador para no perder los aceleradores del teclado de Chrome para cambiar a la pestaña. Cuando no se está ejecutando en una pestaña, es mejor enviar estas teclas al host para que se puedan usar en vim o emacs.\n\nSi se le asigna el valor \"true\", el navegador gestionará Ctrl + teclas del 1 al 9. Si se le asigna el valor \"False\", estas combinaciones se enviarán al host. Si no se le asigna nada, se habilitará la autodetección en función de la plataforma del navegador y el tipo de ventana."
+		"message": "Define si la combinación Ctrl + teclas del 1 al 9 se debe transferir al navegador.\n\nEs útil al ejecutar hterm en una pestaña del navegador para no perder los aceleradores \"cambiar a pestaña\" del teclado de Chrome. Cuando no se está ejecutando en una pestaña, es mejor enviar estas teclas al host para que se puedan usar en vim o emacs.\n\nSi se le asigna el valor \"True\", el navegador controlará Ctrl + teclas del 1 al 9. Si se le asigna el valor \"False\", estas combinaciones se enviarán al host. Si no se le asigna ningún valor, se habilitará la autodetección en función de la plataforma del navegador y el tipo de ventana."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Define si se debe transferir tecla meta + teclas del 1 al 9 al navegador.\n\nEs útil al ejecutar hterm en una pestaña del navegador para no perder los aceleradores del teclado de Chrome para cambiar a la pestaña. Cuando no se está ejecutando en una pestaña, es mejor enviar estas teclas al host para que se puedan usar en vim o emacs.\n\nSi se le asigna el valor \"true\", el navegador gestionará tecla meta + teclas del 1 al 9. Si se le asigna el valor \"False\", estas combinaciones se enviarán al host. Si no se le asigna nada, se habilitará la autodetección en función de la plataforma del navegador y el tipo de ventana."
+		"message": "Define si la combinación tecla meta + teclas del 1 al 9 se debe transferir al navegador.\n\nEs útil al ejecutar hterm en una pestaña del navegador para no perder los aceleradores \"cambiar a pestaña\" del teclado de Chrome. Cuando no se está ejecutando en una pestaña, es mejor enviar estas teclas al host para que se puedan usar en vim o emacs.\n\nSi se le asigna el valor \"True\", el navegador controlará la combinación tecla meta + teclas del 1 al 9. Si se le asigna el valor \"False\", estas combinaciones se enviarán al host. Si no se le asigna ningún valor, se habilitará la autodetección en función de la plataforma del navegador y el tipo de ventana."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Define si tecla meta + V se transfiere al host."
+		"message": "Define si la combinación tecla meta + V se transfiere al host."
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "Define el cifrado esperado de los datos que se reciben del host.\n\nLos valores válidos son \"utf-8\" y \"raw\"."
+		"message": "Define el cifrado esperado de los datos que se reciben del host.\nSi los cifrados no coinciden, es probable que haya errores visuales.\n\nLos valores aceptados son \"utf-8\" y \"raw\"."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Define si se desplaza hacia abajo con cualquier tecla."
@@ -285,7 +306,7 @@
 		"message": "Si se usa el búfer de pantalla alternativo y el modo DECCKM (teclas de cursor de aplicación) está activado, los eventos de desplazamiento de la rueda del ratón emularán las teclas de flecha.\n\nPara inhabilitarlo temporalmente, mantén pulsada la tecla Mayús.\n\nSuele aparecer al usar lectores de página (less), leer páginas de documentación o editores de texto (vi/nano) o usar screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Multiplicador del modo delta de los píxeles en eventos de la rueda causados por la rueda de desplazamiento. Altera la velocidad de desplazamiento por la página."
+		"message": "Multiplicador de eventos de la rueda de desplazamiento cuando se miden en píxeles.\n\nAltera la velocidad de desplazamiento por la página."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Modo vertical de la barra de desplazamiento."
@@ -294,13 +315,13 @@
 		"message": "Define el cifrado de los datos que se envían al host."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Si se le asigna el valor \"true,\" Mayús + Insert pegará. Si se le asigna el valor \"False\", se enviará al host."
+		"message": "Define si la combinación Mayús + Insert se usa para pegar o se envía al host remoto."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Cifrado predeterminado del terminal (DOCS).\n\nISO-2022 habilita las traducciones de mapas de caracteres (como mapas de gráficos).\nUTF-8 inhabilita la compatibilidad con estos.\n\nSi la variante está bloqueada, significa que el cifrado no se puede cambiar en el tiempo de ejecución mediante las secuencias de escape del terminal.\n\nUsa UTF-8 a menos que no se procese bien en aplicaciones antiguas."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Define si se usa el comportamiento de copiar predeterminado de la ventana."
+		"message": "Define si se usa el comportamiento predeterminado del navegador o del SO para copiar.\n\nPermite que el navegador o el SO controle el evento de copiar directamente, lo que puede mejorar la compatibilidad con algunos sistemas en los que no se puede copiar, pero hace que la selección de texto sea menos efectiva.\n\nPor ejemplo, las líneas largas que se hayan dividido automáticamente se copiarán con los caracteres de nueva línea incluidos."
 	},
 	"hterm_pref_user_css": {
 		"message": "URL de la hoja de estilo del usuario que se debe incluir en el documento del terminal."
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Expresión regular para dejar de alinear caracteres a la derecha (final) de una selección.\n\nNormalmente, esta clase de caracteres se utiliza para rechazar caracteres específicos."
+	},
+	"hterm_space_character": {
+		"message": "Espacio"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Aspecto (fuentes, colores e imágenes)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Copiar y pegar"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Codificación"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Extensiones"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Teclado"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Varios"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Desplazamiento"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Sonidos"
 	},
 	"identity_label": {
 		"message": "Identidad"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "Activado."
 	},
+	"new_window_menu_label": {
+		"message": "Nueva ventana"
+	},
 	"notify_copy": {
 		"message": "Selección copiada"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "¿Quieres volver a establecer conexión (R), elegir otra conexión (C) o salir (X)?"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "Opción de transmisión desconocida: $1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "Argumentos SSH"
 	},
+	"terminal_clear_menu_label": {
+		"message": "Borrar pantalla del terminal"
+	},
 	"terminal_preview_label": {
 		"message": "Vista previa"
 	},
 	"terminal_profile_label": {
 		"message": "Perfil actual"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Restablecer terminal"
 	},
 	"tip_1": {
 		"message": "Puedes mantener pulsada la tecla Ctrl (Cmd en Mac OS) al hacer clic en los enlaces para abrirlos."
@@ -429,10 +486,13 @@
 		"message": "Puedes reasignar teclas/combinaciones de teclas a distintas acciones: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Usa Yubikeys y otras tarjetas inteligentes para la autenticación SSH: https://goo.gl/3ZEU1w"
+		"message": "Usa Yubikeys y otras tarjetas inteligentes para la autenticación SSH: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Muestra imágenes insertadas: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Si mantienes pulsada la tecla Ctrl (Cmd en macOS) mientras haces clic con el botón derecho, se abre un menú contextual."
 	},
 	"tip_2": {
 		"message": "Utiliza hterm-notify para mostrar notificaciones en el navegador: https://goo.gl/ZNxGdF"

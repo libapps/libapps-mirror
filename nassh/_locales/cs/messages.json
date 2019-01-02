@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "Pokud tuto kartu zavřete, bude tato relace odpojena."
 	},
+	"cache_pin_prompt": {
+		"message": "Uložit PIN do mezipaměti pro tuto relaci? (y/N):"
+	},
 	"cancel_button_label": {
 		"message": "Zrušit"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Vymazat údaje SSH known_hosts"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "Tento příkaz zobrazuje nabídku známých hostitelů a výzvy k zapomenutí hostitelů."
@@ -65,6 +71,9 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
+	"faq_menu_label": {
+		"message": "Časté dotazy"
+	},
 	"field_argstr_placeholder": {
 		"message": "další argumenty příkazového řádku"
 	},
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "Možnosti přenosového serveru SSH"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "Možnosti přenosového serveru SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "CHYBA: Profil $1 nelze načíst:\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "Posunuto o $1 %,"
+	},
 	"hterm_button_allow_always": {
 		"message": "Vždy povolit"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "Blokovat"
+	},
+	"hterm_button_page_down": {
+		"message": "O stránku dolů"
+	},
+	"hterm_button_page_up": {
+		"message": "O stránku nahoru"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Načtení zdroje $1 se nezdařilo"
@@ -141,7 +159,7 @@
 		"message": "Vyberte heuristiku detekce klávesy AltGr.\n\n'null': Zjistit automaticky podle hodnoty navigator.language:\n      'en-us' => 'none', jinak => 'right-alt'\n'none': Zakázat veškerou manipulaci s klávesou AltGr.\n'ctrl- alt': Předpokládat, že Ctrl + Alt znamená AltGr.\n'left-alt': Předpokládat, že levý Alt znamená AltGr.\n'right-alt': Předpokládat, že pravý Alt znamená AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Nastavuje, zda klávesa Alt funguje jako klávesa Meta, nebo jako samostatná klávesa Alt."
+		"message": "Udává, zda klávesa Alt funguje jako klávesa Meta, nebo jako samostatná klávesa Alt."
 	},
 	"hterm_pref_alt_sends_what": {
 		"message": "Řídí zacházení s klávesou Alt.\n\n  escape: Odeslat předponu ESC.\n  8-bit: Přidat k zadanému znaku 128, jako v emulátoru xterm.\n browser-key: Počkat na událost keypress a zjistit, co řekne prohlížeč. (Tato možnost nebude dobře fungovat na platformách, kde se některé kombinace kláves s klávesou Alt používají pro výchozí akce prohlížeče.)"
@@ -201,19 +219,19 @@
 		"message": "Při hodnotě true vytvoří zvonek terminálu na pozadí webové oznámení. https://www.w3.org/TR/notifications/\n\nK zobrazení oznámení je potřeba oprávnění od uživatele. Pokud je tato možnost nastavena na hodnotu true, pokusí se hterm v případě potřeby uživatele o oprávnění požádat. Pokud žádost o oprávnění nebyla vyvolána akcí uživatele, nemusejí ji prohlížeče zobrazit.\n\nRozšíření pro Chrome s oprávněním „notifications“ oprávnění zobrazovat oznámení mají."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Určuje, zda nejednoznačné východoasijské znaky mají dvousloupcovou šířku."
+		"message": "Udává, zda nejednoznačné východoasijské znaky mají dvousloupcovou šířku."
 	},
 	"hterm_pref_enable_8_bit_control": {
 		"message": "Hodnota true znamená, že jsou 8bitové řídicí znaky povoleny, hodnota false, že mají být ignorovány.\n\nDvoubajtové verze těchto řídicích znaků budeme respektovat bez ohledu na toto nastavení."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "True, pokud máme respektovat atribut blink, false, pokud jej máme ignorovat."
+		"message": "True, pokud máme respektovat atribut blink.False, pokud ho máme ignorovat."
 	},
 	"hterm_pref_enable_bold": {
 		"message": "True, pokud máme pro text s atributem bold/bright použít tučné písmo. False, pokud máme použít běžnou tloušťku písma. Null, pokud máme nastavení zjistit automaticky."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "True, pokud máme pro text s atributem bold použít jasné barvy (8–15 na paletě se 16 barvami), jinak false."
+		"message": "True, pokud máme pro text s atributem bold použít jasné barvy (8–15 na paletě se 16 barvami). Jinak False."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Udává, zda se má v terminálu zobrazit zpráva, když hostitel něco zapíše do schránky."
@@ -239,41 +257,44 @@
 	"hterm_pref_foreground_color": {
 		"message": "Barva popředí textu bez dalších atributů barev."
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Udává, zda se při zadávání má automaticky skrýt kurzor myši. Ve výchozím nastavení se automaticky zjišťuje, zda to určuje platforma nebo operační systém.\n\nPoznámka: Některé operační systémy mohou toto nastavení přepsat, a proto ho v některých případech nebude možné zakázat."
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Při hodnotě true budou klávesy Home a End ovládat posuvník terminálu a Shift+Home/End bude odesílat kódy kláves VT. Při hodnotě false budou klávesy Home a End odesílat kódy VT a Shift+Home/End bude ovládat posuvník."
+		"message": "Při hodnotě true budou klávesy Home a End ovládat posuvník terminálu a klávesy Shift+Home/End budou odeslány na vzdálený hostitelský server. Při hodnotě false budou klávesy Home a End odesílány na vzdálený hostitelský server a Shift+Home/End bude ovládat posuvník."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Mapování kombinací kláves na akce. Kombinace kláves zahrnují nula nebo více modifikačních kláves následovaných kódem klávesy. Kódy kláves mohou být decimální nebo hexadecimální čísla nebo identifikátory kláves. Akce kláves lze zadat jako řetězec, který se má odeslat na hostitelský server, nebo jako identifikátor akce. Pro úplné vysvětlení formátu viz https://goo.gl/LWRndr.\n\nUkázka mapování kláves:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Mapování kombinací kláves na akce. Kombinace kláves zahrnují nula nebo více modifikačních kláves následovaných kódem klávesy. Kódy kláves mohou být decimální nebo hexadecimální čísla nebo identifikátory kláves. Akce kláves lze zadat jako řetězec, který se má odeslat na hostitelský server, nebo jako identifikátor akce. Pro úplné vysvětlení formátu viz https://goo.gl/LWRndr.\n\nUkázkové mapování kláves:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Pokud je nastaveno na hodnotu true, budou se mediální klávesy převádět na ekvivalenty Fkey. Pokud je nastaveno na hodnotu false, bude klávesy zpracovávat prohlížeč."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Nastavujte, zda klávesa Meta odesílá úvodní escape sekvenci, či nikoliv."
+		"message": "Při podržení klávesy Meta a stisknutí nějaké klávesy bude odeslána předpona ESC.\n\nKdyž bude toto pravidlo povoleno, při stisknutí Meta+K se odešle ^[k, jako kdybyste stiskli Escape a potom K. Když bude zakázáno, odešle se jen K."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Tlačítko k vložení pomocí myši nebo null (zjistit automaticky).\n\nV případě automatické detekce použijeme u platforem jiných než X11 (včetně Chrome OS) prostřední tlačítko myši. Na platformě X11 použijeme pravé tlačítko myši (protože v nativním správci oken by se k vložení mělo používat prostřední tlačítko).\n\n0 == levé (primární) tlačítko.\n1 == prostřední (pomocné) tlačítko.\n2 == pravé (sekundární) tlačítko.\n\nTato možnost se aktivuje nezávisle na nastavení mouse-right-click-paste.\n\nPoznámka: Toto nastavení bude fungovat správně u myší pro leváky i pro praváky."
+		"message": "Tlačítko k vložení pomocí myši nebo null (zjistit automaticky).\n\nV případě automatické detekce použijeme u platforem jiných než X11 (včetně Chrome OS) prostřední tlačítko myši. Na platformě X11 použijeme pravé tlačítko myši (protože v nativním správci oken by se k vložení mělo používat prostřední tlačítko).\n\n0 == levé (primární) tlačítko.\n1 == prostřední (pomocné) tlačítko.\n2 == pravé (sekundární) tlačítko.\n\nTato volba je nezávislá na nastavení vložení pravým tlačítkem myši.\n\nPoznámka: Toto nastavení bude fungovat správně u myší pro leváky i pro praváky."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Vložení kliknutím pravým tlačítkem.\n\nTato možnost se aktivuje bez ohledu na nastavení mouse-paste-button.\n\nPoznámka: Toto nastavení bude fungovat správně u myší pro leváky i pro praváky."
+		"message": "Vložení kliknutím pravým tlačítkem.\n\nTato možnost je nezávislá na nastavení mouse-paste-button.\n\nPoznámka: Toto nastavení bude fungovat správně u myší pro leváky i pro praváky."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Při hodnotě true budou klávesy Page Up a Page Down ovládat posuvník terminálu a Shift+Page Up/Down bude odesílat kódy kláves VT. Při hodnotě false budou klávesy Page Up a Page Down odesílat kódy VT a Shift+Page Up/Down bude ovládat posuvník."
+		"message": "Při hodnotě true budou klávesy Page Up a Page Down ovládat posuvník terminálu a Shift+Page Up/Down budou odeslány na vzdálený hostitelský server. Při hodnotě false budou klávesy Page Up a Page Down budou odeslány na vzdálený hostitelský server a Shift+Page Up/Down bude ovládat posuvník."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Nastavuje, zda máme kombinace kláves Alt-1..9 předávat prohlížeči.\n\nToto chování je užitečné, když je hterm spuštěn na kartě prohlížeče, protože tak v Chromu nepřijdete o klávesové zkratky k přechodu na konkrétní kartu. Když není spuštěn na kartě, je lepší tyto klávesy odesílat na hostitelský server, aby je bylo možné používat v editoru Vim nebo Emacs.\n\nPři hodnotě true bude kombinace kláves Alt-1..9 zpracovávat prohlížeč. Při hodnotě false se kombinace kláves Alt-1..9 budou odesílat na hostitelský server. Pokud není nastavena žádná hodnota, zjistí se chování automaticky podle platformy prohlížeče a typu okna."
+		"message": "Určuje, zda budou kombinace kláves Alt-1..9 předávány prohlížeči.\n\nToto chování je užitečné, když je hterm spuštěn na kartě prohlížeče, protože tak v Chromu nepřijdete o klávesové zkratky k přechodu na konkrétní kartu. Když není spuštěn na kartě, je lepší tyto klávesy odesílat na hostitelský server, aby je bylo možné používat v editoru Vim nebo Emacs.\n\nPři hodnotě true bude kombinace kláves Alt-1..9 zpracovávat prohlížeč. Při hodnotě false se kombinace kláves Alt-1..9 budou odesílat na hostitelský server. Pokud není nastavena žádná hodnota, zjistí se chování automaticky podle platformy prohlížeče a typu okna."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Nastavuje, zda máme kombinace kláves Ctrl-1..9 předávat prohlížeči.\n\nToto chování je užitečné, když je hterm spuštěn na kartě prohlížeče, protože tak v Chromu nepřijdete o klávesové zkratky k přechodu na konkrétní kartu. Když není spuštěn na kartě, je lepší tyto klávesy odesílat na hostitelský server, aby je bylo možné používat v editoru Vim nebo Emacs.\n\nPři hodnotě true bude kombinace kláves Ctrl-1..9 zpracovávat prohlížeč. Při hodnotě false se kombinace kláves Ctrl-1..9 budou odesílat na hostitelský server. Pokud není nastavena žádná hodnota, zjistí se chování automaticky podle platformy prohlížeče a typu okna."
+		"message": "Určuje, zda budou kombinace kláves Ctrl-1..9 předávány prohlížeči.\n\nToto chování je užitečné, když je hterm spuštěn na kartě prohlížeče, protože tak v Chromu nepřijdete o klávesové zkratky k přechodu na konkrétní kartu. Když není spuštěn na kartě, je lepší tyto klávesy odesílat na hostitelský server, aby je bylo možné používat v editoru Vim nebo Emacs.\n\nPři hodnotě true bude kombinace kláves Ctrl-1..9 zpracovávat prohlížeč. Při hodnotě false se kombinace kláves Ctrl-1..9 budou odesílat na hostitelský server. Pokud není nastavena žádná hodnota, zjistí se chování automaticky podle platformy prohlížeče a typu okna."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Nastavuje, zda máme kombinace kláves Meta-1..9 předávat prohlížeči.\n\nToto chování je užitečné, když je hterm spuštěn na kartě prohlížeče, protože tak v Chromu nepřijdete o klávesové zkratky k přechodu na konkrétní kartu. Když není spuštěn na kartě, je lepší tyto klávesy odesílat na hostitelský server, aby je bylo možné používat v editoru Vim nebo Emacs.\n\nPři hodnotě true bude kombinace kláves Meta-1..9 zpracovávat prohlížeč. Při hodnotě false se kombinace kláves Meta-1..9 budou odesílat na hostitelský server. Pokud není nastavena žádná hodnota, zjistí se chování automaticky podle platformy prohlížeče a typu okna."
+		"message": "Určuje, zda budou kombinace kláves Meta-1..9 předávány prohlížeči.\n\nToto chování je užitečné, když je hterm spuštěn na kartě prohlížeče, protože tak v Chromu nepřijdete o klávesové zkratky k přechodu na konkrétní kartu. Když není spuštěn na kartě, je lepší tyto klávesy odesílat na hostitelský server, aby je bylo možné používat v editoru Vim nebo Emacs.\n\nPři hodnotě true bude kombinace kláves Meta-1..9 zpracovávat prohlížeč. Při hodnotě false se kombinace kláves Meta-1..9 budou odesílat na hostitelský server. Pokud není nastavena žádná hodnota, zjistí se chování automaticky podle platformy prohlížeče a typu okna."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Nastavuje, zda se má kombinace kláves Meta-V předávat na hostitelský server."
+		"message": "Udává, zda se má kombinace kláves Meta-V předávat na hostitelský server."
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "Nastavuje očekávané kódování pro data přijatá z hostitelského serveru.\n\nPlatné hodnoty jsou 'utf-8' a 'raw'."
+		"message": "Nastavuje očekávané kódování pro data přijatá z hostitelského serveru.\nPokud se kódování nebudou shodovat, lze očekávat vizuální chyby.\n\nPlatné hodnoty jsou utf-8 a raw."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Udává, zda se má při stisknutí libovolné klávesy přejít dolů."
@@ -285,7 +306,7 @@
 		"message": "Pokud používáte alternativní vyrovnávací paměť obrazovky a je aktivní DECCKM (Application Cursor Keys), budou události posunutí kolečka myši emulovat klávesy se šipkami.\n\nToto chování lze dočasně deaktivovat podržením klávesy Shift.\n\nČasto k tomu dochází při používání stránkovacích programů (less), textových editorů (vi/nano), programů screen a tmux nebo při čtení manuálových stránek."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Multiplikátor rozdílu v pixelech při událostech kolečka způsobených posouvacím kolečkem. Upravuje rychlost posouvání stránky."
+		"message": "Multiplikátor událostí kolečka myši (měřeno v pixelech).\n\nUpravuje rychlost posouvání stránky."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Režim svislého posuvníku."
@@ -294,13 +315,13 @@
 		"message": "Nastavuje kódování dat odesílaných na hostitelský server."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Při hodnotě true kombinace kláves Shift + Insert vloží obsah, při hodnotě false se odešle na hostitelský server."
+		"message": "Udává, zda kombinace kláves Shift+Insert slouží k vkládání, nebo je odesílána na vzdálený hostitelský server."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Výchozí kódování terminálu (DOCS).\n\nISO-2022 umožňuje překlady map znaků (jako u grafických map).\nUTF-8 jejich podporu zakazuje.\n\nUzamknutá varianta znamená, že kódování nelze změnit za běhu pomocí escape sekvencí terminálu.\n\nPokud nedochází k chybnému vykreslování u starších aplikací, měli byste se držet kódování UTF-8."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Určuje, zda se má používat výchozí chování okna týkající se kopírování."
+		"message": "Udává, zda se má používat výchozí chování prohlížeče nebo operačního systému týkající se kopírování.\n\nUmožňuje prohlížeči nebo operačnímu systému zpracovávat událost kopírování přímo, což u některých systémů (kde kopírování nefunguje) může zvýšit kompatibilitu, avšak výběr textu bude méně přesný.\n\nDlouhé řádky mohou být automaticky zkracovány a zkopírovány se značkami newline."
 	},
 	"hterm_pref_user_css": {
 		"message": "Adresa URL uživatelské šablony stylů, která má být zahrnuta v dokumentu terminálu."
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Regulární výraz k zastavení hledání shod napravo (směrem ke konci) od výběru.\n\nObvykle se jedná o třídu znaků k odmítnutí konkrétních znaků."
+	},
+	"hterm_space_character": {
+		"message": "Mezera"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Vzhled (písma, barvy, obrázky)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Kopírování"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Kódování"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Rozšíření"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Klávesnice"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Různé"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Posouvání"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Zvuky"
 	},
 	"identity_label": {
 		"message": "Identita"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "Připojeno."
 	},
+	"new_window_menu_label": {
+		"message": "Nové okno"
+	},
 	"notify_copy": {
 		"message": "Výběr byl zkopírován"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "Znovu se připojit (R), vybrat jiné připojení (C) nebo ukončit (X)?"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "Neznámá možnost přenosu: $1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "Argumenty SSH"
 	},
+	"terminal_clear_menu_label": {
+		"message": "Vymazat terminál"
+	},
 	"terminal_preview_label": {
 		"message": "Náhled"
 	},
 	"terminal_profile_label": {
 		"message": "Aktuální profil"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Resetovat terminál"
 	},
 	"tip_1": {
 		"message": "Chcete-li otevřít odkaz, podržte klávesu Ctrl (v macOS klávesu Cmd) a klikněte na něj."
@@ -429,10 +486,13 @@
 		"message": "Přiřazení kláves a zkratek můžete změnit: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Používejte k ověření SSH karty Yubikey a další čipové karty: https://goo.gl/3ZEU1w"
+		"message": "Používejte k ověření SSH karty Yubikey a další chytré karty: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Zobrazovat obrázky v obsahu: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Když při kliknutí pravým tlačítkem podržíte klávesu Ctrl (Cmd na macOS), zobrazí se kontextová nabídka."
 	},
 	"tip_2": {
 		"message": "Pomocí funkce hterm-notify můžete v prohlížeči zobrazovat oznámení: https://goo.gl/ZNxGdF"

@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "Đóng tab này sẽ ngắt kết nối phiên này."
 	},
+	"cache_pin_prompt": {
+		"message": "Bạn muốn lưu mã PIN cho phiên này vào bộ nhớ đệm? (có/Không):"
+	},
 	"cancel_button_label": {
 		"message": "Hủy"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Xóa SSH known_hosts"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "Lệnh này hiển thị menu các máy chủ đã biết và lời nhắc máy chủ cần bỏ qua."
@@ -48,10 +54,10 @@
 		"message": "Hộp thoại kết nối"
 	},
 	"console_crosh_options_notice": {
-		"message": "Bạn có biết rằng chúng tôi cung cấp một trang chuyên về tùy chọn không?\nBạn sẽ không cần sửa đổi 'term_directly' nữa!\nĐể mở trang này, hãy nhấn phím $1 hoặc nhấp vào:\n$2"
+		"message": "Bạn có biết rằng chúng tôi cung cấp một trang chuyên về tùy chọn không?\nBạn sẽ không cần sửa đổi 'term_' trực tiếp nữa!\nĐể mở trang này, hãy nhấn phím $1 hoặc nhấp vào:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Bạn có biết rằng chúng tôi cung cấp một trang chuyên về tùy chọn không?\nBạn sẽ không cần chỉnh sửa 'term_directly' nữa!\n$1"
+		"message": "Bạn có biết rằng chúng tôi cung cấp một trang chuyên về tùy chọn?\nBạn sẽ không cần sửa đổi 'term_' trực tiếp nữa!\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -64,6 +70,9 @@
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
+	},
+	"faq_menu_label": {
+		"message": "Câu hỏi thường gặp"
 	},
 	"field_argstr_placeholder": {
 		"message": "đối số dòng lệnh bổ sung"
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "cổng"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "Tùy chọn về máy chủ chuyển tiếp SSH"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "Tùy chọn về máy chủ chuyển tiếp SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "ERROR: Không thể tải cấu hình $1:\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "Đã cuộn $1%,"
+	},
 	"hterm_button_allow_always": {
 		"message": "Luôn cho phép"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "Chặn"
+	},
+	"hterm_button_page_down": {
+		"message": "Phím Page down"
+	},
+	"hterm_button_page_up": {
+		"message": "Phím Page up"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Không tải được $1"
@@ -141,7 +159,7 @@
 		"message": "Chọn phương pháp phỏng đoán phát hiện AltGr.\n\n'null': Tự động phát hiện dựa trên navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Tắt bất kỳ thay đổi định dạng nào có liên quan đến AltGr.\n'ctrl-alt': Giả sử Ctrl+Alt có nghĩa là AltGr.\n'left-alt': Giả sử phím Alt bên trái có nghĩa là AltGr.\n'right-alt': Giả sử phím Alt bên phải có nghĩa là AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Đặt xem phím Alt có vai trò giống phím Meta hay phím Alt riêng biệt."
+		"message": "Xác định xem phím Alt có vai trò giống phím Meta hay phím Alt riêng biệt không."
 	},
 	"hterm_pref_alt_sends_what": {
 		"message": "Điều khiển cách sử dụng phím Alt.\n\n  escape: Gửi tiền tố ESC.\n  8 bit: Thêm 128 vào ký tự đã nhập như trong xterm.\n browser-key: Chờ sự kiện nhấn phím và xem nội dung trình duyệt hiển thị. (Việc này sẽ hoạt động không hiệu quả trên các nền tảng mà trình duyệt thực hiện hành động mặc định cho một số chuỗi Alt.)"
@@ -171,7 +189,7 @@
 		"message": "Chọn xem có xóa lựa chọn sau khi sao chép hay không."
 	},
 	"hterm_pref_close_on_exit": {
-		"message": "Xem có đóng cửa sổ khi kết thúc thực hiện lệnh hay không."
+		"message": "Xác định xem có đóng cửa sổ khi thực thi xong lệnh hay không."
 	},
 	"hterm_pref_color_palette_overrides": {
 		"message": "Ghi đè màu trong bảng màu mặc định.\n\nCó thể chỉ định thao tác này dưới dạng mảng hoặc đối tượng. Khi được chỉ định dưới dạng đối tượng, đối tượng đó sẽ được coi là mảng thưa, trong đó mỗi thuộc tính chính là một chỉ mục dạng số trong bảng màu.\n\nCó thể chỉ định các giá trị giống nhau như hầu hết các giá trị màu CSS. Giá trị này bao gồm #RGB, #RRGGBB, rgb(...), rgba(...) và bất kỳ tên màu nào cũng nằm trong tệp X11 rgb.txt chuẩn.\n\nBạn có thể sử dụng giá trị \"null\" để nêu rõ rằng không được thay đổi giá trị mặc định. Điều này sẽ hữu ích nếu muốn bỏ qua một số nhỏ các chỉ mục khi chỉ định giá trị này dưới dạng mảng.\n\nChẳng hạn như cả hai giá trị này đặt chỉ mục màu 1 thành màu xanh lam:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
@@ -183,7 +201,7 @@
 		"message": "Tổ hợp phím Ctrl-C sẽ sao chép nếu giá trị là true, sẽ gửi ^C đến máy chủ nếu giá trị là false.\nTổ hợp phím Ctrl-Shift-C sẽ gửi ^C đến máy chủ nếu giá trị là true, sẽ sao chép nếu giá trị là false."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Nếu là true, tổ hợp phím Ctrl-+/-/0 sẽ điều khiển thao tác thu phóng.\nNếu là false, tổ hợp phím Ctrl-Shift- +/-/0 sẽ điều khiển thao tác thu phóng, tổ hợp phím Ctrl-- sẽ gửi ^_, tổ hợp phím Ctrl-+/0 sẽ không thực hiện thao tác nào."
+		"message": "Nếu là true, tổ hợp phím Ctrl-+/-/0 sẽ điều khiển thao tác thu phóng.\nNếu là false, tổ hợp phím Ctrl-Shift-+/-/0 sẽ điều khiển thao tác thu phóng, tổ hợp phím Ctrl-- sẽ gửi ^_, tổ hợp phím Ctrl-+/0 sẽ không thực hiện thao tác nào."
 	},
 	"hterm_pref_ctrl_v_paste": {
 		"message": "Tổ hợp phím Ctrl-V sẽ dán nếu là true, sẽ gửi ^V đến máy chủ nếu là false.\nTổ hợp phím Ctrl-Shift-V sẽ gửi ^V đến máy chủ nếu là true, sẽ dán nếu là false."
@@ -201,19 +219,19 @@
 		"message": "Nếu là true, chuông trong nền của thiết bị đầu cuối sẽ tạo Thông báo web. https://www.w3.org/TR/notifications/\n\nViệc hiển thị thông báo yêu cầu quyền từ người dùng. Khi bạn đặt tùy chọn này thành true, hterm sẽ tìm cách yêu cầu người dùng cấp quyền nếu cần thiết. Các trình duyệt có thể không hiển thị yêu cầu quyền này nếu yêu cầu không được kích hoạt bằng hành động của người dùng.\n\nCác tiện ích của Chrome được cấp quyền về \"thông báo\" sẽ có quyền hiển thị thông báo."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Đặt xem các ký tự ngôn ngữ Đông Á không xác định có chiều rộng hai cột hay không."
+		"message": "Xác định xem các ký tự ngôn ngữ Đông Á không xác định có chiều rộng hai cột hay không."
 	},
 	"hterm_pref_enable_8_bit_control": {
 		"message": "True để bật các ký tự điều khiển 8 bit, false để bỏ qua các ký tự đó.\n\nChúng tôi sẽ sử dụng các phiên bản hai byte của các ký tự điều khiển này cho dù cài đặt này là gì."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "Là true nếu chúng tôi phải dùng thuộc tính nhấp nháy. Là false để bỏ qua thuộc tính đó."
+		"message": "Nếu đặt là true, áp dụng thuộc tính nhấp nháy. Nếu đặt là false, hãy bỏ qua thuộc tính đó."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Là true nếu chúng tôi phải dùng phông chữ có độ đậm cho văn bản có thuộc tính về độ đậm/độ sáng. Là false để sử dụng phông chữ có độ đậm thông thường. Là null để tự động phát hiện."
+		"message": "Nếu đặt là true, hãy dùng phông chữ có độ đậm cho văn bản có thuộc tính về độ đậm/độ sáng. Nếu đặt là false, hãy sử dụng phông chữ có độ đậm thông thường. Nếu để trống, hãy sử dụng tính năng tự động phát hiện."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "Là true nếu chúng tôi phải sử dụng các màu sáng (8-15 trên bảng màu gồm 16 màu) cho mọi văn bản có thuộc tính về độ đậm. Nếu không, chúng tôi sẽ sử dụng tùy chọn false."
+		"message": "Nếu đặt true, hãy sử dụng các màu sáng (8-15 trên bảng màu gồm 16 màu) cho mọi văn bản có thuộc tính về độ đậm. Nếu không, đặt là false."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Xem có hiển thị thông báo trong thiết bị đầu cuối khi máy chủ ghi vào khay nhớ tạm hay không."
@@ -239,41 +257,44 @@
 	"hterm_pref_foreground_color": {
 		"message": "Màu mặt nổi cho văn bản không có các thuộc tính màu khác."
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Xác định xem có tự động ẩn con trỏ chuột khi nhập không. Theo mặc định, hãy tự động phát hiện xem nền tảng/hệ điều hành có xử lý tùy chọn này hay không.\n\nLưu ý: Một số hệ điều hành có thể ghi đè tùy chọn cài đặt này nên không phải lúc nào bạn cũng tắt được tùy chọn đó."
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Nếu là true, phím Home/End sẽ điều khiển thanh cuộn của thiết bị đầu cuối và phím Shift-Home/End sẽ gửi mã phím VT. Nếu là false, phím Home/End sẽ gửi các mã VT còn tổ hợp phím Shift-Home/End sẽ cuộn."
+		"message": "Nếu đặt là true, thì phím Home/End sẽ điều khiển thanh cuộn của thiết bị đầu cuối và tổ hợp phím Shift-Home/Shift-End sẽ được gửi đến máy chủ từ xa. Nếu đặt là false, thì phím Home/End sẽ được gửi đến máy chủ từ xa và tổ hợp phím Shift-Home/Shift-End sẽ cuộn."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Một bản đồ chuỗi phím cho các thao tác do phím thực hiện. Chuỗi phím không bao gồm hoặc bao gồm nhiều phím bổ trợ, theo sau là một mã phím. Các mã phím có thể là số thập phân hoặc thập lục phân hoặc một giá trị nhận dạng phím. Các thao tác do phím thực hiện có thể là một chuỗi được chỉ định để gửi đến máy chủ hoặc là một giá trị nhận dạng thao tác. Để biết giải thích đầy đủ về định dạng, hãy truy cập vào https://goo.gl/LWRndr.\n\nCác liên kết phím mẫu:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Một sơ đồ chuỗi phím cho các thao tác do phím thực hiện. Chuỗi phím không bao gồm hoặc bao gồm nhiều phím bổ trợ, theo sau là một mã phím. Các mã phím có thể là số thập phân hoặc thập lục phân hoặc một giá trị nhận dạng phím. Các thao tác do phím thực hiện có thể là một chuỗi được chỉ định để gửi đến máy chủ hoặc là một giá trị nhận dạng thao tác. Để xem thông tin giải thích đầy đủ về định dạng, hãy truy cập vào https://goo.gl/LWRndr.\n\nCác liên kết phím mẫu:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Nếu true, chuyển đổi các phím phương tiện thành các phím chức năng tương đương. Nếu false, để trình duyệt xử lý các phím."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Đặt xem phím Meta có gửi tiền tố ký tự thoát hay không."
+		"message": "Gửi tiền tố ESC khi nhấn phím trong khi giữ phím Meta.\n\nChẳng hạn, khi bật, thao tác nhấn phím Meta-K sẽ gửi ^[k như thể bạn đã nhập phím Escape rồi đến phím k. Khi tắt, chỉ gửi k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Nút dán của chuột hoặc null để tự động phát hiện.\n\nĐể tự động phát hiện, chúng tôi sẽ sử dụng nút chuột giữa cho các nền tảng không phải nền tảng X11 (bao gồm cả Chrome OS). Trên nền tảng X11, chúng tôi sẽ sử dụng nút chuột phải (vì trình quản lý cửa sổ gốc sẽ dán bằng nút chuột giữa).\n\n0 == nút trái (chính).\n1 == nút giữa (bổ trợ).\n2 == nút phải (phụ).\n\nTùy chọn này được kích hoạt độc lập với cài đặt \"mouse-right-click-paste\".\n\nLưu ý: Tùy chọn này sẽ xử lý chuột trái và phải một cách chính xác."
+		"message": "Nút dán của chuột hoặc giá trị rỗng để tự động phát hiện.\n\nĐể tự động phát hiện, chúng tôi sẽ sử dụng nút chuột giữa cho các nền tảng không phải nền tảng X11 (bao gồm cả Chrome OS). Trên nền tảng X11, chúng tôi sẽ sử dụng nút chuột phải (vì trình quản lý cửa sổ gốc sẽ dán bằng nút chuột giữa).\n\n0 == nút trái (chính).\n1 == nút giữa (bổ trợ).\n2 == nút phải (phụ).\n\nTùy chọn này không phụ thuộc vào mục cài đặt cho thao tác dán bằng cách nhấp chuột phải.\n\nLưu ý: Tùy chọn này sẽ xử lý chuột trái và phải một cách chính xác."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Dán bằng các lần nhấp vào nút chuột phải.\n\nTùy chọn này được kích hoạt độc lập với cài đặt \"mouse-paste-button\".\n\nLưu ý: Tùy chọn này sẽ xử lý chuột trái và phải chính xác."
+		"message": "Dán bằng các lần nhấp vào nút chuột phải.\n\nTùy chọn này không phụ thuộc vào tùy chọn cài đặt \"nút dán bằng chuột\".\n\nLưu ý: Tùy chọn này sẽ xử lý chuột trái và phải chính xác."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Nếu là true, phím Page Up/Down sẽ điều khiển thanh cuộn của thiết bị đầu cuối và tổ hợp phím Shift-Page Up/Down sẽ gửi các mã phím VT. Nếu là false thì phím Page Up/Down sẽ gửi mã VT và tổ hợp phím Shift-Page Up/Down sẽ cuộn."
+		"message": "Nếu là đúng, thì phím Page Up/Page Down sẽ điều khiển thanh cuộn của thiết bị đầu cuối và sẽ gửi tổ hợp phím Shift-Page Up/Shift-Page Down đến máy chủ từ xa. Nếu là sai, thì sẽ gửi phím Page Up/Page Down đến máy chủ từ xa và tổ hợp phím Shift-Page Up/Shift-Page Down sẽ cuộn."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Đặt xem chúng tôi có chuyển Alt-1..9 đến trình duyệt này hay không.\n\nCài đặt này hữu ích khi chạy hterm trong tab trình duyệt, nhờ đó bạn sẽ không mất các trình tăng tốc bàn phím \"chuyển tab\" của Chrome. Khi không chạy trong tab, bạn nên gửi các phím này tới máy chủ để có thể dùng trong vim hoặc emacs.\n\nNếu là true, Alt-1..9 sẽ do trình duyệt xử lý. Nếu là false, Alt-1..9 sẽ được gửi đến máy chủ. Nếu là null thì sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
+		"message": "Xác định xem có chuyển tổ hợp phím Alt-1..9 sang trình duyệt này hay không.\n\nCài đặt này hữu ích khi chạy hterm trong tab trình duyệt, nhờ đó bạn sẽ không mất các trình tăng tốc bàn phím \"chuyển tab\" của Chrome. Khi không chạy trong tab, bạn nên gửi các phím này tới máy chủ để có thể dùng trong vim hoặc emacs.\n\nNếu là đúng, thì tổ hợp phím Alt-1..9 sẽ do trình duyệt xử lý. Nếu là sai, thì sẽ gửi tổ hợp phím Alt-1..9 đến máy chủ. Nếu là rỗng thì sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Đặt xem chúng tôi có chuyển Ctrl-1..9 đến trình duyệt này hay không.\n\nCài đặt này hữu ích khi chạy hterm trong tab trình duyệt, nhờ đó bạn sẽ không mất các trình tăng tốc bàn phím \"chuyển tab\" của Chrome. Khi không chạy trong tab, bạn nên gửi các phím này tới máy chủ để có thể dùng trong vim hoặc emacs.\n\nNếu là true, Alt-1..9 sẽ do trình duyệt xử lý. Nếu là false, Alt-1..9 sẽ được gửi đến máy chủ. Nếu là null thì sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
+		"message": "Xác định xem có chuyển tổ hợp phím Ctrl-1..9 sang trình duyệt này hay không.\n\nCài đặt này hữu ích khi chạy hterm trong tab trình duyệt, nhờ đó bạn sẽ không mất các trình tăng tốc bàn phím \"chuyển tab\" của Chrome. Khi không chạy trong tab, bạn nên gửi các phím này tới máy chủ để có thể dùng trong vim hoặc emacs.\n\nNếu là đúng, thì tổ hợp phím Ctrl-1..9 sẽ do trình duyệt xử lý. Nếu là sai, thì sẽ gửi tổ hợp phím Ctrl-1..9 đến máy chủ. Nếu là rỗng thì sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Đặt xem chúng tôi có chuyển Meta-1..9 đến trình duyệt này hay không.\n\nCài đặt này hữu ích khi chạy hterm trong tab trình duyệt, nhờ đó bạn sẽ không mất các trình tăng tốc bàn phím \"chuyển tab\" của Chrome. Khi không chạy trong tab, bạn nên gửi các phím này tới máy chủ để có thể dùng trong vim hoặc emacs.\n\nNếu là true, Meta-1..9 sẽ do trình duyệt xử lý. Nếu là false, Meta-1..9 sẽ được gửi tới máy chủ. Nếu là null thì sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
+		"message": "Xác định xem có chuyển tổ hợp phím Meta-1..9 sang trình duyệt này hay không.\n\nCài đặt này hữu ích khi chạy hterm trong tab trình duyệt, nhờ đó bạn sẽ không mất các trình tăng tốc bàn phím \"chuyển tab\" của Chrome. Khi không chạy trong tab, bạn nên gửi các phím này tới máy chủ để có thể dùng trong vim hoặc emacs.\n\nNếu là đúng, thì tổ hợp phím Meta-1..9 sẽ do trình duyệt xử lý. Nếu là sai, thì sẽ gửi tổ hợp phím Meta-1..9 đến máy chủ. Nếu là rỗng thì sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Đặt xem Meta-V có được chuyển đến máy chủ hay không."
+		"message": "Xác định xem có chuyển tổ hợp phím Meta-V sang máy chủ hay không."
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "Đặt mã hóa mong muốn cho dữ liệu nhận được từ máy chủ.\n\nCác giá trị hợp lệ là 'utf-8' và 'raw'."
+		"message": "Đặt chế độ mã hóa mong muốn cho dữ liệu nhận từ máy chủ.\nNếu chế độ mã hóa không khớp, chúng ta sẽ thấy hiển thị các lỗi bằng hình ảnh.\n\nCác giá trị hợp lệ là 'utf-8' và 'raw'."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Xem có cuộn xuống cuối khi nhấn vào tổ hợp phím bất kỳ hay không."
@@ -285,7 +306,7 @@
 		"message": "Khi sử dụng vùng đệm màn hình thay thế, đồng thời DECCKM (Các phím con trỏ của ứng dụng) đang hoạt động, thao tác cuộn con lăn chuột sẽ có chức năng giống phím mũi tên.\n\nBạn có thể tạm thời vô hiệu hóa cài đặt này bằng cách giữ phím Shift.\n\nCài đặt này thường gặp khi sử dụng các chương trình trợ giúp đọc (less) hoặc khi đọc các trang hướng dẫn hay các trình chỉnh sửa văn bản (vi/nano) hoặc khi sử dụng screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Bội số cho vùng pixel trong các sự kiện con lăn do thao tác cuộn con lăn chuột tạo ra. Thay đổi tốc độ cuộn trang."
+		"message": "Bội số cho sự kiện cuộn con lăn khi được đo bằng pixel.\n\nThay đổi tốc độ cuộn trang."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Chế độ thanh cuộn dọc."
@@ -294,13 +315,13 @@
 		"message": "Thiết lập mã hóa cho dữ liệu gửi tới máy chủ."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Tổ hợp phím Shift-Insert sẽ thực hiện thao tác dán nếu giá trị là true, còn nếu giá trị là false thì sẽ gửi đến máy chủ."
+		"message": "Xác định xem có sử dụng tổ hợp phím Shift-Insert để dán hoặc gửi tổ hợp phím này đến máy chủ từ xa hay không."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Mã hóa thiết bị đầu cuối mặc định (DOCS).\n\nISO-2022 bật các bản dịch ánh xạ ký tự (chẳng hạn như các ánh xạ đồ họa).\nUTF-8 tắt hỗ trợ cho các bản dịch đó.\n\nBiến bị khóa có nghĩa là không thể thay đổi mã hóa vào thời gian chạy thông qua chuỗi ký tự thoát của thiết bị đầu cuối.\n\nBạn nên luôn sử dụng UTF-8 trừ khi nhận thấy có sự cố hiển thị với các ứng dụng cũ."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Xem có sử dụng hành vi mặc định sao chép cửa sổ hay không."
+		"message": "Xác định xem có sử dụng hành vi sao chép của hệ điều hành/trình duyệt mặc định hay không.\n\nCho phép trình duyệt/hệ điều hành trực tiếp xử lý sự kiện sao chép có thể giúp cải thiện tính tương thích với một số hệ thống (trong đó chức năng sao chép không hề hoạt động), nhưng lại khiến khả năng chọn văn bản kém hiệu quả hơn.\n\nVí dụ: sẽ sao chép các dòng dài sử dụng tính năng tự động bắt đầu dòng mới sao cho các dòng mới vẫn thuộc dòng đó."
 	},
 	"hterm_pref_user_css": {
 		"message": "URL của biểu định kiểu người dùng sẽ bao gồm trong tài liệu của thiết bị đầu cuối."
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Biểu thức chính quy dùng để dừng khớp phần bên phải (kết thúc) của nội dung đã chọn.\n\nThông thường, đây là lớp ký tự dùng để từ chối các ký tự cụ thể."
+	},
+	"hterm_space_character": {
+		"message": "Dấu cách"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Giao diện (phông chữ, màu, hình ảnh)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Sao chép và dán"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Mã hóa"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Tiện ích"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Bàn phím"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Khác"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Cuộn"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Âm thanh"
 	},
 	"identity_label": {
 		"message": "Nhận dạng"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "Đã kết nối!"
 	},
+	"new_window_menu_label": {
+		"message": "Cửa sổ mới"
+	},
 	"notify_copy": {
 		"message": "Đã sao chép văn bản lựa chọn"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "Kết nối lại (R), Chọn một kết nối khác (C) hoặc Thoát (X)?"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "Tùy chọn chuyển tiếp không xác định: $1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "Đối số SSH"
 	},
+	"terminal_clear_menu_label": {
+		"message": "Xóa thiết bị đầu cuối"
+	},
 	"terminal_preview_label": {
 		"message": "Xem trước"
 	},
 	"terminal_profile_label": {
 		"message": "Cấu hình hiện tại"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Đặt lại thiết bị đầu cuối"
 	},
 	"tip_1": {
 		"message": "Bạn có thể giữ phím Ctrl (Cmd trên macOS) trong khi nhấp vào các liên kết để mở!"
@@ -429,10 +486,13 @@
 		"message": "Bạn có thể ràng buộc lại phím/phím tắt: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Sử dụng Yubikey và các thẻ thông minh khác để xác thực ssh: https://goo.gl/3ZEU1w"
+		"message": "Sử dụng Yubikey và các thẻ thông minh khác để xác thực ssh: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Hiển thị hình ảnh nội dòng: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Thao tác giữ phím Ctrl (Cmd trên macOS) trong khi nhấp chuột phải sẽ làm hiển thị menu ngữ cảnh."
 	},
 	"tip_2": {
 		"message": "Hiển thị thông báo trong trình duyệt bằng hterm-notify: https://goo.gl/ZNxGdF"

@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "A lap bezárásával megszakítja a futó programot."
 	},
+	"cache_pin_prompt": {
+		"message": "Tárolja a PIN-kódot erre a munkamenetre? (I/N):"
+	},
 	"cancel_button_label": {
 		"message": "Mégse"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Az SSH known_hosts kulcsok törlése"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "Ez a parancs ismert gazdagépek egy listáját jeleníti meg, és megkérdezi, hogy melyiket felejtse el."
@@ -65,6 +71,9 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
+	"faq_menu_label": {
+		"message": "GYIK"
+	},
 	"field_argstr_placeholder": {
 		"message": "extra parancssori argumentumok"
 	},
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "SSH-továbbítószerver beállításai"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "SSH-továbbítószerver beállításai"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "HIBA: Nem sikerült a(z) $1 profil betöltése:\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "$1% görgetve,"
+	},
 	"hterm_button_allow_always": {
 		"message": "Engedélyezés mindig"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "Tiltás"
+	},
+	"hterm_button_page_down": {
+		"message": "Lapozás lefelé"
+	},
+	"hterm_button_page_up": {
+		"message": "Lapozás felfelé"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Nem sikerült a(z) $1 betöltése…"
@@ -171,7 +189,7 @@
 		"message": "Annak meghatározása, hogy törlődjön-e a kijelölés másolás után."
 	},
 	"hterm_pref_close_on_exit": {
-		"message": "Meghatározza, hogy bezáruljon-e az ablak a parancs kivitelezésének elvégzésekor."
+		"message": "Meghatározza, hogy bezáruljon-e az ablak a parancs végrehajtásának befejezésekor."
 	},
 	"hterm_pref_color_palette_overrides": {
 		"message": "Felülírja az alapértelmezett paletta színeit.\n\nMegadható tömbként vagy objektumként. Ha objektumként van megadva, a rendszer feltételezi, hogy ritka mátrixról van szó, amelyben az egyes tulajdonságok a színpaletta numerikus indexét jelölik.\n\nAz értékek szinte bármilyen CSS-színértékként megadhatók. Ez tartalmazza a következőket: #RGB, #RRGGBB, rgb(…), rgba(…) és minden olyan színnév, amely az alap X11 rgb.txt fájlnak is része.\n\nA „null” értékkel megadhatja, hogy nem szabad módosítani az alapértelmezett értéket. Ez hasznos kis számú index kihagyásakor, amikor az érték tömbként van megadva.\n\nPéldául a következő két lehetőség kékre állítja az 1-es színindexet:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
@@ -207,13 +225,13 @@
 		"message": "A 8 bites vezérlőkarakterek engedélyezéséhez igaz, figyelmen kívül hagyásukhoz hamis.\n\nA beállítástól függetlenül figyelembe vesszük a vezérlőkarakterek két bájtos verzióit."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "Igaz a villogási attribútum figyelembe vételéhez. Hamis a figyelmen kívül hagyásához."
+		"message": "Igaz beállítás esetén a villogási attribútum figyelembe vétele. Hamis beállítás esetén a figyelmen kívül hagyása."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Igaz a félkövér betűtípus használatához félkövér/világos attribútumú szöveg esetén. Hamis a normál betűtípus használatához. Nulla érték az automatikus észleléshez."
+		"message": "Igaz értéknél a félkövér betűtípus használata félkövér/világos attribútumú szöveg esetén. Hamis a normál betűtípus használatához. Nulla érték az automatikus észleléshez."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "Igaz világos színek használatához (8–15. a 16 színű paletta esetén) minden olyan szövegnél, amely rendelkezik a félkövér attribútummal. Más esetben hamis."
+		"message": "Igaz értéknél a világos színek használata (8–15. a 16 színű paletta esetén) minden olyan szövegnél, amely rendelkezik a félkövér attribútummal. Más esetben hamis."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Meghatározza, hogy megjelenjen-e üzenet a terminálon, amikor a gazdagép a vágólapra ír."
@@ -239,41 +257,44 @@
 	"hterm_pref_foreground_color": {
 		"message": "A szöveg előterének színe más színattribútum nélkül."
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Annak meghatározása, hogy automatikusan elrejti-e a szolgáltatás az egérmutatót gépelés közben. Alapértelmezésként a szolgáltatás automatikusan észleli, hogy a platform/operációs rendszer kezeli-e a beállítást.\n\nMegjegyzés: Egyes operációs rendszerek felülbírálhatják ezt a beállítást, és ilyenkor Ön nem mindig tilthatja le."
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Ha igaz, a Home/End a terminál görgetősávját irányítja, a Shift+Home/End pedig a VT-billentyűkódokat küldi el. Ha hamis, akkor a Home/End küldi el a VT-kódokat, míg a Shift+Home/End görget."
+		"message": "Ha igaz, a Home/End a terminál görgetősávját irányítja, a Shift+Home/Shift+End billentyűparancsokat pedig elküldi a szolgáltatás a távoli gazdagépnek. Ha hamis, akkor a Home/End lenyomását küldi el a szolgáltatás a távoli gazdagépnek, míg a Shift+Home/Shift+End görget."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Billentyűkombinációk hozzárendelése a billentyűműveletekhez. A billentyűkombinációk nulla vagy több módosító billentyűt tartalmaznak, melyeket billentyűkód követ. A billentyűkódok decimális vagy hexadecimális számok, illetve billentyűazonosítók lehetnek. A billentyűműveletek a gazdagép számára küldendő karakterláncokként vagy műveletazonosítókként határozhatók meg. A formátum teljes leírásának megtekintéséhez látogasson el a https://goo.gl/LWRndr címre.\n\nPéldák billentyűkombinációkra:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Billentyűsorozatok hozzárendelése a billentyűműveletekhez. A billentyűsorozatok nulla vagy több módosító billentyűt tartalmaznak, melyeket billentyűkód követ. A billentyűkódok decimális vagy hexadecimális számok, illetve billentyűk lehetnek. A billentyűműveletek a gazdagép számára küldendő karakterláncokként vagy műveletazonosítókként határozhatók meg. A formátum teljes leírásának megtekintéséhez látogasson el a https://goo.gl/LWRndr címre.\n\nPéldák billentyűsorozatokra:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Helló Világ\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ha igaz, átalakítja a médiabillentyűket a megfelelő F-billentyűkké. Ha hamis, a böngésző kezeli a billentyűket."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Meghatározza, hogy a Meta billentyű küld-e előtagként feloldójelet."
+		"message": "ESC-előtag elküldése olyankor, amikor megnyomnak egy billentyűt a Meta gomb nyomva tartása közben.\n\nHa engedélyezve van, akkor például a Meta+K elküldi a „^[k” értéket, mintha csak megnyomta volna az Escape, majd a k billentyűket. Letiltása esetén csak a k kerül elküldésre."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Beillesztés gomb az egéren vagy nulla az automatikus felismeréshez.\n\nAz automatikus felismeréshez az egér középső gombját használjuk a nem X11 platformok esetében (beleértve a Chrome OS-t is). X11-en az egér jobb gombját használjuk (mivel a natív ablakkezelő a középső egérgombbal illeszt be).\n\n0 == bal (elsődleges) gomb.\n1 == középső (kiegészítő) gomb.\n2 == jobb (másodlagos) gomb.\n\nEz a beállítás a jobb egérgombos beillesztés beállításától függetlenül aktív.\n\nMegjegyzés: A beállítás megfelelően kezeli a jobb- és balkezes egereket."
+		"message": "Beillesztés gomb az egéren vagy nulla az automatikus felismeréshez.\n\nAz automatikus felismeréshez az egér középső gombját használjuk a nem X11-platformok esetében (beleértve a Chrome OS-t is). X11-en az egér jobb gombját használjuk (mivel a natív ablakkezelő a középső egérgombbal illeszt be).\n\n0 == bal (elsődleges) gomb.\n1 == középső (kiegészítő) gomb.\n2 == jobb (másodlagos) gomb.\n\nEz a beállítás független a jobb egérgombos beillesztés beállításától.\n\nMegjegyzés: A beállítás megfelelően kezeli a jobb- és balkezes egereket."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Beillesztés jobb egérgombbal való kattintással.\n\nEz a beállítás az „mouse-paste-button” beállítástól függetlenül aktív.\n\nMegjegyzés: A beállítás megfelelően kezeli a jobb- és balkezes egereket."
+		"message": "Beillesztés jobb egérgombbal való kattintással.\n\nEz a beállítás független a „mouse-paste-button” beállítástól.\n\nMegjegyzés: A beállítás megfelelően kezeli a jobb- és balkezes egereket."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Ha igaz, a Page Up/Down a terminál görgetősávját irányítja, a Shift+Page Up/Down pedig a VT-billentyűkódokat küldi el. Ha hamis, akkor a Page Up/Down küldi el a VT-kódokat, míg a Shift+Page Up/Down görget."
+		"message": "Ha igaz, a Page Up/Page Down a terminál görgetősávját irányítja, a Shift+Page Up/Shift+Page Down billentyűparancsokat pedig elküldi a szolgáltatás a távoli gazdagépnek. Ha hamis, akkor a Page Up/Down lenyomását küldi el a szolgáltatás a távoli gazdagépnek, míg a Shift+Page Up/Shift+Page Down görget."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Meghatározza, hogy átadjuk-e az Alt+1..9 billentyűkódok kezelését a böngészőnek.\n\nEz akkor hasznos, ha a hterm böngészőlapon fut, így nem veszíti el a felhasználó a Chrome „váltás lapra” billentyűkombinációját. Ha nem böngészőlapon fut, célszerűbb ezeket a billentyűkódokat a gazdagépnek küldeni, hogy a vim és az emacs használhassa őket.\n\nHa igaz, az Alt+1..9 billentyűkódokat a böngésző kezeli. Ha hamis, az Alt+1..9 billentyűkódokat a rendszer elküldi a gazdagépnek. Ha nulla, automatikus észlelés valósul meg a böngészőplatform és az ablaktípus alapján."
+		"message": "Meghatározza, hogy átkerül-e az Alt+1..9 billentyűparancsok kezelése a böngészőhöz.\n\nEz akkor hasznos, ha a hterm böngészőlapon fut, így nem veszíti el a felhasználó a Chrome „váltás lapra” billentyűkombinációját. Ha nem böngészőlapon fut, célszerűbb ezeket a billentyűparancsokat a gazdagépnek küldeni, hogy a vim és az emacs használhassa őket.\n\nHa igaz, az Alt+1..9 billentyűparancsokat a böngésző kezeli. Ha hamis, az Alt+1..9 billentyűparancsokat a rendszer elküldi a gazdagépnek. Ha nulla, automatikus észlelés valósul meg a böngészőplatform és az ablaktípus alapján."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Meghatározza, hogy átadjuk-e a Ctrl+1..9 billentyűkódok kezelését a böngészőnek.\n\nEz akkor hasznos, ha a hterm böngészőlapon fut, így nem veszíti el a felhasználó a Chrome „váltás lapra” billentyűkombinációját. Ha nem böngészőlapon fut, célszerűbb ezeket a billentyűkódokat a gazdagépnek küldeni, hogy a vim és az emacs használhassa őket.\n\nHa igaz, a Ctrl+1..9 billentyűkódokat a böngésző kezeli. Ha hamis, a Ctrl+1..9 billentyűkódokat a rendszer elküldi a gazdagépnek. Ha nulla, automatikus észlelés valósul meg a böngészőplatform és az ablaktípus alapján."
+		"message": "Meghatározza, hogy átkerül-e a Ctrl+1..9 billentyűparancsok kezelése a böngészőnek.\n\nEz akkor hasznos, ha a hterm böngészőlapon fut, így nem veszíti el a felhasználó a Chrome „váltás lapra” billentyűkombinációját. Ha nem böngészőlapon fut, célszerűbb ezeket a billentyűparancsokat a gazdagépnek küldeni, hogy a vim és az emacs használhassa őket.\n\nHa igaz, a Ctrl+1..9 billentyűparancsokat a böngésző kezeli. Ha hamis, a Ctrl+1..9 billentyűparancsokat a rendszer elküldi a gazdagépnek. Ha nulla, automatikus észlelés valósul meg a böngészőplatform és az ablaktípus alapján."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Meghatározza, hogy átadjuk-e a Meta+1..9 billentyűkódok kezelését a böngészőnek.\n\nEz akkor hasznos, ha a hterm böngészőlapon fut, így nem veszíti el a felhasználó a Chrome „váltás lapra” billentyűkombinációját. Ha nem böngészőlapon fut, célszerűbb ezeket a billentyűkódokat a gazdagépnek küldeni, hogy a vim és az emacs használhassa őket.\n\nHa igaz, a Meta+1..9 billentyűkódokat a böngésző kezeli. Ha hamis, a Meta+1..9 billentyűkódokat a rendszer elküldi a gazdagépnek. Ha nulla, automatikus észlelés valósul meg a böngészőplatform és az ablaktípus alapján."
+		"message": "Meghatározza, hogy átkerül-e a Meta+1..9 billentyűparancsok kezelése a böngészőnek.\n\nEz akkor hasznos, ha a hterm böngészőlapon fut, így nem veszíti el a felhasználó a Chrome „váltás lapra” billentyűkombinációját. Ha nem böngészőlapon fut, célszerűbb ezeket a billentyűparancsokat a gazdagépnek küldeni, hogy a vim és az emacs használhassa őket.\n\nHa igaz, a Meta+1..9 billentyűparancsokat a böngésző kezeli. Ha hamis, a Meta+1..9 billentyűparancsokat a rendszer elküldi a gazdagépnek. Ha nulla, automatikus észlelés valósul meg a böngészőplatform és az ablaktípus alapján."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Meghatározza, hogy továbbítja-e a rendszer a Meta-V-t a gazdagépnek."
+		"message": "Meghatározza, hogy továbbítja-e a rendszer a Meta-V billentyűparancsot a gazdagépnek."
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "Meghatározza a gazdagéptől kapott adatok várható kódolását.\n\nAz érvényes értékek: „utf-8” és „raw”."
+		"message": "Meghatározza a gazdagéptől kapott adatok várható kódolását.\nHa a kódolások nem egyeznek, valószínűleg vizuális hibák lesznek tapasztalhatók.\n\nAz érvényes értékek: „utf-8” és „raw”."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Meghatározza, hogy bármely billentyű lenyomásával az oldal aljára görget-e."
@@ -285,7 +306,7 @@
 		"message": "Alternatív képernyőpuffer használatakor, aktív DECCKM (alkalmazáskurzor-billentyűk) mellett az egér görgője a nyílbillentyűket emulálja.\n\nA Shift billentyű nyomva tartásával ez a funkció ideiglenesen letiltható.\n\nPagerek („less”) használata, referencia-kézikönyvek és szövegszerkesztők olvasása (vi/nano), valamint screen/tmux használata esetében gyakran előfordul."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "A pixel delta szorzója az egérgörgő által kiváltott görgetési eseményeknél. Az oldal görgetési sebességét módosítja."
+		"message": "Az egérgörgő által kiváltott görgetési események szorzója képpontokban való mérés esetén.\n\nAz oldal görgetési sebességét módosítja."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Függőleges görgetősáv mód."
@@ -294,13 +315,13 @@
 		"message": "Meghatározza a gazdagépnek küldött adatok kódolását."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "A Shift+Insert beilleszt, ha igaz, a gazdagépnek küld, ha hamis."
+		"message": "Az, hogy a Shift-Insert billentyűkombináció beillesztést hajt végre, illetve küldést végez a távoli gazdagépre."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Az alapértelmezett terminálkódolás (DOCS).\n\nAz ISO-2022 lehetővé teszi a karakter-hozzárendelések fordítását (például grafikus hozzárendelések).\nAz UTF-8 letiltja ezek támogatását.\n\nA lezárt változó azt jelenti, hogy a kódolást nem lehet módosítani a munkamenet során a terminál feloldószekvenciáival.\n\nHasználja az UTF-8 lehetőséget, ha nem tapasztal hibás megjelenítést a régi alkalmazásoknál."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Meghatározza, hogy az alapértelmezett másolási viselkedést használja-e."
+		"message": "Meghatározza, hogy az alapértelmezett böngésző/operációs rendszer másolási viselkedését használja-e a szolgáltatás.\n\nEngedélyezi a böngésző/operációs rendszer számára a másolási esemény közvetlen kezelését, ami javíthatja a kompatibilitást egyes rendszerekkel (ahol a másolás egyáltalán nem működik), ugyanakkor kevésbé széles körűvé teszi a szövegkijelölést.\n\nAz automatikus sortöréssel rendelkező hosszú sorok másolása például úgy történik, hogy bennük marad az új sorok jelzése."
 	},
 	"hterm_pref_user_css": {
 		"message": "A felhasználó stíluslapjának URL-je, amelyet fel kell tüntetni a termináldokumentumban."
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Reguláris kifejezés a kijelölés jobb oldali (végpont) egyeztetésének megállításához.\n\nÁltalában olyan karakterosztály, amely elutasít bizonyos karaktereket."
+	},
+	"hterm_space_character": {
+		"message": "Szóköz"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Megjelenés (betűtípusok, színek, képek)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Másolás és beillesztés"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Kódolás"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Bővítmények"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Billentyűzet"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Egyéb"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Görgetés"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Hangok"
 	},
 	"identity_label": {
 		"message": "Azonosság"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "Csatlakoztatva!"
 	},
+	"new_window_menu_label": {
+		"message": "Új ablak"
+	},
 	"notify_copy": {
 		"message": "Kiválasztott szöveg másolva"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "Újracsatlakozás (r), Másik kapcsolat kiválasztása (c) vagy Kilépés (x)?"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "Ismeretlen továbbítási lehetőség: $1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "SSH-argumentumok"
 	},
+	"terminal_clear_menu_label": {
+		"message": "Terminálképernyő törlése"
+	},
 	"terminal_preview_label": {
 		"message": "Előnézet"
 	},
 	"terminal_profile_label": {
 		"message": "Aktuális profil"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Terminál visszaállítása"
 	},
 	"tip_1": {
 		"message": "A linkek megnyitásához a Ctrl (Mac OS rendszeren Cmd) billentyűt is lenyomhatja, miközben rájuk kattint!"
@@ -429,10 +486,13 @@
 		"message": "Módosíthatja a billentyűket/billentyűparancsokat: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Az SSH-hitelesítéshez használhat YubiKeyt és egyéb intelligens kártyákat: https://goo.gl/3ZEU1w"
+		"message": "Az SSH-hitelesítéshez használhat YubiKeyt és egyéb intelligens kártyákat: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Képek szövegközi megjelenítése: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Ha nyomva tartja a Ctrl (macOS esetén a Cmd) billentyűt a jobb gombbal való kattintás során, akkor megjelenik egy helyi menü."
 	},
 	"tip_2": {
 		"message": "Értesítések megjelenítése a böngészőben a hterm-notify szkripttel: https://goo.gl/ZNxGdF"

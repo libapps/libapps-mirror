@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "Vahelehe sulgemine lõpetab seansi."
 	},
+	"cache_pin_prompt": {
+		"message": "Kas salvestada PIN-kood selle seansi jaoks vahemällu? (y/N):"
+	},
 	"cancel_button_label": {
 		"message": "Tühista"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Tühjenda SSH loend known_hosts"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "See käsk kuvab teadaolevate hostide menüü ja edastab hostile unustamiskäsu."
@@ -51,7 +57,7 @@
 		"message": "Kas teadsite, et olemas on ka spetsiaalne valikute leht?\nEnam ei pea reeglit 'term_' otse muutma!\nSelle avamiseks vajutage klahvikombinatsiooni $1 või klõpsake URL-il\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Kas teadsite, et olemas on ka spetsiaalne valikute leht?\nEnam ei pea reegliga „term_” otse tegelema!\n$1"
+		"message": "Kas teadsite, et olemas on ka spetsiaalne valikute leht?\nEnam ei pea reeglit „term_” vahetult muutma!\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -64,6 +70,9 @@
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
+	},
+	"faq_menu_label": {
+		"message": "KKK"
 	},
 	"field_argstr_placeholder": {
 		"message": "käsurea lisaargumendid"
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "SSH-releeserveri valikud"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "SSH-releeserveri valikud"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "VIGA: profiili $1 ei õnnestunud laadida:\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "$1% on keritud,"
+	},
 	"hterm_button_allow_always": {
 		"message": "Luba alati"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "Blokeeri"
+	},
+	"hterm_button_page_down": {
+		"message": "Lehe võrra alla"
+	},
+	"hterm_button_page_up": {
+		"message": "Lehe võrra üles"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Ressursi $1 laadimine ebaõnnestus …"
@@ -207,13 +225,13 @@
 		"message": "Tõene, et lubada 8-bitised juhttähemärgid, väär, et neid eirata.\n\nOlenemata sellest seadest arvestame nende juhttähemärkide kahebaidiseid versioone."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "Tõene, kui vilkumise atribuuti tuleb arvestada. Väär, kui seda võib eirata."
+		"message": "Kui väärtus on Tõene, arvestatakse vilkumise atribuuti. Atribuudi eiramiseks määrake väärtus Väär."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Tõene, kui paksu/ereda teksti atribuudi puhul tuleb kasutada paksu fonti. Väär, kui kasutada võib tavafonti. Null, kui tuvastamine toimub automaatselt."
+		"message": "Kui väärtus on Tõene, kasutatakse paksu/ereda atribuudiga teksti puhul paksu fonti. Väärtuse Väär korral kasutatakse tavafonti. Väärtuse Null puhul toimub tuvastamine automaatselt."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "Tõene, kui kasutama peab eredaid värve (8–15 16 värviga paleti puhul) mis tahes paksu atribuudiga teksti puhul. Muul juhul väär."
+		"message": "Kui väärtus on Tõene, kasutatakse eredaid värve (16 värviga paleti puhul 8–15) mis tahes paksu atribuudiga teksti puhul. Muul juhul on väärtus Väär."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Määrab, kas terminalis kuvatakse sõnum, kui host kirjutab lõikelauale."
@@ -239,29 +257,32 @@
 	"hterm_pref_foreground_color": {
 		"message": "Muude värviatribuutideta teksti esiplaani värv."
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Määrab, kas hiirekursor peidetakse teksti sisestamise ajal automaatselt. Vaikimisi tuvastatakse automaatselt, kas platvorm/operatsioonisüsteem haldab seda seadet.\n\nMärkus. Mõned operatsioonisüsteemid võivad seade alistada, mistõttu ei saa te seda võib-olla keelata."
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Kui see on tõene, juhivad klahvid Home/End terminali kerimisriba ja kombinatsioon tõstuklahv + Home/End saadab VT-klahvikoodid. Kui see on väär, saadavad klahvid Home/End VT-koodid ja kombinatsioon tõstuklahv + klahv Home/End võimaldab kerida."
+		"message": "Kui see on seatud väärtusele Tõene, juhivad klahvid Home/End terminali kerimisriba ning kombinatsioonid tõstuklahv + Home / tõstuklahv + End saadetakse kaughostile. Kui see on seatud väärtusele Väär, saadetakse klahvide Home/End vajutused kaughostile ja kombinatsioone tõstuklahv + Home / tõstuklahv + End kasutatakse kerimiseks."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Vastendatud klahvikombinatsioonide ja klahvitoimingute kaart. Klahvikombinatsioonid võivad (aga ei pruugi) sisaldada üht või mitut muuteklahvi, millele järgneb klahvikood. Klahvikoodid võivad olla kümnend- või kuueteistkümnendarvud või klahvi identifikaatorid. Klahvitoimingud saab määrata hostile saadetava stringi või toimingu identifikaatorina. Vormingu täieliku selgituse leiate siit: https://goo.gl/LWRndr.\n\nKlahvikombinatsioonide näited:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Vastendatud klahvikombinatsioonide ja klahvitoimingute kaart. Klahvikombinatsioonid võivad (aga ei pruugi) sisaldada üht või mitut muuteklahvi, millele järgneb klahvikood. Klahvikoodid võivad olla kümnend- või kuueteistkümnendarvud või klahvi identifikaatorid. Klahvitoimingud saab määrata hostile saadetava stringi või toimingu identifikaatorina. Vormingu täieliku selgituse leiate siit: https://goo.gl/LWRndr.\n\nKlahvikombinatsioonide näited:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Kui see on Tõene, teisendatakse meediaklahvid F-klahvi ekvivalendiks. Kui see on Väär, lastakse brauseril klahve käsitleda."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Määrab, kas metaklahv saadab esmalt paostamiskäskluse või mitte."
+		"message": "Võimaldab metaklahvi all hoides ja muud klahvi vajutades saata ESC-eesliite.\n\nNäide: kui seade on lubatud ning vajutate metaklahvi ja klahvi K, saadetakse ^[k – nagu oleksite sisestanud paomärgi ja seejärel tähe k. Kui seade on keelatud, saadetakse ainult täht k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Hiire kleepimisnupp või väärtus „null” automaatseks tuvastamiseks.\n\nAutomaatseks tuvastamiseks kasutame mitte-X11 platvormidel (sh Chrome OS) hiire keskmist nuppu. X11-s kasutame hiire parempoolset nuppu (kuna omaakna haldur peaks kleepima hiire keskmise nupuga).\n\n0 == vasakpoolne (peamine) nupp.\n1 == keskmine (lisa) nupp.\n2 == parempoolne (teisene) nupp.\n\nSee valik aktiveeritakse seadest „mouse-right-click-paste” olenemata.\n\nMärkus. See käsitleb vasaku ja parema käe hiiri õigesti."
+		"message": "Hiire kleepimisnupp või väärtus „null” automaatseks tuvastamiseks.\n\nAutomaatseks tuvastamiseks kasutame mitte-X11 platvormidel (sh Chrome OS) hiire keskmist nuppu. X11-s kasutame hiire parempoolset nuppu (kuna omaakna haldur peaks kleepima hiire keskmise nupuga).\n\n0 == vasakpoolne (peamine) nupp.\n1 == keskmine (lisa) nupp.\n2 == parempoolne (teisene) nupp.\n\nSee valik ei olene paremklikiga kleepimise seadest.\n\nMärkus. See käsitleb vasaku ja parema käe hiiri õigesti."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Kleebitakse hiire parempoolse nupu klõpsamisel.\n\nSee valik aktiveeritakse seadest „mouse-paste-button” olenemata.\n\nMärkus. See käsitleb vasaku ja parema käe hiiri õigesti."
+		"message": "Kleebitakse hiire parempoolse nupu klõpsamisel.\n\nSee valik ei olene seadest „mouse-paste-button”.\n\nMärkus. See käsitleb vasaku ja parema käe hiiri õigesti."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Kui see on tõene, juhivad klahvid Lehe võrra üles / Lehe võrra alla terminali kerimisriba ja kombinatsioon tõstuklahv + klahv Lehe võrra üles / Lehe võrra alla saadab VT-klahvikoodid. Kui see on väär, saadavad klahvid Lehe võrra üles / Lehe võrra alla VT-koodid ja kombinatsioon tõstuklahv + klahv Lehe võrra üles / Lehe võrra alla võimaldab kerida."
+		"message": "Kui see on tõene, juhivad klahvid Lehe võrra üles / Lehe võrra alla terminali kerimisriba ja kombinatsioon tõstuklahv + klahv Lehe võrra üles / Lehe võrra alla saadetakse kaughostile. Kui see on väär, saadetakse klahvide Lehe võrra üles / Lehe võrra alla vajutused kaughostile ja kombinatsioon tõstuklahv + klahv Lehe võrra üles / Lehe võrra alla võimaldab kerida."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Määrab, kas klahvikombinatsioon Alt + 1–9 tuleks edastada brauserisse.\n\nSee on kasulik htermi käitamisel brauseri vahelehel, et te ei kaotaks Chrome'i klaviatuuri kiirendeid „lülitu vahelehele”. Kui seda vahelehel ei käitata, soovitame need klahvid saata hostile, et neid saaks kasutada tekstiredaktoris vim või emacs.\n\nKui see on tõene, käsitleb brauser klahvikombinatsioone Alt + 1–9. Kui see on väär, saadetakse klahvikombinatsioonid Alt + 1–9 hostile. Kui väärtus on null, tuvastatakse see automaatselt brauseri platvormi ja akna tüübi järgi."
+		"message": "Määrab, kas klahvikombinatsioon Alt + 1–9 tuleks edastada brauserisse.\n\nSee on kasulik brauseri vahelehel htermi käitamisel, et te ei kaotaks Chrome'i klaviatuuri kiirendeid „lülitu vahelehele”. Kui seda vahelehel ei käitata, soovitame need klahvid saata hostile, et neid saaks kasutada tekstiredaktoris vim või emacs.\n\nKui see on tõene, käsitleb brauser klahvikombinatsioone Alt + 1–9. Kui see on väär, saadetakse klahvikombinatsioonid Alt + 1–9 hostile. Kui väärtus on null, tuvastatakse see automaatselt brauseri platvormi ja akna tüübi järgi."
 	},
 	"hterm_pref_pass_ctrl_number": {
 		"message": "Määrab, kas klahvikombinatsioon Ctrl + 1–9 tuleks edastada brauserisse.\n\nSee on kasulik htermi käitamisel brauseri vahelehel, et te ei kaotaks Chrome'i klaviatuuri kiirendeid „lülitu vahelehele”. Kui seda vahelehel ei käitata, soovitame need klahvid saata hostile, et neid saaks kasutada tekstiredaktoris vim või emacs.\n\nKui see on tõene, käsitleb brauser klahvikombinatsioone Ctrl + 1–9. Kui see on väär, saadetakse klahvikombinatsioonid Ctrl + 1–9 hostile. Kui väärtus on null, tuvastatakse see automaatselt brauseri platvormi ja akna tüübi järgi."
@@ -273,7 +294,7 @@
 		"message": "Määrab, kas klahvikombinatsioon Metaklahv + V edastatakse hostile."
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "Määratakse eeldatav kodeering hostilt saadud andmetele.\n\nKehtivad väärtused on „utf-8” ja „raw”."
+		"message": "Määratakse eeldatav kodeering hostilt saadud andmetele.\nKui kodeeringud ei kattu, ilmnevad tõenäoliselt visuaalsed vead.\n\nKehtivad väärtused on „utf-8” ja „raw”."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Määrab, kas iga klahvivajutusega keritakse alaossa."
@@ -285,7 +306,7 @@
 		"message": "Kui kasutate alternatiivset ekraanipuhvrit ja DECCKM (rakenduse kursori klahvid) on aktiivne, emuleeritakse hiirega kerimisel nooleklahvide toiminguid.\n\nSelle saab ajutiselt keelata, hoides all tõstuklahvi.\n\nSee ilmneb sageli siis, kui kasutatakse lehelugejaid (vähem), loetakse manuaalseid lehti, kasutatakse tekstiredaktoreid (vi/nano) või tööriista screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Pixel Delta kordistaja kerimisratta sündmuste korral, mis toimuvad kerimisratta kasutamisel. Muudab lehe kerimiskiirust."
+		"message": "Kerimisratta sündmuste kordistaja pikslites mõõtmise korral.\n\nMuudab lehe kerimiskiirust."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Vertikaalse kerimisriba režiim."
@@ -294,13 +315,13 @@
 		"message": "Hostile saadetavate andmete jaoks kodeeringu määramine."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Kui see on tõene, saab klahvikombinatsiooniga Tõstuklahv + Sisesta kleepida, kui see on väär, saadetakse see hostile."
+		"message": "Määrab, kas kombinatsiooni tõstuklahv + lisamisklahv kasutatakse kleepimiseks saadetakse kaughostile."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Terminali vaikekodeering (DOCS).\n\nISO-2022 lubab tähemärkide kaardi tõlked (nt graafikakaardid).\nUTF-8 keelab nende toe.\n\nLukustatud variant tähendab, et kodeeringut ei saa käitusajal terminali paokombinatsioonide ajal muuta.\n\nPeaksite kasutama vormingut UTF-8, v.a juhul, kui märkate pärandrakenduste vigast renderdamist."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Määrab, kas kasutada akna kopeerimise vaikekäitumist või mitte"
+		"message": "Määrab, kas kasutada brauseris/operatsioonisüsteemis kopeerimise vaikekäitumist.\n\nVõimaldab brauseril/operatsioonisüsteemil kopeerimissündmust vahetult hallata, mis võib täiustada ühilduvust teatud süsteemidega (kus kopeerimine ei tööta), ent vähendab teksti valimise stabiilsust.\n\nNäiteks automaatselt murtud pikad read kopeeritakse koos reavahedega."
 	},
 	"hterm_pref_user_css": {
 		"message": "Kasutaja laadilehe URL, mis tuleb kaasata terminali dokumenti."
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Regulaaravaldis valiku parempoolse osa (lõpu) vastendamise peatamiseks.\n\nTavapäraselt on see tähemärkide klass, millega konkreetsed tähemärgid tagasi lükata."
+	},
+	"hterm_space_character": {
+		"message": "Tühik"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Välimus (fondid, värvid, pildid)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Kopeerimine ja kleepimine"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Kodeering"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Laiendused"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Klaviatuur"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Muu"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Kerimine"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Helid"
 	},
 	"identity_label": {
 		"message": "Identiteet"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "Ühendatud."
 	},
+	"new_window_menu_label": {
+		"message": "Uus aken"
+	},
 	"notify_copy": {
 		"message": "Valik kopeeriti"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "Kas ühendada uuesti (R), valida teine ühendus (C) või väljuda (X)?"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "Relee tundmatu valik: $1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "SSH argumendid"
 	},
+	"terminal_clear_menu_label": {
+		"message": "Tühjenda terminal"
+	},
 	"terminal_preview_label": {
 		"message": "Eelvaade"
 	},
 	"terminal_profile_label": {
 		"message": "Praegune profiil"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Lähtesta terminal"
 	},
 	"tip_1": {
 		"message": "Linkide avamiseks hoidke nendel klõpsamisel all klahvi Ctrl (Mac OS-is klahvi Cmd)."
@@ -429,10 +486,13 @@
 		"message": "Klahve/otseteid saab uuesti siduda: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Kasutage SSH autentimiseks Yubikeysid ja teisi kiipkaarte: https://goo.gl/3ZEU1w"
+		"message": "Kasutage SSH autentimiseks Yubikeysid ja teisi kiipkaarte: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Kujutised kuvatakse tekstisiseselt: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Klahvi Ctrl (macOS-i puhul klahvi Cmd) allhoidmisel ja paremklõpsamisel kuvatakse kontekstimenüü."
 	},
 	"tip_2": {
 		"message": "Kuvage märguanded brauseris käsuga hterm-notify: https://goo.gl/ZNxGdF"

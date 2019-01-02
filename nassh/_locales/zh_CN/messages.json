@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "关闭此选项卡将会断开本次会话。"
 	},
+	"cache_pin_prompt": {
+		"message": "缓存此会话的 PIN 码？(y/N)："
+	},
 	"cancel_button_label": {
 		"message": "取消"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "清除 SSH known_hosts"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "此命令用于显示已知主机的菜单并提示您要删除的主机。"
@@ -65,6 +71,9 @@
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
+	"faq_menu_label": {
+		"message": "常见问题解答"
+	},
 	"field_argstr_placeholder": {
 		"message": "其他命令行参数"
 	},
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "端口"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "SSH 中继服务器选项"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "SSH 中继服务器选项"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "错误：无法加载配置文件 $1：\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "已滚动 $1%，"
+	},
 	"hterm_button_allow_always": {
 		"message": "一律允许"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "禁止"
+	},
+	"hterm_button_page_down": {
+		"message": "向下翻页"
+	},
+	"hterm_button_page_up": {
+		"message": "向上翻页"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "未能成功加载$1"
@@ -141,7 +159,7 @@
 		"message": "选择一种 AltGr 检测试探法。\n\n'null'：根据 navigator.language 自动检测：\n      'en-us' => 'none', else => 'right-alt'\n'none'：停用任何 AltGr 相关改动。\n'ctrl-alt'：假设 Ctrl+Alt 表示 AltGr。\n'left-alt'：假设左 Alt 键表示 AltGr。\n'right-alt'：假设右 Alt 键表示 AltGr。"
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "指定是将 Alt 键用作 Meta 键还是用作独特的 Alt 键。"
+		"message": "设定是将 Alt 键用作 Meta 键还是用作独特的 Alt 键。"
 	},
 	"hterm_pref_alt_sends_what": {
 		"message": "控制对 Alt 键的处理方式。\n\n  escape：传送 ESC 前缀。\n  8-bit：向所输入的字符添加 128（就像在 xterm 中添加一样）。\n browser-key：等待按键事件发生并观察浏览器如何回应（在浏览器会针对某些 Alt 序列执行默认操作的平台上，此方式不适用。）"
@@ -171,7 +189,7 @@
 		"message": "完成复制后是否清除所选内容。"
 	},
 	"hterm_pref_close_on_exit": {
-		"message": "命令执行完毕后是否关闭窗口。"
+		"message": "设定在命令执行完毕后是否要关闭窗口。"
 	},
 	"hterm_pref_color_palette_overrides": {
 		"message": "替换默认调色板中的颜色。\n\n可以数组或对象形式指定。如果以对象形式指定，则会被假定为稀疏数组，其中的每项属性都是调色板中的数字索引。\n\n指定相应值时可使用几乎任何 css 颜色值。这包括 #RGB、#RRGGBB、rgb(...)、rgba(...)，以及也是标准 X11 rgb.txt 文件的一部分的所有颜色名称。\n\n您可以指定值“null”，以禁止更改默认值。这有助于在以数组形式指定相应值的情况下跳过少量索引。\n\n例如，下面这两者都是将颜色索引 1 设成了蓝色：\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
@@ -201,19 +219,19 @@
 		"message": "如果为 true，当终端在后台响铃时，系统即会创建网页通知。https://www.w3.org/TR/notifications/\n\n必须征得用户的许可才能显示通知。如果此选项设为 true，hterm 便会尝试在必要时向用户请求权限。如果此权限请求不是由用户操作触发的，浏览器可能不会显示此请求。\n\n已获“通知”发送权限的 Chrome 扩展程序均有权显示通知。"
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "指定是否让东亚模糊字符占两个列的宽度。"
+		"message": "设定是否让 East Asian Ambiguous 字符占两个列的宽度。"
 	},
 	"hterm_pref_enable_8_bit_control": {
 		"message": "如果为 true，则启用 8 位控制字符；如果为 false，则忽略它们。\n\n无论此设置是怎样设定的，我们都会采用这些控制字符的双字节版本。"
 	},
 	"hterm_pref_enable_blink": {
-		"message": "如果我们应该采用闪烁属性，则设为 true；如果要忽略它，则设为 false。"
+		"message": "如果设为 true，则采用闪烁属性；如果要忽略它，则设为 false。"
 	},
 	"hterm_pref_enable_bold": {
-		"message": "如果我们应该对具有粗体/明亮属性的文本使用粗体字型，则设为 true。如果要使用普通粗细的字体，则设为 false。如果要让系统自动检测，则设为 null。"
+		"message": "如果设为 true，则对具有粗体/明亮属性的文本使用粗体字型。如果要使用普通粗细的字体，则设为 false。如果要让系统自动检测，则设为 null。"
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "如果我们应该对具有粗体属性的任何文本使用明亮的色彩（16 色调色板上的第 8-15 号颜色），则设为 true；否则，就设为 false。"
+		"message": "如果设为 true，则对具有粗体属性的所有文本使用明亮的色彩（16 色调色板上的第 8-15 号颜色）；如果不想这样，就设为 false。"
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "当主机对剪贴板执行写入操作时，是否在终端中显示消息。"
@@ -239,41 +257,44 @@
 	"hterm_pref_foreground_color": {
 		"message": "没有任何其他颜色属性的文本的前景颜色。"
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "设定在输入时是否要自动隐藏鼠标光标。默认情况下，系统会自动检测平台/操作系统的处理方式。\n\n注意：某些操作系统可能会替换此设置，因此您可能无法始终停用此设置。"
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "如果为 true，Home/End 键会控制终端滚动条，Shift-Home/End 会传送 VT 键码。如果为 false，Home/End 键会传送 VT 键码，Shift-Home/End 则会控制滚动。"
+		"message": "如果设为 true，Home/End 键会控制终端滚动条，Shift-Home/Shift-End 会传送到远程主机。如果设为 false，Home/End 键会传送到远程主机，Shift-Home/Shift-End 会控制滚动。"
 	},
 	"hterm_pref_keybindings": {
-		"message": "按键序列与按键操作的对应关系。按键序列包含零个或多个辅助键，后跟一个键码。键码可以是十进制或十六进制数字，也可以是按键标识符。按键操作可被指定为要向主机传送的字符串，也可被指定为操作标识符。如需获取完整的格式说明，请访问 https://goo.gl/LWRndr。\n\n按键绑定关系示例：\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "按键序列与按键操作的对应关系。按键序列包含零个或多个辅助键，后跟一个键码。键码可以是十进制或十六进制数字，也可以是按键标识符。按键操作可被指定为要向主机传送的字符串，也可被指定为操作标识符。如需获取完整的格式说明，请访问 https://goo.gl/LWRndr。\n\n按键绑定关系示例：\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "如果为 true，则将媒体键转换为与其对应的功能键。如果为 false，则让浏览器处理这些键。"
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "指定是否让 Meta 键传送 ESC 前缀。"
+		"message": "在按住 Meta 键的同时按某个键会传送 ESC 前缀。\n\n例如：启用此设置后，按 Meta-K 将会传送 ^[k，这和您依次按 Esc 键和 k 键的效果一样。停用此设置后，则会仅传送 k。"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "指定用于执行粘贴操作的鼠标按键，设为 null 时可自动检测。\n\n对于自动检测，我们将在非 X11 平台（包括 Chrome 操作系统）上使用鼠标中键。在 X11 上，我们将使用鼠标右键（因为原生窗口管理器需要通过鼠标中键执行粘贴操作）。\n\n0 == 左键（主要）。\n1 == 中键（辅助）。\n2 == 右键（次要）。 \n\n此选项可被独立启用，不受“mouse-right-click-paste”这项设置的影响。\n\n注意：此选项会正确处理左手鼠标和右手鼠标。"
+		"message": "指定用于执行粘贴操作的鼠标按键，设为 null 时可自动检测。\n\n对于自动检测，我们将在非 X11 平台（包括 Chrome 操作系统）上使用鼠标中键。在 X11 上，我们将使用鼠标右键（因为原生窗口管理器需要通过鼠标中键执行粘贴操作）。\n\n0 == 左键（主要）。\n1 == 中键（辅助）。\n2 == 右键（次要）。\n\n此选项不受“mouse-right-click-paste”这项设置的影响。\n\n注意：此选项会正确处理左手鼠标和右手鼠标。"
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "在点击鼠标右键时执行粘贴操作。\n\n此选项可被独立启用，不受“mouse-paste-button”这项设置的影响。\n\n注意：此选项会正确处理左手鼠标和右手鼠标。"
+		"message": "在点击鼠标右键时执行粘贴操作。\n\n此选项不受“mouse-paste-button”这项设置的影响。\n\n注意：此选项会正确处理左手鼠标和右手鼠标。"
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "如果为 true，PageUp/PageDown 键会控制终端滚动条，Shift+PageUp/PageDown 会传送 VT 键码。如果为 false，PageUp/PageDown 键会传送 VT 键码，Shift+PageUp/PageDown 则会控制滚动。"
+		"message": "如果设为 true，PageUp/PageDown 键会控制终端滚动条，Shift-PageUp/Shift-PageDown 会传送到远程主机。如果设为 false，PageUp/PageDown 键会传送到远程主机，Shift-PageUp/Shift-PageDown 会控制滚动。"
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "指定是否应将 Alt-1..9 传递给浏览器。\n\n当在浏览器标签页中运行 hterm 时，此设置非常便于确保您不会失去 Chrome 的“切换至标签页”键盘快捷键。当不在标签页中运行 hterm 时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果为 true，Alt-1..9 将会由浏览器处理。如果为 false，Alt-1..9 将会被传送到主机。如果为 null，则会根据浏览器平台和窗口类型自动检测。"
+		"message": "设定是否应将 Alt-1..9 传递给浏览器。\n\n当在浏览器标签页中运行 hterm 时，此设置非常便于确保您不会失去 Chrome 的“切换至标签页”键盘快捷键。当不在标签页中运行 hterm 时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果设为 true，Alt-1..9 将会由浏览器处理。如果设为 false，Alt-1..9 将会被传送到主机。如果设为 null，则会根据浏览器平台和窗口类型自动检测。"
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "指定是否应将 Ctrl-1..9 传递给浏览器。\n\n当在浏览器标签页中运行 hterm 时，此设置非常便于确保您不会失去 Chrome 的“切换至标签页”键盘快捷键。当不在标签页中运行 hterm 时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果为 true，Ctrl-1..9 将会由浏览器处理。如果为 false，Ctrl-1..9 将会被传送到主机。如果为 null，则会根据浏览器平台和窗口类型自动检测。"
+		"message": "设定是否应将 Ctrl-1..9 传递给浏览器。\n\n当在浏览器标签页中运行 hterm 时，此设置非常便于确保您不会失去 Chrome 的“切换至标签页”键盘快捷键。当不在标签页中运行 hterm 时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果设为 true，Ctrl-1..9 将会由浏览器处理。如果设为 false，Ctrl-1..9 将会被传送到主机。如果设为 null，则会根据浏览器平台和窗口类型自动检测。"
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "指定是否应将 Meta-1..9 传递给浏览器。\n\n当在浏览器标签页中运行 hterm 时，此设置非常便于确保您不会失去 Chrome 的“切换至标签页”键盘快捷键。当不在标签页中运行 hterm 时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果为 true，Meta-1..9 将会由浏览器处理。如果为 false，Meta-1..9 将会被传送到主机。如果为 null，则会根据浏览器平台和窗口类型自动检测。"
+		"message": "设定是否将 Meta-1..9 传递给浏览器。\n\n当在浏览器标签页中运行 hterm 时，此设置非常便于确保您不会失去 Chrome 的“切换至标签页”键盘快捷键。当不在标签页中运行 hterm 时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果设为 true，Meta-1..9 将会由浏览器处理。如果设为 false，Meta-1..9 将会被传送到主机。如果设为 null，则会根据浏览器平台和窗口类型自动检测。"
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "指定是否应将 Meta-V 传递给主机。"
+		"message": "设定是否应将 Meta-V 传递给主机。"
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "为从主机接收到的数据设定预期编码。\n\n有效值是“utf-8”和“raw”。"
+		"message": "为从主机接收到的数据设定预期编码。\n如果编码不匹配，则可能会出现显而易见的错误。\n\n有效值是“utf-8”和“raw”。"
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "是否任何按键操作都会导致滚动到页面底部。"
@@ -285,7 +306,7 @@
 		"message": "当使用备用屏幕缓冲区且 DECCKM（应用光标键）处于活动状态时，鼠标滚轮事件会模拟箭头键。\n\n您可通过按住 Shift 键暂时停用此功能。\n\n当使用页面调度程序 (less)、查阅手册页面或文本编辑器 (vi/nano) 或者使用 Screen/tmux 时，经常会用到此设置。"
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "由滚轮导致的轮事件中像素增量的调节系数。用于改变页面的滚动速度。"
+		"message": "滚轮事件的调节系数（以像素为单位）。\n\n用于改变页面的滚动速度。"
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "垂直滚动条模式。"
@@ -294,13 +315,13 @@
 		"message": "为向主机传送的数据设定编码。"
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "如果为 true，Shift-Insert 会执行粘贴操作；如果为 false，则会传送到主机。"
+		"message": "设定是将 Shift-Insert 用于执行粘贴操作还是传送到远程主机。"
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "默认的终端编码 (DOCS)。\n\nISO-2022 会启用字符映射转换（如图形映射）。\nUTF-8 会停用对此类转换的支持。\n\n已锁定的变体表示无法在运行时通过终端转义序列更改编码。\n\n您应该坚持使用 UTF-8，除非您发现旧版应用无法顺利完成转换。"
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "是否使用默认的窗口复制行为"
+		"message": "设定是否使用默认浏览器/操作系统的复制行为。\n\n允许浏览器/操作系统直接处理复制事件，这可能会提高与某些根本无法进行复制的系统的兼容性，但也会降低文本选择的可靠性。\n\n例如，当复制自动换行的长行时，这些行中的换行符也会被一并复制。"
 	},
 	"hterm_pref_user_css": {
 		"message": "要向终端文档中添加的用户样式表的网址。"
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "指定用于停止与所选范围右端（末尾）匹配的正则表达式。\n\n通常情况下，这会是一个用于拒绝特定字符的字符类。"
+	},
+	"hterm_space_character": {
+		"message": "空格"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "外观（字体、颜色、图片）"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "复制和粘贴"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "编码"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "扩展程序"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "键盘"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "其他"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "滚动"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "音效"
 	},
 	"identity_label": {
 		"message": "身份"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "已安装！"
 	},
+	"new_window_menu_label": {
+		"message": "打开新窗口"
+	},
 	"notify_copy": {
 		"message": "所选文本已复制"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "重新连接(R)、选择其他连接(C)或退出(E)？"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "未知的中继选项：$1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "SSH 参数"
 	},
+	"terminal_clear_menu_label": {
+		"message": "清除终端屏幕"
+	},
 	"terminal_preview_label": {
 		"message": "预览"
 	},
 	"terminal_profile_label": {
 		"message": "当前配置文件"
+	},
+	"terminal_reset_menu_label": {
+		"message": "重置终端设置"
 	},
 	"tip_1": {
 		"message": "在按住 Ctrl 键（如果是 macOS，则请按住 Cmd 键）的同时点击链接，即可将其打开！"
@@ -429,10 +486,13 @@
 		"message": "您可以重新绑定组合键/快捷键：https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "使用 Yubikey 和其他智能卡进行 ssh 身份验证：https://goo.gl/3ZEU1w"
+		"message": "使用 Yubikey 和其他智能卡进行 ssh 身份验证：https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "显示内嵌图片：https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "在按住 Ctrl 键（如果是 macOS，则按住 Cmd 键）的同时点击右键会显示上下文菜单。"
 	},
 	"tip_2": {
 		"message": "借助 hterm-notify 在浏览器中显示通知：https://goo.gl/ZNxGdF"

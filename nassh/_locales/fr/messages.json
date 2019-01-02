@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "La fermeture de cet onglet va mettre fin à cette session."
 	},
+	"cache_pin_prompt": {
+		"message": "Mettre en cache le code pour cette session ? (y/N) :"
+	},
 	"cancel_button_label": {
 		"message": "Annuler"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Effacer les clés hôtes SSH connues"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "Cette commande permet d'afficher un menu répertoriant les invites et les hôtes connus que l'hôte doit supprimer."
@@ -65,6 +71,9 @@
 	"enter_keycap": {
 		"message": "[ENTRÉE]"
 	},
+	"faq_menu_label": {
+		"message": "Questions fréquentes"
+	},
 	"field_argstr_placeholder": {
 		"message": "arguments de ligne de commande supplémentaires"
 	},
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "Options du serveur de relais SSH"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "Options du serveur de relais SSH"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "ERREUR : Impossible de charger le profil $1:\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "$1 % parcourus,"
+	},
 	"hterm_button_allow_always": {
 		"message": "Toujours autoriser"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "Bloquer"
+	},
+	"hterm_button_page_down": {
+		"message": "Page suivante"
+	},
+	"hterm_button_page_up": {
+		"message": "Page précédente"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Échec du chargement de la ressource $1"
@@ -141,7 +159,7 @@
 		"message": "Permet de sélectionner une heuristique de détection Alt Gr.\n\n'null' : active l'autodétection en fonction de l'attribut navigator.language :\n      'en-us' => 'none', autre => 'right-alt'\n'none' : désactive toute manipulation liée à Alt Gr.\n'ctrl-alt' : suppose que Ctrl+Alt signifie Alt Gr.\n'left-alt' : suppose que Alt gauche signifie Alt Gr.\n'right-alt' : suppose que Alt droite signifie Alt Gr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Permet de définir si la touche Alt joue le rôle de touche Méta ou de touche Alt distincte."
+		"message": "Définir si la touche Alt joue le rôle de touche Méta ou de touche Alt distincte."
 	},
 	"hterm_pref_alt_sends_what": {
 		"message": "Détermine le fonctionnement de la touche Alt.\n\n  escape : envoie un préfixe Échap.\n  8-bit : ajoute 128 au caractère saisi comme dans xterm.\n browser-key : attend la pression d'une touche pour découvrir ce que dit\n le navigateur (déconseillé sur les plates-formes où le navigateur\n effectue une action par défaut pour les séquences Alt)."
@@ -171,7 +189,7 @@
 		"message": "Permet de spécifier si la sélection doit être effacée après la copie."
 	},
 	"hterm_pref_close_on_exit": {
-		"message": "Permet de spécifier si la fenêtre doit être fermée à la fin de l'exécution de la commande."
+		"message": "Définir si la fenêtre doit être fermée à la fin de l'exécution de la commande."
 	},
 	"hterm_pref_color_palette_overrides": {
 		"message": "Permet de remplacer les couleurs dans la palette par défaut.\n\nCet élément peut être spécifié en tant que matrice ou objet. S'il est défini en tant qu'objet, il s'agit d'une matrice creuse présumée, où chaque propriété correspond à un indice numérique dans la palette de couleurs.\n\nLes valeurs peuvent être définies comme presque toutes les valeurs de couleur CSS, y compris #RGB, #RRGGBB, rgb(...), rgba(...), et tous les noms de couleur qui font partie du fichier rgb.txt X11.\n\nVous pouvez spécifier l'attribut \"null\" pour indiquer que la valeur par défaut ne doit pas être modifiée. Cette option est particulièrement utile pour ignorer un faible nombre d'indices lorsque la valeur est définie en tant que matrice.\n\nPar exemple, pour définir l'index de couleur 1 sur la couleur bleue, vous pouvez utiliser l'une des options suivantes :\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
@@ -201,7 +219,7 @@
 		"message": "Si ce paramètre indique \"true\", les sonneries en arrière-plan du terminal créent une notification Web. https://www.w3.org/TR/notifications/\n\nL'affichage des notifications nécessite l'autorisation de l'utilisateur. Lorsque cette option est définie sur \"true\", hterm tente de demander à l'utilisateur son autorisation, le cas échéant. Certains navigateurs n'affichent pas cette demande d'autorisation lorsqu'elle n'est pas déclenchée par une action de l'utilisateur.\n\nLes extensions Chrome avec l'autorisation \"notifications\" sont autorisées à afficher les notifications."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Permet de spécifier si les caractères est-asiatiques ambigus ont une largeur de deux colonnes."
+		"message": "Définir si les caractères East Asian Ambiguous ont une largeur de deux colonnes."
 	},
 	"hterm_pref_enable_8_bit_control": {
 		"message": "Lorsque ce paramètre indique \"true\", les caractères de contrôle à 8 bits sont autorisés. Lorsque le paramètre indique \"false\", ils sont ignorés.\n\nLes versions à deux octets de ces caractères de contrôle sont respectées, indépendamment de la configuration de ce paramètre."
@@ -239,26 +257,29 @@
 	"hterm_pref_foreground_color": {
 		"message": "Couleur de premier plan du texte sans aucun autre attribut de couleur."
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Définit s'il faut masquer automatiquement le curseur de la souris lors de la saisie. Par défaut, autodétection si la plate-forme/l'OS est compatible.\n\nRemarque : Certains systèmes d'exploitation peuvent remplacer ce paramètre ; vous ne pourrez peut-être pas toujours le désactiver."
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Si le paramètre indique \"true\", les touches Orig/Fin contrôlent la barre de défilement du terminal et le raccourci Maj+Orig/Fin envoie les codes de touches VT. S'il indique \"false\", les touches Orig/Fin envoient les codes de touches VT et Maj+Orig/Fin permet de contrôler le défilement."
+		"message": "Si le paramètre indique \"true\", les touches Orig/Fin contrôlent la barre de défilement du terminal et les raccourcis Maj+Orig/Maj+Fin sont envoyés à l'hôte distant. S'il indique \"false\", les touches Orig/Fin sont envoyées à l'hôte distant et Maj+Orig/Maj+Fin permettent de contrôler le défilement."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Un tableau des actions associées aux combinaisons de touches. Une combinaison de touches comprend zéro ou plusieurs touches de modification suivies d'un code touche. Les codes touche peuvent être des nombres décimaux ou hexadécimaux, ou des identifiants de touche. Les actions peuvent être précisées dans une chaîne à envoyer à l'hôte ou par des identifiants d'action. Une explication complète du format est disponible à l'adresse https://goo.gl/LWRndr.\n\nExemples de raccourcis clavier :\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Un tableau des actions associées aux combinaisons de touches. Une combinaison de touches comprend zéro ou plusieurs touches de modification suivies d'un code touche. Les codes touche peuvent être des nombres décimaux ou hexadécimaux, ou des identifiants de touche. Les actions peuvent être précisées dans une chaîne à envoyer à l'hôte ou par des identifiants d'action. Une explication complète du format est disponible à l'adresse https://goo.gl/LWRndr.\n\nExemples de raccourcis clavier :\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Maj+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Si le paramètre indique \"true\", les touches multimédias sont converties en touches de fonction équivalente. S'il indique \"false\", le navigateur est autorisé à gérer les touches."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Permet de définir si la touche Méta envoie un préfixe d'échappement ou non."
+		"message": "Envoyer un préfixe ESC en appuyant sur une touche tout en maintenant la touche Méta enfoncée.\n\nPar exemple, si ce paramètre est activé, le fait d'appuyer sur Méta+K enverra ^[k comme si vous aviez appuyé sur Échap, puis k. Lorsqu'il est désactivé, seul k est envoyé."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Bouton de souris pour coller le contenu du presse-papiers ou valeur \"null\" pour activer l'autodétection.\n\nPour l'autodétection, le bouton central de la souris est utilisé pour les plates-formes autres que X11 (dont Chrome OS). Sur les plates-formes X11, c'est le bouton droit de la souris qui est utilisé (le gestionnaire de fenêtre natif devrait coller le contenu du presse-papiers avec le bouton central de la souris).\n\n0 == bouton gauche (primaire)\n1 == bouton central (auxiliaire)\n2 == bouton droit (secondaire)\n\nCette option peut être activée indépendamment du paramètre \"mouse-right-click-paste\".\n\nRemarque : Ce paramètre fonctionnera correctement avec les souris pour droitier et pour gaucher."
+		"message": "Bouton de souris pour coller le contenu du presse-papiers ou valeur \"null\" pour activer l'autodétection.\n\nPour l'autodétection, le bouton central de la souris est utilisé pour les plates-formes autres que X11 (dont Chrome OS). Sur les plates-formes X11, c'est le bouton droit de la souris qui est utilisé (puisque le gestionnaire de fenêtre natif devrait coller le contenu du presse-papiers avec le bouton central de la souris).\n\n0 == bouton gauche (primaire)\n1 == bouton central (auxiliaire)\n2 == bouton droit (secondaire)\n\nCette option est indépendante du paramètre de collage par clic droit.\n\nRemarque : Ce paramètre fonctionnera correctement avec les souris pour droitier et pour gaucher."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Coller le contenu du presse-papier en cas de clic sur le bouton droit de la souris.\n\nCette option peut être activée indépendamment du paramètre \"mouse-paste-button\".\n\nRemarque : Ce paramètre fonctionnera correctement avec les souris pour droitier et pour gaucher."
+		"message": "Coller le contenu du presse-papiers en cas de clic sur le bouton droit de la souris.\n\nCette option est indépendante du paramètre \"mouse-paste-button\".\n\nRemarque : Ce paramètre fonctionnera correctement avec les souris pour droitier et pour gaucher."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Si ce paramètre indique \"true\", les touches Page précédente/Page suivante contrôlent la barre de défilement du terminal et le raccourci Maj+Page précédente/Page suivante envoie les codes de touches VT. S'il indique \"false\", les touches Page précédente/Page suivante envoient les codes de touches VT et Maj+Page précédente/Page suivante permet de contrôler le défilement."
+		"message": "Si le paramètre indique \"true\", les touches Page précédente/Page suivante contrôlent la barre de défilement du terminal et les raccourcis Maj+Page précédente/Maj+Page suivante sont envoyés à l'hôte distant. S'il indique \"false\", les touches Page précédente/Page suivante sont envoyées à l'hôte distant et Maj+Page précédente/Maj+Page suivante permettent de contrôler le défilement."
 	},
 	"hterm_pref_pass_alt_number": {
 		"message": "Définit si les combinaisons de touches Alt+[1 à 9] doivent être envoyées au navigateur.\n\nCe paramètre est pratique lorsque le terminal hterm est ouvert dans un onglet du navigateur, car vous pouvez alors conserver les raccourcis de sélection d'onglets de Chrome. Si vous n'exécutez pas le terminal dans un onglet, il est préférable d'envoyer ces combinaisons de touches à l'hôte afin qu'elles puissent être utilisées dans vim ou emacs.\n\nSi ce paramètre indique \"true\", les combinaisons Alt+[1 à 9] seront gérées par le navigateur. S'il indique \"false\", ces combinaisons de touches seront envoyées à l'hôte. La valeur \"null\" déclenchera l'autodétection, en fonction de la plate-forme de navigateur et du type de fenêtre."
@@ -273,7 +294,7 @@
 		"message": "Permet de définir si la combinaison de touches Méta+V est envoyée à l'hôte."
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "Permet d'identifier l'encodage des données envoyées par l'hôte.\n\nLes valeurs acceptées sont \"utf-8\" et \"raw\"."
+		"message": "Permet d'identifier l'encodage des données envoyées par l'hôte.\nSi les encodages ne correspondent pas, des bugs visuels sont susceptibles d'être observés.\n\nLes valeurs acceptées sont \"utf-8\" et \"raw\"."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Permet de spécifier si l'action d'appuyer sur n'importe quelle touche fera défiler le contenu de l'écran jusqu'en bas."
@@ -285,7 +306,7 @@
 		"message": "Lorsqu'on utilise la mémoire tampon écran alternative, si DECCKM (touches de déplacement du curseur) est actif, les événements de défilement de la molette de la souris émuleront les touches fléchées.\n\nCela peut être désactivé provisoirement en maintenant le touche Maj enfoncée.\n\nCette fonctionnalité est utile lorsqu'on utilise des programmes de pagination (comme less), lorsqu'on visionne des pages man ou des éditeurs de texte (comme vi ou nano) ou lorsqu'on exécute des multiplexeurs de terminaux (comme screen ou tmux)."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Coefficient multiplicateur du delta de pixels pour les événements associés à la molette de la souris : modifie la vitesse de défilement de la page."
+		"message": "Coefficient multiplicateur pour les événements associés à la molette de la souris mesurés en pixels.\n\nModifie la vitesse de défilement de la page."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Mode de barre de défilement verticale."
@@ -294,13 +315,13 @@
 		"message": "Définit l'encodage des données envoyées à l'hôte."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "La combinaison Maj+Inser colle le contenu du presse-papiers si le paramètre indique \"true\" ou l'envoie à l'hôte s'il indique \"false\"."
+		"message": "Permet de définir si Maj+Inser est utilisé pour coller ou est envoyé à l'hôte distant."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Encodage par défaut du terminal (DOCS).\n\nISO-2022 permet les conversions de tables de caractères (comme les tables de caractères graphiques).\nUTF-8 désactive ces conversions.\n\nL'option verrouillée signifie que l'encodage ne peut pas être modifié en cours d'exécution par des séquences d'échappement dans le terminal.\n\nOptez pour UTF-8 à moins de constater des problèmes d'affichage avec des applications anciennes."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Permet de spécifier s'il faut utiliser le comportement de copie par défaut pour la fenêtre."
+		"message": "Indique si le comportement de copie du navigateur/de l'OS par défaut doit être utilisé.\n\nAutorise le navigateur/l'OS à gérer directement l'événement de copie, ce qui peut améliorer la compatibilité avec certains systèmes (lorsque la copie ne fonctionne pas du tout), mais fragilise la sélection du texte.\n\nPar exemple, les longues lignes qui ont été automatiquement encapsulées seront copiées avec les nouvelles lignes."
 	},
 	"hterm_pref_user_css": {
 		"message": "URL de la feuille de style de l'utilisateur à inclure dans le document du terminal."
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Expression régulière servant à interrompre la recherche à droite (à la fin) d'une sélection.\n\nEn principe, c'est une classe de caractère permettant de rejeter des caractères spécifiques."
+	},
+	"hterm_space_character": {
+		"message": "Espace"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Apparence (polices, couleurs, images)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Copier et coller"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Encodage"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Extensions"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Clavier"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Divers"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Défilement"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Sons"
 	},
 	"identity_label": {
 		"message": "Identité"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "Le système de fichiers a bien été installé."
 	},
+	"new_window_menu_label": {
+		"message": "Nouvelle fenêtre"
+	},
 	"notify_copy": {
 		"message": "Sélection copiée"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "Reconnecter (r), sélectionner (c) une autre connexion ou quitter (x) ?"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "Option de relais inconnue : $1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "Arguments SSH"
 	},
+	"terminal_clear_menu_label": {
+		"message": "Effacement de l'écran du terminal"
+	},
 	"terminal_preview_label": {
 		"message": "Aperçu"
 	},
 	"terminal_profile_label": {
 		"message": "Profil actuel"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Réinitialisation des paramètres du terminal"
 	},
 	"tip_1": {
 		"message": "Vous pouvez maintenir la touche Ctrl (Cmd sur macOS) enfoncée pendant que vous cliquez sur les liens pour les ouvrir."
@@ -429,10 +486,13 @@
 		"message": "Vous pouvez associer de nouvelles fonctionnalités aux raccourcis (https://goo.gl/LWRndr)"
 	},
 	"tip_12": {
-		"message": "Utiliser des clés YubiKeys ou des cartes à puce pour l'authentification SSH : https://goo.gl/3ZEU1w"
+		"message": "Utiliser des clés YubiKeys ou des cartes à puce pour l'authentification SSH : https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Afficher des images intégrées : https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "En maintenant la touche Ctrl (Cmd sur Mac OS) enfoncée tout en faisant un clic droit, vous obtenez un menu contextuel."
 	},
 	"tip_2": {
 		"message": "Affichez les notifications dans le navigateur à l'aide de la commande \"hterm-notify\" (https://goo.gl/ZNxGdF)"

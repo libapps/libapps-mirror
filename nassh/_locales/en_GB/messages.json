@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "Closing this tab will disconnect this session."
 	},
+	"cache_pin_prompt": {
+		"message": "Cache the PIN for this session? (Y/N):"
+	},
 	"cancel_button_label": {
 		"message": "Cancel"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Clear SSH known_hosts"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "This command displays a menu of known hosts and prompts for the host to forget."
@@ -51,7 +57,7 @@
 		"message": "Did you know that there is a dedicated options page?\nNo need to modify 'term_' directly anymore!\nPress $1 to open it, or click:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Did you know that there is a dedicated options page?\nNo need to mess with 'term_' directly anymore!\n$1"
+		"message": "Did you know that there is a dedicated options page?\nNo need to modify 'term_' directly anymore.\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -64,6 +70,9 @@
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
+	},
+	"faq_menu_label": {
+		"message": "FAQ"
 	},
 	"field_argstr_placeholder": {
 		"message": "extra command line arguments"
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "SSH relay server options"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "SSH relay server options"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "ERROR: Could not load profile $1:\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "$1% scrolled,"
+	},
 	"hterm_button_allow_always": {
 		"message": "Always allow"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "Block"
+	},
+	"hterm_button_page_down": {
+		"message": "Page down"
+	},
+	"hterm_button_page_up": {
+		"message": "Page up"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Loading $1 failed"
@@ -141,7 +159,7 @@
 		"message": "Select an AltGr detection heuristic.\n\n'null': Autodetect based on navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Disable any AltGr-related munging.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Set whether the Alt key acts as a Meta key or as a distinct Alt key."
+		"message": "Whether the Alt key acts as a Meta key or as a distinct Alt key."
 	},
 	"hterm_pref_alt_sends_what": {
 		"message": "Controls how the Alt key is handled.\n\n  escape: Send an ESC prefix.\n  8-bit: Add 128 to the typed character as in xterm.\n browser-key: Wait for the keypress event and see what the browser\n says. (This won't work well on platforms where the browser\n performs a default action for some Alt sequences.)"
@@ -171,7 +189,7 @@
 		"message": "Whether to clear the selection after copying."
 	},
 	"hterm_pref_close_on_exit": {
-		"message": "Whether to close the window when the command finishes execution."
+		"message": "Whether to close the window when the command finishes executing."
 	},
 	"hterm_pref_color_palette_overrides": {
 		"message": "Override colours in the default palette.\n\nThis can be specified as an array or an object. If specified as an object it is assumed to be a sparse array, where each property is a numeric index into the colour palette.\n\nValues can be specified as almost any CSS colour value. This includes #RGB, #RRGGBB, rgb(...), rgba(...) and any colour names that are also part of the standard X11 rgb.txt file.\n\nYou can use 'null' to specify that the default value should not be changed. This is useful for skipping a small number of indices when the value is specified as an array.\n\nFor example, these set both colour index 1 to blue:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
@@ -201,19 +219,19 @@
 		"message": "If true, terminal bells in the background will create a Web Notification. https://www.w3.org/TR/notifications/\n\nDisplaying notifications requires permission from the user. When this option is set to true, hterm will attempt to ask the user for permission if necessary. Browsers may not show this permission request if it was not triggered by a user action.\n\nChrome extensions with the 'notifications' permission have permission to display notifications."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Set whether East Asian Ambiguous characters have two column width."
+		"message": "Whether East Asian Ambiguous characters have two-column width."
 	},
 	"hterm_pref_enable_8_bit_control": {
 		"message": "True to enable 8-bit control characters, false to ignore them.\n\nWe'll respect the two-byte versions of these control characters regardless of this setting."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "True if we should respect the blink attribute. False to ignore it."
+		"message": "If true, respect the blink attribute. False to ignore it."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "True if we should use bold weight font for text with the bold/bright attribute. False to use the normal weight font. Null to autodetect."
+		"message": "If true, use bold weight font for text with the bold/bright attribute. False to use the normal weight font. Null to auto-detect."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "True if we should use bright colours (8-15 on a 16 colour palette) for any text with the bold attribute. False otherwise."
+		"message": "If true, use bright colours (8-15 on a 16-colour palette) for any text with the bold attribute. False otherwise."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Whether to show a message in the terminal when the host writes to the clipboard."
@@ -239,41 +257,44 @@
 	"hterm_pref_foreground_color": {
 		"message": "The foreground colour for text with no other colour attributes."
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Whether to automatically hide the mouse cursor when typing. By default, auto-detect whether the platform/OS handles this.\n\nNote: Some operating systems may override this setting and thus you might not always be able to disable it."
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "If true, Home/End will control the terminal scrollbar and Shift-Home/End will send the VT key codes. If false, then Home/End sends VT codes and Shift-Home/End scrolls."
+		"message": "If true, Home/End controls the terminal scrollbar and Shift-Home/Shift-End are sent to the remote host. If false, then Home/End are sent to the remote host and Shift-Home/Shift-End scrolls."
 	},
 	"hterm_pref_keybindings": {
-		"message": "A map of key sequences to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers, or a key identifier. Key actions can be specified a string to send to the host, or an action identifier. For a full explanation of the format, see https://goo.gl/LWRndr.\n\nSample keybindings:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "A map of key sequence to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers, or a key identifier. Key actions can be specified as a string to send to the host or an action identifier. For a full explanation of the format, see https://goo.gl/LWRndr.\n\nSample keybindings:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "If true, convert media keys to their Fkey equivalent. If false, let the browser handle the keys."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Set whether the Meta key sends a leading Escape or not."
+		"message": "Send an ESC prefix when pressing a key while holding the Meta key.\n\nFor example, when enabled, pressing Meta-K will send ^[k as if you typed Escape then k. When disabled, only k will be sent."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Mouse paste button, or null to autodetect.\n\nFor autodetect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the native window manager should paste via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is activate independent of the 'mouse-right-click-paste' setting.\n\nNote: This will handle left and right handed mice correctly."
+		"message": "Mouse paste button, or null to auto-detect.\n\nFor auto-detect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the native window manager should paste via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: This will handle left- & right-handed mice correctly."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Paste on right mouse button clicks.\n\nThis option is activated independent of the 'mouse-paste-button' setting.\n\nNote: This will handle left & right handed mice correctly."
+		"message": "Paste on right mouse button clicks.\n\nThis option is independent of the 'mouse-paste-button' setting.\n\nNote: This will handle left- & right-handed mice correctly."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "If true, Page Up/Down will control the terminal scrollbar and Shift-Page Up/Down will send the VT key codes. If false, then Page Up/Down sends VT codes and Shift-Page Up/Down scrolls."
+		"message": "If true, Page Up/Page Down controls the terminal scrollbar and Shift-Page Up/Shift-Page Down are sent to the remote host. If false, then Page Up/Page Down are sent to the remote host and Shift-Page Up/Shift-Page Down scrolls."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Set whether we should pass Alt-1…9 to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard accelerators. When not running in a tab it's better to send these keys to the host so that they can be used in vim or emacs.\n\nIf true, Alt-1…9 will be handled by the browser. If false, Alt-1…9 will be sent to the host. If null, autodetect based on browser platform and window type."
+		"message": "Whether Alt-1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard accelerators. When not running in a tab, it's better to send these keys to the host so that they can be used in vim or emacs.\n\nIf true, Alt-1..9 will be handled by the browser. If false, Alt-1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Set whether we should pass Ctrl-1…9 to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard accelerators. When not running in a tab it's better to send these keys to the host so that they can be used in vim or emacs.\n\nIf true, Ctrl-1…9 will be handled by the browser. If false, Ctrl-1…9 will be sent to the host. If null, autodetect based on browser platform and window type."
+		"message": "Whether Ctrl-1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard accelerators. When not running in a tab, it's better to send these keys to the host so that they can be used in vim or emacs.\n\nIf true, Ctrl-1..9 will be handled by the browser. If false, Ctrl-1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Set whether we should pass Meta-1…9 to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard accelerators. When not running in a tab it's better to send these keys to the host so that they can be used in vim or emacs.\n\nIf true, Meta-1…9 will be handled by the browser. If false, Meta-1…9 will be sent to the host. If null, autodetect based on browser platform and window type."
+		"message": "Whether Meta-1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard accelerators. When not running in a tab it's better to send these keys to the host so that they can be used in vim or emacs.\n\nIf true, Meta-1..9 will be handled by the browser. If false, Meta-1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Set whether Meta-V gets passed to host."
+		"message": "Whether Meta-V gets passed to host."
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "Set the expected encoding for data received from the host.\n\nValid values are 'utf-8' and 'raw'."
+		"message": "Set the expected encoding for data received from the host.\nIf the encodings do not match, visual bugs are likely to be observed.\n\nValid values are 'utf-8' and 'raw'."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Whether to scroll to the bottom on any keystroke."
@@ -285,7 +306,7 @@
 		"message": "When using the alternative screen buffer, and DECCKM (Application Cursor Keys) is active, mouse wheel scroll events will emulate arrow keys.\n\nIt can be temporarily disabled by holding the Shift key.\n\nThis frequently comes up when using pagers (less), reading man pages or text editors (vi/nano) or using screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "The multiplier for the pixel delta in wheel events caused by the scroll wheel. Alters how fast the page scrolls."
+		"message": "The multiplier for scroll wheel events when measured in pixels.\n\nAlters how fast the page scrolls."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "The vertical scrollbar mode."
@@ -294,13 +315,13 @@
 		"message": "Set the encoding for data sent to host."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Shift-Insert pastes if true, sent to host if false."
+		"message": "Whether Shift-Insert is used for pasting or is sent to the remote host."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "The default terminal encoding (DOCS).\n\nISO-2022 enables character map translations (like graphics maps).\nUTF-8 disables support for those.\n\nThe locked variant means the encoding cannot be changed at runtime via terminal escape sequences.\n\nYou should stick with UTF-8 unless you notice broken rendering with legacy applications."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Whether to use the default window copy behaviour."
+		"message": "Whether to use the default browser/OS's copy behaviour.\n\nAllow the browser/OS to handle the copy event directly, which might improve compatibility with some systems (where copying doesn't work at all), but makes the text selection less robust.\n\nFor example, long lines that were automatically line wrapped will be copied with the new lines still in them."
 	},
 	"hterm_pref_user_css": {
 		"message": "URL of user style sheet to include in the terminal document."
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Regular expression to halt matching to the right (end) of a selection.\n\nNormally this is a character class to reject specific characters."
+	},
+	"hterm_space_character": {
+		"message": "Space"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Appearance (fonts, colours, images)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Copy & paste"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Encoding"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Extensions"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Keyboard"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Miscellaneous"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Scrolling"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Sounds"
 	},
 	"identity_label": {
 		"message": "Identity"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "Mounted!"
 	},
+	"new_window_menu_label": {
+		"message": "New window"
+	},
 	"notify_copy": {
 		"message": "Selection copied"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "(R)econnect, (C)hoose another connection or E(x)it?"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "Unknown relay option: $1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "SSH arguments"
 	},
+	"terminal_clear_menu_label": {
+		"message": "Terminal clear"
+	},
 	"terminal_preview_label": {
 		"message": "Preview"
 	},
 	"terminal_profile_label": {
 		"message": "Current profile"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Terminal reset"
 	},
 	"tip_1": {
 		"message": "You can hold Ctrl (Cmd on macOS) while clicking on links to open them!"
@@ -429,10 +486,13 @@
 		"message": "You can rebind keys/shortcuts: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Use Yubikeys and other smart cards for ssh auth: https://goo.gl/3ZEU1w"
+		"message": "Use Yubikeys and other smart cards for ssh authentication: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Display images inline: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Holding Ctrl (Cmd on macOS) while right-clicking brings up a context menu."
 	},
 	"tip_2": {
 		"message": "Display notifications in the browser using hterm-notify: https://goo.gl/ZNxGdF"

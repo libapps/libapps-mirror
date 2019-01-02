@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "Uždarius šį skirtuką, sesija bus nutraukta."
 	},
+	"cache_pin_prompt": {
+		"message": "Saugoti talpykloje šios sesijos PIN kodą? (y/N):"
+	},
 	"cancel_button_label": {
 		"message": "Atšaukti"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Išvalyti SSH „known_hosts“"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "Taikant šią komandą pateikiamas žinomų prieglobų meniu ir raginama ištrinti prieglobą."
@@ -51,7 +57,7 @@
 		"message": "Ar žinote, kad yra paskirtas parinkčių puslapis?\nNebereikia tiesiogiai keisti „term_“!\nPaspauskite $1, kad atidarytumėte, arba spustelėkite\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Ar žinote, kad yra paskirtas parinkčių puslapis?\nNebereikia atlikti veiksmų tiesiogiai su „term_“!\n$1"
+		"message": "Ar žinote, kad yra paskirtas parinkčių puslapis?\nNebereikia tiesiogiai keisti „term_“!\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -64,6 +70,9 @@
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
+	},
+	"faq_menu_label": {
+		"message": "DUK"
 	},
 	"field_argstr_placeholder": {
 		"message": "papildomi komandos eilutės argumentai"
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "prievadas"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "SSH perdavimo serverio parinktys"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "SSH perdavimo serverio parinktys"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "KLAIDA: nepavyko įkelti profilio $1:\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "Slinkta $1 proc.,"
+	},
 	"hterm_button_allow_always": {
 		"message": "Visada leisti"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "Blokuoti"
+	},
+	"hterm_button_page_down": {
+		"message": "Puslapiu žemyn"
+	},
+	"hterm_button_page_up": {
+		"message": "Puslapiu aukštyn"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Nepavyko įkelti $1"
@@ -141,7 +159,7 @@
 		"message": "Pasirinkite euristinį „AltGr“ aptikimą.\n\n„null“: automatiškai aptinkama pagal navigator.language:\n      „en-us“ => „none“, kita => „right-alt“\n„none“: išjungiami bet kokie su „AltGr“ susiję kenksmingi pakeitimai.\n„ctrl-alt“: daroma prielaida, kad „Ctrl“ + „Alt“ reiškia „AltGr“.\n„left-alt“: daroma prielaida, kad kairysis klavišas „Alt“ reiškia „AltGr“.\n„right-alt“: daroma prielaida, kad dešinysis klavišas „Alt“ reiškia „AltGr“."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Nustatoma, ar klavišas „Alt“ veikia kaip metaduomenų klavišas ar kaip atskiras „Alt“ klavišas."
+		"message": "Ar klavišas „Alt“ veikia kaip metaduomenų klavišas ar kaip atskiras „Alt“ klavišas."
 	},
 	"hterm_pref_alt_sends_what": {
 		"message": "Valdoma, kaip apdorojamas klavišas „Alt“.\n\n  „escape“: siunčiamas ESC priešdėlis.\n  „8-bit“: pridedama 128 prie įvesto simbolio kaip „xterm“.\n „browser-key“: laukiama, kol bus paspaustas klavišas, ir stebima, kas nurodoma\n naršyklėje. (Tai tinkamai neveiks platformose, kuriose naršyklė\n veikia kaip numatytasis kai kurių „Alt“ sekų veiksmas.)"
@@ -201,19 +219,19 @@
 		"message": "Jei nustatyta kaip „Tiesa“, terminalo skambučiai fone sukuria žiniatinklio pranešimą. https://www.w3.org/TR/notifications/\n\nNorint pateikti pranešimus, reikia naudotojo leidimo. Kai ši parinktis nustatyta kaip „Tiesa“, „hterm“ bando prašyti naudotojo leidimo, jei reikia. Atminkite, kad naršyklės gali nerodyti šios leidimo užklausos, jei ji pateikta ne naudotojui atlikus veiksmą.\n\n„Chrome“ plėtiniams su pranešimų leidimu suteiktas leidimas pateikti pranešimus."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Nustatoma, ar Rytų Azijos nevienareikšmiai simboliai yra dviejų stulpelių pločio."
+		"message": "A Rytų Azijos nevienareikšmiai simboliai yra dviejų stulpelių pločio."
 	},
 	"hterm_pref_enable_8_bit_control": {
 		"message": "„True“, norint įgalinti 8 bitų valdymo simbolius; „false“, norint jų nepaisyti.\n\nAtsižvelgsime į šių valdymo simbolių dviejų baitų versijas, nepaisydami šio nustatymo."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "„Tiesa“, jei turėtume atsižvelgti į mirksėjimo atributą. „Netiesa“, jei jo turėtume nepaisyti."
+		"message": "Jei „Tiesa“, atsižvelgiama į mirksėjimo atributą. Jei „Netiesa“, jo nepaisoma."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "„Tiesa“, jei turėtume naudoti pusjuodį teksto šriftą su atributu „pusjuodis / ryškus“. „Netiesa“, jei turėtume naudoti įprastą šriftą. „Null“, jei reikia aptikti automatiškai."
+		"message": "Jei „Tiesa“, naudojamas pusjuodis teksto šriftas su atributu „pusjuodis / ryškus“. Jei „Netiesa“, naudojamas įprastas šriftas. Jei „Null“, aptinkama automatiškai."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "„Tiesa“, jei turėtume naudoti ryškias spalvas (Nr. 8–15 16 spalvų gamoje) bet kokiam tekstui su atributu „pusjuodis“. Kitu atveju „Netiesa“."
+		"message": "Jei „Tiesa“, naudojamos ryškios spalvos (Nr. 8–15 16 spalvų gamoje) bet kokiam tekstui su atributu „pusjuodis“. Kitu atveju „Netiesa“."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Ar rodyti pranešimą terminale, kai prieglobos serveris ką nors įrašo į iškarpinę."
@@ -239,41 +257,44 @@
 	"hterm_pref_foreground_color": {
 		"message": "Teksto priekinio plano spalva be jokių kitų spalvų atributų."
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Ar automatiškai slėpti pelės žymeklį vedant tekstą. Pagal numatytuosius nustatymus automatiškai aptinkama, ar platforma / OS tai apdoroja.\n\nPastaba: kai kurios operacinės sistemos gali nepaisyti šio nustatymo, todėl ne visada gali būti leidžiama jį išjungti."
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Nustačius kaip „Tiesa“, klavišais „Home“ / „End“ valdoma terminalo slinkimo juosta, o klavišais „Shift“ ir „Home“ / „End“ siunčiami VT klavišų kodai. Nustačius kaip „Netiesa“, klavišais „Home“ / „End“ siunčiami VT kodai, o klavišais „Shift“ ir „Home“ / „End“ slenkama."
+		"message": "Nustačius kaip „Tiesa“, klavišais „Home“ / „End“ valdoma terminalo slinkimo juosta, o klavišais „Shift“ ir „Home“ / „Shift“ ir „End“ siunčiama nuotoliniam prieglobos serveriui. Nustačius kaip „Netiesa“, klavišais „Home“ / „End“ siunčiama nuotoliniam prieglobos serveriui, o klavišais „Shift“ ir „Home“ / „Shift“ ir „End“ slenkama."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Klavišų sekos atliekant veiksmus klavišais žemėlapis. Į klavišų sekas įtraukiama nulis ar daugiau modifikavimo klavišų su klavišų kodais. Klavišų kodai gali būti dešimtainiai arba šešioliktainiai skaičiai arba klavišo identifikatorius. Klavišų veiksmai gali būti nurodyti kaip eilutė, siunčiama prieglobos serveriui, arba veiksmo identifikatorius. Jei reikia išsamaus formato paaiškinimo, žr. https://goo.gl/LWRndr.\n\nPavyzdiniai klavišų susiejimai:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Klavišų sekos atliekant veiksmus klavišais žemėlapis. Į klavišų sekas įtraukiama nulis ar daugiau modifikavimo klavišų su klavišų kodais. Klavišų kodai gali būti dešimtainiai arba šešioliktainiai skaičiai arba klavišo identifikatorius. Klavišų veiksmai gali būti nurodyti kaip eilutė, siunčiama prieglobos serveriui, arba veiksmo identifikatorius. Jei reikia išsamaus formato paaiškinimo, žr. https://goo.gl/LWRndr.\n\nPavyzdiniai klavišų susiejimai:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Sveikas, pasauli'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Nustačius kaip „True“, medijos klavišai konvertuojami į atitinkamus funkcijų klavišus. Nustačius kaip „False“, naršyklei leidžiama apdoroti klavišus."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Nustatoma, ar metaduomenų klavišas siunčia nurodymą grįžti."
+		"message": "Siunčiamas ESC priešdėlis, paspaudus klavišą, laikant paspaustą metaduomenų klavišą.\n\nPvz., kai įgalinta, paspaudus metaduomenų klavišą ir klavišą K siunčiama ^[k, kaip paspaudus klavišus „Escape“ ir k. Jei išjungta, siunčiama tik k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Įklijavimo parinktis pelės klavišu arba „Null“, norint aptikti automatiškai.\n\nNorint aptikti automatiškai naudojamas pelės vidurinysis klavišas ne X11 platformose (įskaitant „Chrome“ OS). X11 platformose naudojamas pelės dešinysis klavišas (kadangi naudojant savąją langų tvarkytuvę įklijavimo veiksmas turėtų būti atliekamas viduriniuoju pelės klavišu).\n\n0 == kairysis (pagrindinis) klavišas.\n1 == vidurinysis (pagalbinis) klavišas.\n2 == dešinysis (antrinis) klavišas.\n\nŠi parinktis suaktyvinama neatsižvelgiant į nustatymą „mouse-right-click-paste“.\n\nPastaba: atitinkamai nustatoma naudojant kairiarankiams ir dešiniarankiams pritaikytą pelę."
+		"message": "Įklijavimo parinktis pelės klavišu arba „Null“, norint aptikti automatiškai.\n\nNorint aptikti automatiškai naudojamas pelės vidurinysis klavišas ne X11 platformose (įskaitant „Chrome“ OS). X11 platformose naudojamas pelės dešinysis klavišas (kadangi naudojant savąją langų tvarkytuvę įklijavimo veiksmas turėtų būti atliekamas viduriniuoju pelės klavišu).\n\n0 == kairysis (pagrindinis) klavišas.\n1 == vidurinysis (pagalbinis) klavišas.\n2 == dešinysis (antrinis) klavišas.\n\nŠi parinktis nustatoma neatsižvelgiant į įklijavimo dešiniuoju pelės klavišu nustatymą.\n\nPastaba: atitinkamai nustatoma naudojant kairiarankiams ir dešiniarankiams pritaikytą pelę."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Įklijavimas spustelėjus dešiniuoju pelės klavišu.\n\nŠi parinktis suaktyvinama neatsižvelgiant į nustatymą „mouse-paste-button“.\n\nPastaba: atitinkamai nustatoma naudojant kairiarankiams ir dešiniarankiams pritaikytą pelę."
+		"message": "Įklijavimas spustelėjus dešiniuoju pelės klavišu.\n\nŠi parinktis nustatoma neatsižvelgiant į nustatymą „mouse-paste-button“.\n\nPastaba: atitinkamai nustatoma naudojant kairiarankiams ir dešiniarankiams pritaikytą pelę."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Nustačius kaip „Tiesa“, klavišais „Page Up“ / „Page Down“ valdoma terminalo slinkimo juosta, o klavišais „Shift“ ir „Page Up“ / „Page Down“ siunčiami VT klavišų kodai. Nustačius kaip „Netiesa“, klavišais „Page Up“ / „Page Down“ siunčiami VT kodai, o klavišais „Shift“ ir „Page Up“ / „Page Down“ slenkama."
+		"message": "Nustačius kaip „Tiesa“, klavišais „Page Up“ / „Page Down“ valdoma terminalo slinkimo juosta, o klavišais „Shift“ ir „Page Up“ / „Shift“ ir „Page Down“ siunčiama nuotoliniam prieglobos serveriui. Nustačius kaip „Netiesa“, klavišais „Page Up“ / „Page Down“ siunčiama nuotoliniam prieglobos serveriui, o klavišais „Shift“ ir „Page Up“ / „Shift“ ir „Page Down“ slenkama."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Nustatoma, ar turėtume perduoti „Alt“ ir 1–9 naršyklei.\n\nTai naudinga vykdant „hterm“ naršyklės skirtuke, kad neprarastumėte „Chrome“ „perjungimo į skirtuką“ klaviatūros spartinimo įrankių. Nevykdant skirtuke geriau siųsti šiuos klavišus prieglobos serveriui, kad juos būtų galima naudoti „Vim“ arba „Emacs“.\n\nNustačius kaip „Tiesa“, naršyklė apdoros „Alt“ ir 1–9. Nustačius kaip „Netiesa“, „Alt“ ir 1–9 bus siunčiama į prieglobos serverį. Nustačius kaip „Null“, bus automatiškai aptinkama pagal naršyklės platformą ir lango tipą."
+		"message": "Ar „Alt“ ir 1–9 perduodama naršyklei.\n\nTai naudinga vykdant „hterm“ naršyklės skirtuke, kad neprarastumėte „Chrome“ „perjungimo į skirtuką“ klaviatūros spartinimo įrankių. Nevykdant skirtuke geriau siųsti šiuos klavišus prieglobos serveriui, kad juos būtų galima naudoti „Vim“ arba „Emacs“.\n\nNustačius kaip „Tiesa“, naršyklė apdoros „Alt“ ir 1–9. Nustačius kaip „Netiesa“, „Alt“ ir 1–9 bus siunčiama į prieglobos serverį. Nustačius kaip „Null“, bus automatiškai aptinkama pagal naršyklės platformą ir lango tipą."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Nustatoma, ar turėtume perduoti „Ctrl“ ir 1–9 naršyklei.\n\nTai naudinga vykdant „hterm“ naršyklės skirtuke, kad neprarastumėte „Chrome“ „perjungimo į skirtuką“ klaviatūros spartinimo įrankių. Nevykdant skirtuke geriau siųsti šiuos klavišus prieglobos serveriui, kad juos būtų galima naudoti „Vim“ arba „Emacs“.\n\nNustačius kaip „Tiesa“, naršyklė apdoros „Ctrl“ ir 1–9. Nustačius kaip „Netiesa“, „Ctrl“ ir 1–9 bus siunčiama į prieglobos serverį. Nustačius kaip „Null“, bus automatiškai aptinkama pagal naršyklės platformą ir lango tipą."
+		"message": "Ar „Ctrl“ ir 1–9 perduodama naršyklei.\n\nTai naudinga vykdant „hterm“ naršyklės skirtuke, kad neprarastumėte „Chrome“ „perjungimo į skirtuką“ klaviatūros spartinimo įrankių. Nevykdant skirtuke geriau siųsti šiuos klavišus prieglobos serveriui, kad juos būtų galima naudoti „Vim“ arba „Emacs“.\n\nNustačius kaip „Tiesa“, naršyklė apdoros „Ctrl“ ir 1–9. Nustačius kaip „Netiesa“, „Ctrl“ ir 1–9 bus siunčiama į prieglobos serverį. Nustačius kaip „Null“, bus automatiškai aptinkama pagal naršyklės platformą ir lango tipą."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Nustatoma, ar turėtume perduoti „Meta“ ir 1–9 naršyklei.\n\nTai naudinga vykdant „hterm“ naršyklės skirtuke, kad neprarastumėte „Chrome“ „perjungimo į skirtuką“ klaviatūros spartinimo įrankių. Nevykdant skirtuke geriau siųsti šiuos klavišus prieglobos serveriui, kad juos būtų galima naudoti „Vim“ arba „Emacs“.\n\nNustačius kaip „Tiesa“, naršyklė apdoros „Meta“ ir 1–9. Nustačius kaip „Netiesa“, „Meta“ ir 1–9 bus siunčiama į prieglobos serverį. Nustačius kaip „Null“, bus automatiškai aptinkama pagal naršyklės platformą ir lango tipą."
+		"message": "Ar metaduomenų klavišas ir 1–9 perduodama naršyklei.\n\nTai naudinga vykdant „hterm“ naršyklės skirtuke, kad neprarastumėte „Chrome“ „perjungimo į skirtuką“ klaviatūros spartinimo įrankių. Nevykdant skirtuke geriau siųsti šiuos klavišus prieglobos serveriui, kad juos būtų galima naudoti „Vim“ arba „Emacs“.\n\nNustačius kaip „Tiesa“, naršyklė apdoros metaduomenų klavišą ir 1–9. Nustačius kaip „Netiesa“, metaduomenų klavišas ir 1–9 bus siunčiama į prieglobos serverį. Nustačius kaip „Null“, bus automatiškai aptinkama pagal naršyklės platformą ir lango tipą."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Nustatoma, ar „Meta“ ir V perduodama į prieglobos serverį."
+		"message": "Ar metaduomenų klavišas ir V perduodama į prieglobos serverį."
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "Nustatoma numatoma iš prieglobos serverių gautų duomenų koduotė.\n\nGaliojančios vertės yra „utf-8“ ir „raw“."
+		"message": "Nustatoma numatoma iš prieglobos serverių gautų duomenų koduotė.\nJei koduotės neatitinka, gali būti vaizdinių riktų.\n\nGaliojančios vertės yra „utf-8“ ir „raw“."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Ar slinkti žemyn paspaudus bet kurį klavišą."
@@ -285,7 +306,7 @@
 		"message": "Naudojant alternatyvų ekrano buferį ir suaktyvinus DECCKM (programos žymeklio klavišus), slenkant pelės ratuku atliekami rodyklių klavišų veiksmai.\n\nTai galima laikinai išjungti laikant klavišą „Shift“.\n\nTai dažnai taikoma naudojant pranešimų gaviklius („Less“) arba skaitant neautomatinius puslapius ar naudojant teksto redagavimo priemones („Vi“ / „Nano“) ar „Screen“ / „Tmux“."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Slenkant ratuku įvykusių įvykių „Pixel Delta“ daugiklis. Keičiamas slinkimo puslapiu greitis."
+		"message": "Slenkant ratuku įvykusių įvykių daugiklis, kai matuojama pikseliais.\n\nKeičiama slinkimo puslapiu sparta."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Vertikalios slinkimo juostos režimas."
@@ -294,13 +315,13 @@
 		"message": "Nustatoma į prieglobos serverį siunčiamų duomenų koduotė."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Paspaudus „Shift“ + „Insert“ įklijuojama, jei nustatyta kaip „Tiesa“; jei nustatyta kaip „Netiesa“, siunčiama į prieglobos serverį."
+		"message": "Ar „Shift“ ir „Insert“ naudojama įklijuojant ar siunčiama nuotoliniam prieglobos serveriui."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Numatytoji terminalo koduotė (DOCS).\n\nISO-2022 įgalina simbolių žemėlapio vertimus (pvz., grafinių žemėlapių).\nUTF-8 išjungia jų palaikymą.\n\nJei užrakinta, vykdant negalima keisti koduotės naudojant terminalo kaitos sekas.\n\nTurėtumėte naudoti UTF-8, nebent netinkamai pateikiama naudojant pasenusias programas."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Ar naudoti numatytąjį lango kopijavimo veiksmą."
+		"message": "Ar naudoti numatytąją naršyklės / OS kopijavimo elgseną.\n\nLeidžiama naršyklei / OS tiesiogiai apdoroti kopijavimo įvykį, todėl gali pagerėti suderinamumas su tam tikromis sistemomis (kur kopijavimas visiškai neveikia), bet teksto pasirinkimas tampa nebe toks sudėtingas.\n\nPvz., ilgos eilutės, kurios buvo automatiškai sujungtos, bus nukopijuotos su jose pateiktomis naujomis eilutėmis."
 	},
 	"hterm_pref_user_css": {
 		"message": "Stiliaus failo URL, kurį reikia įtraukti į terminalo dokumentą."
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Reguliarusis reiškinys, skirtas atitikčiai sustabdyti pasirinkimo dešinėje (pabaigoje).\n\nĮprastai tai yra simbolių klasė, skirta konkretiems simboliams atmesti."
+	},
+	"hterm_space_character": {
+		"message": "Tarpas"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Išvaizda (šriftai, spalvos, vaizdai)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Kopijavimas ir įklijavimas"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Koduotė"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Plėtiniai"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Klaviatūra"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Įvairūs"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Slinkimas"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Garsai"
 	},
 	"identity_label": {
 		"message": "Tapatybė"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "Įdėta!"
 	},
+	"new_window_menu_label": {
+		"message": "Naujas langas"
+	},
 	"notify_copy": {
 		"message": "Pasirinkimas nukopijuotas"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "Iš naujo prisijungti (R), pasirinkti kitą ryšį (C) ar išeiti (X)?"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "Nežinoma perdavimo parinktis: $1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "SSH argumentai"
 	},
+	"terminal_clear_menu_label": {
+		"message": "Terminalo valymas"
+	},
 	"terminal_preview_label": {
 		"message": "Peržiūra"
 	},
 	"terminal_profile_label": {
 		"message": "Dabartinis profilis"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Terminalo nustatymas iš naujo"
 	},
 	"tip_1": {
 		"message": "Galite laikyti paspaudę „Ctrl“ („Cmd“, jei naudojate „Mac“ OS) ir spustelėti nuorodas, kad jas atidarytumėte!"
@@ -429,10 +486,13 @@
 		"message": "Galite pakartotinai susieti raktus / sparčiuosius klavišus: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Naudokite „Yubikeys“ ir kitas išmaniąsias korteles SSH tapatybei nustatyti: https://goo.gl/3ZEU1w"
+		"message": "Naudokite „Yubikeys“ ir kitas išmaniąsias korteles SSH tapatybei nustatyti: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Pateikite įterptų vaizdų: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Laikant paspaudus „Ctrl“ („Cmd“, jei naudojate „Mac“ OS) ir spustelėjus dešiniuoju pelės klavišu pateikiamas kontekstinis meniu."
 	},
 	"tip_2": {
 		"message": "Pateikite pranešimus naršyklėje naudodami „hterm-notify“: https://goo.gl/ZNxGdF"

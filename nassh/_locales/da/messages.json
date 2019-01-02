@@ -11,8 +11,14 @@
 	"before_unload": {
 		"message": "Hvis denne fane lukkes, afbrydes denne session."
 	},
+	"cache_pin_prompt": {
+		"message": "Vil du gemme pinkoden for denne session i cachen? (y/N):"
+	},
 	"cancel_button_label": {
 		"message": "Annuller"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Ryd SSH known_hosts"
 	},
 	"cmd_ssh_forget_host_help": {
 		"message": "Denne kommando viser en menu med kendte værter og beskeder, som værten skal glemme."
@@ -51,7 +57,7 @@
 		"message": "Vidste du, at der er en dedikeret side med indstillinger?\nDu behøver ikke længere at ændre \"term_\" direkte.\nTryk på $1 for at åben den, eller klik på:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Vidste du, at der er en dedikeret side med indstillinger?\nDu behøver ikke længere at rode direkte med \"term_\".\n$1"
+		"message": "Vidste du, at der er en dedikeret side med indstillinger?\nDu behøver ikke længere at ændre \"term_\" direkte.\n$1"
 	},
 	"del_keycap": {
 		"message": "[DELETE]"
@@ -64,6 +70,9 @@
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
+	},
+	"faq_menu_label": {
+		"message": "Ofte stillede spørgsmål"
 	},
 	"field_argstr_placeholder": {
 		"message": "ekstra kommandolinjeargumenter"
@@ -89,10 +98,10 @@
 	"field_port_placeholder": {
 		"message": "port"
 	},
-	"field_nassh_options_aria_label": {
+	"field_relay_options_aria_label": {
 		"message": "Indstillinger for SSH-relæserver"
 	},
-	"field_nassh_options_placeholder": {
+	"field_relay_options_placeholder": {
 		"message": "Indstillinger for SSH-relæserver"
 	},
 	"field_terminal_profile_placeholder": {
@@ -110,6 +119,9 @@
 	"get_profile_error": {
 		"message": "FEJL: Profilen $1 kunne ikke indlæses:\n$2"
 	},
+	"hterm_announce_current_screen_header": {
+		"message": "Du er rullet $1 %,"
+	},
 	"hterm_button_allow_always": {
 		"message": "Tillad altid"
 	},
@@ -118,6 +130,12 @@
 	},
 	"hterm_button_block": {
 		"message": "Bloker"
+	},
+	"hterm_button_page_down": {
+		"message": "Page Down"
+	},
+	"hterm_button_page_up": {
+		"message": "Page Up"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "$1 blev ikke indlæst"
@@ -171,7 +189,7 @@
 		"message": "Angiver, om markeringen skal fjernes efter kopiering."
 	},
 	"hterm_pref_close_on_exit": {
-		"message": "Angiver, om vinduet skal lukkes, når kommandoen er udført."
+		"message": "Om vinduet skal lukkes, når kommandoen er udført."
 	},
 	"hterm_pref_color_palette_overrides": {
 		"message": "Tilsidesæt farver i standardpaletten.\n\nDenne kan angives som en matrix eller et objekt. Hvis den angives som et objekt, antages den at være en sparsematrix, hvor hver egenskab er et numerisk indeks i farvepaletten.\n\nVærdierne kan angives som næsten en hvilken som helst css-farveværdi. Det omfatter #RGB, #RRGGBB, rgb(...), rgba(...) og alle farvenavne, der også indgår i standardfilen X11 rgb.txt.\n\nDu kan bruge \"null\" til at angive, at standardværdien ikke skal ændres. Dette er nyttigt, hvis du vil springe over nogle få indekser, når værdien er angivet som en matrix.\n\nDisse angiver f.eks. begge farveindekset 1 som blå:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
@@ -201,19 +219,19 @@
 		"message": "Hvis den angives som sand, opretter terminalklokker i baggrunden en Webunderretning. https://www.w3.org/TR/notifications/\n\nVisning af underretninger kræver brugerens tilladelse. Når denne valgmulighed er angivet som sand, forsøger hterm at anmode brugeren om tilladelse, hvis det er nødvendigt. Browsere viser muligvis ikke denne anmodning om tilladelse, hvis den ikke aktiveres af en brugerhandling.\n\nChrome-udvidelser med tilladelsen \"underretninger\" må vise underretninger."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Angiv, om tvetydige østasiatiske tegn skal have dobbelt kolonnebredde."
+		"message": "Om tvetydige østasiatiske tegn skal have dobbelt kolonnebredde."
 	},
 	"hterm_pref_enable_8_bit_control": {
 		"message": "Angiv til sand for at aktivere kontroltegn på otte bit, og angiv til falsk for at se bort fra dem.\n\nUanset denne indstilling respekterer vi versioner af disse kontroltegn med to byte."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "Angiv som sand, hvis vi skal respektere blinkattributten. Angiv som falsk for at ignorere den."
+		"message": "Hvis den er angivet som Sand, skal du respektere blinkattributten. Angiv som Falsk for at ignorere den."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Angiv som sand, hvis vi skal bruge fed skrifttype til tekst med attributten fed/klar. Angiv som falsk, hvis der skal bruges en skrifttype med normal vægt. Angiv som nul, hvis der skal bruges automatisk registrering."
+		"message": "Hvis den er angivet som Sand, skal du bruge fed skrifttype til tekst med attributten fed/klar. Angiv som Falsk, hvis der skal bruges en skrifttype med normal vægt. Angiv som Nul, hvis der skal bruges automatisk registrering."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "Angiv som sand, hvis vi skal bruge klare farver (8-15 i en palet med 16 farver) til tekst med attributten fed skrift. Angiv som falsk, hvis ikke vi skal bruge klare farver."
+		"message": "Hvis den er angivet som Sand, skal du bruge klare farver (8-15 i en palet med 16 farver) Angiv som Falsk, hvis det ikke er tilfældet."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Angiver, om en meddelelse skal vises i terminalen, når hosten skriver til udklipsholderen."
@@ -239,41 +257,44 @@
 	"hterm_pref_foreground_color": {
 		"message": "Forgrundsfarven for tekst uden nogen andre farveattributter."
 	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Om musemarkøren skal skjules automatisk under indtastning. Registrer automatisk som standard, om platformen/operativsystemet skal håndtere dette.\n\nBemærk! Nogle operativsystemer kan tilsidesætte denne indstilling, og derfor vil du muligvis ikke altid kunne deaktivere den."
+	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Hvis den angives som sand, bruges Home/End til at styre terminalens rullepanel, og Shift + Home/End bruges til at sende VT-tastekoderne. Hvis den angives som falsk, bruges Home/End til at sende VT-koder, og Shift + Home/End bruges til at rulle."
+		"message": "Hvis den er angivet som Sand, styrer Home/End terminalens rullepanel, og Shift+Home/Shift+End sendes til den eksterne host. Hvis den er angivet som Falsk, sendes Home/End til den eksterne host, og Shift+Home/Shift+End ruller."
 	},
 	"hterm_pref_keybindings": {
-		"message": "En oversigt over tasterækkefølgen for tastehandlinger. Tasterækkefølgen omfatter nul eller flere ændringstaster efterfulgt af en tastekode. Tastekoder kan være decimaltal eller hexadecimaltal eller en tastidentifikator. Tastehandlinger kan specificeres som en streng, der skal sendes til hosten, eller en handlingsidentifikator. Se en fuld forklaring af formatet på https://goo.gl/LWRndr.\n\nEksempel på tastbindinger:\n{\n  \"Ctrl + Alt + K\": \"clearTerminal\",\n  \"Ctrl + Shift + L\": \"PASS\",\n  \"Ctrl + H\": \"'HELLO\\n'\"\n}"
+		"message": "En oversigt over tasterækkefølgen for tastehandlinger. Tasterækkefølgen omfatter nul eller flere ændringstaster efterfulgt af en tastekode. Tastekoder kan være decimaltal eller hexadecimaltal eller en tastidentifikator. Tastehandlinger kan specificeres som en streng, der skal sendes til hosten, eller en handlingsidentifikator. Se en komplet forklaring af formatet på https://goo.gl/LWRndr.\n\nEksempler på tastbindinger:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Hvis angivet til sand, skal medietasterne konverteres til deres tilsvarende F-taster. Hvis angivet til falsk, skal browseren styre tasterne."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Angiv, om metatasterne skal sende et indledende escape-tegn."
+		"message": "Send et ESC-præfiks, når du trykker på en tast, mens du holder metatasten nede.\n\nNår dette er aktiveret, og du f.eks. trykker på Meta-K, sendes ^[k, som om du har tastet Escape og derefter k. Når dette er deaktiveret, sendes kun k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Musens knap til at indsætte. Angiv nul for automatisk registrering.\n\nVed automatisk registrering bruger vi den midterste museknap til platforme, der ikke er X11, (bl.a. Chrome OS). På X11 bruger vi den højre museknap (da den indbyggede vinduesadministrator burde indsætte via den midterste museknap).\n\n0 == venstre (primær) knap.\n1 == midterste (ekstra) knap.\n2 == højre (sekundær) knap.\n\nDenne valgmulighed er aktiv uafhængigt af indstillingen af \"mus-højreklik-indsæt\".\n\nBemærk! Dette sikrer, at musen fungerer korrekt for henholdsvis højre- og venstrehåndede."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Indsæt med klik på højre museknap.\n\nDenne valgmulighed er aktiv uafhængigt af indstillingen af \"mus-indsæt-knap\".\n\nBemærk! Dette sikrer, at musen fungerer korrekt for henholdsvis højre- og venstrehåndede."
+		"message": "Indsæt med klik på højre museknap.\n\nDenne valgmulighed er uafhængig af indstillingen af \"mus-indsæt-knap\".\n\nBemærk! Dette sikrer, at musen fungerer korrekt for henholdsvis højre- og venstrehåndede."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Hvis den angives som sand, bruges Page Up/Page Down til at styre terminalens rullepanel, og Shift + Page Up/Page Down bruges til at sende VT-tastekoderne. Hvis den angives som falsk, bruges Page Up/Page Down til at sende VT-koderne, og Shift + Page Up/Page Down bruges til at rulle."
+		"message": "Hvis den er angivet som Sand, styrer Page Up/Page Down terminalens rullepanel, og Shift+Page Up/Shift+Page Down sendes til den eksterne host. Hvis den er angivet som Falsk, sendes Page Up/Page Down til den eksterne host, og Shift+Page Up/Shift+Page Down ruller."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Angiv, om vi skal overføre Alt + 1-9 til browseren.\n\nDette er praktisk, når hterm køres i en browserfane, så du ikke mister Chromes \"skift til fane\"-tastaturacceleratorer. Når den ikke køres i en fane, er det bedre at sende disse taster til hosten, så de kan bruges i vim eller emacs.\n\nHvis den angives som sand, håndteres Alt + 1-9 af browseren. Hvis den angives som falsk, sendes Alt + 1-9 til hosten. Hvis den angives som nul, baseres automatisk registrering på browserplatformen og vinduestypen."
+		"message": "Om Alt+1-9 skal overføres til browseren.\n\nDette er praktisk, når hterm køres i en browserfane, så du ikke mister Chromes \"skift til fane\"-tastaturacceleratorer. Når den ikke køres i en fane, er det bedre at sende disse taster til hosten, så de kan bruges i vim eller emacs.\n\nHvis den er angivet som Sand, håndteres Alt+1-9 af browseren. Hvis den er angivet som Falsk, sendes Alt+1-9 til hosten. Hvis den er angivet som Nul, baseres automatisk registrering på browserplatformen og vinduestypen."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Angiv, om vi skal overføre Ctrl + 1-9 til browseren.\n\nDette er praktisk, når hterm køres i en browserfane, så du ikke mister Chromes \"skift til fane\"-tastaturacceleratorer. Når den ikke kører i en fane, er det bedre at sende disse taster til hosten, så de kan bruges i vim eller emacs.\n\nHvis den angives som sand, håndteres Ctrl + 1-9 af browseren. Hvis den angives som falsk, sendes Ctrl + 1-9 til hosten. Hvis den angives som nul, baseres automatisk registrering på browserplatformen og vinduestypen."
+		"message": "Om Ctrl+1-9 skal overføres til browseren.\n\nDette er praktisk, når hterm køres i en browserfane, så du ikke mister Chromes \"skift til fane\"-tastaturacceleratorer. Når den ikke kører i en fane, er det bedre at sende disse taster til hosten, så de kan bruges i vim eller emacs.\n\nHvis den er angivet som Sand, håndteres Ctrl+1-9 af browseren. Hvis den er angivet som Falsk, sendes Ctrl+1-9 til hosten. Hvis den er angivet som Nul, baseres automatisk registrering på browserplatformen og vinduestypen."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Angiv, om vi skal overføre Meta + 1-9 til browseren.\n\nDette er praktisk, når hterm køres i en browserfane, så du ikke mister Chromes \"skift til fane\"-tastaturacceleratorer. Når den ikke kører i en fane, er det bedre at sende disse taster til hosten, så de kan bruges i vim eller emacs.\n\nHvis den angives som sand, håndteres Meta + 1-9 af browseren. Hvis den angives som falsk, sendes Meta + 1-9 til hosten. Hvis den angives som nul, baseres automatisk registrering på browserplatformen og vinduestypen."
+		"message": "Angiv, om vi skal overføre Meta + 1-9 til browseren.\n\nDette er praktisk, når hterm køres i en browserfane, så du ikke mister Chromes \"skift til fane\"-tastaturacceleratorer. Når den ikke kører i en fane, er det bedre at sende disse taster til hosten, så de kan bruges i vim eller emacs.\n\nHvis den er angivet som Sand, håndteres Meta+1-9 af browseren. Hvis den er angivet som Falsk, sendes Meta+1-9 til hosten. Hvis den er angivet som Nul, baseres automatisk registrering på browserplatformen og vinduestypen."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Angiv, om meta + V skal overføres til hosten."
+		"message": "Angiv, om meta+V skal overføres til hosten."
 	},
 	"hterm_pref_receive_encoding": {
-		"message": "Angiv den forventede kodning for data modtaget fra hosten.\n\nDe gyldige værdier er \"utf-8\" og \"raw\"."
+		"message": "Angiv den forventede kodning for data modtaget fra hosten.\nHvis koderne ikke matcher, kan der sandsynligvis noteres visuelle fejl.\n\nDe gyldige værdier er \"utf-8\" og \"raw\"."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Angiver, om der skal rulles ned til bunden med ethvert tastetryk."
@@ -285,7 +306,7 @@
 		"message": "Når den alternative skærmbuffer bruges, og DECCKM (programmarkørtasten) er aktiv, efterligner rulning med musehjulet piletasterne.\n\nDet kan deaktiveres midlertidigt ved at holde Shift-tasten nede.\n\nDette forekommer ofte ved brug af værktøjer til sideinddeling (less), ved læsning af manualsider eller tekstredigeringsværktøjer (vi/nano) eller ved brug af Screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Multiplikatoren for pixeldelta ved hjulhandlinger, der skyldes rulning med hjulet. Ændrer, hvor hurtigt der rulles på siden."
+		"message": "Multiplikatoren for rulning med hjulet, når det måles i pixels.\n\nÆndrer, hvor hurtigt der rulles på siden."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Tilstanden for lodret rullepanel."
@@ -294,13 +315,13 @@
 		"message": "Angiv kodningen for data, der sendes til hosten."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Shift + Insert bruges til at indsætte, hvis den angives som sand, og til at sende til hosten, hvis den angives som falsk."
+		"message": "Om Shift-Insert bruges til at indsætte eller sendes til den eksterne host."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Standardterminalkodning (DOCS).\n\nISO-2022 giver mulighed for oversættelser af tegnoversigt (f.eks. grafikoversigter).\nUTF-8 deaktiverer understøttelse af disse.\n\nDen låste variant betyder, at kodningen ikke kan ændres på kørselstidspunktet via terminalens escape-sekvenser.\n\nDu bør holde dig til UTF-8, medmindre du bemærker gengivelsesfejl i forældede apps."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Angiver, om vinduets standardadfærd for kopiering skal bruges."
+		"message": "Om browserens/operativsystemets standardadfærd for kopiering skal bruges.\n\nTillad, at browseren/operativsystemet håndterer kopieringshændelsen direkte, hvilket kan forbedre kompatibiliteten i forhold til visse systemer (hvor kopiering ikke fungerer overhovedet), men gør tekstmarkeringen mindre pålidelig.\n\nLange linjer, der automatisk blev linjeindkapslet, bliver f.eks. kopieret med linjeskift integreret."
 	},
 	"hterm_pref_user_css": {
 		"message": "Webadressen for brugers typografiark skal inkluderes i terminaldokument."
@@ -316,6 +337,33 @@
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Regulært udtryk, der skal stoppe matching til højre for (slutningen af) en markering.\n\nDette er normalt en tegnklasse til at afvise specifikke tegn."
+	},
+	"hterm_space_character": {
+		"message": "Mellemrum"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Udseende (skrifttyper, farver, billeder)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Kopiér og indsæt"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Tegnkodning"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Udvidelser"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Tastatur"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Diverse"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Rulning"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Lyde"
 	},
 	"identity_label": {
 		"message": "Identitet"
@@ -356,6 +404,9 @@
 	"mounted_message": {
 		"message": "Tilsluttet"
 	},
+	"new_window_menu_label": {
+		"message": "Nyt vindue"
+	},
 	"notify_copy": {
 		"message": "Markeringen blev kopieret"
 	},
@@ -392,7 +443,7 @@
 	"reconnect_message": {
 		"message": "Vil du genoprette forbindelsen (R), vælge en anden forbindelse (C) eller afslutte (X)?"
 	},
-	"nassh_options_error": {
+	"relay_options_error": {
 		"message": "Ukendt relæmulighed: $1"
 	},
 	"relay_retry": {
@@ -413,11 +464,17 @@
 	"ssh_argstr_label": {
 		"message": "SSH-argumenter"
 	},
+	"terminal_clear_menu_label": {
+		"message": "Terminalen er ryddet"
+	},
 	"terminal_preview_label": {
 		"message": "Forhåndsvisning"
 	},
 	"terminal_profile_label": {
 		"message": "Nuværende profil"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Terminalen er nulstillet"
 	},
 	"tip_1": {
 		"message": "Du kan holde Ctrl (Cmd på macOS) nede, mens du klikker på links, for at åben dem."
@@ -429,10 +486,13 @@
 		"message": "Du kan ændre tilknytningen mellem taster og genveje: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Brug Yubikeys og andre smartkort til ssh auth: https://goo.gl/3ZEU1w"
+		"message": "Brug Yubikeys og andre smartkort til ssh-godkendelse: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Vis billeder indlejret: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Hvis du holder Ctrl (Cmd i macOS) nede, mens du højreklikker, vises der en genvejsmenu."
 	},
 	"tip_2": {
 		"message": "Vis underretninger i browseren ved hjælp af hterm-notify: https://goo.gl/ZNxGdF"
