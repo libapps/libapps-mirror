@@ -31,11 +31,12 @@ lib.codec.codeUnitArrayToString = function(array) {
  * Create an array of code units from a UTF-16 encoded string.
  *
  * @param {string} str The string to extract code units from.
+ * @param {type=} type The type of the return value.
  * @return {Array<number>} The array of code units.
  */
-lib.codec.stringToCodeUnitArray = function(str) {
+lib.codec.stringToCodeUnitArray = function(str, type=Array) {
   // Indexing string directly is faster than Array.map.
-  const ret = new Array(str.length);
+  const ret = new type(str.length);
   for (let i = 0; i < str.length; ++i) {
     ret[i] = str.charCodeAt(i);
   }
