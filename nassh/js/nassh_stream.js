@@ -113,12 +113,7 @@ nassh.Stream.Random.prototype.asyncRead = function(size, onRead) {
   if (!this.open)
     throw nassh.Stream.ERR_STREAM_CLOSED;
 
-  var bytes = new Uint8Array(size);
+  const bytes = new Uint8Array(size);
   crypto.getRandomValues(bytes);
-  Array.prototype.map.apply(
-      bytes, [function(el) { return String.fromCharCode(el); }]);
-
-  var b64bytes = btoa(Array.prototype.join.apply(bytes, ['']));
-
-  setTimeout(function() { onRead(b64bytes); }, 0);
+  setTimeout(() => onRead(bytes.buffer), 0);
 };
