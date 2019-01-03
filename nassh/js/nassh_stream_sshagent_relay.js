@@ -29,16 +29,25 @@ nassh.Stream.SSHAgentRelay.prototype.asyncOpen_ = function(args, onComplete) {
   this.authAgentAppID_ = args.authAgentAppID;
   this.port_ = chrome.runtime.connect(this.authAgentAppID_);
 
+  // The other extension (e.g. gnubby) sent us a raw ssh-agent message.
+  // Forward it along to the ssh process.
   var normalOnMessage = (msg) => {
     if (msg.data) {
-      // Prepare header.
-      var size = msg.data.length;
-      var hdr = lib.array.uint32ToArrayBigEndian(size);
+      // The ssh-agent protocol requires a 4-byte length header, so add that
+      // to the buffer before sending to the ssh process.
+      const size = msg.data.length;
+      const buffer = new ArrayBuffer(size + 4);
+      const dv = new DataView(buffer);
+
+      // The 4-byte length.
+      dv.setUint32(0, size);
+
       // Append body.
-      var bData = hdr.concat(msg.data);
+      const body = new Uint8Array(buffer, 4);
+      body.set(msg.data);
 
       // Report to client.
-      this.onDataAvailable(nassh.Stream.binaryToAscii(bData));
+      this.onDataAvailable(buffer);
 
       // Re-examine write buffer; there might be more data in it.
       setTimeout(this.trySendPacket_.bind(this), 0);
