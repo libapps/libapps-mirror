@@ -404,7 +404,6 @@ nassh.Stream.GoogleRelayWS.prototype.onSocketData_ = function(e) {
   if (e.target !== this.socket_)
     return;
 
-  var u8 = new Uint8Array(e.data);
   const dv = new DataView(e.data);
   const ack = dv.getUint32(0);
 
@@ -427,13 +426,15 @@ nassh.Stream.GoogleRelayWS.prototype.onSocketData_ = function(e) {
   this.sentCount_ -= delta;
   this.writeCount_ += delta;
 
-  // TODO: use Uint8Array throughout rather than copy.
-  var data = '';
-  for (var i = 4; i < u8.length; ++i)
-    data = data + String.fromCharCode(u8[i]);
-  if (data.length)
-    this.onDataAvailable(btoa(data));
-  this.readCount_ += (u8.length - 4);
+  // This creates a copy of the ArrayBuffer, but there doesn't seem to be an
+  // alternative -- PPAPI doesn't accept views like Uint8Array.  And if it did,
+  // it would probably still serialize the entire underlying ArrayBuffer (which
+  // in this case wouldn't be a big deal as it's only 4 extra bytes).
+  const data = e.data.slice(4);
+  if (data.byteLength) {
+    this.onDataAvailable(data);
+    this.readCount_ += data.byteLength;
+  }
 
   // isRead == false since for WebSocket we don't need to send another read
   // request, we will get new data as soon as it comes.
