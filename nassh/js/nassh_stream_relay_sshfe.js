@@ -331,9 +331,13 @@ nassh.Stream.RelaySshfeWS.prototype.onSocketData_ = function(e) {
     return;
   }
 
-  const u8 = new Uint8Array(e.data).subarray(4);
-  this.readCount_ = (this.readCount_ + u8.length) & 0xffffff;
-  this.onDataAvailable(nassh.Stream.binaryToAscii(u8));
+  // This creates a copy of the ArrayBuffer, but there doesn't seem to be an
+  // alternative -- PPAPI doesn't accept views like Uint8Array.  And if it did,
+  // it would probably still serialize the entire underlying ArrayBuffer (which
+  // in this case wouldn't be a big deal as it's only 4 extra bytes).
+  const data = e.data.slice(4);
+  this.readCount_ = (this.readCount_ + data.byteLength) & 0xffffff;
+  this.onDataAvailable(data);
 };
 
 /**
