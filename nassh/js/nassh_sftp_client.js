@@ -572,6 +572,10 @@ nassh.sftp.Client.prototype.readChunks = function(handle, callback,
       return;
     }
 
+    // Update our counters as funcs below rely on them.
+    offset += chunk.length;
+    bytesRead += chunk.length;
+
     // Issue a new read request in the background.  If we end up getting
     // canceled before it returns, that's OK.  We assume the best and get
     // better performance most of the time.
@@ -580,9 +584,7 @@ nassh.sftp.Client.prototype.readChunks = function(handle, callback,
     }
     let ret = doRead();
 
-    // Update our counters and let the caller process this chunk.
-    offset += chunk.length;
-    bytesRead += chunk.length;
+    // Let the caller process this chunk.
     if (callback(chunk) === false) {
       canceled = true;
       return Promise.reject();
