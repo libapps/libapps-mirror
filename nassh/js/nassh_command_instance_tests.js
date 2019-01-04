@@ -162,6 +162,14 @@ nassh.CommandInstance.Tests.addTest('parseDestination', function(result, cx) {
 nassh.CommandInstance.Tests.addTest('tokenizeOptions', function(result, cx) {
   let rv;
 
+  // Check the empty set.  This should not fail.
+  rv = nassh.CommandInstance.tokenizeOptions();
+  result.assertEQ('object', typeof rv);
+  rv = nassh.CommandInstance.tokenizeOptions('');
+  result.assertEQ('object', typeof rv);
+  rv = nassh.CommandInstance.tokenizeOptions(' ');
+  result.assertEQ('object', typeof rv);
+
   // Check the meaning of the options.
   rv = nassh.CommandInstance.tokenizeOptions(
       // Check plain options.
@@ -175,6 +183,12 @@ nassh.CommandInstance.Tests.addTest('tokenizeOptions', function(result, cx) {
   result.assertEQ(true, rv['--report-ack-latency']);
   result.assertEQ('google', rv['--config']);
   result.assertEQ(false, rv['--use-xhr']);
+
+  // Check for bad options.
+  try {
+    nassh.CommandInstance.tokenizeOptions('blah');
+    result.fail();
+  } catch (e) {}
 
   result.pass();
 });

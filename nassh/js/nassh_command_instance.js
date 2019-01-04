@@ -931,13 +931,20 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
 /**
  * Turn the nassh option string into an object.
  *
- * @param {string} optionString The set of --long options to parse.
+ * @param {string=} optionString The set of --long options to parse.
  * @return {Object} A map of --option to its value.
  */
-nassh.CommandInstance.tokenizeOptions = function(optionString) {
+nassh.CommandInstance.tokenizeOptions = function(optionString='') {
   let rv = {};
 
-  const optionList = optionString.trim().split(/\s+/g);
+  // If it's empty, return right away else the regex split below will create
+  // [''] which causes the parser to fail.
+  optionString = optionString.trim();
+  if (!optionString) {
+    return rv;
+  }
+
+  const optionList = optionString.split(/\s+/g);
   for (let i = 0; i < optionList.length; ++i) {
     // Make sure it's a long option first.
     const option = optionList[i];
