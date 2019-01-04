@@ -490,7 +490,7 @@ nassh.sftp.fsp.copyFile = function(sourcePath, targetPath, size, client) {
       for (var i = 0; i < size; i += chunkSize) {
         var offset = i;
         var readWritePromise = client.readChunk(sourceHandle, offset,
-                                                chunkSize);
+                                                chunkSize)
           .then(data => client.writeChunk(targetHandle, offset, data));
 
         readWritePromises.push(readWritePromise);
