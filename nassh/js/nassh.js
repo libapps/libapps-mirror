@@ -11,7 +11,7 @@ var nassh = {};
 /**
  * True if nassh is running as a v2 app.
  */
-nassh.v2 = !!chrome.app.window;
+nassh.v2 = (window.chrome && chrome.app && chrome.app.window);
 
 /**
  * Non-null if nassh is running as an extension.
