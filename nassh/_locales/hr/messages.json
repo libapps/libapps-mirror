@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Isključi SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Dostupno je ažuriranje. Zatvorite sve prozore."
-	},
 	"welcome_changelog": {
 		"message": "Zapisnik izmjena/napomene o izdanju: $1"
 	},

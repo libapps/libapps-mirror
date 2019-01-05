@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Unmount SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "अपडेट उपलब्ध आहे. कृपया सर्व विंडो बंद करा."
-	},
 	"welcome_changelog": {
 		"message": "ChangeLog/माहितीपत्रक: $1"
 	},

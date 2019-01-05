@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Nyahlekap SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Kemas kini tersedia. Sila tutup semua tetingkap."
-	},
 	"welcome_changelog": {
 		"message": "ChangeLog/nota keluaran: $1"
 	},

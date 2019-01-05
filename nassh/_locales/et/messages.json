@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Eemalda SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Värskendus on saadaval. Sulgege kõik aknad."
-	},
 	"welcome_changelog": {
 		"message": "Muudatuste logi / väljalaskemärkmed: $1"
 	},

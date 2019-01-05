@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "SFTP 마운트 해제"
 	},
-	"update_available_tooltip": {
-		"message": "업데이트가 있습니다. 모든 창을 닫아 주세요."
-	},
 	"welcome_changelog": {
 		"message": "변경 기록/출시 노트: $1"
 	},

@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Lepaskan SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Update tersedia. Harap tutup semua jendela."
-	},
 	"welcome_changelog": {
 		"message": "Log perubahan/catatan rilis: $1"
 	},

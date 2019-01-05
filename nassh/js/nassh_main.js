@@ -9,16 +9,6 @@ lib.rtdep('lib.f', 'hterm');
 // CSP means that we can't kick off the initialization from the html file,
 // so we do it like this instead.
 window.onload = function() {
-  var app;
-
-  if (!nassh.v2) {
-    var updateNotification = document.querySelector('#update-notification');
-    updateNotification.title = nassh.msg('UPDATE_AVAILABLE_TOOLTIP');
-    updateNotification.addEventListener('click', function() {
-        updateNotification.style.display = 'none';
-      });
-  }
-
   var execNaSSH = function() {
     var profileName = lib.f.parseQuery(document.location.search)['profile'];
 
@@ -74,35 +64,6 @@ window.onload = function() {
         [lib.f.getURL('/html/nassh_preferences_editor.html')]));
   };
 
-  if (!nassh.v2) {
-    var onUpdateAvailable = function() {
-      updateNotification.style.display = '';
-    };
-
-    window.onunload = function() {
-      if (app)
-        app.onUpdateAvailable.removeListener(onUpdateAvailable);
-    };
-  }
-
-  chrome.runtime.getBackgroundPage(function(bg) {
-    if (!bg)
-      return;
-
-    app = bg.app;
-
-    // Exported for console debugging.
-    window.app_ = app;
-
-    // If the background page hasn't finished initializing yet (i.e. bg.app
-    // is undefined), just skip the update check.
-    if (!nassh.v2 && app) {
-      app.onUpdateAvailable.addListener(onUpdateAvailable);
-      if (app.updateAvailable)
-        onUpdateAvailable();
-    }
-
-    nassh.disableTabDiscarding();
-    lib.init(execNaSSH, console.log.bind(console));
-  });
+  nassh.disableTabDiscarding();
+  lib.init(execNaSSH, console.log.bind(console));
 };

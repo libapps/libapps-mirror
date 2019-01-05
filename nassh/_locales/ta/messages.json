@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "SFTPஐ அகற்று"
 	},
-	"update_available_tooltip": {
-		"message": "புதுப்பிப்பு உள்ளது. எல்லாச் சாளரங்களையும் மூடவும்."
-	},
 	"welcome_changelog": {
 		"message": "ChangeLog/வெளியீட்டுக் குறிப்புகள்: $1"
 	},

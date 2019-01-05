@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "‏בטל את הטעינה של SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "יש עדכון זמין. עליך לסגור את כל החלונות."
-	},
 	"welcome_changelog": {
 		"message": "‏ChangeLog/נתוני גירסה: $1"
 	},

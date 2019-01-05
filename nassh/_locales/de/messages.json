@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "SFTP-Bereitstellung beenden"
 	},
-	"update_available_tooltip": {
-		"message": "Ein Update ist verfügbar. Bitte schließen Sie alle Fenster."
-	},
 	"welcome_changelog": {
 		"message": "Änderungsprotokoll/Versionshinweise: $1"
 	},

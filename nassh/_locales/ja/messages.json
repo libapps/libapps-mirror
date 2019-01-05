@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "SFTP のマウントを解除"
 	},
-	"update_available_tooltip": {
-		"message": "アップデートを利用できます。すべてのウィンドウを閉じてください。"
-	},
 	"welcome_changelog": {
 		"message": "変更ログ、リリースノート: $1"
 	},

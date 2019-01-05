@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "SFTP Bağlantısını Kes"
 	},
-	"update_available_tooltip": {
-		"message": "Bir güncelleme var. Lütfen tüm pencereleri kapatın."
-	},
 	"welcome_changelog": {
 		"message": "Değişiklik Günlüğü/sürüm notları: $1"
 	},

@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Désinstaller SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Une mise à jour est disponible. Veuillez fermer toutes les fenêtres."
-	},
 	"welcome_changelog": {
 		"message": "Journal des modifications/Notes de version : $1"
 	},

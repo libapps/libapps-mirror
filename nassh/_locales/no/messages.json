@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Koble fra SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "En oppdatering er tilgjengelig. Lukk alle vinduer."
-	},
 	"welcome_changelog": {
 		"message": "Endringslogg/versjonsnotater: $1"
 	},

@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Izpetje SFTP-ja"
 	},
-	"update_available_tooltip": {
-		"message": "Na voljo je posodobitev. Zaprite vsa okna."
-	},
 	"welcome_changelog": {
 		"message": "Dnevnik sprememb/opombe ob izdaji: $1"
 	},

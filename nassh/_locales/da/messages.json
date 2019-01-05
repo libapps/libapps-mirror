@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Fjern tilslutning til SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Der er en tilgængelig opdatering. Luk alle vinduer."
-	},
 	"welcome_changelog": {
 		"message": "ChangeLog/produktbemærkninger: $1"
 	},

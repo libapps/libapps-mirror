@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Odpojiť protokol SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "K dispozícii je aktualizácia. Zavrite všetky okná."
-	},
 	"welcome_changelog": {
 		"message": "Denník zmien / poznámky k vydaniu: $1"
 	},

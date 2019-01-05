@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Ondoa SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Toleo jipya linapatikana. Tafadhali funga madirisha yote."
-	},
 	"welcome_changelog": {
 		"message": "Madokezo ya toleo au ChangeLog: $1"
 	},

@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Neiekļaut SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Ir pieejams atjauninājums. Lūdzu, aizveriet visus logus."
-	},
 	"welcome_changelog": {
 		"message": "ChangeLog/piezīmes par izdevumu: $1"
 	},

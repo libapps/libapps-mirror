@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Unmount SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "ಅಪ್‌ಡೇಟ್‌ ಲಭ್ಯವಿದೆ. ಎಲ್ಲಾ ವಿಂಡೋಗಳನ್ನು ಮುಚ್ಚಿ."
-	},
 	"welcome_changelog": {
 		"message": "ಬದಲಾವಣೆಯಲಾಗ್/ಬಿಡುಗಡೆಯ ಟಿಪ್ಪಣಿಗಳು: $1"
 	},

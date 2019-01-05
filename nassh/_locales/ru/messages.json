@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Отключить SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Доступно обновление. Закройте все окна."
-	},
 	"welcome_changelog": {
 		"message": "Примечания к выпуску ChangeLog: $1."
 	},

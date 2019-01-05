@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Прекратяване на връзката през SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Налице е актуализация. Моля, затворете всички прозорци."
-	},
 	"welcome_changelog": {
 		"message": "ChangeLog/бележки по версията: $1"
 	},

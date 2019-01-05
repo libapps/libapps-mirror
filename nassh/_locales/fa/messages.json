@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "‏جدا کردن SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "به‌روزرسانی‌ در دسترس است.  لطفاً همه پنجره‌ها را ببندید."
-	},
 	"welcome_changelog": {
 		"message": "گزارش تغییرات/یادداشت‌های انتشار: $1"
 	},

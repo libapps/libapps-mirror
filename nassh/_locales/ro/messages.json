@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Demontează SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Este disponibilă o actualizare. Închide toate ferestrele."
-	},
 	"welcome_changelog": {
 		"message": "Jurnal de modificări/Note despre versiune: $1"
 	},

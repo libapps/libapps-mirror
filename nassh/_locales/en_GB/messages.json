@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Unmount SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "An update is available. Please close all windows."
-	},
 	"welcome_changelog": {
 		"message": "ChangeLog/release notes: $1"
 	},

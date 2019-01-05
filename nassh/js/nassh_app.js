@@ -14,9 +14,6 @@ nassh.App = function(manifest) {
   this.updateAvailable = false;
 
   this.onInit = new lib.Event();
-  this.onUpdateAvailable = new lib.Event(this.onUpdateAvailable_.bind(this));
-
-  chrome.runtime.onUpdateAvailable.addListener(this.onUpdateAvailable);
 
   this.prefs_ = new nassh.PreferenceManager();
   this.omniMatches_ = [];
@@ -238,28 +235,6 @@ nassh.App.prototype.onLaunched = function(e) {
                      'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
                      `minimizable=yes,width=${width},height=${height}`);
   }
-};
-
-nassh.App.prototype.onUpdateAvailable_ = function(e) {
-  this.updateAvailable = true;
-
-  var onQuery = function(rv) {
-    if (!rv.length) {
-      console.log('Reloading for update.');
-      chrome.runtime.reload();
-    } else {
-      console.log('Not reloading for update, ' + rv.length +
-                  ' windows still open.');
-    }
-  };
-
-  var checkTabs = function() {
-    chrome.tabs.query({url: chrome.runtime.getURL('html/nassh.html')},
-                      onQuery);
-  };
-
-  chrome.tabs.onRemoved.addListener(checkTabs);
-  checkTabs();
 };
 
 /**

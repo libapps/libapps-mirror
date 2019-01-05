@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "SFTP leválasztása"
 	},
-	"update_available_tooltip": {
-		"message": "Frissítés áll rendelkezésre. Zárja be az összes ablakot."
-	},
 	"welcome_changelog": {
 		"message": "Módosításnapló/kibocsátási megjegyzések: $1"
 	},

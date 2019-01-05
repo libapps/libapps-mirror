@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Poista SFTP käytöstä"
 	},
-	"update_available_tooltip": {
-		"message": "Päivitys on saatavilla. Sulje kaikki ikkunat."
-	},
 	"welcome_changelog": {
 		"message": "ChangeLog/julkaisutiedot: $1"
 	},

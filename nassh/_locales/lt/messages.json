@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Išimti SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Pasiekiamas naujinys. Uždarykite visus langus."
-	},
 	"welcome_changelog": {
 		"message": "Pakeitimų žurnalas / laidos informacija: $1"
 	},

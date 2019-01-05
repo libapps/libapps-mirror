@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Ngắt kết nối SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Đã có bản cập nhật. Vui lòng đóng tất cả cửa sổ."
-	},
 	"welcome_changelog": {
 		"message": "ChangeLog/ghi chú phát hành: $1"
 	},

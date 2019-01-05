@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Desactiva l'SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Hi ha una actualització disponible. Tanca totes les finestres."
-	},
 	"welcome_changelog": {
 		"message": "Registre de canvis i notes de la versió: $1"
 	},

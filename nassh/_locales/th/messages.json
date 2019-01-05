@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "ยกเลิกการต่อเชื่อม SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "มีอัปเดตให้ใช้งาน โปรดปิดหน้าต่างทั้งหมด"
-	},
 	"welcome_changelog": {
 		"message": "บันทึกการเปลี่ยนแปลง/บันทึกประจำรุ่น: $1"
 	},

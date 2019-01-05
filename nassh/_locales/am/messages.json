@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "SFTPን ንቀል"
 	},
-	"update_available_tooltip": {
-		"message": "አንድ ዝማኔ አለ። እባክዎ ሁሉንም መስኮቶች ይዝጉ።"
-	},
 	"welcome_changelog": {
 		"message": "የለውጥ ምዝግብ ማስታወሻ/ልቀት ማስታወሻዎች፦ $1"
 	},

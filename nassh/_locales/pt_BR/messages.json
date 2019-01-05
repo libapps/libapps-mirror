@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Desativar SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Uma atualização está disponível. Feche todas as janelas."
-	},
 	"welcome_changelog": {
 		"message": "ChangeLog/notas da versão: $1"
 	},

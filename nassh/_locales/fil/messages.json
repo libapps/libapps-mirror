@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "I-unmount ang SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "May available na update. Pakisara ang lahat ng window."
-	},
 	"welcome_changelog": {
 		"message": "ChangeLog/mga tala sa paglabas: $1"
 	},

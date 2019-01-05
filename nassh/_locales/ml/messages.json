@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Unmount SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "ഒരു അപ്‌ഡേറ്റ് ലഭ്യമാണ്. എല്ലാ വിൻഡോകളും അടയ്ക്കുക."
-	},
 	"welcome_changelog": {
 		"message": "മാറ്റ ലോഗ്/റിലീസ് കുറിപ്പുകൾ: $1"
 	},

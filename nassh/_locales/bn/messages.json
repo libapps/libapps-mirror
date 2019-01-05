@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Unmount SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "আপডেট রয়েছে। অনুগ্রহ করে সব উইন্ডো বন্ধ করুন।"
-	},
 	"welcome_changelog": {
 		"message": "পরিবর্তনের তথ্য/প্রকাশের তথ্য: $1"
 	},

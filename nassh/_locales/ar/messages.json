@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "‏إلغاء تحميل SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "يتوفر تحديث. يُرجى إغلاق جميع النوافذ."
-	},
 	"welcome_changelog": {
 		"message": "ملاحظات الإصدار/سجل التغييرات: $1"
 	},

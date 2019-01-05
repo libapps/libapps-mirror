@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "SFTP ontkoppelen"
 	},
-	"update_available_tooltip": {
-		"message": "Er is een update beschikbaar. Sluit alle vensters."
-	},
 	"welcome_changelog": {
 		"message": "ChangeLog/release-opmerkingen: $1"
 	},

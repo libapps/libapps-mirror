@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Avmontera SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "En uppdatering finns tillgänglig. Stäng alla fönster."
-	},
 	"welcome_changelog": {
 		"message": "ChangeLog/viktig information: $1"
 	},

@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Опозови учитавање протокола SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Ажурирање је доступно. Затворите све прозоре."
-	},
 	"welcome_changelog": {
 		"message": "Евиденција промена/напомене о верзији: $1"
 	},

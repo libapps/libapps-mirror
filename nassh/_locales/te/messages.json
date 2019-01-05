@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Unmount SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "ఒక అప్‌డేట్ అందుబాటులో ఉంది. దయచేసి విండోలన్నీ మూసివేయండి."
-	},
 	"welcome_changelog": {
 		"message": "మార్పుల విశ్లేషణ నివేదిక/విడుదల గమనికలు: $1"
 	},

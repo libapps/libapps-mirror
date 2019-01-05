@@ -1137,10 +1137,6 @@
 		"description": "The label for the unmount button. Used to access (mount) remote directories over SSH.",
 		"message": "Unmount SFTP"
 	},
-	"UPDATE_AVAILABLE_TOOLTIP": {
-		"description": "A tooltip shown for the chip that indicates an update is available",
-		"message": "An update is available. Please close all windows."
-	},
 	"WELCOME_CHANGELOG": {
 		"description": "A link to the ChangeLog file, displayed at startup. All the text here may be localized as makes sense.",
 		"message": "ChangeLog/release notes: $URL$",

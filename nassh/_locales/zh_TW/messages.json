@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "卸載 SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "有可用的更新，請關閉所有視窗。"
-	},
 	"welcome_changelog": {
 		"message": "ChangeLog/版本資訊：$1"
 	},

@@ -527,9 +527,6 @@
 	"unmount_button_label": {
 		"message": "Αποπροσάρτηση SFTP"
 	},
-	"update_available_tooltip": {
-		"message": "Υπάρχει διαθέσιμη ενημέρωση. Κλείστε όλα τα παράθυρα."
-	},
 	"welcome_changelog": {
 		"message": "ChangeLog/σημειώσεις έκδοσης: $1"
 	},
