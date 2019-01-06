@@ -187,15 +187,11 @@ nassh.PreferencesEditor.prototype.onRestoreClick = function(e) {
     if (input.files.length != 1)
       return;
 
-    var reader = new FileReader();
-    reader.onloadend = () => {
-      var obj = JSON.parse(reader.result);
-      nassh.importPreferences(obj, function() {
-        document.location.reload();
-      });
-    };
-
-    reader.readAsText(input.files[0]);
+    const reader = new lib.fs.FileReader();
+    reader.readAsText(input.files[0]).then((result) => {
+      const obj = JSON.parse(result);
+      nassh.importPreferences(obj, document.location.reload);
+    });
   };
 
   input.click();

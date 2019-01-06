@@ -120,14 +120,8 @@ nassh.Stream.RelaySshfeWS.prototype.getChallenge_ = function() {
       return response.blob();
     })
     .then((blob) => {
-      // Read the blob via the FileReader API.  But its API is bad (old),
-      // so we have to wrap it in a Promise ourselves.
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onabort = () => reject(reader);
-        reader.readAsText(blob);
-      });
+      const reader = new lib.fs.FileReader();
+      return reader.readAsText(blob);
     })
     .then((result) => {
       // Skip the XSSI countermeasure.
