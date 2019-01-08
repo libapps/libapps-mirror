@@ -66,7 +66,7 @@ def minify_placeholders(msg):
 
 def minify(path, inplace=False):
     """Minify translation."""
-    with open(path) as fp:
+    with open(path, encoding='utf-8') as fp:
         try:
             data = json.loads(fp.read())
         except ValueError as e:
@@ -86,7 +86,7 @@ def minify(path, inplace=False):
                            separators=(',', ':'))
 
     if inplace:
-        with open(path, 'w') as fp:
+        with open(path, 'w', encoding='utf-8') as fp:
             fp.write(formatted)
     else:
         sys.stdout.write(formatted + '\n')
