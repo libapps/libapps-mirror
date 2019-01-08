@@ -464,9 +464,8 @@ nassh.CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
  * that runs in the background page.
  */
 nassh.CommandInstance.prototype.mountProfile = function(profileID, querystr) {
-  const onStartup = (prefs) => {
-    if (chrome.extension.getBackgroundPage()
-        .nassh.sftp.fsp.sftpInstances[prefs.id]) {
+  const onBackgroundPage = (bg, prefs) => {
+    if (bg.nassh.sftp.fsp.sftpInstances[prefs.id]) {
       this.io.println(nassh.msg('ALREADY_MOUNTED_MESSAGE'));
       this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
       return;
@@ -492,8 +491,11 @@ nassh.CommandInstance.prototype.mountProfile = function(profileID, querystr) {
       connectOptions: this.prefsToConnectParams_(prefs),
     };
 
-    chrome.extension.getBackgroundPage()
-      .nassh.sftp.fsp.createSftpInstance(args);
+    bg.nassh.sftp.fsp.createSftpInstance(args);
+  };
+
+  const onStartup = (prefs) => {
+    chrome.runtime.getBackgroundPage((bg) => onBackgroundPage(bg, prefs));
   };
 
   this.commonProfileSetup_(profileID, onStartup);
@@ -695,8 +697,9 @@ nassh.CommandInstance.prototype.mountDestination = function(destination) {
     connectOptions: rv,
   };
 
-  chrome.extension.getBackgroundPage().
-    nassh.sftp.fsp.createSftpInstance(args);
+  chrome.runtime.getBackgroundPage((bg) => {
+    bg.nassh.sftp.fsp.createSftpInstance(args);
+  });
 };
 
 /**
