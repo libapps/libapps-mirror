@@ -53,6 +53,10 @@ If you don't know what this is for, then just ignore it.
 Report connection attempt counts to the relay server.
 If you don't know what this is for, then just ignore it.
 
+## `--resume-connection`
+
+Whether to try to auto-resume broken relay connections.
+
 ## `--ssh-agent=<backend ID>,<backend ID>,...`
 
 A comma-separated list of IDs of backends to use with the builtin JS SSH agent.

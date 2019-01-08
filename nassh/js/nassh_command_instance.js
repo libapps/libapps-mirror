@@ -976,6 +976,7 @@ nassh.CommandInstance.tokenizeOptions = function(optionString='') {
       '--use-ssl': true,
       '--report-ack-latency': true,
       '--report-connect-attempts': true,
+      '--resume-connection': false,
       '--relay-protocol': 'v2',
       '--ssh-agent': nassh.GoogleRelay.defaultGnubbyExtension,
     }, rv);

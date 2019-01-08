@@ -24,6 +24,7 @@ nassh.GoogleRelay = function(io, options, relayLocation, relayStorage) {
   this.relayProtocol = options['--relay-protocol'];
   this.relayServer = null;
   this.relayServerSocket = null;
+  this.resumeConnection = !!options['--resume-connection'];
   this.location = relayLocation;
   this.storage = relayStorage;
 };
@@ -133,8 +134,13 @@ nassh.GoogleRelay.prototype.openSocket = function(fd, host, port, streams,
                                                   onOpen) {
   var streamClass = this.useWebsocket ? nassh.Stream.GoogleRelayWS :
                                         nassh.Stream.GoogleRelayXHR;
-  return streams.openStream(streamClass,
-      fd, {relay: this, host: host, port: port}, onOpen);
+  const options = {
+    relay: this,
+    host: host,
+    port: port,
+    resume: this.resumeConnection,
+  };
+  return streams.openStream(streamClass, fd, options, onOpen);
 };
 
 /**

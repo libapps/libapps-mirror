@@ -43,6 +43,7 @@ nassh.Stream.GoogleRelay.prototype.asyncOpen_ = function(args, onComplete) {
   this.relay_ = args.relay;
   this.host_ = args.host;
   this.port_ = args.port;
+  this.resume_ = args.resume;
 
   var sessionRequest = new XMLHttpRequest();
 
@@ -445,8 +446,13 @@ nassh.Stream.GoogleRelayWS.prototype.onSocketError_ = function(e) {
   if (e.target !== this.socket_)
     return;
 
+  this.socket_.close();
   this.socket_ = null;
-  this.requestError_(true);
+  if (this.resume_) {
+    this.requestError_(true);
+  } else {
+    nassh.Stream.prototype.close.call(this);
+  }
 };
 
 nassh.Stream.GoogleRelayWS.prototype.sendWrite_ = function() {
