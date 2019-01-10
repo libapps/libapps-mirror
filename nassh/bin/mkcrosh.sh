@@ -23,7 +23,7 @@ export MORE_FILE_PATTERNS_EXCLUDE='
   .*/manifest\.json$
   .*/css/nassh_\(box\|connect_dialog\)\.css$
   .*/html/nassh\(_\(connect_dialog\|google_relay\|popup\)\)?\.html$
-  .*/js/nassh_\(agent\|google_relay\|sftp\|stream\).*\.js$
+  .*/js/nassh_\(agent\|column_list\|command_instance\|connect_dialog\|extension\|google_relay\|relay\|sftp\|stream\).*\.js$
   .*/plugin/.*$
   .*/third_party/google-smart-card/.*$
   .*_tests?\.\(js\|html\)$
