@@ -236,7 +236,7 @@ nassh.sftp.fsp.onTruncateRequested = function(options, onSuccess, onError) {
 
   var path = '.' + options.filePath; // relative path
   client.openFile(path, pflags)
-    .then(handle => { client.closeFile(handle); })
+    .then((handle) => client.closeFile(handle))
     .then(onSuccess)
     .catch(response => {
       console.warn(response.name + ': ' + response.message);
