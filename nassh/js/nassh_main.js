@@ -6,11 +6,47 @@
 
 lib.rtdep('lib.f', 'hterm');
 
+/**
+ * Open a new window to the specified URL.
+ *
+ * We have to go through the background page in order to set chrome=no.
+ * Normally Chrome will ignore it (for security reasons) when run in a
+ * webpage or tab.  Extensions/apps are allowed to though, so grab the
+ * background page and let it do the open for us.
+ *
+ * @param {string} url The URL to open.
+ * @returns {Promise} A promise resolving once the window opens.
+ */
+const openNewWindow = function(url) {
+  return new Promise((resolve) => {
+    chrome.runtime.getBackgroundPage((bg) => {
+      bg.window.lib.f.openWindow(
+          url, '',
+          'chrome=no,close=yes,resize=yes,scrollbars=yes,minimizable=yes,' +
+          `width=${window.innerWidth},height=${window.innerHeight}`);
+      resolve();
+    });
+  });
+};
+
 // CSP means that we can't kick off the initialization from the html file,
 // so we do it like this instead.
 window.onload = function() {
+  const params = new URLSearchParams(document.location.search);
+
+  // Allow users to bookmark links that open as a window.
+  if (params.get('openas') == 'window') {
+    // Delete the 'openas' string so we don't get into a loop.  We want to
+    // preserve the rest of the query string when opening the window.
+    params.delete('openas');
+    const url = new URL(document.location);
+    url.search = params.toString();
+    openNewWindow(url.href).then(window.close);
+    return;
+  }
+
   var execNaSSH = function() {
-    var profileName = lib.f.parseQuery(document.location.search)['profile'];
+    const profileName = params.get('profile');
 
     hterm.zoomWarningMessage = nassh.msg('ZOOM_WARNING');
     hterm.notifyCopyMessage = nassh.msg('NOTIFY_COPY');
@@ -43,12 +79,7 @@ window.onload = function() {
       [nassh.msg('TERMINAL_RESET_MENU_LABEL'),
        function() { terminal.reset(); }],
       [nassh.msg('NEW_WINDOW_MENU_LABEL'),
-       function() {
-         lib.f.openWindow(lib.f.getURL('/html/nassh.html'), '',
-                          'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-                          `minimizable=yes,width=${window.innerWidth},` +
-                          `height=${window.innerHeight}`);
-       }],
+       function() { openNewWindow(lib.f.getURL('/html/nassh.html')); }],
       [nassh.msg('FAQ_MENU_LABEL'),
        function() { lib.f.openWindow('https://goo.gl/muppJj', '_blank'); }],
       [nassh.msg('CLEAR_KNOWN_HOSTS_MENU_LABEL'),

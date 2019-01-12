@@ -424,6 +424,9 @@ have to re-import them.
   2. A profile connection (which you already created/set up).
   3. A `ssh://` URL.
 
+  Note that Chrome opens bookmarks in new tabs.  If you want to have a bookmark
+  open as a window, add `?openas=window` to the URI.
+
 *** aside
 In the examples below, the *[ID]* field will need adjusting based on the
 version you have installed:
@@ -954,6 +957,10 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   then Ctrl-N, then F11 again, but that also is not great.
 
   If you want to open another Secure Shell session, use Ctrl-Shift-N.
+
+  Bookmarks will open in a tab regardless of OS and any settings.  You can add
+  `?openas=window` to the URI so Secure Shell will reopen itself as a window
+  automatically.
 
   On macOS, most shortcuts are initiated via the Cmd key, so Ctrl shortcuts are
   passed regardless of the mode (window or tab), so this is generally less of an
