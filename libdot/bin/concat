@@ -192,10 +192,11 @@ def append_resource(name, mime, resource, header_files):
             line = f.readline()
         line = line.lstrip('#')
 
-        if key == 'date':
-            data = line.split(',', 1)[1]
-        elif key == 'version':
-            data = line.split(',', 2)[0]
+        fields = line.split(',')
+        if key == 'version':
+            data = fields[0]
+        elif key == 'date':
+            data = fields[1]
         else:
             raise ValueError('Unknown changelog key: %s' % (key,))
 
