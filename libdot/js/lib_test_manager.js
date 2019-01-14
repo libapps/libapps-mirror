@@ -999,6 +999,10 @@ lib.TestManager.Result.prototype.assertEQ = function(
     return;
 
   // Deal with common object types since JavaScript can't.
+  if (expected instanceof ArrayBuffer) {
+    expected = new Uint8Array(expected);
+    actual = new Uint8Array(expected);
+  }
   if (expected instanceof Array || ArrayBuffer.isView(expected))
     if (lib.array.compare(actual, expected))
       return;
