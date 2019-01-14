@@ -1,3 +1,15 @@
+# 1.26, 2019-01-19, openWindow & new codec helpers.
+
+* test: Support comparing ArrayBuffer.
+* concat: Fix date/version parsing again.
+* minify-translations: Force utf-8 with messages.json.
+* fs: Add a Promise wrapper for the FileReader API.
+* codec: Allow stringToCodeUnitArray to create typed arrays.
+* Speed up codec helpers.
+* codec: New module for binary/UTF8/UTF16 helpers.
+* tests: Switch to a dark theme.
+* Add a lib.f.openWindow helper for noopener.
+
 # 1.25, 2018-12-02, Minor improvements.
 
 * prefs: Fix handling of null defaults.
