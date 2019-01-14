@@ -1,3 +1,62 @@
+# 0.11, 2019-01-19, Lots of bugfixes and internal optimizations.
+
+* Update to hterm 1.84.  Firefox fixes, openWindow security fixes,
+  and few improvements.
+* Update to libdot 1.26.  openWindow & new codec helpers.
+* Move c.googlers.com config into the relay.
+* Allow bookmarks to open as windows.
+* crosh: Exclude more files from the distribution.
+* Switch to chrome.runtime.getBackgroundPage.
+* Make relay connection resume an option.
+* Switch to libdot.fs.FileReader.
+* Switch to array buffers with ssh-fe@google.com.
+* sshfe: Pass Uint8Array to stringToCodeUnitArray.
+* Drop update available check.
+* Switch to array buffers with corp-relay@google.com.
+* sftp: convert to stringToCodeUnitArray.
+* Switch to array buffers for sending /dev/random data.
+* sftp: fix readChunks reading.
+* Add more edge cases/tests for nassh-option parsing.
+* Fix Chrome App v2 check on other platforms.
+* Switch to array buffers for sending sftp packets.
+* Update translations.
+* Switch to array buffers for sending tty data.
+* fsp: Use copy-data extension if available.
+* fsp: Switch to client data sizes.
+* sftp: Use larger read/write sizes with OpenSSH.
+* sftp: Add some higher level read helpers.
+* sftp: Add some constants for read/write data sizes.
+* options: Provide readable pref strings.
+* ssh_client: Allow JS->NaCl data to be sent via arrays.
+* sftp: Rename {read,write}File to {read,write}Chunk.
+* FAQ: Add a tip for OS shortcuts and launching windows.
+* Add SSH-FE relay support.
+* streams: Pass low level open errors back up.
+* streams: Stop passing stream to onOpen callback.
+* Add a --proxy-mode option.
+* Split connectTo up a bit.
+* Switch to new lib.codec module.
+* tests: Switch to a dark theme.
+* Automatically trim whitespace in connection settings.
+* Document the current relay server protocol properly.
+* Fix tab discarding to only affect current tab.
+* ssh_client: depot_tools/webports: Punt.
+* ssh_client: glibc-compat: Split out of webports.
+* ssh_client: ldns: Fix cross-compile build.
+* ssh_client: Switch from glibc-compat to ldns.
+* ssh_client: ldns: Import version 1.7.0.
+* GoogleRelayWS: Use DataView to get/set uint32 length.
+* ssh_client: openssl: Enable libssl building.
+* Unify duplicate base64url handling.
+* Fix v2 & sftp after plugin API change.
+* Drop forced compression.
+* sftp: Add unittests for sftp packet types.
+* ssh_client: Migrate from jsoncpp to native ppapi vars.
+* Use new lib.f.openWindow helper.
+* Rip option parsing out of nassh.GoogleRelay.
+* Rename relay-options to nassh-options.
+* sftp: Use UTF8 encoding for pathnames.
+
 # 0.10, 2018-12-02, OpenSSH 7.9p1 and sftp/build improvements.
 
 * Update to hterm 1.83.  Minor improvements.

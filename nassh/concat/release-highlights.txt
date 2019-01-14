@@ -19,3 +19,4 @@
 
 # release: 0.11
 % Compression no longer enabled by default (ssh -C).
+% SFTP transfer sizes increased to 64k/255k with OpenSSH servers.
