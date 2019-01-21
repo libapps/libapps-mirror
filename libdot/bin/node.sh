@@ -5,7 +5,7 @@
 # Code related to running node/npm related helpers.
 
 # The hash of the node_modules that we maintain.
-NODE_MODULES_HASH='f8a900dd36ba12aa2a433490b1e2ed393be4e20a0451e149aa9decd4ae20ea47'
+NODE_MODULES_HASH='15fa35331d956ff954e6500c5080c2322912d90df182d08cbced24a3e19ce6cc'
 
 # In sync with Chromium's DEPS file because it's easier to use something that
 # already exists than maintain our own.  Look for 'node_linux64' here:
