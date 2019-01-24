@@ -1,3 +1,7 @@
+# 0.12, 2019-01-24, Workaround Chrome bug.
+
+* Add a workaround for missing chrome.runtime bug.
+
 # 0.11, 2019-01-19, Lots of bugfixes and internal optimizations.
 
 * Update to hterm 1.84.  Firefox fixes, openWindow security fixes,

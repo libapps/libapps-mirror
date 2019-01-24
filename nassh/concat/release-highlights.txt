@@ -1,4 +1,4 @@
-0.8.45
+0.9
 
 # The first line tracks the last version that went stable.
 # Only features added since then should be kept here.
@@ -10,13 +10,9 @@
 # Only list significant changes that matter to the user.
 # The more lines that we have here, the more cluttered the output.
 
-# release: 0.9 (stable Oct 25)
-% Context menu available via Ctrl-Right Click.
-% \x1b]8;;https://goo.gl/muppJj#Is-there-a-way-to-try-early-releases-of-Secure-Shell\x07Secure Shell dev channel\x1b]8;;\x07 changed to nightly builds.
-
 # release: 0.10 (stable Dec 3)
 % \x1b]8;;https://www.openssh.com/txt/release-7.9\x07OpenSSH upgraded to 7.9p1\x1b]8;;\x07.
 
-# release: 0.11
+# release: 0.11 (stable Jan 21)
 % Compression no longer enabled by default (ssh -C).
 % SFTP transfer sizes increased to 64k/255k with OpenSSH servers.
