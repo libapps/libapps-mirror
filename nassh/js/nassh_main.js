@@ -32,6 +32,15 @@ const openNewWindow = function(url) {
 // CSP means that we can't kick off the initialization from the html file,
 // so we do it like this instead.
 window.onload = function() {
+  // Chrome has a bug where it sometimes doesn't initialize chrome.runtime.
+  // Try and workaround it by forcing a refresh.  https://crbug.com/924656
+  if (window.chrome && !window.chrome.runtime) {
+    console.warn('chrome.runtime is undefined; reloading to workaround ' +
+                 'https://crbug.com/924656');
+    document.location.reload();
+    return;
+  }
+
   const params = new URLSearchParams(document.location.search);
 
   // Allow users to bookmark links that open as a window.
