@@ -20,6 +20,11 @@ lib.codec = {};
  */
 lib.codec.codeUnitArrayToString = function(array) {
   // String concat is faster than Array.join.
+  //
+  // String.fromCharCode.apply is faster than this if called less frequently
+  // and with smaller array sizes (like <32K).  But it's a recursive call so
+  // larger arrays will blow the stack and fail.  We also seem to be faster
+  // (or at least more constant time) when called frequently.
   let ret = '';
   for (let i = 0; i < array.length; ++i) {
     ret += String.fromCharCode(array[i]);
