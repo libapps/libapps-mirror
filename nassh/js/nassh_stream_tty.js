@@ -105,6 +105,8 @@ nassh.InputBuffer.prototype.read = function(size, onRead) {
 nassh.Stream.Tty = function(fd, info) {
   nassh.Stream.apply(this, [fd]);
 
+  this.writeArrayBuffer = true;
+
   this.encoder_ = new TextEncoder();
 };
 
@@ -147,10 +149,9 @@ nassh.Stream.Tty.prototype.asyncWrite = function(data, onSuccess) {
   if (!this.allowWrite_)
     throw nassh.Stream.ERR_STREAM_CANT_WRITE;
 
-  var string = atob(data);
-  this.acknowledgeCount_ += string.length;
+  this.acknowledgeCount_ += data.byteLength;
 
-  this.io_.writeUTF8(string);
+  this.io_.writeUTF8(data);
 
   setTimeout(() => { onSuccess(this.acknowledgeCount_); }, 0);
 };

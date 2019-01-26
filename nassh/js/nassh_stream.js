@@ -17,6 +17,10 @@ nassh.Stream = function(fd, path) {
   this.fd_ = fd;
   this.path = path;
   this.open = false;
+
+  // Flag to indicate the Stream doesn't accept ArrayBuffers via its write
+  // methods.  We can drop this once all Streams have migrated over.
+  this.writeArrayBuffer = false;
 };
 
 /**
