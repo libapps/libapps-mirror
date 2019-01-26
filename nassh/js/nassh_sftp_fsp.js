@@ -153,11 +153,10 @@ nassh.sftp.fsp.onWriteFileRequested = function(options, onSuccess, onError) {
   var writePromises = [];
   // Splits up the data to be written into chunks that the server can handle
   // and places them into multiple promises which will be resolved asynchronously.
-  for (var i = 0; i < options.data.byteLength; i += client.writeChunkSize) {
-
-    var endSlice = i + client.writeChunkSize;
-    var array = new Uint8Array(options.data.slice(i, endSlice));
-    var dataChunk = String.fromCharCode.apply(null, array);
+  const data = new Uint8Array(options.data);
+  for (let i = 0; i < data.length; i += client.writeChunkSize) {
+    const chunk = data.subarray(i, i + client.writeChunkSize);
+    const dataChunk = lib.codec.codeUnitArrayToString(chunk);
     var offset = options.offset + i;
 
     var writePromise = client.writeChunk(fileHandle, offset, dataChunk);
