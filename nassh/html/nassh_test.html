@@ -3,31 +3,43 @@
   <head>
     <meta charset='utf-8'/>
 
+    <!-- Order should match nassh.html. -->
     <script src='../js/nassh_deps.concat.js'></script>
+    <script src='../third_party/google-smart-card/google-smart-card-client-library.js'></script>
 
     <script src='../js/nassh.js'></script>
     <script src='../js/nassh_agent_message.js'></script>
     <script src='../js/nassh_agent_message_types.js'></script>
     <script src='../js/nassh_agent.js'></script>
     <script src='../js/nassh_agent_backend.js'></script>
-    <script src='../js/nassh_column_list.js'></script>
-    <script src='../js/nassh_command_instance.js'></script>
-    <script src='../js/nassh_connect_dialog.js'></script>
-    <script src='../js/nassh_google_relay.js'></script>
+    <!-- <script src='../js/nassh_agent_backend_gsc.js'></script> -->
     <script src='../js/nassh_preference_manager.js'></script>
     <script src='../js/nassh_stream.js'></script>
     <script src='../js/nassh_stream_set.js'></script>
     <script src='../js/nassh_stream_tty.js'></script>
     <script src='../js/nassh_stream_google_relay.js'></script>
+    <script src='../js/nassh_stream_relay_sshfe.js'></script>
+    <script src='../js/nassh_stream_sshagent.js'></script>
     <script src='../js/nassh_stream_sshagent_relay.js'></script>
+    <script src='../js/nassh_relay.js'></script>
+    <script src='../js/nassh_google_relay.js'></script>
+    <script src='../js/nassh_relay_sshfe.js'></script>
     <script src='../js/nassh_sftp_client.js'></script>
-    <script src='../js/nassh_sftp_fsp.js'></script>
     <script src='../js/nassh_sftp_packet.js'></script>
     <script src='../js/nassh_sftp_packet_types.js'></script>
     <script src='../js/nassh_sftp_status.js'></script>
+    <script src='../js/nassh_sftp_fsp.js'></script>
+    <script src='../js/nassh_command_instance.js'></script>
+    <!-- <script src='../js/nassh_main.js'></script> -->
 
+    <!-- Files from nassh_connect_dialog.html. -->
+    <script src='../js/nassh_column_list.js'></script>
+    <script src='../js/nassh_connect_dialog.js'></script>
+
+    <!-- Test library. -->
     <script src='../../libdot/js/lib_test_manager.js'></script>
 
+    <!-- All the unittests go below here. -->
     <script src='../js/nassh_test.js'></script>
     <script src='../js/nassh_tests.js'></script>
     <script src='../js/nassh_agent_tests.js'></script>
