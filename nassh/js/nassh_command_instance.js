@@ -1263,29 +1263,29 @@ nassh.CommandInstance.prototype.onPlugin_.exit = function(code) {
  * In the future, the plugin may handle its own files.
  */
 nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
-  var isAtty = true;
+  let isAtty;
   var onOpen = (success) => {
     this.sendToPlugin_('onOpenFile', [fd, success, isAtty]);
   };
 
-  var DEV_TTY = '/dev/tty';
   var DEV_STDIN = '/dev/stdin';
   var DEV_STDOUT = '/dev/stdout';
   var DEV_STDERR = '/dev/stderr';
 
   if (path == '/dev/random') {
+    isAtty = false;
     var stream = this.streams_.openStream(nassh.Stream.Random,
       fd, path, onOpen);
     stream.onClose = (reason) => {
       this.sendToPlugin_('onClose', [fd, reason]);
     };
-  } else if (path == DEV_TTY || path == DEV_STDIN || path == DEV_STDOUT ||
-             path == DEV_STDERR) {
-    var allowRead = path == DEV_STDIN || path == DEV_TTY;
-    var allowWrite = path == DEV_STDOUT || path == DEV_STDERR || path == DEV_TTY;
-    if (this.isSftp && path != DEV_TTY) {
-      isAtty = false;
-    }
+  } else if (path == '/dev/tty') {
+    isAtty = true;
+    this.createTtyStream(fd, true, true, onOpen);
+  } else if (path == DEV_STDIN || path == DEV_STDOUT || path == DEV_STDERR) {
+    isAtty = !this.isSftp;
+    var allowRead = path == DEV_STDIN;
+    var allowWrite = path == DEV_STDOUT || path == DEV_STDERR;
     var stream = this.createTtyStream(fd, allowRead, allowWrite, onOpen);
     if (this.isSftp && path == DEV_STDOUT) {
       // Update stdout stream to output to the SFTP Client.
