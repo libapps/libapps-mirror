@@ -1,3 +1,11 @@
+# 0.13, 2019-01-29, Fix SFTP mount on CrOS.
+
+* Pull a few minor unreleased libdot & hterm changes.
+* streams: pull out /dev/tty file handling.
+* fsp: rewrite write file loop.
+* fsp: fix onTruncateRequested handling.
+* ssh_client: change NaCl->JS data to be sent as ArrayBuffer.
+
 # 0.12, 2019-01-24, Workaround Chrome bug.
 
 * Add a workaround for missing chrome.runtime bug.
