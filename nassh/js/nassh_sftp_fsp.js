@@ -242,7 +242,7 @@ nassh.sftp.fsp.onDeleteEntryRequested = function(options, onSuccess, onError) {
   var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
   var path = '.' + options.entryPath; // relative path
   if (options.recursive) {
-    nassh.sftp.fsp.removeDirectory(path, client)
+    client.removeDirectory(path, true)
       .then(onSuccess)
       .catch(response => {
         // If file not found
@@ -269,36 +269,6 @@ nassh.sftp.fsp.onDeleteEntryRequested = function(options, onSuccess, onError) {
         onError('FAILED');
       });
   }
-};
-
-/**
- * Reads the remote directory and removes all of its entries before removing
- * itself.
- */
-nassh.sftp.fsp.removeDirectory = function(path, client) {
-  var directoryHandle;
-  return client.openDirectory(path)
-    .then(handle => { directoryHandle = handle; })
-    .then(() => nassh.sftp.fsp.readDirectory(directoryHandle, client))
-    .then(entries => {
-      var removePromises = [];
-
-      // Recursively delete contents
-      for(var i = 0; i < entries.length; i++) {
-
-        var file = entries[i];
-        var filename = path + '/' + file.filename;
-        if (file.isDirectory) {
-          removePromises.push(nassh.sftp.fsp.removeDirectory(filename, client));
-        } else {
-          removePromises.push(client.removeFile(filename));
-        }
-      }
-
-      return Promise.all(removePromises);
-    })
-    .then(() => client.closeFile(directoryHandle))
-    .then(() => client.removeDirectory(path));
 };
 
 /**

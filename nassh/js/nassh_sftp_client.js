@@ -504,12 +504,51 @@ nassh.sftp.Client.prototype.scanDirectory = function(handle, filter=undefined) {
  * @return {!Promise<!StatusPacket>} A Promise that resolves or rejects with
  *    a nassh.sftp.StatusError.
  */
-nassh.sftp.Client.prototype.removeDirectory = function(path) {
-  var packet = new nassh.sftp.Packet();
-  packet.setString(lib.encodeUTF8(this.basePath_ + path));
+nassh.sftp.Client.prototype.removeDirectory = function(path, recursive=false) {
+  // Low level directory remove packet.  Only works if the dir is already empty.
+  const rmdir = (path) => {
+    const packet = new nassh.sftp.Packet();
+    packet.setString(lib.encodeUTF8(this.basePath_ + path));
 
-  return this.sendRequest_(nassh.sftp.packets.RequestPackets.RMDIR, packet)
-    .then(response => this.isSuccessResponse_(response, 'RMDIR'));
+    return this.sendRequest_(nassh.sftp.packets.RequestPackets.RMDIR, packet)
+      .then((response) => this.isSuccessResponse_(response, 'RMDIR'));
+  };
+
+  // Higher level function to recursively remove a directory.
+  const removeDirectory = (path) => {
+    let directoryHandle;
+    return this.openDirectory(path)
+      .then((handle) => { directoryHandle = handle; })
+      .then(() => {
+        return this.scanDirectory(directoryHandle, (entry) => {
+          return (entry.filename != '.' && entry.filename != '..');
+        });
+      })
+      .then((entries) => {
+        const promises = [];
+
+        // Recursively delete contents.
+        for (let i = 0; i < entries.length; ++i) {
+          const entry = entries[i];
+          const fullpath = `${path}/${entry.filename}`;
+          if (entry.isDirectory) {
+            promises.push(removeDirectory(fullpath));
+          } else {
+            promises.push(this.removeFile(fullpath));
+          }
+        }
+
+        return Promise.all(promises);
+      })
+      .finally(() => {
+        if (directoryHandle !== undefined) {
+          return this.closeFile(directoryHandle);
+        }
+      })
+      .then(() => rmdir(path));
+  };
+
+  return recursive ? removeDirectory(path) : rmdir(path);
 };
 
 
