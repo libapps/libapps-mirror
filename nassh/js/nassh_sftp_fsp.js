@@ -241,34 +241,20 @@ nassh.sftp.fsp.onDeleteEntryRequested = function(options, onSuccess, onError) {
 
   var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
   var path = '.' + options.entryPath; // relative path
-  if (options.recursive) {
-    client.removeDirectory(path, true)
-      .then(onSuccess)
-      .catch(response => {
-        // If file not found
-        if (response instanceof nassh.sftp.StatusError &&
-            response.code == nassh.sftp.packets.StatusCodes.NO_SUCH_FILE) {
-          onError('NOT_FOUND');
-          return;
-        }
-        console.warn(response.name + ': ' + response.message);
-        onError('FAILED');
-      });
-
-  } else {
-    client.removeFile(path)
-      .then(onSuccess)
-      .catch(response => {
-        // If file not found
-        if (response instanceof nassh.sftp.StatusError &&
-            response.code == nassh.sftp.packets.StatusCodes.NO_SUCH_FILE) {
-          onError('NOT_FOUND');
-          return;
-        }
-        console.warn(response.name + ': ' + response.message);
-        onError('FAILED');
-      });
-  }
+  const ret = options.recursive ?
+      client.removeDirectory(path, true) :
+      client.removeFile(path);
+  ret.then(onSuccess)
+    .catch((response) => {
+      // If file not found.
+      if (response instanceof nassh.sftp.StatusError &&
+          response.code == nassh.sftp.packets.StatusCodes.NO_SUCH_FILE) {
+        onError('NOT_FOUND');
+        return;
+      }
+      console.warn(response.name + ': ' + response.message);
+      onError('FAILED');
+    });
 };
 
 /**
