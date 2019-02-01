@@ -300,12 +300,7 @@ nassh.sftp.fsp.removeDirectory = function(path, client) {
       for(var i = 0; i < entries.length; i++) {
 
         var file = entries[i];
-        var filename = file.filename;
-        if (filename == '.' || filename == '..') {
-          continue;
-        }
-
-        filename = path + '/' + filename;
+        var filename = path + '/' + file.filename;
         if (file.isDirectory) {
           removePromises.push(nassh.sftp.fsp.removeDirectory(filename, client));
         } else {
@@ -512,10 +507,6 @@ nassh.sftp.fsp.copyDirectory = function(sourcePath, targetPath, client) {
       var copyPromises = [];
       for(var i = 0; i < entries.length; i++) {
         var file = entries[i];
-        if (file.filename == '.' || file.filename == '..') {
-          continue;
-        }
-
         var fileSourcePath = sourcePath + '/' + file.filename;
         var fileTargetPath = targetPath + '/' + file.filename;
         if (file.isDirectory) {
