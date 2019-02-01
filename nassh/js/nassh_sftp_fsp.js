@@ -345,21 +345,11 @@ nassh.sftp.fsp.onReadFileRequested = function(options, onSuccess, onError) {
     return;
   }
 
-  var readPromises = [];
-  var readLimit = options.offset + options.length;
-  // Splits up the data to be read into chunks that the server can handle
-  // and places them into multiple promises which will be resolved asynchronously.
-  for (var i = options.offset; i < readLimit; i += client.readChunkSize) {
-    readPromises.push(client.readChunk(fileHandle, i, client.readChunkSize));
-  }
-
-  Promise.all(readPromises)
-    .then(dataChunks => {
-      // join all resolved data chunks together and return them as an ArrayBuffer
-      var data = dataChunks.join('');
-      return lib.codec.stringToCodeUnitArray(data, Uint8Array).buffer;
-    })
-    .then(data => { onSuccess(data, false); } )
+  client.readChunks(fileHandle, (chunk) => {
+      const bytes = lib.codec.stringToCodeUnitArray(chunk, Uint8Array).buffer;
+      onSuccess(bytes, true);
+    }, {offset: options.offset, length: options.length})
+    .then(() => onSuccess(new ArrayBuffer(), false))
     .catch(response => {
       console.warn(response.name + ': ' + response.message);
       onError('FAILED');
