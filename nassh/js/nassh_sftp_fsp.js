@@ -81,35 +81,22 @@ nassh.sftp.fsp.onGetMetadataRequested = function(options, onSuccess, onError) {
 /**
  * Reads the remote directory handle and returns a list of metadata entries,
  * which are sanitized if applicable.
+ *
+ * It always skips the "." & ".." pseudo entries, and symlinks.
  */
 nassh.sftp.fsp.readDirectory = function(directoryHandle, client, sanitizeOptions) {
-  var metadataEntries = []; // directory entries
-  function nextRead() {
-    return client.readDirectory(directoryHandle)
-      .then(response => {
-        // If EOF, return all the directory entries
-        if (response instanceof nassh.sftp.packets.StatusPacket
-            && response.code == nassh.sftp.packets.StatusCodes.EOF) {
-          return metadataEntries;
-        }
+  return client.scanDirectory(directoryHandle, (entry) => {
+    // Skip over the file if it's a '.', '..', or symlink.
+    if (entry.filename == '.' || entry.filename == '..' || entry.isLink) {
+      return false;
+    }
 
-        for(var i = 0; i < response.fileCount; i++) {
-          var file = response.files[i];
-          // Skip over the file if it's a '.', '..' or link file
-          if (file.filename == '.' || file.filename == '..' || file.isLink) {
-            continue;
-          }
+    if (sanitizeOptions) {
+      return nassh.sftp.fsp.sanitizeMetadata(entry, sanitizeOptions);
+    }
 
-          if (sanitizeOptions) {
-            file = nassh.sftp.fsp.sanitizeMetadata(file, sanitizeOptions);
-          }
-          metadataEntries.push(file);
-        }
-
-        return nextRead();
-      });
-  }
-  return nextRead();
+    return true;
+  });
 };
 
 /**

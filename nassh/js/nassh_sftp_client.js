@@ -447,6 +447,55 @@ nassh.sftp.Client.prototype.readDirectory = function(handle) {
     .then(response => this.isNameResponse_(response, 'READDIR'));
 };
 
+/**
+ * List all the entries of a directory.
+ *
+ * This is a helper function to enumerate an entire directory with optional
+ * filtering on each result.
+ *
+ * @param {string} handle The handle of the remote directory.
+ * @param {function(NamePacket)=} filter A callback function to filter results.
+ *    The return value controls behavior: false will skip the entry, true will
+ *    keep the entry, undefined will abort processing, and all other return
+ *    values will replace the entry.
+ * @return {Array<NamePacket>} A list of all the entries in this directory.
+ */
+nassh.sftp.Client.prototype.scanDirectory = function(handle, filter=undefined) {
+  const entries = [];
+
+  const nextRead = () => {
+    return this.readDirectory(handle)
+      .then((response) => {
+        // If EOF, return all the directory entries.
+        if (response instanceof nassh.sftp.packets.StatusPacket &&
+            response.code == nassh.sftp.packets.StatusCodes.EOF) {
+          return entries;
+        }
+
+        // Run the user's filter across this batch of files.
+        for (let i = 0; i < response.fileCount; ++i) {
+          let entry = response.files[i];
+
+          if (filter) {
+            const ret = filter(entry);
+            if (ret === undefined) {
+              return [];
+            } else if (ret === false) {
+              continue;
+            } else if (ret !== true) {
+              entry = ret;
+            }
+          }
+
+          entries.push(entry);
+        }
+
+        return nextRead();
+      });
+  };
+
+  return nextRead();
+};
 
 /**
  * Removes a remote directory.
