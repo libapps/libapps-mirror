@@ -743,8 +743,8 @@ nassh.sftp.Client.prototype.copyData =
   packet.setString(writeHandle);
   packet.setUint64(writeOffset);
 
-  return this.client.sendRequest_('copy-data', packet)
-    .then((response) => this.client.isSuccessResponse_(response, 'copy-data'));
+  return this.sendRequest_('copy-data', packet)
+    .then((response) => this.isSuccessResponse_(response, 'copy-data'));
 };
 
 /**

@@ -416,7 +416,7 @@ nassh.sftp.fsp.copyFile = function(sourcePath, targetPath, size, client) {
 
       // If the server can do the copy, let it do it directly.
       if (this.protocolServerExtensions['copy-data'] !== undefined) {
-        return client.copyData(sourceHandle, 0, size, targetHandle, 0);
+        return client.copyData(sourceHandle, targetHandle, size);
       }
 
       var readWritePromises = [];
