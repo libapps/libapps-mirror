@@ -489,7 +489,7 @@ nassh.sftp.fsp.copyDirectory = function(sourcePath, targetPath, client) {
  * Note: This is only called upon first installation of Secure Shell and when
  * the user clicks "Add New Service" from the File App.
  */
-nassh.sftp.fsp.onMountRequested = function(options, onSuccess, onError) {
+nassh.sftp.fsp.onMountRequested = function(onSuccess, onError) {
   lib.f.openWindow('html/nassh.html');
 };
 
@@ -506,20 +506,24 @@ nassh.sftp.fsp.onUnmountRequested = function(options, onSuccess, onError) {
   if (nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
     // Only clear local state if we know about the mount.
     var sftpInstance = nassh.sftp.fsp.sftpInstances[options.fileSystemId];
-    sftpInstance.exit(0); // exit NaCl plugin
-    delete nassh.sftp.fsp.sftpInstances[options.fileSystemId];
+    if (sftpInstance !== undefined) {
+      sftpInstance.exit(0); // exit NaCl plugin
+      delete nassh.sftp.fsp.sftpInstances[options.fileSystemId];
+    }
   }
 
-  chrome.fileSystemProvider.unmount(
-    {fileSystemId: options.fileSystemId}, () => {
-      const err = lib.f.lastError();
-      if (err) {
-        console.warn(err);
-        onError('FAILED');
-      } else {
-        onSuccess();
-      }
-    });
+  if (window.chrome && chrome.fileSystemProvider) {
+    chrome.fileSystemProvider.unmount(
+      {fileSystemId: options.fileSystemId}, () => {
+        const err = lib.f.lastError();
+        if (err) {
+          console.warn(err);
+          onError('FAILED');
+        } else {
+          onSuccess();
+        }
+      });
+  }
 };
 
 /**
