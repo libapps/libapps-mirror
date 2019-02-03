@@ -51,6 +51,7 @@
       "js/nassh_stream_set.js",
       "js/nassh_stream_tty.js",
       "js/nassh_stream_google_relay.js",
+      "js/nassh_stream_sftp.js",
       "js/nassh_stream_sshagent.js",
       "js/nassh_stream_sshagent_relay.js",
       "js/nassh_relay.js",

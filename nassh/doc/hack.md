@@ -284,6 +284,7 @@ The vast majority of the code here lives under [js/].
   * [nassh_stream.js]: Basic class for implementing all `nassh.Stream` streams.
   * [nassh_stream_google_relay.js]: 
   * [nassh_stream_set.js]: 
+  * [nassh_stream_sftp.js]: Stream for passing binary SFTP data through.
   * [nassh_stream_sshagent.js]:
     SSH agent implementation using nassh.agent.Agent to relay requests to
     backends.
@@ -587,6 +588,7 @@ Here's a random list of documents which would be useful to people.
 [nassh_stream_google_relay.js]: ../js/nassh_stream_google_relay.js
 [nassh_stream.js]: ../js/nassh_stream.js
 [nassh_stream_set.js]: ../js/nassh_stream_set.js
+[nassh_stream_sftp.js]: ../js/nassh_stream_sftp.js
 [nassh_stream_sshagent.js]: ../js/nassh_stream_sshagent.js
 [nassh_stream_sshagent_relay.js]: ../js/nassh_stream_sshagent_relay.js
 [nassh_stream_tty.js]: ../js/nassh_stream_tty.js

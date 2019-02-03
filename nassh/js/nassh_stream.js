@@ -86,13 +86,6 @@ nassh.Stream.prototype.close = function(reason) {
 };
 
 /**
- * Set a new IO for the stream.
- */
-nassh.Stream.prototype.setIo = function(io) {
-  this.io_ = io;
-};
-
-/**
  * The /dev/random stream.
  *
  * This special case stream just returns random bytes when read.

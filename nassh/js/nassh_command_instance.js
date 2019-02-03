@@ -1282,15 +1282,17 @@ nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
   } else if (path == '/dev/tty') {
     isAtty = true;
     this.createTtyStream(fd, true, true, onOpen);
+  } else if (this.isSftp && path == DEV_STDOUT) {
+    isAtty = false;
+    const info = {
+      client: this.sftpClient,
+    };
+    this.streams_.openStream(nassh.Stream.Sftp, fd, info, onOpen);
   } else if (path == DEV_STDIN || path == DEV_STDOUT || path == DEV_STDERR) {
     isAtty = !this.isSftp;
     var allowRead = path == DEV_STDIN;
     var allowWrite = path == DEV_STDOUT || path == DEV_STDERR;
-    var stream = this.createTtyStream(fd, allowRead, allowWrite, onOpen);
-    if (this.isSftp && path == DEV_STDOUT) {
-      // Update stdout stream to output to the SFTP Client.
-      stream.setIo(this.sftpClient);
-    }
+    this.createTtyStream(fd, allowRead, allowWrite, onOpen);
   } else {
     this.sendToPlugin_('onOpenFile', [fd, false, false]);
   }

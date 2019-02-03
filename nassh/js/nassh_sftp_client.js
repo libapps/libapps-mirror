@@ -103,7 +103,7 @@ nassh.sftp.Client.prototype.writeChunkSize =
 /**
  * Stream wants to write some packet data to the client.
  */
-nassh.sftp.Client.prototype.writeUTF8 = function(data) {
+nassh.sftp.Client.prototype.writeStreamData = function(data) {
   // add data to buffer
   this.buffer_ += data;
 
