@@ -1081,8 +1081,11 @@ lib.TestManager.Result.prototype.fail = function(opt_message) {
 /**
  * Mark a passed test and exit out of the rest of the test.
  *
- * This will throw a TestCompleted exception, causing the current test to stop.
+ * This will mark the current tests as passing and then throw a TestCompleted
+ * exception, causing the current test to stop.
+ *
+ * @param {boolean=} opt_throw Whether to throw an exception.
  */
-lib.TestManager.Result.prototype.pass = function() {
-  this.completeTest_(this.PASSED, true);
+lib.TestManager.Result.prototype.pass = function(opt_throw=true) {
+  this.completeTest_(this.PASSED, opt_throw);
 };
