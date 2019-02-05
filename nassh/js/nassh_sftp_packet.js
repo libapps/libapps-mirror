@@ -7,26 +7,41 @@
 /**
  * A general packet. Utilizes an offset to keep track of data being read/written.
  *
- * @param {string|Array<number>=} arg The initial data for the new packet.
+ * @param {number|Array<number>=} arg The initial data for the new packet.
  */
-nassh.sftp.Packet = function(arg='') {
-  let packet;
-  if (typeof arg == 'string') {
-    packet = arg;
-  } else {
-    packet = lib.codec.codeUnitArrayToString(arg);
-  }
+nassh.sftp.Packet = function(arg) {
   this.offset_ = 0;
-  this.packet_ = packet;
+  const u8 = new Uint8Array(arg);
+  this.packet_ = u8.buffer;
+  this.dv_ = new DataView(this.packet_);
   this.encoder_ = new TextEncoder();
   this.decoder_ = new TextDecoder();
+};
+
+/**
+ * Expand the array buffer storage.
+ *
+ * @param {number} size How many bytes to add.
+ */
+nassh.sftp.Packet.prototype.addSpace_ = function(size) {
+  const newSize = this.offset_ + size;
+  if (newSize <= this.packet_.byteLength) {
+    return;
+  }
+
+  const newu8 = new Uint8Array(newSize);
+  const oldu8 = new Uint8Array(this.packet_);
+  newu8.set(oldu8);
+  this.packet_ = newu8.buffer;
+  this.dv_ = new DataView(this.packet_);
 };
 
 /**
  * Sets a uint8 at the current offset.
  */
 nassh.sftp.Packet.prototype.setUint8 = function(uint8) {
-  this.packet_ += nassh.sftp.Packet.intToNByteArrayString(uint8, 1);
+  this.addSpace_(1);
+  this.dv_.setUint8(this.offset_, uint8);
   this.offset_ += 1;
 };
 
@@ -34,7 +49,8 @@ nassh.sftp.Packet.prototype.setUint8 = function(uint8) {
  * Sets a uint32 at the current offset.
  */
 nassh.sftp.Packet.prototype.setUint32 = function(uint32) {
-  this.packet_ += nassh.sftp.Packet.intToNByteArrayString(uint32, 4);
+  this.addSpace_(4);
+  this.dv_.setUint32(this.offset_, uint32);
   this.offset_ += 4;
 };
 
@@ -45,7 +61,9 @@ nassh.sftp.Packet.prototype.setUint32 = function(uint32) {
  * is actually limited to 53 bits.
  */
 nassh.sftp.Packet.prototype.setUint64 = function(uint64) {
-  this.packet_ += nassh.sftp.Packet.intToNByteArrayString(uint64, 8);
+  this.addSpace_(8);
+  this.dv_.setUint32(this.offset_, uint64 / 0x100000000);
+  this.dv_.setUint32(this.offset_ + 4, uint64);
   this.offset_ += 8;
 };
 
@@ -59,6 +77,9 @@ nassh.sftp.Packet.prototype.setUint64 = function(uint64) {
  * @param {string} string The binary string to append to the packet.
  */
 nassh.sftp.Packet.prototype.setString = function(binaryString) {
+  if (typeof binaryString == 'string') {
+    binaryString = lib.codec.stringToCodeUnitArray(binaryString, Uint8Array);
+  }
   this.setUint32(binaryString.length);
   this.setData(binaryString);
 };
@@ -73,7 +94,7 @@ nassh.sftp.Packet.prototype.setString = function(binaryString) {
  * @param {string} string The string to append to the packet.
  */
 nassh.sftp.Packet.prototype.setUtf8String = function(string) {
-  const data = lib.codec.codeUnitArrayToString(this.encoder_.encode(string));
+  const data = this.encoder_.encode(string);
   this.setString(data);
 };
 
@@ -81,11 +102,9 @@ nassh.sftp.Packet.prototype.setUtf8String = function(string) {
  * Sets data at the current offset.
  */
 nassh.sftp.Packet.prototype.setData = function(data) {
-  // TODO: Support strings until we've migrated to ArrayBuffers everywhere.
-  if (typeof data != 'string') {
-    data = lib.codec.codeUnitArrayToString(data);
-  }
-  this.packet_ += data;
+  this.addSpace_(data.length);
+  const u8 = new Uint8Array(this.packet_, this.offset_);
+  u8.set(data);
   this.offset_ += data.length;
 };
 
@@ -93,29 +112,18 @@ nassh.sftp.Packet.prototype.setData = function(data) {
  * Gets a uint8 from the current offset, if possible.
  */
 nassh.sftp.Packet.prototype.getUint8 = function() {
-  if (this.offset_ + 1 > this.packet_.length) {
-    throw new Error('Packet too short to read a uint8');
-  }
-
-  var uint8 = this.packet_.charCodeAt(this.offset_);
-
+  const ret = this.dv_.getUint8(this.offset_);
   this.offset_ += 1;
-  return uint8;
+  return ret;
 };
 
 /**
  * Gets a uint32 from the current offset, if possible.
  */
 nassh.sftp.Packet.prototype.getUint32 = function() {
-  if (this.offset_ + 4 > this.packet_.length) {
-    throw new Error('Packet too short to read a uint32');
-  }
-
-  var uint32Slice = this.packet_.slice(this.offset_, this.offset_ + 4);
-  var uint32 = nassh.sftp.Packet.byteArrayStringToInt(uint32Slice);
-
+  const ret = this.dv_.getUint32(this.offset_);
   this.offset_ += 4;
-  return uint32;
+  return ret;
 };
 
 /**
@@ -126,15 +134,15 @@ nassh.sftp.Packet.prototype.getUint32 = function() {
  * that limit for us.
  */
 nassh.sftp.Packet.prototype.getUint64 = function() {
-  if (this.offset_ + 8 > this.packet_.length) {
-    throw new Error('Packet too short to read a uint64');
-  }
-
-  var uint64Slice = this.packet_.slice(this.offset_, this.offset_ + 8);
-  var uint64 = nassh.sftp.Packet.byteArrayStringToInt(uint64Slice);
-
+  const hi32 = this.dv_.getUint32(this.offset_);
+  const lo32 = this.dv_.getUint32(this.offset_ + 4);
   this.offset_ += 8;
-  return uint64;
+
+  let ret = lo32;
+  if (hi32) {
+    ret += (hi32 * 0x100000000);
+  }
+  return ret;
 };
 
 /**
@@ -147,13 +155,8 @@ nassh.sftp.Packet.prototype.getUint64 = function() {
  * @return {string} The binary string.
  */
 nassh.sftp.Packet.prototype.getString = function() {
-  var stringLength = this.getUint32();
-
-  if (this.offset_ + stringLength > this.packet_.length) {
-    throw new Error('Packet too short to read a string');
-  }
-
-  return lib.codec.codeUnitArrayToString(this.getData(stringLength));
+  const length = this.getUint32();
+  return lib.codec.codeUnitArrayToString(this.getData(length));
 };
 
 /**
@@ -177,26 +180,18 @@ nassh.sftp.Packet.prototype.getUtf8String = function() {
  * @return {Uint8Array} The raw bytes from the packet.
  */
 nassh.sftp.Packet.prototype.getData = function(length=undefined) {
-  const data = lib.codec.stringToCodeUnitArray(
-      this.packet_.substr(this.offset_, length), Uint8Array);
+  const data = new Uint8Array(this.packet_, this.offset_, length);
   this.offset_ += data.length;
   return data;
-};
-
-/**
- * Slices the packet from beginSlice to the optional endSlice (else end of
- * packet).
- */
-nassh.sftp.Packet.prototype.slice = function(beginSlice, opt_endSlice) {
-  var endSlice = opt_endSlice || this.packet_.length;
-  this.packet_ = this.packet_.slice(beginSlice, endSlice);
 };
 
 /**
  * Returns the toString representation of the packet.
  */
 nassh.sftp.Packet.prototype.toString = function() {
-  return this.packet_;
+  // We don't use this.decoder_ because this is the entire packet with binary
+  // data, so it won't all be valid UTF-8.
+  return lib.codec.codeUnitArrayToString(this.toByteArray());
 };
 
 /**
@@ -205,7 +200,7 @@ nassh.sftp.Packet.prototype.toString = function() {
  * @return {Uint8Array} The data bytes.
  */
 nassh.sftp.Packet.prototype.toByteArray = function() {
-  return lib.codec.stringToCodeUnitArray(this.packet_, Uint8Array);
+  return new Uint8Array(this.packet_);
 };
 
 /**
@@ -214,14 +209,14 @@ nassh.sftp.Packet.prototype.toByteArray = function() {
  * @return {ArrayBuffer} The data buffer.
  */
 nassh.sftp.Packet.prototype.toArrayBuffer = function() {
-  return this.toByteArray().buffer;
+  return this.packet_;
 };
 
 /**
  * Returns the length of the packet.
  */
 nassh.sftp.Packet.prototype.getLength = function() {
-  return this.packet_.length;
+  return this.packet_.byteLength;
 };
 
 /**
@@ -230,48 +225,5 @@ nassh.sftp.Packet.prototype.getLength = function() {
  * @returns {!boolean} true If the end of the packet data has been reached.
  */
 nassh.sftp.Packet.prototype.eod = function() {
-  return this.offset_ === this.packet_.length;
-};
-
-/**
- * Converts a byte array string to an int.
- *
- * This expects a big endian input.
- */
-nassh.sftp.Packet.byteArrayStringToInt = function(byteArray) {
-  var int = 0;
-
-  // We can't use bitwise shifts because that creates a signed 32-bit int.
-  for (var i = 0; i < byteArray.length; i++) {
-    int = (int * 256) + byteArray.charCodeAt(i);
-  }
-
-  if (int > Number.MAX_SAFE_INTEGER) {
-    throw new RangeError('get int failed: int is too large to represent exactly'
-                         + '(was greater than 2^53-1)');
-  }
-
-  return int;
-};
-
-/**
- * Converts an int to an n byte array string.
- *
- * This produces a big endian array.
- */
-nassh.sftp.Packet.intToNByteArrayString = function(int, n) {
-  // Creates an n byte long array.  We don't have to zero-fill it because the
-  // loop below will take care of writing zeros as needed.
-  const byteArray = new Array(n);
-
-  // Converts the int into its byte array form.
-  for (let i = n - 1; i >= 0; --i) {
-    const byte = int & 0xff;
-    byteArray[i] = byte;
-    // We can't use bitwise shifts because that creates a signed 32-bit int.
-    int = (int - byte) / 256;
-  }
-
-  // Return the byte array represented as a string.
-  return String.fromCharCode.apply(String, byteArray);
+  return this.offset_ === this.getLength();
 };

@@ -124,27 +124,25 @@ nassh.sftp.Client.prototype.parseBuffer_ = function() {
       return false;
     }
 
-    // Read the 32-bit message length.
+    // Pull out the 32-bit message length.
     const dv = new DataView(this.buffer_.buffer, this.buffer_.byteOffset);
     this.pendingMessageSize_ = dv.getUint32(0);
+    this.buffer_ = this.buffer_.subarray(4);
   }
 
   // See if we've got the entire packet yet.
-  if (this.buffer_.length < 4 + this.pendingMessageSize_) {
+  if (this.buffer_.length < this.pendingMessageSize_) {
     return false;
   }
 
-  // Consume header + body.
-  const packet = new nassh.sftp.Packet(
-      this.buffer_.subarray(0, 4 + this.pendingMessageSize_));
-
-  // Skip over the packet data length.
-  packet.getUint32();
-
-  // Remove the expected packet from the buffer.
-  this.buffer_ = this.buffer_.subarray(4 + this.pendingMessageSize_);
+  // Pull out the packet from the buffer.
+  const data = this.buffer_.subarray(0, this.pendingMessageSize_);
+  this.buffer_ = this.buffer_.subarray(this.pendingMessageSize_);
   // Restart the message process.
   this.pendingMessageSize_ = null;
+
+  // Create packet containing the buffer.
+  const packet = new nassh.sftp.Packet(data);
 
   // onPacket handler will return true if valid, else false.
   return this.onPacket(packet);
@@ -226,8 +224,9 @@ nassh.sftp.Client.prototype.sendRequest_ = function(type, data) {
 
   // Now create a packet with the total length, followed by the packet type,
   // followed by the payload.  A bit backwards.
-  const packet = new nassh.sftp.Packet();
-  packet.setUint32(data.getLength() + packetType.getLength());
+  const length = data.getLength() + packetType.getLength();
+  const packet = new nassh.sftp.Packet(length + 4);
+  packet.setUint32(length);
   packet.setData(packetType.toByteArray());
   packet.setData(data.toByteArray());
 

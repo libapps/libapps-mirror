@@ -342,7 +342,7 @@ nassh.sftp.fsp.onReadFileRequested = function(options, onSuccess, onError) {
     return;
   }
 
-  client.readChunks(fileHandle, (chunk) => onSuccess(chunk.buffer, true),
+  client.readChunks(fileHandle, (chunk) => onSuccess(chunk, true),
                     {offset: options.offset, length: options.length})
     .then(() => onSuccess(new ArrayBuffer(), false))
     .catch(response => {
