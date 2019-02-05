@@ -10,6 +10,11 @@ lib.rtdep('lib.f',
 // CSP means that we can't kick off the initialization from the html file,
 // so we do it like this instead.
 window.onload = function() {
+  // Workaround https://crbug.com/928045.
+  if (nassh.workaroundMissingChromeRuntime()) {
+    return;
+  }
+
   const qs = lib.f.parseQuery(document.location.search);
 
   if (qs['command'])
