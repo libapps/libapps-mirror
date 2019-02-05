@@ -20,7 +20,8 @@ nassh.Stream.GoogleRelay = function(fd) {
   this.backoffMS_ = 0;
   this.backoffTimeout_ = null;
 
-  this.writeBuffer_ = '';
+  this.writeArrayBuffer = true;
+  this.writeBuffer_ = new Uint8Array();
   this.writeCount_ = 0;
   this.onWriteSuccess_ = null;
 
@@ -82,10 +83,12 @@ nassh.Stream.GoogleRelay.prototype.resumeRead_ = function() {
  * Queue up some data to write.
  */
 nassh.Stream.GoogleRelay.prototype.asyncWrite = function(data, onSuccess) {
-  if (!data.length)
+  if (!data.byteLength) {
     return;
+  }
 
-  this.writeBuffer_ = this.writeBuffer_ + atob(data);
+  this.writeBuffer_ = lib.array.concatTyped(
+      this.writeBuffer_, new Uint8Array(data));
   this.onWriteSuccess_ = onSuccess;
 
   if (!this.backoffTimeout_)
@@ -228,14 +231,14 @@ nassh.Stream.GoogleRelayXHR.prototype.sendWrite_ = function() {
     return;
   }
 
-  var size = Math.min(this.writeBuffer_.length, this.maxMessageLength);
-  var data = this.writeBuffer_.substr(0, size);
-  data = nassh.base64ToBase64Url(btoa(data));
+  const dataBuffer = this.writeBuffer_.subarray(0, this.maxMessageLength);
+  const data = nassh.base64ToBase64Url(btoa(
+      lib.codec.codeUnitArrayToString(dataBuffer)));
   this.writeRequest_.open('GET', this.relay_.relayServer +
                           'write?sid=' + this.sessionID_ +
                           '&wcnt=' + this.writeCount_ + '&data=' + data, true);
   this.writeRequest_.send();
-  this.lastWriteSize_ = size;
+  this.lastWriteSize_ = dataBuffer.length;
 };
 
 /**
@@ -285,7 +288,7 @@ nassh.Stream.GoogleRelayXHR.prototype.onWriteDone_ = function(e) {
   if (this.writeRequest_.status != 200)
     return this.onRequestError_(e);
 
-  this.writeBuffer_ = this.writeBuffer_.substr(this.lastWriteSize_);
+  this.writeBuffer_ = this.writeBuffer_.subarray(this.lastWriteSize_);
   this.writeCount_ += this.lastWriteSize_;
 
   this.requestSuccess_(false);
@@ -423,7 +426,7 @@ nassh.Stream.GoogleRelayWS.prototype.onSocketData_ = function(e) {
 
   // Unsigned 24 bits wrap-around delta.
   var delta = ((ack & 0xffffff) - (this.writeCount_ & 0xffffff)) & 0xffffff;
-  this.writeBuffer_ = this.writeBuffer_.substr(delta);
+  this.writeBuffer_ = this.writeBuffer_.subarray(delta);
   this.sentCount_ -= delta;
   this.writeCount_ += delta;
 
@@ -467,21 +470,21 @@ nassh.Stream.GoogleRelayWS.prototype.sendWrite_ = function() {
     return;
   }
 
-  var size = Math.min(this.maxMessageLength,
-                      this.writeBuffer_.length - this.sentCount_);
-  var buf = new ArrayBuffer(size + 4);
-  var u8 = new Uint8Array(buf);
+  const dataBuffer = this.writeBuffer_.subarray(
+      this.sentCount_, this.sentCount_ + this.maxMessageLength);
+  const buf = new ArrayBuffer(dataBuffer.length + 4);
+  const u8 = new Uint8Array(buf, 4);
   const dv = new DataView(buf);
 
   // Every ws.send() maps to a Websocket frame on wire.
   // Use first 4 bytes to send ack.
   dv.setUint32(0, this.readCount_ & 0xffffff);
 
-  for (var i = 0; i < size; ++i)
-    u8[i + 4] = this.writeBuffer_.charCodeAt(this.sentCount_ + i);
+  // Copy over the buffer.
+  u8.set(dataBuffer);
 
   this.socket_.send(buf);
-  this.sentCount_ += size;
+  this.sentCount_ += dataBuffer.length;
 
   // Track ack latency.
   this.ackTime_ = Date.now();
