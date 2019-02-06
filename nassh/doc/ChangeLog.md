@@ -1,3 +1,19 @@
+# 0.14, 2019-02-06, Workaround Chrome bug in crosh & fix X10 encoding.
+
+* Pull a few minor unreleased libdot & hterm changes.
+* fsp: Remove redundant path filtering.
+* stream: Allow tty data to be passed as ArrayBuffers.
+* sftp: Move directory listing helper out of fsp.
+* sftp: Merge removeDirectory from fsp.
+* fsp: Simplify onDeleteEntryRequested.
+* fsp: Use Promise.finally when closing file handles.
+* sftp: Fix copy-data usage.
+* fsp: Add tests.
+* switch to array buffers with relay ssh-agent
+* Harmonize script load ordering.
+* sftp: Split sftp stream logic out of tty.
+* crosh: Add a workaround for missing chrome.runtime bug.
+
 # 0.13, 2019-01-29, Fix SFTP mount on CrOS.
 
 * Pull a few minor unreleased libdot & hterm changes.
