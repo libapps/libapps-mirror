@@ -382,7 +382,7 @@ The `name` field can be any one of:
 | `startSession`       | Start a new ssh connection!      | (object `session`) |
 | `onOpenFile`         | Open a new file.                 | (int `fd`, bool `success`, bool `is_atty`) |
 | `onOpenSocket`       | Open a new socket.               | (int `fd`, bool `success`, bool `is_atty`) |
-| `onRead`             | Send new data to the plugin.     | (int `fd`, base64 `data`) |
+| `onRead`             | Send new data to the plugin.     | (int `fd`, ArrayBuffer `data`) |
 | `onWriteAcknowledge` | Tell plugin we've read data.     | (int `fd`, int `count`) |
 | `onClose`            | Close an existing fd.            | (int `fd`) |
 | `onReadReady`        | Notify plugin data is available. | (int `fd`, bool `result`) |
@@ -421,7 +421,7 @@ The `name` field can be any one of:
 | `openFile`    | Plugin wants to open a file.      | (int `fd`, str `path`, int `mode`) |
 | `openSocket`  | Plugin wants to open a socket.    | (int `fd`, str `host`, int `port`) |
 | `read`        | Plugin wants to read data.        | (int `fd`, int `count`) |
-| `write`       | Plugin wants to write data.       | (int `fd`, base64 `data`) |
+| `write`       | Plugin wants to write data.       | (int `fd`, ArrayBuffer `data`) |
 | `close`       | Plugin wants to close an fd.      | (int `fd`) |
 | `isReadReady` | Plugin wants to know read status. | (int `fd`) |
 | `exit`        | The plugin is exiting.            | (int `code`) |
