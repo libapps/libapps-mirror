@@ -34,11 +34,9 @@ nassh.Stream.RelaySshfeWS = function(fd) {
   // The ssh-agent we talk to for the SSH-FE challenge.
   this.sshAgent_ = null;
 
+  this.writeArrayBuffer = true;
   // All the data we've queued but not yet sent out.
-  this.writeBuffer_ = '';
-  // An array buffer cache so we don't have to create a new one everytime
-  // sendWrite is called.  The contents of this are not retained.
-  this.writeBufferCache_ = new ArrayBuffer(this.maxMessageLength + 4);
+  this.writeBuffer_ = new Uint8Array();
   // Callback function when asyncWrite is used.
   this.onWriteSuccess_ = null;
 
@@ -341,11 +339,12 @@ nassh.Stream.RelaySshfeWS.prototype.onSocketData_ = function(e) {
  * @param {function(number)=} onSuccess Optional callback.
  */
 nassh.Stream.RelaySshfeWS.prototype.asyncWrite = function(data, onSuccess) {
-  if (!data.length) {
+  if (!data.byteLength) {
     return;
   }
 
-  this.writeBuffer_ += atob(data);
+  this.writeBuffer_ = lib.array.concatTyped(
+      this.writeBuffer_, new Uint8Array(data));
   this.onWriteSuccess_ = onSuccess;
   this.sendWrite_();
 };
@@ -360,19 +359,19 @@ nassh.Stream.RelaySshfeWS.prototype.sendWrite_ = function() {
     return;
   }
 
-  const size = Math.min(this.maxMessageLength, this.writeBuffer_.length);
-  const u8 = new Uint8Array(this.writeBufferCache_, 0, size + 4);
-  const dv = new DataView(this.writeBufferCache_);
+  const readBuffer = this.writeBuffer_.subarray(0, this.maxMessageLength);
+  const size = readBuffer.length;
+  const buf = new ArrayBuffer(size + 4);
+  const u8 = new Uint8Array(buf, 4);
+  const dv = new DataView(buf);
 
   dv.setUint32(0, this.readCount_);
 
-  const data = u8.subarray(4);
-  for (let i = 0; i < size; ++i) {
-    data[i] = this.writeBuffer_.charCodeAt(i);
-  }
+  // Copy over the read buffer.
+  u8.set(readBuffer);
 
-  this.socket_.send(u8);
-  this.writeBuffer_ = this.writeBuffer_.slice(size);
+  this.socket_.send(buf);
+  this.writeBuffer_ = this.writeBuffer_.subarray(size);
 
   if (this.onWriteSuccess_ !== null) {
     // Notify nassh that we are ready to consume more data.
