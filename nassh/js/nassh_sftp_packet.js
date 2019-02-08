@@ -43,11 +43,8 @@ nassh.sftp.Packet.prototype.setUint64 = function(uint64) {
  * Sets a string at the current offset.
  */
 nassh.sftp.Packet.prototype.setString = function(string) {
-  var stringLength = string.length;
-
-  this.setUint32(stringLength); //sets strings length
-  this.packet_ += string;
-  this.offset_ += stringLength;
+  this.setUint32(string.length);
+  this.setData(string);
 };
 
 /**
@@ -116,16 +113,16 @@ nassh.sftp.Packet.prototype.getString = function() {
     throw new Error('Packet too short to read a string');
   }
 
-  var string = this.packet_.substr(this.offset_, stringLength);
-  this.offset_ += stringLength;
-  return string;
+  return this.getData(stringLength);
 };
 
 /**
- * Gets the remaining data from the packet at the current offset.
+ * Gets raw data from the packet at the current offset.
+ *
+ * @param {number=} length How many bytes to read.
  */
-nassh.sftp.Packet.prototype.getData = function() {
-  var data = this.packet_.substr(this.offset_);
+nassh.sftp.Packet.prototype.getData = function(length=undefined) {
+  const data = this.packet_.substr(this.offset_, length);
   this.offset_ += data.length;
   return data;
 };
