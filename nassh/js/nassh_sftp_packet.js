@@ -40,11 +40,30 @@ nassh.sftp.Packet.prototype.setUint64 = function(uint64) {
 };
 
 /**
- * Sets a string at the current offset.
+ * Sets a binary string at the current offset.
+ *
+ * SFTP defines the 'string' type as a 32-bit integer followed by arbitrary
+ * binary data with no encoding.  This function writes the specified string
+ * to the packet with no encoding -- the bytes are directly appended.
+ *
+ * @param {string} string The binary string to append to the packet.
  */
-nassh.sftp.Packet.prototype.setString = function(string) {
-  this.setUint32(string.length);
-  this.setData(string);
+nassh.sftp.Packet.prototype.setString = function(binaryString) {
+  this.setUint32(binaryString.length);
+  this.setData(binaryString);
+};
+
+/**
+ * Sets a string at the current offset.
+ *
+ * SFTP defines the 'string' type as a 32-bit integer followed by arbitrary
+ * binary data with no encoding.  This function writes the specified string
+ * to the packet by encoding it into UTF-8 code units first.
+ *
+ * @param {string} string The string to append to the packet.
+ */
+nassh.sftp.Packet.prototype.setUtf8String = function(string) {
+  this.setString(lib.encodeUTF8(string));
 };
 
 /**
@@ -104,7 +123,13 @@ nassh.sftp.Packet.prototype.getUint64 = function() {
 };
 
 /**
- * Gets a string from the current offset, if possible.
+ * Gets a binary string from the current offset.
+ *
+ * SFTP defines the 'string' type as a 32-bit integer followed by arbitrary
+ * binary data with no encoding.  This function reads that binary data out of
+ * the packet and returns it directly -- no encoding is assumed here.
+ *
+ * @return {string} The binary string.
  */
 nassh.sftp.Packet.prototype.getString = function() {
   var stringLength = this.getUint32();
@@ -114,6 +139,19 @@ nassh.sftp.Packet.prototype.getString = function() {
   }
 
   return this.getData(stringLength);
+};
+
+/**
+ * Gets a UTF-8 encoded string from the current offset.
+ *
+ * SFTP defines the 'string' type as a 32-bit integer followed by arbitrary
+ * binary data with no encoding.  This function treats that binary data as
+ * UTF-8 encoded and will decode it into native JS strings.
+ *
+ * @return {string} The string.
+ */
+nassh.sftp.Packet.prototype.getUtf8String = function() {
+  return lib.decodeUTF8(this.getString());
 };
 
 /**

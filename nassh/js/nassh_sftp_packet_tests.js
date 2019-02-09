@@ -118,7 +118,7 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetUint64', function(result, cx) {
 });
 
 /**
- * Checks for adding strings.
+ * Checks for adding binary strings.
  */
 nassh.sftp.packets.Tests.addTest('sftpPacketSetString', function(result, cx) {
   const packet = new nassh.sftp.Packet();
@@ -128,10 +128,31 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetString', function(result, cx) {
   result.assertEQ(5, packet.getLength());
   result.assertEQ('\x00\x00\x00\x01\x00', packet.packet_);
 
-  // Then another normal string.
-  packet.setString('abcd');
+  // Then another binary string.
+  packet.setString('abc\xff');
   result.assertEQ(13, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x01\x00\x00\x00\x00\x04abcd', packet.packet_);
+  result.assertEQ('\x00\x00\x00\x01\x00\x00\x00\x00\x04abc\xff',
+                  packet.packet_);
+
+  result.pass();
+});
+
+/**
+ * Checks for adding strings.
+ */
+nassh.sftp.packets.Tests.addTest('sftpPacketSetUtf8String', function(result, cx) {
+  const packet = new nassh.sftp.Packet();
+
+  // Start with a NUL byte.
+  packet.setUtf8String('\u{0}');
+  result.assertEQ(5, packet.getLength());
+  result.assertEQ('\x00\x00\x00\x01\x00', packet.packet_);
+
+  // Then another normal string.
+  packet.setUtf8String('abcdß');
+  result.assertEQ(15, packet.getLength());
+  result.assertEQ('\x00\x00\x00\x01\x00\x00\x00\x00\x06abcd\xc3\x9f',
+                  packet.packet_);
 
   result.pass();
 });
@@ -233,22 +254,46 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetUint64', function(result, cx) {
 });
 
 /**
- * Checks for reading strings.
+ * Checks for reading binary strings.
  */
 nassh.sftp.packets.Tests.addTest('sftpPacketGetString', function(result, cx) {
-  const packet = new nassh.sftp.Packet('\x00\x00\x00\x00\x00\x00\x00\x03abc');
-  result.assertEQ(11, packet.getLength());
+  const packet = new nassh.sftp.Packet('\x00\x00\x00\x00' +
+                                       '\x00\x00\x00\x04abc\xff');
+  result.assertEQ(12, packet.getLength());
 
-  // Read the strings.
+  // Read the binary strings.
   result.assertEQ('', packet.getString());
   result.assertEQ(false, packet.eod());
 
-  result.assertEQ('abc', packet.getString());
+  result.assertEQ('abc\xff', packet.getString());
   result.assertEQ(true, packet.eod());
 
   // Check short read.
   try {
     packet.getString();
+    result.fail();
+  } catch(e) {
+    result.pass();
+  }
+});
+
+/**
+ * Checks for reading strings.
+ */
+nassh.sftp.packets.Tests.addTest('sftpPacketGetUtf8String', function(result, cx) {
+  const packet = new nassh.sftp.Packet('\x00\x00\x00\x00' +
+                                       '\x00\x00\x00\x06abcd\xc3\x9f');
+
+  // Read the strings.
+  result.assertEQ('', packet.getUtf8String());
+  result.assertEQ(false, packet.eod());
+
+  result.assertEQ('abcdß', packet.getUtf8String());
+  result.assertEQ(true, packet.eod());
+
+  // Check short read.
+  try {
+    packet.getUtf8String();
     result.fail();
   } catch(e) {
     result.pass();
