@@ -804,7 +804,8 @@ nassh.sftp.Client.prototype.writeChunk = function(handle, offset, data) {
   var packet = new nassh.sftp.Packet();
   packet.setString(handle);
   packet.setUint64(offset);
-  packet.setString(data);
+  packet.setUint32(data.length);
+  packet.setData(data);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.WRITE, packet)
     .then(response => this.isSuccessResponse_(response, 'WRITE'));

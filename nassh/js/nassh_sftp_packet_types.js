@@ -37,7 +37,8 @@ nassh.sftp.packets.StatusPacket = function(packet) {
  */
 nassh.sftp.packets.DataPacket = function(packet) {
   this.requestId = packet.getUint32();
-  this.data = packet.getString();
+  this.length = packet.getUint32();
+  this.data = packet.getData(this.length);
 };
 
 /**
