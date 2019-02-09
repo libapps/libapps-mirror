@@ -10,6 +10,8 @@
 nassh.sftp.Packet = function(opt_packet) {
   this.offset_ = 0;
   this.packet_ = opt_packet || '';
+  this.encoder_ = new TextEncoder();
+  this.decoder_ = new TextDecoder();
 };
 
 /**
@@ -63,7 +65,8 @@ nassh.sftp.Packet.prototype.setString = function(binaryString) {
  * @param {string} string The string to append to the packet.
  */
 nassh.sftp.Packet.prototype.setUtf8String = function(string) {
-  this.setString(lib.encodeUTF8(string));
+  const data = lib.codec.codeUnitArrayToString(this.encoder_.encode(string));
+  this.setString(data);
 };
 
 /**
@@ -151,7 +154,8 @@ nassh.sftp.Packet.prototype.getString = function() {
  * @return {string} The string.
  */
 nassh.sftp.Packet.prototype.getUtf8String = function() {
-  return lib.decodeUTF8(this.getString());
+  return this.decoder_.decode(new Uint8Array(
+      lib.codec.stringToCodeUnitArray(this.getString())));
 };
 
 /**

@@ -99,6 +99,7 @@ nassh.sftp.packets.Tests.addTest('sftpNamePacketEmpty', function(result, cx) {
  * Verify non-empty NamePacket deserialization.
  */
 nassh.sftp.packets.Tests.addTest('sftpNamePacket', function(result, cx) {
+  const te = new TextEncoder();
   const dataPacket = new nassh.sftp.Packet(
       // 32-bit request id.
       '\x01\x02\x03\x04' +
@@ -117,9 +118,11 @@ nassh.sftp.packets.Tests.addTest('sftpNamePacket', function(result, cx) {
       // File 2: (no) attributes.
       '\x00\x00\x00\x00' +
       // File 3: unicode name.
-      '\x00\x00\x00\x09' + lib.encodeUTF8('日本語') +
+      '\x00\x00\x00\x09' +
+      lib.codec.codeUnitArrayToString(te.encode('日本語')) +
       // File 3: unicode long name.
-      '\x00\x00\x00\x13-rw-rw-rw ' + lib.encodeUTF8('日本語') +
+      '\x00\x00\x00\x13-rw-rw-rw ' +
+      lib.codec.codeUnitArrayToString(te.encode('日本語')) +
       // File 3: simple attributes.
       '\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x03'
   );
