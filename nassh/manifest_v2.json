@@ -2,7 +2,6 @@
   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDixnK8f4AuZrV+QZx7iiONG/SAiU5VrjlXD2KxRGvI6tDJrLvUin+GpcuMH1d/Qrc0+PmCzJ1duAiD/9F2q8kiYwQ1C3gZmztYneAiVX+3/OvXHr/idyueNQ5XFvBnMCpKD0KqPEksP80utV417fuaHAY4NFjofLZyWUvu23XHRwIDAQAB",
   "minimum_chrome_version": "57",
   "manifest_version": 2,
-  "content_security_policy": "script-src 'self'; object-src 'self'",
   "name": "Secure Shell App V2 (tot)",
   "version": "0.20",
   "default_locale": "en",
@@ -13,7 +12,6 @@
   },
   "description": "Terminal emulator and SSH and SFTP client.",
   "offline_enabled": true,
-  "options_page": "html/nassh_preferences_editor.html",
   "permissions": [
     "clipboardRead",
     "clipboardWrite",
@@ -30,21 +28,10 @@
     "multiple_mounts": true,
     "configurable": false
   },
-  "web_accessible_resources": [
-    "html/nassh.html",
-    "html/nassh_google_relay.html",
-    "html/nassh_connect_dialog.html"
-  ],
   "app": {
     "background": {
       "persistent": false,
-      "scripts": [
-        "js/nassh_deps.concat.js",
-        "js/nassh_background.js",
-        "js/nassh.js",
-        "js/nassh_app.js",
-        "js/nassh_preference_manager.js"
-      ]
+      "page": "html/nassh_background.html"
     }
   },
   "platforms": [
@@ -60,8 +47,5 @@
       "nacl_arch": "arm",
       "sub_package_path": "_platform_specific/arm/"
     }
-  ],
-  "omnibox": {
-    "keyword": "ssh"
-  }
+  ]
 }

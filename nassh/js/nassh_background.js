@@ -5,23 +5,15 @@
 'use strict';
 
 (function() {
-  var didLaunch = false;
+  let didLaunch = false;
+  const onLaunched = () => { didLaunch = true; };
 
-  /**
-   * Used to watch for launch events that occur before we're ready to handle
-   * them. Only used when Secure Shell is running as a v2 app.
-   */
-  if (!!chrome.app.window) {
-    var onLaunched = function() { didLaunch = true; };
+  // Used to watch for launch events that occur before we're ready to handle
+  // them.  We'll clean this up below during init.
+  if (nassh.v2) {
     chrome.app.runtime.onLaunched.addListener(onLaunched);
   }
-
-  /**
-   * Used to watch for launch events that occur before we're ready to handle
-   * them. Only used when Secure Shell is running as an extension.
-   */
   if (nassh.browserAction) {
-    const onLaunched = function() { didLaunch = true; };
     nassh.browserAction.onClicked.addListener(onLaunched);
   }
 
@@ -31,31 +23,29 @@
    * The window.app_ property will contain the new app instance so it can be
    * reached from the background page's JS console.
    */
-  lib.init(function nassh_background() {
-    var manifest = chrome.runtime.getManifest();
-    var app = new nassh.App(manifest);
+  lib.init(function() {
+    const app = new nassh.App();
 
-    app.onInit.addListener(function() {
-      if (!!chrome.app.window) {
-        // Ready to handle launch events, no need for special handling anymore.
-        chrome.app.runtime.onLaunched.removeListener(onLaunched);
+    // If we're running as a v2 app, finish setup.
+    if (nassh.v2) {
+      chrome.app.runtime.onLaunched.removeListener(onLaunched);
+      app.installHandlers(chrome.app.runtime);
+    }
 
-        app.installHandlers(chrome.app.runtime);
-
-        if (didLaunch)
-        app.onLaunched();
-      } else {
-        console.log('background-page: init complete');
-      }
-    });
-    app.installOmnibox(chrome.omnibox);
+    // If omnibox is enabled, set it up.
+    if (window.chrome && chrome.omnibox) {
+      app.installOmnibox(chrome.omnibox);
+    }
 
     // If we're running as an extension, finish setup.
     if (nassh.browserAction) {
       nassh.browserAction.onClicked.removeListener(onLaunched);
       app.installBrowserAction();
-      if (didLaunch)
-        app.onLaunched();
+    }
+
+    // If the user tried to run us while we were initializing, run it now.
+    if (didLaunch) {
+      app.onLaunched();
     }
 
     // "Public" window.app will be retrieved by individual windows via

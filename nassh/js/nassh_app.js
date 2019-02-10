@@ -11,8 +11,6 @@
  * @constructor
  */
 nassh.App = function() {
-  this.onInit = new lib.Event();
-
   this.prefs_ = new nassh.PreferenceManager();
   this.omniMatches_ = [];
   this.omniDefault_ = null;
@@ -221,9 +219,9 @@ nassh.App.prototype.installHandlers = function(runtime) {
 nassh.App.prototype.onLaunched = function(e) {
   const width = 900;
   const height = 600;
-  if (chrome.app.window) {
+  if (nassh.v2) {
     chrome.app.window.create('/html/nassh.html', {
-      'bounds': {
+      'innerBounds': {
         'width': width,
         'height': height,
       },
@@ -234,11 +232,4 @@ nassh.App.prototype.onLaunched = function(e) {
                      'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
                      `minimizable=yes,width=${width},height=${height}`);
   }
-};
-
-/**
- * The firstCallback of the onInit event.
- */
-nassh.App.prototype.onInit_ = function() {
-  console.log('nassh: Application initialized: ' + chrome.runtime.getURL(''));
 };
