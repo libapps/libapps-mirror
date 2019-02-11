@@ -323,3 +323,34 @@ nassh.workaroundMissingChromeRuntime = function() {
 
   return false;
 };
+
+/**
+ * Helper to get the background page once it's fully initialized.
+ *
+ * If the background page doesn't exist yet (fresh startup, or it's gone quiet
+ * and Chrome automatically exited it), then the getBackgroundPage helper will
+ * create a new instance on the fly and return it.  Unfortunately, we will often
+ * then try to call funcs in it directly before it's finished initializing which
+ * will cause random failures as it hits race conditions.
+ *
+ * @return {Promise<Window>} A promise resolving to the background page once it
+ *    is fully initialized.
+ */
+nassh.getBackgroundPage = function() {
+  if (!window.chrome || !chrome.runtime || !chrome.runtime.getBackgroundPage) {
+    return Promise.reject();
+  }
+
+  return new Promise((resolve) => {
+    chrome.runtime.getBackgroundPage((bg) => {
+      const checkInitialized = () => {
+        if (bg.loaded) {
+          return resolve(bg);
+        }
+        console.log('Background page not initialized; retrying');
+        setTimeout(checkInitialized, 100);
+      };
+      checkInitialized();
+    });
+  });
+};

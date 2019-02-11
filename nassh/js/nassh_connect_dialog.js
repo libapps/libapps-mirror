@@ -453,12 +453,14 @@ nassh.ConnectDialog.prototype.mount = function() {
  */
 nassh.ConnectDialog.prototype.unmount = function() {
   var options = {fileSystemId: this.currentProfileRecord_.id};
-  chrome.runtime.getBackgroundPage((bg) => {
-    bg.nassh.sftp.fsp.onUnmountRequested(
-        options,
-        (success) => this.displayMountButton_(true),
-        (error) => { /* do nothing */ });
-  });
+  // TODO: Turn this into an external message API.
+  nassh.getBackgroundPage()
+    .then((bg) => {
+      bg.nassh.sftp.fsp.onUnmountRequested(
+          options,
+          (success) => this.displayMountButton_(true),
+          (error) => { /* do nothing */ });
+    });
 };
 
 /**

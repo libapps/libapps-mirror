@@ -495,7 +495,8 @@ nassh.CommandInstance.prototype.mountProfile = function(profileID, querystr) {
   };
 
   const onStartup = (prefs) => {
-    chrome.runtime.getBackgroundPage((bg) => onBackgroundPage(bg, prefs));
+    nassh.getBackgroundPage()
+      .then((bg) => onBackgroundPage(bg, prefs));
   };
 
   this.commonProfileSetup_(profileID, onStartup);
@@ -697,9 +698,8 @@ nassh.CommandInstance.prototype.mountDestination = function(destination) {
     connectOptions: rv,
   };
 
-  chrome.runtime.getBackgroundPage((bg) => {
-    bg.nassh.sftp.fsp.createSftpInstance(args);
-  });
+  nassh.getBackgroundPage()
+    .then((bg) => bg.nassh.sftp.fsp.createSftpInstance(args));
 };
 
 /**
