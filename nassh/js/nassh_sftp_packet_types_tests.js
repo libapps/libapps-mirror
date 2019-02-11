@@ -413,7 +413,8 @@ nassh.sftp.packets.Tests.addTest('sftpSetFileAttrs', function(result, cx) {
   let packet = new nassh.sftp.Packet();
   nassh.sftp.packets.setFileAttrs(packet, {flags: 0});
   assert.equal(4, packet.getLength());
-  assert.equal('\x00\x00\x00\x00', packet.toString());
+  assert.deepStrictEqual(new Uint8Array([0x00, 0x00, 0x00, 0x00]),
+                         packet.toByteArray());
 
   // Check size handling.
   packet = new nassh.sftp.Packet();
@@ -422,8 +423,10 @@ nassh.sftp.packets.Tests.addTest('sftpSetFileAttrs', function(result, cx) {
     size: 0x12345678,
   });
   assert.equal(12, packet.getLength());
-  assert.equal('\x00\x00\x00\x01\x00\x00\x00\x00\x12\x34\x56\x78',
-               packet.toString());
+  assert.deepStrictEqual(
+      new Uint8Array([0x00, 0x00, 0x00, 0x01,
+                      0x00, 0x00, 0x00, 0x00, 0x12, 0x34, 0x56, 0x78]),
+      packet.toByteArray());
 
   // Check uid/gid handling.
   packet = new nassh.sftp.Packet();
@@ -433,8 +436,10 @@ nassh.sftp.packets.Tests.addTest('sftpSetFileAttrs', function(result, cx) {
     gid: 5000,
   });
   assert.equal(12, packet.getLength());
-  assert.equal('\x00\x00\x00\x02\x00\x00\x03\xe8\x00\x00\x13\x88',
-               packet.toString());
+  assert.deepStrictEqual(
+      new Uint8Array([0x00, 0x00, 0x00, 0x02,
+                      0x00, 0x00, 0x03, 0xe8, 0x00, 0x00, 0x13, 0x88]),
+      packet.toByteArray());
 
   // Check permissions handling.
   packet = new nassh.sftp.Packet();
@@ -443,8 +448,9 @@ nassh.sftp.packets.Tests.addTest('sftpSetFileAttrs', function(result, cx) {
     permissions: 0o7777,
   });
   assert.equal(8, packet.getLength());
-  assert.equal('\x00\x00\x00\x04\x00\x00\x0f\xff',
-               packet.toString());
+  assert.deepStrictEqual(
+      new Uint8Array([0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x0f, 0xff]),
+      packet.toByteArray());
 
   // Check time handling.
   packet = new nassh.sftp.Packet();
@@ -454,8 +460,10 @@ nassh.sftp.packets.Tests.addTest('sftpSetFileAttrs', function(result, cx) {
     last_modified: 1500000000,
   });
   assert.equal(12, packet.getLength());
-  assert.equal('\x00\x00\x00\x08\x3b\x9a\xca\x00\x59\x68\x2f\x00',
-               packet.toString());
+  assert.deepStrictEqual(
+      new Uint8Array([0x00, 0x00, 0x00, 0x08,
+                      0x3b, 0x9a, 0xca, 0x00, 0x59, 0x68, 0x2f, 0x00]),
+      packet.toByteArray());
 
   // Now altogether!
   packet = new nassh.sftp.Packet();
@@ -472,12 +480,13 @@ nassh.sftp.packets.Tests.addTest('sftpSetFileAttrs', function(result, cx) {
     last_modified: 1500000000,
   });
   assert.equal(32, packet.getLength());
-  assert.equal('\x00\x00\x00\x0f' +
-               '\x00\x00\x00\x00\x12\x34\x56\x78' +
-               '\x00\x00\x03\xe8\x00\x00\x13\x88' +
-               '\x00\x00\x0f\xff' +
-               '\x3b\x9a\xca\x00\x59\x68\x2f\x00',
-               packet.toString());
+  assert.deepStrictEqual(
+      new Uint8Array([0x00, 0x00, 0x00, 0x0f,
+                      0x00, 0x00, 0x00, 0x00, 0x12, 0x34, 0x56, 0x78,
+                      0x00, 0x00, 0x03, 0xe8, 0x00, 0x00, 0x13, 0x88,
+                      0x00, 0x00, 0x0f, 0xff,
+                      0x3b, 0x9a, 0xca, 0x00, 0x59, 0x68, 0x2f, 0x00]),
+      packet.toByteArray());
 
   result.pass();
 });

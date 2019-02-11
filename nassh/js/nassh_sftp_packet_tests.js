@@ -17,9 +17,8 @@ nassh.sftp.packets.Tests.addTest('sftpPacket', function(result, cx) {
   let packet = new nassh.sftp.Packet();
   assert.equal(0, packet.offset_);
   assert.equal(0, packet.getLength());
-  assert.equal('', packet.packet_);
   assert.equal('', packet.toString());
-  let ret = packet.toByteArray();
+  let ret = packet.toArrayBuffer();
   assert.isTrue(ret instanceof ArrayBuffer);
   assert.deepStrictEqual(new Uint8Array([]), new Uint8Array(ret));
   assert.isTrue(packet.eod());
@@ -27,10 +26,8 @@ nassh.sftp.packets.Tests.addTest('sftpPacket', function(result, cx) {
   packet = new nassh.sftp.Packet(lib.codec.stringToCodeUnitArray('abc'));
   assert.equal(0, packet.offset_);
   assert.equal(3, packet.getLength());
-  assert.equal('abc', packet.packet_);
   assert.equal('abc', packet.toString());
-  assert.deepStrictEqual(new Uint8Array([97, 98, 99]),
-                         new Uint8Array(packet.toByteArray()));
+  assert.deepStrictEqual(new Uint8Array([97, 98, 99]), packet.toByteArray());
   assert.isFalse(packet.eod());
 
   result.pass();
@@ -45,18 +42,20 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetUint8', function(result, cx) {
   // Start with a NUL byte.
   packet.setUint8(0);
   assert.equal(1, packet.getLength());
-  assert.equal('\x00', packet.packet_);
+  assert.deepStrictEqual(new Uint8Array([0x00]), packet.toByteArray());
 
   // Then some more edge case bytes.
   packet.setUint8(127);
   packet.setUint8(255);
   assert.equal(3, packet.getLength());
-  assert.equal('\x00\x7f\xff', packet.packet_);
+  assert.deepStrictEqual(new Uint8Array([0x00, 0x7f, 0xff]),
+                         packet.toByteArray());
 
   // Then a value that's too large for uint8.
   packet.setUint8(0xabcdef);
   assert.equal(4, packet.getLength());
-  assert.equal('\x00\x7f\xff\xef', packet.packet_);
+  assert.deepStrictEqual(new Uint8Array([0x00, 0x7f, 0xff, 0xef]),
+                         packet.toByteArray());
 
   result.pass();
 });
@@ -70,20 +69,25 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetUint32', function(result, cx) {
   // Start with a NUL byte.
   packet.setUint32(0);
   assert.equal(4, packet.getLength());
-  assert.equal('\x00\x00\x00\x00', packet.packet_);
+  assert.deepStrictEqual(new Uint8Array([0x00, 0x00, 0x00, 0x00]),
+                         packet.toByteArray());
 
   // Then some more edge case bytes.
   packet.setUint32(0x7faabbcc);
   packet.setUint32(0xffffffff);
   assert.equal(12, packet.getLength());
-  assert.equal('\x00\x00\x00\x00\x7f\xaa\xbb\xcc\xff\xff\xff\xff',
-               packet.packet_);
+  assert.deepStrictEqual(
+      new Uint8Array([0x00, 0x00, 0x00, 0x00, 0x7f, 0xaa, 0xbb, 0xcc,
+                      0xff, 0xff, 0xff, 0xff]),
+      packet.toByteArray());
 
   // Then a value that's too large for uint32.
   packet.setUint32(0xaabbccddeeff);
   assert.equal(16, packet.getLength());
-  assert.equal('\x00\x00\x00\x00\x7f\xaa\xbb\xcc\xff\xff\xff\xff\xcc\xdd\xee\xff',
-               packet.packet_);
+  assert.deepStrictEqual(
+      new Uint8Array([0x00, 0x00, 0x00, 0x00, 0x7f, 0xaa, 0xbb, 0xcc,
+                      0xff, 0xff, 0xff, 0xff, 0xcc, 0xdd, 0xee, 0xff]),
+      packet.toByteArray());
 
   result.pass();
 });
@@ -97,23 +101,27 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetUint64', function(result, cx) {
   // Start with a NUL byte.
   packet.setUint64(0);
   assert.equal(8, packet.getLength());
-  assert.equal('\x00\x00\x00\x00\x00\x00\x00\x00', packet.packet_);
+  assert.deepStrictEqual(
+      new Uint8Array([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]),
+      packet.toByteArray());
 
   // Then some more edge case bytes.
   packet.setUint64(0xffffffff);
   assert.equal(16, packet.getLength());
-  assert.equal('\x00\x00\x00\x00\x00\x00\x00\x00' +
-               '\x00\x00\x00\x00\xff\xff\xff\xff',
-               packet.packet_);
+  assert.deepStrictEqual(
+      new Uint8Array([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                      0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff]),
+      packet.toByteArray());
 
   // We can't actually test 64-bit values since JavaScript doesn't have a
   // native int type that large.
   packet.setUint64(0xaabbccddeeff);
   assert.equal(24, packet.getLength());
-  assert.equal('\x00\x00\x00\x00\x00\x00\x00\x00' +
-               '\x00\x00\x00\x00\xff\xff\xff\xff' +
-               '\x00\x00\xaa\xbb\xcc\xdd\xee\xff',
-               packet.packet_);
+  assert.deepStrictEqual(
+      new Uint8Array([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                      0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff,
+                      0x00, 0x00, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff]),
+      packet.toByteArray());
 
   result.pass();
 });
@@ -127,12 +135,17 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetString', function(result, cx) {
   // Start with a NUL byte.
   packet.setString('\u{0}');
   assert.equal(5, packet.getLength());
-  assert.equal('\x00\x00\x00\x01\x00', packet.packet_);
+  assert.deepStrictEqual(
+      new Uint8Array([0x00, 0x00, 0x00, 0x01, 0x00]),
+      packet.toByteArray());
 
   // Then another binary string.
   packet.setString('abc\xff');
   assert.equal(13, packet.getLength());
-  assert.equal('\x00\x00\x00\x01\x00\x00\x00\x00\x04abc\xff', packet.packet_);
+  assert.deepStrictEqual(
+      new Uint8Array([0x00, 0x00, 0x00, 0x01, 0x00,
+                      0x00, 0x00, 0x00, 0x04, 97, 98, 99, 0xff]),
+      packet.toByteArray());
 
   result.pass();
 });
@@ -146,13 +159,17 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetUtf8String', function(result, cx)
   // Start with a NUL byte.
   packet.setUtf8String('\u{0}');
   assert.equal(5, packet.getLength());
-  assert.equal('\x00\x00\x00\x01\x00', packet.packet_);
+  assert.deepStrictEqual(
+      new Uint8Array([0x00, 0x00, 0x00, 0x01, 0x00]),
+      packet.toByteArray());
 
   // Then another normal string.
   packet.setUtf8String('abcdß');
   assert.equal(15, packet.getLength());
-  assert.equal('\x00\x00\x00\x01\x00\x00\x00\x00\x06abcd\xc3\x9f',
-               packet.packet_);
+  assert.deepStrictEqual(
+      new Uint8Array([0x00, 0x00, 0x00, 0x01, 0x00,
+                      0x00, 0x00, 0x00, 0x06, 97, 98, 99, 100, 0xc3, 0x9f]),
+      packet.toByteArray());
 
   result.pass();
 });
@@ -166,12 +183,13 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetData', function(result, cx) {
   // Start with a NUL byte.
   packet.setData('\x00');
   assert.equal(1, packet.getLength());
-  assert.equal('\x00', packet.packet_);
+  assert.deepStrictEqual(new Uint8Array([0x00]), packet.toByteArray());
 
   // Then another normal string.
   packet.setData('abcd');
   assert.equal(5, packet.getLength());
-  assert.equal('\x00abcd', packet.packet_);
+  assert.deepStrictEqual(new Uint8Array([0x00, 97, 98, 99, 100]),
+                         packet.toByteArray());
 
   result.pass();
 });

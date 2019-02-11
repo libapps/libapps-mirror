@@ -194,10 +194,21 @@ nassh.sftp.Packet.prototype.toString = function() {
 };
 
 /**
- * Returns the byteArray representation of the packet.
+ * Returns an Array of bytes representation of the packet.
+ *
+ * @return {Uint8Array} The data bytes.
  */
 nassh.sftp.Packet.prototype.toByteArray = function() {
-  return lib.codec.stringToCodeUnitArray(this.packet_, Uint8Array).buffer;
+  return lib.codec.stringToCodeUnitArray(this.packet_, Uint8Array);
+};
+
+/**
+ * Returns the ArrayBuffer representation of the packet.
+ *
+ * @return {ArrayBuffer} The data buffer.
+ */
+nassh.sftp.Packet.prototype.toArrayBuffer = function() {
+  return this.toByteArray().buffer;
 };
 
 /**

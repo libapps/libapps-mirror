@@ -229,7 +229,7 @@ nassh.sftp.Client.prototype.sendRequest_ = function(type, data) {
 
   return new Promise(resolve => {
     this.pendingRequests_[requestId] = resolve;
-    this.sendToPlugin_('onRead', [0, packet.toByteArray()]);
+    this.sendToPlugin_('onRead', [0, packet.toArrayBuffer()]);
   });
 };
 
@@ -316,7 +316,7 @@ nassh.sftp.Client.prototype.init = function() {
 
     this.isInitialised = true;
   };
-  this.sendToPlugin_('onRead', [0, packet.toByteArray()]);
+  this.sendToPlugin_('onRead', [0, packet.toArrayBuffer()]);
 };
 
 
