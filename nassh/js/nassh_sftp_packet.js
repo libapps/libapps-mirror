@@ -6,10 +6,18 @@
 
 /**
  * A general packet. Utilizes an offset to keep track of data being read/written.
+ *
+ * @param {string|Array<number>=} arg The initial data for the new packet.
  */
-nassh.sftp.Packet = function(opt_packet) {
+nassh.sftp.Packet = function(arg='') {
+  let packet;
+  if (typeof arg == 'string') {
+    packet = arg;
+  } else {
+    packet = lib.codec.codeUnitArrayToString(arg);
+  }
   this.offset_ = 0;
-  this.packet_ = opt_packet || '';
+  this.packet_ = packet;
   this.encoder_ = new TextEncoder();
   this.decoder_ = new TextDecoder();
 };

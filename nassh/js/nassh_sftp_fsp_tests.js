@@ -58,16 +58,16 @@ nassh.sftp.fsp.Tests.prototype.preamble = function(result, cx) {
     },
   };
 
-  const packet = new nassh.sftp.Packet(
+  const packet = new nassh.sftp.Packet([
       // 32-bit request id.
-      '\x01\x02\x03\x04' +
+      0x01, 0x02, 0x03, 0x04,
       // 32-bit code.
-      '\x00\x00\x00\x01' +
+      0x00, 0x00, 0x00, 0x01,
       // Message string.
-      '\x00\x00\x00\x00' +
+      0x00, 0x00, 0x00, 0x00,
       // Language string.
-      '\x00\x00\x00\x00'
-  );
+      0x00, 0x00, 0x00, 0x00,
+  ]);
   this.eofPacket = new nassh.sftp.packets.StatusPacket(packet);
 };
 

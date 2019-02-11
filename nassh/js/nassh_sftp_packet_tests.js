@@ -24,7 +24,7 @@ nassh.sftp.packets.Tests.addTest('sftpPacket', function(result, cx) {
   assert.deepStrictEqual(new Uint8Array([]), new Uint8Array(ret));
   assert.isTrue(packet.eod());
 
-  packet = new nassh.sftp.Packet('abc');
+  packet = new nassh.sftp.Packet(lib.codec.stringToCodeUnitArray('abc'));
   assert.equal(0, packet.offset_);
   assert.equal(3, packet.getLength());
   assert.equal('abc', packet.packet_);
@@ -180,7 +180,7 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetData', function(result, cx) {
  * Checks for reading uint8's.
  */
 nassh.sftp.packets.Tests.addTest('sftpPacketGetUint8', function(result, cx) {
-  const packet = new nassh.sftp.Packet('\x00\x7f\xff');
+  const packet = new nassh.sftp.Packet([0x00, 0x7f, 0xff]);
   assert.equal(3, packet.getLength());
 
   // Read a bunch of numbers.
@@ -204,7 +204,7 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetUint8', function(result, cx) {
  */
 nassh.sftp.packets.Tests.addTest('sftpPacketGetUint32', function(result, cx) {
   const packet = new nassh.sftp.Packet(
-      '\x00\x00\x00\x00\x7f\xff\xff\xff\xff\xff\xff\xff');
+      [0x00, 0x00, 0x00, 0x00, 0x7f, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff]);
   assert.equal(12, packet.getLength());
 
   // Read a bunch of numbers.
@@ -227,8 +227,9 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetUint32', function(result, cx) {
  * Checks for reading uint64's.
  */
 nassh.sftp.packets.Tests.addTest('sftpPacketGetUint64', function(result, cx) {
-  const packet = new nassh.sftp.Packet('\x00\x00\x00\x00\x00\x00\x00\x00' +
-                                       '\x00\x00\xaa\xbb\xcc\xdd\xee\xff');
+  const packet = new nassh.sftp.Packet(
+      [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+       0x00, 0x00, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff]);
   assert.equal(16, packet.getLength());
 
   // Read a bunch of numbers.
@@ -248,8 +249,8 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetUint64', function(result, cx) {
  * Checks for reading binary strings.
  */
 nassh.sftp.packets.Tests.addTest('sftpPacketGetString', function(result, cx) {
-  const packet = new nassh.sftp.Packet('\x00\x00\x00\x00' +
-                                       '\x00\x00\x00\x04abc\xff');
+  const packet = new nassh.sftp.Packet(
+      [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 97, 98, 99, 0xff]);
   assert.equal(12, packet.getLength());
 
   // Read the binary strings.
@@ -269,8 +270,9 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetString', function(result, cx) {
  * Checks for reading strings.
  */
 nassh.sftp.packets.Tests.addTest('sftpPacketGetUtf8String', function(result, cx) {
-  const packet = new nassh.sftp.Packet('\x00\x00\x00\x00' +
-                                       '\x00\x00\x00\x06abcd\xc3\x9f');
+  const packet = new nassh.sftp.Packet(
+      [0x00, 0x00, 0x00, 0x00,
+       0x00, 0x00, 0x00, 0x06, 97, 98, 99, 100, 0xc3, 0x9f]);
 
   // Read the strings.
   assert.equal('', packet.getUtf8String());
@@ -289,7 +291,7 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetUtf8String', function(result, cx)
  * Checks for reading data.
  */
 nassh.sftp.packets.Tests.addTest('sftpPacketGetData', function(result, cx) {
-  const packet = new nassh.sftp.Packet('abcd');
+  const packet = new nassh.sftp.Packet([97, 98, 99, 100]);
   assert.equal(4, packet.getLength());
 
   // Read the strings.
