@@ -419,19 +419,33 @@ nassh.ConnectDialog.prototype.save = function() {
 };
 
 /**
- * Mount if the form validates.
+ * Helper for starting a connection.
+ *
+ * @param {string} message The message to send to the main window to startup.
+ * @param {string} protocol The URI schema to try and register.
  */
-nassh.ConnectDialog.prototype.mount = function() {
+nassh.ConnectDialog.prototype.startup_ = function(message, proto) {
   this.maybeCopyPlaceholders_();
   this.save();
+
+  // Since the user has initiated this connection, register the protocol.
+  nassh.registerProtocolHandler(proto);
 
   var items = {
     '/nassh/connectDialog/lastProfileId': this.currentProfileRecord_.id
   };
   chrome.storage.local.set(items);
 
-  if (this.form_.checkValidity())
-    this.postMessage('mountProfile', [this.currentProfileRecord_.id]);
+  if (this.form_.checkValidity()) {
+    this.postMessage(message, [this.currentProfileRecord_.id]);
+  }
+};
+
+/**
+ * Mount the selected profile.
+ */
+nassh.ConnectDialog.prototype.mount = function() {
+  this.startup_('mountProfile', 'ssh');
 };
 
 /**
@@ -448,22 +462,10 @@ nassh.ConnectDialog.prototype.unmount = function() {
 };
 
 /**
- * Save any changes and connect if the form validates.
+ * Connect to the selected profile.
  */
-nassh.ConnectDialog.prototype.connect = function(name, argv) {
-  this.maybeCopyPlaceholders_();
-  this.save();
-
-  // Since the user has initiated this connection, register the protocol.
-  nassh.registerProtocolHandler('ssh');
-
-  var items = {
-    '/nassh/connectDialog/lastProfileId': this.currentProfileRecord_.id
-  };
-  chrome.storage.local.set(items);
-
-  if (this.form_.checkValidity())
-    this.postMessage('connectToProfile', [this.currentProfileRecord_.id]);
+nassh.ConnectDialog.prototype.connect = function() {
+  this.startup_('connectToProfile', 'ssh');
 };
 
 /**
