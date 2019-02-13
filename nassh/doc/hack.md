@@ -456,6 +456,13 @@ We follow the [OpenSSH SFTP Protocol] here, as do many other clients.
 [SFTPv6] noted this desync between implementations and the specification and
 replaced the `SSH_FXP_SYMLINK` packet type with a new `SSH_FXP_LINK`.
 
+### hardlink@openssh.com (v1)
+
+The [OpenSSH SFTP Protocol] defines a `hardlink@openssh.com` extension with
+the same API as `SSH_FXP_SYMLINK`.
+
+We use this extension when the user has requested hardlinks explicitly.
+
 ### posix-rename@openssh.com (v1)
 
 The [OpenSSH SFTP Protocol] defines a `posix-rename@openssh.com` extension with

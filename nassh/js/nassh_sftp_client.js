@@ -880,3 +880,30 @@ nassh.sftp.Client.prototype.symLink = function(target, path) {
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.SYMLINK, packet)
     .then(response => this.isSuccessResponse_(response, 'SYMLINK'));
 };
+
+/**
+ * Create a hardlink.
+ *
+ * This requires the hardlink@openssh.com extension.
+ *
+ * @param {string} oldpath The existing path to link to.
+ * @param {string} newpath The new path to create.
+ * @return {!Promise<!StatusPacket>} A Promise that resolves or rejects with
+ *    a nassh.sftp.StatusError.
+ */
+nassh.sftp.Client.prototype.hardLink = function(oldpath, newpath) {
+  const packet = new nassh.sftp.Packet();
+
+  if (this.protocolServerExtensions['hardlink@openssh.com'] != '1') {
+    throw new nassh.sftp.StatusError({
+      'code': nassh.sftp.packets.StatusCodes.OP_UNSUPPORTED,
+      'message': 'hardlink@openssh.com not supported',
+    }, 'HARDLINK');
+  }
+
+  packet.setUtf8String(this.basePath_ + oldpath);
+  packet.setUtf8String(this.basePath_ + newpath);
+
+  return this.sendRequest_('hardlink@openssh.com', packet)
+    .then((response) => this.isSuccessResponse_(response, 'HARDLINK'));
+};
