@@ -80,6 +80,44 @@ nassh.sftp.packets.AttrsPacket = function(packet) {
 };
 
 /**
+ * SFTP Extended Reply Packet.
+ *
+ * Since extended replies need specific parsers, we just save a reference to the
+ * original packet and delay parsing to whatever call made the extended request.
+ *
+ * @param {nassh.sftp.Packet} packet The source packet to read from.
+ */
+nassh.sftp.packets.ExtendedReplyPacket = function(packet) {
+  this.requestId = packet.getUint32();
+  this.rawPacket = packet;
+};
+
+/**
+ * SFTP response to statvfs@openssh.com packets.
+ *
+ * @param {nassh.sftp.packets.ExtendedReplyPacket} packet The extended reply.
+ */
+nassh.sftp.packets.DiskFreePacket = function(packet) {
+  const p = packet.rawPacket;
+  this.requestId = p.requestId;
+  this.bsize = p.getUint64();
+  this.frsize = p.getUint64();
+  this.blocks = p.getUint64();
+  this.bfree = p.getUint64();
+  this.bavail = p.getUint64();
+  this.files = p.getUint64();
+  this.ffree = p.getUint64();
+  this.favail = p.getUint64();
+  this.fsid_hi = p.getUint32();
+  this.fsid_lo = p.getUint32();
+  this.flag = p.getUint64();
+  this.namemax = p.getUint64();
+
+  this.st_rdonly = !!(this.flag & 0x1);
+  this.st_nosuid = !!(this.flag & 0x2);
+};
+
+/**
  * Make sure the name conforms to the specification.
  *
  * The SFTP RFC defines the extension-name format:
@@ -368,6 +406,7 @@ nassh.sftp.packets.ResponsePackets = {
   103: nassh.sftp.packets.DataPacket,
   104: nassh.sftp.packets.NamePacket,
   105: nassh.sftp.packets.AttrsPacket,
+  201: nassh.sftp.packets.ExtendedReplyPacket,
 };
 
 /**

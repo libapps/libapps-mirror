@@ -892,8 +892,6 @@ nassh.sftp.Client.prototype.symLink = function(target, path) {
  *    a nassh.sftp.StatusError.
  */
 nassh.sftp.Client.prototype.hardLink = function(oldpath, newpath) {
-  const packet = new nassh.sftp.Packet();
-
   if (this.protocolServerExtensions['hardlink@openssh.com'] != '1') {
     throw new nassh.sftp.StatusError({
       'code': nassh.sftp.packets.StatusCodes.OP_UNSUPPORTED,
@@ -901,9 +899,38 @@ nassh.sftp.Client.prototype.hardLink = function(oldpath, newpath) {
     }, 'HARDLINK');
   }
 
+  const packet = new nassh.sftp.Packet();
   packet.setUtf8String(this.basePath_ + oldpath);
   packet.setUtf8String(this.basePath_ + newpath);
 
   return this.sendRequest_('hardlink@openssh.com', packet)
     .then((response) => this.isSuccessResponse_(response, 'HARDLINK'));
+};
+
+/**
+ * Stat the filesystem.
+ *
+ * This requires the statvfs@openssh.com extension.
+ *
+ * @param {string} path The path to stat the underlying filesystem.
+ * @return {!Promise<!StatusPacket>} A Promise that resolves or rejects with
+ *    a nassh.sftp.StatusError.
+ */
+nassh.sftp.Client.prototype.statvfs = function(path) {
+  if (this.protocolServerExtensions['statvfs@openssh.com'] != '2') {
+    throw new nassh.sftp.StatusError({
+      'code': nassh.sftp.packets.StatusCodes.OP_UNSUPPORTED,
+      'message': 'statvfs@openssh.com not supported',
+    }, 'STATVFS');
+  }
+
+  const packet = new nassh.sftp.Packet();
+  packet.setUtf8String(this.basePath_ + path);
+
+  return this.sendRequest_('statvfs@openssh.com', packet)
+    .then((response) => {
+      return this.isExpectedResponse_(
+          response, nassh.sftp.packets.ExtendedReplyPacket, 'STATVFS');
+    })
+    .then((response) => new nassh.sftp.packets.DiskFreePacket(response));
 };

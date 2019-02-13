@@ -472,6 +472,13 @@ Otherwise, the default rename operation can be a bit buggy/racy.
 
 We use this extension when available, or fallback to `SSH_FXP_RENAME` if not.
 
+### statvfs@openssh.com (v2)
+
+The [OpenSSH SFTP Protocol] defines a `statvfs@openssh.com` extension which
+returns the `struct statvfs` data from `statvfs()` syscall.
+
+We use this extension when the user has requested filesystem statistics.
+
 ### copy-data
 
 The [copy-data] extension is great for speeding up remote copies as it avoids
