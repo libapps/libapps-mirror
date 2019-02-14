@@ -292,28 +292,42 @@ nassh.agent.messages.generateKeyBlob = function(keyBlobType, ...args) {
 };
 
 /**
- * Encode an unsigned integer as an mpint.
+ * Encode a byte array as a 'string' on the wire.
+ * @see https://tools.ietf.org/html/rfc4251#section-5
+ *
+ * @param {!Uint8Array} bytes Raw bytes.
+ * @returns {!Uint8Array} Wire encoding as a string.
+ */
+nassh.agent.messages.encodeAsWireString = function(bytes) {
+  const data = new Uint8Array(4 + bytes.length);
+  const view = new DataView(data.buffer);
+  view.setUint32(0, bytes.length);
+  data.set(bytes, 4);
+  return data;
+};
+
+/**
+ * Encode an unsigned integer as an 'mpint' on the wire.
  * @see https://tools.ietf.org/html/rfc4251#section-5
  *
  * @param {!Uint8Array} bytes Raw bytes of an unsigned integer.
- * @returns {!Uint8Array} Wire encoding of an mpint
+ * @returns {!Uint8Array} Wire encoding as an mpint.
  */
-nassh.agent.messages.encodeUnsignedMpint = function(bytes) {
-  let mpint = new Uint8Array(bytes);
-  let pos = 0;
-
+nassh.agent.messages.encodeAsWireMpint = function(bytes) {
   // Strip leading zeros.
-  while (pos < mpint.length && !mpint[pos]) {
+  let pos = 0;
+  while (pos < bytes.length && !bytes[pos]) {
     ++pos;
   }
-  mpint = mpint.slice(pos);
+  let mpint = bytes.subarray(pos);
 
   // Add a leading zero if the positive result would otherwise be treated as a
   // signed mpint.
   if (mpint.length && (mpint[0] & (1 << 7))) {
     mpint = lib.array.concatTyped(new Uint8Array([0]), mpint);
   }
-  return mpint;
+
+  return nassh.agent.messages.encodeAsWireString(mpint);
 };
 
 /**
@@ -329,17 +343,12 @@ nassh.agent.messages.encodeUnsignedMpint = function(bytes) {
 nassh.agent.messages
     .keyBlobGenerators_[nassh.agent.messages.KeyBlobTypes.SSH_RSA] = function(
     exponent, modulus) {
-  const exponentMpint = nassh.agent.messages.encodeUnsignedMpint(exponent);
-  const modulusMpint = nassh.agent.messages.encodeUnsignedMpint(modulus);
-  // Byte representation of the string 'ssh-rsa'.
-  const BYTES_SSH_RSA =
-      new Uint8Array([0x73, 0x73, 0x68, 0x2D, 0x72, 0x73, 0x61]);
+  const exponentMpint = nassh.agent.messages.encodeAsWireMpint(exponent);
+  const modulusMpint = nassh.agent.messages.encodeAsWireMpint(modulus);
+  const BYTES_SSH_RSA = new TextEncoder().encode('ssh-rsa');
   return lib.array.concatTyped(
-      new Uint8Array(lib.array.uint32ToArrayBigEndian(7)),
-      BYTES_SSH_RSA,
-      new Uint8Array(lib.array.uint32ToArrayBigEndian(exponentMpint.length)),
+      nassh.agent.messages.encodeAsWireString(BYTES_SSH_RSA),
       exponentMpint,
-      new Uint8Array(lib.array.uint32ToArrayBigEndian(modulusMpint.length)),
       modulusMpint,
   );
 };

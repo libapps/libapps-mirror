@@ -365,11 +365,8 @@ nassh.agent.backends.GSC.prototype.signRequest =
 
     const rawSignature = await manager.authenticate(dataToSign);
     return lib.array.concatTyped(
-        new Uint8Array(lib.array.uint32ToArrayBigEndian(
-            hashConstants.signaturePrefix.length)),
-        hashConstants.signaturePrefix,
-        new Uint8Array(lib.array.uint32ToArrayBigEndian(rawSignature.length)),
-        rawSignature);
+        nassh.agent.messages.encodeAsWireString(hashConstants.signaturePrefix),
+        nassh.agent.messages.encodeAsWireString(rawSignature));
   } finally {
     await manager.disconnect();
     await manager.releaseContext();
