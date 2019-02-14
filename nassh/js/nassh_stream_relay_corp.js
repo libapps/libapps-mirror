@@ -30,7 +30,7 @@ nassh.Stream.RelayCorp = function(fd) {
   this.backoffMS_ = 0;
   this.backoffTimeout_ = null;
 
-  this.writeBuffer_ = new Uint8Array(0);
+  this.writeBuffer_ = nassh.buffer.new();
   // The total byte count we've written during this session.
   this.writeCount_ = 0;
   this.onWriteSuccess_ = null;
@@ -109,8 +109,7 @@ nassh.Stream.RelayCorp.prototype.asyncWrite = function(data, onSuccess) {
     return;
   }
 
-  this.writeBuffer_ = lib.array.concatTyped(
-      this.writeBuffer_, new Uint8Array(data));
+  this.writeBuffer_.write(data);
   this.onWriteSuccess_ = onSuccess;
 
   if (!this.backoffTimeout_) {
@@ -261,7 +260,7 @@ nassh.Stream.RelayCorpXHR.prototype.resumeRead_ = function() {
  * @override
  */
 nassh.Stream.RelayCorpXHR.prototype.sendWrite_ = function() {
-  if (!this.writeBuffer_.length || this.isRequestBusy_(this.writeRequest_)) {
+  if (this.writeBuffer_.isEmpty() || this.isRequestBusy_(this.writeRequest_)) {
     // Nothing to write, or a write is in progress.
     return;
   }
@@ -271,7 +270,7 @@ nassh.Stream.RelayCorpXHR.prototype.sendWrite_ = function() {
     return;
   }
 
-  const dataBuffer = this.writeBuffer_.subarray(0, this.maxMessageLength);
+  const dataBuffer = this.writeBuffer_.read(this.maxMessageLength);
   const data = nassh.base64ToBase64Url(btoa(
       lib.codec.codeUnitArrayToString(dataBuffer)));
   this.writeRequest_.open('GET', this.relay_.relayServer +
@@ -338,7 +337,7 @@ nassh.Stream.RelayCorpXHR.prototype.onWriteDone_ = function(e) {
     return;
   }
 
-  this.writeBuffer_ = this.writeBuffer_.subarray(this.lastWriteSize_);
+  this.writeBuffer_.ack(this.lastWriteSize_);
   this.writeCount_ += this.lastWriteSize_;
 
   this.requestSuccess_(false);
@@ -498,7 +497,7 @@ nassh.Stream.RelayCorpWS.prototype.onSocketData_ = function(e) {
 
   // Unsigned 24 bits wrap-around delta.
   var delta = ((ack & 0xffffff) - (this.writeCount_ & 0xffffff)) & 0xffffff;
-  this.writeBuffer_ = this.writeBuffer_.subarray(delta);
+  this.writeBuffer_.read(delta);
   this.sentCount_ -= delta;
   this.writeCount_ += delta;
 
@@ -539,7 +538,7 @@ nassh.Stream.RelayCorpWS.prototype.onSocketError_ = function(e) {
  */
 nassh.Stream.RelayCorpWS.prototype.sendWrite_ = function() {
   if (!this.socket_ || this.socket_.readyState != 1 ||
-      this.sentCount_ == this.writeBuffer_.length) {
+      this.writeBuffer_.isEmpty()) {
     // Nothing to write or socket is not ready.
     return;
   }
@@ -557,8 +556,7 @@ nassh.Stream.RelayCorpWS.prototype.sendWrite_ = function() {
     return;
   }
 
-  const dataBuffer = this.writeBuffer_.subarray(
-      this.sentCount_, this.sentCount_ + this.maxMessageLength);
+  const dataBuffer = this.writeBuffer_.read(this.maxMessageLength);
   const buf = new ArrayBuffer(dataBuffer.length + 4);
   const u8 = new Uint8Array(buf, 4);
   const dv = new DataView(buf);
@@ -582,7 +580,7 @@ nassh.Stream.RelayCorpWS.prototype.sendWrite_ = function() {
     this.onWriteSuccess_(this.writeCount_ + this.sentCount_);
   }
 
-  if (this.sentCount_ < this.writeBuffer_.length) {
+  if (!this.writeBuffer_.isEmpty()) {
     // We have more data to send but due to message limit we didn't send it.
     // We don't know when data was sent so just send new portion async.
     setTimeout(this.sendWrite_.bind(this), 0);
