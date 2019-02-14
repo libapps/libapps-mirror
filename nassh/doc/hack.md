@@ -456,6 +456,13 @@ We follow the [OpenSSH SFTP Protocol] here, as do many other clients.
 [SFTPv6] noted this desync between implementations and the specification and
 replaced the `SSH_FXP_SYMLINK` packet type with a new `SSH_FXP_LINK`.
 
+### fsync@openssh.com (v1)
+
+The [OpenSSH SFTP Protocol] defines a `fsync@openssh.com` extension which takes
+an open handle and instructs the remote server to use the `fsync()` syscall.
+
+We use this extension when the user has requested syncing after writes.
+
 ### hardlink@openssh.com (v1)
 
 The [OpenSSH SFTP Protocol] defines a `hardlink@openssh.com` extension with

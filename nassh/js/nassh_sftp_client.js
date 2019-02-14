@@ -934,3 +934,27 @@ nassh.sftp.Client.prototype.statvfs = function(path) {
     })
     .then((response) => new nassh.sftp.packets.DiskFreePacket(response));
 };
+
+/**
+ * Sync the open handle.
+ *
+ * This requires the fsync@openssh.com extension.
+ *
+ * @param {string} handle The handle of the remote file.
+ * @return {!Promise<!StatusPacket>} A Promise that resolves or rejects with
+ *    a nassh.sftp.StatusError.
+ */
+nassh.sftp.Client.prototype.fsync = function(handle) {
+  if (this.protocolServerExtensions['fsync@openssh.com'] != '1') {
+    throw new nassh.sftp.StatusError({
+      'code': nassh.sftp.packets.StatusCodes.OP_UNSUPPORTED,
+      'message': 'fsync@openssh.com not supported',
+    }, 'FSYNC');
+  }
+
+  const packet = new nassh.sftp.Packet();
+  packet.setString(handle);
+
+  return this.sendRequest_('fsync@openssh.com', packet)
+    .then((response) => this.isSuccessResponse_(response, 'FSYNC'));
+};
