@@ -11,10 +11,11 @@
 nassh.Stream.SSHAgentRelay = function(fd) {
   nassh.Stream.apply(this, [fd]);
 
+  this.writeArrayBuffer = true;
   this.authAgentAppID_ = null;
   this.port_ = null;
   this.pendingMessageSize_ = null;
-  this.writeBuffer_ = [];
+  this.writeBuffer_ = new Uint8Array();
 };
 
 /**
@@ -100,8 +101,10 @@ nassh.Stream.SSHAgentRelay.prototype.trySendPacket_ = function() {
     }
 
     // Pull out the 32-bit message length.
-    const data = this.writeBuffer_.splice(0, 4);
-    this.pendingMessageSize_ = lib.array.arrayBigEndianToUint32(data);
+    const dv = new DataView(
+        this.writeBuffer_.buffer, this.writeBuffer_.byteOffset);
+    this.pendingMessageSize_ = dv.getUint32(0);
+    this.writeBuffer_ = this.writeBuffer_.subarray(4);
   }
 
   // See if we've got the message body yet.
@@ -110,14 +113,16 @@ nassh.Stream.SSHAgentRelay.prototype.trySendPacket_ = function() {
   }
 
   // Send the body to the extension.
-  const reqData = this.writeBuffer_.splice(0, this.pendingMessageSize_);
+  const data = this.writeBuffer_.subarray(0, this.pendingMessageSize_);
+  this.writeBuffer_ = this.writeBuffer_.subarray(this.pendingMessageSize_);
   // Restart the message process.
   this.pendingMessageSize_ = null;
 
+  // The postMessage API only accepts JavaScript Arrays, so convert it.
   try {
     this.port_.postMessage({
-        'type': 'auth-agent@openssh.com',
-        'data': reqData
+      'type': 'auth-agent@openssh.com',
+      'data': Array.from(data),
     });
   } catch (e) {
     this.close();
@@ -128,14 +133,15 @@ nassh.Stream.SSHAgentRelay.prototype.trySendPacket_ = function() {
  * Append data to write buffer.
  */
 nassh.Stream.SSHAgentRelay.prototype.asyncWrite = function(data, onSuccess) {
-  if (!data.length)
+  if (!data.byteLength) {
     return;
+  }
 
-  var bData = nassh.Stream.asciiToBinary(data);
-  this.writeBuffer_ = this.writeBuffer_.concat(bData);
+  this.writeBuffer_ = lib.array.concatTyped(
+      this.writeBuffer_, new Uint8Array(data));
 
   setTimeout(this.trySendPacket_.bind(this), 0);
 
   // Note: report binary length written.
-  onSuccess(bData.length);
+  onSuccess(data.byteLength);
 };
