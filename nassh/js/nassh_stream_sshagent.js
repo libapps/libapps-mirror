@@ -21,6 +21,7 @@ nassh.Stream.SSHAgent = function(fd, args) {
   nassh.Stream.apply(this, [fd]);
 
   this.authAgent_ = args.authAgent;
+  this.pendingMessageSize_ = null;
   this.writeBuffer_ = [];
 };
 
@@ -49,19 +50,26 @@ nassh.Stream.SSHAgent.prototype.asyncOpen_ = function(args, onComplete) {
  * @private
  */
 nassh.Stream.SSHAgent.prototype.trySendPacket_ = function() {
-  // Message header, 4 bytes of length.
-  if (this.writeBuffer_.length < 4) {
-    return;
+  // See if we've scanned the message length yet (first 4 bytes).
+  if (this.pendingMessageSize_ === null) {
+    if (this.writeBuffer_.length < 4) {
+      return;
+    }
+
+    // Read the 32-bit message length.
+    const data = this.writeBuffer_.slice(0, 4);
+    this.pendingMessageSize_ = lib.array.arrayBigEndianToUint32(data);
   }
 
-  const size = lib.array.arrayBigEndianToUint32(this.writeBuffer_);
-  // Message body.
-  if (this.writeBuffer_.length < 4 + size) {
+  // See if we've got the message body yet.
+  if (this.writeBuffer_.length < 4 + this.pendingMessageSize_) {
     return;
   }
 
   // Consume header + body.
-  const reqData = this.writeBuffer_.splice(0, 4 + size);
+  const reqData = this.writeBuffer_.splice(0, 4 + this.pendingMessageSize_);
+  // Restart the message process.
+  this.pendingMessageSize_ = null;
 
   this.authAgent_.handleRequest(new Uint8Array(reqData))
       .then(
