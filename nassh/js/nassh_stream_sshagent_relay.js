@@ -13,6 +13,7 @@ nassh.Stream.SSHAgentRelay = function(fd) {
 
   this.authAgentAppID_ = null;
   this.port_ = null;
+  this.pendingMessageSize_ = null;
   this.writeBuffer_ = [];
 };
 
@@ -92,16 +93,26 @@ nassh.Stream.SSHAgentRelay.prototype.close = function(reason) {
  * If so, send packet and handle reply.
  */
 nassh.Stream.SSHAgentRelay.prototype.trySendPacket_ = function() {
-  // Message header, 4 bytes of length.
-  if (this.writeBuffer_.length < 4) return;
+  // See if we've scanned the message length yet (first 4 bytes).
+  if (this.pendingMessageSize_ === null) {
+    if (this.writeBuffer_.length < 4) {
+      return;
+    }
 
-  var size = lib.array.arrayBigEndianToUint32(this.writeBuffer_);
+    // Pull out the 32-bit message length.
+    const data = this.writeBuffer_.splice(0, 4);
+    this.pendingMessageSize_ = lib.array.arrayBigEndianToUint32(data);
+  }
 
-  // Message body.
-  if (this.writeBuffer_.length < 4 + size) return;
+  // See if we've got the message body yet.
+  if (this.writeBuffer_.length < this.pendingMessageSize_) {
+    return;
+  }
 
-  this.writeBuffer_.splice(0, 4);  // Consume header.
-  var reqData = this.writeBuffer_.splice(0, size);  // Consume body.
+  // Send the body to the extension.
+  const reqData = this.writeBuffer_.splice(0, this.pendingMessageSize_);
+  // Restart the message process.
+  this.pendingMessageSize_ = null;
 
   try {
     this.port_.postMessage({
