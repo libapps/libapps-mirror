@@ -20,9 +20,10 @@
 nassh.Stream.SSHAgent = function(fd, args) {
   nassh.Stream.apply(this, [fd]);
 
+  this.writeArrayBuffer = true;
   this.authAgent_ = args.authAgent;
   this.pendingMessageSize_ = null;
-  this.writeBuffer_ = [];
+  this.writeBuffer_ = new Uint8Array();
 };
 
 nassh.Stream.SSHAgent.prototype = Object.create(nassh.Stream.prototype);
@@ -57,8 +58,9 @@ nassh.Stream.SSHAgent.prototype.trySendPacket_ = function() {
     }
 
     // Read the 32-bit message length.
-    const data = this.writeBuffer_.slice(0, 4);
-    this.pendingMessageSize_ = lib.array.arrayBigEndianToUint32(data);
+    const dv = new DataView(
+        this.writeBuffer_.buffer, this.writeBuffer_.byteOffset);
+    this.pendingMessageSize_ = dv.getUint32(0);
   }
 
   // See if we've got the message body yet.
@@ -67,11 +69,12 @@ nassh.Stream.SSHAgent.prototype.trySendPacket_ = function() {
   }
 
   // Consume header + body.
-  const reqData = this.writeBuffer_.splice(0, 4 + this.pendingMessageSize_);
+  const reqData = this.writeBuffer_.subarray(0, 4 + this.pendingMessageSize_);
+  this.writeBuffer_ = this.writeBuffer_.subarray(4 + this.pendingMessageSize_);
   // Restart the message process.
   this.pendingMessageSize_ = null;
 
-  this.authAgent_.handleRequest(new Uint8Array(reqData))
+  this.authAgent_.handleRequest(reqData)
       .then(
           (response) => this.onDataAvailable(
               nassh.Stream.binaryToAscii(Array.from(response.rawMessage()))));
@@ -80,19 +83,19 @@ nassh.Stream.SSHAgent.prototype.trySendPacket_ = function() {
 /**
  * Append data to write buffer.
  *
- * @param data
- * @param onSuccess
+ * @param {ArrayBuffer} data The bytes to append to the current stream.
+ * @param {function(number)} onSuccess Callback once the data is queued.
  */
 nassh.Stream.SSHAgent.prototype.asyncWrite = function(data, onSuccess) {
-  if (!data.length) {
+  if (!data.byteLength) {
     return;
   }
 
-  const bData = nassh.Stream.asciiToBinary(data);
-  this.writeBuffer_ = this.writeBuffer_.concat(bData);
+  this.writeBuffer_ = lib.array.concatTyped(
+      this.writeBuffer_, new Uint8Array(data));
 
   setTimeout(this.trySendPacket_.bind(this), 0);
 
   // Note: report binary length written.
-  onSuccess(bData.length);
+  onSuccess(data.byteLength);
 };
