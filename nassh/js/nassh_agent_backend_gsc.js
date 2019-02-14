@@ -96,8 +96,8 @@ nassh.agent.backends.GSC.APIContext = null;
 
 // clang-format off
 /**
- * Constants for the hash functions as used in the EMSA-PKCS1-v1_5 encoding and
- * the SSH agent protocol.
+ * Constants for the hash functions as used with an RSA key and the
+ * EMSA-PKCS1-v1_5 encoding in the SSH agent protocol.
  * @see https://tools.ietf.org/html/rfc4880#section-5.2.2
  * @see https://tools.ietf.org/html/draft-ietf-curdle-rsa-sha2-00#section-2
  *
@@ -334,30 +334,12 @@ nassh.agent.backends.GSC.prototype.unlockKey_ = async function(manager, keyId) {
  */
 nassh.agent.backends.GSC.prototype.signRequest =
     async function(keyBlob, data, flags) {
-  let hashConstants;
-  if (flags === 0) {
-    hashConstants = nassh.agent.backends.GSC.HashAlgorithms.SHA1;
-  } else if (flags & 0b100) {
-    hashConstants = nassh.agent.backends.GSC.HashAlgorithms.SHA512;
-  } else if (flags & 0b10) {
-    hashConstants = nassh.agent.backends.GSC.HashAlgorithms.SHA256;
-  } else {
-    throw new Error(
-        `GSC.signRequest: unsupported signature flags (` +
-        `${flags.toString(2)})`);
-  }
-
   const keyBlobStr = new TextDecoder('utf-8').decode(keyBlob);
   if (!this.keyBlobToReader_.hasOwnProperty(keyBlobStr)) {
     throw new Error(`GSC.signRequest: no reader found for key "${keyBlobStr}"`);
   }
 
   const {reader, readerKeyId} = this.keyBlobToReader_[keyBlobStr];
-
-  const hash = await window.crypto.subtle.digest(hashConstants.name, data);
-  const dataToSign =
-      lib.array.concatTyped(hashConstants.identifier, new Uint8Array(hash));
-
   const manager = new nassh.agent.backends.GSC.SmartCardManager();
   try {
     await manager.establishContext();
@@ -366,12 +348,68 @@ nassh.agent.backends.GSC.prototype.signRequest =
     await manager.selectApplet(
         nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP);
 
-    await this.unlockKey_(manager, readerKeyId);
+    let dataToSign;
+    let rsaHashConstants;
+    let keyInfo = await manager.fetchKeyInfo();
+    switch (keyInfo.type) {
+      case nassh.agent.messages.KeyTypes.RSA:
+        if (flags === 0) {
+          rsaHashConstants = nassh.agent.backends.GSC.HashAlgorithms.SHA1;
+        } else if (flags & 0b100) {
+          rsaHashConstants = nassh.agent.backends.GSC.HashAlgorithms.SHA512;
+        } else if (flags & 0b10) {
+          rsaHashConstants = nassh.agent.backends.GSC.HashAlgorithms.SHA256;
+        } else {
+          throw new Error(
+              `GSC.signRequest: unsupported flag value for RSA: ` +
+              `0x${flags.toString(16)}`);
+        }
+        const hash =
+            await window.crypto.subtle.digest(rsaHashConstants.name, data);
+        dataToSign = lib.array.concatTyped(
+            rsaHashConstants.identifier, new Uint8Array(hash));
+        break;
+      case nassh.agent.messages.KeyTypes.ECDSA:
+        if (flags !== 0) {
+          throw new Error(
+              `GSC.signRequest: unsupported flag value for ECDSA: ` +
+              `0x${flags.toString(16)}`);
+        }
+        const hashAlgorithm =
+            nassh.agent.messages.OidToCurveInfo[keyInfo.curveOid].hashAlgorithm;
+        dataToSign = new Uint8Array(
+            await window.crypto.subtle.digest(hashAlgorithm, data));
+        break;
+      default:
+        throw new Error(`GSC.signRequest: unsupported key type: ` +
+            `${JSON.stringify(keyInfo)}`);
+    }
 
+    await this.unlockKey_(manager, readerKeyId);
     const rawSignature = await manager.authenticate(dataToSign);
-    return lib.array.concatTyped(
-        nassh.agent.messages.encodeAsWireString(hashConstants.signaturePrefix),
-        nassh.agent.messages.encodeAsWireString(rawSignature));
+
+    let prefix;
+    switch (keyInfo.type) {
+      case nassh.agent.messages.KeyTypes.RSA:
+        return lib.array.concatTyped(
+            nassh.agent.messages.encodeAsWireString(
+                rsaHashConstants.signaturePrefix),
+            nassh.agent.messages.encodeAsWireString(rawSignature));
+      case nassh.agent.messages.KeyTypes.ECDSA:
+        const rRaw = rawSignature.subarray(0, rawSignature.length / 2);
+        const sRaw = rawSignature.subarray(rawSignature.length / 2);
+        const rMpint = nassh.agent.messages.encodeAsWireMpint(rRaw);
+        const sMpint = nassh.agent.messages.encodeAsWireMpint(sRaw);
+        const signatureBlob = lib.array.concatTyped(rMpint, sMpint);
+        prefix = new TextEncoder().encode(
+            nassh.agent.messages.OidToCurveInfo[keyInfo.curveOid].prefix);
+        const identifier = new TextEncoder().encode(
+            nassh.agent.messages.OidToCurveInfo[keyInfo.curveOid].identifier);
+        return lib.array.concatTyped(
+            nassh.agent.messages.encodeAsWireString(
+                lib.array.concatTyped(prefix, identifier)),
+            nassh.agent.messages.encodeAsWireString(signatureBlob));
+    }
   } finally {
     await manager.disconnect();
     await manager.releaseContext();
@@ -1195,6 +1233,64 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
 };
 
 /**
+ * Information about an SSH public key, including its type and perhaps
+ * additional data depending on the type.
+ *
+ * @typedef {{type: !nassh.agent.messages.KeyTypes, curveOid: string}} KeyInfo
+ */
+
+/**
+ * Fetch the key type and additional information from the algorithm attributes
+ * of the authentication subkey.
+ *
+ * @returns {!Promise<!KeyInfo>|!Promise<!Error>} A
+ *     Promise resolving to a KeyInfo object; a rejecting Promise if no
+ *     supported type could be extracted.
+ */
+nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
+    async function() {
+  switch (this.appletSelected_) {
+    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP:
+      /**
+       * Command APDU for the 'GET DATA' command with the identifier of the
+       * 'Application Related Data' data object as data.
+       *
+       * Used to retrieve the 'Algorithm attributes authentication' contained
+       * in the 'Application Related Data'.
+       * @see https://g10code.com/docs/openpgp-card-2.0.pdf
+       */
+      const FETCH_APPLICATION_RELATED_DATA_APDU =
+          new nassh.agent.backends.GSC.CommandAPDU(0x00, 0xCA, 0x00, 0x6E);
+      const appRelatedData = nassh.agent.backends.GSC.DataObject.fromBytes(
+          await this.transmit(FETCH_APPLICATION_RELATED_DATA_APDU));
+      const type = appRelatedData.lookup(0xC3)[0];
+      switch (type) {
+        case nassh.agent.messages.KeyTypes.RSA:
+          return {type};
+        case nassh.agent.messages.KeyTypes.ECDSA:
+          // Curve is determined by the subsequent bytes encoding the OID.
+          const curveOidBytes = appRelatedData.lookup(0xC3).slice(1);
+          const curveOid = nassh.agent.messages.decodeOid(curveOidBytes);
+          if (!(curveOid in nassh.agent.messages.OidToCurveInfo)) {
+            throw new Error(
+                `SmartCardManager.fetchKeyInfo: unsupported curve OID: ` +
+                `${curveOid}`);
+
+          }
+          return {type, curveOid};
+        default:
+          throw new Error(
+              `SmartCardManager.fetchKeyInfo: unsupported algorithm ID: ` +
+              `${type}`);
+      }
+    default:
+      throw new Error(
+          `SmartCardManager.fetchKeyInfo: no or unsupported applet ` +
+          `selected: ${this.appletSelected_}`);
+  }
+}
+
+/**
  * Fetch the public key blob of the authentication subkey on the smart card.
  *
  * For OpenPGP, see RFC 4253, Section 6.6 and RFC 4251, Section 5.
@@ -1221,12 +1317,22 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchPublicKeyBlob =
               0x00, 0x47, 0x81, 0x00, new Uint8Array([0xA4, 0x00]));
       const publicKeyTemplate = nassh.agent.backends.GSC.DataObject.fromBytes(
           await this.transmit(READ_AUTHENTICATION_PUBLIC_KEY_APDU));
-      const exponent = publicKeyTemplate.lookup(0x82);
-      const modulus = publicKeyTemplate.lookup(0x81);
-      return nassh.agent.messages.generateKeyBlob(
-          nassh.agent.messages.KeyBlobTypes.SSH_RSA,
-          exponent,
-          modulus);
+      const keyInfo = await this.fetchKeyInfo();
+      switch (keyInfo.type) {
+        case nassh.agent.messages.KeyTypes.RSA:
+          const exponent = publicKeyTemplate.lookup(0x82);
+          const modulus = publicKeyTemplate.lookup(0x81);
+          return nassh.agent.messages.generateKeyBlob(
+              keyInfo.type, exponent, modulus);
+        case nassh.agent.messages.KeyTypes.ECDSA:
+          const key = publicKeyTemplate.lookup(0x86);
+          return nassh.agent.messages.generateKeyBlob(
+              keyInfo.type, keyInfo.curveOid, key);
+        default:
+          throw new Error(
+              `SmartCardManager.fetchPublicKeyBlob: unsupported key type: ` +
+              `${JSON.stringify(keyInfo)}`);
+      }
     default:
       throw new Error(
           'SmartCardManager.fetchPublicKeyBlob: no or unsupported applet ' +

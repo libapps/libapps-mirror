@@ -63,3 +63,21 @@ nassh.agent.messages.Tests.addTest('write_signResponse', function(result, cx) {
 
   result.pass();
 });
+
+nassh.agent.messages.Tests.addTest('decodeOid', function(result, cx) {
+  result.assertEQ(nassh.agent.messages.decodeOid(new Uint8Array([])), null);
+  result.assertEQ(
+      nassh.agent.messages.decodeOid(new Uint8Array([0x2B])), '1.3');
+  result.assertEQ(
+      nassh.agent.messages.decodeOid(new Uint8Array([0x2B, 0x80])), null);
+  result.assertEQ(
+      nassh.agent.messages.decodeOid(new Uint8Array(
+          [0x2B, 0x24, 0x03, 0x03, 0x02, 0x08, 0x01, 0x01, 0x07])),
+      '1.3.36.3.3.2.8.1.1.7');
+  result.assertEQ(
+      nassh.agent.messages.decodeOid(
+          new Uint8Array([0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x03, 0x01, 0x07])),
+      '1.2.840.10045.3.1.7');
+
+  result.pass();
+});

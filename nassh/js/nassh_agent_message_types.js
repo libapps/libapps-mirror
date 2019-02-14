@@ -257,19 +257,86 @@ nassh.agent.messages
 };
 
 /**
- * Types of SSH identity key blobs.
+ * Types of SSH identity keys.
  *
  * @readonly
  * @enum {!number}
  */
-nassh.agent.messages.KeyBlobTypes = {
-  SSH_RSA: 1,
+nassh.agent.messages.KeyTypes = {
+  RSA: 1,
+  ECDSA: 19,
 };
 
 /**
- * Map key blob types to generator function.
+ * Decodes an ASN.1-encoded OID into human-readable dot notation.
  *
- * @type {Object<!nassh.agent.messages.KeyBlobTypes,
+ * @param {!Uint8Array} asn1Bytes Individual bytes of an ASN.1-encoded OID.
+ * @returns {string} The decoded human-readable OID; null if the byte
+ *     representation is invalid.
+ * @see https://docs.microsoft.com/en-us/windows/desktop/SecCertEnroll/about-object-identifier
+ */
+nassh.agent.messages.decodeOid = function(asn1Bytes) {
+  if (asn1Bytes.length === 0) {
+    return null;
+  }
+
+  let oid = Math.floor(asn1Bytes[0] / 40) + '.' + (asn1Bytes[0] % 40);
+
+  let i = 1;
+  while (i < asn1Bytes.length) {
+    let acc = 0;
+    do {
+      acc = (acc << 7) + (asn1Bytes[i] & 0x7F);
+      i++;
+    } while ((asn1Bytes[i - 1] & 0x80) && (i < asn1Bytes.length));
+    if ((asn1Bytes[i - 1] & 0x80) && (i === asn1Bytes.length)) {
+      // The last byte in a multibyte sequence must not have the high bit set.
+      return null;
+    }
+    oid += '.' + acc;
+  }
+  return oid;
+};
+
+/**
+ * Information about an elliptic curve required to use it for SSH
+ * authentication. This includes the prefix to be used in SSH agent responses
+ * as well as the hash algorithm that should be applied to the raw challenge
+ * before computing the signature (if any).
+ *
+ * @typedef {{prefix: !string, hashAlgorithm: string}} CurveInfo
+ */
+
+/**
+ * Map OIDs to information about their associated elliptic curve.
+ *
+ * @type {Object<!string, CurveInfo>}
+ * @private
+ * @see https://tools.ietf.org/html/rfc5656
+ * @see https://tools.ietf.org/html/draft-ietf-curdle-ssh-ed25519-02
+ */
+nassh.agent.messages.OidToCurveInfo = {
+  '1.2.840.10045.3.1.7': {
+    prefix: 'ecdsa-sha2-',
+    identifier: 'nistp256',
+    hashAlgorithm: 'SHA-256',
+  },
+  '1.3.132.0.34': {
+    prefix: 'ecdsa-sha2-',
+    identifier: 'nistp384',
+    hashAlgorithm: 'SHA-384',
+  },
+  '1.3.132.0.35': {
+    prefix: 'ecdsa-sha2-',
+    identifier: 'nistp521',
+    hashAlgorithm: 'SHA-512',
+  },
+};
+
+/**
+ * Map key types to generator function.
+ *
+ * @type {Object<!nassh.agent.messages.KeyTypes,
  *     function(...[*]): !Uint8Arrays>}
  * @private
  */
@@ -278,16 +345,16 @@ nassh.agent.messages.keyBlobGenerators_ = {};
 /**
  * Generate a key blob of a given type.
  *
- * @param {!nassh.agent.messages.KeyBlobTypes} type
+ * @param {!nassh.agent.messages.KeyTypes} type
  * @param {...*} args Any number of arguments dictated by the key blob type.
  * @returns {!Uint8Array} A key blob for use in the SSH agent protocol.
  */
-nassh.agent.messages.generateKeyBlob = function(keyBlobType, ...args) {
-  if (nassh.agent.messages.keyBlobGenerators_.hasOwnProperty(keyBlobType)) {
-    return nassh.agent.messages.keyBlobGenerators_[keyBlobType](...args);
+nassh.agent.messages.generateKeyBlob = function(keyType, ...args) {
+  if (nassh.agent.messages.keyBlobGenerators_.hasOwnProperty(keyType)) {
+    return nassh.agent.messages.keyBlobGenerators_[keyType](...args);
   } else {
     throw new Error(
-        `messages.generateKeyBlob: key blob type ${keyBlobType} not supported`);
+        `messages.generateKeyBlob: key type ${keyType} not supported`);
   }
 };
 
@@ -340,9 +407,8 @@ nassh.agent.messages.encodeAsWireMpint = function(bytes) {
  *     endian).
  * @returns {!Uint8Array} A key blob for use in the SSH agent protocol.
  */
-nassh.agent.messages
-    .keyBlobGenerators_[nassh.agent.messages.KeyBlobTypes.SSH_RSA] = function(
-    exponent, modulus) {
+nassh.agent.messages.keyBlobGenerators_[nassh.agent.messages.KeyTypes.RSA] =
+    function(exponent, modulus) {
   const exponentMpint = nassh.agent.messages.encodeAsWireMpint(exponent);
   const modulusMpint = nassh.agent.messages.encodeAsWireMpint(modulus);
   const BYTES_SSH_RSA = new TextEncoder().encode('ssh-rsa');
@@ -351,4 +417,30 @@ nassh.agent.messages
       exponentMpint,
       modulusMpint,
   );
+};
+
+/**
+ * Generate a key blob for an ECDSA public key.
+ *
+ * @param {!string} curveOid The OID of the elliptic curve.
+ * @param {!Uint8Array} key The public key.
+ * @returns {!Uint8Array} A key blob for use in the SSH agent protocol.
+ * @throws Will throw if curveOid represents an unsupported curve.
+ * @see https://tools.ietf.org/html/rfc5656#section-3.1
+ */
+nassh.agent.messages.keyBlobGenerators_[nassh.agent.messages.KeyTypes.ECDSA] =
+    function(curveOid, key) {
+  if (!(curveOid in nassh.agent.messages.OidToCurveInfo)) {
+    throw new Error(
+        `SmartCardManager.fetchKeyInfo: unsupported curve OID: ${curveOid}`);
+  }
+  const prefix = new TextEncoder().encode(
+      nassh.agent.messages.OidToCurveInfo[curveOid].prefix);
+  const identifier = new TextEncoder().encode(
+      nassh.agent.messages.OidToCurveInfo[curveOid].identifier);
+  return lib.array.concatTyped(
+      nassh.agent.messages.encodeAsWireString(
+          lib.array.concatTyped(prefix, identifier)),
+      nassh.agent.messages.encodeAsWireString(identifier),
+      nassh.agent.messages.encodeAsWireString(key));
 };
