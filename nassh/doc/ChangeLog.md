@@ -1,3 +1,14 @@
+# 0.15, 2019-02-17, Fix SFTP mounting bugs.
+
+* Pull a few minor unreleased libdot & hterm changes.
+* fsp: Switch onReadFileRequested to readChunks helper.
+* sftp: Expand getData API for reuse.
+* sftp: Change DataPackets to data APIs.
+* Unify connection startup a bit.
+* Fix race with background page and sftp mounts.
+* sftp: Move UTF-8 logic into Packet APIs.
+* sftp: Switch to web Text{En,De}coder APIs.
+
 # 0.14, 2019-02-06, Workaround Chrome bug in crosh & fix X10 encoding.
 
 * Pull a few minor unreleased libdot & hterm changes.
