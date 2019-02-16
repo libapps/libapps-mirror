@@ -54,7 +54,7 @@ lib.init = function(onInit, opt_logFunction) {
       var rec = ary.shift();
       if (opt_logFunction)
         opt_logFunction('init: ' + rec[0]);
-      rec[1](lib.f.alarm(initNext));
+      rec[1](initNext);
     } else {
       onInit();
     }
