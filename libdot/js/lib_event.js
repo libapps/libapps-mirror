@@ -4,8 +4,6 @@
 
 'use strict';
 
-lib.rtdep('lib.f');
-
 /**
  * An event is a JavaScript function with addListener and removeListener
  * properties.

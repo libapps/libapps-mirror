@@ -4,8 +4,6 @@
 
 'use strict';
 
-lib.rtdep('lib.f.getStack');
-
 /**
  * A utility for managing sequences of asynchronous functions.
  *

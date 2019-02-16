@@ -4,8 +4,6 @@
 
 'use strict';
 
-lib.rtdep('lib.f.getStack');
-
 /**
  * HTML5 FileSystem related utility functions.
  */
