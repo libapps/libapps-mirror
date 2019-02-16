@@ -319,14 +319,14 @@ lib.colors.crackRGB = function(color) {
     var ary = color.match(lib.colors.re_.rgba);
     if (ary) {
       ary.shift();
-      return ary;
+      return Array.from(ary);
     }
   } else {
     var ary = color.match(lib.colors.re_.rgb);
     if (ary) {
       ary.shift();
       ary.push('1');
-      return ary;
+      return Array.from(ary);
     }
   }
 
