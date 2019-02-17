@@ -40,7 +40,7 @@ lib.codec.Tests.addTest('stringToCodeUnitArray', function(result, cx) {
 
   // Check typed array handling.
   ret = lib.codec.stringToCodeUnitArray('asdf', Uint8Array);
-  result.assertEQ([97, 115, 100, 102], ret);
+  result.assertEQ(new Uint8Array([97, 115, 100, 102]), ret);
   result.assert(ArrayBuffer.isView(ret));
 
   // Check UTF-16 pairs.

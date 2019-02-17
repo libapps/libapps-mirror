@@ -18,7 +18,7 @@ lib.fs.Tests.addTest('FileReader.readAs', function(result, cx) {
   const reader = new lib.fs.FileReader();
 
   reader.readAsArrayBuffer(blob).then((abdata) => {
-    result.assertEQ([97, 98, 49, 50], new Uint8Array(abdata));
+    result.assertEQ(new Uint8Array([97, 98, 49, 50]), new Uint8Array(abdata));
 
     reader.readAsBinaryString(blob).then((string) => {
       result.assertEQ('ab12', string);
