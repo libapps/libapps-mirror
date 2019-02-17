@@ -4,8 +4,6 @@
 
 'use strict';
 
-lib.rtdep('lib.f', 'hterm');
-
 /**
  * Open a new window to the specified URL.
  *

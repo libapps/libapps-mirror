@@ -4,8 +4,6 @@
 
 'use strict';
 
-lib.rtdep('lib.fs');
-
 /**
  * nassh.External provides a remote API for external apps/extensions.
  */

@@ -4,8 +4,6 @@
 
 'use strict';
 
-lib.rtdep('lib.fs');
-
 var nassh = {};
 
 /**

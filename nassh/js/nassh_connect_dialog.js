@@ -4,8 +4,6 @@
 
 'use strict';
 
-lib.rtdep('lib.colors', 'lib.f', 'lib.fs', 'lib.MessageManager');
-
 /**
  * Constructor a new ConnectDialog instance.
  *

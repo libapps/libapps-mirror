@@ -4,8 +4,6 @@
 
 'use strict';
 
-lib.rtdep('lib.f');
-
 /**
  * UI Element that controls the multi-column list in the connect dialog.
  *

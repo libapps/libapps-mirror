@@ -4,8 +4,6 @@
 
 'use strict';
 
-lib.rtdep('lib.f');
-
 /**
  * @fileoverview Implementation for the corp-relay@google.com proxy.
  */

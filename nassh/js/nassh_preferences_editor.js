@@ -4,8 +4,6 @@
 
 'use strict';
 
-lib.rtdep('lib.colors', 'hterm.PreferenceManager');
-
 // CSP means that we can't kick off the initialization from the html file,
 // so we do it like this instead.
 window.onload = function() {

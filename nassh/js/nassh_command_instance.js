@@ -4,10 +4,6 @@
 
 'use strict';
 
-lib.rtdep('lib.f', 'lib.fs', 'lib.punycode',
-          'nassh.CommandInstance', 'nassh.GoogleRelay',
-          'nassh.PreferenceManager');
-
 /**
  * The NaCl-ssh-powered terminal command.
  *

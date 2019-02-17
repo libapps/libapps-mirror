@@ -4,8 +4,6 @@
 
 'use strict';
 
-lib.rtdep('lib.Event');
-
 /**
  * The singleton app instance for the nassh packaged app, created by the
  * background page.
