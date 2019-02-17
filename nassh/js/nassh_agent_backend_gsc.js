@@ -19,10 +19,12 @@
  *
  * @param {!nassh.agent.Agent.UserIO} userIO Reference to object with terminal
  *     IO functions.
+ * @param {boolean} isForwarded Whether the agent is being forwarded to the
+ *     server.
  * @constructor
  * @implements nassh.agent.Backend
  */
-nassh.agent.backends.GSC = function(userIO) {
+nassh.agent.backends.GSC = function(userIO, isForwarded) {
   nassh.agent.Backend.apply(this, [userIO]);
 
   /**
@@ -41,6 +43,9 @@ nassh.agent.backends.GSC = function(userIO) {
    * @private
    */
   this.pinCache_ = new lib.CredentialCache();
+  if (!isForwarded) {
+    this.pinCache_.setEnabled(false);
+  }
 };
 
 nassh.agent.backends.GSC.prototype =

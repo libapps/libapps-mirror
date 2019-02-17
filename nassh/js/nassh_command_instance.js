@@ -848,13 +848,6 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
   if (options['--ssh-agent']) {
     params.authAgentAppID = options['--ssh-agent'];
   }
-  this.authAgentAppID_ = params.authAgentAppID;
-  // If the agent app ID is not just an app ID, we parse it for the IDs of
-  // built-in agent backends based on nassh.agent.Backend.
-  if (this.authAgentAppID_ && !/^[a-z]{32}$/.test(this.authAgentAppID_)) {
-    const backendIDs = this.authAgentAppID_.split(',');
-    this.authAgent_ = new nassh.agent.Agent(backendIDs, this.io.terminal_);
-  }
 
   this.io.setTerminalProfile(params.terminalProfile || 'default');
 
@@ -916,6 +909,19 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
     argv.arguments = argv.arguments.concat(extraArgs.args);
   if (extraArgs.command)
     argv.arguments.push('--', extraArgs.command);
+
+  this.authAgentAppID_ = params.authAgentAppID;
+  // If the agent app ID is not just an app ID, we parse it for the IDs of
+  // built-in agent backends based on nassh.agent.Backend.
+  if (this.authAgentAppID_ && !/^[a-z]{32}$/.test(this.authAgentAppID_)) {
+    const backendIDs = this.authAgentAppID_.split(',');
+    // Process the cmdline to see whether -a or -A comes last.
+    const enableForward = argv.arguments.lastIndexOf('-A');
+    const disableForward = argv.arguments.lastIndexOf('-a');
+    const forwardAgent = enableForward > disableForward;
+    this.authAgent_ = new nassh.agent.Agent(
+        backendIDs, this.io.terminal_, forwardAgent);
+  }
 
   this.initPlugin_(() => {
     if (!nassh.v2)

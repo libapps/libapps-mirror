@@ -48,9 +48,11 @@ nassh.agent.checkBackendIDs = function(backendIDs) {
  * @param {!Array<!string>} backendIDs An array of IDs of backends which should
  *     be used by the agent to reply to incoming requests.
  * @param {!hterm.Terminal} term Reference to hterm.
+ * @param {boolean} isForwarded Whether the agent is being forwarded to the
+ *     server.
  * @constructor
  */
-nassh.agent.Agent = function(backendIDs, term) {
+nassh.agent.Agent = function(backendIDs, term, isForwarded) {
   console.log(
       'agent.Agent: registered backends:', nassh.agent.registeredBackends_);
 
@@ -67,7 +69,7 @@ nassh.agent.Agent = function(backendIDs, term) {
             if (nassh.agent.registeredBackends_.hasOwnProperty(backendID)) {
               console.log(`agent.Agent: loading backend '${backendID}'`);
               return new nassh.agent.registeredBackends_[backendID](
-                  new nassh.agent.Agent.UserIO(term));
+                  new nassh.agent.Agent.UserIO(term), isForwarded);
             } else {
               console.error(`agent.Agent: unknown backend ID '${backendID}'`);
               return null;
