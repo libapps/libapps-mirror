@@ -17,9 +17,8 @@ lib.array.Tests.addTest('arrayBigEndianToUint32', function(result, cx) {
     [new Uint8Array([0x12, 0x34, 0x56, 0x78]), 305419896, 'big endian'],
   ];
 
-  subtests.forEach((test) => {
-    result.assertEQ(
-        lib.array.arrayBigEndianToUint32(test[0]), test[1], test[2]);
+  subtests.forEach((data) => {
+    assert.equal(lib.array.arrayBigEndianToUint32(data[0]), data[1], data[2]);
   });
 
   result.pass();
@@ -32,9 +31,9 @@ lib.array.Tests.addTest('uint32ToArrayBigEndian', function(result, cx) {
     [305419896, [0x12, 0x34, 0x56, 0x78], 'big endian'],
   ];
 
-  subtests.forEach((test) => {
-    result.assertEQ(
-        lib.array.uint32ToArrayBigEndian(test[0]), test[1], test[2]);
+  subtests.forEach((data) => {
+    assert.deepStrictEqual(
+        lib.array.uint32ToArrayBigEndian(data[0]), data[1], data[2]);
   });
 
   result.pass();
@@ -62,14 +61,15 @@ lib.array.Tests.addTest('concatTyped', function(result, cx) {
     ],
   ];
 
-  subtests.forEach((test) => {
-    const concatenated = lib.array.concatTyped(...test[0]);
+  subtests.forEach((data) => {
+    const concatenated = lib.array.concatTyped(...data[0]);
     // Check whether result has the correct type.
-    result.assert(
-        concatenated instanceof test[1].constructor &&
-            test[1] instanceof concatenated.constructor,
+    assert.isTrue(
+        concatenated instanceof data[1].constructor &&
+            data[1] instanceof concatenated.constructor,
         'type');
-    result.assertEQ(Array.from(concatenated), Array.from(test[1]), test[2]);
+    assert.deepStrictEqual(
+        Array.from(concatenated), Array.from(data[1]), data[2]);
   });
 
   result.pass();
@@ -93,9 +93,8 @@ lib.array.Tests.addTest('compare', function(result, cx) {
     ],
   ];
 
-  subtests.forEach((test) => {
-    result.assertEQ(
-        lib.array.compare(test[0][0], test[0][1]), test[1], test[2]);
+  subtests.forEach((data) => {
+    assert.equal(lib.array.compare(data[0][0], data[0][1]), data[1], data[2]);
   });
 
   result.pass();

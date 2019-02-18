@@ -17,11 +17,11 @@ nassh.agent.Agent.Tests.addTest(
   const keyTypeEd25519 =
       'AAAAC3NzaC1lZDI1NTE5AAAAIKsEa2RL2X0d3L3CA9uwTbqQvJfVjIEEJzH/i8lpWkNq';
 
-  result.assertEQ(
+  assert.equal(
       nassh.agent.Agent.keyBlobToAuthorizedKeysFormat(
           new Uint8Array(nassh.Stream.asciiToBinary(keyTypeRsa))),
       'ssh-rsa ' + keyTypeRsa);
-  result.assertEQ(
+  assert.equal(
       nassh.agent.Agent.keyBlobToAuthorizedKeysFormat(
           new Uint8Array(nassh.Stream.asciiToBinary(keyTypeEd25519))),
       'ssh-ed25519 ' + keyTypeEd25519);

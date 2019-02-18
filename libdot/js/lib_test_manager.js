@@ -160,7 +160,7 @@ lib.TestManager.Log = function(opt_console=console) {
  *       this.list.pop();
  *
  *       // If this assertion fails, the testcase will stop here.
- *       result.assertEQ(this.list.length, this.size - 1);
+ *       assert.equal(this.list.length, this.size - 1);
  *
  *       // A test must indicate it has passed by calling this method.
  *       result.pass();
@@ -169,7 +169,7 @@ lib.TestManager.Log = function(opt_console=console) {
  *   // Sample asynchronous test case.
  *   MyTests.addTest('async-pop-length', function(result, cx) {
  *       var callback = () => {
- *           result.assertEQ(this.list.length, this.size - 1);
+ *           assert.equal(this.list.length, this.size - 1);
  *           result.pass();
  *       };
  *
@@ -964,43 +964,6 @@ lib.TestManager.Result.prototype.completeTest_ = function(status, opt_throw) {
 
   if (arguments.length < 2 || opt_throw)
     throw new lib.TestManager.Result.TestComplete(this);
-};
-
-/**
- * Assert that an actual value is exactly equal to the expected value.
- *
- * This uses the JavaScript '===' operator in order to avoid type coercion.
- *
- * If the assertion fails, the test is marked as a failure and a TestCompleted
- * exception is thrown.
- *
- * @param {*} actual The actual measured value.
- * @param {*} expected The value expected.
- * @param {string} opt_name An optional name used to identify this
- *     assertion in the test log.  If omitted it will be the file:line
- *     of the caller.
- */
-lib.TestManager.Result.prototype.assertEQ = function(
-    actual, expected, opt_name) {
-  assert.deepStrictEqual(actual, expected, opt_name);
-};
-
-/**
- * Assert that a value is true.
- *
- * This uses the JavaScript '===' operator in order to avoid type coercion.
- * The must be the boolean value `true`, not just some "truish" value.
- *
- * If the assertion fails, the test is marked as a failure and a TestCompleted
- * exception is thrown.
- *
- * @param {boolean} actual The actual measured value.
- * @param {string} opt_name An optional name used to identify this
- *     assertion in the test log.  If omitted it will be the file:line
- *     of the caller.
- */
-lib.TestManager.Result.prototype.assert = function(actual, opt_name) {
-  assert.isTrue(actual, opt_name);
 };
 
 /**

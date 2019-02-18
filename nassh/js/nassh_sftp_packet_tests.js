@@ -15,23 +15,23 @@ nassh.sftp.packets.Tests = new lib.TestManager.Suite('nassh.sftp.packets.Tests')
  */
 nassh.sftp.packets.Tests.addTest('sftpPacket', function(result, cx) {
   let packet = new nassh.sftp.Packet();
-  result.assertEQ(0, packet.offset_);
-  result.assertEQ(0, packet.getLength());
-  result.assertEQ('', packet.packet_);
-  result.assertEQ('', packet.toString());
+  assert.equal(0, packet.offset_);
+  assert.equal(0, packet.getLength());
+  assert.equal('', packet.packet_);
+  assert.equal('', packet.toString());
   let ret = packet.toByteArray();
-  result.assert(ret instanceof ArrayBuffer);
-  result.assertEQ(new Uint8Array([]), new Uint8Array(ret));
-  result.assertEQ(true, packet.eod());
+  assert.isTrue(ret instanceof ArrayBuffer);
+  assert.deepStrictEqual(new Uint8Array([]), new Uint8Array(ret));
+  assert.isTrue(packet.eod());
 
   packet = new nassh.sftp.Packet('abc');
-  result.assertEQ(0, packet.offset_);
-  result.assertEQ(3, packet.getLength());
-  result.assertEQ('abc', packet.packet_);
-  result.assertEQ('abc', packet.toString());
-  result.assertEQ(new Uint8Array([97, 98, 99]),
-                  new Uint8Array(packet.toByteArray()));
-  result.assertEQ(false, packet.eod());
+  assert.equal(0, packet.offset_);
+  assert.equal(3, packet.getLength());
+  assert.equal('abc', packet.packet_);
+  assert.equal('abc', packet.toString());
+  assert.deepStrictEqual(new Uint8Array([97, 98, 99]),
+                         new Uint8Array(packet.toByteArray()));
+  assert.isFalse(packet.eod());
 
   result.pass();
 });
@@ -44,19 +44,19 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetUint8', function(result, cx) {
 
   // Start with a NUL byte.
   packet.setUint8(0);
-  result.assertEQ(1, packet.getLength());
-  result.assertEQ('\x00', packet.packet_);
+  assert.equal(1, packet.getLength());
+  assert.equal('\x00', packet.packet_);
 
   // Then some more edge case bytes.
   packet.setUint8(127);
   packet.setUint8(255);
-  result.assertEQ(3, packet.getLength());
-  result.assertEQ('\x00\x7f\xff', packet.packet_);
+  assert.equal(3, packet.getLength());
+  assert.equal('\x00\x7f\xff', packet.packet_);
 
   // Then a value that's too large for uint8.
   packet.setUint8(0xabcdef);
-  result.assertEQ(4, packet.getLength());
-  result.assertEQ('\x00\x7f\xff\xef', packet.packet_);
+  assert.equal(4, packet.getLength());
+  assert.equal('\x00\x7f\xff\xef', packet.packet_);
 
   result.pass();
 });
@@ -69,21 +69,21 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetUint32', function(result, cx) {
 
   // Start with a NUL byte.
   packet.setUint32(0);
-  result.assertEQ(4, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x00', packet.packet_);
+  assert.equal(4, packet.getLength());
+  assert.equal('\x00\x00\x00\x00', packet.packet_);
 
   // Then some more edge case bytes.
   packet.setUint32(0x7faabbcc);
   packet.setUint32(0xffffffff);
-  result.assertEQ(12, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x00\x7f\xaa\xbb\xcc\xff\xff\xff\xff',
-                  packet.packet_);
+  assert.equal(12, packet.getLength());
+  assert.equal('\x00\x00\x00\x00\x7f\xaa\xbb\xcc\xff\xff\xff\xff',
+               packet.packet_);
 
   // Then a value that's too large for uint32.
   packet.setUint32(0xaabbccddeeff);
-  result.assertEQ(16, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x00\x7f\xaa\xbb\xcc\xff\xff\xff\xff\xcc\xdd\xee\xff',
-                  packet.packet_);
+  assert.equal(16, packet.getLength());
+  assert.equal('\x00\x00\x00\x00\x7f\xaa\xbb\xcc\xff\xff\xff\xff\xcc\xdd\xee\xff',
+               packet.packet_);
 
   result.pass();
 });
@@ -96,24 +96,24 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetUint64', function(result, cx) {
 
   // Start with a NUL byte.
   packet.setUint64(0);
-  result.assertEQ(8, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x00\x00\x00\x00\x00', packet.packet_);
+  assert.equal(8, packet.getLength());
+  assert.equal('\x00\x00\x00\x00\x00\x00\x00\x00', packet.packet_);
 
   // Then some more edge case bytes.
   packet.setUint64(0xffffffff);
-  result.assertEQ(16, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x00\x00\x00\x00\x00' +
-                  '\x00\x00\x00\x00\xff\xff\xff\xff',
-                  packet.packet_);
+  assert.equal(16, packet.getLength());
+  assert.equal('\x00\x00\x00\x00\x00\x00\x00\x00' +
+               '\x00\x00\x00\x00\xff\xff\xff\xff',
+               packet.packet_);
 
   // We can't actually test 64-bit values since JavaScript doesn't have a
   // native int type that large.
   packet.setUint64(0xaabbccddeeff);
-  result.assertEQ(24, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x00\x00\x00\x00\x00' +
-                  '\x00\x00\x00\x00\xff\xff\xff\xff' +
-                  '\x00\x00\xaa\xbb\xcc\xdd\xee\xff',
-                  packet.packet_);
+  assert.equal(24, packet.getLength());
+  assert.equal('\x00\x00\x00\x00\x00\x00\x00\x00' +
+               '\x00\x00\x00\x00\xff\xff\xff\xff' +
+               '\x00\x00\xaa\xbb\xcc\xdd\xee\xff',
+               packet.packet_);
 
   result.pass();
 });
@@ -126,14 +126,13 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetString', function(result, cx) {
 
   // Start with a NUL byte.
   packet.setString('\u{0}');
-  result.assertEQ(5, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x01\x00', packet.packet_);
+  assert.equal(5, packet.getLength());
+  assert.equal('\x00\x00\x00\x01\x00', packet.packet_);
 
   // Then another binary string.
   packet.setString('abc\xff');
-  result.assertEQ(13, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x01\x00\x00\x00\x00\x04abc\xff',
-                  packet.packet_);
+  assert.equal(13, packet.getLength());
+  assert.equal('\x00\x00\x00\x01\x00\x00\x00\x00\x04abc\xff', packet.packet_);
 
   result.pass();
 });
@@ -146,14 +145,14 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetUtf8String', function(result, cx)
 
   // Start with a NUL byte.
   packet.setUtf8String('\u{0}');
-  result.assertEQ(5, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x01\x00', packet.packet_);
+  assert.equal(5, packet.getLength());
+  assert.equal('\x00\x00\x00\x01\x00', packet.packet_);
 
   // Then another normal string.
   packet.setUtf8String('abcdß');
-  result.assertEQ(15, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x01\x00\x00\x00\x00\x06abcd\xc3\x9f',
-                  packet.packet_);
+  assert.equal(15, packet.getLength());
+  assert.equal('\x00\x00\x00\x01\x00\x00\x00\x00\x06abcd\xc3\x9f',
+               packet.packet_);
 
   result.pass();
 });
@@ -166,13 +165,13 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetData', function(result, cx) {
 
   // Start with a NUL byte.
   packet.setData('\x00');
-  result.assertEQ(1, packet.getLength());
-  result.assertEQ('\x00', packet.packet_);
+  assert.equal(1, packet.getLength());
+  assert.equal('\x00', packet.packet_);
 
   // Then another normal string.
   packet.setData('abcd');
-  result.assertEQ(5, packet.getLength());
-  result.assertEQ('\x00abcd', packet.packet_);
+  assert.equal(5, packet.getLength());
+  assert.equal('\x00abcd', packet.packet_);
 
   result.pass();
 });
@@ -182,25 +181,22 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetData', function(result, cx) {
  */
 nassh.sftp.packets.Tests.addTest('sftpPacketGetUint8', function(result, cx) {
   const packet = new nassh.sftp.Packet('\x00\x7f\xff');
-  result.assertEQ(3, packet.getLength());
+  assert.equal(3, packet.getLength());
 
   // Read a bunch of numbers.
-  result.assertEQ(0, packet.getUint8());
-  result.assertEQ(false, packet.eod());
+  assert.equal(0, packet.getUint8());
+  assert.isFalse(packet.eod());
 
-  result.assertEQ(0x7f, packet.getUint8());
-  result.assertEQ(false, packet.eod());
+  assert.equal(0x7f, packet.getUint8());
+  assert.isFalse(packet.eod());
 
-  result.assertEQ(0xff, packet.getUint8());
-  result.assertEQ(true, packet.eod());
+  assert.equal(0xff, packet.getUint8());
+  assert.isTrue(packet.eod());
 
   // Check short read.
-  try {
-    packet.getUint8();
-    result.fail();
-  } catch(e) {
-    result.pass();
-  }
+  assert.throws(() => packet.getUint8());
+
+  result.pass();
 });
 
 /**
@@ -209,25 +205,22 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetUint8', function(result, cx) {
 nassh.sftp.packets.Tests.addTest('sftpPacketGetUint32', function(result, cx) {
   const packet = new nassh.sftp.Packet(
       '\x00\x00\x00\x00\x7f\xff\xff\xff\xff\xff\xff\xff');
-  result.assertEQ(12, packet.getLength());
+  assert.equal(12, packet.getLength());
 
   // Read a bunch of numbers.
-  result.assertEQ(0, packet.getUint32());
-  result.assertEQ(false, packet.eod());
+  assert.equal(0, packet.getUint32());
+  assert.isFalse(packet.eod());
 
-  result.assertEQ(0x7fffffff, packet.getUint32());
-  result.assertEQ(false, packet.eod());
+  assert.equal(0x7fffffff, packet.getUint32());
+  assert.isFalse(packet.eod());
 
-  result.assertEQ(0xffffffff, packet.getUint32());
-  result.assertEQ(true, packet.eod());
+  assert.equal(0xffffffff, packet.getUint32());
+  assert.isTrue(packet.eod());
 
   // Check short read.
-  try {
-    packet.getUint32();
-    result.fail();
-  } catch(e) {
-    result.pass();
-  }
+  assert.throws(() => packet.getUint32());
+
+  result.pass();
 });
 
 /**
@@ -236,22 +229,19 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetUint32', function(result, cx) {
 nassh.sftp.packets.Tests.addTest('sftpPacketGetUint64', function(result, cx) {
   const packet = new nassh.sftp.Packet('\x00\x00\x00\x00\x00\x00\x00\x00' +
                                        '\x00\x00\xaa\xbb\xcc\xdd\xee\xff');
-  result.assertEQ(16, packet.getLength());
+  assert.equal(16, packet.getLength());
 
   // Read a bunch of numbers.
-  result.assertEQ(0, packet.getUint64());
-  result.assertEQ(false, packet.eod());
+  assert.equal(0, packet.getUint64());
+  assert.isFalse(packet.eod());
 
-  result.assertEQ(0xaabbccddeeff, packet.getUint64());
-  result.assertEQ(true, packet.eod());
+  assert.equal(0xaabbccddeeff, packet.getUint64());
+  assert.isTrue(packet.eod());
 
   // Check short read.
-  try {
-    packet.getUint64();
-    result.fail();
-  } catch(e) {
-    result.pass();
-  }
+  assert.throws(() => packet.getUint64());
+
+  result.pass();
 });
 
 /**
@@ -260,22 +250,19 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetUint64', function(result, cx) {
 nassh.sftp.packets.Tests.addTest('sftpPacketGetString', function(result, cx) {
   const packet = new nassh.sftp.Packet('\x00\x00\x00\x00' +
                                        '\x00\x00\x00\x04abc\xff');
-  result.assertEQ(12, packet.getLength());
+  assert.equal(12, packet.getLength());
 
   // Read the binary strings.
-  result.assertEQ('', packet.getString());
-  result.assertEQ(false, packet.eod());
+  assert.equal('', packet.getString());
+  assert.isFalse(packet.eod());
 
-  result.assertEQ('abc\xff', packet.getString());
-  result.assertEQ(true, packet.eod());
+  assert.equal('abc\xff', packet.getString());
+  assert.isTrue(packet.eod());
 
   // Check short read.
-  try {
-    packet.getString();
-    result.fail();
-  } catch(e) {
-    result.pass();
-  }
+  assert.throws(() => packet.getString());
+
+  result.pass();
 });
 
 /**
@@ -286,19 +273,16 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetUtf8String', function(result, cx)
                                        '\x00\x00\x00\x06abcd\xc3\x9f');
 
   // Read the strings.
-  result.assertEQ('', packet.getUtf8String());
-  result.assertEQ(false, packet.eod());
+  assert.equal('', packet.getUtf8String());
+  assert.isFalse(packet.eod());
 
-  result.assertEQ('abcdß', packet.getUtf8String());
-  result.assertEQ(true, packet.eod());
+  assert.equal('abcdß', packet.getUtf8String());
+  assert.isTrue(packet.eod());
 
   // Check short read.
-  try {
-    packet.getUtf8String();
-    result.fail();
-  } catch(e) {
-    result.pass();
-  }
+  assert.throws(() => packet.getUtf8String());
+
+  result.pass();
 });
 
 /**
@@ -306,14 +290,14 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetUtf8String', function(result, cx)
  */
 nassh.sftp.packets.Tests.addTest('sftpPacketGetData', function(result, cx) {
   const packet = new nassh.sftp.Packet('abcd');
-  result.assertEQ(4, packet.getLength());
+  assert.equal(4, packet.getLength());
 
   // Read the strings.
-  result.assertEQ('abcd', packet.getData());
-  result.assertEQ(true, packet.eod());
+  assert.equal('abcd', packet.getData());
+  assert.isTrue(packet.eod());
 
-  result.assertEQ('', packet.getData());
-  result.assertEQ(true, packet.eod());
+  assert.equal('', packet.getData());
+  assert.isTrue(packet.eod());
 
   result.pass();
 });

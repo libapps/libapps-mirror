@@ -13,7 +13,7 @@ nassh.agent.messages.Tests =
     new lib.TestManager.Suite('nassh.agent.messages.Tests');
 
 nassh.agent.messages.Tests.addTest('write', function(result, cx) {
-  result.assertEQ(
+  assert.strictEqual(
       nassh.agent.messages.write(1).type,
       nassh.agent.messages.Numbers.AGENT_FAILURE, 'invalid type');
 
@@ -34,11 +34,11 @@ nassh.agent.messages.Tests.addTest(
           comment: new Uint8Array()
         }
       ]);
-  result.assertEQ(
+  assert.strictEqual(
       identitiesAnswerMsg.type,
       nassh.agent.messages.Numbers.AGENT_IDENTITIES_ANSWER,
       'type (SSH_AGENT_IDENTITIES_ANSWER)');
-  result.assertEQ(
+  assert.deepStrictEqual(
       Array.from(identitiesAnswerMsg.data_),
       [
         0, 0, 0, 2, 0, 0, 0, 2, 1, 2, 0, 0, 0, 3, 3,
@@ -54,10 +54,10 @@ nassh.agent.messages.Tests.addTest('write_signResponse', function(result, cx) {
   const signResponseMsg = nassh.agent.messages.write(
       nassh.agent.messages.Numbers.AGENT_SIGN_RESPONSE,
       new Uint8Array([1, 2, 3, 4]));
-  result.assertEQ(
+  assert.strictEqual(
       signResponseMsg.type, nassh.agent.messages.Numbers.AGENT_SIGN_RESPONSE,
       'type (SSH_AGENT_SIGN_RESPONSE)');
-  result.assertEQ(
+  assert.deepStrictEqual(
       Array.from(signResponseMsg.data_), [0, 0, 0, 4, 1, 2, 3, 4],
       'data (SSH_AGENT_SIGN_RESPONSE)');
 
@@ -65,16 +65,15 @@ nassh.agent.messages.Tests.addTest('write_signResponse', function(result, cx) {
 });
 
 nassh.agent.messages.Tests.addTest('decodeOid', function(result, cx) {
-  result.assertEQ(nassh.agent.messages.decodeOid(new Uint8Array([])), null);
-  result.assertEQ(
+  assert.isNull(nassh.agent.messages.decodeOid(new Uint8Array([])));
+  assert.strictEqual(
       nassh.agent.messages.decodeOid(new Uint8Array([0x2B])), '1.3');
-  result.assertEQ(
-      nassh.agent.messages.decodeOid(new Uint8Array([0x2B, 0x80])), null);
-  result.assertEQ(
+  assert.isNull(nassh.agent.messages.decodeOid(new Uint8Array([0x2B, 0x80])));
+  assert.strictEqual(
       nassh.agent.messages.decodeOid(new Uint8Array(
           [0x2B, 0x24, 0x03, 0x03, 0x02, 0x08, 0x01, 0x01, 0x07])),
       '1.3.36.3.3.2.8.1.1.7');
-  result.assertEQ(
+  assert.strictEqual(
       nassh.agent.messages.decodeOid(
           new Uint8Array([0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x03, 0x01, 0x07])),
       '1.2.840.10045.3.1.7');

@@ -15,7 +15,7 @@ nassh.Tests = new lib.TestManager.Suite('nassh.Tests');
  */
 nassh.Tests.addTest('nassh.msg', function(result, cx) {
   // Simple pass through.
-  result.assertEQ('foo', nassh.msg('foo'));
+  assert.equal('foo', nassh.msg('foo'));
 
   result.pass();
 });
@@ -26,15 +26,15 @@ nassh.Tests.addTest('nassh.msg', function(result, cx) {
 nassh.Tests.addTest('nassh.base64url-to-base64', function(result, cx) {
   // The basic alphabet that should be unchanged (other than added padding).
   const base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  result.assertEQ(`${base}==`, nassh.base64UrlToBase64(base));
+  assert.equal(`${base}==`, nassh.base64UrlToBase64(base));
 
   // Check padding handling specifically.
-  result.assertEQ('fooo', nassh.base64UrlToBase64('fooo'));
-  result.assertEQ('foo=', nassh.base64UrlToBase64('foo'));
-  result.assertEQ('fo==', nassh.base64UrlToBase64('fo'));
+  assert.equal('fooo', nassh.base64UrlToBase64('fooo'));
+  assert.equal('foo=', nassh.base64UrlToBase64('foo'));
+  assert.equal('fo==', nassh.base64UrlToBase64('fo'));
 
   // Check the important characters get converted.
-  result.assertEQ('+/+/', nassh.base64UrlToBase64('-_+/'));
+  assert.equal('+/+/', nassh.base64UrlToBase64('-_+/'));
 
   result.pass();
 });
@@ -45,14 +45,14 @@ nassh.Tests.addTest('nassh.base64url-to-base64', function(result, cx) {
 nassh.Tests.addTest('nassh.base64-to-base64url', function(result, cx) {
   // The basic alphabet that should be unchanged;
   const base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  result.assertEQ(base, nassh.base64ToBase64Url(base));
+  assert.equal(base, nassh.base64ToBase64Url(base));
 
   // Check = stripping.
-  result.assertEQ('foo', nassh.base64ToBase64Url('foo='));
-  result.assertEQ('fo', nassh.base64ToBase64Url('fo=='));
+  assert.equal('foo', nassh.base64ToBase64Url('foo='));
+  assert.equal('fo', nassh.base64ToBase64Url('fo=='));
 
   // Check the important characters get converted.
-  result.assertEQ('-_-_', nassh.base64ToBase64Url('-_+/'));
+  assert.equal('-_-_', nassh.base64ToBase64Url('-_+/'));
 
   result.pass();
 });

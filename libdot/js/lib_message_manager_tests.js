@@ -33,23 +33,23 @@ lib.MessageManager.Tests.addTest('processI18nAttribute', function(result, cx) {
   // Test direct message name.
   node.setAttribute('i18n', '{"tattr": "FOO"}');
   mm.processI18nAttribute(node);
-  result.assertEQ(node.getAttribute('tattr'), 'FOO');
+  assert.equal(node.getAttribute('tattr'), 'FOO');
 
   // Test $id handling.
   node.setAttribute('i18n', '{"tattr": "$id"}');
   mm.processI18nAttribute(node);
-  result.assertEQ(node.getAttribute('tattr'), 'SPIC_AND_SPAN_TATTR');
+  assert.equal(node.getAttribute('tattr'), 'SPIC_AND_SPAN_TATTR');
 
   // Test _ handling for the textContent.
   node.setAttribute('i18n', '{"_": "THIS_IS_A_TEST"}');
   mm.processI18nAttribute(node);
-  result.assertEQ(node.textContent, 'THIS_IS_A_TEST');
+  assert.equal(node.textContent, 'THIS_IS_A_TEST');
 
   // Test =attr handling.
   node.setAttribute('i18n', '{"tattr": "CONTENT", "tind": "=tattr"}');
   mm.processI18nAttribute(node);
-  result.assertEQ(node.getAttribute('tattr'), 'CONTENT');
-  result.assertEQ(node.getAttribute('tind'), 'CONTENT');
+  assert.equal(node.getAttribute('tattr'), 'CONTENT');
+  assert.equal(node.getAttribute('tind'), 'CONTENT');
 
   result.pass();
 });
@@ -69,8 +69,8 @@ lib.MessageManager.Tests.addTest('add-messages', function(result, cx) {
       'message': 'foo $1 bar $2',
     },
   });
-  result.assertEQ('text', mm.messages['SOME_ID']);
-  result.assertEQ('foo $1 bar $2', mm.messages['ID_REPLACE']);
+  assert.equal('text', mm.messages['SOME_ID']);
+  assert.equal('foo $1 bar $2', mm.messages['ID_REPLACE']);
 
   result.pass();
 });
@@ -91,11 +91,11 @@ lib.MessageManager.Tests.addTest('get-local', function(result, cx) {
     },
   });
 
-  result.assertEQ('text', mm.get('SOME_ID'));
-  result.assertEQ('text', mm.get('SOME_ID', []));
-  result.assertEQ('text', mm.get('SOME_ID', [], 'not used'));
-  result.assertEQ('foo', mm.get('UNKNOWN', [], 'foo'));
-  result.assertEQ('foo X bar Y', mm.get('ID_REPLACE', ['X', 'Y']));
+  assert.equal('text', mm.get('SOME_ID'));
+  assert.equal('text', mm.get('SOME_ID', []));
+  assert.equal('text', mm.get('SOME_ID', [], 'not used'));
+  assert.equal('foo', mm.get('UNKNOWN', [], 'foo'));
+  assert.equal('foo X bar Y', mm.get('ID_REPLACE', ['X', 'Y']));
 
   result.pass();
 });

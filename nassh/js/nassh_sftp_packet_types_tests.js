@@ -24,12 +24,12 @@ nassh.sftp.packets.Tests.addTest('sftpStatusPacket', function(result, cx) {
   );
 
   const packet = new nassh.sftp.packets.StatusPacket(dataPacket);
-  result.assertEQ(true, dataPacket.eod());
+  assert.isTrue(dataPacket.eod());
 
-  result.assertEQ(0x01020304, packet.requestId);
-  result.assertEQ(0xabcdef11, packet.code);
-  result.assertEQ('status', packet.message);
-  result.assertEQ('', packet.lang);
+  assert.equal(0x01020304, packet.requestId);
+  assert.equal(0xabcdef11, packet.code);
+  assert.equal('status', packet.message);
+  assert.equal('', packet.lang);
 
   result.pass();
 });
@@ -46,10 +46,10 @@ nassh.sftp.packets.Tests.addTest('sftpDataPacket', function(result, cx) {
   );
 
   const packet = new nassh.sftp.packets.DataPacket(dataPacket);
-  result.assertEQ(true, dataPacket.eod());
+  assert.isTrue(dataPacket.eod());
 
-  result.assertEQ(0x01020304, packet.requestId);
-  result.assertEQ('data', packet.data);
+  assert.equal(0x01020304, packet.requestId);
+  assert.equal('data', packet.data);
 
   result.pass();
 });
@@ -66,10 +66,10 @@ nassh.sftp.packets.Tests.addTest('sftpHandlePacket', function(result, cx) {
   );
 
   const packet = new nassh.sftp.packets.HandlePacket(dataPacket);
-  result.assertEQ(true, dataPacket.eod());
+  assert.isTrue(dataPacket.eod());
 
-  result.assertEQ(0x01020304, packet.requestId);
-  result.assertEQ('data', packet.handle);
+  assert.equal(0x01020304, packet.requestId);
+  assert.equal('data', packet.handle);
 
   result.pass();
 });
@@ -86,11 +86,11 @@ nassh.sftp.packets.Tests.addTest('sftpNamePacketEmpty', function(result, cx) {
   );
 
   const packet = new nassh.sftp.packets.NamePacket(dataPacket);
-  result.assertEQ(true, dataPacket.eod());
+  assert.isTrue(dataPacket.eod());
 
-  result.assertEQ(0x01020304, packet.requestId);
-  result.assertEQ(0, packet.fileCount);
-  result.assertEQ([], packet.files);
+  assert.equal(0x01020304, packet.requestId);
+  assert.equal(0, packet.fileCount);
+  assert.deepStrictEqual([], packet.files);
 
   result.pass();
 });
@@ -128,30 +128,30 @@ nassh.sftp.packets.Tests.addTest('sftpNamePacket', function(result, cx) {
   );
 
   const packet = new nassh.sftp.packets.NamePacket(dataPacket);
-  result.assertEQ(true, dataPacket.eod());
+  assert.isTrue(dataPacket.eod());
 
-  result.assertEQ(0x01020304, packet.requestId);
-  result.assertEQ(3, packet.fileCount);
+  assert.equal(0x01020304, packet.requestId);
+  assert.equal(3, packet.fileCount);
 
   // Check file 1 (empty).
   let file = packet.files[0];
-  result.assertEQ('', file.filename);
-  result.assertEQ('', file.long_filename);
-  result.assertEQ(0, file.flags);
+  assert.equal('', file.filename);
+  assert.equal('', file.long_filename);
+  assert.equal(0, file.flags);
 
   // Check file 2 (normal).
   file = packet.files[1];
-  result.assertEQ('abc', file.filename);
-  result.assertEQ('-rwxr-xr-x  1 root  root  8560 Oct 23 23:30 abc',
-                  file.long_filename);
-  result.assertEQ(0, file.flags);
+  assert.equal('abc', file.filename);
+  assert.equal('-rwxr-xr-x  1 root  root  8560 Oct 23 23:30 abc',
+               file.long_filename);
+  assert.equal(0, file.flags);
 
   // Check file 3 (unicode).
   file = packet.files[2];
-  result.assertEQ('日本語', file.filename);
-  result.assertEQ('-rw-rw-rw 日本語', file.long_filename);
-  result.assertEQ(1, file.flags);
-  result.assertEQ(3, file.size);
+  assert.equal('日本語', file.filename);
+  assert.equal('-rw-rw-rw 日本語', file.long_filename);
+  assert.equal(1, file.flags);
+  assert.equal(3, file.size);
 
   result.pass();
 });
@@ -170,11 +170,11 @@ nassh.sftp.packets.Tests.addTest('sftpAttrsPacket', function(result, cx) {
   );
 
   const packet = new nassh.sftp.packets.AttrsPacket(dataPacket);
-  result.assertEQ(true, dataPacket.eod());
+  assert.isTrue(dataPacket.eod());
 
   // Check empty attrs.
-  result.assertEQ(0x01020304, packet.requestId);
-  result.assertEQ(0, packet.attrs.flags);
+  assert.equal(0x01020304, packet.requestId);
+  assert.equal(0, packet.attrs.flags);
 
   result.pass();
 });
@@ -189,14 +189,14 @@ nassh.sftp.packets.Tests.addTest('sftpVersionPacket', function(result, cx) {
   );
 
   const packet = new nassh.sftp.packets.VersionPacket(dataPacket);
-  result.assertEQ(true, dataPacket.eod());
+  assert.isTrue(dataPacket.eod());
 
   // Check the fields.
-  result.assertEQ('init', packet.requestId);
-  result.assertEQ(3, packet.version);
+  assert.equal('init', packet.requestId);
+  assert.equal(3, packet.version);
 
   // Check the extensions.
-  result.assertEQ([], Object.keys(packet.extensions));
+  assert.deepStrictEqual([], Object.keys(packet.extensions));
 
   result.pass();
 });
@@ -223,16 +223,16 @@ nassh.sftp.packets.Tests.addTest('sftpVersionPacketExt', function(result, cx) {
   );
 
   const packet = new nassh.sftp.packets.VersionPacket(dataPacket);
-  result.assertEQ(true, dataPacket.eod());
+  assert.isTrue(dataPacket.eod());
 
   // Check the fields.
-  result.assertEQ('init', packet.requestId);
-  result.assertEQ(6, packet.version);
+  assert.equal('init', packet.requestId);
+  assert.equal(6, packet.version);
 
   // Check the extensions.
-  result.assertEQ('data', packet.extensions['ext@foo']);
-  result.assertEQ('1', packet.extensions['ext@ok.com']);
-  result.assertEQ(undefined, packet.extensions['name']);
+  assert.equal('data', packet.extensions['ext@foo']);
+  assert.equal('1', packet.extensions['ext@ok.com']);
+  assert.isUndefined(packet.extensions['name']);
 
   result.pass();
 });
@@ -255,9 +255,7 @@ nassh.sftp.packets.Tests.addTest('sftpValidExtension', function(result, cx) {
     'na\x7fme',
   ];
   invalidExtensions.forEach((ext) => {
-    if (nassh.sftp.packets.ValidExtension(ext)) {
-      result.fail();
-    }
+    assert.isFalse(nassh.sftp.packets.ValidExtension(ext), ext);
   });
 
   const validExtensions = [
@@ -270,9 +268,7 @@ nassh.sftp.packets.Tests.addTest('sftpValidExtension', function(result, cx) {
     'x@blah.blah.www.org',
   ];
   validExtensions.forEach((ext) => {
-    if (!nassh.sftp.packets.ValidExtension(ext)) {
-      result.fail();
-    }
+    assert.isTrue(nassh.sftp.packets.ValidExtension(ext), ext);
   });
 
   result.pass();
@@ -290,10 +286,10 @@ nassh.sftp.packets.Tests.addTest('sftpUnknownPacket', function(result, cx) {
   );
 
   const packet = new nassh.sftp.packets.UnknownPacket(dataPacket);
-  result.assertEQ(true, dataPacket.eod());
+  assert.isTrue(dataPacket.eod());
 
-  result.assertEQ(0x01020304, packet.requestId);
-  result.assertEQ('abc', packet.data);
+  assert.equal(0x01020304, packet.requestId);
+  assert.equal('abc', packet.data);
 
   result.pass();
 });
@@ -326,7 +322,7 @@ nassh.sftp.packets.Tests.addTest('sftpBitsToUnixModeLine', function(result, cx) 
     ['?rw-r--r--', 0o0644],
   ];
   data.forEach(([expected, mode]) => {
-    result.assertEQ(expected, nassh.sftp.packets.bitsToUnixModeLine(mode));
+    assert.equal(expected, nassh.sftp.packets.bitsToUnixModeLine(mode));
   });
   result.pass();
 });
@@ -338,47 +334,47 @@ nassh.sftp.packets.Tests.addTest('sftpGetFileAttrs', function(result, cx) {
   // Start with a simple packet.
   let packet = new nassh.sftp.Packet('\x00\x00\x00\x00');
   let attrs = nassh.sftp.packets.getFileAttrs(packet);
-  result.assertEQ(true, packet.eod());
-  result.assertEQ(0, attrs.flags);
-  result.assertEQ(undefined, attrs.size);
-  result.assertEQ(undefined, attrs.uid);
-  result.assertEQ(undefined, attrs.gid);
-  result.assertEQ(undefined, attrs.permissions);
-  result.assertEQ(undefined, attrs.last_accessed);
-  result.assertEQ(undefined, attrs.last_modified);
+  assert.isTrue(packet.eod());
+  assert.equal(0, attrs.flags);
+  assert.isUndefined(attrs.size);
+  assert.isUndefined(attrs.uid);
+  assert.isUndefined(attrs.gid);
+  assert.isUndefined(attrs.permissions);
+  assert.isUndefined(attrs.last_accessed);
+  assert.isUndefined(attrs.last_modified);
 
   // Check size handling.
   packet = new nassh.sftp.Packet('\x00\x00\x00\x01' +
                                  '\x00\x00\x00\x00\x12\x34\x56\x78');
   attrs = nassh.sftp.packets.getFileAttrs(packet);
-  result.assertEQ(true, packet.eod());
-  result.assertEQ(nassh.sftp.packets.FileXferAttrs.SIZE, attrs.flags);
-  result.assertEQ(0x12345678, attrs.size);
+  assert.isTrue(packet.eod());
+  assert.equal(nassh.sftp.packets.FileXferAttrs.SIZE, attrs.flags);
+  assert.equal(0x12345678, attrs.size);
 
   // Check uid/gid handling.
   packet = new nassh.sftp.Packet('\x00\x00\x00\x02' +
                                  '\x00\x00\x03\xe8\x00\x00\x13\x88');
   attrs = nassh.sftp.packets.getFileAttrs(packet);
-  result.assertEQ(true, packet.eod());
-  result.assertEQ(nassh.sftp.packets.FileXferAttrs.UIDGID, attrs.flags);
-  result.assertEQ(1000, attrs.uid);
-  result.assertEQ(5000, attrs.gid);
+  assert.isTrue(packet.eod());
+  assert.equal(nassh.sftp.packets.FileXferAttrs.UIDGID, attrs.flags);
+  assert.equal(1000, attrs.uid);
+  assert.equal(5000, attrs.gid);
 
   // Check permissions handling.
   packet = new nassh.sftp.Packet('\x00\x00\x00\x04\x00\x00\x0f\xff');
   attrs = nassh.sftp.packets.getFileAttrs(packet);
-  result.assertEQ(true, packet.eod());
-  result.assertEQ(nassh.sftp.packets.FileXferAttrs.PERMISSIONS, attrs.flags);
-  result.assertEQ(0o7777, attrs.permissions);
+  assert.isTrue(packet.eod());
+  assert.equal(nassh.sftp.packets.FileXferAttrs.PERMISSIONS, attrs.flags);
+  assert.equal(0o7777, attrs.permissions);
 
   // Check time handling.
   packet = new nassh.sftp.Packet('\x00\x00\x00\x08' +
                                  '\x3b\x9a\xca\x00\x59\x68\x2f\x00');
   attrs = nassh.sftp.packets.getFileAttrs(packet);
-  result.assertEQ(true, packet.eod());
-  result.assertEQ(nassh.sftp.packets.FileXferAttrs.ACMODTIME, attrs.flags);
-  result.assertEQ(1000000000, attrs.last_accessed);
-  result.assertEQ(1500000000, attrs.last_modified);
+  assert.isTrue(packet.eod());
+  assert.equal(nassh.sftp.packets.FileXferAttrs.ACMODTIME, attrs.flags);
+  assert.equal(1000000000, attrs.last_accessed);
+  assert.equal(1500000000, attrs.last_modified);
 
   // Now altogether!
   packet = new nassh.sftp.Packet('\x00\x00\x00\x0f' +
@@ -387,17 +383,17 @@ nassh.sftp.packets.Tests.addTest('sftpGetFileAttrs', function(result, cx) {
                                  '\x00\x00\x0f\xff' +
                                  '\x3b\x9a\xca\x00\x59\x68\x2f\x00');
   attrs = nassh.sftp.packets.getFileAttrs(packet);
-  result.assertEQ(true, packet.eod());
-  result.assertEQ(nassh.sftp.packets.FileXferAttrs.SIZE |
-                  nassh.sftp.packets.FileXferAttrs.UIDGID |
-                  nassh.sftp.packets.FileXferAttrs.PERMISSIONS |
-                  nassh.sftp.packets.FileXferAttrs.ACMODTIME, attrs.flags);
-  result.assertEQ(0x12345678, attrs.size);
-  result.assertEQ(1000, attrs.uid);
-  result.assertEQ(5000, attrs.gid);
-  result.assertEQ(0o7777, attrs.permissions);
-  result.assertEQ(1000000000, attrs.last_accessed);
-  result.assertEQ(1500000000, attrs.last_modified);
+  assert.isTrue(packet.eod());
+  assert.equal(nassh.sftp.packets.FileXferAttrs.SIZE |
+               nassh.sftp.packets.FileXferAttrs.UIDGID |
+               nassh.sftp.packets.FileXferAttrs.PERMISSIONS |
+               nassh.sftp.packets.FileXferAttrs.ACMODTIME, attrs.flags);
+  assert.equal(0x12345678, attrs.size);
+  assert.equal(1000, attrs.uid);
+  assert.equal(5000, attrs.gid);
+  assert.equal(0o7777, attrs.permissions);
+  assert.equal(1000000000, attrs.last_accessed);
+  assert.equal(1500000000, attrs.last_modified);
 
   result.pass();
 });
@@ -409,8 +405,8 @@ nassh.sftp.packets.Tests.addTest('sftpSetFileAttrs', function(result, cx) {
   // Start with a simple packet.
   let packet = new nassh.sftp.Packet();
   nassh.sftp.packets.setFileAttrs(packet, {flags: 0});
-  result.assertEQ(4, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x00', packet.toString());
+  assert.equal(4, packet.getLength());
+  assert.equal('\x00\x00\x00\x00', packet.toString());
 
   // Check size handling.
   packet = new nassh.sftp.Packet();
@@ -418,9 +414,9 @@ nassh.sftp.packets.Tests.addTest('sftpSetFileAttrs', function(result, cx) {
     flags: nassh.sftp.packets.FileXferAttrs.SIZE,
     size: 0x12345678,
   });
-  result.assertEQ(12, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x01\x00\x00\x00\x00\x12\x34\x56\x78',
-                  packet.toString());
+  assert.equal(12, packet.getLength());
+  assert.equal('\x00\x00\x00\x01\x00\x00\x00\x00\x12\x34\x56\x78',
+               packet.toString());
 
   // Check uid/gid handling.
   packet = new nassh.sftp.Packet();
@@ -429,9 +425,9 @@ nassh.sftp.packets.Tests.addTest('sftpSetFileAttrs', function(result, cx) {
     uid: 1000,
     gid: 5000,
   });
-  result.assertEQ(12, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x02\x00\x00\x03\xe8\x00\x00\x13\x88',
-                  packet.toString());
+  assert.equal(12, packet.getLength());
+  assert.equal('\x00\x00\x00\x02\x00\x00\x03\xe8\x00\x00\x13\x88',
+               packet.toString());
 
   // Check permissions handling.
   packet = new nassh.sftp.Packet();
@@ -439,9 +435,9 @@ nassh.sftp.packets.Tests.addTest('sftpSetFileAttrs', function(result, cx) {
     flags: nassh.sftp.packets.FileXferAttrs.PERMISSIONS,
     permissions: 0o7777,
   });
-  result.assertEQ(8, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x04\x00\x00\x0f\xff',
-                  packet.toString());
+  assert.equal(8, packet.getLength());
+  assert.equal('\x00\x00\x00\x04\x00\x00\x0f\xff',
+               packet.toString());
 
   // Check time handling.
   packet = new nassh.sftp.Packet();
@@ -450,9 +446,9 @@ nassh.sftp.packets.Tests.addTest('sftpSetFileAttrs', function(result, cx) {
     last_accessed: 1000000000,
     last_modified: 1500000000,
   });
-  result.assertEQ(12, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x08\x3b\x9a\xca\x00\x59\x68\x2f\x00',
-                  packet.toString());
+  assert.equal(12, packet.getLength());
+  assert.equal('\x00\x00\x00\x08\x3b\x9a\xca\x00\x59\x68\x2f\x00',
+               packet.toString());
 
   // Now altogether!
   packet = new nassh.sftp.Packet();
@@ -468,13 +464,13 @@ nassh.sftp.packets.Tests.addTest('sftpSetFileAttrs', function(result, cx) {
     last_accessed: 1000000000,
     last_modified: 1500000000,
   });
-  result.assertEQ(32, packet.getLength());
-  result.assertEQ('\x00\x00\x00\x0f' +
-                  '\x00\x00\x00\x00\x12\x34\x56\x78' +
-                  '\x00\x00\x03\xe8\x00\x00\x13\x88' +
-                  '\x00\x00\x0f\xff' +
-                  '\x3b\x9a\xca\x00\x59\x68\x2f\x00',
-                  packet.toString());
+  assert.equal(32, packet.getLength());
+  assert.equal('\x00\x00\x00\x0f' +
+               '\x00\x00\x00\x00\x12\x34\x56\x78' +
+               '\x00\x00\x03\xe8\x00\x00\x13\x88' +
+               '\x00\x00\x0f\xff' +
+               '\x3b\x9a\xca\x00\x59\x68\x2f\x00',
+               packet.toString());
 
   result.pass();
 });
@@ -489,8 +485,8 @@ nassh.sftp.packets.Tests.addTest('sftpEpochToLocal', function(result, cx) {
     ['Fri, 14 Jul 2017 02:40:00 GMT', 1500000000],
   ];
   data.forEach(([expected, seconds]) => {
-    result.assertEQ(expected,
-                    nassh.sftp.packets.epochToLocal(seconds).toUTCString());
+    assert.equal(expected,
+                 nassh.sftp.packets.epochToLocal(seconds).toUTCString());
   });
   result.pass();
 });

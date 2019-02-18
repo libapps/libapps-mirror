@@ -18,16 +18,17 @@ lib.fs.Tests.addTest('FileReader.readAs', function(result, cx) {
   const reader = new lib.fs.FileReader();
 
   reader.readAsArrayBuffer(blob).then((abdata) => {
-    result.assertEQ(new Uint8Array([97, 98, 49, 50]), new Uint8Array(abdata));
+    assert.deepStrictEqual(new Uint8Array([97, 98, 49, 50]),
+                           new Uint8Array(abdata));
 
     reader.readAsBinaryString(blob).then((string) => {
-      result.assertEQ('ab12', string);
+      assert.equal('ab12', string);
 
       reader.readAsDataURL(blob).then((url) => {
-        result.assertEQ('data:application/octet-stream;base64,YWIxMg==', url);
+        assert.equal('data:application/octet-stream;base64,YWIxMg==', url);
 
         reader.readAsText(blob).then((data) => {
-          result.assertEQ('ab12', data);
+          assert.equal('ab12', data);
           result.pass();
         });
       });
@@ -46,19 +47,19 @@ lib.fs.Tests.addTest('FileReader.slices', function(result, cx) {
 
   let slice = blob.slice(0, 0);
   reader.readAsText(slice).then((empty) => {
-    result.assertEQ('', empty);
+    assert.equal('', empty);
 
     slice = blob.slice(0, 2);
     reader.readAsText(slice).then((str1) => {
-      result.assertEQ('ab', str1);
+      assert.equal('ab', str1);
 
       slice = blob.slice(2, 3);
       reader.readAsText(slice).then((str2) => {
-        result.assertEQ('1', str2);
+        assert.equal('1', str2);
 
         slice = blob.slice(3);
         reader.readAsText(slice).then((str3) => {
-          result.assertEQ('2', str3);
+          assert.equal('2', str3);
           result.pass();
         });
       });

@@ -15,14 +15,14 @@ lib.codec.Tests = new lib.TestManager.Suite('lib.codec.Tests');
  */
 lib.codec.Tests.addTest('codeUnitArrayToString', function(result, cx) {
   // Check default Array handling.
-  result.assertEQ('asdf', lib.codec.codeUnitArrayToString([97, 115, 100, 102]));
+  assert.equal('asdf', lib.codec.codeUnitArrayToString([97, 115, 100, 102]));
 
   // Check typed array handling.
   const u8 = new Uint8Array([97, 115, 100, 102]);
-  result.assertEQ('asdf', lib.codec.codeUnitArrayToString(u8));
+  assert.equal('asdf', lib.codec.codeUnitArrayToString(u8));
 
   // Check UTF-16 pairs.
-  result.assertEQ('\u{1fadc}', lib.codec.codeUnitArrayToString([55358, 57052]));
+  assert.equal('\u{1fadc}', lib.codec.codeUnitArrayToString([55358, 57052]));
 
   result.pass();
 });
@@ -35,16 +35,17 @@ lib.codec.Tests.addTest('stringToCodeUnitArray', function(result, cx) {
 
   // Check default Array handling.
   ret = lib.codec.stringToCodeUnitArray('asdf');
-  result.assertEQ([97, 115, 100, 102], ret);
-  result.assert(Array.isArray(ret));
+  assert.deepStrictEqual([97, 115, 100, 102], ret);
+  assert.isTrue(Array.isArray(ret));
 
   // Check typed array handling.
   ret = lib.codec.stringToCodeUnitArray('asdf', Uint8Array);
-  result.assertEQ(new Uint8Array([97, 115, 100, 102]), ret);
-  result.assert(ArrayBuffer.isView(ret));
+  assert.deepStrictEqual(new Uint8Array([97, 115, 100, 102]), ret);
+  assert.isTrue(ArrayBuffer.isView(ret));
 
   // Check UTF-16 pairs.
-  result.assertEQ([55358, 57052], lib.codec.stringToCodeUnitArray('\u{1fadc}'));
+  assert.deepStrictEqual(
+      [55358, 57052], lib.codec.stringToCodeUnitArray('\u{1fadc}'));
 
   result.pass();
 });

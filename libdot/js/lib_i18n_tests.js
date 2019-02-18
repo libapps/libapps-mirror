@@ -16,7 +16,7 @@ lib.i18n.Tests = new lib.TestManager.Suite('lib.i18n.Tests');
 lib.i18n.Tests.addTest('getAcceptLanguages', function(result, cx) {
   // Just make sure we're called with an array of some sort.
   lib.i18n.getAcceptLanguages((langs) => {
-    result.assert(langs instanceof Array);
+    assert.isTrue(Array.isArray(langs));
     result.pass();
   });
 
@@ -28,10 +28,10 @@ lib.i18n.Tests.addTest('getAcceptLanguages', function(result, cx) {
  */
 lib.i18n.Tests.addTest('getMessage', function(result, cx) {
   // There shouldn't be any registered messages.
-  result.assertEQ('', lib.i18n.getMessage('ID'));
+  assert.equal('', lib.i18n.getMessage('ID'));
 
   // Check fallback message.
-  result.assertEQ('yes', lib.i18n.getMessage('ID', null, 'yes'));
+  assert.equal('yes', lib.i18n.getMessage('ID', null, 'yes'));
 
   result.pass();
 });
@@ -43,12 +43,12 @@ lib.i18n.Tests.addTest('getMessage', function(result, cx) {
  */
 lib.i18n.Tests.addTest('replaceReferences', function(result, cx) {
   // Empty substitutions.
-  result.assertEQ('foba', lib.i18n.replaceReferences('fo$1ba', null));
-  result.assertEQ('foba', lib.i18n.replaceReferences('fo$1ba', undefined));
-  result.assertEQ('foba', lib.i18n.replaceReferences('fo$1ba', []));
+  assert.equal('foba', lib.i18n.replaceReferences('fo$1ba', null));
+  assert.equal('foba', lib.i18n.replaceReferences('fo$1ba', undefined));
+  assert.equal('foba', lib.i18n.replaceReferences('fo$1ba', []));
 
   // Too few substitutions.
-  result.assertEQ('foXbar', lib.i18n.replaceReferences('fo$1ba$2r', ['X']));
+  assert.equal('foXbar', lib.i18n.replaceReferences('fo$1ba$2r', ['X']));
 
   result.pass();
 });

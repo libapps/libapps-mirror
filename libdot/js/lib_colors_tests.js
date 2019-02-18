@@ -29,7 +29,7 @@ lib.colors.Tests.addTest('rgbToX11', function(result, cx) {
   ];
 
   data.forEach((ele) => {
-    result.assertEQ(lib.colors.rgbToX11(ele[0]), ele[1], ele[0]);
+    assert.strictEqual(lib.colors.rgbToX11(ele[0]), ele[1], ele[0]);
   });
 
   result.pass();
@@ -53,7 +53,7 @@ lib.colors.Tests.addTest('x11HexToCSS', function(result, cx) {
   ];
 
   data.forEach((ele) => {
-    result.assertEQ(lib.colors.x11HexToCSS(ele[0]), ele[1], ele[0]);
+    assert.strictEqual(lib.colors.x11HexToCSS(ele[0]), ele[1], ele[0]);
   });
 
   result.pass();
@@ -85,7 +85,7 @@ lib.colors.Tests.addTest('x11ToCSS', function(result, cx) {
   ];
 
   data.forEach((ele) => {
-    result.assertEQ(lib.colors.x11ToCSS(ele[0]), ele[1], ele[0]);
+    assert.deepStrictEqual(lib.colors.x11ToCSS(ele[0]), ele[1], ele[0]);
   });
 
   result.pass();
@@ -109,7 +109,7 @@ lib.colors.Tests.addTest('hexToRGB', function(result, cx) {
   ];
 
   data.forEach((ele) => {
-    result.assertEQ(lib.colors.hexToRGB(ele[0]), ele[1], ele[0]);
+    assert.strictEqual(lib.colors.hexToRGB(ele[0]), ele[1], ele[0]);
   });
 
   result.pass();
@@ -128,7 +128,7 @@ lib.colors.Tests.addTest('rgbToHex', function(result, cx) {
   ];
 
   data.forEach((ele) => {
-    result.assertEQ(lib.colors.rgbToHex(ele[0]), ele[1], ele[0]);
+    assert.deepStrictEqual(lib.colors.rgbToHex(ele[0]), ele[1], ele[0]);
   });
 
   result.pass();
@@ -149,7 +149,7 @@ lib.colors.Tests.addTest('normalizeCSS', function(result, cx) {
   ];
 
   data.forEach((ele) => {
-    result.assertEQ(lib.colors.normalizeCSS(ele[0]), ele[1], ele[0]);
+    assert.strictEqual(lib.colors.normalizeCSS(ele[0]), ele[1], ele[0]);
   });
 
   result.pass();
@@ -163,7 +163,7 @@ lib.colors.Tests.addTest('arrayToRGBA', function(result, cx) {
   ];
 
   data.forEach((ele) => {
-    result.assertEQ(lib.colors.arrayToRGBA(ele[0]), ele[1], ele[0]);
+    assert.strictEqual(lib.colors.arrayToRGBA(ele[0]), ele[1], ele[0]);
   });
 
   result.pass();
@@ -180,7 +180,7 @@ lib.colors.Tests.addTest('setAlpha', function(result, cx) {
   ];
 
   data.forEach((ele) => {
-    result.assertEQ(lib.colors.setAlpha.apply(null, ele[0]), ele[1], ele[0]);
+    assert.strictEqual(lib.colors.setAlpha.apply(null, ele[0]), ele[1], ele[0]);
   });
 
   result.pass();
@@ -198,7 +198,7 @@ lib.colors.Tests.addTest('crackRGB', function(result, cx) {
   ];
 
   data.forEach((ele) => {
-    result.assertEQ(lib.colors.crackRGB(ele[0]), ele[1], ele[0]);
+    assert.deepStrictEqual(lib.colors.crackRGB(ele[0]), ele[1], ele[0]);
   });
 
   result.pass();
@@ -218,7 +218,7 @@ lib.colors.Tests.addTest('nameToRGB', function(result, cx) {
   ];
 
   data.forEach((ele) => {
-    result.assertEQ(lib.colors.nameToRGB(ele[0]), ele[1], ele[0]);
+    assert.strictEqual(lib.colors.nameToRGB(ele[0]), ele[1], ele[0]);
   });
 
   result.pass();

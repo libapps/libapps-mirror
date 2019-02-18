@@ -20,7 +20,7 @@ lib.PreferenceManager.Tests.addTest('local-delete-default', function(result, cx)
   var defaultColor = 'red';
 
   preferenceManager.definePreference('color', defaultColor, function(value) {
-    result.assertEQ(value, defaultColor);
+    assert.strictEqual(value, defaultColor);
     result.pass();
   });
 

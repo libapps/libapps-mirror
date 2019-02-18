@@ -52,8 +52,8 @@ nassh.CommandInstance.Tests.addTest('splitCommandLine', function(result, cx) {
   var dataSet;
   data.forEach((dataSet) => {
     const opts = nassh.CommandInstance.splitCommandLine(dataSet[0]);
-    result.assertEQ(dataSet[1], opts.args);
-    result.assertEQ(dataSet[2], opts.command);
+    assert.deepStrictEqual(dataSet[1], opts.args);
+    assert.deepStrictEqual(dataSet[2], opts.command);
   });
 
   result.pass();
@@ -102,13 +102,13 @@ nassh.CommandInstance.Tests.addTest('parseURI', function(result, cx) {
   data.forEach((dataSet) => {
     const rv = nassh.CommandInstance.parseURI(dataSet[0], true, true);
     if (rv === false) {
-      result.assertEQ(dataSet[1], rv, dataSet[0]);
+      assert.isFalse(dataSet[1], dataSet[0]);
     } else {
-      result.assertEQ(dataSet[1].user, rv.username, dataSet[0]);
-      result.assertEQ(dataSet[1].host, rv.hostname, dataSet[0]);
-      result.assertEQ(dataSet[1].port, rv.port, dataSet[0]);
-      result.assertEQ(dataSet[1].relay, rv.relayHostname, dataSet[0]);
-      result.assertEQ(dataSet[1].relayPort, rv.relayPort, dataSet[0]);
+      assert.equal(dataSet[1].user, rv.username, dataSet[0]);
+      assert.equal(dataSet[1].host, rv.hostname, dataSet[0]);
+      assert.equal(dataSet[1].port, rv.port, dataSet[0]);
+      assert.equal(dataSet[1].relay, rv.relayHostname, dataSet[0]);
+      assert.equal(dataSet[1].relayPort, rv.relayPort, dataSet[0]);
     }
   });
 
@@ -145,11 +145,11 @@ nassh.CommandInstance.Tests.addTest('parseDestination', function(result, cx) {
   data.forEach((dataSet) => {
     const rv = nassh.CommandInstance.parseDestination(dataSet[0]);
     if (rv === false) {
-      result.assertEQ(dataSet[1], rv, dataSet[0]);
+      assert.isFalse(dataSet[1], dataSet[0]);
     } else {
-      result.assertEQ(dataSet[1].user, rv.username, dataSet[0]);
-      result.assertEQ(dataSet[1].host, rv.hostname, dataSet[0]);
-      result.assertEQ(dataSet[1].nasshOptions, rv.nasshOptions, dataSet[0]);
+      assert.equal(dataSet[1].user, rv.username, dataSet[0]);
+      assert.equal(dataSet[1].host, rv.hostname, dataSet[0]);
+      assert.equal(dataSet[1].nasshOptions, rv.nasshOptions, dataSet[0]);
     }
   });
 
@@ -164,11 +164,11 @@ nassh.CommandInstance.Tests.addTest('tokenizeOptions', function(result, cx) {
 
   // Check the empty set.  This should not fail.
   rv = nassh.CommandInstance.tokenizeOptions();
-  result.assertEQ('object', typeof rv);
+  assert.equal('object', typeof rv);
   rv = nassh.CommandInstance.tokenizeOptions('');
-  result.assertEQ('object', typeof rv);
+  assert.equal('object', typeof rv);
   rv = nassh.CommandInstance.tokenizeOptions(' ');
-  result.assertEQ('object', typeof rv);
+  assert.equal('object', typeof rv);
 
   // Check the meaning of the options.
   rv = nassh.CommandInstance.tokenizeOptions(
@@ -179,16 +179,13 @@ nassh.CommandInstance.Tests.addTest('tokenizeOptions', function(result, cx) {
       // Check off options.
       '--no-use-xhr '
   );
-  result.assertEQ('object', typeof rv);
-  result.assertEQ(true, rv['--report-ack-latency']);
-  result.assertEQ('google', rv['--config']);
-  result.assertEQ(false, rv['--use-xhr']);
+  assert.equal('object', typeof rv);
+  assert.isTrue(rv['--report-ack-latency']);
+  assert.equal('google', rv['--config']);
+  assert.isFalse(rv['--use-xhr']);
 
   // Check for bad options.
-  try {
-    nassh.CommandInstance.tokenizeOptions('blah');
-    result.fail();
-  } catch (e) {}
+  assert.throws(() => nassh.CommandInstance.tokenizeOptions('blah'));
 
   result.pass();
 });
@@ -202,26 +199,26 @@ nassh.CommandInstance.Tests.addTest('defaultRelays', function(result, cx) {
   // Proxy host unrelated to Google.
   rv = nassh.CommandInstance.tokenizeOptions(
       '--proxy-host=proxy.example.com', 'example.com');
-  result.assertEQ('proxy.example.com', rv['--proxy-host']);
-  result.assertEQ(undefined, rv['--proxy-port']);
+  assert.equal('proxy.example.com', rv['--proxy-host']);
+  assert.isUndefined(rv['--proxy-port']);
 
   // Default Google settings.
   rv = nassh.CommandInstance.tokenizeOptions(
       '--config=google', 'example.com');
-  result.assertEQ('443', rv['--proxy-port']);
-  result.assertEQ('ssh-relay.corp.google.com', rv['--proxy-host']);
+  assert.equal('443', rv['--proxy-port']);
+  assert.equal('ssh-relay.corp.google.com', rv['--proxy-host']);
 
   // Default cloudtop Google settings.
   rv = nassh.CommandInstance.tokenizeOptions(
       '--config=google', 'example.c.googlers.com');
-  result.assertEQ('443', rv['--proxy-port']);
-  result.assertEQ('sup-ssh-relay.corp.google.com', rv['--proxy-host']);
+  assert.equal('443', rv['--proxy-port']);
+  assert.equal('sup-ssh-relay.corp.google.com', rv['--proxy-host']);
 
   // Explicit proxy settings override defaults.
   rv = nassh.CommandInstance.tokenizeOptions(
       '--config=google --proxy-host=example.com', 'example.c.googlers.com');
-  result.assertEQ('443', rv['--proxy-port']);
-  result.assertEQ('example.com', rv['--proxy-host']);
+  assert.equal('443', rv['--proxy-port']);
+  assert.equal('example.com', rv['--proxy-host']);
 
   result.pass();
 });

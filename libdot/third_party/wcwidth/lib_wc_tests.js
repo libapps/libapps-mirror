@@ -20,25 +20,22 @@ lib.wc.Tests.addTest('strWidth-test', function(result, cx) {
   var narrowSurrogatePair = '\uD83D\uDE6B';  // U+1f66b 🙫
   var combiningChar = 'A\u030A';
 
-  result.assertEQ(1, lib.wc.strWidth(asciiOnechar), 'ASCII char has wcwidth 1');
-  result.assertEQ(15, lib.wc.strWidth(asciiString), 'ASCII string');
-  result.assertEQ(2, lib.wc.strWidth(widecharOnechar),
-                  'Chinese char has width 2');
-  result.assertEQ(8, lib.wc.strWidth(widecharString), 'Widechar string');
-  result.assertEQ(1, lib.wc.strWidth(ambiguousOnechar),
-                  'East Asian Ambiguous character has width 1');
-  result.assertEQ(12, lib.wc.strWidth(mixedString), 'Mixed string');
-  result.assertEQ(0, lib.wc.strWidth(nullChar), 'Null char has wcwdith 0');
-  result.assertEQ(0, lib.wc.strWidth(controlChar),
-                  'Control char has width 0');
-  result.assertEQ(1, lib.wc.strWidth(musicalSign),
-                  'A surrogate pair is considered as a single character.');
-  result.assertEQ(2, lib.wc.strWidth(wideSurrogatePair),
-                  'A wide character represented in a surrogate pair.');
-  result.assertEQ(1, lib.wc.strWidth(narrowSurrogatePair),
-                  'A narrow character represented in a surrogate pair.');
-  result.assertEQ(1, lib.wc.strWidth(combiningChar),
-                  'A combining character.');
+  assert.equal(1, lib.wc.strWidth(asciiOnechar), 'ASCII char has wcwidth 1');
+  assert.equal(15, lib.wc.strWidth(asciiString), 'ASCII string');
+  assert.equal(2, lib.wc.strWidth(widecharOnechar), 'Chinese char has width 2');
+  assert.equal(8, lib.wc.strWidth(widecharString), 'Widechar string');
+  assert.equal(1, lib.wc.strWidth(ambiguousOnechar),
+               'East Asian Ambiguous character has width 1');
+  assert.equal(12, lib.wc.strWidth(mixedString), 'Mixed string');
+  assert.equal(0, lib.wc.strWidth(nullChar), 'Null char has wcwdith 0');
+  assert.equal(0, lib.wc.strWidth(controlChar), 'Control char has width 0');
+  assert.equal(1, lib.wc.strWidth(musicalSign),
+               'Surrogate pair is considered a single character');
+  assert.equal(2, lib.wc.strWidth(wideSurrogatePair),
+               'Wide character represented in a surrogate pair');
+  assert.equal(1, lib.wc.strWidth(narrowSurrogatePair),
+               'Narrow character represented in a surrogate pair');
+  assert.equal(1, lib.wc.strWidth(combiningChar), 'A combining character');
 
   result.pass();
 });
@@ -51,13 +48,13 @@ lib.wc.Tests.addTest('charWidthDisregardAmbiguous-low', function(result, cs) {
   var i;
 
   for (i = 0; i < 0x20; ++i)
-    result.assertEQ(0, lib.wc.charWidthDisregardAmbiguous(i));
+    assert.equal(0, lib.wc.charWidthDisregardAmbiguous(i));
 
   for (i = 0x20; i < 0x7f; ++i)
-    result.assertEQ(1, lib.wc.charWidthDisregardAmbiguous(i));
+    assert.equal(1, lib.wc.charWidthDisregardAmbiguous(i));
 
   for (i = 0x7f; i < 0xa0; ++i)
-    result.assertEQ(0, lib.wc.charWidthDisregardAmbiguous(i));
+    assert.equal(0, lib.wc.charWidthDisregardAmbiguous(i));
 
   result.pass();
 });
@@ -69,17 +66,16 @@ lib.wc.Tests.addTest('charWidthRegardAmbiguous-test', function(result, cs) {
   var nullChar = '\u0000';
   var controlChar = '\r';
 
-  result.assertEQ(1, lib.wc.charWidthRegardAmbiguous(asciiChar.charCodeAt(0)),
-                  'ASCII char has width 1');
-  result.assertEQ(2, lib.wc.charWidthRegardAmbiguous(wideChar.charCodeAt(0)),
-                  'Chinese char has width 2');
-  result.assertEQ(2,
-                  lib.wc.charWidthRegardAmbiguous(ambiguousChar.charCodeAt(0)),
-                  'East Asian Ambiguous character has width 2');
-  result.assertEQ(0, lib.wc.charWidthRegardAmbiguous(nullChar.charCodeAt(0)),
-                  'Null char has wcwdith 0');
-  result.assertEQ(0, lib.wc.charWidthRegardAmbiguous(controlChar.charCodeAt(0)),
-                  'Control char has width 0');
+  assert.equal(1, lib.wc.charWidthRegardAmbiguous(asciiChar.charCodeAt(0)),
+               'ASCII char has width 1');
+  assert.equal(2, lib.wc.charWidthRegardAmbiguous(wideChar.charCodeAt(0)),
+               'Chinese char has width 2');
+  assert.equal(2, lib.wc.charWidthRegardAmbiguous(ambiguousChar.charCodeAt(0)),
+               'East Asian Ambiguous character has width 2');
+  assert.equal(0, lib.wc.charWidthRegardAmbiguous(nullChar.charCodeAt(0)),
+               'Null char has wcwdith 0');
+  assert.equal(0, lib.wc.charWidthRegardAmbiguous(controlChar.charCodeAt(0)),
+               'Control char has width 0');
 
   result.pass();
 });
@@ -93,53 +89,53 @@ lib.wc.Tests.addTest('substr-test', function(result, cx) {
   var combiningString = '123A\u030A456';
   var leadingCombiningString = '\u{30a}x';
 
-  result.assertEQ('1', lib.wc.substr(asciiOnechar, 0, 1));
-  result.assertEQ('1', lib.wc.substr(asciiOnechar, 0, 2));
-  result.assertEQ('1', lib.wc.substr(asciiOnechar, 0));
-  result.assertEQ('', lib.wc.substr(asciiOnechar, 0, 0));
-  result.assertEQ('', lib.wc.substr(asciiOnechar, 1));
+  assert.equal('1', lib.wc.substr(asciiOnechar, 0, 1));
+  assert.equal('1', lib.wc.substr(asciiOnechar, 0, 2));
+  assert.equal('1', lib.wc.substr(asciiOnechar, 0));
+  assert.equal('', lib.wc.substr(asciiOnechar, 0, 0));
+  assert.equal('', lib.wc.substr(asciiOnechar, 1));
 
-  result.assertEQ('1234', lib.wc.substr(asciiString, 0, 4));
-  result.assertEQ('1234567890', lib.wc.substr(asciiString, 0, 15));
-  result.assertEQ('5678', lib.wc.substr(asciiString, 4, 4));
-  result.assertEQ('567890', lib.wc.substr(asciiString, 4, 10));
-  result.assertEQ('67890', lib.wc.substr(asciiString, 5));
-  result.assertEQ('', lib.wc.substr(asciiString, 0, 0));
-  result.assertEQ('', lib.wc.substr(asciiString, 11));
+  assert.equal('1234', lib.wc.substr(asciiString, 0, 4));
+  assert.equal('1234567890', lib.wc.substr(asciiString, 0, 15));
+  assert.equal('5678', lib.wc.substr(asciiString, 4, 4));
+  assert.equal('567890', lib.wc.substr(asciiString, 4, 10));
+  assert.equal('67890', lib.wc.substr(asciiString, 5));
+  assert.equal('', lib.wc.substr(asciiString, 0, 0));
+  assert.equal('', lib.wc.substr(asciiString, 11));
 
-  result.assertEQ('\u4E2D', lib.wc.substr(widecharOnechar, 0, 2));
-  result.assertEQ('\u4E2D', lib.wc.substr(widecharOnechar, 0, 3));
-  result.assertEQ('\u4E2D', lib.wc.substr(widecharOnechar, 0));
-  result.assertEQ('\u4E2D', lib.wc.substr(widecharOnechar, 1));
-  result.assertEQ('', lib.wc.substr(widecharOnechar, 0, 0));
-  result.assertEQ('', lib.wc.substr(widecharOnechar, 0, 1));
-  result.assertEQ('', lib.wc.substr(widecharOnechar, 2));
+  assert.equal('\u4E2D', lib.wc.substr(widecharOnechar, 0, 2));
+  assert.equal('\u4E2D', lib.wc.substr(widecharOnechar, 0, 3));
+  assert.equal('\u4E2D', lib.wc.substr(widecharOnechar, 0));
+  assert.equal('\u4E2D', lib.wc.substr(widecharOnechar, 1));
+  assert.equal('', lib.wc.substr(widecharOnechar, 0, 0));
+  assert.equal('', lib.wc.substr(widecharOnechar, 0, 1));
+  assert.equal('', lib.wc.substr(widecharOnechar, 2));
 
-  result.assertEQ('\u4E2D\u6587', lib.wc.substr(widecharString, 0, 4));
-  result.assertEQ('\u4E2D\u6587', lib.wc.substr(widecharString, 0, 5));
-  result.assertEQ('\u4E2D\u6587\u5B57\u4E32\u4E2D\u6587\u5B57\u4E32',
-                  lib.wc.substr(widecharString, 0, 20));
-  result.assertEQ('\u5B57\u4E32', lib.wc.substr(widecharString, 4, 4));
-  result.assertEQ('\u5B57\u4E32\u4E2D\u6587\u5B57\u4E32',
-                  lib.wc.substr(widecharString, 4, 20));
-  result.assertEQ('\u5B57\u4E32\u4E2D\u6587\u5B57\u4E32',
-                  lib.wc.substr(widecharString, 5));
-  result.assertEQ('', lib.wc.substr(widecharString, 0, 0));
-  result.assertEQ('', lib.wc.substr(widecharString, 17));
+  assert.equal('\u4E2D\u6587', lib.wc.substr(widecharString, 0, 4));
+  assert.equal('\u4E2D\u6587', lib.wc.substr(widecharString, 0, 5));
+  assert.equal('\u4E2D\u6587\u5B57\u4E32\u4E2D\u6587\u5B57\u4E32',
+               lib.wc.substr(widecharString, 0, 20));
+  assert.equal('\u5B57\u4E32', lib.wc.substr(widecharString, 4, 4));
+  assert.equal('\u5B57\u4E32\u4E2D\u6587\u5B57\u4E32',
+               lib.wc.substr(widecharString, 4, 20));
+  assert.equal('\u5B57\u4E32\u4E2D\u6587\u5B57\u4E32',
+               lib.wc.substr(widecharString, 5));
+  assert.equal('', lib.wc.substr(widecharString, 0, 0));
+  assert.equal('', lib.wc.substr(widecharString, 17));
 
-  result.assertEQ('12345\u4E2D', lib.wc.substr(mixedString, 0, 7));
-  result.assertEQ(mixedString, lib.wc.substr(mixedString, 0));
-  result.assertEQ(mixedString, lib.wc.substr(mixedString, 0, 20));
+  assert.equal('12345\u4E2D', lib.wc.substr(mixedString, 0, 7));
+  assert.equal(mixedString, lib.wc.substr(mixedString, 0));
+  assert.equal(mixedString, lib.wc.substr(mixedString, 0, 20));
 
-  result.assertEQ('123A\u030a456', lib.wc.substr(combiningString, 0, 7));
-  result.assertEQ('123A\u030a', lib.wc.substr(combiningString, 0, 4));
-  result.assertEQ('123', lib.wc.substr(combiningString, 0, 3));
-  result.assertEQ('3A\u030a', lib.wc.substr(combiningString, 2, 2));
-  result.assertEQ('A\u030a4', lib.wc.substr(combiningString, 3, 2));
-  result.assertEQ('A\u030a', lib.wc.substr(combiningString, 3, 1));
+  assert.equal('123A\u030a456', lib.wc.substr(combiningString, 0, 7));
+  assert.equal('123A\u030a', lib.wc.substr(combiningString, 0, 4));
+  assert.equal('123', lib.wc.substr(combiningString, 0, 3));
+  assert.equal('3A\u030a', lib.wc.substr(combiningString, 2, 2));
+  assert.equal('A\u030a4', lib.wc.substr(combiningString, 3, 2));
+  assert.equal('A\u030a', lib.wc.substr(combiningString, 3, 1));
 
-  result.assertEQ(leadingCombiningString,
-                  lib.wc.substr(leadingCombiningString, 0));
+  assert.equal(leadingCombiningString,
+               lib.wc.substr(leadingCombiningString, 0));
 
   result.pass();
 });
@@ -148,20 +144,20 @@ lib.wc.Tests.addTest('substr-wide-surrogate-test', function(result, cx) {
   const string = '12\u{2099d}34';
 
   // Sanity check this string actually contains a surrogate pair.
-  result.assertEQ(6, string.length);
+  assert.equal(6, string.length);
 
-  result.assertEQ(string, lib.wc.substr(string, 0));
-  result.assertEQ('12', lib.wc.substr(string, 0, 2));
-  result.assertEQ('2', lib.wc.substr(string, 1, 2));
-  result.assertEQ('2\u{D842}\u{DD9D}', lib.wc.substr(string, 1, 3));
-  result.assertEQ('2\u{D842}\u{DD9D}3', lib.wc.substr(string, 1, 4));
-  result.assertEQ('', lib.wc.substr(string, 2, 1));
-  result.assertEQ('\u{D842}\u{DD9D}', lib.wc.substr(string, 2, 2));
-  result.assertEQ('\u{D842}\u{DD9D}3', lib.wc.substr(string, 2, 3));
+  assert.equal(string, lib.wc.substr(string, 0));
+  assert.equal('12', lib.wc.substr(string, 0, 2));
+  assert.equal('2', lib.wc.substr(string, 1, 2));
+  assert.equal('2\u{D842}\u{DD9D}', lib.wc.substr(string, 1, 3));
+  assert.equal('2\u{D842}\u{DD9D}3', lib.wc.substr(string, 1, 4));
+  assert.equal('', lib.wc.substr(string, 2, 1));
+  assert.equal('\u{D842}\u{DD9D}', lib.wc.substr(string, 2, 2));
+  assert.equal('\u{D842}\u{DD9D}3', lib.wc.substr(string, 2, 3));
   // We don't test column 3 here as it's unclear what the right answer is.
   // That'll be in the middle of the wide character (column wise).
-  result.assertEQ('3', lib.wc.substr(string, 4, 1));
-  result.assertEQ('34', lib.wc.substr(string, 4));
+  assert.equal('3', lib.wc.substr(string, 4, 1));
+  assert.equal('34', lib.wc.substr(string, 4));
 
   result.pass();
 });
@@ -170,16 +166,16 @@ lib.wc.Tests.addTest('substr-narrow-surrogate-test', function(result, cx) {
   const string = '12\u{1f66b}34';
 
   // Sanity check this string actually contains a surrogate pair.
-  result.assertEQ(6, string.length);
+  assert.equal(6, string.length);
 
-  result.assertEQ(string, lib.wc.substr(string, 0));
-  result.assertEQ('12', lib.wc.substr(string, 0, 2));
-  result.assertEQ('2\u{1f66b}', lib.wc.substr(string, 1, 2));
-  result.assertEQ('2\u{1f66b}3', lib.wc.substr(string, 1, 3));
-  result.assertEQ('\u{1f66b}', lib.wc.substr(string, 2, 1));
-  result.assertEQ('\u{1f66b}3', lib.wc.substr(string, 2, 2));
-  result.assertEQ('3', lib.wc.substr(string, 3, 1));
-  result.assertEQ('34', lib.wc.substr(string, 3));
+  assert.equal(string, lib.wc.substr(string, 0));
+  assert.equal('12', lib.wc.substr(string, 0, 2));
+  assert.equal('2\u{1f66b}', lib.wc.substr(string, 1, 2));
+  assert.equal('2\u{1f66b}3', lib.wc.substr(string, 1, 3));
+  assert.equal('\u{1f66b}', lib.wc.substr(string, 2, 1));
+  assert.equal('\u{1f66b}3', lib.wc.substr(string, 2, 2));
+  assert.equal('3', lib.wc.substr(string, 3, 1));
+  assert.equal('34', lib.wc.substr(string, 3));
 
   result.pass();
 });
@@ -189,16 +185,18 @@ lib.wc.Tests.addTest('substring-test', function(result, cx) {
   var widecharString = '\u4E2D\u6587\u5B57\u4E32\u4E2D\u6587\u5B57\u4E32';
   var mixedString = '12345\u4E2D\u6587\u5B57\u4E3267890';
 
-  result.assertEQ('\u6587\u5B57', lib.wc.substring(widecharString, 2, 6));
-  result.assertEQ('\u6587\u5B57', lib.wc.substring(widecharString, 3, 7));
-  result.assertEQ('\u4E2D\u6587\u5B57\u4E3267',
-                  lib.wc.substring(mixedString, 5, 15));
-  result.assertEQ(asciiString.substring(2, 5),
-                  lib.wc.substring(asciiString, 2, 5));
-  result.assertEQ(asciiString.substring(0, 0),
-                  lib.wc.substring(asciiString, 0, 0));
-  result.assertEQ(asciiString.substring(2, 15),
-                  lib.wc.substring(asciiString, 2, 15));
+  assert.equal('\u6587\u5B57',
+               lib.wc.substring(widecharString, 2, 6));
+  assert.equal('\u6587\u5B57',
+               lib.wc.substring(widecharString, 3, 7));
+  assert.equal('\u4E2D\u6587\u5B57\u4E3267',
+               lib.wc.substring(mixedString, 5, 15));
+  assert.equal(asciiString.substring(2, 5),
+               lib.wc.substring(asciiString, 2, 5));
+  assert.equal(asciiString.substring(0, 0),
+               lib.wc.substring(asciiString, 0, 0));
+  assert.equal(asciiString.substring(2, 15),
+               lib.wc.substring(asciiString, 2, 15));
 
   result.pass();
 });
