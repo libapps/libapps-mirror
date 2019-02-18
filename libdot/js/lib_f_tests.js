@@ -179,6 +179,9 @@ lib.f.Tests.addTest('lastError', function(result, cx) {
  */
 lib.f.Tests.addTest('openWindow', function(result, cx) {
   const win = lib.f.openWindow();
-  result.assertEQ(null, win);
+  if (win !== null) {
+    result.assertEQ(null, win.opener);
+    win.close();
+  }
   result.pass();
 });
