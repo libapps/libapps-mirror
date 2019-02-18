@@ -8,9 +8,9 @@
  * @fileoverview Test suite for array helper functions.
  */
 
-lib.array.Tests = new lib.TestManager.Suite('lib.array.Tests');
+describe('lib_array_tests.js', () => {
 
-lib.array.Tests.addTest('arrayBigEndianToUint32', function(result, cx) {
+it('arrayBigEndianToUint32', () => {
   const subtests = [
     [[0, 0, 0, 0], 0, 'zero'],
     [[255, 255, 255, 255], 4294967295, 'max'],
@@ -20,11 +20,9 @@ lib.array.Tests.addTest('arrayBigEndianToUint32', function(result, cx) {
   subtests.forEach((data) => {
     assert.equal(lib.array.arrayBigEndianToUint32(data[0]), data[1], data[2]);
   });
-
-  result.pass();
 });
 
-lib.array.Tests.addTest('uint32ToArrayBigEndian', function(result, cx) {
+it('uint32ToArrayBigEndian', () => {
   const subtests = [
     [0, [0, 0, 0, 0], 'zero'],
     [4294967295, [255, 255, 255, 255], 'max'],
@@ -35,11 +33,9 @@ lib.array.Tests.addTest('uint32ToArrayBigEndian', function(result, cx) {
     assert.deepStrictEqual(
         lib.array.uint32ToArrayBigEndian(data[0]), data[1], data[2]);
   });
-
-  result.pass();
 });
 
-lib.array.Tests.addTest('concatTyped', function(result, cx) {
+it('concatTyped', () => {
   const subtests = [
     [[new Uint8Array([]), new Uint8Array([])], new Uint8Array([]), 'empty'],
     [
@@ -71,11 +67,9 @@ lib.array.Tests.addTest('concatTyped', function(result, cx) {
     assert.deepStrictEqual(
         Array.from(concatenated), Array.from(data[1]), data[2]);
   });
-
-  result.pass();
 });
 
-lib.array.Tests.addTest('compare', function(result, cx) {
+it('compare', () => {
   const subtests = [
     [[null, null], true, 'both null'],
     [[[], null], false, 'first null'],
@@ -96,6 +90,6 @@ lib.array.Tests.addTest('compare', function(result, cx) {
   subtests.forEach((data) => {
     assert.equal(lib.array.compare(data[0][0], data[0][1]), data[1], data[2]);
   });
+});
 
-  result.pass();
 });

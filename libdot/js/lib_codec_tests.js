@@ -8,12 +8,12 @@
  * @fileoverview Various codec test suites.
  */
 
-lib.codec.Tests = new lib.TestManager.Suite('lib.codec.Tests');
+describe('lib_codec_tests.js', () => {
 
 /**
  * Test code unit array conversions to strings.
  */
-lib.codec.Tests.addTest('codeUnitArrayToString', function(result, cx) {
+it('codeUnitArrayToString', () => {
   // Check default Array handling.
   assert.equal('asdf', lib.codec.codeUnitArrayToString([97, 115, 100, 102]));
 
@@ -23,14 +23,12 @@ lib.codec.Tests.addTest('codeUnitArrayToString', function(result, cx) {
 
   // Check UTF-16 pairs.
   assert.equal('\u{1fadc}', lib.codec.codeUnitArrayToString([55358, 57052]));
-
-  result.pass();
 });
 
 /**
  * Test string conversions to code unit arrays.
  */
-lib.codec.Tests.addTest('stringToCodeUnitArray', function(result, cx) {
+it('stringToCodeUnitArray', () => {
   let ret;
 
   // Check default Array handling.
@@ -46,6 +44,6 @@ lib.codec.Tests.addTest('stringToCodeUnitArray', function(result, cx) {
   // Check UTF-16 pairs.
   assert.deepStrictEqual(
       [55358, 57052], lib.codec.stringToCodeUnitArray('\u{1fadc}'));
+});
 
-  result.pass();
 });

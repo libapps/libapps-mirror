@@ -8,63 +8,75 @@
  * @fileoverview HTML5 FileSystem related utility functions test suite.
  */
 
-lib.fs.Tests = new lib.TestManager.Suite('lib.fs.Tests');
+describe('lib_fs_tests.js', () => {
 
 /**
  * Verify the various readAs helpers work.
  */
-lib.fs.Tests.addTest('FileReader.readAs', function(result, cx) {
+describe('FileReader.readAs', () => {
   const blob = new Blob(['ab12']);
   const reader = new lib.fs.FileReader();
 
-  reader.readAsArrayBuffer(blob).then((abdata) => {
-    assert.deepStrictEqual(new Uint8Array([97, 98, 49, 50]),
-                           new Uint8Array(abdata));
-
-    reader.readAsBinaryString(blob).then((string) => {
-      assert.equal('ab12', string);
-
-      reader.readAsDataURL(blob).then((url) => {
-        assert.equal('data:application/octet-stream;base64,YWIxMg==', url);
-
-        reader.readAsText(blob).then((data) => {
-          assert.equal('ab12', data);
-          result.pass();
-        });
-      });
+  it('readAsArrayBuffer', () => {
+    return reader.readAsArrayBuffer(blob).then((abdata) => {
+      assert.deepStrictEqual(new Uint8Array([97, 98, 49, 50]),
+                             new Uint8Array(abdata));
     });
   });
 
-  result.requestTime(1000);
+  it('readAsBinaryString', () => {
+    return reader.readAsBinaryString(blob).then((string) => {
+      assert.equal('ab12', string);
+    });
+  });
+
+  it('readAsDataURL', () => {
+    return reader.readAsDataURL(blob).then((url) => {
+      assert.equal('data:application/octet-stream;base64,YWIxMg==', url);
+    });
+  });
+
+  it('readAsText', () => {
+    return reader.readAsText(blob).then((data) => {
+      assert.equal('ab12', data);
+    });
+  });
 });
 
 /**
  * Verify partial reads work as expected.
  */
-lib.fs.Tests.addTest('FileReader.slices', function(result, cx) {
+describe('FileReader.slices', () => {
   const blob = new Blob(['ab12']);
   const reader = new lib.fs.FileReader();
 
-  let slice = blob.slice(0, 0);
-  reader.readAsText(slice).then((empty) => {
-    assert.equal('', empty);
-
-    slice = blob.slice(0, 2);
-    reader.readAsText(slice).then((str1) => {
-      assert.equal('ab', str1);
-
-      slice = blob.slice(2, 3);
-      reader.readAsText(slice).then((str2) => {
-        assert.equal('1', str2);
-
-        slice = blob.slice(3);
-        reader.readAsText(slice).then((str3) => {
-          assert.equal('2', str3);
-          result.pass();
-        });
-      });
+  it('0,0', () => {
+    const slice = blob.slice(0, 0);
+    return reader.readAsText(slice).then((str) => {
+      assert.equal('', str);
     });
   });
 
-  result.requestTime(1000);
+  it('0,2', () => {
+    const slice = blob.slice(0, 2);
+    return reader.readAsText(slice).then((str) => {
+      assert.equal('ab', str);
+    });
+  });
+
+  it('2,3', () => {
+    const slice = blob.slice(2, 3);
+    return reader.readAsText(slice).then((str) => {
+      assert.equal('1', str);
+    });
+  });
+
+  it('3', () => {
+    const slice = blob.slice(3);
+    return reader.readAsText(slice).then((str) => {
+      assert.equal('2', str);
+    });
+  });
+});
+
 });

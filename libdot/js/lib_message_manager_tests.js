@@ -8,15 +8,15 @@
  * @fileoverview Message manager test suite.
  */
 
-lib.MessageManager.Tests = new lib.TestManager.Suite('lib.MessageManager.Tests');
+describe('lib_message_manager_tests.js', () => {
 
 /**
  * Run processI18nAttribute through tests.
  * Note: This relies on no message ids actually matching.
  */
-lib.MessageManager.Tests.addTest('processI18nAttribute', function(result, cx) {
+it('processI18nAttribute', () => {
   var mm = new lib.MessageManager([]);
-  var node = cx.window.document.createElement('span');
+  var node = window.document.createElement('span');
   node.setAttribute('id', 'spic-and-span');
 
   // Test missing i18n.
@@ -50,14 +50,12 @@ lib.MessageManager.Tests.addTest('processI18nAttribute', function(result, cx) {
   mm.processI18nAttribute(node);
   assert.equal(node.getAttribute('tattr'), 'CONTENT');
   assert.equal(node.getAttribute('tind'), 'CONTENT');
-
-  result.pass();
 });
 
 /**
  * Check addMessages behavior.
  */
-lib.MessageManager.Tests.addTest('add-messages', function(result, cx) {
+it('add-messages', () => {
   const mm = new lib.MessageManager([]);
 
   mm.addMessages({
@@ -71,14 +69,12 @@ lib.MessageManager.Tests.addTest('add-messages', function(result, cx) {
   });
   assert.equal('text', mm.messages['SOME_ID']);
   assert.equal('foo $1 bar $2', mm.messages['ID_REPLACE']);
-
-  result.pass();
 });
 
 /**
  * Verify get with registered messages work.
  */
-lib.MessageManager.Tests.addTest('get-local', function(result, cx) {
+it('get-local', () => {
   const mm = new lib.MessageManager([]);
 
   mm.addMessages({
@@ -96,6 +92,6 @@ lib.MessageManager.Tests.addTest('get-local', function(result, cx) {
   assert.equal('text', mm.get('SOME_ID', [], 'not used'));
   assert.equal('foo', mm.get('UNKNOWN', [], 'foo'));
   assert.equal('foo X bar Y', mm.get('ID_REPLACE', ['X', 'Y']));
+});
 
-  result.pass();
 });

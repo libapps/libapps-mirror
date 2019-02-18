@@ -11,44 +11,38 @@
  * testsuite.  We just make sure basic integration with libdot works.
  */
 
-lib.punycode.Tests = new lib.TestManager.Suite('lib.punycode.Tests');
+describe('lib_punycode_tests.js', () => {
 
-lib.punycode.Tests.addTest('encode', function(result, cx) {
+it('encode', () => {
   // No change.
   assert.equal(lib.punycode.encode('example.com'), 'example.com-');
 
   // Basic unicode conversion.
   assert.equal(lib.punycode.encode('日本'), 'wgv71a');
-
-  result.pass();
 });
 
-lib.punycode.Tests.addTest('decode', function(result, cx) {
+it('decode', () => {
   // No change.
   assert.equal(lib.punycode.decode('example.com-'), 'example.com');
 
   // Basic unicode conversion.
   assert.equal(lib.punycode.decode('wgv71a'), '日本');
-
-  result.pass();
 });
 
-lib.punycode.Tests.addTest('toASCII', function(result, cx) {
+it('toASCII', () => {
   // No change.
   assert.equal(lib.punycode.toASCII('example.com'), 'example.com');
 
   // Basic unicode conversion.
   assert.equal(lib.punycode.toASCII('日本.com'), 'xn--wgv71a.com');
-
-  result.pass();
 });
 
-lib.punycode.Tests.addTest('toUnicode', function(result, cx) {
+it('toUnicode', () => {
   // No change.
   assert.equal(lib.punycode.toUnicode('example.com'), 'example.com');
 
   // Basic unicode conversion.
   assert.equal(lib.punycode.toUnicode('xn--wgv71a.com'), '日本.com');
+});
 
-  result.pass();
 });

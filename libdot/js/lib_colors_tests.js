@@ -10,9 +10,9 @@
  * Verify color parsing logic.
  */
 
-lib.colors.Tests = new lib.TestManager.Suite('lib.colors.Tests');
+describe('lib_color_tests.js', () => {
 
-lib.colors.Tests.addTest('rgbToX11', function(result, cx) {
+it('rgbToX11', () => {
   var data = [
     // Some bad data first.
     ['', null],
@@ -31,11 +31,9 @@ lib.colors.Tests.addTest('rgbToX11', function(result, cx) {
   data.forEach((ele) => {
     assert.strictEqual(lib.colors.rgbToX11(ele[0]), ele[1], ele[0]);
   });
-
-  result.pass();
 });
 
-lib.colors.Tests.addTest('x11HexToCSS', function(result, cx) {
+it('x11HexToCSS', () => {
   var data = [
     // Some bad data first.
     ['', null],
@@ -55,11 +53,9 @@ lib.colors.Tests.addTest('x11HexToCSS', function(result, cx) {
   data.forEach((ele) => {
     assert.strictEqual(lib.colors.x11HexToCSS(ele[0]), ele[1], ele[0]);
   });
-
-  result.pass();
 });
 
-lib.colors.Tests.addTest('x11ToCSS', function(result, cx) {
+it('x11ToCSS', () => {
   var data = [
     // Some bad data first.
     ['', null],
@@ -87,11 +83,9 @@ lib.colors.Tests.addTest('x11ToCSS', function(result, cx) {
   data.forEach((ele) => {
     assert.deepStrictEqual(lib.colors.x11ToCSS(ele[0]), ele[1], ele[0]);
   });
-
-  result.pass();
 });
 
-lib.colors.Tests.addTest('hexToRGB', function(result, cx) {
+it('hexToRGB', () => {
   var data = [
     // Some bad data first.
     ['', null],
@@ -111,11 +105,9 @@ lib.colors.Tests.addTest('hexToRGB', function(result, cx) {
   data.forEach((ele) => {
     assert.strictEqual(lib.colors.hexToRGB(ele[0]), ele[1], ele[0]);
   });
-
-  result.pass();
 });
 
-lib.colors.Tests.addTest('rgbToHex', function(result, cx) {
+it('rgbToHex', () => {
   var data = [
     // Some bad data first.
     ['', null],
@@ -130,11 +122,9 @@ lib.colors.Tests.addTest('rgbToHex', function(result, cx) {
   data.forEach((ele) => {
     assert.deepStrictEqual(lib.colors.rgbToHex(ele[0]), ele[1], ele[0]);
   });
-
-  result.pass();
 });
 
-lib.colors.Tests.addTest('normalizeCSS', function(result, cx) {
+it('normalizeCSS', () => {
   var data = [
     // Some bad data first.
     ['', null],
@@ -151,11 +141,9 @@ lib.colors.Tests.addTest('normalizeCSS', function(result, cx) {
   data.forEach((ele) => {
     assert.strictEqual(lib.colors.normalizeCSS(ele[0]), ele[1], ele[0]);
   });
-
-  result.pass();
 });
 
-lib.colors.Tests.addTest('arrayToRGBA', function(result, cx) {
+it('arrayToRGBA', () => {
   var data = [
     [[1, 2, 3], 'rgba(1, 2, 3, 1)'],
     [[10, 200, 3, 0], 'rgba(10, 200, 3, 0)'],
@@ -165,11 +153,9 @@ lib.colors.Tests.addTest('arrayToRGBA', function(result, cx) {
   data.forEach((ele) => {
     assert.strictEqual(lib.colors.arrayToRGBA(ele[0]), ele[1], ele[0]);
   });
-
-  result.pass();
 });
 
-lib.colors.Tests.addTest('setAlpha', function(result, cx) {
+it('setAlpha', () => {
   var data = [
     [['rgb(2,3,4)', 0], 'rgba(2, 3, 4, 0)'],
     [['rgb(2,3,4)', 1], 'rgba(2, 3, 4, 1)'],
@@ -182,11 +168,9 @@ lib.colors.Tests.addTest('setAlpha', function(result, cx) {
   data.forEach((ele) => {
     assert.strictEqual(lib.colors.setAlpha.apply(null, ele[0]), ele[1], ele[0]);
   });
-
-  result.pass();
 });
 
-lib.colors.Tests.addTest('crackRGB', function(result, cx) {
+it('crackRGB', () => {
   var data = [
     // Some bad data first.
     ['', null],
@@ -200,11 +184,9 @@ lib.colors.Tests.addTest('crackRGB', function(result, cx) {
   data.forEach((ele) => {
     assert.deepStrictEqual(lib.colors.crackRGB(ele[0]), ele[1], ele[0]);
   });
-
-  result.pass();
 });
 
-lib.colors.Tests.addTest('nameToRGB', function(result, cx) {
+it('nameToRGB', () => {
   var data = [
     // Some bad data first.
     ['', null],
@@ -220,6 +202,6 @@ lib.colors.Tests.addTest('nameToRGB', function(result, cx) {
   data.forEach((ele) => {
     assert.strictEqual(lib.colors.nameToRGB(ele[0]), ele[1], ele[0]);
   });
+});
 
-  result.pass();
 });

@@ -8,12 +8,12 @@
  * @fileoverview Test suite for the session-local, encrypted cache.
  */
 
-lib.CredentialCache.Tests = new lib.TestManager.Suite('lib.CredentialCache');
+describe('lib_credential_cache_tests.js', () => {
 
 /**
  * Verify that the cache remains enabled after being enabled once.
  */
-lib.CredentialCache.Tests.addTest('enabled', function(result, cx) {
+it('enabled', () => {
   const cache = new lib.CredentialCache();
   assert.isNull(cache.isEnabled());
   cache.setEnabled(true);
@@ -22,14 +22,12 @@ lib.CredentialCache.Tests.addTest('enabled', function(result, cx) {
   assert.isTrue(cache.isEnabled());
   cache.setEnabled(null);
   assert.isTrue(cache.isEnabled());
-
-  result.pass();
 });
 
 /**
  * Verify that the cache remains disabled after being disabled once.
  */
-lib.CredentialCache.Tests.addTest('disabled', function(result, cx) {
+it('disabled', () => {
   const cache = new lib.CredentialCache();
   assert.isNull(cache.isEnabled());
   cache.setEnabled(false);
@@ -38,18 +36,13 @@ lib.CredentialCache.Tests.addTest('disabled', function(result, cx) {
   assert.isFalse(cache.isEnabled());
   cache.setEnabled(null);
   assert.isFalse(cache.isEnabled());
-
-  result.pass();
 });
 
 /**
  * Simulate and verify a typical workflow consisting of store and retrieve
  * operations.
  */
-lib.CredentialCache.Tests.addTest('workflow', async function(
-    result, cx) {
-  result.requestTime(1000);
-
+it('workflow', async () => {
   const cache = new lib.CredentialCache();
   const keyId1 = 'AABBCCDDEEFF';
   const keyId2 = 'FFEEDDCCBBAA';
@@ -69,6 +62,6 @@ lib.CredentialCache.Tests.addTest('workflow', async function(
   await cache.store('reader_1' + keyId2, new Uint8Array([1, 5, 25]));
   assert.deepStrictEqual(
       Array.from(await cache.retrieve('reader_1' + keyId2)), [1, 5, 25]);
+});
 
-  result.pass();
 });

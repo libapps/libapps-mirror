@@ -5,6 +5,8 @@
 
     <!-- npm modules -->
     <script src='../../node_modules/chai/chai.js'></script>
+    <script src='../../node_modules/mocha/mocha.js'></script>
+    <script>mocha.setup('bdd');</script>
 
     <!-- libdot js files under test; keep in dep order -->
     <script src='../js/lib.js'></script>
@@ -24,7 +26,6 @@
     <script src='../third_party/punycode/lib_punycode.js'></script>
     <script src='../third_party/wcwidth/lib_wc.js'></script>
 
-    <script src='../js/lib_test_manager.js'></script>
     <script src='../js/lib_test.js'></script>
 
     <!-- libdot js tests -->
@@ -40,30 +41,10 @@
     <script src='../third_party/punycode/lib_punycode_tests.js'></script>
     <script src='../third_party/wcwidth/lib_wc_tests.js'></script>
 
-    <style>
-      body {
-        color: white;
-        background-color: black;
-        font-family: sans-serif;
-        font-size: larger;
-      }
-      .good {
-        color: green;
-      }
-      .bad {
-        color: red;
-      }
-      pre#log {
-        white-space: pre-wrap;
-      }
-    </style>
+    <link href='../../node_modules/mocha/mocha.css' rel='stylesheet'/>
   </head>
 
   <body>
-    <p>Check JavaScript console for test log/status.</p>
-    <p id='status'>Running...</p>
-    <p id='passed' class='good'></p>
-    <p id='failed' class='bad'></p>
-    <pre id='log'></pre>
+    <div id='mocha'></div>
   </body>
 </html>

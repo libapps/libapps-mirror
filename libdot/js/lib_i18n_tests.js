@@ -8,32 +8,28 @@
  * @fileoverview i18n functions test suite.
  */
 
-lib.i18n.Tests = new lib.TestManager.Suite('lib.i18n.Tests');
+describe('lib_i18n_tests.js', () => {
 
 /**
  * Basic sanity test.  Hard to validate real values here.
  */
-lib.i18n.Tests.addTest('getAcceptLanguages', function(result, cx) {
+it('getAcceptLanguages', (done) => {
   // Just make sure we're called with an array of some sort.
   lib.i18n.getAcceptLanguages((langs) => {
     assert.isTrue(Array.isArray(langs));
-    result.pass();
+    done();
   });
-
-  result.requestTime(1000);
 });
 
 /**
  * Basic sanity test.  Hard to validate real values here.
  */
-lib.i18n.Tests.addTest('getMessage', function(result, cx) {
+it('getMessage', () => {
   // There shouldn't be any registered messages.
   assert.equal('', lib.i18n.getMessage('ID'));
 
   // Check fallback message.
   assert.equal('yes', lib.i18n.getMessage('ID', null, 'yes'));
-
-  result.pass();
 });
 
 /**
@@ -41,7 +37,7 @@ lib.i18n.Tests.addTest('getMessage', function(result, cx) {
  *
  * We don't bother checking lib.i18n.getMessage.
  */
-lib.i18n.Tests.addTest('replaceReferences', function(result, cx) {
+it('replaceReferences', () => {
   // Empty substitutions.
   assert.equal('foba', lib.i18n.replaceReferences('fo$1ba', null));
   assert.equal('foba', lib.i18n.replaceReferences('fo$1ba', undefined));
@@ -49,6 +45,6 @@ lib.i18n.Tests.addTest('replaceReferences', function(result, cx) {
 
   // Too few substitutions.
   assert.equal('foXbar', lib.i18n.replaceReferences('fo$1ba$2r', ['X']));
+});
 
-  result.pass();
 });

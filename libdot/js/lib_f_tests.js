@@ -8,9 +8,9 @@
  * @fileoverview Utility functions test suite.
  */
 
-lib.f.Tests = new lib.TestManager.Suite('lib.f.Tests');
+describe('lib_f_tests.js', () => {
 
-lib.f.Tests.addTest('replaceVars', function(result, cx) {
+it('replaceVars', () => {
   var input;
 
   input = 'l/i%20b d&ot+';
@@ -27,11 +27,9 @@ lib.f.Tests.addTest('replaceVars', function(result, cx) {
   assert.equal(
     lib.f.replaceVars('blah %escapeHTML(name) blah', {name: input}),
     'blah &lt;lib&amp;dot&gt; text blah');
-
-  result.pass();
 });
 
-lib.f.Tests.addTest('parseQuery', function(result, cx) {
+it('parseQuery', () => {
   var ret = lib.f.parseQuery('var=value&foo=blah&cow=milky&clob=a&clob=b&' +
                              'arr[]=1&arr[]=2&clobarr=x&clobarr[]=3');
   assert.deepEqual({
@@ -42,34 +40,30 @@ lib.f.Tests.addTest('parseQuery', function(result, cx) {
     'arr': ['1', '2'],
     'clobarr': ['3'],
   }, ret);
-  result.pass();
 });
 
-lib.f.Tests.addTest('getURL', function(result, cx) {
+it('getURL', () => {
   if (lib.f.getURL.chromeSupported()) {
     assert.equal(lib.f.getURL('foo'), chrome.runtime.getURL(foo));
   } else {
     // We don't have a chrome.runtime and such, so just test pass through.
     assert.equal(lib.f.getURL('foo'), 'foo');
   }
-  result.pass();
 });
 
-lib.f.Tests.addTest('clamp', function(result, cx) {
+it('clamp', () => {
   assert.equal(lib.f.clamp(0, -1, 1), 0);
   assert.equal(lib.f.clamp(0, 10, 100), 10);
   assert.equal(lib.f.clamp(0, -100, -3), -3);
-  result.pass();
 });
 
-lib.f.Tests.addTest('zpad', function(result, cx) {
+it('zpad', () => {
   assert.equal(lib.f.zpad(0, 0), '0');
   assert.equal(lib.f.zpad(0, 5), '00000');
   assert.equal(lib.f.zpad(123, 5), '00123');
-  result.pass();
 });
 
-lib.f.Tests.addTest('getWhitespace', function(result, cx) {
+it('getWhitespace', () => {
   // Test growing first.
   assert.equal(lib.f.getWhitespace(0), '');
   assert.equal(lib.f.getWhitespace(2), '  ');
@@ -81,14 +75,12 @@ lib.f.Tests.addTest('getWhitespace', function(result, cx) {
 
   // Edge cases!
   assert.equal(lib.f.getWhitespace(-10), '');
-
-  result.pass();
 });
 
 /**
  * Check basic getStack behavior.
  */
-lib.f.Tests.addTest('getStack', function(result, cx) {
+it('getStack', () => {
   // Set up some actual functions to check.
   let stack;
   const f1 = (...args) => lib.f.getStack(...args);
@@ -114,11 +106,9 @@ lib.f.Tests.addTest('getStack', function(result, cx) {
   stack = f3(2, 1);
   assert.equal(stack.length, 1);
   assert.notEqual(stack[0].indexOf('f3'), -1);
-
-  result.pass();
 });
 
-lib.f.Tests.addTest('randomInt', function(result, cx) {
+it('randomInt', () => {
   // How many extra samples to grab.  It's random, so hope for the best.
   var maxSamples = 1000;
   var i, ret;
@@ -133,44 +123,36 @@ lib.f.Tests.addTest('randomInt', function(result, cx) {
   }
 
   assert.equal((max - min + 1), seen.reduce((sum, value) => sum + value));
-
-  result.pass();
 });
 
 /**
  * Simple smoke test.  Relies on a lot on current runtime as we don't mock
  * out all the runtime APIs that this code uses.
  */
-lib.f.Tests.addTest('getOs', function(result, cx) {
-  lib.f.getOs().then((os) => {
+it('getOs', () => {
+  return lib.f.getOs().then((os) => {
     assert.isAbove(os.length, 0);
-    result.pass();
   });
-
-  result.requestTime(200);
 });
 
 /**
  * Simple smoke test.
  */
-lib.f.Tests.addTest('getChromeMilestone', function(result, cx) {
+it('getChromeMilestone', () => {
   const milestone = lib.f.getChromeMilestone();
   if (window.chrome)
     assert.isAbove(milestone, 30);
   else
     assert.isNaN(milestone);
-  result.pass();
 });
 
 /**
  * Simple smoke test.  It gets set by async funcs, so it's not trivial to
  * trigger and then test for it.
  */
-lib.f.Tests.addTest('lastError', function(result, cx) {
+it('lastError', () => {
   // Initially there should be no errors.
   assert.isNull(lib.f.lastError());
-
-  result.pass();
 });
 
 /**
@@ -178,11 +160,12 @@ lib.f.Tests.addTest('lastError', function(result, cx) {
  * (probably because the code wasn't triggered by user interaction), so we can't
  * actually test too much behavior here :/.
  */
-lib.f.Tests.addTest('openWindow', function(result, cx) {
+it('openWindow', () => {
   const win = lib.f.openWindow();
   if (win !== null) {
     assert.isNull(win.opener);
     win.close();
   }
-  result.pass();
+});
+
 });

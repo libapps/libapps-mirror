@@ -4,9 +4,9 @@
 
 'use strict';
 
-lib.wc.Tests = new lib.TestManager.Suite('lib.wc.Tests');
+describe('lib_wc_tests.js', () => {
 
-lib.wc.Tests.addTest('strWidth-test', function(result, cx) {
+it('strWidth-test', () => {
   var asciiOnechar = 'a';
   var asciiString = 'an ascii string';
   var widecharOnechar = '\u4E2D';
@@ -36,15 +36,13 @@ lib.wc.Tests.addTest('strWidth-test', function(result, cx) {
   assert.equal(1, lib.wc.strWidth(narrowSurrogatePair),
                'Narrow character represented in a surrogate pair');
   assert.equal(1, lib.wc.strWidth(combiningChar), 'A combining character');
-
-  result.pass();
 });
 
 /**
  * Verify behavior for all codepoints below 0xa0.  It's quick & easy to do so,
  * and this func has optimizations for them specifically.
  */
-lib.wc.Tests.addTest('charWidthDisregardAmbiguous-low', function(result, cs) {
+it('charWidthDisregardAmbiguous-low', () => {
   var i;
 
   for (i = 0; i < 0x20; ++i)
@@ -55,11 +53,9 @@ lib.wc.Tests.addTest('charWidthDisregardAmbiguous-low', function(result, cs) {
 
   for (i = 0x7f; i < 0xa0; ++i)
     assert.equal(0, lib.wc.charWidthDisregardAmbiguous(i));
-
-  result.pass();
 });
 
-lib.wc.Tests.addTest('charWidthRegardAmbiguous-test', function(result, cs) {
+it('charWidthRegardAmbiguous-test', () => {
   var asciiChar = 'a';
   var wideChar = '\u4E2D';
   var ambiguousChar = '\u2026'; // Horizontal ellipsis
@@ -76,11 +72,9 @@ lib.wc.Tests.addTest('charWidthRegardAmbiguous-test', function(result, cs) {
                'Null char has wcwdith 0');
   assert.equal(0, lib.wc.charWidthRegardAmbiguous(controlChar.charCodeAt(0)),
                'Control char has width 0');
-
-  result.pass();
 });
 
-lib.wc.Tests.addTest('substr-test', function(result, cx) {
+it('substr-test', () => {
   var asciiOnechar = '1';
   var asciiString = '1234567890';
   var widecharOnechar = '\u4E2D';
@@ -136,11 +130,9 @@ lib.wc.Tests.addTest('substr-test', function(result, cx) {
 
   assert.equal(leadingCombiningString,
                lib.wc.substr(leadingCombiningString, 0));
-
-  result.pass();
 });
 
-lib.wc.Tests.addTest('substr-wide-surrogate-test', function(result, cx) {
+it('substr-wide-surrogate-test', () => {
   const string = '12\u{2099d}34';
 
   // Sanity check this string actually contains a surrogate pair.
@@ -158,11 +150,9 @@ lib.wc.Tests.addTest('substr-wide-surrogate-test', function(result, cx) {
   // That'll be in the middle of the wide character (column wise).
   assert.equal('3', lib.wc.substr(string, 4, 1));
   assert.equal('34', lib.wc.substr(string, 4));
-
-  result.pass();
 });
 
-lib.wc.Tests.addTest('substr-narrow-surrogate-test', function(result, cx) {
+it('substr-narrow-surrogate-test', () => {
   const string = '12\u{1f66b}34';
 
   // Sanity check this string actually contains a surrogate pair.
@@ -176,11 +166,9 @@ lib.wc.Tests.addTest('substr-narrow-surrogate-test', function(result, cx) {
   assert.equal('\u{1f66b}3', lib.wc.substr(string, 2, 2));
   assert.equal('3', lib.wc.substr(string, 3, 1));
   assert.equal('34', lib.wc.substr(string, 3));
-
-  result.pass();
 });
 
-lib.wc.Tests.addTest('substring-test', function(result, cx) {
+it('substring-test', () => {
   var asciiString = '1234567890';
   var widecharString = '\u4E2D\u6587\u5B57\u4E32\u4E2D\u6587\u5B57\u4E32';
   var mixedString = '12345\u4E2D\u6587\u5B57\u4E3267890';
@@ -197,6 +185,6 @@ lib.wc.Tests.addTest('substring-test', function(result, cx) {
                lib.wc.substring(asciiString, 0, 0));
   assert.equal(asciiString.substring(2, 15),
                lib.wc.substring(asciiString, 2, 15));
+});
 
-  result.pass();
 });

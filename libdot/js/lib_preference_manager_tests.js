@@ -7,21 +7,22 @@
 /**
  * @fileoverview Unit tests for lib.PreferenceManager.
  */
-lib.PreferenceManager.Tests = lib.TestManager.Suite('lib.PreferenceManager.Tests');
+
+describe('lib_preference_manager_tests.js', () => {
 
 /**
  * If another window changes a preference to the default it will delete the
  * localStorage entry. Here we mock the deleting of a localStorage entry so we
  * can test the window correctly return the default value.
  */
-lib.PreferenceManager.Tests.addTest('local-delete-default', function(result, cx) {
+it('local-delete-default', (done) => {
   var storage = new lib.Storage.Local();
   var preferenceManager = new lib.PreferenceManager(storage);
   var defaultColor = 'red';
 
   preferenceManager.definePreference('color', defaultColor, function(value) {
     assert.strictEqual(value, defaultColor);
-    result.pass();
+    done();
   });
 
   // Fake current value is 'blue'.
@@ -34,6 +35,6 @@ lib.PreferenceManager.Tests.addTest('local-delete-default', function(result, cx)
   event.oldValue = JSON.stringify('blue');
   event.newValue = null;
   window.dispatchEvent(event);
+});
 
-  result.requestTime(100);
 });
