@@ -23,6 +23,9 @@
  *   lib.TestManager.Result - A single test result.
  */
 
+// Add a global shortcut to the assert API.
+const assert = chai.assert;
+
 /**
  * Root object in the unit test hierarchy, and keeper of the log object.
  *
@@ -979,38 +982,7 @@ lib.TestManager.Result.prototype.completeTest_ = function(status, opt_throw) {
  */
 lib.TestManager.Result.prototype.assertEQ = function(
     actual, expected, opt_name) {
-  // Utility function to pretty up the log.
-  function format(value) {
-    if (typeof value == 'number')
-      return value;
-
-    var str = String(value);
-    var ary = str.split('\n').map((e) => JSON.stringify(e));
-    if (ary.length > 1) {
-      // If the string has newlines, start it off on its own line so that
-      // it's easier to compare against another string with newlines.
-      return '\n' + ary.join('\n');
-    } else {
-      return ary.join('\n');
-    }
-  }
-
-  if (actual === expected)
-    return;
-
-  // Deal with common object types since JavaScript can't.
-  if (expected instanceof ArrayBuffer) {
-    expected = new Uint8Array(expected);
-    actual = new Uint8Array(expected);
-  }
-  if (expected instanceof Array || ArrayBuffer.isView(expected))
-    if (lib.array.compare(actual, expected))
-      return;
-
-  var name = opt_name ? '[' + opt_name + ']' : '';
-
-  this.fail('assertEQ' + name + ': ' + this.getCallerLocation_(1) + ': ' +
-            format(actual) + ' !== ' + format(expected));
+  assert.deepStrictEqual(actual, expected, opt_name);
 };
 
 /**
@@ -1028,33 +1000,7 @@ lib.TestManager.Result.prototype.assertEQ = function(
  *     of the caller.
  */
 lib.TestManager.Result.prototype.assert = function(actual, opt_name) {
-  if (actual === true)
-    return;
-
-  var name = opt_name ? '[' + opt_name + ']' : '';
-
-  this.fail('assert' + name + ': ' + this.getCallerLocation_(1) + ': ' +
-            String(actual));
-};
-
-/**
- * Return the filename:line of a calling stack frame.
- *
- * This uses a dirty hack.  It throws an exception, catches it, and examines
- * the stack property of the caught exception.
- *
- * @param {int} frameIndex The stack frame to return.  0 is the frame that
- *     called this method, 1 is its caller, and so on.
- * @return {string} A string of the format "filename:linenumber".
- */
-lib.TestManager.Result.prototype.getCallerLocation_ = function(frameIndex) {
-  try {
-    throw new Error();
-  } catch (ex) {
-    var frame = ex.stack.split('\n')[frameIndex + 2];
-    var ary = frame.match(/([^/]+:\d+):\d+\)?$/);
-    return ary ? ary[1] : '???';
-  }
+  assert.isTrue(actual, opt_name);
 };
 
 /**
