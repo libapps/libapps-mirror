@@ -244,7 +244,6 @@ The vast majority of the code here lives under [js/].
 * [bin/]: Tools for building/testing this extension.
 * concat/: Compiled output of other projects we use.
 * [css/]: Any CSS needed for styling UI.
-  * [chrome-bootstrap.css]: Theme code for the extensions options page.
   * [nassh_box.css]: Common utility styling code.
   * [nassh_connect_dialog.css]: Styling for the connection dialog.
   * [nassh_preferences_editor.css]: Styling for the extensions options page.
@@ -264,6 +263,8 @@ The vast majority of the code here lives under [js/].
   * See the section below.
 * [_locales/]: [Translations](https://developer.chrome.com/extensions/i18n) of strings shown to the user.
 * plugin/: Compiled NaCl & output from [ssh_client]
+* [third_party/]: Various 3rd party code we import.
+  * [chrome-bootstrap.css]: Theme code for the extensions options page.
 * [manifest_ext.json]: The Chrome manifest for the extension.
 * [manifest_v1.5.json]: The Chrome manifest for the "v1.5" app.
 * [manifest_v2.json]: The Chrome manifest for the "v2" app.
@@ -541,13 +542,14 @@ Here's a random list of documents which would be useful to people.
 [images/]: ../images/
 [js/]: ../js/
 [_locales/]: ../_locales/
+[third_party/]: ../third_party/
 
 [manifest_ext.json]: ../manifest_ext.json
 [manifest_v1.5.json]: ../manifest_v1.5.json
 [manifest_v2.json]: ../manifest_v2.json
 [manifest_crosh.json]: https://cs.chromium.org/chromium/src/chrome/browser/resources/chromeos/crosh_builtin/manifest.json
 
-[chrome-bootstrap.css]: ../css/chrome-bootstrap.css
+[chrome-bootstrap.css]: ../third_party/chrome-bootstrap/chrome-bootstrap.css
 [nassh_box.css]: ../css/nassh_box.css
 [nassh_connect_dialog.css]: ../css/nassh_connect_dialog.css
 [nassh_preferences_editor.css]: ../css/nassh_preferences_editor.css

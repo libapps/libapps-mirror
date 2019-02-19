@@ -520,6 +520,7 @@
 .chrome-bootstrap select:focus,
 .chrome-bootstrap input[type='checkbox']:focus,
 .chrome-bootstrap input[type='password']:focus,
+.chrome-bootstrap input[type='range']:focus,
 .chrome-bootstrap input[type='radio']:focus,
 .chrome-bootstrap input[type='search']:focus,
 .chrome-bootstrap input[type='text']:focus,
