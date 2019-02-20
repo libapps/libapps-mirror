@@ -49,7 +49,7 @@ function Crosh(argv) {
   this.argv_ = argv;
   this.io = null;
   this.keyboard_ = null;
-  this.pid_ = -1;
+  this.id_ = null;
 }
 
 /**
@@ -157,15 +157,16 @@ Crosh.prototype.commandName = 'crosh';
 /**
  * Called when an event from the crosh process is detected.
  *
- * @param pid Process id of the process the event came from.
+ * @param id Id of the process the event came from.
  * @param type Type of the event.
  *             'stdout': Process output detected.
  *             'exit': Process has exited.
  * @param text Text that was detected on process output.
 **/
-Crosh.prototype.onProcessOutput_ = function(pid, type, text) {
-  if (this.pid_ == -1 || pid != this.pid_)
+Crosh.prototype.onProcessOutput_ = function(id, type, text) {
+  if (this.id_ === null || id !== this.id_) {
     return;
+  }
 
   if (type == 'exit') {
     this.exit(0);
@@ -207,8 +208,8 @@ Crosh.prototype.run = function() {
       this.onProcessOutput_.bind(this));
   document.body.onunload = this.close_.bind(this);
 
-  const pidInit = (pid) => {
-    if (pid == undefined || pid == -1) {
+  const pidInit = (id) => {
+    if (id === undefined) {
       this.io.println(nassh.msg('COMMAND_STARTUP_FAILED',
                                 [this.commandName, lib.f.lastError('')]));
       this.exit(1);
@@ -216,7 +217,7 @@ Crosh.prototype.run = function() {
     }
 
     window.onbeforeunload = this.onBeforeUnload_.bind(this);
-    this.pid_ = pid;
+    this.id_ = id;
 
     // Setup initial window size.
     this.onTerminalResize_(this.io.terminal_.screenSize.width,
@@ -245,19 +246,21 @@ Crosh.prototype.onBeforeUnload_ = function(e) {
  * @param {string} string The string to send.
  */
 Crosh.prototype.sendString_ = function(string) {
-  if (this.pid_ == -1)
+  if (this.id_ === null) {
     return;
-  chrome.terminalPrivate.sendInput(this.pid_, string);
+  }
+  chrome.terminalPrivate.sendInput(this.id_, string);
 };
 
 /**
  * Closes crosh terminal and exits the crosh command.
 **/
 Crosh.prototype.close_ = function() {
-    if (this.pid_ == -1)
-      return;
-    chrome.terminalPrivate.closeTerminalProcess(this.pid_);
-    this.pid_ = -1;
+  if (this.id_ === null) {
+    return;
+  }
+  chrome.terminalPrivate.closeTerminalProcess(this.id_);
+  this.id_ = null;
 };
 
 /**
@@ -267,10 +270,11 @@ Crosh.prototype.close_ = function() {
  * @param {string|integer} terminal height.
  */
 Crosh.prototype.onTerminalResize_ = function(width, height) {
-  if (this.pid_ == -1)
+  if (this.id_ === null) {
     return;
+  }
 
-  chrome.terminalPrivate.onTerminalResize(this.pid_,
+  chrome.terminalPrivate.onTerminalResize(this.id_,
       Number(width), Number(height),
       function(success) {
         if (!success)
