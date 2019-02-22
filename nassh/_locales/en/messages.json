@@ -903,6 +903,10 @@
 		"description": "Header text displayed before the list of known hosts.",
 		"message": "Known hosts:"
 	},
+	"LICENSES": {
+		"description": "A link to the licenses of open source dependencies.",
+		"message": "Licenses"
+	},
 	"LOADING_LABEL": {
 		"description": "The text displayed in the identity dropdown list while we load identities (which are SSH private key filenames used to authenticate with servers).",
 		"message": "Loading..."
