@@ -38,6 +38,7 @@ nassh.sftp.Client = function(opt_basePath='') {
   this.basePath_ = opt_basePath;
 
   // The buffered packet data coming from the plugin.
+  this.pendingMessageSize_ = null;
   this.buffer_ = '';
 
   // A map of pending packet requests.
@@ -124,26 +125,36 @@ nassh.sftp.Client.prototype.writeStreamData = function(data) {
  * Parse the buffer and process the first valid packet in it, else return false.
  */
 nassh.sftp.Client.prototype.parseBuffer = function() {
-  // create packet containing the buffer
-  var packet = new nassh.sftp.Packet(this.buffer_);
+  // See if we've scanned the message length yet (first 4 bytes).
+  if (this.pendingMessageSize_ === null) {
+    if (this.buffer_.length < 4) {
+      return false;
+    }
 
-  // get packet data length
-  var dataLength = packet.getUint32();
+    // Read the 32-bit message length.
+    const data = lib.codec.stringToCodeUnitArray(this.buffer_.slice(0, 4));
+    this.pendingMessageSize_ = lib.array.arrayBigEndianToUint32(data);
+  }
 
-  // check the buffer contains a full and valid packet
-  if (dataLength > this.buffer_.length - 4 && dataLength > 4) {
+  // See if we've got the entire packet yet.
+  if (this.buffer_.length < 4 + this.pendingMessageSize_) {
     return false;
   }
 
-  // slice buffer packet to contain the expected packet
-  packet.slice(0, dataLength + 4);
+  // Consume header + body.
+  const packet = new nassh.sftp.Packet(
+      this.buffer_.slice(0, 4 + this.pendingMessageSize_));
 
-  // remove the expected packet from buffer
-  this.buffer_ = this.buffer_.substr(packet.getLength());
+  // Skip over the packet data length.
+  packet.getUint32();
 
-  // onPacket handler, will return true if valid, else false
-  var rv = this.onPacket(packet);
-  return rv;
+  // Remove the expected packet from the buffer.
+  this.buffer_ = this.buffer_.slice(packet.getLength());
+  // Restart the message process.
+  this.pendingMessageSize_ = null;
+
+  // onPacket handler will return true if valid, else false.
+  return this.onPacket(packet);
 };
 
 /**
