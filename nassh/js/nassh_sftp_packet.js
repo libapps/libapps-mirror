@@ -81,6 +81,10 @@ nassh.sftp.Packet.prototype.setUtf8String = function(string) {
  * Sets data at the current offset.
  */
 nassh.sftp.Packet.prototype.setData = function(data) {
+  // TODO: Support strings until we've migrated to ArrayBuffers everywhere.
+  if (typeof data != 'string') {
+    data = lib.codec.codeUnitArrayToString(data);
+  }
   this.packet_ += data;
   this.offset_ += data.length;
 };

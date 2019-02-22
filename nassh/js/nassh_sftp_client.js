@@ -224,8 +224,8 @@ nassh.sftp.Client.prototype.sendRequest_ = function(type, data) {
   // followed by the payload.  A bit backwards.
   const packet = new nassh.sftp.Packet();
   packet.setUint32(data.getLength() + packetType.getLength());
-  packet.setData(packetType.toString());
-  packet.setData(data);
+  packet.setData(packetType.toByteArray());
+  packet.setData(data.toByteArray());
 
   return new Promise(resolve => {
     this.pendingRequests_[requestId] = resolve;

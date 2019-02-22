@@ -147,11 +147,8 @@ nassh.sftp.fsp.onWriteFileRequested = function(options, onSuccess, onError) {
   const data = new Uint8Array(options.data);
   for (let i = 0; i < data.length; i += client.writeChunkSize) {
     const chunk = data.subarray(i, i + client.writeChunkSize);
-    const dataChunk = lib.codec.codeUnitArrayToString(chunk);
     var offset = options.offset + i;
-
-    var writePromise = client.writeChunk(fileHandle, offset, dataChunk);
-    writePromises.push(writePromise);
+    writePromises.push(client.writeChunk(fileHandle, offset, chunk));
   }
 
   Promise.all(writePromises)

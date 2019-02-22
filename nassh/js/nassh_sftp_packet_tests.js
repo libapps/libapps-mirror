@@ -181,12 +181,12 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetData', function(result, cx) {
   const packet = new nassh.sftp.Packet();
 
   // Start with a NUL byte.
-  packet.setData('\x00');
+  packet.setData(new Uint8Array([0x00]));
   assert.equal(1, packet.getLength());
   assert.deepStrictEqual(new Uint8Array([0x00]), packet.toByteArray());
 
   // Then another normal string.
-  packet.setData('abcd');
+  packet.setData(lib.codec.stringToCodeUnitArray('abcd'));
   assert.equal(5, packet.getLength());
   assert.deepStrictEqual(new Uint8Array([0x00, 97, 98, 99, 100]),
                          packet.toByteArray());
