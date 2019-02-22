@@ -51,7 +51,7 @@ nassh.sftp.packets.Tests.addTest('sftpDataPacket', function(result, cx) {
   assert.isTrue(dataPacket.eod());
 
   assert.equal(0x01020304, packet.requestId);
-  assert.equal('data', packet.data);
+  assert.deepStrictEqual(new Uint8Array([100, 97, 116, 97]), packet.data);
 
   result.pass();
 });
@@ -293,7 +293,7 @@ nassh.sftp.packets.Tests.addTest('sftpUnknownPacket', function(result, cx) {
   assert.isTrue(dataPacket.eod());
 
   assert.equal(0x01020304, packet.requestId);
-  assert.equal('abc', packet.data);
+  assert.deepStrictEqual(new Uint8Array([97, 98, 99]), packet.data);
 
   result.pass();
 });

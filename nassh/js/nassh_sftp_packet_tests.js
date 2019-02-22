@@ -313,10 +313,10 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetData', function(result, cx) {
   assert.equal(4, packet.getLength());
 
   // Read the strings.
-  assert.equal('abcd', packet.getData());
+  assert.deepStrictEqual(new Uint8Array([97, 98, 99, 100]), packet.getData());
   assert.isTrue(packet.eod());
 
-  assert.equal('', packet.getData());
+  assert.deepStrictEqual(new Uint8Array(), packet.getData());
   assert.isTrue(packet.eod());
 
   result.pass();

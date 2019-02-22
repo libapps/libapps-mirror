@@ -342,10 +342,8 @@ nassh.sftp.fsp.onReadFileRequested = function(options, onSuccess, onError) {
     return;
   }
 
-  client.readChunks(fileHandle, (chunk) => {
-      const bytes = lib.codec.stringToCodeUnitArray(chunk, Uint8Array).buffer;
-      onSuccess(bytes, true);
-    }, {offset: options.offset, length: options.length})
+  client.readChunks(fileHandle, (chunk) => onSuccess(chunk.buffer, true),
+                    {offset: options.offset, length: options.length})
     .then(() => onSuccess(new ArrayBuffer(), false))
     .catch(response => {
       console.warn(response.name + ': ' + response.message);

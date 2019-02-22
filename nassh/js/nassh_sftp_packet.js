@@ -153,7 +153,7 @@ nassh.sftp.Packet.prototype.getString = function() {
     throw new Error('Packet too short to read a string');
   }
 
-  return this.getData(stringLength);
+  return lib.codec.codeUnitArrayToString(this.getData(stringLength));
 };
 
 /**
@@ -166,17 +166,19 @@ nassh.sftp.Packet.prototype.getString = function() {
  * @return {string} The string.
  */
 nassh.sftp.Packet.prototype.getUtf8String = function() {
-  return this.decoder_.decode(new Uint8Array(
-      lib.codec.stringToCodeUnitArray(this.getString())));
+  const length = this.getUint32();
+  return this.decoder_.decode(this.getData(length));
 };
 
 /**
  * Gets raw data from the packet at the current offset.
  *
  * @param {number=} length How many bytes to read.
+ * @return {Uint8Array} The raw bytes from the packet.
  */
 nassh.sftp.Packet.prototype.getData = function(length=undefined) {
-  const data = this.packet_.substr(this.offset_, length);
+  const data = lib.codec.stringToCodeUnitArray(
+      this.packet_.substr(this.offset_, length), Uint8Array);
   this.offset_ += data.length;
   return data;
 };
