@@ -105,26 +105,19 @@ nassh.sftp.Client.prototype.writeChunkSize =
  * Stream wants to write some packet data to the client.
  */
 nassh.sftp.Client.prototype.writeStreamData = function(data) {
-  // add data to buffer
+  // Add this data chunk to the queued buffer.
   this.buffer_ += lib.codec.codeUnitArrayToString(new Uint8Array(data));
 
-  // loop over buffer until all packets have been handled.
-  try {
-    var rv = true;
-    // Exit on false return value, else keep looping through valid packets
-    while(rv && this.buffer_.length > 4) { // 4 bytes needed to read len field
-      rv = this.parseBuffer();
-    }
-  } catch (e) {
-    console.warn(e.name + ': ' + e.message);
-    console.warn(e.stack);
+  // Loop over buffer until all available packets have been handled.
+  while (this.parseBuffer_()) {
+    continue;
   }
 };
 
 /**
  * Parse the buffer and process the first valid packet in it, else return false.
  */
-nassh.sftp.Client.prototype.parseBuffer = function() {
+nassh.sftp.Client.prototype.parseBuffer_ = function() {
   // See if we've scanned the message length yet (first 4 bytes).
   if (this.pendingMessageSize_ === null) {
     if (this.buffer_.length < 4) {
