@@ -39,7 +39,7 @@ nassh.sftp.Client = function(opt_basePath='') {
 
   // The buffered packet data coming from the plugin.
   this.pendingMessageSize_ = null;
-  this.buffer_ = '';
+  this.buffer_ = new Uint8Array();
 
   // A map of pending packet requests.
   // Takes a requestId for a key and a Promise as a value.
@@ -106,7 +106,7 @@ nassh.sftp.Client.prototype.writeChunkSize =
  */
 nassh.sftp.Client.prototype.writeStreamData = function(data) {
   // Add this data chunk to the queued buffer.
-  this.buffer_ += lib.codec.codeUnitArrayToString(new Uint8Array(data));
+  this.buffer_ = lib.array.concatTyped(this.buffer_, new Uint8Array(data));
 
   // Loop over buffer until all available packets have been handled.
   while (this.parseBuffer_()) {
@@ -125,8 +125,8 @@ nassh.sftp.Client.prototype.parseBuffer_ = function() {
     }
 
     // Read the 32-bit message length.
-    const data = lib.codec.stringToCodeUnitArray(this.buffer_.slice(0, 4));
-    this.pendingMessageSize_ = lib.array.arrayBigEndianToUint32(data);
+    const dv = new DataView(this.buffer_.buffer, this.buffer_.byteOffset);
+    this.pendingMessageSize_ = dv.getUint32(0);
   }
 
   // See if we've got the entire packet yet.
@@ -136,13 +136,13 @@ nassh.sftp.Client.prototype.parseBuffer_ = function() {
 
   // Consume header + body.
   const packet = new nassh.sftp.Packet(
-      this.buffer_.slice(0, 4 + this.pendingMessageSize_));
+      this.buffer_.subarray(0, 4 + this.pendingMessageSize_));
 
   // Skip over the packet data length.
   packet.getUint32();
 
   // Remove the expected packet from the buffer.
-  this.buffer_ = this.buffer_.slice(packet.getLength());
+  this.buffer_ = this.buffer_.subarray(4 + this.pendingMessageSize_);
   // Restart the message process.
   this.pendingMessageSize_ = null;
 
