@@ -105,7 +105,7 @@ nassh.sftp.Client.prototype.writeChunkSize =
  */
 nassh.sftp.Client.prototype.writeStreamData = function(data) {
   // add data to buffer
-  this.buffer_ += data;
+  this.buffer_ += lib.codec.codeUnitArrayToString(new Uint8Array(data));
 
   // loop over buffer until all packets have been handled.
   try {

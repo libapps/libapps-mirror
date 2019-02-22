@@ -14,6 +14,7 @@
 nassh.Stream.Sftp = function(fd, info) {
   nassh.Stream.apply(this, [fd]);
 
+  this.writeArrayBuffer = true;
   this.acknowledgeCount_ = 0;
   this.client_ = info.client;
 };
@@ -38,9 +39,8 @@ nassh.Stream.Sftp.prototype.asyncWrite = function(data, onSuccess) {
     throw nassh.Stream.ERR_STREAM_CLOSED;
   }
 
-  const string = atob(data);
-  this.acknowledgeCount_ += string.length;
-  this.client_.writeStreamData(string);
+  this.acknowledgeCount_ += data.byteLength;
+  this.client_.writeStreamData(data);
 
   setTimeout(() => onSuccess(this.acknowledgeCount_), 0);
 };
