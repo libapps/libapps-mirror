@@ -91,6 +91,7 @@ FILE_PATTERNS='
     \./html/.*\.html
     \./images/.*\.png
     \./js/.*\.js
+    \./third_party/.*\.css
     \./third_party/.*\.js
     \./_locales/.*\.json
     \./_platform_specific/.*
