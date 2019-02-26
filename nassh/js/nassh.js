@@ -339,8 +339,12 @@ nassh.getBackgroundPage = function() {
     return Promise.reject();
   }
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     chrome.runtime.getBackgroundPage((bg) => {
+      if (bg === undefined) {
+        return reject();
+      }
+
       const checkInitialized = () => {
         if (bg.loaded) {
           return resolve(bg);
