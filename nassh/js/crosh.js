@@ -171,11 +171,6 @@ Crosh.prototype.run = function() {
     window.onbeforeunload = this.onBeforeUnload_.bind(this);
     this.pid_ = pid;
 
-    if (!chrome.terminalPrivate.onTerminalResize) {
-      console.warn("Terminal resizing not supported.");
-      return;
-    }
-
     // Setup initial window size.
     this.onTerminalResize_(this.io.terminal_.screenSize.width,
                            this.io.terminal_.screenSize.height);
@@ -226,10 +221,6 @@ Crosh.prototype.close_ = function() {
  */
 Crosh.prototype.onTerminalResize_ = function(width, height) {
   if (this.pid_ == -1)
-    return;
-
-  // We don't want to break older versions of chrome.
-  if (!chrome.terminalPrivate.onTerminalResize)
     return;
 
   chrome.terminalPrivate.onTerminalResize(this.pid_,
