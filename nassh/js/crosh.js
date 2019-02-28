@@ -12,10 +12,22 @@ window.onload = function() {
     return;
   }
 
-  const qs = lib.f.parseQuery(document.location.search);
+  const params = new URLSearchParams(document.location.search);
 
-  if (qs['command'])
-    Crosh.prototype.commandName = qs['command'];
+  // Make it easy to re-open as a window.
+  if (params.get('openas') == 'window') {
+    // Delete the 'openas' string so we don't get into a loop.  We want to
+    // preserve the rest of the query string when opening the window.
+    params.delete('openas');
+    const url = new URL(document.location);
+    url.search = params.toString();
+    Crosh.openNewWindow_(url.href).then(window.close);
+    return;
+  }
+
+  if (params['command']) {
+    Crosh.prototype.commandName = params['command'];
+  }
   window.document.title = Crosh.prototype.commandName;
 
   nassh.disableTabDiscarding();
@@ -168,6 +180,18 @@ Crosh.prototype.onProcessOutput_ = function(pid, type, text) {
  */
 Crosh.prototype.run = function() {
   this.io = this.argv_.io.push();
+
+  // We're not currently a window, so show a message to the user with a link to
+  // open as a new window.
+  if (hterm.windowType != 'popup') {
+    const params = new URLSearchParams(document.location.search);
+    params.set('openas', 'window');
+    const url = new URL(document.location);
+    url.search = params.toString();
+    this.io.println(nassh.msg('OPEN_AS_WINDOW_TIP',
+                              [`\x1b]8;;${url.href}\x07[crosh]\x1b]8;;\x07`]));
+    this.io.println('');
+  }
 
   if (!chrome.terminalPrivate) {
     this.io.println(nassh.msg('COMMAND_NOT_SUPPORTED', [this.commandName]));
