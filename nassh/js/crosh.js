@@ -91,10 +91,7 @@ Crosh.init = function() {
     [nassh.msg('NEW_WINDOW_MENU_LABEL'),
      function() {
        // Preserve the full URI in case it has args like for vmshell.
-       lib.f.openWindow(document.location.href, '',
-                        'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-                        `minimizable=yes,width=${window.innerWidth},` +
-                        `height=${window.innerHeight}`);
+       Crosh.openNewWindow_(document.location.href);
      }],
     [nassh.msg('FAQ_MENU_LABEL'),
      function() { lib.f.openWindow('https://goo.gl/muppJj', '_blank'); }],
@@ -109,6 +106,31 @@ Crosh.init = function() {
       ['Ctrl-Shift-P', lib.f.getURL('/html/nassh_preferences_editor.html')]));
 
   return true;
+};
+
+/**
+ * Open a new session in a window.
+ *
+ * We use chrome.windows.create instead of lib.f.openWindow as the latter
+ * might not always have permission to create a new window w/chrome=no.
+ *
+ * We can't rely on the background page all the time (like nassh_main.js) as we
+ * might be executing as a bundled extension which doesn't have a background
+ * page at all.
+ *
+ * @param {string} url The URL to open.
+ * @returns {Promise} A promise resolving once the window opens.
+ */
+Crosh.openNewWindow_ = function(url) {
+  return new Promise((resolve) => {
+    chrome.windows.create({
+      url: url,
+      width: window.innerWidth,
+      height: window.innerHeight,
+      focused: true,
+      type: 'popup',
+    }, resolve);
+  });
 };
 
 /**
