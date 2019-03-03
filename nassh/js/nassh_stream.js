@@ -34,26 +34,6 @@ nassh.Stream.ERR_STREAM_CANT_READ = 'Stream has no read permission';
 nassh.Stream.ERR_STREAM_CANT_WRITE = 'Stream has no write permission';
 
 /**
- * Convert binary byte array into base64 ascii.
- *
- * @param {!Array<!number>} b An array of bytes.
- * @return {!string} The base64 encoding of the byte array.
- */
-nassh.Stream.binaryToAscii = function(b) {
-  return btoa(lib.codec.codeUnitArrayToString(b));
-};
-
-/**
- * Convert ascii base64 into binary byte array.
- *
- * @param {!string} a A base64-encoded string.
- * @return {!Array<!number>} The array of byte values encoded in the string.
- */
-nassh.Stream.asciiToBinary = function(a) {
-  return lib.codec.stringToCodeUnitArray(atob(a));
-};
-
-/**
  * Open a stream, calling back when complete.
  */
 nassh.Stream.prototype.asyncOpen_ = function(path, onOpen) {

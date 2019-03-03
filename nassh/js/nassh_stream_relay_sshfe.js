@@ -207,7 +207,7 @@ nassh.Stream.RelaySshfeWS.prototype.signChallenge_ = function(challenge) {
       }
 
       // Return the signed challenge.
-      return nassh.Stream.binaryToAscii(result.data.slice(5));
+      return btoa(lib.codec.codeUnitArrayToString(result.data.slice(5)));
     });
   });
 };

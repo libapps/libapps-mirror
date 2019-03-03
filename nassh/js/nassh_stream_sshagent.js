@@ -77,7 +77,7 @@ nassh.Stream.SSHAgent.prototype.trySendPacket_ = function() {
   this.authAgent_.handleRequest(reqData)
       .then(
           (response) => this.onDataAvailable(
-              nassh.Stream.binaryToAscii(Array.from(response.rawMessage()))));
+              btoa(lib.codec.codeUnitArrayToString(response.rawMessage()))));
 };
 
 /**
