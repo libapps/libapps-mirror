@@ -8,12 +8,12 @@
  * @fileoverview SFTP utility tests.
  */
 
-nassh.sftp.packets.Tests = new lib.TestManager.Suite('nassh.sftp.packets.Tests');
+describe('nassh_sftp_packet_tests.js', () => {
 
 /**
  * Packet constructor & basic API test.
  */
-nassh.sftp.packets.Tests.addTest('sftpPacket', function(result, cx) {
+it('sftpPacket', () => {
   let packet = new nassh.sftp.Packet();
   assert.equal(0, packet.offset_);
   assert.equal(0, packet.getLength());
@@ -29,14 +29,12 @@ nassh.sftp.packets.Tests.addTest('sftpPacket', function(result, cx) {
   assert.equal('abc', packet.toString());
   assert.deepStrictEqual(new Uint8Array([97, 98, 99]), packet.toByteArray());
   assert.isFalse(packet.eod());
-
-  result.pass();
 });
 
 /**
  * Checks for adding uint8's.
  */
-nassh.sftp.packets.Tests.addTest('sftpPacketSetUint8', function(result, cx) {
+it('sftpPacketSetUint8', () => {
   const packet = new nassh.sftp.Packet();
 
   // Start with a NUL byte.
@@ -56,14 +54,12 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetUint8', function(result, cx) {
   assert.equal(4, packet.getLength());
   assert.deepStrictEqual(new Uint8Array([0x00, 0x7f, 0xff, 0xef]),
                          packet.toByteArray());
-
-  result.pass();
 });
 
 /**
  * Checks for adding uint32's.
  */
-nassh.sftp.packets.Tests.addTest('sftpPacketSetUint32', function(result, cx) {
+it('sftpPacketSetUint32', () => {
   const packet = new nassh.sftp.Packet();
 
   // Start with a NUL byte.
@@ -88,14 +84,12 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetUint32', function(result, cx) {
       new Uint8Array([0x00, 0x00, 0x00, 0x00, 0x7f, 0xaa, 0xbb, 0xcc,
                       0xff, 0xff, 0xff, 0xff, 0xcc, 0xdd, 0xee, 0xff]),
       packet.toByteArray());
-
-  result.pass();
 });
 
 /**
  * Checks for adding uint64's.
  */
-nassh.sftp.packets.Tests.addTest('sftpPacketSetUint64', function(result, cx) {
+it('sftpPacketSetUint64', () => {
   const packet = new nassh.sftp.Packet();
 
   // Start with a NUL byte.
@@ -122,14 +116,12 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetUint64', function(result, cx) {
                       0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff,
                       0x00, 0x00, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff]),
       packet.toByteArray());
-
-  result.pass();
 });
 
 /**
  * Checks for adding binary strings.
  */
-nassh.sftp.packets.Tests.addTest('sftpPacketSetString', function(result, cx) {
+it('sftpPacketSetString', () => {
   const packet = new nassh.sftp.Packet();
 
   // Start with a NUL byte.
@@ -146,14 +138,12 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetString', function(result, cx) {
       new Uint8Array([0x00, 0x00, 0x00, 0x01, 0x00,
                       0x00, 0x00, 0x00, 0x04, 97, 98, 99, 0xff]),
       packet.toByteArray());
-
-  result.pass();
 });
 
 /**
  * Checks for adding strings.
  */
-nassh.sftp.packets.Tests.addTest('sftpPacketSetUtf8String', function(result, cx) {
+it('sftpPacketSetUtf8String', () => {
   const packet = new nassh.sftp.Packet();
 
   // Start with a NUL byte.
@@ -170,14 +160,12 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetUtf8String', function(result, cx)
       new Uint8Array([0x00, 0x00, 0x00, 0x01, 0x00,
                       0x00, 0x00, 0x00, 0x06, 97, 98, 99, 100, 0xc3, 0x9f]),
       packet.toByteArray());
-
-  result.pass();
 });
 
 /**
  * Checks for adding data.
  */
-nassh.sftp.packets.Tests.addTest('sftpPacketSetData', function(result, cx) {
+it('sftpPacketSetData', () => {
   const packet = new nassh.sftp.Packet();
 
   // Start with a NUL byte.
@@ -190,14 +178,12 @@ nassh.sftp.packets.Tests.addTest('sftpPacketSetData', function(result, cx) {
   assert.equal(5, packet.getLength());
   assert.deepStrictEqual(new Uint8Array([0x00, 97, 98, 99, 100]),
                          packet.toByteArray());
-
-  result.pass();
 });
 
 /**
  * Checks for reading uint8's.
  */
-nassh.sftp.packets.Tests.addTest('sftpPacketGetUint8', function(result, cx) {
+it('sftpPacketGetUint8', () => {
   const packet = new nassh.sftp.Packet([0x00, 0x7f, 0xff]);
   assert.equal(3, packet.getLength());
 
@@ -213,14 +199,12 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetUint8', function(result, cx) {
 
   // Check short read.
   assert.throws(() => packet.getUint8());
-
-  result.pass();
 });
 
 /**
  * Checks for reading uint32's.
  */
-nassh.sftp.packets.Tests.addTest('sftpPacketGetUint32', function(result, cx) {
+it('sftpPacketGetUint32', () => {
   const packet = new nassh.sftp.Packet(
       [0x00, 0x00, 0x00, 0x00, 0x7f, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff]);
   assert.equal(12, packet.getLength());
@@ -237,14 +221,12 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetUint32', function(result, cx) {
 
   // Check short read.
   assert.throws(() => packet.getUint32());
-
-  result.pass();
 });
 
 /**
  * Checks for reading uint64's.
  */
-nassh.sftp.packets.Tests.addTest('sftpPacketGetUint64', function(result, cx) {
+it('sftpPacketGetUint64', () => {
   const packet = new nassh.sftp.Packet(
       [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
        0x00, 0x00, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff]);
@@ -259,14 +241,12 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetUint64', function(result, cx) {
 
   // Check short read.
   assert.throws(() => packet.getUint64());
-
-  result.pass();
 });
 
 /**
  * Checks for reading binary strings.
  */
-nassh.sftp.packets.Tests.addTest('sftpPacketGetString', function(result, cx) {
+it('sftpPacketGetString', () => {
   const packet = new nassh.sftp.Packet(
       [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 97, 98, 99, 0xff]);
   assert.equal(12, packet.getLength());
@@ -280,14 +260,12 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetString', function(result, cx) {
 
   // Check short read.
   assert.throws(() => packet.getString());
-
-  result.pass();
 });
 
 /**
  * Checks for reading strings.
  */
-nassh.sftp.packets.Tests.addTest('sftpPacketGetUtf8String', function(result, cx) {
+it('sftpPacketGetUtf8String', () => {
   const packet = new nassh.sftp.Packet(
       [0x00, 0x00, 0x00, 0x00,
        0x00, 0x00, 0x00, 0x06, 97, 98, 99, 100, 0xc3, 0x9f]);
@@ -301,14 +279,12 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetUtf8String', function(result, cx)
 
   // Check short read.
   assert.throws(() => packet.getUtf8String());
-
-  result.pass();
 });
 
 /**
  * Checks for reading data.
  */
-nassh.sftp.packets.Tests.addTest('sftpPacketGetData', function(result, cx) {
+it('sftpPacketGetData', () => {
   const packet = new nassh.sftp.Packet([97, 98, 99, 100]);
   assert.equal(4, packet.getLength());
 
@@ -318,6 +294,6 @@ nassh.sftp.packets.Tests.addTest('sftpPacketGetData', function(result, cx) {
 
   assert.deepStrictEqual(new Uint8Array(), packet.getData());
   assert.isTrue(packet.eod());
+});
 
-  result.pass();
 });

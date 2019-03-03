@@ -8,12 +8,12 @@
  * @fileoverview nassh command instance tests.
  */
 
-nassh.CommandInstance.Tests = new lib.TestManager.Suite('nassh.CommandInstance.Tests');
+describe('nassh_command_instance_tests.js', () => {
 
 /**
  * Verify parsing of command lines.
  */
-nassh.CommandInstance.Tests.addTest('splitCommandLine', function(result, cx) {
+it('splitCommandLine', () => {
   const data = [
     // JS API.
     [undefined, [], ''],
@@ -55,14 +55,12 @@ nassh.CommandInstance.Tests.addTest('splitCommandLine', function(result, cx) {
     assert.deepStrictEqual(dataSet[1], opts.args);
     assert.deepStrictEqual(dataSet[2], opts.command);
   });
-
-  result.pass();
 });
 
 /**
  * Check parsing of ssh:// URIs.
  */
-nassh.CommandInstance.Tests.addTest('parseURI', function(result, cx) {
+it('parseURI', () => {
   const data = [
     // Strip off the leading URI schema.
     ['ssh://root@localhost', {'user': 'root', 'host': 'localhost'}],
@@ -111,15 +109,13 @@ nassh.CommandInstance.Tests.addTest('parseURI', function(result, cx) {
       assert.equal(dataSet[1].relayPort, rv.relayPort, dataSet[0]);
     }
   });
-
-  result.pass();
 });
 
 /**
  * Check parsing of Secure Shell destinations.
  * Most test logic is in parseURI, so we focus on the little bit that isn't.
  */
-nassh.CommandInstance.Tests.addTest('parseDestination', function(result, cx) {
+it('parseDestination', () => {
   const data = [
     // Registered protocol handler.
     ['uri:ssh://root@localhost', {'user': 'root', 'host': 'localhost'}],
@@ -152,14 +148,12 @@ nassh.CommandInstance.Tests.addTest('parseDestination', function(result, cx) {
       assert.equal(dataSet[1].nasshOptions, rv.nasshOptions, dataSet[0]);
     }
   });
-
-  result.pass();
 });
 
 /**
  * Verify parsing of command lines.
  */
-nassh.CommandInstance.Tests.addTest('tokenizeOptions', function(result, cx) {
+it('tokenizeOptions', () => {
   let rv;
 
   // Check the empty set.  This should not fail.
@@ -186,14 +180,12 @@ nassh.CommandInstance.Tests.addTest('tokenizeOptions', function(result, cx) {
 
   // Check for bad options.
   assert.throws(() => nassh.CommandInstance.tokenizeOptions('blah'));
-
-  result.pass();
 });
 
 /**
  * Verify default proxy-host settings.
  */
-nassh.CommandInstance.Tests.addTest('defaultRelays', function(result, cx) {
+it('defaultRelays', () => {
   let rv;
 
   // Proxy host unrelated to Google.
@@ -219,6 +211,6 @@ nassh.CommandInstance.Tests.addTest('defaultRelays', function(result, cx) {
       '--config=google --proxy-host=example.com', 'example.c.googlers.com');
   assert.equal('443', rv['--proxy-port']);
   assert.equal('example.com', rv['--proxy-host']);
+});
 
-  result.pass();
 });

@@ -9,29 +9,24 @@
  * nassh.agent.Message.
  */
 
-nassh.agent.Message.Tests =
-    new lib.TestManager.Suite('nassh.agent.Message.Tests');
+describe('nassh_agent_message_tests.js', () => {
 
-nassh.agent.Message.Tests.addTest('rawMessage', function(result, cx) {
+it('rawMessage', () => {
   const msg = new nassh.agent.Message(1, new Uint8Array([2, 3, 4]));
   const rawMsg = msg.rawMessage();
   assert.deepStrictEqual(Array.from(rawMsg), [0, 0, 0, 4, 1, 2, 3, 4]);
-
-  result.pass();
 });
 
-nassh.agent.Message.Tests.addTest('eom', function(result, cx) {
+it('eom', () => {
   const msg = new nassh.agent.Message(1);
   assert.isTrue(msg.eom(), 'empty message');
   msg.writeUint32(2);
   assert.isTrue(!msg.eom(), 'non-empty message');
   msg.readUint32();
   assert.isTrue(msg.eom(), 'end of non-empty message');
-
-  result.pass();
 });
 
-nassh.agent.Message.Tests.addTest('readUint32', function(result, cx) {
+it('readUint32', () => {
   const msg = new nassh.agent.Message(
       1, new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1]));
   assert.equal(msg.readUint32(), 0x01020304, 'big endian');
@@ -39,11 +34,9 @@ nassh.agent.Message.Tests.addTest('readUint32', function(result, cx) {
 
   // Check end reached.
   assert.throws(() => msg.readUint32());
-
-  result.pass();
 });
 
-nassh.agent.Message.Tests.addTest('writeUint32', function(result, cx) {
+it('writeUint32', () => {
   const msg = new nassh.agent.Message(1);
 
   // Check unsafe integer.
@@ -52,11 +45,9 @@ nassh.agent.Message.Tests.addTest('writeUint32', function(result, cx) {
   msg.writeUint32(0x01020304);
   msg.writeUint32(0x05060708);
   assert.deepStrictEqual(Array.from(msg.data_), [1, 2, 3, 4, 5, 6, 7, 8]);
-
-  result.pass();
 });
 
-nassh.agent.Message.Tests.addTest('readString', function(result, cx) {
+it('readString', () => {
   const msg = new nassh.agent.Message(
       1,
       new Uint8Array(
@@ -68,11 +59,9 @@ nassh.agent.Message.Tests.addTest('readString', function(result, cx) {
 
   // Check end reached.
   assert.throws(() => msg.readString());
-
-  result.pass();
 });
 
-nassh.agent.Message.Tests.addTest('writeString', function(result, cx) {
+it('writeString', () => {
   const msg = new nassh.agent.Message(1);
 
   // Check unsafe integer.
@@ -82,11 +71,9 @@ nassh.agent.Message.Tests.addTest('writeString', function(result, cx) {
   msg.writeString(new Uint8Array([4, 5, 6, 7]));
   assert.deepStrictEqual(
       Array.from(msg.data_), [0, 0, 0, 3, 1, 2, 3, 0, 0, 0, 4, 4, 5, 6, 7]);
-
-  result.pass();
 });
 
-nassh.agent.Message.Tests.addTest('fromRawMessage', function(result, cx) {
+it('fromRawMessage', () => {
   assert.strictEqual(
       nassh.agent.Message.fromRawMessage(new Uint8Array([1, 2, 3, 4])), null,
       'raw message too short');
@@ -97,13 +84,10 @@ nassh.agent.Message.Tests.addTest('fromRawMessage', function(result, cx) {
       nassh.agent.Message.fromRawMessage(
           new Uint8Array([0, 0, 0, 4, 1, 2, 3, 4, 5])),
       null, 'length field invalid (too large)');
-
-  result.pass();
 });
 
 // clang-format off
-nassh.agent.Message.Tests.addTest(
-    'fromRawMessage_requestIdentities', function(result, cx) {
+it('fromRawMessage_requestIdentities', () => {
   assert.deepStrictEqual(
       nassh.agent.Message.fromRawMessage(
           new Uint8Array([0, 0, 0, 5, 11, 1, 2, 3, 4])),
@@ -118,14 +102,11 @@ nassh.agent.Message.Tests.addTest(
   assert.equal(
       Object.keys(requestIdentitiesMsg.fields).length, 0,
       'no fields (SSH_AGENTC_REQUEST_IDENTITIES)');
-
-  result.pass();
 });
 // clang-format on
 
 // clang-format off
-nassh.agent.Message.Tests.addTest(
-    'fromRawMessage_signRequest', function(result, cx) {
+it('fromRawMessage_signRequest', () => {
   assert.deepStrictEqual(
       nassh.agent.Message.fromRawMessage(new Uint8Array([
         0, 0, 0, 18, 13, 0, 0, 0, 2, 1, 2,
@@ -150,7 +131,7 @@ nassh.agent.Message.Tests.addTest(
   assert.equal(
       signRequestMsg.fields.flags, 0x06070809,
       'flags (SSH_AGENTC_SIGN_REQUEST)');
-
-  result.pass();
 });
 // clang-format on
+
+});

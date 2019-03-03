@@ -9,20 +9,16 @@
  * nassh.agent.messages.
  */
 
-nassh.agent.messages.Tests =
-    new lib.TestManager.Suite('nassh.agent.messages.Tests');
+describe('nassh_agent_message_types_tests.js', () => {
 
-nassh.agent.messages.Tests.addTest('write', function(result, cx) {
+it('write', () => {
   assert.strictEqual(
       nassh.agent.messages.write(1).type,
       nassh.agent.messages.Numbers.AGENT_FAILURE, 'invalid type');
-
-  result.pass();
 });
 
 // clang-format off
-nassh.agent.messages.Tests.addTest(
-    'write_identitiesAnswer', function(result, cx) {
+it('write_identitiesAnswer', () => {
   const identitiesAnswerMsg = nassh.agent.messages.write(
       nassh.agent.messages.Numbers.AGENT_IDENTITIES_ANSWER, [
         {
@@ -45,12 +41,10 @@ nassh.agent.messages.Tests.addTest(
         4, 5, 0, 0, 0, 4, 6, 7, 8, 9, 0, 0, 0, 0
       ],
       'data (SSH_AGENT_IDENTITIES_ANSWER)');
-
-  result.pass();
 });
 // clang-format on
 
-nassh.agent.messages.Tests.addTest('write_signResponse', function(result, cx) {
+it('write_signResponse', () => {
   const signResponseMsg = nassh.agent.messages.write(
       nassh.agent.messages.Numbers.AGENT_SIGN_RESPONSE,
       new Uint8Array([1, 2, 3, 4]));
@@ -60,11 +54,9 @@ nassh.agent.messages.Tests.addTest('write_signResponse', function(result, cx) {
   assert.deepStrictEqual(
       Array.from(signResponseMsg.data_), [0, 0, 0, 4, 1, 2, 3, 4],
       'data (SSH_AGENT_SIGN_RESPONSE)');
-
-  result.pass();
 });
 
-nassh.agent.messages.Tests.addTest('decodeOid', function(result, cx) {
+it('decodeOid', () => {
   assert.isNull(nassh.agent.messages.decodeOid(new Uint8Array([])));
   assert.strictEqual(
       nassh.agent.messages.decodeOid(new Uint8Array([0x2B])), '1.3');
@@ -77,6 +69,6 @@ nassh.agent.messages.Tests.addTest('decodeOid', function(result, cx) {
       nassh.agent.messages.decodeOid(
           new Uint8Array([0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x03, 0x01, 0x07])),
       '1.2.840.10045.3.1.7');
+});
 
-  result.pass();
 });

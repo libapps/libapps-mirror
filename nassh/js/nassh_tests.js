@@ -8,22 +8,20 @@
  * @fileoverview nassh unit tests.  Specifically for core/high-level functions.
  */
 
-nassh.Tests = new lib.TestManager.Suite('nassh.Tests');
+describe('nassh_tests.js', () => {
 
 /**
  * Test that basic message lookup works.
  */
-nassh.Tests.addTest('nassh.msg', function(result, cx) {
+it('nassh.msg', () => {
   // Simple pass through.
   assert.equal('foo', nassh.msg('foo'));
-
-  result.pass();
 });
 
 /**
  * Test base64url conversion.
  */
-nassh.Tests.addTest('nassh.base64url-to-base64', function(result, cx) {
+it('nassh.base64url-to-base64', () => {
   // The basic alphabet that should be unchanged (other than added padding).
   const base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   assert.equal(`${base}==`, nassh.base64UrlToBase64(base));
@@ -35,14 +33,12 @@ nassh.Tests.addTest('nassh.base64url-to-base64', function(result, cx) {
 
   // Check the important characters get converted.
   assert.equal('+/+/', nassh.base64UrlToBase64('-_+/'));
-
-  result.pass();
 });
 
 /**
  * Test base64 conversion.
  */
-nassh.Tests.addTest('nassh.base64-to-base64url', function(result, cx) {
+it('nassh.base64-to-base64url', () => {
   // The basic alphabet that should be unchanged;
   const base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   assert.equal(base, nassh.base64ToBase64Url(base));
@@ -53,6 +49,6 @@ nassh.Tests.addTest('nassh.base64-to-base64url', function(result, cx) {
 
   // Check the important characters get converted.
   assert.equal('-_-_', nassh.base64ToBase64Url('-_+/'));
+});
 
-  result.pass();
 });

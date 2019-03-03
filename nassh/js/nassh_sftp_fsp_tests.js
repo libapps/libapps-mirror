@@ -8,7 +8,7 @@
  * @fileoverview FileSystemProvider tests.
  */
 
-nassh.sftp.fsp.Tests = new lib.TestManager.Suite('nassh.sftp.fsp.Tests');
+describe('nassh_sftp_fsp_tests.js', () => {
 
 /**
  * A mock SFTP client.
@@ -50,7 +50,7 @@ MockSftpClient.prototype.automock_ = function(method, ...args) {
 /**
  * Reset any FSP state.
  */
-nassh.sftp.fsp.Tests.prototype.preamble = function(result, cx) {
+beforeEach(function() {
   this.client = new MockSftpClient();
   nassh.sftp.fsp.sftpInstances = {
     'id': {
@@ -69,12 +69,12 @@ nassh.sftp.fsp.Tests.prototype.preamble = function(result, cx) {
       0x00, 0x00, 0x00, 0x00,
   ]);
   this.eofPacket = new nassh.sftp.packets.StatusPacket(packet);
-};
+});
 
 /**
  * Verify all FSP methods are properly registered.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-known-methods', function(result, cx) {
+it('fsp-known-methods', function() {
   // Sanity check that we have some methods.
   assert.isAbove(nassh.sftp.fsp.providerMethods.length, 10);
 
@@ -82,8 +82,6 @@ nassh.sftp.fsp.Tests.addTest('fsp-known-methods', function(result, cx) {
   nassh.sftp.fsp.providerMethods.forEach((method) => {
     assert.equal('function', typeof nassh.sftp.fsp[method]);
   });
-
-  result.pass();
 });
 
 /**
@@ -91,7 +89,7 @@ nassh.sftp.fsp.Tests.addTest('fsp-known-methods', function(result, cx) {
  *
  * This shows up when the Files app state is out of sync with us.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-invalid-fsid', function(result, cx) {
+it('fsp-invalid-fsid', function() {
   let count = 0;
   nassh.sftp.fsp.providerMethods.forEach((method) => {
     // onMountRequested doesn't make callbacks.
@@ -108,14 +106,12 @@ nassh.sftp.fsp.Tests.addTest('fsp-invalid-fsid', function(result, cx) {
 
   // Make sure every error callback was actually called.
   assert.equal(count, nassh.sftp.fsp.providerMethods.length);
-
-  result.pass();
 });
 
 /**
  * Verify the checkInstanceExists utility function.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-instance-check', function(result, cx) {
+it('fsp-instance-check', function() {
   let called;
   let ret;
 
@@ -141,14 +137,12 @@ nassh.sftp.fsp.Tests.addTest('fsp-instance-check', function(result, cx) {
   nassh.sftp.fsp.sftpInstances['1234'] = {};
   ret = nassh.sftp.fsp.checkInstanceExists('1234', assert.fail);
   assert.isTrue(ret);
-
-  result.pass();
 });
 
 /**
  * Verify the sanitizeMetadata utility function.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-sanitize-metadata', function(result, cx) {
+it('fsp-sanitize-metadata', function() {
   // Reduced mock for nassh.sftp.packets.getFileAttrs like fileStatus returns.
   const fileStat = {
     size: 1024,
@@ -214,14 +208,12 @@ nassh.sftp.fsp.Tests.addTest('fsp-sanitize-metadata', function(result, cx) {
   });
   assert.deepStrictEqual(['name'], Object.keys(ret));
   assert.equal('c.txt', ret.name);
-
-  result.pass();
 });
 
 /**
  * Verify onGetMetadataRequested with missing paths.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onGetMetadata-missing', function(result, cx) {
+it('fsp-onGetMetadata-missing', function(done) {
   const options = {fileSystemId: 'id', entryPath: '/foo'};
 
   nassh.sftp.fsp.onGetMetadataRequested(
@@ -229,16 +221,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onGetMetadata-missing', function(result, cx) {
       assert.fail,
       (error) => {
         assert.equal('NOT_FOUND', error);
-        result.pass(false);
+        done();
       });
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onGetMetadataRequested with existing path.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onGetMetadata-found', function(result, cx) {
+it('fsp-onGetMetadata-found', function(done) {
   const options = {
     fileSystemId: 'id',
     entryPath: '/foo',
@@ -258,17 +248,15 @@ nassh.sftp.fsp.Tests.addTest('fsp-onGetMetadata-found', function(result, cx) {
       (metadata) => {
         assert.isFalse(metadata.isDirectory);
         assert.equal(100, metadata.size);
-        result.pass(false);
+        done();
       },
       assert.fail);
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onReadDirectoryRequested with missing path.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onReadDirectory-missing', function(result, cx) {
+it('fsp-onReadDirectory-missing', function(done) {
   const options = {fileSystemId: 'id', directoryPath: '/dir'};
 
   nassh.sftp.fsp.onReadDirectoryRequested(
@@ -276,16 +264,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onReadDirectory-missing', function(result, cx)
       assert.fail,
       (error) => {
         assert.equal('FAILED', error);
-        result.pass(false);
+        done();
       });
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onReadDirectoryRequested with empty dir.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onReadDirectory-empty', function(result, cx) {
+it('fsp-onReadDirectory-empty', function(done) {
   const options = {fileSystemId: 'id', directoryPath: '/dir'};
 
   this.client.openDirectory.return = (path) => {
@@ -298,7 +284,7 @@ nassh.sftp.fsp.Tests.addTest('fsp-onReadDirectory-empty', function(result, cx) {
   };
   this.client.closeFile.return = (handle) => {
     assert.equal('handle', handle);
-    result.pass(false);
+    done();
   };
   nassh.sftp.fsp.onReadDirectoryRequested(
       options,
@@ -307,14 +293,12 @@ nassh.sftp.fsp.Tests.addTest('fsp-onReadDirectory-empty', function(result, cx) {
         assert.isFalse(hasMore);
       },
       assert.fail);
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onReadDirectoryRequested with real results.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onReadDirectory-found', function(result, cx) {
+it('fsp-onReadDirectory-found', function(done) {
   const options = {
     fileSystemId: 'id',
     directoryPath: '/dir',
@@ -349,7 +333,7 @@ nassh.sftp.fsp.Tests.addTest('fsp-onReadDirectory-found', function(result, cx) {
   };
   this.client.closeFile.return = (handle) => {
     assert.equal('handle', handle);
-    result.pass(false);
+    done();
   };
   nassh.sftp.fsp.onReadDirectoryRequested(
       options,
@@ -362,14 +346,12 @@ nassh.sftp.fsp.Tests.addTest('fsp-onReadDirectory-found', function(result, cx) {
         assert.isFalse(hasMore);
       },
       assert.fail);
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onWriteFileRequested with missing path.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onWriteFile-missing', function(result, cx) {
+it('fsp-onWriteFile-missing', function(done) {
   const options = {fileSystemId: 'id', openRequestId: 1};
 
   nassh.sftp.fsp.onWriteFileRequested(
@@ -377,16 +359,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onWriteFile-missing', function(result, cx) {
       assert.fail,
       (error) => {
         assert.equal('INVALID_OPERATION', error);
-        result.pass(false);
+        done();
       });
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onOpenFileRequested with missing path.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onOpenFile-missing', function(result, cx) {
+it('fsp-onOpenFile-missing', function(done) {
   const options = {fileSystemId: 'id', filePath: '/foo'};
 
   nassh.sftp.fsp.onOpenFileRequested(
@@ -394,16 +374,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onOpenFile-missing', function(result, cx) {
       assert.fail,
       (error) => {
         assert.equal('FAILED', error);
-        result.pass(false);
+        done();
       });
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onOpenFileRequested open file for reading.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onOpenFile-read', function(result, cx) {
+it('fsp-onOpenFile-read', function(done) {
   const options = {
     fileSystemId: 'id',
     filePath: '/foo',
@@ -420,17 +398,15 @@ nassh.sftp.fsp.Tests.addTest('fsp-onOpenFile-read', function(result, cx) {
       options,
       () => {
         assert.equal('handle', this.client.openedFiles[1]);
-        result.pass(false);
+        done();
       },
       assert.fail);
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onOpenFileRequested open file for writing.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onOpenFile-write', function(result, cx) {
+it('fsp-onOpenFile-write', function(done) {
   const options = {
     fileSystemId: 'id',
     filePath: '/foo',
@@ -447,17 +423,15 @@ nassh.sftp.fsp.Tests.addTest('fsp-onOpenFile-write', function(result, cx) {
       options,
       () => {
         assert.equal('handle', this.client.openedFiles[1]);
-        result.pass(false);
+        done();
       },
       assert.fail);
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onCreateFileRequested with missing path.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onCreateFile-missing', function(result, cx) {
+it('fsp-onCreateFile-missing', function(done) {
   const options = {fileSystemId: 'id', filePath: '/foo'};
 
   nassh.sftp.fsp.onCreateFileRequested(
@@ -465,16 +439,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onCreateFile-missing', function(result, cx) {
       assert.fail,
       (error) => {
         assert.equal('FAILED', error);
-        result.pass(false);
+        done();
       });
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onCreateFileRequested works.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onCreateFile-found', function(result, cx) {
+it('fsp-onCreateFile-found', function(done) {
   const options = {
     fileSystemId: 'id',
     filePath: '/foo',
@@ -491,17 +463,15 @@ nassh.sftp.fsp.Tests.addTest('fsp-onCreateFile-found', function(result, cx) {
       options,
       () => {
         assert.equal('handle', this.client.openedFiles[1]);
-        result.pass(false);
+        done();
       },
       assert.fail);
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onDeleteEntryRequested with missing dirs.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onDeleteEntry-missing-dir', function(result, cx) {
+it('fsp-onDeleteEntry-missing-dir', function(done) {
   const options = {
     fileSystemId: 'id',
     entryPath: '/path',
@@ -513,16 +483,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onDeleteEntry-missing-dir', function(result, c
       assert.fail,
       (error) => {
         assert.equal('NOT_FOUND', error);
-        result.pass(false);
+        done();
       });
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onDeleteEntryRequested with dirs.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onDeleteEntry-dir', function(result, cx) {
+it('fsp-onDeleteEntry-dir', function(done) {
   const options = {
     fileSystemId: 'id',
     entryPath: '/dir',
@@ -535,16 +503,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onDeleteEntry-dir', function(result, cx) {
   };
   nassh.sftp.fsp.onDeleteEntryRequested(
       options,
-      () => result.pass(false),
+      done,
       assert.fail);
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onDeleteEntryRequested with missing files.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onDeleteEntry-missing-file', function(result, cx) {
+it('fsp-onDeleteEntry-missing-file', function(done) {
   const options = {
     fileSystemId: 'id',
     entryPath: '/path',
@@ -556,16 +522,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onDeleteEntry-missing-file', function(result, 
       assert.fail,
       (error) => {
         assert.equal('NOT_FOUND', error);
-        result.pass(false);
+        done();
       });
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onDeleteEntryRequested with files.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onDeleteEntry-file', function(result, cx) {
+it('fsp-onDeleteEntry-file', function(done) {
   const options = {
     fileSystemId: 'id',
     entryPath: '/path',
@@ -577,16 +541,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onDeleteEntry-file', function(result, cx) {
   };
   nassh.sftp.fsp.onDeleteEntryRequested(
       options,
-      () => result.pass(false),
+      done,
       assert.fail);
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onTruncateRequested with missing path.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onTruncate-missing', function(result, cx) {
+it('fsp-onTruncate-missing', function(done) {
   const options = {fileSystemId: 'id', filePath: '/foo'};
 
   nassh.sftp.fsp.onTruncateRequested(
@@ -594,16 +556,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onTruncate-missing', function(result, cx) {
       assert.fail,
       (error) => {
         assert.equal('FAILED', error);
-        result.pass(false);
+        done();
       });
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onTruncateRequested works.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onTruncate-found', function(result, cx) {
+it('fsp-onTruncate-found', function(done) {
   const options = {
     fileSystemId: 'id',
     filePath: '/foo',
@@ -623,17 +583,15 @@ nassh.sftp.fsp.Tests.addTest('fsp-onTruncate-found', function(result, cx) {
       options,
       () => {
         assert.deepStrictEqual([], Object.keys(this.client.openedFiles));
-        result.pass(false);
+        done();
       },
       assert.fail);
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onCloseFileRequested with missing path.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onCloseFile-missing', function(result, cx) {
+it('fsp-onCloseFile-missing', function(done) {
   const options = {fileSystemId: 'id', openRequestId: 1};
 
   nassh.sftp.fsp.onCloseFileRequested(
@@ -641,16 +599,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onCloseFile-missing', function(result, cx) {
       assert.fail,
       (error) => {
         assert.equal('INVALID_OPERATION', error);
-        result.pass(false);
+        done();
       });
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onCloseFileRequested works.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onCloseFile-found', function(result, cx) {
+it('fsp-onCloseFile-found', function(done) {
   const options = {fileSystemId: 'id', openRequestId: 1};
 
   this.client.openedFiles[1] = 'handle';
@@ -661,17 +617,15 @@ nassh.sftp.fsp.Tests.addTest('fsp-onCloseFile-found', function(result, cx) {
       options,
       () => {
         assert.deepStrictEqual([], Object.keys(this.client.openedFiles));
-        result.pass(false);
+        done();
       },
       assert.fail);
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onCreateDirectoryRequested with missing path.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onCreateDirectory-missing', function(result, cx) {
+it('fsp-onCreateDirectory-missing', function(done) {
   const options = {fileSystemId: 'id', directoryPath: '/foo'};
 
   nassh.sftp.fsp.onCreateDirectoryRequested(
@@ -679,16 +633,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onCreateDirectory-missing', function(result, c
       assert.fail,
       (error) => {
         assert.equal('FAILED', error);
-        result.pass(false);
+        done();
       });
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onCreateDirectoryRequested fails for recursive requests.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onCreateDirectory-recursive', function(result, cx) {
+it('fsp-onCreateDirectory-recursive', function(done) {
   const options = {
     fileSystemId: 'id',
     directoryPath: '/foo',
@@ -700,16 +652,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onCreateDirectory-recursive', function(result,
       assert.fail,
       (error) => {
         assert.equal('INVALID_OPERATION', error);
-        result.pass(false);
+        done();
       });
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onCreateDirectoryRequested works.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onCreateDirectory-found', function(result, cx) {
+it('fsp-onCreateDirectory-found', function(done) {
   const options = {fileSystemId: 'id', directoryPath: '/foo'};
 
   this.client.makeDirectory.return = (path) => {
@@ -717,16 +667,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onCreateDirectory-found', function(result, cx)
   };
   nassh.sftp.fsp.onCreateDirectoryRequested(
       options,
-      () => result.pass(false),
+      done,
       assert.fail);
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onMoveEntryRequested with missing path.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onMoveEntry-missing', function(result, cx) {
+it('fsp-onMoveEntry-missing', function(done) {
   const options = {fileSystemId: 'id', sourcePath: '/src', targetPath: '/dst'};
 
   nassh.sftp.fsp.onMoveEntryRequested(
@@ -734,16 +682,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onMoveEntry-missing', function(result, cx) {
       assert.fail,
       (error) => {
         assert.equal('FAILED', error);
-        result.pass(false);
+        done();
       });
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onMoveEntryRequested works.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onMoveEntry-found', function(result, cx) {
+it('fsp-onMoveEntry-found', function(done) {
   const options = {fileSystemId: 'id', sourcePath: '/src', targetPath: '/dst'};
 
   this.client.renameFile.return = (sourcePath, targetPath) => {
@@ -752,16 +698,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onMoveEntry-found', function(result, cx) {
   };
   nassh.sftp.fsp.onMoveEntryRequested(
       options,
-      () => result.pass(false),
+      done,
       assert.fail);
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onReadFileRequested with missing path.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onReadFile-missing', function(result, cx) {
+it('fsp-onReadFile-missing', function(done) {
   const options = {fileSystemId: 'id', openRequestId: 1};
 
   nassh.sftp.fsp.onReadFileRequested(
@@ -769,16 +713,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onReadFile-missing', function(result, cx) {
       assert.fail,
       (error) => {
         assert.equal('INVALID_OPERATION', error);
-        result.pass(false);
+        done();
       });
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onCopyEntryRequested with missing path.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onCopyEntry-missing', function(result, cx) {
+it('fsp-onCopyEntry-missing', function(done) {
   const options = {fileSystemId: 'id', sourcePath: '/src', targetPath: '/dst'};
 
   nassh.sftp.fsp.onCopyEntryRequested(
@@ -786,16 +728,14 @@ nassh.sftp.fsp.Tests.addTest('fsp-onCopyEntry-missing', function(result, cx) {
       assert.fail,
       (error) => {
         assert.equal('FAILED', error);
-        result.pass(false);
+        done();
       });
-
-  result.requestTime(2000);
 });
 
 /**
  * Verify onUnmount works normally.
  */
-nassh.sftp.fsp.Tests.addTest('fsp-onUnmount-exit', function(result, cx) {
+it('fsp-onUnmount-exit', function() {
   // Create a dummy instance mock that has an exit method.
   let exitStatus;
   nassh.sftp.fsp.sftpInstances['id'] = {
@@ -809,6 +749,6 @@ nassh.sftp.fsp.Tests.addTest('fsp-onUnmount-exit', function(result, cx) {
       assert.fail,
       assert.fail);
   assert.equal(0, exitStatus);
+});
 
-  result.pass();
 });
