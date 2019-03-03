@@ -1527,14 +1527,6 @@ nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
     return;
   }
 
-  // The plugin API has been base64 strings.  If it returns something else,
-  // convert it to a string until we've updated the stream APIs to cope.
-  if (data instanceof ArrayBuffer) {
-    if (!stream.writeArrayBuffer) {
-      data = btoa(lib.codec.codeUnitArrayToString(new Uint8Array(data)));
-    }
-  }
-
   stream.asyncWrite(data, (writeCount) => {
     if (!stream.open) {
       // If the stream was closed before we got a chance to ack, then skip it.

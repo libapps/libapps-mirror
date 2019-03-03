@@ -20,7 +20,6 @@ nassh.Stream.GoogleRelay = function(fd) {
   this.backoffMS_ = 0;
   this.backoffTimeout_ = null;
 
-  this.writeArrayBuffer = true;
   this.writeBuffer_ = new Uint8Array();
   this.writeCount_ = 0;
   this.onWriteSuccess_ = null;

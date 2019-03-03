@@ -11,7 +11,6 @@
 nassh.Stream.SSHAgentRelay = function(fd) {
   nassh.Stream.apply(this, [fd]);
 
-  this.writeArrayBuffer = true;
   this.authAgentAppID_ = null;
   this.port_ = null;
   this.pendingMessageSize_ = null;

@@ -20,7 +20,6 @@
 nassh.Stream.SSHAgent = function(fd, args) {
   nassh.Stream.apply(this, [fd]);
 
-  this.writeArrayBuffer = true;
   this.authAgent_ = args.authAgent;
   this.pendingMessageSize_ = null;
   this.writeBuffer_ = new Uint8Array();

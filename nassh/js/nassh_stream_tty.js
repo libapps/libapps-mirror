@@ -105,8 +105,6 @@ nassh.InputBuffer.prototype.read = function(size, onRead) {
 nassh.Stream.Tty = function(fd, info) {
   nassh.Stream.apply(this, [fd]);
 
-  this.writeArrayBuffer = true;
-
   this.encoder_ = new TextEncoder();
 };
 

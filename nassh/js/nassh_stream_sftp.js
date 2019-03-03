@@ -14,7 +14,6 @@
 nassh.Stream.Sftp = function(fd, info) {
   nassh.Stream.apply(this, [fd]);
 
-  this.writeArrayBuffer = true;
   this.acknowledgeCount_ = 0;
   this.client_ = info.client;
 };

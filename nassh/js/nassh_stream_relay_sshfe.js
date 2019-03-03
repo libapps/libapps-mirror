@@ -34,7 +34,6 @@ nassh.Stream.RelaySshfeWS = function(fd) {
   // The ssh-agent we talk to for the SSH-FE challenge.
   this.sshAgent_ = null;
 
-  this.writeArrayBuffer = true;
   // All the data we've queued but not yet sent out.
   this.writeBuffer_ = new Uint8Array();
   // Callback function when asyncWrite is used.
