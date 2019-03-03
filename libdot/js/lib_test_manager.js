@@ -264,32 +264,6 @@ lib.TestManager.Suite.getTestList = function() {
 };
 
 /**
- * Set properties on a test suite instance, pulling the property value from
- * the context if it exists and from the defaults dictionary if not.
- *
- * This is intended to be used in your test suite's setup() method to
- * define parameters for the test suite which may be overridden through the
- * context object.  For example...
- *
- *   MySuite.prototype.setup = function(cx) {
- *     this.setDefaults(cx, {size: 10});
- *   };
- *
- * If the context object has a 'size' property then this.size will be set to
- * the value of cx.size, otherwise this.size will get a default value of 10.
- *
- * @param {Object} cx The context object for a test run.
- * @param {Object} defaults An object containing name/value pairs to set on
- *     this test suite instance.  The value listed here will be used if the
- *     name is not defined on the context object.
- */
-lib.TestManager.Suite.prototype.setDefaults = function(cx, defaults) {
-  for (var k in defaults) {
-    this[k] = (k in cx) ? cx[k] : defaults[k];
-  }
-};
-
-/**
  * Subclassable method called to set up the test suite.
  *
  * The default implementation of this method is a no-op.  If your test suite
