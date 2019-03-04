@@ -25,8 +25,9 @@ window.onload = function() {
     return;
   }
 
-  if (params['command']) {
-    Crosh.prototype.commandName = params['command'];
+  // If we want to execute something other than the default crosh.
+  if (params.has('command')) {
+    Crosh.prototype.commandName = params.get('command');
   }
   window.document.title = Crosh.prototype.commandName;
 
