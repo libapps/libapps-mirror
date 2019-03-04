@@ -51,6 +51,11 @@ def minify_placeholders(msg):
         # Throw away the 'example' field which is meant for translators.
         settings.pop('example', None)
 
+        # Require every replacement exist in the message.  If it's not in there,
+        # then it's probably a typo, or a stale entry we want to remove.
+        assert '$%s$' % (key.lower(),) in msg['message'].lower(), \
+            'Missing $%s$ (case insensitive) in: %s' % (key, msg['message'])
+
         # If the replacement is simple, inline it.
         m = re.match(r'^[$][0-9]+$', settings['content'])
         if m:

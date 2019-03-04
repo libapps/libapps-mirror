@@ -1433,7 +1433,7 @@
 	},
 	"NASFTP_ERROR_MISSING_PROTOCOL_EXTENSION": {
 		"description": "Error message shown when a protocol extension is unavailable during this session.",
-		"message": "$CMD: '$EXT$' extension unavailable",
+		"message": "$CMD$: '$EXT$' extension unavailable",
 		"placeholders": {
 			"cmd": {
 				"content": "$1",
