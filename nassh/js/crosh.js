@@ -65,8 +65,8 @@ Crosh.croshBuiltinId = 'nkoccljplnhpfnfiajclkommnmllphnl';
  * command.
  */
 Crosh.init = function() {
-  const qs = lib.f.parseQuery(document.location.search);
-  const profileName = qs['profile'];
+  const params = new URLSearchParams(document.location.search);
+  const profileName = params.get('profile');
   var terminal = new hterm.Terminal(profileName);
 
   terminal.decorate(document.querySelector('#terminal'));
@@ -78,7 +78,7 @@ Crosh.init = function() {
 
     terminal.setCursorPosition(0, 0);
     terminal.setCursorVisible(true);
-    terminal.runCommandClass(Crosh, qs['args'] || []);
+    terminal.runCommandClass(Crosh, params.getAll('args[]'));
 
     terminal.command.keyboard_ = terminal.keyboard;
   };
