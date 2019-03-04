@@ -116,12 +116,12 @@ def append_string(s):
 
     Newlines in the input are stripped.
 
-    Lines with embedded escapes won't be wrapped at all.
+    Lines with embedded escapes or spaces won't be wrapped at all.
 
     Single quotes found in the input are escaped.
     """
     ret = ''
-    if '\\' in s:
+    if '\\' in s or ' ' in s:
         lines = s.splitlines()
     else:
         lines = textwrap.wrap(s, 76)
