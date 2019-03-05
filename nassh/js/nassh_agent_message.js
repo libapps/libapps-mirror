@@ -63,10 +63,12 @@ nassh.agent.Message = function(type, data) {
  * @returns {!Uint8Array}
  */
 nassh.agent.Message.prototype.rawMessage = function() {
-  const header =
-      new Uint8Array(lib.array.uint32ToArrayBigEndian(1 + this.data_.length));
-  const body = lib.array.concatTyped(new Uint8Array([this.type]), this.data_);
-  return lib.array.concatTyped(header, body);
+  const buffer = new ArrayBuffer(5);
+  const u8 = new Uint8Array(buffer);
+  const dv = new DataView(buffer);
+  dv.setUint32(0, 1 + this.data_.length);
+  u8[4] = this.type;
+  return lib.array.concatTyped(u8, this.data_);
 };
 
 /**
@@ -90,8 +92,8 @@ nassh.agent.Message.prototype.readUint32 = function() {
   if (this.data_.length < this.offset_ + 4) {
     throw new Error('Message.readUint32: end of data_ reached prematurely');
   }
-  const uint32 = lib.array.arrayBigEndianToUint32(
-      this.data_.slice(this.offset_, this.offset_ + 4));
+  const dv = new DataView(this.data_.buffer, this.data_.buffer.byteOffset);
+  const uint32 = dv.getUint32(this.offset_);
   this.offset_ += 4;
   return uint32;
 };
@@ -105,8 +107,10 @@ nassh.agent.Message.prototype.writeUint32 = function(uint32) {
   if (!Number.isSafeInteger(uint32)) {
     throw new Error(`Message.writeUint32: ${uint32} is not a (safe) integer`);
   }
-  const array = new Uint8Array(lib.array.uint32ToArrayBigEndian(uint32));
-  this.data_ = lib.array.concatTyped(this.data_, array);
+  const buffer = new ArrayBuffer(4);
+  const dv = new DataView(buffer);
+  dv.setUint32(0, uint32);
+  this.data_ = lib.array.concatTyped(this.data_, new Uint8Array(buffer));
 };
 
 /**
@@ -156,7 +160,8 @@ nassh.agent.Message.fromRawMessage = function(rawMessage) {
   if (rawMessage.length < 5) {
     return null;
   }
-  const length = lib.array.arrayBigEndianToUint32(rawMessage);
+  const dv = new DataView(rawMessage.buffer, rawMessage.byteOffset);
+  const length = dv.getUint32(0);
   if (length + 4 !== rawMessage.length) {
     return null;
   }

@@ -160,7 +160,8 @@ nassh.agent.Agent.prototype.handleRequest_ = function(request) {
 nassh.agent.Agent.keyBlobToAuthorizedKeysFormat = function(keyBlob) {
   const keyBlobBase64 = btoa(String.fromCharCode(...keyBlob));
   // Extract and prepend key type prefix.
-  const prefixLength = lib.array.arrayBigEndianToUint32(keyBlob);
+  const dv = new DataView(keyBlob.buffer, keyBlob.byteOffset);
+  const prefixLength = dv.getUint32(0);
   const prefix = String.fromCharCode(...keyBlob.slice(4, 4 + prefixLength));
   return `${prefix} ${keyBlobBase64}`;
 };
