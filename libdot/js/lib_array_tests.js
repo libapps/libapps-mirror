@@ -10,31 +10,6 @@
 
 describe('lib_array_tests.js', () => {
 
-it('arrayBigEndianToUint32', () => {
-  const subtests = [
-    [[0, 0, 0, 0], 0, 'zero'],
-    [[255, 255, 255, 255], 4294967295, 'max'],
-    [new Uint8Array([0x12, 0x34, 0x56, 0x78]), 305419896, 'big endian'],
-  ];
-
-  subtests.forEach((data) => {
-    assert.equal(lib.array.arrayBigEndianToUint32(data[0]), data[1], data[2]);
-  });
-});
-
-it('uint32ToArrayBigEndian', () => {
-  const subtests = [
-    [0, [0, 0, 0, 0], 'zero'],
-    [4294967295, [255, 255, 255, 255], 'max'],
-    [305419896, [0x12, 0x34, 0x56, 0x78], 'big endian'],
-  ];
-
-  subtests.forEach((data) => {
-    assert.deepStrictEqual(
-        lib.array.uint32ToArrayBigEndian(data[0]), data[1], data[2]);
-  });
-});
-
 it('concatTyped', () => {
   const subtests = [
     [[new Uint8Array([]), new Uint8Array([])], new Uint8Array([]), 'empty'],

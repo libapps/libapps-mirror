@@ -11,36 +11,6 @@
 lib.array = {};
 
 /**
- * Convert an array of four unsigned bytes into an unsigned 32-bit integer (big
- * endian).
- *
- * @param {!Array.<!number>} array
- * @returns {!number}
- */
-lib.array.arrayBigEndianToUint32 = function(array) {
-  const maybeSigned =
-      (array[0] << 24) | (array[1] << 16) | (array[2] << 8) | (array[3] << 0);
-  // Interpret the result of the bit operations as an unsigned integer.
-  return maybeSigned >>> 0;
-};
-
-/**
- * Convert an unsigned 32-bit integer into an array of four unsigned bytes (big
- * endian).
- *
- * @param {!number} uint32
- * @returns {!Array.<!number>}
- */
-lib.array.uint32ToArrayBigEndian = function(uint32) {
-  return [
-    (uint32 >>> 24) & 0xFF,
-    (uint32 >>> 16) & 0xFF,
-    (uint32 >>> 8) & 0xFF,
-    (uint32 >>> 0) & 0xFF,
-  ];
-};
-
-/**
  * Concatenate an arbitrary number of typed arrays of the same type into a new
  * typed array of this type.
  *
