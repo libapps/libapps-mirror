@@ -229,6 +229,11 @@ lib.f.getOs = function() {
       return Promise.resolve('windows');
   }
 
+  // Probe node environment.
+  if (typeof process != 'undefined') {
+    return Promise.resolve('node');
+  }
+
   // Still here?  No idea.
   return Promise.reject(null);
 };

@@ -148,6 +148,11 @@ it('lastError', () => {
  * actually test too much behavior here :/.
  */
 it('openWindow', () => {
+  // Can't open windows in node environments.
+  if (typeof process != 'undefined') {
+    return;
+  }
+
   const win = lib.f.openWindow();
   if (win !== null) {
     assert.isNull(win.opener);

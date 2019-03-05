@@ -1,0 +1,25 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+libdot/js/lib.js
+libdot/js/lib_polyfill.js
+libdot/js/lib_array.js
+libdot/js/lib_codec.js
+libdot/js/lib_colors.js
+libdot/js/lib_credential_cache.js
+libdot/js/lib_event.js
+libdot/js/lib_f.js
+libdot/js/lib_fs.js
+libdot/js/lib_i18n.js
+libdot/js/lib_message_manager.js
+libdot/js/lib_preference_manager.js
+libdot/js/lib_resource.js
+libdot/js/lib_storage.js
+libdot/js/lib_storage_chrome.js
+libdot/js/lib_storage_local.js
+libdot/js/lib_storage_memory.js
+libdot/third_party/fast-text-encoding/text.js
+libdot/third_party/intl-segmenter/intl-segmenter.js
+libdot/third_party/punycode/lib_punycode.js
+libdot/third_party/wcwidth/lib_wc.js

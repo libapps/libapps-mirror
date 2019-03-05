@@ -32,7 +32,8 @@ describe('FileReader.readAs', () => {
 
   it('readAsDataURL', () => {
     return reader.readAsDataURL(blob).then((url) => {
-      assert.equal('data:application/octet-stream;base64,YWIxMg==', url);
+      // Depending on the platform, the mime type might be omitted.
+      assert.match(url, /^data:(application\/octet-stream)?;base64,YWIxMg==$/);
     });
   });
 

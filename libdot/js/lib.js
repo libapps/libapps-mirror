@@ -6,6 +6,11 @@
 
 const lib = {};
 
+// Export for node environments.
+if (typeof exports !== 'undefined') {
+  module.exports = lib;
+}
+
 /**
  * List of functions that need to be invoked during library initialization.
  *

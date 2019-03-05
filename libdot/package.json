@@ -1,0 +1,35 @@
+{
+  "name": "libdot",
+  "version": "1.26.0",
+  "description": "Grab bag of JS utility libraries",
+  "main": "js/libdot.js",
+  "unpkg": "js/libdot.min.js",
+  "repository": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/apps/libapps.git"
+  },
+  "author": "Chromium OS Authors",
+  "license": "BSD-3-Clause",
+  "files": [
+    "README.md",
+    "js/libdot.js",
+    "js/libdot.min.js",
+    "js/libdot.min.js.map"
+  ],
+  "bugs": {
+    "url": "https://crbug.com/new",
+    "email": "chromium-hterm@chromium.org"
+  },
+  "homepage": "https://chromium.googlesource.com/apps/libapps",
+  "scripts": {
+    "prepare": "./bin/concat -i concat/libdot.concat -o js/libdot.js && cd js && terser libdot.js --compress --mangle --output libdot.min.js --source-map url=libdot.min.js.map,includeSources",
+    "test": "./bin/concat -i concat/libdot.concat -o js/libdot.js && mocha --file js/test_node.js js/*_tests.js third_party/*/*_tests.js"
+  },
+  "devDependencies": {
+    "chai": "~4",
+    "eslint": "~5",
+    "jsdom": "~13",
+    "mocha": "~5",
+    "terser": "~3"
+  }
+}
