@@ -29,19 +29,6 @@ it('replaceVars', () => {
     'blah &lt;lib&amp;dot&gt; text blah');
 });
 
-it('parseQuery', () => {
-  var ret = lib.f.parseQuery('var=value&foo=blah&cow=milky&clob=a&clob=b&' +
-                             'arr[]=1&arr[]=2&clobarr=x&clobarr[]=3');
-  assert.deepEqual({
-    'var': 'value',
-    'foo': 'blah',
-    'cow': 'milky',
-    'clob': 'b',
-    'arr': ['1', '2'],
-    'clobarr': ['3'],
-  }, ret);
-});
-
 it('getURL', () => {
   if (lib.f.getURL.chromeSupported()) {
     assert.equal(lib.f.getURL('foo'), chrome.runtime.getURL(foo));

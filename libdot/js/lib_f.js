@@ -60,49 +60,6 @@ lib.f.replaceVars.functions = {
   }
 };
 
-/**
- * Parse a query string into a hash.
- *
- * This takes a url query string in the form 'name1=value&name2=value' and
- * converts it into an object of the form { name1: 'value', name2: 'value' }.
- * If a given name appears multiple times in the query string, only the
- * last value will appear in the result.  If the name ends with [], it is
- * turned into an array.
- *
- * Names and values are passed through decodeURIComponent before being added
- * to the result object.
- *
- * @param {string} queryString The string to parse.  If it starts with a
- *     leading '?', the '?' will be ignored.
- */
-lib.f.parseQuery = function(queryString) {
-  if (queryString.startsWith('?'))
-    queryString = queryString.substr(1);
-
-  var rv = {};
-
-  var pairs = queryString.split('&');
-  for (var i = 0; i < pairs.length; i++) {
-    var pair = pairs[i].split('=');
-    let key = decodeURIComponent(pair[0]);
-    let val = decodeURIComponent(pair[1]);
-
-    if (key.endsWith('[]')) {
-      // It's an array.
-      key = key.slice(0, -2);
-      // The key doesn't exist, or wasn't an array before.
-      if (!(rv[key] instanceof Array))
-        rv[key] = [];
-      rv[key].push(val);
-    } else {
-      // It's a plain string.
-      rv[key] = val;
-    }
-  }
-
-  return rv;
-};
-
 lib.f.getURL = function(path) {
   if (lib.f.getURL.chromeSupported())
     return chrome.runtime.getURL(path);
