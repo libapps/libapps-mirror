@@ -198,7 +198,7 @@ nassh.PreferencesEditor.prototype.onRestoreClick = function(e) {
 nassh.PreferencesEditor.prototype.updateBackupLink = function(opt_onComplete) {
   nassh.exportPreferences(function(value) {
     var a = document.querySelector('#backup');
-    a.href = 'data:text/json,' + JSON.stringify(value);
+    a.href = `data:text/json,${encodeURIComponent(JSON.stringify(value))}`;
     if (opt_onComplete)
       opt_onComplete();
   });
