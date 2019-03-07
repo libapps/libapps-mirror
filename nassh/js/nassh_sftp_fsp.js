@@ -512,6 +512,24 @@ nassh.sftp.fsp.onUnmountRequested = function(options, onSuccess, onError) {
 };
 
 /**
+ * Configure Requested handler.
+ *
+ * Shows a dialog for the user to tweak connection settings on the fly.
+ */
+nassh.sftp.fsp.onConfigureRequested = function(options, onSuccess, onError) {
+  if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+    return;
+  }
+
+  lib.f.openWindow(
+      `html/nassh_sftp_fsp_config_dialog.html` +
+      `?profile-id=${options.fileSystemId}`, '',
+      'chrome=no,close=yes,resize=yes,scrollbars=yes,minimizable=yes,' +
+      'width=600,height=400');
+  onSuccess();
+};
+
+/**
  * Checks if the file system id has an associated SFTP instance.
  */
 nassh.sftp.fsp.checkInstanceExists = function(fsId, onError) {
@@ -540,7 +558,8 @@ nassh.sftp.fsp.providerMethods = [
   'onCreateFileRequested',
   'onTruncateRequested',
   'onCopyEntryRequested',
-  'onCreateDirectoryRequested'
+  'onCreateDirectoryRequested',
+  'onConfigureRequested',
 ];
 
 // Loop over the provider methods and link them to their handlers.

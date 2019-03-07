@@ -28,7 +28,8 @@
   "file_system_provider_capabilities": {
     "source": "network",
     "multiple_mounts": true,
-    "configurable": false
+    "configurable": true,
+    "source": "network"
   },
   "web_accessible_resources": [
     "html/nassh.html",

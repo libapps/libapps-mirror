@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'/>
+
+    <script src='../js/nassh_deps.concat.js'></script>
+
+    <script src='../js/nassh.js'></script>
+
+    <script src='../js/nassh_sftp_fsp_config_dialog.js'></script>
+
+    <link rel='stylesheet' href='../css/nassh_box.css'></link>
+    <link rel='stylesheet' href='../css/nassh_sftp_fsp_config_dialog.css'></link>
+  </head>
+  <body x-vbox class='dialog-body'>
+    <x-hbox x-align='baseline' id='mount-path'>
+      <div x-box id='label-mount-path' class='aligned-dialog-labels'
+           i18n='{"_": "MOUNT_PATH_LABEL"}'
+           >MOUNT PATH</div>:&nbsp;
+      <input x-box id='field-mount-path' x-flex='1' type='text'
+             aria-labelledby='label-mount-path'
+             i18n='{"placeholder": "$id"}'>
+    </x-hbox>
+
+    <x-hbox x-align='baseline' id='read-size'>
+      <div x-box id='label-read-size' class='aligned-dialog-labels'
+           i18n='{"_": "READ_SIZE_LABEL"}'
+           >READ SIZE</div>:&nbsp;
+      <input x-box id='field-read-size' x-flex='1' type='number' min='1'
+             aria-labelledby='label-read-size'
+             i18n='{"placeholder": "$id"}'>
+    </x-hbox>
+
+    <x-hbox x-align='baseline' id='write-size'>
+      <div x-box id='label-write-size' class='aligned-dialog-labels'
+           i18n='{"_": "WRITE_SIZE_LABEL"}'
+           >WRITE SIZE</div>:&nbsp;
+      <input x-box id='field-write-size' x-flex='1' type='number' min='1'
+             aria-labelledby='label-write-size'
+             i18n='{"placeholder": "$id"}'>
+    </x-hbox>
+
+    <pre id='raw-stats'></pre>
+  </body>
+</html>

@@ -1623,6 +1623,10 @@
 		"description": "Default filename for the preferences backup file. The filename should be translated, but the '.json' suffix should be retained.",
 		"message": "Secure Shell Preferences Backup.json"
 	},
+	"READ_SIZE_LABEL": {
+		"description": "Label for the read size (in kilobytes) field.",
+		"message": "Read Size (KiB)"
+	},
 	"RECONNECT_MESSAGE": {
 		"description": "Message displayed after a connection closes. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them after the word is OK like: Exit (X).",
 		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
@@ -1836,6 +1840,10 @@
 				"example": "1.0"
 			}
 		}
+	},
+	"WRITE_SIZE_LABEL": {
+		"description": "Label for the write size (in kilobytes) field.",
+		"message": "Write Size (KiB)"
 	},
 	"ZOOM_WARNING": {
 		"description": "Shown in the top/right corner if the web browser zoom setting is not set to 100%. It's a tip to navigate the Chrome browser's menu.",

@@ -1,0 +1,41 @@
+/*
+ * Copyright 2019 The Chromium OS Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+/**
+ * Styles used by the config dialog box.
+ */
+
+/* Default colors here will be updated on the fly. */
+:root {
+  --nassh-bg-color: rgb(16, 16, 16);
+  --nassh-fg-color: rgb(240, 240, 240);
+  --nassh-cursor-color: rgba(255, 0, 0, 0.5);
+}
+
+body {
+  margin: 0;
+  padding: 0.5em;
+  background-color: var(--nassh-bg-color);
+  color: var(--nassh-fg-color);
+  font-family: courier;
+  font-size: smaller;
+}
+
+input, select {
+  border: 1px solid;
+  padding: 3px;
+  line-height: 1.2;
+  font-size: inherit;
+  font-family: inherit;
+  margin: 0.25em;
+  background-color: rgba(255, 255, 255, 0.95); /* yes, white */
+}
+
+.aligned-dialog-labels {
+  text-align: right;
+  display: block;
+  white-space: nowrap;
+}
