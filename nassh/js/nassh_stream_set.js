@@ -36,8 +36,8 @@ nassh.StreamSet.prototype.openStream = function(streamClass, fd, arg, onOpen) {
 /**
  * Closes a stream instance.
  */
-nassh.StreamSet.prototype.closeStream = function(fd, reason) {
-  this.openStreams_[fd].close(reason);
+nassh.StreamSet.prototype.closeStream = function(fd) {
+  this.openStreams_[fd].close();
   delete this.openStreams_[fd];
 };
 

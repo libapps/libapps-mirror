@@ -64,9 +64,9 @@ nassh.Stream.prototype.asyncWrite = function(data, onSuccess) {
 /**
  * Close a stream.
  */
-nassh.Stream.prototype.close = function(reason) {
+nassh.Stream.prototype.close = function() {
   if (this.onClose)
-    this.onClose(reason || 'closed');
+    this.onClose();
 };
 
 /**

@@ -1151,9 +1151,9 @@ nassh.CommandInstance.prototype.createTtyStream = function(
 
     this.inputBuffer_.onDataAvailable.addListener(onDataAvailable);
 
-    stream.onClose = (reason) => {
+    stream.onClose = () => {
       this.inputBuffer_.onDataAvailable.removeListener(onDataAvailable);
-      this.sendToPlugin_('onClose', [fd, reason]);
+      this.sendToPlugin_('onClose', [fd]);
     };
   }
 
@@ -1350,8 +1350,8 @@ nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
     isAtty = false;
     var stream = this.streams_.openStream(nassh.Stream.Random,
       fd, path, onOpen);
-    stream.onClose = (reason) => {
-      this.sendToPlugin_('onClose', [fd, reason]);
+    stream.onClose = () => {
+      this.sendToPlugin_('onClose', [fd]);
     };
   } else if (path == '/dev/tty') {
     isAtty = true;
@@ -1406,8 +1406,8 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(fd, host, port) 
     this.sendToPlugin_('onRead', [fd, data]);
   };
 
-  stream.onClose = (reason) => {
-    this.sendToPlugin_('onClose', [fd, reason]);
+  stream.onClose = () => {
+    this.sendToPlugin_('onClose', [fd]);
   };
 };
 
