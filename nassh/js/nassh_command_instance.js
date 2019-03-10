@@ -247,9 +247,7 @@ nassh.CommandInstance.prototype.reconnect = function(argstr) {
 
   this.io = this.argv_.io.push();
 
-  if (this.plugin_)
-    this.plugin_.parentNode.removeChild(this.plugin_);
-  this.plugin_ = null;
+  this.removePlugin_();
 
   this.stdoutAcknowledgeCount_ = 0;
   this.stderrAcknowledgeCount_ = 0;
@@ -1114,6 +1112,16 @@ nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
 };
 
 /**
+ * Remove the plugin from the runtime.
+ */
+nassh.CommandInstance.prototype.removePlugin_ = function() {
+  if (this.plugin_) {
+    this.plugin_.parentNode.removeChild(this.plugin_);
+    this.plugin_ = null;
+  }
+};
+
+/**
  * Callback when the user types into the terminal.
  *
  * @param {string} data The input from the terminal.
@@ -1167,7 +1175,16 @@ nassh.CommandInstance.prototype.createTtyStream = function(
  * @param {Array} arguments The message arguments.
  */
 nassh.CommandInstance.prototype.sendToPlugin_ = function(name, args) {
-  this.plugin_.postMessage({name: name, arguments: args});
+  try {
+    this.plugin_.postMessage({name: name, arguments: args});
+  } catch(e) {
+    // When we tear down the plugin, we sometimes have a tail of pending calls.
+    // Rather than try and chase all of those down, swallow errors when the
+    // plugin doesn't exist.
+    if (!this.exited_) {
+      console.error(e);
+    }
+  }
 };
 
 /**
@@ -1204,6 +1221,12 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
 
   // Close all streams upon exit.
   this.streams_.closeAllStreams();
+
+  // Hard destroy the plugin object.  In the past, we'd send onExitAcknowledge
+  // to the plugin and let it exit/cleanup itself.  The NaCl runtime seems to
+  // be a bit unstable though when using threads, so we can't rely on it.  See
+  // https://crbug.com/710252 for more details.
+  this.removePlugin_();
 
   if (this.isMount) {
     if (nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId]) {
@@ -1324,7 +1347,6 @@ nassh.CommandInstance.prototype.onPlugin_.printLog = function(str) {
  */
 nassh.CommandInstance.prototype.onPlugin_.exit = function(code) {
   console.log('plugin exit: ' + code);
-  this.sendToPlugin_('onExitAcknowledge', []);
   this.exit(code);
 };
 
