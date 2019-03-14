@@ -213,4 +213,28 @@ it('defaultRelays', () => {
   assert.equal('example.com', rv['--proxy-host']);
 });
 
+/**
+ * Verify default ssh-agent forwarding settings.
+ */
+describe('default-ssh-agent', () => {
+  const tests = [
+    // Host unrelated to Google.
+    ['example.com', false],
+    // Google host, but not one we should forward to.
+    ['google.com', false],
+    // Hosts we should forward by default.
+    ['xxx.yyy.corp.google.com', true],
+    ['xxx.yyy.corp', true],
+    ['xxx.cloud.googlecorp.com', true],
+    ['xxx.c.googlers.com', true],
+  ];
+
+  tests.forEach(([host, expected]) => {
+    it(`forwarding for ${host}`, () => {
+      const rv = nassh.CommandInstance.tokenizeOptions('--config=google', host);
+      assert.equal(rv['auth-agent-forward'], expected);
+    });
+  });
+});
+
 });
