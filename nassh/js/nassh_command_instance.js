@@ -1047,7 +1047,7 @@ nassh.CommandInstance.tokenizeOptions = function(optionString='', hostname='') {
       '--report-connect-attempts': true,
       '--resume-connection': false,
       '--relay-protocol': 'v2',
-      '--ssh-agent': nassh.GoogleRelay.defaultGnubbyExtension,
+      '--ssh-agent': 'gnubby',
     }, rv);
   }
 
@@ -1055,6 +1055,12 @@ nassh.CommandInstance.tokenizeOptions = function(optionString='', hostname='') {
   // we've had for years, and what the public uses currently.
   if (rv['--proxy-host'] && !rv['--proxy-mode']) {
     rv['--proxy-mode'] = 'corp-relay@google.com';
+  }
+
+  // Turn 'gnubby' into the default id.  We do it here because we haven't yet
+  // ported the gnubbyd logic to the new ssh-agent frameworks.
+  if (rv['--ssh-agent'] == 'gnubby') {
+    rv['--ssh-agent'] = nassh.GoogleRelay.defaultGnubbyExtension;
   }
 
   return rv;

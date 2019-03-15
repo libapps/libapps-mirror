@@ -83,6 +83,8 @@ Here's a list of known agents:
 * [gnubbyd app (beknehfpfkghjoafdifaflglpjkojoco)](https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco)
 * [gnubbyd ext (lkjlajklkdhaneeelolkfgbpikkgnkpk)](https://chrome.google.com/webstore/detail/lkjlajklkdhaneeelolkfgbpikkgnkpk)
 
+As a shortcut, `gnubby` may be used as an alias for the autodetected extension.
+
 ## `--ssh-client-version=<version>`
 
 The version of the ssh client to use.  Intended for mitigating regressions with
