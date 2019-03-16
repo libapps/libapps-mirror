@@ -26,6 +26,15 @@ it('eom', () => {
   assert.isTrue(msg.eom(), 'end of non-empty message');
 });
 
+/**
+ * Verify the constructor accepts an Array type.
+ */
+it('from-Array', () => {
+  const msg = new nassh.agent.Message(1, [1, 2, 3, 4]);
+  assert.equal(msg.readUint32(), 0x01020304);
+  assert.isTrue(msg.eom());
+});
+
 it('readUint32', () => {
   const msg = new nassh.agent.Message(
       1, new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1]));

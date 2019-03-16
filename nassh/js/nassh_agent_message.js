@@ -36,7 +36,7 @@ nassh.agent.Message = function(type, data) {
    * @member {?Uint8Array}
    * @private
    */
-  this.data_ = data || new Uint8Array(0);
+  this.data_ = new Uint8Array(data);
 
   /**
    * The current offset into the raw message data. This is only used when
