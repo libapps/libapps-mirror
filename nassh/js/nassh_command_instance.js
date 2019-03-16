@@ -1051,6 +1051,14 @@ nassh.CommandInstance.tokenizeOptions = function(optionString='', hostname='') {
     }, rv);
   }
 
+  // If the user specified an IPv6 address w/out brackets, add them.  It's not
+  // obvious that a command line parameter would need them like a URI does.  We
+  // only use the proxy-host in URI contexts currently, so this is OK.
+  if (rv['--proxy-host'] && !rv['--proxy-host'].startsWith('[') &&
+      rv['--proxy-host'].indexOf(':') != -1) {
+    rv['--proxy-host'] = `[${rv['--proxy-host']}]`;
+  }
+
   // If a proxy server is requested but no mode selected, default to the one
   // we've had for years, and what the public uses currently.
   if (rv['--proxy-host'] && !rv['--proxy-mode']) {

@@ -183,6 +183,30 @@ it('tokenizeOptions', () => {
 });
 
 /**
+ * Check address/hostname proxy-host handling.
+ */
+describe('proxy-host-addresses', () => {
+  const data = [
+    // Hostnames.
+    ['example.com', 'example.com'],
+    // IPv4.
+    ['127.0.0.1', '127.0.0.1'],
+    // IPv6.
+    ['::1', '[::1]'],
+    ['[::1]', '[::1]'],
+    ['2607:f8b0:4007:80e::200e', '[2607:f8b0:4007:80e::200e]'],
+    ['[2607:f8b0:4007:80e::200e]', '[2607:f8b0:4007:80e::200e]'],
+  ];
+
+  data.forEach(([host, expected]) => {
+    it(`--proxy-host=${host}`, () => {
+      const rv = nassh.CommandInstance.tokenizeOptions(`--proxy-host=${host}`);
+      assert.equal(rv['--proxy-host'], expected);
+    });
+  });
+});
+
+/**
  * Verify default proxy-host settings.
  */
 it('defaultRelays', () => {
