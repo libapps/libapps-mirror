@@ -210,11 +210,6 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
   this.optionsButton_.addEventListener('click',
                                        this.onOptionsClick_.bind(this));
 
-  this.$f('identity').addEventListener('select', function(e) {
-      if (e.target.value == '')
-        e.target.selectedIndex = 0;
-    });
-
   // These fields interact with each-other's placeholder text.
   ['description', 'username', 'hostname', 'port'
   ].forEach((name) => {
@@ -369,9 +364,6 @@ nassh.ConnectDialog.prototype.save = function() {
   ['description', 'username', 'hostname', 'port', 'nassh-options',
    'identity', 'argstr', 'terminal-profile', 'mount-path',
   ].forEach((name) => {
-       if (name == 'identity' && this.$f('identity').selectedIndex === 0)
-         return;
-
        var value = this.$f(name).value;
 
        // Most fields don't make sense with leading or trailing whitespace, so
@@ -620,8 +612,6 @@ nassh.ConnectDialog.prototype.syncForm_ = function() {
    'identity', 'terminal-profile', 'mount-path',
   ].forEach((n) => {
       var emptyValue = '';
-      if (n == 'identity')
-        emptyValue = this.$f('identity').firstChild.textContent;
 
       if (this.currentProfileRecord_.prefs) {
         this.$f(n).value =
@@ -630,6 +620,11 @@ nassh.ConnectDialog.prototype.syncForm_ = function() {
         this.$f(n).value = emptyValue;
       }
     });
+
+  // If the profile settings point to a key that no longer exists, reset it.
+  if (this.$f('identity').selectedIndex == -1) {
+    this.$f('identity').selectedIndex = 0;
+  }
 
   this.updateDetailPlaceholders_();
   this.updateDescriptionPlaceholder_();
@@ -695,11 +690,13 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
 
     var option = document.createElement('option');
     option.textContent = '[default]';
+    option.value = '';
     identitySelect.appendChild(option);
 
     for (var i = 0; i < keyfileNames.length; i++) {
       var option = document.createElement('option');
       option.textContent = keyfileNames[i];
+      option.value = keyfileNames[i];
       identitySelect.appendChild(option);
       if (keyfileNames[i] == selectedName)
         identitySelect.selectedIndex = i;
