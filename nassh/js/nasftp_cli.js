@@ -2302,7 +2302,7 @@ nasftp.Cli.commandTestFsp_ = function(_args) {
         opts = newopts({sourcePath: '/subdir', targetPath: '/newdir'});
         return wrap('onCopyEntryRequested', opts);
       })
-      // Verify the contents of the new tree.
+      // Check the contents of the source tree.
       .then(() => {
         opts = newopts({entryPath: '/newdir/subdir/x3', name: true});
         return wrap('onGetMetadataRequested', opts);
@@ -2319,6 +2319,48 @@ nasftp.Cli.commandTestFsp_ = function(_args) {
           failed('/subdir dir listing is incorrect', names);
           return Promise.reject();
         }
+      })
+      // Make sure the symlinks were copied as symlinks.
+      .then(() => {
+        opts = newopts({directoryPath: '/newdir'});
+        return wrap('onReadDirectoryRequested', opts);
+      })
+      .then((entries) => {
+        const names = entries.map((entry) => entry.name).sort();
+        // Broken symlinks should be filtered from the read.
+        if (names[0] != 'file' || names[1] != 'subdir' || names[2] != 'symdir'
+            || names[3] != 'symfile' || names[4] != 'x2') {
+          failed('/newdir dir listing is incorrect', names);
+          return Promise.reject();
+        }
+      })
+      .then(() => {
+        return this.client.linkStatus('/newdir/symdir')
+          .then((metadata) => {
+            if (!metadata.isLink) {
+              failed('/newdir/symdir is not a symlink', metadata);
+              return Promise.reject();
+            }
+          })
+      })
+      .then(() => {
+        return this.client.linkStatus('/newdir/symfile')
+          .then((metadata) => {
+            if (!metadata.isLink) {
+              failed('/newdir/symfile is not a symlink', metadata);
+              return Promise.reject();
+            }
+          })
+      })
+      // We should even copy broken symlinks.
+      .then(() => {
+        return this.client.linkStatus('/newdir/brok')
+          .then((metadata) => {
+            if (!metadata.isLink) {
+              failed('/newdir/brok is not a symlink', metadata);
+              return Promise.reject();
+            }
+          })
       })
 
       // Clean up the scratch dir.

@@ -462,25 +462,31 @@ nassh.sftp.fsp.copyFile = function(sourcePath, targetPath, size, client) {
  * itself.
  */
 nassh.sftp.fsp.copyDirectory = function(sourcePath, targetPath, client) {
-  var sourceHandle;
+  let sourceHandle;
   return client.openDirectory(sourcePath)
     .then(handle => { sourceHandle = handle; })
     .then(() => client.makeDirectory(targetPath))
     .then(() => {
       return client.scanDirectory(sourceHandle, (entry) => {
-        // Skip over the entry if it's '.', '..', or a symlink.
-        // TODO(crbug.com/714212): Copy symlinks as symlinks.
-        return entry.filename != '.' && entry.filename != '..' && !entry.isLink;
+        // Skip over the entry if it's '.' or '..'.
+        return entry.filename != '.' && entry.filename != '..';
       });
     })
     .then(entries => {
-
-      var copyPromises = [];
-      for(var i = 0; i < entries.length; i++) {
-        var file = entries[i];
-        var fileSourcePath = sourcePath + '/' + file.filename;
-        var fileTargetPath = targetPath + '/' + file.filename;
-        if (file.isDirectory) {
+      const copyPromises = [];
+      for (let i = 0; i < entries.length; i++) {
+        const file = entries[i];
+        const fileSourcePath = `${sourcePath}/${file.filename}`;
+        const fileTargetPath = `${targetPath}/${file.filename}`;
+        if (file.isLink) {
+          copyPromises.push(
+            client.readLink(fileSourcePath)
+              .then((response) => {
+                return client.symLink(response.files[0].filename,
+                                      fileTargetPath);
+              })
+          );
+        } else if (file.isDirectory) {
           copyPromises.push(nassh.sftp.fsp.copyDirectory(fileSourcePath,
                                                fileTargetPath, client));
         } else {
