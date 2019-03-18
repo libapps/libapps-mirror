@@ -2134,9 +2134,19 @@ nasftp.Cli.commandTestFsp_ = function(_args) {
 
       // Symlink "sym" to "subdir".
       .then(() => this.client.symLink('subdir', '/sym'))
+      // Copy "sym" to "newsym".
+      .then(() => {
+        opts = newopts({sourcePath: '/sym', targetPath: '/newsym'});
+        return wrap('onCopyEntryRequested', opts);
+      })
       // Delete the "sym" symlink.
       .then(() => {
         opts = newopts({entryPath: '/sym', recursive: true});
+        return wrap('onDeleteEntryRequested', opts);
+      })
+      // Delete the "newsym" symlink.
+      .then(() => {
+        opts = newopts({entryPath: '/newsym', recursive: true});
         return wrap('onDeleteEntryRequested', opts);
       })
       // Verify "subdir" exists.

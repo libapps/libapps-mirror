@@ -834,6 +834,32 @@ it('fsp-onCopyEntry-missing', function(done) {
 });
 
 /**
+ * Verify onCopyEntryRequested with a symlink.
+ */
+it('fsp-onCopyEntry-symlink', function(done) {
+  const options = {fileSystemId: 'id', sourcePath: '/src', targetPath: '/dst'};
+
+  this.client.linkStatus.return = (path) => {
+    assert.equal('./src', path);
+    return {isDirectory: false, isLink: true};
+  };
+  this.client.readLink.return = (path) => {
+    assert.equal('./src', path);
+    return {
+      files: [{filename: '/sym'}],
+    };
+  };
+  this.client.symLink.return = (target, path) => {
+    assert.equal('/sym', target);
+    assert.equal('./dst', path);
+  };
+  nassh.sftp.fsp.onCopyEntryRequested(
+      options,
+      done,
+      assert.fail);
+});
+
+/**
  * Verify onUnmount works normally.
  */
 it('fsp-onUnmount-exit', function() {

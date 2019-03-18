@@ -383,10 +383,14 @@ nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
   var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
   var sourcePath = '.' + options.sourcePath; // relative path
   var targetPath = '.' + options.targetPath; // relative path
-  // TODO(crbug.com/714212): Copy symlinks as symlinks.
-  client.fileStatus(sourcePath)
+  return client.linkStatus(sourcePath)
     .then(metadata => {
-      if (metadata.isDirectory) {
+      if (metadata.isLink) {
+        return client.readLink(sourcePath)
+          .then((response) => {
+            return client.symLink(response.files[0].filename, targetPath);
+          });
+      } else if (metadata.isDirectory) {
         return nassh.sftp.fsp.copyDirectory(sourcePath, targetPath, client);
       } else {
         return nassh.sftp.fsp.copyFile(sourcePath, targetPath, metadata.size, client);
