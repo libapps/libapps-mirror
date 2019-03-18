@@ -391,9 +391,10 @@ nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
             return client.symLink(response.files[0].filename, targetPath);
           });
       } else if (metadata.isDirectory) {
-        return nassh.sftp.fsp.copyDirectory(sourcePath, targetPath, client);
+        return nassh.sftp.fsp.copyDirectory_(sourcePath, targetPath, client);
       } else {
-        return nassh.sftp.fsp.copyFile(sourcePath, targetPath, metadata.size, client);
+        return nassh.sftp.fsp.copyFile_(
+            sourcePath, targetPath, metadata.size, client);
       }
     })
     .then(onSuccess)
@@ -406,7 +407,7 @@ nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
 /**
  * Copies the file at the remote source path to the remote target path.
  */
-nassh.sftp.fsp.copyFile = function(sourcePath, targetPath, size, client) {
+nassh.sftp.fsp.copyFile_ = function(sourcePath, targetPath, size, client) {
   var sourceHandle;
   var targetHandle;
   return client.openFile(sourcePath, nassh.sftp.packets.OpenFlags.READ)
@@ -461,7 +462,7 @@ nassh.sftp.fsp.copyFile = function(sourcePath, targetPath, size, client) {
  * Reads the remote directory and copies all of its entries before copying
  * itself.
  */
-nassh.sftp.fsp.copyDirectory = function(sourcePath, targetPath, client) {
+nassh.sftp.fsp.copyDirectory_ = function(sourcePath, targetPath, client) {
   let sourceHandle;
   return client.openDirectory(sourcePath)
     .then(handle => { sourceHandle = handle; })
@@ -487,11 +488,11 @@ nassh.sftp.fsp.copyDirectory = function(sourcePath, targetPath, client) {
               })
           );
         } else if (file.isDirectory) {
-          copyPromises.push(nassh.sftp.fsp.copyDirectory(fileSourcePath,
-                                               fileTargetPath, client));
+          copyPromises.push(nassh.sftp.fsp.copyDirectory_(
+              fileSourcePath, fileTargetPath, client));
         } else {
-          copyPromises.push(nassh.sftp.fsp.copyFile(fileSourcePath, fileTargetPath,
-                                          file.size, client));
+          copyPromises.push(nassh.sftp.fsp.copyFile_(
+              fileSourcePath, fileTargetPath, file.size, client));
         }
       }
 
