@@ -242,10 +242,24 @@ nassh.sftp.fsp.onDeleteEntryRequested = function(options, onSuccess, onError) {
 
   var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
   var path = '.' + options.entryPath; // relative path
-  const ret = options.recursive ?
-      client.removeDirectory(path, true) :
-      client.removeFile(path);
-  ret.then(onSuccess)
+
+  let ret;
+  if (options.recursive) {
+    // If the FSP layers thinks this is a directory but it's really a symlink
+    // to a directory, make sure we remove the symlink instead.  This adds a
+    // bit of overhead when deleting a directory, but we don't have a choice.
+    ret = client.linkStatus(path)
+      .then((metadata) => {
+        if (metadata.isDirectory) {
+          return client.removeDirectory(path, true);
+        } else {
+          return client.removeFile(path);
+        }
+      });
+  } else {
+    ret = client.removeFile(path);
+  }
+  return ret.then(onSuccess)
     .catch((response) => {
       // If file not found.
       if (response instanceof nassh.sftp.StatusError &&

@@ -19,9 +19,9 @@ const MockSftpClient = function() {
 
   // Methods in nassh.sftp.Client that we mock.
   const methods = [
-    'closeFile', 'fileStatus', 'makeDirectory', 'openDirectory', 'openFile',
-    'readDirectory', 'readLink', 'realPath', 'removeDirectory', 'removeFile',
-    'renameFile', 'scanDirectory', 'symLink',
+    'closeFile', 'fileStatus', 'linkStatus', 'makeDirectory', 'openDirectory',
+    'openFile', 'readDirectory', 'readLink', 'realPath', 'removeDirectory',
+    'removeFile', 'renameFile', 'scanDirectory', 'symLink',
   ];
   methods.forEach((method) => {
     this[method] = (...args) => this.automock_(method, ...args);
@@ -500,6 +500,10 @@ it('fsp-onDeleteEntry-dir', function(done) {
     recursive: true,
   };
 
+  this.client.linkStatus.return = (path) => {
+    assert.equal('./dir', path);
+    return {isDirectory: true, isLink: false};
+  };
   this.client.removeDirectory.return = (path, recursive) => {
     assert.equal('./dir', path);
     assert.isTrue(recursive);
@@ -541,6 +545,29 @@ it('fsp-onDeleteEntry-file', function(done) {
 
   this.client.removeFile.return = (path) => {
     assert.equal('./path', path);
+  };
+  nassh.sftp.fsp.onDeleteEntryRequested(
+      options,
+      done,
+      assert.fail);
+});
+
+/**
+ * Verify onDeleteEntryRequested with symlinks.
+ */
+it('fsp-onDeleteEntry-symlink', function(done) {
+  const options = {
+    fileSystemId: 'id',
+    entryPath: '/sym',
+    recursive: true,
+  };
+
+  this.client.linkStatus.return = (path) => {
+    assert.equal('./sym', path);
+    return {isDirectory: false, isLink: true};
+  };
+  this.client.removeFile.return = (path) => {
+    assert.equal('./sym', path);
   };
   nassh.sftp.fsp.onDeleteEntryRequested(
       options,

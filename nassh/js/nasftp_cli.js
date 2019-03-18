@@ -2132,6 +2132,19 @@ nasftp.Cli.commandTestFsp_ = function(_args) {
         return wrap('onCreateDirectoryRequested', opts);
       })
 
+      // Symlink "sym" to "subdir".
+      .then(() => this.client.symLink('subdir', '/sym'))
+      // Delete the "sym" symlink.
+      .then(() => {
+        opts = newopts({entryPath: '/sym', recursive: true});
+        return wrap('onDeleteEntryRequested', opts);
+      })
+      // Verify "subdir" exists.
+      .then(() => {
+        opts = newopts({entryPath: '/subdir', name: true, isDirectory: true});
+        return wrap('onGetMetadataRequested', opts);
+      })
+
       // Create "x" file.
       .then(() => {
         opts = newopts({filePath: '/x'});
@@ -2142,6 +2155,13 @@ nasftp.Cli.commandTestFsp_ = function(_args) {
         opts = newopts({sourcePath: '/x', targetPath: '/new'});
         return wrap('onMoveEntryRequested', opts);
       })
+      // Symlink "sym" to "new".
+      .then(() => this.client.symLink('new', '/sym'))
+      // Delete the "sym" symlink.
+      .then(() => {
+        opts = newopts({entryPath: '/sym', recursive: false});
+        return wrap('onDeleteEntryRequested', opts);
+      })
       // Verify "new" exists.
       .then(() => {
         opts = newopts({entryPath: '/new', name: true, isDirectory: true});
@@ -2150,6 +2170,13 @@ nasftp.Cli.commandTestFsp_ = function(_args) {
       // Delete the "new" file.
       .then((_entries) => {
         opts = newopts({entryPath: '/new', recursive: false});
+        return wrap('onDeleteEntryRequested', opts);
+      })
+
+      // Create the broken "brok" symlink, then delete it.
+      .then(() => this.client.symLink('brok', '/brok'))
+      .then(() => {
+        opts = newopts({entryPath: '/brok', recursive: false});
         return wrap('onDeleteEntryRequested', opts);
       })
 
