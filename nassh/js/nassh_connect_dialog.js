@@ -656,7 +656,7 @@ nassh.ConnectDialog.prototype.syncButtons_ = function() {
  * Sync the identity dropdown box with the filesystem.
  */
 nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
-  var keyfileNames = [];
+  const keyfileNames = new Set();
   var identitySelect = this.$f('identity');
 
   var selectedName;
@@ -683,7 +683,9 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
     for (var key in entries) {
       var ary = key.match(/^(.*)\.pub/);
       if (ary && ary[1] in entries)
-        keyfileNames.push(ary[1]);
+        keyfileNames.add(ary[1]);
+      else if (key.startsWith('id_') && !key.endsWith('.pub'))
+        keyfileNames.add(key);
     }
 
     clearSelect();
@@ -693,14 +695,15 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
     option.value = '';
     identitySelect.appendChild(option);
 
-    for (var i = 0; i < keyfileNames.length; i++) {
+    Array.from(keyfileNames).sort().forEach((keyfileName) => {
       var option = document.createElement('option');
-      option.textContent = keyfileNames[i];
-      option.value = keyfileNames[i];
+      option.textContent = keyfileName;
+      option.value = keyfileName;
       identitySelect.appendChild(option);
-      if (keyfileNames[i] == selectedName)
-        identitySelect.selectedIndex = i;
-    }
+      if (keyfileName == selectedName) {
+        identitySelect.selectedIndex = identitySelect.length - 1;
+      }
+    });
 
     this.syncForm_();
 
