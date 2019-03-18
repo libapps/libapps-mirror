@@ -717,17 +717,19 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
  * Delete one a pair of identity files from the html5 filesystem.
  */
 nassh.ConnectDialog.prototype.deleteIdentity_ = function(identityName) {
-  var count = 0;
+  const removeFile = (file) => new Promise((resolve) => {
+    // We resolve in the error path because we try to delete paths that are
+    // often not there (e.g. missing .pub file).
+    lib.fs.removeFile(this.fileSystem_.root, file, resolve, resolve);
+  });
 
-  var onRemove = () => {
-    if (++count == 2)
-      this.syncIdentityDropdown_();
-  };
-
-  lib.fs.removeFile(this.fileSystem_.root, '/.ssh/' + identityName,
-                    onRemove);
-  lib.fs.removeFile(this.fileSystem_.root, '/.ssh/' + identityName + '.pub',
-                    onRemove);
+  const files = [
+    // Delete the private & public key halves.
+    `/.ssh/${identityName}`,
+    `/.ssh/${identityName}.pub`,
+  ];
+  return Promise.all(files.map(removeFile))
+    .finally(() => this.syncIdentityDropdown_());
 };
 
 nassh.ConnectDialog.prototype.deleteProfile_ = function(deadID) {
