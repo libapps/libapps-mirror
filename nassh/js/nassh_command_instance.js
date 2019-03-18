@@ -1010,8 +1010,14 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
   if (argv.useJsSocket)
     argv.arguments.push('-o CheckHostIP=no');
 
-  if (params.identity)
-    argv.arguments.push('-i/.ssh/' + params.identity);
+  if (params.identity) {
+    // Load legacy/filtered keys from /.ssh/.
+    // TODO: Delete this at some point after Aug 2019.  Jan 2021 should be long
+    // enough for users to migrate.
+    argv.arguments.push(`-i/.ssh/${params.identity}`);
+
+    argv.arguments.push(`-i/.ssh/identity/${params.identity}`);
+  }
   if (params.port)
     argv.arguments.push('-p' + params.port);
 

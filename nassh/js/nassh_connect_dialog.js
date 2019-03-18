@@ -673,14 +673,7 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
     selectedName = identitySelect.value;
   }
 
-  function clearSelect() {
-    while (identitySelect.firstChild) {
-      identitySelect.removeChild(identitySelect.firstChild);
-    }
-  }
-
   var onReadError = () => {
-    clearSelect();
     var option = document.createElement('option');
     option.textContent = 'Error!';
     identitySelect.appendChild(option);
@@ -697,8 +690,13 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
         keyfileNames.add(name);
       }
     });
+  };
 
-    clearSelect();
+  const onFinalLoad = () => {
+    // Reset the list with the current set of keys.
+    while (identitySelect.firstChild) {
+      identitySelect.removeChild(identitySelect.firstChild);
+    }
 
     var option = document.createElement('option');
     option.textContent = '[default]';
@@ -707,7 +705,9 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
 
     Array.from(keyfileNames).sort().forEach((keyfileName) => {
       var option = document.createElement('option');
-      option.textContent = keyfileName;
+      const idx = keyfileName.lastIndexOf('/');
+      const key = keyfileName.substr(idx + 1);
+      option.textContent = key;
       option.value = keyfileName;
       identitySelect.appendChild(option);
       if (keyfileName == selectedName) {
@@ -719,12 +719,23 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
 
     if (opt_onSuccess)
       opt_onSuccess();
-
   };
 
-  lib.fs.readDirectory(this.fileSystem_.root, '/.ssh/')
-    .then(onReadSuccess)
-    .catch(() => lib.fs.err('Error enumerating /.ssh/', onReadError));
+  return Promise.all([
+    // Load legacy/filtered keys from /.ssh/.
+    // TODO: Delete this at some point after Aug 2019.  Jan 2021 should be long
+    // enough for users to migrate.
+    lib.fs.readDirectory(this.fileSystem_.root, '/.ssh/')
+      .then(onReadSuccess),
+
+    // Load new keys from /.ssh/identity/.
+    lib.fs.readDirectory(this.fileSystem_.root, '/.ssh/identity/')
+      .then((entries) => {
+        entries.forEach((entry) => keyfileNames.add(entry.name));
+      }),
+  ])
+  .catch((e) => console.error('Loading keys failed', e))
+  .finally(onFinalLoad);
 };
 
 /**
@@ -738,9 +749,16 @@ nassh.ConnectDialog.prototype.deleteIdentity_ = function(identityName) {
   });
 
   const files = [
-    // Delete the private & public key halves.
+    // Delete the private & public key halves for this identity from the .ssh/
+    // and .ssh/identity/ dirs.  We used to require importing the pub file in
+    // order to update the display, but that's no longer required.  We used to
+    // import keys into .ssh/, but that made enumeration messy.  To migrate from
+    // the old world state to the new world state, delete all the files!  We can
+    // delete after Jan 2021.
     `/.ssh/${identityName}`,
     `/.ssh/${identityName}.pub`,
+    `/.ssh/identity/${identityName}`,
+    `/.ssh/identity/${identityName}.pub`,
   ];
   return Promise.all(files.map(removeFile))
     .finally(() => this.syncIdentityDropdown_());
@@ -879,7 +897,14 @@ nassh.ConnectDialog.prototype.onImportFiles_ = function(e) {
   for (let i = 0; i < input.files.length; ++i) {
     promises.push(new Promise((resolve, reject) => {
       const file = input.files[i];
-      const targetPath = `/.ssh/${file.name}`;
+
+      // Skip pub key halves as we don't need/use them.
+      if (file.name.endsWith('.pub')) {
+        resolve();
+        return;
+      }
+
+      const targetPath = `/.ssh/identity/${file.name}`;
       lib.fs.overwriteFile(
           this.fileSystem_.root, targetPath, file,
           lib.fs.log(`Imported: ${targetPath}`, resolve),
@@ -890,15 +915,24 @@ nassh.ConnectDialog.prototype.onImportFiles_ = function(e) {
   // Resolve all the imports before syncing the UI.
   Promise.all(promises)
     .finally(() => {
+      // If the import doesn't fully work (skip files/etc...), reset the UI
+      // back to whatever the user has currently selected.
+      const select = this.$f('identity');
+      const selectedIndex = select.selectedIndex;
+
       this.syncIdentityDropdown_(() => {
         // Walk all the files the user imported and pick the first valid match.
-        const select = this.$f('identity');
         for (let i = 0; i < input.files.length; ++i) {
           select.value = input.files[i].name;
           if (select.selectedIndex != -1) {
             this.save();
             break;
           }
+        }
+
+        // Couldn't find anything, so restore the previous value.
+        if (select.selectedIndex == -1) {
+          select.selectedIndex = selectedIndex;
         }
       });
     });
