@@ -459,12 +459,13 @@ nassh.sftp.Client.prototype.readDirectory = function(handle) {
  * @param {string} handle The handle of the remote directory.
  * @param {function(NamePacket)=} filter A callback function to filter results.
  *    The return value controls behavior: false will skip the entry, true will
- *    keep the entry, undefined will abort processing, and all other return
+ *    keep the entry, undefined will abort processing, a Promise will resolve
+ *    (and its return will replace the entry if not falsy), and all other return
  *    values will replace the entry.
  * @return {Array<NamePacket>} A list of all the entries in this directory.
  */
 nassh.sftp.Client.prototype.scanDirectory = function(handle, filter=undefined) {
-  const entries = [];
+  let entries = [];
 
   const nextRead = () => {
     return this.readDirectory(handle)
@@ -474,6 +475,9 @@ nassh.sftp.Client.prototype.scanDirectory = function(handle, filter=undefined) {
             response.code == nassh.sftp.packets.StatusCodes.EOF) {
           return entries;
         }
+
+        // Accumulate promises from the filter as needed.
+        const promises = [];
 
         // Run the user's filter across this batch of files.
         for (let i = 0; i < response.fileCount; ++i) {
@@ -485,6 +489,9 @@ nassh.sftp.Client.prototype.scanDirectory = function(handle, filter=undefined) {
               return [];
             } else if (ret === false) {
               continue;
+            } else if (ret instanceof Promise) {
+              promises.push(ret);
+              continue;
             } else if (ret !== true) {
               entry = ret;
             }
@@ -493,7 +500,11 @@ nassh.sftp.Client.prototype.scanDirectory = function(handle, filter=undefined) {
           entries.push(entry);
         }
 
-        return nextRead();
+        // Resolve all the promises and accumulate any non-false results.
+        return Promise.all(promises).then((results) => {
+          entries = entries.concat(results.filter((result) => !!result));
+        })
+        .then(nextRead);
       });
   };
 

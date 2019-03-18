@@ -318,7 +318,6 @@ it('fsp-onReadDirectory-found', function(done) {
     {filename: '..', isDirectory: true},
     {filename: 'foo.txt', isDirectory: false},
     {filename: 'dir', isDirectory: true},
-    {filename: 'sym', isDirectory: false, isLink: true},
   ];
   this.client.scanDirectory.return = (handle, filter) => {
     let filtered = [];
@@ -346,6 +345,78 @@ it('fsp-onReadDirectory-found', function(done) {
         assert.isFalse(entries[0].isDirectory);
         assert.equal('dir', entries[1].name);
         assert.isTrue(entries[1].isDirectory);
+        assert.isFalse(hasMore);
+      },
+      assert.fail);
+});
+
+/**
+ * Verify onReadDirectoryRequested with symlinks.
+ */
+it('fsp-onReadDirectory-symlinks', function(done) {
+  const options = {
+    fileSystemId: 'id',
+    directoryPath: '/dir',
+    isDirectory: true,
+    name: true,
+  };
+
+  this.client.openDirectory.return = (path) => {
+    assert.equal('./dir', path);
+    return 'handle';
+  };
+  const entries = [
+    {filename: '.', isDirectory: true},
+    {filename: '..', isDirectory: true},
+    {filename: 'dir', isDirectory: true, isLink: true},
+    {filename: 'file', isDirectory: false, isLink: true},
+    {filename: 'brok', isDirectory: false, isLink: true},
+  ];
+  this.client.scanDirectory.return = (handle, filter) => {
+    const filtered = [];
+    const promises = [];
+    assert.equal('handle', handle);
+    entries.forEach((entry) => {
+      let ret = filter(entry);
+      if (ret === false) {
+        return;
+      } else if (ret instanceof Promise) {
+        promises.push(ret);
+        return;
+      } else if (ret !== true) {
+        entry = ret;
+      }
+      filtered.push(ret);
+    });
+    return Promise.all(promises).then((results) => {
+      return filtered.concat(results.filter((result) => !!result));
+    });
+  };
+  this.client.fileStatus.return = (path) => {
+    switch (path) {
+      case './dir/dir':
+        return {isDirectory: true, isLink: false};
+      case './dir/file':
+        return {isDirectory: false, isLink: false};
+      case './dir/brok':
+        return Promise.reject();
+      default:
+        assert.fail();
+        return Promise.reject();
+    }
+  };
+  this.client.closeFile.return = (handle) => {
+    assert.equal('handle', handle);
+    done();
+  };
+  nassh.sftp.fsp.onReadDirectoryRequested(
+      options,
+      (entries, hasMore) => {
+        assert.equal(2, entries.length);
+        assert.equal('dir', entries[0].name);
+        assert.isTrue(entries[0].isDirectory);
+        assert.equal('file', entries[1].name);
+        assert.isFalse(entries[1].isDirectory);
         assert.isFalse(hasMore);
       },
       assert.fail);

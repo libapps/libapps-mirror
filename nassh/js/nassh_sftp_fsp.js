@@ -79,27 +79,6 @@ nassh.sftp.fsp.onGetMetadataRequested = function(options, onSuccess, onError) {
 };
 
 /**
- * Reads the remote directory handle and returns a list of metadata entries,
- * which are sanitized if applicable.
- *
- * It always skips the "." & ".." pseudo entries, and symlinks.
- */
-nassh.sftp.fsp.readDirectory = function(directoryHandle, client, sanitizeOptions) {
-  return client.scanDirectory(directoryHandle, (entry) => {
-    // Skip over the file if it's a '.', '..', or symlink.
-    if (entry.filename == '.' || entry.filename == '..' || entry.isLink) {
-      return false;
-    }
-
-    if (sanitizeOptions) {
-      return nassh.sftp.fsp.sanitizeMetadata(entry, sanitizeOptions);
-    }
-
-    return true;
-  });
-};
-
-/**
  * Read Directory Requested handler. Retrieves the entries of the requested
  * directory.
  */
@@ -113,7 +92,34 @@ nassh.sftp.fsp.onReadDirectoryRequested = function(options, onSuccess, onError) 
   var path = '.' + options.directoryPath; // relative path
   client.openDirectory(path)
     .then(handle => { directoryHandle = handle; })
-    .then(() => nassh.sftp.fsp.readDirectory(directoryHandle, client, options))
+    .then(() => {
+      return client.scanDirectory(directoryHandle, (entry) => {
+        // Skip over the file if it's '.' or '..' pseudo paths.
+        if (entry.filename == '.' || entry.filename == '..') {
+          return false;
+        }
+
+        // If it's a symlink, resolve the target so we can see file-vs-dir.
+        if (entry.isLink) {
+          return client.fileStatus(`${path}/${entry.filename}`)
+            .then((attrs) => {
+              // Overlay the target's attributes on top of this entry.  This
+              // will make it look like the symlink is a real path with the
+              // target's settings.  This is more natural for users.
+              Object.assign(entry, attrs);
+              return nassh.sftp.fsp.sanitizeMetadata(entry, options);
+            })
+            .catch(() => {
+              // If reading the symlink target failed (e.g. it's a broken
+              // symlink), then just ignore it.  The FSP layers can't do
+              // anything useful currently.
+              return false;
+            });
+        }
+
+        return nassh.sftp.fsp.sanitizeMetadata(entry, options);
+      });
+    })
     .then(entries => { onSuccess(entries, false); })
     .catch(response => {
       console.warn(response.name + ': ' + response.message);
@@ -377,6 +383,7 @@ nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
   var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
   var sourcePath = '.' + options.sourcePath; // relative path
   var targetPath = '.' + options.targetPath; // relative path
+  // TODO(crbug.com/714212): Copy symlinks as symlinks.
   client.fileStatus(sourcePath)
     .then(metadata => {
       if (metadata.isDirectory) {
@@ -455,7 +462,13 @@ nassh.sftp.fsp.copyDirectory = function(sourcePath, targetPath, client) {
   return client.openDirectory(sourcePath)
     .then(handle => { sourceHandle = handle; })
     .then(() => client.makeDirectory(targetPath))
-    .then(() => nassh.sftp.fsp.readDirectory(sourceHandle, client))
+    .then(() => {
+      return client.scanDirectory(sourceHandle, (entry) => {
+        // Skip over the entry if it's '.', '..', or a symlink.
+        // TODO(crbug.com/714212): Copy symlinks as symlinks.
+        return entry.filename != '.' && entry.filename != '..' && !entry.isLink;
+      });
+    })
     .then(entries => {
 
       var copyPromises = [];

@@ -2280,6 +2280,13 @@ nasftp.Cli.commandTestFsp_ = function(_args) {
         return wrap('onCloseFileRequested', opts);
       })
 
+      // Create some symlinks to read back later.
+      .then(() => {
+        return this.client.symLink('.', '/subdir/symdir')
+          .then(() => this.client.symLink('brok', '/subdir/brok'))
+          .then(() => this.client.symLink('file', '/subdir/symfile'));
+      })
+
       // Copy the directory tree.
       .then(() => {
         opts = newopts({sourcePath: '/subdir', targetPath: '/newdir'});
@@ -2296,7 +2303,9 @@ nasftp.Cli.commandTestFsp_ = function(_args) {
       })
       .then((entries) => {
         const names = entries.map((entry) => entry.name).sort();
-        if (names[0] != 'file' || names[1] != 'subdir' || names[2] != 'x2') {
+        // Broken symlinks should be filtered.
+        if (names[0] != 'file' || names[1] != 'subdir' || names[2] != 'symdir'
+            || names[3] != 'symfile' || names[4] != 'x2') {
           failed('/subdir dir listing is incorrect', names);
           return Promise.reject();
         }
