@@ -856,19 +856,36 @@ nassh.ConnectDialog.prototype.onFileSystemFound_ = function(
  * (aka this.importFileInput_) control.
  */
 nassh.ConnectDialog.prototype.onImportFiles_ = function(e) {
-  var input = this.importFileInput_;
-  var select = this.$f('identity');
+  const promises = [];
+  const input = this.importFileInput_;
 
-  var onImportSuccess = () => {
-    this.syncIdentityDropdown_(function() {
-      select.selectedIndex = select.childNodes.length - 1;
+  // Create promises for all the file imports.
+  for (let i = 0; i < input.files.length; ++i) {
+    promises.push(new Promise((resolve, reject) => {
+      const file = input.files[i];
+      const targetPath = `/.ssh/${file.name}`;
+      lib.fs.overwriteFile(
+          this.fileSystem_.root, targetPath, file,
+          lib.fs.log(`Imported: ${targetPath}`, resolve),
+          lib.fs.err(`Error importing: ${targetPath}`, reject));
+    }));
+  }
+
+  // Resolve all the imports before syncing the UI.
+  Promise.all(promises)
+    .finally(() => {
+      this.syncIdentityDropdown_(() => {
+        // Walk all the files the user imported and pick the first valid match.
+        const select = this.$f('identity');
+        for (let i = 0; i < input.files.length; ++i) {
+          select.value = input.files[i].name;
+          if (select.selectedIndex != -1) {
+            this.save();
+            break;
+          }
+        }
+      });
     });
-  };
-
-  if (!input.files.length)
-    return;
-
-  nassh.importFiles(this.fileSystem_, '/.ssh/', input.files, onImportSuccess);
 
   return false;
 };
