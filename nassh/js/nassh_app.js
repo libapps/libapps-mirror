@@ -8,10 +8,11 @@
  * The singleton app instance for the nassh packaged app, created by the
  * background page.
  *
+ * @param {!lib.Storage=} storage Storage for sync settings.
  * @constructor
  */
-nassh.App = function() {
-  this.prefs_ = new nassh.PreferenceManager();
+nassh.App = function(storage = undefined) {
+  this.prefs_ = new nassh.PreferenceManager(storage);
   this.localPrefs_ = new nassh.LocalPreferenceManager();
   this.omniMatches_ = [];
   this.omniDefault_ = null;
@@ -129,8 +130,11 @@ nassh.App.prototype.omniboxOnInputStarted_ = function() {
     this.omniMatches_.push(profileIdToOmni(ids[i]));
   }
 
-  this.omniDefault_ = profileIdToOmni(
-      this.localPrefs_.get('connectDialog/lastProfileId'));
+  // When first installed, there won't be a last profile.
+  const lastProfile = this.localPrefs_.get('connectDialog/lastProfileId');
+  if (lastProfile) {
+    this.omniDefault_ = profileIdToOmni(lastProfile);
+  }
 };
 
 /**
