@@ -38,7 +38,7 @@ nassh.App.prototype.omniboxOnInputStarted_ = function() {
   var profileIdToOmni = function(id) {
     var profile = this.prefs_.getProfile(id);
 
-    var port = profile.get('port');
+    var port = profile.get('port') || '';
     if (port)
       port = ':' + port;
 
