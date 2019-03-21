@@ -1,3 +1,62 @@
+# 0.16, 2019-03-20, SFTP client everywhere.
+
+* agent: Refactor and rename wire encoding primitives.
+* agent: Only offer PIN caching if using agent forwarding.
+* agent: Add support for ECDSA keys via OpenPGP applet.
+* agent: Add support for Ed25519 via OpenPGP applet.
+* GoogleRelay: Convert to ArrayBuffers.
+* SSHAgentRelay: Pull out message size parsing.
+* SSHAgentRelay: Convert to ArrayBuffers.
+* nassh: Drop runtime dep checks.
+* tests: Fix assert identity tests.
+* chrome-bootstrap: Move to third_party.
+* tests: Switch core to chai for asserts.
+* sftp: Support creating hardlinks.
+* sftp: Support statvfs@openssh.com.
+* sftp: Support fsync@openssh.com.
+* SSHAgent: Pull out message size parsing.
+* SSHAgent: Convert to ArrayBuffers.
+* crosh: Drop onTerminalResize existence check.
+* tests: Call chai asserts directly.
+* sftp: Allow nassh.sftp.Packet to be initialized from an array.
+* sftp: Change toByteArray helper to return typed arrays.
+* sftp: Allow setData to take arrays.
+* sftp: Change getData helper to return typed arrays.
+* sftp: Change stream to accept ArrayBuffers.
+* sftp: Pull out message size parsing.
+* sftp: Simplify the buffer parsing logic.
+* sftp: Change client buffer to typed array.
+* crosh: Fix getBackgroundPage in native crosh.
+* crosh: Fix opening in window from a tab.
+* tests: Convert test suite to mocha.
+* stream: Drop remaining binary/ascii helpers.
+* crosh: Make it easier to open as a window.
+* nasftp: Add a cli.
+* crosh: Fix command parsing in the query string.
+* crosh: Don't assume ids are pids (numbers).
+* agent: Revise when we default enable ssh-agent forwarding.
+* sftp: Finish conversion to ArrayBuffers.
+* crosh: Switch last lib.f.parseQuery to URLSearchParams.
+* agent: Switch from custom array helpers to DataView.
+* prefs: Fix export with URI-special characters.
+* fsp: Support runtime config tweaking.
+* stream: Drop reason argument to close.
+* plugin: Rework how we tear down the plugin.
+* agent: Add a --ssh-agent=gnubby alias.
+* proxies: Make IPv6 addresses nicer w/--proxy-host.
+* identity: Allow resetting back to the default.
+* identity: Improve the import process.
+* identity: Improve cleanup.
+* identity: List all id_* files in dropdown.
+* agent: Allow agent message to accept Arrays.
+* RelaySshfe: Convert to ArrayBuffers.
+* fsp: Handle symlink deletion.
+* fsp: Handle symlinks better.
+* fsp: Copy symlinks as symlinks.
+* fsp: Handle symlinks when recursively copying.
+* fsp: Internalize internal copy functions.
+* omnibox: Fix handling of default port.
+
 # 0.15, 2019-02-17, Fix SFTP mounting bugs.
 
 * Pull a few minor unreleased libdot & hterm changes.
