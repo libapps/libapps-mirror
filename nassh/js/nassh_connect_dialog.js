@@ -576,8 +576,16 @@ nassh.ConnectDialog.prototype.updateNasshOptionsPlaceholder_ = function() {
     if (!hostname)
       hostname = this.$f('hostname').placeholder;
 
-    if (hostname.match(/(\.corp\.google\.com|\.c\.googlers\.com)$/))
+    const googleHostRegexp = new RegExp(
+        '\.(' +
+        'corp\.google\.com|' +
+        'c\.googlers\.com|' +
+        'cloud\.googlecorp\.com|' +
+        '(internal|proxy)\.gcpnode\.com' +
+        ')$');
+    if (hostname.match(googleHostRegexp)) {
       value = '--config=google';
+    }
   }
   this.$f('nassh-options', 'placeholder', value);
 };

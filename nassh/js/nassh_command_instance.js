@@ -1031,13 +1031,19 @@ nassh.CommandInstance.tokenizeOptions = function(optionString='', hostname='') {
 
   // Handle various named "configs" we have.
   if (rv['--config'] == 'google') {
-    // This lists of agent hosts matches the internal gLinux ssh_config.
+    // This list of agent hosts matches the internal gLinux ssh_config.
     const forwardAgent = [
-        '.corp.google.com', '.corp', '.cloud.googlecorp.com', '.c.googlers.com',
+      '.corp.google.com', '.corp', '.cloud.googlecorp.com', '.c.googlers.com',
     ].reduce((ret, host) => ret || hostname.endsWith(host), false);
 
-    const proxyHost = hostname.endsWith('.c.googlers.com') ?
+    // This list of proxy hosts matches the internal gLinux ssh_config.
+    // Hosts in these spaces should go through a different relay.
+    const useSupSshRelay = [
+      '.c.googlers.com', '.internal.gcpnode.com', '.proxy.gcpnode.com',
+    ].reduce((ret, host) => ret || hostname.endsWith(host), false);
+    const proxyHost = useSupSshRelay ?
         'sup-ssh-relay.corp.google.com' : 'ssh-relay.corp.google.com';
+
     rv = Object.assign({
       'auth-agent-forward': forwardAgent,
       '--proxy-host': proxyHost,

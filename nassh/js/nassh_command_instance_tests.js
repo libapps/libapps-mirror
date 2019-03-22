@@ -209,32 +209,38 @@ describe('proxy-host-addresses', () => {
 /**
  * Verify default proxy-host settings.
  */
-it('defaultRelays', () => {
-  let rv;
+describe('default-proxy-host', () => {
+  const tests = [
+    // Proxy host unrelated to Google.
+    ['--proxy-host=proxy.example.com', 'example.com',
+     undefined, 'proxy.example.com'],
 
-  // Proxy host unrelated to Google.
-  rv = nassh.CommandInstance.tokenizeOptions(
-      '--proxy-host=proxy.example.com', 'example.com');
-  assert.equal('proxy.example.com', rv['--proxy-host']);
-  assert.isUndefined(rv['--proxy-port']);
+    // Default Google settings.
+    ['--config=google', 'example.com',
+     '443', 'ssh-relay.corp.google.com'],
 
-  // Default Google settings.
-  rv = nassh.CommandInstance.tokenizeOptions(
-      '--config=google', 'example.com');
-  assert.equal('443', rv['--proxy-port']);
-  assert.equal('ssh-relay.corp.google.com', rv['--proxy-host']);
+    // Default cloudtop Google settings.
+    ['--config=google', 'example.c.googlers.com',
+     '443', 'sup-ssh-relay.corp.google.com'],
 
-  // Default cloudtop Google settings.
-  rv = nassh.CommandInstance.tokenizeOptions(
-      '--config=google', 'example.c.googlers.com');
-  assert.equal('443', rv['--proxy-port']);
-  assert.equal('sup-ssh-relay.corp.google.com', rv['--proxy-host']);
+    // Default internal GCE settings.
+    ['--config=google', 'example.internal.gcpnode.com',
+     '443', 'sup-ssh-relay.corp.google.com'],
+    ['--config=google', 'example.proxy.gcpnode.com',
+     '443', 'sup-ssh-relay.corp.google.com'],
 
-  // Explicit proxy settings override defaults.
-  rv = nassh.CommandInstance.tokenizeOptions(
-      '--config=google --proxy-host=example.com', 'example.c.googlers.com');
-  assert.equal('443', rv['--proxy-port']);
-  assert.equal('example.com', rv['--proxy-host']);
+    // Explicit proxy settings override defaults.
+    ['--config=google --proxy-host=example.com', 'example.c.googlers.com',
+     '443', 'example.com'],
+  ];
+
+  tests.forEach(([options, host, port, relay]) => {
+    it(`default relay for '${options}' & '${host}'`, () => {
+      const rv = nassh.CommandInstance.tokenizeOptions(options, host);
+      assert.equal(port, rv['--proxy-port']);
+      assert.equal(relay, rv['--proxy-host']);
+    });
+  });
 });
 
 /**
