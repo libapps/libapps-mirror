@@ -11,7 +11,7 @@
     "32": "images/dev/icon-32.png",
     "16": "images/dev/icon-16.png"
   },
-  "description": "Terminal emulator and SSH client.",
+  "description": "Terminal emulator and SSH and SFTP client.",
   "offline_enabled": true,
   "options_page": "html/nassh_preferences_editor.html",
   "permissions": [
