@@ -688,13 +688,16 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
   };
 
   var onReadSuccess = (entries) => {
-    for (var key in entries) {
-      var ary = key.match(/^(.*)\.pub/);
-      if (ary && ary[1] in entries)
+    // Create a set of the filenames which is all we care about.
+    const fileNames = new Set(entries.map((entry) => entry.name));
+    fileNames.forEach((name) => {
+      const ary = name.match(/^(.*)\.pub/);
+      if (ary && fileNames.has(ary[1])) {
         keyfileNames.add(ary[1]);
-      else if (key.startsWith('id_') && !key.endsWith('.pub'))
-        keyfileNames.add(key);
-    }
+      } else if (name.startsWith('id_') && !name.endsWith('.pub')) {
+        keyfileNames.add(name);
+      }
+    });
 
     clearSelect();
 
@@ -720,8 +723,9 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
 
   };
 
-  lib.fs.readDirectory(this.fileSystem_.root, '/.ssh/', onReadSuccess,
-                       lib.fs.err('Error enumerating /.ssh/', onReadError));
+  lib.fs.readDirectory(this.fileSystem_.root, '/.ssh/')
+    .then(onReadSuccess)
+    .catch(() => lib.fs.err('Error enumerating /.ssh/', onReadError));
 };
 
 /**

@@ -149,29 +149,15 @@ lib.fs.removeFile = function(root, path, opt_onSuccess, opt_onError) {
  * @param {DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @param {function(Object)} onSuccess The function to invoke after
- *     success.
- * @param {function(DOMError)} opt_onError Optional function to invoke
- *     if the operation fails.
+ * @return {!Promise(!Array<FileSystemEntry>)} All the entries in the directory.
  */
-lib.fs.readDirectory = function(root, path, onSuccess, opt_onError) {
-  var entries = {};
-
-  function onDirectoryFound(dirEntry) {
-    var reader = dirEntry.createReader();
-    reader.readEntries(function(results) {
-        for (var i = 0; i < results.length; i++) {
-          entries[results[i].name] = results[i];
-        }
-
-        if (true || !results.length) {
-          onSuccess(entries);
-          return;
-        }
-      }, opt_onError);
-  }
-
-  root.getDirectory(path, {create: false}, onDirectoryFound, opt_onError);
+lib.fs.readDirectory = function(root, path) {
+  return new Promise((resolve, reject) => {
+    root.getDirectory(path, {create: false}, (dirEntry) => {
+      const reader = dirEntry.createReader();
+      reader.readEntries(resolve, reject);
+    }, reject);
+  });
 };
 
 /**
