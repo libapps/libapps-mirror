@@ -14,6 +14,7 @@
 % Compression no longer enabled by default (ssh -C).
 % SFTP transfer sizes increased to 64k/255k with OpenSSH servers.
 
-# release: 0.16
+# release: 0.16 (stable Mar 21)
 % Command line SFTP client (alpha) now available on all platforms.
 % Symlinks now supported in SFTP mounts (CrOS-only).
+% --config=google no longer enables ssh-agent forwarding for many hosts; add -A to your ssh commandline as needed.

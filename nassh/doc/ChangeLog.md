@@ -1,3 +1,9 @@
+# 0.17, 2019-03-26, Minor polish.
+
+* hterm: Pull in multi-screen copy fix.
+* manifest: Add SFTP client to the short description.
+* relay: Use sup-ssh-relay for internal GCE nodes.
+
 # 0.16, 2019-03-20, SFTP client everywhere.
 
 * agent: Refactor and rename wire encoding primitives.
