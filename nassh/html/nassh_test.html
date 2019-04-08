@@ -6,7 +6,9 @@
     <!-- npm modules -->
     <script src='../../node_modules/chai/chai.js'></script>
     <script src='../../node_modules/mocha/mocha.js'></script>
-    <script>mocha.setup('bdd');</script>
+
+    <!-- initialize the test framework; this must come first -->
+    <script src='../js/nassh_test.js'></script>
 
     <!-- Order should match nassh.html. -->
     <script src='../js/nassh_deps.concat.js'></script>
@@ -48,7 +50,6 @@
 
     <!-- All the unittests go below here. -->
     <script src='../js/nasftp_cli_tests.js'></script>
-    <script src='../js/nassh_test.js'></script>
     <script src='../js/nassh_tests.js'></script>
     <script src='../js/nassh_agent_tests.js'></script>
     <script src='../js/nassh_agent_message_tests.js'></script>
