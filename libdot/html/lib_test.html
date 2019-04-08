@@ -6,7 +6,9 @@
     <!-- npm modules -->
     <script src='../../node_modules/chai/chai.js'></script>
     <script src='../../node_modules/mocha/mocha.js'></script>
-    <script>mocha.setup('bdd');</script>
+
+    <!-- initialize the test framework; this must come first -->
+    <script src='../js/lib_test.js'></script>
 
     <!-- libdot js files under test; keep in dep order -->
     <script src='../js/lib.js'></script>
@@ -25,8 +27,6 @@
     <script src='../third_party/fast-text-encoding/text.js'></script>
     <script src='../third_party/punycode/lib_punycode.js'></script>
     <script src='../third_party/wcwidth/lib_wc.js'></script>
-
-    <script src='../js/lib_test.js'></script>
 
     <!-- libdot js tests -->
     <script src='../js/lib_array_tests.js'></script>
