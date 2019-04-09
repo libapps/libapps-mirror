@@ -63,7 +63,6 @@ it('splitCommandLine', () => {
 describe('parseURI', () => {
   // A bunch of fields are undefined by default.
   const defaultFields = {
-    'fingerprint': undefined,
     'port': undefined,
     'relayHostname': undefined,
     'relayPort': undefined,
@@ -106,6 +105,48 @@ describe('parseURI', () => {
     // Fingerprints.
     ['u;fingerprint=foo@h',
      {'username': 'u', 'hostname': 'h', 'fingerprint': 'foo'}],
+
+    // nassh params.
+    ['u;-nassh-args=--some-param=some-value@h',
+     {'username': 'u', 'hostname': 'h',
+      'nassh-args': '--some-param=some-value'}],
+
+    // ssh params.
+    ['u;-nassh-ssh-args=--proxy-mode=some-mode@h',
+     {'username': 'u', 'hostname': 'h',
+      'nassh-ssh-args': '--proxy-mode=some-mode'}],
+
+    // Empty args.
+    ['u;-nassh-ssh-args=@h', {'username': 'u', 'hostname': 'h'}],
+
+    // Valid incomplete param.
+    ['u;-nassh-ssh-args=--proxy-mode=@h',
+     {'username': 'u', 'hostname': 'h', 'nassh-ssh-args': '--proxy-mode='}],
+
+    // Params combined.
+    ['u;-nassh-ssh-args=--proxy-mode=some-mode;fingerprint=foo#;' +
+     '-nassh-args="usingQuotMarks"@h',
+     {'username': 'u', 'hostname': 'h',
+      'nassh-ssh-args': '--proxy-mode=some-mode',
+      'fingerprint': 'foo#', 'nassh-args': '"usingQuotMarks"'}],
+
+    // Params combined with encoded chars.
+    ['u;-nassh-ssh-args=--proxy-mode=ssh-fe%40google.com;fingerprint=foo#;' +
+     '-nassh-args="using%3dEqual%3bAndSemicolon"@h',
+     {'username': 'u', 'hostname': 'h',
+      'nassh-ssh-args': '--proxy-mode=ssh-fe@google.com',
+      'fingerprint': 'foo#', 'nassh-args': '"using=Equal;AndSemicolon"'}],
+
+    // Different order.
+    ['u;fingerprint=foo#;-nassh-args="usingQuotMarks";' +
+     '-nassh-ssh-args=--proxy-mode=some-mode@h',
+     {'username': 'u', 'hostname': 'h',
+      'nassh-ssh-args': '--proxy-mode=some-mode',
+      'fingerprint': 'foo#', 'nassh-args': '"usingQuotMarks"'}],
+
+    // Unknown param is not added to the returning object.
+    ['u;-unknown-param="dropTable"@h',
+     {'username': 'u', 'hostname': 'h'}],
   ];
 
   data.forEach(([uri, fields]) => {

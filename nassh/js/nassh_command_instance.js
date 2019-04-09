@@ -567,7 +567,7 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true,
   if (!ary)
     return false;
 
-  let fingerprint;
+  let params = {};
   var username = ary[1];
   var hostname = ary[2];
   var port = ary[3];
@@ -583,28 +583,44 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true,
       relayPort = ary[5];
   }
 
-  // See if the username has an embedded fingerprint.
+  const decode = (x) => decodeComponents && x ? unescape(x) : x;
+
   if (username) {
-    ary = username.match(/^(.*);fingerprint=(.+)$/);
-    if (ary) {
-      username = ary[1];
-      // Should we parse the format here?
-      fingerprint = ary[2];
-    }
+    // See if there are semi-colon delimited options following the username.
+    // Arguments should be URI encoding their values.
+    const splitParams = username.split(';');
+    username = splitParams[0];
+    splitParams.slice(1, splitParams.length).forEach((param) => {
+      // This will take the first '=' appearing from left to right and take
+      // what's on its left as the param's name and what's to its right as its
+      // value. For example, if we have '-nassh-args=--proxy-mode=foo' then
+      // '-nassh-args' will be the name of the param and
+      // '--proxy-mode=foo' will be its value.
+      const key = param.split('=', 1)[0];
+      const validKeys = new Set([
+          'fingerprint', '-nassh-args', '-nassh-ssh-args',
+      ]);
+      if (validKeys.has(key)) {
+        const value = param.substr(key.length + 1);
+        if (value) {
+          params[key.replace(/^-/, '')] = decode(value);
+        }
+      } else {
+        console.error(`${key} is not a valid parameter so it will be skipped`);
+      }
+    })
   }
 
   // We don't decode the hostname or port.  Valid values for both shouldn't
   // need it, and probably could be abused.
-  const decode = (x) => decodeComponents && x ? unescape(x) : x;
-  return {
+  return Object.assign({
     username: decode(username),
     hostname: hostname,
-    fingerprint: decode(fingerprint),
     port: port,
     relayHostname: relayHostname,
     relayPort: relayPort,
     uri: uri,
-  };
+  }, params);
 };
 
 /**

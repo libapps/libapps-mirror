@@ -473,12 +473,7 @@ version you have installed:
 
   You can create `ssh://` links that will automatically open Secure Shell.
   They take the same form as Direct links above.
-
-  `ssh://user@host[:port][@proxyhost[:proxyport]]`
-
-  This is mostly compliant with the [IANA spec](https://www.iana.org/assignments/uri-schemes/prov/ssh).
-  Future work ([user](https://crbug.com/609303) & [fingerprint](https://crbug.com/706536))
-  might bring this more into compliance.
+  See [uri.md](uri.md) in this directory for the details.
 
 *** aside
 The protocol handler is registered upon first connect.  If you want to change
