@@ -1,9 +1,0 @@
-# Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
-# Use of this source code is governed by a BSD-style license that can be
-# found in the LICENSE file.
-
-@include wam/concat/wam_fs.concat
-
-@file libdot/js/lib.js
-@file libdot/js/lib_f.js
-@file libdot/js/lib_event.js

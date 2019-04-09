@@ -31,8 +31,3 @@ of OpenSSH to provide a PuTTY-like app for Chrome users.
 
 * [ssh_client/](./ssh_client/) is the NaCl port of OpenSSH.  It is used by
 [nassh](./nassh/) to create the Secure Shell App.
-
-* [wash/](./wash/) is a library for cross-origin virtual filesystems, similar to
-the Plan 9 filesystem.  This directory also contains a simple bash-like shell
-environment for exploring these filesystems.  The code in this directory is a
-work-in-progress.
