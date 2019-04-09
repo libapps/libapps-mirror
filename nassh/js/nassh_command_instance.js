@@ -595,7 +595,7 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true,
 
   // We don't decode the hostname or port.  Valid values for both shouldn't
   // need it, and probably could be abused.
-  const decode = (x) => decodeComponents ? unescape(x) : x;
+  const decode = (x) => decodeComponents && x ? unescape(x) : x;
   return {
     username: decode(username),
     hostname: hostname,

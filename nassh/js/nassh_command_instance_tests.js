@@ -60,54 +60,64 @@ it('splitCommandLine', () => {
 /**
  * Check parsing of ssh:// URIs.
  */
-it('parseURI', () => {
+describe('parseURI', () => {
+  // A bunch of fields are undefined by default.
+  const defaultFields = {
+    'fingerprint': undefined,
+    'port': undefined,
+    'relayHostname': undefined,
+    'relayPort': undefined,
+  };
+
+  // List the fields that each test requires or deviates from the default.
   const data = [
     // Strip off the leading URI schema.
-    ['ssh://root@localhost', {'user': 'root', 'host': 'localhost'}],
+    ['ssh://root@localhost',
+     {'username': 'root', 'hostname': 'localhost', 'uri': 'root@localhost'}],
 
     // Basic forms.
-    ['root@localhost', {'user': 'root', 'host': 'localhost'}],
-    ['u@h:2222', {'user': 'u', 'host': 'h', 'port': '2222'}],
+    ['root@localhost', {'username': 'root', 'hostname': 'localhost'}],
+    ['u@h:2222', {'username': 'u', 'hostname': 'h', 'port': '2222'}],
 
     // IPv4 forms.
-    ['u@192.168.86.1', {'user': 'u', 'host': '192.168.86.1'}],
+    ['u@192.168.86.1', {'username': 'u', 'hostname': '192.168.86.1'}],
     ['u@192.168.86.124:55',
-     {'user': 'u', 'host': '192.168.86.124', 'port': '55'}],
+     {'username': 'u', 'hostname': '192.168.86.124', 'port': '55'}],
 
     // IPv6 forms.
-    ['u@[::1]', {'user': 'u', 'host': '::1'}],
-    ['u@[::1%eth0]', {'user': 'u', 'host': '::1%eth0'}],
+    ['u@[::1]', {'username': 'u', 'hostname': '::1'}],
+    ['u@[::1%eth0]', {'username': 'u', 'hostname': '::1%eth0'}],
     ['u@[fe80::863a:4bff:feda:8d60]:33',
-     {'user': 'u', 'host': 'fe80::863a:4bff:feda:8d60', 'port': '33'}],
+     {'username': 'u', 'hostname': 'fe80::863a:4bff:feda:8d60', 'port': '33'}],
 
     // Relay host extensions.
-    ['u@h@relay', {'user': 'u', 'host': 'h', 'relay': 'relay'}],
-    ['u@h@relay:2234', {'user': 'u', 'host': 'h', 'relay': 'relay',
-                        'relayPort': '2234'}],
+    ['u@h@relay', {'username': 'u', 'hostname': 'h', 'relayHostname': 'relay'}],
+    ['u@h@relay:2234',
+     {'username': 'u', 'hostname': 'h', 'relayHostname': 'relay',
+      'relayPort': '2234'}],
 
     // Accpetable escaped forms.
-    ['u%40g@h', {'user': 'u@g', 'host': 'h'}],
+    ['u%40g@h', {'username': 'u@g', 'hostname': 'h'}],
 
     // Unaccpetable escaped forms.
-    ['u@h%6eg', {'user': 'u', 'host': 'h%6eg'}],
+    ['u@h%6eg', {'username': 'u', 'hostname': 'h%6eg'}],
     ['u@h:1%302', false],
 
     // Fingerprints.
-    ['u;fingerprint=foo@h', {'user': 'u', 'host': 'h', 'fingerprint': 'foo'}],
+    ['u;fingerprint=foo@h',
+     {'username': 'u', 'hostname': 'h', 'fingerprint': 'foo'}],
   ];
 
-  let dataSet;
-  data.forEach((dataSet) => {
-    const rv = nassh.CommandInstance.parseURI(dataSet[0], true, true);
-    if (rv === false) {
-      assert.isFalse(dataSet[1], dataSet[0]);
-    } else {
-      assert.equal(dataSet[1].user, rv.username, dataSet[0]);
-      assert.equal(dataSet[1].host, rv.hostname, dataSet[0]);
-      assert.equal(dataSet[1].port, rv.port, dataSet[0]);
-      assert.equal(dataSet[1].relay, rv.relayHostname, dataSet[0]);
-      assert.equal(dataSet[1].relayPort, rv.relayPort, dataSet[0]);
-    }
+  data.forEach(([uri, fields]) => {
+    it(uri, () => {
+      const rv = nassh.CommandInstance.parseURI(uri, true, true);
+      if (rv === false) {
+        assert.isFalse(rv);
+      } else {
+        const expected = Object.assign({'uri': uri}, defaultFields, fields);
+        assert.deepStrictEqual(rv, expected);
+      }
+    });
   });
 });
 
