@@ -664,6 +664,8 @@ nassh.CommandInstance.parseDestination = function(destination) {
   }
   rv.nasshOptions = nasshOptions;
 
+  rv.nasshUserOptions = rv['nassh-ssh-args'];
+
   // If the fingerprint is set, maybe add it to the known keys list.
 
   return rv;
@@ -847,6 +849,28 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
     return;
   }
+
+  let userOptions = {};
+  try {
+    userOptions = nassh.CommandInstance.tokenizeOptions(
+        params.nasshUserOptions, params.hostname);
+  } catch (e) {
+    this.io.println(nassh.msg('NASSH_OPTIONS_ERROR', [e]));
+    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+    return;
+  }
+
+  // Merge options from the ssh:// URI that we believe are safe.
+  const safeNasshOptions = new Set([
+    '--config', '--proxy-mode', '--proxy-host', '--proxy-port',
+  ]);
+  Object.keys(userOptions).forEach((option) => {
+    if (safeNasshOptions.has(option)) {
+      options[option] = userOptions[option];
+    } else {
+      console.warning(`Warning: option ${option} not currently supported`);
+    }
+  });
 
   // If the user has requested a proxy relay, load it up.
   if (options['--proxy-mode'] == 'ssh-fe@google.com') {
