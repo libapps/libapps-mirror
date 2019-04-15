@@ -862,7 +862,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
 
   // Merge options from the ssh:// URI that we believe are safe.
   const safeNasshOptions = new Set([
-    '--config', '--proxy-mode', '--proxy-host', '--proxy-port',
+    '--config', '--proxy-mode', '--proxy-host', '--proxy-port', '--ssh-agent',
   ]);
   Object.keys(userOptions).forEach((option) => {
     if (safeNasshOptions.has(option)) {
