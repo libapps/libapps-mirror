@@ -106,43 +106,43 @@ describe('parseURI', () => {
     ['u;fingerprint=foo@h',
      {'username': 'u', 'hostname': 'h', 'fingerprint': 'foo'}],
 
-    // nassh params.
-    ['u;-nassh-args=--some-param=some-value@h',
-     {'username': 'u', 'hostname': 'h',
-      'nassh-args': '--some-param=some-value'}],
-
     // ssh params.
-    ['u;-nassh-ssh-args=--proxy-mode=some-mode@h',
+    ['u;-nassh-ssh-args=-vv%20-4@h',
      {'username': 'u', 'hostname': 'h',
-      'nassh-ssh-args': '--proxy-mode=some-mode'}],
+      'nassh-ssh-args': '-vv -4'}],
+
+    // nassh params.
+    ['u;-nassh-args=--proxy-mode=some-mode@h',
+     {'username': 'u', 'hostname': 'h',
+      'nassh-args': '--proxy-mode=some-mode'}],
 
     // Empty args.
     ['u;-nassh-ssh-args=@h', {'username': 'u', 'hostname': 'h'}],
 
     // Valid incomplete param.
-    ['u;-nassh-ssh-args=--proxy-mode=@h',
-     {'username': 'u', 'hostname': 'h', 'nassh-ssh-args': '--proxy-mode='}],
+    ['u;-nassh-args=--proxy-mode=@h',
+     {'username': 'u', 'hostname': 'h', 'nassh-args': '--proxy-mode='}],
 
     // Params combined.
-    ['u;-nassh-ssh-args=--proxy-mode=some-mode;fingerprint=foo#;' +
-     '-nassh-args="usingQuotMarks"@h',
+    ['u;-nassh-args=--proxy-mode=some-mode;fingerprint=foo#;' +
+     '-nassh-ssh-args="usingQuotMarks"@h',
      {'username': 'u', 'hostname': 'h',
-      'nassh-ssh-args': '--proxy-mode=some-mode',
-      'fingerprint': 'foo#', 'nassh-args': '"usingQuotMarks"'}],
+      'nassh-args': '--proxy-mode=some-mode',
+      'fingerprint': 'foo#', 'nassh-ssh-args': '"usingQuotMarks"'}],
 
     // Params combined with encoded chars.
-    ['u;-nassh-ssh-args=--proxy-mode=ssh-fe%40google.com;fingerprint=foo#;' +
-     '-nassh-args="using%3dEqual%3bAndSemicolon"@h',
+    ['u;-nassh-args=--proxy-mode=ssh-fe%40google.com;fingerprint=foo#;' +
+     '-nassh-ssh-args="using%3dEqual%3bAndSemicolon"@h',
      {'username': 'u', 'hostname': 'h',
-      'nassh-ssh-args': '--proxy-mode=ssh-fe@google.com',
-      'fingerprint': 'foo#', 'nassh-args': '"using=Equal;AndSemicolon"'}],
+      'nassh-args': '--proxy-mode=ssh-fe@google.com',
+      'fingerprint': 'foo#', 'nassh-ssh-args': '"using=Equal;AndSemicolon"'}],
 
     // Different order.
-    ['u;fingerprint=foo#;-nassh-args="usingQuotMarks";' +
-     '-nassh-ssh-args=--proxy-mode=some-mode@h',
+    ['u;fingerprint=foo#;-nassh-ssh-args="usingQuotMarks";' +
+     '-nassh-args=--proxy-mode=some-mode@h',
      {'username': 'u', 'hostname': 'h',
-      'nassh-ssh-args': '--proxy-mode=some-mode',
-      'fingerprint': 'foo#', 'nassh-args': '"usingQuotMarks"'}],
+      'nassh-args': '--proxy-mode=some-mode',
+      'fingerprint': 'foo#', 'nassh-ssh-args': '"usingQuotMarks"'}],
 
     // Unknown param is not added to the returning object.
     ['u;-unknown-param="dropTable"@h',

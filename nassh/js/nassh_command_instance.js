@@ -664,7 +664,8 @@ nassh.CommandInstance.parseDestination = function(destination) {
   }
   rv.nasshOptions = nasshOptions;
 
-  rv.nasshUserOptions = rv['nassh-ssh-args'];
+  rv.nasshUserOptions = rv['nassh-args'];
+  rv.nasshUserSshOptions = rv['nassh-ssh-args'];
 
   // If the fingerprint is set, maybe add it to the known keys list.
 
@@ -860,7 +861,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     return;
   }
 
-  // Merge options from the ssh:// URI that we believe are safe.
+  // Merge nassh options from the ssh:// URI that we believe are safe.
   const safeNasshOptions = new Set([
     '--config', '--proxy-mode', '--proxy-host', '--proxy-port', '--ssh-agent',
   ]);
@@ -868,9 +869,28 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     if (safeNasshOptions.has(option)) {
       options[option] = userOptions[option];
     } else {
-      console.warning(`Warning: option ${option} not currently supported`);
+      console.warn(`Option ${option} not currently supported`);
     }
   });
+
+  // Merge ssh options from the ssh:// URI that we believe are safe.
+  params.userSshArgs = [];
+  const userSshOptionsList = nassh.CommandInstance.splitCommandLine(
+      params.nasshUserSshOptions).args;
+  const safeSshOptions = new Set([
+    '-4', '-6', '-a', '-A', '-C', '-q', '-v', '-V',
+  ]);
+  userSshOptionsList.forEach((option) => {
+    if (safeSshOptions.has(option)) {
+      params.userSshArgs.push(option);
+    } else {
+      console.warn(`Option ${option} not currently supported`);
+    }
+  });
+  if (userSshOptionsList.command) {
+    console.warn(`Remote command '${userSshOptionsList.command}' not ` +
+                 `currently supported`);
+  }
 
   // If the user has requested a proxy relay, load it up.
   if (options['--proxy-mode'] == 'ssh-fe@google.com') {
@@ -998,6 +1018,7 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
   var extraArgs = nassh.CommandInstance.splitCommandLine(params.argstr);
   if (extraArgs.args)
     argv.arguments = argv.arguments.concat(extraArgs.args);
+  argv.arguments = argv.arguments.concat(params.userSshArgs);
   if (extraArgs.command)
     argv.arguments.push('--', extraArgs.command);
 

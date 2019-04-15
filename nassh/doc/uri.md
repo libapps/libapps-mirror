@@ -30,8 +30,11 @@ See [options](options.md) for more details.
 
 Format: `-nassh-args=<parameters>`
 
+The following options are always accepted without prompting the user:
+`--config` `--proxy-mode` `--proxy-host` `--proxy-port` `--ssh-agent`
+
 *** note
-This option is parsed out of the URI, but not currently used.
+All other options are parsed out but then currently ignored.
 Star https://crbug.com/217785 for updates.
 ***
 
@@ -42,8 +45,11 @@ See [ssh(1)](https://man.openbsd.org/ssh.1) for details in general.
 
 Format: `-nassh-ssh-args=<parameters>`
 
+The following options are always accepted without prompting the user:
+`-4` `-6` `-a` `-A` `-C` `-q` `-v` `-V`
+
 *** note
-This option is parsed out of the URI, but not currently used.
+All other options are parsed out but then currently ignored.
 Star https://crbug.com/217785 for updates.
 ***
 
