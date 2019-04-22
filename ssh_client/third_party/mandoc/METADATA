@@ -4,8 +4,8 @@ description: "Suite of tools to convert man pages into HTML"
 third_party {
   url {
     type: HOMEPAGE
-    value: "http://mandoc.bsd.lv/"
+    value: "https://mandoc.bsd.lv/"
   }
-  version: "1.14.3"
-  last_upgrade_date { year: 2017 month: 8 day: 5 }
+  version: "1.14.5"
+  last_upgrade_date { year: 2019 month: 3 day: 10 }
 }
