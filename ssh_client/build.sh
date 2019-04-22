@@ -33,7 +33,7 @@ mkdir -p output
 ./third_party/ldns/build
 
 ./third_party/mandoc/build
-./third_party/openssh-7.9/build
+./third_party/openssh-8.0/build
 
 BUILD_ARGS=()
 if [[ $DEBUG == 1 ]]; then
