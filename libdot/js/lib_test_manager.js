@@ -705,12 +705,18 @@ lib.TestManager.TestRun.prototype.runNextTest_ = function() {
     return;
   }
 
+  let preambleResult;
   try {
     this.log.group(test.testName);
 
     this.currentResult = new lib.TestManager.Result(this, suite, test);
     this.testManager.testPreamble(this.currentResult, this.cx);
-    suite.preamble(this.currentResult, this.cx);
+    preambleResult = new Promise((resolve) => {
+      suite.preamble(this.currentResult, this.cx, resolve);
+      if (suite.preamble.length <= 2) {
+        resolve();
+      }
+    });
 
     this.testQueue_.shift();
   } catch (ex) {
@@ -724,7 +730,7 @@ lib.TestManager.TestRun.prototype.runNextTest_ = function() {
   }
 
   try {
-    this.currentResult.run();
+    preambleResult.then(() => this.currentResult.run());
   } catch (ex) {
     // Result.run() should catch test exceptions and turn them into failures.
     // If we got here, it means there is trouble in the testing framework.
