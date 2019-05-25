@@ -39,7 +39,8 @@ CXXFLAGS ?= -g -O2 -DNDEBUG
 endif
 override WARNINGS+=-Wno-long-long -Wall -Wswitch-enum -Werror
 override CXXFLAGS+=-pthread -std=gnu++0x $(WARNINGS) -I$(TOPDIR)/include \
-        -I$(NACL_SDK_ROOT)/include -I$(NACL_SDK_ROOT)/le32-nacl/include
+        -I$(NACL_SDK_ROOT)/include -I$(NACL_SDK_ROOT)/le32-nacl/include \
+        -fno-rtti -fno-exceptions
 
 OSNAME:=$(shell python $(NACL_SDK_ROOT)/tools/getos.py)
 PNACL_TC_ROOT:=$(NACL_SDK_ROOT)/toolchain/$(OSNAME)_pnacl
