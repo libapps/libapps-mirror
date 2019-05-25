@@ -31,20 +31,6 @@ CXX_SOURCES := \
 	tcp_socket.cc \
 	udp_socket.cc
 
-CXX_HEADERS := \
-	dev_null.h \
-	dev_random.h \
-	file_interfaces.h \
-	file_system.h \
-	js_file.h \
-	pepper_file.h \
-	proxy_stream.h \
-	pthread_helpers.h \
-	ssh_plugin.h \
-	tcp_server_socket.h \
-	tcp_socket.h \
-	udp_socket.h
-
 # Project Build flags
 ifeq ($(DEBUG),1)
 CXXFLAGS ?= -g -O0 -DDEBUG
@@ -54,13 +40,10 @@ endif
 override WARNINGS+=-Wno-long-long -Wall -Wswitch-enum -Werror
 override CXXFLAGS+=-pthread -std=gnu++0x $(WARNINGS) -I$(TOPDIR)/include \
         -I$(NACL_SDK_ROOT)/include -I$(NACL_SDK_ROOT)/le32-nacl/include
-override CFLAGS+=-pthread $(WARNINGS) -I$(TOPDIR)/include -I$(NACL_SDK_ROOT)/include
 
 OSNAME:=$(shell python $(NACL_SDK_ROOT)/tools/getos.py)
 PNACL_TC_ROOT:=$(NACL_SDK_ROOT)/toolchain/$(OSNAME)_pnacl
 PNACL_CXX:=$(PNACL_TC_ROOT)/bin/pnacl-clang++
-PNACL_CC:=$(PNACL_TC_ROOT)/bin/pnacl-clang
-PNACL_AR:=$(PNACL_TC_ROOT)/bin/pnacl-ar
 PNACL_STRIP:=$(PNACL_TC_ROOT)/bin/pnacl-strip
 PNACL_FINALIZE:=$(PNACL_TC_ROOT)/bin/pnacl-finalize
 PNACL_TRANSLATE:=$(PNACL_TC_ROOT)/bin/pnacl-translate
