@@ -129,24 +129,49 @@ def parse_metadata(metadata):
     return ret
 
 
-def pnacl_env():
-    """Get custom env to build using PNaCl toolchain."""
-    env = os.environ.copy()
+class ToolchainInfo:
+    """Information about the active toolchain environment."""
 
+    def __init__(self, env):
+        """Initialize."""
+        self._env = env
+        if not env:
+            return
+        self.sysroot = self._env['SYSROOT']
+        self.libdir = os.path.join(self.sysroot, 'lib')
+        self.incdir = os.path.join(self.sysroot, 'include')
+        self.pkgconfdir = os.path.join(self.libdir, 'pkgconfig')
+        self.ar = self._env['AR']
+
+    @classmethod
+    def from_id(cls, name):
+        """Figure out what environment should be used."""
+        if name == 'pnacl':
+            return cls(_toolchain_pnacl_env())
+
+        assert name == 'build'
+        return cls({})
+
+    def activate(self):
+        """Update the current environment with this toolchain."""
+        os.environ.update(self._env)
+
+
+def _toolchain_pnacl_env():
+    """Get custom env to build using PNaCl toolchain."""
     nacl_sdk_root = os.path.join(OUTPUT, 'naclsdk')
 
     toolchain_root = os.path.join(nacl_sdk_root, 'toolchain', 'linux_pnacl')
     bin_dir = os.path.join(toolchain_root, 'bin')
     compiler_prefix = os.path.join(bin_dir, 'pnacl-')
     sysroot = os.path.join(toolchain_root, 'le32-nacl')
-    sysroot_incdir = os.path.join(sysroot, 'usr', 'include')
-    sysroot_libdir = os.path.join(sysroot, 'usr', 'lib')
+    sysroot_libdir = os.path.join(sysroot, 'lib')
     pkgconfig_dir = os.path.join(sysroot_libdir, 'pkgconfig')
 
-    env.update({
+    return {
         'NACL_ARCH': 'pnacl',
         'NACL_SDK_ROOT': nacl_sdk_root,
-        'PATH': '%s:%s' % (bin_dir, env['PATH']),
+        'PATH': '%s:%s' % (bin_dir, os.environ['PATH']),
         'CC': compiler_prefix + 'clang',
         'CXX': compiler_prefix + 'clang++',
         'AR': compiler_prefix + 'ar',
@@ -155,14 +180,10 @@ def pnacl_env():
         'PKG_CONFIG_PATH': pkgconfig_dir,
         'PKG_CONFIG_LIBDIR': sysroot_libdir,
         'SYSROOT': sysroot,
-        'SYSROOT_INCDIR': sysroot_incdir,
-        'SYSROOT_LIBDIR': sysroot_libdir,
         'CPPFLAGS': '-I%s' % (os.path.join(nacl_sdk_root, 'include'),),
         'LDFLAGS': '-L%s' % (os.path.join(nacl_sdk_root, 'lib', 'pnacl',
                                           'Release'),),
-    })
-
-    return env
+    }
 
 
 def default_src_unpack(metadata):
@@ -204,9 +225,12 @@ def default_src_install(_metadata):
     """Default src_install phase."""
 
 
-def get_parser(desc):
+def get_parser(desc, default_toolchain):
     """Get a command line parser."""
     parser = argparse.ArgumentParser(description=desc)
+    parser.add_argument('--toolchain', choices=('build', 'pnacl'),
+                        default=default_toolchain,
+                        help='Which toolchain to use (default: %(default)s).')
     parser.add_argument('-d', '--debug', action='store_true',
                         help='Run with debug output.')
     parser.add_argument('-j', '--jobs', type=int,
@@ -214,18 +238,24 @@ def get_parser(desc):
     return parser
 
 
-def build_package(module):
+def build_package(module, default_toolchain):
     """Build the package in the |module|.
 
     The file system layout is:
     output/                    OUTPUT
       build/                   BUILDDIR
-        mandoc-1.14.3/         metadata['basedir']
-          work/                metadata['workdir']
-            $p/                metadata['S']
-          temp/                metadata['T']
+        build/                 toolchain
+          mandoc-1.14.3/         metadata['basedir']
+            work/                metadata['workdir']
+              $p/                metadata['S']
+            temp/                metadata['T']
+        pnacl/                 toolchain
+          zlib-1.2.11/           metadata['basedir']
+            work/                metadata['workdir']
+              $p/                metadata['S']
+            temp/                metadata['T']
     """
-    parser = get_parser(module.__doc__)
+    parser = get_parser(module.__doc__, default_toolchain)
     opts = parser.parse_args()
     libdot.setup_logging(debug=opts.debug)
 
@@ -249,7 +279,7 @@ def build_package(module):
     })
 
     # All package-specific build state is under this directory.
-    basedir = os.path.join(BUILDDIR, metadata['p'])
+    basedir = os.path.join(BUILDDIR, opts.toolchain, metadata['p'])
     workdir = os.path.join(basedir, 'work')
     # Package-specific source directory with all the source.
     sourcedir = getattr(module, 'S', os.path.join(workdir, metadata['p']))
@@ -271,6 +301,10 @@ def build_package(module):
 
     for path in (tempdir, workdir, BUILD_BINDIR, HOME):
         os.makedirs(path, exist_ok=True)
+
+    toolchain = ToolchainInfo.from_id(opts.toolchain)
+    toolchain.activate()
+    metadata['toolchain'] = toolchain
 
     os.environ['HOME'] = HOME
     os.environ['PATH'] = '%s:%s' % (BUILD_BINDIR, os.environ['PATH'])

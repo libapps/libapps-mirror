@@ -25,9 +25,8 @@ def src_configure(_metadata):
     if os.path.exists('configure.log'):
         return
 
-    env = ssh_client.pnacl_env()
     try:
-        ssh_client.run(['./configure', '--static', '--prefix=/'], env=env)
+        ssh_client.run(['./configure', '--static', '--prefix=/'])
     except Exception:
         ssh_client.run(['cat', 'configure.log'])
         ssh_client.unlink('configure.log')
@@ -39,15 +38,14 @@ def src_compile(_metadata):
     ssh_client.emake('libz.a')
 
 
-def src_install(_metadata):
+def src_install(metadata):
     """Install the package."""
-    env = ssh_client.pnacl_env()
-
-    ssh_client.copy('libz.a', os.path.join(env['SYSROOT_LIBDIR'], 'libz.a'))
-    ssh_client.copy('zlib.pc', os.path.join(env['PKG_CONFIG_PATH'], 'zlib.pc'))
+    tc = metadata['toolchain']
+    ssh_client.copy('libz.a', os.path.join(tc.libdir, 'libz.a'))
+    ssh_client.copy('zlib.pc', os.path.join(tc.pkgconfdir, 'zlib.pc'))
     for header in ('zconf.h', 'zlib.h'):
-        target = os.path.join(env['SYSROOT_INCDIR'], header)
+        target = os.path.join(tc.incdir, header)
         ssh_client.copy(header, target)
 
 
-ssh_client.build_package(sys.modules[__name__])
+ssh_client.build_package(sys.modules[__name__], 'pnacl')

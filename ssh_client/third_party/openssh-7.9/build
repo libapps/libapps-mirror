@@ -29,7 +29,7 @@ def src_configure(metadata):
         logging.info('Makefile exists; skipping ./configure step')
         return
 
-    env = ssh_client.pnacl_env()
+    tc = metadata['toolchain']
 
     EXTRA_LIBS = ['-lcrypto']
     EXTRA_CFLAGS = [
@@ -44,7 +44,7 @@ def src_configure(metadata):
         '-DHAVE_ENDGRENT',
         '-DHAVE_FD_MASK',
         '-include', 'sys/cdefs.h',
-        '-I%s' % (os.path.join(env['SYSROOT_INCDIR'], 'glibc-compat'),),
+        '-I%s' % (os.path.join(tc.incdir, 'glibc-compat'),),
     ]
 
     EXTRA_CONFIGURE_FLAGS = [
@@ -96,7 +96,7 @@ def src_configure(metadata):
         'CFLAGS=%s' % (' '.join(EXTRA_CFLAGS),),
         'LIBS=%s' % (' '.join(EXTRA_LIBS),),
     ]
-    ssh_client.run(cmd + EXTRA_CONFIGURE_FLAGS, env=env)
+    ssh_client.run(cmd + EXTRA_CONFIGURE_FLAGS)
 
     # Build the html man pages.  Since we're hooking the Makefile, we need can
     # do this only after we've run configure.
@@ -110,7 +110,7 @@ def src_configure(metadata):
         ])
 
 
-def src_compile(_metadata):
+def src_compile(metadata):
     """Compile the source."""
     # These are the few objects we care about for our tools.
     objects = [
@@ -127,9 +127,9 @@ def src_compile(_metadata):
         'html',
     ]
 
-    env = ssh_client.pnacl_env()
-    ssh_client.emake(*targets, env=env)
-    ssh_client.run([env['AR'], 'rcs', 'libopenssh.a'] + objects)
+    tc = metadata['toolchain']
+    ssh_client.emake(*targets)
+    ssh_client.run([tc.ar, 'rcs', 'libopenssh.a'] + objects)
 
 
 def src_install(_metadata):
@@ -145,4 +145,4 @@ def src_install(_metadata):
         ssh_client.copy(path, os.path.join(plugin_docs, path))
 
 
-ssh_client.build_package(sys.modules[__name__])
+ssh_client.build_package(sys.modules[__name__], 'pnacl')

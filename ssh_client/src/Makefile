@@ -55,7 +55,7 @@ PNACL_TRANSLATE_FLAGS=-fdata-sections -ffunction-sections --gc-sections \
 PNACL_LDFLAGS:=-lppapi_cpp -lppapi -lcrypto -lppapi_cpp_private -lnacl_io -lz \
         -L$(OUTPUT) -L$(NACL_SDK_ROOT)/lib/pnacl/Release --pnacl-disable-abi-check
 
-COMPAT_INC:=-I$(PNACL_TC_ROOT)/le32-nacl/usr/include/glibc-compat
+COMPAT_INC:=-I$(PNACL_TC_ROOT)/le32-nacl/include/glibc-compat
 PNACL_CXXFLAGS:=$(CXXFLAGS) $(COMPAT_INC)
 
 # Declare the ALL target first, to make the 'all' target the default build

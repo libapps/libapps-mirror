@@ -28,16 +28,16 @@ PATCHES = (
 )
 
 
-def src_configure(_metadata):
+def src_configure(metadata):
     """Configure the source."""
     if os.path.exists('Makefile'):
         logging.info('Makefile exists; skipping ./configure step')
         return
 
-    env = ssh_client.pnacl_env()
+    tc = metadata['toolchain']
 
     EXTRA_CFLAGS = [
-        '-I%s' % (os.path.join(env['SYSROOT_INCDIR'], 'glibc-compat'),),
+        '-I%s' % (os.path.join(tc.incdir, 'glibc-compat'),),
     ]
 
     cmd = [
@@ -51,9 +51,9 @@ def src_configure(_metadata):
         '--disable-gost',
         # The ldns configure logic is quite poor and searches the filesystem
         # instead of querying the compiler.  Force it to our sysroot.
-        '--with-ssl=%s' % (env['SYSROOT'],),
+        '--with-ssl=%s' % (tc.sysroot,),
     ]
-    ssh_client.run(cmd, env=env)
+    ssh_client.run(cmd)
 
 
 def src_compile(_metadata):
@@ -62,13 +62,13 @@ def src_compile(_metadata):
     ssh_client.emake('lib')
 
 
-def src_install(_metadata):
+def src_install(metadata):
     """Install the package."""
-    env = ssh_client.pnacl_env()
+    tc = metadata['toolchain']
     # List install targets ourselves to avoid installing man pages.
     # This package has a lot (~500) and can be a little slow.
     ssh_client.emake('install-h', 'install-lib', 'install-config',
-                     'DESTDIR=%s' % (env['SYSROOT'],))
+                     'DESTDIR=%s' % (tc.sysroot,))
 
 
-ssh_client.build_package(sys.modules[__name__])
+ssh_client.build_package(sys.modules[__name__], 'pnacl')
