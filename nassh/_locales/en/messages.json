@@ -373,6 +373,10 @@
 		"description": "Label text shown for the hterm 'cursor-color' preference.",
 		"message": "Text cursor color"
 	},
+	"HTERM_NAME_PREF_CURSOR_SHAPE": {
+		"description": "Label text shown for the hterm 'cursor-shape' preference.",
+		"message": "Text cursor shape"
+	},
 	"HTERM_NAME_PREF_DESKTOP_NOTIFICATION_BELL": {
 		"description": "Label text shown for the hterm 'desktop-notification-bell' preference.",
 		"message": "Create desktop notifications for alert bells"
@@ -636,6 +640,10 @@
 	"HTERM_PREF_CURSOR_COLOR": {
 		"description": "Help text shown for the hterm 'cursor-color' preference.",
 		"message": "The color of the visible text cursor."
+	},
+	"HTERM_PREF_CURSOR_SHAPE": {
+		"description": "Help text shown for the hterm 'cursor-shape' preference.",
+		"message": "The shape of the visible text cursor. This can be toggled at runtime via terminal escape sequences."
 	},
 	"HTERM_PREF_DESKTOP_NOTIFICATION_BELL": {
 		"description": "Help text shown for the hterm 'desktop-notification-bell' preference. The true/false words may be translated. The quote style may be changed as needed.",
