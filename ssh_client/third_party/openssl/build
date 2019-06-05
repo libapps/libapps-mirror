@@ -49,16 +49,31 @@ def src_configure(metadata):
         './config',
         '--prefix=/',
         'no-asm',
+        'no-deprecated',
         'no-dso',
+        'no-ec2m',
+        'no-engine',
+        'no-gmp',
         'no-gost',
+        'no-heartbeats',
         'no-hw',
         'no-krb5',
+        'no-rfc3779',
+        'no-sctp',
+        'no-srp',
+        'no-sse2',
+        'no-ssl2',
+        'no-ssl3',
+        'no-syslog',
+        'no-threads',
+        'no-unit-test',
         '-fgnu-inline-asm',
         '-D_GNU_SOURCE',
         '-DNO_SYSLOG',
         '-I%s' % (os.path.join(env['SYSROOT_INCDIR'], 'glibc-compat'),),
     ]
     ssh_client.run(cmd, env=env)
+    ssh_client.emake('depend', 'DIRS=crypto ssl', env=env)
 
 
 def src_compile(_metadata):
