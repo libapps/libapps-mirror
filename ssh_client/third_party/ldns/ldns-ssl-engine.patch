@@ -1,0 +1,36 @@
+From e342a344c87c4f60c731654d9899e9422ba96dd3 Mon Sep 17 00:00:00 2001
+From: Rosen Penev <rosenp@gmail.com>
+Date: Sat, 5 Jan 2019 21:05:55 -0800
+Subject: [PATCH] Make OpenSSL ENGINE support optional
+
+---
+ keys.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/keys.c b/keys.c
+index bb7bd6cd7cae..2a8593dfb809 100644
+--- a/keys.c
++++ b/keys.c
+@@ -16,8 +16,10 @@
+ 
+ #ifdef HAVE_SSL
+ #include <openssl/ssl.h>
+-#include <openssl/engine.h>
+ #include <openssl/rand.h>
++#ifndef OPENSSL_NO_ENGINE
++#include <openssl/engine.h>
++#endif
+ #endif /* HAVE_SSL */
+ 
+ ldns_lookup_table ldns_signing_algorithms[] = {
+@@ -99,7 +101,7 @@ ldns_key_new_frm_fp(ldns_key **k, FILE *fp)
+ 	return ldns_key_new_frm_fp_l(k, fp, NULL);
+ }
+ 
+-#ifdef HAVE_SSL
++#if defined(HAVE_SSL) && !defined(OPENSSL_NO_ENGINE)
+ ldns_status
+ ldns_key_new_frm_engine(ldns_key **key, ENGINE *e, char *key_id, ldns_algorithm alg)
+ {
+-- 
+2.19.1
