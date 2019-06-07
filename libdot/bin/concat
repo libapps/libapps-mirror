@@ -165,7 +165,21 @@ def append_resource(name, mime, resource, header_files):
             data = f.read()
 
         if 'base64' in mime.split(';'):
-            data = base64.b64encode(data).decode('utf-8')
+            data = base64.b64encode(data)
+
+        # Since we're going to be appending the content directly to the output
+        # below, we need to make sure it's a string.  If the input is not in a
+        # compatible format (e.g. binary), then we won't be able to append it
+        # to the output directly anyways (and why we have base64 support).
+        data = data.decode('utf-8')
+
+        # For text formats, escape characters that the textwrap module will
+        # consume on us.  This preserves the content when we output it.
+        if mime == 'text/plain':
+            # Escape \ first since JS handles that itself.
+            data = data.replace('\\', '\\\\')
+            for codepoint in range(9, 14):
+                data = data.replace(chr(codepoint), r'\x%02x' % codepoint)
 
     elif mode == 'date':
         # Resource is a date/time stamp.
