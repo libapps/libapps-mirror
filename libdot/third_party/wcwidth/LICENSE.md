@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 Copyright (C) 2012-2014 by Jun Woong and Tim Oxley.
 
 This package is a javascript porting of `wcwidth()` implementation
-[by Markus Kuhn](http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c).
+[by Markus Kuhn](https://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c).
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in

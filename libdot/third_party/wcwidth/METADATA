@@ -8,7 +8,7 @@ third_party {
   }
   url {
     type: HOMEPAGE
-    value: "http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c"
+    value: "https://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c"
   }
   url {
     type: GIT

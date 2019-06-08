@@ -13,7 +13,7 @@ In update mode, we'll update lib_wc.js directly.  Useful for lazy devs.
 
 You'll need to provide the relevant Unicode database files.
 The latest version can be found here:
-http://www.unicode.org/Public/UNIDATA/UCD.zip
+https://www.unicode.org/Public/UNIDATA/UCD.zip
 """
 
 from __future__ import print_function
@@ -55,12 +55,12 @@ def load_unicode_data():
     """Return codepoints based on their General Category.
 
     See these docs for details on the UnicodeData.txt format.
-    http://unicode.org/reports/tr44/#UnicodeData.txt
-    http://unicode.org/reports/tr44/#General_Category_Values
+    https://unicode.org/reports/tr44/#UnicodeData.txt
+    https://unicode.org/reports/tr44/#General_Category_Values
     """
     db = {
         'Cc': set(),
-        # Format Character: http://unicode.org/glossary/#format_character
+        # Format Character: https://unicode.org/glossary/#format_character
         'Cf': set(),
         'Co': set(),
         'Cs': set(),
@@ -70,9 +70,9 @@ def load_unicode_data():
         'Lt': set(),
         'Lu': set(),
         'Mc': set(),
-        # Enclosing Mark: http://unicode.org/glossary/#enclosing_mark
+        # Enclosing Mark: https://unicode.org/glossary/#enclosing_mark
         'Me': set(),
-        # Nonspacing Mark: http://unicode.org/glossary/#nonspacing_mark
+        # Nonspacing Mark: https://unicode.org/glossary/#nonspacing_mark
         'Mn': set(),
         'Nd': set(),
         'Nl': set(),
@@ -116,8 +116,8 @@ def load_east_asian():
     """Return codepoints based on their east asian width.
 
     See these docs for details on the EastAsianWidth.txt format.
-    http://unicode.org/reports/tr44/#EastAsianWidth.txt
-    http://www.unicode.org/reports/tr11/
+    https://unicode.org/reports/tr44/#EastAsianWidth.txt
+    https://www.unicode.org/reports/tr11/
     """
     db = {
         'A': set(),  # Ambiguous.
@@ -279,7 +279,7 @@ def gen_combining(db, prob_db):
     # https://github.com/jquast/wcwidth/issues/8
 
     # Remove Arabic Signs Spanning Numbers (0600-0605).
-    # http://www.unicode.org/versions/Unicode10.0.0/ch09.pdf
+    # https://www.unicode.org/versions/Unicode10.0.0/ch09.pdf
     # Unicode 10.0.0 chapter 9 section 2 page 377 states:
     # Signs Spanning Numbers. Several other special signs are written in
     # association with numbers in the Arabic script. All of these signs can

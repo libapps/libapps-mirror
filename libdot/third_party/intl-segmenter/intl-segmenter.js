@@ -18,7 +18,7 @@
 
   const GRANULARITIES = ['grapheme', 'word','sentence', 'line'];
 
-  // TODO: Implement http://www.unicode.org/reports/tr29/
+  // TODO: Implement https://www.unicode.org/reports/tr29/
   const RULES = {
     grapheme: {
       grapheme: /^(.|\n)/
