@@ -104,7 +104,7 @@ def echo_results(output_to, data, header_files):
             os.remove(output_to)
         except OSError:
             pass
-        with open(output_to, 'w') as f:
+        with open(output_to, 'w', encoding='utf-8') as f:
             f.write(data)
 
 
@@ -202,7 +202,7 @@ def append_resource(name, mime, resource, header_files):
 
         # The first line of a changelog should look like:
         # # 0.8.44.1, 2018-06-22, Extension startup fix.
-        with open(path) as f:
+        with open(path, encoding='utf-8') as f:
             line = f.readline()
         line = line.lstrip('#')
 
@@ -254,7 +254,7 @@ def process_concat_line(line, seen_files, header_files):
         header_files.append(arg)
 
         ret += '// SOURCE FILE: %s\n' % (arg,)
-        with open(path) as f:
+        with open(path, encoding='utf-8') as f:
             lines = f.readlines()
 
             # Strip out the 'use strict' directive as we add it ourselves and
@@ -289,7 +289,7 @@ def process_concat_file(path, seen_files, header_files):
 
     ret = ''
 
-    with open(path) as f:
+    with open(path, encoding='utf-8') as f:
         lines = f.readlines()
         i = 0
         while i < len(lines):
