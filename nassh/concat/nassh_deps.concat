@@ -11,5 +11,5 @@
 @file libdot/js/lib_fs.js
 @file libdot/third_party/punycode/lib_punycode.js
 
-@resource nassh/release/lastver text/plain $ head -1 release-highlights.txt
-@resource nassh/release/highlights text/plain $ grep ^% release-highlights.txt
+@resource nassh/release/lastver text/plain head -1 release-highlights.txt
+@resource nassh/release/highlights text/plain grep ^% release-highlights.txt
