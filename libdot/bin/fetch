@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Simpler helper to download files."""
+
+from __future__ import print_function
+
+import argparse
+import os
+import sys
+
+import libdot
+
+
+def get_parser():
+    """Get a command line parser."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('-d', '--debug', action='store_true',
+                        help='Run with debug output.')
+    parser.add_argument('-o', '--output', type=str,
+                        help='Alternative path to save to.')
+    parser.add_argument('args', nargs='+',
+                        help='URIs or files to download.')
+    return parser
+
+
+def main(argv):
+    """The main func!"""
+    parser = get_parser()
+    opts = parser.parse_args(argv)
+    libdot.setup_logging(debug=opts.debug)
+
+    for uri in opts.args:
+        output = opts.output
+        if not output:
+            output = os.path.basename(uri)
+        libdot.fetch(uri, output)
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))

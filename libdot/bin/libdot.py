@@ -15,6 +15,7 @@ import os
 import subprocess
 import sys
 import time
+import urllib.request
 
 
 BIN_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -90,3 +91,44 @@ def html_test_runner_main(argv, path):
     logging.info('Running tests against browser "%s".', browser)
     logging.info('Tests page: %s', path)
     subprocess.Popen([browser, '--user-data-dir=%s' % (profile_dir,), path])
+
+
+def fetch(uri, output):
+    """Download |uri| and save it to |output|."""
+    output = os.path.abspath(output)
+    distdir, name = os.path.split(output)
+    if os.path.exists(output):
+        logging.info('Using existing download: %s', name)
+        return
+
+    logging.info('Downloading %s to %s', uri, output)
+    os.makedirs(distdir, exist_ok=True)
+
+    # Don't be verbose if running on CI systems.
+    verbose = os.isatty(sys.stdout.fileno())
+
+    # We use urllib rather than wget or curl to avoid external utils & libs.
+    # This seems to be good enough for our needs.
+    tmpfile = output + '.tmp'
+    with open(tmpfile, 'wb') as outfp:
+        with urllib.request.urlopen(uri) as infp:
+            mb = 0
+            length = infp.length
+            while True:
+                data = infp.read(1024 * 1024)
+                if not data:
+                    break
+                # Show a simple progress bar if the user is interactive.
+                if verbose:
+                    mb += 1
+                    print('~%i MiB downloaded' % (mb,), end='')
+                    if length:
+                        print(' (%.2f%%)' % (mb * 1024 * 1024 * 100 / length,),
+                              end='')
+                    print('\r', end='', flush=True)
+                outfp.write(data)
+    # Clear the progress bar.
+    if verbose:
+        print(' ' * 80, end='\r')
+
+    os.rename(tmpfile, output)

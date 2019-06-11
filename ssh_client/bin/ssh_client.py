@@ -118,21 +118,7 @@ def fetch(uri=None, name=None):
     if name is None:
         name = os.path.basename(uri)
 
-    distfile = os.path.join(DISTDIR, name)
-    if os.path.exists(distfile):
-        logging.info('Using existing download: %s', name)
-        return
-
-    logging.info('Downloading %s to %s', uri, distfile)
-    os.makedirs(DISTDIR, exist_ok=True)
-
-    tmpfile = distfile + '.tmp'
-    try:
-        run(['wget', uri, '-O', tmpfile], cwd=DISTDIR)
-    except SystemExit:
-        unlink(tmpfile)
-        raise
-    os.rename(tmpfile, distfile)
+    libdot.fetch(uri, os.path.join(DISTDIR, name))
 
 
 def stamp_name(workdir, phase, unique):

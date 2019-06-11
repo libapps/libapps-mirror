@@ -49,7 +49,7 @@ update_node_modules() {
     echo_err "Downloading ${tar}"
     pushd "${LIBAPPS_DIR}" >/dev/null
     rm -rf "${NODE_MODULES_DIR}"
-    wget -c "${NODE_MODULES_BASE_URI}/${tar}" || exit
+    fetch "${NODE_MODULES_BASE_URI}/${tar}" || exit
     tar xf "${tar}" || exit
     rm -rf "${tar}"
     echo "${NODE_MODULES_HASH}" >"${hash_file}"
@@ -73,7 +73,7 @@ update_node() {
     mkdir -p "${NODE_BIN_DIR}" "${NODE_DIR}"
     pushd "${NODE_DIR}" >/dev/null
     echo_err "Downloading npm/node"
-    wget -c "${NODE_BASE_URI}/${NODE_VER}/${hash}" || exit
+    fetch "${NODE_BASE_URI}/${NODE_VER}/${hash}" || exit
     tar xf "${hash}" || exit
     rm "${hash}"
     local node=$(echo */bin/node)
