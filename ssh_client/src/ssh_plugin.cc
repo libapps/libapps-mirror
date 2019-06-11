@@ -265,7 +265,7 @@ void SshPluginInstance::SessionThreadImpl() {
 
   LOG("ssh main args:\n");
   for (size_t i = 0; i < argv.size(); i++)
-    LOG("  argv[%d] = %s\n", i, argv[i]);
+    LOG("  argv[%d] = %s\n", i, argv[i].c_str());
 
   std::vector<const char *> cargv;
   for (auto it = argv.begin(); it != argv.end(); ++it)
