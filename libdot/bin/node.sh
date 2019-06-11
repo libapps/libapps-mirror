@@ -10,13 +10,11 @@ NODE_MODULES_HASH='15fa35331d956ff954e6500c5080c2322912d90df182d08cbced24a3e19ce
 # In sync with Chromium's DEPS file because it's easier to use something that
 # already exists than maintain our own.  Look for 'node_linux64' here:
 # https://chromium.googlesource.com/chromium/src/+/master/DEPS
-NODE_VER='8.9.1'
+NODE_VER='10.15.3'
 
-# To update these hashes:
-# curl -s https://chromium.googlesource.com/chromium/src/+/master/third_party/node/linux/node-linux-x64.tar.gz.sha1?format=TEXT | base64 -d
-# curl -s https://chromium.googlesource.com/chromium/src/+/master/third_party/node/mac/node-darwin-x64.tar.gz.sha1?format=TEXT | base64 -d
-NODE_LINUX_HASH='1bdce2f7303ac1db18166035a0c4035134d46bbc'
-NODE_MAC_HASH='c52ee3605efb50ae391bdbe547fb385f39c5a7a9'
+# Run `./node_sync_with_chromium` to update these hashes.
+NODE_LINUX_HASH='3f578b6dec3fdddde88a9e889d9dd5d660c26db9'
+NODE_MAC_HASH='37d5bb727fa6f3f29a8981962903d0a2371a3f2d'
 
 # Bucket maintained by Chromium.
 # gsutil ls gs://chromium-nodejs/

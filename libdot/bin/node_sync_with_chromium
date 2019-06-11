@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Update our pinned copy of node to match Chromium."""
+
+from __future__ import print_function
+
+import argparse
+import base64
+import logging
+import os
+import re
+import sys
+import urllib.request
+
+import libdot
+
+
+# Where in Chromium's tree they maintain their hashes.
+URI_BASE = ('https://chromium.googlesource.com/chromium/src/+/master/'
+            'third_party/node')
+URI_LIN = os.path.join(URI_BASE, 'linux/node-linux-x64.tar.gz.sha1')
+URI_MAC = os.path.join(URI_BASE, 'mac/node-darwin-x64.tar.gz.sha1')
+URI_WIN = os.path.join(URI_BASE, 'win/node.exe.sha1')
+
+# File which records the node hashes.
+HASH_FILE = os.path.join(libdot.BIN_DIR, 'node.sh')
+
+
+def update(uri, var):
+    """Update |var| in our tree with the hash data from |uri|."""
+    new_hash = fetch_data(uri)
+    logging.info('Updating %s with hash %s', var, new_hash)
+
+    # Read the current file.
+    with open(HASH_FILE, 'r', encoding='utf-8') as fp:
+        lines = fp.readlines()
+
+    # Try to update the variable in the file.
+    matcher = re.compile(r"%s='(.*)'" % (var,))
+    for i, line in enumerate(lines):
+        match = matcher.match(line)
+        if match:
+            old_hash = match.group(1)
+            if new_hash != old_hash:
+                logging.info('  Old hash was %s', old_hash)
+                lines[i] = "%s='%s'\n" % (var, new_hash)
+                break
+            else:
+                logging.info('  Hash up-to-date already')
+                return
+    else:
+        logging.error('Unable to locate %s setting in %s', var, HASH_FILE)
+        sys.exit(1)
+
+    # Write out the new file content.
+    with open(HASH_FILE, 'w', encoding='utf-8') as fp:
+        fp.writelines(lines)
+
+
+def fetch_data(uri):
+    """Read the gitiles base64 encoded data from |uri|."""
+    with urllib.request.urlopen(uri + '?format=TEXT') as fp:
+        b64data = fp.read()
+        data = base64.b64decode(b64data)
+        return data.decode('utf-8').strip()
+
+
+def get_parser():
+    """Get a command line parser."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('-d', '--debug', action='store_true',
+                        help='Run with debug output.')
+    return parser
+
+
+def main(argv):
+    """The main func!"""
+    parser = get_parser()
+    opts = parser.parse_args(argv)
+    libdot.setup_logging(debug=opts.debug)
+
+    update(URI_LIN, 'NODE_LINUX_HASH')
+    update(URI_MAC, 'NODE_MAC_HASH')
+    # We don't support Windows yet.
+    #update(URI_WIN, 'NODE_WIN_HASH')
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))
