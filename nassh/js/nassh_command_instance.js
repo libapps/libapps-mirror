@@ -1536,6 +1536,13 @@ nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
   }
 
   stream.asyncWrite(data, (writeCount) => {
+    if (!stream.open) {
+      // If the stream was closed before we got a chance to ack, then skip it.
+      // We don't want to update the state of the plugin in case it re-opens
+      // the same fd and we end up acking to a new fd.
+      return;
+    }
+
     this.sendToPlugin_('onWriteAcknowledge', [fd, writeCount]);
   });
 };
