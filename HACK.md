@@ -60,7 +60,7 @@ $ clang-format -i -style=file foo.js
 You can use [eslint](https://eslint.org/) to quickly check code, or
 [closure compiler](https://developers.google.com/closure/compiler/).
 
-The [bin/lint.sh](./libdot/bin/lint.sh) helper script will run both for you.
+The [bin/lint](./libdot/bin/lint) helper script will run both for you.
 
 The [.eslintrc.js](./.eslintrc.js) is copied from the
 [Chromium project](https://chromium.googlesource.com/chromium/src/+/master/.eslintrc.js).
