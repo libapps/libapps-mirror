@@ -68,7 +68,7 @@ def html_test_runner_main(argv, path):
     setup_logging(debug=opts.debug)
 
     # Try to use default X session.
-    os.environ.setdefault('DISPLAY', '0:0')
+    os.environ.setdefault('DISPLAY', ':0')
 
     # Set up a unique profile to avoid colliding with user settings.
     profile_dir = opts.profile
