@@ -1,10 +1,26 @@
-#!/bin/bash
-# Copyright 2018 The Chromium OS Authors. All rights reserved.
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-LIBDOT_DIR="$(dirname -- "$0")/../../libdot"
-source "${LIBDOT_DIR}/bin/common.sh"
+"""Run npm with the right settings."""
 
-# The common.sh script makes sure our copy is first in the $PATH.
-exec npm "$@"
+from __future__ import print_function
+
+import os
+import sys
+
+import libdot
+
+
+def main(argv):
+    """The main func!"""
+    libdot.setup_logging()
+    libdot.node_and_npm_setup()
+    # We know our tools are first in $PATH now.
+    os.execvp('npm', ['npm'] + argv)
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))

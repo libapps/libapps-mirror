@@ -146,10 +146,10 @@ Our dependencies are maintained in the top level [package.json](./package.json).
 
 The tarball can be created with the libdot/bin/node_modules_create_bundle script
 and then uploaded to the gs://chromeos-localmirror/secureshell/distfiles/ site.
-Then update the NODE_MODULES_HASH setting in libdot/bin/node.sh.
+Then update the NODE_MODULES_HASH setting in libdot/bin/libdot.py.
 
 For example, to update it, run the script and follow its directions.
-You'll want to create & upload a new gerrit commit for the node.sh file too.
+You'll want to create & upload a new gerrit commit for the libdot.py file too.
 ```sh
 # Create the bundle.  This will also prune & upgrade modules.
 $ ./libdot/bin/node_modules_create_bundle
@@ -161,7 +161,7 @@ $ ./libdot/bin/node_modules_create_bundle
 -*- Compressing tarball
 7.4M    node_modules-bef2e594c44731d96ba28d0ce1df789a4611b5bbae70666cbef13f069155a44b.tar.xz
 -*- To update the hash, run:
-sed -i "/^NODE_MODULES_HASH=/s:=.*:='bef2e594c44731d96ba28d0ce1df789a4611b5bbae70666cbef13f069155a44b':" './libdot/bin/node.sh'
+sed -i "/^NODE_MODULES_HASH=/s:=.*:='bef2e594c44731d96ba28d0ce1df789a4611b5bbae70666cbef13f069155a44b':" './libdot/bin/libdot.py'
 -*- To upload the new modules:
 gsutil cp -a public-read node_modules-bef2e594c44731d96ba28d0ce1df789a4611b5bbae70666cbef13f069155a44b.tar.xz gs://chromeos-localmirror/secureshell/distfiles/
 ```

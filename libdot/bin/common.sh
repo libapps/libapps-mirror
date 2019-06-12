@@ -78,8 +78,3 @@ set_manifest_key_value() {
     -c 'import json, sys; d = json.load(open(sys.argv[1])); d[sys.argv[2]] = sys.argv[3]; json.dump(d, open(sys.argv[1], "w"), indent=2);' \
     "${file}" "${key}" "${value}"
 }
-
-# TODO: Remove this $PN hack once we have a better solution for crosh.
-if [[ "${PN}" != "crosh"* ]]; then
-  source "${LIBDOT_BIN_DIR}/node.sh"
-fi
