@@ -14,7 +14,6 @@ import multiprocessing
 import os
 import re
 import shutil
-import subprocess
 import sys
 
 
@@ -55,26 +54,11 @@ SRC_URI_MIRROR = ('https://commondatastorage.googleapis.com/'
 JOBS = multiprocessing.cpu_count()
 
 
-def touch(path):
-    """Touch (and truncate) |path|."""
-    open(path, 'w').close()
-
-
-def unlink(path):
-    """Remove |path| and ignore errors if it doesn't exist."""
-    try:
-        os.unlink(path)
-    except FileNotFoundError:
-        pass
-
-
-def symlink(target, path):
-    """Always symlink |path| to a relativized |target|."""
-    unlink(path)
-    path = os.path.realpath(path)
-    target = os.path.relpath(os.path.realpath(target), os.path.dirname(path))
-    logging.info('Symlinking %s -> %s', os.path.relpath(path, OUTPUT), target)
-    os.symlink(target, path)
+# Help simplify the API for users of ssh_client.py.
+run = libdot.run
+symlink = libdot.symlink
+touch = libdot.touch
+unlink = libdot.unlink
 
 
 def copy(source, dest):
@@ -82,27 +66,6 @@ def copy(source, dest):
     logging.info('Copying %s -> %s', source, dest)
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     shutil.copy(source, dest)
-
-
-def cmdstr(cmd):
-    """Return a string for the |cmd| list w/reasonable quoting."""
-    quoted = []
-    for arg in cmd:
-        if ' ' in arg:
-            arg = '"%s"' % (arg,)
-        quoted.append(arg)
-    return ' '.join(quoted)
-
-
-def run(cmd, check=True, cwd=None, **kwargs):
-    """Run |cmd| inside of |cwd| and exit if it fails."""
-    if cwd is None:
-        cwd = os.getcwd()
-    logging.info('Running: %s\n  (cwd = %s)', cmdstr(cmd), cwd)
-    result = subprocess.run(cmd, cwd=cwd, **kwargs)
-    if check and result.returncode:
-        logging.error('Running %s failed!', cmd[0])
-        sys.exit(result.returncode)
 
 
 def emake(*args, **kwargs):
@@ -140,16 +103,13 @@ def stamp_name(workdir, phase, unique):
 
 def unpack(archive, cwd=None, workdir=None):
     """Unpack |archive| into |cwd|."""
-    if cwd is None:
-        cwd = os.getcwd()
     distfile = os.path.join(DISTDIR, archive)
 
     stamp = stamp_name(workdir, 'unpack', os.path.basename(archive))
     if workdir and os.path.exists(stamp):
         logging.info('Archive already unpacked: %s', archive)
     else:
-        logging.info('Unpacking %s', archive)
-        run(['tar', 'xf', distfile], cwd=workdir or cwd)
+        libdot.unpack(distfile, cwd=workdir or cwd)
         touch(stamp)
 
 

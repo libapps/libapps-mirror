@@ -93,6 +93,57 @@ def html_test_runner_main(argv, path):
     subprocess.Popen([browser, '--user-data-dir=%s' % (profile_dir,), path])
 
 
+def touch(path):
+    """Touch (and truncate) |path|."""
+    open(path, 'w').close()
+
+
+def unlink(path):
+    """Remove |path| and ignore errors if it doesn't exist."""
+    try:
+        os.unlink(path)
+    except FileNotFoundError:
+        pass
+
+
+def symlink(target, path):
+    """Always symlink |path| to a relativized |target|."""
+    unlink(path)
+    path = os.path.realpath(path)
+    target = os.path.relpath(os.path.realpath(target), os.path.dirname(path))
+    logging.info('Symlinking %s -> %s', path, target)
+    os.symlink(target, path)
+
+
+def cmdstr(cmd):
+    """Return a string for the |cmd| list w/reasonable quoting."""
+    quoted = []
+    for arg in cmd:
+        if ' ' in arg:
+            arg = '"%s"' % (arg,)
+        quoted.append(arg)
+    return ' '.join(quoted)
+
+
+def run(cmd, check=True, cwd=None, **kwargs):
+    """Run |cmd| inside of |cwd| and exit if it fails."""
+    if cwd is None:
+        cwd = os.getcwd()
+    logging.info('Running: %s\n  (cwd = %s)', cmdstr(cmd), cwd)
+    result = subprocess.run(cmd, cwd=cwd, **kwargs)
+    if check and result.returncode:
+        logging.error('Running %s failed!', cmd[0])
+        sys.exit(result.returncode)
+
+
+def unpack(archive, cwd=None):
+    """Unpack |archive| into |cwd|."""
+    if cwd is None:
+        cwd = os.getcwd()
+    logging.info('Unpacking %s', os.path.basename(archive))
+    run(['tar', '-xf', archive], cwd=cwd)
+
+
 def fetch(uri, output):
     """Download |uri| and save it to |output|."""
     output = os.path.abspath(output)
