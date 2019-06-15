@@ -20,6 +20,10 @@ import time
 import urllib.request
 
 
+# Require recent Python 3 versions as a sanity check.
+assert (sys.version_info.major, sys.version_info.minor) >= (3, 5), (
+    'Python 3.5 or newer is required')
+
 BIN_DIR = os.path.dirname(os.path.realpath(__file__))
 DIR = os.path.dirname(BIN_DIR)
 LIBAPPS_DIR = os.path.dirname(DIR)
