@@ -1,3 +1,49 @@
+# 2.0.0, 2019-06-17, Significant API overhaul.
+
+* load_tests: use DISPLAY=:0.
+* lint: Rewrite helper in python.
+* node/npm: Rewrite helpers in python.
+* libdot.py: Hoist python helpers out of ssh_client.
+* Update node to 10.15.3 & add update helper script.
+* Add a python download helper.
+* load_tests: Convert to python.
+* concat: Replace arbitrary shell scripts with explicit commands.
+* Start proper package.json packaging for npm.
+* tests: Get them working under node.
+* concat: Explicitly set file encoding to UTF-8.
+* test_manager: Punt unused framework (for mocha).
+* concat: Improve plain text resources.
+* wcwidth: Update to Unicode 12.1.0 release.
+* Update http:// to https:// URIs everywhere.
+* tests: drop --allow-file-access-from-files.
+* Add polyfill for Intl.Segmenter for breaking up Unicode graphemes.
+* test: Support async preambles.
+* Drop lib.f.Sequence APIs.
+* test: Rework to catch early errors.
+* fs: Convert lib.fs.readDirectory to Promises.
+* array: Drop unused custom uint32 helpers.
+* Drop lib.f.parseQuery for URLSearchParams.
+* minify-translations: Sanity check placeholders.
+* concat: Preserve whitespace in lines.
+* tests: Drop setDefaults usage.
+* mkzip: Also include css from third_party.
+* Convert test suite to mocha.
+* tests: Call chai asserts directly.
+* Improve lib.f.openWindow tests.
+* tests: Switch core to chai for asserts.
+* npm: Add more test/dev packages (chai/mocha/jsdom).
+* tests: Fix assert identity tests.
+* colors: Clean up crackRGB return.
+* Drop lib.f.alarm APIs.
+* Drop lib.rtdep APIs.
+* Drop lib.utf8 legacy APIs for Text{De,En}coder.
+* tests: Allow tests to be selected via the URI.
+* tests: Allow pass to not throw.
+* Switch to ES6 Symbol.
+* Import Text{De,En}coder polyfills.
+* codec: Add performance notes wrt String.fromCharCode.apply.
+* Add utf8 decoder tests.
+
 # 1.26, 2019-01-19, openWindow & new codec helpers.
 
 * test: Support comparing ArrayBuffer.
