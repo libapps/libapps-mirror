@@ -1,3 +1,27 @@
+# 0.18, 2019-06-17, OpenSSH 8.0p1 & Unicode improvements.
+
+* Update to hterm 1.85.  Significant Unicode improvements.
+* Update to libdot 2.0.0.  Significant API overhaul.
+* ssh_client: Hoist python helpers out to libdot.
+* lint: Rewrite helper in python.
+* streams: Workaround fd reopen ack race.
+* load_tests: Convert to python.
+* concat: Replace arbitrary shell scripts with explicit commands.
+* ssh_client: openssl: Disable more unused features.
+* tests: Drop --allow-file-access-from-files.
+* ssh_client: ldns: Roll in some patches.
+* ssh_client: Disable C++ exceptions & rtti.
+* ssh_client: Drop unused build settings.
+* uri: Fix nassh-args that where being parsed as nassh-ssh-args and vice-versa.
+* ssh_client: openssh: update to 8.0p1.
+* ssh_client: mandoc: update to 1.14.5.
+* uri: Add ssh-agent as a valid option for -nash-ssh-args.
+* uri: Use proxy-mode for conection if specified on the ssh arguments.
+* uri: Add support for parsing ssh arguments in ssh:// URIs.
+* uri: Fix fingerprint decoding in URIs.
+* test: Rework to catch early errors.
+* connect: Convert lib.fs.readDirectory to Promises.
+
 # 0.17, 2019-03-26, Minor polish.
 
 * hterm: Pull in multi-screen copy fix.
