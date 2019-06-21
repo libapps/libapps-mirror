@@ -16,8 +16,16 @@ import libdot
 
 def main(argv):
     """The main func!"""
+    # Add libdot to search path so pylint can find it.  Any subproject that
+    # uses us will make sure it's in the search path too.
+    env = os.environ.copy()
+    path = env.get('PYTHONPATH', '')
+    if path:
+        path = ':%s' % (path,)
+    env['PYTHONPATH'] = '%s%s' % (libdot.BIN_DIR, path)
+
     pylintrc = os.path.join(libdot.LIBAPPS_DIR, '.pylintrc')
-    os.execvp('pylint3', ['pylint3', '--rcfile', pylintrc] + argv)
+    os.execvpe('pylint3', ['pylint3', '--rcfile', pylintrc] + argv, env)
 
 
 if __name__ == '__main__':
