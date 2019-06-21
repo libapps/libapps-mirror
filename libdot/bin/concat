@@ -353,6 +353,22 @@ def process_concat_file(path, seen_files, header_files):
     return ret
 
 
+def concat(input_file, output_file):
+    """Process the concat |input_file| and write the result to |output_file|."""
+    logging.info('Creating %s', output_file)
+
+    # List of files we've included in the output to be included in the header of
+    # the output.  These paths should be as specified in the concat source list
+    # so they're short and relative to the LIBDOT_SEARCH_PATH.
+    header_files = []
+
+    # Files that we've seen but don't want to process more than once.
+    seen_files = set()
+
+    data = process_concat_file(input_file, seen_files, header_files)
+    echo_results(output_file, data, header_files)
+
+
 def get_parser():
     """Get a command line parser."""
     parser = argparse.ArgumentParser(
@@ -375,19 +391,7 @@ def main(argv):
 
     input_from = os.path.abspath(opts.input_from)
     output_to = os.path.abspath(opts.output)
-
-    logging.info('Creating %s', output_to)
-
-    # List of files we've included in the output to be included in the header of
-    # the output.  These paths should be as specified in the concat source list
-    # so they're short and relative to the LIBDOT_SEARCH_PATH.
-    header_files = []
-
-    # Files that we've seen but don't want to process more than once.
-    seen_files = set()
-
-    data = process_concat_file(input_from, seen_files, header_files)
-    echo_results(output_to, data, header_files)
+    concat(input_from, output_to)
 
 
 if __name__ == '__main__':
