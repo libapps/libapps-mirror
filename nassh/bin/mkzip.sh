@@ -8,7 +8,7 @@ LIBDOT_DIR="$(dirname -- "$0")/../../libdot"
 
 cd "${BIN_DIR}/.."
 
-"${BIN_DIR}"/mkdeps.sh
+"${BIN_DIR}"/mkdeps
 
 mkdir -p ./dist/zip
 

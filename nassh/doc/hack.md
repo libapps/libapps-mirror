@@ -34,7 +34,7 @@ The Secure Shell app depends on some library code from
 [libapps/libdot/](/libdot/) and the hterm terminal emulator from in
 [libapps/hterm/](/hterm/).  To build these external dependencies, run...
 
-    nassh$ ./bin/mkdeps.sh
+    nassh$ ./bin/mkdeps
 
 This will create the `nassh/js/nassh_deps.concat.js` file containing all of the
 necessary libdot and hterm source.  If you find yourself changing a lot of

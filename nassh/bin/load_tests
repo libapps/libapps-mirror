@@ -8,11 +8,12 @@
 from __future__ import print_function
 
 import os
-import subprocess
 import sys
 
 import nassh
 import libdot
+
+import mkdeps
 
 
 # Path to our html test page.
@@ -21,7 +22,7 @@ TEST_PAGE = os.path.join(nassh.DIR, 'html', 'nassh_test.html')
 
 def main(argv):
     """The main func!"""
-    subprocess.check_call([os.path.join(nassh.BIN_DIR, 'mkdeps.sh')])
+    mkdeps.mkdeps()
     return libdot.html_test_runner_main(argv, 'file://%s' % (TEST_PAGE,))
 
 

@@ -16,7 +16,7 @@ cd "${BIN_DIR}/.."
 
 mkdir -p ./dist/zip/tmp
 
-"${BIN_DIR}"/mkdeps.sh
+"${BIN_DIR}"/mkdeps
 
 # Remove things we don't need for crosh.
 export MORE_FILE_PATTERNS_EXCLUDE='
