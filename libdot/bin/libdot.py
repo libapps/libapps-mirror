@@ -190,7 +190,7 @@ def fetch(uri, output):
 # The hash of the node_modules that we maintain.
 # Allow a long line for easy automated updating.
 # pylint: disable=line-too-long
-NODE_MODULES_HASH = '15fa35331d956ff954e6500c5080c2322912d90df182d08cbced24a3e19ce6cc'
+NODE_MODULES_HASH = '056b9a0eb499c5e1269d801e1a9373532f05b6e95af0591c772c2d2f0f92024b'
 # pylint: enable=line-too-long
 
 # In sync with Chromium's DEPS file because it's easier to use something that
