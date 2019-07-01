@@ -202,8 +202,8 @@ Once `_locales/en/messages.json` has updates that need translating:
   `blaze build messages_fileset`
 * In the root of the checkout, the new JSON files will be under
   `blaze-bin/googleclient/chrome/extensions/samples/tc/hterm/messages_fs/_locales/`.
-* Use the [import-translations.sh](../bin/import-translations.sh) script to import:
-  `.../nassh/bin/import-translations.sh .../google3/blaze-bin/googleclient/chrome/extensions/samples/tc/hterm/messages_fs/_locales/`
+* Use the [import-translations](../bin/import-translations) script to import:
+  `.../nassh/bin/import-translations .../google3/blaze-bin/googleclient/chrome/extensions/samples/tc/hterm/messages_fs/_locales/`
 * Upload & land the CL.
 
 See the [TC](http://tc/) page for more details.

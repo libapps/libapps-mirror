@@ -39,7 +39,7 @@ def trim_redundant_placeholders(data):
     for msg in data.values():
         for key, settings in list(msg.get('placeholders', {}).items()):
             if (re.match(r'^[0-9]+$', key) and
-                re.match(r'^[$][0-9]+$', settings['content'])):
+                    re.match(r'^[$][0-9]+$', settings['content'])):
                 msg['placeholders'].pop(key)
 
         # Remove the placeholders setting if it's empty now.
@@ -48,7 +48,7 @@ def trim_redundant_placeholders(data):
             msg.pop('placeholders', None)
 
 
-def reformat(path, inplace=False):
+def reformat(path, output=None, inplace=False):
     """Reformat translation."""
     with open(path) as fp:
         try:
@@ -64,12 +64,15 @@ def reformat(path, inplace=False):
     format_tabs = re.sub('^(    )+',
                          lambda match: '\t' * (len(match.group()) // 4),
                          format_spaces, flags=re.M)
+    format_tabs += '\n'
 
     if inplace:
-        with open(path, 'w') as fp:
-            fp.write(format_tabs + '\n')
+        output = path
+    if output:
+        with open(output, 'w') as fp:
+            fp.write(format_tabs)
     else:
-        sys.stdout.write(format_tabs + '\n')
+        sys.stdout.write(format_tabs)
 
     return True
 
@@ -85,6 +88,7 @@ def get_parser():
 
 
 def main(argv):
+    """The main func!"""
     parser = get_parser()
     opts = parser.parse_args(argv)
 

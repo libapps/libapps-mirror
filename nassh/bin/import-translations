@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Import generated translations from Google's internal Translation Console."""
+
+from __future__ import print_function
+
+import argparse
+import glob
+import logging
+import os
+import sys
+
+import nassh
+import libdot
+
+import filter_translations
+
+
+def get_parser():
+    """Get a command line parser."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('-d', '--debug', action='store_true',
+                        help='Run with debug output.')
+    parser.add_argument('--skip-git', dest='run_git',
+                        action='store_false', default=True,
+                        help='Skip creating a new git commit.')
+    parser.add_argument('builddir',
+                        help='Input path to the compiled locale messages.')
+    parser.add_argument('sourcedir', nargs='?',
+                        default=os.path.join(nassh.DIR, '_locales'),
+                        help='Output path to nassh/_locales/ directory.')
+    return parser
+
+
+def main(argv):
+    """The main func!"""
+    parser = get_parser()
+    opts = parser.parse_args(argv)
+    libdot.setup_logging(debug=opts.debug)
+
+    opts.builddir = os.path.abspath(opts.builddir)
+    opts.sourcedir = os.path.abspath(opts.sourcedir)
+
+    # Find new translations.  Do it here for sanity checking.
+    new_locales = glob.glob(os.path.join(opts.builddir, '*', 'messages.json'))
+    if not new_locales:
+        parser.error("builddir doesn't seem to contain any translations")
+
+    # Clear existing translation files.
+    logging.info('Clearing existing translation files')
+    os.makedirs(opts.sourcedir, exist_ok=True)
+    for locale in os.listdir(opts.sourcedir):
+        locale_dir = os.path.join(opts.sourcedir, locale)
+        path = os.path.join(locale_dir, 'messages.json')
+        libdot.unlink(path)
+
+        # Prune empty dirs.
+        try:
+            os.rmdir(locale_dir)
+        except OSError:
+            pass
+
+    # Copy over the new translations.
+    logging.info('Importing new translation files')
+    for in_locale in new_locales:
+        locale = os.path.basename(os.path.dirname(in_locale))
+        out_locale = os.path.join(opts.sourcedir, locale, 'messages.json')
+        os.makedirs(os.path.dirname(out_locale), exist_ok=True)
+
+        filter_translations.reformat(in_locale, output=out_locale)
+
+    # Generate git commits automatically.
+    if opts.run_git:
+        libdot.run(['git', 'checkout', '-f', 'en/'], cwd=opts.sourcedir)
+        libdot.run(['git', 'add', '.'], cwd=opts.sourcedir)
+        libdot.run(['git', 'commit', '-m', 'nassh: update translations', '.'],
+                   cwd=opts.sourcedir)
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))
