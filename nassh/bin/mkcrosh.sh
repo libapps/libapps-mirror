@@ -16,7 +16,12 @@ cd "${BIN_DIR}/.."
 
 mkdir -p ./dist/zip/tmp
 
-"${BIN_DIR}"/mkdeps
+# Once CrOS defaults to Python 3.5+, we can drop this.
+python="python3"
+if command -v "python3.6" >/dev/null; then
+  python="python3.6"
+fi
+"${python}" "${BIN_DIR}"/mkdeps
 
 # Remove things we don't need for crosh.
 export MORE_FILE_PATTERNS_EXCLUDE='
