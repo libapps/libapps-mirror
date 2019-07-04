@@ -1,9 +1,6 @@
 # Concat results
 js/*.concat.js
 
-# Concatenated licenses of dependencies
-html/licenses.html
-
 # Copy of the nacl plugin used when loading as an unpacked extension
 /_platform_specific/
 /plugin/
