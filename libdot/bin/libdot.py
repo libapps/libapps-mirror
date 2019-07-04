@@ -70,6 +70,9 @@ def html_test_runner_main(argv, path):
     # Try to use default X session.
     os.environ.setdefault('DISPLAY', ':0')
 
+    # Ensure chai/mocha node modules exist.
+    node_and_npm_setup();
+
     # Set up a unique profile to avoid colliding with user settings.
     profile_dir = opts.profile
     if not profile_dir:
