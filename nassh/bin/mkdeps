@@ -8,7 +8,11 @@
 from __future__ import print_function
 
 import argparse
+import html
+import json
+import logging
 import os
+import re
 import sys
 
 import nassh
@@ -17,10 +21,85 @@ import libdot
 import concat
 
 
+LICENSE_FILE = os.path.join(nassh.DIR, 'html', 'licenses.html')
+LICENSE_TEMPLATE = os.path.join(nassh.DIR, 'html', 'licenses.html.in')
+
+
 def mkdeps():
     """Build the dependencies."""
     concat.concat(os.path.join(nassh.DIR, 'concat', 'nassh_deps.concat'),
                   os.path.join(nassh.DIR, 'js', 'nassh_deps.concat.js'))
+
+
+def concat_local_deps():
+    """Concatenate all licenses of third_party/ bundles."""
+    ret = {}
+    third_party_dir = os.path.join(nassh.DIR, 'third_party')
+    for package in os.listdir(third_party_dir):
+        entry = {}
+        version = None
+
+        package_dir = os.path.join(third_party_dir, package)
+
+        metadata_file = os.path.join(package_dir, 'METADATA')
+        with open(metadata_file, 'r', encoding='utf-8') as fp:
+            lines = fp.readlines()
+            for i, line in enumerate(lines):
+                if 'HOMEPAGE' in line:
+                    m = re.match(r'.*"(.*)"', lines[i + 1])
+                    entry['repository'] = m.group(1)
+                elif 'version' in line:
+                    m = re.match(r'.*"(.*)"', line)
+                    version = m.group(1)
+
+        license_file = os.path.join(package_dir, 'LICENSE.md')
+        with open(license_file, 'r', encoding='utf-8') as fp:
+            entry['data'] = fp.read().strip()
+
+        ret['%s@%s' % (package, version)] = entry
+
+    return ret
+
+
+def concat_licenses():
+    """Concatenate all licenses of npm dependencies."""
+    ret = libdot.run([
+        'license-checker', '--search', nassh.DIR, '--onlyunknown',
+        '--production', '--csv',
+    ], capture_output=True, cwd=nassh.DIR)
+    # 'Found error' in stderr indicates that no packages with unspecified
+    # licenses were found.
+    if b'Found error' in ret.stderr:
+        ret = libdot.run([
+            'license-checker', '--search', nassh.DIR, '--unknown',
+            '--production', '--json',
+        ], capture_output=True, cwd=nassh.DIR)
+        res = json.loads(ret.stdout.decode('utf8'))
+        for entry in res.values():
+            with open(entry['licenseFile'], 'r', encoding='utf8') as fp:
+                entry['data'] = fp.read().strip()
+
+        res.update(concat_local_deps())
+
+        generate_html(res)
+    else:
+        logging.error('The following packages did not specify their licenses:')
+        logging.error(ret.stdout.decode('utf8'))
+
+
+def generate_html(licenses):
+    """Write the collected |licenses| to an HTML file."""
+    with open(LICENSE_TEMPLATE, 'r', encoding='utf8') as fp:
+        template = fp.read()
+    output = ''
+    for package in sorted(licenses):
+        entry = licenses[package]
+        output += ('<h2><a href="%s">%s</a></h2>\n' %
+                   (entry['repository'], html.escape(package)))
+        output += '<pre>\n%s</pre>\n' % html.escape(entry['data'])
+    output = template.replace('%%LICENSES%%', output)
+    with open(LICENSE_FILE, 'w', encoding='utf8') as fp:
+        fp.write(output)
 
 
 def get_parser():
@@ -36,7 +115,18 @@ def main(argv):
     parser = get_parser()
     opts = parser.parse_args(argv)
     libdot.setup_logging(debug=opts.debug)
+    libdot.node_and_npm_setup()
     mkdeps()
+
+    logging.info('Concatenating licenses...')
+    # We use nassh's package.json, but reuse libapps' node_modules.
+    libdot.symlink(
+        os.path.join(libdot.LIBAPPS_DIR, 'node_modules'),
+        os.path.join(nassh.DIR, 'node_modules'))
+    try:
+        concat_licenses()
+    finally:
+        libdot.unlink(os.path.join(nassh.DIR, 'node_modules'))
 
 
 if __name__ == '__main__':

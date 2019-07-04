@@ -163,6 +163,14 @@ def cmdstr(cmd):
 
 def run(cmd, check=True, cwd=None, **kwargs):
     """Run |cmd| inside of |cwd| and exit if it fails."""
+    # Python 3.6 doesn't support capture_output.
+    if sys.version_info < (3, 7):
+        capture_output = kwargs.pop('capture_output', None)
+        if capture_output:
+            assert 'stdout' not in kwargs and 'stderr' not in kwargs
+            kwargs['stdout'] = subprocess.PIPE
+            kwargs['stderr'] = subprocess.PIPE
+
     if cwd is None:
         cwd = os.getcwd()
     logging.info('Running: %s\n  (cwd = %s)', cmdstr(cmd), cwd)
@@ -170,6 +178,7 @@ def run(cmd, check=True, cwd=None, **kwargs):
     if check and result.returncode:
         logging.error('Running %s failed!', cmd[0])
         sys.exit(result.returncode)
+    return result
 
 
 def unpack(archive, cwd=None):
