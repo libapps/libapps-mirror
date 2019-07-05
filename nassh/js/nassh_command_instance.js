@@ -4,6 +4,8 @@
 
 'use strict';
 
+import {punycode} from './nassh_deps.rollup.js';
+
 /**
  * The NaCl-ssh-powered terminal command.
  *
@@ -972,7 +974,7 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
   // If they're using an internationalized domain name (IDN), then punycode
   // will return a different ASCII name.  Include that in the display for the
   // user so it's clear where we end up trying to connect to.
-  var idn_hostname = lib.punycode.toASCII(params.hostname);
+  var idn_hostname = punycode.toASCII(params.hostname);
   var disp_hostname = params.hostname;
   if (idn_hostname != params.hostname)
     disp_hostname += ' (' + idn_hostname + ')';

@@ -21,5 +21,4 @@ libdot/js/lib_storage_local.js
 libdot/js/lib_storage_memory.js
 libdot/third_party/fast-text-encoding/text.js
 libdot/third_party/intl-segmenter/intl-segmenter.js
-libdot/third_party/punycode/lib_punycode.js
 libdot/third_party/wcwidth/lib_wc.js
