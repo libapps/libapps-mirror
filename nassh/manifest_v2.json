@@ -43,9 +43,7 @@
         "js/nassh_background.js",
         "js/nassh.js",
         "js/nassh_app.js",
-        "js/nassh_executables.js",
-        "js/nassh_preference_manager.js",
-        "js/nassh_nassh.js"
+        "js/nassh_preference_manager.js"
       ]
     }
   },

@@ -317,9 +317,6 @@ There are a few specialized modules that are not relevant to the core
 Secure Shell logic.
 
 * [crosh.js]: Chrome OS developer shell.  Only used with [crosh.html].
-* Code for hooking into [wash].  Only used with that.
-  * [nassh_executables.js]
-  * [nassh_nassh.js]
 * Connections page specific code (i.e. [nassh_connect_dialog.html]).
   * [nassh_column_list.js]: Utility code for showing things in columns.
   * [nassh_connect_dialog.js]: The main connection dialog page.
@@ -597,12 +594,10 @@ Here's a random list of documents which would be useful to people.
 [nassh_column_list.js]: ../js/nassh_column_list.js
 [nassh_command_instance.js]: ../js/nassh_command_instance.js
 [nassh_connect_dialog.js]: ../js/nassh_connect_dialog.js
-[nassh_executables.js]: ../js/nassh_executables.js
 [nassh_extension_popup.js]: ../js/nassh_extension_popup.js
 [nassh_google_relay_html.js]: ../js/nassh_google_relay_html.js
 [nassh_google_relay.js]: ../js/nassh_google_relay.js
 [nassh_main.js]: ../js/nassh_main.js
-[nassh_nassh.js]: ../js/nassh_nassh.js
 [nassh_preference_manager.js]: ../js/nassh_preference_manager.js
 [nassh_preferences_editor.js]: ../js/nassh_preferences_editor.js
 [nassh_sftp_client.js]: ../js/nassh_sftp_client.js
