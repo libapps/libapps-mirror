@@ -9,8 +9,6 @@
  * background page.
  */
 nassh.App = function(manifest) {
-  this.updateAvailable = false;
-
   this.onInit = new lib.Event();
 
   this.prefs_ = new nassh.PreferenceManager();
