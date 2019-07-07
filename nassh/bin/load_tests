@@ -10,20 +10,20 @@ from __future__ import print_function
 import os
 import sys
 
-import nassh
+import nassh  # pylint: disable=unused-import
 import libdot
 
 import mkdeps
 
 
 # Path to our html test page.
-TEST_PAGE = os.path.join(nassh.DIR, 'html', 'nassh_test.html')
+TEST_PAGE = os.path.join('nassh', 'html', 'nassh_test.html')
 
 
 def main(argv):
     """The main func!"""
     mkdeps.mkdeps()
-    return libdot.html_test_runner_main(argv, 'file://%s' % (TEST_PAGE,))
+    return libdot.html_test_runner_main(argv, TEST_PAGE, serve=True)
 
 
 if __name__ == '__main__':

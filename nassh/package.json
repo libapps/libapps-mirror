@@ -25,12 +25,14 @@
   "homepage": "https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh",
   "scripts": {
     "prepare": "./bin/mkdeps",
+    "start": "http-server -a localhost -c-1 --cors ..",
     "test": "./bin/load_tests"
   },
   "devDependencies": {
     "chai": "~4",
     "eslint": "~6",
     "jsdom": "~15",
+    "http-server": "~0",
     "license-checker": "~25",
     "mocha": "~6",
     "rollup": ">=1.16",

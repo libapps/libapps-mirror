@@ -20,6 +20,7 @@
     "csso-cli": ">=2",
     "eslint": "~6",
     "firebase-tools": ">=7",
+    "http-server": "~0",
     "jsdoc-to-markdown": "~5",
     "jsdom": "~15",
     "license-checker": "~25",

@@ -61,7 +61,7 @@ def html_test_runner_parser():
     return parser
 
 
-def html_test_runner_main(argv, path):
+def html_test_runner_main(argv, path, serve=False):
     """Open the test page at |path|."""
     parser = html_test_runner_parser()
     opts = parser.parse_args(argv)
@@ -92,10 +92,24 @@ def html_test_runner_main(argv, path):
         else:
             parser.error('Could not find a browser; please use --browser.')
 
+    # Kick off server if needed.
+    if serve:
+        server = subprocess.Popen(['http-server', '-a', 'localhost', '-c-1',
+                                   '--cors'],
+                                  cwd=LIBAPPS_DIR)
+        path = 'http://localhost:8080/%s' % path
+
     # Kick off test runner in the background so we exit.
     logging.info('Running tests against browser "%s".', browser)
     logging.info('Tests page: %s', path)
     subprocess.Popen([browser, '--user-data-dir=%s' % (profile_dir,), path])
+
+    # Wait for the server if it exists.
+    if serve:
+        try:
+            server.wait()
+        except KeyboardInterrupt:
+            pass
 
 
 def touch(path):
@@ -202,7 +216,7 @@ def fetch(uri, output):
 # The hash of the node_modules that we maintain.
 # Allow a long line for easy automated updating.
 # pylint: disable=line-too-long
-NODE_MODULES_HASH = '056b9a0eb499c5e1269d801e1a9373532f05b6e95af0591c772c2d2f0f92024b'
+NODE_MODULES_HASH = '17107422d1385bd8ab2154073bcdb2880b4a6787bef8be8e0cfb04f472132ef2'
 # pylint: enable=line-too-long
 
 # In sync with Chromium's DEPS file because it's easier to use something that
