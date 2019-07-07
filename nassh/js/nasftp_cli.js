@@ -1688,8 +1688,7 @@ nasftp.Cli.commandPut_ = function(args, opts) {
                   return;
                 }
 
-                // TODO: Use readAsArrayBuffer once the SFTP layers switches.
-                return reader.readAsBinaryString(chunk)
+                return reader.readAsArrayBuffer(chunk)
                   .then((result) => {
                     return this.client.writeChunk(handle, offset, result);
                   })

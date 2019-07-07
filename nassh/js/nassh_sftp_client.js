@@ -810,11 +810,14 @@ nassh.sftp.Client.prototype.renameFile = function(sourcePath, targetPath) {
  *
  * @param {string} handle The handle of the remote file
  * @param {number} offset The offset to start writing from
- * @param {string} data The data to write
+ * @param {Uint8Array} data The data to write
  * @return {!Promise<!StatusPacket>} A Promise that resolves or rejects with
  *    a nassh.sftp.StatusError
  */
 nassh.sftp.Client.prototype.writeChunk = function(handle, offset, data) {
+  // Accept any typed array form.
+  data = new Uint8Array(data);
+
   var packet = new nassh.sftp.Packet();
   packet.setString(handle);
   packet.setUint64(offset);
