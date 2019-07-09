@@ -933,10 +933,17 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
         'FOUND_RELAY',
         [`${this.relay_.proxyHost}:${this.relay_.proxyPort}`]));
     this.relay_.init();
-  } else if (options['--proxy-mode'] == 'corp-relay@google.com') {
-    this.relay_ = new nassh.GoogleRelay(this.io, options,
-                                        this.terminalLocation,
-                                        this.storage);
+  } else if (options['--proxy-mode'] == 'corp-relay@google.com' ||
+             options['--proxy-mode'] == 'corp-relay-v4@google.com') {
+    if (options['--proxy-mode'] == 'corp-relay@google.com') {
+      this.relay_ = new nassh.GoogleRelay(this.io, options,
+                                          this.terminalLocation,
+                                          this.storage);
+    } else {
+      this.relay_ = new nassh.Relay.Corpv4(this.io, options,
+                                           this.terminalLocation,
+                                           this.storage);
+    }
 
     this.io.println(nassh.msg(
         'INITIALIZING_RELAY',

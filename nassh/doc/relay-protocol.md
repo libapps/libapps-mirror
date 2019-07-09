@@ -16,7 +16,7 @@ See the [Options] document for those details.
 
 [TOC]
 
-## Corp Relay
+## Corp Relay {#corp-relay}
 
 This uses the id `corp-relay@google.com` (e.g. when using `--proxy-mode=`).
 
@@ -298,13 +298,163 @@ All other HTTP errors are ignored.
 Data will continue to be sent via new `/write` requests until [HTTP 410] is
 returned.
 
+## SSH Relay v4 {#corp-relay-v4}
+
+This uses the id `corp-relay-v4@google.com` (e.g. when using `--proxy-mode=`).
+
+The main implementation for this can be found in [nassh_relay_corpv4.js] with
+supporting stream logic in [nassh_stream_relay_corpv4.js].
+
+Googlers can access the internal design doc at [go/ssh-relay-protocol-4].
+
+### Elevator Pitch
+
+The selling points for this protocol over the older [Corp Relay]:
+
+*   Support for resuming connections even when your IP changes.
+*   Support for passing error messages back to the client.
+*   Extensible protocol for adding more in-band commands.
+
+### Protocol Overview
+
+The initial cookie server lookup and `/cookie` API is the same as [Corp Relay].
+What's different is the relay server protocol.
+
+The API endpoints have been chosen such that they can be implemented by the same
+service as the older [Corp Relay].
+
+*  `/v4/connect?host=HOST&port=PORT`
+*  `/v4/reconnect?sid=SID&ack=ACK`
+
+### /v4/connect Protocol
+
+Using [WebSockets], make one connection to `/connect` to the
+`RELAY_PROTOCOL://RELAY_HOST:RELAY_PORT` host to create a bidirectional socket.
+Use `arraybuffer` for the `binaryType` field and `['ssh']` for the `protocols`
+field.
+
+The fields specified in the [query string]:
+
+*   `host=HOST`: The ssh server to connect to.  It may be an IP address or a
+    hostname, and does not need to be resolvable or accessible by the client.
+*   `port=PORT`: The port the ssh server is listening on.
+
+### /v4/reconnect Protocol
+
+This is used to re-establish an existing session.
+Once connected, the protocol is the same as `/v4/connect`.
+
+The fields specified in the [query string]:
+
+*   `sid=SESSION_ID`: The session id returned from the [/proxy] call.
+*   `ack=READ_ACK`: The last read ack the client received.
+
+The `SESSION_ID` allows the relay server to validate the connection.
+This is why you should always use `wss` instead of `ws` to avoid spoofing.
+
+### Commands
+
+Every [WebSocket] message has a tag to determine the type of the command.
+Clients MUST ignore all unknown tags so that servers MAY add more in the future.
+
+All numbers are [big endian] on the wire.
+All arrays are prefixed by a 32-bit number for its length.
+The max length of an array SHOULD not exceed 16KiB
+(servers MAY reject larger requests).
+
+The basic structure looks like:
+
+```C
+struct Command {
+  uint16_t tag;
+  ...
+};
+```
+
+The current defined set of tags:
+
+| Tag | Name                | Meaning |
+|:---:|---------------------|---------|
+| `1` | `CONNECT_SUCCESS`   | First command after `/v4/connect` |
+| `2` | `RECONNECT_SUCCESS` | First command after `/v4/reconnect` |
+| `4` | `DATA`              | New data for the client |
+| `7` | `ACK`               | Server acking client data |
+
+#### CONNECT_SUCCESS
+
+This will be the first message after establishing a `/v4/connect` connection.
+
+This informs the client of its session id (which will be printable ASCII).
+The SID will not be NUL terminated, so use the length exactly.
+The client will use this with the `/v4/reconnect` API as the `SESSION_ID`.
+
+```C
+struct {
+  uint16_t tag;  // 0x0001
+  uint32_t sid_length;
+  char sid[];
+};
+```
+
+#### RECONNECT_SUCCESS
+
+This will be the first message after establishing a `/v4/reconnect` connection.
+
+This allows the client to resync its write buffer in case an ack was missed.
+
+```C
+struct {
+  uint16_t tag;  // 0x0002
+  uint64_t ack;
+};
+```
+
+#### DATA
+
+Transferring arbitrary data.
+
+The receiving end should update its local ack counter and send back an ack
+packet with its new position.
+The ack command need not be sent immediately in case it wants to coalesce
+multiple acks into a single command.
+
+```C
+struct {
+  uint16_t tag;  // 0x0004
+  uint32_t data_length;
+  uint8_t data[];
+};
+```
+
+#### ACK
+
+Acknowledging received data.
+
+The receiving end should update its buffer to discard all acknowledged data.
+
+The ack field is the absolute position in the stream since the initial
+connection which is why it's a 64-bit number.
+The receiving end should keep track of the last ack that it saw so that it can
+compute the delta of how many bytes it may now discard.
+
+```C
+struct {
+  uint16_t tag;  // 0x0007
+  uint64_t ack;
+};
+```
+
 ## SSH-FE
 
 This uses the id `ssh-fe@google.com` (e.g. when using `--proxy-mode=`).
 
+The main implementation for this can be found in [nassh_relay_sshfe.js] with
+supporting stream logic in [nassh_stream_relay_sshfe.js].
+
 TODO
 
 
+[Corp Relay]: #corp-relay
 [method field]: #corp-relay-method
 [/connect]: #corp-relay-connect
 [/cookie]: #corp-relay-cookie
@@ -326,7 +476,11 @@ TODO
 [XHR]: https://en.wikipedia.org/wiki/XMLHttpRequest
 [XSSI header]: https://security.stackexchange.com/questions/110539/
 
+[go/ssh-relay-protocol-4]: https://goto.google.com/ssh-relay-protocol-4
+
 [FAQ]: ./FAQ.md
 [nassh_google_relay.js]: ../js/nassh_google_relay.js
+[nassh_relay_sshfe.js]: ../js/nassh_relay_sshfe.js
 [nassh_stream_google_relay.js]: ../js/nassh_stream_google_relay.js
+[nassh_stream_relay_sshfe.js]: ../js/nassh_stream_relay_sshfe.js
 [Options]: ./options.md
