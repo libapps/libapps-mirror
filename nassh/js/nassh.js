@@ -201,10 +201,20 @@ nassh.reloadWindow = function() {
  * @param {string} proto The protocol name to register.
  */
 nassh.registerProtocolHandler = function(proto) {
-  navigator.registerProtocolHandler(
-    proto,
-    chrome.runtime.getURL('html/nassh.html#uri:%s'),
-    chrome.runtime.getManifest().name);
+  try {
+    navigator.registerProtocolHandler(
+        proto,
+        chrome.runtime.getURL('html/nassh.html#uri:%s'),
+        chrome.runtime.getManifest().name);
+  } catch (e) {
+    console.error(`Unable to register '${proto}' handler:`, e);
+  }
+
+  // Not all runtimes allow direct registration, so also register with the
+  // 'web+' prefix just in case.
+  if (!proto.startsWith('web+')) {
+    nassh.registerProtocolHandler(`web+${proto}`);
+  }
 };
 
 /**

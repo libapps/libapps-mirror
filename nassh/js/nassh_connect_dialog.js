@@ -460,8 +460,7 @@ nassh.ConnectDialog.prototype.unmount = function() {
  * Start a SFTP session with the selected profile.
  */
 nassh.ConnectDialog.prototype.sftpConnect = function() {
-  // TODO: Switch to 'sftp' when available on the web.
-  this.startup_('sftpConnectToProfile', 'web+sftp');
+  this.startup_('sftpConnectToProfile', 'sftp');
 };
 
 /**
