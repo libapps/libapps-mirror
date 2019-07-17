@@ -50,20 +50,6 @@ it('zpad', () => {
   assert.equal(lib.f.zpad(123, 5), '00123');
 });
 
-it('getWhitespace', () => {
-  // Test growing first.
-  assert.equal(lib.f.getWhitespace(0), '');
-  assert.equal(lib.f.getWhitespace(2), '  ');
-  assert.equal(lib.f.getWhitespace(20), '                    ');
-
-  // Then retest smaller sizes (after internal cache has grown).
-  assert.equal(lib.f.getWhitespace(0), '');
-  assert.equal(lib.f.getWhitespace(4), '    ');
-
-  // Edge cases!
-  assert.equal(lib.f.getWhitespace(-10), '');
-});
-
 /**
  * Check basic getStack behavior.
  */

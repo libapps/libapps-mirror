@@ -98,31 +98,6 @@ lib.f.zpad = function(number, length) {
 };
 
 /**
- * Return a string containing a given number of space characters.
- *
- * This method maintains a static cache of the largest amount of whitespace
- * ever requested.  It shouldn't be used to generate an insanely huge amount of
- * whitespace.
- *
- * @param {integer} length The desired amount of whitespace.
- * @param {string} A string of spaces of the requested length.
- */
-lib.f.getWhitespace = function(length) {
-  if (length <= 0)
-    return '';
-
-  var f = this.getWhitespace;
-  if (!f.whitespace)
-    f.whitespace = '          ';
-
-  while (length > f.whitespace.length) {
-    f.whitespace += f.whitespace;
-  }
-
-  return f.whitespace.substr(0, length);
-};
-
-/**
  * Return the current call stack after skipping a given number of frames.
  *
  * This method is intended to be used for debugging only.  It returns an
