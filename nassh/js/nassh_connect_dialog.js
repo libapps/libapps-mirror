@@ -107,7 +107,7 @@ nassh.ConnectDialog.prototype.onPreferencesReady_ = function() {
   // The shortcut list will eventually do this async, but we want it now...
   this.setCurrentProfileRecord(this.profileList_[profileIndex]);
 
-  nassh.getFileSystem(this.onFileSystemFound_.bind(this));
+  nassh.getFileSystem().then(this.onFileSystemFound_.bind(this));
 };
 
 /**

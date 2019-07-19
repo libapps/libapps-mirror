@@ -149,10 +149,10 @@ lib.registerInit('external api', (onInit) => {
   });
 
   // Get handle on FileSystem, cleanup files, and register listener.
-  nassh.getFileSystem((fileSystem) => {
+  nassh.getFileSystem().then((fileSystem) => {
     /** @private */
     nassh.External.fileSystem_ = fileSystem;
-    new Promise((deleteDone) => {
+    return new Promise((deleteDone) => {
       // Remove existing contents of '/external/' before registering listener.
       fileSystem.root.getDirectory(
           nassh.External.ROOT_DIR,

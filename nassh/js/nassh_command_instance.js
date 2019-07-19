@@ -187,7 +187,9 @@ nassh.CommandInstance.prototype.run = function() {
                       `(${htermAgeMinutes} minutes ago)`);
     }
 
-    nassh.getFileSystem(onFileSystemFound, ferr('FileSystem init failed'));
+    nassh.getFileSystem()
+      .then(onFileSystemFound)
+      .catch(ferr('FileSystem init failed'));
   });
 
   var onFileSystemFound = (fileSystem, sshDirectoryEntry) => {

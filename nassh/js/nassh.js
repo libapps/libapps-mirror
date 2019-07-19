@@ -54,24 +54,25 @@ nassh.msg = function(name, opt_args) {
  *
  * This will also create the /.ssh/ directory if it does not exits.
  *
- * @param {function(FileSystem, DirectoryEntry)} onSuccess The function to
- *     invoke when the operation succeeds.
- * @param {function(FileError)} opt_onError Optional function to invoke if
- *     the operation fails.
+ * @return {!Promise(FileSystem, DirectoryEntry)} The root filesystem handle and
+ *     a handle to the /.ssh/ directory.
  */
-nassh.getFileSystem = function(onSuccess, opt_onError) {
-  function onFileSystem(fileSystem) {
-    lib.fs.getOrCreateDirectory(fileSystem.root, '/.ssh',
-                                onSuccess.bind(null, fileSystem),
-                                lib.fs.err('Error creating /.ssh',
-                                           opt_onError));
-  }
+nassh.getFileSystem = function() {
+  const requestFS = window.requestFileSystem || window.webkitRequestFileSystem;
 
-  var requestFS = window.requestFileSystem || window.webkitRequestFileSystem;
-  requestFS(window.PERSISTENT,
-            16 * 1024 * 1024,
-            onFileSystem,
-            lib.fs.err('Error initializing filesystem', opt_onError));
+  return new Promise((resolve, reject) => {
+    function onFileSystem(fileSystem) {
+      lib.fs.getOrCreateDirectory(
+          fileSystem.root, '/.ssh',
+          (directoryEntry) => resolve(fileSystem, directoryEntry),
+          lib.fs.err('Error creating /.ssh', reject));
+    }
+
+    requestFS(window.PERSISTENT,
+              16 * 1024 * 1024,
+              onFileSystem,
+              lib.fs.err('Error initializing filesystem', reject));
+  });
 };
 
 /**
