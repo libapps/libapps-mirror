@@ -22,8 +22,8 @@ TEST_PAGE = os.path.join('nassh', 'html', 'nassh_test.html')
 
 def main(argv):
     """The main func!"""
-    mkdeps.mkdeps()
-    return libdot.html_test_runner_main(argv, TEST_PAGE, serve=True)
+    return libdot.html_test_runner_main(
+        argv, TEST_PAGE, serve=True, mkdeps=lambda opts: mkdeps.mkdeps())
 
 
 if __name__ == '__main__':

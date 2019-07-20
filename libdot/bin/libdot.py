@@ -61,8 +61,15 @@ def html_test_runner_parser():
     return parser
 
 
-def html_test_runner_main(argv, path, serve=False):
-    """Open the test page at |path|."""
+def html_test_runner_main(argv, path, serve=False, mkdeps=False):
+    """Open the test page at |path|.
+
+    Args:
+      argv: The program's command line arguments.
+      path: Path to the test page.
+      serve: Whether to launch a webserver or load the page from disk.
+      mkdeps: Callback to build dependencies after we've initialized.
+    """
     parser = html_test_runner_parser()
     opts = parser.parse_args(argv)
     setup_logging(debug=opts.debug)
@@ -71,7 +78,11 @@ def html_test_runner_main(argv, path, serve=False):
     os.environ.setdefault('DISPLAY', ':0')
 
     # Ensure chai/mocha node modules exist.
-    node_and_npm_setup();
+    node_and_npm_setup()
+
+    # Set up any deps.
+    if mkdeps:
+        mkdeps(opts)
 
     # Set up a unique profile to avoid colliding with user settings.
     profile_dir = opts.profile
