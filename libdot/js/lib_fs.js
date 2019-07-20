@@ -99,6 +99,22 @@ lib.fs.overwriteFile = function(root, path, contents, onSuccess, opt_onError) {
 };
 
 /**
+ * Open a file on an HTML5 filesystem.
+ *
+ * @param {DirectoryEntry} root The directory to consider as the root of the
+ *     path.
+ * @param {string} path The path of the target file, relative to root.
+ * @return {!Promise(File)} The open file handle.
+ */
+lib.fs.openFile = function(root, path) {
+  return new Promise((resolve, reject) => {
+    root.getFile(path, {create: false}, (fileEntry) => {
+      fileEntry.file(resolve, reject);
+    }, reject);
+  });
+};
+
+/**
  * Read a file on an HTML5 filesystem.
  *
  * @param {DirectoryEntry} root The directory to consider as the root of the
@@ -107,14 +123,11 @@ lib.fs.overwriteFile = function(root, path, contents, onSuccess, opt_onError) {
  * @return {!Promise(string)} The file content.
  */
 lib.fs.readFile = function(root, path) {
-  return new Promise((resolve, reject) => {
-    root.getFile(path, {create: false}, (fileEntry) => {
-      fileEntry.file((file) => {
-        const reader = new lib.fs.FileReader();
-        return reader.readAsText(file).then(resolve);
-      }, reject);
-    }, reject);
-  });
+  return lib.fs.openFile(root, path)
+    .then((file) => {
+      const reader = new lib.fs.FileReader();
+      return reader.readAsText(file);
+    });
 };
 
 
