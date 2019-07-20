@@ -926,7 +926,9 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
       this.storage.setItem('nassh.isMount', this.isMount);
       this.storage.setItem('nassh.isSftp', this.isSftp);
 
-      this.relay_.redirect();
+      if (!this.relay_.redirect()) {
+        this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+      }
       return;
     }
   } else if (options['--proxy-mode']) {

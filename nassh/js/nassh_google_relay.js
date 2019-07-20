@@ -56,7 +56,7 @@ nassh.GoogleRelay.prototype.redirect = function(opt_resumePath) {
   // proxy page.
   this.storage.setItem('googleRelay.resumePath', resumePath);
 
-  this.location.href = lib.f.replaceVars(
+  const uri = lib.f.replaceVars(
     this.cookieServerPattern(),
     { host: this.proxyHost,
       port: this.proxyPort,
@@ -65,6 +65,17 @@ nassh.GoogleRelay.prototype.redirect = function(opt_resumePath) {
       // host out of the reply.  From there we continue on to the resumePath.
       return_to:  this.location.host
     });
+
+  // Since the proxy settings are coming from the user, make sure we catch bad
+  // values (hostnames/etc...) directly.
+  try {
+    this.location.href = uri;
+  } catch(e) {
+    this.io.println(e);
+    return false;
+  }
+
+  return true;
 };
 
 /**
