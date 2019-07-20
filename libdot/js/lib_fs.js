@@ -104,20 +104,17 @@ lib.fs.overwriteFile = function(root, path, contents, onSuccess, opt_onError) {
  * @param {DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @param {function(string)} onSuccess The function to invoke after
- *     success.
- * @param {function(DOMError)} opt_onError Optional function to invoke if the
- *     operation fails.
+ * @return {!Promise(string)} The file content.
  */
-lib.fs.readFile = function(root, path, onSuccess, opt_onError) {
-  function onFileFound(fileEntry) {
-    fileEntry.file(function(file) {
-      const reader = new lib.fs.FileReader();
-      reader.readAsText(file).then(onSuccess);
-    }, opt_onError);
-  }
-
-  root.getFile(path, {create: false}, onFileFound, opt_onError);
+lib.fs.readFile = function(root, path) {
+  return new Promise((resolve, reject) => {
+    root.getFile(path, {create: false}, (fileEntry) => {
+      fileEntry.file((file) => {
+        const reader = new lib.fs.FileReader();
+        return reader.readAsText(file).then(resolve);
+      }, reject);
+    }, reject);
+  });
 };
 
 

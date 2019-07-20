@@ -323,14 +323,15 @@ nassh.CommandInstance.prototype.removeAllKnownHosts = function() {
  * @param {integer} index One-based index of the known host entry to remove.
  */
 nassh.CommandInstance.prototype.removeKnownHostByIndex = function(index) {
-  var onError = lib.fs.log('Error accessing /.ssh/known_hosts');
-
-  lib.fs.readFile(this.fileSystem_.root, '/.ssh/known_hosts', (contents) => {
-    var ary = contents.split('\n');
-    ary.splice(index - 1, 1);
-    lib.fs.overwriteFile(this.fileSystem_.root, '/.ssh/known_hosts',
-                         ary.join('\n'), lib.fs.log('done'), onError);
-  }, onError);
+  const path = '/.ssh/known_hosts';
+  lib.fs.readFile(this.fileSystem_.root, path)
+    .then((contents) => {
+      const ary = contents.split('\n');
+      ary.splice(index - 1, 1);
+      lib.fs.overwriteFile(this.fileSystem_.root, path,
+                           ary.join('\n'), lib.fs.log('done'), onError);
+    })
+    .catch(lib.fs.log(`Error accessing ${path}`));
 };
 
 nassh.CommandInstance.prototype.promptForDestination_ = function(opt_default) {
