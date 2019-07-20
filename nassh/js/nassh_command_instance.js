@@ -843,8 +843,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   // First tokenize the options into an object we can work with more easily.
   let options = {};
   try {
-    options = nassh.CommandInstance.tokenizeOptions(params.nasshOptions,
-                                                    params.hostname);
+    options = nassh.CommandInstance.tokenizeOptions(params.nasshOptions);
   } catch (e) {
     this.io.println(nassh.msg('NASSH_OPTIONS_ERROR', [e]));
     this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
@@ -854,7 +853,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   let userOptions = {};
   try {
     userOptions = nassh.CommandInstance.tokenizeOptions(
-        params.nasshUserOptions, params.hostname);
+        params.nasshUserOptions);
   } catch (e) {
     this.io.println(nassh.msg('NASSH_OPTIONS_ERROR', [e]));
     this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
@@ -872,6 +871,9 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
       console.warn(`Option ${option} not currently supported`);
     }
   });
+
+  // Finally post process the combined result.
+  options = nassh.CommandInstance.postProcessOptions(options, params.hostname);
 
   // Merge ssh options from the ssh:// URI that we believe are safe.
   params.userSshArgs = [];
@@ -1054,10 +1056,9 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
  * Turn the nassh option string into an object.
  *
  * @param {string=} optionString The set of --long options to parse.
- * @param {string=} hostname The hostname we're connecting to.
  * @return {Object} A map of --option to its value.
  */
-nassh.CommandInstance.tokenizeOptions = function(optionString='', hostname='') {
+nassh.CommandInstance.tokenizeOptions = function(optionString='') {
   let rv = {};
 
   // If it's empty, return right away else the regex split below will create
@@ -1089,6 +1090,19 @@ nassh.CommandInstance.tokenizeOptions = function(optionString='', hostname='') {
 
     rv[`--${flag}`] = value;
   }
+
+  return rv;
+};
+
+/**
+ * Expand & process nassh options.
+ *
+ * @param {Object} options A map of --option to its value.
+ * @param {string=} hostname The hostname we're connecting to.
+ * @return {Object} A map of --option to its value.
+ */
+nassh.CommandInstance.postProcessOptions = function(options, hostname='') {
+  let rv = Object.assign(options);
 
   // Handle various named "configs" we have.
   if (rv['--config'] == 'google') {

@@ -251,7 +251,11 @@ describe('proxy-host-addresses', () => {
 
   data.forEach(([host, expected]) => {
     it(`--proxy-host=${host}`, () => {
-      const rv = nassh.CommandInstance.tokenizeOptions(`--proxy-host=${host}`);
+      // First verify the tokenization phase.
+      let rv = nassh.CommandInstance.tokenizeOptions(`--proxy-host=${host}`);
+      assert.equal(rv['--proxy-host'], host);
+      // Then verify the post processing phase.
+      rv = nassh.CommandInstance.postProcessOptions(rv, host);
       assert.equal(rv['--proxy-host'], expected);
     });
   });
@@ -287,7 +291,8 @@ describe('default-proxy-host', () => {
 
   tests.forEach(([options, host, port, relay]) => {
     it(`default relay for '${options}' & '${host}'`, () => {
-      const rv = nassh.CommandInstance.tokenizeOptions(options, host);
+      let rv = nassh.CommandInstance.tokenizeOptions(options);
+      rv = nassh.CommandInstance.postProcessOptions(rv, host);
       assert.equal(port, rv['--proxy-port']);
       assert.equal(relay, rv['--proxy-host']);
     });
@@ -312,7 +317,8 @@ describe('default-ssh-agent', () => {
 
   tests.forEach(([host, expected]) => {
     it(`forwarding for ${host}`, () => {
-      const rv = nassh.CommandInstance.tokenizeOptions('--config=google', host);
+      let rv = nassh.CommandInstance.tokenizeOptions('--config=google');
+      rv = nassh.CommandInstance.postProcessOptions(rv, host);
       assert.equal(rv['auth-agent-forward'], expected);
     });
   });
