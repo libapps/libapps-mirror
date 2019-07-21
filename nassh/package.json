@@ -35,6 +35,7 @@
     "http-server": "~0",
     "license-checker": "~25",
     "mocha": "~6",
+    "mocha-headless-chrome": "~2",
     "rollup": ">=1.16",
     "rollup-plugin-node-resolve": ">=5",
     "rollup-plugin-terser": ">=5",

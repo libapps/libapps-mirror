@@ -58,6 +58,11 @@ def html_test_runner_parser():
                         help='Browser program to run tests against.')
     parser.add_argument('--profile', default=os.getenv('CHROME_TEST_PROFILE'),
                         help='Browser profile dir to run against.')
+    parser.add_argument('--skip-mkdeps', dest='run_mkdeps',
+                        action='store_false', default=True,
+                        help='Skip (re)building of dependencies.')
+    parser.add_argument('--visible', action='store_true',
+                        help='Show the browser window to interact with.')
     return parser
 
 
@@ -82,7 +87,10 @@ def html_test_runner_main(argv, path, serve=False, mkdeps=False):
 
     # Set up any deps.
     if mkdeps:
-        mkdeps(opts)
+        if opts.run_mkdeps:
+            mkdeps(opts)
+        else:
+            logging.info('Skipping building dependencies due to --skip-mkdeps')
 
     # Set up a unique profile to avoid colliding with user settings.
     profile_dir = opts.profile
@@ -90,18 +98,10 @@ def html_test_runner_main(argv, path, serve=False, mkdeps=False):
         profile_dir = os.path.expanduser('~/.config/google-chrome-run_local')
     os.makedirs(profile_dir, exist_ok=True)
 
-    # Chrome goes by many names.  We know them all!
+    # Find a Chrome version to run against.
     browser = opts.browser
     if not browser:
-        for suffix in ('', '-stable', '-beta', '-unstable', '-trunk'):
-            browser = 'google-chrome%s' % (suffix,)
-            try:
-                subprocess.check_call([browser, '--version'])
-                break
-            except (FileNotFoundError, subprocess.CalledProcessError):
-                pass
-        else:
-            parser.error('Could not find a browser; please use --browser.')
+        browser = chrome_setup()
 
     # Kick off server if needed.
     if serve:
@@ -113,14 +113,20 @@ def html_test_runner_main(argv, path, serve=False, mkdeps=False):
     # Kick off test runner in the background so we exit.
     logging.info('Running tests against browser "%s".', browser)
     logging.info('Tests page: %s', path)
-    subprocess.Popen([browser, '--user-data-dir=%s' % (profile_dir,), path])
+    if opts.visible:
+        subprocess.Popen([browser, '--user-data-dir=%s' % (profile_dir,), path])
+    else:
+        run(['mocha-headless-chrome', '-e', browser, '-f', path])
 
     # Wait for the server if it exists.
     if serve:
-        try:
-            server.wait()
-        except KeyboardInterrupt:
-            pass
+        if opts.visible:
+            try:
+                server.wait()
+            except KeyboardInterrupt:
+                pass
+        else:
+            server.terminate()
 
 
 def touch(path):
@@ -227,7 +233,7 @@ def fetch(uri, output):
 # The hash of the node_modules that we maintain.
 # Allow a long line for easy automated updating.
 # pylint: disable=line-too-long
-NODE_MODULES_HASH = '17107422d1385bd8ab2154073bcdb2880b4a6787bef8be8e0cfb04f472132ef2'
+NODE_MODULES_HASH = '6aa8e3885b83f646e15bd56f9f53b97a481fe1907da55519fd789ca755d9eca5'
 # pylint: enable=line-too-long
 
 # In sync with Chromium's DEPS file because it's easier to use something that
@@ -339,3 +345,46 @@ def node_and_npm_setup():
     # Make sure our tools show up first in $PATH to override the system.
     path = os.getenv('PATH')
     os.environ['PATH'] = '%s:%s' % (NODE_BIN_DIR, path)
+
+
+# A snapshot of Chrome that we update from time to time.
+# $ uribase='https://dl.google.com/linux/chrome/deb'
+# $ filename=$(
+#     curl -s "${uribase}/dists/stable/main/binary-amd64/Packages.gz" | \
+#         zcat | \
+#         awk '$1 == "Filename:" && $2 ~ /google-chrome-stable/ {print $NF}')
+# $ wget "${uribase}/${filename}"
+# $ gsutil cp -a public-read google-chrome-stable_*.deb \
+#       gs://chromeos-localmirror/secureshell/distfiles/
+CHROME_VERSION = 'google-chrome-stable_75.0.3770.142-1'
+
+
+def chrome_setup():
+    """Download our copy of Chrome for headless testing."""
+    puppeteer = os.path.join(NODE_MODULES_DIR, 'puppeteer')
+    download_dir = os.path.join(puppeteer, '.local-chromium')
+    chrome_dir = os.path.join(download_dir, CHROME_VERSION)
+    chrome_bin = os.path.join(chrome_dir, 'opt', 'google', 'chrome', 'chrome')
+    if os.path.exists(chrome_bin):
+        return chrome_bin
+
+    # Create a tempdir to unpack everything into.
+    tmpdir = chrome_dir + '.tmp'
+    shutil.rmtree(tmpdir, ignore_errors=True)
+    os.makedirs(tmpdir, exist_ok=True)
+
+    # Get the snapshot deb archive.
+    chrome_deb = os.path.join(tmpdir, 'deb')
+    uri = '%s/%s_amd64.deb' % (NODE_MODULES_BASE_URI, CHROME_VERSION)
+    fetch(uri, chrome_deb)
+
+    # Unpack the deb archive, then clean it all up.
+    run(['ar', 'x', 'deb', 'data.tar.xz'], cwd=tmpdir)
+    unpack('data.tar.xz', cwd=tmpdir)
+    unlink(chrome_deb)
+    unlink(os.path.join(tmpdir, 'data.tar.xz'))
+
+    # Finally move the tempdir to the saved location.
+    os.rename(tmpdir, chrome_dir)
+
+    return chrome_bin

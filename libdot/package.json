@@ -23,13 +23,14 @@
   "homepage": "https://chromium.googlesource.com/apps/libapps/+/HEAD/libdot",
   "scripts": {
     "prepare": "./bin/concat -i concat/libdot.concat -o js/libdot.js && cd js && terser libdot.js --compress --mangle --output libdot.min.js --source-map url=libdot.min.js.map,includeSources",
-    "test": "./bin/concat -i concat/libdot.concat -o js/libdot.js && mocha --file js/test_node.js js/*_tests.js third_party/*/*_tests.js"
+    "test": "./bin/load_tests && ./bin/concat -i concat/libdot.concat -o js/libdot.js && mocha --file js/test_node.js js/*_tests.js third_party/*/*_tests.js"
   },
   "devDependencies": {
     "chai": "~4",
     "eslint": "~6",
     "jsdom": "~15",
     "mocha": "~6",
+    "mocha-headless-chrome": "~2",
     "terser": "~4"
   }
 }
