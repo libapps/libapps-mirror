@@ -4,13 +4,34 @@
   <meta charset='utf-8'/>
   <title>Secure Shell - Open Source Licenses</title>
   <link rel='stylesheet' href='../third_party/chrome-bootstrap/chrome-bootstrap.css'></link>
+  <script src='../js/licenses.js'></script>
 
   <style>
     body {
       padding: 1em;
     }
-    pre {
+    pre.license {
       font-size: smaller;
+      display: none;
+    }
+    h2.package {
+      clear: both;
+      width: 100%;
+      background-color: #c3d9ff;
+    }
+    a.license {
+      font-size: smaller;
+      float: right;
+    }
+
+    @media print {
+      pre.license {
+        display: block;
+      }
+
+      a.license {
+        display: none;
+      }
     }
   </style>
 </head>
