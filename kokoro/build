@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Do all the things!"""
+
+from __future__ import print_function
+
+import argparse
+import glob
+import os
+import shutil
+import sys
+
+import kokoro
+import libdot
+
+
+def build():
+    """Build the various components."""
+    # Build the ssh client code.
+    ssh_client_dir = os.path.join(kokoro.LIBAPPS_DIR, 'ssh_client')
+    libdot.run(['./build.sh'], cwd=ssh_client_dir)
+    # Copy output files.
+    libdot.run(['cp', '-r', './ssh_client/output/plugin/', './nassh/'],
+               cwd=kokoro.LIBAPPS_DIR)
+    # Remove dir to avoid rsync error logs.
+    shutil.rmtree(os.path.join(ssh_client_dir, 'output'), ignore_errors=True)
+
+    # Build the nassh program.
+    nassh_dir = os.path.join(kokoro.LIBAPPS_DIR, 'nassh')
+    zip_dir = os.path.join(nassh_dir, 'dist', 'zip')
+    shutil.rmtree(zip_dir, ignore_errors=True)
+    libdot.run(['./bin/mkzip.sh', '--nouse_manifest_platforms'], cwd=nassh_dir)
+
+    # Promote extension and app dev zips.
+    for path in glob.glob(os.path.join(zip_dir, '*V2*.zip')):
+        libdot.unlink(path)
+    for path in glob.glob(os.path.join(zip_dir, 'SecureShell*.zip')):
+        libdot.run(['./bin/promote.sh', path], cwd=nassh_dir)
+
+
+def test():
+    """Test the various components."""
+    for pkg in ('libdot', 'hterm', 'nassh'):
+        pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
+        if os.path.exists(os.path.join(pkg_dir, 'package.json')):
+            cmd = ['npm', 'test']
+        else:
+            cmd = ['./bin/load_tests']
+        libdot.run(cmd, cwd=pkg_dir)
+
+
+def get_parser():
+    """Get a command line parser."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('-d', '--debug', action='store_true',
+                        help='Run with debug output.')
+    return parser
+
+
+def main(argv):
+    """The main func!"""
+    parser = get_parser()
+    opts = parser.parse_args(argv)
+    libdot.setup_logging(debug=opts.debug)
+
+    build()
+    #test()
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))

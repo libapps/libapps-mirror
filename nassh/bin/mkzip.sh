@@ -8,7 +8,7 @@ LIBDOT_DIR="$(dirname -- "$0")/../../libdot"
 
 cd "${BIN_DIR}/.."
 
-"${BIN_DIR}"/mkdeps
+"${BIN_DIR}"/mkdeps || exit
 
 mkdir -p ./dist/zip
 
@@ -56,5 +56,5 @@ set_stamp
 
 for manifest in manifest_*.json; do
   mkzip.sh --append_version "${stamp}" \
-    -s "." -w ./dist/zip/ -m "${manifest}" "$@"
+    -s "." -w ./dist/zip/ -m "${manifest}" "$@" || exit
 done

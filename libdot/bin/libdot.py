@@ -204,6 +204,9 @@ def fetch(uri, output):
         logging.info('Using existing download: %s', name)
         return
 
+    logging.info('Downloading %s to %s', uri, output)
+    os.makedirs(distdir, exist_ok=True)
+
     # Use kokoro build cache or Gentoo distdir if available.
     for envvar in ('KOKORO_GFILE_DIR', 'DISTDIR'):
         cache_dir = os.getenv(envvar)
@@ -212,9 +215,6 @@ def fetch(uri, output):
             if os.path.exists(cache_file):
                 symlink(cache_file, output)
                 return
-
-    logging.info('Downloading %s to %s', uri, output)
-    os.makedirs(distdir, exist_ok=True)
 
     # Don't be verbose if running on CI systems.
     verbose = os.isatty(sys.stdout.fileno())

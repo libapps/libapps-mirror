@@ -3,10 +3,12 @@
 \#*
 .#*
 __pycache__/
+*.py[co]
 *.swp
 
 # Stuff we build for distribution
 dist
+/ssh_client-image.tar*
 
 # npm related dirs.
 node_modules
