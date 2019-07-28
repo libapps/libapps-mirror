@@ -174,7 +174,14 @@ def run(cmd, check=True, cwd=None, **kwargs):
     if cwd is None:
         cwd = os.getcwd()
     logging.info('Running: %s\n  (cwd = %s)', cmdstr(cmd), cwd)
-    result = subprocess.run(cmd, cwd=cwd, **kwargs)
+    # Python 3.4 doesn't support run.
+    if sys.version_info < (3, 5):
+        result = subprocess.Popen(cmd, cwd=cwd, **kwargs)
+        stdout, stderr = result.communicate()
+        result.stdout = stdout
+        result.stderr = stderr
+    else:
+        result = subprocess.run(cmd, cwd=cwd, **kwargs)
     if check and result.returncode:
         logging.error('Running %s failed!', cmd[0])
         sys.exit(result.returncode)
