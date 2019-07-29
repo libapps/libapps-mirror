@@ -73,7 +73,7 @@ def update():
         os.makedirs(NODE_DIR, exist_ok=True)
 
         # Download & unpack the archive.
-        uri = os.path.join(NODE_BASE_URI, NODE_VER, node_hash)
+        uri = '/'.join((NODE_BASE_URI, NODE_VER, node_hash))
         output = os.path.join(NODE_DIR, node_hash)
         libdot.fetch(uri, output)
         libdot.unpack(output, cwd=NODE_DIR)
@@ -111,7 +111,7 @@ def modules_update():
     if not os.path.exists(hash_file):
         # Download & unpack the archive.
         tar = 'node_modules-%s.tar.xz' % (NODE_MODULES_HASH,)
-        uri = os.path.join(NODE_MODULES_BASE_URI, tar)
+        uri = '/'.join((NODE_MODULES_BASE_URI, tar))
         output = os.path.join(libdot.LIBAPPS_DIR, tar)
         libdot.fetch(uri, output)
         libdot.unpack(output, cwd=libdot.LIBAPPS_DIR)

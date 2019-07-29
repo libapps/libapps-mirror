@@ -22,9 +22,9 @@ import libdot
 # Where in Chromium's tree they maintain their hashes.
 URI_BASE = ('https://chromium.googlesource.com/chromium/src/+/master/'
             'third_party/node')
-URI_LIN = os.path.join(URI_BASE, 'linux/node-linux-x64.tar.gz.sha1')
-URI_MAC = os.path.join(URI_BASE, 'mac/node-darwin-x64.tar.gz.sha1')
-URI_WIN = os.path.join(URI_BASE, 'win/node.exe.sha1')
+URI_LIN = '/'.join((URI_BASE, 'linux', 'node-linux-x64.tar.gz.sha1'))
+URI_MAC = '/'.join((URI_BASE, 'mac', 'node-darwin-x64.tar.gz.sha1'))
+URI_WIN = '/'.join((URI_BASE, 'win', 'node.exe.sha1'))
 
 # File which records the node hashes.
 HASH_FILE = os.path.join(libdot.BIN_DIR, 'node')

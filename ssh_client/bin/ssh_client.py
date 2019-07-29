@@ -77,7 +77,7 @@ def emake(*args, **kwargs):
 def fetch(uri=None, name=None):
     """Download |uri| into DISTDIR as |name|."""
     if uri is None:
-        uri = os.path.join(SRC_URI_MIRROR, name)
+        uri = '/'.join((SRC_URI_MIRROR, name))
     if name is None:
         name = os.path.basename(uri)
 
