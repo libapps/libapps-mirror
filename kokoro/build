@@ -10,6 +10,7 @@ from __future__ import print_function
 
 import argparse
 import glob
+import logging
 import os
 import shutil
 import sys
@@ -26,8 +27,6 @@ def build():
     # Copy output files.
     libdot.run(['cp', '-r', './ssh_client/output/plugin/', './nassh/'],
                cwd=kokoro.LIBAPPS_DIR)
-    # Remove dir to avoid rsync error logs.
-    shutil.rmtree(os.path.join(ssh_client_dir, 'output'), ignore_errors=True)
 
     # Build the nassh program.
     nassh_dir = os.path.join(kokoro.LIBAPPS_DIR, 'nassh')
@@ -44,13 +43,33 @@ def build():
 
 def test():
     """Test the various components."""
+    errors = False
     for pkg in ('libdot', 'hterm', 'nassh'):
         pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
         if os.path.exists(os.path.join(pkg_dir, 'package.json')):
-            cmd = ['npm', 'test']
+            cmd = ['npm', 'test', '--', '--no-sandbox']
         else:
-            cmd = ['./bin/load_tests']
-        libdot.run(cmd, cwd=pkg_dir)
+            cmd = ['./bin/load_tests', '--no-sandbox']
+        result = libdot.run(cmd, check=False, cwd=pkg_dir)
+        if result.returncode:
+            logging.error('%s test suite exited %i', pkg, result.returncode)
+            errors = True
+
+    # Run all the unittests before aborting.
+    if errors:
+        sys.exit(1)
+
+
+def clean():
+    """Clean up various compiled objects.
+
+    When kokoro is done (pass or fail), it archives the tree via rsync.
+    Remove all the compiled objects since we don't need them.
+    """
+    ssh_client_dir = os.path.join(kokoro.LIBAPPS_DIR, 'ssh_client')
+    shutil.rmtree(os.path.join(ssh_client_dir, 'output'), ignore_errors=True)
+
+    shutil.rmtree(libdot.NODE_MODULES_DIR, ignore_errors=True)
 
 
 def get_parser():
@@ -58,6 +77,9 @@ def get_parser():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('-d', '--debug', action='store_true',
                         help='Run with debug output.')
+    parser.add_argument('--skip-clean', dest='clean',
+                        action='store_false', default=True,
+                        help='Clean up compiled object dirs.')
     return parser
 
 
@@ -66,10 +88,14 @@ def main(argv):
     parser = get_parser()
     opts = parser.parse_args(argv)
     libdot.setup_logging(debug=opts.debug)
+    libdot.node_and_npm_setup()
 
-    build()
-    #test()
-
+    try:
+        build()
+        test()
+    finally:
+        if opts.clean:
+            clean()
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:]))
