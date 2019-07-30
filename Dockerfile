@@ -24,4 +24,4 @@ RUN apt-get --assume-yes install \
 RUN git config --system user.email "secureshelldummyemail@google.com"
 RUN git config --system user.name "Secure Shell Dummy Name"
 
-CMD /kokoro/build
+CMD /libapps/kokoro/build
