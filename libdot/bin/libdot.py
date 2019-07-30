@@ -67,6 +67,10 @@ def html_test_runner_parser():
                         help='Skip (re)building of dependencies.')
     parser.add_argument('--visible', action='store_true',
                         help='Show the browser window to interact with.')
+    # Note: This CLI option matches Chrome's own naming.
+    parser.add_argument('--no-sandbox', dest='sandbox',
+                        action='store_false', default=True,
+                        help='Disable Chrome sandboxing.')
     return parser
 
 
@@ -114,13 +118,23 @@ def html_test_runner_main(argv, path, serve=False, mkdeps=False):
                                   cwd=LIBAPPS_DIR)
         path = 'http://localhost:8080/%s' % path
 
+    # Some environments are unable to utilize the sandbox: we're not running as
+    # root, and userns is unavailable.  For example, while using docker.
+    if opts.sandbox:
+        sb_arg = mocha_sb_arg = []
+    else:
+        sb_arg = ['--no-sandbox']
+        # The wrapper requires omitting the leading dashes for no real reason.
+        mocha_sb_arg = ['--args=no-sandbox']
+
     # Kick off test runner in the background so we exit.
     logging.info('Running tests against browser "%s".', browser)
     logging.info('Tests page: %s', path)
     if opts.visible:
-        subprocess.Popen([browser, '--user-data-dir=%s' % (profile_dir,), path])
+        subprocess.Popen([browser, '--user-data-dir=%s' % (profile_dir,), path]
+                         + sb_arg)
     else:
-        run(['mocha-headless-chrome', '-e', browser, '-f', path])
+        run(['mocha-headless-chrome', '-e', browser, '-f', path] + mocha_sb_arg)
 
     # Wait for the server if it exists.
     if serve:
