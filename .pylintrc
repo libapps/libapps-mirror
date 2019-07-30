@@ -2,6 +2,11 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+[MASTER]
+
+# Use multiple processes to speed up Pylint.
+jobs = 0
+
 [MESSAGES CONTROL]
 
 # not-callable throws a lot of false positives with pylint-1.6.
