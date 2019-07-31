@@ -127,24 +127,26 @@ def html_test_runner_main(argv, path, serve=False, mkdeps=False):
         # The wrapper requires omitting the leading dashes for no real reason.
         mocha_sb_arg = ['--args=no-sandbox']
 
-    # Kick off test runner in the background so we exit.
-    logging.info('Running tests against browser "%s".', browser)
-    logging.info('Tests page: %s', path)
-    if opts.visible:
-        subprocess.Popen([browser, '--user-data-dir=%s' % (profile_dir,), path]
-                         + sb_arg)
-    else:
-        run(['mocha-headless-chrome', '-e', browser, '-f', path] + mocha_sb_arg)
-
-    # Wait for the server if it exists.
-    if serve:
+    try:
+        # Kick off test runner in the background so we exit.
+        logging.info('Running tests against browser "%s".', browser)
+        logging.info('Tests page: %s', path)
         if opts.visible:
-            try:
-                server.wait()
-            except KeyboardInterrupt:
-                pass
+            subprocess.Popen([browser, '--user-data-dir=%s' % (profile_dir,),
+                              path] + sb_arg)
         else:
-            server.terminate()
+            run(['mocha-headless-chrome', '-e', browser, '-f', path] +
+                mocha_sb_arg)
+    finally:
+        # Wait for the server if it exists.
+        if serve:
+            if opts.visible:
+                try:
+                    server.wait()
+                except KeyboardInterrupt:
+                    pass
+            else:
+                server.terminate()
 
 
 def touch(path):
