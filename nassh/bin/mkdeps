@@ -32,9 +32,10 @@ def mkdeps():
     libdot.run(['rollup', '-c'], cwd=nassh.DIR)
 
 
-def concat_third_party_dir(third_party_dir):
-    """Concatenate all licenses of |third_party_dir| bundles."""
+def concat_local_deps():
+    """Concatenate all licenses of third_party/ bundles."""
     ret = {}
+    third_party_dir = os.path.join(nassh.DIR, 'third_party')
     for package in os.listdir(third_party_dir):
         entry = {}
         version = None
@@ -52,28 +53,12 @@ def concat_third_party_dir(third_party_dir):
                     m = re.match(r'.*"(.*)"', line)
                     version = m.group(1)
 
-        for path in ('LICENSE', 'LICENSE.md'):
-            license_file = os.path.join(package_dir, path)
-            if not os.path.exists(license_file):
-                continue
-            logging.debug('%s: loading %s', package, license_file)
-            with open(license_file, 'r', encoding='utf-8') as fp:
-                entry['data'] = fp.read().strip()
-            break
-        else:
-            raise ValueError('Unable to locate LICENSE for %s' % (package,))
+        license_file = os.path.join(package_dir, 'LICENSE.md')
+        with open(license_file, 'r', encoding='utf-8') as fp:
+            entry['data'] = fp.read().strip()
 
         ret['%s@%s' % (package, version)] = entry
 
-    return ret
-
-
-def concat_local_deps():
-    """Concatenate all licenses of third_party/ bundles."""
-    ret = {}
-    ret.update(concat_third_party_dir(os.path.join(nassh.DIR, 'third_party')))
-    ret.update(concat_third_party_dir(
-        os.path.join(libdot.LIBAPPS_DIR, 'ssh_client', 'third_party')))
     return ret
 
 
@@ -103,20 +88,6 @@ def concat_licenses():
         logging.error(ret.stdout.decode('utf8'))
 
 
-# Template for every package/license entry.
-LICENSE_ENTRY_TEMPLATE = """
-<h2 class='package' id='package-%(package)s'>
-  <a href='%(repository)s'>%(package)s</a>
-  <a class='license'
-     id='show-%(package)s'
-     i18n='{"aria-label": "$id"}'
-     href='#'>show license</a>
-</h2>
-<pre class='license' id='license-%(package)s'>
-%(data)s
-</pre>
-"""
-
 def generate_html(licenses):
     """Write the collected |licenses| to an HTML file."""
     with open(LICENSE_TEMPLATE, 'r', encoding='utf8') as fp:
@@ -124,11 +95,9 @@ def generate_html(licenses):
     output = ''
     for package in sorted(licenses):
         entry = licenses[package]
-        output += LICENSE_ENTRY_TEMPLATE % {
-            'repository': entry['repository'],
-            'package': html.escape(package),
-            'data': html.escape(entry['data']),
-        }
+        output += ('<h2><a href="%s">%s</a></h2>\n' %
+                   (entry['repository'], html.escape(package)))
+        output += '<pre>\n%s</pre>\n' % html.escape(entry['data'])
     output = template.replace('%%LICENSES%%', output)
     with open(LICENSE_FILE, 'w', encoding='utf8') as fp:
         fp.write(output)
