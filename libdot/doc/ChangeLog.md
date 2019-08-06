@@ -1,3 +1,23 @@
+# 3.0.0, 2019-08-06, Few API improvements, and lots of test suite improvements.
+
+* punycode: Drop our local copy & get from npm.
+* load_tests: Tear down server on failures.
+* load_tests: Add a --no-sandbox flag.
+* load_tests: Move node tests out of package.json.
+* libdot: Require Python 3.5+ in tooling.
+* load_tests: Leverage mocha-headless-chrome for headless/CI.
+* load_tests: Refactor mkdeps call.
+* node_modules_create_bundle: Handle interrupted runs.
+* fs: Add openFile helper.
+* fs: readFile: Convert to Promises.
+* load_tests: Support auto launching local node web server.
+* f: getWhitespace: Drop helper for ES6 String.repeat.
+* load_tests: Require node/npm (for chai/mocha).
+* fetch: Leverage $DISTDIR cache.
+* npm: Refresh bundled packages.
+* pylint: Add libdot to search path.
+* concat: Rework to support importing.
+
 # 2.0.0, 2019-06-17, Significant API overhaul.
 
 * load_tests: use DISPLAY=:0.
