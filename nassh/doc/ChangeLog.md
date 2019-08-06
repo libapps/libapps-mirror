@@ -1,3 +1,31 @@
+# 0.19, 2019-08-06, Minor bug fixes & better licensing info.
+
+* Update to hterm 1.86.  Very minor improvements.
+* Update to libdot 3.0.0.  Few API improvements, and test suite improvements.
+* licenses: Add ssh_client details too.
+* punycode: Import from npm instead.
+* agent: Add support for RSA and ECDSA via PIV applet.
+* licenses: Bundle licenses of prod NPM dependencies.
+* tests: Leverage mocha-headless-chrome for headless/CI.
+* identity: Move key files to /.ssh/identity/.
+* load_tests: Refactor mkdeps call.
+* relay: Handle invalid proxy host settings.
+* agent: Use lib.codec.codeUnitArrayToString.
+* fs: Convert getFileSystem to Promises.
+* nassh: Write our own background page.
+* load_tests: Run tests against local node server.
+* uri: Delay expanding user nassh args.
+* nassh: Handle protocol registration errors better.
+* nasftp: Fix put command after ArrayBuffer conversion.
+* nassh: Scrub more update notification code.
+* nassh: Delete unused wash hooks.
+* ssh_client: Improve debug logs.
+* stream: Drop writeArrayBuffer migration.
+* mkcrosh: Add a python3.6 hack.
+* package.json: Start npm packaging files.
+* import-translations: Rewrite in Python.
+* mkdeps: Rewrite in Python.
+
 # 0.18, 2019-06-17, OpenSSH 8.0p1 & Unicode improvements.
 
 * Update to hterm 1.85.  Significant Unicode improvements.
