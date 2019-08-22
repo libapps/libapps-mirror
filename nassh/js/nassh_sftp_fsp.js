@@ -513,7 +513,7 @@ nassh.sftp.fsp.copyDirectory_ = function(sourcePath, targetPath, client) {
  * the user clicks "Add New Service" from the File App.
  */
 nassh.sftp.fsp.onMountRequested = function(onSuccess, onError) {
-  lib.f.openWindow('html/nassh.html');
+  lib.f.openWindow('/html/nassh.html');
 };
 
 /**
@@ -560,7 +560,7 @@ nassh.sftp.fsp.onConfigureRequested = function(options, onSuccess, onError) {
   }
 
   lib.f.openWindow(
-      `html/nassh_sftp_fsp_config_dialog.html` +
+      `/html/nassh_sftp_fsp_config_dialog.html` +
       `?profile-id=${options.fileSystemId}`, '',
       'chrome=no,close=yes,resize=yes,scrollbars=yes,minimizable=yes,' +
       'width=600,height=400');

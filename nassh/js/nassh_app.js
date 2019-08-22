@@ -136,7 +136,7 @@ nassh.App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
     }
   }
 
-  var url = chrome.runtime.getURL('html/nassh.html#' + text);
+  var url = chrome.runtime.getURL('/html/nassh.html#' + text);
   switch (disposition) {
     default:
       console.warn('unknown disposition: ' + disposition);
