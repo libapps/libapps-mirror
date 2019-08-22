@@ -1748,9 +1748,10 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.verifyPIN =
        */
       const VERIFY_PIN_APDU_HEADER_PIV = [0x00, 0x20, 0x00, 0x80];
       // PIV Application PIN can only be numeric and between 6 and 8 digits
-      // long (see PIV specification Section 2.4.3).
-      if (pinBytes.length < 6 || pinBytes.length > 8 ||
-          [].some.call(pinBytes, (byte) => byte < 0x30 || byte > 0x39)) {
+      // long per spec (see PIV specification Section 2.4.3). Real-life cards
+      // and applications are more permissive, hence we allow all characters
+      // while keeping the length requirement.
+      if (pinBytes.length < 6 || pinBytes.length > 8) {
         return false;
       }
       // Pad to 8 bytes by appending (at most two) 0xFF bytes.
