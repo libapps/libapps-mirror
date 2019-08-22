@@ -8,6 +8,6 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/html/crosh.html",
+  "start_url": "/html/crosh.html?command=vmshell",
   "theme_color": "#fff"
 }
