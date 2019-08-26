@@ -73,14 +73,20 @@ nassh.External.COMMANDS.mount = (request, sender, sendResponse) => {
 };
 
 /**
- * Opens a new crosh window.
  *
- * @param {{width: number=, height: number=}} request Customize the new window
- *     behavior.
- * @param {{id: !string}} sender chrome.runtime.MessageSender
+ * @typedef {{url: string, width: number=, height: number=}} NewWindowSettings
+ */
+
+/**
+ * Opens a new window.
+ *
+ * @param {Object} response The response to send back to the caller.
+ * @param {NewWindowSettings} request Customize the new window behavior.
+ * @param {{id: !string}} sender chrome.runtime.MessageSender.
  * @param {function(Object=)} sendResponse called to send response.
  */
-nassh.External.COMMANDS.crosh = (request, sender, sendResponse) => {
+nassh.External.newWindow_ = function(
+    response, request, sender, sendResponse) {
   // Set up some default values.
   request = Object.assign({
     width: 735,
@@ -107,18 +113,88 @@ nassh.External.COMMANDS.crosh = (request, sender, sendResponse) => {
     return;
   }
 
-  lib.f.openWindow(lib.f.getURL('/html/crosh.html'), '',
+  lib.f.openWindow(request.url, '',
                    'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
                    `minimizable=yes,width=${width},height=${height}`);
-  sendResponse({error: false, message: 'openCrosh'});
+  sendResponse(response);
 };
 
 /**
- * Invoked when external app/extension calls chrome.remote.sendMessage.
+ * Opens a new crosh window.
+ *
+ * @param {NewWindowSettings} request Customize the new window behavior.
+ * @param {{id: !string}} sender chrome.runtime.MessageSender.
+ * @param {function(Object=)} sendResponse called to send response.
+ */
+nassh.External.COMMANDS.crosh = function(request, sender, sendResponse) {
+  if (!sender.internal) {
+    delete request.url;
+  }
+
+  request = Object.assign({
+    url: lib.f.getURL('/html/crosh.html'),
+  }, request);
+
+  nassh.External.newWindow_(
+      {error: false, message: 'openCrosh'},
+      request, sender, sendResponse);
+};
+
+/**
+ * Opens a new nassh window.
+ *
+ * @param {NewWindowSettings} request Customize the new window behavior.
+ * @param {{id: !string}} sender chrome.runtime.MessageSender.
+ * @param {function(Object=)} sendResponse called to send response.
+ */
+nassh.External.COMMANDS.nassh = function(request, sender, sendResponse) {
+  if (!sender.internal) {
+    delete request.url;
+  }
+
+  request = Object.assign({
+    url: lib.f.getURL('/html/nassh.html'),
+  }, request);
+
+  nassh.External.newWindow_(
+      {error: false, message: 'openNassh'},
+      request, sender, sendResponse);
+};
+
+/**
+ * Invoked when external app/extension calls chrome.runtime.sendMessage.
  * https://developer.chrome.com/apps/runtime#event-onMessageExternal.
  * @private
  */
 nassh.External.onMessageExternal_ = (request, sender, sendResponse) => {
+  sender.internal = false;
+
+  // Execute specified command.
+  if (!nassh.External.COMMANDS.hasOwnProperty(request.command)) {
+    sendResponse(
+        {error: true, message: `unsupported command ${request.command}`});
+    return;
+  }
+  try {
+    nassh.External.COMMANDS[request.command].call(
+        this, request, sender, sendResponse);
+
+    // Return true to allow async sendResponse.
+    return true;
+  } catch (e) {
+    console.error(e);
+    sendResponse({error: true, message: e.message, stack: e.stack});
+  }
+};
+
+/**
+ * Invoked when internal code calls chrome.runtime.sendMessage.
+ * https://developer.chrome.com/apps/runtime#event-onMessageExternal.
+ * @private
+ */
+nassh.External.onMessage_ = (request, sender, sendResponse) => {
+  sender.internal = true;
+
   // Execute specified command.
   if (!nassh.External.COMMANDS.hasOwnProperty(request.command)) {
     sendResponse(
@@ -163,6 +239,10 @@ lib.registerInit('external api', (onInit) => {
       // Register listener to receive messages.
       chrome.runtime.onMessageExternal.addListener(
           nassh.External.onMessageExternal_.bind(this));
+
+      // Register listener to receive messages.
+      chrome.runtime.onMessage.addListener(
+          nassh.External.onMessage_.bind(this));
 
       // Init complete.
       onInit();

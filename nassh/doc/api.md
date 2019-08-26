@@ -82,6 +82,17 @@ On Chrome OS, open a new [crosh] session.
 | `height`       | number= | The height of the new window. |
 | `width`        | number= | The width of the new window. |
 
+### Nassh
+
+Open a new ssh session.
+
+| Field name     | Type    | Description |
+|----------------|---------|-------------|
+| `command`      | !string | Must be `nassh`. |
+| `height`       | number= | The height of the new window. |
+| `width`        | number= | The width of the new window. |
+| `url`          | string= | *(internal)* URL to open instead for specific profiles. |
+
 
 [Chrome messaging API]: https://developer.chrome.com/apps/messaging
 [crosh]: chromeos-crosh.md
