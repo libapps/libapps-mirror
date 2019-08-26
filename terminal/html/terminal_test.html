@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'/>
+
+    <!-- npm modules -->
+    <script src='../../node_modules/chai/chai.js'></script>
+    <script src='../../node_modules/mocha/mocha.js'></script>
+
+    <!-- Register mocks and initialize the test framework first. -->
+    <script src='../js/terminal_test_mocks.js'></script>
+    <script src='../js/terminal_test.js'></script>
+
+    <!-- Order should match terminal.html. -->
+    <script src='../../nassh/js/nassh_deps.concat.js'></script>
+    <script src='../js/terminal.js'></script>
+
+    <!-- All the unittests go below here. -->
+    <script src='../js/terminal_tests.js'></script>
+
+    <link href='../../node_modules/mocha/mocha.css' rel='stylesheet'/>
+  </head>
+
+  <body>
+    <div id='mocha'></div>
+  </body>
+</html>

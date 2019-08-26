@@ -54,8 +54,8 @@ rm ./dist/zip/tmp/crosh.json
 
 # Add chrome://terminal html, js, and terminal_pwa_manifest.json.
 cd ../terminal
-zip -r "${CROSH_ZIPFILE}" html
-zip -r "${CROSH_ZIPFILE}" js
+zip -r "${CROSH_ZIPFILE}" html -x html/*_test*
+zip -r "${CROSH_ZIPFILE}" js -x js/*_test*
 zip "${CROSH_ZIPFILE}" terminal_pwa_manifest.json
 
 echo

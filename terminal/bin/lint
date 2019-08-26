@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Lint our source files."""
+
+from __future__ import print_function
+
+import glob
+import os
+import sys
+
+import terminal
+import libdot
+
+
+def main(argv):
+    """The main func!"""
+    if not argv:
+        os.chdir(terminal.DIR)
+        # All files is js/*.js.
+        # Sort to ensure consistent order.
+        argv = glob.glob(os.path.join('js', '*.js'))
+        argv.sort()
+
+    libdot.setup_logging()
+    libdot.node_and_npm_setup()
+
+    # We know our tools are first in $PATH now.
+    libdot.run(['eslint'] + argv)
+    # TODO(crbug.com/998928): Update checks beyond just 'lintChecks'.
+    # E.g. --jscomp_error=*.
+    libdot.run([
+        os.path.join(libdot.BIN_DIR, 'closure-compiler'),
+        '--checks-only', '--jscomp_error=lintChecks',
+        '--language_in=ECMASCRIPT_2018'] + argv)
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))

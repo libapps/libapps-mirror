@@ -4,18 +4,6 @@
 
 'use strict';
 
-// CSP means that we can't kick off the initialization from the html file,
-// so we do it like this instead.
-window.onload = function() {
-  // TODO(crbug.com/999028): Make sure system web apps are not discarded as
-  // part of lifecycle API.  This fix used by crosh and nassh are not
-  // guaranteed to be a long term solution.
-  chrome.tabs.getCurrent((tab) => {
-    chrome.tabs.update(tab.id, {autoDiscardable: false});
-  });
-  lib.init(Terminal.init);
-};
-
 /**
  * The Terminal command.
  *
@@ -23,7 +11,7 @@ window.onload = function() {
  * The Terminal command uses the terminalPrivate extension API to create and
  * use the vmshell process on a Chrome OS machine.
  *
- * @param {Object} argv The argument object passed in from the Terminal.
+ * @param {!Object} argv The argument object passed in from the Terminal.
  */
 function Terminal(argv) {
   this.commandName = argv.commandName;
@@ -36,8 +24,10 @@ function Terminal(argv) {
 /**
  * Static initializer.
  *
- * This constructs a new Terminal instance and instructs it to run the Terminal
- * command.
+ * This constructs a new hterm.Terminal instance and instructs it to run
+ * the Terminal command.
+ *
+ * @return {!hterm.Terminal} The new hterm.Terminal instance.
  */
 Terminal.init = function() {
   const params = new URLSearchParams(document.location.search);
@@ -73,9 +63,7 @@ Terminal.init = function() {
   // function]) when translated strings are available via
   // chrome://terminal/strings.js.
 
-  // Useful for console debugging.
-  window.term_ = terminal;
-  return true;
+  return terminal;
 };
 
 /**
@@ -129,7 +117,6 @@ Terminal.prototype.run = function() {
       return;
     }
 
-    window.onbeforeunload = this.onBeforeUnload_.bind(this);
     this.id_ = id;
 
     // Setup initial window size.
@@ -140,13 +127,6 @@ Terminal.prototype.run = function() {
 
   chrome.terminalPrivate.openTerminalProcess(
       this.commandName, this.argv_.args, pidInit);
-};
-
-Terminal.prototype.onBeforeUnload_ = function(e) {
-  // Note: This message doesn't seem to be shown by browsers.
-  const msg = `Closing this tab will exit ${this.commandName}.`;
-  e.returnValue = msg;
-  return msg;
 };
 
 /**
@@ -175,8 +155,8 @@ Terminal.prototype.close_ = function() {
 /**
  * Notify process about new terminal size.
  *
- * @param {string|integer} terminal width.
- * @param {string|integer} terminal height.
+ * @param {string|number} width The new terminal width.
+ * @param {string|number} height The new terminal height.
  */
 Terminal.prototype.onTerminalResize_ = function(width, height) {
   if (this.id_ === null) {
@@ -192,10 +172,11 @@ Terminal.prototype.onTerminalResize_ = function(width, height) {
 
 /**
  * Exit the terminal command.
+ *
+ * @param {number} code Exit code, 0 for success.
  */
 Terminal.prototype.exit = function(code) {
   this.close_();
-  window.onbeforeunload = null;
 
   if (code == 0) {
     this.io.pop();

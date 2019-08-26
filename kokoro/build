@@ -50,7 +50,7 @@ def build():
 def test():
     """Test the various components."""
     errors = False
-    for pkg in ('libdot', 'hterm', 'nassh'):
+    for pkg in ('libdot', 'hterm', 'nassh', 'terminal'):
         pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
         if os.path.exists(os.path.join(pkg_dir, 'package.json')):
             cmd = ['npm', 'test', '--', '--no-sandbox']
