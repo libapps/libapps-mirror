@@ -65,8 +65,8 @@ window.onload = function() {
     const runNassh = function() {
       terminal.setCursorPosition(0, 0);
       terminal.setCursorVisible(true);
-      terminal.runCommandClass(nassh.CommandInstance,
-                               document.location.hash.substr(1));
+      terminal.runCommandClass(
+          nassh.CommandInstance, 'nassh', [document.location.hash.substr(1)]);
     };
     terminal.onTerminalReady = function() {
       if (window.chrome && chrome.accessibilityFeatures &&

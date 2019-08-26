@@ -198,7 +198,7 @@ nassh.CommandInstance.prototype.run = function() {
     this.fileSystem_ = fileSystem;
     this.sshDirectoryEntry_ = sshDirectoryEntry;
 
-    var argstr = this.argv_.argString;
+    var argstr = this.argv_.args.join(' ');
 
     // This item is set before we redirect away to login to a relay server.
     // If it's set now, it's the first time we're reloading after the redirect.

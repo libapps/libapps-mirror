@@ -25,12 +25,6 @@ window.onload = function() {
     return;
   }
 
-  // If we want to execute something other than the default crosh.
-  if (params.has('command')) {
-    Crosh.prototype.commandName = params.get('command');
-  }
-  window.document.title = Crosh.prototype.commandName;
-
   nassh.disableTabDiscarding();
   lib.init(Crosh.init);
 };
@@ -42,10 +36,10 @@ window.onload = function() {
  * The Crosh command uses terminalPrivate extension API to create and use crosh
  * process on Chrome OS machine.
  *
- *
  * @param {Object} argv The argument object passed in from the Terminal.
  */
 function Crosh(argv) {
+  this.commandName = argv.commandName;
   this.argv_ = argv;
   this.io = null;
   this.keyboard_ = null;
@@ -69,6 +63,10 @@ Crosh.init = function() {
   const profileName = params.get('profile');
   var terminal = new hterm.Terminal(profileName);
 
+  // If we want to execute something other than the default crosh.
+  const commandName = params.get('command') || 'crosh';
+  window.document.title = commandName;
+
   terminal.decorate(document.querySelector('#terminal'));
   const runCrosh = function() {
     terminal.keyboard.bindings.addBinding('Ctrl-Shift-P', function() {
@@ -78,7 +76,7 @@ Crosh.init = function() {
 
     terminal.setCursorPosition(0, 0);
     terminal.setCursorVisible(true);
-    terminal.runCommandClass(Crosh, params.getAll('args[]'));
+    terminal.runCommandClass(Crosh, commandName, params.getAll('args[]'));
 
     terminal.command.keyboard_ = terminal.keyboard;
   };
@@ -145,14 +143,6 @@ Crosh.openNewWindow_ = function(url) {
     }, resolve);
   });
 };
-
-/**
- * The name of this command used in messages to the user.
- *
- * Perhaps this will also be used by the user to invoke this command, if we
- * build a shell command.
- */
-Crosh.prototype.commandName = 'crosh';
 
 /**
  * Called when an event from the crosh process is detected.
@@ -224,13 +214,8 @@ Crosh.prototype.run = function() {
                            this.io.terminal_.screenSize.height);
   };
 
-  // The optional arguments field is new to Chrome M65.  Once that goes stable
-  // everywhere, we can drop this fallback logic.
-  const args = this.argv_.argString;
-  if (args.length)
-    chrome.terminalPrivate.openTerminalProcess(this.commandName, args, pidInit);
-  else
-    chrome.terminalPrivate.openTerminalProcess(this.commandName, pidInit);
+  chrome.terminalPrivate.openTerminalProcess(
+      this.commandName, this.argv_.args, pidInit);
 };
 
 Crosh.prototype.onBeforeUnload_ = function(e) {
