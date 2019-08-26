@@ -18,6 +18,7 @@ LIBAPPS_DIR = os.path.dirname(DIR)
 
 
 sys.path.insert(0, os.path.join(LIBAPPS_DIR, 'libdot', 'bin'))
+sys.path.insert(0, os.path.join(LIBAPPS_DIR, 'nassh', 'bin'))
 
 # pylint: disable=unused-import
 import libdot  # pylint: disable=wrong-import-position

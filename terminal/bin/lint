@@ -16,9 +16,14 @@ import terminal
 import libdot
 
 
+# Path to generated deps file that terminal uses for libdot/hterm/etc...
+NASSH_DIR = os.path.join(libdot.LIBAPPS_DIR, 'nassh')
+DEPS_FILE = os.path.join(NASSH_DIR, 'js', 'nassh_deps.concat.js')
+
+
 def _get_default_paths():
     """Get list of paths to lint by default."""
-    # All files is js/*.js.
+    # All files in js/*.js.
     # Use relpath for nicer default output.
     # Sort to ensure consistent order.
     return sorted(
@@ -26,10 +31,18 @@ def _get_default_paths():
         for x in glob.glob(os.path.join(terminal.DIR, 'js', '*.js')))
 
 
+def mkdeps(_opts):
+    """Build the deps we might use when linting."""
+    if not os.path.exists(DEPS_FILE):
+        libdot.run([os.path.join(NASSH_DIR, 'bin', 'mkdeps')])
+
+
 def main(argv):
     """The main func!"""
-    return libdot.lint.main(argv, paths=_get_default_paths(),
-                            closure_args=['--jscomp_error=lintChecks'])
+    closure_args = list(libdot.lint.DEFAULT_CLOSURE_ARGS) + [
+        os.path.relpath(DEPS_FILE)]
+    return libdot.lint.main(argv, paths=_get_default_paths(), mkdeps=mkdeps,
+                            closure_args=closure_args)
 
 
 if __name__ == '__main__':

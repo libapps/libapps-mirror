@@ -13,7 +13,10 @@ const terminal = {};
  * The Terminal command uses the terminalPrivate extension API to create and
  * use the vmshell process on a Chrome OS machine.
  *
- * @param {!Object} argv The argument object passed in from the Terminal.
+ * @param {{
+     commandName: string,
+ *   args: !Array<string>,
+ * }} argv The argument object passed in from the Terminal.
  * @constructor
  */
 terminal.Command = function(argv) {
@@ -40,7 +43,7 @@ terminal.init = function() {
   const commandName = params.get('command') || 'vmshell';
   window.document.title = commandName;
 
-  term.decorate(document.querySelector('#terminal'));
+  term.decorate(lib.notNull(document.querySelector('#terminal')));
   const runTerminal = function() {
     term.setCursorPosition(0, 0);
     term.setCursorVisible(true);
@@ -73,11 +76,11 @@ terminal.init = function() {
 /**
  * Called when an event from the vmshell process is detected.
  *
- * @param id Id of the process the event came from.
- * @param type Type of the event.
+ * @param {string} id Id of the process the event came from.
+ * @param {string} type Type of the event.
  *             'stdout': Process output detected.
  *             'exit': Process has exited.
- * @param text Text that was detected on process output.
+ * @param {string} text Text that was detected on process output.
  */
 terminal.Command.prototype.onProcessOutput_ = function(id, type, text) {
   if (this.id_ === null || id !== this.id_) {
