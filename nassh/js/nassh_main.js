@@ -16,13 +16,19 @@
  * @returns {Promise} A promise resolving once the window opens.
  */
 const openNewWindow = function(url) {
-  return new Promise((resolve) => {
-    chrome.runtime.getBackgroundPage((bg) => {
-      bg.window.lib.f.openWindow(
-          url, '',
-          'chrome=no,close=yes,resize=yes,scrollbars=yes,minimizable=yes,' +
-          `width=${window.innerWidth},height=${window.innerHeight}`);
-      resolve();
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage({
+      command: 'nassh',
+      width: window.innerWidth,
+      height: window.innerHeight,
+      url: url,
+      window: true,
+    }, null, (response) => {
+      if (response.error) {
+        reject(`request failed: ${response.message}`);
+      } else {
+        resolve();
+      }
     });
   });
 };
