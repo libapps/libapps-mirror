@@ -490,54 +490,6 @@ We use this extension when the user has requested filesystem statistics.
 The [copy-data] extension is great for speeding up remote copies as it avoids
 having to download data from one file and uploading to a different one.
 
-# External API
-
-The extension provides an external API to allow other apps/extensions make
-requests using the [Chrome messaging API](https://developer.chrome.com/apps/messaging).
-
-The nassh background page adds a listener for
-[`chrome.runtime.onMessageExternal`](https://developer.chrome.com/apps/runtime#event-onMessageExternal)
-which can be invoked by other apps / extensions by calling
-[`chrome.runtime.sendMessage`](https://developer.chrome.com/extensions/runtime#method-sendMessage)
-with the following fields in message:
-
-| Field name     | Type    | Description |
-|----------------|---------|-------------|
-| `command`      | !string | Command to run.  Currently only `mount` supported |
-
-The API will then respond with an object:
-
-| Field name     | Type    | Description |
-|----------------|---------|-------------|
-| `error`        | bool    | Whether the request succeeded. |
-| `message`      | !string | A short message providing more details. |
-| `stack`        | ?string | A JavaScript stack trace for errors. |
-
-## Mount
-
-On Chrome OS, trigger a SFTP filesystem mount with the Files app.
-
-| Field name     | Type    | Description |
-|----------------|---------|-------------|
-| `command`      | !string | Must be `mount`. |
-| `knownHosts`   | !string | File contents of known_hosts to be used for connection.  e.g. output from `ssh-keyscan <ssh-server>` |
-| `identityFile` | !string | File contents of private key identity_file (e.g. contents of id_rsa file `-----BEGIN RSA PRIVATE KEY----- ...`) |
-| `username`     | !string | Username for connection |
-| `hostname`     | !string | Hostname or IP address for connection |
-| `port`         | number  | (optional) Port, default is 22 |
-| `fileSystemId` | !string | ID used for Chrome OS mounted filesystem |
-| `displayName`  | !string | Display name in Chrome OS Files.app for mounted filesystem |
-
-## Crosh
-
-On Chrome OS, open a new [crosh] session.
-
-| Field name     | Type    | Description |
-|----------------|---------|-------------|
-| `command`      | !string | Must be `crosh`. |
-| `height`       | !number | The height of the new window. |
-| `width`        | !number | The width of the new window. |
-
 # References
 
 Here's a random list of documents which would be useful to people.
