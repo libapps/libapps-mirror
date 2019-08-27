@@ -14,8 +14,8 @@
  *     3. The client code may be part of a library packaged in a third-party
  *        Chrome extension.
  *
- * @param {Array} languages List of languages to load, in the order they
- *     should be loaded.  Newer messages replace older ones.  'en' is
+ * @param {!Array<string>} languages List of languages to load, in the order
+ *     they should be loaded.  Newer messages replace older ones.  'en' is
  *     automatically added as the first language if it is not already present.
  */
 lib.MessageManager = function(languages) {
@@ -32,6 +32,8 @@ lib.MessageManager = function(languages) {
  *
  * This takes an object of the same format of a Chrome messages.json file.  See
  * <https://developer.chrome.com/extensions/i18n-messages>.
+ *
+ * @param {!Object} defs The message to add to the database.
  */
 lib.MessageManager.prototype.addMessages = function(defs) {
   for (var key in defs) {
@@ -55,10 +57,10 @@ lib.MessageManager.prototype.addMessages = function(defs) {
  *
  * @param {string} pattern A url pattern containing a "$1" where the locale
  *     name should go.
- * @param {function(Array,Array)} onComplete Function to be called when loading
- *     is complete.  The two arrays are the list of successful and failed
- *     locale names.  If the first parameter is length 0, no locales were
- *     loaded.
+ * @param {function(!Array<string>, !Array<string>)} onComplete Function to be
+ *     called when loading is complete.  The two arrays are the list of
+ *     successful and failed locale names.  If the first parameter is length 0,
+ *     no locales were loaded.
  */
 lib.MessageManager.prototype.findAndLoadMessages = function(
     pattern, onComplete) {
@@ -91,6 +93,10 @@ lib.MessageManager.prototype.findAndLoadMessages = function(
 
 /**
  * Load messages from a messages.json file.
+ *
+ * @param {string} url The URL to load the messages from.
+ * @param {function()} onSuccess Callback when loading is successful.
+ * @param {function()=} opt_onError Callback when any error is hit.
  */
 lib.MessageManager.prototype.loadMessages = function(
     url, onSuccess, opt_onError) {
@@ -116,9 +122,11 @@ lib.MessageManager.prototype.replaceReferences = lib.i18n.replaceReferences;
  * Get a message by name, optionally replacing arguments too.
  *
  * @param {string} msgname String containing the name of the message to get.
- * @param {Array} opt_args Optional array containing the argument values.
- * @param {string} opt_default Optional value to return if the msgname is not
+ * @param {!Array<string>=} opt_args Optional array containing the argument
+ *     values.
+ * @param {string=} opt_default Optional value to return if the msgname is not
  *     found.  Returns the message name by default.
+ * @return {string} The formatted translation.
  */
 lib.MessageManager.prototype.get = function(msgname, opt_args, opt_default) {
   // First try the integrated browser getMessage.  We prefer that over any
@@ -143,6 +151,8 @@ lib.MessageManager.prototype.get = function(msgname, opt_args, opt_default) {
  * Process all of the "i18n" html attributes found in a given dom fragment.
  *
  * The real work happens in processI18nAttribute.
+ *
+ * @param {!Document} dom The DOM whose nodes will be translated.
  */
 lib.MessageManager.prototype.processI18nAttributes = function(dom) {
   var nodes = dom.querySelectorAll('[i18n]');
@@ -170,6 +180,8 @@ lib.MessageManager.prototype.processI18nAttributes = function(dom) {
  * The aria-label message name will be computed as "SEND_BUTTON_ARIA_LABEL".
  * Notice that the "id" attribute was appended to the target attribute, and
  * the result converted to UPPER_AND_UNDER style.
+ *
+ * @param {!Element} node The element to translate.
  */
 lib.MessageManager.prototype.processI18nAttribute = function(node) {
   // Convert the "lower-and-dashes" attribute names into

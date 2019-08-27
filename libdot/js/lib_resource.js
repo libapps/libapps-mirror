@@ -42,9 +42,9 @@ lib.resource.add = function(name, type, data) {
  * The resource data is stored on the "data" property of the returned object.
  *
  * @param {string} name The name of the resource to get.
- * @param {*} opt_defaultValue The optional value to return if the resource is
+ * @param {*=} opt_defaultValue The optional value to return if the resource is
  *   not defined.
- * @return {object} An object with "type", "name", and "data" properties.
+ * @return {!Object} An object with "type", "name", and "data" properties.
  */
 lib.resource.get = function(name, opt_defaultValue) {
   if (!(name in lib.resource.resources_)) {
@@ -61,7 +61,7 @@ lib.resource.get = function(name, opt_defaultValue) {
  * Retrieve resource data.
  *
  * @param {string} name The name of the resource to get.
- * @param {*} opt_defaultValue The optional value to return if the resource is
+ * @param {*=} opt_defaultValue The optional value to return if the resource is
  *   not defined.
  * @return {*} The resource data.
  */
@@ -80,7 +80,7 @@ lib.resource.getData = function(name, opt_defaultValue) {
  * Retrieve resource as a data: url.
  *
  * @param {string} name The name of the resource to get.
- * @param {*} opt_defaultValue The optional value to return if the resource is
+ * @param {*=} opt_defaultValue The optional value to return if the resource is
  *   not defined.
  * @return {*} A data: url encoded version of the resource.
  */

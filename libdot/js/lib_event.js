@@ -15,9 +15,9 @@
  * The returned function will have the list of callbacks, excluding
  * opt_firstCallback and opt_lastCallback, as its 'observers' property.
  *
- * @param {function(...)} opt_firstCallback The optional function to call
+ * @param {function(...)=} opt_firstCallback The optional function to call
  *     before the observers.
- * @param {function(...)} opt_finalCallback The optional function to call
+ * @param {function(...)=} opt_finalCallback The optional function to call
  *     after the observers.
  *
  * @return {function(...)} A function that, when called, invokes all callbacks
@@ -44,7 +44,7 @@ lib.Event = function(opt_firstCallback, opt_finalCallback) {
    * Add a callback function.
    *
    * @param {function(...)} callback The function to call back.
-   * @param {Object} opt_obj The optional |this| object to apply the function
+   * @param {!Object=} opt_obj The optional |this| object to apply the function
    *     to.  Use this rather than bind when you plan on removing the listener
    *     later, so that you don't have to save the bound-function somewhere.
    */

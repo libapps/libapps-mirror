@@ -10,6 +10,11 @@
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
 if (!String.prototype.padStart) {
+  /**
+   * @param {number} targetLength
+   * @param {string} padString
+   * @return {string}
+   */
   String.prototype.padStart = function(targetLength, padString) {
     // If the string is already long enough, nothing to do!
     targetLength -= this.length;
@@ -29,6 +34,11 @@ if (!String.prototype.padStart) {
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd
 if (!String.prototype.padEnd) {
+  /**
+   * @param {number} targetLength
+   * @param {string} padString
+   * @return {string}
+   */
   String.prototype.padEnd = function(targetLength, padString) {
     // If the string is already long enough, nothing to do!
     targetLength -= this.length;
@@ -55,6 +65,10 @@ if (!Object.values || !Object.entries) {
   const concat = Function.bind.call(Function.call, Array.prototype.concat);
 
   if (!Object.values) {
+    /**
+     * @param {!Object} O
+     * @return {!Array}
+     */
     Object.values = function values(O) {
       return reduce(Reflect.ownKeys(O), (v, k) => concat(v,
           typeof k === 'string' && isEnumerable(O, k) ? [O[k]] : []), []);
@@ -62,6 +76,10 @@ if (!Object.values || !Object.entries) {
   }
 
   if (!Object.entries) {
+    /**
+     * @param {!Object} O
+     * @return {!Array}
+     */
     Object.entries = function entries(O) {
       return reduce(Reflect.ownKeys(O), (e, k) => concat(e,
           typeof k === 'string' && isEnumerable(O, k) ? [[k, O[k]]] : []), []);
@@ -72,6 +90,11 @@ if (!Object.values || !Object.entries) {
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/finally
 // https://github.com/tc39/proposal-promise-finally/blob/master/polyfill.js
 if (typeof Promise.prototype.finally !== 'function') {
+  /**
+   * @param {!Object} O
+   * @param {function()} defaultConstructor
+   * @return {function()}
+   */
   const speciesConstructor = function(O, defaultConstructor) {
     if (!O || (typeof O !== 'object' && typeof O !== 'function')) {
       throw new TypeError('Assertion failed: Type(O) is not Object');

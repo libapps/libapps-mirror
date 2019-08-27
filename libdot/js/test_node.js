@@ -13,8 +13,7 @@ global['assert'] = require('chai').assert;
 
 // Stub out the window object as much as we need.
 const jsdom = require('jsdom');
-const window = new jsdom.JSDOM().window;
-global['window'] = window;
+global['window'] = new jsdom.JSDOM().window;
 
 // Node doesn't support this (yet?).
 require('../third_party/intl-segmenter/intl-segmenter.js');

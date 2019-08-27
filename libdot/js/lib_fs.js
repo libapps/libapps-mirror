@@ -24,7 +24,9 @@ lib.fs = {};
  *   invoking a callback passed in to your method.
  *
  * @param {string} msg The message prefix to use in the log.
- * @param {function(*)} opt_callback A function to invoke after logging.
+ * @param {function(?Array<*>)=} opt_callback A function to invoke after
+ *     logging.
+ * @return {function}
  */
 lib.fs.log = function(msg, opt_callback) {
   return function() {
@@ -42,7 +44,8 @@ lib.fs.log = function(msg, opt_callback) {
  * be styled as an error.  See fs.log() for some use cases.
  *
  * @param {string} msg The message prefix to use in the log.
- * @param {function(*)} opt_callback A function to invoke after logging.
+ * @param {function()=} opt_callback A function to invoke after logging.
+ * @return {function}
  */
 lib.fs.err = function(msg, opt_callback) {
   return function() {
@@ -59,12 +62,12 @@ lib.fs.err = function(msg, opt_callback) {
  * Replace the contents of a file with the string provided.  If the file
  * doesn't exist it is created.  If it does, it is removed and re-created.
  *
- * @param {DirectoryEntry} root The directory to consider as the root of the
+ * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @param {Blob|string} contents The new contents of the file.
+ * @param {!Blob|string} contents The new contents of the file.
  * @param {function()} onSuccess The function to invoke after success.
- * @param {function(DOMError)} opt_onError Optional function to invoke if the
+ * @param {function(!DOMError)=} opt_onError Optional function to invoke if the
  *     operation fails.
  */
 lib.fs.overwriteFile = function(root, path, contents, onSuccess, opt_onError) {
@@ -101,10 +104,10 @@ lib.fs.overwriteFile = function(root, path, contents, onSuccess, opt_onError) {
 /**
  * Open a file on an HTML5 filesystem.
  *
- * @param {DirectoryEntry} root The directory to consider as the root of the
+ * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @return {!Promise(File)} The open file handle.
+ * @return {!Promise<!File>} The open file handle.
  */
 lib.fs.openFile = function(root, path) {
   return new Promise((resolve, reject) => {
@@ -117,10 +120,10 @@ lib.fs.openFile = function(root, path) {
 /**
  * Read a file on an HTML5 filesystem.
  *
- * @param {DirectoryEntry} root The directory to consider as the root of the
+ * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @return {!Promise(string)} The file content.
+ * @return {!Promise<string>} The file content.
  */
 lib.fs.readFile = function(root, path) {
   return lib.fs.openFile(root, path)
@@ -130,16 +133,15 @@ lib.fs.readFile = function(root, path) {
     });
 };
 
-
 /**
  * Remove a file from an HTML5 filesystem.
  *
- * @param {DirectoryEntry} root The directory to consider as the root of the
+ * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @param {function(string)} opt_onSuccess Optional function to invoke after
+ * @param {function(string)=} opt_onSuccess Optional function to invoke after
  *     success.
- * @param {function(DOMError)} opt_onError Optional function to invoke if the
+ * @param {function(!DOMError)=} opt_onError Optional function to invoke if the
  *     operation fails.
  */
 lib.fs.removeFile = function(root, path, opt_onSuccess, opt_onError) {
@@ -156,10 +158,11 @@ lib.fs.removeFile = function(root, path, opt_onSuccess, opt_onError) {
 /**
  * Build a list of all FileEntrys in an HTML5 filesystem.
  *
- * @param {DirectoryEntry} root The directory to consider as the root of the
+ * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @return {!Promise(!Array<FileSystemEntry>)} All the entries in the directory.
+ * @return {!Promise(!Array<!FileSystemEntry>)} All the entries in the
+ *     directory.
  */
 lib.fs.readDirectory = function(root, path) {
   return new Promise((resolve, reject) => {
@@ -174,12 +177,12 @@ lib.fs.readDirectory = function(root, path) {
  * Locate the file referred to by path, creating directories or the file
  * itself if necessary.
  *
- * @param {DirectoryEntry} root The directory to consider as the root of the
+ * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @param {function(string)} onSuccess The function to invoke after
+ * @param {function(string)=} onSuccess The function to invoke after
  *     success.
- * @param {function(DOMError)} opt_onError Optional function to invoke if the
+ * @param {function(!DOMError)=} opt_onError Optional function to invoke if the
  *     operation fails.
  */
 lib.fs.getOrCreateFile = function(root, path, onSuccess, opt_onError) {
@@ -210,11 +213,11 @@ lib.fs.getOrCreateFile = function(root, path, onSuccess, opt_onError) {
  * Locate the directory referred to by path, creating directories along the
  * way.
  *
- * @param {DirectoryEntry} root The directory to consider as the root of the
+ * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
  * @param {function(string)} onSuccess The function to invoke after success.
- * @param {function(DOMError)} opt_onError Optional function to invoke if the
+ * @param {function(!DOMError)=} opt_onError Optional function to invoke if the
  *     operation fails.
  */
 lib.fs.getOrCreateDirectory = function(root, path, onSuccess, opt_onError) {
@@ -248,9 +251,10 @@ lib.fs.FileReader = function() {
 /**
  * Internal helper for wrapping all the readAsXxx funcs.
  *
- * @param {Blob} blob The blob of data to read.
+ * @param {!Blob} blob The blob of data to read.
  * @param {string} method The specific readAsXxx function to call.
- * @param {Promise} A promise to resolve when reading finishes or fails.
+ * @return {!Promise} A promise to resolve when reading finishes or fails.
+ * @private
  */
 lib.fs.FileReader.prototype.readAs_ = function(blob, method) {
   return new Promise((resolve, reject) => {
@@ -264,8 +268,9 @@ lib.fs.FileReader.prototype.readAs_ = function(blob, method) {
 /**
  * Wrapper around FileReader.readAsArrayBuffer.
  *
- * @param {Blob} blob The blob of data to read.
- * @param {Promise} A promise to resolve when reading finishes or fails.
+ * @param {!Blob} blob The blob of data to read.
+ * @return {!Promise<!ArrayBuffer>} A promise to resolve when reading finishes
+ *     or fails.
  */
 lib.fs.FileReader.prototype.readAsArrayBuffer = function(blob) {
   return this.readAs_(blob, 'readAsArrayBuffer');
@@ -274,8 +279,9 @@ lib.fs.FileReader.prototype.readAsArrayBuffer = function(blob) {
 /**
  * Wrapper around FileReader.readAsBinaryString.
  *
- * @param {Blob} blob The blob of data to read.
- * @param {Promise} A promise to resolve when reading finishes or fails.
+ * @param {!Blob} blob The blob of data to read.
+ * @return {!Promise<string>} A promise to resolve when reading finishes or
+ *     fails.
  */
 lib.fs.FileReader.prototype.readAsBinaryString = function(blob) {
   return this.readAs_(blob, 'readAsBinaryString');
@@ -284,8 +290,9 @@ lib.fs.FileReader.prototype.readAsBinaryString = function(blob) {
 /**
  * Wrapper around FileReader.readAsDataURL.
  *
- * @param {Blob} blob The blob of data to read.
- * @param {Promise} A promise to resolve when reading finishes or fails.
+ * @param {!Blob} blob The blob of data to read.
+ * @return {!Promise<string>} A promise to resolve when reading finishes or
+ *     fails.
  */
 lib.fs.FileReader.prototype.readAsDataURL = function(blob) {
   return this.readAs_(blob, 'readAsDataURL');
@@ -294,8 +301,9 @@ lib.fs.FileReader.prototype.readAsDataURL = function(blob) {
 /**
  * Wrapper around FileReader.readAsText.
  *
- * @param {Blob} blob The blob of data to read.
- * @param {Promise} A promise to resolve when reading finishes or fails.
+ * @param {!Blob} blob The blob of data to read.
+ * @return {!Promise<string>} A promise to resolve when reading finishes or
+ *     fails.
  */
 lib.fs.FileReader.prototype.readAsText = function(blob) {
   return this.readAs_(blob, 'readAsText');

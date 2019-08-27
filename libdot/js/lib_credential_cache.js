@@ -74,7 +74,7 @@ lib.CredentialCache = function() {
 /**
  * Initialize the cache and generate a new, non-extractable encryption key.
  *
- * @returns {!Promise.<void>}
+ * @return {!Promise.<void>}
  * @private
  */
 lib.CredentialCache.prototype.init_ = async function() {
@@ -104,9 +104,9 @@ lib.CredentialCache.prototype.clear_ = function() {
  * data is deleted and should be added again after its validity has been
  * verified.
  *
- * @param {!string} key The key to which the corresponding data should be
+ * @param {string} key The key to which the corresponding data should be
  *     looked up.
- * @returns {Promise.<?Uint8Array>} The data bytes if the key is present in the
+ * @return {?Promise<?Uint8Array>} The data bytes if the key is present in the
  *     cache; null otherwise.
  */
 lib.CredentialCache.prototype.retrieve = async function(key) {
@@ -129,10 +129,10 @@ lib.CredentialCache.prototype.retrieve = async function(key) {
  * Note: The provided data array is overwritten with zeroes after the data has
  * been added to the cache.
  *
- * @param {!string} key The key under which the data should be stored in the
+ * @param {string} key The key under which the data should be stored in the
  *     cache.
  * @param {!Uint8Array} data The data bytes to be stored.
- * @returns {Promise.<void>}
+ * @return {?Promise<void>}
  */
 lib.CredentialCache.prototype.store = async function(key, data) {
   if (!this.cache_) {
@@ -149,7 +149,7 @@ lib.CredentialCache.prototype.store = async function(key, data) {
 /**
  * Check whether caching is enabled.
  *
- * @returns {?boolean} True if the user enabled caching; false if the user
+ * @return {?boolean} True if the user enabled caching; false if the user
  *     disabled caching; null if the user has not made a decision yet.
  */
 lib.CredentialCache.prototype.isEnabled = function() {
@@ -161,7 +161,7 @@ lib.CredentialCache.prototype.isEnabled = function() {
  *
  * Note: Caching can only be enabled or disabled once.
  *
- * @param {!boolean} enable
+ * @param {boolean} enable
  */
 lib.CredentialCache.prototype.setEnabled = function(enable) {
   if (this.enabled_ === null) {

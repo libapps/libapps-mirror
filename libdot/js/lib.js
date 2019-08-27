@@ -29,7 +29,8 @@ lib.initCallbacks_ = [];
  *
  * @param {string} name A short descriptive name of the init routine useful for
  *     debugging.
- * @param {function(function)} callback The initialization function to register.
+ * @param {function(function())} callback The initialization function to
+ *     register.
  * @return {function} The callback parameter.
  */
 lib.registerInit = function(name, callback) {
@@ -48,7 +49,7 @@ lib.registerInit = function(name, callback) {
  *
  * @param {function()} onInit The function to invoke when initialization is
  *     complete.
- * @param {function(*)} opt_logFunction An optional function to send
+ * @param {function(*)=} opt_logFunction An optional function to send
  *     initialization related log messages to.
  */
 lib.init = function(onInit, opt_logFunction) {

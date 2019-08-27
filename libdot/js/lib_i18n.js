@@ -24,8 +24,8 @@ lib.i18n.browser_ =
  *
  * https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/i18n/getAcceptLanguages
  *
- * @param {function(Array)} callback Function to invoke with the results.  The
- *     parameter is a list of locale names.
+ * @param {function(!Array<string>)} callback Function to invoke with the
+ *     results.  The parameter is a list of locale names.
  */
 lib.i18n.getAcceptLanguages = function(callback) {
   if (lib.i18n.browser_) {
@@ -43,7 +43,7 @@ lib.i18n.getAcceptLanguages = function(callback) {
  * https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/i18n/getMessage
  *
  * @param {string} msgname The id for this localized string.
- * @param {string[]=} substitutions Any replacements in the string.
+ * @param {!Array<string>=} substitutions Any replacements in the string.
  * @param {string=} fallback Translation if the message wasn't found.
  * @return {string} The translated message.
  */
@@ -66,7 +66,7 @@ lib.i18n.getMessage = function(msgname, substitutions = [], fallback = '') {
  * always replaced/removed regardless of the specified substitutions.
  *
  * @param {string} msg String containing the message and argument references.
- * @param {string[]=} args Array containing the argument values.
+ * @param {!Array<string>=} args Array containing the argument values.
  * @return {string} The message with replacements expanded.
  */
 lib.i18n.replaceReferences = function(msg, args = []) {
