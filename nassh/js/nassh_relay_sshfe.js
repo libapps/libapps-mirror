@@ -10,6 +10,10 @@
 
 /**
  * SSH-FE relay implementation.
+ *
+ * @param {!hterm.Terminal.IO} io
+ * @param {!Object} options
+ * @param {string} username
  */
 nassh.Relay.Sshfe = function(io, options, username) {
   this.io = io;
@@ -29,6 +33,13 @@ nassh.Relay.Sshfe.prototype.init = function() {};
 /**
  * Return an nassh.Stream object that will handle the socket stream
  * for this relay.
+ *
+ * @param {number} fd
+ * @param {string} host
+ * @param {number} port
+ * @param {!nassh.StreamSet} streams
+ * @param {function()} onOpen
+ * @return {!nassh.Stream}
  */
 nassh.Relay.Sshfe.prototype.openSocket = function(fd, host, port, streams,
                                                   onOpen) {

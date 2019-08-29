@@ -7,6 +7,7 @@
 /**
  * Relay ssh-agent messages to another app.
  *
+ * @param {number} fd
  */
 nassh.Stream.SSHAgentRelay = function(fd) {
   nassh.Stream.apply(this, [fd]);
@@ -25,6 +26,9 @@ nassh.Stream.SSHAgentRelay.constructor = nassh.Stream.SSHAgentRelay;
 
 /**
  * Open a connection to agent.
+ *
+ * @param {!Object} args
+ * @param {function(boolean)} onComplete
  */
 nassh.Stream.SSHAgentRelay.prototype.asyncOpen_ = function(args, onComplete) {
   this.authAgentAppID_ = args.authAgentAppID;
@@ -81,7 +85,7 @@ nassh.Stream.SSHAgentRelay.prototype.asyncOpen_ = function(args, onComplete) {
 };
 
 /**
- * @Override
+ * @override
  */
 nassh.Stream.SSHAgentRelay.prototype.close = function() {
   if (this.port_) this.port_.disconnect();
@@ -130,6 +134,9 @@ nassh.Stream.SSHAgentRelay.prototype.trySendPacket_ = function() {
 
 /**
  * Append data to write buffer.
+ *
+ * @param {string} data
+ * @param {function(number)} onSuccess
  */
 nassh.Stream.SSHAgentRelay.prototype.asyncWrite = function(data, onSuccess) {
   if (!data.byteLength) {

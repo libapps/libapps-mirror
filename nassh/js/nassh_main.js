@@ -13,7 +13,7 @@
  * background page and let it do the open for us.
  *
  * @param {string} url The URL to open.
- * @returns {Promise} A promise resolving once the window opens.
+ * @return {!Promise} A promise resolving once the window opens.
  */
 const openNewWindow = function(url) {
   return new Promise((resolve, reject) => {
@@ -33,8 +33,10 @@ const openNewWindow = function(url) {
   });
 };
 
-// CSP means that we can't kick off the initialization from the html file,
-// so we do it like this instead.
+/**
+ * CSP means that we can't kick off the initialization from the html file,
+ * so we do it like this instead.
+ */
 window.onload = function() {
   // Workaround https://crbug.com/924656.
   if (nassh.workaroundMissingChromeRuntime()) {

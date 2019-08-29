@@ -29,11 +29,11 @@ nassh.External.sessionCounter_ = 0;
 /**
  * Performs SFTP mount.
  *
- * @param {{username: !string, hostname: !string, port: number=,
- *     identityFile: !string, knownHosts: !string, fileSystemId: !string,
- *     displayName: !string}} request Request to mount specified host.
- * @param {{id: !string}} sender chrome.runtime.MessageSender
- * @param {function(Object=)} sendResponse called to send response.
+ * @param {{username:string, hostname:string, port:(number|undefined),
+ *     identityFile:string, knownHosts:string, fileSystemId:string,
+ *     displayName:string}} request Request to mount specified host.
+ * @param {{id:string}} sender chrome.runtime.MessageSender
+ * @param {function(!Object=)} sendResponse called to send response.
  */
 nassh.External.COMMANDS.mount = (request, sender, sendResponse) => {
   const sessionId = nassh.External.sessionCounter_++;
@@ -73,17 +73,16 @@ nassh.External.COMMANDS.mount = (request, sender, sendResponse) => {
 };
 
 /**
- *
  * @typedef {{url: string, width: number=, height: number=}} NewWindowSettings
  */
 
 /**
  * Opens a new window.
  *
- * @param {Object} response The response to send back to the caller.
- * @param {NewWindowSettings} request Customize the new window behavior.
- * @param {{id: !string}} sender chrome.runtime.MessageSender.
- * @param {function(Object=)} sendResponse called to send response.
+ * @param {!Object} response The response to send back to the caller.
+ * @param {!NewWindowSettings} request Customize the new window behavior.
+ * @param {{id:string}} sender chrome.runtime.MessageSender.
+ * @param {function(!Object=)} sendResponse called to send response.
  */
 nassh.External.newWindow_ = function(
     response, request, sender, sendResponse) {
@@ -122,9 +121,9 @@ nassh.External.newWindow_ = function(
 /**
  * Opens a new crosh window.
  *
- * @param {NewWindowSettings} request Customize the new window behavior.
- * @param {{id: !string}} sender chrome.runtime.MessageSender.
- * @param {function(Object=)} sendResponse called to send response.
+ * @param {!NewWindowSettings} request Customize the new window behavior.
+ * @param {{id:string}} sender chrome.runtime.MessageSender.
+ * @param {function(!Object=)} sendResponse called to send response.
  */
 nassh.External.COMMANDS.crosh = function(request, sender, sendResponse) {
   if (!sender.internal) {
@@ -143,9 +142,9 @@ nassh.External.COMMANDS.crosh = function(request, sender, sendResponse) {
 /**
  * Opens a new nassh window.
  *
- * @param {NewWindowSettings} request Customize the new window behavior.
- * @param {{id: !string}} sender chrome.runtime.MessageSender.
- * @param {function(Object=)} sendResponse called to send response.
+ * @param {!NewWindowSettings} request Customize the new window behavior.
+ * @param {{id:string}} sender chrome.runtime.MessageSender.
+ * @param {function(!Object=)} sendResponse called to send response.
  */
 nassh.External.COMMANDS.nassh = function(request, sender, sendResponse) {
   if (!sender.internal) {
@@ -162,8 +161,17 @@ nassh.External.COMMANDS.nassh = function(request, sender, sendResponse) {
 };
 
 /**
+ * @typedef {{command:string}} OnMessageRequest
+ */
+
+/**
  * Invoked when external app/extension calls chrome.runtime.sendMessage.
  * https://developer.chrome.com/apps/runtime#event-onMessageExternal.
+ *
+ * @param {!OnMessageRequest} request
+ * @param {{id:string}} sender chrome.runtime.MessageSender.
+ * @param {function(!Object=)} sendResponse called to send response.
+ * @return {boolean}
  * @private
  */
 nassh.External.onMessageExternal_ = (request, sender, sendResponse) => {
@@ -190,6 +198,11 @@ nassh.External.onMessageExternal_ = (request, sender, sendResponse) => {
 /**
  * Invoked when internal code calls chrome.runtime.sendMessage.
  * https://developer.chrome.com/apps/runtime#event-onMessageExternal.
+ *
+ * @param {!OnMessageRequest} request
+ * @param {{id:string}} sender chrome.runtime.MessageSender.
+ * @param {function(!Object=)} sendResponse called to send response.
+ * @return {boolean}
  * @private
  */
 nassh.External.onMessage_ = (request, sender, sendResponse) => {

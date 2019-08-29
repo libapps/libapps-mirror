@@ -4,8 +4,10 @@
 
 'use strict';
 
-// CSP means that we can't kick off the initialization from the html file,
-// so we do it like this instead.
+/**
+ * CSP means that we can't kick off the initialization from the html file,
+ * so we do it like this instead.
+ */
 window.onload = function() {
   function setupPreferences() {
     var manifest = chrome.runtime.getManifest();
@@ -101,7 +103,7 @@ window.onload = function() {
 /**
  * Class for editing hterm profiles.
  *
- * @param {string} opt_profileId Optional profile name to read settings from;
+ * @param {string=} opt_profileId Optional profile name to read settings from;
  *     defaults to the "default" profile.
  */
 nassh.PreferencesEditor = function(opt_profileId) {
@@ -114,10 +116,11 @@ nassh.PreferencesEditor = function(opt_profileId) {
  * This way people can type up a setting before seeing an update.
  * Useful with settings such as font names or sizes.
  *
- * @param {object} input An HTML input element to pass down to callback.
- * @param {function} callback Function to call after debouncing while passing
+ * @param {!InputElement} input An HTML input element to pass down to
+ *     callback.
+ * @param {function()} callback Function to call after debouncing while passing
  *     it the input object.
- * @param {integer} opt_timeout Optional how long to debounce.
+ * @param {number=} opt_timeout Optional how long to debounce.
  */
 nassh.PreferencesEditor.debounce = function(input, callback, opt_timeout) {
   clearTimeout(input.timeout);
@@ -154,7 +157,7 @@ nassh.PreferencesEditor.prototype.selectProfile = function(profileId) {
  * original click but generate a synthetic click once the preferences are known
  * to us.
  *
- * @param {MouseEvent} e
+ * @param {!MouseEvent} e
  */
 nassh.PreferencesEditor.prototype.onBackupClick = function(e) {
   // If we generated this event, just let it happen.
@@ -177,6 +180,8 @@ nassh.PreferencesEditor.prototype.onBackupClick = function(e) {
  * backup to restore.  Invalid backups fail silently.  Successful restores
  * cause the page to reload with the restored preference values.  Any open
  * nassh windows should immediately reflect the new preference values.
+ *
+ * @param {!MouseEvent} e
  */
 nassh.PreferencesEditor.prototype.onRestoreClick = function(e) {
   e.preventDefault();
@@ -195,6 +200,7 @@ nassh.PreferencesEditor.prototype.onRestoreClick = function(e) {
   input.click();
 };
 
+/** @param {function()=} opt_onComplete */
 nassh.PreferencesEditor.prototype.updateBackupLink = function(opt_onComplete) {
   nassh.exportPreferences(function(value) {
     var a = document.querySelector('#backup');
@@ -224,7 +230,7 @@ nassh.PreferencesEditor.prototype.colorSave = function(key) {
 /**
  * Save the HTML state to the preferences.
  *
- * @param {object} input An HTML input element to update the corresponding
+ * @param {!Object} input An HTML input element to update the corresponding
  *     preferences key.  Uses input.id to locate relevant preference.
  */
 nassh.PreferencesEditor.prototype.save = function(input) {
@@ -289,7 +295,7 @@ nassh.PreferencesEditor.prototype.save = function(input) {
  * @param {string} key The HTML input.id to use to locate the color input
  *     object.  By appending ':alpha' to the key name, we can also locate
  *     the range input object.
- * @param {object} pref The preference object to get the current state from.
+ * @param {!Object} pref The preference object to get the current state from.
  * @return {string} The rgba color information.
  */
 nassh.PreferencesEditor.prototype.colorSync = function(key, pref) {
@@ -311,8 +317,9 @@ nassh.PreferencesEditor.prototype.colorSync = function(key, pref) {
 /**
  * Sync the preferences state to the HTML object.
  *
- * @param {Object} input An HTML input element to update the corresponding
- *     preferences key.  Uses input.id to locate relevant preference.
+ * @param {!InputElement} input An HTML input element to update the
+ *     corresponding preferences key.  Uses input.id to locate relevant
+ *     preference.
  */
 nassh.PreferencesEditor.prototype.sync = function(input) {
   var keys = input.id.split(':');
@@ -373,7 +380,7 @@ nassh.PreferencesEditor.prototype.sync = function(input) {
  * This is a helper that should be used in an event handler (e.g. onchange).
  * Should work with any input type.
  *
- * @param {Object} input An HTML input element to update from.
+ * @param {!InputElement} input An HTML input element to update from.
  */
 nassh.PreferencesEditor.prototype.onInputChange = function(input) {
   this.save(input);
@@ -413,6 +420,10 @@ nassh.PreferencesEditor.prototype.syncPage = function() {
 /**
  * Add a series of HTML elements to allow inputting the value of the given
  * preference option.
+ *
+ * @param {!Object} categoryDef The hterm preference category object.
+ * @param {!Element} parent
+ * @return {!SectionElement}
  */
 nassh.PreferencesEditor.prototype.addCategoryRow =
     function(categoryDef, parent) {
@@ -431,6 +442,9 @@ nassh.PreferencesEditor.prototype.addCategoryRow =
 /**
  * Add a series of HTML elements to allow inputting the value of the given
  * preference option.
+ *
+ * @param {string} key
+ * @param {!Element} parent
  */
 nassh.PreferencesEditor.prototype.addInputRow = function(key, parent) {
   var input = this.createInput(key);
@@ -486,6 +500,10 @@ nassh.PreferencesEditor.prototype.addInputRow = function(key, parent) {
   this.sync(input);
 };
 
+/**
+ * @param {string} key
+ * @return {string}
+ */
 nassh.PreferencesEditor.prototype.createInput = function(key) {
   var prefsEditor = this;
 
@@ -585,6 +603,10 @@ nassh.PreferencesEditor.prototype.createInput = function(key) {
   return input;
 };
 
+/**
+ * @param {string} key
+ * @return {string}
+ */
 nassh.PreferencesEditor.prototype.getPreferenceDescription = function(key) {
   var entry = hterm.PreferenceManager.defaultPreferences[key];
   if (entry === undefined)
@@ -597,7 +619,7 @@ nassh.PreferencesEditor.prototype.getPreferenceDescription = function(key) {
 /**
  * Get the translated hterm preference name.
  *
- * @param {string} def The hterm preference category object.
+ * @param {string} key The hterm preference category object.
  * @return {string} The translated category text.
  */
 nassh.PreferencesEditor.prototype.getPreferenceName = function(key) {
@@ -613,7 +635,7 @@ nassh.PreferencesEditor.prototype.getPreferenceName = function(key) {
 /**
  * Get the translated hterm category.
  *
- * @param {Object} def The hterm preference category object.
+ * @param {!Object} def The hterm preference category object.
  * @return {string} The translated category text.
  */
 nassh.PreferencesEditor.prototype.getCategoryDescription = function(def) {
@@ -621,6 +643,10 @@ nassh.PreferencesEditor.prototype.getCategoryDescription = function(def) {
   return hterm.msg(id, [], def.text);
 };
 
+/**
+ * @param {string} key
+ * @return {string}
+ */
 nassh.PreferencesEditor.prototype.getPreferenceType = function(key) {
   var entry = hterm.PreferenceManager.defaultPreferences[key];
   if (entry) {
@@ -639,6 +665,10 @@ nassh.PreferencesEditor.prototype.getPreferenceType = function(key) {
   }
 };
 
+/**
+ * @param {string} key
+ * @return {string}
+ */
 nassh.PreferencesEditor.prototype.getPreferenceEnumValues = function(key) {
   var entry = hterm.PreferenceManager.defaultPreferences[key];
   if (entry) {
@@ -651,6 +681,10 @@ nassh.PreferencesEditor.prototype.getPreferenceEnumValues = function(key) {
   return [];
 };
 
+/**
+ * @param {string} key
+ * @return {string}
+ */
 nassh.PreferencesEditor.prototype.getPreferenceCategory = function(key) {
   var entry = hterm.PreferenceManager.defaultPreferences[key];
   if (entry)
@@ -674,7 +708,7 @@ nassh.PreferencesEditor.prototype.resetAll = function() {
 /**
  * Reset specified preference to its default state.
  *
- * @param {object} input An HTML input element to reset.
+ * @param {!InputElement} input An HTML input element to reset.
  */
 nassh.PreferencesEditor.prototype.reset = function(input) {
   var keys = input.id.split(':');
@@ -687,7 +721,7 @@ nassh.PreferencesEditor.prototype.reset = function(input) {
  * Display a message to the user.
  *
  * @param {string} msg The string to show to the user.
- * @param {integer} opt_timeout Optional how long to show the message.
+ * @param {number=} opt_timeout Optional how long to show the message.
  */
 nassh.PreferencesEditor.prototype.notify = function(msg, opt_timeout) {
   // Update status to let user know options were updated.

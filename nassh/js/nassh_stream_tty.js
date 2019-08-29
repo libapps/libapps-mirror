@@ -28,6 +28,8 @@ nassh.InputBuffer = function() {
  * Write data to the input buffer.
  *
  * This may call callbacks for pending readers.
+ *
+ * @param {string} data
  */
 nassh.InputBuffer.prototype.write = function(data) {
   var wasAvailable = this.data_.length != 0;
@@ -69,6 +71,9 @@ nassh.InputBuffer.prototype.write = function(data) {
  * This only happens if there is no data available in the buffer. If there is
  * not enough data available, onRead is called with all of the data in the
  * buffer.
+ *
+ * @param {number} size
+ * @param {function(number)} onRead
  */
 nassh.InputBuffer.prototype.read = function(size, onRead) {
   var avail = this.data_.length;
@@ -101,6 +106,9 @@ nassh.InputBuffer.prototype.read = function(size, onRead) {
  * This stream allows reads (from an nassh.InputBuffer) and writes (to a
  * hterm.Terminal.IO). It is used for /dev/tty, as well as stdin, stdout and
  * stderr when they are reading from/writing to a terminal.
+ *
+ * @param {number} fd
+ * @param {!Object} info
  */
 nassh.Stream.Tty = function(fd, info) {
   nassh.Stream.apply(this, [fd]);
@@ -111,6 +119,10 @@ nassh.Stream.Tty = function(fd, info) {
 nassh.Stream.Tty.prototype = Object.create(nassh.Stream.prototype);
 nassh.Stream.Tty.constructor = nassh.Stream.Tty;
 
+/**
+ * @param {!Object} info
+ * @param {function(boolean)} onOpen
+ */
 nassh.Stream.Tty.prototype.asyncOpen_ = function(info, onOpen) {
   this.allowRead_ = info.allowRead;
   this.allowWrite_ = info.allowWrite;
@@ -121,6 +133,10 @@ nassh.Stream.Tty.prototype.asyncOpen_ = function(info, onOpen) {
   setTimeout(function() { onOpen(true); }, 0);
 };
 
+/**
+ * @param {number} size
+ * @param {function(string)} onRead
+ */
 nassh.Stream.Tty.prototype.asyncRead = function(size, onRead) {
   if (!this.open)
     throw nassh.Stream.ERR_STREAM_CLOSED;
@@ -140,6 +156,10 @@ nassh.Stream.Tty.prototype.asyncRead = function(size, onRead) {
   });
 };
 
+/**
+ * @param {string} data
+ * @param {function(number)} onSuccess
+ */
 nassh.Stream.Tty.prototype.asyncWrite = function(data, onSuccess) {
   if (!this.open)
     throw nassh.Stream.ERR_STREAM_CLOSED;

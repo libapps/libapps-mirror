@@ -22,6 +22,8 @@ const showError = function(id, msg) {
 
 /**
  * Show an error message originating from the Secure Shell app.
+ *
+ * @param {string} msg
  */
 const showNasshError = function(msg) {
   showError('nassh', msg);
@@ -29,11 +31,14 @@ const showNasshError = function(msg) {
 
 /**
  * Show an error message originating from the relay server.
+ *
+ * @param {string} msg
  */
 const showRelayError = function(msg) {
   showError('relay', msg);
 };
 
+/** On load. */
 window.onload = function() {
   var hash = document.location.hash.substr(1);
 

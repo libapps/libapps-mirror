@@ -240,7 +240,7 @@ nasftp.Cli.prototype.rawprintln_ = function(string) {
 /**
  * Run a specific internal command.
  *
- * @param {string|Array<string>} userArgs The command to run.
+ * @param {string|!Array<string>} userArgs The command to run.
  * @return {!Promise} A promise that resolves once the command finishes.
  */
 nasftp.Cli.prototype.dispatchCommand_ = function(userArgs) {
@@ -2340,7 +2340,7 @@ nasftp.Cli.commandTestFsp_ = function(_args) {
               failed('/newdir/symdir is not a symlink', metadata);
               return Promise.reject();
             }
-          })
+          });
       })
       .then(() => {
         return this.client.linkStatus('/newdir/symfile')
@@ -2349,7 +2349,7 @@ nasftp.Cli.commandTestFsp_ = function(_args) {
               failed('/newdir/symfile is not a symlink', metadata);
               return Promise.reject();
             }
-          })
+          });
       })
       // We should even copy broken symlinks.
       .then(() => {
@@ -2359,7 +2359,7 @@ nasftp.Cli.commandTestFsp_ = function(_args) {
               failed('/newdir/brok is not a symlink', metadata);
               return Promise.reject();
             }
-          })
+          });
       })
 
       // Clean up the scratch dir.

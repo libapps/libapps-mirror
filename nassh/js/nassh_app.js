@@ -7,8 +7,10 @@
 /**
  * The singleton app instance for the nassh packaged app, created by the
  * background page.
+ *
+ * @constructor
  */
-nassh.App = function(manifest) {
+nassh.App = function() {
   this.onInit = new lib.Event();
 
   this.prefs_ = new nassh.PreferenceManager();
@@ -67,7 +69,7 @@ nassh.App.prototype.omniboxOnInputStarted_ = function() {
  * Callback when the user changes the input at all.
  *
  * @param {string} text Current input in the omnibox.
- * @param {function} suggest Function for us to call to notify of our
+ * @param {function()} suggest Function for us to call to notify of our
  *     matches against the text.
  */
 nassh.App.prototype.omniboxOnInputChanged_ = function(text, suggest) {
@@ -183,7 +185,7 @@ nassh.App.prototype.omniboxOnInputCancelled_ = function() {
 /**
  * Bind our callbacks to the omnibox.
  *
- * @param {object} omnibox The omnibox instance to bind to.
+ * @param {!Object} omnibox The omnibox instance to bind to.
  */
 nassh.App.prototype.installOmnibox = function(omnibox) {
   this.omnibox_ = omnibox;
@@ -208,13 +210,14 @@ nassh.App.prototype.installBrowserAction = function() {
 /**
  * Bind our callbacks to the runtime.
  *
- * @param {object} runtime The runtime instance to bind to.
+ * @param {!Object} runtime The runtime instance to bind to.
  */
 nassh.App.prototype.installHandlers = function(runtime) {
   runtime.onLaunched.addListener(this.onLaunched.bind(this));
   runtime.onRestarted.addListener(this.onLaunched.bind(this));
 };
 
+/** @param {!Event} e */
 nassh.App.prototype.onLaunched = function(e) {
   const width = 900;
   const height = 600;

@@ -8,6 +8,9 @@
  * PreferenceManager subclass managing global NaSSH preferences.
  *
  * This is currently just an ordered list of known connection profiles.
+ *
+ * @param {!Storage=} opt_storage
+ * @constructor
  */
 nassh.PreferenceManager = function(opt_storage) {
   var storage = opt_storage || nassh.defaultStorage;
@@ -63,20 +66,30 @@ nassh.PreferenceManager.prototype.readStorage = function(callback=undefined) {
   lib.PreferenceManager.prototype.readStorage.call(this, onRead);
 };
 
+/** @return {function()} */
 nassh.PreferenceManager.prototype.createProfile = function() {
   return this.createChild('profile-ids');
 };
 
+/** @param {string} id */
 nassh.PreferenceManager.prototype.removeProfile = function(id) {
-  return this.removeChild('profile-ids', id);
+  this.removeChild('profile-ids', id);
 };
 
+/**
+ * @param {string} id
+ * @return {*}
+ */
 nassh.PreferenceManager.prototype.getProfile = function(id) {
   return this.getChild('profile-ids', id);
 };
 
 /**
  * lib.PreferenceManager subclass managing per-connection preferences.
+ *
+ * @param {!Element} parent
+ * @param {string} id
+ * @constructor
  */
 nassh.ProfilePreferenceManager = function(parent, id) {
   lib.PreferenceManager.call(this, parent.storage,

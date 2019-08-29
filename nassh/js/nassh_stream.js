@@ -12,6 +12,10 @@
 
 /**
  * Base class for streams required by the plugin.
+ *
+ * @param {number} fd
+ * @param {string} path
+ * @constructor
  */
 nassh.Stream = function(fd, path) {
   this.fd_ = fd;
@@ -31,6 +35,9 @@ nassh.Stream.ERR_STREAM_CANT_WRITE = 'Stream has no write permission';
 
 /**
  * Open a stream, calling back when complete.
+ *
+ * @param {string} path
+ * @param {function(boolean)} onOpen
  */
 nassh.Stream.prototype.asyncOpen_ = function(path, onOpen) {
   setTimeout(() => onOpen(false, 'nassh.Stream.ERR_NOT_IMPLEMENTED'), 0);
@@ -42,6 +49,9 @@ nassh.Stream.prototype.asyncOpen_ = function(path, onOpen) {
  * The default implementation does not actually send data to the client, but
  * assumes that it is instead pushed to the client using the
  * onDataAvailable event.
+ *
+ * @param {number} size
+ * @param {function(string)} onRead
  */
 nassh.Stream.prototype.asyncRead = function(size, onRead) {
   if (this.onDataAvailable === undefined)
@@ -52,6 +62,9 @@ nassh.Stream.prototype.asyncRead = function(size, onRead) {
 
 /**
  * Write to a stream.
+ *
+ * @param {string} data
+ * @param {function(number)} onSuccess
  */
 nassh.Stream.prototype.asyncWrite = function(data, onSuccess) {
   throw nassh.Stream.ERR_NOT_IMPLEMENTED;
@@ -69,6 +82,8 @@ nassh.Stream.prototype.close = function() {
  * The /dev/random stream.
  *
  * This special case stream just returns random bytes when read.
+ *
+ * @param {number} fd
  */
 nassh.Stream.Random = function(fd) {
   nassh.Stream.apply(this, [fd]);
@@ -77,11 +92,19 @@ nassh.Stream.Random = function(fd) {
 nassh.Stream.Random.prototype = Object.create(nassh.Stream.prototype);
 nassh.Stream.Random.constructor = nassh.Stream.Random;
 
+/**
+ * @param {string} path
+ * @param {function(boolean)} onOpen
+ */
 nassh.Stream.Random.prototype.asyncOpen_ = function(path, onOpen) {
   this.path = path;
   setTimeout(function() { onOpen(true); }, 0);
 };
 
+/**
+ * @param {number} size
+ * @param {function(string)} onRead
+ */
 nassh.Stream.Random.prototype.asyncRead = function(size, onRead) {
   if (!this.open)
     throw nassh.Stream.ERR_STREAM_CLOSED;

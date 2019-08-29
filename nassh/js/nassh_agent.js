@@ -13,7 +13,7 @@
  * Map backend IDs to the respective classes inheriting from
  * nassh.agent.Backend.
  *
- * @type {!Object<!string, !function(new:nassh.agent.Backend)>}
+ * @type {!Object<string, function(!nassh.agent.Backend)>}
  * @private
  */
 nassh.agent.registeredBackends_ = {};
@@ -21,7 +21,7 @@ nassh.agent.registeredBackends_ = {};
 /**
  * Used by a backend to register itself with the agent.
  *
- * @param {!function(new:nassh.agent.Backend)} backendClass
+ * @param {function(!nassh.agent.Backend)} backendClass
  */
 nassh.agent.registerBackend = function(backendClass) {
   nassh.agent.registeredBackends_[backendClass.prototype.BACKEND_ID] =
@@ -31,9 +31,8 @@ nassh.agent.registerBackend = function(backendClass) {
 /**
  * Check whether a list of backend IDs is valid.
  *
- * @param {!Array<!string>} backendIDs
- *
- * @returns {!Array<!boolean>} An array of the same length as backendIDs, where
+ * @param {!Array<string>} backendIDs
+ * @return {!Array<boolean>} An array of the same length as backendIDs, where
  *     an entry is true if and only if its backend ID corresponds to a
  *     registered backend.
  */
@@ -45,7 +44,7 @@ nassh.agent.checkBackendIDs = function(backendIDs) {
 /**
  * Manage multiples SSH agent backends and aggregates their results.
  *
- * @param {!Array<!string>} backendIDs An array of IDs of backends which should
+ * @param {!Array<string>} backendIDs An array of IDs of backends which should
  *     be used by the agent to reply to incoming requests.
  * @param {!hterm.Terminal} term Reference to hterm.
  * @param {boolean} isForwarded Whether the agent is being forwarded to the
@@ -83,7 +82,7 @@ nassh.agent.Agent = function(backendIDs, term, isForwarded) {
   /**
    * Map backend IDs to the instantiated backend.
    *
-   * @member {!Object<!string, !nassh.agent.Backend>}
+   * @member {!Object<string, !nassh.agent.Backend>}
    * @private
    */
   this.idToBackend_ = {};
@@ -95,7 +94,7 @@ nassh.agent.Agent = function(backendIDs, term, isForwarded) {
    * Map a string representation of an identity's key blob to the ID of the
    * backend that provides it.
    *
-   * @member {!Object<!string, !string>}
+   * @member {!Object<string, string>}
    * @private
    */
   this.identityToBackendID_ = {};
@@ -104,7 +103,7 @@ nassh.agent.Agent = function(backendIDs, term, isForwarded) {
 /**
  * Initialize all backends by calling their ping function.
  *
- * @returns {!Promise<void>} A resolving promise if all backends initialized
+ * @return {!Promise<void>} A resolving promise if all backends initialized
  *     successfully; a rejecting promise otherwise.
  */
 nassh.agent.Agent.prototype.ping = function() {
@@ -117,7 +116,7 @@ nassh.agent.Agent.prototype.ping = function() {
  *
  * @param {!Uint8Array} rawRequest The bytes of a raw request.
  *
- * @returns {!Promise<!nassh.agent.Message>} A Message object containing the
+ * @return {!Promise<!nassh.agent.Message>} A Message object containing the
  *     aggregate responses of all backends.
  */
 nassh.agent.Agent.prototype.handleRequest = function(rawRequest) {
@@ -132,11 +131,18 @@ nassh.agent.Agent.prototype.handleRequest = function(rawRequest) {
 /**
  * Map message (request) types to handler functions.
  *
- * @type {Object<nassh.agent.messages.Numbers, function(this:nassh.agent.Agent,
- *     !nassh.agent.Message): !nassh.agent.Message>}
+ * @type {!Object<!nassh.agent.messages.Numbers,
+ *     function(this:!nassh.agent.Agent, !nassh.agent.Message):
+ *     !nassh.agent.Message>}
  * @private
+ * @suppress {lintChecks} Allow non-primitive prototype property.
  */
 nassh.agent.Agent.prototype.requestHandlers_ = {};
+
+/**
+ * @param {!Uint8Array} request
+ * @return {!Promise<!nassh.agent.Message>}
+ */
 nassh.agent.Agent.prototype.handleRequest_ = function(request) {
   if (this.requestHandlers_.hasOwnProperty(request.type)) {
     return this.requestHandlers_[request.type]
@@ -155,7 +161,7 @@ nassh.agent.Agent.prototype.handleRequest_ = function(request) {
 /**
  * Convert a raw SSH key blob to the format used in authorized_keys files.
  * @param {!Uint8Array} keyBlob The raw key blob.
- * @returns {!string}
+ * @return {string}
  */
 nassh.agent.Agent.keyBlobToAuthorizedKeysFormat = function(keyBlob) {
   const keyBlobBase64 = btoa(lib.codec.codeUnitArrayToString(keyBlob));
@@ -172,7 +178,7 @@ nassh.agent.Agent.keyBlobToAuthorizedKeysFormat = function(keyBlob) {
  * AGENT_IDENTITIES_ANSWER.
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
  *
- * @returns {!Promise<!nassh.agent.Message>}
+ * @return {!Promise<!nassh.agent.Message>}
  */
 nassh.agent.Agent.prototype
     .requestHandlers_[nassh.agent.messages.Numbers.AGENTC_REQUEST_IDENTITIES] =
@@ -223,8 +229,8 @@ nassh.agent.Agent.prototype
  * Handle an AGENTC_SIGN_REQUEST request by responding with an
  * AGENT_SIGN_RESPONSE.
  *
- * @param {nassh.agent.Message} request The request as a Message object.
- * @returns {Promise<nassh.agent.Message>}
+ * @param {!nassh.agent.Message} request The request as a Message object.
+ * @return {!Promise<!nassh.agent.Message>}
  */
 nassh.agent.Agent.prototype
     .requestHandlers_[nassh.agent.messages.Numbers.AGENTC_SIGN_REQUEST] =
@@ -262,9 +268,9 @@ nassh.agent.Agent.UserIO = function(term) {
 /**
  * Show a message in the terminal window.
  *
- * @param {!string} backendID The ID of the backend that wants to show the
+ * @param {string} backendID The ID of the backend that wants to show the
  *     message.
- * @param {!string} message The message to be shown.
+ * @param {string} message The message to be shown.
  */
 nassh.agent.Agent.UserIO.prototype.showMessage = function(backendID, message) {
   this.term_.io.println(`[agent '${backendID}'] ${message}`);
@@ -273,9 +279,9 @@ nassh.agent.Agent.UserIO.prototype.showMessage = function(backendID, message) {
 /**
  * Show a message in the terminal window and prompt the user for a string.
  *
- * @param {!string} backendID The ID of the backend prompting the user.
- * @param {!string} promptMessage The message that should precede the prompt.
- * @returns {!Promise<!string>|!Promise<void>} A promise resolving to the input
+ * @param {string} backendID The ID of the backend prompting the user.
+ * @param {string} promptMessage The message that should precede the prompt.
+ * @return {!Promise<string>|!Promise<void>} A promise resolving to the input
  *     if the user confirms it by pressing enter; a rejecting promise if the
  *     user cancels the prompt by pressing ESC.
  */

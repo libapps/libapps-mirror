@@ -24,6 +24,8 @@ nassh.sftp.packets.StatusCodes = {
 /**
  * SFTP Status Packet containing the request id, status codes, status message
  * and language.
+ *
+ * @param {!nassh.sftp.Packet} packet
  */
 nassh.sftp.packets.StatusPacket = function(packet) {
   this.requestId = packet.getUint32();
@@ -34,6 +36,8 @@ nassh.sftp.packets.StatusPacket = function(packet) {
 
 /**
  * SFTP Data Packet containing the request id and associated data.
+ *
+ * @param {!nassh.sftp.Packet} packet
  */
 nassh.sftp.packets.DataPacket = function(packet) {
   this.requestId = packet.getUint32();
@@ -43,6 +47,8 @@ nassh.sftp.packets.DataPacket = function(packet) {
 
 /**
  * SFTP Handle Packet containing the request id and a file handle.
+ *
+ * @param {!nassh.sftp.Packet} packet
  */
 nassh.sftp.packets.HandlePacket = function(packet) {
   this.requestId = packet.getUint32();
@@ -52,6 +58,8 @@ nassh.sftp.packets.HandlePacket = function(packet) {
 /**
  * SFTP Name Packet containing the request id, file count and an array of file
  * attributes.
+ *
+ * @param {!nassh.sftp.Packet} packet
  */
 nassh.sftp.packets.NamePacket = function(packet) {
   this.requestId = packet.getUint32();
@@ -73,6 +81,8 @@ nassh.sftp.packets.NamePacket = function(packet) {
 
 /**
  * SFTP Attrs Packet containing the request id and a file's attributes.
+ *
+ * @param {!nassh.sftp.Packet} packet
  */
 nassh.sftp.packets.AttrsPacket = function(packet) {
   this.requestId = packet.getUint32();
@@ -85,7 +95,7 @@ nassh.sftp.packets.AttrsPacket = function(packet) {
  * Since extended replies need specific parsers, we just save a reference to the
  * original packet and delay parsing to whatever call made the extended request.
  *
- * @param {nassh.sftp.Packet} packet The source packet to read from.
+ * @param {!nassh.sftp.Packet} packet The source packet to read from.
  */
 nassh.sftp.packets.ExtendedReplyPacket = function(packet) {
   this.requestId = packet.getUint32();
@@ -95,7 +105,7 @@ nassh.sftp.packets.ExtendedReplyPacket = function(packet) {
 /**
  * SFTP response to statvfs@openssh.com packets.
  *
- * @param {nassh.sftp.packets.ExtendedReplyPacket} packet The extended reply.
+ * @param {!nassh.sftp.packets.ExtendedReplyPacket} packet The extended reply.
  */
 nassh.sftp.packets.DiskFreePacket = function(packet) {
   const p = packet.rawPacket;
@@ -130,7 +140,7 @@ nassh.sftp.packets.DiskFreePacket = function(packet) {
  * Really we just need this func to filter out extensions that we don't care
  * about in our implementation.  If another one shows up, we can revisit.
  *
- * @param {string} name The protocol name to check.
+ * @param {string} ext The protocol name to check.
  * @return {boolean} True if the name is valid.
  */
 nassh.sftp.packets.ValidExtension = function(ext) {
@@ -168,6 +178,9 @@ nassh.sftp.packets.ValidExtension = function(ext) {
 
 /**
  * SFTP Version Packet containing the version and possible extensions.
+ *
+ * @param {!nassh.sftp.Packet} packet
+ * @constructor
  */
 nassh.sftp.packets.VersionPacket = function(packet) {
   this.requestId = 'init';
@@ -188,6 +201,8 @@ nassh.sftp.packets.VersionPacket = function(packet) {
 /**
  * Unknown Packet containing the request id (potentially garbage) and associated
  * data (also potentially garbage).
+ *
+ * @param {!nassh.sftp.Packet} packet
  */
 nassh.sftp.packets.UnknownPacket = function(packet) {
   this.requestId = packet.getUint32();
@@ -238,7 +253,7 @@ nassh.sftp.packets.PermissionBits = {
  *
  * The output will look similar to `ls -l`.  e.g. "drwxr-xr-x".
  *
- * @param {integer} bits The permission bits to convert.
+ * @param {number} bits The permission bits to convert.
  * @return {string} The short `ls -l`-like summary.
  */
 nassh.sftp.packets.bitsToUnixModeLine = function(bits) {
@@ -281,6 +296,9 @@ nassh.sftp.packets.bitsToUnixModeLine = function(bits) {
 
 /**
  * Given a packet (at the correct offset), will read one file's attributes.
+ *
+ * @param {!nassh.sftp.Packet} packet
+ * @return {!Object}
  */
 nassh.sftp.packets.getFileAttrs = function(packet) {
   var attrs = {};
@@ -328,6 +346,9 @@ nassh.sftp.packets.getFileAttrs = function(packet) {
 
 /**
  * Serialize an attribute object back into a packet.
+ *
+ * @param {!nassh.sftp.Packet} packet
+ * @param {!Object} attrs
  */
 nassh.sftp.packets.setFileAttrs = function(packet, attrs) {
   // We only add fields we know how to handle.
@@ -360,8 +381,8 @@ nassh.sftp.packets.setFileAttrs = function(packet, attrs) {
  * Typically used in conjunction with AttrsPacket and the last_accessed &
  * last_modified fields.  This is the same thing as "UNIX time".
  *
- * @param {integer} epoch The epoch time to convert.
- * @return {Date} A standard Date object.
+ * @param {number} epoch The epoch time to convert.
+ * @return {!Date} A standard Date object.
  */
 nassh.sftp.packets.epochToLocal = function(epoch) {
   var date = new Date(0);

@@ -31,7 +31,7 @@ function popup() {
 /**
  * Open a specific connection.
  *
- * @param {MouseEvent} e The event triggering this.
+ * @param {!MouseEvent} e The event triggering this.
  */
 popup.prototype.openLink_ = function(e) {
   const id = e.target.id;

@@ -55,8 +55,8 @@ nassh.Stream.RelaySshfeWS.constructor = nassh.Stream.RelaySshfeWS;
 /**
  * Open a relay socket.
  *
- * @param {Object} args
- * @param {function(bool, string=)} onComplete
+ * @param {!Object} args
+ * @param {function(boolean, string=)} onComplete
  */
 nassh.Stream.RelaySshfeWS.prototype.asyncOpen_ = function(args, onComplete) {
   this.io_ = args.io;
@@ -94,7 +94,7 @@ nassh.Stream.RelaySshfeWS.prototype.challengeTemplate_ =
 /**
  * Get the server challenge.
  *
- * @return {Promise} A promise to resolve with the server's challenge.
+ * @return {!Promise} A promise to resolve with the server's challenge.
  */
 nassh.Stream.RelaySshfeWS.prototype.getChallenge_ = function() {
   // Send the current user to the relay to get the challenge.
@@ -135,8 +135,8 @@ nassh.Stream.RelaySshfeWS.prototype.getChallenge_ = function() {
 /**
  * Send a message to the ssh agent.
  *
- * @param {Object} data The object to send to the agent.
- * @return {Promise} A promise to resolve with the agent's response.
+ * @param {!Object} data The object to send to the agent.
+ * @return {!Promise} A promise to resolve with the agent's response.
  */
 nassh.Stream.RelaySshfeWS.prototype.sendAgentMessage_ = function(data) {
   // The Chrome message API uses callbacks, so wrap in a Promise ourselves.
@@ -155,7 +155,7 @@ nassh.Stream.RelaySshfeWS.prototype.sendAgentMessage_ = function(data) {
  * specific key to use to sign the challenge.
  *
  * @param {string} challenge The server challenge
- * @return {Promise} A promise to resolve with the signed result.
+ * @return {!Promise} A promise to resolve with the signed result.
  */
 nassh.Stream.RelaySshfeWS.prototype.signChallenge_ = function(challenge) {
   // Construct a SSH_AGENTC_PUBLIC_KEY_CHALLENGE packet.
@@ -232,6 +232,9 @@ nassh.Stream.RelaySshfeWS.prototype.connectTemplate_ =
 
 /**
  * Start a new connection to the proxy server.
+ *
+ * @param {string} challenge
+ * @param {string} signature
  */
 nassh.Stream.RelaySshfeWS.prototype.connect_ = function(challenge, signature) {
   if (this.socket_) {
@@ -280,7 +283,7 @@ nassh.Stream.RelaySshfeWS.prototype.close_ = function(reason) {
 /**
  * Callback when the socket connects successfully.
  *
- * @param {Event} e The event details.
+ * @param {!Event} e The event details.
  */
 nassh.Stream.RelaySshfeWS.prototype.onSocketOpen_ = function(e) {
   // If we had any pending writes, kick them off.  We can't call sendWrite
@@ -292,7 +295,7 @@ nassh.Stream.RelaySshfeWS.prototype.onSocketOpen_ = function(e) {
 /**
  * Callback when the socket closes when the connection is finished.
  *
- * @param {CloseEvent} e The event details.
+ * @param {!CloseEvent} e The event details.
  */
 nassh.Stream.RelaySshfeWS.prototype.onSocketClose_ = function(e) {
   this.close_('server closed socket');
@@ -301,7 +304,7 @@ nassh.Stream.RelaySshfeWS.prototype.onSocketClose_ = function(e) {
 /**
  * Callback when the socket closes due to an error.
  *
- * @param {Event} e The event details.
+ * @param {!Event} e The event details.
  */
 nassh.Stream.RelaySshfeWS.prototype.onSocketError_ = function(e) {
   this.close_('server sent an error');
@@ -310,7 +313,7 @@ nassh.Stream.RelaySshfeWS.prototype.onSocketError_ = function(e) {
 /**
  * Callback when new data is available from the server.
  *
- * @param {MessageEvent} e The message with data to read.
+ * @param {!MessageEvent} e The message with data to read.
  */
 nassh.Stream.RelaySshfeWS.prototype.onSocketData_ = function(e) {
   const dv = new DataView(e.data);

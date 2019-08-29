@@ -12,7 +12,7 @@
 /**
  * Relay ssh-agent messages to an nassh.agent.Agent instance.
  *
- * @param fd
+ * @param {number} fd
  * @param {{authAgent: !nassh.agent.Agent}} args
  * @constructor
  * @implements nassh.Stream
@@ -31,8 +31,8 @@ nassh.Stream.SSHAgent.constructor = nassh.Stream.SSHAgent;
 /**
  * Open a connection to the agent and let it initialize its backends.
  *
- * @param args
- * @param onComplete
+ * @param {!Object} args
+ * @param {function(boolean, string)} onComplete
  * @private
  */
 nassh.Stream.SSHAgent.prototype.asyncOpen_ = function(args, onComplete) {
@@ -82,7 +82,7 @@ nassh.Stream.SSHAgent.prototype.trySendPacket_ = function() {
 /**
  * Append data to write buffer.
  *
- * @param {ArrayBuffer} data The bytes to append to the current stream.
+ * @param {!ArrayBuffer} data The bytes to append to the current stream.
  * @param {function(number)} onSuccess Callback once the data is queued.
  */
 nassh.Stream.SSHAgent.prototype.asyncWrite = function(data, onSuccess) {

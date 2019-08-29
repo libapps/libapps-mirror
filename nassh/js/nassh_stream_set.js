@@ -14,6 +14,12 @@ nassh.StreamSet = function() {
 
 /**
  * Open a new stream instance of a given class.
+ *
+ * @param {function()} streamClass
+ * @param {number} fd
+ * @param {!Object} arg
+ * @param {function(boolean)} onOpen
+ * @return {!nassh.Stream}
  */
 nassh.StreamSet.prototype.openStream = function(streamClass, fd, arg, onOpen) {
   if (this.openStreams_[fd])
@@ -35,6 +41,8 @@ nassh.StreamSet.prototype.openStream = function(streamClass, fd, arg, onOpen) {
 
 /**
  * Closes a stream instance.
+ *
+ * @param {number} fd
  */
 nassh.StreamSet.prototype.closeStream = function(fd) {
   const stream = this.openStreams_[fd];
@@ -54,6 +62,9 @@ nassh.StreamSet.prototype.closeAllStreams = function() {
 
 /**
  * Returns a stream instance.
+ *
+ * @param {number} fd
+ * @return {!nassh.Stream}
  */
 nassh.StreamSet.prototype.getStreamByFd = function(fd) {
   return this.openStreams_[fd];

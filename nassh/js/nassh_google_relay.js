@@ -10,6 +10,12 @@
 
 /**
  * Corp Relay implementation.
+ *
+ * @param {!hterm.Terminal.IO} io
+ * @param {!Object} options
+ * @param {string} relayLocation
+ * @param {!Storage} relayStorage
+ * @constructor
  */
 nassh.GoogleRelay = function(io, options, relayLocation, relayStorage) {
   this.io = io;
@@ -29,6 +35,8 @@ nassh.GoogleRelay = function(io, options, relayLocation, relayStorage) {
 
 /**
  * Returns the pattern for the cookie server URL.
+ *
+ * @return {string}
  */
 nassh.GoogleRelay.prototype.cookieServerPattern = function() {
   var template = '%(protocol)://%(host):%(port)/cookie' +
@@ -48,6 +56,10 @@ nassh.GoogleRelay.prototype.cookieServerPattern = function() {
 nassh.GoogleRelay.prototype.relayServerPattern =
     '%(protocol)://%(host):%(port)/';
 
+/**
+ * @param {string=} opt_resumePath
+ * @return {boolean}
+ */
 nassh.GoogleRelay.prototype.redirect = function(opt_resumePath) {
   var resumePath = opt_resumePath ||
     this.location.href.substr(this.location.origin.length);
@@ -85,6 +97,9 @@ nassh.GoogleRelay.prototype.redirect = function(opt_resumePath) {
  * will redirect to the cookie server and return false.
  *
  * If we have just come back from the cookie server, then we'll return true.
+ *
+ * @param {string=} opt_resumePath
+ * @return {boolean}
  */
 nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
   var resumePath = opt_resumePath ||
@@ -138,6 +153,13 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
 /**
  * Return an nassh.Stream object that will handle the socket stream
  * for this relay.
+ *
+ * @param {number} fd
+ * @param {string} host
+ * @param {number} port
+ * @param {!nassh.StreamSet} streams
+ * @param {function()} onOpen
+ * @return {!nassh.Stream}
  */
 nassh.GoogleRelay.prototype.openSocket = function(fd, host, port, streams,
                                                   onOpen) {

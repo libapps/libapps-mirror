@@ -9,7 +9,7 @@ nassh.sftp = {};
 /**
  * A SFTP Client that manages the sending and receiving of SFTP packets.
  *
- * @param {string} [opt_basePath] The base directory for client requests.
+ * @param {string=} opt_basePath The base directory for client requests.
  */
 nassh.sftp.Client = function(opt_basePath='') {
   // The version of the protocol we're using.
@@ -103,6 +103,8 @@ nassh.sftp.Client.prototype.writeChunkSize =
 
 /**
  * Stream wants to write some packet data to the client.
+ *
+ * @param {string} data
  */
 nassh.sftp.Client.prototype.writeStreamData = function(data) {
   // Add this data chunk to the queued buffer.
@@ -116,6 +118,8 @@ nassh.sftp.Client.prototype.writeStreamData = function(data) {
 
 /**
  * Parse the buffer and process the first valid packet in it, else return false.
+ *
+ * @return {boolean}
  */
 nassh.sftp.Client.prototype.parseBuffer_ = function() {
   // See if we've scanned the message length yet (first 4 bytes).
@@ -153,6 +157,9 @@ nassh.sftp.Client.prototype.parseBuffer_ = function() {
  * requesting packet's callback. If the response packet is valid and has a valid
  * request id, it will be returned with the callback. Finding and executing
  * a callback will return true, else will return false if an error occurred.
+ *
+ * @param {!nassh.sftp.Packet} packet
+ * @return {boolean}
  */
 nassh.sftp.Client.prototype.onPacket = function(packet) {
   var packetType = packet.getUint8();
@@ -173,21 +180,21 @@ nassh.sftp.Client.prototype.onPacket = function(packet) {
   return true;
 };
 
-
 /**
  * Initializes SFTP connection.
+ *
+ * @param {!EmbedElement} plugin
  */
 nassh.sftp.Client.prototype.initConnection = function(plugin) {
   this.plugin_ = plugin;
   this.init();
 };
 
-
 /**
  * Send a message to the nassh plugin.
  *
  * @param {string} name The name of the message to send.
- * @param {Array} arguments The message arguments.
+ * @param {!Array} args The message arguments.
  */
 nassh.sftp.Client.prototype.sendToPlugin_ = function(name, args) {
   this.plugin_.postMessage({name: name, arguments: args});
@@ -236,9 +243,13 @@ nassh.sftp.Client.prototype.sendRequest_ = function(type, data) {
   });
 };
 
-
 /**
  * Checks to see whether the response packet is of the expected type or not.
+ *
+ * @param {!nassh.sftp.Packet} responsePacket
+ * @param {!nassh.sftp.Packet} expectedPacket
+ * @param {string} requestType
+ * @return {!nassh.sftp.Packet}
  */
 nassh.sftp.Client.prototype.isExpectedResponse_ = function(responsePacket,
     expectedPacket, requestType) {
@@ -254,9 +265,12 @@ nassh.sftp.Client.prototype.isExpectedResponse_ = function(responsePacket,
   return responsePacket;
 };
 
-
 /**
  * Checks to see whether the response packet was a successful status packet.
+ *
+ * @param {!nassh.sftp.Packet} responsePacket
+ * @param {string} requestType
+ * @return {!nassh.sftp.Packet}
  */
 nassh.sftp.Client.prototype.isSuccessResponse_ = function(responsePacket,
     requestType) {
@@ -272,9 +286,12 @@ nassh.sftp.Client.prototype.isSuccessResponse_ = function(responsePacket,
   return responsePacket;
 };
 
-
 /**
  * Checks to see whether the response packet was a name packet.
+ *
+ * @param {!nassh.sftp.Packet} responsePacket
+ * @param {string} requestType
+ * @return {!nassh.sftp.Packet}
  */
 nassh.sftp.Client.prototype.isNameResponse_ = function(responsePacket,
     requestType) {
@@ -379,12 +396,11 @@ nassh.sftp.Client.prototype.fileHandleStatus = function(handle) {
     .then(response => response.attrs);
 };
 
-
 /**
  * Sets status information for a remote file.
  *
  * @param {string} path The path of the remote file
- * @param {Object} attrs The file attributes to set (see the structure
+ * @param {!Object} attrs The file attributes to set (see the structure
  *    nassh.sftp.packets.getFileAttrs sets up)
  * @return {!Promise<!AttrsPacket>} A Promise that resolves with the remote
  *    file attributes, or rejects (usually with an nassh.sftp.StatusError)
@@ -398,12 +414,11 @@ nassh.sftp.Client.prototype.setFileStatus = function(path, attrs) {
     .then(response => this.isSuccessResponse_(response, 'SETSTAT'));
 };
 
-
 /**
  * Sets status information for a remote file handle.
  *
  * @param {string} handle The open file handle
- * @param {Object} attrs The file attributes to set (see the structure
+ * @param {!Object} attrs The file attributes to set (see the structure
  *    nassh.sftp.packets.getFileAttrs sets up)
  * @return {!Promise<!AttrsPacket>} A Promise that resolves with the remote
  *    file attributes, or rejects (usually with an nassh.sftp.StatusError)
@@ -457,12 +472,12 @@ nassh.sftp.Client.prototype.readDirectory = function(handle) {
  * filtering on each result.
  *
  * @param {string} handle The handle of the remote directory.
- * @param {function(NamePacket)=} filter A callback function to filter results.
+ * @param {function(!NamePacket)=} filter A callback function to filter results.
  *    The return value controls behavior: false will skip the entry, true will
  *    keep the entry, undefined will abort processing, a Promise will resolve
  *    (and its return will replace the entry if not falsy), and all other return
  *    values will replace the entry.
- * @return {Array<NamePacket>} A list of all the entries in this directory.
+ * @return {!Array<!NamePacket>} A list of all the entries in this directory.
  */
 nassh.sftp.Client.prototype.scanDirectory = function(handle, filter=undefined) {
   let entries = [];
@@ -515,6 +530,7 @@ nassh.sftp.Client.prototype.scanDirectory = function(handle, filter=undefined) {
  * Removes a remote directory.
  *
  * @param {string} path The path of the remote directory
+ * @param {boolean=} recursive
  * @return {!Promise<!StatusPacket>} A Promise that resolves or rejects with
  *    a nassh.sftp.StatusError.
  */
@@ -635,8 +651,10 @@ nassh.sftp.Client.prototype.readChunk = function(handle, offset, len) {
  *
  * @param {string} handle The handle of the remote file.
  * @param {function(string)} callback The function called on every chunk.
- * @param {number?} offset The offset to start reading from.
- * @param {number?} length The maximum number of bytes to read.
+ * @param {{offset: (number|undefined), length: (number|undefined)}=}
+ *   offset {number=} The offset to start reading from.
+ *   length {number=} The maximum number of bytes to read.
+ * @return {!Promise}
  */
 nassh.sftp.Client.prototype.readChunks = function(handle, callback,
                                                   {offset=0, length}={}) {
@@ -705,10 +723,12 @@ nassh.sftp.Client.prototype.readChunks = function(handle, callback,
  * Helper to handle opening/closing a file, and processing all the chunks
  * automatically by calling the user's callback.
  *
- * @param {string} handle The handle of the remote file.
+ * @param {string} path The handle of the remote file.
  * @param {function(string)} callback The function called on every chunk.
- * @param {number?} offset The offset to start reading from.
- * @param {number?} length The maximum number of bytes to read.
+ * @param {{offset: (number|undefined), length: (number|undefined)}=}
+ *   offset {number=} The offset to start reading from.
+ *   length {number=} The maximum number of bytes to read.
+ * @return {!Promise}
  */
 nassh.sftp.Client.prototype.readFile = function(path, callback,
                                                 {offset=0, length}={}) {
@@ -764,7 +784,7 @@ nassh.sftp.Client.prototype.copyData =
 /**
  * Removes a remote file.
  *
- * @param {string} handle The handle of the remote file
+ * @param {string} path The handle of the remote file
  * @return {!Promise<!StatusPacket>} A Promise that resolves or rejects with
  *    a nassh.sftp.StatusError
  */
@@ -801,7 +821,6 @@ nassh.sftp.Client.prototype.renameFile = function(sourcePath, targetPath) {
     .then(response => this.isSuccessResponse_(response, 'RENAME'));
 };
 
-
 /**
  * Write a chunk in a remote file.
  *
@@ -810,7 +829,7 @@ nassh.sftp.Client.prototype.renameFile = function(sourcePath, targetPath) {
  *
  * @param {string} handle The handle of the remote file
  * @param {number} offset The offset to start writing from
- * @param {Uint8Array} data The data to write
+ * @param {!Uint8Array} data The data to write
  * @return {!Promise<!StatusPacket>} A Promise that resolves or rejects with
  *    a nassh.sftp.StatusError
  */

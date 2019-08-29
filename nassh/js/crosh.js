@@ -4,8 +4,10 @@
 
 'use strict';
 
-// CSP means that we can't kick off the initialization from the html file,
-// so we do it like this instead.
+/**
+ * CSP means that we can't kick off the initialization from the html file,
+ * so we do it like this instead.
+ */
 window.onload = function() {
   // Workaround https://crbug.com/928045.
   if (nassh.workaroundMissingChromeRuntime()) {
@@ -36,7 +38,7 @@ window.onload = function() {
  * The Crosh command uses terminalPrivate extension API to create and use crosh
  * process on Chrome OS machine.
  *
- * @param {Object} argv The argument object passed in from the Terminal.
+ * @param {!Object} argv The argument object passed in from the Terminal.
  */
 function Crosh(argv) {
   this.commandName = argv.commandName;
@@ -57,6 +59,8 @@ Crosh.croshBuiltinId = 'nkoccljplnhpfnfiajclkommnmllphnl';
  *
  * This constructs a new Terminal instance and instructs it to run the Crosh
  * command.
+ *
+ * @return {boolean}
  */
 Crosh.init = function() {
   const params = new URLSearchParams(document.location.search);
@@ -130,7 +134,7 @@ Crosh.init = function() {
  * page at all.
  *
  * @param {string} url The URL to open.
- * @returns {Promise} A promise resolving once the window opens.
+ * @return {!Promise} A promise resolving once the window opens.
  */
 Crosh.openNewWindow_ = function(url) {
   return new Promise((resolve) => {
@@ -218,6 +222,10 @@ Crosh.prototype.run = function() {
       this.commandName, this.argv_.args, pidInit);
 };
 
+/**
+ * @param {!Event} e
+ * @return {string}
+ */
 Crosh.prototype.onBeforeUnload_ = function(e) {
   // Note: This message doesn't seem to be shown by browsers.
   const msg = `Closing this tab will exit ${this.commandName}.`;
@@ -251,8 +259,8 @@ Crosh.prototype.close_ = function() {
 /**
  * Notify process about new terminal size.
  *
- * @param {string|integer} terminal width.
- * @param {string|integer} terminal height.
+ * @param {string|number} width The new terminal width.
+ * @param {string|number} height The new terminal height.
  */
 Crosh.prototype.onTerminalResize_ = function(width, height) {
   if (this.id_ === null) {
@@ -270,6 +278,8 @@ Crosh.prototype.onTerminalResize_ = function(width, height) {
 
 /**
  * Exit the crosh command.
+ *
+ * @param {number} code Exit code, 0 for success.
  */
 Crosh.prototype.exit = function(code) {
   this.close_();

@@ -17,7 +17,7 @@ nassh.agent.messages = {};
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.5.1
  *
  * @readonly
- * @enum {!number}
+ * @enum {number}
  */
 nassh.agent.messages.Numbers = {
   AGENT_FAILURE: 5,
@@ -44,7 +44,7 @@ nassh.agent.messages.FAILURE =
 /**
  * Map message types to reader function.
  *
- * @type {Object<!nassh.agent.messages.Numbers, function(!nassh.agent.Message):
+ * @type {!Object<!nassh.agent.messages.Numbers, function(!nassh.agent.Message):
  *     void>}
  * @private
  */
@@ -54,7 +54,8 @@ nassh.agent.messages.readers_ = {};
  * Read the contents of a message into fields according to the format specified
  * by its type.
  *
- * @param {nassh.agent.Message} message
+ * @param {!nassh.agent.Message} message
+ * @return {?nassh.agent.Message}
  */
 nassh.agent.messages.read = function(message) {
   if (nassh.agent.messages.readers_.hasOwnProperty(message.type)) {
@@ -76,6 +77,7 @@ nassh.agent.messages.read = function(message) {
  *
  * @param {!nassh.agent.Message} message A message of type
  *     AGENTC_REQUEST_IDENTITIES.
+ * @return {!nassh.agent.Message}
  */
 nassh.agent.messages
     .readers_[nassh.agent.messages.Numbers.AGENTC_REQUEST_IDENTITIES] =
@@ -92,6 +94,7 @@ nassh.agent.messages
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.5
  *
  * @param {!nassh.agent.Message} message A message of type AGENTC_SIGN_REQUEST.
+ * @return {!nassh.agent.Message}
  */
 nassh.agent.messages
     .readers_[nassh.agent.messages.Numbers.AGENTC_SIGN_REQUEST] = function(
@@ -110,7 +113,9 @@ nassh.agent.messages
  *
  * This is a Google extension.
  *
- * @param {!nassh.agent.Message} message A message of type AGENT_PUBLIC_KEY_RESPONSE.
+ * @param {!nassh.agent.Message} message A message of type
+ *     AGENT_PUBLIC_KEY_RESPONSE.
+ * @return {!nassh.agent.Message}
  */
 nassh.agent.messages
     .readers_[nassh.agent.messages.Numbers.AGENT_PUBLIC_KEY_RESPONSE] =
@@ -164,7 +169,7 @@ nassh.agent.messages
 /**
  * Map message types to writer function.
  *
- * @type {Object<!nassh.agent.messages.Numbers, function(...[*]):
+ * @type {!Object<!nassh.agent.messages.Numbers, function(...*):
  *     !nassh.agent.Message>}
  * @private
  */
@@ -175,7 +180,7 @@ nassh.agent.messages.writers_ = {};
  *
  * @param {!nassh.agent.messages.Numbers} type
  * @param {...*} args Any number of arguments dictated by the type.
- * @returns {!nassh.agent.Message} A message of the given type encoding the
+ * @return {!nassh.agent.Message} A message of the given type encoding the
  *     supplied arguments.
  */
 nassh.agent.messages.write = function(type, ...args) {
@@ -205,7 +210,7 @@ nassh.agent.messages.write = function(type, ...args) {
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
  *
  * @param {!Array<!Identity>} identities An array of SSH identities.
- * @returns {!nassh.agent.Message}
+ * @return {!nassh.agent.Message}
  */
 nassh.agent.messages
     .writers_[nassh.agent.messages.Numbers.AGENT_IDENTITIES_ANSWER] = function(
@@ -225,7 +230,7 @@ nassh.agent.messages
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.5
  *
  * @param {!Uint8Array} signature The computed signature.
- * @returns {!nassh.agent.Message}
+ * @return {!nassh.agent.Message}
  */
 nassh.agent.messages
     .writers_[nassh.agent.messages.Numbers.AGENT_SIGN_RESPONSE] = function(
@@ -243,7 +248,7 @@ nassh.agent.messages
  * @param {!Uint8Array} keyBlob The public key.
  * @param {!Uint8Array} data The data to sign.
  * @param {number=} flags Command flags.
- * @returns {!nassh.agent.Message}
+ * @return {!nassh.agent.Message}
  */
 nassh.agent.messages
     .writers_[nassh.agent.messages.Numbers.AGENTC_SIGN_REQUEST] = function(
@@ -260,7 +265,7 @@ nassh.agent.messages
  * Types of SSH identity keys.
  *
  * @readonly
- * @enum {!number}
+ * @enum {number}
  */
 nassh.agent.messages.KeyTypes = {
   RSA: 1,
@@ -272,7 +277,7 @@ nassh.agent.messages.KeyTypes = {
  * Decodes an ASN.1-encoded OID into human-readable dot notation.
  *
  * @param {!Uint8Array} asn1Bytes Individual bytes of an ASN.1-encoded OID.
- * @returns {string} The decoded human-readable OID; null if the byte
+ * @return {string} The decoded human-readable OID; null if the byte
  *     representation is invalid.
  * @see https://docs.microsoft.com/en-us/windows/desktop/SecCertEnroll/about-object-identifier
  */
@@ -315,7 +320,7 @@ nassh.agent.messages.decodeOid = function(asn1Bytes) {
 /**
  * Map OIDs to information about their associated elliptic curve.
  *
- * @type {Object<!string, CurveInfo>}
+ * @type {!Object<string, !CurveInfo>}
  * @private
  * @see https://tools.ietf.org/html/rfc5656
  * @see https://tools.ietf.org/html/draft-ietf-curdle-ssh-ed25519-02
@@ -347,7 +352,7 @@ nassh.agent.messages.OidToCurveInfo = {
 /**
  * Map key types to generator function.
  *
- * @type {Object<!nassh.agent.messages.KeyTypes,
+ * @type {!Object<!nassh.agent.messages.KeyTypes,
  *     function(...[*]): !Uint8Arrays>}
  * @private
  */
@@ -356,9 +361,9 @@ nassh.agent.messages.keyBlobGenerators_ = {};
 /**
  * Generate a key blob of a given type.
  *
- * @param {!nassh.agent.messages.KeyTypes} type
+ * @param {!nassh.agent.messages.KeyTypes} keyType
  * @param {...*} args Any number of arguments dictated by the key blob type.
- * @returns {!Uint8Array} A key blob for use in the SSH agent protocol.
+ * @return {!Uint8Array} A key blob for use in the SSH agent protocol.
  */
 nassh.agent.messages.generateKeyBlob = function(keyType, ...args) {
   if (nassh.agent.messages.keyBlobGenerators_.hasOwnProperty(keyType)) {
@@ -374,7 +379,7 @@ nassh.agent.messages.generateKeyBlob = function(keyType, ...args) {
  * @see https://tools.ietf.org/html/rfc4251#section-5
  *
  * @param {!Uint8Array} bytes Raw bytes.
- * @returns {!Uint8Array} Wire encoding as a string.
+ * @return {!Uint8Array} Wire encoding as a string.
  */
 nassh.agent.messages.encodeAsWireString = function(bytes) {
   const data = new Uint8Array(4 + bytes.length);
@@ -389,7 +394,7 @@ nassh.agent.messages.encodeAsWireString = function(bytes) {
  * @see https://tools.ietf.org/html/rfc4251#section-5
  *
  * @param {!Uint8Array} bytes Raw bytes of an unsigned integer.
- * @returns {!Uint8Array} Wire encoding as an mpint.
+ * @return {!Uint8Array} Wire encoding as an mpint.
  */
 nassh.agent.messages.encodeAsWireMpint = function(bytes) {
   // Strip leading zeros.
@@ -416,7 +421,7 @@ nassh.agent.messages.encodeAsWireMpint = function(bytes) {
  *     (big endian).
  * @param {!Uint8Array} modulus The modulus as an unsigned integer (big
  *     endian).
- * @returns {!Uint8Array} A key blob for use in the SSH agent protocol.
+ * @return {!Uint8Array} A key blob for use in the SSH agent protocol.
  */
 nassh.agent.messages.keyBlobGenerators_[nassh.agent.messages.KeyTypes.RSA] =
     function(exponent, modulus) {
@@ -433,9 +438,9 @@ nassh.agent.messages.keyBlobGenerators_[nassh.agent.messages.KeyTypes.RSA] =
 /**
  * Generate a key blob for an ECDSA public key.
  *
- * @param {!string} curveOid The OID of the elliptic curve.
+ * @param {string} curveOid The OID of the elliptic curve.
  * @param {!Uint8Array} key The public key.
- * @returns {!Uint8Array} A key blob for use in the SSH agent protocol.
+ * @return {!Uint8Array} A key blob for use in the SSH agent protocol.
  * @throws Will throw if curveOid represents an unsupported curve.
  * @see https://tools.ietf.org/html/rfc5656#section-3.1
  */
@@ -459,9 +464,9 @@ nassh.agent.messages.keyBlobGenerators_[nassh.agent.messages.KeyTypes.ECDSA] =
 /**
  * Generate a key blob for an EDDSA public key.
  *
- * @param {!string} curveOid The OID of the elliptic curve.
+ * @param {string} curveOid The OID of the elliptic curve.
  * @param {!Uint8Array} key The public key.
- * @returns {!Uint8Array} A key blob for use in the SSH agent protocol.
+ * @return {!Uint8Array} A key blob for use in the SSH agent protocol.
  * @throws Will throw if curveOid represents an unsupported curve.
  * @see https://tools.ietf.org/html/draft-ietf-curdle-ssh-ed25519-02#section-4
  */

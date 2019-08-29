@@ -36,7 +36,8 @@ lib.registerInit('nassh', function(onInit) {
  * Return a formatted message in the current locale.
  *
  * @param {string} name The name of the message to return.
- * @param {Array} opt_args The message arguments, if required.
+ * @param {!Array=} opt_args The message arguments, if required.
+ * @return {string} The localized & formatted message.
  */
 nassh.msg = function(name, opt_args) {
   const rv = lib.i18n.getMessage(name, opt_args, name);
@@ -85,8 +86,9 @@ nassh.getFileSystem = function() {
  * This is method must be given a completion callback because the hterm
  * profiles need to be loaded asynchronously.
  *
- * @param {function(Object)} Callback to be invoked when export is complete.
- *   The callback will receive a plan js object representing the state of
+ * @param {function(!Object)} onComplete Callback to be invoked when export is
+ *     complete.
+ *   The callback will receive a plain JS object representing the state of
  *   nassh preferences.  The object can be passed back to
  *   nassh.importPreferences.
  */
@@ -129,9 +131,9 @@ nassh.exportPreferences = function(onComplete) {
  *
  * This will not overwrite any existing preferences.
  *
- * @param {Object} prefsObject A preferences object created with
+ * @param {!Object} prefsObject A preferences object created with
  *   nassh.exportPreferences.
- * @param {function()} opt_onComplete An optional callback to be invoked when
+ * @param {function()=} opt_onComplete An optional callback to be invoked when
  *   the import is complete.
  */
 nassh.importPreferences = function(prefsObject, opt_onComplete) {
@@ -181,6 +183,7 @@ nassh.openOptionsPage = function() {
     fallback();
 };
 
+/** Reload window. */
 nassh.reloadWindow = function() {
   if (!nassh.v2) {
     document.location.hash = '';
@@ -254,7 +257,7 @@ nassh.disableTabDiscarding = function() {
  * We re-add any trailing = padding characters.
  *
  * @param {string} data The base64url encoded data.
- * @returns {string} The data in base64 encoding.
+ * @return {string} The data in base64 encoding.
  */
 nassh.base64UrlToBase64 = function(data) {
   const replacements = {'-': '+', '_': '/'};
@@ -284,7 +287,7 @@ nassh.base64UrlToBase64 = function(data) {
  * We strip off any = padding characters too.
  *
  * @param {string} data The base64 encoded data.
- * @returns {string} The data in base64url encoding.
+ * @return {string} The data in base64url encoding.
  */
 nassh.base64ToBase64Url = function(data) {
   const replacements = {'+': '-', '/': '_', '=': ''};
@@ -299,6 +302,9 @@ nassh.base64ToBase64Url = function(data) {
  * While this is fixed in R72+, we unfortunately have EOL Chromebooks that will
  * never be able to upgrade to that version, so we have to keep this around for
  * a long time -- once we update minimum_chrome_version in the manifest to 72+.
+ *
+ * @return {boolean} True if bug was detected and the caller should halt all
+ *     processing.
  */
 nassh.workaroundMissingChromeRuntime = function() {
   // Chrome has a bug where it sometimes doesn't initialize chrome.runtime.
@@ -322,8 +328,8 @@ nassh.workaroundMissingChromeRuntime = function() {
  * then try to call funcs in it directly before it's finished initializing which
  * will cause random failures as it hits race conditions.
  *
- * @return {Promise<Window>} A promise resolving to the background page once it
- *    is fully initialized.
+ * @return {!Promise<!Window>} A promise resolving to the background page once
+ *     it is fully initialized.
  */
 nassh.getBackgroundPage = function() {
   if (!window.chrome || !chrome.runtime || !chrome.runtime.getBackgroundPage) {

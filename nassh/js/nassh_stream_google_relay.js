@@ -7,6 +7,9 @@
  *
  * This class implements session initialization and back-off logic common for
  * both types of streams.
+ *
+ * @param {number} fd
+ * @constructor
  */
 nassh.Stream.GoogleRelay = function(fd) {
   nassh.Stream.apply(this, [fd]);
@@ -38,6 +41,9 @@ nassh.Stream.GoogleRelay.constructor = nassh.Stream.GoogleRelay;
  *
  * This fires off the /proxy request, and if it succeeds starts the /read
  * hanging GET.
+ *
+ * @param {!Object} args
+ * @param {function(boolean)} onComplete
  */
 nassh.Stream.GoogleRelay.prototype.asyncOpen_ = function(args, onComplete) {
   this.relay_ = args.relay;
@@ -74,12 +80,16 @@ nassh.Stream.GoogleRelay.prototype.asyncOpen_ = function(args, onComplete) {
   sessionRequest.send();
 };
 
+/** Resume read. */
 nassh.Stream.GoogleRelay.prototype.resumeRead_ = function() {
   throw nassh.Stream.ERR_NOT_IMPLEMENTED;
 };
 
 /**
  * Queue up some data to write.
+ *
+ * @param {string} data
+ * @param {function(number)} onSuccess
  */
 nassh.Stream.GoogleRelay.prototype.asyncWrite = function(data, onSuccess) {
   if (!data.byteLength) {
@@ -116,6 +126,8 @@ nassh.Stream.GoogleRelay.prototype.onBackoffExpired_ = function() {
 /**
  * Called after a successful read or write to indicate that communication
  * is working as expected.
+ *
+ * @param {boolean} isRead
  */
 nassh.Stream.GoogleRelay.prototype.requestSuccess_ = function(isRead) {
   this.backoffMS_ = 0;
@@ -138,6 +150,7 @@ nassh.Stream.GoogleRelay.prototype.requestSuccess_ = function(isRead) {
   }
 };
 
+/** @param {boolean} isRead */
 nassh.Stream.GoogleRelay.prototype.requestError_ = function(isRead) {
   if (!this.sessionID_ || this.backoffTimeout_)
     return;
@@ -171,6 +184,8 @@ nassh.Stream.GoogleRelay.prototype.requestError_ = function(isRead) {
  *
  * This class manages the read and write XML http requests used to communicate
  * with the Google relay server.
+ *
+ * @param {number} fd
  */
 nassh.Stream.GoogleRelayXHR = function(fd) {
   nassh.Stream.GoogleRelay.apply(this, [fd]);
@@ -200,6 +215,7 @@ nassh.Stream.GoogleRelayXHR.constructor = nassh.Stream.GoogleRelayXHR;
  */
 nassh.Stream.GoogleRelayXHR.prototype.maxMessageLength = 1024;
 
+/** Resume read. */
 nassh.Stream.GoogleRelayXHR.prototype.resumeRead_ = function() {
   if (this.isRequestBusy_(this.readRequest_)) {
     // Read request is in progress.
@@ -245,6 +261,8 @@ nassh.Stream.GoogleRelayXHR.prototype.sendWrite_ = function() {
  *
  * This indicates that the response entity has the data for us to send to the
  * terminal.
+ *
+ * @param {!Event} e
  */
 nassh.Stream.GoogleRelayXHR.prototype.onReadReady_ = function(e) {
   if (this.readRequest_.readyState != XMLHttpRequest.DONE)
@@ -257,8 +275,10 @@ nassh.Stream.GoogleRelayXHR.prototype.onReadReady_ = function(e) {
     return;
   }
 
-  if (this.readRequest_.status != 200)
-    return this.onRequestError_(e);
+  if (this.readRequest_.status != 200) {
+    this.onRequestError_(e);
+    return;
+  }
 
   this.readCount_ += Math.floor(
       this.readRequest_.responseText.length * 3 / 4);
@@ -273,6 +293,8 @@ nassh.Stream.GoogleRelayXHR.prototype.onReadReady_ = function(e) {
  *
  * This indicates that data we wrote has either been successfully written, or
  * failed somewhere along the way.
+ *
+ * @param {!Event} e
  */
 nassh.Stream.GoogleRelayXHR.prototype.onWriteDone_ = function(e) {
   if (this.writeRequest_.readyState != XMLHttpRequest.DONE)
@@ -284,8 +306,10 @@ nassh.Stream.GoogleRelayXHR.prototype.onWriteDone_ = function(e) {
     return;
   }
 
-  if (this.writeRequest_.status != 200)
-    return this.onRequestError_(e);
+  if (this.writeRequest_.status != 200) {
+    this.onRequestError_(e);
+    return;
+  }
 
   this.writeBuffer_ = this.writeBuffer_.subarray(this.lastWriteSize_);
   this.writeCount_ += this.lastWriteSize_;
@@ -296,12 +320,16 @@ nassh.Stream.GoogleRelayXHR.prototype.onWriteDone_ = function(e) {
     this.onWriteSuccess_(this.writeCount_);
 };
 
+/** @param {!Event} e */
 nassh.Stream.GoogleRelayXHR.prototype.onRequestError_ = function(e) {
   this.requestError_(e.target == this.readRequest_);
 };
 
 /**
  * Returns true if the given XHR is busy.
+ *
+ * @param {!XMLHttpRequest} r
+ * @return {boolean}
  */
 nassh.Stream.GoogleRelayXHR.prototype.isRequestBusy_ = function(r) {
   return (r.readyState != XMLHttpRequest.DONE &&
@@ -313,6 +341,8 @@ nassh.Stream.GoogleRelayXHR.prototype.isRequestBusy_ = function(r) {
  *
  * This class manages the read and write through WebSocket to communicate
  * with the Google relay server.
+ *
+ * @param {number} fd
  */
 nassh.Stream.GoogleRelayWS = function(fd) {
   nassh.Stream.GoogleRelay.apply(this, [fd]);
@@ -351,6 +381,7 @@ nassh.Stream.GoogleRelayWS.constructor = nassh.Stream.GoogleRelayWS;
  */
 nassh.Stream.GoogleRelayWS.prototype.maxMessageLength = 32 * 1024 - 4;
 
+/** Resume read. */
 nassh.Stream.GoogleRelayWS.prototype.resumeRead_ = function() {
   if (this.backoffTimeout_) {
     console.warn('Attempt to read while backing off.');
@@ -375,6 +406,7 @@ nassh.Stream.GoogleRelayWS.prototype.resumeRead_ = function() {
   }
 };
 
+/** @param {!Event} e */
 nassh.Stream.GoogleRelayWS.prototype.onSocketOpen_ = function(e) {
   if (e.target !== this.socket_)
     return;
@@ -383,6 +415,7 @@ nassh.Stream.GoogleRelayWS.prototype.onSocketOpen_ = function(e) {
   this.requestSuccess_(false);
 };
 
+/** @param {number} deltaTime */
 nassh.Stream.GoogleRelayWS.prototype.recordAckTime_ = function(deltaTime) {
   this.ackTimes_[this.ackTimesIndex_] = deltaTime;
   this.ackTimesIndex_ = (this.ackTimesIndex_ + 1) % this.ackTimes_.length;
@@ -403,6 +436,7 @@ nassh.Stream.GoogleRelayWS.prototype.recordAckTime_ = function(deltaTime) {
   }
 };
 
+/** @param {!Event} e */
 nassh.Stream.GoogleRelayWS.prototype.onSocketData_ = function(e) {
   if (e.target !== this.socket_)
     return;
@@ -444,6 +478,7 @@ nassh.Stream.GoogleRelayWS.prototype.onSocketData_ = function(e) {
   this.requestSuccess_(false);
 };
 
+/** @param {!Event} e */
 nassh.Stream.GoogleRelayWS.prototype.onSocketError_ = function(e) {
   if (e.target !== this.socket_)
     return;
@@ -457,6 +492,7 @@ nassh.Stream.GoogleRelayWS.prototype.onSocketError_ = function(e) {
   }
 };
 
+/** Send write. */
 nassh.Stream.GoogleRelayWS.prototype.sendWrite_ = function() {
   if (!this.socket_ || this.socket_.readyState != 1 ||
       this.sentCount_ == this.writeBuffer_.length) {

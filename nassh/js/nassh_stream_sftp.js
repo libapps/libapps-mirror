@@ -10,6 +10,10 @@
 
 /**
  * The sftp packet stream.
+ *
+ * @param {number} fd
+ * @param {!Object} info
+ * @constructor
  */
 nassh.Stream.Sftp = function(fd, info) {
   nassh.Stream.apply(this, [fd]);
@@ -23,6 +27,9 @@ nassh.Stream.Sftp.constructor = nassh.Stream.Sftp;
 
 /**
  * Open the stream asynchronously.
+ *
+ * @param {!Object} info
+ * @param {function(boolean)} onOpen
  */
 nassh.Stream.Sftp.prototype.asyncOpen_ = function(info, onOpen) {
   this.acknowledgeCount_ = 0;
@@ -32,6 +39,9 @@ nassh.Stream.Sftp.prototype.asyncOpen_ = function(info, onOpen) {
 
 /**
  * Write to the stream asynchronously.
+ *
+ * @param {string} data
+ * @param {function(number)} onSuccess
  */
 nassh.Stream.Sftp.prototype.asyncWrite = function(data, onSuccess) {
   if (!this.open) {

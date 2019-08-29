@@ -30,6 +30,10 @@ const MockSftpClient = function() {
 
 /**
  * Mock helper for stubbing out calls.
+ *
+ * @param {function()} method
+ * @param {!Array} args
+ * @return {!Promise}
  */
 MockSftpClient.prototype.automock_ = function(method, ...args) {
   return new Promise((resolve) => {

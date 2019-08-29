@@ -4,8 +4,10 @@
 
 'use strict';
 
-// CSP means that we can't kick off the initialization from the html file,
-// so we do it like this instead.
+/**
+ * CSP means that we can't kick off the initialization from the html file,
+ * so we do it like this instead.
+ */
 window.onload = function() {
   document.body.querySelectorAll('h2.package').forEach((ele) => {
     ele.onclick = toggle;
@@ -19,4 +21,4 @@ function toggle() {
   const id = this.id.replace(/^[^-]*-/, '');
   const ele = document.getElementById(`license-${id}`);
   ele.style.display = ele.style.display ? '' : 'block';
-};
+}
