@@ -55,6 +55,11 @@ def test():
             logging.error('%s test suite exited %i', pkg, result.returncode)
             errors = True
 
+        result = libdot.run(['./bin/lint'], check=False, cwd=pkg_dir)
+        if result.returncode:
+            # TODO: Make this fatal for testing CLs, but not for release builds.
+            logging.warning('%s linter exited %i', pkg, result.returncode)
+
     # Run all the unittests before aborting.
     if errors:
         sys.exit(1)
