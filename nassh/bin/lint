@@ -29,7 +29,8 @@ def main(argv):
     libdot.run(['eslint'] + argv)
     # We allow ECMAScript 2017 (aka 8) due to use of async keywords.
     libdot.run([
-        'closure-compiler', '--checks-only', '--jscomp_warning=lintChecks',
+        os.path.join(libdot.BIN_DIR, 'closure-compiler'),
+        '--checks-only', '--jscomp_warning=lintChecks',
         '--language_in=ECMASCRIPT_2017'] + argv)
 
 

@@ -1,5 +1,6 @@
 # Cached scripts
 /bin/.png.crusher.*
+/bin/.closure-compiler*
 
 # Stuff we build for distribution
 dist

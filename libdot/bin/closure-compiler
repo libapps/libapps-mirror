@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Download & run the Closure Compiler.
+
+https://github.com/google/closure-compiler/wiki/Binary-Downloads
+"""
+
+from __future__ import print_function
+
+import glob
+import os
+import sys
+
+import libdot
+
+
+# The version we currently run.  Pinned to make sure everyone gets consistent
+# behavior all the time.
+VERSION = '20190819'
+
+# Full path to Google's closure compiler.
+URI = 'https://dl.google.com/closure-compiler/compiler-%s.tar.gz' % (VERSION,)
+
+
+# Where we cache our copy of closure.
+CLOSURE = os.path.join(libdot.BIN_DIR, '.closure-compiler.%s.jar' % (VERSION,))
+
+
+def update_closure():
+    """Update our local cache of Google's closure compiler."""
+    if os.path.exists(CLOSURE):
+        return
+
+    for path in glob.glob(os.path.join(
+            libdot.BIN_DIR, '.closure-compiler.*.jar')):
+        os.unlink(path)
+
+    tar = os.path.join(libdot.BIN_DIR, '.closure-compiler.tar')
+    libdot.fetch(URI, tar)
+
+    src = 'closure-compiler-v%s.jar' % (VERSION,)
+    libdot.unpack(tar, cwd=libdot.BIN_DIR, files=(src,))
+    libdot.unlink(tar)
+    os.rename(os.path.join(libdot.BIN_DIR, src), CLOSURE)
+
+
+def main(argv):
+    """The main func!"""
+    libdot.setup_logging()
+
+    update_closure()
+
+    # Run it!
+    os.execvp('java', ['java', '-jar', CLOSURE] + argv)
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))

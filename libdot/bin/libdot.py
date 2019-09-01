@@ -208,12 +208,17 @@ def run(cmd, check=True, cwd=None, **kwargs):
     return result
 
 
-def unpack(archive, cwd=None):
+def unpack(archive, cwd=None, files=()):
     """Unpack |archive| into |cwd|."""
     if cwd is None:
         cwd = os.getcwd()
+    if files:
+        files = ['--'] + list(files)
+    else:
+        files = []
+
     logging.info('Unpacking %s', os.path.basename(archive))
-    run(['tar', '-xf', archive], cwd=cwd)
+    run(['tar', '-xf', archive] + files, cwd=cwd)
 
 
 def fetch(uri, output):
