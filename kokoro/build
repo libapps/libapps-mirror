@@ -19,6 +19,12 @@ import kokoro
 import libdot
 
 
+def is_presubmit():
+    """Whether we're testing a pending CL."""
+    # This env var is passed down by kokoro.
+    return bool(os.environ.get('KOKORO_GERRIT_REVISION'))
+
+
 def build():
     """Build the various components."""
     # Build the ssh client code.
@@ -57,8 +63,12 @@ def test():
 
         result = libdot.run(['./bin/lint'], check=False, cwd=pkg_dir)
         if result.returncode:
-            # TODO: Make this fatal for testing CLs, but not for release builds.
-            logging.warning('%s linter exited %i', pkg, result.returncode)
+            msg = '%s linter exited %i' % (pkg, result.returncode)
+            if is_presubmit() and pkg in {'libdot'}:
+                logging.error(msg)
+                errors = True
+            else:
+                logging.warning('%s; ignoring for release builds', msg)
 
     # Run all the unittests before aborting.
     if errors:
