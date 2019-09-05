@@ -4,11 +4,16 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-"""Lint our source files."""
+"""Lint our source files.
+
+We'll run through eslint & closure-compiler.
+"""
 
 from __future__ import print_function
 
+import argparse
 import glob
+import json
 import os
 import sys
 
@@ -18,6 +23,154 @@ import libdot
 # All checks except strictMissingRequire.
 DEFAULT_CLOSURE_ARGS = (
     '--jscomp_error=*', '--jscomp_off=strictMissingRequire')
+
+
+def convert_eslint_to_kokoro(data):
+    """Take eslint JSON output and convert it to kokoro comment format.
+
+    The |data| input will look like:
+    [
+        {
+            "errorCount": <total number of errors>,
+            "filePath": ".../libapps/libdot/js/lib_f.js",
+            "fixableErrorCount": 1,
+            "fixableWarningCount": 0,
+            "messages": [  // This contains errors & warnings.
+                {
+                    "column": 2,
+                    "endColumn": 57,
+                    "endLine": 1,
+                    "line": 1,
+                    "message": "Missing semicolon.",
+                    "nodeType": "ExpressionStatement",
+                    "ruleId": "semi",
+                    "severity": <1=warning 2=error>
+                }
+            ],
+            "source": "...the entire source file...",
+            "warningCount": <total number of warnings>
+        },
+        {
+            "errorCount": <total number of errors>,
+            "filePath": ".../libapps/libdot/js/lib_fs.js",
+            "fixableErrorCount": 2,
+            "fixableWarningCount": 0,
+            "messages": [  // This contains errors & warnings.
+                {
+                    "column": 2,
+                    "fix": {
+                        "range": [8180, 8180],
+                        "text": ";"
+                    },
+                    "line": 262,
+                    "message": "Missing semicolon.",
+                    "nodeType": "ExpressionStatement",
+                    "ruleId": "semi",
+                    "severity": <1=warning 2=error>
+                },
+                {
+                    "column": 10,
+                    "fix": {
+                        "range": [8436, 8436],
+                        "text": ";"
+                    },
+                    "line": 271,
+                    "message": "Missing semicolon.",
+                    "nodeType": "VariableDeclaration",
+                    "ruleId": "semi",
+                    "severity": <1=warning 2=error>
+                }
+            ],
+            "source": "...the entire source file...",
+            "warningCount":  <total number of warnings>
+        }
+    ]
+
+    We want to return a list of results like:
+    [
+        {
+           path: "relative/path/to/source/file",
+           message: "Content of the inline comment."
+           startLine: <integer line number>,
+           startCharacter: <integer column number>,
+           endLine: <integer line number>,
+           endCharacter: <integer column number>
+        },
+        { ... more results above ... }
+    ]
+    """
+    RULES_URI_BASE = 'https://eslint.org/docs/rules/'
+    SEVERITY_TO_HEADER = {1: 'Warning', 2: 'Error'}
+
+    for file_results in data:
+        for message in file_results['messages']:
+            msg = '%s: %s\n%s' % (
+                SEVERITY_TO_HEADER[message['severity']],
+                message['message'],
+                '%s%s' % (RULES_URI_BASE, message['ruleId']),
+            )
+
+            yield {
+                'path': os.path.relpath(file_results['filePath'],
+                                        libdot.LIBAPPS_DIR),
+                'message': msg,
+                'startLine': message['line'],
+                'endLine': message.get('endLine', message['line'] + 1),
+                'startCharacter': message['column'],
+                'endCharacter': message.get('endColumn', message['column'] + 1),
+            }
+
+
+def run_eslint(opts, extra_args=()):
+    """Run the eslint tool."""
+    ret = True
+
+    cmd = ['eslint'] + list(extra_args)
+    if opts.gerrit_comments_file:
+        cmd += ['--max-warnings=0']
+
+    # We know our tools are first in $PATH now.
+    result = libdot.run(cmd + opts.paths, check=False)
+    if result.returncode:
+        ret = False
+
+        # Rerun for Gerrit.
+        if opts.gerrit_comments_file:
+            os.makedirs(os.path.dirname(opts.gerrit_comments_file),
+                        exist_ok=True)
+
+            cmd += ['--format=json']
+            result = libdot.run(cmd + opts.paths, check=False,
+                                capture_output=True)
+
+            # Save a copy for debugging later.
+            with open(opts.gerrit_comments_file + '.in', 'wb') as fp:
+                fp.write(result.stdout)
+
+            data = json.loads(result.stdout)
+            comments = list(convert_eslint_to_kokoro(data))
+            with open(opts.gerrit_comments_file, 'w', encoding='utf-8') as fp:
+                json.dump(comments, fp)
+    elif opts.gerrit_comments_file:
+        # If there were no failures, clear the files to avoid leaving previous
+        # results laying around & confuse devs.
+        libdot.unlink(opts.gerrit_comments_file)
+        libdot.unlink(opts.gerrit_comments_file + '.in')
+
+    return ret
+
+
+def run_closure(opts, extra_args=()):
+    """Run the closure-compiler tool."""
+    # TODO(crbug.com/998928): Update checks beyond just 'lintChecks'.
+    # E.g. --jscomp_error=*.
+    cmd = [
+        os.path.join(libdot.BIN_DIR, 'closure-compiler'),
+        '--checks-only',
+        '--language_in=ECMASCRIPT_2018',
+    ] + list(extra_args)
+    result = libdot.run(cmd + opts.paths, check=False)
+    return result.returncode == 0
 
 
 def _get_default_paths():
@@ -31,6 +184,18 @@ def _get_default_paths():
         if x != 'js/libdot.js')
 
 
+def get_parser():
+    """Get a command line parser."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--gerrit-comments-file',
+                        help='Save errors for posting files to Gerrit.')
+    parser.add_argument('-d', '--debug', action='store_true',
+                        help='Run with debug output.')
+    parser.add_argument('paths', nargs='*',
+                        help='Paths to lint.')
+    return parser
+
+
 def main(argv, paths=(), eslint_args=(), closure_args=DEFAULT_CLOSURE_ARGS):
     """The common main func for all linters.
 
@@ -41,26 +206,21 @@ def main(argv, paths=(), eslint_args=(), closure_args=DEFAULT_CLOSURE_ARGS):
       eslint_args: Extra arguments to pass to eslint.
       closure_args: Extra arguments to pass to closure-compiler.
     """
-    libdot.setup_logging()
+    parser = get_parser()
+    opts = parser.parse_args(argv)
+    libdot.setup_logging(debug=opts.debug)
     libdot.node_and_npm_setup()
 
-    if not argv:
+    if not opts.paths:
         if paths:
-            argv = paths
+            opts.paths = paths
         else:
             print('No files to lint.')
             return 0
 
-    # We know our tools are first in $PATH now.
-    libdot.run(['eslint'] + list(eslint_args) + argv)
-    # TODO(crbug.com/998928): Update checks beyond just 'lintChecks'.
-    # E.g. --jscomp_error=*.
-    libdot.run([
-        os.path.join(libdot.BIN_DIR, 'closure-compiler'),
-        '--checks-only', '--language_in=ECMASCRIPT_2018'] +
-               list(closure_args) + argv)
-
-    return 0
+    return 0 if all((
+        run_eslint(opts, eslint_args), run_closure(opts, closure_args),
+    )) else 1
 
 
 if __name__ == '__main__':
