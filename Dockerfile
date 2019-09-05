@@ -1,3 +1,7 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
 # Creates a Docker image containing necessary dependencies of ssh_client and a
 # command to build all of Secure Shell.
 #
@@ -23,7 +27,7 @@ RUN apt-get --assume-yes install \
     libcups2 libdbus-1-3 libexpat1 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 \
     libnspr4 libnss3 libpango-1.0-0 libuuid1 libx11-6 libx11-xcb1 libxcb1 \
     libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 \
-    libxrandr2 libxrender1 libxss1 libxtst6
+    libxrandr2 libxrender1 libxss1 libxtst6 default-jre-headless
 
 # Set git config to dummy values for webports patch to work.
 # When patches are applied, webports generates local git repos & commits.
