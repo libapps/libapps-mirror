@@ -417,6 +417,10 @@
 		"description": "Label text shown for the hterm 'enable-dec12' preference.",
 		"message": "Allow changing of text cursor blinking"
 	},
+	"HTERM_NAME_PREF_ENABLE_RESIZE_STATUS": {
+		"description": "Label text shown for the hterm 'enable-resize-status' preference.",
+		"message": "Show terminal dimensions when resized"
+	},
 	"HTERM_NAME_PREF_ENVIRONMENT": {
 		"description": "Label text shown for the hterm 'environment' preference.",
 		"message": "Environment variables"
@@ -684,6 +688,10 @@
 	"HTERM_PREF_ENABLE_DEC12": {
 		"description": "Help text shown for the hterm 'enable-dec12' preference. 'DEC' should not be translated, but 'Private Mode' may be.",
 		"message": "Respect the host's attempt to change the text cursor blink status using DEC Private Mode 12."
+	},
+	"HTERM_PREF_ENABLE_RESIZE_STATUS": {
+		"description": "Help text shown for the hterm 'enable-resize-status' preference.",
+		"message": "Whether to show terminal dimensions when the terminal changes size."
 	},
 	"HTERM_PREF_ENVIRONMENT": {
 		"description": "Help text shown for the hterm 'environment' preference.",
