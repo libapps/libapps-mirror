@@ -52,10 +52,11 @@ mkzip.sh \
   -s "." -w ./dist/zip/ -m "./dist/zip/tmp/crosh.json"
 rm ./dist/zip/tmp/crosh.json
 
-# Add chrome://terminal html, js, and terminal_pwa_manifest.json.
+# Add chrome://terminal html, js, css, and terminal_pwa_manifest.json.
 cd ../terminal
 zip -r "${CROSH_ZIPFILE}" html -x html/*_test*
 zip -r "${CROSH_ZIPFILE}" js -x js/*_test*
+zip -r "${CROSH_ZIPFILE}" css
 zip "${CROSH_ZIPFILE}" terminal_pwa_manifest.json
 
 echo
