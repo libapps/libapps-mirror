@@ -4,6 +4,8 @@
 
 'use strict';
 
+const terminal = {};
+
 /**
  * The Terminal command.
  *
@@ -12,14 +14,15 @@
  * use the vmshell process on a Chrome OS machine.
  *
  * @param {!Object} argv The argument object passed in from the Terminal.
+ * @constructor
  */
-function Terminal(argv) {
+terminal.Command = function(argv) {
   this.commandName = argv.commandName;
   this.argv_ = argv;
   this.io = null;
   this.keyboard_ = null;
   this.id_ = null;
-}
+};
 
 /**
  * Static initializer.
@@ -29,29 +32,30 @@ function Terminal(argv) {
  *
  * @return {!hterm.Terminal} The new hterm.Terminal instance.
  */
-Terminal.init = function() {
+terminal.init = function() {
   const params = new URLSearchParams(document.location.search);
-  var terminal = new hterm.Terminal();
+  let term = new hterm.Terminal();
 
   // If we want to execute something other than the default vmshell.
   const commandName = params.get('command') || 'vmshell';
   window.document.title = commandName;
 
-  terminal.decorate(document.querySelector('#terminal'));
+  term.decorate(document.querySelector('#terminal'));
   const runTerminal = function() {
-    terminal.setCursorPosition(0, 0);
-    terminal.setCursorVisible(true);
-    terminal.runCommandClass(Terminal, commandName, params.getAll('args[]'));
+    term.setCursorPosition(0, 0);
+    term.setCursorVisible(true);
+    term.runCommandClass(
+        terminal.Command, commandName, params.getAll('args[]'));
 
-    terminal.command.keyboard_ = terminal.keyboard;
+    term.command.keyboard_ = term.keyboard;
   };
-  terminal.onTerminalReady = function() {
+  term.onTerminalReady = function() {
     if (window.chrome && chrome.accessibilityFeatures &&
         chrome.accessibilityFeatures.spokenFeedback) {
       chrome.accessibilityFeatures.spokenFeedback.onChange.addListener(
-          (details) => terminal.setAccessibilityEnabled(details.value));
-      chrome.accessibilityFeatures.spokenFeedback.get({}, function(details) {
-        terminal.setAccessibilityEnabled(details.value);
+          (details) => term.setAccessibilityEnabled(details.value));
+      chrome.accessibilityFeatures.spokenFeedback.get({}, (details) => {
+        term.setAccessibilityEnabled(details.value);
         runTerminal();
       });
     } else {
@@ -63,7 +67,7 @@ Terminal.init = function() {
   // function]) when translated strings are available via
   // chrome://terminal/strings.js.
 
-  return terminal;
+  return term;
 };
 
 /**
@@ -75,7 +79,7 @@ Terminal.init = function() {
  *             'exit': Process has exited.
  * @param text Text that was detected on process output.
  */
-Terminal.prototype.onProcessOutput_ = function(id, type, text) {
+terminal.Command.prototype.onProcessOutput_ = function(id, type, text) {
   if (this.id_ === null || id !== this.id_) {
     return;
   }
@@ -92,7 +96,7 @@ Terminal.prototype.onProcessOutput_ = function(id, type, text) {
  *
  * This is invoked by the terminal as a result of terminal.runCommandClass().
  */
-Terminal.prototype.run = function() {
+terminal.Command.prototype.run = function() {
   this.io = this.argv_.io.push();
 
   if (!chrome.terminalPrivate) {
@@ -134,7 +138,7 @@ Terminal.prototype.run = function() {
  *
  * @param {string} string The string to send.
  */
-Terminal.prototype.sendString_ = function(string) {
+terminal.Command.prototype.sendString_ = function(string) {
   if (this.id_ === null) {
     return;
   }
@@ -144,7 +148,7 @@ Terminal.prototype.sendString_ = function(string) {
 /**
  * Closes the terminal and exits the command.
  */
-Terminal.prototype.close_ = function() {
+terminal.Command.prototype.close_ = function() {
   if (this.id_ === null) {
     return;
   }
@@ -158,7 +162,7 @@ Terminal.prototype.close_ = function() {
  * @param {string|number} width The new terminal width.
  * @param {string|number} height The new terminal height.
  */
-Terminal.prototype.onTerminalResize_ = function(width, height) {
+terminal.Command.prototype.onTerminalResize_ = function(width, height) {
   if (this.id_ === null) {
     return;
   }
@@ -175,7 +179,7 @@ Terminal.prototype.onTerminalResize_ = function(width, height) {
  *
  * @param {number} code Exit code, 0 for success.
  */
-Terminal.prototype.exit = function(code) {
+terminal.Command.prototype.exit = function(code) {
   this.close_();
 
   if (code == 0) {
