@@ -94,7 +94,7 @@ def main(argv):
 
     ret = 0
     for path in opts.files:
-        if not reformat(path, opts.inplace):
+        if not reformat(path, inplace=opts.inplace):
             ret = 1
     return ret
 
