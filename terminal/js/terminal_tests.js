@@ -42,7 +42,7 @@ it('opens-process-in-init', function(done) {
         assert.deepEqual([], args);
         setTimeout(done, 0);
       });
-  Terminal.init();
+  terminal.init();
 });
 
 });
