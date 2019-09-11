@@ -277,8 +277,10 @@ nassh.sftp.packets.bitsToUnixModeLine = function(bits) {
 
   // Then handle user/group/other permissions.
   function threebits(bits, sid, x, X) {
-    if (!sid)
-      x = 'x', X = '-';
+    if (!sid) {
+      x = 'x';
+      X = '-';
+    }
     return ((bits & 0o4) ? 'r' : '-') +
            ((bits & 0o2) ? 'w' : '-') +
            ((bits & 0o1) ? x : X);

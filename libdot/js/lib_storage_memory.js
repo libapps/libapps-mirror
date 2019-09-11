@@ -45,7 +45,7 @@ lib.Storage.Memory.prototype.removeObserver = function(callback) {
 lib.Storage.Memory.prototype.clear = function(opt_callback) {
   var e = {};
   for (var key in this.storage_) {
-    e[key] = {oldValue: this.storage_[key], newValue: (void 0)};
+    e[key] = {oldValue: this.storage_[key], newValue: undefined};
   }
 
   this.storage_ = {};

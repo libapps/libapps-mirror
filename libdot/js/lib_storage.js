@@ -8,4 +8,4 @@
  * Namespace for implementations of persistent, possibly cloud-backed
  * storage.
  */
-lib.Storage = new Object();
+lib.Storage = {};
