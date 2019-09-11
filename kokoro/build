@@ -64,7 +64,7 @@ def test():
         result = libdot.run(['./bin/lint'], check=False, cwd=pkg_dir)
         if result.returncode:
             msg = '%s linter exited %i' % (pkg, result.returncode)
-            if is_presubmit() and pkg in {'libdot'}:
+            if is_presubmit():
                 logging.error(msg)
                 errors = True
             else:
