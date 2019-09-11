@@ -16,7 +16,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
       (tab) => { chrome.tabs.update(tab.id, {autoDiscardable: false}); });
 
   lib.init(() => {
-    window.term_ = Terminal.init();
+    window.term_ = terminal.init();
     window.addEventListener('hashchange', terminal.Menu.onHashChange);
   });
 });
