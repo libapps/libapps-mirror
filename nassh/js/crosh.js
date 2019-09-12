@@ -28,6 +28,15 @@ window.onload = function() {
   }
 
   nassh.disableTabDiscarding();
+  lib.registerInit('messages', (onInit) => {
+    lib.i18n.getAcceptLanguages(async (languages) => {
+      // Replace and load hterm.messageManager.
+      hterm.messageManager = new lib.MessageManager(languages, true);
+      const url =  lib.f.getURL('/_locales/$1/messages.json');
+      await hterm.messageManager.findAndLoadMessages(url);
+      onInit();
+    });
+  });
   lib.init(Crosh.init);
 };
 
@@ -39,6 +48,7 @@ window.onload = function() {
  * process on Chrome OS machine.
  *
  * @param {!Object} argv The argument object passed in from the Terminal.
+ * @constructor
  */
 function Crosh(argv) {
   this.commandName = argv.commandName;
@@ -53,6 +63,17 @@ function Crosh(argv) {
  * the Chromium OS system image.
  */
 Crosh.croshBuiltinId = 'nkoccljplnhpfnfiajclkommnmllphnl';
+
+/**
+ * Return a formatted message in the current locale.
+ *
+ * @param {string} name The name of the message to return.
+ * @param {!Array=} args The message arguments, if required.
+ * @return {string} The localized & formatted message.
+ */
+Crosh.msg = function(name, args) {
+  return hterm.messageManager.get(name, args);
+};
 
 /**
  * Static initializer called from crosh.html.
@@ -99,24 +120,24 @@ Crosh.init = function() {
   };
 
   terminal.contextMenu.setItems([
-    [nassh.msg('TERMINAL_CLEAR_MENU_LABEL'),
+    [Crosh.msg('TERMINAL_CLEAR_MENU_LABEL'),
      function() { terminal.wipeContents(); }],
-    [nassh.msg('TERMINAL_RESET_MENU_LABEL'),
+    [Crosh.msg('TERMINAL_RESET_MENU_LABEL'),
      function() { terminal.reset(); }],
-    [nassh.msg('NEW_WINDOW_MENU_LABEL'),
+    [Crosh.msg('NEW_WINDOW_MENU_LABEL'),
      function() {
        // Preserve the full URI in case it has args like for vmshell.
        Crosh.openNewWindow_(document.location.href);
      }],
-    [nassh.msg('FAQ_MENU_LABEL'),
+    [Crosh.msg('FAQ_MENU_LABEL'),
      function() { lib.f.openWindow('https://goo.gl/muppJj', '_blank'); }],
-    [nassh.msg('OPTIONS_BUTTON_LABEL'),
+    [Crosh.msg('OPTIONS_BUTTON_LABEL'),
      function() { nassh.openOptionsPage(); }],
   ]);
 
   // Useful for console debugging.
   window.term_ = terminal;
-  console.log(nassh.msg(
+  console.log(Crosh.msg(
       'CONSOLE_CROSH_OPTIONS_NOTICE',
       ['Ctrl-Shift-P', lib.f.getURL('/html/nassh_preferences_editor.html')]));
 
@@ -184,13 +205,13 @@ Crosh.prototype.run = function() {
     params.set('openas', 'window');
     const url = new URL(document.location);
     url.search = params.toString();
-    this.io.println(nassh.msg('OPEN_AS_WINDOW_TIP',
+    this.io.println(Crosh.msg('OPEN_AS_WINDOW_TIP',
                               [`\x1b]8;;${url.href}\x07[crosh]\x1b]8;;\x07`]));
     this.io.println('');
   }
 
   if (!chrome.terminalPrivate) {
-    this.io.println(nassh.msg('COMMAND_NOT_SUPPORTED', [this.commandName]));
+    this.io.println(Crosh.msg('COMMAND_NOT_SUPPORTED', [this.commandName]));
     this.exit(1);
     return;
   }
@@ -204,7 +225,7 @@ Crosh.prototype.run = function() {
 
   const pidInit = (id) => {
     if (id === undefined) {
-      this.io.println(nassh.msg('COMMAND_STARTUP_FAILED',
+      this.io.println(Crosh.msg('COMMAND_STARTUP_FAILED',
                                 [this.commandName, lib.f.lastError('')]));
       this.exit(1);
       return;
@@ -292,8 +313,8 @@ Crosh.prototype.exit = function(code) {
     return;
   }
 
-  this.io.println(nassh.msg('COMMAND_COMPLETE', [this.commandName, code]));
-  this.io.println(nassh.msg('RECONNECT_MESSAGE'));
+  this.io.println(Crosh.msg('COMMAND_COMPLETE', [this.commandName, code]));
+  this.io.println(Crosh.msg('RECONNECT_MESSAGE'));
   this.io.onVTKeystroke = (string) => {
     var ch = string.toLowerCase();
     if (ch == 'r' || ch == ' ' || ch == '\x0d' /* enter */ ||
