@@ -55,7 +55,7 @@ it('processI18nAttribute', () => {
 /**
  * Check addMessages behavior.
  */
-it('add-messages', () => {
+it('add-messages', /** @suppress{visibility} */ () => {
   const mm = new lib.MessageManager([]);
 
   mm.addMessages({
@@ -67,8 +67,8 @@ it('add-messages', () => {
       'message': 'foo $1 bar $2',
     },
   });
-  assert.equal('text', mm.messages['SOME_ID']);
-  assert.equal('foo $1 bar $2', mm.messages['ID_REPLACE']);
+  assert.equal('text', mm.messages_['SOME_ID']);
+  assert.equal('foo $1 bar $2', mm.messages_['ID_REPLACE']);
 });
 
 /**

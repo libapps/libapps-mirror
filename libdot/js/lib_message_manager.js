@@ -15,16 +15,25 @@
  *        Chrome extension.
  *
  * @param {!Array<string>} languages List of languages to load, in the order
- *     they should be loaded.  Newer messages replace older ones.  'en' is
- *     automatically added as the first language if it is not already present.
+ *     they are preferred.  The first language found will be used.  'en' is
+ *     automatically added as the last language if it is not already present.
+ * @param {boolean=} useCrlf If true, '\n' in messages are substituted for
+ *     '\r\n'.  This fixes the translation process which discards '\r'
+ *     characters.
  */
-lib.MessageManager = function(languages) {
+lib.MessageManager = function(languages, useCrlf = false) {
   this.languages_ = languages.map((el) => el.replace(/-/g, '_'));
 
   if (this.languages_.indexOf('en') == -1)
-    this.languages_.unshift('en');
+    this.languages_.push('en');
 
-  this.messages = {};
+  this.useCrlf = useCrlf;
+
+  /**
+   * @private {!Object<string, string>}
+   * @const
+   */
+  this.messages_ = {};
 };
 
 /**
@@ -40,12 +49,13 @@ lib.MessageManager.prototype.addMessages = function(defs) {
     var def = defs[key];
 
     if (!def.placeholders) {
-      this.messages[key] = def.message;
+      // Upper case key into this.messages_ since our translated
+      // bundles are lower case, but we request msg as upper.
+      this.messages_[key.toUpperCase()] = def.message;
     } else {
       // Replace "$NAME$" placeholders with "$1", etc.
-      this.messages[key] = def.message.replace(
-          /\$([a-z][^\s\$]+)\$/ig,
-          function(m, name) {
+      this.messages_[key.toUpperCase()] =
+          def.message.replace(/\$([a-z][^\s\$]+)\$/ig, function(m, name) {
             return defs[key].placeholders[name.toLowerCase()].content;
           });
     }
@@ -57,66 +67,49 @@ lib.MessageManager.prototype.addMessages = function(defs) {
  *
  * @param {string} pattern A url pattern containing a "$1" where the locale
  *     name should go.
- * @param {function(!Array<string>, !Array<string>)} onComplete Function to be
- *     called when loading is complete.  The two arrays are the list of
- *     successful and failed locale names.  If the first parameter is length 0,
- *     no locales were loaded.
  */
-lib.MessageManager.prototype.findAndLoadMessages = function(
-    pattern, onComplete) {
-  var languages = this.languages_.concat();
-  var loaded = [];
-  var failed = [];
-
-  function onLanguageComplete(state) {
-    if (state) {
-      loaded = languages.shift();
-    } else {
-      failed = languages.shift();
-    }
-
-    if (languages.length) {
-      tryNextLanguage();
-    } else {
-      onComplete(loaded, failed);
-    }
+lib.MessageManager.prototype.findAndLoadMessages = async function(pattern) {
+  if (lib.i18n.browserSupported()) {
+    return;
   }
 
-  var tryNextLanguage = function() {
-    this.loadMessages(this.replaceReferences(pattern, languages),
-                      onLanguageComplete.bind(this, true),
-                      onLanguageComplete.bind(this, false));
-  }.bind(this);
-
-  tryNextLanguage();
+  for (const lang of this.languages_) {
+    const url = lib.i18n.replaceReferences(pattern, lang);
+    try {
+      await this.loadMessages(url);
+      return;
+    } catch (e) {
+      console.warn(
+          `Error fetching ${lang} messages at ${url}`, e,
+          'Trying all languages:', this.languages_);
+    }
+  }
 };
 
 /**
  * Load messages from a messages.json file.
  *
  * @param {string} url The URL to load the messages from.
- * @param {function()} onSuccess Callback when loading is successful.
- * @param {function()=} opt_onError Callback when any error is hit.
+ * @return {!Promise<void>}
  */
-lib.MessageManager.prototype.loadMessages = function(
-    url, onSuccess, opt_onError) {
-  var xhr = new XMLHttpRequest();
+lib.MessageManager.prototype.loadMessages = function(url) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = () => {
+      try {
+        this.addMessages(JSON.parse(xhr.responseText));
+        resolve();
+      } catch (e) {
+        // Error parsing JSON.
+        reject(e);
+      }
+    };
+    xhr.onerror = () => reject(xhr);
 
-  xhr.onload = () => {
-    this.addMessages(JSON.parse(xhr.responseText));
-    onSuccess();
-  };
-  if (opt_onError)
-    xhr.onerror = () => opt_onError(xhr);
-
-  xhr.open('GET', url);
-  xhr.send();
+    xhr.open('GET', url);
+    xhr.send();
+  });
 };
-
-/**
- * Per-instance copy of replaceReferences.
- */
-lib.MessageManager.prototype.replaceReferences = lib.i18n.replaceReferences;
 
 /**
  * Get a message by name, optionally replacing arguments too.
@@ -132,19 +125,21 @@ lib.MessageManager.prototype.get = function(msgname, opt_args, opt_default) {
   // First try the integrated browser getMessage.  We prefer that over any
   // registered messages as only the browser supports translations.
   let message = lib.i18n.getMessage(msgname, opt_args);
-  if (message)
-    return message;
-
-  // Look it up in the registered cache next.
-  message = this.messages[msgname];
   if (!message) {
-    console.warn('Unknown message: ' + msgname);
-    message = opt_default === undefined ? msgname : opt_default;
-    // Register the message with the default to avoid multiple warnings.
-    this.messages[msgname] = message;
+    // Look it up in the registered cache next.
+    message = this.messages_[msgname];
+    if (!message) {
+      console.warn('Unknown message: ' + msgname);
+      message = opt_default === undefined ? msgname : opt_default;
+      // Register the message with the default to avoid multiple warnings.
+      this.messages_[msgname] = message;
+    }
+    message = lib.i18n.replaceReferences(message, opt_args);
   }
-
-  return this.replaceReferences(message, opt_args);
+  if (this.useCrlf) {
+    message = message.replace(/\n/g, '\r\n');
+  }
+  return message;
 };
 
 /**

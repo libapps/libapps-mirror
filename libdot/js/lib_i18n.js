@@ -20,6 +20,15 @@ lib.i18n.browser_ =
     null;
 
 /**
+ * Return whether the browser supports i18n natively.
+ *
+ * @return {boolean} True if browser.i18n or chrome.i18n exists.
+ */
+lib.i18n.browserSupported = function() {
+  return lib.i18n.browser_ !== null;
+};
+
+/**
  * Get the list of accepted UI languages.
  *
  * https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/i18n/getAcceptLanguages
