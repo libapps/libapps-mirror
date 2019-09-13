@@ -9,19 +9,41 @@ window.chrome = window.chrome || {};
 /**
  * Mock Event.
  *
+ * @extends {Event}
  * @constructor
  */
 function MockEvent() {
   /**
-   * @private {!Array<function(...*)>}
-   * @const
+   * @private {!Array<?EventListener|function(!Event)>}
    */
   this.listeners_ = [];
 }
 
-/** @param {function(...*)} listener */
+/** @param {?EventListener|function(!Event)} listener */
 MockEvent.prototype.addListener = function(listener) {
   this.listeners_.push(listener);
+};
+
+/** @param {?EventListener|function(!Event)} listener */
+MockEvent.prototype.removeListener = function(listener) {
+  this.listeners_ = this.listeners_.filter((l) => l != listener);
+};
+
+/**
+ * Dispatch to all listeners async.
+ *
+ * @param {...*} args
+ * @return {!Promise<void>}
+ */
+MockEvent.prototype.dispatch = function(...args) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      for (const l of this.listeners_) {
+        l.apply(null, args);
+      }
+      resolve();
+    }, 0);
+  });
 };
 
 /**
@@ -163,4 +185,49 @@ MockTerminalPrivate.prototype.onTerminalResize = function(
  */
 MockTerminalPrivate.prototype.ackOutput = function(tabId, id) {
   this.notifyObservers_('ackOutput', arguments);
+};
+
+/**
+ * Mock Window.
+ *
+ * @extends {Window}
+ * @constructor
+ */
+function MockWindow() {
+  /** @type {{hash: string}} */
+  this.location = {hash: '#'};
+
+  /** @type {!Object<string, !MockEvent>} */
+  this.events = new Proxy({}, {
+    get: function(obj, prop) {
+      if (!obj.hasOwnProperty(prop)) {
+        obj[prop] = new MockEvent();
+      }
+      return obj[prop];
+    }
+  });
+}
+
+/**
+ * Add event listener.  Listeners can be registered and then invoked with:
+ *   mockWindow.addEventListener('mytype', listenerFunc);
+ *   mockWindow.events['mytype'].dispatch(args);
+ *
+ * @param {string} type Event type.
+ * @param {?EventListener|function(!Event)} listener Listener function.
+ * @override
+ */
+MockWindow.prototype.addEventListener = function(type, listener) {
+  this.events[type].addListener(listener);
+};
+
+/**
+ * Remove event listener.
+ *
+ * @param {string} type Event type.
+ * @param {?EventListener|function(!Event)} listener Listener function.
+ * @override
+ */
+MockWindow.prototype.removeEventListener = function(type, listener) {
+  this.events[type].removeListener(listener);
 };

@@ -17,6 +17,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   lib.init(() => {
     window.term_ = terminal.init();
-    window.addEventListener('hashchange', terminal.Menu.onHashChange);
+    new terminal.Menu(window).install();
   });
 });

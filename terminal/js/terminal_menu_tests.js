@@ -9,36 +9,28 @@
  */
 
 describe('terminal_menu_tests.js', () => {
-  const changeHash = async function(hash) {
-    if (hash == window.location.hash) {
-      return;
-    }
-    return new Promise(resolve => {
-      const listener = () => {
-        window.removeEventListener('hashchange', listener);
-        resolve();
-      };
-      window.addEventListener('hashchange', listener);
-      window.location.hash = hash;
-    });
-  };
-
   it('invokes-callback-when-hash-changes', async function() {
+    const mockWindow = new MockWindow();
+    async function changeHash(hash) {
+      mockWindow.location.hash = hash;
+      return mockWindow.events['hashchange'].dispatch({});
+    }
+    const menu = new terminal.Menu(mockWindow);
     let callCount = 0;
-    terminal.Menu.HANDLERS['#test'] = function() { callCount++; };
-    await changeHash('');
+    terminal.Menu.HANDLERS.set('#test', () => callCount++);
+    await changeHash('#');
 
     // Callback is triggered, even for the same hash repeatedly.
-    window.addEventListener('hashchange', terminal.Menu.onHashChange);
-    await changeHash('test');
+    menu.install();
+    await changeHash('#test');
     assert.equal(callCount, 1);
-    await changeHash('test');
+    await changeHash('#test');
     assert.equal(callCount, 2);
-    await changeHash('notCalled');
+    await changeHash('#notCalled');
     assert.equal(callCount, 2);
 
     // Not triggered after uninstall.
-    window.removeEventListener('hashchange', terminal.Menu.onHashChange);
+    menu.uninstall();
     await changeHash('test');
     assert.equal(callCount, 2);
   });

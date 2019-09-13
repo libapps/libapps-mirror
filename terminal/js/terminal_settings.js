@@ -5,6 +5,6 @@
 'use strict';
 
 /** Open settings page in a new window. */
-terminal.Menu.HANDLERS['#options'] = function() {
-  window.open('/html/terminal_settings.html');
-};
+terminal.Menu.HANDLERS.set(
+    '#options',
+    function() { this.window.open('/html/terminal_settings.html'); });
