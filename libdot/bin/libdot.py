@@ -478,4 +478,5 @@ class HelperProgram:
 
 
 # Wrappers around libdot/bin/ programs for other tools to access directly.
+concat = HelperProgram('concat')
 lint = HelperProgram('lint')

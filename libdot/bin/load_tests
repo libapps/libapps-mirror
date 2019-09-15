@@ -11,7 +11,6 @@ import os
 import sys
 
 import libdot
-import concat
 
 
 # Path to our html test page.
@@ -24,8 +23,8 @@ def main(argv):
     libdot.html_test_runner_main(argv, 'file://%s' % (TEST_PAGE,))
 
     # Then run the standalone tests through node.
-    concat.concat(os.path.join(libdot.DIR, 'concat', 'libdot.concat'),
-                  os.path.join(libdot.DIR, 'js', 'libdot.js'))
+    libdot.concat.concat(os.path.join(libdot.DIR, 'concat', 'libdot.concat'),
+                         os.path.join(libdot.DIR, 'js', 'libdot.js'))
     libdot.run(['mocha', '--file', os.path.join('js', 'test_node.js'),
                 os.path.join('js', '*_tests.js'),
                 os.path.join('third_party', '*', '*_tests.js')],
