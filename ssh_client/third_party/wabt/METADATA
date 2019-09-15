@@ -1,0 +1,10 @@
+name: "wabt"
+description: "The WebAssembly Binary Toolkit"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://github.com/WebAssembly/wabt"
+  }
+  version: "1.0.12"
+}

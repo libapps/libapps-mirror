@@ -1,0 +1,10 @@
+name: "binaryen"
+description: "Compiler infrastructure and toolchain library for WebAssembly"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://github.com/WebAssembly/binaryen"
+  }
+  version: "89"
+}

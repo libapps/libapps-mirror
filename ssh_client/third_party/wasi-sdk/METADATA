@@ -1,0 +1,10 @@
+name: "wasi-sdk"
+description: "WASI-enabled C/C++ toolchain"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://github.com/CraneStation/wasi-sdk"
+  }
+  version: "7.0"
+}

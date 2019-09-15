@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Build wabt package."""
+
+from __future__ import print_function
+
+import os
+import sys
+
+FILESDIR = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
+
+import ssh_client  # pylint: disable=wrong-import-position
+
+
+ARCHIVES = ('%(P)s-linux.tar.gz',)
+
+
+def src_install(metadata):
+    """Install the package."""
+    # For now we assume everything in here is a program.
+    for prog in os.listdir(metadata['S']):
+        target = os.path.join(metadata['S'], prog)
+        path = os.path.join(ssh_client.BUILD_BINDIR, prog)
+        ssh_client.symlink(target, path)
+
+
+ssh_client.build_package(sys.modules[__name__], 'build')

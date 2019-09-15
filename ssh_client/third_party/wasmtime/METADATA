@@ -1,0 +1,10 @@
+name: "wasmtime"
+description: "Standalone JIT-style runtime for WebAssembly"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://github.com/CraneStation/wasmtime"
+  }
+  version: "0.3.0"
+}
