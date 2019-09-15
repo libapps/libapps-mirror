@@ -10,6 +10,7 @@ from __future__ import print_function
 
 import argparse
 import glob
+import importlib.machinery
 import logging
 import logging.handlers
 import os
@@ -17,6 +18,7 @@ import shutil
 import subprocess
 import sys
 import time
+import types
 import urllib.request
 
 
@@ -422,3 +424,54 @@ def chrome_setup():
     os.rename(tmpdir, chrome_dir)
 
     return chrome_bin
+
+
+def load_module(name, path):
+    """Load a module from the filesystem.
+
+    Args:
+      name: The name of the new module to import.
+      path: The full path to the file to import.
+    """
+    loader = importlib.machinery.SourceFileLoader(name, path)
+    module = types.ModuleType(loader.name)
+    loader.exec_module(module)
+    return module
+
+
+class HelperProgram:
+    """Wrapper around local programs that get reused by other projects.
+
+    This allows people to do inprocess execution rather than having to fork+exec
+    another Python instance.
+
+    This allows us to avoid filesystem symlinks (which aren't portable), and to
+    avoid naming programs with .py extensions, and to avoid clashes between
+    projects that use the same program name (e.g. "import lint" would confuse
+    libdot/bin/lint & nassh/bin/lint), and to avoid merging all libdot helpers
+    into the single libdot.py module.
+    """
+
+    def __init__(self, name, path=None):
+        """Initialize.
+
+        Args:
+          name: The base name of the program to import.
+          path: The full path to the file.  It defaults to libdot/bin/|name|.
+        """
+        self._name = name
+        if path is None:
+            path = os.path.join(BIN_DIR, name)
+        self._path = path
+        self._module_cache = None
+
+    @property
+    def _module(self):
+        """Load & cache the program module."""
+        if self._module_cache is None:
+            self._module_cache = load_module(self._name, self._path)
+        return self._module_cache
+
+    def __getattr__(self, name):
+        """Dynamic forwarder to module members."""
+        return getattr(self._module, name)
