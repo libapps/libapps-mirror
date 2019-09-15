@@ -15,28 +15,47 @@ import sys
 import libdot
 
 
-def main(argv):
-    """The main func!"""
-    if not argv:
-        os.chdir(libdot.DIR)
-        # All files in js/*.js excluding generated files.
-        # Sort to ensure lib.js comes before lib_array.js, etc.
-        argv = [f for f in glob.glob(os.path.join('js', '*.js'))
-                if not f == 'js/libdot.js']
-        argv.sort()
+def _get_default_paths():
+    """Get list of paths to lint by default."""
+    os.chdir(libdot.DIR)
+    # All files in js/*.js excluding generated files.
+    # Sort to ensure lib.js comes before lib_array.js, etc.
+    return sorted(
+        x for x in glob.glob(os.path.join('js', '*.js'))
+        if x != 'js/libdot.js')
 
+
+def main(argv, get_default_paths=None, eslint_args=(), closure_args=()):
+    """The common main func for all linters.
+
+    Args:
+      argv: The command line to process.
+      get_default_paths: Function to get all the default set of files to lint.
+          If the user doesn't specify any, we'll get them from here.
+      eslint_args: Extra arguments to pass to eslint.
+      closure_args: Extra arguments to pass to closure-compiler.
+    """
     libdot.setup_logging()
     libdot.node_and_npm_setup()
 
+    if not argv:
+        if get_default_paths:
+            argv = get_default_paths()
+        else:
+            print('No files to lint.')
+            return 0
+
     # We know our tools are first in $PATH now.
-    libdot.run(['eslint'] + argv)
+    libdot.run(['eslint'] + list(eslint_args) + argv)
     # TODO(crbug.com/998928): Update checks beyond just 'lintChecks'.
     # E.g. --jscomp_error=*.
     libdot.run([
         os.path.join(libdot.BIN_DIR, 'closure-compiler'),
         '--checks-only', '--jscomp_error=lintChecks',
-        '--language_in=ECMASCRIPT_2018'] + argv)
+        '--language_in=ECMASCRIPT_2018'] + list(closure_args) + argv)
+
+    return 0
 
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:]))
+    sys.exit(main(sys.argv[1:], get_default_paths=_get_default_paths))

@@ -475,3 +475,7 @@ class HelperProgram:
     def __getattr__(self, name):
         """Dynamic forwarder to module members."""
         return getattr(self._module, name)
+
+
+# Wrappers around libdot/bin/ programs for other tools to access directly.
+lint = HelperProgram('lint')
