@@ -10,10 +10,8 @@ from __future__ import print_function
 import os
 import sys
 
-import nassh  # pylint: disable=unused-import
+import nassh
 import libdot
-
-import mkdeps
 
 
 # Path to our html test page.
@@ -23,7 +21,7 @@ TEST_PAGE = os.path.join('nassh', 'html', 'nassh_test.html')
 def main(argv):
     """The main func!"""
     return libdot.html_test_runner_main(
-        argv, TEST_PAGE, serve=True, mkdeps=lambda opts: mkdeps.mkdeps())
+        argv, TEST_PAGE, serve=True, mkdeps=lambda opts: nassh.mkdeps.mkdeps())
 
 
 if __name__ == '__main__':
