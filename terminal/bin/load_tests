@@ -18,13 +18,14 @@ import libdot
 TEST_PAGE = os.path.join('terminal', 'html', 'terminal_test.html')
 
 
-def mkdeps(opts):
+def mkdeps(_opts):
+    """Build the required deps for the test suite."""
     libdot.run([os.path.join(terminal.LIBAPPS_DIR, 'nassh', 'bin', 'mkdeps')])
 
 
 def main(argv):
     """The main func!"""
-    return libdot.html_test_runner_main(
+    return libdot.load_tests.test_runner_main(
         argv, TEST_PAGE, serve=True, mkdeps=mkdeps)
 
 

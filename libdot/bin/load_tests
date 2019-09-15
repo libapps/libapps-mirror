@@ -7,7 +7,10 @@
 
 from __future__ import print_function
 
+import argparse
+import logging
 import os
+import subprocess
 import sys
 
 import libdot
@@ -17,10 +20,108 @@ import libdot
 TEST_PAGE = os.path.join(libdot.DIR, 'html', 'lib_test.html')
 
 
+def get_parser():
+    """Get a parser for our test runner."""
+    parser = argparse.ArgumentParser(
+        description='HTML test runner',
+        formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument('-d', '--debug', action='store_true',
+                        help='Run with debug output.')
+    parser.add_argument('--browser', default=os.getenv('CHROME_BIN'),
+                        help='Browser program to run tests against.')
+    parser.add_argument('--profile', default=os.getenv('CHROME_TEST_PROFILE'),
+                        help='Browser profile dir to run against.')
+    parser.add_argument('--skip-mkdeps', dest='run_mkdeps',
+                        action='store_false', default=True,
+                        help='Skip (re)building of dependencies.')
+    parser.add_argument('--visible', action='store_true',
+                        help='Show the browser window to interact with.')
+    # Note: This CLI option matches Chrome's own naming.
+    parser.add_argument('--no-sandbox', dest='sandbox',
+                        action='store_false', default=True,
+                        help='Disable Chrome sandboxing.')
+    return parser
+
+
+def test_runner_main(argv, path, serve=False, mkdeps=False):
+    """Open the test page at |path|.
+
+    Args:
+      argv: The program's command line arguments.
+      path: Path to the test page.
+      serve: Whether to launch a webserver or load the page from disk.
+      mkdeps: Callback to build dependencies after we've initialized.
+    """
+    parser = get_parser()
+    opts = parser.parse_args(argv)
+    libdot.setup_logging(debug=opts.debug)
+
+    # Try to use default X session.
+    os.environ.setdefault('DISPLAY', ':0')
+
+    # Ensure chai/mocha node modules exist.
+    libdot.node_and_npm_setup()
+
+    # Set up any deps.
+    if mkdeps:
+        if opts.run_mkdeps:
+            mkdeps(opts)
+        else:
+            logging.info('Skipping building dependencies due to --skip-mkdeps')
+
+    # Set up a unique profile to avoid colliding with user settings.
+    profile_dir = opts.profile
+    if not profile_dir:
+        profile_dir = os.path.expanduser('~/.config/google-chrome-run_local')
+    os.makedirs(profile_dir, exist_ok=True)
+
+    # Find a Chrome version to run against.
+    browser = opts.browser
+    if not browser:
+        browser = libdot.chrome_setup()
+
+    # Kick off server if needed.
+    if serve:
+        server = subprocess.Popen(['http-server', '-a', 'localhost', '-c-1',
+                                   '--cors'],
+                                  cwd=libdot.LIBAPPS_DIR)
+        path = 'http://localhost:8080/%s' % path
+
+    # Some environments are unable to utilize the sandbox: we're not running as
+    # root, and userns is unavailable.  For example, while using docker.
+    if opts.sandbox:
+        sb_arg = mocha_sb_arg = []
+    else:
+        sb_arg = ['--no-sandbox']
+        # The wrapper requires omitting the leading dashes for no real reason.
+        mocha_sb_arg = ['--args=no-sandbox']
+
+    try:
+        # Kick off test runner in the background so we exit.
+        logging.info('Running tests against browser "%s".', browser)
+        logging.info('Tests page: %s', path)
+        if opts.visible:
+            subprocess.Popen([browser, '--user-data-dir=%s' % (profile_dir,),
+                              path] + sb_arg)
+        else:
+            libdot.run(['mocha-headless-chrome', '-e', browser, '-f', path] +
+                       mocha_sb_arg)
+    finally:
+        # Wait for the server if it exists.
+        if serve:
+            if opts.visible:
+                try:
+                    server.wait()
+                except KeyboardInterrupt:
+                    pass
+            else:
+                server.terminate()
+
+
 def main(argv):
     """The main func!"""
     # Run the tests through Chrome.
-    libdot.html_test_runner_main(argv, 'file://%s' % (TEST_PAGE,))
+    test_runner_main(argv, 'file://%s' % (TEST_PAGE,))
 
     # Then run the standalone tests through node.
     libdot.concat.concat(os.path.join(libdot.DIR, 'concat', 'libdot.concat'),
