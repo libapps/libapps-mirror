@@ -132,12 +132,12 @@ def src_compile(metadata):
     ssh_client.run([tc.ar, 'rcs', 'libopenssh.a'] + objects)
 
 
-def src_install(_metadata):
+def src_install(metadata):
     """Install the package."""
+    tc = metadata['toolchain']
     for lib in ('libopenssh.a', 'libssh.a',
                 'openbsd-compat/libopenbsd-compat.a'):
-        ssh_client.copy(lib,
-                        os.path.join(ssh_client.OUTPUT, os.path.basename(lib)))
+        ssh_client.copy(lib, os.path.join(tc.libdir, os.path.basename(lib)))
 
     plugin_docs = os.path.join(ssh_client.OUTPUT, 'plugin', 'docs')
     os.makedirs(plugin_docs, exist_ok=True)

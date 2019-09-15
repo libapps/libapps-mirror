@@ -53,7 +53,7 @@ PNACL_TRANSLATE:=$(PNACL_TC_ROOT)/bin/pnacl-translate
 PNACL_TRANSLATE_FLAGS=-fdata-sections -ffunction-sections --gc-sections \
         --allow-llvm-bitcode-input
 PNACL_LDFLAGS:=-lppapi_cpp -lppapi -lcrypto -lppapi_cpp_private -lnacl_io -lz \
-        -L$(OUTPUT) -L$(NACL_SDK_ROOT)/lib/pnacl/Release --pnacl-disable-abi-check
+        -L$(NACL_SDK_ROOT)/lib/pnacl/Release --pnacl-disable-abi-check
 
 COMPAT_INC:=-I$(PNACL_TC_ROOT)/le32-nacl/include/glibc-compat
 PNACL_CXXFLAGS:=$(CXXFLAGS) $(COMPAT_INC)
