@@ -84,7 +84,7 @@ def clean():
     ssh_client_dir = os.path.join(kokoro.LIBAPPS_DIR, 'ssh_client')
     shutil.rmtree(os.path.join(ssh_client_dir, 'output'), ignore_errors=True)
 
-    shutil.rmtree(libdot.NODE_MODULES_DIR, ignore_errors=True)
+    shutil.rmtree(libdot.node.NODE_MODULES_DIR, ignore_errors=True)
 
 
 def get_parser():

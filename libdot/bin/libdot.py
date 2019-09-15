@@ -8,7 +8,6 @@
 
 from __future__ import print_function
 
-import glob
 import importlib.machinery
 import logging
 import logging.handlers
@@ -167,121 +166,15 @@ def fetch(uri, output):
     os.rename(tmpfile, output)
 
 
-# The hash of the node_modules that we maintain.
-# Allow a long line for easy automated updating.
-# pylint: disable=line-too-long
-NODE_MODULES_HASH = '6aa8e3885b83f646e15bd56f9f53b97a481fe1907da55519fd789ca755d9eca5'
-# pylint: enable=line-too-long
-
-# In sync with Chromium's DEPS file because it's easier to use something that
-# already exists than maintain our own.  Look for 'node_linux64' here:
-# https://chromium.googlesource.com/chromium/src/+/master/DEPS
-NODE_VER = '10.15.3'
-
-# Run `./node_sync_with_chromium` to update these hashes.
-NODE_LINUX_HASH = '3f578b6dec3fdddde88a9e889d9dd5d660c26db9'
-NODE_MAC_HASH = '37d5bb727fa6f3f29a8981962903d0a2371a3f2d'
-
-# Bucket maintained by Chromium.
-# gsutil ls gs://chromium-nodejs/
-NODE_BASE_URI = 'https://storage.googleapis.com/chromium-nodejs'
-
-# Bucket maintained by us.
-NODE_MODULES_GS_FRAGMENT = 'chromeos-localmirror/secureshell/distfiles'
-NODE_MODULES_GS_URI = 'gs://%s' % (NODE_MODULES_GS_FRAGMENT,)
-NODE_MODULES_BASE_URI = ('https://storage.googleapis.com/%s'
-                         % (NODE_MODULES_GS_FRAGMENT,))
-
-# The node_modules & node/npm paths.
-NODE_MODULES_DIR = os.path.join(LIBAPPS_DIR, 'node_modules')
-NODE_BIN_DIR = os.path.join(NODE_MODULES_DIR, '.bin')
-NODE = os.path.join(NODE_BIN_DIR, 'node')
-NPM = os.path.join(NODE_BIN_DIR, 'npm')
-# Use a dotdir as npm expects to manage everything under node_modules/.
-NODE_DIR = os.path.join(NODE_MODULES_DIR, '.node')
-
-
-def node_update():
-    """Download & update our copy of node."""
-    osname = os.uname().sysname
-    if osname == 'Linux':
-        node_hash = NODE_LINUX_HASH
-    elif osname == 'Darwin':
-        node_hash = NODE_MAC_HASH
-    # We don't support Windows yet.
-    #elif osname == 'Windows':
-    #    node_hash = NODE_WIN_HASH
-    else:
-        raise RuntimeError('Unknown OS %s' % (osname,))
-
-    # In case of an upgrade, nuke existing dir.
-    hash_file = os.path.join(NODE_DIR, node_hash)
-    if not os.path.exists(hash_file):
-        shutil.rmtree(NODE_DIR, ignore_errors=True)
-
-    if not os.path.exists(NODE):
-        os.makedirs(NODE_BIN_DIR, exist_ok=True)
-        os.makedirs(NODE_DIR, exist_ok=True)
-
-        # Download & unpack the archive.
-        uri = os.path.join(NODE_BASE_URI, NODE_VER, node_hash)
-        output = os.path.join(NODE_DIR, node_hash)
-        fetch(uri, output)
-        unpack(output, cwd=NODE_DIR)
-        unlink(output)
-
-        # Create canonical symlinks for node & npm.
-        paths = glob.glob(os.path.join(NODE_DIR, '*', 'bin', 'node'))
-        #relpath = os.path.relpath(paths[0], NODE_BIN_DIR)
-        #os.symlink(relpath, NODE)
-        symlink(paths[0], NODE)
-        paths = glob.glob(os.path.join(NODE_DIR, '*', '*', 'node_modules',
-                                       'npm', 'bin', 'npm-cli.js'))
-        #relpath = os.path.relpath(paths[0], NODE_BIN_DIR)
-        #os.symlink(relpath, NPM)
-        symlink(paths[0], NPM)
-
-        # Mark the hash of this checkout.
-        touch(hash_file)
-
-
-def node_modules_update():
-    """Download & update our copy of node_modules."""
-    hash_file = os.path.join(NODE_MODULES_DIR, '.hash')
-    old_hash = None
-    try:
-        with open(hash_file, 'r', encoding='utf-8') as fp:
-            old_hash = fp.read().strip()
-    except FileNotFoundError:
-        pass
-
-    # In case of an upgrade, nuke existing dir.
-    if old_hash != NODE_MODULES_HASH:
-        shutil.rmtree(NODE_MODULES_DIR, ignore_errors=True)
-
-    if not os.path.exists(hash_file):
-        # Download & unpack the archive.
-        tar = 'node_modules-%s.tar.xz' % (NODE_MODULES_HASH,)
-        uri = os.path.join(NODE_MODULES_BASE_URI, tar)
-        output = os.path.join(LIBAPPS_DIR, tar)
-        fetch(uri, output)
-        unpack(output, cwd=LIBAPPS_DIR)
-        unlink(output)
-
-        # Mark the hash of this checkout.
-        with open(hash_file, 'w', encoding='utf-8') as fp:
-            fp.write(NODE_MODULES_HASH)
-
-
 def node_and_npm_setup():
     """Download our copies of node & npm to our tree and updates env ($PATH)."""
     # We have to update modules first as it'll nuke the dir node lives under.
-    node_modules_update()
-    node_update()
+    node.modules_update()
+    node.update()
 
     # Make sure our tools show up first in $PATH to override the system.
     path = os.getenv('PATH')
-    os.environ['PATH'] = '%s:%s' % (NODE_BIN_DIR, path)
+    os.environ['PATH'] = '%s:%s' % (node.NODE_BIN_DIR, path)
 
 
 # A snapshot of Chrome that we update from time to time.
@@ -298,7 +191,7 @@ CHROME_VERSION = 'google-chrome-stable_75.0.3770.142-1'
 
 def chrome_setup():
     """Download our copy of Chrome for headless testing."""
-    puppeteer = os.path.join(NODE_MODULES_DIR, 'puppeteer')
+    puppeteer = os.path.join(node.NODE_MODULES_DIR, 'puppeteer')
     download_dir = os.path.join(puppeteer, '.local-chromium')
     chrome_dir = os.path.join(download_dir, CHROME_VERSION)
     chrome_bin = os.path.join(chrome_dir, 'opt', 'google', 'chrome', 'chrome')
@@ -312,7 +205,7 @@ def chrome_setup():
 
     # Get the snapshot deb archive.
     chrome_deb = os.path.join(tmpdir, 'deb')
-    uri = '%s/%s_amd64.deb' % (NODE_MODULES_BASE_URI, CHROME_VERSION)
+    uri = '%s/%s_amd64.deb' % (node.NODE_MODULES_BASE_URI, CHROME_VERSION)
     fetch(uri, chrome_deb)
 
     # Unpack the deb archive, then clean it all up.
@@ -382,3 +275,4 @@ class HelperProgram:
 concat = HelperProgram('concat')
 lint = HelperProgram('lint')
 load_tests = HelperProgram('load_tests')
+node = HelperProgram('node')
