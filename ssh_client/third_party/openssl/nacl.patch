@@ -1,6 +1,6 @@
 --- a/Configure
 +++ b/Configure
-@@ -419,6 +419,13 @@ my %table=(
+@@ -419,6 +419,14 @@ my %table=(
  "linux-x86_64-icc", "icc:-DL_ENDIAN -O2::-D_REENTRANT::-ldl -no_cpprt:SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_INT DES_UNROLL:${x86_64_asm}:elf:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
  "linux-x32",	"gcc:-mx32 -DL_ENDIAN -O3 -Wall::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT RC4_CHUNK_LL DES_INT DES_UNROLL:${x86_64_asm}:elf:dlfcn:linux-shared:-fPIC:-mx32:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::x32",
  "linux64-s390x",	"gcc:-m64 -DB_ENDIAN -O3 -Wall::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHAR RC4_CHUNK DES_INT DES_UNROLL:${s390x_asm}:64:dlfcn:linux-shared:-fPIC:-m64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
@@ -10,6 +10,7 @@
 +"nacl-le32newlib",     "gcc:-DL_ENDIAN -DTERMIOS -O3 -fomit-frame-pointer -Wall::-D_REENTRANT:::BN_LLONG ${x86_gcc_des} ${x86_gcc_opts}:${x86_asm}:a.out",
 +"nacl-le32bionic",     "gcc:-DL_ENDIAN -DTERMIOS -O3 -fomit-frame-pointer -Wall::-D_REENTRANT::-ldl:BN_LLONG ${x86_gcc_des} ${x86_gcc_opts}:${x86_elf_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
 +"nacl-le32glibc",      "gcc:-DL_ENDIAN -DTERMIOS -O3 -fomit-frame-pointer -Wall::-D_REENTRANT::-ldl:BN_LLONG ${x86_gcc_des} ${x86_gcc_opts}:${x86_elf_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
++"wasm32", "gcc:-DL_ENDIAN -DTERMIOS -O2 -fomit-frame-pointer -Wall::-D_REENTRANT:::BN_LLONG ${x86_gcc_des} ${x86_gcc_opts}:${x86_asm}:a.out",
 +
  #### So called "highgprs" target for z/Architecture CPUs
  # "Highgprs" is kernel feature first implemented in Linux 2.6.32, see
@@ -25,28 +26,16 @@
  		elsif (/^[-+]/)
  			{
  			if (/^--prefix=(.*)$/)
---- a/apps/speed.c
-+++ b/apps/speed.c
-@@ -108,6 +108,10 @@
- #  include <signal.h>
- # endif
- 
-+#ifdef __native_client__
-+#undef SIGALRM
-+#endif
-+
- # if defined(_WIN32) || defined(__CYGWIN__)
- #  include <windows.h>
- #  if defined(__CYGWIN__) && !defined(_WIN32)
 --- a/config
 +++ b/config
-@@ -679,6 +679,9 @@ case "$GUESSOS" in
+@@ -679,6 +679,10 @@ case "$GUESSOS" in
  	#fi
  	OUT="linux64-s390x"
  	;;
 +  le32newlib-*-nacl) OUT="nacl-le32newlib" ;;
 +  le32bionic-*-nacl) OUT="nacl-le32bionic" ;;
 +  le32glibc-*-nacl) OUT="nacl-le32glibc" ;;
++  wasm32*) OUT="wasm32" ;;
    x86_64-*-linux?) OUT="linux-x86_64" ;;
    *86-*-linux2) OUT="linux-elf"
  	if [ "$GCCVER" -gt 28 ]; then
@@ -84,6 +73,15 @@
  
  /*
   * The following algorithm repeatedly samples the real-time clock (RTC) to
+@@ -245,7 +245,7 @@
+     }
+     return 1;
+ }
+-# elif defined __OpenBSD__
++# elif defined __OpenBSD__ || defined __wasm__
+ int RAND_poll(void)
+ {
+     u_int32_t rnd = 0, i;
 
 we have to revert this change as it causes crashes at startup
 https://github.com/openssl/openssl/commit/104ce8a9f02d250dd43c255eb7b8747e81b29422#diff-4818ba1aaac04d28ae24c1c0150b8212
@@ -132,7 +130,7 @@ this module gets rand numbers over a unix socket which we don't care about
   */
  
 -#if defined(OPENSSL_SYS_WIN32) || defined(OPENSSL_SYS_VMS) || defined(OPENSSL_SYS_MSDOS) || defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_NETWARE) || defined(OPENSSL_SYS_VOS) || defined(OPENSSL_SYS_BEOS)
-+#if defined(OPENSSL_SYS_WIN32) || defined(OPENSSL_SYS_VMS) || defined(OPENSSL_SYS_MSDOS) || defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_NETWARE) || defined(OPENSSL_SYS_VOS) || defined(OPENSSL_SYS_BEOS) || defined(__native_client__)
++#if defined(OPENSSL_SYS_WIN32) || defined(OPENSSL_SYS_VMS) || defined(OPENSSL_SYS_MSDOS) || defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_NETWARE) || defined(OPENSSL_SYS_VOS) || defined(OPENSSL_SYS_BEOS) || defined(__native_client__) || defined(__wasm__)
  int RAND_query_egd_bytes(const char *path, unsigned char *buf, int bytes)
  {
      return (-1);

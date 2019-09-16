@@ -31,18 +31,23 @@ PATCHES = (
 
 def src_configure(metadata):
     """Configure the source."""
+    tc = metadata['toolchain']
+    if tc.chost == 'nacl':
+        machine = 'le32newlib'
+    else:
+        machine = tc.chost.split('-')[0]
+
     # See if configure passed.
     with open('Makefile') as fp:
-        if 'nacl-le32newlib' in fp.read():
+        if machine in fp.read():
             logging.info('Makefile exists; skipping ./configure step')
             return
 
-    tc = metadata['toolchain']
     env = os.environ.copy()
     env.update({
-        'SYSTEM': 'nacl',
+        'SYSTEM': tc.chost,
+        'MACHINE': machine,
         'RELEASE': '0',
-        'MACHINE': 'le32newlib',
     })
 
     cmd = [
