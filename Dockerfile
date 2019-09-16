@@ -14,6 +14,10 @@ FROM debian:buster
 
 ENV DEBIAN_FRONTEND noninteractive
 
+# Since the container runs as root, don't muck with the cache files as the user
+# won't be root outside of the container.  Shouldn't be a performance hit.
+ENV PYTHONDONTWRITEBYTECODE 1
+
 # Install needed packages for building ssh_client.
 RUN dpkg --add-architecture i386
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
@@ -24,7 +28,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 # switch to anything newer until they do too.
 RUN apt-get --assume-yes install \
     libstdc++6:i386 libglib2.0-0:i386 git make cmake \
-    python python2.7 python3.6 wget curl zlib1g-dev zip rsync \
+    python python2.7 python3.6 pylint3 python3-requests python3-wcwidth \
+    wget curl zlib1g-dev zip rsync \
     libasound2 libatk1.0-0 libatk-bridge2.0-0 libatspi2.0-0 libcairo2 \
     libcups2 libdbus-1-3 libexpat1 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 \
     libnspr4 libnss3 libpango-1.0-0 libuuid1 libx11-6 libx11-xcb1 libxcb1 \

@@ -111,6 +111,65 @@ def test_jslint():
     return ret
 
 
+def test_pylint():
+    """Run pylint over all the Python files in the tree."""
+    logging.info('Linting all Python files')
+
+    # Log the linter version since we pull it from the container.
+    pylint_libdot = os.path.join(kokoro.LIBAPPS_DIR, 'libdot', 'bin', 'pylint')
+    libdot.run([pylint_libdot, '--version'])
+
+    def find_pyfiles(pkg, topdir):
+        """Walk |topdir| and find all Python files under it."""
+        for root, dirs, files in os.walk(topdir):
+            # TODO(vapier): Find a better way to handle this.  We run tests
+            # after building so ssh_client/output/ is full of upstream sources.
+            # We can't use `git ls-tree` as .git/ in repo checkouts isn't fully
+            # mounted in the container.
+            if pkg == 'ssh_client' and 'output' in dirs:
+                dirs.remove('output')
+
+            # TODO(vapier): Figure out why pylint hates us.  Running in the
+            # container on these modules fails with "internal errors:
+            # maximum recursion depth exceeded.".
+            if pkg == 'libdot' and root == os.path.join(topdir, 'bin'):
+                files.remove('node')
+            elif pkg == 'ssh_client' and root == os.path.join(topdir, 'bin'):
+                files.remove('ssh_client.py')
+
+            for path in files:
+                full_path = os.path.join(root, path)
+
+                if os.path.islink(full_path):
+                    # Ignore symlinks.
+                    continue
+                elif path.endswith('.py'):
+                    # Add all .py files as they should only be Python.
+                    yield os.path.relpath(full_path, pkg_dir)
+                elif os.access(full_path, os.X_OK):
+                    # Add executable programs with python shebangs.
+                    with open(full_path, 'rb') as fp:
+                        shebang = fp.readline()
+                        if b'python' in shebang:
+                            yield os.path.relpath(full_path, pkg_dir)
+
+    # Lint the main dirs with the common pylint.
+    ret = True
+    for pkg in ('kokoro', 'libdot', 'hterm', 'nassh', 'ssh_client', 'terminal'):
+        pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
+
+        # See if the project has a custom linter.
+        pylint = os.path.join(pkg_dir, 'bin', 'pylint')
+        if not os.path.exists(pylint):
+            # Use the common one.
+            pylint = pylint_libdot
+
+        pyfiles = list(find_pyfiles(pkg, pkg_dir))
+        ret &= _run_linter([pylint] + pyfiles, pkg_dir)
+
+    return ret
+
+
 def test_unittests():
     """Run all the unittests."""
     ret = True
@@ -133,6 +192,7 @@ def test():
 
     # Run all the tests before aborting.
     success &= test_jslint()
+    success &= test_pylint()
     success &= test_unittests()
 
     if not success:
