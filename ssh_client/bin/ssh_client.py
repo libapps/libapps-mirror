@@ -150,6 +150,8 @@ class ToolchainInfo:
         """Figure out what environment should be used."""
         if name == 'pnacl':
             return cls(_toolchain_pnacl_env())
+        elif name == 'wasm':
+            return cls(_toolchain_wasm_env())
 
         assert name == 'build'
         return cls({})
@@ -198,6 +200,31 @@ def _toolchain_pnacl_env():
     }
 
 
+def _toolchain_wasm_env():
+    """Get custom env to build using WASM toolchain."""
+    sdk_root = os.path.join(OUTPUT, 'wasi-sdk')
+
+    bin_dir = os.path.join(sdk_root, 'bin')
+    sysroot = os.path.join(sdk_root, 'share', 'wasi-sysroot')
+    libdir = os.path.join(sysroot, 'lib')
+    incdir = os.path.join(sysroot, 'include')
+    pcdir = os.path.join(libdir, 'pkgconfig')
+
+    return {
+        'CHOST': 'wasm32-wasi',
+        'CC': os.path.join(bin_dir, 'clang') + ' --sysroot=%s' % sysroot,
+        'CXX': os.path.join(bin_dir, 'clang++') + ' --sysroot=%s' % sysroot,
+        'AR': os.path.join(bin_dir, 'llvm-ar'),
+        'RANLIB': os.path.join(bin_dir, 'llvm-ranlib'),
+        'STRIP': os.path.join(BUILD_BINDIR, 'wasm-strip'),
+        'PKG_CONFIG_SYSROOT_DIR': sysroot,
+        'PKG_CONFIG_LIBDIR': pcdir,
+        'SYSROOT': sysroot,
+        'CPPFLAGS': '-isystem %s' % (incdir,),
+        'LDFLAGS': '-L%s' % (libdir,),
+    }
+
+
 def default_src_unpack(metadata):
     """Default src_unpack phase."""
     for archive in metadata['archives']:
@@ -240,7 +267,7 @@ def default_src_install(_metadata):
 def get_parser(desc, default_toolchain):
     """Get a command line parser."""
     parser = argparse.ArgumentParser(description=desc)
-    parser.add_argument('--toolchain', choices=('build', 'pnacl'),
+    parser.add_argument('--toolchain', choices=('build', 'pnacl', 'wasm'),
                         default=default_toolchain,
                         help='Which toolchain to use (default: %(default)s).')
     parser.add_argument('-d', '--debug', action='store_true',
