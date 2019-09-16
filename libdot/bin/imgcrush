@@ -78,9 +78,9 @@ def process_file(pool, path):
         pool.apply_async(run, (path, [JPG_CRUSHER, path]))
 
 
-def process_dir(pool, path):
-    """Process all the paths under |path|."""
-    for root, dirs, files in os.walk(path):
+def process_dir(pool, topdir):
+    """Process all the paths under |topdir|."""
+    for root, dirs, files in os.walk(topdir):
         # Not really needed, but makes things consistent.
         dirs.sort()
         files.sort()

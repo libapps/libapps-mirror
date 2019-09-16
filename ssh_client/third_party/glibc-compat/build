@@ -28,7 +28,8 @@ def src_install(_metadata):
     for root, _, files in os.walk(srcdir):
         for header in files:
             relsrcdir = os.path.relpath(root, srcdir)
-            targetdir = os.path.join(env['SYSROOT_INCDIR'], 'glibc-compat', relsrcdir)
+            targetdir = os.path.join(
+                env['SYSROOT_INCDIR'], 'glibc-compat', relsrcdir)
             os.makedirs(targetdir, exist_ok=True)
             ssh_client.copy(os.path.join(root, header),
                             os.path.join(targetdir, header))

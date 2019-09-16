@@ -26,6 +26,7 @@ disable=
     invalid-name,
     locally-enabled,
     locally-disabled,
+    no-else-return,
     not-callable,
     relative-import,
     too-few-public-methods,

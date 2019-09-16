@@ -326,7 +326,8 @@ def gen_east_asian_ambiguous(db):
 def find_js(js):
     """Locate the JavaScript file to update."""
     if js is None:
-        js = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'lib_wc.js')
+        js = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                          'lib_wc.js')
 
     return js
 
