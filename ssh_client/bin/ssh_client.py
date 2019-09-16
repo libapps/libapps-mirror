@@ -137,6 +137,8 @@ class ToolchainInfo:
         self._env = env
         if not env:
             return
+        self._cbuild = None
+        self.chost = self._env['CHOST']
         self.sysroot = self._env['SYSROOT']
         self.libdir = os.path.join(self.sysroot, 'lib')
         self.incdir = os.path.join(self.sysroot, 'include')
@@ -156,6 +158,15 @@ class ToolchainInfo:
         """Update the current environment with this toolchain."""
         os.environ.update(self._env)
 
+    @property
+    def cbuild(self):
+        """Get the current build system."""
+        if self._cbuild is None:
+            prog = os.path.join(BUILD_BINDIR, 'config.guess')
+            result = run([prog], capture_output=True)
+            self._cbuild = result.stdout.strip().decode('utf-8')
+        return self._cbuild
+
 
 def _toolchain_pnacl_env():
     """Get custom env to build using PNaCl toolchain."""
@@ -169,6 +180,7 @@ def _toolchain_pnacl_env():
     pkgconfig_dir = os.path.join(sysroot_libdir, 'pkgconfig')
 
     return {
+        'CHOST': 'nacl',
         'NACL_ARCH': 'pnacl',
         'NACL_SDK_ROOT': nacl_sdk_root,
         'PATH': '%s:%s' % (bin_dir, os.environ['PATH']),

@@ -89,7 +89,8 @@ def src_configure(metadata):
 
     cmd = [
         './configure',
-        '--host=nacl',
+        '--build=%s' % (tc.cbuild,),
+        '--host=%s' % (tc.chost,),
         # The prefix path matches what is used at runtime.
         '--prefix=/',
         '--cache-file=../config.cache',
