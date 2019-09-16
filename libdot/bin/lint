@@ -15,6 +15,11 @@ import sys
 import libdot
 
 
+# All checks except strictMissingRequire.
+DEFAULT_CLOSURE_ARGS = (
+    '--jscomp_error=*', '--jscomp_off=strictMissingRequire')
+
+
 def _get_default_paths():
     """Get list of paths to lint by default."""
     os.chdir(libdot.DIR)
@@ -25,7 +30,7 @@ def _get_default_paths():
         if x != 'js/libdot.js')
 
 
-def main(argv, get_default_paths=None, eslint_args=(), closure_args=()):
+def main(argv, paths=(), eslint_args=(), closure_args=DEFAULT_CLOSURE_ARGS):
     """The common main func for all linters.
 
     Args:
@@ -39,8 +44,8 @@ def main(argv, get_default_paths=None, eslint_args=(), closure_args=()):
     libdot.node_and_npm_setup()
 
     if not argv:
-        if get_default_paths:
-            argv = get_default_paths()
+        if paths:
+            argv = paths
         else:
             print('No files to lint.')
             return 0
@@ -51,11 +56,12 @@ def main(argv, get_default_paths=None, eslint_args=(), closure_args=()):
     # E.g. --jscomp_error=*.
     libdot.run([
         os.path.join(libdot.BIN_DIR, 'closure-compiler'),
-        '--checks-only', '--jscomp_error=lintChecks',
-        '--language_in=ECMASCRIPT_2018'] + list(closure_args) + argv)
+        '--checks-only', '--language_in=ECMASCRIPT_2018'] +
+               list(closure_args) + argv)
 
     return 0
 
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:], get_default_paths=_get_default_paths))
+    sys.exit(main(sys.argv[1:], paths=_get_default_paths(),
+                  closure_args=['--jscomp_error=lintChecks']))
