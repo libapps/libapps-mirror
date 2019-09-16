@@ -47,9 +47,31 @@ def build():
         libdot.run(['./bin/promote.sh', path], cwd=nassh_dir)
 
 
-def test():
-    """Test the various components."""
-    errors = False
+def _run_linter(cmd, cwd):
+    """Run the linter taking into account presubmit bot state."""
+    result = libdot.run(cmd, check=False, cwd=cwd)
+    if result.returncode:
+        msg = '%s linter exited %i' % (cmd[0], result.returncode)
+        if is_presubmit():
+            logging.error(msg)
+            return False
+        else:
+            logging.warning('%s; ignoring for release builds', msg)
+    return True
+
+
+def test_jslint():
+    """Lint all our JS files."""
+    ret = True
+    for pkg in ('libdot', 'hterm', 'nassh', 'terminal'):
+        pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
+        ret &= _run_linter(['./bin/lint'], pkg_dir)
+    return ret
+
+
+def test_unittests():
+    """Run all the unittests."""
+    ret = True
     for pkg in ('libdot', 'hterm', 'nassh', 'terminal'):
         pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
         if os.path.exists(os.path.join(pkg_dir, 'package.json')):
@@ -59,19 +81,19 @@ def test():
         result = libdot.run(cmd, check=False, cwd=pkg_dir)
         if result.returncode:
             logging.error('%s test suite exited %i', pkg, result.returncode)
-            errors = True
+            ret = False
+    return ret
 
-        result = libdot.run(['./bin/lint'], check=False, cwd=pkg_dir)
-        if result.returncode:
-            msg = '%s linter exited %i' % (pkg, result.returncode)
-            if is_presubmit():
-                logging.error(msg)
-                errors = True
-            else:
-                logging.warning('%s; ignoring for release builds', msg)
 
-    # Run all the unittests before aborting.
-    if errors:
+def test():
+    """Test the various components."""
+    success = True
+
+    # Run all the tests before aborting.
+    success &= test_jslint()
+    success &= test_unittests()
+
+    if not success:
         sys.exit(1)
 
 
