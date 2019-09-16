@@ -238,6 +238,19 @@ def get_parser(desc, default_toolchain):
     return parser
 
 
+def update_gnuconfig(metadata, sourcedir):
+    """Update config.guess/config.sub files in |sourcedir|."""
+    # Special case the sorce of gnuconfig.
+    if metadata['PN'] == 'gnuconfig':
+        return
+
+    for prog in ('config.guess', 'config.sub'):
+        source = os.path.join(BUILD_BINDIR, prog)
+        target = os.path.join(sourcedir, prog)
+        if os.path.exists(source) and os.path.exists(target):
+            copy(source, target)
+
+
 def build_package(module, default_toolchain):
     """Build the package in the |module|.
 
@@ -320,6 +333,7 @@ def build_package(module, default_toolchain):
         func(metadata)
 
     run_phase('src_unpack', workdir)
+    update_gnuconfig(metadata, sourcedir)
     run_phase('src_prepare', sourcedir)
     run_phase('src_configure', sourcedir)
     run_phase('src_compile', sourcedir)

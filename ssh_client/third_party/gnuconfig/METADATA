@@ -1,0 +1,11 @@
+name: "gnuconfig"
+description: "config.guess and config.sub scripts"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://savannah.gnu.org/projects/config"
+  }
+  version: "20190804"
+  last_upgrade_date { year: 2019 month: 8 day: 4 }
+}

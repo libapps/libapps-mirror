@@ -25,6 +25,7 @@ done
 cd "$(dirname "$0")"
 mkdir -p output
 
+./third_party/gnuconfig/build
 ./third_party/naclsdk/build
 
 ./third_party/glibc-compat/build
