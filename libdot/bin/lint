@@ -178,10 +178,11 @@ def _get_default_paths():
     # All files in js/*.js excluding generated files.
     # Use relpath for nicer default output.
     # Sort to ensure lib.js comes before lib_array.js, etc.
+    # Filter out the generated libdot.js/libdot.min.js/etc...
     return sorted(
         os.path.relpath(x, os.getcwd())
         for x in glob.glob(os.path.join(libdot.DIR, 'js', '*.js'))
-        if x != 'js/libdot.js')
+        if not os.path.basename(x).startswith('libdot.'))
 
 
 def get_parser():

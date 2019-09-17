@@ -24,7 +24,7 @@ def _get_default_paths():
     return sorted(
         os.path.relpath(x, os.getcwd())
         for x in glob.glob(os.path.join(nassh.DIR, 'js', '*.js'))
-        if not x.startswith('js/nassh_deps'))
+        if not os.path.basename(x).startswith('nassh_deps'))
 
 
 def main(argv):
