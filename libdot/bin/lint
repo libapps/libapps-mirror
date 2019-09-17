@@ -22,11 +22,12 @@ DEFAULT_CLOSURE_ARGS = (
 
 def _get_default_paths():
     """Get list of paths to lint by default."""
-    os.chdir(libdot.DIR)
     # All files in js/*.js excluding generated files.
+    # Use relpath for nicer default output.
     # Sort to ensure lib.js comes before lib_array.js, etc.
     return sorted(
-        x for x in glob.glob(os.path.join('js', '*.js'))
+        os.path.relpath(x, os.getcwd())
+        for x in glob.glob(os.path.join(libdot.DIR, 'js', '*.js'))
         if x != 'js/libdot.js')
 
 

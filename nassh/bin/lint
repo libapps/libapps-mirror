@@ -18,11 +18,12 @@ import libdot
 
 def _get_default_paths():
     """Get list of paths to lint by default."""
-    os.chdir(nassh.DIR)
     # All files in js/*.js excluding generated files.
+    # Use relpath for nicer default output.
     # Sort to ensure nasftp.js comes before nasftp_cli.js, etc.
     return sorted(
-        x for x in glob.glob(os.path.join('js', '*.js'))
+        os.path.relpath(x, os.getcwd())
+        for x in glob.glob(os.path.join(nassh.DIR, 'js', '*.js'))
         if not x.startswith('js/nassh_deps'))
 
 
