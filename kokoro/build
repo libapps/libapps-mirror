@@ -19,6 +19,14 @@ import kokoro
 import libdot
 
 
+# Where we drop all our comment files for passing back to gerrit.
+# Kokoro can handle more than one file, but they must all be named the same
+# "gerrit_comments.json".  So we have to namespace the files under dirs.
+# We'll use a convention like gerrit_comments/$PKG/$TOOL/.
+GERRIT_COMMENTS_NAME = 'gerrit_comments.json'
+GERRIT_COMMENTS_DIR = os.path.join(kokoro.LIBAPPS_DIR, 'gerrit_comments')
+
+
 def is_presubmit():
     """Whether we're testing a pending CL."""
     # This env var is passed down by kokoro.
@@ -65,7 +73,13 @@ def test_jslint():
     ret = True
     for pkg in ('libdot', 'hterm', 'nassh', 'terminal'):
         pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
-        ret &= _run_linter(['./bin/lint'], pkg_dir)
+        cmd = [
+            './bin/lint',
+            '--gerrit-comments-file',
+            os.path.join(GERRIT_COMMENTS_DIR, pkg, 'eslint',
+                         GERRIT_COMMENTS_NAME),
+        ]
+        ret &= _run_linter(cmd, pkg_dir)
     return ret
 
 
@@ -88,6 +102,9 @@ def test_unittests():
 def test():
     """Test the various components."""
     success = True
+
+    # Create the dropbox for gerrit comments.
+    shutil.rmtree(GERRIT_COMMENTS_DIR, ignore_errors=True)
 
     # Run all the tests before aborting.
     success &= test_jslint()
