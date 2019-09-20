@@ -21,6 +21,7 @@
  *     names.  The '/' character should be used to separate levels of hierarchy,
  *     if you're going to have that kind of thing.  If provided, the prefix
  *     should start with a '/'.  If not provided, it defaults to '/'.
+ * @constructor
  */
 lib.PreferenceManager = function(storage, opt_prefix) {
   this.storage = storage;
@@ -41,6 +42,7 @@ lib.PreferenceManager = function(storage, opt_prefix) {
   // to elide redundant storage writes (for quota reasons).
   this.isImportingJson_ = false;
 
+  /** @type {!Object<string, !lib.PreferenceManager.Record>} */
   this.prefRecords_ = {};
   this.globalObservers_ = [];
 
@@ -69,7 +71,7 @@ lib.PreferenceManager = function(storage, opt_prefix) {
  *
  * Equality tests against this value MUST use '===' or '!==' to be accurate.
  *
- * @type {!Symbol}
+ * @type {symbol}
  */
 lib.PreferenceManager.prototype.DEFAULT_VALUE = Symbol('DEFAULT_VALUE');
 
@@ -81,6 +83,7 @@ lib.PreferenceManager.prototype.DEFAULT_VALUE = Symbol('DEFAULT_VALUE');
  *
  * @param {string} name
  * @param {*} defaultValue
+ * @constructor
  */
 lib.PreferenceManager.Record = function(name, defaultValue) {
   this.name = name;
@@ -92,7 +95,7 @@ lib.PreferenceManager.Record = function(name, defaultValue) {
 /**
  * A local copy of the DEFAULT_VALUE constant to make it less verbose.
  *
- * @type {!Symbol}
+ * @type {symbol}
  */
 lib.PreferenceManager.Record.prototype.DEFAULT_VALUE =
     lib.PreferenceManager.prototype.DEFAULT_VALUE;
@@ -295,7 +298,7 @@ lib.PreferenceManager.prototype.defineChildren = function(
 /**
  * Register to observe preference changes.
  *
- * @param {function()} global A callback that will happen for every preference.
+ * @param {?function()} global A callback that will happen for every preference.
  *     Pass null if you don't need one.
  * @param {!Object} map A map of preference specific callbacks.  Pass null if
  *     you don't need any.
@@ -361,9 +364,9 @@ lib.PreferenceManager.prototype.notifyChange_ = function(name) {
  * and use it.
  *
  * @param {string} listName The child list to create the new instance from.
- * @param {string=} opt_hint Optional hint to include in the child id.
+ * @param {?string=} opt_hint Optional hint to include in the child id.
  * @param {string=} opt_id Optional id to override the generated id.
- * @return {function}
+ * @return {function()}
  */
 lib.PreferenceManager.prototype.createChild = function(listName, opt_hint,
                                                        opt_id) {
@@ -448,50 +451,6 @@ lib.PreferenceManager.prototype.getChild = function(listName, id, opt_default) {
 };
 
 /**
- * Calculate the difference between two lists of child ids.
- *
- * Given two arrays of child ids, this function will return an object
- * with "added", "removed", and "common" properties.  Each property is
- * a map of child-id to `true`.  For example, given...
- *
- *    a = ['child-x', 'child-y']
- *    b = ['child-y']
- *
- *    diffChildLists(a, b) =>
- *      { added: { 'child-x': true }, removed: {}, common: { 'child-y': true } }
- *
- * The added/removed properties assume that `a` is the current list.
- *
- * @param {!Array<string>} a The most recent list of child ids.
- * @param {!Array<string>} b An older list of child ids.
- * @return {!Object} An object with added/removed/common properties.
- */
-lib.PreferenceManager.diffChildLists = function(a, b) {
-  var rv = {
-    added: {},
-    removed: {},
-    common: {},
-  };
-
-  for (var i = 0; i < a.length; i++) {
-    if (b.indexOf(a[i]) != -1) {
-      rv.common[a[i]] = true;
-    } else {
-      rv.added[a[i]] = true;
-    }
-  }
-
-  for (var i = 0; i < b.length; i++) {
-    if ((b[i] in rv.added) || (b[i] in rv.common))
-      continue;
-
-    rv.removed[b[i]] = true;
-  }
-
-  return rv;
-};
-
-/**
  * Synchronize a list of child PreferenceManagers instances with the current
  * list stored in prefs.
  *
@@ -518,8 +477,6 @@ lib.PreferenceManager.prototype.syncChildList = function(
   // The known managers at the start of the sync.  Any manager still in this
   // list at the end should be discarded.
   var oldIds = Object.keys(this.childLists_[listName]);
-
-  var rv = lib.PreferenceManager.diffChildLists(currentIds, oldIds);
 
   for (var i = 0; i < currentIds.length; i++) {
     var id = currentIds[i];
@@ -736,6 +693,42 @@ lib.PreferenceManager.prototype.get = function(name) {
     throw new Error('Unknown preference: ' + name);
 
   return record.get();
+};
+
+/**
+ * Get the boolean value of a preference.
+ *
+ * @param {string} name The preference to get.
+ * @return {boolean}
+ */
+lib.PreferenceManager.prototype.getBoolean = function(name) {
+  const result = this.get(name);
+  lib.assert(typeof result == 'boolean');
+  return result;
+};
+
+/**
+ * Get the number value of a preference.
+ *
+ * @param {string} name The preference to get.
+ * @return {number}
+ */
+lib.PreferenceManager.prototype.getNumber = function(name) {
+  const result = this.get(name);
+  lib.assert(typeof result == 'number');
+  return result;
+};
+
+/**
+ * Get the string value of a preference.
+ *
+ * @param {string} name The preference to get.
+ * @return {string}
+ */
+lib.PreferenceManager.prototype.getString = function(name) {
+  const result = this.get(name);
+  lib.assert(typeof result == 'string');
+  return result;
 };
 
 /**
