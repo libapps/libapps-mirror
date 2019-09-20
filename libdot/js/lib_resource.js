@@ -19,6 +19,9 @@ lib.resource = {
   resources_: {}
 };
 
+/** @typedef {{type: string, name: string, data: *}} */
+lib.resource.ResourceRecord;
+
 /**
  * Add a resource.
  *
@@ -42,9 +45,9 @@ lib.resource.add = function(name, type, data) {
  * The resource data is stored on the "data" property of the returned object.
  *
  * @param {string} name The name of the resource to get.
- * @param {*=} opt_defaultValue The optional value to return if the resource is
- *   not defined.
- * @return {!Object} An object with "type", "name", and "data" properties.
+ * @param {!lib.resource.ResourceRecord=} opt_defaultValue The optional value
+ *     to return if the resource is not defined.
+ * @return {!lib.resource.ResourceRecord} The matching resource if it exists.
  */
 lib.resource.get = function(name, opt_defaultValue) {
   if (!(name in lib.resource.resources_)) {
@@ -80,9 +83,9 @@ lib.resource.getData = function(name, opt_defaultValue) {
  * Retrieve resource as a data: url.
  *
  * @param {string} name The name of the resource to get.
- * @param {*=} opt_defaultValue The optional value to return if the resource is
- *   not defined.
- * @return {*} A data: url encoded version of the resource.
+ * @param {!lib.resource.ResourceRecord=} opt_defaultValue The optional value
+ *     to return if the resource is not defined.
+ * @return {string} A data: url encoded version of the resource.
  */
 lib.resource.getDataUrl = function(name, opt_defaultValue) {
   var resource = lib.resource.get(name, opt_defaultValue);
