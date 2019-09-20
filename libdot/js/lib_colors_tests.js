@@ -115,8 +115,6 @@ it('rgbToHex', () => {
     // Then some reasonable data.
     ['rgb(0,0,0)', '#000000'],
     ['rgb(10, 100, 255)', '#0a64ff'],
-    // Check array inputs.
-    [['rgb(50, 102, 95)', 'rgb(255,255,255)'], ['#32665f', '#ffffff']],
   ];
 
   data.forEach((ele) => {
