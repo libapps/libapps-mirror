@@ -20,6 +20,7 @@
  * @param {boolean=} useCrlf If true, '\n' in messages are substituted for
  *     '\r\n'.  This fixes the translation process which discards '\r'
  *     characters.
+ * @constructor
  */
 lib.MessageManager = function(languages, useCrlf = false) {
   this.languages_ = languages.map((el) => el.replace(/-/g, '_'));
@@ -37,12 +38,22 @@ lib.MessageManager = function(languages, useCrlf = false) {
 };
 
 /**
+ * @typedef {!Object<string, {
+ *     message: string,
+ *     description: (string|undefined),
+ *     placeholders: ({content: string, example: string}|undefined),
+ * }>}
+ */
+lib.MessageManager.Messages;
+
+/**
  * Add message definitions to the message manager.
  *
  * This takes an object of the same format of a Chrome messages.json file.  See
  * <https://developer.chrome.com/extensions/i18n-messages>.
  *
- * @param {!Object} defs The message to add to the database.
+ * @param {!lib.MessageManager.Messages} defs The message to add to the
+ *     database.
  */
 lib.MessageManager.prototype.addMessages = function(defs) {
   for (var key in defs) {
@@ -97,7 +108,8 @@ lib.MessageManager.prototype.loadMessages = function(url) {
     const xhr = new XMLHttpRequest();
     xhr.onload = () => {
       try {
-        this.addMessages(JSON.parse(xhr.responseText));
+        this.addMessages(/** @type {!lib.MessageManager.Messages} */ (
+            JSON.parse(xhr.responseText)));
         resolve();
       } catch (e) {
         // Error parsing JSON.
