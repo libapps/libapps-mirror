@@ -37,8 +37,10 @@ lib.CredentialCache = function() {
    * encrypted data and the initialization vector (IV) used for the AES
    * encryption in CBC mode.
    *
-   * @member {?Object<!string, {encryptedData: !Uint8Array, iv: !Uint8Array}>>}
-   * @private
+   * @private {?Object<string, {
+   *     encryptedData: !ArrayBuffer,
+   *     iv: !ArrayBufferView,
+   * }>}
    */
   this.cache_ = null;
 
@@ -47,8 +49,7 @@ lib.CredentialCache = function() {
    * in the cache. The key is randomly generated during initialization or after
    * the cache has been cleared.
    *
-   * @member {?CryptoKey}
-   * @private
+   * @private {?webCrypto.CryptoKey}
    */
   this.cryptoKey_ = null;
 
@@ -56,8 +57,7 @@ lib.CredentialCache = function() {
    * Set to true if caching is enabled; false if caching is disabled and null if
    * the user has not yet made a decision.
    *
-   * @member {?boolean}
-   * @private
+   * @private {?boolean}
    */
   this.enabled_ = null;
 
@@ -79,8 +79,9 @@ lib.CredentialCache = function() {
  */
 lib.CredentialCache.prototype.init_ = async function() {
   this.cache_ = {};
-  this.cryptoKey_ = await window.crypto.subtle.generateKey(
-      {name: 'AES-CBC', length: 128}, false, ['encrypt', 'decrypt']);
+  this.cryptoKey_ = /** @type {!webCrypto.CryptoKey} */ (
+      await window.crypto.subtle.generateKey(
+          {name: 'AES-CBC', length: 128}, false, ['encrypt', 'decrypt']));
 };
 
 /**
@@ -118,7 +119,7 @@ lib.CredentialCache.prototype.retrieve = async function(key) {
     // Remove cache entry to be added again only if data verification succeeds.
     delete this.cache_[key];
     return new Uint8Array(await window.crypto.subtle.decrypt(
-        {name: 'AES-CBC', iv}, this.cryptoKey_, encryptedData));
+        {name: 'AES-CBC', iv}, lib.notNull(this.cryptoKey_), encryptedData));
   }
   return null;
 };
@@ -141,7 +142,7 @@ lib.CredentialCache.prototype.store = async function(key, data) {
   // AES-CBC requires a new, cryptographically random IV for every operation.
   const iv = window.crypto.getRandomValues(new Uint8Array(16));
   const encryptedData = await window.crypto.subtle.encrypt(
-      {name: 'AES-CBC', iv}, this.cryptoKey_, data.buffer);
+      {name: 'AES-CBC', iv}, lib.notNull(this.cryptoKey_), data.buffer);
   data.fill(0);
   this.cache_[key] = {encryptedData, iv};
 };
