@@ -15,7 +15,8 @@ lib.codec = {};
  *
  * The input array type may be an Array or a typed Array (e.g. Uint8Array).
  *
- * @param {!Array<number>} array The code units to generate for the string.
+ * @param {!Uint8Array|!Array<number>} array The code units to generate for
+ *     the string.
  * @return {string} A UTF-16 encoded string.
  */
 lib.codec.codeUnitArrayToString = function(array) {
@@ -36,12 +37,13 @@ lib.codec.codeUnitArrayToString = function(array) {
  * Create an array of code units from a UTF-16 encoded string.
  *
  * @param {string} str The string to extract code units from.
- * @param {function(number)=} type The type of the return value.
- * @return {!Array<number>} The array of code units.
+ * @param {!ArrayBufferView=} ret The buffer to hold the result.  If not set, a
+ *     new Uint8Array is created.
+ * @return {!ArrayBufferView} The array of code units.
  */
-lib.codec.stringToCodeUnitArray = function(str, type=Array) {
+lib.codec.stringToCodeUnitArray = function(
+    str, ret = new Uint8Array(str.length)) {
   // Indexing string directly is faster than Array.map.
-  const ret = new type(str.length);
   for (let i = 0; i < str.length; ++i) {
     ret[i] = str.charCodeAt(i);
   }

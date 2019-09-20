@@ -193,7 +193,7 @@ nassh.Stream.RelaySshfeWS.prototype.signChallenge_ = function(challenge) {
     const request = nassh.agent.messages.write(
         nassh.agent.messages.Numbers.AGENTC_SIGN_REQUEST,
         new Uint8Array(response.fields.publicKeyRaw),
-        lib.codec.stringToCodeUnitArray(challenge, Uint8Array));
+        lib.codec.stringToCodeUnitArray(challenge));
 
     // Send the sign request.  We can only send Arrays, but request is a typed
     // array, so convert it over (and skip leading length field).

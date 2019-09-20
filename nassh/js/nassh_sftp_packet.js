@@ -85,7 +85,7 @@ nassh.sftp.Packet.prototype.setUint64 = function(uint64) {
  */
 nassh.sftp.Packet.prototype.setString = function(binaryString) {
   if (typeof binaryString == 'string') {
-    binaryString = lib.codec.stringToCodeUnitArray(binaryString, Uint8Array);
+    binaryString = lib.codec.stringToCodeUnitArray(binaryString);
   }
   this.setUint32(binaryString.length);
   this.setData(binaryString);

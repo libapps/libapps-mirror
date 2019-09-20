@@ -31,19 +31,16 @@ it('codeUnitArrayToString', () => {
 it('stringToCodeUnitArray', () => {
   let ret;
 
-  // Check default Array handling.
+  // Check default Uint8Array handling.
   ret = lib.codec.stringToCodeUnitArray('asdf');
-  assert.deepStrictEqual([97, 115, 100, 102], ret);
-  assert.isTrue(Array.isArray(ret));
-
-  // Check typed array handling.
-  ret = lib.codec.stringToCodeUnitArray('asdf', Uint8Array);
   assert.deepStrictEqual(new Uint8Array([97, 115, 100, 102]), ret);
   assert.isTrue(ArrayBuffer.isView(ret));
 
   // Check UTF-16 pairs.
-  assert.deepStrictEqual(
-      [55358, 57052], lib.codec.stringToCodeUnitArray('\u{1fadc}'));
+  const s = '\u{1fadc}';
+  ret = lib.codec.stringToCodeUnitArray(s, new Uint16Array(s.length));
+  assert.deepStrictEqual(new Uint16Array([55358, 57052]), ret);
+  assert.isTrue(ArrayBuffer.isView(ret));
 });
 
 });

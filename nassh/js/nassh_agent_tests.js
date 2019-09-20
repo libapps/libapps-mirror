@@ -12,7 +12,7 @@ describe('nassh_agent_tests.js', () => {
 
 it('keyBlobToAuthorizedKeysFormat', () => {
   const asciiToBinary = (str) => {
-    return lib.codec.stringToCodeUnitArray(atob(str), Uint8Array);
+    return lib.codec.stringToCodeUnitArray(atob(str));
   };
 
   const keyTypeRsa =
