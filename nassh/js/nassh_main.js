@@ -85,18 +85,20 @@ window.onload = function() {
     };
 
     terminal.contextMenu.setItems([
-      [nassh.msg('TERMINAL_CLEAR_MENU_LABEL'),
-       function() { terminal.wipeContents(); }],
-      [nassh.msg('TERMINAL_RESET_MENU_LABEL'),
-       function() { terminal.reset(); }],
-      [nassh.msg('NEW_WINDOW_MENU_LABEL'),
-       function() { openNewWindow(lib.f.getURL('/html/nassh.html')); }],
-      [nassh.msg('FAQ_MENU_LABEL'),
-       function() { lib.f.openWindow('https://goo.gl/muppJj', '_blank'); }],
-      [nassh.msg('CLEAR_KNOWN_HOSTS_MENU_LABEL'),
-       function() { terminal.command.removeAllKnownHosts(); }],
-      [nassh.msg('OPTIONS_BUTTON_LABEL'),
-       function() { nassh.openOptionsPage(); }],
+      {name: nassh.msg('TERMINAL_CLEAR_MENU_LABEL'),
+       action: function() { terminal.wipeContents(); }},
+      {name: nassh.msg('TERMINAL_RESET_MENU_LABEL'),
+       action: function() { terminal.reset(); }},
+      {name: nassh.msg('NEW_WINDOW_MENU_LABEL'),
+       action: function() { openNewWindow(lib.f.getURL('/html/nassh.html')); }},
+      {name: nassh.msg('FAQ_MENU_LABEL'),
+       action: function() {
+         lib.f.openWindow('https://goo.gl/muppJj', '_blank');
+       }},
+      {name: nassh.msg('CLEAR_KNOWN_HOSTS_MENU_LABEL'),
+       action: function() { terminal.command.removeAllKnownHosts(); }},
+      {name: nassh.msg('OPTIONS_BUTTON_LABEL'),
+       action: function() { nassh.openOptionsPage(); }},
     ]);
 
     // Useful for console debugging.

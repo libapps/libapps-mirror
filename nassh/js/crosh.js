@@ -120,19 +120,21 @@ Crosh.init = function() {
   };
 
   terminal.contextMenu.setItems([
-    [Crosh.msg('TERMINAL_CLEAR_MENU_LABEL'),
-     function() { terminal.wipeContents(); }],
-    [Crosh.msg('TERMINAL_RESET_MENU_LABEL'),
-     function() { terminal.reset(); }],
-    [Crosh.msg('NEW_WINDOW_MENU_LABEL'),
-     function() {
+    {name: Crosh.msg('TERMINAL_CLEAR_MENU_LABEL'),
+     action: function() { terminal.wipeContents(); }},
+    {name: Crosh.msg('TERMINAL_RESET_MENU_LABEL'),
+     action: function() { terminal.reset(); }},
+    {name: Crosh.msg('NEW_WINDOW_MENU_LABEL'),
+     action: function() {
        // Preserve the full URI in case it has args like for vmshell.
        Crosh.openNewWindow_(document.location.href);
-     }],
-    [Crosh.msg('FAQ_MENU_LABEL'),
-     function() { lib.f.openWindow('https://goo.gl/muppJj', '_blank'); }],
-    [Crosh.msg('OPTIONS_BUTTON_LABEL'),
-     function() { nassh.openOptionsPage(); }],
+     }},
+    {name: Crosh.msg('FAQ_MENU_LABEL'),
+     action: function() {
+       lib.f.openWindow('https://goo.gl/muppJj', '_blank');
+     }},
+    {name: Crosh.msg('OPTIONS_BUTTON_LABEL'),
+     action: function() { nassh.openOptionsPage(); }},
   ]);
 
   // Useful for console debugging.
