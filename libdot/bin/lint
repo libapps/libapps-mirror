@@ -226,13 +226,15 @@ def run_closure(opts, extra_args=()):
 
     comments_path = kokoro_comments_path(opts.gerrit_comments_file, 'closure')
 
-    # TODO(crbug.com/998928): Update checks beyond just 'lintChecks'.
-    # E.g. --jscomp_error=*.
+    externs = []
+    for extern in glob.glob(os.path.join(libdot.DIR, 'externs', '*.js')):
+        externs += ['--externs', os.path.relpath(extern, os.getcwd())]
+
     cmd = [
         os.path.join(libdot.BIN_DIR, 'closure-compiler'),
         '--checks-only',
         '--language_in=ECMASCRIPT_2018',
-    ] + list(extra_args)
+    ] + externs + list(extra_args)
     result = libdot.run(cmd + opts.paths, check=False)
     if result.returncode:
         ret = False
@@ -317,5 +319,4 @@ def main(argv, paths=(), eslint_args=(), closure_args=DEFAULT_CLOSURE_ARGS):
 
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:], paths=_get_default_paths(),
-                  closure_args=['--jscomp_error=lintChecks']))
+    sys.exit(main(sys.argv[1:], paths=_get_default_paths()))
