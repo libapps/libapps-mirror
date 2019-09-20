@@ -8,6 +8,7 @@
  * window.localStorage based class with an async interface that is
  * interchangeable with other lib.Storage.* implementations.
  *
+ * @implements {lib.Storage}
  * @constructor
  */
 lib.Storage.Local = function() {
@@ -46,6 +47,7 @@ lib.Storage.Local.prototype.onStorage_ = function(e) {
  *
  * @param {function(!Object)} callback The function to invoke when the storage
  *     changes.
+ * @override
  */
 lib.Storage.Local.prototype.addObserver = function(callback) {
   this.observers_.push(callback);
@@ -54,7 +56,8 @@ lib.Storage.Local.prototype.addObserver = function(callback) {
 /**
  * Unregister a change observer.
  *
- * @param {function()} callback A previously registered callback.
+ * @param {function(!Object)} callback A previously registered callback.
+ * @override
  */
 lib.Storage.Local.prototype.removeObserver = function(callback) {
   var i = this.observers_.indexOf(callback);
@@ -67,6 +70,7 @@ lib.Storage.Local.prototype.removeObserver = function(callback) {
  *
  * @param {function(!Object)=} opt_callback The function to invoke when the
  *     delete has completed.
+ * @override
  */
 lib.Storage.Local.prototype.clear = function(opt_callback) {
   this.storage_.clear();
@@ -79,8 +83,9 @@ lib.Storage.Local.prototype.clear = function(opt_callback) {
  * Return the current value of a storage item.
  *
  * @param {string} key The key to look up.
- * @param {function(*) callback The function to invoke when the value has
+ * @param {function(*)} callback The function to invoke when the value has
  *     been retrieved.
+ * @override
  */
 lib.Storage.Local.prototype.getItem = function(key, callback) {
   var value = this.storage_.getItem(key);
@@ -99,12 +104,19 @@ lib.Storage.Local.prototype.getItem = function(key, callback) {
 /**
  * Fetch the values of multiple storage items.
  *
- * @param {!Array<string>} keys The keys to look up.
- * @param {function(!Object) callback The function to invoke when the values
+ * @param {?Array<string>} keys The keys to look up.  Pass null for all keys.
+ * @param {function(!Object)} callback The function to invoke when the values
  *     have been retrieved.
+ * @override
  */
 lib.Storage.Local.prototype.getItems = function(keys, callback) {
   var rv = {};
+  if (!keys) {
+    keys = [];
+    for (let i = 0; i < this.storage_.length; i++) {
+      keys.push(this.storage_.key(i));
+    }
+  }
 
   for (var i = keys.length - 1; i >= 0; i--) {
     var key = keys[i];
@@ -133,6 +145,7 @@ lib.Storage.Local.prototype.getItems = function(keys, callback) {
  * @param {function()=} opt_callback Optional function to invoke when the
  *     set is complete.  You don't have to wait for the set to complete in order
  *     to read the value, since the local cache is updated synchronously.
+ * @override
  */
 lib.Storage.Local.prototype.setItem = function(key, value, opt_callback) {
   this.storage_.setItem(key, JSON.stringify(value));
@@ -148,6 +161,7 @@ lib.Storage.Local.prototype.setItem = function(key, value, opt_callback) {
  * @param {function()=} opt_callback Optional function to invoke when the
  *     set is complete.  You don't have to wait for the set to complete in order
  *     to read the value, since the local cache is updated synchronously.
+ * @override
  */
 lib.Storage.Local.prototype.setItems = function(obj, opt_callback) {
   for (var key in obj) {
@@ -165,6 +179,7 @@ lib.Storage.Local.prototype.setItems = function(obj, opt_callback) {
  * @param {function()=} opt_callback Optional function to invoke when the
  *     remove is complete.  You don't have to wait for the set to complete in
  *     order to read the value, since the local cache is updated synchronously.
+ * @override
  */
 lib.Storage.Local.prototype.removeItem = function(key, opt_callback) {
   this.storage_.removeItem(key);
@@ -180,6 +195,7 @@ lib.Storage.Local.prototype.removeItem = function(key, opt_callback) {
  * @param {function()=} opt_callback Optional function to invoke when the
  *     remove is complete.  You don't have to wait for the set to complete in
  *     order to read the value, since the local cache is updated synchronously.
+ * @override
  */
 lib.Storage.Local.prototype.removeItems = function(ary, opt_callback) {
   for (var i = 0; i < ary.length; i++) {

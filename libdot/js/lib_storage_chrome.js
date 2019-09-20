@@ -9,6 +9,7 @@
  * with other lib.Storage.* implementations.
  *
  * @param {!StorageArea} storage
+ * @implements {lib.Storage}
  * @constructor
  */
 lib.Storage.Chrome = function(storage) {
@@ -21,7 +22,7 @@ lib.Storage.Chrome = function(storage) {
 /**
  * Called by the storage implementation when the storage is modified.
  *
- * @param {!Array} changes
+ * @param {!Array<*>} changes
  * @param {string} areaname
  */
 lib.Storage.Chrome.prototype.onChanged_ = function(changes, areaname) {
@@ -38,6 +39,7 @@ lib.Storage.Chrome.prototype.onChanged_ = function(changes, areaname) {
  *
  * @param {function(!Object)} callback The function to invoke when the storage
  *     changes.
+ * @override
  */
 lib.Storage.Chrome.prototype.addObserver = function(callback) {
   this.observers_.push(callback);
@@ -46,7 +48,8 @@ lib.Storage.Chrome.prototype.addObserver = function(callback) {
 /**
  * Unregister a change observer.
  *
- * @param {function()} callback A previously registered callback.
+ * @param {function(!Object)} callback A previously registered callback.
+ * @override
  */
 lib.Storage.Chrome.prototype.removeObserver = function(callback) {
   var i = this.observers_.indexOf(callback);
@@ -59,6 +62,7 @@ lib.Storage.Chrome.prototype.removeObserver = function(callback) {
  *
  * @param {function(!Object)=} opt_callback The function to invoke when the
  *     delete has completed.
+ * @override
  */
 lib.Storage.Chrome.prototype.clear = function(opt_callback) {
   this.storage_.clear();
@@ -73,6 +77,7 @@ lib.Storage.Chrome.prototype.clear = function(opt_callback) {
  * @param {string} key The key to look up.
  * @param {function(*)} callback The function to invoke when the value has
  *     been retrieved.
+ * @override
  */
 lib.Storage.Chrome.prototype.getItem = function(key, callback) {
   this.storage_.get(key, callback);
@@ -80,11 +85,11 @@ lib.Storage.Chrome.prototype.getItem = function(key, callback) {
 /**
  * Fetch the values of multiple storage items.
  *
- * @param {!Array<string>} keys The keys to look up.
- * @param {function(!Object) callback The function to invoke when the values
+ * @param {?Array<string>} keys The keys to look up.  Pass null for all keys.
+ * @param {function(!Object)} callback The function to invoke when the values
  *     have been retrieved.
+ * @override
  */
-
 lib.Storage.Chrome.prototype.getItems = function(keys, callback) {
   this.storage_.get(keys, callback);
 };
@@ -98,6 +103,7 @@ lib.Storage.Chrome.prototype.getItems = function(keys, callback) {
  * @param {function()=} opt_callback Optional function to invoke when the
  *     set is complete.  You don't have to wait for the set to complete in order
  *     to read the value, since the local cache is updated synchronously.
+ * @override
  */
 lib.Storage.Chrome.prototype.setItem = function(key, value, opt_callback) {
   const onComplete = () => {
@@ -130,6 +136,7 @@ lib.Storage.Chrome.prototype.setItem = function(key, value, opt_callback) {
  * @param {function()=} opt_callback Optional function to invoke when the
  *     set is complete.  You don't have to wait for the set to complete in order
  *     to read the value, since the local cache is updated synchronously.
+ * @override
  */
 lib.Storage.Chrome.prototype.setItems = function(obj, opt_callback) {
   this.storage_.set(obj, opt_callback);
@@ -142,6 +149,7 @@ lib.Storage.Chrome.prototype.setItems = function(obj, opt_callback) {
  * @param {function()=} opt_callback Optional function to invoke when the
  *     remove is complete.  You don't have to wait for the set to complete in
  *     order to read the value, since the local cache is updated synchronously.
+ * @override
  */
 lib.Storage.Chrome.prototype.removeItem = function(key, opt_callback) {
   this.storage_.remove(key, opt_callback);
@@ -154,6 +162,7 @@ lib.Storage.Chrome.prototype.removeItem = function(key, opt_callback) {
  * @param {function()=} opt_callback Optional function to invoke when the
  *     remove is complete.  You don't have to wait for the set to complete in
  *     order to read the value, since the local cache is updated synchronously.
+ * @override
  */
 lib.Storage.Chrome.prototype.removeItems = function(keys, opt_callback) {
   this.storage_.remove(keys, opt_callback);
