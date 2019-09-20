@@ -82,6 +82,7 @@ lib.init = function(onInit, opt_logFunction) {
  * it runs.
  *
  * @param {boolean} condition A condition to check.
+ * @closurePrimitive {asserts.truthy}
  */
 lib.assert = function(condition) {
   if (window.chai) {
