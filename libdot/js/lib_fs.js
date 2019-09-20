@@ -23,17 +23,16 @@ lib.fs = {};
  *   Great for debugging or times when you want to log a message before
  *   invoking a callback passed in to your method.
  *
+ * @template T
  * @param {string} msg The message prefix to use in the log.
- * @param {function(?Array<*>)=} opt_callback A function to invoke after
- *     logging.
- * @return {function}
+ * @param {T=} opt_callback A function to invoke after logging.
+ * @return {T}
  */
 lib.fs.log = function(msg, opt_callback) {
-  return function() {
-    var ary = Array.apply(null, arguments);
-    console.log(msg + ': ' + ary.join(', '));
+  return function(...args) {
+    console.log(msg + ': ' + args.join(', '));
     if (opt_callback)
-      opt_callback.call(null, arguments);
+      opt_callback.apply(null, args);
   };
 };
 
@@ -43,16 +42,16 @@ lib.fs.log = function(msg, opt_callback) {
  * This is exactly like fs.log(), except the message in the JS console will
  * be styled as an error.  See fs.log() for some use cases.
  *
+ * @template T
  * @param {string} msg The message prefix to use in the log.
- * @param {function()=} opt_callback A function to invoke after logging.
- * @return {function}
+ * @param {T=} opt_callback A function to invoke after logging.
+ * @return {T}
  */
 lib.fs.err = function(msg, opt_callback) {
-  return function() {
-    var ary = Array.apply(null, arguments);
-    console.error(msg + ': ' + ary.join(', '), lib.f.getStack());
+  return function(...args) {
+    console.error(msg + ': ' + args.join(', '), lib.f.getStack());
     if (opt_callback)
-      opt_callback.call(null, arguments);
+      opt_callback.apply(null, args);
   };
 };
 
@@ -139,7 +138,7 @@ lib.fs.readFile = function(root, path) {
  * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @param {function(string)=} opt_onSuccess Optional function to invoke after
+ * @param {function()=} opt_onSuccess Optional function to invoke after
  *     success.
  * @param {function(!DOMError)=} opt_onError Optional function to invoke if the
  *     operation fails.
@@ -148,8 +147,8 @@ lib.fs.removeFile = function(root, path, opt_onSuccess, opt_onError) {
   root.getFile(
       path, {},
       function (f) {
-        f.remove(lib.fs.log('Removed: ' + path, opt_onSuccess),
-                 lib.fs.err('Error removing' + path, opt_onError));
+        f.remove(lib.notNull(lib.fs.log('Removed: ' + path, opt_onSuccess)),
+                 lib.fs.err('Error removing: ' + path, opt_onError));
       },
       lib.fs.log('Error finding: ' + path, opt_onError)
   );
@@ -161,7 +160,7 @@ lib.fs.removeFile = function(root, path, opt_onSuccess, opt_onError) {
  * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @return {!Promise(!Array<!FileSystemEntry>)} All the entries in the
+ * @return {!Promise<!Array<!FileSystemEntry>>} All the entries in the
  *     directory.
  */
 lib.fs.readDirectory = function(root, path) {
@@ -244,6 +243,8 @@ lib.fs.getOrCreateDirectory = function(root, path, onSuccess, opt_onError) {
  * A Promise API around the FileReader API.
  *
  * The FileReader API is old, so wrap its callbacks with a Promise.
+ *
+ * @constructor
  */
 lib.fs.FileReader = function() {
 };
