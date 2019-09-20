@@ -23,7 +23,7 @@ lib.f = {};
  * Will result in "Hello, Google%2B".
  *
  * @param {string} str String containing variable references.
- * @param {!Array<string>} vars Variables to substitute in.
+ * @param {!Object<string, string>} vars Variables to substitute in.
  * @return {string} String with references substituted.
  */
 lib.f.replaceVars = function(str, vars) {
@@ -237,7 +237,7 @@ lib.f.getChromeMilestone = function() {
   if (window.navigator && navigator.userAgent) {
     const ary = navigator.userAgent.match(/\sChrome\/(\d+)/);
     if (ary)
-      return parseInt(ary[1]);
+      return parseInt(ary[1], 10);
   }
 
   // Returning NaN will make all number comparisons fail.
@@ -250,8 +250,8 @@ lib.f.getChromeMilestone = function() {
  * This object might live in different locations, and it isn't always defined
  * (if there hasn't been a "last error").  Wrap all that ugliness here.
  *
- * @param {string=} defaultMsg The default message if no error is found.
- * @return {string} The last error message from the browser.
+ * @param {?string=} defaultMsg The default message if no error is found.
+ * @return {?string} The last error message from the browser.
  */
 lib.f.lastError = function(defaultMsg = null) {
   let lastError;

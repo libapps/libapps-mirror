@@ -31,7 +31,7 @@ it('replaceVars', () => {
 
 it('getURL', () => {
   if (lib.f.getURL.chromeSupported()) {
-    assert.equal(lib.f.getURL('foo'), chrome.runtime.getURL(foo));
+    assert.equal(lib.f.getURL('foo'), chrome.runtime.getURL('foo'));
   } else {
     // We don't have a chrome.runtime and such, so just test pass through.
     assert.equal(lib.f.getURL('foo'), 'foo');
