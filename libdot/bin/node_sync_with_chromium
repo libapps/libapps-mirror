@@ -27,7 +27,7 @@ URI_MAC = os.path.join(URI_BASE, 'mac/node-darwin-x64.tar.gz.sha1')
 URI_WIN = os.path.join(URI_BASE, 'win/node.exe.sha1')
 
 # File which records the node hashes.
-HASH_FILE = os.path.join(libdot.BIN_DIR, 'libdot.py')
+HASH_FILE = os.path.join(libdot.BIN_DIR, 'node')
 
 
 def update(uri, var):
