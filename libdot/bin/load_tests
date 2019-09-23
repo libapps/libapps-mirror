@@ -120,16 +120,7 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
 
 def main(argv):
     """The main func!"""
-    # Run the tests through Chrome.
-    test_runner_main(argv, 'file://%s' % (TEST_PAGE,))
-
-    # Then run the standalone tests through node.
-    libdot.concat.concat(os.path.join(libdot.DIR, 'concat', 'libdot.concat'),
-                         os.path.join(libdot.DIR, 'js', 'libdot.js'))
-    libdot.run(['mocha', '--file', os.path.join('js', 'test_node.js'),
-                os.path.join('js', '*_tests.js'),
-                os.path.join('third_party', '*', '*_tests.js')],
-               cwd=libdot.DIR)
+    return test_runner_main(argv, 'file://%s' % (TEST_PAGE,))
 
 
 if __name__ == '__main__':

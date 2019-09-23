@@ -16,11 +16,6 @@ describe('lib_preference_manager_tests.js', () => {
  * can test the window correctly return the default value.
  */
 it('local-delete-default', (done) => {
-  // Local storage doesn't work w/jsdom under node currently.
-  if (typeof process != 'undefined') {
-    done();
-  }
-
   var storage = new lib.Storage.Local();
   var preferenceManager = new lib.PreferenceManager(storage);
   var defaultColor = 'red';

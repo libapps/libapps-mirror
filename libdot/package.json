@@ -28,7 +28,6 @@
   "devDependencies": {
     "chai": "~4",
     "eslint": "~6",
-    "jsdom": "~15",
     "mocha": "~6",
     "mocha-headless-chrome": "~2",
     "terser": "~4"

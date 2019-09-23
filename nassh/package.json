@@ -31,7 +31,6 @@
   "devDependencies": {
     "chai": "~4",
     "eslint": "~6",
-    "jsdom": "~15",
     "http-server": "~0",
     "license-checker": "~25",
     "mocha": "~6",
