@@ -27,6 +27,7 @@
     "mocha": "~6",
     "mocha-headless-chrome": "~2",
     "pkijs": "~2.1",
+    "@polymer/polymer": "^3.3",
     "punycode": "~2",
     "rollup": ">=1.16",
     "rollup-plugin-node-resolve": ">=5",

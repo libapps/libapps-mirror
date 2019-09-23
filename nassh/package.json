@@ -43,6 +43,7 @@
   "dependencies": {
     "asn1js": "~2",
     "pkijs": "~2.1",
+    "@polymer/polymer": "^3.3",
     "punycode": "~2"
   }
 }
