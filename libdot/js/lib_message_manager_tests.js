@@ -55,7 +55,7 @@ it('processI18nAttribute', () => {
 /**
  * Check addMessages behavior.
  */
-it('add-messages', /** @suppress{visibility} */ () => {
+it('add-messages', /** @suppress {visibility} */ () => {
   const mm = new lib.MessageManager([]);
 
   mm.addMessages({

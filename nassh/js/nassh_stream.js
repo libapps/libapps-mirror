@@ -5,7 +5,7 @@
 'use strict';
 
 /**
- * @fileoverview: The NaCl plugin leans on its host to provide some basic
+ * @fileoverview The NaCl plugin leans on its host to provide some basic
  * stream-like objects for /dev/random. The interface is likely to change
  * in the near future, so documentation in this file is a bit sparse.
  */

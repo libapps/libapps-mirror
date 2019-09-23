@@ -5,7 +5,7 @@
 'use strict';
 
 /**
- * @fileoverview: Runtime SFTP connect dialog.
+ * @fileoverview Runtime SFTP connect dialog.
  */
 
 /**

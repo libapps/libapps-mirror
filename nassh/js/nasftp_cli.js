@@ -5,7 +5,7 @@
 'use strict';
 
 /**
- * @fileoverview: This file manages the command line sftp client logic.  Not to
+ * @fileoverview This file manages the command line sftp client logic.  Not to
  *                be confused with the nassh.sftp.client class which provides a
  *                JS API only.
  */

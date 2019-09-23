@@ -1,4 +1,4 @@
-// Copyright 2017 The Chromium Authors. All rights reserved.
+// Copyright 2017 The Chromium OS Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -14,6 +14,10 @@ module.exports = {
     'ecmaVersion': 2018,
     'sourceType': 'module',
   },
+
+  'plugins': [
+    'jsdoc',
+  ],
 
   // See https://eslint.org/docs/rules/ for details.
   // These rules were picked based on the existing codebase.  If you find one
@@ -84,5 +88,25 @@ module.exports = {
     'use-isnan': 'error',
     'valid-typeof': 'error',
     'yoda': 'error',
+
+    'jsdoc/check-tag-names': 2,
+  },
+
+  'settings': {
+    'jsdoc': {
+      'tagNamePreference': {
+        // While not explicitly defined, Google/Chromium JS style guides only
+        // use these keyword forms, as does the closure compiler docs.
+        'augments': 'extends',
+        'constant': 'const',
+        'class': 'constructor',
+        'file': 'fileoverview',
+        'returns': 'return',
+
+        // Stub out closure-specific tags so they get ignored.
+        'closurePrimitive': '',
+        'suppress': '',
+      },
+    },
   },
 };

@@ -7,7 +7,7 @@
 nassh.sftp.fsp = {};
 
 /**
- * @fileoverview: This file manages the File System Provider API requests and
+ * @fileoverview This file manages the File System Provider API requests and
  *                currently active SFTP instances. File system requests are
  *                handled by their respective SFTP clients.
  */

@@ -5,6 +5,6 @@
 'use strict';
 
 /**
- * @fileoverview: Core SFTP logic.
+ * @fileoverview Core SFTP logic.
  */
 const nasftp = {};
