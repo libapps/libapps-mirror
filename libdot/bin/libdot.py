@@ -99,6 +99,10 @@ def run(cmd, check=True, cwd=None, **kwargs):
     result = subprocess.run(cmd, cwd=cwd, **kwargs)
     if check and result.returncode:
         logging.error('Running %s failed!', cmd[0])
+        if result.stdout is not None:
+            logging.error('stdout:\n%s', result.stdout)
+        if result.stderr is not None:
+            logging.error('stderr:\n%s', result.stderr)
         sys.exit(result.returncode)
     return result
 
