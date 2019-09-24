@@ -19,12 +19,16 @@ import kokoro
 import libdot
 
 
+# Where kokoro expects files to end up.  Anything put in this dir will be
+# uploaded & archived, while everything else will be discarded.
+ARTIFACTS_DIR = os.path.join(kokoro.LIBAPPS_DIR, 'artifacts')
+
 # Where we drop all our comment files for passing back to gerrit.
 # Kokoro can handle more than one file, but they must all be named the same
 # "gerrit_comments.json".  So we have to namespace the files under dirs.
 # We'll use a convention like gerrit_comments/$PKG/$TOOL/.
 GERRIT_COMMENTS_NAME = 'gerrit_comments.json'
-GERRIT_COMMENTS_DIR = os.path.join(kokoro.LIBAPPS_DIR, 'gerrit_comments')
+GERRIT_COMMENTS_DIR = os.path.join(ARTIFACTS_DIR, 'gerrit_comments')
 
 
 def is_presubmit():
@@ -103,9 +107,6 @@ def test():
     """Test the various components."""
     success = True
 
-    # Create the dropbox for gerrit comments.
-    shutil.rmtree(GERRIT_COMMENTS_DIR, ignore_errors=True)
-
     # Run all the tests before aborting.
     success &= test_jslint()
     success &= test_unittests()
@@ -126,6 +127,24 @@ def clean():
     shutil.rmtree(libdot.node.NODE_MODULES_DIR, ignore_errors=True)
 
 
+def setup():
+    """Set up the overall state before we build/test."""
+    # Initialize the artifacts output.
+    logging.info('Setting up artifacts output %s', ARTIFACTS_DIR)
+    shutil.rmtree(ARTIFACTS_DIR, ignore_errors=True)
+    os.makedirs(ARTIFACTS_DIR)
+
+    # Create the dropbox for gerrit comments.
+    os.makedirs(GERRIT_COMMENTS_DIR)
+    # Always create a stub comments file.  The kokoro docs don't say this is
+    # required, but other users report it doesn't post updates back to Gerrit
+    # unless it exists, and we're seeing that same behavior.
+    # http://g/kokoro-users/coBW2tNu46g/W8PozUUpAQAJ
+    stub = os.path.join(GERRIT_COMMENTS_DIR, GERRIT_COMMENTS_NAME)
+    with open(stub, 'w') as fp:
+        fp.write('[]')
+
+
 def get_parser():
     """Get a command line parser."""
     parser = argparse.ArgumentParser(description=__doc__)
@@ -144,6 +163,7 @@ def main(argv):
     libdot.setup_logging(debug=opts.debug)
     libdot.node_and_npm_setup()
 
+    setup()
     try:
         build()
         test()
