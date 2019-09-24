@@ -46,6 +46,7 @@ fi
 make -C src clean && make -C src -j${ncpus} "${BUILD_ARGS[@]}"
 
 cd output
-tar cf "${tarname}" \
-	`find plugin/ -type f | LC_ALL=C sort` \
-	`find build/pnacl* -name '*.pexe' -o -name '*.dbg.nexe' | LC_ALL=C sort`
+tar cf - \
+  `find plugin/ -type f | LC_ALL=C sort` \
+  `find build/pnacl* -name '*.pexe' -o -name '*.dbg.nexe' | LC_ALL=C sort` \
+  | xz -T0 -9 >"${tarname}.xz"

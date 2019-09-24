@@ -53,6 +53,11 @@ def build_archive():
         libdot.run(['unzip', archive, '-d',
                     os.path.join(ARTIFACTS_DIR, output)])
 
+    # Copy over the nacl ssh build with debug info.
+    ssh_client_dir = os.path.join(kokoro.LIBAPPS_DIR, 'ssh_client')
+    os.rename(os.path.join(ssh_client_dir, 'output', 'release.tar.xz'),
+              os.path.join(ARTIFACTS_DIR, 'ssh_client-release.tar.xz'))
+
 
 def build():
     """Build the various components."""
