@@ -23,11 +23,12 @@ LICENSE_FILE = os.path.join(nassh.DIR, 'html', 'licenses.html')
 LICENSE_TEMPLATE = os.path.join(nassh.DIR, 'html', 'licenses.html.in')
 
 
-def mkdeps():
+def mkdeps(rollup=True):
     """Build the dependencies."""
     libdot.concat.concat(os.path.join(nassh.DIR, 'concat', 'nassh_deps.concat'),
                          os.path.join(nassh.DIR, 'js', 'nassh_deps.concat.js'))
-    libdot.run(['rollup', '-c'], cwd=nassh.DIR)
+    if rollup:
+        libdot.run(['rollup', '-c'], cwd=nassh.DIR)
 
 
 def concat_third_party_dir(third_party_dir):
@@ -137,6 +138,9 @@ def get_parser():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('-d', '--debug', action='store_true',
                         help='Run with debug output.')
+    parser.add_argument('--skip-rollup', dest='rollup',
+                        action='store_false', default=True,
+                        help='Skip (re)building of rollup dependencies.')
     return parser
 
 
@@ -146,17 +150,18 @@ def main(argv):
     opts = parser.parse_args(argv)
     libdot.setup_logging(debug=opts.debug)
     libdot.node_and_npm_setup()
-    mkdeps()
+    mkdeps(rollup=opts.rollup)
 
-    logging.info('Concatenating licenses...')
-    # We use nassh's package.json, but reuse libapps' node_modules.
-    libdot.symlink(
-        os.path.join(libdot.LIBAPPS_DIR, 'node_modules'),
-        os.path.join(nassh.DIR, 'node_modules'))
-    try:
-        concat_licenses()
-    finally:
-        libdot.unlink(os.path.join(nassh.DIR, 'node_modules'))
+    if opts.rollup:
+        logging.info('Concatenating licenses...')
+        # We use nassh's package.json, but reuse libapps' node_modules.
+        libdot.symlink(
+            os.path.join(libdot.LIBAPPS_DIR, 'node_modules'),
+            os.path.join(nassh.DIR, 'node_modules'))
+        try:
+            concat_licenses()
+        finally:
+            libdot.unlink(os.path.join(nassh.DIR, 'node_modules'))
 
 
 if __name__ == '__main__':
