@@ -52,3 +52,8 @@ terminal.Menu.prototype.onHashChange_ = function(event) {
   // will trigger.
   this.window.location.hash = '';
 };
+
+/** Open settings page in a new window. */
+terminal.Menu.HANDLERS.set(
+    '#options',
+    function() { this.window.open('/html/terminal_settings.html'); });
