@@ -155,11 +155,17 @@ lib.fs.readDirectory = function(root, path) {
  * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @return {!Promise<!FileSystemFileEntry>}
+ * @return {!Promise<!FileEntry>}
  */
 lib.fs.getOrCreateFile = function(root, path) {
   var dirname = null;
   var basename = null;
+
+  function onDirFound(dirEntry) {
+    return new Promise((resolve, reject) => {
+      dirEntry.getFile(lib.notNull(basename), {create: true}, resolve, reject);
+    });
+  }
 
   var i = path.lastIndexOf('/');
   if (i > -1) {
@@ -170,14 +176,10 @@ lib.fs.getOrCreateFile = function(root, path) {
   }
 
   if (!dirname) {
-    onDirFound(root);
-    return;
+    return onDirFound(root);
   }
 
-  return lib.fs.getOrCreateDirectory(root, dirname)
-    .then((dirEntry) => new Promise((resolve, reject) => {
-      dirEntry.getFile(basename, {create: true}, resolve, reject);
-    }));
+  return lib.fs.getOrCreateDirectory(root, dirname).then(onDirFound);
 };
 
 /**
@@ -187,7 +189,7 @@ lib.fs.getOrCreateFile = function(root, path) {
  * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @return {!Promise<!FileSystemDirectoryEntry>}
+ * @return {!Promise<!DirectoryEntry>}
  */
 lib.fs.getOrCreateDirectory = function(root, path) {
   const names = path.split('/');
