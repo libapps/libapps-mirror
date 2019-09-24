@@ -37,6 +37,23 @@ def is_presubmit():
     return bool(os.environ.get('KOKORO_GERRIT_REVISION'))
 
 
+def build_archive():
+    """Move compiled files to artifacts output tree."""
+    # Unpack the nassh extensions so they can be packaged & signed.
+    nassh_dir = os.path.join(kokoro.LIBAPPS_DIR, 'nassh')
+    zip_dir = os.path.join(nassh_dir, 'dist', 'zip')
+    for archive in glob.glob(os.path.join(zip_dir, 'SecureShell*.zip')):
+        # The archives look like:
+        #   SecureShellApp-0.20.zip
+        #   SecureShellApp-dev-0.20.7220.2157.zip
+        # We want to output dirs like:
+        #   SecureShellApp/
+        #   SecureShellApp-dev/
+        output = os.path.basename(archive).rsplit('-', 1)[0]
+        libdot.run(['unzip', archive, '-d',
+                    os.path.join(ARTIFACTS_DIR, output)])
+
+
 def build():
     """Build the various components."""
     # Build the ssh client code.
@@ -57,6 +74,8 @@ def build():
         libdot.unlink(path)
     for path in glob.glob(os.path.join(zip_dir, 'SecureShell*.zip')):
         libdot.run(['./bin/promote.sh', path], cwd=nassh_dir)
+
+    build_archive()
 
 
 def _run_linter(cmd, cwd):
