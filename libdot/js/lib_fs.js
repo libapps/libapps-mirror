@@ -138,20 +138,12 @@ lib.fs.readFile = function(root, path) {
  * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @param {function()=} opt_onSuccess Optional function to invoke after
- *     success.
- * @param {function(!DOMError)=} opt_onError Optional function to invoke if the
- *     operation fails.
+ * @return {!Promise<void>}
  */
-lib.fs.removeFile = function(root, path, opt_onSuccess, opt_onError) {
-  root.getFile(
-      path, {},
-      function (f) {
-        f.remove(lib.notNull(lib.fs.log('Removed: ' + path, opt_onSuccess)),
-                 lib.fs.err('Error removing: ' + path, opt_onError));
-      },
-      lib.fs.log('Error finding: ' + path, opt_onError)
-  );
+lib.fs.removeFile = function(root, path) {
+  return new Promise((resolve, reject) => {
+    root.getFile(path, {}, (f) => f.remove(resolve, reject), reject);
+  });
 };
 
 /**

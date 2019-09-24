@@ -785,11 +785,11 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
  * @return {!Promise}
  */
 nassh.ConnectDialog.prototype.deleteIdentity_ = function(identityName) {
-  const removeFile = (file) => new Promise((resolve) => {
-    // We resolve in the error path because we try to delete paths that are
+  const removeFile = (file) => {
+    // We swallow the rejection because we try to delete paths that are
     // often not there (e.g. missing .pub file).
-    lib.fs.removeFile(this.fileSystem_.root, file, resolve, resolve);
-  });
+    return lib.fs.removeFile(this.fileSystem_.root, file).catch(() => {});
+  };
 
   const files = [
     // Delete the private & public key halves for this identity from the .ssh/
