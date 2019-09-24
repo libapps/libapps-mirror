@@ -298,6 +298,20 @@ lib.PreferenceManager.prototype.defineChildren = function(
 /**
  * Register to observe preference changes.
  *
+ * @param {string} name The name of preference you wish to observe..
+ * @param {function()} observer The callback.
+ */
+lib.PreferenceManager.prototype.addObserver = function(name, observer) {
+  if (!(name in this.prefRecords_)) {
+    throw new Error(`Unknown preference: ${name}`);
+  }
+
+  this.prefRecords_[name].addObserver(observer);
+};
+
+/**
+ * Register to observe preference changes.
+ *
  * @param {?function()} global A callback that will happen for every preference.
  *     Pass null if you don't need one.
  * @param {!Object} map A map of preference specific callbacks.  Pass null if
@@ -314,10 +328,7 @@ lib.PreferenceManager.prototype.addObservers = function(global, map) {
     return;
 
   for (var name in map) {
-    if (!(name in this.prefRecords_))
-      throw new Error('Unknown preference: ' + name);
-
-    this.prefRecords_[name].addObserver(map[name]);
+    this.addObserver(name, map[name]);
   }
 };
 
