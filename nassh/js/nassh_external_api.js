@@ -39,13 +39,13 @@ nassh.External.COMMANDS.mount = (request, sender, sendResponse) => {
   const sessionId = nassh.External.sessionCounter_++;
   const knownHosts = `${nassh.External.ROOT_DIR}/${sessionId}.known_hosts`;
   const identityFile = `${nassh.External.ROOT_DIR}/${sessionId}.identity_file`;
-  function writeFile(filename, content, resolve, reject) {
-    lib.fs.overwriteFile(
-        nassh.External.fileSystem_.root, filename, content, resolve, reject);
-  }
+  const writeFile = (filename, content) => {
+    return lib.fs.overwriteFile(
+        nassh.External.fileSystem_.root, filename, content);
+  };
   Promise.all([
-      new Promise(writeFile.bind(this, knownHosts, request.knownHosts)),
-      new Promise(writeFile.bind(this, identityFile, request.identityFile)),
+      writeFile(knownHosts, request.knownHosts),
+      writeFile(identityFile, request.identityFile),
   ]).then(() => {
     const args = {
       argv: {

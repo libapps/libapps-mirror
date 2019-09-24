@@ -962,10 +962,7 @@ nassh.ConnectDialog.prototype.onImportFiles_ = function(e) {
       }
 
       const targetPath = `/.ssh/identity/${file.name}`;
-      lib.fs.overwriteFile(
-          this.fileSystem_.root, targetPath, file,
-          lib.fs.log(`Imported: ${targetPath}`, resolve),
-          lib.fs.err(`Error importing: ${targetPath}`, reject));
+      return lib.fs.overwriteFile(this.fileSystem_.root, targetPath, file);
     }));
   }
 

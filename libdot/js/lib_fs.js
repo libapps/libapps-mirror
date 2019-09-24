@@ -65,39 +65,23 @@ lib.fs.err = function(msg, opt_callback) {
  *     path.
  * @param {string} path The path of the target file, relative to root.
  * @param {!Blob|string} contents The new contents of the file.
- * @param {function()} onSuccess The function to invoke after success.
- * @param {function(!DOMError)=} opt_onError Optional function to invoke if the
- *     operation fails.
+ * @return {!Promise<void>}
  */
-lib.fs.overwriteFile = function(root, path, contents, onSuccess, opt_onError) {
-  function onFileRemoved() {
-    lib.fs.getOrCreateFile(root, path)
-      .then(onFileFound)
-      .catch(lib.fs.log('Error creating: ' + path, opt_onError));
+lib.fs.overwriteFile = function(root, path, contents) {
+  if (!(contents instanceof Blob)) {
+    contents = new Blob([contents], {type: 'text/plain'});
   }
 
-  function onFileFound(fileEntry) {
-    fileEntry.createWriter(onFileWriter,
-                           lib.fs.log('Error creating writer for: ' + path,
-                                      opt_onError));
-  }
-
-  function onFileWriter(writer) {
-    writer.onwriteend = onSuccess;
-    writer.onerror = lib.fs.log('Error writing to: ' + path, opt_onError);
-
-    if (!(contents instanceof Blob)) {
-      contents = new Blob([contents], {type: 'text/plain'});
-    }
-
-    writer.write(contents);
-  }
-
-  root.getFile(path, {create: false},
-               function(fileEntry) {
-                 fileEntry.remove(onFileRemoved, onFileRemoved);
-               },
-               onFileRemoved);
+  return lib.fs.removeFile(root, path)
+    .catch(() => {})
+    .then(() => lib.fs.getOrCreateFile(root, path))
+    .then((fileEntry) => new Promise((resolve, reject) => {
+      fileEntry.createWriter((writer) => {
+        writer.onwriteend = resolve;
+        writer.onerror = reject;
+        writer.write(contents);
+      }, reject);
+    }));
 };
 
 /**

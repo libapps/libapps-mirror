@@ -333,8 +333,7 @@ nassh.CommandInstance.prototype.removeKnownHostByIndex = function(index) {
     .then((contents) => {
       const ary = contents.split('\n');
       ary.splice(index - 1, 1);
-      lib.fs.overwriteFile(this.fileSystem_.root, path,
-                           ary.join('\n'), lib.fs.log('done'), onError);
+      return lib.fs.overwriteFile(this.fileSystem_.root, path, ary.join('\n'));
     })
     .catch(lib.fs.log(`Error accessing ${path}`));
 };
