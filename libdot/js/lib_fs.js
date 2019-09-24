@@ -71,9 +71,9 @@ lib.fs.err = function(msg, opt_callback) {
  */
 lib.fs.overwriteFile = function(root, path, contents, onSuccess, opt_onError) {
   function onFileRemoved() {
-    lib.fs.getOrCreateFile(root, path,
-                          onFileFound,
-                          lib.fs.log('Error creating: ' + path, opt_onError));
+    lib.fs.getOrCreateFile(root, path)
+      .then(onFileFound)
+      .catch(lib.fs.log('Error creating: ' + path, opt_onError));
   }
 
   function onFileFound(fileEntry) {
@@ -171,18 +171,11 @@ lib.fs.readDirectory = function(root, path) {
  * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @param {function(string)=} onSuccess The function to invoke after
- *     success.
- * @param {function(!DOMError)=} opt_onError Optional function to invoke if the
- *     operation fails.
+ * @return {!Promise<!FileSystemFileEntry>}
  */
-lib.fs.getOrCreateFile = function(root, path, onSuccess, opt_onError) {
+lib.fs.getOrCreateFile = function(root, path) {
   var dirname = null;
   var basename = null;
-
-  function onDirFound(dirEntry) {
-    dirEntry.getFile(basename, { create: true }, onSuccess, opt_onError);
-  }
 
   var i = path.lastIndexOf('/');
   if (i > -1) {
@@ -197,7 +190,11 @@ lib.fs.getOrCreateFile = function(root, path, onSuccess, opt_onError) {
     return;
   }
 
-  lib.fs.getOrCreateDirectory(root, dirname, onDirFound, opt_onError);
+  return new Promise((resolve, reject) => {
+    lib.fs.getOrCreateDirectory(root, dirname, (dirEntry) => {
+      dirEntry.getFile(basename, {create: true}, resolve, reject);
+    }, reject);
+  });
 };
 
 /**
