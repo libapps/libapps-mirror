@@ -153,6 +153,10 @@ def clean():
 
 def setup():
     """Set up the overall state before we build/test."""
+    # Log some system state so we can see current CI/container state.
+    libdot.run(['uname', '-a'])
+    libdot.run(['cat', '/etc/os-release'], check=False)
+
     # Initialize the artifacts output.
     logging.info('Setting up artifacts output %s', ARTIFACTS_DIR)
     shutil.rmtree(ARTIFACTS_DIR, ignore_errors=True)
