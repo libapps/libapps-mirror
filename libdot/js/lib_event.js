@@ -8,69 +8,43 @@
  * An event is a JavaScript function with addListener and removeListener
  * properties.
  *
- * When the endpoint function is called, the firstCallback will be invoked,
- * followed by all of the listeners in the order they were attached, then
- * the finalCallback.
+ * When the endpoint function is called, all of the listeners will be invoked
+ * in the order they were attached.
  *
- * The returned function will have the list of callbacks, excluding
- * opt_firstCallback and opt_lastCallback, as its 'observers' property.
+ * The returned function will have the list of callbacks as its 'observers'
+ * property.
  *
- * @param {function(...)=} opt_firstCallback The optional function to call
- *     before the observers.
- * @param {function(...)=} opt_finalCallback The optional function to call
- *     after the observers.
- *
- * @return {function(...)} A function that, when called, invokes all callbacks
+ * @return {function(...*)} A function that, when called, invokes all callbacks
  *     with whatever arguments it was passed.
  */
-lib.Event = function(opt_firstCallback, opt_finalCallback) {
-  var ep = function() {
-    var args = Array.prototype.slice.call(arguments);
-
-    var rv;
-    if (opt_firstCallback)
-      rv = opt_firstCallback.apply(null, args);
-
-    if (rv === false)
-      return;
-
-    ep.observers.forEach((ary) => ary[0].apply(ary[1], args));
-
-    if (opt_finalCallback)
-      opt_finalCallback.apply(null, args);
+lib.Event = function() {
+  const ep = function(...args) {
+    ep.observers.forEach((callback) => callback.apply(null, args));
   };
 
   /**
    * Add a callback function.
    *
-   * @param {function(...)} callback The function to call back.
-   * @param {!Object=} opt_obj The optional |this| object to apply the function
-   *     to.  Use this rather than bind when you plan on removing the listener
-   *     later, so that you don't have to save the bound-function somewhere.
+   * @param {function(...*)} callback The function to call back.
    */
-  ep.addListener = function(callback, opt_obj) {
-    if (!callback) {
-      console.error('Missing param: callback');
-      console.log(lib.f.getStack());
-    }
+  ep.addListener = function(callback) {
+    lib.assert(callback);
 
-    ep.observers.push([callback, opt_obj]);
+    ep.observers.push(callback);
   };
 
   /**
    * Remove a callback function.
+   *
+   * If the function is registered more than once (weird), all will be removed.
+   *
+   * @param {function(...*)} callback The function to remove.
    */
-  ep.removeListener = function(callback, opt_obj) {
-    for (var i = 0; i < ep.observers.length; i++) {
-      if (ep.observers[i][0] == callback && ep.observers[i][1] == opt_obj) {
-        ep.observers.splice(i, 1);
-        break;
-      }
-    }
+  ep.removeListener = function(callback) {
+    ep.observers = ep.observers.filter((cb) => cb !== callback);
   };
 
   ep.observers = [];
-
 
   return ep;
 };
