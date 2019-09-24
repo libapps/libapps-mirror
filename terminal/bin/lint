@@ -28,7 +28,8 @@ def _get_default_paths():
     # Sort to ensure consistent order.
     return sorted(
         os.path.relpath(x, os.getcwd())
-        for x in glob.glob(os.path.join(terminal.DIR, 'js', '*.js')))
+        for x in glob.glob(os.path.join(terminal.DIR, 'js', '*.js'))
+        if 'nassh_deps' not in os.path.basename(x))
 
 
 def mkdeps(_opts):

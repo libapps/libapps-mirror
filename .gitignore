@@ -14,3 +14,7 @@ dist
 # npm related dirs.
 node_modules
 package-lock.json
+
+# Stuff left over from unit tests
+terminal/js/nassh_deps.concat.js
+terminal/js/nassh_deps.rollup.js

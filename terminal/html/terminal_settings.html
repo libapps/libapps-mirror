@@ -2,9 +2,22 @@
 <html>
 <head>
   <meta charset='utf-8'/>
+
+  <script src='../js/nassh_deps.concat.js'></script>
+  <script type='module' src='../js/terminal_settings_main.js'></script>
+
   <link rel='stylesheet' href='/css/terminal_settings.css'/>
 </head>
 <body>
-  settings
+  <!-- TODO(juwa@google.com): Add translations -->
+  <h1>Settings</h1>
+  <terminal-settings-checkbox
+      description="Cursor Blink"
+      preference="cursor-blink">
+  </terminal-settings-checkbox>
+  <terminal-settings-checkbox
+      description="Copy On Select"
+      preference="copy-on-select">
+  </terminal-settings-checkbox>
 </body>
 </html>

@@ -7,3 +7,7 @@
 html {
   font-family: serif;
 }
+
+terminal-settings-checkbox {
+  display: block;
+}
