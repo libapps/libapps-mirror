@@ -25,6 +25,14 @@ DEFAULT_CLOSURE_ARGS = (
     '--jscomp_error=*', '--jscomp_off=strictMissingRequire')
 
 
+def kokoro_comments_path(path, tool):
+    """Expand % markers that might exist in |path|."""
+    if not path:
+        return None
+    else:
+        return path.replace('%(tool)', tool)
+
+
 def convert_eslint_to_kokoro(data):
     """Take eslint JSON output and convert it to kokoro comment format.
 
@@ -131,8 +139,10 @@ def run_eslint(opts, extra_args=()):
     """Run the eslint tool."""
     ret = True
 
+    comments_path = kokoro_comments_path(opts.gerrit_comments_file, 'eslint')
+
     cmd = ['eslint'] + list(extra_args)
-    if opts.gerrit_comments_file:
+    if comments_path:
         cmd += ['--max-warnings=0']
 
     # We know our tools are first in $PATH now.
@@ -141,9 +151,9 @@ def run_eslint(opts, extra_args=()):
         ret = False
 
         # Rerun for Gerrit.
-        if opts.gerrit_comments_file:
+        if comments_path:
             # Handle relative paths like "foo.json".
-            dirname = os.path.dirname(opts.gerrit_comments_file)
+            dirname = os.path.dirname(comments_path)
             if dirname:
                 os.makedirs(dirname, exist_ok=True)
 
@@ -152,24 +162,70 @@ def run_eslint(opts, extra_args=()):
                                 capture_output=True)
 
             # Save a copy for debugging later.
-            with open(opts.gerrit_comments_file + '.in', 'wb') as fp:
+            with open(comments_path + '.in', 'wb') as fp:
                 fp.write(result.stdout)
 
             data = json.loads(result.stdout.decode('utf-8'))
             comments = list(convert_eslint_to_kokoro(data))
-            with open(opts.gerrit_comments_file, 'w', encoding='utf-8') as fp:
+            with open(comments_path, 'w', encoding='utf-8') as fp:
                 json.dump(comments, fp)
-    elif opts.gerrit_comments_file:
+    elif comments_path:
         # If there were no failures, clear the files to avoid leaving previous
         # results laying around & confuse devs.
-        libdot.unlink(opts.gerrit_comments_file)
-        libdot.unlink(opts.gerrit_comments_file + '.in')
+        libdot.unlink(comments_path)
+        libdot.unlink(comments_path + '.in')
 
     return ret
 
 
+def convert_closure_to_kokoro(data):
+    """Take closure JSON output and convert it to kokoro comment format.
+
+    The |data| input will look like:
+    [
+      {
+        "column": 21,
+        "context": " * @return {!Promise<FileSystemFileEntry>}\n...",
+        "description": "FileSystemFileEntry is a reference type with ...",
+        "key": "JSC_MISSING_NULLABILITY_MODIFIER_JSDOC",
+        "level": "error",
+        "line": 174,
+        "source": "js/lib_fs.js"
+      },
+      {
+        "description": "1 error(s), 0 warning(s)",
+        "level": "info"
+      }
+    ]
+
+    See convert_eslint_to_kokoro for example return value.
+    """
+    for result in data:
+        # Ignore info lines.
+        if result['level'] == 'info':
+            continue
+
+        # Add leading space prefix to results to get code text.
+        msg = '[closure] %s: %s\n%s\n\n %s' % (
+            result['level'], result['key'], result['description'],
+            '\n '.join(result['context'].splitlines()),
+        )
+
+        yield {
+            'path': os.path.relpath(result['source'], libdot.LIBAPPS_DIR),
+            'message': msg,
+            'startLine': result['line'],
+            'endLine': result.get('endline', result['line']),
+            'startCharacter': result['column'],
+        }
+
+
 def run_closure(opts, extra_args=()):
     """Run the closure-compiler tool."""
+    ret = True
+
+    comments_path = kokoro_comments_path(opts.gerrit_comments_file, 'closure')
+
     # TODO(crbug.com/998928): Update checks beyond just 'lintChecks'.
     # E.g. --jscomp_error=*.
     cmd = [
@@ -178,7 +234,35 @@ def run_closure(opts, extra_args=()):
         '--language_in=ECMASCRIPT_2018',
     ] + list(extra_args)
     result = libdot.run(cmd + opts.paths, check=False)
-    return result.returncode == 0
+    if result.returncode:
+        ret = False
+
+        # Rerun for Gerrit.
+        if comments_path:
+            # Handle relative paths like "foo.json".
+            dirname = os.path.dirname(comments_path)
+            if dirname:
+                os.makedirs(dirname, exist_ok=True)
+
+            cmd += ['--error_format=JSON']
+            result = libdot.run(cmd + opts.paths, check=False,
+                                capture_output=True)
+
+            # Save a copy for debugging later.
+            with open(comments_path + '.in', 'wb') as fp:
+                fp.write(result.stderr)
+
+            data = json.loads(result.stderr.decode('utf-8'))
+            comments = list(convert_closure_to_kokoro(data))
+            with open(comments_path, 'w', encoding='utf-8') as fp:
+                json.dump(comments, fp)
+    elif comments_path:
+        # If there were no failures, clear the files to avoid leaving previous
+        # results laying around & confuse devs.
+        libdot.unlink(comments_path)
+        libdot.unlink(comments_path + '.in')
+
+    return ret
 
 
 def _get_default_paths():

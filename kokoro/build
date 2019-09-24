@@ -104,7 +104,7 @@ def test_jslint():
         cmd = [
             './bin/lint',
             '--gerrit-comments-file',
-            os.path.join(GERRIT_COMMENTS_DIR, pkg, 'eslint',
+            os.path.join(GERRIT_COMMENTS_DIR, pkg, '%(tool)',
                          GERRIT_COMMENTS_NAME),
         ]
         ret &= _run_linter(cmd, pkg_dir)
