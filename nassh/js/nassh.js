@@ -66,10 +66,9 @@ nassh.getFileSystem = function() {
       // We create /.ssh/identity/ subdir for storing keys.  We need a dedicated
       // subdir for users to import files to avoid collisions with standard ssh
       // config files.
-      lib.fs.getOrCreateDirectory(
-          fileSystem.root, '/.ssh/identity',
-          (directoryEntry) => resolve(fileSystem, directoryEntry),
-          lib.fs.err('Error creating /.ssh/identity', reject));
+      lib.fs.getOrCreateDirectory(fileSystem.root, '/.ssh/identity')
+        .then((directoryEntry) => resolve(fileSystem, directoryEntry))
+        .catch(reject);
     }
 
     requestFS(window.PERSISTENT,

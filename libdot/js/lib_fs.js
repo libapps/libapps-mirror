@@ -174,11 +174,10 @@ lib.fs.getOrCreateFile = function(root, path) {
     return;
   }
 
-  return new Promise((resolve, reject) => {
-    lib.fs.getOrCreateDirectory(root, dirname, (dirEntry) => {
+  return lib.fs.getOrCreateDirectory(root, dirname)
+    .then((dirEntry) => new Promise((resolve, reject) => {
       dirEntry.getFile(basename, {create: true}, resolve, reject);
-    }, reject);
-  });
+    }));
 };
 
 /**
@@ -188,28 +187,27 @@ lib.fs.getOrCreateFile = function(root, path) {
  * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @param {function(string)} onSuccess The function to invoke after success.
- * @param {function(!DOMError)=} opt_onError Optional function to invoke if the
- *     operation fails.
+ * @return {!Promise<!FileSystemDirectoryEntry>}
  */
-lib.fs.getOrCreateDirectory = function(root, path, onSuccess, opt_onError) {
-  var names = path.split('/');
+lib.fs.getOrCreateDirectory = function(root, path) {
+  const names = path.split('/');
 
-  function getOrCreateNextName(dir) {
-    if (!names.length)
-      return onSuccess(dir);
+  return new Promise((resolve, reject) => {
+    function getOrCreateNextName(dir) {
+      if (!names.length) {
+        return resolve(dir);
+      }
 
-    var name = names.shift();
-
-    if (!name || name == '.') {
-      getOrCreateNextName(dir);
-    } else {
-      dir.getDirectory(name, { create: true }, getOrCreateNextName,
-                       opt_onError);
+      const name = names.shift();
+      if (!name || name == '.') {
+        getOrCreateNextName(dir);
+      } else {
+        dir.getDirectory(name, {create: true}, getOrCreateNextName, reject);
+      }
     }
-  }
 
-  getOrCreateNextName(root);
+    getOrCreateNextName(root);
+  });
 };
 
 /**
