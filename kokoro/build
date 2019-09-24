@@ -196,6 +196,7 @@ def test():
     success &= test_unittests()
 
     if not success:
+        logging.error('Some tests failed!  See above for details.')
         sys.exit(1)
 
 
@@ -255,6 +256,7 @@ def main(argv):
     try:
         build()
         test()
+        logging.info('All builds & tests passed!')
     finally:
         if opts.clean:
             clean()
