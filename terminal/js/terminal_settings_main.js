@@ -6,15 +6,20 @@
  * @fileoverview Initializes global state used in terminal settings.
  */
 import {TerminalSettingsCheckboxElement} from './terminal_settings_checkbox.js';
+import {TerminalSettingsDropdownElement} from './terminal_settings_dropdown.js';
 
 window.addEventListener('DOMContentLoaded', (event) => {
   lib.init(() => {
-    window.preferenceManager = new hterm.PreferenceManager('default');
+    window.PreferenceManager = hterm.PreferenceManager;
+    window.preferenceManager = new window.PreferenceManager('default');
 
     window.preferenceManager.readStorage(() => {
       customElements.define(
           TerminalSettingsCheckboxElement.is,
           TerminalSettingsCheckboxElement);
+      customElements.define(
+          TerminalSettingsDropdownElement.is,
+          TerminalSettingsDropdownElement);
     });
   });
 });

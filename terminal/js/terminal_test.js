@@ -11,7 +11,7 @@
 // Setup the mocha framework.
 // TODO(juwa@google.com): Move preference manager into a module such that it is
 // no longer a global variable.
-mocha.setup({ui: 'bdd', globals: ['preferenceManager']});
+mocha.setup({ui: 'bdd', globals: ['PreferenceManager', 'preferenceManager']});
 mocha.checkLeaks();
 
 // Add a global shortcut to the assert API.

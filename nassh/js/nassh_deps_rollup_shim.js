@@ -51,5 +51,7 @@ export {punycode};
  * own dependencies, but instead includes nassh's.
  */
 import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
-const polymer = {PolymerElement, html}
+import {} from '@polymer/polymer/lib/elements/dom-repeat.js';
+import {flush} from '@polymer/polymer/lib/utils/flush.js';
+const polymer = {PolymerElement, html, flush}
 export {polymer};

@@ -4,14 +4,11 @@
 
 /**
  * @fileoverview Exports a Polymer element terminal-settings-checkbox.
- * This element automatically handles data binding between the managed
- * preferences and the preferences being displayed in the ui.
- *
- * @suppress {checkTypes}
  */
-import {PolymerElement, html} from './polymer.js';
+import {html} from './polymer.js';
+import {TerminalSettingsElement} from './terminal_settings_element.js';
 
-export class TerminalSettingsCheckboxElement extends PolymerElement {
+export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
   static get is() { return 'terminal-settings-checkbox'; }
 
   static get properties() {
@@ -34,42 +31,5 @@ export class TerminalSettingsCheckboxElement extends PolymerElement {
         <label for="checkbox">[[description]]</label>
         <input id="checkbox" type="checkbox" checked="{{uiValue_::change}}" />
     `;
-  }
-
-  constructor() {
-    super();
-
-    this.preferenceValue_ = null;
-    this.boundPreferenceChanged_ = this.preferenceChanged_.bind(this);
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-
-    this.preferenceChanged_(
-        window.preferenceManager.get(this.preference));
-    window.preferenceManager.addObserver(
-        this.preference,
-        this.boundPreferenceChanged_);
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-
-    window.preferenceManager.removeObserver(
-        this.preference,
-        this.boundPreferenceChanged_);
-  }
-
-  isConsistent() {
-    return this.preferenceValue_ === this.uiValue_;
-  }
-
-  uiChanged_() {
-    window.preferenceManager.set(this.preference, this.uiValue_);
-  }
-
-  preferenceChanged_(value) {
-    this.preferenceValue_ = this.uiValue_ = value;
   }
 }
