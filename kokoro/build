@@ -9,6 +9,7 @@
 from __future__ import print_function
 
 import argparse
+import fnmatch
 import glob
 import logging
 import os
@@ -37,6 +38,42 @@ def is_presubmit():
     return bool(os.environ.get('KOKORO_GERRIT_REVISION'))
 
 
+def should_build_plugin():
+    """Whether we should build the ssh_client plugin code.
+
+    Building this native code with the nacl toolchain dominates our build times
+    (usually ~75% of the entire build).  Lets skip it if we don't think any of
+    changes are relevant.
+    """
+    logging.info('Detecting whether to build plugin')
+
+    # Release builders always build the plugin.
+    if not is_presubmit():
+        logging.info('Release builder: always building the plugin!')
+        return True
+
+    check_paths = (
+        # The CI itself.
+        'kokoro/*',
+        # Utility libraries.
+        'libdot/bin/*',
+        # The plugin code itself.
+        'ssh_client/*',
+    )
+    result = libdot.run(['git', 'show', '--format=', '--name-only',
+                         os.environ['KOKORO_GERRIT_REVISION']],
+                        capture_output=True, cwd=kokoro.LIBAPPS_DIR)
+    relevant_paths = list(
+        x for x in result.stdout.decode('utf-8').splitlines()
+        if any(fnmatch.fnmatch(x, check) for check in check_paths))
+    if relevant_paths:
+        logging.info('Presubmit: some files might affect the plugin:\n%s',
+                     '\n'.join(relevant_paths))
+    else:
+        logging.info('Presubmit: no files affect the plugin; skipping')
+    return bool(relevant_paths)
+
+
 def build_archive():
     """Move compiled files to artifacts output tree."""
     # Unpack the nassh extensions so they can be packaged & signed.
@@ -54,19 +91,21 @@ def build_archive():
                     os.path.join(ARTIFACTS_DIR, output)])
 
     # Copy over the nacl ssh build with debug info.
-    ssh_client_dir = os.path.join(kokoro.LIBAPPS_DIR, 'ssh_client')
-    os.rename(os.path.join(ssh_client_dir, 'output', 'release.tar.xz'),
-              os.path.join(ARTIFACTS_DIR, 'ssh_client-release.tar.xz'))
+    if should_build_plugin():
+        ssh_client_dir = os.path.join(kokoro.LIBAPPS_DIR, 'ssh_client')
+        os.rename(os.path.join(ssh_client_dir, 'output', 'release.tar.xz'),
+                  os.path.join(ARTIFACTS_DIR, 'ssh_client-release.tar.xz'))
 
 
 def build():
     """Build the various components."""
-    # Build the ssh client code.
-    ssh_client_dir = os.path.join(kokoro.LIBAPPS_DIR, 'ssh_client')
-    libdot.run(['./build.sh'], cwd=ssh_client_dir)
-    # Copy output files.
-    libdot.run(['cp', '-r', './ssh_client/output/plugin/', './nassh/'],
-               cwd=kokoro.LIBAPPS_DIR)
+    if should_build_plugin():
+        # Build the ssh client code.
+        ssh_client_dir = os.path.join(kokoro.LIBAPPS_DIR, 'ssh_client')
+        libdot.run(['./build.sh'], cwd=ssh_client_dir)
+        # Copy output files.
+        libdot.run(['cp', '-r', './ssh_client/output/plugin/', './nassh/'],
+                   cwd=kokoro.LIBAPPS_DIR)
 
     # Build the nassh program.
     nassh_dir = os.path.join(kokoro.LIBAPPS_DIR, 'nassh')
