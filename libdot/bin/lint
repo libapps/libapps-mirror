@@ -104,20 +104,26 @@ def convert_eslint_to_kokoro(data):
 
     for file_results in data:
         for message in file_results['messages']:
-            msg = '%s: %s\n%s' % (
+            msg = '[eslint] %s: %s' % (
                 SEVERITY_TO_HEADER[message['severity']],
                 message['message'],
-                '%s%s' % (RULES_URI_BASE, message['ruleId']),
             )
 
+            # For syntax errors, this will be omitted.
+            ruleId = message.get('ruleId')
+            if ruleId:
+                msg += '\n%s%s' % (RULES_URI_BASE, ruleId)
+
+            # Gerrit comments appear to count columns from 0 while eslint counts
+            # from 1.  Adjust them down by one to handle.
             yield {
                 'path': os.path.relpath(file_results['filePath'],
                                         libdot.LIBAPPS_DIR),
                 'message': msg,
                 'startLine': message['line'],
-                'endLine': message.get('endLine', message['line'] + 1),
-                'startCharacter': message['column'],
-                'endCharacter': message.get('endColumn', message['column'] + 1),
+                'endLine': message.get('endLine', message['line']),
+                'startCharacter': message['column'] - 1,
+                'endCharacter': message.get('endColumn', message['column']),
             }
 
 
@@ -136,8 +142,10 @@ def run_eslint(opts, extra_args=()):
 
         # Rerun for Gerrit.
         if opts.gerrit_comments_file:
-            os.makedirs(os.path.dirname(opts.gerrit_comments_file),
-                        exist_ok=True)
+            # Handle relative paths like "foo.json".
+            dirname = os.path.dirname(opts.gerrit_comments_file)
+            if dirname:
+                os.makedirs(dirname, exist_ok=True)
 
             cmd += ['--format=json']
             result = libdot.run(cmd + opts.paths, check=False,
@@ -147,7 +155,7 @@ def run_eslint(opts, extra_args=()):
             with open(opts.gerrit_comments_file + '.in', 'wb') as fp:
                 fp.write(result.stdout)
 
-            data = json.loads(result.stdout)
+            data = json.loads(result.stdout.decode('utf-8'))
             comments = list(convert_eslint_to_kokoro(data))
             with open(opts.gerrit_comments_file, 'w', encoding='utf-8') as fp:
                 json.dump(comments, fp)
