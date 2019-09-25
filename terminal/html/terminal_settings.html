@@ -25,16 +25,31 @@
   <section id="appearance" class="terminal-settings-category">
     <section>
       <h3>Background Color</h3>
+
+      <div class="section-body">
+        <terminal-settings-colorpicker
+            preference="background-color">
+        </terminal-settings-colorpicker>
+      </div>
     </section>
 
     <section>
       <h3>Text Styling</h3>
+
+      <div class="section-body">
+        <terminal-settings-colorpicker
+            preference="foreground-color">
+        </terminal-settings-colorpicker>
+      </div>
     </section>
 
     <section>
       <h3>Cursor Styling</h3>
 
       <div class="section-body">
+        <terminal-settings-colorpicker
+            preference="cursor-color">
+        </terminal-settings-colorpicker>
         <terminal-settings-checkbox
             description="Cursor Blink"
             preference="cursor-blink">

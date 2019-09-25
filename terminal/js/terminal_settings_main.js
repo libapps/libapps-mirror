@@ -7,6 +7,8 @@
  */
 import {TerminalSettingsCheckboxElement} from './terminal_settings_checkbox.js';
 import {TerminalSettingsDropdownElement} from './terminal_settings_dropdown.js';
+import {TerminalSettingsColorpickerElement} from
+    './terminal_settings_colorpicker.js';
 import {
   TerminalSettingsCategoryOptionElement,
   TerminalSettingsCategorySelectorElement
@@ -21,6 +23,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
       const elements = [
           TerminalSettingsCheckboxElement,
           TerminalSettingsDropdownElement,
+          TerminalSettingsColorpickerElement,
           TerminalSettingsCategoryOptionElement,
           TerminalSettingsCategorySelectorElement];
 
