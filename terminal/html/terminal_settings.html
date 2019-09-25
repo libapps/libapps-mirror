@@ -10,18 +10,70 @@
 </head>
 <body>
   <!-- TODO(juwa@google.com): Add translations -->
-  <h1>Settings</h1>
-  <terminal-settings-checkbox
-      description="Cursor Blink"
-      preference="cursor-blink">
-  </terminal-settings-checkbox>
-  <terminal-settings-checkbox
-      description="Copy On Select"
-      preference="copy-on-select">
-  </terminal-settings-checkbox>
-  <terminal-settings-dropdown
-      description="Cursor Shape"
-      preference="cursor-shape">
-  </terminal-settings-dropdown>
+  <terminal-settings-category-selector>
+    <terminal-settings-category-option for="appearance">
+      <h2 slot="title">Appearance</h2>
+    </terminal-settings-category-option>
+    <terminal-settings-category-option for="mousekeyboard">
+      <h2 slot="title">Mouse & Keyboard</h2>
+    </terminal-settings-category-option>
+    <terminal-settings-category-option for="miscellaneous">
+      <h2 slot="title">Miscellaneous</h2>
+    </terminal-settings-category-option>
+  </terminal-settings-category-selector>
+
+  <section id="appearance" class="terminal-settings-category">
+    <section>
+      <h3>Background Color</h3>
+    </section>
+
+    <section>
+      <h3>Text Styling</h3>
+    </section>
+
+    <section>
+      <h3>Cursor Styling</h3>
+
+      <div class="section-body">
+        <terminal-settings-checkbox
+            description="Cursor Blink"
+            preference="cursor-blink">
+        </terminal-settings-checkbox>
+        <terminal-settings-dropdown
+            description="Cursor Shape"
+            preference="cursor-shape">
+        </terminal-settings-dropdown>
+      </div>
+    </section>
+  </section>
+
+  <section id="mousekeyboard" class="terminal-settings-category">
+    <section>
+      <h3>Copy Paste</h3>
+
+      <div class="section-body">
+        <terminal-settings-checkbox
+            description="Copy On Select"
+            preference="copy-on-select">
+        </terminal-settings-checkbox>
+        <terminal-settings-checkbox
+            description="Show Notification When Copying"
+            preference="enable-clipboard-notice">
+        <terminal-settings-checkbox
+            description="Mouse Right Click Pastes"
+            preference="mouse-right-click-paste">
+        </terminal-settings-checkbox>
+      </div>
+    </section>
+  </section>
+
+  <section id="miscellaneous" class="terminal-settings-category">
+      <div class="section-body">
+        <terminal-settings-checkbox
+            description="Close Window On Exit"
+            preference="close-on-exit">
+        </terminal-settings-checkbox>
+      </div>
+  </section>
 </body>
 </html>

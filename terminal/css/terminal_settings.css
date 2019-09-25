@@ -5,9 +5,52 @@
  */
 
 html {
-  font-family: serif;
+  color: rgb(95, 99, 104);
+  font-family: 'Roboto';
+  font-size: small;
+  line-height: 2.65em;
 }
 
-terminal-settings-checkbox {
+body {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 0px;
+  padding: 0px;
+}
+
+terminal-settings-category-option {
+  cursor: pointer;
+}
+
+terminal-settings-category-option > h2 {
+  border-radius: 0 20px 20px 0;
+  padding: 0 40px 0 20px;
+  user-select: none;
+}
+
+terminal-settings-category-option:hover > h2 {
+  background-color: rgb(240, 240, 240);
+}
+
+terminal-settings-category-option[active] > h2 {
+  background-color: rgb(210, 227, 252);
+  color: rgb(26, 115, 232);
+}
+
+.terminal-settings-category {
+  display: none;
+  flex-grow: 1;
+  margin: 0 40px;
+}
+
+.terminal-settings-category[active-category] {
+  display: block;
+}
+
+.section-body {
+  padding: 0 50px;
+}
+
+.section-body > * {
   display: block;
 }

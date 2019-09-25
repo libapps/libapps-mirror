@@ -7,6 +7,10 @@
  */
 import {TerminalSettingsCheckboxElement} from './terminal_settings_checkbox.js';
 import {TerminalSettingsDropdownElement} from './terminal_settings_dropdown.js';
+import {
+  TerminalSettingsCategoryOptionElement,
+  TerminalSettingsCategorySelectorElement
+} from './terminal_settings_category_selector.js';
 
 window.addEventListener('DOMContentLoaded', (event) => {
   lib.init(() => {
@@ -14,12 +18,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
     window.preferenceManager = new window.PreferenceManager('default');
 
     window.preferenceManager.readStorage(() => {
-      customElements.define(
-          TerminalSettingsCheckboxElement.is,
-          TerminalSettingsCheckboxElement);
-      customElements.define(
-          TerminalSettingsDropdownElement.is,
-          TerminalSettingsDropdownElement);
+      const elements = [
+          TerminalSettingsCheckboxElement,
+          TerminalSettingsDropdownElement,
+          TerminalSettingsCategoryOptionElement,
+          TerminalSettingsCategorySelectorElement];
+
+      for (const element of elements) {
+        customElements.define(element.is, element);
+      }
     });
   });
 });
