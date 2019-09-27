@@ -250,6 +250,30 @@ def clean():
 
     shutil.rmtree(libdot.node.NODE_MODULES_DIR, ignore_errors=True)
 
+    # Sync uid/gid settings in the output artifacts.  The docker container
+    # runs all code as root, but the accounts outside won't be that.  Look
+    # at the source tree created outside the container for the right values.
+    st = os.stat(kokoro.LIBAPPS_DIR)
+    uid = st.st_uid
+    gid = st.st_gid
+    if uid != os.getuid():
+        def chown(path):
+            if os.path.islink(path):
+                return
+            try:
+                os.chown(path, uid, gid)
+            except OSError as e:
+                logging.warning('Unable to chown(%s, %s, %s): %s',
+                                path, uid, gid, e)
+
+        logging.info('Changing ownership of artifacts dir to %i:%i', uid, gid)
+        chown(ARTIFACTS_DIR)
+        for root, dirs, files in os.walk(ARTIFACTS_DIR):
+            for d in dirs:
+                chown(os.path.join(root, d))
+            for f in files:
+                chown(os.path.join(root, f))
+
 
 def setup():
     """Set up the overall state before we build/test."""
