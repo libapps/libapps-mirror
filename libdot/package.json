@@ -22,7 +22,7 @@
   },
   "homepage": "https://chromium.googlesource.com/apps/libapps/+/HEAD/libdot",
   "scripts": {
-    "prepare": "./bin/concat -i concat/libdot.concat -o js/libdot.js && cd js && terser libdot.js --compress --mangle --output libdot.min.js --source-map url=libdot.min.js.map,includeSources",
+    "prepare": "./bin/mkdist && cd js && terser libdot.js --compress --mangle --output libdot.min.js --source-map url=libdot.min.js.map,includeSources",
     "test": "./bin/load_tests"
   },
   "devDependencies": {
