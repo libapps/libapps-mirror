@@ -273,9 +273,12 @@ def _get_default_paths():
     # Use relpath for nicer default output.
     # Sort to ensure lib.js comes before lib_array.js, etc.
     # Filter out the generated libdot.js/libdot.min.js/etc...
+    all_paths = (
+        glob.glob(os.path.join(libdot.DIR, 'js', '*.js')) +
+        glob.glob(os.path.join(libdot.DIR, 'third_party', '*', '*.js')))
     return sorted(
         os.path.relpath(x, os.getcwd())
-        for x in glob.glob(os.path.join(libdot.DIR, 'js', '*.js'))
+        for x in all_paths
         if not os.path.basename(x).startswith('libdot.'))
 
 
