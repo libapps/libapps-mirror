@@ -140,7 +140,12 @@ def unpack(archive, cwd=None, files=()):
         files = []
 
     logging.info('Unpacking %s', os.path.basename(archive))
-    run(['tar', '-xf', archive] + files, cwd=cwd)
+    # We use relpath here to help out tar on platforms where it doesn't like
+    # paths with colons in them (e.g. Windows).  We have to construct the full
+    # before running through relpath as relative archives will implicitly be
+    # checked against os.getcwd rather than the explicit cwd.
+    src = os.path.relpath(os.path.join(cwd, archive), cwd)
+    run(['tar', '-xf', src] + files, cwd=cwd)
 
 
 def fetch(uri, output):
