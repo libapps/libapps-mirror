@@ -137,7 +137,7 @@ def _run_linter(cmd, cwd):
 
 def test_jslint():
     """Lint all our JS files."""
-    ret = True
+    ret = []
     for pkg in ('libdot', 'hterm', 'nassh', 'terminal'):
         pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
         cmd = [
@@ -146,7 +146,8 @@ def test_jslint():
             os.path.join(GERRIT_COMMENTS_DIR, pkg, '%(tool)',
                          GERRIT_COMMENTS_NAME),
         ]
-        ret &= _run_linter(cmd, pkg_dir)
+        if not _run_linter(cmd, pkg_dir):
+            ret.append(('jslint', pkg))
     return ret
 
 
@@ -193,7 +194,7 @@ def test_pylint():
                             yield os.path.relpath(full_path, pkg_dir)
 
     # Lint the main dirs with the common pylint.
-    ret = True
+    ret = []
     for pkg in ('kokoro', 'libdot', 'hterm', 'nassh', 'ssh_client', 'terminal'):
         pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
 
@@ -211,14 +212,15 @@ def test_pylint():
         ]
 
         pyfiles = list(find_pyfiles(pkg, pkg_dir))
-        ret &= _run_linter(cmd + pyfiles, pkg_dir)
+        if not _run_linter(cmd + pyfiles, pkg_dir):
+            ret.append(('pylint', pkg))
 
     return ret
 
 
 def test_unittests():
     """Run all the unittests."""
-    ret = True
+    ret = []
     for pkg in ('libdot', 'hterm', 'nassh', 'terminal'):
         pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
         if os.path.exists(os.path.join(pkg_dir, 'package.json')):
@@ -228,21 +230,18 @@ def test_unittests():
         result = libdot.run(cmd, check=False, cwd=pkg_dir)
         if result.returncode:
             logging.error('%s test suite exited %i', pkg, result.returncode)
-            ret = False
+            ret.append(('unittests', pkg))
     return ret
 
 
 def test():
     """Test the various components."""
-    success = True
-
     # Run all the tests before aborting.
-    success &= test_jslint()
-    success &= test_pylint()
-    success &= test_unittests()
-
-    if not success:
+    failures = test_jslint() + test_pylint() + test_unittests()
+    if failures:
         logging.error('Some tests failed!  See above for details.')
+        for (step, pkg) in failures:
+            logging.error('  %s failed %s phase.', pkg, step)
         sys.exit(1)
 
 
@@ -265,6 +264,7 @@ def clean():
     gid = st.st_gid
     if uid != os.getuid():
         def chown(path):
+            """Helper to chown |path| to |uid| & |gid|."""
             if os.path.islink(path):
                 return
             try:
