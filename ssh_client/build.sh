@@ -5,6 +5,9 @@
 
 set -xe
 
+# Default version must come first.
+SSH_VERSIONS=( 8.0 )
+
 ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 
 DEBUG=0
@@ -34,7 +37,9 @@ mkdir -p output
 ./third_party/ldns/build
 
 ./third_party/mandoc/build
-./third_party/openssh-8.0/build
+for ver in "${SSH_VERSIONS[@]}"; do
+  ./third_party/openssh-${ver}/build
+done
 
 BUILD_ARGS=()
 if [[ $DEBUG == 1 ]]; then
@@ -44,7 +49,12 @@ else
   tarname="release.tar"
 fi
 
-make -C src clean && make -C src -j${ncpus} "${BUILD_ARGS[@]}"
+first="true"
+for version in "${SSH_VERSIONS[@]}"; do
+  make -C src -j${ncpus} "${BUILD_ARGS[@]}" \
+    SSH_VERSION="${version}" DEFAULT_VERSION="${first}"
+  first=
+done
 
 cd output
 tar cf - \

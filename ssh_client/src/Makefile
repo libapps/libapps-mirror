@@ -15,6 +15,13 @@ WORKDIR = $(OUTPUT)/build/$(BUILD_NAME)/$(RELEASE)
 EXEDIR = $(WORKDIR)
 D = $(OUTPUT)/plugin/$(BUILD_NAME)
 
+SSH_VERSION = 8.0
+DEFAULT_VERSION = true
+ifeq ($(DEFAULT_VERSION),)
+D := $(D)-openssh-$(SSH_VERSION)
+EXEDIR := $(EXEDIR)/$(SSH_VERSION)
+endif
+
 $(shell mkdir -p $(WORKDIR) $(EXEDIR) $(D))
 NACL_SDK_ROOT ?= $(OUTPUT)/naclsdk
 
@@ -85,8 +92,8 @@ $(POBJS): $(WORKDIR)/%_p.o : $(CURDIR)/%.cc
 	$(PNACL_CXX) -o $@ -c $< $(PNACL_CXXFLAGS)
 
 $(EXEDIR)/$(newlib_pexe): $(POBJS)
-	$(PNACL_CXX) -o $@ $^ -lopenssh -lssh \
-		-lopenbsd-compat -lldns \
+	$(PNACL_CXX) -o $@ $^ -lopenssh-$(SSH_VERSION) -lssh-$(SSH_VERSION) \
+		-lopenbsd-compat-$(SSH_VERSION) -lldns \
 		$(PNACL_LDFLAGS) $(PNACL_CXXFLAGS)
 
 $(EXEDIR)/$(PROJECT)_nl_arm.dbg.nexe: $(EXEDIR)/$(newlib_pexe)

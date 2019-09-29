@@ -136,9 +136,14 @@ def src_compile(metadata):
 def src_install(metadata):
     """Install the package."""
     tc = metadata['toolchain']
+    # Turn "8.0p1" into just "8.0".
+    major_minor_version = metadata['PV'][:3]
     for lib in ('libopenssh.a', 'libssh.a',
                 'openbsd-compat/libopenbsd-compat.a'):
-        ssh_client.copy(lib, os.path.join(tc.libdir, os.path.basename(lib)))
+        # Transform libssh.a to libssh-8.0.a.
+        base, ext = os.path.splitext(os.path.basename(lib))
+        target = '%s-%s%s' % (base, major_minor_version, ext)
+        ssh_client.copy(lib, os.path.join(tc.libdir, target))
 
     plugin_docs = os.path.join(ssh_client.OUTPUT, 'plugin', 'docs')
     os.makedirs(plugin_docs, exist_ok=True)
