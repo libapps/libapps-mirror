@@ -203,8 +203,15 @@ def test_pylint():
             # Use the common one.
             pylint = pylint_libdot
 
+        cmd = [
+            pylint,
+            '--gerrit-comments-file',
+            os.path.join(GERRIT_COMMENTS_DIR, pkg, '%(tool)',
+                         GERRIT_COMMENTS_NAME),
+        ]
+
         pyfiles = list(find_pyfiles(pkg, pkg_dir))
-        ret &= _run_linter([pylint] + pyfiles, pkg_dir)
+        ret &= _run_linter(cmd + pyfiles, pkg_dir)
 
     return ret
 

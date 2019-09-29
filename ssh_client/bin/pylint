@@ -8,24 +8,12 @@
 
 from __future__ import print_function
 
-import os
 import sys
 
 import ssh_client
 import libdot
 
 
-def main(argv):
-    """The main func!"""
-    env = os.environ.copy()
-    pythonpath = ':'.join([libdot.BIN_DIR, ssh_client.BIN_DIR])
-    if 'PYTHONPATH' in env:
-        pythonpath = '%s:%s' % (pythonpath, env['PYTHONPATH'])
-    env['PYTHONPATH'] = pythonpath
-
-    pylint = os.path.join(libdot.BIN_DIR, 'pylint')
-    os.execve(pylint, [pylint] + argv, env)
-
-
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:]))
+    sys.exit(libdot.pylint.main(
+        sys.argv[1:], pythonpaths=(ssh_client.BIN_DIR,)))
