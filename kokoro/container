@@ -1,0 +1,176 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Helper to manage the container used by kokoro CI.
+
+This isn't used directly by kokoro, but the container this produces is.
+This is to help devs quickly iterate & reproduce the CI environment.
+
+This will use the docker image name "ssh_client" everywhere.
+
+No state is retained across invocations.
+The libapps tree is bind mounted into the container at /libapps/.
+That is used for source access & artifacts output.
+
+The current tree state (even if it's dirty) is used.
+
+Actions:
+  all: Run build+test steps.
+  build: Build the container using the Dockerfile.
+         Also archives & loads it into docker.
+         This must be run before any other step.
+  enter: Enter the container for debugging things.
+  test: Run /kokoro/build tests in the container.
+"""
+
+from __future__ import print_function
+
+import argparse
+import grp
+import os
+import sys
+
+import kokoro  # pylint: disable=unused-import
+import libdot
+
+
+CONTAINER_NAME = 'ssh_client'
+IMAGE_NAME = '%s-image.tar.xz' % (CONTAINER_NAME,)
+
+
+def cleanup():
+    """Clean up random artifact outputs.
+
+    We want to make sure every kokoro run starts from the same state.
+    When these are owned by root, docker & users get upset.
+    """
+    cmd = ['rm', '-rf', 'artifacts', 'hterm/dist', 'nassh/dist',
+           'ssh_client/output']
+    with open('/dev/null', 'wb') as fp:
+        ret = libdot.run(cmd, cwd=libdot.LIBAPPS_DIR, check=False, stderr=fp)
+    if ret.returncode:
+        libdot.run(['sudo'] + cmd, cwd=libdot.LIBAPPS_DIR)
+
+
+def sudo_run(opts, cmd, **kwargs):
+    """Run |cmd| through sudo if requested."""
+    if kwargs.get('shell'):
+        if opts.sudo_cmd:
+            cmd = opts.sudo_cmd[0] + ' ' + cmd
+    else:
+        cmd = opts.sudo_cmd + cmd
+    return libdot.run(cmd, **kwargs)
+
+
+def build(opts):
+    """Build the container."""
+    sudo_run(opts, ['docker', 'build', '--no-cache', '-t', CONTAINER_NAME, '.'],
+             cwd=libdot.LIBAPPS_DIR)
+    # Would be nice to not use shell=True here.
+    with open(IMAGE_NAME, 'wb') as fp:
+        sudo_run(opts, 'docker save ssh_client | xz -T0 -9 -v',
+                 cwd=libdot.LIBAPPS_DIR, shell=True, stdout=fp)
+    sudo_run(opts, ['docker', 'load', '--input', IMAGE_NAME],
+             cwd=libdot.LIBAPPS_DIR)
+
+
+def run_docker(opts, docker_args=(), cmd_args=()):
+    """Invoke docker."""
+    distfiles = os.path.join(libdot.LIBAPPS_DIR, 'ssh_client', 'distfiles')
+    base_cmd = [
+        'docker', 'run',
+        '--env', 'VCSID=HEAD',
+        '--env', 'DISTDIR=/libapps/ssh_client/distfiles',
+        '--volume', '%s:/libapps' % (libdot.LIBAPPS_DIR,),
+        '--volume', '%s:/libapps/ssh_client/distfiles' % (distfiles,),
+    ]
+
+    # If we're running in a CrOS checkout, we have to bind mount in .repo so
+    # that the local .git tree works.
+    repo_dir = os.path.join(libdot.LIBAPPS_DIR, '..', '..', '..', '.repo')
+    if os.path.isdir(repo_dir):
+        base_cmd += ['--volume', '%s:/.repo:ro' % (repo_dir,)]
+
+    # The kokoro build detects this env var for presubmit.
+    if opts.type == 'presubmit':
+        base_cmd += ['--env', 'KOKORO_GERRIT_REVISION=HEAD']
+
+    cmd = base_cmd + list(docker_args) + [CONTAINER_NAME] + list(cmd_args)
+    return sudo_run(opts, cmd, cwd=libdot.LIBAPPS_DIR, check=False)
+
+
+def enter(opts):
+    """Enter the container."""
+    return run_docker(opts, docker_args=('-i', '-t'),
+                      cmd_args=('/bin/bash', '-l', '-i'))
+
+
+def test(opts):
+    """Test the container."""
+    return run_docker(opts)
+
+
+def docker_needs_sudo():
+    """See whether we need sudo."""
+    try:
+        group = grp.getgrnam('docker')
+    except KeyError:
+        return True
+
+    return group.gr_gid in os.getgroups()
+
+
+def get_parser():
+    """Get a command line parser."""
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument('-d', '--debug', action='store_true',
+                        help='Run with debug output.')
+    parser.add_argument('--type', choices=('presubmit', 'release'),
+                        default='presubmit',
+                        help='Type of build to run (default: %(default)s)')
+    parser.add_argument('--sudo', action='store_true',
+                        help='Use sudo to run docker (default: auto)')
+    parser.add_argument('--no-sudo', dest='sudo', action='store_false',
+                        help='Do not use sudo to run docker')
+    parser.add_argument('action',
+                        choices=('build', 'enter', 'test', 'all'),
+                        help='What to do!')
+    return parser
+
+
+def main(argv):
+    """The main func!"""
+    parser = get_parser()
+    opts = parser.parse_args(argv)
+    libdot.setup_logging(debug=opts.debug)
+
+    if opts.sudo is None:
+        opts.sudo = docker_needs_sudo()
+    opts.sudo_cmd = ['sudo'] if opts.sudo else []
+
+    cleanup()
+    if opts.action == 'build':
+        build(opts)
+        return 0
+    elif opts.action == 'enter':
+        return enter(opts).returncode
+    elif opts.action == 'test':
+        return test(opts).returncode
+    elif opts.action == 'all':
+        build(opts)
+        ret = test(opts)
+        if ret.returncode:
+            return ret.returncode
+        return 0
+
+    parser.error('unhandled action %s' % (opts.action,))
+    return 1
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))

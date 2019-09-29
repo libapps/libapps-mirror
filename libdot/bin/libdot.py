@@ -98,6 +98,9 @@ def symlink(target, path):
 
 def cmdstr(cmd):
     """Return a string for the |cmd| list w/reasonable quoting."""
+    if isinstance(cmd, str):
+        return cmd
+
     quoted = []
     for arg in cmd:
         if ' ' in arg:
