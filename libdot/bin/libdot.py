@@ -29,20 +29,43 @@ DIR = os.path.dirname(BIN_DIR)
 LIBAPPS_DIR = os.path.dirname(DIR)
 
 
+class ColoredFormatter(logging.Formatter):
+    """Colorize warning/error messages automatically."""
+
+    _COLOR_MAPPING = {
+        'WARNING': '\033[1;33m',
+        'ERROR': '\033[1;31m'
+    }
+    _RESET = '\033[m'
+
+    def __init__(self, *args, **kwargs):
+        """Initialize!"""
+        self._use_colors = 'NOCOLOR' not in os.environ
+        super(ColoredFormatter, self).__init__(*args, **kwargs)
+
+    def format(self, record):
+        """Formats |record| with color."""
+        msg = super(ColoredFormatter, self).format(record)
+        color = self._COLOR_MAPPING.get(record.levelname)
+        if self._use_colors and color:
+            msg = '%s%s%s' % (color, msg, self._RESET)
+        return msg
+
+
 def setup_logging(debug=False):
     """Setup the logging module."""
-    fmt = u'%(asctime)s: %(levelname)-7s: '
+    fmt = '%(asctime)s: %(levelname)-7s: '
     if debug:
-        fmt += u'%(filename)s:%(funcName)s: '
-    fmt += u'%(message)s'
+        fmt += '%(filename)s:%(funcName)s: '
+    fmt += '%(message)s'
 
     # 'Sat, 05 Oct 2013 18:58:50 -0400 (EST)'
     tzname = time.strftime('%Z', time.localtime())
-    datefmt = u'%a, %d %b %Y %H:%M:%S ' + tzname
+    datefmt = '%a, %d %b %Y %H:%M:%S ' + tzname
 
     level = logging.DEBUG if debug else logging.INFO
 
-    formatter = logging.Formatter(fmt, datefmt)
+    formatter = ColoredFormatter(fmt, datefmt)
     handler = logging.StreamHandler(stream=sys.stdout)
     handler.setFormatter(formatter)
 
