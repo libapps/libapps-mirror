@@ -294,13 +294,15 @@ def get_parser():
     return parser
 
 
-def main(argv, paths=(), eslint_args=(), closure_args=DEFAULT_CLOSURE_ARGS):
+def main(argv, paths=(), mkdeps=None, eslint_args=(),
+         closure_args=DEFAULT_CLOSURE_ARGS):
     """The common main func for all linters.
 
     Args:
       argv: The command line to process.
-      get_default_paths: Function to get all the default set of files to lint.
-          If the user doesn't specify any, we'll get them from here.
+      paths: The default set of files to lint.  If the user doesn't specify
+          any, we'll use these instead.
+      mkdeps: Callback to build dependencies after we've initialized.
       eslint_args: Extra arguments to pass to eslint.
       closure_args: Extra arguments to pass to closure-compiler.
     """
@@ -316,6 +318,8 @@ def main(argv, paths=(), eslint_args=(), closure_args=DEFAULT_CLOSURE_ARGS):
             print('No files to lint.')
             return 0
 
+    if mkdeps:
+        mkdeps(opts)
     return 0 if all((
         run_eslint(opts, eslint_args), run_closure(opts, closure_args),
     )) else 1
