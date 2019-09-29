@@ -126,7 +126,7 @@ nassh.GoogleRelay.prototype.init = function(opt_resumePath) {
       }
 
       // If we made it this far, we're probably not stuck in a redirect loop.
-      sessionStorage.removeItem('googleRelay.redirectCount');
+      window.sessionStorage.removeItem('googleRelay.redirectCount');
     } else {
       // If everything is ok, this should be the second time we've been asked
       // to do the same init.  (The first time would have redirected.)  If this

@@ -132,7 +132,7 @@ nassh.agent.Agent.prototype.handleRequest = function(rawRequest) {
  * Map message (request) types to handler functions.
  *
  * @type {!Object<!nassh.agent.messages.Numbers,
- *     function(this:!nassh.agent.Agent, !nassh.agent.Message):
+ *     function(this:nassh.agent.Agent, !nassh.agent.Message):
  *     !nassh.agent.Message>}
  * @private
  * @suppress {lintChecks} Allow non-primitive prototype property.

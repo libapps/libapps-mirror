@@ -157,7 +157,6 @@ nassh.agent.messages
         lib.codec.codeUnitArrayToString(pk.readString());
     message.fields.publicKeyBytes = pk.readString();
     if (message.fields.publicKeyCurve == 'nistp256') {
-      const p256 = new nassh.agent.Message(0, message.fields.publicKeyBytes);
       message.fields.publicKeyX = message.fields.publicKeyBytes.slice(1, 33);
       message.fields.publicKeyY = message.fields.publicKeyBytes.slice(33);
     }
@@ -353,7 +352,7 @@ nassh.agent.messages.OidToCurveInfo = {
  * Map key types to generator function.
  *
  * @type {!Object<!nassh.agent.messages.KeyTypes,
- *     function(...[*]): !Uint8Arrays>}
+ *     function(...): !Uint8Arrays>}
  * @private
  */
 nassh.agent.messages.keyBlobGenerators_ = {};

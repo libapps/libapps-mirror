@@ -47,7 +47,10 @@ window.onload = function() {
  * The Crosh command uses terminalPrivate extension API to create and use crosh
  * process on Chrome OS machine.
  *
- * @param {!Object} argv The argument object passed in from the Terminal.
+ * @param {{
+     commandName: string,
+ *   args: !Array<string>,
+ * }} argv The argument object passed in from the Terminal.
  * @constructor
  */
 function Crosh(argv) {
@@ -174,12 +177,12 @@ Crosh.openNewWindow_ = function(url) {
 /**
  * Called when an event from the crosh process is detected.
  *
- * @param id Id of the process the event came from.
- * @param type Type of the event.
+ * @param {string} id Id of the process the event came from.
+ * @param {string} type Type of the event.
  *             'stdout': Process output detected.
  *             'exit': Process has exited.
- * @param text Text that was detected on process output.
-**/
+ * @param {string} text Text that was detected on process output.
+ */
 Crosh.prototype.onProcessOutput_ = function(id, type, text) {
   if (this.id_ === null || id !== this.id_) {
     return;
@@ -246,8 +249,10 @@ Crosh.prototype.run = function() {
 };
 
 /**
- * @param {!Event} e
- * @return {string}
+ * Registers with window.onbeforeunload and runs when page is unloading.
+ *
+ * @param {!Event} e Before unload event.
+ * @return {string} Message to display.
  */
 Crosh.prototype.onBeforeUnload_ = function(e) {
   // Note: This message doesn't seem to be shown by browsers.

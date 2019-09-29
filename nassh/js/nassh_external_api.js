@@ -73,14 +73,19 @@ nassh.External.COMMANDS.mount = (request, sender, sendResponse) => {
 };
 
 /**
- * @typedef {{url: string, width: number=, height: number=}} NewWindowSettings
+ * @typedef {{
+ *     url: string,
+ *     width: (number|undefined),
+ *     height: (number|undefined),
+ * }}
  */
+nassh.NewWindowSettings;
 
 /**
  * Opens a new window.
  *
  * @param {!Object} response The response to send back to the caller.
- * @param {!NewWindowSettings} request Customize the new window behavior.
+ * @param {!nassh.NewWindowSettings} request Customize the new window behavior.
  * @param {{id:string}} sender chrome.runtime.MessageSender.
  * @param {function(!Object=)} sendResponse called to send response.
  */

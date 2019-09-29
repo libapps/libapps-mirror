@@ -138,7 +138,7 @@ nassh.PreferencesEditor.debounce = function(input, callback, opt_timeout) {
  * @param {string} profileId The profile name to read settings from.
  */
 nassh.PreferencesEditor.prototype.selectProfile = function(profileId) {
-  term_.setProfile(profileId);
+  window.term_.setProfile(profileId);
   var prefsEditor = this;
   var prefs = new hterm.PreferenceManager(profileId);
   this.prefs_ = prefs;
@@ -393,8 +393,6 @@ nassh.PreferencesEditor.prototype.onInputChange = function(input) {
  * Will basically rewrite the displayed HTML code on the fly.
  */
 nassh.PreferencesEditor.prototype.syncPage = function() {
-  var prefsEditor = this;
-
   var eles = document.getElementById('settings');
 
   // Clear out existing settings table.
@@ -532,7 +530,6 @@ nassh.PreferencesEditor.prototype.createInput = function(key) {
   };
 
   var input = document.createElement('input');
-  var prefValue = this.prefs_.get(key);
   switch(this.getPreferenceType(key)) {
     case 'bool':
       input.type = 'checkbox';

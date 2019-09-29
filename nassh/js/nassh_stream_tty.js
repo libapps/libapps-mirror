@@ -77,7 +77,6 @@ nassh.InputBuffer.prototype.write = function(data) {
  */
 nassh.InputBuffer.prototype.read = function(size, onRead) {
   var avail = this.data_.length;
-  var rv;
 
   if (avail == 0) {
     // No data is available. Wait for data to be available and send it to the

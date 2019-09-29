@@ -129,7 +129,7 @@ it('nasftp-unknown-argv', function(done) {
  * Check known command with too few arguments.
  */
 it('nasftp-too-few-args', function(done) {
-  this.client.symLink.return = () => fail();
+  this.client.symLink.return = () => assert.fail();
 
   this.cli.dispatchCommand_('symlink 1')
     .then(() => done());
@@ -139,7 +139,7 @@ it('nasftp-too-few-args', function(done) {
  * Check known command with too many arguments.
  */
 it('nasftp-too-many-args', function(done) {
-  this.client.symLink.return = () => fail();
+  this.client.symLink.return = () => assert.fail();
 
   this.cli.dispatchCommand_('symlink 1 2 3')
     .then(() => done());

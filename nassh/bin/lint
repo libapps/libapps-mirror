@@ -16,6 +16,10 @@ import nassh
 import libdot
 
 
+# Path to generated deps file that terminal uses for libdot/hterm/etc...
+DEPS_FILE = os.path.join(nassh.DIR, 'js', 'nassh_deps.concat.js')
+
+
 def _get_default_paths():
     """Get list of paths to lint by default."""
     # All files in js/*.js excluding generated files.
@@ -27,11 +31,19 @@ def _get_default_paths():
         if not os.path.basename(x).startswith('nassh_deps'))
 
 
+def mkdeps(_opts):
+    """Build the deps we might use when linting."""
+    if not os.path.exists(DEPS_FILE):
+        libdot.run([os.path.join(nassh.DIR, 'bin', 'mkdeps')])
+
+
 def main(argv):
     """The main func!"""
-    return libdot.lint.main(argv, paths=_get_default_paths(),
-                            closure_args=['--jscomp_error=lintChecks',
-                                          '--jscomp_off=moduleLoad'])
+    # TODO(joelhockey): Fix nassh and don't turn off 'checkTypes'.
+    closure_args = list(libdot.lint.DEFAULT_CLOSURE_ARGS) + [
+        '--jscomp_off=checkTypes', os.path.relpath(DEPS_FILE)]
+    return libdot.lint.main(argv, paths=_get_default_paths(), mkdeps=mkdeps,
+                            closure_args=closure_args)
 
 
 if __name__ == '__main__':

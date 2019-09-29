@@ -417,7 +417,7 @@ nassh.ConnectDialog.prototype.save = function() {
 
   if (dirtyForm) {
     if (!prefs) {
-      var prefs = this.prefs_.createProfile();
+      prefs = this.prefs_.createProfile();
       var rec = new nassh.ConnectDialog.ProfileRecord(
           prefs.id, prefs, changedFields['description']);
       this.currentProfileRecord_ = rec;
@@ -611,11 +611,11 @@ nassh.ConnectDialog.prototype.updateNasshOptionsPlaceholder_ = function() {
       hostname = this.$f('hostname').placeholder;
 
     const googleHostRegexp = new RegExp(
-        '\.(' +
-        'corp\.google\.com|' +
-        'c\.googlers\.com|' +
-        'cloud\.googlecorp\.com|' +
-        '(internal|proxy)\.gcpnode\.com' +
+        '\\.(' +
+        'corp\\.google\\.com|' +
+        'c\\.googlers\\.com|' +
+        'cloud\\.googlecorp\\.com|' +
+        '(internal|proxy)\\.gcpnode\\.com' +
         ')$');
     if (hostname.match(googleHostRegexp)) {
       value = '--config=google';
@@ -766,7 +766,7 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(opt_onSuccess) {
     // TODO: Delete this at some point after Aug 2019.  Jan 2021 should be long
     // enough for users to migrate.
     lib.fs.readDirectory(this.fileSystem_.root, '/.ssh/')
-      .then(onReadSuccess),
+      .then(onReadSuccess).catch(onReadError),
 
     // Load new keys from /.ssh/identity/.
     lib.fs.readDirectory(this.fileSystem_.root, '/.ssh/identity/')

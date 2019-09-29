@@ -16,7 +16,6 @@ nassh.agent.backends = {};
  *
  * @param {!nassh.agent.Agent.UserIO} userIO Used for user-facing terminal IO.
  * @constructor
- * @interface
  */
 nassh.agent.Backend = function(userIO) {
   /**

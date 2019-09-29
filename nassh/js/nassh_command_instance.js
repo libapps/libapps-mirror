@@ -2,6 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+/**
+ * @fileoverview
+ * @suppress {moduleLoad}
+ */
+
 import {punycode} from './nassh_deps.rollup.js';
 
 /**
@@ -385,7 +390,7 @@ nassh.CommandInstance.prototype.promptForDestination_ = function() {
   };
 
   // Clear retry count whenever we show the dialog.
-  sessionStorage.removeItem('googleRelay.redirectCount');
+  window.sessionStorage.removeItem('googleRelay.redirectCount');
 
   connectDialog.show();
 };
@@ -981,6 +986,7 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
   // If they're using an internationalized domain name (IDN), then punycode
   // will return a different ASCII name.  Include that in the display for the
   // user so it's clear where we end up trying to connect to.
+  /** @suppress {checkVars} */
   var idn_hostname = punycode.toASCII(params.hostname);
   var disp_hostname = params.hostname;
   if (idn_hostname != params.hostname)
@@ -1392,8 +1398,10 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
 };
 
 /**
- * @param {!Event} e
- * @return {string=}
+ * Registers with window.onbeforeunload and runs when page is unloading.
+ *
+ * @param {!Event} e Before unload event.
+ * @return {string} Message to display.
  */
 nassh.CommandInstance.prototype.onBeforeUnload_ = function(e) {
   if (hterm.windowType == 'popup')

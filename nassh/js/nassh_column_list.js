@@ -44,8 +44,8 @@ nassh.ColumnList.prototype.decorate = function(div) {
   var baseId = this.div_.getAttribute('id');
   if (!baseId) {
     baseId =  lib.f.randomInt(1, 0xffff).toString(16);
-    baseId = lib.f.zpad(baseID, 4);
-    baseId = 'columnlist-' + baseID;
+    baseId = lib.f.zpad(baseId, 4);
+    baseId = 'columnlist-' + baseId;
   }
 
   this.baseId_ = baseId;
@@ -309,7 +309,6 @@ nassh.ColumnList.prototype.onKeyDown_ = function(e) {
 
   var i = this.activeIndex;
   var rc = this.getRowColByIndex_(i);
-  var node = this.getActiveNode_();
 
   switch (e.keyCode) {
     case 38:  // UP

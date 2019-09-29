@@ -45,8 +45,8 @@ window.onload = function() {
   if (hash.indexOf('@') != -1) {
     // URLs containing '@' are legacy v1 redirects.
     var ary = hash.match(/@([^:]+)(?::(\d+))?/);
-    sessionStorage.setItem('googleRelay.relayHost', ary[1]);
-    sessionStorage.setItem('googleRelay.relayPort', ary[2] || '');
+    window.sessionStorage.setItem('googleRelay.relayHost', ary[1]);
+    window.sessionStorage.setItem('googleRelay.relayPort', ary[2] || '');
   } else {
     // URLs not containing '@' are assumed to be v2 URL safe Base64 JSON blobs.
     var blob = atob(nassh.base64UrlToBase64(hash));
@@ -54,8 +54,8 @@ window.onload = function() {
 
     if (params['endpoint']) {
       var [host, port] = params['endpoint'].split(':');
-      sessionStorage.setItem('googleRelay.relayHost', host);
-      sessionStorage.setItem('googleRelay.relayPort', port || '');
+      window.sessionStorage.setItem('googleRelay.relayHost', host);
+      window.sessionStorage.setItem('googleRelay.relayPort', port || '');
     }
 
     if (params['error']) {
@@ -63,7 +63,7 @@ window.onload = function() {
     }
   }
 
-  var path = sessionStorage.getItem('googleRelay.resumePath');
+  var path = window.sessionStorage.getItem('googleRelay.resumePath');
   if (!path) {
     showNasshError('Nowhere to resume to!');
     return;
@@ -74,15 +74,16 @@ window.onload = function() {
 
   // Avoid infinite loops when the relay server rejects us and we redirect
   // back and forth.
-  let count = parseInt(sessionStorage.getItem('googleRelay.redirectCount'));
+  let count =
+      parseInt(window.sessionStorage.getItem('googleRelay.redirectCount'));
   if (isNaN(count))
     count = 0;
   if (++count > 3) {
     showNasshError('Redirected by relay too many times, so giving up.  Sorry.');
-    sessionStorage.removeItem('googleRelay.redirectCount');
+    window.sessionStorage.removeItem('googleRelay.redirectCount');
     return;
   }
-  sessionStorage.setItem('googleRelay.redirectCount', count);
+  window.sessionStorage.setItem('googleRelay.redirectCount', count);
 
   document.location = url;
 };

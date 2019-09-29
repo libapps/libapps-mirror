@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {asn1js, pkijs} from './nassh_deps.rollup.js';
-
 /**
  * @fileoverview An SSH agent backend that supports private keys stored on smart
  * cards, using the Google Smart Card Connector app.
@@ -11,7 +9,11 @@ import {asn1js, pkijs} from './nassh_deps.rollup.js';
  * Note: A single API context with the Google Smart Card Connector Client
  * library is retained on file scope level and shared among all instances of
  * the backend.
+ *
+ * @suppress {moduleLoad}
  */
+
+import {asn1js, pkijs} from './nassh_deps.rollup.js';
 
 /**
  * An SSH agent backend that uses the Google Smart Card Connector library to
@@ -77,6 +79,7 @@ nassh.agent.backends.GSC.CLIENT_TITLE = chrome.runtime.getManifest().name;
  *
  * @readonly
  * @const {string}
+ * @suppress {checkVars}
  */
 nassh.agent.backends.GSC.SERVER_APP_ID =
     GoogleSmartCard.PcscLiteCommon.Constants.SERVER_OFFICIAL_APP_ID;
@@ -694,6 +697,8 @@ nassh.agent.backends.GSC.DataObject = function() {};
  * Recursively parse (a range of) the byte representation of a TLV-encoded data
  * object into a DataObject object.
  * @see https://www.cardwerk.com/smartcards/smartcard_standard_ISO7816-4_annex-d.aspx
+ * TODO(joelhockey): Change return type from an Array with positional values,
+ * to use {{data: ?nassh.agent.backends.GSC.DataObject, index: number}}.
  *
  * @constructs nassh.agent.backends.GSC.DataObject
  * @param {!Uint8Array} bytes The raw bytes of the data object.
@@ -703,7 +708,7 @@ nassh.agent.backends.GSC.DataObject = function() {};
  *     parse.
  * @throws Will throw if the raw data does not follow the specification for
  *     TLV-encoded data objects.
- * @return {[?nassh.agent.backends.GSC.DataObject, number]} A pair of
+ * @return {!Array<*>} A pair of
  *     a DataObject object that is the result of the parsing and an index into
  *     the input byte array which points to the end of the part consumed so
  *     far.
@@ -1050,8 +1055,8 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.appletName = function() {
  * Packs the return values of the thenable into an array if there is not just a
  * single one.
  *
- * @param sCardPromise
- * @return {!Promise<...args>|!Promise<Error>} A promise resolving to the
+ * @param {!Promise} sCardPromise
+ * @return {!Promise} A promise resolving to the
  *     return values of the GSC thenable; a rejecting promise containing an
  *     Error object if an error occurred.
  * @private
@@ -1188,8 +1193,8 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.transmit =
  *
  * Supports continued responses.
  *
- * @param rawResult - A result array formed using execute_ on the result
- *     returned asynchronously by SCardTransmit.
+ * @param {!Uint8Array} rawResult - A result array formed using execute_ on the
+ *     result returned asynchronously by SCardTransmit.
  * @return {!Promise<!Uint8Array>|
  *    !Promise<!nassh.agent.backends.GSC.StatusBytes>} A Promise resolving to
  *    the response; a rejecting Promise containing the status bytes if they
@@ -1379,7 +1384,9 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
               .fromBytes(certificateObject.lookup(0x53).value)
               .lookup(0x70)
               .value;
+      /** @suppress {checkVars} */
       const asn1Certificate = asn1js.fromBER(certificateBytes.buffer);
+      /** @suppress {checkVars} */
       const certificate =
           new pkijs.Certificate({schema: asn1Certificate.result});
       const algorithmId =
@@ -1414,7 +1421,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
         default:
           throw new Error(
               `SmartCardManager.fetchKeyInfo: unsupported PIV algorithm OID: ` +
-              `${algorithmOid}`);
+              `${algorithmId}`);
       }
     default:
       throw new Error(

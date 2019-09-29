@@ -49,7 +49,6 @@ it('splitCommandLine', () => {
     //['-o"foo bar" -o "foo bar"', ['-ofoo bar', '-o', 'foo bar'], ''],
   ];
 
-  var dataSet;
   data.forEach((dataSet) => {
     const opts = nassh.CommandInstance.splitCommandLine(dataSet[0]);
     assert.deepStrictEqual(dataSet[1], opts.args);
@@ -188,7 +187,6 @@ it('parseDestination', () => {
     ['localhost', false],
   ];
 
-  let dataSet;
   data.forEach((dataSet) => {
     const rv = nassh.CommandInstance.parseDestination(dataSet[0]);
     if (rv === false) {

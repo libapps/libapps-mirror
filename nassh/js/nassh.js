@@ -19,18 +19,21 @@ nassh.browserAction =
     window.chrome && chrome.browserAction ? chrome.browserAction :
     null;
 
-/**
- * Register a static initializer for nassh.*.
- *
- * @param {function} onInit The function lib.init() wants us to invoke when
- *     initialization is complete.
- */
-lib.registerInit('nassh', function(onInit) {
-  if (!nassh.defaultStorage)
-    nassh.defaultStorage = new lib.Storage.Chrome(chrome.storage.sync);
+lib.registerInit(
+    'nassh',
+    /**
+     * Register a static initializer for nassh.*.
+     *
+     * @param {function()} onInit The function lib.init() wants us to invoke
+     *     when initialization is complete.
+     */
+    function(onInit) {
+      if (!nassh.defaultStorage) {
+        nassh.defaultStorage = new lib.Storage.Chrome(chrome.storage.sync);
+      }
 
-  onInit();
-});
+      onInit();
+    });
 
 /**
  * Return a formatted message in the current locale.
@@ -55,8 +58,8 @@ nassh.msg = function(name, opt_args) {
  *
  * This will also create the /.ssh/ directory if it does not exits.
  *
- * @return {!Promise(FileSystem, DirectoryEntry)} The root filesystem handle and
- *     a handle to the /.ssh/ directory.
+ * @return {!Promise<!FileSystem, !DirectoryEntry>} The root filesystem handle
+ *     and a handle to the /.ssh/ directory.
  */
 nassh.getFileSystem = function() {
   const requestFS = window.requestFileSystem || window.webkitRequestFileSystem;
