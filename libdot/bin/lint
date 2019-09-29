@@ -217,6 +217,7 @@ def convert_closure_to_kokoro(data):
             'startLine': result['line'],
             'endLine': result.get('endline', result['line']),
             'startCharacter': result['column'],
+            'endCharacter': result['column'],
         }
 
 

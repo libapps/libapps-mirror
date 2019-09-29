@@ -55,7 +55,9 @@ def convert_pylint_to_kokoro(data):
             'path': os.path.relpath(path, libdot.LIBAPPS_DIR),
             'message': msg,
             'startLine': result['line'],
+            'endLine': result['line'],
             'startCharacter': result['column'],
+            'endCharacter': result['column'],
         }
 
 
