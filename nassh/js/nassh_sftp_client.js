@@ -359,8 +359,11 @@ nassh.sftp.Client.prototype.fileStatus = function(path) {
   packet.setUtf8String(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.STAT, packet)
-    .then(response => this.isExpectedResponse_(response, nassh.sftp.packets.AttrsPacket, 'STAT'))
-    .then(response => response.attrs);
+      .then((response) => {
+        return this.isExpectedResponse_(
+            response, nassh.sftp.packets.AttrsPacket, 'STAT');
+      })
+      .then((response) => response.attrs);
 };
 
 
@@ -376,8 +379,11 @@ nassh.sftp.Client.prototype.linkStatus = function(path) {
   packet.setUtf8String(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.LSTAT, packet)
-    .then(response => this.isExpectedResponse_(response, nassh.sftp.packets.AttrsPacket, 'LSTAT'))
-    .then(response => response.attrs);
+      .then((response) => {
+        return this.isExpectedResponse_(
+              response, nassh.sftp.packets.AttrsPacket, 'LSTAT');
+      })
+      .then((response) => response.attrs);
 };
 
 
@@ -393,8 +399,11 @@ nassh.sftp.Client.prototype.fileHandleStatus = function(handle) {
   packet.setString(handle);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.FSTAT, packet)
-    .then(response => this.isExpectedResponse_(response, nassh.sftp.packets.AttrsPacket, 'FSTAT'))
-    .then(response => response.attrs);
+      .then((response) => {
+        return this.isExpectedResponse_(
+            response, nassh.sftp.packets.AttrsPacket, 'FSTAT');
+      })
+      .then((response) => response.attrs);
 };
 
 /**
@@ -446,8 +455,11 @@ nassh.sftp.Client.prototype.openDirectory = function(path) {
   packet.setUtf8String(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.OPENDIR, packet)
-    .then(response => this.isExpectedResponse_(response, nassh.sftp.packets.HandlePacket, 'OPENDIR'))
-    .then(response => response.handle);
+      .then((response) => {
+        return this.isExpectedResponse_(
+            response, nassh.sftp.packets.HandlePacket, 'OPENDIR');
+      })
+      .then(response => response.handle);
 };
 
 
@@ -598,8 +610,11 @@ nassh.sftp.Client.prototype.openFile = function(path, pflags) {
   packet.setUint32(0); // default attr values
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.OPEN, packet)
-    .then(response => this.isExpectedResponse_(response, nassh.sftp.packets.HandlePacket, 'OPEN'))
-    .then(response => response.handle);
+      .then((response) => {
+        return this.isExpectedResponse_(
+              response, nassh.sftp.packets.HandlePacket, 'OPEN');
+      })
+      .then((response) => response.handle);
 };
 
 

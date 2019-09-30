@@ -102,7 +102,8 @@ nassh.External.newWindow_ = function(
     if (typeof number == 'number') {
       return number;
     } else {
-      sendResponse({error: true, message: `${field}: invalid number: ${number}`});
+      sendResponse(
+          {error: true, message: `${field}: invalid number: ${number}`});
       return false;
     }
   };

@@ -97,7 +97,8 @@ nassh.sftp.fsp.onGetMetadataRequested = function(options, onSuccess, onError) {
  * @param {function()} onSuccess
  * @param {function()} onError
  */
-nassh.sftp.fsp.onReadDirectoryRequested = function(options, onSuccess, onError) {
+nassh.sftp.fsp.onReadDirectoryRequested = function(
+    options, onSuccess, onError) {
   if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
     return;
   }
@@ -168,7 +169,8 @@ nassh.sftp.fsp.onWriteFileRequested = function(options, onSuccess, onError) {
 
   var writePromises = [];
   // Splits up the data to be written into chunks that the server can handle
-  // and places them into multiple promises which will be resolved asynchronously.
+  // and places them into multiple promises which will be resolved
+  // asynchronously.
   const data = new Uint8Array(options.data);
   for (let i = 0; i < data.length; i += client.writeChunkSize) {
     const chunk = data.subarray(i, i + client.writeChunkSize);
@@ -351,7 +353,8 @@ nassh.sftp.fsp.onCloseFileRequested = function(options, onSuccess, onError) {
  * @param {function()} onSuccess
  * @param {function()} onError
  */
-nassh.sftp.fsp.onCreateDirectoryRequested = function(options, onSuccess, onError) {
+nassh.sftp.fsp.onCreateDirectoryRequested = function(
+    options, onSuccess, onError) {
   if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
     return;
   }

@@ -575,10 +575,12 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true,
       uri = uri.substr(2);
   }
 
+  /* eslint-disable */
   // Parse the connection string.
   var ary = uri.match(
       //|user |@| [  ipv6       %zoneid   ]| host |   :port      @ relay options
       /^([^@]+)@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:@]+)(?::(\d+))?(?:@([^:]+)(?::(\d+))?)?$/);
+  /* eslint-enable */
 
   if (!ary)
     return false;
@@ -808,7 +810,8 @@ nassh.CommandInstance.splitCommandLine = function(argstr) {
  * @return {boolean} True if we were able to parse the destination string,
  *     false otherwise.
  */
-nassh.CommandInstance.prototype.sftpConnectToDestination = function(destination) {
+nassh.CommandInstance.prototype.sftpConnectToDestination = function(
+    destination) {
   const rv = nassh.CommandInstance.parseDestination(destination);
   if (rv === false) {
     this.io.println(nassh.msg('BAD_DESTINATION', [destination]));
@@ -1063,8 +1066,10 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
   }
 
   this.initPlugin_(() => {
-    if (!nassh.v2)
-      this.terminalWindow.addEventListener('beforeunload', this.onBeforeUnload_);
+    if (!nassh.v2) {
+      this.terminalWindow.addEventListener(
+          'beforeunload', this.onBeforeUnload_);
+    }
 
     this.io.println(nassh.msg('CONNECTING',
                               [`${params.username}@${disp_hostname}`]));
@@ -1339,8 +1344,10 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
 
   this.exited_ = true;
 
-  if (!nassh.v2)
-    this.terminalWindow.removeEventListener('beforeunload', this.onBeforeUnload_);
+  if (!nassh.v2) {
+    this.terminalWindow.removeEventListener(
+        'beforeunload', this.onBeforeUnload_);
+  }
 
   // Close all streams upon exit.
   this.streams_.closeAllStreams();
@@ -1444,8 +1451,8 @@ nassh.CommandInstance.prototype.onConnectDialog_.mountProfile = function(
 /**
  * Sent from the dialog when the user chooses to connect to a profile via sftp.
  */
-nassh.CommandInstance.prototype.onConnectDialog_.sftpConnectToProfile = function(
-    dialogFrame, profileID) {
+nassh.CommandInstance.prototype.onConnectDialog_.sftpConnectToProfile =
+    function(dialogFrame, profileID) {
   dialogFrame.close();
 
   this.sftpConnectToProfile(profileID);
@@ -1532,7 +1539,8 @@ nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
  * @param {string} host
  * @param {number} port
  */
-nassh.CommandInstance.prototype.onPlugin_.openSocket = function(fd, host, port) {
+nassh.CommandInstance.prototype.onPlugin_.openSocket = function(
+    fd, host, port) {
   var stream = null;
 
   const onOpen = (success, error) => {

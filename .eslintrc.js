@@ -30,6 +30,7 @@ module.exports = {
     'eol-last': 'error',
     'generator-star-spacing': ['error', 'after'],
     'lines-between-class-members': 'error',
+    'max-len': ['error', {'code': 80, 'ignoreUrls': true}],
     'new-parens': 'error',
     'no-alert': 'error',
     'no-catch-shadow': 'error',

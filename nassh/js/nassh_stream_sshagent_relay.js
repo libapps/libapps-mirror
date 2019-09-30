@@ -93,8 +93,8 @@ nassh.Stream.SSHAgentRelay.prototype.close = function() {
 };
 
 /**
- * Check whether there is enough data in the write buffer to constitute a packet.
- * If so, send packet and handle reply.
+ * Check whether there is enough data in the write buffer to constitute a
+ * packet. If so, send packet and handle reply.
  */
 nassh.Stream.SSHAgentRelay.prototype.trySendPacket_ = function() {
   // See if we've scanned the message length yet (first 4 bytes).

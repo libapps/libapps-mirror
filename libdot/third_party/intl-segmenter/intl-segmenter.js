@@ -221,4 +221,6 @@
         string, segment(this._locale, this._granularity, string));
     }
   };
-}(typeof window !== 'undefined' ? window : (typeof global !== 'undefined' ? global : this)));
+}(typeof window !== 'undefined' ?
+      window :
+      (typeof global !== 'undefined' ? global : this)));

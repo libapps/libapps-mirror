@@ -35,7 +35,8 @@ if (scope['TextEncoder'] && scope['TextDecoder']) {
 function FastTextEncoder(utfLabel='utf-8') {
   if (utfLabel !== 'utf-8') {
     throw new RangeError(
-      `Failed to construct 'TextEncoder': The encoding label provided ('${utfLabel}') is invalid.`);
+        `Failed to construct 'TextEncoder': ` +
+        `The encoding label provided ('${utfLabel}') is invalid.`);
   }
 }
 
@@ -116,10 +117,13 @@ FastTextEncoder.prototype.encode = function(string, options={stream: false}) {
 function FastTextDecoder(utfLabel='utf-8', options={fatal: false}) {
   if (utfLabel !== 'utf-8') {
     throw new RangeError(
-      `Failed to construct 'TextDecoder': The encoding label provided ('${utfLabel}') is invalid.`);
+        `Failed to construct 'TextDecoder': ` +
+        `The encoding label provided ('${utfLabel}') is invalid.`);
   }
   if (options.fatal) {
-    throw new Error(`Failed to construct 'TextDecoder': the 'fatal' option is unsupported.`);
+    throw new Error(
+        `Failed to construct 'TextDecoder': ` +
+        `the 'fatal' option is unsupported.`);
   }
 }
 
@@ -165,7 +169,8 @@ FastTextDecoder.prototype.decode = function(buffer, options={stream: false}) {
       const byte4 = bytes[pos++] & 0x3f;
 
       // this can be > 0xffff, so possibly generate surrogates
-      let codepoint = ((byte1 & 0x07) << 0x12) | (byte2 << 0x0c) | (byte3 << 0x06) | byte4;
+      let codepoint =
+          ((byte1 & 0x07) << 0x12) | (byte2 << 0x0c) | (byte3 << 0x06) | byte4;
       if (codepoint > 0xffff) {
         // codepoint &= ~0x10000;
         codepoint -= 0x10000;
@@ -183,5 +188,6 @@ FastTextDecoder.prototype.decode = function(buffer, options={stream: false}) {
 
 scope['TextEncoder'] = FastTextEncoder;
 scope['TextDecoder'] = FastTextDecoder;
-
-}(typeof window !== 'undefined' ? window : (typeof global !== 'undefined' ? global : this)));
+}(typeof window !== 'undefined' ?
+      window :
+      (typeof global !== 'undefined' ? global : this)));

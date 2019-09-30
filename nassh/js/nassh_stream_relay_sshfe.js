@@ -162,7 +162,7 @@ nassh.Stream.RelaySshfeWS.prototype.signChallenge_ = function(challenge) {
   //   byte    code
   //   byte    slot
   //   byte    alt
-  // TODO: Rename "challenge" since it has nothing to do with |challenge| parameter.
+  // TODO: Rename "challenge" since it has nothing to do with |challenge| param.
   //   string  challenge  (16 bytes)
   const buffer = new ArrayBuffer(23);
   const u8 = new Uint8Array(buffer);
@@ -182,7 +182,8 @@ nassh.Stream.RelaySshfeWS.prototype.signChallenge_ = function(challenge) {
   // Send the challenge.
   return this.sendAgentMessage_(Array.from(u8)).then((result) => {
     if (result.data.length <= 5) {
-      throw new Error(`Agent failed; missing ssh certificate? (${result.data})`);
+      throw new Error(
+          `Agent failed; missing ssh certificate? (${result.data})`);
     }
 
     // Receive SSH_AGENTC_PUBLIC_KEY_RESPONSE.
@@ -200,7 +201,8 @@ nassh.Stream.RelaySshfeWS.prototype.signChallenge_ = function(challenge) {
     const data = Array.from(request.rawMessage().subarray(4));
     return this.sendAgentMessage_(data).then((result) => {
       if (result.data.length <= 5) {
-        throw new Error(`Agent failed; unable to sign challenge (${result.data})`);
+        throw new Error(
+            `Agent failed; unable to sign challenge (${result.data})`);
       }
 
       // Return the signed challenge.
