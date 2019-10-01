@@ -61,8 +61,8 @@ nassh.agent.Backend.prototype.ping = function() {
 
 /**
  * Called when the client sends an AGENTC_REQUEST_IDENTITIES request.
- * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
  *
+ * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
  * @return {!Promise<!Array<!Identity>>|!Promise<!Error>} A promise
  *     resolving to an array of SSH identities; a rejecting promise with an
  *     error message if the request could not be handled.
@@ -73,8 +73,8 @@ nassh.agent.Backend.prototype.requestIdentities = function() {
 
 /**
  * Called when the client sends an AGENTC_SIGN_REQUEST request.
- * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.5
  *
+ * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.5
  * @param {!Uint8Array} keyBlob The key blob of the key requested to perform
  *     the signature.
  * @param {!Uint8Array} data The challenge data to be signed.

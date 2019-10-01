@@ -14,8 +14,8 @@ nassh.agent.messages = {};
 /**
  * Types of requests/responses exchanged between client application and SSH
  * agent. All types are represented as 8-bit unsigned integers.
- * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.5.1
  *
+ * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.5.1
  * @readonly
  * @enum {number}
  */
@@ -31,8 +31,8 @@ nassh.agent.messages.Numbers = {
 
 /**
  * Generic agent responses.
- * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.1
  *
+ * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.1
  * @readonly
  * @const {!nassh.agent.Message}
  */
@@ -73,8 +73,8 @@ nassh.agent.messages.read = function(message) {
 
 /**
  * Read an AGENTC_REQUEST_IDENTITIES request.
- * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
  *
+ * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
  * @param {!nassh.agent.Message} message A message of type
  *     AGENTC_REQUEST_IDENTITIES.
  * @return {!nassh.agent.Message}
@@ -91,8 +91,8 @@ nassh.agent.messages
 
 /**
  * Read an AGENTC_SIGN_REQUEST request.
- * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.5
  *
+ * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.5
  * @param {!nassh.agent.Message} message A message of type AGENTC_SIGN_REQUEST.
  * @return {!nassh.agent.Message}
  */
@@ -199,15 +199,15 @@ nassh.agent.messages.write = function(type, ...args) {
 /**
  * An SSH identity (public key), containing the wire encoding of the public key
  * and a UTF-8 encoded human-readable comment.
- * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
  *
+ * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
  * @typedef {{keyBlob: !Uint8Array, comment: !Uint8Array}} Identity
  */
 
 /**
  * Write an AGENT_IDENTITIES_ANSWER response.
- * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
  *
+ * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
  * @param {!Array<!Identity>} identities An array of SSH identities.
  * @return {!nassh.agent.Message}
  */
@@ -226,8 +226,8 @@ nassh.agent.messages
 
 /**
  * Write an AGENT_SIGN_RESPONSE response.
- * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.5
  *
+ * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.5
  * @param {!Uint8Array} signature The computed signature.
  * @return {!nassh.agent.Message}
  */
@@ -242,8 +242,8 @@ nassh.agent.messages
 
 /**
  * Write an AGENTC_SIGN_REQUEST response.
- * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.5
  *
+ * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.5
  * @param {!Uint8Array} keyBlob The public key.
  * @param {!Uint8Array} data The data to sign.
  * @param {number=} flags Command flags.
@@ -375,8 +375,8 @@ nassh.agent.messages.generateKeyBlob = function(keyType, ...args) {
 
 /**
  * Encode a byte array as a 'string' on the wire.
- * @see https://tools.ietf.org/html/rfc4251#section-5
  *
+ * @see https://tools.ietf.org/html/rfc4251#section-5
  * @param {!Uint8Array} bytes Raw bytes.
  * @return {!Uint8Array} Wire encoding as a string.
  */
@@ -390,8 +390,8 @@ nassh.agent.messages.encodeAsWireString = function(bytes) {
 
 /**
  * Encode an unsigned integer as an 'mpint' on the wire.
- * @see https://tools.ietf.org/html/rfc4251#section-5
  *
+ * @see https://tools.ietf.org/html/rfc4251#section-5
  * @param {!Uint8Array} bytes Raw bytes of an unsigned integer.
  * @return {!Uint8Array} Wire encoding as an mpint.
  */
@@ -414,8 +414,8 @@ nassh.agent.messages.encodeAsWireMpint = function(bytes) {
 
 /**
  * Generate a key blob for a public key of type 'ssh-rsa'.
- * @see https://www.ietf.org/rfc/rfc4253
  *
+ * @see https://www.ietf.org/rfc/rfc4253
  * @param {!Uint8Array} exponent The public exponent as an unsigned integer
  *     (big endian).
  * @param {!Uint8Array} modulus The modulus as an unsigned integer (big

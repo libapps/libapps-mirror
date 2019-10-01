@@ -102,6 +102,7 @@ nassh.agent.backends.GSC.APIContext = null;
 /**
  * Constants for the hash functions as used with an RSA key and the
  * EMSA-PKCS1-v1_5 encoding in the SSH agent protocol.
+ *
  * @see https://tools.ietf.org/html/rfc4880#section-5.2.2
  * @see https://tools.ietf.org/html/draft-ietf-curdle-rsa-sha2-00#section-2
  *
@@ -169,10 +170,11 @@ nassh.agent.backends.GSC.prototype.ping = async function() {
  * readers. Blocked devices will also be skipped. The backend remembers which
  * key blobs were obtained from which reader.
  *
- * @param {!Object<string, {reader: string, readerKeyId: !Uint8Array,
- *     applet: !nassh.agent.backends.GSC.SmartCardManager.CardApplets}>}
- *     keyBlobToReader Maps SSH identities to the readers and applets they have
- *     been retrieved from for later use by signRequest.
+ * @param {!Object<string, {
+ *       reader: string, readerKeyId: !Uint8Array,
+ *       applet: !nassh.agent.backends.GSC.SmartCardManager.CardApplets}>
+ *     } keyBlobToReader Maps SSH identities to the readers and applets they
+ *     have been retrieved from for later use by signRequest.
  * @param {string} reader The name of the reader to connect to.
  * @return {!Promise<!Array<!Identity>>} A Promise resolving to a list of SSH
  *     identities.
@@ -635,8 +637,8 @@ nassh.agent.backends.GSC.CommandAPDU.prototype.commands = function(
 
 /**
  * Human-readable descriptions of common data object tags for OpenPGP cards.
- * @see https://g10code.com/docs/openpgp-card-2.0.pdf
  *
+ * @see https://g10code.com/docs/openpgp-card-2.0.pdf
  * @readonly
  * @enum {string}
  */
@@ -673,8 +675,8 @@ nassh.agent.backends.GSC.DATA_OBJECT_TAG = {
 /**
  * Human-readable descriptions of common data object tag classes for OpenPGP
  * cards.
- * @see https://g10code.com/docs/openpgp-card-2.0.pdf
  *
+ * @see https://g10code.com/docs/openpgp-card-2.0.pdf
  * @readonly
  * @enum {string}
  */
@@ -687,6 +689,7 @@ nassh.agent.backends.GSC.DATA_OBJECT_TAG_CLASS = {
 
 /**
  * A TLV-encoded data object following ISO 7816-4: Annex D.
+ *
  * @see https://www.cardwerk.com/smartcards/smartcard_standard_ISO7816-4_annex-d.aspx
  *
  * @constructor
@@ -696,6 +699,7 @@ nassh.agent.backends.GSC.DataObject = function() {};
 /**
  * Recursively parse (a range of) the byte representation of a TLV-encoded data
  * object into a DataObject object.
+ *
  * @see https://www.cardwerk.com/smartcards/smartcard_standard_ISO7816-4_annex-d.aspx
  * TODO(joelhockey): Change return type from an Array with positional values,
  * to use {{data: ?nassh.agent.backends.GSC.DataObject, index: number}}.
@@ -794,6 +798,7 @@ nassh.agent.backends.GSC.DataObject.fromBytesInRange = function(
  * lengths, other cards return a list of subtags. In the latter case, this
  * function creates an artificial root object which contains all the subtags
  * in the list as children.
+ *
  * @see https://www.cardwerk.com/smartcards/smartcard_standard_ISO7816-4_annex-d.aspx
  *
  * @constructs nassh.agent.backends.GSC.DataObject
@@ -924,6 +929,7 @@ nassh.agent.backends.GSC.SmartCardManager = function() {
 
   /**
    * The transmission protocol currently in use by the agent.
+   *
    * @member {?number}
    * @private
    */
@@ -948,6 +954,7 @@ nassh.agent.backends.GSC.SmartCardManager = function() {
 
   /**
    * True if the card is known to support extended lengths (Lc and Le).
+   *
    * @member {boolean}
    * @private
    */
@@ -1193,7 +1200,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.transmit =
  *
  * Supports continued responses.
  *
- * @param {!Uint8Array} rawResult - A result array formed using execute_ on the
+ * @param {!Uint8Array} rawResult A result array formed using execute_ on the
  *     result returned asynchronously by SCardTransmit.
  * @return {!Promise<!Uint8Array>|
  *    !Promise<!nassh.agent.backends.GSC.StatusBytes>} A Promise resolving to
@@ -1207,6 +1214,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.getData_ =
    * Command APDU for the 'GET RESPONSE' command.
    *
    * Used to retrieve the continuation of a long response.
+   *
    * @see https://g10code.com/docs/openpgp-card-2.0.pdf
    */
   const GET_RESPONSE_APDU =
@@ -1265,6 +1273,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
        * Application Identifier (AID) as data.
        *
        * Used to select the OpenPGP applet on a smart card.
+       *
        * @see https://g10code.com/docs/openpgp-card-2.0.pdf
        */
       const SELECT_APPLET_OPENPGP_APDU =
@@ -1283,6 +1292,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
        * Identifier (AID) as data.
        *
        * Used to select the PIV applet on a smart card.
+       *
        * @see https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-73-4.pdf
        *
        * @readonly
@@ -1335,6 +1345,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
        *
        * Used to retrieve the 'Algorithm attributes authentication' contained
        * in the 'Application Related Data'.
+       *
        * @see https://g10code.com/docs/openpgp-card-2.0.pdf
        */
       const FETCH_APPLICATION_RELATED_DATA_APDU =
@@ -1368,6 +1379,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
        *
        * Used to retrieve information on the public part of the authentication
        * subkey.
+       *
        * @see https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-73-4.pdf
        */
       const READ_AUTHENTICATION_CERTIFICATE_APDU =
@@ -1448,6 +1460,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchPublicKeyBlob =
        *
        * Used to retrieve information on the public part of the authentication
        * subkey.
+       *
        * @see https://g10code.com/docs/openpgp-card-2.0.pdf
        * @see RFC 4253, Section 6.6 and RFC 4251, Section 5.
        */
@@ -1481,6 +1494,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchPublicKeyBlob =
        *
        * Used to retrieve information on the public part of the authentication
        * subkey.
+       *
        * @see https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-73-4.pdf
        */
       const READ_AUTHENTICATION_CERTIFICATE_APDU =
@@ -1548,6 +1562,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
        * 'Application Related Data' data object as data.
        *
        * Used to retrieve the 'Application Related Data'.
+       *
        * @see https://g10code.com/docs/openpgp-card-2.0.pdf
        */
       const FETCH_APPLICATION_RELATED_DATA_APDU =
@@ -1562,6 +1577,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
        *
        * Used to retrieve information on the public part of the authentication
        * subkey.
+       *
        * @see https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-73-4.pdf
        */
       const READ_AUTHENTICATION_CERTIFICATE_PIV_APDU =
@@ -1609,6 +1625,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
        * 'Application Related Data' data object as data.
        *
        * Used to retrieve the 'Application Related Data'.
+       *
        * @see https://g10code.com/docs/openpgp-card-2.0.pdf
        */
       const FETCH_APPLICATION_RELATED_DATA_APDU =
@@ -1621,6 +1638,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
        * Header bytes of the command APDU for the 'VERIFY PIN' command (PIV).
        *
        * Used to unlock private key operations on the smart card.
+       *
        * @see https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-73-4.pdf
        */
       const VERIFY_PIN_PIV_APDU_HEADER = [0x00, 0x20, 0x00, 0x80];
@@ -1665,6 +1683,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
    *
    * Used to retrieve the 'Historical Bytes", which contain information on the
    * communication capabilities of the card.
+   *
    * @see https://g10code.com/docs/openpgp-card-2.0.pdf
    */
   const FETCH_HISTORICAL_BYTES_APDU =
@@ -1714,6 +1733,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.verifyPIN =
        * Header bytes of the command APDU for the 'VERIFY PIN' command.
        *
        * Used to unlock private key operations on the smart card.
+       *
        * @see https://g10code.com/docs/openpgp-card-2.0.pdf
        */
       const VERIFY_PIN_APDU_HEADER_OPENPGP = [0x00, 0x20, 0x00, 0x82];
@@ -1749,6 +1769,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.verifyPIN =
        * Header bytes of the command APDU for the 'VERIFY PIN' command (PIV).
        *
        * Used to unlock private key operations on the smart card.
+       *
        * @see https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-73-4.pdf
        */
       const VERIFY_PIN_APDU_HEADER_PIV = [0x00, 0x20, 0x00, 0x80];
@@ -1814,6 +1835,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.authenticate =
        *
        * Used to perform a signature operation using the authentication subkey
        * on the smart card.
+       *
        * @see https://g10code.com/docs/openpgp-card-2.0.pdf
        */
       const INTERNAL_AUTHENTICATE_APDU_HEADER = [0x00, 0x88, 0x00, 0x00];
@@ -1827,6 +1849,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.authenticate =
        *
        * Used to perform a signature operation using the authentication subkey
        * on the smart card.
+       *
        * @see https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-73-4.pdf
        */
       const keyInfo = await this.fetchKeyInfo();

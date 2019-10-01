@@ -275,7 +275,7 @@ Crosh.prototype.sendString_ = function(string) {
 
 /**
  * Closes crosh terminal and exits the crosh command.
-**/
+ */
 Crosh.prototype.close_ = function() {
   if (this.id_ === null) {
     return;

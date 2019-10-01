@@ -112,10 +112,9 @@ nassh.agent.Agent.prototype.ping = function() {
 
 /**
  * Delegate handling a raw SSH agent request to a registered request handler.
+ *
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.3
- *
  * @param {!Uint8Array} rawRequest The bytes of a raw request.
- *
  * @return {!Promise<!nassh.agent.Message>} A Message object containing the
  *     aggregate responses of all backends.
  */
@@ -160,6 +159,7 @@ nassh.agent.Agent.prototype.handleRequest_ = function(request) {
 
 /**
  * Convert a raw SSH key blob to the format used in authorized_keys files.
+ *
  * @param {!Uint8Array} keyBlob The raw key blob.
  * @return {string}
  */
@@ -176,8 +176,8 @@ nassh.agent.Agent.keyBlobToAuthorizedKeysFormat = function(keyBlob) {
 /**
  * Handle an AGENTC_REQUEST_IDENTITIES request by responding with an
  * AGENT_IDENTITIES_ANSWER.
- * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
  *
+ * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
  * @return {!Promise<!nassh.agent.Message>}
  */
 nassh.agent.Agent.prototype

@@ -16,12 +16,14 @@ nassh.External.COMMANDS = {};
 
 /**
  * Root dir for all files to be written under.
+ *
  * @const
  */
 nassh.External.ROOT_DIR = '/external';
 
 /**
  * Unique identifier for each session.
+ *
  * @private
  */
 nassh.External.sessionCounter_ = 0;

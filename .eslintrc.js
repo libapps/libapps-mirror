@@ -90,7 +90,22 @@ module.exports = {
     'valid-typeof': 'error',
     'yoda': 'error',
 
+    'jsdoc/check-alignment': 2,
+    'jsdoc/check-examples': 2,
+    'jsdoc/check-param-names': 2,
+    // Make sure this is disabled as this rejects closure syntax.
+    'jsdoc/check-syntax': 0,
     'jsdoc/check-tag-names': 2,
+    'jsdoc/implements-on-classes': 2,
+    'jsdoc/newline-after-description': 2,
+    // This is only for TypeScript which we don't care about.
+    'jsdoc/no-types': 0,
+    // We don't want to require examples.
+    'jsdoc/require-example': 0,
+    'jsdoc/require-hyphen-before-param-description': ['error', 'never'],
+    'jsdoc/require-returns': 2,
+    'jsdoc/require-returns-check': 2,
+    'jsdoc/require-returns-type': 2,
   },
 
   'settings': {

@@ -47,6 +47,7 @@ nassh.Stream.SSHAgent.prototype.asyncOpen_ = function(args, onComplete) {
 /**
  * Check whether there is enough data in the write buffer to constitute a
  * packet. If so, send packet to Agent and relay its reply.
+ *
  * @private
  */
 nassh.Stream.SSHAgent.prototype.trySendPacket_ = function() {

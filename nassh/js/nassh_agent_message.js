@@ -14,8 +14,8 @@ nassh.agent = {};
 /**
  * Create an SSH agent message from a raw byte array containing the message
  * contents.
- * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4
  *
+ * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4
  * @param {!nassh.agent.messages.Numbers} type The type of the message as per
  *     Section 7.1 of the specification.
  * @param {?Uint8Array} [data] The raw data of the message, if any.
@@ -24,8 +24,8 @@ nassh.agent = {};
 nassh.agent.Message = function(type, data) {
   /**
    * Type of the message.
-   * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.7.1
    *
+   * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.7.1
    * @member {!nassh.agent.messages.Numbers}
    */
   this.type = type;
@@ -58,8 +58,8 @@ nassh.agent.Message = function(type, data) {
 
 /**
  * Get the raw, length-encoded representation of the message.
- * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.3
  *
+ * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.3
  * @return {!Uint8Array}
  */
 nassh.agent.Message.prototype.rawMessage = function() {
@@ -83,9 +83,9 @@ nassh.agent.Message.prototype.eom = function() {
 
 /**
  * Read a uint32 from the raw message data.
+ *
  * @see https://tools.ietf.org/html/rfc4251#section-5
  * @throws Will throw an error if there are less than four more bytes available.
- *
  * @return {number}
  */
 nassh.agent.Message.prototype.readUint32 = function() {
@@ -100,6 +100,7 @@ nassh.agent.Message.prototype.readUint32 = function() {
 
 /**
  * Write a uint32 to the raw message data.
+ *
  * @see https://tools.ietf.org/html/rfc4251#section-5
  * @param {number} uint32 An unsigned 32-bit integer.
  */
@@ -115,10 +116,10 @@ nassh.agent.Message.prototype.writeUint32 = function(uint32) {
 
 /**
  * Read a string from the raw message data.
+ *
  * @see https://tools.ietf.org/html/rfc4251#section-5
  * @throws Will throw an error if there are less bytes available than indicated
- *  by the length field.
- *
+ *    by the length field.
  * @return {!Uint8Array}
  */
 nassh.agent.Message.prototype.readString = function() {
@@ -133,8 +134,8 @@ nassh.agent.Message.prototype.readString = function() {
 
 /**
  * Write a string to the raw message data.
- * @see https://tools.ietf.org/html/rfc4251#section-5
  *
+ * @see https://tools.ietf.org/html/rfc4251#section-5
  * @param {!Uint8Array} string
  */
 nassh.agent.Message.prototype.writeString = function(string) {
@@ -148,9 +149,9 @@ nassh.agent.Message.prototype.writeString = function(string) {
 
 /**
  * Parse a raw SSH agent message into a Message object.
+ *
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.3
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4
- *
  * @constructs nassh.agent.Message
  * @param {!Uint8Array} rawMessage
  * @return {?nassh.agent.Message} A Message object created from the raw message

@@ -807,8 +807,6 @@ nassh.CommandInstance.splitCommandLine = function(argstr) {
  * Initiate a SFTP connection to a remote host.
  *
  * @param {string} destination A string of the form username@host[:port].
- * @return {boolean} True if we were able to parse the destination string,
- *     false otherwise.
  */
 nassh.CommandInstance.prototype.sftpConnectToDestination = function(
     destination) {
