@@ -144,6 +144,8 @@ def run_eslint(opts, extra_args=()):
     cmd = ['eslint'] + list(extra_args)
     if comments_path:
         cmd += ['--max-warnings=0']
+    if opts.fix:
+        cmd += ['--fix']
 
     # We know our tools are first in $PATH now.
     result = libdot.run(cmd + opts.paths, check=False)
@@ -286,6 +288,8 @@ def _get_default_paths():
 def get_parser():
     """Get a command line parser."""
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--fix', action='store_true',
+                        help='Run just eslint with --fix setting.')
     parser.add_argument('--gerrit-comments-file',
                         help='Save errors for posting files to Gerrit.')
     parser.add_argument('-d', '--debug', action='store_true',
@@ -321,9 +325,11 @@ def main(argv, paths=(), mkdeps=None, eslint_args=(),
 
     if mkdeps:
         mkdeps(opts)
-    return 0 if all((
-        run_eslint(opts, eslint_args), run_closure(opts, closure_args),
-    )) else 1
+
+    checks = [run_eslint(opts, eslint_args)]
+    if not opts.fix:
+        checks += [run_closure(opts, closure_args)]
+    return 0 if all(checks) else 1
 
 
 if __name__ == '__main__':
