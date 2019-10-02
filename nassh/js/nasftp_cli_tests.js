@@ -12,6 +12,8 @@ describe('nasftp_cli_tests.js', () => {
 
 /**
  * A mock object for nasftp.Cli usage.
+ *
+ * @param {!hterm.Terminal} terminal The terminal to display to.
  */
 const MockSftpCommandInstance = function(terminal) {
   this.terminal = terminal;

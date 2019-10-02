@@ -230,25 +230,9 @@ nassh.CommandInstance.prototype.run = function() {
 };
 
 /**
- * This method moved off to be a static method on nassh, but remains here
- * for js console users who expect to find it here.
- */
-nassh.CommandInstance.prototype.exportPreferences = function(onComplete) {
-  nassh.exportPreferences(onComplete);
-};
-
-/**
- * This method moved off to be a static method on nassh, but remains here
- * for js console users who expect to find it here.
- */
-nassh.CommandInstance.prototype.importPreferences = function(json, onComplete) {
-  nassh.importPreferences(json, onComplete);
-};
-
-/**
  * Reconnects to host, using the same CommandInstance.
  *
- * @param {string} argstr The connection ArgString
+ * @param {string} argstr The connection ArgString.
  */
 nassh.CommandInstance.prototype.reconnect = function(argstr) {
   // Terminal reset.
@@ -478,8 +462,10 @@ nassh.CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
 /**
  * Mount a remote host given a profile id. Creates a new SFTP CommandInstance
  * that runs in the background page.
+ *
+ * @param {string} profileID Terminal preference profile name.
  */
-nassh.CommandInstance.prototype.mountProfile = function(profileID, querystr) {
+nassh.CommandInstance.prototype.mountProfile = function(profileID) {
   const onBackgroundPage = (bg, prefs) => {
     if (bg.nassh.sftp.fsp.sftpInstances[prefs.id]) {
       this.io.println(nassh.msg('ALREADY_MOUNTED_MESSAGE'));
@@ -520,10 +506,10 @@ nassh.CommandInstance.prototype.mountProfile = function(profileID, querystr) {
 
 /**
  * Creates a new SFTP CommandInstance that runs in the background page.
+ *
+ * @param {string} profileID Terminal preference profile name.
  */
-nassh.CommandInstance.prototype.sftpConnectToProfile = function(
-    profileID, querystr) {
-
+nassh.CommandInstance.prototype.sftpConnectToProfile = function(profileID) {
   const onStartup = (prefs) => {
     this.isSftp = true;
     this.sftpClient = new nassh.sftp.Client();
@@ -536,9 +522,10 @@ nassh.CommandInstance.prototype.sftpConnectToProfile = function(
 
 /**
  * Initiate a connection to a remote host given a profile id.
+ *
+ * @param {string} profileID Terminal preference profile name.
  */
-nassh.CommandInstance.prototype.connectToProfile = function(
-    profileID, querystr) {
+nassh.CommandInstance.prototype.connectToProfile = function(profileID) {
   const onStartup = (prefs) => {
     this.connectTo(this.prefsToConnectParams_(prefs));
   };
@@ -1185,6 +1172,10 @@ nassh.CommandInstance.postProcessOptions = function(options, hostname='') {
 
 /**
  * Dispatch a "message" to one of a collection of message handlers.
+ *
+ * @param {string} desc
+ * @param {!Object} handlers
+ * @param {!Object} msg
  */
 nassh.CommandInstance.prototype.dispatchMessage_ = function(
     desc, handlers, msg) {
@@ -1422,6 +1413,8 @@ nassh.CommandInstance.prototype.onBeforeUnload_ = function(e) {
  * Plugin messages are JSON strings rather than arbitrary JS values.  They
  * also use "arguments" instead of "argv".  This function translates the
  * plugin message into something dispatchMessage_ can digest.
+ *
+ * @param {!Object} e
  */
 nassh.CommandInstance.prototype.onPluginMessage_ = function(e) {
   // TODO: We should adjust all our callees to avoid this.
@@ -1438,6 +1431,9 @@ nassh.CommandInstance.prototype.onConnectDialog_ = {};
 
 /**
  * Sent from the dialog when the user chooses to mount a profile.
+ *
+ * @param {!hterm.Frame} dialogFrame
+ * @param {string} profileID Terminal preference profile name.
  */
 nassh.CommandInstance.prototype.onConnectDialog_.mountProfile = function(
     dialogFrame, profileID) {
@@ -1448,6 +1444,9 @@ nassh.CommandInstance.prototype.onConnectDialog_.mountProfile = function(
 
 /**
  * Sent from the dialog when the user chooses to connect to a profile via sftp.
+ *
+ * @param {!hterm.Frame} dialogFrame
+ * @param {string} profileID Terminal preference profile name.
  */
 nassh.CommandInstance.prototype.onConnectDialog_.sftpConnectToProfile =
     function(dialogFrame, profileID) {
@@ -1458,6 +1457,9 @@ nassh.CommandInstance.prototype.onConnectDialog_.sftpConnectToProfile =
 
 /**
  * Sent from the dialog when the user chooses to connect to a profile.
+ *
+ * @param {!hterm.Frame} dialogFrame
+ * @param {string} profileID Terminal preference profile name.
  */
 nassh.CommandInstance.prototype.onConnectDialog_.connectToProfile = function(
     dialogFrame, profileID) {
@@ -1475,6 +1477,8 @@ nassh.CommandInstance.prototype.onPlugin_ = {};
 
 /**
  * Log a message from the plugin.
+ *
+ * @param {string} str Message to log to the console.
  */
 nassh.CommandInstance.prototype.onPlugin_.printLog = function(str) {
   console.log('plugin log: ' + str);
@@ -1482,6 +1486,8 @@ nassh.CommandInstance.prototype.onPlugin_.printLog = function(str) {
 
 /**
  * Plugin has exited.
+ *
+ * @param {number} code Exit code, 0 for success.
  */
 nassh.CommandInstance.prototype.onPlugin_.exit = function(code) {
   console.log('plugin exit: ' + code);
@@ -1495,6 +1501,10 @@ nassh.CommandInstance.prototype.onPlugin_.exit = function(code) {
  * the HTML5 Filesystem API.
  *
  * In the future, the plugin may handle its own files.
+ *
+ * @param {number} fd The integer to associate with this request.
+ * @param {string} path The path to the file to open.
+ * @param {number} mode The mode to open the path.
  */
 nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
   let isAtty;
@@ -1581,6 +1591,9 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(
  * Plugin wants to write some data to a file descriptor.
  *
  * This is used to write to HTML5 Filesystem files.
+ *
+ * @param {number} fd The file handle to write to.
+ * @param {string} data The content to write.
  */
 nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
   var stream = this.streams_.getStreamByFd(fd);
@@ -1647,6 +1660,9 @@ nassh.CommandInstance.prototype.onSftpInitialised = function() {
 
 /**
  * Plugin wants to read from a fd.
+ *
+ * @param {number} fd The file handle to read from.
+ * @param {number} size How many bytes to read.
  */
 nassh.CommandInstance.prototype.onPlugin_.read = function(fd, size) {
   var stream = this.streams_.getStreamByFd(fd);
@@ -1663,6 +1679,8 @@ nassh.CommandInstance.prototype.onPlugin_.read = function(fd, size) {
 
 /**
  * Notify the plugin that data is available to read.
+ *
+ * @param {number} fd The file handle to data available for reading.
  */
 nassh.CommandInstance.prototype.onPlugin_.isReadReady = function(fd) {
   var stream = this.streams_.getStreamByFd(fd);
@@ -1678,6 +1696,8 @@ nassh.CommandInstance.prototype.onPlugin_.isReadReady = function(fd) {
 
 /**
  * Plugin wants to close a file descriptor.
+ *
+ * @param {number} fd The file handle to close.
  */
 nassh.CommandInstance.prototype.onPlugin_.close = function(fd) {
   var stream = this.streams_.getStreamByFd(fd);
