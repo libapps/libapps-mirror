@@ -92,24 +92,47 @@ module.exports = {
 
     'jsdoc/check-alignment': 2,
     'jsdoc/check-examples': 2,
+    // We want hanging indentation, but this check requires none everywhere.
+    'jsdoc/check-indentation': 0,
     'jsdoc/check-param-names': 2,
     // Make sure this is disabled as this rejects closure syntax.
     'jsdoc/check-syntax': 0,
     'jsdoc/check-tag-names': 2,
+    // This is disabled until this crash is resolved:
+    // https://github.com/gajus/eslint-plugin-jsdoc/issues/389
+    'jsdoc/check-types': 0,
     'jsdoc/implements-on-classes': 2,
     'jsdoc/newline-after-description': 2,
     // This is only for TypeScript which we don't care about.
     'jsdoc/no-types': 0,
+    // TODO(vapier): Turn this on.
+    'jsdoc/require-description': 0,
+    // TODO(vapier): Turn this on.
+    'jsdoc/require-description-complete-sentence': 0,
     // We don't want to require examples.
     'jsdoc/require-example': 0,
     'jsdoc/require-hyphen-before-param-description': ['error', 'never'],
+    // TODO(vapier): Turn this on.
+    'jsdoc/require-jsdoc': 0,
+    'jsdoc/require-param': 1,
+    // TODO(vapier): Turn this on.
+    'jsdoc/require-param-description': 0,
+    'jsdoc/require-param-name': 2,
+    'jsdoc/require-param-type': 2,
     'jsdoc/require-returns': 2,
     'jsdoc/require-returns-check': 2,
+    // TODO(vapier): Turn this on.
+    'jsdoc/require-returns-description': 0,
     'jsdoc/require-returns-type': 2,
+    // This would be nice to turn on, but requires a lot more research.
+    'jsdoc/valid-types': 0,
   },
 
   'settings': {
     'jsdoc': {
+      'preferredTypes': {
+        'object': 'Object',
+      },
       'tagNamePreference': {
         // While not explicitly defined, Google/Chromium JS style guides only
         // use these keyword forms, as does the closure compiler docs.
