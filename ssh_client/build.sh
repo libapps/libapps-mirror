@@ -28,17 +28,46 @@ done
 cd "$(dirname "$0")"
 mkdir -p output
 
-./third_party/gnuconfig/build
-./third_party/naclsdk/build
+# Build the toolchain packages.
+pkgs=(
+  # Build tools.
+  gnuconfig
+  mandoc
 
-./third_party/glibc-compat/build
-./third_party/zlib/build
-./third_party/openssl/build
-./third_party/ldns/build
+  # NaCl toolchain.
+  naclsdk
+  glibc-compat
 
-./third_party/mandoc/build
-for ver in "${SSH_VERSIONS[@]}"; do
-  ./third_party/openssh-${ver}/build
+  # WASM toolchain.
+  binaryen
+  wabt
+  wasi-sdk
+  wasmtime
+)
+for pkg in "${pkgs[@]}"; do
+  ./third_party/${pkg}/build
+done
+
+# The plugin packages.
+pkgs=(
+  zlib
+  openssl
+  ldns
+  $(printf 'openssh-%s ' "${SSH_VERSIONS[@]}")
+)
+
+# Build the NaCl packages.
+for pkg in "${pkgs[@]}"; do
+  ./third_party/${pkg}/build --toolchain pnacl
+done
+
+# TODO(vapier): Add more here as they work.
+pkgs=(
+  zlib
+)
+# Build the WASM packages.
+for pkg in "${pkgs[@]}"; do
+  ./third_party/${pkg}/build --toolchain wasm
 done
 
 BUILD_ARGS=()
