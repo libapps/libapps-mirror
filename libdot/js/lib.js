@@ -102,3 +102,21 @@ lib.notNull = function(value) {
   lib.assert(value !== null);
   return value;
 };
+
+/**
+ * Wait for a condition.
+ *
+ * @param {function():boolean} testFn Returns true when wait is over.
+ * @return {!Promise<void>} Promise which resolve once testFn returns true.
+ */
+lib.waitUntil = async function(testFn) {
+  return new Promise((resolve) => {
+    const check = () => {
+      if (testFn()) {
+        return resolve();
+      }
+      setTimeout(check, 0);
+    };
+    check();
+  });
+};

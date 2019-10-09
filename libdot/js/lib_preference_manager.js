@@ -333,6 +333,20 @@ lib.PreferenceManager.prototype.addObservers = function(global, map) {
 };
 
 /**
+ * Remove preference observer.
+ *
+ * @param {string} name The name of preference you wish to stop observing.
+ * @param {function()} observer The observer to remove.
+ */
+lib.PreferenceManager.prototype.removeObserver = function(name, observer) {
+  if (!(name in this.prefRecords_)) {
+    throw new Error(`Unknown preference: ${name}`);
+  }
+
+  this.prefRecords_[name].removeObserver(observer);
+};
+
+/**
  * Dispatch the change observers for all known preferences.
  *
  * It may be useful to call this after readStorage completes, in order to
@@ -658,6 +672,8 @@ lib.PreferenceManager.prototype.changeDefaults = function(map) {
  * @param {function()=} onComplete Callback when the set call completes.
  * @param {boolean=} saveToStorage Whether to commit the change to the backing
  *     storage or only the in-memory record copy.
+ * @return {!Promise<void>} Promise which resolves once all observers are
+ *     notified.
  */
 lib.PreferenceManager.prototype.set = function(
     name, newValue, onComplete=undefined, saveToStorage=true) {
@@ -668,7 +684,7 @@ lib.PreferenceManager.prototype.set = function(
   var oldValue = record.get();
 
   if (!this.diff(oldValue, newValue))
-    return;
+    return Promise.resolve();
 
   if (this.diff(record.defaultValue, newValue)) {
     record.currentValue = newValue;
@@ -686,9 +702,11 @@ lib.PreferenceManager.prototype.set = function(
   // currentValue until the storage event, a pref read immediately after a write
   // would return the previous value.
   //
-  // The notification is in a timeout so clients don't accidentally depend on
+  // The notification is async so clients don't accidentally depend on
   // a synchronous notification.
-  setTimeout(this.notifyChange_.bind(this, name), 0);
+  return Promise.resolve().then(() => {
+    this.notifyChange_(name);
+  });
 };
 
 /**
