@@ -10,7 +10,6 @@ import {TerminalSettingsCheckboxElement} from './terminal_settings_checkbox.js';
 
 describe('terminal_settings_checkbox_tests.js', () => {
   const preference = 'terminal_settings_checkbox_tests_preference';
-  let el;
 
   before(function() {
     if (customElements.get(TerminalSettingsCheckboxElement.is) === undefined) {
@@ -25,39 +24,39 @@ describe('terminal_settings_checkbox_tests.js', () => {
       new lib.PreferenceManager(new lib.Storage.Memory());
     window.preferenceManager.definePreference(preference, false);
 
-    el = document.createElement('terminal-settings-checkbox');
-    el.setAttribute('description', 'test element');
-    el.setAttribute('preference', preference);
-    document.body.appendChild(el);
+    this.el = document.createElement('terminal-settings-checkbox');
+    this.el.setAttribute('description', 'test element');
+    this.el.setAttribute('preference', preference);
+    document.body.appendChild(this.el);
   });
 
   afterEach(function() {
-    document.body.removeChild(el);
+    document.body.removeChild(this.el);
 
     delete window.preferenceManager;
   });
 
-  it('checkbox-updates-when-setting-changes', async function() {
+  it('updates-ui-when-preference-changes', async function() {
     assert.isFalse(window.preferenceManager.get(preference));
-    assert.isFalse(el.shadowRoot.getElementById('checkbox').checked);
+    assert.isFalse(this.el.shadowRoot.getElementById('checkbox').checked);
 
     await window.preferenceManager.set(preference, true);
-    assert.isTrue(el.shadowRoot.getElementById('checkbox').checked);
+    assert.isTrue(this.el.shadowRoot.getElementById('checkbox').checked);
 
     await window.preferenceManager.set(preference, false);
-    assert.isFalse(el.shadowRoot.getElementById('checkbox').checked);
+    assert.isFalse(this.el.shadowRoot.getElementById('checkbox').checked);
   });
 
-  it('setting-updates-when-checkbox-changes', async function() {
+  it('updates-preference-when-ui-changes', async function() {
     assert.isFalse(window.preferenceManager.get(preference));
-    assert.isFalse(el.shadowRoot.getElementById('checkbox').checked);
+    assert.isFalse(this.el.shadowRoot.getElementById('checkbox').checked);
 
-    el.shadowRoot.getElementById('checkbox').click();
-    await lib.waitUntil(() => el.isConsistent());
+    this.el.shadowRoot.getElementById('checkbox').click();
+    await lib.waitUntil(() => this.el.isConsistent());
     assert.isTrue(window.preferenceManager.get(preference));
 
-    el.shadowRoot.getElementById('checkbox').click();
-    await lib.waitUntil(() => el.isConsistent());
+    this.el.shadowRoot.getElementById('checkbox').click();
+    await lib.waitUntil(() => this.el.isConsistent());
     assert.isFalse(window.preferenceManager.get(preference));
   });
 });
