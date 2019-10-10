@@ -26,6 +26,8 @@ window.onerror = function() {
 
 /** Run the test framework once everything is finished. */
 window.onload = function() {
+  hterm.defaultStorage = new lib.Storage.Memory();
+
   lib.init(() => {
     mocha.run();
 
