@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview Terminal Settings Checkbox Polymer Element unit tests.
+ * @fileoverview Terminal Settings Checkbox Element unit tests.
  */
 
 import {TerminalSettingsCheckboxElement} from './terminal_settings_checkbox.js';
@@ -28,6 +28,11 @@ describe('terminal_settings_checkbox_tests.js', () => {
     this.el.setAttribute('description', 'test element');
     this.el.setAttribute('preference', preference);
     document.body.appendChild(this.el);
+
+    // the element renders asynchronously.
+    // TODO(juwa@google.com): fix linter such that updateComplete can be
+    // accessed as a property, not via a key.
+    return this.el['updateComplete'];
   });
 
   afterEach(function() {

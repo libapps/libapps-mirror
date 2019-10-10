@@ -3,10 +3,9 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview Terminal Settings Dropdown Polymer Element unit tests.
+ * @fileoverview Terminal Settings Dropdown Element unit tests.
  */
 
-import {flush} from './polymer.js';
 import {TerminalSettingsDropdownElement} from './terminal_settings_dropdown.js';
 
 describe('terminal_settings_dropdown_tests.js', () => {
@@ -36,9 +35,10 @@ describe('terminal_settings_dropdown_tests.js', () => {
     this.el.setAttribute('preference', preference);
     document.body.appendChild(this.el);
 
-    // terminal-settings-dropdown uses dom-repeat, which won't render
-    // immediately, so a flush is required.
-    return flush();
+    // the element renders asynchronously.
+    // TODO(juwa@google.com): fix linter such that updateComplete can be
+    // accessed as a property, not via a key.
+    return this.el['updateComplete'];
   });
 
   afterEach(function() {
@@ -63,11 +63,11 @@ describe('terminal_settings_dropdown_tests.js', () => {
     assert.equal(window.preferenceManager.get(preference), options[0]);
     assert.equal(this.el.shadowRoot.getElementById('select').value, options[0]);
 
-    this.el.uiValue_ = options[1];
+    this.el.uiChanged_({target: {value: options[1]}});
     await lib.waitUntil(() => this.el.isConsistent());
     assert.equal(window.preferenceManager.get(preference), options[1]);
 
-    this.el.uiValue_ = options[2];
+    this.el.uiChanged_({target: {value: options[2]}});
     await lib.waitUntil(() => this.el.isConsistent());
     assert.equal(window.preferenceManager.get(preference), options[2]);
   });

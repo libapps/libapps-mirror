@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview Terminal Settings Category Selector Polymer Element unit tests.
+ * @fileoverview Terminal Settings Category Selector Element unit tests.
  */
 
 import {TerminalSettingsCategorySelectorElement} from

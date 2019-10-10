@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview exports PolymerElement and html.
+ * @fileoverview exports lit element utilities.
  *
  * As nassh_deps.rollup.js is a compiled js file, it violates the linter in
  * numerous ways. As a consequnce, it must be suppressed and the types imported
@@ -11,9 +11,9 @@
  *
  * @suppress {moduleLoad}
  */
-import {polymer} from './nassh_deps.rollup.js';
+import {litelement} from './nassh_deps.rollup.js';
 
 /** @suppress {undefinedVars} */
-const {PolymerElement, html, flush} = polymer;
+const {LitElement, html, css} = litelement;
 
-export {PolymerElement, html, flush};
+export {LitElement, html, css};

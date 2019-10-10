@@ -3,9 +3,9 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview Exports a Polymer element terminal-settings-dropdown.
+ * @fileoverview Exports an element: terminal-settings-dropdown.
  */
-import {html} from './polymer.js';
+import {html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
 
 export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
@@ -19,22 +19,25 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
       preference: {
         type: String,
       },
+      options_: {
+        type: Array,
+      },
       uiValue_: {
         type: String,
-        observer: 'uiChanged_',
       },
     };
   }
 
-  static get template() {
+  render() {
     return html`
-        <label for="select">[[description]]</label>
-        <select id="select" value="{{uiValue_::change}}">
-          <template is="dom-repeat" items="[[options_]]">
-            <option value="[[item]]" selected$="{{selected_(item)}}">
-              [[item]]
-            </option>
-          </template>
+        <label for="select">${this.description}</label>
+        <select id="select" value="${this.uiValue_}"
+            @change="${this.uiChanged_}">
+        ${this.options_.map(
+          option => this.uiValue_ === option
+            ? html`<option value="${option}" selected>${option}</option>`
+            : html`<option value="${option}">${option}</option>`
+        )}
         </select>
     `;
   }
@@ -42,11 +45,11 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   connectedCallback() {
     super.connectedCallback();
 
-    this.set('options_',
-        window.PreferenceManager.defaultPreferences[this.preference].type);
+    this.options_ =
+        window.PreferenceManager.defaultPreferences[this.preference].type;
   }
 
-  selected_(value) {
-    return this.uiValue_ === value;
+  uiChanged_(event) {
+    super.uiChanged_(event.target.value);
   }
 }

@@ -3,9 +3,9 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview Exports a Polymer element terminal-settings-checkbox.
+ * @fileoverview Exports an element: terminal-settings-checkbox.
  */
-import {html} from './polymer.js';
+import {html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
 
 export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
@@ -21,15 +21,23 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
       },
       uiValue_: {
         type: Boolean,
-        observer: 'uiChanged_',
       },
     };
   }
 
-  static get template() {
+  render() {
     return html`
-        <label for="checkbox">[[description]]</label>
-        <input id="checkbox" type="checkbox" checked="{{uiValue_::change}}" />
+        <label for="checkbox">${this.description}</label>
+        ${this.uiValue_
+          ? html`<input id="checkbox" type="checkbox"
+              @change="${this.uiChanged_}" checked />`
+          : html`<input id="checkbox" type="checkbox"
+              @change="${this.uiChanged_}" />`
+        }
     `;
+  }
+
+  uiChanged_(event) {
+    super.uiChanged_(event.target.checked);
   }
 }

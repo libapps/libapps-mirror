@@ -3,15 +3,15 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview Exports the base class for terminal settings Polymer elements.
+ * @fileoverview Exports the base class for terminal settings elements.
  * This element automatically handles data binding between the managed
  * preferences and the preferences being displayed in the ui.
  *
  * @suppress {checkTypes}
  */
-import {PolymerElement} from './polymer.js';
+import {LitElement} from './lit_element.js';
 
-export class TerminalSettingsElement extends PolymerElement {
+export class TerminalSettingsElement extends LitElement {
   constructor() {
     super();
 
@@ -41,7 +41,8 @@ export class TerminalSettingsElement extends PolymerElement {
     return this.preferenceValue_ === this.uiValue_;
   }
 
-  uiChanged_() {
+  uiChanged_(value) {
+    this.uiValue_ = value;
     window.preferenceManager.set(this.preference, this.uiValue_);
   }
 
