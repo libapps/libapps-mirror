@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "asn1js": "~2",
+    "lit-element": "^2.2.1",
     "pkijs": "~2.1",
     "@polymer/polymer": "^3.3",
     "punycode": "~2"
