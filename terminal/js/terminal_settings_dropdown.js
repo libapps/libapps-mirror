@@ -4,6 +4,8 @@
 
 /**
  * @fileoverview Exports an element: terminal-settings-dropdown.
+ *
+ * @suppress {moduleLoad}
  */
 import {html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
@@ -11,6 +13,7 @@ import {TerminalSettingsElement} from './terminal_settings_element.js';
 export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   static get is() { return 'terminal-settings-dropdown'; }
 
+  /** @override */
   static get properties() {
     return {
       preference: {
@@ -25,9 +28,19 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
     };
   }
 
+  constructor() {
+    super();
+    /** @type {string} */
+    this.description;
+    /** @private {!Array<string>} */
+    this.options_;
+  }
+
+  /** @override */
   render() {
     return html`
-        <select id="select" value=${this.uiValue_} @change=${this.uiChanged_}>
+        <select id="select" value=${this.uiValue_}
+            @change=${this.onUiChanged_}>
         ${this.options_.map(
           option => html`<option value=${option}
               ?selected=${this.uiValue_ === option}>${option}</option>
@@ -37,6 +50,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
     `;
   }
 
+  /** @override */
   connectedCallback() {
     super.connectedCallback();
 
@@ -44,7 +58,8 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
         window.PreferenceManager.defaultPreferences[this.preference].type;
   }
 
-  uiChanged_(event) {
+  /** @param {!Event} event */
+  onUiChanged_(event) {
     super.uiChanged_(event.target.value);
   }
 }

@@ -5,13 +5,14 @@
 /**
  * @fileoverview Exports elements for exposing sub pages.
  *
- * @suppress {checkTypes}
+ * @suppress {moduleLoad}
  */
 import {LitElement, html} from './lit_element.js';
 
 export class TerminalSettingsCategoryOptionElement extends LitElement {
   static get is() { return 'terminal-settings-category-option'; }
 
+  /** @override */
   render() {
     return html`
         <slot name="title"></slot>
@@ -22,18 +23,21 @@ export class TerminalSettingsCategoryOptionElement extends LitElement {
 export class TerminalSettingsCategorySelectorElement extends LitElement {
   static get is() { return 'terminal-settings-category-selector'; }
 
+  /** @override */
   render() {
     return html`
         <slot></slot>
     `;
   }
 
+  /** @override */
   connectedCallback() {
     super.connectedCallback();
-    this.activate_(this.firstElementChild);
+    this.activate_(lib.notNull(this.firstElementChild));
     this.addEventListener('click', this.clicked_);
   }
 
+  /** @param {!Event} event */
   clicked_(event) {
     let section = event.target;
     while (section.parentElement !== this) {
@@ -48,12 +52,14 @@ export class TerminalSettingsCategorySelectorElement extends LitElement {
     this.activate_(section);
   }
 
+  /** @param {!Element} element */
   activate_(element) {
     element.setAttribute('active', '');
     const id = element.getAttribute('for');
     document.getElementById(id).setAttribute('active-category', '');
   }
 
+  /** @param {!Element} element */
   deactivate_(element) {
     element.removeAttribute('active');
     const id = element.getAttribute('for');

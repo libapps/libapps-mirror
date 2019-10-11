@@ -17,19 +17,8 @@ describe('terminal_settings_category_selector_tests.js', () => {
   ];
 
   /**
-   * @param {!Array|!NodeList} collection
-   *
-   * @suppress {missingProperties}
-   */
-  const assertIsEmpty = (collection) => {
-    assert.isEmpty(collection);
-  };
-
-  /**
    * @param {string} query
    * @param {?Element} element
-   *
-   * @suppress {missingProperties}
    */
   const assertQueriedElementIs = (query, element) => {
     const elements = [...document.querySelectorAll(query)];
@@ -47,8 +36,8 @@ describe('terminal_settings_category_selector_tests.js', () => {
   });
 
   beforeEach(function() {
-    this.selectorEl = document.createElement(
-        'terminal-settings-category-selector');
+    this.selectorEl = /** @type {!TerminalSettingsCategorySelectorElement} */ (
+        document.createElement('terminal-settings-category-selector'));
     this.selectorEl.innerHTML = categories.map(category => `
         <terminal-settings-category-option for='${category.id}'>
           <h1 slot='title' id='${category.titleId}'>A Title</h1>
@@ -70,8 +59,8 @@ describe('terminal_settings_category_selector_tests.js', () => {
 
   it('sets-first-elements-active-attibute-on-construction', function() {
     document.body.appendChild(this.categoriesEl);
-    assertIsEmpty(document.querySelectorAll('[active-category]'));
-    assertIsEmpty(document.querySelectorAll('[active]'));
+    assert.isEmpty(document.querySelectorAll('[active-category]'));
+    assert.isEmpty(document.querySelectorAll('[active]'));
 
     document.body.appendChild(this.selectorEl);
     assertQueriedElementIs('[active-category]',

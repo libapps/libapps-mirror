@@ -21,10 +21,18 @@ chai.assert = function(expression, message) {};
  * @param {*} expected
  * @param {string=} message
  */
-chai.assert.isAbove = chai.assert.isAtLeast = chai.assert.isAtMost =
-chai.assert.isBelow = chai.assert.deepEqual = chai.assert.deepStrictEqual =
-chai.assert.equal = chai.assert.include = chai.assert.isAbove =
-chai.assert.notEqual = chai.assert.notStrictEqual =
+chai.assert.isAbove =
+chai.assert.isAtLeast =
+chai.assert.isAtMost =
+chai.assert.isBelow =
+chai.assert.deepEqual =
+chai.assert.deepStrictEqual =
+chai.assert.equal =
+chai.assert.include =
+chai.assert.isAbove =
+chai.assert.lengthOf =
+chai.assert.notEqual =
+chai.assert.notStrictEqual =
 chai.assert.strictEqual = function(actual, expected, message) {};
 
 /**
@@ -41,8 +49,13 @@ chai.assert.fail = function(message) {};
  * @param {*} value
  * @param {string=} message
  */
-chai.assert.isDefined = chai.assert.isFalse = chai.assert.isFalse =
-chai.assert.isNaN = chai.assert.isNull = chai.assert.isTrue =
+chai.assert.isDefined =
+chai.assert.isEmpty =
+chai.assert.isFalse =
+chai.assert.isFalse =
+chai.assert.isNaN =
+chai.assert.isNull =
+chai.assert.isTrue =
 chai.assert.isUndefined = function(value, message) {};
 
 /**

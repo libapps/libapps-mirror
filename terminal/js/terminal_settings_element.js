@@ -7,7 +7,7 @@
  * This element automatically handles data binding between the managed
  * preferences and the preferences being displayed in the ui.
  *
- * @suppress {checkTypes}
+ * @suppress {moduleLoad}
  */
 import {LitElement} from './lit_element.js';
 
@@ -15,10 +15,16 @@ export class TerminalSettingsElement extends LitElement {
   constructor() {
     super();
 
-    this.preferenceValue_ = null;
+    /** @type {string} */
+    this.preference;
+    /** @protected {string|boolean|number} */
+    this.preferenceValue_;
+    /** @protected {string|boolean|number} */
+    this.uiValue_;
     this.boundPreferenceChanged_ = this.preferenceChanged_.bind(this);
   }
 
+  /** @override */
   connectedCallback() {
     super.connectedCallback();
 
@@ -29,6 +35,7 @@ export class TerminalSettingsElement extends LitElement {
         this.boundPreferenceChanged_);
   }
 
+  /** @override */
   disconnectedCallback() {
     super.disconnectedCallback();
 
@@ -37,15 +44,19 @@ export class TerminalSettingsElement extends LitElement {
         this.boundPreferenceChanged_);
   }
 
-  isConsistent() {
-    return this.preferenceValue_ === this.uiValue_;
-  }
-
+  /**
+   * @param {string|boolean|number} value
+   * @protected
+   */
   uiChanged_(value) {
     this.uiValue_ = value;
     window.preferenceManager.set(this.preference, this.uiValue_);
   }
 
+  /**
+   * @param {string|boolean|number} value
+   * @private
+   */
   preferenceChanged_(value) {
     this.preferenceValue_ = this.uiValue_ = value;
   }

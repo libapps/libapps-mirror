@@ -4,6 +4,8 @@
 
 /**
  * @fileoverview Exports an element: terminal-settings-colorpicker.
+ *
+ * @suppress {moduleLoad}
  */
 import {html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
@@ -12,6 +14,7 @@ export class TerminalSettingsColorpickerElement extends
     TerminalSettingsElement {
   static get is() { return 'terminal-settings-colorpicker'; }
 
+  /** @override */
   static get properties() {
     return {
       preference: {
@@ -23,13 +26,16 @@ export class TerminalSettingsColorpickerElement extends
     };
   }
 
+  /** @override */
   render() {
     return html`
-        <input type="color" value=${this.uiValue_} @change=${this.uiChanged_}/>
+        <input type="color" value=${this.uiValue_}
+            @change=${this.onUiChanged_}/>
     `;
   }
 
-  uiChanged_(event) {
+  /** @param {!Event} event */
+  onUiChanged_(event) {
     super.uiChanged_(event.target.value);
   }
 }

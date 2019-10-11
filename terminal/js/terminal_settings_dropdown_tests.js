@@ -30,14 +30,13 @@ describe('terminal_settings_dropdown_tests.js', () => {
       new lib.PreferenceManager(new lib.Storage.Memory());
     window.preferenceManager.definePreference(preference, options[0]);
 
-    this.el = document.createElement('terminal-settings-dropdown');
+    this.el = /** @type {!TerminalSettingsDropdownElement} */ (
+        document.createElement('terminal-settings-dropdown'));
     this.el.setAttribute('preference', preference);
     document.body.appendChild(this.el);
 
     // The element renders asynchronously.
-    // TODO(juwa@google.com): Fix linter such that updateComplete can be
-    // accessed as a property, not via a key.
-    return this.el['updateComplete'];
+    return this.el.updateComplete;
   });
 
   afterEach(function() {
@@ -59,15 +58,22 @@ describe('terminal_settings_dropdown_tests.js', () => {
   });
 
   it('updates-preference-when-ui-changes', async function() {
+    const selectEl = this.el.shadowRoot.getElementById('select');
     assert.equal(window.preferenceManager.get(preference), options[0]);
-    assert.equal(this.el.shadowRoot.getElementById('select').value, options[0]);
+    assert.equal(selectEl.value, options[0]);
 
-    this.el.uiChanged_({target: {value: options[1]}});
-    await lib.waitUntil(() => this.el.isConsistent());
+    let prefChanged = test.listenForPrefChange(
+        window.preferenceManager, preference);
+    selectEl.selectedIndex = 1;
+    selectEl.dispatchEvent(new Event('change'));
+    await prefChanged;
     assert.equal(window.preferenceManager.get(preference), options[1]);
 
-    this.el.uiChanged_({target: {value: options[2]}});
-    await lib.waitUntil(() => this.el.isConsistent());
+    prefChanged = test.listenForPrefChange(
+        window.preferenceManager, preference);
+    selectEl.selectedIndex = 2;
+    selectEl.dispatchEvent(new Event('change'));
+    await prefChanged;
     assert.equal(window.preferenceManager.get(preference), options[2]);
   });
 });

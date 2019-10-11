@@ -4,6 +4,8 @@
 
 /**
  * @fileoverview Exports an element: terminal-settings-checkbox.
+ *
+ * @suppress {moduleLoad}
  */
 import {html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
@@ -11,6 +13,7 @@ import {TerminalSettingsElement} from './terminal_settings_element.js';
 export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
   static get is() { return 'terminal-settings-checkbox'; }
 
+  /** @override */
   static get properties() {
     return {
       preference: {
@@ -22,14 +25,22 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
     };
   }
 
+  constructor() {
+    super();
+    /** @type {string} */
+    this.description;
+  }
+
+  /** @override */
   render() {
     return html`
-        <input id="checkbox" type="checkbox" @change=${this.uiChanged_}
+        <input id="checkbox" type="checkbox" @change=${this.onUiChanged_}
             ?checked=${this.uiValue_} />
     `;
   }
 
-  uiChanged_(event) {
+  /** @param {!Event} event */
+  onUiChanged_(event) {
     super.uiChanged_(event.target.checked);
   }
 }

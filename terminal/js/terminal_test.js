@@ -8,6 +8,26 @@
  * @fileoverview Test framework setup when run inside the browser.
  */
 
+// Utility functions for testing.
+const test = {};
+
+/**
+ * Listens for the next change to the specified preference.
+ *
+ * @param {!lib.PreferenceManager} prefMgr
+ * @param {string} prefName
+ * @return {!Promise<void>} Promise which resolves when preference is changed.
+ */
+test.listenForPrefChange = function(prefMgr, prefName) {
+  return new Promise((resolve) => {
+    const observer = () => {
+      resolve();
+      prefMgr.removeObserver(prefName, observer);
+    };
+    prefMgr.addObserver(prefName, observer);
+  });
+};
+
 // Setup the mocha framework.
 // TODO(juwa@google.com): Move preference manager into a module such that it is
 // no longer a global variable.

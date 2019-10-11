@@ -24,14 +24,13 @@ describe('terminal_settings_checkbox_tests.js', () => {
       new lib.PreferenceManager(new lib.Storage.Memory());
     window.preferenceManager.definePreference(preference, false);
 
-    this.el = document.createElement('terminal-settings-checkbox');
+    this.el = /** @type {!TerminalSettingsCheckboxElement} */ (
+        document.createElement('terminal-settings-checkbox'));
     this.el.setAttribute('preference', preference);
     document.body.appendChild(this.el);
 
     // The element renders asynchronously.
-    // TODO(juwa@google.com): Fix linter such that updateComplete can be
-    // accessed as a property, not via a key.
-    return this.el['updateComplete'];
+    return this.el.updateComplete;
   });
 
   afterEach(function() {
@@ -55,12 +54,16 @@ describe('terminal_settings_checkbox_tests.js', () => {
     assert.isFalse(window.preferenceManager.get(preference));
     assert.isFalse(this.el.shadowRoot.getElementById('checkbox').checked);
 
+    let prefChanged = test.listenForPrefChange(
+        window.preferenceManager, preference);
     this.el.shadowRoot.getElementById('checkbox').click();
-    await lib.waitUntil(() => this.el.isConsistent());
+    await prefChanged;
     assert.isTrue(window.preferenceManager.get(preference));
 
+    prefChanged = test.listenForPrefChange(
+        window.preferenceManager, preference);
     this.el.shadowRoot.getElementById('checkbox').click();
-    await lib.waitUntil(() => this.el.isConsistent());
+    await prefChanged;
     assert.isFalse(window.preferenceManager.get(preference));
   });
 });
