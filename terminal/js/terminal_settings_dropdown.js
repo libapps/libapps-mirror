@@ -34,9 +34,9 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
         <select id="select" value="${this.uiValue_}"
             @change="${this.uiChanged_}">
         ${this.options_.map(
-          option => this.uiValue_ === option
-            ? html`<option value="${option}" selected>${option}</option>`
-            : html`<option value="${option}">${option}</option>`
+          option => html`<option value="${option}"
+              ?selected=${this.uiValue_ === option}>${option}</option>
+          `
         )}
         </select>
     `;
