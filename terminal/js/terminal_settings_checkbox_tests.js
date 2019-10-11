@@ -29,8 +29,8 @@ describe('terminal_settings_checkbox_tests.js', () => {
     this.el.setAttribute('preference', preference);
     document.body.appendChild(this.el);
 
-    // the element renders asynchronously.
-    // TODO(juwa@google.com): fix linter such that updateComplete can be
+    // The element renders asynchronously.
+    // TODO(juwa@google.com): Fix linter such that updateComplete can be
     // accessed as a property, not via a key.
     return this.el['updateComplete'];
   });
