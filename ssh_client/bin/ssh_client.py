@@ -194,7 +194,9 @@ def _toolchain_pnacl_env():
         'PKG_CONFIG_PATH': pkgconfig_dir,
         'PKG_CONFIG_LIBDIR': sysroot_libdir,
         'SYSROOT': sysroot,
-        'CPPFLAGS': '-I%s' % (os.path.join(nacl_sdk_root, 'include'),),
+        'CPPFLAGS': '-I%s -I%s' % (
+            os.path.join(sysroot, 'include', 'glibc-compat'),
+            os.path.join(nacl_sdk_root, 'include')),
         'LDFLAGS': '-L%s' % (os.path.join(nacl_sdk_root, 'lib', 'pnacl',
                                           'Release'),),
     }

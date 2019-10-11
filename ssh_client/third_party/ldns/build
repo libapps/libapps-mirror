@@ -37,7 +37,6 @@ def src_configure(metadata):
     tc = metadata['toolchain']
 
     EXTRA_CFLAGS = [
-        '-I%s' % (os.path.join(tc.incdir, 'glibc-compat'),),
         # The configure script tests these structs (and finds them), but then
         # forgets to create the right defines for them.  Force the logic when
         # we build to avoid failures.

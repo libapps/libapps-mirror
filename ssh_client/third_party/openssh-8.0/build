@@ -44,7 +44,6 @@ def src_configure(metadata):
         '-DHAVE_ENDGRENT',
         '-DHAVE_FD_MASK',
         '-include', 'sys/cdefs.h',
-        '-I%s' % (os.path.join(tc.incdir, 'glibc-compat'),),
     ]
 
     EXTRA_CONFIGURE_FLAGS = [
