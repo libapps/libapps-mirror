@@ -19,7 +19,7 @@ import libdot
 # The hash of the node_modules that we maintain.
 # Allow a long line for easy automated updating.
 # pylint: disable=line-too-long
-NODE_MODULES_HASH = '9c49a8c3c8f09bc0975268052dbe382824a49e901f6793f3afd6347382d20c6c'
+NODE_MODULES_HASH = '84259097b393ed263265e277bc3dcd102efb2c8f192be710bab12ed1cd1e7808'
 # pylint: enable=line-too-long
 
 # In sync with Chromium's DEPS file because it's easier to use something that
