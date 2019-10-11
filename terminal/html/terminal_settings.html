@@ -24,71 +24,255 @@
 
   <section id="appearance" class="terminal-settings-category">
     <section>
-      <h3>Background Color</h3>
+      <h3>Background</h3>
 
-      <div class="section-body">
-        <terminal-settings-colorpicker
-            preference="background-color">
-        </terminal-settings-colorpicker>
-      </div>
+      <ul class="section-body">
+        <li>
+          <h4>Pick a theme, or fully customize your Terminal</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+        </li>
+        <li>
+          <h4>Background color</h4>
+          <terminal-settings-colorpicker preference="background-color">
+          </terminal-settings-colorpicker>
+        </li>
+        <li>
+          <h4>Background image</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+        <!-- TODO(juwa@google.com): Hide image options if no image selected -->
+        <li>
+          <h4>Background image position</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <select></select>
+        </li>
+        <li>
+          <h4>Background image blending</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="range" />
+        </li>
+      </ul>
     </section>
 
     <section>
-      <h3>Text Styling</h3>
+      <h3>Text</h3>
 
-      <div class="section-body">
-        <terminal-settings-colorpicker
-            preference="foreground-color">
-        </terminal-settings-colorpicker>
-      </div>
+      <ul class="section-body">
+        <li>
+          <h4>Font face</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <select></select>
+        </li>
+        <li>
+          <h4>Font style</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <select></select>
+        </li>
+        <li>
+          <h4>Font size</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <select></select>
+        </li>
+        <li>
+          <h4>Font color</h4>
+          <terminal-settings-colorpicker preference="foreground-color">
+          </terminal-settings-colorpicker>
+        </li>
+        <li>
+          <h4>Anti-alias</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+      </ul>
     </section>
 
     <section>
-      <h3>Cursor Styling</h3>
+      <h3>Cursor</h3>
 
-      <div class="section-body">
-        <terminal-settings-colorpicker
-            preference="cursor-color">
-        </terminal-settings-colorpicker>
-        <terminal-settings-checkbox
-            description="Cursor Blink"
-            preference="cursor-blink">
-        </terminal-settings-checkbox>
-        <terminal-settings-dropdown
-            description="Cursor Shape"
-            preference="cursor-shape">
-        </terminal-settings-dropdown>
-      </div>
+      <ul class="section-body">
+        <li>
+          <h4>Cursor shape</h4>
+          <terminal-settings-dropdown preference="cursor-shape">
+          </terminal-settings-dropdown>
+        </li>
+        <li>
+          <h4>Cursor color</h4>
+          <terminal-settings-colorpicker preference="cursor-color">
+          </terminal-settings-colorpicker>
+        </li>
+        <li>
+          <h4>Cursor blink</h4>
+          <terminal-settings-checkbox preference="cursor-blink">
+          </terminal-settings-checkbox>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Scrollbar</h3>
+
+      <ul class="section-body">
+        <li>
+          <h4>Scrollbar visibility</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+      </ul>
     </section>
   </section>
 
   <section id="mousekeyboard" class="terminal-settings-category">
     <section>
-      <h3>Copy Paste</h3>
+      <h3>Keyboard</h3>
 
-      <div class="section-body">
-        <terminal-settings-checkbox
-            description="Copy On Select"
-            preference="copy-on-select">
-        </terminal-settings-checkbox>
-        <terminal-settings-checkbox
-            description="Show Notification When Copying"
-            preference="enable-clipboard-notice">
-        <terminal-settings-checkbox
-            description="Mouse Right Click Pastes"
-            preference="mouse-right-click-paste">
-        </terminal-settings-checkbox>
-      </div>
+      <ul class="section-body">
+        <li>
+          <h4>Ctrl-+/-/0 zoom behavior</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+        <li>
+          <h4>Ctrl-C copy behavior</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+        <li>
+          <h4>Ctrl-V paste behavior</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+        <li>
+          <h4>Hide mouse cursor while typing</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <select></select>
+        </li>
+        <li>
+          <h4>AltGr key mode</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <select></select>
+        </li>
+        <li>
+          <h4>Alt-Backspace is Meta-Backspace</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+        <li>
+          <h4>Treat Alt key as Meta Key</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+        <li>
+          <h4>Alt key modifier handling</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <select></select>
+        </li>
+        <li>
+          <h4>Backspace key behavior</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+        <li>
+          <h4>East Asian Ambiguous use two columns</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+        <li>
+          <h4>Support non-UTF-8 C1 control characters</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+        <li>
+          <h4>Home/End key scroll behavior</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h3>Mouse</h3>
+
+      <ul class="section-body">
+        <li>
+          <h4>Scroll to bottom after keystroke</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+        <li>
+          <h4>Scroll to bottom after new output</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+        <li>
+          <h4>Emulate arrow keys with scroll wheel</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h3>Copy & paste</h3>
+
+      <ul class="section-body">
+        <li>
+          <h4>Automatically copy selected content</h4>
+          <terminal-settings-checkbox preference="copy-on-select">
+          </terminal-settings-checkbox>
+        </li>
+        <li>
+          <h4>Show notification when copying content</h4>
+          <terminal-settings-checkbox preference="enable-clipboard-notice">
+          </terminal-settings-checkbox>
+        </li>
+        <li>
+          <h4>Mouse right click pastes content</h4>
+          <terminal-settings-checkbox preference="mouse-right-click-paste">
+          </terminal-settings-checkbox>
+        </li>
+        <li>
+          <h4>Automatically clear text selection</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+      </ul>
     </section>
   </section>
 
   <section id="miscellaneous" class="terminal-settings-category">
-      <div class="section-body">
-        <terminal-settings-checkbox
-            description="Close Window On Exit"
-            preference="close-on-exit">
-        </terminal-settings-checkbox>
-      </div>
+      <h3>Miscellaneous</h3>
+
+      <ul class="section-body">
+        <li>
+          <h4>Close window on exit</h4>
+          <terminal-settings-checkbox preference="close-on-exit">
+          </terminal-settings-checkbox>
+        </li>
+        <li>
+          <h4>Create desktop notifications for alert bells</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+        <li>
+          <h4>Allow changing of text cursor blinking</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+        <li>
+          <h4>Allow clearing of scrollback buffer</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <input type="checkbox" />
+        </li>
+        <li>
+          <h4>Receive encoding</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <select></select>
+        </li>
+        <li>
+          <h4>Terminal encoding</h4>
+          <!-- TODO(juwa@google.com): Add element -->
+          <select></select>
+        </li>
+      </ul>
   </section>
 </body>
 </html>

@@ -12,10 +12,15 @@ html {
 }
 
 body {
+  bottom: 0;
   display: flex;
   flex-wrap: nowrap;
-  margin: 0px;
-  padding: 0px;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 terminal-settings-category-option {
@@ -41,6 +46,7 @@ terminal-settings-category-option[active] > h2 {
   display: none;
   flex-grow: 1;
   margin: 0 40px;
+  overflow: auto;
 }
 
 .terminal-settings-category[active-category] {
@@ -48,9 +54,17 @@ terminal-settings-category-option[active] > h2 {
 }
 
 .section-body {
-  padding: 0 50px;
+  margin: 0;
+  padding: 0;
 }
 
-.section-body > * {
+.section-body > li {
+  border-bottom: 1px solid lightgrey;
   display: block;
+  margin: 0;
+  padding: 0 20px;
+}
+
+.section-body > li > h4 {
+  display: inline-block;
 }

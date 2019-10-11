@@ -13,9 +13,6 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
 
   static get properties() {
     return {
-      description: {
-        type: String,
-      },
       preference: {
         type: String,
       },
@@ -30,7 +27,6 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
 
   render() {
     return html`
-        <label for="select">${this.description}</label>
         <select id="select" value=${this.uiValue_} @change=${this.uiChanged_}>
         ${this.options_.map(
           option => html`<option value=${option}

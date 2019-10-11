@@ -35,12 +35,16 @@ export class TerminalSettingsCategorySelectorElement extends LitElement {
   }
 
   clicked_(event) {
-    this.querySelectorAll('[active]')
-        .forEach(section => this.deactivate_(section));
     let section = event.target;
     while (section.parentElement !== this) {
+      // The click event is in the selector, but not on an option.
+      if (section.parentElement === null) {
+        return;
+      }
       section = section.parentElement;
     }
+    this.querySelectorAll('[active]')
+        .forEach(active => this.deactivate_(active));
     this.activate_(section);
   }
 

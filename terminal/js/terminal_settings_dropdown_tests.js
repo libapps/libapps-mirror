@@ -31,7 +31,6 @@ describe('terminal_settings_dropdown_tests.js', () => {
     window.preferenceManager.definePreference(preference, options[0]);
 
     this.el = document.createElement('terminal-settings-dropdown');
-    this.el.setAttribute('description', 'test element');
     this.el.setAttribute('preference', preference);
     document.body.appendChild(this.el);
 

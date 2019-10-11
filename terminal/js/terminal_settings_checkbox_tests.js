@@ -25,7 +25,6 @@ describe('terminal_settings_checkbox_tests.js', () => {
     window.preferenceManager.definePreference(preference, false);
 
     this.el = document.createElement('terminal-settings-checkbox');
-    this.el.setAttribute('description', 'test element');
     this.el.setAttribute('preference', preference);
     document.body.appendChild(this.el);
 

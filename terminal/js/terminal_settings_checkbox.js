@@ -13,9 +13,6 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
 
   static get properties() {
     return {
-      description: {
-        type: String,
-      },
       preference: {
         type: String,
       },
@@ -27,7 +24,6 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
 
   render() {
     return html`
-        <label for="checkbox">${this.description}</label>
         <input id="checkbox" type="checkbox" @change=${this.uiChanged_}
             ?checked=${this.uiValue_} />
     `;
