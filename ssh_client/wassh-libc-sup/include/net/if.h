@@ -1,0 +1,1 @@
+/* A stub header that some sources include unconditionally. */

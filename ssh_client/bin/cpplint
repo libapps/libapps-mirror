@@ -20,10 +20,16 @@ def main(argv):
     # We don't parse argv on purpose -- pass everything down to cpplint.
     if not argv:
         os.chdir(ssh_client.DIR)
-        argv = glob.glob('src/*.cc') + glob.glob('src/*.h')
+        argv = []
+        for subdir in ('src', os.path.join('wassh-libc-sup', 'include'),
+                       os.path.join('wassh-libc-sup', 'include', 'sys'),
+                       os.path.join('wassh-libc-sup', 'src')):
+            argv += glob.glob(os.path.join(subdir, '*.cc'))
+            argv += glob.glob(os.path.join(subdir, '*.[ch]'))
 
     # TODO: Should prob sort out the /int and /casting warnings.
     cmd = ['cpplint.py',
+           '--extensions=cc,c,h,hpp,cpp',
            ('--filter=-build/header_guard,-build/include,-runtime/int,'
             '-readability/casting,-readability/todo')] + argv
 

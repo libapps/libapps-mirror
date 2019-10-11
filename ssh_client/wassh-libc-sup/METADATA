@@ -1,0 +1,6 @@
+name: "wasm-libc-shim"
+description: "Random C library compatibility headers"
+
+third_party {
+  version: "0.1"
+}

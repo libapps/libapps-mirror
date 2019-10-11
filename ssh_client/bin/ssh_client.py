@@ -212,6 +212,9 @@ def _toolchain_wasm_env():
     pcdir = os.path.join(libdir, 'pkgconfig')
 
     return {
+        'ac_cv_func_calloc_0_nonnull': 'yes',
+        'ac_cv_func_malloc_0_nonnull': 'yes',
+        'ac_cv_func_realloc_0_nonnull': 'yes',
         'CHOST': 'wasm32-wasi',
         'CC': os.path.join(bin_dir, 'clang') + ' --sysroot=%s' % sysroot,
         'CXX': os.path.join(bin_dir, 'clang++') + ' --sysroot=%s' % sysroot,
@@ -221,8 +224,14 @@ def _toolchain_wasm_env():
         'PKG_CONFIG_SYSROOT_DIR': sysroot,
         'PKG_CONFIG_LIBDIR': pcdir,
         'SYSROOT': sysroot,
-        'CPPFLAGS': '-isystem %s' % (incdir,),
-        'LDFLAGS': '-L%s' % (libdir,),
+        'CPPFLAGS': '-isystem %s' % (os.path.join(incdir, 'wassh-libc-sup'),),
+        'LDFLAGS': ' '.join([
+            '-L%s' % (libdir,),
+            '-lwassh-libc-sup',
+            '-Wl,--allow-undefined-file=%s' % (
+                os.path.join(libdir, 'wassh-libc-sup.imports'),),
+            '-Wl,--export=__wassh_signal_handlers',
+        ]),
     }
 
 

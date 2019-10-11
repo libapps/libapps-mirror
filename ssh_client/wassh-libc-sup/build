@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Build WASM libc shim package."""
+
+from __future__ import print_function
+
+import os
+import shutil
+import sys
+
+FILESDIR = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0, os.path.join(FILESDIR, '..', 'bin'))
+
+import ssh_client  # pylint: disable=wrong-import-position
+
+
+S = '%(workdir)s'
+
+
+def src_compile(metadata):
+    """Compile the source."""
+    tc = metadata['toolchain']
+    shutil.rmtree(os.path.join(tc.incdir, 'wassh-libc-sup'), ignore_errors=True)
+    ssh_client.emake('OUTPUT=%s' % (metadata['workdir'],),
+                     cwd=os.path.join(FILESDIR, 'src'))
+
+
+def src_install(metadata):
+    """Install the package."""
+    tc = metadata['toolchain']
+    srcdir = os.path.join(FILESDIR, 'include')
+    for root, _, files in os.walk(srcdir):
+        for header in files:
+            relsrcdir = os.path.relpath(root, srcdir)
+            targetdir = os.path.join(tc.incdir, 'wassh-libc-sup', relsrcdir)
+            os.makedirs(targetdir, exist_ok=True)
+            ssh_client.copy(os.path.join(root, header),
+                            os.path.join(targetdir, header))
+    ssh_client.copy(os.path.join(metadata['workdir'], 'libwassh.a'),
+                    os.path.join(tc.libdir, 'libwassh-libc-sup.a'))
+    ssh_client.copy(os.path.join(FILESDIR, 'src', 'wassh.imports'),
+                    os.path.join(tc.libdir, 'wassh-libc-sup.imports'))
+
+
+ssh_client.build_package(sys.modules[__name__], 'wasm')

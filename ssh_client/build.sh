@@ -61,9 +61,12 @@ for pkg in "${pkgs[@]}"; do
   ./third_party/${pkg}/build --toolchain pnacl
 done
 
+./wassh-libc-sup/build
 # TODO(vapier): Add more here as they work.
 pkgs=(
   zlib
+  openssl
+  ldns
 )
 # Build the WASM packages.
 for pkg in "${pkgs[@]}"; do
