@@ -6,7 +6,7 @@
 set -xe
 
 # Default version must come first.
-SSH_VERSIONS=( 8.0 )
+SSH_VERSIONS=( 8.1 8.0 )
 
 ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 
