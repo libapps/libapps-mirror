@@ -212,6 +212,9 @@ def _toolchain_wasm_env():
     pcdir = os.path.join(libdir, 'pkgconfig')
 
     return {
+        # Only use single core here due to known bug in 89 release:
+        # https://github.com/WebAssembly/binaryen/issues/2273
+        'BINARYEN_CORES': '1',
         'ac_cv_func_calloc_0_nonnull': 'yes',
         'ac_cv_func_malloc_0_nonnull': 'yes',
         'ac_cv_func_realloc_0_nonnull': 'yes',

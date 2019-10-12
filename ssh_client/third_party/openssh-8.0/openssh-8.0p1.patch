@@ -14,12 +14,16 @@
  
 --- a/ssh.c
 +++ b/ssh.c
-@@ -577,7 +577,7 @@ set_addrinfo_port(struct addrinfo *addrs, int port)
+@@ -577,7 +577,12 @@ set_addrinfo_port(struct addrinfo *addrs, int port)
   * Main program for the ssh client.
   */
  int
--main(int ac, char **av)
++#if defined(__pnacl__) || defined(__nacl__)
 +ssh_main(int ac, char **av, const char *subsystem)
++#else
++#define subsystem NULL
+ main(int ac, char **av)
++#endif
  {
  	struct ssh *ssh = NULL;
  	int i, r, opt, exit_status, use_syslog, direct, timeout_ms;
@@ -129,3 +133,22 @@ bz#3059, patch from samuel at cendio.se.
  # else
  #  ifdef O_NOFOLLOW
  	if (flag & AT_SYMLINK_NOFOLLOW)
+
+These statvfs defines might not exist.
+
+--- a/sftp-client.c
++++ b/sftp-client.c
+@@ -384,8 +384,13 @@ get_decode_statvfs(struct sftp_conn *conn, struct sftp_statvfs *st,
+ 	    (r = sshbuf_get_u64(msg, &st->f_namemax)) != 0)
+ 		fatal("%s: buffer error: %s", __func__, ssh_err(r));
+ 
++	st->f_flag = 0;
++#ifdef ST_RDONLY
+ 	st->f_flag = (flag & SSH2_FXE_STATVFS_ST_RDONLY) ? ST_RDONLY : 0;
++#endif
++#ifdef ST_NOSUID
+ 	st->f_flag |= (flag & SSH2_FXE_STATVFS_ST_NOSUID) ? ST_NOSUID : 0;
++#endif
+ 
+ 	sshbuf_free(msg);
+ 

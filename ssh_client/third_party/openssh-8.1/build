@@ -134,6 +134,9 @@ def src_compile(metadata):
     ]
 
     tc = metadata['toolchain']
+    if tc.chost.startswith('wasm'):
+        targets += ['scp', 'sftp', 'ssh', 'ssh-keygen']
+
     ssh_client.emake(*targets)
     ssh_client.run([tc.ar, 'rcs', 'libopenssh.a'] + objects)
 

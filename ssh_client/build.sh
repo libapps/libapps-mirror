@@ -62,17 +62,55 @@ for pkg in "${pkgs[@]}"; do
 done
 
 ./wassh-libc-sup/build
-# TODO(vapier): Add more here as they work.
-pkgs=(
-  zlib
-  openssl
-  ldns
-)
 # Build the WASM packages.
 for pkg in "${pkgs[@]}"; do
   ./third_party/${pkg}/build --toolchain wasm
 done
 
+# Install the WASM programs.  We run them through the legalize process so we
+# split the i64 in the WASI syscall layers to two i32's.  This is a bit of a
+# hack, but it should be good enough for now.  We won't be able to run the
+# resulting files through wasmtime, but we still have the sources.
+# https://github.com/WebAssembly/proposals/issues/7
+# https://github.com/WebAssembly/WASI/issues/54
+#
+# We use -O2 as that seems to provide good enough shrinkage.  -O3/-O4 take
+# much longer but don't produce singificnatly larger/smaller files.  -Os/-Oz
+# also aren't that much smaller than -O2.  So use this pending more testing.
+#
+# Only use single core here due to known bug in 89 release:
+# https://github.com/WebAssembly/binaryen/issues/2273
+export BINARYEN_CORES=1
+PATH+=":${PWD}/output/bin"
+
+WASM_OPTS=()
+if [[ ${DEBUG} == 1 ]]; then
+  WASM_OPTS+=( -O0 )
+else
+  WASM_OPTS+=( -O2 )
+fi
+
+pushd output >/dev/null
+first="true"
+for version in "${SSH_VERSIONS[@]}"; do
+  dir="plugin/wasm"
+  if [[ "${first}" == "true" ]]; then
+    first=
+  else
+    dir+="-openssh-${version}"
+  fi
+  mkdir -p "${dir}"
+
+  for prog in scp sftp ssh ssh-keygen; do
+    wasm-opt \
+      "${WASM_OPTS[@]}" --legalize-js-interface \
+      build/wasm/openssh-${version}*/work/openssh-*/${prog} \
+      -o "${dir}/${prog}.wasm"
+  done
+done
+popd >/dev/null
+
+# Build the PNaCl programs.
 BUILD_ARGS=()
 if [[ $DEBUG == 1 ]]; then
   BUILD_ARGS+=( DEBUG=1 )
