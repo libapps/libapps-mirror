@@ -18,6 +18,7 @@ import ssh_client  # pylint: disable=wrong-import-position
 
 
 ARCHIVES = ('%(P)s-linux.tar.gz',)
+PATCHES = ('%(p)s-ififo.patch',)
 
 
 def src_install(metadata):
