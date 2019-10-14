@@ -21,8 +21,8 @@ nassh.agent.Backend = function(userIO) {
   /**
    * Reference to object with terminal IO functions.
    *
-   * @member {!nassh.agent.Agent.UserIO}
-   * @private
+   * @private {!nassh.agent.Agent.UserIO}
+   * @const
    */
   this.userIO_ = userIO;
 };
@@ -31,15 +31,13 @@ nassh.agent.Backend = function(userIO) {
  * The unique ID of the backend. This is used to reference the backend in the
  * relay options and must not match the regexp /^[a-z]{32}$/.
  *
- * @readonly
- * @const {string}
+ * @type {string}
  */
 nassh.agent.Backend.prototype.BACKEND_ID = 'stub';
 
 /**
  *  Generic response for request types that are not implemented.
  *
- * @readonly
  * @const {!Error}
  */
 nassh.agent.Backend.ERR_NOT_IMPLEMENTED = new Error('not implemented');
@@ -52,7 +50,7 @@ nassh.agent.registerBackend(nassh.agent.Backend);
  * The backend should check whether it is fully operational and run
  * initializations that can fail.
  *
- * @return {!Promise<void>|!Promise<!Error>} A resolving promise if the
+ * @return {!Promise<void>} A resolving promise if the
  *     backend initialized successfully; a rejecting promise otherwise.
  */
 nassh.agent.Backend.prototype.ping = function() {
@@ -63,7 +61,7 @@ nassh.agent.Backend.prototype.ping = function() {
  * Called when the client sends an AGENTC_REQUEST_IDENTITIES request.
  *
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
- * @return {!Promise<!Array<!Identity>>|!Promise<!Error>} A promise
+ * @return {!Promise<!Array<!nassh.agent.messages.Identity>>} A promise
  *     resolving to an array of SSH identities; a rejecting promise with an
  *     error message if the request could not be handled.
  */

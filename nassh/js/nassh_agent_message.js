@@ -18,32 +18,30 @@ nassh.agent = {};
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4
  * @param {!nassh.agent.messages.Numbers} type The type of the message as per
  *     Section 7.1 of the specification.
- * @param {?Uint8Array} [data] The raw data of the message, if any.
+ * @param {!Uint8Array=} data The raw data of the message, if any.
  * @constructor
  */
-nassh.agent.Message = function(type, data) {
+nassh.agent.Message = function(type, data = new Uint8Array(0)) {
   /**
    * Type of the message.
    *
    * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.7.1
-   * @member {!nassh.agent.messages.Numbers}
+   * @type {!nassh.agent.messages.Numbers}
    */
   this.type = type;
 
   /**
    * The raw data of the message.
    *
-   * @member {?Uint8Array}
-   * @private
+   * @private {!Uint8Array}
    */
-  this.data_ = new Uint8Array(data);
+  this.data_ = data;
 
   /**
    * The current offset into the raw message data. This is only used when
    * reading raw messages (i.e. requests).
    *
-   * @member {number}
-   * @private
+   * @private {number}
    */
   this.offset_ = 0;
 
@@ -51,7 +49,7 @@ nassh.agent.Message = function(type, data) {
    * The fields encoded in the message data. This is only used when reading raw
    * messages (i.e. requests) that contain data.
    *
-   * @member {!Object}
+   * @type {!Object}
    */
   this.fields = {};
 };
@@ -92,7 +90,7 @@ nassh.agent.Message.prototype.readUint32 = function() {
   if (this.data_.length < this.offset_ + 4) {
     throw new Error('Message.readUint32: end of data_ reached prematurely');
   }
-  const dv = new DataView(this.data_.buffer, this.data_.buffer.byteOffset);
+  const dv = new DataView(this.data_.buffer, this.data_.byteOffset);
   const uint32 = dv.getUint32(this.offset_);
   this.offset_ += 4;
   return uint32;
@@ -166,6 +164,8 @@ nassh.agent.Message.fromRawMessage = function(rawMessage) {
   if (length + 4 !== rawMessage.length) {
     return null;
   }
-  const message = new nassh.agent.Message(rawMessage[4], rawMessage.slice(5));
+  const message = new nassh.agent.Message(
+      /** @type {!nassh.agent.messages.Numbers} */ (rawMessage[4]),
+      rawMessage.slice(5));
   return nassh.agent.messages.read(message);
 };

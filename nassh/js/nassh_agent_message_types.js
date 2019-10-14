@@ -44,8 +44,8 @@ nassh.agent.messages.FAILURE =
 /**
  * Map message types to reader function.
  *
- * @type {!Object<!nassh.agent.messages.Numbers, function(!nassh.agent.Message):
- *     void>}
+ * @type {!Object<!nassh.agent.messages.Numbers,
+ *     function(!nassh.agent.Message): !nassh.agent.Message>}
  * @private
  */
 nassh.agent.messages.readers_ = {};
@@ -149,7 +149,10 @@ nassh.agent.messages
         'AGENT_PUBLIC_KEY_RESPONSE: message body longer than expected');
   }
 
-  const pk = new nassh.agent.Message(0, message.fields.publicKeyRaw);
+  const pk = new nassh.agent.Message(
+      // Dummy zero value used.
+      /** @type {!nassh.agent.messages.Numbers} */ (0),
+      message.fields.publicKeyRaw);
   message.fields.publicKeyAlgo =
       lib.codec.codeUnitArrayToString(pk.readString());
   if (message.fields.publicKeyAlgo.startsWith('ecdsa')) {
@@ -168,7 +171,7 @@ nassh.agent.messages
 /**
  * Map message types to writer function.
  *
- * @type {!Object<!nassh.agent.messages.Numbers, function(...*):
+ * @type {!Object<!nassh.agent.messages.Numbers, function(...):
  *     !nassh.agent.Message>}
  * @private
  */
@@ -201,14 +204,16 @@ nassh.agent.messages.write = function(type, ...args) {
  * and a UTF-8 encoded human-readable comment.
  *
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
- * @typedef {{keyBlob: !Uint8Array, comment: !Uint8Array}} Identity
+ * @typedef {{keyBlob: !Uint8Array, comment: !Uint8Array}}
  */
+nassh.agent.messages.Identity;
 
 /**
  * Write an AGENT_IDENTITIES_ANSWER response.
  *
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
- * @param {!Array<!Identity>} identities An array of SSH identities.
+ * @param {!Array<!nassh.agent.messages.Identity>} identities An array of SSH
+ *     identities.
  * @return {!nassh.agent.Message}
  */
 nassh.agent.messages
@@ -276,7 +281,7 @@ nassh.agent.messages.KeyTypes = {
  * Decodes an ASN.1-encoded OID into human-readable dot notation.
  *
  * @param {!Uint8Array} asn1Bytes Individual bytes of an ASN.1-encoded OID.
- * @return {string} The decoded human-readable OID; null if the byte
+ * @return {?string} The decoded human-readable OID; null if the byte
  *     representation is invalid.
  * @see https://docs.microsoft.com/en-us/windows/desktop/SecCertEnroll/about-object-identifier
  */
@@ -312,14 +317,19 @@ nassh.agent.messages.decodeOid = function(asn1Bytes) {
  * curves that are to be used with the PIV applet, the algorithm ID is
  * specified.
  *
- * @typedef {{prefix: !string, identifier: string, hashAlgorithm: string,
- *     pivAlgorithmId: string}} CurveInfo
+ * @typedef {{
+ *     prefix: string,
+ *     identifier: string,
+ *     hashAlgorithm: string,
+ *     pivAlgorithmId: string,
+ * }}
  */
+nassh.agent.messages.CurveInfo;
 
 /**
  * Map OIDs to information about their associated elliptic curve.
  *
- * @type {!Object<string, !CurveInfo>}
+ * @type {!Object<string, !nassh.agent.messages.CurveInfo>}
  * @private
  * @see https://tools.ietf.org/html/rfc5656
  * @see https://tools.ietf.org/html/draft-ietf-curdle-ssh-ed25519-02
@@ -352,7 +362,7 @@ nassh.agent.messages.OidToCurveInfo = {
  * Map key types to generator function.
  *
  * @type {!Object<!nassh.agent.messages.KeyTypes,
- *     function(...): !Uint8Arrays>}
+ *     function(...): !Uint8Array>}
  * @private
  */
 nassh.agent.messages.keyBlobGenerators_ = {};

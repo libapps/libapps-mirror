@@ -24,7 +24,7 @@ import {asn1js, pkijs} from './nassh_deps.rollup.js';
  * @param {boolean} isForwarded Whether the agent is being forwarded to the
  *     server.
  * @constructor
- * @implements nassh.agent.Backend
+ * @extends {nassh.agent.Backend}
  */
 nassh.agent.backends.GSC = function(userIO, isForwarded) {
   nassh.agent.Backend.apply(this, [userIO]);
@@ -42,8 +42,8 @@ nassh.agent.backends.GSC = function(userIO, isForwarded) {
   /**
    * The cache used to offer smart card PIN caching to the user.
    *
-   * @member {!lib.CredentialCache}
-   * @private
+   * @private {!lib.CredentialCache}
+   * @const
    */
   this.pinCache_ = new lib.CredentialCache();
   if (!isForwarded) {
@@ -53,13 +53,14 @@ nassh.agent.backends.GSC = function(userIO, isForwarded) {
 
 nassh.agent.backends.GSC.prototype =
     Object.create(nassh.agent.Backend.prototype);
+/** @override */
 nassh.agent.backends.GSC.constructor = nassh.agent.backends.GSC;
 
 /**
  * The unique ID of the backend.
  *
- * @readonly
  * @const {string}
+ * @override
  */
 nassh.agent.backends.GSC.prototype.BACKEND_ID = 'gsc';
 
@@ -79,7 +80,6 @@ nassh.agent.backends.GSC.CLIENT_TITLE = chrome.runtime.getManifest().name;
  *
  * @readonly
  * @const {string}
- * @suppress {checkVars}
  */
 nassh.agent.backends.GSC.SERVER_APP_ID =
     GoogleSmartCard.PcscLiteCommon.Constants.SERVER_OFFICIAL_APP_ID;
@@ -148,8 +148,9 @@ nassh.agent.backends.GSC.HashAlgorithms = {
 /**
  * Initialize the Google Smart Card Connector library context on first use.
  *
- * @return {!Promise<void>|!Promise<!Error>} A resolving Promise if the
+ * @return {!Promise<void>} A resolving Promise if the
  *     initialization succeeded; a rejecting Promise otherwise.
+ * @override
  */
 nassh.agent.backends.GSC.prototype.ping = async function() {
   try {
@@ -157,7 +158,8 @@ nassh.agent.backends.GSC.prototype.ping = async function() {
   } catch (e) {
     this.showMessage(nassh.msg(
         'SMART_CARD_CONNECTOR_NOT_INSTALLED',
-        'https://chrome.google.com/webstore/detail/khpfeaanjngmcnplbdlpegiifgpfgdco'));
+        ['https://chrome.google.com/webstore/detail/' +
+         'khpfeaanjngmcnplbdlpegiifgpfgdco']));
     throw e;
   }
 };
@@ -176,8 +178,8 @@ nassh.agent.backends.GSC.prototype.ping = async function() {
  *     } keyBlobToReader Maps SSH identities to the readers and applets they
  *     have been retrieved from for later use by signRequest.
  * @param {string} reader The name of the reader to connect to.
- * @return {!Promise<!Array<!Identity>>} A Promise resolving to a list of SSH
- *     identities.
+ * @return {!Promise<!Array<!nassh.agent.messages.Identity>>} A Promise
+ *     resolving to a list of SSH identities.
  */
 nassh.agent.backends.GSC.prototype.requestReaderIdentities_ =
     async function(keyBlobToReader, reader) {
@@ -234,9 +236,10 @@ nassh.agent.backends.GSC.prototype.requestReaderIdentities_ =
  * readers. Blocked devices will also be skipped. The backend remembers which
  * key blobs were obtained from which reader.
  *
- * @return {!Promise<!Array<!Identity>>|!Promise<!Error>} A Promise
+ * @return {!Promise<!Array<!nassh.agent.messages.Identity>>} A Promise
  *     resolving to a list of SSH identities; a rejecting Promise if the
  *     connected readers could not be listed or some other error occurred.
+ * @override
  */
 nassh.agent.backends.GSC.prototype.requestIdentities = async function() {
   // Written to this.keyBlobToReader_ in the end to prevent asynchronous
@@ -271,7 +274,7 @@ nassh.agent.backends.GSC.prototype.requestIdentities = async function() {
  * @param {string} appletName The name of the applet on the card (OpenPGP or
  *     PIV) that provides the key.
  * @param {number} numTries The number of PIN attempts the user has left.
- * @return {!Promise<string>|!Promise<void>} A promise resolving to the PIN
+ * @return {!Promise<string>} A promise resolving to the PIN
  *     entered by the user; a rejecting promise if the user cancelled the PIN
  *     entry.
  */
@@ -316,7 +319,10 @@ nassh.agent.backends.GSC.prototype.unlockKey_ = async function(manager, keyId) {
     if (!pinBytes) {
       try {
         const pin = await this.requestPIN(
-            manager.readerShort(), keyId, manager.appletName(), numTries);
+            lib.notNull(manager.readerShort()),
+            keyId,
+            manager.appletName(),
+            numTries);
         pinBytes = new TextEncoder('utf-8').encode(pin);
       } catch (e) {
         throw new Error('GSC.signRequest: authentication canceled by user');
@@ -352,6 +358,7 @@ nassh.agent.backends.GSC.prototype.unlockKey_ = async function(manager, keyId) {
  *     flags are provided, there is no reader corresponding to the requested
  *     key, the key on the reader has changed since requestIdentities has been
  *     called or the user cancels the PIN entry.
+ * @override
  */
 nassh.agent.backends.GSC.prototype.signRequest =
     async function(keyBlob, data, flags) {
@@ -394,8 +401,8 @@ nassh.agent.backends.GSC.prototype.signRequest =
               `GSC.signRequest: unsupported flag value for ECDSA: ` +
               `0x${flags.toString(16)}`);
         }
-        const hashAlgorithm =
-            nassh.agent.messages.OidToCurveInfo[keyInfo.curveOid].hashAlgorithm;
+        const hashAlgorithm = nassh.agent.messages.OidToCurveInfo[
+            lib.notNull(keyInfo.curveOid)].hashAlgorithm;
         dataToSign = new Uint8Array(
             await window.crypto.subtle.digest(hashAlgorithm, data));
         break;
@@ -429,17 +436,18 @@ nassh.agent.backends.GSC.prototype.signRequest =
         const rMpint = nassh.agent.messages.encodeAsWireMpint(rRaw);
         const sMpint = nassh.agent.messages.encodeAsWireMpint(sRaw);
         const signatureBlob = lib.array.concatTyped(rMpint, sMpint);
+        const curveOid = lib.notNull(keyInfo.curveOid);
         prefix = new TextEncoder().encode(
-            nassh.agent.messages.OidToCurveInfo[keyInfo.curveOid].prefix);
+            nassh.agent.messages.OidToCurveInfo[curveOid].prefix);
         const identifier = new TextEncoder().encode(
-            nassh.agent.messages.OidToCurveInfo[keyInfo.curveOid].identifier);
+            nassh.agent.messages.OidToCurveInfo[curveOid].identifier);
         return lib.array.concatTyped(
             nassh.agent.messages.encodeAsWireString(
                 lib.array.concatTyped(prefix, identifier)),
             nassh.agent.messages.encodeAsWireString(signatureBlob));
       case nassh.agent.messages.KeyTypes.EDDSA:
         prefix = new TextEncoder().encode(
-            nassh.agent.messages.OidToCurveInfo[keyInfo.curveOid].prefix);
+            nassh.agent.messages.OidToCurveInfo[curveOid].prefix);
         return lib.array.concatTyped(
             nassh.agent.messages.encodeAsWireString(prefix),
             nassh.agent.messages.encodeAsWireString(rawSignature));
@@ -496,16 +504,16 @@ nassh.agent.backends.GSC.initializeAPIContext = async function() {
  * If the error is not recognized to be a PC/SC-Lite error code or is not
  * a number, the original error is returned.
  *
- * @param {?number|?Error} error A numerical PC/SC-Lite error code or an Error
+ * @param {number|!Error} error A numerical PC/SC-Lite error code or an Error
  *     object, which should be transformed into its textual representation.
- * @param {?string} stack Information about the call stack at the time the
- *     error occurred.
- * @return {?Error}
+ * @param {!Array<string>} stack Information about the call stack at the time
+ *     the error occurred.
+ * @return {!Promise<!Error>}
  */
 nassh.agent.backends.GSC.decodePcscError = async function(error, stack) {
   stack = stack || '';
   // Numeric error codes signify PC/SC-Lite errors.
-  if (Number.isInteger(error)) {
+  if (typeof error === 'number') {
     try {
       const errorText =
           await nassh.agent.backends.GSC.API.pcsc_stringify_error(error);
@@ -548,24 +556,24 @@ nassh.agent.backends.GSC.CommandAPDU = function(
   /**
    * The header of an APDU, consisting of the CLA, INS, P1 and P2 byte in order.
    *
-   * @member {!Uint8Array}
-   * @private
+   * @private {!Uint8Array}
+   * @const
    */
   this.header_ = new Uint8Array([cla, ins, p1, p2]);
 
   /**
    * The data to be sent in the body of the APDU.
    *
-   * @member {!Uint8Array}
-   * @private
+   * @private {!Uint8Array}
+   * @const
    */
   this.data_ = data;
 
   /**
    * If true, a response from the smart card will be expected.
    *
-   * @member {boolean}
-   * @private
+   * @private {boolean}
+   * @const
    */
   this.expectResponse_ = expectResponse;
 };
@@ -697,12 +705,18 @@ nassh.agent.backends.GSC.DATA_OBJECT_TAG_CLASS = {
 nassh.agent.backends.GSC.DataObject = function() {};
 
 /**
+ * @typedef {{
+ *     dataObject: ?nassh.agent.backends.GSC.DataObject,
+ *     index: number
+ * }}
+ */
+nassh.agent.backends.GSC.DataObjectAndIndex;
+
+/**
  * Recursively parse (a range of) the byte representation of a TLV-encoded data
  * object into a DataObject object.
  *
  * @see https://www.cardwerk.com/smartcards/smartcard_standard_ISO7816-4_annex-d.aspx
- * TODO(joelhockey): Change return type from an Array with positional values,
- * to use {{data: ?nassh.agent.backends.GSC.DataObject, index: number}}.
  *
  * @constructs nassh.agent.backends.GSC.DataObject
  * @param {!Uint8Array} bytes The raw bytes of the data object.
@@ -712,10 +726,9 @@ nassh.agent.backends.GSC.DataObject = function() {};
  *     parse.
  * @throws Will throw if the raw data does not follow the specification for
  *     TLV-encoded data objects.
- * @return {!Array<*>} A pair of
- *     a DataObject object that is the result of the parsing and an index into
- *     the input byte array which points to the end of the part consumed so
- *     far.
+ * @return {!nassh.agent.backends.GSC.DataObjectAndIndex} A DataObject object
+ *     that is the result of the parsing and an index into the input byte array
+ *     which points to the end of the part consumed so far.
  */
 nassh.agent.backends.GSC.DataObject.fromBytesInRange = function(
     bytes, start = 0, end = bytes.length) {
@@ -725,7 +738,7 @@ nassh.agent.backends.GSC.DataObject.fromBytesInRange = function(
     ++pos;
   }
   if (pos >= end) {
-    return [null, start];
+    return {dataObject: null, index: start};
   }
 
   const dataObject = new nassh.agent.backends.GSC.DataObject();
@@ -779,15 +792,15 @@ nassh.agent.backends.GSC.DataObject.fromBytesInRange = function(
     dataObject.children = [];
     let child;
     do {
-      [child, pos] = nassh.agent.backends.GSC.DataObject.fromBytesInRange(
-          bytes, pos, valueEnd);
+      ({dataObject: child, index: pos} = nassh.agent.backends.GSC.DataObject
+          .fromBytesInRange(bytes, pos, valueEnd));
       if (child) {
         dataObject.children.push(child);
       }
     } while (child);
   }
 
-  return [dataObject, valueEnd];
+  return {dataObject, index: valueEnd};
 };
 
 /**
@@ -810,11 +823,11 @@ nassh.agent.backends.GSC.DataObject.fromBytesInRange = function(
  */
 nassh.agent.backends.GSC.DataObject.fromBytes = function(bytes) {
   let dataObjects = [];
-  let pos = 0;
+  let index = 0;
   let dataObject;
   do {
-    [dataObject, pos] =
-        nassh.agent.backends.GSC.DataObject.fromBytesInRange(bytes, pos);
+    ({dataObject, index} = nassh.agent.backends.GSC.DataObject
+        .fromBytesInRange(bytes, index));
     if (dataObject) {
       dataObjects.push(dataObject);
     }
@@ -840,7 +853,8 @@ nassh.agent.backends.GSC.DataObject.fromBytes = function(bytes) {
  * Return a data object with a given tag (depth-first search).
  *
  * @param {number} tag
- * @return {?DataObject} The requested data object if present; null otherwise.
+ * @return {?nassh.agent.backends.GSC.DataObject} The requested data object if
+ *     present; null otherwise.
  */
 nassh.agent.backends.GSC.DataObject.prototype.lookup = function(tag) {
   if (this.tag === tag) {
@@ -883,7 +897,10 @@ nassh.agent.backends.GSC.StatusBytes.prototype.value = function() {
   return (this.bytes[0] << 8) + this.bytes[1];
 };
 
-/** @return {string} */
+/**
+ * @return {string}
+ * @override
+ */
 nassh.agent.backends.GSC.StatusBytes.prototype.toString = function() {
   return `(0x${this.bytes[0].toString(16)} 0x${this.bytes[1].toString(16)})`;
 };
@@ -1062,7 +1079,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.appletName = function() {
  * Packs the return values of the thenable into an array if there is not just a
  * single one.
  *
- * @param {!Promise} sCardPromise
+ * @param {!Promise<!GoogleSmartCard.PcscLiteClient.API.Result>} sCardPromise
  * @return {!Promise} A promise resolving to the
  *     return values of the GSC thenable; a rejecting promise containing an
  *     Error object if an error occurred.
@@ -1072,17 +1089,17 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.execute_ = function(
     sCardPromise) {
   // Retain call stack for logging purposes.
   const stack = lib.f.getStack();
-  return sCardPromise.then(
-      (result) =>
-          new Promise(function(resolve, reject) {
-            result.get(
-                (...args) => args.length > 1 ? resolve(args) : resolve(args[0]),
-                reject);
-          })
-              .catch(
-                  (e) =>
-                      nassh.agent.backends.GSC.decodePcscError(e, stack).then(
-                          (e) => Promise.reject(e))));
+  return sCardPromise.then((result) => {
+    return new Promise(function(resolve, reject) {
+        result.get(
+            (...args) => args.length > 1 ? resolve(args) : resolve(args[0]),
+            reject);
+    }).catch((e) => {
+      return nassh.agent.backends.GSC.decodePcscError(
+          /** @type {number|!Error} */ (e), stack)
+          .then((e) => Promise.reject(e));
+    });
+  });
 };
 
 /**
@@ -1324,14 +1341,18 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
  * Information about an SSH public key, including its type and perhaps
  * additional data depending on the type.
  *
- * @typedef {{type: !nassh.agent.messages.KeyTypes, curveOid: string}} KeyInfo
+ * @typedef {{
+ *     type: !nassh.agent.messages.KeyTypes,
+ *     curveOid: ?string,
+ * }}
  */
+nassh.agent.backends.KeyInfo;
 
 /**
  * Fetch the key type and additional information from the algorithm attributes
  * of the authentication subkey.
  *
- * @return {!Promise<!KeyInfo>|!Promise<!Error>} A
+ * @return {!Promise<!nassh.agent.backends.KeyInfo>} A
  *     Promise resolving to a KeyInfo object; a rejecting Promise if no
  *     supported type could be extracted.
  */
@@ -1353,14 +1374,15 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
       const appRelatedData = nassh.agent.backends.GSC.DataObject.fromBytes(
           await this.transmit(FETCH_APPLICATION_RELATED_DATA_APDU));
       const type = appRelatedData.lookup(0xC3).value[0];
+      let curveOid = null;
       switch (type) {
         case nassh.agent.messages.KeyTypes.RSA:
-          return {type};
+          return {type, curveOid};
         case nassh.agent.messages.KeyTypes.ECDSA:
         case nassh.agent.messages.KeyTypes.EDDSA:
           // Curve is determined by the subsequent bytes encoding the OID.
           const curveOidBytes = appRelatedData.lookup(0xC3).value.slice(1);
-          const curveOid = nassh.agent.messages.decodeOid(curveOidBytes);
+          curveOid = nassh.agent.messages.decodeOid(curveOidBytes);
           if (!(curveOid in nassh.agent.messages.OidToCurveInfo)) {
             throw new Error(
                 `SmartCardManager.fetchKeyInfo: unsupported curve OID: ` +
@@ -1396,9 +1418,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
               .fromBytes(certificateObject.lookup(0x53).value)
               .lookup(0x70)
               .value;
-      /** @suppress {checkVars} */
       const asn1Certificate = asn1js.fromBER(certificateBytes.buffer);
-      /** @suppress {checkVars} */
       const certificate =
           new pkijs.Certificate({schema: asn1Certificate.result});
       const algorithmId =
@@ -1406,7 +1426,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
       switch (algorithmId) {
         case '1.2.840.113549.1.1.1':
           // RSA
-          return {type: nassh.agent.messages.KeyTypes.RSA};
+          return {type: nassh.agent.messages.KeyTypes.RSA, curveOid: null};
         case '1.2.840.10045.2.1':
           // ECDSA
           // We deviate from the PIV spec by allowing curves other than P-256.
@@ -1880,9 +1900,8 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.authenticate =
               new Uint8Array(
                   [0x7C, 4 + data.length, 0x82, 0x00, 0x81, data.length]),
               data);
-          const algorithmId =
-              nassh.agent.messages.OidToCurveInfo[keyInfo.curveOid]
-                  .pivAlgorithmId;
+          const algorithmId = nassh.agent.messages.OidToCurveInfo[
+              lib.notNull(keyInfo.curveOid)].pivAlgorithmId;
           const GENERAL_AUTHENTICATE_ECC_APDU_HEADER =
               [0x00, 0x87, algorithmId, 0x9A];
           const signedAuthTemplate =

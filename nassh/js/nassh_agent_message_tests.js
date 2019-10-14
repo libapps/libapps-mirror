@@ -12,13 +12,16 @@
 describe('nassh_agent_message_tests.js', () => {
 
 it('rawMessage', () => {
-  const msg = new nassh.agent.Message(1, new Uint8Array([2, 3, 4]));
+  const msg = new nassh.agent.Message(
+      nassh.agent.messages.Numbers.AGENT_SUCCESS,
+      new Uint8Array([2, 3, 4]));
   const rawMsg = msg.rawMessage();
-  assert.deepStrictEqual(Array.from(rawMsg), [0, 0, 0, 4, 1, 2, 3, 4]);
+  assert.deepStrictEqual(Array.from(rawMsg), [0, 0, 0, 4, 6, 2, 3, 4]);
 });
 
 it('eom', () => {
-  const msg = new nassh.agent.Message(1);
+  const msg = new nassh.agent.Message(
+      nassh.agent.messages.Numbers.AGENT_SUCCESS);
   assert.isTrue(msg.eom(), 'empty message');
   msg.writeUint32(2);
   assert.isTrue(!msg.eom(), 'non-empty message');
@@ -26,18 +29,10 @@ it('eom', () => {
   assert.isTrue(msg.eom(), 'end of non-empty message');
 });
 
-/**
- * Verify the constructor accepts an Array type.
- */
-it('from-Array', () => {
-  const msg = new nassh.agent.Message(1, [1, 2, 3, 4]);
-  assert.equal(msg.readUint32(), 0x01020304);
-  assert.isTrue(msg.eom());
-});
-
 it('readUint32', () => {
   const msg = new nassh.agent.Message(
-      1, new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1]));
+      nassh.agent.messages.Numbers.AGENT_SUCCESS,
+      new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1]));
   assert.equal(msg.readUint32(), 0x01020304, 'big endian');
   assert.equal(msg.readUint32(), 0x05060708, 'correct offset');
 
@@ -45,8 +40,9 @@ it('readUint32', () => {
   assert.throws(() => msg.readUint32());
 });
 
-it('writeUint32', () => {
-  const msg = new nassh.agent.Message(1);
+it('writeUint32', /** @suppress {visibility} msg.data_ */ () => {
+  const msg = new nassh.agent.Message(
+      nassh.agent.messages.Numbers.AGENT_SUCCESS);
 
   // Check unsafe integer.
   assert.throws(() => msg.writeUint32(0.5));
@@ -58,7 +54,7 @@ it('writeUint32', () => {
 
 it('readString', () => {
   const msg = new nassh.agent.Message(
-      1,
+      nassh.agent.messages.Numbers.AGENT_SUCCESS,
       new Uint8Array(
           [0, 0, 0, 3, 1, 2, 3, 0, 0, 0, 4, 4, 5, 6, 7, 0, 0, 0, 2, 8]));
   assert.deepStrictEqual(Array.from(msg.readString()), [1, 2, 3],
@@ -70,11 +66,9 @@ it('readString', () => {
   assert.throws(() => msg.readString());
 });
 
-it('writeString', () => {
-  const msg = new nassh.agent.Message(1);
-
-  // Check unsafe integer.
-  assert.throws(() => msg.writeString([1, 2, 3, 4]));
+it('writeString', /** @suppress {visibility} msg.data_ */ () => {
+  const msg = new nassh.agent.Message(
+      nassh.agent.messages.Numbers.AGENT_SUCCESS);
 
   msg.writeString(new Uint8Array([1, 2, 3]));
   msg.writeString(new Uint8Array([4, 5, 6, 7]));

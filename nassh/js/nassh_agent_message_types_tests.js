@@ -11,14 +11,8 @@
 
 describe('nassh_agent_message_types_tests.js', () => {
 
-it('write', () => {
-  assert.strictEqual(
-      nassh.agent.messages.write(1).type,
-      nassh.agent.messages.Numbers.AGENT_FAILURE, 'invalid type');
-});
-
 // clang-format off
-it('write_identitiesAnswer', () => {
+it('write_identitiesAnswer', /** @suppress {visibility} msg.data_ */ () => {
   const identitiesAnswerMsg = nassh.agent.messages.write(
       nassh.agent.messages.Numbers.AGENT_IDENTITIES_ANSWER, [
         {
@@ -27,7 +21,7 @@ it('write_identitiesAnswer', () => {
         },
         {
           keyBlob: new Uint8Array([6, 7, 8, 9]),
-          comment: new Uint8Array()
+          comment: new Uint8Array(0)
         }
       ]);
   assert.strictEqual(
@@ -44,7 +38,7 @@ it('write_identitiesAnswer', () => {
 });
 // clang-format on
 
-it('write_signResponse', () => {
+it('write_signResponse', /** @suppress {visibility} msg.data_ */ () => {
   const signResponseMsg = nassh.agent.messages.write(
       nassh.agent.messages.Numbers.AGENT_SIGN_RESPONSE,
       new Uint8Array([1, 2, 3, 4]));

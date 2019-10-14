@@ -13,7 +13,8 @@
  * Map backend IDs to the respective classes inheriting from
  * nassh.agent.Backend.
  *
- * @type {!Object<string, function(!nassh.agent.Backend)>}
+ * @type {!Object<string, function(new:nassh.agent.Backend,
+ *     !nassh.agent.Agent.UserIO, boolean)>}
  * @private
  */
 nassh.agent.registeredBackends_ = {};
@@ -21,7 +22,8 @@ nassh.agent.registeredBackends_ = {};
 /**
  * Used by a backend to register itself with the agent.
  *
- * @param {function(!nassh.agent.Backend)} backendClass
+ * @param {function(new:nassh.agent.Backend,
+ *     !nassh.agent.Agent.UserIO, boolean)} backendClass
  */
 nassh.agent.registerBackend = function(backendClass) {
   nassh.agent.registeredBackends_[backendClass.prototype.BACKEND_ID] =
@@ -59,8 +61,8 @@ nassh.agent.Agent = function(backendIDs, term, isForwarded) {
    * The collection of instantiated backends that the agent is using to respond
    * to requests.
    *
-   * @member {!Array<!nassh.agent.Backend>}
-   * @private
+   * @private {!Array<!nassh.agent.Backend>}
+   * @const
    */
   this.backends_ =
       backendIDs
@@ -82,8 +84,8 @@ nassh.agent.Agent = function(backendIDs, term, isForwarded) {
   /**
    * Map backend IDs to the instantiated backend.
    *
-   * @member {!Object<string, !nassh.agent.Backend>}
-   * @private
+   * @private {!Object<string, !nassh.agent.Backend>}
+   * @const
    */
   this.idToBackend_ = {};
   for (const backend of this.backends_) {
@@ -94,8 +96,7 @@ nassh.agent.Agent = function(backendIDs, term, isForwarded) {
    * Map a string representation of an identity's key blob to the ID of the
    * backend that provides it.
    *
-   * @member {!Object<string, string>}
-   * @private
+   * @private {!Object<string, string>}
    */
   this.identityToBackendID_ = {};
 };
@@ -103,8 +104,8 @@ nassh.agent.Agent = function(backendIDs, term, isForwarded) {
 /**
  * Initialize all backends by calling their ping function.
  *
- * @return {!Promise<void>} A resolving promise if all backends initialized
- *     successfully; a rejecting promise otherwise.
+ * @return {!Promise<!Array<undefined>>} A resolving promise if all backends
+ *     initialized successfully; a rejecting promise otherwise.
  */
 nassh.agent.Agent.prototype.ping = function() {
   return Promise.all(this.backends_.map((backend) => backend.ping()));
@@ -132,14 +133,14 @@ nassh.agent.Agent.prototype.handleRequest = function(rawRequest) {
  *
  * @type {!Object<!nassh.agent.messages.Numbers,
  *     function(this:nassh.agent.Agent, !nassh.agent.Message):
- *     !nassh.agent.Message>}
+ *     !Promise<!nassh.agent.Message>>}
  * @private
  * @suppress {lintChecks} Allow non-primitive prototype property.
  */
 nassh.agent.Agent.prototype.requestHandlers_ = {};
 
 /**
- * @param {!Uint8Array} request
+ * @param {!nassh.agent.Message} request
  * @return {!Promise<!nassh.agent.Message>}
  */
 nassh.agent.Agent.prototype.handleRequest_ = function(request) {
@@ -177,6 +178,7 @@ nassh.agent.Agent.keyBlobToAuthorizedKeysFormat = function(keyBlob) {
  * Handle an AGENTC_REQUEST_IDENTITIES request by responding with an
  * AGENT_IDENTITIES_ANSWER.
  *
+ * @this {nassh.agent.Agent}
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
  * @return {!Promise<!nassh.agent.Message>}
  */
@@ -229,6 +231,7 @@ nassh.agent.Agent.prototype
  * Handle an AGENTC_SIGN_REQUEST request by responding with an
  * AGENT_SIGN_RESPONSE.
  *
+ * @this {nassh.agent.Agent}
  * @param {!nassh.agent.Message} request The request as a Message object.
  * @return {!Promise<!nassh.agent.Message>}
  */
@@ -259,8 +262,8 @@ nassh.agent.Agent.UserIO = function(term) {
   /**
    * Reference to the current terminal.
    *
-   * @member {!hterm.Terminal}
-   * @private
+   * @private {!hterm.Terminal}
+   * @const
    */
   this.term_ = term;
 };
