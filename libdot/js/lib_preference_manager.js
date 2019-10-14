@@ -280,10 +280,10 @@ lib.PreferenceManager.prototype.definePreferences = function(defaults) {
  *     preference on this PreferenceManager used to store the ordered list of
  *     child ids.  It is also used in get/add/remove operations to identify the
  *     list of children to operate on.
- * @param {function()} childFactory A function that will be used to generate
- *     instances of these children.  The factory function will receive the
- *     parent lib.PreferenceManager object and a unique id for the new child
- *     preferences.
+ * @param {function(!lib.PreferenceManager, string)} childFactory A function
+ *     that will be used to generate instances of these children.  The factory
+ *     function will receive the parent lib.PreferenceManager object and a
+ *     unique id for the new child preferences.
  */
 lib.PreferenceManager.prototype.defineChildren = function(
     listName, childFactory) {

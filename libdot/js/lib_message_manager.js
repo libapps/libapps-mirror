@@ -154,14 +154,14 @@ lib.MessageManager.prototype.get = function(msgname, args, fallback) {
 };
 
 /**
- * Process all of the "i18n" html attributes found in a given dom fragment.
+ * Process all of the "i18n" html attributes found in a given element.
  *
  * The real work happens in processI18nAttribute.
  *
- * @param {!Document} dom The DOM whose nodes will be translated.
+ * @param {!Element} node The element whose nodes will be translated.
  */
-lib.MessageManager.prototype.processI18nAttributes = function(dom) {
-  var nodes = dom.querySelectorAll('[i18n]');
+lib.MessageManager.prototype.processI18nAttributes = function(node) {
+  var nodes = node.querySelectorAll('[i18n]');
 
   for (var i = 0; i < nodes.length; i++)
     this.processI18nAttribute(nodes[i]);

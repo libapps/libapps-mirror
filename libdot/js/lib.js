@@ -102,3 +102,17 @@ lib.notNull = function(value) {
   lib.assert(value !== null);
   return value;
 };
+
+/**
+ * Verify |value| is not undefined and return |value| if so, else throw Error.
+ * See lib.assert.
+ *
+ * @template T
+ * @param {T} value A value to check for null.
+ * @return {T} A non-undefined |value|.
+ * @closurePrimitive {asserts.truthy}
+ */
+lib.notUndefined = function(value) {
+  lib.assert(value !== undefined);
+  return value;
+};

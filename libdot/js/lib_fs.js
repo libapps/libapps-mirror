@@ -138,7 +138,7 @@ lib.fs.removeFile = function(root, path) {
  * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @return {!Promise<!Array<!FileSystemEntry>>} All the entries in the
+ * @return {!Promise<!Array<!Entry>>} All the entries in the
  *     directory.
  */
 lib.fs.readDirectory = function(root, path) {

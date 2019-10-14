@@ -270,12 +270,12 @@ lib.colors.arrayToRGBA = function(ary) {
  * Overwrite the alpha channel of an rgb/rgba color.
  *
  * @param {string} rgb The normalized CSS color spec.
- * @param {string} alpha The alpha channel.
+ * @param {number} alpha The alpha channel.
  * @return {string} The normalized CSS color spec with updated alpha channel.
  */
 lib.colors.setAlpha = function(rgb, alpha) {
   var ary = lib.colors.crackRGB(rgb);
-  ary[3] = alpha;
+  ary[3] = alpha.toString();
   return lib.colors.arrayToRGBA(ary);
 };
 
