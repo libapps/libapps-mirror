@@ -72,3 +72,8 @@ chai.assert.hasAllKeys = function(object, keys, message) {};
  */
 chai.assert.notProperty =
 chai.assert.property = function(object, property, message) {};
+
+/**
+ * @param {Function} fn
+ */
+chai.assert.throws = function(fn) {};
