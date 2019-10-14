@@ -8,12 +8,14 @@
  * CSP means that we can't kick off the initialization from the html file,
  * so we do it like this instead.
  */
-window.onload = function() {
+window.addEventListener('DOMContentLoaded', (event) => {
   lib.init(() => new popup());
-};
+});
 
 /**
  * Manage the browser extension popup.
+ *
+ * @constructor
  */
 function popup() {
   // The nassh global pref manager.
@@ -86,7 +88,8 @@ popup.prototype.populateList_ = function() {
     const link = document.createElement('div');
     link.id = id;
     link.className = 'links';
-    link.addEventListener('click', this.openLink_.bind(this));
+    link.addEventListener('click',
+        /** @type {!EventListener} */ (this.openLink_.bind(this)));
 
     switch (id) {
       case 'connect-dialog':
@@ -129,17 +132,17 @@ popup.prototype.populateList_ = function() {
  */
 popup.prototype.updateTheme_ = function() {
   let style = document.body.style;
-  style.color = this.htermPrefs_.get('foreground-color');
-  style.backgroundColor = this.htermPrefs_.get('background-color');
-  style.fontSize = this.htermPrefs_.get('font-size') + 'px';
-  style.fontFamily = this.htermPrefs_.get('font-family');
+  style.color = this.htermPrefs_.getString('foreground-color');
+  style.backgroundColor = this.htermPrefs_.getString('background-color');
+  style.fontSize = this.htermPrefs_.getNumber('font-size') + 'px';
+  style.fontFamily = this.htermPrefs_.getString('font-family');
   if (style.webkitFontSmoothing !== undefined)
-    style.webkitFontSmoothing = this.htermPrefs_.get('font-smoothing');
+    style.webkitFontSmoothing = this.htermPrefs_.getString('font-smoothing');
 
   style = document.createElement('style');
   style.textContent = (
       'div.links:hover {' +
-      `  background-color: ${this.htermPrefs_.get('cursor-color')};` +
+      `  background-color: ${this.htermPrefs_.getString('cursor-color')};` +
       '}'
   );
   document.head.appendChild(style);
