@@ -17,6 +17,8 @@
  * Resuming of connections is not supported.
  *
  * @param {number} fd
+ * @constructor
+ * @extends {nassh.Stream}
  */
 nassh.Stream.RelaySshfeWS = function(fd) {
   nassh.Stream.call(this, fd);
@@ -35,7 +37,7 @@ nassh.Stream.RelaySshfeWS = function(fd) {
   this.sshAgent_ = null;
 
   // All the data we've queued but not yet sent out.
-  this.writeBuffer_ = new Uint8Array();
+  this.writeBuffer_ = new Uint8Array(0);
   // Callback function when asyncWrite is used.
   this.onWriteSuccess_ = null;
 
@@ -50,22 +52,24 @@ nassh.Stream.RelaySshfeWS = function(fd) {
  * We are a subclass of nassh.Stream.
  */
 nassh.Stream.RelaySshfeWS.prototype = Object.create(nassh.Stream.prototype);
+/** @override */
 nassh.Stream.RelaySshfeWS.constructor = nassh.Stream.RelaySshfeWS;
 
 /**
  * Open a relay socket.
  *
- * @param {!Object} args
+ * @param {!Object} settings
  * @param {function(boolean, string=)} onComplete
+ * @override
  */
-nassh.Stream.RelaySshfeWS.prototype.asyncOpen_ = function(args, onComplete) {
-  this.io_ = args.io;
-  this.relayHost_ = args.relayHost;
-  this.relayPort_ = args.relayPort;
-  this.relayUser_ = args.relayUser;
-  this.host_ = args.host;
-  this.port_ = args.port;
-  this.sshAgent_ = args.sshAgent;
+nassh.Stream.RelaySshfeWS.prototype.asyncOpen = function(settings, onComplete) {
+  this.io_ = settings.io;
+  this.relayHost_ = settings.relayHost;
+  this.relayPort_ = settings.relayPort;
+  this.relayUser_ = settings.relayUser;
+  this.host_ = settings.host;
+  this.port_ = settings.port;
+  this.sshAgent_ = settings.sshAgent;
 
   // The SSH-FE challenge details.
   let sshFeChallenge = null;
@@ -339,8 +343,9 @@ nassh.Stream.RelaySshfeWS.prototype.onSocketData_ = function(e) {
 /**
  * Queue up some data to write asynchronously.
  *
- * @param {string} data A base64 encoded string.
+ * @param {!ArrayBuffer} data A base64 encoded string.
  * @param {function(number)=} onSuccess Optional callback.
+ * @override
  */
 nassh.Stream.RelaySshfeWS.prototype.asyncWrite = function(data, onSuccess) {
   if (!data.byteLength) {

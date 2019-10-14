@@ -8,6 +8,8 @@
  * Relay ssh-agent messages to another app.
  *
  * @param {number} fd
+ * @constructor
+ * @extends {nassh.Stream}
  */
 nassh.Stream.SSHAgentRelay = function(fd) {
   nassh.Stream.apply(this, [fd]);
@@ -15,23 +17,26 @@ nassh.Stream.SSHAgentRelay = function(fd) {
   this.authAgentAppID_ = null;
   this.port_ = null;
   this.pendingMessageSize_ = null;
-  this.writeBuffer_ = new Uint8Array();
+  this.writeBuffer_ = new Uint8Array(0);
 };
 
 /**
  * We are a subclass of nassh.Stream.
  */
 nassh.Stream.SSHAgentRelay.prototype = Object.create(nassh.Stream.prototype);
+/** @override */
 nassh.Stream.SSHAgentRelay.constructor = nassh.Stream.SSHAgentRelay;
 
 /**
  * Open a connection to agent.
  *
- * @param {!Object} args
- * @param {function(boolean)} onComplete
+ * @param {!Object} settings
+ * @param {function(boolean, ?string=)} onComplete
+ * @override
  */
-nassh.Stream.SSHAgentRelay.prototype.asyncOpen_ = function(args, onComplete) {
-  this.authAgentAppID_ = args.authAgentAppID;
+nassh.Stream.SSHAgentRelay.prototype.asyncOpen = function(
+    settings, onComplete) {
+  this.authAgentAppID_ = settings.authAgentAppID;
   this.port_ = chrome.runtime.connect(this.authAgentAppID_);
 
   // The other extension (e.g. gnubby) sent us a raw ssh-agent message.
@@ -116,7 +121,8 @@ nassh.Stream.SSHAgentRelay.prototype.trySendPacket_ = function() {
   }
 
   // Send the body to the extension.
-  const data = this.writeBuffer_.subarray(0, this.pendingMessageSize_);
+  const data =
+      this.writeBuffer_.subarray(0, lib.notNull(this.pendingMessageSize_));
   this.writeBuffer_ = this.writeBuffer_.subarray(this.pendingMessageSize_);
   // Restart the message process.
   this.pendingMessageSize_ = null;
@@ -135,8 +141,9 @@ nassh.Stream.SSHAgentRelay.prototype.trySendPacket_ = function() {
 /**
  * Append data to write buffer.
  *
- * @param {string} data
+ * @param {!ArrayBuffer} data
  * @param {function(number)} onSuccess
+ * @override
  */
 nassh.Stream.SSHAgentRelay.prototype.asyncWrite = function(data, onSuccess) {
   if (!data.byteLength) {

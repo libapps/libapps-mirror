@@ -9,6 +9,8 @@
  * This is necessary when /dev/tty and stdin can be separate streams. In that
  * case, the input from the user must be buffered, and data must only be given
  * to the first stream that reads it.
+ *
+ * @constructor
  */
 nassh.InputBuffer = function() {
   // The buffered data.
@@ -16,12 +18,16 @@ nassh.InputBuffer = function() {
 
   // The queue of readers that are waiting for data. Readers are only queued
   // when they attempt to read and there is no data available.
+  /**
+   * @const
+   * @private {!Array<{size: number, onRead: function(string):boolean}>}
+   */
   this.pendingReaders_ = [];
 
   // This event is fired with the value true when there is data available to be
   // read, and false when the buffer is empty. It is only fired when this
   // status changes.
-  this.onDataAvailable = new lib.Event();
+  this.onDataAvailable = lib.Event();
 };
 
 /**
@@ -73,7 +79,7 @@ nassh.InputBuffer.prototype.write = function(data) {
  * buffer.
  *
  * @param {number} size
- * @param {function(number)} onRead
+ * @param {function(string)} onRead
  */
 nassh.InputBuffer.prototype.read = function(size, onRead) {
   var avail = this.data_.length;
@@ -108,6 +114,8 @@ nassh.InputBuffer.prototype.read = function(size, onRead) {
  *
  * @param {number} fd
  * @param {!Object} info
+ * @constructor
+ * @extends {nassh.Stream}
  */
 nassh.Stream.Tty = function(fd, info) {
   nassh.Stream.apply(this, [fd]);
@@ -116,17 +124,19 @@ nassh.Stream.Tty = function(fd, info) {
 };
 
 nassh.Stream.Tty.prototype = Object.create(nassh.Stream.prototype);
+/** @override */
 nassh.Stream.Tty.constructor = nassh.Stream.Tty;
 
 /**
- * @param {!Object} info
+ * @param {!Object} settings
  * @param {function(boolean)} onOpen
+ * @override
  */
-nassh.Stream.Tty.prototype.asyncOpen_ = function(info, onOpen) {
-  this.allowRead_ = info.allowRead;
-  this.allowWrite_ = info.allowWrite;
-  this.inputBuffer_ = info.inputBuffer;
-  this.io_ = info.io;
+nassh.Stream.Tty.prototype.asyncOpen = function(settings, onOpen) {
+  this.allowRead_ = settings.allowRead;
+  this.allowWrite_ = settings.allowWrite;
+  this.inputBuffer_ = settings.inputBuffer;
+  this.io_ = settings.io;
   this.acknowledgeCount_ = 0;
 
   setTimeout(function() { onOpen(true); }, 0);
@@ -134,7 +144,8 @@ nassh.Stream.Tty.prototype.asyncOpen_ = function(info, onOpen) {
 
 /**
  * @param {number} size
- * @param {function(string)} onRead
+ * @param {function(!ArrayBuffer)} onRead
+ * @override
  */
 nassh.Stream.Tty.prototype.asyncRead = function(size, onRead) {
   if (!this.open)
@@ -156,8 +167,9 @@ nassh.Stream.Tty.prototype.asyncRead = function(size, onRead) {
 };
 
 /**
- * @param {string} data
+ * @param {!ArrayBuffer} data
  * @param {function(number)} onSuccess
+ * @override
  */
 nassh.Stream.Tty.prototype.asyncWrite = function(data, onSuccess) {
   if (!this.open)

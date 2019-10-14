@@ -6,19 +6,26 @@
 
 /**
  * A set of open streams for a command instance.
+ *
+ * @constructor
  */
 nassh.StreamSet = function() {
-  // Collection of currently open stream instances.
+  /**
+   * Collection of currently open stream instances.
+   *
+   * @private {!Object<number, !nassh.Stream>}
+   * @const
+   */
   this.openStreams_ = {};
 };
 
 /**
  * Open a new stream instance of a given class.
  *
- * @param {function()} streamClass
+ * @param {function(new:nassh.Stream, number, ?)} streamClass
  * @param {number} fd
  * @param {!Object} arg
- * @param {function(boolean)} onOpen
+ * @param {function(boolean, ?string=)} onOpen
  * @return {!nassh.Stream}
  */
 nassh.StreamSet.prototype.openStream = function(streamClass, fd, arg, onOpen) {
@@ -27,7 +34,7 @@ nassh.StreamSet.prototype.openStream = function(streamClass, fd, arg, onOpen) {
 
   var stream = new streamClass(fd, arg);
 
-  stream.asyncOpen_(arg, (success, errorMessage) => {
+  stream.asyncOpen(arg, (success, errorMessage) => {
       if (success) {
         this.openStreams_[fd] = stream;
         stream.open = true;
@@ -56,7 +63,7 @@ nassh.StreamSet.prototype.closeStream = function(fd) {
  */
 nassh.StreamSet.prototype.closeAllStreams = function() {
   for (var fd in this.openStreams_) {
-    this.closeStream(fd);
+    this.closeStream(Number(fd));
   }
 };
 

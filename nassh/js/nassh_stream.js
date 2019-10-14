@@ -14,7 +14,7 @@
  * Base class for streams required by the plugin.
  *
  * @param {number} fd
- * @param {string} path
+ * @param {string=} path
  * @constructor
  */
 nassh.Stream = function(fd, path) {
@@ -36,10 +36,11 @@ nassh.Stream.ERR_STREAM_CANT_WRITE = 'Stream has no write permission';
 /**
  * Open a stream, calling back when complete.
  *
- * @param {string} path
- * @param {function(boolean)} onOpen
+ * @param {!Object} settings Each subclass of nassh.Stream defines its own
+ *     set of properties to be included in settings.
+ * @param {function(boolean, ?string=)} onOpen
  */
-nassh.Stream.prototype.asyncOpen_ = function(path, onOpen) {
+nassh.Stream.prototype.asyncOpen = function(settings, onOpen) {
   setTimeout(() => onOpen(false, 'nassh.Stream.ERR_NOT_IMPLEMENTED'), 0);
 };
 
@@ -51,19 +52,19 @@ nassh.Stream.prototype.asyncOpen_ = function(path, onOpen) {
  * onDataAvailable event.
  *
  * @param {number} size
- * @param {function(string)} onRead
+ * @param {function(!ArrayBuffer)} onRead
  */
 nassh.Stream.prototype.asyncRead = function(size, onRead) {
   if (this.onDataAvailable === undefined)
     throw nassh.Stream.ERR_NOT_IMPLEMENTED;
 
-  setTimeout(() => onRead(''), 0);
+  setTimeout(() => onRead(new ArrayBuffer(0)), 0);
 };
 
 /**
  * Write to a stream.
  *
- * @param {string} data
+ * @param {!ArrayBuffer} data
  * @param {function(number)} onSuccess
  */
 nassh.Stream.prototype.asyncWrite = function(data, onSuccess) {
@@ -84,26 +85,30 @@ nassh.Stream.prototype.close = function() {
  * This special case stream just returns random bytes when read.
  *
  * @param {number} fd
+ * @constructor
+ * @extends {nassh.Stream}
  */
 nassh.Stream.Random = function(fd) {
   nassh.Stream.apply(this, [fd]);
 };
 
 nassh.Stream.Random.prototype = Object.create(nassh.Stream.prototype);
+/** @override */
 nassh.Stream.Random.constructor = nassh.Stream.Random;
 
 /**
- * @param {string} path
- * @param {function(boolean)} onOpen
+ * @param {!Object} settings
+ * @param {function(boolean, ?string=)} onOpen
+ * @override
  */
-nassh.Stream.Random.prototype.asyncOpen_ = function(path, onOpen) {
-  this.path = path;
+nassh.Stream.Random.prototype.asyncOpen = function(settings, onOpen) {
   setTimeout(function() { onOpen(true); }, 0);
 };
 
 /**
  * @param {number} size
- * @param {function(string)} onRead
+ * @param {function(!ArrayBuffer)} onRead
+ * @override
  */
 nassh.Stream.Random.prototype.asyncRead = function(size, onRead) {
   if (!this.open)
