@@ -8,7 +8,7 @@
  * CSP means that we can't kick off the initialization from the html file,
  * so we do it like this instead.
  */
-window.onload = function() {
+window.addEventListener('DOMContentLoaded', (event) => {
   // Workaround https://crbug.com/928045.
   if (nassh.workaroundMissingChromeRuntime()) {
     return;
@@ -21,9 +21,9 @@ window.onload = function() {
     // Delete the 'openas' string so we don't get into a loop.  We want to
     // preserve the rest of the query string when opening the window.
     params.delete('openas');
-    const url = new URL(document.location);
+    const url = new URL(document.location.toString());
     url.search = params.toString();
-    Crosh.openNewWindow_(url.href).then(window.close);
+    Crosh.openNewWindow_(url.href).then(() => window.close());
     return;
   }
 
@@ -38,7 +38,7 @@ window.onload = function() {
     });
   });
   lib.init(Crosh.init);
-};
+});
 
 /**
  * The Crosh-powered terminal command.
@@ -95,7 +95,7 @@ Crosh.init = function() {
   const commandName = params.get('command') || 'crosh';
   window.document.title = commandName;
 
-  terminal.decorate(document.querySelector('#terminal'));
+  terminal.decorate(lib.notNull(document.querySelector('#terminal')));
   const runCrosh = function() {
     terminal.keyboard.bindings.addBinding('Ctrl-Shift-P', function() {
       nassh.openOptionsPage();
@@ -208,7 +208,7 @@ Crosh.prototype.run = function() {
   if (hterm.windowType != 'popup') {
     const params = new URLSearchParams(document.location.search);
     params.set('openas', 'window');
-    const url = new URL(document.location);
+    const url = new URL(document.location.toString());
     url.search = params.toString();
     this.io.println(Crosh.msg('OPEN_AS_WINDOW_TIP',
                               [`\x1b]8;;${url.href}\x07[crosh]\x1b]8;;\x07`]));
@@ -251,7 +251,7 @@ Crosh.prototype.run = function() {
 /**
  * Registers with window.onbeforeunload and runs when page is unloading.
  *
- * @param {!Event} e Before unload event.
+ * @param {?Event} e Before unload event.
  * @return {string} Message to display.
  */
 Crosh.prototype.onBeforeUnload_ = function(e) {

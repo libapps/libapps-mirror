@@ -37,7 +37,7 @@ const openNewWindow = function(url) {
  * CSP means that we can't kick off the initialization from the html file,
  * so we do it like this instead.
  */
-window.onload = function() {
+window.addEventListener('DOMContentLoaded', (event) => {
   // Workaround https://crbug.com/924656.
   if (nassh.workaroundMissingChromeRuntime()) {
     return;
@@ -50,9 +50,9 @@ window.onload = function() {
     // Delete the 'openas' string so we don't get into a loop.  We want to
     // preserve the rest of the query string when opening the window.
     params.delete('openas');
-    const url = new URL(document.location);
+    const url = new URL(document.location.toString());
     url.search = params.toString();
-    openNewWindow(url.href).then(window.close);
+    openNewWindow(url.href).then(() => window.close);
     return;
   }
 
@@ -63,7 +63,7 @@ window.onload = function() {
     hterm.notifyCopyMessage = nassh.msg('NOTIFY_COPY');
 
     var terminal = new hterm.Terminal(profileName);
-    terminal.decorate(document.querySelector('#terminal'));
+    terminal.decorate(lib.notNull(document.querySelector('#terminal')));
     const runNassh = function() {
       terminal.setCursorPosition(0, 0);
       terminal.setCursorVisible(true);
@@ -110,4 +110,4 @@ window.onload = function() {
 
   nassh.disableTabDiscarding();
   lib.init(execNaSSH, console.log.bind(console));
-};
+});

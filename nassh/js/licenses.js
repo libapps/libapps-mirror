@@ -8,14 +8,16 @@
  * CSP means that we can't kick off the initialization from the html file,
  * so we do it like this instead.
  */
-window.onload = function() {
+window.addEventListener('DOMContentLoaded', (event) => {
   document.body.querySelectorAll('h2.package').forEach((ele) => {
     ele.onclick = toggle;
   });
-};
+});
 
 /**
  * Toggle display of the associated license data.
+ *
+ * @this {Element}
  */
 function toggle() {
   const id = this.id.replace(/^[^-]*-/, '');
