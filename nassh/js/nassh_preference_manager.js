@@ -11,6 +11,7 @@
  *
  * @param {!Storage=} storage
  * @constructor
+ * @extends {lib.PreferenceManager}
  */
 nassh.PreferenceManager = function(storage) {
   if (!storage) {
@@ -37,14 +38,16 @@ nassh.PreferenceManager = function(storage) {
 
 nassh.PreferenceManager.prototype =
     Object.create(lib.PreferenceManager.prototype);
+/** @override */
 nassh.PreferenceManager.constructor = nassh.PreferenceManager;
 
 /**
  * Entry point when loading the nassh preferences.
  *
  * @param {function()=} callback Callback when the storage is loaded.
+ * @override
  */
-nassh.PreferenceManager.prototype.readStorage = function(callback=undefined) {
+nassh.PreferenceManager.prototype.readStorage = function(callback) {
   // Handle renaming the "relay-options" field to "nassh-options".
   // We can probably delete this migration by Dec 2019.
   const onRead = () => {
@@ -68,7 +71,7 @@ nassh.PreferenceManager.prototype.readStorage = function(callback=undefined) {
   lib.PreferenceManager.prototype.readStorage.call(this, onRead);
 };
 
-/** @return {function()} */
+/** @return {!lib.PreferenceManager} */
 nassh.PreferenceManager.prototype.createProfile = function() {
   return this.createChild('profile-ids');
 };
@@ -80,7 +83,7 @@ nassh.PreferenceManager.prototype.removeProfile = function(id) {
 
 /**
  * @param {string} id
- * @return {*}
+ * @return {!lib.PreferenceManager}
  */
 nassh.PreferenceManager.prototype.getProfile = function(id) {
   return this.getChild('profile-ids', id);
@@ -89,9 +92,10 @@ nassh.PreferenceManager.prototype.getProfile = function(id) {
 /**
  * lib.PreferenceManager subclass managing per-connection preferences.
  *
- * @param {!Element} parent
+ * @param {!lib.PreferenceManager} parent
  * @param {string} id
  * @constructor
+ * @extends {lib.PreferenceManager}
  */
 nassh.ProfilePreferenceManager = function(parent, id) {
   lib.PreferenceManager.call(this, parent.storage,
@@ -159,4 +163,5 @@ nassh.ProfilePreferenceManager = function(parent, id) {
 
 nassh.ProfilePreferenceManager.prototype =
     Object.create(lib.PreferenceManager.prototype);
+/** @override */
 nassh.ProfilePreferenceManager.constructor = nassh.ProfilePreferenceManager;

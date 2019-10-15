@@ -13,7 +13,7 @@
  *
  * @param {!hterm.Terminal.IO} io
  * @param {!Object} options
- * @param {string} relayLocation
+ * @param {!Location} relayLocation
  * @param {!Storage} relayStorage
  * @constructor
  */
@@ -121,11 +121,9 @@ nassh.GoogleRelay.prototype.init = function(resumePath) {
       var pattern = this.relayServerPattern;
       this.relayServer = lib.f.replaceVars(pattern,
           {host: relayHost, port: relayPort, protocol: protocol});
-      if (!this.useXHR) {
-        protocol = this.useSecure ? 'wss' : 'ws';
-        this.relayServerSocket = lib.f.replaceVars(pattern,
-            {host: relayHost, port: relayPort, protocol: protocol});
-      }
+      protocol = this.useSecure ? 'wss' : 'ws';
+      this.relayServerSocket = lib.f.replaceVars(pattern,
+          {host: relayHost, port: relayPort, protocol: protocol});
 
       // If we made it this far, we're probably not stuck in a redirect loop.
       window.sessionStorage.removeItem('googleRelay.redirectCount');
@@ -160,7 +158,7 @@ nassh.GoogleRelay.prototype.init = function(resumePath) {
  * @param {string} host
  * @param {number} port
  * @param {!nassh.StreamSet} streams
- * @param {function()} onOpen
+ * @param {function(boolean, ?string=)} onOpen
  * @return {!nassh.Stream}
  */
 nassh.GoogleRelay.prototype.openSocket = function(fd, host, port, streams,

@@ -9,15 +9,16 @@
  *
  * Maybe it should be promoted to a shared lib at some point.
  *
- * @param {!DivElement} div
+ * @param {!Element} div
  * @param {!Object} items
  * @param {number=} columnCount
+ * @constructor
  */
 nassh.ColumnList = function(div, items, columnCount = 2) {
   this.div_ = div || null;
   this.items_ = items;
   this.columnCount = columnCount;
-  this.activeIndex = null;
+  this.activeIndex = 0;
 
   // List of callbacks to invoke after the next redraw().
   this.afterRedraw_ = [];
@@ -31,7 +32,7 @@ nassh.ColumnList = function(div, items, columnCount = 2) {
 /**
  * Turn a div into a ColumnList.
  *
- * @param {!DivElement} div
+ * @param {!Element} div
  */
 nassh.ColumnList.prototype.decorate = function(div) {
   this.div_ = div;
@@ -39,7 +40,8 @@ nassh.ColumnList.prototype.decorate = function(div) {
 
   this.div_.style.overflowY = 'auto';
   this.div_.style.overflowX = 'hidden';
-  this.div_.addEventListener('keydown', this.onKeyDown_.bind(this));
+  this.div_.addEventListener('keydown',
+      /** @type {!EventListener} */ (this.onKeyDown_.bind(this)));
 
   var baseId = this.div_.getAttribute('id');
   if (!baseId) {
@@ -165,6 +167,9 @@ nassh.ColumnList.prototype.afterNextRedraw = function(callback) {
   this.afterRedraw_.push(callback);
 };
 
+/** @typedef {{before: number, now: number}} */
+nassh.ColumnList.ActiveIndexChangedEvent;
+
 /**
  * Set the index of the item that should be considered "active".
  *
@@ -210,7 +215,7 @@ nassh.ColumnList.prototype.getActiveNode_ = function() {
  */
 nassh.ColumnList.prototype.getRowColByIndex_ = function(i) {
   return {
-    row: parseInt(i / this.columnCount),
+    row: parseInt(i / this.columnCount, 10),
     column: i % this.columnCount
   };
 };
@@ -243,11 +248,11 @@ nassh.ColumnList.prototype.getIndexByRowCol_ = function(
  *
  * @param {number} row
  * @param {number} column
- * @return {!Node}
+ * @return {!Element}
  */
 nassh.ColumnList.prototype.getNodeByRowCol_ = function(row, column) {
-  return this.div_.querySelector(
-      '[row="' + row + '"][column="' + column + '"]');
+  return lib.notNull(this.div_.querySelector(
+      '[row="' + row + '"][column="' + column + '"]'));
 };
 
 /**
@@ -258,8 +263,8 @@ nassh.ColumnList.prototype.getNodeByRowCol_ = function(row, column) {
  * @return {boolean}
  */
 nassh.ColumnList.prototype.onItemClick_ = function(srcNode, e) {
-  var i = this.getIndexByRowCol_(parseInt(srcNode.getAttribute('row')),
-                                 parseInt(srcNode.getAttribute('column')));
+  var i = this.getIndexByRowCol_(parseInt(srcNode.getAttribute('row'), 10),
+                                 parseInt(srcNode.getAttribute('column'), 10));
   this.setActiveIndex(i);
 
   e.preventDefault();
@@ -284,7 +289,7 @@ nassh.ColumnList.prototype.getColumnHeight_ = function(column) {
 /**
  * Clients can override this to learn when the active index changes.
  *
- * @param {!Event} e
+ * @param {!nassh.ColumnList.ActiveIndexChangedEvent} e
  */
 nassh.ColumnList.prototype.onActiveIndexChanged = function(e) { };
 

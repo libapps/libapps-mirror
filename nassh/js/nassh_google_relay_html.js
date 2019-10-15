@@ -39,7 +39,7 @@ const showRelayError = function(msg) {
 };
 
 /** On load. */
-window.onload = function() {
+window.addEventListener('DOMContentLoaded', (event) => {
   var hash = document.location.hash.substr(1);
 
   if (hash.indexOf('@') != -1) {
@@ -75,7 +75,7 @@ window.onload = function() {
   // Avoid infinite loops when the relay server rejects us and we redirect
   // back and forth.
   let count =
-      parseInt(window.sessionStorage.getItem('googleRelay.redirectCount'));
+      parseInt(window.sessionStorage.getItem('googleRelay.redirectCount'), 10);
   if (isNaN(count))
     count = 0;
   if (++count > 3) {
@@ -83,7 +83,7 @@ window.onload = function() {
     window.sessionStorage.removeItem('googleRelay.redirectCount');
     return;
   }
-  window.sessionStorage.setItem('googleRelay.redirectCount', count);
+  window.sessionStorage.setItem('googleRelay.redirectCount', count.toString());
 
   document.location = url;
-};
+});

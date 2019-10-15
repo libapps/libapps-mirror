@@ -67,8 +67,8 @@ nassh.App.prototype.omniboxOnInputStarted_ = function() {
  * Callback when the user changes the input at all.
  *
  * @param {string} text Current input in the omnibox.
- * @param {function()} suggest Function for us to call to notify of our
- *     matches against the text.
+ * @param {function(!Array<{content: string, description: string}>)} suggest
+ *     Function for us to call to notify of our matches against the text.
  */
 nassh.App.prototype.omniboxOnInputChanged_ = function(text, suggest) {
   var resultsUhp = [];
@@ -183,7 +183,7 @@ nassh.App.prototype.omniboxOnInputCancelled_ = function() {
 /**
  * Bind our callbacks to the omnibox.
  *
- * @param {!Object} omnibox The omnibox instance to bind to.
+ * @param {!chrome.Omnibox} omnibox The omnibox instance to bind to.
  */
 nassh.App.prototype.installOmnibox = function(omnibox) {
   this.omnibox_ = omnibox;
@@ -215,17 +215,19 @@ nassh.App.prototype.installHandlers = function(runtime) {
   runtime.onRestarted.addListener(this.onLaunched.bind(this));
 };
 
-/** @param {!Event} e */
-nassh.App.prototype.onLaunched = function(e) {
+/**
+ * Called on app launch.
+ */
+nassh.App.prototype.onLaunched = function() {
   const width = 900;
   const height = 600;
   if (nassh.v2) {
     chrome.app.window.create('/html/nassh.html', {
-      'innerBounds': {
-        'width': width,
-        'height': height,
+      innerBounds: {
+        width: width,
+        height: height,
       },
-      'id': 'mainWindow',
+      id: 'mainWindow',
     });
   } else {
     lib.f.openWindow(lib.f.getURL('/html/nassh.html'), '',
