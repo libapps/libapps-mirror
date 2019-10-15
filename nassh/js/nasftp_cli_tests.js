@@ -14,6 +14,8 @@ describe('nasftp_cli_tests.js', () => {
  * A mock object for nasftp.Cli usage.
  *
  * @param {!hterm.Terminal} terminal The terminal to display to.
+ * @constructor
+ * @extends {nassh.CommandInstance}
  */
 const MockSftpCommandInstance = function(terminal) {
   this.terminal = terminal;
@@ -24,6 +26,8 @@ const MockSftpCommandInstance = function(terminal) {
 
 /**
  * Mock for the exit method.
+ *
+ * @override
  */
 MockSftpCommandInstance.prototype.exit = function() {
   this.exited_ = true;
