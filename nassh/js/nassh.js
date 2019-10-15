@@ -58,8 +58,7 @@ nassh.msg = function(name, args) {
  *
  * This will also create the /.ssh/ directory if it does not exits.
  *
- * @return {!Promise<!FileSystem, !DirectoryEntry>} The root filesystem handle
- *     and a handle to the /.ssh/ directory.
+ * @return {!Promise<!FileSystem>} The root filesystem handle.
  */
 nassh.getFileSystem = function() {
   const requestFS = window.requestFileSystem || window.webkitRequestFileSystem;
@@ -70,7 +69,7 @@ nassh.getFileSystem = function() {
       // subdir for users to import files to avoid collisions with standard ssh
       // config files.
       lib.fs.getOrCreateDirectory(fileSystem.root, '/.ssh/identity')
-        .then((directoryEntry) => resolve(fileSystem, directoryEntry))
+        .then(() => resolve(fileSystem))
         .catch(reject);
     }
 
@@ -196,19 +195,19 @@ nassh.reloadWindow = function() {
     // to the defaults so we at least get a new window.
     const win = chrome.app.window.current();
     let opts = {
-      'innerBounds': {
-        'width': 900,
-        'height': 600,
+      innerBounds: {
+        width: 900,
+        height: 600,
       },
     };
     if (win) {
       // We have to make sure to not re-use the id field as Chrome won't open a
       // new window if it already exists with the same id.
       opts = {
-        'alwaysOnTop': win.isAlwaysOnTop(),
-        'focused': true,
-        'innerBounds': win.innerBounds,
-        'state': win.isFullscreen() ? 'fullscreen' :
+        alwaysOnTop: win.isAlwaysOnTop(),
+        focused: true,
+        innerBounds: win.innerBounds,
+        state: win.isFullscreen() ? 'fullscreen' :
                  win.isMaximized() ? 'maximized' :
                  win.isMinimized() ? 'minimized' :
                  'normal',

@@ -927,12 +927,9 @@ nassh.ConnectDialog.prototype.syncProfiles_ = function(callback) {
  * Kick off the "Identity" dropdown now that we have access to the filesystem.
  *
  * @param {!FileSystem} fileSystem
- * @param {!DirectoryEntry} sshDirectoryEntry
  */
-nassh.ConnectDialog.prototype.onFileSystemFound_ = function(
-    fileSystem, sshDirectoryEntry) {
+nassh.ConnectDialog.prototype.onFileSystemFound_ = function(fileSystem) {
   this.fileSystem_ = fileSystem;
-  this.sshDirectoryEntry_ = sshDirectoryEntry;
   this.syncIdentityDropdown_();
 
   // Tell the parent we're ready to roll.

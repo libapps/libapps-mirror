@@ -44,9 +44,6 @@ nassh.CommandInstance = function(argv) {
   // A set of open streams for this instance.
   this.streams_ = new nassh.StreamSet();
 
-  // An HTML5 DirectoryEntry for /.ssh/.
-  this.sshDirectoryEntry_ = null;
-
   // The version of the ssh client to load.
   this.sshClientVersion_ = 'pnacl';
 
@@ -200,9 +197,8 @@ nassh.CommandInstance.prototype.run = function() {
       .catch(ferr('FileSystem init failed'));
   });
 
-  var onFileSystemFound = (fileSystem, sshDirectoryEntry) => {
+  const onFileSystemFound = (fileSystem) => {
     this.fileSystem_ = fileSystem;
-    this.sshDirectoryEntry_ = sshDirectoryEntry;
 
     var argstr = this.argv_.args.join(' ');
 
