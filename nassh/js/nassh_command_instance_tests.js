@@ -99,7 +99,7 @@ describe('parseURI', () => {
 
     // Unaccpetable escaped forms.
     ['u@h%6eg', {'username': 'u', 'hostname': 'h%6eg'}],
-    ['u@h:1%302', false],
+    ['u@h:1%302', null],
 
     // Fingerprints.
     ['u;fingerprint=foo@h',
@@ -151,8 +151,8 @@ describe('parseURI', () => {
   data.forEach(([uri, fields]) => {
     it(uri, () => {
       const rv = nassh.CommandInstance.parseURI(uri, true, true);
-      if (rv === false) {
-        assert.isFalse(rv);
+      if (rv === null) {
+        assert.isNull(rv);
       } else {
         const expected = Object.assign({'uri': uri}, defaultFields, fields);
         assert.deepStrictEqual(rv, expected);
@@ -169,7 +169,7 @@ it('parseDestination', () => {
   const data = [
     // Registered protocol handler.
     ['uri:ssh://root@localhost', {'user': 'root', 'host': 'localhost'}],
-    ['uri:root@localhost', false],
+    ['uri:root@localhost', null],
 
     // For non-URI handler, we'll preserve the prefix.
     ['ssh://root@localhost', {'user': 'ssh://root', 'host': 'localhost'}],
@@ -184,13 +184,13 @@ it('parseDestination', () => {
                        'nasshOptions': '--proxy-host=host --proxy-port=1234'}],
 
     // Reject missing usernames.
-    ['localhost', false],
+    ['localhost', null],
   ];
 
   data.forEach((dataSet) => {
     const rv = nassh.CommandInstance.parseDestination(dataSet[0]);
-    if (rv === false) {
-      assert.isFalse(dataSet[1], dataSet[0]);
+    if (rv === null) {
+      assert.isNull(dataSet[1], dataSet[0]);
     } else {
       assert.equal(dataSet[1].user, rv.username, dataSet[0]);
       assert.equal(dataSet[1].host, rv.hostname, dataSet[0]);

@@ -423,7 +423,6 @@ The `name` field can be any one of:
 | `read`        | Plugin wants to read data.        | (int `fd`, int `count`) |
 | `write`       | Plugin wants to write data.       | (int `fd`, ArrayBuffer `data`) |
 | `close`       | Plugin wants to close an fd.      | (int `fd`) |
-| `isReadReady` | Plugin wants to know read status. | (int `fd`) |
 | `exit`        | The plugin is exiting.            | (int `code`) |
 | `printLog`    | Send a string to `console.log`.   | (str `str`) |
 

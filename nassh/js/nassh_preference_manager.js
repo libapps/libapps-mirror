@@ -71,9 +71,10 @@ nassh.PreferenceManager.prototype.readStorage = function(callback) {
   lib.PreferenceManager.prototype.readStorage.call(this, onRead);
 };
 
-/** @return {!lib.PreferenceManager} */
+/** @return {!nassh.PreferenceManager} */
 nassh.PreferenceManager.prototype.createProfile = function() {
-  return this.createChild('profile-ids');
+  return /** @type {!nassh.PreferenceManager} */ (
+      this.createChild('profile-ids'));
 };
 
 /** @param {string} id */
@@ -83,10 +84,11 @@ nassh.PreferenceManager.prototype.removeProfile = function(id) {
 
 /**
  * @param {string} id
- * @return {!lib.PreferenceManager}
+ * @return {!nassh.PreferenceManager}
  */
 nassh.PreferenceManager.prototype.getProfile = function(id) {
-  return this.getChild('profile-ids', id);
+  return /** @type {!nassh.PreferenceManager} */ (
+      this.getChild('profile-ids', id));
 };
 
 /**

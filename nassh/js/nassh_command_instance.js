@@ -21,6 +21,7 @@ import {punycode} from './nassh_deps.rollup.js';
  * command.
  *
  * @param {!Object} argv The argument object passed in from the Terminal.
+ * @constructor
  */
 nassh.CommandInstance = function(argv) {
   // Command arguments.
@@ -157,13 +158,13 @@ nassh.CommandInstance.prototype.run = function() {
     this.io.println(nassh.msg('WELCOME_CHANGELOG',
                               ['\x1b[1mhttps://goo.gl/YnmXOs\x1b[m']));
     let notes = lib.resource.getData('nassh/release/highlights');
-    if (this.prefs_.get('welcome/notes-version') != notes.length) {
+    if (this.prefs_.getNumber('welcome/notes-version') != notes.length) {
       // They upgraded, so reset the counters.
       this.prefs_.set('welcome/show-count', 0);
       this.prefs_.set('welcome/notes-version', notes.length);
     }
     // Figure out how many times we've shown this.
-    var notesShowCount = this.prefs_.get('welcome/show-count');
+    var notesShowCount = this.prefs_.getNumber('welcome/show-count');
     if (notesShowCount < 10) {
       // For new runs, show the highlights directly.
       this.io.print(nassh.msg('WELCOME_RELEASE_HIGHLIGHTS',
@@ -385,11 +386,11 @@ nassh.CommandInstance.prototype.connectToArgString = function(argstr) {
   var ary = argstr.match(/^profile-id:([a-z0-9]+)(\?.*)?/i);
   if (ary) {
     if (isMount) {
-      this.mountProfile(ary[1], ary[2]);
+      this.mountProfile(ary[1]);
     } else if (isSftp) {
-      this.sftpConnectToProfile(ary[1], ary[2]);
+      this.sftpConnectToProfile(ary[1]);
     } else {
-      this.connectToProfile(ary[1], ary[2]);
+      this.connectToProfile(ary[1]);
     }
   } else {
     if (isMount) {
@@ -545,7 +546,7 @@ nassh.CommandInstance.prototype.connectToProfile = function(profileID) {
  * @param {string} uri The URI to parse.
  * @param {boolean=} stripSchema Whether to strip off ssh:// at the start.
  * @param {boolean=} decodeComponents Whether to unescape percent encodings.
- * @return {boolean|!Object} False if we couldn't parse the destination.
+ * @return {?Object} Returns null if we couldn't parse the destination.
  *     An object if we were able to parse out the connect settings.
  */
 nassh.CommandInstance.parseURI = function(uri, stripSchema=true,
@@ -566,7 +567,7 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true,
   /* eslint-enable */
 
   if (!ary)
-    return false;
+    return null;
 
   let params = {};
   var username = ary[1];
@@ -632,7 +633,7 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true,
  * with various entry points into Secure Shell.
  *
  * @param {string} destination The string to connect to.
- * @return {boolean|!Object} False if we couldn't parse the destination.
+ * @return {?Object} Returns null if we couldn't parse the destination.
  *     An object if we were able to parse out the connect settings.
  */
 nassh.CommandInstance.parseDestination = function(destination) {
@@ -645,7 +646,7 @@ nassh.CommandInstance.parseDestination = function(destination) {
     // Strip off the "uri:" before decoding it.
     destination = unescape(destination.substr(4));
     if (!destination.startsWith('ssh:'))
-      return false;
+      return null;
 
     stripSchema = true;
     decodeComponents = true;
@@ -653,7 +654,7 @@ nassh.CommandInstance.parseDestination = function(destination) {
 
   const rv = nassh.CommandInstance.parseURI(destination, stripSchema,
                                             decodeComponents);
-  if (rv === false)
+  if (rv === null)
     return rv;
 
   // Turn the relay URI settings into nassh command line options.
@@ -685,7 +686,7 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
   }
 
   var rv = nassh.CommandInstance.parseDestination(destination);
-  if (rv === false) {
+  if (rv === null) {
     this.io.println(nassh.msg('BAD_DESTINATION', [destination]));
     this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
     return;
@@ -705,7 +706,7 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
  */
 nassh.CommandInstance.prototype.mountDestination = function(destination) {
   var rv = nassh.CommandInstance.parseDestination(destination);
-  if (rv === false) {
+  if (rv === null) {
     this.io.println(nassh.msg('BAD_DESTINATION', [destination]));
     this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
     return;
@@ -794,7 +795,7 @@ nassh.CommandInstance.splitCommandLine = function(argstr) {
 nassh.CommandInstance.prototype.sftpConnectToDestination = function(
     destination) {
   const rv = nassh.CommandInstance.parseDestination(destination);
-  if (rv === false) {
+  if (rv === null) {
     this.io.println(nassh.msg('BAD_DESTINATION', [destination]));
     this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
     return;
@@ -969,7 +970,6 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
   // If they're using an internationalized domain name (IDN), then punycode
   // will return a different ASCII name.  Include that in the display for the
   // user so it's clear where we end up trying to connect to.
-  /** @suppress {checkVars} */
   var idn_hostname = punycode.toASCII(params.hostname);
   var disp_hostname = params.hostname;
   if (idn_hostname != params.hostname)
@@ -1247,7 +1247,8 @@ nassh.CommandInstance.prototype.onVTKeystroke_ = function(data) {
  * @param {number} fd The file descriptor index.
  * @param {boolean} allowRead True if this stream can be read from.
  * @param {boolean} allowWrite True if this stream can be written to.
- * @param {function()} onOpen Callback to call when the stream is opened.
+ * @param {function(boolean, ?string=)} onOpen Callback to call when the
+ *     stream is opened.
  * @return {!Object} The newly created stream.
  */
 nassh.CommandInstance.prototype.createTtyStream = function(
@@ -1392,7 +1393,7 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
  * Registers with window.onbeforeunload and runs when page is unloading.
  *
  * @param {!Event} e Before unload event.
- * @return {string} Message to display.
+ * @return {string|undefined} Message to display.
  */
 nassh.CommandInstance.prototype.onBeforeUnload_ = function(e) {
   if (hterm.windowType == 'popup')
@@ -1428,6 +1429,7 @@ nassh.CommandInstance.prototype.onConnectDialog_ = {};
 /**
  * Sent from the dialog when the user chooses to mount a profile.
  *
+ * @this {nassh.CommandInstance}
  * @param {!hterm.Frame} dialogFrame
  * @param {string} profileID Terminal preference profile name.
  */
@@ -1441,6 +1443,7 @@ nassh.CommandInstance.prototype.onConnectDialog_.mountProfile = function(
 /**
  * Sent from the dialog when the user chooses to connect to a profile via sftp.
  *
+ * @this {nassh.CommandInstance}
  * @param {!hterm.Frame} dialogFrame
  * @param {string} profileID Terminal preference profile name.
  */
@@ -1454,6 +1457,7 @@ nassh.CommandInstance.prototype.onConnectDialog_.sftpConnectToProfile =
 /**
  * Sent from the dialog when the user chooses to connect to a profile.
  *
+ * @this {nassh.CommandInstance}
  * @param {!hterm.Frame} dialogFrame
  * @param {string} profileID Terminal preference profile name.
  */
@@ -1483,11 +1487,12 @@ nassh.CommandInstance.prototype.onPlugin_.printLog = function(str) {
 /**
  * Plugin has exited.
  *
+ * @this {nassh.CommandInstance}
  * @param {number} code Exit code, 0 for success.
  */
 nassh.CommandInstance.prototype.onPlugin_.exit = function(code) {
   console.log('plugin exit: ' + code);
-  this.exit(code);
+  this.exit(code, /*noReconnect=*/false);
 };
 
 /**
@@ -1498,6 +1503,7 @@ nassh.CommandInstance.prototype.onPlugin_.exit = function(code) {
  *
  * In the future, the plugin may handle its own files.
  *
+ * @this {nassh.CommandInstance}
  * @param {number} fd The integer to associate with this request.
  * @param {string} path The path to the file to open.
  * @param {number} mode The mode to open the path.
@@ -1532,6 +1538,7 @@ nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
 };
 
 /**
+ * @this {nassh.CommandInstance}
  * @param {number} fd
  * @param {string} host
  * @param {number} port
@@ -1540,6 +1547,10 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(
     fd, host, port) {
   var stream = null;
 
+  /**
+   * @param {boolean} success
+   * @param {?string=} error
+   */
   const onOpen = (success, error) => {
     if (!success) {
       this.io.println(nassh.msg('STREAM_OPEN_ERROR', ['socket', error]));
@@ -1581,8 +1592,9 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(
  *
  * This is used to write to HTML5 Filesystem files.
  *
+ * @this {nassh.CommandInstance}
  * @param {number} fd The file handle to write to.
- * @param {string} data The content to write.
+ * @param {!ArrayBuffer} data The content to write.
  */
 nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
   var stream = this.streams_.getStreamByFd(fd);
@@ -1650,6 +1662,7 @@ nassh.CommandInstance.prototype.onSftpInitialised = function() {
 /**
  * Plugin wants to read from a fd.
  *
+ * @this {nassh.CommandInstance}
  * @param {number} fd The file handle to read from.
  * @param {number} size How many bytes to read.
  */
@@ -1667,25 +1680,9 @@ nassh.CommandInstance.prototype.onPlugin_.read = function(fd, size) {
 };
 
 /**
- * Notify the plugin that data is available to read.
- *
- * @param {number} fd The file handle to data available for reading.
- */
-nassh.CommandInstance.prototype.onPlugin_.isReadReady = function(fd) {
-  var stream = this.streams_.getStreamByFd(fd);
-
-  if (!stream) {
-    console.warn('Attempt to call isReadReady from unknown fd: ' + fd);
-    return;
-  }
-
-  var rv = stream.isReadReady();
-  this.sendToPlugin_('onIsReadReady', [fd, rv]);
-};
-
-/**
  * Plugin wants to close a file descriptor.
  *
+ * @this {nassh.CommandInstance}
  * @param {number} fd The file handle to close.
  */
 nassh.CommandInstance.prototype.onPlugin_.close = function(fd) {
