@@ -42,9 +42,8 @@ def main(argv):
     externs = ['--js_module_root=nassh'] + [
         '--externs=%s' % os.path.relpath(x) for x in
         glob.glob(os.path.join(nassh.DIR, 'externs', '*.js'))]
-    # TODO(joelhockey): Fix nassh and don't turn off 'checkTypes'.
     closure_args = list(libdot.lint.DEFAULT_CLOSURE_ARGS) + externs + [
-        '--jscomp_off=checkTypes', os.path.relpath(DEPS_FILE)]
+        os.path.relpath(DEPS_FILE)]
     return libdot.lint.main(argv, paths=_get_default_paths(), mkdeps=mkdeps,
                             closure_args=closure_args)
 

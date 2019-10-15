@@ -14,6 +14,7 @@
  * @param {!hterm.Terminal.IO} io
  * @param {!Object} options
  * @param {string} username
+ * @constructor
  */
 nassh.Relay.Sshfe = function(io, options, username) {
   this.io = io;
