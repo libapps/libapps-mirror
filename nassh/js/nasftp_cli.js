@@ -956,8 +956,7 @@ nasftp.Cli.commandCat_ = function(args) {
     }
   };
 
-  return this.client.readFile(this.makePath_(path), handleChunk,
-                              {offset: offset, length: length})
+  return this.client.readFile(this.makePath_(path), handleChunk, offset, length)
     .then(() => {
       if (!finalNewline) {
         this.io.println('');
@@ -1111,8 +1110,7 @@ nasftp.Cli.commandClip_ = function(args) {
     chunks.push(chunk);
   };
 
-  return this.client.readFile(this.makePath_(path), handleChunk,
-                              {offset: offset, length: length})
+  return this.client.readFile(this.makePath_(path), handleChunk, offset, length)
     .then(() => {
       const reader = new lib.fs.FileReader();
       return reader.readAsText(new Blob(chunks));
@@ -1453,7 +1451,7 @@ nasftp.Cli.commandList_ = function(args, opts) {
           // One entry per line.
           entries.forEach((file) => {
             if (opts.all || !file.filename.startsWith('.')) {
-              this.rawprintln_(opts.long ? file.long_filename : file.filename);
+              this.rawprintln_(opts.long ? file.longFilename : file.filename);
             }
           });
         } else {

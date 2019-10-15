@@ -292,7 +292,7 @@ it('sftpPacketGetData', () => {
   assert.deepStrictEqual(new Uint8Array([97, 98, 99, 100]), packet.getData());
   assert.isTrue(packet.eod());
 
-  assert.deepStrictEqual(new Uint8Array(), packet.getData());
+  assert.deepStrictEqual(new Uint8Array(0), packet.getData());
   assert.isTrue(packet.eod());
 });
 

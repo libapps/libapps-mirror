@@ -8,6 +8,8 @@ nassh.sftp.packets = {};
 
 /**
  * Possible status code values.
+ *
+ * @enum {number}
  */
 nassh.sftp.packets.StatusCodes = {
   OK:                0,
@@ -26,6 +28,8 @@ nassh.sftp.packets.StatusCodes = {
  * and language.
  *
  * @param {!nassh.sftp.Packet} packet
+ * @constructor
+ * @extends {nassh.sftp.Packet}
  */
 nassh.sftp.packets.StatusPacket = function(packet) {
   this.requestId = packet.getUint32();
@@ -38,6 +42,8 @@ nassh.sftp.packets.StatusPacket = function(packet) {
  * SFTP Data Packet containing the request id and associated data.
  *
  * @param {!nassh.sftp.Packet} packet
+ * @constructor
+ * @extends {nassh.sftp.Packet}
  */
 nassh.sftp.packets.DataPacket = function(packet) {
   this.requestId = packet.getUint32();
@@ -49,6 +55,8 @@ nassh.sftp.packets.DataPacket = function(packet) {
  * SFTP Handle Packet containing the request id and a file handle.
  *
  * @param {!nassh.sftp.Packet} packet
+ * @constructor
+ * @extends {nassh.sftp.Packet}
  */
 nassh.sftp.packets.HandlePacket = function(packet) {
   this.requestId = packet.getUint32();
@@ -60,22 +68,21 @@ nassh.sftp.packets.HandlePacket = function(packet) {
  * attributes.
  *
  * @param {!nassh.sftp.Packet} packet
+ * @constructor
+ * @extends {nassh.sftp.Packet}
  */
 nassh.sftp.packets.NamePacket = function(packet) {
   this.requestId = packet.getUint32();
   this.fileCount = packet.getUint32();
+  /* @type {!Array<!nassh.sftp.File>} */
   this.files = [];
 
   for(var i = 0; i < this.fileCount; i++) {
-    const fileName = packet.getUtf8String();
-    const longFileName = packet.getUtf8String();
-
-    var fileData = nassh.sftp.packets.getFileAttrs(packet);
-
-    fileData.filename = fileName;
-    fileData.long_filename = longFileName;
-
-    this.files.push(fileData);
+    this.files.push({
+      filename: packet.getUtf8String(),
+      longFilename: packet.getUtf8String(),
+      fileAttrs: nassh.sftp.packets.getFileAttrs(packet)
+    });
   }
 };
 
@@ -83,6 +90,8 @@ nassh.sftp.packets.NamePacket = function(packet) {
  * SFTP Attrs Packet containing the request id and a file's attributes.
  *
  * @param {!nassh.sftp.Packet} packet
+ * @constructor
+ * @extends {nassh.sftp.Packet}
  */
 nassh.sftp.packets.AttrsPacket = function(packet) {
   this.requestId = packet.getUint32();
@@ -96,6 +105,8 @@ nassh.sftp.packets.AttrsPacket = function(packet) {
  * original packet and delay parsing to whatever call made the extended request.
  *
  * @param {!nassh.sftp.Packet} packet The source packet to read from.
+ * @constructor
+ * @extends {nassh.sftp.Packet}
  */
 nassh.sftp.packets.ExtendedReplyPacket = function(packet) {
   this.requestId = packet.getUint32();
@@ -106,10 +117,12 @@ nassh.sftp.packets.ExtendedReplyPacket = function(packet) {
  * SFTP response to statvfs@openssh.com packets.
  *
  * @param {!nassh.sftp.packets.ExtendedReplyPacket} packet The extended reply.
+ * @constructor
+ * @extends {nassh.sftp.Packet}
  */
 nassh.sftp.packets.DiskFreePacket = function(packet) {
   const p = packet.rawPacket;
-  this.requestId = p.requestId;
+  this.requestId = packet.requestId;
   this.bsize = p.getUint64();
   this.frsize = p.getUint64();
   this.blocks = p.getUint64();
@@ -181,6 +194,7 @@ nassh.sftp.packets.ValidExtension = function(ext) {
  *
  * @param {!nassh.sftp.Packet} packet
  * @constructor
+ * @extends {nassh.sftp.Packet}
  */
 nassh.sftp.packets.VersionPacket = function(packet) {
   this.requestId = 'init';
@@ -203,6 +217,8 @@ nassh.sftp.packets.VersionPacket = function(packet) {
  * data (also potentially garbage).
  *
  * @param {!nassh.sftp.Packet} packet
+ * @constructor
+ * @extends {nassh.sftp.Packet}
  */
 nassh.sftp.packets.UnknownPacket = function(packet) {
   this.requestId = packet.getUint32();
@@ -211,6 +227,8 @@ nassh.sftp.packets.UnknownPacket = function(packet) {
 
 /**
  * Possible SFTP File Transfer flags attributes (SSH_FILEXFER_ATTR_XXX).
+ *
+ * @enum {number}
  */
 nassh.sftp.packets.FileXferAttrs = {
   SIZE:        0x00000001,
@@ -300,7 +318,7 @@ nassh.sftp.packets.bitsToUnixModeLine = function(bits) {
  * Given a packet (at the correct offset), will read one file's attributes.
  *
  * @param {!nassh.sftp.Packet} packet
- * @return {!Object}
+ * @return {!nassh.sftp.FileAttrs}
  */
 nassh.sftp.packets.getFileAttrs = function(packet) {
   var attrs = {};
@@ -325,8 +343,8 @@ nassh.sftp.packets.getFileAttrs = function(packet) {
     attrs.isSocket = (fmt == nassh.sftp.packets.PermissionBits.IFSOCK);
   }
   if (attrs.flags & nassh.sftp.packets.FileXferAttrs.ACMODTIME) {
-    attrs.last_accessed = packet.getUint32();
-    attrs.last_modified = packet.getUint32();
+    attrs.lastAccessed = packet.getUint32();
+    attrs.lastModified = packet.getUint32();
   }
   if (attrs.flags & nassh.sftp.packets.FileXferAttrs.EXTENDED) {
     var extendedCount = packet.getUint32();
@@ -350,7 +368,7 @@ nassh.sftp.packets.getFileAttrs = function(packet) {
  * Serialize an attribute object back into a packet.
  *
  * @param {!nassh.sftp.Packet} packet
- * @param {!Object} attrs
+ * @param {!nassh.sftp.FileAttrs} attrs
  */
 nassh.sftp.packets.setFileAttrs = function(packet, attrs) {
   // We only add fields we know how to handle.
@@ -362,18 +380,18 @@ nassh.sftp.packets.setFileAttrs = function(packet, attrs) {
   ));
 
   if (attrs.flags & nassh.sftp.packets.FileXferAttrs.SIZE) {
-    packet.setUint64(attrs.size);
+    packet.setUint64(lib.notUndefined(attrs.size));
   }
   if (attrs.flags & nassh.sftp.packets.FileXferAttrs.UIDGID) {
-    packet.setUint32(attrs.uid);
-    packet.setUint32(attrs.gid);
+    packet.setUint32(lib.notUndefined(attrs.uid));
+    packet.setUint32(lib.notUndefined(attrs.gid));
   }
   if (attrs.flags & nassh.sftp.packets.FileXferAttrs.PERMISSIONS) {
-    packet.setUint32(attrs.permissions);
+    packet.setUint32(lib.notUndefined(attrs.permissions));
   }
   if (attrs.flags & nassh.sftp.packets.FileXferAttrs.ACMODTIME) {
-    packet.setUint32(attrs.last_accessed);
-    packet.setUint32(attrs.last_modified);
+    packet.setUint32(lib.notUndefined(attrs.last_accessed));
+    packet.setUint32(lib.notUndefined(attrs.last_modified));
   }
 };
 
@@ -394,6 +412,8 @@ nassh.sftp.packets.epochToLocal = function(epoch) {
 
 /**
  * Possible SFTP Request Packet types
+ *
+ * @enum {number}
  */
 nassh.sftp.packets.RequestPackets = {
   INIT:     1,
@@ -421,6 +441,9 @@ nassh.sftp.packets.RequestPackets = {
 
 /**
  * Possible SFTP Response Packet types
+ *
+ * @type {!Object<number, function(new:nassh.sftp.Packet, !nassh.sftp.Packet)>}
+ * @const
  */
 nassh.sftp.packets.ResponsePackets = {
   2: nassh.sftp.packets.VersionPacket,
@@ -434,6 +457,8 @@ nassh.sftp.packets.ResponsePackets = {
 
 /**
  * Possible bit flags with open packets.
+ *
+ * @enum {number}
  */
 nassh.sftp.packets.OpenFlags = {
   READ:   0x00000001,

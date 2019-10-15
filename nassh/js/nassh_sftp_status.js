@@ -10,7 +10,8 @@
  * Error message while preserving the status code.
  *
  * @param {!Object} statusPacket
- * @param {!Object} expectedPacketType
+ * @param {string} expectedPacketType
+ * @constructor
  */
 nassh.sftp.StatusError = function(statusPacket, expectedPacketType) {
   this.name = 'StatusError';
@@ -21,4 +22,5 @@ nassh.sftp.StatusError = function(statusPacket, expectedPacketType) {
 };
 
 nassh.sftp.StatusError.prototype = Object.create(Error.prototype);
+/** @override */
 nassh.sftp.StatusError.prototype.constructor = nassh.sftp.StatusError;

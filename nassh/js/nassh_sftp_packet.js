@@ -8,9 +8,11 @@
  * A general packet. Utilizes an offset to keep track of data being
  * read/written.
  *
- * @param {number|!Array<number>=} arg The initial data for the new packet.
+ * @param {number|!ArrayBufferView|!Array<number>=} arg The initial data for
+ *     the new packet.
+ * @constructor
  */
-nassh.sftp.Packet = function(arg) {
+nassh.sftp.Packet = function(arg = []) {
   this.offset_ = 0;
   const u8 = new Uint8Array(arg);
   this.packet_ = u8.buffer;
@@ -23,6 +25,7 @@ nassh.sftp.Packet = function(arg) {
  * Expand the array buffer storage.
  *
  * @param {number} size How many bytes to add.
+ * @private
  */
 nassh.sftp.Packet.prototype.addSpace_ = function(size) {
   const newSize = this.offset_ + size;
@@ -81,7 +84,8 @@ nassh.sftp.Packet.prototype.setUint64 = function(uint64) {
  * binary data with no encoding.  This function writes the specified string
  * to the packet with no encoding -- the bytes are directly appended.
  *
- * @param {string} binaryString The binary string to append to the packet.
+ * @param {!ArrayBufferView|string} binaryString The binary string to append
+ *     to the packet.
  */
 nassh.sftp.Packet.prototype.setString = function(binaryString) {
   if (typeof binaryString == 'string') {
@@ -108,7 +112,7 @@ nassh.sftp.Packet.prototype.setUtf8String = function(string) {
 /**
  * Sets data at the current offset.
  *
- * @param {string} data
+ * @param {!ArrayBufferView} data
  */
 nassh.sftp.Packet.prototype.setData = function(data) {
   this.addSpace_(data.length);
@@ -204,6 +208,7 @@ nassh.sftp.Packet.prototype.getData = function(length=undefined) {
  * Returns the toString representation of the packet.
  *
  * @return {string}
+ * @override
  */
 nassh.sftp.Packet.prototype.toString = function() {
   // We don't use this.decoder_ because this is the entire packet with binary

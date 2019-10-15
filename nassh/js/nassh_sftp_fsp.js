@@ -32,9 +32,21 @@ nassh.sftp.fsp.createSftpInstance = function(args) {
  * Sanitizes the provided file's metadata to the requirements specified in
  * 'options'.
  *
- * @param {!FileEntry} file
- * @param {!Object} options
- * @return {!Object}
+ * @param {!nassh.sftp.File} file
+ * @param {{
+ *     name: (boolean|undefined),
+ *     directoryPath: (string|undefined),
+ *     entryPath: (string|undefined),
+ *     isDirectory: (boolean|undefined),
+ *     size: (boolean|undefined),
+ *     modificationTime: (boolean|undefined),
+ * }} options
+ * @return {{
+ *     name: (string|undefined),
+ *     isDirectory: (boolean|undefined),
+ *     size: (number|undefined),
+ *     modificationTime: (!Date|undefined),
+ * }}
  */
 nassh.sftp.fsp.sanitizeMetadata = function(file, options) {
   var metadata = {};
@@ -48,13 +60,13 @@ nassh.sftp.fsp.sanitizeMetadata = function(file, options) {
     }
   }
   if (options.isDirectory) {
-    metadata.isDirectory = file.isDirectory;
+    metadata.isDirectory = file.fileAttrs.isDirectory;
   }
   if (options.size) {
-    metadata.size = file.size;
+    metadata.size = file.fileAttrs.size;
   }
   if (options.modificationTime) {
-    metadata.modificationTime = new Date(file.last_modified*1000);
+    metadata.modificationTime = new Date(file.fileAttrs.lastModified*1000);
   }
   return metadata;
 };
@@ -64,8 +76,8 @@ nassh.sftp.fsp.sanitizeMetadata = function(file, options) {
  * file path.
  *
  * @param {!Object} options
- * @param {function()} onSuccess
- * @param {function()} onError
+ * @param {function(!Metadata)} onSuccess
+ * @param {function(string)} onError
  */
 nassh.sftp.fsp.onGetMetadataRequested = function(options, onSuccess, onError) {
   if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
@@ -94,8 +106,8 @@ nassh.sftp.fsp.onGetMetadataRequested = function(options, onSuccess, onError) {
  * directory.
  *
  * @param {!Object} options
- * @param {function()} onSuccess
- * @param {function()} onError
+ * @param {function(!Array<!Entry>, boolean)} onSuccess
+ * @param {function(string)} onError
  */
 nassh.sftp.fsp.onReadDirectoryRequested = function(
     options, onSuccess, onError) {
@@ -153,7 +165,7 @@ nassh.sftp.fsp.onReadDirectoryRequested = function(
  *
  * @param {!Object} options
  * @param {function()} onSuccess
- * @param {function()} onError
+ * @param {function(string)} onError
  */
 nassh.sftp.fsp.onWriteFileRequested = function(options, onSuccess, onError) {
   if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
@@ -191,7 +203,7 @@ nassh.sftp.fsp.onWriteFileRequested = function(options, onSuccess, onError) {
  *
  * @param {!Object} options
  * @param {function()} onSuccess
- * @param {function()} onError
+ * @param {function(string)} onError
  */
 nassh.sftp.fsp.onOpenFileRequested = function(options, onSuccess, onError) {
   if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
@@ -222,7 +234,7 @@ nassh.sftp.fsp.onOpenFileRequested = function(options, onSuccess, onError) {
  *
  * @param {!Object} options
  * @param {function()} onSuccess
- * @param {function()} onError
+ * @param {function(string)} onError
  */
 nassh.sftp.fsp.onCreateFileRequested = function(options, onSuccess, onError) {
   if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
@@ -249,7 +261,7 @@ nassh.sftp.fsp.onCreateFileRequested = function(options, onSuccess, onError) {
  *
  * @param {!Object} options
  * @param {function()} onSuccess
- * @param {function()} onError
+ * @param {function(string)} onError
  */
 nassh.sftp.fsp.onTruncateRequested = function(options, onSuccess, onError) {
   if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
@@ -276,12 +288,12 @@ nassh.sftp.fsp.onTruncateRequested = function(options, onSuccess, onError) {
  *
  * @param {!Object} options
  * @param {function()} onSuccess
- * @param {function()} onError
+ * @param {function(string)} onError
  * @return {!Promise}
  */
 nassh.sftp.fsp.onDeleteEntryRequested = function(options, onSuccess, onError) {
   if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
-    return;
+    return Promise.resolve();
   }
 
   var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
@@ -322,7 +334,7 @@ nassh.sftp.fsp.onDeleteEntryRequested = function(options, onSuccess, onError) {
  *
  * @param {!Object} options
  * @param {function()} onSuccess
- * @param {function()} onError
+ * @param {function(string)} onError
  */
 nassh.sftp.fsp.onCloseFileRequested = function(options, onSuccess, onError) {
   if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
@@ -351,7 +363,7 @@ nassh.sftp.fsp.onCloseFileRequested = function(options, onSuccess, onError) {
  *
  * @param {!Object} options
  * @param {function()} onSuccess
- * @param {function()} onError
+ * @param {function(string)} onError
  */
 nassh.sftp.fsp.onCreateDirectoryRequested = function(
     options, onSuccess, onError) {
@@ -380,7 +392,7 @@ nassh.sftp.fsp.onCreateDirectoryRequested = function(
  *
  * @param {!Object} options
  * @param {function()} onSuccess
- * @param {function()} onError
+ * @param {function(string)} onError
  */
 nassh.sftp.fsp.onMoveEntryRequested = function(options, onSuccess, onError) {
   if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
@@ -402,8 +414,8 @@ nassh.sftp.fsp.onMoveEntryRequested = function(options, onSuccess, onError) {
  * Read File Requested handler. Reads the requested file and returns its data.
  *
  * @param {!Object} options
- * @param {function()} onSuccess
- * @param {function()} onError
+ * @param {function(!ArrayBuffer, boolean)} onSuccess
+ * @param {function(string)} onError
  */
 nassh.sftp.fsp.onReadFileRequested = function(options, onSuccess, onError) {
   if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
@@ -418,8 +430,8 @@ nassh.sftp.fsp.onReadFileRequested = function(options, onSuccess, onError) {
   }
 
   client.readChunks(fileHandle, (chunk) => onSuccess(chunk, true),
-                    {offset: options.offset, length: options.length})
-    .then(() => onSuccess(new ArrayBuffer(), false))
+                    options.offset, options.length)
+    .then(() => onSuccess(new ArrayBuffer(0), false))
     .catch(response => {
       console.warn(response.name + ': ' + response.message);
       onError('FAILED');
@@ -432,12 +444,12 @@ nassh.sftp.fsp.onReadFileRequested = function(options, onSuccess, onError) {
  *
  * @param {!Object} options
  * @param {function()} onSuccess
- * @param {function()} onError
+ * @param {function(string)} onError
  * @return {!Promise}
  */
 nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
   if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
-    return;
+    return Promise.resolve();
   }
 
   var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
@@ -584,7 +596,7 @@ nassh.sftp.fsp.copyDirectory_ = function(sourcePath, targetPath, client) {
  * the user clicks "Add New Service" from the File App.
  *
  * @param {function()} onSuccess
- * @param {function()} onError
+ * @param {function(string)} onError
  */
 nassh.sftp.fsp.onMountRequested = function(onSuccess, onError) {
   lib.f.openWindow('/html/nassh.html');
@@ -596,7 +608,7 @@ nassh.sftp.fsp.onMountRequested = function(onSuccess, onError) {
  *
  * @param {!Object} options
  * @param {function()} onSuccess
- * @param {function()} onError
+ * @param {function(string)} onError
  */
 nassh.sftp.fsp.onUnmountRequested = function(options, onSuccess, onError) {
   // We don't return immediately on errors.  If the caller is trying to unmount

@@ -10,6 +10,8 @@
 
 /**
  * A mock SFTP client.
+ *
+ * @constructor
  */
 const MockSftpClient = function() {
   this.protocolClientVersion = 3;
@@ -31,7 +33,7 @@ const MockSftpClient = function() {
 /**
  * Mock helper for stubbing out calls.
  *
- * @param {function()} method
+ * @param {string} method
  * @param {!Array} args
  * @return {!Promise}
  */
@@ -122,15 +124,6 @@ it('fsp-instance-check', function() {
   let called;
   let ret;
 
-  // Undefined ids should error.
-  called = false;
-  ret = nassh.sftp.fsp.checkInstanceExists(undefined, (error) => {
-    assert.equal('FAILED', error);
-    called = true;
-  });
-  assert.isTrue(called);
-  assert.isFalse(ret);
-
   // Unknown ids should error.
   called = false;
   ret = nassh.sftp.fsp.checkInstanceExists('1234', (error) => {
@@ -151,26 +144,30 @@ it('fsp-instance-check', function() {
  */
 it('fsp-sanitize-metadata', function() {
   // Reduced mock for nassh.sftp.packets.getFileAttrs like fileStatus returns.
-  const fileStat = {
-    size: 1024,
-    isDirectory: false,
-    last_modified: 100,
-  };
-  const dirStat = {
-    size: 0,
-    isDirectory: true,
-    last_modified: 200,
-  };
+  const fileEntry = {
+    filename: 'foo.txt',
+    longFilename: 'foo.txt',
+    fileAttrs: {
+      size: 1024,
+      isDirectory: false,
+      lastModified: 100,
+    }};
+
   // Mock for directory entry like readDirectory returns.
-  const fileEntry = Object.assign({filename: 'foo.txt'}, fileStat);
-  const dirEntry = Object.assign({filename: 'dir'}, dirStat);
+  const dirEntry = {
+    filename: 'dir',
+    longFilename: 'dir',
+    fileAttrs: {
+      size: 0,
+      isDirectory: true,
+      lastModified: 200,
+    }};
 
   let ret;
 
   // Nothing is requested so nothing is returned or even checked.
-  ret = nassh.sftp.fsp.sanitizeMetadata(undefined, {});
-  assert.deepStrictEqual([], Object.keys(ret));
-  ret = nassh.sftp.fsp.sanitizeMetadata({}, {});
+  ret = nassh.sftp.fsp.sanitizeMetadata(
+    {filename: '', longFilename: '', fileAttrs: {}}, {});
   assert.deepStrictEqual([], Object.keys(ret));
 
   // Check each field by itself.
@@ -202,14 +199,16 @@ it('fsp-sanitize-metadata', function() {
   assert.equal(200000, ret.modificationTime.getTime());
 
   // Check filtering of attrs.
-  ret = nassh.sftp.fsp.sanitizeMetadata(dirStat, {
+  dirEntry.filename = '';
+  ret = nassh.sftp.fsp.sanitizeMetadata(dirEntry, {
     name: true,
     directoryPath: '/a/b/c',
   });
   assert.deepStrictEqual(['name'], Object.keys(ret));
   assert.equal('c', ret.name);
 
-  ret = nassh.sftp.fsp.sanitizeMetadata(fileStat, {
+  fileEntry.filename = '';
+  ret = nassh.sftp.fsp.sanitizeMetadata(fileEntry, {
     name: true,
     entryPath: '/a/b/c.txt',
   });
@@ -225,7 +224,7 @@ it('fsp-onGetMetadata-missing', function(done) {
 
   nassh.sftp.fsp.onGetMetadataRequested(
       options,
-      assert.fail,
+      (metadata) => assert.fail(),
       (error) => {
         assert.equal('NOT_FOUND', error);
         done();
@@ -246,9 +245,10 @@ it('fsp-onGetMetadata-found', function(done) {
   this.client.fileStatus.return = (path) => {
     assert.equal('./foo', path);
     return {
-      isDirectory: false,
-      size: 100,
-    };
+      fileAttrs: {
+        isDirectory: false,
+        size: 100,
+      }};
   };
   nassh.sftp.fsp.onGetMetadataRequested(
       options,
@@ -268,7 +268,7 @@ it('fsp-onReadDirectory-missing', function(done) {
 
   nassh.sftp.fsp.onReadDirectoryRequested(
       options,
-      assert.fail,
+      (entries, hasMore) => assert.fail(),
       (error) => {
         assert.equal('FAILED', error);
         done();
@@ -815,7 +815,7 @@ it('fsp-onReadFile-missing', function(done) {
 
   nassh.sftp.fsp.onReadFileRequested(
       options,
-      assert.fail,
+      (chunk, hasMore) => assert.fail(),
       (error) => {
         assert.equal('INVALID_OPERATION', error);
         done();

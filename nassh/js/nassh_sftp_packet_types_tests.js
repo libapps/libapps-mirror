@@ -132,22 +132,22 @@ it('sftpNamePacket', () => {
   // Check file 1 (empty).
   let file = packet.files[0];
   assert.equal('', file.filename);
-  assert.equal('', file.long_filename);
-  assert.equal(0, file.flags);
+  assert.equal('', file.longFilename);
+  assert.equal(0, file.fileAttrs.flags);
 
   // Check file 2 (normal).
   file = packet.files[1];
   assert.equal('abc', file.filename);
   assert.equal('-rwxr-xr-x  1 root  root  8560 Oct 23 23:30 abc',
-               file.long_filename);
-  assert.equal(0, file.flags);
+               file.longFilename);
+  assert.equal(0, file.fileAttrs.flags);
 
   // Check file 3 (unicode).
   file = packet.files[2];
   assert.equal('日本語', file.filename);
-  assert.equal('-rw-rw-rw 日本語', file.long_filename);
-  assert.equal(1, file.flags);
-  assert.equal(3, file.size);
+  assert.equal('-rw-rw-rw 日本語', file.longFilename);
+  assert.equal(1, file.fileAttrs.flags);
+  assert.equal(3, file.fileAttrs.size);
 });
 
 /**
@@ -359,8 +359,8 @@ it('sftpGetFileAttrs', () => {
   attrs = nassh.sftp.packets.getFileAttrs(packet);
   assert.isTrue(packet.eod());
   assert.equal(nassh.sftp.packets.FileXferAttrs.ACMODTIME, attrs.flags);
-  assert.equal(1000000000, attrs.last_accessed);
-  assert.equal(1500000000, attrs.last_modified);
+  assert.equal(1000000000, attrs.lastAccessed);
+  assert.equal(1500000000, attrs.lastModified);
 
   // Now altogether!
   packet = new nassh.sftp.Packet([
@@ -380,8 +380,8 @@ it('sftpGetFileAttrs', () => {
   assert.equal(1000, attrs.uid);
   assert.equal(5000, attrs.gid);
   assert.equal(0o7777, attrs.permissions);
-  assert.equal(1000000000, attrs.last_accessed);
-  assert.equal(1500000000, attrs.last_modified);
+  assert.equal(1000000000, attrs.lastAccessed);
+  assert.equal(1500000000, attrs.lastModified);
 });
 
 /**
