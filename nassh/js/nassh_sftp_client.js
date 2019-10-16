@@ -792,7 +792,7 @@ nassh.sftp.Client.prototype.readChunks = function(
  * @return {!Promise}
  */
 nassh.sftp.Client.prototype.readFile = function(
-      path, callback, offset = 0, length = 0) {
+      path, callback, offset = 0, length) {
   return this.openFile(path, nassh.sftp.packets.OpenFlags.READ)
     .then((handle) => {
       return this.readChunks(handle, callback, offset, length)
