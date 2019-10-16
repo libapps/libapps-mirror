@@ -1111,10 +1111,7 @@ nasftp.Cli.commandClip_ = function(args) {
   };
 
   return this.client.readFile(this.makePath_(path), handleChunk, offset, length)
-    .then(() => {
-      const reader = new lib.fs.FileReader();
-      return reader.readAsText(new Blob(chunks));
-    })
+    .then(() => (new Blob(chunks)).text())
     .then((string) => {
       this.io.println(nassh.msg('NASFTP_CMD_CLIP_SUMMARY', [string.length]));
       this.terminal.copyStringToClipboard(string);
@@ -1685,7 +1682,6 @@ nasftp.Cli.commandPut_ = function(args, opts) {
         // Next promise waits for the file to be processed (read+uploaded).
         return new Promise((resolveOneFile) => {
           // Read the next chunk from the file and add it to the queue.
-          const reader = new lib.fs.FileReader();
 
           // Clobber whatever file might already exist.
           const flags = nassh.sftp.packets.OpenFlags.WRITE |
@@ -1713,7 +1709,7 @@ nasftp.Cli.commandPut_ = function(args, opts) {
                   return;
                 }
 
-                return reader.readAsArrayBuffer(chunk)
+                return chunk.arrayBuffer()
                   .then((result) => {
                     return this.client.writeChunk(handle, offset, result);
                   })

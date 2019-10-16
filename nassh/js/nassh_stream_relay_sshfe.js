@@ -120,10 +120,7 @@ nassh.Stream.RelaySshfeWS.prototype.getChallenge_ = function() {
       // Get the response from the server as a blob.
       return response.blob();
     })
-    .then((blob) => {
-      const reader = new lib.fs.FileReader();
-      return reader.readAsText(blob);
-    })
+    .then((blob) => blob.text())
     .then((result) => {
       // Skip the XSSI countermeasure.
       if (!result.startsWith(")]}'\n")) {

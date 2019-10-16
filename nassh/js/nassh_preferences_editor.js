@@ -192,8 +192,7 @@ nassh.PreferencesEditor.prototype.onRestoreClick = function(e) {
     if (input.files.length != 1)
       return;
 
-    const reader = new lib.fs.FileReader();
-    reader.readAsText(input.files[0]).then((result) => {
+    input.files[0].text().then((result) => {
       const obj = /** @type {!Object} */ (JSON.parse(result));
       nassh.importPreferences(obj, document.location.reload);
     });

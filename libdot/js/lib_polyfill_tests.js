@@ -100,4 +100,40 @@ it('polyfills-promise-finally', async () => {
       Promise.prototype, 'finally', lib.polyfill.promiseFinally, test);
 });
 
+it('Blob.arrayBuffer', async () => {
+  const blob = new Blob(['ab12']);
+  const exp = new Uint8Array([97, 98, 49, 50]);
+  let ret;
+
+  // Make sure polyfill matches standards behavior in newer browser.
+  // This might be our own stub in older browsers :).
+  if (blob.arrayBuffer !== undefined) {
+    ret = await blob.arrayBuffer();
+    assert.deepStrictEqual(exp, new Uint8Array(ret));
+  }
+
+  // Force bind in our polyfill & test it.
+  blob.arrayBuffer = lib.polyfill.BlobArrayBuffer.bind(blob);
+  ret = await blob.arrayBuffer();
+  assert.deepStrictEqual(exp, new Uint8Array(ret));
+});
+
+it('Blob.text', async () => {
+  const exp = 'ab12';
+  const blob = new Blob([exp]);
+  let ret;
+
+  // Make sure polyfill matches standards behavior in newer browser.
+  // This might be our own stub in older browsers :).
+  if (blob.text !== undefined) {
+    ret = await blob.text();
+    assert.deepStrictEqual(exp, ret);
+  }
+
+  // Force bind in our polyfill & test it.
+  blob.text = lib.polyfill.BlobText.bind(blob);
+  ret = await blob.text();
+  assert.deepStrictEqual(exp, ret);
+});
+
 });

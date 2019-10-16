@@ -112,10 +112,7 @@ lib.fs.openFile = function(root, path) {
  */
 lib.fs.readFile = function(root, path) {
   return lib.fs.openFile(root, path)
-    .then((file) => {
-      const reader = new lib.fs.FileReader();
-      return reader.readAsText(file);
-    });
+    .then((file) => file.text());
 };
 
 /**
@@ -212,75 +209,4 @@ lib.fs.getOrCreateDirectory = function(root, path) {
 
     getOrCreateNextName(root);
   });
-};
-
-/**
- * A Promise API around the FileReader API.
- *
- * The FileReader API is old, so wrap its callbacks with a Promise.
- *
- * @constructor
- */
-lib.fs.FileReader = function() {
-};
-
-/**
- * Internal helper for wrapping all the readAsXxx funcs.
- *
- * @param {!Blob} blob The blob of data to read.
- * @param {string} method The specific readAsXxx function to call.
- * @return {!Promise} A promise to resolve when reading finishes or fails.
- * @private
- */
-lib.fs.FileReader.prototype.readAs_ = function(blob, method) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onabort = reader.onerror = () => reject(reader);
-    reader[method](blob);
-  });
-};
-
-/**
- * Wrapper around FileReader.readAsArrayBuffer.
- *
- * @param {!Blob} blob The blob of data to read.
- * @return {!Promise<!ArrayBuffer>} A promise to resolve when reading finishes
- *     or fails.
- */
-lib.fs.FileReader.prototype.readAsArrayBuffer = function(blob) {
-  return this.readAs_(blob, 'readAsArrayBuffer');
-};
-
-/**
- * Wrapper around FileReader.readAsBinaryString.
- *
- * @param {!Blob} blob The blob of data to read.
- * @return {!Promise<string>} A promise to resolve when reading finishes or
- *     fails.
- */
-lib.fs.FileReader.prototype.readAsBinaryString = function(blob) {
-  return this.readAs_(blob, 'readAsBinaryString');
-};
-
-/**
- * Wrapper around FileReader.readAsDataURL.
- *
- * @param {!Blob} blob The blob of data to read.
- * @return {!Promise<string>} A promise to resolve when reading finishes or
- *     fails.
- */
-lib.fs.FileReader.prototype.readAsDataURL = function(blob) {
-  return this.readAs_(blob, 'readAsDataURL');
-};
-
-/**
- * Wrapper around FileReader.readAsText.
- *
- * @param {!Blob} blob The blob of data to read.
- * @return {!Promise<string>} A promise to resolve when reading finishes or
- *     fails.
- */
-lib.fs.FileReader.prototype.readAsText = function(blob) {
-  return this.readAs_(blob, 'readAsText');
 };
