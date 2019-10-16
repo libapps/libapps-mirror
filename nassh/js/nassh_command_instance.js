@@ -1516,14 +1516,7 @@ nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
   var DEV_STDOUT = '/dev/stdout';
   var DEV_STDERR = '/dev/stderr';
 
-  if (path == '/dev/random') {
-    isAtty = false;
-    var stream = this.streams_.openStream(nassh.Stream.Random,
-      fd, path, onOpen);
-    stream.onClose = () => {
-      this.sendToPlugin_('onClose', [fd]);
-    };
-  } else if (path == '/dev/tty') {
+  if (path == '/dev/tty') {
     isAtty = true;
     this.createTtyStream(fd, true, true, onOpen);
   } else if (this.isSftp && path == DEV_STDOUT) {

@@ -6,8 +6,7 @@
 
 /**
  * @fileoverview The NaCl plugin leans on its host to provide some basic
- * stream-like objects for /dev/random. The interface is likely to change
- * in the near future, so documentation in this file is a bit sparse.
+ * stream-like objects.
  */
 
 /**
@@ -77,44 +76,4 @@ nassh.Stream.prototype.asyncWrite = function(data, onSuccess) {
 nassh.Stream.prototype.close = function() {
   if (this.onClose)
     this.onClose();
-};
-
-/**
- * The /dev/random stream.
- *
- * This special case stream just returns random bytes when read.
- *
- * @param {number} fd
- * @constructor
- * @extends {nassh.Stream}
- */
-nassh.Stream.Random = function(fd) {
-  nassh.Stream.apply(this, [fd]);
-};
-
-nassh.Stream.Random.prototype = Object.create(nassh.Stream.prototype);
-/** @override */
-nassh.Stream.Random.constructor = nassh.Stream.Random;
-
-/**
- * @param {!Object} settings
- * @param {function(boolean, ?string=)} onOpen
- * @override
- */
-nassh.Stream.Random.prototype.asyncOpen = function(settings, onOpen) {
-  setTimeout(function() { onOpen(true); }, 0);
-};
-
-/**
- * @param {number} size
- * @param {function(!ArrayBuffer)} onRead
- * @override
- */
-nassh.Stream.Random.prototype.asyncRead = function(size, onRead) {
-  if (!this.open)
-    throw nassh.Stream.ERR_STREAM_CLOSED;
-
-  const bytes = new Uint8Array(size);
-  crypto.getRandomValues(bytes);
-  setTimeout(() => onRead(bytes.buffer), 0);
 };
