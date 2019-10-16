@@ -371,11 +371,9 @@ def concat(input_file, output_file):
 
 def get_parser():
     """Get a command line parser."""
-    parser = argparse.ArgumentParser(
+    parser = libdot.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('-d', '--debug', action='store_true',
-                        help='Run with debug output.')
     parser.add_argument('-i', '--input-from', required=True,
                         help='File containing a list of files to concatenate.')
     parser.add_argument('-o', '--output',
@@ -387,7 +385,6 @@ def main(argv):
     """The main func!"""
     parser = get_parser()
     opts = parser.parse_args(argv)
-    libdot.setup_logging(debug=opts.debug)
 
     input_from = os.path.abspath(opts.input_from)
     output_to = os.path.abspath(opts.output)

@@ -7,7 +7,6 @@
 
 from __future__ import print_function
 
-import argparse
 import html
 import json
 import logging
@@ -135,9 +134,7 @@ def generate_html(licenses):
 
 def get_parser():
     """Get a command line parser."""
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('-d', '--debug', action='store_true',
-                        help='Run with debug output.')
+    parser = libdot.ArgumentParser(description=__doc__)
     parser.add_argument('--skip-rollup', dest='rollup',
                         action='store_false', default=True,
                         help='Skip (re)building of rollup dependencies.')
@@ -148,7 +145,6 @@ def main(argv):
     """The main func!"""
     parser = get_parser()
     opts = parser.parse_args(argv)
-    libdot.setup_logging(debug=opts.debug)
     libdot.node_and_npm_setup()
     mkdeps(rollup=opts.rollup)
 

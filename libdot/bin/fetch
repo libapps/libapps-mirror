@@ -8,7 +8,6 @@
 
 from __future__ import print_function
 
-import argparse
 import os
 import sys
 
@@ -17,9 +16,7 @@ import libdot
 
 def get_parser():
     """Get a command line parser."""
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('-d', '--debug', action='store_true',
-                        help='Run with debug output.')
+    parser = libdot.ArgumentParser(description=__doc__)
     parser.add_argument('-o', '--output', type=str,
                         help='Alternative path to save to.')
     parser.add_argument('args', nargs='+',
@@ -31,7 +28,6 @@ def main(argv):
     """The main func!"""
     parser = get_parser()
     opts = parser.parse_args(argv)
-    libdot.setup_logging(debug=opts.debug)
 
     for uri in opts.args:
         output = opts.output

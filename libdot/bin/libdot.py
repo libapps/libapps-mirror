@@ -8,6 +8,7 @@
 
 from __future__ import print_function
 
+import argparse
 import importlib.machinery
 import logging
 import logging.handlers
@@ -52,7 +53,7 @@ class ColoredFormatter(logging.Formatter):
         return msg
 
 
-def setup_logging(debug=False):
+def setup_logging(debug=False, quiet=0):
     """Setup the logging module."""
     fmt = '%(asctime)s: %(levelname)-7s: '
     if debug:
@@ -63,7 +64,16 @@ def setup_logging(debug=False):
     tzname = time.strftime('%Z', time.localtime())
     datefmt = '%a, %d %b %Y %H:%M:%S ' + tzname
 
-    level = logging.DEBUG if debug else logging.INFO
+    if debug:
+        level = logging.DEBUG
+    elif quiet <= 0:
+        level = logging.INFO
+    elif quiet <= 1:
+        level = logging.WARNING
+    elif quiet <= 2:
+        level = logging.ERROR
+    elif quiet <= 3:
+        level = logging.CRITICAL
 
     formatter = ColoredFormatter(fmt, datefmt)
     handler = logging.StreamHandler(stream=sys.stdout)
@@ -72,6 +82,31 @@ def setup_logging(debug=False):
     logger = logging.getLogger()
     logger.addHandler(handler)
     logger.setLevel(level)
+
+
+class ArgumentParser(argparse.ArgumentParser):
+    """Custom parser to hold a consistent set of options & runtime env."""
+
+    def __init__(self, **kwargs):
+        """Initialize!"""
+        super(ArgumentParser, self).__init__(**kwargs)
+
+        self.add_common_arguments()
+
+    def parse_args(self, args=None, namespace=None):
+        """Parse all the |args| and save the results to |namespace|."""
+        namespace = argparse.ArgumentParser.parse_args(
+            self, args=args, namespace=namespace)
+        setup_logging(debug=namespace.debug, quiet=namespace.quiet)
+        return namespace
+
+    def add_common_arguments(self):
+        """Add our custom/consistent set of command line flags."""
+        self.add_argument('-d', '--debug', action='store_true',
+                          help='Run with debug output.')
+        self.add_argument('-q', '--quiet', action='count', default=0,
+                          help='Use once to hide info messages, twice to hide '
+                               'warnings, and thrice to hide errors.')
 
 
 def touch(path):

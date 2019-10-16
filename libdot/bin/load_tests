@@ -22,11 +22,9 @@ TEST_PAGE = os.path.join(libdot.DIR, 'html', 'lib_test.html')
 
 def get_parser():
     """Get a parser for our test runner."""
-    parser = argparse.ArgumentParser(
+    parser = libdot.ArgumentParser(
         description='HTML test runner',
         formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('-d', '--debug', action='store_true',
-                        help='Run with debug output.')
     parser.add_argument('--browser', default=os.getenv('CHROME_BIN'),
                         help='Browser program to run tests against.')
     parser.add_argument('--profile', default=os.getenv('CHROME_TEST_PROFILE'),
@@ -54,7 +52,6 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
     """
     parser = get_parser()
     opts = parser.parse_args(argv)
-    libdot.setup_logging(debug=opts.debug)
 
     # Try to use default X session.
     os.environ.setdefault('DISPLAY', ':0')

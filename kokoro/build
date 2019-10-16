@@ -8,7 +8,6 @@
 
 from __future__ import print_function
 
-import argparse
 import fnmatch
 import glob
 import logging
@@ -306,9 +305,7 @@ def setup():
 
 def get_parser():
     """Get a command line parser."""
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('-d', '--debug', action='store_true',
-                        help='Run with debug output.')
+    parser = libdot.ArgumentParser(description=__doc__)
     parser.add_argument('--skip-clean', dest='clean',
                         action='store_false', default=True,
                         help='Clean up compiled object dirs.')
@@ -319,7 +316,6 @@ def main(argv):
     """The main func!"""
     parser = get_parser()
     opts = parser.parse_args(argv)
-    libdot.setup_logging(debug=opts.debug)
     libdot.node_and_npm_setup()
 
     setup()

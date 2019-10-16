@@ -11,7 +11,6 @@ We'll run through eslint & closure-compiler.
 
 from __future__ import print_function
 
-import argparse
 import glob
 import json
 import os
@@ -287,13 +286,11 @@ def _get_default_paths():
 
 def get_parser():
     """Get a command line parser."""
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = libdot.ArgumentParser(description=__doc__)
     parser.add_argument('--fix', action='store_true',
                         help='Run just eslint with --fix setting.')
     parser.add_argument('--gerrit-comments-file',
                         help='Save errors for posting files to Gerrit.')
-    parser.add_argument('-d', '--debug', action='store_true',
-                        help='Run with debug output.')
     parser.add_argument('paths', nargs='*',
                         help='Paths to lint.')
     return parser
@@ -313,7 +310,6 @@ def main(argv, paths=(), mkdeps=None, eslint_args=(),
     """
     parser = get_parser()
     opts = parser.parse_args(argv)
-    libdot.setup_logging(debug=opts.debug)
     libdot.node_and_npm_setup()
 
     if not opts.paths:

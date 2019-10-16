@@ -12,10 +12,11 @@ directly, and there's a bunch of metadata that are only for translators.
 
 from __future__ import print_function
 
-import argparse
 import json
 import re
 import sys
+
+import libdot
 
 
 def minify_placeholders(msg):
@@ -101,7 +102,7 @@ def minify(path, inplace=False):
 
 def get_parser():
     """Get a command line parser."""
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = libdot.ArgumentParser(description=__doc__)
     parser.add_argument('-i', '--inplace', default=False, action='store_true',
                         help='Modify files inline rather than writing stdout.')
     parser.add_argument('files', nargs='+', metavar='files',

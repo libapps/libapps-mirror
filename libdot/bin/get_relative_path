@@ -8,14 +8,15 @@
 
 from __future__ import print_function
 
-import argparse
 import os
 import sys
+
+import libdot
 
 
 def get_parser():
     """Get a command line parser."""
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = libdot.ArgumentParser(description=__doc__)
     parser.add_argument('path', help='Path to process.')
     parser.add_argument('cwd', nargs='?', default=os.getcwd(),
                         help='Path to be relative to.')

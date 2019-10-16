@@ -12,14 +12,15 @@ readlink isn't used to find missing directories, only canonicalize paths.
 
 from __future__ import print_function
 
-import argparse
 import os
 import sys
+
+import libdot
 
 
 def get_parser():
     """Get a command line parser."""
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = libdot.ArgumentParser(description=__doc__)
     parser.add_argument('-f', '--canonicalize', action='store_true',
                         help='Canonicalize the paths.')
     parser.add_argument('paths', nargs='+',

@@ -125,11 +125,9 @@ def docker_needs_sudo():
 
 def get_parser():
     """Get a command line parser."""
-    parser = argparse.ArgumentParser(
+    parser = libdot.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('-d', '--debug', action='store_true',
-                        help='Run with debug output.')
     parser.add_argument('--type', choices=('presubmit', 'release'),
                         default='presubmit',
                         help='Type of build to run (default: %(default)s)')
@@ -147,7 +145,6 @@ def main(argv):
     """The main func!"""
     parser = get_parser()
     opts = parser.parse_args(argv)
-    libdot.setup_logging(debug=opts.debug)
 
     if opts.sudo is None:
         opts.sudo = docker_needs_sudo()

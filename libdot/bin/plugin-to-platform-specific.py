@@ -15,10 +15,11 @@ https://developer.chrome.com/native-client/devguide/distributing
 
 from __future__ import print_function
 
-import argparse
 import json
 import os
 import sys
+
+import libdot
 
 
 ARCHES = set(('arm', 'x86-32', 'x86-64'))
@@ -65,7 +66,7 @@ def process_manifest(opts, manifest_path, srcroot, dstroot):
 
 def get_parser():
     """Get a command line parser."""
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = libdot.ArgumentParser(description=__doc__)
     parser.add_argument('--base',
                         help='Base path for input/output defaults.')
     parser.add_argument('--input',

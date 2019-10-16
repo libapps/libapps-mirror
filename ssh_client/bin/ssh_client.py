@@ -8,7 +8,6 @@
 
 from __future__ import print_function
 
-import argparse
 import logging
 import multiprocessing
 import os
@@ -268,12 +267,10 @@ def default_src_install(_metadata):
 
 def get_parser(desc, default_toolchain):
     """Get a command line parser."""
-    parser = argparse.ArgumentParser(description=desc)
+    parser = libdot.ArgumentParser(description=desc)
     parser.add_argument('--toolchain', choices=('build', 'pnacl', 'wasm'),
                         default=default_toolchain,
                         help='Which toolchain to use (default: %(default)s).')
-    parser.add_argument('-d', '--debug', action='store_true',
-                        help='Run with debug output.')
     parser.add_argument('-j', '--jobs', type=int,
                         help='Number of jobs to use in parallel.')
     return parser
@@ -311,7 +308,6 @@ def build_package(module, default_toolchain):
     """
     parser = get_parser(module.__doc__, default_toolchain)
     opts = parser.parse_args()
-    libdot.setup_logging(debug=opts.debug)
 
     if opts.jobs:
         global JOBS  # pylint: disable=global-statement
