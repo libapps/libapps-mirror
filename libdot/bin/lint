@@ -13,6 +13,7 @@ from __future__ import print_function
 
 import glob
 import json
+import logging
 import os
 import sys
 
@@ -293,6 +294,9 @@ def get_parser():
                         help='Save errors for posting files to Gerrit.')
     parser.add_argument('paths', nargs='*',
                         help='Paths to lint.')
+    parser.add_argument('--skip-mkdeps', dest='run_mkdeps',
+                        action='store_false', default=True,
+                        help='Skip (re)building of dependencies.')
     return parser
 
 
@@ -320,7 +324,10 @@ def main(argv, paths=(), mkdeps=None, eslint_args=(),
             return 0
 
     if mkdeps:
-        mkdeps(opts)
+        if opts.run_mkdeps:
+            mkdeps(opts)
+        else:
+            logging.info('Skipping building dependencies due to --skip-mkdeps')
 
     checks = [run_eslint(opts, eslint_args)]
     if not opts.fix:

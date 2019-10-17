@@ -33,8 +33,7 @@ def _get_default_paths():
 
 def mkdeps(_opts):
     """Build the deps we might use when linting."""
-    if not os.path.exists(DEPS_FILE):
-        libdot.run([os.path.join(NASSH_DIR, 'bin', 'mkdeps')])
+    libdot.run([os.path.join(NASSH_DIR, 'bin', 'mkdeps')])
 
 
 def main(argv):

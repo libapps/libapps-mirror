@@ -24,11 +24,10 @@ TEST_PAGE = os.path.join('terminal', 'html', 'terminal_test.html')
 
 def mkdeps(_opts):
     """Build the required deps for the test suite."""
-    terminal_rollup = os.path.join(terminal.DIR, 'js', 'nassh_deps.rollup.js')
-    if not os.path.exists(terminal_rollup):
-        libdot.run([os.path.join(NASSH_DIR, 'bin', 'mkdeps')])
+    libdot.run([os.path.join(NASSH_DIR, 'bin', 'mkdeps')])
     shutil.copy(NASSH_DEPS_CONCAT, os.path.join(terminal.DIR, 'js'))
     shutil.copy(NASSH_DEPS_ROLLUP, os.path.join(terminal.DIR, 'js'))
+
 
 def main(argv):
     """The main func!"""
