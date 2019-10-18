@@ -42,4 +42,10 @@ class LitElement$$module$js$lit_element{
  * @param {ITemplateArray} strings
  * @param {...*} values
  */
+function css$$module$js$lit_element(strings, ...values) {}
+
+/**
+ * @param {ITemplateArray} strings
+ * @param {...*} values
+ */
 function html$$module$js$lit_element(strings, ...values) {}

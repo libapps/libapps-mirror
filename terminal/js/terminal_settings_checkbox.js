@@ -7,7 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {html} from './lit_element.js';
+import {css, html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
 
 export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
@@ -23,6 +23,57 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
         type: Boolean,
       },
     };
+  }
+
+  static get styles() {
+    return css`
+        #checkbox {
+          cursor: pointer;
+          height: 15px;
+          margin: 0;
+          padding: 0;
+          position: relative;
+          width: 38px;
+        }
+
+        #checkbox:before {
+          background-color: rgb(201, 206, 214);
+          border-radius: 15px;
+          bottom: 0;
+          content: "";
+          display: block;
+          left: 0;
+          position: absolute;
+          right: 0;
+          top: 0;
+          transition: all 75ms ease;
+        }
+
+        #checkbox:after {
+          background-color: rgb(151, 162, 179);
+          border-radius: 100%;
+          bottom: 0;
+          box-shadow: 1px 1px 3.5px 0px rgb(180, 180, 180);
+          content: "";
+          display: block;
+          left: 0;
+          margin: -2px;
+          position: absolute;
+          top: 0;
+          transition: all 75ms ease-in-out;
+          width: 19px;
+        }
+
+        #checkbox:checked:before {
+          background-color: rgb(160, 194, 249);
+        }
+
+        #checkbox:checked:after {
+          background-color: rgb(66, 133, 244);
+          box-shadow: 1px 1px 3.5px 0px rgb(160, 194, 249);
+          left: calc(100% - 19px + 4px);
+        }
+    `;
   }
 
   constructor() {
