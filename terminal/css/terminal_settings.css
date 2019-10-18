@@ -58,13 +58,12 @@ terminal-settings-category-option[active] > h2 {
   padding: 0;
 }
 
-.section-body > li {
+.setting-container {
+  align-items: center;
   border-bottom: 1px solid lightgrey;
-  display: block;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   margin: 0;
   padding: 0 20px;
-}
-
-.section-body > li > h4 {
-  display: inline-block;
 }
