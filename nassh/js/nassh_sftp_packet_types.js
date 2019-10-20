@@ -78,11 +78,15 @@ nassh.sftp.packets.NamePacket = function(packet) {
   this.files = [];
 
   for(var i = 0; i < this.fileCount; i++) {
-    this.files.push({
-      filename: packet.getUtf8String(),
-      longFilename: packet.getUtf8String(),
-      fileAttrs: nassh.sftp.packets.getFileAttrs(packet)
-    });
+    const fileName = packet.getUtf8String();
+    const longFileName = packet.getUtf8String();
+
+    var fileData = nassh.sftp.packets.getFileAttrs(packet);
+
+    fileData.filename = fileName;
+    fileData.longFilename = longFileName;
+
+    this.files.push(fileData);
   }
 };
 
@@ -390,16 +394,16 @@ nassh.sftp.packets.setFileAttrs = function(packet, attrs) {
     packet.setUint32(lib.notUndefined(attrs.permissions));
   }
   if (attrs.flags & nassh.sftp.packets.FileXferAttrs.ACMODTIME) {
-    packet.setUint32(lib.notUndefined(attrs.last_accessed));
-    packet.setUint32(lib.notUndefined(attrs.last_modified));
+    packet.setUint32(lib.notUndefined(attrs.lastAccessed));
+    packet.setUint32(lib.notUndefined(attrs.lastModified));
   }
 };
 
 /**
  * Convert UTC epoch timestamps that we get from the server to local time.
  *
- * Typically used in conjunction with AttrsPacket and the last_accessed &
- * last_modified fields.  This is the same thing as "UNIX time".
+ * Typically used in conjunction with AttrsPacket and the lastAccessed &
+ * lastModified fields.  This is the same thing as "UNIX time".
  *
  * @param {number} epoch The epoch time to convert.
  * @return {!Date} A standard Date object.

@@ -144,30 +144,24 @@ it('fsp-instance-check', function() {
  */
 it('fsp-sanitize-metadata', function() {
   // Reduced mock for nassh.sftp.packets.getFileAttrs like fileStatus returns.
-  const fileEntry = {
-    filename: 'foo.txt',
-    longFilename: 'foo.txt',
-    fileAttrs: {
-      size: 1024,
-      isDirectory: false,
-      lastModified: 100,
-    }};
-
+  const fileStat = {
+    size: 1024,
+    isDirectory: false,
+    lastModified: 100,
+  };
+  const dirStat = {
+    size: 0,
+    isDirectory: true,
+    lastModified: 200,
+  };
   // Mock for directory entry like readDirectory returns.
-  const dirEntry = {
-    filename: 'dir',
-    longFilename: 'dir',
-    fileAttrs: {
-      size: 0,
-      isDirectory: true,
-      lastModified: 200,
-    }};
+  const fileEntry = Object.assign({filename: 'foo.txt'}, fileStat);
+  const dirEntry = Object.assign({filename: 'dir'}, dirStat);
 
   let ret;
 
   // Nothing is requested so nothing is returned or even checked.
-  ret = nassh.sftp.fsp.sanitizeMetadata(
-    {filename: '', longFilename: '', fileAttrs: {}}, {});
+  ret = nassh.sftp.fsp.sanitizeMetadata({}, {});
   assert.deepStrictEqual([], Object.keys(ret));
 
   // Check each field by itself.
@@ -199,16 +193,14 @@ it('fsp-sanitize-metadata', function() {
   assert.equal(200000, ret.modificationTime.getTime());
 
   // Check filtering of attrs.
-  dirEntry.filename = '';
-  ret = nassh.sftp.fsp.sanitizeMetadata(dirEntry, {
+  ret = nassh.sftp.fsp.sanitizeMetadata(dirStat, {
     name: true,
     directoryPath: '/a/b/c',
   });
   assert.deepStrictEqual(['name'], Object.keys(ret));
   assert.equal('c', ret.name);
 
-  fileEntry.filename = '';
-  ret = nassh.sftp.fsp.sanitizeMetadata(fileEntry, {
+  ret = nassh.sftp.fsp.sanitizeMetadata(fileStat, {
     name: true,
     entryPath: '/a/b/c.txt',
   });
@@ -245,10 +237,9 @@ it('fsp-onGetMetadata-found', function(done) {
   this.client.fileStatus.return = (path) => {
     assert.equal('./foo', path);
     return {
-      fileAttrs: {
-        isDirectory: false,
-        size: 100,
-      }};
+      isDirectory: false,
+      size: 100,
+    };
   };
   nassh.sftp.fsp.onGetMetadataRequested(
       options,

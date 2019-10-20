@@ -1436,7 +1436,7 @@ nasftp.Cli.commandList_ = function(args, opts) {
           if (opts.size) {
             sort = (a, b) => a.size < b.size ? less : more;
           } else if (opts.time) {
-            sort = (a, b) => a.last_modified < b.last_modified ? less : more;
+            sort = (a, b) => a.lastModified < b.lastModified ? less : more;
           } else {
             sort = (a, b) => a.filename > b.filename ? less : more;
           }
@@ -1923,10 +1923,10 @@ nasftp.Cli.commandStat_ = function(args) {
           attrs.gid,
           `0${lib.f.zpad(attrs.permissions.toString(8), 7)} ` +
           `(${nassh.sftp.packets.bitsToUnixModeLine(attrs.permissions)})`,
-          `${attrs.last_accessed} (` +
-          `${nassh.sftp.packets.epochToLocal(attrs.last_accessed)})`,
-          `${attrs.last_modified} (` +
-          `${nassh.sftp.packets.epochToLocal(attrs.last_modified)})`,
+          `${attrs.lastAccessed} (` +
+          `${nassh.sftp.packets.epochToLocal(attrs.lastAccessed)})`,
+          `${attrs.lastModified} (` +
+          `${nassh.sftp.packets.epochToLocal(attrs.lastModified)})`,
         ]));
         if (attrs.extensions) {
           this.io.println(nassh.msg('NASFTP_CMD_STAT_EXTENSIONS_HEADER'));

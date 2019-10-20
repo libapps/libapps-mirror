@@ -32,7 +32,6 @@ nassh.sftp.FileAttrs;
  * @typedef {{
  *     filename: string,
  *     longFilename: string,
- *     fileAttrs: !nassh.sftp.FileAttrs,
  * }}
  */
 nassh.sftp.File;

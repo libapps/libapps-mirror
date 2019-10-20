@@ -32,7 +32,7 @@ nassh.sftp.fsp.createSftpInstance = function(args) {
  * Sanitizes the provided file's metadata to the requirements specified in
  * 'options'.
  *
- * @param {!nassh.sftp.File} file
+ * @param {!nassh.sftp.File|!nassh.sftp.FileAttrs} file
  * @param {{
  *     name: (boolean|undefined),
  *     directoryPath: (string|undefined),
@@ -60,13 +60,13 @@ nassh.sftp.fsp.sanitizeMetadata = function(file, options) {
     }
   }
   if (options.isDirectory) {
-    metadata.isDirectory = file.fileAttrs.isDirectory;
+    metadata.isDirectory = file.isDirectory;
   }
   if (options.size) {
-    metadata.size = file.fileAttrs.size;
+    metadata.size = file.size;
   }
   if (options.modificationTime) {
-    metadata.modificationTime = new Date(file.fileAttrs.lastModified*1000);
+    metadata.modificationTime = new Date(file.lastModified * 1000);
   }
   return metadata;
 };
