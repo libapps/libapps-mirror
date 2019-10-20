@@ -1422,6 +1422,28 @@ nasftp.Cli.commandList_ = function(args, opts) {
         })
         .finally(() => this.client.closeFile(handle));
       })
+      .catch((response) => {
+        if (response instanceof nassh.sftp.StatusError) {
+          // Maybe they tried to list a file.  Synthesize a result.
+          if (response.code == nassh.sftp.packets.StatusCodes.NO_SUCH_FILE) {
+            return this.client.linkStatus(path)
+              .then((attrs) => {
+                const mode =
+                    nassh.sftp.packets.bitsToUnixModeLine(attrs.permissions);
+                const date =
+                    nassh.sftp.packets.epochToLocal(attrs.lastModified);
+                const longFilename =
+                    `${mode}  ${attrs.uid} ${attrs.gid}  ${attrs.size}  ` +
+                    `${date.toDateString()}  ${path}`;
+                return [Object.assign({
+                  filename: path,
+                  longFilename: longFilename,
+                }, attrs)];
+              });
+          }
+        }
+        throw response;
+      })
       .then((entries) => {
         spinner.update();
         if (this.userInterrupted_) {
