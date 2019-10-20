@@ -85,8 +85,8 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
   /** @override */
   render() {
     return html`
-        <input id="checkbox" type="checkbox" @change=${this.onUiChanged_}
-            ?checked=${this.uiValue_} />
+        <input id="checkbox" type="checkbox" @change="${this.onUiChanged_}"
+            ?checked="${this.uiValue_}" />
     `;
   }
 

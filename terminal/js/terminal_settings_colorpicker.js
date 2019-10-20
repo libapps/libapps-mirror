@@ -29,8 +29,8 @@ export class TerminalSettingsColorpickerElement extends
   /** @override */
   render() {
     return html`
-        <input type="color" value=${this.uiValue_}
-            @change=${this.onUiChanged_}/>
+        <input type="color" value="${this.uiValue_}"
+            @change="${this.onUiChanged_}" />
     `;
   }
 
