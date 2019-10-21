@@ -203,6 +203,7 @@ def fetch(uri, output):
         if cache_dir:
             cache_file = os.path.join(cache_dir, name)
             if os.path.exists(cache_file):
+                logging.info('  Cache hit via %s', envvar)
                 symlink(cache_file, output)
                 return
 
