@@ -62,10 +62,10 @@ You can use [eslint](https://eslint.org/) to quickly check code, or
 
 The [bin/lint](./libdot/bin/lint) helper script will run both for you.
 
-The [.eslintrc.js](./.eslintrc.js) is copied from the
+The [.eslintrc.js](./.eslintrc.js) was based on the
 [Chromium project](https://chromium.googlesource.com/chromium/src/+/master/.eslintrc.js).
 
-For build tools writtin in Python, you can use [bin/pylint](./libdot/bin/pylint)
+For build tools written in Python, you can use [bin/pylint](./libdot/bin/pylint)
 to run [pylint](https://www.pylint.org/) with the right settings.
 
 ## Console Logging
@@ -204,6 +204,8 @@ review.  From there, review largely happens via the web interface.
 Once the CL (ChangeList, aka patch or git commit) has been uploaded, the review
 process starts.
 
+### Getting Code-Review+2 (LGTM+Approval)
+
 If you want to get feedback from other developers, look through the recent git
 log to find some people who are likely to help.  Then click the "REPLY" button
 and type their names/e-mail addresses under the "Reviewers" field.  Finally
@@ -214,9 +216,24 @@ with a Code-Review+2 tag.  This is an approval.  You might see Code-Review+1
 in which case the reviewer is OK with the code, but would rather have someone
 else give the actual approval.
 
+### Getting Verified+1
+
 At this point, it's not yet ready for submitting until it's been marked
-Verified+1.  This is typically left up to the person uploading the CL to add
-to indicate they've finished testing.
+Verified+1.  We let the automated kokoro CI system run its checks to make sure
+the code passes all linting & unittests.  This is activated as soon as someone
+has Code-Review+2 the CL, so you just have to wait.  It normally doesn't take
+too long for it to start or finish (i.e. O(minutes)).
+
+If kokoro doesn't pass, it will provide links to its logs.  If you're unable
+to access them, feel free to ask the developer who provided the Code-Review+2
+to take a look.
+
+Some tips in case things are still failing:
+*    Make sure your commit is based on the latest tree state.
+     *   Try clicking the "Rebase" button to get onto the latest master easily.
+*    If kokoro's build flaked, post the message "kokoro rerun" to retry.
+
+### Merging
 
 The final merge into the tree is often left to the developer who approved the
 CL, although this isn't strictly required.
