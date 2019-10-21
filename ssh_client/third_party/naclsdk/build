@@ -17,17 +17,8 @@ sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
 import ssh_client  # pylint: disable=wrong-import-position
 
 
-NACL_URI = ('https://commondatastorage.googleapis.com/nativeclient-mirror/'
-            'nacl/nacl_sdk/%(PV)s/naclsdk_linux.tar.bz2')
+ARCHIVES = ('naclsdk_linux-%(PV)s.tar.xz',)
 S = '%(workdir)s'
-
-
-def src_unpack(metadata):
-    """Unpack the source."""
-    uri = NACL_URI % metadata
-    tarball = '%(p)s.tar.bz2' % metadata
-    ssh_client.fetch(uri, tarball)
-    ssh_client.unpack(tarball, workdir=metadata['workdir'])
 
 
 def src_install(metadata):
