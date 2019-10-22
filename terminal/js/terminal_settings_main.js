@@ -13,6 +13,7 @@ import {
   TerminalSettingsCategoryOptionElement,
   TerminalSettingsCategorySelectorElement
 } from './terminal_settings_category_selector.js';
+import {TerminalSettingsThemeElement} from './terminal_settings_theme.js';
 
 window.addEventListener('DOMContentLoaded', (event) => {
   lib.init(() => {
@@ -25,7 +26,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
           TerminalSettingsDropdownElement,
           TerminalSettingsColorpickerElement,
           TerminalSettingsCategoryOptionElement,
-          TerminalSettingsCategorySelectorElement];
+          TerminalSettingsCategorySelectorElement,
+          TerminalSettingsThemeElement];
 
       for (const element of elements) {
         customElements.define(element.is, element);
