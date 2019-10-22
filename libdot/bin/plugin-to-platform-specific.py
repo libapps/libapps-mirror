@@ -73,8 +73,6 @@ def get_parser():
                         help='The plugin directory to read.')
     parser.add_argument('--output',
                         help='The nacl directory to write.')
-    parser.add_argument('-q', '--quiet', default=False, action='store_true',
-                        help='Only emit error messages.')
     return parser
 
 
