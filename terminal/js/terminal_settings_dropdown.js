@@ -25,8 +25,9 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
       options_: {
         type: Array,
       },
-      uiValue_: {
+      value: {
         type: String,
+        reflect: true,
       },
     };
   }
@@ -103,7 +104,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   render() {
     const renderOption = (option, index) => html`
         <li class="option" roll="option" tab-index="-1" value="${option}"
-            option-index="${index}" aria-selected="${this.uiValue_ === option}"
+            option-index="${index}" aria-selected="${this.value === option}"
             @click="${this.onUiChanged_}" >
           ${option}
         </ul>
@@ -111,7 +112,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
 
     return html`
         <div id="container" @role="button" aria-expanded="${this.expanded}" >
-          ${this.uiValue_}
+          ${this.value}
           <ul id="options">
             ${this.options_.map(renderOption)}
           </ul>
@@ -166,13 +167,13 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
 
   selectPrevious_() {
     return this.selectNth_(+this.shadowRoot
-        .querySelector(`.option[value="${this.uiValue_}"]`)
+        .querySelector(`.option[value="${this.value}"]`)
         .getAttribute('option-index') - 1);
   }
 
   selectNext_() {
     return this.selectNth_(+this.shadowRoot
-        .querySelector(`.option[value="${this.uiValue_}"]`)
+        .querySelector(`.option[value="${this.value}"]`)
         .getAttribute('option-index') + 1);
   }
 

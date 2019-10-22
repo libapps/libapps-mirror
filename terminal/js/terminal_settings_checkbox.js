@@ -19,8 +19,9 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
       preference: {
         type: String,
       },
-      uiValue_: {
+      value: {
         type: Boolean,
+        reflect: true,
       },
     };
   }
@@ -86,7 +87,7 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
   render() {
     return html`
         <input id="checkbox" type="checkbox" @change="${this.onUiChanged_}"
-            ?checked="${this.uiValue_}" />
+            ?checked="${this.value}" />
     `;
   }
 

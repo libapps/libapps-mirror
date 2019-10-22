@@ -20,8 +20,9 @@ export class TerminalSettingsColorpickerElement extends
       preference: {
         type: String,
       },
-      uiValue_: {
+      value: {
         type: String,
+        reflect: true,
       },
     };
   }
@@ -29,7 +30,7 @@ export class TerminalSettingsColorpickerElement extends
   /** @override */
   render() {
     return html`
-        <input type="color" value="${this.uiValue_}"
+        <input type="color" value="${this.value}"
             @change="${this.onUiChanged_}" />
     `;
   }

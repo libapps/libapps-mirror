@@ -48,18 +48,18 @@ describe('terminal_settings_dropdown_tests.js', () => {
 
   it('updates-ui-when-preference-changes', async function() {
     assert.equal(window.preferenceManager.get(preference), options[0]);
-    assert.equal(this.el.uiValue_, options[0]);
+    assert.equal(this.el.value, options[0]);
 
     await window.preferenceManager.set(preference, options[1]);
-    assert.equal(this.el.uiValue_, options[1]);
+    assert.equal(this.el.value, options[1]);
 
     await window.preferenceManager.set(preference, options[2]);
-    assert.equal(this.el.uiValue_, options[2]);
+    assert.equal(this.el.value, options[2]);
   });
 
   it('updates-preference-when-ui-changes', async function() {
     assert.equal(window.preferenceManager.get(preference), options[0]);
-    assert.equal(this.el.uiValue_, options[0]);
+    assert.equal(this.el.value, options[0]);
 
     let prefChanged = test.listenForPrefChange(
         window.preferenceManager, preference);
@@ -189,121 +189,121 @@ describe('terminal_settings_dropdown_tests.js', () => {
 
   it('selects-first-option-list-when-page-up-pressed', async function() {
     await window.preferenceManager.set(preference, options[2]);
-    assert.equal(this.el.uiValue_, options[2]);
+    assert.equal(this.el.value, options[2]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'PageUp'}));
     await this.el.updateComplete;
 
-    assert.equal(this.el.uiValue_, options[0]);
+    assert.equal(this.el.value, options[0]);
   });
 
   it('selects-first-option-when-home-pressed', async function() {
     await window.preferenceManager.set(preference, options[2]);
-    assert.equal(this.el.uiValue_, options[2]);
+    assert.equal(this.el.value, options[2]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'Home'}));
     await this.el.updateComplete;
 
-    assert.equal(this.el.uiValue_, options[0]);
+    assert.equal(this.el.value, options[0]);
   });
 
   it('selects-last-option-when-page-down-pressed', async function() {
-    assert.equal(this.el.uiValue_, options[0]);
+    assert.equal(this.el.value, options[0]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'PageDown'}));
     await this.el.updateComplete;
 
-    assert.equal(this.el.uiValue_, options[2]);
+    assert.equal(this.el.value, options[2]);
   });
 
   it('selects-last-option-when-end-pressed', async function() {
-    assert.equal(this.el.uiValue_, options[0]);
+    assert.equal(this.el.value, options[0]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'End'}));
     await this.el.updateComplete;
 
-    assert.equal(this.el.uiValue_, options[2]);
+    assert.equal(this.el.value, options[2]);
   });
 
   it('selects-previous-option-when-left-arrow-pressed', async function() {
     await window.preferenceManager.set(preference, options[2]);
-    assert.equal(this.el.uiValue_, options[2]);
+    assert.equal(this.el.value, options[2]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'ArrowLeft'}));
     await this.el.updateComplete;
 
-    assert.equal(this.el.uiValue_, options[1]);
+    assert.equal(this.el.value, options[1]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'ArrowLeft'}));
     await this.el.updateComplete;
 
-    assert.equal(this.el.uiValue_, options[0]);
+    assert.equal(this.el.value, options[0]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'ArrowLeft'}));
     await this.el.updateComplete;
 
     // ArrowLeft when first element is selected has no effect.
-    assert.equal(this.el.uiValue_, options[0]);
+    assert.equal(this.el.value, options[0]);
   });
 
   it('selects-previous-option-when-up-arrow-pressed', async function() {
     await window.preferenceManager.set(preference, options[2]);
-    assert.equal(this.el.uiValue_, options[2]);
+    assert.equal(this.el.value, options[2]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'ArrowUp'}));
     await this.el.updateComplete;
 
-    assert.equal(this.el.uiValue_, options[1]);
+    assert.equal(this.el.value, options[1]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'ArrowUp'}));
     await this.el.updateComplete;
 
-    assert.equal(this.el.uiValue_, options[0]);
+    assert.equal(this.el.value, options[0]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'ArrowUp'}));
     await this.el.updateComplete;
 
     // ArrowUp when first element is selected has no effect.
-    assert.equal(this.el.uiValue_, options[0]);
+    assert.equal(this.el.value, options[0]);
   });
 
   it('selects-next-option-when-right-arrow-pressed', async function() {
-    assert.equal(this.el.uiValue_, options[0]);
+    assert.equal(this.el.value, options[0]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'ArrowRight'}));
     await this.el.updateComplete;
 
-    assert.equal(this.el.uiValue_, options[1]);
+    assert.equal(this.el.value, options[1]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'ArrowRight'}));
     await this.el.updateComplete;
 
-    assert.equal(this.el.uiValue_, options[2]);
+    assert.equal(this.el.value, options[2]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'ArrowRight'}));
     await this.el.updateComplete;
 
     // ArrowRight when last element is selected has no effect.
-    assert.equal(this.el.uiValue_, options[2]);
+    assert.equal(this.el.value, options[2]);
   });
 
   it('selects-next-option-when-down-arrow-pressed', async function() {
-    assert.equal(this.el.uiValue_, options[0]);
+    assert.equal(this.el.value, options[0]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'ArrowDown'}));
     await this.el.updateComplete;
 
-    assert.equal(this.el.uiValue_, options[1]);
+    assert.equal(this.el.value, options[1]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'ArrowDown'}));
     await this.el.updateComplete;
 
-    assert.equal(this.el.uiValue_, options[2]);
+    assert.equal(this.el.value, options[2]);
 
     this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'ArrowDown'}));
     await this.el.updateComplete;
 
     // ArrowDown when last element is selected has no effect.
-    assert.equal(this.el.uiValue_, options[2]);
+    assert.equal(this.el.value, options[2]);
   });
 });
