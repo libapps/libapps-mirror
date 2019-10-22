@@ -6,8 +6,10 @@
  * @fileoverview Terminal Settings Category Selector Element unit tests.
  */
 
-import {TerminalSettingsCategorySelectorElement} from
-  './terminal_settings_category_selector.js';
+import {
+  TerminalSettingsCategoryOptionElement,
+  TerminalSettingsCategorySelectorElement,
+} from './terminal_settings_category_selector.js';
 
 describe('terminal_settings_category_selector_tests.js', () => {
   const categories = [
@@ -27,6 +29,12 @@ describe('terminal_settings_category_selector_tests.js', () => {
   };
 
   before(function() {
+    if (customElements.get(TerminalSettingsCategoryOptionElement.is) ===
+        undefined) {
+      customElements.define(
+          TerminalSettingsCategoryOptionElement.is,
+          TerminalSettingsCategoryOptionElement);
+    }
     if (customElements.get(TerminalSettingsCategorySelectorElement.is) ===
         undefined) {
       customElements.define(
@@ -84,6 +92,31 @@ describe('terminal_settings_category_selector_tests.js', () => {
         document.getElementById(categories[1].titleId).parentElement);
 
     document.getElementById(categories[2].titleId).click();
+    assertQueriedElementIs('[active-category]',
+        document.getElementById(categories[2].id));
+    assertQueriedElementIs('[active]',
+        document.getElementById(categories[2].titleId).parentElement);
+  });
+
+  it('updates-elements-active-attribute-on-enter-and-space', function() {
+    document.body.appendChild(this.categoriesEl);
+    document.body.appendChild(this.selectorEl);
+    assertQueriedElementIs('[active-category]',
+        document.getElementById(categories[0].id));
+    assertQueriedElementIs('[active]',
+        document.getElementById(categories[0].titleId).parentElement);
+
+    document.getElementById(categories[1].titleId)
+        .dispatchEvent(
+            new KeyboardEvent('keydown', {code: 'Space', bubbles: true}));
+    assertQueriedElementIs('[active-category]',
+        document.getElementById(categories[1].id));
+    assertQueriedElementIs('[active]',
+        document.getElementById(categories[1].titleId).parentElement);
+
+    document.getElementById(categories[2].titleId)
+        .dispatchEvent(
+            new KeyboardEvent('keydown', {code: 'Enter', bubbles: true}));
     assertQueriedElementIs('[active-category]',
         document.getElementById(categories[2].id));
     assertQueriedElementIs('[active]',

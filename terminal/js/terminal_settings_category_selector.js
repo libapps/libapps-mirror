@@ -9,6 +9,8 @@
  */
 import {LitElement, html} from './lit_element.js';
 
+const PASSED_THROUGH_OPTION = Symbol("PASSED_THROUGH_OPTION");
+
 export class TerminalSettingsCategoryOptionElement extends LitElement {
   static get is() { return 'terminal-settings-category-option'; }
 
@@ -17,6 +19,32 @@ export class TerminalSettingsCategoryOptionElement extends LitElement {
     return html`
         <slot name="title"></slot>
     `;
+  }
+
+  /** @override */
+  connectedCallback() {
+    super.connectedCallback();
+
+    if (!this.hasAttribute('tabindex')) {
+      this.tabIndex = 0;
+    }
+
+    this.addEventListener('click', this.onEvent_);
+    this.addEventListener('keydown', this.onEvent_);
+  }
+
+  /** @override */
+  disconnectedCallback() {
+    super.disconnectedCallback();
+
+    this.removeEventListener('click', this.onEvent_);
+    this.removeEventListener('keydown', this.onEvent_);
+  }
+
+  /** @param {!Event} event */
+  onEvent_(event) {
+    lib.assert(!event[PASSED_THROUGH_OPTION]);
+    event[PASSED_THROUGH_OPTION] = this;
   }
 }
 
@@ -33,36 +61,51 @@ export class TerminalSettingsCategorySelectorElement extends LitElement {
   /** @override */
   connectedCallback() {
     super.connectedCallback();
+
     this.activate_(lib.notNull(this.firstElementChild));
-    this.addEventListener('click', this.clicked_);
+    this.addEventListener('click', this.onClick_);
+    this.addEventListener('keydown', this.onKeyDown_);
+  }
+
+  /** @override */
+  disconnectedCallback() {
+    super.disconnectedCallback();
+
+    this.removeEventListener('click', this.onClick_);
+    this.removeEventListener('keydown', this.onKeyDown_);
   }
 
   /** @param {!Event} event */
-  clicked_(event) {
-    let section = event.target;
-    while (section.parentElement !== this) {
-      // The click event is in the selector, but not on an option.
-      if (section.parentElement === null) {
-        return;
-      }
-      section = section.parentElement;
+  onClick_(event) {
+    if (!event[PASSED_THROUGH_OPTION]) {
+      return;
     }
-    this.querySelectorAll('[active]')
-        .forEach(active => this.deactivate_(active));
-    this.activate_(section);
+    this.activate_(event[PASSED_THROUGH_OPTION]);
+  }
+
+  /** @param {!Event} event */
+  onKeyDown_(event) {
+    if (!event[PASSED_THROUGH_OPTION]) {
+      return;
+    }
+    switch (event.code) {
+      case 'Enter':
+      case 'Space':
+        this.activate_(event[PASSED_THROUGH_OPTION]);
+        break;
+    }
   }
 
   /** @param {!Element} element */
   activate_(element) {
+    this.querySelectorAll('[active]').forEach(active => {
+      active.removeAttribute('active');
+      const id = active.getAttribute('for');
+      document.getElementById(id).removeAttribute('active-category');
+    });
+
     element.setAttribute('active', '');
     const id = element.getAttribute('for');
     document.getElementById(id).setAttribute('active-category', '');
-  }
-
-  /** @param {!Element} element */
-  deactivate_(element) {
-    element.removeAttribute('active');
-    const id = element.getAttribute('for');
-    document.getElementById(id).removeAttribute('active-category');
   }
 }
