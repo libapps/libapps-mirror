@@ -77,12 +77,6 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
     `;
   }
 
-  constructor() {
-    super();
-    /** @type {string} */
-    this.description;
-  }
-
   /** @override */
   render() {
     return html`

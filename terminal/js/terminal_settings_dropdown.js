@@ -93,8 +93,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
 
   constructor() {
     super();
-    /** @type {string} */
-    this.description;
+
     this.expanded = false;
     /** @private {!Array<string>} */
     this.options_;
