@@ -10,8 +10,6 @@
 import {css, html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
 
-const PASSED_THROUGH_DROPDOWN = Symbol("PASSED_THROUGH_DROPDOWN");
-
 export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   static get is() { return 'terminal-settings-dropdown'; }
 
@@ -94,16 +92,11 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
 
   constructor() {
     super();
-    this.boundOnDocumentClick_ = this.onDocumentClick_.bind(this);
     /** @type {string} */
     this.description;
     this.expanded = false;
     /** @private {!Array<string>} */
     this.options_;
-
-    this.addEventListener('blur', (event) => this.onBlur_(event));
-    this.addEventListener('click', (event) => this.onClick_(event));
-    this.addEventListener('keydown', (event) => this.onKeyDown_(event));
   }
 
   /** @override */
@@ -137,14 +130,18 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
       this.tabIndex = 0;
     }
 
-    document.addEventListener('click', this.boundOnDocumentClick_);
+    this.addEventListener('blur', this.onBlur_);
+    this.addEventListener('click', this.onClick_);
+    this.addEventListener('keydown', this.onKeyDown_);
   }
 
   /** @override */
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    document.removeEventListener('click', this.boundOnDocumentClick_);
+    this.removeEventListener('blur', this.onBlur_);
+    this.removeEventListener('click', this.onClick_);
+    this.removeEventListener('keydown', this.onKeyDown_);
   }
 
   selectNth_(index) {
@@ -180,14 +177,6 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   }
 
   /** @param {!Event} event */
-  onDocumentClick_(event) {
-    // Own onClick_ handler will have already processed this event if possible.
-    if (event[PASSED_THROUGH_DROPDOWN] !== this) {
-      this.expanded = false;
-    }
-  }
-
-  /** @param {!Event} event */
   onBlur_(event) {
     this.expanded = false;
   }
@@ -195,8 +184,6 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   /** @param {!Event} event */
   onClick_(event) {
     this.expanded = !this.expanded;
-    lib.assert(!event[PASSED_THROUGH_DROPDOWN]);
-    event[PASSED_THROUGH_DROPDOWN] = this;
   }
 
   /** @param {!Event} event */

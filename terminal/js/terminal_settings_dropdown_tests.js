@@ -108,56 +108,6 @@ describe('terminal_settings_dropdown_tests.js', () => {
         .getAttribute('aria-expanded'), 'false');
   });
 
-  it('closes-options-list-when-document-clicked', async function() {
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
-
-    this.el.click();
-    await this.el.updateComplete;
-
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'true');
-
-    document.body.click();
-    await this.el.updateComplete;
-
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
-  });
-
-  it('closes-options-list-when-other-dropdown-clicked', async function() {
-    const otherDropdown = /** @type {!TerminalSettingsDropdownElement} */ (
-        document.createElement('terminal-settings-dropdown'));
-    otherDropdown.setAttribute('preference', preference);
-    document.body.appendChild(otherDropdown);
-    await otherDropdown.updateComplete;
-
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
-    assert.equal(otherDropdown.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
-
-    this.el.click();
-    await this.el.updateComplete;
-
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'true');
-    assert.equal(otherDropdown.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
-
-    otherDropdown.click();
-    await otherDropdown.updateComplete;
-    await this.el.updateComplete;
-
-    // Will be reset due to the elements document click watcher.
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
-    assert.equal(otherDropdown.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'true');
-
-    document.body.removeChild(otherDropdown);
-  });
-
   it('closes-options-list-when-element-looses-focus', async function() {
     assert.equal(this.el.shadowRoot.querySelector('#container')
         .getAttribute('aria-expanded'), 'false');
