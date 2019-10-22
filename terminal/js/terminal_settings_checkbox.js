@@ -81,7 +81,7 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
   render() {
     return html`
         <input id="checkbox" type="checkbox" @change="${this.onUiChanged_}"
-            ?checked="${this.value}" />
+            .checked="${this.value}" />
     `;
   }
 
