@@ -1181,8 +1181,9 @@ You'll have to adjust your keyboard/muscle memory accordingly.
 
 ### Can I synchronize my emacs/vim selection with the system clipboard?
 
-  Yes, as long as you're not using tmux.  For Emacs, see [osc52.el], and for
-  vim, see [osc52.vim].
+  Yes -- for Vim, see [osc52.vim]. For Emacs versions prior to Emacs 25, see
+  [osc52.el] (newer Emacs versions have built-in OSC-52 support). osc52.vim
+  works inside tmux and screen sessions.
 
 
 ### How do I talk to hterm from inside screen/tmux?
