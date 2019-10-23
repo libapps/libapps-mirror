@@ -24,7 +24,10 @@ terminal.Command = function(argv) {
   this.argv_ = argv;
   this.io = null;
   this.keyboard_ = null;
-  this.id_ = null;
+  // We pass this ID to chrome to use for startup text which is sent before the
+  // vsh process is created and we receive an ID from openTerminalProcess.
+  this.id_ = Math.random().toString().substring(2);
+  argv.args.push('--startup_id=' + this.id_);
 };
 
 /**

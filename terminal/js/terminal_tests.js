@@ -39,7 +39,8 @@ it('opens-process-in-init', function(done) {
   this.mockTerminalPrivateController.addObserver(
       'openTerminalProcess', (processName, args) => {
         assert.equal('vmshell', processName);
-        assert.deepEqual([], args);
+        assert.lengthOf(args, 1);
+        assert.match(args[0], /^--startup_id=\d+$/);
         setTimeout(done, 0);
       });
   terminal.init();
