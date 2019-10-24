@@ -22,6 +22,7 @@ beforeEach(function() {
   div.style.width = '100%';
   document.body.appendChild(div);
   this.mockTerminalPrivateController = MockTerminalPrivate.start();
+  this.mockTerminalPrivate = this.mockTerminalPrivateController.instance;
 });
 
 /**
@@ -35,15 +36,27 @@ afterEach(function() {
 /**
  *  init.
  */
-it('opens-process-in-init', function(done) {
-  this.mockTerminalPrivateController.addObserver(
-      'openTerminalProcess', (processName, args) => {
-        assert.equal('vmshell', processName);
-        assert.lengthOf(args, 1);
-        assert.match(args[0], /^--startup_id=\d+$/);
-        setTimeout(done, 0);
-      });
+it('opens-process-in-init', async function() {
   terminal.init();
+  const [processName, args] =
+      await this.mockTerminalPrivateController.on('openTerminalProcess');
+  assert.equal('vmshell', processName);
+  assert.lengthOf(args, 1);
+  assert.match(args[0], /^--startup_id=\d+$/);
+});
+
+it('does-not-exit-on-first-output', async function() {
+  const pid = 'pid1234';
+  this.mockTerminalPrivate.openTerminalProcessId = pid;
+  let exitCalled = false;
+  const term = terminal.init();
+  await this.mockTerminalPrivateController.on('openTerminalProcess');
+  term.command.exit = () => { exitCalled = true; };
+
+  await this.mockTerminalPrivate.onProcessOutput.dispatch(pid, 'exit', 'text');
+  assert.isFalse(exitCalled);
+  await this.mockTerminalPrivate.onProcessOutput.dispatch(pid, 'exit', 'text');
+  assert.isTrue(exitCalled);
 });
 
 });

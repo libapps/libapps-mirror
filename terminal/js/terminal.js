@@ -27,7 +27,8 @@ terminal.Command = function(argv) {
   // We pass this ID to chrome to use for startup text which is sent before the
   // vsh process is created and we receive an ID from openTerminalProcess.
   this.id_ = Math.random().toString().substring(2);
-  argv.args.push('--startup_id=' + this.id_);
+  argv.args.push(`--startup_id=${this.id_}`);
+  this.isFirstOutput = false;
 };
 
 /**
@@ -86,15 +87,19 @@ terminal.init = function() {
  * @param {string} text Text that was detected on process output.
  */
 terminal.Command.prototype.onProcessOutput_ = function(id, type, text) {
-  if (this.id_ === null || id !== this.id_) {
+  if (id !== this.id_) {
     return;
   }
 
-  if (type == 'exit') {
+  // When terminal starts, the first message may be type 'exit' if the process
+  // fails to start.  In this case, we don't want to close the tab since we
+  // can display an error message to the user.
+  if (type == 'exit' && !this.isFirstOutput_) {
     this.exit(0);
     return;
   }
   this.io.print(text);
+  this.isFirstOutput_ = false;
 };
 
 /**
@@ -128,6 +133,7 @@ terminal.Command.prototype.run = function() {
     }
 
     this.id_ = id;
+    this.isFirstOutput_ = true;
 
     // Setup initial window size.
     this.onTerminalResize_(
@@ -145,9 +151,6 @@ terminal.Command.prototype.run = function() {
  * @param {string} string The string to send.
  */
 terminal.Command.prototype.sendString_ = function(string) {
-  if (this.id_ === null) {
-    return;
-  }
   chrome.terminalPrivate.sendInput(this.id_, string);
 };
 
@@ -155,9 +158,6 @@ terminal.Command.prototype.sendString_ = function(string) {
  * Closes the terminal and exits the command.
  */
 terminal.Command.prototype.close_ = function() {
-  if (this.id_ === null) {
-    return;
-  }
   chrome.terminalPrivate.closeTerminalProcess(this.id_);
   this.id_ = null;
 };
@@ -169,10 +169,6 @@ terminal.Command.prototype.close_ = function() {
  * @param {string|number} height The new terminal height.
  */
 terminal.Command.prototype.onTerminalResize_ = function(width, height) {
-  if (this.id_ === null) {
-    return;
-  }
-
   chrome.terminalPrivate.onTerminalResize(
       this.id_, Number(width), Number(height), function(success) {
         if (!success)
