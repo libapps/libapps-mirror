@@ -274,3 +274,27 @@ MockWindow.prototype.addEventListener = function(type, listener) {
 MockWindow.prototype.removeEventListener = function(type, listener) {
   this.events[type].removeListener(listener);
 };
+
+/**
+ * Mock Location.
+ *
+ * @extends {Location}
+ */
+class MockLocation {
+  /** @param {!URL} url */
+  constructor(url) { this.url = url; }
+
+  /** @override */
+  get hash() { return this.url.hash; }
+
+  /** @override */
+  set hash(hash) { this.url.hash = hash; }
+
+  /** @override */
+  get href() { return this.url.href; }
+}
+
+/** @override */
+MockLocation.prototype.replace = function(url) {
+  this.url = new URL(url, this.url);
+};

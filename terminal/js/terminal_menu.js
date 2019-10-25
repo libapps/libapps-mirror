@@ -16,7 +16,7 @@ terminal.Menu = function(window) {
 };
 
 /**
- * @type {!Map<string, function()>}
+ * @type {!Map<string, function(boolean)>}
  * @const
  */
 terminal.Menu.HANDLERS = new Map();
@@ -26,8 +26,9 @@ terminal.Menu.HANDLERS = new Map();
  */
 terminal.Menu.prototype.install = function() {
   this.listener_ =
-      /** @type {!EventListener} */ (this.onHashChange_.bind(this));
+      /** @type {!EventListener} */ (this.onHashChange_.bind(this, false));
   this.window.addEventListener('hashchange', this.listener_);
+  this.onHashChange_(true);
 };
 
 /**
@@ -40,13 +41,15 @@ terminal.Menu.prototype.uninstall = function() {
 /**
  * Handle hash changes.
  *
- * @param {!HashChangeEvent} event The event to handle.
+ * @param {boolean} initialLoad True if this is the initial page load rather
+ *     than a change.
+ * @param {!HashChangeEvent=} event The event to handle.
  * @private
  */
-terminal.Menu.prototype.onHashChange_ = function(event) {
+terminal.Menu.prototype.onHashChange_ = function(initialLoad, event) {
   const handler = terminal.Menu.HANDLERS.get(this.window.location.hash);
   if (handler) {
-    handler.call(this);
+    handler.call(this, initialLoad);
   }
   // Reset hash back to empty so that repeated menu selection of the same item
   // will trigger.
@@ -54,6 +57,11 @@ terminal.Menu.prototype.onHashChange_ = function(event) {
 };
 
 /** Open settings page in a new window. */
-terminal.Menu.HANDLERS.set(
-    '#options',
-    function() { this.window.open('/html/terminal_settings.html'); });
+terminal.Menu.HANDLERS.set('#options', function(initialLoad) {
+  const url = '/html/terminal_settings.html';
+  if (initialLoad) {
+    this.window.location.replace(url);
+  } else {
+    this.window.open(url);
+  }
+});
