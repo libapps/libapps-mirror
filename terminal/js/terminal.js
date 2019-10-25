@@ -32,6 +32,17 @@ terminal.Command = function(argv) {
 };
 
 /**
+ * Return a formatted message in the current locale.
+ *
+ * @param {string} name The name of the message to return.
+ * @param {!Array=} args The message arguments, if required.
+ * @return {string} The localized & formatted message.
+ */
+terminal.msg = function(name, args) {
+  return hterm.messageManager.get(name, args);
+};
+
+/**
  * Static initializer.
  *
  * This constructs a new hterm.Terminal instance and instructs it to run
@@ -70,9 +81,18 @@ terminal.init = function() {
     }
   };
 
-  // TODO(crbug.com/998920): Add terminal.contextMenu.setItems([string,
-  // function]) when translated strings are available via
-  // chrome://terminal/strings.js.
+  term.contextMenu.setItems([
+    {name: terminal.msg('TERMINAL_CLEAR_MENU_LABEL'),
+     action: function() { term.wipeContents(); }},
+    {name: terminal.msg('TERMINAL_RESET_MENU_LABEL'),
+     action: function() { term.reset(); }},
+    {name: terminal.msg('FAQ_MENU_LABEL'),
+     action: function() {
+       lib.f.openWindow('https://goo.gl/muppJj', '_blank');
+     }},
+    {name: terminal.msg('OPTIONS_BUTTON_LABEL'),
+     action: function() { location.hash = '#options'; }},
+  ]);
 
   return term;
 };

@@ -15,6 +15,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
   chrome.tabs.getCurrent(
       (tab) => { chrome.tabs.update(tab.id, {autoDiscardable: false}); });
 
+  // Load i18n messages.
+  lib.registerInit('messages', (onInit) => {
+    lib.i18n.getAcceptLanguages(async (languages) => {
+      // Replace and load hterm.messageManager.
+      hterm.messageManager = new lib.MessageManager(languages, true);
+      const url =  lib.f.getURL('/_locales/$1/messages.json');
+      await hterm.messageManager.findAndLoadMessages(url);
+      onInit();
+    });
+  });
+
   lib.init(() => {
     window.term_ = terminal.init();
     new terminal.Menu(window).install();
