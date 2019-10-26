@@ -77,8 +77,8 @@ def build_archive():
     """Move compiled files to artifacts output tree."""
     # Unpack the nassh extensions so they can be packaged & signed.
     nassh_dir = os.path.join(kokoro.LIBAPPS_DIR, 'nassh')
-    zip_dir = os.path.join(nassh_dir, 'dist', 'zip')
-    for archive in glob.glob(os.path.join(zip_dir, 'SecureShell*.zip')):
+    dist_dir = os.path.join(nassh_dir, 'dist')
+    for archive in glob.glob(os.path.join(dist_dir, '*.zip')):
         # The archives look like:
         #   SecureShellApp-0.20.zip
         #   SecureShellApp-dev-0.20.7220.2157.zip
@@ -108,15 +108,9 @@ def build():
 
     # Build the nassh program.
     nassh_dir = os.path.join(kokoro.LIBAPPS_DIR, 'nassh')
-    zip_dir = os.path.join(nassh_dir, 'dist', 'zip')
-    shutil.rmtree(zip_dir, ignore_errors=True)
-    libdot.run(['./bin/mkzip.sh', '--nouse_manifest_platforms'], cwd=nassh_dir)
-
-    # Promote extension and app dev zips.
-    for path in glob.glob(os.path.join(zip_dir, '*V2*.zip')):
-        libdot.unlink(path)
-    for path in glob.glob(os.path.join(zip_dir, 'SecureShell*.zip')):
-        libdot.run(['./bin/promote.sh', path], cwd=nassh_dir)
+    dist_dir = os.path.join(nassh_dir, 'dist')
+    shutil.rmtree(dist_dir, ignore_errors=True)
+    libdot.run(['./bin/mkdist'], cwd=nassh_dir)
 
     build_archive()
 

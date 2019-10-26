@@ -1,0 +1,255 @@
+#!/usr/bin/env python3
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Utility code for creating and maintaining extension zip files."""
+
+from __future__ import print_function
+
+import datetime
+import fnmatch
+import glob
+import json
+import logging
+import os
+import re
+import shutil
+import sys
+
+import nassh
+import libdot
+
+
+# List of files to be included in the zip file as globs.
+INCLUDE_PATTERNS = (
+    os.path.join('css', '*.css'),
+    os.path.join('html', '*.html'),
+    os.path.join('images', '*', '*.png'),
+    os.path.join('js', '*.js'),
+    os.path.join('third_party', '*', '*.css'),
+    os.path.join('third_party', '*', '*.js'),
+    '_locales',
+    '_platform_specific',
+    'plugin',
+)
+
+# List of files to be excluded from the zip as fnmatch globs.
+EXCLUDE_PATTERNS = (
+    '*_test.html',
+    '*_test.js',
+    '*_tests.js',
+)
+
+# List of additionall files to be excluded when building crosh archive.
+EXCLUDE_PATTERNS_CROSH = (
+    'manifest.json',
+    os.path.join('css', 'nassh_box.css'),
+    os.path.join('css', 'nassh_connect_dialog.css'),
+    os.path.join('css', 'nassh_sftp_fsp_config_dialog.css'),
+    os.path.join('html', 'nassh.html'),
+    os.path.join('html', 'nassh_background.html'),
+    os.path.join('html', 'nassh_connect_dialog.html'),
+    os.path.join('html', 'nassh_google_relay.html'),
+    os.path.join('html', 'nassh_popup.html'),
+    os.path.join('html', 'nassh_sftp_fsp_config_dialog.html'),
+    os.path.join('js', 'nasftp*.js'),
+    os.path.join('js', 'nassh_agent*.js'),
+    os.path.join('js', 'nassh_column_list*.js'),
+    os.path.join('js', 'nassh_command_instance*.js'),
+    os.path.join('js', 'nassh_connect_dialog*.js'),
+    os.path.join('js', 'nassh_extension*.js'),
+    os.path.join('js', 'nassh_google_relay*.js'),
+    os.path.join('js', 'nassh_relay*.js'),
+    os.path.join('js', 'nassh_sftp*.js'),
+    os.path.join('js', 'nassh_stream*.js'),
+    'plugin',
+    os.path.join('third_party', 'google-smart-card', '*'),
+    os.path.join('images', '*', 'icon-fullsize.png'),
+)
+
+
+DIST_DIR = os.path.join(nassh.DIR, 'dist')
+TMP_DIR = os.path.join(DIST_DIR, 'tmp')
+
+
+def minify(tmpdir):
+    """Run various minification steps."""
+    libdot.run([os.path.join(libdot.BIN_DIR, 'minify-translations.py'),
+                '-i', '--glob', os.path.join('_locales', '*', 'messages.json')],
+               cwd=tmpdir)
+
+
+def copyfiles(tmpdir, extra_exclude=()):
+    """Copy the files to |tmpdir| so we can minify them."""
+    shutil.rmtree(tmpdir, ignore_errors=True)
+    os.makedirs(tmpdir, exist_ok=True)
+
+    def excluded(path):
+        """See if |path| should be ignored."""
+        for exc in EXCLUDE_PATTERNS + extra_exclude:
+            if fnmatch.fnmatch(path, exc):
+                return True
+        return False
+
+    for inc in INCLUDE_PATTERNS:
+        for path in glob.glob(os.path.join(nassh.DIR, inc)):
+            subpath = os.path.relpath(path, nassh.DIR)
+            if not excluded(subpath):
+                dst = os.path.join(tmpdir, subpath)
+                os.makedirs(os.path.dirname(dst), exist_ok=True)
+                if os.path.isdir(path):
+                    shutil.copytree(path, dst)
+                else:
+                    shutil.copy(path, dst)
+
+
+def mkzip(manifest, stamps=()):
+    """Build the nassh extension archive."""
+    logging.info('Processing %s', manifest)
+
+    with open(manifest, encoding='utf-8') as fp:
+        data = json.load(fp)
+
+    name = re.sub(r' \(tot\)', '', data['name'])
+
+    version = data['version']
+    version = '.'.join([version] + list(stamps))
+
+    basename = name.replace(' ', '')
+
+    if stamps:
+        name += ' (dev)'
+        basename += '-dev'
+    else:
+        # Point the icons to the stable version.
+        for size in data['icons'].keys():
+            data['icons'][size] = re.sub(r'/dev/', '/stable/',
+                                         data['icons'][size])
+    data['name'] = name
+
+    basename += '-' + version
+    zipfile = '%s.zip' % (basename,)
+    archive = os.path.join(DIST_DIR, zipfile)
+
+    logging.info('Name: %s', name)
+    logging.info('Version: %s', version)
+    logging.info('Archive: %s', zipfile)
+
+    tmpdir = os.path.join(TMP_DIR, basename)
+    copyfiles(tmpdir)
+    minify(tmpdir)
+
+    del data['key']
+    del data['platforms']
+    path = os.path.join(tmpdir, 'manifest.json')
+    with open(path, 'w', encoding='utf-8') as fp:
+        json.dump(data, fp, separators=(',', ':'))
+
+    libdot.unlink(archive)
+    libdot.run(['zip', '-rq', os.path.relpath(archive, tmpdir), '.'],
+               cwd=tmpdir)
+
+
+def mkcrosh():
+    """Build the crosh archive."""
+    logging.info('Processing crosh/terminal')
+
+    basename = 'crosh'
+    zipfile = '%s.zip' % (basename,)
+    archive = os.path.join(DIST_DIR, zipfile)
+    logging.info('Name: %s', basename)
+    logging.info('Archive: %s', zipfile)
+
+    tmpdir = os.path.join(TMP_DIR, basename)
+    copyfiles(tmpdir, extra_exclude=EXCLUDE_PATTERNS_CROSH)
+
+    # Copy over the Terminal project.
+    terminal = os.path.join(libdot.LIBAPPS_DIR, 'terminal')
+    for subdir in ('css', 'html', 'js'):
+        for path in glob.glob(os.path.join(terminal, subdir, '*')):
+            if not fnmatch.fnmatch(path, '*_test*'):
+                shutil.copy(path, os.path.join(tmpdir, subdir))
+    shutil.copy(os.path.join(terminal, 'terminal_pwa_manifest.json'), tmpdir)
+
+    minify(tmpdir)
+    libdot.unlink(archive)
+    libdot.run(['zip', '-rq', os.path.relpath(archive, tmpdir), '.'],
+               cwd=tmpdir)
+
+
+def get_stamp():
+    """Get the timestamp as a version.
+
+    CWS limits each dotted field to 16-bits (65535), and allows only 4 fields.
+    That means we have to pack the year/month/day and hour/minutes/seconds.
+      https://developer.chrome.com/extensions/manifest/version
+    If we're creative, we can pack these so the version is always increasing.
+
+    We're really just worried about two consecutive builds not decreasing.
+    Keep in mind that we hand maintain the first two components of the version
+    in the manifest.json.
+    """
+    now = datetime.datetime.now()
+    tm = now.timetuple()
+
+    # The first field is the date.
+    # - last two digits of the year [0..99]
+    # - day of the year [1..366] -- we subtract 1 to get [0..365]
+    #
+    # Field = (year * 366) + day_of_year
+    # This is OK because (99 * 366) + 366 = 36600 < 65535.
+    stamp_date = ((tm.tm_year % 100) * 366) + (tm.tm_yday - 1)
+
+    # The second field is the time.
+    # - hour [0..23]
+    # - minute [0..59]
+    # - seconds [0..60] -- includes leap second
+    #
+    # But 23 * 60 * 60 = 82800 which exceeds 65535.
+    # If we divide seconds by 2, then everything fits.
+    #
+    # Field = (hour * 60 * 30) + (minute * 30) + (second / 2)
+    # This is OK because (23 * 60 * 30) + (59 * 30) + 30 = 43200 < 65535.
+    stamp_time = (tm.tm_hour * 60 * 30) + (tm.tm_min * 30) + tm.tm_sec // 2
+
+    return (str(stamp_date), str(stamp_time))
+
+
+def get_parser():
+    """Get a command line parser."""
+    parser = libdot.ArgumentParser(description=__doc__)
+    parser.add_argument('--skip-mkdeps', dest='run_mkdeps',
+                        action='store_false', default=True,
+                        help='Skip (re)building of dependencies.')
+    parser.add_argument('--crosh-only', action='store_true',
+                        help='Only build crosh (and Terminal).')
+    return parser
+
+
+def main(argv):
+    """The main func!"""
+    parser = get_parser()
+    opts = parser.parse_args(argv)
+    libdot.node_and_npm_setup()
+
+    # Setup source & output paths.
+    os.makedirs(DIST_DIR, exist_ok=True)
+    os.makedirs(TMP_DIR, exist_ok=True)
+
+    if opts.run_mkdeps:
+        libdot.run([os.path.join(nassh.BIN_DIR, 'mkdeps')])
+
+    stamps = get_stamp()
+    if not opts.crosh_only:
+        # Build the dev channel variants.
+        mkzip('manifest_ext.json', stamps)
+        mkzip('manifest_v1.5.json', stamps)
+        # Build the stable channel variants.
+        mkzip('manifest_ext.json')
+        mkzip('manifest_v1.5.json')
+    mkcrosh()
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))
