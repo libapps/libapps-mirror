@@ -12,7 +12,9 @@ directly, and there's a bunch of metadata that are only for translators.
 
 from __future__ import print_function
 
+import glob
 import json
+import logging
 import re
 import sys
 
@@ -76,7 +78,7 @@ def minify(path, inplace=False):
         try:
             data = json.loads(fp.read())
         except ValueError as e:
-            print('ERROR: Processing %s: %s' % (path, e), file=sys.stderr)
+            logging.error('Processing %s: %s', path, e)
             return False
 
     # Strip out the metadata that only translators read.
@@ -105,6 +107,8 @@ def get_parser():
     parser = libdot.ArgumentParser(description=__doc__)
     parser.add_argument('-i', '--inplace', default=False, action='store_true',
                         help='Modify files inline rather than writing stdout.')
+    parser.add_argument('--glob', action='store_true',
+                        help='Whether to use glob() on input paths.')
     parser.add_argument('files', nargs='+', metavar='files',
                         help='The translations to format.')
     return parser
@@ -115,8 +119,17 @@ def main(argv):
     parser = get_parser()
     opts = parser.parse_args(argv)
 
+    def expander(paths):
+        """Handle recursive expansions of |paths|."""
+        for path in paths:
+            if opts.glob:
+                yield from glob.glob(path)
+            else:
+                yield path
+
     ret = 0
-    for path in opts.files:
+    for path in expander(opts.files):
+        logging.debug('Processing %s', path)
         if not minify(path, opts.inplace):
             ret = 1
     return ret
