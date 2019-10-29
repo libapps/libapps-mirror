@@ -98,8 +98,12 @@ it('hexToRGB', () => {
     // Then some reasonable data.
     ['#000',    'rgb(0, 0, 0)'],
     ['#abc',    'rgb(170, 187, 204)'],
+    ['#abcc',   'rgba(170, 187, 204, 0.8)'],
     ['#a0b0c0', 'rgb(160, 176, 192)'],
     ['#fFfFFf', 'rgb(255, 255, 255)'],
+    ['#a0b0c000', 'rgba(160, 176, 192, 0)'],
+    ['#a0b0c0cc', 'rgba(160, 176, 192, 0.8)'],
+    ['#a0b0c0Ff', 'rgb(160, 176, 192)'],
   ];
 
   data.forEach((ele) => {
@@ -115,6 +119,10 @@ it('rgbToHex', () => {
     // Then some reasonable data.
     ['rgb(0,0,0)', '#000000'],
     ['rgb(10, 100, 255)', '#0a64ff'],
+    ['rgba(10, 100, 255, 0)', '#0a64ff00'],
+    ['rgba(10, 100, 255, 0.799)', '#0a64ffcc'],
+    ['rgba(10, 100, 255, 0.8)', '#0a64ffcc'],
+    ['rgba(10, 100, 255, 1)', '#0a64ff'],
   ];
 
   data.forEach((ele) => {

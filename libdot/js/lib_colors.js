@@ -32,11 +32,11 @@ lib.colors = {};
  * Instead, we stoop to this .replace() trick.
  */
 lib.colors.re_ = {
-  // CSS hex color, #RGB.
-  hex16: /#([a-f0-9])([a-f0-9])([a-f0-9])/i,
+  // CSS hex color, #RGB or RGBA.
+  hex16: /^#([a-f0-9])([a-f0-9])([a-f0-9])([a-f0-9])?$/i,
 
-  // CSS hex color, #RRGGBB.
-  hex24: /#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/i,
+  // CSS hex color, #RRGGBB or #RRGGBBAA.
+  hex24: /^#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})?$/i,
 
   // CSS rgb color, rgb(rrr,ggg,bbb).
   rgb: new RegExp(
@@ -192,51 +192,58 @@ lib.colors.x11ToCSS = function(v) {
 };
 
 /**
- * Converts one or more CSS '#RRGGBB' color values into their rgb(...)
- * form.
+ * Converts one or more CSS '#RRGGBB' or '#RRGGBBAA' color values into their
+ * rgb(...) or rgba(...) form respectively.
  *
  * Arrays are converted in place. If a value cannot be converted, it is
  * replaced with null.
  *
- * @param {string} hex A single RGB value to convert.
+ * @param {string} hex A single RGB or RGBA value to convert.
  * @return {?string} The converted value.
  */
 lib.colors.hexToRGB = function(hex) {
-  var hex16 = lib.colors.re_.hex16;
-  var hex24 = lib.colors.re_.hex24;
+  const hex16 = lib.colors.re_.hex16;
+  const hex24 = lib.colors.re_.hex24;
 
-  if (hex.length == 4) {
-    hex = hex.replace(hex16, function(h, r, g, b) {
-      return "#" + r + r + g + g + b + b;
-    });
+  if (hex16.test(hex)) {
+    // Convert from RGB to RRGGBB and from RGBA to RRGGBBAA.
+    hex = `#${hex.match(/[a-f0-9]/gi).map(x => `${x}${x}`).join('')}`;
   }
-  var ary = hex.match(hex24);
-  if (!ary)
-    return null;
 
-  return 'rgb(' + parseInt(ary[1], 16) + ', ' +
-      parseInt(ary[2], 16) + ', ' +
-      parseInt(ary[3], 16) + ')';
+  const ary = hex.match(hex24);
+  if (!ary) {
+    return null;
+  }
+
+  const val = (index) => parseInt(ary[index + 1], 16);
+  return ary[4] === undefined || val(3) === 255
+      ? `rgb(${val(0)}, ${val(1)}, ${val(2)})`
+      : `rgba(${val(0)}, ${val(1)}, ${val(2)}, ${val(3) / 255})`;
 };
 
 /**
- * Converts one or more CSS rgb(...) forms into their '#RRGGBB' color values.
- *
- * If given an rgba(...) form, the alpha field is thrown away.
+ * Converts one or more CSS rgb(...) or rgba(...) forms into their '#RRGGBB' or
+ * '#RRGGBBAA' color values respectively.
  *
  * Arrays are converted in place. If a value cannot be converted, it is
  * replaced with null.
  *
- * @param {string} rgb A single rgb(...) value to convert.
+ * @param {string} rgb A single rgb(...) or rgba(...) value to convert.
  * @return {?string} The converted value.
  */
 lib.colors.rgbToHex = function(rgb) {
-  var ary = lib.colors.crackRGB(rgb);
-  if (!ary)
+  const ary = lib.colors.crackRGB(rgb);
+  if (!ary) {
     return null;
-  return '#' + lib.f.zpad(((parseInt(ary[0], 10) << 16) |
-                           (parseInt(ary[1], 10) <<  8) |
-                           (parseInt(ary[2], 10) <<  0)).toString(16), 6);
+  }
+
+  const hex = '#' + lib.f.zpad((
+      (parseInt(ary[0], 10) << 16) |
+      (parseInt(ary[1], 10) <<  8) |
+      (parseInt(ary[2], 10) <<  0)).toString(16), 6);
+  return ary[3] === undefined || ary[3] === '1'
+      ? hex
+      : `${hex}${lib.f.zpad(Math.round(255 * ary[3]).toString(16), 2)}`;
 };
 
 /**
