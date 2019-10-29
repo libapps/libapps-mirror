@@ -176,6 +176,66 @@ it('setAlpha', () => {
   });
 });
 
+it('crackHSL', () => {
+  var data = [
+    // Some bad data first.
+    ['', null],
+    ['blah', null],
+    ['hsl(1, 2)', null],
+    // Then some reasonable data.
+    ['hsl(1,2%,3%)', ['1', '2', '3', '1']],
+    ['hsla(0, 255%, 10%, 0)', ['0', '255', '10', '0']],
+  ];
+
+  data.forEach((ele) => {
+    assert.deepStrictEqual(lib.colors.crackHSL(ele[0]), ele[1], ele[0]);
+  });
+});
+
+it('hslToRGB', () => {
+  var data = [
+    // Some bad data first.
+    ['', null],
+    ['foo', null],
+    ['#hi', null],
+    ['#', null],
+    ['#0', null],
+    ['#00', null],
+    [' #345', null],
+    // Then some reasonable data.
+    ['hsl(0, 0%, 0%)',    'rgb(0, 0, 0)'],
+    ['hsl(210, 25%, 73%)',    'rgb(169, 186, 203)'],
+    ['hsl(210, 20%, 69%)', 'rgb(160, 176, 192)'],
+    ['hsl(0, 0%, 100%)', 'rgb(255, 255, 255)'],
+    ['hsla(210, 20%, 69%, 0)', 'rgba(160, 176, 192, 0)'],
+    ['hsla(210, 20%, 69%, 0.8)', 'rgba(160, 176, 192, 0.8)'],
+    ['hsla(210, 20%, 69%, 1)', 'rgb(160, 176, 192)'],
+  ];
+
+  data.forEach((ele) => {
+    assert.strictEqual(lib.colors.hslToRGB(ele[0]), ele[1], ele[0]);
+  });
+});
+
+it('rgbToHsl', () => {
+  var data = [
+    // Some bad data first.
+    ['', null],
+    ['foo', null],
+    // Then some reasonable data.
+    ['rgb(0,0,0)', 'hsl(0, 0%, 0%)'],
+    ['rgb(10, 100, 255)', 'hsl(218, 100%, 52%)'],
+    ['rgba(10, 100, 255, 0)', 'hsla(218, 100%, 52%, 0)'],
+    ['rgba(10, 100, 255, 0.8)', 'hsla(218, 100%, 52%, 0.8)'],
+    ['rgba(100, 100, 100, 0.8)', 'hsla(0, 0%, 39%, 0.8)'],
+    ['rgba(10, 100, 255, 1)', 'hsl(218, 100%, 52%)'],
+  ];
+
+  data.forEach((ele) => {
+    assert.deepStrictEqual(lib.colors.rgbToHsl(ele[0]), ele[1], ele[0]);
+  });
+});
+
 it('crackRGB', () => {
   var data = [
     // Some bad data first.
