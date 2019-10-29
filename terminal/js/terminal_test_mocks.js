@@ -296,5 +296,5 @@ class MockLocation {
 
 /** @override */
 MockLocation.prototype.replace = function(url) {
-  this.url = new URL(url, this.url);
+  this.url = new URL(`${url}`, this.url);
 };
