@@ -103,7 +103,7 @@ export class TransparencySliderElement extends LitElement {
 
   /** @param {!Event} event */
   onClick_(event) {
-    const xPercent = event.offsetX / this.clientWidth;
+    const xPercent = lib.f.clamp(event.offsetX / this.clientWidth, 0, 1);
 
     this.transparency = xPercent;
 

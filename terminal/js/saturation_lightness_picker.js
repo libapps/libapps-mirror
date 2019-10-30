@@ -122,8 +122,8 @@ export class SaturationLightnessPickerElement extends LitElement {
 
   /** @param {!Event} event */
   onClick_(event) {
-    const xPercent = event.offsetX / this.clientWidth;
-    const yPercent = event.offsetY / this.clientHeight;
+    const xPercent = lib.f.clamp(event.offsetX / this.clientWidth, 0, 1);
+    const yPercent = lib.f.clamp(event.offsetY / this.clientHeight, 0, 1);
 
     this.saturation = 100 * xPercent;
     this.lightness = 100 * (1 - yPercent);
