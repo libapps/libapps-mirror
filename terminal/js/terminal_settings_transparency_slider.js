@@ -3,22 +3,25 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview Exports an element: hue-slider
+ * @fileoverview Exports an element: transparency-slider
  *
  * @suppress {moduleLoad}
  */
 import {LitElement, css, html} from './lit_element.js';
 
-export class HueSliderElement extends LitElement {
-  static get is() { return 'hue-slider'; }
+export class TransparencySliderElement extends LitElement {
+  static get is() { return 'transparency-slider'; }
 
   /** @override */
   static get properties() {
     return {
-      hue: {
+      transparency: {
         type: Number,
         reflect: true,
-      }
+      },
+      hue: {
+        type: Number,
+      },
     };
   }
 
@@ -26,14 +29,20 @@ export class HueSliderElement extends LitElement {
     return css`
         :host {
           background-image: linear-gradient(
-              to right,
-              rgba(255, 0, 0, 1),
-              rgba(255, 255, 0, 1),
-              rgba(0, 255, 0, 1),
-              rgba(0, 255, 255, 1),
-              rgba(0, 0, 255, 1),
-              rgba(255, 0, 255, 1),
-              rgba(255, 0, 0, 1));
+              45deg,
+              rgba(0,0,0,0.1) 25%,
+              transparent 25%,
+              transparent 75%,
+              rgba(0,0,0,0.1) 75%,
+              rgba(0,0,0,0.1) 0), linear-gradient(
+              45deg,
+              rgba(0,0,0,0.1) 25%,
+              transparent 25%,
+              transparent 75%,
+              rgba(0,0,0,0.1) 75%,
+              rgba(0,0,0,0.1) 0);
+          background-position: 0px 0, 5px 5px;
+          background-size: 10px 10px, 10px 10px;
           border-radius: 4px;
           box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
           cursor: pointer;
@@ -41,6 +50,13 @@ export class HueSliderElement extends LitElement {
           height: 12px;
           position: relative;
           width: 200px;
+        }
+
+        #display {
+          border-radius: inherit;
+          height: 100%;
+          pointer-events: none;
+          width: 100%;
         }
 
         #picker {
@@ -64,9 +80,22 @@ export class HueSliderElement extends LitElement {
   /** @override */
   render() {
     return html`
-        <div id="picker" style="left: ${100 * this.hue / 360}%; background-color: hsl(${this.hue}, 100%, 50%);"></div>
+        <div id="display" style="background-image: linear-gradient(to right,
+            transparent, hsl(${this.hue}, 100%, 50%));">
+        </div>
+        <div id="picker" style="left: ${100 * this.transparency}%;
+            background-color: hsl(${this.hue}, 100%, 50%);">
         </div>
     `;
+  }
+
+  constructor() {
+    super();
+
+    /** @private {number} */
+    this.hue;
+    /** @private {number} */
+    this.transparency;
   }
 
   /** @override */
@@ -87,7 +116,7 @@ export class HueSliderElement extends LitElement {
   onClick_(event) {
     const xPercent = lib.f.clamp(event.offsetX / this.clientWidth, 0, 1);
 
-    this.hue = 360 * xPercent;
+    this.transparency = xPercent;
 
     this.dispatchEvent(new CustomEvent('updated', {bubbles: true}));
   }

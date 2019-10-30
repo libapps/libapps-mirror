@@ -53,7 +53,7 @@ export class TerminalSettingsElement extends LitElement {
 
   /**
    * @param {string|boolean|number} value
-   * @private
+   * @protected
    */
   preferenceChanged_(value) {
     this.value = value;

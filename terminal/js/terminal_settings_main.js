@@ -5,10 +5,11 @@
 /**
  * @fileoverview Initializes global state used in terminal settings.
  */
-import {HueSliderElement} from './hue_slider.js';
-import {TransparencySliderElement} from './transparency_slider.js';
+import {HueSliderElement} from './terminal_settings_hue_slider.js';
+import {TransparencySliderElement} from
+    './terminal_settings_transparency_slider.js';
 import {SaturationLightnessPickerElement} from
-    './saturation_lightness_picker.js';
+    './terminal_settings_saturation_lightness_picker.js';
 import {TerminalSettingsCheckboxElement} from './terminal_settings_checkbox.js';
 import {TerminalSettingsDropdownElement} from './terminal_settings_dropdown.js';
 import {TerminalSettingsColorpickerElement} from

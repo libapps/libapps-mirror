@@ -3,15 +3,16 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview Hue Slider unit tests
+ * @fileoverview Transparency Slider unit tests
  */
 
-import {HueSliderElement as Element} from './hue_slider.js';
+import {TransparencySliderElement as Element} from
+    './terminal_settings_transparency_slider.js';
 
-describe('hue_slider_tests.js', () => {
-  const createElement = (hue) => {
+describe('transparency_slider_tests.js', () => {
+  const createElement = (transparency) => {
     const el = document.createElement(Element.is);
-    el.setAttribute('hue', hue);
+    el.setAttribute('transparency', transparency);
     return el;
   };
 
@@ -31,7 +32,7 @@ describe('hue_slider_tests.js', () => {
   });
 
   it('initialises-the-picker-to-the-correct-x-coordinates', async function() {
-    const els = [createElement(0), createElement(180), createElement(360)];
+    const els = [createElement(0), createElement(0.5), createElement(1)];
 
     els.forEach(el => document.body.appendChild(el));
     await Promise.all(els.map(el => el.updateComplete));
@@ -41,21 +42,21 @@ describe('hue_slider_tests.js', () => {
   });
 
   it('updates-picker-location-when-attribute-changed', async function() {
-    const el = createElement(90);
+    const el = createElement(0.25);
 
     document.body.appendChild(el);
     await el.updateComplete;
 
     assert.equal(getPicker(el).style.left, '25%');
 
-    el.setAttribute('hue', 270);
+    el.setAttribute('transparency', 0.75);
     await el.updateComplete;
 
     assert.equal(getPicker(el).style.left, '75%');
   });
 
   it('updates-picker-location-when-clicked', async function() {
-    const el = createElement(90);
+    const el = createElement(0.25);
 
     document.body.appendChild(el);
     await el.updateComplete;
@@ -67,11 +68,11 @@ describe('hue_slider_tests.js', () => {
     await el.updateComplete;
 
     assert.equal(getPicker(el).style.left, '75%');
-    assert.equal(el.getAttribute('hue'), 270);
+    assert.equal(el.getAttribute('transparency'), 0.75);
   });
 
   it('publishes-event-when-clicked', async function() {
-    const el = createElement(90);
+    const el = createElement(0.25);
 
     document.body.appendChild(el);
     await el.updateComplete;

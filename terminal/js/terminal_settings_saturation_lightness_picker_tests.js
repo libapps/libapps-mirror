@@ -6,7 +6,8 @@
  * @fileoverview Sauration Lightness Picker unit tests
  */
 
-import {SaturationLightnessPickerElement as Element} from './saturation_lightness_picker.js';
+import {SaturationLightnessPickerElement as Element} from
+    './terminal_settings_saturation_lightness_picker.js';
 
 describe('saturation_lightness_picker_tests.js', () => {
   const createElement = (saturation, lightness) => {

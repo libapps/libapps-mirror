@@ -3,15 +3,15 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview Transparency Slider unit tests
+ * @fileoverview Hue Slider unit tests
  */
 
-import {TransparencySliderElement as Element} from './transparency_slider.js';
+import {HueSliderElement as Element} from './terminal_settings_hue_slider.js';
 
-describe('transparency_slider_tests.js', () => {
-  const createElement = (transparency) => {
+describe('hue_slider_tests.js', () => {
+  const createElement = (hue) => {
     const el = document.createElement(Element.is);
-    el.setAttribute('transparency', transparency);
+    el.setAttribute('hue', hue);
     return el;
   };
 
@@ -31,7 +31,7 @@ describe('transparency_slider_tests.js', () => {
   });
 
   it('initialises-the-picker-to-the-correct-x-coordinates', async function() {
-    const els = [createElement(0), createElement(0.5), createElement(1)];
+    const els = [createElement(0), createElement(180), createElement(360)];
 
     els.forEach(el => document.body.appendChild(el));
     await Promise.all(els.map(el => el.updateComplete));
@@ -41,21 +41,21 @@ describe('transparency_slider_tests.js', () => {
   });
 
   it('updates-picker-location-when-attribute-changed', async function() {
-    const el = createElement(0.25);
+    const el = createElement(90);
 
     document.body.appendChild(el);
     await el.updateComplete;
 
     assert.equal(getPicker(el).style.left, '25%');
 
-    el.setAttribute('transparency', 0.75);
+    el.setAttribute('hue', 270);
     await el.updateComplete;
 
     assert.equal(getPicker(el).style.left, '75%');
   });
 
   it('updates-picker-location-when-clicked', async function() {
-    const el = createElement(0.25);
+    const el = createElement(90);
 
     document.body.appendChild(el);
     await el.updateComplete;
@@ -67,11 +67,11 @@ describe('transparency_slider_tests.js', () => {
     await el.updateComplete;
 
     assert.equal(getPicker(el).style.left, '75%');
-    assert.equal(el.getAttribute('transparency'), 0.75);
+    assert.equal(el.getAttribute('hue'), 270);
   });
 
   it('publishes-event-when-clicked', async function() {
-    const el = createElement(0.25);
+    const el = createElement(90);
 
     document.body.appendChild(el);
     await el.updateComplete;

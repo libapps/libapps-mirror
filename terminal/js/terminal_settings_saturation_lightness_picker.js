@@ -99,11 +99,25 @@ export class SaturationLightnessPickerElement extends LitElement {
   /** @override */
   render() {
     return html`
-        <div id="display" style="background-color: hsl(${this.hue}, 100%, 50%);">
+        <div id="display" style="background-color:
+            hsl(${this.hue}, 100%, 50%);">
         </div>
-        <div id="picker" style="left: ${this.saturation}%; top: ${100 - this.lightness}%; background-color: hsl(${this.hue}, ${this.saturation}%, ${this.lightness}%);"></div>
+        <div id="picker" style="left: ${this.saturation}%;
+            top: ${100 - this.lightness}%; background-color:
+            hsl(${this.hue}, ${this.saturation}%, ${this.lightness}%);">
         </div>
     `;
+  }
+
+  constructor() {
+    super();
+
+    /** @private {number} */
+    this.hue;
+    /** @private {number} */
+    this.saturation;
+    /** @private {number} */
+    this.lightness;
   }
 
   /** @override */
