@@ -77,3 +77,11 @@ chai.assert.property = function(object, property, message) {};
  * @param {Function} fn
  */
 chai.assert.throws = function(fn) {};
+
+/**
+ * @param {number} actual
+ * @param {number} expected
+ * @param {number} delta
+ * @param {string=} message
+ */
+chai.assert.closeTo = function(actual, expected, delta, message) {};
