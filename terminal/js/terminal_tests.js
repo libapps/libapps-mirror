@@ -37,7 +37,7 @@ afterEach(function() {
  *  init.
  */
 it('opens-process-in-init', async function() {
-  terminal.init();
+  terminal.init(this.div);
   const [processName, args] =
       await this.mockTerminalPrivateController.on('openTerminalProcess');
   assert.equal('vmshell', processName);
@@ -49,7 +49,7 @@ it('does-not-exit-on-first-output', async function() {
   const pid = 'pid1234';
   this.mockTerminalPrivate.openTerminalProcessId = pid;
   let exitCalled = false;
-  const term = terminal.init();
+  const term = terminal.init(this.div);
   await this.mockTerminalPrivateController.on('openTerminalProcess');
   term.command.exit = () => { exitCalled = true; };
 

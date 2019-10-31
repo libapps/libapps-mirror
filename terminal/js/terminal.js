@@ -48,9 +48,10 @@ terminal.msg = function(name, args) {
  * This constructs a new hterm.Terminal instance and instructs it to run
  * the Terminal command.
  *
+ * @param {!Element} element The element that is to be decorated.
  * @return {!hterm.Terminal} The new hterm.Terminal instance.
  */
-terminal.init = function() {
+terminal.init = function(element) {
   const params = new URLSearchParams(document.location.search);
   let term = new hterm.Terminal();
 
@@ -58,7 +59,7 @@ terminal.init = function() {
   const commandName = params.get('command') || 'vmshell';
   window.document.title = commandName;
 
-  term.decorate(lib.notNull(document.querySelector('#terminal')));
+  term.decorate(element);
   const runTerminal = function() {
     term.setCursorPosition(0, 0);
     term.setCursorVisible(true);

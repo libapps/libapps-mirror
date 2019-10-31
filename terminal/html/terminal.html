@@ -6,7 +6,7 @@
     <script src='../js/nassh_deps.concat.js'></script>
     <script src='../js/terminal.js'></script>
     <script src='../js/terminal_menu.js'></script>
-    <script src='../js/terminal_main.js'></script>
+    <script type="module" src='../js/terminal_main.js'></script>
 
     <style>
       body {
@@ -19,7 +19,7 @@
         background-color: black;
       }
 
-      #terminal {
+      terminal-display-manager {
         display: block;
         position: relative;
         width: 100%;
@@ -30,6 +30,7 @@
   </head>
 
   <body>
-    <div id='terminal'></div>
+    <terminal-display-manager>
+    </terminal-display-manager>
   </body>
 </html>

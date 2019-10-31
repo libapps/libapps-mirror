@@ -2,13 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
+import {TerminalDisplayManagerElement as Manager} from
+    './terminal_display_manager.js';
 
-/**
- * CSP means that we can't kick off the initialization from the html file,
- * so we do it like this instead.
- */
-window.addEventListener('DOMContentLoaded', (event) => {
+window.addEventListener('DOMContentLoaded', () => {
   // TODO(crbug.com/999028): Make sure system web apps are not discarded as
   // part of the lifecycle API.  This fix used by crosh and nassh is not
   // guaranteed to be a long term solution.
@@ -27,7 +24,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
   });
 
   lib.init(() => {
-    window.term_ = terminal.init();
     new terminal.Menu(window).install();
+    document.querySelector(Manager.is)
+        .addEventListener('terminal-display-ready', (event) => {
+      const element = document.createElement('div');
+      element.setAttribute('slot', event.detail.slot);
+      event.target.appendChild(element);
+      terminal.init(element);
+    });
+    customElements.define(Manager.is, Manager);
   });
 });
