@@ -22,7 +22,7 @@ class LitElement$$module$js$lit_element{
   static get properties() {};
 
   /**
-   * @return {?TemplateResult}
+   * @return {!TemplateResult}
    * @protected
    */
   render() {}
@@ -47,5 +47,12 @@ function css$$module$js$lit_element(strings, ...values) {}
 /**
  * @param {ITemplateArray} strings
  * @param {...*} values
+* @return {!TemplateResult}
  */
 function html$$module$js$lit_element(strings, ...values) {}
+
+/**
+ * @param {!TemplateResult} template
+ * @param {!Element|!ShadowRoot|!DocumentFragment} element
+ */
+function render$$module$js$lit_element(template, element) {}

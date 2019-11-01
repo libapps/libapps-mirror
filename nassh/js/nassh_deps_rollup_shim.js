@@ -50,6 +50,7 @@ export {punycode};
  * accomplish this though, as the terminal app currently does not manage its
  * own dependencies, but instead includes nassh's.
  */
+import {render} from 'lit-html/lit-html';
 import {LitElement, html, css} from 'lit-element/lit-element';
-const litelement = {LitElement, html, css}
+const litelement = {LitElement, render, html, css}
 export {litelement};
