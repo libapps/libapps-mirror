@@ -24,7 +24,7 @@ PATCHES = ('%(p)s-ififo.patch',)
 def src_install(metadata):
     """Install the package."""
     path = os.path.join(ssh_client.OUTPUT, 'wasi-sdk')
-    ssh_client.symlink(os.path.join(metadata['S'], 'opt', 'wasi-sdk'), path)
+    ssh_client.symlink(metadata['S'], path)
 
 
 ssh_client.build_package(sys.modules[__name__], 'build')

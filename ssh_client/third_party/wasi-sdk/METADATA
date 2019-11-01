@@ -6,5 +6,5 @@ third_party {
     type: HOMEPAGE
     value: "https://github.com/CraneStation/wasi-sdk"
   }
-  version: "7.0"
+  version: "8.0"
 }

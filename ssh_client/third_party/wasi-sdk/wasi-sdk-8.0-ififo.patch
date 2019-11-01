@@ -13,8 +13,8 @@ duplicate labels.  Move S_IFIFO to a unique unused value.
  libc-bottom-half/headers/public/__mode_t.h | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
---- a/opt/wasi-sdk/share/wasi-sysroot/share/wasm32-wasi/predefined-macros.txt
-+++ b/opt/wasi-sdk/share/wasi-sysroot/share/wasm32-wasi/predefined-macros.txt
+--- a/share/wasi-sysroot/share/wasm32-wasi/predefined-macros.txt
++++ b/share/wasi-sysroot/share/wasm32-wasi/predefined-macros.txt
 @@ -1717,7 +1717,7 @@
  #define S_IFBLK (0x6000)
  #define S_IFCHR (0x2000)
@@ -24,8 +24,8 @@ duplicate labels.  Move S_IFIFO to a unique unused value.
  #define S_IFLNK (0xa000)
  #define S_IFMT (S_IFBLK | S_IFCHR | S_IFDIR | S_IFIFO | S_IFLNK | S_IFREG | S_IFSOCK)
  #define S_IFREG (0x8000)
---- a/opt/wasi-sdk/share/wasi-sysroot/include/__mode_t.h
-+++ b/opt/wasi-sdk/share/wasi-sysroot/include/__mode_t.h
+--- a/share/wasi-sysroot/include/__mode_t.h
++++ b/share/wasi-sysroot/include/__mode_t.h
 @@ -9,7 +9,7 @@
  #define S_IFLNK (0xa000)
  #define S_IFREG (0x8000)
