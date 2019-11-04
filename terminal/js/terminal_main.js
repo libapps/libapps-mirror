@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
   lib.init(() => {
     new terminal.Menu(window).install();
     document.querySelector(Manager.is)
-        .addEventListener('terminal-display-ready', (event) => {
+        .addEventListener('terminal-window-ready', (event) => {
       const element = document.createElement('div');
       element.setAttribute('slot', event.detail.slot);
       event.target.appendChild(element);

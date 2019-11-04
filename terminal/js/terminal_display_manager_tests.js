@@ -28,6 +28,15 @@ describe('terminal_display_manager_tests.js', () => {
     return Array.prototype.map.call(elements, (el) => getStyle(el, key));
   };
 
+  const getDimensions = (element) => {
+    return {
+      l: element.offsetLeft,
+      w: element.offsetWidth,
+      t: element.offsetTop,
+      h: element.offsetHeight
+    };
+  };
+
   before(function() {
     if (customElements.get(Element.is) === undefined) {
       customElements.define(Element.is, Element);
@@ -39,11 +48,11 @@ describe('terminal_display_manager_tests.js', () => {
         .forEach(el => el.parentNode.removeChild(el));
   });
 
-  it('dispatches-terminal-display-ready-when-connected', function() {
+  it('dispatches-terminal-window-ready-when-connected', function() {
     const el = document.createElement(Element.is);
     let slot = null;
     el.addEventListener(
-        'terminal-display-ready', (event) => slot = event.detail.slot);
+        'terminal-window-ready', (event) => slot = event.detail.slot);
 
     document.body.appendChild(el);
     assert(slot);
@@ -60,10 +69,10 @@ describe('terminal_display_manager_tests.js', () => {
     const el = document.createElement(Element.is);
     let eventTriggerCount = 0;
     el.addEventListener(
-        'terminal-display-ready', (event) => ++eventTriggerCount);
+        'terminal-window-ready', (event) => ++eventTriggerCount);
 
     document.body.appendChild(el);
-    assert.lengthOf(el.shadowRoot.querySelectorAll('.display'), 1);
+    assert.lengthOf(el.shadowRoot.querySelectorAll('.window'), 1);
     assert.equal(eventTriggerCount, 1);
     {
       const displayValues =
@@ -74,7 +83,7 @@ describe('terminal_display_manager_tests.js', () => {
 
     el.shadowRoot.querySelectorAll('.controls')
         .forEach(control => control.click());
-    assert.lengthOf(el.shadowRoot.querySelectorAll('.display'), 1);
+    assert.lengthOf(el.shadowRoot.querySelectorAll('.window'), 1);
     assert.equal(eventTriggerCount, 1);
     {
       const displayValues =
@@ -89,11 +98,11 @@ describe('terminal_display_manager_tests.js', () => {
     const el = document.createElement(Element.is);
     let eventTriggerCount = 0;
     el.addEventListener(
-        'terminal-display-ready', (event) => ++eventTriggerCount);
+        'terminal-window-ready', (event) => ++eventTriggerCount);
     el.setAttribute('terminal-splits-enabled', true);
 
     document.body.appendChild(el);
-    assert.lengthOf(el.shadowRoot.querySelectorAll('.display'), 1);
+    assert.lengthOf(el.shadowRoot.querySelectorAll('.window'), 1);
     assert.equal(eventTriggerCount, 1);
     {
       const displayValues =
@@ -104,13 +113,149 @@ describe('terminal_display_manager_tests.js', () => {
 
     el.shadowRoot.querySelectorAll('.controls')
         .forEach(control => control.click());
-    assert.lengthOf(el.shadowRoot.querySelectorAll('.display'), 5);
+    assert.lengthOf(el.shadowRoot.querySelectorAll('.window'), 5);
     assert.equal(eventTriggerCount, 5);
     {
       const displayValues =
           getStyles(el.shadowRoot.querySelectorAll('.controls'), 'display');
       assert.lengthOf(displayValues, 20);
       assert.lengthOf(displayValues.filter(x => x != 'none'), 20);
+    }
+  });
+
+  it('can-split-vertically-towards-the-left', function () {
+    const el = document.createElement(Element.is);
+    const slots = [];
+    el.addEventListener(
+        'terminal-window-ready', (event) => slots.push(event.detail.slot));
+    el.setAttribute('terminal-splits-enabled', true);
+    el.style.width = '500px';
+    el.style.height = '500px';
+
+    document.body.appendChild(el);
+    assert.lengthOf(slots, 1);
+    {
+      const first =
+          el.shadowRoot.querySelector(`slot[name="${slots[0]}"]`).parentNode;
+      assert.deepEqual(getDimensions(el), getDimensions(first));
+    }
+
+    el.shadowRoot.querySelector('.controls[side="L"]').click();
+    assert.lengthOf(slots, 2);
+    {
+      const first =
+          el.shadowRoot.querySelector(`slot[name="${slots[0]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l: l + w / 2, w: w / 2, t, h}, getDimensions(first));
+    }
+
+    {
+      const second =
+          el.shadowRoot.querySelector(`slot[name="${slots[1]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l, w: w / 2, t, h}, getDimensions(second));
+    }
+  });
+
+  it('can-split-vertically-towards-the-right', function () {
+    const el = document.createElement(Element.is);
+    const slots = [];
+    el.addEventListener(
+        'terminal-window-ready', (event) => slots.push(event.detail.slot));
+    el.setAttribute('terminal-splits-enabled', true);
+    el.style.width = '500px';
+    el.style.height = '500px';
+
+    document.body.appendChild(el);
+    assert.lengthOf(slots, 1);
+    {
+      const first =
+          el.shadowRoot.querySelector(`slot[name="${slots[0]}"]`).parentNode;
+      assert.deepEqual(getDimensions(el), getDimensions(first));
+    }
+
+    el.shadowRoot.querySelector('.controls[side="R"]').click();
+    assert.lengthOf(slots, 2);
+    {
+      const first =
+          el.shadowRoot.querySelector(`slot[name="${slots[0]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l, w: w / 2, t, h}, getDimensions(first));
+    }
+
+    {
+      const second =
+          el.shadowRoot.querySelector(`slot[name="${slots[1]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l: l + w / 2, w: w / 2, t, h}, getDimensions(second));
+    }
+  });
+
+  it('can-split-horizontally-towards-the-bottom', function () {
+    const el = document.createElement(Element.is);
+    const slots = [];
+    el.addEventListener(
+        'terminal-window-ready', (event) => slots.push(event.detail.slot));
+    el.setAttribute('terminal-splits-enabled', true);
+    el.style.width = '500px';
+    el.style.height = '500px';
+
+    document.body.appendChild(el);
+    assert.lengthOf(slots, 1);
+    {
+      const first =
+          el.shadowRoot.querySelector(`slot[name="${slots[0]}"]`).parentNode;
+      assert.deepEqual(getDimensions(el), getDimensions(first));
+    }
+
+    el.shadowRoot.querySelector('.controls[side="B"]').click();
+    assert.lengthOf(slots, 2);
+    {
+      const first =
+          el.shadowRoot.querySelector(`slot[name="${slots[0]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l, w, t, h: h / 2}, getDimensions(first));
+    }
+
+    {
+      const second =
+          el.shadowRoot.querySelector(`slot[name="${slots[1]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l, w, t: t + h / 2, h: h / 2}, getDimensions(second));
+    }
+  });
+
+  it('can-split-horizontally-towards-the-top', function () {
+    const el = document.createElement(Element.is);
+    const slots = [];
+    el.addEventListener(
+        'terminal-window-ready', (event) => slots.push(event.detail.slot));
+    el.setAttribute('terminal-splits-enabled', true);
+    el.style.width = '500px';
+    el.style.height = '500px';
+
+    document.body.appendChild(el);
+    assert.lengthOf(slots, 1);
+    {
+      const first =
+          el.shadowRoot.querySelector(`slot[name="${slots[0]}"]`).parentNode;
+      assert.deepEqual(getDimensions(el), getDimensions(first));
+    }
+
+    el.shadowRoot.querySelector('.controls[side="T"]').click();
+    assert.lengthOf(slots, 2);
+    {
+      const first =
+          el.shadowRoot.querySelector(`slot[name="${slots[0]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l, w, t: t + h / 2, h: h / 2}, getDimensions(first));
+    }
+
+    {
+      const second =
+          el.shadowRoot.querySelector(`slot[name="${slots[1]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l, w, t, h: h / 2}, getDimensions(second));
     }
   });
 });
