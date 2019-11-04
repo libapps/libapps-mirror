@@ -115,6 +115,7 @@ def mkzip(manifest, stamps=()):
 
     version = data['version']
     version = '.'.join([version] + list(stamps))
+    data['version'] = version
 
     basename = name.replace(' ', '')
 
