@@ -307,7 +307,7 @@ describe('terminal_settings_dropdown_tests.js', () => {
     assert.equal(this.el.value, options[2]);
   });
 
-  it('uses-explicit-options-attribute-if-present'', async function() {
+  it('uses-explicit-options-attribute-if-present', async function() {
     this.el.setAttribute('options', '["override1", "override2"]');
     await this.el.updateComplete;
 
