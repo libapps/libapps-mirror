@@ -113,10 +113,13 @@ int main(int argc, char *argv[])
 
 #if 1
 	{
-		char buf[3] = {};
+		const size_t buf_size = 10;
+		char buf[buf_size];
 		printf("arc4random() = %#x\n", arc4random());
-		arc4random_buf(buf, 3);
-		printf("arc4random_buf() = %#x %#x %#x\n", buf[0], buf[1], buf[2]);
+		arc4random_buf(buf, buf_size);
+		for (int i = 0; i < buf_size; i++) {
+			printf("arc4random_buf[%d] = 0x%02x\n", i, buf[i] & 0xff);
+		}
 		puts("");
 	}
 #endif
