@@ -306,4 +306,15 @@ describe('terminal_settings_dropdown_tests.js', () => {
     // ArrowDown when last element is selected has no effect.
     assert.equal(this.el.value, options[2]);
   });
+
+  it('uses-explicit-options-attribute-if-present'', async function() {
+    this.el.setAttribute('options', '["override1", "override2"]');
+    await this.el.updateComplete;
+
+    // Options attribute should take precedence.
+    assert.deepEqual(
+        Array.from(this.el.shadowRoot.querySelectorAll('li'))
+            .map(element => element.getAttribute('value')),
+        ['override1', 'override2']);
+  });
 });

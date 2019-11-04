@@ -22,7 +22,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
       expanded: {
         type: Boolean,
       },
-      options_: {
+      options: {
         type: Array,
       },
       value: {
@@ -95,12 +95,15 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
     super();
 
     this.expanded = false;
-    /** @private {!Array<string>} */
-    this.options_;
+    /** @public {!Array<string>} */
+    this.options;
   }
 
   /** @override */
   render() {
+    const options = this.options ||
+        window.PreferenceManager.defaultPreferences[this.preference].type;
+
     const renderOption = (option, index) => html`
         <li class="option" roll="option" tab-index="-1" value="${option}"
             option-index="${index}" aria-selected="${this.value === option}"
@@ -113,7 +116,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
         <div id="container" @role="button" aria-expanded="${this.expanded}" >
           ${this.value}
           <ul id="options">
-            ${this.options_.map(renderOption)}
+            ${options.map(renderOption)}
           </ul>
         </div>
     `;
@@ -122,9 +125,6 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   /** @override */
   connectedCallback() {
     super.connectedCallback();
-
-    this.options_ =
-        window.PreferenceManager.defaultPreferences[this.preference].type;
 
     if (!this.hasAttribute('tabindex')) {
       this.tabIndex = 0;
