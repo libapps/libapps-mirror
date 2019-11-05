@@ -27,6 +27,9 @@ nassh.CommandInstance = function(argv) {
   // Command arguments.
   this.argv_ = argv;
 
+  // Whether to show welcome messages.
+  this.welcome_ = !argv.args.some(arg => arg.includes("--no-welcome"));
+
   // Command environment.
   this.environment_ = argv.environment || {};
 
@@ -138,6 +141,17 @@ nassh.CommandInstance.prototype.run = function() {
     this.io.print('\x1b]0;' + this.manifest_.name + ' ' +
                     this.manifest_.version + '\x07');
 
+    // Welcome unless --no-welcome.
+    if (this.welcome_) {
+      showWelcome();
+    }
+
+    nassh.getFileSystem()
+      .then(onFileSystemFound)
+      .catch(ferr('FileSystem init failed'));
+  });
+
+  const showWelcome = () => {
     this.io.println(
         nassh.msg('WELCOME_VERSION',
                   ['\x1b[1m' + this.manifest_.name + '\x1b[m',
@@ -192,11 +206,7 @@ nassh.CommandInstance.prototype.run = function() {
       this.io.println(`[dev] built on ${htermDate} ` +
                       `(${htermAgeMinutes} minutes ago)`);
     }
-
-    nassh.getFileSystem()
-      .then(onFileSystemFound)
-      .catch(ferr('FileSystem init failed'));
-  });
+  };
 
   const onFileSystemFound = (fileSystem) => {
     this.fileSystem_ = fileSystem;
@@ -864,6 +874,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   // Merge nassh options from the ssh:// URI that we believe are safe.
   const safeNasshOptions = new Set([
     '--config', '--proxy-mode', '--proxy-host', '--proxy-port', '--ssh-agent',
+    '--welcome',
   ]);
   Object.keys(userOptions).forEach((option) => {
     if (safeNasshOptions.has(option)) {
@@ -1050,6 +1061,11 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
     if (!nassh.v2) {
       this.terminalWindow.addEventListener(
           'beforeunload', this.onBeforeUnload_);
+    }
+
+    if (!this.welcome_) {
+      // Clear terminal display area.
+      this.io.print('\x1b[2J\x1b[0;0H');
     }
 
     this.io.println(nassh.msg('CONNECTING',
