@@ -39,6 +39,7 @@ EXCLUDE_PATTERNS = (
     '*_test.html',
     '*_test.js',
     '*_tests.js',
+    os.path.join('js', 'nassh_deps_rollup_shim.js'),
 )
 
 # List of additionall files to be excluded when building crosh archive.
@@ -54,12 +55,17 @@ EXCLUDE_PATTERNS_CROSH = (
     os.path.join('html', 'nassh_popup.html'),
     os.path.join('html', 'nassh_sftp_fsp_config_dialog.html'),
     os.path.join('js', 'nasftp*.js'),
+    os.path.join('js', 'nassh.js'),
     os.path.join('js', 'nassh_agent*.js'),
+    os.path.join('js', 'nassh_app.js'),
+    os.path.join('js', 'nassh_background.js'),
     os.path.join('js', 'nassh_column_list*.js'),
     os.path.join('js', 'nassh_command_instance*.js'),
     os.path.join('js', 'nassh_connect_dialog*.js'),
     os.path.join('js', 'nassh_extension*.js'),
+    os.path.join('js', 'nassh_external_api.js'),
     os.path.join('js', 'nassh_google_relay*.js'),
+    os.path.join('js', 'nassh_main.js'),
     os.path.join('js', 'nassh_relay*.js'),
     os.path.join('js', 'nassh_sftp*.js'),
     os.path.join('js', 'nassh_stream*.js'),
