@@ -119,23 +119,25 @@ const createWindowElement = (id, onClick) => {
 };
 
 class Grid {
+  /** @param {!Element} rootElement */
   constructor(rootElement) {
     this.lastNodeId_ = 0;
     this.lastColumnId_ = 0;
     this.lastRowId_ = 0;
-    this.columns = [];
-    this.rows = [];
+    this.columns_ = [];
+    this.rows_ = [];
     this.nodes_ = {};
     this.root = new GridNode(
         this,
         rootElement,
+        null,
         this.makeColumn_(0),
         this.makeColumn_(100),
         this.makeRow_(0),
         this.makeRow_(100));
   }
 
-  /*
+  /**
    * @param {!Element} element
    * @return {!GridNode}
    */
@@ -143,7 +145,7 @@ class Grid {
     return lib.notNull(this.nodes_[element.getAttribute('terminal-window-id')]);
   }
 
-  /*
+  /**
    * @param {string} id
    * @param {!GridNode} node
    */
@@ -151,45 +153,103 @@ class Grid {
     this.nodes_[id] = node;
   }
 
+  /** @param {string} id */
+  nodeRemoved_(id) {
+    delete this.nodes_[id];
+  }
+
   /** @return {string} */
   makeNodeId_() { return `${++this.lastNodeId_}`; }
 
-  /*
+  /**
+   * @param {!Object} edge
+   * @param {!Array} edges
+   * @return {?number} index
+   */
+  findEdge_(edge, edges) {
+    // There may be more than one edge with the same precedingSpace. so we check
+    // all possible edges in a limited range.
+    const l = binarySearch(
+        edges, (x) => x.precedingSpace - edge.precedingSpace + 0.1);
+    const r = binarySearch(
+        edges, (x) => x.precedingSpace - edge.precedingSpace - 0.1);
+    for (let i = l; i < r; ++i) {
+      if (edges[i] === edge) {
+        return i;
+      }
+    }
+    return null;
+  }
+
+  /**
    * @param {string} id
    * @param {!Array} edges
    * @param {number} precedingSpace
    * @return {!Object}
    */
   makeEdge_(id, edges, precedingSpace) {
+    // Can binary search because we don't care where exactly the edge is
+    // inserted, so long as the array ends up ordered.
     const index = binarySearch(edges, (x) => x.precedingSpace - precedingSpace);
     const edge = {id, precedingSpace};
     edges.splice(index, 0, edge);
     return edge;
   }
 
-  /*
+  /**
    * @param {number} precedingSpace
    * @return {!Object}
    */
   makeColumn_(precedingSpace) {
     return this.makeEdge_(
-        `c${++this.lastColumnId_}`, this.columns, precedingSpace);
+        `c${++this.lastColumnId_}`, this.columns_, precedingSpace);
   }
 
-  /*
+  /**
+   * @param {!Object} column
+   */
+  removeColumn_(column) {
+    const index = this.findEdge_(column, this.columns_);
+    if (index !== null) {
+      this.columns_.splice(index, 1);
+    }
+  }
+
+  /**
    * @param {number} precedingSpace
    * @return {!Object}
    */
   makeRow_(precedingSpace) {
-    return this.makeEdge_(`r${++this.lastRowId_}`, this.rows, precedingSpace);
+    return this.makeEdge_(`r${++this.lastRowId_}`, this.rows_, precedingSpace);
+  }
+
+  /**
+   * @param {!Object} row
+   */
+  removeRow_(row) {
+    const index = this.findEdge_(row, this.rows_);
+    if (index !== null) {
+      this.rows_.splice(index, 1);
+    }
   }
 }
 
 class GridNode {
-  constructor(grid, element, leftEdge, rightEdge, topEdge, bottomEdge) {
+  /**
+   * @param {!Grid} grid
+   * @param {!Element} element
+   * @param {?GridNode} parentNode
+   * @param {!Object} leftEdge
+   * @param {!Object} rightEdge
+   * @param {!Object} topEdge
+   * @param {!Object} bottomEdge
+   */
+  constructor(
+      grid, element, parentNode, leftEdge, rightEdge, topEdge, bottomEdge) {
     this.grid_ = grid;
     this.element_ = element;
     this.id_ = this.grid_.makeNodeId_();
+    this.parentNode_ = parentNode;
     this.bottomEdge_ = bottomEdge;
     this.leftEdge_ = leftEdge;
     this.rightEdge_ = rightEdge;
@@ -199,13 +259,36 @@ class GridNode {
     this.lastChild_ = null;
 
     this.element_.setAttribute('terminal-window-id', this.id_);
-    this.element_.style.gridArea = `${this.topEdge_.id} / ${
-        this.leftEdge_.id} / ${this.bottomEdge_.id} / ${this.rightEdge_.id}`;
+    this.setGridArea_();
 
     this.grid_.nodeCreated_(this.id_, this);
   }
 
-  /*
+  setGridArea_() {
+    this.element_.style.gridArea = `${this.topEdge_.id} / ${
+        this.leftEdge_.id} / ${this.bottomEdge_.id} / ${this.rightEdge_.id}`;
+  }
+
+  destructor_() {
+    if (!this.isLeaf()) {
+      this.firstChild_.destructor_();
+      this.lastChild_.destructor_();
+    }
+    const par = this.parentNode_;
+    const isSplitVertically_ =
+        !par ? null : par.firstChild_.topEdge_ === par.lastChild_.topEdge_;
+    if (isSplitVertically_ === true) {
+      this.grid_.removeColumn_(
+          par.firstChild_ === this ? this.rightEdge_ : this.leftEdge_);
+    }
+    if (isSplitVertically_ === false) {
+      this.grid_.removeRow_(
+          par.firstChild_ === this ? this.bottomEdge_ : this.topEdge_);
+    }
+    this.grid_.nodeRemoved_(this.id_);
+  }
+
+  /**
    * @return {boolean}
    */
   isLeaf() {
@@ -220,7 +303,58 @@ class GridNode {
     }
   }
 
-  /*
+  destroy() {
+    lib.assert(this.isLeaf());
+
+    if (!this.parentNode_) {
+      // Cannot destroy root
+      return;
+    }
+
+    const sibling = this.parentNode_.firstChild_ === this ?
+                        this.parentNode_.lastChild_ :
+                        this.parentNode_.firstChild_;
+
+    if (!this.parentNode_.parentNode_) {
+      this.grid_.root = sibling;
+    } else if (this.parentNode_.parentNode_.firstChild_ === this.parentNode_) {
+      this.parentNode_.parentNode_.firstChild_ = sibling;
+    } else {
+      this.parentNode_.parentNode_.lastChild_ = sibling;
+    }
+
+    this.destructor_();
+    this.grid_.nodeRemoved_(this.parentNode_.id_);
+
+    sibling.parentNode_ = this.parentNode_.parentNode_;
+    for (const edge of [
+        (node, edge = node.bottomEdge_) => node.bottomEdge_ = edge,
+        (node, edge = node.leftEdge_) => node.leftEdge_ = edge,
+        (node, edge = node.rightEdge_) => node.rightEdge_ = edge,
+        (node, edge = node.topEdge_) => node.topEdge_ = edge
+    ]) {
+      const removedEdge = edge(sibling);
+      const parentEdge = edge(this.parentNode_);
+      if (removedEdge === parentEdge) {
+        continue;
+      }
+      const recurser = (node) => {
+        if (edge(node) === removedEdge) {
+          edge(node, parentEdge);
+          if (node.isLeaf()) {
+            node.setGridArea_();
+          }
+        }
+        if (!node.isLeaf()) {
+          recurser(node.firstChild_);
+          recurser(node.lastChild_);
+        }
+      };
+      recurser(sibling);
+    }
+  }
+
+  /**
    * @param {?Element} firstElement
    * @param {?Element} lastElement
    */
@@ -235,14 +369,16 @@ class GridNode {
     const newEdge = this.grid_.makeRow_(midpoint);
     this.firstChild_ = new GridNode(
         this.grid_,
-        firstElement || this.element_,
+        lib.notNull(firstElement || this.element_),
+        this,
         this.leftEdge_,
         this.rightEdge_,
         this.topEdge_,
         newEdge);
     this.lastChild_ = new GridNode(
         this.grid_,
-        lastElement || this.element_,
+        lib.notNull(lastElement || this.element_),
+        this,
         this.leftEdge_,
         this.rightEdge_,
         newEdge,
@@ -250,7 +386,7 @@ class GridNode {
     this.element_ = null;
   }
 
-  /*
+  /**
    * @param {?Element} firstElement
    * @param {?Element} lastElement
    */
@@ -265,14 +401,16 @@ class GridNode {
     const newEdge = this.grid_.makeColumn_(midpoint);
     this.firstChild_ = new GridNode(
         this.grid_,
-        firstElement || this.element_,
+        lib.notNull(firstElement || this.element_),
+        this,
         this.leftEdge_,
         newEdge,
         this.topEdge_,
         this.bottomEdge_);
     this.lastChild_ = new GridNode(
         this.grid_,
-        lastElement || this.element_,
+        lib.notNull(lastElement || this.element_),
+        this,
         newEdge,
         this.rightEdge_,
         this.topEdge_,
@@ -309,6 +447,23 @@ export class TerminalDisplayManagerElement extends HTMLElement {
     this.addNewSlot_(id, windowEl);
   }
 
+  /** @param {string} slotId */
+  destroySlot(slotId) {
+    const windowEl = lib.notNull(
+        this.shadowRoot.querySelector(`slot[name="${slotId}"]`).parentElement);
+    const node = this.grid.getNodeFromElement(windowEl);
+
+    if (node === this.grid.root) {
+      return;
+    }
+
+    node.destroy();
+    this.shadowRoot.getElementById('container').removeChild(windowEl);
+
+    this.updateColumnLineIndices_();
+    this.updateRowLineIndices_();
+  }
+
   /** @override */
   disconnectedCallback() {
     // Cleanup grid as it is reasonably memory heavy.
@@ -317,13 +472,13 @@ export class TerminalDisplayManagerElement extends HTMLElement {
 
   updateColumnLineIndices_() {
     this.shadowRoot.getElementById('container').style.gridTemplateColumns =
-        this.grid.columns.map((x, i, xs) => !i ? `[${x.id}]` : ` ${
+        this.grid.columns_.map((x, i, xs) => !i ? `[${x.id}]` : ` ${
           x.precedingSpace - xs[i - 1].precedingSpace}% [${x.id}]`).join(' ');
   }
 
   updateRowLineIndices_() {
     this.shadowRoot.getElementById('container').style.gridTemplateRows =
-        this.grid.rows.map((x, i, xs) => !i ? `[${x.id}]` : ` ${
+        this.grid.rows_.map((x, i, xs) => !i ? `[${x.id}]` : ` ${
           x.precedingSpace - xs[i - 1].precedingSpace}% [${x.id}]`).join(' ');
   }
 
@@ -336,7 +491,7 @@ export class TerminalDisplayManagerElement extends HTMLElement {
       return;
     }
 
-    const existingNode = host.grid.getNodeFromElement(this.parentNode);
+    const existingNode = host.grid.getNodeFromElement(this.parentElement);
 
     const newId = `tdm-slot-${++host.lastSlotId}`;
     const newWindowEl = createWindowElement(newId, host.onControlsClick_);
@@ -363,7 +518,7 @@ export class TerminalDisplayManagerElement extends HTMLElement {
     host.addNewSlot_(newId, newWindowEl);
   }
 
-  /*
+  /**
    * @param {string} id
    * @param {!Element} windowEl
    */

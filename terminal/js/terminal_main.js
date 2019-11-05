@@ -30,6 +30,9 @@ window.addEventListener('DOMContentLoaded', () => {
     document.querySelector(Manager.is)
         .addEventListener('terminal-window-ready', (event) => {
       const element = document.createElement('div');
+      element.addEventListener('terminal-closing', () => {
+        event.target.destroySlot(event.detail.slot);
+      });
       element.setAttribute('slot', event.detail.slot);
       event.target.appendChild(element);
       window.term_ = terminal.init(element);

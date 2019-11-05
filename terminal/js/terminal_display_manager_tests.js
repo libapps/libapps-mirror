@@ -65,7 +65,7 @@ describe('terminal_display_manager_tests.js', () => {
     assert(document.getElementById('contents'));
   });
 
-  it('does-not-show-controls-when-not-enabled', function () {
+  it('does-not-show-controls-when-not-enabled', function() {
     const el = document.createElement(Element.is);
     let eventTriggerCount = 0;
     el.addEventListener(
@@ -94,7 +94,7 @@ describe('terminal_display_manager_tests.js', () => {
   });
 
   it('shows-controls-and-adds-new-slots-when-enabled-and-controls-clicked',
-      function () {
+      function() {
     const el = document.createElement(Element.is);
     let eventTriggerCount = 0;
     el.addEventListener(
@@ -123,7 +123,7 @@ describe('terminal_display_manager_tests.js', () => {
     }
   });
 
-  it('can-split-vertically-towards-the-left', function () {
+  it('can-split-vertically-towards-the-left', function() {
     const el = document.createElement(Element.is);
     const slots = [];
     el.addEventListener(
@@ -157,7 +157,7 @@ describe('terminal_display_manager_tests.js', () => {
     }
   });
 
-  it('can-split-vertically-towards-the-right', function () {
+  it('can-split-vertically-towards-the-right', function() {
     const el = document.createElement(Element.is);
     const slots = [];
     el.addEventListener(
@@ -191,7 +191,7 @@ describe('terminal_display_manager_tests.js', () => {
     }
   });
 
-  it('can-split-horizontally-towards-the-bottom', function () {
+  it('can-split-horizontally-towards-the-bottom', function() {
     const el = document.createElement(Element.is);
     const slots = [];
     el.addEventListener(
@@ -225,7 +225,7 @@ describe('terminal_display_manager_tests.js', () => {
     }
   });
 
-  it('can-split-horizontally-towards-the-top', function () {
+  it('can-split-horizontally-towards-the-top', function() {
     const el = document.createElement(Element.is);
     const slots = [];
     el.addEventListener(
@@ -256,6 +256,239 @@ describe('terminal_display_manager_tests.js', () => {
           el.shadowRoot.querySelector(`slot[name="${slots[1]}"]`).parentNode;
       const {l, w, t, h} = getDimensions(el);
       assert.deepEqual({l, w, t, h: h / 2}, getDimensions(second));
+    }
+  });
+
+  it('cannot-destroy-root-slot', function() {
+    const el = document.createElement(Element.is);
+    const slots = [];
+    el.addEventListener(
+        'terminal-window-ready', (event) => slots.push(event.detail.slot));
+
+    document.body.appendChild(el);
+    assert.lengthOf(el.shadowRoot.querySelectorAll('slot'), 1);
+
+    el.destroySlot(slots[0]);
+    assert.lengthOf(el.shadowRoot.querySelectorAll('slot'), 1);
+  });
+
+  for (const [name, edge] of
+           [['left', 'L'], ['right', 'R'], ['top', 'T'], ['bottom', 'B']]) {
+    it(`can-destroy-${name}-split-slot`, function() {
+      const el = document.createElement(Element.is);
+      const slots = [];
+      el.addEventListener(
+          'terminal-window-ready', (event) => slots.push(event.detail.slot));
+      el.setAttribute('terminal-splits-enabled', true);
+      el.style.width = '500px';
+      el.style.height = '500px';
+
+      document.body.appendChild(el);
+      assert.lengthOf(el.shadowRoot.querySelectorAll('slot'), 1);
+
+      el.shadowRoot.querySelector(`.controls[side="${edge}"]`).click();
+      assert.lengthOf(el.shadowRoot.querySelectorAll('slot'), 2);
+
+      el.destroySlot(slots[0]);
+      assert.lengthOf(el.shadowRoot.querySelectorAll('slot'), 1);
+      assert.equal(
+          el.shadowRoot.querySelector('slot').getAttribute('name'), slots[1]);
+      const slot = el.shadowRoot.querySelector('slot').parentNode;
+      assert.deepEqual(getDimensions(el), getDimensions(slot));
+    });
+  }
+
+  it('can-destroy-deep-split-slot', function() {
+    const el = document.createElement(Element.is);
+    const slots = [];
+    el.addEventListener(
+        'terminal-window-ready', (event) => slots.push(event.detail.slot));
+    el.setAttribute('terminal-splits-enabled', true);
+    el.style.width = '500px';
+    el.style.height = '500px';
+
+    document.body.appendChild(el);
+    assert.lengthOf(el.shadowRoot.querySelectorAll('slot'), 1);
+
+    el.shadowRoot.querySelector(`slot[name=${slots[0]}]`)
+        .parentNode.querySelector('.controls[side="R"]')
+        .click();
+    assert.lengthOf(el.shadowRoot.querySelectorAll('slot'), 2);
+    {
+      const first =
+          el.shadowRoot.querySelector(`slot[name="${slots[0]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l, w: w / 2, t, h}, getDimensions(first));
+    }
+
+    {
+      const second =
+          el.shadowRoot.querySelector(`slot[name="${slots[1]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l: l + w / 2, w: w / 2, t, h}, getDimensions(second));
+    }
+
+    el.shadowRoot.querySelector(`slot[name=${slots[1]}]`)
+        .parentNode.querySelector('.controls[side="L"]')
+        .click();
+    assert.lengthOf(el.shadowRoot.querySelectorAll('slot'), 3);
+    {
+      const first =
+          el.shadowRoot.querySelector(`slot[name="${slots[0]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l, w: w / 2, t, h}, getDimensions(first));
+    }
+
+    {
+      const second =
+          el.shadowRoot.querySelector(`slot[name="${slots[1]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual(
+          {l: l + 3 * w / 4, w: w / 4, t, h}, getDimensions(second));
+    }
+
+    {
+      const third =
+          el.shadowRoot.querySelector(`slot[name="${slots[2]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual(
+          {l: l + 2 * w / 4, w: w / 4, t, h}, getDimensions(third));
+    }
+
+    el.destroySlot(slots[2]);
+    assert.lengthOf(el.shadowRoot.querySelectorAll('slot'), 2);
+    {
+      const first =
+          el.shadowRoot.querySelector(`slot[name="${slots[0]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l, w: w / 2, t, h}, getDimensions(first));
+    }
+
+    {
+      const second =
+          el.shadowRoot.querySelector(`slot[name="${slots[1]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l: l + w / 2, w: w / 2, t, h}, getDimensions(second));
+    }
+  });
+
+  it('can-destroy-slot-whose-sibling-is-not-a-leaf', function() {
+    const el = document.createElement(Element.is);
+    const slots = [];
+    el.addEventListener(
+        'terminal-window-ready', (event) => slots.push(event.detail.slot));
+    el.setAttribute('terminal-splits-enabled', true);
+    el.style.width = '500px';
+    el.style.height = '500px';
+
+    document.body.appendChild(el);
+    assert.lengthOf(el.shadowRoot.querySelectorAll('slot'), 1);
+
+    el.shadowRoot.querySelector(`slot[name=${slots[0]}]`)
+        .parentNode.querySelector('.controls[side="R"]')
+        .click();
+    assert.lengthOf(el.shadowRoot.querySelectorAll('slot'), 2);
+    {
+      const first =
+          el.shadowRoot.querySelector(`slot[name="${slots[0]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l, w: w / 2, t, h}, getDimensions(first));
+    }
+
+    {
+      const second =
+          el.shadowRoot.querySelector(`slot[name="${slots[1]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l: l + w / 2, w: w / 2, t, h}, getDimensions(second));
+    }
+
+    el.shadowRoot.querySelector(`slot[name=${slots[1]}]`)
+        .parentNode.querySelector('.controls[side="L"]')
+        .click();
+    assert.lengthOf(el.shadowRoot.querySelectorAll('slot'), 3);
+    {
+      const first =
+          el.shadowRoot.querySelector(`slot[name="${slots[0]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l, w: w / 2, t, h}, getDimensions(first));
+    }
+
+    {
+      const second =
+          el.shadowRoot.querySelector(`slot[name="${slots[1]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual(
+          {l: l + 3 * w / 4, w: w / 4, t, h}, getDimensions(second));
+    }
+
+    {
+      const third =
+          el.shadowRoot.querySelector(`slot[name="${slots[2]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual(
+          {l: l + 2 * w / 4, w: w / 4, t, h}, getDimensions(third));
+    }
+
+    el.shadowRoot.querySelector(`slot[name=${slots[1]}]`)
+        .parentNode.querySelector('.controls[side="R"]')
+        .click();
+    assert.lengthOf(el.shadowRoot.querySelectorAll('slot'), 4);
+    {
+      const first =
+          el.shadowRoot.querySelector(`slot[name="${slots[0]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l, w: w / 2, t, h}, getDimensions(first));
+    }
+
+    {
+      const second =
+          el.shadowRoot.querySelector(`slot[name="${slots[1]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual(
+          {l: l + 3 * w / 4, w: Math.ceil(w / 8), t, h}, getDimensions(second));
+    }
+
+    {
+      const third =
+          el.shadowRoot.querySelector(`slot[name="${slots[2]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual(
+          {l: l + 2 * w / 4, w: w / 4, t, h}, getDimensions(third));
+    }
+
+    {
+      const fourth =
+          el.shadowRoot.querySelector(`slot[name="${slots[3]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual(
+          {l: Math.ceil(l + 7 * w / 8), w: Math.floor(w / 8), t, h},
+          getDimensions(fourth));
+    }
+
+    el.destroySlot(slots[2]);
+    assert.lengthOf(el.shadowRoot.querySelectorAll('slot'), 3);
+    {
+      const first =
+          el.shadowRoot.querySelector(`slot[name="${slots[0]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual({l, w: w / 2, t, h}, getDimensions(first));
+    }
+
+    {
+      const second =
+          el.shadowRoot.querySelector(`slot[name="${slots[1]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual(
+          {l: l + w / 2, w: Math.ceil(3 * w / 8), t, h}, getDimensions(second));
+    }
+
+    {
+      const fourth =
+          el.shadowRoot.querySelector(`slot[name="${slots[3]}"]`).parentNode;
+      const {l, w, t, h} = getDimensions(el);
+      assert.deepEqual(
+          {l: Math.ceil(l + 7 * w / 8), w: Math.floor(w / 8), t, h},
+          getDimensions(fourth));
     }
   });
 });
