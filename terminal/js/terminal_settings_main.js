@@ -19,6 +19,7 @@ import {
   TerminalSettingsCategorySelectorElement
 } from './terminal_settings_category_selector.js';
 import {TerminalSettingsThemeElement} from './terminal_settings_theme.js';
+import {TerminalSettingsApp} from './terminal_settings_app.js';
 
 window.addEventListener('DOMContentLoaded', (event) => {
   lib.init(() => {
@@ -28,14 +29,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
     window.preferenceManager.readStorage(() => {
       const elements = [
           HueSliderElement,
-          TransparencySliderElement,
           SaturationLightnessPickerElement,
+          TerminalSettingsApp,
           TerminalSettingsCheckboxElement,
           TerminalSettingsDropdownElement,
           TerminalSettingsColorpickerElement,
           TerminalSettingsCategoryOptionElement,
           TerminalSettingsCategorySelectorElement,
-          TerminalSettingsThemeElement];
+          TerminalSettingsThemeElement,
+          TransparencySliderElement,
+      ];
 
       for (const element of elements) {
         customElements.define(element.is, element);

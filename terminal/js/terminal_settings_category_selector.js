@@ -100,12 +100,13 @@ export class TerminalSettingsCategorySelectorElement extends LitElement {
   activate_(element) {
     this.querySelectorAll('[active]').forEach(active => {
       active.removeAttribute('active');
-      const id = active.getAttribute('for');
-      document.getElementById(id).removeAttribute('active-category');
     });
 
     element.setAttribute('active', '');
-    const id = element.getAttribute('for');
-    document.getElementById(id).setAttribute('active-category', '');
+    this.dispatchEvent(new CustomEvent('category-change', {
+      detail: {
+        category: element.getAttribute('for'),
+      },
+    }));
   }
 }

@@ -44,81 +44,73 @@ describe('terminal_settings_category_selector_tests.js', () => {
   });
 
   beforeEach(function() {
+    this.categoryChanges = /** !Array<string> */ [];
     this.selectorEl = /** @type {!TerminalSettingsCategorySelectorElement} */ (
         document.createElement('terminal-settings-category-selector'));
+    this.selectorEl.addEventListener('category-change',
+        e => this.categoryChanges.push(e.detail.category));
     this.selectorEl.innerHTML = categories.map(category => `
         <terminal-settings-category-option for='${category.id}'>
           <h1 slot='title' id='${category.titleId}'>A Title</h1>
         </terminal-settings-category-option>
     `).join('');
-    this.categoriesEl = document.createElement('div');
-    this.categoriesEl.innerHTML = categories.map(category => `
-        <div id='${category.id}'></div>
-    `).join('');
   });
 
   afterEach(function() {
-    for (const el of [this.selectorEl, this.categoriesEl]) {
-      if (el.parentElement) {
-        el.parentElement.removeChild(el);
-      }
+    const parentElement = this.selectorEl.parentElement;
+    if (parentElement) {
+      parentElement.removeChild(this.selectorEl);
     }
   });
 
   it('sets-first-elements-active-attibute-on-construction', function() {
-    document.body.appendChild(this.categoriesEl);
-    assert.isEmpty(document.querySelectorAll('[active-category]'));
+    assert.isEmpty(this.categoryChanges);
     assert.isEmpty(document.querySelectorAll('[active]'));
 
     document.body.appendChild(this.selectorEl);
-    assertQueriedElementIs('[active-category]',
-        document.getElementById(categories[0].id));
+    assert.deepEqual(this.categoryChanges, [categories[0].id]);
     assertQueriedElementIs('[active]',
         document.getElementById(categories[0].titleId).parentElement);
   });
 
   it('updates-elements-active-attribute-on-click', function() {
-    document.body.appendChild(this.categoriesEl);
     document.body.appendChild(this.selectorEl);
-    assertQueriedElementIs('[active-category]',
-        document.getElementById(categories[0].id));
+    assert.deepEqual(this.categoryChanges, [categories[0].id]);
     assertQueriedElementIs('[active]',
         document.getElementById(categories[0].titleId).parentElement);
 
     document.getElementById(categories[1].titleId).click();
-    assertQueriedElementIs('[active-category]',
-        document.getElementById(categories[1].id));
+    assert.deepEqual(this.categoryChanges,
+        [categories[0].id, categories[1].id]);
     assertQueriedElementIs('[active]',
         document.getElementById(categories[1].titleId).parentElement);
 
     document.getElementById(categories[2].titleId).click();
-    assertQueriedElementIs('[active-category]',
-        document.getElementById(categories[2].id));
+    assert.deepEqual(this.categoryChanges,
+        [categories[0].id, categories[1].id, categories[2].id]);
     assertQueriedElementIs('[active]',
         document.getElementById(categories[2].titleId).parentElement);
   });
 
   it('updates-elements-active-attribute-on-enter-and-space', function() {
-    document.body.appendChild(this.categoriesEl);
     document.body.appendChild(this.selectorEl);
-    assertQueriedElementIs('[active-category]',
-        document.getElementById(categories[0].id));
+    assert.deepEqual(this.categoryChanges, [categories[0].id]);
     assertQueriedElementIs('[active]',
         document.getElementById(categories[0].titleId).parentElement);
 
     document.getElementById(categories[1].titleId)
         .dispatchEvent(
             new KeyboardEvent('keydown', {code: 'Space', bubbles: true}));
-    assertQueriedElementIs('[active-category]',
-        document.getElementById(categories[1].id));
+    assert.deepEqual(this.categoryChanges,
+        [categories[0].id, categories[1].id]);
     assertQueriedElementIs('[active]',
         document.getElementById(categories[1].titleId).parentElement);
 
     document.getElementById(categories[2].titleId)
         .dispatchEvent(
             new KeyboardEvent('keydown', {code: 'Enter', bubbles: true}));
-    assertQueriedElementIs('[active-category]',
-        document.getElementById(categories[2].id));
+    assert.deepEqual(this.categoryChanges,
+        [categories[0].id, categories[1].id, categories[2].id]);
     assertQueriedElementIs('[active]',
         document.getElementById(categories[2].titleId).parentElement);
   });
