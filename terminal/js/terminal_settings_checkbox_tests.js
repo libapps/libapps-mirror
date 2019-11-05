@@ -11,14 +11,6 @@ import {TerminalSettingsCheckboxElement} from './terminal_settings_checkbox.js';
 describe('terminal_settings_checkbox_tests.js', () => {
   const preference = 'terminal_settings_checkbox_tests_preference';
 
-  before(function() {
-    if (customElements.get(TerminalSettingsCheckboxElement.is) === undefined) {
-      customElements.define(
-          TerminalSettingsCheckboxElement.is,
-          TerminalSettingsCheckboxElement);
-    }
-  });
-
   beforeEach(function() {
     window.preferenceManager =
       new lib.PreferenceManager(new lib.Storage.Memory());

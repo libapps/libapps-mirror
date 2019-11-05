@@ -226,3 +226,6 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
     super.uiChanged_(event.target.getAttribute('value'));
   }
 }
+
+customElements.define(TerminalSettingsDropdownElement.is,
+    TerminalSettingsDropdownElement);

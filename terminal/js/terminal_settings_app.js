@@ -9,14 +9,21 @@
  */
 
 import {css, html, LitElement} from './lit_element.js';
+import './terminal_settings_app.js';
+import './terminal_settings_category_selector.js';
+import './terminal_settings_checkbox.js';
+import './terminal_settings_colorpicker.js';
+import './terminal_settings_dropdown.js';
+import './terminal_settings_hue_slider.js';
+import './terminal_settings_saturation_lightness_picker.js';
+import './terminal_settings_theme.js';
+import './terminal_settings_transparency_slider.js';
 
 const THEME_FONT_FAMILY = "'DejaVu Sans Mono', 'Noto Sans Mono', " +
                           "'Everson Mono', FreeMono, Menlo, Terminal, " +
                           "monospace";
 
 export class TerminalSettingsApp extends LitElement {
-  static get is() { return 'terminal-settings-app'; }
-
   /** @override */
   static get properties() {
     return {
@@ -28,6 +35,13 @@ export class TerminalSettingsApp extends LitElement {
     super();
 
     this.activeCategory_ = "appearance";
+  }
+
+  /** @override */
+  async performUpdate() {
+    // A lot of elements in this page assume preference manager has been loaded.
+    await window.preferenceManagerLoaded;
+    super.performUpdate();
   }
 
   static get styles() {
@@ -434,3 +448,5 @@ export class TerminalSettingsApp extends LitElement {
     this.activeCategory_ = e.detail.category;
   }
 }
+
+customElements.define('terminal-settings-app', TerminalSettingsApp);

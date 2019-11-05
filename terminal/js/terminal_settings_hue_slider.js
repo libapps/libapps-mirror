@@ -100,3 +100,5 @@ export class HueSliderElement extends LitElement {
     this.dispatchEvent(new CustomEvent('updated', {bubbles: true}));
   }
 }
+
+customElements.define(HueSliderElement.is, HueSliderElement);

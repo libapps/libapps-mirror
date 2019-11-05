@@ -22,6 +22,12 @@ class LitElement$$module$js$lit_element{
   static get properties() {};
 
   /**
+   * @return {?Promise}
+   * @protected
+   */
+  performUpdate() {}
+
+  /**
    * @return {!TemplateResult}
    * @protected
    */

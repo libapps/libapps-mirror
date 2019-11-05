@@ -48,6 +48,9 @@ export class TerminalSettingsCategoryOptionElement extends LitElement {
   }
 }
 
+customElements.define(TerminalSettingsCategoryOptionElement.is,
+    TerminalSettingsCategoryOptionElement);
+
 export class TerminalSettingsCategorySelectorElement extends LitElement {
   static get is() { return 'terminal-settings-category-selector'; }
 
@@ -110,3 +113,6 @@ export class TerminalSettingsCategorySelectorElement extends LitElement {
     }));
   }
 }
+
+customElements.define(TerminalSettingsCategorySelectorElement.is,
+    TerminalSettingsCategorySelectorElement);

@@ -126,3 +126,6 @@ export class TerminalSettingsThemeElement extends LitElement {
 
   }
 }
+
+customElements.define(TerminalSettingsThemeElement.is,
+    TerminalSettingsThemeElement);

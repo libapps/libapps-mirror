@@ -219,3 +219,6 @@ export class TerminalSettingsColorpickerElement extends
     }
   }
 }
+
+customElements.define(TerminalSettingsColorpickerElement.is,
+    TerminalSettingsColorpickerElement);

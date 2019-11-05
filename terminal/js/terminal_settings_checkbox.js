@@ -90,3 +90,6 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
     super.uiChanged_(event.target.checked);
   }
 }
+
+customElements.define(TerminalSettingsCheckboxElement.is,
+    TerminalSettingsCheckboxElement);

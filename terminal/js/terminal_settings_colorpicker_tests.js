@@ -47,12 +47,6 @@ describe('terminal_settings_colorpicker.js', () => {
     });
   }
 
-  before(function() {
-    if (customElements.get(Element.is) === undefined) {
-      customElements.define(Element.is, Element);
-    }
-  });
-
   beforeEach(function() {
     window.preferenceManager =
       new lib.PreferenceManager(new lib.Storage.Memory());

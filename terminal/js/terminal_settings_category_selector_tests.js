@@ -7,7 +7,6 @@
  */
 
 import {
-  TerminalSettingsCategoryOptionElement,
   TerminalSettingsCategorySelectorElement,
 } from './terminal_settings_category_selector.js';
 
@@ -27,21 +26,6 @@ describe('terminal_settings_category_selector_tests.js', () => {
     assert.lengthOf(elements, 1);
     assert.equal(elements[0], element);
   };
-
-  before(function() {
-    if (customElements.get(TerminalSettingsCategoryOptionElement.is) ===
-        undefined) {
-      customElements.define(
-          TerminalSettingsCategoryOptionElement.is,
-          TerminalSettingsCategoryOptionElement);
-    }
-    if (customElements.get(TerminalSettingsCategorySelectorElement.is) ===
-        undefined) {
-      customElements.define(
-          TerminalSettingsCategorySelectorElement.is,
-          TerminalSettingsCategorySelectorElement);
-    }
-  });
 
   beforeEach(function() {
     this.categoryChanges = /** !Array<string> */ [];

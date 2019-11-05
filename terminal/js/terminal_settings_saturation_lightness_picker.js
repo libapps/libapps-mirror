@@ -145,3 +145,6 @@ export class SaturationLightnessPickerElement extends LitElement {
     this.dispatchEvent(new CustomEvent('updated', {bubbles: true}));
   }
 }
+
+customElements.define(SaturationLightnessPickerElement.is,
+    SaturationLightnessPickerElement);

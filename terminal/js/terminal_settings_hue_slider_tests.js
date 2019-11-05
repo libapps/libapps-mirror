@@ -17,14 +17,6 @@ describe('hue_slider_tests.js', () => {
 
   const getPicker = el => el.shadowRoot.getElementById('picker');
 
-  before(function() {
-    if (customElements.get(Element.is) === undefined) {
-      customElements.define(
-          Element.is,
-          Element);
-    }
-  });
-
   afterEach(function() {
     document.querySelectorAll(Element.is)
         .forEach(el => el.parentElement.removeChild(el));

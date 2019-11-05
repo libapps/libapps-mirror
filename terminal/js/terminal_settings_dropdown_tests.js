@@ -12,14 +12,6 @@ describe('terminal_settings_dropdown_tests.js', () => {
   const preference = 'terminal_settings_dropdown_tests_preference';
   const options = ['opt1', 'opt2', 'opt3'];
 
-  before(function() {
-    if (customElements.get(TerminalSettingsDropdownElement.is) === undefined) {
-      customElements.define(
-          TerminalSettingsDropdownElement.is,
-          TerminalSettingsDropdownElement);
-    }
-  });
-
   beforeEach(function() {
     window.PreferenceManager = {
       defaultPreferences: {
