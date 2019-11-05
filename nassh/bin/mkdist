@@ -79,11 +79,35 @@ DIST_DIR = os.path.join(nassh.DIR, 'dist')
 TMP_DIR = os.path.join(DIST_DIR, 'tmp')
 
 
-def minify(tmpdir):
-    """Run various minification steps."""
+def minify_json_data(data, path):
+    """Write JSON |data| as minified output to |path|."""
+    with open(path, 'w', encoding='utf-8') as fp:
+        json.dump(data, fp, separators=(',', ':'))
+
+
+def minify_json(path):
+    """Minify JSON |path| in place."""
+    with open(path, encoding='utf-8') as fp:
+        data = json.load(fp)
+    minify_json_data(data, path)
+
+
+def minify_translations(tmpdir):
+    """Minimize translation files."""
     libdot.run([os.path.join(libdot.BIN_DIR, 'minify-translations.py'),
                 '-i', '--glob', os.path.join('_locales', '*', 'messages.json')],
                cwd=tmpdir)
+
+
+def minify(tmpdir):
+    """Run various minification steps."""
+    for root, _, files in os.walk(tmpdir):
+        for name in [x for x in files if x != 'messages.json']:
+            path = os.path.join(root, name)
+            if name.endswith('.json'):
+                minify_json(path)
+
+    minify_translations(tmpdir)
 
 
 def copyfiles(tmpdir, extra_exclude=()):
@@ -145,20 +169,18 @@ def mkzip(manifest, stamps=()):
 
     tmpdir = os.path.join(TMP_DIR, basename)
     copyfiles(tmpdir)
-    minify(tmpdir)
+    minify_translations(tmpdir)
 
     del data['key']
     del data['platforms']
-    path = os.path.join(tmpdir, 'manifest.json')
-    with open(path, 'w', encoding='utf-8') as fp:
-        json.dump(data, fp, separators=(',', ':'))
+    minify_json_data(data, os.path.join(tmpdir, 'manifest.json'))
 
     libdot.unlink(archive)
     libdot.run(['zip', '-rq', os.path.relpath(archive, tmpdir), '.'],
                cwd=tmpdir)
 
 
-def mkcrosh():
+def mkcrosh(enable_minify):
     """Build the crosh archive."""
     logging.info('Processing crosh/terminal')
 
@@ -179,7 +201,8 @@ def mkcrosh():
                 shutil.copy(path, os.path.join(tmpdir, subdir))
     shutil.copy(os.path.join(terminal, 'terminal_pwa_manifest.json'), tmpdir)
 
-    minify(tmpdir)
+    if enable_minify:
+        minify(tmpdir)
     libdot.unlink(archive)
     libdot.run(['zip', '-rq', os.path.relpath(archive, tmpdir), '.'],
                cwd=tmpdir)
@@ -231,6 +254,9 @@ def get_parser():
                         help='Skip (re)building of dependencies.')
     parser.add_argument('--crosh-only', action='store_true',
                         help='Only build crosh (and Terminal).')
+    parser.add_argument('--skip-minify', dest='minify',
+                        action='store_false', default=True,
+                        help='Skip minify steps on files.')
     return parser
 
 
@@ -255,7 +281,7 @@ def main(argv):
         # Build the stable channel variants.
         mkzip('manifest_ext.json')
         mkzip('manifest_v1.5.json')
-    mkcrosh()
+    mkcrosh(opts.minify)
 
 
 if __name__ == '__main__':
