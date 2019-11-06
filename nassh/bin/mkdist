@@ -55,7 +55,6 @@ EXCLUDE_PATTERNS_CROSH = (
     os.path.join('html', 'nassh_popup.html'),
     os.path.join('html', 'nassh_sftp_fsp_config_dialog.html'),
     os.path.join('js', 'nasftp*.js'),
-    os.path.join('js', 'nassh.js'),
     os.path.join('js', 'nassh_agent*.js'),
     os.path.join('js', 'nassh_app.js'),
     os.path.join('js', 'nassh_background.js'),
