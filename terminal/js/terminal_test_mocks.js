@@ -63,6 +63,7 @@ function MockTerminalPrivate() {
 
   /** @type {string} */
   this.openTerminalProcessId = '';
+  this.croshSettings = {};
 }
 
 /**
@@ -228,6 +229,21 @@ MockTerminalPrivate.prototype.onTerminalResize = function(
  */
 MockTerminalPrivate.prototype.ackOutput = function(tabId, id) {
   this.notifyObservers_('ackOutput', arguments);
+};
+
+/**
+ * Returns settings used by the crosh extension.  This function is called by
+ * the terminal system app the first time it is run to migrate any previously
+ * settings.
+ *
+ * @param {function(!Object<string, *>)} callback Callback that will be called
+ *     with settings.
+ */
+MockTerminalPrivate.prototype.getCroshSettings = function(callback) {
+  setTimeout(() => {
+    callback(this.croshSettings);
+    this.notifyObservers_('getCroshSettings', arguments);
+  }, 0);
 };
 
 /**

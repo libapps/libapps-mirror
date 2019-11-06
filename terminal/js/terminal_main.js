@@ -23,6 +23,8 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  lib.registerInit('migrate-settings', terminal.migrateSettings);
+
   lib.init(() => {
     new terminal.Menu(window).install();
     document.querySelector(Manager.is)
@@ -30,7 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const element = document.createElement('div');
       element.setAttribute('slot', event.detail.slot);
       event.target.appendChild(element);
-      terminal.init(element);
+      window.term_ = terminal.init(element);
     });
     customElements.define(Manager.is, Manager);
   });

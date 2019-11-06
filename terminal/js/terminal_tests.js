@@ -33,9 +33,6 @@ afterEach(function() {
   this.mockTerminalPrivateController.stop();
 });
 
-/**
- *  init.
- */
 it('opens-process-in-init', async function() {
   terminal.init(this.div);
   const [processName, args] =
@@ -57,6 +54,33 @@ it('does-not-exit-on-first-output', async function() {
   assert.isFalse(exitCalled);
   await this.mockTerminalPrivate.onProcessOutput.dispatch(pid, 'exit', 'text');
   assert.isTrue(exitCalled);
+});
+
+it('migrates-settings-on-first-run-only', async function() {
+  const getItems = async () => {
+    return new Promise((resolve) => {
+      hterm.defaultStorage.getItems(null, resolve);
+    });
+  };
+
+  let callCount = 0;
+  this.mockTerminalPrivateController.addObserver('getCroshSettings', () => {
+    ++callCount;
+  });
+
+  // First time calls getCroshSettings and copies settings.
+  this.mockTerminalPrivate.croshSettings = {'test': 1};
+  await new Promise((resolve) => terminal.migrateSettings(resolve));
+  assert.equal(callCount, 1);
+  let settings = await getItems();
+  assert.deepEqual(settings, {'test': 1, 'crosh.settings.migrated': true});
+
+  // Once migrated, doesn't call getCroshSettings again, or update settings.
+  this.mockTerminalPrivate.croshSettings = {'test': 2};
+  await new Promise((resolve) => terminal.migrateSettings(resolve));
+  assert.equal(callCount, 1);
+  settings = await getItems();
+  assert.deepEqual(settings, {'test': 1, 'crosh.settings.migrated': true});
 });
 
 });

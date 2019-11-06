@@ -238,6 +238,11 @@ chrome.terminalPrivate = {};
 /** @param {string} id */
 chrome.terminalPrivate.closeTerminalProcess = function(id) {};
 
+/**
+ * @param {function(!Object<string, *>)} callback
+ */
+chrome.terminalPrivate.getCroshSettings = function(callback) {};
+
 /** @type {ChromeBaseEvent<function(string, string, string)>} */
 chrome.terminalPrivate.onProcessOutput;
 
