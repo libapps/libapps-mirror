@@ -78,24 +78,6 @@ DIST_DIR = os.path.join(nassh.DIR, 'dist')
 TMP_DIR = os.path.join(DIST_DIR, 'tmp')
 
 
-def minify_css(path):
-    """Minify CSS |path| in place."""
-    ret = libdot.run(['csso', '-i', os.path.relpath(path, nassh.DIR), '--stat'],
-                     capture_output=True, cwd=nassh.DIR)
-    logging.info(ret.stderr.strip().decode('utf-8'))
-    with open(path, 'wb') as fp:
-        fp.write(ret.stdout)
-
-
-def minify_js(path):
-    """Minify JS |path| in place."""
-    ret = libdot.run(['terser', os.path.relpath(path, nassh.DIR), '--compress',
-                      '--mangle'],
-                     capture_output=True, cwd=nassh.DIR)
-    with open(path, 'wb') as fp:
-        fp.write(ret.stdout)
-
-
 def minify_json_data(data, path):
     """Write JSON |data| as minified output to |path|."""
     with open(path, 'w', encoding='utf-8') as fp:
@@ -123,10 +105,6 @@ def minify(tmpdir):
             path = os.path.join(root, name)
             if name.endswith('.json'):
                 minify_json(path)
-            elif name.endswith('.css'):
-                minify_css(path)
-            elif name.endswith('.js'):
-                minify_js(path)
 
     minify_translations(tmpdir)
 
