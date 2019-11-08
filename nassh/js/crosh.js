@@ -28,15 +28,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
   }
 
   nassh.disableTabDiscarding();
-  lib.registerInit('messages', (onInit) => {
-    lib.i18n.getAcceptLanguages(async (languages) => {
-      // Replace and load hterm.messageManager.
-      hterm.messageManager = new lib.MessageManager(languages, true);
-      const url =  lib.f.getURL('/_locales/$1/messages.json');
-      await hterm.messageManager.findAndLoadMessages(url);
-      onInit();
+
+  // Modifications if crosh is running as chrome://terminal.
+  if (location.href.startsWith('chrome://terminal/')) {
+    lib.registerInit('terminal-private-storage', (onInit) => {
+      hterm.defaultStorage = new lib.Storage.TerminalPrivate(onInit);
     });
-  });
+    lib.registerInit('messages', nassh.loadMessages);
+    lib.registerInit('migrate-settings', Crosh.migrateSettings);
+  }
+
   lib.init(Crosh.init);
 });
 
@@ -76,6 +77,33 @@ Crosh.croshBuiltinId = 'nkoccljplnhpfnfiajclkommnmllphnl';
  */
 Crosh.msg = function(name, args) {
   return hterm.messageManager.get(name, args);
+};
+
+/**
+ * Migrates settings from crosh extension to chrome://terminal.
+ * TODO(crbug.com/1019021): Remove after M83.
+ *
+ * Copy any settings from the previous crosh extension which were stored in
+ * chrome.storage.sync into the current local storage of chrome://terminal.
+ *
+ * @param {function():void} callback Invoked when complete.
+ */
+Crosh.migrateSettings = function(callback) {
+  if (!chrome.terminalPrivate || !chrome.terminalPrivate.getCroshSettings) {
+    callback();
+    return;
+  }
+
+  hterm.defaultStorage.getItem('crosh.settings.migrated', (migrated) => {
+    if (migrated) {
+      callback();
+      return;
+    }
+    chrome.terminalPrivate.getCroshSettings((settings) => {
+      settings['crosh.settings.migrated'] = true;
+      hterm.defaultStorage.setItems(settings, callback);
+    });
+  });
 };
 
 /**

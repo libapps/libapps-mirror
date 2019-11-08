@@ -9,6 +9,23 @@
  * so we do it like this instead.
  */
 window.addEventListener('DOMContentLoaded', (event) => {
+  // Modifications if crosh is running as chrome://terminal.
+  if (location.href.startsWith('chrome://terminal/')) {
+    lib.registerInit('terminal-private-storage', (onInit) => {
+      hterm.defaultStorage = new lib.Storage.TerminalPrivate(onInit);
+    });
+    lib.registerInit('messages', nassh.loadMessages);
+    // Polyfill chrome.runtime.getManifest since it is not available when
+    // running as chrome://terminal.  We require name, version, and icons.
+    chrome.runtime.getManifest = () => {
+      return {
+        'name': 'Terminal',
+        'version': 'system',
+        'icons': {'192': '/images/dev/crostini-192.png'},
+      };
+    };
+  }
+
   function setupPreferences() {
     var manifest = chrome.runtime.getManifest();
 
