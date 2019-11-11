@@ -55,13 +55,13 @@ describe('terminal_settings_dropdown_tests.js', () => {
 
     let prefChanged = test.listenForPrefChange(
         window.preferenceManager, preference);
-    this.el.shadowRoot.querySelector('.option[option-index="1"]').click();
+    this.el.shadowRoot.querySelector('.option[data-index="1"]').click();
     await prefChanged;
     assert.equal(window.preferenceManager.get(preference), options[1]);
 
     prefChanged = test.listenForPrefChange(
         window.preferenceManager, preference);
-    this.el.shadowRoot.querySelector('.option[option-index="2"]').click();
+    this.el.shadowRoot.querySelector('.option[data-index="2"]').click();
     await prefChanged;
     assert.equal(window.preferenceManager.get(preference), options[2]);
   });
@@ -93,7 +93,7 @@ describe('terminal_settings_dropdown_tests.js', () => {
     assert.equal(this.el.shadowRoot.querySelector('#container')
         .getAttribute('aria-expanded'), 'true');
 
-    this.el.shadowRoot.querySelector('.option[option-index="1"]').click();
+    this.el.shadowRoot.querySelector('.option[data-index="1"]').click();
     await this.el.updateComplete;
 
     assert.equal(this.el.shadowRoot.querySelector('#container')

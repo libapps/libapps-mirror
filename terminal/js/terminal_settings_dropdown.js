@@ -105,17 +105,17 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
         window.PreferenceManager.defaultPreferences[this.preference].type;
 
     const renderOption = (option, index) => html`
-        <li class="option" roll="option" tab-index="-1" value="${option}"
-            option-index="${index}" aria-selected="${this.value === option}"
+        <li class="option" role="option" tab-index="-1" value="${option}"
+            data-index="${index}" aria-selected="${this.value === option}"
             @click="${this.onUiChanged_}" >
           ${option}
-        </ul>
+        </li>
     `;
 
     return html`
-        <div id="container" @role="button" aria-expanded="${this.expanded}" >
+        <div id="container" role="button" aria-expanded="${this.expanded}" >
           ${this.value}
-          <ul id="options">
+          <ul id="options" role="listbox">
             ${options.map(renderOption)}
           </ul>
         </div>
@@ -146,7 +146,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
 
   selectNth_(index) {
     const element = this.shadowRoot
-        .querySelector(`.option[option-index="${index}"]`);
+        .querySelector(`.option[data-index="${index}"]`);
     if (element) {
       super.uiChanged_(element.getAttribute('value'));
       return true;
@@ -167,13 +167,13 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   selectPrevious_() {
     return this.selectNth_(+this.shadowRoot
         .querySelector(`.option[value="${this.value}"]`)
-        .getAttribute('option-index') - 1);
+        .getAttribute('data-index') - 1);
   }
 
   selectNext_() {
     return this.selectNth_(+this.shadowRoot
         .querySelector(`.option[value="${this.value}"]`)
-        .getAttribute('option-index') + 1);
+        .getAttribute('data-index') + 1);
   }
 
   /** @param {!Event} event */
