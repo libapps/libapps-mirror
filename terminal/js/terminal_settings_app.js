@@ -162,8 +162,8 @@ export class TerminalSettingsApp extends LitElement {
           <terminal-settings-category-option for="mousekeyboard">
             <h2 slot="title">Mouse & Keyboard</h2>
           </terminal-settings-category-option>
-          <terminal-settings-category-option for="miscellaneous">
-            <h2 slot="title">Miscellaneous</h2>
+          <terminal-settings-category-option for="behavior">
+            <h2 slot="title">Behavior</h2>
           </terminal-settings-category-option>
         </terminal-settings-category-selector>
 
@@ -240,11 +240,6 @@ export class TerminalSettingsApp extends LitElement {
                 <terminal-settings-dropdown preference="font-family"
                   .options=${FONT_FAMILY_OPTIONS}>
                 </terminal-settings-dropdown>
-              </li>
-              <li class="setting-container">
-                <h4>Font style</h4>
-                <!-- TODO(juwa@google.com): Add element -->
-                <select></select>
               </li>
               <li class="setting-container">
                 <h4>Font size</h4>
@@ -431,8 +426,8 @@ export class TerminalSettingsApp extends LitElement {
         </section>
 
         <section class="terminal-settings-category"
-            ?active-category="${this.activeCategory_ === "miscellaneous"}">
-            <h3>Miscellaneous</h3>
+            ?active-category="${this.activeCategory_ === "behavior"}">
+            <h3>Behavior</h3>
 
             <ul class="section-body">
               <li class="setting-container">
