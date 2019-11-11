@@ -158,8 +158,6 @@ export class TerminalSettingsColorpickerElement extends
   }
 
   /**
-   * @param {boolean|number|string} value
-   * @protected
    * @override
    */
   preferenceChanged_(value) {

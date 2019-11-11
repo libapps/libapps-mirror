@@ -38,6 +38,15 @@ describe('terminal_settings_dropdown_tests.js', () => {
     delete window.PreferenceManager;
   });
 
+  it('infers-options-from-preference', async function() {
+    assert.deepEqual(this.el.getOptions_(), ['opt1', 'opt2', 'opt3']);
+  });
+
+  it('uses-explicit-options-if-present', async function() {
+    this.el.options = ["override1", "override2"];
+    assert.deepEqual(this.el.getOptions_(), ['override1', 'override2']);
+  });
+
   it('updates-ui-when-preference-changes', async function() {
     assert.equal(window.preferenceManager.get(preference), options[0]);
     assert.equal(this.el.value, options[0]);
@@ -299,14 +308,11 @@ describe('terminal_settings_dropdown_tests.js', () => {
     assert.equal(this.el.value, options[2]);
   });
 
-  it('uses-explicit-options-attribute-if-present', async function() {
-    this.el.setAttribute('options', '["override1", "override2"]');
+  it('use-custom-toText-if-present', async function() {
+    this.el.toText = value => `*${value}*`;
     await this.el.updateComplete;
-
-    // Options attribute should take precedence.
-    assert.deepEqual(
-        Array.from(this.el.shadowRoot.querySelectorAll('li'))
-            .map(element => element.getAttribute('value')),
-        ['override1', 'override2']);
+    const liTexts = Array.from(this.el.shadowRoot.querySelectorAll('li'))
+                         .map(li => li.textContent.trim());
+    assert.deepEqual(liTexts, ['*opt1*', '*opt2*', '*opt3*']);
   });
 });

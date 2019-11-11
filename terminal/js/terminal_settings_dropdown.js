@@ -10,6 +10,14 @@
 import {css, html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
 
+/**
+ * @param {*} value
+ * @return {string}
+ */
+function trivialToText(value) {
+  return `${value}`;
+}
+
 export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   static get is() { return 'terminal-settings-dropdown'; }
 
@@ -24,10 +32,13 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
       },
       options: {
         type: Array,
+        attribute: false,
       },
       value: {
-        type: String,
-        reflect: true,
+        attribute: false,
+      },
+      toText: {
+        attribute: false,
       },
     };
   }
@@ -95,28 +106,27 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
     super();
 
     this.expanded = false;
-    /** @public {!Array<string>} */
-    this.options;
+    /** @public {?Array<*>} */
+    this.options = null;
+    /** @public {function(*): string} */
+    this.toText = trivialToText;
   }
 
   /** @override */
   render() {
-    const options = this.options ||
-        window.PreferenceManager.defaultPreferences[this.preference].type;
-
     const renderOption = (option, index) => html`
-        <li class="option" role="option" tab-index="-1" value="${option}"
+        <li class="option" role="option" tab-index="-1"
             data-index="${index}" aria-selected="${this.value === option}"
             @click="${this.onUiChanged_}" >
-          ${option}
+          ${this.toText(option)}
         </li>
     `;
 
     return html`
         <div id="container" role="button" aria-expanded="${this.expanded}" >
-          ${this.value}
+          ${this.toText(this.value)}
           <ul id="options" role="listbox">
-            ${options.map(renderOption)}
+            ${this.getOptions_().map(renderOption)}
           </ul>
         </div>
     `;
@@ -148,7 +158,9 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
     const element = this.shadowRoot
         .querySelector(`.option[data-index="${index}"]`);
     if (element) {
-      super.uiChanged_(element.getAttribute('value'));
+      super.uiChanged_(this.getValueFromLiElement_(
+          /** @type {!HTMLLIElement} */ (element)
+      ));
       return true;
     } else {
       return false;
@@ -166,13 +178,13 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
 
   selectPrevious_() {
     return this.selectNth_(+this.shadowRoot
-        .querySelector(`.option[value="${this.value}"]`)
+        .querySelector(`.option[aria-selected="true"]`)
         .getAttribute('data-index') - 1);
   }
 
   selectNext_() {
     return this.selectNth_(+this.shadowRoot
-        .querySelector(`.option[value="${this.value}"]`)
+        .querySelector(`.option[aria-selected="true"]`)
         .getAttribute('data-index') + 1);
   }
 
@@ -221,9 +233,35 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
     }
   }
 
+  /**
+   * @private
+   * @return {!Array<*>}
+   */
+  getOptions_() {
+    if (Array.isArray(this.options)) {
+      return this.options;
+    } else {
+      const preferenceType =
+          window.PreferenceManager.defaultPreferences[this.preference].type;
+      lib.assert(Array.isArray(preferenceType));
+      return preferenceType;
+    }
+  }
+
+  /**
+   * @private
+   * @param {!HTMLLIElement} liElement
+   * @return {*}
+   */
+  getValueFromLiElement_(liElement) {
+    return this.getOptions_()[+liElement.getAttribute('data-index')];
+  }
+
   /** @param {!Event} event */
   onUiChanged_(event) {
-    super.uiChanged_(event.target.getAttribute('value'));
+    super.uiChanged_(this.getValueFromLiElement_(
+        /** @type {!HTMLLIElement} */ (event.target)
+    ));
   }
 }
 

@@ -23,6 +23,34 @@ const THEME_FONT_FAMILY = "'DejaVu Sans Mono', 'Noto Sans Mono', " +
                           "'Everson Mono', FreeMono, Menlo, Terminal, " +
                           "monospace";
 
+/**
+ * @param {null|string} mode
+ * @return {string}
+ */
+function altGrModeToText(mode) {
+  switch (mode) {
+    case null:
+      return "Auto";
+    case 'none':
+      return 'Disable';
+    default:
+      return mode;
+  }
+}
+
+// TODO(lxj@google.com): These are hand picked monospace fonts available on
+// Chrome OS. We might want to find a better way instead of hard coding.
+const FONT_FAMILY_OPTIONS = [
+    'Cousine',
+    'monospace',
+    'Noto Sans Mono',
+    'Noto Sans Mono CJK HK',
+    'Noto Sans Mono CJK JP',
+    'Noto Sans Mono CJK KR',
+    'Noto Sans Mono CJK SC',
+    'Noto Sans Mono CJK TC',
+];
+
 export class TerminalSettingsApp extends LitElement {
   /** @override */
   static get properties() {
@@ -209,8 +237,9 @@ export class TerminalSettingsApp extends LitElement {
             <ul class="section-body">
               <li class="setting-container">
                 <h4>Font face</h4>
-                <!-- TODO(juwa@google.com): Add element -->
-                <select></select>
+                <terminal-settings-dropdown preference="font-family"
+                  .options=${FONT_FAMILY_OPTIONS}>
+                </terminal-settings-dropdown>
               </li>
               <li class="setting-container">
                 <h4>Font style</h4>
@@ -222,7 +251,7 @@ export class TerminalSettingsApp extends LitElement {
                 <!-- TODO(lxj@google.com): Options' value is taken from the UX
                     mock. We might want a wider range of choices. -->
                 <terminal-settings-dropdown preference="font-size"
-                  options="${'["6", "8", "10", "12", "14", "16", "18"]'}">
+                  .options=${[6, 8, 10, 12, 14, 16, 18]}>
                 </terminal-settings-dropdown>
               </li>
               <li class="setting-container">
@@ -303,8 +332,10 @@ export class TerminalSettingsApp extends LitElement {
               </li>
               <li class="setting-container">
                 <h4>AltGr key mode</h4>
-                <!-- TODO(juwa@google.com): Add element -->
-                <select></select>
+                <terminal-settings-dropdown
+                    preference="alt-gr-mode"
+                    .toText=${altGrModeToText}>
+                </terminal-settings-dropdown>
               </li>
               <li class="setting-container">
                 <h4>Alt-Backspace is Meta-Backspace</h4>

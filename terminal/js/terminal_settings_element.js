@@ -17,7 +17,7 @@ export class TerminalSettingsElement extends LitElement {
 
     /** @type {string} */
     this.preference;
-    /** @protected {string|boolean|number} */
+    /** @protected {*} */
     this.value;
     this.boundPreferenceChanged_ = this.preferenceChanged_.bind(this);
   }
@@ -43,7 +43,7 @@ export class TerminalSettingsElement extends LitElement {
   }
 
   /**
-   * @param {string|boolean|number} value
+   * @param {*} value
    * @protected
    */
   uiChanged_(value) {
@@ -52,7 +52,7 @@ export class TerminalSettingsElement extends LitElement {
   }
 
   /**
-   * @param {string|boolean|number} value
+   * @param {*} value
    * @protected
    */
   preferenceChanged_(value) {
