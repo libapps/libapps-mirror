@@ -23,6 +23,11 @@ const THEME_FONT_FAMILY = "'DejaVu Sans Mono', 'Noto Sans Mono', " +
                           "'Everson Mono', FreeMono, Menlo, Terminal, " +
                           "monospace";
 
+const BELL_SOUND_CONVERTER = {
+  toChecked: value => !!value,
+  fromChecked: checked => checked ? 'lib-resource:hterm/audio/bell' : '',
+};
+
 /**
  * @param {null|string} mode
  * @return {string}
@@ -430,6 +435,13 @@ export class TerminalSettingsApp extends LitElement {
             <h3>Behavior</h3>
 
             <ul class="section-body">
+              <li class="setting-container">
+                <h4>Terminal bell</h4>
+                <terminal-settings-checkbox
+                    preference="audible-bell-sound"
+                    .converter=${BELL_SOUND_CONVERTER}>
+                </terminal-settings-checkbox>
+              </li>
               <li class="setting-container">
                 <h4>Close window on exit</h4>
                 <terminal-settings-checkbox preference="close-on-exit">

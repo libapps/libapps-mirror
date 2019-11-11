@@ -14,11 +14,17 @@ describe('terminal_settings_checkbox_tests.js', () => {
   beforeEach(function() {
     window.preferenceManager =
       new lib.PreferenceManager(new lib.Storage.Memory());
-    window.preferenceManager.definePreference(preference, false);
+    window.preferenceManager.definePreference(preference, 'off');
+
+    const converter = {
+      toChecked: value => value === 'on',
+      fromChecked: checked => checked ? 'on' : 'off',
+    };
 
     this.el = /** @type {!TerminalSettingsCheckboxElement} */ (
         document.createElement('terminal-settings-checkbox'));
     this.el.setAttribute('preference', preference);
+    this.el.converter = converter;
     document.body.appendChild(this.el);
 
     // The element renders asynchronously.
@@ -32,30 +38,39 @@ describe('terminal_settings_checkbox_tests.js', () => {
   });
 
   it('updates-ui-when-preference-changes', async function() {
-    assert.isFalse(window.preferenceManager.get(preference));
+    assert.equal(window.preferenceManager.get(preference), 'off');
     assert.isFalse(this.el.shadowRoot.getElementById('checkbox').checked);
 
-    await window.preferenceManager.set(preference, true);
+    await window.preferenceManager.set(preference, 'on');
     assert.isTrue(this.el.shadowRoot.getElementById('checkbox').checked);
 
-    await window.preferenceManager.set(preference, false);
+    await window.preferenceManager.set(preference, 'off');
     assert.isFalse(this.el.shadowRoot.getElementById('checkbox').checked);
   });
 
   it('updates-preference-when-ui-changes', async function() {
-    assert.isFalse(window.preferenceManager.get(preference));
+    assert.equal(window.preferenceManager.get(preference), 'off');
     assert.isFalse(this.el.shadowRoot.getElementById('checkbox').checked);
 
     let prefChanged = test.listenForPrefChange(
         window.preferenceManager, preference);
     this.el.shadowRoot.getElementById('checkbox').click();
     await prefChanged;
-    assert.isTrue(window.preferenceManager.get(preference));
+    assert.equal(window.preferenceManager.get(preference), 'on');
 
     prefChanged = test.listenForPrefChange(
         window.preferenceManager, preference);
     this.el.shadowRoot.getElementById('checkbox').click();
     await prefChanged;
-    assert.isFalse(window.preferenceManager.get(preference));
+    assert.equal(window.preferenceManager.get(preference), 'off');
+  });
+
+  it('uses-trivial-converter-by-default', async function() {
+    const element = document.createElement('terminal-settings-checkbox');
+
+    assert.isTrue(element.converter.toChecked(true));
+    assert.isFalse(element.converter.toChecked(false));
+    assert.isTrue(element.converter.fromChecked(true));
+    assert.isFalse(element.converter.fromChecked(false));
   });
 });

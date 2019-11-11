@@ -10,6 +10,12 @@
 import {css, html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
 
+
+const DEFAULT_CONVERTER = {
+  toChecked: value => !!value,
+  fromChecked: checked => checked,
+};
+
 export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
   static get is() { return 'terminal-settings-checkbox'; }
 
@@ -19,11 +25,28 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
       preference: {
         type: String,
       },
+      // The preference value, which does not have to be a boolean. See property
+      // |converter|.
       value: {
-        type: Boolean,
-        reflect: true,
+        attribute: false,
+      },
+      // An optional converter, which converts preference value to/from checked
+      // state.
+      converter: {
+        type: Object,
+        attribute: false,
       },
     };
+  }
+
+  constructor() {
+    super();
+
+    /**
+     * @public {{toChecked: function(*): boolean,
+     *           fromChecked: function(boolean): *}}
+     */
+    this.converter = DEFAULT_CONVERTER;
   }
 
   static get styles() {
@@ -81,13 +104,13 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
   render() {
     return html`
         <input id="checkbox" type="checkbox" @change="${this.onUiChanged_}"
-            .checked="${this.value}" />
+            .checked="${this.converter.toChecked(this.value)}" />
     `;
   }
 
   /** @param {!Event} event */
   onUiChanged_(event) {
-    super.uiChanged_(event.target.checked);
+    super.uiChanged_(this.converter.fromChecked(event.target.checked));
   }
 }
 
