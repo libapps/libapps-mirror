@@ -12,6 +12,10 @@ window.addEventListener('DOMContentLoaded', () => {
   chrome.tabs.getCurrent(
       (tab) => { chrome.tabs.update(tab.id, {autoDiscardable: false}); });
 
+  lib.registerInit('terminal-private-storage', (onInit) => {
+    hterm.defaultStorage = new lib.Storage.TerminalPrivate(onInit);
+  });
+
   // Load i18n messages.
   lib.registerInit('messages', (onInit) => {
     lib.i18n.getAcceptLanguages(async (languages) => {
