@@ -30,8 +30,8 @@ lib.Storage.prototype.removeObserver = function(callback) {};
 /**
  * Delete everything in this storage.
  *
- * @param {function(!Object)=} callback The function to invoke when the
- *     delete has completed.
+ * @param {function()=} callback The function to invoke when the delete has
+ *     completed.
  */
 lib.Storage.prototype.clear = function(callback) {};
 

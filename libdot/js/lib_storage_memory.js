@@ -42,8 +42,8 @@ lib.Storage.Memory.prototype.removeObserver = function(callback) {
 /**
  * Delete everything in this storage.
  *
- * @param {function(!Object)=} callback The function to invoke when the
- *     delete has completed.
+ * @param {function()=} callback The function to invoke when the delete has
+ *     completed.
  * @override
  */
 lib.Storage.Memory.prototype.clear = function(callback) {
@@ -181,8 +181,8 @@ lib.Storage.Memory.prototype.setItems = function(obj, callback) {
  *
  * @param {string} key The key to be removed.
  * @param {function()=} callback Function to invoke when the remove is complete.
- *     You don't have to wait for the set to complete in order to read the value
- *     since the local cache is updated synchronously.
+ *     The local cache is updated synchronously, so reads will immediately
+ *     return undefined for this item even before removeItem completes.
  * @override
  */
 lib.Storage.Memory.prototype.removeItem = function(key, callback) {
@@ -198,8 +198,8 @@ lib.Storage.Memory.prototype.removeItem = function(key, callback) {
  *
  * @param {!Array<string>} ary The keys to be removed.
  * @param {function()=} callback Function to invoke when the remove is complete.
- *     You don't have to wait for the set to complete in order to read the value
- *     since the local cache is updated synchronously.
+ *     The local cache is updated synchronously, so reads will immediately
+ *     return undefined for these items even before removeItems completes.
  * @override
  */
 lib.Storage.Memory.prototype.removeItems = function(ary, callback) {

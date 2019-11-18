@@ -62,8 +62,8 @@ lib.Storage.Chrome.prototype.removeObserver = function(callback) {
 /**
  * Delete everything in this storage.
  *
- * @param {function(!Object)=} callback The function to invoke when the
- *     delete has completed.
+ * @param {function()=} callback The function to invoke when the delete has
+ *     completed.
  * @override
  */
 lib.Storage.Chrome.prototype.clear = function(callback) {
@@ -85,6 +85,7 @@ lib.Storage.Chrome.prototype.clear = function(callback) {
 lib.Storage.Chrome.prototype.getItem = function(key, callback) {
   this.storage_.get(key, callback);
 };
+
 /**
  * Fetch the values of multiple storage items.
  *
