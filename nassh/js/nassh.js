@@ -32,8 +32,28 @@ lib.registerInit(
         nassh.defaultStorage = new lib.Storage.Chrome(chrome.storage.sync);
       }
 
+      // Since our translation process only preserves \n (and discards \r), we
+      // have to manually insert them ourselves.
+      hterm.messageManager.useCrlf = true;
+
       onInit();
     });
+
+/**
+ * Loads messages for when chrome.i18n is not available.
+ *
+ * This should only be used in contexts outside of extensions/apps.
+ *
+ * @param {function()} callback Invoked when message loading is complete.
+ */
+nassh.loadMessages = function(callback) {
+  lib.i18n.getAcceptLanguages(async (languages) => {
+    // Load hterm.messageManager from /_locales/<lang>/messages.json.
+    const url = lib.f.getURL('/_locales/$1/messages.json');
+    await hterm.messageManager.findAndLoadMessages(url);
+    callback();
+  });
+};
 
 /**
  * Return a formatted message in the current locale.
@@ -43,14 +63,7 @@ lib.registerInit(
  * @return {string} The localized & formatted message.
  */
 nassh.msg = function(name, args) {
-  const rv = lib.i18n.getMessage(name, args, name);
-
-  // Since our translation process only preserves \n (and discards \r), we have
-  // to manually insert them here ourselves.  Any place we display translations
-  // should be able to handle \r correctly, and keeps us from having to remember
-  // to do it whenever we need to.  If a situation comes up where we don't want
-  // the \r, we can reevaluate this decision then.
-  return rv.replace(/\n/g, '\n\r');
+  return hterm.messageManager.get(name, args, name);
 };
 
 /**
