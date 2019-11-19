@@ -11,6 +11,10 @@ window.preferenceManagerLoaded = new Promise(resolve => {
 });
 
 window.addEventListener('DOMContentLoaded', (event) => {
+  lib.registerInit('terminal-private-storage', (onInit) => {
+    hterm.defaultStorage = new lib.Storage.TerminalPrivate(onInit);
+  });
+
   lib.init(() => {
     window.PreferenceManager = hterm.PreferenceManager;
     window.preferenceManager = new window.PreferenceManager('default');
