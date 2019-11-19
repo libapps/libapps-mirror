@@ -46,13 +46,12 @@ lib.registerInit(
  *
  * @param {function()} callback Invoked when message loading is complete.
  */
-nassh.loadMessages = function(callback) {
-  lib.i18n.getAcceptLanguages(async (languages) => {
-    // Load hterm.messageManager from /_locales/<lang>/messages.json.
-    const url = lib.f.getURL('/_locales/$1/messages.json');
-    await hterm.messageManager.findAndLoadMessages(url);
-    callback();
-  });
+nassh.loadMessages = async function(callback) {
+  // Load hterm.messageManager from /_locales/<lang>/messages.json.
+  hterm.messageManager.useCrlf = true;
+  const url = lib.f.getURL('/_locales/$1/messages.json');
+  await hterm.messageManager.findAndLoadMessages(url);
+  callback();
 };
 
 /**

@@ -17,14 +17,12 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // Load i18n messages.
-  lib.registerInit('messages', (onInit) => {
-    lib.i18n.getAcceptLanguages(async (languages) => {
-      // Replace and load hterm.messageManager.
-      hterm.messageManager = new lib.MessageManager(languages, true);
-      const url =  lib.f.getURL('/_locales/$1/messages.json');
-      await hterm.messageManager.findAndLoadMessages(url);
-      onInit();
-    });
+  lib.registerInit('messages', async (onInit) => {
+    // Load hterm.messageManager from /_locales/<lang>/messages.json.
+    hterm.messageManager.useCrlf = true;
+    const url =  lib.f.getURL('/_locales/$1/messages.json');
+    await hterm.messageManager.findAndLoadMessages(url);
+    onInit();
   });
 
   lib.registerInit('migrate-settings', terminal.migrateSettings);
