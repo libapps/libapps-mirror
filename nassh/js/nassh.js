@@ -29,7 +29,7 @@ lib.registerInit(
      */
     function(onInit) {
       if (!nassh.defaultStorage) {
-        nassh.defaultStorage = new lib.Storage.Chrome(chrome.storage.sync);
+        nassh.defaultStorage = hterm.defaultStorage;
       }
 
       // Since our translation process only preserves \n (and discards \r), we
