@@ -58,10 +58,10 @@ terminal.Menu.prototype.onHashChange_ = function(initialLoad, event) {
 
 /** Open settings page in a new window. */
 terminal.Menu.HANDLERS.set('#options', function(initialLoad) {
-  const url = '/html/terminal_settings.html';
+  const url = 'chrome://terminal/html/terminal_settings.html';
   if (initialLoad) {
     this.window.location.replace(url);
   } else {
-    this.window.open(url);
+    chrome.tabs.create({url});
   }
 });

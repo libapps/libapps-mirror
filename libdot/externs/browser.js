@@ -211,7 +211,7 @@ chrome.storage.sync;
 /** @const */
 chrome.tabs = {};
 
-/** @param {{url: string, active: boolean}} opts */
+/** @param {{url: (string|undefined), active: (boolean|undefined)}} opts */
 chrome.tabs.create = function(opts) {};
 
 /** @param {function({id:string})} callback */
