@@ -77,6 +77,7 @@ export class TerminalSettingsApp extends LitElement {
     super.performUpdate();
   }
 
+  /** @override */
   static get styles() {
     return css`
       :host {

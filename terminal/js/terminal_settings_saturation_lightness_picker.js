@@ -29,6 +29,7 @@ export class SaturationLightnessPickerElement extends LitElement {
     };
   }
 
+  /** @override */
   static get styles() {
     return css`
         :host {

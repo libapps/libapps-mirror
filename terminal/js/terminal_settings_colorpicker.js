@@ -42,6 +42,7 @@ export class TerminalSettingsColorpickerElement extends
     };
   }
 
+  /** @override */
   static get styles() {
     return css`
         #smallview {

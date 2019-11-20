@@ -43,6 +43,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
     };
   }
 
+  /** @override */
   static get styles() {
     return css`
         #container {

@@ -49,6 +49,7 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
     this.converter = DEFAULT_CONVERTER;
   }
 
+  /** @override */
   static get styles() {
     return css`
         #checkbox {

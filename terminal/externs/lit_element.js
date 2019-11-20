@@ -12,6 +12,7 @@
 var PropertyDeclaration;
 
 class TemplateResult {}
+class CSSResult {}
 
 /** @extends {HTMLElement} */
 class LitElement$$module$js$lit_element{
@@ -20,6 +21,12 @@ class LitElement$$module$js$lit_element{
    * @protected
    */
   static get properties() {};
+
+  /**
+   * @return {!CSSResult|!Array<CSSResult>}
+   * @protected
+   */
+  static get styles() {};
 
   /**
    * @return {?Promise}
