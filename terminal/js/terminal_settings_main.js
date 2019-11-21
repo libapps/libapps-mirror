@@ -5,9 +5,9 @@
 /**
  * @fileoverview Initializes global state used in terminal settings.
  */
-let resolvePreferenceManagerLoaded;
-window.preferenceManagerLoaded = new Promise(resolve => {
-  resolvePreferenceManagerLoaded = resolve;
+let resolveLibdotInitialized;
+window.libdotInitialized = new Promise(resolve => {
+  resolveLibdotInitialized = resolve;
 });
 
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -15,9 +15,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
     hterm.defaultStorage = new lib.Storage.TerminalPrivate(onInit);
   });
 
+  // Load i18n messages.
+  lib.registerInit('messages', async (onInit) => {
+    // Load hterm.messageManager from /_locales/<lang>/messages.json.
+    // Set "useCrlf" to match how the terminal is using it, although we don't
+    // actually need it for settings.
+    hterm.messageManager.useCrlf = true;
+    const url =  lib.f.getURL('/_locales/$1/messages.json');
+    await hterm.messageManager.findAndLoadMessages(url);
+    onInit();
+  });
   lib.init(() => {
     window.PreferenceManager = hterm.PreferenceManager;
     window.preferenceManager = new window.PreferenceManager('default');
-    window.preferenceManager.readStorage(resolvePreferenceManagerLoaded);
+    window.preferenceManager.readStorage(resolveLibdotInitialized);
   });
 });
