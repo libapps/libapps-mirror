@@ -165,20 +165,20 @@ export class TerminalSettingsApp extends LitElement {
         <terminal-settings-category-selector
             @category-change="${this.onCategoryChange_}">
           <terminal-settings-category-option for="appearance">
-            <h2 slot="title">Appearance</h2>
+            <h2 slot="title">${msg('TERMINAL_TITLE_PREF_APPEARANCE')}</h2>
           </terminal-settings-category-option>
           <terminal-settings-category-option for="mousekeyboard">
-            <h2 slot="title">Mouse & Keyboard</h2>
+            <h2 slot="title">${msg('TERMINAL_TITLE_PREF_KEYBOARD_MOUSE')}</h2>
           </terminal-settings-category-option>
           <terminal-settings-category-option for="behavior">
-            <h2 slot="title">Behavior</h2>
+            <h2 slot="title">${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}</h2>
           </terminal-settings-category-option>
         </terminal-settings-category-selector>
 
         <section class="terminal-settings-category"
             ?active-category="${this.activeCategory_ === "appearance"}">
           <section>
-            <h3>Background</h3>
+            <h3>${msg('TERMINAL_TITLE_PREF_BACKGROUND')}</h3>
 
             <ul class="section-body">
               <li class="setting-container theme-setting-container">
@@ -215,12 +215,12 @@ export class TerminalSettingsApp extends LitElement {
                 </div>
               </li>
               <li class="setting-container">
-                <h4>${msg('HTERM_NAME_PREF_BACKGROUND_COLOR')}</h4>
+                <h4>${msg('TERMINAL_NAME_PREF_COLOR')}</h4>
                 <terminal-settings-colorpicker preference="background-color">
                 </terminal-settings-colorpicker>
               </li>
               <li class="setting-container">
-                <h4>${msg('HTERM_NAME_PREF_BACKGROUND_IMAGE')}</h4>
+                <h4>${msg('TERMINAL_NAME_PREF_IMAGE')}</h4>
                 <!-- TODO(juwa@google.com): Add element -->
                 <input type="checkbox" />
               </li>
@@ -240,9 +240,11 @@ export class TerminalSettingsApp extends LitElement {
           </section>
 
           <section>
-            <h3>Text</h3>
+            <h3>${msg('TERMINAL_TITLE_PREF_TEXT')}</h3>
 
             <ul class="section-body">
+              <!-- TODO(lxj@google.com): merge options font family and font
+                  size -->
               <li class="setting-container">
                 <h4>${msg('HTERM_NAME_PREF_FONT_FAMILY')}</h4>
                 <terminal-settings-dropdown preference="font-family"
@@ -258,7 +260,7 @@ export class TerminalSettingsApp extends LitElement {
                 </terminal-settings-dropdown>
               </li>
               <li class="setting-container">
-                <h4>${msg('HTERM_NAME_PREF_FOREGROUND_COLOR')}</h4>
+                <h4>${msg('TERMINAL_NAME_PREF_COLOR')}</h4>
                 <terminal-settings-colorpicker preference="foreground-color">
                 </terminal-settings-colorpicker>
               </li>
@@ -272,21 +274,21 @@ export class TerminalSettingsApp extends LitElement {
           </section>
 
           <section>
-            <h3>Cursor</h3>
+            <h3>${msg('TERMINAL_TITLE_PREF_CURSOR')}</h3>
 
             <ul class="section-body">
               <li class="setting-container">
-                <h4>${msg('HTERM_NAME_PREF_CURSOR_SHAPE')}</h4>
+                <h4>${msg('TERMINAL_NAME_PREF_SHAPE')}</h4>
                 <terminal-settings-dropdown preference="cursor-shape">
                 </terminal-settings-dropdown>
               </li>
               <li class="setting-container">
-                <h4>${msg('HTERM_NAME_PREF_CURSOR_COLOR')}</h4>
+                <h4>${msg('TERMINAL_NAME_PREF_COLOR')}</h4>
                 <terminal-settings-colorpicker preference="cursor-color">
                 </terminal-settings-colorpicker>
               </li>
               <li class="setting-container">
-                <h4>${msg('HTERM_NAME_PREF_CURSOR_BLINK')}</h4>
+                <h4>${msg('TERMINAL_NAME_PREF_BLINKING')}</h4>
                 <terminal-settings-checkbox preference="cursor-blink">
                 </terminal-settings-checkbox>
               </li>
@@ -294,11 +296,11 @@ export class TerminalSettingsApp extends LitElement {
           </section>
 
           <section>
-            <h3>Scrollbar</h3>
+            <h3>${msg('TERMINAL_TITLE_PREF_SCROLLBAR')}</h3>
 
             <ul class="section-body">
               <li class="setting-container">
-                <h4>${msg('HTERM_NAME_PREF_SCROLLBAR_VISIBLE')}</h4>
+                <h4>${msg('TERMINAL_NAME_PREF_VISIBLE')}</h4>
                 <terminal-settings-checkbox preference="scrollbar-visible">
                 </terminal-settings-checkbox>
               </li>
@@ -385,7 +387,7 @@ export class TerminalSettingsApp extends LitElement {
             </ul>
           </section>
           <section>
-            <h3>Mouse</h3>
+            <h3>${msg('TERMINAL_TITLE_PREF_MOUSE')}</h3>
 
             <ul class="section-body">
               <li class="setting-container">
@@ -441,11 +443,11 @@ export class TerminalSettingsApp extends LitElement {
 
         <section class="terminal-settings-category"
             ?active-category="${this.activeCategory_ === "behavior"}">
-            <h3>Behavior</h3>
+            <h3>${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}</h3>
 
             <ul class="section-body">
               <li class="setting-container">
-                <h4>Terminal bell</h4>
+                <h4>${msg('TERMINAL_NAME_PREF_BELL')}</h4>
                 <terminal-settings-checkbox
                     preference="audible-bell-sound"
                     .converter=${BELL_SOUND_CONVERTER}>

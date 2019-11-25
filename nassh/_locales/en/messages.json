@@ -1721,6 +1721,34 @@
 		"description": "The menu label to clear the terminal screen.",
 		"message": "Terminal Clear"
 	},
+	"TERMINAL_NAME_PREF_BELL": {
+		"description": "Label text shown for the preference toggling the terminal bell sound.",
+		"message": "Bell"
+	},
+	"TERMINAL_NAME_PREF_BLINKING": {
+		"description": "Label text shown for the toggle preference controlling whether the cursor should be blinking.",
+		"message": "Blinking"
+	},
+	"TERMINAL_NAME_PREF_COLOR": {
+		"description": "Label text shown for preferences where users pick a color (e.g. font/background/cursor color).",
+		"message": "Color"
+	},
+	"TERMINAL_NAME_PREF_FONT": {
+		"description": "Label text shown for font-related preferences (e.g. Font family/Font size).",
+		"message": "Font"
+	},
+	"TERMINAL_NAME_PREF_IMAGE": {
+		"description": "Label text shown for preferences where users pick an image (e.g. background image).",
+		"message": "Image"
+	},
+	"TERMINAL_NAME_PREF_SHAPE": {
+		"description": "Label text shown for the preference where users pick a cursor shape.",
+		"message": "Shape"
+	},
+	"TERMINAL_NAME_PREF_VISIBLE": {
+		"description": "Label text shown for toggle preferences controlling visibility (e.g. scrollbar visibility).",
+		"message": "Visible"
+	},
 	"TERMINAL_PREVIEW_LABEL": {
 		"description": "Label for the preview window that allows users to preview their preferences (like color and font choices).",
 		"message": "Preview"
@@ -1728,6 +1756,42 @@
 	"TERMINAL_PROFILE_LABEL": {
 		"description": "Label for the current terminal emulator profile name. Profiles are used to customize things like color and fonts.",
 		"message": "Current profile"
+	},
+	"TERMINAL_TITLE_PREF_APPEARANCE": {
+		"description": "Header for the terminal Appearance preference category (e.g. background, Text and cursor appearance). Shown in a navigation sidebar.",
+		"message": "Appearance"
+	},
+	"TERMINAL_TITLE_PREF_BACKGROUND": {
+		"description": "Header for the terminal background preference sub-category (e.g. background color/image). Shown above all related settings.",
+		"message": "Background"
+	},
+	"TERMINAL_TITLE_PREF_BEHAVIOR": {
+		"description": "Header for the terminal behavior preference category (e.g. bell sound, whether to close window on exit). Shown in a navigation sidebar.",
+		"message": "Behavior"
+	},
+	"TERMINAL_TITLE_PREF_CURSOR": {
+		"description": "Header for the terminal cursor preference sub-category (e.g. cursor shape/color). Shown above all related settings.",
+		"message": "Cursor"
+	},
+	"TERMINAL_TITLE_PREF_KEYBOARD_MOUSE": {
+		"description": "Header for the terminal keyboard & mouse preference category (e.g. keyboard shortcuts, mouse wheel behavior). Shown in a navigation sidebar.",
+		"message": "Keyboard & mouse"
+	},
+	"TERMINAL_TITLE_PREF_SCROLLBAR": {
+		"description": "Header for the terminal scrollbar preference sub-category (e.g. scrollbar visibility). Shown above all related settings.",
+		"message": "Scrollbar"
+	},
+	"TERMINAL_TITLE_PREF_KEYBOARD": {
+		"description": "Header for the terminal keyboard preference sub-category (e.g. keyboard shortcuts and Alt key behavior). Shown above all related settings.",
+		"message": "Keyboard"
+	},
+	"TERMINAL_TITLE_PREF_MOUSE": {
+		"description": "Header for the terminal mouse preference sub-category (e.g. Mouse scroll wheel behavior). Shown above all related settings.",
+		"message": "Mouse"
+	},
+	"TERMINAL_TITLE_PREF_TEXT": {
+		"description": "Header for the terminal text preference sub-category (e.g. font family/size/color). Shown above all related settings.",
+		"message": "Text"
 	},
 	"TERMINAL_RESET_MENU_LABEL": {
 		"description": "The menu label to reset the active terminal settings.",
