@@ -1,3 +1,61 @@
+# 4.0.0, 2019-11-28, Tons of tooling improvements & linting cleanups.
+
+* bin: Log when/where we have an unpack cache hit.
+* storage: Add terminal private storage.
+* colors: Support hsla? css strings.
+* colors: Convert transparent hex values to rgba and vice versa.
+* bin: Drop mkzip & shell scripts.
+* minify-translations: Add a --glob option.
+* fs: Replace libdot.fs.FileReader with Blob.arrayBuffer/text.
+* lint: Support skip-mkdeps flag.
+* bin: Unify argument parsing & log setup in tools.
+* lib: Remove lib.waitUntil API.
+* PreferenceManager: Remove removeObserver API.
+* lint: Add support for eslint --fix.
+* eslint: Set max-len 80.
+* bin: unpack: Fix portability issues for Windows.
+* js: Rewrite code for jsdoc usage to avoid opt_ prefix.
+* npm/eslint: Enable jsdoc plugin & tag naming.
+* bin: logging: use colors with warning/error messages.
+* lint: Fill out all gerrit comments fields.
+* lint: Support generating deps before linting.
+* pylint: Support kokoro gerrit format.
+* mkdist: New helper for building our release.
+* lint: Add third_party js files to default set.
+* js: Clean up jsdoc more.
+* externs: js compilation.
+* bin: fetch: Fix portability issues for Windows.
+* event: Rework to remove unused APIs.
+* lint: Support kokoro gerrit format for closure.
+* lib.PreferenceManager: Extract addObserver to a public function.
+* fs: Migrate lib.fs.getOrCreateDirectory to Promises.
+* fs: Migrate lib.fs.overwriteFile to Promises.
+* fs: Migrate getOrCreateFile to Promises.
+* lint: Improve gerrit comments output.
+* fs: Migrate readFile to Promises.
+* storage: Create common interface.
+* bin: Dump stdout/stderr when commands fail.
+* tests: Drop support for node testing.
+* externs: Add APIs for closure.
+* js: Clean up closure compilation.
+* lib: Add lib.assert and lib.notNull to help JS compilation and tests.
+* lint: Fix default filter.
+* lint: Support kokoro gerrit format for eslint.
+* lint: Fix chdir logic with default paths.
+* lint: Have all packages specify closure args.
+* pylint: Clean up various pylint issues in the code base.
+* node: Rework code sharing.
+* load_tests: Rework code sharing.
+* concat: Rework code sharing.
+* lint: Unify lint helper program.
+* bin: Add machinery for importing our python programs.
+* lib.MessageManager: Add Crlf mangling, internalize some members, and switch
+  to Promise based API.
+* eslint: Turn on more rules.
+* js: Fix lint and closure-compile errors.
+* bin: Drop Python 3.4 workaround.
+* closure-compiler: New tool wrapper.
+
 # 3.0.0, 2019-08-06, Few API improvements, and lots of test suite improvements.
 
 * punycode: Drop our local copy & get from npm.
