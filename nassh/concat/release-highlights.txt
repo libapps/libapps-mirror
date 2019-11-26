@@ -16,6 +16,8 @@
 % --config=google no longer enables ssh-agent forwarding for many hosts; add -A to your ssh commandline as needed.
 
 # release: 0.18 (stable Jun 18)
-% \x1b]8;;https://www.openssh.com/txt/release-8.0\x07OpenSSH upgraded to 8.0p1\x1b]8;;\x07.
 % \x1b]8;;https://unicode.org/versions/Unicode12.1.0/\x07Unicode tables updated to 12.1.0 release\x1b]8;;\x07.
 % \x1b]8;;https://unicode.org/reports/tr29/\x07Unicode strings now split by graphemes according to UAX29\x1b]8;;\x07.
+
+# release: 0.20 (stable Nov 28)
+% \x1b]8;;https://www.openssh.com/txt/release-8.1\x07OpenSSH upgraded to 8.1p1\x1b]8;;\x07.

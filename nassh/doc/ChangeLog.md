@@ -1,3 +1,72 @@
+# 0.20, 2019-11-28, OpenSSH 8.1p1 & code cleanups.
+
+* Update to hterm 1.87.  Tons of linting/cleanups.
+* Update to libdot 4.0.0.  Tons of tooling improvements & linting cleanups.
+* nassh: Use hterm default storage.
+* mkdist: Gzip crosh files.
+* crosh: Fix preferences page to run in chrome://terminal.
+* l10n: Add loadMessages, reuse hterm messageManager.
+* ssh_client: openssh: Initial wasm port.
+* ssh_client: wassh-libc-sup: Custom C library additions.
+* uri: Add option -nassh-args=--no-welcome.
+* mkdist: Minify CSS/JS files for crosh.
+* mkdist: Improve minification a bit.
+* mkdist: Filter out more unused files.
+* ssh_client: wasi-sdk: Update to 8.0.
+* mkcrosh/mkzip/promote: Drop shell scripts.
+* mkdist: Rewrite release generation.
+* doc: FAQ: Correct docs to note that osc52.vim supports screen/tmux.
+* ssh_client: naclsdk: Switch to tar.xz.
+* nasftp: ls: Support listing files.
+* js: Replace libdot.fs.FileReader with Blob.arrayBuffer/text.
+* ssh_client: wasi-sdk: Add patch for fifo defines.
+* bin: Unify argument parsing & log setup.
+* nassh.getFileSystem: Fix to return single object in Promise.
+* stream: Drop /dev/random handler.
+* ssh_client: Move glibc-compat to nacl toolchain.
+* ssh_client: openssh: Update to 8.1p1 release.
+* ssh_client: openssh: Disable some more unused code.
+* npm/rollup: Depend on lit-element for Terminal.
+* ssh_client: openssh-8.0: Add upstream fix for chown/chmod fallbacks.
+* ssh_client: ldns: Force some struct tests.
+* ssh_client: openssl: Initial wasm port.
+* ssh_client: build.sh: Refactor a bit to build nacl & wasm.
+* ssh_client: Initial wasm toolchain support.
+* ssh_client: Import wasm tools.
+* js: Fill out remaining jsdocs & update APIs.
+* eslint: Enable more jsdoc checks.
+* eslint: Set max-len 80.
+* js: Rewrite code for jsdoc usage.
+* ssh_client: Support multiple versions of openssh.
+* eslint: Enable jsdoc plugin & tag naming.
+* ssh_client: improve --host/--build handling.
+* ssh_client: gnuconfig: Add build package.
+* kokoro: Slim down container.
+* ssh_client: Move openssh libs into the sysroot.
+* ssh_client: Overhaul toolchain management to support multiple types.
+* mkdeps: Add option to skip rollup.
+* nassh: Get v2 app working again.
+* fs: Migrate lib.fs APIs to Promises.
+* kokoro: Add ssh client archive to output.
+* tests: Drop support for node testing.
+* lint: Fix chdir logic with default paths.
+* docker: Upgrade build to buster.
+* pylint: Clean up various pylint issues in the code base.
+* google-smart-card: Port helper script to Python 3.
+* lint: Unify helper program.
+* crosh: Use lib.MessageManager rather than chrome.i18n.
+* eslint: Turn on more rules.
+* filter_translations: Fix inplace usage.
+* js: Fix lint and closure-compile errors.
+* lint: Use new closure-compiler wrapper.
+* crosh/nassh: Pass commandName in Command constructor.
+* nassh: openNewWindow: Use new API to open new windows.
+* external api: Add an "nassh" API.
+* doc: Split api doc out.
+* gsc: Allow non-numeric PIV PINs to be sent to the card.
+* openWindow: use absolute html paths everywhere.
+* mkcrosh: Support for bundling chrome://terminal.
+
 # 0.19, 2019-08-06, Minor bug fixes & better licensing info.
 
 * Update to hterm 1.86.  Very minor improvements.
