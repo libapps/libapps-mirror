@@ -547,7 +547,7 @@ nassh.PreferencesEditor.prototype.createInput = function(key) {
   var addOption = function(parent, value) {
     var option = document.createElement('option');
     option.value = JSON.stringify(value);
-    option.innerText = (value === null ? "auto" : value);
+    option.innerText = (value === null ? 'auto' : value);
     parent.appendChild(option);
   };
 

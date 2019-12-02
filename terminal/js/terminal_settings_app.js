@@ -21,7 +21,7 @@ import './terminal_settings_transparency_slider.js';
 
 const THEME_FONT_FAMILY = "'DejaVu Sans Mono', 'Noto Sans Mono', " +
                           "'Everson Mono', FreeMono, Menlo, Terminal, " +
-                          "monospace";
+                          'monospace';
 
 const BELL_SOUND_CONVERTER = {
   toChecked: value => !!value,
@@ -35,7 +35,7 @@ const BELL_SOUND_CONVERTER = {
 function altGrModeToText(mode) {
   switch (mode) {
     case null:
-      return "Auto";
+      return 'Auto';
     case 'none':
       return 'Disable';
     default:
@@ -67,7 +67,7 @@ export class TerminalSettingsApp extends LitElement {
   constructor() {
     super();
 
-    this.activeCategory_ = "appearance";
+    this.activeCategory_ = 'appearance';
   }
 
   /** @override */
@@ -176,7 +176,7 @@ export class TerminalSettingsApp extends LitElement {
         </terminal-settings-category-selector>
 
         <section class="terminal-settings-category"
-            ?active-category="${this.activeCategory_ === "appearance"}">
+            ?active-category="${this.activeCategory_ === 'appearance'}">
           <section>
             <h3>${msg('TERMINAL_TITLE_PREF_BACKGROUND')}</h3>
 
@@ -309,7 +309,7 @@ export class TerminalSettingsApp extends LitElement {
         </section>
 
         <section class="terminal-settings-category"
-            ?active-category="${this.activeCategory_ === "mousekeyboard"}">
+            ?active-category="${this.activeCategory_ === 'mousekeyboard'}">
           <section>
             <h3>${msg('HTERM_TITLE_PREF_KEYBOARD')}</h3>
 
@@ -442,7 +442,7 @@ export class TerminalSettingsApp extends LitElement {
         </section>
 
         <section class="terminal-settings-category"
-            ?active-category="${this.activeCategory_ === "behavior"}">
+            ?active-category="${this.activeCategory_ === 'behavior'}">
             <h3>${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}</h3>
 
             <ul class="section-body">

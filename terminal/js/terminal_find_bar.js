@@ -101,7 +101,7 @@ export class TerminalFindBar extends LitElement {
   /** @override */
   render() {
     const nextPreviousButtonClass =
-        this.inputIsEmpty_ ? "button" : "button enabled";
+        this.inputIsEmpty_ ? 'button' : 'button enabled';
 
     // TODO(lxj@google.com): i18n the accessibility label
     return html`

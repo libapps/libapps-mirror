@@ -212,9 +212,9 @@ nassh.sftp.fsp.onOpenFileRequested = function(options, onSuccess, onError) {
 
   var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
   var pflags = 0;
-  if (options.mode == "READ") {
+  if (options.mode == 'READ') {
     pflags |= nassh.sftp.packets.OpenFlags.READ;
-  } else if (options.mode == "WRITE") {
+  } else if (options.mode == 'WRITE') {
     pflags |= nassh.sftp.packets.OpenFlags.WRITE;
   }
 

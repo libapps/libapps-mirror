@@ -43,7 +43,7 @@ describe('terminal_settings_dropdown_tests.js', () => {
   });
 
   it('uses-explicit-options-if-present', async function() {
-    this.el.options = ["override1", "override2"];
+    this.el.options = ['override1', 'override2'];
     assert.deepEqual(this.el.getOptions_(), ['override1', 'override2']);
   });
 

@@ -327,7 +327,7 @@ Crosh.prototype.onTerminalResize_ = function(width, height) {
       Number(width), Number(height),
       function(success) {
         if (!success)
-          console.warn("terminalPrivate.onTerminalResize failed");
+          console.warn('terminalPrivate.onTerminalResize failed');
       }
   );
 };

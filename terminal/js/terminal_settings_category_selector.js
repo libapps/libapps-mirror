@@ -9,7 +9,7 @@
  */
 import {LitElement, html} from './lit_element.js';
 
-const PASSED_THROUGH_OPTION = Symbol("PASSED_THROUGH_OPTION");
+const PASSED_THROUGH_OPTION = Symbol('PASSED_THROUGH_OPTION');
 
 export class TerminalSettingsCategoryOptionElement extends LitElement {
   static get is() { return 'terminal-settings-category-option'; }

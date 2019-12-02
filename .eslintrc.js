@@ -78,6 +78,8 @@ module.exports = {
     'no-with': 'error',
     'prefer-numeric-literals': 'error',
     'quote-props': ['error', 'consistent'],
+    'quotes': ['error', 'single',
+               {'avoidEscape': true, 'allowTemplateLiterals': true}],
     'rest-spread-spacing': 'error',
     'semi': ['error', 'always'],
     'semi-style': ['error', 'last'],

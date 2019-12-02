@@ -28,7 +28,7 @@ nassh.CommandInstance = function(argv) {
   this.argv_ = argv;
 
   // Whether to show welcome messages.
-  this.welcome_ = !argv.args.some(arg => arg.includes("--no-welcome"));
+  this.welcome_ = !argv.args.some(arg => arg.includes('--no-welcome'));
 
   // Command environment.
   this.environment_ = argv.environment || {};
