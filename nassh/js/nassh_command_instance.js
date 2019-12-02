@@ -27,9 +27,6 @@ nassh.CommandInstance = function(argv) {
   // Command arguments.
   this.argv_ = argv;
 
-  // Whether to show welcome messages.
-  this.welcome_ = !argv.args.some(arg => arg.includes('--no-welcome'));
-
   // Command environment.
   this.environment_ = argv.environment || {};
 
@@ -141,10 +138,7 @@ nassh.CommandInstance.prototype.run = function() {
     this.io.print('\x1b]0;' + this.manifest_.name + ' ' +
                     this.manifest_.version + '\x07');
 
-    // Welcome unless --no-welcome.
-    if (this.welcome_) {
-      showWelcome();
-    }
+    showWelcome();
 
     nassh.getFileSystem()
       .then(onFileSystemFound)
@@ -906,6 +900,11 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
                  `currently supported`);
   }
 
+  if (options['--welcome'] === false) {
+    // Clear terminal display area.
+    this.io.terminal_.clearHome();
+  }
+
   // If the user has requested a proxy relay, load it up.
   if (options['--proxy-mode'] == 'ssh-fe@google.com') {
     this.relay_ = new nassh.Relay.Sshfe(this.io, options, params.username);
@@ -1063,10 +1062,6 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
           'beforeunload', this.onBeforeUnload_);
     }
 
-    if (!this.welcome_) {
-      // Clear terminal display area.
-      this.io.print('\x1b[2J\x1b[0;0H');
-    }
 
     this.io.println(nassh.msg('CONNECTING',
                               [`${params.username}@${disp_hostname}`]));

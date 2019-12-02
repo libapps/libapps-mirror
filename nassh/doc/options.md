@@ -100,6 +100,12 @@ Here are some versions that might be available:
 * `pnacl`: The default OpenSSH version built for NaCl most people should use.
 * `pnacl-openssh-7.5p1`: An older OpenSSH release.
 
+## `--welcome`
+
+Display the normal welcome/tips/etc... messages when loading a connection.
+Users are probably interested in the `--no-welcome` inverse to automatically
+clear all of this when connecting.
+
 
 [Relay Protocol]: relay-protocol.md
 [Section 6 of RFC4251]: https://tools.ietf.org/html/rfc4251#section-6
