@@ -187,9 +187,12 @@ def mkzip(manifest, stamps=()):
         basename += '-dev'
     else:
         # Point the icons to the stable version.
-        for size in data['icons'].keys():
-            data['icons'][size] = re.sub(r'/dev/', '/stable/',
-                                         data['icons'][size])
+        def _update_icons(icons):
+            for size in icons.keys():
+                icons[size] = re.sub(r'/dev/', '/stable/', icons[size])
+        _update_icons(data['icons'])
+        if 'browser_action' in data:
+            _update_icons(data['browser_action']['default_icon'])
     data['name'] = name
 
     basename += '-' + version
