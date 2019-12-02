@@ -3,7 +3,7 @@
   "minimum_chrome_version": "57",
   "manifest_version": 2,
   "name": "Secure Shell App V2 (tot)",
-  "version": "0.20",
+  "version": "0.21",
   "default_locale": "en",
   "icons": {
     "128": "images/dev/icon-128.png",

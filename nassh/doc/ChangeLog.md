@@ -1,3 +1,9 @@
+# 0.21, 2019-12-02, SFTP mount fix.
+
+* nassh: Fix up new --welcome setting.
+* eslint: Enable single quote checking.
+* mkdist: Update extension icons too.
+
 # 0.20, 2019-11-28, OpenSSH 8.1p1 & code cleanups.
 
 * Update to hterm 1.87.  Tons of linting/cleanups.
