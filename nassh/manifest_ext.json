@@ -21,8 +21,14 @@
     "notifications",
     "storage",
     "unlimitedStorage",
+    "fileSystemProvider",
     "accessibilityFeatures.read"
   ],
+  "file_system_provider_capabilities": {
+    "multiple_mounts": true,
+    "configurable": true,
+    "source": "network"
+  },
   "web_accessible_resources": [
     "html/nassh.html",
     "html/nassh_google_relay.html",
