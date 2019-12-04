@@ -166,7 +166,7 @@ nassh.App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
       // We'll abuse this to open a window instead of a tab.
       lib.f.openWindow(url, '',
                        'chrome=no,close=yes,resize=yes,minimizable=yes,' +
-                       'scrollbars=yes,width=900,height=600,noopener');
+                       'scrollbars=yes,width=900,height=600');
       break;
   }
 };
