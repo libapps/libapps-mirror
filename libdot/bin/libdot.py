@@ -245,7 +245,7 @@ def node_and_npm_setup():
 
     # Make sure our tools show up first in $PATH to override the system.
     path = os.getenv('PATH')
-    os.environ['PATH'] = '%s:%s' % (node.NODE_BIN_DIR, path)
+    os.environ['PATH'] = os.pathsep.join((node.NODE_BIN_DIR, path))
 
 
 # A snapshot of Chrome that we update from time to time.

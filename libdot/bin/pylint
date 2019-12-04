@@ -75,7 +75,7 @@ def run_pylint(opts, pythonpaths=()):
     paths = [libdot.BIN_DIR] + list(pythonpaths)
     if path is not None:
         paths.append(path)
-    env['PYTHONPATH'] = ':'.join(paths)
+    env['PYTHONPATH'] = os.pathsep.join(paths)
 
     pylintrc = os.path.relpath(os.path.join(libdot.LIBAPPS_DIR, '.pylintrc'),
                                os.getcwd())

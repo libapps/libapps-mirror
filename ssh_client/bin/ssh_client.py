@@ -184,7 +184,7 @@ def _toolchain_pnacl_env():
         'CHOST': 'nacl',
         'NACL_ARCH': 'pnacl',
         'NACL_SDK_ROOT': nacl_sdk_root,
-        'PATH': '%s:%s' % (bin_dir, os.environ['PATH']),
+        'PATH': os.path.sep.join((bin_dir, os.environ['PATH'])),
         'CC': compiler_prefix + 'clang',
         'CXX': compiler_prefix + 'clang++',
         'AR': compiler_prefix + 'ar',
@@ -369,7 +369,7 @@ def build_package(module, default_toolchain):
     metadata['toolchain'] = toolchain
 
     os.environ['HOME'] = HOME
-    os.environ['PATH'] = '%s:%s' % (BUILD_BINDIR, os.environ['PATH'])
+    os.environ['PATH'] = os.pathsep.join((BUILD_BINDIR, os.environ['PATH']))
 
     # Run all the source phases now to build it.
     common_module = sys.modules[__name__]
