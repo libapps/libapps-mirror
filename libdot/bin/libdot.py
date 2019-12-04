@@ -321,10 +321,6 @@ def node_and_npm_setup():
     node.modules_update()
     node.update()
 
-    # Make sure our tools show up first in $PATH to override the system.
-    path = os.getenv('PATH')
-    os.environ['PATH'] = os.pathsep.join((node.NODE_BIN_DIR, path))
-
 
 def load_module(name, path):
     """Load a module from the filesystem.

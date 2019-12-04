@@ -163,8 +163,7 @@ def run_eslint(opts, extra_args=()):
     if opts.fix:
         cmd += ['--fix']
 
-    # We know our tools are first in $PATH now.
-    result = libdot.run(cmd + opts.paths, check=False)
+    result = libdot.node.run(cmd + opts.paths, check=False)
     if result.returncode:
         ret = False
 
@@ -176,8 +175,8 @@ def run_eslint(opts, extra_args=()):
                 os.makedirs(dirname, exist_ok=True)
 
             cmd += ['--format=json']
-            result = libdot.run(cmd + opts.paths, check=False,
-                                capture_output=True)
+            result = libdot.node.run(cmd + opts.paths, check=False,
+                                     capture_output=True)
 
             # Save a copy for debugging later.
             with open(comments_path + '.in', 'wb') as fp:

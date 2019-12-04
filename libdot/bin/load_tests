@@ -81,9 +81,11 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
 
     # Kick off server if needed.
     if serve:
-        server = subprocess.Popen(['http-server', '-a', 'localhost', '-c-1',
-                                   '--cors'],
-                                  cwd=libdot.LIBAPPS_DIR)
+        server = subprocess.Popen(
+            [libdot.node.NODE,
+             os.path.join(libdot.node.NODE_BIN_DIR, 'http-server'),
+             '-a', 'localhost', '-c-1', '--cors'],
+            cwd=libdot.LIBAPPS_DIR)
         path = 'http://localhost:8080/%s' % path
 
     # Some environments are unable to utilize the sandbox: we're not running as
@@ -103,8 +105,8 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
             subprocess.Popen([browser, '--user-data-dir=%s' % (profile_dir,),
                               path] + sb_arg)
         else:
-            libdot.run(['mocha-headless-chrome', '-e', browser, '-f', path,
-                        '--reporter', opts.reporter] + mocha_sb_arg)
+            libdot.node.run(['mocha-headless-chrome', '-e', browser, '-f', path,
+                             '--reporter', opts.reporter] + mocha_sb_arg)
     finally:
         # Wait for the server if it exists.
         if serve:

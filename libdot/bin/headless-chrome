@@ -65,9 +65,7 @@ def main(argv):
     libdot.node_and_npm_setup()
 
     chrome_bin = chrome_setup()
-    # We know our tools are first in $PATH now.
-    os.execvp('mocha-headless-chrome',
-              ['mocha-headless-chrome', '-e', chrome_bin] + argv)
+    libdot.node.run(['mocha-headless-chrome', '-e', chrome_bin] + argv)
 
 
 if __name__ == '__main__':

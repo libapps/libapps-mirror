@@ -244,11 +244,12 @@ def test_unittests():
         pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
         if os.path.exists(os.path.join(pkg_dir, 'package.json')):
             cmd = ['npm', 'test', '--'] + test_args
+            run = libdot.node.run
         else:
             cmd = ['./bin/load_tests'] + test_args
-        result = libdot.run(cmd, check=False, cwd=pkg_dir,
-                            stdout=subprocess.PIPE,
-                            stderr=subprocess.STDOUT)
+            run = libdot.run
+        result = run(cmd, check=False, cwd=pkg_dir,
+                     stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
         if result.returncode:
             logging.error('%s test suite exited %i', pkg, result.returncode)
@@ -276,7 +277,8 @@ def test_unittests():
             print(f'<xml data is in {xml_file}>')
             print(log_footer.decode('utf-8'))
         else:
-            logging.error('Unable to parse xml results from log output!')
+            logging.error('Unable to parse xml results from log output!\n%s',
+                          result.stdout.decode('utf-8'))
             ret.append(('unittests', pkg))
 
     return ret

@@ -64,7 +64,7 @@ def mkdeps(rollup=True):
     libdot.concat.concat(os.path.join(nassh.DIR, 'concat', 'nassh_deps.concat'),
                          os.path.join(nassh.DIR, 'js', 'nassh_deps.concat.js'))
     if rollup:
-        libdot.run(['rollup', '-c'], cwd=nassh.DIR)
+        libdot.node.run(['rollup', '-c'], cwd=nassh.DIR)
 
 
 def concat_third_party_dir(third_party_dir):
@@ -114,14 +114,14 @@ def concat_local_deps():
 
 def concat_licenses():
     """Concatenate all licenses of npm dependencies."""
-    ret = libdot.run([
+    ret = libdot.node.run([
         'license-checker', '--search', nassh.DIR, '--onlyunknown',
         '--production', '--csv',
     ], capture_output=True, cwd=nassh.DIR)
     # 'Found error' in stderr indicates that no packages with unspecified
     # licenses were found.
     if b'Found error' in ret.stderr:
-        ret = libdot.run([
+        ret = libdot.node.run([
             'license-checker', '--search', nassh.DIR, '--unknown',
             '--production', '--json', '--onlyAllow',
             ';'.join(sorted(ALLOWED_LICENSES)),

@@ -52,6 +52,24 @@ NPM = os.path.join(NODE_BIN_DIR, 'npm')
 NODE_DIR = os.path.join(NODE_MODULES_DIR, '.node')
 
 
+def run(cmd, **kwargs):
+    """Run the node |cmd|.
+
+    This assumes |cmd| is a node program.  Different OS's might need to invoke
+    node differently, so wrap the calls here.
+    """
+    # We need the node bin dir to be at the start of the $PATH as some packages
+    # will try to run other npm packages directly.
+    extra_env = kwargs.setdefault('extra_env', {})
+    assert 'PATH' not in extra_env
+    extra_env['PATH'] = os.pathsep.join([NODE_BIN_DIR, os.getenv('PATH')])
+    return libdot.run(
+        cmd[1:],
+        cmd_prefix=[NODE, os.path.join(NODE_BIN_DIR, cmd[0])],
+        log_prefix=[cmd[0]],
+        **kwargs)
+
+
 def update():
     """Download & update our copy of node."""
     osname = platform.system()
@@ -134,8 +152,7 @@ def main(argv):
     """The main func!"""
     libdot.setup_logging()
     libdot.node_and_npm_setup()
-    # We know our tools are first in $PATH now.
-    os.execvp(NODE, ['node'] + argv)
+    os.execv(NODE, ['node'] + argv)
 
 
 if __name__ == '__main__':

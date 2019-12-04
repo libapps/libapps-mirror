@@ -8,7 +8,6 @@
 
 from __future__ import print_function
 
-import os
 import sys
 
 import libdot
@@ -18,8 +17,7 @@ def main(argv):
     """The main func!"""
     libdot.setup_logging()
     libdot.node_and_npm_setup()
-    # We know our tools are first in $PATH now.
-    os.execvp('npm', ['npm'] + argv)
+    libdot.node.run(['npm'] + argv)
 
 
 if __name__ == '__main__':
