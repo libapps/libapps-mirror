@@ -144,7 +144,7 @@ def cmdstr(cmd):
     return ' '.join(quoted)
 
 
-def run(cmd, check=True, cwd=None, **kwargs):
+def run(cmd, check=True, cwd=None, extra_env=None, **kwargs):
     """Run |cmd| inside of |cwd| and exit if it fails."""
     # Python 3.6 doesn't support capture_output.
     if sys.version_info < (3, 7):
@@ -153,6 +153,14 @@ def run(cmd, check=True, cwd=None, **kwargs):
             assert 'stdout' not in kwargs and 'stderr' not in kwargs
             kwargs['stdout'] = subprocess.PIPE
             kwargs['stderr'] = subprocess.PIPE
+
+    # The |env| setting specifies the entire environment, so we need to manually
+    # merge our |extra_env| settings into it before passing it along.
+    if extra_env is not None:
+        env = kwargs.pop('env', os.environ)
+        env = env.copy()
+        env.update(extra_env)
+        kwargs['env'] = env
 
     if cwd is None:
         cwd = os.getcwd()
@@ -177,13 +185,18 @@ def unpack(archive, cwd=None, files=()):
     else:
         files = []
 
+    # Try to make symlink usage easier in Windows.
+    extra_env = {
+        'MSYS': 'winsymlinks:nativestrict',
+    }
+
     logging.info('Unpacking %s', os.path.basename(archive))
     # We use relpath here to help out tar on platforms where it doesn't like
     # paths with colons in them (e.g. Windows).  We have to construct the full
     # before running through relpath as relative archives will implicitly be
     # checked against os.getcwd rather than the explicit cwd.
     src = os.path.relpath(os.path.join(cwd, archive), cwd)
-    run(['tar', '-xf', src] + files, cwd=cwd)
+    run(['tar', '-xf', src] + files, cwd=cwd, extra_env=extra_env)
 
 
 def fetch(uri, output):
