@@ -47,6 +47,10 @@ lib.Storage.TerminalPrivate.prototype.onSettingsChanged_ = function(settings) {
       e[key] = {oldValue: this.prefValue_[key], newValue: undefined};
     }
   }
+  for (const key in e) {
+    delete this.prefValue_[key];
+  }
+
   // Check what has changed.
   for (const key in settings) {
     const oldValue = this.prefValue_[key];
@@ -56,6 +60,7 @@ lib.Storage.TerminalPrivate.prototype.onSettingsChanged_ = function(settings) {
       continue;
     }
     e[key] = {oldValue, newValue};
+    this.prefValue_[key] = newValue;
   }
 
   setTimeout(() => {
