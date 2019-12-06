@@ -3,7 +3,7 @@
   "minimum_chrome_version": "65",
   "manifest_version": 2,
   "content_security_policy": "script-src 'self'; object-src 'self'",
-  "name": "Secure Shell Extension (tot)",
+  "name": "Secure Shell (tot)",
   "version": "0.21",
   "default_locale": "en",
   "icons": {
