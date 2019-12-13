@@ -14,7 +14,8 @@ The nassh background page adds a listener for
 The possible messages are documented in the next sections, but they all must
 have the `command` field set to select the right function.
 
-The API will then respond with an object of the form:
+The API will then respond with an object of the basic form
+(some commands might contain more fields):
 
 | Field name     | Type    | Description |
 |----------------|---------|-------------|
@@ -56,6 +57,23 @@ Internal callers use the same form but omit `id` as it'll automatically go to
 the right background page.
 
 ## API
+
+### Hello
+
+This is a simple stub message to help with debugging.
+It will respond with some basic messaging details.
+
+| Field name     | Type    | Description |
+|----------------|---------|-------------|
+| `command`      | !string | Must be `hello`. |
+
+The response will have these additional fields:
+
+| Field name     | Type    | Description |
+|----------------|---------|-------------|
+| `message`      | !string | Will be `hello`. |
+| `internal`     | bool    | Whether the sender is the same extension. |
+| `id`           | string  | The extension id of the sender. |
 
 ### Mount
 

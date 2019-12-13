@@ -15,6 +15,23 @@ nassh.External = {};
 nassh.External.COMMANDS = {};
 
 /**
+/**
+ * Probe the extension.
+ *
+ * @param {*} request The hello message.
+ * @param {{id:string}} sender chrome.runtime.MessageSender
+ * @param {function(!Object=)} sendResponse called to send response.
+ */
+nassh.External.COMMANDS.hello = (request, sender, sendResponse) => {
+  sendResponse({
+    error: false,
+    message: 'hello',
+    internal: sender.internal,
+    id: sender.id,
+  });
+};
+
+/**
  * Root dir for all files to be written under.
  *
  * @const
