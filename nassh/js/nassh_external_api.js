@@ -171,8 +171,60 @@ nassh.External.COMMANDS.nassh = function(request, sender, sendResponse) {
       request, sender, sendResponse);
 };
 
+/**
+ * Whether we've initialized enough for message handlers.
+ *
+ * @private
+ */
+let messageHandlersReady = false;
+
 /** @typedef {{command:string}} */
 nassh.External.OnMessageRequest;
+
+/**
+ * Common message dispatcher.
+ *
+ * @param {boolean} internal Whether the sender is this own extension.
+ * @param {!nassh.External.OnMessageRequest} request
+ * @param {{id:string}} sender chrome.runtime.MessageSender.
+ * @param {function(!Object=)} sendResponse called to send response.
+ * @return {boolean} Whether sendResponse will be called asynchronously.
+ * @private
+ */
+nassh.External.dispatchMessage_ = (internal, request, sender, sendResponse) => {
+  // If we aren't ready yet, reschedule the call.
+  if (!messageHandlersReady) {
+    window.setTimeout(
+        nassh.External.dispatchMessage_.bind(
+            this, internal, request, sender, sendResponse),
+        100);
+    return true;
+  }
+
+  // Pass the internal setting down so the handler can easily detect.
+  sender.internal = internal;
+
+  // Execute specified command.
+  if (typeof request != 'object') {
+    sendResponse({error: true, message: `invalid request: ${request}`});
+    return false;
+  } else if (!nassh.External.COMMANDS.hasOwnProperty(request.command)) {
+    sendResponse(
+        {error: true, message: `unsupported command '${request.command}'`});
+    return false;
+  }
+  try {
+    nassh.External.COMMANDS[request.command].call(
+        this, request, sender, sendResponse);
+
+    // Return true to allow async sendResponse.
+    return true;
+  } catch (e) {
+    console.error(e);
+    sendResponse({error: true, message: e.message, stack: e.stack});
+    return false;
+  }
+};
 
 /**
  * Invoked when external app/extension calls chrome.runtime.sendMessage.
@@ -181,59 +233,27 @@ nassh.External.OnMessageRequest;
  * @param {!nassh.External.OnMessageRequest} request
  * @param {{id:string}} sender chrome.runtime.MessageSender.
  * @param {function(!Object=)} sendResponse called to send response.
- * @return {boolean}
+ * @return {boolean} Whether sendResponse will be called asynchronously.
  * @private
  */
 nassh.External.onMessageExternal_ = (request, sender, sendResponse) => {
-  sender.internal = false;
-
-  // Execute specified command.
-  if (!nassh.External.COMMANDS.hasOwnProperty(request.command)) {
-    sendResponse(
-        {error: true, message: `unsupported command ${request.command}`});
-    return false;
-  }
-  try {
-    nassh.External.COMMANDS[request.command].call(
-        this, request, sender, sendResponse);
-
-    // Return true to allow async sendResponse.
-    return true;
-  } catch (e) {
-    console.error(e);
-    sendResponse({error: true, message: e.message, stack: e.stack});
-  }
+  return nassh.External.dispatchMessage_.call(
+      this, false, request, sender, sendResponse);
 };
 
 /**
  * Invoked when internal code calls chrome.runtime.sendMessage.
- * https://developer.chrome.com/apps/runtime#event-onMessageExternal.
+ * https://developer.chrome.com/apps/runtime#event-onMessage.
  *
  * @param {!nassh.External.OnMessageRequest} request
  * @param {{id:string}} sender chrome.runtime.MessageSender.
  * @param {function(!Object=)} sendResponse called to send response.
- * @return {boolean}
+ * @return {boolean} Whether sendResponse will be called asynchronously.
  * @private
  */
 nassh.External.onMessage_ = (request, sender, sendResponse) => {
-  sender.internal = true;
-
-  // Execute specified command.
-  if (!nassh.External.COMMANDS.hasOwnProperty(request.command)) {
-    sendResponse(
-        {error: true, message: `unsupported command ${request.command}`});
-    return false;
-  }
-  try {
-    nassh.External.COMMANDS[request.command].call(
-        this, request, sender, sendResponse);
-
-    // Return true to allow async sendResponse.
-    return true;
-  } catch (e) {
-    console.error(e);
-    sendResponse({error: true, message: e.message, stack: e.stack});
-  }
+  return nassh.External.dispatchMessage_.call(
+      this, true, request, sender, sendResponse);
 };
 
 // Initialize nassh.External.
@@ -259,16 +279,18 @@ lib.registerInit('external api', (onInit) => {
           (f) => { f.removeRecursively(deleteDone, deleteDone); },
           deleteDone);
     }).then(() => {
-      // Register listener to receive messages.
-      chrome.runtime.onMessageExternal.addListener(
-          nassh.External.onMessageExternal_.bind(this));
-
-      // Register listener to receive messages.
-      chrome.runtime.onMessage.addListener(
-          nassh.External.onMessage_.bind(this));
+      // We can start processing messages now.
+      messageHandlersReady = true;
 
       // Init complete.
       onInit();
     });
   });
 });
+
+// Register listeners to receive messages.  We have to do it here so we can
+// handle messages when first launched (but before lib.registerInit finishes).
+chrome.runtime.onMessageExternal.addListener(
+    nassh.External.onMessageExternal_.bind(this));
+chrome.runtime.onMessage.addListener(
+    nassh.External.onMessage_.bind(this));
