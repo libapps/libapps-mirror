@@ -32,8 +32,7 @@
   },
   "web_accessible_resources": [
     "html/nassh.html",
-    "html/nassh_google_relay.html",
-    "html/nassh_connect_dialog.html"
+    "html/nassh_google_relay.html"
   ],
   "background": {
     "persistent": false,
