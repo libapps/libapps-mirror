@@ -111,6 +111,39 @@ Open a new ssh session.
 | `width`        | number= | The width of the new window. |
 | `url`          | string= | *(internal)* URL to open instead for specific profiles. |
 
+### Import Preferences
+
+*** note
+*NB*: This is only available to Secure Shell itself.
+***
+
+Import saved preferences for nassh & hterm.
+
+| Field name     | Type    | Description |
+|----------------|---------|-------------|
+| `command`      | !string | Must be `prefsImport`. |
+| `prefs`        | !Object | The preferences to import. |
+| `asJson`       | bool=   | Whether the prefs are a JSON string. |
+
+### Export Preferences
+
+*** note
+*NB*: This is only available to Secure Shell itself.
+***
+
+Export saved preferences for nassh & hterm.
+
+| Field name     | Type    | Description |
+|----------------|---------|-------------|
+| `command`      | !string | Must be `prefsExport`. |
+| `asJson`       | bool=   | Whether the prefs will be a JSON string. |
+
+The response will have these additional fields:
+
+| Field name     | Type    | Description |
+|----------------|---------|-------------|
+| `prefs`        | !Object | The exported preferences as JSON or an object. |
+
 
 [Chrome messaging API]: https://developer.chrome.com/apps/messaging
 [crosh]: chromeos-crosh.md

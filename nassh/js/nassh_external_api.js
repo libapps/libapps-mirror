@@ -15,6 +15,16 @@ nassh.External = {};
 nassh.External.COMMANDS = {};
 
 /**
+ * Our own extension ids.
+ */
+nassh.External.SelfExtIds = new Set([
+  'pnhechapfaindjhompbnflcldabbghjo',  // Secure Shell App (stable).
+  'okddffdblfhhnmhodogpojmfkjmhinfp',  // Secure Shell App (dev).
+  'iodihamcpbpeioajjeobimgagajmlibd',  // Secure Shell Extension (stable).
+  'algkcnfjnajfhgimadimbjhmpaeohhln',  // Secure Shell Extension (dev).
+  'nkoccljplnhpfnfiajclkommnmllphnl',  // Crosh.
+]);
+
 /**
  * Probe the extension.
  *
@@ -186,6 +196,55 @@ nassh.External.COMMANDS.nassh = function(request, sender, sendResponse) {
   nassh.External.newWindow_(
       {error: false, message: 'openNassh'},
       request, sender, sendResponse);
+};
+
+/**
+ * Import new preferences.
+ *
+ * @param {{prefs:(!Object|string)}} request The preferences to import.
+ * @param {{id:string}} sender chrome.runtime.MessageSender
+ * @param {function(!Object=)} sendResponse called to send response.
+ */
+nassh.External.COMMANDS.prefsImport = (request, sender, sendResponse) => {
+  if (!sender.internal && !nassh.External.SelfExtIds.has(sender.id)) {
+    sendResponse(
+        {error: true, message: 'prefsImport: External access not allowed'});
+    return;
+  }
+
+  let prefs;
+  if (request.asJson) {
+    lib.assert(typeof request.prefs == 'string');
+    prefs = /** @type {!Object} */ (JSON.parse(request.prefs));
+  } else {
+    lib.assert(typeof request.prefs == 'object');
+    prefs = request.prefs;
+  }
+  nassh.importPreferences(prefs, () => {
+    sendResponse({error: false, message: 'prefsImport'});
+  });
+};
+
+/**
+ * Export existing preferences.
+ *
+ * @param {{asJson:boolean}} request How to export the preferences.
+ * @param {{id:string}} sender chrome.runtime.MessageSender
+ * @param {function(!Object=)} sendResponse called to send response.
+ */
+nassh.External.COMMANDS.prefsExport = (request, sender, sendResponse) => {
+  if (!sender.internal && !nassh.External.SelfExtIds.has(sender.id)) {
+    sendResponse(
+        {error: true, message: 'prefsExport: External access not allowed'});
+    return;
+  }
+
+  nassh.exportPreferences((prefs) => {
+    if (request.asJson) {
+      prefs = JSON.stringify(prefs);
+    }
+    sendResponse({error: false, message: 'prefsExport', prefs: prefs});
+  });
 };
 
 /**
