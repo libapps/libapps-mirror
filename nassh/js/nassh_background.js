@@ -10,9 +10,6 @@
 
   // Used to watch for launch events that occur before we're ready to handle
   // them.  We'll clean this up below during init.
-  if (nassh.v2) {
-    chrome.app.runtime.onLaunched.addListener(onLaunched);
-  }
   if (nassh.browserAction) {
     nassh.browserAction.onClicked.addListener(onLaunched);
   }
@@ -25,12 +22,6 @@
    */
   lib.init(function() {
     const app = new nassh.App();
-
-    // If we're running as a v2 app, finish setup.
-    if (nassh.v2) {
-      chrome.app.runtime.onLaunched.removeListener(onLaunched);
-      app.installHandlers(chrome.app.runtime);
-    }
 
     // If omnibox is enabled, set it up.
     if (window.chrome && chrome.omnibox) {

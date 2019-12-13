@@ -838,8 +838,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   }
 
   if (params.hostname == '>crosh') {
-    // TODO: This will need to be done better.  document.location changes don't
-    // work in v2 apps.
+    // TODO: This should be done better.
     const template = 'crosh.html?profile=%encodeURIComponent(terminalProfile)';
     this.terminalLocation.href = lib.f.replaceVars(template, params);
     return;
@@ -1057,11 +1056,7 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
   }
 
   this.initPlugin_(() => {
-    if (!nassh.v2) {
-      this.terminalWindow.addEventListener(
-          'beforeunload', this.onBeforeUnload_);
-    }
-
+    this.terminalWindow.addEventListener('beforeunload', this.onBeforeUnload_);
 
     this.io.println(nassh.msg('CONNECTING',
                               [`${params.username}@${disp_hostname}`]));
@@ -1341,10 +1336,7 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
 
   this.exited_ = true;
 
-  if (!nassh.v2) {
-    this.terminalWindow.removeEventListener(
-        'beforeunload', this.onBeforeUnload_);
-  }
+  this.terminalWindow.removeEventListener('beforeunload', this.onBeforeUnload_);
 
   // Close all streams upon exit.
   this.streams_.closeAllStreams();

@@ -206,32 +206,12 @@ nassh.App.prototype.installBrowserAction = function() {
 };
 
 /**
- * Bind our callbacks to the runtime.
- *
- * @param {!Object} runtime The runtime instance to bind to.
- */
-nassh.App.prototype.installHandlers = function(runtime) {
-  runtime.onLaunched.addListener(this.onLaunched.bind(this));
-  runtime.onRestarted.addListener(this.onLaunched.bind(this));
-};
-
-/**
  * Called on app launch.
  */
 nassh.App.prototype.onLaunched = function() {
   const width = 900;
   const height = 600;
-  if (nassh.v2) {
-    chrome.app.window.create('/html/nassh.html', {
-      innerBounds: {
-        width: width,
-        height: height,
-      },
-      id: 'mainWindow',
-    });
-  } else {
-    lib.f.openWindow(lib.f.getURL('/html/nassh.html'), '',
-                     'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-                     `minimizable=yes,width=${width},height=${height}`);
-  }
+  lib.f.openWindow(lib.f.getURL('/html/nassh.html'), '',
+                   'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
+                   `minimizable=yes,width=${width},height=${height}`);
 };

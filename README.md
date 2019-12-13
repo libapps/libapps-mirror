@@ -25,9 +25,8 @@ part of hterm, now available as shared code.
 * [hterm/](./hterm/) is a JS library that provides a terminal emulator.  It is
 reasonably fast, reasonably correct, and reasonably portable across browsers.
 
-* [nassh/](./nassh/) is the Secure Shell Chrome App (currently a "v1.5" app,
-soon to become a "v2" or platform app) that combines hterm with a NaCl build
-of OpenSSH to provide a PuTTY-like app for Chrome users.
+* [nassh/](./nassh/) is the Secure Shell Chrome extension that combines hterm
+with a NaCl build of OpenSSH to provide a PuTTY-like app for Chrome users.
 
 * [ssh_client/](./ssh_client/) is the NaCl port of OpenSSH.  It is used by
 [nassh](./nassh/) to create the Secure Shell App.

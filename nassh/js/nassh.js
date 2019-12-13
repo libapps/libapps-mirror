@@ -7,11 +7,6 @@
 var nassh = {};
 
 /**
- * True if nassh is running as a v2 app.
- */
-nassh.v2 = !!(window.chrome && chrome.app && chrome.app.window);
-
-/**
  * Non-null if nassh is running as an extension.
  */
 nassh.browserAction =
@@ -199,38 +194,8 @@ nassh.openOptionsPage = function() {
 
 /** Reload window. */
 nassh.reloadWindow = function() {
-  if (!nassh.v2) {
-    document.location.hash = '';
-    document.location.reload();
-  } else {
-    // Sometimes current() can't return the window.  Not clear why.  Fallback
-    // to the defaults so we at least get a new window.
-    const win = chrome.app.window.current();
-    let opts = {
-      innerBounds: {
-        width: 900,
-        height: 600,
-      },
-    };
-    if (win) {
-      // We have to make sure to not re-use the id field as Chrome won't open a
-      // new window if it already exists with the same id.
-      opts = {
-        alwaysOnTop: win.isAlwaysOnTop(),
-        focused: true,
-        innerBounds: win.innerBounds,
-        state: win.isFullscreen() ? 'fullscreen' :
-                 win.isMaximized() ? 'maximized' :
-                 win.isMinimized() ? 'minimized' :
-                 'normal',
-      };
-    }
-    // We have to wait to close this window in the callback as Chrome is unable
-    // to fully initialize the new window if we close ourselves too fast.
-    chrome.app.window.create(
-        window.document.location.pathname, opts,
-        () => window.close());
-  }
+  document.location.hash = '';
+  document.location.reload();
 };
 
 /**

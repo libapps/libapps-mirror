@@ -21,9 +21,8 @@
 
 # Introduction
 
-Secure Shell is a Chrome App (currently a "v1.5" app, soon to become a "v2" or
-Platform App) that combines hterm with a NaCl build of OpenSSH to provide
-a PuTTY-like app for Chrome users.
+Secure Shell is a Chrome extension that combines hterm with a NaCl build of
+OpenSSH to provide a PuTTY-like app for Chrome users.
 
 See [/HACK.md](/HACK.md) for general information about working with the source
 control setup.
@@ -119,10 +118,6 @@ used to build the Secure Shell App and has been what we've used for the longest
 time, but is largely for Chrome OS only now.  The [manifest_ext.json] is used to
 build the Secure Shell Extension which works on all platforms (but lacks any
 Chrome OS specific features).
-
-The [manifest_v2.json] is not used currently.  Some day we might finish the
-migration and replace [manifest_v1.5.json] with it so we only have one app
-manifest.  Today it is not often tested.
 
 The "v1.5" and "v2" app formats should not be confused with the "v1" and "v2"
 manifest formats.  Secure Shell uses the legacy/deprecated "v1.5" app style to
@@ -267,7 +262,6 @@ The vast majority of the code here lives under [js/].
   * [chrome-bootstrap.css]: Theme code for the extensions options page.
 * [manifest_ext.json]: The Chrome manifest for the extension.
 * [manifest_v1.5.json]: The Chrome manifest for the "v1.5" app.
-* [manifest_v2.json]: The Chrome manifest for the "v2" app.
 
 ## JavaScript Source Layout
 
@@ -517,7 +511,6 @@ Here's a random list of documents which would be useful to people.
 
 [manifest_ext.json]: ../manifest_ext.json
 [manifest_v1.5.json]: ../manifest_v1.5.json
-[manifest_v2.json]: ../manifest_v2.json
 [manifest_crosh.json]: https://cs.chromium.org/chromium/src/chrome/browser/resources/chromeos/crosh_builtin/manifest.json
 
 [chrome-bootstrap.css]: ../third_party/chrome-bootstrap/chrome-bootstrap.css
