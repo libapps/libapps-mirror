@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+# Copyright 2019 The ChromiumOS Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Build ncurses package."""
+
+import logging
+import os
+from pathlib import Path
+import sys
+
+FILESDIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(FILESDIR.parent.parent / "bin"))
+
+import ssh_client  # pylint: disable=wrong-import-position
+
+
+ARCHIVES = ("%(p)s.tar.gz",)
+PATCHES = ("%(p)s-build.patch",)
+
+
+def src_configure(metadata):
+    """Configure the source."""
+    if os.path.exists("Makefile"):
+        logging.info("Makefile exists; skipping ./configure step")
+        return
+
+    tc = metadata["toolchain"]
+
+    cmd = [
+        "./configure",
+        f"--build={tc.cbuild}",
+        f"--host={tc.chost}",
+        # The prefix path matches what is used at runtime.
+        "--prefix=/",
+        "--cache-file=../config.cache",
+        "--enable-static",
+        "--disable-shared",
+        "--enable-pc-files",
+        "--with-pkg-config-libdir=/lib/pkgconfig",
+        "--with-fallbacks=xterm-256color",
+        "--with-termlib",
+        "--disable-database",
+        "--disable-home-terminfo",
+        "--disable-termcap",
+        "--without-ada",
+        "--without-cxx",
+        "--without-debug",
+        "--without-hashed-db",
+        "--without-manpages",
+        "--without-profile",
+        "--without-progs",
+        "--without-pthread",
+        "--without-reentrant",
+        "--without-tack",
+        "--without-tests",
+        "--without-trace",
+        "cf_cv_gcc_inline=no",
+    ]
+    ssh_client.run(cmd)
+
+
+def src_compile(_metadata):
+    """Compile the source."""
+    ssh_client.emake()
+
+
+def src_install(metadata):
+    """Install the package."""
+    tc = metadata["toolchain"]
+    ssh_client.emake("install", f"DESTDIR={tc.sysroot}")
+
+
+ssh_client.build_package(sys.modules[__name__], "wasm")

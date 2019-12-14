@@ -59,10 +59,14 @@ pkgs=(
   ldns
   $(printf 'openssh-%s ' "${SSH_VERSIONS[@]}")
 )
+wasm_pkgs=(
+  "${pkgs[@]}"
+  ncurses
+)
 
 ./wassh-libc-sup/build
 # Build the WASM packages.
-for pkg in "${pkgs[@]}"; do
+for pkg in "${wasm_pkgs[@]}"; do
   ./third_party/${pkg}/build --toolchain wasm
 done
 

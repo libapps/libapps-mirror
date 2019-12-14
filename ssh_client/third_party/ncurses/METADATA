@@ -1,0 +1,14 @@
+name: "ncurses"
+description: "curses terminal library"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://invisible-island.net/ncurses/"
+  }
+  version: "6.1"
+  last_upgrade_date { year: 2018 month: 1 day: 27 }
+
+  local_modifications:
+      "See the patches in this directory for more details."
+}

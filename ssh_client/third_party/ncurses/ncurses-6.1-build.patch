@@ -1,0 +1,25 @@
+Disable building of panel/menu/form sublibs as we don't use them.
+
+--- a/configure
++++ b/configure
+@@ -3230,7 +3230,6 @@ echo "${ECHO_T}$with_curses_h" >&6
+ modules_to_build="ncurses"
+ test "X$cf_with_progs" != Xno && modules_to_build="$modules_to_build progs"
+ test "X$cf_with_tack"  != Xno && modules_to_build="$modules_to_build tack"
+-modules_to_build="$modules_to_build panel menu form"
+ 
+ test "$program_prefix" != NONE &&
+   program_transform_name="s,^,$program_prefix,;$program_transform_name"
+
+Fix building when using --disable-database.  The run_tic.sh won't be created.
+
+--- a/misc/Makefile.in
++++ b/misc/Makefile.in
+@@ -86,6 +86,7 @@
+ 		$(DESTDIR)$(libdir) \
+ 		$(DESTDIR)$(datadir) \
+ 		$(DESTDIR)$(tabsetdir)
++	[ -e run_tic.sh ] || exit 0; \
+ 	DESTDIR=${DESTDIR} \
+ 	prefix=${prefix} \
+ 	exec_prefix=${exec_prefix} \
