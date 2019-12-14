@@ -20,10 +20,23 @@
     "idle",
     "notifications",
     "storage",
+    "terminalPrivate",
     "unlimitedStorage",
     "fileSystemProvider",
     "accessibilityFeatures.read"
   ],
+  "sockets": {
+    "tcp": {
+      "connect": ["*:*"]
+    },
+    "tcpServer": {
+      "listen": ["*:*"]
+    },
+    "udp": {
+      "bind": ["*:*"],
+      "send": ["*:*"]
+    }
+  },
   "file_system_provider_capabilities": {
     "multiple_mounts": true,
     "configurable": true,
