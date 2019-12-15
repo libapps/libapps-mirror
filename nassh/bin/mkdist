@@ -207,6 +207,16 @@ def mkzip(manifest, stamps=()):
     copyfiles(tmpdir)
     minify_translations(tmpdir)
 
+    if not stamps:
+        # Point the icons to the stable version.
+        path = os.path.join(tmpdir, 'html', 'nassh.html')
+        if os.path.exists(path):
+            with open(path, 'r', encoding='utf-8') as fp:
+                html = re.sub(r'images/dev/', 'images/stable/', fp.read(),
+                              flags=re.M)
+            with open(path, 'w', encoding='utf-8') as fp:
+                fp.write(html)
+
     del data['key']
     del data['platforms']
     minify_json_data(data, os.path.join(tmpdir, 'manifest.json'))
