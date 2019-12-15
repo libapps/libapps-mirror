@@ -61,7 +61,7 @@ def process_manifest(opts, manifest_path, srcroot, dstroot):
             print('Rewriting manifest for _platform_specific: %s' %
                   (manifest_path,))
         with open(manifest_path, 'w') as fp:
-            json.dump(manifest, fp)
+            json.dump(manifest, fp, sort_keys=True)
 
 
 def get_parser():

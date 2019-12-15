@@ -91,7 +91,7 @@ def minify(path, inplace=False):
 
     # Throw away all whitespace.
     formatted = json.dumps(data, ensure_ascii=False, indent=None,
-                           separators=(',', ':'))
+                           separators=(',', ':'), sort_keys=True)
 
     if inplace:
         with open(path, 'w', encoding='utf-8') as fp:

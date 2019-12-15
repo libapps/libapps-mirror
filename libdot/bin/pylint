@@ -101,7 +101,7 @@ def run_pylint(opts, pythonpaths=()):
             data = json.loads(result.stdout.decode('utf-8'))
             comments = list(convert_pylint_to_kokoro(data))
             with open(comments_path, 'w', encoding='utf-8') as fp:
-                json.dump(comments, fp)
+                json.dump(comments, fp, sort_keys=True)
     elif comments_path:
         # If there were no failures, clear the files to avoid leaving previous
         # results laying around & confuse devs.

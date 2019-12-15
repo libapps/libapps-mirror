@@ -100,7 +100,7 @@ def minify_js(path):
 def minify_json_data(data, path):
     """Write JSON |data| as minified output to |path|."""
     with open(path, 'w', encoding='utf-8') as fp:
-        json.dump(data, fp, separators=(',', ':'))
+        json.dump(data, fp, separators=(',', ':'), sort_keys=True)
 
 
 def minify_json(path):
