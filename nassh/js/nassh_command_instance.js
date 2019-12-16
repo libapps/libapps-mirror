@@ -910,6 +910,22 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     this.io.terminal_.clearHome();
   }
 
+  // Start driving non-CrOS people to the extension variant.
+  // We do this only for newer versions so we don't flag users on EOL devices
+  // who can't migrate to the extension.
+  if (this.manifest_.app && hterm.os != 'cros') {
+    const extUrl = 'https://chrome.google.com/webstore/detail/' +
+        'iodihamcpbpeioajjeobimgagajmlibd';
+    const docUrl = 'https://chromium.googlesource.com/apps/libapps/+/HEAD/' +
+        'nassh/doc/app-to-ext-migration.md';
+    this.io.println('');
+    this.io.println(nassh.msg('MIGRATE_TO_EXT', [
+      `\x1b]8;;${extUrl}\x07link\x1b]8;;\x07`,
+      `\x1b]8;;${docUrl}\x07link\x1b]8;;\x07`,
+    ]));
+    this.io.println('');
+  }
+
   // If the user has requested a proxy relay, load it up.
   if (options['--proxy-mode'] == 'ssh-fe@google.com') {
     this.relay_ = new nassh.Relay.Sshfe(this.io, options, params.username);
