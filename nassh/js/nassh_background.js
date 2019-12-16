@@ -48,3 +48,72 @@
     window.loaded = true;
   }, console.log.bind(console));
 })();
+
+/**
+ * Sync prefs between versions automatically.
+ *
+ * This helps when installing the dev version the first time, or migrating from
+ * the Chrome App variant to the standard extension.
+ */
+chrome.runtime.onInstalled.addListener((details) => {
+  console.log(`onInstalled fired due to "${details.reason}"`);
+  // Only sync prefs when installed the first time.
+  if (details.reason != 'install') {
+    return;
+  }
+
+  // We'll get called when logging into a new device for the first time when we
+  // get installed automatically as part of the overall sync.  We'll have prefs
+  // in that case already, so no need to sync.
+  const commonPref = '/nassh/profile-ids';
+  chrome.storage.sync.get([commonPref], (items) => {
+    // Prefs exist, so exit early.
+    if (commonPref in items) {
+      return;
+    }
+
+    const appStableId = 'pnhechapfaindjhompbnflcldabbghjo';
+    const appDevId = 'okddffdblfhhnmhodogpojmfkjmhinfp';
+    const extStableId = 'iodihamcpbpeioajjeobimgagajmlibd';
+    const extDevId = 'algkcnfjnajfhgimadimbjhmpaeohhln';
+
+    /**
+     * Try to import prefs from another install into our own.
+     *
+     * @param {string} srcId The extension to import from.
+     * @param {function()=} onError Callback if extension doesn't exist.
+     */
+    const migrate = (srcId, onError) => {
+      console.log(`Trying to sync prefs from ${srcId}`);
+      const cmdExport = {command: 'prefsExport'};
+      chrome.runtime.sendMessage(srcId, cmdExport, (response) => {
+        const err = lib.f.lastError();
+        if (err) {
+          if (onError) {
+            onError();
+          }
+        } else {
+          const { prefs } = response;
+          nassh.importPreferences(prefs);
+        }
+      });
+    };
+
+    switch (chrome.runtime.id) {
+      case appDevId:
+      case extStableId:
+        // Sync from stable app.
+        migrate(appStableId);
+        break;
+
+      case extDevId:
+        // Sync from stable ext then stable app then dev app.
+        migrate(extStableId, () => {
+          migrate(appStableId, () => {
+            migrate(appDevId);
+          });
+        });
+        break;
+    }
+  });
+});

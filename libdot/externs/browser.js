@@ -177,6 +177,20 @@ chrome.runtime.getURL = function(path) {};
 chrome.runtime.lastError = {};
 
 /**
+ * @typedef {{
+ *     reason: string,
+ *     previousVersion: string,
+ *     id: string,
+ * }}
+ */
+chrome.runtime.onInstalled.Details;
+
+/**
+ * @type {!ChromeBaseEvent<function(chrome.runtime.onInstalled.Details)>}
+ */
+chrome.runtime.onInstalled;
+
+/**
  * @type {!ChromeBaseEvent<function(
  *     {command: string},
  *     {id: string},
