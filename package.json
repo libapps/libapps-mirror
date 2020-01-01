@@ -12,6 +12,9 @@
   "files": [
     "README.md"
   ],
+  "scripts": {
+    "start": "http-server -a localhost -c-1 --cors ."
+  },
   "devDependencies": {},
   "dependencies": {
     "asn1js": "~2",
