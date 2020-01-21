@@ -196,6 +196,7 @@ module.exports = {
         'class': 'constructor',
         'file': 'fileoverview',
         'returns': 'return',
+        'yields': 'yield',
 
         // Stub out closure-specific tags so they get ignored.
         // TODO(vapier): Delete this after upgrade to newer jsdoc.
