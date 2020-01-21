@@ -14,18 +14,29 @@ import * as WASI from './wasi.js';
 
 /**
  * Shared logic between different process types.
+ *
+ * @extends {Process}
  */
 class Base {
+  /**
+   * @param {{
+   *   executable: string,
+   *   argv: !Array<string>,
+   *   environ: !Object<string, string>,
+   * }} param1
+   */
   constructor({executable, argv, environ}) {
     this.executable = executable;
     this.argv = argv;
     this.environ = environ;
   }
 
+  /** @override */
   debug(...args) {
     console.log(...args);
   }
 
+  /** @override */
   logError(...args) {
     console.error(...args);
   }
@@ -38,6 +49,15 @@ class Base {
  * fast/short programs, or when the thread is dedicated to it (e.g. a worker).
  */
 export class Foreground extends Base {
+  /**
+   * @param {{
+   *   executable: string,
+   *   argv: !Array<string>,
+   *   environ: !Object<string, string>,
+   *   sys_handlers: !Array<!SyscallHandler>,
+   *   sys_entries: !Array<!SyscallEntry>,
+   * }} param1
+   */
   constructor({executable, argv, environ, sys_handlers, sys_entries}) {
     super({executable, argv, environ});
     this.sys_handlers_ = sys_handlers;
@@ -56,6 +76,8 @@ export class Foreground extends Base {
 
   /**
    * Return an imports object suitable for a new WASM instance.
+   *
+   * @return {!Object}
    */
   getImports_() {
     return this.sys_entries_.reduce((ret, sys_entry) => {
@@ -63,19 +85,17 @@ export class Foreground extends Base {
     }, {});
   }
 
-  /**
-   * Get a u8 view into the WASM memory.
-   *
-   * @param {number} base Starting offset in WASM memory to copy from.
-   * @param {number} end End offset in WASM memory.
-   * @return {Uint8Array}
-   */
-  getMem(base, end) {
+  /** @override */
+  getMem(base, end = undefined) {
     return new Uint8Array(this.instance_.exports.memory.buffer)
         .subarray(base, end);
   }
 
-  getView(base, length) {
+  /**
+   * @override
+   * @suppress {checkTypes} WasiView$$module$js$dataview naming confusion.
+   */
+  getView(base, length = undefined) {
     return new WasiView(this.instance_.exports.memory.buffer, base, length);
   }
 }
@@ -86,8 +106,19 @@ export class Foreground extends Base {
  * This will take care of creating the web worker, managing its communication,
  * and its lifecycle.  You need to provide the script that runs in the new
  * worker and implements the worker.js APIs.
+ *
+ * @unrestricted https://github.com/google/closure-compiler/issues/1737
  */
 export class Background extends Base {
+  /**
+   * @param {string} workerUri
+   * @param {{
+   *   executable: string,
+   *   argv: !Array<string>,
+   *   environ: !Object<string, string>,
+   *   handler: !SyscallHandler,
+   * }} param1
+   */
   constructor(workerUri, {executable, argv, environ, handler}) {
     super({executable, argv, environ});
 
@@ -110,15 +141,32 @@ export class Background extends Base {
     this.terminate();
   }
 
+  /**
+   * @param {string} name
+   * @param {number|string|!Object} args Arguments that can be serialized.
+   */
   postMessage(name, ...args) {
     this.debug(`main>>> postMessage ${name}`, args);
     this.worker.postMessage({name, argv: args});
   }
 
+  /**
+   * Handle an incoming messsage.
+   *
+   * The message must have a registered handler (see onMessage_*).
+   *
+   * @param {!MessageEvent} e The message sent to us.
+   */
   async onMessage(e) {
-    this.debug('>>>main onMessage', e.data);
-
+    /**
+     * @type {{
+     *   name: string,
+     *   argv: !Array<*>,
+     * }}
+     */
     const data = e.data;
+    this.debug('>>>main onMessage', data);
+
     const {name, argv} = data;
 
     const method = `onMessage_${name}`;
@@ -138,6 +186,10 @@ export class Background extends Base {
     this.terminate();
   }
 
+  /**
+   * @param {string} syscall
+   * @param {!Array<*>} args
+   */
   async onMessage_syscall(syscall, ...args) {
     const method = `handle_${syscall}`;
     let ret = WASI.errno.ENOSYS;
@@ -152,10 +204,16 @@ export class Background extends Base {
     this.lock.unlock();
   }
 
+  /**
+   * @param {number} status
+   */
   onMessage_exit(status) {
     this.terminate(new util.CompletedProcessError({status}));
   }
 
+  /**
+   * @param {number} signal
+   */
   onMessage_signal(signal) {
     this.terminate(new util.CompletedProcessError({signal}));
   }
@@ -173,10 +231,12 @@ export class Background extends Base {
   async run() {
     const w = new Worker(this.workerUri, {type: 'module'});
     this.worker = w;
-    w.addEventListener('message', this.onMessage.bind(this));
+    w.addEventListener(
+        'message', /** @type {!EventListener} */ (this.onMessage.bind(this)));
     w.addEventListener('messageerror', this.onMessageError.bind(this));
-//    w.addEventListener('error', this.onError.bind(this));
-    this.postMessage('run', this.executable, this.argv, this.environ, this.sab, this.handler.getHandlers_());
+    w.addEventListener('error', this.onError.bind(this));
+    this.postMessage('run', this.executable, this.argv, this.environ, this.sab,
+                     this.handler.getHandlers_());
 
     // Return a promise that resolves when we terminate.
     return new Promise((resolve) => {

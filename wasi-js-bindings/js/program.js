@@ -11,11 +11,12 @@
  */
 export class Program {
   /**
-   * @param {string} Path to the WASM program to fetch/load.
+   * @param {string} source Path to the WASM program to fetch/load.
    * @param {boolean=} stream Whether to use WebAssembly.instantiateStreaming.
    */
   constructor(source, stream = false) {
     this.source = source;
+    /** @type {?WebAssembly.Instance} */
     this.instance = null;
     // Hack for webservers that don't return .wasm with right mime type.
     // https://www.w3.org/TR/wasm-web-api-1/#streaming-modules
@@ -27,7 +28,7 @@ export class Program {
    * Instantiate the program (but don't run it).
    *
    * @param {!Object} imports Set of function imports for the WASM program.
-   * @return {WebAssembly.Instance} The WASM instance.
+   * @return {!Promise<!WebAssembly.Instance>} The WASM instance.
    */
   async instantiate(imports) {
     let result;
@@ -41,7 +42,7 @@ export class Program {
         .then((bytes) => WebAssembly.instantiate(bytes, imports));
     }
     this.instance = result.instance;
-    return this.instance;
+    return /** @type {!WebAssembly.Instance} */ (this.instance);
   }
 
   /**

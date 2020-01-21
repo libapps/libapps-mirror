@@ -12,28 +12,55 @@ import * as WASI from './wasi.js';
 
 /**
  * Base class for creating syscall entries.
+ *
+ * @unrestricted https://github.com/google/closure-compiler/issues/1737
+ * @extends {SyscallEntry}
+ * @abstract
  */
 export class Base {
+  /**
+   * @param {{
+   *   sys_handlers: (!Array<!Object>|undefined),
+   *   process: !Process,
+   *   trace: boolean,
+   * }} param1
+   */
   constructor({sys_handlers, process, trace}) {
     this.enableTrace_ = trace;
     this.process_ = null;
     this.bindHandlers_(sys_handlers);
+    /** @type {string} */
+    this.namespace = '';
   }
 
+  /** @override */
   setProcess(process) {
     this.process_ = process;
   }
 
-  getMem_(...args) {
-    return this.process_.getMem(...args);
+  /**
+   * @param {!WASI_t.pointer} base
+   * @param {!WASI_t.pointer=} end
+   * @return {!Uint8Array}
+   */
+  getMem_(base, end = undefined) {
+    return this.process_.getMem(base, end);
   }
 
-  getView_(...args) {
-    return this.process_.getView(...args);
+  /**
+   * @param {!WASI_t.pointer} base
+   * @param {!WASI_t.u32=} offset
+   * @return {!WasiView}
+   * @suppress {checkTypes} WasiView$$module$js$dataview naming confusion.
+   */
+  getView_(base, offset = undefined) {
+    return this.process_.getView(base, offset);
   }
 
   /**
    * Log a debug message.
+   *
+   * @param {*} args The message to log.
    */
   debug(...args) {
     this.process_.debug(...args);
@@ -41,11 +68,19 @@ export class Base {
 
   /**
    * Log an error message.
+   *
+   * @param {*} args The message to log.
    */
   logError(...args) {
     this.process_.logError(...args);
   }
 
+  /**
+   * @param {function(*): !WASI_t.errno} func
+   * @param {string} prefix
+   * @param {...} args
+   * @return {!WASI_t.errno}
+   */
   traceCall(func, prefix, ...args) {
     this.debug(`${prefix}(${args.join(', ')})`);
     const ret = func(...args);
@@ -57,6 +92,11 @@ export class Base {
     return ret;
   }
 
+  /**
+   * @param {function(*)} func
+   * @param {string} prefix
+   * @return {function(*)}
+   */
   createTracer_(func, prefix) {
     if (this.enableTrace_) {
       return this.traceCall.bind(this, func, prefix);
@@ -74,6 +114,11 @@ export class Base {
     return WASI.errno.ENOSYS;
   }
 
+  /**
+   * @param {!Function} func
+   * @param {*} args
+   * @return {*}
+   */
   unhandledExceptionWrapper_(func, ...args) {
     try {
       return func(...args);
@@ -93,7 +138,7 @@ export class Base {
    * syscall.  If the |handlers| provide a relevant implementation, we'll use
    * it, otherwise we'll fallback to a stub that returns ENOSYS.
    *
-   * @param handlers {Array<!Object>} Array of SyscallHandler objects.
+   * @param {!Array<!Object>=} handlers Array of SyscallHandler objects.
    */
   bindHandlers_(handlers = []) {
     if (!Array.isArray(handlers)) {
@@ -120,12 +165,15 @@ export class Base {
 
   /**
    * Get list of all registered syscall entries.
+   *
+   * @return {!Array<string>}
    */
   getSyscalls_() {
     return Array.from(util.getAllPropertyNames(this))
-      .filter((key) => key.startsWith('sys_'));
+      .filter((/** @type {string} */ key) => key.startsWith('sys_'));
   }
 
+  /** @override */
   getImports() {
     const entries = {};
     this.getSyscalls_().forEach((key) => {
@@ -146,6 +194,11 @@ export class WasiUnstable extends Base {
     this.namespace = 'wasi_unstable';
   }
 
+  /**
+   * @param {!WASI_t.pointer} ptr
+   * @param {!WASI_t.u32} len
+   * @return {?string|number}
+   */
   get_nullable_path_(ptr, len) {
     let ret = null;
     if (ptr) {
@@ -160,6 +213,7 @@ export class WasiUnstable extends Base {
     return ret;
   }
 
+  /** @override */
   sys_args_get(argv, argv_buf) {
     const ret = this.handle_args_get();
     if (Number.isInteger(ret)) {
@@ -186,6 +240,7 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_args_sizes_get(argc, argv_size) {
     const ret = this.handle_args_sizes_get();
     if (Number.isInteger(ret)) {
@@ -199,6 +254,10 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /**
+   * @override
+   * @suppress {checkTypes} https://github.com/google/closure-compiler/commit/ee80bed57fe1ee93876fee66ad77e025a345c7a7
+   */
   sys_clock_res_get(clockid, resolution_ptr) {
     const ret = this.handle_clock_res_get(clockid);
     if (Number.isInteger(ret)) {
@@ -210,6 +269,10 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /**
+   * @override
+   * @suppress {checkTypes} https://github.com/google/closure-compiler/commit/ee80bed57fe1ee93876fee66ad77e025a345c7a7
+   */
   sys_clock_time_get(clockid, precision, time_ptr) {
     // TODO: Figure out what to do with precision.
     const ret = this.handle_clock_time_get(clockid);
@@ -222,6 +285,7 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_environ_get(envp, env_buf) {
     const ret = this.handle_environ_get();
     if (Number.isInteger(ret)) {
@@ -251,6 +315,7 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_environ_sizes_get(env_size, env_buf) {
     const ret = this.handle_environ_sizes_get();
     if (Number.isInteger(ret)) {
@@ -260,28 +325,33 @@ export class WasiUnstable extends Base {
     const dvSize = this.getView_(env_size, 4);
     const dvBuf = this.getView_(env_buf, 4);
     // Include one extra for NULL terminator.
-    // XXX: Is this necessary ?
+    // TODO(vapier): Is this necessary ?
     dvSize.setUint32(0, ret.length + 1, true);
     dvBuf.setUint32(0, ret.size, true);
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_fd_advise(fd, offset, len, advice) {
     return this.handle_fd_advise(fd, offset, len, advice);
   }
 
+  /** @override */
   sys_fd_allocate(fd, offset, len) {
     return this.handle_fd_allocate(fd, offset, len);
   }
 
+  /** @override */
   sys_fd_close(fd) {
     return this.handle_fd_close(fd);
   }
 
+  /** @override */
   sys_fd_datasync(fd) {
     return this.handle_fd_datasync(fd);
   }
 
+  /** @override */
   sys_fd_fdstat_get(fd, buf) {
     const ret = this.handle_fd_fdstat_get(fd);
     if (Number.isInteger(ret)) {
@@ -293,15 +363,18 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_fd_fdstat_set_flags(fd, fdflags) {
     return this.handle_fd_fdstat_set_flags(fd, fdflags);
   }
 
+  /** @override */
   sys_fd_fdstat_set_rights(fd, fs_rights_base, fs_rights_inheriting) {
     return this.handle_fd_fdstat_set_rights(
         fd, fs_rights_base, fs_rights_inheriting);
   }
 
+  /** @override */
   sys_fd_filestat_get(fd, filestat_ptr) {
     const ret = this.handle_fd_filestat_get(fd);
     if (Number.isInteger(ret)) {
@@ -313,18 +386,22 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_fd_filestat_set_size(fd, size) {
     return this.handle_fd_filestat_set_size(fd, size);
   }
 
+  /** @override */
   sys_fd_filestat_set_times(fd, atim, mtim, fst_flags) {
     return this.handle_fd_filestat_set_times(fd, atim, mtim, fst_flags);
   }
 
+  /** @override */
   sys_fd_pread(fd, iovs_ptr, iovs_len, offset, nread_ptr) {
     return WASI.errno.ENOSYS;
   }
 
+  /** @override */
   sys_fd_prestat_dir_name(fd, path_ptr, path_len) {
     const ret = this.handle_fd_prestat_get(fd);
     if (Number.isInteger(ret)) {
@@ -337,6 +414,7 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_fd_prestat_get(fd, buf) {
     const ret = this.handle_fd_prestat_get(fd);
     if (Number.isInteger(ret)) {
@@ -344,13 +422,14 @@ export class WasiUnstable extends Base {
     }
 
     const dv = this.getView_(buf, 8);
-    dv.setUint8(0, 0 /*__WASI_PREOPENTYPE_DIR*/, true);
+    dv.setUint8(0, 0 /* __WASI_PREOPENTYPE_DIR */);
 
     const te = new TextEncoder();
     dv.setUint32(4, te.encode(ret.path).length, true);
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_fd_pwrite(fd, iovs_ptr, iovs_len, offset, nwritten_ptr) {
     let nwritten = 0;
     for (let i = 0; i < iovs_len; ++i) {
@@ -372,6 +451,7 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_fd_read(fd, iovs_ptr, iovs_len, nread_ptr) {
     const dvIovs = this.getView_(iovs_ptr);
     const dvNread = this.getView_(nread_ptr, 4);
@@ -392,6 +472,7 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_fd_readdir(fd, buf_ptr, buf_len, cookie, size_ptr) {
     const buf = this.getMem_(buf_ptr, buf_ptr + buf_len);
     const ret = this.handle_fd_readdir(fd, buf, cookie);
@@ -404,10 +485,15 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_fd_renumber(fd, to) {
     return this.handle_fd_renumber(fd, to);
   }
 
+  /**
+   * @override
+   * @suppress {checkTypes} https://github.com/google/closure-compiler/commit/ee80bed57fe1ee93876fee66ad77e025a345c7a7
+   */
   sys_fd_seek(fd, offset, whence, newoffset_ptr) {
     const ret = this.handle_fd_seek(fd, offset, whence);
     if (Number.isInteger(ret)) {
@@ -419,10 +505,15 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_fd_sync(fd) {
     return this.handle_fd_sync(fd);
   }
 
+  /**
+   * @override
+   * @suppress {checkTypes} https://github.com/google/closure-compiler/commit/ee80bed57fe1ee93876fee66ad77e025a345c7a7
+   */
   sys_fd_tell(fd, filesize_ptr) {
     const ret = this.handle_fd_sync(fd);
     if (Number.isInteger(ret)) {
@@ -434,6 +525,7 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_fd_write(fd, iovs, iovs_len, nwritten_ptr) {
     // const fn = fd == 1 ? console.error : console.info;
     let nwritten = 0;
@@ -456,6 +548,7 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_path_create_directory(fd, path_ptr, path_len) {
     const path = this.get_nullable_path_(path_ptr, path_len);
     if (Number.isInteger(path)) {
@@ -465,6 +558,7 @@ export class WasiUnstable extends Base {
     return this.handle_path_create_directory(fd, path);
   }
 
+  /** @override */
   sys_path_filestat_get(fd, lookupflags, path_ptr, path_len, filestat_ptr) {
     const path = this.get_nullable_path_(path_ptr, path_len);
     if (Number.isInteger(path)) {
@@ -481,6 +575,7 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_path_filestat_set_times(fd, flags, path_ptr, path_len, atim, mtim,
                               fst_flags) {
     const path = this.get_nullable_path_(path_ptr, path_len);
@@ -488,9 +583,11 @@ export class WasiUnstable extends Base {
       return path;
     }
 
-    return this.handle_path_filestat_set_times(fd, flags, path, atim, mtim, fst_flags);
+    return this.handle_path_filestat_set_times(
+        fd, flags, path, atim, mtim, fst_flags);
   }
 
+  /** @override */
   sys_path_link(old_fd, old_flags, old_path_ptr, old_path_len, new_fd,
                 new_path_ptr, new_path_len) {
     const old_path = this.get_nullable_path_(old_path_ptr, old_path_len);
@@ -506,6 +603,7 @@ export class WasiUnstable extends Base {
     return this.handle_path_link(old_fd, old_flags, old_path, new_fd, new_path);
   }
 
+  /** @override */
   sys_path_open(dirfd, dirflags, path_ptr, path_len, o_flags, fs_rights_base,
                 fs_rights_inheriting, fs_flags, fdptr) {
     const path = this.get_nullable_path_(path_ptr, path_len);
@@ -526,6 +624,7 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_path_readlink(fd, path_ptr, path_len, buf_ptr, buf_len, bufused_ptr) {
     const path = this.get_nullable_path_(path_ptr, path_len);
     if (Number.isInteger(path)) {
@@ -543,6 +642,7 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   sys_path_remove_directory(fd, path_ptr, path_len) {
     const path = this.get_nullable_path_(path_ptr, path_len);
     if (Number.isInteger(path)) {
@@ -552,6 +652,7 @@ export class WasiUnstable extends Base {
     return this.handle_path_remove_directory(fd, path);
   }
 
+  /** @override */
   sys_path_rename(fd, old_path_ptr, old_path_len, new_fd, new_path_ptr,
                   new_path_len) {
     const old_path = this.get_nullable_path_(old_path_ptr, old_path_len);
@@ -567,6 +668,7 @@ export class WasiUnstable extends Base {
     return this.handle_path_rename(fd, old_path, new_fd, new_path);
   }
 
+  /** @override */
   sys_path_symlink(old_path_ptr, old_path_len, fd, new_path_ptr, new_path_len) {
     const old_path = this.get_nullable_path_(old_path_ptr, old_path_len);
     if (Number.isInteger(old_path)) {
@@ -581,6 +683,7 @@ export class WasiUnstable extends Base {
     return this.handle_path_symlink(old_path, fd, new_path);
   }
 
+  /** @override */
   sys_path_unlink_file(fd, path_ptr, path_len) {
     const path = this.get_nullable_path_(path_ptr, path_len);
     if (Number.isInteger(path)) {
@@ -590,11 +693,12 @@ export class WasiUnstable extends Base {
     return this.handle_path_unlink_file(fd, path);
   }
 
+  /** @override */
   sys_poll_oneoff(...args) {
-    //poll_oneoff(in: ConstPointer<subscription>, out: Pointer<event>, nsubscriptions: size) -> (errno, size)
     return WASI.errno.ENOSYS;
   }
 
+  /** @override */
   sys_proc_exit(status) {
     this.handle_proc_exit(status);
 
@@ -602,6 +706,7 @@ export class WasiUnstable extends Base {
     throw new util.CompletedProcessError({status});
   }
 
+  /** @override */
   sys_proc_raise(signal) {
     this.handle_proc_raise(signal);
 
@@ -609,30 +714,28 @@ export class WasiUnstable extends Base {
     throw new util.CompletedProcessError({signal});
   }
 
-  /**
-   * Fill the supplied buffer with random bytes.
-   *
-   * @param {number} buf Offset of the buffer to fill in WASM memory.
-   * @param {number} buf_len Length of buf in bytes.
-   * @return {WASI.errno} The result from the syscall handler.
-   */
+  /** @override */
   sys_random_get(buf, buf_len) {
     const bytes = this.getMem_(buf, buf + buf_len);
     return this.handle_random_get(bytes);
   }
 
+  /** @override */
   sys_sched_yield() {
     return this.handle_sched_yield();
   }
 
+  /** @override */
   sys_sock_recv(fd, ri_data, ri_flags, ro_datalen_ptr, ro_flags_ptr) {
     return WASI.errno.ENOSYS;
   }
 
+  /** @override */
   sys_sock_send(fd, si_data, si_flags, so_datalen_ptr) {
     return WASI.errno.ENOSYS;
   }
 
+  /** @override */
   sys_sock_shutdown(fd, how) {
     return this.handle_sock_shutdown(fd, how);
   }

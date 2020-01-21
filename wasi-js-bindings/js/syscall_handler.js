@@ -6,18 +6,23 @@
  * @fileoverview Syscall handler APIs.  These actually implement syscalls.
  */
 
-import * as WASI from './wasi.js';
 import {SyscallLock} from './syscall_lock.js';
 import * as util from './util.js';
+import * as WASI from './wasi.js';
 
 /**
  * Base class for creating syscall handlers.
+ *
+ * @abstract
+ * @extends {SyscallHandler}
  */
 export class Base {
   constructor() {
+    /** @type {?Process} */
     this.process_ = null;
   }
 
+  /** @override */
   setProcess(process) {
     this.process_ = process;
   }
@@ -28,7 +33,7 @@ export class Base {
 
   getHandlers_() {
     const gen = util.getAllPropertyNames(this);
-    return new Set({
+    return new Set(/** @type {!Iterable<string>} */ ({
       [Symbol.iterator]: function* () {
         while (1) {
           const ele = gen.next();
@@ -40,12 +45,14 @@ export class Base {
           }
         }
       },
-    });
+    }));
   }
 }
 
 /**
  * This handler dispatches all requests to a worker thread.
+ *
+ * @unrestricted https://github.com/google/closure-compiler/issues/1737
  */
 export class ProxyWasiUnstable extends Base {
   constructor(worker, sab, handlers) {
@@ -75,11 +82,13 @@ export class ProxyWasiUnstable extends Base {
     }
   }
 
+  /** @override */
   handle_proc_exit(status) {
     this.worker.postMessage('exit', status);
     return new Promise(() => {});
   }
 
+  /** @override */
   handle_proc_raise(signal) {
     this.worker.postMessage('signal', signal);
     return new Promise(() => {});
@@ -95,10 +104,12 @@ const kNanosecToMillisec = 1000000;
  * This handler implements syscalls directly.
  */
 export class DirectWasiUnstable extends Base {
+  /** @override */
   handle_args_get() {
     return {argv: this.process_.argv};
   }
 
+  /** @override */
   handle_args_sizes_get() {
     const te = new TextEncoder();
     const argv = this.process_.argv;
@@ -108,6 +119,7 @@ export class DirectWasiUnstable extends Base {
     };
   }
 
+  /** @override */
   handle_clock_res_get(clockid) {
     switch (clockid) {
       case WASI.clock.REALTIME:
@@ -123,6 +135,7 @@ export class DirectWasiUnstable extends Base {
     }
   }
 
+  /** @override */
   handle_clock_time_get(clockid) {
     switch (clockid) {
       case WASI.clock.REALTIME: {
@@ -137,6 +150,7 @@ export class DirectWasiUnstable extends Base {
     }
   }
 
+  /** @return {!Array<string>} */
   flattenEnviron_() {
     const ret = [];
     Object.entries(this.process_.environ).forEach(
@@ -144,10 +158,12 @@ export class DirectWasiUnstable extends Base {
     return ret;
   }
 
+  /** @override */
   handle_environ_get() {
     return {env: this.flattenEnviron_()};
   }
 
+  /** @override */
   handle_environ_sizes_get() {
     const te = new TextEncoder();
     const env = this.flattenEnviron_();
@@ -157,22 +173,27 @@ export class DirectWasiUnstable extends Base {
     };
   }
 
+  /** @override */
   handle_fd_datasync(fd) {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   handle_fd_sync(fd) {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   handle_proc_exit(status) {
     throw new util.CompletedProcessError({status});
   }
 
+  /** @override */
   handle_proc_raise(signal) {
     throw new util.CompletedProcessError({signal});
   }
 
+  /** @override */
   handle_random_get(bytes) {
     // The crypto calls cannot operate on shared memory, so an additional copy
     // to a non-shared type is required. Other types of syscall will be able to
@@ -189,6 +210,7 @@ export class DirectWasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /** @override */
   handle_sched_yield() {
     return WASI.errno.ESUCCESS;
   }

@@ -6,10 +6,12 @@
  * @fileoverview WASI API constants.
  */
 
-export * as advice from './wasi/advice.js';
-export * as clock from './wasi/clock.js';
-export * as errno from './wasi/errno.js';
-export * as eventtype from './wasi/eventtype.js';
-export * as filetype from './wasi/filetype.js';
-export * as signal from './wasi/signal.js';
-export * as whence from './wasi/whence.js';
+// TODO(vapier): Switch to 'export * as' once closure support it.
+import * as advice from './wasi/advice.js';
+import * as clock from './wasi/clock.js';
+import * as errno from './wasi/errno.js';
+import * as eventtype from './wasi/eventtype.js';
+import * as filetype from './wasi/filetype.js';
+import * as signal from './wasi/signal.js';
+import * as whence from './wasi/whence.js';
+export {advice, clock, errno, eventtype, filetype, signal, whence};

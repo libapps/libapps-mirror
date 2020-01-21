@@ -8,11 +8,12 @@
 
 import * as ERRNO from './wasi/errno.js';
 
+// eslint-disable-next-line jsdoc/require-returns-check
 /**
  * Generator to return all properties on an object.
  *
- * @param {!Object} obj The object whose names to enumerate.
- * @yield {string} The property names.
+ * @param {?Object} obj The object whose names to enumerate.
+ * @return {!Iterable<string>} The property names.
  */
 export function* getAllPropertyNames(obj) {
   while (obj) {
@@ -28,6 +29,12 @@ export function* getAllPropertyNames(obj) {
  * Status of an exited process.
  */
 export class CompletedProcessError extends Error {
+  /**
+   * @param {{
+   *   status: (number|undefined),
+   *   signal: (number|undefined),
+   * }} param1
+   */
   constructor({status, signal}) {
     super();
     this.status = status;
@@ -37,6 +44,9 @@ export class CompletedProcessError extends Error {
 
   /**
    * Convert object to a human readable string.
+   *
+   * @override
+   * @return {string}
    */
   toString() {
     if (this.status !== undefined) {
@@ -49,6 +59,12 @@ export class CompletedProcessError extends Error {
   }
 }
 
+/**
+ * Turn error number into symbolic constant.
+ *
+ * @param {number} errno The error number.
+ * @return {string} The symbolic constant (e.g. EINVAL).
+ */
 export function strerror(errno) {
   for (const [key, val] of Object.entries(ERRNO)) {
     if (key[0] == 'E' && val == errno) {

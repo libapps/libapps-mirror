@@ -2,6 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+/**
+ * @fileoverview
+ * @suppress {moduleLoad}
+ */
+
 import * as SyscallEntry from '../../wasi-js-bindings/js/syscall_entry.js';
 import * as SyscallHandler from '../../wasi-js-bindings/js/syscall_handler.js';
 import * as WASI from '../../wasi-js-bindings/js/wasi.js';
@@ -38,11 +43,11 @@ class FdMap extends Map {
   }
 }
 
- /**
+/**
  * Wassh implementation of direct syscalls.
-  *
+ *
  * These must all be synchronous.
-  */
+ */
 export class DirectWasiUnstable extends SyscallHandler.DirectWasiUnstable {
 }
 

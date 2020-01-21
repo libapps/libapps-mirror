@@ -4,6 +4,7 @@
 
 /**
  * @fileoverview
+ * @suppress {moduleLoad}
  */
 
 import * as BackgroundWorker from '../../wasi-js-bindings/js/worker.js';
@@ -23,7 +24,8 @@ class WasshWorker extends BackgroundWorker.Base {
       new SyscallEntry.WasiUnstable({sys_handlers, trace: true}),
       new WasshSyscallEntry.WasshExperimental({}),
     ];
-    return new Process.Foreground({executable, argv, environ, sys_handlers, sys_entries});
+    return new Process.Foreground(
+        {executable, argv, environ, sys_handlers, sys_entries});
   }
 }
 

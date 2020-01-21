@@ -8,13 +8,11 @@
 
 /**
  * DataView with methods for working with WASI structures.
+ *
+ * @implements {WasiViewInterface}
  */
 export class WasiView extends DataView {
-  /**
-   * Read a dirent structure.
-   *
-   * https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#-dirent-struct
-   */
+  /** @override */
   getDirent(byteOffset, littleEndian = false) {
     /*
      * typedef struct __wasi_dirent_t {
@@ -30,15 +28,14 @@ export class WasiView extends DataView {
       d_next: this.getBigUint64(byteOffset, littleEndian),
       d_ino: this.getBigUint64(byteOffset + 8, littleEndian),
       d_namelen: this.getUint32(byteOffset + 16, littleEndian),
-      d_type: this.getUint8(byteOffset + 20, littleEndian),
+      d_type: /** @type {!WASI_t.filetype} */ (this.getUint8(byteOffset + 20)),
       length: 24,
     };
   }
 
   /**
-   * Write a fdstat structure.
-   *
-   * https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#fdstat
+   * @override
+   * @suppress {checkTypes} https://github.com/google/closure-compiler/commit/ee80bed57fe1ee93876fee66ad77e025a345c7a7
    */
   setFdstat(byteOffset, value, littleEndian = false) {
     /*
@@ -57,11 +54,7 @@ export class WasiView extends DataView {
     this.setBigUint64(byteOffset + 16, value.rights_inheriting, littleEndian);
   }
 
-  /**
-   * Write a filestat structure.
-   *
-   * https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#filestat
-   */
+  /** @override */
   setFilestat(byteOffset, value, littleEndian = false) {
     /*
      * typedef struct __wasi_filestat_t {
@@ -78,12 +71,7 @@ export class WasiView extends DataView {
      */
   }
 
-  /**
-   * Read an iovec/ciovec structure.
-   *
-   * https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#-iovec-struct
-   * https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#-ciovec-struct
-   */
+  /** @override */
   getIovec(byteOffset, littleEndian = false) {
     /*
      * typedef struct __wasi_iovec_t {

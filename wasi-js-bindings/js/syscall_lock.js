@@ -18,9 +18,8 @@ export class SyscallLock {
   /**
    * Creates an instance of SyscallLock.
    *
-   * @param offset
-   * @param buffer
-   * @param {SharedArrayBuffer!} shared_buffer Shared memory for this lock.
+   * @param {!SharedArrayBuffer} buffer Shared memory for this lock.
+   * @param {number=} offset
    */
   constructor(buffer, offset = 0) {
     // Constants for keeping track of the locked state.
@@ -56,7 +55,8 @@ export class SyscallLock {
   lock() {
     // TODO(ajws@): Check if the lock is already held.
     return Atomics.compareExchange(
-        this.sabArr, this.lockIndex, this.UNLOCKED, this.LOCKED) == this.UNLOCKED;
+        this.sabArr, this.lockIndex, this.UNLOCKED, this.LOCKED) ===
+        this.UNLOCKED;
   }
 
   /**
@@ -106,10 +106,11 @@ export class SyscallLock {
    */
   setData(obj) {
     const te = new TextEncoder();
-    // encodeInto doesn't support shared array buffers yet.
+    /** @suppress {checkTypes} https://github.com/google/closure-compiler/issues/3701 */
     const str = JSON.stringify(obj, (key, value) => {
       return (typeof value === 'bigint') ? {'bigint': value.toString()} : value;
     });
+    // encodeInto doesn't support shared array buffers yet.
     const bytes = te.encode(str);
     this.sabDataArr.set(bytes);
     this.sabArr[this.dataLengthIndex] = bytes.length;
@@ -118,7 +119,7 @@ export class SyscallLock {
   /**
    * Deserialize complicated objects.
    *
-   * @return {Object?} The object returned by the syscall handler, or null if
+   * @return {?Object} The object returned by the syscall handler, or null if
    *    there is no object passed back.
    */
   getData() {
