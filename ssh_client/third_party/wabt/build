@@ -26,7 +26,8 @@ def src_install(metadata):
     for prog in os.listdir(metadata['S']):
         target = os.path.join(metadata['S'], prog)
         path = os.path.join(ssh_client.BUILD_BINDIR, prog)
-        ssh_client.symlink(target, path)
+        if os.access(target, os.X_OK):
+            ssh_client.symlink(target, path)
 
 
 ssh_client.build_package(sys.modules[__name__], 'build')
