@@ -92,7 +92,7 @@ def run_pylint(opts, pythonpaths=()):
                 os.makedirs(dirname, exist_ok=True)
 
             cmd += ['--output-format=json']
-            result = libdot.run(cmd, check=False, capture_output=True)
+            result = libdot.run(cmd, env=env, check=False, capture_output=True)
 
             # Save a copy for debugging later.
             with open(comments_path + '.in', 'wb') as fp:
