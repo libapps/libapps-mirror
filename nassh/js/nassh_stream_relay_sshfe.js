@@ -137,10 +137,18 @@ nassh.Stream.RelaySshfeWS.prototype.getChallenge_ = function() {
 };
 
 /**
+ * @typedef {{
+ *     data: !Array
+ * }}
+ */
+nassh.Stream.RelaySshfeWS.AgentResponse;
+
+/**
  * Send a message to the ssh agent.
  *
- * @param {!Object} data The object to send to the agent.
- * @return {!Promise} A promise to resolve with the agent's response.
+ * @param {!Array} data The object to send to the agent.
+ * @return {!Promise<!nassh.Stream.RelaySshfeWS.AgentResponse>} A promise to
+ *    resolve with the agent's response.
  */
 nassh.Stream.RelaySshfeWS.prototype.sendAgentMessage_ = function(data) {
   // The Chrome message API uses callbacks, so wrap in a Promise ourselves.
@@ -192,7 +200,8 @@ nassh.Stream.RelaySshfeWS.prototype.signChallenge_ = function(challenge) {
 
     // Receive SSH_AGENTC_PUBLIC_KEY_RESPONSE.
     const response = nassh.agent.messages.read(
-        new nassh.agent.Message(result.data[0], result.data.slice(1)));
+        new nassh.agent.Message(
+            result.data[0], new Uint8Array(result.data.slice(1))));
 
     // Construct a SSH_AGENTC_SIGN_REQUEST.
     const request = nassh.agent.messages.write(
