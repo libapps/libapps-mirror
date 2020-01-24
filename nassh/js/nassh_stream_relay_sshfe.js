@@ -75,7 +75,10 @@ nassh.Stream.RelaySshfeWS.prototype.asyncOpen = function(settings, onComplete) {
   let sshFeChallenge = null;
   let sshFeSignature = null;
 
-  this.getChallenge_()
+  // Use Promise.resolve to put all of getChallenge into a promise in case any
+  // of its setup logic throws an exception (for our catch below).
+  Promise.resolve()
+    .then(() => this.getChallenge_())
     .then((challenge) => {
       sshFeChallenge = challenge;
       return this.signChallenge_(challenge);
