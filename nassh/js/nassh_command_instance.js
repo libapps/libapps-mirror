@@ -225,6 +225,12 @@ nassh.CommandInstance.prototype.run = function() {
 
       this.promptForDestination_();
     } else {
+      const params = new URLSearchParams(this.terminalLocation.search);
+      // An undocumented hack for extension popup to force a one-off connection.
+      if (params.get('promptOnReload') == 'yes') {
+        this.storage.setItem('nassh.promptOnReload', 'yes');
+      }
+
       this.connectToArgString(argstr);
     }
   };

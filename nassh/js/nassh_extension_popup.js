@@ -46,7 +46,7 @@ popup.prototype.openLink_ = function(e) {
       nassh.openOptionsPage();
       return;
     default:
-      url += `#profile-id:${id}`;
+      url += `?promptOnReload=yes#profile-id:${id}`;
       break;
   }
 
