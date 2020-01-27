@@ -38,7 +38,7 @@ def src_configure(metadata):
         machine = tc.chost.split('-')[0]
 
     # See if configure passed.
-    with open('Makefile') as fp:
+    with open('Makefile', encoding='utf-8') as fp:
         if machine in fp.read():
             logging.info('Makefile exists; skipping ./configure step')
             return

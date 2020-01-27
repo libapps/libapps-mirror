@@ -97,10 +97,7 @@ def echo_results(output_to, data, header_files):
     if not output_to:
         print(data)
     else:
-        try:
-            os.remove(output_to)
-        except OSError:
-            pass
+        libdot.unlink(output_to)
         with open(output_to, 'w', encoding='utf-8') as f:
             f.write(data)
 
@@ -234,7 +231,7 @@ def append_resource(name, mime, resource, header_files):
         if count != '-1':
             raise ValueError('Only count==-1 supported currently')
 
-        with open(path) as f:
+        with open(path, encoding='utf-8') as f:
             data = f.readline().strip()
         logging.info('  -> %s', data)
 
@@ -247,7 +244,7 @@ def append_resource(name, mime, resource, header_files):
             raise ValueError('Too many args to grep: %s' % (arg,))
         regex, path = argv
 
-        with open(path) as f:
+        with open(path, encoding='utf-8') as f:
             lines = [x for x in f.readlines() if re.match(regex, x)]
         data = ''.join(lines)
         logging.info('  -> %s ...', data[:80])

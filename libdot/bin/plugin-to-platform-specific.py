@@ -27,7 +27,8 @@ ARCHES = set(('arm', 'x86-32', 'x86-64'))
 
 def process_manifest(opts, manifest_path, srcroot, dstroot):
     """Rewrite the manifest to use the _platform_specific feature."""
-    manifest = json.load(open(manifest_path))
+    with open(manifest_path, 'rb') as fp:
+        manifest = json.load(fp)
     if 'program' not in manifest:
         return
 
@@ -60,7 +61,7 @@ def process_manifest(opts, manifest_path, srcroot, dstroot):
         if not opts.quiet:
             print('Rewriting manifest for _platform_specific: %s' %
                   (manifest_path,))
-        with open(manifest_path, 'w') as fp:
+        with open(manifest_path, 'wb') as fp:
             json.dump(manifest, fp, sort_keys=True)
 
 

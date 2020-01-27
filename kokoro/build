@@ -280,6 +280,7 @@ def setup():
     # Log some system state so we can see current CI/container state.
     libdot.run(['uname', '-a'])
     libdot.run(['cat', '/etc/os-release'], check=False)
+    libdot.run(['env'])
 
     # Initialize the artifacts output.
     logging.info('Setting up artifacts output %s', ARTIFACTS_DIR)
@@ -293,8 +294,8 @@ def setup():
     # unless it exists, and we're seeing that same behavior.
     # http://g/kokoro-users/coBW2tNu46g/W8PozUUpAQAJ
     stub = os.path.join(GERRIT_COMMENTS_DIR, GERRIT_COMMENTS_NAME)
-    with open(stub, 'w') as fp:
-        fp.write('[]')
+    with open(stub, 'wb') as fp:
+        fp.write(b'[]')
 
 
 def get_parser():

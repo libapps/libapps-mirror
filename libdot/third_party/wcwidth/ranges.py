@@ -28,7 +28,7 @@ def load_proplist():
     """Return codepoints based on their various properties."""
     db = {}
 
-    with open('PropList.txt') as fp:
+    with open('PropList.txt', encoding='utf-8') as fp:
         data = fp.read()
 
     for line in data.splitlines():
@@ -93,7 +93,7 @@ def load_unicode_data():
         'Zs': set(),
     }
 
-    with open('UnicodeData.txt') as fp:
+    with open('UnicodeData.txt', encoding='utf-8') as fp:
         data = fp.read()
 
     for line in data.splitlines():
@@ -128,7 +128,7 @@ def load_east_asian():
         'W': set(),  # Wide.
     }
 
-    with open('EastAsianWidth.txt') as fp:
+    with open('EastAsianWidth.txt', encoding='utf-8') as fp:
         data = fp.read()
 
     for line in data.splitlines():
@@ -362,14 +362,14 @@ def main(argv):
             print(name + ' = ' + text)
     else:
         js = find_js(opts.js)
-        with open(js) as fp:
+        with open(js, encoding='utf-8') as fp:
             data = fp.read()
 
         for name, text in tables:
             data = re.sub(r'^%s = .*?^\];\n$' % name, name + ' = ' + text, data,
                           flags=re.M|re.S)
 
-        with open(js, 'w') as fp:
+        with open(js, 'w', encoding='utf-8') as fp:
             fp.write(data)
 
 

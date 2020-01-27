@@ -117,7 +117,7 @@ def parse_metadata(metadata):
     ret = {}
     re_field = re.compile(r'^(name|version): "(.*)"')
 
-    with open(metadata, 'r') as f:
+    with open(metadata, 'r', encoding='utf-8') as f:
         for line in f:
             line = line.strip()
 

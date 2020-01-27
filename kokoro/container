@@ -82,6 +82,7 @@ def run_docker(opts, docker_args=(), cmd_args=()):
     distfiles = os.path.join(libdot.LIBAPPS_DIR, 'ssh_client', 'distfiles')
     base_cmd = [
         'docker', 'run',
+        '--env', 'LANG=C.UTF-8',
         '--env', 'VCSID=HEAD',
         '--env', 'DISTDIR=/libapps/ssh_client/distfiles',
         '--volume', '%s:/libapps' % (libdot.LIBAPPS_DIR,),

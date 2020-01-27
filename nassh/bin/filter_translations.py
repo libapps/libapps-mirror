@@ -52,7 +52,7 @@ def trim_redundant_placeholders(data):
 
 def reformat(path, output=None, inplace=False):
     """Reformat translation."""
-    with open(path) as fp:
+    with open(path, 'rb') as fp:
         try:
             data = json.loads(fp.read())
         except ValueError as e:
@@ -71,7 +71,7 @@ def reformat(path, output=None, inplace=False):
     if inplace:
         output = path
     if output:
-        with open(output, 'w') as fp:
+        with open(output, 'w', encoding='utf-8') as fp:
             fp.write(format_tabs)
     else:
         sys.stdout.write(format_tabs)
