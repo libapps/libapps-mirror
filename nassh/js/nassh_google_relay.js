@@ -57,8 +57,10 @@ nassh.GoogleRelay.prototype.relayServerPattern =
     '%(protocol)://%(host):%(port)/';
 
 /**
+ * Redirect to the relay lookup server to initialize the connection.
+ *
  * @param {string=} resumePath
- * @return {boolean}
+ * @return {boolean} Whether redirection was successful.
  */
 nassh.GoogleRelay.prototype.redirect = function(resumePath) {
   if (!resumePath) {
@@ -70,24 +72,27 @@ nassh.GoogleRelay.prototype.redirect = function(resumePath) {
   this.storage.setItem('googleRelay.resumePath', resumePath);
 
   const uri = lib.f.replaceVars(
-    this.cookieServerPattern(),
-    { host: this.proxyHost,
+    this.cookieServerPattern(), {
+      host: this.proxyHost,
       port: this.proxyPort,
       protocol: this.useSecure ? 'https' : 'http',
       // This returns us to nassh_google_relay.html so we can pick the relay
       // host out of the reply.  From there we continue on to the resumePath.
-      return_to:  this.location.host
+      return_to: this.location.host,
     });
 
   // Since the proxy settings are coming from the user, make sure we catch bad
   // values (hostnames/etc...) directly.
   try {
-    this.location.href = uri;
+    // eslint-disable-next-line no-new
+    new URL(uri);
   } catch(e) {
     this.io.println(e);
+    this.io.println(uri);
     return false;
   }
 
+  this.location.href = uri;
   return true;
 };
 
@@ -109,31 +114,35 @@ nassh.GoogleRelay.prototype.init = function(resumePath) {
 
   // This session storage item is created by /html/nassh_google_relay.html
   // if we succeed at finding a relay host.
-  var relayHost = this.storage.getItem('googleRelay.relayHost');
-  var relayPort = this.storage.getItem('googleRelay.relayPort') ||
+  const relayHost = this.storage.getItem('googleRelay.relayHost');
+  const relayPort = this.storage.getItem('googleRelay.relayPort') ||
       this.proxyPort;
 
   if (relayHost) {
-    var expectedResumePath =
-        this.storage.getItem('googleRelay.resumePath');
+    const expectedResumePath = this.storage.getItem('googleRelay.resumePath');
     if (expectedResumePath == resumePath) {
-      var protocol = this.useSecure ? 'https' : 'http';
-      var pattern = this.relayServerPattern;
-      this.relayServer = lib.f.replaceVars(pattern,
-          {host: relayHost, port: relayPort, protocol: protocol});
-      protocol = this.useSecure ? 'wss' : 'ws';
-      this.relayServerSocket = lib.f.replaceVars(pattern,
-          {host: relayHost, port: relayPort, protocol: protocol});
+      const pattern = this.relayServerPattern;
+      this.relayServer = lib.f.replaceVars(pattern, {
+        host: relayHost,
+        port: relayPort,
+        protocol: this.useSecure ? 'https' : 'http',
+      });
+      this.relayServerSocket = lib.f.replaceVars(pattern, {
+        host: relayHost,
+        port: relayPort,
+        protocol: this.useSecure ? 'wss' : 'ws',
+      });
 
       // If we made it this far, we're probably not stuck in a redirect loop.
-      window.sessionStorage.removeItem('googleRelay.redirectCount');
+      // Clear the counter used by the relay redirect page.
+      this.storage.removeItem('googleRelay.redirectCount');
     } else {
       // If everything is ok, this should be the second time we've been asked
       // to do the same init.  (The first time would have redirected.)  If this
       // init specifies a different resumePath, then something is probably
       // wrong.
-      console.warn('Destination mismatch: ' + expectedResumePath + ' != ' +
-                   resumePath);
+      console.warn(`Destination mismatch: ${expectedResumePath} != ` +
+                   `${resumePath}`);
       this.relayServer = null;
     }
   }
@@ -163,8 +172,8 @@ nassh.GoogleRelay.prototype.init = function(resumePath) {
  */
 nassh.GoogleRelay.prototype.openSocket = function(fd, host, port, streams,
                                                   onOpen) {
-  var streamClass = this.useWebsocket ? nassh.Stream.GoogleRelayWS :
-                                        nassh.Stream.GoogleRelayXHR;
+  const streamClass = this.useWebsocket ? nassh.Stream.GoogleRelayWS :
+                                          nassh.Stream.GoogleRelayXHR;
   const options = {
     relay: this,
     host: host,
