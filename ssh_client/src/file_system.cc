@@ -387,7 +387,9 @@ int FileSystem::IsReady(int nfds, fd_set* fds, bool (FileStream::*is_ready)(),
   for (int i = 0; i < nfds; i++) {
     if (FD_ISSET(i, fds)) {
       FileStream* stream = GetStream(i);
-      if (stream && (stream->*is_ready)()) {
+      if (!stream) {
+        return -1;
+      } else if ((stream->*is_ready)()) {
         if (!apply)
           return 1;
         else
