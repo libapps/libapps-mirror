@@ -1,0 +1,41 @@
+https://marc.info/?l=openssh-unix-dev&m=158031806016705&w=2
+
+From aa5b7cfa4cff19ed23d0b9fb0ceb8e5e39fa30c3 Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier@chromium.org>
+Date: Wed, 29 Jan 2020 11:53:51 -0500
+Subject: [PATCH] clientloop: die if writing to the sender fails
+
+The write call here wasn't having its return value checked.  This
+could lead to CPU busy loops when the select() call returns but
+the write attempt fails.  This came up when running under NaCl, so
+I'm not sure how to recreate it in general, but it seems like this
+code should be checking its return value.  There shouldn't be a
+situation where returning an error & ignoring it is wanted.
+
+I went with fatal() here rather than error()+break becuase the code
+outside the loop will then attempt some writes and then call fatal.
+
+Url: https://crbug.com/990181
+---
+ clientloop.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/clientloop.c b/clientloop.c
+index 175b8480207d..50f32e2a718f 100644
+--- a/clientloop.c
++++ b/clientloop.c
+@@ -1392,8 +1392,10 @@ client_loop(struct ssh *ssh, int have_pty, int escape_char_arg,
+ 		 * Send as much buffered packet data as possible to the
+ 		 * sender.
+ 		 */
+-		if (FD_ISSET(connection_out, writeset))
+-			ssh_packet_write_poll(ssh);
++		if (FD_ISSET(connection_out, writeset)) {
++			if ((r = ssh_packet_write_poll(ssh)) != 0)
++				fatal("%s: write: %s", __func__, ssh_err(r));
++		}
+ 
+ 		/*
+ 		 * If we are a backgrounded control master, and the
+-- 
+2.23.0
