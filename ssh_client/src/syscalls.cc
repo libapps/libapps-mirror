@@ -2,15 +2,17 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 #include <errno.h>
+#include <inttypes.h>
 #include <netdb.h>
 #include <pthread.h>
 #include <pwd.h>
 #include <stdarg.h>
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/socket.h>
-#include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
 #include <termios.h>
 
 #include "nacl-mounts/base/irt_syscalls.h"
@@ -20,7 +22,13 @@
 extern "C" {
 
 #define VLOG_SYSCALL_ENTER() VLOG("SYSCALL: %s(", __func__)
-#define VLOG_SYSCALL_EXIT(ret) VLOG(") = %i\n", ret)
+#define VLOG_SYSCALL_EXIT(ret) \
+  do { \
+    VLOG(") = %i", ret); \
+    if (ret == -1) \
+      VLOG(" errno=%i(%s)", errno, strerror(errno)); \
+    VLOG("\n"); \
+  } while (0)
 #define LOG_SYSCALL_ENTER() LOG("SYSCALL: %s(", __func__)
 #define LOG_SYSCALL_EXIT(ret) \
   do { \
@@ -289,7 +297,11 @@ int ioctl(int fd, unsigned long request, ...) {
 int select(int nfds, fd_set* readfds, fd_set* writefds,
            fd_set* exceptfds, struct timeval* timeout) {
   VLOG_SYSCALL_ENTER();
-  VLOG("nfds=%d", nfds);
+  VLOG("nfds=%d, readfds=%p, writefds=%p, exceptfds=%p,"
+       " timeout=%p({tv_sec=%" PRIu64 ", tv_usec=%" PRIu64 "})",
+       nfds, readfds, writefds, exceptfds, timeout,
+       timeout ? (uint64_t)timeout->tv_sec : 0,
+       timeout ? (uint64_t)timeout->tv_usec : 0);
   int ret = FileSystem::GetFileSystem()->select(
       nfds, readfds, writefds, exceptfds, timeout);
   VLOG_SYSCALL_EXIT(ret);
@@ -554,18 +566,24 @@ ssize_t recv(int fd, void* buf, size_t count, int flags) {
 
 ssize_t sendto(int sockfd, const void* buf, size_t len, int flags,
                const struct sockaddr* dest_addr, socklen_t addrlen) {
-  LOG("SYSCALL: sendto(sockfd=%i, buf=%p, len=%zu, flags=%i, addr=%p, addrlen=%u)\n",
+  LOG_SYSCALL_ENTER();
+  LOG("sockfd=%i, buf=%p, len=%zu, flags=%i, addr=%p, addrlen=%u",
       sockfd, buf, len, flags, dest_addr, addrlen);
-  return FileSystem::GetFileSystem()->sendto(sockfd, (char*)buf, len, flags,
-                                             dest_addr, addrlen);
+  ssize_t ret = FileSystem::GetFileSystem()->sendto(
+      sockfd, (char*)buf, len, flags, dest_addr, addrlen);
+  LOG_SYSCALL_EXIT(ret);
+  return ret;
 }
 
 ssize_t recvfrom(int socket, void* buffer, size_t len, int flags,
                  struct sockaddr* addr, socklen_t* addrlen) {
-  LOG("SYSCALL: recvfrom(sockfd=%i, buf=%p, len=%zu, flags=%i, addr=%p, addrlen=%p)\n",
+  LOG_SYSCALL_ENTER();
+  LOG("sockfd=%i, buf=%p, len=%zu, flags=%i, addr=%p, addrlen=%p",
       socket, buffer, len, flags, addr, addrlen);
-  return FileSystem::GetFileSystem()->recvfrom(socket, (char*)buffer, len,
-                                               flags, addr, addrlen);
+  ssize_t ret = FileSystem::GetFileSystem()->recvfrom(
+      socket, (char*)buffer, len, flags, addr, addrlen);
+  LOG_SYSCALL_EXIT(ret);
+  return ret;
 }
 
 int socketpair(int domain, int type, int protocol, int socket_vector[2]) {

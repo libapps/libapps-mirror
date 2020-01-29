@@ -5,6 +5,7 @@
 #include "file_system.h"
 
 #include <arpa/inet.h>
+#include <inttypes.h>
 #include <netdb.h>
 #include <netinet/in.h>
 #include <signal.h>
@@ -422,10 +423,12 @@ int FileSystem::select(int nfds, fd_set* readfds, fd_set* writefds,
     int64_t wakeup_time_us =
         current_time_us +
         timeout->tv_sec * kMicrosecondsPerSecond + timeout->tv_usec;
-     ts_abs.tv_sec = wakeup_time_us / kMicrosecondsPerSecond;
-     ts_abs.tv_nsec =
+    ts_abs.tv_sec = wakeup_time_us / kMicrosecondsPerSecond;
+    ts_abs.tv_nsec =
         (wakeup_time_us - ts_abs.tv_sec * kMicrosecondsPerSecond) *
         kNanosecondsPerMicrosecond;
+    VLOG("%s: ts_abs={tv_sec=%" PRIu64 ", tv_nsec=%" PRIu64 "}\n",
+         __func__, (uint64_t)ts_abs.tv_sec, (uint64_t)ts_abs.tv_nsec);
   }
 
   while (!(IsInterrupted() ||
