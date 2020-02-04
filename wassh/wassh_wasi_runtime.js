@@ -168,12 +168,11 @@ export class WasshWasiRuntime {
 }
 
 /**
- * WASI syscalls.
+ * Base syscall entry class.
  */
-class WasiUnstable {
+class SyscallEntry {
   constructor(runtime) {
     this.runtime = runtime;
-    this.argv = runtime.argv;
   }
 
   getSharedMem_(...args) {
@@ -186,6 +185,16 @@ class WasiUnstable {
 
   getView_(...args) {
     return this.runtime.getView(...args);
+  }
+}
+
+/**
+ * WASI syscalls.
+ */
+class WasiUnstable extends SyscallEntry {
+  constructor(runtime) {
+    super(runtime);
+    this.argv = runtime.argv;
   }
 
   flattenEnviron_() {
@@ -606,9 +615,9 @@ class WasiUnstable {
 /**
  * WASSH syscall extensions.
  */
-class WasshExperimental {
+class WasshExperimental extends SyscallEntry {
   constructor(runtime) {
-    this.runtime = runtime;
+    super(runtime);
   }
 
   sock_create(sock, domain, type) {
