@@ -29,20 +29,7 @@ export class WasshWasiWorker {
 
     // TODO(ajws@): investigate if we can back the memory supplied to the WASM
     // runtime with a SharedArrayBuffer
-    const imports = {
-      'wasi_unstable': {},
-      'wassh_experimental': {},
-    };
-
-    // TODO(vapier): Not clear why we need to explicitly rebind.
-    Object.keys(imports).forEach((api) => {
-      Object.getOwnPropertyNames(this.runtime[api].__proto__).forEach((key) => {
-        if (key.endsWith('_') || key == 'constructor') {
-          return;
-        }
-        imports[api][key] = this.runtime[api][key].bind(this.runtime[api]);
-      });
-    });
+    const imports = this.runtime.getImports();
 
     this.runtime.io.write(`> Loading ${prog_path}\n`);
     let instance;
@@ -165,6 +152,12 @@ export class WasshWasiRuntime {
     };
     return dv;
   }
+
+  getImports() {
+    return Object.assign(
+        {}, this.wasi_unstable.getImports(),
+        this.wassh_experimental.getImports());
+  }
 }
 
 /**
@@ -186,6 +179,25 @@ class SyscallEntry {
   getView_(...args) {
     return this.runtime.getView(...args);
   }
+
+  getSyscalls_() {
+    // TODO: This only checks methods the class defined directly, not methods
+    // it might have inherited.  Only way around this would be to walk the
+    // prototype inheritance chain ourselves.  Or force classes to define the
+    // set of syscalls it supports (somehow).
+    return Object.getOwnPropertyNames(Object.getPrototypeOf(this))
+      .filter((key) => key.startsWith('sys_'));
+  }
+
+  getImports() {
+    const entries = {};
+    this.getSyscalls_().forEach((key) => {
+      entries[key.slice(4)] = this[key].bind(this);
+    });
+    const ret = {};
+    ret[this.namespace] = entries;
+    return ret;
+  }
 }
 
 /**
@@ -194,6 +206,7 @@ class SyscallEntry {
 class WasiUnstable extends SyscallEntry {
   constructor(runtime) {
     super(runtime);
+    this.namespace = 'wasi_unstable';
     this.argv = runtime.argv;
   }
 
@@ -204,7 +217,7 @@ class WasiUnstable extends SyscallEntry {
     return ret;
   }
 
-  environ_sizes_get(env_size, env_buf) {
+  sys_environ_sizes_get(env_size, env_buf) {
     this.runtime.io.debug(`environ_sizes_get(${env_size}, ${env_buf})`);
     const dvSize = this.getView_(env_size, 4);
     const dvBuf = this.getView_(env_buf, 4);
@@ -217,7 +230,7 @@ class WasiUnstable extends SyscallEntry {
     return WASI.errno.ESUCCESS;
   }
 
-  environ_get(envp, env_buf) {
+  sys_environ_get(envp, env_buf) {
     this.runtime.io.debug(`environ_get(${envp}, ${env_buf})`);
     const env = this.flattenEnviron_();
     const dvEnvp = this.getView_(envp, 4 * (env.length + 1));
@@ -236,7 +249,7 @@ class WasiUnstable extends SyscallEntry {
     return WASI.errno.ESUCCESS;
   }
 
-  args_sizes_get(argc, argv_size) {
+  sys_args_sizes_get(argc, argv_size) {
     this.runtime.io.debug(`args_sizes_get(${argc}, ${argv_size})`);
     const dvSize = this.getView_(argc, 4);
     const dvBuf = this.getView_(argv_size, 4);
@@ -248,7 +261,7 @@ class WasiUnstable extends SyscallEntry {
     return WASI.errno.ESUCCESS;
   }
 
-  args_get(argv, argv_buf) {
+  sys_args_get(argv, argv_buf) {
     this.runtime.io.debug(`args_get(${argv}, ${argv_buf})`);
     const dvArgv = this.getView_(argv, 4 * this.argv.length);
     let ptr = argv_buf;
@@ -264,12 +277,12 @@ class WasiUnstable extends SyscallEntry {
     return WASI.errno.ESUCCESS;
   }
 
-  proc_exit(status) {
+  sys_proc_exit(status) {
     this.runtime.io.debug(`proc_exit(${status})`);
     throw Error(`Exit ${status}`);
   }
 
-  proc_raise(sig) {
+  sys_proc_raise(sig) {
     this.runtime.io.debug(`proc_raise(${sig})`);
     throw Error(`Signaled ${sig}`);
   }
@@ -348,7 +361,7 @@ class WasiUnstable extends SyscallEntry {
    * @param {number} buf_len Length of buf in bytes.
    * @return {WASI.errno} The result from the syscall handler.
    */
-  random_get(buf, buf_len) {
+  sys_random_get(buf, buf_len) {
     this.runtime.io.debug(`entered random_get(${buf}, ${buf_len})`);
 
     // TODO(ajws@): work out if we can dynamically get the calling function's
@@ -362,12 +375,12 @@ class WasiUnstable extends SyscallEntry {
         'random_get', [this.getSharedMem_(buf, buf + buf_len)]);
   }
 
-  sched_yield() {
+  sys_sched_yield() {
     this.runtime.io.debug(`sched_yield()`);
     return WASI.errno.ESUCCESS;
   }
 
-  clock_res_get(clockid, resolution) {
+  sys_clock_res_get(clockid, resolution) {
     this.runtime.io.debug(`clock_res_get(${clockid}, ${resolution})`);
     const dv = this.getView_(resolution, 8);
     switch (clockid) {
@@ -386,7 +399,7 @@ class WasiUnstable extends SyscallEntry {
     }
   }
 
-  clock_time_get(clockid, precision, precisionHi, time) {
+  sys_clock_time_get(clockid, precision, precisionHi, time) {
     this.runtime.io.debug(`clock_time_get(${clockid}, ${precision}, ${time})`);
     const dv = this.getView_(time, 8);
     switch (clockid) {
@@ -406,7 +419,7 @@ class WasiUnstable extends SyscallEntry {
     }
   }
 
-  fd_prestat_get(fd, buf) {
+  sys_fd_prestat_get(fd, buf) {
     this.runtime.io.debug(`fd_prestat_get(${fd}, ${buf})`);
 
     if (!this.runtime.fds.has(fd)) {
@@ -428,7 +441,7 @@ class WasiUnstable extends SyscallEntry {
     return WASI.errno.ESUCCESS;
   }
 
-  fd_prestat_dir_name(fd, pathptr, path_len) {
+  sys_fd_prestat_dir_name(fd, pathptr, path_len) {
     this.runtime.io.debug(
         `fd_prestat_dir_name(${fd}, ${pathptr}, ${path_len})`);
 
@@ -449,7 +462,7 @@ class WasiUnstable extends SyscallEntry {
     return WASI.errno.ESUCCESS;
   }
 
-  fd_fdstat_get(fd, buf) {
+  sys_fd_fdstat_get(fd, buf) {
     this.runtime.io.debug(`fd_fdstat_get(${fd}, ${buf})`);
 
     if (!this.runtime.fds.has(fd)) {
@@ -480,22 +493,22 @@ class WasiUnstable extends SyscallEntry {
     return WASI.errno.ESUCCESS;
   }
 
-  fd_close(...args) {
+  sys_fd_close(...args) {
     this.runtime.io.debug(`fd_close(${args})`);
     return WASI.errno.ENOSYS;
   }
 
-  fd_seek(...args) {
+  sys_fd_seek(...args) {
     this.runtime.io.debug(`fd_seek(${args})`);
     return WASI.errno.ENOSYS;
   }
 
-  fd_sync(fd) {
+  sys_fd_sync(fd) {
     this.runtime.io.debug(`fd_sync(${fd})`);
     return WASI.errno.ESUCCESS;
   }
 
-  fd_write(fd, iovs, iovs_len, nwritten) {
+  sys_fd_write(fd, iovs, iovs_len, nwritten) {
     this.runtime.io.debug(`fd_write(${fd}, ${iovs}, ${iovs_len})`);
     // const fn = fd == 1 ? console.error : console.info;
     let ret = 0;
@@ -514,24 +527,24 @@ class WasiUnstable extends SyscallEntry {
     return WASI.errno.ESUCCESS;
   }
 
-  fd_filestat_get(...args) {
+  sys_fd_filestat_get(...args) {
     this.runtime.io.debug(`fd_filestat_get(${args})`);
     return WASI.errno.ENOSYS;
   }
 
-  fd_fdstat_set_flags(...args) {
+  sys_fd_fdstat_set_flags(...args) {
     this.runtime.io.debug(`fd_fdstat_set_flags(${args})`);
     return WASI.errno.ENOSYS;
   }
 
-  fd_read(fd, iovs, iovs_len, nread) {
+  sys_fd_read(fd, iovs, iovs_len, nread) {
     this.runtime.io.debug(`fd_read(${fd}, ${iovs}, ${iovs_len}, ${nread})`);
     const dv = this.getView_(nread, 4);
     dv.setUint32(0, 0, true);
     return WASI.errno.ENOSYS;
   }
 
-  path_open(
+  sys_path_open(
       dirfd, dirflags, pathptr, path_len, o_flags, fs_rights_baseLo,
       fs_rights_baseHi, fs_rights_inheritingLo, fs_rights_inheritingHi,
       fs_flags, fdptr) {
@@ -561,52 +574,52 @@ class WasiUnstable extends SyscallEntry {
     return WASI.errno.ESUCCESS;
   }
 
-  path_create_directory(...args) {
+  sys_path_create_directory(...args) {
     this.runtime.io.debug(`path_create_directory(${args})`);
     return WASI.errno.ENOSYS;
   }
 
-  path_link(...args) {
+  sys_path_link(...args) {
     this.runtime.io.debug(`path_link(${args})`);
     return WASI.errno.ENOSYS;
   }
 
-  path_unlink_file(...args) {
+  sys_path_unlink_file(...args) {
     this.runtime.io.debug(`path_unlink_file(${args})`);
     return WASI.errno.ENOSYS;
   }
 
-  path_rename(...args) {
+  sys_path_rename(...args) {
     this.runtime.io.debug(`path_rename(${args})`);
     return WASI.errno.ENOSYS;
   }
 
-  path_filestat_get(...args) {
+  sys_path_filestat_get(...args) {
     this.runtime.io.debug(`path_filestat_get(${args})`);
     return WASI.errno.ENOSYS;
   }
 
-  poll_oneoff(...args) {
+  sys_poll_oneoff(...args) {
     this.runtime.io.debug(`poll_oneoff(${args})`);
     return WASI.errno.ENOSYS;
   }
 
-  path_remove_directory(...args) {
+  sys_path_remove_directory(...args) {
     this.runtime.io.debug(`path_remove_directory(${args})`);
     return WASI.errno.ENOSYS;
   }
 
-  fd_readdir(...args) {
+  sys_fd_readdir(...args) {
     this.runtime.io.debug(`fd_readdir(${args})`);
     return WASI.errno.ENOSYS;
   }
 
-  sock_recv(...args) {
+  sys_sock_recv(...args) {
     this.runtime.io.debug(`sock_recv(${args})`);
     return WASI.errno.ENOSYS;
   }
 
-  sock_shutdown(...args) {
+  sys_sock_shutdown(...args) {
     this.runtime.io.debug(`sock_shutdown(${args})`);
     return WASI.errno.ENOSYS;
   }
@@ -618,19 +631,20 @@ class WasiUnstable extends SyscallEntry {
 class WasshExperimental extends SyscallEntry {
   constructor(runtime) {
     super(runtime);
+    this.namespace = 'wassh_experimental';
   }
 
-  sock_create(sock, domain, type) {
+  sys_sock_create(sock, domain, type) {
     this.runtime.io.debug(`sock_create(${sock}, ${domain}, ${type})`);
     return WASI.errno.ENOSYS;
   }
 
-  sock_connect(sock, domain, addr, port) {
+  sys_sock_connect(sock, domain, addr, port) {
     this.runtime.io.debug(`sock_connect(${sock}, ${domain}, ${addr}, ${port})`);
     return WASI.errno.ENOSYS;
   }
 
-  test_func(...args) {
+  sys_test_func(...args) {
     this.runtime.io.debug(`test_func(${args})`);
     return WASI.errno.ENOSYS;
   }
