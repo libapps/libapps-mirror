@@ -1,3 +1,28 @@
+# 0.22, 2020-02-05, New relay protocol & minor SSH-FE & SSH fixes.
+
+* corp relay: Port cleanups from new corpv4 code.
+* grue: Implement new corp-ssh-v4@google.com protocol.
+* ssh_client: Fix hang in openssh with broken connections.
+* ssh_client: Have select return EBADFD with invalid fds.
+* app: Start encouraging people to move to the extension.
+* extension: Have Ctrl-Shift-N open connect dialog.
+* sshfe: Fix error after closure compilation change.
+* sshfe: Make connection parsing a little more robust.
+* ssh_client: wabt: Update to 1.0.13 release.
+* hterm: word-breaks: Add more quote marks.
+* ssh_client: binaryen: Update to 90 release.
+* nassh: Auto-sync prefs on install.
+* api: Add prefereneces import/export commands.
+* nassh: Fix favicon usage with shortcuts.
+* extension: Add crosh & socket APIs.
+* connect dialog: Drop from web_accessible_resources.
+* nassh: Drop Chrome Apps (v2) support.
+* api: Add a simple hello message.
+* api: Rework to better handle startup.
+* extension: Drop "Extension" from the name.  It's cleaner.
+* omnibox: Fix opening windows.
+* extension: Enable FSP support.
+
 # 0.21, 2019-12-02, SFTP mount fix.
 
 * nassh: Fix up new --welcome setting.
