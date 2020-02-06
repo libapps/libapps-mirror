@@ -1807,6 +1807,10 @@
 		"description": "Header for the terminal text preference sub-category (e.g. font family/size/color). Shown above all related settings.",
 		"message": "Text"
 	},
+	"TERMINAL_TITLE_SETTINGS": {
+		"description": "Title for terminal settings window",
+		"message": "Settings"
+	},
 	"TERMINAL_RESET_MENU_LABEL": {
 		"description": "The menu label to reset the active terminal settings.",
 		"message": "Terminal Reset"

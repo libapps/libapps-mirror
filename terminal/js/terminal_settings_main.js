@@ -23,6 +23,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     hterm.messageManager.useCrlf = true;
     const url =  lib.f.getURL('/_locales/$1/messages.json');
     await hterm.messageManager.findAndLoadMessages(url);
+    document.title = hterm.messageManager.get('TERMINAL_TITLE_SETTINGS');
     onInit();
   });
   lib.init(() => {
