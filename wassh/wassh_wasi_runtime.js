@@ -93,6 +93,11 @@ class TrackedMemoryRegion {
 }
 
 /**
+ * How many nanoseconds in one millisecond.
+ */
+const kNanosecToMillisec = 1000000;
+
+/**
  * The runtime glue between the JS & WASM worlds.
  */
 export class WasshWasiRuntime {
@@ -145,12 +150,7 @@ export class WasshWasiRuntime {
   }
 
   getView(base, length) {
-    const dv = new DataView(this.instance.exports.memory.buffer, base, length);
-    dv.setUint64 = function(offset, value, endian) {
-      this.setUint32(offset, value, endian);
-      this.setUint32(offset + 4, value / 0x100000000, endian);
-    };
-    return dv;
+    return new DataView(this.instance.exports.memory.buffer, base, length);
   }
 
   getImports() {
@@ -416,11 +416,11 @@ class WasiUnstable extends SyscallEntry {
         // JavaScript's Date.now is millisecond resolution.
         // performance.now provides microseconds, but browsers have disabled it
         // due to security concerns.
-        dv.setUint64(0, 1000000, true);
+        dv.setBigUint64(0, BigInt(kNanosecToMillisec), true);
         return WASI.errno.ESUCCESS;
       case WASI.clock.MONOTONIC:
         // performance.now is guaranteed to be monotonic.
-        dv.setUint64(0, 1, true);
+        dv.setBigUint64(0, BigInt(1), true);
         return WASI.errno.ESUCCESS;
       default:
         return WASI.errno.EINVAL;
@@ -432,13 +432,13 @@ class WasiUnstable extends SyscallEntry {
     switch (clockid) {
       case WASI.clock.REALTIME: {
         // Convert milliseconds to nanoseconds.
-        const now = Date.now() * 1000000;
-        dv.setUint64(0, now, true);
+        const now = BigInt(Date.now()) * BigInt(kNanosecToMillisec);
+        dv.setBigUint64(0, now, true);
         return WASI.errno.ESUCCESS;
       }
       case WASI.clock.MONOTONIC: {
-        const now = performance.now() * 1000000000;
-        dv.setUint64(0, now, true);
+        const now = BigInt(Math.floor(performance.now() * 1000000000));
+        dv.setBigUint64(0, now, true);
         return WASI.errno.ESUCCESS;
       }
       default:
@@ -508,8 +508,8 @@ class WasiUnstable extends SyscallEntry {
     */
     dv.setUint8(0, WASI.filetype.DIRECTORY, true);
     dv.setUint16(2, 0, true);
-    dv.setUint64(8, 0xffffffffff, true);
-    dv.setUint64(16, 0xffffffffff, true);
+    dv.setBigUint64(8, BigInt(0xffffffffff), true);
+    dv.setBigUint64(16, BigInt(0xffffffffff), true);
     return WASI.errno.ESUCCESS;
   }
 
