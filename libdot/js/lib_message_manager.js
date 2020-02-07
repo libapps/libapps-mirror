@@ -23,8 +23,15 @@
  * @constructor
  */
 lib.MessageManager = function(languages, useCrlf = false) {
-  this.languages_ = languages.map((el) => el.replace(/-/g, '_'));
-
+  // Replace '-' with '_'.  Use 'en' for 'en_US' since it is the
+  // default, and ensure 'en' is always included as last fallback.
+  this.languages_ = languages.map((el) => {
+    el = el.replace(/-/g, '_');
+    if (el == 'en_US') {
+      el = 'en';
+    }
+    return el;
+  });
   if (this.languages_.indexOf('en') == -1)
     this.languages_.push('en');
 
