@@ -913,7 +913,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   // Start driving non-CrOS people to the extension variant.
   // We do this only for newer versions so we don't flag users on EOL devices
   // who can't migrate to the extension.
-  if (this.manifest_.app && hterm.os != 'cros') {
+  if (this.manifest_ && this.manifest_.app && hterm.os != 'cros') {
     const extUrl = 'https://chrome.google.com/webstore/detail/' +
         'iodihamcpbpeioajjeobimgagajmlibd';
     const docUrl = 'https://chromium.googlesource.com/apps/libapps/+/HEAD/' +
