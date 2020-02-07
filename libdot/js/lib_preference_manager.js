@@ -299,7 +299,7 @@ lib.PreferenceManager.prototype.defineChildren = function(
  * Register to observe preference changes.
  *
  * @param {string} name The name of preference you wish to observe..
- * @param {function()} observer The callback.
+ * @param {function(*, string, !lib.PreferenceManager)} observer The callback.
  */
 lib.PreferenceManager.prototype.addObserver = function(name, observer) {
   if (!(name in this.prefRecords_)) {

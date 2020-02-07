@@ -29,6 +29,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
   lib.init(() => {
     window.PreferenceManager = hterm.PreferenceManager;
     window.preferenceManager = new window.PreferenceManager('default');
+
+    // Add a listener to 'background-color' pref and set
+    // <meta id='meta-theme-color' name='theme-color' content="#...">
+    // to update tab and frame colors.
+    window.preferenceManager.addObserver('background-color', (color) => {
+      document.getElementById('meta-theme-color')
+          .setAttribute('content', /** @type {string} */(color));
+    });
     window.preferenceManager.readStorage(resolveLibdotInitialized);
   });
 });

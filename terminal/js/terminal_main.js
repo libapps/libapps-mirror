@@ -2,6 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+/**
+ * @fileoverview Initializes global state used in terminal.
+ */
+
 import {TerminalDisplayManagerElement as Manager} from
     './terminal_display_manager.js';
 
@@ -38,6 +42,14 @@ window.addEventListener('DOMContentLoaded', () => {
       element.setAttribute('slot', event.detail.slot);
       event.target.appendChild(element);
       window.term_ = terminal.init(element);
+
+      // Add a listener to 'background-color' pref and set
+      // <meta id='meta-theme-color' name='theme-color' content="#...">
+      // to update tab and frame colors.
+      window.term_.getPrefs().addObserver('background-color', (color) => {
+        document.getElementById('meta-theme-color')
+            .setAttribute('content', /** @type {string} */(color));
+      });
     });
     customElements.define(Manager.is, Manager);
   });
