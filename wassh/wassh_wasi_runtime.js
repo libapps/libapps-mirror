@@ -7,7 +7,7 @@
  */
 
 import {SyscallLock} from './syscall_lock.js';
-import * as WASI from './wasi.js';
+import * as WASI from './js/wasi.js';
 
 export class WasshWasiWorker {
   async run(prog_path, syscall_lock) {
