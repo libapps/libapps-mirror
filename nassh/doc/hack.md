@@ -149,6 +149,15 @@ are already removed from the [manifest_ext.json] for the extension.
   <br>
   Note: Making connections over https using relay servers will still work
   though.  See the [FAQ] for more details.
+* Access to [chrome.sockets] APIs.  This allows connecting directly to SSH
+  servers (e.g. port 22).  We're allowing this pending [Native Sockets] support
+  in the web platform itself.
+* Access to `chrome.crashReportPrivate` APIs.
+  This allows users to opt-in to providing crash-reports.
+  Not required to be able to use Secure Shell of course.
+* Access to `chrome.metricsPrivate` APIs.
+  This allows users to opt-in to metrics/UMA collection about basic features.
+  Not required to be able to use Secure Shell of course.
 * SFTP backend for Chrome OS (`fileSystemProvider` and
   `file_system_provider_capabilities`).
   [(1)](https://cs.chromium.org/chromium/src/chrome/common/extensions/api/_permission_features.json)
@@ -565,6 +574,7 @@ Here's a random list of documents which would be useful to people.
 [crosh]: chromeos-crosh.md
 [gnubbyd]: https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco
 [NaCl]: https://developer.chrome.com/native-client
+[Native Sockets]: https://crbug.com/909927
 [OpenSSH]: https://www.openssh.com/
 [OpenSSH SFTP Protocol]: https://github.com/openssh/openssh-portable/blob/master/PROTOCOL
 [SFTPv3]: https://tools.ietf.org/html/draft-ietf-secsh-filexfer-02

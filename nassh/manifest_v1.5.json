@@ -23,7 +23,9 @@
     "terminalPrivate",
     "unlimitedStorage",
     "fileSystemProvider",
-    "accessibilityFeatures.read"
+    "accessibilityFeatures.read",
+    "crashReportPrivate",
+    "metricsPrivate"
   ],
   "file_system_provider_capabilities": {
     "source": "network",

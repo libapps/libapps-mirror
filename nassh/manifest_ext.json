@@ -23,7 +23,9 @@
     "terminalPrivate",
     "unlimitedStorage",
     "fileSystemProvider",
-    "accessibilityFeatures.read"
+    "accessibilityFeatures.read",
+    "crashReportPrivate",
+    "metricsPrivate"
   ],
   "sockets": {
     "tcp": {
