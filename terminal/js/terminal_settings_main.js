@@ -37,6 +37,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
       document.getElementById('meta-theme-color')
           .setAttribute('content', /** @type {string} */(color));
     });
-    window.preferenceManager.readStorage(resolveLibdotInitialized);
+    window.preferenceManager.readStorage(() => {
+      window.preferenceManager.notifyAll();
+      resolveLibdotInitialized();
+    });
   });
 });
