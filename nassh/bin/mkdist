@@ -167,9 +167,10 @@ def copyfiles(tmpdir, extra_exclude=()):
                     shutil.copy(path, dst)
 
 
-def mkzip(manifest, stamps=()):
+def mkzip(manifest_name, stamps=()):
     """Build the nassh extension archive."""
-    logging.info('Processing %s', manifest)
+    logging.info('Processing %s', manifest_name)
+    manifest = os.path.join(nassh.DIR, manifest_name)
 
     with open(manifest, encoding='utf-8') as fp:
         data = json.load(fp)
