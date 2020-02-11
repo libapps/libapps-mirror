@@ -16,12 +16,7 @@ import './terminal_settings_colorpicker.js';
 import './terminal_settings_dropdown.js';
 import './terminal_settings_hue_slider.js';
 import './terminal_settings_saturation_lightness_picker.js';
-import './terminal_settings_theme.js';
 import './terminal_settings_transparency_slider.js';
-
-const THEME_FONT_FAMILY = "'DejaVu Sans Mono', 'Noto Sans Mono', " +
-                          "'Everson Mono', FreeMono, Menlo, Terminal, " +
-                          'monospace';
 
 const BELL_SOUND_CONVERTER = {
   toChecked: value => !!value,
@@ -140,19 +135,6 @@ export class TerminalSettingsApp extends LitElement {
         margin: 0;
         padding: 0 20px;
       }
-
-      .theme-setting-container {
-        display: block;
-        padding-bottom: 15px;
-      }
-
-      .theme-picker > terminal-settings-theme {
-        box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.2);
-        display: inline-block;
-        height: 140px;
-        margin: 5px;
-        width: 140px;
-      }
     `;
   }
 
@@ -181,39 +163,6 @@ export class TerminalSettingsApp extends LitElement {
             <h3>${msg('TERMINAL_TITLE_PREF_BACKGROUND')}</h3>
 
             <ul class="section-body">
-              <li class="setting-container theme-setting-container">
-                <h4>Pick a theme, or fully customize your Terminal</h4>
-                <div class="theme-picker">
-                  <terminal-settings-theme
-                      name="Small dark mode"
-                      backgroundcolor="#444444"
-                      fontcolor="#0cd44b"
-                      fontsize="15"
-                      fontfamily="${THEME_FONT_FAMILY}">
-                  </terminal-settings-theme>
-                  <terminal-settings-theme
-                      name="Big dark mode"
-                      backgroundcolor="#444444"
-                      fontcolor="#0cd44b"
-                      fontsize="20"
-                      fontfamily="${THEME_FONT_FAMILY}">
-                  </terminal-settings-theme>
-                  <terminal-settings-theme
-                      name="Small light mode"
-                      backgroundcolor="#dddddd"
-                      fontcolor="#7d0f5b"
-                      fontsize="15"
-                      fontfamily="${THEME_FONT_FAMILY}">
-                  </terminal-settings-theme>
-                  <terminal-settings-theme
-                      name="Big light mode"
-                      backgroundcolor="#dddddd"
-                      fontcolor="#7d0f5b"
-                      fontsize="20"
-                      fontfamily="${THEME_FONT_FAMILY}">
-                  </terminal-settings-theme>
-                </div>
-              </li>
               <li class="setting-container">
                 <h4>${msg('TERMINAL_NAME_PREF_COLOR')}</h4>
                 <terminal-settings-colorpicker preference="background-color">
