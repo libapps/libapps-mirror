@@ -165,25 +165,12 @@ export class TerminalSettingsApp extends LitElement {
             <ul class="section-body">
               <li class="setting-container">
                 <h4>${msg('TERMINAL_NAME_PREF_COLOR')}</h4>
-                <terminal-settings-colorpicker preference="background-color">
+                <!-- TODO(crbug.com/1050882) We need to have migration code to
+                    reset background transparency to 0% now that the user cannot
+                    set it. -->
+                <terminal-settings-colorpicker preference="background-color"
+                    disableTransparency>
                 </terminal-settings-colorpicker>
-              </li>
-              <li class="setting-container">
-                <h4>${msg('TERMINAL_NAME_PREF_IMAGE')}</h4>
-                <!-- TODO(juwa@google.com): Add element -->
-                <input type="checkbox" />
-              </li>
-              <!-- TODO(juwa@google.com): Hide image options if no image
-                  selected -->
-              <li class="setting-container">
-                <h4>${msg('HTERM_NAME_PREF_BACKGROUND_POSITION')}</h4>
-                <!-- TODO(juwa@google.com): Add element -->
-                <select></select>
-              </li>
-              <li class="setting-container">
-                <h4>Background image blending</h4>
-                <!-- TODO(juwa@google.com): Add element -->
-                <input type="range" />
               </li>
             </ul>
           </section>

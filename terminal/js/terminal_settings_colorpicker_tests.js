@@ -143,4 +143,17 @@ describe('terminal_settings_colorpicker.js', () => {
     await allUpdatesComplete(this.el);
     assert.closeTo(+hs.getAttribute('hue'), 276.7, 0.05);
   });
+
+  it('hides-transparency-when-disableTransparency-is-set', async function() {
+    assert.isNotNull(
+        this.el.shadowRoot.querySelector('saturation-lightness-picker'));
+    assert.isNotNull(this.el.shadowRoot.querySelector('hue-slider'));
+    assert.isNotNull(this.el.shadowRoot.querySelector('transparency-slider'));
+    this.el.setAttribute('disableTransparency', true);
+    await this.el.updateComplete;
+    assert.isNotNull(
+        this.el.shadowRoot.querySelector('saturation-lightness-picker'));
+    assert.isNotNull(this.el.shadowRoot.querySelector('hue-slider'));
+    assert.isNull(this.el.shadowRoot.querySelector('transparency-slider'));
+  });
 });

@@ -27,6 +27,9 @@ export class TerminalSettingsColorpickerElement extends
       expanded: {
         type: Boolean,
       },
+      disableTransparency: {
+        type: Boolean,
+      },
       hue_: {
         type: Number
       },
@@ -128,11 +131,14 @@ export class TerminalSettingsColorpickerElement extends
           Hue
           <hue-slider hue="${this.hue_}" @updated="${this.onHue_}">
           </hue-slider>
-          Transparency
-          <transparency-slider hue="${this.hue_}"
-              @updated="${this.onTransparency_}"
-              transparency="${this.transparency_}">
-          </transparency-slider>
+          ${this.disableTransparency
+              ? ''
+              : html`Transparency
+                     <transparency-slider hue="${this.hue_}"
+                         @updated="${this.onTransparency_}"
+                         transparency="${this.transparency_}">
+                     </transparency-slider>`
+          }
         </div>
     `;
   }
@@ -141,6 +147,7 @@ export class TerminalSettingsColorpickerElement extends
     super();
 
     this.expanded = false;
+    this.disableTransparency = false;
     /** @private {number} */
     this.hue_;
     /** @private {number} */
