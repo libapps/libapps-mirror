@@ -1,0 +1,14 @@
+name: "OpenSSH"
+description: "SSH and SFTP client"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://www.openssh.com/"
+  }
+  version: "8.2p1"
+  last_upgrade_date { year: 2020 month: 2 day: 14 }
+
+  local_modifications:
+      "See the patches in this directory for more details."
+}

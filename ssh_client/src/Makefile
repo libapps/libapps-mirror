@@ -15,7 +15,7 @@ WORKDIR = $(OUTPUT)/build/$(BUILD_NAME)/$(RELEASE)
 EXEDIR = $(WORKDIR)
 D = $(OUTPUT)/plugin/$(BUILD_NAME)
 
-SSH_VERSION = 8.0
+SSH_VERSION = 8.2
 DEFAULT_VERSION = true
 ifeq ($(DEFAULT_VERSION),)
 D := $(D)-openssh-$(SSH_VERSION)
@@ -92,7 +92,9 @@ $(POBJS): $(WORKDIR)/%_p.o : $(CURDIR)/%.cc
 	$(PNACL_CXX) -o $@ -c $< $(PNACL_CXXFLAGS)
 
 $(EXEDIR)/$(newlib_pexe): $(POBJS)
-	$(PNACL_CXX) -o $@ $^ -lopenssh-$(SSH_VERSION) -lssh-$(SSH_VERSION) \
+	$(PNACL_CXX) -o $@ $^ \
+		-Wl,--whole-archive -lopenssh-$(SSH_VERSION) -Wl,--no-whole-archive \
+		-lssh-$(SSH_VERSION) \
 		-lopenbsd-compat-$(SSH_VERSION) -lldns \
 		$(PNACL_LDFLAGS) $(PNACL_CXXFLAGS)
 

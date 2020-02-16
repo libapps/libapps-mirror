@@ -21,6 +21,15 @@ __BEGIN_DECLS
 #define SIG_DFL  ((void*)(uintptr_t)0)
 #define SIG_IGN  ((void*)(uintptr_t)1)
 
+// Flags for sa_flags.
+#define SA_NOCLDSTOP 0x0001
+#define SA_ONSTACK   0x0002
+#define SA_RESETHAND 0x0004
+#define SA_RESTART   0x0008
+#define SA_SIGINFO   0x0010
+#define SA_NOCLDWAIT 0x0020
+#define SA_NODEFER   0x0040
+
 typedef void (*sighandler_t)(int);
 sighandler_t signal(int signum, sighandler_t handler);
 
