@@ -5,6 +5,9 @@
 /**
  * @fileoverview Initializes global state used in terminal settings.
  */
+
+import {normalizePrefsInPlace} from './terminal_common.js';
+
 let resolveLibdotInitialized;
 window.libdotInitialized = new Promise(resolve => {
   resolveLibdotInitialized = resolve;
@@ -38,6 +41,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
           .setAttribute('content', /** @type {string} */(color));
     });
     window.preferenceManager.readStorage(() => {
+      normalizePrefsInPlace(window.preferenceManager);
       window.preferenceManager.notifyAll();
       resolveLibdotInitialized();
     });

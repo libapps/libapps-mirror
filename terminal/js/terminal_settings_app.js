@@ -9,6 +9,8 @@
  */
 
 import {css, html, LitElement} from './lit_element.js';
+import {SUPPORTED_FONT_SIZES, SUPPORTED_FONT_FAMILIES} from
+    './terminal_common.js';
 import './terminal_settings_app.js';
 import './terminal_settings_category_selector.js';
 import './terminal_settings_checkbox.js';
@@ -37,19 +39,6 @@ function altGrModeToText(mode) {
       return mode;
   }
 }
-
-// TODO(lxj@google.com): These are hand picked monospace fonts available on
-// Chrome OS. We might want to find a better way instead of hard coding.
-const FONT_FAMILY_OPTIONS = [
-    'Cousine',
-    'monospace',
-    'Noto Sans Mono',
-    'Noto Sans Mono CJK HK',
-    'Noto Sans Mono CJK JP',
-    'Noto Sans Mono CJK KR',
-    'Noto Sans Mono CJK SC',
-    'Noto Sans Mono CJK TC',
-];
 
 export class TerminalSettingsApp extends LitElement {
   /** @override */
@@ -184,7 +173,7 @@ export class TerminalSettingsApp extends LitElement {
               <li class="setting-container">
                 <h4>${msg('HTERM_NAME_PREF_FONT_FAMILY')}</h4>
                 <terminal-settings-dropdown preference="font-family"
-                  .options=${FONT_FAMILY_OPTIONS}>
+                  .options=${SUPPORTED_FONT_FAMILIES}>
                 </terminal-settings-dropdown>
               </li>
               <li class="setting-container">
@@ -192,7 +181,7 @@ export class TerminalSettingsApp extends LitElement {
                 <!-- TODO(lxj@google.com): Options' value is taken from the UX
                     mock. We might want a wider range of choices. -->
                 <terminal-settings-dropdown preference="font-size"
-                  .options=${[6, 8, 10, 12, 14, 16, 18]}>
+                  .options=${SUPPORTED_FONT_SIZES}>
                 </terminal-settings-dropdown>
               </li>
               <li class="setting-container">
