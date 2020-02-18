@@ -33,7 +33,6 @@ module.exports = {
     'max-len': ['error', {'code': 80, 'ignoreUrls': true}],
     'new-parens': 'error',
     'no-alert': 'error',
-    'no-catch-shadow': 'error',
     'no-cond-assign': 'error',
     'no-const-assign': 'error',
     'no-debugger': 'error',
