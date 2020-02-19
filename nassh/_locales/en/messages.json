@@ -481,6 +481,22 @@
 		"description": "Label text shown for the hterm 'pass-ctrl-number' preference.",
 		"message": "Pass Ctrl-1..9 key behavior"
 	},
+	"HTERM_NAME_PREF_PASS_CTRL_N": {
+		"description": "Label text shown for the hterm 'pass-ctrl-n' preference.",
+		"message": "Pass Ctrl-N key behavior"
+	},
+	"HTERM_NAME_PREF_PASS_CTRL_T": {
+		"description": "Label text shown for the hterm 'pass-ctrl-t' preference.",
+		"message": "Pass Ctrl-T key behavior"
+	},
+	"HTERM_NAME_PREF_PASS_CTRL_TAB": {
+		"description": "Label text shown for the hterm 'pass-ctrl-tab' preference.",
+		"message": "Pass Ctrl-Tab key behavior"
+	},
+	"HTERM_NAME_PREF_PASS_CTRL_W": {
+		"description": "Label text shown for the hterm 'pass-ctrl-w' preference.",
+		"message": "Pass Ctrl-W key behavior"
+	},
 	"HTERM_NAME_PREF_PASS_META_NUMBER": {
 		"description": "Label text shown for the hterm 'pass-meta-number' preference.",
 		"message": "Pass Meta-1..9 key behavior"
@@ -752,6 +768,23 @@
 	"HTERM_PREF_PASS_CTRL_NUMBER": {
 		"description": "Help text shown for the hterm 'pass-ctrl-number' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
 		"message": "Whether Ctrl-1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard accelerators. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Ctrl-1..9 will be handled by the browser. If false, Ctrl-1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
+	},
+	"HTERM_PREF_PASS_CTRL_N": {
+		"description": "Help text shown for the hterm 'pass-ctrl-n' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
+		"message": "Whether Ctrl-N is passed to the browser.\n\nIf true, Ctrl-N will be handled by the browser as the \"new window\" keyboard accelerator. If false, Ctrl-N will be sent to the host."
+
+	},
+	"HTERM_PREF_PASS_CTRL_T": {
+		"description": "Help text shown for the hterm 'pass-ctrl-t' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
+		"message": "Whether Ctrl-T is passed to the browser.\n\nIf true, Ctrl-T will be handled by the browser as the \"new tab\" keyboard accelerator. If false, Ctrl-T will be sent to the host."
+	},
+	"HTERM_PREF_PASS_CTRL_TAB": {
+		"description": "Help text shown for the hterm 'pass-ctrl-tab' preference. 'Ctrl' and 'Shift' are the names of the keyboard buttons and may be translated as makes sense.",
+		"message": "Whether Ctrl-Tab and Ctrl-Shift-Tab are passed to the browser.\n\nIf true, Ctrl-Tab and Ctrl-Shift-Tab will be handled by the browser as the \"next/previous tab\" keyboard accelerator. If false, the Tab key is sent to the host without Ctrl or Shift."
+	},
+	"HTERM_PREF_PASS_CTRL_W": {
+		"description": "Help text shown for the hterm 'pass-ctrl-w' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
+		"message": "Whether Ctrl-W is passed to the browser.\n\nIf true, Ctrl-W will be handled by the browser as the \"close tab\" keyboard accelerator. If false, Ctrl-W will be sent to the host."
 	},
 	"HTERM_PREF_PASS_META_NUMBER": {
 		"description": "Help text shown for the hterm 'pass-meta-number' preference. 'Meta' is the name of the keyboard button and may be translated as makes sense.",
