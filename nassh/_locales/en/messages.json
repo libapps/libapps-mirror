@@ -772,7 +772,6 @@
 	"HTERM_PREF_PASS_CTRL_N": {
 		"description": "Help text shown for the hterm 'pass-ctrl-n' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
 		"message": "Whether Ctrl-N is passed to the browser.\n\nIf true, Ctrl-N will be handled by the browser as the \"new window\" keyboard accelerator. If false, Ctrl-N will be sent to the host."
-
 	},
 	"HTERM_PREF_PASS_CTRL_T": {
 		"description": "Help text shown for the hterm 'pass-ctrl-t' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",

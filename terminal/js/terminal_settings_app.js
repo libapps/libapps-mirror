@@ -240,6 +240,26 @@ export class TerminalSettingsApp extends LitElement {
 
             <ul class="section-body">
               <li class="setting-container">
+                <h4>${msg('HTERM_NAME_PREF_PASS_CTRL_N')}</h4>
+                <terminal-settings-checkbox preference="pass-ctrl-n">
+                </terminal-settings-checkbox>
+              </li>
+              <li class="setting-container">
+                <h4>${msg('HTERM_NAME_PREF_PASS_CTRL_T')}</h4>
+                <terminal-settings-checkbox preference="pass-ctrl-t">
+                </terminal-settings-checkbox>
+              </li>
+              <li class="setting-container">
+                <h4>${msg('HTERM_NAME_PREF_PASS_CTRL_W')}</h4>
+                <terminal-settings-checkbox preference="pass-ctrl-w">
+                </terminal-settings-checkbox>
+              </li>
+              <li class="setting-container">
+                <h4>${msg('HTERM_NAME_PREF_PASS_CTRL_TAB')}</h4>
+                <terminal-settings-checkbox preference="pass-ctrl-tab">
+                </terminal-settings-checkbox>
+              </li>
+              <li class="setting-container">
                 <h4>${msg('HTERM_NAME_PREF_CTRL_PLUS_MINUS_ZERO_ZOOM')}</h4>
                 <terminal-settings-checkbox
                     preference="ctrl-plus-minus-zero-zoom">
