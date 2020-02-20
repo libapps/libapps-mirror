@@ -8,7 +8,6 @@
 
 import {TerminalDisplayManagerElement as Manager} from
     './terminal_display_manager.js';
-import {normalizePrefsInPlace} from './terminal_common.js';
 
 window.addEventListener('DOMContentLoaded', () => {
   // TODO(crbug.com/999028): Make sure system web apps are not discarded as
@@ -43,7 +42,6 @@ window.addEventListener('DOMContentLoaded', () => {
       element.setAttribute('slot', event.detail.slot);
       event.target.appendChild(element);
       window.term_ = terminal.init(element);
-      normalizePrefsInPlace(window.term_.getPrefs());
 
       // Add a listener to 'background-color' pref and set
       // <meta id='meta-theme-color' name='theme-color' content="#...">
