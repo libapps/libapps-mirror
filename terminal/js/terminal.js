@@ -2,9 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
+import {TerminalMenu} from './terminal_menu.js';
 
-const terminal = {};
+export const terminal = {};
 
 /**
  * The Terminal command.
@@ -236,3 +236,5 @@ terminal.migrateSettings = function(callback) {
     });
   });
 };
+
+terminal.Menu = TerminalMenu;

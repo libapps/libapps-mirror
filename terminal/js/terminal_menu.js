@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * Terminal menu watches changes in the URL fragment to detect when a user
  * selects items from the menu.
@@ -11,20 +9,20 @@
  * @param {!Window} window Window to attach to for 'hashchange' events.
  * @constructor
  */
-terminal.Menu = function(window) {
+export function TerminalMenu(window) {
   this.window = window;
-};
+}
 
 /**
  * @type {!Map<string, function(boolean)>}
  * @const
  */
-terminal.Menu.HANDLERS = new Map();
+TerminalMenu.HANDLERS = new Map();
 
 /**
  * Install Menu to listen to 'hashchange' events.
  */
-terminal.Menu.prototype.install = function() {
+TerminalMenu.prototype.install = function() {
   this.listener_ =
       /** @type {!EventListener} */ (this.onHashChange_.bind(this, false));
   this.window.addEventListener('hashchange', this.listener_);
@@ -34,7 +32,7 @@ terminal.Menu.prototype.install = function() {
 /**
  * Uninstall Menu from listening to 'hashchange' events.
  */
-terminal.Menu.prototype.uninstall = function() {
+TerminalMenu.prototype.uninstall = function() {
   this.window.removeEventListener('hashchange', this.listener_);
 };
 
@@ -46,8 +44,8 @@ terminal.Menu.prototype.uninstall = function() {
  * @param {!HashChangeEvent=} event The event to handle.
  * @private
  */
-terminal.Menu.prototype.onHashChange_ = function(initialLoad, event) {
-  const handler = terminal.Menu.HANDLERS.get(this.window.location.hash);
+TerminalMenu.prototype.onHashChange_ = function(initialLoad, event) {
+  const handler = TerminalMenu.HANDLERS.get(this.window.location.hash);
   if (handler) {
     handler.call(this, initialLoad);
   }
@@ -57,7 +55,7 @@ terminal.Menu.prototype.onHashChange_ = function(initialLoad, event) {
 };
 
 /** Open settings page in a new window. */
-terminal.Menu.HANDLERS.set('#options', function(initialLoad) {
+TerminalMenu.HANDLERS.set('#options', function(initialLoad) {
   const url = 'chrome://terminal/html/terminal_settings.html';
   if (initialLoad) {
     this.window.location.replace(url);

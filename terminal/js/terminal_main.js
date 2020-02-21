@@ -6,6 +6,7 @@
  * @fileoverview Initializes global state used in terminal.
  */
 
+import {terminal} from './terminal.js';
 import {TerminalDisplayManagerElement as Manager} from
     './terminal_display_manager.js';
 

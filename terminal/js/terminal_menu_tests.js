@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
+import {TerminalMenu} from './terminal_menu.js';
 
 /**
  * @fileoverview Terminal Menu unit tests.
@@ -16,9 +16,9 @@ describe('terminal_menu_tests.js', () => {
       this.mockWindow.location.hash = hash;
       return this.mockWindow.events['hashchange'].dispatch({});
     };
-    const menu = new terminal.Menu(this.mockWindow);
+    const menu = new TerminalMenu(this.mockWindow);
     let callCount = 0;
-    terminal.Menu.HANDLERS.set('#test', () => callCount++);
+    TerminalMenu.HANDLERS.set('#test', () => callCount++);
     await changeHash('#');
 
     // Callback is triggered, even for the same hash repeatedly.
@@ -39,7 +39,7 @@ describe('terminal_menu_tests.js', () => {
   it('goes-directly-to-settings-on-page-load', async function() {
     this.mockWindow.location = new MockLocation(
         new URL('chrome://terminal/html/terminal.html#options'));
-    const menu = new terminal.Menu(this.mockWindow);
+    const menu = new TerminalMenu(this.mockWindow);
     menu.install();
     assert.equal(
         this.mockWindow.location.href,
