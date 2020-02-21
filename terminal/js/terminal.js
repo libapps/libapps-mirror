@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {normalizePrefsInPlace} from './terminal_common.js';
 import {TerminalMenu} from './terminal_menu.js';
 
 export const terminal = {};
@@ -69,6 +70,7 @@ terminal.init = function(element) {
     term.command.keyboard_ = term.keyboard;
   };
   term.onTerminalReady = function() {
+    normalizePrefsInPlace(term.getPrefs());
     if (window.chrome && chrome.accessibilityFeatures &&
         chrome.accessibilityFeatures.spokenFeedback) {
       chrome.accessibilityFeatures.spokenFeedback.onChange.addListener(

@@ -26,6 +26,7 @@ chai.assert.isAtLeast =
 chai.assert.isAtMost =
 chai.assert.isBelow =
 chai.assert.deepEqual =
+chai.assert.deepInclude =
 chai.assert.deepStrictEqual =
 chai.assert.equal =
 chai.assert.include =
