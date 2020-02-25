@@ -12,11 +12,17 @@ export const SUPPORTED_FONT_FAMILIES = ['Noto Sans Mono', 'Cousine'];
 export const SUPPORTED_FONT_SIZES = [6, 8, 10, 12, 14, 16, 18];
 export const DEFAULT_FONT_SIZE = 14;
 
+export const COLOR_PREFS = [
+    'foreground-color',
+    'cursor-color',
+    'background-color',
+];
+
 /**
  * Return a normalized font family.
  *
- * @param {string} cssFontFamily
- * @return {string} The normalized font
+ * @param {string} cssFontFamily The font family.
+ * @return {string} The normalized font.
  */
 function normalizeFontFamily(cssFontFamily) {
   for (let fontFamily of cssFontFamily.split(',')) {
@@ -28,10 +34,34 @@ function normalizeFontFamily(cssFontFamily) {
   return SUPPORTED_FONT_FAMILIES[0];
 }
 
+
+/**
+ * Normalize a color preference.
+ *
+ * @param {!lib.PreferenceManager} prefs The target preference manager.
+ * @param {string} prefName The preference name.
+ * @param {boolean} resetAlpha If true, the alpha will be set to 1.
+ */
+function normlizeColorInPlace(prefs, prefName, resetAlpha) {
+  let color = lib.colors.normalizeCSSToHSL(
+      /** @type {string} */(prefs.get(prefName)));
+  if (!color) {
+    color = lib.notNull(lib.colors.normalizeCSSToHSL(
+        /** @type {string} */(prefs.getDefault(prefName))));
+  }
+  if (resetAlpha) {
+    const array = lib.colors.crackHSL(color);
+    array[3] = '1';
+    color = lib.colors.arrayToHSLA(array);
+  }
+
+  prefs.set(prefName, color);
+}
+
 /**
  * Make sure preference values are valid.
  *
- * @param {!lib.PreferenceManager} prefs
+ * @param {!lib.PreferenceManager} prefs The preference manager.
  */
 export function normalizePrefsInPlace(prefs) {
   prefs.set('font-family', normalizeFontFamily(
@@ -41,12 +71,6 @@ export function normalizePrefsInPlace(prefs) {
     prefs.set('font-size', DEFAULT_FONT_SIZE);
   }
 
-  const backgroundColor = lib.colors.normalizeCSS(
-      /** @type {string} */(prefs.get('background-color')));
-  if (!backgroundColor) {
-    // The color value is invalid.
-    prefs.reset('background-color');
-  } else {
-    prefs.set('background-color', lib.colors.setAlpha( backgroundColor, 1));
-  }
+  COLOR_PREFS.forEach(
+      name => normlizeColorInPlace(prefs, name, name === 'background-color'));
 }

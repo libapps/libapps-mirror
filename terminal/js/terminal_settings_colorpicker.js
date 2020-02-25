@@ -10,6 +10,15 @@
 import {css, html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
 
+/**
+ * Convert HSL color to hex color.
+ *
+ * @param {string} hsl color
+ * @return {string} hex color
+ */
+const hslToHex = hsl => lib.notNull(lib.colors.rgbToHex(lib.notNull(
+    lib.colors.hslToRGB(hsl))));
+
 export class TerminalSettingsColorpickerElement extends
     TerminalSettingsElement {
   static get is() { return 'terminal-settings-colorpicker'; }
@@ -120,7 +129,8 @@ export class TerminalSettingsColorpickerElement extends
             <div id="swatchdisplay" style="background-color: ${this.value}">
             </div>
           </div>
-          <input id="hexinput" type="text" .value="${this.value}"
+          <input id="hexinput" type="text"
+              .value="${hslToHex(/** @type {string} */(this.value))}"
               @blur="${this.onInputBlur_}"/>
         </div>
         <div id="largeview" aria-expanded="${this.expanded}">
@@ -159,23 +169,18 @@ export class TerminalSettingsColorpickerElement extends
   }
 
   onUiChanged_() {
-    super.uiChanged_(
-        lib.notNull(lib.colors.rgbToHex(lib.notNull(lib.colors.hslToRGB(
-            `hsla(${Math.round(this.hue_)}, ${Math.round(this.saturation_)}%, ${
-                Math.round(this.lightness_)}%, ${this.transparency_})`)))));
+    super.uiChanged_(lib.colors.arrayToHSLA([this.hue_, this.saturation_,
+          this.lightness_, this.transparency_]));
   }
 
   /**
    * @override
    */
   preferenceChanged_(value) {
-    /** @suppress {checkTypes} The color preferences will always be strings. */
-    const norm = lib.notNull(lib.colors.normalizeCSS(value));
+    super.preferenceChanged_(value);
 
-    super.preferenceChanged_(lib.notNull(lib.colors.rgbToHex(norm)));
-
-    const [h, s, l, a] =
-        lib.colors.rgbxArrayToHslaArray(lib.notNull(lib.colors.crackRGB(norm)));
+    const [h, s, l, a] = lib.notNull(lib.colors.crackHSL(
+        /** @type {string} */(value))).map(Number.parseFloat);
     // Only update the preferences if they have changed noticably, as minor
     // updates due to rounding can move the picker around by small perceptible
     // amounts when clicking the same spot.
@@ -217,11 +222,11 @@ export class TerminalSettingsColorpickerElement extends
 
   /** @param {!Event} event */
   onInputBlur_(event) {
-    const css = lib.colors.normalizeCSS(event.target.value);
-    if (!css) {
-      event.target.value = this.value;
+    const hsl = lib.colors.normalizeCSSToHSL(event.target.value);
+    if (!hsl) {
+      event.target.value = hslToHex(/** @type {string} */(this.value));
     } else {
-      super.uiChanged_(css);
+      super.uiChanged_(hsl);
     }
   }
 }

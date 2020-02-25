@@ -434,7 +434,7 @@ lib.colors.rgbToHsl = function(rgb) {
 };
 
 /**
- * Take any valid css color definition and turn it into an rgb or rgba value.
+ * Take any valid CSS color definition and turn it into an rgb or rgba value.
  *
  * @param {string} def The CSS color spec to normalize.
  * @return {?string} The converted value.
@@ -456,6 +456,24 @@ lib.colors.normalizeCSS = function(def) {
 };
 
 /**
+ * Take any valid CSS color definition and turn it into an hsl or hsla value.
+ *
+ * @param {string} def The CSS color spec to normalize.
+ * @return {?string} The converted value.
+ */
+lib.colors.normalizeCSSToHSL = function(def) {
+  if (lib.colors.re_.hslx.test(def)) {
+    return def;
+  }
+
+  const rgb = lib.colors.normalizeCSS(def);
+  if (!rgb) {
+    return rgb;
+  }
+  return lib.colors.rgbToHsl(rgb);
+};
+
+/**
  * Convert a 3 or 4 element array into an rgba(...) string.
  *
  * @param {?Array<string|number>} ary The RGB or RGBA elements to convert.
@@ -464,6 +482,18 @@ lib.colors.normalizeCSS = function(def) {
 lib.colors.arrayToRGBA = function(ary) {
   var alpha = (ary.length > 3) ? ary[3] : 1;
   return 'rgba(' + ary[0] + ', ' + ary[1] + ', ' + ary[2] + ', ' + alpha + ')';
+};
+
+/**
+ * Convert a 3 or 4 element array into an hsla(...) string.
+ *
+ * @param {?Array<string|number>} ary The HSL or HSLA elements to convert.
+ * @return {string} The normalized CSS color spec.
+ */
+lib.colors.arrayToHSLA = function(ary) {
+  const alpha = (ary.length > 3) ? ary[3] : 1;
+  return `hsla(${Math.round(ary[0])}, ${Math.round(ary[1])}%, ` +
+      `${Math.round(ary[2])}%, ${alpha})`;
 };
 
 /**

@@ -142,10 +142,33 @@ it('normalizeCSS', () => {
     ['rgb(1,2,3)', 'rgb(1,2,3)'],
     ['rgba(1,2,3, 0)', 'rgba(1,2,3, 0)'],
     ['rgb(255, 100, 0)', 'rgb(255, 100, 0)'],
+    ['hsl(24, 100%, 70%)', 'rgb(255, 163, 102)'],
+    ['hsla(24, 100%, 70%, 0.5)', 'rgba(255, 163, 102, 0.5)'],
   ];
 
   data.forEach((ele) => {
     assert.strictEqual(lib.colors.normalizeCSS(ele[0]), ele[1], ele[0]);
+  });
+});
+
+it('normalizeCSSToHSL', () => {
+  const data = [
+    // Some bad data first.
+    ['', null],
+    ['blah', null],
+    // Then some reasonable data.
+    ['#ADE', 'hsl(195, 67%, 80%)'],
+    ['#a1d2e3', 'hsl(195, 54%, 76%)'],
+    ['white', 'hsl(0, 0%, 100%)'],
+    ['rgb(1,2,3)', 'hsl(210, 50%, 1%)'],
+    ['rgba(1,2,3, 0.5)', 'hsla(210, 50%, 1%, 0.5)'],
+    ['rgb(255, 100, 0)', 'hsl(24, 100%, 50%)'],
+    ['hsl(24, 100%, 70%)', 'hsl(24, 100%, 70%)'],
+    ['hsl(24, 100%, 70%, 0.5)', 'hsl(24, 100%, 70%, 0.5)'],
+  ];
+
+  data.forEach((ele) => {
+    assert.strictEqual(lib.colors.normalizeCSSToHSL(ele[0]), ele[1], ele[0]);
   });
 });
 
@@ -158,6 +181,18 @@ it('arrayToRGBA', () => {
 
   data.forEach((ele) => {
     assert.strictEqual(lib.colors.arrayToRGBA(ele[0]), ele[1], ele[0]);
+  });
+});
+
+it('arrayToHSLA', () => {
+  const data = [
+    [[1, 2, 3], 'hsla(1, 2%, 3%, 1)'],
+    [[10, 200, 3, 0], 'hsla(10, 200%, 3%, 0)'],
+    [['0', '30', '50', '1'], 'hsla(0, 30%, 50%, 1)'],
+  ];
+
+  data.forEach((ele) => {
+    assert.strictEqual(lib.colors.arrayToHSLA(ele[0]), ele[1], ele[0]);
   });
 });
 

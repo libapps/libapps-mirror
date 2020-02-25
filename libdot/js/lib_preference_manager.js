@@ -724,6 +724,21 @@ lib.PreferenceManager.prototype.get = function(name) {
 };
 
 /**
+ * Get the default value of a preference.
+ *
+ * @param {string} name The preference to get.
+ * @return {*} The preference's default value.
+ */
+lib.PreferenceManager.prototype.getDefault = function(name) {
+  const record = this.prefRecords_[name];
+  if (!record) {
+    throw new Error(`Unknown preference: ${name}`);
+  }
+
+  return record.defaultValue;
+};
+
+/**
  * Get the boolean value of a preference.
  *
  * @param {string} name The preference to get.
