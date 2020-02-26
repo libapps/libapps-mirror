@@ -82,10 +82,12 @@ export class TerminalSettingsApp extends LitElement {
 
       terminal-settings-category-option {
         cursor: pointer;
+        outline: none;
       }
 
       terminal-settings-category-option > h2 {
         border-radius: 0 20px 20px 0;
+        font-size: 12px;
         padding: 0 40px 0 20px;
         user-select: none;
       }
@@ -132,7 +134,6 @@ export class TerminalSettingsApp extends LitElement {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
 
     return html`
-        <!-- TODO(juwa@google.com): Add translations -->
         <terminal-settings-category-selector
             @category-change="${this.onCategoryChange_}">
           <terminal-settings-category-option for="appearance">
