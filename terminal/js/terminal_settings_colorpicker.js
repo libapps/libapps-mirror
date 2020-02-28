@@ -177,10 +177,12 @@ export class TerminalSettingsColorpickerElement extends
    * @override
    */
   preferenceChanged_(value) {
-    super.preferenceChanged_(value);
+    const hsl = lib.notNull(lib.colors.normalizeCSSToHSL(
+        /** @type {string} */(value)));
+    super.preferenceChanged_(hsl);
 
-    const [h, s, l, a] = lib.notNull(lib.colors.crackHSL(
-        /** @type {string} */(value))).map(Number.parseFloat);
+    const [h, s, l, a] = lib.notNull(lib.colors.crackHSL(hsl)).map(
+        Number.parseFloat);
     // Only update the preferences if they have changed noticably, as minor
     // updates due to rounding can move the picker around by small perceptible
     // amounts when clicking the same spot.
