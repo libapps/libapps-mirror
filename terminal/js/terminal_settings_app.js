@@ -104,8 +104,8 @@ export class TerminalSettingsApp extends LitElement {
       .terminal-settings-category {
         display: none;
         flex-grow: 1;
-        margin: 0 40px;
         overflow: auto;
+        padding: 0 40px;
       }
 
       .terminal-settings-category[active-category] {
