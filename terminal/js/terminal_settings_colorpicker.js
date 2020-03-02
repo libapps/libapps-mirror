@@ -33,9 +33,6 @@ export class TerminalSettingsColorpickerElement extends
         type: String,
         reflect: true,
       },
-      expanded: {
-        type: Boolean,
-      },
       disableTransparency: {
         type: Boolean,
       },
@@ -110,13 +107,19 @@ export class TerminalSettingsColorpickerElement extends
           width: 17ch;
         }
 
-        #largeview {
-          display: none;
-          padding: 4px;
+        dialog {
+          border: 0;
+          border-radius: 8px;
+          box-shadow: 0 0 16px rgba(0, 0, 0, 0.12),
+                      0 16px 16px rgba(0, 0, 0, 0.24);
         }
 
-        #largeview[aria-expanded="true"] {
-          display: block;
+        #dialog-content {
+          padding: 30px;
+        }
+
+        hue-slider, transparency-slider {
+          margin-top: 20px;
         }
     `;
   }
@@ -133,30 +136,30 @@ export class TerminalSettingsColorpickerElement extends
               .value="${hslToHex(/** @type {string} */(this.value))}"
               @blur="${this.onInputBlur_}"/>
         </div>
-        <div id="largeview" aria-expanded="${this.expanded}">
-          <saturation-lightness-picker @updated="${this.onSaturationLightness_}"
-              hue="${this.hue_}" saturation="${this.saturation_}"
-              lightness="${this.lightness_}">
-          </saturation-lightness-picker>
-          Hue
-          <hue-slider hue="${this.hue_}" @updated="${this.onHue_}">
-          </hue-slider>
-          ${this.disableTransparency
-              ? ''
-              : html`Transparency
-                     <transparency-slider hue="${this.hue_}"
-                         @updated="${this.onTransparency_}"
-                         transparency="${this.transparency_}">
-                     </transparency-slider>`
-          }
-        </div>
+        <dialog @click=${this.onDialogClick_}>
+          <div id="dialog-content">
+            <saturation-lightness-picker
+                @updated="${this.onSaturationLightness_}"
+                hue="${this.hue_}" saturation="${this.saturation_}"
+                lightness="${this.lightness_}">
+            </saturation-lightness-picker>
+            <hue-slider hue="${this.hue_}" @updated="${this.onHue_}" >
+            </hue-slider>
+            ${this.disableTransparency
+                ? ''
+                : html`<transparency-slider hue="${this.hue_}"
+                           @updated="${this.onTransparency_}"
+                           transparency="${this.transparency_}">
+                       </transparency-slider>`
+            }
+          </div>
+        </dialog>
     `;
   }
 
   constructor() {
     super();
 
-    this.expanded = false;
     this.disableTransparency = false;
     /** @private {number} */
     this.hue_;
@@ -200,7 +203,20 @@ export class TerminalSettingsColorpickerElement extends
 
   /** @param {!Event} event */
   onSwatchClick_(event) {
-    this.expanded = !this.expanded;
+    this.shadowRoot.querySelector('dialog').showModal();
+  }
+
+  /**
+   * Detects clicks on the dialog backdrop to close the dialog.
+   *
+   * @param {!Event} event
+   */
+  onDialogClick_(event) {
+    // The visible dialog is filled by <div id="#dialog-content">,
+    // so any click on target 'DIALOG', is on the backdrop.
+    if (event.target.tagName === 'DIALOG') {
+      event.target.close();
+    }
   }
 
   /** @param {!Event} event */

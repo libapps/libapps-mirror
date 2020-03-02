@@ -71,6 +71,23 @@ describe('terminal_settings_colorpicker.js', () => {
     delete window.preferenceManager;
   });
 
+  it('shows-and-hides-dialog', function() {
+    const dialog = this.el.shadowRoot.querySelector('dialog');
+    const swatch = this.el.shadowRoot.querySelector('#swatch');
+    const slp = this.el.shadowRoot.querySelector('saturation-lightness-picker');
+
+    // Show dialog when swatch clicked.
+    assert.isFalse(dialog.hasAttribute('open'));
+    swatch.dispatchEvent(new MouseEvent('click'));
+    assert.isTrue(dialog.hasAttribute('open'));
+
+    // Close dialog when backdrop clicked, but not elements in dialog.
+    slp.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+    assert.isTrue(dialog.hasAttribute('open'));
+    dialog.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+    assert.isFalse(dialog.hasAttribute('open'));
+  });
+
   it('updates-ui-when-preference-changes', async function() {
     assert.equal(window.preferenceManager.get(preference), orange);
     assertInternals(this.el, '#ffa600', 39, 100, 50, 1);
