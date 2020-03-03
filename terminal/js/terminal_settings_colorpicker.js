@@ -7,7 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {css, html} from './lit_element.js';
+import {LitElement, css, html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
 
 /**
@@ -21,19 +21,18 @@ function cssToHex(css) {
       lib.colors.rgbToHex(lib.notNull(lib.colors.normalizeCSS(css))));
 }
 
-export class TerminalSettingsColorpickerElement extends
-    TerminalSettingsElement {
-  static get is() { return 'terminal-settings-colorpicker'; }
+export class TerminalColorpickerElement extends LitElement {
+  static get is() { return 'terminal-colorpicker'; }
 
   /** @override */
   static get properties() {
     return {
-      preference: {
-        type: String,
-      },
       value: {
         type: String,
         reflect: true,
+      },
+      inputInDialog: {
+        type: Boolean,
       },
       disableTransparency: {
         type: Boolean,
@@ -61,7 +60,6 @@ export class TerminalSettingsColorpickerElement extends
           display: flex;
           flex-wrap: nowrap;
           justify-content: space-between;
-          min-width: 200px;
           padding: 4px;
         }
 
@@ -117,10 +115,10 @@ export class TerminalSettingsColorpickerElement extends
         }
 
         #dialog-content {
-          padding: 30px;
+          padding: 8px;
         }
 
-        hue-slider, transparency-slider {
+        hue-slider, transparency-slider, dialog #hexinput {
           margin-top: 20px;
         }
     `;
@@ -128,15 +126,22 @@ export class TerminalSettingsColorpickerElement extends
 
   /** @override */
   render() {
+    const transparency = this.disableTransparency ? '' : html`
+        <transparency-slider hue="${this.hue_}"
+            @updated="${this.onTransparency_}"
+            transparency="${this.transparency_}">
+        </transparency-slider>`;
+    const input = html`
+        <input id="hexinput" type="text"
+            .value="${cssToHex(/** @type {string} */(this.value))}"
+            @blur="${this.onInputBlur_}"/>`;
     return html`
         <div id="smallview">
           <div id="swatch" @click="${this.onSwatchClick_}">
             <div id="swatchdisplay" style="background-color: ${this.value}">
             </div>
           </div>
-          <input id="hexinput" type="text"
-              .value="${cssToHex(/** @type {string} */(this.value))}"
-              @blur="${this.onInputBlur_}"/>
+          ${this.inputInDialog ? '' : input}
         </div>
         <dialog @click=${this.onDialogClick_}>
           <div id="dialog-content">
@@ -147,13 +152,8 @@ export class TerminalSettingsColorpickerElement extends
             </saturation-lightness-picker>
             <hue-slider hue="${this.hue_}" @updated="${this.onHue_}" >
             </hue-slider>
-            ${this.disableTransparency
-                ? ''
-                : html`<transparency-slider hue="${this.hue_}"
-                           @updated="${this.onTransparency_}"
-                           transparency="${this.transparency_}">
-                       </transparency-slider>`
-            }
+            ${transparency}
+            ${this.inputInDialog ? input : ''}
           </div>
         </dialog>
     `;
@@ -162,7 +162,12 @@ export class TerminalSettingsColorpickerElement extends
   constructor() {
     super();
 
+    /** If true, hex input is shown in dialog rather than next to swatch. */
+    this.inputInDialog = false;
+    /** If true, transparency is not shown. */
     this.disableTransparency = false;
+    /** @private {string} */
+    this.value_;
     /** @private {number} */
     this.hue_;
     /** @private {number} */
@@ -173,17 +178,31 @@ export class TerminalSettingsColorpickerElement extends
     this.transparency_;
   }
 
-  onUiChanged_() {
-    super.uiChanged_(lib.colors.arrayToHSLA([this.hue_, this.saturation_,
-          this.lightness_, this.transparency_]));
+  /**
+   * UI changed and we should update value with rgb provided, or
+   * recalculate value from hslt components.
+   *
+   * @param {string=} rgb New RGB value from hex input.
+   * @private
+   */
+  onUiChanged_(rgb) {
+    if (rgb !== undefined) {
+      this.value = rgb;
+    } else {
+      this.value = lib.colors.arrayToHSLA([this.hue_, this.saturation_,
+            this.lightness_, this.transparency_]);
+    }
+    this.dispatchEvent(new CustomEvent('updated'));
   }
 
-  /** @override */
-  preferenceChanged_(value) {
-    super.preferenceChanged_(value);
-    const hsl = lib.notNull(lib.colors.normalizeCSSToHSL(
-        /** @type {string} */(value)));
-
+  /** @param {string} value */
+  set value(value) {
+    if (value === this.value_) {
+      return;
+    }
+    const oldValue = this.value_;
+    this.value_ = value;
+    const hsl = lib.notNull(lib.colors.normalizeCSSToHSL(value));
     const [h, s, l, a] = lib.notNull(lib.colors.crackHSL(hsl)).map(
         Number.parseFloat);
     // Only update the preferences if they have changed noticably, as minor
@@ -199,6 +218,12 @@ export class TerminalSettingsColorpickerElement extends
       this.lightness_ = l;
     }
     this.transparency_ = a;
+    this.requestUpdate('value', oldValue);
+  }
+
+  /** @return {string} */
+  get value() {
+    return this.value_;
   }
 
   /** @param {!Event} event */
@@ -244,8 +269,58 @@ export class TerminalSettingsColorpickerElement extends
     if (!rgb) {
       event.target.value = cssToHex(/** @type {string} */(this.value));
     } else {
-      super.uiChanged_(rgb);
+      this.onUiChanged_(rgb);
     }
+  }
+}
+
+customElements.define(TerminalColorpickerElement.is,
+    TerminalColorpickerElement);
+
+export class TerminalSettingsColorpickerElement extends
+    TerminalSettingsElement {
+  static get is() { return 'terminal-settings-colorpicker'; }
+
+  /** @override */
+  static get properties() {
+    return {
+      preference: {
+        type: String,
+      },
+      value: {
+        type: String,
+        reflect: true,
+      },
+      disableTransparency: {
+        type: Boolean,
+      }
+    };
+  }
+
+  /** @override */
+  render() {
+    return html`
+        <terminal-colorpicker @updated="${this.onUpdated_}"
+            value="${this.value}"
+            ?disableTransparency="${this.disableTransparency}"/>
+    `;
+  }
+
+  constructor() {
+    super();
+
+    /** If true, transparency is not shown. */
+    this.disableTransparency = false;
+  }
+
+  /**
+   * Handle 'updated' event when one of the colors changes.
+   *
+   * @param {!CustomEvent} event Event with index and value.
+   * @private
+   */
+  onUpdated_(event) {
+    super.uiChanged_(event.target.value);
   }
 }
 

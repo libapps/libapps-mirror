@@ -1767,6 +1767,14 @@
 		"description": "The menu label to clear the terminal screen.",
 		"message": "Terminal Clear"
 	},
+	"TERMINAL_NAME_PREF_ANSI_COLORS": {
+		"description": "Label text shown for the preference to set ANSI colors.  ANSI is an acronym for American National Standards Institute.  Terminals specify a default 16 colors for their display, this configuration allows users to override the default colors.",
+		"message": "ANSI colors"
+	},
+	"TERMINAL_NAME_PREF_ANTI_ALIAS": {
+		"description": "Label text shown for the preference toggling the anti-alias font smoothing.",
+		"message": "Anti-alias"
+	},
 	"TERMINAL_NAME_PREF_BELL": {
 		"description": "Label text shown for the preference toggling the terminal bell sound.",
 		"message": "Bell"

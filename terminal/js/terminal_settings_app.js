@@ -11,6 +11,7 @@
 import {css, html, LitElement} from './lit_element.js';
 import {SUPPORTED_FONT_SIZES, SUPPORTED_FONT_FAMILIES} from
     './terminal_common.js';
+import './terminal_settings_ansi_colors.js';
 import './terminal_settings_app.js';
 import './terminal_settings_category_selector.js';
 import './terminal_settings_checkbox.js';
@@ -191,10 +192,16 @@ export class TerminalSettingsApp extends LitElement {
                 </terminal-settings-colorpicker>
               </li>
               <li class="setting-container">
-                <h4>Anti-alias</h4>
+                <h4>${msg('TERMINAL_NAME_PREF_ANTI_ALIAS')}</h4>
                 <!-- TODO(juwa@google.com): Add element -->
                 <terminal-settings-checkbox preference="font-smoothing">
                 </terminal-settings-checkbox>
+              </li>
+              <li class="setting-container">
+                <h4>${msg('TERMINAL_NAME_PREF_ANSI_COLORS')}</h4>
+                <terminal-settings-ansi-colors
+                    preference="color-palette-overrides">
+                </terminal-settings-ansi-colors>
               </li>
             </ul>
           </section>

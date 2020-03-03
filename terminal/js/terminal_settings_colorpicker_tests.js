@@ -22,11 +22,11 @@ describe('terminal_settings_colorpicker.js', () => {
     assert.equal(+crackedHSL[2], lightness);
     assert.equal(+crackedHSL[3], transparency);
 
-    const sd = el.shadowRoot.getElementById('swatchdisplay');
-    const hi = el.shadowRoot.getElementById('hexinput');
-    const slp = el.shadowRoot.querySelector('saturation-lightness-picker');
-    const hs = el.shadowRoot.querySelector('hue-slider');
-    const ts = el.shadowRoot.querySelector('transparency-slider');
+    const sd = getElement(el, '#swatchdisplay');
+    const hi = getElement(el, '#hexinput');
+    const slp = getElement(el, 'saturation-lightness-picker');
+    const hs = getElement(el, 'hue-slider');
+    const ts = getElement(el, 'transparency-slider');
 
     // Compare against attribute value, not style value, as style value yeilds a
     // converted color in rgba form.
@@ -41,17 +41,19 @@ describe('terminal_settings_colorpicker.js', () => {
     assert.closeTo(+ts.getAttribute('transparency'), transparency, error);
   }
 
-  function allUpdatesComplete(el) {
-    return new Promise((resolve, reject) => {
-      el.updateComplete.then(() => {
-        const slp =
-            el.shadowRoot.querySelector('saturation-lightness-picker');
-        const hs = el.shadowRoot.querySelector('hue-slider');
-        const ts = el.shadowRoot.querySelector('transparency-slider');
+  function getElement(el, tagName) {
+    const tc = el.shadowRoot.querySelector('terminal-colorpicker');
+    return tc.shadowRoot.querySelector(tagName);
+  }
 
-        Promise.all([slp, hs, ts].map(x => x.updateComplete)).then(resolve);
-      });
-    });
+  async function allUpdatesComplete(el) {
+      await el.updateComplete;
+      const tc = el.shadowRoot.querySelector('terminal-colorpicker');
+      await tc.updateComplete;
+      const slp = getElement(el, 'saturation-lightness-picker');
+      const hs = getElement(el, 'hue-slider');
+      const ts = getElement(el, 'transparency-slider');
+      return Promise.all([slp, hs, ts].map(x => x.updateComplete));
   }
 
   beforeEach(function() {
@@ -73,9 +75,9 @@ describe('terminal_settings_colorpicker.js', () => {
   });
 
   it('shows-and-hides-dialog', function() {
-    const dialog = this.el.shadowRoot.querySelector('dialog');
-    const swatch = this.el.shadowRoot.querySelector('#swatch');
-    const slp = this.el.shadowRoot.querySelector('saturation-lightness-picker');
+    const dialog = getElement(this.el, 'dialog');
+    const swatch = getElement(this.el, '#swatch');
+    const slp = getElement(this.el, 'saturation-lightness-picker');
 
     // Show dialog when swatch clicked.
     assert.isFalse(dialog.hasAttribute('open'));
@@ -94,6 +96,7 @@ describe('terminal_settings_colorpicker.js', () => {
     assertInternals(this.el, '#ffa600', 39, 100, 50, 1);
 
     await window.preferenceManager.set(preference, 'hsla(12, 34%, 56%, 0.78)');
+    await allUpdatesComplete(this.el);
     assertInternals(this.el, '#b57869c7', 12, 34, 56, .78);
   });
 
@@ -102,7 +105,7 @@ describe('terminal_settings_colorpicker.js', () => {
     assert.equal(window.preferenceManager.get(preference), orange);
     assertInternals(this.el, '#ffa600', 39, 100, 50, 1);
 
-    const slp = this.el.shadowRoot.querySelector('saturation-lightness-picker');
+    const slp = getElement(this.el, 'saturation-lightness-picker');
     slp.saturation = 20;
     slp.lightness = 80;
     slp.dispatchEvent(new CustomEvent('updated'));
@@ -115,7 +118,7 @@ describe('terminal_settings_colorpicker.js', () => {
     assert.equal(window.preferenceManager.get(preference), orange);
     assertInternals(this.el, '#ffa600', 39, 100, 50, 1);
 
-    const hs = this.el.shadowRoot.querySelector('hue-slider');
+    const hs = getElement(this.el, 'hue-slider');
     hs.hue = 222;
     hs.dispatchEvent(new CustomEvent('updated'));
     await allUpdatesComplete(this.el);
@@ -127,7 +130,7 @@ describe('terminal_settings_colorpicker.js', () => {
     assert.equal(window.preferenceManager.get(preference), orange);
     assertInternals(this.el, '#ffa600', 39, 100, 50, 1);
 
-    const ts = this.el.shadowRoot.querySelector('transparency-slider');
+    const ts = getElement(this.el, 'transparency-slider');
     ts.transparency = 0.5;
     ts.dispatchEvent(new CustomEvent('updated'));
     await allUpdatesComplete(this.el);
@@ -139,7 +142,7 @@ describe('terminal_settings_colorpicker.js', () => {
     assert.equal(window.preferenceManager.get(preference), orange);
     assertInternals(this.el, '#ffa600', 39, 100, 50, 1);
 
-    const hi = this.el.shadowRoot.getElementById('hexinput');
+    const hi = getElement(this.el, '#hexinput');
     hi.focus();
     hi.value = 'purple';
     hi.blur();
@@ -150,15 +153,13 @@ describe('terminal_settings_colorpicker.js', () => {
   });
 
   it('hides-transparency-when-disableTransparency-is-set', async function() {
-    assert.isNotNull(
-        this.el.shadowRoot.querySelector('saturation-lightness-picker'));
-    assert.isNotNull(this.el.shadowRoot.querySelector('hue-slider'));
-    assert.isNotNull(this.el.shadowRoot.querySelector('transparency-slider'));
+    assert.isNotNull(getElement(this.el, 'saturation-lightness-picker'));
+    assert.isNotNull(getElement(this.el, 'hue-slider'));
+    assert.isNotNull(getElement(this.el, 'transparency-slider'));
     this.el.setAttribute('disableTransparency', true);
     await this.el.updateComplete;
-    assert.isNotNull(
-        this.el.shadowRoot.querySelector('saturation-lightness-picker'));
-    assert.isNotNull(this.el.shadowRoot.querySelector('hue-slider'));
-    assert.isNull(this.el.shadowRoot.querySelector('transparency-slider'));
+    assert.isNotNull(getElement(this.el, 'saturation-lightness-picker'));
+    assert.isNotNull(getElement(this.el, 'hue-slider'));
+    assert.isNull(getElement(this.el, 'transparency-slider'));
   });
 });

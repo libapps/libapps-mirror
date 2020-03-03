@@ -7,6 +7,9 @@ import {TerminalMenu} from './terminal_menu.js';
 
 export const terminal = {};
 
+/** @type {!lib.PreferenceManager} */
+window.preferenceManager;
+
 /**
  * The Terminal command.
  *

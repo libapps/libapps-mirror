@@ -12,6 +12,9 @@ export const SUPPORTED_FONT_FAMILIES = ['Noto Sans Mono', 'Cousine'];
 export const SUPPORTED_FONT_SIZES = [6, 8, 10, 12, 14, 16, 18];
 export const DEFAULT_FONT_SIZE = 14;
 
+/** @type {!Array<string>} */
+export const DEFAULT_ANSI_COLORS = lib.colors.stockColorPalette.slice(0, 16);
+
 /**
  * Return a normalized font family.
  *
@@ -26,30 +29,6 @@ function normalizeFontFamily(cssFontFamily) {
     }
   }
   return SUPPORTED_FONT_FAMILIES[0];
-}
-
-
-/**
- * Normalize a color preference.
- *
- * @param {!lib.PreferenceManager} prefs The target preference manager.
- * @param {string} prefName The preference name.
- * @param {boolean} resetAlpha If true, the alpha will be set to 1.
- */
-function normlizeColorInPlace(prefs, prefName, resetAlpha) {
-  let color = lib.colors.normalizeCSSToHSL(
-      /** @type {string} */(prefs.get(prefName)));
-  if (!color) {
-    color = lib.notNull(lib.colors.normalizeCSSToHSL(
-        /** @type {string} */(prefs.getDefault(prefName))));
-  }
-  if (resetAlpha) {
-    const array = lib.colors.crackHSL(color);
-    array[3] = '1';
-    color = lib.colors.arrayToHSLA(array);
-  }
-
-  prefs.set(prefName, color);
 }
 
 /**
@@ -71,6 +50,8 @@ export function normalizePrefsInPlace(prefs) {
     // The color value is invalid.
     prefs.reset('background-color');
   } else {
-    prefs.set('background-color', lib.colors.setAlpha( backgroundColor, 1));
+    prefs.set('background-color', lib.colors.setAlpha(backgroundColor, 1));
   }
+
+  prefs.definePreference('color-palette-overrides', DEFAULT_ANSI_COLORS);
 }
