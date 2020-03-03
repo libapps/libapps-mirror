@@ -1,3 +1,8 @@
+# 0.23, 2020-03-03, OpenSSH 8.2p1.
+
+* nassh: Enable metrics/crash APIs for crosh/Terminal.
+* ssh_client: openssh: Update to 8.2p1 release.
+
 # 0.22, 2020-02-05, New relay protocol & minor SSH-FE & SSH fixes.
 
 * corp relay: Port cleanups from new corpv4 code.
