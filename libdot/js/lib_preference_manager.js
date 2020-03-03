@@ -113,7 +113,8 @@ lib.PreferenceManager.Record.prototype.addObserver = function(observer) {
 /**
  * Unregister an observer callback.
  *
- * @param {function()} observer A previously registered callback.
+ * @param {function(string, string, !lib.PreferenceManager)} observer A
+ *     previously registered callback.
  */
 lib.PreferenceManager.Record.prototype.removeObserver = function(observer) {
   var i = this.observers.indexOf(observer);
@@ -336,7 +337,8 @@ lib.PreferenceManager.prototype.addObservers = function(global, map) {
  * Remove preference observer.
  *
  * @param {string} name The name of preference you wish to stop observing.
- * @param {function()} observer The observer to remove.
+ * @param {function(*, string, !lib.PreferenceManager)} observer The observer to
+ *     remove.
  */
 lib.PreferenceManager.prototype.removeObserver = function(name, observer) {
   if (!(name in this.prefRecords_)) {
