@@ -22,8 +22,10 @@ import urllib.request
 
 
 # Require recent Python 3 versions as a sanity check.
-assert (sys.version_info.major, sys.version_info.minor) >= (3, 5), (
-    'Python 3.5 or newer is required')
+# NB: We cannot require newer versions than CrOS itself supports.
+assert (sys.version_info.major, sys.version_info.minor) >= (3, 6), (
+    'Python 3.6 or newer is required; found %s' % (sys.version,))
+
 
 BIN_DIR = os.path.dirname(os.path.realpath(__file__))
 DIR = os.path.dirname(BIN_DIR)
