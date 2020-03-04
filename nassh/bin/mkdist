@@ -17,6 +17,7 @@ import os
 import re
 import shutil
 import sys
+from typing import Callable
 
 import nassh
 import libdot
@@ -167,8 +168,17 @@ def copyfiles(tmpdir, extra_exclude=()):
                     shutil.copy(path, dst)
 
 
-def mkzip(manifest_name, stamps=()):
-    """Build the nassh extension archive."""
+def mkzip(manifest_name: str, stable: bool, archive_suffix: str,
+          version_mangle: Callable = lambda x: x):
+    """Build the nassh extension archive.
+
+    Args:
+      manifest_name: The input manifest file to process for this variant.
+      stable: Whether to mark the manifest as stable or dev [channel].
+      archive_suffix: String to append to the archive name.  Every build needs
+          to have a unique name in order to be archived/signed correctly.
+      version_mangle: Callback to mangle the manifest's version field.
+    """
     logging.info('Processing %s', manifest_name)
     manifest = os.path.join(nassh.DIR, manifest_name)
 
@@ -178,14 +188,13 @@ def mkzip(manifest_name, stamps=()):
     name = re.sub(r' \(tot\)', '', data['name'])
 
     version = data['version']
-    version = '.'.join([version] + list(stamps))
+    version = version_mangle(version)
     data['version'] = version
 
     basename = name.replace(' ', '')
 
-    if stamps:
+    if not stable:
         name += ' (dev)'
-        basename += '-dev'
     else:
         # Point the icons to the stable version.
         def _update_icons(icons):
@@ -196,7 +205,7 @@ def mkzip(manifest_name, stamps=()):
             _update_icons(data['browser_action']['default_icon'])
     data['name'] = name
 
-    basename += '-' + version
+    basename += archive_suffix + '-' + version
     zipfile = '%s.zip' % (basename,)
     archive = os.path.join(DIST_DIR, zipfile)
 
@@ -208,7 +217,7 @@ def mkzip(manifest_name, stamps=()):
     copyfiles(tmpdir)
     minify_translations(tmpdir)
 
-    if not stamps:
+    if stable:
         # Point the icons to the stable version.
         path = os.path.join(tmpdir, 'html', 'nassh.html')
         if os.path.exists(path):
@@ -325,11 +334,22 @@ def main(argv):
     stamps = get_stamp()
     if not opts.crosh_only:
         # Build the dev channel variants.
-        mkzip('manifest_ext.json', stamps)
-        mkzip('manifest_v1.5.json', stamps)
+        def _stamp_dev(version):
+            return '.'.join([version] + list(stamps))
+        mkzip('manifest_ext.json', False, '-dev', _stamp_dev)
+        mkzip('manifest_v1.5.json', False, '-dev', _stamp_dev)
         # Build the stable channel variants.
-        mkzip('manifest_ext.json')
-        mkzip('manifest_v1.5.json')
+        mkzip('manifest_ext.json', True, '')
+        mkzip('manifest_v1.5.json', True, '')
+        # Build the stable channel rollback variants.
+        def _rollback(version):
+            parts = list(int(x) for x in version.split('.'))
+            parts[-1] += 1
+            parts += [0, 1]
+            return '.'.join(str(x) for x in parts)
+        mkzip('manifest_ext.json', True, '-rollback', _rollback)
+        mkzip('manifest_v1.5.json', True, '-rollback', _rollback)
+
     # Never minify, maybe gzip.
     # TODO(crbug.com/1023866): Gzip off for now until chrome is ready.
     mkcrosh(False, False)
