@@ -129,8 +129,7 @@ nassh.Stream.RelayCorpv4WS = function(fd) {
 
   // The relay connection settings.
   this.io_ = null;
-  this.relayHost_ = null;
-  this.relayPort_ = null;
+  this.relay_ = null;
 
   // The remote ssh server settings.
   this.host_ = null;
@@ -181,9 +180,6 @@ nassh.Stream.RelayCorpv4WS.prototype.asyncOpen =
     function(settings, onComplete) {
   this.io_ = settings.io;
   this.relay_ = settings.relay;
-  this.relayHost_ = settings.relayHost;
-  this.relayPort_ = settings.relayPort;
-  this.useSecure_ = settings.useSecure;
   this.resume_ = settings.resume;
   this.host_ = settings.host;
   this.port_ = settings.port;
@@ -205,7 +201,7 @@ nassh.Stream.RelayCorpv4WS.prototype.maxDataWriteLength = 16 * 1024;
  * URI to establish a new connection to the ssh server via the relay.
  */
 nassh.Stream.RelayCorpv4WS.prototype.connectTemplate_ =
-    `%(protocol)://%(relayHost):%(relayPort)/v4/connect` +
+    `%(relay)/v4/connect` +
     `?host=%encodeURIComponent(host)` +
     `&port=%encodeURIComponent(port)`;
 
@@ -221,9 +217,7 @@ nassh.Stream.RelayCorpv4WS.prototype.connect_ = function() {
   const uri = lib.f.replaceVars(this.connectTemplate_, {
     host: this.host_,
     port: this.port_,
-    protocol: this.useSecure_ ? 'wss' : 'ws',
-    relayHost: this.relayHost_,
-    relayPort: this.relayPort_,
+    relay: this.relay_,
   });
 
   this.socket_ = new WebSocket(uri, ['ssh']);
@@ -238,7 +232,7 @@ nassh.Stream.RelayCorpv4WS.prototype.connect_ = function() {
  * URI to reconnect to an existing session.
  */
 nassh.Stream.RelayCorpv4WS.prototype.reconnectTemplate_ =
-    `%(protocol)://%(relayHost):%(relayPort)/v4/reconnect` +
+    `%(relay)/v4/reconnect` +
     `?sid=%encodeURIComponent(sid)` +
     `&ack=%(ack)`;
 
@@ -257,9 +251,7 @@ nassh.Stream.RelayCorpv4WS.prototype.reconnect_ = function() {
 
   const uri = lib.f.replaceVars(this.reconnectTemplate_, {
     ack: this.readCount_,
-    protocol: this.useSecure_ ? 'wss' : 'ws',
-    relayHost: this.relayHost_,
-    relayPort: this.relayPort_,
+    relay: this.relay_,
     sid: this.sid_,
   });
 

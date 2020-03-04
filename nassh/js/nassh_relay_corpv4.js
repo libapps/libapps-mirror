@@ -23,6 +23,7 @@ nassh.Relay.Corpv4 = function(io, options, relayLocation, relayStorage) {
   this.proxyPort = options['--proxy-port'] || 443;
   this.useSecure = options['--use-ssl'];
   this.resumeConnection = !!options['--resume-connection'];
+  this.relayServer = null;
   this.location = relayLocation;
   this.storage = relayStorage;
 };
@@ -43,7 +44,7 @@ nassh.Relay.Corpv4.prototype.cookieTemplate_ =
  * The pattern for the relay server's base url.
  */
 nassh.Relay.Corpv4.prototype.relayServerTemplate_ =
-    '%(protocol)://%(host):%(port)/';
+    '%(protocol)://%(host):%(port)';
 
 /**
  * Redirect to the relay lookup server to initialize the connection.
@@ -108,12 +109,6 @@ nassh.Relay.Corpv4.prototype.init = function() {
           this.relayServerTemplate_, {
             host: relayHost,
             port: relayPort,
-            protocol: this.useSecure ? 'https' : 'http',
-          });
-      this.relayServerSocket = lib.f.replaceVars(
-          this.relayServerTemplate_, {
-            host: relayHost,
-            port: relayPort,
             protocol: this.useSecure ? 'wss' : 'ws',
           });
 
@@ -158,10 +153,7 @@ nassh.Relay.Corpv4.prototype.openSocket = function(fd, host, port, streams,
                                                    onOpen) {
   const settings = {
     io: this.io,
-    relay: this.relayServerSocket,
-    relayHost: this.proxyHost,
-    relayPort: this.proxyPort,
-    useSecure: this.useSecure,
+    relay: this.relayServer,
     resume: this.resumeConnection,
     host: host,
     port: port,
