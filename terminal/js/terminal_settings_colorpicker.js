@@ -11,13 +11,15 @@ import {css, html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
 
 /**
- * Convert HSL color to hex color.
+ * Convert CSS color to hex color.
  *
- * @param {string} hsl color
+ * @param {string} css
  * @return {string} hex color
  */
-const hslToHex = hsl => lib.notNull(lib.colors.rgbToHex(lib.notNull(
-    lib.colors.hslToRGB(hsl))));
+function cssToHex(css) {
+  return lib.notNull(
+      lib.colors.rgbToHex(lib.notNull(lib.colors.normalizeCSS(css))));
+}
 
 export class TerminalSettingsColorpickerElement extends
     TerminalSettingsElement {
@@ -133,7 +135,7 @@ export class TerminalSettingsColorpickerElement extends
             </div>
           </div>
           <input id="hexinput" type="text"
-              .value="${hslToHex(/** @type {string} */(this.value))}"
+              .value="${cssToHex(/** @type {string} */(this.value))}"
               @blur="${this.onInputBlur_}"/>
         </div>
         <dialog @click=${this.onDialogClick_}>
@@ -176,13 +178,11 @@ export class TerminalSettingsColorpickerElement extends
           this.lightness_, this.transparency_]));
   }
 
-  /**
-   * @override
-   */
+  /** @override */
   preferenceChanged_(value) {
+    super.preferenceChanged_(value);
     const hsl = lib.notNull(lib.colors.normalizeCSSToHSL(
         /** @type {string} */(value)));
-    super.preferenceChanged_(hsl);
 
     const [h, s, l, a] = lib.notNull(lib.colors.crackHSL(hsl)).map(
         Number.parseFloat);
@@ -240,11 +240,11 @@ export class TerminalSettingsColorpickerElement extends
 
   /** @param {!Event} event */
   onInputBlur_(event) {
-    const hsl = lib.colors.normalizeCSSToHSL(event.target.value);
-    if (!hsl) {
-      event.target.value = hslToHex(/** @type {string} */(this.value));
+    const rgb = lib.colors.normalizeCSS(event.target.value);
+    if (!rgb) {
+      event.target.value = cssToHex(/** @type {string} */(this.value));
     } else {
-      super.uiChanged_(hsl);
+      super.uiChanged_(rgb);
     }
   }
 }

@@ -15,7 +15,8 @@ describe('terminal_settings_colorpicker.js', () => {
   const preference = 'terminal_settings_colorpicker';
 
   function assertInternals(el, hex, hue, saturation, lightness, transparency) {
-    const crackedHSL = lib.colors.crackHSL(el.value);
+    const crackedHSL = lib.colors.crackHSL(
+        lib.notNull(lib.colors.normalizeCSSToHSL(el.value)));
     assert.equal(+crackedHSL[0], hue);
     assert.equal(+crackedHSL[1], saturation);
     assert.equal(+crackedHSL[2], lightness);
@@ -144,9 +145,8 @@ describe('terminal_settings_colorpicker.js', () => {
     hi.blur();
     await allUpdatesComplete(this.el);
 
-    assert.equal(window.preferenceManager.get(preference),
-        'hsl(277, 87%, 53%)');
-    assertInternals(this.el, '#9f1fef', 277, 87, 53, 1);
+    assert.equal(window.preferenceManager.get(preference), 'rgb(160, 32, 240)');
+    assertInternals(this.el, '#a020f0', 277, 87, 53, 1);
   });
 
   it('hides-transparency-when-disableTransparency-is-set', async function() {

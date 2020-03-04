@@ -12,12 +12,6 @@ export const SUPPORTED_FONT_FAMILIES = ['Noto Sans Mono', 'Cousine'];
 export const SUPPORTED_FONT_SIZES = [6, 8, 10, 12, 14, 16, 18];
 export const DEFAULT_FONT_SIZE = 14;
 
-export const COLOR_PREFS = [
-    'foreground-color',
-    'cursor-color',
-    'background-color',
-];
-
 /**
  * Return a normalized font family.
  *
@@ -71,6 +65,12 @@ export function normalizePrefsInPlace(prefs) {
     prefs.set('font-size', DEFAULT_FONT_SIZE);
   }
 
-  COLOR_PREFS.forEach(
-      name => normlizeColorInPlace(prefs, name, name === 'background-color'));
+  const backgroundColor = lib.colors.normalizeCSS(
+      /** @type {string} */(prefs.get('background-color')));
+  if (!backgroundColor) {
+    // The color value is invalid.
+    prefs.reset('background-color');
+  } else {
+    prefs.set('background-color', lib.colors.setAlpha( backgroundColor, 1));
+  }
 }
