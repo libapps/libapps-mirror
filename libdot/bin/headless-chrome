@@ -9,9 +9,54 @@
 from __future__ import print_function
 
 import os
+import shutil
 import sys
 
 import libdot
+
+
+# A snapshot of Chrome that we update from time to time.
+# $ uribase='https://dl.google.com/linux/chrome/deb'
+# $ filename=$(
+#     curl -s "${uribase}/dists/stable/main/binary-amd64/Packages.gz" | \
+#         zcat | \
+#         awk '$1 == "Filename:" && $2 ~ /google-chrome-stable/ {print $NF}')
+# $ wget "${uribase}/${filename}"
+# $ gsutil cp -a public-read google-chrome-stable_*.deb \
+#       gs://chromeos-localmirror/secureshell/distfiles/
+CHROME_VERSION = 'google-chrome-stable_75.0.3770.142-1'
+
+
+def chrome_setup():
+    """Download our copy of Chrome for headless testing."""
+    puppeteer = os.path.join(libdot.node.NODE_MODULES_DIR, 'puppeteer')
+    download_dir = os.path.join(puppeteer, '.local-chromium')
+    chrome_dir = os.path.join(download_dir, CHROME_VERSION)
+    chrome_bin = os.path.join(chrome_dir, 'opt', 'google', 'chrome', 'chrome')
+    if os.path.exists(chrome_bin):
+        return chrome_bin
+
+    # Create a tempdir to unpack everything into.
+    tmpdir = chrome_dir + '.tmp'
+    shutil.rmtree(tmpdir, ignore_errors=True)
+    os.makedirs(tmpdir, exist_ok=True)
+
+    # Get the snapshot deb archive.
+    chrome_deb = os.path.join(tmpdir, 'deb')
+    uri = '%s/%s_amd64.deb' % (libdot.node.NODE_MODULES_BASE_URI,
+                               CHROME_VERSION)
+    libdot.fetch(uri, chrome_deb)
+
+    # Unpack the deb archive, then clean it all up.
+    libdot.run(['ar', 'x', 'deb', 'data.tar.xz'], cwd=tmpdir)
+    libdot.unpack('data.tar.xz', cwd=tmpdir)
+    libdot.unlink(chrome_deb)
+    libdot.unlink(os.path.join(tmpdir, 'data.tar.xz'))
+
+    # Finally move the tempdir to the saved location.
+    os.rename(tmpdir, chrome_dir)
+
+    return chrome_bin
 
 
 def main(argv):
@@ -19,7 +64,7 @@ def main(argv):
     libdot.setup_logging()
     libdot.node_and_npm_setup()
 
-    chrome_bin = libdot.chrome_setup()
+    chrome_bin = chrome_setup()
     # We know our tools are first in $PATH now.
     os.execvp('mocha-headless-chrome',
               ['mocha-headless-chrome', '-e', chrome_bin] + argv)

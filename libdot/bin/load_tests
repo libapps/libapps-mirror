@@ -75,7 +75,7 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
     # Find a Chrome version to run against.
     browser = opts.browser
     if not browser:
-        browser = libdot.chrome_setup()
+        browser = libdot.headless_chrome.chrome_setup()
 
     # Kick off server if needed.
     if serve:

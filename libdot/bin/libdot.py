@@ -13,7 +13,6 @@ import importlib.machinery
 import logging
 import logging.handlers
 import os
-import shutil
 import subprocess
 import sys
 import time
@@ -263,49 +262,6 @@ def node_and_npm_setup():
     os.environ['PATH'] = os.pathsep.join((node.NODE_BIN_DIR, path))
 
 
-# A snapshot of Chrome that we update from time to time.
-# $ uribase='https://dl.google.com/linux/chrome/deb'
-# $ filename=$(
-#     curl -s "${uribase}/dists/stable/main/binary-amd64/Packages.gz" | \
-#         zcat | \
-#         awk '$1 == "Filename:" && $2 ~ /google-chrome-stable/ {print $NF}')
-# $ wget "${uribase}/${filename}"
-# $ gsutil cp -a public-read google-chrome-stable_*.deb \
-#       gs://chromeos-localmirror/secureshell/distfiles/
-CHROME_VERSION = 'google-chrome-stable_75.0.3770.142-1'
-
-
-def chrome_setup():
-    """Download our copy of Chrome for headless testing."""
-    puppeteer = os.path.join(node.NODE_MODULES_DIR, 'puppeteer')
-    download_dir = os.path.join(puppeteer, '.local-chromium')
-    chrome_dir = os.path.join(download_dir, CHROME_VERSION)
-    chrome_bin = os.path.join(chrome_dir, 'opt', 'google', 'chrome', 'chrome')
-    if os.path.exists(chrome_bin):
-        return chrome_bin
-
-    # Create a tempdir to unpack everything into.
-    tmpdir = chrome_dir + '.tmp'
-    shutil.rmtree(tmpdir, ignore_errors=True)
-    os.makedirs(tmpdir, exist_ok=True)
-
-    # Get the snapshot deb archive.
-    chrome_deb = os.path.join(tmpdir, 'deb')
-    uri = '%s/%s_amd64.deb' % (node.NODE_MODULES_BASE_URI, CHROME_VERSION)
-    fetch(uri, chrome_deb)
-
-    # Unpack the deb archive, then clean it all up.
-    run(['ar', 'x', 'deb', 'data.tar.xz'], cwd=tmpdir)
-    unpack('data.tar.xz', cwd=tmpdir)
-    unlink(chrome_deb)
-    unlink(os.path.join(tmpdir, 'data.tar.xz'))
-
-    # Finally move the tempdir to the saved location.
-    os.rename(tmpdir, chrome_dir)
-
-    return chrome_bin
-
-
 def load_module(name, path):
     """Load a module from the filesystem.
 
@@ -359,6 +315,7 @@ class HelperProgram:
 
 # Wrappers around libdot/bin/ programs for other tools to access directly.
 concat = HelperProgram('concat')
+headless_chrome = HelperProgram('headless-chrome')
 lint = HelperProgram('lint')
 load_tests = HelperProgram('load_tests')
 node = HelperProgram('node')
