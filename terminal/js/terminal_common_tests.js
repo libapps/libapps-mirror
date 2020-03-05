@@ -7,17 +7,14 @@
  */
 
 import {normalizePrefsInPlace, SUPPORTED_FONT_FAMILIES, SUPPORTED_FONT_SIZES,
-  DEFAULT_FONT_SIZE} from './terminal_common.js';
+  DEFAULT_FONT_SIZE, DEFAULT_BACKGROUND_COLOR} from './terminal_common.js';
 
 describe('terminal_common_tests.js', () => {
   let preferenceManager;
-  const defaultColor = 'rgb(16, 16, 16)';
 
   beforeEach(() => {
     preferenceManager = new lib.PreferenceManager(new lib.Storage.Memory());
     preferenceManager.definePreference('font-family', 'invalid');
-    preferenceManager.definePreference('font-size', 1000);
-    preferenceManager.definePreference('background-color', defaultColor);
   });
 
   it('normalizePrefsInPlace', () => {
@@ -40,7 +37,8 @@ describe('terminal_common_tests.js', () => {
     assertNormalizationResult('font-size', SUPPORTED_FONT_SIZES[0],
         SUPPORTED_FONT_SIZES[0]);
 
-    assertNormalizationResult('background-color', 'invalid', defaultColor);
+    assertNormalizationResult(
+        'background-color', 'invalid', DEFAULT_BACKGROUND_COLOR);
     // Background color's alpha should be reset to 1
     assertNormalizationResult('background-color', '#01020310',
         'rgba(1, 2, 3, 1)');

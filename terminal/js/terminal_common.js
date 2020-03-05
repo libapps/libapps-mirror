@@ -12,8 +12,27 @@ export const SUPPORTED_FONT_FAMILIES = ['Noto Sans Mono', 'Cousine'];
 export const SUPPORTED_FONT_SIZES = [6, 8, 10, 12, 14, 16, 18];
 export const DEFAULT_FONT_SIZE = 14;
 
+export const DEFAULT_BACKGROUND_COLOR = '#202124';
+export const DEFAULT_FOREGROUND_COLOR = '#FFFFFF';
 /** @type {!Array<string>} */
-export const DEFAULT_ANSI_COLORS = lib.colors.stockColorPalette.slice(0, 16);
+export const DEFAULT_ANSI_COLORS = [
+  '#9AA0A6',
+  '#F28B82',
+  '#87FFC5',
+  '#FDD663',
+  '#8AB4F8',
+  '#F4B5FB',
+  '#80F9F9',
+  '#F8F9FA',
+  '#80868B',
+  '#EE675C',
+  '#0AA882',
+  '#F9AB00',
+  '#669DF6',
+  '#EE5FFA',
+  '#03BFC8',
+  '#BDC1C6',
+];
 
 /**
  * Return a normalized font family.
@@ -37,6 +56,13 @@ function normalizeFontFamily(cssFontFamily) {
  * @param {!lib.PreferenceManager} prefs The preference manager.
  */
 export function normalizePrefsInPlace(prefs) {
+  // Set terminal default overrides from hterm.
+  // TODO(joelhockey): Separate setting these defaults from normalizing values.
+  prefs.definePreference('font-size', DEFAULT_FONT_SIZE);
+  prefs.definePreference('background-color', DEFAULT_BACKGROUND_COLOR);
+  prefs.definePreference('foreground-color', DEFAULT_FOREGROUND_COLOR);
+  prefs.definePreference('color-palette-overrides', DEFAULT_ANSI_COLORS);
+
   prefs.set('font-family', normalizeFontFamily(
       /** @type {string} */(prefs.get('font-family'))));
 
@@ -44,6 +70,7 @@ export function normalizePrefsInPlace(prefs) {
     prefs.set('font-size', DEFAULT_FONT_SIZE);
   }
 
+  // Remove alpha from background-color.
   const backgroundColor = lib.colors.normalizeCSS(
       /** @type {string} */(prefs.get('background-color')));
   if (!backgroundColor) {
@@ -52,6 +79,4 @@ export function normalizePrefsInPlace(prefs) {
   } else {
     prefs.set('background-color', lib.colors.setAlpha(backgroundColor, 1));
   }
-
-  prefs.definePreference('color-palette-overrides', DEFAULT_ANSI_COLORS);
 }
