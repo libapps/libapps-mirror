@@ -2,9 +2,8 @@
 js/*.concat.js
 js/*.rollup.js
 
-# Generated HTML files.
-/html/changelog.html
-/html/licenses.html
+# Concatenated licenses of dependencies
+html/licenses.html
 
 # Copy of the nacl plugin used when loading as an unpacked extension
 /_platform_specific/

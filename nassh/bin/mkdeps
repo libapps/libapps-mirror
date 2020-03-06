@@ -147,7 +147,6 @@ def main(argv):
     opts = parser.parse_args(argv)
     libdot.node_and_npm_setup()
     mkdeps(rollup=opts.rollup)
-    nassh.generate_changelog.generate_changelog()
 
     if opts.rollup:
         logging.info('Concatenating licenses...')

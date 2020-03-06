@@ -288,8 +288,6 @@ class HelperProgram:
     into the single libdot.py module.
     """
 
-    _BIN_DIR = BIN_DIR
-
     def __init__(self, name, path=None):
         """Initialize.
 
@@ -299,7 +297,7 @@ class HelperProgram:
         """
         self._name = name
         if path is None:
-            path = os.path.join(self._BIN_DIR, name)
+            path = os.path.join(BIN_DIR, name)
         self._path = path
         self._module_cache = None
 

@@ -29,10 +29,6 @@
 		"description": "The label for the Cancel button in dialogs.",
 		"message": "Cancel"
 	},
-	"CHANGELOG": {
-		"description": "A link to the list of recent commits (ChangeLog).",
-		"message": "ChangeLog"
-	},
 	"CLEAR_KNOWN_HOSTS_MENU_LABEL": {
 		"description": "The menu label to clear the list of SSH known host keys.",
 		"message": "Clear SSH known_hosts"
