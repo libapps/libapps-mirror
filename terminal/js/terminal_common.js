@@ -14,6 +14,7 @@ export const DEFAULT_FONT_SIZE = 14;
 
 export const DEFAULT_BACKGROUND_COLOR = '#202124';
 export const DEFAULT_FOREGROUND_COLOR = '#FFFFFF';
+export const DEFAULT_CURSOR_COLOR = '#AECBFA';
 /** @type {!Array<string>} */
 export const DEFAULT_ANSI_COLORS = [
   '#9AA0A6',
@@ -61,6 +62,7 @@ export function normalizePrefsInPlace(prefs) {
   prefs.definePreference('font-size', DEFAULT_FONT_SIZE);
   prefs.definePreference('background-color', DEFAULT_BACKGROUND_COLOR);
   prefs.definePreference('foreground-color', DEFAULT_FOREGROUND_COLOR);
+  prefs.definePreference('cursor-color', DEFAULT_CURSOR_COLOR);
   prefs.definePreference('color-palette-overrides', DEFAULT_ANSI_COLORS);
 
   prefs.set('font-family', normalizeFontFamily(
