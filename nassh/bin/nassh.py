@@ -24,4 +24,9 @@ import libdot  # pylint: disable=wrong-import-position
 
 
 # Wrappers around nassh/bin/ programs for other tools to access directly.
-mkdeps = libdot.HelperProgram('mkdeps', os.path.join(BIN_DIR, 'mkdeps'))
+class HelperProgram(libdot.HelperProgram):
+    """Avoid copying & pasting BIN_DIR setting."""
+    _BIN_DIR = BIN_DIR
+
+generate_changelog = HelperProgram('generate-changelog')
+mkdeps = HelperProgram('mkdeps')
