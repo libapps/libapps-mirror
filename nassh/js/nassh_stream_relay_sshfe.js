@@ -41,6 +41,9 @@ nassh.Stream.RelaySshfeWS = function(fd) {
   // Callback function when asyncWrite is used.
   this.onWriteSuccess_ = null;
 
+  // The total byte count we've written during this session.
+  this.writeCount_ = 0;
+
   // Data we've read so we can ack it to the server.
   this.readCount_ = 0;
 
@@ -390,10 +393,11 @@ nassh.Stream.RelaySshfeWS.prototype.sendWrite_ = function() {
 
   this.socket_.send(buf);
   this.writeBuffer_ = this.writeBuffer_.subarray(size);
+  this.writeCount_ += size;
 
   if (this.onWriteSuccess_ !== null) {
     // Notify nassh that we are ready to consume more data.
-    this.onWriteSuccess_(size);
+    this.onWriteSuccess_(this.writeCount_);
   }
 
   if (this.writeBuffer_.length) {

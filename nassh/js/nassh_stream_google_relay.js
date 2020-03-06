@@ -25,6 +25,7 @@ nassh.Stream.GoogleRelay = function(fd) {
   this.backoffTimeout_ = null;
 
   this.writeBuffer_ = new Uint8Array(0);
+  // The total byte count we've written during this session.
   this.writeCount_ = 0;
   this.onWriteSuccess_ = null;
 

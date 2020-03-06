@@ -406,6 +406,9 @@ The session object currently has these members:
 * str `authAgentAppID`: Extension id to use as the ssh-agent.
 * str `subsystem`: Which subsystem to launch.
 
+The `onWriteAcknowledge` `count` field tracks the total byte count sent for the
+connection, not the `count` from the most recent `write` request.
+
 ## NaCl->JS API
 
 Here is the API that the NaCl [ssh_client] code uses to communicate with the

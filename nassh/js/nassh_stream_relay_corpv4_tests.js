@@ -165,7 +165,7 @@ it('RelayCorpv4WS basic', (done) => {
 
   // A write should be queued.
   stream.asyncWrite(new Uint8Array([0xa0]).buffer);
-  assert.equal(0, stream.writeCount_);
+  assert.equal(0, stream.sentCount_);
 
   // Start the connection.
   let openCallbackRet;
@@ -175,7 +175,7 @@ it('RelayCorpv4WS basic', (done) => {
 
   // Writes should still be queued.
   stream.asyncWrite(new Uint8Array([0xa1]).buffer);
-  assert.equal(0, stream.writeCount_);
+  assert.equal(0, stream.sentCount_);
 
   // The connection is opened.
   stream.socket_.readyState = WebSocket.OPEN;
@@ -184,7 +184,7 @@ it('RelayCorpv4WS basic', (done) => {
   assert.isTrue(openCallbackRet);
 
   // We queued a write, but didn't call it.
-  assert.equal(0, stream.writeCount_);
+  assert.equal(0, stream.sentCount_);
 
   // Handle CONNECT SUCCESS message from the server.
   stream.onSocketData_(new MessageEvent('message', {

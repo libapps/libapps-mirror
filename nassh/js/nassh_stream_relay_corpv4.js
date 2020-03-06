@@ -142,15 +142,14 @@ nassh.Stream.RelayCorpv4WS = function(fd) {
   this.writeBuffer_ = new Uint8Array(0);
   // Callback function when asyncWrite is used.
   this.onWriteSuccess_ = null;
+  // Amount of data in buffer that were sent but not acknowledged yet.
+  this.sentCount_ = 0;
 
   // Data we've read so we can ack it to the server.
   this.readCount_ = BigInt(0);
 
   // Data we've written that the server has acked.
   this.writeAckCount_ = BigInt(0);
-
-  // Offset in our local write buffer.
-  this.writeCount_ = 0;
 
   // Session id for reconnecting.
   this.sid_ = null;
@@ -381,12 +380,12 @@ nassh.Stream.RelayCorpv4WS.prototype.onSocketData_ = function(e) {
 
       // Adjust our write buffer.
       this.writeBuffer_ = this.writeBuffer_.subarray(acked);
-      this.writeCount_ -= acked;
+      this.sentCount_ -= acked;
       this.writeAckCount_ = packet.ack;
 
       if (this.onWriteSuccess_ !== null) {
         // Notify nassh that we are ready to consume more data.
-        this.onWriteSuccess_(acked);
+        this.onWriteSuccess_(Number(this.writeAckCount_));
       }
       break;
     }
@@ -420,19 +419,19 @@ nassh.Stream.RelayCorpv4WS.prototype.asyncWrite = function(data, onSuccess) {
  */
 nassh.Stream.RelayCorpv4WS.prototype.sendWrite_ = function() {
   if (!this.socket_ || this.socket_.readyState != WebSocket.OPEN ||
-      this.writeBuffer_.length <= this.writeCount_) {
+      this.writeBuffer_.length <= this.sentCount_) {
     // Nothing to write or socket is not ready.
     return;
   }
 
   // Send the data packet.
   const readBuffer = this.writeBuffer_.subarray(
-      this.writeCount_, this.writeCount_ + this.maxDataWriteLength);
+      this.sentCount_, this.sentCount_ + this.maxDataWriteLength);
   const dataPacket = new nassh.Stream.RelayCorpv4.ClientDataPacket(readBuffer);
   this.socket_.send(dataPacket.frame);
-  this.writeCount_ += dataPacket.length;
+  this.sentCount_ += dataPacket.length;
 
-  if (this.writeCount_ < this.writeBuffer_.length) {
+  if (this.sentCount_ < this.writeBuffer_.length) {
     // We have more data to send but due to message limit we didn't send it.
     setTimeout(this.sendWrite_.bind(this), 0);
   }
