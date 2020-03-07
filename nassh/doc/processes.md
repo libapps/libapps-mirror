@@ -178,35 +178,10 @@ Send the same announcement as before but to the the public
 We don't currently have any.  We strive to keep the master branch stable.
 You should too!
 
-## Updating Translations
+## Translations
 
-*** note
-This process is meant for Googlers who are making new releases.
-***
-
-Once `_locales/en/messages.json` has updates that need translating:
-
-* Go into `//depot/google3/googleclient/chrome/extensions/samples/tc/hterm/`.
-* Make sure the locale list in `BUILD` is up to date.
-* Open `i18n_messages.js` for editing.
-* Run `../convert_json_messages.py < .../nassh/_locales/en/messages.json > i18n_messages.js`.
-* Upload & land the CL.
-  * If you need JavaScript readability approval, add readtome-javascript@.
-* If you want to make other changes, check with [CWS oncall](http://oncall/chrome-webstore-eng).
-* Talk to your TC contact about scheduling another run.
-  * Visit http://go/l10npms and use product "Chrome OS".
-* Wait for the translators to finish.
-* The updated files are at `//depot/google3/googledata/transconsole/xtb/ChromeExtensions/*.xtb`
-  but you won't use them directly.
-* Convert the xtb files to JS files (while under the `hterm` dir mentioned above):
-  `blaze build messages_fileset`
-* In the root of the checkout, the new JSON files will be under
-  `blaze-bin/googleclient/chrome/extensions/samples/tc/hterm/messages_fs/_locales/`.
-* Use the [import-translations](../bin/import-translations) script to import:
-  `.../nassh/bin/import-translations .../google3/blaze-bin/googleclient/chrome/extensions/samples/tc/hterm/messages_fs/_locales/`
-* Upload & land the CL.
-
-See the [TC](http://tc/) page for more details.
+Once `_locales/en/messages.json` has updates that need translating, follow the
+directions/guidelines in the [Translations documentation](./translations.md).
 
 ## Calendar
 
@@ -222,7 +197,8 @@ Similarly, try to follow:
 
 ## Launch Bugs
 
-* https://docs.google.com/document/d/13O6lLu8Acyd2JhuulUaivDbHVSRe2_ECM8z3NMirqE4/edit: PRD (Product Requirements Document)
+* https://goto.google.com/chrome-secure-shell-prd: PRD (Product Requirements Document)
+* https://goto.google.com/chrome-secure-shell-pdd: PDD (Privacy Design Document)
 * https://crbug.com/205752: Main launch bug.
 * https://crbug.com/211243: Security review launch bug.
 * https://crbug.com/200406: Tracker bug for initial SSH NaCl client.
