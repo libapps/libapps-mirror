@@ -1,3 +1,9 @@
+# 0.24, 2020-03-08, Relay fixes.
+
+* relay corpv4/sshfe: Fix write ack confusion.
+* relay corpv4: Use discovered relay.
+* mkzip: Start building versions for stable rollback.
+
 # 0.23, 2020-03-03, OpenSSH 8.2p1.
 
 * nassh: Enable metrics/crash APIs for crosh/Terminal.
