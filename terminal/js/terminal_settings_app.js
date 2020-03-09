@@ -180,8 +180,8 @@ export class TerminalSettingsApp extends LitElement {
               </li>
               <li class="setting-container">
                 <h4>${msg('HTERM_NAME_PREF_FONT_SIZE')}</h4>
-                <!-- TODO(lxj@google.com): Options' value is taken from the UX
-                    mock. We might want a wider range of choices. -->
+                <!-- TODO(lxj@google.com): We should allow user to input a text
+                    size not in the list. -->
                 <terminal-settings-dropdown preference="font-size"
                   .options=${SUPPORTED_FONT_SIZES}>
                 </terminal-settings-dropdown>

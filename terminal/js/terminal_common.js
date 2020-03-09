@@ -9,8 +9,8 @@
 // TODO(lxj@google.com) Move code duplicated in both terminal and settings here.
 
 export const SUPPORTED_FONT_FAMILIES = ['Noto Sans Mono', 'Cousine'];
-export const SUPPORTED_FONT_SIZES = [6, 8, 10, 12, 14, 16, 18];
-export const DEFAULT_FONT_SIZE = 14;
+export const SUPPORTED_FONT_SIZES = [10, 11, 12, 13, 14, 16, 18, 20];
+export const DEFAULT_FONT_SIZE = 13;
 
 export const DEFAULT_BACKGROUND_COLOR = '#202124';
 export const DEFAULT_FOREGROUND_COLOR = '#FFFFFF';
