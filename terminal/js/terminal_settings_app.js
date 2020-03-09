@@ -284,11 +284,6 @@ export class TerminalSettingsApp extends LitElement {
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container">
-                <h4>${msg('HTERM_NAME_PREF_HIDE_MOUSE_WHILE_TYPING')}</h4>
-                <!-- TODO(juwa@google.com): Add element -->
-                <select></select>
-              </li>
-              <li class="setting-container">
                 <h4>${msg('HTERM_NAME_PREF_ALT_GR_MODE')}</h4>
                 <terminal-settings-dropdown
                     preference="alt-gr-mode"
