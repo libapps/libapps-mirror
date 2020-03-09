@@ -59,16 +59,12 @@ terminal.init = function(element) {
   const params = new URLSearchParams(document.location.search);
   let term = new hterm.Terminal();
 
-  // If we want to execute something other than the default vmshell.
-  const commandName = params.get('command') || 'vmshell';
-  window.document.title = commandName;
-
   term.decorate(element);
   const runTerminal = function() {
     term.setCursorPosition(0, 0);
     term.setCursorVisible(true);
     term.runCommandClass(
-        terminal.Command, commandName, params.getAll('args[]'));
+        terminal.Command, 'vmshell', params.getAll('args[]'));
 
     term.command.keyboard_ = term.keyboard;
   };
@@ -184,8 +180,14 @@ terminal.Command.prototype.run = function() {
         this.io.terminal_.screenSize.height);
   };
 
-  chrome.terminalPrivate.openTerminalProcess(
-      this.commandName, this.argv_.args, pidInit);
+  // TODO(crbug.com/1056049): Remove openTerminalProcess once chrome supports
+  // openVmshellProcess on all releases.
+  if (chrome.terminalPrivate.openVmshellProcess) {
+    chrome.terminalPrivate.openVmshellProcess(this.argv_.args, pidInit);
+  } else {
+    chrome.terminalPrivate.openTerminalProcess(
+        this.commandName, this.argv_.args, pidInit);
+  }
 };
 
 /**

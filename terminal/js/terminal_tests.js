@@ -35,19 +35,18 @@ afterEach(function() {
 
 it('opens-process-in-init', async function() {
   terminal.init(this.div);
-  const [processName, args] =
-      await this.mockTerminalPrivateController.on('openTerminalProcess');
-  assert.equal('vmshell', processName);
+  const [args] =
+      await this.mockTerminalPrivateController.on('openVmshellProcess');
   assert.lengthOf(args, 1);
   assert.match(args[0], /^--startup_id=\d+$/);
 });
 
 it('does-not-exit-on-first-output', async function() {
   const pid = 'pid1234';
-  this.mockTerminalPrivate.openTerminalProcessId = pid;
+  this.mockTerminalPrivate.openVmshellProcessId = pid;
   let exitCalled = false;
   const term = terminal.init(this.div);
-  await this.mockTerminalPrivateController.on('openTerminalProcess');
+  await this.mockTerminalPrivateController.on('openVmshellProcess');
   term.command.exit = () => { exitCalled = true; };
 
   await this.mockTerminalPrivate.onProcessOutput.dispatch(pid, 'exit', 'text');

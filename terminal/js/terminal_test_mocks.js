@@ -62,7 +62,7 @@ function MockTerminalPrivate() {
   this.onProcessOutput = new MockEvent();
 
   /** @type {string} */
-  this.openTerminalProcessId = '';
+  this.openVmshellProcessId = '';
   this.croshSettings = {};
 }
 
@@ -155,19 +155,16 @@ MockTerminalPrivate.prototype.notifyObservers_ = function(fnName, args) {
 };
 
 /**
- * Starts new process.
+ * Starts new vmshell process.
  *
- * @param {string} processName Name of the process to open. May be 'crosh' or
- *     'vmshell'.
  * @param {!Array<string>} args Command line arguments to pass to the process.
  * @param {function(string)} callback Returns id of the launched process. If no
  *     process was launched returns -1.
  */
-MockTerminalPrivate.prototype.openTerminalProcess = function(
-    processName, args, callback) {
+MockTerminalPrivate.prototype.openVmshellProcess = function(args, callback) {
   setTimeout(() => {
-    callback(this.openTerminalProcessId);
-    this.notifyObservers_('openTerminalProcess', arguments);
+    callback(this.openVmshellProcessId);
+    this.notifyObservers_('openVmshellProcess', arguments);
   }, 0);
 };
 

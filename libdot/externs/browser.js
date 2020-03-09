@@ -276,6 +276,12 @@ chrome.terminalPrivate.openTerminalProcess = function(
     commandName, argv, callback) {};
 
 /**
+ * @param {!Array<string>} argv
+ * @param {function(string)} callback
+ */
+chrome.terminalPrivate.openVmshellProcess = function(argv, callback) {};
+
+/**
  * @param {string} id
  * @return {string} input
  */
