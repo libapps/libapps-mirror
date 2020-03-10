@@ -475,35 +475,35 @@
 	},
 	"HTERM_NAME_PREF_PASS_ALT_NUMBER": {
 		"description": "Label text shown for the hterm 'pass-alt-number' preference.",
-		"message": "Pass Alt-1..9 key behavior"
+		"message": "Alt-1..9 switch tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_NUMBER": {
 		"description": "Label text shown for the hterm 'pass-ctrl-number' preference.",
-		"message": "Pass Ctrl-1..9 key behavior"
+		"message": "Ctrl-1..9 switch tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_N": {
 		"description": "Label text shown for the hterm 'pass-ctrl-n' preference.",
-		"message": "Pass Ctrl-N key behavior"
+		"message": "Ctrl-N new window behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_T": {
 		"description": "Label text shown for the hterm 'pass-ctrl-t' preference.",
-		"message": "Pass Ctrl-T key behavior"
+		"message": "Ctrl-T new tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_TAB": {
 		"description": "Label text shown for the hterm 'pass-ctrl-tab' preference.",
-		"message": "Pass Ctrl-Tab key behavior"
+		"message": "Ctrl-Tab switch tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_W": {
 		"description": "Label text shown for the hterm 'pass-ctrl-w' preference.",
-		"message": "Pass Ctrl-W key behavior"
+		"message": "Ctrl-W close tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_META_NUMBER": {
 		"description": "Label text shown for the hterm 'pass-meta-number' preference.",
-		"message": "Pass Meta-1..9 key behavior"
+		"message": "Meta-1..9 switch tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_META_V": {
 		"description": "Label text shown for the hterm 'pass-meta-v' preference.",
-		"message": "Pass Meta-V key behavior"
+		"message": "Meta-V paste behavior"
 	},
 	"HTERM_NAME_PREF_PASTE_ON_DROP": {
 		"description": "Label text shown for the hterm 'paste-on-drop' preference.",
