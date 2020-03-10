@@ -9,6 +9,8 @@
  */
 import {LitElement, css, html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
+import {stylesButtonContainer} from './terminal_settings_styles.js';
+import './terminal_settings_button.js';
 
 /**
  * Convert CSS color to hex color.
@@ -54,7 +56,7 @@ export class TerminalColorpickerElement extends LitElement {
 
   /** @override */
   static get styles() {
-    return css`
+    return [stylesButtonContainer, css`
         #smallview {
           align-items: center;
           display: flex;
@@ -121,11 +123,12 @@ export class TerminalColorpickerElement extends LitElement {
         hue-slider, transparency-slider, dialog #hexinput {
           margin-top: 20px;
         }
-    `;
+    `];
   }
 
   /** @override */
   render() {
+    const msg = hterm.messageManager.get.bind(hterm.messageManager);
     const transparency = this.disableTransparency ? '' : html`
         <transparency-slider hue="${this.hue_}"
             @updated="${this.onTransparency_}"
@@ -134,7 +137,8 @@ export class TerminalColorpickerElement extends LitElement {
     const input = html`
         <input id="hexinput" type="text"
             .value="${cssToHex(/** @type {string} */(this.value))}"
-            @blur="${this.onInputBlur_}"/>`;
+            @blur="${this.onInputBlur_}"
+            @keyup="${this.onInputKeyup_}"/>`;
     return html`
         <div id="smallview">
           <div id="swatch" @click="${this.onSwatchClick_}">
@@ -143,7 +147,7 @@ export class TerminalColorpickerElement extends LitElement {
           </div>
           ${this.inputInDialog ? '' : input}
         </div>
-        <dialog @click=${this.onDialogClick_}>
+        <dialog>
           <div id="dialog-content">
             <saturation-lightness-picker
                 @updated="${this.onSaturationLightness_}"
@@ -154,6 +158,16 @@ export class TerminalColorpickerElement extends LitElement {
             </hue-slider>
             ${transparency}
             ${this.inputInDialog ? input : ''}
+            <div class="button-container">
+              <terminal-settings-button class="cancel"
+                  @click="${this.onCancelClick_}">
+                ${msg('CANCEL_BUTTON_LABEL')}
+              </terminal-settings-button>
+              <terminal-settings-button class="action"
+                  @click="${this.onOkClick_}">
+                ${msg('OK_BUTTON_LABEL')}
+              </terminal-settings-button>
+            </div>
           </div>
         </dialog>
     `;
@@ -176,6 +190,8 @@ export class TerminalColorpickerElement extends LitElement {
     this.lightness_;
     /** @private {number} */
     this.transparency_;
+    /** @private {string} */
+    this.cancelValue_;
   }
 
   /**
@@ -229,19 +245,7 @@ export class TerminalColorpickerElement extends LitElement {
   /** @param {!Event} event */
   onSwatchClick_(event) {
     this.shadowRoot.querySelector('dialog').showModal();
-  }
-
-  /**
-   * Detects clicks on the dialog backdrop to close the dialog.
-   *
-   * @param {!Event} event
-   */
-  onDialogClick_(event) {
-    // The visible dialog is filled by <div id="#dialog-content">,
-    // so any click on target 'DIALOG', is on the backdrop.
-    if (event.target.tagName === 'DIALOG') {
-      event.target.close();
-    }
+    this.cancelValue_ = this.value;
   }
 
   /** @param {!Event} event */
@@ -271,6 +275,33 @@ export class TerminalColorpickerElement extends LitElement {
     } else {
       this.onUiChanged_(rgb);
     }
+  }
+
+  /** @param {!KeyboardEvent} event */
+  onInputKeyup_(event) {
+    if (event.key === 'Enter') {
+      this.onInputBlur_(event);
+      this.onOkClick_(event);
+    }
+  }
+
+  /**
+   * Detects clicks on the dialog cancel button.
+   *
+   * @param {!Event} event
+   */
+  onCancelClick_(event) {
+    this.shadowRoot.querySelector('dialog').close();
+    this.onUiChanged_(this.cancelValue_);
+  }
+
+  /**
+   * Detects clicks on the dialog cancel button.
+   *
+   * @param {!Event} event
+   */
+  onOkClick_(event) {
+    this.shadowRoot.querySelector('dialog').close();
   }
 }
 

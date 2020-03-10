@@ -74,23 +74,6 @@ describe('terminal_settings_colorpicker.js', () => {
     delete window.preferenceManager;
   });
 
-  it('shows-and-hides-dialog', function() {
-    const dialog = getElement(this.el, 'dialog');
-    const swatch = getElement(this.el, '#swatch');
-    const slp = getElement(this.el, 'saturation-lightness-picker');
-
-    // Show dialog when swatch clicked.
-    assert.isFalse(dialog.hasAttribute('open'));
-    swatch.dispatchEvent(new MouseEvent('click'));
-    assert.isTrue(dialog.hasAttribute('open'));
-
-    // Close dialog when backdrop clicked, but not elements in dialog.
-    slp.dispatchEvent(new MouseEvent('click', {bubbles: true}));
-    assert.isTrue(dialog.hasAttribute('open'));
-    dialog.dispatchEvent(new MouseEvent('click', {bubbles: true}));
-    assert.isFalse(dialog.hasAttribute('open'));
-  });
-
   it('updates-ui-when-preference-changes', async function() {
     assert.equal(window.preferenceManager.get(preference), orange);
     assertInternals(this.el, '#ffa600', 39, 100, 50, 1);
@@ -161,5 +144,76 @@ describe('terminal_settings_colorpicker.js', () => {
     assert.isNotNull(getElement(this.el, 'saturation-lightness-picker'));
     assert.isNotNull(getElement(this.el, 'hue-slider'));
     assert.isNull(getElement(this.el, 'transparency-slider'));
+  });
+
+  it('updates-and-closes-dialog-when-enter-pressed-in-input', async function() {
+    const dialog = getElement(this.el, 'dialog');
+    const swatch = getElement(this.el, '#swatch');
+    const hi = getElement(this.el, '#hexinput');
+
+    // Show dialog when swatch clicked.
+    assert.isFalse(dialog.hasAttribute('open'));
+    swatch.dispatchEvent(new MouseEvent('click'));
+    assert.isTrue(dialog.hasAttribute('open'));
+
+    // Modify input and press enter.
+    hi.value = 'purple';
+    hi.dispatchEvent(new KeyboardEvent('keyup', {key: 'Enter'}));
+    await allUpdatesComplete(this.el);
+
+    // Dialog closed and value updated.
+    assert.isFalse(dialog.hasAttribute('open'));
+    assert.equal(window.preferenceManager.get(preference), 'rgb(160, 32, 240)');
+    assertInternals(this.el, '#a020f0', 277, 87, 53, 1);
+  });
+
+  it('closes-dialog-when-ok-clicked', async function() {
+    const dialog = getElement(this.el, 'dialog');
+    const swatch = getElement(this.el, '#swatch');
+    const slp = getElement(this.el, 'saturation-lightness-picker');
+    const ok = getElement(this.el, 'terminal-settings-button.action');
+
+    // Show dialog when swatch clicked.
+    assert.isFalse(dialog.hasAttribute('open'));
+    swatch.dispatchEvent(new MouseEvent('click'));
+    assert.isTrue(dialog.hasAttribute('open'));
+
+    // Modify input and click OK.
+    slp.saturation = 20;
+    slp.lightness = 80;
+    slp.dispatchEvent(new CustomEvent('updated'));
+    await allUpdatesComplete(this.el);
+    ok.dispatchEvent(new MouseEvent('click'));
+
+    // Dialog closed and value updated.
+    assert.isFalse(dialog.hasAttribute('open'));
+    assert.equal(
+        window.preferenceManager.get(preference), 'hsla(39, 20%, 80%, 1)');
+    assertInternals(this.el, '#d6cfc2', 39, 20, 80, 1);
+  });
+
+  it('closes-dialog-and-reverts-when-cancel-clicked', async function() {
+    const dialog = getElement(this.el, 'dialog');
+    const swatch = getElement(this.el, '#swatch');
+    const slp = getElement(this.el, 'saturation-lightness-picker');
+    const cancel = getElement(this.el, 'terminal-settings-button.cancel');
+
+    // Show dialog when swatch clicked.
+    assert.isFalse(dialog.hasAttribute('open'));
+    swatch.dispatchEvent(new MouseEvent('click'));
+    assert.isTrue(dialog.hasAttribute('open'));
+
+    // Modify input and click OK.
+    slp.saturation = 20;
+    slp.lightness = 80;
+    slp.dispatchEvent(new CustomEvent('updated'));
+    await allUpdatesComplete(this.el);
+    cancel.dispatchEvent(new MouseEvent('click'));
+    await allUpdatesComplete(this.el);
+
+    // Dialog closed and value updated.
+    assert.isFalse(dialog.hasAttribute('open'));
+    assert.equal(window.preferenceManager.get(preference), orange);
+    assertInternals(this.el, '#ffa600', 39, 100, 50, 1);
   });
 });
