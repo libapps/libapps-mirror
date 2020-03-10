@@ -175,7 +175,7 @@ export class TerminalSettingsApp extends LitElement {
               <li class="setting-container">
                 <h4>${msg('HTERM_NAME_PREF_FONT_FAMILY')}</h4>
                 <terminal-settings-dropdown preference="font-family"
-                  .options=${SUPPORTED_FONT_FAMILIES}>
+                  .options=${Array.from(SUPPORTED_FONT_FAMILIES.keys())}>
                 </terminal-settings-dropdown>
               </li>
               <li class="setting-container">

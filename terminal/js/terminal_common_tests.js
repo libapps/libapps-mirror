@@ -9,6 +9,8 @@
 import {normalizePrefsInPlace, SUPPORTED_FONT_FAMILIES, SUPPORTED_FONT_SIZES,
   DEFAULT_FONT_SIZE, DEFAULT_BACKGROUND_COLOR} from './terminal_common.js';
 
+const fontFamilies = Array.from(SUPPORTED_FONT_FAMILIES.keys());
+
 describe('terminal_common_tests.js', () => {
   let preferenceManager;
 
@@ -24,14 +26,12 @@ describe('terminal_common_tests.js', () => {
       assert.equal(preferenceManager.get(pref), after);
     }
 
-    assertNormalizationResult('font-family', 'invalid',
-        SUPPORTED_FONT_FAMILIES[0]);
-    assertNormalizationResult('font-family', SUPPORTED_FONT_FAMILIES[1],
-        SUPPORTED_FONT_FAMILIES[1]);
+    assertNormalizationResult('font-family', 'invalid', fontFamilies[0]);
+    assertNormalizationResult('font-family', fontFamilies[1], fontFamilies[1]);
     // Select first valid font if it is a list
     assertNormalizationResult('font-family',
-        `invalid, ${SUPPORTED_FONT_FAMILIES[1]}, ${SUPPORTED_FONT_FAMILIES[0]}`,
-        SUPPORTED_FONT_FAMILIES[1]);
+        `invalid, ${fontFamilies[1]}, ${fontFamilies[0]}`,
+        fontFamilies[1]);
 
     assertNormalizationResult('font-size', 1000, DEFAULT_FONT_SIZE);
     assertNormalizationResult('font-size', SUPPORTED_FONT_SIZES[0],

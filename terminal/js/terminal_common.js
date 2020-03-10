@@ -8,7 +8,19 @@
 
 // TODO(lxj@google.com) Move code duplicated in both terminal and settings here.
 
-export const SUPPORTED_FONT_FAMILIES = ['Noto Sans Mono', 'Cousine'];
+// The value of an entry is true if it is a web font from fonts.google.com,
+// otherwise it is a local font. Note that the UI shows the fonts in the same
+// order as the entries'.
+//
+// @type {!Map<string, boolean>}
+export const SUPPORTED_FONT_FAMILIES = new Map([
+  // The first font is the default font.
+  ['Noto Sans Mono', false],
+  ['Cousine', false],
+  ['Roboto Mono', true],
+  ['Inconsolata', true],
+  ['Source Code Pro', true],
+]);
 export const SUPPORTED_FONT_SIZES = [10, 11, 12, 13, 14, 16, 18, 20];
 export const DEFAULT_FONT_SIZE = 13;
 
@@ -44,11 +56,11 @@ export const DEFAULT_ANSI_COLORS = [
 function normalizeFontFamily(cssFontFamily) {
   for (let fontFamily of cssFontFamily.split(',')) {
     fontFamily = fontFamily.trim();
-    if (SUPPORTED_FONT_FAMILIES.includes(fontFamily)) {
+    if (SUPPORTED_FONT_FAMILIES.has(fontFamily)) {
       return fontFamily;
     }
   }
-  return SUPPORTED_FONT_FAMILIES[0];
+  return SUPPORTED_FONT_FAMILIES.keys().next().value;
 }
 
 /**
@@ -81,4 +93,47 @@ export function normalizePrefsInPlace(prefs) {
   } else {
     prefs.set('background-color', lib.colors.setAlpha(backgroundColor, 1));
   }
+}
+
+/**
+ * Load a web font into a document object.
+ *
+ * @param {!Document} document The document to load the web font into.
+ * @param {string} fontFamily The font family to load.
+ * @return {!Promise<boolean>} False if the font is not a web font.
+ */
+export function loadWebFont(document, fontFamily) {
+  return new Promise((resolve, reject) => {
+    const LINK_ID = 'terminal:web-font-link';
+    if (!SUPPORTED_FONT_FAMILIES.get(fontFamily)) {
+      // Not a web font.
+      resolve(false);
+      return;
+    }
+
+    const head = document.querySelector('head');
+    let link = head.querySelector(`#${CSS.escape(LINK_ID)}`);
+    if (link) {
+      link.remove();
+    }
+    link = document.createElement('link');
+    link.id = LINK_ID;
+    link.href = `https://fonts.googleapis.com/css2?family=` +
+        `${encodeURIComponent(fontFamily)}&display=swap`;
+    link.rel = 'stylesheet';
+    link.addEventListener('load', async () => {
+      // 'X' is the character of which hterm measures the size. For the font
+      // size, the default one is used because it probably does not matter.
+      const fonts = await document.fonts.load(
+          `${DEFAULT_FONT_SIZE}px "${fontFamily}"`, 'X');
+      if (fonts.length === 0) {
+        reject(new Error('Unable to load fonts'));
+      } else {
+        resolve(true);
+      }
+    });
+    link.addEventListener('error',
+        () => reject(new Error('Unable to load css')));
+    head.appendChild(link);
+  });
 }

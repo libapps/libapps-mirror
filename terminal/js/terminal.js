@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {normalizePrefsInPlace} from './terminal_common.js';
+import {normalizePrefsInPlace, loadWebFont} from './terminal_common.js';
 import {TerminalMenu} from './terminal_menu.js';
 
 export const terminal = {};
@@ -73,7 +73,24 @@ terminal.init = function(element) {
     term.command.keyboard_ = term.keyboard;
   };
   term.onTerminalReady = function() {
-    normalizePrefsInPlace(term.getPrefs());
+    const prefs = term.getPrefs();
+    normalizePrefsInPlace(prefs);
+
+    const onFontFamilyChanged = async (fontFamily) => {
+      // If the user changes font quickly enough, we might have a pending
+      // loadWebFont() task, but it should be harmless. Potentially, we can
+      // implement a cancellable promise so that we can cancel it.
+      //
+      // TODO(lxj@google.com): catch and handle error raised by loadWebFont()
+      // somehow (e.g. show a notification).
+      if (await loadWebFont(element.querySelector('iframe').contentDocument,
+          fontFamily)) {
+        term.syncFontFamily();
+      }
+    };
+    onFontFamilyChanged(prefs.get('font-family'));
+    prefs.addObserver('font-family', onFontFamilyChanged);
+
     if (window.chrome && chrome.accessibilityFeatures &&
         chrome.accessibilityFeatures.spokenFeedback) {
       chrome.accessibilityFeatures.spokenFeedback.onChange.addListener(
