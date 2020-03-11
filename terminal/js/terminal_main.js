@@ -51,6 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
       window.term_.getPrefs().addObserver('background-color', (color) => {
         document.getElementById('meta-theme-color')
             .setAttribute('content', /** @type {string} */(color));
+        document.body.style.backgroundColor = /** @type {string} */(color);
       });
     });
     customElements.define(Manager.is, Manager);
