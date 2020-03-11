@@ -87,17 +87,12 @@ terminal.init = function(element) {
     onFontFamilyChanged(prefs.get('font-family'));
     prefs.addObserver('font-family', onFontFamilyChanged);
 
-    if (window.chrome && chrome.accessibilityFeatures &&
-        chrome.accessibilityFeatures.spokenFeedback) {
-      chrome.accessibilityFeatures.spokenFeedback.onChange.addListener(
-          (details) => term.setAccessibilityEnabled(details.value));
-      chrome.accessibilityFeatures.spokenFeedback.get({}, (details) => {
-        term.setAccessibilityEnabled(details.value);
-        runTerminal();
-      });
-    } else {
+    chrome.terminalPrivate.onA11yStatusChanged.addListener(
+        enabled => term.setAccessibilityEnabled(enabled));
+    chrome.terminalPrivate.getA11yStatus(enabled => {
+      term.setAccessibilityEnabled(enabled);
       runTerminal();
-    }
+    });
   };
 
   term.contextMenu.setItems([

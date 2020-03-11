@@ -60,10 +60,12 @@ function MockTerminalPrivate() {
    */
   this.observers_ = {};
   this.onProcessOutput = new MockEvent();
+  this.onA11yStatusChanged = new MockEvent();
 
   /** @type {string} */
   this.openVmshellProcessId = '';
   this.croshSettings = {};
+  this.a11yStatus = false;
 }
 
 /**
@@ -240,6 +242,19 @@ MockTerminalPrivate.prototype.getCroshSettings = function(callback) {
   setTimeout(() => {
     callback(this.croshSettings);
     this.notifyObservers_('getCroshSettings', arguments);
+  }, 0);
+};
+
+/**
+ * Returns the current a11y status.
+ *
+ * @param {function(boolean)} callback Callback that will be called
+ *     with the current a11y status.
+ */
+MockTerminalPrivate.prototype.getA11yStatus = function(callback) {
+  setTimeout(() => {
+    callback(this.a11yStatus);
+    this.notifyObservers_('getA11yStatus', arguments);
   }, 0);
 };
 

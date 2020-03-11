@@ -10,48 +10,68 @@ import {terminal} from './terminal.js';
 
 describe('terminal_tests.js', () => {
 
+let mockTerminalPrivate;
+let mockTerminalPrivateController;
+let div;
+
 /**
  * Create the #terminal div in the document for testing, and start mocks.
  */
 beforeEach(function() {
   const document = window.document;
-  const div = this.div = document.createElement('div');
+  div = document.createElement('div');
   div.setAttribute('id', 'terminal');
   div.style.position = 'absolute';
   div.style.height = '100%';
   div.style.width = '100%';
   document.body.appendChild(div);
-  this.mockTerminalPrivateController = MockTerminalPrivate.start();
-  this.mockTerminalPrivate = this.mockTerminalPrivateController.instance;
+  mockTerminalPrivateController = MockTerminalPrivate.start();
+  mockTerminalPrivate = mockTerminalPrivateController.instance;
 });
 
 /**
  * Remove the #terminal div from the document, and stop mocks.
  */
 afterEach(function() {
-  document.body.removeChild(this.div);
-  this.mockTerminalPrivateController.stop();
+  document.body.removeChild(div);
+  mockTerminalPrivateController.stop();
 });
 
 it('opens-process-in-init', async function() {
-  terminal.init(this.div);
+  terminal.init(div);
   const [args] =
-      await this.mockTerminalPrivateController.on('openVmshellProcess');
+      await mockTerminalPrivateController.on('openVmshellProcess');
   assert.lengthOf(args, 1);
   assert.match(args[0], /^--startup_id=\d+$/);
 });
 
+[true, false].map(value => it(`set-a11y-in-init-to-${value}`, async () => {
+  mockTerminalPrivate.a11yStatus = value;
+  const term = terminal.init(div);
+  await mockTerminalPrivateController.on('getA11yStatus');
+  assert.equal(term.accessibilityReader_.accessibilityEnabled, value);
+}));
+
+[true, false].map(value => it(`set-a11y-to-${value}-on-changed`, async () => {
+  mockTerminalPrivate.a11yStatus = !value;
+  const term = terminal.init(div);
+  await mockTerminalPrivateController.on('getA11yStatus');
+
+  await mockTerminalPrivate.onA11yStatusChanged.dispatch(value);
+  assert.equal(term.accessibilityReader_.accessibilityEnabled, value);
+}));
+
 it('does-not-exit-on-first-output', async function() {
   const pid = 'pid1234';
-  this.mockTerminalPrivate.openVmshellProcessId = pid;
+  mockTerminalPrivate.openVmshellProcessId = pid;
   let exitCalled = false;
-  const term = terminal.init(this.div);
-  await this.mockTerminalPrivateController.on('openVmshellProcess');
+  const term = terminal.init(div);
+  await mockTerminalPrivateController.on('openVmshellProcess');
   term.command.exit = () => { exitCalled = true; };
 
-  await this.mockTerminalPrivate.onProcessOutput.dispatch(pid, 'exit', 'text');
+  await mockTerminalPrivate.onProcessOutput.dispatch(pid, 'exit', 'text');
   assert.isFalse(exitCalled);
-  await this.mockTerminalPrivate.onProcessOutput.dispatch(pid, 'exit', 'text');
+  await mockTerminalPrivate.onProcessOutput.dispatch(pid, 'exit', 'text');
   assert.isTrue(exitCalled);
 });
 
@@ -63,19 +83,19 @@ it('migrates-settings-on-first-run-only', async function() {
   };
 
   let callCount = 0;
-  this.mockTerminalPrivateController.addObserver('getCroshSettings', () => {
+  mockTerminalPrivateController.addObserver('getCroshSettings', () => {
     ++callCount;
   });
 
   // First time calls getCroshSettings and copies settings.
-  this.mockTerminalPrivate.croshSettings = {'test': 1};
+  mockTerminalPrivate.croshSettings = {'test': 1};
   await new Promise((resolve) => terminal.migrateSettings(resolve));
   assert.equal(callCount, 1);
   let settings = await getItems();
   assert.deepInclude(settings, {'test': 1, 'crosh.settings.migrated': true});
 
   // Once migrated, doesn't call getCroshSettings again, or update settings.
-  this.mockTerminalPrivate.croshSettings = {'test': 2};
+  mockTerminalPrivate.croshSettings = {'test': 2};
   await new Promise((resolve) => terminal.migrateSettings(resolve));
   assert.equal(callCount, 1);
   settings = await getItems();
