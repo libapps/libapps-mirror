@@ -37,6 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.querySelector(Manager.is)
         .addEventListener('terminal-window-ready', (event) => {
       const element = document.createElement('div');
+      element.style.width = element.style.height = '100%';
       element.addEventListener('terminal-closing', () => {
         event.target.destroySlot(event.detail.slot);
       });
