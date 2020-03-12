@@ -151,11 +151,11 @@ nassh.App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
       chrome.tabs.create({url: url, active: true});
       break;
     case 'newBackgroundTab':
-      // Fired when pressing Meta-Enter/Command-Enter.
+      // Fired when pressing Meta+Enter/Command+Enter.
       chrome.tabs.create({url: url, active: false});
       break;
     case 'newForegroundTab':
-      // Fired when pressing Alt-Enter.
+      // Fired when pressing Alt+Enter.
       // Close the active tab.  We need to do this before opening a new window
       // in case Chrome selects that as the new active tab.  It won't kill us
       // right away though as the JS execution model guarantees we'll finish

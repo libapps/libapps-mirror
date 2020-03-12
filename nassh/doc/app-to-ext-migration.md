@@ -101,7 +101,7 @@ Unfortunately, Chrome does not provide a great flow for this.
 
 1.  Click the extension icon in the upper right of Chrome.
 1.  Hold Ctrl while clicking "Connection Dialog" to open it in a tab.
-1.  Open Chrome's ⋮ menu in the upper right (Alt-F shortcut).
+1.  Open Chrome's ⋮ menu in the upper right (Alt+F shortcut).
 1.  Expand the "More tools" submenu.
 1.  Select the "Create shortcut..." option.
 1.  Check the "Open as window" option to automatically open it as a window.

@@ -150,16 +150,16 @@ nasftp.Cli = function(commandInstance) {
 
   // Set up keyboard shortcuts.
   this.terminal.keyboard.bindings.addBindings({
-    'Ctrl-C': this.onCtrlCKey_.bind(this),
-    'Ctrl-D': this.onCtrlDKey_.bind(this),
-    'Ctrl-H': this.onBackspaceKey_.bind(this),
-    'Ctrl-I': this.onTabKey_.bind(this),
+    'Ctrl+C': this.onCtrlCKey_.bind(this),
+    'Ctrl+D': this.onCtrlDKey_.bind(this),
+    'Ctrl+H': this.onBackspaceKey_.bind(this),
+    'Ctrl+I': this.onTabKey_.bind(this),
     // Open the brower's downloads page.
-    'Ctrl-J': hterm.Keyboard.KeyActions.PASS,
-    'Ctrl-L': this.onCtrlLKey_.bind(this),
-    'Ctrl-U': this.onCtrlUKey_.bind(this),
-    'Ctrl-W': this.onCtrlWKey_.bind(this),
-    'Ctrl-220': this.onCtrlBackslashKey_.bind(this),
+    'Ctrl+J': hterm.Keyboard.KeyActions.PASS,
+    'Ctrl+L': this.onCtrlLKey_.bind(this),
+    'Ctrl+U': this.onCtrlUKey_.bind(this),
+    'Ctrl+W': this.onCtrlWKey_.bind(this),
+    'Ctrl+220': this.onCtrlBackslashKey_.bind(this),
     'Backspace': this.onBackspaceKey_.bind(this),
     'Delete': hterm.Keyboard.KeyActions.CANCEL,
     'Tab': this.onTabKey_.bind(this),
@@ -405,7 +405,7 @@ nasftp.Cli.prototype.onInput_ = function(string) {
 };
 
 /**
- * Callback for handling interrupt requests (Ctrl-C).
+ * Callback for handling interrupt requests (Ctrl+C).
  *
  * @return {!hterm.Keyboard.KeyActions}
  */
@@ -426,7 +426,7 @@ nasftp.Cli.prototype.onCtrlCKey_ = function() {
 };
 
 /**
- * Callback for handling end-of-input requests (Ctrl-D).
+ * Callback for handling end-of-input requests (Ctrl+D).
  *
  * @return {!hterm.Keyboard.KeyActions}
  */
@@ -445,7 +445,7 @@ nasftp.Cli.prototype.onCtrlDKey_ = function() {
 };
 
 /**
- * Callback for handling clear screen requests (Ctrl-L).
+ * Callback for handling clear screen requests (Ctrl+L).
  *
  * @return {!hterm.Keyboard.KeyActions}
  */
@@ -463,7 +463,7 @@ nasftp.Cli.prototype.onCtrlLKey_ = function() {
 };
 
 /**
- * Callback for handling clear line requests (Ctrl-U).
+ * Callback for handling clear line requests (Ctrl+U).
  *
  * @return {!hterm.Keyboard.KeyActions}
  */
@@ -482,7 +482,7 @@ nasftp.Cli.prototype.onCtrlUKey_ = function() {
 };
 
 /**
- * Callback for handling delete word requests (Ctrl-W).
+ * Callback for handling delete word requests (Ctrl+W).
  *
  * @return {!hterm.Keyboard.KeyActions}
  */
@@ -505,7 +505,7 @@ nasftp.Cli.prototype.onCtrlWKey_ = function() {
 };
 
 /**
- * Callback for handling quit requests (Ctrl-\).
+ * Callback for handling quit requests (Ctrl+\).
  *
  * @return {!hterm.Keyboard.KeyActions}
  */

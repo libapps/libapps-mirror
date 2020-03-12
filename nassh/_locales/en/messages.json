@@ -115,7 +115,7 @@
 		"placeholders": {
 			"shortcut": {
 				"content": "$1",
-				"example": "Ctrl-Shift-P"
+				"example": "Ctrl+Shift+P"
 			},
 			"url": {
 				"content": "$2",
@@ -291,7 +291,7 @@
 	},
 	"HTERM_NAME_PREF_ALT_BACKSPACE_IS_META_BACKSPACE": {
 		"description": "Label text shown for the hterm 'alt-backspace-is-meta-backspace' preference.",
-		"message": "Alt-Backspace is Meta-Backspace"
+		"message": "Alt+Backspace is Meta+Backspace"
 	},
 	"HTERM_NAME_PREF_ALT_GR_MODE": {
 		"description": "Label text shown for the hterm 'alt-gr-mode' preference.",
@@ -351,15 +351,15 @@
 	},
 	"HTERM_NAME_PREF_CTRL_C_COPY": {
 		"description": "Label text shown for the hterm 'ctrl-c-copy' preference.",
-		"message": "Ctrl-C copy behavior"
+		"message": "Ctrl+C copy behavior"
 	},
 	"HTERM_NAME_PREF_CTRL_PLUS_MINUS_ZERO_ZOOM": {
 		"description": "Label text shown for the hterm 'ctrl-plus-minus-zero-zoom' preference.",
-		"message": "Ctrl-+/-/0 zoom behavior"
+		"message": "Ctrl++/-/0 zoom behavior"
 	},
 	"HTERM_NAME_PREF_CTRL_V_PASTE": {
 		"description": "Label text shown for the hterm 'ctrl-v-paste' preference.",
-		"message": "Ctrl-V paste behavior"
+		"message": "Ctrl+V paste behavior"
 	},
 	"HTERM_NAME_PREF_CURSOR_BLINK": {
 		"description": "Label text shown for the hterm 'cursor-blink' preference.",
@@ -475,35 +475,35 @@
 	},
 	"HTERM_NAME_PREF_PASS_ALT_NUMBER": {
 		"description": "Label text shown for the hterm 'pass-alt-number' preference.",
-		"message": "Alt-1..9 switch tab behavior"
+		"message": "Alt+1..9 switch tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_NUMBER": {
 		"description": "Label text shown for the hterm 'pass-ctrl-number' preference.",
-		"message": "Ctrl-1..9 switch tab behavior"
+		"message": "Ctrl+1..9 switch tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_N": {
 		"description": "Label text shown for the hterm 'pass-ctrl-n' preference.",
-		"message": "Ctrl-N new window behavior"
+		"message": "Ctrl+N new window behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_T": {
 		"description": "Label text shown for the hterm 'pass-ctrl-t' preference.",
-		"message": "Ctrl-T new tab behavior"
+		"message": "Ctrl+T new tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_TAB": {
 		"description": "Label text shown for the hterm 'pass-ctrl-tab' preference.",
-		"message": "Ctrl-Tab switch tab behavior"
+		"message": "Ctrl+Tab switch tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_W": {
 		"description": "Label text shown for the hterm 'pass-ctrl-w' preference.",
-		"message": "Ctrl-W close tab behavior"
+		"message": "Ctrl+W close tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_META_NUMBER": {
 		"description": "Label text shown for the hterm 'pass-meta-number' preference.",
-		"message": "Meta-1..9 switch tab behavior"
+		"message": "Meta+1..9 switch tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_META_V": {
 		"description": "Label text shown for the hterm 'pass-meta-v' preference.",
-		"message": "Meta-V paste behavior"
+		"message": "Meta+V paste behavior"
 	},
 	"HTERM_NAME_PREF_PASTE_ON_DROP": {
 		"description": "Label text shown for the hterm 'paste-on-drop' preference.",
@@ -535,7 +535,7 @@
 	},
 	"HTERM_NAME_PREF_SHIFT_INSERT_PASTE": {
 		"description": "Label text shown for the hterm 'shift-insert-paste' preference.",
-		"message": "Shift-Insert paste"
+		"message": "Shift+Insert paste"
 	},
 	"HTERM_NAME_PREF_TERMINAL_ENCODING": {
 		"description": "Label text shown for the hterm 'terminal-encoding' preference.",
@@ -579,7 +579,7 @@
 	},
 	"HTERM_PREF_ALT_BACKSPACE_IS_META_BACKSPACE": {
 		"description": "Help text shown for the hterm 'alt-backspace-is-meta-backspace' preference. 'Alt', 'Backspace', and 'DEL' are the names of the keyboard buttons and may be translated as makes sense.",
-		"message": "If set, undoes the Chrome OS Alt-Backspace->DEL remap, so that Alt-Backspace indeed is Alt-Backspace."
+		"message": "If set, undoes the Chrome OS Alt+Backspace->DEL remap, so that Alt+Backspace indeed is Alt+Backspace."
 	},
 	"HTERM_PREF_ALT_GR_MODE": {
 		"description": "Help text shown for the hterm 'alt-gr-mode' preference. 'Alt' and 'AltGR' are the names of the keyboard buttons and may be translated as makes sense. Do not translate 'navigator.language' or anything else in quotes here. The quote style may be changed as makes sense for the language. The 'else' keyword here should be translated with its normal meaning.",
@@ -639,15 +639,15 @@
 	},
 	"HTERM_PREF_CTRL_C_COPY": {
 		"description": "Help text shown for the hterm 'ctrl-c-copy' preference. The true/false words may be translated. Ctrl/Shift/C are the keyboard button combinations and may be translated as makes sense (although it will always be the C key that is pressed). ^C should not be translated.",
-		"message": "Ctrl-C copies if true, send ^C to host if false.\nCtrl-Shift-C sends ^C to host if true, copies if false."
+		"message": "Ctrl+C copies if true, send ^C to host if false.\nCtrl+Shift+C sends ^C to host if true, copies if false."
 	},
 	"HTERM_PREF_CTRL_PLUS_MINUS_ZERO_ZOOM": {
 		"description": "Help text shown for the hterm 'ctrl-plus-minus-zero-zoom' preference. The true/false words may be translated. Ctrl/Shift/Plus/Minus/Zero are the keyboard button combinations and may be translated as makes sense. ^_ should not be translated.",
-		"message": "If true, Ctrl-Plus/Minus/Zero controls zoom.\nIf false, Ctrl-Shift-Plus/Minus/Zero controls zoom, Ctrl-Minus sends ^_, Ctrl-Plus/Zero do nothing."
+		"message": "If true, Ctrl+Plus/Minus/Zero controls zoom.\nIf false, Ctrl+Shift+Plus/Minus/Zero controls zoom, Ctrl+Minus sends ^_, Ctrl+Plus/Zero do nothing."
 	},
 	"HTERM_PREF_CTRL_V_PASTE": {
 		"description": "Help text shown for the hterm 'ctrl-v-paste' preference. The true/false words may be translated. Ctrl/Shift/V are the keyboard button combinations and may be translated as makes sense (although it will always be the V key that is pressed). ^V should not be translated.",
-		"message": "Ctrl-V pastes if true, send ^V to host if false.\nCtrl-Shift-V sends ^V to host if true, pastes if false."
+		"message": "Ctrl+V pastes if true, send ^V to host if false.\nCtrl+Shift+V sends ^V to host if true, pastes if false."
 	},
 	"HTERM_PREF_CURSOR_BLINK": {
 		"description": "Help text shown for the hterm 'cursor-blink' preference.",
@@ -735,11 +735,11 @@
 	},
 	"HTERM_PREF_HOME_KEYS_SCROLL": {
 		"description": "Help text shown for the hterm 'home-keys-scroll' preference. 'Home', 'End', and 'Shift' are the keyboard buttons and may be translated as makes sense.",
-		"message": "If true, Home/End controls the terminal scrollbar and Shift-Home/Shift-End are sent to the remote host. If false, then Home/End are sent to the remote host and Shift-Home/Shift-End scrolls."
+		"message": "If true, Home/End controls the terminal scrollbar and Shift+Home/Shift+End are sent to the remote host. If false, then Home/End are sent to the remote host and Shift+Home/Shift+End scrolls."
 	},
 	"HTERM_PREF_KEYBINDINGS": {
 		"description": "Help text shown for the hterm 'keybindings' preference. The example keybindings should not be translated; you can translate the 'Hello World' text, but you must not change the quote style.",
-		"message": "A map of key sequence to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers, or a key identifier. Key actions can be specified as a string to send to the host, or an action identifier. For a full explanation of the format, see https://goo.gl/LWRndr.\n\nSample keybindings:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "A map of key sequence to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers, or a key identifier. Key actions can be specified as a string to send to the host, or an action identifier. For a full explanation of the format, see https://goo.gl/LWRndr.\n\nSample keybindings:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"HTERM_PREF_MEDIA_KEYS_ARE_FKEYS": {
 		"description": "Help text shown for the hterm 'media-keys-are-fkeys' preference. The true/false words may be translated.",
@@ -747,7 +747,7 @@
 	},
 	"HTERM_PREF_META_SENDS_ESCAPE": {
 		"description": "Help text shown for the hterm 'meta-sends-escape' preference. 'ESC', 'Meta', 'Escape', and 'k' are the keyboard buttons and may be translated as makes sense.",
-		"message": "Send an ESC prefix when pressing a key while holding the Meta key.\n\nFor example, when enabled, pressing Meta-K will send ^[k as if you typed Escape then k. When disabled, only k will be sent."
+		"message": "Send an ESC prefix when pressing a key while holding the Meta key.\n\nFor example, when enabled, pressing Meta+K will send ^[k as if you typed Escape then k. When disabled, only k will be sent."
 	},
 	"HTERM_PREF_MOUSE_PASTE_BUTTON": {
 		"description": "Help text shown for the hterm 'mouse-paste-button' preference. Do not translate 'X11'.",
@@ -759,39 +759,39 @@
 	},
 	"HTERM_PREF_PAGE_KEYS_SCROLL": {
 		"description": "Help text shown for the hterm 'page-keys-scroll' preference. 'Page Up', 'Page Down', and 'Shift' are the keyboard buttons and may be translated as makes sense.",
-		"message": "If true, Page Up/Page Down controls the terminal scrollbar and Shift-Page Up/Shift-Page Down are sent to the remote host. If false, then Page Up/Page Down are sent to the remote host and Shift-Page Up/Shift-Page Down scrolls."
+		"message": "If true, Page Up/Page Down controls the terminal scrollbar and Shift+Page Up/Shift+Page Down are sent to the remote host. If false, then Page Up/Page Down are sent to the remote host and Shift+Page Up/Shift+Page Down scrolls."
 	},
 	"HTERM_PREF_PASS_ALT_NUMBER": {
 		"description": "Help text shown for the hterm 'pass-alt-number' preference. 'Alt' is the name of the keyboard button and may be translated as makes sense.",
-		"message": "Whether Alt-1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard accelerators. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Alt-1..9 will be handled by the browser. If false, Alt-1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
+		"message": "Whether Alt+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard accelerators. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Alt+1..9 will be handled by the browser. If false, Alt+1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
 	},
 	"HTERM_PREF_PASS_CTRL_NUMBER": {
 		"description": "Help text shown for the hterm 'pass-ctrl-number' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
-		"message": "Whether Ctrl-1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard accelerators. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Ctrl-1..9 will be handled by the browser. If false, Ctrl-1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
+		"message": "Whether Ctrl+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard accelerators. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Ctrl+1..9 will be handled by the browser. If false, Ctrl+1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
 	},
 	"HTERM_PREF_PASS_CTRL_N": {
 		"description": "Help text shown for the hterm 'pass-ctrl-n' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
-		"message": "Whether Ctrl-N is passed to the browser.\n\nIf true, Ctrl-N will be handled by the browser as the \"new window\" keyboard accelerator. If false, Ctrl-N will be sent to the host."
+		"message": "Whether Ctrl+N is passed to the browser.\n\nIf true, Ctrl+N will be handled by the browser as the \"new window\" keyboard accelerator. If false, Ctrl+N will be sent to the host."
 	},
 	"HTERM_PREF_PASS_CTRL_T": {
 		"description": "Help text shown for the hterm 'pass-ctrl-t' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
-		"message": "Whether Ctrl-T is passed to the browser.\n\nIf true, Ctrl-T will be handled by the browser as the \"new tab\" keyboard accelerator. If false, Ctrl-T will be sent to the host."
+		"message": "Whether Ctrl+T is passed to the browser.\n\nIf true, Ctrl+T will be handled by the browser as the \"new tab\" keyboard accelerator. If false, Ctrl+T will be sent to the host."
 	},
 	"HTERM_PREF_PASS_CTRL_TAB": {
 		"description": "Help text shown for the hterm 'pass-ctrl-tab' preference. 'Ctrl' and 'Shift' are the names of the keyboard buttons and may be translated as makes sense.",
-		"message": "Whether Ctrl-Tab and Ctrl-Shift-Tab are passed to the browser.\n\nIf true, Ctrl-Tab and Ctrl-Shift-Tab will be handled by the browser as the \"next/previous tab\" keyboard accelerator. If false, the Tab key is sent to the host without Ctrl or Shift."
+		"message": "Whether Ctrl+Tab and Ctrl+Shift+Tab are passed to the browser.\n\nIf true, Ctrl+Tab and Ctrl+Shift+Tab will be handled by the browser as the \"next/previous tab\" keyboard accelerator. If false, the Tab key is sent to the host without Ctrl or Shift."
 	},
 	"HTERM_PREF_PASS_CTRL_W": {
 		"description": "Help text shown for the hterm 'pass-ctrl-w' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
-		"message": "Whether Ctrl-W is passed to the browser.\n\nIf true, Ctrl-W will be handled by the browser as the \"close tab\" keyboard accelerator. If false, Ctrl-W will be sent to the host."
+		"message": "Whether Ctrl+W is passed to the browser.\n\nIf true, Ctrl+W will be handled by the browser as the \"close tab\" keyboard accelerator. If false, Ctrl+W will be sent to the host."
 	},
 	"HTERM_PREF_PASS_META_NUMBER": {
 		"description": "Help text shown for the hterm 'pass-meta-number' preference. 'Meta' is the name of the keyboard button and may be translated as makes sense.",
-		"message": "Whether Meta-1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard accelerators. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Meta-1..9 will be handled by the browser. If false, Meta-1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
+		"message": "Whether Meta+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard accelerators. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Meta+1..9 will be handled by the browser. If false, Meta+1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
 	},
 	"HTERM_PREF_PASS_META_V": {
-		"description": "Help text shown for the hterm 'pass-meta-v' preference. 'Meta-V' is the keyboard button combo and may be translated as makes sense.",
-		"message": "Whether Meta-V gets passed to host."
+		"description": "Help text shown for the hterm 'pass-meta-v' preference. 'Meta+V' is the keyboard button combo and may be translated as makes sense.",
+		"message": "Whether Meta+V gets passed to host."
 	},
 	"HTERM_PREF_PASTE_ON_DROP": {
 		"description": "Help text shown for the hterm 'paste-on-drop' preference.",
@@ -823,7 +823,7 @@
 	},
 	"HTERM_PREF_SHIFT_INSERT_PASTE": {
 		"description": "Help text shown for the hterm 'shift-insert-paste' preference. 'Shift' and 'Insert' are the names of keyboard buttons and may be translated as makes sense.",
-		"message": "Whether Shift-Insert is used for pasting or is sent to the remote host."
+		"message": "Whether Shift+Insert is used for pasting or is sent to the remote host."
 	},
 	"HTERM_PREF_TERMINAL_ENCODING": {
 		"description": "Help text shown for the hterm 'terminal-encoding' preference. 'DOCS' and 'ISO-2022' should not be translated, and 'UTF-8' may be translated as makes sense.",
@@ -1653,7 +1653,7 @@
 	},
 	"OPEN_AS_WINDOW_TIP": {
 		"description": "Message displayed to users who are running Secure Shell in a tab. The [Pro Tip] should be localized (it is slang in the computing world), but can be localized as just 'tip' if easier. The quote style may be changed as needed.",
-		"message": "[Pro Tip] Use 'Open as Window' or 'Fullscreen' to prevent Ctrl-W from closing your terminal!\n[Pro Tip] See $URL$ for more information.",
+		"message": "[Pro Tip] Use 'Open as Window' or 'Fullscreen' to prevent Ctrl+W from closing your terminal!\n[Pro Tip] See $URL$ for more information.",
 		"placeholders": {
 			"url": {
 				"content": "$1",
@@ -1861,7 +1861,7 @@
 	},
 	"TIP_10": {
 		"description": "Helpful tip shown to user advertising features",
-		"message": "When running in a window, Ctrl-Shift-N can open another session."
+		"message": "When running in a window, Ctrl+Shift+N can open another session."
 	},
 	"TIP_11": {
 		"description": "Helpful tip shown to user advertising features. 'rebind' means changing the behavior of a specific shortcut.",

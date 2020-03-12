@@ -28,13 +28,13 @@ that it applies to Chromium OS as well.
 ## The "crosh" shell
 
    Chrome OS comes with a small set of command line commands accessible from
-   the "crosh" shell.  You can open a new crosh instance with the Ctrl-Alt-T
+   the "crosh" shell.  You can open a new crosh instance with the Ctrl+Alt+T
    key sequence.
 
    The crosh commands are intended to be used for troubleshooting Chrome OS.
    Because it is not intended for frequent use, the crosh shell does not have
    an associated icon in the app launcher.  The only way to get to it is via
-   the Ctrl-Alt-T sequence.
+   the Ctrl+Alt+T sequence.
 
    You do not need to install any additional applications to access crosh.
    This is critical for debugging network connectivity issues.  It also means

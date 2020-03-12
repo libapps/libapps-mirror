@@ -125,7 +125,7 @@ Crosh.init = function() {
 
   terminal.decorate(lib.notNull(document.querySelector('#terminal')));
   const runCrosh = function() {
-    terminal.keyboard.bindings.addBinding('Ctrl-Shift-P', function() {
+    terminal.keyboard.bindings.addBinding('Ctrl+Shift+P', function() {
       nassh.openOptionsPage();
       return hterm.Keyboard.KeyActions.CANCEL;
     });
@@ -172,7 +172,7 @@ Crosh.init = function() {
   window.term_ = terminal;
   console.log(Crosh.msg(
       'CONSOLE_CROSH_OPTIONS_NOTICE',
-      ['Ctrl-Shift-P', lib.f.getURL('/html/nassh_preferences_editor.html')]));
+      ['Ctrl+Shift+P', lib.f.getURL('/html/nassh_preferences_editor.html')]));
 
   return true;
 };
