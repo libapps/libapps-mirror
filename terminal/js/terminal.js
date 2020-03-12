@@ -166,6 +166,7 @@ terminal.Command.prototype.run = function() {
       return;
     }
 
+    window.onbeforeunload = this.onBeforeUnload_.bind(this);
     this.id_ = id;
     this.isFirstOutput_ = true;
 
@@ -183,6 +184,16 @@ terminal.Command.prototype.run = function() {
     chrome.terminalPrivate.openTerminalProcess(
         this.commandName, this.argv_.args, pidInit);
   }
+};
+
+/**
+ * Registers with window.onbeforeunload and runs when page is unloading.
+ *
+ * @param {?Event} e Before unload event.
+ */
+terminal.Command.prototype.onBeforeUnload_ = function(e) {
+  // Set e.returnValue to any string for chrome to display a warning.
+  e.returnValue = '';
 };
 
 /**
@@ -223,6 +234,7 @@ terminal.Command.prototype.onTerminalResize_ = function(width, height) {
  */
 terminal.Command.prototype.exit = function(code) {
   this.close_();
+  window.onbeforeunload = null;
 
   if (code == 0) {
     this.io.pop();
