@@ -105,6 +105,7 @@ export class TerminalColorpickerElement extends LitElement {
           border: none;
           box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
           margin: 4px;
+          outline: none;
           padding: 5px;
           width: 17ch;
         }

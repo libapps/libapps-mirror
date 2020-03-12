@@ -46,6 +46,10 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   /** @override */
   static get styles() {
     return css`
+        :host {
+          outline: none;
+        }
+
         #container {
           background-color: rgb(241, 243, 244);
           border-radius: 6px;
