@@ -418,11 +418,6 @@ export class TerminalSettingsApp extends LitElement {
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container">
-                <h4>${msg('HTERM_NAME_PREF_ENABLE_CSI_J_3')}</h4>
-                <terminal-settings-checkbox preference="enable-csi-j-3">
-                </terminal-settings-checkbox>
-              </li>
-              <li class="setting-container">
                 <h4>${msg('HTERM_NAME_PREF_RECEIVE_ENCODING')}</h4>
                 <terminal-settings-dropdown preference="receive-encoding">
                 </terminal-settings-dropdown>
