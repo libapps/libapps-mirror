@@ -1811,6 +1811,70 @@
 		"description": "Label for the current terminal emulator profile name. Profiles are used to customize things like color and fonts.",
 		"message": "Current profile"
 	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_0": {
+		"description": "Tooltip shown over the ANSI color 0 black colorpicker.",
+		"message": "Color 0: Black"
+	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_1": {
+		"description": "Tooltip shown over the ANSI color 1 red colorpicker.",
+		"message": "Color 1: Red"
+	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_2": {
+		"description": "Tooltip shown over the ANSI color 2 green colorpicker.",
+		"message": "Color 2: Green"
+	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_3": {
+		"description": "Tooltip shown over the ANSI color 3 yellow colorpicker.",
+		"message": "Color 3: Yellow"
+	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_4": {
+		"description": "Tooltip shown over the ANSI color 4 blue colorpicker.",
+		"message": "Color 4: Blue"
+	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_5": {
+		"description": "Tooltip shown over the ANSI color 5 magenta colorpicker.",
+		"message": "Color 5: Magenta"
+	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_6": {
+		"description": "Tooltip shown over the ANSI color 6 cyan colorpicker.",
+		"message": "Color 6: Cyan"
+	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_7": {
+		"description": "Tooltip shown over the ANSI color 7 white colorpicker.",
+		"message": "Color 7: White"
+	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_8": {
+		"description": "Tooltip shown over the ANSI color 8 bright black colorpicker.",
+		"message": "Color 8: Bright Black"
+	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_9": {
+		"description": "Tooltip shown over the ANSI color 9 bright red colorpicker.",
+		"message": "Color 9: Bright Red"
+	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_10": {
+		"description": "Tooltip shown over the ANSI color 10 bright green colorpicker.",
+		"message": "Color 10: Bright Green"
+	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_11": {
+		"description": "Tooltip shown over the ANSI color 11 bright yellow colorpicker.",
+		"message": "Color 11: Bright Yellow"
+	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_12": {
+		"description": "Tooltip shown over the ANSI color 12 bright blue colorpicker.",
+		"message": "Color 12: Bright Blue"
+	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_13": {
+		"description": "Tooltip shown over the ANSI color 13 bright magenta colorpicker.",
+		"message": "Color 13: Bright Magenta"
+	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_14": {
+		"description": "Tooltip shown over the ANSI color 14 bright cyan colorpicker.",
+		"message": "Color 14: Bright Cyan"
+	},
+	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_15": {
+		"description": "Tooltip shown over the ANSI color 15 bright white colorpicker.",
+		"message": "Color 15: Bright White"
+	},
 	"TERMINAL_TITLE_PREF_APPEARANCE": {
 		"description": "Header for the terminal Appearance preference category (e.g. background, Text and cursor appearance). Shown in a navigation sidebar.",
 		"message": "Appearance"
