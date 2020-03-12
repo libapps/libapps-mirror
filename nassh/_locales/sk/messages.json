@@ -153,7 +153,7 @@
 		"message": "Určuje, či chcete vzdialenému hostiteľovi povoliť zobrazovať obrázky v termináli.\n\nPredvolene sa zobrazuje výzva, dokým sa používateľ nerozhodne."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ak túto možnosť nastavíte, zruší sa mapovanie kombinácie klávesov Alt-Backspace->DEL v systéme Chrome OS, aby kombinácia Alt-Backspace bola v skutočnosti Alt-Backspace."
+		"message": "Ak túto možnosť nastavíte, zruší sa mapovanie kombinácie klávesov Alt+Backspace->DEL v systéme Chrome OS, aby kombinácia Alt+Backspace bola v skutočnosti Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Vyberte rozpoznávanie klávesa AltGr pre metódu heuristic.\n\n'null': Automatické rozpoznávanie na základe parametra navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Zakázať akékoľvek poškodzovanie súvisiace s klávesom.\n'ctrl-alt': Považovať kombináciu klávesov Ctrl+Alt za AltGr.\n'left-alt': Považovať ľavý kláves Alt za AltGr.\n'right-alt': Považovať pravý kláves Alt za AltGr."
@@ -201,7 +201,7 @@
 		"message": "Ak nastavíte hodnotu True, kombináciou Ctrl+C budete kopírovať. Ak nastavíte hodnotu False, bude odosielať hostiteľovi ^C.\nAk nastavíte hodnotu True, kombinácia Ctrl+Shift+C bude odosielať hostiteľovi ^C a ak nastavíte hodnotu False, bude kopírovať."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Ak nastavíte hodnotu True, kombinácia Ctrl-Plus/Mínus/Nula bude ovládať priblíženie a oddialenie.\nAk nastavíte hodnotu False, kombinácia Ctrl-Shift-Plus/Mínus/Nula bude ovládať priblíženie a oddialenie, kombinácia Ctrl-Mínus bude odosielať výraz ^_ a kombinácia Ctrl-Plus/Nula nebude mať žiadnu funkciu."
+		"message": "Ak nastavíte hodnotu True, kombinácia Ctrl+Plus/Mínus/Nula bude ovládať priblíženie a oddialenie.\nAk nastavíte hodnotu False, kombinácia Ctrl+Shift+Plus/Mínus/Nula bude ovládať priblíženie a oddialenie, kombinácia Ctrl+Mínus bude odosielať výraz ^_ a kombinácia Ctrl+Plus/Nula nebude mať žiadnu funkciu."
 	},
 	"hterm_pref_ctrl_v_paste": {
 		"message": "Ak nastavíte hodnotu True, kombináciou Ctrl+V budete prilepovať. Ak nastavíte hodnotu False, bude odosielať hostiteľovi ^V.\nAk nastavíte hodnotu True, kombinácia Ctrl+Shift+V bude odosielať hostiteľovi ^V a ak nastavíte hodnotu False, bude prilepovať."
@@ -261,16 +261,16 @@
 		"message": "Určuje, či sa má pri písaní automaticky skrývať kurzor myši. Predvolene sa automaticky rozpozná, či príslušná platforma alebo operačný systém túto funkciu vykonáva.\n\nPoznámka: Niektoré operačné systémy môžu toto nastavenie prepísať, takže ho niekedy nie je možné zakázať."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Ak nastavíte hodnotu true, klávesy Home a End budú ovládať posúvač terminálu a kombinácie klávesov Shift-Home a Shift-End sa odošlú vzdialenému hostiteľovi. Ak nastavíte hodnotu false, klávesy Home a End sa odošlú vzdialenému hostiteľovi a kombinácie klávesov Shift-Home a Shift-End budú ovládať posúvač."
+		"message": "Ak nastavíte hodnotu true, klávesy Home a End budú ovládať posúvač terminálu a kombinácie klávesov Shift+Home a Shift+End sa odošlú vzdialenému hostiteľovi. Ak nastavíte hodnotu false, klávesy Home a End sa odošlú vzdialenému hostiteľovi a kombinácie klávesov Shift+Home a Shift+End budú ovládať posúvač."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Mapovanie kombinácie klávesov na akcie. Kombinácia klávesov zahŕňa nula alebo viac modifikačných klávesov nasledovaných kódom klávesa. Kódy klávesov môžu byť decimálne alebo hexadecimálne čísla alebo identifikátory klávesov. Akcie klávesov je možné zadať ako reťazec, ktorý sa má odoslať hostiteľovi, alebo ako identifikátor akcie. Úplné vysvetlenie formátu nájdete na adrese https://goo.gl/LWRndr.\n\nUkážka mapovania klávesov:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "Mapovanie kombinácie klávesov na akcie. Kombinácia klávesov zahŕňa nula alebo viac modifikačných klávesov nasledovaných kódom klávesa. Kódy klávesov môžu byť decimálne alebo hexadecimálne čísla alebo identifikátory klávesov. Akcie klávesov je možné zadať ako reťazec, ktorý sa má odoslať hostiteľovi, alebo ako identifikátor akcie. Úplné vysvetlenie formátu nájdete na adrese https://goo.gl/LWRndr.\n\nUkážka mapovania klávesov:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ak je nastavená hodnota True, mediálne klávesy sa budú premieňať na ekvivalenty Fkey. Ak je nastavená hodnota False, klávesy bude spracovávať prehliadač."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Odošle predponu ESC, keď stlačíte kláves a zároveň pridržíte kláves Meta.\n\nKeď túto predvoľbu povolíte, stlačením kombinácie klávesov Meta-K odošlete ^[k, ako keď ste zadali Escape a potom k. Keď ju zakážete, odošle sa iba k."
+		"message": "Odošle predponu ESC, keď stlačíte kláves a zároveň pridržíte kláves Meta.\n\nKeď túto predvoľbu povolíte, stlačením kombinácie klávesov Meta+K odošlete ^[k, ako keď ste zadali Escape a potom k. Keď ju zakážete, odošle sa iba k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Tlačidlo na prilepenie pomocou myši alebo null na automatické rozpoznávanie.\n\nV prípade automatického rozpoznávania použijeme v platformách iných než X11 (vrátane Chrome OS) stredné tlačidlo myši. V platforme X11 použijeme pravé tlačidlo myši (keďže v natívnom správcovi okien by sa na vloženie malo používať stredné tlačidlo).\n\n0 == ľavé (primárne) tlačidlo.\n1 == stredné (pomocné) tlačidlo.\n2 == pravé (sekundárne) tlačidlo.\n\nTáto možnosť je nezávislá na nastavení mouse-paste-button.\n\nPoznámka: Toto nastavenie bude fungovať správne v prípade myší pre ľavákov i pravákov."
@@ -279,16 +279,16 @@
 		"message": "Prilepenie po kliknutiach na pravé tlačidlo myši.\n\nTáto možnosť je nezávislá na nastavení mouse-paste-button.\n\nPoznámka: Toto nastavenie bude fungovať správne v prípade myší pre ľavákov i pravákov."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Ak nastavíte hodnotu true, ovládacie prvky Page Up a Page Down ovládajú posúvač terminálu a kombinácie klávesov Shift-Page Up a Shift-Page Down sa odošlú vzdialenému hostiteľovi. Ak nastavíte hodnotu false, ovládacie prvky Page Up a Page Down sa odošlú vzdialenému hostiteľovi a kombinácie klávesov Shift-Page Up a Shift-Page Down budú ovládať posúvač."
+		"message": "Ak nastavíte hodnotu true, ovládacie prvky Page Up a Page Down ovládajú posúvač terminálu a kombinácie klávesov Shift+Page Up a Shift+Page Down sa odošlú vzdialenému hostiteľovi. Ak nastavíte hodnotu false, ovládacie prvky Page Up a Page Down sa odošlú vzdialenému hostiteľovi a kombinácie klávesov Shift+Page Up a Shift+Page Down budú ovládať posúvač."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Určuje, či sa majú kombinácie klávesov Alt-1..9 odovzdávať prehliadaču.\n\nToto správanie je užitočné, keď je program hterm spustený na karte prehliadača, pretože tak v Chrome neprídete o klávesové skratky na prechod na konkrétnu kartu. Keď nie je spustený na karte, je lepšie tieto klávesy odosielať hostiteľovi, aby sa dali použiť v editore Vim alebo Emacs.\n\nAk nastavíte hodnotu true, kombináciu klávesov Alt-1..9 bude spracovávať prehliadač. Ak nastavíte hodnotu false, kombinácie klávesov Alt-1..9 sa budú odosielať hostiteľovi. Ak nie je nastavená žiadna hodnota, správanie sa zistí automaticky podľa platformy prehliadača a typu okna."
+		"message": "Určuje, či sa majú kombinácie klávesov Alt+1..9 odovzdávať prehliadaču.\n\nToto správanie je užitočné, keď je program hterm spustený na karte prehliadača, pretože tak v Chrome neprídete o klávesové skratky na prechod na konkrétnu kartu. Keď nie je spustený na karte, je lepšie tieto klávesy odosielať hostiteľovi, aby sa dali použiť v editore Vim alebo Emacs.\n\nAk nastavíte hodnotu true, kombináciu klávesov Alt+1..9 bude spracovávať prehliadač. Ak nastavíte hodnotu false, kombinácie klávesov Alt+1..9 sa budú odosielať hostiteľovi. Ak nie je nastavená žiadna hodnota, správanie sa zistí automaticky podľa platformy prehliadača a typu okna."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Určuje, či sa majú kombinácie klávesov Ctrl-1..9 odovzdávať prehliadaču.\n\nToto správanie je užitočné, keď je program hterm spustený na karte prehliadača, pretože tak v Chrome neprídete o klávesové skratky prechodu na konkrétnu kartu. Keď nie je spustený na karte, je lepšie tieto klávesy odosielať hostiteľovi, aby ich bolo možné používať v editore Vim alebo Emacs.\n\nAk nastavíte hodnotu true, kombináciu klávesov Ctrl-1..9 bude spracovávať prehliadač. Ak nastavíte hodnotu false, kombinácie klávesov Ctrl-1..9 sa budú odosielať hostiteľovi. Ak nie je nastavená žiadna hodnota, správanie sa zistí automaticky podľa platformy prehliadača a typu okna."
+		"message": "Určuje, či sa majú kombinácie klávesov Ctrl+1..9 odovzdávať prehliadaču.\n\nToto správanie je užitočné, keď je program hterm spustený na karte prehliadača, pretože tak v Chrome neprídete o klávesové skratky prechodu na konkrétnu kartu. Keď nie je spustený na karte, je lepšie tieto klávesy odosielať hostiteľovi, aby ich bolo možné používať v editore Vim alebo Emacs.\n\nAk nastavíte hodnotu true, kombináciu klávesov Ctrl+1..9 bude spracovávať prehliadač. Ak nastavíte hodnotu false, kombinácie klávesov Ctrl+1..9 sa budú odosielať hostiteľovi. Ak nie je nastavená žiadna hodnota, správanie sa zistí automaticky podľa platformy prehliadača a typu okna."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Určuje, či sa majú kombinácie klávesov Ctrl-1..9 odovzdávať prehliadaču.\n\nToto správanie je užitočné, keď je program hterm spustený na karte prehliadača, pretože tak v Chrome neprídete o klávesové skratky prechodu na konkrétnu kartu. Keď nie je spustený na karte, je lepšie tieto klávesy odosielať hostiteľovi, aby ich bolo možné používať v editore Vim alebo Emacs.\n\nAk nastavíte hodnotu true, kombináciu klávesov Ctrl-1..9 bude spracovávať prehliadač. Ak nastavíte hodnotu false, kombinácie klávesov Ctrl-1..9 sa budú odosielať hostiteľovi. Ak nie je nastavená žiadna hodnota, správanie sa zistí automaticky podľa platformy prehliadača a typu okna."
+		"message": "Určuje, či sa majú kombinácie klávesov Ctrl+1..9 odovzdávať prehliadaču.\n\nToto správanie je užitočné, keď je program hterm spustený na karte prehliadača, pretože tak v Chrome neprídete o klávesové skratky prechodu na konkrétnu kartu. Keď nie je spustený na karte, je lepšie tieto klávesy odosielať hostiteľovi, aby ich bolo možné používať v editore Vim alebo Emacs.\n\nAk nastavíte hodnotu true, kombináciu klávesov Ctrl+1..9 bude spracovávať prehliadač. Ak nastavíte hodnotu false, kombinácie klávesov Ctrl+1..9 sa budú odosielať hostiteľovi. Ak nie je nastavená žiadna hodnota, správanie sa zistí automaticky podľa platformy prehliadača a typu okna."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Určuje, či sa má kombinácia klávesov meta-V odovzdávať hostiteľovi."
@@ -315,7 +315,7 @@
 		"message": "Nastavuje kódovanie dát odosielaných hostiteľovi."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Určuje, či sa kombinácia klávesov Shift-Insert použije na prilepenie alebo sa odošle vzdialenému hostiteľovi."
+		"message": "Určuje, či sa kombinácia klávesov Shift+Insert použije na prilepenie alebo sa odošle vzdialenému hostiteľovi."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Predvolené kódovanie terminálu (DOCS).\n\nISO-2022 umožňuje preklady máp znakov (napr. v prípade grafických máp).\nUTF-8 ich podporu zakazuje.\n\nUzamknutý variant znamená, že kódovanie nie je možné zmeniť počas spustenia pomocou sekvencií escape terminálu.\n\nAk nedochádza k chybnému vykresľovaniu v starších aplikáciách, mali by ste ponechať kódovánie UTF-8."
@@ -480,7 +480,7 @@
 		"message": "Ak pridržíte kláves Ctrl (Cmd v systéme macOS) a kliknete na odkaz, otvorí sa."
 	},
 	"tip_10": {
-		"message": "Stlačením kombinácie klávesov Ctrl-Shift-N počas zobrazenia v okne otvoríte novú reláciu."
+		"message": "Stlačením kombinácie klávesov Ctrl+Shift+N počas zobrazenia v okne otvoríte novú reláciu."
 	},
 	"tip_11": {
 		"message": "Klávesom alebo skratkám môžete priradiť nové funkcie: https://goo.gl/LWRndr"

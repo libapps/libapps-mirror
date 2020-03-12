@@ -156,13 +156,13 @@
 		"message": "När detta alternativ har ställts in åsidosätts ommappningen av Alt+Backsteg till DEL i Chrome OS så att kombinationen Alt+Backsteg verkligen ger Alt+Backsteg."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Välj heuristisk metod för identifiering av AltGr-tangent.\n\n'null': Automatisk identifiering utifrån navigator.language:\n      'en-us' => 'none', övriga => 'right-alt'\n'none': Inaktivera alla AltGr-relaterade ändringar.\n'ctrl-alt': Anta att Ctrl+Alt används som AltGr.\n'left-alt': Anta att vänster Alt-tangent används som AltGr.\n'right-alt': Anta att höger Alt-tangent används som AltGr."
+		"message": "Välj heuristisk metod för identifiering av AltGr-tangent.\n\n'null': Automatisk identifiering utifrån navigator.language:\n      'en-us' => 'none', övriga => 'right-alt'\n'none': Inaktivera alla AltGr-relaterade ändringar.\n'ctrl-alt': Anta att Ctrl+Alt används som AltGr.\n'left-alt': Anta att vänster Alt+tangent används som AltGr.\n'right-alt': Anta att höger Alt+tangent används som AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Om Alt-tangenten används som Meta-tangent eller som Alt-tangent."
+		"message": "Om Alt+tangenten används som Meta+tangent eller som Alt+tangent."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Styr hur Alt-tangenten fungerar.\n\n  escape: Skicka ett ESC-prefix.\n  8-bit: Lägg till 128 till teckenvärdet, som i xterm.\n browser-key: Invänta tangenttryckningshändelsen och se hur den tolkas\n i webbläsaren. (Detta fungerar inte bra på plattformar där\n vissa Alt-sekvenser aktiverar en standardåtgärd i webbläsaren.)"
+		"message": "Styr hur Alt+tangenten fungerar.\n\n  escape: Skicka ett ESC-prefix.\n  8-bit: Lägg till 128 till teckenvärdet, som i xterm.\n browser-key: Invänta tangenttryckningshändelsen och se hur den tolkas\n i webbläsaren. (Detta fungerar inte bra på plattformar där\n vissa Alt+sekvenser aktiverar en standardåtgärd i webbläsaren.)"
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "Webbadress för terminalens klockljud. Lämna strängen tom om inget klockljud ska höras."
@@ -264,13 +264,13 @@
 		"message": "När detta är inställt på sant styr tangenterna Home/End terminalens rullningslist och teckensekvenserna Skift + Home/End skickas till den virtuella terminalen. Med inställningen falskt skickas Home/End till fjärrvärden och Skift + Home/End används för att rulla."
 	},
 	"hterm_pref_keybindings": {
-		"message": "En koppling mellan tangentsekvenser och motsvarande åtgärder. Tangentsekvenserna består av noll eller flera specialtangenter åtföljda av en tangentkod. Tangentkoden kan bestå av decimala eller hexadecimala siffror eller en tangentidentifierare. Tangentåtgärderna kan vara en sträng som skickas till värden eller en åtgärdsidentifierare. En fullständig förklaring av formatet finns på https://goo.gl/LWRndr.\n\nExempel på tangentbindningar:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "En koppling mellan tangentsekvenser och motsvarande åtgärder. Tangentsekvenserna består av noll eller flera specialtangenter åtföljda av en tangentkod. Tangentkoden kan bestå av decimala eller hexadecimala siffror eller en tangentidentifierare. Tangentåtgärderna kan vara en sträng som skickas till värden eller en åtgärdsidentifierare. En fullständig förklaring av formatet finns på https://goo.gl/LWRndr.\n\nExempel på tangentbindningar:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "När detta är inställt på sant konverteras medietangenter till motsvarande funktionstangent. Med inställningen falskt hanterar webbläsaren tangenterna."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Skicka ett ESC-prefix när en tangent trycks ned medan Meta-tangenten är nedtryckt.\n\nNär detta är aktiverat skickas till exempel ^[k när du trycker på Meta+K, som om du hade tryckt på Esc följt av k. När detta är inaktiverat skickas bara k."
+		"message": "Skicka ett ESC-prefix när en tangent trycks ned medan Meta+tangenten är nedtryckt.\n\nNär detta är aktiverat skickas till exempel ^[k när du trycker på Meta+K, som om du hade tryckt på Esc följt av k. När detta är inaktiverat skickas bara k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Klistra in med musknappen eller lämna tomt om automatisk identifiering ska användas.\n\nMed automatisk identifiering används musens mittknapp på plattformar som inte har X11 som fönsterhanterare (inklusive Chrome OS). Med X11 används höger musknapp (eftersom musens mittknapp normalt används av systemets fönsterhanterare för att klistra in).\n\n0 == vänster musknapp (primär).\n1 == mittknappen (reserv).\n2 == höger musknapp (sekundär).\n\nAlternativet är oberoende av inställningen för att klistra in med höger musknapp.\n\nObs! Inställningen hanterar vänster- och högerhänta datormöss korrekt."
@@ -480,7 +480,7 @@
 		"message": "Du kan hålla ned Ctrl (Cmd på macOS) när du klickar på länkar för att öppna dem."
 	},
 	"tip_10": {
-		"message": "När du kör via ett fönster kan du öppna en ny session med Ctrl-Skift-N."
+		"message": "När du kör via ett fönster kan du öppna en ny session med Ctrl+Skift-N."
 	},
 	"tip_11": {
 		"message": "Du kan ändra funktionen för tangenter/kortkommandon: https://goo.gl/LWRndr"

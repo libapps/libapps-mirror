@@ -153,7 +153,7 @@
 		"message": "Apakah mengizinkan host remote untuk menampilkan gambar di terminal.\n\nSecara default, kami meminta hingga pilihan dibuat."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Jika disetel, pemetaan ulang Chrome OS Alt-Backspace->DEL akan diurungkan, sehingga Alt-Backspace memang Alt-Backspace."
+		"message": "Jika disetel, pemetaan ulang Chrome OS Alt+Backspace->DEL akan diurungkan, sehingga Alt+Backspace memang Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Memilih heuristik deteksi AltGr.\n\n'null': Mendeteksi otomatis berdasarkan navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Menonaktifkan semua proses munging yang terkait dengan AltGr.\n'ctrl-alt': Mengasumsikan Ctrl+Alt berarti AltGr.\n'left-alt': Mengasumsikan Alt kiri berarti AltGr.\n'right-alt': Mengasumsikan Alt kanan berarti AltGr."
@@ -198,13 +198,13 @@
 		"message": "Otomatis menyalin pilihan mouse ke papan klip."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl+C melakukan copy jika true, mengirimkan ^C ke host jika false.\nCtrl-Shift-C mengirimkan ^C ke host jika true, melakukan jika false."
+		"message": "Ctrl+C melakukan copy jika true, mengirimkan ^C ke host jika false.\nCtrl+Shift+C mengirimkan ^C ke host jika true, melakukan jika false."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Jika true, Ctrl-Plus/Minus/Zero mengontrol zoom.\nJika false, Ctrl-Shift-Plus/Minus/Zero mengontrol zoom, Ctrl-Minus mengirim ^_, Ctrl-Plus/Zero tidak melakukan apa pun."
+		"message": "Jika true, Ctrl+Plus/Minus/Zero mengontrol zoom.\nJika false, Ctrl+Shift+Plus/Minus/Zero mengontrol zoom, Ctrl+Minus mengirim ^_, Ctrl+Plus/Zero tidak melakukan apa pun."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl-V melakukan paste jika true, mengirimkan ^V ke host jika false.\nCtrl-Shift-V mengirimkan ^V ke host jika true, melakukan paste jika false."
+		"message": "Ctrl+V melakukan paste jika true, mengirimkan ^V ke host jika false.\nCtrl+Shift+V mengirimkan ^V ke host jika true, melakukan paste jika false."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Apakah kursor teks berkedip secara default. Ini dapat dialihkan saat waktu proses melalui urutan escape terminal."
@@ -261,16 +261,16 @@
 		"message": "Menentukan apakah akan otomatis menyembunyikan kursor mouse saat mengetik. Secara default, mendeteksi otomatis apakah platform/OS menangani ini.\n\nCatatan: Beberapa sistem operasi dapat mengganti setelan ini sehingga Anda mungkin tidak selalu dapat menonaktifkannya."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Jika true, Home/End akan mengontrol scrollbar terminal dan Shift-Home/End akan dikirim ke host jarak jauh. Jika false, Home/End akan dikirim ke host jarak jauh dan Shift-Home/End melakukan scroll."
+		"message": "Jika true, Home/End akan mengontrol scrollbar terminal dan Shift+Home/End akan dikirim ke host jarak jauh. Jika false, Home/End akan dikirim ke host jarak jauh dan Shift+Home/End melakukan scroll."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Peta berisi urutan tombol untuk tindakan tombol. Urutan tombol mencakup nol atau kunci pengubah lainnya yang diikuti oleh kode tombol. Kode tombol dapat berupa angka desimal atau heksadesimal, atau ID tombol. Tindakan tombol diberikan string untuk dikirim ke host, atau ID tindakan. Untuk penjelasan selengkapnya mengenai format, lihat https://goo.gl/LWRndr.\n\nContoh kombinasi tombol:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'HELLO\\n'\"\n}"
+		"message": "Peta berisi urutan tombol untuk tindakan tombol. Urutan tombol mencakup nol atau kunci pengubah lainnya yang diikuti oleh kode tombol. Kode tombol dapat berupa angka desimal atau heksadesimal, atau ID tombol. Tindakan tombol diberikan string untuk dikirim ke host, atau ID tindakan. Untuk penjelasan selengkapnya mengenai format, lihat https://goo.gl/LWRndr.\n\nContoh kombinasi tombol:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Jika true, mengonversi tombol media ke yang setara Fkey. Jika false, mengizinkan browser menangani tombol."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Mengirim prefiks ESC saat menekan tombol sambil menahan tombol Meta.\n\nMisalnya, jika diaktifkan, tindakan menekan Meta-K akan mengirim ^[k seolah-olah Anda mengetik Escape lalu k. Jika dinonaktifkan, hanya k yang akan dikirim."
+		"message": "Mengirim prefiks ESC saat menekan tombol sambil menahan tombol Meta.\n\nMisalnya, jika diaktifkan, tindakan menekan Meta+K akan mengirim ^[k seolah-olah Anda mengetik Escape lalu k. Jika dinonaktifkan, hanya k yang akan dikirim."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Tombol tempel mouse, atau null untuk deteksi otomatis.\n\nUntuk deteksi otomatis, kami akan menggunakan tombol mouse tengah untuk platform non-X11 (termasuk Chrome OS). Di X11, kami akan menggunakan tombol mouse kanan (karena pengelola jendela asli akan melakukan aktivitas tempel melalui tombol mouse tengah).\n\n0 == tombol (utama) kiri.\n1 == tombol (auxiliary) tengah.\n2 == tombol (sekunder) kanan.\n\nOpsi ini terpisah dengan setelan tempel menggunakan klik kanan.\n\nCatatan: Opsi ini akan menangani mouse tangan kiri & kanan dengan tepat."
@@ -279,19 +279,19 @@
 		"message": "Melakukan aktivitas tempel dengan mengklik tombol mouse kanan.\n\nOpsi ini terpisah dari setelan \"tombol-tempel-mouse\".\n\nCatatan: Opsi ini akan menangani mouse tangan kiri & kanan dengan tepat."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Jika true, Page Up/Page Down akan mengontrol scrollbar terminal dan Shift-Page Up/Down akan dikirim ke host jarak jauh. Jika false, Page Up/Page Down akan dikirim ke host jarak jauh dan Shift-Page Up/Shift-Page Down melakukan scroll."
+		"message": "Jika true, Page Up/Page Down akan mengontrol scrollbar terminal dan Shift+Page Up/Down akan dikirim ke host jarak jauh. Jika false, Page Up/Page Down akan dikirim ke host jarak jauh dan Shift+Page Up/Shift+Page Down melakukan scroll."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Apakah Alt-1..9 diteruskan ke browser.\n\nIni berguna saat menjalankan hterm di tab browser, agar Anda tidak kehilangan akselerator keyboard \"beralih ke tab\" pada Chrome. Saat tidak berjalan di tab, sebaiknya kirimkan tombol ini ke host agar dapat digunakan di vim atau emacs.\n\nJika true, Alt-1..9 akan ditangani oleh browser. Jika false, Alt-1..9 akan dikirimkan ke host. Jika null, deteksi otomatis berdasarkan platform browser dan jenis jendela."
+		"message": "Apakah Alt+1..9 diteruskan ke browser.\n\nIni berguna saat menjalankan hterm di tab browser, agar Anda tidak kehilangan akselerator keyboard \"beralih ke tab\" pada Chrome. Saat tidak berjalan di tab, sebaiknya kirimkan tombol ini ke host agar dapat digunakan di vim atau emacs.\n\nJika true, Alt+1..9 akan ditangani oleh browser. Jika false, Alt+1..9 akan dikirimkan ke host. Jika null, deteksi otomatis berdasarkan platform browser dan jenis jendela."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Apakah Ctrl-1..9 diteruskan ke browser.\n\nIni berguna saat menjalankan hterm di tab browser, agar Anda tidak kehilangan akselerator keyboard \"beralih ke tab\" pada Chrome. Saat tidak berjalan di tab, sebaiknya kirimkan tombol ini ke host agar dapat digunakan di vim atau emacs.\n\nJika true, Ctrl-1..9 akan ditangani oleh browser. Jika false, Ctrl-1..9 akan dikirimkan ke host. Jika null, deteksi otomatis berdasarkan platform browser dan jenis jendela."
+		"message": "Apakah Ctrl+1..9 diteruskan ke browser.\n\nIni berguna saat menjalankan hterm di tab browser, agar Anda tidak kehilangan akselerator keyboard \"beralih ke tab\" pada Chrome. Saat tidak berjalan di tab, sebaiknya kirimkan tombol ini ke host agar dapat digunakan di vim atau emacs.\n\nJika true, Ctrl+1..9 akan ditangani oleh browser. Jika false, Ctrl+1..9 akan dikirimkan ke host. Jika null, deteksi otomatis berdasarkan platform browser dan jenis jendela."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Apakah Meta-1..9 diteruskan ke browser.\n\nIni berguna saat menjalankan hterm di tab browser, agar Anda tidak kehilangan akselerator keyboard \"beralih ke tab\" pada Chrome. Saat tidak berjalan di tab, sebaiknya kirimkan tombol ini ke host agar dapat digunakan di vim atau emacs.\n\nJika true, Meta-1..9 akan ditangani oleh browser. Jika false, Meta-1..9 akan dikirimkan ke host. Jika null, deteksi otomatis berdasarkan platform browser dan jenis jendela."
+		"message": "Apakah Meta+1..9 diteruskan ke browser.\n\nIni berguna saat menjalankan hterm di tab browser, agar Anda tidak kehilangan akselerator keyboard \"beralih ke tab\" pada Chrome. Saat tidak berjalan di tab, sebaiknya kirimkan tombol ini ke host agar dapat digunakan di vim atau emacs.\n\nJika true, Meta+1..9 akan ditangani oleh browser. Jika false, Meta+1..9 akan dikirimkan ke host. Jika null, deteksi otomatis berdasarkan platform browser dan jenis jendela."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Menentukan apakah Meta-V diteruskan ke host."
+		"message": "Menentukan apakah Meta+V diteruskan ke host."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Menyetel encoding yang diharapkan untuk data yang diterima dari host.\nJika encoding tidak cocok, bug visual kemungkinan akan ditemukan.\n\nNilai yang valid adalah 'utf-8' dan 'raw'."
@@ -315,7 +315,7 @@
 		"message": "Menyetel encoding untuk data yang dikirimkan ke host."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Menentukan apakah Shift-Insert digunakan untuk paste atau dikirim ke host jarak jauh."
+		"message": "Menentukan apakah Shift+Insert digunakan untuk paste atau dikirim ke host jarak jauh."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Encoding terminal default (DOCS).\n\nISO-2022 mengaktifkan terjemahan peta karakter (seperti peta grafik).\nUTF-8 menonaktifkan dukungan untuk itu.\n\nVariasi yang terkunci artinya encoding tidak dapat diubah saat waktu proses melalui urutan escape terminal.\n\nSebaiknya tetap gunakan UTF-8, kecuali Anda menemukan rendering rusak dengan aplikasi lama."
@@ -417,7 +417,7 @@
 		"message": "<url><match>pengguna@hostname[:port]</match></url> Hubungkan ke profil yang disimpan atau sistem ssh baru"
 	},
 	"open_as_window_tip": {
-		"message": "[Tips Pro] Gunakan 'Buka sebagai Jendela' atau 'Layar penuh' agar Ctrl-W tidak menutup terminal!\n[Tips Pro] Lihat $1 untuk informasi selengkapnya."
+		"message": "[Tips Pro] Gunakan 'Buka sebagai Jendela' atau 'Layar penuh' agar Ctrl+W tidak menutup terminal!\n[Tips Pro] Lihat $1 untuk informasi selengkapnya."
 	},
 	"options_button_label": {
 		"message": "Opsi"
@@ -480,7 +480,7 @@
 		"message": "Anda dapat menekan tombol Ctrl (Cmd di macOS) sambil mengklik link untuk membukanya."
 	},
 	"tip_10": {
-		"message": "Saat dijalankan di jendela, menekan tombol Ctrl-Shift-N dapat membuka sesi lainnya."
+		"message": "Saat dijalankan di jendela, menekan tombol Ctrl+Shift+N dapat membuka sesi lainnya."
 	},
 	"tip_11": {
 		"message": "Anda dapat mengembalikan kunci/pintasan: https://goo.gl/LWRndr"

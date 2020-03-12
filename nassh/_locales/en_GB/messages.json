@@ -153,7 +153,7 @@
 		"message": "Whether to allow the remote host to display images in the terminal.\n\nBy default, we prompt until a choice is made."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "If set, undoes the Chrome OS Alt-Backspace->DEL remap, so that Alt-Backspace indeed is Alt-Backspace."
+		"message": "If set, undoes the Chrome OS Alt+Backspace->DEL remap, so that Alt+Backspace indeed is Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Select an AltGr detection heuristic.\n\n'null': Autodetect based on navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Disable any AltGr-related munging.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
@@ -198,13 +198,13 @@
 		"message": "Automatically copy mouse selection to the clipboard."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl-C copies if true, send ^C to host if false.\nCtrl-Shift-C sends ^C to host if true, copies if false."
+		"message": "Ctrl+C copies if true, send ^C to host if false.\nCtrl+Shift+C sends ^C to host if true, copies if false."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "If true, Ctrl-Plus/Minus/Zero controls zoom.\nIf false, Ctrl-Shift-Plus/Minus/Zero controls zoom, Ctrl-Minus sends ^_, Ctrl-Plus/Zero do nothing."
+		"message": "If true, Ctrl+Plus/Minus/Zero controls zoom.\nIf false, Ctrl+Shift+Plus/Minus/Zero controls zoom, Ctrl+Minus sends ^_, Ctrl+Plus/Zero do nothing."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl-V pastes if true, send ^V to host if false.\nCtrl-Shift-V sends ^V to host if true, pastes if false."
+		"message": "Ctrl+V pastes if true, send ^V to host if false.\nCtrl+Shift+V sends ^V to host if true, pastes if false."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Whether the text cursor blinks by default. This can be toggled at runtime via terminal escape sequences."
@@ -261,16 +261,16 @@
 		"message": "Whether to automatically hide the mouse cursor when typing. By default, auto-detect whether the platform/OS handles this.\n\nNote: Some operating systems may override this setting and thus you might not always be able to disable it."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "If true, Home/End controls the terminal scrollbar and Shift-Home/Shift-End are sent to the remote host. If false, then Home/End are sent to the remote host and Shift-Home/Shift-End scrolls."
+		"message": "If true, Home/End controls the terminal scrollbar and Shift+Home/Shift+End are sent to the remote host. If false, then Home/End are sent to the remote host and Shift+Home/Shift+End scrolls."
 	},
 	"hterm_pref_keybindings": {
-		"message": "A map of key sequence to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers, or a key identifier. Key actions can be specified as a string to send to the host or an action identifier. For a full explanation of the format, see https://goo.gl/LWRndr.\n\nSample keybindings:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "A map of key sequence to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers, or a key identifier. Key actions can be specified as a string to send to the host or an action identifier. For a full explanation of the format, see https://goo.gl/LWRndr.\n\nSample keybindings:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "If true, convert media keys to their Fkey equivalent. If false, let the browser handle the keys."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Send an ESC prefix when pressing a key while holding the Meta key.\n\nFor example, when enabled, pressing Meta-K will send ^[k as if you typed Escape then k. When disabled, only k will be sent."
+		"message": "Send an ESC prefix when pressing a key while holding the Meta key.\n\nFor example, when enabled, pressing Meta+K will send ^[k as if you typed Escape then k. When disabled, only k will be sent."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Mouse paste button, or null to auto-detect.\n\nFor auto-detect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the native window manager should paste via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: This will handle left- & right-handed mice correctly."
@@ -279,19 +279,19 @@
 		"message": "Paste on right mouse button clicks.\n\nThis option is independent of the 'mouse-paste-button' setting.\n\nNote: This will handle left- & right-handed mice correctly."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "If true, Page Up/Page Down controls the terminal scrollbar and Shift-Page Up/Shift-Page Down are sent to the remote host. If false, then Page Up/Page Down are sent to the remote host and Shift-Page Up/Shift-Page Down scrolls."
+		"message": "If true, Page Up/Page Down controls the terminal scrollbar and Shift+Page Up/Shift+Page Down are sent to the remote host. If false, then Page Up/Page Down are sent to the remote host and Shift+Page Up/Shift+Page Down scrolls."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Whether Alt-1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard accelerators. When not running in a tab, it's better to send these keys to the host so that they can be used in vim or emacs.\n\nIf true, Alt-1..9 will be handled by the browser. If false, Alt-1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
+		"message": "Whether Alt+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard accelerators. When not running in a tab, it's better to send these keys to the host so that they can be used in vim or emacs.\n\nIf true, Alt+1..9 will be handled by the browser. If false, Alt+1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Whether Ctrl-1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard accelerators. When not running in a tab, it's better to send these keys to the host so that they can be used in vim or emacs.\n\nIf true, Ctrl-1..9 will be handled by the browser. If false, Ctrl-1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
+		"message": "Whether Ctrl+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard accelerators. When not running in a tab, it's better to send these keys to the host so that they can be used in vim or emacs.\n\nIf true, Ctrl+1..9 will be handled by the browser. If false, Ctrl+1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Whether Meta-1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard accelerators. When not running in a tab it's better to send these keys to the host so that they can be used in vim or emacs.\n\nIf true, Meta-1..9 will be handled by the browser. If false, Meta-1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
+		"message": "Whether Meta+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard accelerators. When not running in a tab it's better to send these keys to the host so that they can be used in vim or emacs.\n\nIf true, Meta+1..9 will be handled by the browser. If false, Meta+1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Whether Meta-V gets passed to host."
+		"message": "Whether Meta+V gets passed to host."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Set the expected encoding for data received from the host.\nIf the encodings do not match, visual bugs are likely to be observed.\n\nValid values are 'utf-8' and 'raw'."
@@ -315,7 +315,7 @@
 		"message": "Set the encoding for data sent to host."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Whether Shift-Insert is used for pasting or is sent to the remote host."
+		"message": "Whether Shift+Insert is used for pasting or is sent to the remote host."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "The default terminal encoding (DOCS).\n\nISO-2022 enables character map translations (like graphics maps).\nUTF-8 disables support for those.\n\nThe locked variant means the encoding cannot be changed at runtime via terminal escape sequences.\n\nYou should stick with UTF-8 unless you notice broken rendering with legacy applications."
@@ -417,7 +417,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Connect to a saved profile or a new ssh system"
 	},
 	"open_as_window_tip": {
-		"message": "[Pro Tip] Use 'Open as Window' or 'Full screen' to prevent Ctrl-W from closing your terminal!\n[Pro Tip] See $1 for more information."
+		"message": "[Pro Tip] Use 'Open as Window' or 'Full screen' to prevent Ctrl+W from closing your terminal!\n[Pro Tip] See $1 for more information."
 	},
 	"options_button_label": {
 		"message": "Options"
@@ -480,7 +480,7 @@
 		"message": "You can hold Ctrl (Cmd on macOS) while clicking on links to open them!"
 	},
 	"tip_10": {
-		"message": "When running in a window, Ctrl-Shift-N can open another session."
+		"message": "When running in a window, Ctrl+Shift+N can open another session."
 	},
 	"tip_11": {
 		"message": "You can rebind keys/shortcuts: https://goo.gl/LWRndr"

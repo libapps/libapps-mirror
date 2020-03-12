@@ -153,7 +153,7 @@
 		"message": "Permite ou não que o host remoto exiba imagens no terminal.\n\nPor padrão, isso é perguntado ao usuário até que uma escolha seja feita."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Se essa opção é definida, o Chrome OS desfaz o remapeamento de Alt-Backspace->DEL de forma que Alt-Backspace realmente seja Alt-Backspace."
+		"message": "Se essa opção é definida, o Chrome OS desfaz o remapeamento de Alt+Backspace->DEL de forma que Alt+Backspace realmente seja Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Selecione uma heurística de detecção AltGr.\n\n\"null\": detecção automática com base em navigator.language:\n      \"en-us\" => \"none\", caso contrário => \"right-alt\"\n\"none\": desativar deterioração relacionada a AltGr.\n\"ctrl-alt\": pressupor que Ctrl+Alt significa AltGr.\n\"left-alt\": pressupor que Alt esquerdo significa AltGr.\n\"right-alt\": pressupor que Alt direito significa AltGr."
@@ -201,7 +201,7 @@
 		"message": "Ctrl+C copia se for verdadeira e envia ^C para o host se for falsa.\nCtrl+Shift+C envia ^C para o host se for verdadeira e copia se for falsa."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Se for verdadeira, Ctrl-Mais/Menos/Zero controla o zoom.\nSe for falsa, Ctrl-Shift-Mais/Menos/Zero controla o zoom, Ctrl-Menos envia ^_ e Ctrl-Mais/Zero não faz nada."
+		"message": "Se for verdadeira, Ctrl+Mais/Menos/Zero controla o zoom.\nSe for falsa, Ctrl+Shift+Mais/Menos/Zero controla o zoom, Ctrl+Menos envia ^_ e Ctrl+Mais/Zero não faz nada."
 	},
 	"hterm_pref_ctrl_v_paste": {
 		"message": "Ctrl+V cola se for verdadeira e envia ^V para o host se for falsa.\nCtrl+Shift+V envia ^V para o host se for verdadeira e cola se for falsa."
@@ -261,16 +261,16 @@
 		"message": "Define se o cursor do mouse deve ser ocultado automaticamente ao digitar. Por padrão, há detecção automática de se isso é realizado pela plataforma/SO.\n\nObservação: alguns sistemas operacionais podem modificar essa configuração e, portanto, pode não ser possível desativá-la."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Se verdadeira, as teclas Home/End controlam a barra de rolagem terminal, e Shift-Home/Shift-End são enviadas ao host remoto. Se falsa, as teclas Home/End são enviadas ao host remoto, e Shift-Home/Shift-End rolam a tela."
+		"message": "Se verdadeira, as teclas Home/End controlam a barra de rolagem terminal, e Shift+Home/Shift+End são enviadas ao host remoto. Se falsa, as teclas Home/End são enviadas ao host remoto, e Shift+Home/Shift+End rolam a tela."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Um mapa de sequência de teclas para ações de teclas. As sequências incluem zero ou mais teclas modificadoras seguidas por um código de tecla. Esses códigos podem ser números decimais, hexadecimais ou um identificador de tecla. Ações de teclas podem ser especificadas por uma string enviada ao host ou um identificador de ação. Para ver uma explicação completa do formato, visite https://goo.gl/LWRndr.\n\nExemplos de mapeamento de teclas:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Olá, mundo'\"\n}"
+		"message": "Um mapa de sequência de teclas para ações de teclas. As sequências incluem zero ou mais teclas modificadoras seguidas por um código de tecla. Esses códigos podem ser números decimais, hexadecimais ou um identificador de tecla. Ações de teclas podem ser especificadas por uma string enviada ao host ou um identificador de ação. Para ver uma explicação completa do formato, visite https://goo.gl/LWRndr.\n\nExemplos de mapeamento de teclas:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Olá, mundo'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Se definida como verdadeira, converterá as teclas de mídia nas teclas F equivalentes. Se definida como falsa, deixará o navegador controlar as teclas."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Enviar um prefixo ESC ao pressionar uma tecla mantendo a tecla Meta pressionada.\n\nPor exemplo, quando ativada, pressionar Meta-K enviará ^[k como se você tivesse pressionado Escape e depois k. Quando desativada, apenas k será enviada."
+		"message": "Enviar um prefixo ESC ao pressionar uma tecla mantendo a tecla Meta pressionada.\n\nPor exemplo, quando ativada, pressionar Meta+K enviará ^[k como se você tivesse pressionado Escape e depois k. Quando desativada, apenas k será enviada."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Botão de colar do mouse ou nula para detecção automática.\n\nPara detecção automática, usaremos o botão do meio do mouse para plataformas não X11 (incluindo o Chrome OS). Na plataforma X11, usaremos o botão direito do mouse (visto que o gerenciador de janelas nativo precisa colar usando o botão do meio do mouse).\n\n0 == botão esquerdo (principal).\n1 == botão do meio (auxiliar).\n2 == botão direito (secundário).\n\nEsta opção é independente da configuração de colar usando o botão direito.\n\nObservação: essa opção controlará configurações de mouse destro e canhoto corretamente."
@@ -279,19 +279,19 @@
 		"message": "Colar ao clicar com o botão direito do mouse.\n\nEsta opção é independente da configuração \"mouse-paste-button\".\n\nObservação: essa opção controlará configurações de mouse destro e canhoto corretamente."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Se verdadeira, as teclas Page Up/Page Down controlam a barra de rolagem terminal, e Shift-Page Up/Shift-Page Down são enviadas ao host remoto. Se falsa, as teclas Page Up/Page Down são enviadas ao host remoto, e Shift-Page Up/Shift Page-Down rolam a tela."
+		"message": "Se verdadeira, as teclas Page Up/Page Down controlam a barra de rolagem terminal, e Shift+Page Up/Shift+Page Down são enviadas ao host remoto. Se falsa, as teclas Page Up/Page Down são enviadas ao host remoto, e Shift+Page Up/Shift Page-Down rolam a tela."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Define se as teclas Alt-1 a 9 são transmitidas ao navegador.\n\nIsso é útil ao executar hterm em uma guia do navegador, para que você não perca os aceleradores de teclado \"alternar para guia\" do Chrome. Quando não for executada em uma guia, é melhor enviar essas teclas ao host para que elas possam ser usadas em vim ou emacs.\n\nSe definida como verdadeira, as teclas Alt-1 a 9 serão controladas pelo navegador. Se definida como falsa, essas teclas serão enviadas ao host. Se for nula, a detecção será automática, com base na plataforma do navegador e no tipo de janela."
+		"message": "Define se as teclas Alt+1 a 9 são transmitidas ao navegador.\n\nIsso é útil ao executar hterm em uma guia do navegador, para que você não perca os aceleradores de teclado \"alternar para guia\" do Chrome. Quando não for executada em uma guia, é melhor enviar essas teclas ao host para que elas possam ser usadas em vim ou emacs.\n\nSe definida como verdadeira, as teclas Alt+1 a 9 serão controladas pelo navegador. Se definida como falsa, essas teclas serão enviadas ao host. Se for nula, a detecção será automática, com base na plataforma do navegador e no tipo de janela."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Define se as teclas Ctrl-1 a 9 são transmitidas ao navegador.\n\nIsso é útil ao executar hterm em uma guia do navegador, para que você não perca os aceleradores de teclado \"alternar para guia\" do Chrome. Quando não for executada em uma guia, é melhor enviar essas teclas ao host para que elas possam ser usadas em vim ou emacs.\n\nSe definida como verdadeira, as teclas Ctrl-1 a 9 serão controladas pelo navegador. Se definida como falsa, essas teclas serão enviadas ao host. Se for nula, a detecção será automática, com base na plataforma do navegador e no tipo de janela."
+		"message": "Define se as teclas Ctrl+1 a 9 são transmitidas ao navegador.\n\nIsso é útil ao executar hterm em uma guia do navegador, para que você não perca os aceleradores de teclado \"alternar para guia\" do Chrome. Quando não for executada em uma guia, é melhor enviar essas teclas ao host para que elas possam ser usadas em vim ou emacs.\n\nSe definida como verdadeira, as teclas Ctrl+1 a 9 serão controladas pelo navegador. Se definida como falsa, essas teclas serão enviadas ao host. Se for nula, a detecção será automática, com base na plataforma do navegador e no tipo de janela."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Define se as teclas Meta-1 a 9 são transmitidas ao navegador.\n\nIsso é útil ao executar hterm em uma guia do navegador, para que você não perca os aceleradores de teclado \"alternar para guia\" do Chrome. Quando não for executada em uma guia, é melhor enviar essas teclas ao host para que elas possam ser usadas em vim ou emacs.\n\nSe definida como verdadeira, as teclas Meta-1 a 9 serão controladas pelo navegador. Se definida como falsa, essas teclas serão enviadas ao host. Se nula, a detecção será automática, com base na plataforma do navegador e no tipo de janela."
+		"message": "Define se as teclas Meta+1 a 9 são transmitidas ao navegador.\n\nIsso é útil ao executar hterm em uma guia do navegador, para que você não perca os aceleradores de teclado \"alternar para guia\" do Chrome. Quando não for executada em uma guia, é melhor enviar essas teclas ao host para que elas possam ser usadas em vim ou emacs.\n\nSe definida como verdadeira, as teclas Meta+1 a 9 serão controladas pelo navegador. Se definida como falsa, essas teclas serão enviadas ao host. Se nula, a detecção será automática, com base na plataforma do navegador e no tipo de janela."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Define se Meta-V é transmitida ao host."
+		"message": "Define se Meta+V é transmitida ao host."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Define a codificação esperada para os dados recebidos do host.\nSe as codificações não corresponderem, é provável que bugs visuais sejam observados.\n\nOs valores válidos são \"utf-8\" e \"raw\"."
@@ -315,7 +315,7 @@
 		"message": "Define a codificação dos dados enviados ao host."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Define se as teclas Shift-Insert são usadas para colar ou são enviadas para o host remoto."
+		"message": "Define se as teclas Shift+Insert são usadas para colar ou são enviadas para o host remoto."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "A codificação padrão do terminal (DOCS).\n\nISO-2022 ativa translações de mapas de caracteres (como mapas gráficos).\nUTF-8 desativa a compatibilidade das translações.\n\nA variante bloqueada significa que a codificação não pode ser alterada durante o tempo de execução por meio de sequências de escape de terminal.\n\nUtilize UTF-8 a menos que você encontre renderizações incorretas em aplicativos legados."
@@ -417,7 +417,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Conectar a um perfil salvo ou a um novo sistema ssh"
 	},
 	"open_as_window_tip": {
-		"message": "[Dica] Use \"Abrir como janela\" ou \"Tela inteira\" para evitar que Ctrl-W feche o terminal.\n[Dica] Consulte $1 para ver mais informações."
+		"message": "[Dica] Use \"Abrir como janela\" ou \"Tela inteira\" para evitar que Ctrl+W feche o terminal.\n[Dica] Consulte $1 para ver mais informações."
 	},
 	"options_button_label": {
 		"message": "Opções"
@@ -480,7 +480,7 @@
 		"message": "Você pode manter a tecla Ctrl (ou command no macOS) pressionada ao clicar nos links para abri-los."
 	},
 	"tip_10": {
-		"message": "Quando executado em uma janela, Ctrl-Shift-N pode abrir outra sessão."
+		"message": "Quando executado em uma janela, Ctrl+Shift+N pode abrir outra sessão."
 	},
 	"tip_11": {
 		"message": "Você pode reassociar chaves/atalhos: https://goo.gl/LWRndr"

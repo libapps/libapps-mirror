@@ -159,10 +159,10 @@
 		"message": "Velg en heuristisk algoritme for gjenkjenning av AltGr.\n\n«null»: automatisk gjenkjenning basert på navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n«none»: Slår av eventuell AltGr-relatert arrangering.\n«ctrl-alt»: Antar at Ctrl+Alt betyr AltGr.\n«left-alt»: Antar at venstre Alt betyr AltGr.\n«right-alt»: Antar at høyre Alt betyr AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Om Alt-tasten skal fungere som en Meta-tast eller en unik Alt-tast."
+		"message": "Om Alt+tasten skal fungere som en Meta+tast eller en unik Alt+tast."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Kontrollerer hvordan Alt-tasten håndteres.\n\n  escape: Send et ESC-prefiks.\n  8-bit: Legg 128 til det angitte tegnet, som i xterm.\n browser-key: Vent på et tastetrykk, og se hva nettleseren\n sier. (Dette fungerer ikke godt på plattformer hvor nettleseren\n utfører en standardhandling for noen Alt-sekvenser.)"
+		"message": "Kontrollerer hvordan Alt+tasten håndteres.\n\n  escape: Send et ESC-prefiks.\n  8-bit: Legg 128 til det angitte tegnet, som i xterm.\n browser-key: Vent på et tastetrykk, og se hva nettleseren\n sier. (Dette fungerer ikke godt på plattformer hvor nettleseren\n utfører en standardhandling for noen Alt+sekvenser.)"
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "Nettadresse for terminalbjellelyd. Strengen er tom når det ikke høres noen bjelle."
@@ -261,16 +261,16 @@
 		"message": "Om musepilen skal skjules automatisk når du skriver. Som standard gjenkjennes det automatisk om plattformen/OS-et kan håndtere dette.\n\nMerk: Enkelte operativsystemer kan overstyre denne innstillingen, og i noen tilfeller kan den ikke slås av."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Hvis «true» (sant) er valgt, kontrollerer Home/End terminalens rullefelt, og Shift-Home/Shift-End sendes til den eksterne verten. Hvis «false» (usant) er valgt, sendes Home/End til den eksterne verten, og Shift-Home/Shift-End ruller."
+		"message": "Hvis «true» (sant) er valgt, kontrollerer Home/End terminalens rullefelt, og Shift+Home/Shift+End sendes til den eksterne verten. Hvis «false» (usant) er valgt, sendes Home/End til den eksterne verten, og Shift+Home/Shift+End ruller."
 	},
 	"hterm_pref_keybindings": {
-		"message": "En oversikt over tastesekvenser for tastehandlinger. Tastesekvensene har null eller flere modifikatortaster som etterfølges av en tastekode. Tastekoder kan være desimaltall, heksadesimaltall eller tasteidentifikatorer. Tastehandlinger kan angis som strenger som sendes til verten, eller som funksjonsidentifikatorer. Du kan se en fullstendig forklaring av formatet ved å gå til https://goo.gl/LWRndr.\n\nEksempler på tastekombinasjoner:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "En oversikt over tastesekvenser for tastehandlinger. Tastesekvensene har null eller flere modifikatortaster som etterfølges av en tastekode. Tastekoder kan være desimaltall, heksadesimaltall eller tasteidentifikatorer. Tastehandlinger kan angis som strenger som sendes til verten, eller som funksjonsidentifikatorer. Du kan se en fullstendig forklaring av formatet ved å gå til https://goo.gl/LWRndr.\n\nEksempler på tastekombinasjoner:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Hvis «true» (sann) er valgt, konverteres medietastene til de tilsvarende funksjonstastene. Hvis «false» (usann) er valgt, håndteres tastene av nettleseren."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Sender et ESC-prefiks når du trykker på en tast samtidig som du holder inne Meta-tasten.\n\nNår innstillingen er slått på og du trykker på Meta-K, sendes ^[k som om du hadde skrevet ESC-K. Når innstillingen er slått av, sendes bare K-tasten."
+		"message": "Sender et ESC-prefiks når du trykker på en tast samtidig som du holder inne Meta+tasten.\n\nNår innstillingen er slått på og du trykker på Meta+K, sendes ^[k som om du hadde skrevet ESC-K. Når innstillingen er slått av, sendes bare K-tasten."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Musens innlimingsknapp (null for automatisk gjenkjenning).\n\nVed automatisk gjenkjenning bruker vi den midtre museknappen på ikke-X11-plattformer (inkludert Chrome OS). På X11 bruker vi den høyre museknappen (siden den innebygde vindusbehandleren bør lime inn med den midtre museknappen).\n\n0 == venstre (primær) knapp.\n1 == midtre (ekstra) knapp.\n2 == høyre (sekundær) knapp.\n\nDette alternativet er uavhengig av «right-click-paste»-innstillingen.\n\nMerk: Dette håndterer både høyrehendte og venstrehendte mus riktig."
@@ -279,19 +279,19 @@
 		"message": "Lim inn med høyreklikk.\n\nDette alternativet er uavhengig av «mouse-paste-button»-innstillingen.\n\nMerk: Dette håndterer både høyrehendte og venstrehendte mus riktig."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Hvis «true» (sant) er valgt, kontrollerer PageUp/PageDown terminalens rullefelt, og Shift-PageUp/Shift-PageDown sendes til den eksterne verten. Hvis «false» (usant) er valgt, sendes PageUp/PageDown til den eksterne verten, og Shift-PageUp/Shift-PageDown ruller."
+		"message": "Hvis «true» (sant) er valgt, kontrollerer PageUp/PageDown terminalens rullefelt, og Shift+PageUp/Shift+PageDown sendes til den eksterne verten. Hvis «false» (usant) er valgt, sendes PageUp/PageDown til den eksterne verten, og Shift+PageUp/Shift+PageDown ruller."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Om Alt-1..9 skal sendes til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sant) er valgt, håndteres Alt-1..9 av nettleseren. Hvis «false» (usant) er valgt, sendes Alt-1..9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
+		"message": "Om Alt+1..9 skal sendes til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sant) er valgt, håndteres Alt+1..9 av nettleseren. Hvis «false» (usant) er valgt, sendes Alt+1..9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Om Ctrl-1..9 skal sendes til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sant) er valgt, håndteres Ctrl-1..9 av nettleseren. Hvis «false» (usant) er valgt, sendes Ctrl-1..9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
+		"message": "Om Ctrl+1..9 skal sendes til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sant) er valgt, håndteres Ctrl+1..9 av nettleseren. Hvis «false» (usant) er valgt, sendes Ctrl+1..9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Om Meta-1..9 skal sendes til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sant) er valgt, håndteres Meta-1..9 av nettleseren. Hvis «false» (usant) er valgt, sendes Meta-1..9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
+		"message": "Om Meta+1..9 skal sendes til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sant) er valgt, håndteres Meta+1..9 av nettleseren. Hvis «false» (usant) er valgt, sendes Meta+1..9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Om Meta-V skal sendes til verten."
+		"message": "Om Meta+V skal sendes til verten."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Angi forventet koding for data som mottas fra verten. \nHvis kodingene ikke samsvarer, er det sannsynlig at visuelle feil oppstår.\n\nGyldige verdier er «utf-8» og «raw»."
@@ -303,7 +303,7 @@
 		"message": "Angir om det skal rulles til bunnen ved terminalutdata."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Når du bruker den alternative skjermbufferen og DECCKM (appmarkørtaster) er aktivert, emulerer rulling på musehjulet piltastene.\n\nDu kan deaktivere dette midlertidig ved å trykke og holde på Shift-tasten.\n\nDette kommer ofte opp når du bruker sidevekslingskontroller (less), leser man-sider eller tekstredigeringsprogrammer (vi/nano) eller bruker screen/tmux."
+		"message": "Når du bruker den alternative skjermbufferen og DECCKM (appmarkørtaster) er aktivert, emulerer rulling på musehjulet piltastene.\n\nDu kan deaktivere dette midlertidig ved å trykke og holde på Shift+tasten.\n\nDette kommer ofte opp når du bruker sidevekslingskontroller (less), leser man-sider eller tekstredigeringsprogrammer (vi/nano) eller bruker screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "Multiplikatoren for rullehjulhendelser, målt i piksler.\n\nEndrer hvor raskt du kan rulle på siden."
@@ -315,7 +315,7 @@
 		"message": "Angi kodingen for data som sendes til verten."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Om Shift-Ins brukes for innliming, eller om det sendes til den eksterne verten."
+		"message": "Om Shift+Ins brukes for innliming, eller om det sendes til den eksterne verten."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Standard terminalkoding (DOCS).\n\nISO-2022 aktiverer oversettinger av tegntilordninger (som grafikktilordninger).\nUTF-8 deaktiverer støtte for slike.\n\nDen låste varianten betyr at kodingen ikke kan endres under kjøring via escape-sekvenser i terminalen.\n\nDu bør holde deg til UTF-8 med mindre du merker at eldre apper ikke gjengis skikkelig."
@@ -531,7 +531,7 @@
 		"message": "Endringslogg/versjonsnotater: $1"
 	},
 	"welcome_faq": {
-		"message": "Svar på vanlige spørsmål: $1 (Ctrl-klikk på linker for å åpne dem)"
+		"message": "Svar på vanlige spørsmål: $1 (Ctrl+klikk på linker for å åpne dem)"
 	},
 	"welcome_release_highlights": {
 		"message": "Betydelige endringer siden $1:"

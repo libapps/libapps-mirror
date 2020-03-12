@@ -153,7 +153,7 @@
 		"message": "Kung papayagan ang remote na host na magpakita ng mga larawan sa terminal.\n\nBilang default, magpa-prompt kami hanggang may mapili."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Kung itatakda, maa-undo ang Chrome OS Alt-Backspace->DEL remap, para maging Alt-Backspace talaga ang Alt-Backspace."
+		"message": "Kung itatakda, maa-undo ang Chrome OS Alt+Backspace->DEL remap, para maging Alt+Backspace talaga ang Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Pumipili ng AltGr detection heuristic.\n\n'null': Awtomatikong magde-detect batay sa navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Idi-disable ang anumang munging na nauugnay sa AltGr.\n'ctrl-alt': Ipagpapalagay na ang Ctrl+Alt ay AltGr.\n'left-alt': Ipagpapalagay na ang left Alt ay AltGr.\n'right-alt': Ipagpapalagay na ang right Alt ay AltGr."
@@ -198,13 +198,13 @@
 		"message": "Awtomatikong kopyahin ang napili ng mouse sa clipboard."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Kumokopya ang Ctrl-C kung true, nagpapadala ito ng ^C sa host kung false.\nNagpapadala ang Ctrl-Shift-C ng ^C sa host kung true, kumokopya ito kung false."
+		"message": "Kumokopya ang Ctrl+C kung true, nagpapadala ito ng ^C sa host kung false.\nNagpapadala ang Ctrl+Shift+C ng ^C sa host kung true, kumokopya ito kung false."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Kung true, kinokontrol ng Ctrl-Plus/Minus/Zero ang pag-zoom.\nKung false, kinokontrol ng Ctrl-Shift-Plus/Minus/Zero ang pag-zoom, nagpapadala ang Ctrl-Minus ng ^_, walang nagagawa ang Ctrl-Plus/Zero."
+		"message": "Kung true, kinokontrol ng Ctrl+Plus/Minus/Zero ang pag-zoom.\nKung false, kinokontrol ng Ctrl+Shift+Plus/Minus/Zero ang pag-zoom, nagpapadala ang Ctrl+Minus ng ^_, walang nagagawa ang Ctrl+Plus/Zero."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Nagpe-paste ang Ctrl-V kung true, nagpapadala ito ng ^V sa host kung false.\nNagpapadala ang Ctrl-Shift-V ng ^V sa host kung true, nagpe-paste ito kung false."
+		"message": "Nagpe-paste ang Ctrl+V kung true, nagpapadala ito ng ^V sa host kung false.\nNagpapadala ang Ctrl+Shift+V ng ^V sa host kung true, nagpe-paste ito kung false."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Kung magbi-blink ang text cursor bilang default. Maaari itong i-toggle sa runtime sa pamamagitan ng mga terminal escape sequence."
@@ -261,16 +261,16 @@
 		"message": "Kung awtomatikong itatago ang cursor ng mouse habang nagta-type. Bilang default, awtomatikong tukuyin kung papangasiwaan ito ng platform/OS.\n\nTandaan: Maaaring i-override ng ilang operating system ang setting na ito kung kaya maaaring hindi mo ito madi-disable sa lahat ng oras."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Kung true, ang Home/End ang kokontrol sa terminal scrollbar at ang Shift-Home/Shift-End ang ipapadala sa remote host. Kung false, ang Home/End ang ipapadala sa remote host at ang Shift-Home/Shift-End ang magso-scroll."
+		"message": "Kung true, ang Home/End ang kokontrol sa terminal scrollbar at ang Shift+Home/Shift+End ang ipapadala sa remote host. Kung false, ang Home/End ang ipapadala sa remote host at ang Shift+Home/Shift+End ang magso-scroll."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Isang mapa ng key sequence sa mga pagkilos ng key. Kabilang sa mga key sequence ang zero o higit pang modifier key na sinusundan ng key code. Ang mga key code ay maaaring maging mga decimal o hexadecimal number, o key identifier. Matutukoy ang mga pagkilos ng key bilang string na ipapadala sa host, o action identifier. Para sa kumpletong paliwanag ng format, tingnan ang https://goo.gl/LWRndr.\n\nMga sample na keybinding:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal,\"\n  \"Ctrl-Shift-L\": \"PASS,\"\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "Isang mapa ng key sequence sa mga pagkilos ng key. Kabilang sa mga key sequence ang zero o higit pang modifier key na sinusundan ng key code. Ang mga key code ay maaaring maging mga decimal o hexadecimal number, o key identifier. Matutukoy ang mga pagkilos ng key bilang string na ipapadala sa host, o action identifier. Para sa kumpletong paliwanag ng format, tingnan ang https://goo.gl/LWRndr.\n\nMga sample na keybinding:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal,\"\n  \"Ctrl+Shift+L\": \"PASS,\"\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Kung true, i-convert ang mga media key sa kanilang katumbas na Fkey. Kung false, hayaan ang browser na mangasiwa sa mga key."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Magpadala ng ESC na prefix kapag pumipindot ng key habang pinipindot nang matagal ang Meta key.\n\nHalimbawa, kapag naka-enable, kapag pinindot ang Meta-K, magpapadala ng ^[k gaya kung nag-type ka ng Escape pagkatapos ay k. Kapag naka-disable, k lang ang ipapadala."
+		"message": "Magpadala ng ESC na prefix kapag pumipindot ng key habang pinipindot nang matagal ang Meta key.\n\nHalimbawa, kapag naka-enable, kapag pinindot ang Meta+K, magpapadala ng ^[k gaya kung nag-type ka ng Escape pagkatapos ay k. Kapag naka-disable, k lang ang ipapadala."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Button ng pag-paste gamit ang mouse, o null para awtomatikong mag-detect.\n\nPara awtomatikong mag-detect, gagamitin namin ang gitnang button ng mouse para sa mga platform na hindi X11 (kabilang ang Chrome OS). Sa X11, gagamitin namin ang kanang button ng mouse (dahil dapat mag-paste ang native na window manager sa pamamagitan ng gitnang button ng mouse).\n\n0 == kaliwang (pangunahing) button.\n1 == gitnang (karagdagang) button.\n2 == kanang (pangalawang) button.\n\nAng opsyong ito ay hiwalay sa setting para sa pag-paste gamit ang right-click.\n\nTandaan: Pangangasiwaan nito ang mga mouse para sa kaliwa at kanang kamay nang tama."
@@ -279,19 +279,19 @@
 		"message": "Mag-paste sa pamamagitan ng mga pag-click sa kanang button ng mouse.\n\nAng opsyong ito ay hiwalay sa setting na \"mouse-paste-button.\"\n\nTandaan: Pangangasiwaan nito ang mga mouse sa kaliwa at kanang kamay nang tama."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Kung true, ang Page Up/Page Down ang kokontrol sa terminal scrollbar at ang Shift-Page Up/Shift-Page Down ang ipapadala sa remote host. Kung false, ang Page Up/Page Down ang ipapadala sa remote host at ang Shift-Page Up/Shift-Page Down ang magso-scroll."
+		"message": "Kung true, ang Page Up/Page Down ang kokontrol sa terminal scrollbar at ang Shift+Page Up/Shift+Page Down ang ipapadala sa remote host. Kung false, ang Page Up/Page Down ang ipapadala sa remote host at ang Shift+Page Up/Shift+Page Down ang magso-scroll."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Kung ipapasa ang Alt-1..9 sa browser.\n\nKapaki-pakinabang ito kapag nagpapatakbo ng hterm sa tab ng browser, para hindi mawala ang mga accelerator ng keyboard na \"switch to tab\" ng Chrome. Kapag hindi pinapatakbo sa isang tab, mas mainam kung ipapadala ang mga key na ito sa host para magamit ang mga ito sa vim o mga emac.\n\nKung true, pangangasiwaan ng browser ang Alt-1..9. Kung false, ipapadala ang Alt-1..9 sa host. Kung null, awtomatikong magde-detect batay sa platform ng browser at uri ng window."
+		"message": "Kung ipapasa ang Alt+1..9 sa browser.\n\nKapaki-pakinabang ito kapag nagpapatakbo ng hterm sa tab ng browser, para hindi mawala ang mga accelerator ng keyboard na \"switch to tab\" ng Chrome. Kapag hindi pinapatakbo sa isang tab, mas mainam kung ipapadala ang mga key na ito sa host para magamit ang mga ito sa vim o mga emac.\n\nKung true, pangangasiwaan ng browser ang Alt+1..9. Kung false, ipapadala ang Alt+1..9 sa host. Kung null, awtomatikong magde-detect batay sa platform ng browser at uri ng window."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Kung ipapasa ang Ctrl-1..9 sa browser.\n\nKapaki-pakinabang ito kapag nagpapatakbo ng hterm sa tab ng browser, para hindi mawala ang mga accelerator ng keyboard na \"switch to tab\" ng Chrome. Kapag hindi pinapatakbo sa isang tab, mas mainam kung ipapadala ang mga key na ito sa host para magamit ang mga ito sa vim o mga emac.\n\nKung true, pangangasiwaan ng browser ang Ctrl-1..9. Kung false, ipapadala ang Ctrl-1..9 sa host. Kung null, awtomatikong magde-detect batay sa platform ng browser at uri ng window."
+		"message": "Kung ipapasa ang Ctrl+1..9 sa browser.\n\nKapaki-pakinabang ito kapag nagpapatakbo ng hterm sa tab ng browser, para hindi mawala ang mga accelerator ng keyboard na \"switch to tab\" ng Chrome. Kapag hindi pinapatakbo sa isang tab, mas mainam kung ipapadala ang mga key na ito sa host para magamit ang mga ito sa vim o mga emac.\n\nKung true, pangangasiwaan ng browser ang Ctrl+1..9. Kung false, ipapadala ang Ctrl+1..9 sa host. Kung null, awtomatikong magde-detect batay sa platform ng browser at uri ng window."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Kung ipapasa ang Meta-1..9 sa browser.\n\nKapaki-pakinabang ito kapag nagpapatakbo ng hterm sa tab ng browser, para hindi mawala ang mga accelerator ng keyboard na \"switch to tab\" ng Chrome. Kapag hindi pinapatakbo sa isang tab, mas mainam kung ipapadala ang mga key na ito sa host para magamit ang mga ito sa vim o mga emac.\n\nKung true, pangangasiwaan ng browser ang Meta-1..9. Kung false, ipapadala ang Meta-1..9 sa host. Kung null, awtomatikong magde-detect batay sa platform ng browser at uri ng window."
+		"message": "Kung ipapasa ang Meta+1..9 sa browser.\n\nKapaki-pakinabang ito kapag nagpapatakbo ng hterm sa tab ng browser, para hindi mawala ang mga accelerator ng keyboard na \"switch to tab\" ng Chrome. Kapag hindi pinapatakbo sa isang tab, mas mainam kung ipapadala ang mga key na ito sa host para magamit ang mga ito sa vim o mga emac.\n\nKung true, pangangasiwaan ng browser ang Meta+1..9. Kung false, ipapadala ang Meta+1..9 sa host. Kung null, awtomatikong magde-detect batay sa platform ng browser at uri ng window."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Kung mapapasa ang Meta-V sa host."
+		"message": "Kung mapapasa ang Meta+V sa host."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Itakda ang inaasahang pag-encode para sa data na natanggap mula sa host.\nKung hindi tumutugma ang mga pag-encode, maaaring makaranas ng mga visual bug.\n\nAng mga valid na value ay 'utf-8' at 'raw.'"
@@ -315,7 +315,7 @@
 		"message": "Itakda ang pag-e-encode para sa data na ipinadala sa host."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Kung ginagamit ang Shift-Insert para sa pag-paste o kung ipinapadala ito sa remote host."
+		"message": "Kung ginagamit ang Shift+Insert para sa pag-paste o kung ipinapadala ito sa remote host."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Ang default na terminal na pag-e-encode (DOCS).\n\nNag-e-enable ang ISO-2022 ng mga pag-translate ng mapa ng character (tulad ng mga mapa ng graphics).\nNagdi-disable ang UTF-8 ng suporta para sa mga iyon.\n\nAng naka-lock na variant ay nangangahulugang hindi mababago ang pag-e-encode sa runtime sa pamamagitan ng mga terminal na escape sequence.\n\nDapat kang manatili sa UTF-8 maliban na lang kung may mapansin kang sirang pag-render sa mga legacy application."
@@ -417,7 +417,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Kumonekta sa isang naka-save na profile o sa isang bagong ssh system"
 	},
 	"open_as_window_tip": {
-		"message": "[Pro Tip] Gamitin ang 'Buksan bilang Window' o 'Fullscreen' para mapigilan ang Ctrl-W sa pagsara ng iyong terminal!\n[Pro Tip] Tingnan sa $1 para sa higit pang impormasyon."
+		"message": "[Pro Tip] Gamitin ang 'Buksan bilang Window' o 'Fullscreen' para mapigilan ang Ctrl+W sa pagsara ng iyong terminal!\n[Pro Tip] Tingnan sa $1 para sa higit pang impormasyon."
 	},
 	"options_button_label": {
 		"message": "Mga Opsyon"
@@ -480,7 +480,7 @@
 		"message": "Maaari mong pindutin nang matagal ang Ctrl (Cmd sa macOS) habang nagki-click sa mga link upang buksan ang mga ito!"
 	},
 	"tip_10": {
-		"message": "Kapag nagpapatakbo sa isang window, maaaring magbukas ang Ctrl-Shift-N ng isa pang session."
+		"message": "Kapag nagpapatakbo sa isang window, maaaring magbukas ang Ctrl+Shift+N ng isa pang session."
 	},
 	"tip_11": {
 		"message": "Maaari mong i-rebind ang mga key/shortcut sa: https://goo.gl/LWRndr"

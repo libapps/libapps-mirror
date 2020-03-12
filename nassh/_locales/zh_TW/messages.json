@@ -264,7 +264,7 @@
 		"message": "如果為 true，Home/End 鍵可操控終端機捲軸，Shift + Home/Shift + End 鍵則會傳送至遠端主機。如果為 false，Home/End 鍵會傳送至遠端主機，Shift + Home/Shift + End 鍵則可捲動。"
 	},
 	"hterm_pref_keybindings": {
-		"message": "按鍵序列與按鍵動作的對應。按鍵序列包含 0 或多個輔助鍵加上按鍵碼。按鍵碼可以是十進位/十六進位數字或按鍵識別碼。按鍵動作可以是要傳送至主機的指定字串，也可以是動作識別碼。如需完整的格式說明，請參閱 https://goo.gl/LWRndr。\n\n按鍵繫結關係範例：\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "按鍵序列與按鍵動作的對應。按鍵序列包含 0 或多個輔助鍵加上按鍵碼。按鍵碼可以是十進位/十六進位數字或按鍵識別碼。按鍵動作可以是要傳送至主機的指定字串，也可以是動作識別碼。如需完整的格式說明，請參閱 https://goo.gl/LWRndr。\n\n按鍵繫結關係範例：\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "如果為 true，會將媒體鍵轉換成對應的 F- 鍵。如果為 false，則讓瀏覽器處理按鍵。"

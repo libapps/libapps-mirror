@@ -159,10 +159,10 @@
 		"message": "Wählen Sie eine AltGr-Erkennungsheuristik.\n\n\"null\": Automatische Erkennung basiert auf navigator.language:\n      \"en-us\" => \"none\", sonst => \"right-alt\"\n\"none\": Deaktiviert jegliche AltGr-Manipulation.\n\"ctrl-alt\": Es wird angenommen, dass \"Strg + Alt\" für \"AltGr\" steht.\n\"left-alt\": Es wird angenommen, dass \"Alt\" für \"AltGr\" steht.\n\"right-alt\": Es wird angenommen, dass \"Alt\" für \"AltGr\" steht."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Legt fest, ob die Alt-Taste als Meta- oder als Alt-Taste dient."
+		"message": "Legt fest, ob die Alt+Taste als Meta+ oder als Alt+Taste dient."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Steuert die Funktion der Alt-Taste.\n\n  escape: ESC-Präfix senden.\n  8-bit: Dem eingegebenen Zeichen 128 hinzufügen, wie in xterm.\n browser-key: Das Drücken der Taste und die Reaktion des Browsers\n abwarten. Dies funktioniert nicht einwandfrei auf Plattformen, auf denen der\n Browser bei bestimmten Alt-Sequenzen eine Standardaktion ausführt."
+		"message": "Steuert die Funktion der Alt+Taste.\n\n  escape: ESC-Präfix senden.\n  8-bit: Dem eingegebenen Zeichen 128 hinzufügen, wie in xterm.\n browser-key: Das Drücken der Taste und die Reaktion des Browsers\n abwarten. Dies funktioniert nicht einwandfrei auf Plattformen, auf denen der\n Browser bei bestimmten Alt+Sequenzen eine Standardaktion ausführt."
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "URL des Terminaltons. Ein leerer String gibt an, dass kein hörbarer Ton vorhanden ist."
@@ -264,13 +264,13 @@
 		"message": "Wenn \"true\" eingestellt ist, wird mit Pos1/Ende die Bildlaufleiste des Terminals gesteuert und Umschalttaste + Pos1/Ende an den Remote-Host gesendet. Wenn \"false\" eingestellt ist, werden Pos1/Ende an den Remote-Host gesendet und mit Umschalttaste + Pos1/Ende wird gescrollt."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Eine Karte mit Tastenkombinationen für Schlüsselfunktionen. Tastenkombinationen bestehen aus einer Null oder mehreren Modifikatortasten, gefolgt von einem Tastencode. Tastencodes können Dezimal- oder Hexadezimalzahlen oder eine Schlüsselkennung sein. Schlüsselfunktionen können als String definiert sein, der an den Host gesendet wird, oder als eine Aktionskennzeichnung. Eine vollständige Erklärung des Formats finden Sie unter https://goo.gl/LWRndr.\n\nBeispiele für Tastenbelegungen:\n{\n\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n\n  \"Ctrl-Shift-L\": \"PASS\",\n\n  \"Ctrl-H\": \"'Hallo Welt'\"\n\n}"
+		"message": "Eine Karte mit Tastenkombinationen für Schlüsselfunktionen. Tastenkombinationen bestehen aus einer Null oder mehreren Modifikatortasten, gefolgt von einem Tastencode. Tastencodes können Dezimal- oder Hexadezimalzahlen oder eine Schlüsselkennung sein. Schlüsselfunktionen können als String definiert sein, der an den Host gesendet wird, oder als eine Aktionskennzeichnung. Eine vollständige Erklärung des Formats finden Sie unter https://goo.gl/LWRndr.\n\nBeispiele für Tastenbelegungen:\n{\n\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n\n  \"Ctrl+Shift+L\": \"PASS\",\n\n  \"Ctrl+H\": \"'Hallo Welt'\"\n\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Wenn \"true\" eingestellt ist, werden die Medientasten in ihr F-Tasten-Äquivalent umgewandelt. Wenn \"false\" eingestellt ist, werden die Tasten vom Browser gesteuert."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Ein ESC-Präfix senden, wenn gleichzeitig eine Taste sowie die Meta-Taste gedrückt werden.\n\nWenn diese Option aktiviert ist, wird zum Beispiel beim Drücken der Meta-Taste und der Taste \"k\" \"^[k\" gesendet, als hätten Sie Escape und dann \"k\" gedrückt. Ist sie deaktiviert, wird nur \"k\" gesendet."
+		"message": "Ein ESC-Präfix senden, wenn gleichzeitig eine Taste sowie die Meta+Taste gedrückt werden.\n\nWenn diese Option aktiviert ist, wird zum Beispiel beim Drücken der Meta+Taste und der Taste \"k\" \"^[k\" gesendet, als hätten Sie Escape und dann \"k\" gedrückt. Ist sie deaktiviert, wird nur \"k\" gesendet."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "\"mouse-paste-button\" oder Null für automatische Erkennung.\n\nFür die automatische Erkennung verwenden wir die mittlere Maustaste in Nicht-X11-Plattformen (einschließlich Chrome OS). Unter X11 verwenden wir die rechte Maustaste (da die mittlere Maustaste vom nativen Fenstermanager zum Einfügen verwendet werden sollte).\n\n0 == linke (primäre) Taste.\n1 == mittlere (Hilfs-)Taste.\n2 == rechte (sekundäre) Taste.\n\nDiese Option ist unabhängig von der Einstellung \"right-click paste\".\n\nHinweis: Damit können Mäuse für Rechts- und Linkshänder korrekt verwendet werden."
@@ -291,7 +291,7 @@
 		"message": "Hier wird festgelegt, ob Meta + 1 bis 9 an den Browser übergeben wird.\n\nDies ist praktisch, wenn HTerm in einem Browsertab ausgeführt wird, sodass Sie nicht die Zugriffstasten für \"Zu folgendem Tab wechseln:\" von Chrome verlieren. Wird HTerm nicht in einem Tab ausgeführt, ist es besser, diese Tasten an den Host zu senden, damit sie in Vim oder Emacs verwendet werden können.\n\nWenn \"true\" eingestellt ist, wird Meta + 1 bis 9 vom Browser verarbeitet. Wenn \"false\" eingestellt ist, wird Meta + 1 bis 9 an den Host gesendet. Ist er null, basiert die automatische Erkennung auf der Browserplattform und dem Fenstertyp."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Legt fest, ob Meta-V an den Host übergeben wird."
+		"message": "Legt fest, ob Meta+V an den Host übergeben wird."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Hier wird die erwartete Codierung für vom Host empfangene Daten festgelegt.\nSollte die Codierung nicht übereinstimmen, kommt es wahrscheinlich zu Fehlern bei der Darstellung.\n\nGültige Werte sind \"utf-8\" und \"raw\"."

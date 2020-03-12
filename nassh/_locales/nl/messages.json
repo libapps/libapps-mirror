@@ -159,10 +159,10 @@
 		"message": "Selecteer een AltGr-detectieheuristiek.\n\n'null': automatische detectie op basis van navigator.language:\n      'en-us' => 'none', anders => 'right-alt'\n'none': schakelt schadelijke wijzigingen voor AltGr uit.\n'ctrl-alt': veronderstelt dat Ctrl + Alt eigenlijk AltGr betekent.\n'left-alt': veronderstelt dat de linker-Alt eigenlijk AltGr betekent.\n'right-alt': veronderstelt dat de rechter-Alt eigenlijk AltGr betekent."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Hiermee kun je instellen of de Alt-toets als Meta-toets of specifiek als Alt-toets fungeert."
+		"message": "Hiermee kun je instellen of de Alt+toets als Meta+toets of specifiek als Alt+toets fungeert."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Hiermee wordt de functie van de Alt-toets bepaald.\n\n  escape: een ESC-voorvoegsel verzenden.\n  8-bit: 128 aan het teken toevoegen zonder Shift, zoals in xterm.\nbrowser-key: Wachten tot een toets wordt ingedrukt om te zien wat de browser doet. (Dit werkt niet goed op platforms waarin de browser een standaardactie uitvoert bij bepaalde Alt-toetscombinaties.)"
+		"message": "Hiermee wordt de functie van de Alt+toets bepaald.\n\n  escape: een ESC-voorvoegsel verzenden.\n  8-bit: 128 aan het teken toevoegen zonder Shift, zoals in xterm.\nbrowser-key: Wachten tot een toets wordt ingedrukt om te zien wat de browser doet. (Dit werkt niet goed op platforms waarin de browser een standaardactie uitvoert bij bepaalde Alt+toetscombinaties.)"
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "De URL van het geluid van de terminalbel. Een lege tekenreeks betekent dat er geen hoorbare bel is."
@@ -264,13 +264,13 @@
 		"message": "Als 'true' is ingesteld, wordt met Home/End de scrollbalk van de terminal bediend en worden Shift + Home/Shift + End naar de externe host verzonden. Als 'false' is ingesteld, worden Home/End naar de externe host verzonden en wordt er met Shift + Home/Shift + End gescrolld."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Een toetsencombinatie toewijzen aan toetsacties. Toetsencombinaties bestaan uit nul of meer functietoetsen gevolgd door een toetscode. Toetscodes kunnen bestaan uit decimale of hexadecimale getallen of een toets-ID. Een toetsactie kan een opgegeven tekenreeks zijn die wordt verzonden naar de host, of een actie-ID. Zie https://goo.gl/LWRndr voor een volledige uitleg van de indeling.\n\nVoorbeelden van sneltoetsen:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "Een toetsencombinatie toewijzen aan toetsacties. Toetsencombinaties bestaan uit nul of meer functietoetsen gevolgd door een toetscode. Toetscodes kunnen bestaan uit decimale of hexadecimale getallen of een toets-ID. Een toetsactie kan een opgegeven tekenreeks zijn die wordt verzonden naar de host, of een actie-ID. Zie https://goo.gl/LWRndr voor een volledige uitleg van de indeling.\n\nVoorbeelden van sneltoetsen:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Als dit is ingesteld op 'True', worden mediatoetsen geconverteerd naar de equivalente functietoets. Als dit is ingesteld op 'False', wordt de functie van de toetsen door de browser bepaald."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Hiermee verzend je een ESC-voorvoegsel als je een toets indrukt terwijl je de Meta-toets ingedrukt houdt.\n\nAls deze optie is ingeschakeld en je bijvoorbeeld op Meta + K drukt, wordt ^[k verzonden alsof je Escape en vervolgens k typt. Als de optie is uitgeschakeld, wordt alleen k verzonden."
+		"message": "Hiermee verzend je een ESC-voorvoegsel als je een toets indrukt terwijl je de Meta+toets ingedrukt houdt.\n\nAls deze optie is ingeschakeld en je bijvoorbeeld op Meta + K drukt, wordt ^[k verzonden alsof je Escape en vervolgens k typt. Als de optie is uitgeschakeld, wordt alleen k verzonden."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Plakken met muisknop of 'null' (leeg) voor automatische detectie.\n\nOp niet-X11-platforms (inclusief Chrome OS) gebruiken we de middelste muisknop voor automatisch detecteren. Op X11 gebruiken we de rechtermuisknop (aangezien in de systeemeigen functie voor vensterbeheer de plakbewerking wordt uitgevoerd met de middelste muisknop).\n\n0 == linkermuisknop (primair).\n1 == middelste knop (supplementair).\n2 == rechtermuisknop (secundair).\n\nDeze optie is onafhankelijk van de instelling voor plakken met de rechtermuisknop.\n\nOpmerking: Geschikt voor links- en rechtshandige muizen."
@@ -303,7 +303,7 @@
 		"message": "Hiermee wordt bepaald of naar de onderzijde van de terminaluitvoer wordt gescrolld."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Wanneer de alternatieve schermbuffer wordt gebruikt en DECCKM (Application Cursor Keys) actief is, emuleren scrollgebeurtenissen met het muiswiel de pijltoetsen.\n\nDit kan tijdelijk worden uitgeschakeld door de Shift-toets ingedrukt te houden.\n\nDit komt regelmatig voor wanneer je pagers (less) gebruikt, documentatie of tekst in teksteditors (vi/nano) leest of screen/tmux gebruikt."
+		"message": "Wanneer de alternatieve schermbuffer wordt gebruikt en DECCKM (Application Cursor Keys) actief is, emuleren scrollgebeurtenissen met het muiswiel de pijltoetsen.\n\nDit kan tijdelijk worden uitgeschakeld door de Shift+toets ingedrukt te houden.\n\nDit komt regelmatig voor wanneer je pagers (less) gebruikt, documentatie of tekst in teksteditors (vi/nano) leest of screen/tmux gebruikt."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "De multiplier voor scrollwielgebeurtenissen wanneer wordt gemeten in pixels.\n\nHiermee wijzig je hoe snel de pagina wordt gescrolld."
@@ -480,7 +480,7 @@
 		"message": "Je kunt Ctrl (Cmd op macOS) ingedrukt houden terwijl je op links klikt om ze te openen."
 	},
 	"tip_10": {
-		"message": "Wanneer de pagina wordt uitgevoerd in een (incognito)venster, kun je met Ctrl-Shift-N nog een sessie openen."
+		"message": "Wanneer de pagina wordt uitgevoerd in een (incognito)venster, kun je met Ctrl+Shift+N nog een sessie openen."
 	},
 	"tip_11": {
 		"message": "Je kunt de functionaliteit van toetsen/sneltoetsen aanpassen: https://goo.gl/LWRndr"
@@ -492,7 +492,7 @@
 		"message": "Afbeeldingen inline weergeven: https://goo.gl/MnSysj"
 	},
 	"tip_14": {
-		"message": "Als je met de rechtermuisknop klikt terwijl je de Ctrl-toets (Cmd op macOS) ingedrukt houdt, wordt er een contextmenu weergegeven."
+		"message": "Als je met de rechtermuisknop klikt terwijl je de Ctrl+toets (Cmd op macOS) ingedrukt houdt, wordt er een contextmenu weergegeven."
 	},
 	"tip_2": {
 		"message": "Geef meldingen in de browser weer met hterm-notify: https://goo.gl/ZNxGdF"

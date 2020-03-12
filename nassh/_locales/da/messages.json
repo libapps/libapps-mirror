@@ -156,13 +156,13 @@
 		"message": "Hvis den angives, annulleres Chrome OS-tilknytningen af Alt + tilbagetasten til DEL, så Alt + tilbagetasten faktisk er Alt + tilbagetasten."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Vælg en registreringsheuristik for AltGr.\n\n\"null\": Registrer automatisk baseret på navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n\"none\": Deaktiver enhver omformning i forhold til AltGr.\n\"ctrl-alt\": Gå ud fra, at Ctrl+Alt er AltGr.\n\"left-alt\": Gå ud fra, at venstre Alt-tast er AltGr.\n\"right-alt\": Gå ud fra, at højre Alt-tast er AltGr."
+		"message": "Vælg en registreringsheuristik for AltGr.\n\n\"null\": Registrer automatisk baseret på navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n\"none\": Deaktiver enhver omformning i forhold til AltGr.\n\"ctrl-alt\": Gå ud fra, at Ctrl+Alt er AltGr.\n\"left-alt\": Gå ud fra, at venstre Alt+tast er AltGr.\n\"right-alt\": Gå ud fra, at højre Alt+tast er AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Angiv, om Alt-tasten skal fungere som metatast eller entydigt som Alt-tast."
+		"message": "Angiv, om Alt+tasten skal fungere som metatast eller entydigt som Alt+tast."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Bestemmer, hvordan Alt-tasten håndteres.\n\n  escape: Send et ESC-præfiks.\n  8-bit: Føj 128 til det angivne tegn som i xterm.\n browser-key: Vent, til der trykkes på en tast, og se, hvad browseren\n siger (dette fungerer ikke godt på platforme, hvor browseren\n udfører en standardhandling for nogle kombinationer med Alt.)"
+		"message": "Bestemmer, hvordan Alt+tasten håndteres.\n\n  escape: Send et ESC-præfiks.\n  8-bit: Føj 128 til det angivne tegn som i xterm.\n browser-key: Vent, til der trykkes på en tast, og se, hvad browseren\n siger (dette fungerer ikke godt på platforme, hvor browseren\n udfører en standardhandling for nogle kombinationer med Alt.)"
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "Webadresse med terminalens klokkelyd. Hvis strengen er tom, høres ingen klokke."
@@ -264,13 +264,13 @@
 		"message": "Hvis den er angivet som Sand, styrer Home/End terminalens rullepanel, og Shift+Home/Shift+End sendes til den eksterne host. Hvis den er angivet som Falsk, sendes Home/End til den eksterne host, og Shift+Home/Shift+End ruller."
 	},
 	"hterm_pref_keybindings": {
-		"message": "En oversigt over tasterækkefølgen for tastehandlinger. Tasterækkefølgen omfatter nul eller flere ændringstaster efterfulgt af en tastekode. Tastekoder kan være decimaltal eller hexadecimaltal eller en tastidentifikator. Tastehandlinger kan specificeres som en streng, der skal sendes til hosten, eller en handlingsidentifikator. Se en komplet forklaring af formatet på https://goo.gl/LWRndr.\n\nEksempler på tastbindinger:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\n}"
+		"message": "En oversigt over tasterækkefølgen for tastehandlinger. Tasterækkefølgen omfatter nul eller flere ændringstaster efterfulgt af en tastekode. Tastekoder kan være decimaltal eller hexadecimaltal eller en tastidentifikator. Tastehandlinger kan specificeres som en streng, der skal sendes til hosten, eller en handlingsidentifikator. Se en komplet forklaring af formatet på https://goo.gl/LWRndr.\n\nEksempler på tastbindinger:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Hvis angivet til sand, skal medietasterne konverteres til deres tilsvarende F-taster. Hvis angivet til falsk, skal browseren styre tasterne."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Send et ESC-præfiks, når du trykker på en tast, mens du holder metatasten nede.\n\nNår dette er aktiveret, og du f.eks. trykker på Meta-K, sendes ^[k, som om du har tastet Escape og derefter k. Når dette er deaktiveret, sendes kun k."
+		"message": "Send et ESC-præfiks, når du trykker på en tast, mens du holder metatasten nede.\n\nNår dette er aktiveret, og du f.eks. trykker på Meta+K, sendes ^[k, som om du har tastet Escape og derefter k. Når dette er deaktiveret, sendes kun k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Musens knap til at indsætte. Angiv nul for automatisk registrering.\n\nVed automatisk registrering bruger vi den midterste museknap til platforme, der ikke er X11, (bl.a. Chrome OS). På X11 bruger vi den højre museknap (da den indbyggede vinduesadministrator burde indsætte via den midterste museknap).\n\n0 == venstre (primær) knap.\n1 == midterste (ekstra) knap.\n2 == højre (sekundær) knap.\n\nDenne valgmulighed er aktiv uafhængigt af indstillingen af \"mus-højreklik-indsæt\".\n\nBemærk! Dette sikrer, at musen fungerer korrekt for henholdsvis højre- og venstrehåndede."
@@ -303,7 +303,7 @@
 		"message": "Angiver, om der skal rulles ned til bunden ved terminaloutput."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Når den alternative skærmbuffer bruges, og DECCKM (programmarkørtasten) er aktiv, efterligner rulning med musehjulet piletasterne.\n\nDet kan deaktiveres midlertidigt ved at holde Shift-tasten nede.\n\nDette forekommer ofte ved brug af værktøjer til sideinddeling (less), ved læsning af manualsider eller tekstredigeringsværktøjer (vi/nano) eller ved brug af Screen/tmux."
+		"message": "Når den alternative skærmbuffer bruges, og DECCKM (programmarkørtasten) er aktiv, efterligner rulning med musehjulet piletasterne.\n\nDet kan deaktiveres midlertidigt ved at holde Shift+tasten nede.\n\nDette forekommer ofte ved brug af værktøjer til sideinddeling (less), ved læsning af manualsider eller tekstredigeringsværktøjer (vi/nano) eller ved brug af Screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "Multiplikatoren for rulning med hjulet, når det måles i pixels.\n\nÆndrer, hvor hurtigt der rulles på siden."
@@ -315,7 +315,7 @@
 		"message": "Angiv kodningen for data, der sendes til hosten."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Om Shift-Insert bruges til at indsætte eller sendes til den eksterne host."
+		"message": "Om Shift+Insert bruges til at indsætte eller sendes til den eksterne host."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Standardterminalkodning (DOCS).\n\nISO-2022 giver mulighed for oversættelser af tegnoversigt (f.eks. grafikoversigter).\nUTF-8 deaktiverer understøttelse af disse.\n\nDen låste variant betyder, at kodningen ikke kan ændres på kørselstidspunktet via terminalens escape-sekvenser.\n\nDu bør holde dig til UTF-8, medmindre du bemærker gengivelsesfejl i forældede apps."
@@ -480,7 +480,7 @@
 		"message": "Du kan holde Ctrl (Cmd på macOS) nede, mens du klikker på links, for at åben dem."
 	},
 	"tip_10": {
-		"message": "Ved kørsel i et andet vindue kan du trykke Ctrl-Shift-N for at åbne en ny session."
+		"message": "Ved kørsel i et andet vindue kan du trykke Ctrl+Shift+N for at åbne en ny session."
 	},
 	"tip_11": {
 		"message": "Du kan ændre tilknytningen mellem taster og genveje: https://goo.gl/LWRndr"

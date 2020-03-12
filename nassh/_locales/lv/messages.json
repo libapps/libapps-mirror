@@ -153,7 +153,7 @@
 		"message": "Vai atļaut rādīt terminālī attēlus no attālā saimniekdatora.\n\nPēc noklusējuma uzvedne tiek rādīta, līdz tiek veikta izvēle."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ja šī politika ir iestatīta, tiek atcelta Chrome OS taustiņu Alt-Backspace->DEL pārkartēšana, lai taustiņu kombinācija Alt-Backspace nozīmētu Alt-Backspace."
+		"message": "Ja šī politika ir iestatīta, tiek atcelta Chrome OS taustiņu Alt+Backspace->DEL pārkartēšana, lai taustiņu kombinācija Alt+Backspace nozīmētu Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Atlasiet AltGr noteikšanas heiristikas metodi.\n\n'null': automātiskās noteikšanas pamatā ir navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': atspējot jebkādas ar AltGr saistītas kaitīgas izmaiņas.\n'ctrl- alt': pieņemt, ka Ctrl+Alt nozīmē AltGr.\n'left-alt': pieņemt, ka kreisais Alt taustiņš nozīmē AltGr.\n'right-alt': pieņemt, ka labais Alt taustiņš nozīmē AltGr."
@@ -264,13 +264,13 @@
 		"message": "Ja ir iestatīta vērtība “true”, ar taustiņiem Home/End tiek vadīta termināļa ritjosla, bet ar taustiņiem Shift un Home/End tiek nosūtīti uz attālo saimniekdatoru. Ja ir iestatīta vērtība “false”, ar taustiņiem Home/End tiek nosūtīti uz attālo saimniekdatoru, bet ar taustiņiem Shift un Home/End notiek ritināšana."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Karte ar taustiņu kombināciju veiktajām taustiņu darbībām. Taustiņu \nkombinācijās ir ietverts nulles taustiņš vai citi modificētājtaustiņi un\n taustiņa kods. Taustiņu kodi var būt decimāli vai heksadecimāli skaitļi\n vai taustiņa identifikators. Taustiņu darbības var būt norādītas kā \nvirkne, ko sūtīt saimniekdatoram, vai kā darbības identifikators. Visu \nformāta skaidrojumu skatiet vietnē:https://goo.gl/LWRndr.\nSaistīto taustiņu piemēri:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "Karte ar taustiņu kombināciju veiktajām taustiņu darbībām. Taustiņu \nkombinācijās ir ietverts nulles taustiņš vai citi modificētājtaustiņi un\n taustiņa kods. Taustiņu kodi var būt decimāli vai heksadecimāli skaitļi\n vai taustiņa identifikators. Taustiņu darbības var būt norādītas kā \nvirkne, ko sūtīt saimniekdatoram, vai kā darbības identifikators. Visu \nformāta skaidrojumu skatiet vietnē:https://goo.gl/LWRndr.\nSaistīto taustiņu piemēri:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ja ir iestatīta vērtība “true”, multivides taustiņi tiek mainīti uz to funkciju taustiņu ekvivalentiem. Ja ir iestatīta vērtība “false”, pārlūkam tiek ļauts apstrādāt taustiņus."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Sūtīt ESC prefiksu, nospiežot taustiņu un turot nospiestu taustiņu Meta.\n\nPiemēram, kad tas ir iespējots, nospiežot taustiņu Meta-k, tiks nosūtīts ^[k, it kā būtu nospiests taustiņš Escape un k. Kad tas ir atspējots, tiks nosūtīts tikai k."
+		"message": "Sūtīt ESC prefiksu, nospiežot taustiņu un turot nospiestu taustiņu Meta.\n\nPiemēram, kad tas ir iespējots, nospiežot taustiņu Meta+k, tiks nosūtīts ^[k, it kā būtu nospiests taustiņš Escape un k. Kad tas ir atspējots, tiks nosūtīts tikai k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Ielīmēšanai izmantojamā peles poga; vērtība “null” automātiskai noteikšanai.\n\nAutomātiskai noteikšanai platformās, kas nav X11 platformas (tostarp Chrome OS), tiek izmantota peles vidējā poga. X11 platformā tiek izmantota peles labā poga (jo vietējam logu pārvaldniekam ir jāveic ielīmēšana, izmantojot peles vidējo pogu).\n\n0 == kreisā (galvenā) poga.\n1 == vidējā (palīga) poga.\n2 == labā (sekundārā) poga.\n\nŠī opcija ir aktivizēta neatkarīgi no iestatījuma “mouse-right-click-paste”.\n\nPiezīme. Šis iestatījums tiek pareizi lietots kreiļiem un labročiem paredzētām pelēm."
@@ -282,16 +282,16 @@
 		"message": "Ja ir iestatīta vērtība “true”, ar taustiņiem Page up/Page down tiek vadīta termināļa ritjosla, bet ar taustiņiem Shift un Page up/Page down tiek nosūtīti uz attālo saimniekdatoru. Ja ir iestatīta vērtība “false”, ar taustiņiem Page up/Page down tiek nosūtīti uz attālo saimniekdatoru, bet ar taustiņiem Shift un Page up/Page down notiek ritināšana."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Vai nosūtīt taustiņus Alt-1–9 pārlūkam.\n\nŠis iestatījums ir noderīgs, izpildot hterm pārlūka cilnē, lai nepazaudētu Chrome tastatūras darbības paātrinātājus ciļņu pārslēgšanai. Ja nenotiek izpildīšana cilnē, vēlams nosūtīt šos taustiņus saimniekdatoram, lai tos varētu izmantot teksta redaktorā vim vai emacs.\n\nJa ir iestatīta vērtība “true”, taustiņi Alt-1–9 tiek apstrādāti pārlūkā. Ja ir iestatīta vērtība “false”, taustiņi Alt-1–9 tiek nosūtīti saimniekdatoram. Ja ir iestatīta vērtība “null”, notiek automātiska noteikšana, pamatojoties uz pārlūka platformu un loga veidu."
+		"message": "Vai nosūtīt taustiņus Alt+1–9 pārlūkam.\n\nŠis iestatījums ir noderīgs, izpildot hterm pārlūka cilnē, lai nepazaudētu Chrome tastatūras darbības paātrinātājus ciļņu pārslēgšanai. Ja nenotiek izpildīšana cilnē, vēlams nosūtīt šos taustiņus saimniekdatoram, lai tos varētu izmantot teksta redaktorā vim vai emacs.\n\nJa ir iestatīta vērtība “true”, taustiņi Alt+1–9 tiek apstrādāti pārlūkā. Ja ir iestatīta vērtība “false”, taustiņi Alt+1–9 tiek nosūtīti saimniekdatoram. Ja ir iestatīta vērtība “null”, notiek automātiska noteikšana, pamatojoties uz pārlūka platformu un loga veidu."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Vai nosūtīt taustiņus Ctrl-1–9 pārlūkam.\n\nŠis iestatījums ir noderīgs, izpildot hterm pārlūka cilnē, lai nepazaudētu Chrome tastatūras darbības paātrinātājus ciļņu pārslēgšanai. Ja nenotiek izpildīšana cilnē, vēlams nosūtīt šos taustiņus saimniekdatoram, lai tos varētu izmantot teksta redaktorā vim vai emacs.\n\nJa ir iestatīta vērtība “true”, taustiņi Ctrl-1–9 tiek apstrādāti pārlūkā. Ja ir iestatīta vērtība “false”, taustiņi Ctrl-1–9 tiek nosūtīti saimniekdatoram. Ja ir iestatīta vērtība “null”, notiek automātiska noteikšana, pamatojoties uz pārlūka platformu un loga veidu."
+		"message": "Vai nosūtīt taustiņus Ctrl+1–9 pārlūkam.\n\nŠis iestatījums ir noderīgs, izpildot hterm pārlūka cilnē, lai nepazaudētu Chrome tastatūras darbības paātrinātājus ciļņu pārslēgšanai. Ja nenotiek izpildīšana cilnē, vēlams nosūtīt šos taustiņus saimniekdatoram, lai tos varētu izmantot teksta redaktorā vim vai emacs.\n\nJa ir iestatīta vērtība “true”, taustiņi Ctrl+1–9 tiek apstrādāti pārlūkā. Ja ir iestatīta vērtība “false”, taustiņi Ctrl+1–9 tiek nosūtīti saimniekdatoram. Ja ir iestatīta vērtība “null”, notiek automātiska noteikšana, pamatojoties uz pārlūka platformu un loga veidu."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Vai nosūtīt taustiņus Meta-1–9 pārlūkam.\n\nŠis iestatījums ir noderīgs, izpildot hterm pārlūka cilnē, lai nepazaudētu Chrome tastatūras darbības paātrinātājus ciļņu pārslēgšanai. Ja nenotiek izpildīšana cilnē, vēlams nosūtīt šos taustiņus saimniekdatoram, lai tos varētu izmantot teksta redaktorā vim vai emacs.\n\nJa ir iestatīta vērtība “true”, taustiņi Meta-1–9 tiek apstrādāti pārlūkā. Ja ir iestatīta vērtība “false”, taustiņi Meta-1–9 tiek nosūtīti saimniekdatoram. Ja ir iestatīta vērtība “null”, notiek automātiska noteikšana, pamatojoties uz pārlūka platformu un loga veidu."
+		"message": "Vai nosūtīt taustiņus Meta+1–9 pārlūkam.\n\nŠis iestatījums ir noderīgs, izpildot hterm pārlūka cilnē, lai nepazaudētu Chrome tastatūras darbības paātrinātājus ciļņu pārslēgšanai. Ja nenotiek izpildīšana cilnē, vēlams nosūtīt šos taustiņus saimniekdatoram, lai tos varētu izmantot teksta redaktorā vim vai emacs.\n\nJa ir iestatīta vērtība “true”, taustiņi Meta+1–9 tiek apstrādāti pārlūkā. Ja ir iestatīta vērtība “false”, taustiņi Meta+1–9 tiek nosūtīti saimniekdatoram. Ja ir iestatīta vērtība “null”, notiek automātiska noteikšana, pamatojoties uz pārlūka platformu un loga veidu."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Vai saimniekdatoram tiek nosūtīta taustiņu kombinācija Meta-V."
+		"message": "Vai saimniekdatoram tiek nosūtīta taustiņu kombinācija Meta+V."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Iestatiet paredzamo kodējumu no saimnienkdatora saņemtajiem datiem.\nJa kodējums nesakrīt, iespējams, tiks novērotas vizuālas kļūdas.\n\n\nDerīgas vērtības ir “utf-8” un “raw”."
@@ -315,7 +315,7 @@
 		"message": "Iestatiet kodējumu saimniekdatoram nosūtītajiem datiem."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Vai taustiņu kombinācija Shift-Insert tiek izmantota ielīmēšanai vai tiek nosūtīta uz attālo saimniekdatoru."
+		"message": "Vai taustiņu kombinācija Shift+Insert tiek izmantota ielīmēšanai vai tiek nosūtīta uz attālo saimniekdatoru."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Noklusējuma termināļa kodējums (DOCS).\n\nISO-2022 iespējo rakstzīmju kartes tulkojumus (piemēram, grafisko karšu tulkojumus).\nUTF-8 atspējo šo tulkojum atbalstu.\n\nBloķētais variants nozīmē, ka kodējumu nevar mainīt izpildlaikā, terminālī izmantojot kombinācijas ar taustiņu escape.\n\nIzmantojiet UTF-8, ja vien neesat pamanījis bojātu atveidi mantotajās lietojumprogrammās."
@@ -417,7 +417,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Izveidojiet savienojumu ar saglabātu profilu vai jaunu SSH sistēmu."
 	},
 	"open_as_window_tip": {
-		"message": "[Profesionāļa padoms] Izmantojiet “Atvērt kā logu” vai “Pilnekrāns”, lai ar taustiņu kombināciju Ctrl-W neaizvērtu termināli.\n[Profesionāļa padoms] Plašāku informāciju skatiet vietnē $1."
+		"message": "[Profesionāļa padoms] Izmantojiet “Atvērt kā logu” vai “Pilnekrāns”, lai ar taustiņu kombināciju Ctrl+W neaizvērtu termināli.\n[Profesionāļa padoms] Plašāku informāciju skatiet vietnē $1."
 	},
 	"options_button_label": {
 		"message": "Opcijas"
@@ -480,7 +480,7 @@
 		"message": "Lai atvērtu saiti, turiet nospiestu taustiņu Ctrl (taustiņu Cmd macOS datorā), vienlaikus noklikšķinot uz attiecīgās saites."
 	},
 	"tip_10": {
-		"message": "Nospiežot Ctrl-Shift-N atvērtā logā, varat atvērt jaunu sesiju."
+		"message": "Nospiežot Ctrl+Shift+N atvērtā logā, varat atvērt jaunu sesiju."
 	},
 	"tip_11": {
 		"message": "Varat atkārtoti saistīt īsinājumtaustiņus šeit: https://goo.gl/LWRndr."

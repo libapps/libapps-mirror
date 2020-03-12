@@ -264,7 +264,7 @@
 		"message": "Nustačius kaip „Tiesa“, klavišais „Home“ / „End“ valdoma terminalo slinkimo juosta, o klavišais „Shift“ ir „Home“ / „Shift“ ir „End“ siunčiama nuotoliniam prieglobos serveriui. Nustačius kaip „Netiesa“, klavišais „Home“ / „End“ siunčiama nuotoliniam prieglobos serveriui, o klavišais „Shift“ ir „Home“ / „Shift“ ir „End“ slenkama."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Klavišų sekos atliekant veiksmus klavišais žemėlapis. Į klavišų sekas įtraukiama nulis ar daugiau modifikavimo klavišų su klavišų kodais. Klavišų kodai gali būti dešimtainiai arba šešioliktainiai skaičiai arba klavišo identifikatorius. Klavišų veiksmai gali būti nurodyti kaip eilutė, siunčiama prieglobos serveriui, arba veiksmo identifikatorius. Jei reikia išsamaus formato paaiškinimo, žr. https://goo.gl/LWRndr.\n\nPavyzdiniai klavišų susiejimai:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Sveikas, pasauli'\"\n}"
+		"message": "Klavišų sekos atliekant veiksmus klavišais žemėlapis. Į klavišų sekas įtraukiama nulis ar daugiau modifikavimo klavišų su klavišų kodais. Klavišų kodai gali būti dešimtainiai arba šešioliktainiai skaičiai arba klavišo identifikatorius. Klavišų veiksmai gali būti nurodyti kaip eilutė, siunčiama prieglobos serveriui, arba veiksmo identifikatorius. Jei reikia išsamaus formato paaiškinimo, žr. https://goo.gl/LWRndr.\n\nPavyzdiniai klavišų susiejimai:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Sveikas, pasauli'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Nustačius kaip „True“, medijos klavišai konvertuojami į atitinkamus funkcijų klavišus. Nustačius kaip „False“, naršyklei leidžiama apdoroti klavišus."

@@ -264,13 +264,13 @@
 		"message": "Jeśli wybrano opcję prawda, klawisze Home/End przewijają terminal, a kombinacje Shift+Home/End są wysyłane do zdalnego hosta. Jeśli wybrano opcję fałsz, klawisze Home/End są wysyłane do zdalnego hosta, a kombinacje Shift+Home/End przewijają."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Mapowanie sekwencji klawiszy na działania. Sekwencje klawiszy zawierają zero lub więcej klawiszy modyfikujących, a po nich kod klawisza. Kody klawiszy mogą mieć postać liczb dziesiętnych lub szesnastkowych albo identyfikatorów klawiszy. Działania mogą mieć postać ciągu znaków, który jest wysyłany do hosta, albo postać identyfikatora działania. Pełny opis formatu znajdziesz na https://goo.gl/LWRndr\n\nPrzykładowe powiązania klawiszy:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PRZEKAŻ\",\n  \"Ctrl-H\": \"Witaj, świecie\"\n}"
+		"message": "Mapowanie sekwencji klawiszy na działania. Sekwencje klawiszy zawierają zero lub więcej klawiszy modyfikujących, a po nich kod klawisza. Kody klawiszy mogą mieć postać liczb dziesiętnych lub szesnastkowych albo identyfikatorów klawiszy. Działania mogą mieć postać ciągu znaków, który jest wysyłany do hosta, albo postać identyfikatora działania. Pełny opis formatu znajdziesz na https://goo.gl/LWRndr\n\nPrzykładowe powiązania klawiszy:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PRZEKAŻ\",\n  \"Ctrl+H\": \"Witaj, świecie\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Jeśli wybrano opcję true, klawisze multimedialne będą traktowane jako odpowiadające im klawisze funkcyjne. Jeśli wybrano opcję false, naciśnięcia tych klawiszy będzie obsługiwać przeglądarka."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Wyślij prefiks ESC po naciśnięciu klawisza z przytrzymanym klawiszem meta.\n\nNa przykład, gdy ta opcja jest włączona, naciśnięcie Meta-K spowoduje wysłanie ^[k (jakby naciśnięto Escape, a następnie k). Gdy jest wyłączona, wysłany zostanie tylko znak k."
+		"message": "Wyślij prefiks ESC po naciśnięciu klawisza z przytrzymanym klawiszem meta.\n\nNa przykład, gdy ta opcja jest włączona, naciśnięcie Meta+K spowoduje wysłanie ^[k (jakby naciśnięto Escape, a następnie k). Gdy jest wyłączona, wysłany zostanie tylko znak k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Przycisk myszy używany do wklejania. Opcja null to wykrywanie automatyczne.\n\nW przypadku wykrywania automatycznego na platformach innych niż X11 (w tym w Chrome OS) używany jest środkowy przycisk myszy. Na platformach X11 używany jest prawy przycisk myszy (ponieważ natywny menedżer okien powinien używać środkowego przycisku myszy do wklejania).\n\n0 == lewy (pierwszy) przycisk.\n1 == środkowy (pomocniczy) przycisk.\n2 == prawy (drugi) przycisk.\n\nTo ustawienie jest niezależne od ustawienia wklejania prawym przyciskiem.\n\nUwaga: to ustawienie działa poprawnie z myszą używaną zarówno lewą, jak i prawą ręką."
@@ -417,7 +417,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Połącz się z zapisanym profilem lub nowym systemem ssh"
 	},
 	"open_as_window_tip": {
-		"message": "[Wskazówka] Użyj opcji „Otwórz jako okno” lub „Pełny ekran”, by skrót Ctrl-W nie zamykał terminala.\n[Wskazówka] Więcej informacji znajdziesz na $1."
+		"message": "[Wskazówka] Użyj opcji „Otwórz jako okno” lub „Pełny ekran”, by skrót Ctrl+W nie zamykał terminala.\n[Wskazówka] Więcej informacji znajdziesz na $1."
 	},
 	"options_button_label": {
 		"message": "Opcje"

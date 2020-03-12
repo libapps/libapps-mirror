@@ -153,7 +153,7 @@
 		"message": "Ali naj se oddaljenemu gostitelju dovoli prikazovanje slik v terminalu.\n\nPrivzeto je prikazan poziv, dokler ni uveljavljena izbira."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Če je to nastavljeno, razveljavi preslikavo kombinacije tipk Alt-vračalka -> DEL v sistemu OS Chrome, tako da se s kombinacijo tipk Alt-vračalka dejansko izvrši kombinacija Alt-vračalka."
+		"message": "Če je to nastavljeno, razveljavi preslikavo kombinacije tipk Alt+vračalka -> DEL v sistemu OS Chrome, tako da se s kombinacijo tipk Alt+vračalka dejansko izvrši kombinacija Alt+vračalka."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Izbira hevrističnega postopka za zaznavanje tipke AltGr.\n\n»null«: samodejno zaznavanje na podlagi parametra »navigator.language«:\n      »en-us« => »none«, drugo => »right-alt«\n»none«: onemogočanje napak, povezanih s tipko AltGr.\n»ctrl- alt«: predvidevanje, da kombinacija tipk Ctrl + Alt pomeni tipko AltGr.\n»left-alt«: predvidevanje, da leva tipka Alt pomeni tipko AltGr.\n»right-alt«: predvidevanje, da desna tipka Alt pomeni tipko AltGr."
@@ -198,13 +198,13 @@
 		"message": "Samodejno kopiranje izbora z miško v odložišče."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Kombinacija tipk Ctrl-C kopira, če je omogočeno, in pošlje gostitelju »^C«, če ni omogočeno.\nKombinacija tipk Ctrl-Shift-C pošlje gostitelju »^C«, če je omogočeno, in kopira, če ni omogočeno."
+		"message": "Kombinacija tipk Ctrl+C kopira, če je omogočeno, in pošlje gostitelju »^C«, če ni omogočeno.\nKombinacija tipk Ctrl+Shift+C pošlje gostitelju »^C«, če je omogočeno, in kopira, če ni omogočeno."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Če je omogočeno, kombinacija tipk Ctrl-Plus/Minus/0 nadzira povečavo.\nČe ni omogočeno, kombinacija tipk Ctrl-Shift-Plus/Minus/0 nadzira povečavo, kombinacija tipk Ctrl-minus pošlje »^_«, kombinacija tipk Ctrl-Plus/0 pa nima učinka."
+		"message": "Če je omogočeno, kombinacija tipk Ctrl+Plus/Minus/0 nadzira povečavo.\nČe ni omogočeno, kombinacija tipk Ctrl+Shift+Plus/Minus/0 nadzira povečavo, kombinacija tipk Ctrl+minus pošlje »^_«, kombinacija tipk Ctrl+Plus/0 pa nima učinka."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Kombinacija tipk Ctrl-V kopira, če je omogočeno, in pošlje gostitelju »^V«, če ni omogočeno.\nKombinacija tipk Ctrl-Shift-V pošlje gostitelju »^V«, če je omogočeno, in prilepi, če ni omogočeno."
+		"message": "Kombinacija tipk Ctrl+V kopira, če je omogočeno, in pošlje gostitelju »^V«, če ni omogočeno.\nKombinacija tipk Ctrl+Shift+V pošlje gostitelju »^V«, če je omogočeno, in prilepi, če ni omogočeno."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Določa, ali kazalec besedila privzeto utripa. To je mogoče preklopiti med izvajanjem z ubežnimi zaporedji terminala."
@@ -261,10 +261,10 @@
 		"message": "Določa, ali naj se med tipkanjem samodejno skrije kazalec miške. Privzeto se samodejno zazna, ali to obravnava okolje/operacijski sistem.\n\nOpomba: nekateri operacijski sistemi morda preglasijo to nastavitev, zato je morda včasih ne morete onemogočiti."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Če je omogočeno, tipki Home/End upravljata drsno vrstico terminala, kombinaciji Shift-Home/Shift-End pa sta poslani oddaljenemu gostitelju. Če je onemogočeno, sta tipki Home/End poslani oddaljenemu gostitelju, kombinaciji Shift-Home/Shift-End pa upravljata drsenje."
+		"message": "Če je omogočeno, tipki Home/End upravljata drsno vrstico terminala, kombinaciji Shift+Home/Shift+End pa sta poslani oddaljenemu gostitelju. Če je onemogočeno, sta tipki Home/End poslani oddaljenemu gostitelju, kombinaciji Shift+Home/Shift+End pa upravljata drsenje."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Preslikava zaporedij tipk na dejanja tipk. Zaporedja tipk vključujejo nič ali več modifikatorskih tipk in kodo tipke. Kode tipk so lahko desetiške ali šestnajstiške številke oziroma identifikator tipke. Dejanja tipk so lahko določena kot niz, ki se pošlje gostitelju, ali identifikator dejanja. Celotno pojasnilo oblike zapisa je na voljo tukaj: https://goo.gl/LWRndr.\n\nPrimer povezav tipk:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "Preslikava zaporedij tipk na dejanja tipk. Zaporedja tipk vključujejo nič ali več modifikatorskih tipk in kodo tipke. Kode tipk so lahko desetiške ali šestnajstiške številke oziroma identifikator tipke. Dejanja tipk so lahko določena kot niz, ki se pošlje gostitelju, ali identifikator dejanja. Celotno pojasnilo oblike zapisa je na voljo tukaj: https://goo.gl/LWRndr.\n\nPrimer povezav tipk:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Če je omogočeno, pretvori predstavnostne tipke v enakovredne za Fkey. Če je onemogočeno, tipke obdela brskalnik."
@@ -279,19 +279,19 @@
 		"message": "Lepljenje ob klikih desne miškine tipke.\n\nTa možnost je neodvisna od nastavitve »mouse-paste-button«.\n\nOpomba: to pravilno obravnava miške za levičarje in za desničarje."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Če je omogočeno, tipki Page Up/Page Down upravljata drsno vrstico terminala, kombinaciji Shift-Page Up/Shift- Page Down pa sta poslani oddaljenemu gostitelju. Če je onemogočeno, sta tipki Page Up/Page Down poslani oddaljenemu gostitelju, kombinaciji Shift-Page Up/Shift-Page Down pa upravljata drsenje."
+		"message": "Če je omogočeno, tipki Page Up/Page Down upravljata drsno vrstico terminala, kombinaciji Shift+Page Up/Shift+ Page Down pa sta poslani oddaljenemu gostitelju. Če je onemogočeno, sta tipki Page Up/Page Down poslani oddaljenemu gostitelju, kombinaciji Shift+Page Up/Shift+Page Down pa upravljata drsenje."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Določa, ali naj se Alt-1..9 posreduje brskalniku.\n\nTo je priročno pri izvajanju terminala hterm na zavihku brskalnika, tako da ne izgubite Chromovih bližnjic za preklop na zavihek. Če se ne izvaja na zavihku, je te tipke bolje poslati gostitelju, da jih je mogoče uporabiti v programih vim ali emacs.\n\nČe je omogočeno, bo Alt-1..9 obdelal brskalnik. Če je onemogočeno, se Alt-1..9 pošlje gostitelju. Če je nastavljeno na nič, se uporabi samozaznavanje na podlagi vrste brskalnika in okna."
+		"message": "Določa, ali naj se Alt+1..9 posreduje brskalniku.\n\nTo je priročno pri izvajanju terminala hterm na zavihku brskalnika, tako da ne izgubite Chromovih bližnjic za preklop na zavihek. Če se ne izvaja na zavihku, je te tipke bolje poslati gostitelju, da jih je mogoče uporabiti v programih vim ali emacs.\n\nČe je omogočeno, bo Alt+1..9 obdelal brskalnik. Če je onemogočeno, se Alt+1..9 pošlje gostitelju. Če je nastavljeno na nič, se uporabi samozaznavanje na podlagi vrste brskalnika in okna."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Določa, ali naj se Ctrl-1..9 posreduje brskalniku.\n\nTo je priročno pri izvajanju terminala hterm na zavihku brskalnika, tako da ne izgubite Chromovih bližnjic za preklop na zavihek. Če se ne izvaja na zavihku, je te tipke bolje poslati gostitelju, da jih je mogoče uporabiti v programih vim ali emacs.\n\nČe je omogočeno, bo Ctrl-1..9 obdelal brskalnik. Če je onemogočeno, se Ctrl-1..9 pošlje gostitelju. Če je nastavljeno na nič, se uporabi samozaznavanje na podlagi vrste brskalnika in okna."
+		"message": "Določa, ali naj se Ctrl+1..9 posreduje brskalniku.\n\nTo je priročno pri izvajanju terminala hterm na zavihku brskalnika, tako da ne izgubite Chromovih bližnjic za preklop na zavihek. Če se ne izvaja na zavihku, je te tipke bolje poslati gostitelju, da jih je mogoče uporabiti v programih vim ali emacs.\n\nČe je omogočeno, bo Ctrl+1..9 obdelal brskalnik. Če je onemogočeno, se Ctrl+1..9 pošlje gostitelju. Če je nastavljeno na nič, se uporabi samozaznavanje na podlagi vrste brskalnika in okna."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Določa, ali naj se Meta-1..9 posreduje brskalniku.\n\nTo je priročno pri izvajanju terminala hterm na zavihku brskalnika, tako da ne izgubite Chromovih bližnjic za preklop na zavihek. Če se ne izvaja na zavihku, je te tipke bolje poslati gostitelju, da jih je mogoče uporabiti v programih vim ali emacs.\n\nČe je omogočeno, bo Meta-1..9 obdelal brskalnik. Če je onemogočeno, se Meta-1..9 pošlje gostitelju. Če je nastavljeno na nič, se uporabi samozaznavanje na podlagi vrste brskalnika in okna."
+		"message": "Določa, ali naj se Meta+1..9 posreduje brskalniku.\n\nTo je priročno pri izvajanju terminala hterm na zavihku brskalnika, tako da ne izgubite Chromovih bližnjic za preklop na zavihek. Če se ne izvaja na zavihku, je te tipke bolje poslati gostitelju, da jih je mogoče uporabiti v programih vim ali emacs.\n\nČe je omogočeno, bo Meta+1..9 obdelal brskalnik. Če je onemogočeno, se Meta+1..9 pošlje gostitelju. Če je nastavljeno na nič, se uporabi samozaznavanje na podlagi vrste brskalnika in okna."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Določa, ali naj se Meta-V pošlje gostitelju."
+		"message": "Določa, ali naj se Meta+V pošlje gostitelju."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Nastavitev pričakovanega kodiranja podatkov, prejetih iz gostitelja.\nČe se kodiranja ne ujemajo, so verjetno zaznane vidne napake.\n\nVeljavni vrednosti sta »utf-8« in »raw«."
@@ -315,7 +315,7 @@
 		"message": "Nastavitev kodiranja za podatke, poslane gostitelju"
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Določa, ali se kombinacija Shift-Insert uporablja za lepljenje ali se pošlje oddaljenemu gostitelju."
+		"message": "Določa, ali se kombinacija Shift+Insert uporablja za lepljenje ali se pošlje oddaljenemu gostitelju."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Privzeto terminalsko kodiranje (DOCS).\n\nISO-2022 omogoča preslikave tabel znakov (npr. grafičnih tabel).\nUTF-8 onemogoča podporo zanje.\n\nZaklenjena možnost pomeni, da kodiranja med izvajanjem ni mogoče spremeniti z ubežnimi zaporedji terminala.\n\nPriporočamo uporabo UTF-8, razen če pri starejših aplikacijah opazite napačno upodabljanje."

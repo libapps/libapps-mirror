@@ -153,7 +153,7 @@
 		"message": "Uzak ana makinenin terminalde resimleri görüntülemesine izin verilip verilmeyeceğini belirler.\n\nVarsayılan olarak, seçim yapılana kadar sormaya devam ederiz."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ayarlanırsa Chrome OS Alt-Geri tuşu->DEL farklı işlev atamasını geri alır. Böylece Alt-Geri tuşu, Alt-Geri tuşu olarak kalır."
+		"message": "Ayarlanırsa Chrome OS Alt+Geri tuşu->DEL farklı işlev atamasını geri alır. Böylece Alt+Geri tuşu, Alt+Geri tuşu olarak kalır."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr sezgisel algılama seçin.\n\n'null': navigator.language ayarına dayalı olarak otomatik algılama:\n      'en-us' => 'none', else => 'right-alt'\n'none': AltGr ile alakalı değişiklikler devre dışıdır.\n'ctrl-alt': Ctrl+Alt, AltGr demektir.\n'left-alt': Sol Alt, AltGr demektir.\n'right-alt': Sağ Alt, AltGr demektir."
@@ -198,13 +198,13 @@
 		"message": "Fare seçimini otomatik olarak panoya kopyalar."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Doğru değerine ayarlanırsa Ctrl-C kopyalar, yanlış olduğunda ana makineye ^C gönderir.\nDoğru değerine ayarlanırsa Ctrl-Üst Karakter-C ana makineye ^C gönderir, yanlış olduğunda kopyalar."
+		"message": "Doğru değerine ayarlanırsa Ctrl+C kopyalar, yanlış olduğunda ana makineye ^C gönderir.\nDoğru değerine ayarlanırsa Ctrl+Üst Karakter-C ana makineye ^C gönderir, yanlış olduğunda kopyalar."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Doğru değerine ayarlanırsa Ctrl-Artı/Eksi/Sıfır yakınlaştırmayı kontrol eder.\nYanlış değerine ayarlanırsa Ctrl-Üst Karakter- Artı/Eksi/Sıfır yakınlaştırmayı kontrol eder, Ctrl-Eksi ^_ öğesini gönderir, Ctrl-Artı/Sıfır hiçbir şey yapmaz."
+		"message": "Doğru değerine ayarlanırsa Ctrl+Artı/Eksi/Sıfır yakınlaştırmayı kontrol eder.\nYanlış değerine ayarlanırsa Ctrl+Üst Karakter- Artı/Eksi/Sıfır yakınlaştırmayı kontrol eder, Ctrl+Eksi ^_ öğesini gönderir, Ctrl+Artı/Sıfır hiçbir şey yapmaz."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Doğru değerine ayarlanırsa Ctrl-V yapıştırır, yanlış olduğunda ana makineye ^V gönderir.\nDoğru değerine ayarlanırsa Ctrl-Üst Karakter-V ana makineye ^V gönderir, yanlış olduğunda yapıştırır."
+		"message": "Doğru değerine ayarlanırsa Ctrl+V yapıştırır, yanlış olduğunda ana makineye ^V gönderir.\nDoğru değerine ayarlanırsa Ctrl+Üst Karakter-V ana makineye ^V gönderir, yanlış olduğunda yapıştırır."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Metin imlecinin varsayılan olarak yanıp söneceğini veya sönmeyeceğini belirler. Bu, çalışma zamanında terminal kod dışı bırakma sıraları aracılığıyla değiştirilebilir."
@@ -264,13 +264,13 @@
 		"message": "True (Doğru) değerine ayarlanırsa Home/End denetimleri terminal kaydırma çubuğunu kontrol eder ve Üst Karakter-Home/Üst Karakter-End denetimleri uzak ana makineye gönderilir. False (Yanlış) değerine ayarlanırsa Home/End denetimleri uzak ana makineye gönderilir, Üst Karakter-Home/Üst Karakter-End denetimleri kaydırma yapar."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Tuş işlemleri için tuş sırasının bir haritası. Tuş sıraları, sıfır veya daha fazla değiştirici tuş ile ardından gelen bir tuş kodundan oluşur. Tuş kodları ondalık veya onaltılık sayılar ya da bir tuş tanımlayıcı olabilir. Tuş işlemlerine, ana makineye gönderilecek bir dize ya da işlem tanımlayıcı belirlenebilir. Biçimin tam açıklaması için https://goo.gl/LWRndr adresine bakın.\n\nÖrnek tuş ilişkilendirmeleri:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Üst Karakter-L\": \"BAŞARILI\",\n  \"Ctrl-H\": \"'MERHABA\\n'\"\n}"
+		"message": "Tuş işlemleri için tuş sırasının bir haritası. Tuş sıraları, sıfır veya daha fazla değiştirici tuş ile ardından gelen bir tuş kodundan oluşur. Tuş kodları ondalık veya onaltılık sayılar ya da bir tuş tanımlayıcı olabilir. Tuş işlemlerine, ana makineye gönderilecek bir dize ya da işlem tanımlayıcı belirlenebilir. Biçimin tam açıklaması için https://goo.gl/LWRndr adresine bakın.\n\nÖrnek tuş ilişkilendirmeleri:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Üst Karakter-L\": \"BAŞARILI\",\n  \"Ctrl+H\": \"'MERHABA\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Doğru değerine ayarlanırsa, medya tuşlarını Fkey eşdeğerlerine dönüştürür. Yanlış değerine ayarlanırsa tarayıcının tuşları ele almasına izin verir."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Meta tuşunu basılı tutarken bir tuşa bastığınızda bir ESC öneki gönderir.\n\nÖrneğin, tercih etkinleştirildiğinde Meta-K tuşlarına basılması, Escape'in ardından k tuşuna basmışsınız gibi ^[k değerini gönderir. Devre dışı bırakıldığında yalnızca k gönderilir."
+		"message": "Meta tuşunu basılı tutarken bir tuşa bastığınızda bir ESC öneki gönderir.\n\nÖrneğin, tercih etkinleştirildiğinde Meta+K tuşlarına basılması, Escape'in ardından k tuşuna basmışsınız gibi ^[k değerini gönderir. Devre dışı bırakıldığında yalnızca k gönderilir."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Fare ile yapıştırma düğmesi. Boş değerine ayarlanırsa otomatik olarak algılanır.\n\nOtomatik algılama için, X11 dışındaki platformlarda (Chrome OS de dahil olmak üzere) orta fare düğmesini kullanacağız. X11'de sağ fare tuşunu kullanacağız (yerel pencere yöneticisi, orta fare tuşuyla yapıştıracağı için).\n\n0 == sol (birincil) düğme.\n1 == orta (yardımcı) düğme.\n2 == sağ (ikincil) düğme.\n\nBu seçenek \"sağ tıklayıp yapıştırma\" ayarından bağımsızdır.\n\nNot: Bu, sol ve sağ elli kullanım için ayarlanmış farelerde doğru şekilde kullanılacaktır."
@@ -282,16 +282,16 @@
 		"message": "True (Doğru) değerine ayarlanırsa Page Up/Page Down denetimleri terminal araç çubuğunu kontrol eder, Üst Karakter-Page Up/Üst Karakter-Page Down denetimleri uzak ana makineye gönderilir. False (Yanlış) değerine ayarlanırsa Page Up/Page Down denetimleri uzak ana makineye gönderilir, Üst Karakter-Page Up/Üst Karakter-Page Down denetimleri kaydırma yapar."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Alt-1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye hızlandırıcılarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nDoğru değerine ayarlanırsa, Alt-1..9 tarayıcı tarafından ele alınır. Yanlış değerine ayarlanırsa, Alt-1..9 ana makineye gönderilir. Boş değerine ayarlanırsa, tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
+		"message": "Alt+1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye hızlandırıcılarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nDoğru değerine ayarlanırsa, Alt+1..9 tarayıcı tarafından ele alınır. Yanlış değerine ayarlanırsa, Alt+1..9 ana makineye gönderilir. Boş değerine ayarlanırsa, tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Ctrl-1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye hızlandırıcılarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nDoğru değerine ayarlanırsa, Ctrl-1..9 tarayıcı tarafından ele alınır. Yanlış değerine ayarlanırsa, Ctrl-1..9 ana makineye gönderilir. Boş değerine ayarlanırsa, tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
+		"message": "Ctrl+1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye hızlandırıcılarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nDoğru değerine ayarlanırsa, Ctrl+1..9 tarayıcı tarafından ele alınır. Yanlış değerine ayarlanırsa, Ctrl+1..9 ana makineye gönderilir. Boş değerine ayarlanırsa, tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Meta-1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye hızlandırıcılarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nDoğru değerine ayarlanırsa, Meta-1..9 tarayıcı tarafından ele alınır. Yanlış değerine ayarlanırsa, Meta-1..9 ana makineye gönderilir. Boş değerine ayarlanırsa, tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
+		"message": "Meta+1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye hızlandırıcılarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nDoğru değerine ayarlanırsa, Meta+1..9 tarayıcı tarafından ele alınır. Yanlış değerine ayarlanırsa, Meta+1..9 ana makineye gönderilir. Boş değerine ayarlanırsa, tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Meta-V'nin ana makineye aktarılıp aktarılmayacağı."
+		"message": "Meta+V'nin ana makineye aktarılıp aktarılmayacağı."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Ana makineden alınan veriler için beklenen kodlamayı belirler.\nKodlamalar eşleşmezse görsel hataların gözlemlenme olasılığı artar.\n\nGeçerli değerler \"utf-8\" ve \"raw\" değerleridir."
@@ -417,7 +417,7 @@
 		"message": "<url><match>kullanıcı@anamakineadı[:bağlantinoktasi]</match></url> Kayıtlı bir profile veya yeni bir ssh sistemine bağlan"
 	},
 	"open_as_window_tip": {
-		"message": "[Uzmandan İpucu] Ctrl-W tuşlarının terminalinizi kapatmasını önlemek için \"Pencere Olarak Aç\" veya \"Tam ekran\" seçeneğini kullanın!\n[Uzmandan İpucu] Daha fazla bilgi için $1 adresine bakın."
+		"message": "[Uzmandan İpucu] Ctrl+W tuşlarının terminalinizi kapatmasını önlemek için \"Pencere Olarak Aç\" veya \"Tam ekran\" seçeneğini kullanın!\n[Uzmandan İpucu] Daha fazla bilgi için $1 adresine bakın."
 	},
 	"options_button_label": {
 		"message": "Seçenekler"
@@ -480,7 +480,7 @@
 		"message": "Bağlantıları açmak için, tıklarken Ctrl tuşunu (macOS'de Cmd tuşu) basılı tutabilirsiniz!"
 	},
 	"tip_10": {
-		"message": "Bir pencerede çalışırken, Ctrl-ÜstKrkt-N tuşlarını kullanarak başka bir oturum açabilirsiniz."
+		"message": "Bir pencerede çalışırken, Ctrl+ÜstKrkt-N tuşlarını kullanarak başka bir oturum açabilirsiniz."
 	},
 	"tip_11": {
 		"message": "Tuşları/kısayolları yeniden birleştirebilirsiniz: https://goo.gl/LWRndr"

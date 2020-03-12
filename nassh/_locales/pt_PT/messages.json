@@ -153,7 +153,7 @@
 		"message": "Se permite que o anfitrião remoto apresente imagens no terminal.\n\nPor predefinição, perguntamos até escolher uma opção."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Se esta opção estiver definida, anula o remapeamento de Alt-retrocesso->DEL no Chrome OS para que Alt-retrocesso seja mesmo Alt-retrocesso."
+		"message": "Se esta opção estiver definida, anula o remapeamento de Alt+retrocesso->DEL no Chrome OS para que Alt+retrocesso seja mesmo Alt+retrocesso."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Selecione um algoritmo de deteção de AltGr.\n\n'null': detetar automaticamente com base em navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': desativar qualquer \"munging\" relacionado com AltGr.\n'ctrl-alt': assumir que Ctrl+Alt significa AltGr.\n'left-alt': assumir que Alt da esquerda significa AltGr.\n'right-alt': assumir que Alt da direita significa AltGr."
@@ -198,13 +198,13 @@
 		"message": "Copie automaticamente a seleção do rato para a área de transferência."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl-C copia, se for verdadeiro, e envia ^C para o anfitrião, se for falso.\nCtrl-Shift-C envia ^C para o anfitrião, se for verdadeiro, e copia, se for falso."
+		"message": "Ctrl+C copia, se for verdadeiro, e envia ^C para o anfitrião, se for falso.\nCtrl+Shift+C envia ^C para o anfitrião, se for verdadeiro, e copia, se for falso."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Se for verdadeiro, Ctrl-Sinal de adição/Menos/Zero controla o zoom.\nSe for falso, Ctrl-Shift-Sinal de adição/Menos/Zero controla o zoom, Ctrl-Menos envia ^_, Ctrl-Sinal de adição/Zero não faz nada."
+		"message": "Se for verdadeiro, Ctrl+Sinal de adição/Menos/Zero controla o zoom.\nSe for falso, Ctrl+Shift+Sinal de adição/Menos/Zero controla o zoom, Ctrl+Menos envia ^_, Ctrl+Sinal de adição/Zero não faz nada."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl-V cola, se for verdadeiro, e envia ^V para o anfitrião, se for falso.\nCtrl-Shift-V envia ^V para o anfitrião, se for verdadeiro, e cola, se for falso."
+		"message": "Ctrl+V cola, se for verdadeiro, e envia ^V para o anfitrião, se for falso.\nCtrl+Shift+V envia ^V para o anfitrião, se for verdadeiro, e cola, se for falso."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Se o cursor de texto fica intermitente por predefinição. É possível ativar/desativar esta definição no tempo de execução através de sequências de escape do terminal."
@@ -261,16 +261,16 @@
 		"message": "Se pretender ocultar automaticamente o cursor do rato ao digitar. Por predefinição, detetar automaticamente se a plataforma/o SO processa isto.\n\nNota: alguns sistemas operativos podem substituir esta definição, pelo que nem sempre a poderá desativar."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Se definido como verdadeiro, as teclas Home/End controlam a barra de deslocamento do terminal e o comando Shift-Home/End é enviado para o anfitrião remoto. Se definido como falso, as teclas Home/End são enviadas para o anfitrião remoto e o comando Shift-Home/End efetua o deslocamento."
+		"message": "Se definido como verdadeiro, as teclas Home/End controlam a barra de deslocamento do terminal e o comando Shift+Home/End é enviado para o anfitrião remoto. Se definido como falso, as teclas Home/End são enviadas para o anfitrião remoto e o comando Shift+Home/End efetua o deslocamento."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Um mapa da sequência de teclas para as ações das teclas. As sequências de teclas incluem zero ou mais teclas de modificação seguidas de um código de teclas. Os códigos de teclas podem ser números decimais ou hexadecimais, ou um identificador de teclas. As ações das teclas podem ser especificadas por uma string a enviar ao anfitrião ou um identificador de ações. Para obter uma explicação completa do formato, aceda a https://goo.gl/LWRndr.\n\n\n\nExemplos de associações de teclas:\n:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "Um mapa da sequência de teclas para as ações das teclas. As sequências de teclas incluem zero ou mais teclas de modificação seguidas de um código de teclas. Os códigos de teclas podem ser números decimais ou hexadecimais, ou um identificador de teclas. As ações das teclas podem ser especificadas por uma string a enviar ao anfitrião ou um identificador de ações. Para obter uma explicação completa do formato, aceda a https://goo.gl/LWRndr.\n\n\n\nExemplos de associações de teclas:\n:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Se for definida como verdadeira, deve converter as teclas multimédia nas respetivas teclas F equivalentes. Se for definida como falsa, permita que o navegador processe as teclas."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Envie um prefixo ESC ao premir uma tecla enquanto mantém premida a tecla Meta.\n\nPor exemplo, se estiver ativado, premir Meta-K envia ^[k como se tivesse digitado Escape, seguido de k. Se estiver desativado, apenas k é enviado."
+		"message": "Envie um prefixo ESC ao premir uma tecla enquanto mantém premida a tecla Meta.\n\nPor exemplo, se estiver ativado, premir Meta+K envia ^[k como se tivesse digitado Escape, seguido de k. Se estiver desativado, apenas k é enviado."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Botão para colar do rato ou definição nula para a deteção automática.\n\nPara a deteção automática, vamos utilizar o botão do meio do rato para outras plataformas que não o X11 (incluindo o Chrome OS). No X11, vamos utilizar o botão direito do rato (uma vez que o gestor de janela nativo deverá utilizar o botão do meio do rato para colar).\n\n0 == botão esquerdo (principal).\n1 == botão do meio (auxiliar).\n2 == botão direito (secundário).\n\nEsta opção é independente da definição para colar ao clicar no botão direito.\n\nNota: esta opção processa corretamente os ratos para utilizadores canhotos e destros."
@@ -279,19 +279,19 @@
 		"message": "Colar ao clicar no botão do lado direito do rato.\n\nEsta opção é independente da definição para colar ao clicar no botão direito.\n\nNota: esta opção processa corretamente os ratos para utilizadores canhotos e destros."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Se definido como verdadeiro, as teclas Page Up/Page Down controlam a barra de deslocamento do terminal e o comando Shift-Page Up/Shift-Page Down é enviado para o anfitrião remoto. Se definido como falso, as teclas Page Up/Page Down são enviadas para o anfitrião remoto e o comando Shift-Page Up/Shift-Page Down efetua o deslocamento."
+		"message": "Se definido como verdadeiro, as teclas Page Up/Page Down controlam a barra de deslocamento do terminal e o comando Shift+Page Up/Shift+Page Down é enviado para o anfitrião remoto. Se definido como falso, as teclas Page Up/Page Down são enviadas para o anfitrião remoto e o comando Shift+Page Up/Shift+Page Down efetua o deslocamento."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Se devemos atribuir o comando Alt-1 a 9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os aceleradores do teclado \"mudar para o separador\" do Chrome. Quando não estiver a executar num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou no Emacs.\n\nSe for definida como verdadeira, o comando Alt-1 a 9 é processado pelo navegador. Se for definida como falsa, o comando é enviado ao anfitrião. Se for definida como nula, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
+		"message": "Se devemos atribuir o comando Alt+1 a 9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os aceleradores do teclado \"mudar para o separador\" do Chrome. Quando não estiver a executar num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou no Emacs.\n\nSe for definida como verdadeira, o comando Alt+1 a 9 é processado pelo navegador. Se for definida como falsa, o comando é enviado ao anfitrião. Se for definida como nula, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Se devemos atribuir o comando Ctrl-1 a 9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os aceleradores do teclado \"mudar para o separador\" do Chrome. Quando não estiver a ser executada num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou no Emacs.\n\nSe for definida como verdadeira, o comando Ctrl-1 a 9 é processado pelo navegador. Se for definida como falsa, o comando é enviado ao anfitrião. Se for definida como nula, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
+		"message": "Se devemos atribuir o comando Ctrl+1 a 9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os aceleradores do teclado \"mudar para o separador\" do Chrome. Quando não estiver a ser executada num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou no Emacs.\n\nSe for definida como verdadeira, o comando Ctrl+1 a 9 é processado pelo navegador. Se for definida como falsa, o comando é enviado ao anfitrião. Se for definida como nula, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Se devemos atribuir o comando Meta-1 a 9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os aceleradores do teclado \"mudar para o separador\" do Chrome. Quando não estiver a executar num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou no Emacs.\n\nSe for definida como verdadeira, o comando Meta-1 a 9 é processado pelo navegador. Se for definida como falsa, o comando é enviado ao anfitrião. Se for definida como nula, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
+		"message": "Se devemos atribuir o comando Meta+1 a 9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os aceleradores do teclado \"mudar para o separador\" do Chrome. Quando não estiver a executar num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou no Emacs.\n\nSe for definida como verdadeira, o comando Meta+1 a 9 é processado pelo navegador. Se for definida como falsa, o comando é enviado ao anfitrião. Se for definida como nula, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Se o comando Meta-V é atribuído ao anfitrião."
+		"message": "Se o comando Meta+V é atribuído ao anfitrião."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Definir a codificação esperada para os dados recebidos do anfitrião.\nSe as codificações não corresponderem, é provável que sejam observados erros visuais.\n\nOs valores válidos são \"utf-8\" e \"raw\"."
@@ -315,7 +315,7 @@
 		"message": "Definir a codificação para os dados enviados ao anfitrião."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Se o comando Shift-Insert é utilizado para colar ou é enviado para o anfitrião remoto."
+		"message": "Se o comando Shift+Insert é utilizado para colar ou é enviado para o anfitrião remoto."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "A codificação do terminal predefinida (DOCS).\n\nA ISO-2022 ativa as traduções dos mapas de carateres (tais como mapas de gráficos).\nA UTF-8 desativa o suporte para as mesmas.\n\nA variante de bloqueio significa que não é possível alterar a codificação no tempo de execução através de sequências de escape do terminal.\n\nDeve utilizar a UTF-8, a menos que se depare com uma renderização danificada das aplicações antigas."
@@ -480,7 +480,7 @@
 		"message": "Pode premir sem soltar Ctrl (Cmd no macOS) enquanto clica nos links para os abrir."
 	},
 	"tip_10": {
-		"message": "Quando estiver em execução numa janela, premir Ctrl-Shift-N pode abrir outra sessão."
+		"message": "Quando estiver em execução numa janela, premir Ctrl+Shift+N pode abrir outra sessão."
 	},
 	"tip_11": {
 		"message": "Pode voltar a vincular teclas/atalhos: https://goo.gl/LWRndr"

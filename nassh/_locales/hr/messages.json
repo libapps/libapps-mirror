@@ -264,7 +264,7 @@
 		"message": "Ako se postavi na True, tipke Home/End kontroliraju klizač terminala, a Shift – Home/End šalju se udaljenom hostu. Ako se postavi na False, onda se Home/End šalju udaljenom hostu, a Shift – Home/End služi za pomicanje."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Karta sljedova tipki za radnje tipki. Sljedovi tipki uključuju nula ili više modifikatorskih tipki iza kojih slijedi kôd tipke. Kodovi tipki mogu biti decimalni ili heksadecimalni brojevi, odnosno identifikator tipke. Radnje tipki mogu se odrediti kao niz koji se šalje hostu ili kao identifikator radnje. Potpuno objašnjenje formata dostupno je na https://goo.gl/LWRndr.\n\nPrimjeri povezivanja tipki:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "Karta sljedova tipki za radnje tipki. Sljedovi tipki uključuju nula ili više modifikatorskih tipki iza kojih slijedi kôd tipke. Kodovi tipki mogu biti decimalni ili heksadecimalni brojevi, odnosno identifikator tipke. Radnje tipki mogu se odrediti kao niz koji se šalje hostu ili kao identifikator radnje. Potpuno objašnjenje formata dostupno je na https://goo.gl/LWRndr.\n\nPrimjeri povezivanja tipki:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ako je vrijednost \"točno\", medijske tipke pretvaraju se u svoje odgovarajuće funkcijske tipke. Ako je \"netočno\", tipke obrađuje preglednik."
@@ -282,16 +282,16 @@
 		"message": "Ako se postavi na True, tipke Page Up/Page Down kontroliraju klizač terminala, a Shift – Page Up/Page Down šalju se udaljenom hostu. Ako se postavi na False, onda se Page Up/Page Down šalju udaljenom hostu, a Shift – Page Up/Page Down služi za pomicanje."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Određuje hoće li se \"Alt-1..9\" prosljeđivati pregledniku.\n\nTo je praktično kada se hterm izvodi na kartici preglednika, tako da se ne izgube Chromeovi prečaci za prebacivanje na karticu. Kada se ne izvodi na kartici, bolje je te tipke slati hostu kako bi se mogle upotrebljavati u Vimu ili Emacsu.\n\nAko je vrijednost True, \"Alt-1..9\" obrađuje preglednik. Ako je False, \"Alt-1..9\" šalje se hostu. Ako nije postavljeno, otkrivanje je automatsko na temelju platforme preglednika i vrste prozora."
+		"message": "Određuje hoće li se \"Alt+1..9\" prosljeđivati pregledniku.\n\nTo je praktično kada se hterm izvodi na kartici preglednika, tako da se ne izgube Chromeovi prečaci za prebacivanje na karticu. Kada se ne izvodi na kartici, bolje je te tipke slati hostu kako bi se mogle upotrebljavati u Vimu ili Emacsu.\n\nAko je vrijednost True, \"Alt+1..9\" obrađuje preglednik. Ako je False, \"Alt+1..9\" šalje se hostu. Ako nije postavljeno, otkrivanje je automatsko na temelju platforme preglednika i vrste prozora."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Određuje hoće li se \"Ctrl-1..9\" prosljeđivati pregledniku.\n\nTo je praktično kada se hterm izvodi na kartici preglednika, tako da se ne izgube Chromeovi prečaci za prebacivanje na karticu. Kada se ne izvodi na kartici, bolje je te tipke slati hostu kako bi se mogle upotrebljavati u Vimu ili Emacsu.\n\nAko je vrijednost True, \"Ctrl-1..9\" obrađuje preglednik. Ako je False, \"Ctrl-1..9\" šalje se hostu. Ako nije postavljeno, otkrivanje je automatsko na temelju platforme preglednika i vrste prozora."
+		"message": "Određuje hoće li se \"Ctrl+1..9\" prosljeđivati pregledniku.\n\nTo je praktično kada se hterm izvodi na kartici preglednika, tako da se ne izgube Chromeovi prečaci za prebacivanje na karticu. Kada se ne izvodi na kartici, bolje je te tipke slati hostu kako bi se mogle upotrebljavati u Vimu ili Emacsu.\n\nAko je vrijednost True, \"Ctrl+1..9\" obrađuje preglednik. Ako je False, \"Ctrl+1..9\" šalje se hostu. Ako nije postavljeno, otkrivanje je automatsko na temelju platforme preglednika i vrste prozora."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Određuje treba li se \"Meta-1..9\" prosljeđivati pregledniku.\n\nTo je praktično kada se hterm izvodi na kartici preglednika, tako da se ne izgube Chromeovi prečaci za prebacivanje na karticu. Kada se ne izvodi na kartici, bolje je te tipke slati hostu kako bi se mogle upotrebljavati u Vimu ili Emacsu.\n\nAko je vrijednost True, \"Meta-1..9\" obrađuje preglednik. Ako je False, \"Meta-1..9\" šalje se hostu. Ako nije postavljeno, otkrivanje je automatsko na temelju platforme preglednika i vrste prozora."
+		"message": "Određuje treba li se \"Meta+1..9\" prosljeđivati pregledniku.\n\nTo je praktično kada se hterm izvodi na kartici preglednika, tako da se ne izgube Chromeovi prečaci za prebacivanje na karticu. Kada se ne izvodi na kartici, bolje je te tipke slati hostu kako bi se mogle upotrebljavati u Vimu ili Emacsu.\n\nAko je vrijednost True, \"Meta+1..9\" obrađuje preglednik. Ako je False, \"Meta+1..9\" šalje se hostu. Ako nije postavljeno, otkrivanje je automatsko na temelju platforme preglednika i vrste prozora."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Određuje hoće li se \"Meta-V\" prosljeđivati hostu."
+		"message": "Određuje hoće li se \"Meta+V\" prosljeđivati hostu."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Određuje očekivano kodiranje za podatke primljene s hosta.\nAko se kodiranja ne podudaraju, vjerojatno će biti vidljive vizualne pogreške.\n\nVažeće se vrijednosti \"utf-8\" i \"raw\"."
@@ -417,7 +417,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Povežite se sa spremljenim profilom ili novim SSH sustavom"
 	},
 	"open_as_window_tip": {
-		"message": "[Profesionalni savjet] Upotrijebite \"Otvori kao prozor\" ili \"Cijeli zaslon\" da biste spriječili zatvaranje terminala prečacem Ctrl-W.\n[Profesionalni savjet] Više informacija dostupno je na $1."
+		"message": "[Profesionalni savjet] Upotrijebite \"Otvori kao prozor\" ili \"Cijeli zaslon\" da biste spriječili zatvaranje terminala prečacem Ctrl+W.\n[Profesionalni savjet] Više informacija dostupno je na $1."
 	},
 	"options_button_label": {
 		"message": "Opcije"

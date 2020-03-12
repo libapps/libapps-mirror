@@ -153,7 +153,7 @@
 		"message": "Xem có cho phép máy chủ từ xa hiển thị hình ảnh trong thiết bị đầu cuối hay không.\n\nTheo mặc định, chúng tôi sẽ nhắc cho đến khi bạn lựa chọn."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Nếu đã đặt, hãy hoàn tác Chrome OS Alt-Backspace về DEL remap, để Alt-Backspace cũng chính là Alt-Backspace."
+		"message": "Nếu đã đặt, hãy hoàn tác Chrome OS Alt+Backspace về DEL remap, để Alt+Backspace cũng chính là Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Chọn phương pháp phỏng đoán phát hiện AltGr.\n\n'null': Tự động phát hiện dựa trên navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Tắt bất kỳ thay đổi định dạng nào có liên quan đến AltGr.\n'ctrl-alt': Giả sử Ctrl+Alt có nghĩa là AltGr.\n'left-alt': Giả sử phím Alt bên trái có nghĩa là AltGr.\n'right-alt': Giả sử phím Alt bên phải có nghĩa là AltGr."
@@ -198,13 +198,13 @@
 		"message": "Tự động sao chép vùng chọn bằng chuột vào khay nhớ tạm."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Tổ hợp phím Ctrl-C sẽ sao chép nếu giá trị là true, sẽ gửi ^C đến máy chủ nếu giá trị là false.\nTổ hợp phím Ctrl-Shift-C sẽ gửi ^C đến máy chủ nếu giá trị là true, sẽ sao chép nếu giá trị là false."
+		"message": "Tổ hợp phím Ctrl+C sẽ sao chép nếu giá trị là true, sẽ gửi ^C đến máy chủ nếu giá trị là false.\nTổ hợp phím Ctrl+Shift+C sẽ gửi ^C đến máy chủ nếu giá trị là true, sẽ sao chép nếu giá trị là false."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Nếu là true, tổ hợp phím Ctrl-+/-/0 sẽ điều khiển thao tác thu phóng.\nNếu là false, tổ hợp phím Ctrl-Shift-+/-/0 sẽ điều khiển thao tác thu phóng, tổ hợp phím Ctrl-- sẽ gửi ^_, tổ hợp phím Ctrl-+/0 sẽ không thực hiện thao tác nào."
+		"message": "Nếu là true, tổ hợp phím Ctrl++/-/0 sẽ điều khiển thao tác thu phóng.\nNếu là false, tổ hợp phím Ctrl+Shift++/-/0 sẽ điều khiển thao tác thu phóng, tổ hợp phím Ctrl+- sẽ gửi ^_, tổ hợp phím Ctrl++/0 sẽ không thực hiện thao tác nào."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Tổ hợp phím Ctrl-V sẽ dán nếu là true, sẽ gửi ^V đến máy chủ nếu là false.\nTổ hợp phím Ctrl-Shift-V sẽ gửi ^V đến máy chủ nếu là true, sẽ dán nếu là false."
+		"message": "Tổ hợp phím Ctrl+V sẽ dán nếu là true, sẽ gửi ^V đến máy chủ nếu là false.\nTổ hợp phím Ctrl+Shift+V sẽ gửi ^V đến máy chủ nếu là true, sẽ dán nếu là false."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Xem con trỏ văn bản có nhấp nháy theo mặc định hay không. Bạn có thể bật/tắt tùy chọn này vào thời điểm chạy thông qua chuỗi ký tự thoát của thiết bị đầu cuối."
@@ -261,16 +261,16 @@
 		"message": "Xác định xem có tự động ẩn con trỏ chuột khi nhập không. Theo mặc định, hãy tự động phát hiện xem nền tảng/hệ điều hành có xử lý tùy chọn này hay không.\n\nLưu ý: Một số hệ điều hành có thể ghi đè tùy chọn cài đặt này nên không phải lúc nào bạn cũng tắt được tùy chọn đó."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Nếu đặt là true, thì phím Home/End sẽ điều khiển thanh cuộn của thiết bị đầu cuối và tổ hợp phím Shift-Home/Shift-End sẽ được gửi đến máy chủ từ xa. Nếu đặt là false, thì phím Home/End sẽ được gửi đến máy chủ từ xa và tổ hợp phím Shift-Home/Shift-End sẽ cuộn."
+		"message": "Nếu đặt là true, thì phím Home/End sẽ điều khiển thanh cuộn của thiết bị đầu cuối và tổ hợp phím Shift+Home/Shift+End sẽ được gửi đến máy chủ từ xa. Nếu đặt là false, thì phím Home/End sẽ được gửi đến máy chủ từ xa và tổ hợp phím Shift+Home/Shift+End sẽ cuộn."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Một sơ đồ chuỗi phím cho các thao tác do phím thực hiện. Chuỗi phím không bao gồm hoặc bao gồm nhiều phím bổ trợ, theo sau là một mã phím. Các mã phím có thể là số thập phân hoặc thập lục phân hoặc một giá trị nhận dạng phím. Các thao tác do phím thực hiện có thể là một chuỗi được chỉ định để gửi đến máy chủ hoặc là một giá trị nhận dạng thao tác. Để xem thông tin giải thích đầy đủ về định dạng, hãy truy cập vào https://goo.gl/LWRndr.\n\nCác liên kết phím mẫu:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "Một sơ đồ chuỗi phím cho các thao tác do phím thực hiện. Chuỗi phím không bao gồm hoặc bao gồm nhiều phím bổ trợ, theo sau là một mã phím. Các mã phím có thể là số thập phân hoặc thập lục phân hoặc một giá trị nhận dạng phím. Các thao tác do phím thực hiện có thể là một chuỗi được chỉ định để gửi đến máy chủ hoặc là một giá trị nhận dạng thao tác. Để xem thông tin giải thích đầy đủ về định dạng, hãy truy cập vào https://goo.gl/LWRndr.\n\nCác liên kết phím mẫu:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Nếu true, chuyển đổi các phím phương tiện thành các phím chức năng tương đương. Nếu false, để trình duyệt xử lý các phím."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Gửi tiền tố ESC khi nhấn phím trong khi giữ phím Meta.\n\nChẳng hạn, khi bật, thao tác nhấn phím Meta-K sẽ gửi ^[k như thể bạn đã nhập phím Escape rồi đến phím k. Khi tắt, chỉ gửi k."
+		"message": "Gửi tiền tố ESC khi nhấn phím trong khi giữ phím Meta.\n\nChẳng hạn, khi bật, thao tác nhấn phím Meta+K sẽ gửi ^[k như thể bạn đã nhập phím Escape rồi đến phím k. Khi tắt, chỉ gửi k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Nút dán của chuột hoặc giá trị rỗng để tự động phát hiện.\n\nĐể tự động phát hiện, chúng tôi sẽ sử dụng nút chuột giữa cho các nền tảng không phải nền tảng X11 (bao gồm cả Chrome OS). Trên nền tảng X11, chúng tôi sẽ sử dụng nút chuột phải (vì trình quản lý cửa sổ gốc sẽ dán bằng nút chuột giữa).\n\n0 == nút trái (chính).\n1 == nút giữa (bổ trợ).\n2 == nút phải (phụ).\n\nTùy chọn này không phụ thuộc vào mục cài đặt cho thao tác dán bằng cách nhấp chuột phải.\n\nLưu ý: Tùy chọn này sẽ xử lý chuột trái và phải một cách chính xác."
@@ -279,19 +279,19 @@
 		"message": "Dán bằng các lần nhấp vào nút chuột phải.\n\nTùy chọn này không phụ thuộc vào tùy chọn cài đặt \"nút dán bằng chuột\".\n\nLưu ý: Tùy chọn này sẽ xử lý chuột trái và phải chính xác."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Nếu là đúng, thì phím Page Up/Page Down sẽ điều khiển thanh cuộn của thiết bị đầu cuối và sẽ gửi tổ hợp phím Shift-Page Up/Shift-Page Down đến máy chủ từ xa. Nếu là sai, thì sẽ gửi phím Page Up/Page Down đến máy chủ từ xa và tổ hợp phím Shift-Page Up/Shift-Page Down sẽ cuộn."
+		"message": "Nếu là đúng, thì phím Page Up/Page Down sẽ điều khiển thanh cuộn của thiết bị đầu cuối và sẽ gửi tổ hợp phím Shift+Page Up/Shift+Page Down đến máy chủ từ xa. Nếu là sai, thì sẽ gửi phím Page Up/Page Down đến máy chủ từ xa và tổ hợp phím Shift+Page Up/Shift+Page Down sẽ cuộn."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Xác định xem có chuyển tổ hợp phím Alt-1..9 sang trình duyệt này hay không.\n\nCài đặt này hữu ích khi chạy hterm trong tab trình duyệt, nhờ đó bạn sẽ không mất các trình tăng tốc bàn phím \"chuyển tab\" của Chrome. Khi không chạy trong tab, bạn nên gửi các phím này tới máy chủ để có thể dùng trong vim hoặc emacs.\n\nNếu là đúng, thì tổ hợp phím Alt-1..9 sẽ do trình duyệt xử lý. Nếu là sai, thì sẽ gửi tổ hợp phím Alt-1..9 đến máy chủ. Nếu là rỗng thì sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
+		"message": "Xác định xem có chuyển tổ hợp phím Alt+1..9 sang trình duyệt này hay không.\n\nCài đặt này hữu ích khi chạy hterm trong tab trình duyệt, nhờ đó bạn sẽ không mất các trình tăng tốc bàn phím \"chuyển tab\" của Chrome. Khi không chạy trong tab, bạn nên gửi các phím này tới máy chủ để có thể dùng trong vim hoặc emacs.\n\nNếu là đúng, thì tổ hợp phím Alt+1..9 sẽ do trình duyệt xử lý. Nếu là sai, thì sẽ gửi tổ hợp phím Alt+1..9 đến máy chủ. Nếu là rỗng thì sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Xác định xem có chuyển tổ hợp phím Ctrl-1..9 sang trình duyệt này hay không.\n\nCài đặt này hữu ích khi chạy hterm trong tab trình duyệt, nhờ đó bạn sẽ không mất các trình tăng tốc bàn phím \"chuyển tab\" của Chrome. Khi không chạy trong tab, bạn nên gửi các phím này tới máy chủ để có thể dùng trong vim hoặc emacs.\n\nNếu là đúng, thì tổ hợp phím Ctrl-1..9 sẽ do trình duyệt xử lý. Nếu là sai, thì sẽ gửi tổ hợp phím Ctrl-1..9 đến máy chủ. Nếu là rỗng thì sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
+		"message": "Xác định xem có chuyển tổ hợp phím Ctrl+1..9 sang trình duyệt này hay không.\n\nCài đặt này hữu ích khi chạy hterm trong tab trình duyệt, nhờ đó bạn sẽ không mất các trình tăng tốc bàn phím \"chuyển tab\" của Chrome. Khi không chạy trong tab, bạn nên gửi các phím này tới máy chủ để có thể dùng trong vim hoặc emacs.\n\nNếu là đúng, thì tổ hợp phím Ctrl+1..9 sẽ do trình duyệt xử lý. Nếu là sai, thì sẽ gửi tổ hợp phím Ctrl+1..9 đến máy chủ. Nếu là rỗng thì sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Xác định xem có chuyển tổ hợp phím Meta-1..9 sang trình duyệt này hay không.\n\nCài đặt này hữu ích khi chạy hterm trong tab trình duyệt, nhờ đó bạn sẽ không mất các trình tăng tốc bàn phím \"chuyển tab\" của Chrome. Khi không chạy trong tab, bạn nên gửi các phím này tới máy chủ để có thể dùng trong vim hoặc emacs.\n\nNếu là đúng, thì tổ hợp phím Meta-1..9 sẽ do trình duyệt xử lý. Nếu là sai, thì sẽ gửi tổ hợp phím Meta-1..9 đến máy chủ. Nếu là rỗng thì sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
+		"message": "Xác định xem có chuyển tổ hợp phím Meta+1..9 sang trình duyệt này hay không.\n\nCài đặt này hữu ích khi chạy hterm trong tab trình duyệt, nhờ đó bạn sẽ không mất các trình tăng tốc bàn phím \"chuyển tab\" của Chrome. Khi không chạy trong tab, bạn nên gửi các phím này tới máy chủ để có thể dùng trong vim hoặc emacs.\n\nNếu là đúng, thì tổ hợp phím Meta+1..9 sẽ do trình duyệt xử lý. Nếu là sai, thì sẽ gửi tổ hợp phím Meta+1..9 đến máy chủ. Nếu là rỗng thì sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Xác định xem có chuyển tổ hợp phím Meta-V sang máy chủ hay không."
+		"message": "Xác định xem có chuyển tổ hợp phím Meta+V sang máy chủ hay không."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Đặt chế độ mã hóa mong muốn cho dữ liệu nhận từ máy chủ.\nNếu chế độ mã hóa không khớp, chúng ta sẽ thấy hiển thị các lỗi bằng hình ảnh.\n\nCác giá trị hợp lệ là 'utf-8' và 'raw'."
@@ -315,7 +315,7 @@
 		"message": "Thiết lập mã hóa cho dữ liệu gửi tới máy chủ."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Xác định xem có sử dụng tổ hợp phím Shift-Insert để dán hoặc gửi tổ hợp phím này đến máy chủ từ xa hay không."
+		"message": "Xác định xem có sử dụng tổ hợp phím Shift+Insert để dán hoặc gửi tổ hợp phím này đến máy chủ từ xa hay không."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Mã hóa thiết bị đầu cuối mặc định (DOCS).\n\nISO-2022 bật các bản dịch ánh xạ ký tự (chẳng hạn như các ánh xạ đồ họa).\nUTF-8 tắt hỗ trợ cho các bản dịch đó.\n\nBiến bị khóa có nghĩa là không thể thay đổi mã hóa vào thời gian chạy thông qua chuỗi ký tự thoát của thiết bị đầu cuối.\n\nBạn nên luôn sử dụng UTF-8 trừ khi nhận thấy có sự cố hiển thị với các ứng dụng cũ."
@@ -417,7 +417,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Kết nối với một hồ sơ đã lưu hoặc hệ thống SSH mới"
 	},
 	"open_as_window_tip": {
-		"message": "[Mẹo chuyên nghiệp] Hãy sử dụng 'Open as Window' (Mở dưới dạng cửa sổ) hoặc 'Fullscreen' (Toàn màn hình) để ngăn tổ hợp phím Ctrl-W đóng thiết bị đầu cuối của bạn!\n[Mẹo chuyên nghiệp] Xem $1 để biết thêm thông tin."
+		"message": "[Mẹo chuyên nghiệp] Hãy sử dụng 'Open as Window' (Mở dưới dạng cửa sổ) hoặc 'Fullscreen' (Toàn màn hình) để ngăn tổ hợp phím Ctrl+W đóng thiết bị đầu cuối của bạn!\n[Mẹo chuyên nghiệp] Xem $1 để biết thêm thông tin."
 	},
 	"options_button_label": {
 		"message": "Tùy chọn"
@@ -480,7 +480,7 @@
 		"message": "Bạn có thể giữ phím Ctrl (Cmd trên macOS) trong khi nhấp vào các liên kết để mở!"
 	},
 	"tip_10": {
-		"message": "Khi chạy trong một cửa sổ, bạn có thể nhấn tổ hợp phím Ctrl-Shift-N để mở một phiên khác."
+		"message": "Khi chạy trong một cửa sổ, bạn có thể nhấn tổ hợp phím Ctrl+Shift+N để mở một phiên khác."
 	},
 	"tip_11": {
 		"message": "Bạn có thể ràng buộc lại phím/phím tắt: https://goo.gl/LWRndr"

@@ -264,7 +264,7 @@
 		"message": "true の場合は、Home / End キーでターミナルのスクロールバーを制御し、Shift+Home / Shift+End キーをリモートホストに送信します。false の場合は、Home / End キーをリモートホストに送信し、Shift+Home / Shift+End キーでスクロールします。"
 	},
 	"hterm_pref_keybindings": {
-		"message": "キーシーケンスとキーアクションをマッピングします。キーシーケンスは、0 個以上の修飾キーと、それに続く 1 つのキーコードで構成されます。キーコードには 10 進数または 16 進数、あるいはキーの識別子を指定します。キーアクションは、ホストに送信する文字列、またはアクションの識別子として指定します。形式について詳しくは https://goo.gl/LWRndr をご覧ください。\n\nキーバインディングの例:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "キーシーケンスとキーアクションをマッピングします。キーシーケンスは、0 個以上の修飾キーと、それに続く 1 つのキーコードで構成されます。キーコードには 10 進数または 16 進数、あるいはキーの識別子を指定します。キーアクションは、ホストに送信する文字列、またはアクションの識別子として指定します。形式について詳しくは https://goo.gl/LWRndr をご覧ください。\n\nキーバインディングの例:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "true の場合、メディアキーを同等のファンクション キーに変換します。false の場合、キーはブラウザの処理に従います。"

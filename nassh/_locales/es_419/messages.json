@@ -264,7 +264,7 @@
 		"message": "Si esta preferencia se establece como \"true\", las teclas Inicio y Fin controlarán la barra de desplazamiento de la terminal; Mayúscula + Inicio o Fin se envían al host remoto. Si se establece como \"false\", las teclas Inicio y Fin se envían al host remoto; Mayúscula + Inicio o Fin controlarán el desplazamiento."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Un mapa de secuencia de teclas a acciones de teclas. Las secuencias de teclas incluyen cero o más teclas modificadoras seguidas por un código de tecla. Los códigos de tecla pueden ser números decimales o hexadecimales, o un identificador de tecla. Las acciones de tecla se pueden especificar como una string para enviar al host, o un identificador de acción. Para obtener una explicación detallada del formato, consulta https://goo.gl/LWRndr.\n\nEnlaces de teclado de muestra:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hola, mundo\"\n}"
+		"message": "Un mapa de secuencia de teclas a acciones de teclas. Las secuencias de teclas incluyen cero o más teclas modificadoras seguidas por un código de tecla. Los códigos de tecla pueden ser números decimales o hexadecimales, o un identificador de tecla. Las acciones de tecla se pueden especificar como una string para enviar al host, o un identificador de acción. Para obtener una explicación detallada del formato, consulta https://goo.gl/LWRndr.\n\nEnlaces de teclado de muestra:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hola, mundo\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Si esta preferencia se establece como verdadera, convierte las teclas de medios en su equivalente de Fkey. Si se establece como falsa, permite que el navegador administre las teclas."
@@ -282,16 +282,16 @@
 		"message": "Si esta preferencia se establece como \"true\", las teclas Inicio y Fin controlarán la barra de desplazamiento de la terminal; Mayúscula + Inicio o Fin se envían al host remoto. Si se establece como \"false\", las teclas Inicio y Fin se envían al host remoto; Mayúscula + Inicio o Fin controlarán el desplazamiento."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Establece si se envía Alt-1..9 al navegador.\n\nEsta opción es práctica cuando se ejecuta hterm en una pestaña del navegador, para que no pierdas los aceleradores del teclado de \"Cambiar a pestaña\" en Chrome. Cuando no se ejecuta en una pestaña, es mejor enviar estas teclas al host para que se puedan usar en vim o emacs.\n\nSi esta preferencia se establece como \"true\", el navegador administrará Alt-1..9. Si se establece como \"false\", se enviará Alt-1..9 al host. Si se establece como \"null\", la autodetección se basará en la plataforma del navegador y el tipo de ventana."
+		"message": "Establece si se envía Alt+1..9 al navegador.\n\nEsta opción es práctica cuando se ejecuta hterm en una pestaña del navegador, para que no pierdas los aceleradores del teclado de \"Cambiar a pestaña\" en Chrome. Cuando no se ejecuta en una pestaña, es mejor enviar estas teclas al host para que se puedan usar en vim o emacs.\n\nSi esta preferencia se establece como \"true\", el navegador administrará Alt+1..9. Si se establece como \"false\", se enviará Alt+1..9 al host. Si se establece como \"null\", la autodetección se basará en la plataforma del navegador y el tipo de ventana."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Establece si se envía Ctrl-1..9 al navegador.\n\nEsta opción es práctica cuando se ejecuta hterm en una pestaña del navegador, para que no pierdas los aceleradores del teclado de \"Cambiar a pestaña\" en Chrome. Cuando no se ejecuta en una pestaña, es mejor enviar estas teclas al host para que se puedan usar en vim o emacs.\n\nSi esta preferencia se establece como \"true\", el navegador administrará Ctrl-1..9. Si se establece como \"false\", se enviará Ctrl-1..9 al host. Si se establece como \"null\", la autodetección se basará en la plataforma del navegador y el tipo de ventana."
+		"message": "Establece si se envía Ctrl+1..9 al navegador.\n\nEsta opción es práctica cuando se ejecuta hterm en una pestaña del navegador, para que no pierdas los aceleradores del teclado de \"Cambiar a pestaña\" en Chrome. Cuando no se ejecuta en una pestaña, es mejor enviar estas teclas al host para que se puedan usar en vim o emacs.\n\nSi esta preferencia se establece como \"true\", el navegador administrará Ctrl+1..9. Si se establece como \"false\", se enviará Ctrl+1..9 al host. Si se establece como \"null\", la autodetección se basará en la plataforma del navegador y el tipo de ventana."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Establece si se envía Meta-1..9 al navegador.\n\nEsta opción es práctica cuando se ejecuta hterm en una pestaña del navegador, para que no pierdas los aceleradores del teclado de \"Cambiar a pestaña\" en Chrome. Cuando no se ejecuta en una pestaña, es mejor enviar estas teclas al host para que se puedan usar en vim o emacs.\n\nSi esta preferencia se establece como \"true\", el navegador administrará Meta-1..9. Si se establece como \"false\", se enviará Meta-1..9 al host. Si se establece como \"null\", la autodetección se basará en la plataforma del navegador y el tipo de ventana."
+		"message": "Establece si se envía Meta+1..9 al navegador.\n\nEsta opción es práctica cuando se ejecuta hterm en una pestaña del navegador, para que no pierdas los aceleradores del teclado de \"Cambiar a pestaña\" en Chrome. Cuando no se ejecuta en una pestaña, es mejor enviar estas teclas al host para que se puedan usar en vim o emacs.\n\nSi esta preferencia se establece como \"true\", el navegador administrará Meta+1..9. Si se establece como \"false\", se enviará Meta+1..9 al host. Si se establece como \"null\", la autodetección se basará en la plataforma del navegador y el tipo de ventana."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Establece si se envía Meta-V al host."
+		"message": "Establece si se envía Meta+V al host."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Establece la codificación esperada para los datos que se reciben del host.\nSi las codificaciones no coinciden, es probable que se vean errores visuales.\n\nLos valores válidos son \"utf-8\" y \"raw\"."
@@ -417,7 +417,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Conéctate a un perfil guardado o un sistema ssh nuevo"
 	},
 	"open_as_window_tip": {
-		"message": "[Consejo de experto] Usa \"Abrir como ventana\" o \"Pantalla completa\" para evitar que la combinación de teclas Ctrl-W cierre tu terminal.\n[Consejo de experto] Consulta $1 para obtener más información."
+		"message": "[Consejo de experto] Usa \"Abrir como ventana\" o \"Pantalla completa\" para evitar que la combinación de teclas Ctrl+W cierre tu terminal.\n[Consejo de experto] Consulta $1 para obtener más información."
 	},
 	"options_button_label": {
 		"message": "Opciones"
@@ -480,7 +480,7 @@
 		"message": "¡Puedes mantener presionado Ctrl (Cmd en macOS) mientras haces clic en los vínculos para abrirlos!"
 	},
 	"tip_10": {
-		"message": "Cuando se ejecuta en una ventana, Ctrl-mayúscula-N puede abrir otra sesión."
+		"message": "Cuando se ejecuta en una ventana, Ctrl+mayúscula-N puede abrir otra sesión."
 	},
 	"tip_11": {
 		"message": "Puedes reasignar las teclas o las combinaciones de teclas: https://goo.gl/LWRndr"

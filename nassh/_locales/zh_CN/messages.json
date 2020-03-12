@@ -153,7 +153,7 @@
 		"message": "是否允许远程主机在终端中显示图片。\n\n默认情况下，我们会发出提示，直到用户做出选择为止。"
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "如果您设定了此设置，系统即会撤消 Chrome 操作系统中的 Alt-退格键->DEL 这项重新映射，以确保 Alt-退格键确实就是 Alt-退格键。"
+		"message": "如果您设定了此设置，系统即会撤消 Chrome 操作系统中的 Alt+退格键->DEL 这项重新映射，以确保 Alt+退格键确实就是 Alt+退格键。"
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "选择一种 AltGr 检测试探法。\n\n'null'：根据 navigator.language 自动检测：\n      'en-us' => 'none', else => 'right-alt'\n'none'：停用任何 AltGr 相关改动。\n'ctrl-alt'：假设 Ctrl+Alt 表示 AltGr。\n'left-alt'：假设左 Alt 键表示 AltGr。\n'right-alt'：假设右 Alt 键表示 AltGr。"
@@ -198,13 +198,13 @@
 		"message": "将鼠标所选内容自动复制到剪贴板中。"
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "如果为 true，Ctrl-C 会执行复制操作；如果为 false，则会向主机传送 ^C。\n如果为 true，Ctrl-Shift-C 会向主机传送 ^C；如果为 false，则会执行复制操作。"
+		"message": "如果为 true，Ctrl+C 会执行复制操作；如果为 false，则会向主机传送 ^C。\n如果为 true，Ctrl+Shift+C 会向主机传送 ^C；如果为 false，则会执行复制操作。"
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "如果为 true，Ctrl-加号键/减号键/0 键会控制缩放。\n如果为 false，Ctrl-Shift-加号键/减号键/0 键会控制缩放，Ctrl-减号键会传送 ^_，Ctrl-加号键/0 键则不会执行任何操作。"
+		"message": "如果为 true，Ctrl+加号键/减号键/0 键会控制缩放。\n如果为 false，Ctrl+Shift+加号键/减号键/0 键会控制缩放，Ctrl+减号键会传送 ^_，Ctrl+加号键/0 键则不会执行任何操作。"
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "如果为 true，Ctrl-V 会执行粘贴操作；如果为 false，则会向主机传送 ^V。\n如果为 true，Ctrl-Shift-V 会向主机传送 ^V；如果为 false，则会执行粘贴操作。"
+		"message": "如果为 true，Ctrl+V 会执行粘贴操作；如果为 false，则会向主机传送 ^V。\n如果为 true，Ctrl+Shift+V 会向主机传送 ^V；如果为 false，则会执行粘贴操作。"
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "默认情况下，文本光标是否会闪烁。可在运行时通过终端转义序列来切换此设置。"
@@ -261,16 +261,16 @@
 		"message": "设定在输入时是否要自动隐藏鼠标光标。默认情况下，系统会自动检测平台/操作系统的处理方式。\n\n注意：某些操作系统可能会替换此设置，因此您可能无法始终停用此设置。"
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "如果设为 true，Home/End 键会控制终端滚动条，Shift-Home/Shift-End 会传送到远程主机。如果设为 false，Home/End 键会传送到远程主机，Shift-Home/Shift-End 会控制滚动。"
+		"message": "如果设为 true，Home/End 键会控制终端滚动条，Shift+Home/Shift+End 会传送到远程主机。如果设为 false，Home/End 键会传送到远程主机，Shift+Home/Shift+End 会控制滚动。"
 	},
 	"hterm_pref_keybindings": {
-		"message": "按键序列与按键操作的对应关系。按键序列包含零个或多个辅助键，后跟一个键码。键码可以是十进制或十六进制数字，也可以是按键标识符。按键操作可被指定为要向主机传送的字符串，也可被指定为操作标识符。如需获取完整的格式说明，请访问 https://goo.gl/LWRndr。\n\n按键绑定关系示例：\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World'\"\n}"
+		"message": "按键序列与按键操作的对应关系。按键序列包含零个或多个辅助键，后跟一个键码。键码可以是十进制或十六进制数字，也可以是按键标识符。按键操作可被指定为要向主机传送的字符串，也可被指定为操作标识符。如需获取完整的格式说明，请访问 https://goo.gl/LWRndr。\n\n按键绑定关系示例：\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "如果为 true，则将媒体键转换为与其对应的功能键。如果为 false，则让浏览器处理这些键。"
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "在按住 Meta 键的同时按某个键会传送 ESC 前缀。\n\n例如：启用此设置后，按 Meta-K 将会传送 ^[k，这和您依次按 Esc 键和 k 键的效果一样。停用此设置后，则会仅传送 k。"
+		"message": "在按住 Meta 键的同时按某个键会传送 ESC 前缀。\n\n例如：启用此设置后，按 Meta+K 将会传送 ^[k，这和您依次按 Esc 键和 k 键的效果一样。停用此设置后，则会仅传送 k。"
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "指定用于执行粘贴操作的鼠标按键，设为 null 时可自动检测。\n\n对于自动检测，我们将在非 X11 平台（包括 Chrome 操作系统）上使用鼠标中键。在 X11 上，我们将使用鼠标右键（因为原生窗口管理器需要通过鼠标中键执行粘贴操作）。\n\n0 == 左键（主要）。\n1 == 中键（辅助）。\n2 == 右键（次要）。\n\n此选项不受“mouse-right-click-paste”这项设置的影响。\n\n注意：此选项会正确处理左手鼠标和右手鼠标。"
@@ -279,19 +279,19 @@
 		"message": "在点击鼠标右键时执行粘贴操作。\n\n此选项不受“mouse-paste-button”这项设置的影响。\n\n注意：此选项会正确处理左手鼠标和右手鼠标。"
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "如果设为 true，PageUp/PageDown 键会控制终端滚动条，Shift-PageUp/Shift-PageDown 会传送到远程主机。如果设为 false，PageUp/PageDown 键会传送到远程主机，Shift-PageUp/Shift-PageDown 会控制滚动。"
+		"message": "如果设为 true，PageUp/PageDown 键会控制终端滚动条，Shift+PageUp/Shift+PageDown 会传送到远程主机。如果设为 false，PageUp/PageDown 键会传送到远程主机，Shift+PageUp/Shift+PageDown 会控制滚动。"
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "设定是否应将 Alt-1..9 传递给浏览器。\n\n当在浏览器标签页中运行 hterm 时，此设置非常便于确保您不会失去 Chrome 的“切换至标签页”键盘快捷键。当不在标签页中运行 hterm 时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果设为 true，Alt-1..9 将会由浏览器处理。如果设为 false，Alt-1..9 将会被传送到主机。如果设为 null，则会根据浏览器平台和窗口类型自动检测。"
+		"message": "设定是否应将 Alt+1..9 传递给浏览器。\n\n当在浏览器标签页中运行 hterm 时，此设置非常便于确保您不会失去 Chrome 的“切换至标签页”键盘快捷键。当不在标签页中运行 hterm 时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果设为 true，Alt+1..9 将会由浏览器处理。如果设为 false，Alt+1..9 将会被传送到主机。如果设为 null，则会根据浏览器平台和窗口类型自动检测。"
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "设定是否应将 Ctrl-1..9 传递给浏览器。\n\n当在浏览器标签页中运行 hterm 时，此设置非常便于确保您不会失去 Chrome 的“切换至标签页”键盘快捷键。当不在标签页中运行 hterm 时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果设为 true，Ctrl-1..9 将会由浏览器处理。如果设为 false，Ctrl-1..9 将会被传送到主机。如果设为 null，则会根据浏览器平台和窗口类型自动检测。"
+		"message": "设定是否应将 Ctrl+1..9 传递给浏览器。\n\n当在浏览器标签页中运行 hterm 时，此设置非常便于确保您不会失去 Chrome 的“切换至标签页”键盘快捷键。当不在标签页中运行 hterm 时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果设为 true，Ctrl+1..9 将会由浏览器处理。如果设为 false，Ctrl+1..9 将会被传送到主机。如果设为 null，则会根据浏览器平台和窗口类型自动检测。"
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "设定是否将 Meta-1..9 传递给浏览器。\n\n当在浏览器标签页中运行 hterm 时，此设置非常便于确保您不会失去 Chrome 的“切换至标签页”键盘快捷键。当不在标签页中运行 hterm 时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果设为 true，Meta-1..9 将会由浏览器处理。如果设为 false，Meta-1..9 将会被传送到主机。如果设为 null，则会根据浏览器平台和窗口类型自动检测。"
+		"message": "设定是否将 Meta+1..9 传递给浏览器。\n\n当在浏览器标签页中运行 hterm 时，此设置非常便于确保您不会失去 Chrome 的“切换至标签页”键盘快捷键。当不在标签页中运行 hterm 时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果设为 true，Meta+1..9 将会由浏览器处理。如果设为 false，Meta+1..9 将会被传送到主机。如果设为 null，则会根据浏览器平台和窗口类型自动检测。"
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "设定是否应将 Meta-V 传递给主机。"
+		"message": "设定是否应将 Meta+V 传递给主机。"
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "为从主机接收到的数据设定预期编码。\n如果编码不匹配，则可能会出现显而易见的错误。\n\n有效值是“utf-8”和“raw”。"
@@ -315,7 +315,7 @@
 		"message": "为向主机传送的数据设定编码。"
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "设定是将 Shift-Insert 用于执行粘贴操作还是传送到远程主机。"
+		"message": "设定是将 Shift+Insert 用于执行粘贴操作还是传送到远程主机。"
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "默认的终端编码 (DOCS)。\n\nISO-2022 会启用字符映射转换（如图形映射）。\nUTF-8 会停用对此类转换的支持。\n\n已锁定的变体表示无法在运行时通过终端转义序列更改编码。\n\n您应该坚持使用 UTF-8，除非您发现旧版应用无法顺利完成转换。"

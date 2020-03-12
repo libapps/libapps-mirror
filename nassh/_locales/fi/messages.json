@@ -153,16 +153,16 @@
 		"message": "Määritä, sallitaanko etäisännän näyttää kuvia terminaalissa.\n\nOletuksena lähetämme kehotteita, kunnes valinta tehdään."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Jos määritetty, kumoaa Chrome-käyttöjärjestelmän Alt-Askelpalautin->DEL-uudelleenmäärityksen, jolloin Alt-Askelpalautin on oikeasti Alt-Askelpalautin."
+		"message": "Jos määritetty, kumoaa Chrome-käyttöjärjestelmän Alt+Askelpalautin->DEL-uudelleenmäärityksen, jolloin Alt+Askelpalautin on oikeasti Alt+Askelpalautin."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Valitse heuristinen AltGr-tunnistus.\n\nnull: Tunnista automaattisesti navigator.language-arvon perusteella:\n      en-us => none, muut arvot => right-alt.\nnone: Poista käytöstä kaikki AltGr-muunnokset.\nctrl-alt: Oleta, että Ctrl+Alt on AltGr.\nleft-alt: Oleta, että vasen Alt on AltGr.\nright-alt: Oleta, että oikea Alt on AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Toimiiko Alt-näppäin Meta-näppäimenä vai oikeana Alt-näppäimenä"
+		"message": "Toimiiko Alt+näppäin Meta+näppäimenä vai oikeana Alt+näppäimenä"
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Määritä Alt-näppäimen käsittelytapa.\n\n  escape: Lähetä ESC-etuliite.\n  8-bit: Lisää kirjoitettuun merkkiin 128 kuten xtermissä.\n browser-key: Odota näppäinpainallusta ja tarkista selaimen vastaus. (Tämä ei toimi kunnolla käyttöympäristöissä,\n joissa selain suorittaa oletustoiminnon joidenkin Alt-näppäinyhdistelmien yhteydessä.)"
+		"message": "Määritä Alt+näppäimen käsittelytapa.\n\n  escape: Lähetä ESC-etuliite.\n  8-bit: Lisää kirjoitettuun merkkiin 128 kuten xtermissä.\n browser-key: Odota näppäinpainallusta ja tarkista selaimen vastaus. (Tämä ei toimi kunnolla käyttöympäristöissä,\n joissa selain suorittaa oletustoiminnon joidenkin Alt+näppäinyhdistelmien yhteydessä.)"
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "Terminaalin äänimerkin URL-osoite. Tyhjä merkkijono merkitsee, että kuuluvaa äänimerkkiä ei ole."
@@ -198,13 +198,13 @@
 		"message": "Kopioi hiiren valinta automaattisesti leikepöydälle."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl-C kopioi jos tosi, lähettää isännälle arvon ^C jos epätosi.\nCtrl-Vaihto-C lähettää isännälle arvon ^C jos tosi, kopioi jos epätosi."
+		"message": "Ctrl+C kopioi jos tosi, lähettää isännälle arvon ^C jos epätosi.\nCtrl+Vaihto-C lähettää isännälle arvon ^C jos tosi, kopioi jos epätosi."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Jos tosi, Ctrl-Plus/Miinus/Nolla säätää zoomausta.\nJos epätosi, Ctrl-Vaihto-Plus/Miinus/Nolla säätää zoomausta, Ctrl-Miinus lähettää arvon ^_ ja Ctrl-Plus/Nolla ei tee mitään."
+		"message": "Jos tosi, Ctrl+Plus/Miinus/Nolla säätää zoomausta.\nJos epätosi, Ctrl+Vaihto-Plus/Miinus/Nolla säätää zoomausta, Ctrl+Miinus lähettää arvon ^_ ja Ctrl+Plus/Nolla ei tee mitään."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl-V liittää jos tosi, lähettää isännälle arvon ^V jos epätosi.\nCtrl-Vaihto-V lähettää isännälle arvon ^V jos tosi, liittää jos epätosi."
+		"message": "Ctrl+V liittää jos tosi, lähettää isännälle arvon ^V jos epätosi.\nCtrl+Vaihto-V lähettää isännälle arvon ^V jos tosi, liittää jos epätosi."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Määritä, vilkkuuko tekstikentän osoitin oletuksena. Asetus voidaan vaihtaa suoritusaikana terminaalin ohjaussekvenssien avulla."
@@ -264,13 +264,13 @@
 		"message": "Jos tosi, Home- ja End-näppäimiä käytetään terminaalin vierityspalkin ohjaamiseen ja yhdistelmä Vaihto-Home tai Vaihto-End lähetetään etäisännälle. Jos epätosi, Home- ja End-näppäimet lähetetään etäisännälle ja Vaihto-Home tai Vaihto-End vierittävät."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Näppäinyhdistelmien ja niihin liittyvien näppäintoimintojen kartta. Näppäinyhdistelmä sisältää muokkausnäppäimen painalluksia (nolla tai useampia) sekä niitä seuraavan näppäinkoodin. Näppäinkoodit voivat olla desimaali- tai heksadesimaalilukuja tai näppäintunnisteita. Näppäintoiminnot voidaan määrittää isännälle lähetettäväksi merkkijonoksi tai toimintotunnisteeksi. Voit lukea kattavan esittelyn täältä: https://goo.gl/LWRndr.\n\nEsimerkkejä:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hei maailma'\"\n}"
+		"message": "Näppäinyhdistelmien ja niihin liittyvien näppäintoimintojen kartta. Näppäinyhdistelmä sisältää muokkausnäppäimen painalluksia (nolla tai useampia) sekä niitä seuraavan näppäinkoodin. Näppäinkoodit voivat olla desimaali- tai heksadesimaalilukuja tai näppäintunnisteita. Näppäintoiminnot voidaan määrittää isännälle lähetettäväksi merkkijonoksi tai toimintotunnisteeksi. Voit lukea kattavan esittelyn täältä: https://goo.gl/LWRndr.\n\nEsimerkkejä:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hei maailma'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Jos arvo on tosi, medianäppäimet muunnetaan niitä vastaaviksi F-näppäimiksi. Jos arvo on epätosi, selain käsittelee näppäimet."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Lähetä ESC-etuliite, kun näppäintä painetaan Meta-näppäimen ollessa painettuna.\n\nKun se on käytössä, esimerkiksi Meta-K-yhdistelmä lähettää ^[k-yhdistelmän, aivan kuten Esc- ja k-näppäimen painaminen. Jos pois käytöstä, lähetetään vain k."
+		"message": "Lähetä ESC-etuliite, kun näppäintä painetaan Meta+näppäimen ollessa painettuna.\n\nKun se on käytössä, esimerkiksi Meta+K-yhdistelmä lähettää ^[k-yhdistelmän, aivan kuten Esc- ja k-näppäimen painaminen. Jos pois käytöstä, lähetetään vain k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Hiiren liittämispainike. Jos arvo on tyhjä, käytetään automaattista tunnistusta.\n\nJos painike tunnistetaan automaattisesti, muissa kuin X11-käyttöympäristöissä (myös Chrome-käyttöjärjestelmässä) käytetään hiiren keskimmäistä painiketta. X11:ssä käytetään hiiren oikeaa painiketta (sillä ikkunoiden natiivin hallintatoiminnon pitäisi käyttää liittämiseen hiiren keskimmäistä painiketta).\n\n0 == vasen (ensisijainen) painike\n1 == keskimmäinen (täydentävä) painike\n2 == oikea (toissijainen) painike\n\nTämä asetus ei riipu mouse-right-click-paste-asetuksesta.\n\nHuom. Tämä asetus toimii oikein riippumatta siitä, onko hiiri vasen- vai oikeakätinen malli."
@@ -282,16 +282,16 @@
 		"message": "Jos tosi, Page Up- ja Page Down ‑näppäimiä käytetään terminaalin vierityspalkin ohjaamiseen and Vaihto-Page Up / Vaihto-Page Down ‑yhdistelmä lähetetään etäisännälle. Jos epätosi, Page Up ja Page Down ‑painallukset lähetetään etäisännälle ja Vaihto-Page Up / Vaihto-Page Down ‑yhdistelmä vierittää."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Lähetetäänkö Alt-1–9-painallukset selaimelle\n\nTästä on hyötyä htermin toimiessa selaimen välilehdellä, sillä tällöin on mahdollista jatkaa Chromen välilehtien pikanäppäinten käyttöä. Kun hterm ei toimi välilehdellä, näppäinpainallukset kannattaa lähettää isännälle, jotta niitä voidaan käyttää vim- tai emacs-toimintojen kanssa.\n\nJos arvo on tosi, selain käsittelee Alt-1–9-painallukset. Jos arvo on epätosi, Alt-1–9-painallukset lähetetään isännälle. Jos arvo on tyhjä, tunnistus suoritetaan automaattisesti selainympäristön ja ikkunatyypin mukaan."
+		"message": "Lähetetäänkö Alt+1–9-painallukset selaimelle\n\nTästä on hyötyä htermin toimiessa selaimen välilehdellä, sillä tällöin on mahdollista jatkaa Chromen välilehtien pikanäppäinten käyttöä. Kun hterm ei toimi välilehdellä, näppäinpainallukset kannattaa lähettää isännälle, jotta niitä voidaan käyttää vim- tai emacs-toimintojen kanssa.\n\nJos arvo on tosi, selain käsittelee Alt+1–9-painallukset. Jos arvo on epätosi, Alt+1–9-painallukset lähetetään isännälle. Jos arvo on tyhjä, tunnistus suoritetaan automaattisesti selainympäristön ja ikkunatyypin mukaan."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Lähetetäänkö Ctrl-1–9-painallukset selaimelle\n\nTästä on hyötyä htermin toimiessa selaimen välilehdellä, sillä tällöin on mahdollista jatkaa Chromen välilehtien pikanäppäinten käyttöä. Kun hterm ei toimi välilehdellä, näppäinpainallukset kannattaa lähettää isännälle, jotta niitä voidaan käyttää vim- tai emacs-toimintojen kanssa.\n\nJos arvo on tosi, selain käsittelee Ctrl-1–9-painallukset. Jos arvo on epätosi, Ctrl-1–9-painallukset lähetetään isännälle. Jos arvo on tyhjä, tunnistus suoritetaan automaattisesti selainympäristön ja ikkunatyypin mukaan."
+		"message": "Lähetetäänkö Ctrl+1–9-painallukset selaimelle\n\nTästä on hyötyä htermin toimiessa selaimen välilehdellä, sillä tällöin on mahdollista jatkaa Chromen välilehtien pikanäppäinten käyttöä. Kun hterm ei toimi välilehdellä, näppäinpainallukset kannattaa lähettää isännälle, jotta niitä voidaan käyttää vim- tai emacs-toimintojen kanssa.\n\nJos arvo on tosi, selain käsittelee Ctrl+1–9-painallukset. Jos arvo on epätosi, Ctrl+1–9-painallukset lähetetään isännälle. Jos arvo on tyhjä, tunnistus suoritetaan automaattisesti selainympäristön ja ikkunatyypin mukaan."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Lähetetäänkö Meta-1–9-painallukset selaimelle\n\nTästä on hyötyä htermin toimiessa selaimen välilehdellä, sillä tällöin on mahdollista jatkaa Chromen välilehtien pikanäppäinten käyttöä. Kun hterm ei toimi välilehdellä, näppäinpainallukset kannattaa lähettää isännälle, jotta niitä voidaan käyttää vim- tai emacs-toimintojen kanssa.\n\nJos arvo on tosi, selain käsittelee Meta-1–9-painallukset. Jos arvo on epätosi, Meta-1–9-painallukset lähetetään isännälle. Jos arvo on tyhjä, tunnistus suoritetaan automaattisesti selainympäristön ja ikkunatyypin mukaan."
+		"message": "Lähetetäänkö Meta+1–9-painallukset selaimelle\n\nTästä on hyötyä htermin toimiessa selaimen välilehdellä, sillä tällöin on mahdollista jatkaa Chromen välilehtien pikanäppäinten käyttöä. Kun hterm ei toimi välilehdellä, näppäinpainallukset kannattaa lähettää isännälle, jotta niitä voidaan käyttää vim- tai emacs-toimintojen kanssa.\n\nJos arvo on tosi, selain käsittelee Meta+1–9-painallukset. Jos arvo on epätosi, Meta+1–9-painallukset lähetetään isännälle. Jos arvo on tyhjä, tunnistus suoritetaan automaattisesti selainympäristön ja ikkunatyypin mukaan."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Lähetetäänkö Meta-V isännälle"
+		"message": "Lähetetäänkö Meta+V isännälle"
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Määritä merkkijärjestelmä, jota isännältä vastaanotettavien tietojen odotetaan käyttävän. Jos merkkijärjestelmät eivät täsmää, visuaalisia virheitä todennäköisesti havaitaan.\n\nKelvollisia arvoja ovat utf-8 ja raw."
@@ -417,7 +417,7 @@
 		"message": "<url><match>käyttäjä@isäntä[:portti]</match></url> Muodosta yhteys tallennettuun profiiliin tai uuteen ssh-järjestelmään."
 	},
 	"open_as_window_tip": {
-		"message": "[Pro-vinkki] Kun käytät Avaa ikkunassa- tai Koko näyttö ‑toimintoa, Ctrl-W ei sulje terminaalia.\n[Pro-vinkki] Saat lisätietoja täältä: $1."
+		"message": "[Pro-vinkki] Kun käytät Avaa ikkunassa- tai Koko näyttö ‑toimintoa, Ctrl+W ei sulje terminaalia.\n[Pro-vinkki] Saat lisätietoja täältä: $1."
 	},
 	"options_button_label": {
 		"message": "Asetukset"
@@ -480,7 +480,7 @@
 		"message": "Kun painat linkin klikkaamisen yhteydessä Ctrl (Cmd macOS:ssä), linkki avataan."
 	},
 	"tip_10": {
-		"message": "Kun käyttökerta on käynnissä, Ctrl-Vaihto-N avaa uuden sellaisen."
+		"message": "Kun käyttökerta on käynnissä, Ctrl+Vaihto-N avaa uuden sellaisen."
 	},
 	"tip_11": {
 		"message": "Voit yhdistää painikkeita tai pikakomentoja uudelleen: https://goo.gl/LWRndr"
@@ -531,7 +531,7 @@
 		"message": "ChangeLog/julkaisutiedot: $1"
 	},
 	"welcome_faq": {
-		"message": "Vastauksia usein kysyttyihin kysymyksiin: $1 (Avaa linkit Ctrl-klikkaamalla)"
+		"message": "Vastauksia usein kysyttyihin kysymyksiin: $1 (Avaa linkit Ctrl+klikkaamalla)"
 	},
 	"welcome_release_highlights": {
 		"message": "Olennaiset muutokset $1:n jälkeen:"

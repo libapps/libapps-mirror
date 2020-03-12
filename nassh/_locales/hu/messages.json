@@ -264,7 +264,7 @@
 		"message": "Ha igaz, a Home/End a terminál görgetősávját irányítja, a Shift+Home/Shift+End billentyűparancsokat pedig elküldi a szolgáltatás a távoli gazdagépnek. Ha hamis, akkor a Home/End lenyomását küldi el a szolgáltatás a távoli gazdagépnek, míg a Shift+Home/Shift+End görget."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Billentyűsorozatok hozzárendelése a billentyűműveletekhez. A billentyűsorozatok nulla vagy több módosító billentyűt tartalmaznak, melyeket billentyűkód követ. A billentyűkódok decimális vagy hexadecimális számok, illetve billentyűk lehetnek. A billentyűműveletek a gazdagép számára küldendő karakterláncokként vagy műveletazonosítókként határozhatók meg. A formátum teljes leírásának megtekintéséhez látogasson el a https://goo.gl/LWRndr címre.\n\nPéldák billentyűsorozatokra:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Helló Világ\\n'\"\n}"
+		"message": "Billentyűsorozatok hozzárendelése a billentyűműveletekhez. A billentyűsorozatok nulla vagy több módosító billentyűt tartalmaznak, melyeket billentyűkód követ. A billentyűkódok decimális vagy hexadecimális számok, illetve billentyűk lehetnek. A billentyűműveletek a gazdagép számára küldendő karakterláncokként vagy műveletazonosítókként határozhatók meg. A formátum teljes leírásának megtekintéséhez látogasson el a https://goo.gl/LWRndr címre.\n\nPéldák billentyűsorozatokra:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Helló Világ\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ha igaz, átalakítja a médiabillentyűket a megfelelő F-billentyűkké. Ha hamis, a böngésző kezeli a billentyűket."
@@ -291,7 +291,7 @@
 		"message": "Meghatározza, hogy átkerül-e a Meta+1..9 billentyűparancsok kezelése a böngészőnek.\n\nEz akkor hasznos, ha a hterm böngészőlapon fut, így nem veszíti el a felhasználó a Chrome „váltás lapra” billentyűkombinációját. Ha nem böngészőlapon fut, célszerűbb ezeket a billentyűparancsokat a gazdagépnek küldeni, hogy a vim és az emacs használhassa őket.\n\nHa igaz, a Meta+1..9 billentyűparancsokat a böngésző kezeli. Ha hamis, a Meta+1..9 billentyűparancsokat a rendszer elküldi a gazdagépnek. Ha nulla, automatikus észlelés valósul meg a böngészőplatform és az ablaktípus alapján."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Meghatározza, hogy továbbítja-e a rendszer a Meta-V billentyűparancsot a gazdagépnek."
+		"message": "Meghatározza, hogy továbbítja-e a rendszer a Meta+V billentyűparancsot a gazdagépnek."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Meghatározza a gazdagéptől kapott adatok várható kódolását.\nHa a kódolások nem egyeznek, valószínűleg vizuális hibák lesznek tapasztalhatók.\n\nAz érvényes értékek: „utf-8” és „raw”."
@@ -315,7 +315,7 @@
 		"message": "Meghatározza a gazdagépnek küldött adatok kódolását."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Az, hogy a Shift-Insert billentyűkombináció beillesztést hajt végre, illetve küldést végez a távoli gazdagépre."
+		"message": "Az, hogy a Shift+Insert billentyűkombináció beillesztést hajt végre, illetve küldést végez a távoli gazdagépre."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Az alapértelmezett terminálkódolás (DOCS).\n\nAz ISO-2022 lehetővé teszi a karakter-hozzárendelések fordítását (például grafikus hozzárendelések).\nAz UTF-8 letiltja ezek támogatását.\n\nA lezárt változó azt jelenti, hogy a kódolást nem lehet módosítani a munkamenet során a terminál feloldószekvenciáival.\n\nHasználja az UTF-8 lehetőséget, ha nem tapasztal hibás megjelenítést a régi alkalmazásoknál."

@@ -153,7 +153,7 @@
 		"message": "Dacă se permite gazdei la distanță să afișeze imagini în terminal.\n\nÎn mod prestabilit, solicitarea apare până se face o alegere."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Dacă este setată, opțiunea anulează remaparea Alt-Backspace->DEL din sistemul de operare Chrome, pentru ca Alt-Backspace să fie chiar Alt-Backspace."
+		"message": "Dacă este setată, opțiunea anulează remaparea Alt+Backspace->DEL din sistemul de operare Chrome, pentru ca Alt+Backspace să fie chiar Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Selectează o euristică de detectare AltGr.\n\n„null”: detectează automat în funcție de navigator.language:\n      „en-us” => „none”, altfel => „right-alt”\n„none”: dezactivează reinterpretarea caracterelor în funcție de AltGr.\n„ctrl-alt”: presupune că Ctrl+Alt înseamnă AltGr.\n„left-alt”: presupune că Alt stânga înseamnă AltGr.\n„right-alt”: presupune că Alt dreapta înseamnă AltGr."
@@ -201,7 +201,7 @@
 		"message": "Comanda Ctrl+C copiază dacă preferința este activată, trimite ^C la gazdă dacă este dezactivată.\nComanda Ctrl+Shift+C trimite ^C la gazdă dacă preferința este activată, copiază dacă este dezactivată."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Dacă este activată, comanda Ctrl-Plus/Minus/Zero controlează nivelul de zoom.\nDacă este dezactivată, comanda Ctrl-Shift-Plus/Minus/Zero controlează nivelul de zoom, Ctrl-Minus trimite ^_, Ctrl-Plus/Zero nu fac nimic."
+		"message": "Dacă este activată, comanda Ctrl+Plus/Minus/Zero controlează nivelul de zoom.\nDacă este dezactivată, comanda Ctrl+Shift+Plus/Minus/Zero controlează nivelul de zoom, Ctrl+Minus trimite ^_, Ctrl+Plus/Zero nu fac nimic."
 	},
 	"hterm_pref_ctrl_v_paste": {
 		"message": "Comanda Ctrl+V inserează dacă este activată, trimite ^V la gazdă dacă este dezactivată.\nComanda Ctrl+Shift+V trimite ^V la gazdă dacă este activată, inserează dacă este dezactivată."
@@ -261,16 +261,16 @@
 		"message": "Dacă se ascunde automat cursorul mouse-ului când se tastează. În mod prestabilit, se autodetectează dacă platforma/sistemul de operare se ocupă de aceasta. \n\nNotă: unele sisteme de operare pot modifica această setare și, astfel, este posibil să n-o poți dezactiva întotdeauna."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Dacă este „true” tastele Home/End controlează bara de derulare a terminalului, iar Shift-Home/Shift-End sunt trimise gazdei la distanță. Dacă este „false” tastele Home/End sunt trimise gazdei de la distanță și Shift-Home/Shift-End derulează."
+		"message": "Dacă este „true” tastele Home/End controlează bara de derulare a terminalului, iar Shift+Home/Shift+End sunt trimise gazdei la distanță. Dacă este „false” tastele Home/End sunt trimise gazdei de la distanță și Shift+Home/Shift+End derulează."
 	},
 	"hterm_pref_keybindings": {
-		"message": "O mapare a secvenței de taste la acțiunea corespunzătoare. Secvențele de taste includ zero sau mai multe taste de modificare, urmate de un cod de tastă. Codurile de taste pot include numere zecimale sau hexazecimale ori un identificator de tastă. Acțiunile pot fi specificate cu un șir de trimis gazdei sau printr-un identificator de acțiune. Pentru o explicație completă a formatului, accesează https://goo.gl/LWRndr.\n\nExemple de corespondențe:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Hello World\\n'\"\n}"
+		"message": "O mapare a secvenței de taste la acțiunea corespunzătoare. Secvențele de taste includ zero sau mai multe taste de modificare, urmate de un cod de tastă. Codurile de taste pot include numere zecimale sau hexazecimale ori un identificator de tastă. Acțiunile pot fi specificate cu un șir de trimis gazdei sau printr-un identificator de acțiune. Pentru o explicație completă a formatului, accesează https://goo.gl/LWRndr.\n\nExemple de corespondențe:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World\\n'\"\n}"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Dacă preferința este activată, transformă tastele media în echivalentul lor Fkey. Dacă este dezactivată, lasă browserul să trateze tastele."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Trimite un prefix ESC când apeși o tastă și apeși lung tasta Meta.\n\nDe exemplu, atunci când este activată, apăsarea Meta-K va trimite ^[k la fel ca atunci când tastezi Escape, apoi k. Atunci când este dezactivată, se va trimite doar k."
+		"message": "Trimite un prefix ESC când apeși o tastă și apeși lung tasta Meta.\n\nDe exemplu, atunci când este activată, apăsarea Meta+K va trimite ^[k la fel ca atunci când tastezi Escape, apoi k. Atunci când este dezactivată, se va trimite doar k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Butonul de inserare al mouse-ului sau „Null” pentru detectare automată.\n\nPentru detectare automată, vom folosi butonul din mijloc al mouse-ului pentru platforme non-X11 (inclusiv sistemul de operare Chrome). În X11, vom folosi butonul drept al mouse-ului (deoarece managerul de ferestre nativ trebuie să insereze prin butonul din mijloc al mouse-ului).\n\n0 == butonul stâng (principal).\n1 == butonul din mijloc (auxiliar).\n2 == butonul drept (secundar).\n\nAceastă opțiune este independentă de setarea pentru inserare prin clic dreapta.\n\nNotă: această preferință va trata corect mouse-urile pentru persoane dreptace și stângace."
@@ -279,19 +279,19 @@
 		"message": "Inserează la clicurile pe butonul drept al mouse-ului.\n\nAceastă opțiune este independentă de setarea „mouse-paste-button”.\n\nNotă: această preferință va trata corect mouse-urile pentru persoane dreptace și stângace."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Dacă preferința este activată, tastele Page Up/Page Down vor controla bara de derulare a terminalului, iar combinațiile Shift-Page Up/Shift-Page Down sunt trimise gazdei de la distanță. Dacă preferința este dezactivată, tastele Page Up/Page Down sunt trimise gazdei de la distanță, iar combinațiile Shift-Page Up/Shift-Page Down derulează."
+		"message": "Dacă preferința este activată, tastele Page Up/Page Down vor controla bara de derulare a terminalului, iar combinațiile Shift+Page Up/Shift+Page Down sunt trimise gazdei de la distanță. Dacă preferința este dezactivată, tastele Page Up/Page Down sunt trimise gazdei de la distanță, iar combinațiile Shift+Page Up/Shift+Page Down derulează."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Dacă se trimite Alt-1..9 la browser.\n\nPreferința este utilă atunci când rulezi hterm într-o filă de browser, pentru a nu pierde acceleratorii din tastatură pentru comanda „Comută la fila\" din Chrome. Atunci când nu rulezi într-o filă, este mai bine să trimiți aceste taste la gazdă, pentru a putea fi folosite în vim sau emacs.\n\nDacă preferința este activată, combinațiile Alt-1..9 vor fi tratate de browser. Dacă este dezactivată, Alt-1..9 vor fi trimise la gazdă. Dacă este „Null”, se detectează automat pe baza platformei de browser și a tipului de fereastră."
+		"message": "Dacă se trimite Alt+1..9 la browser.\n\nPreferința este utilă atunci când rulezi hterm într-o filă de browser, pentru a nu pierde acceleratorii din tastatură pentru comanda „Comută la fila\" din Chrome. Atunci când nu rulezi într-o filă, este mai bine să trimiți aceste taste la gazdă, pentru a putea fi folosite în vim sau emacs.\n\nDacă preferința este activată, combinațiile Alt+1..9 vor fi tratate de browser. Dacă este dezactivată, Alt+1..9 vor fi trimise la gazdă. Dacă este „Null”, se detectează automat pe baza platformei de browser și a tipului de fereastră."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Dacă se trimite Ctrl-1..9 la browser.\n\nPreferința este utilă atunci când rulezi hterm într-o filă de browser, pentru a nu pierde acceleratorii din tastatură pentru comanda „Comută la fila\" din Chrome. Atunci când nu rulezi într-o filă, este mai bine să trimiți aceste taste la gazdă, pentru a putea fi folosite în vim sau emacs.\n\nDacă preferința este activată, combinațiile Ctrl-1..9 vor fi tratate de browser. Dacă este dezactivată, Ctrl-1..9 vor fi trimise la gazdă. Dacă este „Null”, se detectează automat pe baza platformei de browser și a tipului de fereastră."
+		"message": "Dacă se trimite Ctrl+1..9 la browser.\n\nPreferința este utilă atunci când rulezi hterm într-o filă de browser, pentru a nu pierde acceleratorii din tastatură pentru comanda „Comută la fila\" din Chrome. Atunci când nu rulezi într-o filă, este mai bine să trimiți aceste taste la gazdă, pentru a putea fi folosite în vim sau emacs.\n\nDacă preferința este activată, combinațiile Ctrl+1..9 vor fi tratate de browser. Dacă este dezactivată, Ctrl+1..9 vor fi trimise la gazdă. Dacă este „Null”, se detectează automat pe baza platformei de browser și a tipului de fereastră."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Dacă se trimite Meta-1..9 la browser.\n\nPreferința este utilă atunci când rulezi hterm într-o filă de browser, pentru a nu pierde acceleratorii din tastatură pentru comanda „Comută la fila\" din Chrome. Atunci când nu rulezi într-o filă, este mai bine să trimiți aceste taste la gazdă, pentru a putea fi folosite în vim sau emacs.\n\nDacă preferința este activată, combinațiile Meta-1..9 vor fi tratate de browser. Dacă este dezactivată, Meta-1..9 vor fi trimise la gazdă. Dacă este „Null”, se detectează automat pe baza platformei de browser și a tipului de fereastră."
+		"message": "Dacă se trimite Meta+1..9 la browser.\n\nPreferința este utilă atunci când rulezi hterm într-o filă de browser, pentru a nu pierde acceleratorii din tastatură pentru comanda „Comută la fila\" din Chrome. Atunci când nu rulezi într-o filă, este mai bine să trimiți aceste taste la gazdă, pentru a putea fi folosite în vim sau emacs.\n\nDacă preferința este activată, combinațiile Meta+1..9 vor fi tratate de browser. Dacă este dezactivată, Meta+1..9 vor fi trimise la gazdă. Dacă este „Null”, se detectează automat pe baza platformei de browser și a tipului de fereastră."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Dacă Meta-V se trimite la gazdă."
+		"message": "Dacă Meta+V se trimite la gazdă."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Setează codificarea așteptată pentru datele primite de la gazdă.\nDacă codificările nu se potrivesc, probabil că vor apărea erori vizuale.\n\nValorile valide sunt „utf-8” și „raw”."
@@ -315,7 +315,7 @@
 		"message": "Setează codificarea pentru datele trimise gazdei."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Dacă Shift-Insert se folosește pentru inserare sau se trimite gazdei la distanță."
+		"message": "Dacă Shift+Insert se folosește pentru inserare sau se trimite gazdei la distanță."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Codificarea prestabilită a terminalului (DOCS).\n\nISO-2022 permite traducerile hărților de caractere (cum sunt hărțile grafice).\nUTF-8 dezactivează suportul pentru acestea.\n\nÎn varianta blocată, codificarea nu poate fi schimbată la momentul execuției prin secvențe de escape ale terminalului.\n\nSe recomandă să rămâi la UTF-8, dacă nu observi probleme de redare cu aplicațiile vechi."
@@ -417,7 +417,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Conectează-te la un profil salvat sau la un nou sistem SSH"
 	},
 	"open_as_window_tip": {
-		"message": "[Sfat profesionist] Folosește „Deschide ca fereastră” sau „Ecran complet”, pentru a împiedica Ctrl-W să închidă terminalul!\n[Sfat profesionist] Accesează $1 pentru mai multe informații."
+		"message": "[Sfat profesionist] Folosește „Deschide ca fereastră” sau „Ecran complet”, pentru a împiedica Ctrl+W să închidă terminalul!\n[Sfat profesionist] Accesează $1 pentru mai multe informații."
 	},
 	"options_button_label": {
 		"message": "Opțiuni"
@@ -480,7 +480,7 @@
 		"message": "Poți să ții apăsată tasta Ctrl (Cmd pe macOS) în timp ce dai clic pe linkuri pentru a le deschide!"
 	},
 	"tip_10": {
-		"message": "Când rulează într-o fereastră, Ctrl-Shift-N poate deschide o altă sesiune."
+		"message": "Când rulează într-o fereastră, Ctrl+Shift+N poate deschide o altă sesiune."
 	},
 	"tip_11": {
 		"message": "Poți să asociezi din nou tastele/comenzile rapide: https://goo.gl/LWRndr"
