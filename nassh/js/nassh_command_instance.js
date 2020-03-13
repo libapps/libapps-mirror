@@ -704,7 +704,7 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
 
   // We have to set the url here rather than in connectToArgString, because
   // some callers may come directly to connectToDestination.
-  this.terminalLocation.hash = rv.uri;
+  this.terminalLocation.hash = destination;
 
   this.connectTo(rv);
 };
@@ -724,7 +724,7 @@ nassh.CommandInstance.prototype.mountDestination = function(destination) {
 
   // We have to set the url here rather than in connectToArgString, because
   // some callers may come directly to connectToDestination.
-  this.terminalLocation.hash = rv.uri;
+  this.terminalLocation.hash = destination;
 
   var args = {
     argv: {
@@ -813,7 +813,7 @@ nassh.CommandInstance.prototype.sftpConnectToDestination = function(
 
   // We have to set the url here rather than in connectToArgString, because
   // some callers may come directly to connectToDestination.
-  this.terminalLocation.hash = rv.destination;
+  this.terminalLocation.hash = destination;
 
   const args = {
     argv: {
