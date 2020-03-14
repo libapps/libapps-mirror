@@ -1,3 +1,8 @@
+# 0.25, 2020-03-15, hterm tweaks & URI reconnect fixes.
+
+* nassh: Retain the original destination in the location.
+* Replace minus with plus for key shortcuts.
+
 # 0.24, 2020-03-08, Relay fixes.
 
 * relay corpv4/sshfe: Fix write ack confusion.
