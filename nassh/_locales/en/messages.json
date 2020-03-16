@@ -1811,6 +1811,26 @@
 		"description": "Label for the current terminal emulator profile name. Profiles are used to customize things like color and fonts.",
 		"message": "Current profile"
 	},
+	"TERMINAL_SETTINGS_DROPDOWN_ALT_GR_MODE_AUTO": {
+		"description": "Label for AltGr key mode 'Auto' option. See HTERM_PREF_ALT_GR_MODE.",
+		"message": "Auto"
+	},
+	"TERMINAL_SETTINGS_DROPDOWN_ALT_GR_MODE_DISABLE": {
+		"description": "Label for AltGr key mode 'Disable' option. See HTERM_PREF_ALT_GR_MODE.",
+		"message": "Disable"
+	},
+	"TERMINAL_SETTINGS_DROPDOWN_CURSOR_SHAPE_BEAM": {
+		"description": "Label for cursor shape drowdown 'Beam' option. See HTERM_PREF_CURSOR_SHAPE. Beam is also known is I-beam or vertical bar.",
+		"message": "Beam"
+	},
+	"TERMINAL_SETTINGS_DROPDOWN_CURSOR_SHAPE_BLOCK": {
+		"description": "Label for cursor shape drowdown 'Block' option. See HTERM_PREF_CURSOR_SHAPE. Block is a solid rectangle shape.",
+		"message": "Block"
+	},
+	"TERMINAL_SETTINGS_DROPDOWN_CURSOR_SHAPE_UNDERLINE": {
+		"description": "Label for cursor shape drowdown 'Underline' option. See HTERM_PREF_CURSOR_SHAPE.",
+		"message": "Underline"
+	},
 	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_0": {
 		"description": "Tooltip shown over the ANSI color 0 black colorpicker.",
 		"message": "Color 0: Black"

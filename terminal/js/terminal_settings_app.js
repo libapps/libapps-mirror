@@ -27,15 +27,28 @@ const BELL_SOUND_CONVERTER = {
 };
 
 /**
+ * Returns translated value for MACRO_CASE of
+ * `TERMINAL_SETTINGS_DROPDOWN_${name}_${value}`.
+ *
+ * @param {string} name Name of the dropdown, typically preference name.
+ * @param {*} value Value of the option.
+ * @return {string} Translated string to display.
+ */
+function translateDropdown(name, value) {
+  const key = `TERMINAL_SETTINGS_DROPDOWN_${name}_${value}`;
+  return hterm.messageManager.get(key.replace(/\W/g, '_').toUpperCase());
+}
+
+/**
  * @param {null|string} mode
  * @return {string}
  */
 function altGrModeToText(mode) {
   switch (mode) {
     case null:
-      return 'Auto';
+      return translateDropdown('alt-gr-mode', 'Auto');
     case 'none':
-      return 'Disable';
+      return translateDropdown('alt-gr-mode', 'Disable');
     default:
       return mode;
   }
@@ -212,7 +225,8 @@ export class TerminalSettingsApp extends LitElement {
             <ul class="section-body">
               <li class="setting-container">
                 <h4>${msg('TERMINAL_NAME_PREF_SHAPE')}</h4>
-                <terminal-settings-dropdown preference="cursor-shape">
+                <terminal-settings-dropdown preference="cursor-shape"
+                    .toText=${translateDropdown.bind(null, 'cursor-shape')}>
                 </terminal-settings-dropdown>
               </li>
               <li class="setting-container">
