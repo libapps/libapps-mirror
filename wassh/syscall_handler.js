@@ -11,7 +11,7 @@
 // in their own right should land in Chrome 80.
 
 import {SyscallLock} from './syscall_lock.js';
-import * as WASI from './js/wasi.js';
+import * as WASI from '../wasi-js-bindings/js/wasi.js';
 
 /**
  * Receive syscall requets from WASI runtimes, assumes the message has been
