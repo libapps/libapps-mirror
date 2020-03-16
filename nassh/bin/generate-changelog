@@ -58,6 +58,12 @@ def get_previous_tag() -> str:
 
 def generate_changelog(prev_tag: str = None):
     """Generate the changelog.html file from recent git history."""
+    # Ebuilds don't currently checkout the entire tree, so stub it.
+    if 'EAPI' in os.environ:
+        logging.warning('Generating a stub changelog for ebuild.')
+        generate_html('', [])
+        return
+
     if prev_tag is None:
         prev_tag = get_previous_tag()
     logging.info('Generating history since tag "%s"', prev_tag)
@@ -79,12 +85,7 @@ def main(argv: List[str]):
     parser = get_parser()
     opts = parser.parse_args(argv)
 
-    # Ebuilds don't currently checkout the entire tree, so stub it.
-    if 'EAPI' in os.environ:
-        logging.warning('Generating a stub changelog for ebuild.')
-        generate_html('', [])
-    else:
-        generate_changelog(prev_tag=opts.commit)
+    generate_changelog(prev_tag=opts.commit)
 
 
 
