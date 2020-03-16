@@ -1847,6 +1847,18 @@
 		"description": "Label for cursor shape drowdown 'Underline' option. See HTERM_PREF_CURSOR_SHAPE.",
 		"message": "Underline"
 	},
+	"TERMINAL_SETTINGS_RESET_DIALOG_MESSAGE": {
+		"description": "Message for the settings theme reset dialog. The confirmation dialog is shown when a user clicks to reset a theme and restore the default colors and settings.",
+		"message": "Are you sure you want to reset the theme to its defaults?"
+	},
+	"TERMINAL_SETTINGS_RESET_DIALOG_TITLE": {
+		"description": "Title for the settings theme reset dialog. The confirmation dialog is shown when a user clicks to reset a theme and restore the default colors and settings.",
+		"message": "Reset theme"
+	},
+	"TERMINAL_SETTINGS_RESET_LABEL": {
+		"description": "Label for terminal settings reset theme. Clicking reset will restore the default colors and settings for a theme.",
+		"message": "Reset"
+	},
 	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_0": {
 		"description": "Tooltip shown over the ANSI color 0 black colorpicker.",
 		"message": "Color 0: Black"
