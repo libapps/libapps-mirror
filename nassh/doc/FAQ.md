@@ -973,8 +973,8 @@ You'll have to adjust your keyboard/muscle memory accordingly.
 
   In Chrome OS, Ctrl+Shift+Space and Ctrl+Space are used to cycle through
   keyboard input methods.  By default, hterm will capture these.  You can
-  add custom bindings for these in the 'keybindings' settings to pass them
-  along to the OS instead.
+  turn on the 'keybindings-os-defaults' setting, or add custom bindings for
+  these in the 'keybindings' settings to pass them along to the OS instead.
 
      {
        "Ctrl+Shift+Space": "PASS",
