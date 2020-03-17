@@ -62,8 +62,12 @@ def setup_logging(debug=False, quiet=0):
     fmt += '%(message)s'
 
     # 'Sat, 05 Oct 2013 18:58:50 -0400 (EST)'
+    datefmt = '%a, %d %b %Y %H:%M:%S %z'
     tzname = time.strftime('%Z', time.localtime())
-    datefmt = '%a, %d %b %Y %H:%M:%S ' + tzname
+    if tzname and ' ' not in tzname and len(tzname) <= 5:
+        # If the name is verbose, don't include it.  Some systems like to use
+        # "Eastern Daylight Time" which is much too chatty.
+        datefmt += f' ({tzname})'
 
     if debug:
         level = logging.DEBUG
