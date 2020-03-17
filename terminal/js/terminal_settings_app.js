@@ -272,6 +272,13 @@ export class TerminalSettingsApp extends LitElement {
 
             <ul class="section-body">
               <li class="setting-container"
+                  title="${msg('HTERM_PREF_KEYBINDINGS_OS_DEFAULTS')}">
+                <h4>${msg('HTERM_NAME_PREF_KEYBINDINGS_OS_DEFAULTS')}</h4>
+                <terminal-settings-checkbox
+                    preference="keybindings-os-defaults">
+                </terminal-settings-checkbox>
+              </li>
+              <li class="setting-container"
                   title="${msg('HTERM_PREF_PASS_CTRL_N')}">
                 <h4>${msg('HTERM_NAME_PREF_PASS_CTRL_N')}</h4>
                 <terminal-settings-checkbox preference="pass-ctrl-n">
