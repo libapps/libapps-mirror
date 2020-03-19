@@ -76,6 +76,7 @@ export function normalizePrefsInPlace(prefs) {
   prefs.definePreference('foreground-color', DEFAULT_FOREGROUND_COLOR);
   prefs.definePreference('cursor-color', DEFAULT_CURSOR_COLOR);
   prefs.definePreference('color-palette-overrides', DEFAULT_ANSI_COLORS);
+  prefs.definePreference('pass-ctrl-tab', true);
 
   prefs.set('font-family', normalizeFontFamily(
       /** @type {string} */(prefs.get('font-family'))));
