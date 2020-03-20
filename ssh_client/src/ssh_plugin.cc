@@ -392,9 +392,21 @@ void SshPluginInstance::OnWriteAcknowledge(const pp::VarArray& args) {
   if (fd.is_number() && count.is_number()) {
     InputStreams::iterator it = streams_.find(fd.AsInt());
     if (it != streams_.end()) {
-      // TODO(dpolukhin): UInt here is only 32-bit, current version of API
-      // don't support 64-bit integer numbers.
-      it->second->OnWriteAcknowledge(count.AsInt());
+      // JS tops out at 53-bits for integers, so we can use signed ints here
+      // even though the underlying OnWriteAcknowledge is using uint64_t.
+      int64_t cnt;
+      if (count.is_int()) {
+        cnt = count.AsInt();
+      } else {
+        cnt = static_cast<int64_t>(count.AsDouble());
+      }
+      if (cnt < 0) {
+        PrintLogImpl(0, "onWriteAcknowledge: count is negative\n");
+      } else if (cnt > 1ULL << 53) {
+        PrintLogImpl(0, "onWriteAcknowledge: count is too big\n");
+      } else {
+        it->second->OnWriteAcknowledge(cnt);
+      }
     } else {
       PrintLogImpl(0, "onWriteAcknowledge: for unknown file descriptor\n");
     }

@@ -386,7 +386,7 @@ The `name` field can be any one of:
 | `onOpenFile`         | Open a new file.                 | (int `fd`, bool `success`, bool `is_atty`) |
 | `onOpenSocket`       | Open a new socket.               | (int `fd`, bool `success`, bool `is_atty`) |
 | `onRead`             | Send new data to the plugin.     | (int `fd`, ArrayBuffer `data`) |
-| `onWriteAcknowledge` | Tell plugin we've read data.     | (int `fd`, int `count`) |
+| `onWriteAcknowledge` | Tell plugin we've read data.     | (int `fd`, number `count`) |
 | `onClose`            | Close an existing fd.            | (int `fd`) |
 | `onReadReady`        | Notify plugin data is available. | (int `fd`, bool `result`) |
 | `onResize`           | Notify terminal size changes.    | (int `width`, int `height`) |
@@ -408,6 +408,7 @@ The session object currently has these members:
 
 The `onWriteAcknowledge` `count` field tracks the total byte count sent for the
 connection, not the `count` from the most recent `write` request.
+It supports up to `Number.MAX_SAFE_INTEGER` bytes.
 
 ## NaCl->JS API
 
