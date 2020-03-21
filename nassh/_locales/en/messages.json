@@ -1297,6 +1297,14 @@
 		"description": "Name of the 'rename' command which renames files on the remote server. This should be translated as one word.",
 		"message": "rename"
 	},
+	"NASFTP_CMD_REPUT": {
+		"description": "Name of the 'reput' command which resumes file uploads. This should be translated as one word.",
+		"message": "reput"
+	},
+	"NASFTP_CMD_REPUT_HELP": {
+		"description": "Help text for the 'reput' command.",
+		"message": "Resume uploading files"
+	},
 	"NASFTP_CMD_RM": {
 		"description": "Name of the 'rm' command which removes files on the remote server. This should be translated as one word.",
 		"message": "rm"

@@ -1652,6 +1652,7 @@ nasftp.Cli.addCommand_(['prompt'], 0, 1, '', '[prompt]',
  */
 nasftp.Cli.commandPut_ = function(args, opts) {
   // Translate short options into something more readable.
+  opts.resume = opts.a || args.cmd === 'reput';
   opts.fsync = opts.f;
 
   const doc = this.terminal.getDocument();
@@ -1702,21 +1703,38 @@ nasftp.Cli.commandPut_ = function(args, opts) {
         const spinner = new nasftp.ProgressBar(this.terminal, file.size);
 
         // Next promise waits for the file to be processed (read+uploaded).
-        return new Promise((resolveOneFile) => {
-          // Read the next chunk from the file and add it to the queue.
+        return new Promise(async (resolveOneFile) => {
+          const path = this.makePath_(name);
+          let offset = 0;
 
-          // Clobber whatever file might already exist.
-          const flags = nassh.sftp.packets.OpenFlags.WRITE |
-              nassh.sftp.packets.OpenFlags.CREAT |
-              nassh.sftp.packets.OpenFlags.TRUNC;
+          // Figure out whether to resume or clobber the file.
+          let flags = nassh.sftp.packets.OpenFlags.WRITE;
+          let resume = opts.resume;
+          if (resume) {
+            try {
+              const attrs = await this.client.fileStatus(path);
+              offset = attrs.size;
+              flags |= nassh.sftp.packets.OpenFlags.APPEND;
+            } catch (e) {
+              // File doesn't exist, so disable resuming.
+              if (e instanceof nassh.sftp.StatusError) {
+                resume = false;
+              } else {
+                throw e;
+              }
+            }
+          }
+          if (!resume) {
+            flags |= nassh.sftp.packets.OpenFlags.CREAT |
+                nassh.sftp.packets.OpenFlags.TRUNC;
+          }
 
           // Start by opening the remote path.
           let openHandle;
-          return this.client.openFile(this.makePath_(name), flags)
+          return this.client.openFile(path, flags)
             .then((handle) => {
               openHandle = handle;
 
-              let offset = 0;
               const readThenWrite = () => {
                 spinner.update(offset);
                 if (this.userInterrupted_) {
@@ -1766,7 +1784,7 @@ nasftp.Cli.commandPut_ = function(args, opts) {
   })
   .finally(() => doc.body.removeChild(input));
 };
-nasftp.Cli.addCommand_(['put'], 0, 1, 'f', '[remote name]',
+nasftp.Cli.addCommand_(['put', 'reput'], 0, 1, 'af', '[remote name]',
                        nasftp.Cli.commandPut_);
 
 /**
