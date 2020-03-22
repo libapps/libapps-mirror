@@ -877,6 +877,17 @@ nasftp.Cli.prototype.parseOpts_ = function(args, optstring) {
  * @param {string} path The path (relative or absolute) to convert.
  * @return {string} The absolute path.
  */
+nasftp.Cli.prototype.basename = function(path) {
+  const ary = path.replace(/\/+$/, '').split('/');
+  return ary[ary.length - 1];
+};
+
+/**
+ * Create an absolute path that respects the user's cwd setting.
+ *
+ * @param {string} path The path (relative or absolute) to convert.
+ * @return {string} The absolute path.
+ */
 nasftp.Cli.prototype.makePath_ = function(path) {
   return path.startsWith('/') ? path : this.cwd + path;
 };
@@ -1364,13 +1375,8 @@ nasftp.Cli.commandGet_ = function(args) {
   const doc = this.terminal.getDocument();
   const a = doc.createElement('a');
 
-  const basename = (path) => {
-    const ary = path.replace(/\/+$/, '').split('/');
-    return ary[ary.length - 1];
-  };
-
   const src = args.shift();
-  const dst = args.length == 0 ? basename(src) : args.shift();
+  const dst = args.length == 0 ? this.basename(src) : args.shift();
   a.download = dst;
 
   this.io.println(nassh.msg('NASFTP_CMD_GET_DOWNLOAD_FILE', [
@@ -1506,15 +1512,16 @@ nasftp.Cli.commandList_ = function(args, opts) {
           if (response.code == nassh.sftp.packets.StatusCodes.NO_SUCH_FILE) {
             return this.client.linkStatus(path)
               .then((attrs) => {
+                const basename = this.basename(path);
                 const mode =
                     nassh.sftp.packets.bitsToUnixModeLine(attrs.permissions);
                 const date =
                     nassh.sftp.packets.epochToLocal(attrs.lastModified);
                 const longFilename =
                     `${mode}  ${attrs.uid} ${attrs.gid}  ${attrs.size}  ` +
-                    `${date.toDateString()}  ${path}`;
+                    `${date.toDateString()}  ${basename}`;
                 return [Object.assign({
-                  filename: path,
+                  filename: basename,
                   longFilename: longFilename,
                 }, attrs)];
               });
