@@ -272,24 +272,7 @@ nasftp.Cli.prototype.dispatchCommand_ = function(userArgs) {
     return handler.call(this, args)
       .catch((response) => {
         if (response instanceof nassh.sftp.StatusError) {
-          let msgId;
-          const msgArgs = [args.cmd];
-          switch (response.code) {
-            case nassh.sftp.packets.StatusCodes.EOF:
-              msgId = 'NASFTP_ERROR_END_OF_FILE';
-              break;
-            case nassh.sftp.packets.StatusCodes.NO_SUCH_FILE:
-              msgId = 'NASFTP_ERROR_FILE_NOT_FOUND';
-              break;
-            case nassh.sftp.packets.StatusCodes.PERMISSION_DENIED:
-              msgId = 'NASFTP_ERROR_PERMISSION_DENIED';
-              break;
-            default:
-              msgId = 'NASFTP_ERROR_SERVER_ERROR';
-              msgArgs.push(response.message);
-              break;
-          }
-          this.showError_(nassh.msg(msgId, msgArgs));
+          this.showSftpStatusError_(response, args.cmd);
         } else if (response !== undefined) {
           showCrash(response);
         }
@@ -320,14 +303,37 @@ nasftp.Cli.prototype.onInputChar_ = function(ch) {
     let data = this.stdin_.replace(/^\s*/, '');
     data = data.replace(/\s*$/, '');
 
-    return this.dispatchCommand_(data)
-      .catch((cmd) => {
-        // Don't warn when the user just hits enter w/out a command.
-        if (cmd) {
-          this.showError_(nassh.msg('NASFTP_ERROR_UNKNOWN_CMD', [cmd]));
+    return new Promise((resolve) => {
+      /**
+       * Finish up the command processing.
+       *
+       * @param {!Event=} e When called by unhandledrejection,
+       *     the event with the uncaught promise that we need to handle.
+       */
+      const finishCommand = (e) => {
+        window.removeEventListener('unhandledrejection', finishCommand);
+        resolve();
+
+        if (e) {
+          /**
+           * Suppress checks to workaround bug:
+           * https://github.com/google/closure-compiler/issues/3572
+           * We need a function because closure doesn't support suppressing this
+           * particular check at the line level, only the func level.
+           *
+           * @param {!Event} e
+           * @suppress {checkTypes}
+           */
+          const handleError = (e) => {
+            if (e.reason instanceof nassh.sftp.StatusError) {
+              this.showSftpStatusError_(e.reason, data);
+            } else {
+              this.showError_(nassh.msg('NASFTP_ERROR_INTERNAL', [e.reason]));
+            }
+          };
+          handleError(e);
         }
-      })
-      .finally(() => {
+
         // Add non-empty entries into the history.
         if (this.stdin_.length) {
           this.history_.unshift(this.stdin_);
@@ -350,7 +356,22 @@ nasftp.Cli.prototype.onInputChar_ = function(ch) {
           this.buffered_ = '';
         }
         this.userInterrupted_ = false;
-      });
+      };
+
+      // If the subcommand uses an async handler that rejects or crashes,
+      // catch it and recover gracefully.
+      window.addEventListener('unhandledrejection', finishCommand);
+
+      // Dispatch the command and wait for it to finish.
+      return this.dispatchCommand_(data)
+        .catch((cmd) => {
+          // Don't warn when the user just hits enter w/out a command.
+          if (cmd) {
+            this.showError_(nassh.msg('NASFTP_ERROR_UNKNOWN_CMD', [cmd]));
+          }
+        })
+        .finally(finishCommand);
+    });
   } else {
     // Eat various unprintable chars.  Queue the rest into stdin.
     if (ch.codePointAt(0) >= 0x20) {
@@ -721,6 +742,33 @@ nasftp.Cli.prototype.showPrompt_ = function() {
  */
 nasftp.Cli.prototype.showError_ = function(msg) {
   this.io.println(nassh.msg('NASFTP_ERROR_MESSAGE', [msg]));
+};
+
+/**
+ * Helper to decode SFTP status errors for the user.
+ *
+ * @param {!nassh.sftp.StatusError} response The status error packet.
+ * @param {string} cmd The current command we're processing.
+ */
+nasftp.Cli.prototype.showSftpStatusError_ = function(response, cmd) {
+  let msgId;
+  const msgArgs = [cmd];
+  switch (response.code) {
+    case nassh.sftp.packets.StatusCodes.EOF:
+      msgId = 'NASFTP_ERROR_END_OF_FILE';
+      break;
+    case nassh.sftp.packets.StatusCodes.NO_SUCH_FILE:
+      msgId = 'NASFTP_ERROR_FILE_NOT_FOUND';
+      break;
+    case nassh.sftp.packets.StatusCodes.PERMISSION_DENIED:
+      msgId = 'NASFTP_ERROR_PERMISSION_DENIED';
+      break;
+    default:
+      msgId = 'NASFTP_ERROR_SERVER_ERROR';
+      msgArgs.push(response.message);
+      break;
+  }
+  this.showError_(nassh.msg(msgId, msgArgs));
 };
 
 /**
