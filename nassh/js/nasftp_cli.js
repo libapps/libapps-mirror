@@ -1432,24 +1432,36 @@ nasftp.Cli.addCommand_(['get'], 1, 2, '', '<remote name> [local name]',
                        nasftp.Cli.commandGet_);
 
 /**
- * User command to show all registered commands.
+ * User command to show help for registered commands.
  *
  * @this {nasftp.Cli}
- * @param {!Array<string>} _args The command arguments.
+ * @param {!Array<string>} args The command arguments.
  * @return {!Promise<void>}
  */
-nasftp.Cli.commandHelp_ = function(_args) {
+nasftp.Cli.commandHelp_ = function(args) {
   const lhs = (command) => {
     return nassh.msg('NASFTP_CMD_HELP_LHS', [command.command, command.usage]);
   };
   let pad = 0;
 
-  for (const command in this.commands_) {
+  // If the user didn't request specific commands, show all of them.
+  if (args.length == 0) {
+    args = Object.keys(this.commands_);
+  }
+
+  // Calculate the length of commands to align the final output.
+  for (const command of args) {
+    if (!this.commands_.hasOwnProperty(command)) {
+      this.showError_(nassh.msg('NASFTP_ERROR_UNKNOWN_CMD', [command]));
+      return Promise.resolve();
+    }
+
     const obj = this.commands_[command];
     pad = Math.max(pad, lhs(obj).length);
   }
 
-  for (const command in this.commands_) {
+  // Display each command now.
+  for (const command of args) {
     // Omit internal commands.
     if (command.startsWith('_')) {
       continue;
@@ -1463,7 +1475,7 @@ nasftp.Cli.commandHelp_ = function(_args) {
 
   return Promise.resolve();
 };
-nasftp.Cli.addCommand_(['help', '?'], 0, 0, '', '',
+nasftp.Cli.addCommand_(['help', '?'], 0, null, '', '[commands]',
                        nasftp.Cli.commandHelp_);
 
 /**
@@ -2192,6 +2204,8 @@ nasftp.Cli.commandTestCli_ = function(_args) {
   const oldCwd = this.cwd;
   return wrap('version')
     .then(() => wrap('help'))
+    .then(() => wrap('help', 'cd', 'version'))
+    .then(() => wrap('help', 'xxxxxxx'))
     .then(() => wrap('color'))
     .then(() => wrap('color'))
     .then(() => wrap('chdir', '/tmp'))
