@@ -2066,21 +2066,47 @@ nasftp.Cli.addCommand_(['stat', 'lstat'], 1, null, '', '<paths...>',
  *
  * @this {nasftp.Cli}
  * @param {!Array<string>} args The command arguments.
+ * @param {!Object} opts The set of seen options.
  * @return {!Promise<void>}
  */
-nasftp.Cli.commandTruncate_ = function(args) {
+nasftp.Cli.commandTruncate_ = function(args, opts) {
+  // Peel off the first positional argument if using the -s option.
+  let size = 0;
+  if (opts.s) {
+    size = this.parseInt_(args.cmd, 'size', args.shift());
+  }
+
   // Create a chain of promises by processing each path in serial.
   return args.reduce((chain, path) => chain.then(() => {
     // Clobber whatever file might already exist.
     const flags = nassh.sftp.packets.OpenFlags.CREAT |
-        nassh.sftp.packets.OpenFlags.TRUNC;
+      (size ? nassh.sftp.packets.OpenFlags.WRITE :
+              nassh.sftp.packets.OpenFlags.TRUNC);
 
     // Final promise series sends open(trunc)+close packets.
+    let writeHandle;
     return this.client.openFile(this.makePath_(path), flags)
-      .then((handle) => this.client.closeFile(handle));
+      .then((handle) => {
+        writeHandle = handle;
+
+        // If truncating to a specific non-zero size, set the file size here.
+        // Otherwise, the open itself truncated down to 0 bytes already.
+        if (size) {
+          const attrs = {
+            flags: nassh.sftp.packets.FileXferAttrs.SIZE,
+            size,
+          };
+          return this.client.setFileHandleStatus(handle, attrs);
+        }
+      })
+      .finally(() => {
+        if (writeHandle !== undefined) {
+          return this.client.closeFile(writeHandle);
+        }
+      });
   }), Promise.resolve());
 };
-nasftp.Cli.addCommand_(['truncate'], 1, null, '', '<paths...>',
+nasftp.Cli.addCommand_(['truncate'], 1, null, 's', '[-s <size>] <paths...>',
                        nasftp.Cli.commandTruncate_);
 
 /**
@@ -2162,6 +2188,7 @@ nasftp.Cli.commandTestCli_ = function(_args) {
     .then(() => wrap('mkdir', 'subdir', 'subdir2', 'subdir3', 'emptydir'))
     .then(() => wrap('rmdir', 'emptydir'))
     .then(() => wrap('truncate', 'x', 'subdir/x1', 'subdir/üñïçödë'))
+    .then(() => wrap('truncate', '-s', '10KB', 'x'))
     .then(() => wrap('ln', 'x', 'hard'))
     .then(() => wrap('ln', '-s', 'x', 'soft'))
     .then(() => wrap('symlink', 'x', 'sym'))
