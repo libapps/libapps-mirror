@@ -257,10 +257,10 @@ nasftp.Cli.prototype.dispatchCommand_ = function(userArgs) {
   const cmd = args.shift();
   args.cmd = cmd;
 
-  const handler = this.commands_[cmd];
-  if (!handler) {
+  if (!this.commands_.hasOwnProperty(cmd)) {
     return Promise.reject(cmd);
   }
+  const handler = this.commands_[cmd];
 
   const showCrash = (e) => {
     this.showError_(nassh.msg('NASFTP_ERROR_INTERNAL', [e]));
