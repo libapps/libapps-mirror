@@ -108,6 +108,51 @@ it('nasftp-escape-string', function() {
 });
 
 /**
+ * Check number parsing.
+ */
+describe('parseint', () => {
+  const data = [
+    // Bad inputs.
+    ['', null],
+    ['z', null],
+
+    // Good decimal inputs.
+    ['0', 0],
+    ['10', 10],
+    ['0x0', 0],
+
+    // Good hex inputs.
+    ['0xf', 15],
+    ['0xF', 15],
+
+    // Decimal inputs with units.
+    ['0K', 0],
+    ['1K', 1024],
+    ['1KiB', 1024],
+    ['1KB', 1000],
+    ['4M', 4194304],
+    ['5MiB', 5242880],
+    ['5MB', 5000000],
+    ['123G', 132070244352],
+    ['100GiB', 107374182400],
+    ['9999GB', 9999000000000],
+
+    // Hex inputs with units.
+    ['0x0K', 0],
+    ['0x10K', 16 * 1024],
+    ['0x10KiB', 16 * 1024],
+    ['0x10KB', 16000],
+    ['0x10000MiB', 68719476736],
+  ];
+
+  data.forEach(([input, exp]) => {
+    it(`"${input}" -> ${exp}`, function() {
+      assert.equal(this.cli.parseInt_('cmd', 'foo', input), exp);
+    });
+  });
+});
+
+/**
  * Check basic input processing.
  */
 it('nasftp-input-empty', function(done) {

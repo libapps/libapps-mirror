@@ -787,12 +787,42 @@ nasftp.Cli.prototype.parseInt_ = function(
     return defaultValue;
   }
 
-  const ret = parseInt(argValue, radix);
+  let ret = parseInt(argValue, radix);
   if (!isFinite(ret)) {
     this.showError_(nassh.msg('NASFTP_ERROR_INVALID_NUMBER', [
       cmd, argName, argValue,
     ]));
     return null;
+  }
+
+  // Handle optional size units.
+  const knownSuffix = 'KMGTPEZY';
+  let scale = 1;
+  let offset;
+  if (argValue.endsWith('iB')) {
+    scale = 1024;
+    offset = 3;
+  } else if (argValue.endsWith('B')) {
+    scale = 1000;
+    offset = 2;
+  } else if (knownSuffix.includes(argValue[argValue.length - 1])) {
+    scale = 1024;
+    offset = 1;
+  }
+  if (offset !== undefined) {
+    const sfx = argValue[argValue.length - offset];
+    if (!knownSuffix.includes(sfx)) {
+      this.showError_(nassh.msg('NASFTP_ERROR_INVALID_NUMBER', [
+        cmd, argName, argValue,
+      ]));
+      return null;
+    }
+    for (const s of knownSuffix) {
+      ret *= scale;
+      if (s === sfx) {
+        break;
+      }
+    }
   }
 
   return ret;
