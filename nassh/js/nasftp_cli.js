@@ -1888,7 +1888,7 @@ nasftp.Cli.commandRemove_ = function(args, opts) {
       });
   }), Promise.resolve());
 };
-nasftp.Cli.addCommand_(['del', 'rm'], 1, null, 'rRfv', '<paths...>',
+nasftp.Cli.addCommand_(['rm', 'del'], 1, null, 'rRfv', '<paths...>',
                        nasftp.Cli.commandRemove_);
 
 /**
