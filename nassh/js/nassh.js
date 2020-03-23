@@ -398,3 +398,17 @@ nassh.sgrSequence = function({bold, faint, italic, underline, fg, bg} = {}) {
 nassh.sgrText = function(text, settings) {
   return nassh.sgrSequence(settings) + text + nassh.sgrSequence();
 };
+
+/**
+ * Generate a hyperlink using OSC-8 escape sequence.
+ *
+ * @param {string} url The link target.
+ * @param {string=} text The user visible text.
+ * @return {string} The hyperlink with OSC-8 escape sequences.
+ */
+nassh.osc8Link = function(url, text = url) {
+  if (url.startsWith('/')) {
+    url = lib.f.getURL(url);
+  }
+  return `\x1b]8;;${url}\x07${text}\x1b]8;;\x07`;
+};

@@ -241,8 +241,9 @@ Crosh.prototype.run = function() {
     params.set('openas', 'window');
     const url = new URL(document.location.toString());
     url.search = params.toString();
-    this.io.println(Crosh.msg('OPEN_AS_WINDOW_TIP',
-                              [`\x1b]8;;${url.href}\x07[crosh]\x1b]8;;\x07`]));
+    this.io.println(Crosh.msg(
+        'OPEN_AS_WINDOW_TIP',
+        [nassh.sgrText(nassh.osc8Link(url.href, '[crosh]'), {bold: true})]));
     this.io.println('');
   }
 

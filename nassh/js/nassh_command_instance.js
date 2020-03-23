@@ -169,7 +169,7 @@ nassh.CommandInstance.prototype.run = function() {
     // We'll reset the counter when the release notes change.
     this.io.println(nassh.msg(
         'WELCOME_CHANGELOG',
-        [nassh.sgrText('https://goo.gl/YnmXOs', style)]));
+        [nassh.sgrText(nassh.osc8Link('https://goo.gl/YnmXOs'), style)]));
     let notes = lib.resource.getData('nassh/release/highlights');
     if (this.prefs_.getNumber('welcome/notes-version') != notes.length) {
       // They upgraded, so reset the counters.
@@ -926,8 +926,8 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
         'nassh/doc/app-to-ext-migration.md';
     this.io.println('');
     this.io.println(nassh.msg('MIGRATE_TO_EXT', [
-      `\x1b]8;;${extUrl}\x07link\x1b]8;;\x07`,
-      `\x1b]8;;${docUrl}\x07link\x1b]8;;\x07`,
+      nassh.osc8Link(extUrl, 'link'),
+      nassh.osc8Link(docUrl, 'link'),
     ]));
     this.io.println('');
   }

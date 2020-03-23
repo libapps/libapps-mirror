@@ -73,4 +73,14 @@ it('nassh.SGR-text', () => {
   assert.equal('\x1b[1mfoo\x1b[m', nassh.sgrText('foo', {bold: true}));
 });
 
+/**
+ * Test OSC-8 text helper.
+ */
+it('nassh.OSC-8-link', () => {
+  assert.equal('\x1b]8;;https://example.com\x07https://example.com\x1b]8;;\x07',
+               nassh.osc8Link('https://example.com'));
+  assert.equal('\x1b]8;;https://example.com\x07foo\x1b]8;;\x07',
+               nassh.osc8Link('https://example.com', 'foo'));
+});
+
 });
