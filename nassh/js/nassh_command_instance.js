@@ -146,25 +146,30 @@ nassh.CommandInstance.prototype.run = function() {
   });
 
   const showWelcome = () => {
-    this.io.println(
-        nassh.msg('WELCOME_VERSION',
-                  ['\x1b[1m' + this.manifest_.name + '\x1b[m',
-                   '\x1b[1m' + this.manifest_.version + '\x1b[m']));
+    const style = {bold: true};
 
-    this.io.println(
-        nassh.msg('WELCOME_FAQ', ['\x1b[1mhttps://goo.gl/muppJj\x1b[m']));
+    this.io.println(nassh.msg(
+        'WELCOME_VERSION',
+        [nassh.sgrText(this.manifest_.name, style),
+         nassh.sgrText(this.manifest_.version, style)]));
+
+    this.io.println(nassh.msg(
+        'WELCOME_FAQ',
+        [nassh.sgrText('https://goo.gl/muppJj', style)]));
 
     if (hterm.windowType != 'popup' && hterm.os != 'mac') {
       this.io.println('');
-      this.io.println(nassh.msg('OPEN_AS_WINDOW_TIP',
-                                ['\x1b[1mhttps://goo.gl/muppJj\x1b[m']));
+      this.io.println(nassh.msg(
+          'OPEN_AS_WINDOW_TIP',
+          [nassh.sgrText('https://goo.gl/muppJj', style)]));
       this.io.println('');
     }
 
     // Show some release highlights the first couple of runs with a new version.
     // We'll reset the counter when the release notes change.
-    this.io.println(nassh.msg('WELCOME_CHANGELOG',
-                              ['\x1b[1mhttps://goo.gl/YnmXOs\x1b[m']));
+    this.io.println(nassh.msg(
+        'WELCOME_CHANGELOG',
+        [nassh.sgrText('https://goo.gl/YnmXOs', style)]));
     let notes = lib.resource.getData('nassh/release/highlights');
     if (this.prefs_.getNumber('welcome/notes-version') != notes.length) {
       // They upgraded, so reset the counters.

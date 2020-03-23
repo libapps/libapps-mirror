@@ -356,3 +356,45 @@ nassh.getBackgroundPage = function() {
     });
   });
 };
+
+/**
+ * Generate an SGR escape sequence.
+ *
+ * @param {!Object=} settings
+ * @return {string} The SGR escape sequence.
+ */
+nassh.sgrSequence = function({bold, faint, italic, underline, fg, bg} = {}) {
+  let parts = [];
+  if (bold) {
+    parts.push('1');
+  }
+  if (faint) {
+    parts.push('2');
+  }
+  if (italic) {
+    parts.push('3');
+  }
+  if (underline) {
+    parts.push('4');
+  }
+  if (fg) {
+    parts.push(fg);
+  }
+  if (bg) {
+    parts.push(bg);
+  }
+  return `\x1b[${parts.join(';')}m`;
+};
+
+/**
+ * Apply SGR styling to text.
+ *
+ * This will reset the SGR style to the default.
+ *
+ * @param {string} text The text to be stylized.
+ * @param {!Object=} settings The SGR settings to apply.
+ * @return {string} The text wrapped in SGR escape sequences.
+ */
+nassh.sgrText = function(text, settings) {
+  return nassh.sgrSequence(settings) + text + nassh.sgrSequence();
+};

@@ -690,18 +690,30 @@ nasftp.Cli.prototype.onDownArrowKey_ = function() {
  * Color settings for the interface.
  */
 nasftp.Cli.colorMap_ = {
-  'reset': '\x1b[0m',
-  'prompt': '\x1b[30;1m',
-  'error': '\x1b[31;1m',
-  'warning': '\x1b[33;1m',
+  'reset': {},
+  'bold': {bold: true},
+  'prompt': {bold: true, fg: 30},
+  'error': {bold: true, fg: 31},
+  'warning': {bold: true, fg: 33},
   // File types.
-  'dir': '\x1b[34;1m',
-  'sym': '\x1b[36;1m',
-  'fifo': '\x1b[40;33m',
-  'socket': '\x1b[35;1m',
-  'char': '\x1b[40;33;1m',
-  'block': '\x1b[40;33;1m',
+  'dir': {bold: true, fg: 34},
+  'sym': {bold: true, fg: 36},
+  'fifo': {bold: true, fg: 33, bg: 40},
+  'socket': {bold: true, fg: 35},
+  'char': {bold: true, fg: 33, bg: 40},
+  'block': {bold: true, fg: 33, bg: 40},
 };
+
+/**
+ * Cache the SGR sequences.
+ */
+lib.registerInit('nasftp color cache', (onInit) => {
+  Object.entries(nasftp.Cli.colorMap_).forEach(([key, setting]) => {
+    nasftp.Cli.colorMap_[key] = nassh.sgrSequence(setting);
+  });
+
+  onInit();
+});
 
 /**
  * Helper to show the CLI prompt to the user.
@@ -718,13 +730,13 @@ nasftp.Cli.prototype.showPrompt_ = function() {
   } else if (this.prompt_ == '') {
     prompt = defaultPrompt.replace(
         'nasftp',
-        '\x1b[1m' +
-        '\x1b[38:2:51:105:232mn' +
-        '\x1b[38:2:213:15:37ma' +
-        '\x1b[38:2:238:178:17ms' +
-        '\x1b[38:2:51:105:232mf' +
-        '\x1b[38:2:0:153:37mt' +
-        '\x1b[38:2:213:15:37mp' +
+        '%(bold)' +
+        nassh.sgrSequence({fg: '38:2:51:105:232'}) + 'n' +
+        nassh.sgrSequence({fg: '38:2:213:15:37'}) + 'a' +
+        nassh.sgrSequence({fg: '38:2:238:178:17'}) + 's' +
+        nassh.sgrSequence({fg: '38:2:51:105:232'}) + 'f' +
+        nassh.sgrSequence({fg: '38:2:0:153:37'}) + 't' +
+        nassh.sgrSequence({fg: '38:2:213:15:37'}) + 'p' +
         '%(reset)');
   }
 
