@@ -63,6 +63,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
     hterm.notifyCopyMessage = nassh.msg('NOTIFY_COPY');
 
     var terminal = new hterm.Terminal(profileName);
+    // TODO(crbug.com/1063219) We need this to not prompt the user for clipboard
+    // permission.
+    terminal.alwaysUseLegacyPasting = true;
     terminal.decorate(lib.notNull(document.querySelector('#terminal')));
     const runNassh = function() {
       terminal.setCursorPosition(0, 0);

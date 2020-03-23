@@ -118,6 +118,9 @@ Crosh.init = function() {
   const params = new URLSearchParams(document.location.search);
   const profileName = params.get('profile');
   var terminal = new hterm.Terminal(profileName);
+  // TODO(crbug.com/1063219) We need this to not prompt the user for clipboard
+  // permission.
+  terminal.alwaysUseLegacyPasting = true;
 
   // If we want to execute something other than the default crosh.
   const commandName = params.get('command') || 'crosh';
