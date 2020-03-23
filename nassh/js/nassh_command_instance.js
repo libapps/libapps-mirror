@@ -169,7 +169,7 @@ nassh.CommandInstance.prototype.run = function() {
     // We'll reset the counter when the release notes change.
     this.io.println(nassh.msg(
         'WELCOME_CHANGELOG',
-        [nassh.sgrText(nassh.osc8Link('https://goo.gl/YnmXOs'), style)]));
+        [nassh.sgrText(nassh.osc8Link('/html/changelog.html'), style)]));
     let notes = lib.resource.getData('nassh/release/highlights');
     if (this.prefs_.getNumber('welcome/notes-version') != notes.length) {
       // They upgraded, so reset the counters.
