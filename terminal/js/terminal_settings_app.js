@@ -11,6 +11,7 @@
 import {css, html, LitElement} from './lit_element.js';
 import {SUPPORTED_FONT_SIZES, SUPPORTED_FONT_FAMILIES} from
     './terminal_common.js';
+import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_settings_ansi_colors.js';
 import './terminal_settings_app.js';
 import './terminal_settings_category_selector.js';
@@ -19,6 +20,7 @@ import './terminal_settings_colorpicker.js';
 import './terminal_settings_dropdown.js';
 import './terminal_settings_hue_slider.js';
 import './terminal_settings_saturation_lightness_picker.js';
+import './terminal_settings_theme.js';
 import './terminal_settings_transparency_slider.js';
 
 const BELL_SOUND_CONVERTER = {
@@ -77,7 +79,7 @@ export class TerminalSettingsApp extends LitElement {
 
   /** @override */
   static get styles() {
-    return css`
+    return [stylesVars, css`
       :host {
         bottom: 0;
         color: rgb(95, 99, 104);
@@ -111,7 +113,7 @@ export class TerminalSettingsApp extends LitElement {
       }
 
       terminal-settings-category-option[active] > h2 {
-        background-color: rgb(210, 227, 252);
+        background-color: var(--active-bg);
         color: rgb(26, 115, 232);
       }
 
@@ -140,7 +142,7 @@ export class TerminalSettingsApp extends LitElement {
         margin: 0;
         padding: 0 20px;
       }
-    `;
+    `];
   }
 
   /** @override */
@@ -163,6 +165,11 @@ export class TerminalSettingsApp extends LitElement {
 
         <section class="terminal-settings-category"
             ?active-category="${this.activeCategory_ === 'appearance'}">
+          <section>
+            <h3>${msg('TERMINAL_TITLE_THEME')}</h3>
+            <terminal-settings-theme />
+          </section>
+
           <section>
             <h3>${msg('TERMINAL_TITLE_PREF_BACKGROUND')}</h3>
 

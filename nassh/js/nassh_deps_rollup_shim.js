@@ -51,6 +51,6 @@ export {punycode};
  * own dependencies, but instead includes nassh's.
  */
 import {render} from 'lit-html/lit-html';
-import {LitElement, html, css} from 'lit-element/lit-element';
-const litelement = {LitElement, render, html, css}
+import {LitElement, html, css, unsafeCSS} from 'lit-element/lit-element';
+const litelement = {LitElement, render, html, css, unsafeCSS}
 export {litelement};

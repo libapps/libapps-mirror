@@ -76,3 +76,9 @@ function html$$module$js$lit_element(strings, ...values) {}
  * @param {!Element|!ShadowRoot|!DocumentFragment} element
  */
 function render$$module$js$lit_element(template, element) {}
+
+/**
+ * @param {*} value
+ * @return {CSSResult}
+ */
+function unsafeCSS$$module$js$lit_element(value) {}

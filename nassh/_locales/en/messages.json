@@ -1875,6 +1875,30 @@
 		"description": "Label for terminal settings reset theme. Clicking reset will restore the default colors and settings for a theme.",
 		"message": "Reset"
 	},
+	"TERMINAL_THEME_DARK_LABEL": {
+		"description": "Label for dark theme.  The dark theme uses a black background and darker colors.",
+		"message": "Dark"
+	},
+	"TERMINAL_THEME_HTERM_LABEL": {
+		"description": "Label for hterm theme.  Do not translate.",
+		"message": "hterm"
+	},
+	"TERMINAL_THEME_LIGHT_LABEL": {
+		"description": "Label for light theme.  The light theme uses a white background and lighter colors.",
+		"message": "Light"
+	},
+	"TERMINAL_THEME_HAZE_LABEL": {
+		"description": "Label for haze theme.  This theme is based on a purple color, and the name is a reference to the Jimi Hendrix song 'Purple Haze'.  It is OK to translate this name in any way.  Use a short name, or it is also OK to not translate",
+		"message": "Haze"
+	},
+	"TERMINAL_THEME_SOLARIZED_DARK_LABEL": {
+		"description": "Label for solarized dark theme.  Note to translators: 'Solarized' is a well known theme which should likely not be tranlsated.  See https://ethanschoonover.com/solarized/.",
+		"message": "Solarized Dark"
+	},
+	"TERMINAL_THEME_SOLARIZED_LIGHT_LABEL": {
+		"description": "Label for solarized light theme.  Note to translators: 'Solarized' is a well known theme which should likely not be tranlsated.  See https://ethanschoonover.com/solarized/.",
+		"message": "Solarized Light"
+	},
 	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_0": {
 		"description": "Tooltip shown over the ANSI color 0 black colorpicker.",
 		"message": "Color 0: Black"
@@ -1978,6 +2002,10 @@
 	"TERMINAL_TITLE_SETTINGS": {
 		"description": "Title for terminal settings window",
 		"message": "Settings"
+	},
+	"TERMINAL_TITLE_THEME": {
+		"description": "Title for terminal theme section.  This section shows a list of color themes for styling the terminal",
+		"message": "Theme"
 	},
 	"TERMINAL_RESET_MENU_LABEL": {
 		"description": "The menu label to reset the active terminal settings.",

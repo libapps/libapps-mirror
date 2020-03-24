@@ -24,19 +24,12 @@ export const SUPPORTED_FONT_FAMILIES = new Map([
 export const SUPPORTED_FONT_SIZES = [10, 11, 12, 13, 14, 16, 18, 20];
 export const DEFAULT_FONT_SIZE = 13;
 
+export const DEFAULT_THEME = 'dark';
 export const DEFAULT_BACKGROUND_COLOR = '#202124';
 export const DEFAULT_FOREGROUND_COLOR = '#FFFFFF';
-export const DEFAULT_CURSOR_COLOR = '#AECBFA';
+export const DEFAULT_CURSOR_COLOR = 'rgba(174, 203, 250, 0.5)';
 /** @type {!Array<string>} */
 export const DEFAULT_ANSI_COLORS = [
-  '#9AA0A6',
-  '#F28B82',
-  '#87FFC5',
-  '#FDD663',
-  '#8AB4F8',
-  '#F4B5FB',
-  '#80F9F9',
-  '#F8F9FA',
   '#80868B',
   '#EE675C',
   '#0AA882',
@@ -45,6 +38,14 @@ export const DEFAULT_ANSI_COLORS = [
   '#EE5FFA',
   '#03BFC8',
   '#BDC1C6',
+  '#9AA0A6',
+  '#F28B82',
+  '#87FFC5',
+  '#FDD663',
+  '#8AB4F8',
+  '#F4B5FB',
+  '#80F9F9',
+  '#F8F9FA',
 ];
 
 /**
@@ -77,6 +78,7 @@ export function normalizePrefsInPlace(prefs) {
   prefs.definePreference('cursor-color', DEFAULT_CURSOR_COLOR);
   prefs.definePreference('color-palette-overrides', DEFAULT_ANSI_COLORS);
   prefs.definePreference('pass-ctrl-tab', true);
+  prefs.definePreference('theme', DEFAULT_THEME);
 
   prefs.set('font-family', normalizeFontFamily(
       /** @type {string} */(prefs.get('font-family'))));
