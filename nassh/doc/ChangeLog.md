@@ -1,3 +1,19 @@
+# 0.26, 2020-03-25, SSH-FE & SFTP fixes & keybinding & copy/paste tweaks.
+
+* changelog: Point people to local changelog.
+* nassh: Make all links clickable via OSC-8 link sequences.
+* nassh: Add helper for generating SGR style sequences.
+* sshfe: Add dedicated --proxy-user setting.
+* nassh: Always use legacy pasting for nassh and crosh.
+* nasftp: ls: Fix fake file listings.
+* nasftp: truncate: Support truncating to a specific size.
+* nasftp: Support numeric units on sizes.
+* nasftp: Make command loop more robust with rejected promises.
+* nasftp: Fix rm/del subcommand ordering.
+* nasftp: Implement upload resume.
+* ssh_client: Handle streams larger than 2GB.
+* changelog: Autogenerate a bundled copy.
+
 # 0.25, 2020-03-15, hterm tweaks & URI reconnect fixes.
 
 * nassh: Retain the original destination in the location.
