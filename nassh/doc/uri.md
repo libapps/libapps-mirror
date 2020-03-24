@@ -31,8 +31,8 @@ See [options](options.md) for more details.
 Format: `-nassh-args=<parameters>`
 
 The following options are always accepted without prompting the user:
-`--config` `--proxy-mode` `--proxy-host` `--proxy-port` `--ssh-agent`
-`--no-welcome`
+`--config` `--proxy-mode` `--proxy-host` `--proxy-port` `--proxy-user`
+`--ssh-agent` `--no-welcome`
 
 *** note
 All other options are parsed out but then currently ignored.

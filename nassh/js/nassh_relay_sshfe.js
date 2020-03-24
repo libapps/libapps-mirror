@@ -13,14 +13,13 @@
  *
  * @param {!hterm.Terminal.IO} io
  * @param {!Object} options
- * @param {string} username
  * @constructor
  */
-nassh.Relay.Sshfe = function(io, options, username) {
+nassh.Relay.Sshfe = function(io, options) {
   this.io = io;
   this.proxyHost = options['--proxy-host'];
   this.proxyPort = options['--proxy-port'] || 443;
-  this.username = username;
+  this.username = options['--proxy-user'];
   this.sshAgent_ = options['--ssh-agent'] ||
       nassh.GoogleRelay.defaultGnubbyExtension;
   this.relayServer = `wss://${this.proxyHost}:${this.proxyPort}`;

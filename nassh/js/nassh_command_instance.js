@@ -872,8 +872,8 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
 
   // Merge nassh options from the ssh:// URI that we believe are safe.
   const safeNasshOptions = new Set([
-    '--config', '--proxy-mode', '--proxy-host', '--proxy-port', '--ssh-agent',
-    '--welcome',
+    '--config', '--proxy-mode', '--proxy-host', '--proxy-port', '--proxy-user',
+    '--ssh-agent', '--welcome',
   ]);
   Object.keys(userOptions).forEach((option) => {
     if (safeNasshOptions.has(option)) {
@@ -884,7 +884,8 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   });
 
   // Finally post process the combined result.
-  options = nassh.CommandInstance.postProcessOptions(options, params.hostname);
+  options = nassh.CommandInstance.postProcessOptions(
+      options, params.hostname, params.username);
 
   // Merge ssh options from the ssh:// URI that we believe are safe.
   params.userSshArgs = [];
@@ -928,7 +929,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
 
   // If the user has requested a proxy relay, load it up.
   if (options['--proxy-mode'] == 'ssh-fe@google.com') {
-    this.relay_ = new nassh.Relay.Sshfe(this.io, options, params.username);
+    this.relay_ = new nassh.Relay.Sshfe(this.io, options);
     this.io.println(nassh.msg(
         'FOUND_RELAY',
         [`${this.relay_.proxyHost}:${this.relay_.proxyPort}`]));
@@ -1144,10 +1145,12 @@ nassh.CommandInstance.tokenizeOptions = function(optionString='') {
  * Expand & process nassh options.
  *
  * @param {!Object<string, *>} options A map of --option to its value.
- * @param {string=} hostname The hostname we're connecting to.
+ * @param {string} hostname The hostname we're connecting to.
+ * @param {string} username The ssh username we're using.
  * @return {!Object<string, *>} A map of --option to its value.
  */
-nassh.CommandInstance.postProcessOptions = function(options, hostname='') {
+nassh.CommandInstance.postProcessOptions = function(
+    options, hostname, username) {
   let rv = Object.assign(options);
 
   // Handle various named "configs" we have.
@@ -1196,6 +1199,11 @@ nassh.CommandInstance.postProcessOptions = function(options, hostname='') {
   // ported the gnubbyd logic to the new ssh-agent frameworks.
   if (rv['--ssh-agent'] == 'gnubby') {
     rv['--ssh-agent'] = nassh.GoogleRelay.defaultGnubbyExtension;
+  }
+
+  // Default the relay username to the ssh username.
+  if (!rv['--proxy-user']) {
+    rv['--proxy-user'] = username;
   }
 
   return rv;

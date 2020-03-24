@@ -31,6 +31,14 @@ server.
 
 The port to connect to on the relay server.
 
+## `--proxy-user=<username>`
+
+The username to use when talking to the relay server itself.
+This is not the same username used to connect to the ssh server.
+
+Not all relay servers need or use this setting.
+If not specified, it will default to the ssh server username.
+
 ## `--use-ssl=<bool>`
 
 Whether to use HTTPS (the default) or HTTP when communicating with the relay

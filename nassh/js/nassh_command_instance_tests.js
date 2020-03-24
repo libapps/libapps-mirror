@@ -253,7 +253,7 @@ describe('proxy-host-addresses', () => {
       let rv = nassh.CommandInstance.tokenizeOptions(`--proxy-host=${host}`);
       assert.equal(rv['--proxy-host'], host);
       // Then verify the post processing phase.
-      rv = nassh.CommandInstance.postProcessOptions(rv, host);
+      rv = nassh.CommandInstance.postProcessOptions(rv, host, '');
       assert.equal(rv['--proxy-host'], expected);
     });
   });
@@ -266,33 +266,38 @@ describe('default-proxy-host', () => {
   const tests = [
     // Proxy host unrelated to Google.
     ['--proxy-host=proxy.example.com', 'example.com',
-     undefined, 'proxy.example.com'],
+     undefined, 'proxy.example.com', 'root'],
 
     // Default Google settings.
     ['--config=google', 'example.com',
-     '443', 'ssh-relay.corp.google.com'],
+     '443', 'ssh-relay.corp.google.com', 'root'],
 
     // Default cloudtop Google settings.
     ['--config=google', 'example.c.googlers.com',
-     '443', 'sup-ssh-relay.corp.google.com'],
+     '443', 'sup-ssh-relay.corp.google.com', 'root'],
 
     // Default internal GCE settings.
     ['--config=google', 'example.internal.gcpnode.com',
-     '443', 'sup-ssh-relay.corp.google.com'],
+     '443', 'sup-ssh-relay.corp.google.com', 'root'],
     ['--config=google', 'example.proxy.gcpnode.com',
-     '443', 'sup-ssh-relay.corp.google.com'],
+     '443', 'sup-ssh-relay.corp.google.com', 'root'],
 
     // Explicit proxy settings override defaults.
     ['--config=google --proxy-host=example.com', 'example.c.googlers.com',
-     '443', 'example.com'],
+     '443', 'example.com', 'root'],
+
+    // Username settings.
+    ['--config=google --proxy-host=example.com --proxy-user=user',
+     'example.c.googlers.com', '443', 'example.com', 'user'],
   ];
 
-  tests.forEach(([options, host, port, relay]) => {
+  tests.forEach(([options, host, port, relay, user]) => {
     it(`default relay for '${options}' & '${host}'`, () => {
       let rv = nassh.CommandInstance.tokenizeOptions(options);
-      rv = nassh.CommandInstance.postProcessOptions(rv, host);
+      rv = nassh.CommandInstance.postProcessOptions(rv, host, 'root');
       assert.equal(port, rv['--proxy-port']);
       assert.equal(relay, rv['--proxy-host']);
+      assert.equal(user, rv['--proxy-user']);
     });
   });
 });
@@ -316,7 +321,7 @@ describe('default-ssh-agent', () => {
   tests.forEach(([host, expected]) => {
     it(`forwarding for ${host}`, () => {
       let rv = nassh.CommandInstance.tokenizeOptions('--config=google');
-      rv = nassh.CommandInstance.postProcessOptions(rv, host);
+      rv = nassh.CommandInstance.postProcessOptions(rv, host, '');
       assert.equal(rv['auth-agent-forward'], expected);
     });
   });
