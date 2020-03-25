@@ -9,7 +9,8 @@
  */
 import {LitElement, css, html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
-import {stylesButtonContainer} from './terminal_settings_styles.js';
+import {stylesButtonContainer, stylesDialog}
+    from './terminal_settings_styles.js';
 import './terminal_settings_button.js';
 
 /**
@@ -56,7 +57,7 @@ export class TerminalColorpickerElement extends LitElement {
 
   /** @override */
   static get styles() {
-    return [stylesButtonContainer, css`
+    return [stylesButtonContainer, stylesDialog, css`
         #smallview {
           align-items: center;
           display: flex;
@@ -112,18 +113,6 @@ export class TerminalColorpickerElement extends LitElement {
           width: 17ch;
         }
 
-        dialog {
-          border: 0;
-          border-radius: 8px;
-          box-shadow: 0 0 16px rgba(0, 0, 0, 0.12),
-                      0 16px 16px rgba(0, 0, 0, 0.24);
-          padding: 0;
-        }
-
-        #dialog-content {
-          padding: 20px;
-        }
-
         hue-slider, transparency-slider {
           margin: 24px 0;
         }
@@ -156,26 +145,24 @@ export class TerminalColorpickerElement extends LitElement {
           ${this.inputInDialog ? '' : input}
         </div>
         <dialog>
-          <div id="dialog-content">
-            <saturation-lightness-picker
-                @updated="${this.onSaturationLightness_}"
-                hue="${this.hue_}" saturation="${this.saturation_}"
-                lightness="${this.lightness_}">
-            </saturation-lightness-picker>
-            <hue-slider hue="${this.hue_}" @updated="${this.onHue_}" >
-            </hue-slider>
-            ${transparency}
-            ${this.inputInDialog ? input : ''}
-            <div class="button-container">
-              <terminal-settings-button class="cancel"
-                  @click="${this.onCancelClick_}">
-                ${msg('CANCEL_BUTTON_LABEL')}
-              </terminal-settings-button>
-              <terminal-settings-button class="action"
-                  @click="${this.onOkClick_}">
-                ${msg('OK_BUTTON_LABEL')}
-              </terminal-settings-button>
-            </div>
+          <saturation-lightness-picker
+              @updated="${this.onSaturationLightness_}"
+              hue="${this.hue_}" saturation="${this.saturation_}"
+              lightness="${this.lightness_}">
+          </saturation-lightness-picker>
+          <hue-slider hue="${this.hue_}" @updated="${this.onHue_}" >
+          </hue-slider>
+          ${transparency}
+          ${this.inputInDialog ? input : ''}
+          <div class="button-container">
+            <terminal-settings-button class="cancel"
+                @click="${this.onCancelClick_}">
+              ${msg('CANCEL_BUTTON_LABEL')}
+            </terminal-settings-button>
+            <terminal-settings-button class="action"
+                @click="${this.onOkClick_}">
+              ${msg('OK_BUTTON_LABEL')}
+            </terminal-settings-button>
           </div>
         </dialog>
     `;

@@ -15,6 +15,7 @@ describe('terminal_settings_theme_tests.js', () => {
     window.preferenceManager =
       new lib.PreferenceManager(new lib.Storage.Memory());
     window.preferenceManager.definePreference('theme', 'dark');
+    window.preferenceManager.definePreference('theme-variations', {});
     window.preferenceManager.definePreference(
         'background-color', DEFAULT_BACKGROUND_COLOR);
     window.preferenceManager.definePreference(
@@ -93,5 +94,71 @@ describe('terminal_settings_theme_tests.js', () => {
          '#4B6A88', '#D93025', '#1A73E8', '#B05E3B',
          '#7462E0', '#C61AD9', '#60781D', '#3C4043'],
         window.preferenceManager.get('color-palette-overrides'));
+  });
+
+  it('shows-reset-on-variation', async function() {
+    assert.equal(window.preferenceManager.get('theme'), 'dark');
+    assert.isTrue(
+        this.el.shadowRoot.getElementById('dark').hasAttribute('active-theme'));
+    assert.isFalse(
+        this.el.shadowRoot.getElementById('dark').hasAttribute('reset-theme'));
+
+    await window.preferenceManager.set('background-color', 'purple');
+    assert.isTrue(
+        this.el.shadowRoot.getElementById('dark').hasAttribute('reset-theme'));
+  });
+
+  it('persists-variations-across-selection', async function() {
+    assert.equal(window.preferenceManager.get('theme'), 'dark');
+    assert.isTrue(
+        this.el.shadowRoot.getElementById('dark').hasAttribute('active-theme'));
+    await window.preferenceManager.set('background-color', 'purple');
+    assert.isTrue(
+        this.el.shadowRoot.getElementById('dark').hasAttribute('reset-theme'));
+
+    let prefChanged = test.listenForPrefChange(
+        window.preferenceManager, 'theme');
+    this.el.shadowRoot.getElementById('light').click();
+    await prefChanged;
+    assert.isTrue(this.el.shadowRoot.getElementById('light').hasAttribute(
+        'active-theme'));
+    assert.isFalse(
+        this.el.shadowRoot.getElementById('light').hasAttribute('reset-theme'));
+
+    prefChanged = test.listenForPrefChange(window.preferenceManager, 'theme');
+    this.el.shadowRoot.getElementById('dark').click();
+    await prefChanged;
+    assert.isTrue(
+        this.el.shadowRoot.getElementById('dark').hasAttribute('active-theme'));
+    assert.isTrue(
+        this.el.shadowRoot.getElementById('dark').hasAttribute('reset-theme'));
+  });
+
+  it('resets', async function() {
+    assert.equal(window.preferenceManager.get('theme'), 'dark');
+    await window.preferenceManager.set('background-color', 'purple');
+    assert.isTrue(
+        this.el.shadowRoot.getElementById('dark').hasAttribute('active-theme'));
+    assert.isTrue(
+        this.el.shadowRoot.getElementById('dark').hasAttribute('reset-theme'));
+    await window.preferenceManager.set('background-color', 'purple');
+    assert.isTrue(
+        this.el.shadowRoot.getElementById('dark').hasAttribute('reset-theme'));
+
+    this.el.shadowRoot.getElementById('dark').click();
+    assert.isTrue(
+        this.el.shadowRoot.querySelector('dialog').hasAttribute('open'));
+
+    let prefChanged = test.listenForPrefChange(
+        window.preferenceManager, 'background-color');
+    this.el.shadowRoot.querySelector('terminal-settings-button.action').click();
+    await prefChanged;
+    assert.isTrue(
+        this.el.shadowRoot.getElementById('dark').hasAttribute('active-theme'));
+    assert.isFalse(
+        this.el.shadowRoot.getElementById('dark').hasAttribute('reset-theme'));
+    assert.equal(
+        window.preferenceManager.get('background-color'),
+        DEFAULT_BACKGROUND_COLOR);
   });
 });

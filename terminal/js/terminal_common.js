@@ -79,6 +79,7 @@ export function definePrefs(prefs) {
   prefs.definePreference('color-palette-overrides', DEFAULT_ANSI_COLORS);
   prefs.definePreference('pass-ctrl-tab', true);
   prefs.definePreference('theme', DEFAULT_THEME);
+  prefs.definePreference('theme-variations', {});
 }
 
 /**

@@ -36,6 +36,7 @@ export class TerminalSettingsButtonElement extends LitElement {
           font-family: var(--font);
           font-weight: 500;
           min-width: 5.14em;
+          outline: none;
           padding: 8px 16px;
         }
 

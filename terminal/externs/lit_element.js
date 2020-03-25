@@ -41,8 +41,8 @@ class LitElement$$module$js$lit_element{
   render() {}
 
   /**
-   * @param {string} propertyName
-   * @param {*} oldValue
+   * @param {string=} propertyName
+   * @param {*=} oldValue
    * @return {!Promise<void>}
    */
   requestUpdate(propertyName, oldValue) {}

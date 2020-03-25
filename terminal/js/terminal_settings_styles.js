@@ -29,3 +29,17 @@ export const stylesButtonContainer = css`
   }
 `;
 
+export const stylesDialog = css`
+  dialog {
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.12),
+                0 16px 16px rgba(0, 0, 0, 0.24);
+    padding: 20px;
+  }
+
+  #dialog-title {
+    font-weight: bold;
+    padding: 0 0 20px 0;
+  }
+`;
