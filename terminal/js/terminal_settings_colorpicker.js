@@ -13,14 +13,14 @@ import {stylesButtonContainer} from './terminal_settings_styles.js';
 import './terminal_settings_button.js';
 
 /**
- * Convert CSS color to hex color.
+ * Convert CSS color to hex color.  Always use uppercase for display.
  *
  * @param {string} css
  * @return {string} hex color
  */
 function cssToHex(css) {
-  return lib.notNull(
-      lib.colors.rgbToHex(lib.notNull(lib.colors.normalizeCSS(css))));
+  return lib.notNull(lib.colors.rgbToHex(
+      lib.notNull(lib.colors.normalizeCSS(css)))).toUpperCase();
 }
 
 export class TerminalColorpickerElement extends LitElement {
@@ -206,12 +206,12 @@ export class TerminalColorpickerElement extends LitElement {
    * UI changed and we should update value with rgb provided, or
    * recalculate value from hslt components.
    *
-   * @param {string=} rgb New RGB value from hex input.
+   * @param {string=} value New value from hex input.
    * @private
    */
-  onUiChanged_(rgb) {
-    if (rgb !== undefined) {
-      this.value = rgb;
+  onUiChanged_(value) {
+    if (value !== undefined) {
+      this.value = value;
     } else {
       this.value = lib.colors.arrayToHSLA([this.hue_, this.saturation_,
             this.lightness_, this.transparency_]);
@@ -281,7 +281,8 @@ export class TerminalColorpickerElement extends LitElement {
     if (!rgb) {
       event.target.value = cssToHex(/** @type {string} */(this.value));
     } else {
-      this.onUiChanged_(rgb);
+      // Store uppercase hex to help detect when a value is set to default.
+      this.onUiChanged_(cssToHex(event.target.value));
     }
   }
 

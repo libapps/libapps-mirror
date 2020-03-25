@@ -102,7 +102,9 @@ export function normalizePrefsInPlace(prefs) {
     // The color value is invalid.
     prefs.reset('background-color');
   } else {
-    prefs.set('background-color', lib.colors.setAlpha(backgroundColor, 1));
+    // Store uppercase hex to help detect when a value is set to default.
+    const rgb = lib.colors.setAlpha(backgroundColor, 1);
+    prefs.set('background-color', lib.colors.rgbToHex(rgb).toUpperCase());
   }
 }
 

@@ -42,10 +42,10 @@ describe('terminal_common_tests.js', () => {
     assertNormalizationResult(
         'background-color', 'invalid', DEFAULT_BACKGROUND_COLOR);
     // Background color's alpha should be reset to 1
-    assertNormalizationResult('background-color', '#01020310',
-        'rgba(1, 2, 3, 1)');
-    assertNormalizationResult('background-color', 'rgba(1, 2, 3, 0.5)',
-        'rgba(1, 2, 3, 1)');
+    assertNormalizationResult(
+        'background-color', '#01020310', '#010203');
+    assertNormalizationResult(
+        'background-color', 'rgba(1, 2, 3, 0.5)', '#010203');
   });
 
 });
