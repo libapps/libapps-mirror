@@ -2,7 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {normalizePrefsInPlace, loadWebFont} from './terminal_common.js';
+import {definePrefs, normalizePrefsInPlace, loadWebFont}
+    from './terminal_common.js';
 import {TerminalMenu} from './terminal_menu.js';
 
 export const terminal = {};
@@ -70,6 +71,7 @@ terminal.init = function(element) {
   };
   term.onTerminalReady = function() {
     const prefs = term.getPrefs();
+    definePrefs(prefs);
     normalizePrefsInPlace(prefs);
 
     const onFontFamilyChanged = async (fontFamily) => {

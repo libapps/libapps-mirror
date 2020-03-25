@@ -65,13 +65,13 @@ function normalizeFontFamily(cssFontFamily) {
 }
 
 /**
- * Make sure preference values are valid.
+ * Define prefs for terminal which are not used by hterm, or that have a
+ * different default.
  *
  * @param {!lib.PreferenceManager} prefs The preference manager.
  */
-export function normalizePrefsInPlace(prefs) {
+export function definePrefs(prefs) {
   // Set terminal default overrides from hterm.
-  // TODO(joelhockey): Separate setting these defaults from normalizing values.
   prefs.definePreference('font-size', DEFAULT_FONT_SIZE);
   prefs.definePreference('background-color', DEFAULT_BACKGROUND_COLOR);
   prefs.definePreference('foreground-color', DEFAULT_FOREGROUND_COLOR);
@@ -79,6 +79,14 @@ export function normalizePrefsInPlace(prefs) {
   prefs.definePreference('color-palette-overrides', DEFAULT_ANSI_COLORS);
   prefs.definePreference('pass-ctrl-tab', true);
   prefs.definePreference('theme', DEFAULT_THEME);
+}
+
+/**
+ * Make sure preference values are valid.
+ *
+ * @param {!lib.PreferenceManager} prefs The preference manager.
+ */
+export function normalizePrefsInPlace(prefs) {
 
   prefs.set('font-family', normalizeFontFamily(
       /** @type {string} */(prefs.get('font-family'))));
