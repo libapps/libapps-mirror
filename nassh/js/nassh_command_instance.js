@@ -577,8 +577,8 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true,
   /* eslint-disable */
   // Parse the connection string.
   var ary = uri.match(
-      //|user |@| [  ipv6       %zoneid   ]| host |   :port      @ relay options
-      /^([^@]+)@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:@]+)(?::(\d+))?(?:@([^:]+)(?::(\d+))?)?$/);
+      //|user |@| [  ipv6       %zoneid   ]| host |   :port     |@| [  ipv6       %zoneid   ]|relay|   :relay port |
+      /^([^@]+)@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:@]+)(?::(\d+))?(?:@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:]+)(?::(\d+))?)?$/);
   /* eslint-enable */
 
   if (!ary)
@@ -596,6 +596,10 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true,
   var relayHostname, relayPort;
   if (ary[4]) {
     relayHostname = ary[4];
+    // If it's IPv6, remove the brackets.
+    if (relayHostname.startsWith('[') && relayHostname.endsWith(']')) {
+      relayHostname = relayHostname.substr(1, relayHostname.length - 2);
+    }
     if (ary[5])
       relayPort = ary[5];
   }

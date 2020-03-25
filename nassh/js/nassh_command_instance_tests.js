@@ -90,9 +90,32 @@ describe('parseURI', () => {
 
     // Relay host extensions.
     ['u@h@relay', {'username': 'u', 'hostname': 'h', 'relayHostname': 'relay'}],
+    ['u@h:20@relay',
+     {'username': 'u', 'hostname': 'h', 'port': '20',
+      'relayHostname': 'relay'}],
     ['u@h@relay:2234',
      {'username': 'u', 'hostname': 'h', 'relayHostname': 'relay',
       'relayPort': '2234'}],
+    ['u@h:20@relay:2234',
+     {'username': 'u', 'hostname': 'h', 'port': '20', 'relayHostname': 'relay',
+      'relayPort': '2234'}],
+
+    // Relay hosts using IPv6.
+    ['u@h@[::1]', {'username': 'u', 'hostname': 'h', 'relayHostname': '::1'}],
+    ['u@h:20@[::1]',
+     {'username': 'u', 'hostname': 'h', 'port': '20', 'relayHostname': '::1'}],
+    ['u@h@[::1%eth0]',
+     {'username': 'u', 'hostname': 'h', 'relayHostname': '::1%eth0'}],
+    ['u@h:20@[::1]:2234',
+     {'username': 'u', 'hostname': 'h', 'port': '20', 'relayHostname': '::1',
+      'relayPort': '2234'}],
+
+    // Both using IPv6.
+    ['u@[::1]@[::1]',
+     {'username': 'u', 'hostname': '::1', 'relayHostname': '::1'}],
+    ['u@[::1]:20@[::1]:40',
+     {'username': 'u', 'hostname': '::1', 'port': '20', 'relayHostname': '::1',
+      'relayPort': '40'}],
 
     // Accpetable escaped forms.
     ['u%40g@h', {'username': 'u@g', 'hostname': 'h'}],
@@ -152,7 +175,7 @@ describe('parseURI', () => {
     it(uri, () => {
       const rv = nassh.CommandInstance.parseURI(uri, true, true);
       if (rv === null) {
-        assert.isNull(rv);
+        assert.isNull(fields);
       } else {
         const expected = Object.assign({'uri': uri}, defaultFields, fields);
         assert.deepStrictEqual(rv, expected);
