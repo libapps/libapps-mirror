@@ -474,14 +474,16 @@ lib.colors.normalizeCSSToHSL = function(def) {
 };
 
 /**
- * Convert a 3 or 4 element array into an rgba(...) string.
+ * Convert a 3 or 4 element array into an rgb(...) or rgba(...) string.
  *
  * @param {?Array<string|number>} ary The RGB or RGBA elements to convert.
  * @return {string} The normalized CSS color spec.
  */
 lib.colors.arrayToRGBA = function(ary) {
-  var alpha = (ary.length > 3) ? ary[3] : 1;
-  return 'rgba(' + ary[0] + ', ' + ary[1] + ', ' + ary[2] + ', ' + alpha + ')';
+  if (ary.length == 3) {
+    return `rgb(${ary[0]}, ${ary[1]}, ${ary[2]})`;
+  }
+  return `rgba(${ary[0]}, ${ary[1]}, ${ary[2]}, ${ary[3]})`;
 };
 
 /**
