@@ -82,18 +82,28 @@ export class TerminalSettingsApp extends LitElement {
     return [stylesVars, css`
       :host {
         bottom: 0;
-        color: rgb(95, 99, 104);
+        color: #80868B;
         display: flex;
         flex-wrap: nowrap;
         font-family: 'Roboto';
-        font-size: small;
+        font-size: 13px;
         left: 0;
-        line-height: 2.65em;
         margin: 0;
         padding: 0;
         position: absolute;
         right: 0;
         top: 0;
+      }
+
+      h4 {
+        color: #212121;
+        font-weight: 400;
+        line-height: 24px;
+        margin: 12px 0;
+      }
+
+      terminal-settings-category-selector {
+        min-width: 192px;
       }
 
       terminal-settings-category-option {
@@ -102,9 +112,11 @@ export class TerminalSettingsApp extends LitElement {
       }
 
       terminal-settings-category-option > h2 {
-        border-radius: 0 20px 20px 0;
-        font-size: 12px;
-        padding: 0 40px 0 20px;
+        border-radius: 0 16px 16px 0;
+        font-size: 13px;
+        line-height: 32px;
+        margin: 8px 0;
+        padding: 0 24px 0 32px;
         user-select: none;
       }
 
@@ -124,8 +136,21 @@ export class TerminalSettingsApp extends LitElement {
         padding: 0 40px;
       }
 
+      .terminal-settings-category > section {
+        margin-bottom: 20px;
+      }
+
       .terminal-settings-category[active-category] {
         display: block;
+      }
+
+      .terminal-settings-category h3 {
+        color: rgb(95, 99, 104);
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 20px;
+        margin: 0;
+        padding: 14px 20px;
       }
 
       .section-body {
@@ -135,12 +160,22 @@ export class TerminalSettingsApp extends LitElement {
 
       .setting-container {
         align-items: center;
-        border-bottom: 1px solid lightgrey;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.14);
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
-        margin: 0;
-        padding: 0 20px;
+        margin: 0 0 0 32px;
+        padding: 0;
+      }
+
+      terminal-settings-dropdown {
+        margin: 8px 0;
+        line-height: 32px;
+      }
+
+      terminal-settings-ansi-colors {
+        margin-right: -6px;
+        padding: 6px 0;
       }
     `];
   }

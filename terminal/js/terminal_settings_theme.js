@@ -109,8 +109,10 @@ export class TerminalSettingsThemeElement extends TerminalSettingsElement {
         white-space: pre;
       }
 
-      .label h4 {
-        margin: 0 1em 0 1em;
+      .label {
+        color: rgb(95, 99, 104);
+        font-weight: 500;
+        padding: 10px;
       }
 
       .theme[active-theme] .label {
@@ -153,7 +155,7 @@ drwxr-xr-x 1 root 10:38 <span class="ansi12">.config</span>
 -rwxr-xr-x 1 root 14:30 <span class="ansi10">autoexec.bat</span>
 <span class="ansi10">joel@penguin</span>:<span class="ansi12">~</span
 >$ ls -al<span class="cursor">&nbsp;</span></div>
-            <div class="label"><h4>${msg(t.translationKey)}</h4></div>
+            <div class="label">${msg(t.translationKey)}</div>
           </div>`)}
         </div>
     `;

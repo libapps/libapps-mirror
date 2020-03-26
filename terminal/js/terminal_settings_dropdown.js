@@ -53,11 +53,12 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
         #container {
           background-color: rgb(241, 243, 244);
           border-radius: 6px;
+          color: #202124;
           cursor: pointer;
-          padding: 1px 23px 1px 9px;
+          min-width: 60px;
+          padding: 0 32px 0 8px;
           position: relative;
           user-select: none;
-          min-width: 134px;
         }
 
         #container:after {
@@ -74,8 +75,9 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
 
         #options {
           background-color: white;
-          border-radius: 6px;
-          border: 1px solid lightgrey;
+          border-radius: 4px;
+          box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
+                      0 2px 6px 2px rgba(60, 64, 67, 0.15);
           box-sizing: border-box;
           display: none;
           left: 0;

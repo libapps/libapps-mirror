@@ -62,7 +62,6 @@ export class TerminalColorpickerElement extends LitElement {
           display: flex;
           flex-wrap: nowrap;
           justify-content: space-between;
-          padding: 4px;
         }
 
         #swatch {
@@ -82,14 +81,13 @@ export class TerminalColorpickerElement extends LitElement {
           background-position: 0px 0, 5px 5px;
           background-size: 10px 10px, 10px 10px;
           border-radius: 100%;
-          box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
           cursor: pointer;
           display: inline-block;
-          height: 30px;
-          margin: 4px;
+          height: 24px;
+          margin: 6px;
           position: relative;
           user-select: none;
-          width: 30px;
+          width: 24px;
         }
 
         #swatchdisplay {
@@ -100,13 +98,17 @@ export class TerminalColorpickerElement extends LitElement {
         }
 
         #hexinput {
-          background-color: lightgrey;
+          background-color: #F1F3F4;
           border-radius: 4px;
           border: none;
-          box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-          margin: 4px;
+          color: #202124;
+          font-family: Roboto;
+          font-size: 13px;
           outline: none;
-          padding: 5px;
+          line-height: 32px;
+          margin: 8px 0 8px 6px;
+          padding: 0 8px;
+          text-transform: uppercase;
           width: 17ch;
         }
 
@@ -115,14 +117,19 @@ export class TerminalColorpickerElement extends LitElement {
           border-radius: 8px;
           box-shadow: 0 0 16px rgba(0, 0, 0, 0.12),
                       0 16px 16px rgba(0, 0, 0, 0.24);
+          padding: 0;
         }
 
         #dialog-content {
-          padding: 8px;
+          padding: 20px;
         }
 
-        hue-slider, transparency-slider, dialog #hexinput {
-          margin-top: 20px;
+        hue-slider, transparency-slider {
+          margin: 24px 0;
+        }
+
+        dialog #hexinput {
+          margin: 0;
         }
     `];
   }

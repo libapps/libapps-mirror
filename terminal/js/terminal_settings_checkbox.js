@@ -54,15 +54,14 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
     return css`
         #checkbox {
           cursor: pointer;
-          height: 15px;
-          margin: 0;
-          padding: 0;
+          height: 16px;
+          margin: 2px 0;
           position: relative;
           width: 38px;
         }
 
         #checkbox:before {
-          background-color: rgb(201, 206, 214);
+          background-color: rgb(189, 193, 198);
           border-radius: 15px;
           bottom: 0;
           content: "";
@@ -75,10 +74,11 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
         }
 
         #checkbox:after {
-          background-color: rgb(151, 162, 179);
+          background-color: rgb(255, 255, 255);
           border-radius: 100%;
           bottom: 0;
-          box-shadow: 1px 1px 3.5px 0px rgb(180, 180, 180);
+          box-shadow: 0 1px 1px 0 rgba(60, 64, 67, 0.3),
+                      0 1px 3px 1px rgba(60, 64, 67, 0.15);
           content: "";
           display: block;
           left: 0;
@@ -86,7 +86,7 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
           position: absolute;
           top: 0;
           transition: all 75ms ease-in-out;
-          width: 19px;
+          width: 20px;
         }
 
         #checkbox:checked:before {
@@ -95,7 +95,8 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
 
         #checkbox:checked:after {
           background-color: rgb(66, 133, 244);
-          box-shadow: 1px 1px 3.5px 0px rgb(160, 194, 249);
+          box-shadow: 0 1px 1px 0 rgba(66, 133, 244, 0.3),
+                      0 1px 3px 1px rgba(66, 133, 244, 0.15);
           left: calc(100% - 19px + 4px);
         }
     `;

@@ -33,7 +33,6 @@ export class SaturationLightnessPickerElement extends LitElement {
   static get styles() {
     return css`
         :host {
-          box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
           cursor: pointer;
           display: block;
           height: 160px;
@@ -81,17 +80,17 @@ export class SaturationLightnessPickerElement extends LitElement {
 
         #picker {
           border-radius: 100%;
-          border: 2px solid white;
-          box-shadow: 1px 1px 2px;
+          border: 3px solid white;
+          box-shadow: 0 0 0 1px #5F6368;
           box-sizing: border-box;
           cursor: pointer;
-          height: 24px;
+          height: 32px;
           left: 50%;
           pointer-events: none;
           position: absolute;
           top: 50%;
           transform: translate(-50%, -50%);
-          width: 24px;
+          width: 32px;
           z-index: 2;
         }
     `;
