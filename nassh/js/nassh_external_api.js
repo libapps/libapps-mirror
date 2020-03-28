@@ -258,6 +258,19 @@ function(request, sender, sendResponse) {
   });
 });
 
+nassh.External.COMMANDS.set('openProtoReg',
+/**
+ * Show the protocol registration dialog.
+ *
+ * @param {*} request Not used.
+ * @param {{id:string}} sender chrome.runtime.MessageSender
+ * @param {function(!Object=)} sendResponse Called to send response.
+ */
+function(request, sender, sendResponse) {
+  lib.f.openWindow(lib.f.getURL('/html/protocol_register.html'), '_blank');
+  sendResponse({error: false, message: 'openProtoReg'});
+});
+
 /**
  * Whether we've initialized enough for message handlers.
  *

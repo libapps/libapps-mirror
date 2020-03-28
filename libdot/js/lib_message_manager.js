@@ -165,7 +165,8 @@ lib.MessageManager.prototype.get = function(msgname, args, fallback) {
  *
  * The real work happens in processI18nAttribute.
  *
- * @param {!Element} node The element whose nodes will be translated.
+ * @param {!HTMLDocument|!Element} node The element whose nodes will be
+ *     translated.
  */
 lib.MessageManager.prototype.processI18nAttributes = function(node) {
   var nodes = node.querySelectorAll('[i18n]');

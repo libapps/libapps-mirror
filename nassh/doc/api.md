@@ -144,6 +144,16 @@ The response will have these additional fields:
 |----------------|---------|-------------|
 | `prefs`        | !Object | The exported preferences as JSON or an object. |
 
+### Protocol Registration
+
+Open a dedicated page for registering protocol handlers (e.g. `ssh://`).
+The web platform does not allow us to register handlers without user intent,
+so this provides a simple/clear UI for users to manually trigger.
+
+| Field name     | Type    | Description |
+|----------------|---------|-------------|
+| `command`      | !string | Must be `openProtoReg`. |
+
 
 [Chrome messaging API]: https://developer.chrome.com/apps/messaging
 [crosh]: chromeos-crosh.md

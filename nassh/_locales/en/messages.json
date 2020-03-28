@@ -1709,6 +1709,30 @@
 		"description": "Default filename for the preferences backup file. The filename should be translated, but the '.json' suffix should be retained.",
 		"message": "Secure Shell Preferences Backup.json"
 	},
+	"PROTOCOL_REGISTER_BUTTON": {
+		"description": "Label for the button that triggers dialogs that try to register ourselves to handle ssh:// URIs.",
+		"message": "Register protocol handlers"
+	},
+	"PROTOCOL_REGISTER_EXPLAIN": {
+		"description": "Text explaining what the protocolr registration process is for and what the UX looks like.",
+		"message": "The button below will attempt to register handlers for all protocols we support. For example, this allows us to handle ssh:// links directly. A prompt will be displayed by the browser for each protocol, so please confirm/accept each one as it is shown. If no prompts are shown, then please see the next section for troubleshooting tips."
+	},
+	"PROTOCOL_REGISTER_EXPLAIN_SETTINGS": {
+		"description": "Text explaining how to troubleshoot registration errors, and how to navigate the Chrome settings page.",
+		"message": "If we've already registered handlers, or previous registration attempts were denied, then no further prompts will be displayed. Please open the dialog below, then check the registered handler settings in the ssh/sftp/etc... sections. If they're blocked, you can delete them. If they're registered, but this isn't set as the default, you can change that too."
+	},
+	"PROTOCOL_REGISTER_OPTIONS_LINK": {
+		"description": "Link text to open the URI protocol registration page.",
+		"message": "Protocol Register"
+	},
+	"PROTOCOL_REGISTER_SETTINGS_BUTTON": {
+		"description": "Label for the button that opens a Chrome settings page.",
+		"message": "Open registered handlers settings"
+	},
+	"PROTOCOL_REGISTER_TITLE": {
+		"description": "Title page for the settings page that allows users to register the application to handle ssh:// URIs.",
+		"message": "Secure Shell protocol handler registration helper"
+	},
 	"READ_SIZE_LABEL": {
 		"description": "Label for the read size (in kilobytes) field.",
 		"message": "Read Size (KiB)"
