@@ -12,7 +12,7 @@ nassh.External = {};
 /**
  * Commands available.
  */
-nassh.External.COMMANDS = {};
+nassh.External.COMMANDS = new Map();
 
 /**
  * Our own extension ids.
@@ -25,6 +25,7 @@ nassh.External.SelfExtIds = new Set([
   'nkoccljplnhpfnfiajclkommnmllphnl',  // Crosh.
 ]);
 
+nassh.External.COMMANDS.set('hello',
 /**
  * Probe the extension.
  *
@@ -32,14 +33,14 @@ nassh.External.SelfExtIds = new Set([
  * @param {{id:string}} sender chrome.runtime.MessageSender
  * @param {function(!Object=)} sendResponse called to send response.
  */
-nassh.External.COMMANDS.hello = (request, sender, sendResponse) => {
+function(request, sender, sendResponse) {
   sendResponse({
     error: false,
     message: 'hello',
     internal: sender.internal,
     id: sender.id,
   });
-};
+});
 
 /**
  * Root dir for all files to be written under.
@@ -55,6 +56,7 @@ nassh.External.ROOT_DIR = '/external';
  */
 nassh.External.sessionCounter_ = 0;
 
+nassh.External.COMMANDS.set('mount',
 /**
  * Performs SFTP mount.
  *
@@ -64,10 +66,15 @@ nassh.External.sessionCounter_ = 0;
  * @param {{id:string}} sender chrome.runtime.MessageSender
  * @param {function(!Object=)} sendResponse called to send response.
  */
-nassh.External.COMMANDS.mount = (request, sender, sendResponse) => {
+function(request, sender, sendResponse) {
   const sessionId = nassh.External.sessionCounter_++;
   const knownHosts = `${nassh.External.ROOT_DIR}/${sessionId}.known_hosts`;
   const identityFile = `${nassh.External.ROOT_DIR}/${sessionId}.identity_file`;
+  /**
+   * @param {string} filename The filename to write to.
+   * @param {string} content The data to write out.
+   * @return {!Promise<void>} A promise completing when the write finishes.
+   */
   const writeFile = (filename, content) => {
     return lib.fs.overwriteFile(
         nassh.External.fileSystem_.root, filename, content);
@@ -99,7 +106,7 @@ nassh.External.COMMANDS.mount = (request, sender, sendResponse) => {
     console.error(e);
     sendResponse({error: true, message: e.message, stack: e.stack});
   });
-};
+});
 
 /**
  * @typedef {{
@@ -154,6 +161,7 @@ nassh.External.newWindow_ = function(
   sendResponse(response);
 };
 
+nassh.External.COMMANDS.set('crosh',
 /**
  * Opens a new crosh window.
  *
@@ -162,7 +170,7 @@ nassh.External.newWindow_ = function(
  * @param {{id:string}} sender chrome.runtime.MessageSender.
  * @param {function(!Object=)} sendResponse called to send response.
  */
-nassh.External.COMMANDS.crosh = function(request, sender, sendResponse) {
+function(request, sender, sendResponse) {
   if (!sender.internal) {
     delete request.url;
   }
@@ -174,8 +182,9 @@ nassh.External.COMMANDS.crosh = function(request, sender, sendResponse) {
   nassh.External.newWindow_(
       {error: false, message: 'openCrosh'},
       request, sender, sendResponse);
-};
+});
 
+nassh.External.COMMANDS.set('nassh',
 /**
  * Opens a new nassh window.
  *
@@ -184,7 +193,7 @@ nassh.External.COMMANDS.crosh = function(request, sender, sendResponse) {
  * @param {{id:string}} sender chrome.runtime.MessageSender.
  * @param {function(!Object=)} sendResponse called to send response.
  */
-nassh.External.COMMANDS.nassh = function(request, sender, sendResponse) {
+function(request, sender, sendResponse) {
   if (!sender.internal) {
     delete request.url;
   }
@@ -196,8 +205,9 @@ nassh.External.COMMANDS.nassh = function(request, sender, sendResponse) {
   nassh.External.newWindow_(
       {error: false, message: 'openNassh'},
       request, sender, sendResponse);
-};
+});
 
+nassh.External.COMMANDS.set('prefsImport',
 /**
  * Import new preferences.
  *
@@ -205,7 +215,7 @@ nassh.External.COMMANDS.nassh = function(request, sender, sendResponse) {
  * @param {{id:string}} sender chrome.runtime.MessageSender
  * @param {function(!Object=)} sendResponse called to send response.
  */
-nassh.External.COMMANDS.prefsImport = (request, sender, sendResponse) => {
+function(request, sender, sendResponse) {
   if (!sender.internal && !nassh.External.SelfExtIds.has(sender.id)) {
     sendResponse(
         {error: true, message: 'prefsImport: External access not allowed'});
@@ -223,8 +233,9 @@ nassh.External.COMMANDS.prefsImport = (request, sender, sendResponse) => {
   nassh.importPreferences(prefs, () => {
     sendResponse({error: false, message: 'prefsImport'});
   });
-};
+});
 
+nassh.External.COMMANDS.set('prefsExport',
 /**
  * Export existing preferences.
  *
@@ -232,7 +243,7 @@ nassh.External.COMMANDS.prefsImport = (request, sender, sendResponse) => {
  * @param {{id:string}} sender chrome.runtime.MessageSender
  * @param {function(!Object=)} sendResponse called to send response.
  */
-nassh.External.COMMANDS.prefsExport = (request, sender, sendResponse) => {
+function(request, sender, sendResponse) {
   if (!sender.internal && !nassh.External.SelfExtIds.has(sender.id)) {
     sendResponse(
         {error: true, message: 'prefsExport: External access not allowed'});
@@ -245,7 +256,7 @@ nassh.External.COMMANDS.prefsExport = (request, sender, sendResponse) => {
     }
     sendResponse({error: false, message: 'prefsExport', prefs: prefs});
   });
-};
+});
 
 /**
  * Whether we've initialized enough for message handlers.
@@ -284,14 +295,14 @@ nassh.External.dispatchMessage_ = (internal, request, sender, sendResponse) => {
   if (typeof request != 'object') {
     sendResponse({error: true, message: `invalid request: ${request}`});
     return false;
-  } else if (!nassh.External.COMMANDS.hasOwnProperty(request.command)) {
+  } else if (!nassh.External.COMMANDS.has(request.command)) {
     sendResponse(
         {error: true, message: `unsupported command '${request.command}'`});
     return false;
   }
   console.log(`API: ${request.command}`);
   try {
-    nassh.External.COMMANDS[request.command].call(
+    nassh.External.COMMANDS.get(request.command).call(
         this, request, sender, sendResponse);
 
     // Return true to allow async sendResponse.
