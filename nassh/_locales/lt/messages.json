@@ -198,13 +198,13 @@
 		"message": "Automatiškai kopijuojamas pasirinkimas pelės klavišu į iškarpinę."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Paspaudus „Ctrl“ + C kopijuojama, jei nustatyta kaip „Tiesa“; siunčiama ^C į prieglobos serverį, jei nustatyta kaip „Netiesa“.\nPaspaudus „Ctrl“ + „Shift“ + C siunčiama ^C į prieglobos serverį, jei nustatyta kaip „Tiesa“; kopijuojama, jei nustatyta kaip „Netiesa“."
+		"message": "Paspaudus „Ctrl“ + C kopijuojama, jei nustatyta į „true“; siunčiama ^C į prieglobos serverį, jei nustatyta į „false“.\nPaspaudus „Ctrl“ + „Shift“ + C siunčiama ^C į prieglobos serverį, jei nustatyta į „true“; kopijuojama, jei nustatyta į „false“."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "Jei nustatyta kaip „Tiesa“, paspaudus „Ctrl“ ir pliuso / minuso / nulio klavišą valdomas mastelis.\nJei nustatyta kaip „Netiesa“, paspaudus „Ctrl“, „Shift“ ir pliuso / minuso / nulio klavišą valdomas mastelis, paspaudus „Ctrl“ ir minuso klavišą siunčiama ^_, paspaudus „Ctrl“ ir pliuso / nulio klavišą, neatliekami jokie veiksmai."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Paspaudus „Ctrl“ + V įklijuojama, jei nustatyta kaip „Tiesa“; jei nustatyta kaip „Netiesa“, siunčiama ^V į prieglobos serverį.\nPaspaudus „Ctrl“ + „Shift“ + V siunčiama ^V į prieglobos serverį, jei nustatyta kaip „Tiesa“; jei nustatyta kaip „Netiesa“, įklijuojama."
+		"message": "Paspaudus „Ctrl“ + V įklijuojama, jei nustatyta į „true“; jei nustatyta į „false“, siunčiama ^V į prieglobos serverį.\nPaspaudus „Ctrl“ + „Shift“ + V siunčiama ^V į prieglobos serverį, jei nustatyta į „true“; jei nustatyta į „false“, įklijuojama."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Ar teksto žymeklis mirksi pagal numatytuosius nustatymus. Vykdant tai galima keisti naudojant terminalo kaitos sekas."

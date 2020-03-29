@@ -516,7 +516,7 @@
 		"message": "Has trobat un error? Vols una nova funció? Fes-nos-ho saber: https://goo.gl/vb94JY"
 	},
 	"unexpected_error": {
-		"message": "S'ha produït un error inesperat. Consulta la Consola de JavaScript per obtenir més detalls."
+		"message": "S'ha produït un error inesperat. Consulta la consola de JavaScript per obtenir més detalls."
 	},
 	"unknown_ssh_client_version": {
 		"message": "Versió d'SSH desconeguda: $1"

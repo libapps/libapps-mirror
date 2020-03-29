@@ -198,13 +198,13 @@
 		"message": "Nakili kiotomatiki sehemu uliyochagua kwa kutumia kipanya kwenye ubao wa kunakili."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl+C hunakili ikiwa ndivyo, hutuma ^C kwenye seva pangishi ikiwa sivyo.\nCtrl+Shift+C hutuma ^C kwenye seva pangishi ikiwa ndivyo, hunakili ikiwa sivyo."
+		"message": "Ctrl+C hunakili kama ndivyo, hutuma ^C kwenye seva pangishi kama sivyo.\nCtrl+Shift+C hutuma ^C kwenye seva pangishi kama ndivyo, hunakili kama sivyo."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "Ikiwa ndivyo, Ctrl+Plus/Minus/Zero hudhibiti ukuzaji.\nIkiwa sivyo, Ctrl+Shift+Plus/Minus/Zero hudhibiti ukuzaji, Ctrl+Minus hutuma ^_, Ctrl+Plus/Zero haifanyi chochote."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl+V hubandika ikiwa ndivyo, hutuma ^V kwenye seva pangishi ikiwa sivyo.\nCtrl+Shift+V hutuma ^V kwenye seva pangishi ikiwa ndivyo, hubandika ikiwa sivyo."
+		"message": "Ctrl+V hubandika kama ndivyo, hutuma ^V kwenye seva pangishi kama sivyo.\nCtrl+Shift+V hutuma ^V kwenye seva pangishi kama ndivyo, hubandika kama sivyo."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Ikiwa kishale cha maandishi kinapepesapepesa kwa chaguomsingi. Hali hii inaweza kubadilishwa wakati wa utekelezaji kupitia mifuatano ya mwisho ya uondoaji."
@@ -246,7 +246,7 @@
 		"message": "Vigezo vya kwanza vya mazingira, kama kipengee."
 	},
 	"hterm_pref_font_family": {
-		"message": "Jamii chaguomsingi ya sehemu ya maandishi."
+		"message": "Kundi chaguomsingi la sehemu ya maandishi."
 	},
 	"hterm_pref_font_size": {
 		"message": "Ukubwa chaguomsingi wa fonti katika pikseli."
@@ -354,7 +354,7 @@
 		"message": "Kibodi"
 	},
 	"hterm_title_pref_miscellaneous": {
-		"message": "Mingineyo"
+		"message": "Mengineyo"
 	},
 	"hterm_title_pref_scrolling": {
 		"message": "Kusogeza"

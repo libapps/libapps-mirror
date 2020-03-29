@@ -1,54 +1,12 @@
 {
-	"already_mounted_message": {
-		"message": "File system is already mounted!"
-	},
 	"backup_prefs": {
 		"message": "Save backup"
-	},
-	"bad_destination": {
-		"message": "Unable to parse destination: $1"
-	},
-	"before_unload": {
-		"message": "Closing this tab will disconnect this session."
-	},
-	"cache_pin_prompt": {
-		"message": "Cache the PIN for this session? (Y/N):"
-	},
-	"cancel_button_label": {
-		"message": "Cancel"
-	},
-	"clear_known_hosts_menu_label": {
-		"message": "Clear SSH known_hosts"
-	},
-	"cmd_ssh_forget_host_help": {
-		"message": "This command displays a menu of known hosts and prompts for the host to forget."
 	},
 	"cmd_ssh_forget_host_title": {
 		"message": "Forget a known SSH host."
 	},
 	"cmd_ssh_help": {
 		"message": "The |username| and |hostname| parameters are required; |port| is optional. If port is not specified, it defaults to 22."
-	},
-	"cmd_ssh_title": {
-		"message": "Opens a new SSH session."
-	},
-	"command_complete": {
-		"message": "The command $1 exited with status code $2."
-	},
-	"command_not_supported": {
-		"message": "$1 is not supported on this version of Chrome"
-	},
-	"command_startup_failed": {
-		"message": "Launching $1 failed: $2"
-	},
-	"connect_button_label": {
-		"message": "Connect"
-	},
-	"connect_or_exit_message": {
-		"message": "(C)hoose another connection or E(x)it?"
-	},
-	"connecting": {
-		"message": "Connecting to $1..."
 	},
 	"connection_dialog_name": {
 		"message": "Connection Dialogue"
@@ -59,155 +17,23 @@
 	"console_nassh_options_notice": {
 		"message": "Did you know that there is a dedicated options page?\nNo need to modify 'term_' directly anymore.\n$1"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
-	"delete_button_label": {
-		"message": "Delete"
-	},
 	"disconnect_message": {
 		"message": "NaCl plug-in exited with status code $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
-	},
-	"faq_menu_label": {
-		"message": "FAQ"
-	},
-	"field_argstr_placeholder": {
-		"message": "extra command line arguments"
-	},
-	"field_description_aria_label": {
-		"message": "description"
-	},
-	"field_description_placeholder": {
-		"message": "username@hostname or free form text"
-	},
-	"field_hostname_aria_label": {
-		"message": "hostname"
-	},
-	"field_hostname_placeholder": {
-		"message": "hostname"
-	},
-	"field_mount_path_placeholder": {
-		"message": "the default path is the user's home directory"
-	},
-	"field_nassh_options_aria_label": {
-		"message": "SSH relay server options"
-	},
-	"field_nassh_options_placeholder": {
-		"message": "SSH relay server options"
-	},
-	"field_port_aria_label": {
-		"message": "port"
-	},
-	"field_port_placeholder": {
-		"message": "port"
-	},
-	"field_terminal_profile_placeholder": {
-		"message": "default"
-	},
-	"field_username_aria_label": {
-		"message": "username"
-	},
-	"field_username_placeholder": {
-		"message": "username"
-	},
-	"found_relay": {
-		"message": "Found relay server: $1"
-	},
-	"get_profile_error": {
-		"message": "ERROR: Could not load profile $1:\n$2"
-	},
-	"hterm_announce_current_screen_header": {
-		"message": "$1% scrolled,"
-	},
-	"hterm_button_allow_always": {
-		"message": "Always allow"
-	},
-	"hterm_button_allow_session": {
-		"message": "Allow this session"
-	},
-	"hterm_button_block": {
-		"message": "Block"
-	},
-	"hterm_button_page_down": {
-		"message": "Page down"
-	},
-	"hterm_button_page_up": {
-		"message": "Page up"
-	},
-	"hterm_loading_resource_failed": {
-		"message": "Loading $1 failed"
 	},
 	"hterm_loading_resource_start": {
 		"message": "Loading $1 …"
 	},
-	"hterm_popup_inline_image": {
-		"message": "Inline Images"
-	},
-	"hterm_popup_inline_image_disabled": {
-		"message": "Inline Images Disabled"
-	},
-	"hterm_pref_allow_images_inline": {
-		"message": "Whether to allow the remote host to display images in the terminal.\n\nBy default, we prompt until a choice is made."
-	},
-	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "If set, undoes the Chrome OS Alt+Backspace->DEL remap, so that Alt+Backspace indeed is Alt+Backspace."
-	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Select an AltGr detection heuristic.\n\n'null': Autodetect based on navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Disable any AltGr-related munging.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
-	},
-	"hterm_pref_alt_is_meta": {
-		"message": "Whether the Alt key acts as a Meta key or as a distinct Alt key."
-	},
-	"hterm_pref_alt_sends_what": {
-		"message": "Controls how the Alt key is handled.\n\n  escape: Send an ESC prefix.\n  8-bit: Add 128 to the typed character as in xterm.\n browser-key: Wait for the keypress event and see what the browser\n says. (This won't work well on platforms where the browser\n performs a default action for some Alt sequences.)"
-	},
-	"hterm_pref_audible_bell_sound": {
-		"message": "URL of the terminal bell sound. Empty string for no audible bell."
 	},
 	"hterm_pref_background_color": {
 		"message": "The background colour for text with no other colour attributes."
 	},
-	"hterm_pref_background_image": {
-		"message": "CSS value of the background image. Empty string for no image.\n\nFor example:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
-	},
 	"hterm_pref_background_position": {
 		"message": "CSS value of the background image position.\n\nFor example:\n  10% 10%\n  centre"
 	},
-	"hterm_pref_background_size": {
-		"message": "CSS value of the background image size."
-	},
-	"hterm_pref_backspace_sends_backspace": {
-		"message": "If true, the backspace should send BS ('\\x08', aka ^H). Otherwise the backspace key should send '\\x7f'."
-	},
-	"hterm_pref_character_map_overrides": {
-		"message": "This is specified as an object. It is a sparse array, where each property is the character set code and the value is an object that is a sparse array itself. In that sparse array, each property is the received character and the value is the displayed character.\n\nFor example:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
-	},
-	"hterm_pref_clear_selection_after_copy": {
-		"message": "Whether to clear the selection after copying."
-	},
-	"hterm_pref_close_on_exit": {
-		"message": "Whether to close the window when the command finishes executing."
-	},
 	"hterm_pref_color_palette_overrides": {
 		"message": "Override colours in the default palette.\n\nThis can be specified as an array or an object. If specified as an object it is assumed to be a sparse array, where each property is a numeric index into the colour palette.\n\nValues can be specified as almost any CSS colour value. This includes #RGB, #RRGGBB, rgb(...), rgba(...) and any colour names that are also part of the standard X11 rgb.txt file.\n\nYou can use 'null' to specify that the default value should not be changed. This is useful for skipping a small number of indices when the value is specified as an array.\n\nFor example, these set both colour index 1 to blue:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
-	},
-	"hterm_pref_copy_on_select": {
-		"message": "Automatically copy mouse selection to the clipboard."
-	},
-	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl+C copies if true, send ^C to host if false.\nCtrl+Shift+C sends ^C to host if true, copies if false."
-	},
-	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "If true, Ctrl+Plus/Minus/Zero controls zoom.\nIf false, Ctrl+Shift+Plus/Minus/Zero controls zoom, Ctrl+Minus sends ^_, Ctrl+Plus/Zero do nothing."
-	},
-	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl+V pastes if true, send ^V to host if false.\nCtrl+Shift+V sends ^V to host if true, pastes if false."
-	},
-	"hterm_pref_cursor_blink": {
-		"message": "Whether the text cursor blinks by default. This can be toggled at runtime via terminal escape sequences."
 	},
 	"hterm_pref_cursor_blink_cycle": {
 		"message": "The text cursor blink rate in milliseconds.\n\nA two element array, the first of which is how long the text cursor should be on, the second is how long it should be off."
@@ -221,38 +47,11 @@
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Whether East Asian Ambiguous characters have two-column width."
 	},
-	"hterm_pref_enable_8_bit_control": {
-		"message": "True to enable 8-bit control characters, false to ignore them.\n\nWe'll respect the two-byte versions of these control characters regardless of this setting."
-	},
-	"hterm_pref_enable_blink": {
-		"message": "If true, respect the blink attribute. False to ignore it."
-	},
 	"hterm_pref_enable_bold": {
 		"message": "If true, use bold weight font for text with the bold/bright attribute. False to use the normal weight font. Null to auto-detect."
 	},
 	"hterm_pref_enable_bold_as_bright": {
 		"message": "If true, use bright colours (8-15 on a 16-colour palette) for any text with the bold attribute. False otherwise."
-	},
-	"hterm_pref_enable_clipboard_notice": {
-		"message": "Whether to show a message in the terminal when the host writes to the clipboard."
-	},
-	"hterm_pref_enable_clipboard_write": {
-		"message": "Allow the remote host to write directly to the local system clipboard.\nRead access is never granted regardless of this setting.\n\nThis is used to control access to features like OSC-52."
-	},
-	"hterm_pref_enable_dec12": {
-		"message": "Respect the host's attempt to change the text cursor blink status using DEC Private Mode 12."
-	},
-	"hterm_pref_environment": {
-		"message": "The initial set of environment variables, as an object."
-	},
-	"hterm_pref_font_family": {
-		"message": "Default font family for the terminal text."
-	},
-	"hterm_pref_font_size": {
-		"message": "The default font size in pixels."
-	},
-	"hterm_pref_font_smoothing": {
-		"message": "CSS font-smoothing property."
 	},
 	"hterm_pref_foreground_color": {
 		"message": "The foreground colour for text with no other colour attributes."
@@ -260,83 +59,20 @@
 	"hterm_pref_hide_mouse_while_typing": {
 		"message": "Whether to automatically hide the mouse cursor when typing. By default, auto-detect whether the platform/OS handles this.\n\nNote: Some operating systems may override this setting and thus you might not always be able to disable it."
 	},
-	"hterm_pref_home_keys_scroll": {
-		"message": "If true, Home/End controls the terminal scrollbar and Shift+Home/Shift+End are sent to the remote host. If false, then Home/End are sent to the remote host and Shift+Home/Shift+End scrolls."
-	},
-	"hterm_pref_keybindings": {
-		"message": "A map of key sequence to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers, or a key identifier. Key actions can be specified as a string to send to the host or an action identifier. For a full explanation of the format, see https://goo.gl/LWRndr.\n\nSample keybindings:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
-	},
-	"hterm_pref_media_keys_are_fkeys": {
-		"message": "If true, convert media keys to their Fkey equivalent. If false, let the browser handle the keys."
-	},
-	"hterm_pref_meta_sends_escape": {
-		"message": "Send an ESC prefix when pressing a key while holding the Meta key.\n\nFor example, when enabled, pressing Meta+K will send ^[k as if you typed Escape then k. When disabled, only k will be sent."
-	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Mouse paste button, or null to auto-detect.\n\nFor auto-detect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the native window manager should paste via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: This will handle left- & right-handed mice correctly."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Paste on right mouse button clicks.\n\nThis option is independent of the 'mouse-paste-button' setting.\n\nNote: This will handle left- & right-handed mice correctly."
 	},
-	"hterm_pref_page_keys_scroll": {
-		"message": "If true, Page Up/Page Down controls the terminal scrollbar and Shift+Page Up/Shift+Page Down are sent to the remote host. If false, then Page Up/Page Down are sent to the remote host and Shift+Page Up/Shift+Page Down scrolls."
-	},
-	"hterm_pref_pass_alt_number": {
-		"message": "Whether Alt+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard accelerators. When not running in a tab, it's better to send these keys to the host so that they can be used in vim or emacs.\n\nIf true, Alt+1..9 will be handled by the browser. If false, Alt+1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
-	},
-	"hterm_pref_pass_ctrl_number": {
-		"message": "Whether Ctrl+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard accelerators. When not running in a tab, it's better to send these keys to the host so that they can be used in vim or emacs.\n\nIf true, Ctrl+1..9 will be handled by the browser. If false, Ctrl+1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
-	},
-	"hterm_pref_pass_meta_number": {
-		"message": "Whether Meta+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard accelerators. When not running in a tab it's better to send these keys to the host so that they can be used in vim or emacs.\n\nIf true, Meta+1..9 will be handled by the browser. If false, Meta+1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
-	},
-	"hterm_pref_pass_meta_v": {
-		"message": "Whether Meta+V gets passed to host."
-	},
-	"hterm_pref_receive_encoding": {
-		"message": "Set the expected encoding for data received from the host.\nIf the encodings do not match, visual bugs are likely to be observed.\n\nValid values are 'utf-8' and 'raw'."
-	},
-	"hterm_pref_scroll_on_keystroke": {
-		"message": "Whether to scroll to the bottom on any keystroke."
-	},
-	"hterm_pref_scroll_on_output": {
-		"message": "Whether to scroll to the bottom on terminal output."
-	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
 		"message": "When using the alternative screen buffer, and DECCKM (Application Cursor Keys) is active, mouse wheel scroll events will emulate arrow keys.\n\nIt can be temporarily disabled by holding the Shift key.\n\nThis frequently comes up when using pagers (less), reading man pages or text editors (vi/nano) or using screen/tmux."
-	},
-	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "The multiplier for scroll wheel events when measured in pixels.\n\nAlters how fast the page scrolls."
-	},
-	"hterm_pref_scrollbar_visible": {
-		"message": "The vertical scrollbar mode."
-	},
-	"hterm_pref_shift_insert_paste": {
-		"message": "Whether Shift+Insert is used for pasting or is sent to the remote host."
-	},
-	"hterm_pref_terminal_encoding": {
-		"message": "The default terminal encoding (DOCS).\n\nISO-2022 enables character map translations (like graphics maps).\nUTF-8 disables support for those.\n\nThe locked variant means the encoding cannot be changed at runtime via terminal escape sequences.\n\nYou should stick with UTF-8 unless you notice broken rendering with legacy applications."
 	},
 	"hterm_pref_use_default_window_copy": {
 		"message": "Whether to use the default browser/OS's copy behaviour.\n\nAllow the browser/OS to handle the copy event directly, which might improve compatibility with some systems (where copying doesn't work at all), but makes the text selection less robust.\n\nFor example, long lines that were automatically line wrapped will be copied with the new lines still in them."
 	},
-	"hterm_pref_user_css": {
-		"message": "URL of user style sheet to include in the terminal document."
-	},
-	"hterm_pref_user_css_text": {
-		"message": "Custom CSS text for styling the terminal."
-	},
 	"hterm_pref_word_break_match_left": {
 		"message": "Regular expression to halt matching to the left (start) of a selection.\n\nNormally this is a character class to reject specific characters.\nWe allow '~' and '.' by default as paths frequently start with those."
-	},
-	"hterm_pref_word_break_match_middle": {
-		"message": "Regular expression to match all the characters in the middle.\n\nNormally this is a character class to reject specific characters.\n\nUsed to expand the selection surrounding the starting point."
-	},
-	"hterm_pref_word_break_match_right": {
-		"message": "Regular expression to halt matching to the right (end) of a selection.\n\nNormally this is a character class to reject specific characters."
-	},
-	"hterm_space_character": {
-		"message": "Space"
 	},
 	"hterm_title_pref_appearance": {
 		"message": "Appearance (fonts, colours, images)"
@@ -344,65 +80,8 @@
 	"hterm_title_pref_copypaste": {
 		"message": "Copy & paste"
 	},
-	"hterm_title_pref_encoding": {
-		"message": "Encoding"
-	},
-	"hterm_title_pref_extensions": {
-		"message": "Extensions"
-	},
-	"hterm_title_pref_keyboard": {
-		"message": "Keyboard"
-	},
-	"hterm_title_pref_miscellaneous": {
-		"message": "Miscellaneous"
-	},
-	"hterm_title_pref_scrolling": {
-		"message": "Scrolling"
-	},
-	"hterm_title_pref_sounds": {
-		"message": "Sounds"
-	},
-	"identity_label": {
-		"message": "Identity"
-	},
-	"import_link_aria_label": {
-		"message": "file import"
-	},
-	"import_link_label": {
-		"message": "Import..."
-	},
-	"initializing_relay": {
-		"message": "Looking up relay server using: $1"
-	},
-	"json_parse_error": {
-		"message": "Could not parse JSON in '$1': $2"
-	},
-	"known_hosts_empty": {
-		"message": "No known hosts, nothing to forget."
-	},
-	"known_hosts_prompt": {
-		"message": "Please select a host to forget [1-$1]:"
-	},
-	"known_hosts_title": {
-		"message": "Known hosts:"
-	},
-	"loading_label": {
-		"message": "Loading..."
-	},
-	"missing_param": {
-		"message": "Missing parameter: $1"
-	},
 	"mount_button_label": {
 		"message": "SFTP mount"
-	},
-	"mount_path_label": {
-		"message": "Mount Path"
-	},
-	"mounted_message": {
-		"message": "Mounted!"
-	},
-	"nassh_options_error": {
-		"message": "Unknown relay option: $1"
 	},
 	"new_window_menu_label": {
 		"message": "New window"
@@ -410,53 +89,17 @@
 	"notify_copy": {
 		"message": "Selection copied"
 	},
-	"ok_button_label": {
-		"message": "OK"
-	},
-	"omnibox_default": {
-		"message": "<url><match>user@hostname[:port]</match></url> Connect to a saved profile or a new ssh system"
-	},
-	"open_as_window_tip": {
-		"message": "[Pro Tip] Use 'Open as Window' or 'Full screen' to prevent Ctrl+W from closing your terminal!\n[Pro Tip] See $1 for more information."
-	},
-	"options_button_label": {
-		"message": "Options"
-	},
 	"plugin_loading": {
 		"message": "Loading NaCl plug-in..."
-	},
-	"plugin_loading_complete": {
-		"message": " done."
-	},
-	"plugin_loading_failed": {
-		"message": " failed! :("
-	},
-	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
 	},
 	"preferences_header": {
 		"message": "Profile settings"
 	},
-	"preferences_reset": {
-		"message": "All preferences reset!"
-	},
 	"reconnect_message": {
 		"message": "(R)econnect, (C)hoose another connection or E(x)it?"
 	},
-	"relay_retry": {
-		"message": "Retrying..."
-	},
-	"request_pin_prompt": {
-		"message": "Enter PIN to unlock key $1 on '$2' ($3 tries remaining):"
-	},
 	"restore_prefs": {
 		"message": "Restore backup"
-	},
-	"shortcut_list_aria_label": {
-		"message": "saved connections"
-	},
-	"smart_card_connector_not_installed": {
-		"message": "Please install the Smart Card Connector app: $1"
 	},
 	"ssh_argstr_label": {
 		"message": "SSH arguments"
@@ -464,82 +107,19 @@
 	"terminal_clear_menu_label": {
 		"message": "Terminal clear"
 	},
-	"terminal_preview_label": {
-		"message": "Preview"
-	},
-	"terminal_profile_label": {
-		"message": "Current profile"
-	},
 	"terminal_reset_menu_label": {
 		"message": "Terminal reset"
-	},
-	"tip_1": {
-		"message": "You can hold Ctrl (Cmd on macOS) while clicking on links to open them!"
-	},
-	"tip_10": {
-		"message": "When running in a window, Ctrl+Shift+N can open another session."
-	},
-	"tip_11": {
-		"message": "You can rebind keys/shortcuts: https://goo.gl/LWRndr"
-	},
-	"tip_12": {
-		"message": "Use Yubikeys and other smart cards for ssh authentication: https://goo.gl/Hu2o3v"
-	},
-	"tip_13": {
-		"message": "Display images inline: https://goo.gl/MnSysj"
 	},
 	"tip_14": {
 		"message": "Holding Ctrl (Cmd on macOS) while right-clicking brings up a context menu."
 	},
-	"tip_2": {
-		"message": "Display notifications in the browser using hterm-notify: https://goo.gl/ZNxGdF"
-	},
-	"tip_3": {
-		"message": "Connect from the omnibox by typing 'ssh <profile name>': https://goo.gl/V7o8ki"
-	},
-	"tip_4": {
-		"message": "Chrome OS can mount file systems via SFTP and browse via the Files app. Use 'SFTP Mount' instead of 'Connect'."
-	},
-	"tip_5": {
-		"message": "Connect using ssh:// links in web pages, or save a bookmark: https://goo.gl/zS8EZD"
-	},
 	"tip_6": {
 		"message": "Colour your output/prompt using basic 16 colours & 256 colours & full 24-bit colours: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
-	},
-	"tip_7": {
-		"message": "Copy to your clipboard from emacs/vim/etc... using OSC-52: https://goo.gl/XSnyLo"
-	},
-	"tip_8": {
-		"message": "Chat with fellow hterm/Secure Shell users via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
-	},
-	"tip_9": {
-		"message": "Found a bug? Request a new feature? Let us know: https://goo.gl/vb94JY"
 	},
 	"unexpected_error": {
 		"message": "An unexpected error occurred; please check the JavaScript console for more details."
 	},
-	"unknown_ssh_client_version": {
-		"message": "Unknown SSH version: $1"
-	},
-	"unmount_button_label": {
-		"message": "Unmount SFTP"
-	},
-	"welcome_changelog": {
-		"message": "ChangeLog/release notes: $1"
-	},
 	"welcome_faq": {
 		"message": "Answers to frequently asked questions: $1 (ctrl+click on links to open)"
-	},
-	"welcome_release_highlights": {
-		"message": "Major changes since $1:"
-	},
-	"welcome_tip_of_day": {
-		"message": "Random Pro Tip #$1: $2"
-	},
-	"welcome_version": {
-		"message": "Welcome to $1 version $2."
-	},
-	"zoom_warning": {
-		"message": "Please set Chrome Menu->Zoom to 100%"
 	}
 }

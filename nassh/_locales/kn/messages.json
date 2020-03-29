@@ -1,9 +1,9 @@
 {
 	"already_mounted_message": {
-		"message": "File system is already mounted!"
+		"message": "ಫೈಲ್ ಸಿಸ್ಟಂ ಅನ್ನು ಈಗಾಗಲೇ ಮೌಂಟ್ ಮಾಡಲಾಗಿದೆ!"
 	},
 	"backup_prefs": {
-		"message": "Save Backup"
+		"message": "ಬ್ಯಾಕಪ್ ಅನ್ನು ಉಳಿಸಿ"
 	},
 	"bad_destination": {
 		"message": "ಗಮ್ಯಸ್ಥಾನ ಪಾರ್ಸ್ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ: $1"
@@ -27,13 +27,13 @@
 		"message": "ತಿಳಿದಿರುವ ssh ಹೋಸ್ಟ್ ಅನ್ನು ಮರೆಯಿರಿ."
 	},
 	"cmd_ssh_help": {
-		"message": "|username| ಮತ್ತು |hostname| ಪ್ಯಾರಾಮೀಟರ್‌ಗಳು ಅಗತ್ಯವಾಗಿವೆ, |port| ಐಚ್ಛಿಕವಾಗಿದೆ. ಪೋರ್ಟ್ ಅನ್ನು ನಿರ್ದಿಷ್ಟಪಡಿಸಿರದಿದ್ದರೆ, ಇದು 22 ಕ್ಕೆ ಡಿಫಾಲ್ಟ್ ಆಗುತ್ತದೆ."
+		"message": "|username| ಮತ್ತು |hostname| ಪ್ಯಾರಾಮೀಟರ್‌ಗಳು ಅಗತ್ಯವಾಗಿವೆ, |port| ಐಚ್ಛಿಕವಾಗಿದೆ. ಪೋರ್ಟ್ ಅನ್ನು ನಿರ್ದಿಷ್ಟಪಡಿಸಿರದಿದ್ದರೆ, ಇದು 22 ಕ್ಕೆ ಡೀಫಾಲ್ಟ್ ಆಗುತ್ತದೆ."
 	},
 	"cmd_ssh_title": {
 		"message": "ಹೊಸ SSH ಸೆಶನ್ ಅನ್ನು ತೆರೆಯುತ್ತದೆ."
 	},
 	"command_complete": {
-		"message": "The command $1 exited with status code $2."
+		"message": "$1 ಕಮಾಂಡ್, $2 ಕೋಡ್‌ನೊಂದಿಗೆ ನಿರ್ಗಮಿಸಿದೆ."
 	},
 	"command_not_supported": {
 		"message": "Chrome ನ ಈ ಆವೃತ್ತಿಯಲ್ಲಿ $1 ಬೆಂಬಲಿತವಾಗಿಲ್ಲ"
@@ -45,10 +45,10 @@
 		"message": "ಸಂಪರ್ಕಿಸಿ"
 	},
 	"connect_or_exit_message": {
-		"message": "(C)hoose another connection or E(x)it?"
+		"message": "ಬೇರೊಂದು ಸಂಪರ್ಕ ಆಯ್ಕೆ ಮಾಡಬೇಕೇ (C) ಅಥವಾ ನಿರ್ಗಮಿಸಬೇಕೇ (x)?"
 	},
 	"connecting": {
-		"message": "Connecting to $1..."
+		"message": "$1 ಗೆ ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ..."
 	},
 	"connection_dialog_name": {
 		"message": "ಸಂಪರ್ಕ ಡೈಲಾಗ್"
@@ -63,10 +63,10 @@
 		"message": "[DEL]"
 	},
 	"delete_button_label": {
-		"message": "Delete"
+		"message": "ಅಳಿಸಿ"
 	},
 	"disconnect_message": {
-		"message": "NaCl plugin exited with status code $1."
+		"message": "$1 ಕೋಡ್‌ನೊಂದಿಗೆ NaCl ಪ್ಲಗ್ಇನ್‌ನಿಂದ ನಿರ್ಗಮಿಸಲಾಗಿದೆ."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -75,22 +75,22 @@
 		"message": "FAQ"
 	},
 	"field_argstr_placeholder": {
-		"message": "extra command line arguments"
+		"message": "ಹೆಚ್ಚುವರಿ ಕಮಾಂಡ್ ಲೈನ್ ಆರ್ಗ್ಯುಮೆಂಟ್‌ಗಳು"
 	},
 	"field_description_aria_label": {
-		"message": "description"
+		"message": "ವಿವರಣೆ"
 	},
 	"field_description_placeholder": {
-		"message": "username@hostname or free form text"
+		"message": "username@hostname ಅಥವಾ ಮುಕ್ತ ಸ್ವರೂಪದ ಪಠ್ಯ"
 	},
 	"field_hostname_aria_label": {
-		"message": "hostname"
+		"message": "ಹೋಸ್ಟ್ ಹೆಸರು"
 	},
 	"field_hostname_placeholder": {
-		"message": "hostname"
+		"message": "ಹೋಸ್ಟ್ ಹೆಸರು"
 	},
 	"field_mount_path_placeholder": {
-		"message": "ಬಳಕೆದಾರರ ಮುಖಪುಟ ಡೈರೆಕ್ಟರಿಯು ಡಿಫಾಲ್ಟ್ ಮಾರ್ಗವಾಗಿರುತ್ತದೆ"
+		"message": "ಬಳಕೆದಾರರ ಹೋಮ್ ಡೈರೆಕ್ಟರಿಯು ಡೀಫಾಲ್ಟ್ ಮಾರ್ಗವಾಗಿರುತ್ತದೆ"
 	},
 	"field_nassh_options_aria_label": {
 		"message": "SSH ರಿಲೇ ಸರ್ವರ್ ಆಯ್ಕೆಗಳು"
@@ -99,22 +99,22 @@
 		"message": "SSH ಅವಲಂಬಿತ ಸರ್ವರ್ ಆಯ್ಕೆಗಳು"
 	},
 	"field_port_aria_label": {
-		"message": "port"
+		"message": "ಪೋರ್ಟ್"
 	},
 	"field_port_placeholder": {
-		"message": "port"
+		"message": "ಪೋರ್ಟ್"
 	},
 	"field_terminal_profile_placeholder": {
-		"message": "default"
+		"message": "ಡೀಫಾಲ್ಟ್"
 	},
 	"field_username_aria_label": {
-		"message": "username"
+		"message": "ಬಳಕೆದಾರರ ಹೆಸರು"
 	},
 	"field_username_placeholder": {
-		"message": "username"
+		"message": "ಬಳಕೆದಾರರ ಹೆಸರು"
 	},
 	"found_relay": {
-		"message": "Found relay server: $1"
+		"message": "ರಿಲೇ ಸರ್ವರ್ ಕಂಡುಬಂದಿದೆ: $1"
 	},
 	"get_profile_error": {
 		"message": "ದೋಷ: ಪ್ರೊಫೈಲ್ $1 ಅನ್ನು ಲೋಡ್ ಮಾಡಲಾಗಲಿಲ್ಲ:\n$2"
@@ -150,7 +150,7 @@
 		"message": "ಇನ್‌ಲೈನ್‌ ಚಿತ್ರಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ"
 	},
 	"hterm_pref_allow_images_inline": {
-		"message": "ಟರ್ಮಿನಲ್‌ನಲ್ಲಿ ಚಿತ್ರಗಳನ್ನು ಪ್ರದರ್ಶಿಸಲು ರಿಮೋಟ್ ಹೋಸ್ಟ್‌ಗೆ ಅನುಮತಿಸಬೇಕೆ.\n\nಡಿಫಾಲ್ಟ್ ಆಗಿ, ಆಯ್ಕೆ ಮಾಡುವವರೆಗೆ ನಾವು ಪ್ರಾಂಪ್ಟ್ ಮಾಡುತ್ತೇವೆ."
+		"message": "ಟರ್ಮಿನಲ್‌ನಲ್ಲಿ ಚಿತ್ರಗಳನ್ನು ಪ್ರದರ್ಶಿಸಲು ರಿಮೋಟ್ ಹೋಸ್ಟ್‌ಗೆ ಅನುಮತಿಸಬೇಕೆ.\n\nಡೀಫಾಲ್ಟ್ ಆಗಿ, ಆಯ್ಕೆ ಮಾಡುವವರೆಗೆ ನಾವು ಪ್ರಾಂಪ್ಟ್ ಮಾಡುತ್ತೇವೆ."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
 		"message": "ಹೊಂದಿಸಿದಲ್ಲಿ, Chrome OS Alt+Backspace->DEL ಮರುನಕ್ಷೆ ಮಾಡುವಿಕೆಯನ್ನು ರದ್ದುಗೊಳಿಸುತ್ತದೆ, ಆದ್ದರಿಂದ Alt+Backspace ನಿಜವಾಗಿಯೂ Alt+Backspace ಆಗಿರುತ್ತದೆ."
@@ -207,7 +207,7 @@
 		"message": "ಒಂದು ವೇಳೆ ಸರಿಯಾಗಿದ್ದರೆ Ctrl+V ಅಂಟಿಸುತ್ತದೆ, ಅದು ತಪ್ಪಾಗಿದ್ದರೆ ಹೋಸ್ಟ್‌ಗೆ ^V ಅನ್ನು ಕಳುಹಿಸುತ್ತದೆ.\nಒಂದು ವೇಳೆ ಸರಿಯಿದ್ದರೆ ^V ಅನ್ನು Ctrl+Shift+V ಹೋಸ್ಟ್‌ಗೆ ಕಳುಹಿಸುತ್ತದೆ, ತಪ್ಪಾಗಿದ್ದರೆ ಅಂಟಿಸುತ್ತದೆ."
 	},
 	"hterm_pref_cursor_blink": {
-		"message": "ಡಿಫಾಲ್ಟ್ ಆಗಿ ಪಠ್ಯ ಕರ್ಸರ್ ಬ್ಲಿಂಕ್ ಆಗುತ್ತಿರಬೇಕೇ. ಟರ್ಮಿನಲ್ ಎಸ್ಕೇಪ್ ಸೀಕ್ವೆನ್ಸ್‌ಗಳ ಮೂಲಕ ರನ್‌ಟೈಮ್ ಸಮಯದಲ್ಲಿ ಇದನ್ನು ಟಾಗಲ್ ಮಾಡಬಹುದು."
+		"message": "ಡೀಫಾಲ್ಟ್ ಆಗಿ ಪಠ್ಯ ಕರ್ಸರ್ ಬ್ಲಿಂಕ್ ಆಗುತ್ತಿರಬೇಕೇ. ಟರ್ಮಿನಲ್ ಎಸ್ಕೇಪ್ ಸೀಕ್ವೆನ್ಸ್‌ಗಳ ಮೂಲಕ ರನ್‌ಟೈಮ್ ಸಮಯದಲ್ಲಿ ಇದನ್ನು ಟಾಗಲ್ ಮಾಡಬಹುದು."
 	},
 	"hterm_pref_cursor_blink_cycle": {
 		"message": "ಪಠ್ಯ ಕರ್ಸರ್ ಬ್ಲಿಂಕ್ ದರ ಮಿಲಿಸೆಕೆಂಡುಗಳಲ್ಲಿದೆ. \n\nಎರಡು ಅಂಶಗಳ ಶ್ರೇಣಿ. ಇದರಲ್ಲಿ ಮೊದಲನೆಯ ಶ್ರೇಣಿಯು ಪಠ್ಯ ಕರ್ಸರ್ ಎಷ್ಟು ಸಮಯ ಆನ್ ಆಗಿರಬೇಕು ಎನ್ನುವುದನ್ನು ಸೂಚಿಸಿದರೆ, ಎರಡನೆಯ ಶ್ರೇಣಿಯು ಪಠ್ಯ ಕರ್ಸರ್‌ ಎಷ್ಟು ಸಮಯ ಆಫ್ ಆಗಿರಬೇಕು ಎನ್ನುವುದನ್ನು ಸೂಚಿಸುತ್ತದೆ."
@@ -327,7 +327,7 @@
 		"message": "ಟರ್ಮಿನಲ್ ಅನ್ನು ವಿನ್ಯಾಸಗೊಳಿಸಲು ಕಸ್ಟಮ್ CSS."
 	},
 	"hterm_pref_word_break_match_left": {
-		"message": "ಆಯ್ಕೆಯ ಎಡಭಾಗದಲ್ಲಿ (ಪ್ರಾರಂಭ) ಜೊತೆ ಹೊಂದಾಣಿಕೆ ಮಾಡಲು ನೀವು ರೆಗ್ಯುಲರ್‌ ಎಕ್ಸ್‌ಪ್ರೆಶನ್‌ ಬಳಸಬಹುದು.\n\nಸಾಮಾನ್ಯವಾಗಿ, ನಿರ್ಧಿಷ್ಟ ಅಕ್ಷರಗಳನ್ನು ತಿರಸ್ಕರಿಸಲು ಇದ ಅಕ್ಷರಗಳ ವರ್ಗವಾಗಿದೆ.\nಪಥಗಳು ಪದೇ ಪದೇ ಪ್ರಾರಂಭವಾಗುವಂತೆ ನಾವು \"~\" ಮತ್ತು \".\" ಅನ್ನು ಡಿಫಾಲ್ಟ್‌ ಮೂಲಕ ಅನುಮತಿಸುತ್ತೇವೆ."
+		"message": "ಆಯ್ಕೆಯ ಎಡಭಾಗದಲ್ಲಿ (ಪ್ರಾರಂಭ) ಜೊತೆ ಹೊಂದಾಣಿಕೆ ಮಾಡಲು ನೀವು ರೆಗ್ಯುಲರ್‌ ಎಕ್ಸ್‌ಪ್ರೆಶನ್‌ ಬಳಸಬಹುದು.\n\nಸಾಮಾನ್ಯವಾಗಿ, ನಿರ್ಧಿಷ್ಟ ಅಕ್ಷರಗಳನ್ನು ತಿರಸ್ಕರಿಸಲು ಇದ ಅಕ್ಷರಗಳ ವರ್ಗವಾಗಿದೆ.\nಪಥಗಳು ಪದೇ ಪದೇ ಪ್ರಾರಂಭವಾಗುವಂತೆ ನಾವು \"~\" ಮತ್ತು \".\" ಅನ್ನು ಡೀಫಾಲ್ಟ್‌ ಮೂಲಕ ಅನುಮತಿಸುತ್ತೇವೆ."
 	},
 	"hterm_pref_word_break_match_middle": {
 		"message": "ಮಧ್ಯದಲ್ಲಿ ಎಲ್ಲಾ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಾಣಿಕೆ ಮಾಡಲು ರೆಗ್ಯುಲರ್‌ ಎಕ್ಸ್‌ಪ್ರೆಶನ್‌.\n\nಸಾಮಾನ್ಯವಾಗಿ, ನಿರ್ಧಿಷ್ಟ ಅಕ್ಷರಗಳನ್ನು ತಿರಸ್ಕರಿಸಲು ಇದ ಅಕ್ಷರಗಳ ವರ್ಗವಾಗಿದೆ.\n\nಆರಂಭಿಕ ಹಂತದ ಸುತ್ತಲಿನ ಆಯ್ಕೆಯನ್ನು ವಿಸ್ತರಿಸಲು ಬಳಸಲಾಗುತ್ತದೆ."
@@ -363,16 +363,16 @@
 		"message": "ಧ್ವನಿಗಳು"
 	},
 	"identity_label": {
-		"message": "Identity"
+		"message": "ಗುರುತು"
 	},
 	"import_link_aria_label": {
-		"message": "file import"
+		"message": "ಫೈಲ್ ಆಮದು"
 	},
 	"import_link_label": {
-		"message": "Import..."
+		"message": "ಆಮದು ಮಾಡಿ..."
 	},
 	"initializing_relay": {
-		"message": "Looking up relay server using: $1"
+		"message": "ಇದನ್ನು ಬಳಸಿ ರಿಲೇ ಸರ್ವರ್ ಅನ್ನು ಹುಡುಕಲಾಗುತ್ತಿದೆ: $1"
 	},
 	"json_parse_error": {
 		"message": "'$1' ನಲ್ಲಿ JSON ಅನ್ನು ಪಾರ್ಸ್ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ: : $2"
@@ -387,19 +387,19 @@
 		"message": "ತಿಳಿದಿರುವ ಹೋಸ್ಟ್‌ಗಳು:"
 	},
 	"loading_label": {
-		"message": "Loading..."
+		"message": "ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ..."
 	},
 	"missing_param": {
 		"message": "ಕಾಣೆಯಾದ ಪ್ಯಾರಾಮೀಟರ್: $1"
 	},
 	"mount_button_label": {
-		"message": "SFTP Mount"
+		"message": "SFTP ಮೌಂಟ್"
 	},
 	"mount_path_label": {
 		"message": "ಅಳವಡಿಕೆಯ ಮಾರ್ಗ"
 	},
 	"mounted_message": {
-		"message": "Mounted!"
+		"message": "ಮೌಂಟ್ ಮಾಡಲಾಗಿದೆ!"
 	},
 	"nassh_options_error": {
 		"message": "ಅಪರಿಚಿತ ರಲೇ ಆಯ್ಕೆ: $1"
@@ -408,7 +408,7 @@
 		"message": "ಹೊಸ ವಿಂಡೋ"
 	},
 	"notify_copy": {
-		"message": "Selection Copied"
+		"message": "ಆಯ್ಕೆಯನ್ನು ನಕಲಿಸಲಾಗಿದೆ"
 	},
 	"ok_button_label": {
 		"message": "ಸರಿ"
@@ -420,7 +420,7 @@
 		"message": "[ಪ್ರೊ ಸಲಹೆ] Ctrl+W ನಿಮ್ಮ ಟರ್ಮಿನಲ್ ಅನ್ನು ಮುಚ್ಚುವುದನ್ನು ತಡೆಯಲು 'ವಿಂಡೋದಂತೆ ತೆರೆಯಿರಿ' ಅಥವಾ 'ಪೂರ್ಣಪರದೆ' ಬಳಸಿ!\n[ಪ್ರೊ ಸಲಹೆ] ಹೆಚ್ಚಿನ ಮಾಹಿತಿಗಾಗಿ $1 ವೀಕ್ಷಿಸಿ."
 	},
 	"options_button_label": {
-		"message": "Options"
+		"message": "ಆಯ್ಕೆಗಳು"
 	},
 	"plugin_loading": {
 		"message": "NaCl ಪ್ಲಗ್‌ಇನ್‌ ಲೋಡ್‌ ಆಗುತ್ತಿದೆ..."
@@ -432,43 +432,43 @@
 		"message": " ವಿಫಲವಾಗಿದೆ! :("
 	},
 	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
+		"message": "ಸುರಕ್ಷಿತ Shell ಆದ್ಯತೆಗಳ ಬ್ಯಾಕಪ್.json"
 	},
 	"preferences_header": {
-		"message": "Profile Settings"
+		"message": "ಪ್ರೊಫೈಲ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
 	},
 	"preferences_reset": {
-		"message": "All preferences reset!"
+		"message": "ಎಲ್ಲಾ ಆದ್ಯತೆಗಳನ್ನು ಮರುಹೊಂದಿಸಲಾಗಿದೆ!"
 	},
 	"reconnect_message": {
-		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
+		"message": "(R) ಮರುಸಂಪರ್ಕಿಸಬೇಕೇ, (C) ಬೇರೊಂದು ಸಂಪರ್ಕ ಆಯ್ಕೆ ಮಾಡಬೇಕೇ, ಅಥವಾ ನಿರ್ಗಮಿಸಬೇಕೇ (x)?"
 	},
 	"relay_retry": {
-		"message": "Retrying..."
+		"message": "ಮರುಪ್ರಯತ್ನಿಸಲಾಗುತ್ತಿದೆ..."
 	},
 	"request_pin_prompt": {
 		"message": "'$2' ನಲ್ಲಿನ $1 ಕೀ ಅನ್‌ಲಾಕ್‌ ಮಾಡಲು ಪಿನ್‌ ಅನ್ನು ನಮೂದಿಸಿ ($3 ಪ್ರಯತ್ನಗಳು ಬಾಕಿ ಉಳಿದಿವೆ):"
 	},
 	"restore_prefs": {
-		"message": "Restore Backup"
+		"message": "ಬ್ಯಾಕಪ್ ಅನ್ನು ಮರುಸ್ಥಾಪಿಸಿ"
 	},
 	"shortcut_list_aria_label": {
-		"message": "saved connections"
+		"message": "ಉಳಿಸಿರುವ ಸಂಪರ್ಕಗಳು"
 	},
 	"smart_card_connector_not_installed": {
 		"message": "ಸ್ಮಾರ್ಟ್‌ ಕಾರ್ಡ್‌ ಕನೆಕ್ಟರ್‌ ಅಪ್ಲಿಕೇಶನ್‌ ಅನ್ನು ಇನ್‌ಸ್ಟಾಲ್‌ ಮಾಡಿ: $1"
 	},
 	"ssh_argstr_label": {
-		"message": "SSH Arguments"
+		"message": "SSH ಆರ್ಗ್ಯುಮೆಂಟ್‌ಗಳು"
 	},
 	"terminal_clear_menu_label": {
 		"message": "ಟರ್ಮಿನಲ್‌ ತೆರವುಗೊಳಿಸುವಿಕೆ"
 	},
 	"terminal_preview_label": {
-		"message": "Preview"
+		"message": "ಪೂರ್ವವೀಕ್ಷಣೆ"
 	},
 	"terminal_profile_label": {
-		"message": "Current profile"
+		"message": "ಪ್ರಸ್ತುತ ಪ್ರೊಫೈಲ್"
 	},
 	"terminal_reset_menu_label": {
 		"message": "ಟರ್ಮಿನಲ್‌ ಮರುಹೊಂದಿಸುವಿಕೆ"
@@ -522,13 +522,13 @@
 		"message": "ಅಪರಿಚಿತ SSH ಆವೃತ್ತಿ: $1"
 	},
 	"unmount_button_label": {
-		"message": "Unmount SFTP"
+		"message": "SFTP ಅನ್ನು ಅನ್‌ಮೌಂಟ್ ಮಾಡಿ"
 	},
 	"welcome_changelog": {
 		"message": "ಬದಲಾವಣೆಯಲಾಗ್/ಬಿಡುಗಡೆಯ ಟಿಪ್ಪಣಿಗಳು: $1"
 	},
 	"welcome_faq": {
-		"message": "Answers to Frequently Asked Questions: $1 (ctrl+click on links to open)"
+		"message": "ಪದೇ ಪದೇ ಕೇಳಲಾಗುವ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಗಳು: $1 (ತೆರೆಯಲು, ಲಿಂಕ್‍ಗಳ ಮೇಲೆ ctrl+ಕ್ಲಿಕ್ ಮಾಡಿ)"
 	},
 	"welcome_release_highlights": {
 		"message": "$1 ರಿಂದ ಪ್ರಮುಖ ಬದಲಾವಣೆಗಳು:"
@@ -537,9 +537,9 @@
 		"message": "ಯಾದೃಚ್ಛಿಕ ಪ್ರೊ ಸಲಹೆ #$1: $2"
 	},
 	"welcome_version": {
-		"message": "Welcome to $1 version $2."
+		"message": "$1 ನ $2 ಆವೃತ್ತಿಗೆ ಸ್ವಾಗತ."
 	},
 	"zoom_warning": {
-		"message": "Please set Chrome Menu->Zoom to 100%"
+		"message": "Chrome ಮೆನು->100% ಗೆ ಝೂಮ್ ಮಾಡಿ ಎಂಬುದಾಗಿ ಹೊಂದಿಸಿ"
 	}
 }

@@ -9,7 +9,7 @@
 		"message": "Nelze analyzovat cíl: $1"
 	},
 	"before_unload": {
-		"message": "Pokud tuto kartu zavřete, bude tato relace odpojena."
+		"message": "Pokud tuto kartu zavřete, bude tato návštěvy odpojena."
 	},
 	"cache_pin_prompt": {
 		"message": "Uložit PIN do mezipaměti pro tuto relaci? (y/N):"
@@ -30,7 +30,7 @@
 		"message": "Parametry |username| a |hostname| jsou povinné, parametr |port| je volitelný. Pokud port není zadán, použije se výchozí hodnota 22."
 	},
 	"cmd_ssh_title": {
-		"message": "Zahájení nové relace SSH."
+		"message": "Zahájení nové návštěvy SSH."
 	},
 	"command_complete": {
 		"message": "Příkaz $1 byl ukončen se stavovým kódem $2."

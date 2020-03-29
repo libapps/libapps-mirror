@@ -1,6 +1,6 @@
 {
 	"already_mounted_message": {
-		"message": "File system is already mounted!"
+		"message": "ફાઇલ સિસ્ટમ પહેલેથી માઉન્ટ કરેલી છે!"
 	},
 	"backup_prefs": {
 		"message": "Save Backup"
@@ -33,7 +33,7 @@
 		"message": "નવું SSH સત્ર ખોલે છે."
 	},
 	"command_complete": {
-		"message": "The command $1 exited with status code $2."
+		"message": "સ્ટેટસ કોડ $2 ધરાવતા આદેશ $1માંથી બહાર નીકળ્યાં."
 	},
 	"command_not_supported": {
 		"message": "$1 Chromeના આ વર્ઝન પર સપોર્ટ કરતું નથી."
@@ -45,10 +45,10 @@
 		"message": "કનેક્ટ કરો"
 	},
 	"connect_or_exit_message": {
-		"message": "(C)hoose another connection or E(x)it?"
+		"message": "બીજું કનેક્શન પસંદ કરીએ (C) કે બહાર નીકળીએ (x)?"
 	},
 	"connecting": {
-		"message": "Connecting to $1..."
+		"message": "$1 સાથે કનેક્ટ કરી રહ્યાં છીએ…"
 	},
 	"connection_dialog_name": {
 		"message": "કનેક્શન સંવાદ"
@@ -66,7 +66,7 @@
 		"message": "ડિલીટ કરો"
 	},
 	"disconnect_message": {
-		"message": "NaCl plugin exited with status code $1."
+		"message": "સ્ટેટસ કોડ $1 ધરાવતા NaCl પ્લગ-ઇનમાંથી બહાર નીકળ્યાં."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -75,19 +75,19 @@
 		"message": "સામાન્ય પ્રશ્નો"
 	},
 	"field_argstr_placeholder": {
-		"message": "extra command line arguments"
+		"message": "વધારાના કમાન્ડ લાઇન તર્ક"
 	},
 	"field_description_aria_label": {
-		"message": "description"
+		"message": "વર્ણન"
 	},
 	"field_description_placeholder": {
-		"message": "username@hostname or free form text"
+		"message": "વપરાશકર્તાનામ@હોસ્ટનું નામ અથવા ફ્રી ફોર્મ ટેક્સ્ટ"
 	},
 	"field_hostname_aria_label": {
-		"message": "hostname"
+		"message": "હોસ્ટનું નામ"
 	},
 	"field_hostname_placeholder": {
-		"message": "hostname"
+		"message": "હોસ્ટનું નામ"
 	},
 	"field_mount_path_placeholder": {
 		"message": "વપરાશકર્તાની હોમ ડિરેક્ટરી એ ડિફૉલ્ટ પથ છે"
@@ -99,22 +99,22 @@
 		"message": "SSH રિલે સર્વરના વિકલ્પો"
 	},
 	"field_port_aria_label": {
-		"message": "port"
+		"message": "પોર્ટ"
 	},
 	"field_port_placeholder": {
-		"message": "port"
+		"message": "પોર્ટ"
 	},
 	"field_terminal_profile_placeholder": {
-		"message": "default"
+		"message": "ડિફૉલ્ટ"
 	},
 	"field_username_aria_label": {
-		"message": "username"
+		"message": "વપરાશકર્તાનામ"
 	},
 	"field_username_placeholder": {
-		"message": "username"
+		"message": "વપરાશકર્તાનામ"
 	},
 	"found_relay": {
-		"message": "Found relay server: $1"
+		"message": "રિલે સર્વર મળ્યું: $1"
 	},
 	"get_profile_error": {
 		"message": "ભૂલ: પ્રોફાઇલ $1 લોડ કરી શકાયું નથી:\n$2"
@@ -198,13 +198,13 @@
 		"message": "ક્લિપબોર્ડ પર, માઉસ વડે પસંદ કરેલની આપમેળે કૉપિ થાય."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "જો સાચુંંં હોય, તો Ctrl+C કૉપિ કરે છે, જો ખોટું હોય તો ^C હોસ્ટને મોકલે છે.\nજો સાચુંંં હોય, તો Ctrl+Shift+C એ ^C હોસ્ટને મોકલે છે, જો ખોટું હોય તો કૉપિ કરે છે."
+		"message": "જો સાચું હોય, તો Ctrl+C કૉપિ કરે છે, જો ખોટું હોય તો ^C હોસ્ટને મોકલે છે.\nજો સાચું હોય, તો Ctrl+Shift+C એ ^C હોસ્ટને મોકલે છે, જો ખોટું હોય તો કૉપિ કરે છે."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "જો સાચુંંં હોય, તો Ctrl+Plus/Minus/Zero ઝૂમનું નિયંત્રણ કરે છે.\nજો ખોટું હોય તો, Ctrl+Shift+Plus/Minus/Zero ઝૂમનું નિયંત્રણ કરે છે, Ctrl+Minus એ ^_ મોકલે છે, Ctrl+Plus/Zero કંઈ કરતું નથી."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "જો સાચુંંં હોય, તો Ctrl+V પેસ્ટ કરે છે, જો ખોટું હોય તો ^V હોસ્ટને મોકલે છે.\nજો સાચુંંં હોય, તો Ctrl+Shift+V એ ^V હોસ્ટને મોકલે છે, જો ખોટું હોય તો પેસ્ટ કરે છે."
+		"message": "જો સાચું હોય, તો Ctrl+V પેસ્ટ કરે છે, જો ખોટું હોય તો ^V હોસ્ટને મોકલે છે.\nજો સાચું હોય, તો Ctrl+Shift+V એ ^V હોસ્ટને મોકલે છે, જો ખોટું હોય તો પેસ્ટ કરે છે."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "ટેક્સ્ટ કર્સર ડિફૉલ્ટ રૂપે ઝબકે છે કે નહિ. આને ટર્મિનલ એસ્કેપ સિક્વન્સ મારફતે રનટાઇમ પર લૉગ કરી શકાય છે."
@@ -363,16 +363,16 @@
 		"message": "સાઉન્ડ"
 	},
 	"identity_label": {
-		"message": "Identity"
+		"message": "ઓળખ"
 	},
 	"import_link_aria_label": {
-		"message": "file import"
+		"message": "ફાઇલની આયાત કરો"
 	},
 	"import_link_label": {
-		"message": "Import..."
+		"message": "આયાત કરો…"
 	},
 	"initializing_relay": {
-		"message": "Looking up relay server using: $1"
+		"message": "રિલે સર્વર શોધવા માટે ઉપયોગમાં લેવાય છે: $1"
 	},
 	"json_parse_error": {
 		"message": "'$1'માં JSONનું પાર્સ ન કરી શક્યા: $2"
@@ -387,19 +387,19 @@
 		"message": "જાણીતા હોસ્ટ્સ:"
 	},
 	"loading_label": {
-		"message": "Loading..."
+		"message": "લોડ થઈ રહી છે…"
 	},
 	"missing_param": {
 		"message": "પરિમાણ ખૂટે છે: $1"
 	},
 	"mount_button_label": {
-		"message": "SFTP Mount"
+		"message": "SFTP માઉન્ટ"
 	},
 	"mount_path_label": {
 		"message": "માઉન્ટ પથ"
 	},
 	"mounted_message": {
-		"message": "Mounted!"
+		"message": "માઉન્ટ કરી!"
 	},
 	"nassh_options_error": {
 		"message": "અજ્ઞાત રિલે વિકલ્પ: $1"
@@ -408,7 +408,7 @@
 		"message": "નવી વિંડો"
 	},
 	"notify_copy": {
-		"message": "Selection Copied"
+		"message": "પસંદગીની કૉપિ કરી"
 	},
 	"ok_button_label": {
 		"message": "ઓકે"
@@ -420,7 +420,7 @@
 		"message": "[વ્યવસાયી ટિપ] Ctrl+Wને તમારું ટર્મિનલ બંધ કરવાથી રોકવા માટે, 'વિંડો તરીકે ખોલો' અથવા 'પૂર્ણસ્ક્રીન'નો ઉપયોગ કરો!\n[વ્યવસાયી ટિપ] વધુ માહિતી માટે $1 જુઓ."
 	},
 	"options_button_label": {
-		"message": "Options"
+		"message": "વિકલ્પો"
 	},
 	"plugin_loading": {
 		"message": "NaCl પ્લગઇન લોડ કરી રહ્યું છે..."
@@ -432,34 +432,34 @@
 		"message": " નિષ્ફળ થયું! :("
 	},
 	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
+		"message": "સુરક્ષિત શેલ પસંદગી બૅકઅપ.json"
 	},
 	"preferences_header": {
-		"message": "Profile Settings"
+		"message": "પ્રોફાઇલ સેટિંગ"
 	},
 	"preferences_reset": {
-		"message": "All preferences reset!"
+		"message": "બધી પસંદગીઓને રીસેટ કરી!"
 	},
 	"reconnect_message": {
-		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
+		"message": "ફરી કનેક્ટ કરીએ (R), બીજું કનેક્શન પસંદ કરીએ (C) અથવા બહાર નીકળીએ (x)?"
 	},
 	"relay_retry": {
-		"message": "Retrying..."
+		"message": "ફરી પ્રયાસ કરી રહ્યાં છીએ…"
 	},
 	"request_pin_prompt": {
 		"message": "'$2' પર $1કીને અનલૉક કરવા માટે પિન દાખલ કરો ($3 પ્રયાસો બાકી):"
 	},
 	"restore_prefs": {
-		"message": "Restore Backup"
+		"message": "બૅકઅપ પાછું મેળવો"
 	},
 	"shortcut_list_aria_label": {
-		"message": "saved connections"
+		"message": "સાચવેલાં કનેક્શન�"
 	},
 	"smart_card_connector_not_installed": {
 		"message": "કૃપા કરીને સ્માર્ટ કાર્ડ કનેક્ટર ઍપ ઇન્સ્ટૉલ કરો: $1"
 	},
 	"ssh_argstr_label": {
-		"message": "SSH Arguments"
+		"message": "SSH તર્ક"
 	},
 	"terminal_clear_menu_label": {
 		"message": "ટર્મિનલ સાફ કરો"
@@ -468,7 +468,7 @@
 		"message": "પ્રીવ્યૂ કરો"
 	},
 	"terminal_profile_label": {
-		"message": "Current profile"
+		"message": "હાલનું પ્રોફાઇલ"
 	},
 	"terminal_reset_menu_label": {
 		"message": "ટર્મિનલ રીસેટ કરો"
@@ -522,13 +522,13 @@
 		"message": "અજ્ઞાત SSH વર્ઝન: $1"
 	},
 	"unmount_button_label": {
-		"message": "Unmount SFTP"
+		"message": "SFTPને અનમાઉન્ટ કરો"
 	},
 	"welcome_changelog": {
 		"message": "ચેન્જલૉગ/રિલીઝ નોટ: $1"
 	},
 	"welcome_faq": {
-		"message": "Answers to Frequently Asked Questions: $1 (ctrl+click on links to open)"
+		"message": "સામાન્ય પ્રશ્નોના જવાબો: $1 (ખોલવા માટે ctrl કી દબાવીને લિંક પર ક્લિક કરો)"
 	},
 	"welcome_release_highlights": {
 		"message": "$1 પછીના મુખ્ય ફેરફારો:"
@@ -540,6 +540,6 @@
 		"message": "Welcome to $1 version $2."
 	},
 	"zoom_warning": {
-		"message": "Please set Chrome Menu->Zoom to 100%"
+		"message": "કૃપા કરીને Chrome મેનૂ-> નાનું-મોટું કરવાને 100% પર સેટ કરો"
 	}
 }

@@ -159,10 +159,10 @@
 		"message": "Velg en heuristisk algoritme for gjenkjenning av AltGr.\n\n«null»: automatisk gjenkjenning basert på navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n«none»: Slår av eventuell AltGr-relatert arrangering.\n«ctrl-alt»: Antar at Ctrl+Alt betyr AltGr.\n«left-alt»: Antar at venstre Alt betyr AltGr.\n«right-alt»: Antar at høyre Alt betyr AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Om Alt+tasten skal fungere som en Meta+tast eller en unik Alt+tast."
+		"message": "Om Alt-tasten skal fungere som en Meta-tast eller en unik Alt-tast."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Kontrollerer hvordan Alt+tasten håndteres.\n\n  escape: Send et ESC-prefiks.\n  8-bit: Legg 128 til det angitte tegnet, som i xterm.\n browser-key: Vent på et tastetrykk, og se hva nettleseren\n sier. (Dette fungerer ikke godt på plattformer hvor nettleseren\n utfører en standardhandling for noen Alt+sekvenser.)"
+		"message": "Kontrollerer hvordan Alt-tasten håndteres.\n\n  escape: Send et ESC-prefiks.\n  8-bit: Legg 128 til det angitte tegnet, som i xterm.\n browser-key: Vent på et tastetrykk, og se hva nettleseren\n sier. (Dette fungerer ikke godt på plattformer hvor nettleseren\n utfører en standardhandling for noen Alt-sekvenser.)"
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "Nettadresse for terminalbjellelyd. Strengen er tom når det ikke høres noen bjelle."
@@ -198,13 +198,13 @@
 		"message": "Kopier automatisk det som merkes med musen, til utklippstavlen."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl + C kopierer hvis verdien er «true» (sann), og sender ^C til verten hvis den er «false» (usann).\nCtrl + Shift + C sender ^C til verten hvis verdien er «true» (sann), og kopierer hvis den er «false» (usann)."
+		"message": "Ctrl+C kopierer hvis verdien er «true» (sann) og sender ^C til verten hvis den er «false» (usann).\nCtrl+Shift+C sender ^C til verten hvis verdien er «true» (sann) og kopierer hvis den er «false» (usann)."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "Hvis verdien er «true» (sann), kontrollerer Ctrl + pluss/minus/null zoomnivået.\nHvis den er «false» (usann), kontrollerer Ctrl + Shift + pluss/minus/null zoomnivået. Ctrl + minus sender i så fall ^_, og Ctrl + pluss/null gjør ingenting."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl + V limer inn hvis verdien er «true» (sann), og sender ^V til verten hvis den er «false» (usann).\nCtrl + Shift + V sender ^V til verten hvis verdien er «true» (sann), og limer inn hvis den er «false» (usann)."
+		"message": "Ctrl+V limer inn hvis verdien er «true» (sann) og sender ^V til verten hvis den er «false» (usann).\nCtrl+Shift+V sender ^V til verten hvis verdien er «true» (sann) og limer inn hvis den er «false» (usann)."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Angir om tekstmarkøren blinker som standard. Dette kan slås av og på under kjøring via escape-sekvenser i terminalen."
@@ -303,7 +303,7 @@
 		"message": "Angir om det skal rulles til bunnen ved terminalutdata."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Når du bruker den alternative skjermbufferen og DECCKM (appmarkørtaster) er aktivert, emulerer rulling på musehjulet piltastene.\n\nDu kan deaktivere dette midlertidig ved å trykke og holde på Shift+tasten.\n\nDette kommer ofte opp når du bruker sidevekslingskontroller (less), leser man-sider eller tekstredigeringsprogrammer (vi/nano) eller bruker screen/tmux."
+		"message": "Når du bruker den alternative skjermbufferen og DECCKM (appmarkørtaster) er aktivert, emulerer rulling på musehjulet piltastene.\n\nDu kan deaktivere dette midlertidig ved å trykke og holde på Shift-tasten.\n\nDette kommer ofte opp når du bruker sidevekslingskontroller (less), leser man-sider eller tekstredigeringsprogrammer (vi/nano) eller bruker screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "Multiplikatoren for rullehjulhendelser, målt i piksler.\n\nEndrer hvor raskt du kan rulle på siden."
@@ -528,7 +528,7 @@
 		"message": "Endringslogg/versjonsnotater: $1"
 	},
 	"welcome_faq": {
-		"message": "Svar på vanlige spørsmål: $1 (Ctrl+klikk på linker for å åpne dem)"
+		"message": "Svar på vanlige spørsmål: $1 (Ctrl-klikk på linker for å åpne dem)"
 	},
 	"welcome_release_highlights": {
 		"message": "Betydelige endringer siden $1:"

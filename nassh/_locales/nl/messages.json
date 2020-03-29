@@ -159,10 +159,10 @@
 		"message": "Selecteer een AltGr-detectieheuristiek.\n\n'null': automatische detectie op basis van navigator.language:\n      'en-us' => 'none', anders => 'right-alt'\n'none': schakelt schadelijke wijzigingen voor AltGr uit.\n'ctrl-alt': veronderstelt dat Ctrl + Alt eigenlijk AltGr betekent.\n'left-alt': veronderstelt dat de linker-Alt eigenlijk AltGr betekent.\n'right-alt': veronderstelt dat de rechter-Alt eigenlijk AltGr betekent."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Hiermee kun je instellen of de Alt+toets als Meta+toets of specifiek als Alt+toets fungeert."
+		"message": "Hiermee kun je instellen of de Alt-toets als Meta-toets of specifiek als Alt-toets fungeert."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Hiermee wordt de functie van de Alt+toets bepaald.\n\n  escape: een ESC-voorvoegsel verzenden.\n  8-bit: 128 aan het teken toevoegen zonder Shift, zoals in xterm.\nbrowser-key: Wachten tot een toets wordt ingedrukt om te zien wat de browser doet. (Dit werkt niet goed op platforms waarin de browser een standaardactie uitvoert bij bepaalde Alt+toetscombinaties.)"
+		"message": "Hiermee wordt de functie van de Alt-toets bepaald.\n\n  escape: een ESC-voorvoegsel verzenden.\n  8-bit: 128 aan het teken toevoegen zonder Shift, zoals in xterm.\nbrowser-key: Wachten tot een toets wordt ingedrukt om te zien wat de browser doet. (Dit werkt niet goed op platforms waarin de browser een standaardactie uitvoert bij bepaalde Alt-toetscombinaties.)"
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "De URL van het geluid van de terminalbel. Een lege tekenreeks betekent dat er geen hoorbare bel is."
@@ -198,13 +198,13 @@
 		"message": "Kopieert de selectie van de muis automatisch naar het klembord."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl + C kopieert als deze voorkeur is ingesteld op 'True', en verzendt ^C naar host als ingesteld op 'False'.\nCtrl + Shift + C verzendt ^C naar host als deze voorkeur is ingesteld op 'True', en kopieert als ingesteld op 'False'."
+		"message": "Ctrl+C kopieert indien 'waar' (true), en verzendt ^C naar host indien 'onwaar' (false).\nCtrl+Shift+C verzendt ^C naar host indien 'waar' (true), en kopieert indien 'onwaar' (false)."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "Als 'true' is ingesteld voor deze voorkeur, wordt met Ctrl + plus/min/nul de zoomfactor bediend.\nAls 'false' is ingesteld, wordt met Ctrl + Shift +plus/min/nul de zoomfactor bediend en wordt met Ctrl + min ^_ verzonden en gebeurt er niks met Ctrl + plus/nul."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl + V plakt als deze voorkeur is ingesteld op 'true', en verzendt ^V naar host als ingesteld op 'false'.\nCtrl + Shift + V verzendt ^V naar host als deze voorkeur is ingesteld op 'true', en plakt als ingesteld op 'false'."
+		"message": "Ctrl+V plakt indien 'waar' (true), en verzendt ^V naar host indien 'onwaar' (false).\nCtrl+Shift+V verzendt ^V naar host indien 'waar' (true), en plakt indien 'onwaar' (false)."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Hiermee wordt bepaald of de tekstcursor standaard knippert. Dit kan tijdens runtime via terminal-escapereeksen in en uit worden geschakeld."
@@ -303,7 +303,7 @@
 		"message": "Hiermee wordt bepaald of naar de onderzijde van de terminaluitvoer wordt gescrolld."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Wanneer de alternatieve schermbuffer wordt gebruikt en DECCKM (Application Cursor Keys) actief is, emuleren scrollgebeurtenissen met het muiswiel de pijltoetsen.\n\nDit kan tijdelijk worden uitgeschakeld door de Shift+toets ingedrukt te houden.\n\nDit komt regelmatig voor wanneer je pagers (less) gebruikt, documentatie of tekst in teksteditors (vi/nano) leest of screen/tmux gebruikt."
+		"message": "Wanneer de alternatieve schermbuffer wordt gebruikt en DECCKM (Application Cursor Keys) actief is, emuleren scrollgebeurtenissen met het muiswiel de pijltoetsen.\n\nDit kan tijdelijk worden uitgeschakeld door de Shift-toets ingedrukt te houden.\n\nDit komt regelmatig voor wanneer je pagers (less) gebruikt, documentatie of tekst in teksteditors (vi/nano) leest of screen/tmux gebruikt."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "De multiplier voor scrollwielgebeurtenissen wanneer wordt gemeten in pixels.\n\nHiermee wijzig je hoe snel de pagina wordt gescrolld."
@@ -489,7 +489,7 @@
 		"message": "Afbeeldingen inline weergeven: https://goo.gl/MnSysj"
 	},
 	"tip_14": {
-		"message": "Als je met de rechtermuisknop klikt terwijl je de Ctrl+toets (Cmd op macOS) ingedrukt houdt, wordt er een contextmenu weergegeven."
+		"message": "Als je met de rechtermuisknop klikt terwijl je de Ctrl-toets (Cmd op macOS) ingedrukt houdt, wordt er een contextmenu weergegeven."
 	},
 	"tip_2": {
 		"message": "Geef meldingen in de browser weer met hterm-notify: https://goo.gl/ZNxGdF"

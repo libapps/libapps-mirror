@@ -198,13 +198,13 @@
 		"message": "Fare seçimini otomatik olarak panoya kopyalar."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Doğru değerine ayarlanırsa Ctrl+C kopyalar, yanlış olduğunda ana makineye ^C gönderir.\nDoğru değerine ayarlanırsa Ctrl+Üst Karakter-C ana makineye ^C gönderir, yanlış olduğunda kopyalar."
+		"message": "Doğru değerine ayarlanırsa Ctrl+C kopyalar, yanlış olduğunda ana makineye ^C gönderir.\nDoğru değerine ayarlanırsa Ctrl+Üst Karakter+C ana makineye ^C'yi gönderir, yanlış olduğunda kopyalar."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "Doğru değerine ayarlanırsa Ctrl+Artı/Eksi/Sıfır yakınlaştırmayı kontrol eder.\nYanlış değerine ayarlanırsa Ctrl+Üst Karakter- Artı/Eksi/Sıfır yakınlaştırmayı kontrol eder, Ctrl+Eksi ^_ öğesini gönderir, Ctrl+Artı/Sıfır hiçbir şey yapmaz."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Doğru değerine ayarlanırsa Ctrl+V yapıştırır, yanlış olduğunda ana makineye ^V gönderir.\nDoğru değerine ayarlanırsa Ctrl+Üst Karakter-V ana makineye ^V gönderir, yanlış olduğunda yapıştırır."
+		"message": "Doğru değerine ayarlanırsa Ctrl+V yapıştırır, yanlış olduğunda ana makineye ^V gönderir.\nDoğru değerine ayarlanırsa Ctrl+Üst Karakter+V ana makineye ^V'yi gönderir, yanlış olduğunda yapıştırır."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Metin imlecinin varsayılan olarak yanıp söneceğini veya sönmeyeceğini belirler. Bu, çalışma zamanında terminal kod dışı bırakma sıraları aracılığıyla değiştirilebilir."

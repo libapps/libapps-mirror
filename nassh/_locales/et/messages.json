@@ -159,10 +159,10 @@
 		"message": "Valige AltGr-i tuvastamise heuristika.\n\n'null': automaatne tuvastamine toimub järgmise põhjal: navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': keelatakse AltGr-iga seotud muutmised.\n'ctrl- alt': oletatakse, et Ctrl + Alt tähendab klahvi AltGr.\n'left-alt': oletatakse, et vasakpoolne Alt tähendab klahvi AltGr.\n'right-alt': oletatakse, et parempoolne Alt tähendab klahvi AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Määrab, kas Alt+klahv toimib metaklahvina või ainult Alt+klahvina."
+		"message": "Määrab, kas Alt-klahv toimib metaklahvina või ainult Alt-klahvina."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Juhib Alt+klahvi käsitlemist.\n\n  escape: ESC-eesliite saatmine.\n  8-bit: lisatakse 128 sisestatud tähemärgile, nagu teenuses xterm.\n browser-key: oodake klahvivajutust ja vaadake, mida brauser\n ütleb. (See ei tööta hästi platvormidel, kus brauser teeb\n mõne Alt+seeria puhul vaiketoimingu.)"
+		"message": "Juhib Alt-klahvi käsitlemist.\n\n  escape: ESC-eesliite saatmine.\n  8-bit: lisatakse 128 sisestatud tähemärgile, nagu teenuses xterm.\n browser-key: oodake klahvivajutust ja vaadake, mida brauser\n ütleb. (See ei tööta hästi platvormidel, kus brauser teeb\n mõne Alt-seeria puhul vaiketoimingu.)"
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "Terminali kellaheli URL. Puuduva kellaheli puhul on string tühi."
@@ -198,13 +198,13 @@
 		"message": "Hiirega tehtud valik kopeeritakse automaatselt lõikelauale."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl + C kopeerib, kui see on tõene, ja saadab ^C hostile, kui see on väär.\nCtrl + Tõstuklahv + C saadab ^C hostile, kui see on tõene, ja kopeerib, kui see on väär."
+		"message": "Ctrl + C kopeerib, kui see on tõene, ja saadab ^C hosti juurde, kui see on väär.\nCtrl + Tõstuklahv + C saadab ^C hosti juurde, kui see on tõene, ja kopeerib, kui see on väär."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "Kui see on tõene, juhib Ctrl + pluss/miinus/null suumi.\nKui see on väär, juhib suumi klahvikombinatsioon Ctrl + Tõstuklahv + pluss/miinus/null, Ctrl + miinus saadab ^_, Ctrl + pluss/null ei tee midagi."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Kui see on tõene, siis Ctrl + V kleebib, kui see on väär, saadab ^V hostile.\nCtrl + Tõstuklahv + V saadab ^V hostile, kui see on tõene, ja kleebib, kui see on väär."
+		"message": "Kui see on tõene, siis Ctrl + V kleebib, kui see on väär, saadab ^V hosti juurde.\nCtrl + Tõstuklahv + V saadab ^V hosti juurde, kui see on tõene, ja kleebib, kui see on väär."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Määrab, kas tekstikursor vilgub vaikimisi. Seda saab valida käitusajal terminali paokombinatsioonide abil."

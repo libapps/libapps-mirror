@@ -159,10 +159,10 @@
 		"message": "Valitse heuristinen AltGr-tunnistus.\n\nnull: Tunnista automaattisesti navigator.language-arvon perusteella:\n      en-us => none, muut arvot => right-alt.\nnone: Poista käytöstä kaikki AltGr-muunnokset.\nctrl-alt: Oleta, että Ctrl+Alt on AltGr.\nleft-alt: Oleta, että vasen Alt on AltGr.\nright-alt: Oleta, että oikea Alt on AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Toimiiko Alt+näppäin Meta+näppäimenä vai oikeana Alt+näppäimenä"
+		"message": "Toimiiko Alt-näppäin Meta-näppäimenä vai oikeana Alt-näppäimenä"
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Määritä Alt+näppäimen käsittelytapa.\n\n  escape: Lähetä ESC-etuliite.\n  8-bit: Lisää kirjoitettuun merkkiin 128 kuten xtermissä.\n browser-key: Odota näppäinpainallusta ja tarkista selaimen vastaus. (Tämä ei toimi kunnolla käyttöympäristöissä,\n joissa selain suorittaa oletustoiminnon joidenkin Alt+näppäinyhdistelmien yhteydessä.)"
+		"message": "Määritä Alt-näppäimen käsittelytapa.\n\n  escape: Lähetä ESC-etuliite.\n  8-bit: Lisää kirjoitettuun merkkiin 128 kuten xtermissä.\n browser-key: Odota näppäinpainallusta ja tarkista selaimen vastaus. (Tämä ei toimi kunnolla käyttöympäristöissä,\n joissa selain suorittaa oletustoiminnon joidenkin Alt-näppäinyhdistelmien yhteydessä.)"
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "Terminaalin äänimerkin URL-osoite. Tyhjä merkkijono merkitsee, että kuuluvaa äänimerkkiä ei ole."
@@ -198,13 +198,13 @@
 		"message": "Kopioi hiiren valinta automaattisesti leikepöydälle."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl+C kopioi jos tosi, lähettää isännälle arvon ^C jos epätosi.\nCtrl+Vaihto-C lähettää isännälle arvon ^C jos tosi, kopioi jos epätosi."
+		"message": "Ctrl+C kopioi jos tosi, lähettää ^C:n isännälle jos epätosi.\nCtrl+vaihto+C lähdettää ^C:n isännälle jos tosi, kopioi jos epätosi."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "Jos tosi, Ctrl+Plus/Miinus/Nolla säätää zoomausta.\nJos epätosi, Ctrl+Vaihto-Plus/Miinus/Nolla säätää zoomausta, Ctrl+Miinus lähettää arvon ^_ ja Ctrl+Plus/Nolla ei tee mitään."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl+V liittää jos tosi, lähettää isännälle arvon ^V jos epätosi.\nCtrl+Vaihto-V lähettää isännälle arvon ^V jos tosi, liittää jos epätosi."
+		"message": "Ctrl+V liittää jos tosi, lähettää ^V:n isännälle jos epätosi.\nCtrl+vaihto+V lähettää ^V:n isännälle jos tosi, liittää jos epätosi."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Määritä, vilkkuuko tekstikentän osoitin oletuksena. Asetus voidaan vaihtaa suoritusaikana terminaalin ohjaussekvenssien avulla."
@@ -228,7 +228,7 @@
 		"message": "Jos tosi, vilkkumisattribuuttia on noudatettava. Jos epätosi, se ohitetaan."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Jos tosi, lihavoitua kirjasinta on käytettävä lihavointi- tai kirkkausattribuutin (bold tai bright) yhteydessä. Epätosi, jos käytetään tavallista kirjasinpaksuutta. Tyhjä, jos paksuus tunnistetaan automaattisesti."
+		"message": "Jos tosi, lihavoitua fonttia on käytettävä lihavointi- tai kirkkausattribuutin (bold tai bright) yhteydessä. Epätosi, jos käytetään tavallista fonttipaksuutta. Tyhjä, jos paksuus tunnistetaan automaattisesti."
 	},
 	"hterm_pref_enable_bold_as_bright": {
 		"message": "Jos tosi, lihavointiattribuutin (bold) sisältävässä tekstissä käytetään kirkkaita värejä (16 värin paletissa värit 8–15). Muussa tapauksessa epätosi."
@@ -246,13 +246,13 @@
 		"message": "Ympäristön oletusmuuttujat objekteina"
 	},
 	"hterm_pref_font_family": {
-		"message": "Terminaalitekstin oletuskirjasinperhe"
+		"message": "Terminaalitekstin oletusfonttiperhe"
 	},
 	"hterm_pref_font_size": {
 		"message": "Fontin oletuskoko pikseleinä"
 	},
 	"hterm_pref_font_smoothing": {
-		"message": "Kirjasinta tasoittava CSS-ominaisuus"
+		"message": "Fonttia tasoittava CSS-ominaisuus"
 	},
 	"hterm_pref_foreground_color": {
 		"message": "Etualan väri, kun tekstillä ei ole muita väriattribuutteja"
@@ -339,7 +339,7 @@
 		"message": "Välilyönti"
 	},
 	"hterm_title_pref_appearance": {
-		"message": "Ulkoasu (kirjasimet, värit, kuvat)"
+		"message": "Ulkoasu (fontit, värit, kuvat)"
 	},
 	"hterm_title_pref_copypaste": {
 		"message": "Kopioi ja liitä"
@@ -528,7 +528,7 @@
 		"message": "ChangeLog/julkaisutiedot: $1"
 	},
 	"welcome_faq": {
-		"message": "Vastauksia usein kysyttyihin kysymyksiin: $1 (Avaa linkit Ctrl+klikkaamalla)"
+		"message": "Vastauksia usein kysyttyihin kysymyksiin: $1 (Avaa linkit Ctrl-klikkaamalla)"
 	},
 	"welcome_release_highlights": {
 		"message": "Olennaiset muutokset $1:n jälkeen:"

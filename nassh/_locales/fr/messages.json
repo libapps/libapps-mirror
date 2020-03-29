@@ -195,7 +195,7 @@
 		"message": "Permet de remplacer les couleurs dans la palette par défaut.\n\nCet élément peut être spécifié en tant que matrice ou objet. S'il est défini en tant qu'objet, il s'agit d'une matrice creuse présumée, où chaque propriété correspond à un indice numérique dans la palette de couleurs.\n\nLes valeurs peuvent être définies comme presque toutes les valeurs de couleur CSS, y compris #RGB, #RRGGBB, rgb(...), rgba(...), et tous les noms de couleur qui font partie du fichier rgb.txt X11.\n\nVous pouvez spécifier l'attribut \"null\" pour indiquer que la valeur par défaut ne doit pas être modifiée. Cette option est particulièrement utile pour ignorer un faible nombre d'indices lorsque la valeur est définie en tant que matrice.\n\nPar exemple, pour définir l'index de couleur 1 sur la couleur bleue, vous pouvez utiliser l'une des options suivantes :\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
-		"message": "Permet de copier automatiquement la sélection effectuée avec la souris dans le Presse-papiers."
+		"message": "Permet de copier automatiquement la sélection effectuée avec la souris dans le presse-papiers."
 	},
 	"hterm_pref_ctrl_c_copy": {
 		"message": "Ctrl+C effectue la copie si le paramètre indique \"true\", envoie ^C à l'hôte si le paramètre indique \"false\".\nCtrl+Maj+C envoie ^C à l'hôte si le paramètre indique \"true\", effectue la copie si le paramètre indique \"false\"."
@@ -234,10 +234,10 @@
 		"message": "Lorsque ce paramètre indique \"true\", des couleurs claires (8 à 15 sur une palette de 16 couleurs) doivent être appliquées au texte présentant l'attribut \"gras\". Dans le cas contraire, la valeur \"false\" est définie."
 	},
 	"hterm_pref_enable_clipboard_notice": {
-		"message": "Permet de spécifier si un message s'affiche sur le terminal en cas d'écriture dans le Presse-papiers par l'hôte."
+		"message": "Permet de spécifier si un message s'affiche sur le terminal en cas d'écriture dans le presse-papiers par l'hôte."
 	},
 	"hterm_pref_enable_clipboard_write": {
-		"message": "Autorise l'hôte distant à écrire directement dans le Presse-papiers du système local.\nL'accès en lecture n'est jamais accordé, indépendamment de ce paramètre.\n\nCe paramètre permet de contrôler l'accès à des fonctionnalités comme OSC-52."
+		"message": "Autorise l'hôte distant à écrire directement dans le presse-papiers du système local.\nL'accès en lecture n'est jamais accordé, indépendamment de ce paramètre.\n\nCe paramètre permet de contrôler l'accès à des fonctionnalités comme OSC-52."
 	},
 	"hterm_pref_enable_dec12": {
 		"message": "Respecte la tentative de modification de l'état de clignotement du curseur de texte par l'hôte avec le mode privé DEC 12."

@@ -198,13 +198,13 @@
 		"message": "Copia automaticamente la selezione del mouse negli appunti."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Se il valore è true, la combinazione di tasti CTRL + C consente di eseguire la copia. Se il valore è false, viene inviato ^C all'host.\nSe il valore è true, la combinazione di tasti CTRL + MAIUSC + C consente di inviare ^C all'host. Se il valore è false, consente di eseguire la copia."
+		"message": "Se il valore è true, Ctrl+C esegue la copia. Se il valore è false, invia ^C all'host.\nSe il valore è true, Ctrl+Maiusc+C invia ^C all'host. Se il valore è false, esegue la copia."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "Se il valore è true, la combinazione di tasti CTRL + più/meno/zero consente di controllare lo zoom.\nSe il valore è false, la combinazione di tasti CTRL + MAIUSC + più/meno/zero consente di controllare lo zoom, CTRL + meno consente di inviare ^_, mentre CTRL + più/zero non consente di compiere alcuna azione."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Se il valore è true, la combinazione di tasti CTRL + V consente di incollare. Se il valore è false, viene inviato ^V all'host.\nSe il valore è true, la combinazione di tasti CTRL + MAIUSC + V consente di inviare ^V all'host. Se il valore è false, consente di incollare."
+		"message": "Se il valore è true, Ctrl+V esegue l'incollamento. Se il valore è false, invia ^V all'host.\nSe il valore è true, Ctrl+Maiusc+V invia ^V all'host. Se il valore è false, esegue l'incollamento."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Consente di impostare o meno l'intermittenza del cursore di testo per impostazione predefinita. È possibile attivare e disattivare questa preferenza in fase di runtime tramite sequenze di escape nel terminale."

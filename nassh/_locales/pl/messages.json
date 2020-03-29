@@ -198,13 +198,13 @@
 		"message": "Automatyczne kopiowanie zaznaczenia myszą do schowka."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl+C: jeśli ma wartość prawda, kopiuj. Jeśli fałsz, wyślij ^C do hosta.\nCtrl+Shift+C: jeśli ma wartość prawda, wyślij ^C do hosta. Jeśli fałsz, kopiuj."
+		"message": "Ctrl+C: jeśli ma wartość true, kopiuj. Jeśli false, wyślij ^C do hosta.\nCtrl+Shift+C: jeśli ma wartość true, wyślij ^C do hosta. Jeśli false, kopiuj."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "Jeśli ma wartość prawda: Ctrl+plus/minus/zero zmienia powiększenie.\nJeśli ma wartość fałsz: Ctrl+Shift+plus/minus/zero zmienia powiększenie, Ctrl+minus wysyła ^_, Ctrl+plus/zero nie ma żadnego efektu."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl+V: jeśli ma wartość prawda, wklej. Jeśli fałsz, wyślij ^V do hosta.\nCtrl+Shift+V: jeśli ma wartość prawda, wyślij ^V do hosta. Jeśli fałsz, wklej."
+		"message": "Ctrl+V: jeśli ma wartość true, wklej. Jeśli false, wyślij ^V do hosta.\nCtrl+Shift+V: jeśli ma wartość true, wyślij ^V do hosta. Jeśli false, wklej."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Czy domyślnie kursor tekstowy ma migać. Można to zmieniać podczas działania za pomocą sekwencji zmieniających znaczenie (escape) terminala."

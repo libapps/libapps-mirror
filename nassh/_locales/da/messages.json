@@ -156,13 +156,13 @@
 		"message": "Hvis den angives, annulleres Chrome OS-tilknytningen af Alt + tilbagetasten til DEL, så Alt + tilbagetasten faktisk er Alt + tilbagetasten."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Vælg en registreringsheuristik for AltGr.\n\n\"null\": Registrer automatisk baseret på navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n\"none\": Deaktiver enhver omformning i forhold til AltGr.\n\"ctrl-alt\": Gå ud fra, at Ctrl+Alt er AltGr.\n\"left-alt\": Gå ud fra, at venstre Alt+tast er AltGr.\n\"right-alt\": Gå ud fra, at højre Alt+tast er AltGr."
+		"message": "Vælg en registreringsheuristik for AltGr.\n\n\"null\": Registrer automatisk baseret på navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n\"none\": Deaktiver enhver omformning i forhold til AltGr.\n\"ctrl-alt\": Gå ud fra, at Ctrl+Alt er AltGr.\n\"left-alt\": Gå ud fra, at venstre Alt-tast er AltGr.\n\"right-alt\": Gå ud fra, at højre Alt-tast er AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Angiv, om Alt+tasten skal fungere som metatast eller entydigt som Alt+tast."
+		"message": "Angiv, om Alt-tasten skal fungere som metatast eller entydigt som Alt-tast."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Bestemmer, hvordan Alt+tasten håndteres.\n\n  escape: Send et ESC-præfiks.\n  8-bit: Føj 128 til det angivne tegn som i xterm.\n browser-key: Vent, til der trykkes på en tast, og se, hvad browseren\n siger (dette fungerer ikke godt på platforme, hvor browseren\n udfører en standardhandling for nogle kombinationer med Alt.)"
+		"message": "Bestemmer, hvordan Alt-tasten håndteres.\n\n  escape: Send et ESC-præfiks.\n  8-bit: Føj 128 til det angivne tegn som i xterm.\n browser-key: Vent, til der trykkes på en tast, og se, hvad browseren\n siger (dette fungerer ikke godt på platforme, hvor browseren\n udfører en standardhandling for nogle kombinationer med Alt.)"
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "Webadresse med terminalens klokkelyd. Hvis strengen er tom, høres ingen klokke."
@@ -198,13 +198,13 @@
 		"message": "Kopiér automatisk markeringer med musen til udklipsholderen."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl + C bruges til kopiere, hvis den angives som sand, og til at sende ^C til hosten, hvis den angives som falsk.\nCtrl + Shift + C bruges til at sende ^C til hosten, hvis den angives som sand, og til at kopiere, hvis den angives som falsk."
+		"message": "Ctrl + C bruges til kopiere, hvis den indstilles til sand, og til at sende ^C til hosten, hvis den indstilles til falsk.\nCtrl + Shift + C bruges til at sende ^C til hosten, hvis den indstilles til sand, og til at kopiere, hvis den indstilles til falsk."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "Hvis den angives som sand, styres zoom via Ctrl + plustegn/minustegn/nul.\nHvis den angives som falsk, styres zoom via Ctrl + Shift + plustegn/minustegn/nul, mens Ctrl + minustegn bruges til at sende ^_, og Ctrl + plustegn/nul ikke gør noget."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl + V bruges til at indsætte, hvis den angives som sand, og til at sende ^V til hosten, hvis den angives som falsk.\nCtrl + Shift + V bruges til at sende ^V til hosten, hvis den angives som sand, og til at indsætte, hvis den angives som falsk."
+		"message": "Ctrl + V indsætter, hvis denne er indstillet til sand, og sender ^V til hosten, hvis den indstilles til falsk.\nCtrl + Shift + V sender ^V til hosten, hvis den indstillet til sand, og indsætter, hvis den indstilles til falsk."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Angiver, om tekstmarkøren skal blinke som standard. Denne kan slås til/fra på kørselstidspunktet via terminalens escape-sekvenser."
@@ -216,7 +216,7 @@
 		"message": "Farven på tekstmarkøren, når den er synlig."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "Hvis den angives som sand, opretter terminalklokker i baggrunden en Webunderretning. https://www.w3.org/TR/notifications/\n\nVisning af underretninger kræver brugerens tilladelse. Når denne valgmulighed er angivet som sand, forsøger hterm at anmode brugeren om tilladelse, hvis det er nødvendigt. Browsere viser muligvis ikke denne anmodning om tilladelse, hvis den ikke aktiveres af en brugerhandling.\n\nChrome-udvidelser med tilladelsen \"underretninger\" må vise underretninger."
+		"message": "Hvis den angives som sand, opretter terminalklokker i baggrunden en Webnotifikation. https://www.w3.org/TR/notifications/\n\nVisning af notifikationer kræver brugerens tilladelse. Når denne valgmulighed er angivet som sand, forsøger hterm at anmode brugeren om tilladelse, hvis det er nødvendigt. Browsere viser muligvis ikke denne anmodning om tilladelse, hvis den ikke aktiveres af en brugerhandling.\n\nChrome-udvidelser med tilladelsen \"notifikationer\" må vise notifikationer."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Om tvetydige østasiatiske tegn skal have dobbelt kolonnebredde."
@@ -303,7 +303,7 @@
 		"message": "Angiver, om der skal rulles ned til bunden ved terminaloutput."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Når den alternative skærmbuffer bruges, og DECCKM (programmarkørtasten) er aktiv, efterligner rulning med musehjulet piletasterne.\n\nDet kan deaktiveres midlertidigt ved at holde Shift+tasten nede.\n\nDette forekommer ofte ved brug af værktøjer til sideinddeling (less), ved læsning af manualsider eller tekstredigeringsværktøjer (vi/nano) eller ved brug af Screen/tmux."
+		"message": "Når den alternative skærmbuffer bruges, og DECCKM (programmarkørtasten) er aktiv, efterligner rulning med musehjulet piletasterne.\n\nDet kan deaktiveres midlertidigt ved at holde Shift-tasten nede.\n\nDette forekommer ofte ved brug af værktøjer til sideinddeling (less), ved læsning af manualsider eller tekstredigeringsværktøjer (vi/nano) eller ved brug af Screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "Multiplikatoren for rulning med hjulet, når det måles i pixels.\n\nÆndrer, hvor hurtigt der rulles på siden."
@@ -492,7 +492,7 @@
 		"message": "Hvis du holder Ctrl (Cmd i macOS) nede, mens du højreklikker, vises der en genvejsmenu."
 	},
 	"tip_2": {
-		"message": "Vis underretninger i browseren ved hjælp af hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Vis notifikationer i browseren ved hjælp af hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
 		"message": "Opret forbindelse fra omnifeltet ved at skrive \"ssh <profilnavn>\": https://goo.gl/V7o8ki"

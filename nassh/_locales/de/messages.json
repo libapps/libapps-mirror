@@ -159,10 +159,10 @@
 		"message": "Wählen Sie eine AltGr-Erkennungsheuristik.\n\n\"null\": Automatische Erkennung basiert auf navigator.language:\n      \"en-us\" => \"none\", sonst => \"right-alt\"\n\"none\": Deaktiviert jegliche AltGr-Manipulation.\n\"ctrl-alt\": Es wird angenommen, dass \"Strg + Alt\" für \"AltGr\" steht.\n\"left-alt\": Es wird angenommen, dass \"Alt\" für \"AltGr\" steht.\n\"right-alt\": Es wird angenommen, dass \"Alt\" für \"AltGr\" steht."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Legt fest, ob die Alt+Taste als Meta+ oder als Alt+Taste dient."
+		"message": "Legt fest, ob die Alt-Taste als Meta- oder als Alt-Taste dient."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Steuert die Funktion der Alt+Taste.\n\n  escape: ESC-Präfix senden.\n  8-bit: Dem eingegebenen Zeichen 128 hinzufügen, wie in xterm.\n browser-key: Das Drücken der Taste und die Reaktion des Browsers\n abwarten. Dies funktioniert nicht einwandfrei auf Plattformen, auf denen der\n Browser bei bestimmten Alt+Sequenzen eine Standardaktion ausführt."
+		"message": "Steuert die Funktion der Alt-Taste.\n\n  escape: ESC-Präfix senden.\n  8-bit: Dem eingegebenen Zeichen 128 hinzufügen, wie in xterm.\n browser-key: Das Drücken der Taste und die Reaktion des Browsers\n abwarten. Dies funktioniert nicht einwandfrei auf Plattformen, auf denen der\n Browser bei bestimmten Alt-Sequenzen eine Standardaktion ausführt."
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "URL des Terminaltons. Ein leerer String gibt an, dass kein hörbarer Ton vorhanden ist."
@@ -411,7 +411,7 @@
 		"message": "Auswahl wurde kopiert"
 	},
 	"ok_button_label": {
-		"message": "OK"
+		"message": "Ok"
 	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Sie können sich mit einem gespeicherten Profil oder einem neuen SSH-System verbinden"

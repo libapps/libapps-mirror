@@ -3,7 +3,7 @@
 		"message": "Sistem file sudah terpasang!"
 	},
 	"backup_prefs": {
-		"message": "Simpan Backup"
+		"message": "Simpan Cadangan"
 	},
 	"bad_destination": {
 		"message": "Tidak dapat mengurai tujuan: $1"
@@ -198,13 +198,13 @@
 		"message": "Otomatis menyalin pilihan mouse ke papan klip."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl+C melakukan copy jika true, mengirimkan ^C ke host jika false.\nCtrl+Shift+C mengirimkan ^C ke host jika true, melakukan jika false."
+		"message": "Ctrl+C menyalin jika true, mengirimkan ^C ke host jika false.\nCtrl+Shift+C mengirimkan ^C ke host jika true, menyalin jika false."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "Jika true, Ctrl+Plus/Minus/Zero mengontrol zoom.\nJika false, Ctrl+Shift+Plus/Minus/Zero mengontrol zoom, Ctrl+Minus mengirim ^_, Ctrl+Plus/Zero tidak melakukan apa pun."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl+V melakukan paste jika true, mengirimkan ^V ke host jika false.\nCtrl+Shift+V mengirimkan ^V ke host jika true, melakukan paste jika false."
+		"message": "Ctrl+V menempel jika true, mengirimkan ^V ke host jika false.\nCtrl+Shift+V mengirimkan ^V ke host jika true, menempel jika false."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Apakah kursor teks berkedip secara default. Ini dapat dialihkan saat waktu proses melalui urutan escape terminal."
@@ -450,7 +450,7 @@
 		"message": "Masukkan PIN untuk membuka kunci tombol $1 di '$2' (Sisa $3 kali coba):"
 	},
 	"restore_prefs": {
-		"message": "Pulihkan Backup"
+		"message": "Pulihkan Cadangan"
 	},
 	"shortcut_list_aria_label": {
 		"message": "koneksi yang tersimpan"

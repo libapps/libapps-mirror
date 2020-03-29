@@ -198,13 +198,13 @@
 		"message": "Copiar a seleção do mouse automaticamente para a área de transferência."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl+C copia se for verdadeira e envia ^C para o host se for falsa.\nCtrl+Shift+C envia ^C para o host se for verdadeira e copia se for falsa."
+		"message": "Ctrl+C copia se for verdadeira, envia ^C para o host se for falsa.\nCtrl+Shift+C envia ^C para o host se for verdadeira, copia se for falsa."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "Se for verdadeira, Ctrl+Mais/Menos/Zero controla o zoom.\nSe for falsa, Ctrl+Shift+Mais/Menos/Zero controla o zoom, Ctrl+Menos envia ^_ e Ctrl+Mais/Zero não faz nada."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl+V cola se for verdadeira e envia ^V para o host se for falsa.\nCtrl+Shift+V envia ^V para o host se for verdadeira e cola se for falsa."
+		"message": "Ctrl+V cola se for verdadeira, envia ^V para o host se for falsa.\nCtrl+Shift+V envia ^V para o host se for verdadeira e cola se for falsa."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Define se o cursor de texto pisca por padrão ou não. Isso pode ser ativado durante o tempo de execução por meio de sequências de escape de terminal."

@@ -198,13 +198,13 @@
 		"message": "Automatski kopira odabir miša u međuspremnik."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl + C kopira odabir ako je vrijednost postavljena na \"true\", a hostu šalje ^C ako je postavljena na \"false\".\nCtrl + Shift + C hostu šalje ^C ako je vrijednost \"true\", a kopira odabir ako je \"false\"."
+		"message": "Ctrl+C kopira odabir ako je vrijednost postavljena na \"true\", a hostu šalje ^C ako je postavljena na \"false\".\nCtrl+Shift+C hostu šalje ^C ako je vrijednost \"true\", a kopira odabir ako je \"false\"."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "Ako je vrijednost postavljena na \"true\", Ctrl – plus/minus/nula kontrolira zumiranje.\nAko je postavljena na \"false\", Ctrl – Shift – plus/minus/nula kontrolira zumiranje, Ctrl – minus šalje ^_, a Ctrl – plus/nula ne radi ništa."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl + V zaljepljuje odabir ako je vrijednost postavljena na \"true\", a hostu šalje ^V ako je postavljena na \"false\".\nCtrl + Shift + V hostu šalje ^V ako je vrijednost postavljena na \"true\", a lijepi odabir ako je postavljena na \"false\"."
+		"message": "Ctrl+V zaljepljuje odabir ako je vrijednost postavljena na \"true\", a hostu šalje ^V ako je postavljena na \"false\".\nCtrl+Shift+V hostu šalje ^V ako je vrijednost postavljena na \"true\", a zaljepljuje odabir ako je postavljena na \"false\"."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Hoće li pokazivač teksta treperiti prema zadanim postavkama. To se može promijeniti za vrijeme izvođenja putem izlaznih sljedova terminala"

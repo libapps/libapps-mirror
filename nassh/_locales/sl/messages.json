@@ -198,13 +198,13 @@
 		"message": "Samodejno kopiranje izbora z miško v odložišče."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Kombinacija tipk Ctrl+C kopira, če je omogočeno, in pošlje gostitelju »^C«, če ni omogočeno.\nKombinacija tipk Ctrl+Shift+C pošlje gostitelju »^C«, če je omogočeno, in kopira, če ni omogočeno."
+		"message": "Kombinacija tipk Ctrl + C kopira, če je omogočeno, in pošlje gostitelju »^C«, če ni omogočeno.\nKombinacija tipk Ctrl + Shift + C pošlje gostitelju »^C«, če je omogočeno, in kopira, če ni omogočeno."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "Če je omogočeno, kombinacija tipk Ctrl+Plus/Minus/0 nadzira povečavo.\nČe ni omogočeno, kombinacija tipk Ctrl+Shift+Plus/Minus/0 nadzira povečavo, kombinacija tipk Ctrl+minus pošlje »^_«, kombinacija tipk Ctrl+Plus/0 pa nima učinka."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Kombinacija tipk Ctrl+V kopira, če je omogočeno, in pošlje gostitelju »^V«, če ni omogočeno.\nKombinacija tipk Ctrl+Shift+V pošlje gostitelju »^V«, če je omogočeno, in prilepi, če ni omogočeno."
+		"message": "Kombinacija tipk Ctrl + V kopira, če je omogočeno, in pošlje gostitelju »^V«, če ni omogočeno.\nKombinacija tipk Ctrl + Shift + V pošlje gostitelju »^V«, če je omogočeno, in prilepi, če ni omogočeno."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Določa, ali kazalec besedila privzeto utripa. To je mogoče preklopiti med izvajanjem z ubežnimi zaporedji terminala."

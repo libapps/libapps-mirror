@@ -90,7 +90,7 @@
 		"message": "호스트 이름"
 	},
 	"field_mount_path_placeholder": {
-		"message": "기본 경로는 사용자의 홈 디렉토리입니다"
+		"message": "기본 경로는 사용자의 홈 디렉터리입니다"
 	},
 	"field_nassh_options_aria_label": {
 		"message": "SSH 릴레이 서버 옵션"
@@ -198,13 +198,13 @@
 		"message": "마우스로 선택한 항목을 클립보드에 자동으로 복사합니다."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl+C: True인 경우 복사를 실행하고, False인 경우 호스트에 ^C를 전송합니다.\nCtrl+Shift+C: True인 경우 호스트에 ^C를 전송하고, False인 경우 복사를 실행합니다."
+		"message": "Ctrl + C: True인 경우 복사를 실행하고, False인 경우 호스트에 ^C를 전송합니다.\nCtrl + Shift + C: True인 경우 호스트에 ^C를 전송하고, False인 경우 복사를 실행합니다."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "True인 경우 Ctrl과 +/-/0 키를 눌러 확대/축소를 제어합니다.\nFalse인 경우 Ctrl, Shift와 +/-/0 키를 눌러 확대/축소를 제어하고, Ctrl과 - 키는 ^_를 전송하며, Ctrl과 +/0 키를 누르면 아무것도 실행되지 않습니다."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl+V: True인 경우 붙여넣기를 실행하고, False인 경우 호스트에 ^V를 전송합니다.\nCtrl+Shift+V: True인 경우 호스트에 ^V를 전송하고, False인 경우 붙여넣기를 실행합니다."
+		"message": "Ctrl+V: Ture인 경우 붙여넣기를 실행하고, False인 경우 호스트에 ^V를 전송합니다.\nCtrl+Shift+V: True인 경우 호스트에 ^V를 전송하고, False인 경우 붙여넣기를 실행합니다."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "텍스트 커서가 기본적으로 깜박일지 선택합니다. 터미널 이스케이프 시퀀스를 통해 런타임 시 전환할 수 있습니다."

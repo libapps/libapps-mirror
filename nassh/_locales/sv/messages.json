@@ -156,13 +156,13 @@
 		"message": "När detta alternativ har ställts in åsidosätts ommappningen av Alt+Backsteg till DEL i Chrome OS så att kombinationen Alt+Backsteg verkligen ger Alt+Backsteg."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Välj heuristisk metod för identifiering av AltGr-tangent.\n\n'null': Automatisk identifiering utifrån navigator.language:\n      'en-us' => 'none', övriga => 'right-alt'\n'none': Inaktivera alla AltGr-relaterade ändringar.\n'ctrl-alt': Anta att Ctrl+Alt används som AltGr.\n'left-alt': Anta att vänster Alt+tangent används som AltGr.\n'right-alt': Anta att höger Alt+tangent används som AltGr."
+		"message": "Välj heuristisk metod för identifiering av AltGr-tangent.\n\n'null': Automatisk identifiering utifrån navigator.language:\n      'en-us' => 'none', övriga => 'right-alt'\n'none': Inaktivera alla AltGr-relaterade ändringar.\n'ctrl-alt': Anta att Ctrl+Alt används som AltGr.\n'left-alt': Anta att vänster Alt-tangent används som AltGr.\n'right-alt': Anta att höger Alt-tangent används som AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Om Alt+tangenten används som Meta+tangent eller som Alt+tangent."
+		"message": "Om Alt-tangenten används som Meta-tangent eller som Alt-tangent."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Styr hur Alt+tangenten fungerar.\n\n  escape: Skicka ett ESC-prefix.\n  8-bit: Lägg till 128 till teckenvärdet, som i xterm.\n browser-key: Invänta tangenttryckningshändelsen och se hur den tolkas\n i webbläsaren. (Detta fungerar inte bra på plattformar där\n vissa Alt+sekvenser aktiverar en standardåtgärd i webbläsaren.)"
+		"message": "Styr hur Alt-tangenten fungerar.\n\n  escape: Skicka ett ESC-prefix.\n  8-bit: Lägg till 128 till teckenvärdet, som i xterm.\n browser-key: Invänta tangenttryckningshändelsen och se hur den tolkas\n i webbläsaren. (Detta fungerar inte bra på plattformar där\n vissa Alt-sekvenser aktiverar en standardåtgärd i webbläsaren.)"
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "Webbadress för terminalens klockljud. Lämna strängen tom om inget klockljud ska höras."
@@ -204,7 +204,7 @@
 		"message": "När detta är inställt på sant används Ctrl och +/- för att zooma och Ctrl+0 för att nollställa zoomen.\nMed inställningen falskt används Ctrl+Skift och +/- respektive Ctrl+Skift+0 för zoomen. Ctrl och - skickar ^_ medan Ctrl och + respektive Ctrl+0 inte gör någonting."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "När detta är inställt på sant används Ctrl+V för att klistra in. Med inställningen falskt används Ctrl+V för att skicka ^V till värden.\nMed inställningen sant skickas ^V till värden med Ctrl+Skift+V och med inställningen falskt används Ctrl+Skift+V för att klistra in."
+		"message": "När detta är inställt på sant används Ctrl+V för att klistra in. Med inställningen falskt används Ctrl+V för att skicka ^V till värden.\nMed inställningen sant skickar man ^V till värden med Ctrl+Skift+V och med inställningen falskt används Ctrl+Skift+V för att klistra in."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Om textmarkören ska blinka eller inte som standard. Detta kan aktiveras och inaktiveras med escape-sekvenser i terminalen under körning."
