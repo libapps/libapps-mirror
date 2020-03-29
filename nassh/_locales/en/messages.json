@@ -959,6 +959,14 @@
 		"description": "A link to the licenses of open source dependencies.",
 		"message": "Licenses"
 	},
+	"LICENSES_EXPAND_LINK": {
+		"description": "Link that shows the extended details for a specific license.",
+		"message": "show license"
+	},
+	"LICENSES_TITLE": {
+		"description": "Title text for the page showing licensing information for the project. Everything here may be translated as long as there are proper translations for the corresponding concepts; see https://opensource.org/licenses for details.",
+		"message": "Open Source Licenses"
+	},
 	"LOADING_LABEL": {
 		"description": "The text displayed in the identity dropdown list while we load identities (which are SSH private key filenames used to authenticate with servers).",
 		"message": "Loading..."

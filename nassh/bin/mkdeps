@@ -107,8 +107,8 @@ LICENSE_ENTRY_TEMPLATE = """
   <a href='%(repository)s'>%(package)s</a>
   <a class='license'
      id='show-%(package)s'
-     i18n='{"aria-label": "$id"}'
-     href='#'>show license</a>
+     i18n='{"aria-label": "$id", "_": "LICENSES_EXPAND_LINK"}'
+     href='#'></a>
 </h2>
 <pre class='license' id='license-%(package)s'>
 %(data)s
