@@ -113,9 +113,8 @@ def minify_json(path):
 
 def minify_translations(tmpdir):
     """Minimize translation files."""
-    libdot.run([os.path.join(libdot.BIN_DIR, 'minify-translations.py'),
-                '-i', '--glob', os.path.join('_locales', '*', 'messages.json')],
-               cwd=tmpdir)
+    libdot.minify_translations.minify_many(
+        glob.glob(os.path.join(tmpdir, '_locales', '*', 'messages.json')), True)
 
 
 def minify(tmpdir):

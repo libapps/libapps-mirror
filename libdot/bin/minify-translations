@@ -102,6 +102,16 @@ def minify(path, inplace=False):
     return True
 
 
+def minify_many(paths, inplace=False):
+    """Minify translations."""
+    ret = True
+    for path in paths:
+        logging.debug('Processing %s', path)
+        if not minify(path, inplace):
+            ret = False
+    return ret
+
+
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
@@ -127,12 +137,7 @@ def main(argv):
             else:
                 yield path
 
-    ret = 0
-    for path in expander(opts.files):
-        logging.debug('Processing %s', path)
-        if not minify(path, opts.inplace):
-            ret = 1
-    return ret
+    return 0 if minify_many(expander(opts.files), opts.inplace) else 1
 
 
 if __name__ == '__main__':
