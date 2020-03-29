@@ -1645,6 +1645,10 @@
 			}
 		}
 	},
+	"NASSH_PRODUCT_NAME": {
+		"description": "The name of the product. It may be localized if there is a common localization for the SSH program (which is short for 'Secure Shell').",
+		"message": "Secure Shell"
+	},
 	"NASSH_OPTIONS_ERROR": {
 		"description": "Error message shown when a user specified option is invalid. All strings here should be translated.",
 		"message": "Unknown option: $OPTION$",
