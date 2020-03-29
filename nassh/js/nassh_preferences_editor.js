@@ -26,6 +26,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
     };
   }
 
+  // Support multiple settings subpages.
+  document.querySelectorAll('.navigation > .menu > li > a').forEach((ele) => {
+    ele.addEventListener('click', nassh.PreferencesEditor.onSettingsPageClick);
+  });
+
   function setupPreferences() {
     var manifest = chrome.runtime.getManifest();
 
@@ -100,6 +105,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
         if (document.activeElement.name == 'settings' && e.keyCode == 27)
           prefsEditor.reset(document.activeElement);
       };
+
+    // If the user wants a specific page, navigate to it now.
+    const page = document.location.hash;
+    if (page) {
+      nassh.PreferencesEditor.switchSettingsPage(page.substr(1));
+    }
   }
 
   lib.init(setupPreferences);
@@ -113,6 +124,54 @@ window.addEventListener('DOMContentLoaded', (event) => {
  */
 nassh.PreferencesEditor = function(profileId = 'default') {
   this.selectProfile(profileId);
+};
+
+/**
+ * Helper for switching between settings panes.
+ *
+ * @param {string} page The new page to display.
+ */
+nassh.PreferencesEditor.switchSettingsPage = function(page) {
+  const hash = `#${page}`;
+  const selected = 'selected';
+
+  // Make sure it's a valid/known menu.
+  const currMenuLink = document.querySelector(`.menu a[href="${hash}"]`);
+  if (!currMenuLink) {
+    console.warn(`Settings page "${page}" is unknown`);
+    return;
+  }
+
+  // If clicking the same page, don't hide/show it to avoid flashing.
+  const oldMenu = document.querySelector('.menu > li.selected');
+  const newMenu = currMenuLink.parentNode;
+  if (oldMenu === newMenu) {
+    return;
+  }
+
+  // Deselect the current settings section & hide the content.
+  oldMenu.classList.remove(selected);
+  const oldSection = document.querySelector('.mainview > .selected');
+  oldSection.classList.remove(selected);
+  oldSection.style.display = 'none';
+
+  // Select the new settings section & show the content.
+  newMenu.classList.add(selected);
+  const newSection = document.querySelector(hash);
+  // Delay the selection to help with the fancy UI transition.
+  setTimeout(() => newSection.classList.add(selected), 0);
+  newSection.style.display = 'block';
+};
+
+/**
+ * Helper for switching between settings panes.
+ *
+ * @param {!Event} e The event triggering the switch.
+ */
+nassh.PreferencesEditor.onSettingsPageClick = function(e) {
+  e.preventDefault();
+  const url = new URL(e.currentTarget.href);
+  nassh.PreferencesEditor.switchSettingsPage(url.hash.substr(1));
 };
 
 /**

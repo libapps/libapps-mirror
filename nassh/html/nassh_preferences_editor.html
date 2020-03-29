@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'/>
+<head>
+  <meta charset='utf-8'/>
 
-    <script src='../js/nassh_deps.concat.js'></script>
-    <script src='../js/nassh.js'></script>
-    <script src='../js/nassh_preference_manager.js'></script>
-    <script src='../js/nassh_preferences_editor.js'></script>
+  <script src='../js/nassh_deps.concat.js'></script>
+  <script src='../js/nassh.js'></script>
+  <script src='../js/nassh_preference_manager.js'></script>
+  <script src='../js/nassh_preferences_editor.js'></script>
 
-    <link rel='stylesheet' href='../third_party/chrome-bootstrap/chrome-bootstrap.css'></link>
-    <link rel='stylesheet' href='../css/nassh_preferences_editor.css'></link>
-  </head>
+  <link rel='stylesheet' href='../third_party/chrome-bootstrap/chrome-bootstrap.css'></link>
+  <link rel='stylesheet' href='../css/nassh_preferences_editor.css'></link>
+</head>
 
-  <body class="chrome-bootstrap">
-    <div class="options-container hflex">
+<body class='chrome-bootstrap'>
+  <div class='frame'>
 
-      <div class="navigation">
-        <h1 id='manifest-name'></h1>
-        <ul class="menu">
-          <li class="selected">
-            <a href="#options" i18n='{"_": "PREFERENCES_HEADER"}'></a>
-          </li>
-        </ul>
-        <ul style="margin-left: 1em">
-          <li><img id='icon'/></li>
-          <li><a id='backup' href='#backup' i18n='{"_": "BACKUP_PREFS"}'
-                 >Save Backup</a></li>
-          <li><a id='restore' href='#restore' i18n='{"_": "RESTORE_PREFS"}'
-                 >Restore Backup</a></li>
-          <li><a id='licenses' href='licenses.html' i18n='{"_": "LICENSES"}'
-                 target='_blank'>Licenses</a></li>
-          <li><a id='changelog' href='changelog.html' i18n='{"_": "CHANGELOG"}'
-                 target='_blank'>ChangeLog</a></li>
-          <li><a id='protocols' href='protocol_register.html'
-                 i18n='{"_": "PROTOCOL_REGISTER_OPTIONS_LINK"}'
-                 target='_blank'></a></li>
-        </ul>
-        <input class='restore' type='file'>
-      </div>
+    <div class='navigation'>
+      <h1 id='manifest-name'></h1>
+      <ul class='menu'>
+        <li class='selected'>
+          <a href='#options' i18n='{"_": "PREFERENCES_HEADER"}'></a>
+        </li>
+      </ul>
+      <ul style='margin-left: 1em'>
+        <li><img id='icon'/></li>
+        <li><a id='backup' href='#backup' i18n='{"_": "BACKUP_PREFS"}'
+               >Save Backup</a></li>
+        <li><a id='restore' href='#restore' i18n='{"_": "RESTORE_PREFS"}'
+               >Restore Backup</a></li>
+        <li><a id='licenses' href='licenses.html' i18n='{"_": "LICENSES"}'
+               target='_blank'>Licenses</a></li>
+        <li><a id='changelog' href='changelog.html' i18n='{"_": "CHANGELOG"}'
+               target='_blank'>ChangeLog</a></li>
+        <li><a id='protocols' href='protocol_register.html'
+               i18n='{"_": "PROTOCOL_REGISTER_OPTIONS_LINK"}'
+               target='_blank'></a></li>
+      </ul>
+      <input class='restore' type='file'>
+    </div>
 
-      <div id="options">
+    <div class='mainview view'>
+      <div id='options' class='selected'>
         <header>
           <h1 i18n='{"_": "PREFERENCES_HEADER"}'></h1>
 
@@ -58,11 +59,13 @@
           </div>
         </header>
 
-        <div id="options-settings-section" class="vflex">
+        <div id='options-settings-section' class='content vflex'>
           <div id='settings'></div>
         </div>
       </div>
 
     </div>
-  </body>
+
+  </div>
+</body>
 </html>
