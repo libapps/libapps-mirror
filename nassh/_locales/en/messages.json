@@ -1713,6 +1713,10 @@
 		"description": "Friendly message shown on the preferences (e.g. colors, fonts, etc...) editing page.",
 		"message": "Profile Settings"
 	},
+	"PREFERENCES_HEADER_URI": {
+		"description": "Menu label to select the protocol handler registration page. This controls settings for e.g. ssh:// URIs.",
+		"message": "URI Handlers"
+	},
 	"PREFERENCES_RESET": {
 		"description": "Message displayed after all preferences (e.g. colors, fonts, etc...) are reset.",
 		"message": "All preferences reset!"

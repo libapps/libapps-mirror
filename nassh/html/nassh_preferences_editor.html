@@ -7,6 +7,7 @@
   <script src='../js/nassh.js'></script>
   <script src='../js/nassh_preference_manager.js'></script>
   <script src='../js/nassh_preferences_editor.js'></script>
+  <script src='../js/nassh_preferences_protocol_register.js'></script>
 
   <link rel='stylesheet' href='../third_party/chrome-bootstrap/chrome-bootstrap.css'></link>
   <link rel='stylesheet' href='../css/nassh_preferences_editor.css'></link>
@@ -21,6 +22,9 @@
         <li class='selected'>
           <a href='#options' i18n='{"_": "PREFERENCES_HEADER"}'></a>
         </li>
+        <li>
+          <a href='#handlers' i18n='{"_": "PREFERENCES_HEADER_URI"}'></a>
+        </li>
       </ul>
       <ul style='margin-left: 1em'>
         <li><img id='icon'/></li>
@@ -32,9 +36,6 @@
                target='_blank'>Licenses</a></li>
         <li><a id='changelog' href='changelog.html' i18n='{"_": "CHANGELOG"}'
                target='_blank'>ChangeLog</a></li>
-        <li><a id='protocols' href='protocol_register.html'
-               i18n='{"_": "PROTOCOL_REGISTER_OPTIONS_LINK"}'
-               target='_blank'></a></li>
       </ul>
       <input class='restore' type='file'>
     </div>
@@ -64,6 +65,25 @@
         </div>
       </div>
 
+      <div id='handlers'>
+        <header>
+          <h1 i18n='{"_": "PROTOCOL_REGISTER_TITLE"}'></h1>
+        </header>
+
+        <div id='handlers-settings-section' class='content vflex'>
+          <section>
+            <p i18n='{"_": "PROTOCOL_REGISTER_EXPLAIN"}'></p>
+            <button id='proto-register'
+                    i18n='{"_": "PROTOCOL_REGISTER_BUTTON"}'></button>
+          </section>
+
+          <section>
+            <p i18n='{"_": "PROTOCOL_REGISTER_EXPLAIN_SETTINGS"}'></p>
+            <button id='proto-open-settings'
+                    i18n='{"_": "PROTOCOL_REGISTER_SETTINGS_BUTTON"}'></button>
+          </section>
+        </div>
+      </div>
     </div>
 
   </div>

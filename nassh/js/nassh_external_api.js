@@ -267,7 +267,8 @@ nassh.External.COMMANDS.set('openProtoReg',
  * @param {function(!Object=)} sendResponse Called to send response.
  */
 function(request, sender, sendResponse) {
-  lib.f.openWindow(lib.f.getURL('/html/protocol_register.html'), '_blank');
+  lib.f.openWindow(lib.f.getURL('/html/nassh_preferences_editor.html#handlers'),
+                   '_blank');
   sendResponse({error: false, message: 'openProtoReg'});
 });
 

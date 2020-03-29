@@ -31,24 +31,11 @@ nassh.ProtocolRegisterDialog.openSettings = function() {
 };
 
 /**
- * Translate the dialog.
- */
-nassh.ProtocolRegisterDialog.updateLabels = function() {
-  lib.i18n.getAcceptLanguages((languages) => {
-    const mm = new lib.MessageManager(languages);
-    mm.processI18nAttributes(document);
-  });
-};
-
-/**
  * Event when the window finishes loading.
  */
 window.addEventListener('DOMContentLoaded', (event) => {
-  lib.init(() => {
-    nassh.ProtocolRegisterDialog.updateLabels();
-    window.document.getElementById('register').onclick =
-        nassh.ProtocolRegisterDialog.register;
-    window.document.getElementById('settings').onclick =
-        nassh.ProtocolRegisterDialog.openSettings;
-  });
+  document.getElementById('proto-register').onclick =
+      nassh.ProtocolRegisterDialog.register;
+  document.getElementById('proto-open-settings').onclick =
+      nassh.ProtocolRegisterDialog.openSettings;
 });
