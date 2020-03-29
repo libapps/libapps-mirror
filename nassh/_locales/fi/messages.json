@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "oletuspolku on käyttäjän kotihakemisto"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH-välityspalvelinvalinnat"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH-välityspalvelinvalinnat"
+	},
 	"field_port_aria_label": {
 		"message": "portti"
 	},
 	"field_port_placeholder": {
 		"message": "portti"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH-välityspalvelinvalinnat"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH-välityspalvelinvalinnat"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "oletus"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Pystysuuntainen vierityspalkkitila"
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Määritä isännälle lähetettävien tietojen merkkijärjestelmä."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Liittääkö Vaihto-Insert tiedot vai lähetetäänkö se etäisännälle."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Käytössä"
 	},
+	"nassh_options_error": {
+		"message": "Tuntematon välitysasetus: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Uusi ikkuna"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Haluatko yhdistää uudelleen (r), valita toisen yhteystavan (c) vai poistua (x)?"
-	},
-	"relay_options_error": {
-		"message": "Tuntematon välitysasetus: $1"
 	},
 	"relay_retry": {
 		"message": "Yritetään uudelleen…"

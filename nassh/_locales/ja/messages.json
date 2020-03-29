@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "デフォルトのパスはユーザーのホーム ディレクトリです"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH 中継サーバーのオプション"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH 中継サーバーのオプション"
+	},
 	"field_port_aria_label": {
 		"message": "ポート"
 	},
 	"field_port_placeholder": {
 		"message": "ポート"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH 中継サーバーのオプション"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH 中継サーバーのオプション"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "デフォルト"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "縦方向のスクロールバーのモードです。"
 	},
-	"hterm_pref_send_encoding": {
-		"message": "ホストに送信されるデータのエンコード方法を設定します。"
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Shift+Insert キーを貼り付けに使用するか、リモートホストに送信するかを設定します。"
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "マウント完了。"
 	},
+	"nassh_options_error": {
+		"message": "不明な中継オプション: $1"
+	},
 	"new_window_menu_label": {
 		"message": "新規ウインドウ"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "再接続(&R)、別の接続を選択(&C)、または終了(&X)"
-	},
-	"relay_options_error": {
-		"message": "不明な中継オプション: $1"
 	},
 	"relay_retry": {
 		"message": "再試行しています..."

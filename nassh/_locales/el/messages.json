@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "η προεπιλεγμένη διαδρομή είναι ο αρχικός κατάλογος του χρήστη"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Επιλογές διακομιστή αναμετάδοσης SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Επιλογές διακομιστή αναμετάδοσης SSH"
+	},
 	"field_port_aria_label": {
 		"message": "θύρα"
 	},
 	"field_port_placeholder": {
 		"message": "θύρα"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Επιλογές διακομιστή αναμετάδοσης SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Επιλογές διακομιστή αναμετάδοσης SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "προεπιλογή"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Η λειτουργία της κατακόρυφης γραμμής κύλισης."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Ορίστε την κωδικοποίηση για τα δεδομένα που αποστέλλονται στον κεντρικό υπολογιστή."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Εάν ο συνδυασμός πλήκτρων Shift+Insert χρησιμοποιείται για επικόλληση ή εάν αποστέλλεται στον απομακρυσμένο κεντρικό υπολογιστή."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Προσαρτήθηκε!"
 	},
+	"nassh_options_error": {
+		"message": "Άγνωστη επιλογή αναμετάδοσης: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Νέο παράθυρο"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Θέλετε να κάνετε επανασύνδεση(R), να επιλέξετε(C) άλλη σύνδεση ή να πραγματοποιήσετε έξοδο(X);"
-	},
-	"relay_options_error": {
-		"message": "Άγνωστη επιλογή αναμετάδοσης: $1"
 	},
 	"relay_retry": {
 		"message": "Επανάληψη…"

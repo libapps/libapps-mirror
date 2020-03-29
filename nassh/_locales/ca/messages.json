@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "la ruta predeterminada és el directori d'inici de l'usuari"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Opcions del servidor de tramesa SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Opcions del servidor de tramesa SSH"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Opcions del servidor de tramesa SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Opcions del servidor de tramesa SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "opció predeterminada"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "El mode de barra de desplaçament vertical."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Estableix la codificació de les dades enviades a l'amfitrió."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Estableix si s'utilitza Maj+Insereix per enganxar o si s'envia a l'amfitrió remot."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "S'ha activat."
 	},
+	"nassh_options_error": {
+		"message": "Opció de tramesa desconeguda: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Finestra nova"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Vols torna(r) a connectar, triar una altra (c)onnexió o sortir (x)?"
-	},
-	"relay_options_error": {
-		"message": "Opció de tramesa desconeguda: $1"
 	},
 	"relay_retry": {
 		"message": "S'està tornant a provar..."

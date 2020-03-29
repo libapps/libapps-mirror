@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "numatytasis kelias yra naudotojo pagrindinis katalogas"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH perdavimo serverio parinktys"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH perdavimo serverio parinktys"
+	},
 	"field_port_aria_label": {
 		"message": "prievadas"
 	},
 	"field_port_placeholder": {
 		"message": "prievadas"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH perdavimo serverio parinktys"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH perdavimo serverio parinktys"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "numatytasis"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Vertikalios slinkimo juostos režimas."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Nustatoma į prieglobos serverį siunčiamų duomenų koduotė."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Ar „Shift“ ir „Insert“ naudojama įklijuojant ar siunčiama nuotoliniam prieglobos serveriui."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Įdėta!"
 	},
+	"nassh_options_error": {
+		"message": "Nežinoma perdavimo parinktis: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Naujas langas"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Iš naujo prisijungti (R), pasirinkti kitą ryšį (C) ar išeiti (X)?"
-	},
-	"relay_options_error": {
-		"message": "Nežinoma perdavimo parinktis: $1"
 	},
 	"relay_retry": {
 		"message": "Bandoma iš naujo..."

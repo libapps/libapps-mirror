@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "ডিফল্ট পাথ হল ব্যবহারকারীর হোম ডিরেক্টরি"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH রিলে সার্ভার বিকল্প"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH রিলে সার্ভার বিকল্প"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH রিলে সার্ভার বিকল্প"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH রিলে সার্ভার বিকল্প"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "default"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "উল্লম্ব স্ক্রলবার মোড।"
 	},
-	"hterm_pref_send_encoding": {
-		"message": "হোস্টে ডেটা পাঠানোর জন্য এনকোডিং সেট করা হয়।"
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Shift+Insert পেস্ট করার জন্য ব্যবহার করা হবে নাকি রিমোট হোস্টকে পাঠাতে ব্যবহার করা হবে।"
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Mounted!"
 	},
+	"nassh_options_error": {
+		"message": "অজানা রিলে বিকল্প: $1"
+	},
 	"new_window_menu_label": {
 		"message": "নতুন উইন্ডো"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
-	},
-	"relay_options_error": {
-		"message": "অজানা রিলে বিকল্প: $1"
 	},
 	"relay_retry": {
 		"message": "Retrying..."

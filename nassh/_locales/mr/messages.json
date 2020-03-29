@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "वापरकर्त्याची होम डिरेक्टरी हा डीफॉल्ट पाथ आहे"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH रिले सर्व्हर पर्याय"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH रिले सर्व्हर पर्याय"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH रिले सर्व्हर पर्याय"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH रिले सर्व्हर पर्याय"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "default"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "व्हर्टिकल स्क्रोलबार मोड."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "होस्टला पाठवलेल्या डेटासाठी एंकोडिंग सेट करा"
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Shift+Insert पेस्ट करण्यासाठी वापरले जाते की रिमोट होस्टवर पाठवले जाते."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Mounted!"
 	},
+	"nassh_options_error": {
+		"message": "अज्ञात रीले पर्याय: $1"
+	},
 	"new_window_menu_label": {
 		"message": "नवीन विंडो"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
-	},
-	"relay_options_error": {
-		"message": "अज्ञात रीले पर्याय: $1"
 	},
 	"relay_retry": {
 		"message": "Retrying..."

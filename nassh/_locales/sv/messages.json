@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "sökvägen är användarens home-katalog som standard"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Alternativ för SSH-reläserver"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Alternativ för SSH-reläserver"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Alternativ för SSH-reläserver"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Alternativ för SSH-reläserver"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "standard"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Läge för den lodräta rullningslisten."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Ange teckenkodning för data som skickas till värden."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Om teckensekvensen Skift+Insert ska användas för att klistra in eller skickas till fjärrvärden."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Filsystemet har monterats."
 	},
+	"nassh_options_error": {
+		"message": "Okänt reläalternativ: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Nytt fönster"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Vill du återansluta (R), välja en annan anslutning (C) eller avsluta (X)?"
-	},
-	"relay_options_error": {
-		"message": "Okänt reläalternativ: $1"
 	},
 	"relay_retry": {
 		"message": "Försöker igen …"

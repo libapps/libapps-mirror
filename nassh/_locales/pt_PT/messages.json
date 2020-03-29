@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "o caminho predefinido é o diretório principal do utilizador"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Opções do servidor de retransmissão SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Opções do servidor de retransmissão SSH"
+	},
 	"field_port_aria_label": {
 		"message": "porta"
 	},
 	"field_port_placeholder": {
 		"message": "porta"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Opções do servidor de retransmissão SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Opções do servidor de retransmissão SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "predefinição"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "O modo de barra de deslocamento vertical."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Definir a codificação para os dados enviados ao anfitrião."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Se o comando Shift+Insert é utilizado para colar ou é enviado para o anfitrião remoto."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Montado"
 	},
+	"nassh_options_error": {
+		"message": "Opção de retransmissão desconhecida: $1."
+	},
 	"new_window_menu_label": {
 		"message": "Nova janela"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Pretende voltar a ligar (R), escolher outra ligação (C) ou sair (X)?"
-	},
-	"relay_options_error": {
-		"message": "Opção de retransmissão desconhecida: $1."
 	},
 	"relay_retry": {
 		"message": "A tentar novamente..."

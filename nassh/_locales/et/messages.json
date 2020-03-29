@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "vaiketee on kasutaja juurkataloog"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH-releeserveri valikud"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH-releeserveri valikud"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH-releeserveri valikud"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH-releeserveri valikud"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "vaikeprofiil"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Vertikaalse kerimisriba režiim."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Hostile saadetavate andmete jaoks kodeeringu määramine."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Määrab, kas kombinatsiooni tõstuklahv + lisamisklahv kasutatakse kleepimiseks saadetakse kaughostile."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Ühendatud."
 	},
+	"nassh_options_error": {
+		"message": "Relee tundmatu valik: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Uus aken"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Kas ühendada uuesti (R), valida teine ühendus (C) või väljuda (X)?"
-	},
-	"relay_options_error": {
-		"message": "Relee tundmatu valik: $1"
 	},
 	"relay_retry": {
 		"message": "Uuesti proovimine …"

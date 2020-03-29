@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "ነባሪው ዱካ የተጠቃሚው መነሻ ማውጫ ነው"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "የSSH አቀባይ አገልጋይ አማራጮች"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "የSSH አቀባይ አገልጋይ አማራጮች"
+	},
 	"field_port_aria_label": {
 		"message": "ወደብ"
 	},
 	"field_port_placeholder": {
 		"message": "ወደብ"
-	},
-	"field_relay_options_aria_label": {
-		"message": "የSSH አቀባይ አገልጋይ አማራጮች"
-	},
-	"field_relay_options_placeholder": {
-		"message": "የSSH አቀባይ አገልጋይ አማራጮች"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "ነባሪ"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "አቀባዊ የማሸብለያ አሞሌ ሁነታ።"
 	},
-	"hterm_pref_send_encoding": {
-		"message": "ወደ አስተናጋጁ የሚላከው የውሂብ ኮድ ቅየራ።"
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Shift+Insert ለመለጠፍ ሥራ ላይ ይውል ወይም ወደ የርቀት አስተናጋጁ ይላክ እንደሆነ።"
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "ተፈናጥጧል!"
 	},
+	"nassh_options_error": {
+		"message": "ያልታወቀ የማበያያ አማራጭ፦ $1"
+	},
 	"new_window_menu_label": {
 		"message": "አዲስ መስኮት"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "ዳግም(R) ይገናኝ፣ ሌላ ግንኙነት ይምረጡ(C) ወይም ይውጡ(X)?"
-	},
-	"relay_options_error": {
-		"message": "ያልታወቀ የማበያያ አማራጭ፦ $1"
 	},
 	"relay_retry": {
 		"message": "ዳግም በመሞከር ላይ..."

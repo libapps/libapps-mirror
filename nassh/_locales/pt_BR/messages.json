@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "o caminho padrão é o diretório inicial do usuário"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Opções de servidor relay SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Opções de servidor relay SSH"
+	},
 	"field_port_aria_label": {
 		"message": "porta"
 	},
 	"field_port_placeholder": {
 		"message": "porta"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Opções de servidor relay SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Opções de servidor relay SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "padrão"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "O modo de barra de rolagem vertical."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Define a codificação dos dados enviados ao host."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Define se as teclas Shift+Insert são usadas para colar ou são enviadas para o host remoto."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Ativado."
 	},
+	"nassh_options_error": {
+		"message": "Opção de relé desconhecida: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Nova janela"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Reconectar (R), escolher outra conexão (C) ou sair (X)?"
-	},
-	"relay_options_error": {
-		"message": "Opção de relé desconhecida: $1"
 	},
 	"relay_retry": {
 		"message": "Tentando novamente..."

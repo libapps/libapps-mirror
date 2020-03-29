@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "đường dẫn mặc định là thư mục gốc của người dùng"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Tùy chọn về máy chủ chuyển tiếp SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Tùy chọn về máy chủ chuyển tiếp SSH"
+	},
 	"field_port_aria_label": {
 		"message": "cổng"
 	},
 	"field_port_placeholder": {
 		"message": "cổng"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Tùy chọn về máy chủ chuyển tiếp SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Tùy chọn về máy chủ chuyển tiếp SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "mặc định"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Chế độ thanh cuộn dọc."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Thiết lập mã hóa cho dữ liệu gửi tới máy chủ."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Xác định xem có sử dụng tổ hợp phím Shift+Insert để dán hoặc gửi tổ hợp phím này đến máy chủ từ xa hay không."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Đã kết nối!"
 	},
+	"nassh_options_error": {
+		"message": "Tùy chọn chuyển tiếp không xác định: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Cửa sổ mới"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Kết nối lại (R), Chọn một kết nối khác (C) hoặc Thoát (X)?"
-	},
-	"relay_options_error": {
-		"message": "Tùy chọn chuyển tiếp không xác định: $1"
 	},
 	"relay_retry": {
 		"message": "Đang thử lại..."

@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "பயனரின் முதன்மைக் கோப்பகமே இயல்புத் தடமாகும்"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH ரிலே சேவையக விருப்பங்கள்"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH ரிலே சேவையக விருப்பங்கள்"
+	},
 	"field_port_aria_label": {
 		"message": "போர்ட்"
 	},
 	"field_port_placeholder": {
 		"message": "போர்ட்"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH ரிலே சேவையக விருப்பங்கள்"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH ரிலே சேவையக விருப்பங்கள்"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "இயல்பு"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "செங்குத்து ஸ்க்ரோல்பார் பயன்முறை."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "ஹோஸ்ட்டுக்கு அனுப்பிய தரவிற்கான என்கோடிங்கை அமைக்கும்."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Shift+Insert ஒட்டுவதற்குப் பயன்படுத்தப்படுகிறதா அல்லது தொலைநிலை ஹோஸ்ட்டுக்கு அனுப்பப்படுகிறதா என்பதை அமைக்கும்."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "இணைக்கப்பட்டது!"
 	},
+	"nassh_options_error": {
+		"message": "தெரியாத ரிலே விருப்பம்: $1"
+	},
 	"new_window_menu_label": {
 		"message": "புதிய சாளரம்"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "மீண்டும் இணைக்கவா(R), வேறு இணைப்பைத் தேர்வு செய்யவா(C) அல்லது வெளியேறவா(x)?"
-	},
-	"relay_options_error": {
-		"message": "தெரியாத ரிலே விருப்பம்: $1"
 	},
 	"relay_retry": {
 		"message": "மீண்டும் முயல்கிறது..."

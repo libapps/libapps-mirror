@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "उपयोगकर्ता की होम निर्देशिका डिफ़ॉल्ट पाथ है"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH रिले सर्वर के विकल्प"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH रिले सर्वर के विकल्प"
+	},
 	"field_port_aria_label": {
 		"message": "पोर्ट"
 	},
 	"field_port_placeholder": {
 		"message": "पोर्ट"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH रिले सर्वर के विकल्प"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH रिले सर्वर के विकल्प"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "डिफ़ॉल्ट"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "वर्टिकल स्क्रोलबार मोड."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "होस्ट को भेजे गए डेटा के लिए कोड में बदलने का तरीका सेट करें."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "क्या Shift+Insert का इस्तेमाल चिपकाने के लिए किया जाता है या रिमोट होस्ट पर भेजने के लिए."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "माउंट किया गया!"
 	},
+	"nassh_options_error": {
+		"message": "अज्ञात रिले विकल्प: $1"
+	},
 	"new_window_menu_label": {
 		"message": "नई विंडो"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "फिर से कनेक्ट करें (R), कोई दूसरा कनेक्शन चुनें (C) या बाहर निकलेें (x)?"
-	},
-	"relay_options_error": {
-		"message": "अज्ञात रिले विकल्प: $1"
 	},
 	"relay_retry": {
 		"message": "फिर से कोशिश की जा रही है..."

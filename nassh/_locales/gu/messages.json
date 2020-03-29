@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "વપરાશકર્તાની હોમ ડિરેક્ટરી એ ડિફૉલ્ટ પથ છે"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH રિલે સર્વરના વિકલ્પો"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH રિલે સર્વરના વિકલ્પો"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH રિલે સર્વરના વિકલ્પો"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH રિલે સર્વરના વિકલ્પો"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "default"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "ઉભો સ્ક્રૉલ્બાર મોડ."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "હોસ્ટને મોકલાતા ડેટા માટે એન્કોડિંગ સેટ કરો."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Shift+Insert નો ઉપયોગ પેસ્ટ કરવા માટે થાય છે કે તે રિમોટ હોસ્ટને મોકલવામાં આવે છે."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Mounted!"
 	},
+	"nassh_options_error": {
+		"message": "અજ્ઞાત રિલે વિકલ્પ: $1"
+	},
 	"new_window_menu_label": {
 		"message": "નવી વિંડો"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
-	},
-	"relay_options_error": {
-		"message": "અજ્ઞાત રિલે વિકલ્પ: $1"
 	},
 	"relay_retry": {
 		"message": "Retrying..."

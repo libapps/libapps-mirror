@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "calea prestabilită este directorul principal al utilizatorului"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Opțiunile serverului de retransmitere SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Opțiunile serverului de retransmitere SSH"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Opțiunile serverului de retransmitere SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Opțiunile serverului de retransmitere SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "prestabilit"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Modul bară de derulare verticală."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Setează codificarea pentru datele trimise gazdei."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Dacă Shift+Insert se folosește pentru inserare sau se trimite gazdei la distanță."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Montat!"
 	},
+	"nassh_options_error": {
+		"message": "Opțiune de retransmitere necunoscută: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Fereastră nouă"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Te reconectezi (r), alegi o altă conexiune (c) sau ieși (x)?"
-	},
-	"relay_options_error": {
-		"message": "Opțiune de retransmitere necunoscută: $1"
 	},
 	"relay_retry": {
 		"message": "Se reîncearcă..."

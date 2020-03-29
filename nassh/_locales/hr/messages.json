@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "zadani put početni je direktorij korisnika"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Opcije SSH relejnog poslužitelja"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Opcije SSH relejnog poslužitelja"
+	},
 	"field_port_aria_label": {
 		"message": "priključak"
 	},
 	"field_port_placeholder": {
 		"message": "priključak"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Opcije SSH relejnog poslužitelja"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Opcije SSH relejnog poslužitelja"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "zadano"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Način rada vertikalnog klizača."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Postavlja kodiranje za podatke koji se šalju hostu."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Određuje hoće li se tipke Shift – Insert upotrebljavati za lijepljenje ili će se slati udaljenom hostu."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Učitano!"
 	},
+	"nassh_options_error": {
+		"message": "Nepoznata opcija releja: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Novi prozor"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Želite li se ponovo povezati (R), odabrati neku drugu vezu (C) ili napustiti povezivanje (x)?"
-	},
-	"relay_options_error": {
-		"message": "Nepoznata opcija releja: $1"
 	},
 	"relay_retry": {
 		"message": "Ponovni pokušaj..."

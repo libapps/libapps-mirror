@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "ഉപയോക്താവിന്റെ ഹോം ഡയറക്‌ടറിയാണ് ഡിഫോൾട്ട് പാത്ത്"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH റിലേ സെർവർ ഓപ്ഷനുകൾ"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH റിലേ സെർവർ ഓപ്ഷനുകൾ"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH റിലേ സെർവർ ഓപ്ഷനുകൾ"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH റിലേ സെർവർ ഓപ്ഷനുകൾ"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "default"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "ലംബ സ്ക്രോൾബാർ മോഡ്."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "ഹോസ്റ്റിലേക്ക് ഡാറ്റയുടെ എൻകോഡിംഗ് അയയ്ക്കുന്ന തരത്തിൽ സജ്ജീകരിക്കുക."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "ഷിഫ്‌റ്റ്-ഇൻസെർട്ട് ഒട്ടിക്കുന്നതിന് ഉപയോഗിക്കണോ അല്ലെങ്കിൽ വിദൂര ഹോസ്‌റ്റിലേക്ക് അയയ്‌ക്കണോ എന്നത്."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Mounted!"
 	},
+	"nassh_options_error": {
+		"message": "തിരിച്ചറിയാനാകാത്ത റിലേ ഓപ്ഷൻ: $1"
+	},
 	"new_window_menu_label": {
 		"message": "പുതിയ വിന്‍ഡോ"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
-	},
-	"relay_options_error": {
-		"message": "തിരിച്ചറിയാനാകാത്ത റിലേ ഓപ്ഷൻ: $1"
 	},
 	"relay_retry": {
 		"message": "Retrying..."

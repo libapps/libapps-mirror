@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "ścieżką domyślną jest katalog główny użytkownika"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Opcje serwera przekazującego SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Opcje serwera przekazującego SSH"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Opcje serwera przekazującego SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Opcje serwera przekazującego SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "domyślny"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Tryb pionowego paska przewijania."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Określa kodowanie danych wysyłanych do hosta."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Czy kombinacja Shift+Insert ma służyć do wklejania, czy być wysyłana do zdalnego hosta."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Podłączono."
 	},
+	"nassh_options_error": {
+		"message": "Nieznana opcja serwera przekazującego: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Nowe okno"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Połącz ponownie (R), Wybierz inne połączenie (C) lub Zakończ (X)."
-	},
-	"relay_options_error": {
-		"message": "Nieznana opcja serwera przekazującego: $1"
 	},
 	"relay_retry": {
 		"message": "Próbuję ponownie…"

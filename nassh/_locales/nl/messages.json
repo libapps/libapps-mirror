@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "het standaardpad is de home-map van de gebruiker"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Opties voor SSH-relayserver"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Opties voor SSH-relayserver"
+	},
 	"field_port_aria_label": {
 		"message": "poort"
 	},
 	"field_port_placeholder": {
 		"message": "poort"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Opties voor SSH-relayserver"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Opties voor SSH-relayserver"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "standaard"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "De verticale scrollbalkmodus."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Hiermee stel je de versleuteling in voor gegevens die worden verzonden naar de host."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Of Shift + Insert wordt gebruikt om te plakken of wordt verzonden naar de externe host."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Gekoppeld."
 	},
+	"nassh_options_error": {
+		"message": "Onbekende relayoptie: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Nieuw venster"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Opnieuw verbinden (R), een andere verbinding kiezen (C) of afsluiten (X)?"
-	},
-	"relay_options_error": {
-		"message": "Onbekende relayoptie: $1"
 	},
 	"relay_retry": {
 		"message": "Opnieuw proberen…"

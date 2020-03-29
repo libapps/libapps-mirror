@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "the default path is the user's home directory"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH relay server options"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH relay server options"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH relay server options"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH relay server options"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "default"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "The vertical scrollbar mode."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Set the encoding for data sent to host."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Whether Shift+Insert is used for pasting or is sent to the remote host."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Mounted!"
 	},
+	"nassh_options_error": {
+		"message": "Unknown relay option: $1"
+	},
 	"new_window_menu_label": {
 		"message": "New window"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "(R)econnect, (C)hoose another connection or E(x)it?"
-	},
-	"relay_options_error": {
-		"message": "Unknown relay option: $1"
 	},
 	"relay_retry": {
 		"message": "Retrying..."

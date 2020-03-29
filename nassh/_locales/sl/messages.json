@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "privzeta pot je uporabnikov domači imenik"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "možnosti strežnika za posredovanje SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "možnosti strežnika za posredovanje SSH"
+	},
 	"field_port_aria_label": {
 		"message": "vrata"
 	},
 	"field_port_placeholder": {
 		"message": "vrata"
-	},
-	"field_relay_options_aria_label": {
-		"message": "možnosti strežnika za posredovanje SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "možnosti strežnika za posredovanje SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "privzeto"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Način navpične drsne vrstice"
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Nastavitev kodiranja za podatke, poslane gostitelju"
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Določa, ali se kombinacija Shift+Insert uporablja za lepljenje ali se pošlje oddaljenemu gostitelju."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Vpeto."
 	},
+	"nassh_options_error": {
+		"message": "Neznana možnost releja: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Novo okno"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Želite znova vzpostaviti povezavo (R), izbrati drugo povezavo (C) ali zapreti (X)?"
-	},
-	"relay_options_error": {
-		"message": "Neznana možnost releja: $1"
 	},
 	"relay_retry": {
 		"message": "Vnovičen poskus ..."

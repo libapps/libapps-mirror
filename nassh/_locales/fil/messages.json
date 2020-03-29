@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "ang default na path ay ang home directory ng user"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Mga opsyon ng SSH relay server"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Mga opsyon ng SSH relay server"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Mga opsyon ng SSH relay server"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Mga opsyon ng SSH relay server"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "default"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Ang patayong scrollbar na mode."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Itakda ang pag-e-encode para sa data na ipinadala sa host."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Kung ginagamit ang Shift+Insert para sa pag-paste o kung ipinapadala ito sa remote host."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Na-mount na!"
 	},
+	"nassh_options_error": {
+		"message": "Hindi kilalang opsyon ng pag-relay: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Bagong Window"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Muling Kumonekta (R), Pumili ng ibang konesyon (C), o Lumabas (X)?"
-	},
-	"relay_options_error": {
-		"message": "Hindi kilalang opsyon ng pag-relay: $1"
 	},
 	"relay_retry": {
 		"message": "Muling sinusubukan..."

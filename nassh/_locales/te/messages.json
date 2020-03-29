@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "డిఫాల్ట్ పథం వినియోగదారు యొక్క హోమ్ డైరెక్టరీ"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH రిలే సర్వర్ ఎంపికలు"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH రిలే సర్వర్ ఎంపికలు"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH రిలే సర్వర్ ఎంపికలు"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH రిలే సర్వర్ ఎంపికలు"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "default"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "నిలువు స్క్రోల్‌బార్ మోడ్"
 	},
-	"hterm_pref_send_encoding": {
-		"message": "హోస్ట్‌కి పంపే డేటాకు ఎన్‌కోడింగ్‌ని సెట్ చేయండి."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "షిఫ్ట్-ఇన్సర్ట్‌ను అతికించడానికి ఉపయోగించాలా లేదా రిమోట్ హోస్ట్‌కు పంపాలా అన్నది నియంత్రిస్తుంది."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Mounted!"
 	},
+	"nassh_options_error": {
+		"message": "తెలియని రిలే ఎంపిక: $1"
+	},
 	"new_window_menu_label": {
 		"message": "కొత్త విండో"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
-	},
-	"relay_options_error": {
-		"message": "తెలియని రిలే ఎంపిక: $1"
 	},
 	"relay_retry": {
 		"message": "Retrying..."

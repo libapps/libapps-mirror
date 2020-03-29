@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "varsayılan yol, kullanıcının ana dizinidir"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH geçiş sunucusu seçenekleri"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH geçiş sunucusu seçenekleri"
+	},
 	"field_port_aria_label": {
 		"message": "bağlantı noktası"
 	},
 	"field_port_placeholder": {
 		"message": "bağlantı noktası"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH geçiş sunucusu seçenekleri"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH geçiş sunucusu seçenekleri"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "varsayılan"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Dikey kaydırma çubuğu modu."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Ana makineye gönderilen verilerin kodlamasını belirler."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Üst Karakter-Insert kombinasyonunun yapıştırma için mi kullanıldığı yoksa uzak ana makineye mi gönderildiği."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Eklendi!"
 	},
+	"nassh_options_error": {
+		"message": "Bilinmeyen geçiş seçeneği: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Yeni Pencere"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "(R) Yeniden bağlan, (C) Başka bir bağlantı seç veya (X) Çık?"
-	},
-	"relay_options_error": {
-		"message": "Bilinmeyen geçiş seçeneği: $1"
 	},
 	"relay_retry": {
 		"message": "Yeniden deneniyor..."

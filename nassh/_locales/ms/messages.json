@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "laluan lalai ialah direktori laman utama pengguna"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Pilihan pelayan geganti SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Pilihan pelayan geganti SSH"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Pilihan pelayan geganti SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Pilihan pelayan geganti SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "lalai"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Mod bar tatal menegak."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Tetapkan pengekodan untuk data yang dihantar kepada hos."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Sama ada Shift+Insert digunakan untuk menampal atau dihantar kepada hos jauh."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Dilekapkan!"
 	},
+	"nassh_options_error": {
+		"message": "Pilihan geganti tidak diketahui: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Tetingkap Baharu"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Sambung semula (R), Pilih sambungan lain (C) atau Keluar (x)?"
-	},
-	"relay_options_error": {
-		"message": "Pilihan geganti tidak diketahui: $1"
 	},
 	"relay_retry": {
 		"message": "Mencuba semula..."

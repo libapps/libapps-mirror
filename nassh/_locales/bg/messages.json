@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "стандартният път е основната директория на потребителя"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Опции за сървъра за прехвърляне на SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Опции за предаващия SSH сървър"
+	},
 	"field_port_aria_label": {
 		"message": "порт"
 	},
 	"field_port_placeholder": {
 		"message": "порт"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Опции за сървъра за прехвърляне на SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Опции за предаващия SSH сървър"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "по подразбиране"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Режим на вертикалната лента за превъртане."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Задава кодировката на данните, изпращани до хоста."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Дали Shift+Insert да се използва за поставяне, или да се изпраща до отдалечения хост."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Свързването бе успешно!"
 	},
+	"nassh_options_error": {
+		"message": "Неизвестна опция за препредаване: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Нов прозорец"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Натиснете R, за да се свържете отново, C за избиране на друга връзка или Х за изход."
-	},
-	"relay_options_error": {
-		"message": "Неизвестна опция за препредаване: $1"
 	},
 	"relay_retry": {
 		"message": "Извършва се повторен опит..."

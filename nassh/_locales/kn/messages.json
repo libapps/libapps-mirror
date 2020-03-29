@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "ಬಳಕೆದಾರರ ಮುಖಪುಟ ಡೈರೆಕ್ಟರಿಯು ಡಿಫಾಲ್ಟ್ ಮಾರ್ಗವಾಗಿರುತ್ತದೆ"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH ರಿಲೇ ಸರ್ವರ್ ಆಯ್ಕೆಗಳು"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH ಅವಲಂಬಿತ ಸರ್ವರ್ ಆಯ್ಕೆಗಳು"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH ರಿಲೇ ಸರ್ವರ್ ಆಯ್ಕೆಗಳು"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH ಅವಲಂಬಿತ ಸರ್ವರ್ ಆಯ್ಕೆಗಳು"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "default"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "ಲಂಬ ಸ್ಕ್ರಾಲ್‌ಬಾರ್ ಮೋಡ್."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "ಹೋಸ್ಟ್‌ಗೆ ಕಳುಹಿಸಿದ ಡೇಟಾಗಾಗಿ ಎನ್‌ಕೋಡಿಂಗ್ ಅನ್ನು ಹೊಂದಿಸಿ."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "ಅಂಟಿಸುವುದಕ್ಕಾಗಿ ಶಿಫ್ಟ್-ಇನ್ಸರ್ಟ್ ಬಳಸಲಾಗಿದೆಯೇ ಅಥವಾ ರಿಮೋಟ್ ಹೋಸ್ಟ್‌ಗೆ ಕಳುಹಿಸಲಾಗಿದೆಯೇ."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Mounted!"
 	},
+	"nassh_options_error": {
+		"message": "ಅಪರಿಚಿತ ರಲೇ ಆಯ್ಕೆ: $1"
+	},
 	"new_window_menu_label": {
 		"message": "ಹೊಸ ವಿಂಡೋ"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
-	},
-	"relay_options_error": {
-		"message": "ಅಪರಿಚಿತ ರಲೇ ಆಯ್ಕೆ: $1"
 	},
 	"relay_retry": {
 		"message": "Retrying..."

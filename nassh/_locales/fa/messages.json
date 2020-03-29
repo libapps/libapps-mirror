@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "مسیر پیش‌فرض، فهرست راهنمای اصلی کاربر است"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "‏گزینه‌های سرور رله SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "‏گزینه‌های سرور رله SSH"
+	},
 	"field_port_aria_label": {
 		"message": "درگاه"
 	},
 	"field_port_placeholder": {
 		"message": "درگاه"
-	},
-	"field_relay_options_aria_label": {
-		"message": "‏گزینه‌های سرور رله SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "‏گزینه‌های سرور رله SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "پیش‌فرض"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "حالت نوار پیمایش عمودی."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "کدبندی را برای داده‌های ارسال‌شده به میزبان تنظیم می‌کند."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "‏اینکه Shift+Insert برای جای‌گذاری استفاده شود یا به میزبان راه‌دور ارسال شود."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "نشانده شد!"
 	},
+	"nassh_options_error": {
+		"message": "گزینه رله نامشخص: $1"
+	},
 	"new_window_menu_label": {
 		"message": "پنجره جدید"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "‏دوباره متصل شود(R)، اتصال دیگری انتخاب شود(C) یا خارج می‌شوید(E)؟"
-	},
-	"relay_options_error": {
-		"message": "گزینه رله نامشخص: $1"
 	},
 	"relay_retry": {
 		"message": "درحال امتحان مجدد..."

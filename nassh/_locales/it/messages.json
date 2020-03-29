@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "il percorso predefinito è la home directory dell'utente"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Opzioni server relay SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Opzioni server relay SSH"
+	},
 	"field_port_aria_label": {
 		"message": "porta"
 	},
 	"field_port_placeholder": {
 		"message": "porta"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Opzioni server relay SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Opzioni server relay SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "predefinito"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "La modalità verticale della barra di scorrimento."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Consente di impostare la codifica dei dati inviati all'host."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Consente di stabilire se usare o meno i tasti MAIUSC + INS per incollare o se inviarli o meno all'host remoto."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Montato."
 	},
+	"nassh_options_error": {
+		"message": "Opzione relay sconosciuta: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Nuova finestra"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Riconnettere (R), Scegliere un'altra connessione (C) o Uscire (X)?"
-	},
-	"relay_options_error": {
-		"message": "Opzione relay sconosciuta: $1"
 	},
 	"relay_retry": {
 		"message": "Nuovo tentativo…"

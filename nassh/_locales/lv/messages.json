@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "noklusējuma ceļš ir lietotāja sākumdirektorijs"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH pārraides servera opcijas"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH pārraides servera opcijas"
+	},
 	"field_port_aria_label": {
 		"message": "ports"
 	},
 	"field_port_placeholder": {
 		"message": "ports"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH pārraides servera opcijas"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH pārraides servera opcijas"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "noklusējums"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Vertikālās ritjoslas režīms."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Iestatiet kodējumu saimniekdatoram nosūtītajiem datiem."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Vai taustiņu kombinācija Shift+Insert tiek izmantota ielīmēšanai vai tiek nosūtīta uz attālo saimniekdatoru."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Iekļauta!"
 	},
+	"nassh_options_error": {
+		"message": "Nezināma pārraides opcija: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Jauns logs"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Vai atkārtoti izveidot savienojumu (R), izvēlēties citu savienojumu (C) vai iziet (X)?"
-	},
-	"relay_options_error": {
-		"message": "Nezināma pārraides opcija: $1"
 	},
 	"relay_retry": {
 		"message": "Notiek atkārtots mēģinājums..."

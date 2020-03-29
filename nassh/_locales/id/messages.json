@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "lokasi defaultnya adalah direktori beranda pengguna"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Opsi server relay SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Opsi server relay SSH"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Opsi server relay SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Opsi server relay SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "default"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Mode scroll bar vertikal."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Menyetel encoding untuk data yang dikirimkan ke host."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Menentukan apakah Shift+Insert digunakan untuk paste atau dikirim ke host jarak jauh."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Terpasang!"
 	},
+	"nassh_options_error": {
+		"message": "Opsi relay tak dikenal: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Jendela Baru"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Sambungkan ulang (R), Pilih koneksi lainnya (C), atau Keluar (X)?"
-	},
-	"relay_options_error": {
-		"message": "Opsi relay tak dikenal: $1"
 	},
 	"relay_retry": {
 		"message": "Mencoba ulang..."

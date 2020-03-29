@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "默认路径是用户的主目录"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH 中继服务器选项"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH 中继服务器选项"
+	},
 	"field_port_aria_label": {
 		"message": "端口"
 	},
 	"field_port_placeholder": {
 		"message": "端口"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH 中继服务器选项"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH 中继服务器选项"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "默认"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "垂直滚动条模式。"
 	},
-	"hterm_pref_send_encoding": {
-		"message": "为向主机传送的数据设定编码。"
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "设定是将 Shift+Insert 用于执行粘贴操作还是传送到远程主机。"
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "已安装！"
 	},
+	"nassh_options_error": {
+		"message": "未知的中继选项：$1"
+	},
 	"new_window_menu_label": {
 		"message": "打开新窗口"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "重新连接(R)、选择其他连接(C)或退出(E)？"
-	},
-	"relay_options_error": {
-		"message": "未知的中继选项：$1"
 	},
 	"relay_retry": {
 		"message": "正在重试…"

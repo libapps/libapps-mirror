@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "az alapértelmezett elérési út a felhasználó kezdőkönyvtára"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH-továbbítószerver beállításai"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH-továbbítószerver beállításai"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH-továbbítószerver beállításai"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH-továbbítószerver beállításai"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "alapbeállítás"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Függőleges görgetősáv mód."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Meghatározza a gazdagépnek küldött adatok kódolását."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Az, hogy a Shift+Insert billentyűkombináció beillesztést hajt végre, illetve küldést végez a távoli gazdagépre."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Csatlakoztatva!"
 	},
+	"nassh_options_error": {
+		"message": "Ismeretlen továbbítási lehetőség: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Új ablak"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Újracsatlakozás (r), Másik kapcsolat kiválasztása (c) vagy Kilépés (x)?"
-	},
-	"relay_options_error": {
-		"message": "Ismeretlen továbbítási lehetőség: $1"
 	},
 	"relay_retry": {
 		"message": "Újrapróbálkozás…"

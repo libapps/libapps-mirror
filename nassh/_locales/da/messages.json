@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "standardstien er brugerens hjemmeindeks"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Indstillinger for SSH-relæserver"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Indstillinger for SSH-relæserver"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Indstillinger for SSH-relæserver"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Indstillinger for SSH-relæserver"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "standard"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Tilstanden for lodret rullepanel."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Angiv kodningen for data, der sendes til hosten."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Om Shift+Insert bruges til at indsætte eller sendes til den eksterne host."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Tilsluttet"
 	},
+	"nassh_options_error": {
+		"message": "Ukendt relæmulighed: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Nyt vindue"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Vil du genoprette forbindelsen (R), vælge en anden forbindelse (C) eller afslutte (X)?"
-	},
-	"relay_options_error": {
-		"message": "Ukendt relæmulighed: $1"
 	},
 	"relay_retry": {
 		"message": "Prøver igen…"

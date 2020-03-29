@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "يتمثل المسار التلقائي في دليل الصفحة الرئيسية للمستخدم"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "‏خيارات خادم ترحيل SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "‏خيارات خادم ترحيل SSH"
+	},
 	"field_port_aria_label": {
 		"message": "المنفذ"
 	},
 	"field_port_placeholder": {
 		"message": "المنفذ"
-	},
-	"field_relay_options_aria_label": {
-		"message": "‏خيارات خادم ترحيل SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "‏خيارات خادم ترحيل SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "تلقائي"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "وضع شريط التمرير العمودي."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "يمكنك تعيين الترميز للبيانات المُرسلة إلى المضيف."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "‏يمكنك تحديد ما إذا كان الخيار Shift+Insert يُستخدم للصق أو يتم إرساله إلى المضيف البعيد."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "تم التثبيت!"
 	},
+	"nassh_options_error": {
+		"message": "خيار ترحيل غير معروف: $1"
+	},
 	"new_window_menu_label": {
 		"message": "نافذة جديدة"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "‏هل تريد إعادة الاتصال (R) أم اختيار اتصال آخر أم الخروج (X)؟"
-	},
-	"relay_options_error": {
-		"message": "خيار ترحيل غير معروف: $1"
 	},
 	"relay_retry": {
 		"message": "جارٍ إعادة المحاولة..."

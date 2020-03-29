@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "預設路徑為使用者的主目錄"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH 轉送伺服器選項"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH 轉送伺服器選項"
+	},
 	"field_port_aria_label": {
 		"message": "通訊埠"
 	},
 	"field_port_placeholder": {
 		"message": "通訊埠"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH 轉送伺服器選項"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH 轉送伺服器選項"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "預設"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "縱向捲軸模式。"
 	},
-	"hterm_pref_send_encoding": {
-		"message": "針對傳送至主機的資料設定編碼。"
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "設定 Shift + Insert 鍵會執行貼上動作還是傳送至遠端主機。"
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "已掛接！"
 	},
+	"nassh_options_error": {
+		"message": "未知的轉送選項：$1"
+	},
 	"new_window_menu_label": {
 		"message": "開新視窗"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "重新連線(R)、選擇其他連線(C)或結束(X)？"
-	},
-	"relay_options_error": {
-		"message": "未知的轉送選項：$1"
 	},
 	"relay_retry": {
 		"message": "重試中..."

@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "výchozí cestou je domovský adresář uživatele"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Možnosti přenosového serveru SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Možnosti přenosového serveru SSH"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Možnosti přenosového serveru SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Možnosti přenosového serveru SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "výchozí"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Režim svislého posuvníku."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Nastavuje kódování dat odesílaných na hostitelský server."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Udává, zda kombinace kláves Shift+Insert slouží k vkládání, nebo je odesílána na vzdálený hostitelský server."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Připojeno."
 	},
+	"nassh_options_error": {
+		"message": "Neznámá možnost přenosu: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Nové okno"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Znovu se připojit (R), vybrat jiné připojení (C) nebo ukončit (X)?"
-	},
-	"relay_options_error": {
-		"message": "Neznámá možnost přenosu: $1"
 	},
 	"relay_retry": {
 		"message": "Další pokus..."

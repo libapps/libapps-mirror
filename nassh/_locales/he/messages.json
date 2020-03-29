@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "נתיב ברירת המחדל הוא ספריית הבית של המשתמש"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "‏אפשרויות של שרת ממסר SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "‏אפשרויות של שרת ממסר SSH"
+	},
 	"field_port_aria_label": {
 		"message": "יציאה"
 	},
 	"field_port_placeholder": {
 		"message": "יציאה"
-	},
-	"field_relay_options_aria_label": {
-		"message": "‏אפשרויות של שרת ממסר SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "‏אפשרויות של שרת ממסר SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "ברירת מחדל"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "מצב סרגל הגלילה האנכי."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "קובעת את הקידוד של נתונים שנשלחים למארח."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "‏קובעת אם הקשה על Shift+Insert משמשת להדבקה או נשלחת אל המארח המרוחק."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "נטען!"
 	},
+	"nassh_options_error": {
+		"message": "אפשרות ממסר לא ידועה: $1"
+	},
 	"new_window_menu_label": {
 		"message": "חלון חדש"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "‏הקש על R כדי להתחבר מחדש, על C כדי לבחור חיבור אחר או על X כדי לצאת."
-	},
-	"relay_options_error": {
-		"message": "אפשרות ממסר לא ידועה: $1"
 	},
 	"relay_retry": {
 		"message": "מנסה שוב..."

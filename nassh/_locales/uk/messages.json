@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "шлях за умовчанням – це домашній каталог користувача"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Параметри сервера передавання SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Параметри сервера передавання SSH"
+	},
 	"field_port_aria_label": {
 		"message": "порт"
 	},
 	"field_port_placeholder": {
 		"message": "порт"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Параметри сервера передавання SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Параметри сервера передавання SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "за умовчанням"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Режим вертикальної панелі прокручування."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Налаштовує кодування даних, які надсилаються в хост."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Визначає, чи комбінація клавіш Shift + Insert використовується для вставлення вмісту чи для надсилання даних у віддалений хост."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Підключено"
 	},
+	"nassh_options_error": {
+		"message": "Невідома опція ретрансляції: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Нове вікно"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Ще раз підключитися (R), вибрати інше підключення (C) чи вийти (X)?"
-	},
-	"relay_options_error": {
-		"message": "Невідома опція ретрансляції: $1"
 	},
 	"relay_retry": {
 		"message": "Повторна спроба…"

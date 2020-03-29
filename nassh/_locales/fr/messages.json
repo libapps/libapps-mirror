@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "le chemin par défaut est le répertoire d'accueil de l'utilisateur"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Options du serveur de relais SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Options du serveur de relais SSH"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
 	"field_port_placeholder": {
 		"message": "port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Options du serveur de relais SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Options du serveur de relais SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "par défaut"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Mode de barre de défilement verticale."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Définit l'encodage des données envoyées à l'hôte."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Permet de définir si Maj+Inser est utilisé pour coller ou est envoyé à l'hôte distant."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Le système de fichiers a bien été installé."
 	},
+	"nassh_options_error": {
+		"message": "Option de relais inconnue : $1"
+	},
 	"new_window_menu_label": {
 		"message": "Nouvelle fenêtre"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Reconnecter (r), sélectionner (c) une autre connexion ou quitter (x) ?"
-	},
-	"relay_options_error": {
-		"message": "Option de relais inconnue : $1"
 	},
 	"relay_retry": {
 		"message": "Nouvelle tentative…"

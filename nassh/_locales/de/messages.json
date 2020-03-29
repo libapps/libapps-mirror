@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "der Standardpfad ist das Basisverzeichnis des Nutzers"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH-Relay-Server-Optionen"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH-Relay-Server-Optionen"
+	},
 	"field_port_aria_label": {
 		"message": "Port"
 	},
 	"field_port_placeholder": {
 		"message": "Port"
-	},
-	"field_relay_options_aria_label": {
-		"message": "SSH-Relay-Server-Optionen"
-	},
-	"field_relay_options_placeholder": {
-		"message": "SSH-Relay-Server-Optionen"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "Standard"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Der vertikale Bildlaufleisten-Modus."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Hiermit wird die Codierung der an den Host gesendeten Daten definiert."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Legt fest, ob Umschalttaste + \"Einfügen\" zum Einfügen verwendet wird oder an den Remote-Host gesendet wird."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Wird schon bereitgestellt."
 	},
+	"nassh_options_error": {
+		"message": "Unbekannte Relay-Option: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Neues Fenster"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Verbindung wiederherstellen (r), eine andere Verbindung wählen (c) oder den Vorgang beenden (x)?"
-	},
-	"relay_options_error": {
-		"message": "Unbekannte Relay-Option: $1"
 	},
 	"relay_retry": {
 		"message": "Wird erneut versucht..."

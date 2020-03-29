@@ -92,17 +92,17 @@
 	"field_mount_path_placeholder": {
 		"message": "njia chaguomsingi ni saraka ya ukurasa wa mwanzo wa mtumiaji"
 	},
+	"field_nassh_options_aria_label": {
+		"message": "Chaguo za utekelezaji za seva ya SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Chaguo za utekelezaji za seva ya SSH"
+	},
 	"field_port_aria_label": {
 		"message": "mlango"
 	},
 	"field_port_placeholder": {
 		"message": "mlango"
-	},
-	"field_relay_options_aria_label": {
-		"message": "Chaguo za utekelezaji za seva ya SSH"
-	},
-	"field_relay_options_placeholder": {
-		"message": "Chaguo za utekelezaji za seva ya SSH"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "chaguomsingi"
@@ -311,9 +311,6 @@
 	"hterm_pref_scrollbar_visible": {
 		"message": "Hali ya kiwima ya sehemu ya kusogeza."
 	},
-	"hterm_pref_send_encoding": {
-		"message": "Weka usimbaji wa data inayotumwa kwenye seva pangishi."
-	},
 	"hterm_pref_shift_insert_paste": {
 		"message": "Ikiwa Shift+Insert inatumika kubandika au imetumwa kwenye seva pangishi ya mbali."
 	},
@@ -404,6 +401,9 @@
 	"mounted_message": {
 		"message": "Umepachikwa!"
 	},
+	"nassh_options_error": {
+		"message": "Chaguo la uwasilishaji lisilojulikana: $1"
+	},
 	"new_window_menu_label": {
 		"message": "Dirisha Jipya"
 	},
@@ -442,9 +442,6 @@
 	},
 	"reconnect_message": {
 		"message": "Ungependa kuunganisha tena (R), Kuchagua muunganisho mwingine (C) au Kufunga (X)?"
-	},
-	"relay_options_error": {
-		"message": "Chaguo la uwasilishaji lisilojulikana: $1"
 	},
 	"relay_retry": {
 		"message": "Inajaribu tena..."
