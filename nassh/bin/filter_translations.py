@@ -52,12 +52,15 @@ def trim_redundant_placeholders(data):
 
 def reformat(path, output=None, inplace=False):
     """Reformat translation."""
-    with open(path, 'rb') as fp:
-        try:
-            data = json.loads(fp.read())
-        except ValueError as e:
-            print('ERROR: Processing %s: %s' % (path, e), file=sys.stderr)
-            return False
+    if isinstance(path, dict):
+        data = path
+    else:
+        with open(path, 'rb') as fp:
+            try:
+                data = json.loads(fp.read())
+            except ValueError as e:
+                print('ERROR: Processing %s: %s' % (path, e), file=sys.stderr)
+                return False
 
     trim_redundant_placeholders(data)
 

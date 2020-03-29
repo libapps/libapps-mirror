@@ -8,6 +8,7 @@
 from __future__ import print_function
 
 import glob
+import json
 import logging
 import os
 import sys
@@ -40,17 +41,29 @@ def main(argv):
     opts.builddir = os.path.abspath(opts.builddir)
     opts.sourcedir = os.path.abspath(opts.sourcedir)
 
+    # The english translation is the hand maintained baseline.
+    with open(os.path.join(opts.sourcedir, 'en', 'messages.json'), 'rb') as fp:
+        baseline = json.load(fp)
+    # The translation process normalizes all the ids to lowercase, so do that
+    # here too to simplify checks later on.
+    for msgid, msg in sorted(baseline.items()):
+        libdot.minify_translations.minify_placeholders(msg)
+        baseline[msgid.lower()] = baseline.pop(msgid)
+
     # Find new translations.  Do it here for sanity checking.
     new_locales = glob.glob(os.path.join(opts.builddir, '*', 'messages.json'))
     if not new_locales:
         parser.error("builddir doesn't seem to contain any translations")
 
-    # Clear existing translation files.
+    # Load & clear existing translations.
     logging.info('Clearing existing translation files')
+    old_trans = {}
     os.makedirs(opts.sourcedir, exist_ok=True)
     for locale in os.listdir(opts.sourcedir):
         locale_dir = os.path.join(opts.sourcedir, locale)
         path = os.path.join(locale_dir, 'messages.json')
+        with open(path, 'rb') as fp:
+            old_trans[locale] = json.load(fp)
         libdot.unlink(path)
 
         # Prune empty dirs.
@@ -59,14 +72,39 @@ def main(argv):
         except OSError:
             pass
 
-    # Copy over the new translations.
+    def normalize(msg):
+        """Hack up the message string.
+
+        English translations don't roundtrip.  Sometimes the whitespae gets
+        mangled -- leading, trailing, or inline.  Try to reduce it all down
+        so we can compare it to the original English input.
+        """
+        return msg['message'].replace(' ', '')
+
+    # Copy over the new translations, and merge it with existing content.
     logging.info('Importing new translation files')
     for in_locale in new_locales:
         locale = os.path.basename(os.path.dirname(in_locale))
         out_locale = os.path.join(opts.sourcedir, locale, 'messages.json')
         os.makedirs(os.path.dirname(out_locale), exist_ok=True)
 
-        filter_translations.reformat(in_locale, output=out_locale)
+        # Strip out untranslated strings.  This saves space, and we'd rather
+        # use the older (perhaps stale) translations than the english one.
+        with open(in_locale, 'rb') as fp:
+            new = json.load(fp)
+        old = old_trans[locale]
+        for msgid, msg in sorted(new.items()):
+            # The conversion process is a bit buggy :(.
+            msg['message'] = msg['message'].replace(
+                'chromium- hterm@chromium.org', 'chromium-hterm@chromium.org')
+
+            if normalize(baseline[msgid]) == normalize(msg):
+                if msgid in old:
+                    new[msgid] = old[msgid]
+                else:
+                    new.pop(msgid)
+
+        filter_translations.reformat(new, output=out_locale)
 
     # Generate git commits automatically.
     if opts.run_git:
