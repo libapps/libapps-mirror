@@ -63,20 +63,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     a.onclick = prefsEditor.onRestoreClick.bind(prefsEditor);
 
     // Set up labels.
-    var eles = document.querySelectorAll('[i18n-content]');
-    for (var i = 0; i < eles.length; ++i) {
-      var ele = eles[i];
-      var attr = ele.getAttribute('i18n-content');
-      var text;
-      if (attr.substr(0, 8) == 'manifest') {
-        text = manifest[attr.substr(9)];
-      } else {
-        text = nassh.msg(attr);
-      }
-      if (text !== undefined) {
-        ele.innerText = text;
-      }
-    }
+    document.querySelector('#manifest-name').textContent = manifest.name;
+    hterm.messageManager.processI18nAttributes(document);
 
     // Set up icon on the left side.
     // Start with 128px, but if it's not available, scale the highest available.
