@@ -190,7 +190,12 @@ def mkzip(manifest_name: str, stable: bool, archive_suffix: str,
     version = version_mangle(version)
     data['version'] = version
 
-    basename = name.replace(' ', '')
+    # Hack up localized name for the filesystem.
+    def _hack_localize(s: str) -> str:
+        """Careful: not for use with user visible content."""
+        return s.replace('__MSG_nassh_product_name__', 'Secure Shell')
+
+    basename = _hack_localize(name).replace(' ', '')
 
     if not stable:
         name += ' (dev)'
@@ -208,7 +213,7 @@ def mkzip(manifest_name: str, stable: bool, archive_suffix: str,
     zipfile = '%s.zip' % (basename,)
     archive = os.path.join(DIST_DIR, zipfile)
 
-    logging.info('Name: %s', name)
+    logging.info('Name: %s', _hack_localize(name))
     logging.info('Version: %s', version)
     logging.info('Archive: %s', zipfile)
 
