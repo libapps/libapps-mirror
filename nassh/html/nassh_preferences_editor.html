@@ -8,6 +8,7 @@
   <script src='../js/nassh_preference_manager.js'></script>
   <script src='../js/nassh_preferences_editor.js'></script>
   <script src='../js/nassh_preferences_protocol_register.js'></script>
+  <script src='../js/nassh_preferences_ssh_files.js'></script>
 
   <link rel='stylesheet' href='../third_party/chrome-bootstrap/chrome-bootstrap.css'></link>
   <link rel='stylesheet' href='../css/nassh_preferences_editor.css'></link>
@@ -21,6 +22,9 @@
       <ul class='menu'>
         <li class='selected'>
           <a href='#options' i18n='{"_": "PREFERENCES_HEADER"}'></a>
+        </li>
+        <li>
+          <a href='#ssh-files' i18n='{"_": "PREFERENCES_HEADER_SSH_FILES"}'>SSH Files</a>
         </li>
         <li>
           <a href='#handlers' i18n='{"_": "PREFERENCES_HEADER_URI"}'></a>
@@ -62,6 +66,40 @@
 
         <div id='options-settings-section' class='content vflex'>
           <div id='settings'></div>
+        </div>
+      </div>
+
+      <div id='ssh-files'>
+        <header>
+          <h1 i18n='{"_": "PREFERENCES_HEADER_SSH_FILES"}'></h1>
+        </header>
+
+        <div class='content vflex'>
+          <section>
+            <h3>
+              <a href='../plugin/docs/ssh.1.html#VERIFYING_HOST_KEYS'
+                 target='_blank'>~/.ssh/known_hosts</a>
+            </h3>
+
+            <textarea id='ssh-files-known-hosts' rows=5></textarea>
+            <br/>
+            <button id='ssh-files-known-hosts-clear'
+                    i18n='{"_": "CLEAR_LABEL"}'></button>
+            <button id='ssh-files-known-hosts-save'
+                    i18n='{"_": "SAVE_LABEL"}'></button>
+          </section>
+
+          <section>
+            <h3>
+              <a href='../plugin/docs/ssh_config.5.html'
+                 target='_blank'>~/.ssh/config</a>
+            </h3>
+
+            <textarea id='ssh-files-config' rows=10></textarea>
+            <br/>
+            <button id='ssh-files-config-save'
+                    i18n='{"_": "SAVE_LABEL"}'></button>
+          </section>
         </div>
       </div>
 

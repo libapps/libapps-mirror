@@ -37,6 +37,10 @@
 		"description": "The menu label to clear the list of SSH known host keys.",
 		"message": "Clear SSH known_hosts"
 	},
+	"CLEAR_LABEL": {
+		"description": "Label for clearing the user's input in a text field.",
+		"message": "Clear"
+	},
 	"CMD_SSH_FORGET_HOST_HELP": {
 		"description": "Long form help text for this command.",
 		"message": "This command displays a menu of known hosts and prompts for the host to forget."
@@ -1713,6 +1717,10 @@
 		"description": "Friendly message shown on the preferences (e.g. colors, fonts, etc...) editing page.",
 		"message": "Profile Settings"
 	},
+	"PREFERENCES_HEADER_SSH_FILES": {
+		"description": "Menu label to select the SSH config files page.",
+		"message": "SSH Files"
+	},
 	"PREFERENCES_HEADER_URI": {
 		"description": "Menu label to select the protocol handler registration page. This controls settings for e.g. ssh:// URIs.",
 		"message": "URI Handlers"
@@ -1786,6 +1794,10 @@
 	"RESTORE_PREFS": {
 		"description": "Label for the link in the options page that lets the user restore their preferences (e.g. colors, font, etc...).",
 		"message": "Restore Backup"
+	},
+	"SAVE_LABEL": {
+		"description": "Label for saving the user's input to a file.",
+		"message": "Save"
 	},
 	"SFTP_CLIENT_BUTTON_LABEL": {
 		"description": "The label for the SFTP client button. 'SFTP' refers to the protocol and probably should not be translated if the language does not have a common replacement.",

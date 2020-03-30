@@ -163,3 +163,9 @@ body {
 #settings span.setting-ui input {
   vertical-align: middle;
 }
+
+#ssh-files-known-hosts, #ssh-files-config {
+  font-family: monospace;
+  white-space: nowrap;
+  width: 100%;
+}

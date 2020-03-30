@@ -546,23 +546,9 @@ You'll have to adjust your keyboard/muscle memory accordingly.
 
 ### How do I remove a known host fingerprint (aka known_hosts) entry?
 
-  If you know the index of the offending host entry (it's usually reported
-  by ssh if the connection fails) you can open the JavaScript console and
-  type...
-
-     term_.command.removeKnownHostByIndex(index)
-
-  Replace index with the numeric, one-based host index.
-
-  If you don't know the index, or you'd like to clear all known hosts,
-  type...
-
-     term_.command.removeAllKnownHosts()
-
-  Make sure that you are typing these commands in the top frame of the app.  You
-  can access it by right-clicking on the new connection dialog, choosing
-  'Inspect', then picking `<top>` from the drop down menu in the JavaScript
-  console.
+  The easiest way to modify the file is to visit the options page and select the
+  "SSH Files" section on the left.  From there you will find text fields to edit
+  the various files including the known_hosts database.
 
   You can also hold Ctrl while right clicking the terminal to bring up a context
   menu.  Under that is an option to clear all SSH known hosts.
