@@ -62,8 +62,12 @@ def main(argv):
     for locale in os.listdir(opts.sourcedir):
         locale_dir = os.path.join(opts.sourcedir, locale)
         path = os.path.join(locale_dir, 'messages.json')
-        with open(path, 'rb') as fp:
-            old_trans[locale] = json.load(fp)
+        try:
+            with open(path, 'rb') as fp:
+                old_trans[locale] = json.load(fp)
+        except FileNotFoundError:
+            # Completely new translations won't exist yet.
+            pass
         libdot.unlink(path)
 
         # Prune empty dirs.
@@ -92,7 +96,7 @@ def main(argv):
         # use the older (perhaps stale) translations than the english one.
         with open(in_locale, 'rb') as fp:
             new = json.load(fp)
-        old = old_trans[locale]
+        old = old_trans.get(locale, {})
         for msgid, msg in sorted(new.items()):
             # The conversion process is a bit buggy :(.
             msg['message'] = msg['message'].replace(
