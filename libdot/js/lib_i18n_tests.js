@@ -47,4 +47,33 @@ it('replaceReferences', () => {
   assert.equal('foXbar', lib.i18n.replaceReferences('fo$1ba$2r', ['X']));
 });
 
+/**
+ * Check resolution of languages.
+ */
+it('resolveLanguage', () => {
+  [
+    ['es-RR', 'es_419'],
+    ['es-ES', 'es'],
+    ['es', 'es'],
+    ['pt-RR', 'pt_PT'],
+    ['pt-BR', 'pt_BR'],
+    ['pt', 'pt_BR'],
+    ['zh-TW', 'zh_TW'],
+    ['zh-HK', 'zh_TW'],
+    ['zh-MO', 'zh_TW'],
+    ['zh-RR', 'zh_CN'],
+    ['zh', 'zh_CN'],
+    ['en-AU', 'en_GB'],
+    ['en-CA', 'en_GB'],
+    ['en-IN', 'en_GB'],
+    ['en-NZ', 'en_GB'],
+    ['en-ZA', 'en_GB'],
+    ['en-US', 'en'],
+    ['en-RR', 'en'],
+    ['en', 'en'],
+    ['ll-RR', 'll_RR'],
+  ].forEach(([input, exp]) =>
+      assert.equal(exp, lib.i18n.resolveLanguage(input)));
+});
+
 });

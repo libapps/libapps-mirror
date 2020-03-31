@@ -23,17 +23,22 @@
  * @constructor
  */
 lib.MessageManager = function(languages, useCrlf = false) {
-  // Replace '-' with '_'.  Use 'en' for 'en_US' since it is the
-  // default, and ensure 'en' is always included as last fallback.
-  this.languages_ = languages.map((el) => {
-    el = el.replace(/-/g, '_');
-    if (el == 'en_US') {
-      el = 'en';
+  /**
+   * @private {!Array<string>}
+   * @const
+   */
+  this.languages_ = [];
+  for (let i = 0; i < languages.length; i++) {
+    const lang = lib.i18n.resolveLanguage(languages[i]);
+    // There is no point having any language with lower priorty than 'en' since
+    // 'en' always contains all messages.
+    if (lang == 'en') {
+      break;
     }
-    return el;
-  });
-  if (this.languages_.indexOf('en') == -1)
-    this.languages_.push('en');
+    this.languages_.push(lang);
+  }
+  // Always have 'en' as last fallback.
+  this.languages_.push('en');
 
   this.useCrlf = useCrlf;
 
@@ -81,7 +86,8 @@ lib.MessageManager.prototype.addMessages = function(defs) {
 };
 
 /**
- * Load the first available language message bundle.
+ * Load language message bundles.  Loads in reverse order so that higher
+ * priority languages overwrite lower priority.
  *
  * @param {string} pattern A url pattern containing a "$1" where the locale
  *     name should go.
@@ -91,15 +97,15 @@ lib.MessageManager.prototype.findAndLoadMessages = async function(pattern) {
     return;
   }
 
-  for (const lang of this.languages_) {
+  for (let i = this.languages_.length - 1; i >= 0; i--) {
+    const lang = this.languages_[i];
     const url = lib.i18n.replaceReferences(pattern, lang);
     try {
       await this.loadMessages(url);
-      return;
     } catch (e) {
       console.warn(
           `Error fetching ${lang} messages at ${url}`, e,
-          'Trying all languages:', this.languages_);
+          'Trying all languages in reverse order:', this.languages_);
     }
   }
 };
