@@ -132,7 +132,14 @@ nassh.PreferencesEditor = function(profileId = 'default') {
  * @param {string} page The new page to display.
  */
 nassh.PreferencesEditor.switchSettingsPage = function(page) {
-  const hash = `#${page}`;
+  const scrollTo = () => {
+    const header = document.querySelector('.mainview > .selected > header');
+    const anchor = document.querySelector(`a[name="${page}"]`);
+    document.scrollingElement.scrollTo(
+        0, anchor ? anchor.offsetTop - header.clientHeight : 0);
+  };
+
+  const hash = `#${page.split('_')[0]}`;
   const selected = 'selected';
 
   // Make sure it's a valid/known menu.
@@ -146,6 +153,7 @@ nassh.PreferencesEditor.switchSettingsPage = function(page) {
   const oldMenu = document.querySelector('.menu > li.selected');
   const newMenu = currMenuLink.parentNode;
   if (oldMenu === newMenu) {
+    scrollTo();
     return;
   }
 
@@ -159,7 +167,10 @@ nassh.PreferencesEditor.switchSettingsPage = function(page) {
   newMenu.classList.add(selected);
   const newSection = document.querySelector(hash);
   // Delay the selection to help with the fancy UI transition.
-  setTimeout(() => newSection.classList.add(selected), 0);
+  setTimeout(() => {
+    newSection.classList.add(selected);
+    scrollTo();
+  }, 0);
   newSection.style.display = 'block';
 };
 
@@ -462,18 +473,25 @@ nassh.PreferencesEditor.prototype.onInputChange = function(input) {
  * Will basically rewrite the displayed HTML code on the fly.
  */
 nassh.PreferencesEditor.prototype.syncPage = function() {
+  const menu = document.getElementById('options-settings-menu');
   var eles = document.getElementById('settings');
 
-  // Clear out existing settings table.
-  while (eles.hasChildNodes()) {
-    eles.removeChild(eles.firstChild);
-  }
+  /** @param {?Element} parent The node to clear out. */
+  const deleteChildren = (parent) => {
+    while (parent.hasChildNodes()) {
+      parent.removeChild(parent.firstChild);
+    }
+  };
+
+  // Clear out previously generated nodes.
+  deleteChildren(menu);
+  deleteChildren(eles);
 
   // Create the table of settings.
   for(var i = 0; i < hterm.PreferenceManager.categoryDefinitions.length; i++) {
     var categoryDefinition = hterm.PreferenceManager.categoryDefinitions[i];
 
-    var elem = this.addCategoryRow(categoryDefinition, eles);
+    var elem = this.addCategoryRow(categoryDefinition, eles, menu);
 
     var category = categoryDefinition.id;
     for (var key in this.prefs_.prefRecords_) {
@@ -489,19 +507,35 @@ nassh.PreferencesEditor.prototype.syncPage = function() {
  * preference option.
  *
  * @param {!Object} categoryDef The hterm preference category object.
- * @param {!Element} parent
- * @return {!Element}
+ * @param {?Element} parent The node to attach the new category to.
+ * @param {?Element} menu The menu to add linkage to.
+ * @return {!Element} The new category section.
  */
 nassh.PreferencesEditor.prototype.addCategoryRow =
-    function(categoryDef, parent) {
+    function(categoryDef, parent, menu) {
   var details = document.createElement('section');
   details.className = 'category-details';
 
+  const anchor = document.createElement('a');
+  anchor.name = `options_${categoryDef.id}`;
+  details.appendChild(anchor);
+
+  const desc = this.getCategoryDescription(categoryDef);
+
   var summary = document.createElement('h3');
-  summary.innerText = this.getCategoryDescription(categoryDef);
+  summary.innerText = desc;
 
   details.appendChild(summary);
   parent.appendChild(details);
+
+  // Generate the menu sidebar link.
+  const li = document.createElement('li');
+  const a = document.createElement('a');
+  a.textContent = desc;
+  a.href = `#${anchor.name}`;
+  a.addEventListener('click', nassh.PreferencesEditor.onSettingsPageClick);
+  li.appendChild(a);
+  menu.appendChild(li);
 
   return details;
 };
