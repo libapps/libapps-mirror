@@ -1369,7 +1369,7 @@
 	},
 	"NASFTP_CMD_STAT_SUMMARY": {
 		"description": "Output shown to summarize file metadata. Indentation need not be maintained, although fields should be kept aligned if possible. 'UID' and 'GID' refer to the 'user' and 'group' ids and may be translated. 'Access' refers to the read/write/execute permissions and may be translated. 'atime' and 'mtime' refer to the 'accessed' and 'modified' times and may be translated.",
-		"message": "  File: $FILE$\n  Size: $SIZE$ bytes\n   UID: $UID$\n   GID: $GID$\nAccess: $PERM$\n atime: $ATIME$\n mtime: $MTIME$",
+		"message": "  File: $FILE$\n  Size: $SIZE$ bytes\n   UID: $USERID$\n   GID: $GROUPID$\nAccess: $PERM$\n atime: $ATIME$\n mtime: $MTIME$",
 		"placeholders": {
 			"atime": {
 				"content": "$6",
@@ -1379,7 +1379,7 @@
 				"content": "$1",
 				"example": "file.txt"
 			},
-			"gid": {
+			"groupid": {
 				"content": "$4",
 				"example": "1000"
 			},
@@ -1395,7 +1395,7 @@
 				"content": "$2",
 				"example": "1234"
 			},
-			"uid": {
+			"userid": {
 				"content": "$3",
 				"example": "1000"
 			}
