@@ -72,6 +72,7 @@ function normalizeFontFamily(cssFontFamily) {
  */
 export function definePrefs(prefs) {
   // Set terminal default overrides from hterm.
+  prefs.definePreference('audible-bell-sound', '');
   prefs.definePreference('font-size', DEFAULT_FONT_SIZE);
   prefs.definePreference('background-color', DEFAULT_BACKGROUND_COLOR);
   prefs.definePreference('foreground-color', DEFAULT_FOREGROUND_COLOR);
