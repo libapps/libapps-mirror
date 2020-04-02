@@ -17,8 +17,22 @@ lib.Storage.TerminalPrivate = function(callback) {
    * @private
    */
   this.observers_ = [];
-  /** @private {!Object<string, *>} */
+
+  /**
+   * Local cache of terminalPrivate.getSettings.
+   *
+   * @private {!Object<string, *>}
+   */
   this.prefValue_ = {};
+
+  /**
+   * We do async writes to terminalPrivate.setSettings to allow multiple
+   * sync writes to be batched.  This array holds the list of optional callbacks
+   * for the changes that are in the current batch.
+   *
+   * @private {!Array<function()|undefined>}
+   */
+  this.prefValueWriteCallbacks_ = [];
 
   // Load.
   chrome.terminalPrivate.getSettings((settings) => {
@@ -71,20 +85,27 @@ lib.Storage.TerminalPrivate.prototype.onSettingsChanged_ = function(settings) {
 };
 
 /**
- * Set pref then run callback.
+ * Set pref then run callback.  Writes are done async to allow multiple
+ * concurrent calls to this function to be batched into a single write.
  *
  * @param {function()=} callback Callback to run once pref is set.
  * @private
  */
 lib.Storage.TerminalPrivate.prototype.setPref_ = function(callback) {
-  chrome.terminalPrivate.setSettings(this.prefValue_, () => {
-    if (chrome.runtime.lastError) {
-      console.error(chrome.runtime.lastError.message);
-    }
-    if (callback) {
-      callback();
-    }
-  });
+  this.prefValueWriteCallbacks_.push(callback);
+  if (this.prefValueWriteCallbacks_.length > 1) {
+    return;
+  }
+  setTimeout(() => {
+    const callbacks = this.prefValueWriteCallbacks_;
+    this.prefValueWriteCallbacks_ = [];
+    chrome.terminalPrivate.setSettings(this.prefValue_, () => {
+      if (chrome.runtime.lastError) {
+        console.error(chrome.runtime.lastError.message);
+      }
+      callbacks.forEach(c => c && c());
+    });
+  }, 0);
 };
 
 /**
