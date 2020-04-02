@@ -207,6 +207,12 @@ def mkzip(manifest_name: str, stable: bool, archive_suffix: str,
         _update_icons(data['icons'])
         if 'browser_action' in data:
             _update_icons(data['browser_action']['default_icon'])
+
+    # Workaround a bug in CWS where it can't handle partial translations.
+    # b/153099839
+    if ('__MSG_nassh_product_name__' in name and
+            name != '__MSG_nassh_product_name__'):
+        name = _hack_localize(name)
     data['name'] = name
 
     basename += archive_suffix + '-' + version
