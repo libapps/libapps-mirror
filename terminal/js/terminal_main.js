@@ -33,7 +33,6 @@ window.addEventListener('DOMContentLoaded', () => {
   lib.registerInit('migrate-settings', terminal.migrateSettings);
 
   lib.init(() => {
-    new terminal.Menu(window).install();
     document.querySelector(Manager.is)
         .addEventListener('terminal-window-ready', (event) => {
       const element = document.createElement('div');

@@ -4,7 +4,6 @@
 
 import {definePrefs, normalizePrefsInPlace, loadWebFont}
     from './terminal_common.js';
-import {TerminalMenu} from './terminal_menu.js';
 
 export const terminal = {};
 
@@ -45,6 +44,13 @@ terminal.Command = function(argv) {
  */
 terminal.msg = function(name, args) {
   return hterm.messageManager.get(name, args);
+};
+
+/**
+ * Create a new window to the options page for customizing preferences.
+ */
+terminal.openOptionsPage = function() {
+  lib.f.openWindow('/html/terminal_settings.html');
 };
 
 /**
@@ -107,7 +113,7 @@ terminal.init = function(element) {
        lib.f.openWindow('https://goo.gl/muppJj', '_blank');
      }},
     {name: terminal.msg('OPTIONS_BUTTON_LABEL'),
-     action: function() { location.hash = '#options'; }},
+     action: function() { terminal.openOptionsPage(); }},
   ]);
 
   return term;
@@ -270,4 +276,3 @@ terminal.migrateSettings = function(callback) {
   });
 };
 
-terminal.Menu = TerminalMenu;
