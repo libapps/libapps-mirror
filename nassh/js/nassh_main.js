@@ -68,6 +68,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     terminal.alwaysUseLegacyPasting = true;
     terminal.decorate(lib.notNull(document.querySelector('#terminal')));
     const runNassh = function() {
+      terminal.onOpenOptionsPage = nassh.openOptionsPage;
       terminal.setCursorPosition(0, 0);
       terminal.setCursorVisible(true);
       terminal.runCommandClass(

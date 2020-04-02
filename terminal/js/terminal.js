@@ -68,6 +68,7 @@ terminal.init = function(element) {
 
   term.decorate(element);
   const runTerminal = function() {
+    term.onOpenOptionsPage = terminal.openOptionsPage;
     term.setCursorPosition(0, 0);
     term.setCursorVisible(true);
     term.runCommandClass(

@@ -133,6 +133,7 @@ Crosh.init = function() {
       return hterm.Keyboard.KeyActions.CANCEL;
     });
 
+    terminal.onOpenOptionsPage = nassh.openOptionsPage;
     terminal.setCursorPosition(0, 0);
     terminal.setCursorVisible(true);
     terminal.runCommandClass(Crosh, commandName, params.getAll('args[]'));
