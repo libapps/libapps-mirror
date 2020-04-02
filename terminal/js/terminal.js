@@ -68,6 +68,11 @@ terminal.init = function(element) {
 
   term.decorate(element);
   const runTerminal = function() {
+    term.keyboard.bindings.addBinding('Ctrl+Shift+P', function() {
+      terminal.openOptionsPage();
+      return hterm.Keyboard.KeyActions.CANCEL;
+    });
+
     term.onOpenOptionsPage = terminal.openOptionsPage;
     term.setCursorPosition(0, 0);
     term.setCursorVisible(true);
