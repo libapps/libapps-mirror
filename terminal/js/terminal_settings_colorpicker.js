@@ -327,7 +327,7 @@ export class TerminalSettingsColorpickerElement extends
   /** @override */
   render() {
     return html`
-        <terminal-colorpicker @updated="${this.onUpdated_}"
+        <terminal-colorpicker @updated="${this.scheduleUpdate_}"
             value="${this.value}"
             ?disableTransparency="${this.disableTransparency}"/>
     `;
@@ -338,16 +338,35 @@ export class TerminalSettingsColorpickerElement extends
 
     /** If true, transparency is not shown. */
     this.disableTransparency = false;
+    /** @private {string} */
+    this.pendingValue_ = '';
+    /** @private {?Promise<void>} */
+    this.pendingUpdate_ = null;
+    /** @public {number} */
+    this.updateDelay = 100;
   }
 
   /**
-   * Handle 'updated' event when one of the colors changes.
+   * Schedule to update the preference (and thus also this.value). The reason
+   * that we do not do the update immediately is to avoid flooding the
+   * preference manager, in which case the user might see the color picker knob
+   * jumping around by itself after dragging the knob quickly.
    *
-   * @param {!CustomEvent} event Event with index and value.
+   * @param {!CustomEvent} event Event with value.
    * @private
    */
-  onUpdated_(event) {
-    super.uiChanged_(event.target.value);
+  scheduleUpdate_(event) {
+    this.pendingValue_ = event.target.value;
+    if (this.pendingUpdate_ === null) {
+      // We need to use a promise so that tests can wait on this.
+      this.pendingUpdate_ = new Promise((resolve) => {
+        setTimeout(() => {
+          this.pendingUpdate_ = null;
+          super.uiChanged_(this.pendingValue_);
+          resolve();
+        }, this.updateDelay);
+      });
+    }
   }
 }
 

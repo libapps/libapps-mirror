@@ -47,13 +47,16 @@ describe('terminal_settings_colorpicker.js', () => {
   }
 
   async function allUpdatesComplete(el) {
-      await el.updateComplete;
-      const tc = el.shadowRoot.querySelector('terminal-colorpicker');
-      await tc.updateComplete;
-      const slp = getElement(el, 'saturation-lightness-picker');
-      const hs = getElement(el, 'hue-slider');
-      const ts = getElement(el, 'transparency-slider');
-      return Promise.all([slp, hs, ts].map(x => x.updateComplete));
+    if (el.pendingUpdate_) {
+      await el.pendingUpdate_;
+    }
+    await el.updateComplete;
+    const tc = el.shadowRoot.querySelector('terminal-colorpicker');
+    await tc.updateComplete;
+    const slp = getElement(el, 'saturation-lightness-picker');
+    const hs = getElement(el, 'hue-slider');
+    const ts = getElement(el, 'transparency-slider');
+    return Promise.all([slp, hs, ts].map(x => x.updateComplete));
   }
 
   beforeEach(function() {
@@ -63,6 +66,7 @@ describe('terminal_settings_colorpicker.js', () => {
 
     this.el = /** @type {!Element} */ (document.createElement(Element.is));
     this.el.setAttribute('preference', preference);
+    this.el.updateDelay = 0;
     document.body.appendChild(this.el);
 
     return allUpdatesComplete(this.el);
