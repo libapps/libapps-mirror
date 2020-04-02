@@ -152,3 +152,22 @@ export function loadWebFont(document, fontFamily) {
     head.appendChild(link);
   });
 }
+
+/**
+ * Add a listener to 'background-color' pref and set
+ * <meta id='meta-theme-color' name='theme-color' content="#...">
+ * to update tab and frame colors.
+ *
+ * @param {!lib.PreferenceManager} prefs The preference manager.
+ * @param {boolean} updateBody Whether body background should be updated when
+ *     background-color pref changes.
+ */
+export function watchBackgroundColor(prefs, updateBody) {
+  prefs.addObserver('background-color', (color) => {
+    document.getElementById('meta-theme-color')
+        .setAttribute('content', /** @type {string} */ (color));
+    if (updateBody) {
+      document.body.style.backgroundColor = /** @type {string} */ (color);
+    }
+  });
+}

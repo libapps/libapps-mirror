@@ -6,7 +6,8 @@
  * @fileoverview Initializes global state used in terminal settings.
  */
 
-import {definePrefs, normalizePrefsInPlace} from './terminal_common.js';
+import {definePrefs, normalizePrefsInPlace, watchBackgroundColor}
+    from './terminal_common.js';
 
 let resolveLibdotInitialized;
 window.libdotInitialized = new Promise(resolve => {
@@ -33,6 +34,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     window.PreferenceManager = hterm.PreferenceManager;
     window.preferenceManager = new window.PreferenceManager('default');
     definePrefs(window.preferenceManager);
+    watchBackgroundColor(window.preferenceManager, /*updateBody=*/false);
     window.preferenceManager.readStorage(() => {
       normalizePrefsInPlace(window.preferenceManager);
       window.preferenceManager.notifyAll();
