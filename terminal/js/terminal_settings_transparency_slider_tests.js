@@ -47,7 +47,7 @@ describe('transparency_slider_tests.js', () => {
     assert.equal(getPicker(el).style.left, '75%');
   });
 
-  it('updates-picker-location-when-clicked', async function() {
+  it('updates-picker-location-on-pointer-event', async function() {
     const el = createElement(0.25);
 
     document.body.appendChild(el);
@@ -55,15 +55,16 @@ describe('transparency_slider_tests.js', () => {
 
     assert.equal(getPicker(el).style.left, '25%');
 
-    // Manually call handler, as you can't set offsetX on a custom mouse event.
-    el.onClick_({offsetX: el.clientWidth * 0.75});
+    // Manually call handler, as you can't set offsetX on a custom pointer
+    // event, and the event handlers may throw an error for a fake pointerId.
+    el.update_({offsetX: el.clientWidth * 0.75});
     await el.updateComplete;
 
     assert.equal(getPicker(el).style.left, '75%');
     assert.equal(el.getAttribute('transparency'), 0.75);
   });
 
-  it('publishes-event-when-clicked', async function() {
+  it('publishes-event-on-pointer-event', async function() {
     const el = createElement(0.25);
 
     document.body.appendChild(el);
@@ -71,7 +72,9 @@ describe('transparency_slider_tests.js', () => {
 
     let listenerInvocations = 0;
     el.addEventListener('updated', () => ++listenerInvocations);
-    el.dispatchEvent(new MouseEvent('click'));
+    // Manually call handler, as you can't set offsetX on a custom pointer
+    // event, and the event handlers may throw an error for a fake pointerId.
+    el.update_({offsetX: el.clientWidth * 0.75});
     await el.updateComplete;
 
     assert.equal(listenerInvocations, 1);

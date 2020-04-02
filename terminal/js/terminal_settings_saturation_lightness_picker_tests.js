@@ -76,7 +76,7 @@ describe('saturation_lightness_picker_tests.js', () => {
     assert.equal(getPicker(el).style.top, '25%');
   });
 
-  it('updates-picker-location-when-clicked', async function() {
+  it('updates-picker-location-on-pointer-event', async function() {
     const el = createElement(25, 25);
 
     document.body.appendChild(el);
@@ -85,9 +85,10 @@ describe('saturation_lightness_picker_tests.js', () => {
     assert.equal(getPicker(el).style.left, '25%');
     assert.equal(getPicker(el).style.top, '75%');
 
-    // Manually call handler, as you can't set offsetX/offsetY on a custom mouse
-    // event.
-    el.onClick_(
+    // Manually call handler, as you can't set offsetX/offsetY on a custom
+    // pointer event, and the event handlers may throw an error for a fake
+    // pointerId.
+    el.update_(
         {offsetX: el.clientWidth * 0.75, offsetY: el.clientHeight * 0.25});
     await el.updateComplete;
 
@@ -97,7 +98,7 @@ describe('saturation_lightness_picker_tests.js', () => {
     assert.equal(el.getAttribute('lightness'), 75);
   });
 
-  it('publishes-event-when-clicked', async function() {
+  it('publishes-event-on-pointer-event', async function() {
     const el = createElement(25, 25);
 
     document.body.appendChild(el);
@@ -105,7 +106,11 @@ describe('saturation_lightness_picker_tests.js', () => {
 
     let listenerInvocations = 0;
     el.addEventListener('updated', () => ++listenerInvocations);
-    el.dispatchEvent(new MouseEvent('click'));
+    // Manually call handler, as you can't set offsetX/offsetY on a custom
+    // pointer event, and the event handlers may throw an error for a fake
+    // pointerId.
+    el.update_(
+        {offsetX: el.clientWidth * 0.75, offsetY: el.clientHeight * 0.25});
     await el.updateComplete;
 
     assert.equal(listenerInvocations, 1);

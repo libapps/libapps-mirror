@@ -81,22 +81,41 @@ export class HueSliderElement extends LitElement {
   connectedCallback() {
     super.connectedCallback();
 
-    this.addEventListener('click', this.onClick_);
+    this.addEventListener('pointerdown', this.onPointerDown_);
+    this.addEventListener('pointerup', this.onPointerUp_);
   }
 
   /** @override */
   disconnectedCallback() {
-    this.removeEventListener('click', this.onClick_);
+    this.removeEventListener('pointerdown', this.onPointerDown_);
+    this.removeEventListener('pointerup', this.onPointerUp_);
 
     super.disconnectedCallback();
   }
 
   /** @param {!Event} event */
-  onClick_(event) {
-    const xPercent = lib.f.clamp(event.offsetX / this.clientWidth, 0, 1);
+  onPointerDown_(event) {
+    this.addEventListener('pointermove', this.onPointerMove_);
+    this.setPointerCapture(event.pointerId);
+    this.update_(event);
+  }
 
-    this.hue = 360 * xPercent;
+  /** @param {!Event} event */
+  onPointerMove_(event) {
+    this.update_(event);
+  }
 
+  /** @param {!Event} event */
+  onPointerUp_(event) {
+    this.removeEventListener('pointermove', this.onPointerMove_);
+    this.releasePointerCapture(event.pointerId);
+    this.update_(event);
+  }
+
+  /** @param {!Event} event */
+  update_(event) {
+    this.hue = 360 * lib.f.clamp(
+        event.offsetX / this.clientWidth, 0, 1);
     this.dispatchEvent(new CustomEvent('updated', {bubbles: true}));
   }
 }
