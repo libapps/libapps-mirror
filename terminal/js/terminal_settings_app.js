@@ -413,13 +413,6 @@ export class TerminalSettingsApp extends LitElement {
                     preference="mouse-right-click-paste">
                 </terminal-settings-checkbox>
               </li>
-              <li class="setting-container"
-                  title="${msg('HTERM_PREF_CLEAR_SELECTION_AFTER_COPY')}">
-                <h4>${msg('HTERM_NAME_PREF_CLEAR_SELECTION_AFTER_COPY')}</h4>
-                <terminal-settings-checkbox
-                    preference="clear-selection-after-copy">
-                </terminal-settings-checkbox>
-              </li>
             </ul>
           </section>
         </section>
