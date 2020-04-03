@@ -55,7 +55,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
           border-radius: 6px;
           color: #202124;
           cursor: pointer;
-          min-width: 60px;
+          min-width: 40px;
           padding: 0 32px 0 8px;
           position: relative;
           user-select: none;

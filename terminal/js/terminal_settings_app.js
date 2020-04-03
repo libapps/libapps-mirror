@@ -177,6 +177,16 @@ export class TerminalSettingsApp extends LitElement {
         margin-right: -6px;
         padding: 6px 0;
       }
+
+      terminal-settings-dropdown[preference='font-family'] {
+        display: inline-block;
+        min-width: 170px;
+      }
+
+      terminal-settings-dropdown[preference='font-size'] {
+        display: inline-block;
+        min-width: 80px;
+      }
     `];
   }
 
@@ -228,21 +238,20 @@ export class TerminalSettingsApp extends LitElement {
             <ul class="section-body">
               <!-- TODO(lxj@google.com): merge options font family and font
                   size -->
-              <li class="setting-container"
-                  title="${msg('HTERM_PREF_FONT_FAMILY')}">
-                <h4>${msg('HTERM_NAME_PREF_FONT_FAMILY')}</h4>
-                <terminal-settings-dropdown preference="font-family"
-                  .options=${Array.from(SUPPORTED_FONT_FAMILIES.keys())}>
-                </terminal-settings-dropdown>
-              </li>
-              <li class="setting-container"
-                  title="${msg('HTERM_PREF_FONT_SIZE')}">
-                <h4>${msg('HTERM_NAME_PREF_FONT_SIZE')}</h4>
-                <!-- TODO(lxj@google.com): We should allow user to input a text
-                    size not in the list. -->
-                <terminal-settings-dropdown preference="font-size"
-                  .options=${SUPPORTED_FONT_SIZES}>
-                </terminal-settings-dropdown>
+              <li class="setting-container">
+                <h4>${msg('TERMINAL_NAME_PREF_FONT')}</h4>
+                <div>
+                  <terminal-settings-dropdown preference="font-family"
+                      title="${msg('HTERM_PREF_FONT_FAMILY')}"
+                      .options=${Array.from(SUPPORTED_FONT_FAMILIES.keys())}>
+                  </terminal-settings-dropdown>
+                  <!-- TODO(lxj@google.com): We should allow user to input a
+                      text size not in the list. -->
+                  <terminal-settings-dropdown preference="font-size"
+                      title="${msg('HTERM_PREF_FONT_SIZE')}"
+                      .options=${SUPPORTED_FONT_SIZES}>
+                  </terminal-settings-dropdown>
+                </div>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_FOREGROUND_COLOR')}">
