@@ -107,13 +107,15 @@ void JsFile::OnRead(const char* buf, size_t size) {
           if (!in_buf_.empty() && in_buf_.back() != '\n') {
             in_buf_.pop_back();
             if (tio_.c_lflag & ECHO)
-              ::write(1, "\b \b", 3);
+              ::write(fd_, "\b \b", 3);
           }
           continue;
         } else if ((tio_.c_lflag & ECHO) ||
                    ((tio_.c_lflag & ECHONL) && c == '\n')) {
-          ::write(1, &c, 1);
+          ::write(fd_, &c, 1);
         }
+      } else if (tio_.c_lflag & ECHO) {
+        ::write(fd_, &c, 1);
       }
       in_buf_.push_back(c);
     }
