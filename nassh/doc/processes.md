@@ -212,6 +212,14 @@ See the [TC](http://tc/) page for more details.
 
 We don't have one.  Releases are made as changes roll in.
 
+We try to release on Mon-Wed to line up with normal working hours.
+The [CWS] delays all publishing currently, so we assume changes will go live
+before Friday.
+
+Similarly, try to follow:
+* Avoid US holidays (and large international ones if possible).
+* Follow the normal Google production freeze schedule.
+
 ## Launch Bugs
 
 * https://docs.google.com/document/d/13O6lLu8Acyd2JhuulUaivDbHVSRe2_ECM8z3NMirqE4/edit: PRD (Product Requirements Document)
