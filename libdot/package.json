@@ -1,6 +1,6 @@
 {
   "name": "libdot",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Grab bag of JS utility libraries",
   "main": "js/libdot.js",
   "unpkg": "js/libdot.min.js",

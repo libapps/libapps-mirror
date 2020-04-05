@@ -1,3 +1,24 @@
+# 5.0.0, 2020-04-05, Unicode 13.0.0 update, and minor tooling improvements.
+
+* wcwidth: Update to Unicode 13.0.0 release.
+* colors: arrayToRGBA: Return rgb() when there's no alpha.
+* i18n: Better resolve translations.
+* minify-translations: Rename for reuse.
+* bin: Improve timezone logging info.
+* headless-chrome: Move unique logic out of common module.
+* bin: Require Python 3.6+.
+* colors: Add HSL helpers.
+* MessageManager: Lookup en directly rather than en_US for messages.
+* externs: bigint/chai: Add more prototypes.
+* bin: Use UTF-8 encoding in more places.
+* pylint: Include custom env for comments too.
+* externs: browser: Add more prototypes.
+* bin: Use sort_keys=True when dumping json.
+* bin: unpack: Enable symlinks under Windows.
+* bin: Use os.pathsep for portability.
+* node: Add Windows support.
+* eslint: Enable single quote checking.
+
 # 4.0.0, 2019-11-28, Tons of tooling improvements & linting cleanups.
 
 * bin: Log when/where we have an unpack cache hit.
