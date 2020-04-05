@@ -1,3 +1,23 @@
+# 0.27, 2020-04-05, Better options page.
+
+* Update to hterm 1.88.  Better word breaks, more keyboard prefs, and dynamic colors.
+* Update to libdot 5.0.0.  Unicode 13.0.0 update, and minor tooling improvements.
+* ssh_client: Fix tty echo handling.
+* preferences: Remove unused label text.
+* preferences: Add sidebar links to subsections.
+* import-translations: Fix handling of new translations.
+* preferences: Add UI for managing .ssh/ files.
+* preferences: Support multiple pages of settings.
+* l10n: Pull in some minor translation updates.
+* l10n: Improve translation import process.
+* l10n: Update translations with renamed/deleted fields.
+* preferences: Switch from i18n-content to i18n tag.
+* licenses: Localize all fixed content.
+* l10n: Support translating the official name.
+* uri: Add a helper page for registering protocol handlers.
+* api: Switch to using a Map.
+* uri: Handle IPv6 relay hosts.
+
 # 0.26, 2020-03-25, SSH-FE & SFTP fixes & keybinding & copy/paste tweaks.
 
 * changelog: Point people to local changelog.
