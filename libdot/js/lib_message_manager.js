@@ -79,7 +79,7 @@ lib.MessageManager.prototype.addMessages = function(defs) {
       // Replace "$NAME$" placeholders with "$1", etc.
       this.messages_[key.toUpperCase()] =
           def.message.replace(/\$([a-z][^\s\$]+)\$/ig, function(m, name) {
-            return defs[key].placeholders[name.toLowerCase()].content;
+            return defs[key].placeholders[name.toUpperCase()].content;
           });
     }
   }
