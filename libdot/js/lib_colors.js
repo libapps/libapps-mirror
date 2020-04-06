@@ -588,6 +588,40 @@ lib.colors.nameToRGB = function(name) {
 };
 
 /**
+ * Calculate the relative luminance as per
+ * https://www.w3.org/TR/WCAG20/#relativeluminancedef
+ *
+ * @param {number} r The value (>=0 and <= 255) of the rgb component.
+ * @param {number} g The value (>=0 and <= 255) of the rgb component.
+ * @param {number} b The value (>=0 and <= 255) of the rgb component.
+ * @return {number} The relative luminance.
+ */
+lib.colors.luminance = function(r, g, b) {
+  const [rr, gg, bb] = [r, g, b].map((value) => {
+    value /= 255;
+    if (value <= 0.03928) {
+      return value / 12.92;
+    } else {
+      return Math.pow((value + 0.055)/1.055, 2.4);
+    }
+  });
+
+  return 0.2126 * rr + 0.7152 * gg + 0.0722 * bb;
+};
+
+/**
+ * Calculate the contrast ratio of two relative luminance values as per
+ * https://www.w3.org/TR/WCAG20/#contrast-ratiodef
+ *
+ * @param {number} l1 Relative luminance value.
+ * @param {number} l2 Relative luminance value.
+ * @return {number} The contrast ratio.
+ */
+lib.colors.contrastRatio = function(l1, l2) {
+  return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+};
+
+/**
  * The stock color palette.
  *
  * @type {!Array<string>}

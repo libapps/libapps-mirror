@@ -305,4 +305,31 @@ it('nameToRGB', () => {
   });
 });
 
+it('luminance', () => {
+  const data = [
+      [[0, 0, 0], 0],
+      [[255, 255, 255], 1],
+      [[12, 34, 56], 0.0151],
+      [[123, 213, 31], 0.5189],
+  ];
+
+  data.forEach((ele) => {
+    assert.closeTo(lib.colors.luminance(...ele[0]), ele[1], 0.0001);
+  });
+});
+
+it('contrastRatio', () => {
+  const data = [
+      [[[0, 0, 0], [255, 255, 255]], 21],
+      [[[12, 34, 56], [123, 213, 31]], 8.74],
+  ];
+
+  data.forEach((ele) => {
+    const l1 = lib.colors.luminance(...ele[0][0]);
+    const l2 = lib.colors.luminance(...ele[0][1]);
+    assert.closeTo(lib.colors.contrastRatio(l1, l2), ele[1], 0.01);
+    assert.closeTo(lib.colors.contrastRatio(l2, l1), ele[1], 0.01);
+  });
+});
+
 });

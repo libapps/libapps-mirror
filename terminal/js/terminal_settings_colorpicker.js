@@ -24,6 +24,19 @@ function cssToHex(css) {
       lib.notNull(lib.colors.normalizeCSS(css)))).toUpperCase();
 }
 
+/**
+ * Return true if a css color is too close to white.
+ *
+ * @param {string} css the css color.
+ * @return {boolean}
+ */
+function tooCloseToWhite(css) {
+  const c = lib.colors;
+  const contrastRatio = c.contrastRatio(1, c.luminance(
+      ...lib.notNull(c.crackRGB(lib.notNull(c.normalizeCSS(css))))));
+  return contrastRatio < 1.25;
+}
+
 export class TerminalColorpickerElement extends LitElement {
   static get is() { return 'terminal-colorpicker'; }
 
@@ -81,7 +94,7 @@ export class TerminalColorpickerElement extends LitElement {
               rgba(0,0,0,0.1) 0);
           background-position: 0px 0, 5px 5px;
           background-size: 10px 10px, 10px 10px;
-          border-radius: 100%;
+          border-radius: 50%;
           cursor: pointer;
           display: inline-block;
           height: 24px;
@@ -96,6 +109,10 @@ export class TerminalColorpickerElement extends LitElement {
           height: 100%;
           pointer-events: none;
           width: 100%;
+        }
+
+        .swatchborder {
+          box-shadow: inset 0 0 0 1px black;
         }
 
         #hexinput {
@@ -139,7 +156,9 @@ export class TerminalColorpickerElement extends LitElement {
     return html`
         <div id="smallview">
           <div id="swatch" @click="${this.onSwatchClick_}">
-            <div id="swatchdisplay" style="background-color: ${this.value}">
+            <div id="swatchdisplay"
+                class="${tooCloseToWhite(this.value)?'swatchborder':''}"
+                style="background-color: ${this.value}">
             </div>
           </div>
           ${this.inputInDialog ? '' : input}
