@@ -1899,6 +1899,10 @@
 		"description": "The menu label to reset the active terminal settings.",
 		"message": "Terminal Reset"
 	},
+	"TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP": {
+		"description": "Help text shown for the terminal 'background-image' preference.",
+		"message": "Background image URL. Must start with 'http://' or 'https://'. Empty string for no image.\n\nFor example:\n  https://goo.gl/anedTK"
+	},
 	"TERMINAL_SETTINGS_DROPDOWN_ALT_GR_MODE_AUTO": {
 		"description": "Label for AltGr key mode 'Auto' option. See TERMINAL_PREF_ALT_GR_MODE.",
 		"message": "Auto"

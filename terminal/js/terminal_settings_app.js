@@ -20,10 +20,27 @@ import './terminal_settings_colorpicker.js';
 import './terminal_settings_dropdown.js';
 import './terminal_settings_hue_slider.js';
 import './terminal_settings_saturation_lightness_picker.js';
+import './terminal_settings_text.js';
 import './terminal_settings_theme.js';
 import './terminal_settings_transparency_slider.js';
 
-const BELL_SOUND_CONVERTER = {
+export const BACKGROUND_IMAGE_CONVERTER = {
+  preferenceToDisplay: preference => {
+    preference = preference ? preference.toString().trim() : '';
+    let result = preference.match(/^url\(['"]?(.*?)['"]?\)$/i);
+    return result ? result[1] : preference;
+  },
+  displayToPreference: display => {
+    display = display.trim();
+    if (!display) {
+      return '';
+    }
+    let prefix = RegExp('^https?://', 'i').test(display) ? '' : 'http://';
+    return `url(${prefix}${display})`;
+  },
+};
+
+export const BELL_SOUND_CONVERTER = {
   toChecked: value => !!value,
   fromChecked: checked => checked ? 'lib-resource:hterm/audio/bell' : '',
 };
@@ -222,12 +239,16 @@ export class TerminalSettingsApp extends LitElement {
               <li class="setting-container"
                   title="${msg('HTERM_PREF_BACKGROUND_COLOR')}">
                 <h4>${msg('TERMINAL_NAME_PREF_COLOR')}</h4>
-                <!-- TODO(crbug.com/1050882) We need to have migration code to
-                    reset background transparency to 0% now that the user cannot
-                    set it. -->
                 <terminal-settings-colorpicker preference="background-color"
                     disableTransparency>
                 </terminal-settings-colorpicker>
+              </li>
+              <li class="setting-container"
+                  title="${msg('TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP')}">
+                <h4>${msg('TERMINAL_NAME_PREF_IMAGE')}</h4>
+                <terminal-settings-text preference="background-image"
+                    .converter=${BACKGROUND_IMAGE_CONVERTER}>
+                </terminal-settings-text>
               </li>
             </ul>
           </section>

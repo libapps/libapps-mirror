@@ -9,7 +9,7 @@
  */
 import {LitElement, css, html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
-import {stylesButtonContainer, stylesDialog}
+import {stylesButtonContainer, stylesDialog, stylesText}
     from './terminal_settings_styles.js';
 import './terminal_settings_button.js';
 
@@ -92,7 +92,7 @@ export class TerminalColorpickerElement extends LitElement {
 
   /** @override */
   static get styles() {
-    return [stylesButtonContainer, stylesDialog, css`
+    return [stylesButtonContainer, stylesDialog, stylesText, css`
         #smallview {
           align-items: center;
           display: flex;
@@ -134,16 +134,6 @@ export class TerminalColorpickerElement extends LitElement {
         }
 
         #hexinput {
-          background-color: #F1F3F4;
-          border-radius: 4px;
-          border: none;
-          color: #202124;
-          font-family: Roboto;
-          font-size: 13px;
-          outline: none;
-          line-height: 32px;
-          margin: 8px 0 8px 6px;
-          padding: 0 8px;
           text-transform: uppercase;
           width: 17ch;
         }

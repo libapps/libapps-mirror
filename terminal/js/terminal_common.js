@@ -22,12 +22,7 @@ export const SUPPORTED_FONT_FAMILIES = new Map([
   ['Source Code Pro', true],
 ]);
 export const SUPPORTED_FONT_SIZES = [10, 11, 12, 13, 14, 16, 18, 20];
-export const DEFAULT_FONT_SIZE = 13;
 
-export const DEFAULT_THEME = 'dark';
-export const DEFAULT_BACKGROUND_COLOR = '#202124';
-export const DEFAULT_FOREGROUND_COLOR = '#FFFFFF';
-export const DEFAULT_CURSOR_COLOR = 'rgba(174, 203, 250, 0.5)';
 /** @type {!Array<string>} */
 export const DEFAULT_ANSI_COLORS = [
   '#80868B',
@@ -47,6 +42,12 @@ export const DEFAULT_ANSI_COLORS = [
   '#80F9F9',
   '#F8F9FA',
 ];
+export const DEFAULT_BACKGROUND_COLOR = '#202124';
+export const DEFAULT_BACKGROUND_SIZE = '100% 100%';
+export const DEFAULT_FOREGROUND_COLOR = '#FFFFFF';
+export const DEFAULT_CURSOR_COLOR = 'rgba(174, 203, 250, 0.5)';
+export const DEFAULT_FONT_SIZE = 13;
+export const DEFAULT_THEME = 'dark';
 
 /**
  * Return a normalized font family.
@@ -73,11 +74,12 @@ function normalizeFontFamily(cssFontFamily) {
 export function definePrefs(prefs) {
   // Set terminal default overrides from hterm.
   prefs.definePreference('audible-bell-sound', '');
-  prefs.definePreference('font-size', DEFAULT_FONT_SIZE);
   prefs.definePreference('background-color', DEFAULT_BACKGROUND_COLOR);
-  prefs.definePreference('foreground-color', DEFAULT_FOREGROUND_COLOR);
+  prefs.definePreference('background-size', DEFAULT_BACKGROUND_SIZE);
   prefs.definePreference('cursor-color', DEFAULT_CURSOR_COLOR);
   prefs.definePreference('color-palette-overrides', DEFAULT_ANSI_COLORS);
+  prefs.definePreference('font-size', DEFAULT_FONT_SIZE);
+  prefs.definePreference('foreground-color', DEFAULT_FOREGROUND_COLOR);
   prefs.definePreference('pass-ctrl-tab', true);
   prefs.definePreference('theme', DEFAULT_THEME);
   prefs.definePreference('theme-variations', {});
