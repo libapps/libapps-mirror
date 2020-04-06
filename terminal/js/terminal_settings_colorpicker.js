@@ -13,6 +13,10 @@ import {stylesButtonContainer, stylesDialog}
     from './terminal_settings_styles.js';
 import './terminal_settings_button.js';
 
+export const TOO_WHITE_BOX_SHADOW = 'inset 0 0 0 1px black';
+export const FOCUS_BOX_SHADOW =
+    '0 0 0 2px rgba(var(--google-blue-600-rgb), .4)';
+
 /**
  * Convert CSS color to hex color.  Always use uppercase for display.
  *
@@ -25,16 +29,31 @@ function cssToHex(css) {
 }
 
 /**
- * Return true if a css color is too close to white.
+ * Return a css string for the swatch's style attribute.
  *
- * @param {string} css the css color.
- * @return {boolean}
+ * @param {string} color the css color.
+ * @param {boolean} dialogIsOpened whether dialog is opened.
+ * @return {string}
  */
-function tooCloseToWhite(css) {
-  const c = lib.colors;
-  const contrastRatio = c.contrastRatio(1, c.luminance(
-      ...lib.notNull(c.crackRGB(lib.notNull(c.normalizeCSS(css))))));
-  return contrastRatio < 1.25;
+function swatchStyle(color, dialogIsOpened) {
+  const boxShadows = [];
+
+  if (color) {
+    const c = lib.colors;
+    const contrastRatio = c.contrastRatio(1, c.luminance(
+        ...lib.notNull(c.crackRGB(lib.notNull(c.normalizeCSS(color))))));
+    if (contrastRatio < 1.25) {
+      // The color is too white. Put a "border" to make it stands out from the
+      // background.
+      boxShadows.push(TOO_WHITE_BOX_SHADOW);
+    }
+  }
+
+  if (dialogIsOpened) {
+    boxShadows.push(FOCUS_BOX_SHADOW);
+  }
+
+  return `background-color: ${color}; box-shadow: ${boxShadows.join(',')}`;
 }
 
 export class TerminalColorpickerElement extends LitElement {
@@ -64,6 +83,9 @@ export class TerminalColorpickerElement extends LitElement {
       },
       transparency_: {
         type: Number
+      },
+      dialogIsOpened_: {
+        type: Boolean
       },
     };
   }
@@ -111,10 +133,6 @@ export class TerminalColorpickerElement extends LitElement {
           width: 100%;
         }
 
-        .swatchborder {
-          box-shadow: inset 0 0 0 1px black;
-        }
-
         #hexinput {
           background-color: #F1F3F4;
           border-radius: 4px;
@@ -157,8 +175,7 @@ export class TerminalColorpickerElement extends LitElement {
         <div id="smallview">
           <div id="swatch" @click="${this.onSwatchClick_}">
             <div id="swatchdisplay"
-                class="${tooCloseToWhite(this.value)?'swatchborder':''}"
-                style="background-color: ${this.value}">
+                style="${swatchStyle(this.value, this.dialogIsOpened_)}">
             </div>
           </div>
           ${this.inputInDialog ? '' : input}
@@ -206,6 +223,8 @@ export class TerminalColorpickerElement extends LitElement {
     this.transparency_;
     /** @private {string} */
     this.cancelValue_;
+    /** @private {boolean} */
+    this.dialogIsOpened_ = false;
   }
 
   /**
@@ -258,7 +277,7 @@ export class TerminalColorpickerElement extends LitElement {
 
   /** @param {!Event} event */
   onSwatchClick_(event) {
-    this.shadowRoot.querySelector('dialog').showModal();
+    this.openDialog();
     this.cancelValue_ = this.value;
   }
 
@@ -306,7 +325,7 @@ export class TerminalColorpickerElement extends LitElement {
    * @param {!Event} event
    */
   onCancelClick_(event) {
-    this.shadowRoot.querySelector('dialog').close();
+    this.closeDialog();
     this.onUiChanged_(this.cancelValue_);
   }
 
@@ -316,6 +335,16 @@ export class TerminalColorpickerElement extends LitElement {
    * @param {!Event} event
    */
   onOkClick_(event) {
+    this.closeDialog();
+  }
+
+  openDialog() {
+    this.dialogIsOpened_ = true;
+    this.shadowRoot.querySelector('dialog').showModal();
+  }
+
+  closeDialog() {
+    this.dialogIsOpened_ = false;
     this.shadowRoot.querySelector('dialog').close();
   }
 }

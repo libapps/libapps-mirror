@@ -6,13 +6,21 @@
  * @fileoverview Terminal Settings Colorpicker Element unit tests.
  */
 
-import {TerminalSettingsColorpickerElement as Element} from
-    './terminal_settings_colorpicker.js';
+import {TerminalSettingsColorpickerElement as Element, TOO_WHITE_BOX_SHADOW,
+  FOCUS_BOX_SHADOW} from './terminal_settings_colorpicker.js';
 
 const orange = 'hsl(39, 100%, 50%)';
 
 describe('terminal_settings_colorpicker.js', () => {
   const preference = 'terminal_settings_colorpicker';
+
+  // Extract css setting from the style attribute of an element. Unlike
+  // element.style.name, which normalizes the value, this function preserves the
+  // original value.
+  function extractInlineStyle(element, name) {
+    const re = new RegExp(`${name}:([^;]*)`);
+    return element.getAttribute('style').match(re)[1].trim();
+  }
 
   function assertInternals(el, hex, hue, saturation, lightness, transparency) {
     const crackedHSL = lib.colors.crackHSL(
@@ -28,9 +36,7 @@ describe('terminal_settings_colorpicker.js', () => {
     const hs = getElement(el, 'hue-slider');
     const ts = getElement(el, 'transparency-slider');
 
-    // Compare against attribute value, not style value, as style value yeilds a
-    // converted color in rgba form.
-    assert.equal(sd.getAttribute('style'), `background-color: ${el.value}`);
+    assert.equal(extractInlineStyle(sd, 'background-color'), el.value);
     assert.equal(hi.value, hex);
     const error = 0.005;
     assert.closeTo(+slp.getAttribute('hue'), hue, error);
@@ -219,5 +225,37 @@ describe('terminal_settings_colorpicker.js', () => {
     assert.isFalse(dialog.hasAttribute('open'));
     assert.equal(window.preferenceManager.get(preference), orange);
     assertInternals(this.el, '#FFA600', 39, 100, 50, 1);
+  });
+
+  it('sets-swatch-box-shadows-when-too-white', async function() {
+    const swatchDisplay = getElement(this.el, '#swatchdisplay');
+
+    await window.preferenceManager.set(preference, 'white');
+    await allUpdatesComplete(this.el);
+    assert.isTrue(extractInlineStyle(swatchDisplay, 'box-shadow').includes(
+        TOO_WHITE_BOX_SHADOW));
+
+    await window.preferenceManager.set(preference, 'black');
+    await allUpdatesComplete(this.el);
+    assert.isFalse(extractInlineStyle(swatchDisplay, 'box-shadow').includes(
+        TOO_WHITE_BOX_SHADOW));
+  });
+
+  it('sets-swatch-box-shadows-when-dialog-is-opened', async function() {
+    const dialog = getElement(this.el, 'dialog');
+    const swatch = getElement(this.el, '#swatch');
+    const swatchDisplay = getElement(this.el, '#swatchdisplay');
+
+    // No focus ring when the dialog is closed.
+    assert.isFalse(dialog.hasAttribute('open'));
+    await allUpdatesComplete(this.el);
+    assert.isFalse(extractInlineStyle(swatchDisplay, 'box-shadow').includes(
+        FOCUS_BOX_SHADOW));
+
+    await window.preferenceManager.set(preference, 'black');
+    swatch.dispatchEvent(new MouseEvent('click'));
+    await allUpdatesComplete(this.el);
+    assert.isTrue(extractInlineStyle(swatchDisplay, 'box-shadow').includes(
+        FOCUS_BOX_SHADOW));
   });
 });
