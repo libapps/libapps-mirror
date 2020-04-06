@@ -404,6 +404,9 @@
 	"nassh_options_error": {
 		"message": "अज्ञात रीले पर्याय: $1"
 	},
+	"nassh_product_name": {
+		"message": "Secure Shell"
+	},
 	"new_window_menu_label": {
 		"message": "नवीन विंडो"
 	},

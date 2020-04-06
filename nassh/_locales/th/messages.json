@@ -404,6 +404,9 @@
 	"nassh_options_error": {
 		"message": "ตัวเลือกรีเลย์ที่ไม่รู้จัก: $1"
 	},
+	"nassh_product_name": {
+		"message": "Secure Shell"
+	},
 	"new_window_menu_label": {
 		"message": "หน้าต่างใหม่"
 	},

@@ -2202,5 +2202,8 @@
 	"ZOOM_WARNING": {
 		"description": "Shown in the top/right corner if the web browser zoom setting is not set to 100%. It's a tip to navigate the Chrome browser's menu.",
 		"message": "Please set Chrome Menu->Zoom to 100%"
+	},
+	"nassh_product_name": {
+		"message": "Secure Shell"
 	}
 }

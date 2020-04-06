@@ -102,6 +102,12 @@ def main(argv):
             msg['message'] = msg['message'].replace(
                 'chromium- hterm@chromium.org', 'chromium-hterm@chromium.org')
 
+            # The CWS requires manifest strings be in all locales.  It should
+            # fall back to English automatically, but it doesn't.
+            if msgid == 'nassh_product_name':
+                new.setdefault(msgid, baseline[msgid])
+                continue
+
             if normalize(baseline[msgid]) == normalize(msg):
                 if msgid in old:
                     new[msgid] = old[msgid]

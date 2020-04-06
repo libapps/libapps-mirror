@@ -404,6 +404,9 @@
 	"nassh_options_error": {
 		"message": "未知的中继选项：$1"
 	},
+	"nassh_product_name": {
+		"message": "Secure Shell"
+	},
 	"new_window_menu_label": {
 		"message": "打开新窗口"
 	},

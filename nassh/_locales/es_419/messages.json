@@ -404,6 +404,9 @@
 	"nassh_options_error": {
 		"message": "Opción de retransmisión desconocida: $1"
 	},
+	"nassh_product_name": {
+		"message": "Secure Shell"
+	},
 	"new_window_menu_label": {
 		"message": "Nueva ventana"
 	},

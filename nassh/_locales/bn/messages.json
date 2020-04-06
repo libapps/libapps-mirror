@@ -404,6 +404,9 @@
 	"nassh_options_error": {
 		"message": "অজানা রিলে বিকল্প: $1"
 	},
+	"nassh_product_name": {
+		"message": "Secure Shell"
+	},
 	"new_window_menu_label": {
 		"message": "নতুন উইন্ডো"
 	},

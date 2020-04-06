@@ -83,6 +83,9 @@
 	"mount_button_label": {
 		"message": "SFTP mount"
 	},
+	"nassh_product_name": {
+		"message": "Secure Shell"
+	},
 	"new_window_menu_label": {
 		"message": "New window"
 	},
