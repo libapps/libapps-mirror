@@ -248,7 +248,7 @@ def js_dumps(ranges):
     for r in ranges:
         if i == 0:
             # Indent this new line.
-            ret += '    '
+            ret += '  '
         else:
             # Add a space after the previous element.
             ret += ' '
