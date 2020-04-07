@@ -35,8 +35,9 @@ lib.Storage.Memory.prototype.addObserver = function(callback) {
  */
 lib.Storage.Memory.prototype.removeObserver = function(callback) {
   var i = this.observers_.indexOf(callback);
-  if (i != -1)
+  if (i != -1) {
     this.observers_.splice(i, 1);
+  }
 };
 
 /**

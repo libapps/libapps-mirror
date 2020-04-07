@@ -23,8 +23,9 @@ lib.Storage.Local = function() {
  * @param {!Event} e The setting that has changed.
  */
 lib.Storage.Local.prototype.onStorage_ = function(e) {
-  if (e.storageArea != this.storage_)
+  if (e.storageArea != this.storage_) {
     return;
+  }
 
   // JS throws an exception if JSON.parse is given an empty string. So here we
   // only parse if the value is truthy. This mean the empty string, undefined
@@ -61,8 +62,9 @@ lib.Storage.Local.prototype.addObserver = function(callback) {
  */
 lib.Storage.Local.prototype.removeObserver = function(callback) {
   var i = this.observers_.indexOf(callback);
-  if (i != -1)
+  if (i != -1) {
     this.observers_.splice(i, 1);
+  }
 };
 
 /**

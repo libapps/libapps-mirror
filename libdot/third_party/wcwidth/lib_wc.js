@@ -368,8 +368,9 @@ lib.wc.binaryTableSearch_ = function(ucs, table) {
   var min = 0, max = table.length - 1;
   var mid;
 
-  if (ucs < table[min][0] || ucs > table[max][1])
+  if (ucs < table[min][0] || ucs > table[max][1]) {
     return false;
+  }
   while (max >= min) {
     mid = Math.floor((min + max) / 2);
     if (ucs > table[mid][1]) {
@@ -431,21 +432,24 @@ lib.wc.charWidth = function(ucs) {
 lib.wc.charWidthDisregardAmbiguous = function(ucs) {
   // Optimize for ASCII characters.
   if (ucs < 0x7f) {
-    if (ucs >= 0x20)
+    if (ucs >= 0x20) {
       return 1;
-    else if (ucs == 0)
+    } else if (ucs == 0) {
       return lib.wc.nulWidth;
-    else /* if (ucs < 0x20) */
+    } else /* if (ucs < 0x20) */ {
       return lib.wc.controlWidth;
+    }
   }
 
   // Test for 8-bit control characters.
-  if (ucs < 0xa0)
+  if (ucs < 0xa0) {
     return lib.wc.controlWidth;
+  }
 
   // Binary search in table of non-spacing characters.
-  if (lib.wc.isSpace(ucs))
+  if (lib.wc.isSpace(ucs)) {
     return 0;
+  }
 
   // Binary search in table of wide characters.
   return lib.wc.binaryTableSearch_(ucs, lib.wc.unambiguous) ? 2 : 1;
@@ -459,8 +463,9 @@ lib.wc.charWidthDisregardAmbiguous = function(ucs) {
  * @return {number} The column width of the given character.
  */
 lib.wc.charWidthRegardAmbiguous = function(ucs) {
-  if (lib.wc.isCjkAmbiguous(ucs))
+  if (lib.wc.isCjkAmbiguous(ucs)) {
     return lib.wc.cjkAmbiguousWidth;
+  }
 
   return lib.wc.charWidthDisregardAmbiguous(ucs);
 };
@@ -477,8 +482,9 @@ lib.wc.strWidth = function(str) {
   for (var i = 0; i < str.length;) {
     var codePoint = str.codePointAt(i);
     width = lib.wc.charWidth(codePoint);
-    if (width < 0)
+    if (width < 0) {
       return -1;
+    }
     rv += width;
     i += (codePoint <= 0xffff) ? 1 : 2;
   }
@@ -508,8 +514,9 @@ lib.wc.substr = function(str, start, opt_width) {
     for (width = 0; startIndex < str.length;) {
       const codePoint = str.codePointAt(startIndex);
       width += lib.wc.charWidth(codePoint);
-      if (width > start)
+      if (width > start) {
         break;
+      }
       startIndex += (codePoint <= 0xffff) ? 1 : 2;
     }
   }
@@ -518,8 +525,9 @@ lib.wc.substr = function(str, start, opt_width) {
     for (endIndex = startIndex, width = 0; endIndex < str.length;) {
       const codePoint = str.codePointAt(endIndex);
       width += lib.wc.charWidth(codePoint);
-      if (width > opt_width)
+      if (width > opt_width) {
         break;
+      }
       endIndex += (codePoint <= 0xffff) ? 1 : 2;
     }
     return str.substring(startIndex, endIndex);

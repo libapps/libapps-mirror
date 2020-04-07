@@ -62,8 +62,9 @@ lib.init = function(onInit, logFunction) {
     }
   };
 
-  if (typeof onInit != 'function')
+  if (typeof onInit != 'function') {
     throw new Error('Missing or invalid argument: onInit');
+  }
 
   setTimeout(initNext, 0);
 };

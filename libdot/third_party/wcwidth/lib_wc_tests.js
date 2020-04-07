@@ -45,14 +45,17 @@ it('strWidth-test', () => {
 it('charWidthDisregardAmbiguous-low', () => {
   var i;
 
-  for (i = 0; i < 0x20; ++i)
+  for (i = 0; i < 0x20; ++i) {
     assert.equal(0, lib.wc.charWidthDisregardAmbiguous(i));
+  }
 
-  for (i = 0x20; i < 0x7f; ++i)
+  for (i = 0x20; i < 0x7f; ++i) {
     assert.equal(1, lib.wc.charWidthDisregardAmbiguous(i));
+  }
 
-  for (i = 0x7f; i < 0xa0; ++i)
+  for (i = 0x7f; i < 0xa0; ++i) {
     assert.equal(0, lib.wc.charWidthDisregardAmbiguous(i));
+  }
 });
 
 it('charWidthRegardAmbiguous-test', () => {

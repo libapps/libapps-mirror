@@ -28,8 +28,9 @@ lib.f = {};
  */
 lib.f.replaceVars = function(str, vars) {
   return str.replace(/%([a-z]*)\(([^\)]+)\)/gi, function(match, fn, varname) {
-      if (typeof vars[varname] == 'undefined')
+      if (typeof vars[varname] == 'undefined') {
         throw 'Unknown variable: ' + varname;
+      }
 
       var rv = vars[varname];
 
@@ -71,8 +72,9 @@ lib.f.replaceVars.functions = {
  * @return {string} Fully qualified URI.
  */
 lib.f.getURL = function(path) {
-  if (lib.f.getURL.chromeSupported())
+  if (lib.f.getURL.chromeSupported()) {
     return chrome.runtime.getURL(path);
+  }
 
   return path;
 };
@@ -95,10 +97,12 @@ lib.f.getURL.chromeSupported = function() {
  * @return {number} The clamped value.
  */
 lib.f.clamp = function(v, min, max) {
-  if (v < min)
+  if (v < min) {
     return min;
-  if (v > max)
+  }
+  if (v > max) {
     return max;
+  }
   return v;
 };
 
@@ -142,16 +146,18 @@ lib.f.getStack = function(ignoreFrames = 0, count = undefined) {
   ignoreFrames += 2;
 
   const max = stackArray.length - ignoreFrames;
-  if (count === undefined)
+  if (count === undefined) {
     count = max;
-  else
+  } else {
     count = lib.f.clamp(count, 0, max);
+  }
 
   // Remove the leading spaces and "at" from each line:
   // '    at window.onload (file:///.../lib_test.js:11:18)'
   const stackObject = new Array();
-  for (let i = ignoreFrames; i < count + ignoreFrames; ++i)
+  for (let i = ignoreFrames; i < count + ignoreFrames; ++i) {
     stackObject.push(stackArray[i].replace(/^\s*at\s+/, ''));
+  }
 
   return stackObject;
 };
@@ -196,8 +202,9 @@ lib.f.randomInt = function(min, max) {
  */
 lib.f.getOs = function() {
   // Try the brower extensions API.
-  if (window.browser && browser.runtime && browser.runtime.getPlatformInfo)
+  if (window.browser && browser.runtime && browser.runtime.getPlatformInfo) {
     return browser.runtime.getPlatformInfo().then((info) => info.os);
+  }
 
   // Use the native Chrome API if available.
   if (window.chrome && chrome.runtime && chrome.runtime.getPlatformInfo) {
@@ -209,16 +216,17 @@ lib.f.getOs = function() {
   // browser API above.
   if (window.navigator && navigator.userAgent) {
     const ua = navigator.userAgent;
-    if (ua.includes('Mac OS X'))
+    if (ua.includes('Mac OS X')) {
       return Promise.resolve('mac');
-    else if (ua.includes('CrOS'))
+    } else if (ua.includes('CrOS')) {
       return Promise.resolve('cros');
-    else if (ua.includes('Linux'))
+    } else if (ua.includes('Linux')) {
       return Promise.resolve('linux');
-    else if (ua.includes('Android'))
+    } else if (ua.includes('Android')) {
       return Promise.resolve('android');
-    else if (ua.includes('Windows'))
+    } else if (ua.includes('Windows')) {
       return Promise.resolve('windows');
+    }
   }
 
   // Probe node environment.
@@ -238,8 +246,9 @@ lib.f.getOs = function() {
 lib.f.getChromeMilestone = function() {
   if (window.navigator && navigator.userAgent) {
     const ary = navigator.userAgent.match(/\sChrome\/(\d+)/);
-    if (ary)
+    if (ary) {
       return parseInt(ary[1], 10);
+    }
   }
 
   // Returning NaN will make all number comparisons fail.
@@ -257,15 +266,17 @@ lib.f.getChromeMilestone = function() {
  */
 lib.f.lastError = function(defaultMsg = null) {
   let lastError;
-  if (window.browser && browser.runtime)
+  if (window.browser && browser.runtime) {
     lastError = browser.runtime.lastError;
-  else if (window.chrome && chrome.runtime)
+  } else if (window.chrome && chrome.runtime) {
     lastError = chrome.runtime.lastError;
+  }
 
-  if (lastError && lastError.message)
+  if (lastError && lastError.message) {
     return lastError.message;
-  else
+  } else {
     return defaultMsg;
+  }
 };
 
 /**

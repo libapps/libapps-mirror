@@ -32,8 +32,9 @@ lib.PreferenceManager = function(storage, prefix = '/') {
 
   this.trace = false;
 
-  if (!prefix.endsWith('/'))
+  if (!prefix.endsWith('/')) {
     prefix += '/';
+  }
 
   this.prefix = prefix;
 
@@ -118,8 +119,9 @@ lib.PreferenceManager.Record.prototype.addObserver = function(observer) {
  */
 lib.PreferenceManager.Record.prototype.removeObserver = function(observer) {
   var i = this.observers.indexOf(observer);
-  if (i >= 0)
+  if (i >= 0) {
     this.observers.splice(i, 1);
+  }
 };
 
 /**
@@ -129,8 +131,9 @@ lib.PreferenceManager.Record.prototype.removeObserver = function(observer) {
  */
 lib.PreferenceManager.Record.prototype.get = function() {
   if (this.currentValue === this.DEFAULT_VALUE) {
-    if (/^(string|number)$/.test(typeof this.defaultValue))
+    if (/^(string|number)$/.test(typeof this.defaultValue)) {
       return this.defaultValue;
+    }
 
     if (typeof this.defaultValue == 'object') {
       // We want to return a COPY of the default value so that users can
@@ -151,8 +154,9 @@ lib.PreferenceManager.Record.prototype.get = function() {
  * that you don't get notified about irrelevant changes.
  */
 lib.PreferenceManager.prototype.deactivate = function() {
-  if (!this.isActive_)
+  if (!this.isActive_) {
     throw new Error('Not activated');
+  }
 
   this.isActive_ = false;
   this.storage.removeObserver(this.storageObserver_);
@@ -166,8 +170,9 @@ lib.PreferenceManager.prototype.deactivate = function() {
  * it's automatically called as part of the constructor.
  */
 lib.PreferenceManager.prototype.activate = function() {
-  if (this.isActive_)
+  if (this.isActive_) {
     throw new Error('Already activated');
+  }
 
   this.isActive_ = true;
   this.storage.addObserver(this.storageObserver_);
@@ -193,14 +198,16 @@ lib.PreferenceManager.prototype.readStorage = function(opt_callback) {
   var pendingChildren = 0;
 
   function onChildComplete() {
-    if (--pendingChildren == 0 && opt_callback)
+    if (--pendingChildren == 0 && opt_callback) {
       opt_callback();
+    }
   }
 
   var keys = Object.keys(this.prefRecords_).map((el) => this.prefix + el);
 
-  if (this.trace)
+  if (this.trace) {
     console.log('Preferences read: ' + this.prefix);
+  }
 
   this.storage.getItems(keys, function(items) {
       var prefixLength = this.prefix.length;
@@ -220,8 +227,9 @@ lib.PreferenceManager.prototype.readStorage = function(opt_callback) {
         }
       }
 
-      if (pendingChildren == 0 && opt_callback)
+      if (pendingChildren == 0 && opt_callback) {
         setTimeout(opt_callback);
+      }
     }.bind(this));
 };
 
@@ -251,8 +259,9 @@ lib.PreferenceManager.prototype.definePreference = function(
         new lib.PreferenceManager.Record(name, value);
   }
 
-  if (opt_onChange)
+  if (opt_onChange) {
     record.addObserver(opt_onChange);
+  }
 };
 
 /**
@@ -319,14 +328,17 @@ lib.PreferenceManager.prototype.addObserver = function(name, observer) {
  *     you don't need any.
  */
 lib.PreferenceManager.prototype.addObservers = function(global, map) {
-  if (global && typeof global != 'function')
+  if (global && typeof global != 'function') {
     throw new Error('Invalid param: globals');
+  }
 
-  if (global)
+  if (global) {
     this.globalObservers_.push(global);
+  }
 
-  if (!map)
+  if (!map) {
     return;
+  }
 
   for (var name in map) {
     this.addObserver(name, map[name]);
@@ -370,13 +382,15 @@ lib.PreferenceManager.prototype.notifyAll = function() {
  */
 lib.PreferenceManager.prototype.notifyChange_ = function(name) {
   var record = this.prefRecords_[name];
-  if (!record)
+  if (!record) {
     throw new Error('Unknown preference: ' + name);
+  }
 
   var currentValue = record.get();
 
-  for (var i = 0; i < this.globalObservers_.length; i++)
+  for (var i = 0; i < this.globalObservers_.length; i++) {
     this.globalObservers_[i](name, currentValue);
+  }
 
   for (var i = 0; i < record.observers.length; i++) {
     record.observers[i](currentValue, name, this);
@@ -402,16 +416,18 @@ lib.PreferenceManager.prototype.createChild = function(listName, opt_hint,
 
   if (opt_id) {
     id = opt_id;
-    if (ids.indexOf(id) != -1)
+    if (ids.indexOf(id) != -1) {
       throw new Error('Duplicate child: ' + listName + ': ' + id);
+    }
 
   } else {
     // Pick a random, unique 4-digit hex identifier for the new profile.
     while (!id || ids.indexOf(id) != -1) {
       id = lib.f.randomInt(1, 0xffff).toString(16);
       id = lib.f.zpad(id, 4);
-      if (opt_hint)
+      if (opt_hint) {
         id = opt_hint + ':' + id;
+      }
     }
   }
 
@@ -463,13 +479,15 @@ lib.PreferenceManager.prototype.removeChild = function(listName, id) {
  * @return {!lib.PreferenceManager} The specified child PreferenceManager.
  */
 lib.PreferenceManager.prototype.getChild = function(listName, id, opt_default) {
-  if (!(listName in this.childLists_))
+  if (!(listName in this.childLists_)) {
     throw new Error('Unknown child list: ' + listName);
+  }
 
   var childList = this.childLists_[listName];
   if (!(id in childList)) {
-    if (typeof opt_default == 'undefined')
+    if (typeof opt_default == 'undefined') {
       throw new Error('Unknown "' + listName + '" child: ' + id);
+    }
 
     return opt_default;
   }
@@ -493,8 +511,9 @@ lib.PreferenceManager.prototype.syncChildList = function(
 
   var pendingChildren = 0;
   function onChildStorage() {
-    if (--pendingChildren == 0 && opt_callback)
+    if (--pendingChildren == 0 && opt_callback) {
       opt_callback();
+    }
   }
 
   // The list of child ids that we *should* have a manager for.
@@ -508,8 +527,9 @@ lib.PreferenceManager.prototype.syncChildList = function(
     var id = currentIds[i];
 
     var managerIndex = oldIds.indexOf(id);
-    if (managerIndex >= 0)
+    if (managerIndex >= 0) {
       oldIds.splice(managerIndex, 1);
+    }
 
     if (!this.childLists_[listName][id]) {
       var childManager = this.childFactories_[listName](this, id);
@@ -529,8 +549,9 @@ lib.PreferenceManager.prototype.syncChildList = function(
     delete this.childLists_[listName][oldIds[i]];
   }
 
-  if (!pendingChildren && opt_callback)
+  if (!pendingChildren && opt_callback) {
     setTimeout(opt_callback);
+  }
 };
 
 /**
@@ -543,8 +564,9 @@ lib.PreferenceManager.prototype.syncChildList = function(
  */
 lib.PreferenceManager.prototype.reset = function(name) {
   var record = this.prefRecords_[name];
-  if (!record)
+  if (!record) {
     throw new Error('Unknown preference: ' + name);
+  }
 
   this.storage.removeItem(this.prefix + name);
 
@@ -631,8 +653,9 @@ lib.PreferenceManager.prototype.diff = function(a, b) {
  */
 lib.PreferenceManager.prototype.changeDefault = function(name, newValue) {
   var record = this.prefRecords_[name];
-  if (!record)
+  if (!record) {
     throw new Error('Unknown preference: ' + name);
+  }
 
   if (!this.diff(record.defaultValue, newValue)) {
     // Default value hasn't changed.
@@ -680,22 +703,26 @@ lib.PreferenceManager.prototype.changeDefaults = function(map) {
 lib.PreferenceManager.prototype.set = function(
     name, newValue, onComplete=undefined, saveToStorage=true) {
   var record = this.prefRecords_[name];
-  if (!record)
+  if (!record) {
     throw new Error('Unknown preference: ' + name);
+  }
 
   var oldValue = record.get();
 
-  if (!this.diff(oldValue, newValue))
+  if (!this.diff(oldValue, newValue)) {
     return Promise.resolve();
+  }
 
   if (this.diff(record.defaultValue, newValue)) {
     record.currentValue = newValue;
-    if (saveToStorage)
+    if (saveToStorage) {
       this.storage.setItem(this.prefix + name, newValue, onComplete);
+    }
   } else {
     record.currentValue = this.DEFAULT_VALUE;
-    if (saveToStorage)
+    if (saveToStorage) {
       this.storage.removeItem(this.prefix + name, onComplete);
+    }
   }
 
   // We need to manually send out the notification on this instance.  If we
@@ -719,8 +746,9 @@ lib.PreferenceManager.prototype.set = function(
  */
 lib.PreferenceManager.prototype.get = function(name) {
   var record = this.prefRecords_[name];
-  if (!record)
+  if (!record) {
     throw new Error('Unknown preference: ' + name);
+  }
 
   return record.get();
 };
@@ -797,8 +825,9 @@ lib.PreferenceManager.prototype.exportAsJson = function() {
 
     } else {
       var record = this.prefRecords_[name];
-      if (record.currentValue != this.DEFAULT_VALUE)
+      if (record.currentValue != this.DEFAULT_VALUE) {
         rv[name] = record.currentValue;
+      }
     }
   }
 
@@ -824,9 +853,11 @@ lib.PreferenceManager.prototype.importFromJson = function(json, onComplete) {
       }
 
       // We've delayed updates to the child arrays, so flush them now.
-      for (let name in json)
-        if (name in this.childLists_)
+      for (let name in json) {
+        if (name in this.childLists_) {
           this.set(name, this.get(name));
+        }
+      }
 
       this.isImportingJson_ = false;
     }
@@ -839,8 +870,9 @@ lib.PreferenceManager.prototype.importFromJson = function(json, onComplete) {
         var id = childList[i].id;
 
         var childPrefManager = this.childLists_[name][id];
-        if (!childPrefManager)
+        if (!childPrefManager) {
           childPrefManager = this.createChild(name, null, id);
+        }
 
         childPrefManager.importFromJson(childList[i].json, onWriteStorage);
         pendingWrites++;
@@ -876,8 +908,9 @@ lib.PreferenceManager.prototype.onChildListChange_ = function(listName) {
 lib.PreferenceManager.prototype.onStorageChange_ = function(map) {
   for (var key in map) {
     if (this.prefix) {
-      if (key.lastIndexOf(this.prefix, 0) != 0)
+      if (key.lastIndexOf(this.prefix, 0) != 0) {
         continue;
+      }
     }
 
     var name = key.substr(this.prefix.length);
@@ -891,8 +924,9 @@ lib.PreferenceManager.prototype.onStorageChange_ = function(map) {
 
     var newValue = map[key].newValue;
     var currentValue = record.currentValue;
-    if (currentValue === record.DEFAULT_VALUE)
+    if (currentValue === record.DEFAULT_VALUE) {
       currentValue = undefined;
+    }
 
     if (this.diff(currentValue, newValue)) {
       if (typeof newValue == 'undefined' || newValue === null) {

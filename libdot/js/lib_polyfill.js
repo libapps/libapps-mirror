@@ -24,15 +24,18 @@ lib.polyfill.stringPadStart = function() {
   String.prototype.padStart = function(targetLength, padString) {
     // If the string is already long enough, nothing to do!
     targetLength -= this.length;
-    if (targetLength <= 0)
+    if (targetLength <= 0) {
       return String(this);
+    }
 
-    if (padString === undefined)
+    if (padString === undefined) {
       padString = ' ';
+    }
 
     // In case the pad is multiple chars long.
-    if (targetLength > padString.length)
+    if (targetLength > padString.length) {
       padString = padString.repeat((targetLength / padString.length) + 1);
+    }
 
     return padString.slice(0, targetLength) + String(this);
   };
@@ -54,15 +57,18 @@ lib.polyfill.stringPadEnd = function() {
   String.prototype.padEnd = function(targetLength, padString) {
     // If the string is already long enough, nothing to do!
     targetLength -= this.length;
-    if (targetLength <= 0)
+    if (targetLength <= 0) {
       return String(this);
+    }
 
-    if (padString === undefined)
+    if (padString === undefined) {
       padString = ' ';
+    }
 
     // In case the pad is multiple chars long.
-    if (targetLength > padString.length)
+    if (targetLength > padString.length) {
       padString = padString.repeat((targetLength / padString.length) + 1);
+    }
 
     return String(this) + padString.slice(0, targetLength);
   };
@@ -158,7 +164,9 @@ lib.polyfill.promiseFinally = function() {
     return Promise.prototype.then.call(
       promise,
       x => new C(resolve => resolve(onFinally())).then(() => x),
-      e => new C(resolve => resolve(onFinally())).then(() => { throw e; })
+      e => new C(resolve => resolve(onFinally())).then(() => {
+        throw e;
+      })
     );
   }
   Object.defineProperty(Promise.prototype, 'finally', {

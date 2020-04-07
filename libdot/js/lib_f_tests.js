@@ -113,10 +113,11 @@ it('getOs', () => {
  */
 it('getChromeMilestone', () => {
   const milestone = lib.f.getChromeMilestone();
-  if (window.chrome)
+  if (window.chrome) {
     assert.isAbove(milestone, 30);
-  else
+  } else {
     assert.isNaN(milestone);
+  }
 });
 
 /**

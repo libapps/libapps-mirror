@@ -28,8 +28,9 @@ lib.Storage.Chrome = function(storage) {
  *     or "managed") the changes are for.
  */
 lib.Storage.Chrome.prototype.onChanged_ = function(changes, areaname) {
-  if (chrome.storage[areaname] != this.storage_)
+  if (chrome.storage[areaname] != this.storage_) {
     return;
+  }
 
   for (var i = 0; i < this.observers_.length; i++) {
     this.observers_[i](changes);
@@ -55,8 +56,9 @@ lib.Storage.Chrome.prototype.addObserver = function(callback) {
  */
 lib.Storage.Chrome.prototype.removeObserver = function(callback) {
   var i = this.observers_.indexOf(callback);
-  if (i != -1)
+  if (i != -1) {
     this.observers_.splice(i, 1);
+  }
 };
 
 /**

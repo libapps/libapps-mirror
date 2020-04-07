@@ -34,19 +34,25 @@ describe('lib_polyfill_tests.js', () => {
   }
 
 it('polyfills-string-pad-start', async () => {
-  function test() { assert.equal('23'.padStart(7, '01'), '0101023'); }
+  function test() {
+    assert.equal('23'.padStart(7, '01'), '0101023');
+  }
   await polyfillTest(
       String.prototype, 'padStart', lib.polyfill.stringPadStart, test);
 });
 
 it('polyfills-string-pad-end', async () => {
-  function test() { assert.equal('23'.padEnd(7, '01'), '2301010'); }
+  function test() {
+    assert.equal('23'.padEnd(7, '01'), '2301010');
+  }
   await polyfillTest(
       String.prototype, 'padEnd', lib.polyfill.stringPadEnd, test);
 });
 
 it('polyfills-object-values', async () => {
-  function test() { assert.deepEqual(Object.values({a: 1, b: 2}), [1, 2]); }
+  function test() {
+    assert.deepEqual(Object.values({a: 1, b: 2}), [1, 2]);
+  }
   await polyfillTest(Object, 'values', lib.polyfill.object, test);
 });
 

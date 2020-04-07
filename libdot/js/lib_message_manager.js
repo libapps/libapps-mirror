@@ -177,8 +177,9 @@ lib.MessageManager.prototype.get = function(msgname, args, fallback) {
 lib.MessageManager.prototype.processI18nAttributes = function(node) {
   var nodes = node.querySelectorAll('[i18n]');
 
-  for (var i = 0; i < nodes.length; i++)
+  for (var i = 0; i < nodes.length; i++) {
     this.processI18nAttribute(nodes[i]);
+  }
 };
 
 /**
@@ -209,8 +210,9 @@ lib.MessageManager.prototype.processI18nAttribute = function(node) {
   const thunk = (str) => str.replace(/-/g, '_').toUpperCase();
 
   var i18n = node.getAttribute('i18n');
-  if (!i18n)
+  if (!i18n) {
     return;
+  }
 
   try {
     i18n = JSON.parse(i18n);
@@ -232,14 +234,16 @@ lib.MessageManager.prototype.processI18nAttribute = function(node) {
     }
 
     // For "$foo", calculate the message name.
-    if (msgname.startsWith('$'))
+    if (msgname.startsWith('$')) {
       msgname = thunk(node.getAttribute(msgname.substr(1)) + '_' + key);
+    }
 
     // Finally load the message.
     var msg = this.get(msgname);
-    if (attr == '_')
+    if (attr == '_') {
       node.textContent = msg;
-    else
+    } else {
       node.setAttribute(attr, msg);
+    }
   }
 };

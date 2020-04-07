@@ -103,8 +103,9 @@ lib.colors.rgbToX11 = function(value) {
   }
 
   var ary = value.match(lib.colors.re_.rgbx);
-  if (!ary)
+  if (!ary) {
     return null;
+  }
 
   return 'rgb:' + scale(ary[1]) + '/' + scale(ary[2]) + '/' + scale(ary[3]);
 };
@@ -126,18 +127,21 @@ lib.colors.rgbToX11 = function(value) {
  *     converted.
  */
 lib.colors.x11HexToCSS = function(v) {
-  if (!v.startsWith('#'))
+  if (!v.startsWith('#')) {
     return null;
+  }
   // Strip the leading # off.
   v = v.substr(1);
 
   // Reject unknown sizes.
-  if ([3, 6, 9, 12].indexOf(v.length) == -1)
+  if ([3, 6, 9, 12].indexOf(v.length) == -1) {
     return null;
+  }
 
   // Reject non-hex values.
-  if (v.match(/[^a-f0-9]/i))
+  if (v.match(/[^a-f0-9]/i)) {
     return null;
+  }
 
   // Split the colors out.
   var size = v.length / 3;
@@ -201,10 +205,11 @@ lib.colors.x11ToCSS = function(v) {
   var ary = v.match(lib.colors.re_.x11rgb);
   if (!ary) {
     // Handle the legacy format.
-    if (v.startsWith('#'))
+    if (v.startsWith('#')) {
       return lib.colors.x11HexToCSS(v);
-    else
+    } else {
       return lib.colors.nameToRGB(v);
+    }
   }
 
   ary.splice(0, 1);
@@ -573,16 +578,19 @@ lib.colors.crackRGB = function(color) {
  * @return {?string} The corresponding CSS rgb(...) value.
  */
 lib.colors.nameToRGB = function(name) {
-  if (name in lib.colors.colorNames)
+  if (name in lib.colors.colorNames) {
     return lib.colors.colorNames[name];
+  }
 
   name = name.toLowerCase();
-  if (name in lib.colors.colorNames)
+  if (name in lib.colors.colorNames) {
     return lib.colors.colorNames[name];
+  }
 
   name = name.replace(/\s+/g, '');
-  if (name in lib.colors.colorNames)
+  if (name in lib.colors.colorNames) {
     return lib.colors.colorNames[name];
+  }
 
   return null;
 };

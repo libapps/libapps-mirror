@@ -59,8 +59,9 @@ lib.i18n.getMessage = function(msgname, substitutions = [], fallback = '') {
   // First let the native browser APIs handle everything for us.
   if (lib.i18n.browser_) {
     const message = lib.i18n.browser_.getMessage(msgname, substitutions);
-    if (message)
+    if (message) {
       return message;
+    }
   }
 
   // Do our best to get something reasonable.

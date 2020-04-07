@@ -11,8 +11,9 @@
 //    * granularity: 'sentence' does not understand decimals
 
 (function(global) {
-  if ('Intl' in global && 'Segmenter' in global.Intl)
+  if ('Intl' in global && 'Segmenter' in global.Intl) {
     return;
+  }
 
   global.Intl = global.Intl || {};
 
@@ -78,8 +79,9 @@
   function segment(locale, granularity, string) {
     const breaks = [];
     if ('v8BreakIterator' in global.Intl) {
-      if (granularity === 'grapheme')
+      if (granularity === 'grapheme') {
         granularity = 'character';
+      }
       const vbi = new global.Intl.v8BreakIterator(locale, {type: granularity});
       vbi.adoptText(string);
       let last = 0;
@@ -132,11 +134,14 @@
       this._breaks = breaks;
     }
 
-    [Symbol.iterator]() { return this; }
+    [Symbol.iterator]() {
+      return this;
+    }
 
     next() {
-      if (this._cur < this._breaks.length)
+      if (this._cur < this._breaks.length) {
         ++this._cur;
+      }
 
       if (this._cur >= this._breaks.length) {
         this._type = undefined;
@@ -154,11 +159,13 @@
     }
 
     following(index = undefined) {
-      if (!this._breaks.length)
+      if (!this._breaks.length) {
         return true;
+      }
       if (index === undefined) {
-        if (this._cur < this._breaks.length)
+        if (this._cur < this._breaks.length) {
           ++this._cur;
+        }
       } else {
         // TODO: binary search
         for (this._cur = 0;
@@ -173,13 +180,16 @@
     }
 
     preceding(index = undefined) {
-      if (!this._breaks.length)
+      if (!this._breaks.length) {
         return true;
+      }
       if (index === undefined) {
-        if (this._cur >= this._breaks.length)
+        if (this._cur >= this._breaks.length) {
           --this._cur;
-        if (this._cur >= 0)
+        }
+        if (this._cur >= 0) {
           --this._cur;
+        }
       } else {
         // TODO: binary search
         for (this._cur = this._breaks.length - 1;
@@ -195,10 +205,12 @@
     }
 
     get position() {
-      if (this._cur < 0 || !this._breaks.length)
+      if (this._cur < 0 || !this._breaks.length) {
         return this._breaks.initial;
-      if (this._cur >= this._breaks.length)
+      }
+      if (this._cur >= this._breaks.length) {
         return this._breaks[this._breaks.length - 1].pos;
+      }
       return this._breaks[this._cur].pos;
     }
 
