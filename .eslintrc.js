@@ -80,6 +80,7 @@ module.exports = {
     'quote-props': ['error', 'consistent'],
     'quotes': ['error', 'single',
                {'avoidEscape': true, 'allowTemplateLiterals': true}],
+    'radix': 'error',
     'rest-spread-spacing': 'error',
     'semi': ['error', 'always'],
     'semi-style': ['error', 'last'],
