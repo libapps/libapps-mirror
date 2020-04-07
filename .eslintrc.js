@@ -27,6 +27,7 @@ module.exports = {
     'arrow-spacing': ['error', {'before': true, 'after': true}],
     'block-spacing': ['error', 'always'],
     'comma-style': 'error',
+    'curly': 'error',
     'eol-last': 'error',
     'generator-star-spacing': ['error', 'after'],
     'lines-between-class-members': 'error',
