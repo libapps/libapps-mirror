@@ -861,7 +861,7 @@ nassh.agent.backends.GSC.DataObject.prototype.lookup = function(tag) {
     return this;
   }
   if (this.isConstructed) {
-    for (let child of this.children) {
+    for (const child of this.children) {
       let result = child.lookup(tag);
       if (result !== null) {
         return result;

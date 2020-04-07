@@ -175,8 +175,8 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
    * @param {...function(!Event)} handlers
    */
   function addListeners(node, events, ...handlers) {
-    for (let handler of handlers) {
-      for (let e of events) {
+    for (const handler of handlers) {
+      for (const e of events) {
         node.addEventListener(e, handler);
       }
     }
@@ -380,7 +380,7 @@ nassh.ConnectDialog.prototype.displayMountButton_ = function(state) {
   }
 
   chrome.fileSystemProvider.getAll((fileSystems) => {
-    for (let fs of fileSystems) {
+    for (const fs of fileSystems) {
       if (fs.fileSystemId == this.currentProfileRecord_.id) {
         this.displayButton_(this.mountButton_, false);
         this.displayButton_(this.unmountButton_, true);
