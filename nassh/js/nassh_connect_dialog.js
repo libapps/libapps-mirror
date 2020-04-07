@@ -99,8 +99,9 @@ nassh.ConnectDialog.prototype.onPreferencesReady_ = function() {
   if (this.profileList_.length > 1) {
     chrome.storage.local.get('/nassh/connectDialog/lastProfileId', (items) => {
       var lastProfileId = items['/nassh/connectDialog/lastProfileId'];
-      if (lastProfileId)
+      if (lastProfileId) {
         profileIndex = Math.max(0, this.getProfileIndex_(lastProfileId));
+      }
 
       this.shortcutList_.setActiveIndex(profileIndex);
       this.setCurrentProfileRecord(this.profileList_[profileIndex]);
@@ -141,8 +142,9 @@ nassh.ConnectDialog.ProfileRecord = function(id, prefs, textContent) {
  * @return {string}
  */
 nassh.ConnectDialog.prototype.msg = function(name, args) {
-  if (!this.mm_)
+  if (!this.mm_) {
     return 'loading...';
+  }
 
   return this.mm_.get(name.toUpperCase().replace(/-/g, '_'), args);
 };
@@ -291,14 +293,17 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
  */
 nassh.ConnectDialog.prototype.$f = function(name, attrName, attrValue) {
   var node = document.querySelector('#field-' + name);
-  if (!node)
+  if (!node) {
     throw new Error('Can\'t find: #field-' + name);
+  }
 
-  if (!attrName)
+  if (!attrName) {
     return node;
+  }
 
-  if (typeof attrValue == 'undefined')
+  if (typeof attrValue == 'undefined') {
     return node.getAttribute(attrName);
+  }
 
   node.setAttribute(attrName, attrValue);
 };
@@ -310,8 +315,9 @@ nassh.ConnectDialog.prototype.$f = function(name, attrName, attrValue) {
  */
 nassh.ConnectDialog.prototype.setCurrentProfileRecord = function(
     profileRecord) {
-  if (!profileRecord)
+  if (!profileRecord) {
     throw 'null profileRecord.';
+  }
 
   this.currentProfileRecord_ = profileRecord;
   this.syncForm_();
@@ -391,8 +397,9 @@ nassh.ConnectDialog.prototype.displayMountButton_ = function(state) {
  * Persist the current form to prefs, even if it's invalid.
  */
 nassh.ConnectDialog.prototype.save = function() {
-  if (!this.$f('description').value)
+  if (!this.$f('description').value) {
     return;
+  }
 
   var dirtyForm = false;
   var changedFields = {};
@@ -420,8 +427,9 @@ nassh.ConnectDialog.prototype.save = function() {
          }
        }
 
-       if ((!prefs && !value) || (prefs && value == prefs.get(name)))
+       if ((!prefs && !value) || (prefs && value == prefs.get(name))) {
          return;
+       }
 
        dirtyForm = true;
        changedFields[name] = value;
@@ -531,8 +539,9 @@ nassh.ConnectDialog.prototype.maybeDirty_ = function(fieldName) {
       this.currentProfileRecord_.dirty = true;
     }
   } else {
-    if (this.$f(fieldName).value)
+    if (this.$f(fieldName).value) {
       this.currentProfileRecord_.dirty = true;
+    }
   }
 };
 
@@ -619,8 +628,9 @@ nassh.ConnectDialog.prototype.updateNasshOptionsPlaceholder_ = function() {
   let value = this.msg('FIELD_NASSH_OPTIONS_PLACEHOLDER');
   if (!this.$f('nassh-options').value) {
     let hostname = this.$f('hostname').value;
-    if (!hostname)
+    if (!hostname) {
       hostname = this.$f('hostname').placeholder;
+    }
 
     const googleHostRegexp = new RegExp(
         '\\.(' +
@@ -649,8 +659,9 @@ nassh.ConnectDialog.prototype.updateDescriptionPlaceholder_ = function() {
     placeholder = username + '@' + hostname;
 
     var v = this.$f('port').value;
-    if (v)
+    if (v) {
       placeholder += ':' + v;
+    }
   } else {
     placeholder = this.msg('FIELD_DESCRIPTION_PLACEHOLDER');
   }
@@ -851,8 +862,9 @@ nassh.ConnectDialog.prototype.deleteProfile_ = function(deadID) {
  */
 nassh.ConnectDialog.prototype.getProfileIndex_ = function(id) {
   for (var i = 0; i < this.profileList_.length; i++) {
-    if (this.profileList_[i].id == id)
+    if (this.profileList_[i].id == id) {
       return i;
+    }
   }
 
   return -1;
@@ -876,8 +888,9 @@ nassh.ConnectDialog.prototype.syncProfiles_ = function(callback) {
     var id = ids[i];
     var p;
 
-    if (this.currentProfileRecord_ && id == this.currentProfileRecord_.id)
+    if (this.currentProfileRecord_ && id == this.currentProfileRecord_.id) {
       currentProfileExists = true;
+    }
 
     if (id == this.emptyProfileRecord_.id) {
       emptyProfileExists = true;
@@ -929,8 +942,9 @@ nassh.ConnectDialog.prototype.syncProfiles_ = function(callback) {
   };
 
   this.profileList_.forEach((profile) => {
-    if (profile.prefs)
+    if (profile.prefs) {
       profile.prefs.readStorage(onRead.bind(this, profile));
+    }
   });
 };
 
@@ -1024,8 +1038,9 @@ nassh.ConnectDialog.prototype.onDocumentKeyDown_ = function(e) {
     case 'p':  // Chrome print (!shift) and OS print (shift).
     case 'o':  // Open (!shift) and bookmark manager (shift).
     case 't':  // New tab (!shift) and new incognito tab (shift).
-      if (e.ctrlKey && !e.altKey && !e.metaKey)
+      if (e.ctrlKey && !e.altKey && !e.metaKey) {
         cancel = true;
+      }
       break;
 
     // Shortcuts where we only kill non-shift variants (and allow shift).
@@ -1033,8 +1048,9 @@ nassh.ConnectDialog.prototype.onDocumentKeyDown_ = function(e) {
     case 'h':  // History.
     case 's':  // Save.
     case 'u':  // View source.
-      if (e.ctrlKey && !e.altKey && !e.metaKey && !e.shiftKey)
+      if (e.ctrlKey && !e.altKey && !e.metaKey && !e.shiftKey) {
         cancel = true;
+      }
       break;
   }
 
@@ -1095,8 +1111,9 @@ nassh.ConnectDialog.prototype.onProfileIndexChanged = function(e) {
  * @param {!Event} e
  */
 nassh.ConnectDialog.prototype.onButtonKeypress_ = function(e) {
-  if (e.charCode == 13 || e.charCode == 32)
+  if (e.charCode == 13 || e.charCode == 32) {
     e.srcElement.click();
+  }
 };
 
 /**
@@ -1117,8 +1134,9 @@ nassh.ConnectDialog.prototype.onUnmountClick_ = function() {
  * Someone clicked on the connect button.
  */
 nassh.ConnectDialog.prototype.onConnectClick_ = function() {
-  if (this.connectButton_.getAttribute('disabled'))
+  if (this.connectButton_.getAttribute('disabled')) {
     return;
+  }
 
   this.connect();
 };
@@ -1129,8 +1147,9 @@ nassh.ConnectDialog.prototype.onConnectClick_ = function() {
  * @param {!Event} e
  */
 nassh.ConnectDialog.prototype.onSftpClientClick_ = function(e) {
-  if (this.sftpClientButton_.getAttribute('disabled'))
+  if (this.sftpClientButton_.getAttribute('disabled')) {
     return;
+  }
 
   this.sftpConnect();
 };
@@ -1141,8 +1160,9 @@ nassh.ConnectDialog.prototype.onSftpClientClick_ = function(e) {
  * @param {!Event} e
  */
 nassh.ConnectDialog.prototype.onDeleteClick_ = function(e) {
-  if (this.deleteButton_.getAttribute('disabled'))
+  if (this.deleteButton_.getAttribute('disabled')) {
     return;
+  }
 
   if (document.activeElement.getAttribute('id') == 'field-identity') {
     this.deleteIdentity_(e.target.value);
@@ -1189,7 +1209,7 @@ nassh.ConnectDialog.prototype.onFormFocusChange_ = function(e) {
  * Pref callback invoked when the global 'profile-ids' changed.
  */
 nassh.ConnectDialog.prototype.onProfileListChanged_ = function() {
-  this.syncProfiles_(() => { this.shortcutList_.redraw(); });
+  this.syncProfiles_(() => this.shortcutList_.redraw());
 };
 
 /**
@@ -1258,9 +1278,11 @@ nassh.ConnectDialog.prototype.onMessageName_['terminal-info'] = function(info) {
     vars['--nassh-cursor-color-' + i] = lib.colors.setAlpha(cursor, i / 100);
   }
 
-  for (var key in vars)
-    if (key.startsWith('--nassh-'))
+  for (var key in vars) {
+    if (key.startsWith('--nassh-')) {
       document.documentElement.style.setProperty(key, vars[key]);
+    }
+  }
 
   // Tell the parent we've finished loading all the terminal details.
   this.postMessage('terminal-info-ok');

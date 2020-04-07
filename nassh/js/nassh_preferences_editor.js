@@ -94,16 +94,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
     profile.oninput = function() {
         nassh.PreferencesEditor.debounce(profile, function(input) {
             prefsEditor.notify(nassh.msg('LOADING_LABEL'), 500);
-            if (input.value.length)
+            if (input.value.length) {
               prefsEditor.selectProfile(input.value);
+            }
           });
       };
     profile.value = nassh.msg('FIELD_TERMINAL_PROFILE_PLACEHOLDER');
 
     // Allow people to reset individual fields by pressing escape.
     document.onkeyup = function(e) {
-        if (document.activeElement.name == 'settings' && e.keyCode == 27)
+        if (document.activeElement.name == 'settings' && e.keyCode == 27) {
           prefsEditor.reset(document.activeElement);
+        }
       };
 
     // If the user wants a specific page, navigate to it now.
@@ -236,8 +238,9 @@ nassh.PreferencesEditor.prototype.selectProfile = function(profileId) {
  */
 nassh.PreferencesEditor.prototype.onBackupClick = function(e) {
   // If we generated this event, just let it happen.
-  if (!e || e.synthetic)
+  if (!e || e.synthetic) {
     return;
+  }
 
   this.updateBackupLink(function() {
     var event = new MouseEvent(e.type, e);
@@ -264,8 +267,9 @@ nassh.PreferencesEditor.prototype.onRestoreClick = function(e) {
   }
   var input = document.querySelector('input.restore');
   input.onchange = () => {
-    if (input.files.length != 1)
+    if (input.files.length != 1) {
       return;
+    }
 
     input.files[0].text().then((result) => {
       const obj = /** @type {!Object} */ (JSON.parse(result));
@@ -313,8 +317,9 @@ nassh.PreferencesEditor.prototype.colorSave = function(key) {
  */
 nassh.PreferencesEditor.prototype.save = function(input) {
   // Skip ones we don't yet handle.
-  if (input.disabled)
+  if (input.disabled) {
     return;
+  }
 
   var keys = input.id.split(':');
   var key = keys[0];
@@ -424,10 +429,11 @@ nassh.PreferencesEditor.prototype.sync = function(input) {
 
     case 'string':
     case 'multiline-string':
-      if (prefValue == null)
+      if (prefValue == null) {
         input.value = '';
-      else
+      } else {
         input.value = prefValue;
+      }
       break;
 
     case 'color':
@@ -435,10 +441,11 @@ nassh.PreferencesEditor.prototype.sync = function(input) {
       break;
 
     case 'url':
-      if (prefValue == null)
+      if (prefValue == null) {
         input.value = '';
-      else
+      } else {
         input.value = prefValue;
+      }
       break;
 
     case 'value':
@@ -446,10 +453,11 @@ nassh.PreferencesEditor.prototype.sync = function(input) {
       // Use an indent for the stringify so the output is formatted somewhat
       // nicely.  Otherwise, the default output packs everything into a single
       // line and strips out all whitespace making it an unreadable mess.
-      if (prefValue == null)
+      if (prefValue == null) {
         input.value = '';
-      else
+      } else {
         input.value = JSON.stringify(prefValue, null, '  ');
+      }
       break;
   }
 };
@@ -614,8 +622,9 @@ nassh.PreferencesEditor.prototype.createInput = function(key) {
           // we debounce the input.  So manually save & restore cursor.
           var i = input.selectionStart;
           prefsEditor.onInputChange(input);
-          if (document.activeElement === input)
+          if (document.activeElement === input) {
             input.setSelectionRange(i, i);
+          }
         });
     };
   var onchange = function() {
@@ -709,8 +718,9 @@ nassh.PreferencesEditor.prototype.createInput = function(key) {
  */
 nassh.PreferencesEditor.prototype.getPreferenceDescription = function(key) {
   var entry = hterm.PreferenceManager.defaultPreferences[key];
-  if (entry === undefined)
+  if (entry === undefined) {
     return '';
+  }
 
   const id = 'PREF_' + key.replace(/-/g, '_').toUpperCase();
   return hterm.msg(id, [], entry['help']);
@@ -751,8 +761,9 @@ nassh.PreferencesEditor.prototype.getPreferenceType = function(key) {
   var entry = hterm.PreferenceManager.defaultPreferences[key];
   if (entry) {
     const prefType = entry['type'];
-    if (Array.isArray(prefType))
+    if (Array.isArray(prefType)) {
       return 'enum';
+    }
     return prefType;
   }
 
@@ -773,8 +784,9 @@ nassh.PreferencesEditor.prototype.getPreferenceEnumValues = function(key) {
   var entry = hterm.PreferenceManager.defaultPreferences[key];
   if (entry) {
     const prefType = entry['type'];
-    if (Array.isArray(prefType))
+    if (Array.isArray(prefType)) {
       return prefType;
+    }
   }
 
   console.warn('Pref. is not an enum', key);
@@ -787,8 +799,9 @@ nassh.PreferencesEditor.prototype.getPreferenceEnumValues = function(key) {
  */
 nassh.PreferencesEditor.prototype.getPreferenceCategory = function(key) {
   var entry = hterm.PreferenceManager.defaultPreferences[key];
-  if (entry)
+  if (entry) {
     return entry['category'];
+  }
 
   return hterm.PreferenceManager.Categories.Miscellaneous;
 };
@@ -800,8 +813,9 @@ nassh.PreferencesEditor.prototype.resetAll = function() {
   var settings = document.getElementsByName('settings');
 
   this.prefs_.resetAll();
-  for (var i = 0; i < settings.length; ++i)
+  for (var i = 0; i < settings.length; ++i) {
     this.sync(settings[i]);
+  }
   this.notify(nassh.msg('PREFERENCES_RESET'));
 };
 

@@ -76,8 +76,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
   // back and forth.
   let count =
       parseInt(window.sessionStorage.getItem('googleRelay.redirectCount'), 10);
-  if (isNaN(count))
+  if (isNaN(count)) {
     count = 0;
+  }
   if (++count > 3) {
     showNasshError('Redirected by relay too many times, so giving up.  Sorry.');
     window.sessionStorage.removeItem('googleRelay.redirectCount');

@@ -37,8 +37,9 @@ nassh.App.prototype.omniboxOnInputStarted_ = function() {
     var profile = this.prefs_.getProfile(id);
 
     var port = profile.get('port') || '';
-    if (port)
+    if (port) {
       port = ':' + port;
+    }
 
     return {
       uhp: profile.get('username') + '@' + profile.get('hostname') + port,
@@ -51,14 +52,16 @@ nassh.App.prototype.omniboxOnInputStarted_ = function() {
   // our active profiles.
   this.prefs_.readStorage(() => {
     var ids = this.prefs_.get('profile-ids');
-    for (var i = 0; i < ids.length; ++i)
+    for (var i = 0; i < ids.length; ++i) {
       this.omniMatches_.push(profileIdToOmni.call(this, ids[i]));
+    }
 
     chrome.storage.local.get('/nassh/connectDialog/lastProfileId',
       (items) => {
         var lastProfileId = items['/nassh/connectDialog/lastProfileId'];
-        if (lastProfileId)
+        if (lastProfileId) {
           this.omniDefault_ = profileIdToOmni.call(this, lastProfileId);
+        }
       });
   });
 };
@@ -76,26 +79,29 @@ nassh.App.prototype.omniboxOnInputChanged_ = function(text, suggest) {
   var resultsDescSubstr = [];
 
   this.omniMatches_.forEach((match) => {
-    if (match.uhp.startsWith(text))
+    if (match.uhp.startsWith(text)) {
       resultsUhp.push({
         content: 'profile-id:' + match.id,
         description: lib.f.replaceVars(
           '<match>%escapeHTML(uhp)</match>: %escapeHTML(desc)', match),
       });
+    }
 
-    if (match.desc.startsWith(text))
+    if (match.desc.startsWith(text)) {
       resultsDescLeading.push({
         content: 'profile-id:' + match.id,
         description: lib.f.replaceVars(
           '%escapeHTML(uhp): <match>%escapeHTML(desc)</match>', match),
       });
+    }
 
-    if (match.desc.includes(text))
+    if (match.desc.includes(text)) {
       resultsDescSubstr.push({
         content: 'profile-id:' + match.id,
         description: lib.f.replaceVars(
           '%escapeHTML(uhp): <match>%escapeHTML(desc)</match>', match),
       });
+    }
   });
 
   // Now merge the suggestions together in order.
@@ -103,15 +109,17 @@ nassh.App.prototype.omniboxOnInputChanged_ = function(text, suggest) {
   if (results.length == 0 || text.trim().length == 0) {
     // If they're just starting input, or if we have no matches, then show the
     // last connection used first.
-    if (this.omniDefault_)
+    if (this.omniDefault_) {
       results.unshift({
         content: 'profile-id:' + this.omniDefault_.id,
         description: lib.f.replaceVars('%escapeHTML(uhp): %escapeHTML(desc)',
                                        this.omniDefault_),
       });
+    }
   }
-  if (results.length)
+  if (results.length) {
     suggest(results);
+  }
 };
 
 /**
@@ -199,8 +207,9 @@ nassh.App.prototype.installOmnibox = function(omnibox) {
  * Bind our callbacks to the browser action button (for extensions).
  */
 nassh.App.prototype.installBrowserAction = function() {
-  if (!nassh.browserAction)
+  if (!nassh.browserAction) {
     return;
+  }
 
   nassh.browserAction.onClicked.addListener(this.onLaunched.bind(this));
 };

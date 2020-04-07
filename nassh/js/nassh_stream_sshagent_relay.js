@@ -93,7 +93,9 @@ nassh.Stream.SSHAgentRelay.prototype.asyncOpen = function(
  * @override
  */
 nassh.Stream.SSHAgentRelay.prototype.close = function() {
-  if (this.port_) this.port_.disconnect();
+  if (this.port_) {
+    this.port_.disconnect();
+  }
   nassh.Stream.prototype.close.call(this);
 };
 

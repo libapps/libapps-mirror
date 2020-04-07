@@ -570,8 +570,9 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true,
     // Strip off the "ssh:" prefix.
     uri = uri.substr(4);
     // Strip off the "//" if it exists.
-    if (uri.startsWith('//'))
+    if (uri.startsWith('//')) {
       uri = uri.substr(2);
+    }
   }
 
   /* eslint-disable */
@@ -581,8 +582,9 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true,
       /^([^@]+)@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:@]+)(?::(\d+))?(?:@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:]+)(?::(\d+))?)?$/);
   /* eslint-enable */
 
-  if (!ary)
+  if (!ary) {
     return null;
+  }
 
   let params = {};
   var username = ary[1];
@@ -590,8 +592,9 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true,
   var port = ary[3];
 
   // If it's IPv6, remove the brackets.
-  if (hostname.startsWith('[') && hostname.endsWith(']'))
+  if (hostname.startsWith('[') && hostname.endsWith(']')) {
     hostname = hostname.substr(1, hostname.length - 2);
+  }
 
   var relayHostname, relayPort;
   if (ary[4]) {
@@ -600,8 +603,9 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema=true,
     if (relayHostname.startsWith('[') && relayHostname.endsWith(']')) {
       relayHostname = relayHostname.substr(1, relayHostname.length - 2);
     }
-    if (ary[5])
+    if (ary[5]) {
       relayPort = ary[5];
+    }
   }
 
   const decode = (x) => decodeComponents && x ? unescape(x) : x;
@@ -664,8 +668,9 @@ nassh.CommandInstance.parseDestination = function(destination) {
   if (destination.startsWith('uri:')) {
     // Strip off the "uri:" before decoding it.
     destination = unescape(destination.substr(4));
-    if (!destination.startsWith('ssh:'))
+    if (!destination.startsWith('ssh:')) {
       return null;
+    }
 
     stripSchema = true;
     decodeComponents = true;
@@ -673,15 +678,17 @@ nassh.CommandInstance.parseDestination = function(destination) {
 
   const rv = nassh.CommandInstance.parseURI(destination, stripSchema,
                                             decodeComponents);
-  if (rv === null)
+  if (rv === null) {
     return rv;
+  }
 
   // Turn the relay URI settings into nassh command line options.
   let nasshOptions;
   if (rv.relayHostname !== undefined) {
     nasshOptions = '--proxy-host=' + rv.relayHostname;
-    if (rv.relayPort !== undefined)
+    if (rv.relayPort !== undefined) {
       nasshOptions += ' --proxy-port=' + rv.relayPort;
+    }
   }
   rv.nasshOptions = nasshOptions;
 
@@ -794,10 +801,11 @@ nassh.CommandInstance.splitCommandLine = function(argstr) {
     // Strip out any whitespace.  There shouldn't be anything left that the
     // regex wouldn't have matched, but let's be paranoid.
     args = args.trim();
-    if (args)
+    if (args) {
       ary = [args];
-    else
+    } else {
       ary = [];
+    }
   }
 
   return {
@@ -1020,8 +1028,9 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
   // user so it's clear where we end up trying to connect to.
   var idn_hostname = punycode.toASCII(params.hostname);
   var disp_hostname = params.hostname;
-  if (idn_hostname != params.hostname)
+  if (idn_hostname != params.hostname) {
     disp_hostname += ' (' + idn_hostname + ')';
+  }
 
   this.io.onVTKeystroke = this.onVTKeystroke_.bind(this);
   this.io.sendString = this.sendString_.bind(this);
@@ -1034,8 +1043,9 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
   argv.environment = this.environment_;
   argv.writeWindow = 8 * 1024;
 
-  if (this.isSftp)
+  if (this.isSftp) {
     argv.subsystem = 'sftp';
+  }
 
   argv.arguments = [];
 
@@ -1053,8 +1063,9 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
       Object.keys(argv.environment).map((x) => `-oSendEnv=${x}`));
 
   // Disable IP address check for connection through proxy.
-  if (argv.useJsSocket)
+  if (argv.useJsSocket) {
     argv.arguments.push('-o CheckHostIP=no');
+  }
 
   if (params.identity) {
     // Load legacy/filtered keys from /.ssh/.
@@ -1064,8 +1075,9 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
 
     argv.arguments.push(`-i/.ssh/identity/${params.identity}`);
   }
-  if (params.port)
+  if (params.port) {
     argv.arguments.push('-p' + params.port);
+  }
 
   // We split the username apart so people can use whatever random characters in
   // it they want w/out causing parsing troubles ("@" or leading "-" or " ").
@@ -1075,11 +1087,13 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
   // Finally, we append the custom command line the user has constructed.
   // This matches native `ssh` behavior and makes our lives simpler.
   var extraArgs = nassh.CommandInstance.splitCommandLine(params.argstr);
-  if (extraArgs.args)
+  if (extraArgs.args) {
     argv.arguments = argv.arguments.concat(extraArgs.args);
+  }
   argv.arguments = argv.arguments.concat(params.userSshArgs);
-  if (extraArgs.command)
+  if (extraArgs.command) {
     argv.arguments.push('--', extraArgs.command);
+  }
 
   this.authAgentAppID_ = params.authAgentAppID;
   // If the agent app ID is not just an app ID, we parse it for the IDs of
@@ -1445,8 +1459,9 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
  * @return {string|undefined} Message to display.
  */
 nassh.CommandInstance.prototype.onBeforeUnload_ = function(e) {
-  if (hterm.windowType == 'popup')
+  if (hterm.windowType == 'popup') {
     return;
+  }
 
   var msg = nassh.msg('BEFORE_UNLOAD');
   e.returnValue = msg;
@@ -1671,8 +1686,9 @@ nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
 nassh.CommandInstance.prototype.onSftpInitialised = function() {
   if (this.isMount) {
     // Newer versions of Chrome support this API, but olders will error out.
-    if (lib.f.getChromeMilestone() >= 64)
+    if (lib.f.getChromeMilestone() >= 64) {
       this.mountOptions['persistent'] = false;
+    }
 
     // Mount file system.
     chrome.fileSystemProvider.mount(this.mountOptions);

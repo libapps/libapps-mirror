@@ -63,11 +63,13 @@ nassh.Stream.GoogleRelay.prototype.asyncOpen = function(settings, onComplete) {
   };
 
   var onReady = () => {
-    if (sessionRequest.readyState != XMLHttpRequest.DONE)
+    if (sessionRequest.readyState != XMLHttpRequest.DONE) {
       return;
+    }
 
-    if (sessionRequest.status != 200)
+    if (sessionRequest.status != 200) {
       return onError();
+    }
 
     this.sessionID_ = sessionRequest.responseText;
     this.resumeRead_();
@@ -105,8 +107,9 @@ nassh.Stream.GoogleRelay.prototype.asyncWrite = function(data, onSuccess) {
       this.writeBuffer_, new Uint8Array(data));
   this.onWriteSuccess_ = onSuccess;
 
-  if (!this.backoffTimeout_)
+  if (!this.backoffTimeout_) {
     this.sendWrite_();
+  }
 };
 
 /**
@@ -157,15 +160,17 @@ nassh.Stream.GoogleRelay.prototype.requestSuccess_ = function(isRead) {
 
 /** @param {boolean} isRead */
 nassh.Stream.GoogleRelay.prototype.requestError_ = function(isRead) {
-  if (!this.sessionID_ || this.backoffTimeout_)
+  if (!this.sessionID_ || this.backoffTimeout_) {
     return;
+  }
 
   if (!this.backoffMS_) {
     this.backoffMS_ = 1;
   } else {
     this.backoffMS_ = this.backoffMS_ * 2 + 13;
-    if (this.backoffMS_ > 10000)
+    if (this.backoffMS_ > 10000) {
       this.backoffMS_ = 10000 - (this.backoffMS_ % 9000);
+    }
   }
 
   var requestType = isRead ? 'read' : 'write';
@@ -279,8 +284,9 @@ nassh.Stream.GoogleRelayXHR.prototype.sendWrite_ = function() {
  * @param {!Event} e
  */
 nassh.Stream.GoogleRelayXHR.prototype.onReadReady_ = function(e) {
-  if (this.readRequest_.readyState != XMLHttpRequest.DONE)
+  if (this.readRequest_.readyState != XMLHttpRequest.DONE) {
     return;
+  }
 
   if (this.readRequest_.status == 410) {
     // HTTP 410 Gone indicates that the relay has dropped our ssh session.
@@ -311,8 +317,9 @@ nassh.Stream.GoogleRelayXHR.prototype.onReadReady_ = function(e) {
  * @param {!Event} e
  */
 nassh.Stream.GoogleRelayXHR.prototype.onWriteDone_ = function(e) {
-  if (this.writeRequest_.readyState != XMLHttpRequest.DONE)
+  if (this.writeRequest_.readyState != XMLHttpRequest.DONE) {
     return;
+  }
 
   if (this.writeRequest_.status == 410) {
     // HTTP 410 Gone indicates that the relay has dropped our ssh session.
@@ -330,8 +337,9 @@ nassh.Stream.GoogleRelayXHR.prototype.onWriteDone_ = function(e) {
 
   this.requestSuccess_(false);
 
-  if (typeof this.onWriteSuccess_ == 'function')
+  if (typeof this.onWriteSuccess_ == 'function') {
     this.onWriteSuccess_(this.writeCount_);
+  }
 };
 
 /** @param {!Event} e */
@@ -414,8 +422,9 @@ nassh.Stream.GoogleRelayWS.prototype.resumeRead_ = function() {
         'connect?sid=' + this.sessionID_ +
         '&ack=' + (this.readCount_ & 0xffffff) +
         '&pos=' + (this.writeCount_ & 0xffffff);
-    if (this.relay_.reportConnectAttempts)
+    if (this.relay_.reportConnectAttempts) {
       uri += '&try=' + ++this.connectCount_;
+    }
     this.socket_ = new WebSocket(uri);
     this.socket_.binaryType = 'arraybuffer';
     this.socket_.onopen = this.onSocketOpen_.bind(this);
@@ -429,8 +438,9 @@ nassh.Stream.GoogleRelayWS.prototype.resumeRead_ = function() {
 
 /** @param {!Event} e */
 nassh.Stream.GoogleRelayWS.prototype.onSocketOpen_ = function(e) {
-  if (e.target !== this.socket_)
+  if (e.target !== this.socket_) {
     return;
+  }
 
   this.connectCount_ = 0;
   this.requestSuccess_(false);
@@ -444,8 +454,9 @@ nassh.Stream.GoogleRelayWS.prototype.recordAckTime_ = function(deltaTime) {
   if (this.ackTimesIndex_ == 0) {
     // Filled the circular buffer; compute average.
     var average = 0;
-    for (var i = 0; i < this.ackTimes_.length; ++i)
+    for (var i = 0; i < this.ackTimes_.length; ++i) {
       average += this.ackTimes_[i];
+    }
     average /= this.ackTimes_.length;
 
     if (this.relay_.reportAckLatency) {
@@ -459,8 +470,9 @@ nassh.Stream.GoogleRelayWS.prototype.recordAckTime_ = function(deltaTime) {
 
 /** @param {!Event} e */
 nassh.Stream.GoogleRelayWS.prototype.onSocketData_ = function(e) {
-  if (e.target !== this.socket_)
+  if (e.target !== this.socket_) {
     return;
+  }
 
   const dv = new DataView(e.data);
   const ack = dv.getUint32(0);
@@ -501,8 +513,9 @@ nassh.Stream.GoogleRelayWS.prototype.onSocketData_ = function(e) {
 
 /** @param {!Event} e */
 nassh.Stream.GoogleRelayWS.prototype.onSocketError_ = function(e) {
-  if (e.target !== this.socket_)
+  if (e.target !== this.socket_) {
     return;
+  }
 
   this.socket_.close();
   this.socket_ = null;

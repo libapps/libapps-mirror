@@ -292,10 +292,11 @@ nassh.sftp.packets.bitsToUnixModeLine = function(bits) {
     [nassh.sftp.packets.PermissionBits.IFLNK]: 'l',
     [nassh.sftp.packets.PermissionBits.IFSOCK]: 's',
   };
-  if (fmtMap[ifmt] === undefined)
+  if (fmtMap[ifmt] === undefined) {
     ret += '?';
-  else
+  } else {
     ret += fmtMap[ifmt];
+  }
 
   // Then handle user/group/other permissions.
   function threebits(bits, sid, x, X) {

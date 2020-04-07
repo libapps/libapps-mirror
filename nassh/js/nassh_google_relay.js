@@ -214,10 +214,11 @@ nassh.GoogleRelay.findGnubbyExtension = function() {
 
       // If the probe worked, return the id, else return nothing so we can
       // clear out all the pending promises.
-      if (result !== undefined && result['rc'] == 0)
+      if (result !== undefined && result['rc'] == 0) {
         resolve(id);
-      else
+      } else {
         resolve();
+      }
     });
   });
 

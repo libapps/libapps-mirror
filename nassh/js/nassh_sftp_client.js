@@ -333,16 +333,18 @@ nassh.sftp.Client.prototype.isSuccessResponse_ = function(responsePacket,
 nassh.sftp.Client.prototype.isNameResponse_ = function(responsePacket,
     requestType) {
   if (responsePacket instanceof nassh.sftp.packets.StatusPacket) {
-    if (responsePacket.code != nassh.sftp.packets.StatusCodes.EOF)
+    if (responsePacket.code != nassh.sftp.packets.StatusCodes.EOF) {
       throw new nassh.sftp.StatusError(responsePacket, requestType);
+    }
 
     // EOF
     return responsePacket;
   }
 
-  if (!(responsePacket instanceof nassh.sftp.packets.NamePacket))
+  if (!(responsePacket instanceof nassh.sftp.packets.NamePacket)) {
     throw new TypeError('Received unexpected response to '
                         + requestType + ' packet: ' + responsePacket);
+  }
 
   return responsePacket;
 };

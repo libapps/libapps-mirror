@@ -29,8 +29,9 @@ nassh.StreamSet = function() {
  * @return {!nassh.Stream}
  */
 nassh.StreamSet.prototype.openStream = function(streamClass, fd, arg, onOpen) {
-  if (this.openStreams_[fd])
+  if (this.openStreams_[fd]) {
     throw nassh.Stream.ERR_FD_IN_USE;
+  }
 
   var stream = new streamClass(fd, arg);
 

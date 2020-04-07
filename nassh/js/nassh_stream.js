@@ -54,8 +54,9 @@ nassh.Stream.prototype.asyncOpen = function(settings, onOpen) {
  * @param {function(!ArrayBuffer)} onRead
  */
 nassh.Stream.prototype.asyncRead = function(size, onRead) {
-  if (this.onDataAvailable === undefined)
+  if (this.onDataAvailable === undefined) {
     throw nassh.Stream.ERR_NOT_IMPLEMENTED;
+  }
 
   setTimeout(() => onRead(new ArrayBuffer(0)), 0);
 };
@@ -74,6 +75,7 @@ nassh.Stream.prototype.asyncWrite = function(data, onSuccess) {
  * Close a stream.
  */
 nassh.Stream.prototype.close = function() {
-  if (this.onClose)
+  if (this.onClose) {
     this.onClose();
+  }
 };

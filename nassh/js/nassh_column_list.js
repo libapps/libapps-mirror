@@ -25,8 +25,9 @@ nassh.ColumnList = function(div, items, columnCount = 2) {
 
   this.document_ = null;
 
-  if (div)
+  if (div) {
     this.decorate(div);
+  }
 };
 
 /**
@@ -59,8 +60,9 @@ nassh.ColumnList.prototype.decorate = function(div) {
  * Focus the ColumnList.
  */
 nassh.ColumnList.prototype.focus = function() {
-  if (!this.div_)
+  if (!this.div_) {
     throw 'Not initialized.';
+  }
 
   this.div_.focus();
 };
@@ -71,8 +73,9 @@ nassh.ColumnList.prototype.focus = function() {
  * @param {...*} args
  */
 nassh.ColumnList.prototype.addEventListener = function(...args) {
-  if (!this.div_)
+  if (!this.div_) {
     throw 'Not initialized.';
+  }
 
   this.div_.addEventListener.apply(this.div_, arguments);
 };
@@ -83,8 +86,9 @@ nassh.ColumnList.prototype.addEventListener = function(...args) {
  * Coalesces multiple invocations during the timeout period.
  */
 nassh.ColumnList.prototype.scheduleRedraw = function() {
-  if (this.redrawTimeout_)
+  if (this.redrawTimeout_) {
     return;
+  }
 
   this.redrawTimeout_ = setTimeout(() => {
     this.redrawTimeout_ = null;
@@ -105,8 +109,9 @@ nassh.ColumnList.prototype.redraw = function() {
   div.setAttribute('tabindex', '0');
   div.setAttribute('role', 'listbox');
 
-  if (!this.items_.length)
+  if (!this.items_.length) {
     return;
+  }
 
   var columnWidth = (1 / this.columnCount * 100) + '%';
 
@@ -176,15 +181,17 @@ nassh.ColumnList.ActiveIndexChangedEvent;
  * @param {number} i
  */
 nassh.ColumnList.prototype.setActiveIndex = function(i) {
-  if (isNaN(i))
+  if (isNaN(i)) {
     throw new Error('Index is NaN');
+  }
 
   var before = this.activeIndex;
 
   if (i != this.activeIndex) {
     var n = this.getActiveNode_();
-    if (n)
+    if (n) {
       n.classList.remove('active');
+    }
 
     setTimeout(
         this.onActiveIndexChanged.bind(this, {before: before, now: i}), 0);
@@ -280,8 +287,9 @@ nassh.ColumnList.prototype.onItemClick_ = function(srcNode, e) {
 nassh.ColumnList.prototype.getColumnHeight_ = function(column) {
   var tallestColumn = Math.ceil(this.items_.length / this.columnCount);
 
-  if (column + 1 <= Math.floor(this.columnCount / column + 1))
+  if (column + 1 <= Math.floor(this.columnCount / column + 1)) {
     return tallestColumn;
+  }
 
   return tallestColumn - 1;
 };
@@ -309,8 +317,9 @@ nassh.ColumnList.prototype.onKeyDown = function(e) { };
  * @param {!KeyboardEvent} e
  */
 nassh.ColumnList.prototype.onKeyDown_ = function(e) {
-  if (this.onKeyDown(e) === false)
+  if (this.onKeyDown(e) === false) {
     return;
+  }
 
   var i = this.activeIndex;
   var rc = this.getRowColByIndex_(i);
@@ -342,10 +351,11 @@ nassh.ColumnList.prototype.onKeyDown_ = function(e) {
         i = this.getIndexByRowCol_(rc.row + 1, rc.column);
         // If the next row is incomplete, warp to top of the next.
         if (i > this.items_.length - 1) {
-          if (rc.column >= this.columnCount - 1)
+          if (rc.column >= this.columnCount - 1) {
             i = 0;
-          else
+          } else {
             i = this.getIndexByRowCol_(0, rc.column + 1);
+          }
         }
       }
       break;

@@ -106,8 +106,9 @@ nassh.exportPreferences = function(onComplete) {
 
   var onReadStorage = function(profile, prefs) {
     rv.hterm[profile] = prefs.exportAsJson();
-    if (--pendingReads < 1)
+    if (--pendingReads < 1) {
       onComplete(rv);
+    }
   };
 
   rv.magic = 'nassh-prefs';
@@ -128,8 +129,9 @@ nassh.exportPreferences = function(onComplete) {
         pendingReads++;
       });
 
-      if (profiles.length == 0)
+      if (profiles.length == 0) {
         onComplete(rv);
+      }
     });
   });
 };
@@ -154,11 +156,13 @@ nassh.importPreferences = function(prefsObject, onComplete) {
     }
   };
 
-  if (prefsObject.magic != 'nassh-prefs')
+  if (prefsObject.magic != 'nassh-prefs') {
     throw new Error('Not a JSON object or bad value for \'magic\'.');
+  }
 
-  if (prefsObject.version != 1)
+  if (prefsObject.version != 1) {
     throw new Error('Bad version, expected 1, got: ' + prefsObject.version);
+  }
 
   var nasshPrefs = new nassh.PreferenceManager();
   nasshPrefs.importFromJson(prefsObject.nassh, () => {
@@ -188,8 +192,9 @@ nassh.openOptionsPage = function() {
         fallback();
       }
     });
-  } else
+  } else {
     fallback();
+  }
 };
 
 /** Reload window. */

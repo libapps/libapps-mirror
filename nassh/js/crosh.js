@@ -331,8 +331,9 @@ Crosh.prototype.onTerminalResize_ = function(width, height) {
   chrome.terminalPrivate.onTerminalResize(this.id_,
       Number(width), Number(height),
       function(success) {
-        if (!success)
+        if (!success) {
           console.warn('terminalPrivate.onTerminalResize failed');
+        }
       }
   );
 };
@@ -348,8 +349,9 @@ Crosh.prototype.exit = function(code) {
 
   if (code == 0) {
     this.io.pop();
-    if (this.argv_.onExit)
+    if (this.argv_.onExit) {
       this.argv_.onExit(code);
+    }
     return;
   }
 
@@ -371,8 +373,9 @@ Crosh.prototype.exit = function(code) {
     if (ch == 'e' || ch == 'x' || ch == '\x1b' /* ESC */ ||
         ch == '\x17' /* C-w */) {
       this.io.pop();
-      if (this.argv_.onExit)
+      if (this.argv_.onExit) {
         this.argv_.onExit(code);
+      }
     }
   };
 };

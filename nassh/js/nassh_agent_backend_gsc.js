@@ -1281,8 +1281,9 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
     throw new Error('SmartCardManager.selectApplet: not connected');
   }
   if (this.appletSelected_ !==
-      nassh.agent.backends.GSC.SmartCardManager.CardApplets.NONE)
+      nassh.agent.backends.GSC.SmartCardManager.CardApplets.NONE) {
     throw new Error('SmartCardManager.selectApplet: applet already selected');
+  }
   switch (applet) {
     case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP:
       /**
@@ -1331,9 +1332,10 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
           `SmartCardManager.selectApplet: applet ID ${applet} not supported`);
   }
   if (this.appletSelected_ !==
-      nassh.agent.backends.GSC.SmartCardManager.CardApplets.NONE)
+      nassh.agent.backends.GSC.SmartCardManager.CardApplets.NONE) {
     throw new Error(
         'SmartCardManager.selectApplet: applet already selected (race)');
+  }
   this.appletSelected_ = applet;
 };
 

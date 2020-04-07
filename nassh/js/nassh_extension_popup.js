@@ -52,12 +52,14 @@ popup.prototype.openLink_ = function(e) {
 
   // Figure out whether to open a window or a tab.
   let mode;
-  if (e.ctrlKey)
+  if (e.ctrlKey) {
     mode = 'tab';
-  else if (e.shiftKey)
+  } else if (e.shiftKey) {
     mode = 'window';
-  else
-    mode = 'window';  // TODO: Get default from prefs.
+  } else {
+    // TODO: Get default from prefs.
+    mode = 'window';
+  }
 
   // Launch it.
   if (mode == 'tab') {
@@ -136,8 +138,9 @@ popup.prototype.updateTheme_ = function() {
   style.backgroundColor = this.htermPrefs_.getString('background-color');
   style.fontSize = this.htermPrefs_.getNumber('font-size') + 'px';
   style.fontFamily = this.htermPrefs_.getString('font-family');
-  if (style.webkitFontSmoothing !== undefined)
+  if (style.webkitFontSmoothing !== undefined) {
     style.webkitFontSmoothing = this.htermPrefs_.getString('font-smoothing');
+  }
 
   style = document.createElement('style');
   style.textContent = (

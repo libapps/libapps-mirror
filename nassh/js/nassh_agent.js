@@ -124,8 +124,9 @@ nassh.agent.Agent.prototype.handleRequest = function(rawRequest) {
   if (!request) {
     console.error('Agent.handleRequest: invalid request', rawRequest);
     return Promise.resolve(nassh.agent.messages.FAILURE);
-  } else
+  } else {
     return this.handleRequest_(request);
+  }
 };
 
 /**

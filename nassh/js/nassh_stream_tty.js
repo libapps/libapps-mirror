@@ -148,11 +148,13 @@ nassh.Stream.Tty.prototype.asyncOpen = function(settings, onOpen) {
  * @override
  */
 nassh.Stream.Tty.prototype.asyncRead = function(size, onRead) {
-  if (!this.open)
+  if (!this.open) {
     throw nassh.Stream.ERR_STREAM_CLOSED;
+  }
 
-  if (!this.allowRead_)
+  if (!this.allowRead_) {
     throw nassh.Stream.ERR_STREAM_CANT_READ;
+  }
 
   this.inputBuffer_.read(size, (data) => {
     if (!this.open) {
@@ -172,11 +174,13 @@ nassh.Stream.Tty.prototype.asyncRead = function(size, onRead) {
  * @override
  */
 nassh.Stream.Tty.prototype.asyncWrite = function(data, onSuccess) {
-  if (!this.open)
+  if (!this.open) {
     throw nassh.Stream.ERR_STREAM_CLOSED;
+  }
 
-  if (!this.allowWrite_)
+  if (!this.allowWrite_) {
     throw nassh.Stream.ERR_STREAM_CANT_WRITE;
+  }
 
   this.acknowledgeCount_ += data.byteLength;
 
