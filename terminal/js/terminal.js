@@ -237,8 +237,9 @@ terminal.Command.prototype.close_ = function() {
 terminal.Command.prototype.onTerminalResize_ = function(width, height) {
   chrome.terminalPrivate.onTerminalResize(
       this.id_, Number(width), Number(height), function(success) {
-        if (!success)
+        if (!success) {
           console.warn('terminalPrivate.onTerminalResize failed');
+        }
       });
 };
 
@@ -253,8 +254,9 @@ terminal.Command.prototype.exit = function(code) {
 
   if (code == 0) {
     this.io.pop();
-    if (this.argv_.onExit)
+    if (this.argv_.onExit) {
       this.argv_.onExit(code);
+    }
     return;
   }
 };
