@@ -191,15 +191,15 @@ lib.PreferenceManager.prototype.activate = function() {
  * This function is asynchronous, if you need to read preference values, you
  * *must* wait for the callback.
  *
- * @param {function()=} opt_callback Optional function to invoke when the read
+ * @param {function()=} callback Optional function to invoke when the read
  *     has completed.
  */
-lib.PreferenceManager.prototype.readStorage = function(opt_callback) {
+lib.PreferenceManager.prototype.readStorage = function(callback = undefined) {
   var pendingChildren = 0;
 
   function onChildComplete() {
-    if (--pendingChildren == 0 && opt_callback) {
-      opt_callback();
+    if (--pendingChildren == 0 && callback) {
+      callback();
     }
   }
 
@@ -227,8 +227,8 @@ lib.PreferenceManager.prototype.readStorage = function(opt_callback) {
         }
       }
 
-      if (pendingChildren == 0 && opt_callback) {
-        setTimeout(opt_callback);
+      if (pendingChildren == 0 && callback) {
+        setTimeout(callback);
       }
     }.bind(this));
 };
@@ -243,13 +243,13 @@ lib.PreferenceManager.prototype.readStorage = function(opt_callback) {
  * @param {string|number|boolean|!Object|!Array|null} value The default value of
  *     this preference.  Anything that can be represented in JSON is a valid
  *     default value.
- * @param {function(*, string, !lib.PreferenceManager)=} opt_onChange A
+ * @param {function(*, string, !lib.PreferenceManager)=} onChange A
  *     function to invoke when the preference changes.  It will receive the new
  *     value, the name of the preference, and a reference to the
  *     PreferenceManager as parameters.
  */
 lib.PreferenceManager.prototype.definePreference = function(
-    name, value, opt_onChange) {
+    name, value, onChange = undefined) {
 
   var record = this.prefRecords_[name];
   if (record) {
@@ -259,8 +259,8 @@ lib.PreferenceManager.prototype.definePreference = function(
         new lib.PreferenceManager.Record(name, value);
   }
 
-  if (opt_onChange) {
-    record.addObserver(opt_onChange);
+  if (onChange) {
+    record.addObserver(onChange);
   }
 };
 
@@ -405,17 +405,15 @@ lib.PreferenceManager.prototype.notifyChange_ = function(name) {
  * and use it.
  *
  * @param {string} listName The child list to create the new instance from.
- * @param {?string=} opt_hint Optional hint to include in the child id.
- * @param {string=} opt_id Optional id to override the generated id.
+ * @param {?string=} hint Optional hint to include in the child id.
+ * @param {string=} id Optional id to override the generated id.
  * @return {!lib.PreferenceManager} The new child preference manager.
  */
-lib.PreferenceManager.prototype.createChild = function(listName, opt_hint,
-                                                       opt_id) {
+lib.PreferenceManager.prototype.createChild = function(
+    listName, hint = undefined, id = undefined) {
   var ids = this.get(listName);
-  var id;
 
-  if (opt_id) {
-    id = opt_id;
+  if (id) {
     if (ids.indexOf(id) != -1) {
       throw new Error('Duplicate child: ' + listName + ': ' + id);
     }
@@ -425,8 +423,8 @@ lib.PreferenceManager.prototype.createChild = function(listName, opt_hint,
     while (!id || ids.indexOf(id) != -1) {
       id = lib.f.randomInt(1, 0xffff).toString(16);
       id = lib.f.zpad(id, 4);
-      if (opt_hint) {
-        id = opt_hint + ':' + id;
+      if (hint) {
+        id = `${hint}:${id}`;
       }
     }
   }
@@ -474,22 +472,23 @@ lib.PreferenceManager.prototype.removeChild = function(listName, id) {
  *
  * @param {string} listName The child list to look in.
  * @param {string} id The child ID.
- * @param {!lib.PreferenceManager=} opt_default The value to return if the child
- *     is not found.
+ * @param {!lib.PreferenceManager=} defaultValue The value to return if the
+ *     child is not found.
  * @return {!lib.PreferenceManager} The specified child PreferenceManager.
  */
-lib.PreferenceManager.prototype.getChild = function(listName, id, opt_default) {
+lib.PreferenceManager.prototype.getChild = function(
+    listName, id, defaultValue = undefined) {
   if (!(listName in this.childLists_)) {
     throw new Error('Unknown child list: ' + listName);
   }
 
   var childList = this.childLists_[listName];
   if (!(id in childList)) {
-    if (typeof opt_default == 'undefined') {
+    if (defaultValue === undefined) {
       throw new Error('Unknown "' + listName + '" child: ' + id);
     }
 
-    return opt_default;
+    return defaultValue;
   }
 
   return childList[id];
@@ -504,15 +503,14 @@ lib.PreferenceManager.prototype.getChild = function(listName, id, opt_default) {
  * be deleted.
  *
  * @param {string} listName The child list to synchronize.
- * @param {function()=} opt_callback Function to invoke when the sync finishes.
+ * @param {function()=} callback Function to invoke when the sync finishes.
  */
 lib.PreferenceManager.prototype.syncChildList = function(
-    listName, opt_callback) {
-
+    listName, callback = undefined) {
   var pendingChildren = 0;
   function onChildStorage() {
-    if (--pendingChildren == 0 && opt_callback) {
-      opt_callback();
+    if (--pendingChildren == 0 && callback) {
+      callback();
     }
   }
 
@@ -549,8 +547,8 @@ lib.PreferenceManager.prototype.syncChildList = function(
     delete this.childLists_[listName][oldIds[i]];
   }
 
-  if (!pendingChildren && opt_callback) {
-    setTimeout(opt_callback);
+  if (!pendingChildren && callback) {
+    setTimeout(callback);
   }
 };
 

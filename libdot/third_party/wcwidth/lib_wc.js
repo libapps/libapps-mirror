@@ -497,10 +497,10 @@ lib.wc.strWidth = function(str) {
  *
  * @param {string} str The string to get substring from.
  * @param {number} start The starting column offset to get substring.
- * @param {number=} opt_width The column width of the substring.
+ * @param {number=} subwidth The column width of the substring.
  * @return {string} The substring.
  */
-lib.wc.substr = function(str, start, opt_width) {
+lib.wc.substr = function(str, start, subwidth = undefined) {
   var startIndex = 0;
   var endIndex, width;
 
@@ -521,11 +521,11 @@ lib.wc.substr = function(str, start, opt_width) {
     }
   }
 
-  if (opt_width != undefined) {
+  if (subwidth !== undefined) {
     for (endIndex = startIndex, width = 0; endIndex < str.length;) {
       const codePoint = str.codePointAt(endIndex);
       width += lib.wc.charWidth(codePoint);
-      if (width > opt_width) {
+      if (width > subwidth) {
         break;
       }
       endIndex += (codePoint <= 0xffff) ? 1 : 2;
