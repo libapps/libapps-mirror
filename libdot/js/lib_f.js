@@ -173,7 +173,7 @@ lib.f.getStack = function(ignoreFrames = 0, count = undefined) {
  * @param {number} denominator
  * @return {number}
  */
-lib.f.smartFloorDivide = function(numerator,  denominator) {
+lib.f.smartFloorDivide = function(numerator, denominator) {
   const val = numerator / denominator;
   const ceiling = Math.ceil(val);
   if (ceiling - val < .0001) {

@@ -20,11 +20,11 @@ it('rgbToX11', () => {
     ['rgb()', null],
     ['rgb(1,2,hi)', null],
     // Then some reasonable data.
-    ['rgb(1,2,3)',         'rgb:0101/0202/0303'],
+    ['rgb(1,2,3)', 'rgb:0101/0202/0303'],
     [' rgb ( 1 , 2 , 3 )', 'rgb:0101/0202/0303'],
     ['rgb (50, 100, 200)', 'rgb:3232/6464/c8c8'],
-    ['rgb(0, 0, 0)',       'rgb:0000/0000/0000'],
-    ['rgb(255, 0, 0)',     'rgb:ffff/0000/0000'],
+    ['rgb(0, 0, 0)', 'rgb:0000/0000/0000'],
+    ['rgb(255, 0, 0)', 'rgb:ffff/0000/0000'],
     ['rgb(255, 255, 255)', 'rgb:ffff/ffff/ffff'],
   ];
 
@@ -57,6 +57,7 @@ it('x11HexToCSS', () => {
 
 it('x11ToCSS', () => {
   const data = [
+    /* eslint-disable no-multi-spaces */
     // Some bad data first.
     ['', null],
     ['foo', null],
@@ -78,6 +79,7 @@ it('x11ToCSS', () => {
     ['rgb:2222/2020/0202', 'rgb(34, 32, 2)'],
     // Only nominally test hex formats as x11HexToCSS above covers more.
     ['#000', 'rgb(0, 0, 0)'],
+    /* eslint-enable no-multi-spaces */
   ];
 
   data.forEach((ele) => {
@@ -96,9 +98,9 @@ it('hexToRGB', () => {
     ['#00', null],
     [' #345', null],
     // Then some reasonable data.
-    ['#000',    'rgb(0, 0, 0)'],
-    ['#abc',    'rgb(170, 187, 204)'],
-    ['#abcc',   'rgba(170, 187, 204, 0.8)'],
+    ['#000', 'rgb(0, 0, 0)'],
+    ['#abc', 'rgb(170, 187, 204)'],
+    ['#abcc', 'rgba(170, 187, 204, 0.8)'],
     ['#a0b0c0', 'rgb(160, 176, 192)'],
     ['#fFfFFf', 'rgb(255, 255, 255)'],
     ['#a0b0c000', 'rgba(160, 176, 192, 0)'],
@@ -238,8 +240,8 @@ it('hslToRGB', () => {
     ['#00', null],
     [' #345', null],
     // Then some reasonable data.
-    ['hsl(0, 0%, 0%)',    'rgb(0, 0, 0)'],
-    ['hsl(210, 25%, 73%)',    'rgb(169, 186, 203)'],
+    ['hsl(0, 0%, 0%)', 'rgb(0, 0, 0)'],
+    ['hsl(210, 25%, 73%)', 'rgb(169, 186, 203)'],
     ['hsl(210, 20%, 69%)', 'rgb(160, 176, 192)'],
     ['hsl(0, 0%, 100%)', 'rgb(255, 255, 255)'],
     ['hsla(210, 20%, 69%, 0)', 'rgba(160, 176, 192, 0)'],

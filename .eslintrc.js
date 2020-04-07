@@ -64,6 +64,7 @@ module.exports = {
     'no-irregular-whitespace': 'error',
     'no-label-var': 'error',
     'no-mixed-spaces-and-tabs': 'error',
+    'no-multi-spaces': ['error', {'ignoreEOLComments': true}],
     'no-multiple-empty-lines': 'error',
     'no-new': 'error',
     'no-new-func': 'error',

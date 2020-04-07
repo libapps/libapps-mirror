@@ -264,8 +264,8 @@ lib.colors.rgbToHex = function(rgb) {
 
   const hex = '#' + lib.f.zpad((
       (parseInt(ary[0], 10) << 16) |
-      (parseInt(ary[1], 10) <<  8) |
-      (parseInt(ary[2], 10) <<  0)).toString(16), 6);
+      (parseInt(ary[1], 10) << 8) |
+      (parseInt(ary[2], 10) << 0)).toString(16), 6);
   if (ary[3] === undefined || ary[3] === '1') {
     return hex;
   } else {
@@ -340,7 +340,7 @@ lib.colors.hslxArrayToRgbaArray = function(hslx) {
     }
   };
 
-  const t2 = light <= 0.5 ?  light * (sat + 1) : light + sat - (light * sat);
+  const t2 = light <= 0.5 ? light * (sat + 1) : light + sat - (light * sat);
   const t1 = light * 2 - t2;
 
   return [

@@ -46,7 +46,7 @@ nassh.ColumnList.prototype.decorate = function(div) {
 
   let baseId = this.div_.getAttribute('id');
   if (!baseId) {
-    baseId =  lib.f.randomInt(1, 0xffff).toString(16);
+    baseId = lib.f.randomInt(1, 0xffff).toString(16);
     baseId = lib.f.zpad(baseId, 4);
     baseId = 'columnlist-' + baseId;
   }

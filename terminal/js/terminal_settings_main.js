@@ -36,7 +36,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // Set "useCrlf" to match how the terminal is using it, although we don't
     // actually need it for settings.
     hterm.messageManager.useCrlf = true;
-    const url =  lib.f.getURL('/_locales/$1/messages.json');
+    const url = lib.f.getURL('/_locales/$1/messages.json');
     await hterm.messageManager.findAndLoadMessages(url);
     document.title = hterm.messageManager.get('TERMINAL_TITLE_SETTINGS');
     onInit();
