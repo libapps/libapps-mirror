@@ -509,6 +509,10 @@
 		"description": "Label text shown for the hterm 'receive-encoding' preference.",
 		"message": "Receive encoding"
 	},
+	"HTERM_NAME_PREF_SCREEN_PADDING_SIZE": {
+		"description": "Label text shown for the hterm 'screen-padding-size' preference.",
+		"message": "Screen padding size"
+	},
 	"HTERM_NAME_PREF_SCROLLBAR_VISIBLE": {
 		"description": "Label text shown for the hterm 'scrollbar-visible' preference. This is a short description for controlling whether the scrollbar is always shown, or only shown on demand.",
 		"message": "Scrollbar visibility"
@@ -800,6 +804,10 @@
 	"HTERM_PREF_RECEIVE_ENCODING": {
 		"description": "Help text shown for the hterm 'receive-encoding' preference. 'utf-8' and 'raw' should not be translated. The quote style may be changed as needed.",
 		"message": "Set the expected encoding for data received from the host.\nIf the encodings do not match, visual bugs are likely to be observed.\n\nValid values are 'utf-8' and 'raw'."
+	},
+	"HTERM_PREF_SCREEN_PADDING_SIZE": {
+		"description": "Help text shown for the hterm 'padding-size' preference.",
+		"message": "The padding size in pixels around the border of the terminal screen.\n\nThis controls the size of the border around the terminal screen so the user can add some visible padding to the edges of the screen."
 	},
 	"HTERM_PREF_SCROLLBAR_VISIBLE": {
 		"description": "Help text shown for the hterm 'scrollbar-visible' preference.",
