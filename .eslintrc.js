@@ -69,6 +69,7 @@ module.exports = {
     'no-unreachable': 'error',
     'no-useless-call': 'error',
     'no-useless-concat': 'error',
+    'no-useless-escape': 'error',
     'no-void': 'error',
     // We allow TODO comments.
     'no-warning-comments': [

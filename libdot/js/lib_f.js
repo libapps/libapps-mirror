@@ -27,7 +27,7 @@ lib.f = {};
  * @return {string} String with references substituted.
  */
 lib.f.replaceVars = function(str, vars) {
-  return str.replace(/%([a-z]*)\(([^\)]+)\)/gi, function(match, fn, varname) {
+  return str.replace(/%([a-z]*)\(([^)]+)\)/gi, function(match, fn, varname) {
       if (typeof vars[varname] == 'undefined') {
         throw 'Unknown variable: ' + varname;
       }
@@ -61,7 +61,7 @@ lib.f.replaceVars.functions = {
       "'": '&#39;'
     };
 
-    return str.replace(/[<>&\"\']/g, (m) => map[m]);
+    return str.replace(/[<>&"']/g, (m) => map[m]);
   }
 };
 
