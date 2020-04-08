@@ -67,6 +67,7 @@ module.exports = {
     'no-unmodified-loop-condition': 'error',
     'no-unneeded-ternary': 'error',
     'no-unreachable': 'error',
+    'no-useless-call': 'error',
     'no-void': 'error',
     // We allow TODO comments.
     'no-warning-comments': [
