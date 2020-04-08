@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview WASI advice API constants from wasi/core.h.
+ * @fileoverview WASI advice API constants from wasi/api.h.
  */
 
 export const NORMAL = 0;

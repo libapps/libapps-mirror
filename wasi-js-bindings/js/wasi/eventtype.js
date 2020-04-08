@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview WASI eventtype API constants from wasi/core.h.
+ * @fileoverview WASI eventtype API constants from wasi/api.h.
  */
 
 export const CLOCK = 0;

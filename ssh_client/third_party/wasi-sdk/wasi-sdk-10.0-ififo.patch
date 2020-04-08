@@ -26,7 +26,7 @@ duplicate labels.  Move S_IFIFO to a unique unused value.
  #define S_IFREG (0x8000)
 --- a/share/wasi-sysroot/include/__mode_t.h
 +++ b/share/wasi-sysroot/include/__mode_t.h
-@@ -9,7 +9,7 @@
+@@ -10,7 +10,7 @@
  #define S_IFLNK (0xa000)
  #define S_IFREG (0x8000)
  #define S_IFSOCK (0xc000)

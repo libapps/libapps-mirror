@@ -14,7 +14,7 @@
 #include <errno.h>
 #include <stdint.h>
 
-#include <wasi/core.h>
+#include <wasi/api.h>
 
 #include "bh-syscalls.h"
 

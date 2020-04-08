@@ -14,7 +14,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include <wasi/core.h>
+#include <wasi/api.h>
 
 #include <sys/cdefs.h>
 

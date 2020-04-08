@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview WASI whence API constants from wasi/core.h.
+ * @fileoverview WASI whence API constants from wasi/api.h.
  */
 
 export const CUR = 0;

@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview WASI clockid API constants from wasi/core.h.
+ * @fileoverview WASI clockid API constants from wasi/api.h.
  */
 
 export const REALTIME = 0;

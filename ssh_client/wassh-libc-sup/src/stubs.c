@@ -189,9 +189,6 @@ int dup(int oldfd) {
 int dup2(int oldfd, int newfd) {
   STUB_ENOSYS(-1, "");
 }
-int utime(const char* filename, const /*struct utimbuf*/void* times) {
-  STUB_ENOSYS(-1, "");
-}
 
 speed_t cfgetispeed(const struct termios* termios_p) {
   STUB_RETURN(B0, "termios=%p", termios_p);

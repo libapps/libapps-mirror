@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview WASI errno API constants from wasi/core.h.
+ * @fileoverview WASI errno API constants from wasi/api.h.
  */
 
 export const ESUCCESS = 0;

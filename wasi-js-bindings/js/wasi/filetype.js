@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview WASI filetype API constants from wasi/core.h.
+ * @fileoverview WASI filetype API constants from wasi/api.h.
  */
 
 export const UNKNOWN = 0;
