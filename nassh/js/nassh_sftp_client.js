@@ -592,7 +592,8 @@ nassh.sftp.Client.prototype.scanDirectory = function(handle, filter) {
  * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
  *     or rejects with a nassh.sftp.StatusError.
  */
-nassh.sftp.Client.prototype.removeDirectory = function(path, recursive=false) {
+nassh.sftp.Client.prototype.removeDirectory = function(
+    path, recursive = false) {
   // Low level directory remove packet.  Only works if the dir is already empty.
   const rmdir = (path) => {
     const packet = new nassh.sftp.Packet();
@@ -830,8 +831,8 @@ nassh.sftp.Client.prototype.closeFile = function(handle) {
  * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
  *     or rejects with a nassh.sftp.StatusError
  */
-nassh.sftp.Client.prototype.copyData =
-    function(readHandle, writeHandle, length=0, readOffset=0, writeOffset=0) {
+nassh.sftp.Client.prototype.copyData = function(
+    readHandle, writeHandle, length = 0, readOffset = 0, writeOffset = 0) {
   const packet = new nassh.sftp.Packet();
   packet.setString(readHandle);
   packet.setUint64(readOffset);

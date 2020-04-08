@@ -564,8 +564,8 @@ nassh.CommandInstance.prototype.connectToProfile = function(profileID) {
  * @return {?Object} Returns null if we couldn't parse the destination.
  *     An object if we were able to parse out the connect settings.
  */
-nassh.CommandInstance.parseURI = function(uri, stripSchema=true,
-                                          decodeComponents=false) {
+nassh.CommandInstance.parseURI = function(uri, stripSchema = true,
+                                          decodeComponents = false) {
   if (stripSchema && uri.startsWith('ssh:')) {
     // Strip off the "ssh:" prefix.
     uri = uri.substr(4);
@@ -1128,7 +1128,7 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
  * @param {string=} optionString The set of --long options to parse.
  * @return {!Object} A map of --option to its value.
  */
-nassh.CommandInstance.tokenizeOptions = function(optionString='') {
+nassh.CommandInstance.tokenizeOptions = function(optionString = '') {
   let rv = {};
 
   // If it's empty, return right away else the regex split below will create

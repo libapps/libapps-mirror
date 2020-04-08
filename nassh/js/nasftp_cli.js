@@ -72,7 +72,7 @@ nasftp.ProgressBar.prototype.update = function(pos) {
  *
  * @param {boolean=} summarize Whether to display a statistics summary.
  */
-nasftp.ProgressBar.prototype.finish = function(summarize=false) {
+nasftp.ProgressBar.prototype.finish = function(summarize = false) {
   this.endTime_ = performance.now();
   this.terminal_.eraseLine();
   this.terminal_.setCursorColumn(0);
@@ -188,7 +188,7 @@ nasftp.Cli = function(commandInstance) {
  * @param {string=} string The string to filter.
  * @return {string} The escaped string for printing.
  */
-nasftp.Cli.prototype.escapeString_ = function(string='') {
+nasftp.Cli.prototype.escapeString_ = function(string = '') {
   const map = (ch) => {
     const cp = ch.codePointAt(0);
     return String.fromCodePoint(cp == 0x7f ? 0x2421 : cp + 0x2400);
@@ -225,7 +225,7 @@ nasftp.Cli.format_ = function(number) {
  *
  * @param {string=} string The string to filter and display.
  */
-nasftp.Cli.prototype.rawprint_ = function(string='') {
+nasftp.Cli.prototype.rawprint_ = function(string = '') {
   this.io.print(this.escapeString_(string));
 };
 
@@ -2292,7 +2292,7 @@ nasftp.Cli.commandTestFsp_ = function(_args) {
     this.client.writeChunkSize = 200;
 
     // Helpers for displaying pass/fail status.
-    const pass = (test, msg='-') => this.rawprintln_(`PASS: ${test}: ${msg}`);
+    const pass = (test, msg = '-') => this.rawprintln_(`PASS: ${test}: ${msg}`);
     const failed = (test, msg) => this.rawprintln_(`FAIL: ${test}: ${msg}`);
 
     /**

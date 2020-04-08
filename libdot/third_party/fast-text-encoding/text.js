@@ -32,7 +32,7 @@ if (scope['TextEncoder'] && scope['TextDecoder']) {
  * @constructor
  * @param {string=} utfLabel
  */
-function FastTextEncoder(utfLabel='utf-8') {
+function FastTextEncoder(utfLabel = 'utf-8') {
   if (utfLabel !== 'utf-8') {
     throw new RangeError(
         `Failed to construct 'TextEncoder': ` +
@@ -47,7 +47,7 @@ Object.defineProperty(FastTextEncoder.prototype, 'encoding', {value: 'utf-8'});
  * @param {{stream: boolean}=} options
  * @return {!Uint8Array}
  */
-FastTextEncoder.prototype.encode = function(string, options={stream: false}) {
+FastTextEncoder.prototype.encode = function(string, options = {stream: false}) {
   if (options.stream) {
     throw new Error(`Failed to encode: the 'stream' option is unsupported.`);
   }
@@ -114,7 +114,7 @@ FastTextEncoder.prototype.encode = function(string, options={stream: false}) {
  * @param {string=} utfLabel
  * @param {{fatal: boolean}=} options
  */
-function FastTextDecoder(utfLabel='utf-8', options={fatal: false}) {
+function FastTextDecoder(utfLabel = 'utf-8', options = {fatal: false}) {
   if (utfLabel !== 'utf-8') {
     throw new RangeError(
         `Failed to construct 'TextDecoder': ` +
@@ -138,7 +138,7 @@ Object.defineProperty(FastTextDecoder.prototype, 'ignoreBOM', {value: false});
  * @param {{stream: boolean}=} options
  * @return {string}
  */
-FastTextDecoder.prototype.decode = function(buffer, options={stream: false}) {
+FastTextDecoder.prototype.decode = function(buffer, options = {stream: false}) {
   if (options['stream']) {
     throw new Error(`Failed to decode: the 'stream' option is unsupported.`);
   }

@@ -198,7 +198,7 @@ nassh.sftp.Packet.prototype.getUtf8String = function() {
  * @param {number=} length How many bytes to read.
  * @return {!Uint8Array} The raw bytes from the packet.
  */
-nassh.sftp.Packet.prototype.getData = function(length=undefined) {
+nassh.sftp.Packet.prototype.getData = function(length = undefined) {
   const data = new Uint8Array(this.packet_, this.offset_, length);
   this.offset_ += data.length;
   return data;

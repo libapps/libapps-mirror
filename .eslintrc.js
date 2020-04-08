@@ -91,6 +91,7 @@ module.exports = {
     'rest-spread-spacing': 'error',
     'semi': ['error', 'always'],
     'semi-style': ['error', 'last'],
+    'space-infix-ops': 'error',
     'space-unary-ops': 'error',
     'spaced-comment': ['error', 'always'],
     'switch-colon-spacing': ['error', {'after': true, 'before': false}],

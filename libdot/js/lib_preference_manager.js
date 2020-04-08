@@ -699,7 +699,7 @@ lib.PreferenceManager.prototype.changeDefaults = function(map) {
  *     notified.
  */
 lib.PreferenceManager.prototype.set = function(
-    name, newValue, onComplete=undefined, saveToStorage=true) {
+    name, newValue, onComplete = undefined, saveToStorage = true) {
   var record = this.prefRecords_[name];
   if (!record) {
     throw new Error('Unknown preference: ' + name);

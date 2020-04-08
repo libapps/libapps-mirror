@@ -661,7 +661,7 @@ lib.colors.luminance = function(r, g, b) {
     if (value <= 0.03928) {
       return value / 12.92;
     } else {
-      return Math.pow((value + 0.055)/1.055, 2.4);
+      return Math.pow((value + 0.055) / 1.055, 2.4);
     }
   });
 

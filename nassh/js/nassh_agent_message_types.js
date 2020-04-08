@@ -256,7 +256,7 @@ nassh.agent.messages
  */
 nassh.agent.messages
     .writers_[nassh.agent.messages.Numbers.AGENTC_SIGN_REQUEST] = function(
-    keyBlob, data, flags=0) {
+    keyBlob, data, flags = 0) {
   const message =
       new nassh.agent.Message(nassh.agent.messages.Numbers.AGENTC_SIGN_REQUEST);
   message.writeString(keyBlob);

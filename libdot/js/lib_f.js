@@ -291,7 +291,7 @@ lib.f.lastError = function(defaultMsg = null) {
  * @param {string=} features The window features to enable.
  * @return {?Window} The newly opened window.
  */
-lib.f.openWindow = function(url, name=undefined, features=undefined) {
+lib.f.openWindow = function(url, name = undefined, features = undefined) {
   // We create the window first without the URL loaded.
   const win = window.open(undefined, name, features);
 

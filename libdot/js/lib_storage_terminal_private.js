@@ -140,7 +140,7 @@ lib.Storage.TerminalPrivate.prototype.removeObserver = function(callback) {
  * @override
  */
 lib.Storage.TerminalPrivate.prototype.clear = function(callback) {
-  this.prefValue_= {};
+  this.prefValue_ = {};
   this.setPref_(callback);
 };
 

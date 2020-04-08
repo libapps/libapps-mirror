@@ -353,7 +353,7 @@ nassh.ConnectDialog.prototype.enableButton_ = function(button, state) {
  * @param {string=} style
  */
 nassh.ConnectDialog.prototype.displayButton_ = function(
-    button, state, style='inline') {
+    button, state, style = 'inline') {
   if (state) {
     button.style.display = style;
     button.setAttribute('tabindex', '0');
