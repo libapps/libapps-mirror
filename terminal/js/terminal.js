@@ -257,7 +257,6 @@ terminal.Command.prototype.exit = function(code) {
     if (this.argv_.onExit) {
       this.argv_.onExit(code);
     }
-    return;
   }
 };
 
