@@ -91,6 +91,7 @@ module.exports = {
     'radix': 'error',
     'rest-spread-spacing': 'error',
     'semi': ['error', 'always'],
+    'semi-spacing': 'error',
     'semi-style': ['error', 'last'],
     'space-infix-ops': 'error',
     'space-unary-ops': 'error',
