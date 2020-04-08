@@ -10,7 +10,7 @@ import {definePrefs, normalizePrefsInPlace, watchBackgroundColor}
     from './terminal_common.js';
 
 let resolveLibdotInitialized;
-window.libdotInitialized = new Promise(resolve => {
+window.libdotInitialized = new Promise((resolve) => {
   resolveLibdotInitialized = resolve;
 });
 

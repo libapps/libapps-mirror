@@ -101,7 +101,7 @@ export class TerminalSettingsCategorySelectorElement extends LitElement {
 
   /** @param {!Element} element */
   activate_(element) {
-    this.querySelectorAll('[active]').forEach(active => {
+    this.querySelectorAll('[active]').forEach((active) => {
       active.removeAttribute('active');
     });
 

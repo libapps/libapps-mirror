@@ -23,12 +23,12 @@ import './terminal_settings_theme.js';
 import './terminal_settings_transparency_slider.js';
 
 export const BACKGROUND_IMAGE_CONVERTER = {
-  preferenceToDisplay: preference => {
+  preferenceToDisplay: (preference) => {
     preference = preference ? preference.toString().trim() : '';
     let result = preference.match(/^url\(['"]?(.*?)['"]?\)$/i);
     return result ? result[1] : preference;
   },
-  displayToPreference: display => {
+  displayToPreference: (display) => {
     display = display.trim();
     if (!display) {
       return '';
@@ -39,8 +39,8 @@ export const BACKGROUND_IMAGE_CONVERTER = {
 };
 
 export const BELL_SOUND_CONVERTER = {
-  toChecked: value => !!value,
-  fromChecked: checked => checked ? 'lib-resource:hterm/audio/bell' : '',
+  toChecked: (value) => !!value,
+  fromChecked: (checked) => checked ? 'lib-resource:hterm/audio/bell' : '',
 };
 
 /**

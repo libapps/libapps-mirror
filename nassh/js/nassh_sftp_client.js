@@ -273,7 +273,7 @@ nassh.sftp.Client.prototype.sendRequest_ = function(type, data) {
   packet.setData(packetType.toByteArray());
   packet.setData(data.toByteArray());
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     this.pendingRequests_[requestId] = resolve;
     this.sendToPlugin_('onRead', [0, packet.toArrayBuffer()]);
   });
@@ -463,7 +463,7 @@ nassh.sftp.Client.prototype.setFileStatus = function(path, attrs) {
   nassh.sftp.packets.setFileAttrs(packet, attrs);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.SETSTAT, packet)
-    .then(response => this.isSuccessResponse_(response, 'SETSTAT'));
+    .then((response) => this.isSuccessResponse_(response, 'SETSTAT'));
 };
 
 /**
@@ -482,7 +482,7 @@ nassh.sftp.Client.prototype.setFileHandleStatus = function(handle, attrs) {
   nassh.sftp.packets.setFileAttrs(packet, attrs);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.FSETSTAT, packet)
-    .then(response => this.isSuccessResponse_(response, 'FSETSTAT'));
+    .then((response) => this.isSuccessResponse_(response, 'FSETSTAT'));
 };
 
 
@@ -502,7 +502,7 @@ nassh.sftp.Client.prototype.openDirectory = function(path) {
         return this.isExpectedResponse_(
             response, nassh.sftp.packets.HandlePacket, 'OPENDIR');
       })
-      .then(response => response.handle);
+      .then((response) => response.handle);
 };
 
 
@@ -519,7 +519,7 @@ nassh.sftp.Client.prototype.readDirectory = function(handle) {
   packet.setString(handle);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.READDIR, packet)
-    .then(response => this.isNameResponse_(response, 'READDIR'));
+    .then((response) => this.isNameResponse_(response, 'READDIR'));
 };
 
 /**
@@ -683,7 +683,7 @@ nassh.sftp.Client.prototype.readChunk = function(handle, offset, len) {
   packet.setUint32(len); // max bytes per packet
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.READ, packet)
-    .then(response => {
+    .then((response) => {
       if (response instanceof nassh.sftp.packets.StatusPacket) {
         if (response.code != nassh.sftp.packets.StatusCodes.EOF) {
           throw new nassh.sftp.StatusError(response, 'READ');
@@ -814,7 +814,7 @@ nassh.sftp.Client.prototype.closeFile = function(handle) {
   packet.setString(handle);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.CLOSE, packet)
-    .then(response => this.isSuccessResponse_(response, 'CLOSE'));
+    .then((response) => this.isSuccessResponse_(response, 'CLOSE'));
 };
 
 /**
@@ -856,7 +856,7 @@ nassh.sftp.Client.prototype.removeFile = function(path) {
   packet.setUtf8String(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.REMOVE, packet)
-    .then(response => this.isSuccessResponse_(response, 'REMOVE'));
+    .then((response) => this.isSuccessResponse_(response, 'REMOVE'));
 };
 
 
@@ -881,7 +881,7 @@ nassh.sftp.Client.prototype.renameFile = function(sourcePath, targetPath) {
   packet.setUtf8String(this.basePath_ + targetPath);
 
   return this.sendRequest_(type, packet)
-    .then(response => this.isSuccessResponse_(response, 'RENAME'));
+    .then((response) => this.isSuccessResponse_(response, 'RENAME'));
 };
 
 /**
@@ -907,7 +907,7 @@ nassh.sftp.Client.prototype.writeChunk = function(handle, offset, data) {
   packet.setData(data);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.WRITE, packet)
-    .then(response => this.isSuccessResponse_(response, 'WRITE'));
+    .then((response) => this.isSuccessResponse_(response, 'WRITE'));
 };
 
 
@@ -925,7 +925,7 @@ nassh.sftp.Client.prototype.makeDirectory = function(path) {
   packet.setUint32(0); // flags, 0b0000, no modified attributes
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.MKDIR, packet)
-    .then(response => this.isSuccessResponse_(response, 'MKDIR'));
+    .then((response) => this.isSuccessResponse_(response, 'MKDIR'));
 };
 
 
@@ -941,7 +941,7 @@ nassh.sftp.Client.prototype.realPath = function(path) {
   packet.setUtf8String(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.REALPATH, packet)
-    .then(response => this.isNameResponse_(response, 'REALPATH'));
+    .then((response) => this.isNameResponse_(response, 'REALPATH'));
 };
 
 
@@ -957,7 +957,7 @@ nassh.sftp.Client.prototype.readLink = function(path) {
   packet.setUtf8String(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.READLINK, packet)
-    .then(response => this.isNameResponse_(response, 'READLINK'));
+    .then((response) => this.isNameResponse_(response, 'READLINK'));
 };
 
 
@@ -978,7 +978,7 @@ nassh.sftp.Client.prototype.symLink = function(target, path) {
   packet.setUtf8String(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.SYMLINK, packet)
-    .then(response => this.isSuccessResponse_(response, 'SYMLINK'));
+    .then((response) => this.isSuccessResponse_(response, 'SYMLINK'));
 };
 
 /**

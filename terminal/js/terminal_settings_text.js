@@ -12,8 +12,8 @@ import {TerminalSettingsElement} from './terminal_settings_element.js';
 import {stylesText} from './terminal_settings_styles.js';
 
 const DEFAULT_CONVERTER = {
-  preferenceToDisplay: v => v,
-  displayToPreference: v => v,
+  preferenceToDisplay: (v) => v,
+  displayToPreference: (v) => v,
 };
 
 export class TerminalSettingsTextElement extends TerminalSettingsElement {

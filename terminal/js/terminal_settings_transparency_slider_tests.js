@@ -16,21 +16,21 @@ describe('transparency_slider_tests.js', () => {
     return el;
   };
 
-  const getPicker = el => el.shadowRoot.getElementById('picker');
+  const getPicker = (el) => el.shadowRoot.getElementById('picker');
 
   afterEach(function() {
     document.querySelectorAll(Element.is)
-        .forEach(el => el.parentElement.removeChild(el));
+        .forEach((el) => el.parentElement.removeChild(el));
   });
 
   it('initialises-the-picker-to-the-correct-x-coordinates', async function() {
     const els = [createElement(0), createElement(0.5), createElement(1)];
 
-    els.forEach(el => document.body.appendChild(el));
-    await Promise.all(els.map(el => el.updateComplete));
+    els.forEach((el) => document.body.appendChild(el));
+    await Promise.all(els.map((el) => el.updateComplete));
 
     assert.deepEqual(
-        els.map(el => getPicker(el).style.left), ['0%', '50%', '100%']);
+        els.map((el) => getPicker(el).style.left), ['0%', '50%', '100%']);
   });
 
   it('updates-picker-location-when-attribute-changed', async function() {

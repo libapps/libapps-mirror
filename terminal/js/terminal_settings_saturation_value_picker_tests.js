@@ -17,11 +17,11 @@ describe('saturation_value_picker.js', () => {
     return el;
   };
 
-  const getPicker = el => el.shadowRoot.getElementById('picker');
+  const getPicker = (el) => el.shadowRoot.getElementById('picker');
 
   afterEach(function() {
     document.querySelectorAll(Element.is)
-        .forEach(el => el.parentElement.removeChild(el));
+        .forEach((el) => el.parentElement.removeChild(el));
   });
 
   it('initialises-the-picker-to-the-correct-coordinates', async function() {
@@ -37,11 +37,11 @@ describe('saturation_value_picker.js', () => {
       createElement(100, 100),
     ];
 
-    els.forEach(el => document.body.appendChild(el));
-    await Promise.all(els.map(el => el.updateComplete));
+    els.forEach((el) => document.body.appendChild(el));
+    await Promise.all(els.map((el) => el.updateComplete));
 
     assert.deepEqual(
-        els.map(getPicker).map(el => [el.style.left, el.style.top]), [
+        els.map(getPicker).map((el) => [el.style.left, el.style.top]), [
           ['0%', '100%'],
           ['0%', '50%'],
           ['0%', '0%'],

@@ -103,7 +103,7 @@ lib.Storage.TerminalPrivate.prototype.setPref_ = function(callback) {
       if (chrome.runtime.lastError) {
         console.error(chrome.runtime.lastError.message);
       }
-      callbacks.forEach(c => c && c());
+      callbacks.forEach((c) => c && c());
     });
   }, 0);
 };

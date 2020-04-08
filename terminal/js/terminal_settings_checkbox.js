@@ -12,8 +12,8 @@ import {TerminalSettingsElement} from './terminal_settings_element.js';
 
 
 const DEFAULT_CONVERTER = {
-  toChecked: value => !!value,
-  fromChecked: checked => checked,
+  toChecked: (value) => !!value,
+  fromChecked: (checked) => checked,
 };
 
 export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {

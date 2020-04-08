@@ -63,7 +63,7 @@ describe('terminal_find_bar_tests.js', () => {
   function checkEvent(trigger, expectedType) {
     const eventDetails = [];
     findBar.addEventListener('find-bar-event',
-        e => eventDetails.push(e.detail));
+        (e) => eventDetails.push(e.detail));
 
     trigger();
     assert.lengthOf(eventDetails, 0,
@@ -96,7 +96,7 @@ describe('terminal_find_bar_tests.js', () => {
   it('fires-close-event-on-close-button-clicked', async function() {
     const eventDetails = [];
     findBar.addEventListener(
-        'find-bar-event', e => eventDetails.push(e.detail));
+        'find-bar-event', (e) => eventDetails.push(e.detail));
     closeButton.click();
     assert.deepEqual(eventDetails, [{type: 'close'}]);
   });

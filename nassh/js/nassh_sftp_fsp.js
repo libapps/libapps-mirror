@@ -87,9 +87,9 @@ nassh.sftp.fsp.onGetMetadataRequested = function(options, onSuccess, onError) {
   var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
   var path = '.' + options.entryPath; // relative path
   client.fileStatus(path)
-    .then(metadata => nassh.sftp.fsp.sanitizeMetadata(metadata, options))
+    .then((metadata) => nassh.sftp.fsp.sanitizeMetadata(metadata, options))
     .then(onSuccess)
-    .catch(response => {
+    .catch((response) => {
         // If file not found
       if (response instanceof nassh.sftp.StatusError &&
           response.code == nassh.sftp.packets.StatusCodes.NO_SUCH_FILE) {
@@ -119,7 +119,7 @@ nassh.sftp.fsp.onReadDirectoryRequested = function(
   var directoryHandle;
   var path = '.' + options.directoryPath; // relative path
   client.openDirectory(path)
-    .then(handle => { directoryHandle = handle; })
+    .then((handle) => { directoryHandle = handle; })
     .then(() => {
       return client.scanDirectory(directoryHandle, (entry) => {
         // Skip over the file if it's '.' or '..' pseudo paths.
@@ -148,8 +148,8 @@ nassh.sftp.fsp.onReadDirectoryRequested = function(
         return nassh.sftp.fsp.sanitizeMetadata(entry, options);
       });
     })
-    .then(entries => { onSuccess(entries, false); })
-    .catch(response => {
+    .then((entries) => { onSuccess(entries, false); })
+    .catch((response) => {
       console.warn(response.name + ': ' + response.message);
       onError('FAILED');
     })
@@ -192,7 +192,7 @@ nassh.sftp.fsp.onWriteFileRequested = function(options, onSuccess, onError) {
 
   Promise.all(writePromises)
     .then(onSuccess)
-    .catch(response => {
+    .catch((response) => {
       console.warn(response.name + ': ' + response.message);
       onError('FAILED');
     });
@@ -220,9 +220,9 @@ nassh.sftp.fsp.onOpenFileRequested = function(options, onSuccess, onError) {
 
   var path = '.' + options.filePath; // relative path
   client.openFile(path, pflags)
-    .then(handle => { client.openedFiles[options.requestId] = handle; })
+    .then((handle) => { client.openedFiles[options.requestId] = handle; })
     .then(onSuccess)
-    .catch(response => {
+    .catch((response) => {
       console.warn(response.name + ': ' + response.message);
       onError('FAILED');
     });
@@ -247,9 +247,9 @@ nassh.sftp.fsp.onCreateFileRequested = function(options, onSuccess, onError) {
 
   var path = '.' + options.filePath; // relative path
   client.openFile(path, pflags)
-    .then(handle => { client.openedFiles[options.requestId] = handle; })
+    .then((handle) => { client.openedFiles[options.requestId] = handle; })
     .then(onSuccess)
-    .catch(response => {
+    .catch((response) => {
       console.warn(response.name + ': ' + response.message);
       onError('FAILED');
     });
@@ -276,7 +276,7 @@ nassh.sftp.fsp.onTruncateRequested = function(options, onSuccess, onError) {
   client.openFile(path, pflags)
     .then((handle) => client.closeFile(handle))
     .then(onSuccess)
-    .catch(response => {
+    .catch((response) => {
       console.warn(response.name + ': ' + response.message);
       onError('FAILED');
     });
@@ -351,7 +351,7 @@ nassh.sftp.fsp.onCloseFileRequested = function(options, onSuccess, onError) {
   client.closeFile(client.openedFiles[options.openRequestId])
     .then(() => { delete client.openedFiles[options.openRequestId]; })
     .then(onSuccess)
-    .catch(response => {
+    .catch((response) => {
       console.warn(response.name + ': ' + response.message);
       onError('FAILED');
     });
@@ -380,7 +380,7 @@ nassh.sftp.fsp.onCreateDirectoryRequested = function(
   var path = '.' + options.directoryPath; // relative path
   client.makeDirectory(path)
     .then(onSuccess)
-    .catch(response => {
+    .catch((response) => {
       console.warn(response.name + ': ' + response.message);
       onError('FAILED');
     });
@@ -404,7 +404,7 @@ nassh.sftp.fsp.onMoveEntryRequested = function(options, onSuccess, onError) {
   var targetPath = '.' + options.targetPath; // relative path
   client.renameFile(sourcePath, targetPath)
     .then(onSuccess)
-    .catch(response => {
+    .catch((response) => {
       console.warn(response.name + ': ' + response.message);
       onError('FAILED');
     });
@@ -432,7 +432,7 @@ nassh.sftp.fsp.onReadFileRequested = function(options, onSuccess, onError) {
   client.readChunks(fileHandle, (chunk) => onSuccess(chunk, true),
                     options.offset, options.length)
     .then(() => onSuccess(new ArrayBuffer(0), false))
-    .catch(response => {
+    .catch((response) => {
       console.warn(response.name + ': ' + response.message);
       onError('FAILED');
     });
@@ -456,7 +456,7 @@ nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
   var sourcePath = '.' + options.sourcePath; // relative path
   var targetPath = '.' + options.targetPath; // relative path
   return client.linkStatus(sourcePath)
-    .then(metadata => {
+    .then((metadata) => {
       if (metadata.isLink) {
         return client.readLink(sourcePath)
           .then((response) => {
@@ -470,7 +470,7 @@ nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
       }
     })
     .then(onSuccess)
-    .catch(response => {
+    .catch((response) => {
       console.warn(response.name + ': ' + response.message);
       onError('FAILED');
     });
@@ -489,7 +489,7 @@ nassh.sftp.fsp.copyFile_ = function(sourcePath, targetPath, size, client) {
   var sourceHandle;
   var targetHandle;
   return client.openFile(sourcePath, nassh.sftp.packets.OpenFlags.READ)
-    .then(handle => {
+    .then((handle) => {
 
       sourceHandle = handle;
       var pflags = nassh.sftp.packets.OpenFlags.WRITE |
@@ -499,7 +499,7 @@ nassh.sftp.fsp.copyFile_ = function(sourcePath, targetPath, size, client) {
       return client.openFile(targetPath, pflags);
 
     })
-    .then(handle => {
+    .then((handle) => {
 
       targetHandle = handle;
 
@@ -517,7 +517,7 @@ nassh.sftp.fsp.copyFile_ = function(sourcePath, targetPath, size, client) {
         var offset = i;
         var readWritePromise = client.readChunk(sourceHandle, offset,
                                                 chunkSize)
-          .then(data => client.writeChunk(targetHandle, offset, data));
+          .then((data) => client.writeChunk(targetHandle, offset, data));
 
         readWritePromises.push(readWritePromise);
       }
@@ -548,7 +548,7 @@ nassh.sftp.fsp.copyFile_ = function(sourcePath, targetPath, size, client) {
 nassh.sftp.fsp.copyDirectory_ = function(sourcePath, targetPath, client) {
   let sourceHandle;
   return client.openDirectory(sourcePath)
-    .then(handle => { sourceHandle = handle; })
+    .then((handle) => { sourceHandle = handle; })
     .then(() => client.makeDirectory(targetPath))
     .then(() => {
       return client.scanDirectory(sourceHandle, (entry) => {
@@ -556,7 +556,7 @@ nassh.sftp.fsp.copyDirectory_ = function(sourcePath, targetPath, client) {
         return entry.filename != '.' && entry.filename != '..';
       });
     })
-    .then(entries => {
+    .then((entries) => {
       const copyPromises = [];
       for (let i = 0; i < entries.length; i++) {
         const file = entries[i];

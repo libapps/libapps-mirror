@@ -17,8 +17,8 @@ describe('terminal_settings_checkbox_tests.js', () => {
     window.preferenceManager.definePreference(preference, 'off');
 
     const converter = {
-      toChecked: value => value === 'on',
-      fromChecked: checked => checked ? 'on' : 'off',
+      toChecked: (value) => value === 'on',
+      fromChecked: (checked) => checked ? 'on' : 'off',
     };
 
     this.el = /** @type {!TerminalSettingsCheckboxElement} */ (

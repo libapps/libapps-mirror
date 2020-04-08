@@ -163,8 +163,8 @@ lib.polyfill.promiseFinally = function() {
     }
     return Promise.prototype.then.call(
       promise,
-      x => new C(resolve => resolve(onFinally())).then(() => x),
-      e => new C(resolve => resolve(onFinally())).then(() => {
+      (x) => new C((resolve) => resolve(onFinally())).then(() => x),
+      (e) => new C((resolve) => resolve(onFinally())).then(() => {
         throw e;
       })
     );

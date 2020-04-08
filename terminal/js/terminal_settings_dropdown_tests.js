@@ -309,10 +309,10 @@ describe('terminal_settings_dropdown_tests.js', () => {
   });
 
   it('use-custom-toText-if-present', async function() {
-    this.el.toText = value => `*${value}*`;
+    this.el.toText = (value) => `*${value}*`;
     await this.el.updateComplete;
     const liTexts = Array.from(this.el.shadowRoot.querySelectorAll('li'))
-                         .map(li => li.textContent.trim());
+                         .map((li) => li.textContent.trim());
     assert.deepEqual(liTexts, ['*opt1*', '*opt2*', '*opt3*']);
   });
 });

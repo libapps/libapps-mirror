@@ -106,7 +106,7 @@ MockTerminalPrivate.Controller.prototype.removeObserver = function(
     fnName, callback) {
   if (this.instance.observers_[fnName]) {
     this.instance.observers_[fnName] =
-        this.instance.observers_[fnName].filter(o => o != callback);
+        this.instance.observers_[fnName].filter((o) => o != callback);
   }
 };
 
@@ -117,7 +117,7 @@ MockTerminalPrivate.Controller.prototype.removeObserver = function(
  * @return {!Promise<!Array<*>>} Arguments from function.
  */
 MockTerminalPrivate.Controller.prototype.on = function(fnName) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const observer = (...args) => {
       this.removeObserver(fnName, observer);
       resolve(args);

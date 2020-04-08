@@ -42,8 +42,8 @@ export class TerminalSettingsAnsiColorsElement extends
   /** @override */
   render() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
-    return html`${rows.map(row => html`
-        <div class="color-row">${row.map(i => html`
+    return html`${rows.map((row) => html`
+        <div class="color-row">${row.map((i) => html`
           <terminal-colorpicker data-index="${i}" value="${this.value[i]}"
               title="${msg(`TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_${i}`)}"
               @updated="${this.onColorChanged_}" inputInDialog/>`)}

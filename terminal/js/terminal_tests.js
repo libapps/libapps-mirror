@@ -45,14 +45,14 @@ it('opens-process-in-init', async function() {
   assert.match(args[0], /^--startup_id=\d+$/);
 });
 
-[true, false].map(value => it(`set-a11y-in-init-to-${value}`, async () => {
+[true, false].map((value) => it(`set-a11y-in-init-to-${value}`, async () => {
   mockTerminalPrivate.a11yStatus = value;
   const term = terminal.init(div);
   await mockTerminalPrivateController.on('getA11yStatus');
   assert.equal(term.accessibilityReader_.accessibilityEnabled, value);
 }));
 
-[true, false].map(value => it(`set-a11y-to-${value}-on-changed`, async () => {
+[true, false].map((value) => it(`set-a11y-to-${value}-on-changed`, async () => {
   mockTerminalPrivate.a11yStatus = !value;
   const term = terminal.init(div);
   await mockTerminalPrivateController.on('getA11yStatus');

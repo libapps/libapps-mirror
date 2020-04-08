@@ -17,8 +17,8 @@ describe('terminal_settings_text_tests.js', () => {
     window.preferenceManager.definePreference(preference, 'foo');
 
     const converter = {
-      preferenceToDisplay: preference => preference.toUpperCase(),
-      displayToPreference: display => display.toLowerCase(),
+      preferenceToDisplay: (preference) => preference.toUpperCase(),
+      displayToPreference: (display) => display.toLowerCase(),
     };
 
     this.el = /** @type {!TerminalSettingsTextElement} */ (

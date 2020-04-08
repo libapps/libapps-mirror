@@ -232,7 +232,7 @@ lib.colors.hexToRGB = function(hex) {
 
   if (hex16.test(hex)) {
     // Convert from RGB to RRGGBB and from RGBA to RRGGBBAA.
-    hex = `#${hex.match(/[a-f0-9]/gi).map(x => `${x}${x}`).join('')}`;
+    hex = `#${hex.match(/[a-f0-9]/gi).map((x) => `${x}${x}`).join('')}`;
   }
 
   const ary = hex.match(hex24);

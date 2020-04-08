@@ -45,7 +45,7 @@ describe('terminal_display_manager_tests.js', () => {
 
   afterEach(function() {
     document.querySelectorAll(Element.is)
-        .forEach(el => el.parentNode.removeChild(el));
+        .forEach((el) => el.parentNode.removeChild(el));
   });
 
   it('dispatches-terminal-window-ready-when-connected', function() {
@@ -78,18 +78,18 @@ describe('terminal_display_manager_tests.js', () => {
       const displayValues =
           getStyles(el.shadowRoot.querySelectorAll('.controls'), 'display');
       assert.lengthOf(displayValues, 4);
-      assert.lengthOf(displayValues.filter(x => x != 'none'), 0);
+      assert.lengthOf(displayValues.filter((x) => x != 'none'), 0);
     }
 
     el.shadowRoot.querySelectorAll('.controls')
-        .forEach(control => control.click());
+        .forEach((control) => control.click());
     assert.lengthOf(el.shadowRoot.querySelectorAll('.window'), 1);
     assert.equal(eventTriggerCount, 1);
     {
       const displayValues =
           getStyles(el.shadowRoot.querySelectorAll('.controls'), 'display');
       assert.lengthOf(displayValues, 4);
-      assert.lengthOf(displayValues.filter(x => x != 'none'), 0);
+      assert.lengthOf(displayValues.filter((x) => x != 'none'), 0);
     }
   });
 
@@ -108,18 +108,18 @@ describe('terminal_display_manager_tests.js', () => {
       const displayValues =
           getStyles(el.shadowRoot.querySelectorAll('.controls'), 'display');
       assert.lengthOf(displayValues, 4);
-      assert.lengthOf(displayValues.filter(x => x != 'none'), 4);
+      assert.lengthOf(displayValues.filter((x) => x != 'none'), 4);
     }
 
     el.shadowRoot.querySelectorAll('.controls')
-        .forEach(control => control.click());
+        .forEach((control) => control.click());
     assert.lengthOf(el.shadowRoot.querySelectorAll('.window'), 5);
     assert.equal(eventTriggerCount, 5);
     {
       const displayValues =
           getStyles(el.shadowRoot.querySelectorAll('.controls'), 'display');
       assert.lengthOf(displayValues, 20);
-      assert.lengthOf(displayValues.filter(x => x != 'none'), 20);
+      assert.lengthOf(displayValues.filter((x) => x != 'none'), 20);
     }
   });
 

@@ -111,7 +111,7 @@ class Theme {
   writeToPrefs() {
     // Any non-priimitive stored into prefs must be duplicated to avoid storing
     // the live copy which makes comparisons void.
-    PREFS.forEach(p => {
+    PREFS.forEach((p) => {
       let v = this.getPref_(p);
       if (Array.isArray(v)) {
         v = v.slice();
@@ -236,12 +236,12 @@ export class TerminalSettingsThemeElement extends LitElement {
   connectedCallback() {
     super.connectedCallback();
 
-    Object.values(THEMES).forEach(t => {
+    Object.values(THEMES).forEach((t) => {
       t.init(window.preferenceManager);
     });
     this.preferenceChanged_(
         window.preferenceManager.get('theme'), 'theme');
-    PREFS.forEach(p => {
+    PREFS.forEach((p) => {
       window.preferenceManager.addObserver(
           p, this.boundPreferenceChanged_);
     });
@@ -251,7 +251,7 @@ export class TerminalSettingsThemeElement extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    PREFS.forEach(p => {
+    PREFS.forEach((p) => {
       window.preferenceManager.removeObserver(
         p, this.boundPreferenceChanged_);
     });
@@ -320,7 +320,7 @@ export class TerminalSettingsThemeElement extends LitElement {
     const span = (color, text) =>
         html`<span style="color:${color};font-weight:bold">${text}</span>`;
     return html`
-        <div id="themes">${Object.values(THEMES).map(t => html`
+        <div id="themes">${Object.values(THEMES).map((t) => html`
           <div id="${t.id}" class="theme"
               @click="${this.onClicked_.bind(this, t.id)}"
               ?active-theme="${this.theme_.id === t.id}"

@@ -32,8 +32,8 @@ describe('terminal_settings_category_selector_tests.js', () => {
     this.selectorEl = /** @type {!TerminalSettingsCategorySelectorElement} */ (
         document.createElement('terminal-settings-category-selector'));
     this.selectorEl.addEventListener('category-change',
-        e => this.categoryChanges.push(e.detail.category));
-    this.selectorEl.innerHTML = categories.map(category => `
+        (e) => this.categoryChanges.push(e.detail.category));
+    this.selectorEl.innerHTML = categories.map((category) => `
         <terminal-settings-category-option for='${category.id}'>
           <h1 slot='title' id='${category.titleId}'>A Title</h1>
         </terminal-settings-category-option>

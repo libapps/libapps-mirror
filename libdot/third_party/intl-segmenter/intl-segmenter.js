@@ -222,7 +222,7 @@
   global.Intl.Segmenter = class Segmenter {
     constructor(locale, options) {
       this._locale = Array.isArray(locale)
-        ? locale.map(s => String(s)) : String(locale || navigator.language);
+        ? locale.map((s) => String(s)) : String(locale || navigator.language);
       options = Object.assign({granularity: 'grapheme'}, options);
       this._granularity = GRANULARITIES.includes(options.granularity)
         ? options.granularity : 'grapheme';

@@ -24,6 +24,7 @@ module.exports = {
   // to be too onerous and not required by the styleguide, feel free to discuss.
   'rules': {
     'array-bracket-spacing': 'error',
+    'arrow-parens': ['error', 'always'],
     'arrow-spacing': ['error', {'before': true, 'after': true}],
     'block-spacing': ['error', 'always'],
     'comma-dangle': ['error', 'always-multiline'],

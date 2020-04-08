@@ -103,8 +103,8 @@ terminal.init = function(element) {
     prefs.addObserver('font-family', onFontFamilyChanged);
 
     chrome.terminalPrivate.onA11yStatusChanged.addListener(
-        enabled => term.setAccessibilityEnabled(enabled));
-    chrome.terminalPrivate.getA11yStatus(enabled => {
+        (enabled) => term.setAccessibilityEnabled(enabled));
+    chrome.terminalPrivate.getA11yStatus((enabled) => {
       term.setAccessibilityEnabled(enabled);
       runTerminal();
     });
@@ -277,7 +277,7 @@ terminal.migrateSettings = function(callback) {
       callback();
       return;
     }
-    chrome.terminalPrivate.getCroshSettings(settings => {
+    chrome.terminalPrivate.getCroshSettings((settings) => {
       settings['crosh.settings.migrated'] = true;
       hterm.defaultStorage.setItems(settings, callback);
     });

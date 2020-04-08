@@ -63,7 +63,7 @@ describe('terminal_settings_colorpicker.js', () => {
     const svp = getElement(el, 'saturation-value-picker');
     const hs = getElement(el, 'hue-slider');
     const ts = getElement(el, 'transparency-slider');
-    return Promise.all([svp, hs, ts].map(x => x.updateComplete));
+    return Promise.all([svp, hs, ts].map((x) => x.updateComplete));
   }
 
   beforeEach(function() {
