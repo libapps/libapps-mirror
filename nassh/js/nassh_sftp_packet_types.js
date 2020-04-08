@@ -77,7 +77,7 @@ nassh.sftp.packets.NamePacket = function(packet) {
   /* @type {!Array<!nassh.sftp.File>} */
   this.files = [];
 
-  for(var i = 0; i < this.fileCount; i++) {
+  for (var i = 0; i < this.fileCount; i++) {
     const fileName = packet.getUtf8String();
     const longFileName = packet.getUtf8String();
 
@@ -356,7 +356,7 @@ nassh.sftp.packets.getFileAttrs = function(packet) {
     attrs.extendedCount = extendedCount;
     var extendedData = [];
 
-    for(var i = 0; i < extendedCount; i++) {
+    for (var i = 0; i < extendedCount; i++) {
       extendedData.push({
         'type': packet.getString(),
         'data': packet.getString()

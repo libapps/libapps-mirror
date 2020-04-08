@@ -1354,7 +1354,7 @@ nassh.CommandInstance.prototype.createTtyStream = function(
 nassh.CommandInstance.prototype.sendToPlugin_ = function(name, args) {
   try {
     this.plugin_.postMessage({name: name, arguments: args});
-  } catch(e) {
+  } catch (e) {
     // When we tear down the plugin, we sometimes have a tail of pending calls.
     // Rather than try and chase all of those down, swallow errors when the
     // plugin doesn't exist.

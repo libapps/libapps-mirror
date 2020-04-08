@@ -73,7 +73,7 @@ nassh.Relay.Corpv4.prototype.redirect = function() {
   try {
     // eslint-disable-next-line no-new
     new URL(uri);
-  } catch(e) {
+  } catch (e) {
     this.io.println(e);
     this.io.println(uri);
     return false;

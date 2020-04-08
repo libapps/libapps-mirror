@@ -325,7 +325,7 @@ nassh.PreferencesEditor.prototype.save = function(input) {
   var key = keys[0];
   var prefs = this.prefs_;
 
-  switch(this.getPreferenceType(key)) {
+  switch (this.getPreferenceType(key)) {
     case 'bool':
       prefs.set(key, input.checked);
       break;
@@ -410,7 +410,7 @@ nassh.PreferencesEditor.prototype.sync = function(input) {
   var keys = input.id.split(':');
   var key = keys[0];
   var prefValue = this.prefs_.get(key);
-  switch(this.getPreferenceType(key)) {
+  switch (this.getPreferenceType(key)) {
     case 'bool':
       input.checked = prefValue;
       break;
@@ -496,7 +496,7 @@ nassh.PreferencesEditor.prototype.syncPage = function() {
   deleteChildren(eles);
 
   // Create the table of settings.
-  for(var i = 0; i < hterm.PreferenceManager.categoryDefinitions.length; i++) {
+  for (var i = 0; i < hterm.PreferenceManager.categoryDefinitions.length; i++) {
     var categoryDefinition = hterm.PreferenceManager.categoryDefinitions[i];
 
     var elem = this.addCategoryRow(categoryDefinition, eles, menu);
@@ -642,7 +642,7 @@ nassh.PreferencesEditor.prototype.createInput = function(key) {
   };
 
   var input = document.createElement('input');
-  switch(this.getPreferenceType(key)) {
+  switch (this.getPreferenceType(key)) {
     case 'bool':
       input.type = 'checkbox';
       break;
@@ -654,7 +654,7 @@ nassh.PreferencesEditor.prototype.createInput = function(key) {
     case 'enum':
       input = document.createElement('select');
       var prefValues = this.getPreferenceEnumValues(key);
-      for(var i = 0; i < prefValues.length; i++) {
+      for (var i = 0; i < prefValues.length; i++) {
         addOption(input, prefValues[i]);
       }
       oninput = onchange;
@@ -767,7 +767,7 @@ nassh.PreferencesEditor.prototype.getPreferenceType = function(key) {
     return prefType;
   }
 
-  switch(typeof this.prefs_.get(key)) {
+  switch (typeof this.prefs_.get(key)) {
     case 'boolean': return 'bool';
     case 'string': return 'string';
     case 'object': return 'value';

@@ -30,6 +30,7 @@ module.exports = {
     'curly': 'error',
     'eol-last': 'error',
     'generator-star-spacing': ['error', 'after'],
+    'keyword-spacing': 'error',
     'lines-between-class-members': 'error',
     'max-len': ['error', {'code': 80, 'ignoreUrls': true}],
     'new-parens': 'error',
