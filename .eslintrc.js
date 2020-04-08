@@ -84,6 +84,7 @@ module.exports = {
     ],
     'no-whitespace-before-property': 'error',
     'no-with': 'error',
+    'one-var-declaration-per-line': 'error',
     'prefer-numeric-literals': 'error',
     'quote-props': ['error', 'consistent'],
     'quotes': ['error', 'single',

@@ -365,8 +365,9 @@ lib.wc.unambiguous = [
  * @return {boolean} True if the given character is in the table.
  */
 lib.wc.binaryTableSearch_ = function(ucs, table) {
-  var min = 0, max = table.length - 1;
-  var mid;
+  let min = 0;
+  let max = table.length - 1;
+  let mid;
 
   if (ucs < table[min][0] || ucs > table[max][1]) {
     return false;
@@ -477,11 +478,11 @@ lib.wc.charWidthRegardAmbiguous = function(ucs) {
  * @return {number} The column width of the given string.
  */
 lib.wc.strWidth = function(str) {
-  var width, rv = 0;
+  let rv = 0;
 
   for (var i = 0; i < str.length;) {
     var codePoint = str.codePointAt(i);
-    width = lib.wc.charWidth(codePoint);
+    const width = lib.wc.charWidth(codePoint);
     if (width < 0) {
       return -1;
     }
