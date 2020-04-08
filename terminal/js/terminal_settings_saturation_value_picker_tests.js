@@ -34,7 +34,7 @@ describe('saturation_value_picker.js', () => {
       createElement(50, 100),
       createElement(100, 0),
       createElement(100, 50),
-      createElement(100, 100)
+      createElement(100, 100),
     ];
 
     els.forEach(el => document.body.appendChild(el));
@@ -50,7 +50,7 @@ describe('saturation_value_picker.js', () => {
           ['50%', '0%'],
           ['100%', '100%'],
           ['100%', '50%'],
-          ['100%', '0%']
+          ['100%', '0%'],
         ]);
   });
 

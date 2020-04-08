@@ -223,7 +223,7 @@ nassh.ColumnList.prototype.getActiveNode_ = function() {
 nassh.ColumnList.prototype.getRowColByIndex_ = function(i) {
   return {
     row: parseInt(i / this.columnCount, 10),
-    column: i % this.columnCount
+    column: i % this.columnCount,
   };
 };
 

@@ -331,7 +331,7 @@ class GridNode {
         (node, edge = node.bottomEdge_) => node.bottomEdge_ = edge,
         (node, edge = node.leftEdge_) => node.leftEdge_ = edge,
         (node, edge = node.rightEdge_) => node.rightEdge_ = edge,
-        (node, edge = node.topEdge_) => node.topEdge_ = edge
+        (node, edge = node.topEdge_) => node.topEdge_ = edge,
     ]) {
       const removedEdge = edge(sibling);
       const parentEdge = edge(this.parentNode_);

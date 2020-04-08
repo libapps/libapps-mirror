@@ -35,7 +35,7 @@ lib.Storage.Local.prototype.onStorage_ = function(e) {
   var o = {};
   o[e.key] = {
     oldValue: prevValue,
-    newValue: curValue
+    newValue: curValue,
   };
 
   for (var i = 0; i < this.observers_.length; i++) {

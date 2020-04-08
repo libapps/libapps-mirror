@@ -18,7 +18,7 @@ export class HueSliderElement extends LitElement {
       hue: {
         type: Number,
         reflect: true,
-      }
+      },
     };
   }
 

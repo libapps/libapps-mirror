@@ -17,12 +17,12 @@ it('write_identitiesAnswer', /** @suppress {visibility} msg.data_ */ () => {
       nassh.agent.messages.Numbers.AGENT_IDENTITIES_ANSWER, [
         {
           keyBlob: new Uint8Array([1, 2]),
-          comment: new Uint8Array([3, 4, 5])
+          comment: new Uint8Array([3, 4, 5]),
         },
         {
           keyBlob: new Uint8Array([6, 7, 8, 9]),
-          comment: new Uint8Array(0)
-        }
+          comment: new Uint8Array(0),
+        },
       ]);
   assert.strictEqual(
       identitiesAnswerMsg.type,
@@ -32,7 +32,7 @@ it('write_identitiesAnswer', /** @suppress {visibility} msg.data_ */ () => {
       Array.from(identitiesAnswerMsg.data_),
       [
         0, 0, 0, 2, 0, 0, 0, 2, 1, 2, 0, 0, 0, 3, 3,
-        4, 5, 0, 0, 0, 4, 6, 7, 8, 9, 0, 0, 0, 0
+        4, 5, 0, 0, 0, 4, 6, 7, 8, 9, 0, 0, 0, 0,
       ],
       'data (SSH_AGENT_IDENTITIES_ANSWER)');
 });

@@ -275,7 +275,7 @@ function MockWindow() {
         obj[prop] = new MockEvent();
       }
       return obj[prop];
-    }
+    },
   });
 }
 

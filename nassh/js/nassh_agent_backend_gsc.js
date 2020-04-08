@@ -140,7 +140,7 @@ nassh.agent.backends.GSC.HashAlgorithms = {
     signaturePrefix: new Uint8Array(/* 'rsa-sha2-512' */[
       0x72, 0x73, 0x61, 0x2d, 0x73, 0x68, 0x61, 0x32, 0x2d, 0x35,
       0x31, 0x32,
-    ])
+    ]),
   },
 };
 // clang-format on

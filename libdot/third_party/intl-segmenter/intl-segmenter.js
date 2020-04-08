@@ -22,20 +22,20 @@
   // TODO: Implement https://www.unicode.org/reports/tr29/
   const RULES = {
     grapheme: {
-      grapheme: /^(.|\n)/
+      grapheme: /^(.|\n)/,
     },
     word: {
       letter: /^[a-z](?:'?[a-z])*/i,
-      number: /^\d+([,.]\d+)*/
+      number: /^\d+([,.]\d+)*/,
     },
     sentence: {
       terminator: /^[^.?!\r\n]+[.?!]+[\r\n]?/,
-      separator: /^[^.?!\r\n]+[\r\n]?/
+      separator: /^[^.?!\r\n]+[\r\n]?/,
     },
     line: {
       hard: /^\S*[\r\n]/,
-      soft: /^\S*\s*/
-    }
+      soft: /^\S*\s*/,
+    },
   };
 
   // Work around bug in v8BreakIterator where ICU's UWordBreak enum is
@@ -50,7 +50,7 @@
       letter: 200, // UBRK_WORD_LETTER
       kana: 300, // UBRK_WORD_KANA
       ideo: 400, // UBRK_WORD_IDEO
-      unknown: -1
+      unknown: -1,
     }[value] || 0;
 
 
@@ -63,13 +63,13 @@
       // Map ULineBreakTag rule status to string.
       return {
         0: 'terminator',
-        100: 'separator'
+        100: 'separator',
       }[ruleStatus] || value;
     case 'line':
       // Map ULineBreakTag rule status to string.
       return {
         0: 'soft',
-        100: 'hard'
+        100: 'hard',
       }[ruleStatus] || value;
     default:
       return value;
@@ -90,7 +90,7 @@
         breaks.push({
           pos: vbi.current(),
           segment: string.slice(last, pos),
-          breakType: fixBreakType(vbi.breakType(), granularity)
+          breakType: fixBreakType(vbi.breakType(), granularity),
         });
         last = pos;
         pos = vbi.next();
@@ -108,7 +108,7 @@
             breaks.push({
               pos: pos,
               segment: m[0],
-              breakType: granularity === 'grapheme' ? undefined : rule
+              breakType: granularity === 'grapheme' ? undefined : rule,
             });
             found = true;
             break;
@@ -118,7 +118,7 @@
           breaks.push({
             pos: pos + 1,
             segment: string.slice(pos, ++pos),
-            breakType: 'none'
+            breakType: 'none',
           });
         }
       }
@@ -153,8 +153,8 @@
         done: false,
         value: {
           segment: this._breaks[this._cur].segment,
-          breakType: this._breaks[this._cur].breakType
-        }
+          breakType: this._breaks[this._cur].breakType,
+        },
       };
     }
 

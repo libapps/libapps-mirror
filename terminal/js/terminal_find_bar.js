@@ -16,7 +16,7 @@ export class TerminalFindBar extends LitElement {
       inputIsEmpty_: {
         type: Boolean,
         attribute: false,
-      }
+      },
     };
   }
 
@@ -151,7 +151,7 @@ export class TerminalFindBar extends LitElement {
         detail: {
           type: type,
           value,
-        }
+        },
       }));
     }
   }
@@ -170,8 +170,8 @@ export class TerminalFindBar extends LitElement {
   onCloseClick_() {
     this.dispatchEvent(new CustomEvent('find-bar-event', {
       detail: {
-        type: 'close'
-      }
+        type: 'close',
+      },
     }));
   }
 

@@ -58,11 +58,11 @@ lib.f.replaceVars.functions = {
       '>': '&gt;',
       '&': '&amp;',
       '"': '&quot;',
-      "'": '&#39;'
+      "'": '&#39;',
     };
 
     return str.replace(/[<>&"']/g, (m) => map[m]);
-  }
+  },
 };
 
 /**

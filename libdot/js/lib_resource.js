@@ -16,7 +16,7 @@
  * collisions.
  */
 lib.resource = {
-  resources_: {}
+  resources_: {},
 };
 
 /** @typedef {{type: string, name: string, data: *}} */
@@ -35,7 +35,7 @@ lib.resource.add = function(name, type, data) {
   lib.resource.resources_[name] = {
     type: type,
     name: name,
-    data: data
+    data: data,
   };
 };
 

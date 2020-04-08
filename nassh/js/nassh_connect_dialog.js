@@ -184,7 +184,7 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
 
   // Observe global 'profile-ids' list so we can keep the ColumnList updated.
   this.prefs_.addObservers(null, {
-      'profile-ids': this.onProfileListChanged_.bind(this)
+      'profile-ids': this.onProfileListChanged_.bind(this),
     });
 
   // Same for the 'description' field of all known profiles.
@@ -192,7 +192,7 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
     var rec = this.profileList_[i];
     if (rec.prefs) {
       rec.prefs.addObservers(null, {
-       description: this.onDescriptionChanged_.bind(this)
+       description: this.onDescriptionChanged_.bind(this),
       });
     }
   }
@@ -234,7 +234,7 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
                                        this.onOptionsClick_.bind(this));
 
   // These fields interact with each-other's placeholder text.
-  ['description', 'username', 'hostname', 'port'
+  ['description', 'username', 'hostname', 'port',
   ].forEach((name) => {
       var field = /** @type {!Element} */ (this.$f(name));
 
@@ -443,7 +443,7 @@ nassh.ConnectDialog.prototype.save = function() {
       this.currentProfileRecord_ = rec;
 
       prefs.addObservers(null, {
-       description: this.onDescriptionChanged_.bind(this)
+       description: this.onDescriptionChanged_.bind(this),
       });
 
       this.shortcutList_.afterNextRedraw(() => {
@@ -471,7 +471,7 @@ nassh.ConnectDialog.prototype.startup_ = function(message, proto) {
   nassh.registerProtocolHandler(proto);
 
   var items = {
-    '/nassh/connectDialog/lastProfileId': this.currentProfileRecord_.id
+    '/nassh/connectDialog/lastProfileId': this.currentProfileRecord_.id,
   };
   chrome.storage.local.set(items);
 
@@ -608,7 +608,7 @@ nassh.ConnectDialog.prototype.updateDetailPlaceholders_ = function() {
   // Copy the remaining match elements into the appropriate placeholder
   // attribute.  Set the default placeholder text from this.str.placeholders
   // for any field that was not matched.
-  ['username', 'hostname', 'port'
+  ['username', 'hostname', 'port',
   ].forEach((name) => {
     var value = ary.shift();
     if (!value) {

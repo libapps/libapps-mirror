@@ -33,7 +33,7 @@ describe('terminal_display_manager_tests.js', () => {
       l: element.offsetLeft,
       w: element.offsetWidth,
       t: element.offsetTop,
-      h: element.offsetHeight
+      h: element.offsetHeight,
     };
   };
 

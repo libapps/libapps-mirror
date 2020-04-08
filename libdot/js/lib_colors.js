@@ -344,7 +344,7 @@ lib.colors.hslxArrayToRgbaArray = function(hslx) {
     255 * hueToRgb(t1, t2, hue + 2),
     255 * hueToRgb(t1, t2, hue),
     255 * hueToRgb(t1, t2, hue - 2),
-    hslx[3] !== undefined ? +hslx[3] : 1
+    hslx[3] !== undefined ? +hslx[3] : 1,
   ];
 };
 
@@ -739,7 +739,7 @@ lib.colors.stockColorPalette = [
     '#080808', '#121212', '#1C1C1C', '#262626', '#303030', '#3A3A3A',
     '#444444', '#4E4E4E', '#585858', '#626262', '#6C6C6C', '#767676',
     '#808080', '#8A8A8A', '#949494', '#9E9E9E', '#A8A8A8', '#B2B2B2',
-    '#BCBCBC', '#C6C6C6', '#D0D0D0', '#DADADA', '#E4E4E4', '#EEEEEE'
+    '#BCBCBC', '#C6C6C6', '#D0D0D0', '#DADADA', '#E4E4E4', '#EEEEEE',
    ].map(lib.colors.hexToRGB);
 
 /**

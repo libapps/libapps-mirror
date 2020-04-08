@@ -91,7 +91,7 @@ function(request, sender, sendResponse) {
           fileSystemId: request.fileSystemId,
           displayName: request.displayName,
           writable: true,
-        }
+        },
       },
       connectOptions: {
         username: request.username,

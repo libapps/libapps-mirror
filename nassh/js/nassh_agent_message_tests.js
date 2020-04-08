@@ -113,11 +113,11 @@ it('fromRawMessage_signRequest', () => {
   assert.deepStrictEqual(
       nassh.agent.Message.fromRawMessage(new Uint8Array([
         0, 0, 0, 18, 13, 0, 0, 0, 2, 1, 2,
-        6, 7, 8, 9,  0,  0, 0, 3, 3, 4, 5
+        6, 7, 8, 9,  0,  0, 0, 3, 3, 4, 5,
       ])),
       null, 'invalid message (SSH_AGENTC_REQUEST_IDENTITIES)');
   const signRequestMsg = nassh.agent.Message.fromRawMessage(new Uint8Array([
-    0, 0, 0, 18, 13, 0, 0, 0, 2, 1, 2, 0, 0, 0, 3, 3, 4, 5, 6, 7, 8, 9
+    0, 0, 0, 18, 13, 0, 0, 0, 2, 1, 2, 0, 0, 0, 3, 3, 4, 5, 6, 7, 8, 9,
   ]));
   assert.isTrue(signRequestMsg.eom(), 'eom (SSH_AGENTC_SIGN_REQUEST)');
   assert.equal(

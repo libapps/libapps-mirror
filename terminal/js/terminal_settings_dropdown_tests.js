@@ -16,7 +16,7 @@ describe('terminal_settings_dropdown_tests.js', () => {
     window.PreferenceManager = {
       defaultPreferences: {
         [preference]: {type: options},
-      }
+      },
     };
     window.preferenceManager =
       new lib.PreferenceManager(new lib.Storage.Memory());

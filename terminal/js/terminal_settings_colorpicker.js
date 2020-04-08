@@ -75,19 +75,19 @@ export class TerminalColorpickerElement extends LitElement {
         type: Boolean,
       },
       hue_: {
-        type: Number
+        type: Number,
       },
       saturation_: {
-        type: Number
+        type: Number,
       },
       hsvValue_: {
-        type: Number
+        type: Number,
       },
       transparency_: {
-        type: Number
+        type: Number,
       },
       dialogIsOpened_: {
-        type: Boolean
+        type: Boolean,
       },
     };
   }
@@ -362,7 +362,7 @@ export class TerminalSettingsColorpickerElement extends
       },
       disableTransparency: {
         type: Boolean,
-      }
+      },
     };
   }
 

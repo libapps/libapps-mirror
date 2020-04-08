@@ -499,8 +499,8 @@ nassh.CommandInstance.prototype.mountProfile = function(profileID) {
         mountOptions: {
           fileSystemId: prefs.id,
           displayName: prefs.get('description'),
-          writable: true
-        }
+          writable: true,
+        },
       },
       connectOptions: this.prefsToConnectParams_(prefs),
     };
@@ -755,8 +755,8 @@ nassh.CommandInstance.prototype.mountDestination = function(destination) {
       mountOptions: {
         fileSystemId: rv.username + rv.hostname,
         displayName: rv.username + rv.hostname,
-        writable: true
-      }
+        writable: true,
+      },
     },
     connectOptions: rv,
   };
@@ -1324,7 +1324,7 @@ nassh.CommandInstance.prototype.createTtyStream = function(
     allowRead: allowRead,
     allowWrite: allowWrite,
     inputBuffer: this.inputBuffer_,
-    io: this.io
+    io: this.io,
   };
 
   var stream = this.streams_.openStream(nassh.Stream.Tty, fd, arg, onOpen);

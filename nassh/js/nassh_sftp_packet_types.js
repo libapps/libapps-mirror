@@ -359,7 +359,7 @@ nassh.sftp.packets.getFileAttrs = function(packet) {
     for (var i = 0; i < extendedCount; i++) {
       extendedData.push({
         'type': packet.getString(),
-        'data': packet.getString()
+        'data': packet.getString(),
       });
     }
 
