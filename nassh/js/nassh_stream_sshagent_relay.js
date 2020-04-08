@@ -86,7 +86,7 @@ nassh.Stream.SSHAgentRelay.prototype.asyncOpen = function(
 
   this.port_.onMessage.addListener(initialOnMessage);
   this.port_.onDisconnect.addListener(initialDisconnect);
-  this.port_.postMessage({'type':'auth-agent@openssh.com','data':[0]});
+  this.port_.postMessage({'type': 'auth-agent@openssh.com', 'data': [0]});
 };
 
 /**

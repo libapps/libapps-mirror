@@ -17,7 +17,7 @@
 
   global.Intl = global.Intl || {};
 
-  const GRANULARITIES = ['grapheme', 'word','sentence', 'line'];
+  const GRANULARITIES = ['grapheme', 'word', 'sentence', 'line'];
 
   // TODO: Implement https://www.unicode.org/reports/tr29/
   const RULES = {
