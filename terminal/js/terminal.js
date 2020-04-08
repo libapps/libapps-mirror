@@ -85,7 +85,7 @@ terminal.init = function(element) {
     const prefs = term.getPrefs();
     definePrefs(prefs);
     normalizePrefsInPlace(prefs);
-    watchBackgroundColor(prefs, /*updateBody=*/true);
+    watchBackgroundColor(prefs, /* updateBody= */ true);
 
     const onFontFamilyChanged = async (fontFamily) => {
       // If the user changes font quickly enough, we might have a pending

@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     window.PreferenceManager = hterm.PreferenceManager;
     window.preferenceManager = new window.PreferenceManager('default');
     definePrefs(window.preferenceManager);
-    watchBackgroundColor(window.preferenceManager, /*updateBody=*/false);
+    watchBackgroundColor(window.preferenceManager, /* updateBody= */ false);
     window.preferenceManager.readStorage(() => {
       normalizePrefsInPlace(window.preferenceManager);
       window.preferenceManager.notifyAll();

@@ -1909,7 +1909,7 @@ nasftp.Cli.addCommand_(['pwd'], 0, 0, '', '',
  */
 nasftp.Cli.commandQuit_ = function(_args) {
   this.terminal.keyboard.bindings.clear();
-  this.commandInstance_.exit(0, /*noReconnect=*/false);
+  this.commandInstance_.exit(0, /* noReconnect= */ false);
   return Promise.resolve();
 };
 nasftp.Cli.addCommand_(['exit', 'quit', 'bye'], 0, 0, '', '',

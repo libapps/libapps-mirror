@@ -46,7 +46,7 @@ it('splitCommandLine', () => {
     ['-x "--" ls "a b c"', ['-x', '--', 'ls', 'a b c'], ''],
 
     // Our parser doesn't handle more complicated quoting (yet?).
-    //['-o"foo bar" -o "foo bar"', ['-ofoo bar', '-o', 'foo bar'], ''],
+    // ['-o"foo bar" -o "foo bar"', ['-ofoo bar', '-o', 'foo bar'], ''],
   ];
 
   data.forEach((dataSet) => {

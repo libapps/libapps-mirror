@@ -678,7 +678,7 @@ nassh.sftp.Client.prototype.openFile = function(path, pflags) {
 nassh.sftp.Client.prototype.readChunk = function(handle, offset, len) {
   var packet = new nassh.sftp.Packet();
   packet.setString(handle);
-  packet.setUint64(offset); //offset
+  packet.setUint64(offset); // offset
   packet.setUint32(len); // max bytes per packet
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.READ, packet)

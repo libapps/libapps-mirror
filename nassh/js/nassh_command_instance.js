@@ -1556,7 +1556,7 @@ nassh.CommandInstance.prototype.onPlugin_.printLog = function(str) {
  */
 nassh.CommandInstance.prototype.onPlugin_.exit = function(code) {
   console.log('plugin exit: ' + code);
-  this.exit(code, /*noReconnect=*/false);
+  this.exit(code, /* noReconnect= */ false);
 };
 
 /**

@@ -85,6 +85,7 @@ module.exports = {
     'semi': ['error', 'always'],
     'semi-style': ['error', 'last'],
     'space-unary-ops': 'error',
+    'spaced-comment': ['error', 'always'],
     'switch-colon-spacing': ['error', {'after': true, 'before': false}],
     'symbol-description': 'error',
     'template-curly-spacing': ['error', 'never'],
