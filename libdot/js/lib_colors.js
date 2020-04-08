@@ -306,7 +306,7 @@ lib.colors.crackHSL = function(color) {
  * The returned alpha component defaults to 1 if it isn't present in the input.
  *
  * The returned values are not rounded to preserve precision for computations,
- * rounded before they are used in CSS strings.
+ * so should be rounded before they are used in CSS strings.
  *
  * @param {?Array<string|number>} hslx The HSL or HSLA elements to convert.
  * @return {!Array<number>} The RGBA values.
@@ -346,6 +346,57 @@ lib.colors.hslxArrayToRgbaArray = function(hslx) {
     255 * hueToRgb(t1, t2, hue - 2),
     hslx[3] !== undefined ? +hslx[3] : 1
   ];
+};
+
+/**
+ * Converts a hsvx array to a hsla array. The hsvx array is an array of [hue
+ * (>=0, <=360), saturation (>=0, <=100), value (>=0, <=100), alpha] (alpha can
+ * be missing).
+ *
+ * The returned alpha component defaults to 1 if it isn't present in the input.
+ *
+ * The returned values are not rounded to preserve precision for computations,
+ * so should be rounded before they are used in CSS strings.
+ *
+ * @param {?Array<string|number>} hsvx The hsv or hsva array.
+ * @return {!Array<number>} The hsla array.
+ */
+lib.colors.hsvxArrayToHslaArray = function(hsvx) {
+  const clamp = (x) => lib.f.clamp(x, 0, 100);
+  const [hue, saturation, value] = hsvx.map(parseFloat);
+  const hslLightness = clamp(value * (100 - saturation / 2) / 100);
+  let hslSaturation = 0;
+  if (hslLightness !== 0 && hslLightness !== 100) {
+    hslSaturation = clamp((value - hslLightness) /
+        Math.min(hslLightness, 100 - hslLightness) * 100);
+  }
+  return [
+      hue,
+      hslSaturation,
+      hslLightness,
+      hsvx.length === 4 ? +hsvx[3] : 1,
+  ];
+};
+
+/**
+ * Converts a hslx array to a hsva array. The hsva array is an array of [hue
+ * (>=0, <=360), saturation (>=0, <=100), value (>=0, <=100), alpha].
+ *
+ * The returned alpha component defaults to 1 if it isn't present in the input.
+ *
+ * @param {?Array<string|number>} hslx The hsl or hsla array.
+ * @return {!Array<number>} The hsva array.
+ */
+lib.colors.hslxArrayToHsvaArray = function(hslx) {
+  const clamp = (x) => lib.f.clamp(x, 0, 100);
+  const [hue, saturation, lightness] = hslx.map(parseFloat);
+  const hsvValue = clamp(
+      lightness + saturation * Math.min(lightness, 100 - lightness) / 100);
+  let hsvSaturation = 0;
+  if (hsvValue !== 0) {
+    hsvSaturation = clamp(200 * (1 - lightness / hsvValue));
+  }
+  return [hue, hsvSaturation, hsvValue, hslx.length === 4 ? +hslx[3] : 1];
 };
 
 /**

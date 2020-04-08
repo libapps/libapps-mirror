@@ -332,4 +332,36 @@ it('contrastRatio', () => {
   });
 });
 
+it('hslxArrayToHsvaArray', () => {
+  const data = [
+      [[0, 0, 0], [0, 0, 0, 1]],
+      [[277, 0, 100], [277, 0, 100, 1]],
+      [[95, 53, 36, 0], [95, 69, 55, 0]],
+      [[126, 53, 69, 1], [126, 38, 85, 1]],
+      [[172, 100, 69, 0.5], [172, 62, 100, 0.5]],
+  ];
+
+  data.forEach(([hsl, hsv]) => {
+    const result = lib.colors.hslxArrayToHsvaArray(hsl);
+    assert.lengthOf(result, hsv.length);
+    result.forEach((value, i) => assert.closeTo(value, hsv[i], 1));
+  });
+});
+
+it('hsvxArrayToHslaArray', () => {
+  const data = [
+      [[0, 0, 0], [0, 0, 0, 1]],
+      [[277, 0, 100], [277, 0, 100, 1]],
+      [[95, 69, 55, 0], [95, 53, 36, 0]],
+      [[126, 38, 85, 1], [126, 52, 69, 1]],
+      [[172, 62, 100, 0.5], [172, 100, 69, 0.5]],
+  ];
+
+  data.forEach(([hsv, hsl]) => {
+    const result = lib.colors.hsvxArrayToHslaArray(hsv);
+    assert.lengthOf(result, hsl.length);
+    result.forEach((value, i) => assert.closeTo(value, hsl[i], 1));
+  });
+});
+
 });

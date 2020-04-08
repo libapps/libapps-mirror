@@ -3,14 +3,14 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview Exports an element: saturation-lightness-picker
+ * @fileoverview Exports an element: saturation-value-picker
  *
  * @suppress {moduleLoad}
  */
 import {LitElement, css, html} from './lit_element.js';
 
-export class SaturationLightnessPickerElement extends LitElement {
-  static get is() { return 'saturation-lightness-picker'; }
+export class SaturationValuePickerElement extends LitElement {
+  static get is() { return 'saturation-value-picker'; }
 
   /** @override */
   static get properties() {
@@ -22,7 +22,7 @@ export class SaturationLightnessPickerElement extends LitElement {
         type: Number,
         reflect: true,
       },
-      lightness: {
+      value: {
         type: Number,
         reflect: true,
       },
@@ -40,44 +40,6 @@ export class SaturationLightnessPickerElement extends LitElement {
           width: 200px;
         }
 
-        :host::before {
-          background-image: linear-gradient(
-              to right,
-              hsl(0, 0%, 50%),
-              transparent);
-          bottom: 0;
-          content: "";
-          left: 0;
-          pointer-events: none;
-          position: absolute;
-          right: 0;
-          top: 0;
-          z-index: 1;
-        }
-
-        :host::after {
-          background-image: linear-gradient(
-              to top,
-              black,
-              transparent,
-              white);
-          bottom: 0;
-          content: "";
-          left: 0;
-          pointer-events: none;
-          position: absolute;
-          right: 0;
-          top: 0;
-          z-index: 1;
-        }
-
-        #display {
-          border-radius: inherit;
-          height: 100%;
-          pointer-events: none;
-          width: 100%;
-        }
-
         #picker {
           border-radius: 100%;
           border: 3px solid white;
@@ -93,19 +55,37 @@ export class SaturationLightnessPickerElement extends LitElement {
           width: 32px;
           z-index: 2;
         }
+
+        #black-to-transparent, #white-to-pure {
+          border-radius: 8px;
+          height: 100%;
+          pointer-events: none;
+          position: absolute;
+          width: 100%;
+          z-index: 1;
+        }
+
+        #black-to-transparent {
+          background: linear-gradient(to top, #000000 0%, #00000000 100%);
+          z-index: 2;
+        }
     `;
   }
 
   /** @override */
   render() {
+    const whiteToPureStyle = `background: linear-gradient(to right, ` +
+        `#ffffff 0%, hsl(${this.hue}, 100%, 50%) 100%);`;
+    const color = lib.colors.arrayToHSLA(
+        lib.colors.hsvxArrayToHslaArray(
+            [this.hue, this.saturation, this.value]));
+    const pickerStyle = `left: ${this.saturation}%; ` +
+        `top: ${100 - this.value}%; background-color: ${color};`;
+
     return html`
-        <div id="display" style="background-color:
-            hsl(${this.hue}, 100%, 50%);">
-        </div>
-        <div id="picker" style="left: ${this.saturation}%;
-            top: ${100 - this.lightness}%; background-color:
-            hsl(${this.hue}, ${this.saturation}%, ${this.lightness}%);">
-        </div>
+        <div id="black-to-transparent"></div>
+        <div id="white-to-pure" style="${whiteToPureStyle}"></div>
+        <div id="picker" style="${pickerStyle}"></div>
     `;
   }
 
@@ -117,7 +97,7 @@ export class SaturationLightnessPickerElement extends LitElement {
     /** @private {number} */
     this.saturation;
     /** @private {number} */
-    this.lightness;
+    this.value;
   }
 
   /** @override */
@@ -161,11 +141,11 @@ export class SaturationLightnessPickerElement extends LitElement {
     const yPercent = lib.f.clamp(event.offsetY / this.clientHeight, 0, 1);
 
     this.saturation = 100 * xPercent;
-    this.lightness = 100 * (1 - yPercent);
+    this.value = 100 * (1 - yPercent);
 
     this.dispatchEvent(new CustomEvent('updated', {bubbles: true}));
   }
 }
 
-customElements.define(SaturationLightnessPickerElement.is,
-    SaturationLightnessPickerElement);
+customElements.define(SaturationValuePickerElement.is,
+    SaturationValuePickerElement);

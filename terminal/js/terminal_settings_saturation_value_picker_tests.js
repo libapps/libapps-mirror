@@ -3,17 +3,17 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview Sauration Lightness Picker unit tests
+ * @fileoverview Sauration Value Picker unit tests
  */
 
-import {SaturationLightnessPickerElement as Element} from
-    './terminal_settings_saturation_lightness_picker.js';
+import {SaturationValuePickerElement as Element} from
+    './terminal_settings_saturation_value_picker.js';
 
-describe('saturation_lightness_picker_tests.js', () => {
-  const createElement = (saturation, lightness) => {
+describe('saturation_value_picker.js', () => {
+  const createElement = (saturation, value) => {
     const el = document.createElement(Element.is);
     el.setAttribute('saturation', saturation);
-    el.setAttribute('lightness', lightness);
+    el.setAttribute('value', value);
     return el;
   };
 
@@ -69,7 +69,7 @@ describe('saturation_lightness_picker_tests.js', () => {
     assert.equal(getPicker(el).style.left, '75%');
     assert.equal(getPicker(el).style.top, '75%');
 
-    el.setAttribute('lightness', 75);
+    el.setAttribute('value', 75);
     await el.updateComplete;
 
     assert.equal(getPicker(el).style.left, '75%');
@@ -95,7 +95,7 @@ describe('saturation_lightness_picker_tests.js', () => {
     assert.equal(getPicker(el).style.left, '75%');
     assert.equal(getPicker(el).style.top, '25%');
     assert.equal(el.getAttribute('saturation'), 75);
-    assert.equal(el.getAttribute('lightness'), 75);
+    assert.equal(el.getAttribute('value'), 75);
   });
 
   it('publishes-event-on-pointer-event', async function() {

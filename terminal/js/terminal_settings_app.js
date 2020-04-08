@@ -18,8 +18,6 @@ import './terminal_settings_category_selector.js';
 import './terminal_settings_checkbox.js';
 import './terminal_settings_colorpicker.js';
 import './terminal_settings_dropdown.js';
-import './terminal_settings_hue_slider.js';
-import './terminal_settings_saturation_lightness_picker.js';
 import './terminal_settings_text.js';
 import './terminal_settings_theme.js';
 import './terminal_settings_transparency_slider.js';

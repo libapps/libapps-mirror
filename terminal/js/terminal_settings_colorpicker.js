@@ -12,6 +12,8 @@ import {TerminalSettingsElement} from './terminal_settings_element.js';
 import {stylesButtonContainer, stylesDialog, stylesText}
     from './terminal_settings_styles.js';
 import './terminal_settings_button.js';
+import './terminal_settings_hue_slider.js';
+import './terminal_settings_saturation_value_picker.js';
 
 export const TOO_WHITE_BOX_SHADOW = 'inset 0 0 0 1px black';
 export const FOCUS_BOX_SHADOW =
@@ -78,7 +80,7 @@ export class TerminalColorpickerElement extends LitElement {
       saturation_: {
         type: Number
       },
-      lightness_: {
+      hsvValue_: {
         type: Number
       },
       transparency_: {
@@ -171,11 +173,11 @@ export class TerminalColorpickerElement extends LitElement {
           ${this.inputInDialog ? '' : input}
         </div>
         <dialog>
-          <saturation-lightness-picker
-              @updated="${this.onSaturationLightness_}"
+          <saturation-value-picker
+              @updated="${this.onSaturationValue_}"
               hue="${this.hue_}" saturation="${this.saturation_}"
-              lightness="${this.lightness_}">
-          </saturation-lightness-picker>
+              value="${this.hsvValue_}">
+          </saturation-value-picker>
           <hue-slider hue="${this.hue_}" @updated="${this.onHue_}" >
           </hue-slider>
           ${transparency}
@@ -208,7 +210,7 @@ export class TerminalColorpickerElement extends LitElement {
     /** @private {number} */
     this.saturation_;
     /** @private {number} */
-    this.lightness_;
+    this.hsvValue_;
     /** @private {number} */
     this.transparency_;
     /** @private {string} */
@@ -228,8 +230,9 @@ export class TerminalColorpickerElement extends LitElement {
     if (value !== undefined) {
       this.value = value;
     } else {
-      this.value = lib.colors.arrayToHSLA([this.hue_, this.saturation_,
-            this.lightness_, this.transparency_]);
+      const hslaArray = lib.colors.hsvxArrayToHslaArray([this.hue_,
+          this.saturation_, this.hsvValue_, this.transparency_]);
+      this.value = lib.colors.arrayToHSLA(hslaArray);
     }
     this.dispatchEvent(new CustomEvent('updated'));
   }
@@ -242,8 +245,9 @@ export class TerminalColorpickerElement extends LitElement {
     const oldValue = this.value_;
     this.value_ = value;
     const hsl = lib.notNull(lib.colors.normalizeCSSToHSL(value));
-    const [h, s, l, a] = lib.notNull(lib.colors.crackHSL(hsl)).map(
+    const hslaArray = lib.notNull(lib.colors.crackHSL(hsl)).map(
         Number.parseFloat);
+    const [h, s, v, a] = lib.colors.hslxArrayToHsvaArray(hslaArray);
     // Only update the preferences if they have changed noticably, as minor
     // updates due to rounding can move the picker around by small perceptible
     // amounts when clicking the same spot.
@@ -253,8 +257,8 @@ export class TerminalColorpickerElement extends LitElement {
     if (Math.round(this.saturation_) !== Math.round(s)) {
       this.saturation_ = s;
     }
-    if (Math.round(this.lightness_) !== Math.round(l)) {
-      this.lightness_ = l;
+    if (Math.round(this.hsvValue_) !== Math.round(v)) {
+      this.hsvValue_ = v;
     }
     this.transparency_ = a;
     this.requestUpdate('value', oldValue);
@@ -272,9 +276,9 @@ export class TerminalColorpickerElement extends LitElement {
   }
 
   /** @param {!Event} event */
-  onSaturationLightness_(event) {
+  onSaturationValue_(event) {
     this.saturation_ = event.target.saturation;
-    this.lightness_ = event.target.lightness;
+    this.hsvValue_ = event.target.value;
     this.onUiChanged_();
   }
 

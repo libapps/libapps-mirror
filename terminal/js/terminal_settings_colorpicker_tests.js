@@ -9,10 +9,15 @@
 import {TerminalSettingsColorpickerElement as Element, TOO_WHITE_BOX_SHADOW,
   FOCUS_BOX_SHADOW} from './terminal_settings_colorpicker.js';
 
-const orange = 'hsl(39, 100%, 50%)';
 
 describe('terminal_settings_colorpicker.js', () => {
   const preference = 'terminal_settings_colorpicker';
+
+  function hsvxToCSS(hsvx) {
+    return lib.colors.arrayToHSLA(lib.colors.hsvxArrayToHslaArray(hsvx));
+  }
+
+  const orange = hsvxToCSS([39, 100, 100]);
 
   // Extract css setting from the style attribute of an element. Unlike
   // element.style.name, which normalizes the value, this function preserves the
@@ -22,26 +27,22 @@ describe('terminal_settings_colorpicker.js', () => {
     return element.getAttribute('style').match(re)[1].trim();
   }
 
-  function assertInternals(el, hex, hue, saturation, lightness, transparency) {
-    const crackedHSL = lib.colors.crackHSL(
-        lib.notNull(lib.colors.normalizeCSSToHSL(el.value)));
-    assert.equal(+crackedHSL[0], hue);
-    assert.equal(+crackedHSL[1], saturation);
-    assert.equal(+crackedHSL[2], lightness);
-    assert.equal(+crackedHSL[3], transparency);
+  function assertInternals(el, hex, hue, saturation, value, transparency) {
+    assert.equal(lib.colors.rgbToHex(
+        lib.notNull(lib.colors.normalizeCSS(el.value))).toUpperCase(), hex);
 
     const sd = getElement(el, '#swatchdisplay');
     const hi = getElement(el, '#hexinput');
-    const slp = getElement(el, 'saturation-lightness-picker');
+    const svp = getElement(el, 'saturation-value-picker');
     const hs = getElement(el, 'hue-slider');
     const ts = getElement(el, 'transparency-slider');
 
     assert.equal(extractInlineStyle(sd, 'background-color'), el.value);
     assert.equal(hi.value, hex);
-    const error = 0.005;
-    assert.closeTo(+slp.getAttribute('hue'), hue, error);
-    assert.closeTo(+slp.getAttribute('saturation'), saturation, error);
-    assert.closeTo(+slp.getAttribute('lightness'), lightness, error);
+    const error = 1;
+    assert.closeTo(+svp.getAttribute('hue'), hue, error);
+    assert.closeTo(+svp.getAttribute('saturation'), saturation, error);
+    assert.closeTo(+svp.getAttribute('value'), value, error);
     assert.closeTo(+hs.getAttribute('hue'), hue, error);
     assert.closeTo(+ts.getAttribute('hue'), hue, error);
     assert.closeTo(+ts.getAttribute('transparency'), transparency, error);
@@ -59,10 +60,10 @@ describe('terminal_settings_colorpicker.js', () => {
     await el.updateComplete;
     const tc = el.shadowRoot.querySelector('terminal-colorpicker');
     await tc.updateComplete;
-    const slp = getElement(el, 'saturation-lightness-picker');
+    const svp = getElement(el, 'saturation-value-picker');
     const hs = getElement(el, 'hue-slider');
     const ts = getElement(el, 'transparency-slider');
-    return Promise.all([slp, hs, ts].map(x => x.updateComplete));
+    return Promise.all([svp, hs, ts].map(x => x.updateComplete));
   }
 
   beforeEach(function() {
@@ -86,54 +87,55 @@ describe('terminal_settings_colorpicker.js', () => {
 
   it('updates-ui-when-preference-changes', async function() {
     assert.equal(window.preferenceManager.get(preference), orange);
-    assertInternals(this.el, '#FFA600', 39, 100, 50, 1);
+    assertInternals(this.el, '#FFA600', 39, 100, 100, 1);
 
-    await window.preferenceManager.set(preference, 'hsla(12, 34%, 56%, 0.78)');
+    await window.preferenceManager.set(preference,
+        hsvxToCSS([12, 34, 56, .78]));
     await allUpdatesComplete(this.el);
-    assertInternals(this.el, '#B57869C7', 12, 34, 56, .78);
+    assertInternals(this.el, '#8D675EC7', 12, 34, 56, .78);
   });
 
-  it('updates-preference-when-saturation-lightness-picker-changes',
+  it('updates-preference-when-saturation-value-picker-changes',
       async function() {
     assert.equal(window.preferenceManager.get(preference), orange);
-    assertInternals(this.el, '#FFA600', 39, 100, 50, 1);
+    assertInternals(this.el, '#FFA600', 39, 100, 100, 1);
 
-    const slp = getElement(this.el, 'saturation-lightness-picker');
-    slp.saturation = 20;
-    slp.lightness = 80;
-    slp.dispatchEvent(new CustomEvent('updated'));
+    const svp = getElement(this.el, 'saturation-value-picker');
+    svp.saturation = 20;
+    svp.value = 80;
+    svp.dispatchEvent(new CustomEvent('updated'));
     await allUpdatesComplete(this.el);
 
-    assertInternals(this.el, '#D6CFC2', 39, 20, 80, 1);
+    assertInternals(this.el, '#CCBEA3', 39, 20, 80, 1);
   });
 
   it('updates-preference-when-hue-slider-changes', async function() {
     assert.equal(window.preferenceManager.get(preference), orange);
-    assertInternals(this.el, '#FFA600', 39, 100, 50, 1);
+    assertInternals(this.el, '#FFA600', 39, 100, 100, 1);
 
     const hs = getElement(this.el, 'hue-slider');
     hs.hue = 222;
     hs.dispatchEvent(new CustomEvent('updated'));
     await allUpdatesComplete(this.el);
 
-    assertInternals(this.el, '#004CFF', 222, 100, 50, 1);
+    assertInternals(this.el, '#004CFF', 222, 100, 100, 1);
   });
 
   it('updates-preference-when-transparency-slider-changes', async function() {
     assert.equal(window.preferenceManager.get(preference), orange);
-    assertInternals(this.el, '#FFA600', 39, 100, 50, 1);
+    assertInternals(this.el, '#FFA600', 39, 100, 100, 1);
 
     const ts = getElement(this.el, 'transparency-slider');
     ts.transparency = 0.5;
     ts.dispatchEvent(new CustomEvent('updated'));
     await allUpdatesComplete(this.el);
 
-    assertInternals(this.el, '#FFA60080', 39, 100, 50, 0.5);
+    assertInternals(this.el, '#FFA60080', 39, 100, 100, 0.5);
   });
 
   it('updates-preference-when-input-element-blurs', async function() {
     assert.equal(window.preferenceManager.get(preference), orange);
-    assertInternals(this.el, '#FFA600', 39, 100, 50, 1);
+    assertInternals(this.el, '#FFA600', 39, 100, 100, 1);
 
     const hi = getElement(this.el, '#hexinput');
     hi.focus();
@@ -142,16 +144,16 @@ describe('terminal_settings_colorpicker.js', () => {
     await allUpdatesComplete(this.el);
 
     assert.equal(window.preferenceManager.get(preference), '#A020F0');
-    assertInternals(this.el, '#A020F0', 277, 87, 53, 1);
+    assertInternals(this.el, '#A020F0', 277, 87, 94, 1);
   });
 
   it('hides-transparency-when-disableTransparency-is-set', async function() {
-    assert.isNotNull(getElement(this.el, 'saturation-lightness-picker'));
+    assert.isNotNull(getElement(this.el, 'saturation-value-picker'));
     assert.isNotNull(getElement(this.el, 'hue-slider'));
     assert.isNotNull(getElement(this.el, 'transparency-slider'));
     this.el.setAttribute('disableTransparency', true);
     await this.el.updateComplete;
-    assert.isNotNull(getElement(this.el, 'saturation-lightness-picker'));
+    assert.isNotNull(getElement(this.el, 'saturation-value-picker'));
     assert.isNotNull(getElement(this.el, 'hue-slider'));
     assert.isNull(getElement(this.el, 'transparency-slider'));
   });
@@ -174,13 +176,13 @@ describe('terminal_settings_colorpicker.js', () => {
     // Dialog closed and value updated.
     assert.isFalse(dialog.hasAttribute('open'));
     assert.equal(window.preferenceManager.get(preference), '#A020F0');
-    assertInternals(this.el, '#A020F0', 277, 87, 53, 1);
+    assertInternals(this.el, '#A020F0', 277, 87, 94, 1);
   });
 
   it('closes-dialog-when-ok-clicked', async function() {
     const dialog = getElement(this.el, 'dialog');
     const swatch = getElement(this.el, '#swatch');
-    const slp = getElement(this.el, 'saturation-lightness-picker');
+    const svp = getElement(this.el, 'saturation-value-picker');
     const ok = getElement(this.el, 'terminal-settings-button.action');
 
     // Show dialog when swatch clicked.
@@ -189,23 +191,23 @@ describe('terminal_settings_colorpicker.js', () => {
     assert.isTrue(dialog.hasAttribute('open'));
 
     // Modify input and click OK.
-    slp.saturation = 20;
-    slp.lightness = 80;
-    slp.dispatchEvent(new CustomEvent('updated'));
+    svp.saturation = 20;
+    svp.value = 80;
+    svp.dispatchEvent(new CustomEvent('updated'));
     await allUpdatesComplete(this.el);
     ok.dispatchEvent(new MouseEvent('click'));
 
     // Dialog closed and value updated.
     assert.isFalse(dialog.hasAttribute('open'));
     assert.equal(
-        window.preferenceManager.get(preference), 'hsla(39, 20%, 80%, 1)');
-    assertInternals(this.el, '#D6CFC2', 39, 20, 80, 1);
+        window.preferenceManager.get(preference), hsvxToCSS([39, 20, 80]));
+    assertInternals(this.el, '#CCBEA3', 39, 20, 80, 1);
   });
 
   it('closes-dialog-and-reverts-when-cancel-clicked', async function() {
     const dialog = getElement(this.el, 'dialog');
     const swatch = getElement(this.el, '#swatch');
-    const slp = getElement(this.el, 'saturation-lightness-picker');
+    const svp = getElement(this.el, 'saturation-value-picker');
     const cancel = getElement(this.el, 'terminal-settings-button.cancel');
 
     // Show dialog when swatch clicked.
@@ -214,9 +216,9 @@ describe('terminal_settings_colorpicker.js', () => {
     assert.isTrue(dialog.hasAttribute('open'));
 
     // Modify input and click OK.
-    slp.saturation = 20;
-    slp.lightness = 80;
-    slp.dispatchEvent(new CustomEvent('updated'));
+    svp.saturation = 20;
+    svp.value = 80;
+    svp.dispatchEvent(new CustomEvent('updated'));
     await allUpdatesComplete(this.el);
     cancel.dispatchEvent(new MouseEvent('click'));
     await allUpdatesComplete(this.el);
@@ -224,7 +226,7 @@ describe('terminal_settings_colorpicker.js', () => {
     // Dialog closed and value updated.
     assert.isFalse(dialog.hasAttribute('open'));
     assert.equal(window.preferenceManager.get(preference), orange);
-    assertInternals(this.el, '#FFA600', 39, 100, 50, 1);
+    assertInternals(this.el, '#FFA600', 39, 100, 100, 1);
   });
 
   it('sets-swatch-box-shadows-when-too-white', async function() {
