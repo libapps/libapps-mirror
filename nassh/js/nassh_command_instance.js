@@ -289,7 +289,7 @@ nassh.CommandInstance.prototype.removeFile = function(fullPath) {
 nassh.CommandInstance.prototype.removeDirectory = function(fullPath) {
   this.fileSystem_.root.getDirectory(
       fullPath, {},
-      function (f) {
+      function(f) {
         f.removeRecursively(lib.fs.log('Removed: ' + fullPath),
                             lib.fs.err('Error removing' + fullPath));
       },

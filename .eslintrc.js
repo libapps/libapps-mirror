@@ -96,6 +96,13 @@ module.exports = {
     'semi': ['error', 'always'],
     'semi-spacing': 'error',
     'semi-style': ['error', 'last'],
+    'space-before-function-paren': [
+      'error', {
+        'anonymous': 'never',
+        'named': 'never',
+        'asyncArrow': 'always',
+      },
+    ],
     'space-infix-ops': 'error',
     'space-unary-ops': 'error',
     'spaced-comment': ['error', 'always'],
