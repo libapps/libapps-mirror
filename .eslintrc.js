@@ -90,6 +90,7 @@ module.exports = {
     ],
     'no-whitespace-before-property': 'error',
     'no-with': 'error',
+    'object-curly-newline': ['error', {'consistent': true}],
     'object-curly-spacing': 'error',
     'one-var-declaration-per-line': 'error',
     'prefer-numeric-literals': 'error',
