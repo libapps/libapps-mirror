@@ -75,7 +75,7 @@ export class TerminalSettingsApp extends LitElement {
   /** @override */
   static get properties() {
     return {
-      activeCategory_: { type: String },
+      activeCategory_: {type: String},
     };
   }
 

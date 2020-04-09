@@ -93,7 +93,7 @@ chrome.runtime.onInstalled.addListener((details) => {
             onError();
           }
         } else {
-          const { prefs } = response;
+          const {prefs} = response;
           nassh.importPreferences(prefs);
         }
       });
