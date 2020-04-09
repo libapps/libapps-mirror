@@ -50,6 +50,9 @@ module.exports = {
     'no-empty-character-class': 'error',
     'no-eval': 'error',
     'no-ex-assign': 'error',
+    // We want 'all' (nestedBinaryExpressions=false), but this breaks
+    // closure-compiler casts.
+    'no-extra-parens': ['error', 'functions'],
     'no-extra-semi': 'error',
     'no-implied-eval': 'error',
     'no-invalid-regexp': 'error',
