@@ -1935,17 +1935,17 @@
 		"description": "Label for terminal settings reset theme. Clicking reset will restore the default colors and settings for a theme.",
 		"message": "Reset"
 	},
+	"TERMINAL_THEME_CLASSIC_LABEL": {
+		"description": "Label for classic hterm theme.",
+		"message": "Classic"
+	},
 	"TERMINAL_THEME_DARK_LABEL": {
 		"description": "Label for dark theme.  The dark theme uses a black background and darker colors.",
 		"message": "Dark"
 	},
 	"TERMINAL_THEME_HAZE_LABEL": {
-		"description": "Label for haze theme.  This theme is based on a purple color, and the name is a reference to the Jimi Hendrix song 'Purple Haze'.  It is OK to translate this name in any way.  Use a short name, or it is also OK to not translate",
+		"description": "Label for haze theme.  It is OK to translate this name in any way.  Use a short name, or it is also OK to not translate",
 		"message": "Haze"
-	},
-	"TERMINAL_THEME_HTERM_LABEL": {
-		"description": "Label for hterm theme.  Do not translate.",
-		"message": "hterm"
 	},
 	"TERMINAL_THEME_LIGHT_LABEL": {
 		"description": "Label for light theme.  The light theme uses a white background and lighter colors.",
