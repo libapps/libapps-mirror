@@ -32,6 +32,7 @@ module.exports = {
     'comma-style': 'error',
     'curly': 'error',
     'eol-last': 'error',
+    'func-call-spacing': 'error',
     'generator-star-spacing': ['error', 'after'],
     'keyword-spacing': 'error',
     'lines-between-class-members': 'error',

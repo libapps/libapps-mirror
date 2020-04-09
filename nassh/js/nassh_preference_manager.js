@@ -105,8 +105,7 @@ nassh.ProfilePreferenceManager = function(parent, id) {
 
   this.id = id;
 
-  this.definePreferences
-  ([
+  this.definePreferences([
     /**
      * The free-form description of this connection profile.
      */
@@ -160,7 +159,7 @@ nassh.ProfilePreferenceManager = function(parent, id) {
      * The appid to which to pass auth-agent requests.
      */
     ['auth-agent-appid', null],
-   ]);
+  ]);
 };
 
 nassh.ProfilePreferenceManager.prototype =
