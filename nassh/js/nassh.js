@@ -4,6 +4,13 @@
 
 'use strict';
 
+/**
+ * Namespace for the whole nassh project.
+ *
+ * We export this with 'var' as we access it across background pages.
+ * It's messy and probably should be cleaned up at some point.
+ * eslint-disable-next-line no-var
+ */
 var nassh = {};
 
 /**
@@ -101,10 +108,10 @@ nassh.getFileSystem = function() {
  *   nassh.importPreferences.
  */
 nassh.exportPreferences = function(onComplete) {
-  var pendingReads = 0;
-  var rv = {};
+  let pendingReads = 0;
+  const rv = {};
 
-  var onReadStorage = function(profile, prefs) {
+  const onReadStorage = function(profile, prefs) {
     rv.hterm[profile] = prefs.exportAsJson();
     if (--pendingReads < 1) {
       onComplete(rv);
@@ -114,7 +121,7 @@ nassh.exportPreferences = function(onComplete) {
   rv.magic = 'nassh-prefs';
   rv.version = 1;
 
-  var nasshPrefs = new nassh.PreferenceManager();
+  const nasshPrefs = new nassh.PreferenceManager();
   nasshPrefs.readStorage(function() {
     // Export all the connection settings.
     rv.nassh = nasshPrefs.exportAsJson();
@@ -147,9 +154,9 @@ nassh.exportPreferences = function(onComplete) {
  *     complete.
  */
 nassh.importPreferences = function(prefsObject, onComplete) {
-  var pendingReads = 0;
+  let pendingReads = 0;
 
-  var onReadStorage = function(terminalProfile, prefs) {
+  const onReadStorage = function(terminalProfile, prefs) {
     prefs.importFromJson(prefsObject.hterm[terminalProfile]);
     if (--pendingReads < 1 && onComplete) {
       onComplete();
@@ -164,10 +171,10 @@ nassh.importPreferences = function(prefsObject, onComplete) {
     throw new Error('Bad version, expected 1, got: ' + prefsObject.version);
   }
 
-  var nasshPrefs = new nassh.PreferenceManager();
+  const nasshPrefs = new nassh.PreferenceManager();
   nasshPrefs.importFromJson(prefsObject.nassh, () => {
-    for (var terminalProfile in prefsObject.hterm) {
-      var prefs = new hterm.PreferenceManager(terminalProfile);
+    for (const terminalProfile in prefsObject.hterm) {
+      const prefs = new hterm.PreferenceManager(terminalProfile);
       prefs.readStorage(onReadStorage.bind(null, terminalProfile, prefs));
       pendingReads++;
     }
@@ -369,7 +376,7 @@ nassh.getBackgroundPage = function() {
  * @return {string} The SGR escape sequence.
  */
 nassh.sgrSequence = function({bold, faint, italic, underline, fg, bg} = {}) {
-  let parts = [];
+  const parts = [];
   if (bold) {
     parts.push('1');
   }

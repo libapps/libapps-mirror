@@ -33,10 +33,10 @@ nassh.App.prototype.omniboxOnInputStarted_ = function() {
   this.omniDefault_ = null;
 
   // Convert a nassh profile into an object we can easily match later on.
-  var profileIdToOmni = function(id) {
-    var profile = this.prefs_.getProfile(id);
+  const profileIdToOmni = function(id) {
+    const profile = this.prefs_.getProfile(id);
 
-    var port = profile.get('port') || '';
+    let port = profile.get('port') || '';
     if (port) {
       port = ':' + port;
     }
@@ -51,14 +51,14 @@ nassh.App.prototype.omniboxOnInputStarted_ = function() {
   // Read our saved settings and construct the partial matches from all of
   // our active profiles.
   this.prefs_.readStorage(() => {
-    var ids = this.prefs_.get('profile-ids');
-    for (var i = 0; i < ids.length; ++i) {
+    const ids = this.prefs_.get('profile-ids');
+    for (let i = 0; i < ids.length; ++i) {
       this.omniMatches_.push(profileIdToOmni.call(this, ids[i]));
     }
 
     chrome.storage.local.get('/nassh/connectDialog/lastProfileId',
       (items) => {
-        var lastProfileId = items['/nassh/connectDialog/lastProfileId'];
+        const lastProfileId = items['/nassh/connectDialog/lastProfileId'];
         if (lastProfileId) {
           this.omniDefault_ = profileIdToOmni.call(this, lastProfileId);
         }
@@ -74,9 +74,9 @@ nassh.App.prototype.omniboxOnInputStarted_ = function() {
  *     Function for us to call to notify of our matches against the text.
  */
 nassh.App.prototype.omniboxOnInputChanged_ = function(text, suggest) {
-  var resultsUhp = [];
-  var resultsDescLeading = [];
-  var resultsDescSubstr = [];
+  const resultsUhp = [];
+  const resultsDescLeading = [];
+  const resultsDescSubstr = [];
 
   this.omniMatches_.forEach((match) => {
     if (match.uhp.startsWith(text)) {
@@ -105,7 +105,7 @@ nassh.App.prototype.omniboxOnInputChanged_ = function(text, suggest) {
   });
 
   // Now merge the suggestions together in order.
-  var results = resultsUhp.concat(resultsDescLeading, resultsDescSubstr);
+  const results = resultsUhp.concat(resultsDescLeading, resultsDescSubstr);
   if (results.length == 0 || text.trim().length == 0) {
     // If they're just starting input, or if we have no matches, then show the
     // last connection used first.
@@ -144,7 +144,7 @@ nassh.App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
     }
   }
 
-  var url = chrome.runtime.getURL('/html/nassh.html#' + text);
+  const url = chrome.runtime.getURL('/html/nassh.html#' + text);
   switch (disposition) {
     default:
       console.warn('unknown disposition: ' + disposition);

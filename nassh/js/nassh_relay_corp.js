@@ -39,7 +39,7 @@ nassh.relay.Corp = function(io, options, relayLocation, relayStorage) {
  * @return {string}
  */
 nassh.relay.Corp.prototype.cookieServerPattern = function() {
-  var template = '%(protocol)://%(host):%(port)/cookie' +
+  let template = '%(protocol)://%(host):%(port)/cookie' +
       '?ext=%encodeURIComponent(return_to)' +
       '&path=html/nassh_google_relay.html';
   if (this.relayProtocol == 'v2') {

@@ -196,15 +196,15 @@ nassh.sftp.Client.prototype.parseBuffer_ = function() {
  * @return {boolean}
  */
 nassh.sftp.Client.prototype.onPacket = function(packet) {
-  var packetType = packet.getUint8();
+  const packetType = packet.getUint8();
 
   // Obtain the response packet's constructor and create it.
-  var ResponseType = nassh.sftp.packets.ResponsePackets[packetType]
+  const ResponseType = nassh.sftp.packets.ResponsePackets[packetType]
       || nassh.sftp.UnknownPacket;
-  var responsePacket = new ResponseType(packet);
+  const responsePacket = new ResponseType(packet);
 
   // get request id and execute the callback (if found)
-  var requestId = responsePacket.requestId;
+  const requestId = responsePacket.requestId;
   if (this.pendingRequests_.hasOwnProperty(requestId)) {
     this.pendingRequests_[requestId](responsePacket);
     delete this.pendingRequests_[requestId];
@@ -251,7 +251,7 @@ nassh.sftp.Client.prototype.sendRequest_ = function(type, data) {
   }
 
   // First construct the packet type portion of the packet header.
-  var requestId = this.requestId_++;
+  const requestId = this.requestId_++;
   const packetType = new nassh.sftp.Packet();
   if (typeof type == 'string') {
     // Handle extended packets.
@@ -353,7 +353,7 @@ nassh.sftp.Client.prototype.isNameResponse_ = function(responsePacket,
  * Sends a SFTP init packet.
  */
 nassh.sftp.Client.prototype.init = function() {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setUint32(5); // length, 5 bytes for type and version fields
   packet.setUint8(nassh.sftp.packets.RequestPackets.INIT);
   packet.setUint32(this.protocolClientVersion);
@@ -393,7 +393,7 @@ nassh.sftp.Client.prototype.onInit = function() {};
  *     nassh.sftp.StatusError)
  */
 nassh.sftp.Client.prototype.fileStatus = function(path) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setUtf8String(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.STAT, packet)
@@ -414,7 +414,7 @@ nassh.sftp.Client.prototype.fileStatus = function(path) {
  *     nassh.sftp.StatusError)
  */
 nassh.sftp.Client.prototype.linkStatus = function(path) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setUtf8String(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.LSTAT, packet)
@@ -435,7 +435,7 @@ nassh.sftp.Client.prototype.linkStatus = function(path) {
  *     nassh.sftp.StatusError)
  */
 nassh.sftp.Client.prototype.fileHandleStatus = function(handle) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setString(handle);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.FSTAT, packet)
@@ -457,7 +457,7 @@ nassh.sftp.Client.prototype.fileHandleStatus = function(handle) {
  *     nassh.sftp.StatusError)
  */
 nassh.sftp.Client.prototype.setFileStatus = function(path, attrs) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setUtf8String(this.basePath_ + path);
   nassh.sftp.packets.setFileAttrs(packet, attrs);
 
@@ -476,7 +476,7 @@ nassh.sftp.Client.prototype.setFileStatus = function(path, attrs) {
  *     nassh.sftp.StatusError)
  */
 nassh.sftp.Client.prototype.setFileHandleStatus = function(handle, attrs) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setString(handle);
   nassh.sftp.packets.setFileAttrs(packet, attrs);
 
@@ -493,7 +493,7 @@ nassh.sftp.Client.prototype.setFileHandleStatus = function(handle, attrs) {
  *    directory handle, or rejects (usually with an nassh.sftp.StatusError)
  */
 nassh.sftp.Client.prototype.openDirectory = function(path) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setUtf8String(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.OPENDIR, packet)
@@ -514,7 +514,7 @@ nassh.sftp.Client.prototype.openDirectory = function(path) {
  *     nassh.sftp.StatusError)
  */
 nassh.sftp.Client.prototype.readDirectory = function(handle) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setString(handle);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.READDIR, packet)
@@ -649,7 +649,7 @@ nassh.sftp.Client.prototype.removeDirectory = function(
  *     remote file handle, or rejects (usually with an nassh.sftp.StatusError)
  */
 nassh.sftp.Client.prototype.openFile = function(path, pflags) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setUtf8String(this.basePath_ + path);
   packet.setUint32(pflags); // open flags
   packet.setUint32(0); // default attr values
@@ -676,7 +676,7 @@ nassh.sftp.Client.prototype.openFile = function(path, pflags) {
  *    file data, or rejects (usually with an nassh.sftp.StatusError)
  */
 nassh.sftp.Client.prototype.readChunk = function(handle, offset, len) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setString(handle);
   packet.setUint64(offset); // offset
   packet.setUint32(len); // max bytes per packet
@@ -765,7 +765,7 @@ nassh.sftp.Client.prototype.readChunks = function(
     if (canceled) {
       return;
     }
-    let ret = doRead();
+    const ret = doRead();
 
     // Let the caller process this chunk.
     if (callback(chunk) === false) {
@@ -809,7 +809,7 @@ nassh.sftp.Client.prototype.readFile = function(
  *     or rejects with a nassh.sftp.StatusError
  */
 nassh.sftp.Client.prototype.closeFile = function(handle) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setString(handle);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.CLOSE, packet)
@@ -851,7 +851,7 @@ nassh.sftp.Client.prototype.copyData = function(
  *     or rejects with a nassh.sftp.StatusError
  */
 nassh.sftp.Client.prototype.removeFile = function(path) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setUtf8String(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.REMOVE, packet)
@@ -868,7 +868,7 @@ nassh.sftp.Client.prototype.removeFile = function(path) {
  *     or rejects with a nassh.sftp.StatusError
  */
 nassh.sftp.Client.prototype.renameFile = function(sourcePath, targetPath) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
 
   let type;
   if (this.protocolServerExtensions['posix-rename@openssh.com'] == '1') {
@@ -899,7 +899,7 @@ nassh.sftp.Client.prototype.writeChunk = function(handle, offset, data) {
   // Accept any typed array form.
   data = new Uint8Array(data);
 
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setString(handle);
   packet.setUint64(offset);
   packet.setUint32(data.length);
@@ -919,7 +919,7 @@ nassh.sftp.Client.prototype.writeChunk = function(handle, offset, data) {
  *     nassh.sftp.StatusError)
  */
 nassh.sftp.Client.prototype.makeDirectory = function(path) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setUtf8String(this.basePath_ + path);
   packet.setUint32(0); // flags, 0b0000, no modified attributes
 
@@ -936,7 +936,7 @@ nassh.sftp.Client.prototype.makeDirectory = function(path) {
  *     with the remote path, or rejects (usually with an nassh.sftp.StatusError)
  */
 nassh.sftp.Client.prototype.realPath = function(path) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setUtf8String(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.REALPATH, packet)
@@ -952,7 +952,7 @@ nassh.sftp.Client.prototype.realPath = function(path) {
  *     with the remote path, or rejects (usually with an nassh.sftp.StatusError)
  */
 nassh.sftp.Client.prototype.readLink = function(path) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setUtf8String(this.basePath_ + path);
 
   return this.sendRequest_(nassh.sftp.packets.RequestPackets.READLINK, packet)
@@ -972,7 +972,7 @@ nassh.sftp.Client.prototype.readLink = function(path) {
  *     with the remote path, or rejects (usually with an nassh.sftp.StatusError)
  */
 nassh.sftp.Client.prototype.symLink = function(target, path) {
-  var packet = new nassh.sftp.Packet();
+  const packet = new nassh.sftp.Packet();
   packet.setUtf8String(target);
   packet.setUtf8String(this.basePath_ + path);
 

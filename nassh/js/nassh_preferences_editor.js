@@ -32,12 +32,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
   });
 
   function setupPreferences() {
-    var manifest = chrome.runtime.getManifest();
+    const manifest = chrome.runtime.getManifest();
 
     // Create a local hterm instance so people can see their changes live.
-    var term = new hterm.Terminal();
+    const term = new hterm.Terminal();
     term.onTerminalReady = function() {
-        var io = term.io.push();
+        const io = term.io.push();
         io.onVTKeystroke = io.print;
         io.sendString = io.print;
         io.println('# ' + nassh.msg('WELCOME_VERSION',
@@ -57,9 +57,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // Useful for console debugging.
     window.term_ = term;
 
-    var prefsEditor = new nassh.PreferencesEditor();
+    const prefsEditor = new nassh.PreferencesEditor();
 
-    var a = document.querySelector('#backup');
+    let a = document.querySelector('#backup');
     a.download = nassh.msg('PREF_BACKUP_FILENAME');
     a.onclick = prefsEditor.onBackupClick.bind(prefsEditor);
     prefsEditor.updateBackupLink();
@@ -90,7 +90,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
       };
 
     // Set up profile selection field.
-    var profile = lib.notNull(document.getElementById('profile'));
+    const profile = lib.notNull(document.getElementById('profile'));
     profile.oninput = function() {
         nassh.PreferencesEditor.debounce(profile, function(input) {
             prefsEditor.notify(nassh.msg('LOADING_LABEL'), 500);
@@ -216,8 +216,8 @@ nassh.PreferencesEditor.debounce = function(input, callback, timeout = 500) {
  */
 nassh.PreferencesEditor.prototype.selectProfile = function(profileId) {
   window.term_.setProfile(profileId);
-  var prefsEditor = this;
-  var prefs = new hterm.PreferenceManager(profileId);
+  const prefsEditor = this;
+  const prefs = new hterm.PreferenceManager(profileId);
   this.prefs_ = prefs;
   prefs.readStorage(function() {
       prefs.notifyAll();
@@ -243,7 +243,7 @@ nassh.PreferencesEditor.prototype.onBackupClick = function(e) {
   }
 
   this.updateBackupLink(function() {
-    var event = new MouseEvent(e.type, e);
+    const event = new MouseEvent(e.type, e);
     event.synthetic = true;
     e.target.dispatchEvent(event);
   });
@@ -265,7 +265,7 @@ nassh.PreferencesEditor.prototype.onRestoreClick = function(e) {
   if (e) {
     e.preventDefault();
   }
-  var input = document.querySelector('input.restore');
+  const input = document.querySelector('input.restore');
   input.onchange = () => {
     if (input.files.length != 1) {
       return;
@@ -283,7 +283,7 @@ nassh.PreferencesEditor.prototype.onRestoreClick = function(e) {
 /** @param {function()=} onComplete */
 nassh.PreferencesEditor.prototype.updateBackupLink = function(onComplete) {
   nassh.exportPreferences(function(value) {
-    var a = document.querySelector('#backup');
+    const a = document.querySelector('#backup');
     a.href = `data:text/json,${encodeURIComponent(JSON.stringify(value))}`;
     if (onComplete) {
       onComplete();
@@ -302,9 +302,9 @@ nassh.PreferencesEditor.prototype.updateBackupLink = function(onComplete) {
  *     the range input object.
  */
 nassh.PreferencesEditor.prototype.colorSave = function(key) {
-  var cinput = document.getElementById(key);
-  var ainput = document.getElementById(key + ':alpha');
-  var rgb = lib.colors.hexToRGB(cinput.value);
+  const cinput = document.getElementById(key);
+  const ainput = document.getElementById(key + ':alpha');
+  const rgb = lib.colors.hexToRGB(cinput.value);
   this.prefs_.set(key, lib.colors.setAlpha(
       lib.notNull(rgb), ainput.value / 100));
 };
@@ -321,9 +321,9 @@ nassh.PreferencesEditor.prototype.save = function(input) {
     return;
   }
 
-  var keys = input.id.split(':');
-  var key = keys[0];
-  var prefs = this.prefs_;
+  const keys = input.id.split(':');
+  const key = keys[0];
+  const prefs = this.prefs_;
 
   switch (this.getPreferenceType(key)) {
     case 'bool':
@@ -356,8 +356,8 @@ nassh.PreferencesEditor.prototype.save = function(input) {
       break;
 
     case 'value':
-    default:
-      var value = input.value || 'null';
+    default: {
+      let value = input.value || 'null';
       try {
         value = JSON.parse(value);
       } catch (err) {
@@ -366,6 +366,7 @@ nassh.PreferencesEditor.prototype.save = function(input) {
       }
       prefs.set(key, value);
       break;
+    }
   }
 
   console.log('New pref value for ' + key + ': ', prefs.get(key));
@@ -382,10 +383,10 @@ nassh.PreferencesEditor.prototype.save = function(input) {
  * @return {?string} The rgba color information.
  */
 nassh.PreferencesEditor.prototype.colorSync = function(key, pref) {
-  var cinput = lib.notNull(document.getElementById(key));
-  var ainput = lib.notNull(document.getElementById(key + ':alpha'));
+  const cinput = lib.notNull(document.getElementById(key));
+  const ainput = lib.notNull(document.getElementById(key + ':alpha'));
 
-  var rgba = lib.colors.normalizeCSS(pref);
+  const rgba = lib.colors.normalizeCSS(pref);
 
   if (rgba) {
     cinput.value = lib.colors.rgbToHex(rgba);
@@ -407,9 +408,9 @@ nassh.PreferencesEditor.prototype.colorSync = function(key, pref) {
  *     preference.
  */
 nassh.PreferencesEditor.prototype.sync = function(input) {
-  var keys = input.id.split(':');
-  var key = keys[0];
-  var prefValue = this.prefs_.get(key);
+  const keys = input.id.split(':');
+  const key = keys[0];
+  const prefValue = this.prefs_.get(key);
   switch (this.getPreferenceType(key)) {
     case 'bool':
       input.checked = prefValue;
@@ -482,7 +483,7 @@ nassh.PreferencesEditor.prototype.onInputChange = function(input) {
  */
 nassh.PreferencesEditor.prototype.syncPage = function() {
   const menu = document.getElementById('options-settings-menu');
-  var eles = document.getElementById('settings');
+  const eles = document.getElementById('settings');
 
   /** @param {?Element} parent The node to clear out. */
   const deleteChildren = (parent) => {
@@ -496,13 +497,13 @@ nassh.PreferencesEditor.prototype.syncPage = function() {
   deleteChildren(eles);
 
   // Create the table of settings.
-  for (var i = 0; i < hterm.PreferenceManager.categoryDefinitions.length; i++) {
-    var categoryDefinition = hterm.PreferenceManager.categoryDefinitions[i];
+  for (let i = 0; i < hterm.PreferenceManager.categoryDefinitions.length; i++) {
+    const categoryDefinition = hterm.PreferenceManager.categoryDefinitions[i];
 
-    var elem = this.addCategoryRow(categoryDefinition, eles, menu);
+    const elem = this.addCategoryRow(categoryDefinition, eles, menu);
 
-    var category = categoryDefinition.id;
-    for (var key in this.prefs_.prefRecords_) {
+    const category = categoryDefinition.id;
+    for (const key in this.prefs_.prefRecords_) {
       if (this.getPreferenceCategory(key) == category) {
         this.addInputRow(key, elem);
       }
@@ -521,7 +522,7 @@ nassh.PreferencesEditor.prototype.syncPage = function() {
  */
 nassh.PreferencesEditor.prototype.addCategoryRow =
     function(categoryDef, parent, menu) {
-  var details = document.createElement('section');
+  const details = document.createElement('section');
   details.className = 'category-details';
 
   const anchor = document.createElement('a');
@@ -530,7 +531,7 @@ nassh.PreferencesEditor.prototype.addCategoryRow =
 
   const desc = this.getCategoryDescription(categoryDef);
 
-  var summary = document.createElement('h3');
+  const summary = document.createElement('h3');
   summary.innerText = desc;
 
   details.appendChild(summary);
@@ -556,7 +557,7 @@ nassh.PreferencesEditor.prototype.addCategoryRow =
  * @param {!Element} parent
  */
 nassh.PreferencesEditor.prototype.addInputRow = function(key, parent) {
-  var input = this.createInput(key);
+  const input = this.createInput(key);
 
   // We want this element structure when we're done:
   // <div class='text'>
@@ -567,10 +568,10 @@ nassh.PreferencesEditor.prototype.addInputRow = function(key, parent) {
   //    </span>
   //  </label>
   // </div>
-  var div = document.createElement('div');
-  var label = document.createElement('label');
-  var span_text = document.createElement('span');
-  var span_input = document.createElement('span');
+  const div = document.createElement('div');
+  const label = document.createElement('label');
+  const span_text = document.createElement('span');
+  const span_input = document.createElement('span');
 
   label.title = this.getPreferenceDescription(key);
   label.setAttribute('tabindex', '0');
@@ -587,7 +588,7 @@ nassh.PreferencesEditor.prototype.addInputRow = function(key, parent) {
   parent.appendChild(div);
 
   if (input.type == 'color') {
-    var alabel = document.createElement('label');
+    const alabel = document.createElement('label');
     alabel.innerText = 'Alpha';
     alabel.className = 'alpha-text';
     alabel.setAttribute('tabindex', '0');
@@ -595,7 +596,7 @@ nassh.PreferencesEditor.prototype.addInputRow = function(key, parent) {
 
     // Since the HTML5 color picker does not support alpha,
     // we have to create a dedicated slider for it.
-    var ainput = document.createElement('input');
+    const ainput = document.createElement('input');
     ainput.type = 'range';
     ainput.id = key + ':alpha';
     ainput.min = '0';
@@ -614,34 +615,34 @@ nassh.PreferencesEditor.prototype.addInputRow = function(key, parent) {
  * @return {!Element}
  */
 nassh.PreferencesEditor.prototype.createInput = function(key) {
-  var prefsEditor = this;
+  const prefsEditor = this;
 
-  var onchangeCursorReset = function() {
+  const onchangeCursorReset = function() {
       nassh.PreferencesEditor.debounce(this, function(input) {
           // Chrome has a bug where it resets cursor position on us when
           // we debounce the input.  So manually save & restore cursor.
-          var i = input.selectionStart;
+          const i = input.selectionStart;
           prefsEditor.onInputChange(input);
           if (document.activeElement === input) {
             input.setSelectionRange(i, i);
           }
         });
     };
-  var onchange = function() {
+  let onchange = function() {
       nassh.PreferencesEditor.debounce(this, function(input) {
           prefsEditor.onInputChange(input);
         });
     };
-  var oninput = null;
+  let oninput = null;
 
-  var addOption = function(parent, value) {
-    var option = document.createElement('option');
+  const addOption = function(parent, value) {
+    const option = document.createElement('option');
     option.value = JSON.stringify(value);
     option.innerText = (value === null ? 'auto' : value);
     parent.appendChild(option);
   };
 
-  var input = document.createElement('input');
+  let input = document.createElement('input');
   switch (this.getPreferenceType(key)) {
     case 'bool':
       input.type = 'checkbox';
@@ -651,15 +652,16 @@ nassh.PreferencesEditor.prototype.createInput = function(key) {
       input.type = 'number';
       break;
 
-    case 'enum':
+    case 'enum': {
       input = document.createElement('select');
-      var prefValues = this.getPreferenceEnumValues(key);
-      for (var i = 0; i < prefValues.length; i++) {
+      const prefValues = this.getPreferenceEnumValues(key);
+      for (let i = 0; i < prefValues.length; i++) {
         addOption(input, prefValues[i]);
       }
       oninput = onchange;
       onchange = null;
       break;
+    }
 
     case 'tristate':
       input = document.createElement('select');
@@ -717,7 +719,7 @@ nassh.PreferencesEditor.prototype.createInput = function(key) {
  * @return {string}
  */
 nassh.PreferencesEditor.prototype.getPreferenceDescription = function(key) {
-  var entry = hterm.PreferenceManager.defaultPreferences[key];
+  const entry = hterm.PreferenceManager.defaultPreferences[key];
   if (entry === undefined) {
     return '';
   }
@@ -758,7 +760,7 @@ nassh.PreferencesEditor.prototype.getCategoryDescription = function(def) {
  * @return {string}
  */
 nassh.PreferencesEditor.prototype.getPreferenceType = function(key) {
-  var entry = hterm.PreferenceManager.defaultPreferences[key];
+  const entry = hterm.PreferenceManager.defaultPreferences[key];
   if (entry) {
     const prefType = entry['type'];
     if (Array.isArray(prefType)) {
@@ -781,7 +783,7 @@ nassh.PreferencesEditor.prototype.getPreferenceType = function(key) {
  * @return {!Array<string>}
  */
 nassh.PreferencesEditor.prototype.getPreferenceEnumValues = function(key) {
-  var entry = hterm.PreferenceManager.defaultPreferences[key];
+  const entry = hterm.PreferenceManager.defaultPreferences[key];
   if (entry) {
     const prefType = entry['type'];
     if (Array.isArray(prefType)) {
@@ -798,7 +800,7 @@ nassh.PreferencesEditor.prototype.getPreferenceEnumValues = function(key) {
  * @return {string}
  */
 nassh.PreferencesEditor.prototype.getPreferenceCategory = function(key) {
-  var entry = hterm.PreferenceManager.defaultPreferences[key];
+  const entry = hterm.PreferenceManager.defaultPreferences[key];
   if (entry) {
     return entry['category'];
   }
@@ -810,10 +812,10 @@ nassh.PreferencesEditor.prototype.getPreferenceCategory = function(key) {
  * Reset all preferences to their default state and update the HTML objects.
  */
 nassh.PreferencesEditor.prototype.resetAll = function() {
-  var settings = document.getElementsByName('settings');
+  const settings = document.getElementsByName('settings');
 
   this.prefs_.resetAll();
-  for (var i = 0; i < settings.length; ++i) {
+  for (let i = 0; i < settings.length; ++i) {
     this.sync(settings[i]);
   }
   this.notify(nassh.msg('PREFERENCES_RESET'));
@@ -825,8 +827,8 @@ nassh.PreferencesEditor.prototype.resetAll = function() {
  * @param {!Element} input An HTML input element to reset.
  */
 nassh.PreferencesEditor.prototype.reset = function(input) {
-  var keys = input.id.split(':');
-  var key = keys[0];
+  const keys = input.id.split(':');
+  const key = keys[0];
   this.prefs_.reset(key);
   this.sync(input);
 };
@@ -840,7 +842,7 @@ nassh.PreferencesEditor.prototype.reset = function(input) {
 nassh.PreferencesEditor.prototype.notify = function(msg, timeout = 1000) {
   // Update status to let user know options were updated.
   clearTimeout(this.notifyTimeout_);
-  var status = document.getElementById('label_status');
+  const status = document.getElementById('label_status');
   status.innerText = msg;
   this.notifyTimeout_ = setTimeout(function() {
       status.innerHTML = '&nbsp;';

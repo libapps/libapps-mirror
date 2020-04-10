@@ -117,7 +117,7 @@ Crosh.migrateSettings = function(callback) {
 Crosh.init = function() {
   const params = new URLSearchParams(document.location.search);
   const profileName = params.get('profile');
-  var terminal = new hterm.Terminal(profileName);
+  const terminal = new hterm.Terminal(profileName);
   // TODO(crbug.com/1063219) We need this to not prompt the user for clipboard
   // permission.
   terminal.alwaysUseLegacyPasting = true;
@@ -358,7 +358,7 @@ Crosh.prototype.exit = function(code) {
   this.io.println(Crosh.msg('COMMAND_COMPLETE', [this.commandName, code]));
   this.io.println(Crosh.msg('RECONNECT_MESSAGE'));
   this.io.onVTKeystroke = (string) => {
-    var ch = string.toLowerCase();
+    const ch = string.toLowerCase();
     if (ch == 'r' || ch == ' ' || ch == '\x0d' /* enter */ ||
         ch == '\x12' /* ctrl-r */) {
       document.location.reload();

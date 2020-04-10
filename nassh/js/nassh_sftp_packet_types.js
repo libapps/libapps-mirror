@@ -77,11 +77,11 @@ nassh.sftp.packets.NamePacket = function(packet) {
   /* @type {!Array<!nassh.sftp.File>} */
   this.files = [];
 
-  for (var i = 0; i < this.fileCount; i++) {
+  for (let i = 0; i < this.fileCount; i++) {
     const fileName = packet.getUtf8String();
     const longFileName = packet.getUtf8String();
 
-    var fileData = nassh.sftp.packets.getFileAttrs(packet);
+    const fileData = nassh.sftp.packets.getFileAttrs(packet);
 
     fileData.filename = fileName;
     fileData.longFilename = longFileName;
@@ -279,11 +279,11 @@ nassh.sftp.packets.PermissionBits = {
  * @return {string} The short `ls -l`-like summary.
  */
 nassh.sftp.packets.bitsToUnixModeLine = function(bits) {
-  var ret = '';
+  let ret = '';
 
   // First handle the file type.
-  var ifmt = bits & nassh.sftp.packets.PermissionBits.IFMT;
-  var fmtMap = {
+  const ifmt = bits & nassh.sftp.packets.PermissionBits.IFMT;
+  const fmtMap = {
     [nassh.sftp.packets.PermissionBits.IFCHR]: 'c',
     [nassh.sftp.packets.PermissionBits.IFDIR]: 'd',
     [nassh.sftp.packets.PermissionBits.IFBLK]: 'b',
@@ -326,7 +326,7 @@ nassh.sftp.packets.bitsToUnixModeLine = function(bits) {
  * @return {!nassh.sftp.FileAttrs}
  */
 nassh.sftp.packets.getFileAttrs = function(packet) {
-  var attrs = {};
+  const attrs = {};
 
   attrs.flags = packet.getUint32();
   if (attrs.flags & nassh.sftp.packets.FileXferAttrs.SIZE) {
@@ -352,11 +352,11 @@ nassh.sftp.packets.getFileAttrs = function(packet) {
     attrs.lastModified = packet.getUint32();
   }
   if (attrs.flags & nassh.sftp.packets.FileXferAttrs.EXTENDED) {
-    var extendedCount = packet.getUint32();
+    const extendedCount = packet.getUint32();
     attrs.extendedCount = extendedCount;
-    var extendedData = [];
+    const extendedData = [];
 
-    for (var i = 0; i < extendedCount; i++) {
+    for (let i = 0; i < extendedCount; i++) {
       extendedData.push({
         'type': packet.getString(),
         'data': packet.getString(),
@@ -410,7 +410,7 @@ nassh.sftp.packets.setFileAttrs = function(packet, attrs) {
  * @return {!Date} A standard Date object.
  */
 nassh.sftp.packets.epochToLocal = function(epoch) {
-  var date = new Date(0);
+  const date = new Date(0);
   date.setUTCSeconds(epoch);
   return date;
 };

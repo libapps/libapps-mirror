@@ -24,7 +24,7 @@ nassh.sftp.fsp.sftpInstances = {};
  * @param {!Object} args
  */
 nassh.sftp.fsp.createSftpInstance = function(args) {
-  var sftpInstance = new nassh.CommandInstance(args.argv);
+  const sftpInstance = new nassh.CommandInstance(args.argv);
   sftpInstance.connectTo(args.connectOptions);
 };
 
@@ -49,7 +49,7 @@ nassh.sftp.fsp.createSftpInstance = function(args) {
  * }}
  */
 nassh.sftp.fsp.sanitizeMetadata = function(file, options) {
-  var metadata = {};
+  const metadata = {};
   if (options.name) {
     if (file.filename) {
       metadata.name = file.filename;
@@ -84,8 +84,8 @@ nassh.sftp.fsp.onGetMetadataRequested = function(options, onSuccess, onError) {
     return;
   }
 
-  var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
-  var path = '.' + options.entryPath; // relative path
+  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const path = '.' + options.entryPath; // relative path
   client.fileStatus(path)
     .then((metadata) => nassh.sftp.fsp.sanitizeMetadata(metadata, options))
     .then(onSuccess)
@@ -115,9 +115,9 @@ nassh.sftp.fsp.onReadDirectoryRequested = function(
     return;
   }
 
-  var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
-  var directoryHandle;
-  var path = '.' + options.directoryPath; // relative path
+  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  let directoryHandle;
+  const path = '.' + options.directoryPath; // relative path
   client.openDirectory(path)
     .then((handle) => { directoryHandle = handle; })
     .then(() => {
@@ -172,21 +172,21 @@ nassh.sftp.fsp.onWriteFileRequested = function(options, onSuccess, onError) {
     return;
   }
 
-  var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
-  var fileHandle = client.openedFiles[options.openRequestId];
+  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const fileHandle = client.openedFiles[options.openRequestId];
   if (!fileHandle) {
     onError('INVALID_OPERATION');
     return;
   }
 
-  var writePromises = [];
+  const writePromises = [];
   // Splits up the data to be written into chunks that the server can handle
   // and places them into multiple promises which will be resolved
   // asynchronously.
   const data = new Uint8Array(options.data);
   for (let i = 0; i < data.length; i += client.writeChunkSize) {
     const chunk = data.subarray(i, i + client.writeChunkSize);
-    var offset = options.offset + i;
+    const offset = options.offset + i;
     writePromises.push(client.writeChunk(fileHandle, offset, chunk));
   }
 
@@ -210,15 +210,15 @@ nassh.sftp.fsp.onOpenFileRequested = function(options, onSuccess, onError) {
     return;
   }
 
-  var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
-  var pflags = 0;
+  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  let pflags = 0;
   if (options.mode == 'READ') {
     pflags |= nassh.sftp.packets.OpenFlags.READ;
   } else if (options.mode == 'WRITE') {
     pflags |= nassh.sftp.packets.OpenFlags.WRITE;
   }
 
-  var path = '.' + options.filePath; // relative path
+  const path = '.' + options.filePath; // relative path
   client.openFile(path, pflags)
     .then((handle) => { client.openedFiles[options.requestId] = handle; })
     .then(onSuccess)
@@ -241,11 +241,11 @@ nassh.sftp.fsp.onCreateFileRequested = function(options, onSuccess, onError) {
     return;
   }
 
-  var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
-  var pflags = nassh.sftp.packets.OpenFlags.CREAT |
+  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const pflags = nassh.sftp.packets.OpenFlags.CREAT |
                nassh.sftp.packets.OpenFlags.EXCL;
 
-  var path = '.' + options.filePath; // relative path
+  const path = '.' + options.filePath; // relative path
   client.openFile(path, pflags)
     .then((handle) => { client.openedFiles[options.requestId] = handle; })
     .then(onSuccess)
@@ -268,11 +268,11 @@ nassh.sftp.fsp.onTruncateRequested = function(options, onSuccess, onError) {
     return;
   }
 
-  var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
-  var pflags = nassh.sftp.packets.OpenFlags.CREAT |
+  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const pflags = nassh.sftp.packets.OpenFlags.CREAT |
                nassh.sftp.packets.OpenFlags.TRUNC;
 
-  var path = '.' + options.filePath; // relative path
+  const path = '.' + options.filePath; // relative path
   client.openFile(path, pflags)
     .then((handle) => client.closeFile(handle))
     .then(onSuccess)
@@ -296,8 +296,8 @@ nassh.sftp.fsp.onDeleteEntryRequested = function(options, onSuccess, onError) {
     return Promise.resolve();
   }
 
-  var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
-  var path = '.' + options.entryPath; // relative path
+  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const path = '.' + options.entryPath; // relative path
 
   let ret;
   if (options.recursive) {
@@ -341,7 +341,7 @@ nassh.sftp.fsp.onCloseFileRequested = function(options, onSuccess, onError) {
     return;
   }
 
-  var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
   if (!client.openedFiles[options.openRequestId]) {
     console.warn('File handle not found');
     onError('INVALID_OPERATION');
@@ -371,13 +371,13 @@ nassh.sftp.fsp.onCreateDirectoryRequested = function(
     return;
   }
 
-  var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
   if (options.recursive) { // Not supported/implemented.
     onError('INVALID_OPERATION');
     return;
   }
 
-  var path = '.' + options.directoryPath; // relative path
+  const path = '.' + options.directoryPath; // relative path
   client.makeDirectory(path)
     .then(onSuccess)
     .catch((response) => {
@@ -399,9 +399,9 @@ nassh.sftp.fsp.onMoveEntryRequested = function(options, onSuccess, onError) {
     return;
   }
 
-  var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
-  var sourcePath = '.' + options.sourcePath; // relative path
-  var targetPath = '.' + options.targetPath; // relative path
+  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const sourcePath = '.' + options.sourcePath; // relative path
+  const targetPath = '.' + options.targetPath; // relative path
   client.renameFile(sourcePath, targetPath)
     .then(onSuccess)
     .catch((response) => {
@@ -422,8 +422,8 @@ nassh.sftp.fsp.onReadFileRequested = function(options, onSuccess, onError) {
     return;
   }
 
-  var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
-  var fileHandle = client.openedFiles[options.openRequestId];
+  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const fileHandle = client.openedFiles[options.openRequestId];
   if (!fileHandle) {
     onError('INVALID_OPERATION');
     return;
@@ -452,9 +452,9 @@ nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
     return Promise.resolve();
   }
 
-  var client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
-  var sourcePath = '.' + options.sourcePath; // relative path
-  var targetPath = '.' + options.targetPath; // relative path
+  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const sourcePath = '.' + options.sourcePath; // relative path
+  const targetPath = '.' + options.targetPath; // relative path
   return client.linkStatus(sourcePath)
     .then((metadata) => {
       if (metadata.isLink) {
@@ -486,13 +486,13 @@ nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
  * @return {!Promise}
  */
 nassh.sftp.fsp.copyFile_ = function(sourcePath, targetPath, size, client) {
-  var sourceHandle;
-  var targetHandle;
+  let sourceHandle;
+  let targetHandle;
   return client.openFile(sourcePath, nassh.sftp.packets.OpenFlags.READ)
     .then((handle) => {
 
       sourceHandle = handle;
-      var pflags = nassh.sftp.packets.OpenFlags.WRITE |
+      const pflags = nassh.sftp.packets.OpenFlags.WRITE |
                    nassh.sftp.packets.OpenFlags.APPEND |
                    nassh.sftp.packets.OpenFlags.CREAT |
                    nassh.sftp.packets.OpenFlags.EXCL;
@@ -508,15 +508,15 @@ nassh.sftp.fsp.copyFile_ = function(sourcePath, targetPath, size, client) {
         return client.copyData(sourceHandle, targetHandle, size);
       }
 
-      var readWritePromises = [];
+      const readWritePromises = [];
       // Splits up the data to be read and written into chunks that the server
       // can handle and places them into multiple promises which will be
       // resolved asynchronously.
       const chunkSize = Math.min(client.readChunkSize, client.writeChunkSize);
-      for (var i = 0; i < size; i += chunkSize) {
-        var offset = i;
-        var readWritePromise = client.readChunk(sourceHandle, offset,
-                                                chunkSize)
+      for (let i = 0; i < size; i += chunkSize) {
+        const offset = i;
+        const readWritePromise = client.readChunk(sourceHandle, offset,
+                                                  chunkSize)
           .then((data) => client.writeChunk(targetHandle, offset, data));
 
         readWritePromises.push(readWritePromise);
@@ -618,7 +618,7 @@ nassh.sftp.fsp.onUnmountRequested = function(options, onSuccess, onError) {
   // for us to always unmount with the FSP layer.
   if (nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
     // Only clear local state if we know about the mount.
-    var sftpInstance = nassh.sftp.fsp.sftpInstances[options.fileSystemId];
+    const sftpInstance = nassh.sftp.fsp.sftpInstances[options.fileSystemId];
     if (sftpInstance !== undefined) {
       sftpInstance.exit(0); // exit NaCl plugin
       delete nassh.sftp.fsp.sftpInstances[options.fileSystemId];

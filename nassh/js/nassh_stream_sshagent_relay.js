@@ -41,7 +41,7 @@ nassh.Stream.SSHAgentRelay.prototype.asyncOpen = function(
 
   // The other extension (e.g. gnubby) sent us a raw ssh-agent message.
   // Forward it along to the ssh process.
-  var normalOnMessage = (msg) => {
+  const normalOnMessage = (msg) => {
     if (msg.data) {
       // The ssh-agent protocol requires a 4-byte length header, so add that
       // to the buffer before sending to the ssh process.
@@ -64,13 +64,13 @@ nassh.Stream.SSHAgentRelay.prototype.asyncOpen = function(
     }
   };
 
-  var normalDisconnect = () => {
+  const normalDisconnect = () => {
     this.port_.onMessage.removeListener(normalOnMessage);
     this.port_.onDisconnect.removeListener(normalDisconnect);
     this.close();
   };
 
-  var initialOnMessage = (msg) => {
+  const initialOnMessage = (msg) => {
     this.port_.onMessage.removeListener(initialOnMessage);
     this.port_.onDisconnect.removeListener(initialDisconnect);
     this.port_.onMessage.addListener(normalOnMessage);
@@ -78,7 +78,7 @@ nassh.Stream.SSHAgentRelay.prototype.asyncOpen = function(
     onComplete(true);
   };
 
-  var initialDisconnect = () => {
+  const initialDisconnect = () => {
     this.port_.onMessage.removeListener(initialOnMessage);
     this.port_.onDisconnect.removeListener(initialDisconnect);
     onComplete(false, lib.f.lastError());

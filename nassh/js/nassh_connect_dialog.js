@@ -22,8 +22,8 @@ nassh.ConnectDialog = function(messagePort) {
   this.messagePort_.start();
 
   // Turn off spellcheck everywhere.
-  var ary = document.querySelectorAll('input[type="text"]');
-  for (var i = 0; i < ary.length; i++) {
+  const ary = document.querySelectorAll('input[type="text"]');
+  for (let i = 0; i < ary.length; i++) {
     ary[i].setAttribute('spellcheck', 'false');
   }
 
@@ -94,11 +94,11 @@ nassh.ConnectDialog.prototype.onPreferencesReady_ = function() {
   // Install various (DOM and non-DOM) event handlers.
   this.installHandlers_();
 
-  var profileIndex = 0;
+  let profileIndex = 0;
 
   if (this.profileList_.length > 1) {
     chrome.storage.local.get('/nassh/connectDialog/lastProfileId', (items) => {
-      var lastProfileId = items['/nassh/connectDialog/lastProfileId'];
+      const lastProfileId = items['/nassh/connectDialog/lastProfileId'];
       if (lastProfileId) {
         profileIndex = Math.max(0, this.getProfileIndex_(lastProfileId));
       }
@@ -156,7 +156,7 @@ nassh.ConnectDialog.prototype.msg = function(name, args) {
  * box layout, but since we're using a fixed width font it's a simple hack.
  */
 nassh.ConnectDialog.prototype.alignLabels_ = function() {
-  var labels = document.querySelectorAll('.aligned-dialog-labels');
+  const labels = document.querySelectorAll('.aligned-dialog-labels');
 
   let maxWidth = 0;
   labels.forEach((el) => maxWidth = Math.max(maxWidth, el.clientWidth));
@@ -188,8 +188,8 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
     });
 
   // Same for the 'description' field of all known profiles.
-  for (var i = 0; i < this.profileList_.length; i++) {
-    var rec = this.profileList_[i];
+  for (let i = 0; i < this.profileList_.length; i++) {
+    const rec = this.profileList_[i];
     if (rec.prefs) {
       rec.prefs.addObservers(null, {
        description: this.onDescriptionChanged_.bind(this),
@@ -236,7 +236,7 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
   // These fields interact with each-other's placeholder text.
   ['description', 'username', 'hostname', 'port',
   ].forEach((name) => {
-      var field = /** @type {!Element} */ (this.$f(name));
+      const field = /** @type {!Element} */ (this.$f(name));
 
       // Alter description or detail placeholders, and commit the pref.
       addListeners(field, ['change', 'keypress', 'keyup'],
@@ -276,7 +276,7 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
   this.importFileInput_.addEventListener(
       'change', this.onImportFiles_.bind(this));
 
-  var importLink = document.querySelector('#import-link');
+  const importLink = document.querySelector('#import-link');
   importLink.addEventListener('click', (e) => {
       this.importFileInput_.click();
       e.preventDefault();
@@ -292,7 +292,7 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
  * @return {!Element|string|undefined}
  */
 nassh.ConnectDialog.prototype.$f = function(name, attrName, attrValue) {
-  var node = document.querySelector('#field-' + name);
+  const node = document.querySelector('#field-' + name);
   if (!node) {
     throw new Error('Can\'t find: #field-' + name);
   }
@@ -401,15 +401,15 @@ nassh.ConnectDialog.prototype.save = function() {
     return;
   }
 
-  var dirtyForm = false;
-  var changedFields = {};
+  let dirtyForm = false;
+  const changedFields = {};
 
-  var prefs = this.currentProfileRecord_.prefs;
+  let prefs = this.currentProfileRecord_.prefs;
 
   ['description', 'username', 'hostname', 'port', 'nassh-options',
    'identity', 'argstr', 'terminal-profile', 'mount-path',
   ].forEach((name) => {
-       var value = this.$f(name).value;
+       let value = this.$f(name).value;
 
        // Most fields don't make sense with leading or trailing whitespace, so
        // trim them automatically.  This could cause confusion in some fields
@@ -438,7 +438,7 @@ nassh.ConnectDialog.prototype.save = function() {
   if (dirtyForm) {
     if (!prefs) {
       prefs = this.prefs_.createProfile();
-      var rec = new nassh.ConnectDialog.ProfileRecord(
+      const rec = new nassh.ConnectDialog.ProfileRecord(
           prefs.id, prefs, changedFields['description']);
       this.currentProfileRecord_ = rec;
 
@@ -451,7 +451,7 @@ nassh.ConnectDialog.prototype.save = function() {
       });
     }
 
-    for (var name in changedFields) {
+    for (const name in changedFields) {
       this.currentProfileRecord_.prefs.set(name, changedFields[name]);
     }
   }
@@ -470,7 +470,7 @@ nassh.ConnectDialog.prototype.startup_ = function(message, proto) {
   // Since the user has initiated this connection, register the protocol.
   nassh.registerProtocolHandler(proto);
 
-  var items = {
+  const items = {
     '/nassh/connectDialog/lastProfileId': this.currentProfileRecord_.id,
   };
   chrome.storage.local.set(items);
@@ -491,7 +491,7 @@ nassh.ConnectDialog.prototype.mount = function() {
  * Unmount the SFTP connection.
  */
 nassh.ConnectDialog.prototype.unmount = function() {
-  var options = {fileSystemId: this.currentProfileRecord_.id};
+  const options = {fileSystemId: this.currentProfileRecord_.id};
   // TODO: Turn this into an external message API.
   nassh.getBackgroundPage()
     .then((bg) => {
@@ -562,8 +562,8 @@ nassh.ConnectDialog.prototype.maybeCopyPlaceholders_ = function() {
  * @param {string} fieldName
  */
 nassh.ConnectDialog.prototype.maybeCopyPlaceholder_ = function(fieldName) {
-  var field = this.$f(fieldName);
-  var placeholder = field.getAttribute('placeholder');
+  const field = this.$f(fieldName);
+  const placeholder = field.getAttribute('placeholder');
   if (!field.value && placeholder != this.msg('FIELD_' + fieldName +
                                               '_PLACEHOLDER')) {
     field.value = placeholder;
@@ -596,7 +596,7 @@ nassh.ConnectDialog.prototype.updateDetailPlaceholders_ = function() {
   // Try to split the description up into the sub-fields.
   // This supports basic user[@hostname[:port]] strings, and the hostname match
   // is a best effort will remaining simple.
-  var ary = this.$f('description').value.match(
+  let ary = this.$f('description').value.match(
       /^([^@]+)@([^:@\s]+)?(?:(?::)(\d+))?/);
 
   // Set a blank array if the match failed.
@@ -610,7 +610,7 @@ nassh.ConnectDialog.prototype.updateDetailPlaceholders_ = function() {
   // for any field that was not matched.
   ['username', 'hostname', 'port',
   ].forEach((name) => {
-    var value = ary.shift();
+    let value = ary.shift();
     if (!value) {
       value = this.msg('FIELD_' + name + '_PLACEHOLDER');
     }
@@ -650,15 +650,15 @@ nassh.ConnectDialog.prototype.updateNasshOptionsPlaceholder_ = function() {
  * Update the description placeholder.
  */
 nassh.ConnectDialog.prototype.updateDescriptionPlaceholder_ = function() {
-  var username = this.$f('username').value;
-  var hostname = this.$f('hostname').value;
+  const username = this.$f('username').value;
+  const hostname = this.$f('hostname').value;
 
-  var placeholder;
+  let placeholder;
 
   if (username && hostname) {
     placeholder = username + '@' + hostname;
 
-    var v = this.$f('port').value;
+    const v = this.$f('port').value;
     if (v) {
       placeholder += ':' + v;
     }
@@ -676,7 +676,7 @@ nassh.ConnectDialog.prototype.syncForm_ = function() {
   ['description', 'username', 'hostname', 'port', 'argstr', 'nassh-options',
    'identity', 'terminal-profile', 'mount-path',
   ].forEach((n) => {
-      var emptyValue = '';
+      const emptyValue = '';
 
       if (this.currentProfileRecord_.prefs) {
         this.$f(n).value =
@@ -727,22 +727,22 @@ nassh.ConnectDialog.prototype.syncButtons_ = function() {
  */
 nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(onSuccess) {
   const keyfileNames = new Set();
-  var identitySelect = this.$f('identity');
+  const identitySelect = this.$f('identity');
 
-  var selectedName;
+  let selectedName;
   if (this.currentProfileRecord_.prefs) {
     selectedName = this.currentProfileRecord_.prefs.get('identity');
   } else {
     selectedName = identitySelect.value;
   }
 
-  var onReadError = () => {
-    var option = document.createElement('option');
+  const onReadError = () => {
+    const option = document.createElement('option');
     option.textContent = 'Error!';
     identitySelect.appendChild(option);
   };
 
-  var onReadSuccess = (entries) => {
+  const onReadSuccess = (entries) => {
     // Create a set of the filenames which is all we care about.
     const fileNames = new Set(
         entries.filter((entry) => entry.isFile).map((entry) => entry.name));
@@ -762,13 +762,13 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(onSuccess) {
       identitySelect.removeChild(identitySelect.firstChild);
     }
 
-    var option = document.createElement('option');
+    const option = document.createElement('option');
     option.textContent = '[default]';
     option.value = '';
     identitySelect.appendChild(option);
 
     Array.from(keyfileNames).sort().forEach((keyfileName) => {
-      var option = document.createElement('option');
+      const option = document.createElement('option');
       const idx = keyfileName.lastIndexOf('/');
       const key = keyfileName.substr(idx + 1);
       option.textContent = key;
@@ -847,7 +847,7 @@ nassh.ConnectDialog.prototype.deleteProfile_ = function(deadID) {
     // The actual profile removal and list-updating will happen async.
     // Rather than come up with a fancy hack to update the selection when
     // it's done, we just move it before the delete.
-    var currentIndex = this.shortcutList_.activeIndex;
+    const currentIndex = this.shortcutList_.activeIndex;
     if (currentIndex == this.profileList_.length - 1) {
       // User is deleting the last (non-new) profile, select the one before
       // it.
@@ -867,7 +867,7 @@ nassh.ConnectDialog.prototype.deleteProfile_ = function(deadID) {
  * @return {number} -1 if the id is not found.
  */
 nassh.ConnectDialog.prototype.getProfileIndex_ = function(id) {
-  for (var i = 0; i < this.profileList_.length; i++) {
+  for (let i = 0; i < this.profileList_.length; i++) {
     if (this.profileList_[i].id == id) {
       return i;
     }
@@ -882,17 +882,17 @@ nassh.ConnectDialog.prototype.getProfileIndex_ = function(id) {
  * @param {function()=} callback
  */
 nassh.ConnectDialog.prototype.syncProfiles_ = function(callback) {
-  var ids = this.prefs_.get('profile-ids');
+  const ids = this.prefs_.get('profile-ids');
 
   this.profileList_.length = 0;
-  var currentProfileExists = false;
-  var emptyProfileExists = false;
+  let currentProfileExists = false;
+  let emptyProfileExists = false;
 
-  var deadProfiles = Object.keys(this.profileMap_);
+  const deadProfiles = Object.keys(this.profileMap_);
 
-  for (var i = 0; i < ids.length; i++) {
-    var id = ids[i];
-    var p;
+  for (let i = 0; i < ids.length; i++) {
+    const id = ids[i];
+    let p;
 
     if (this.currentProfileRecord_ && id == this.currentProfileRecord_.id) {
       currentProfileExists = true;
@@ -917,7 +917,7 @@ nassh.ConnectDialog.prototype.syncProfiles_ = function(callback) {
     this.profileList_.push(p);
   }
 
-  for (var i = 0; i < deadProfiles.length; i++) {
+  for (let i = 0; i < deadProfiles.length; i++) {
     delete this.profileMap_[deadProfiles[i]];
   }
 
@@ -937,9 +937,9 @@ nassh.ConnectDialog.prototype.syncProfiles_ = function(callback) {
   }
 
   // Start at 1 for the "[New Connection]" profile.
-  var initialized = 1;
+  let initialized = 1;
 
-  var onRead = function(profile) {
+  const onRead = function(profile) {
     profile.textContent = profile.prefs.get('description');
 
     if ((++initialized == this.profileList_.length) && callback) {
@@ -1077,7 +1077,8 @@ nassh.ConnectDialog.prototype.onDocumentKeyDown_ = function(e) {
  * @param {!Event} e
  */
 nassh.ConnectDialog.prototype.onShortcutListKeyDown_ = function(e) {
-  var isNewConnection = this.currentProfileRecord_ == this.emptyProfileRecord_;
+  const isNewConnection =
+      this.currentProfileRecord_ == this.emptyProfileRecord_;
   if (e.keyCode == 46) {
     // DEL delete the profile.
     if (!isNewConnection) {
@@ -1270,23 +1271,23 @@ nassh.ConnectDialog.prototype.onMessageName_['terminal-info'] = function(info) {
   document.body.style.fontFamily = info.fontFamily;
   document.body.style.fontSize = info.fontSize + 'px';
 
-  var fg = lib.notNull(lib.colors.normalizeCSS(info.foregroundColor));
-  var bg = lib.notNull(lib.colors.normalizeCSS(info.backgroundColor));
-  var cursor = lib.notNull(lib.colors.normalizeCSS(info.cursorColor));
+  const fg = lib.notNull(lib.colors.normalizeCSS(info.foregroundColor));
+  const bg = lib.notNull(lib.colors.normalizeCSS(info.backgroundColor));
+  const cursor = lib.notNull(lib.colors.normalizeCSS(info.cursorColor));
 
-  var vars = {
+  const vars = {
     '--nassh-bg-color': bg,
     '--nassh-fg-color': fg,
     '--nassh-cursor-color': cursor,
   };
 
-  for (var i = 10; i < 100; i += 5) {
+  for (let i = 10; i < 100; i += 5) {
     vars['--nassh-bg-color-' + i] = lib.colors.setAlpha(bg, i / 100);
     vars['--nassh-fg-color-' + i] = lib.colors.setAlpha(fg, i / 100);
     vars['--nassh-cursor-color-' + i] = lib.colors.setAlpha(cursor, i / 100);
   }
 
-  for (var key in vars) {
+  for (const key in vars) {
     if (key.startsWith('--nassh-')) {
       document.documentElement.style.setProperty(key, vars[key]);
     }

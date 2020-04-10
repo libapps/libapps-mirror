@@ -308,17 +308,17 @@ it('fsp-onReadDirectory-found', function(done) {
     assert.equal('./dir', path);
     return 'handle';
   };
-  let entries = [
+  const entries = [
     {filename: '.', isDirectory: true},
     {filename: '..', isDirectory: true},
     {filename: 'foo.txt', isDirectory: false},
     {filename: 'dir', isDirectory: true},
   ];
   this.client.scanDirectory.return = (handle, filter) => {
-    let filtered = [];
+    const filtered = [];
     assert.equal('handle', handle);
     entries.forEach((entry) => {
-      let ret = filter(entry);
+      const ret = filter(entry);
       if (ret === false) {
         return;
       } else if (ret !== true) {
@@ -372,7 +372,7 @@ it('fsp-onReadDirectory-symlinks', function(done) {
     const promises = [];
     assert.equal('handle', handle);
     entries.forEach((entry) => {
-      let ret = filter(entry);
+      const ret = filter(entry);
       if (ret === false) {
         return;
       } else if (ret instanceof Promise) {

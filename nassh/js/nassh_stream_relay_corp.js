@@ -61,14 +61,14 @@ nassh.Stream.RelayCorp.prototype.asyncOpen = function(settings, onComplete) {
   this.port_ = settings.port;
   this.resume_ = settings.resume;
 
-  var sessionRequest = new XMLHttpRequest();
+  const sessionRequest = new XMLHttpRequest();
 
-  var onError = () => {
+  const onError = () => {
     console.error('Failed to get session id:', sessionRequest);
     onComplete(false, `${sessionRequest.status}: ${sessionRequest.statusText}`);
   };
 
-  var onReady = () => {
+  const onReady = () => {
     if (sessionRequest.readyState != XMLHttpRequest.DONE) {
       return;
     }
@@ -178,7 +178,7 @@ nassh.Stream.RelayCorp.prototype.requestError_ = function(isRead) {
     }
   }
 
-  var requestType = isRead ? 'read' : 'write';
+  const requestType = isRead ? 'read' : 'write';
   console.log('Error during ' + requestType +
               ', backing off: ' + this.backoffMS_ + 'ms');
 
@@ -307,7 +307,7 @@ nassh.Stream.RelayCorpXHR.prototype.onReadReady_ = function(e) {
 
   this.readCount_ += Math.floor(
       this.readRequest_.responseText.length * 3 / 4);
-  var data = nassh.base64UrlToBase64(this.readRequest_.responseText);
+  const data = nassh.base64UrlToBase64(this.readRequest_.responseText);
   this.onDataAvailable(data);
 
   this.requestSuccess_(true);
@@ -423,7 +423,7 @@ nassh.Stream.RelayCorpWS.prototype.resumeRead_ = function() {
   }
 
   if (this.sessionID_ && !this.socket_) {
-    var uri = this.relay_.relayServerSocket +
+    let uri = this.relay_.relayServerSocket +
         'connect?sid=' + this.sessionID_ +
         '&ack=' + (this.readCount_ & 0xffffff) +
         '&pos=' + (this.writeCount_ & 0xffffff);
@@ -458,8 +458,8 @@ nassh.Stream.RelayCorpWS.prototype.recordAckTime_ = function(deltaTime) {
 
   if (this.ackTimesIndex_ == 0) {
     // Filled the circular buffer; compute average.
-    var average = 0;
-    for (var i = 0; i < this.ackTimes_.length; ++i) {
+    let average = 0;
+    for (let i = 0; i < this.ackTimes_.length; ++i) {
       average += this.ackTimes_[i];
     }
     average /= this.ackTimes_.length;
@@ -467,7 +467,7 @@ nassh.Stream.RelayCorpWS.prototype.recordAckTime_ = function(deltaTime) {
     if (this.relay_.reportAckLatency) {
       // Report observed average to relay.
       // Send this meta-data as string vs. the normal binary payloads.
-      var msg = 'A:' + Math.round(average);
+      const msg = 'A:' + Math.round(average);
       this.socket_.send(msg);
     }
   }
@@ -496,7 +496,7 @@ nassh.Stream.RelayCorpWS.prototype.onSocketData_ = function(e) {
   }
 
   // Unsigned 24 bits wrap-around delta.
-  var delta = ((ack & 0xffffff) - (this.writeCount_ & 0xffffff)) & 0xffffff;
+  const delta = ((ack & 0xffffff) - (this.writeCount_ & 0xffffff)) & 0xffffff;
   this.writeBuffer_.read(delta);
   this.sentCount_ -= delta;
   this.writeCount_ += delta;

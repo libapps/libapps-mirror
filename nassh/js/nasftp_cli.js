@@ -2489,7 +2489,7 @@ nasftp.Cli.commandTestFsp_ = function(_args) {
       .then(([chunks, offset, length]) => {
         // Turn the UTF-8 data into a JS string.
         const decoder = new TextDecoder();
-        let data = chunks.reduce(
+        const data = chunks.reduce(
             (acc, chunk) => acc + decoder.decode(chunk, {stream: true}), '');
 
         // The length is in terms of UTF-8 codeunits, not characters.

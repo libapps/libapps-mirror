@@ -184,7 +184,7 @@ nassh.agent.backends.GSC.prototype.ping = async function() {
 nassh.agent.backends.GSC.prototype.requestReaderIdentities_ =
     async function(keyBlobToReader, reader) {
   const manager = new nassh.agent.backends.GSC.SmartCardManager();
-  let identities = [];
+  const identities = [];
   try {
     await manager.establishContext();
     for (const applet
@@ -244,7 +244,7 @@ nassh.agent.backends.GSC.prototype.requestReaderIdentities_ =
 nassh.agent.backends.GSC.prototype.requestIdentities = async function() {
   // Written to this.keyBlobToReader_ in the end to prevent asynchronous
   // overwrites from leaving it in an inconsistent state.
-  let keyBlobToReader = {};
+  const keyBlobToReader = {};
 
   const manager = new nassh.agent.backends.GSC.SmartCardManager();
   let readers;
@@ -376,7 +376,7 @@ nassh.agent.backends.GSC.prototype.signRequest =
 
     let dataToSign;
     let rsaHashConstants;
-    let keyInfo = await manager.fetchKeyInfo();
+    const keyInfo = await manager.fetchKeyInfo();
     switch (keyInfo.type) {
       case nassh.agent.messages.KeyTypes.RSA:
         if (flags === 0) {
@@ -616,10 +616,10 @@ nassh.agent.backends.GSC.CommandAPDU.prototype.commands = function(
     ];
   }
   if (this.data_.length <= MAX_LC || supportsChaining) {
-    let commands = [];
+    const commands = [];
     let remainingBytes = this.data_.length;
     while (remainingBytes > MAX_LC) {
-      let header = new Uint8Array(this.header_);
+      const header = new Uint8Array(this.header_);
       // Set continuation bit in CLA byte.
       header[0] |= 1 << 4;
       const lc = new Uint8Array([MAX_LC]);
@@ -822,7 +822,7 @@ nassh.agent.backends.GSC.DataObject.fromBytesInRange = function(
  *     result of the parsing.
  */
 nassh.agent.backends.GSC.DataObject.fromBytes = function(bytes) {
-  let dataObjects = [];
+  const dataObjects = [];
   let index = 0;
   let dataObject;
   do {
@@ -862,7 +862,7 @@ nassh.agent.backends.GSC.DataObject.prototype.lookup = function(tag) {
   }
   if (this.isConstructed) {
     for (const child of this.children) {
-      let result = child.lookup(tag);
+      const result = child.lookup(tag);
       if (result !== null) {
         return result;
       }
@@ -1803,7 +1803,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.verifyPIN =
         return false;
       }
       // Pad to 8 bytes by appending (at most two) 0xFF bytes.
-      let paddedPinBytes =
+      const paddedPinBytes =
           lib.array.concatTyped(pinBytes, new Uint8Array([0xFF, 0xFF]))
               .subarray(0, 8);
       try {

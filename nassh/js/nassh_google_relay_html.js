@@ -40,20 +40,20 @@ const showRelayError = function(msg) {
 
 /** On load. */
 window.addEventListener('DOMContentLoaded', (event) => {
-  var hash = document.location.hash.substr(1);
+  const hash = document.location.hash.substr(1);
 
   if (hash.indexOf('@') != -1) {
     // URLs containing '@' are legacy v1 redirects.
-    var ary = hash.match(/@([^:]+)(?::(\d+))?/);
+    const ary = hash.match(/@([^:]+)(?::(\d+))?/);
     window.sessionStorage.setItem('googleRelay.relayHost', ary[1]);
     window.sessionStorage.setItem('googleRelay.relayPort', ary[2] || '');
   } else {
     // URLs not containing '@' are assumed to be v2 URL safe Base64 JSON blobs.
-    var blob = atob(nassh.base64UrlToBase64(hash));
-    var params = JSON.parse(blob);
+    const blob = atob(nassh.base64UrlToBase64(hash));
+    const params = JSON.parse(blob);
 
     if (params['endpoint']) {
-      var [host, port] = params['endpoint'].split(':');
+      const [host, port] = params['endpoint'].split(':');
       window.sessionStorage.setItem('googleRelay.relayHost', host);
       window.sessionStorage.setItem('googleRelay.relayPort', port || '');
     }
@@ -63,13 +63,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
   }
 
-  var path = window.sessionStorage.getItem('googleRelay.resumePath');
+  const path = window.sessionStorage.getItem('googleRelay.resumePath');
   if (!path) {
     showNasshError('Nowhere to resume to!');
     return;
   }
 
-  var url = chrome.extension.getURL(path);
+  const url = chrome.extension.getURL(path);
   console.log(url);
 
   // Avoid infinite loops when the relay server rejects us and we redirect

@@ -145,12 +145,12 @@ nassh.External.newWindow_ = function(
     }
   };
 
-  let width = checkNumber('width');
+  const width = checkNumber('width');
   if (width === false) {
     return;
   }
 
-  let height = checkNumber('height');
+  const height = checkNumber('height');
   if (height === false) {
     return;
   }

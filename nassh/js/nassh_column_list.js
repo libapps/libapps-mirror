@@ -44,7 +44,7 @@ nassh.ColumnList.prototype.decorate = function(div) {
   this.div_.addEventListener('keydown',
       /** @type {!EventListener} */ (this.onKeyDown_.bind(this)));
 
-  var baseId = this.div_.getAttribute('id');
+  let baseId = this.div_.getAttribute('id');
   if (!baseId) {
     baseId =  lib.f.randomInt(1, 0xffff).toString(16);
     baseId = lib.f.zpad(baseId, 4);
@@ -100,7 +100,7 @@ nassh.ColumnList.prototype.scheduleRedraw = function() {
  * Emoty out and redraw the list.
  */
 nassh.ColumnList.prototype.redraw = function() {
-  var div = this.div_;
+  const div = this.div_;
 
   while (div.firstChild) {
     div.removeChild(div.firstChild);
@@ -113,23 +113,23 @@ nassh.ColumnList.prototype.redraw = function() {
     return;
   }
 
-  var columnWidth = (1 / this.columnCount * 100) + '%';
+  const columnWidth = (1 / this.columnCount * 100) + '%';
 
-  var table = this.document_.createElement('table');
+  const table = this.document_.createElement('table');
   table.style.tableLayout = 'fixed';
   table.style.width = '100%';
   div.appendChild(table);
 
-  var tbody = this.document_.createElement('tbody');
+  const tbody = this.document_.createElement('tbody');
   table.appendChild(tbody);
 
-  var tr;
+  let tr;
 
-  for (var i = 0; i < this.items_.length; i++) {
-    var row = Math.floor(i / this.columnCount);
-    var column = i % this.columnCount;
+  for (let i = 0; i < this.items_.length; i++) {
+    const row = Math.floor(i / this.columnCount);
+    const column = i % this.columnCount;
 
-    var td = this.document_.createElement('td');
+    const td = this.document_.createElement('td');
     td.setAttribute('role', 'option');
     td.setAttribute('id', this.baseId_ + '-item-' + i);
     td.setAttribute('row', row);
@@ -137,7 +137,7 @@ nassh.ColumnList.prototype.redraw = function() {
     td.style.width = columnWidth;
     td.className = 'column-list-item';
 
-    var item = this.document_.createElement('div');
+    const item = this.document_.createElement('div');
     item.textContent = this.items_[i].textContent || 'no-name';
     item.addEventListener('click', this.onItemClick_.bind(this, td));
     item.addEventListener('dblclick', this.onItemClick_.bind(this, td));
@@ -154,7 +154,7 @@ nassh.ColumnList.prototype.redraw = function() {
   this.setActiveIndex(Math.min(this.activeIndex, this.items_.length - 1));
 
   while (this.afterRedraw_.length) {
-    var callback = this.afterRedraw_.pop();
+    const callback = this.afterRedraw_.pop();
     callback();
   }
 };
@@ -185,10 +185,10 @@ nassh.ColumnList.prototype.setActiveIndex = function(i) {
     throw new Error('Index is NaN');
   }
 
-  var before = this.activeIndex;
+  const before = this.activeIndex;
 
   if (i != this.activeIndex) {
-    var n = this.getActiveNode_();
+    const n = this.getActiveNode_();
     if (n) {
       n.classList.remove('active');
     }
@@ -198,7 +198,7 @@ nassh.ColumnList.prototype.setActiveIndex = function(i) {
   }
 
   this.activeIndex = i;
-  var node = this.getActiveNode_();
+  const node = this.getActiveNode_();
   node.classList.add('active');
   this.div_.setAttribute('aria-activedescendant', node.getAttribute('id'));
 
@@ -234,7 +234,7 @@ nassh.ColumnList.prototype.getRowColByIndex_ = function(i) {
  * @return {!Node}
  */
 nassh.ColumnList.prototype.getNodeByIndex_ = function(i) {
-  var rc = this.getRowColByIndex_(i);
+  const rc = this.getRowColByIndex_(i);
   return this.getNodeByRowCol_(rc.row, rc.column);
 };
 
@@ -270,8 +270,9 @@ nassh.ColumnList.prototype.getNodeByRowCol_ = function(row, column) {
  * @return {boolean}
  */
 nassh.ColumnList.prototype.onItemClick_ = function(srcNode, e) {
-  var i = this.getIndexByRowCol_(parseInt(srcNode.getAttribute('row'), 10),
-                                 parseInt(srcNode.getAttribute('column'), 10));
+  const i = this.getIndexByRowCol_(
+      parseInt(srcNode.getAttribute('row'), 10),
+      parseInt(srcNode.getAttribute('column'), 10));
   this.setActiveIndex(i);
 
   e.preventDefault();
@@ -285,7 +286,7 @@ nassh.ColumnList.prototype.onItemClick_ = function(srcNode, e) {
  * @return {number}
  */
 nassh.ColumnList.prototype.getColumnHeight_ = function(column) {
-  var tallestColumn = Math.ceil(this.items_.length / this.columnCount);
+  const tallestColumn = Math.ceil(this.items_.length / this.columnCount);
 
   if (column + 1 <= Math.floor(this.columnCount / column + 1)) {
     return tallestColumn;
@@ -321,8 +322,8 @@ nassh.ColumnList.prototype.onKeyDown_ = function(e) {
     return;
   }
 
-  var i = this.activeIndex;
-  var rc = this.getRowColByIndex_(i);
+  let i = this.activeIndex;
+  const rc = this.getRowColByIndex_(i);
 
   switch (e.keyCode) {
     case 38:  // UP

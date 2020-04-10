@@ -18,7 +18,7 @@ it('sftpPacket', () => {
   assert.equal(0, packet.offset_);
   assert.equal(0, packet.getLength());
   assert.equal('', packet.toString());
-  let ret = packet.toArrayBuffer();
+  const ret = packet.toArrayBuffer();
   assert.isTrue(ret instanceof ArrayBuffer);
   assert.deepStrictEqual(new Uint8Array([]), new Uint8Array(ret));
   assert.isTrue(packet.eod());

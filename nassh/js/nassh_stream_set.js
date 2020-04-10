@@ -33,7 +33,7 @@ nassh.StreamSet.prototype.openStream = function(streamClass, fd, arg, onOpen) {
     throw nassh.Stream.ERR_FD_IN_USE;
   }
 
-  var stream = new streamClass(fd, arg);
+  const stream = new streamClass(fd, arg);
 
   stream.asyncOpen(arg, (success, errorMessage) => {
       if (success) {
@@ -63,7 +63,7 @@ nassh.StreamSet.prototype.closeStream = function(fd) {
  * Closes all stream instances.
  */
 nassh.StreamSet.prototype.closeAllStreams = function() {
-  for (var fd in this.openStreams_) {
+  for (const fd in this.openStreams_) {
     this.closeStream(Number(fd));
   }
 };
