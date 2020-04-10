@@ -100,7 +100,7 @@
       let pos = 0;
       while (pos < string.length) {
         let found = false;
-        for (let rule of Object.keys(rules)) {
+        for (const rule of Object.keys(rules)) {
           const re = rules[rule];
           const m = string.slice(pos).match(re);
           if (m) {

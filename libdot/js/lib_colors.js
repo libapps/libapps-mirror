@@ -484,6 +484,7 @@ lib.colors.rgbToHsl = function(rgb) {
   }
 
   /* eslint-disable id-blacklist */
+  // eslint-disable-next-line prefer-const
   let [h, s, l, a] = lib.colors.rgbxArrayToHslaArray(ary);
   h = Math.round(h);
   s = Math.round(s);

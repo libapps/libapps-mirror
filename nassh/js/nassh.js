@@ -9,8 +9,8 @@
  *
  * We export this with 'var' as we access it across background pages.
  * It's messy and probably should be cleaned up at some point.
- * eslint-disable-next-line no-var
  */
+// eslint-disable-next-line no-var
 var nassh = {};
 
 /**

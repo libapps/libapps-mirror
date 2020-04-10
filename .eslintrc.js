@@ -83,6 +83,7 @@ module.exports = {
     'no-useless-concat': 'error',
     'no-useless-escape': 'error',
     'no-useless-return': 'error',
+    'no-var': 'error',
     'no-void': 'error',
     // We allow TODO comments.
     'no-warning-comments': [
@@ -95,6 +96,7 @@ module.exports = {
     'object-curly-newline': ['error', {'consistent': true}],
     'object-curly-spacing': 'error',
     'one-var-declaration-per-line': 'error',
+    'prefer-const': 'error',
     'prefer-numeric-literals': 'error',
     'quote-props': ['error', 'consistent'],
     'quotes': ['error', 'single',
