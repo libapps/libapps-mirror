@@ -50,7 +50,7 @@ describe('terminal_settings_text_tests.js', () => {
     assert.equal(window.preferenceManager.get(preference), 'foo');
     assert.equal(text.value, 'FOO');
 
-    let prefChanged = test.listenForPrefChange(
+    const prefChanged = test.listenForPrefChange(
         window.preferenceManager, preference);
     text.focus();
     text.value = 'BAR';

@@ -72,7 +72,7 @@ describe('terminal_settings_theme_tests.js', () => {
   it('updates-preferences-when-ui-changes', async function() {
     assert.equal(window.preferenceManager.get('theme'), 'dark');
 
-    let prefChanged = test.listenForPrefChange(
+    const prefChanged = test.listenForPrefChange(
         window.preferenceManager, 'theme');
     this.el.shadowRoot.getElementById('light').click();
     await prefChanged;
@@ -149,7 +149,7 @@ describe('terminal_settings_theme_tests.js', () => {
     assert.isTrue(
         this.el.shadowRoot.querySelector('dialog').hasAttribute('open'));
 
-    let prefChanged = test.listenForPrefChange(
+    const prefChanged = test.listenForPrefChange(
         window.preferenceManager, 'background-color');
     this.el.shadowRoot.querySelector('terminal-settings-button.action').click();
     await prefChanged;

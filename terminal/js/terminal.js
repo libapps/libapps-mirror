@@ -64,7 +64,7 @@ terminal.openOptionsPage = function() {
  */
 terminal.init = function(element) {
   const params = new URLSearchParams(document.location.search);
-  let term = new hterm.Terminal();
+  const term = new hterm.Terminal();
 
   term.decorate(element);
   const runTerminal = function() {

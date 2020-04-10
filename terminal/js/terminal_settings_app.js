@@ -25,7 +25,7 @@ import './terminal_settings_transparency_slider.js';
 export const BACKGROUND_IMAGE_CONVERTER = {
   preferenceToDisplay: (preference) => {
     preference = preference ? preference.toString().trim() : '';
-    let result = preference.match(/^url\(['"]?(.*?)['"]?\)$/i);
+    const result = preference.match(/^url\(['"]?(.*?)['"]?\)$/i);
     return result ? result[1] : preference;
   },
   displayToPreference: (display) => {
@@ -33,7 +33,7 @@ export const BACKGROUND_IMAGE_CONVERTER = {
     if (!display) {
       return '';
     }
-    let prefix = RegExp('^https?://', 'i').test(display) ? '' : 'http://';
+    const prefix = RegExp('^https?://', 'i').test(display) ? '' : 'http://';
     return `url(${prefix}${display})`;
   },
 };
