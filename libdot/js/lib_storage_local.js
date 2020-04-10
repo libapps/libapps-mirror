@@ -30,15 +30,15 @@ lib.Storage.Local.prototype.onStorage_ = function(e) {
   // JS throws an exception if JSON.parse is given an empty string. So here we
   // only parse if the value is truthy. This mean the empty string, undefined
   // and null will not be parsed.
-  var prevValue = e.oldValue ? JSON.parse(e.oldValue) : e.oldValue;
-  var curValue = e.newValue ? JSON.parse(e.newValue) : e.newValue;
-  var o = {};
+  const prevValue = e.oldValue ? JSON.parse(e.oldValue) : e.oldValue;
+  const curValue = e.newValue ? JSON.parse(e.newValue) : e.newValue;
+  const o = {};
   o[e.key] = {
     oldValue: prevValue,
     newValue: curValue,
   };
 
-  for (var i = 0; i < this.observers_.length; i++) {
+  for (let i = 0; i < this.observers_.length; i++) {
     this.observers_[i](o);
   }
 };
@@ -61,7 +61,7 @@ lib.Storage.Local.prototype.addObserver = function(callback) {
  * @override
  */
 lib.Storage.Local.prototype.removeObserver = function(callback) {
-  var i = this.observers_.indexOf(callback);
+  const i = this.observers_.indexOf(callback);
   if (i != -1) {
     this.observers_.splice(i, 1);
   }
@@ -91,7 +91,7 @@ lib.Storage.Local.prototype.clear = function(callback) {
  * @override
  */
 lib.Storage.Local.prototype.getItem = function(key, callback) {
-  var value = this.storage_.getItem(key);
+  let value = this.storage_.getItem(key);
 
   if (typeof value == 'string') {
     try {
@@ -113,7 +113,7 @@ lib.Storage.Local.prototype.getItem = function(key, callback) {
  * @override
  */
 lib.Storage.Local.prototype.getItems = function(keys, callback) {
-  var rv = {};
+  const rv = {};
   if (!keys) {
     keys = [];
     for (let i = 0; i < this.storage_.length; i++) {
@@ -121,9 +121,9 @@ lib.Storage.Local.prototype.getItems = function(keys, callback) {
     }
   }
 
-  for (var i = keys.length - 1; i >= 0; i--) {
-    var key = keys[i];
-    var value = this.storage_.getItem(key);
+  for (let i = keys.length - 1; i >= 0; i--) {
+    const key = keys[i];
+    const value = this.storage_.getItem(key);
     if (typeof value == 'string') {
       try {
         rv[key] = JSON.parse(value);
@@ -168,7 +168,7 @@ lib.Storage.Local.prototype.setItem = function(key, value, callback) {
  * @override
  */
 lib.Storage.Local.prototype.setItems = function(obj, callback) {
-  for (var key in obj) {
+  for (const key in obj) {
     this.storage_.setItem(key, JSON.stringify(obj[key]));
   }
 
@@ -204,7 +204,7 @@ lib.Storage.Local.prototype.removeItem = function(key, callback) {
  * @override
  */
 lib.Storage.Local.prototype.removeItems = function(ary, callback) {
-  for (var i = 0; i < ary.length; i++) {
+  for (let i = 0; i < ary.length; i++) {
     this.storage_.removeItem(ary[i]);
   }
 

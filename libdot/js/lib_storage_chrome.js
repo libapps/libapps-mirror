@@ -32,7 +32,7 @@ lib.Storage.Chrome.prototype.onChanged_ = function(changes, areaname) {
     return;
   }
 
-  for (var i = 0; i < this.observers_.length; i++) {
+  for (let i = 0; i < this.observers_.length; i++) {
     this.observers_[i](changes);
   }
 };
@@ -55,7 +55,7 @@ lib.Storage.Chrome.prototype.addObserver = function(callback) {
  * @override
  */
 lib.Storage.Chrome.prototype.removeObserver = function(callback) {
-  var i = this.observers_.indexOf(callback);
+  const i = this.observers_.indexOf(callback);
   if (i != -1) {
     this.observers_.splice(i, 1);
   }
@@ -131,7 +131,7 @@ lib.Storage.Chrome.prototype.setItem = function(key, value, callback) {
     }
   };
 
-  var obj = {};
+  const obj = {};
   obj[key] = value;
   this.storage_.set(obj, onComplete);
 };

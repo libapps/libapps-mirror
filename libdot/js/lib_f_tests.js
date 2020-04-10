@@ -11,7 +11,7 @@
 describe('lib_f_tests.js', () => {
 
 it('replaceVars', () => {
-  var input;
+  let input;
 
   input = 'l/i%20b d&ot+';
   assert.equal(
@@ -83,13 +83,13 @@ it('getStack', () => {
 
 it('randomInt', () => {
   // How many extra samples to grab.  It's random, so hope for the best.
-  var maxSamples = 1000;
-  var i, ret;
-  var seen = [];
-  var min = 0;
-  var max = 10;
+  const maxSamples = 1000;
+  let ret;
+  const seen = [];
+  const min = 0;
+  const max = 10;
 
-  for (i = 0; i < maxSamples; ++i) {
+  for (let i = 0; i < maxSamples; ++i) {
     ret = lib.f.randomInt(min, max);
     assert.isTrue(ret >= min && ret <= max);
     seen[ret] = 1;

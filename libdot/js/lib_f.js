@@ -32,7 +32,7 @@ lib.f.replaceVars = function(str, vars) {
         throw 'Unknown variable: ' + varname;
       }
 
-      var rv = vars[varname];
+      let rv = vars[varname];
 
       if (fn in lib.f.replaceVars.functions) {
         rv = lib.f.replaceVars.functions[fn](rv);
@@ -53,7 +53,7 @@ lib.f.replaceVars.functions = {
   encodeURI: encodeURI,
   encodeURIComponent: encodeURIComponent,
   escapeHTML: function(str) {
-    var map = {
+    const map = {
       '<': '&lt;',
       '>': '&gt;',
       '&': '&amp;',
@@ -174,8 +174,8 @@ lib.f.getStack = function(ignoreFrames = 0, count = undefined) {
  * @return {number}
  */
 lib.f.smartFloorDivide = function(numerator,  denominator) {
-  var val = numerator / denominator;
-  var ceiling = Math.ceil(val);
+  const val = numerator / denominator;
+  const ceiling = Math.ceil(val);
   if (ceiling - val < .0001) {
     return ceiling;
   } else {

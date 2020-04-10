@@ -13,7 +13,7 @@
 describe('lib_color_tests.js', () => {
 
 it('rgbToX11', () => {
-  var data = [
+  const data = [
     // Some bad data first.
     ['', null],
     ['foo', null],
@@ -34,7 +34,7 @@ it('rgbToX11', () => {
 });
 
 it('x11HexToCSS', () => {
-  var data = [
+  const data = [
     // Some bad data first.
     ['', null],
     ['foo', null],
@@ -56,7 +56,7 @@ it('x11HexToCSS', () => {
 });
 
 it('x11ToCSS', () => {
-  var data = [
+  const data = [
     // Some bad data first.
     ['', null],
     ['foo', null],
@@ -86,7 +86,7 @@ it('x11ToCSS', () => {
 });
 
 it('hexToRGB', () => {
-  var data = [
+  const data = [
     // Some bad data first.
     ['', null],
     ['foo', null],
@@ -112,7 +112,7 @@ it('hexToRGB', () => {
 });
 
 it('rgbToHex', () => {
-  var data = [
+  const data = [
     // Some bad data first.
     ['', null],
     ['foo', null],
@@ -131,7 +131,7 @@ it('rgbToHex', () => {
 });
 
 it('normalizeCSS', () => {
-  var data = [
+  const data = [
     // Some bad data first.
     ['', null],
     ['blah', null],
@@ -173,7 +173,7 @@ it('normalizeCSSToHSL', () => {
 });
 
 it('arrayToRGBA', () => {
-  var data = [
+  const data = [
     [[1, 2, 3], 'rgb(1, 2, 3)'],
     [[10, 200, 3, 0], 'rgba(10, 200, 3, 0)'],
     [['0', '30', '50', '1'], 'rgba(0, 30, 50, 1)'],
@@ -197,7 +197,7 @@ it('arrayToHSLA', () => {
 });
 
 it('setAlpha', () => {
-  var data = [
+  const data = [
     [['rgb(2,3,4)', 0], 'rgba(2, 3, 4, 0)'],
     [['rgb(2,3,4)', 1], 'rgba(2, 3, 4, 1)'],
     [['rgba(2,3,4, 0)', 0], 'rgba(2, 3, 4, 0)'],
@@ -212,7 +212,7 @@ it('setAlpha', () => {
 });
 
 it('crackHSL', () => {
-  var data = [
+  const data = [
     // Some bad data first.
     ['', null],
     ['blah', null],
@@ -228,7 +228,7 @@ it('crackHSL', () => {
 });
 
 it('hslToRGB', () => {
-  var data = [
+  const data = [
     // Some bad data first.
     ['', null],
     ['foo', null],
@@ -253,7 +253,7 @@ it('hslToRGB', () => {
 });
 
 it('rgbToHsl', () => {
-  var data = [
+  const data = [
     // Some bad data first.
     ['', null],
     ['foo', null],
@@ -272,7 +272,7 @@ it('rgbToHsl', () => {
 });
 
 it('crackRGB', () => {
-  var data = [
+  const data = [
     // Some bad data first.
     ['', null],
     ['blah', null],
@@ -288,7 +288,7 @@ it('crackRGB', () => {
 });
 
 it('nameToRGB', () => {
-  var data = [
+  const data = [
     // Some bad data first.
     ['', null],
     ['unknown!', null],

@@ -15,8 +15,8 @@ describe('lib_message_manager_tests.js', () => {
  * Note: This relies on no message ids actually matching.
  */
 it('processI18nAttribute', () => {
-  var mm = new lib.MessageManager([]);
-  var node = window.document.createElement('span');
+  const mm = new lib.MessageManager([]);
+  const node = window.document.createElement('span');
   node.setAttribute('id', 'spic-and-span');
 
   // Test missing i18n.

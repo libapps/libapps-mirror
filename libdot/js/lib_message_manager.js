@@ -68,8 +68,8 @@ lib.MessageManager.Messages;
  *     database.
  */
 lib.MessageManager.prototype.addMessages = function(defs) {
-  for (var key in defs) {
-    var def = defs[key];
+  for (const key in defs) {
+    const def = defs[key];
 
     if (!def.placeholders) {
       // Upper case key into this.messages_ since our translated
@@ -175,9 +175,9 @@ lib.MessageManager.prototype.get = function(msgname, args, fallback) {
  *     translated.
  */
 lib.MessageManager.prototype.processI18nAttributes = function(node) {
-  var nodes = node.querySelectorAll('[i18n]');
+  const nodes = node.querySelectorAll('[i18n]');
 
-  for (var i = 0; i < nodes.length; i++) {
+  for (let i = 0; i < nodes.length; i++) {
     this.processI18nAttribute(nodes[i]);
   }
 };
@@ -209,7 +209,7 @@ lib.MessageManager.prototype.processI18nAttribute = function(node) {
   // "UPPER_AND_UNDER" style.
   const thunk = (str) => str.replace(/-/g, '_').toUpperCase();
 
-  var i18n = node.getAttribute('i18n');
+  let i18n = node.getAttribute('i18n');
   if (!i18n) {
     return;
   }
@@ -222,11 +222,11 @@ lib.MessageManager.prototype.processI18nAttribute = function(node) {
   }
 
   // Load all the messages specified in the i18n attributes.
-  for (var key in i18n) {
+  for (let key in i18n) {
     // The node attribute we'll be setting.
-    var attr = key;
+    const attr = key;
 
-    var msgname = i18n[key];
+    let msgname = i18n[key];
     // For "=foo", re-use the referenced message name.
     if (msgname.startsWith('=')) {
       key = msgname.substr(1);
@@ -239,7 +239,7 @@ lib.MessageManager.prototype.processI18nAttribute = function(node) {
     }
 
     // Finally load the message.
-    var msg = this.get(msgname);
+    const msg = this.get(msgname);
     if (attr == '_') {
       node.textContent = msg;
     } else {

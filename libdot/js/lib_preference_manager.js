@@ -118,7 +118,7 @@ lib.PreferenceManager.Record.prototype.addObserver = function(observer) {
  *     previously registered callback.
  */
 lib.PreferenceManager.Record.prototype.removeObserver = function(observer) {
-  var i = this.observers.indexOf(observer);
+  const i = this.observers.indexOf(observer);
   if (i >= 0) {
     this.observers.splice(i, 1);
   }
@@ -195,7 +195,7 @@ lib.PreferenceManager.prototype.activate = function() {
  *     has completed.
  */
 lib.PreferenceManager.prototype.readStorage = function(callback = undefined) {
-  var pendingChildren = 0;
+  let pendingChildren = 0;
 
   function onChildComplete() {
     if (--pendingChildren == 0 && callback) {
@@ -203,21 +203,22 @@ lib.PreferenceManager.prototype.readStorage = function(callback = undefined) {
     }
   }
 
-  var keys = Object.keys(this.prefRecords_).map((el) => this.prefix + el);
+  const keys = Object.keys(this.prefRecords_).map((el) => this.prefix + el);
 
   if (this.trace) {
     console.log('Preferences read: ' + this.prefix);
   }
 
   this.storage.getItems(keys, function(items) {
-      var prefixLength = this.prefix.length;
+      const prefixLength = this.prefix.length;
 
-      for (var key in items) {
-        var value = items[key];
-        var name = key.substr(prefixLength);
-        var needSync = (name in this.childLists_ &&
-                        (JSON.stringify(value) !=
-                         JSON.stringify(this.prefRecords_[name].currentValue)));
+      for (const key in items) {
+        const value = items[key];
+        const name = key.substr(prefixLength);
+        const needSync = (
+            name in this.childLists_ &&
+            (JSON.stringify(value) !=
+             JSON.stringify(this.prefRecords_[name].currentValue)));
 
         this.prefRecords_[name].currentValue = value;
 
@@ -251,7 +252,7 @@ lib.PreferenceManager.prototype.readStorage = function(callback = undefined) {
 lib.PreferenceManager.prototype.definePreference = function(
     name, value, onChange = undefined) {
 
-  var record = this.prefRecords_[name];
+  let record = this.prefRecords_[name];
   if (record) {
     this.changeDefault(name, value);
   } else {
@@ -272,7 +273,7 @@ lib.PreferenceManager.prototype.definePreference = function(
  *     preference.
  */
 lib.PreferenceManager.prototype.definePreferences = function(defaults) {
-  for (var i = 0; i < defaults.length; i++) {
+  for (let i = 0; i < defaults.length; i++) {
     this.definePreference(defaults[i][0], defaults[i][1], defaults[i][2]);
   }
 };
@@ -340,7 +341,7 @@ lib.PreferenceManager.prototype.addObservers = function(global, map) {
     return;
   }
 
-  for (var name in map) {
+  for (const name in map) {
     this.addObserver(name, map[name]);
   }
 };
@@ -370,7 +371,7 @@ lib.PreferenceManager.prototype.removeObserver = function(name, observer) {
  * a live object, for example when switching to a different prefix.
  */
 lib.PreferenceManager.prototype.notifyAll = function() {
-  for (var name in this.prefRecords_) {
+  for (const name in this.prefRecords_) {
     this.notifyChange_(name);
   }
 };
@@ -381,18 +382,18 @@ lib.PreferenceManager.prototype.notifyAll = function() {
  * @param {string} name The name of the preference that changed.
  */
 lib.PreferenceManager.prototype.notifyChange_ = function(name) {
-  var record = this.prefRecords_[name];
+  const record = this.prefRecords_[name];
   if (!record) {
     throw new Error('Unknown preference: ' + name);
   }
 
-  var currentValue = record.get();
+  const currentValue = record.get();
 
-  for (var i = 0; i < this.globalObservers_.length; i++) {
+  for (let i = 0; i < this.globalObservers_.length; i++) {
     this.globalObservers_[i](name, currentValue);
   }
 
-  for (var i = 0; i < record.observers.length; i++) {
+  for (let i = 0; i < record.observers.length; i++) {
     record.observers[i](currentValue, name, this);
   }
 };
@@ -411,7 +412,7 @@ lib.PreferenceManager.prototype.notifyChange_ = function(name) {
  */
 lib.PreferenceManager.prototype.createChild = function(
     listName, hint = undefined, id = undefined) {
-  var ids = this.get(listName);
+  const ids = this.get(listName);
 
   if (id) {
     if (ids.indexOf(id) != -1) {
@@ -429,7 +430,7 @@ lib.PreferenceManager.prototype.createChild = function(
     }
   }
 
-  var childManager = this.childFactories_[listName](this, id);
+  const childManager = this.childFactories_[listName](this, id);
   childManager.trace = this.trace;
   childManager.resetAll();
 
@@ -451,11 +452,11 @@ lib.PreferenceManager.prototype.createChild = function(
  * @param {string} id The child ID.
  */
 lib.PreferenceManager.prototype.removeChild = function(listName, id) {
-  var prefs = this.getChild(listName, id);
+  const prefs = this.getChild(listName, id);
   prefs.resetAll();
 
-  var ids = this.get(listName);
-  var i = ids.indexOf(id);
+  const ids = this.get(listName);
+  const i = ids.indexOf(id);
   if (i != -1) {
     ids.splice(i, 1);
     this.set(listName, ids, undefined, !this.isImportingJson_);
@@ -482,7 +483,7 @@ lib.PreferenceManager.prototype.getChild = function(
     throw new Error('Unknown child list: ' + listName);
   }
 
-  var childList = this.childLists_[listName];
+  const childList = this.childLists_[listName];
   if (!(id in childList)) {
     if (defaultValue === undefined) {
       throw new Error('Unknown "' + listName + '" child: ' + id);
@@ -507,7 +508,7 @@ lib.PreferenceManager.prototype.getChild = function(
  */
 lib.PreferenceManager.prototype.syncChildList = function(
     listName, callback = undefined) {
-  var pendingChildren = 0;
+  let pendingChildren = 0;
   function onChildStorage() {
     if (--pendingChildren == 0 && callback) {
       callback();
@@ -515,22 +516,22 @@ lib.PreferenceManager.prototype.syncChildList = function(
   }
 
   // The list of child ids that we *should* have a manager for.
-  var currentIds = this.get(listName);
+  const currentIds = this.get(listName);
 
   // The known managers at the start of the sync.  Any manager still in this
   // list at the end should be discarded.
-  var oldIds = Object.keys(this.childLists_[listName]);
+  const oldIds = Object.keys(this.childLists_[listName]);
 
-  for (var i = 0; i < currentIds.length; i++) {
-    var id = currentIds[i];
+  for (let i = 0; i < currentIds.length; i++) {
+    const id = currentIds[i];
 
-    var managerIndex = oldIds.indexOf(id);
+    const managerIndex = oldIds.indexOf(id);
     if (managerIndex >= 0) {
       oldIds.splice(managerIndex, 1);
     }
 
     if (!this.childLists_[listName][id]) {
-      var childManager = this.childFactories_[listName](this, id);
+      const childManager = this.childFactories_[listName](this, id);
       if (!childManager) {
         console.warn('Unable to restore child: ' + listName + ': ' + id);
         continue;
@@ -543,7 +544,7 @@ lib.PreferenceManager.prototype.syncChildList = function(
     }
   }
 
-  for (var i = 0; i < oldIds.length; i++) {
+  for (let i = 0; i < oldIds.length; i++) {
     delete this.childLists_[listName][oldIds[i]];
   }
 
@@ -561,7 +562,7 @@ lib.PreferenceManager.prototype.syncChildList = function(
  * @param {string} name The preference to reset.
  */
 lib.PreferenceManager.prototype.reset = function(name) {
-  var record = this.prefRecords_[name];
+  const record = this.prefRecords_[name];
   if (!record) {
     throw new Error('Unknown preference: ' + name);
   }
@@ -578,23 +579,23 @@ lib.PreferenceManager.prototype.reset = function(name) {
  * Reset all preferences back to their default state.
  */
 lib.PreferenceManager.prototype.resetAll = function() {
-  var changed = [];
+  const changed = [];
 
-  for (var listName in this.childLists_) {
-    var childList = this.childLists_[listName];
-    for (var id in childList) {
+  for (const listName in this.childLists_) {
+    const childList = this.childLists_[listName];
+    for (const id in childList) {
       childList[id].resetAll();
     }
   }
 
-  for (var name in this.prefRecords_) {
+  for (const name in this.prefRecords_) {
     if (this.prefRecords_[name].currentValue !== this.DEFAULT_VALUE) {
       this.prefRecords_[name].currentValue = this.DEFAULT_VALUE;
       changed.push(name);
     }
   }
 
-  var keys = Object.keys(this.prefRecords_).map(function(el) {
+  const keys = Object.keys(this.prefRecords_).map(function(el) {
       return this.prefix + el;
   }.bind(this));
 
@@ -650,7 +651,7 @@ lib.PreferenceManager.prototype.diff = function(a, b) {
  * @param {*} newValue The new default value for the preference.
  */
 lib.PreferenceManager.prototype.changeDefault = function(name, newValue) {
-  var record = this.prefRecords_[name];
+  const record = this.prefRecords_[name];
   if (!record) {
     throw new Error('Unknown preference: ' + name);
   }
@@ -678,7 +679,7 @@ lib.PreferenceManager.prototype.changeDefault = function(name, newValue) {
  *     values.
  */
 lib.PreferenceManager.prototype.changeDefaults = function(map) {
-  for (var key in map) {
+  for (const key in map) {
     this.changeDefault(key, map[key]);
   }
 };
@@ -700,12 +701,12 @@ lib.PreferenceManager.prototype.changeDefaults = function(map) {
  */
 lib.PreferenceManager.prototype.set = function(
     name, newValue, onComplete = undefined, saveToStorage = true) {
-  var record = this.prefRecords_[name];
+  const record = this.prefRecords_[name];
   if (!record) {
     throw new Error('Unknown preference: ' + name);
   }
 
-  var oldValue = record.get();
+  const oldValue = record.get();
 
   if (!this.diff(oldValue, newValue)) {
     return Promise.resolve();
@@ -743,7 +744,7 @@ lib.PreferenceManager.prototype.set = function(
  * @return {*} The preference's value.
  */
 lib.PreferenceManager.prototype.get = function(name) {
-  var record = this.prefRecords_[name];
+  const record = this.prefRecords_[name];
   if (!record) {
     throw new Error('Unknown preference: ' + name);
   }
@@ -810,19 +811,19 @@ lib.PreferenceManager.prototype.getString = function(name) {
  * @return {!Object} The JSON preferences.
  */
 lib.PreferenceManager.prototype.exportAsJson = function() {
-  var rv = {};
+  const rv = {};
 
-  for (var name in this.prefRecords_) {
+  for (const name in this.prefRecords_) {
     if (name in this.childLists_) {
       rv[name] = [];
-      var childIds = this.get(name);
-      for (var i = 0; i < childIds.length; i++) {
-        var id = childIds[i];
+      const childIds = this.get(name);
+      for (let i = 0; i < childIds.length; i++) {
+        const id = childIds[i];
         rv[name].push({id: id, json: this.getChild(name, id).exportAsJson()});
       }
 
     } else {
-      var record = this.prefRecords_[name];
+      const record = this.prefRecords_[name];
       if (record.currentValue != this.DEFAULT_VALUE) {
         rv[name] = record.currentValue;
       }
@@ -851,7 +852,7 @@ lib.PreferenceManager.prototype.importFromJson = function(json, onComplete) {
       }
 
       // We've delayed updates to the child arrays, so flush them now.
-      for (let name in json) {
+      for (const name in json) {
         if (name in this.childLists_) {
           this.set(name, this.get(name));
         }
@@ -861,13 +862,13 @@ lib.PreferenceManager.prototype.importFromJson = function(json, onComplete) {
     }
   };
 
-  for (var name in json) {
+  for (const name in json) {
     if (name in this.childLists_) {
-      var childList = json[name];
-      for (var i = 0; i < childList.length; i++) {
-        var id = childList[i].id;
+      const childList = json[name];
+      for (let i = 0; i < childList.length; i++) {
+        const id = childList[i].id;
 
-        var childPrefManager = this.childLists_[name][id];
+        let childPrefManager = this.childLists_[name][id];
         if (!childPrefManager) {
           childPrefManager = this.createChild(name, null, id);
         }
@@ -904,24 +905,24 @@ lib.PreferenceManager.prototype.onChildListChange_ = function(listName) {
  * @param {!Object} map Dictionary of changed settings.
  */
 lib.PreferenceManager.prototype.onStorageChange_ = function(map) {
-  for (var key in map) {
+  for (const key in map) {
     if (this.prefix) {
       if (key.lastIndexOf(this.prefix, 0) != 0) {
         continue;
       }
     }
 
-    var name = key.substr(this.prefix.length);
+    const name = key.substr(this.prefix.length);
 
     if (!(name in this.prefRecords_)) {
       // Sometimes we'll get notified about prefs that are no longer defined.
       continue;
     }
 
-    var record = this.prefRecords_[name];
+    const record = this.prefRecords_[name];
 
-    var newValue = map[key].newValue;
-    var currentValue = record.currentValue;
+    const newValue = map[key].newValue;
+    let currentValue = record.currentValue;
     if (currentValue === record.DEFAULT_VALUE) {
       currentValue = undefined;
     }

@@ -480,8 +480,8 @@ lib.wc.charWidthRegardAmbiguous = function(ucs) {
 lib.wc.strWidth = function(str) {
   let rv = 0;
 
-  for (var i = 0; i < str.length;) {
-    var codePoint = str.codePointAt(i);
+  for (let i = 0; i < str.length;) {
+    const codePoint = str.codePointAt(i);
     const width = lib.wc.charWidth(codePoint);
     if (width < 0) {
       return -1;
@@ -502,8 +502,7 @@ lib.wc.strWidth = function(str) {
  * @return {string} The substring.
  */
 lib.wc.substr = function(str, start, subwidth = undefined) {
-  var startIndex = 0;
-  var endIndex, width;
+  let startIndex = 0;
 
   // Fun edge case: Normally we associate zero width codepoints (like combining
   // characters) with the previous codepoint, so we skip any leading ones while
@@ -512,7 +511,7 @@ lib.wc.substr = function(str, start, subwidth = undefined) {
   // in the result.  This also makes for a simple optimization for a common
   // request.
   if (start) {
-    for (width = 0; startIndex < str.length;) {
+    for (let width = 0; startIndex < str.length;) {
       const codePoint = str.codePointAt(startIndex);
       width += lib.wc.charWidth(codePoint);
       if (width > start) {
@@ -523,7 +522,8 @@ lib.wc.substr = function(str, start, subwidth = undefined) {
   }
 
   if (subwidth !== undefined) {
-    for (endIndex = startIndex, width = 0; endIndex < str.length;) {
+    let endIndex = startIndex;
+    for (let width = 0; endIndex < str.length;) {
       const codePoint = str.codePointAt(endIndex);
       width += lib.wc.charWidth(codePoint);
       if (width > subwidth) {

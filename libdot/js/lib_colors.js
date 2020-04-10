@@ -102,7 +102,7 @@ lib.colors.rgbToX11 = function(value) {
     return lib.f.zpad(v, 4);
   }
 
-  var ary = value.match(lib.colors.re_.rgbx);
+  const ary = value.match(lib.colors.re_.rgbx);
   if (!ary) {
     return null;
   }
@@ -144,10 +144,10 @@ lib.colors.x11HexToCSS = function(v) {
   }
 
   // Split the colors out.
-  var size = v.length / 3;
-  var r = v.substr(0, size);
-  var g = v.substr(size, size);
-  var b = v.substr(size + size, size);
+  const size = v.length / 3;
+  const r = v.substr(0, size);
+  const g = v.substr(size, size);
+  const b = v.substr(size + size, size);
 
   // Normalize to 16 bits.
   function norm16(v) {
@@ -202,7 +202,7 @@ lib.colors.x11ToCSS = function(v) {
     return Math.round(parseInt(v, 16) / 257);
   }
 
-  var ary = v.match(lib.colors.re_.x11rgb);
+  const ary = v.match(lib.colors.re_.x11rgb);
   if (!ary) {
     // Handle the legacy format.
     if (v.startsWith('#')) {
@@ -562,7 +562,7 @@ lib.colors.arrayToHSLA = function(ary) {
  * @return {string} The normalized CSS color spec with updated alpha channel.
  */
 lib.colors.setAlpha = function(rgb, alpha) {
-  var ary = lib.colors.crackRGB(rgb);
+  const ary = lib.colors.crackRGB(rgb);
   ary[3] = alpha.toString();
   return lib.colors.arrayToRGBA(ary);
 };
@@ -576,11 +576,11 @@ lib.colors.setAlpha = function(rgb, alpha) {
  * @return {string} The new tinted CSS color spec.
  */
 lib.colors.mix = function(base, tint, percent) {
-  var ary1 = lib.colors.crackRGB(base);
-  var ary2 = lib.colors.crackRGB(tint);
+  const ary1 = lib.colors.crackRGB(base);
+  const ary2 = lib.colors.crackRGB(tint);
 
-  for (var i = 0; i < 4; ++i) {
-    var diff = ary2[i] - ary1[i];
+  for (let i = 0; i < 4; ++i) {
+    const diff = ary2[i] - ary1[i];
     ary1[i] = Math.round(parseInt(ary1[i], 10) + diff * percent).toString();
   }
 
@@ -598,13 +598,13 @@ lib.colors.mix = function(base, tint, percent) {
  */
 lib.colors.crackRGB = function(color) {
   if (color.startsWith('rgba')) {
-    var ary = color.match(lib.colors.re_.rgba);
+    const ary = color.match(lib.colors.re_.rgba);
     if (ary) {
       ary.shift();
       return Array.from(ary);
     }
   } else {
-    var ary = color.match(lib.colors.re_.rgb);
+    const ary = color.match(lib.colors.re_.rgb);
     if (ary) {
       ary.shift();
       ary.push('1');

@@ -16,9 +16,9 @@ describe('lib_preference_manager_tests.js', () => {
  * can test the window correctly return the default value.
  */
 it('local-delete-default', (done) => {
-  var storage = new lib.Storage.Local();
-  var preferenceManager = new lib.PreferenceManager(storage);
-  var defaultColor = 'red';
+  const storage = new lib.Storage.Local();
+  const preferenceManager = new lib.PreferenceManager(storage);
+  const defaultColor = 'red';
 
   preferenceManager.definePreference('color', defaultColor, function(value) {
     assert.strictEqual(value, defaultColor);
@@ -29,7 +29,7 @@ it('local-delete-default', (done) => {
   preferenceManager.prefRecords_.color.currentValue = 'blue';
 
   // Simpulate deleting the key on another browser.
-  var event = new Event('storage');
+  const event = new Event('storage');
   event.storageArea = window.localStorage;
   event.key = '/color';
   event.oldValue = JSON.stringify('blue');

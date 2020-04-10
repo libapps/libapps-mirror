@@ -48,11 +48,11 @@ lib.registerInit = function(name, callback) {
  *     related log messages to.
  */
 lib.init = function(onInit, logFunction) {
-  var ary = lib.initCallbacks_;
+  const ary = lib.initCallbacks_;
 
-  var initNext = function() {
+  const initNext = function() {
     if (ary.length) {
-      var rec = ary.shift();
+      const rec = ary.shift();
       if (logFunction) {
         logFunction(`init: ${rec[0]}`);
       }

@@ -7,18 +7,18 @@
 describe('lib_wc_tests.js', () => {
 
 it('strWidth-test', () => {
-  var asciiOnechar = 'a';
-  var asciiString = 'an ascii string';
-  var widecharOnechar = '\u4E2D';
-  var widecharString = '\u4E2D\u6587\u5B57\u4E32';
-  var ambiguousOnechar = '\u2026'; // Horizontal ellipsis
-  var mixedString = '\u4E2D\u6587 English';
-  var nullChar = '\u0000';
-  var controlChar = '\r';
-  var musicalSign = '\uD834\uDD00';
-  var wideSurrogatePair = '\uD842\uDD9D';  // U+2099d 𠦝
-  var narrowSurrogatePair = '\uD83D\uDE6B';  // U+1f66b 🙫
-  var combiningChar = 'A\u030A';
+  const asciiOnechar = 'a';
+  const asciiString = 'an ascii string';
+  const widecharOnechar = '\u4E2D';
+  const widecharString = '\u4E2D\u6587\u5B57\u4E32';
+  const ambiguousOnechar = '\u2026'; // Horizontal ellipsis
+  const mixedString = '\u4E2D\u6587 English';
+  const nullChar = '\u0000';
+  const controlChar = '\r';
+  const musicalSign = '\uD834\uDD00';
+  const wideSurrogatePair = '\uD842\uDD9D';  // U+2099d 𠦝
+  const narrowSurrogatePair = '\uD83D\uDE6B';  // U+1f66b 🙫
+  const combiningChar = 'A\u030A';
 
   assert.equal(1, lib.wc.strWidth(asciiOnechar), 'ASCII char has wcwidth 1');
   assert.equal(15, lib.wc.strWidth(asciiString), 'ASCII string');
@@ -43,7 +43,7 @@ it('strWidth-test', () => {
  * and this func has optimizations for them specifically.
  */
 it('charWidthDisregardAmbiguous-low', () => {
-  var i;
+  let i;
 
   for (i = 0; i < 0x20; ++i) {
     assert.equal(0, lib.wc.charWidthDisregardAmbiguous(i));
@@ -59,11 +59,11 @@ it('charWidthDisregardAmbiguous-low', () => {
 });
 
 it('charWidthRegardAmbiguous-test', () => {
-  var asciiChar = 'a';
-  var wideChar = '\u4E2D';
-  var ambiguousChar = '\u2026'; // Horizontal ellipsis
-  var nullChar = '\u0000';
-  var controlChar = '\r';
+  const asciiChar = 'a';
+  const wideChar = '\u4E2D';
+  const ambiguousChar = '\u2026'; // Horizontal ellipsis
+  const nullChar = '\u0000';
+  const controlChar = '\r';
 
   assert.equal(1, lib.wc.charWidthRegardAmbiguous(asciiChar.charCodeAt(0)),
                'ASCII char has width 1');
@@ -78,13 +78,13 @@ it('charWidthRegardAmbiguous-test', () => {
 });
 
 it('substr-test', () => {
-  var asciiOnechar = '1';
-  var asciiString = '1234567890';
-  var widecharOnechar = '\u4E2D';
-  var widecharString = '\u4E2D\u6587\u5B57\u4E32\u4E2D\u6587\u5B57\u4E32';
-  var mixedString = '12345\u4E2D\u6587\u5B57\u4E3267890';
-  var combiningString = '123A\u030A456';
-  var leadingCombiningString = '\u{30a}x';
+  const asciiOnechar = '1';
+  const asciiString = '1234567890';
+  const widecharOnechar = '\u4E2D';
+  const widecharString = '\u4E2D\u6587\u5B57\u4E32\u4E2D\u6587\u5B57\u4E32';
+  const mixedString = '12345\u4E2D\u6587\u5B57\u4E3267890';
+  const combiningString = '123A\u030A456';
+  const leadingCombiningString = '\u{30a}x';
 
   assert.equal('1', lib.wc.substr(asciiOnechar, 0, 1));
   assert.equal('1', lib.wc.substr(asciiOnechar, 0, 2));
@@ -172,9 +172,9 @@ it('substr-narrow-surrogate-test', () => {
 });
 
 it('substring-test', () => {
-  var asciiString = '1234567890';
-  var widecharString = '\u4E2D\u6587\u5B57\u4E32\u4E2D\u6587\u5B57\u4E32';
-  var mixedString = '12345\u4E2D\u6587\u5B57\u4E3267890';
+  const asciiString = '1234567890';
+  const widecharString = '\u4E2D\u6587\u5B57\u4E32\u4E2D\u6587\u5B57\u4E32';
+  const mixedString = '12345\u4E2D\u6587\u5B57\u4E3267890';
 
   assert.equal('\u6587\u5B57',
                lib.wc.substring(widecharString, 2, 6));

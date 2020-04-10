@@ -157,8 +157,8 @@ lib.fs.readDirectory = function(root, path) {
  * @return {!Promise<!FileEntry>}
  */
 lib.fs.getOrCreateFile = function(root, path) {
-  var dirname = null;
-  var basename = null;
+  let dirname = null;
+  let basename = null;
 
   function onDirFound(dirEntry) {
     return new Promise((resolve, reject) => {
@@ -166,7 +166,7 @@ lib.fs.getOrCreateFile = function(root, path) {
     });
   }
 
-  var i = path.lastIndexOf('/');
+  const i = path.lastIndexOf('/');
   if (i > -1) {
     dirname = path.substr(0, i);
     basename = path.substr(i + 1);

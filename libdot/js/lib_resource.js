@@ -82,6 +82,6 @@ lib.resource.getData = function(name, defaultValue) {
  * @return {string} A data: url encoded version of the resource.
  */
 lib.resource.getDataUrl = function(name, defaultValue) {
-  var resource = lib.resource.get(name, defaultValue);
+  const resource = lib.resource.get(name, defaultValue);
   return 'data:' + resource.type + ',' + resource.data;
 };

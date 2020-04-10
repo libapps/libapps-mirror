@@ -34,7 +34,7 @@ lib.Storage.Memory.prototype.addObserver = function(callback) {
  * @override
  */
 lib.Storage.Memory.prototype.removeObserver = function(callback) {
-  var i = this.observers_.indexOf(callback);
+  const i = this.observers_.indexOf(callback);
   if (i != -1) {
     this.observers_.splice(i, 1);
   }
@@ -48,15 +48,15 @@ lib.Storage.Memory.prototype.removeObserver = function(callback) {
  * @override
  */
 lib.Storage.Memory.prototype.clear = function(callback) {
-  var e = {};
-  for (var key in this.storage_) {
+  const e = {};
+  for (const key in this.storage_) {
     e[key] = {oldValue: this.storage_[key], newValue: undefined};
   }
 
   this.storage_ = {};
 
   setTimeout(function() {
-    for (var i = 0; i < this.observers_.length; i++) {
+    for (let i = 0; i < this.observers_.length; i++) {
       this.observers_[i](e);
     }
   }.bind(this), 0);
@@ -75,7 +75,7 @@ lib.Storage.Memory.prototype.clear = function(callback) {
  * @override
  */
 lib.Storage.Memory.prototype.getItem = function(key, callback) {
-  var value = this.storage_[key];
+  let value = this.storage_[key];
 
   if (typeof value == 'string') {
     try {
@@ -97,14 +97,14 @@ lib.Storage.Memory.prototype.getItem = function(key, callback) {
  * @override
  */
 lib.Storage.Memory.prototype.getItems = function(keys, callback) {
-  var rv = {};
+  const rv = {};
   if (!keys) {
     keys = Object.keys(this.storage_);
   }
 
-  for (var i = keys.length - 1; i >= 0; i--) {
-    var key = keys[i];
-    var value = this.storage_[key];
+  for (let i = keys.length - 1; i >= 0; i--) {
+    const key = keys[i];
+    const value = this.storage_[key];
     if (typeof value == 'string') {
       try {
         rv[key] = JSON.parse(value);
@@ -132,14 +132,14 @@ lib.Storage.Memory.prototype.getItems = function(keys, callback) {
  * @override
  */
 lib.Storage.Memory.prototype.setItem = function(key, value, callback) {
-  var oldValue = this.storage_[key];
+  const oldValue = this.storage_[key];
   this.storage_[key] = JSON.stringify(value);
 
-  var e = {};
+  const e = {};
   e[key] = {oldValue: oldValue, newValue: value};
 
   setTimeout(function() {
-    for (var i = 0; i < this.observers_.length; i++) {
+    for (let i = 0; i < this.observers_.length; i++) {
       this.observers_[i](e);
     }
   }.bind(this), 0);
@@ -159,15 +159,15 @@ lib.Storage.Memory.prototype.setItem = function(key, value, callback) {
  * @override
  */
 lib.Storage.Memory.prototype.setItems = function(obj, callback) {
-  var e = {};
+  const e = {};
 
-  for (var key in obj) {
+  for (const key in obj) {
     e[key] = {oldValue: this.storage_[key], newValue: obj[key]};
     this.storage_[key] = JSON.stringify(obj[key]);
   }
 
   setTimeout(function() {
-    for (var i = 0; i < this.observers_.length; i++) {
+    for (let i = 0; i < this.observers_.length; i++) {
       this.observers_[i](e);
     }
   }.bind(this));
@@ -204,7 +204,7 @@ lib.Storage.Memory.prototype.removeItem = function(key, callback) {
  * @override
  */
 lib.Storage.Memory.prototype.removeItems = function(ary, callback) {
-  for (var i = 0; i < ary.length; i++) {
+  for (let i = 0; i < ary.length; i++) {
     delete this.storage_[ary[i]];
   }
 
