@@ -26,7 +26,7 @@ MockEvent.prototype.addListener = function(listener) {
 
 /** @param {?EventListener|function(!Event)} listener */
 MockEvent.prototype.removeListener = function(listener) {
-  this.listeners_ = this.listeners_.filter((l) => l != listener);
+  this.listeners_ = this.listeners_.filter((x) => x != listener);
 };
 
 /**
@@ -38,8 +38,8 @@ MockEvent.prototype.removeListener = function(listener) {
 MockEvent.prototype.dispatch = function(...args) {
   return new Promise((resolve) => {
     setTimeout(() => {
-      for (const l of this.listeners_) {
-        l.apply(null, args);
+      for (const listener of this.listeners_) {
+        listener.apply(null, args);
       }
       resolve();
     }, 0);

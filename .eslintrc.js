@@ -34,6 +34,8 @@ module.exports = {
     'eol-last': 'error',
     'func-call-spacing': 'error',
     'generator-star-spacing': ['error', 'after'],
+    // l/I: Depending on the font, these are hard to distinguish.
+    'id-blacklist': ['error', 'l', 'I'],
     'keyword-spacing': 'error',
     'lines-between-class-members': 'error',
     'max-len': ['error', {'code': 80, 'ignoreUrls': true}],

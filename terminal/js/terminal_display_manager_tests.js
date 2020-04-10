@@ -9,6 +9,12 @@
 import {TerminalDisplayManagerElement as Element} from
     './terminal_display_manager.js';
 
+/*
+ * This uses "l" for shortcut to "left" which is hopefully obvious with the
+ * other common dimension uses of w/t/h.  Let it slide here.
+ */
+/* eslint-disable id-blacklist */
+
 describe('terminal_display_manager_tests.js', () => {
   /**
    * @param {!Element} element

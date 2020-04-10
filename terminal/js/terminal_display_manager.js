@@ -13,25 +13,25 @@
 import {html, render} from './lit_element.js';
 
 /**
- * @param {!Array<?>} xs
+ * @param {!Array<?>} list The list to search.
  * @param {function(?)} compare
  * @return {number}
  */
-const binarySearch = (xs, compare) => {
-  let l = 0;
-  let r = xs.length - 1;
-  while (l <= r) {
-    const m = Math.floor((l + r) / 2);
-    const result = compare(xs[m]);
+const binarySearch = (list, compare) => {
+  let min = 0;
+  let max = list.length - 1;
+  while (min <= max) {
+    const mid = Math.floor((min + max) / 2);
+    const result = compare(list[mid]);
     if (result < 0) {
-      l = m + 1;
+      min = mid + 1;
     } else if (result > 0) {
-      r = m - 1;
+      max = mid - 1;
     } else {
-      return m;
+      return mid;
     }
   }
-  return l;
+  return min;
 };
 
 const managerTemplate = html`
@@ -169,11 +169,11 @@ class Grid {
   findEdge_(edge, edges) {
     // There may be more than one edge with the same precedingSpace. so we check
     // all possible edges in a limited range.
-    const l = binarySearch(
+    const min = binarySearch(
         edges, (x) => x.precedingSpace - edge.precedingSpace + 0.1);
-    const r = binarySearch(
+    const max = binarySearch(
         edges, (x) => x.precedingSpace - edge.precedingSpace - 0.1);
-    for (let i = l; i < r; ++i) {
+    for (let i = min; i < max; ++i) {
       if (edges[i] === edge) {
         return i;
       }
