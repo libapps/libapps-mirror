@@ -382,11 +382,6 @@ nassh.Stream.RelayCorpv4WS.prototype.onSocketData_ = function(e) {
       this.writeBuffer_ = this.writeBuffer_.subarray(acked);
       this.sentCount_ -= acked;
       this.writeAckCount_ = packet.ack;
-
-      if (this.onWriteSuccess_ !== null) {
-        // Notify nassh that we are ready to consume more data.
-        this.onWriteSuccess_(Number(this.writeAckCount_));
-      }
       break;
     }
 
@@ -430,6 +425,11 @@ nassh.Stream.RelayCorpv4WS.prototype.sendWrite_ = function() {
   const dataPacket = new nassh.Stream.RelayCorpv4.ClientDataPacket(readBuffer);
   this.socket_.send(dataPacket.frame);
   this.sentCount_ += dataPacket.length;
+
+  if (this.onWriteSuccess_) {
+    // Notify nassh that we are ready to consume more data.
+    this.onWriteSuccess_(Number(this.writeAckCount_) + this.sentCount_);
+  }
 
   if (this.sentCount_ < this.writeBuffer_.length) {
     // We have more data to send but due to message limit we didn't send it.

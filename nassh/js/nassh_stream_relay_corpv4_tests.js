@@ -162,10 +162,15 @@ it('RelayCorpv4WS basic', (done) => {
   stream.onClose = () => {
     streamClosed = true;
   };
+  let writeCount;
+  const onWriteSuccess = (bytes) => {
+    writeCount = bytes;
+  };
 
   // A write should be queued.
-  stream.asyncWrite(new Uint8Array([0xa0]).buffer);
+  stream.asyncWrite(new Uint8Array([0xa0]).buffer, onWriteSuccess);
   assert.equal(0, stream.sentCount_);
+  assert.isUndefined(writeCount);
 
   // Start the connection.
   let openCallbackRet;
@@ -174,8 +179,9 @@ it('RelayCorpv4WS basic', (done) => {
   });
 
   // Writes should still be queued.
-  stream.asyncWrite(new Uint8Array([0xa1]).buffer);
+  stream.asyncWrite(new Uint8Array([0xa1]).buffer, onWriteSuccess);
   assert.equal(0, stream.sentCount_);
+  assert.isUndefined(writeCount);
 
   // The connection is opened.
   stream.socket_.readyState = WebSocket.OPEN;
@@ -185,6 +191,7 @@ it('RelayCorpv4WS basic', (done) => {
 
   // We queued a write, but didn't call it.
   assert.equal(0, stream.sentCount_);
+  assert.isUndefined(writeCount);
 
   // Handle CONNECT SUCCESS message from the server.
   stream.onSocketData_(new MessageEvent('message', {
@@ -217,6 +224,7 @@ it('RelayCorpv4WS basic', (done) => {
       0x00, 0x00, 0x00, 0x02,
       0xa0, 0xa1,
     ]), new Uint8Array(socketData[1]));
+    assert.equal(2, writeCount);
 
     // Close the socket.
     assert.isNotTrue(streamClosed);
