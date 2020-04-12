@@ -380,6 +380,14 @@ nassh.Stream.RelaySshfeWS.prototype.sendWrite_ = function() {
     return;
   }
 
+  // If we've queued too much already, go back to sleep.
+  // NB: This check is fuzzy at best, so we don't need to include the size of
+  // the data we're about to write below into the calculation.
+  if (this.socket_.bufferedAmount >= this.maxWebSocketBufferLength) {
+    setTimeout(this.sendWrite_.bind(this));
+    return;
+  }
+
   const readBuffer = this.writeBuffer_.subarray(0, this.maxMessageLength);
   const size = readBuffer.length;
   const buf = new ArrayBuffer(size + 4);
