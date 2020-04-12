@@ -98,6 +98,9 @@ nassh.buffer.backend = 'concat';
  */
 nassh.buffer.new = function(...args) {
   switch (nassh.buffer.backend) {
+    case 'scatgat':
+      return new nassh.buffer.ScatGat(...args);
+
     default:
       console.warn(`Unknown buffer type '${nassh.buffer.backend}'; ` +
                    `using 'concat' instead.`);
