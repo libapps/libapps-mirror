@@ -928,6 +928,10 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     this.io.terminal_.clearHome();
   }
 
+  if (options['--field-trial-buffer']) {
+    nassh.buffer.backend = options['--field-trial-buffer'];
+  }
+
   // Start driving non-CrOS people to the extension variant.
   // We do this only for newer versions so we don't flag users on EOL devices
   // who can't migrate to the extension.
