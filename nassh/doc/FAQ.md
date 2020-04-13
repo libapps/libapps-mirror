@@ -372,6 +372,10 @@ have to re-import them.
 
 ### How do I remove a key?
 
+  The easiest way is to visit the options page and select the "SSH Files"
+  section on the left.  From there you will find a list of all the identities
+  and you can delete individual ones.
+
   From the connection dialog, select an identity from the dropdown and press
   the DELETE key.  This will remove both the private and public key files from
   the HTML5 filesystem.
