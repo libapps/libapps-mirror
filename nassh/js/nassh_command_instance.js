@@ -946,7 +946,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
 
   // If the user has requested a proxy relay, load it up.
   if (options['--proxy-mode'] == 'ssh-fe@google.com') {
-    this.relay_ = new nassh.Relay.Sshfe(this.io, options);
+    this.relay_ = new nassh.relay.Sshfe(this.io, options);
     this.io.println(nassh.msg(
         'FOUND_RELAY',
         [`${this.relay_.proxyHost}:${this.relay_.proxyPort}`]));
@@ -958,7 +958,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
                                           this.terminalLocation,
                                           this.storage);
     } else {
-      this.relay_ = new nassh.Relay.Corpv4(this.io, options,
+      this.relay_ = new nassh.relay.Corpv4(this.io, options,
                                            this.terminalLocation,
                                            this.storage);
     }

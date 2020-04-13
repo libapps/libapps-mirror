@@ -15,7 +15,7 @@
  * @param {!Object} options
  * @constructor
  */
-nassh.Relay.Sshfe = function(io, options) {
+nassh.relay.Sshfe = function(io, options) {
   this.io = io;
   this.proxyHost = options['--proxy-host'];
   this.proxyPort = options['--proxy-port'] || 443;
@@ -28,7 +28,7 @@ nassh.Relay.Sshfe = function(io, options) {
 /**
  * Initialize this relay object.
  */
-nassh.Relay.Sshfe.prototype.init = function() {};
+nassh.relay.Sshfe.prototype.init = function() {};
 
 /**
  * Return an nassh.Stream object that will handle the socket stream
@@ -41,7 +41,7 @@ nassh.Relay.Sshfe.prototype.init = function() {};
  * @param {function()} onOpen
  * @return {!nassh.Stream}
  */
-nassh.Relay.Sshfe.prototype.openSocket = function(fd, host, port, streams,
+nassh.relay.Sshfe.prototype.openSocket = function(fd, host, port, streams,
                                                   onOpen) {
   const settings = {
     io: this.io,

@@ -17,7 +17,7 @@
  * @param {!Storage} relayStorage
  * @constructor
  */
-nassh.Relay.Corpv4 = function(io, options, relayLocation, relayStorage) {
+nassh.relay.Corpv4 = function(io, options, relayLocation, relayStorage) {
   this.io = io;
   this.proxyHost = options['--proxy-host'];
   this.proxyPort = options['--proxy-port'] || 443;
@@ -33,7 +33,7 @@ nassh.Relay.Corpv4 = function(io, options, relayLocation, relayStorage) {
  *
  * We only support version 2 of the cookie protocol.
  */
-nassh.Relay.Corpv4.prototype.cookieTemplate_ =
+nassh.relay.Corpv4.prototype.cookieTemplate_ =
     '%(protocol)://%(host):%(port)/cookie' +
     '?ext=%encodeURIComponent(return_to)' +
     '&path=html/nassh_google_relay.html' +
@@ -43,7 +43,7 @@ nassh.Relay.Corpv4.prototype.cookieTemplate_ =
 /**
  * The pattern for the relay server's base url.
  */
-nassh.Relay.Corpv4.prototype.relayServerTemplate_ =
+nassh.relay.Corpv4.prototype.relayServerTemplate_ =
     '%(protocol)://%(host):%(port)';
 
 /**
@@ -51,7 +51,7 @@ nassh.Relay.Corpv4.prototype.relayServerTemplate_ =
  *
  * @return {boolean} Whether redirection was successful.
  */
-nassh.Relay.Corpv4.prototype.redirect = function() {
+nassh.relay.Corpv4.prototype.redirect = function() {
   const resumePath = this.location.href.substr(this.location.origin.length);
 
   // Save off our destination in session storage before we leave for the
@@ -93,7 +93,7 @@ nassh.Relay.Corpv4.prototype.redirect = function() {
  *
  * @return {boolean}
  */
-nassh.Relay.Corpv4.prototype.init = function() {
+nassh.relay.Corpv4.prototype.init = function() {
   const resumePath = this.location.href.substr(this.location.origin.length);
 
   // This session storage item is created by /html/nassh_google_relay.html
@@ -149,7 +149,7 @@ nassh.Relay.Corpv4.prototype.init = function() {
  * @param {function(boolean, ?string=)} onOpen
  * @return {!nassh.Stream}
  */
-nassh.Relay.Corpv4.prototype.openSocket = function(fd, host, port, streams,
+nassh.relay.Corpv4.prototype.openSocket = function(fd, host, port, streams,
                                                    onOpen) {
   const settings = {
     io: this.io,

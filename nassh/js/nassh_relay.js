@@ -8,4 +8,4 @@
  * @fileoverview Common relay logic.
  */
 
-nassh.Relay = {};
+nassh.relay = {};
