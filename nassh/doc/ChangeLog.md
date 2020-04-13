@@ -1,3 +1,28 @@
+# 0.28, 2020-04-14, Linting & perf fixes for corpv4 relay.
+
+* relay: corp: Rename original corp relay.
+* relay: Rename class to match style guide.
+* preferences: Add UI for managing identify files.
+* nasftp: Fix bad command lookups.
+* nasftp: help: Support displaying specific commands.
+* corpv4: Fix plugin ack logic.
+* doc: hack: Update release version.
+* background: Add new corp v4 scripts.
+* lint: Enable object-curly-spacing checks.
+* ssh_client: wasmtime: Version bump to 0.15.0.
+* ssh_client: wasi-sdk: Version bump to 10.0.
+* ssh_client: binaryen: Version bump to 91.
+* lint: Enable func-call-spacing checks.
+* lint: Enable space-before-function-paren checks.
+* lint: Enable arrow-parens checks.
+* lint: Enable comma-dangle checks.
+* lint: Enable space-infix-ops checks.
+* lint: Enable comma-spacing checks.
+* lint: Enable keyword-spacing checks.
+* lint: Enable spaced-comment checks.
+* lint: Use const with for...of loops.
+* lint: Add missing braces everywhere per our style guide.
+
 # 0.27, 2020-04-05, Better options page.
 
 * Update to hterm 1.88.  Better word breaks, more keyboard prefs, and dynamic colors.
