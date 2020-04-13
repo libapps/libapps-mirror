@@ -17,7 +17,7 @@
  * @param {!Storage} relayStorage
  * @constructor
  */
-nassh.GoogleRelay = function(io, options, relayLocation, relayStorage) {
+nassh.relay.Corp = function(io, options, relayLocation, relayStorage) {
   this.io = io;
   this.proxyHost = options['--proxy-host'];
   this.proxyPort = options['--proxy-port'] || 8022;
@@ -38,7 +38,7 @@ nassh.GoogleRelay = function(io, options, relayLocation, relayStorage) {
  *
  * @return {string}
  */
-nassh.GoogleRelay.prototype.cookieServerPattern = function() {
+nassh.relay.Corp.prototype.cookieServerPattern = function() {
   var template = '%(protocol)://%(host):%(port)/cookie' +
       '?ext=%encodeURIComponent(return_to)' +
       '&path=html/nassh_google_relay.html';
@@ -53,7 +53,7 @@ nassh.GoogleRelay.prototype.cookieServerPattern = function() {
  *
  * We'll be appending 'proxy', 'read' and 'write' to this as necessary.
  */
-nassh.GoogleRelay.prototype.relayServerPattern =
+nassh.relay.Corp.prototype.relayServerPattern =
     '%(protocol)://%(host):%(port)/';
 
 /**
@@ -62,7 +62,7 @@ nassh.GoogleRelay.prototype.relayServerPattern =
  * @param {string=} resumePath
  * @return {boolean} Whether redirection was successful.
  */
-nassh.GoogleRelay.prototype.redirect = function(resumePath) {
+nassh.relay.Corp.prototype.redirect = function(resumePath) {
   if (!resumePath) {
     resumePath = this.location.href.substr(this.location.origin.length);
   }
@@ -107,7 +107,7 @@ nassh.GoogleRelay.prototype.redirect = function(resumePath) {
  * @param {string=} resumePath
  * @return {boolean}
  */
-nassh.GoogleRelay.prototype.init = function(resumePath) {
+nassh.relay.Corp.prototype.init = function(resumePath) {
   if (!resumePath) {
     resumePath = this.location.href.substr(this.location.origin.length);
   }
@@ -170,10 +170,10 @@ nassh.GoogleRelay.prototype.init = function(resumePath) {
  * @param {function(boolean, ?string=)} onOpen
  * @return {!nassh.Stream}
  */
-nassh.GoogleRelay.prototype.openSocket = function(fd, host, port, streams,
+nassh.relay.Corp.prototype.openSocket = function(fd, host, port, streams,
                                                   onOpen) {
-  const streamClass = this.useWebsocket ? nassh.Stream.GoogleRelayWS :
-                                          nassh.Stream.GoogleRelayXHR;
+  const streamClass = this.useWebsocket ? nassh.Stream.RelayCorpWS :
+                                          nassh.Stream.RelayCorpXHR;
   const options = {
     relay: this,
     host: host,
@@ -186,7 +186,7 @@ nassh.GoogleRelay.prototype.openSocket = function(fd, host, port, streams,
 /**
  * Find a usable gnubby extension.
  */
-nassh.GoogleRelay.findGnubbyExtension = function() {
+nassh.relay.Corp.findGnubbyExtension = function() {
   // If we're not in an extension context, nothing to do.
   if (!window.chrome || !chrome.runtime) {
     return;
@@ -223,7 +223,7 @@ nassh.GoogleRelay.findGnubbyExtension = function() {
   });
 
   // Guess a reasonable default based on the OS.
-  nassh.GoogleRelay.defaultGnubbyExtension =
+  nassh.relay.Corp.defaultGnubbyExtension =
       (hterm.os == 'cros' ? stableAppId : stableExtId);
 
   // We don't set a timeout here as it doesn't block overall execution.
@@ -232,7 +232,7 @@ nassh.GoogleRelay.findGnubbyExtension = function() {
     for (let i = 0; i < extensions.length; ++i) {
       const extId = extensions[i];
       if (results.includes(extId)) {
-        nassh.GoogleRelay.defaultGnubbyExtension = extId;
+        nassh.relay.Corp.defaultGnubbyExtension = extId;
         break;
       }
     }
@@ -246,7 +246,7 @@ nassh.GoogleRelay.findGnubbyExtension = function() {
  * It resolves using promises in the background, so this is OK.
  */
 lib.registerInit('gnubby probe', function(onInit) {
-  nassh.GoogleRelay.findGnubbyExtension();
+  nassh.relay.Corp.findGnubbyExtension();
 
   onInit();
 });

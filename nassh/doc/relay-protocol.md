@@ -20,8 +20,8 @@ See the [Options] document for those details.
 
 This uses the id `corp-relay@google.com` (e.g. when using `--proxy-mode=`).
 
-The main implementation for this can be found in [nassh_google_relay.js] with
-supporting stream logic in [nassh_stream_google_relay.js].
+The main implementation for this can be found in [nassh_relay_corp.js] with
+supporting stream logic in [nassh_stream_relay_corp.js].
 
 ### Protocol Overview
 
@@ -479,8 +479,8 @@ TODO
 [go/ssh-relay-protocol-4]: https://goto.google.com/ssh-relay-protocol-4
 
 [FAQ]: ./FAQ.md
-[nassh_google_relay.js]: ../js/nassh_google_relay.js
+[nassh_relay_corp.js]: ../js/nassh_relay_corp.js
 [nassh_relay_sshfe.js]: ../js/nassh_relay_sshfe.js
-[nassh_stream_google_relay.js]: ../js/nassh_stream_google_relay.js
+[nassh_stream_relay_corp.js]: ../js/nassh_stream_relay_corp.js
 [nassh_stream_relay_sshfe.js]: ../js/nassh_stream_relay_sshfe.js
 [Options]: ./options.md

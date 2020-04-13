@@ -954,7 +954,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   } else if (options['--proxy-mode'] == 'corp-relay@google.com' ||
              options['--proxy-mode'] == 'corp-relay-v4@google.com') {
     if (options['--proxy-mode'] == 'corp-relay@google.com') {
-      this.relay_ = new nassh.GoogleRelay(this.io, options,
+      this.relay_ = new nassh.relay.Corp(this.io, options,
                                           this.terminalLocation,
                                           this.storage);
     } else {
@@ -1221,7 +1221,7 @@ nassh.CommandInstance.postProcessOptions = function(
   // Turn 'gnubby' into the default id.  We do it here because we haven't yet
   // ported the gnubbyd logic to the new ssh-agent frameworks.
   if (rv['--ssh-agent'] == 'gnubby') {
-    rv['--ssh-agent'] = nassh.GoogleRelay.defaultGnubbyExtension;
+    rv['--ssh-agent'] = nassh.relay.Corp.defaultGnubbyExtension;
   }
 
   // Default the relay username to the ssh username.

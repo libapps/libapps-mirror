@@ -278,15 +278,16 @@ The vast majority of the code here lives under [js/].
   * [nassh.js]: Main `nassh` object setup and glue code to Chrome runtime.
   * [nassh_app.js]: Main `nassh.App` code.
   * [nassh_command_instance.js]: Main `nassh.CommandInstance` launching code.
-  * [nassh_google_relay.js]: Web relay `nassh.GoogleRelay` code for proxying
-    connections.
   * [nassh_preference_manager.js]: Logic holding user preferences.
+* Relay code.
+  * [nassh_relay_corp.js]: Web relay `nassh.relay.Corp` code for proxying
+    connections via [Corp Relay] protocol.
 * Extension glue code
   * [nassh_background.js]: Background extension code.  
   * [nassh_main.js]: Main code to initialize a new connection and hand off.
 * Stream (I/O) related code
   * [nassh_stream.js]: Basic class for implementing all `nassh.Stream` streams.
-  * [nassh_stream_google_relay.js]: 
+  * [nassh_stream_relay_corp.js]: Stream for [Corp Relay] connections.
   * [nassh_stream_set.js]: 
   * [nassh_stream_sftp.js]: Stream for passing binary SFTP data through.
   * [nassh_stream_sshagent.js]:
@@ -553,16 +554,16 @@ Here's a random list of documents which would be useful to people.
 [nassh_connect_dialog.js]: ../js/nassh_connect_dialog.js
 [nassh_extension_popup.js]: ../js/nassh_extension_popup.js
 [nassh_google_relay_html.js]: ../js/nassh_google_relay_html.js
-[nassh_google_relay.js]: ../js/nassh_google_relay.js
 [nassh_main.js]: ../js/nassh_main.js
 [nassh_preference_manager.js]: ../js/nassh_preference_manager.js
 [nassh_preferences_editor.js]: ../js/nassh_preferences_editor.js
+[nassh_relay_corp.js]: ../js/nassh_relay_corp.js
 [nassh_sftp_client.js]: ../js/nassh_sftp_client.js
 [nassh_sftp_fsp.js]: ../js/nassh_sftp_fsp.js
 [nassh_sftp_packet.js]: ../js/nassh_sftp_packet.js
 [nassh_sftp_packet_types.js]: ../js/nassh_sftp_packet_types.js
 [nassh_sftp_status.js]: ../js/nassh_sftp_status.js
-[nassh_stream_google_relay.js]: ../js/nassh_stream_google_relay.js
+[nassh_stream_relay_corp.js]: ../js/nassh_stream_relay_corp.js
 [nassh_stream.js]: ../js/nassh_stream.js
 [nassh_stream_set.js]: ../js/nassh_stream_set.js
 [nassh_stream_sftp.js]: ../js/nassh_stream_sftp.js
@@ -575,6 +576,7 @@ Here's a random list of documents which would be useful to people.
 [FAQ]: FAQ.md
 
 [copy-data]: https://tools.ietf.org/html/draft-ietf-secsh-filexfer-extensions-00#section-7
+[Corp Relay: relay-protocol.md#corp-relay
 [crosh]: chromeos-crosh.md
 [gnubbyd]: https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco
 [NaCl]: https://developer.chrome.com/native-client
