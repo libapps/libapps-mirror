@@ -139,11 +139,12 @@ nassh.Stream.RelayCorpv4WS = function(fd) {
   this.openCallback_ = null;
 
   // All the data we've queued but not yet sent out.
-  this.writeBuffer_ = new Uint8Array(0);
+  this.writeBuffer_ = nassh.buffer.new();
   // Callback function when asyncWrite is used.
   this.onWriteSuccess_ = null;
-  // Amount of data in buffer that were sent but not acknowledged yet.
-  this.sentCount_ = 0;
+
+  // The total byte count we've written during this session.
+  this.writeCount_ = 0;
 
   // Data we've read so we can ack it to the server.
   this.readCount_ = BigInt(0);
@@ -379,8 +380,7 @@ nassh.Stream.RelayCorpv4WS.prototype.onSocketData_ = function(e) {
       }
 
       // Adjust our write buffer.
-      this.writeBuffer_ = this.writeBuffer_.subarray(acked);
-      this.sentCount_ -= acked;
+      this.writeBuffer_.ack(acked);
       this.writeAckCount_ = packet.ack;
       break;
     }
@@ -403,8 +403,7 @@ nassh.Stream.RelayCorpv4WS.prototype.asyncWrite = function(data, onSuccess) {
     return;
   }
 
-  this.writeBuffer_ = lib.array.concatTyped(
-      this.writeBuffer_, new Uint8Array(data));
+  this.writeBuffer_.write(data);
   this.onWriteSuccess_ = onSuccess;
   this.sendWrite_();
 };
@@ -414,7 +413,7 @@ nassh.Stream.RelayCorpv4WS.prototype.asyncWrite = function(data, onSuccess) {
  */
 nassh.Stream.RelayCorpv4WS.prototype.sendWrite_ = function() {
   if (!this.socket_ || this.socket_.readyState != WebSocket.OPEN ||
-      this.writeBuffer_.length <= this.sentCount_) {
+      this.writeBuffer_.isEmpty()) {
     // Nothing to write or socket is not ready.
     return;
   }
@@ -428,18 +427,17 @@ nassh.Stream.RelayCorpv4WS.prototype.sendWrite_ = function() {
   }
 
   // Send the data packet.
-  const readBuffer = this.writeBuffer_.subarray(
-      this.sentCount_, this.sentCount_ + this.maxDataWriteLength);
+  const readBuffer = this.writeBuffer_.read(this.maxDataWriteLength);
   const dataPacket = new nassh.Stream.RelayCorpv4.ClientDataPacket(readBuffer);
   this.socket_.send(dataPacket.frame);
-  this.sentCount_ += dataPacket.length;
+  this.writeCount_ += dataPacket.length;
 
   if (this.onWriteSuccess_) {
     // Notify nassh that we are ready to consume more data.
-    this.onWriteSuccess_(Number(this.writeAckCount_) + this.sentCount_);
+    this.onWriteSuccess_(this.writeCount_);
   }
 
-  if (this.sentCount_ < this.writeBuffer_.length) {
+  if (!this.writeBuffer_.isEmpty()) {
     // We have more data to send but due to message limit we didn't send it.
     setTimeout(this.sendWrite_.bind(this), 0);
   }

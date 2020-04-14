@@ -169,7 +169,7 @@ it('RelayCorpv4WS basic', (done) => {
 
   // A write should be queued.
   stream.asyncWrite(new Uint8Array([0xa0]).buffer, onWriteSuccess);
-  assert.equal(0, stream.sentCount_);
+  assert.equal(0, stream.writeCount_);
   assert.isUndefined(writeCount);
 
   // Start the connection.
@@ -180,7 +180,7 @@ it('RelayCorpv4WS basic', (done) => {
 
   // Writes should still be queued.
   stream.asyncWrite(new Uint8Array([0xa1]).buffer, onWriteSuccess);
-  assert.equal(0, stream.sentCount_);
+  assert.equal(0, stream.writeCount_);
   assert.isUndefined(writeCount);
 
   // The connection is opened.
@@ -190,7 +190,7 @@ it('RelayCorpv4WS basic', (done) => {
   assert.isTrue(openCallbackRet);
 
   // We queued a write, but didn't call it.
-  assert.equal(0, stream.sentCount_);
+  assert.equal(0, stream.writeCount_);
   assert.isUndefined(writeCount);
 
   // Handle CONNECT SUCCESS message from the server.
