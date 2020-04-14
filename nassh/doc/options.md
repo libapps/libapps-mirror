@@ -114,6 +114,11 @@ Display the normal welcome/tips/etc... messages when loading a connection.
 Users are probably interested in the `--no-welcome` inverse to automatically
 clear all of this when connecting.
 
+## `--field-trial-xxx`
+
+Control internal field trial settings.
+These are not currently documented as they aren't meant for normal users.
+
 
 [Relay Protocol]: relay-protocol.md
 [Section 6 of RFC4251]: https://tools.ietf.org/html/rfc4251#section-6
