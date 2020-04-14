@@ -231,23 +231,38 @@ def fetch(uri, output):
     # We use urllib rather than wget or curl to avoid external utils & libs.
     # This seems to be good enough for our needs.
     tmpfile = output + '.tmp'
-    with open(tmpfile, 'wb') as outfp:
-        with urllib.request.urlopen(uri) as infp:
-            mb = 0
-            length = infp.length
-            while True:
-                data = infp.read(1024 * 1024)
-                if not data:
-                    break
-                # Show a simple progress bar if the user is interactive.
-                if verbose:
-                    mb += 1
-                    print('~%i MiB downloaded' % (mb,), end='')
-                    if length:
-                        print(' (%.2f%%)' % (mb * 1024 * 1024 * 100 / length,),
-                              end='')
-                    print('\r', end='', flush=True)
-                outfp.write(data)
+    def _download():
+        """Attempt to download a URI."""
+        with open(tmpfile, 'wb') as outfp:
+            with urllib.request.urlopen(uri) as infp:
+                mb = 0
+                length = infp.length
+                while True:
+                    data = infp.read(1024 * 1024)
+                    if not data:
+                        break
+                    # Show a simple progress bar if the user is interactive.
+                    if verbose:
+                        mb += 1
+                        print('~%i MiB downloaded' % (mb,), end='')
+                        if length:
+                            percent = mb * 1024 * 1024 * 100 / length
+                            print(' (%.2f%%)' % (percent,), end='')
+                        print('\r', end='', flush=True)
+                    outfp.write(data)
+
+    for _ in range(0, 5):
+        try:
+            _download()
+            break
+        except ConnectionError as e:
+            time.sleep(1)
+            logging.warning('Download failed; retrying: %s', e)
+    else:
+        logging.error('Unabled to download; giving up')
+        unlink(tmpfile)
+        sys.exit(1)
+
     # Clear the progress bar.
     if verbose:
         print(' ' * 80, end='\r')
