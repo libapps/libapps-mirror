@@ -429,7 +429,7 @@ have to re-import them.
   3. A `ssh://` URL.
 
   Note that Chrome opens bookmarks in new tabs.  If you want to have a bookmark
-  open as a window, add `?openas=window` to the URI.
+  open as a window, add `?openas=window` to the URI (before `#`).
 
 *** aside
 In the examples below, the *[ID]* field will need adjusting based on the
