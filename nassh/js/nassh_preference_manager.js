@@ -154,11 +154,6 @@ nassh.ProfilePreferenceManager = function(parent, id) {
      * The base path used when mounting via SFTP.
      */
     ['mount-path', ''],
-
-    /**
-     * The appid to which to pass auth-agent requests.
-     */
-    ['auth-agent-appid', null],
   ]);
 };
 

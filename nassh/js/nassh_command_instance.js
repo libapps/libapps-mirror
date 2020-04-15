@@ -467,7 +467,6 @@ nassh.CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
     identity: prefs.get('identity'),
     argstr: prefs.get('argstr'),
     terminalProfile: prefs.get('terminal-profile'),
-    authAgentAppID: prefs.get('auth-agent-appid'),
   };
 };
 
