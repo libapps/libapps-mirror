@@ -744,7 +744,8 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(onSuccess) {
 
   var onReadSuccess = (entries) => {
     // Create a set of the filenames which is all we care about.
-    const fileNames = new Set(entries.map((entry) => entry.name));
+    const fileNames = new Set(
+        entries.filter((entry) => entry.isFile).map((entry) => entry.name));
     fileNames.forEach((name) => {
       const ary = name.match(/^(.*)\.pub/);
       if (ary && fileNames.has(ary[1])) {
@@ -795,7 +796,11 @@ nassh.ConnectDialog.prototype.syncIdentityDropdown_ = function(onSuccess) {
     // Load new keys from /.ssh/identity/.
     lib.fs.readDirectory(this.fileSystem_.root, '/.ssh/identity/')
       .then((entries) => {
-        entries.forEach((entry) => keyfileNames.add(entry.name));
+        entries.forEach((entry) => {
+          if (entry.isFile && !entry.name.endsWith('-cert.pub')) {
+            keyfileNames.add(entry.name);
+          }
+        });
       }),
   ])
   .catch((e) => console.error('Loading keys failed', e))
@@ -826,6 +831,7 @@ nassh.ConnectDialog.prototype.deleteIdentity_ = function(identityName) {
     `/.ssh/${identityName}.pub`,
     `/.ssh/identity/${identityName}`,
     `/.ssh/identity/${identityName}.pub`,
+    `/.ssh/identity/${identityName}-cert.pub`,
   ];
   return Promise.all(files.map(removeFile))
     .finally(() => this.syncIdentityDropdown_());
@@ -982,7 +988,8 @@ nassh.ConnectDialog.prototype.onImportFiles_ = function(e) {
       const file = input.files[i];
 
       // Skip pub key halves as we don't need/use them.
-      if (file.name.endsWith('.pub')) {
+      // Except ssh has a naming convention for certificate files.
+      if (file.name.endsWith('.pub') && !file.name.endsWith('-cert.pub')) {
         resolve();
         return;
       }
