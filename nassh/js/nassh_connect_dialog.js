@@ -984,19 +984,17 @@ nassh.ConnectDialog.prototype.onImportFiles_ = function(e) {
 
   // Create promises for all the file imports.
   for (let i = 0; i < input.files.length; ++i) {
-    promises.push(new Promise((resolve, reject) => {
-      const file = input.files[i];
+    const file = input.files[i];
 
-      // Skip pub key halves as we don't need/use them.
-      // Except ssh has a naming convention for certificate files.
-      if (file.name.endsWith('.pub') && !file.name.endsWith('-cert.pub')) {
-        resolve();
-        return;
-      }
+    // Skip pub key halves as we don't need/use them.
+    // Except ssh has a naming convention for certificate files.
+    if (file.name.endsWith('.pub') && !file.name.endsWith('-cert.pub')) {
+      continue;
+    }
 
-      const targetPath = `/.ssh/identity/${file.name}`;
-      return lib.fs.overwriteFile(this.fileSystem_.root, targetPath, file);
-    }));
+    const targetPath = `/.ssh/identity/${file.name}`;
+    promises.push(lib.fs.overwriteFile(
+        this.fileSystem_.root, targetPath, file));
   }
 
   // Resolve all the imports before syncing the UI.
@@ -1021,6 +1019,9 @@ nassh.ConnectDialog.prototype.onImportFiles_ = function(e) {
         if (select.selectedIndex == -1) {
           select.selectedIndex = selectedIndex;
         }
+
+        // Clear the files list so the next import always works.
+        input.value = '';
       });
     });
 
