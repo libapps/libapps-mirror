@@ -80,7 +80,10 @@ MockTerminalPrivate.Controller = function() {
    * @const
    */
   this.origTerminalPrivate_ = chrome.terminalPrivate;
-  /** @suppress {checkTypes} The mock is not an exact match. */
+  /**
+   * @suppress {constantProperty} Reassigning to chrome.terminalPrivate.
+   * @suppress {checkTypes} The mock is not an exact match.
+   */
   chrome.terminalPrivate = this.instance = new MockTerminalPrivate();
 };
 
@@ -130,7 +133,7 @@ MockTerminalPrivate.Controller.prototype.on = function(fnName) {
  * Stop the mock.
  */
 MockTerminalPrivate.Controller.prototype.stop = function() {
-  /** @suppress {duplicate} Reassigning to const chrome.terminalPrivate. */
+  /** @suppress {constantProperty} Reassigning to chrome.terminalPrivate. */
   chrome.terminalPrivate = this.origTerminalPrivate_;
 };
 
