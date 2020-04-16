@@ -56,21 +56,6 @@ function translateDropdown(name, value) {
   return hterm.messageManager.get(key.replace(/\W/g, '_').toUpperCase());
 }
 
-/**
- * @param {null|string} mode
- * @return {string}
- */
-function altGrModeToText(mode) {
-  switch (mode) {
-    case null:
-      return translateDropdown('alt-gr-mode', 'Auto');
-    case 'none':
-      return translateDropdown('alt-gr-mode', 'Disable');
-    default:
-      return mode;
-  }
-}
-
 export class TerminalSettingsApp extends LitElement {
   /** @override */
   static get properties() {
