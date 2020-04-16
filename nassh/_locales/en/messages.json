@@ -1713,6 +1713,10 @@
 		"description": "Appended to PLUGIN_LOADING message when loading has failed.",
 		"message": " failed! :("
 	},
+	"POPUP_CONNECT_TOOLTIP": {
+		"description": "Tooltip text shown when hovering over a connection link. 'Ctrl' is the Control key on the keyboard and may be translated accordingly. 'tab' refers to a tab in the browser.",
+		"message": "Hold Ctrl to open in a new tab."
+	},
 	"PREFERENCES_HEADER": {
 		"description": "Friendly message shown on the preferences (e.g. colors, fonts, etc...) editing page.",
 		"message": "Profile Settings"

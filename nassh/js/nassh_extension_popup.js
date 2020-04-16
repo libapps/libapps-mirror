@@ -88,6 +88,7 @@ popup.prototype.populateList_ = function() {
     const id = ids[i];
 
     const link = document.createElement('div');
+    link.title = nassh.msg('POPUP_CONNECT_TOOLTIP');
     link.id = id;
     link.className = 'links';
     link.addEventListener('click',
