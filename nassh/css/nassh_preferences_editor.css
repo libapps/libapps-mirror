@@ -58,6 +58,14 @@ body {
 }
 
 /*
+ * Make sure the right pane takes up the whole page when selected.
+ * Otherwise, unselected panes underneath will bleed through.
+ */
+.chrome-bootstrap .frame .mainview > .selected {
+  height: 100%;
+}
+
+/*
  * The container of the terminal preview iframe.
  */
 #terminal {
