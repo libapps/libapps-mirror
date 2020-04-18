@@ -108,11 +108,20 @@ def main(argv):
                 new.setdefault(msgid, baseline[msgid])
                 continue
 
+            # If we've deleted a message, delete it from the translations too.
+            if msgid not in baseline:
+                new.pop(msgid)
+                continue
+
             if normalize(baseline[msgid]) == normalize(msg):
                 if msgid in old:
                     new[msgid] = old[msgid]
                 else:
                     new.pop(msgid)
+
+        # If we don't have any translations yet, ignore it.
+        if len(new) <= 1:
+            continue
 
         filter_translations.reformat(new, output=out_locale)
 
