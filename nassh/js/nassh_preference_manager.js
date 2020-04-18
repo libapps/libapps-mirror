@@ -41,36 +41,6 @@ nassh.PreferenceManager.prototype =
 /** @override */
 nassh.PreferenceManager.constructor = nassh.PreferenceManager;
 
-/**
- * Entry point when loading the nassh preferences.
- *
- * @param {function()=} callback Callback when the storage is loaded.
- * @override
- */
-nassh.PreferenceManager.prototype.readStorage = function(callback) {
-  // Handle renaming the "relay-options" field to "nassh-options".
-  // We can probably delete this migration by Dec 2019.
-  const onRead = () => {
-    const profiles = this.get('profile-ids');
-    profiles.forEach((id) => {
-      const profile = this.getProfile(id);
-      const oldName = `${profile.prefix}relay-options`;
-      profile.storage.getItems([oldName], (items) => {
-        if (oldName in items) {
-          profile.set('nassh-options', items[oldName]);
-          profile.storage.removeItem(oldName);
-        }
-      });
-    });
-
-    if (callback) {
-      callback();
-    }
-  };
-
-  lib.PreferenceManager.prototype.readStorage.call(this, onRead);
-};
-
 /** @return {!nassh.PreferenceManager} */
 nassh.PreferenceManager.prototype.createProfile = function() {
   return /** @type {!nassh.PreferenceManager} */ (
