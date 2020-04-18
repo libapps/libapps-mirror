@@ -437,7 +437,7 @@
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
-	"preferences_header": {
+	"preferences_header_terminal": {
 		"message": "配置文件设置"
 	},
 	"preferences_reset": {

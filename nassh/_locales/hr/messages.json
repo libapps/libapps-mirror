@@ -437,7 +437,7 @@
 	"pref_backup_filename": {
 		"message": "Backup.json za postavke sigurne ljuske"
 	},
-	"preferences_header": {
+	"preferences_header_terminal": {
 		"message": "Postavke profila"
 	},
 	"preferences_reset": {

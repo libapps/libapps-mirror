@@ -1713,13 +1713,13 @@
 		"description": "Tooltip text shown when hovering over a connection link. 'Ctrl' is the Control key on the keyboard and may be translated accordingly. 'tab' refers to a tab in the browser.",
 		"message": "Hold Ctrl to open in a new tab."
 	},
-	"PREFERENCES_HEADER": {
-		"description": "Friendly message shown on the preferences (e.g. colors, fonts, etc...) editing page.",
-		"message": "Profile Settings"
-	},
 	"PREFERENCES_HEADER_SSH_FILES": {
 		"description": "Menu label to select the SSH config files page.",
 		"message": "SSH Files"
+	},
+	"PREFERENCES_HEADER_TERMINAL": {
+		"description": "Friendly message shown on the terminal preferences (e.g. colors, fonts, etc...) editing page.",
+		"message": "Terminal Settings"
 	},
 	"PREFERENCES_HEADER_URI": {
 		"description": "Menu label to select the protocol handler registration page. This controls settings for e.g. ssh:// URIs.",

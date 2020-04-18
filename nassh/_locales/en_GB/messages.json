@@ -95,9 +95,6 @@
 	"plugin_loading": {
 		"message": "Loading NaCl plug-in..."
 	},
-	"preferences_header": {
-		"message": "Profile settings"
-	},
 	"reconnect_message": {
 		"message": "(R)econnect, (C)hoose another connection or E(x)it?"
 	},

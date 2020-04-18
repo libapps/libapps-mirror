@@ -437,7 +437,7 @@
 	"pref_backup_filename": {
 		"message": "Sikkerhetskopi av Secure Shell-innstillinger.json"
 	},
-	"preferences_header": {
+	"preferences_header_terminal": {
 		"message": "Profilinnstillinger"
 	},
 	"preferences_reset": {

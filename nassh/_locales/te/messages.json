@@ -437,7 +437,7 @@
 	"pref_backup_filename": {
 		"message": "సురక్షిత షెల్ ప్రాధాన్యతల బ్యాకప్.json"
 	},
-	"preferences_header": {
+	"preferences_header_terminal": {
 		"message": "ప్రొఫైల్ సెట్టింగ్‌లు"
 	},
 	"preferences_reset": {
