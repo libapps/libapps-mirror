@@ -98,7 +98,7 @@
 		"message": "Connect"
 	},
 	"CONNECT_OR_EXIT_MESSAGE": {
-		"description": "Message displayed after a connection closes and the user cannot reconnect. Do not translate the (C) or (X) fields as they are keyboard shortcuts. Placing them after the word is OK like: Exit (X).",
+		"description": "Message displayed after a connection closes and the user cannot reconnect. Do not translate the (C) or (X) fields as they are keyboard shortcuts, although changing case is OK. Placing them after the word is OK like: Exit (X).",
 		"message": "(C)hoose another connection or E(x)it?"
 	},
 	"CONSOLE_CROSH_OPTIONS_NOTICE": {
@@ -152,7 +152,7 @@
 		"message": "FAQ"
 	},
 	"FIELD_ARGSTR_PLACEHOLDER": {
-		"description": "Placeholder text for the optional ssh arguments field. These are command line flags to the ssh program itself. Translators: the text does not need to be kept lowercase.",
+		"description": "Placeholder text for the optional ssh arguments field. These are command line flags to the ssh program itself so that users may specify extra options. Translators: the text does not need to be kept lowercase.",
 		"message": "extra command line arguments"
 	},
 	"FIELD_DESCRIPTION_ARIA_LABEL": {
@@ -160,7 +160,7 @@
 		"message": "description"
 	},
 	"FIELD_DESCRIPTION_PLACEHOLDER": {
-		"description": "Placeholder text for the custom connection name. This string can be fully translated, but it should keep the 'username' and 'hostname' together with an @ sign.",
+		"description": "Placeholder text for the custom connection name. This string can be fully translated, but it should keep the 'username' and 'hostname' together with an @ sign. If 'username' or 'hostname' expand with spaces or otherwise breaks up the association, you can use angle brackets (or similar) to indicate it is a single element.",
 		"message": "username@hostname or free form text"
 	},
 	"FIELD_HOSTNAME_ARIA_LABEL": {
@@ -228,7 +228,7 @@
 		}
 	},
 	"HTERM_ANNOUNCE_CURRENT_SCREEN_HEADER": {
-		"description": "Message spoken to a user through Assistive Technology when they page up/down through the scrollport. The percentage of the document that has been scrolled is read out, followed by the text that is currently visible on screen. The trailing comma is used to help the listener by inserting a slight pause rather than using a period which would add a longer pause.",
+		"description": "Message spoken to a user through Assistive Technology when they scroll up/down through the screen history. The percentage of the document that has been scrolled is read out loud, followed by the text that is currently visible on screen. The trailing comma is used to help the listener by inserting a slight pause rather than using a period which would add a longer pause.",
 		"message": "$PERCENT$% scrolled,",
 		"placeholders": {
 			"PERCENT": {
@@ -250,11 +250,11 @@
 		"message": "Block"
 	},
 	"HTERM_BUTTON_PAGE_DOWN": {
-		"description": "Button label for scrolling down one page in the terminal output history.",
+		"description": "Button label for scrolling down one page in the terminal output history. It is meant to be read out loud by screen readers so users can interact with the element. It does not refer to the keyboard button.",
 		"message": "Page down"
 	},
 	"HTERM_BUTTON_PAGE_UP": {
-		"description": "Button label for scrolling up one page in the terminal output history.",
+		"description": "Button label for scrolling up one page in the terminal output history. It is meant to be read out loud by screen readers so users can interact with the element. It does not refer to the keyboard button.",
 		"message": "Page up"
 	},
 	"HTERM_LOADING_RESOURCE_FAILED": {
@@ -278,291 +278,291 @@
 		}
 	},
 	"HTERM_NAME_PREF_ALLOW_IMAGES_INLINE": {
-		"description": "Label text shown for the hterm 'allow-images-inline' preference. 'inline' means the images will be displayed directly instead of being downloaded.",
+		"description": "Label text shown for the 'allow-images-inline' preference. 'inline' means the images will be displayed directly instead of being downloaded.",
 		"message": "Allow inline image display"
 	},
 	"HTERM_NAME_PREF_ALT_BACKSPACE_IS_META_BACKSPACE": {
-		"description": "Label text shown for the hterm 'alt-backspace-is-meta-backspace' preference.",
+		"description": "Label text shown for the 'alt-backspace-is-meta-backspace' preference.",
 		"message": "Alt+Backspace is Meta+Backspace"
 	},
 	"HTERM_NAME_PREF_ALT_GR_MODE": {
-		"description": "Label text shown for the hterm 'alt-gr-mode' preference.",
+		"description": "Label text shown for the 'alt-gr-mode' preference.",
 		"message": "AltGr key mode"
 	},
 	"HTERM_NAME_PREF_ALT_IS_META": {
-		"description": "Label text shown for the hterm 'alt-is-meta' preference.",
+		"description": "Label text shown for the 'alt-is-meta' preference.",
 		"message": "Treat Alt key as Meta key"
 	},
 	"HTERM_NAME_PREF_ALT_SENDS_WHAT": {
-		"description": "Label text shown for the hterm 'alt-sends-what' preference.",
+		"description": "Label text shown for the 'alt-sends-what' preference.",
 		"message": "Alt key modifier handling"
 	},
 	"HTERM_NAME_PREF_AUDIBLE_BELL_SOUND": {
-		"description": "Label text shown for the hterm 'audible-bell-sound' preference. The terminal will play this sound to get the user's attention. It is specified by the user as a URL/URI.",
+		"description": "Label text shown for the 'audible-bell-sound' preference. The terminal will play this sound to get the user's attention. It is specified by the user as a URL/URI.",
 		"message": "Alert bell sound (URI)"
 	},
 	"HTERM_NAME_PREF_BACKGROUND_COLOR": {
-		"description": "Label text shown for the hterm 'background-color' preference.",
+		"description": "Label text shown for the 'background-color' preference.",
 		"message": "Background color"
 	},
 	"HTERM_NAME_PREF_BACKGROUND_IMAGE": {
-		"description": "Label text shown for the hterm 'background-image' preference.",
+		"description": "Label text shown for the 'background-image' preference.",
 		"message": "Background image"
 	},
 	"HTERM_NAME_PREF_BACKGROUND_POSITION": {
-		"description": "Label text shown for the hterm 'background-position' preference.",
+		"description": "Label text shown for the 'background-position' preference.",
 		"message": "Background image position"
 	},
 	"HTERM_NAME_PREF_BACKGROUND_SIZE": {
-		"description": "Label text shown for the hterm 'background-size' preference.",
+		"description": "Label text shown for the 'background-size' preference.",
 		"message": "Background image size"
 	},
 	"HTERM_NAME_PREF_BACKSPACE_SENDS_BACKSPACE": {
-		"description": "Label text shown for the hterm 'backspace-sends-backspace' preference.",
+		"description": "Label text shown for the 'backspace-sends-backspace' preference.",
 		"message": "Backspace key behavior"
 	},
 	"HTERM_NAME_PREF_CHARACTER_MAP_OVERRIDES": {
-		"description": "Label text shown for the hterm 'character-map-overrides' preference. This maps input characters to different output characters as the user chooses. For example, they can change every 'f' character to be displayed as 'k' instead by providing a 'f'->'k' mapping. This only maps ASCII characters.",
+		"description": "Label text shown for the 'character-map-overrides' preference. This maps input characters to different output characters as the user chooses. For example, they can change every 'f' character to be displayed as 'k' instead by providing a 'f'->'k' mapping. This only maps ASCII characters.",
 		"message": "Character map overrides"
 	},
 	"HTERM_NAME_PREF_CLEAR_SELECTION_AFTER_COPY": {
-		"description": "Label text shown for the hterm 'clear-selection-after-copy' preference.",
+		"description": "Label text shown for the 'clear-selection-after-copy' preference.",
 		"message": "Automatically clear text selection"
 	},
 	"HTERM_NAME_PREF_CLOSE_ON_EXIT": {
-		"description": "Label text shown for the hterm 'close-on-exit' preference.",
+		"description": "Label text shown for the 'close-on-exit' preference.",
 		"message": "Close window on exit"
 	},
 	"HTERM_NAME_PREF_COLOR_PALETTE_OVERRIDES": {
-		"description": "Label text shown for the hterm 'color-palette-overrides' preference.",
+		"description": "Label text shown for the 'color-palette-overrides' preference.",
 		"message": "Initial color palette"
 	},
 	"HTERM_NAME_PREF_COPY_ON_SELECT": {
-		"description": "Label text shown for the hterm 'copy-on-select' preference.",
+		"description": "Label text shown for the 'copy-on-select' preference.",
 		"message": "Automatically copy selected content"
 	},
 	"HTERM_NAME_PREF_CTRL_C_COPY": {
-		"description": "Label text shown for the hterm 'ctrl-c-copy' preference. 'Ctrl' and 'C' refer to keys on the keyboard and may be translated accordingly.",
+		"description": "Label text shown for the 'ctrl-c-copy' preference. 'Ctrl' and 'C' refer to keys on the keyboard and may be translated accordingly.",
 		"message": "Ctrl+C copy behavior"
 	},
 	"HTERM_NAME_PREF_CTRL_PLUS_MINUS_ZERO_ZOOM": {
-		"description": "Label text shown for the hterm 'ctrl-plus-minus-zero-zoom' preference. 'Ctrl', '+', '-', and '0' refer to keys on the keyboard and may be translated accordingly",
+		"description": "Label text shown for the 'ctrl-plus-minus-zero-zoom' preference. 'Ctrl', '+', '-', and '0' refer to keys on the keyboard and may be translated accordingly",
 		"message": "Ctrl++/-/0 zoom behavior"
 	},
 	"HTERM_NAME_PREF_CTRL_V_PASTE": {
-		"description": "Label text shown for the hterm 'ctrl-v-paste' preference. 'Ctrl' and 'V' refer to keys on the keyboard and may be translated accordingly",
+		"description": "Label text shown for the 'ctrl-v-paste' preference. 'Ctrl' and 'V' refer to keys on the keyboard and may be translated accordingly",
 		"message": "Ctrl+V paste behavior"
 	},
 	"HTERM_NAME_PREF_CURSOR_BLINK": {
-		"description": "Label text shown for the hterm 'cursor-blink' preference.",
+		"description": "Label text shown for the 'cursor-blink' preference. This controls whether the text cursor blinks on/off or remains solid.",
 		"message": "Cursor blink"
 	},
 	"HTERM_NAME_PREF_CURSOR_BLINK_CYCLE": {
-		"description": "Label text shown for the hterm 'cursor-blink-cycle' preference.",
+		"description": "Label text shown for the 'cursor-blink-cycle' preference. This allows the user to specify the rate at which the cursor turns on/off.",
 		"message": "Cursor blink rate"
 	},
 	"HTERM_NAME_PREF_CURSOR_COLOR": {
-		"description": "Label text shown for the hterm 'cursor-color' preference.",
+		"description": "Label text shown for the 'cursor-color' preference.",
 		"message": "Text cursor color"
 	},
 	"HTERM_NAME_PREF_CURSOR_SHAPE": {
-		"description": "Label text shown for the hterm 'cursor-shape' preference.",
+		"description": "Label text shown for the 'cursor-shape' preference. This allows the user to pick between shapes like 'underline', 'block', 'vertical line', etc...",
 		"message": "Text cursor shape"
 	},
 	"HTERM_NAME_PREF_DESKTOP_NOTIFICATION_BELL": {
-		"description": "Label text shown for the hterm 'desktop-notification-bell' preference.",
+		"description": "Label text shown for the 'desktop-notification-bell' preference.",
 		"message": "Create desktop notifications for alert bells"
 	},
 	"HTERM_NAME_PREF_EAST_ASIAN_AMBIGUOUS_AS_TWO_COLUMN": {
-		"description": "Label text shown for the hterm 'east-asian-ambiguous-as-two-column' preference. 'East Asian Ambiguous' should not be translated as it refers to a specific Unicode standard: https://unicode.org/reports/tr11/. These are a set of characters that might take up one or two cells/columns.",
+		"description": "Label text shown for the 'east-asian-ambiguous-as-two-column' preference. 'East Asian Ambiguous' should not be translated as it refers to a specific Unicode standard: https://unicode.org/reports/tr11/. These are a set of characters that might take up one or two cells/columns.",
 		"message": "East Asian Ambiguous use two columns"
 	},
 	"HTERM_NAME_PREF_ENABLE_8_BIT_CONTROL": {
-		"description": "Label text shown for the hterm 'enable-8-bit-control' preference. 'C1' refers to a specification that documents data streams, and 'control characters' are a set of bytes in that specification that control the runtime behavior. 'C1' should not be translated, but 'UTF-8' may be translated as makes sense.",
+		"description": "Label text shown for the 'enable-8-bit-control' preference. 'C1' refers to a specification that documents data streams, and 'control characters' are a set of bytes in that specification that control the runtime behavior. 'C1' should not be translated, but 'UTF-8' may be translated as makes sense.",
 		"message": "Support non-UTF-8 C1 control characters"
 	},
 	"HTERM_NAME_PREF_ENABLE_BLINK": {
-		"description": "Label text shown for the hterm 'enable-blink' preference.",
+		"description": "Label text shown for the 'enable-blink' preference.",
 		"message": "Enable blinking text"
 	},
 	"HTERM_NAME_PREF_ENABLE_BOLD": {
-		"description": "Label text shown for the hterm 'enable-bold' preference.",
+		"description": "Label text shown for the 'enable-bold' preference.",
 		"message": "Bold text behavior"
 	},
 	"HTERM_NAME_PREF_ENABLE_BOLD_AS_BRIGHT": {
-		"description": "Label text shown for the hterm 'enable-bold-as-bright' preference.",
+		"description": "Label text shown for the 'enable-bold-as-bright' preference.",
 		"message": "Use bright colors with bold text"
 	},
 	"HTERM_NAME_PREF_ENABLE_CLIPBOARD_NOTICE": {
-		"description": "Label text shown for the hterm 'enable-clipboard-notice' preference.",
+		"description": "Label text shown for the 'enable-clipboard-notice' preference.",
 		"message": "Show notification when copying content"
 	},
 	"HTERM_NAME_PREF_ENABLE_CLIPBOARD_WRITE": {
-		"description": "Label text shown for the hterm 'enable-clipboard-write' preference. This allows remote systems to write directly to the user's local clipboard.",
+		"description": "Label text shown for the 'enable-clipboard-write' preference. This allows remote systems to write directly to the user's local clipboard.",
 		"message": "Allow remote clipboard writes"
 	},
 	"HTERM_NAME_PREF_ENABLE_CSI_J_3": {
-		"description": "Label text shown for the hterm 'enable-csi-j-3' preference. 'CSI-J-3' should not be be translated, but everything else may be.",
+		"description": "Label text shown for the 'enable-csi-j-3' preference. 'CSI-J-3' should not be be translated, but everything else may be.",
 		"message": "Allow clearing of scrollback buffer (CSI-J-3)"
 	},
 	"HTERM_NAME_PREF_ENABLE_DEC12": {
-		"description": "Label text shown for the hterm 'enable-dec12' preference.",
+		"description": "Label text shown for the 'enable-dec12' preference.",
 		"message": "Allow changing of text cursor blinking"
 	},
 	"HTERM_NAME_PREF_ENABLE_RESIZE_STATUS": {
-		"description": "Label text shown for the hterm 'enable-resize-status' preference.",
+		"description": "Label text shown for the 'enable-resize-status' preference.",
 		"message": "Show terminal dimensions when resized"
 	},
 	"HTERM_NAME_PREF_ENVIRONMENT": {
-		"description": "Label text shown for the hterm 'environment' preference.",
+		"description": "Label text shown for the 'environment' preference.",
 		"message": "Environment variables"
 	},
 	"HTERM_NAME_PREF_FONT_FAMILY": {
-		"description": "Label text shown for the hterm 'font-family' preference.",
+		"description": "Label text shown for the 'font-family' preference.",
 		"message": "Text font family"
 	},
 	"HTERM_NAME_PREF_FONT_SIZE": {
-		"description": "Label text shown for the hterm 'font-size' preference.",
+		"description": "Label text shown for the 'font-size' preference.",
 		"message": "Text font size"
 	},
 	"HTERM_NAME_PREF_FONT_SMOOTHING": {
-		"description": "Label text shown for the hterm 'font-smoothing' preference.",
+		"description": "Label text shown for the 'font-smoothing' preference.",
 		"message": "Text font smoothing"
 	},
 	"HTERM_NAME_PREF_FOREGROUND_COLOR": {
-		"description": "Label text shown for the hterm 'foreground-color' preference.",
+		"description": "Label text shown for the 'foreground-color' preference.",
 		"message": "Text color"
 	},
 	"HTERM_NAME_PREF_HIDE_MOUSE_WHILE_TYPING": {
-		"description": "Label text shown for the hterm 'hide-mouse-while-typing' preference.",
+		"description": "Label text shown for the 'hide-mouse-while-typing' preference.",
 		"message": "Hide mouse cursor while typing"
 	},
 	"HTERM_NAME_PREF_HOME_KEYS_SCROLL": {
-		"description": "Label text shown for the hterm 'home-keys-scroll' preference.",
+		"description": "Label text shown for the 'home-keys-scroll' preference.",
 		"message": "Home/End key scroll behavior"
 	},
 	"HTERM_NAME_PREF_KEYBINDINGS": {
-		"description": "Label text shown for the hterm 'keybindings' preference.",
+		"description": "Label text shown for the 'keybindings' preference.",
 		"message": "Keyboard bindings/shortcuts"
 	},
 	"HTERM_NAME_PREF_KEYBINDINGS_OS_DEFAULTS": {
-		"description": "Label text shown for the hterm 'keybindings-os-defaults' preference.",
+		"description": "Label text shown for the 'keybindings-os-defaults' preference.",
 		"message": "Use default OS Keyboard bindings/shortcuts"
 	},
 	"HTERM_NAME_PREF_MEDIA_KEYS_ARE_FKEYS": {
-		"description": "Label text shown for the hterm 'media-keys-are-fkeys' preference. 'Media keys' are the keyboard buttons that allow the user to control things like volume & screen brightness. 'Fkeys' refer to function keys which are the keyboard buttons F1/F2/F3/etc... Everything may be translated as makes sense.",
+		"description": "Label text shown for the 'media-keys-are-fkeys' preference. 'Media keys' are the keyboard buttons that allow the user to control things like volume & screen brightness. 'Fkeys' refer to function keys which are the keyboard buttons F1/F2/F3/etc... Everything may be translated as makes sense.",
 		"message": "Media keys are Fkeys"
 	},
 	"HTERM_NAME_PREF_META_SENDS_ESCAPE": {
-		"description": "Label text shown for the hterm 'meta-sends-escape' preference.",
+		"description": "Label text shown for the 'meta-sends-escape' preference.",
 		"message": "Meta key modifier handling"
 	},
 	"HTERM_NAME_PREF_MOUSE_PASTE_BUTTON": {
-		"description": "Label text shown for the hterm 'mouse-paste-button' preference. This allows the user to pick which mouse button they want to use to paste content from the clipboard when clicking.",
+		"description": "Label text shown for the 'mouse-paste-button' preference. This allows the user to pick which mouse button they want to use to paste content from the clipboard when clicking.",
 		"message": "Mouse button paste"
 	},
 	"HTERM_NAME_PREF_MOUSE_RIGHT_CLICK_PASTE": {
-		"description": "Label text shown for the hterm 'mouse-right-click-paste' preference. This refers to the user action of right clicking with their mouse so that they can paste content from the clipboard.",
+		"description": "Label text shown for the 'mouse-right-click-paste' preference. This refers to the user action of right clicking with their mouse so that they can paste content from the clipboard.",
 		"message": "Mouse right clicks paste content"
 	},
 	"HTERM_NAME_PREF_PAGE_KEYS_SCROLL": {
-		"description": "Label text shown for the hterm 'page-keys-scroll' preference. 'Page Up' and 'Page Down' refer to keyboard buttons and may be translated accordingly.",
+		"description": "Label text shown for the 'page-keys-scroll' preference. 'Page Up' and 'Page Down' refer to keyboard buttons and may be translated accordingly.",
 		"message": "Page Up/Down key scroll behavior"
 	},
 	"HTERM_NAME_PREF_PASS_ALT_NUMBER": {
-		"description": "Label text shown for the hterm 'pass-alt-number' preference. 'Alt' is the name of the keyboard button and may be translated as makes sense.",
+		"description": "Label text shown for the 'pass-alt-number' preference. 'Alt' is the name of the keyboard button and may be translated as makes sense.",
 		"message": "Alt+1..9 switch tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_N": {
-		"description": "Label text shown for the hterm 'pass-ctrl-n' preference.",
+		"description": "Label text shown for the 'pass-ctrl-n' preference.",
 		"message": "Ctrl+N new window behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_NUMBER": {
-		"description": "Label text shown for the hterm 'pass-ctrl-number' preference. 'Ctrl' (Control) is the name of the keyboard button and may be translated as makes sense.",
+		"description": "Label text shown for the 'pass-ctrl-number' preference. 'Ctrl' (Control) is the name of the keyboard button and may be translated as makes sense.",
 		"message": "Ctrl+1..9 switch tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_T": {
-		"description": "Label text shown for the hterm 'pass-ctrl-t' preference.",
+		"description": "Label text shown for the 'pass-ctrl-t' preference.",
 		"message": "Ctrl+T new tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_TAB": {
-		"description": "Label text shown for the hterm 'pass-ctrl-tab' preference.",
+		"description": "Label text shown for the 'pass-ctrl-tab' preference.",
 		"message": "Ctrl+Tab switch tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_W": {
-		"description": "Label text shown for the hterm 'pass-ctrl-w' preference.",
+		"description": "Label text shown for the 'pass-ctrl-w' preference.",
 		"message": "Ctrl+W close tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_META_NUMBER": {
-		"description": "Label text shown for the hterm 'pass-meta-number' preference. 'Meta' is the name of the keyboard button and may be translated as makes sense.",
+		"description": "Label text shown for the 'pass-meta-number' preference. 'Meta' is the name of the keyboard button and may be translated as makes sense.",
 		"message": "Meta+1..9 switch tab behavior"
 	},
 	"HTERM_NAME_PREF_PASS_META_V": {
-		"description": "Label text shown for the hterm 'pass-meta-v' preference.",
+		"description": "Label text shown for the 'pass-meta-v' preference.",
 		"message": "Meta+V paste behavior"
 	},
 	"HTERM_NAME_PREF_PASTE_ON_DROP": {
-		"description": "Label text shown for the hterm 'paste-on-drop' preference.",
+		"description": "Label text shown for the 'paste-on-drop' preference.",
 		"message": "Allow drag & drop to paste"
 	},
 	"HTERM_NAME_PREF_RECEIVE_ENCODING": {
-		"description": "Label text shown for the hterm 'receive-encoding' preference.",
+		"description": "Label text shown for the 'receive-encoding' preference.",
 		"message": "Receive encoding"
 	},
 	"HTERM_NAME_PREF_SCREEN_PADDING_SIZE": {
-		"description": "Label text shown for the hterm 'screen-padding-size' preference.",
+		"description": "Label text shown for the 'screen-padding-size' preference.",
 		"message": "Screen padding size"
 	},
 	"HTERM_NAME_PREF_SCROLLBAR_VISIBLE": {
-		"description": "Label text shown for the hterm 'scrollbar-visible' preference. This is a short description for controlling whether the scrollbar is always shown, or only shown on demand.",
+		"description": "Label text shown for the 'scrollbar-visible' preference. This is a short description for controlling whether the scrollbar is always shown, or only shown on demand.",
 		"message": "Scrollbar visibility"
 	},
 	"HTERM_NAME_PREF_SCROLL_ON_KEYSTROKE": {
-		"description": "Label text shown for the hterm 'scroll-on-keystroke' preference.",
+		"description": "Label text shown for the 'scroll-on-keystroke' preference.",
 		"message": "Scroll to bottom after keystroke"
 	},
 	"HTERM_NAME_PREF_SCROLL_ON_OUTPUT": {
-		"description": "Label text shown for the hterm 'scroll-on-output' preference. This is a short description for the behavior when new output is displayed in the terminal: should it automatically scroll to the bottom to show it, or should it stay in its current position in the scrollback/history buffer.",
+		"description": "Label text shown for the 'scroll-on-output' preference. This is a short description for the behavior when new output is displayed in the terminal: should it automatically scroll to the bottom to show it, or should it stay in its current position in the scrollback/history buffer.",
 		"message": "Scroll to bottom after new output"
 	},
 	"HTERM_NAME_PREF_SCROLL_WHEEL_MAY_SEND_ARROW_KEYS": {
-		"description": "Label text shown for the hterm 'scroll-wheel-may-send-arrow-keys' preference.",
+		"description": "Label text shown for the 'scroll-wheel-may-send-arrow-keys' preference.",
 		"message": "Emulate arrow keys with scroll wheel"
 	},
 	"HTERM_NAME_PREF_SCROLL_WHEEL_MOVE_MULTIPLIER": {
-		"description": "Label text shown for the hterm 'scroll-wheel-move-multiplier' preference. This is a numeric value the user enters and is used as a multiplier to control how fast the page scrolls. 'scroll wheel' refers to the normal computing terms, so everything here may be translated as makes sense.",
+		"description": "Label text shown for the 'scroll-wheel-move-multiplier' preference. This is a numeric value the user enters and is used as a multiplier to control how fast the page scrolls. 'scroll wheel' refers to the normal computing terms, so everything here may be translated as makes sense.",
 		"message": "Mouse scroll wheel multiplier"
 	},
 	"HTERM_NAME_PREF_SHIFT_INSERT_PASTE": {
-		"description": "Label text shown for the hterm 'shift-insert-paste' preference. Shift+Insert refers to the keyboard shortcut used to trigger a paste operation (like pressing Ctrl+V). Both are keys on the keyboard and may be translated accordingly.",
+		"description": "Label text shown for the 'shift-insert-paste' preference. Shift+Insert refers to the keyboard shortcut used to trigger a paste operation (like pressing Ctrl+V). Both are keys on the keyboard and may be translated accordingly.",
 		"message": "Shift+Insert paste"
 	},
 	"HTERM_NAME_PREF_TERMINAL_ENCODING": {
-		"description": "Label text shown for the hterm 'terminal-encoding' preference. 'Terminal encoding' refers to the encoding the terminal uses when displaying user content.",
+		"description": "Label text shown for the 'terminal-encoding' preference. 'Terminal encoding' refers to the encoding the terminal uses when displaying user content.",
 		"message": "Terminal encoding"
 	},
 	"HTERM_NAME_PREF_USER_CSS": {
-		"description": "Label text shown for the hterm 'user-css' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible.",
+		"description": "Label text shown for the 'user-css' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible.",
 		"message": "Custom CSS (URI)"
 	},
 	"HTERM_NAME_PREF_USER_CSS_TEXT": {
-		"description": "Label text shown for the hterm 'user-css-text' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. 'inline text' refers to the content the user enters directly into a text field.",
+		"description": "Label text shown for the 'user-css-text' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. 'inline text' refers to the content the user enters directly into a text field.",
 		"message": "Custom CSS (inline text)"
 	},
 	"HTERM_NAME_PREF_USE_DEFAULT_WINDOW_COPY": {
-		"description": "Label text shown for the hterm 'use-default-window-copy' preference.",
+		"description": "Label text shown for the 'use-default-window-copy' preference.",
 		"message": "Let the browser handle text copying"
 	},
 	"HTERM_NAME_PREF_WORD_BREAK_MATCH_LEFT": {
-		"description": "Label text shown for the hterm 'word-break-match-left' preference. When automatically expanding the user's selection, this controls when to stop expanding the selection to the left of content. This will be used when double clicking text and deciding how much text to the left of he cursor to automatically select.",
+		"description": "Label text shown for the 'word-break-match-left' preference. When automatically expanding the user's selection, this controls when to stop expanding the selection to the left of content. This will be used when double clicking text and deciding how much text to the left of he cursor to automatically select.",
 		"message": "Automatic selection halting (to the left)"
 	},
 	"HTERM_NAME_PREF_WORD_BREAK_MATCH_MIDDLE": {
-		"description": "Label text shown for the hterm 'word-break-match-middle' preference. When automatically expanding the user's selection, this determines what characters are used to separate words.",
+		"description": "Label text shown for the 'word-break-match-middle' preference. When automatically expanding the user's selection, this determines what characters are used to separate words.",
 		"message": "Word break characters"
 	},
 	"HTERM_NAME_PREF_WORD_BREAK_MATCH_RIGHT": {
-		"description": "Label text shown for the hterm 'word-break-match-right' preference. When automatically expanding the user's selection, this controls when to stop expanding the selection to the right of content. This will be used when double clicking text and deciding how much text to the right of he cursor to automatically select.",
+		"description": "Label text shown for the 'word-break-match-right' preference. When automatically expanding the user's selection, this controls when to stop expanding the selection to the right of content. This will be used when double clicking text and deciding how much text to the right of he cursor to automatically select.",
 		"message": "Automatic selection halting (to the right)"
 	},
 	"HTERM_POPUP_INLINE_IMAGE": {
@@ -574,291 +574,291 @@
 		"message": "Inline Images Disabled"
 	},
 	"HTERM_PREF_ALLOW_IMAGES_INLINE": {
-		"description": "Help text shown for the hterm 'allow-images-inline' preference.",
+		"description": "Help text shown for the 'allow-images-inline' preference.",
 		"message": "Whether to allow the remote host to display images in the terminal.\n\nBy default, we prompt until a choice is made."
 	},
 	"HTERM_PREF_ALT_BACKSPACE_IS_META_BACKSPACE": {
-		"description": "Help text shown for the hterm 'alt-backspace-is-meta-backspace' preference. 'Alt', 'Backspace', and 'Delete' are the names of the keyboard buttons and may be translated as makes sense. By default, Chrome OS has a Alt+Backspace keyboard shortcut to behave like the Delete key, so this setting reverts that behavior.",
+		"description": "Help text shown for the 'alt-backspace-is-meta-backspace' preference. 'Alt', 'Backspace', and 'Delete' are the names of the keyboard buttons and may be translated as makes sense. By default, Chrome OS has a Alt+Backspace keyboard shortcut to behave like the Delete key, so this setting reverts that behavior.",
 		"message": "If set, undoes the Chrome OS Alt+Backspace->Delete remap, so that Alt+Backspace indeed is Alt+Backspace."
 	},
 	"HTERM_PREF_ALT_GR_MODE": {
-		"description": "Help text shown for the hterm 'alt-gr-mode' preference. 'Alt' and 'AltGR' are the names of the keyboard buttons and may be translated as makes sense. Do not translate 'navigator.language' or anything else in quotes here. The quote style may be changed as makes sense for the language. The 'else' keyword here should be translated with its normal meaning.",
-		"message": "Select an AltGr detection heuristic.\n\n'null': Autodetect based on navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Disable any AltGr related munging.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
+		"description": "Help text shown for the 'alt-gr-mode' preference. 'Alt' and 'AltGR' are the names of the keyboard buttons and may be translated as makes sense. Do not translate 'navigator.language' or anything else in quotes here. The quote style may be changed as makes sense for the language. The 'else' keyword here should be translated with its normal meaning. Emulation is like 'pretending' and can be translated as such.",
+		"message": "Select an AltGr detection heuristic.\n\n'null': Autodetect based on navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Disable any AltGr emulation.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
 	},
 	"HTERM_PREF_ALT_IS_META": {
-		"description": "Help text shown for the hterm 'alt-is-meta' preference. 'Meta' and 'Alt' are the names of the keyboard buttons and may be translated as makes sense.",
+		"description": "Help text shown for the 'alt-is-meta' preference. 'Meta' and 'Alt' are the names of the keyboard buttons and may be translated as makes sense.",
 		"message": "Whether the Alt key acts as a Meta key or as a distinct Alt key."
 	},
 	"HTERM_PREF_ALT_SENDS_WHAT": {
-		"description": "Help text shown for the hterm 'alt-sends-what' preference. 'Alt' and 'ESC' (Escape) are the keyboard buttons and may be translated as makes sense. 'escape', '8-bit', and 'browser-key' are user selectable values and should not be translated. 'xterm' is the name of a program and should not be translated.",
+		"description": "Help text shown for the 'alt-sends-what' preference. 'Alt' and 'ESC' (Escape) are the keyboard buttons and may be translated as makes sense. 'escape', '8-bit', and 'browser-key' are user selectable values and should not be translated. 'xterm' is the name of a program and should not be translated.",
 		"message": "Controls how the Alt key is handled.\n\n  escape: Send an ESC prefix.\n  8-bit: Add 128 to the typed character as in xterm.\n  browser-key: Wait for the keypress event and see what the browser\n    says. (This won't work well on platforms where the browser\n    performs a default action for some Alt sequences.)"
 	},
 	"HTERM_PREF_AUDIBLE_BELL_SOUND": {
-		"description": "Help text shown for the hterm 'audible-bell-sound' preference. The terminal will play this sound to get the user's attention.",
+		"description": "Help text shown for the 'audible-bell-sound' preference. The terminal will play this sound to get the user's attention.",
 		"message": "URL of the terminal bell sound. Leave it blank for no audible bell."
 	},
 	"HTERM_PREF_BACKGROUND_COLOR": {
-		"description": "Help text shown for the hterm 'background-color' preference.",
+		"description": "Help text shown for the 'background-color' preference.",
 		"message": "The background color for text with no other color attributes."
 	},
 	"HTERM_PREF_BACKGROUND_IMAGE": {
-		"description": "Help text shown for the hterm 'background-image' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. The example code should not be translated.",
+		"description": "Help text shown for the 'background-image' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. The example code should not be translated.",
 		"message": "CSS value of the background image. Leave it blank for no image.\n\nFor example:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"HTERM_PREF_BACKGROUND_POSITION": {
-		"description": "Help text shown for the hterm 'background-position' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. The example code should not be translated.",
+		"description": "Help text shown for the 'background-position' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. The example code should not be translated.",
 		"message": "CSS value of the background image position.\n\nFor example:\n  10% 10%\n  center"
 	},
 	"HTERM_PREF_BACKGROUND_SIZE": {
-		"description": "Help text shown for the hterm 'background-size' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible.",
+		"description": "Help text shown for the 'background-size' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible.",
 		"message": "CSS value of the background image size."
 	},
 	"HTERM_PREF_BACKSPACE_SENDS_BACKSPACE": {
-		"description": "Help text shown for the hterm 'backspace-sends-backspace' preference. 'Backspace' refers to the keyboard button and may be translated as makes sense. The quoting style around the escape sequences may be freely changed. 'aka' is short for 'also known as' and should be translated accordingly. '^H' should be left as-is.",
+		"description": "Help text shown for the 'backspace-sends-backspace' preference. 'Backspace' refers to the keyboard button and may be translated as makes sense. The quoting style around the escape sequences may be freely changed. 'aka' is short for 'also known as' and should be translated accordingly. BS is the name of the byte and should be left as-is. '^H' should be left as-is.",
 		"message": "If true, the Backspace key will send BS ('\\x08', aka ^H). Otherwise the Backspace key will send '\\x7f'."
 	},
 	"HTERM_PREF_CHARACTER_MAP_OVERRIDES": {
-		"description": "Help text shown for the hterm 'character-map-overrides' preference. Do not translate the example at all.",
+		"description": "Help text shown for the 'character-map-overrides' preference. Do not translate the example at all.",
 		"message": "This is specified as an object. It is a sparse array, where each property is the character set code and the value is an object that is a sparse array itself. In that sparse array, each property is the received character and the value is the displayed character.\n\nFor example:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"HTERM_PREF_CLEAR_SELECTION_AFTER_COPY": {
-		"description": "Help text shown for the hterm 'clear-selection-after-copy' preference.",
+		"description": "Help text shown for the 'clear-selection-after-copy' preference.",
 		"message": "Whether to clear the selection after copying."
 	},
 	"HTERM_PREF_CLOSE_ON_EXIT": {
-		"description": "Help text shown for the hterm 'close-on-exit' preference.",
+		"description": "Help text shown for the 'close-on-exit' preference.",
 		"message": "Whether to close the window when the command finishes executing."
 	},
 	"HTERM_PREF_COLOR_PALETTE_OVERRIDES": {
-		"description": "Help text shown for the hterm 'color-palette-overrides' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. Do not translate 'null', X11, rgb.txt, the #RGB/#RRGGBB/rgb()/rgba() code, or the example code. The quote style around 'null' may be changed as needed.",
+		"description": "Help text shown for the 'color-palette-overrides' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. Do not translate 'null', X11, rgb.txt, the #RGB/#RRGGBB/rgb()/rgba() code, or the example code. The quote style around 'null' may be changed as needed.",
 		"message": "Override colors in the default palette.\n\nThis can be specified as an array or an object. If specified as an object it is assumed to be a sparse array, where each property is a numeric index into the color palette.\n\nValues can be specified as almost any CSS color value. This includes #RGB, #RRGGBB, rgb(...), rgba(...), and any color names that are also part of the standard X11 rgb.txt file.\n\nYou can use 'null' to specify that the default value should be not be changed. This is useful for skipping a small number of indices when the value is specified as an array.\n\nFor example, these both set color index 1 to blue:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"HTERM_PREF_COPY_ON_SELECT": {
-		"description": "Help text shown for the hterm 'copy-on-select' preference.",
+		"description": "Help text shown for the 'copy-on-select' preference.",
 		"message": "Automatically copy mouse selection to the clipboard."
 	},
 	"HTERM_PREF_CTRL_C_COPY": {
-		"description": "Help text shown for the hterm 'ctrl-c-copy' preference. The true/false words may be translated. Ctrl/Shift/C are the keyboard button combinations and may be translated as makes sense (although it will always be the C key that is pressed). ^C should not be translated.",
+		"description": "Help text shown for the 'ctrl-c-copy' preference. The true/false words may be translated. Ctrl/Shift/C are the keyboard button combinations and may be translated as makes sense (although it will always be the C key that is pressed). ^C should not be translated.",
 		"message": "Ctrl+C copies if true, send ^C to host if false.\nCtrl+Shift+C sends ^C to host if true, copies if false."
 	},
 	"HTERM_PREF_CTRL_PLUS_MINUS_ZERO_ZOOM": {
-		"description": "Help text shown for the hterm 'ctrl-plus-minus-zero-zoom' preference. The true/false words may be translated. Ctrl/Shift/Plus/Minus/Zero are the keyboard button combinations and may be translated as makes sense. ^_ should not be translated.",
+		"description": "Help text shown for the 'ctrl-plus-minus-zero-zoom' preference. The true/false words may be translated. Ctrl/Shift/Plus/Minus/Zero are the keyboard button combinations and may be translated as makes sense. ^_ should not be translated.",
 		"message": "If true, Ctrl+Plus/Minus/Zero controls zoom.\nIf false, Ctrl+Shift+Plus/Minus/Zero controls zoom, Ctrl+Minus sends ^_, Ctrl+Plus/Zero do nothing."
 	},
 	"HTERM_PREF_CTRL_V_PASTE": {
-		"description": "Help text shown for the hterm 'ctrl-v-paste' preference. The true/false words may be translated. Ctrl/Shift/V are the keyboard button combinations and may be translated as makes sense (although it will always be the V key that is pressed). ^V should not be translated.",
+		"description": "Help text shown for the 'ctrl-v-paste' preference. The true/false words may be translated. Ctrl/Shift/V are the keyboard button combinations and may be translated as makes sense (although it will always be the V key that is pressed). ^V should not be translated.",
 		"message": "Ctrl+V pastes if true, send ^V to host if false.\nCtrl+Shift+V sends ^V to host if true, pastes if false."
 	},
 	"HTERM_PREF_CURSOR_BLINK": {
-		"description": "Help text shown for the hterm 'cursor-blink' preference.",
+		"description": "Help text shown for the 'cursor-blink' preference. 'terminal escape sequences' are commands executed dynamically during the runtime of the program to change behavior; see https://en.wikipedia.org/wiki/ANSI_escape_code for more details. Everything here should be translated accordingly.",
 		"message": "Whether the text cursor blinks by default. This can be toggled at runtime via terminal escape sequences."
 	},
 	"HTERM_PREF_CURSOR_BLINK_CYCLE": {
-		"description": "Help text shown for the hterm 'cursor-blink-cycle' preference.",
+		"description": "Help text shown for the 'cursor-blink-cycle' preference.",
 		"message": "The text cursor blink rate in milliseconds.\n\nA two element array, the first of which is how long the text cursor should be on, second is how long it should be off."
 	},
 	"HTERM_PREF_CURSOR_COLOR": {
-		"description": "Help text shown for the hterm 'cursor-color' preference.",
+		"description": "Help text shown for the 'cursor-color' preference.",
 		"message": "The color of the visible text cursor."
 	},
 	"HTERM_PREF_CURSOR_SHAPE": {
-		"description": "Help text shown for the hterm 'cursor-shape' preference.",
+		"description": "Help text shown for the 'cursor-shape' preference. 'terminal escape sequences' are commands executed dynamically during the runtime of the program to change behavior; see https://en.wikipedia.org/wiki/ANSI_escape_code for more details. Everything here should be translated accordingly.",
 		"message": "The shape of the visible text cursor. This can be changed at runtime via terminal escape sequences."
 	},
 	"HTERM_PREF_DESKTOP_NOTIFICATION_BELL": {
-		"description": "Help text shown for the hterm 'desktop-notification-bell' preference. 'bells' are alerts generated by the terminal. The true/false words may be translated. The quote style may be changed as needed.",
-		"message": "If true, terminal bells in the background will create a Web Notification. https://www.w3.org/TR/notifications/\n\nDisplaying notifications requires permission from the user. When this option is set to true, hterm will attempt to ask the user for permission if necessary. Browsers may not show this permission request if it was not triggered by a user action.\n\nChrome extensions with the \"notifications\" permission have permission to display notifications."
+		"description": "Help text shown for the 'desktop-notification-bell' preference. 'bells' are alerts generated by the terminal. Everything here, including the true/false words and 'notifications' permission name, may be translated. The quote style may be changed as needed.",
+		"message": "If true, terminal bells in the background will create a Web Notification. https://www.w3.org/TR/notifications/\n\nDisplaying notifications requires permission from the user. When this option is set to true, hterm will attempt to ask the user for permission if necessary. Browsers might not show this permission request if it was not triggered by a user action.\n\nChrome extensions with the \"notifications\" permission have permission to display notifications."
 	},
 	"HTERM_PREF_EAST_ASIAN_AMBIGUOUS_AS_TWO_COLUMN": {
-		"description": "Help text shown for the hterm 'east-asian-ambiguous-as-two-column' preference. 'East Asian Ambiguous' should not be translated as it refers to a specific Unicode standard: https://unicode.org/reports/tr11/. These are a set of characters that might take up one or two cells/columns.",
+		"description": "Help text shown for the 'east-asian-ambiguous-as-two-column' preference. 'East Asian Ambiguous' should not be translated as it refers to a specific Unicode standard: https://unicode.org/reports/tr11/. These are a set of characters that might take up one or two cells/columns.",
 		"message": "Whether East Asian Ambiguous characters have two column width."
 	},
 	"HTERM_PREF_ENABLE_8_BIT_CONTROL": {
-		"description": "Help text shown for the hterm 'enable-8-bit-control' preference. Everything here may be translated, but take care with '8-bit control characters' to preserve its specific meaning.",
+		"description": "Help text shown for the 'enable-8-bit-control' preference. Everything here may be translated, but take care with '8-bit control characters' to preserve its specific meaning.",
 		"message": "True to enable 8-bit control characters, false to ignore them.\n\nWe'll respect the two-byte versions of these control characters regardless of this setting."
 	},
 	"HTERM_PREF_ENABLE_BLINK": {
-		"description": "Help text shown for the hterm 'enable-blink' preference. Everything here may be translated, but take care with 'blink' as it refers to a specific known terminal attribute.",
+		"description": "Help text shown for the 'enable-blink' preference. Everything here may be translated, but take care with 'blink' as it refers to a specific known terminal attribute.",
 		"message": "If true, respect the blink attribute. False to ignore it."
 	},
 	"HTERM_PREF_ENABLE_BOLD": {
-		"description": "Help text shown for the hterm 'enable-bold' preference. All words here may be translated, but take care with 'bold', 'bright', and 'normal' as they refer to specific known terminal attributes.",
+		"description": "Help text shown for the 'enable-bold' preference. All words here may be translated, but take care with 'bold', 'bright', and 'normal' as they refer to specific known terminal attributes.",
 		"message": "If true, use bold weight font for text with the bold/bright attribute. False to use the normal weight font. Null to autodetect."
 	},
 	"HTERM_PREF_ENABLE_BOLD_AS_BRIGHT": {
-		"description": "Help text shown for the hterm 'enable-bold-as-bright' preference.",
+		"description": "Help text shown for the 'enable-bold-as-bright' preference.",
 		"message": "If true, use bright colors (8-15 on a 16 color palette) for any text with the bold attribute. False otherwise."
 	},
 	"HTERM_PREF_ENABLE_CLIPBOARD_NOTICE": {
-		"description": "Help text shown for the hterm 'enable-clipboard-notice' preference.",
+		"description": "Help text shown for the 'enable-clipboard-notice' preference.",
 		"message": "Whether to show a message in the terminal when the host writes to the clipboard."
 	},
 	"HTERM_PREF_ENABLE_CLIPBOARD_WRITE": {
-		"description": "Help text shown for the hterm 'enable-clipboard-write' preference. 'OSC-52' should not be translated.",
+		"description": "Help text shown for the 'enable-clipboard-write' preference. 'OSC-52' should not be translated.",
 		"message": "Allow the remote host to write directly to the local system clipboard.\nRead access is never granted regardless of this setting.\n\nThis is used to control access to features like OSC-52."
 	},
 	"HTERM_PREF_ENABLE_CSI_J_3": {
-		"description": "Help text shown for the hterm 'enable-csi-j-3' preference. 'CSI-J' should not be be translated, but 'Erase Saved Lines' and 'Erase Display' may be. 'mode 3' refers to the specific subfunction (Erase Saved Lines) of the CSI-J command and may be translated accordingly (as a function, mode of operation, etc...). The scrollback buffer is the screen history and may be translated accordingly. We describe this as 'is safe' as a clue to the user that, even if they don't understand what this feature does or how it's used, they can safely enable it and not worry if it will cause problems with their system.",
+		"description": "Help text shown for the 'enable-csi-j-3' preference. 'CSI-J' should not be be translated, but 'Erase Saved Lines' and 'Erase Display' may be. 'mode 3' refers to the specific subfunction (Erase Saved Lines) of the CSI-J command and may be translated accordingly (as a function, mode of operation, etc...). The scrollback buffer is the screen history and may be translated accordingly. We describe this as 'is safe' as a clue to the user that, even if they don't understand what this feature does or how it's used, they can safely enable it and not worry if it will cause problems with their system. 'may' here means permission as in 'allow to be cleared'.",
 		"message": "Whether the Erase Saved Lines function (mode 3) of the Erase Display command (CSI-J) may clear the terminal scrollback buffer.\n\nEnabling this by default is safe."
 	},
 	"HTERM_PREF_ENABLE_DEC12": {
-		"description": "Help text shown for the hterm 'enable-dec12' preference. 'DEC' should not be translated, but 'Private Mode' may be.",
+		"description": "Help text shown for the 'enable-dec12' preference. 'DEC' should not be translated, but 'Private Mode' may be.",
 		"message": "Respect the host's attempt to change the text cursor blink status using DEC Private Mode 12."
 	},
 	"HTERM_PREF_ENABLE_RESIZE_STATUS": {
-		"description": "Help text shown for the hterm 'enable-resize-status' preference.",
+		"description": "Help text shown for the 'enable-resize-status' preference.",
 		"message": "Whether to show terminal dimensions when the terminal changes size."
 	},
 	"HTERM_PREF_ENVIRONMENT": {
-		"description": "Help text shown for the hterm 'environment' preference.",
+		"description": "Help text shown for the 'environment' preference.",
 		"message": "The initial set of environment variables, as an object."
 	},
 	"HTERM_PREF_FONT_FAMILY": {
-		"description": "Help text shown for the hterm 'font-family' preference.",
+		"description": "Help text shown for the 'font-family' preference.",
 		"message": "Default font family for the terminal text."
 	},
 	"HTERM_PREF_FONT_SIZE": {
-		"description": "Help text shown for the hterm 'font-size' preference.",
+		"description": "Help text shown for the 'font-size' preference.",
 		"message": "The default font size in pixels."
 	},
 	"HTERM_PREF_FONT_SMOOTHING": {
-		"description": "Help text shown for the hterm 'font-smoothing' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. Do not translate 'font-smoothing'.",
+		"description": "Help text shown for the 'font-smoothing' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. Do not translate 'font-smoothing'.",
 		"message": "CSS font-smoothing property."
 	},
 	"HTERM_PREF_FOREGROUND_COLOR": {
-		"description": "Help text shown for the hterm 'foreground-color' preference.",
+		"description": "Help text shown for the 'foreground-color' preference.",
 		"message": "The foreground color for text with no other color attributes."
 	},
 	"HTERM_PREF_HIDE_MOUSE_WHILE_TYPING": {
-		"description": "Help text shown for the hterm 'hide-mouse-while-typing' preference.",
-		"message": "Whether to automatically hide the mouse cursor when typing. By default, autodetect whether the platform/OS handles this.\n\nNote: Some operating systems may override this setting and thus you might not be able to always disable it."
+		"description": "Help text shown for the 'hide-mouse-while-typing' preference.",
+		"message": "Whether to automatically hide the mouse cursor when typing. By default, autodetect whether the platform/OS handles this.\n\nNote: Your operating system might override this setting and thus you might not be able to always disable it."
 	},
 	"HTERM_PREF_HOME_KEYS_SCROLL": {
-		"description": "Help text shown for the hterm 'home-keys-scroll' preference. 'Home', 'End', and 'Shift' are the keyboard buttons and may be translated as makes sense.",
+		"description": "Help text shown for the 'home-keys-scroll' preference. 'Home', 'End', and 'Shift' are the keyboard buttons and may be translated as makes sense.",
 		"message": "If true, Home/End controls the terminal scrollbar and Shift+Home/Shift+End are sent to the remote host. If false, then Home/End are sent to the remote host and Shift+Home/Shift+End scrolls."
 	},
 	"HTERM_PREF_KEYBINDINGS": {
-		"description": "Help text shown for the hterm 'keybindings' preference. The example keybindings should not be translated; you can translate the 'Hello World' text, but you must not change the quote style.",
+		"description": "Help text shown for the 'keybindings' preference. The example keybindings should not be translated; you can translate the 'Hello World' text, but you must not change the quote style.",
 		"message": "A map of key sequence to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers, or a key identifier. Key actions can be specified as a string to send to the host, or an action identifier. For a full explanation of the format, see https://goo.gl/LWRndr.\n\nSample keybindings:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"HTERM_PREF_KEYBINDINGS_OS_DEFAULTS": {
-		"description": "Help text shown for the hterm 'keybindings-os-defaults' preference. 'OS' is 'operating system' and may be translated accordingly. 'hterm' should not be translated. 'own use' means that the program will capture & process the keyboard shortcuts itself and prevent the OS from doing anything.",
+		"description": "Help text shown for the 'keybindings-os-defaults' preference. 'OS' is 'operating system' and may be translated accordingly. 'hterm' should not be translated. 'own use' means that the program will capture & process the keyboard shortcuts itself and prevent the OS from doing anything.",
 		"message": "Whether common OS keyboard bindings should be respected instead of always capturing for hterm's own use."
 	},
 	"HTERM_PREF_MEDIA_KEYS_ARE_FKEYS": {
-		"description": "Help text shown for the hterm 'media-keys-are-fkeys' preference. 'Media keys' are the keyboard buttons that allow the user to control things like volume & screen brightness. 'Fkeys' refer to function keys which are the keyboard buttons F1/F2/F3/etc... Everything (including the true/false words) may be translated as makes sense.",
+		"description": "Help text shown for the 'media-keys-are-fkeys' preference. 'Media keys' are the keyboard buttons that allow the user to control things like volume & screen brightness. 'Fkeys' refer to function keys which are the keyboard buttons F1/F2/F3/etc... Everything (including the true/false words) may be translated as makes sense.",
 		"message": "If true, convert media keys to their Fkey equivalent. If false, let the browser handle the keys."
 	},
 	"HTERM_PREF_META_SENDS_ESCAPE": {
-		"description": "Help text shown for the hterm 'meta-sends-escape' preference. 'ESC'/'Escape', 'Meta', and 'k' are the keyboard buttons and may be translated as makes sense.",
+		"description": "Help text shown for the 'meta-sends-escape' preference. 'ESC'/'Escape', 'Meta', and 'k' are the keyboard buttons and may be translated as makes sense.",
 		"message": "Send an ESC prefix when pressing a key while holding the Meta key.\n\nFor example, when enabled, pressing Meta+K will send ^[k as if you typed Escape then k. When disabled, only k will be sent."
 	},
 	"HTERM_PREF_MOUSE_PASTE_BUTTON": {
-		"description": "Help text shown for the hterm 'mouse-paste-button' preference. Do not translate 'X11'.",
-		"message": "The mouse button to use for pasting.\n\nFor autodetect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the native window manager should paste via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: This will handle left & right handed mice correctly."
+		"description": "Help text shown for the 'mouse-paste-button' preference. Do not translate 'X11'.",
+		"message": "The mouse button to use for pasting.\n\nFor autodetect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the window manager should paste via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: This will handle left & right handed mice correctly."
 	},
 	"HTERM_PREF_MOUSE_RIGHT_CLICK_PASTE": {
-		"description": "Help text shown for the hterm 'mouse-right-click-paste' preference. The quote style may be changed as needed. Do not translate 'mouse-paste-button'.",
+		"description": "Help text shown for the 'mouse-right-click-paste' preference. The quote style may be changed as needed. Do not translate 'mouse-paste-button'.",
 		"message": "Paste on right mouse button clicks.\n\nThis option is independent of the \"mouse-paste-button\" setting.\n\nNote: This will handle left & right handed mice correctly."
 	},
 	"HTERM_PREF_PAGE_KEYS_SCROLL": {
-		"description": "Help text shown for the hterm 'page-keys-scroll' preference. 'Page Up', 'Page Down', and 'Shift' are the keyboard buttons and may be translated as makes sense.",
+		"description": "Help text shown for the 'page-keys-scroll' preference. 'Page Up', 'Page Down', and 'Shift' are the keyboard buttons and may be translated as makes sense.",
 		"message": "If true, Page Up/Page Down controls the terminal scrollbar and Shift+Page Up/Shift+Page Down are sent to the remote host. If false, then Page Up/Page Down are sent to the remote host and Shift+Page Up/Shift+Page Down scrolls."
 	},
 	"HTERM_PREF_PASS_ALT_NUMBER": {
-		"description": "Help text shown for the hterm 'pass-alt-number' preference. 'Alt' is the name of the keyboard button and may be translated as makes sense.",
+		"description": "Help text shown for the 'pass-alt-number' preference. 'Alt' is the name of the keyboard button and may be translated as makes sense.",
 		"message": "Whether Alt+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard shortcuts. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Alt+1..9 will be handled by the browser. If false, Alt+1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
 	},
 	"HTERM_PREF_PASS_CTRL_N": {
-		"description": "Help text shown for the hterm 'pass-ctrl-n' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
+		"description": "Help text shown for the 'pass-ctrl-n' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
 		"message": "Whether Ctrl+N is passed to the browser.\n\nIf true, Ctrl+N will be handled by the browser as the \"new window\" keyboard shortcut. If false, Ctrl+N will be sent to the host."
 	},
 	"HTERM_PREF_PASS_CTRL_NUMBER": {
-		"description": "Help text shown for the hterm 'pass-ctrl-number' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
+		"description": "Help text shown for the 'pass-ctrl-number' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
 		"message": "Whether Ctrl+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard shortcuts. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Ctrl+1..9 will be handled by the browser. If false, Ctrl+1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
 	},
 	"HTERM_PREF_PASS_CTRL_T": {
-		"description": "Help text shown for the hterm 'pass-ctrl-t' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense. This controls whether the browser opens a new tab, or data is sent to the remote system.",
+		"description": "Help text shown for the 'pass-ctrl-t' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense. This controls whether the browser opens a new tab, or data is sent to the remote system.",
 		"message": "Whether Ctrl+T is passed to the browser.\n\nIf true, Ctrl+T will be handled by the browser as the \"new tab\" keyboard shortcut. If false, Ctrl+T will be sent to the host."
 	},
 	"HTERM_PREF_PASS_CTRL_TAB": {
-		"description": "Help text shown for the hterm 'pass-ctrl-tab' preference. 'Ctrl' and 'Shift' are the names of the keyboard buttons and may be translated as makes sense.",
+		"description": "Help text shown for the 'pass-ctrl-tab' preference. 'Ctrl' and 'Shift' are the names of the keyboard buttons and may be translated as makes sense.",
 		"message": "Whether Ctrl+Tab and Ctrl+Shift+Tab are passed to the browser.\n\nIf true, Ctrl+Tab and Ctrl+Shift+Tab will be handled by the browser as the \"next/previous tab\" keyboard shortcut. If false, the Tab key is sent to the host without Ctrl or Shift."
 	},
 	"HTERM_PREF_PASS_CTRL_W": {
-		"description": "Help text shown for the hterm 'pass-ctrl-w' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
+		"description": "Help text shown for the 'pass-ctrl-w' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
 		"message": "Whether Ctrl+W is passed to the browser.\n\nIf true, Ctrl+W will be handled by the browser as the \"close tab\" keyboard shortcut. If false, Ctrl+W will be sent to the host."
 	},
 	"HTERM_PREF_PASS_META_NUMBER": {
-		"description": "Help text shown for the hterm 'pass-meta-number' preference. 'Meta' is the name of the keyboard button and may be translated as makes sense.",
+		"description": "Help text shown for the 'pass-meta-number' preference. 'Meta' is the name of the keyboard button and may be translated as makes sense.",
 		"message": "Whether Meta+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard shortcuts. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Meta+1..9 will be handled by the browser. If false, Meta+1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
 	},
 	"HTERM_PREF_PASS_META_V": {
-		"description": "Help text shown for the hterm 'pass-meta-v' preference. 'Meta+V' is the keyboard button combo and may be translated as makes sense.",
-		"message": "Whether Meta+V gets passed to host."
+		"description": "Help text shown for the 'pass-meta-v' preference. 'Meta+V' is the keyboard button combo and may be translated as makes sense.",
+		"message": "Whether Meta+V gets passed to the browser.\n\nOn some systems, this is used to paste content."
 	},
 	"HTERM_PREF_PASTE_ON_DROP": {
-		"description": "Help text shown for the hterm 'paste-on-drop' preference. 'Drag and drop' refers to the operation where users select content, then click on the selection to start a 'drag' operation by 'grabbing' it, then move that text somewhere else and release the mouse button to 'drop' it.",
+		"description": "Help text shown for the 'paste-on-drop' preference. 'Drag and drop' refers to the operation where users select content, then click on the selection to start a 'drag' operation by 'grabbing' it, then move that text somewhere else and release the mouse button to 'drop' it.",
 		"message": "If true, Drag and dropped text will paste into terminal.\nIf false, dropped text will be ignored."
 	},
 	"HTERM_PREF_RECEIVE_ENCODING": {
-		"description": "Help text shown for the hterm 'receive-encoding' preference. 'utf-8' and 'raw' should not be translated. The quote style may be changed as needed.",
+		"description": "Help text shown for the 'receive-encoding' preference. 'utf-8' and 'raw' should not be translated. The quote style may be changed as needed.",
 		"message": "Set the expected encoding for data received from the host.\nIf the encodings do not match, visual bugs are likely to be observed.\n\nValid values are 'utf-8' and 'raw'."
 	},
 	"HTERM_PREF_SCREEN_PADDING_SIZE": {
-		"description": "Help text shown for the hterm 'padding-size' preference.",
+		"description": "Help text shown for the 'padding-size' preference.",
 		"message": "The padding size in pixels around the border of the terminal screen.\n\nThis controls the size of the border around the terminal screen so the user can add some visible padding to the edges of the screen."
 	},
 	"HTERM_PREF_SCROLLBAR_VISIBLE": {
-		"description": "Help text shown for the hterm 'scrollbar-visible' preference.",
+		"description": "Help text shown for the 'scrollbar-visible' preference.",
 		"message": "The vertical scrollbar mode."
 	},
 	"HTERM_PREF_SCROLL_ON_KEYSTROKE": {
-		"description": "Help text shown for the hterm 'scroll-on-keystroke' preference.",
+		"description": "Help text shown for the 'scroll-on-keystroke' preference.",
 		"message": "Whether to scroll to the bottom on any keystroke."
 	},
 	"HTERM_PREF_SCROLL_ON_OUTPUT": {
-		"description": "Help text shown for the hterm 'scroll-on-output' preference.",
+		"description": "Help text shown for the 'scroll-on-output' preference.",
 		"message": "Whether to scroll to the bottom on terminal output."
 	},
 	"HTERM_PREF_SCROLL_WHEEL_MAY_SEND_ARROW_KEYS": {
-		"description": "Help text shown for the hterm 'scroll-wheel-may-send-arrow-keys' preference. 'DECCKM', 'vi', 'nano', 'less', 'screen', and 'tmux' should not be translated as they're the name of specific programs. 'man pages' are manual/reference documentation. 'Application Cursor Keys' and 'alternative screen buffer' may be translated, but take care to not deviate too much as they refer to specific terminal features. 'Shift' is the name of the keyboard button and may be translated as makes sense.",
-		"message": "When using the alternative screen buffer, and DECCKM (Application Cursor Keys) is active, mouse wheel scroll events will emulate arrow keys.\n\nIt can be temporarily disabled by holding the Shift key.\n\nThis frequently comes up when using pagers (less) or reading man pages or text editors (vi/nano) or using screen/tmux."
+		"description": "Help text shown for the 'scroll-wheel-may-send-arrow-keys' preference. 'DECCKM', 'vi', 'nano', 'less', 'screen', and 'tmux' should not be translated as they're the name of specific programs. 'man pages' are manual/reference documentation. 'Application Cursor Keys' and 'alternative screen buffer' may be translated, but take care to not deviate too much as they refer to specific terminal features. 'Shift' is the name of the keyboard button and may be translated as makes sense.",
+		"message": "When using the alternative screen buffer, and DECCKM (Application Cursor Keys) is active, mouse scroll wheel events will emulate arrow keys.\n\nIt can be temporarily disabled by holding the Shift key.\n\nThis frequently comes up when using pagers (less) or reading man pages or text editors (vi/nano) or using screen/tmux."
 	},
 	"HTERM_PREF_SCROLL_WHEEL_MOVE_MULTIPLIER": {
-		"description": "Help text shown for the hterm 'scroll-wheel-move-multiplier' preference. This is a numeric value the user enters and is used as a multiplier. 'scroll wheel' and 'pixels' refer to the normal computing terms, so everything here may be translated as makes sense.",
-		"message": "The multiplier for scroll wheel events when measured in pixels.\n\nAlters how fast the page scrolls."
+		"description": "Help text shown for the 'scroll-wheel-move-multiplier' preference. This is a numeric value the user enters and is used as a multiplier. 'mouse scroll wheel' and 'pixels' refer to the normal computing terms, so everything here may be translated as makes sense.",
+		"message": "The multiplier for mouse scroll wheel events when measured in pixels.\n\nAlters how fast the page scrolls."
 	},
 	"HTERM_PREF_SHIFT_INSERT_PASTE": {
-		"description": "Help text shown for the hterm 'shift-insert-paste' preference. 'Shift' and 'Insert' are the names of keyboard buttons and may be translated as makes sense.",
+		"description": "Help text shown for the 'shift-insert-paste' preference. 'Shift' and 'Insert' are the names of keyboard buttons and may be translated as makes sense.",
 		"message": "Whether Shift+Insert is used for pasting or is sent to the remote host."
 	},
 	"HTERM_PREF_TERMINAL_ENCODING": {
-		"description": "Help text shown for the hterm 'terminal-encoding' preference. 'Terminal encoding' refers to the encoding the terminal uses when displaying user content. 'DOCS' and 'ISO-2022' should not be translated, and 'UTF-8' may be translated as makes sense.",
+		"description": "Help text shown for the 'terminal-encoding' preference. 'Terminal encoding' refers to the encoding the terminal uses when displaying user content. 'DOCS' and 'ISO-2022' should not be translated, and 'UTF-8' may be translated as makes sense. 'terminal escape sequences' are commands executed dynamically during the runtime of the program to change behavior; see https://en.wikipedia.org/wiki/ANSI_escape_code for more details. Everything here should be translated accordingly.",
 		"message": "The default terminal encoding (DOCS).\n\nISO-2022 enables character map translations (like graphics maps).\nUTF-8 disables support for those.\n\nThe locked variant means the encoding cannot be changed at runtime via terminal escape sequences.\n\nYou should stick with UTF-8 unless you notice broken rendering with legacy applications."
 	},
 	"HTERM_PREF_USER_CSS": {
-		"description": "Help text shown for the hterm 'user-css' preference. 'stylesheet' is a technical term in the CSS (Cascading Style Sheets) standard and may be translated if possible. 'terminal document' refers to the web page containing the terminal program.",
+		"description": "Help text shown for the 'user-css' preference. 'stylesheet' is a technical term in the CSS (Cascading Style Sheets) standard and may be translated if possible. 'terminal document' refers to the web page containing the terminal program.",
 		"message": "URL of user stylesheet to include in the terminal document."
 	},
 	"HTERM_PREF_USER_CSS_TEXT": {
-		"description": "Help text shown for the hterm 'user-css-text' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible.",
+		"description": "Help text shown for the 'user-css-text' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible.",
 		"message": "Custom CSS text for styling the terminal."
 	},
 	"HTERM_PREF_USE_DEFAULT_WINDOW_COPY": {
-		"description": "Help text shown for the hterm 'use-default-window-copy' preference.",
+		"description": "Help text shown for the 'use-default-window-copy' preference. 'newlines' refer to the line endings that are created when pressing the enter key and break up strings into new lines; see https://en.wikipedia.org/wiki/Newline for details. Everything here, including 'newlines', should be translated accordingly.",
 		"message": "Whether to use the default browser/OS's copy behavior.\n\nAllow the browser/OS to handle the copy event directly which might improve compatibility with some systems (where copying doesn't work at all), but makes the text selection less robust.\n\nFor example, long lines that were automatically line wrapped will be copied with the newlines still in them."
 	},
 	"HTERM_PREF_WORD_BREAK_MATCH_LEFT": {
-		"description": "Help text shown for the hterm 'word-break-match-left' preference. When automatically expanding the user's selection, this controls when to stop expanding the selection to the left of content. This will be used when double clicking text and deciding how much text to the left of he cursor to automatically select. 'Regular expression' and 'character class' are computing terms referring to the syntax used by the preference. The quote style may be changed as needed.",
+		"description": "Help text shown for the 'word-break-match-left' preference. When automatically expanding the user's selection, this controls when to stop expanding the selection to the left of content. This will be used when double clicking text and deciding how much text to the left of he cursor to automatically select. 'Regular expression' and 'character class' are computing terms referring to the syntax used by the preference. The quote style may be changed as needed.",
 		"message": "Regular expression to halt matching to the left (start) of a selection.\n\nNormally this is a character class to reject specific characters.\nWe allow \"~\" and \".\" by default as paths frequently start with those."
 	},
 	"HTERM_PREF_WORD_BREAK_MATCH_MIDDLE": {
-		"description": "Help text shown for the hterm 'word-break-match-middle' preference. When automatically expanding the user's selection, this determines what characters are used to separate words. 'Regular expression' and 'character class' are computing terms referring to the syntax used by the preference.",
+		"description": "Help text shown for the 'word-break-match-middle' preference. When automatically expanding the user's selection, this determines what characters are used to separate words. 'Regular expression' and 'character class' are computing terms referring to the syntax used by the preference.",
 		"message": "Regular expression to match all the characters in the middle.\n\nNormally this is a character class to reject specific characters.\n\nUsed to expand the selection surrounding the starting point."
 	},
 	"HTERM_PREF_WORD_BREAK_MATCH_RIGHT": {
-		"description": "Help text shown for the hterm 'word-break-match-right' preference. When automatically expanding the user's selection, this controls when to stop expanding the selection to the right of content. This will be used when double clicking text and deciding how much text to the right of the cursor to automatically select. 'Regular expression' and 'character class' are computing terms referring to the syntax used by the preference. The quote style may be changed as needed.",
+		"description": "Help text shown for the 'word-break-match-right' preference. When automatically expanding the user's selection, this controls when to stop expanding the selection to the right of content. This will be used when double clicking text and deciding how much text to the right of the cursor to automatically select. 'Regular expression' and 'character class' are computing terms referring to the syntax used by the preference. The quote style may be changed as needed.",
 		"message": "Regular expression to halt matching to the right (end) of a selection.\n\nNormally this is a character class to reject specific characters."
 	},
 	"HTERM_SPACE_CHARACTER": {
@@ -910,7 +910,7 @@
 		"message": "Import..."
 	},
 	"INITIALIZING_RELAY": {
-		"description": "Text displayed in the terminal when the user is connecting through a relay server (which is like a web proxy for connections). This shows the host used to look up the relay server system.",
+		"description": "Status message in the terminal when the user is connecting through a relay server (which is like a web proxy for connections). This shows the host used to look up the relay server system. There is no progress bar or similar UI involved here: a series of statements are shown one after the other.",
 		"message": "Looking up relay server using: $HOST$",
 		"placeholders": {
 			"HOST": {
@@ -1242,7 +1242,7 @@
 		"message": "prompt"
 	},
 	"NASFTP_CMD_PROMPT_HELP": {
-		"description": "Help text for the 'prompt' command.",
+		"description": "Help text for the 'prompt' command which sets the user's interactive prompt string. This is the status message shown whenever the program prompts the user to enter a command.",
 		"message": "Set the prompt string"
 	},
 	"NASFTP_CMD_PUT": {
@@ -1272,15 +1272,15 @@
 		}
 	},
 	"NASFTP_CMD_PWD": {
-		"description": "Name of the 'pwd' command which displays the current working directory. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"description": "Name of the 'pwd' ('print working directory') command which displays the current working directory on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "pwd"
 	},
 	"NASFTP_CMD_PWD_HELP": {
-		"description": "Help text for the 'pwd' command.",
+		"description": "Help text for the 'pwd' ('print working directory') command which displays the current working directory on the remote server.",
 		"message": "Show current working directory"
 	},
 	"NASFTP_CMD_PWD_OUTPUT": {
-		"description": "Output for the 'pwd' command.",
+		"description": "Output for the 'pwd' ('print working directory') command which displays the current working directory on the remote server.",
 		"message": "Remote working directory: $CWD$",
 		"placeholders": {
 			"CWD": {
@@ -1718,7 +1718,7 @@
 		"message": " failed! :("
 	},
 	"POPUP_CONNECT_TOOLTIP": {
-		"description": "Tooltip text shown when hovering over a connection link. 'Ctrl' is the Control key on the keyboard and may be translated accordingly. 'tab' refers to a tab in the browser.",
+		"description": "Tooltip text shown when hovering over a connection link. 'Ctrl' is the Control key on the keyboard and may be translated accordingly. 'tab' refers to a tab in the browser. The default behavior is to open links in windows, not tabs, so the user has to hold Ctrl to change.",
 		"message": "Hold Ctrl to open in a new tab."
 	},
 	"PREFERENCES_HEADER_SSH_FILES": {
@@ -1726,7 +1726,7 @@
 		"message": "SSH Files"
 	},
 	"PREFERENCES_HEADER_TERMINAL": {
-		"description": "Friendly message shown on the terminal preferences (e.g. colors, fonts, etc...) editing page.",
+		"description": "Friendly message shown on the preferences (e.g. colors, fonts, etc...) editing page. These are settings for the text based terminal emulator program the user interacts with.",
 		"message": "Terminal Settings"
 	},
 	"PREFERENCES_HEADER_URI": {
@@ -1746,11 +1746,11 @@
 		"message": "Register protocol handlers"
 	},
 	"PROTOCOL_REGISTER_EXPLAIN": {
-		"description": "Text explaining what the protocol registration process is for and what the UX looks like. Please see the chrome://settings/handlers page for more details.",
+		"description": "Text explaining what the protocol registration process is for and what the UX looks like. Pressing the button will send requests to Chrome which will display dialogs to the user. Please see the chrome://settings/handlers page for more details.",
 		"message": "The button below will attempt to register handlers for all protocols we support. For example, this allows us to handle ssh:// links directly. A prompt will be displayed by the browser for each protocol, so please confirm/accept each one as it is shown. If no prompts are shown, then please see the next section for troubleshooting tips."
 	},
 	"PROTOCOL_REGISTER_EXPLAIN_SETTINGS": {
-		"description": "Text explaining how to troubleshoot registration errors, and how to navigate the Chrome settings page. Please see the chrome://settings/handlers page for more details.",
+		"description": "Text explaining how to troubleshoot registration errors, and how to navigate the Chrome settings page. Please see the chrome://settings/handlers page for more details. 'registered handlers' are operating system settings used to associate specific URI schemes with this Secure Shell program.",
 		"message": "If we've already registered handlers, or previous registration attempts were denied, then no further prompts will be displayed. Please open the dialog below, then check the registered handler settings in the ssh/sftp/etc... sections. If this program is blocked, you can delete those settings which will allow you to retry registration. If this program is already registered, but it isn't set as the default handler, you can change the default handler too."
 	},
 	"PROTOCOL_REGISTER_OPTIONS_LINK": {
@@ -1770,7 +1770,7 @@
 		"message": "Read Size (KiB)"
 	},
 	"RECONNECT_MESSAGE": {
-		"description": "Message displayed after a connection closes. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them relative to the word is OK as long as it's clear what action will be taken when the keyboard button is pressed. Similarly, using parentheses is not required other than for clarity. For example, these are OK: 'Exit (X)' or '[X]Exit' or whatever makes the most sense for the language.",
+		"description": "Message displayed after a connection closes. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them relative to the word is OK as long as it's clear what action will be taken when the keyboard button is pressed. Similarly, using parentheses is not required other than for clarity. Changing case is also OK. For example, these are OK: 'Exit (X)' or '[X]Exit' or whatever makes the most sense for the language.",
 		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
 	},
 	"RELAY_RETRY": {
@@ -1898,15 +1898,15 @@
 		"message": "Visible"
 	},
 	"TERMINAL_PREF_ALT_GR_MODE": {
-		"description": "Help text shown for the terminal 'alt-gr-mode' preference. 'Alt' and 'AltGR' are the names of the keyboard buttons and may be translated as makes sense. Do not translate 'navigator.language' or anything else in quotes here except 'Auto' and 'Disable'. The quote style may be changed as makes sense for the language. The 'else' keyword here should be translated with its normal meaning.",
-		"message": "Select an AltGr detection heuristic.\n\n'Auto': Autodetect based on navigator.language:\n      'en-us' => 'Disable', else => 'right-alt'\n'Disable': Disable any AltGr related munging.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
+		"description": "Help text shown for the 'alt-gr-mode' preference. 'Alt' and 'AltGR' are the names of the keyboard buttons and may be translated as makes sense. Do not translate 'navigator.language' or anything else in quotes here except 'Auto' and 'Disable'. The quote style may be changed as makes sense for the language. The 'else' keyword here should be translated with its normal meaning. Emulation is like 'pretending' and can be translated as such.",
+		"message": "Select an AltGr detection heuristic.\n\n'Auto': Autodetect based on navigator.language:\n      'en-us' => 'Disable', else => 'right-alt'\n'Disable': Disable any AltGr emulation.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
 	},
 	"TERMINAL_PREF_ANSI_COLORS": {
 		"description": "Help text shown for the terminal ANSI colors setting.",
 		"message": "Set colors for the default palette."
 	},
 	"TERMINAL_PREF_BELL": {
-		"description": "Help text shown for the terminal 'audible-bell-sound' preference. This toggles whether the terminal will play a sound to get the user's attention.",
+		"description": "Help text shown for the 'audible-bell-sound' preference. This toggles whether the terminal will play a sound to get the user's attention.",
 		"message": "Audible terminal bell."
 	},
 	"TERMINAL_PREVIEW_LABEL": {
@@ -1922,7 +1922,7 @@
 		"message": "Terminal Reset"
 	},
 	"TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP": {
-		"description": "Help text shown for the terminal 'background-image' preference.",
+		"description": "Help text shown for the 'background-image' preference.",
 		"message": "Background image URL. Must start with 'http://' or 'https://'. Leave it blank for no image.\n\nFor example:\n  https://goo.gl/anedTK"
 	},
 	"TERMINAL_SETTINGS_DROPDOWN_ALT_GR_MODE_AUTO": {
@@ -1990,27 +1990,27 @@
 		"message": "Color 1: Red"
 	},
 	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_10": {
-		"description": "Tooltip shown over the ANSI color 10 bright green colorpicker.",
+		"description": "Tooltip shown over the ANSI color 10 bright green colorpicker. Do not try to convert this into a different color name; translate bright as an attribute of the color as in 'it is brighter'.",
 		"message": "Color 10: Bright Green"
 	},
 	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_11": {
-		"description": "Tooltip shown over the ANSI color 11 bright yellow colorpicker.",
+		"description": "Tooltip shown over the ANSI color 11 bright yellow colorpicker. Do not try to convert this into a different color name; translate bright as an attribute of the color as in 'it is brighter'.",
 		"message": "Color 11: Bright Yellow"
 	},
 	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_12": {
-		"description": "Tooltip shown over the ANSI color 12 bright blue colorpicker.",
+		"description": "Tooltip shown over the ANSI color 12 bright blue colorpicker. Do not try to convert this into a different color name; translate bright as an attribute of the color as in 'it is brighter'.",
 		"message": "Color 12: Bright Blue"
 	},
 	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_13": {
-		"description": "Tooltip shown over the ANSI color 13 bright magenta colorpicker.",
+		"description": "Tooltip shown over the ANSI color 13 bright magenta colorpicker. Do not try to convert this into a different color name; translate bright as an attribute of the color as in 'it is brighter'.",
 		"message": "Color 13: Bright Magenta"
 	},
 	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_14": {
-		"description": "Tooltip shown over the ANSI color 14 bright cyan colorpicker.",
+		"description": "Tooltip shown over the ANSI color 14 bright cyan colorpicker. Do not try to convert this into a different color name; translate bright as an attribute of the color as in 'it is brighter'.",
 		"message": "Color 14: Bright Cyan"
 	},
 	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_15": {
-		"description": "Tooltip shown over the ANSI color 15 bright white colorpicker.",
+		"description": "Tooltip shown over the ANSI color 15 bright white colorpicker. Do not try to convert this into a different color name; translate bright as an attribute of the color as in 'it is brighter'.",
 		"message": "Color 15: Bright White"
 	},
 	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_2": {
@@ -2038,11 +2038,11 @@
 		"message": "Color 7: White"
 	},
 	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_8": {
-		"description": "Tooltip shown over the ANSI color 8 bright black colorpicker.",
+		"description": "Tooltip shown over the ANSI color 8 bright black colorpicker. Do not try to convert this into a different color name; translate bright as an attribute of the color as in 'it is brighter'.",
 		"message": "Color 8: Bright Black"
 	},
 	"TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_9": {
-		"description": "Tooltip shown over the ANSI color 9 bright red colorpicker.",
+		"description": "Tooltip shown over the ANSI color 9 bright red colorpicker. Do not try to convert this into a different color name; translate bright as an attribute of the color as in 'it is brighter'.",
 		"message": "Color 9: Bright Red"
 	},
 	"TERMINAL_TITLE_PREF_APPEARANCE": {
@@ -2174,7 +2174,7 @@
 		}
 	},
 	"WELCOME_FAQ": {
-		"description": "A link to the frequently asked questions documentation displayed at startup. 'Ctrl+Click' refers to holding the keyboard Control button while clicking with the mouse. 'links' refer to website URL links. Everything may be translated.",
+		"description": "A link to the frequently asked questions documentation displayed at startup. 'Ctrl+Click' refers to holding the keyboard Control button while clicking with the mouse. 'links' refer to website URL links and is meant as general advice that also applies to this text (which is why it is plural even though there's only one link in this message). Everything may be translated.",
 		"message": "Answers to Frequently Asked Questions: $URL$ (Ctrl+Click on links to open)",
 		"placeholders": {
 			"URL": {
