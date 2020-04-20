@@ -103,11 +103,12 @@ popup.prototype.populateList_ = function() {
         link.textContent = nassh.msg('OPTIONS_BUTTON_LABEL');
         link.style.textAlign = 'center';
         break;
-      default:
+      default: {
         const profile = this.prefs_.getProfile(id);
         const desc = profile.get('description');
         link.textContent = desc;
         break;
+      }
     }
 
     document.body.appendChild(link);

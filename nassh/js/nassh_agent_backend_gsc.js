@@ -378,7 +378,7 @@ nassh.agent.backends.GSC.prototype.signRequest =
     let rsaHashConstants;
     const keyInfo = await manager.fetchKeyInfo();
     switch (keyInfo.type) {
-      case nassh.agent.messages.KeyTypes.RSA:
+      case nassh.agent.messages.KeyTypes.RSA: {
         if (flags === 0) {
           rsaHashConstants = nassh.agent.backends.GSC.HashAlgorithms.SHA1;
         } else if (flags & 0b100) {
@@ -395,7 +395,8 @@ nassh.agent.backends.GSC.prototype.signRequest =
         dataToSign = lib.array.concatTyped(
             rsaHashConstants.identifier, new Uint8Array(hash));
         break;
-      case nassh.agent.messages.KeyTypes.ECDSA:
+      }
+      case nassh.agent.messages.KeyTypes.ECDSA: {
         if (flags !== 0) {
           throw new Error(
               `GSC.signRequest: unsupported flag value for ECDSA: ` +
@@ -406,6 +407,7 @@ nassh.agent.backends.GSC.prototype.signRequest =
         dataToSign = new Uint8Array(
             await window.crypto.subtle.digest(hashAlgorithm, data));
         break;
+      }
       case nassh.agent.messages.KeyTypes.EDDSA:
         if (flags !== 0) {
           throw new Error(
@@ -424,19 +426,19 @@ nassh.agent.backends.GSC.prototype.signRequest =
     const rawSignature = await manager.authenticate(dataToSign);
 
     let prefix;
+    const curveOid = lib.notNull(keyInfo.curveOid);
     switch (keyInfo.type) {
       case nassh.agent.messages.KeyTypes.RSA:
         return lib.array.concatTyped(
             nassh.agent.messages.encodeAsWireString(
                 rsaHashConstants.signaturePrefix),
             nassh.agent.messages.encodeAsWireString(rawSignature));
-      case nassh.agent.messages.KeyTypes.ECDSA:
+      case nassh.agent.messages.KeyTypes.ECDSA: {
         const rRaw = rawSignature.subarray(0, rawSignature.length / 2);
         const sRaw = rawSignature.subarray(rawSignature.length / 2);
         const rMpint = nassh.agent.messages.encodeAsWireMpint(rRaw);
         const sMpint = nassh.agent.messages.encodeAsWireMpint(sRaw);
         const signatureBlob = lib.array.concatTyped(rMpint, sMpint);
-        const curveOid = lib.notNull(keyInfo.curveOid);
         prefix = new TextEncoder().encode(
             nassh.agent.messages.OidToCurveInfo[curveOid].prefix);
         const identifier = new TextEncoder().encode(
@@ -445,6 +447,7 @@ nassh.agent.backends.GSC.prototype.signRequest =
             nassh.agent.messages.encodeAsWireString(
                 lib.array.concatTyped(prefix, identifier)),
             nassh.agent.messages.encodeAsWireString(signatureBlob));
+      }
       case nassh.agent.messages.KeyTypes.EDDSA:
         prefix = new TextEncoder().encode(
             nassh.agent.messages.OidToCurveInfo[curveOid].prefix);
@@ -1285,7 +1288,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
     throw new Error('SmartCardManager.selectApplet: applet already selected');
   }
   switch (applet) {
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP:
+    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP: {
       /**
        * Command APDU for the 'SELECT APPLET' command with the OpenPGP
        * Application Identifier (AID) as data.
@@ -1304,7 +1307,8 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
       await this.transmit(SELECT_APPLET_OPENPGP_APDU);
       await this.determineOpenPGPCardCapabilities();
       break;
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV:
+    }
+    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV: {
       /**
        * Command APDU for the 'SELECT APPLET' command with the PIV Application
        * Identifier (AID) as data.
@@ -1327,6 +1331,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
       // Chaining support is part of the specification for the PIV applet.
       this.supportsChaining_ = true;
       break;
+    }
     default:
       throw new Error(
           `SmartCardManager.selectApplet: applet ID ${applet} not supported`);
@@ -1361,7 +1366,7 @@ nassh.agent.backends.KeyInfo;
 nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
     async function() {
   switch (this.appletSelected_) {
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP:
+    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP: {
       /**
        * Command APDU for the 'GET DATA' command with the identifier of the
        * 'Application Related Data' data object as data.
@@ -1381,7 +1386,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
         case nassh.agent.messages.KeyTypes.RSA:
           return {type, curveOid};
         case nassh.agent.messages.KeyTypes.ECDSA:
-        case nassh.agent.messages.KeyTypes.EDDSA:
+        case nassh.agent.messages.KeyTypes.EDDSA: {
           // Curve is determined by the subsequent bytes encoding the OID.
           const curveOidBytes = appRelatedData.lookup(0xC3).value.slice(1);
           curveOid = nassh.agent.messages.decodeOid(curveOidBytes);
@@ -1391,12 +1396,14 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
                 `${curveOid}`);
           }
           return {type, curveOid};
+        }
         default:
           throw new Error(
               `SmartCardManager.fetchKeyInfo: unsupported algorithm ID: ` +
               `${type}`);
       }
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV:
+    }
+    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV: {
       /**
        * Command APDU for the 'GET DATA' command for the 'X.509 Certificate
        * for PIV Authentication' data object.
@@ -1429,7 +1436,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
         case '1.2.840.113549.1.1.1':
           // RSA
           return {type: nassh.agent.messages.KeyTypes.RSA, curveOid: null};
-        case '1.2.840.10045.2.1':
+        case '1.2.840.10045.2.1': {
           // ECDSA
           // We deviate from the PIV spec by allowing curves other than P-256.
           // If curve detection fails, we fall back to the default.
@@ -1452,11 +1459,13 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
                 `PIV: ${curveOid}`);
           }
           return {type: nassh.agent.messages.KeyTypes.ECDSA, curveOid};
+        }
         default:
           throw new Error(
               `SmartCardManager.fetchKeyInfo: unsupported PIV algorithm OID: ` +
               `${algorithmId}`);
       }
+    }
     default:
       throw new Error(
           `SmartCardManager.fetchKeyInfo: no or unsupported applet ` +
@@ -1493,16 +1502,18 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchPublicKeyBlob =
           await this.transmit(READ_AUTHENTICATION_PUBLIC_KEY_APDU));
       const keyInfo = await this.fetchKeyInfo();
       switch (keyInfo.type) {
-        case nassh.agent.messages.KeyTypes.RSA:
+        case nassh.agent.messages.KeyTypes.RSA: {
           const exponent = publicKeyTemplate.lookup(0x82).value;
           const modulus = publicKeyTemplate.lookup(0x81).value;
           return nassh.agent.messages.generateKeyBlob(
               keyInfo.type, exponent, modulus);
+        }
         case nassh.agent.messages.KeyTypes.ECDSA:
-        case nassh.agent.messages.KeyTypes.EDDSA:
+        case nassh.agent.messages.KeyTypes.EDDSA: {
           const key = publicKeyTemplate.lookup(0x86).value;
           return nassh.agent.messages.generateKeyBlob(
               keyInfo.type, keyInfo.curveOid, key);
+        }
         default:
           throw new Error(
               `SmartCardManager.fetchPublicKeyBlob: unsupported key type: ` +
@@ -1540,7 +1551,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchPublicKeyBlob =
           certificate.subjectPublicKeyInfo.subjectPublicKey.valueBlock.valueHex;
       const keyInfo = await this.fetchKeyInfo();
       switch (keyInfo.type) {
-        case nassh.agent.messages.KeyTypes.RSA:
+        case nassh.agent.messages.KeyTypes.RSA: {
           const asn1PublicKey = asn1js.fromBER(rawPublicKey);
           const rsaPublicKey =
               new pkijs.RSAPublicKey({schema: asn1PublicKey.result});
@@ -1550,6 +1561,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchPublicKeyBlob =
               new Uint8Array(rsaPublicKey.modulus.valueBlock.valueHex);
           return nassh.agent.messages.generateKeyBlob(
               keyInfo.type, exponent, modulus);
+        }
         case nassh.agent.messages.KeyTypes.ECDSA:
           return nassh.agent.messages.generateKeyBlob(
               keyInfo.type, keyInfo.curveOid, new Uint8Array(rawPublicKey));
@@ -1578,7 +1590,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
     .fetchAuthenticationPublicKeyId =
     async function() {
   switch (this.appletSelected_) {
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP:
+    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP: {
       /**
        * Command APDU for the 'GET DATA' command with the identifier of the
        * 'Application Related Data' data object as data.
@@ -1592,7 +1604,8 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
       const appRelatedData = nassh.agent.backends.GSC.DataObject.fromBytes(
           await this.transmit(FETCH_APPLICATION_RELATED_DATA_APDU));
       return appRelatedData.lookup(0xC5).value.subarray(40, 60);
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV:
+    }
+    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV: {
       /**
        * Command APDU for the 'GET DATA' command for the 'X.509 Certificate
        * for PIV Authentication' data object.
@@ -1623,6 +1636,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
           pkijsCertificate.subjectPublicKeyInfo.toSchema().toBER(false);
       return new Uint8Array(
           await window.crypto.subtle.digest('SHA-1', subjectPublicKeyInfo));
+    }
     default:
       throw new Error(
           `SmartCardManager.fetchAuthenticationPublicKeyId: no or ` +
@@ -1641,7 +1655,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
     .fetchPINVerificationTriesRemaining =
     async function() {
   switch (this.appletSelected_) {
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP:
+    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP: {
       /**
        * Command APDU for the 'GET DATA' command with the identifier of the
        * 'Application Related Data' data object as data.
@@ -1655,7 +1669,8 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
       const appRelatedData = nassh.agent.backends.GSC.DataObject.fromBytes(
           await this.transmit(FETCH_APPLICATION_RELATED_DATA_APDU));
       return appRelatedData.lookup(0xC4).value[4];
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV:
+    }
+    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV: {
       /**
        * Header bytes of the command APDU for the 'VERIFY PIN' command (PIV).
        *
@@ -1683,6 +1698,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
             `${statusBytes.toString()}`);
       }
       break;
+    }
     default:
       throw new Error(
           `SmartCardManager.fetchPINVerificationTriesRemaining: no or ` +
@@ -1750,7 +1766,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
 nassh.agent.backends.GSC.SmartCardManager.prototype.verifyPIN =
     async function(pinBytes) {
   switch (this.appletSelected_) {
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP:
+    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP: {
       /**
        * Header bytes of the command APDU for the 'VERIFY PIN' command.
        *
@@ -1786,7 +1802,8 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.verifyPIN =
           throw error;
         }
       }
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV:
+    }
+    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV: {
       /**
        * Header bytes of the command APDU for the 'VERIFY PIN' command (PIV).
        *
@@ -1830,6 +1847,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.verifyPIN =
           throw error;
         }
       }
+    }
     default:
       throw new Error(
           `SmartCardManager.verifyPIN: no or unsupported applet selected: ` +
@@ -1850,7 +1868,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.verifyPIN =
 nassh.agent.backends.GSC.SmartCardManager.prototype.authenticate =
     async function(data) {
   switch (this.appletSelected_) {
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP:
+    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP: {
       /**
        * Header bytes of the command APDU for the 'INTERNAL AUTHENTICATE'
        * command (OpenPGP).
@@ -1863,7 +1881,8 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.authenticate =
       const INTERNAL_AUTHENTICATE_APDU_HEADER = [0x00, 0x88, 0x00, 0x00];
       return this.transmit(new nassh.agent.backends.GSC.CommandAPDU(
           ...INTERNAL_AUTHENTICATE_APDU_HEADER, data));
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV:
+    }
+    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV: {
       /**
        * Header bytes of the command APDU for the 'GENERAL AUTHENTICATE'
        * command (PIV), using the RSA-2048 algorithm (0x07) resp. ECC P-256
@@ -1918,6 +1937,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.authenticate =
           return lib.array.concatTyped(new Uint8Array(x), new Uint8Array(y));
         }
       }
+    }
     default:
       throw new Error(
           `SmartCardManager.authenticate: no or unsupported applet ` +

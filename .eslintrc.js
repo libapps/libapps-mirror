@@ -41,6 +41,7 @@ module.exports = {
     'max-len': ['error', {'code': 80, 'ignoreUrls': true}],
     'new-parens': 'error',
     'no-alert': 'error',
+    'no-case-declarations': 'error',
     'no-cond-assign': 'error',
     'no-const-assign': 'error',
     'no-control-regex': 'error',
