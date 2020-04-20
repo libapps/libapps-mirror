@@ -29,7 +29,7 @@ lib.f = {};
 lib.f.replaceVars = function(str, vars) {
   return str.replace(/%([a-z]*)\(([^)]+)\)/gi, function(match, fn, varname) {
       if (typeof vars[varname] == 'undefined') {
-        throw 'Unknown variable: ' + varname;
+        throw new Error(`Unknown variable: ${varname}`);
       }
 
       let rv = vars[varname];
@@ -37,7 +37,7 @@ lib.f.replaceVars = function(str, vars) {
       if (fn in lib.f.replaceVars.functions) {
         rv = lib.f.replaceVars.functions[fn](rv);
       } else if (fn) {
-        throw 'Unknown escape function: ' + fn;
+        throw new Error(`Unknown escape function: ${fn}`);
       }
 
       return rv;

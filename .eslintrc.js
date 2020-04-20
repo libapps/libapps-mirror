@@ -77,6 +77,7 @@ module.exports = {
     'no-shadow-restricted-names': 'error',
     'no-tabs': 'error',
     'no-template-curly-in-string': 'error',
+    'no-throw-literal': 'error',
     'no-trailing-spaces': 'error',
     'no-unmodified-loop-condition': 'error',
     'no-unneeded-ternary': 'error',

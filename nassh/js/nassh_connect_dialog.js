@@ -316,7 +316,7 @@ nassh.ConnectDialog.prototype.$f = function(name, attrName, attrValue) {
 nassh.ConnectDialog.prototype.setCurrentProfileRecord = function(
     profileRecord) {
   if (!profileRecord) {
-    throw 'null profileRecord.';
+    throw new Error('null profileRecord.');
   }
 
   this.currentProfileRecord_ = profileRecord;

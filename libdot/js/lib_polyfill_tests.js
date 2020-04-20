@@ -64,6 +64,7 @@ it('polyfills-object-entries', async () => {
 });
 
 it('polyfills-promise-finally', async () => {
+  const err = new Error('then2error');
   async function test() {
     const stack = [];
     const result = await new Promise((resolve, reject) => {
@@ -76,7 +77,7 @@ it('polyfills-promise-finally', async () => {
     })
     .then((p) => {
       stack.push(p, 'then2');
-      throw 'then2error';
+      throw err;
     })
     .then((p) => {
       stack.push(p, 'then3');
@@ -98,7 +99,7 @@ it('polyfills-promise-finally', async () => {
         'constructor',
         'constructor', 'then1',
         'then1', 'then2',
-        'then2error', 'catch',
+        err, 'catch',
         undefined, 'finally',
         'catch', 'then4']);
   }
