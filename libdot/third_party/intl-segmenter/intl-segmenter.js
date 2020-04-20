@@ -171,7 +171,7 @@
         for (this._cur = 0;
              this._cur < this._breaks.length
              && this._breaks[this._cur].pos < index;
-             ++this._cur) {}
+             ++this._cur) { /* TODO */ }
       }
 
       this._type = this._cur < this._breaks.length
@@ -195,7 +195,7 @@
         for (this._cur = this._breaks.length - 1;
              this._cur >= 0
              && this._breaks[this._cur].pos >= index;
-             --this._cur) {}
+             --this._cur) { /* TODO */ }
       }
 
       this._type =

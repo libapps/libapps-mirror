@@ -49,6 +49,7 @@ module.exports = {
     'no-dupe-class-members': 'error',
     'no-dupe-keys': 'error',
     'no-duplicate-case': 'error',
+    'no-empty': 'error',
     'no-empty-character-class': 'error',
     'no-eval': 'error',
     'no-ex-assign': 'error',
