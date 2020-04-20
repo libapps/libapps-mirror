@@ -33,7 +33,7 @@
     "eslint": "~6",
     "http-server": "~0",
     "license-checker": "~25",
-    "mocha": "~6",
+    "mocha": "~7",
     "mocha-headless-chrome": "~2",
     "rollup": ">=1.16",
     "rollup-plugin-node-resolve": ">=5",
