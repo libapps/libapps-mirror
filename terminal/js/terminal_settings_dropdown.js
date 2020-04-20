@@ -166,8 +166,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
         .querySelector(`.option[data-index="${index}"]`);
     if (element) {
       super.uiChanged_(this.getValueFromLiElement_(
-          /** @type {!HTMLLIElement} */ (element)
-      ));
+          /** @type {!HTMLLIElement} */ (element)));
       return true;
     } else {
       return false;
@@ -267,8 +266,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   /** @param {!Event} event */
   onUiChanged_(event) {
     super.uiChanged_(this.getValueFromLiElement_(
-        /** @type {!HTMLLIElement} */ (event.target)
-    ));
+        /** @type {!HTMLLIElement} */ (event.target)));
   }
 }
 
