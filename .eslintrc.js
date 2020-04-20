@@ -165,6 +165,7 @@ module.exports = {
 
   'settings': {
     'jsdoc': {
+      'mode': 'closure',
       'preferredTypes': {
         'object': 'Object',
       },
@@ -178,8 +179,8 @@ module.exports = {
         'returns': 'return',
 
         // Stub out closure-specific tags so they get ignored.
+        // TODO(vapier): Delete this after upgrade to newer jsdoc.
         'closurePrimitive': '',
-        'suppress': '',
       },
     },
   },

@@ -22,7 +22,7 @@
     "csso": ">=3",
     "csso-cli": ">=2",
     "eslint": "~6",
-    "eslint-plugin-jsdoc": "~15",
+    "eslint-plugin-jsdoc": "~22",
     "firebase-tools": ">=7",
     "http-server": "~0",
     "jsdoc-to-markdown": "~5",
