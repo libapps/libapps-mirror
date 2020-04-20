@@ -122,9 +122,8 @@ nassh.CommandInstance.prototype.run = function() {
 
   // Similar to lib.fs.err, except this logs to the terminal too.
   const ferr = (msg) => {
-    return (err) => {
-      const ary = Array.apply(null, arguments);
-      console.error(msg + ': ' + ary.join(', '));
+    return (err, ...args) => {
+      console.error(`${msg}: ${args.join(', ')}`);
 
       this.io.println(nassh.msg('UNEXPECTED_ERROR'));
       this.io.println(err);

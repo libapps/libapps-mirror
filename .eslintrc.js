@@ -98,6 +98,7 @@ module.exports = {
     'one-var-declaration-per-line': 'error',
     'prefer-const': 'error',
     'prefer-numeric-literals': 'error',
+    'prefer-rest-params': 'error',
     'quote-props': ['error', 'consistent'],
     'quotes': ['error', 'single',
                {'avoidEscape': true, 'allowTemplateLiterals': true}],

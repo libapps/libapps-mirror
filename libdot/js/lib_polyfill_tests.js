@@ -86,8 +86,8 @@ it('polyfills-promise-finally', async () => {
       stack.push(p, 'catch');
       return 'catch';
     })
-    .finally(function() {
-      stack.push(arguments[0], 'finally');
+    .finally(function(ret = undefined) {
+      stack.push(ret, 'finally');
       return 'finally';
     }).then((p) => {
       stack.push(p, 'then4');

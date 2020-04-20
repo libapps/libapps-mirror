@@ -77,7 +77,7 @@ nassh.ColumnList.prototype.addEventListener = function(...args) {
     throw 'Not initialized.';
   }
 
-  this.div_.addEventListener.apply(this.div_, arguments);
+  this.div_.addEventListener.apply(this.div_, args);
 };
 
 /**

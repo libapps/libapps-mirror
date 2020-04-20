@@ -169,7 +169,7 @@ MockTerminalPrivate.prototype.notifyObservers_ = function(fnName, args) {
 MockTerminalPrivate.prototype.openVmshellProcess = function(args, callback) {
   setTimeout(() => {
     callback(this.openVmshellProcessId);
-    this.notifyObservers_('openVmshellProcess', arguments);
+    this.notifyObservers_('openVmshellProcess', [args, callback]);
   }, 0);
 };
 
@@ -183,7 +183,7 @@ MockTerminalPrivate.prototype.openVmshellProcess = function(args, callback) {
 MockTerminalPrivate.prototype.closeTerminalProcess = function(id, callback) {
   setTimeout(() => {
     callback(true);
-    this.notifyObservers_('closeTerminalProcess', arguments);
+    this.notifyObservers_('closeTerminalProcess', [id, callback]);
   }, 0);
 };
 
@@ -199,7 +199,7 @@ MockTerminalPrivate.prototype.closeTerminalProcess = function(id, callback) {
 MockTerminalPrivate.prototype.sendInput = function(id, input, callback) {
   setTimeout(() => {
     callback(true);
-    this.notifyObservers_('sendInput', arguments);
+    this.notifyObservers_('sendInput', [id, input, callback]);
   }, 0);
 };
 
@@ -216,7 +216,7 @@ MockTerminalPrivate.prototype.onTerminalResize = function(
     id, width, height, callback) {
   setTimeout(() => {
     callback(true);
-    this.notifyObservers_('onTerminalResize', arguments);
+    this.notifyObservers_('onTerminalResize', [id, width, height, callback]);
   }, 0);
 };
 
@@ -230,7 +230,7 @@ MockTerminalPrivate.prototype.onTerminalResize = function(
  *     dispatched.
  */
 MockTerminalPrivate.prototype.ackOutput = function(tabId, id) {
-  this.notifyObservers_('ackOutput', arguments);
+  this.notifyObservers_('ackOutput', [tabId, id]);
 };
 
 /**
@@ -244,7 +244,7 @@ MockTerminalPrivate.prototype.ackOutput = function(tabId, id) {
 MockTerminalPrivate.prototype.getCroshSettings = function(callback) {
   setTimeout(() => {
     callback(this.croshSettings);
-    this.notifyObservers_('getCroshSettings', arguments);
+    this.notifyObservers_('getCroshSettings', [callback]);
   }, 0);
 };
 
@@ -257,7 +257,7 @@ MockTerminalPrivate.prototype.getCroshSettings = function(callback) {
 MockTerminalPrivate.prototype.getA11yStatus = function(callback) {
   setTimeout(() => {
     callback(this.a11yStatus);
-    this.notifyObservers_('getA11yStatus', arguments);
+    this.notifyObservers_('getA11yStatus', [callback]);
   }, 0);
 };
 
