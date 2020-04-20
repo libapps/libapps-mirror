@@ -82,3 +82,8 @@ function render$$module$js$lit_element(template, element) {}
  * @return {CSSResult}
  */
 function unsafeCSS$$module$js$lit_element(value) {}
+
+/**
+ * @param {*} value
+ */
+function live$$module$js$lit_element(value) {}
