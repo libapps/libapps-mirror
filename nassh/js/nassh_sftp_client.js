@@ -717,7 +717,7 @@ nassh.sftp.Client.prototype.readChunk = function(handle, offset, len) {
  * @return {!Promise}
  */
 nassh.sftp.Client.prototype.readChunks = function(
-    handle, callback, offset = 0, length) {
+    handle, callback, offset = 0, length = undefined) {
   // How many bytes we've read so far.
   let bytesRead = 0;
 
@@ -793,7 +793,7 @@ nassh.sftp.Client.prototype.readChunks = function(
  * @return {!Promise}
  */
 nassh.sftp.Client.prototype.readFile = function(
-      path, callback, offset = 0, length) {
+      path, callback, offset = 0, length = undefined) {
   return this.openFile(path, nassh.sftp.packets.OpenFlags.READ)
     .then((handle) => {
       return this.readChunks(handle, callback, offset, length)

@@ -794,7 +794,7 @@ nasftp.Cli.prototype.showSftpStatusError_ = function(response, cmd) {
  * @return {?number} The parsed number, or false if the value is invalid.
  */
 nasftp.Cli.prototype.parseInt_ = function(
-    cmd, argName, argValue, defaultValue = 0, radix) {
+    cmd, argName, argValue, defaultValue = 0, radix = undefined) {
   if (argValue === undefined) {
     return defaultValue;
   }
