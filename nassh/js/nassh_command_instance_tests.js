@@ -243,7 +243,7 @@ it('tokenizeOptions', () => {
       // Check options w/values.
       '--config=google ' +
       // Check off options.
-      '--no-use-xhr '
+      '--no-use-xhr ',
   );
   assert.equal('object', typeof rv);
   assert.isTrue(rv['--report-ack-latency']);

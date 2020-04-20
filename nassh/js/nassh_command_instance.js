@@ -292,7 +292,7 @@ nassh.CommandInstance.prototype.removeDirectory = function(fullPath) {
         f.removeRecursively(lib.fs.log('Removed: ' + fullPath),
                             lib.fs.err('Error removing' + fullPath));
       },
-      lib.fs.log('Error finding: ' + fullPath)
+      lib.fs.log('Error finding: ' + fullPath),
   );
 };
 

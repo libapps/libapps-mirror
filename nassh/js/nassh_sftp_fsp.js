@@ -568,7 +568,7 @@ nassh.sftp.fsp.copyDirectory_ = function(sourcePath, targetPath, client) {
               .then((response) => {
                 return client.symLink(response.files[0].filename,
                                       fileTargetPath);
-              })
+              }),
           );
         } else if (file.isDirectory) {
           copyPromises.push(nassh.sftp.fsp.copyDirectory_(

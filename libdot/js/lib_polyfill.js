@@ -166,7 +166,7 @@ lib.polyfill.promiseFinally = function() {
       (x) => new C((resolve) => resolve(onFinally())).then(() => x),
       (e) => new C((resolve) => resolve(onFinally())).then(() => {
         throw e;
-      })
+      }),
     );
   }
   Object.defineProperty(Promise.prototype, 'finally', {

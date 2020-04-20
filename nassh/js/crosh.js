@@ -334,7 +334,7 @@ Crosh.prototype.onTerminalResize_ = function(width, height) {
         if (!success) {
           console.warn('terminalPrivate.onTerminalResize failed');
         }
-      }
+      },
   );
 };
 
