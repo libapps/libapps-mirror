@@ -66,6 +66,7 @@ module.exports = {
     'no-new-func': 'error',
     'no-new-object': 'error',
     'no-new-wrappers': 'error',
+    'no-octal': 'error',
     'no-octal-escape': 'error',
     'no-return-await': 'error',
     'no-script-url': 'error',
