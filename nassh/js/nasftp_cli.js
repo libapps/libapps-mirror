@@ -374,41 +374,34 @@ Cli.prototype.onInputChar_ = function(ch) {
  * e.g. When typing on the keyboard or pasting strings.
  *
  * @param {string} string The string of characters to process.
- * @return {!Promise} A promise that resolves once all processing is done.
+ * @return {!Promise<void>} A promise that resolves once all processing is done.
  */
-Cli.prototype.onInput_ = function(string) {
+Cli.prototype.onInput_ = async function(string) {
   // If we got an empty event, just return;
   if (string.length == 0) {
-    return Promise.resolve();
+    return;
   }
   this.buffered_ += string;
 
   // If we're in the middle of processing a command, only queue new input.
   if (this.holdInput_) {
-    return Promise.resolve();
+    return;
   }
 
-  const processNextChar = () => {
-    // If we're done processing the whole buffer, return.
-    if (this.buffered_.length == 0) {
-      return;
-    }
-
-    // Note: This splits UTF-16 surrogate pairs incorrectly.  However, this
-    // shouldn't be a problem in practice as we only run commands based on
-    // newlines, and the commands should only match on complete strings.
-    const ch = this.buffered_[0];
-    this.buffered_ = this.buffered_.slice(1);
-
-    return this.onInputChar_(ch)
-      .then(processNextChar);
-  };
-
   this.holdInput_ = true;
-  return processNextChar()
-    .finally(() => {
-      this.holdInput_ = false;
-    });
+  try {
+    while (this.buffered_.length) {
+      // Note: This splits UTF-16 surrogate pairs incorrectly.  However, this
+      // shouldn't be a problem in practice as we only run commands based on
+      // newlines, and the commands should only match on complete strings.
+      const ch = this.buffered_[0];
+      this.buffered_ = this.buffered_.slice(1);
+
+      await this.onInputChar_(ch);
+    }
+  } finally {
+    this.holdInput_ = false;
+  }
 };
 
 /**
