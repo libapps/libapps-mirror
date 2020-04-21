@@ -16,8 +16,10 @@ import nassh
 import libdot
 
 
+JS_DIR = os.path.join(nassh.DIR, 'js')
+
 # Path to generated deps file that terminal uses for libdot/hterm/etc...
-DEPS_FILE = os.path.join(nassh.DIR, 'js', 'nassh_deps.concat.js')
+DEPS_FILE = os.path.join(JS_DIR, 'nassh_deps.concat.js')
 
 
 def _get_default_paths():
@@ -27,7 +29,7 @@ def _get_default_paths():
     # Sort to ensure nasftp.js comes before nasftp_cli.js, etc.
     return sorted(
         os.path.relpath(x, os.getcwd())
-        for x in glob.glob(os.path.join(nassh.DIR, 'js', '*.js'))
+        for x in glob.glob(os.path.join(JS_DIR, '*.js'))
         if not os.path.basename(x).startswith('nassh_deps'))
 
 
@@ -39,7 +41,14 @@ def mkdeps(_opts):
 
 def main(argv):
     """The main func!"""
-    externs = ['--js_module_root=nassh'] + [
+    # We need to use an absolute path with the module root to workaround
+    # https://github.com/google/closure-compiler/issues/3580
+    for i, arg in enumerate(argv):
+        if arg and arg[0] != '-' and os.path.exists(arg):
+            argv[i] = os.path.relpath(os.path.realpath(arg), nassh.DIR)
+    os.chdir(nassh.DIR)
+
+    externs = ['--js_module_root', JS_DIR] + [
         '--externs=%s' % os.path.relpath(x) for x in
         glob.glob(os.path.join(nassh.DIR, 'externs', '*.js'))]
     closure_args = list(libdot.lint.DEFAULT_CLOSURE_ARGS) + externs + [
