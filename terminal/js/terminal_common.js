@@ -47,6 +47,7 @@ export const DEFAULT_BACKGROUND_SIZE = '100% 100%';
 export const DEFAULT_FOREGROUND_COLOR = '#FFFFFF';
 export const DEFAULT_CURSOR_COLOR = 'rgba(174, 203, 250, 0.5)';
 export const DEFAULT_FONT_SIZE = 13;
+export const DEFAULT_SCREEN_PADDING_SIZE = 8;
 export const DEFAULT_THEME = 'dark';
 
 /**
@@ -81,6 +82,7 @@ export function definePrefs(prefs) {
   prefs.definePreference('font-size', DEFAULT_FONT_SIZE);
   prefs.definePreference('foreground-color', DEFAULT_FOREGROUND_COLOR);
   prefs.definePreference('pass-ctrl-tab', true);
+  prefs.definePreference('screen-padding-size', DEFAULT_SCREEN_PADDING_SIZE);
   prefs.definePreference('theme', DEFAULT_THEME);
   prefs.definePreference('theme-variations', {});
 }
