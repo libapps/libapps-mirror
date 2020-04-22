@@ -26,14 +26,24 @@ it('local-delete-default', (done) => {
   });
 
   // Fake current value is 'blue'.
-  preferenceManager.prefRecords_.color.currentValue = 'blue';
+  preferenceManager.prefRecords_['color'].currentValue = 'blue';
 
+  /**
+   * Workaround bad extern in closure. cl/307771888
+   *
+   * @suppress {checkTypes}
+   * @return {!StorageEvent}
+   */
+  function newEvent() {
+    return new StorageEvent('storage', {
+      storageArea: window.localStorage,
+      key: '/color',
+      oldValue: JSON.stringify('blue'),
+      newValue: null,
+    });
+  }
   // Simpulate deleting the key on another browser.
-  const event = new Event('storage');
-  event.storageArea = window.localStorage;
-  event.key = '/color';
-  event.oldValue = JSON.stringify('blue');
-  event.newValue = null;
+  const event = newEvent();
   window.dispatchEvent(event);
 });
 
