@@ -25,6 +25,25 @@ browser.i18n.getAcceptLanguages = function(callback) {};
  */
 browser.i18n.getMessage = function(messageName, substitutions) {};
 
+/** @const */
+browser.runtime = {};
+
+/** @type {{message:(string|undefined)}|undefined} */
+browser.runtime.lastError;
+
+/**
+ * @typedef {{
+ *   os: string,
+ *   arch: string,
+ * }}
+ */
+browser.runtime.PlatformInfo;
+
+/**
+ * @return {!Promise<!browser.runtime.PlatformInfo>}
+ */
+browser.runtime.getPlatformInfo = function() {};
+
 /**
  * @interface
  * @template LISTENER
@@ -99,7 +118,7 @@ chrome.extension = {};
 /** @param {string} path */
 chrome.extension.getURL = function(path) {};
 
-/** @type {!Array<FileSystemProvider>} */
+/** @type {!FileSystemProvider} */
 chrome.fileSystemProvider;
 
 /** @param {function(!Array<FileSystemProvider>)} callback */
@@ -364,7 +383,12 @@ Intl.Segmenter.Iterator.prototype.next = function() {};
  */
 Intl.Segmenter.prototype.segment = function(s) {};
 
-/** @typedef {{done: boolean}} */
+/**
+ * @typedef {{
+ *   done: boolean,
+ *   value: ?{segment: string, breakType: string},
+ * }}
+ */
 Intl.Segmenter.Segment;
 
 /** @type {boolean} */
