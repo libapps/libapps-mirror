@@ -79,43 +79,6 @@ if (!String.prototype.padEnd) {
 }
 
 /**
- * https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Object/values
- * https://github.com/tc39/proposal-object-values-entries/blob/master/polyfill.js
- */
-lib.polyfill.object = function() {
-  const reduce = Function.bind.call(Function.call, Array.prototype.reduce);
-  const isEnumerable = Function.bind.call(Function.call,
-      Object.prototype.propertyIsEnumerable);
-  const concat = Function.bind.call(Function.call, Array.prototype.concat);
-
-  if (!Object.values) {
-    /**
-     * @param {!Object} O
-     * @return {!Array}
-     */
-    Object.values = function values(O) {
-      return reduce(Reflect.ownKeys(O), (v, k) => concat(v,
-          typeof k === 'string' && isEnumerable(O, k) ? [O[k]] : []), []);
-    };
-  }
-
-  if (!Object.entries) {
-    /**
-     * @param {!Object} O
-     * @return {!Array<!Array<string>>}
-     */
-    Object.entries = function entries(O) {
-      return reduce(Reflect.ownKeys(O), (e, k) => concat(e,
-          typeof k === 'string' && isEnumerable(O, k) ? [[k, O[k]]] : []), []);
-    };
-  }
-};
-
-if (!Object.values || !Object.entries) {
-  lib.polyfill.object();
-}
-
-/**
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/finally
  * https://github.com/tc39/proposal-promise-finally/blob/master/polyfill.js
  */
