@@ -185,7 +185,7 @@ const THEMES = {
        '#6355BA', '#A51BB5', '#53671E', '#363A3D',
        '#4B6A88', '#D93025', '#1A73E8', '#B05E3B',
        '#7462E0', '#C61AD9', '#60781D', '#3C4043']),
-  'hterm': new Theme('classic',
+  'classic': new Theme('classic',
       'TERMINAL_THEME_CLASSIC_LABEL', '#101010', '#FFFFFF',
       'rgba(255, 0, 0, 0.5)', lib.colors.stockColorPalette.slice(0, 16)),
   'solarizedDark': new Theme('solarizedDark',
