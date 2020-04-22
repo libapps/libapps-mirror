@@ -202,7 +202,7 @@ nassh.App.prototype.omniboxOnInputCancelled_ = function() {
 /**
  * Bind our callbacks to the omnibox.
  *
- * @param {!chrome.Omnibox} omnibox The omnibox instance to bind to.
+ * @param {!typeof chrome.omnibox} omnibox The omnibox instance to bind to.
  */
 nassh.App.prototype.installOmnibox = function(omnibox) {
   this.omnibox_ = omnibox;

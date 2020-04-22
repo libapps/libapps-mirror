@@ -30,6 +30,32 @@ URI = 'https://dl.google.com/closure-compiler/compiler-%s.tar.gz' % (VERSION,)
 CLOSURE = os.path.join(libdot.BIN_DIR, '.closure-compiler.%s.jar' % (VERSION,))
 
 
+# Where we store externs files.
+EXTERNS_DIR = os.path.join(libdot.DIR, 'externs')
+
+# The version of externs that we pull in from closure.  We normally pin to the
+# closure version for stability, but this can be updated independently.
+EXTERNS_VERSION = VERSION
+
+
+def update_externs():
+    """Update our local cache of externs."""
+    URI_TEMPLATE = ('https://github.com/google/closure-compiler/raw/'
+                    f'v{EXTERNS_VERSION}/contrib/externs/%(name)s.js')
+
+    for name in ('chrome', 'chrome_extensions'):
+        uri = URI_TEMPLATE % {'name': name}
+        path = os.path.join(EXTERNS_DIR,
+                            f'closure-{name}-v{EXTERNS_VERSION}.js')
+        if os.path.exists(path):
+            continue
+
+        for oldpath in glob.glob(os.path.join(
+                EXTERNS_DIR, f'closure-{name}-v*.js')):
+            os.unlink(oldpath)
+        libdot.fetch(uri, path)
+
+
 def update_closure():
     """Update our local cache of Google's closure compiler."""
     if os.path.exists(CLOSURE):
@@ -56,6 +82,7 @@ def main(argv):
     libdot.setup_logging()
 
     update_closure()
+    update_externs()
 
     # Run it!
     os.execvp('java', ['java', '-jar', CLOSURE] + argv)

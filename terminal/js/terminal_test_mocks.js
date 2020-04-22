@@ -4,6 +4,9 @@
 
 'use strict';
 
+/**
+ * @suppress {constantProperty} Allow tests in browsers.
+ */
 window.chrome = window.chrome || {};
 
 /**

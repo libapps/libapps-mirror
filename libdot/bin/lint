@@ -229,6 +229,7 @@ def run_closure(opts, extra_args=()):
 
     comments_path = kokoro_comments_path(opts.gerrit_comments_file, 'closure')
 
+    libdot.closure_compiler.update_externs()
     externs = []
     for extern in glob.glob(os.path.join(libdot.DIR, 'externs', '*.js')):
         externs += ['--externs', os.path.relpath(extern, os.getcwd())]
