@@ -336,4 +336,8 @@ def main(argv, paths=(), mkdeps=None, eslint_args=(),
 
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:], paths=_get_default_paths()))
+    sys.exit(main(sys.argv[1:], paths=_get_default_paths(),
+                  closure_args=DEFAULT_CLOSURE_ARGS + (
+                      # TODO(vapier): We want to turn this on at some point.
+                      '--jscomp_off=strictMissingProperties',
+                  )))

@@ -51,6 +51,8 @@ def main(argv):
         '--externs=%s' % os.path.relpath(x) for x in
         glob.glob(os.path.join(terminal.DIR, 'externs', '*.js'))]
     closure_args = list(libdot.lint.DEFAULT_CLOSURE_ARGS) + externs + [
+        # TODO(vapier): We want to turn this on at some point.
+        '--jscomp_off=strictMissingProperties',
         os.path.relpath(DEPS_FILE)]
     return libdot.lint.main(argv, paths=_get_default_paths(), mkdeps=mkdeps,
                             closure_args=closure_args)
