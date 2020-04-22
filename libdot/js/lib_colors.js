@@ -266,9 +266,12 @@ lib.colors.rgbToHex = function(rgb) {
       (parseInt(ary[0], 10) << 16) |
       (parseInt(ary[1], 10) <<  8) |
       (parseInt(ary[2], 10) <<  0)).toString(16), 6);
-  return ary[3] === undefined || ary[3] === '1'
-      ? hex
-      : `${hex}${lib.f.zpad(Math.round(255 * ary[3]).toString(16), 2)}`;
+  if (ary[3] === undefined || ary[3] === '1') {
+    return hex;
+  } else {
+    const alpha = Math.round(255 * parseFloat(ary[3])).toString(16);
+    return `${hex}${lib.f.zpad(alpha, 2)}`;
+  }
 };
 
 /**
@@ -312,9 +315,9 @@ lib.colors.crackHSL = function(color) {
  * @return {!Array<number>} The RGBA values.
  */
 lib.colors.hslxArrayToRgbaArray = function(hslx) {
-  const hue = hslx[0] / 60;
-  const sat = hslx[1] / 100;
-  const light = hslx[2] / 100;
+  const hue = parseInt(hslx[0], 10) / 60;
+  const sat = parseInt(hslx[1], 10) / 100;
+  const light = parseInt(hslx[2], 10) / 100;
 
   // The following algorithm has been adapted from:
   //     https://www.w3.org/TR/css-color-4/#hsl-to-rgb
@@ -434,9 +437,9 @@ lib.colors.hslToRGB = function(hsl) {
  * @return {!Array<number>} The HSLA values.
  */
 lib.colors.rgbxArrayToHslaArray = function(rgbx) {
-  const r = rgbx[0] / 255;
-  const g = rgbx[1] / 255;
-  const b = rgbx[2] / 255;
+  const r = parseInt(rgbx[0], 10) / 255;
+  const g = parseInt(rgbx[1], 10) / 255;
+  const b = parseInt(rgbx[2], 10) / 255;
 
   const min = Math.min(r, g, b);
   const max = Math.max(r, g, b);
@@ -585,8 +588,10 @@ lib.colors.mix = function(base, tint, percent) {
   const ary2 = lib.colors.crackRGB(tint);
 
   for (let i = 0; i < 4; ++i) {
-    const diff = ary2[i] - ary1[i];
-    ary1[i] = Math.round(parseInt(ary1[i], 10) + diff * percent).toString();
+    const basecol = parseInt(ary1[i], 10);
+    const tintcol = parseInt(ary2[i], 10);
+    const diff = tintcol - basecol;
+    ary1[i] = Math.round(base + diff * percent).toString();
   }
 
   return lib.colors.arrayToRGBA(ary1);
