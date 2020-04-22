@@ -123,7 +123,6 @@
         }
       }
     }
-    breaks.initial = 0;
     return breaks;
   }
 
@@ -206,7 +205,7 @@
 
     get position() {
       if (this._cur < 0 || !this._breaks.length) {
-        return this._breaks.initial;
+        return 0;
       }
       if (this._cur >= this._breaks.length) {
         return this._breaks[this._breaks.length - 1].pos;
@@ -220,12 +219,11 @@
   }
 
   global.Intl.Segmenter = class Segmenter {
-    constructor(locale, options) {
+    constructor(locale, {localeMatcher, granularity = 'grapheme'} = {}) {
       this._locale = Array.isArray(locale)
         ? locale.map((s) => String(s)) : String(locale || navigator.language);
-      options = Object.assign({granularity: 'grapheme'}, options);
-      this._granularity = GRANULARITIES.includes(options.granularity)
-        ? options.granularity : 'grapheme';
+      this._granularity = GRANULARITIES.includes(granularity)
+        ? granularity : 'grapheme';
     }
 
     segment(string) {
