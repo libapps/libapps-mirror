@@ -100,7 +100,7 @@ lib.i18n.replaceReferences = function(msg, args = []) {
  * https://cs.chromium.org/chromium/src/ui/base/l10n/l10n_util.cc?type=cs&q=CheckAndResolveLocale
  *
  * @param {string} language language from navigator.languages.
- * @return {string} locale for translation.
+ * @return {!Array<string>} priority list of locales for translation.
  */
 lib.i18n.resolveLanguage = function(language) {
   const [lang, region] = language.toLowerCase().split(/[-_]/, 2);
@@ -109,26 +109,26 @@ lib.i18n.resolveLanguage = function(language) {
   // Spanish locale).
   if (lang == 'es') {
     if (region != undefined && region != 'es') {
-      return 'es_419';
+      return ['es_419'];
     }
-    return 'es';
+    return ['es'];
   }
 
   // Map pt-RR other than pt-BR to pt-PT. Note that "pt" by itself maps to
   // pt-BR (logic below).
   if (lang == 'pt') {
     if (region == 'br' || region == undefined) {
-      return 'pt_BR';
+      return ['pt_BR'];
     }
-    return 'pt_PT';
+    return ['pt_PT'];
   }
 
   // Map zh-HK and zh-MO to zh-TW. Otherwise, zh-FOO is mapped to zh-CN.
   if (lang == 'zh') {
     if (region == 'tw' || region == 'hk' || region == 'mo') {
-      return 'zh_TW';
+      return ['zh_TW'];
     }
-    return 'zh_CN';
+    return ['zh_CN'];
   }
 
   // Map Australian, Canadian, Indian, New Zealand and South African
@@ -136,10 +136,14 @@ lib.i18n.resolveLanguage = function(language) {
   if (lang == 'en') {
     if (region == 'au' || region == 'ca' || region == 'in' || region == 'nz' ||
         region == 'za') {
-      return 'en_GB';
+      return ['en_GB'];
     }
-    return 'en';
+    return ['en'];
   }
 
-  return language.replace(/-/g, '_');
+  if (region) {
+    return [language.replace(/-/g, '_'), lang];
+  } else {
+    return [lang];
+  }
 };

@@ -28,14 +28,19 @@ lib.MessageManager = function(languages, useCrlf = false) {
    * @const
    */
   this.languages_ = [];
-  for (let i = 0; i < languages.length; i++) {
-    const lang = lib.i18n.resolveLanguage(languages[i]);
-    // There is no point having any language with lower priorty than 'en' since
-    // 'en' always contains all messages.
-    if (lang == 'en') {
-      break;
+  let stop = false;
+  for (let i = 0; i < languages.length && !stop; i++) {
+    for (const lang of lib.i18n.resolveLanguage(languages[i])) {
+      // There is no point having any language with lower priorty than 'en'
+      // since 'en' always contains all messages.
+      if (lang == 'en') {
+        stop = true;
+        break;
+      }
+      if (!this.languages_.includes(lang)) {
+        this.languages_.push(lang);
+      }
     }
-    this.languages_.push(lang);
   }
   // Always have 'en' as last fallback.
   this.languages_.push('en');
