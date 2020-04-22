@@ -198,7 +198,8 @@ nassh.CommandInstance.prototype.run = function() {
       const htermVer = lib.resource.getData('hterm/changelog/version');
       const htermRev = lib.resource.getData('hterm/git/HEAD');
       const htermAgeMinutes =
-          Math.round((new Date() - new Date(htermDate)) / 1000 / 60);
+          Math.round((new Date().getTime() - new Date(htermDate).getTime()) /
+                     1000 / 60);
 
       this.io.println(`[dev] hterm v${htermVer} (git ${htermRev})`);
       this.io.println(`[dev] built on ${htermDate} ` +
