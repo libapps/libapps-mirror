@@ -14,13 +14,16 @@
 lib.Storage.Local = function() {
   this.observers_ = [];
   this.storage_ = window.localStorage;
-  window.addEventListener('storage', this.onStorage_.bind(this));
+  // Closure thinks all addEventListener calls take Events.
+  window.addEventListener(
+      'storage',
+      /** @type {function(!Event)} */ (this.onStorage_.bind(this)));
 };
 
 /**
  * Called by the storage implementation when the storage is modified.
  *
- * @param {!Event} e The setting that has changed.
+ * @param {!StorageEvent} e The setting that has changed.
  */
 lib.Storage.Local.prototype.onStorage_ = function(e) {
   if (e.storageArea != this.storage_) {

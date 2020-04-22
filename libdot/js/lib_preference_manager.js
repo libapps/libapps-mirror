@@ -412,7 +412,7 @@ lib.PreferenceManager.prototype.notifyChange_ = function(name) {
  */
 lib.PreferenceManager.prototype.createChild = function(
     listName, hint = undefined, id = undefined) {
-  const ids = this.get(listName);
+  const ids = /** @type {!Array<string>} */ (this.get(listName));
 
   if (id) {
     if (ids.indexOf(id) != -1) {
@@ -455,7 +455,7 @@ lib.PreferenceManager.prototype.removeChild = function(listName, id) {
   const prefs = this.getChild(listName, id);
   prefs.resetAll();
 
-  const ids = this.get(listName);
+  const ids = /** @type {!Array<string>} */ (this.get(listName));
   const i = ids.indexOf(id);
   if (i != -1) {
     ids.splice(i, 1);
@@ -516,7 +516,7 @@ lib.PreferenceManager.prototype.syncChildList = function(
   }
 
   // The list of child ids that we *should* have a manager for.
-  const currentIds = this.get(listName);
+  const currentIds = /** @type {!Array<string>} */ (this.get(listName));
 
   // The known managers at the start of the sync.  Any manager still in this
   // list at the end should be discarded.
@@ -816,7 +816,7 @@ lib.PreferenceManager.prototype.exportAsJson = function() {
   for (const name in this.prefRecords_) {
     if (name in this.childLists_) {
       rv[name] = [];
-      const childIds = this.get(name);
+      const childIds = /** @type {!Array<string>} */ (this.get(name));
       for (let i = 0; i < childIds.length; i++) {
         const id = childIds[i];
         rv[name].push({id: id, json: this.getChild(name, id).exportAsJson()});

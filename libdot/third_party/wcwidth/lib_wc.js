@@ -361,7 +361,8 @@ lib.wc.unambiguous = [
  * Binary search to check if the given unicode character is in the table.
  *
  * @param {number} ucs A unicode character code.
- * @param {!Object} table A sorted list of internals to match against.
+ * @param {!Array<!Array<number>>} table A sorted list of internals to match
+ *     against.
  * @return {boolean} True if the given character is in the table.
  */
 lib.wc.binaryTableSearch_ = function(ucs, table) {
