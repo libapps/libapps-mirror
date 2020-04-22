@@ -8,7 +8,7 @@
  * @externs
  */
 
-const chai = {};
+var chai = {};
 
 /**
  * @param {*} expression

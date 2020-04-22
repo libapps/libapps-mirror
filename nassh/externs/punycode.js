@@ -8,7 +8,7 @@
  * @externs
  */
 
-const punycode$$module$js$nassh_deps_rollup = {};
+var punycode$$module$js$nassh_deps_rollup = {};
 
 /**
  * @param {string} input

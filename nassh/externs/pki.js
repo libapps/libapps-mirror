@@ -8,7 +8,7 @@
  * @externs
  */
 
-const pkijs$$module$js$nassh_deps_rollup = {};
+var pkijs$$module$js$nassh_deps_rollup = {};
 pkijs$$module$js$nassh_deps_rollup.Certificate = Certificate;
 pkijs$$module$js$nassh_deps_rollup.RSAPublicKey = RSAPublicKey;
 

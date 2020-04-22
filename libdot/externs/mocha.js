@@ -17,7 +17,7 @@ Mocha.Runner = function() {};
 /** @param {Error} err */
 Mocha.Runner.prototype.uncaught = function(err) {};
 
-const mocha = {};
+var mocha = {};
 
 mocha.checkLeaks = mocha.run = function() {};
 
@@ -25,28 +25,28 @@ mocha.checkLeaks = mocha.run = function() {};
 mocha.setup = function(opts) {};
 
 /** @param {function(function())} fn */
-const after = function(fn) {};
+var after = function(fn) {};
 
 /** @param {function(function())} fn */
-const afterEach = function(fn) {};
+var afterEach = function(fn) {};
 
 /** @param {function(function())} fn */
-const before = function(fn) {};
+var before = function(fn) {};
 
 /** @param {function(function())} fn */
-const beforeEach = function(fn) {};
+var beforeEach = function(fn) {};
 
 /**
  * @param {string} name
  * @param {function()} fn
  */
-const describe = function(name, fn) {};
+var describe = function(name, fn) {};
 
 /**
  * @param {string} name
  * @param {function(function())} fn
  */
-const it = function(name, fn) {};
+var it = function(name, fn) {};
 
 /**
  * @param {string} name

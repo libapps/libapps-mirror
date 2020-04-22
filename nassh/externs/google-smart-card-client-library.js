@@ -8,7 +8,7 @@
  * @externs
  */
 
-const GoogleSmartCard = {};
+var GoogleSmartCard = {};
 
 /** @const */
 GoogleSmartCard.PcscLiteClient = {};

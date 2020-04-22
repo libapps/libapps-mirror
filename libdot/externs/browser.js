@@ -7,7 +7,7 @@
  * @externs
  */
 
-const browser = {};
+var browser = {};
 
 /** @const */
 browser.browserAction = {};
@@ -37,7 +37,7 @@ ChromeBaseEvent.prototype.addListener = function(callback) {};
 /** @param {LISTENER} callback */
 ChromeBaseEvent.prototype.removeListener = function(callback) {};
 
-const chrome = {};
+var chrome = {};
 
 /** @const */
 chrome.app = {};

@@ -13,4 +13,4 @@
  * @param {number} n
  * @return {number}
  */
-const BigInt = function(n) {};
+var BigInt = function(n) {};

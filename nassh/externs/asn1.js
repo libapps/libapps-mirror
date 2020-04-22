@@ -8,7 +8,7 @@
  * @externs
  */
 
-const asn1js$$module$js$nassh_deps_rollup = {};
+var asn1js$$module$js$nassh_deps_rollup = {};
 
 /**
  * @param {!ArrayBuffer} buffer
