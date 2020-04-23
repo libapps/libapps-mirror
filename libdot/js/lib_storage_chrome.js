@@ -22,8 +22,8 @@ lib.Storage.Chrome = function(storage) {
 /**
  * Called by the storage implementation when the storage is modified.
  *
- * @param {!Array<*>} changes Object mapping each key that changed to its
- *     corresponding storage.StorageChange for that item.
+ * @param {!Object<string, !StorageChange>} changes Object mapping each key that
+ *     changed to its corresponding StorageChange for that item.
  * @param {string} areaname The name of the storage area ("sync", "local",
  *     or "managed") the changes are for.
  */
@@ -40,8 +40,8 @@ lib.Storage.Chrome.prototype.onChanged_ = function(changes, areaname) {
 /**
  * Register a function to observe storage changes.
  *
- * @param {function(!Object)} callback The function to invoke when the storage
- *     changes.
+ * @param {function(!Object<string, !StorageChange>)} callback The function to
+ *     invoke when the storage changes.
  * @override
  */
 lib.Storage.Chrome.prototype.addObserver = function(callback) {
@@ -51,7 +51,8 @@ lib.Storage.Chrome.prototype.addObserver = function(callback) {
 /**
  * Unregister a change observer.
  *
- * @param {function(!Object)} callback A previously registered callback.
+ * @param {function(!Object<string, !StorageChange>)} callback A previously
+ *     registered callback.
  * @override
  */
 lib.Storage.Chrome.prototype.removeObserver = function(callback) {

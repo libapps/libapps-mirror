@@ -226,6 +226,31 @@ chrome.runtime.onMessageExternal;
 chrome.runtime.sendMessage = function(
     extensionIdOrRequest, request, callback) {};
 
+/**
+ * The event listener for Storage receives an Object mapping each
+ * key that changed to its corresponding StorageChange for that item.
+ *
+ * Listener will receive an object that maps each key to its StorageChange,
+ * and the namespace ("sync" or "local") of the storage area the changes
+ * are for.
+ * @see https://developer.chrome.com/extensions/storage.html
+ * @interface
+ * @extends {ChromeBaseEvent<function(!Object<string, !StorageChange>, string)>}
+ */
+function StorageChangeEvent() {}
+
+/**
+ * @see https://developer.chrome.com/extensions/storage.html#type-StorageChange
+ * @constructor
+ */
+function StorageChange() {}
+
+/** @type {?} */
+StorageChange.prototype.oldValue;
+
+/** @type {?} */
+StorageChange.prototype.newValue;
+
 /** @const */
 chrome.storage = {};
 
@@ -235,7 +260,7 @@ chrome.storage.local;
 /** @type {!StorageArea} */
 chrome.storage.managed;
 
-/** @type {!ChromeBaseEvent<function(!Array<*>, string)>} */
+/** @type {!StorageChangeEvent} */
 chrome.storage.onChanged;
 
 /** @type {!StorageArea} */
