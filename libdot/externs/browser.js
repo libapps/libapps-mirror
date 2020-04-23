@@ -171,13 +171,23 @@ chrome.runtime.connect = function(id) {};
 /** @type {!Event} */
 chrome.runtime.connect.onDisconnect;
 
+/** @constructor */
+chrome.runtime.Manifest = function() {};
+
+/** @type {string} */
+chrome.runtime.Manifest.prototype.name;
+
+/** @type {string} */
+chrome.runtime.Manifest.prototype.version;
+
 /**
- * @return {{
- *     name: string,
- *     version: string,
- *     icons: !Object<number, string>,
- * }}
+ * Pending in cl/309118680.
+ *
+ * @type {!Object<string, string>}
  */
+chrome.runtime.Manifest.prototype.icons;
+
+/** @return {!chrome.runtime.Manifest} */
 chrome.runtime.getManifest = function() {};
 
 /** @param {function(!Window)} callback */

@@ -18,11 +18,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // Polyfill chrome.runtime.getManifest since it is not available when
     // running as chrome://terminal.  We require name, version, and icons.
     chrome.runtime.getManifest = () => {
-      return {
+      return /** @type {!chrome.runtime.Manifest} */ ({
         'name': 'Terminal',
         'version': 'system',
         'icons': {'192': '/images/dev/crostini-192.png'},
-      };
+      });
     };
   }
 
