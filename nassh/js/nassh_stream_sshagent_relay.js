@@ -118,13 +118,12 @@ nassh.Stream.SSHAgentRelay.prototype.trySendPacket_ = function() {
   }
 
   // See if we've got the message body yet.
-  if (this.writeBuffer_.length < this.pendingMessageSize_) {
+  if (this.writeBuffer_.length < lib.notNull(this.pendingMessageSize_)) {
     return;
   }
 
   // Send the body to the extension.
-  const data =
-      this.writeBuffer_.subarray(0, lib.notNull(this.pendingMessageSize_));
+  const data = this.writeBuffer_.subarray(0, this.pendingMessageSize_);
   this.writeBuffer_ = this.writeBuffer_.subarray(this.pendingMessageSize_);
   // Restart the message process.
   this.pendingMessageSize_ = null;

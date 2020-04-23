@@ -390,7 +390,7 @@ nassh.PreferencesEditor.prototype.colorSync = function(key, pref) {
 
   if (rgba) {
     cinput.value = lib.colors.rgbToHex(rgba);
-    ainput.value = lib.colors.crackRGB(rgba)[3] * 100;
+    ainput.value = parseFloat(lib.colors.crackRGB(rgba)[3]) * 100;
   } else {
     // If pref could not be normalized, then reset.
     this.reset(cinput);

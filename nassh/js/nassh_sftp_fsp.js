@@ -66,7 +66,8 @@ nassh.sftp.fsp.sanitizeMetadata = function(file, options) {
     metadata.size = file.size;
   }
   if (options.modificationTime) {
-    metadata.modificationTime = new Date(file.lastModified * 1000);
+    metadata.modificationTime =
+        new Date(lib.notUndefined(file.lastModified) * 1000);
   }
   return metadata;
 };

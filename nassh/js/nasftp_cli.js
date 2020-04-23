@@ -54,7 +54,7 @@ nasftp.ProgressBar.prototype.PERCENTAGE = Symbol('Percentage');
  *
  * @param {number=} pos The new byte count.
  */
-nasftp.ProgressBar.prototype.update = function(pos) {
+nasftp.ProgressBar.prototype.update = function(pos = 0) {
   if (this.mode_ == this.RANDOM) {
     this.io_.print(`${String.fromCodePoint(this.pos_)}\r`);
     // Pick a new random code point.

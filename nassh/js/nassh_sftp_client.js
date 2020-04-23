@@ -170,12 +170,12 @@ nassh.sftp.Client.prototype.parseBuffer_ = function() {
   }
 
   // See if we've got the entire packet yet.
-  if (this.buffer_.getUnreadCount() < this.pendingMessageSize_) {
+  if (this.buffer_.getUnreadCount() < lib.notNull(this.pendingMessageSize_)) {
     return false;
   }
 
   // Pull out the packet from the buffer.
-  const data = this.buffer_.read(lib.notNull(this.pendingMessageSize_));
+  const data = this.buffer_.read(this.pendingMessageSize_);
   // Restart the message process.
   this.pendingMessageSize_ = null;
 
