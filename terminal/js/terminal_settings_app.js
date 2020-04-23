@@ -9,8 +9,7 @@
  */
 
 import {css, html, LitElement} from './lit_element.js';
-import {SUPPORTED_FONT_SIZES, SUPPORTED_FONT_FAMILIES} from
-    './terminal_common.js';
+import {SUPPORTED_FONT_SIZES} from './terminal_common.js';
 import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_settings_ansi_colors.js';
 import './terminal_settings_app.js';
@@ -18,6 +17,7 @@ import './terminal_settings_category_selector.js';
 import './terminal_settings_checkbox.js';
 import './terminal_settings_colorpicker.js';
 import './terminal_settings_dropdown.js';
+import './terminal_settings_fonts.js';
 import './terminal_settings_text.js';
 import './terminal_settings_theme.js';
 import './terminal_settings_transparency_slider.js';
@@ -150,9 +150,12 @@ export class TerminalSettingsApp extends LitElement {
         border-bottom: 1px solid rgba(0, 0, 0, 0.14);
         display: flex;
         flex-wrap: nowrap;
-        justify-content: space-between;
         margin: 0 0 0 32px;
         padding: 0;
+      }
+
+      .setting-container>h4:first-child {
+        flex-grow: 1;
       }
 
       terminal-settings-ansi-colors {
@@ -160,13 +163,12 @@ export class TerminalSettingsApp extends LitElement {
         padding: 6px 0;
       }
 
-      terminal-settings-dropdown[preference='font-family'] {
-        display: inline-block;
+      terminal-settings-fonts {
+        margin-right: 6px;
         min-width: 170px;
       }
 
       terminal-settings-dropdown[preference='font-size'] {
-        display: inline-block;
         min-width: 80px;
       }
     `];
@@ -230,25 +232,18 @@ export class TerminalSettingsApp extends LitElement {
             <h3>${msg('TERMINAL_TITLE_PREF_TEXT')}</h3>
 
             <ul class="section-body">
-              <!-- TODO(lxj@google.com): merge options font family and font
-                  size -->
               <li class="setting-container">
                 <h4>${msg('TERMINAL_NAME_PREF_FONT')}</h4>
-                <div>
-                  <terminal-settings-dropdown preference="font-family"
-                      title="${msg('HTERM_PREF_FONT_FAMILY')}"
-                      .options="${Array.from(SUPPORTED_FONT_FAMILIES.keys())
-                                       .map((value) => ({value}))}">
-                  </terminal-settings-dropdown>
-                  <!-- TODO(lxj@google.com): We should allow user to input a
-                      text size not in the list. -->
-                  <terminal-settings-dropdown preference="font-size"
-                      title="${msg('HTERM_PREF_FONT_SIZE')}"
-                      .options="${SUPPORTED_FONT_SIZES.map(
-                                      (value) => ({value}))}"
-                  >
-                  </terminal-settings-dropdown>
-                </div>
+                <terminal-settings-fonts
+                    title="${msg('HTERM_PREF_FONT_FAMILY')}">
+                </terminal-settings-fonts
+                <!-- TODO(lxj@google.com): We should allow user to input a
+                    text size not in the list. -->
+                <terminal-settings-dropdown preference="font-size"
+                    title="${msg('HTERM_PREF_FONT_SIZE')}"
+                    .options="${SUPPORTED_FONT_SIZES.map((value) => ({value}))}"
+                >
+                </terminal-settings-dropdown>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_FOREGROUND_COLOR')}">
@@ -259,7 +254,6 @@ export class TerminalSettingsApp extends LitElement {
               <li class="setting-container"
                   title="${msg('HTERM_PREF_FONT_SMOOTHING')}">
                 <h4>${msg('TERMINAL_NAME_PREF_ANTI_ALIAS')}</h4>
-                <!-- TODO(juwa@google.com): Add element -->
                 <terminal-settings-checkbox preference="font-smoothing">
                 </terminal-settings-checkbox>
               </li>

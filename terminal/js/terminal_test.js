@@ -29,9 +29,13 @@ test.listenForPrefChange = function(prefMgr, prefName) {
 };
 
 // Setup the mocha framework.
-// TODO(juwa@google.com): Move preference manager into a module such that it is
+// TODO(lxj@google.com): Move preference manager into a module such that it is
 // no longer a global variable.
-mocha.setup({ui: 'bdd', globals: ['PreferenceManager', 'preferenceManager']});
+mocha.setup({ui: 'bdd', globals: [
+  'PreferenceManager',
+  'preferenceManager',
+  'webFontPromises',
+]});
 mocha.checkLeaks();
 
 // Add a global shortcut to the assert API.

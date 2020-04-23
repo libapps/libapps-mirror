@@ -117,11 +117,16 @@ export function normalizePrefsInPlace(prefs) {
  *
  * @param {!Document} document The document to load the web font into.
  * @param {string} fontFamily The font family to load.
- * @return {!Promise<boolean>} False if the font is not a web font.
+ * @param {?string=} link_id The id for the <link> element. Existing element
+ *     with the same id will be removed first. If this is not specified, a
+ *     default value will be used.
+ * @return {!Promise<boolean>} Resolve to false if the font is not a web font.
+ *     Otherwise, it either resolves to true or rejects depending on whether the
+ *     loading is successful.
  */
-export function loadWebFont(document, fontFamily) {
+export function loadWebFont(document, fontFamily, link_id) {
   return new Promise((resolve, reject) => {
-    const LINK_ID = 'terminal:web-font-link';
+    link_id = link_id || 'terminal:web-font-link';
     if (!SUPPORTED_FONT_FAMILIES.get(fontFamily)) {
       // Not a web font.
       resolve(false);
@@ -129,12 +134,12 @@ export function loadWebFont(document, fontFamily) {
     }
 
     const head = document.querySelector('head');
-    let link = head.querySelector(`#${CSS.escape(LINK_ID)}`);
+    let link = head.querySelector(`#${CSS.escape(link_id)}`);
     if (link) {
       link.remove();
     }
     link = document.createElement('link');
-    link.id = LINK_ID;
+    link.id = link_id;
     link.href = `https://fonts.googleapis.com/css2?family=` +
         `${encodeURIComponent(fontFamily)}&display=swap`;
     link.rel = 'stylesheet';

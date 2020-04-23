@@ -6,13 +6,24 @@
  * @fileoverview Initializes global state used in terminal settings.
  */
 
-import {definePrefs, normalizePrefsInPlace, watchBackgroundColor}
-    from './terminal_common.js';
+import {SUPPORTED_FONT_FAMILIES, definePrefs, loadWebFont,
+  normalizePrefsInPlace, watchBackgroundColor} from './terminal_common.js';
 
 let resolveLibdotInitialized;
 window.libdotInitialized = new Promise((resolve) => {
   resolveLibdotInitialized = resolve;
 });
+
+// We are loading all web fonts at the beginning because some settings UI need
+// to know whether a web font is available.
+window.webFontPromises = new Map(
+    Array.from(SUPPORTED_FONT_FAMILIES)
+        .filter(([f, isWebFont]) => isWebFont)
+        .map(([f]) => [
+          f,
+          loadWebFont(document, f, `terminal-settings:font:${f}`),
+        ]),
+);
 
 window.addEventListener('DOMContentLoaded', (event) => {
   lib.registerInit('terminal-private-storage', (onInit) => {
