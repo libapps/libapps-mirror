@@ -43,19 +43,6 @@ export const BELL_SOUND_CONVERTER = {
   fromChecked: (checked) => checked ? 'lib-resource:hterm/audio/bell' : '',
 };
 
-/**
- * Returns translated value for MACRO_CASE of
- * `TERMINAL_SETTINGS_DROPDOWN_${name}_${value}`.
- *
- * @param {string} name Name of the dropdown, typically preference name.
- * @param {*} value Value of the option.
- * @return {string} Translated string to display.
- */
-function translateDropdown(name, value) {
-  const key = `TERMINAL_SETTINGS_DROPDOWN_${name}_${value}`;
-  return hterm.messageManager.get(key.replace(/\W/g, '_').toUpperCase());
-}
-
 export class TerminalSettingsApp extends LitElement {
   /** @override */
   static get properties() {
@@ -168,11 +155,6 @@ export class TerminalSettingsApp extends LitElement {
         padding: 0;
       }
 
-      terminal-settings-dropdown {
-        margin: 8px 0;
-        line-height: 32px;
-      }
-
       terminal-settings-ansi-colors {
         margin-right: -6px;
         padding: 6px 0;
@@ -193,6 +175,14 @@ export class TerminalSettingsApp extends LitElement {
   /** @override */
   render() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
+
+    const cursorShapeOptions =
+        window.PreferenceManager.defaultPreferences['cursor-shape'].type.map(
+            (value) => ({
+              value,
+              label: msg(`TERMINAL_SETTINGS_DROPDOWN_CURSOR_SHAPE_${value}`),
+            }),
+        );
 
     return html`
         <terminal-settings-category-selector
@@ -247,13 +237,16 @@ export class TerminalSettingsApp extends LitElement {
                 <div>
                   <terminal-settings-dropdown preference="font-family"
                       title="${msg('HTERM_PREF_FONT_FAMILY')}"
-                      .options=${Array.from(SUPPORTED_FONT_FAMILIES.keys())}>
+                      .options="${Array.from(SUPPORTED_FONT_FAMILIES.keys())
+                                       .map((value) => ({value}))}">
                   </terminal-settings-dropdown>
                   <!-- TODO(lxj@google.com): We should allow user to input a
                       text size not in the list. -->
                   <terminal-settings-dropdown preference="font-size"
                       title="${msg('HTERM_PREF_FONT_SIZE')}"
-                      .options=${SUPPORTED_FONT_SIZES}>
+                      .options="${SUPPORTED_FONT_SIZES.map(
+                                      (value) => ({value}))}"
+                  >
                   </terminal-settings-dropdown>
                 </div>
               </li>
@@ -288,7 +281,7 @@ export class TerminalSettingsApp extends LitElement {
                   title="${msg('HTERM_PREF_CURSOR_SHAPE')}">
                 <h4>${msg('TERMINAL_NAME_PREF_SHAPE')}</h4>
                 <terminal-settings-dropdown preference="cursor-shape"
-                    .toText=${translateDropdown.bind(null, 'cursor-shape')}>
+                    .options="${cursorShapeOptions}">
                 </terminal-settings-dropdown>
               </li>
               <li class="setting-container"

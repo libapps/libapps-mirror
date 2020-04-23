@@ -11,12 +11,31 @@ import {css, html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
 
 /**
+ * This is equivalent to |value ?? fallback|, which closure-compiler does not
+ * support yet.
+ *
  * @param {*} value
- * @return {string}
+ * @param {*} fallback
+ * @return {*} value ?? fallback
  */
-function trivialToText(value) {
-  return `${value}`;
+function nullishCoalescing(value, fallback) {
+  if (value === undefined || value === null) {
+    return fallback;
+  }
+  return value;
 }
+
+/**
+ * If |label| is nullish, |value| is used as the label.
+ *
+ * @typedef {{
+ *            value: *,
+ *            label: ?string,
+ *            style: ?string,
+ *            disabled: ?boolean,
+ *          }}
+ */
+let OptionType;
 
 export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   static get is() { return 'terminal-settings-dropdown'; }
@@ -30,14 +49,12 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
       expanded: {
         type: Boolean,
       },
+      // Array of |OptionType| objects.
       options: {
         type: Array,
         attribute: false,
       },
       value: {
-        attribute: false,
-      },
-      toText: {
         attribute: false,
       },
     };
@@ -47,6 +64,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   static get styles() {
     return css`
         :host {
+          line-height: 32px;
           outline: none;
         }
 
@@ -99,11 +117,15 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
           padding: 1px 9px;
         }
 
+        .option[disabled] {
+          opacity: .38;
+        }
+
         .option[aria-selected="true"] {
           background-color: rgb(213, 229, 255);
         }
 
-        .option:hover {
+        .option:not([disabled]):hover {
           background-color: lightgrey;
         }
     `;
@@ -113,27 +135,36 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
     super();
 
     this.expanded = false;
-    /** @public {?Array<*>} */
-    this.options = null;
-    /** @public {function(*): string} */
-    this.toText = trivialToText;
+    /** @public {!Array<!OptionType>} */
+    this.options = [];
   }
 
   /** @override */
   render() {
+    const selectedIndex = this.findSelectedIndex_();
+
     const renderOption = (option, index) => html`
         <li class="option" role="option" tab-index="-1"
-            data-index="${index}" aria-selected="${this.value === option}"
-            @click="${this.onUiChanged_}" >
-          ${this.toText(option)}
+            aria-selected="${index === selectedIndex}"
+            style="${nullishCoalescing(option.style, '')}"
+            ?disabled="${option.disabled === true}"
+            @click="${this.onItemClickedHandler_(index)}">
+          ${nullishCoalescing(option.label, option.value)}
         </li>
     `;
 
+    let selectedLabel = '';
+    let selectedStyle = '';
+    if (selectedIndex !== -1) {
+      const option = this.options[selectedIndex];
+      selectedLabel = nullishCoalescing(option.label, option.value);
+      selectedStyle = nullishCoalescing(option.style, '');
+    }
     return html`
         <div id="container" role="button" aria-expanded="${this.expanded}" >
-          ${this.toText(this.value)}
+          <div style="${selectedStyle}">${selectedLabel}</div>
           <ul id="options" role="listbox">
-            ${this.getOptions_().map(renderOption)}
+            ${this.options.map(renderOption)}
           </ul>
         </div>
     `;
@@ -161,37 +192,43 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
     this.removeEventListener('keydown', this.onKeyDown_);
   }
 
-  selectNth_(index) {
-    const element = this.shadowRoot
-        .querySelector(`.option[data-index="${index}"]`);
-    if (element) {
-      super.uiChanged_(this.getValueFromLiElement_(
-          /** @type {!HTMLLIElement} */ (element)));
-      return true;
-    } else {
-      return false;
+  /**
+   * Select the first enabled option from |options|.
+   *
+   * @param {!Array<!OptionType>} options
+   * @return {boolean} True if an option is selected.
+   */
+  selectFirstEnabled_(options) {
+    for (const option of options) {
+      if (option.disabled !== true) {
+        this.uiChanged_(option.value);
+        return true;
+      }
     }
+    return false;
   }
 
-  selectFirst_() {
-    return this.selectNth_(0);
-  }
-
-  selectLast_() {
-    return this.selectNth_(this.shadowRoot
-        .querySelectorAll(`.option`).length - 1);
+  /**
+   * @return {number} Return the index of the currently selected option, or -1
+   *     if none are selected.
+   */
+  findSelectedIndex_() {
+    return this.options.findIndex((option) => option.value === this.value);
   }
 
   selectPrevious_() {
-    return this.selectNth_(+this.shadowRoot
-        .querySelector(`.option[aria-selected="true"]`)
-        .getAttribute('data-index') - 1);
+    const selected = this.findSelectedIndex_();
+    if (selected != -1) {
+      return this.selectFirstEnabled_(
+          this.options.slice(0, selected).reverse());
+    }
   }
 
   selectNext_() {
-    return this.selectNth_(+this.shadowRoot
-        .querySelector(`.option[aria-selected="true"]`)
-        .getAttribute('data-index') + 1);
+    const selected = this.findSelectedIndex_();
+    if (selected != -1) {
+      return this.selectFirstEnabled_(this.options.slice(selected + 1));
+    }
   }
 
   /** @param {!Event} event */
@@ -219,11 +256,12 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
         break;
       case 'PageUp':
       case 'Home':
-        preventDefault = this.selectFirst_();
+        preventDefault = this.selectFirstEnabled_(this.options);
         break;
       case 'PageDown':
       case 'End':
-        preventDefault = this.selectLast_();
+        preventDefault = this.selectFirstEnabled_(
+            this.options.slice().reverse());
         break;
       case 'ArrowLeft':
       case 'ArrowUp':
@@ -240,33 +278,20 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   }
 
   /**
-   * @private
-   * @return {!Array<*>}
+   * Return a click event handler for a option <li> element.
+   *
+   * @param {number} index The index of the option.
+   * @return {function(!Event)}
    */
-  getOptions_() {
-    if (Array.isArray(this.options)) {
-      return this.options;
-    } else {
-      const preferenceType =
-          window.PreferenceManager.defaultPreferences[this.preference].type;
-      lib.assert(Array.isArray(preferenceType));
-      return preferenceType;
-    }
-  }
-
-  /**
-   * @private
-   * @param {!HTMLLIElement} liElement
-   * @return {*}
-   */
-  getValueFromLiElement_(liElement) {
-    return this.getOptions_()[+liElement.getAttribute('data-index')];
-  }
-
-  /** @param {!Event} event */
-  onUiChanged_(event) {
-    super.uiChanged_(this.getValueFromLiElement_(
-        /** @type {!HTMLLIElement} */ (event.target)));
+  onItemClickedHandler_(index) {
+    return (event) => {
+      const option = this.options[index];
+      if (option.disabled !== true) {
+        this.uiChanged_(option.value);
+        this.expanded = false;
+      }
+      event.stopPropagation();
+    };
   }
 }
 
