@@ -467,7 +467,7 @@ nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
         return nassh.sftp.fsp.copyDirectory_(sourcePath, targetPath, client);
       } else {
         return nassh.sftp.fsp.copyFile_(
-            sourcePath, targetPath, metadata.size, client);
+            sourcePath, targetPath, lib.notUndefined(metadata.size), client);
       }
     })
     .then(onSuccess)

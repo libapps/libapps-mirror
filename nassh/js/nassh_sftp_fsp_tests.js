@@ -144,24 +144,28 @@ it('fsp-instance-check', function() {
  */
 it('fsp-sanitize-metadata', function() {
   // Reduced mock for nassh.sftp.packets.getFileAttrs like fileStatus returns.
-  const fileStat = {
+  const /** @type {!nassh.sftp.FileAttrs} */ fileStat = {
+    flags: 0,
     size: 1024,
     isDirectory: false,
     lastModified: 100,
   };
-  const dirStat = {
+  const /** @type {!nassh.sftp.FileAttrs} */ dirStat = {
+    flags: 0,
     size: 0,
     isDirectory: true,
     lastModified: 200,
   };
   // Mock for directory entry like readDirectory returns.
-  const fileEntry = Object.assign({filename: 'foo.txt'}, fileStat);
-  const dirEntry = Object.assign({filename: 'dir'}, dirStat);
+  const fileEntry = /** @type {!nassh.sftp.File} */ (
+      Object.assign({filename: 'foo.txt'}, fileStat));
+  const dirEntry = /** @type {!nassh.sftp.File} */ (
+      Object.assign({filename: 'dir'}, dirStat));
 
   let ret;
 
   // Nothing is requested so nothing is returned or even checked.
-  ret = nassh.sftp.fsp.sanitizeMetadata({}, {});
+  ret = nassh.sftp.fsp.sanitizeMetadata({flags: 0}, {});
   assert.deepStrictEqual([], Object.keys(ret));
 
   // Check each field by itself.

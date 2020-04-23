@@ -8,7 +8,7 @@ nassh.sftp = {};
 
 /**
  * @typedef {{
- *     flags: (number|undefined),
+ *     flags: number,
  *     size: (number|undefined),
  *     uid: (number|undefined),
  *     gid: (number|undefined),
