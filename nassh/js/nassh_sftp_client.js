@@ -711,7 +711,7 @@ nassh.sftp.Client.prototype.readChunk = function(handle, offset, len) {
  * the fragments.
  *
  * @param {string} handle The handle of the remote file.
- * @param {function(string)} callback The function called on every chunk.
+ * @param {function(!ArrayBuffer)} callback The function called on every chunk.
  * @param {number=} offset The offset to start reading from.
  * @param {number=} length The maximum number of bytes to read.
  * @return {!Promise}
@@ -787,7 +787,7 @@ nassh.sftp.Client.prototype.readChunks = function(
  * automatically by calling the user's callback.
  *
  * @param {string} path The handle of the remote file.
- * @param {function(string)} callback The function called on every chunk.
+ * @param {function(!ArrayBuffer)} callback The function called on every chunk.
  * @param {number=} offset The offset to start reading from.
  * @param {number=} length The maximum number of bytes to read.
  * @return {!Promise}
