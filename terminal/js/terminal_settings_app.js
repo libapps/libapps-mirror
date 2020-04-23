@@ -204,7 +204,11 @@ export class TerminalSettingsApp extends LitElement {
             ?active-category="${this.activeCategory_ === 'appearance'}">
           <section>
             <h3>${msg('TERMINAL_TITLE_THEME')}</h3>
-            <terminal-settings-theme />
+            <ul class="section-body">
+              <li class="setting-container">
+                <terminal-settings-theme />
+              </li>
+            </ul>
           </section>
 
           <section>
