@@ -117,7 +117,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
           padding: 1px 9px;
         }
 
-        .option[disabled] {
+        #current-value[data-disabled], .option[disabled] {
           opacity: .38;
         }
 
@@ -155,14 +155,20 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
 
     let selectedLabel = '';
     let selectedStyle = '';
+    let selectedDisabled = false;
     if (selectedIndex !== -1) {
       const option = this.options[selectedIndex];
       selectedLabel = nullishCoalescing(option.label, option.value);
       selectedStyle = nullishCoalescing(option.style, '');
+      selectedDisabled = option.disabled === true;
     }
     return html`
         <div id="container" role="button" aria-expanded="${this.expanded}" >
-          <div style="${selectedStyle}">${selectedLabel}</div>
+          <div id="current-value" style="${selectedStyle}"
+              ?data-disabled="${selectedDisabled}"
+          >
+            ${selectedLabel}
+          </div>
           <ul id="options" role="listbox">
             ${this.options.map(renderOption)}
           </ul>

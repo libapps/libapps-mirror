@@ -352,7 +352,7 @@ describe('terminal_settings_dropdown_tests.js', () => {
     // Style also apply to the "current value" <div> in additional to the
     // corresponding <li>.
     const getCurrentValueDivStyle = () => this.el.shadowRoot.querySelector(
-        '#container>div').getAttribute('style');
+        '#current-value').getAttribute('style');
     assert.equal(this.el.value, newOptions[0].value);
     assert.equal(getCurrentValueDivStyle(), style);
 
@@ -364,7 +364,7 @@ describe('terminal_settings_dropdown_tests.js', () => {
 
   // This only test that the attr is set. The behavior for disabled <li> element
   // (e.g. click, arrow keys) is tested in other test cases.
-  it('sets-disabled-attr-for-li-with-disabled-option', async function() {
+  it('sets-disabled-attr-for-disabled-option', async function() {
     const newOptions = createOptions();
     newOptions[0].disabled = true;
     this.el.options = newOptions;
@@ -372,5 +372,17 @@ describe('terminal_settings_dropdown_tests.js', () => {
 
     assert.isTrue(this.getNthLiElement(0).hasAttribute('disabled'));
     assert.isFalse(this.getNthLiElement(1).hasAttribute('disabled'));
+
+    // The current value <div> should also be set.
+    const isCurrentValueDisabled = () => this.el.shadowRoot.querySelector(
+        '#current-value').hasAttribute('data-disabled');
+
+    await window.preferenceManager.set(preference, options[0].value);
+    await this.el.updateComplete;
+    assert.isTrue(isCurrentValueDisabled());
+
+    await window.preferenceManager.set(preference, options[1].value);
+    await this.el.updateComplete;
+    assert.isFalse(isCurrentValueDisabled());
   });
 });
