@@ -21,6 +21,43 @@ import libdot
 LICENSE_FILE = os.path.join(nassh.DIR, 'html', 'licenses.html')
 LICENSE_TEMPLATE = os.path.join(nassh.DIR, 'html', 'licenses.html.in')
 
+# Make sure we keep a handle on what licenses we ship.  This is not the list of
+# licenses that are actually used, just all the ones that we're OK with using.
+ALLOWED_LICENSES = {
+    'Apache-2.0',
+    'BSD',
+    'BSD-2-Clause',
+    'BSD-3-Clause',
+    'CC0',
+    'GPL-2',
+    'GPL-2.0',
+    'GPL-3',
+    'GPL-3.0',
+    'ISC',
+    'LGPL',
+    'LGPL-2.1',
+    'LGPL-3',
+    'MIT',
+    'Unlicense',
+    'zlib',
+}
+
+# Licenses that we explicitly never want to use.  Do *not* remove any of these.
+BANNED_LICENSES = {
+    'AGPL',
+    'AGPL-3',
+    'AGPL-3+',
+    'CC-BY-NC',
+    'CC-BY-NC-ND',
+    'CC-BY-NC-SA',
+    'CPAL',
+    'EUPL',
+    'SISSL',
+    'SSPL',
+    'WTFPL',
+}
+assert not BANNED_LICENSES & ALLOWED_LICENSES
+
 
 def mkdeps(rollup=True):
     """Build the dependencies."""
@@ -86,7 +123,8 @@ def concat_licenses():
     if b'Found error' in ret.stderr:
         ret = libdot.run([
             'license-checker', '--search', nassh.DIR, '--unknown',
-            '--production', '--json',
+            '--production', '--json', '--onlyAllow',
+            ';'.join(sorted(ALLOWED_LICENSES)),
         ], capture_output=True, cwd=nassh.DIR)
         res = json.loads(ret.stdout.decode('utf8'))
         for entry in res.values():
