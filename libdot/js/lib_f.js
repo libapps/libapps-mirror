@@ -85,7 +85,7 @@ lib.f.getURL = function(path) {
  * @return {boolean} True if chrome.runtime.getURL is supported.
  */
 lib.f.getURL.chromeSupported = function() {
-  return window.chrome && chrome.runtime && chrome.runtime.getURL;
+  return !!(window.chrome && chrome.runtime && chrome.runtime.getURL);
 };
 
 /**
