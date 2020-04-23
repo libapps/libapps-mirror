@@ -12,7 +12,14 @@ nassh.sftp.fsp = {};
  *                handled by their respective SFTP clients.
  */
 
-// Map of file system ids to their SFTP instances
+/**
+ * Map of file system ids to their SFTP instances.
+ *
+ * @type {!Object<?string, {
+ *   exit: (undefined|function(number, boolean)),
+ *   sftpClient: !nassh.sftp.Client,
+ * }>}
+ */
 nassh.sftp.fsp.sftpInstances = {};
 
 /**
@@ -621,7 +628,7 @@ nassh.sftp.fsp.onUnmountRequested = function(options, onSuccess, onError) {
     // Only clear local state if we know about the mount.
     const sftpInstance = nassh.sftp.fsp.sftpInstances[options.fileSystemId];
     if (sftpInstance !== undefined) {
-      sftpInstance.exit(0); // exit NaCl plugin
+      sftpInstance.exit(0, true); // exit NaCl plugin
       delete nassh.sftp.fsp.sftpInstances[options.fileSystemId];
     }
   }

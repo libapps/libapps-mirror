@@ -104,7 +104,7 @@ nassh.ConfigDialog.prototype.refresh_ = function() {
  * Get the SFTP client from the background page handle.
  *
  * @param {!Window} bg The extension's background page.
- * @param {?string} fsId The unique filesystem id.
+ * @param {string} fsId The unique filesystem id.
  * @return {?nassh.ConfigDialog} The new runtime dialog.
  */
 nassh.ConfigDialog.fromBackgroundPage = function(bg, fsId) {
@@ -122,7 +122,7 @@ nassh.ConfigDialog.fromBackgroundPage = function(bg, fsId) {
 window.addEventListener('DOMContentLoaded', (event) => {
   lib.init(() => {
     const params = new URLSearchParams(document.location.search);
-    const profileId = params.get('profile-id');
+    const profileId = lib.notNull(params.get('profile-id'));
     document.title = `SFTP: ${profileId}`;
     nassh.getBackgroundPage()
       .then((bg) => {

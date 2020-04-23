@@ -1697,7 +1697,10 @@ nassh.CommandInstance.prototype.onSftpInitialised = function() {
     chrome.fileSystemProvider.mount(this.mountOptions);
 
     // Add this instance to list of SFTP instances.
-    nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId] = this;
+    nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId] = {
+      sftpClient: lib.notNull(this.sftpClient),
+      exit: this.exit.bind(this),
+    };
 
     this.io.showOverlay(nassh.msg('MOUNTED_MESSAGE') + ' '
                         + nassh.msg('CONNECT_OR_EXIT_MESSAGE'), null);

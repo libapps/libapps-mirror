@@ -134,7 +134,9 @@ it('fsp-instance-check', function() {
   assert.isFalse(ret);
 
   // Valid ids should pass.
-  nassh.sftp.fsp.sftpInstances['1234'] = {};
+  nassh.sftp.fsp.sftpInstances['1234'] = {
+    sftpClient: /** @type {!nassh.sftp.Client} */ ({}),
+  };
   ret = nassh.sftp.fsp.checkInstanceExists('1234', assert.fail);
   assert.isTrue(ret);
 });
@@ -865,6 +867,7 @@ it('fsp-onUnmount-exit', function() {
   // Create a dummy instance mock that has an exit method.
   let exitStatus;
   nassh.sftp.fsp.sftpInstances['id'] = {
+    sftpClient: /** @type {!nassh.sftp.Client} */ ({}),
     exit: (status) => exitStatus = status,
   };
 
