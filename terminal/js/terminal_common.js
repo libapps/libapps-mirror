@@ -14,13 +14,14 @@
 //
 // @type {!Map<string, boolean>}
 export const SUPPORTED_FONT_FAMILIES = new Map([
-  // The first font is the default font.
+  // The first font is the default font. It must be a local font.
   ['Noto Sans Mono', false],
   ['Cousine', false],
   ['Roboto Mono', true],
   ['Inconsolata', true],
   ['Source Code Pro', true],
 ]);
+export const DEFAULT_FONT_FAMILY = SUPPORTED_FONT_FAMILIES.keys().next().value;
 export const SUPPORTED_FONT_SIZES = [10, 11, 12, 13, 14, 16, 18, 20];
 
 /** @type {!Array<string>} */
@@ -51,19 +52,34 @@ export const DEFAULT_SCREEN_PADDING_SIZE = 8;
 export const DEFAULT_THEME = 'dark';
 
 /**
- * Return a normalized font family.
+ * Convert a font family to a CSS string.
  *
- * @param {string} cssFontFamily The font family.
+ * @param {string} fontFamily one of the font in SUPPORTED_FONT_FAMILIES.
+ * @return {string}
+ */
+export function fontFamilyToCSS(fontFamily) {
+  if (fontFamily === DEFAULT_FONT_FAMILY) {
+    return fontFamily;
+  }
+  return `'${fontFamily}', '${DEFAULT_FONT_FAMILY}'`;
+}
+
+/**
+ * Normalize a css font family string and return one of the font family in
+ * SUPPORTED_FONT_FAMILIES.
+ *
+ * @param {string} cssFontFamily The css font family string.
  * @return {string} The normalized font.
  */
-function normalizeFontFamily(cssFontFamily) {
+export function normalizeCSSFontFamily(cssFontFamily) {
   for (let fontFamily of cssFontFamily.split(',')) {
-    fontFamily = fontFamily.trim();
+    // The regex can never fail, so it is safe to just use the result.
+    fontFamily = fontFamily.match(/^\s*['"]?(.*?)['"]?\s*$/)[1];
     if (SUPPORTED_FONT_FAMILIES.has(fontFamily)) {
       return fontFamily;
     }
   }
-  return SUPPORTED_FONT_FAMILIES.keys().next().value;
+  return DEFAULT_FONT_FAMILY;
 }
 
 /**
@@ -94,8 +110,8 @@ export function definePrefs(prefs) {
  */
 export function normalizePrefsInPlace(prefs) {
 
-  prefs.set('font-family', normalizeFontFamily(
-      /** @type {string} */(prefs.get('font-family'))));
+  prefs.set('font-family', fontFamilyToCSS(normalizeCSSFontFamily(
+      /** @type {string} */(prefs.get('font-family')))));
 
   if (!SUPPORTED_FONT_SIZES.includes(prefs.get('font-size'))) {
     prefs.set('font-size', DEFAULT_FONT_SIZE);
@@ -122,9 +138,8 @@ export function normalizePrefsInPlace(prefs) {
  * @param {?string=} link_id The id for the <link> element. Existing element
  *     with the same id will be removed first. If this is not specified, a
  *     default value will be used.
- * @return {!Promise<boolean>} Resolve to false if the font is not a web font.
- *     Otherwise, it either resolves to true or rejects depending on whether the
- *     loading is successful.
+ * @return {!Promise<boolean>} Reject if cannot load the font. Otherwise, it
+ *     resolves to a boolean indicating whether the font is a web font or not.
  */
 export function loadWebFont(document, fontFamily, link_id) {
   return new Promise((resolve, reject) => {

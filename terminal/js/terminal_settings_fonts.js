@@ -8,7 +8,7 @@
  * @suppress {moduleLoad}
  */
 import {html, LitElement} from './lit_element.js';
-import {SUPPORTED_FONT_FAMILIES} from './terminal_common.js';
+import {SUPPORTED_FONT_FAMILIES, fontFamilyToCSS} from './terminal_common.js';
 import './terminal_settings_dropdown.js';
 
 export class TerminalSettingsFonts extends LitElement {
@@ -40,7 +40,8 @@ export class TerminalSettingsFonts extends LitElement {
   render() {
     const options = Array.from(SUPPORTED_FONT_FAMILIES).map(
         ([font, isWebFont]) => ({
-          value: font,
+          value: fontFamilyToCSS(font),
+          label: font,
           style: `font-family: ${font}`,
           disabled: isWebFont && !this.loadedWebFonts_.includes(font),
         }),

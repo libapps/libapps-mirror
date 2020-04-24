@@ -1847,6 +1847,20 @@
 		"description": "The menu label to clear the terminal screen.",
 		"message": "Terminal Clear"
 	},
+	"TERMINAL_FONT_UNAVAILABLE": {
+		"description": "The title of the notification shown to the user when terminal fails to load a font",
+		"message": "\"$FONT$\" is not available",
+		"placeholders": {
+			"FONT": {
+				"content": "$1",
+				"example": "Noto Sans Mono"
+			}
+		}
+	},
+	"TERMINAL_TRY_AGAIN_WITH_INTERNET": {
+		"description": "Message shown to the user to ask them to try again with the Internet.",
+		"message": "Connect to the Internet and try again."
+	},
 	"TERMINAL_NAME_PREF_ANSI_COLORS": {
 		"description": "Label text shown for the preference to set ANSI colors.  ANSI is an acronym for American National Standards Institute.  Terminals specify a default 16 colors for their display, this configuration allows users to override the default colors.",
 		"message": "ANSI colors"

@@ -6,9 +6,9 @@
  * @fileoverview unit tests for terminal_common.js
  */
 
-import {definePrefs, normalizePrefsInPlace, SUPPORTED_FONT_FAMILIES,
-    SUPPORTED_FONT_SIZES, DEFAULT_FONT_SIZE, DEFAULT_BACKGROUND_COLOR}
-    from './terminal_common.js';
+import {DEFAULT_BACKGROUND_COLOR, DEFAULT_FONT_SIZE, SUPPORTED_FONT_FAMILIES,
+  SUPPORTED_FONT_SIZES, definePrefs, normalizePrefsInPlace, fontFamilyToCSS}
+      from './terminal_common.js';
 
 const fontFamilies = Array.from(SUPPORTED_FONT_FAMILIES.keys());
 
@@ -28,12 +28,16 @@ describe('terminal_common_tests.js', () => {
       assert.equal(preferenceManager.get(pref), after);
     }
 
-    assertNormalizationResult('font-family', 'invalid', fontFamilies[0]);
-    assertNormalizationResult('font-family', fontFamilies[1], fontFamilies[1]);
+    assertNormalizationResult('font-family', 'invalid', fontFamilyToCSS(
+        fontFamilies[0]));
+    assertNormalizationResult('font-family', fontFamilies[1],
+        fontFamilyToCSS(fontFamilies[1]));
+    assertNormalizationResult('font-family', fontFamilyToCSS(fontFamilies[1]),
+        fontFamilyToCSS(fontFamilies[1]));
     // Select first valid font if it is a list
     assertNormalizationResult('font-family',
         `invalid, ${fontFamilies[1]}, ${fontFamilies[0]}`,
-        fontFamilies[1]);
+        fontFamilyToCSS(fontFamilies[1]));
 
     assertNormalizationResult('font-size', 1000, DEFAULT_FONT_SIZE);
     assertNormalizationResult('font-size', SUPPORTED_FONT_SIZES[0],

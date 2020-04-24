@@ -6,7 +6,8 @@
  * @fileoverview Terminal Settings Fonts Element unit tests.
  */
 
-import {SUPPORTED_FONT_FAMILIES} from './terminal_common.js';
+import {SUPPORTED_FONT_FAMILIES, DEFAULT_FONT_FAMILY}
+    from './terminal_common.js';
 import './terminal_settings_fonts.js';
 
 describe('terminal_settings_fonts_tests.js', () => {
@@ -14,7 +15,7 @@ describe('terminal_settings_fonts_tests.js', () => {
     window.preferenceManager =
       new lib.PreferenceManager(new lib.Storage.Memory());
     window.preferenceManager.definePreference('font-family',
-        SUPPORTED_FONT_FAMILIES.keys().next().value);
+        DEFAULT_FONT_FAMILY);
 
     this.loadWebFontsMock = [];
     window.webFontPromises = new Map();
@@ -51,30 +52,30 @@ describe('terminal_settings_fonts_tests.js', () => {
     const waitUpdate = async () => this.el.updateComplete;
 
     // All web fonts should be disabled by default.
-    this.dropdown.options.forEach(({value, disabled}) => {
+    this.dropdown.options.forEach(({label, disabled}) => {
       assert.equal(
           disabled,
-          window.webFontPromises.has(value),
-          `"${value}"->${disabled}`);
+          window.webFontPromises.has(label),
+          `"${label}"->${disabled}`);
     });
 
     // "Load" first web font
     this.loadWebFontsMock[0].resolve(true);
     await waitUpdate();
-    this.dropdown.options.forEach(({value, disabled}) => {
+    this.dropdown.options.forEach(({label, disabled}) => {
       assert.equal(
           disabled,
-          window.webFontPromises.has(value) &&
-              value !== this.loadWebFontsMock[0].font,
-          `"${value}"->${disabled}`);
+          window.webFontPromises.has(label) &&
+              label !== this.loadWebFontsMock[0].font,
+          `"${label}"->${disabled}`);
     });
 
     // Reject the the second web font and "load" the rest.
     this.loadWebFontsMock[1].reject();
     this.loadWebFontsMock.slice(2).forEach(({resolve}) => resolve(true));
     await waitUpdate();
-    this.dropdown.options.forEach(({value, disabled}) => {
-      assert.equal(disabled, value === this.loadWebFontsMock[1].font);
+    this.dropdown.options.forEach(({label, disabled}) => {
+      assert.equal(disabled, label === this.loadWebFontsMock[1].font);
     });
   });
 });
