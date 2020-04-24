@@ -133,14 +133,13 @@ describe('terminal_settings_colorpicker.js', () => {
     assertInternals(this.el, '#FFA60080', 39, 100, 100, 0.5);
   });
 
-  it('updates-preference-when-input-element-blurs', async function() {
+  it('updates-preference-when-input-element-changes', async function() {
     assert.equal(window.preferenceManager.get(preference), orange);
     assertInternals(this.el, '#FFA600', 39, 100, 100, 1);
 
     const hi = getElement(this.el, '#hexinput');
-    hi.focus();
     hi.value = 'purple';
-    hi.blur();
+    hi.dispatchEvent(new Event('change'));
     await allUpdatesComplete(this.el);
 
     assert.equal(window.preferenceManager.get(preference), '#A020F0');
@@ -170,7 +169,7 @@ describe('terminal_settings_colorpicker.js', () => {
 
     // Modify input and press enter.
     hi.value = 'purple';
-    hi.dispatchEvent(new KeyboardEvent('keyup', {key: 'Enter'}));
+    hi.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
     await allUpdatesComplete(this.el);
 
     // Dialog closed and value updated.

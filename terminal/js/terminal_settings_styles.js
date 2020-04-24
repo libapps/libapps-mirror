@@ -43,18 +43,3 @@ export const stylesDialog = css`
     padding: 0 0 20px 0;
   }
 `;
-
-export const stylesText = css`
-  input[type='text'] {
-    background-color: #F1F3F4;
-    border-radius: 4px;
-    border: none;
-    color: #202124;
-    font-family: Roboto;
-    font-size: 13px;
-    outline: none;
-    line-height: 32px;
-    margin: 8px 0 8px 6px;
-    padding: 0 8px;
-  }
-`;

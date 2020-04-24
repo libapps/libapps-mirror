@@ -6,10 +6,11 @@
  * @fileoverview Terminal Settings Text Element unit tests.
  */
 
-import {TerminalSettingsTextElement} from './terminal_settings_text.js';
+import {TerminalSettingsTextfieldElement} from
+    './terminal_settings_textfield.js';
 
-describe('terminal_settings_text_tests.js', () => {
-  const preference = 'terminal_settings_text_tests_preference';
+describe('terminal_settings_textfield_tests.js', () => {
+  const preference = 'terminal_settings_textfield_tests_preference';
 
   beforeEach(function() {
     window.preferenceManager =
@@ -21,8 +22,8 @@ describe('terminal_settings_text_tests.js', () => {
       displayToPreference: (display) => display.toLowerCase(),
     };
 
-    this.el = /** @type {!TerminalSettingsTextElement} */ (
-        document.createElement('terminal-settings-text'));
+    this.el = /** @type {!TerminalSettingsTextfieldElement} */ (
+        document.createElement('terminal-settings-textfield'));
     this.el.setAttribute('preference', preference);
     this.el.converter = converter;
     document.body.appendChild(this.el);
@@ -39,28 +40,29 @@ describe('terminal_settings_text_tests.js', () => {
 
   it('updates-ui-when-preference-changes', async function() {
     assert.equal(window.preferenceManager.get(preference), 'foo');
-    assert.equal(this.el.shadowRoot.getElementById('text').value, 'FOO');
+    assert.equal(this.el.shadowRoot.querySelector('terminal-textfield').value,
+        'FOO');
 
     await window.preferenceManager.set(preference, 'bar');
-    assert.equal(this.el.shadowRoot.getElementById('text').value, 'BAR');
+    assert.equal(this.el.shadowRoot.querySelector('terminal-textfield').value,
+        'BAR');
   });
 
   it('updates-preference-when-ui-changes', async function() {
-    const text = this.el.shadowRoot.getElementById('text');
+    const textfield = this.el.shadowRoot.querySelector('terminal-textfield');
     assert.equal(window.preferenceManager.get(preference), 'foo');
-    assert.equal(text.value, 'FOO');
+    assert.equal(textfield.value, 'FOO');
 
     const prefChanged = test.listenForPrefChange(
         window.preferenceManager, preference);
-    text.focus();
-    text.value = 'BAR';
-    text.blur();
+    textfield.value = 'BAR';
+    textfield.dispatchEvent(new Event('change'));
     await prefChanged;
     assert.equal(window.preferenceManager.get(preference), 'bar');
   });
 
   it('uses-trivial-converter-by-default', async function() {
-    const element = document.createElement('terminal-settings-text');
+    const element = document.createElement('terminal-settings-textfield');
     assert.equal(element.converter.preferenceToDisplay('foo'), 'foo');
     assert.equal(element.converter.displayToPreference('foo'), 'foo');
   });

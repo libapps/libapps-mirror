@@ -18,7 +18,7 @@ import './terminal_settings_checkbox.js';
 import './terminal_settings_colorpicker.js';
 import './terminal_settings_dropdown.js';
 import './terminal_settings_fonts.js';
-import './terminal_settings_text.js';
+import './terminal_settings_textfield.js';
 import './terminal_settings_theme.js';
 import './terminal_settings_transparency_slider.js';
 
@@ -221,9 +221,9 @@ export class TerminalSettingsApp extends LitElement {
               <li class="setting-container"
                   title="${msg('TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP')}">
                 <h4>${msg('TERMINAL_NAME_PREF_IMAGE')}</h4>
-                <terminal-settings-text preference="background-image"
+                <terminal-settings-textfield preference="background-image"
                     .converter=${BACKGROUND_IMAGE_CONVERTER}>
-                </terminal-settings-text>
+                </terminal-settings-textfield>
               </li>
             </ul>
           </section>

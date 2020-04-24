@@ -9,15 +9,15 @@
  */
 import {html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
-import {stylesText} from './terminal_settings_styles.js';
+import './terminal_textfield.js';
 
 const DEFAULT_CONVERTER = {
   preferenceToDisplay: (v) => v,
   displayToPreference: (v) => v,
 };
 
-export class TerminalSettingsTextElement extends TerminalSettingsElement {
-  static get is() { return 'terminal-settings-text'; }
+export class TerminalSettingsTextfieldElement extends TerminalSettingsElement {
+  static get is() { return 'terminal-settings-textfield'; }
 
   /** @override */
   static get properties() {
@@ -46,15 +46,13 @@ export class TerminalSettingsTextElement extends TerminalSettingsElement {
   }
 
   /** @override */
-  static get styles() { return stylesText; }
-
-  /** @override */
   render() {
     return html`
-        <input id="text" type="text"
+        <terminal-textfield
             .value="${this.converter.preferenceToDisplay(this.value)}"
-            @blur="${this.onUiChanged_}"
-            @keyup="${this.onInputKeyup_}"/>
+            @change="${this.onUiChanged_}"
+        >
+        </terminal-textfield>
     `;
   }
 
@@ -62,14 +60,7 @@ export class TerminalSettingsTextElement extends TerminalSettingsElement {
   onUiChanged_(event) {
     super.uiChanged_(this.converter.displayToPreference(event.target.value));
   }
-
-  /** @param {!KeyboardEvent} event */
-  onInputKeyup_(event) {
-    if (event.key === 'Enter') {
-      this.onUiChanged_(event);
-    }
-  }
 }
 
-customElements.define(TerminalSettingsTextElement.is,
-    TerminalSettingsTextElement);
+customElements.define(TerminalSettingsTextfieldElement.is,
+    TerminalSettingsTextfieldElement);

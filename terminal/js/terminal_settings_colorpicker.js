@@ -9,11 +9,12 @@
  */
 import {LitElement, css, html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
-import {stylesButtonContainer, stylesDialog, stylesText}
+import {stylesButtonContainer, stylesDialog}
     from './terminal_settings_styles.js';
 import './terminal_settings_button.js';
 import './terminal_settings_hue_slider.js';
 import './terminal_settings_saturation_value_picker.js';
+import './terminal_textfield.js';
 
 export const TOO_WHITE_BOX_SHADOW = 'inset 0 0 0 1px black';
 export const FOCUS_BOX_SHADOW =
@@ -94,7 +95,7 @@ export class TerminalColorpickerElement extends LitElement {
 
   /** @override */
   static get styles() {
-    return [stylesButtonContainer, stylesDialog, stylesText, css`
+    return [stylesButtonContainer, stylesDialog, css`
         #smallview {
           align-items: center;
           display: flex;
@@ -136,8 +137,9 @@ export class TerminalColorpickerElement extends LitElement {
         }
 
         #hexinput {
-          text-transform: uppercase;
-          width: 17ch;
+          margin-left: 6px;
+          width: 140px;
+          --terminal-textfield-text-transform: uppercase;
         }
 
         hue-slider, transparency-slider {
@@ -159,10 +161,10 @@ export class TerminalColorpickerElement extends LitElement {
             transparency="${this.transparency_}">
         </transparency-slider>`;
     const input = html`
-        <input id="hexinput" type="text"
+        <terminal-textfield id="hexinput"
             .value="${cssToHex(/** @type {string} */(this.value))}"
-            @blur="${this.onInputBlur_}"
-            @keyup="${this.onInputKeyup_}"/>`;
+            @change="${this.onInputChange_}"
+            @keydown="${this.onInputKeydown_}"/>`;
     return html`
         <div id="smallview">
           <div id="swatch" @click="${this.onSwatchClick_}">
@@ -295,7 +297,7 @@ export class TerminalColorpickerElement extends LitElement {
   }
 
   /** @param {!Event} event */
-  onInputBlur_(event) {
+  onInputChange_(event) {
     const rgb = lib.colors.normalizeCSS(event.target.value);
     if (!rgb) {
       event.target.value = cssToHex(/** @type {string} */(this.value));
@@ -306,10 +308,10 @@ export class TerminalColorpickerElement extends LitElement {
   }
 
   /** @param {!KeyboardEvent} event */
-  onInputKeyup_(event) {
+  onInputKeydown_(event) {
     if (event.key === 'Enter') {
-      this.onInputBlur_(event);
-      this.onOkClick_(event);
+      this.onInputChange_(event);
+      this.onOkClick_();
     }
   }
 
@@ -325,10 +327,8 @@ export class TerminalColorpickerElement extends LitElement {
 
   /**
    * Detects clicks on the dialog cancel button.
-   *
-   * @param {!Event} event
    */
-  onOkClick_(event) {
+  onOkClick_() {
     this.closeDialog();
   }
 
