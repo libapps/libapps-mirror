@@ -75,6 +75,11 @@ nassh.CommandInstance = function(argv) {
   // Terminal Window reference (can accept another hterm tab's window).
   this.terminalWindow = argv.terminalWindow || window;
 
+  /**
+   * @type {?string} The current connection profile.
+   */
+  this.profileId_ = null;
+
   // Root preference manager.
   this.prefs_ = new nassh.PreferenceManager();
 
@@ -438,6 +443,7 @@ nassh.CommandInstance.prototype.commonProfileSetup_ = function(
       return;
     }
 
+    this.profileId_ = profileID;
     document.querySelector('#terminal').focus();
 
     this.terminalLocation.hash = 'profile-id:' + profileID;
