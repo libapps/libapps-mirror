@@ -46,14 +46,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const params = new URLSearchParams(document.location.search);
 
   // Allow users to bookmark links that open as a window.
-  if (params.get('openas') == 'window') {
-    // Delete the 'openas' string so we don't get into a loop.  We want to
-    // preserve the rest of the query string when opening the window.
-    params.delete('openas');
-    const url = new URL(document.location.toString());
-    url.search = params.toString();
-    openNewWindow(url.href).then(() => window.close);
-    return;
+  const openas = params.get('openas');
+  switch (openas) {
+    case 'window': {
+      // Delete the 'openas' string so we don't get into a loop.  We want to
+      // preserve the rest of the query string when opening the window.
+      params.delete('openas');
+      const url = new URL(document.location.toString());
+      url.search = params.toString();
+      openNewWindow(url.href).then(() => window.close);
+      return;
+    }
+
+    case 'fullscreen':
+    case 'maximized':
+      chrome.windows.getCurrent((win) => {
+        chrome.windows.update(win.id, {state: openas});
+      });
+      break;
   }
 
   const execNaSSH = function() {
