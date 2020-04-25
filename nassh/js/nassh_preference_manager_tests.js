@@ -63,12 +63,15 @@ it('local-pref-manager-profiles', () => {
   // Create a profile and check its state.
   let profile = prefs.createProfile('foo');
   assert.equal('foo', profile.id);
+  assert.equal('0', profile.get('win/top'));
 
   // Make sure it's registered in the ids group.
   assert.deepEqual([profile.id], prefs.get('profile-ids'));
 
   // Make sure we can access it.
+  profile.set('win/top', '100');
   profile = prefs.getProfile(profile.id);
+  assert.equal('100', profile.get('win/top'));
 
   // Remove the profile.
   prefs.removeProfile(profile.id);

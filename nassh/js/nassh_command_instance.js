@@ -151,6 +151,11 @@ nassh.CommandInstance.prototype.run = function() {
 
     this.localPrefs_.readStorage(() => {
       this.localPrefs_.syncProfiles(this.prefs_);
+      const updater = this.updateWindowDimensions_.bind(this);
+      window.addEventListener('resize', updater);
+      // Window doesn't offer a 'move' event, and blur/resize don't seem to
+      // work.  Listening for mouseout should be low enough overhead.
+      window.addEventListener('mouseout', updater);
     });
   });
 
@@ -270,6 +275,38 @@ nassh.CommandInstance.prototype.reconnect = function(argstr) {
   this.exited_ = false;
 
   this.connectToArgString(argstr);
+};
+
+/**
+ * Event for when the window dimensions change.
+ */
+nassh.CommandInstance.prototype.updateWindowDimensions_ = function() {
+  if (!this.profileId_) {
+    // We haven't connected yet, so nothing to save.
+    return;
+  }
+
+  // The web platform doesn't provide a way to check the window state, so use
+  // Chrome APIs directly for that.
+  chrome.windows.getCurrent((win) => {
+    // Ignore minimized state completely.
+    if (win.state === 'minimized') {
+      return;
+    }
+
+    const profile = this.localPrefs_.getProfile(lib.notNull(this.profileId_));
+    profile.set('win/state', win.state);
+
+    // Only record dimensions when we're not fullscreen/maximized.  This allows
+    // the position/size to be remembered independent of temporarily going to
+    // the max screen dimensions.
+    if (win.state === 'normal') {
+      profile.set('win/top', window.screenTop);
+      profile.set('win/left', window.screenLeft);
+      profile.set('win/height', window.outerHeight);
+      profile.set('win/width', window.outerWidth);
+    }
+  });
 };
 
 /**

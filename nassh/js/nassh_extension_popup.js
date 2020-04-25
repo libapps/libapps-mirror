@@ -43,18 +43,7 @@ function popup() {
  */
 popup.prototype.openLink_ = function(e) {
   const id = e.target.id;
-
-  let url = lib.f.getURL('/html/nassh.html');
-  switch (id) {
-    case 'connect-dialog':
-      break;
-    case 'options':
-      nassh.openOptionsPage();
-      return;
-    default:
-      url += `?promptOnReload=yes#profile-id:${id}`;
-      break;
-  }
+  let profile;
 
   // Figure out whether to open a window or a tab.
   let mode;
@@ -67,14 +56,51 @@ popup.prototype.openLink_ = function(e) {
     mode = 'window';
   }
 
+  let url = lib.f.getURL('/html/nassh.html');
+  switch (id) {
+    case 'connect-dialog':
+      break;
+    case 'options':
+      nassh.openOptionsPage();
+      return;
+    default: {
+      profile = this.localPrefs_.getProfile(id);
+      let openas = '';
+      if (mode === 'window') {
+        const state = profile.get('win/state');
+        if (state !== 'normal') {
+          openas = `openas=${state}`;
+        }
+      }
+      url += `?promptOnReload=yes&${openas}#profile-id:${id}`;
+      break;
+    }
+  }
+
   // Launch it.
   if (mode == 'tab') {
     // Should we offer a way to open tabs in the background?
     chrome.tabs.create({url: url, active: true});
   } else {
+    let top = 0;
+    let left = 0;
+    let height = 600;
+    let width = 900;
+    if (id) {
+      const profile = this.localPrefs_.getProfile(id);
+      const parseDim = (value, fallback) => {
+        const ret = parseInt(value, 10);
+        return isNaN(ret) ? fallback : ret;
+      };
+      top = parseDim(profile.get('win/top'), top);
+      left = parseDim(profile.get('win/left'), left);
+      height = parseDim(profile.get('win/height'), height);
+      width = parseDim(profile.get('win/width'), width);
+    }
     lib.f.openWindow(url, '',
                      'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-                     'minimizable=yes,width=900,height=600');
+                     `minimizable=yes,top=${top},left=${left},` +
+                     `height=${height},width=${width}`);
   }
 
   // Close the popup.  It happens automatically on some systems (e.g. Linux),

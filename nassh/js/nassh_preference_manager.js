@@ -225,6 +225,11 @@ nassh.ProfileLocalPreferenceManager = function(parent, id) {
   this.id = id;
 
   this.definePreferences([
+    ['win/top', '0'],
+    ['win/left', '0'],
+    ['win/height', '600'],
+    ['win/width', '900'],
+    ['win/state', 'normal'],
   ]);
 };
 
