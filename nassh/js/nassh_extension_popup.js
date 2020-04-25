@@ -18,15 +18,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
  * @constructor
  */
 function popup() {
-  // The nassh global pref manager.
+  // The nassh global preference managers.
   this.prefs_ = new nassh.PreferenceManager();
+  this.localPrefs_ = new nassh.LocalPreferenceManager();
   // The hterm pref manager.  We use the 'default' profile to theme.
   this.htermPrefs_ = new hterm.PreferenceManager('default');
 
   // Load the theme first so the style doesn't flicker.
   this.htermPrefs_.readStorage(() => {
     this.updateTheme_();
-    this.prefs_.readStorage(() => this.populateList_());
+    this.prefs_.readStorage(() => {
+      this.populateList_();
+      this.localPrefs_.readStorage(() => {
+        this.localPrefs_.syncProfiles(this.prefs_);
+      });
+    });
   });
 }
 

@@ -32,8 +32,12 @@ nassh.ConnectDialog = function(messagePort) {
 
   // The nassh global pref manager.
   this.prefs_ = new nassh.PreferenceManager();
+  this.localPrefs_ = new nassh.LocalPreferenceManager();
   this.prefs_.readStorage(() => {
     this.syncProfiles_(this.onPreferencesReady_.bind(this));
+    this.localPrefs_.readStorage(() => {
+      this.localPrefs_.syncProfiles(this.prefs_);
+    });
   });
 
   // The profile we're currently displaying.
@@ -438,6 +442,7 @@ nassh.ConnectDialog.prototype.save = function() {
   if (dirtyForm) {
     if (!prefs) {
       prefs = this.prefs_.createProfile();
+      this.localPrefs_.createProfile(prefs.id);
       const rec = new nassh.ConnectDialog.ProfileRecord(
           prefs.id, prefs, changedFields['description']);
       this.currentProfileRecord_ = rec;

@@ -80,8 +80,9 @@ nassh.CommandInstance = function(argv) {
    */
   this.profileId_ = null;
 
-  // Root preference manager.
+  // Root preference managers.
   this.prefs_ = new nassh.PreferenceManager();
+  this.localPrefs_ = new nassh.LocalPreferenceManager();
 
   // Prevent us from reporting an exit twice.
   this.exited_ = false;
@@ -147,6 +148,10 @@ nassh.CommandInstance.prototype.run = function() {
     nassh.getFileSystem()
       .then(onFileSystemFound)
       .catch(ferr('FileSystem init failed'));
+
+    this.localPrefs_.readStorage(() => {
+      this.localPrefs_.syncProfiles(this.prefs_);
+    });
   });
 
   const showWelcome = () => {

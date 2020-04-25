@@ -1,0 +1,105 @@
+// Copyright 2020 The Chromium OS Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+'use strict';
+
+/**
+ * @fileoverview nassh preference manager tests.
+ */
+
+describe('nassh_preference_manager_tests.js', () => {
+
+/**
+ * Check basic init/empty behavior.
+ */
+it('pref-manager-init', () => {
+  const prefs = new nassh.PreferenceManager(new lib.Storage.Memory());
+
+  // Default settings should work but be empty.
+  assert.deepEqual([], prefs.get('profile-ids'));
+  assert.equal('', prefs.get('welcome/notes-version'));
+});
+
+/**
+ * Check profile handling.
+ */
+it('pref-manager-profiles', () => {
+  const prefs = new nassh.PreferenceManager(new lib.Storage.Memory());
+
+  // Create a profile and check its state.
+  let profile = prefs.createProfile();
+  assert.equal('', profile.get('description'));
+
+  // Make sure it's registered in the ids group.
+  assert.deepEqual([profile.id], prefs.get('profile-ids'));
+
+  // Make sure we can access it.
+  profile.set('username', 'root');
+  profile = prefs.getProfile(profile.id);
+  assert.equal('root', profile.get('username'));
+
+  // Remove the profile.
+  prefs.removeProfile(profile.id);
+  assert.deepEqual([], prefs.get('profile-ids'));
+});
+
+/**
+ * Check basic init/empty behavior.
+ */
+it('local-pref-manager-init', () => {
+  const prefs = new nassh.LocalPreferenceManager(new lib.Storage.Memory());
+
+  // Default settings should work but be empty.
+  assert.deepEqual([], prefs.get('profile-ids'));
+});
+
+/**
+ * Check profile handling.
+ */
+it('local-pref-manager-profiles', () => {
+  const prefs = new nassh.LocalPreferenceManager(new lib.Storage.Memory());
+
+  // Create a profile and check its state.
+  let profile = prefs.createProfile('foo');
+  assert.equal('foo', profile.id);
+
+  // Make sure it's registered in the ids group.
+  assert.deepEqual([profile.id], prefs.get('profile-ids'));
+
+  // Make sure we can access it.
+  profile = prefs.getProfile(profile.id);
+
+  // Remove the profile.
+  prefs.removeProfile(profile.id);
+  assert.deepEqual([], prefs.get('profile-ids'));
+});
+
+/**
+ * Check profile syncing.
+ */
+it('local-pref-manager-profiles', () => {
+  const remotePrefs = new nassh.PreferenceManager(new lib.Storage.Memory());
+  const localPrefs = new nassh.LocalPreferenceManager(new lib.Storage.Memory());
+
+  // Create remote profiles.
+  const rprof1 = remotePrefs.createProfile();
+  const rprof2 = remotePrefs.createProfile();
+
+  // Sync it over.
+  assert.deepEqual([], localPrefs.get('profile-ids'));
+  localPrefs.syncProfiles(remotePrefs);
+  assert.deepEqual([rprof1.id, rprof2.id], localPrefs.get('profile-ids'));
+
+  // Remote a remote profile & resync.
+  remotePrefs.removeProfile(rprof1.id);
+  localPrefs.syncProfiles(remotePrefs);
+  assert.deepEqual([rprof2.id], localPrefs.get('profile-ids'));
+
+  // Create a local profile & resync.
+  localPrefs.createProfile('asdfasdf');
+  localPrefs.syncProfiles(remotePrefs);
+  assert.deepEqual([rprof2.id], localPrefs.get('profile-ids'));
+});
+
+});
