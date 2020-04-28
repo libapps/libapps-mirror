@@ -12,25 +12,19 @@
 		"message": "Om du stänger fliken avslutas sessionen."
 	},
 	"cache_pin_prompt": {
-		"message": "Vill du cachelagra pinkoden för den här sessionen? (y/N):"
+		"message": "Vill du cachelagra pinkoden för den här SSH-sessionen? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "Avbryt"
 	},
+	"changelog": {
+		"message": "Ändringslogg"
+	},
 	"clear_known_hosts_menu_label": {
-		"message": "Rensa known_hosts för SSH"
+		"message": "Rensa kända värdar för SSH"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "Kommandot visar värdar som vi känner till i en meny och frågar vilken värd som ska glömmas bort."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Glöm en känd ssh-värd."
-	},
-	"cmd_ssh_help": {
-		"message": "Parametrarna |username| och |hostname| är obligatoriska. |port| är valfri. Om du inte anger en port blir den automatiskt 22."
-	},
-	"cmd_ssh_title": {
-		"message": "Öppnar en ny SSH-session."
+	"clear_label": {
+		"message": "Rensa"
 	},
 	"command_complete": {
 		"message": "Kommandot $1 avslutades med statuskoden $2."
@@ -69,7 +63,7 @@
 		"message": "NaCl-plugin avslutades med statuskoden $1."
 	},
 	"enter_keycap": {
-		"message": "[ENTER]"
+		"message": "[RETUR]"
 	},
 	"faq_menu_label": {
 		"message": "Vanliga frågor"
@@ -120,7 +114,7 @@
 		"message": "FEL: Det gick inte att läsa in profilen med id $1:\n$2"
 	},
 	"hterm_announce_current_screen_header": {
-		"message": "Har rullats till $1 %,"
+		"message": "Har scrollats till $1 %,"
 	},
 	"hterm_button_allow_always": {
 		"message": "Tillåt alltid"
@@ -135,13 +129,226 @@
 		"message": "Nedåt en sida"
 	},
 	"hterm_button_page_up": {
-		"message": "Uppåt en sida"
+		"message": "En sida upp"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Det gick inte att läsa in $1"
 	},
 	"hterm_loading_resource_start": {
 		"message": "Läser in $1 …"
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Tillåt visning av bilder i terminalfönstret"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Backsteg används för Meta+Backsteg"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "Inställning för AltGr-tangent"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Behandla Alt-tangenten som Meta-tangent"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Hantering av Alt-tangenten som specialtangent"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Ljudsignal (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Bakgrundsfärg"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Bakgrundsbild"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Position för bakgrundsbild"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Storlek på bakgrundsbild"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Inställning för backsteg"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Åsidosättning av teckenmappning"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Rensa textmarkering automatiskt"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Stäng fönstret vid avslut"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Ursprunglig färgpalett"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Kopiera markering automatiskt"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Inställning för Ctrl+C (kopiera)"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Inställning för Ctrl och +/-/0 (zoom)"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Inställning för Ctrl+V (klistra in)"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Markörens blinkningsstatus"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Hur snabbt markören ska blinka"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Textmarkörens färg"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Textmarkörens form"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Skapa skrivbordsaviseringar för ljudsignaler"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Tvåkolumnsbredd används vid tvetydiga fall i östasiatisk skrift"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Stöd C1-kontrolltecken som inte finns i UTF-8"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Aktivera blinkande text"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Inställning för fetstil"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Använd lysande färger för fetstil"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Visa avisering vid kopiering"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Tillåt skrivning till fjärrdatorns urklipp"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Tillåt att bakåtrullningsbufferten rensas (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Tillåt ändring av textmarkörens blinkningsstatus"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Visa terminalens mått vid storleksändring"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Miljövariabler"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Textens teckensnittsfamilj"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Textens teckenstorlek"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Kantutjämning av text"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Textfärg"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Dölj muspekaren när användaren skriver"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Inställning för scrollning med Home-/End-tangent"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Tangentbindningar/kortkommandon"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Använd tangentbindningar/kortkommandon som är standard i operativsystemet"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Uppspelningstangenterna används som funktionstangenter"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Hantering av Meta-tangent som specialtangent"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Klistra in med musknappen"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Klistra in med höger musknapp"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Inställning för scrollning med Page Up/Page Down"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Inställning för Alt+1–9 (byta flik)"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Inställning för Ctrl+N (nytt fönster)"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Inställning för Ctrl+1–9 (byta flik)"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Inställning för Ctrl+T (ny flik)"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Inställning för Ctrl+Tabb (byta flik)"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Inställning för Ctrl+W (stänga flik)"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Inställning för Meta+1–9 (byta flik)"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Inställning för Meta+V (klistra in)"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Tillåt klistra in genom att dra och släppa"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Ta emot kodning"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Scrolla längst ned efter tangenttryckning"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Scrolla längst ned efter ny utmatning"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Emulera piltangenter med rullningshjulet"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Multiplikator för musens rullningshjul"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Rullningslistens synlighet"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Klistra in med Skift+Insert"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Terminalens teckenkodning"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Låt webbläsaren hantera kopiering av text"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "Anpassad CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "Anpassad CSS (infogad text)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Automatiskt markeringsstopp (till vänster)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Tecken för radbrytning inuti ord"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Automatiskt markeringsstopp (till höger)"
 	},
 	"hterm_popup_inline_image": {
 		"message": "Infogade bilder"
@@ -153,7 +360,7 @@
 		"message": "Om fjärrvärden ska få visa bilder i terminalen.\n\nSom standard visas en fråga tills någonting väljs."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "När detta alternativ har ställts in åsidosätts ommappningen av Alt+Backsteg till DEL i Chrome OS så att kombinationen Alt+Backsteg verkligen ger Alt+Backsteg."
+		"message": "När detta alternativ har ställts in åsidosätts ommappningen av Alt+Backsteg till Delete i Chrome OS så att kombinationen Alt+Backsteg verkligen ger Alt+Backsteg."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Välj heuristisk metod för identifiering av AltGr-tangent.\n\n'null': Automatisk identifiering utifrån navigator.language:\n      'en-us' => 'none', övriga => 'right-alt'\n'none': Inaktivera alla AltGr-relaterade ändringar.\n'ctrl-alt': Anta att Ctrl+Alt används som AltGr.\n'left-alt': Anta att vänster Alt-tangent används som AltGr.\n'right-alt': Anta att höger Alt-tangent används som AltGr."
@@ -165,13 +372,13 @@
 		"message": "Styr hur Alt-tangenten fungerar.\n\n  escape: Skicka ett ESC-prefix.\n  8-bit: Lägg till 128 till teckenvärdet, som i xterm.\n browser-key: Invänta tangenttryckningshändelsen och se hur den tolkas\n i webbläsaren. (Detta fungerar inte bra på plattformar där\n vissa Alt-sekvenser aktiverar en standardåtgärd i webbläsaren.)"
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "Webbadress för terminalens klockljud. Lämna strängen tom om inget klockljud ska höras."
+		"message": "Webbadress till terminalens klockljud. Lämna strängen tom om inget klockljud ska höras."
 	},
 	"hterm_pref_background_color": {
 		"message": "Bakgrundsfärg för text utan andra färgattribut."
 	},
 	"hterm_pref_background_image": {
-		"message": "CSS-värde för bakgrundsbild. En tom sträng ger ingen bild.\n\nExempel:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "CSS-värde för bakgrundsbilden. En tom sträng ger ingen bild.\n\nExempel:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "CSS-värde för bakgrundsbildens position.\n\nExempel:\n  10% 10%\n  center"
@@ -183,7 +390,7 @@
 		"message": "När detta är inställt på sant skickar backstegstangenten värdet BS (\\x08, samma som ^H). I annat fall skickar backstegstangenten värdet \\x7f."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "Detta anges som ett objekt. Det är en gles vektor där varje egenskap är teckenuppsättningskoden och värdet är ett objekt som självt är en gles vektor. I denna glesa vektor är egenskapen det tecken som tagits emot och värdet det tecken som visas.\n\nExempel:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "Detta anges som ett objekt. Det är en gles vektor där varje egenskap är teckenuppsättningskoden och värdet är ett objekt som självt är en gles vektor. I denna glesa vektor är egenskapen det tecken som tagits emot och värdet det tecken som visas.\n\nExempel:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "Om markeringen ska tas bort eller inte efter kopiering."
@@ -215,6 +422,9 @@
 	"hterm_pref_cursor_color": {
 		"message": "Textmarkörens färg när den är synlig."
 	},
+	"hterm_pref_cursor_shape": {
+		"message": "Textmarkörens form när den är synlig. Detta kan ändras under körning med escape-sekvenser i terminalen."
+	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "När detta är sant skapas en webbavisering vid klockljud i bakgrunden i en terminal. https://www.w3.org/TR/notifications/\n\nAnvändaren måste ha tillåtit aviseringar. När alternativet är inställt på sant frågar hterm efter behörighet om det behövs. Frågan om behörighet kanske inte visas i webbläsaren om den inte utlöstes av något som användaren gjort.\n\nChrome-tillägg med aviseringsbehörighet kan visa aviseringar."
 	},
@@ -239,8 +449,14 @@
 	"hterm_pref_enable_clipboard_write": {
 		"message": "Tillåt fjärrvärden att skrivas direkt i Urklipp på det lokala systemet.\nLäsbehörighet medges aldrig, oavsett denna inställning.\n\nDetta används för att styra funktioner som OSC-52."
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Om CSI-J-kommandot (rensa skärmen) med 3 som argument (rensa sparade rader) får rensa terminalens bakåtrullningsbuffert.\n\nDet är säkert att aktivera detta som standard."
+	},
 	"hterm_pref_enable_dec12": {
 		"message": "Följ ändringar av textmarkörens blinkstatus som görs på värden med DEC:s privata läge 12."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Om terminalens mått ska visas när terminalens storlek ändras."
 	},
 	"hterm_pref_environment": {
 		"message": "Den ursprungliga uppsättningen miljövariabler som ett objekt."
@@ -261,16 +477,19 @@
 		"message": "Om muspekaren ska döljas automatiskt när tangentbordet används. Standardinställningen är att identifiera automatiskt om plattformen/operativsystemet hanterar detta.\n\nObs! Inställningen kan åsidosättas i vissa operativsystem. I så fall går det kanske inte att inaktivera den permanent."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "När detta är inställt på sant styr tangenterna Home/End terminalens rullningslist och teckensekvenserna Skift + Home/End skickas till den virtuella terminalen. Med inställningen falskt skickas Home/End till fjärrvärden och Skift + Home/End används för att rulla."
+		"message": "När detta är inställt på sant styr tangenterna Home/End terminalens rullningslist och teckensekvenserna Skift + Home/End skickas till den virtuella terminalen. Med inställningen falskt skickas Home/End till fjärrvärden och Skift + Home/End används för att scrolla."
 	},
 	"hterm_pref_keybindings": {
-		"message": "En koppling mellan tangentsekvenser och motsvarande åtgärder. Tangentsekvenserna består av noll eller flera specialtangenter åtföljda av en tangentkod. Tangentkoden kan bestå av decimala eller hexadecimala siffror eller en tangentidentifierare. Tangentåtgärderna kan vara en sträng som skickas till värden eller en åtgärdsidentifierare. En fullständig förklaring av formatet finns på https://goo.gl/LWRndr.\n\nExempel på tangentbindningar:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "En koppling mellan tangentsekvenser och motsvarande åtgärder. Tangentsekvenserna består av noll eller flera specialtangenter åtföljda av en tangentkod. Tangentkoden kan bestå av decimala eller hexadecimala siffror eller en tangentidentifierare. Tangentåtgärderna kan vara en sträng som skickas till värden eller en åtgärdsidentifierare. En fullständig förklaring av formatet finns på https://goo.gl/LWRndr.\n\nExempel på tangentbindningar:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Skift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Om vanliga tangentbindningar i operativsystemet ska användas i stället för hterms egna tilldelningar."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "När detta är inställt på sant konverteras medietangenter till motsvarande funktionstangent. Med inställningen falskt hanterar webbläsaren tangenterna."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Skicka ett ESC-prefix när en tangent trycks ned medan Meta+tangenten är nedtryckt.\n\nNär detta är aktiverat skickas till exempel ^[k när du trycker på Meta+K, som om du hade tryckt på Esc följt av k. När detta är inaktiverat skickas bara k."
+		"message": "Skicka ett ESC-prefix när en tangent trycks ned medan Meta-tangenten är nedtryckt.\n\nNär detta är aktiverat skickas till exempel ^[k när du trycker på Meta+K, som om du hade tryckt på Esc följt av k. När detta är inaktiverat skickas bara k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Klistra in med musknappen eller lämna tomt om automatisk identifiering ska användas.\n\nMed automatisk identifiering används musens mittknapp på plattformar som inte har X11 som fönsterhanterare (inklusive Chrome OS). Med X11 används höger musknapp (eftersom musens mittknapp normalt används av systemets fönsterhanterare för att klistra in).\n\n0 == vänster musknapp (primär).\n1 == mittknappen (reserv).\n2 == höger musknapp (sekundär).\n\nAlternativet är oberoende av inställningen för att klistra in med höger musknapp.\n\nObs! Inställningen hanterar vänster- och högerhänta datormöss korrekt."
@@ -279,13 +498,25 @@
 		"message": "Klistra in genom att klicka på höger musknapp.\n\nAlternativet är oberoende av inställningen mouse-paste-button.\n\nObs! Inställningen hanterar vänster- och högerhänta datormöss korrekt."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "När detta är inställt på sant styr tangenterna Pgup/Pgdn (Page up/Page down) terminalens rullningslist och tangentsekvenserna Skift + Pgup/Pgdn skickas till den virtuella terminalen. Med inställningen falskt skickas Pgup/Pgdn till fjärrvärden och Skift + Pgup/Pgdn används för att rulla."
+		"message": "När detta är inställt på sant styr tangenterna Pgup/Pgdn (Page up/Page down) terminalens rullningslist och tangentsekvenserna Skift + Pgup/Pgdn skickas till den virtuella terminalen. Med inställningen falskt skickas Pgup/Pgdn till fjärrvärden och Skift + Pgup/Pgdn används för att scrolla."
 	},
 	"hterm_pref_pass_alt_number": {
 		"message": "Om Alt+1–9 ska skickas till webbläsaren eller inte.\n\nDetta är praktiskt om du kör hterm på en webbläsarflik så att du kan fortsätta att använda Chromes kortkommandon för att byta flik. Om hterm inte körs på en flik är det bättre att skicka tangenttryckningarna till värden, så de kan användas i vim eller emacs.\n\nNär detta är inställt på sant hanteras Alt+1–9 av webbläsaren. Med inställningen falskt skickas Alt+1–9 till värden. Om inställningen lämnas utan värde används automatisk identifiering utifrån webbläsarplattform och fönstertyp."
 	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Om Ctrl+N ska skickas till webbläsaren eller inte.\n\nNär detta är inställt på sant hanteras Ctrl+N av webbläsaren som kortkommandot för nytt fönster. När det är inställt på falskt skickas Ctrl+N till värden."
+	},
 	"hterm_pref_pass_ctrl_number": {
 		"message": "Om Ctrl+1–9 ska skickas till webbläsaren eller inte.\n\nDetta är praktiskt om du kör hterm på en webbläsarflik så att du kan fortsätta att använda Chromes kortkommandon för att byta flik. Om hterm inte körs på en flik är det bättre att skicka tangenttryckningarna till värden, så de kan användas i vim eller emacs.\n\nNär detta är inställt på sant hanteras Ctrl+1–9 i webbläsaren. Med inställningen falskt skickas Ctrl+1–9 till värden. Om inställningen lämnas utan värde används automatisk identifiering utifrån webbläsarplattform och fönstertyp."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Om Ctrl+T ska skickas till webbläsaren eller inte.\n\nNär detta är inställt på sant hanteras Ctrl+T av webbläsaren som kortkommandot för ny flik. När det är inställt på falskt skickas Ctrl+T till värden."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Om Ctrl+Tabb och Ctrl+Skift+Tabb ska skickas till webbläsaren eller inte.\n\nNär detta är inställt på sant hanteras Ctrl+Tabb och Ctrl+Skift+Tabb av webbläsaren som kortkommandot för nästa/föregående flik. När det är inställt på falskt skickas tabbtangenten till värden utan Ctrl eller Skift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Om Ctrl+W ska skickas till webbläsaren eller inte.\n\nNär detta är inställt på sant hanteras Ctrl+W av webbläsaren som kortkommandot för att stänga en flik. När det är inställt på falskt skickas Ctrl+W till värden."
 	},
 	"hterm_pref_pass_meta_number": {
 		"message": "Om Meta+1–9 ska skickas till webbläsaren eller inte.\n\nDetta är praktiskt om du kör hterm på en webbläsarflik så att du kan fortsätta att använda Chromes kortkommandon för att byta flik. Om hterm inte körs på en flik är det bättre att skicka tangenttryckningarna till värden, så de kan användas i vim eller emacs.\n\nNär detta är inställt på sant hanteras Meta+1–9 i webbläsaren. Med inställningen falskt skickas Meta+1–9 till värden. Om inställningen lämnas utan värde används automatisk identifiering utifrån webbläsarplattform och fönstertyp."
@@ -293,14 +524,17 @@
 	"hterm_pref_pass_meta_v": {
 		"message": "Om Meta+V ska skickas till fjärrvärden eller inte."
 	},
+	"hterm_pref_paste_on_drop": {
+		"message": "När detta är inställt på sant klistras text in i terminalen när du drar och släpper.\nMed inställningen falskt ignoreras texten som släpps."
+	},
 	"hterm_pref_receive_encoding": {
 		"message": "Ange den förväntade teckenkodningen för data från värden.Om teckenkodningarna inte stämmer överens blir det sannolikt problem med visningen av vissa tecken.\n\nDe giltiga värdena är utf-8 och raw."
 	},
 	"hterm_pref_scroll_on_keystroke": {
-		"message": "Rulla längst ned varje gång en tangent trycks ned."
+		"message": "Scrolla längst ned varje gång en tangent trycks ned."
 	},
 	"hterm_pref_scroll_on_output": {
-		"message": "Rulla längst ned vid utdata från terminalen."
+		"message": "Scrolla längst ned vid utdata från terminalen."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
 		"message": "När du använder den alternativa skärmbufferten och DECCKM (Application Cursor Keys) har aktiverats används mushjulet för att emulera piltangenterna.\n\nDu kan inaktivera detta tillfälligt genom att hålla ned Skift.\n\nDetta behövs ofta vid användning av program som visar en sida i taget (t.ex. less), vid läsning av manualsidor med man, i textredigerare (vi, nano), eller med screen/tmux."
@@ -345,7 +579,7 @@
 		"message": "Kopiera och klistra in"
 	},
 	"hterm_title_pref_encoding": {
-		"message": "Teckenkodning"
+		"message": "Kodning"
 	},
 	"hterm_title_pref_extensions": {
 		"message": "Tillägg"
@@ -354,10 +588,10 @@
 		"message": "Tangentbord"
 	},
 	"hterm_title_pref_miscellaneous": {
-		"message": "Övrigt"
+		"message": "Diverse"
 	},
 	"hterm_title_pref_scrolling": {
-		"message": "Rullning"
+		"message": "Scrollning"
 	},
 	"hterm_title_pref_sounds": {
 		"message": "Ljud"
@@ -386,8 +620,20 @@
 	"known_hosts_title": {
 		"message": "Kända värdar:"
 	},
+	"licenses": {
+		"message": "Licenser"
+	},
+	"licenses_expand_link": {
+		"message": "visa licens"
+	},
+	"licenses_title": {
+		"message": "Licenser"
+	},
 	"loading_label": {
 		"message": "Läser in …"
+	},
+	"migrate_to_ext": {
+		"message": "Obs! Migrera till det nya tillägget för Secure Shell ($1).\nChrome-appar har fasats ut, så den här versionen får inga fler uppdateringar.\nI migreringsguiden ($2) finns mer information."
 	},
 	"missing_param": {
 		"message": "Parametern $1 saknas"
@@ -401,11 +647,176 @@
 	"mounted_message": {
 		"message": "Filsystemet har monterats."
 	},
+	"nasftp_cmd_cat_help": {
+		"message": "Skriv ut en fil i terminalfönstret"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Ändra arbetskatalog"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Ändra vilken grupp som en sökväg tillhör"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Ändra behörigheter för sökvägar"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Ändra ägare till sökvägar"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Rensa den aktuella terminalskärmen."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Kopiera en fil till urklipp (standard: 10 MiB från början)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "$1 byte kopierades till urklipp"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Aktivera och inaktivera färganvändning"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Kopiera källa till mål"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Radera filer"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Visa diskstatistik"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Sökväg: $1\n  fsid: $2\n Totalt: $3\n  Används: $4 ($5 %)\n Tillgänglig: $6 (för användare utan särskild behörighet)\n $7 (för root)"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Koppla bort"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Laddar ned filen: $1 som $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Ladda ned filer"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Den här hjälpskärmen"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Visa kataloginformation som lista"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Skapa en länk på den angivna sökvägen som pekar på målet"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Skapa kataloger"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Byta namn på en fil"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Ange prompt-sträng"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Ladda upp filer"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Laddar upp filen: $1 som $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Visa aktuell arbetskatalog"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Fjärrarbetskatalog: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Läs symboliska länkar"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Kanonisera sökvägar"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Återuppta filuppladdning"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Ta bort filer"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Radera tomma kataloger"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Visa filer direkt i terminalfönstret"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Tillägg:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Visa filstatus"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Fil: $1\n  Storlek: $2 byte\n   UID: $3\n   GID: $4\nÅtkomst: $5\n användes: $6\n ändrades: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Skapa en symbolisk länk på den angivna sökvägen som pekar på målet"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Trunkera sökvägar till 0 byte"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  servertillägg:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Visa aktuell protokollversion"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Information om version av SFTP-protokoll:\n  lokalt: $1\n  server: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: filen tog slut"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: filen hittades inte."
+	},
+	"nasftp_error_file_reading": {
+		"message": "Det gick inte att läsa $1: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Internt fel som inte hanteras, felrapportera detta: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: ogiltigt tal: $3"
+	},
+	"nasftp_error_message": {
+		"message": "FEL: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: tillägget $2 är inte tillgängligt"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: inte en normal fil"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: för få argument"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: behörighet nekades"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: för många argument"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: okänt kommando"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: okänd flagga $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Tvångsavsluta"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 byte överfördes på $2 sekunder ($3/s)"
+	},
 	"nassh_options_error": {
-		"message": "Okänt reläalternativ: $1"
+		"message": "Okänt alternativ: $1"
 	},
 	"nassh_product_name": {
-		"message": "Secure Shell"
+		"message": "SSH"
 	},
 	"new_window_menu_label": {
 		"message": "Nytt fönster"
@@ -434,14 +845,44 @@
 	"plugin_loading_failed": {
 		"message": " misslyckades :("
 	},
+	"popup_connect_tooltip": {
+		"message": "Håll ned Ctrl för att öppna en ny flik."
+	},
 	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
+		"message": "Säkerhetskopia av SSH-inställningar.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "SSH-filer"
 	},
 	"preferences_header_terminal": {
-		"message": "Profilinställningar"
+		"message": "Terminalinställningar"
+	},
+	"preferences_header_uri": {
+		"message": "URI-hanterare"
 	},
 	"preferences_reset": {
 		"message": "Alla inställningar har återställts."
+	},
+	"protocol_register_button": {
+		"message": "Registrera protokollhanterare"
+	},
+	"protocol_register_explain": {
+		"message": "Med knappen nedan görs ett försök att registrera hanterare för alla protokoll som stöds. Det gör att exempelvis länkar med ssh:// kan hanteras direkt. En fråga visas i webbläsaren för varje protokoll. Godkänn dem allt eftersom de visas. Om inga frågor visas läser du felsökningstipsen i nästa avsnitt."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Inga fler frågor visas om hanterare redan har registrerats eller om tidigare registreringsförsök nekades. Öppna dialogrutan nedan och kontrollera inställningarna för registrerade hanterare i avsnitten för ssh/sftp/…. Om programmet blockeras kan du radera dessa inställningar så att du kan göra ett nytt registreringsförsök. Om programmet redan är registrerat men inte har ställts in som standardhanterare kan du ändra denna inställning också."
+	},
+	"protocol_register_options_link": {
+		"message": "Protokollregistrering"
+	},
+	"protocol_register_settings_button": {
+		"message": "Öppna inställningarna för registrerade hanterare"
+	},
+	"protocol_register_title": {
+		"message": "Hjälpprogram för registrering av SSH-protokollhanterare"
+	},
+	"read_size_label": {
+		"message": "Lässtorlek (kB)"
 	},
 	"reconnect_message": {
 		"message": "Vill du återansluta (R), välja en annan anslutning (C) eller avsluta (X)?"
@@ -450,10 +891,13 @@
 		"message": "Försöker igen …"
 	},
 	"request_pin_prompt": {
-		"message": "Ange pinkoden för att få åtkomst till $1 i $2 ($3 försök återstår):"
+		"message": "Ange pinkoden för att få åtkomst till $1 i $2 ($3) ($4 försök återstår):"
 	},
 	"restore_prefs": {
 		"message": "Återställ säkerhetskopia"
+	},
+	"save_label": {
+		"message": "Spara"
 	},
 	"shortcut_list_aria_label": {
 		"message": "sparade anslutningar"
@@ -464,11 +908,47 @@
 	"ssh_argstr_label": {
 		"message": "SSH-argument"
 	},
+	"stream_open_error": {
+		"message": "Det gick inte att öppna strömmen $1: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "Rensa terminal"
 	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI-färger"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Kantutjämning"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Ljudsignal"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Blinkande"
+	},
+	"terminal_name_pref_color": {
+		"message": "Färg"
+	},
+	"terminal_name_pref_font": {
+		"message": "Teckensnitt"
+	},
+	"terminal_name_pref_image": {
+		"message": "Bild"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Form"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Synlig"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Ange färger för standardpaletten."
+	},
+	"terminal_pref_bell": {
+		"message": "Ljudsignal."
+	},
 	"terminal_preview_label": {
-		"message": "Förhandsgranska"
+		"message": "Förhandsvisa"
 	},
 	"terminal_profile_label": {
 		"message": "Aktuell profil"
@@ -476,11 +956,131 @@
 	"terminal_reset_menu_label": {
 		"message": "Återställ terminal"
 	},
+	"terminal_settings_background_image_help": {
+		"message": "Webbadress för bakgrundsbild. Måste börja med http:// eller https://. En tom sträng ger ingen bild.\n\nExempel:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Inaktivera"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "I-stapel"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Blockera"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Understruket"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Vill du återställa temat till standardinställningarna?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Återställ temat"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Återställ"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Klassisk"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Mörkt"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Purpurdimma"
+	},
+	"terminal_theme_light_label": {
+		"message": "Ljust"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized – mörkt"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized – ljust"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Färg 0: svart"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Färg 1: röd"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Färg 10: lysande grön"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Färg 11: lysande gul"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Färg 12: lysande blå"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Färg 13: lysande magenta"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Färg 14: lysande cyan"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Färg 15: lysande vit"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Färg 2: grön"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Färg 3: gul"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Färg 4: blå"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Färg 5: magenta"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Färg 6: cyan"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Färg 7: vit"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Färg 8: lysande svart"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Färg 9: lysande röd"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Utseende"
+	},
+	"terminal_title_pref_background": {
+		"message": "Bakgrund"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Beteende"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "Markör"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Tangentbord"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Tangentbord och mus"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Mus"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Rullningslist"
+	},
+	"terminal_title_settings": {
+		"message": "Inställningar"
+	},
+	"terminal_title_theme": {
+		"message": "Tema"
+	},
 	"tip_1": {
 		"message": "Du kan hålla ned Ctrl (Cmd på macOS) när du klickar på länkar för att öppna dem."
 	},
 	"tip_10": {
-		"message": "När du kör via ett fönster kan du öppna en ny session med Ctrl+Skift-N."
+		"message": "När du kör i ett fönster kan du öppna en ny session med Ctrl+Skift+N."
 	},
 	"tip_11": {
 		"message": "Du kan ändra funktionen för tangenter/kortkommandon: https://goo.gl/LWRndr"
@@ -542,7 +1142,10 @@
 	"welcome_version": {
 		"message": "Här är $1-versionen $2."
 	},
+	"write_size_label": {
+		"message": "Skrivstorlek (kB)"
+	},
 	"zoom_warning": {
-		"message": "Öppna Chrome-menyn > ställ in Zoom på 100 %"
+		"message": "Öppna Chrome-menyn > ställ in Zoom på 100 %"
 	}
 }

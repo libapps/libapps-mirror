@@ -12,25 +12,19 @@
 		"message": "Vahelehe sulgemine lõpetab seansi."
 	},
 	"cache_pin_prompt": {
-		"message": "Kas salvestada PIN-kood selle seansi jaoks vahemällu? (y/N):"
+		"message": "Kas salvestada PIN-kood selle SSH-seansi jaoks vahemällu? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "Tühista"
 	},
+	"changelog": {
+		"message": "Muudatuste logi"
+	},
 	"clear_known_hosts_menu_label": {
-		"message": "Tühjenda SSH loend known_hosts"
+		"message": "Kustuta teadaolevad SSH-hostid"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "See käsk kuvab teadaolevate hostide menüü ja edastab hostile unustamiskäsu."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Teadaolev SSH-hosti unustamine."
-	},
-	"cmd_ssh_help": {
-		"message": "Parameetrid |username| ja |hostname| on kohustuslikud, |port| on valikuline. Kui jätate pordi määramata, siis kasutatakse vaikeväärtust 22."
-	},
-	"cmd_ssh_title": {
-		"message": "Avab uue SSH-seansi."
+	"clear_label": {
+		"message": "Kustuta"
 	},
 	"command_complete": {
 		"message": "Käsust $1 väljuti olekukoodiga $2."
@@ -39,7 +33,7 @@
 		"message": "Käsku $1 selles Chrome'i versioonis ei toetata"
 	},
 	"command_startup_failed": {
-		"message": "Käsu $1 käivitamine nurjus: $2"
+		"message": "Käsu $1 käivitamine ebaõnnestus: $2"
 	},
 	"connect_button_label": {
 		"message": "Ühenda"
@@ -54,7 +48,7 @@
 		"message": "Ühenduse dialoog"
 	},
 	"console_crosh_options_notice": {
-		"message": "Kas teadsite, et olemas on ka spetsiaalne valikute leht?\nEnam ei pea reeglit 'term_' otse muutma!\nSelle avamiseks vajutage klahvikombinatsiooni $1 või klõpsake URL-il\n$2"
+		"message": "Kas teadsite, et olemas on ka spetsiaalne valikute leht?\nEnam ei pea reeglit „term_” otse muutma!\nSelle avamiseks vajutage klahvikombinatsiooni $1 või klõpsake URL-il\n$2"
 	},
 	"console_nassh_options_notice": {
 		"message": "Kas teadsite, et olemas on ka spetsiaalne valikute leht?\nEnam ei pea reeglit „term_” vahetult muutma!\n$1"
@@ -93,10 +87,10 @@
 		"message": "vaiketee on kasutaja juurkataloog"
 	},
 	"field_nassh_options_aria_label": {
-		"message": "SSH-releeserveri valikud"
+		"message": "SSH-vaheserveri valikud"
 	},
 	"field_nassh_options_placeholder": {
-		"message": "SSH-releeserveri valikud"
+		"message": "SSH-vaheserveri valikud"
 	},
 	"field_port_aria_label": {
 		"message": "port"
@@ -105,7 +99,7 @@
 		"message": "port"
 	},
 	"field_terminal_profile_placeholder": {
-		"message": "vaikeprofiil"
+		"message": "vaikimisi"
 	},
 	"field_username_aria_label": {
 		"message": "kasutajanimi"
@@ -114,7 +108,7 @@
 		"message": "kasutajanimi"
 	},
 	"found_relay": {
-		"message": "Leiti releeserver: $1"
+		"message": "Leiti vaheserver: $1"
 	},
 	"get_profile_error": {
 		"message": "VIGA: profiili $1 ei õnnestunud laadida:\n$2"
@@ -143,6 +137,219 @@
 	"hterm_loading_resource_start": {
 		"message": "Allika $1 laadimine …"
 	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Luba tekstisiseste kujutiste kuvamine"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt + tagasilükkeklahv on Meta + tagasilükkeklahv"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "Klahvi AltGr režiim"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Klahvi Alt kohtlemine klahvina Meta"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Muuteklahvi Alt töötlemine"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Hoiatuskella heli (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Taustavärv"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Taustkujutis"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Taustkujutise paigutus"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Taustkujutise suurus"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Tagasilükkeklahvi käitumine"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Tähemärkide kaart alistab"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Tühjenda tekstivalik automaatselt"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Akna sulgemine väljumisel"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Algne värvipalett"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Valitud sisu automaatne kopeerimine"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Kopeerimiskäsu Ctrl + C käitumine"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Suumi klahvikombinatsioonide Ctrl ja +/–/0 käitumine"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Kleepimiskäsu Ctrl + V käitumine"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Kursori vilkumine"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Kursori vilkumissagedus"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Tekstikursori värv"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Tekstikursori kuju"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Loo hoiatuskellade jaoks töölauamärguanded"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Ida-Aasia mitmetähenduslikud tähemärgid hõlmavad kaks veergu"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Mitte-UTF-8 C1 juhtmärkide tugi"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Vilkuva teksti lubamine"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Paksu teksti käitumine"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Kasutage erksaid värve ja paksu teksti"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Sisu kopeerimisel märguande kuvamine"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Lõikelauale kaugkirjutamise lubamine"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Tagasikerimise puhvri tühjendamise lubamine (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Lubab tekstikursori vilkumist muuta"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Kuva terminali suuruse muutmisel selle mõõtmed"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Keskkonna muutujad"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Teksti fondipere"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Teksti fondi suurus"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Teksti fondi silumine"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Teksti värv"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Teksti sisestamise ajal hiirekursori peitmine"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Klahvide Home/End kerimiskäitumine"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Klaviatuuri seosed/otseteed"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Kasuta operatsioonisüsteemi klaviatuuri vaikeseoseid/-otseteid"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Meediaklahvid on F-klahvid"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Muuteklahvi Meta töötlemine"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Hiirenupuga kleepimine"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Hiire paremklikk kleebib sisu"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Klahvidega Page Up / Page Down kerimise käitumine"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Vahelehe vahetamise käskude Alt + 1–9 käitumine"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Uue akna avamise käsu Ctrl + N käitumine"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Klahvidega Ctrl + 1–9 vahelehe vahetamise käitumine"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Uue vahelehe avamise käsu Ctrl + T käitumine"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Vahelehe vahetamise käsu Ctrl + tabulaator käitumine"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Vahelehe sulgemise käsu Ctrl + W käitumine"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Vahelehe vahetamise käskude Meta + 1–9 käitumine"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Kleepimiskäsu Meta + V käitumine"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Luba pukseerides kleepimine"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Kodeeringu vastuvõtmine"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Pärast klahvivajutust alaossa kerimine"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Keri pärast uut väljundit alaossa"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Kerimisrattaga nooleklahvide emuleerimine"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Hiire kerimisratta kordisti"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Kerimisriba nähtavus"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Kleepimine klahvikombinatsiooniga tõstuklahv + Insert"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Terminali kodeering"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Luba brauseril teksti kopeerimise toiminguid töödelda"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "Kohandatud CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "Kohandatud CSS (tekstisisene)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Valiku automaatne peatamine (vasakule)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Sõnavahe tähemärgid"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Valiku automaatne peatamine (paremale)"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Tekstisisesed kujutised"
 	},
@@ -153,7 +360,7 @@
 		"message": "Määrab, kas lubada kaughostil terminalis pilte kuvada.\n\nVaikimisi esitatakse viip, kuni tehakse valik."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Kui see määratakse, võetakse tagasi Chrome OS-i klahvikombinatsiooni Alt + Tagasilükkeklahv -> DEL ümbermuutmine, nii et Alt + Tagasilükkeklahv on ka tegelikult Alt + Tagasilükkeklahv."
+		"message": "Kui see määratakse, võetakse tagasi Chrome OS-i klahvikombinatsiooni Alt + tagasilükkeklahv -> kustutamisklahv ümbermuutmine, nii et Alt + tagasilükkeklahv on ka tegelikult Alt + tagasilükkeklahv."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Valige AltGr-i tuvastamise heuristika.\n\n'null': automaatne tuvastamine toimub järgmise põhjal: navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': keelatakse AltGr-iga seotud muutmised.\n'ctrl- alt': oletatakse, et Ctrl + Alt tähendab klahvi AltGr.\n'left-alt': oletatakse, et vasakpoolne Alt tähendab klahvi AltGr.\n'right-alt': oletatakse, et parempoolne Alt tähendab klahvi AltGr."
@@ -165,13 +372,13 @@
 		"message": "Juhib Alt-klahvi käsitlemist.\n\n  escape: ESC-eesliite saatmine.\n  8-bit: lisatakse 128 sisestatud tähemärgile, nagu teenuses xterm.\n browser-key: oodake klahvivajutust ja vaadake, mida brauser\n ütleb. (See ei tööta hästi platvormidel, kus brauser teeb\n mõne Alt-seeria puhul vaiketoimingu.)"
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "Terminali kellaheli URL. Puuduva kellaheli puhul on string tühi."
+		"message": "Terminali kellaheli URL. Puuduva kellaheli puhul jätke see tühjaks."
 	},
 	"hterm_pref_background_color": {
 		"message": "Muude värviatribuutideta teksti taustavärv."
 	},
 	"hterm_pref_background_image": {
-		"message": "Taustakujutise CSS-väärtus. Puuduva kujutise puhul on string tühi.\n\nNäide:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Taustakujutise CSS-väärtus. Kui kujutist ei ole, jätke see tühjaks.\n\nNäide:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Taustakujutise asendi CSS-väärtus.\n\nNäide:\n  10% 10%\n  center"
@@ -180,10 +387,10 @@
 		"message": "Taustakujutise suuruse CSS-väärtus."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Kui see on tõene, peaks tagasilükkeklahv saatma vastuse BS ('\\x08', aka ^H). Muul juhul peaks tagasilükkeklahv saatma vastuse '\\x7f'."
+		"message": "Kui see on tõene, saadab tagasilükkeklahv vastuse BS („\\x08” ehk ^H). Muul juhul saadab tagasilükkeklahv vastuse „\\x7f”."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "See on tuvastatud objektina. See on hõre maatriks, kus iga atribuut on tähemärgi määratud kood ja väärtus on objekt, mis on ise hõre maatriks. Selles hõredas maatriksis on iga atribuut vastuvõetud tähemärk ja väärtus on kuvatud tähemärk.\n\nNäide:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "See on tuvastatud objektina. See on hõre maatriks, kus iga atribuut on tähemärgi määratud kood ja väärtus on objekt, mis on ise hõre maatriks. Selles hõredas maatriksis on iga atribuut vastuvõetud tähemärk ja väärtus on kuvatud tähemärk.\n\nNäide:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "Kas kustutada valik pärast kopeerimist või mitte."
@@ -192,7 +399,7 @@
 		"message": "Määrab, kas sulgeda aken pärast käsu täitmist."
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "Saate vaikepaleti värvid alistada.\n\nSelle saab määrata massiivi või objektina. Objektina määramisel eeldatakse, et tegemist on hõreda massiiviga, mille iga atribuut on värvipaleti arvindeks.\n\nVäärtusteks saab määrata sisuliselt mis tahes CSS-i värviväärtused, sealhulgas vormingu #RGB, #RRGGBB, rgb(...) ja rgba(...) ning X11 standardses failis rgb.txt sisalduvad värvinimed.\n\nVõite kasutada väärtust „null”, mis tähendab, et vaikeväärtust ei tohi muuta. See võimaldab väikese arvu indekseid vahele jätta, kui väärtus on määratud massiivina.\n\nNäiteks mõlemad järgmised väärtused määravad 1. värviindeksi jaoks sinise värvi:\n  1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "Saate vaikepaleti värvid alistada.\n\nSelle saab määrata massiivi või objektina. Objektina määramisel eeldatakse, et tegemist on hõreda massiiviga, mille iga atribuut on värvipaleti arvindeks.\n\nVäärtusteks saab määrata sisuliselt mis tahes CSS-i värviväärtused, sealhulgas vormingu #RGB, #RRGGBB, rgb(...) ja rgba(...) ning X11 standardses failis rgb.txt sisalduvad värvinimed.\n\nVõite kasutada väärtust „null”, mis tähendab, et vaikeväärtust ei tohi muuta. See võimaldab väikese arvu indekseid vahele jätta, kui väärtus on määratud massiivina.\n\nNäiteks mõlemad järgmised väärtused määravad 1. värviindeksi jaoks sinise värvi:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
 		"message": "Hiirega tehtud valik kopeeritakse automaatselt lõikelauale."
@@ -201,7 +408,7 @@
 		"message": "Ctrl + C kopeerib, kui see on tõene, ja saadab ^C hosti juurde, kui see on väär.\nCtrl + Tõstuklahv + C saadab ^C hosti juurde, kui see on tõene, ja kopeerib, kui see on väär."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Kui see on tõene, juhib Ctrl + pluss/miinus/null suumi.\nKui see on väär, juhib suumi klahvikombinatsioon Ctrl + Tõstuklahv + pluss/miinus/null, Ctrl + miinus saadab ^_, Ctrl + pluss/null ei tee midagi."
+		"message": "Kui see on tõene, juhib Ctrl + pluss/miinus/null suumi.\nKui see on väär, juhib suumi klahvikombinatsioon Ctrl + tõstuklahv + pluss/miinus/null, Ctrl + miinus saadab ^_, Ctrl + pluss/null ei tee midagi."
 	},
 	"hterm_pref_ctrl_v_paste": {
 		"message": "Kui see on tõene, siis Ctrl + V kleebib, kui see on väär, saadab ^V hosti juurde.\nCtrl + Tõstuklahv + V saadab ^V hosti juurde, kui see on tõene, ja kleebib, kui see on väär."
@@ -214,6 +421,9 @@
 	},
 	"hterm_pref_cursor_color": {
 		"message": "Nähtava tekstikursori värv."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "Nähtava tekstikursori värv. Seda saab käitusajal terminali paokombinatsioonide abil muuta."
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Kui see on tõene, loovad terminali kellad taustal veebimärguande. https://www.w3.org/TR/notifications/\n\nMärguannete kuvamine vajab kasutaja luba. Kui see valik on määratud tõeseks, üritab hterm vajaduse korral kasutajalt luba küsida. Brauserid ei pruugi seda loa taotlust kuvada, kui kasutaja toiming seda ei käivitanud.\n\nChrome'i laiendustel, millel on luba „märguanded”, on luba märguannete kuvamiseks."
@@ -239,8 +449,14 @@
 	"hterm_pref_enable_clipboard_write": {
 		"message": "Kaughostil lubatakse kirjutada otse kohaliku süsteemi lõikelauale.\nJuurdepääsu lugemiseks ei anta olenemata sellest seadest mitte kunagi.\n\nSeda kasutatakse juurdepääsu juhtimiseks funktsioonidele, nagu OSC-52."
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Määrab, kas käsu Ekraanikuva kustutamine (CSI-J) funktsioon Salvestatud ridade kustutamine (režiim 3) võib tühjendada terminali tagasikerimise puhvri.\n\nSelle vaikimisi lubamine on ohutu."
+	},
 	"hterm_pref_enable_dec12": {
 		"message": "Arvestatakse hosti katset muuta tekstikursori vilkumise olekut DEC-privaatrežiimi 12 abil."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Määrab, kas terminali suuruse muutumisel kuvatakse terminali mõõtmed."
 	},
 	"hterm_pref_environment": {
 		"message": "Keskkonna muutujate algne komplekt objekti kujul."
@@ -266,6 +482,9 @@
 	"hterm_pref_keybindings": {
 		"message": "Vastendatud klahvikombinatsioonide ja klahvitoimingute kaart. Klahvikombinatsioonid võivad (aga ei pruugi) sisaldada üht või mitut muuteklahvi, millele järgneb klahvikood. Klahvikoodid võivad olla kümnend- või kuueteistkümnendarvud või klahvi identifikaatorid. Klahvitoimingud saab määrata hostile saadetava stringi või toimingu identifikaatorina. Vormingu täieliku selgituse leiate siit: https://goo.gl/LWRndr.\n\nKlahvikombinatsioonide näited:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Määrab, kas järgida tuleks operatsioonisüsteemi tavapäraseid klaviatuuriseoseid, selle asemel et jäädvustada kombinatsioonid alati htermis kasutamiseks."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Kui see on Tõene, teisendatakse meediaklahvid F-klahvi ekvivalendiks. Kui see on Väär, lastakse brauseril klahve käsitleda."
 	},
@@ -282,16 +501,31 @@
 		"message": "Kui see on tõene, juhivad klahvid Lehe võrra üles / Lehe võrra alla terminali kerimisriba ja kombinatsioon tõstuklahv + klahv Lehe võrra üles / Lehe võrra alla saadetakse kaughostile. Kui see on väär, saadetakse klahvide Lehe võrra üles / Lehe võrra alla vajutused kaughostile ja kombinatsioon tõstuklahv + klahv Lehe võrra üles / Lehe võrra alla võimaldab kerida."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Määrab, kas klahvikombinatsioon Alt + 1–9 tuleks edastada brauserisse.\n\nSee on kasulik brauseri vahelehel htermi käitamisel, et te ei kaotaks Chrome'i klaviatuuri kiirendeid „lülitu vahelehele”. Kui seda vahelehel ei käitata, soovitame need klahvid saata hostile, et neid saaks kasutada tekstiredaktoris vim või emacs.\n\nKui see on tõene, käsitleb brauser klahvikombinatsioone Alt + 1–9. Kui see on väär, saadetakse klahvikombinatsioonid Alt + 1–9 hostile. Kui väärtus on null, tuvastatakse see automaatselt brauseri platvormi ja akna tüübi järgi."
+		"message": "Määrab, kas klahvikombinatsioon Alt + 1–9 edastatakse brauserile.\n\nSee on kasulik htermi käitamisel brauseri vahelehel, et te ei kaotaks Chrome'i klaviatuuri otseteid „lülitu vahelehele”. Kui seda vahelehel ei käitata, soovitame need klahvid saata hostile, et neid saaks kasutada tekstiredaktoris vim või emacs.\n\nKui see on tõene, käsitleb brauser klahvikombinatsioone Alt + 1–9. Kui see on väär, saadetakse klahvikombinatsioonid Alt + 1–9 hostile. Kui väärtus on null, tuvastatakse see automaatselt brauseri platvormi ja akna tüübi järgi."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Määrab, kas klahvikombinatsioon Ctrl + N edastatakse brauserile.\n\nKui see on tõene, käsitleb brauser klahvikombinatsiooni Ctrl + N klaviatuuri otseteena uue akna avamiseks. Kui see on väär, saadetakse Ctrl + N hostile."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Määrab, kas klahvikombinatsioon Ctrl + 1–9 tuleks edastada brauserisse.\n\nSee on kasulik htermi käitamisel brauseri vahelehel, et te ei kaotaks Chrome'i klaviatuuri kiirendeid „lülitu vahelehele”. Kui seda vahelehel ei käitata, soovitame need klahvid saata hostile, et neid saaks kasutada tekstiredaktoris vim või emacs.\n\nKui see on tõene, käsitleb brauser klahvikombinatsioone Ctrl + 1–9. Kui see on väär, saadetakse klahvikombinatsioonid Ctrl + 1–9 hostile. Kui väärtus on null, tuvastatakse see automaatselt brauseri platvormi ja akna tüübi järgi."
+		"message": "Määrab, kas klahvikombinatsioon Ctrl + 1–9 edastatakse brauserile.\n\nSee on kasulik htermi käitamisel brauseri vahelehel, et te ei kaotaks Chrome'i klaviatuuri otseteid „lülitu vahelehele”. Kui seda vahelehel ei käitata, soovitame need klahvid saata hostile, et neid saaks kasutada tekstiredaktoris vim või emacs.\n\nKui see on tõene, käsitleb brauser klahvikombinatsioone Ctrl + 1–9. Kui see on väär, saadetakse klahvikombinatsioonid Ctrl + 1–9 hostile. Kui väärtus on null, tuvastatakse see automaatselt brauseri platvormi ja akna tüübi järgi."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Määrab, kas klahvikombinatsioon Ctrl + T edastatakse brauserile.\n\nKui see on tõene, käsitleb brauser klahvikombinatsiooni Ctrl + T klaviatuuri otseteena uue vahelehe avamiseks. Kui see on väär, saadetakse Ctrl + T hostile."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Määrab, kas klahvikombinatsioonid Ctrl + tabulaator ja Ctrl + tõstuklahv + tabulaator edastatakse brauserile.\n\nKui see on tõene, käsitleb brauser klahvikombinatsioone Ctrl + tabulaator ja Ctrl + tõstuklahv + tabulaator klaviatuuri otseteedena järgmisele/eelmisele vahelehele liikumiseks. Kui see on väär, saadetakse tabulaator hostile ilma tõstuklahvita ja klahvita Ctrl."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Määrab, kas klahvikombinatsioon Ctrl + W edastatakse brauserile.\n\nKui see on tõene, käsitleb brauser klahvikombinatsiooni Ctrl + N klaviatuuri otseteena vahelehe sulgemiseks. Kui see on väär, saadetakse Ctrl + W hostile."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Määrab, kas klahvikombinatsioon Metaklahv + 1–9 tuleks edastada brauserisse.\n\nSee on kasulik htermi käitamisel brauseri vahelehel, et te ei kaotaks Chrome'i klaviatuuri kiirendeid „lülitu vahelehele”. Kui seda vahelehel ei käitata, soovitame need klahvid saata hostile, et neid saaks kasutada tekstiredaktoris vim või emacs.\n\nKui see on tõene, käsitleb klahvikombinatsioone Metaklahv + 1–9 brauser. Kui see on väär, saadetakse klahvikombinatsioonid Metaklahv + 1–9 hostile. Kui väärtus on null, tuvastatakse see automaatselt brauseri platvormi ja akna tüübi järgi."
+		"message": "Määrab, kas klahvikombinatsioon Meta + 1–9 edastatakse brauserile.\n\nSee on kasulik htermi käitamisel brauseri vahelehel, et te ei kaotaks Chrome'i klaviatuuri otseteid „lülitu vahelehele”. Kui seda vahelehel ei käitata, soovitame need klahvid saata hostile, et neid saaks kasutada tekstiredaktoris vim või emacs.\n\nKui see on tõene, käsitleb brauser klahvikombinatsioone Meta + 1–9. Kui see on väär, saadetakse klahvikombinatsioonid Meta + 1–9 hostile. Kui väärtus on null, tuvastatakse see automaatselt brauseri platvormi ja akna tüübi järgi."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Määrab, kas klahvikombinatsioon Metaklahv + V edastatakse hostile."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Kui see on tõene, kleebitakse pukseeritud tekst terminali.\nKui see on väär, eiratakse pukseeritud teksti."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Määratakse eeldatav kodeering hostilt saadud andmetele.\nKui kodeeringud ei kattu, ilmnevad tõenäoliselt visuaalsed vead.\n\nKehtivad väärtused on „utf-8” ja „raw”."
@@ -312,10 +546,10 @@
 		"message": "Vertikaalse kerimisriba režiim."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Määrab, kas kombinatsiooni tõstuklahv + lisamisklahv kasutatakse kleepimiseks saadetakse kaughostile."
+		"message": "Määrab, kas kombinatsiooni tõstuklahv + Insert kasutatakse kleepimiseks või saadetakse kaughostile."
 	},
 	"hterm_pref_terminal_encoding": {
-		"message": "Terminali vaikekodeering (DOCS).\n\nISO-2022 lubab tähemärkide kaardi tõlked (nt graafikakaardid).\nUTF-8 keelab nende toe.\n\nLukustatud variant tähendab, et kodeeringut ei saa käitusajal terminali paokombinatsioonide ajal muuta.\n\nPeaksite kasutama vormingut UTF-8, v.a juhul, kui märkate pärandrakenduste vigast renderdamist."
+		"message": "Terminali vaikekodeering (DOCS).\n\nISO-2022 lubab tähemärkide kaardi tõlked (nt graafikakaardid).\nUTF-8 keelab nende toe.\n\nLukustatud variant tähendab, et kodeeringut ei saa käitusajal terminali paokombinatsioonide abil muuta.\n\nPeaksite kasutama vormingut UTF-8, v.a juhul, kui märkate pärandrakenduste vigast renderdamist."
 	},
 	"hterm_pref_use_default_window_copy": {
 		"message": "Määrab, kas kasutada brauseris/operatsioonisüsteemis kopeerimise vaikekäitumist.\n\nVõimaldab brauseril/operatsioonisüsteemil kopeerimissündmust vahetult hallata, mis võib täiustada ühilduvust teatud süsteemidega (kus kopeerimine ei tööta), ent vähendab teksti valimise stabiilsust.\n\nNäiteks automaatselt murtud pikad read kopeeritakse koos reavahedega."
@@ -372,7 +606,7 @@
 		"message": "Importimine …"
 	},
 	"initializing_relay": {
-		"message": "Otsitakse releeserverit, kasutades hosti $1"
+		"message": "Otsitakse vaheserverit, kasutades hosti $1"
 	},
 	"json_parse_error": {
 		"message": "Käsku JSON asukohas „$1” ei saanud sõeluda: $2"
@@ -386,8 +620,20 @@
 	"known_hosts_title": {
 		"message": "Teadaolevad hostid:"
 	},
+	"licenses": {
+		"message": "Litsentsid"
+	},
+	"licenses_expand_link": {
+		"message": "kuva litsents"
+	},
+	"licenses_title": {
+		"message": "Avatud lähtekoodi litsentsid"
+	},
 	"loading_label": {
 		"message": "Laadimine …"
+	},
+	"migrate_to_ext": {
+		"message": "Teade. Võtke kasutusele Secure Shelli laienduse uus versioon ($1).\nChrome'i rakenduste tugi on katkestatud, mistõttu ei saa see versioon enam värskendusi.\nVaadake lisateavet üleviimisjuhendist ($2)."
 	},
 	"missing_param": {
 		"message": "Puuduv parameeter: $1"
@@ -401,8 +647,173 @@
 	"mounted_message": {
 		"message": "Ühendatud."
 	},
+	"nasftp_cmd_cat_help": {
+		"message": "Faili kukutamine terminali"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Töökataloogi muutmine"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Teede grupi muutmine"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Teede lubade muutmine"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Teede omaniku muutmine"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Tühjendab praeguse terminalikuva"
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Faili kopeerimine lõikelauale (vaikeseade: 10 MiB algusest)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "$1 baiti kopeeriti lõikelauale"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Värvide kasutamise lüliti"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Lähtesisu kopeerimine sihtkohta"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Failide kustutamine"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Ketta statistika kuvamine"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Tee: $1\n  Failisüsteemi ID: $2\n Kokku: $3\n  Kasutatud: $4 ($5%)\n Saadaval: $6 (privileegideta kasutajatele)\n $7 (juursüsteemile)"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Katkesta ühendus"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Faili allalaadimine: $1 nimega $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Failide allalaadimine"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "See abikuva"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Kataloogi üksikasjade loetlemine"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Sihtmärgile viitaval teel lingi loomine"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Kataloogide loomine"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Faili nime muutmine"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Viiba stringi määramine"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Failide üleslaadimine"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Faili üleslaadimine: $1 nimega $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Praeguse töökataloogi kuvamine"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Kaugtöö kataloog: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Sümbolnimede lugemine"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Teede kanoniseerimine"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Failide üleslaadimise jätkamine"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Failide eemaldamine"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Tühjade kataloogide kustutamine"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Failide tekstisisene kuvamine"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Laiendused:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Faili oleku kuvamine"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Fail: $1\nMaht: $2 baiti\nKasutaja ID: $3\nGrupi ID: $4\nJuurdepääs: $5\nJuurdepääsemise aeg: $6\nMuutmise aeg: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Sihtmärgile viitaval teel sümbolnime loomine"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Teede lühendamine 0 baidini"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  serveri laiendid:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Protokolli praeguse versiooni kuvamine"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "SFTP-protokolli versiooniteave:\n  kohalik: $1\n  server: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: faili lõpp"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: faili ei leitud"
+	},
+	"nasftp_error_file_reading": {
+		"message": "Faili $1 lugemine ebaõnnestus: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Käsitlemata sisemine tõrge, teatage veast: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: sobimatu number: $3"
+	},
+	"nasftp_error_message": {
+		"message": "VIGA: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: laiendus „$2“ ei ole saadaval"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: ei ole tavaline fail"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: argumente ei ole piisavalt"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: luba ei antud"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: liiga palju argumente"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: tundmatu käsk"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: tundmatu lipp $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Sundsulgemine"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 baiti teisaldati $2 sekundiga ($3/s)"
+	},
 	"nassh_options_error": {
-		"message": "Relee tundmatu valik: $1"
+		"message": "Tundmatu valik: $1"
 	},
 	"nassh_product_name": {
 		"message": "Secure Shell"
@@ -426,7 +837,7 @@
 		"message": "Valikud"
 	},
 	"plugin_loading": {
-		"message": "NaCl pistikprogrammi laadimine ..."
+		"message": "NaCl pistikprogrammi laadimine …"
 	},
 	"plugin_loading_complete": {
 		"message": " valmis."
@@ -434,14 +845,44 @@
 	"plugin_loading_failed": {
 		"message": " ebaõnnestus! :("
 	},
+	"popup_connect_tooltip": {
+		"message": "Uuel vahelehel avamiseks hoidke all klahvi Ctrl."
+	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
+	"preferences_header_ssh_files": {
+		"message": "SSH-failid"
+	},
 	"preferences_header_terminal": {
-		"message": "Profiili seaded"
+		"message": "Terminali seaded"
+	},
+	"preferences_header_uri": {
+		"message": "URI töötlejad"
 	},
 	"preferences_reset": {
 		"message": "Kõik eelistused lähtestati."
+	},
+	"protocol_register_button": {
+		"message": "Protokollitöötlejate registreerimine"
+	},
+	"protocol_register_explain": {
+		"message": "Allolev nupp proovib registreerida töötlejad kõigi protokollide jaoks, mida me toetame. Näiteks võimaldab see meil protokolliga ssh:// linke vahetult töödelda. Brauser kuvab iga protokolli kohta viiba, seega tuleb teil iga protokoll eraldi kinnitada / vastu võtta. Kui ühtki viipa ei kuvata, vaadake järgmisest jaotisest vigade otsimise nõuandeid."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Kui oleme juba töötlejad registreerinud või eelmised registreerimiskatsed lükati tagasi, ei kuvata rohkem viipasid. Avage allolev dialoogiaken ja kontrollige registreeritud töötlejate seadeid jaotistes ssh/sftp/jne. Kui see programm on blokeeritud, saate need seaded kustutada, et proovida uuesti registreerida. Kui see programm on juba registreeritud, kuid pole määratud vaiketöötlejaks, saate muuta ka vaiketöötlejat."
+	},
+	"protocol_register_options_link": {
+		"message": "Protokolli registreerimine"
+	},
+	"protocol_register_settings_button": {
+		"message": "Ava registreeritud töötlejate seaded"
+	},
+	"protocol_register_title": {
+		"message": "Secure Shelli protokolli töötleja registreerimisabiline"
+	},
+	"read_size_label": {
+		"message": "Maht lugemisel (KiB)"
 	},
 	"reconnect_message": {
 		"message": "Kas ühendada uuesti (R), valida teine ühendus (C) või väljuda (X)?"
@@ -450,10 +891,13 @@
 		"message": "Uuesti proovimine …"
 	},
 	"request_pin_prompt": {
-		"message": "Sisestage PIN-kood, et avada klahv $1 lugejas „$2” (jäänud on $3 katset):"
+		"message": "Sisestage PIN-kood, et avada klahv $1 lugejas „$2 ($3)” (jäänud on $4 katset):"
 	},
 	"restore_prefs": {
 		"message": "Varukoopia taastamine"
+	},
+	"save_label": {
+		"message": "Salvesta"
 	},
 	"shortcut_list_aria_label": {
 		"message": "salvestatud ühendused"
@@ -464,8 +908,41 @@
 	"ssh_argstr_label": {
 		"message": "SSH argumendid"
 	},
+	"stream_open_error": {
+		"message": "Voo $1 avamine ebaõnnestus: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "Tühjenda terminal"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI-värvid"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Sakitõrje"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Kell"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Vilkuv"
+	},
+	"terminal_name_pref_color": {
+		"message": "Värv"
+	},
+	"terminal_name_pref_image": {
+		"message": "Pilt"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Kuju"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Nähtav"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Määrake vaikepaleti värvid."
+	},
+	"terminal_pref_bell": {
+		"message": "Terminali kuuldav kell."
 	},
 	"terminal_preview_label": {
 		"message": "Eelvaade"
@@ -476,11 +953,128 @@
 	"terminal_reset_menu_label": {
 		"message": "Lähtesta terminal"
 	},
+	"terminal_settings_background_image_help": {
+		"message": "Taustkujutise URL. Peab algama kujul „http://” või „https://”. Kui kujutist ei ole, jätke see tühjaks.\n\nNäide:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Automaatne"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Keela"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Blokeeri"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Jooni alla"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Kas soovite kindlasti taastada teema vaikeseaded?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Teema lähtestamine"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Lähtesta"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Klassikaline"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Tume"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Uduvine"
+	},
+	"terminal_theme_light_label": {
+		"message": "Hele"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Värv 0: must"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Värv 1: punane"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Värv 10: erkroheline"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Värv 11: erkkollane"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Värv 12: erksinine"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Värv 13: erk magenta"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Värv 14: erk tsüaansinine"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Värv 15: erkvalge"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Värv 2: roheline"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Värv 3: kollane"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Värv 4: sinine"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Värv 5: magenta"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Värv 6: tsüaan"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Värv 7: valge"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Värv 8: erkmust"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Värv 9: erkpunane"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Välimus"
+	},
+	"terminal_title_pref_background": {
+		"message": "Taust"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Käitumine"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "Kursor"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Klaviatuur"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Klaviatuur ja hiir"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Hiir"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Kerimisriba"
+	},
+	"terminal_title_pref_text": {
+		"message": "Tekst"
+	},
+	"terminal_title_settings": {
+		"message": "Seaded"
+	},
+	"terminal_title_theme": {
+		"message": "Teema"
+	},
 	"tip_1": {
 		"message": "Linkide avamiseks hoidke nendel klõpsamisel all klahvi Ctrl (Mac OS-is klahvi Cmd)."
 	},
 	"tip_10": {
-		"message": "Aknas käitamisel avab klahvikombinatsioon Ctrl+Tõstuklahv-N uue seansi."
+		"message": "Aknas käitamisel avab klahvikombinatsioon Ctrl + tõstuklahv + N uue seansi."
 	},
 	"tip_11": {
 		"message": "Klahve/otseteid saab uuesti siduda: https://goo.gl/LWRndr"
@@ -531,7 +1125,7 @@
 		"message": "Muudatuste logi / väljalaskemärkmed: $1"
 	},
 	"welcome_faq": {
-		"message": "Vastused korduma kippuvatele küsimustele: $1 (avamiseks hoidke juhtklahvi all ja klõpsake linkidel)"
+		"message": "Vastused korduma kippuvatele küsimustele: $1 (avamiseks hoidke Ctrl-kahvi all ja klõpsake linkidel)"
 	},
 	"welcome_release_highlights": {
 		"message": "Suured muudatused pärast versiooni $1:"
@@ -541,6 +1135,9 @@
 	},
 	"welcome_version": {
 		"message": "Tere tulemast rakenduse $1 versiooni $2!"
+	},
+	"write_size_label": {
+		"message": "Maht kirjutamisel (kB)"
 	},
 	"zoom_warning": {
 		"message": "Seadistage suumi tase Chrome'i menüüs 100%-le"

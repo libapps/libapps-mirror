@@ -1,9 +1,9 @@
 {
 	"already_mounted_message": {
-		"message": "這個檔案系統已經掛接。"
+		"message": "檔案系統已掛接！"
 	},
 	"backup_prefs": {
-		"message": "儲存備份"
+		"message": "儲存備份內容"
 	},
 	"bad_destination": {
 		"message": "無法剖析目的地：$1"
@@ -12,40 +12,34 @@
 		"message": "關閉這個分頁會使這個工作階段中斷連線。"
 	},
 	"cache_pin_prompt": {
-		"message": "是否要快取 PIN 碼以供這個工作階段使用？(y/N)："
+		"message": "要快取這個 SSH 工作階段的 PIN 碼嗎？(Y/N)："
 	},
 	"cancel_button_label": {
 		"message": "取消"
 	},
+	"changelog": {
+		"message": "變更記錄"
+	},
 	"clear_known_hosts_menu_label": {
-		"message": "清除已知的 SSH 主機"
+		"message": "清除 SSH 已知主機"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "這個指令會顯示已知主機選單和要刪除的主機提示。"
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "刪除已知的 SSH 主機。"
-	},
-	"cmd_ssh_help": {
-		"message": "|username| 和 |hostname| 是必要參數，|port| 為選用參數。如未指定通訊埠，則通訊埠會預設為 22。"
-	},
-	"cmd_ssh_title": {
-		"message": "開啟新的 SSH 工作階段。"
+	"clear_label": {
+		"message": "清除"
 	},
 	"command_complete": {
-		"message": "$1 指令結束，傳回 $2 狀態碼。"
+		"message": "$1 指令結束，傳回狀態碼 $2。"
 	},
 	"command_not_supported": {
-		"message": "這個 Chrome 版本不支援 $1"
+		"message": "這個版本的 Chrome 不支援 $1"
 	},
 	"command_startup_failed": {
-		"message": "$1 啟動失敗：$2"
+		"message": "無法啟動 $1：$2"
 	},
 	"connect_button_label": {
 		"message": "連線"
 	},
 	"connect_or_exit_message": {
-		"message": "選擇其他連線(C)或結束(X)？"
+		"message": "要選擇其他連線(C)還是結束(X)？"
 	},
 	"connecting": {
 		"message": "正在連線至 $1..."
@@ -54,34 +48,34 @@
 		"message": "連線對話方塊"
 	},
 	"console_crosh_options_notice": {
-		"message": "你知道嗎？我們提供了專用的選項頁面。\n所有選項一目瞭然，不必再直接指定「term_」！\n按下 $1 或點選以下連結即可開啟：\n$2"
+		"message": "你知道嗎？我們提供了專用的選項頁面。\n因此，你再也不需要直接修改「term_」！\n按下 $1 或點選以下連結即可開啟：\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "你知道嗎？我們提供了專用的選項頁面。\n所有選項一目瞭然，不必再直接修改「term_」！\n$1"
+		"message": "你知道嗎？我們提供了專用的選項頁面。\n因此，你再也不需要直接修改「term_」！\n$1"
 	},
 	"del_keycap": {
-		"message": "[DEL]"
+		"message": "[Del]"
 	},
 	"delete_button_label": {
 		"message": "刪除"
 	},
 	"disconnect_message": {
-		"message": "NaCl 外掛程式結束，傳回 $1 狀態碼。"
+		"message": "NaCl 外掛程式結束，傳回狀態碼 $1。"
 	},
 	"enter_keycap": {
-		"message": "[ENTER]"
+		"message": "[Enter]"
 	},
 	"faq_menu_label": {
 		"message": "常見問題"
 	},
 	"field_argstr_placeholder": {
-		"message": "其他命令列引數"
+		"message": "其他指令列引數"
 	},
 	"field_description_aria_label": {
 		"message": "說明"
 	},
 	"field_description_placeholder": {
-		"message": "<使用者名稱>@<主機名稱> 或形式不拘的文字"
+		"message": "<使用者名稱>@<主機名稱> 或自由格式文字"
 	},
 	"field_hostname_aria_label": {
 		"message": "主機名稱"
@@ -114,13 +108,13 @@
 		"message": "使用者名稱"
 	},
 	"found_relay": {
-		"message": "找到轉送伺服器：$1"
+		"message": "找到的轉送伺服器：$1"
 	},
 	"get_profile_error": {
 		"message": "錯誤：無法載入設定檔 $1：\n$2"
 	},
 	"hterm_announce_current_screen_header": {
-		"message": "已捲動 $1%。"
+		"message": "已捲動 $1%，"
 	},
 	"hterm_button_allow_always": {
 		"message": "一律允許"
@@ -138,40 +132,253 @@
 		"message": "上一頁"
 	},
 	"hterm_loading_resource_failed": {
-		"message": "$1 載入失敗"
+		"message": "無法載入 $1"
 	},
 	"hterm_loading_resource_start": {
-		"message": "正在載入 $1…"
+		"message": "正在載入 $1 ..."
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "允許顯示內嵌圖片"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "將 Alt + Backspace 鍵視為 Meta + Backspace 鍵"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "AltGr 鍵模式"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "將 Alt 鍵視為 Meta 鍵"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Alt 鍵的輔助鍵處理方式"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "提示音 (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "背景顏色"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "背景圖片"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "背景圖片位置"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "背景圖片大小"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Backspace 鍵行為"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "字元對應覆寫"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "自動清除所選文字"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "結束時關閉視窗"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "初始調色盤"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "自動複製選取的內容"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Ctrl + C 鍵的複製行為"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ctrl + +/-/0 鍵的縮放行為"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Ctrl + V 鍵的貼上行為"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "游標閃爍"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "游標閃爍速率"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "文字游標顏色"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "文字游標形狀"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "在收到提示音時建立桌面通知"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian Ambiguous 使用兩欄"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "支援非 UTF-8 C1 控制字元"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "啟用閃爍文字"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "粗體字行為"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "對粗體字使用亮色"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "在複製內容時顯示通知"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "允許寫入遠端剪貼簿"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "允許清除向後捲動緩衝區 (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "允許變更文字游標的閃爍速率"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "當終端機的大小有所調整時顯示終端機的尺寸"
+	},
+	"hterm_name_pref_environment": {
+		"message": "環境變數"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "字型系列"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "字型大小"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "字型平滑處理"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "文字顏色"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "在輸入時隱藏滑鼠游標"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Home/End 鍵的捲動行為"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "鍵盤繫結/快速鍵"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "使用預設的 OS 鍵盤繫結/快速鍵"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "將媒體鍵視為功能鍵 (F1 ~ F12)"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Meta 鍵的輔助鍵處理方式"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "使用滑鼠按鈕貼上"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "按一下滑鼠右鍵可貼上內容"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Page Up/Down 鍵的捲動行為"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Alt + 1..9 鍵的切換分頁行為"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Ctrl + N 鍵的開啟新視窗行為"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Ctrl + 1..9 鍵的切換分頁行為"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ctrl + T 鍵的新增分頁行為"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Ctrl + Tab 鍵的切換分頁行為"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Ctrl + W 鍵的關閉分頁行為"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Meta + 1..9 鍵的切換分頁行為"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Meta + V 鍵的貼上行為"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "允許拖曳貼上"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "接收編碼"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "使用按鍵後捲動至底部"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "新增輸出後捲動至底部"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "使用滾輪模擬方向鍵"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "滑鼠滾輪調節係數"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "捲軸顯示設定"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Shift + Insert 鍵貼上"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "終端機編碼"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "讓瀏覽器處理文字複製作業"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "自訂 CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "自訂 CSS (內嵌文字)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "暫停自動選取 (左側)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "斷字字元"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "暫停自動選取 (右側)"
 	},
 	"hterm_popup_inline_image": {
-		"message": "內置圖片"
+		"message": "內嵌圖片"
 	},
 	"hterm_popup_inline_image_disabled": {
-		"message": "內置圖片已停用"
+		"message": "已停用內嵌圖片的功能"
 	},
 	"hterm_pref_allow_images_inline": {
-		"message": "是否允許遠端主機在終端機顯示圖片。\n\n根據預設，我們會在未選擇時持續提示。"
+		"message": "設定是否要允許遠端主機在終端機顯示圖片。\n\n根據預設，我們會持續顯示提示，直到完成設定為止。"
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "設定後將復原 Chrome 作業系統 Alt+Backspace->DEL 重新對應，讓 Alt+Backspace 確實為 Alt+Backspace。"
+		"message": "設定後將取消 Chrome 作業系統 Alt + Backspace 鍵與 Delete 鍵的對應關係，讓 Alt + Backspace 鍵確實做為 Alt + Backspace 鍵使用。"
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "選取 AltGr 偵測試誤法。\n\n「null」：根據 navigator.language 自動偵測：\n      「en-us」=>「none」，其他 =>「right-alt」\n「none」：禁止任何 AltGr 相關改寫。\n「ctrl-alt」：假設 Ctrl+Alt 鍵表示 AltGr。\n「left-alt」：假設向左鍵+Alt 鍵表示 AltGr。\n「right-alt」：假設向右鍵+Alt 鍵表示 AltGr。"
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "設定是否將 Alt 鍵的功能設為 Meta 鍵或獨特的 Alt 鍵。"
+		"message": "設定是否要將 Alt 鍵的功能設為 Meta 鍵或僅做為 Alt 鍵使用。"
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "控制 Alt 鍵的處理方式。\n\n  escape：傳送 ESC 前置詞。\n  8-bit：將 128 新增至輸入的字元 (如同在 xterm 中)。\n browser-key：等待按鍵事件，觀察瀏覽器\n 如何回應 (在瀏覽器會針對某些 Alt 序列\n 執行預設動作的平台上無法順利運作)。"
+		"message": "控制 Alt 鍵的處理方式。\n\nescape：傳送 ESC 鍵前置詞。\n8-bit：將 128 新增至輸入的字元 (如同在 xterm 中)。\nbrowser-key：等待按鍵事件，觀察瀏覽器如何回應 (如果平台上的瀏覽器會針對某些 Alt 鍵序列執行預設動作，則此設定無法順利運作)。"
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "終端機提示音的網址。空白字串表示不發出提示音。"
+		"message": "終端機提示音的網址。留空表示不發出提示音。"
 	},
 	"hterm_pref_background_color": {
 		"message": "無其他色彩屬性的文字的背景顏色。"
 	},
 	"hterm_pref_background_image": {
-		"message": "背景圖片的 CSS 值。空白字串表示沒有圖片。\n\n例如：\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "背景圖片的 CSS 值。留空表示沒有圖片。\n\n例如：\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "背景圖片位置的 CSS 值。\n\n例如：\n  10% 10%\n  center"
@@ -180,67 +387,76 @@
 		"message": "背景圖片大小的 CSS 值。"
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "如果為 true，Backspace 鍵應傳送 BS (「\\x08」，又稱 ^H)，否則應傳送「\\x7f」。"
+		"message": "如果設為 True，Backspace 鍵會傳送 BS (「\\x08」，又稱為 ^H)，，否則會傳送「\\x7f」。"
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "以物件形式指定。屬於疏鬆陣列，各屬性為字元集代碼，值則是物件 (本身為疏鬆陣列)。在該疏鬆陣列中，各屬性為接收的字元，值則是顯示的字元。\n\n例如：\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "這是以物件形式指定，屬於疏鬆陣列，其中每個屬性都是字元集代碼，值則是物件 (本身為疏鬆陣列)。在該疏鬆陣列中，每個屬性都是接收字元，值則是顯示字元。\n\n例如：\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
-		"message": "複製後是否清除所選內容。"
+		"message": "設定是否要在複製後清除所選內容。"
 	},
 	"hterm_pref_close_on_exit": {
-		"message": "指令執行完畢後是否關閉視窗。"
+		"message": "設定是否要在指令執行完畢後關閉視窗。"
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "覆寫預設調色盤中的色彩。\n\n可選擇以陣列或物件形式指定。選擇後者時會假設為疏鬆陣列，其中各屬性為調色盤中色彩的數字索引。\n\n指定值時可使用幾乎任何 CSS 色彩值，包括  #RGB、#RRGGBB、rgb(...)、rgba(...)，以及同屬標準 X11 rgb.txt 檔案一部分的任何色彩名稱。\n\n可使用「null」指定禁止變更預設值。以陣列形式指定值時，如要略過少數索引，可善用這種做法。\n\n舉例來說，以下兩者皆可將色彩索引 1 設為藍色：\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "覆寫預設調色盤中的色彩。\n\n你可以選擇以陣列或物件的形式指定。如果以物件形式指定，則會假設為疏鬆陣列，其中每個屬性都是調色盤中的數字索引。\n\n你可以使用絕大多數的 CSS 色彩值來指定值，包括 #RGB、#RRGGBB、rgb(...)、rgba(...)，以及任何也包含在標準 X11 rgb.txt 檔案中的色彩名稱。\n\n你可以使用「null」指定禁止變更預設值。以陣列形式指定值時，如要略過少數索引，這種做法相當實用。\n\n舉例來說，以下兩者都能將色彩索引 1 設為藍色：\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
 		"message": "自動將滑鼠所選內容複製到剪貼簿。"
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "如果為 true，Ctrl+C 鍵會執行複製動作；如果為 false，則會將 ^C 傳送至主機。\n如果為 true，Ctrl+Shift+C 鍵會將 ^C 傳送至主機；如果為 false，則會執行複製動作。"
+		"message": "如果設為 True，Ctrl + C 鍵會執行複製動作；如果設為 False，則會將 ^C 傳送至主機。\n如果設為 True，Ctrl + Shift + C 鍵會將 ^C 傳送至主機；如果設為 False，則會執行複製動作。"
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "如果為 true，Ctrl+加號鍵/減號鍵/0 鍵可控制縮放設定。\n如果為 false，Ctrl+Shift+加號鍵/減號鍵/0 鍵可控制縮放設定，Ctrl+減號鍵會傳送 ^_，Ctrl+加號鍵/0 鍵則不會執行任何動作。"
+		"message": "如果設為 True，Ctrl + 加號鍵/減號鍵/數字 0 鍵可操控縮放功能。\n如果設為 False，Ctrl + Shift + 加號鍵/減號鍵/數字 0 鍵可操控縮放功能，Ctrl + 減號鍵會傳送 ^_，Ctrl + 加號鍵/數字 0 鍵則不會執行任何動作。"
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "如果為 true，Ctrl+V 鍵會執行貼上動作；如果為 false，則會將 ^V 傳送至主機。\n如果為 true，Ctrl+Shift+V 鍵會將 ^V 傳送至主機；如果為 false，則會執行貼上動作。"
+		"message": "如果設為 True，Ctrl + V 鍵會執行貼上動作；如果設為 False，則會將 ^V 傳送至主機。\n如果設為 True，Ctrl + Shift + V 鍵會將 ^V 傳送至主機；如果設為 False，則會執行貼上動作。"
 	},
 	"hterm_pref_cursor_blink": {
-		"message": "文字游標是否預設為閃爍狀態。可在執行階段透過終端機逸出序列切換這項設定。"
+		"message": "設定在預設狀態下，文字游標是否要閃爍。你可以在執行階段透過終端機逸出序列切換這項設定。"
 	},
 	"hterm_pref_cursor_blink_cycle": {
-		"message": "文字游標閃爍速率 (以毫秒為單位)。\n\n雙元素陣列，第一個元素為文字游標顯示時間長度，第二個元素為滑鼠游標隱藏時間長度。"
+		"message": "文字游標閃爍速率 (以毫秒為單位)。\n\n這是雙元素陣列，第一個元素代表文字游標開啟的時間長度，第二個元素代表文字游標關閉的時間長度。"
 	},
 	"hterm_pref_cursor_color": {
 		"message": "文字游標的顯示顏色。"
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "文字游標的顯示形狀。可在執行階段透過終端機逸出序列變更這項設定。"
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "如果為 true，背景終端機提示音會建立網路通知。https://www.w3.org/TR/notifications/\n\n必須經使用者授權才能顯示通知。當這個選項設為 true 時，hterm 會視需要嘗試要求使用者授權。如果這項權限要求不是因使用者動作而觸發，則可能不會顯示在瀏覽器中。\n\n擁有「通知」權限的 Chrome 擴充功能可顯示通知。"
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "設定中東歧義字元是否佔兩欄寬度。"
+		"message": "設定是否要讓 East Asian Ambiguous 字元占兩欄寬度。"
 	},
 	"hterm_pref_enable_8_bit_control": {
-		"message": "設為 true 時會啟用 8 位元控制字元，設為 false 時則予以忽略。\n\n無論這項設定為何，都會採用這些字元的雙位元組版本。"
+		"message": "設為 True 時會啟用 8 位元控制字元；設為 False 時則予以忽略。\n\n無論這項設定為何，我們都會採用這些控制字元的雙位元組版本。"
 	},
 	"hterm_pref_enable_blink": {
-		"message": "設為 true 時會採用閃爍屬性，設為 false 時則予以忽略。"
+		"message": "如果設為 True，系統會採用閃爍屬性，設為 False 時則予以忽略。"
 	},
 	"hterm_pref_enable_bold": {
-		"message": "設為 true 時會針對有粗體/亮色屬性的文字使用粗體字型，設為 false 時使用一般字型，設為 null 時則會自動偵測。"
+		"message": "如果設為 True，系統會對具有粗體/亮色屬性的文字使用粗體字型；如果設為 False，則會使用一般字型；如果設為 Null，則會自動偵測。"
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "設為 true 時會針對有粗體屬性的任何文字使用亮色 (16 色調色盤中的 8-15)，設為 false 時則不會。"
+		"message": "如果設為 True，系統會針對具有粗體屬性的任何文字使用亮色 (16 色調色盤中的 8-15)，設為 False 時則不會。"
 	},
 	"hterm_pref_enable_clipboard_notice": {
-		"message": "當主機寫入剪貼簿時，是否要在終端機顯示訊息。"
+		"message": "設定當主機寫入剪貼簿時，是否要在終端機顯示訊息。"
 	},
 	"hterm_pref_enable_clipboard_write": {
 		"message": "允許遠端主機直接寫入本機系統剪貼簿。\n無論這項設定為何，一律不授予讀取權限。\n\n用於控制 OSC-52 這類功能的存取權。"
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "設定「清除顯示內容」指令 (CSI-J) 的「清除已儲存的行」函式 (模式 3) 是否可清除終端機向後捲動緩衝區。\n\n請放心依預設啟用這項設定。"
+	},
 	"hterm_pref_enable_dec12": {
 		"message": "允許主機嘗試使用 DEC 私密模式 12 變更文字游標閃爍狀態。"
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "設定是否要在終端機變更大小時顯示終端機的尺寸。"
 	},
 	"hterm_pref_environment": {
 		"message": "初始環境變數集 (做為物件)。"
@@ -261,46 +477,64 @@
 		"message": "設定輸入時是否要隱藏滑鼠游標。根據預設，系統會自動偵測平台/作業系統的處理方式。\n\n注意：部分作業系統會覆寫這項設定，因此你可能無法予以停用。"
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "如果為 true，Home/End 鍵可操控終端機捲軸，Shift + Home/Shift + End 鍵則會傳送至遠端主機。如果為 false，Home/End 鍵會傳送至遠端主機，Shift + Home/Shift + End 鍵則可捲動。"
+		"message": "如果設為 True，Home/End 鍵可操控終端機捲軸，且系統會將 Shift + Home/Shift + End 鍵傳送至遠端主機。如果設為 False，系統會將 Home/End 鍵傳送至遠端主機，且可使用 Shift + Home/Shift + End 鍵捲動畫面。"
 	},
 	"hterm_pref_keybindings": {
-		"message": "按鍵序列與按鍵動作的對應。按鍵序列包含 0 或多個輔助鍵加上按鍵碼。按鍵碼可以是十進位/十六進位數字或按鍵識別碼。按鍵動作可以是要傳送至主機的指定字串，也可以是動作識別碼。如需完整的格式說明，請參閱 https://goo.gl/LWRndr。\n\n按鍵繫結關係範例：\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "按鍵序列與按鍵動作的對應。按鍵序列包含 0 或多個輔助鍵，後面加上按鍵碼。按鍵碼可以是十進位/十六進位數字或按鍵 ID。按鍵動作可以是要傳送至主機的指定字串，也可以是動作 ID。如需完整的格式說明，請參閱 https://goo.gl/LWRndr。\n\n按鍵繫結關係範例：\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "設定是否要遵守一般 OS 鍵盤繫結，而非一律擷取 hterm 本身的使用方式。"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
-		"message": "如果為 true，會將媒體鍵轉換成對應的 F- 鍵。如果為 false，則讓瀏覽器處理按鍵。"
+		"message": "如果設為 True，系統會將媒體鍵轉換成對應的功能鍵 (F1 ~ F12)。如果設為 False，系統會讓瀏覽器處理按鍵。"
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "按住 Meta 鍵並按下另一個鍵，會傳送 ESC 前置詞。\n\n舉例來說，在啟用這項設定的情況下，如果按下 Meta + K 鍵，就會傳送 ^[k，效果等同於依序按下 Escape 鍵和 K 鍵。如果停用這項設定，則只會傳送 K。"
+		"message": "按住 Meta 鍵並按下另一個鍵會傳送 ESC 鍵前置詞。\n\n舉例來說，如果已啟用這項設定，按下 Meta + K 鍵就會傳送 ^[k，效果等同於依序按下 Escape 鍵和 K 鍵。如果停用這項設定，則只會傳送 K 鍵。"
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "滑鼠的貼上按鈕，如果為 null 則會自動偵測。\n\n在自動偵測情況下，如果是非 X11 平台 (包括 Chrome 作業系統)，我們會使用滑鼠中鍵。在 X11 平台上，則會使用滑鼠右鍵 (因內建視窗管理員會透過滑鼠中鍵執行貼上動作)。\n\n0 == 左 (主要) 鍵。\n1 == 中 (輔助) 鍵。\n2 == 右 (次要) 鍵。\n\n這個選項可獨立啟用，不受點擊右鍵貼上的設定影響。\n\n注意：左/右手用滑鼠皆可正確處理。"
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "按一下滑鼠右鍵時執行貼上動作。\n\n這個選項可獨立啟用，不受「mouse-paste-button」設定影響。\n\n注意：左/右手用滑鼠皆可正確處理。"
+		"message": "按一下滑鼠右鍵時執行貼上動作。\n\n這個選項不會受到「mouse-paste-button」的設定影響。\n\n注意：這項設定可正確處理左/右手用滑鼠。"
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "如果為 true，Page Up/Page Down 鍵可操控終端機捲軸，Shift + Page Up/Shift + Page Down 鍵則會傳送至遠端主機。如果為 false，Page Up/Page Down 鍵會傳送至遠端主機，Shift + Page Up/Shift + Page Down 鍵則可捲動。"
+		"message": "如果設為 True，Page Up/Page Down 鍵可操控終端機捲軸，且系統會將 Shift + Page Up/Shift + Page Down 鍵傳送至遠端主機。如果設為 False，系統會將 Page Up/Page Down 鍵傳送至遠端主機，且可使用 Shift + Page Up/Shift + Page Down 鍵捲動畫面。"
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "設定是否將 Alt + 1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，這樣就仍可使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 Vim 或 Emacs 中使用。\n\n如果為 true，Alt+1..9 鍵將由瀏覽器處理。如果為 false，Alt + 1..9 鍵會傳送至主機。如果為 null，則根據瀏覽器平台和視窗類型自動偵測。"
+		"message": "設定是否要將 Alt + 1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，以便繼續使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 vim 或 emacs 中使用。\n\n如果設為 True，Alt + 1..9 鍵將由瀏覽器處理。如果設為 False，系統會將 Alt + 1..9 鍵傳送至主機。如果設為 Null，系統會根據瀏覽器平台和視窗類型自動偵測。"
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "設定是否要將 Ctrl + N 鍵傳送至瀏覽器。\n\n如果設為 True，瀏覽器會將 Ctrl + N 鍵當做「開啟新視窗」的鍵盤快速鍵處理。如果設為 False，系統會將 Ctrl + N 鍵傳送至主機。"
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "設定是否將 Ctrl + 1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，這樣就仍可使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 Vim 或 Emacs 中使用。\n\n如果為 true，Ctrl + 1..9 鍵將由瀏覽器處理。如果為 false，Ctrl + 1..9 鍵會傳送至主機。如果為 null，則根據瀏覽器平台和視窗類型自動偵測。"
+		"message": "設定是否要將 Ctrl + 1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，以便繼續使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 vim 或 emacs 中使用。\n\n如果設為 True，Ctrl + 1..9 鍵將由瀏覽器處理。如果設為 False，系統會將 Ctrl + 1..9 鍵傳送至主機。如果設為 Null，系統會根據瀏覽器平台和視窗類型自動偵測。"
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "設定是否要將 Ctrl + T 鍵傳送至瀏覽器。\n\n如果設為 True，瀏覽器會將 Ctrl + T 鍵當做「新增分頁」的鍵盤快速鍵處理。如果設為 False，系統會將 Ctrl + T 鍵傳送至主機。"
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "設定是否要將 Ctrl + Tab 鍵和 Ctrl + Shift + Tab 鍵傳送至瀏覽器。\n\n如果設為 True，瀏覽器會將 Ctrl + Tab 鍵和 Ctrl + Shift + Tab 鍵當做「下一個/上一個分頁」的鍵盤快速鍵處理。如果設為 False，系統會將 Tab 鍵傳送至主機，而不會傳送 Ctrl 鍵或 Shift 鍵。"
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "設定是否要將 Ctrl + W 鍵傳送至瀏覽器。\n\n如果設為 True，瀏覽器會將 Ctrl + W 鍵當做「關閉分頁」的鍵盤快速鍵處理。如果設為 False，系統會將 Ctrl + W 鍵傳送至主機。"
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "設定是否將 Meta + 1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，這樣就仍可使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 Vim 或 Emacs 中使用。\n\n如果為 true，Meta+1..9 鍵將由瀏覽器處理。如果為 false，Meta+1..9 鍵會傳送至主機。如果為 null，則根據瀏覽器平台和視窗類型自動偵測。"
+		"message": "設定是否要將 Meta + 1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，以便繼續使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 vim 或 emacs 中使用。\n\n如果設為 True，Meta + 1..9 鍵將由瀏覽器處理。如果設為 False，系統會將 Meta + 1..9 鍵傳送至主機。如果設為 Null，系統會根據瀏覽器平台和視窗類型自動偵測。"
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "設定是否將 Meta + V 鍵傳送至主機。"
 	},
+	"hterm_pref_paste_on_drop": {
+		"message": "如果設為 True，系統會將拖曳的文字貼到終端機。\n如果設為 False，系統會忽略拖曳的文字。"
+	},
 	"hterm_pref_receive_encoding": {
-		"message": "針對從主機接收的資料設定預期的編碼。\n如果編碼不符，可能會出現明顯可見的錯誤。\n\n有效的值為「utf-8」和「raw」。"
+		"message": "針對從主機接收的資料設定預期的編碼。\n如果編碼不相符，在視覺呈現上可能會出現錯誤。\n\n有效的值為「utf-8」和「raw」。"
 	},
 	"hterm_pref_scroll_on_keystroke": {
-		"message": "是否任何按鍵行為都會捲動到畫面底部。"
+		"message": "設定是否任何按鍵動作都會捲動至畫面底部。"
 	},
 	"hterm_pref_scroll_on_output": {
-		"message": "終端機輸出時是否會捲動到畫面底部。"
+		"message": "設定是否要在終端機輸出時捲動至畫面底部。"
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
 		"message": "使用替代螢幕緩衝區且 DECCKM (應用程式游標鍵) 啟用時，滑鼠滾輪捲動事件會模擬方向鍵。\n\n按住 Shift 鍵可暫時停用。\n\n這種情形常見於使用呼叫器 (less)、讀取手冊頁或文字編輯器 (vi/nano)，或是使用 screen/tmux 時。"
@@ -312,13 +546,13 @@
 		"message": "縱向捲軸模式。"
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "設定 Shift + Insert 鍵會執行貼上動作還是傳送至遠端主機。"
+		"message": "設定 Shift + Insert 鍵是用來執行貼上動作還是會傳送至遠端主機。"
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "預設的終端機編碼 (DOCS)。\n\nISO-2022 會啟用字元對應轉譯功能 (例如圖形對應)。\nUTF-8 會停用這類支援功能。\n\n鎖定的變體表示無法在執行階段透過終端機逸出序列變更編碼。\n\n除非舊應用程式發生無法順利轉譯的情形，否則建議一律使用 UTF-8。"
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "設定是否使用預設瀏覽器/OS 的複製行為。\n\n允許瀏覽器/OS 直接處理可能會改善某些系統相容性的複製事件 (在複製操作完全無法執行時)，但會降低文字選取功能的完善度。\n\n舉例來說，原本是自動換行的長句，在複製後會出現斷行。"
+		"message": "設定是否要使用預設瀏覽器/OS 的複製行為。\n\n允許瀏覽器/OS 直接處理複製事件可能會提高與部分系統 (在其中完全無法執行複製作業) 的相容性，但會降低文字選取功能的可靠性。\n\n舉例來說，複製自動換行的長句時，會一併複製其中的換行符號。"
 	},
 	"hterm_pref_user_css": {
 		"message": "要包含在終端機文件中的使用者樣式表網址。"
@@ -327,13 +561,13 @@
 		"message": "用於設定終端機樣式的自訂 CSS 文字。"
 	},
 	"hterm_pref_word_break_match_left": {
-		"message": "可停止比對所選字元左端 (起始) 的規則運算式。\n\n通常這是用於拒絕特定字元的字元類別。\n根據預設，我們接受「~」和「.」，因為這是常見的路徑起始字元。"
+		"message": "可暫停比對所選字元左端 (起始位置) 的規則運算式。\n\n這通常是用於拒絕特定字元的字元類別。\n根據預設，我們允許「~」和「.」，因為這些是常見的路徑起始字元。"
 	},
 	"hterm_pref_word_break_match_middle": {
-		"message": "可比對中間所有字元的規則運算式。\n\n通常這是用於拒絕特定字元的字元類別。\n\n可用於擴大起始點周圍所選範圍。"
+		"message": "可比對中間所有字元的規則運算式。\n\n這通常是用於拒絕特定字元的字元類別。\n\n可用於擴大起點周圍所選範圍。"
 	},
 	"hterm_pref_word_break_match_right": {
-		"message": "可停止比對所選字元右端 (結束) 的規則運算式。\n\n通常這是用於拒絕特定字元的字元類別。"
+		"message": "可暫停比對所選字元右端 (結束位置) 的規則運算式。\n\n這通常是用於拒絕特定字元的字元類別。"
 	},
 	"hterm_space_character": {
 		"message": "空格"
@@ -345,7 +579,7 @@
 		"message": "複製和貼上"
 	},
 	"hterm_title_pref_encoding": {
-		"message": "編碼方式"
+		"message": "編碼"
 	},
 	"hterm_title_pref_extensions": {
 		"message": "擴充功能"
@@ -363,7 +597,7 @@
 		"message": "音效"
 	},
 	"identity_label": {
-		"message": "身分"
+		"message": "身分識別"
 	},
 	"import_link_aria_label": {
 		"message": "匯入檔案"
@@ -372,7 +606,7 @@
 		"message": "匯入..."
 	},
 	"initializing_relay": {
-		"message": "使用 $1 查詢轉送伺服器"
+		"message": "正在使用 $1 查詢轉送伺服器"
 	},
 	"json_parse_error": {
 		"message": "無法剖析「$1」中的 JSON：$2"
@@ -384,10 +618,22 @@
 		"message": "請選取要刪除的主機 [1-$1]："
 	},
 	"known_hosts_title": {
-		"message": "已知的主機："
+		"message": "已知主機："
+	},
+	"licenses": {
+		"message": "授權"
+	},
+	"licenses_expand_link": {
+		"message": "顯示授權"
+	},
+	"licenses_title": {
+		"message": "開放原始碼授權"
 	},
 	"loading_label": {
-		"message": "載入中…"
+		"message": "載入中..."
+	},
+	"migrate_to_ext": {
+		"message": "注意：請遷移至新版安全殼層擴充功能 ($1)。\nChrome 應用程式現已不適用，因此這個版本將停止接收更新。\n詳情請參閱遷移指南 ($2)。"
 	},
 	"missing_param": {
 		"message": "找不到下列參數：$1"
@@ -401,14 +647,185 @@
 	"mounted_message": {
 		"message": "已掛接！"
 	},
+	"nasftp_cmd_cat_help": {
+		"message": "將檔案匯出到終端機"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "變更工作目錄"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "變更路徑群組"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "變更路徑權限"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "變更路徑的擁有者"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "清除目前的終端機畫面。"
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "將檔案複製到剪貼簿 (預設值：前 10 MiB)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "已將 $1 個位元組複製到剪貼簿"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "切換使用的顏色"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "將來源複製到目的地"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "刪除檔案"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "顯示磁碟統計資料"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  路徑：$1\n檔案系統 ID：$2\n總數：$3\n已使用：$4 ($5%)\n可用：$6 (針對一般使用者)\n$7 (針對根層級使用者)"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "中斷連線"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "正在下載檔案：將 $1 下載為 $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "下載檔案"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "這個說明畫面"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "列出目錄詳細資料"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "建立含有目標路徑的連結"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "建立目錄"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "重新命名檔案"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "設定提示字串"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "上傳檔案"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "正在上傳檔案：將 $1 上傳為 $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "顯示目前的工作目錄"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "遠端工作目錄：$1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "讀取符號連結"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "將路徑標準化"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "繼續上傳檔案"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "移除檔案"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "刪除空白的目錄"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "以內嵌的方式顯示檔案"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "擴充功能："
+	},
+	"nasftp_cmd_stat_extensions_line": {
+		"message": "  $1：$2"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "顯式檔案狀態"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  檔案：$1\n大小：$2 個位元組\nUID：$3\nGID：$4\n存取權：$5\n上次存取時間：$6\n上次修改時間：$7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "建立含有目標路徑的符號連結"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "將路徑截斷為 0 個位元組"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  伺服器擴充功能："
+	},
+	"nasftp_cmd_version_help": {
+		"message": "顯示目前的通訊協定版本"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "SFTP 通訊協定版本資訊：\n本機：$1\n伺服器：$1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1：已到達檔案結尾"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1：找不到檔案"
+	},
+	"nasftp_error_file_reading": {
+		"message": "無法讀取 $1：$2"
+	},
+	"nasftp_error_internal": {
+		"message": "發生未經處理的內部錯誤；請回報錯誤：$1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1：$2：無效的號碼：$3"
+	},
+	"nasftp_error_message": {
+		"message": "錯誤：$1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1：無法使用「$2」擴充功能"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1：$2：並非一般檔案"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1：引數不足"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1：權限遭拒"
+	},
+	"nasftp_error_server_error": {
+		"message": "$1：$2"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1：引數過多"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1：不明的指令"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1：不明的標記 $2"
+	},
+	"nasftp_force_quit": {
+		"message": "強制結束"
+	},
+	"nasftp_progress_summary": {
+		"message": "已在 $2 秒內轉移 $1 個位元組 ($3/秒)"
+	},
 	"nassh_options_error": {
-		"message": "未知的轉送選項：$1"
+		"message": "不明的選項：$1"
 	},
 	"nassh_product_name": {
-		"message": "Secure Shell"
+		"message": "安全殼層"
 	},
 	"new_window_menu_label": {
-		"message": "開新視窗"
+		"message": "開啟新視窗"
 	},
 	"notify_copy": {
 		"message": "已複製所選內容"
@@ -417,10 +834,10 @@
 		"message": "確定"
 	},
 	"omnibox_default": {
-		"message": "<url><match>user@hostname[:port]</match></url> 連線至已儲存的設定檔或新的 SSH 系統"
+		"message": "<url><match>使用者@主機名稱[:通訊埠]</match></url> 連線至已儲存的設定檔或新的 SSH 系統"
 	},
 	"open_as_window_tip": {
-		"message": "[PRO 提示] 使用「在視窗中開啟」或「全螢幕」防止 Ctrl + W 鍵關閉終端機！\n[PRO 提示] 詳情請見 $1。"
+		"message": "[實用秘訣] 使用「在視窗中開啟」或「全螢幕」可防止 Ctrl + W 鍵關閉終端機！\n[實用秘訣] 詳情請參閱 $1。"
 	},
 	"options_button_label": {
 		"message": "選項"
@@ -429,31 +846,64 @@
 		"message": "正在載入 NaCl 外掛程式..."
 	},
 	"plugin_loading_complete": {
-		"message": "完成。"
+		"message": " 完成。"
 	},
 	"plugin_loading_failed": {
-		"message": " 載入失敗！:("
+		"message": " 失敗！:("
+	},
+	"popup_connect_tooltip": {
+		"message": "按住 Ctrl 鍵即可在新分頁中開啟。"
 	},
 	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
+		"message": "安全殼層偏好設定備份.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "SSH 檔案"
 	},
 	"preferences_header_terminal": {
-		"message": "設定檔設定"
+		"message": "終端機設定"
+	},
+	"preferences_header_uri": {
+		"message": "URI 處理常式"
 	},
 	"preferences_reset": {
-		"message": "重設所有偏好設定！"
+		"message": "已重設所有偏好設定！"
+	},
+	"protocol_register_button": {
+		"message": "註冊通訊協定處理常式"
+	},
+	"protocol_register_explain": {
+		"message": "點擊下方按鈕後，系統即會嘗試為所有支援的通訊協定註冊處理常式。比方說，這可讓我們直接處理 ssh:// 連結。瀏覽器會針對個別通訊協定顯示提示，因此請逐一確認/接受所有提示。如果未顯示任何提示，請查看下一個部分的疑難排解提示。"
+	},
+	"protocol_register_explain_settings": {
+		"message": "如果我們已註冊處理常式，或是之前的註冊嘗試遭到拒絕，系統就不會顯示任何進一步的提示。請開啟下方的對話方塊，然後檢查 ssh 或 sftp 等部分中已註冊的處理常式設定。如果這個程式遭到封鎖，你可以刪除相關設定，這樣即可重新嘗試註冊。如果這個程式已註冊，但並未設為預設的處理常式，你也可以變更預設的處理常式。"
+	},
+	"protocol_register_options_link": {
+		"message": "註冊通訊協定"
+	},
+	"protocol_register_settings_button": {
+		"message": "開啟已註冊的處理常式設定"
+	},
+	"protocol_register_title": {
+		"message": "安全殼層通訊協定處理常式註冊協助工具"
+	},
+	"read_size_label": {
+		"message": "讀取大小 (KiB)"
 	},
 	"reconnect_message": {
-		"message": "重新連線(R)、選擇其他連線(C)或結束(X)？"
+		"message": "要重新連線(R)、選擇其他連線(C)還是結束(X)？"
 	},
 	"relay_retry": {
-		"message": "重試中..."
+		"message": "正在重試..."
 	},
 	"request_pin_prompt": {
-		"message": "請在「$2」輸入 PIN 碼來解鎖金鑰 $1 (還剩 $3 次嘗試機會)："
+		"message": "請在「$2 ($3)」上輸入 PIN 碼來解鎖金鑰 $1 (還可嘗試 $4 次)："
 	},
 	"restore_prefs": {
 		"message": "還原備份內容"
+	},
+	"save_label": {
+		"message": "儲存"
 	},
 	"shortcut_list_aria_label": {
 		"message": "已儲存的連線"
@@ -464,8 +914,44 @@
 	"ssh_argstr_label": {
 		"message": "SSH 引數"
 	},
+	"stream_open_error": {
+		"message": "無法開啟串流 $1：$2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "清除終端機"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI 顏色"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "消除鋸齒"
+	},
+	"terminal_name_pref_bell": {
+		"message": "提示音"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "閃爍"
+	},
+	"terminal_name_pref_color": {
+		"message": "顏色"
+	},
+	"terminal_name_pref_font": {
+		"message": "字型"
+	},
+	"terminal_name_pref_image": {
+		"message": "圖片"
+	},
+	"terminal_name_pref_shape": {
+		"message": "形狀"
+	},
+	"terminal_name_pref_visible": {
+		"message": "顯示"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "設定預設調色盤的顏色。"
+	},
+	"terminal_pref_bell": {
+		"message": "終端機提示音。"
 	},
 	"terminal_preview_label": {
 		"message": "預覽"
@@ -476,73 +962,199 @@
 	"terminal_reset_menu_label": {
 		"message": "重設終端機"
 	},
+	"terminal_settings_background_image_help": {
+		"message": "背景圖片網址。開頭必須為「http://」或「https://」。留空表示沒有圖片。\n\n例如：\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "自動"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "停用"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "直條"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "方塊"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "底線"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "確定要將主題重設為預設值嗎？"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "重設主題"
+	},
+	"terminal_settings_reset_label": {
+		"message": "重設"
+	},
+	"terminal_theme_classic_label": {
+		"message": "傳統版"
+	},
+	"terminal_theme_dark_label": {
+		"message": "深色"
+	},
+	"terminal_theme_light_label": {
+		"message": "淺色"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized 深色"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized 淺色"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "顏色 0：黑色"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "顏色 1：紅色"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "顏色 10：亮綠色"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "顏色 11：亮黃色"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "顏色 12：亮藍色"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "顏色 13：亮紫紅"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "顏色 14：亮青色"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "顏色 15：亮白色"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "顏色 2：綠色"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "顏色 3：黃色"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "顏色 4：藍色"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "顏色 5：紫紅色"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "顏色 6：青色"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "顏色 7：白色"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "顏色 8：亮黑色"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "顏色 9：亮紅色"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "外觀"
+	},
+	"terminal_title_pref_background": {
+		"message": "背景"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "行為"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "游標"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "鍵盤"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "鍵盤與滑鼠"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "滑鼠"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "捲軸"
+	},
+	"terminal_title_pref_text": {
+		"message": "文字"
+	},
+	"terminal_title_settings": {
+		"message": "設定"
+	},
+	"terminal_title_theme": {
+		"message": "主題"
+	},
 	"tip_1": {
-		"message": "點選連結時按住 Ctrl 鍵 (Mac OS 則為 Cmd 鍵) 即可開啟連結！"
+		"message": "按住 Ctrl 鍵 (macOS 則為 Cmd 鍵) 並點選連結即可開啟網址！"
 	},
 	"tip_10": {
-		"message": "在視窗中執行作業時，按下 Ctrl + Shift + N 鍵即可開啟其他工作階段。"
+		"message": "在視窗中執行作業時，按下 Ctrl + Shift + N 鍵可開啟另一個工作階段。"
 	},
 	"tip_11": {
-		"message": "你可以重新繫結金鑰/快速鍵：https://goo.gl/LWRndr"
+		"message": "你可以重新繫結按鍵/快速鍵：https://goo.gl/LWRndr"
 	},
 	"tip_12": {
 		"message": "使用 Yubikeys 和其他智慧型卡片進行 SSH 驗證：https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
-		"message": "顯示內嵌圖片：https://goo.gl/MnSysj"
+		"message": "以內嵌的方式顯示圖片：https://goo.gl/MnSysj"
 	},
 	"tip_14": {
-		"message": "按住 Ctrl 鍵 (Mac OS 則為 Cmd 鍵) 並按一下滑鼠右鍵，即可顯示內容選單。"
+		"message": "按住 Ctrl 鍵 (macOS 則為 Cmd 鍵) 並按一下滑鼠右鍵，即可顯示內容選單。"
 	},
 	"tip_2": {
 		"message": "使用 hterm-notify 在瀏覽器中顯示通知：https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "輸入「ssh <profile name>」，從網址列連線：https://goo.gl/V7o8ki"
+		"message": "在網址列輸入「ssh <設定檔名稱>」以連線：https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome 作業系統可經由 SFTP 掛接檔案系統並透過「檔案」應用程式瀏覽。請改為使用 [SFTP 掛接]，而不要使用 [連線]。"
+		"message": "Chrome 作業系統可透過 SFTP 掛接檔案系統，並透過「檔案」應用程式瀏覽。請使用 [SFTP 掛接]，而不要使用 [連線]。"
 	},
 	"tip_5": {
 		"message": "在網頁中使用 ssh:// 連結進行連線，或儲存為書籤：https://goo.gl/zS8EZD"
 	},
 	"tip_6": {
-		"message": "使用基本的 16 色、256 色和 24 位元全彩，讓你的輸出/提示內容更繽紛：http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+		"message": "使用基本的 16 色、256 色和完整的 24 位元色彩，讓你的輸出/提示內容更繽紛：http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "使用 OSC-52 從 emacs、vim 等來源複製內容到剪貼簿：https://goo.gl/XSnyLo"
+		"message": "使用 OSC-52 從 emacs 或 vim 等來源複製內容到剪貼簿：https://goo.gl/XSnyLo"
 	},
 	"tip_8": {
-		"message": "透過 chromium-hterm@chromium.org 與其他 hterm/Secure Shell 使用者進行即時通訊：https://goo.gl/RYHiK"
+		"message": "透過 chromium-hterm@chromium.org 與其他 hterm/安全殼層使用者進行即時通訊：https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "發現錯誤或想提出新功能建議嗎？歡迎隨時與我們聯絡：https://goo.gl/vb94JY"
+		"message": "發現錯誤或想提出新功能建議嗎？歡迎與我們聯絡：https://goo.gl/vb94JY"
 	},
 	"unexpected_error": {
-		"message": "發生未預期的錯誤，請查看 JavaScript 控制台瞭解詳情。"
+		"message": "發生非預期的錯誤，請查看 JavaScript 控制台瞭解詳情。"
 	},
 	"unknown_ssh_client_version": {
-		"message": "未知的 SSH 版本：$1"
+		"message": "不明的 SSH 版本：$1"
 	},
 	"unmount_button_label": {
 		"message": "卸載 SFTP"
 	},
 	"welcome_changelog": {
-		"message": "ChangeLog/版本資訊：$1"
+		"message": "變更記錄/版本資訊：$1"
 	},
 	"welcome_faq": {
 		"message": "常見問題解答：$1 (按住 Ctrl 鍵並點選連結即可開啟網址)"
 	},
 	"welcome_release_highlights": {
-		"message": "$1 起的重大更新："
+		"message": "自 $1 版起的重大異動："
 	},
 	"welcome_tip_of_day": {
 		"message": "隨機實用秘訣 #$1：$2"
 	},
 	"welcome_version": {
-		"message": "歡迎使用 $1 $2 版。"
+		"message": "歡迎使用$1第 $2 版。"
+	},
+	"write_size_label": {
+		"message": "寫入大小 (KiB)"
 	},
 	"zoom_warning": {
-		"message": "請設定 Chrome 選單 -> [縮放到 100%]"
+		"message": "請開啟 Chrome 選單 -> 將 [縮放] 設為 100%"
 	}
 }

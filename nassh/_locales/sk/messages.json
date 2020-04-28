@@ -12,25 +12,19 @@
 		"message": "Ak túto kartu zavriete, táto relácia sa odpojí."
 	},
 	"cache_pin_prompt": {
-		"message": "Chcete kód PIN tejto relácie uložiť do vyrovnávacej pamäte? (y/N):"
+		"message": "Chcete kód PIN tejto relácie SSH uložiť do vyrovnávacej pamäte? (Á/N):"
 	},
 	"cancel_button_label": {
 		"message": "Zrušiť"
 	},
+	"changelog": {
+		"message": "Denník zmien"
+	},
 	"clear_known_hosts_menu_label": {
-		"message": "Vymazať zoznam SSH known_hosts"
+		"message": "Vymazať známych hostiteľov SSH"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "Tento príkaz zobrazí ponuku známych hostiteľov a príkazy pre hostiteľa, ktoré chcete odstrániť."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Odstrániť známeho hostiteľa ssh."
-	},
-	"cmd_ssh_help": {
-		"message": "Parametre |username| a |hostname| sú povinné, parameter |port| je voliteľný. Ak port nie je uvedený, predvolená hodnota je 22."
-	},
-	"cmd_ssh_title": {
-		"message": "Otvorí novú reláciu SSH."
+	"clear_label": {
+		"message": "Vymazať"
 	},
 	"command_complete": {
 		"message": "Príkaz $1 bol ukončený s kódom stavu $2."
@@ -45,7 +39,7 @@
 		"message": "Pripojiť"
 	},
 	"connect_or_exit_message": {
-		"message": "Vybrať iné pripojenie (C) alebo ukončiť (X)?"
+		"message": "Chcete vybrať iné pripojenie (C) alebo ukončiť (X)?"
 	},
 	"connecting": {
 		"message": "Pripája sa k hostiteľovi $1..."
@@ -54,7 +48,7 @@
 		"message": "Dialógové okno pripojenia"
 	},
 	"console_crosh_options_notice": {
-		"message": "Vedeli ste, že existuje vyhradená stránka pre možnosti?\nUž nemusíte priamo upravovať parameter „term_“!\nOtvorte ho pomocou skratky $1, prípadne kliknite na adresu:\n$2"
+		"message": "Vedeli ste, že existuje vyhradená stránka pre možnosti?\nUž nemusíte priamo upravovať parameter „term_“!\nOtvorte ho pomocou skratky $1, prípadne kliknite na\n$2"
 	},
 	"console_nassh_options_notice": {
 		"message": "Vedeli ste, že existuje vyhradená stránka pre možnosti?\nUž nemusíte priamo upravovať parameter „term_“!\n$1"
@@ -114,7 +108,7 @@
 		"message": "používateľské meno"
 	},
 	"found_relay": {
-		"message": "Našiel sa server typu relay: $1"
+		"message": "Nebol nájdený server typu relay: $1"
 	},
 	"get_profile_error": {
 		"message": "CHYBA: Profil $1 sa nepodarilo načítať:\n$2"
@@ -143,6 +137,219 @@
 	"hterm_loading_resource_start": {
 		"message": "$1 sa načítava..."
 	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Povolenie zobrazenia vloženého obrázka"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Backspace je Meta+Backspace"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "Režim klávesa AltGr"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Považovanie klávesa Alt za kláves Meta"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Správanie klávesového modifikátora Alt"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Zvuk zvončeka varovania (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Farba pozadia"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Obrázok na pozadí"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Poloha obrázka na pozadí"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Veľkosť obrázka na pozadí"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Správanie klávesa backspace"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Prepísanie mapovania znakov"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Automatické vymazanie výberu textu"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Zatvorenie okna pri ukončení"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Úvodná paleta farieb"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Automatické kopírovanie vybraného obsahu"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Správanie kopírovania kombináciou klávesov Ctrl+C"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Správanie priblíženia kombináciou klávesov Ctrl++/-/0"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Správanie prilepenia kombináciou klávesov Ctrl+V"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Blikanie kurzora"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Rýchlosť blikania kurzora"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Farba textového kurzora"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Tvar textového kurzora"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Vytvorenie upozornenia na ploche pre zvončeky varovania"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Východoázijské viacvýznamové znaky používajú dva stĺpce"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Podpora riadiacich znakov C1 (nie UTF‑8)"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Povolenie blikajúceho textu"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Správanie tučného textu"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Používanie jasných farieb s tučným textom"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Zobrazenie upozornenia pri kopírovaní obsahu"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Povolenie vzdialeného zápisu do schránky"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Povolenie vymazania vyrovnávacej pamäte spätného posuvu (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Povolenie zmeny blikania textového kurzora"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Zobrazenie rozmerov terminálu pri zmene veľkosti"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Premenné prostredia"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Skupina písiem textu"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Veľkosť písma textu"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Vyhladzovanie písma textu"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Farba textu"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Skrytie kurzora myši počas písania"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Správanie posúvania pomocou klávesov Home a End"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Klávesové skratky"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Používanie predvolených klávesových skratiek operačného systému"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Mediálne klávesy sú funkčné klávesy"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Správanie klávesového modifikátora Meta"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Prilepenie tlačidlom myši"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Vloženie obsahu kliknutím pravým tlačidlom"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Správanie posúvania klávesmi Page Up a Page Down"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Správanie prepínania karty kombináciou klávesov Alt+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Správanie nového okna kombináciou klávesov Ctrl+N"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Správanie prepínania karty kombináciou klávesov Ctrl+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Správanie novej karty kombináciou klávesov Ctrl+T"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Správanie prepínania karty kombináciou klávesov Ctrl+Tab"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Správanie zatvorenia karty kombináciou klávesov Ctrl+W"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Správanie prepínania karty kombináciou klávesov Meta+1..9"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Správanie prilepenia kombináciou klávesov Meta+V"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Povolenie prilepenia presunutím"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Príjem kódovania"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Posun naspodok po stlačení klávesa"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Posun naspodok po novom výstupe"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Emulácia šípok posúvacím kolieskom"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Multiplikátor posúvacieho kolieska myši"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Viditeľnosť posúvača"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Prilepenie kombináciou klávesov Shift+Insert"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Kódovanie terminálu"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Spracúvanie kopírovania textu prehliadačom"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "Vlastná šablóna CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "Vlastná šablóna CSS (vložený text)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Zastavenie automatického výberu (smerom doľava)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Znaky oddelenia slov"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Zastavenie automatického výberu (smerom doprava)"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Vložené obrázky"
 	},
@@ -153,7 +360,7 @@
 		"message": "Určuje, či chcete vzdialenému hostiteľovi povoliť zobrazovať obrázky v termináli.\n\nPredvolene sa zobrazuje výzva, dokým sa používateľ nerozhodne."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ak túto možnosť nastavíte, zruší sa mapovanie kombinácie klávesov Alt+Backspace->DEL v systéme Chrome OS, aby kombinácia Alt+Backspace bola v skutočnosti Alt+Backspace."
+		"message": "Ak túto možnosť nastavíte, zruší sa mapovanie kombinácie klávesov Alt+Backspace->Delete v systéme Chrome OS, aby kombinácia Alt+Backspace bola skutočne Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Vyberte rozpoznávanie klávesa AltGr pre metódu heuristic.\n\n'null': Automatické rozpoznávanie na základe parametra navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Zakázať akékoľvek poškodzovanie súvisiace s klávesom.\n'ctrl-alt': Považovať kombináciu klávesov Ctrl+Alt za AltGr.\n'left-alt': Považovať ľavý kláves Alt za AltGr.\n'right-alt': Považovať pravý kláves Alt za AltGr."
@@ -162,7 +369,7 @@
 		"message": "Určuje, či kláves Alt funguje ako metakláves alebo ako kláves Alt s odlišnými funkciami."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Umožňuje ovládať, ako systém interpretuje kláves Alt.\n\n  escape: Odoslať predponu ESC.\n  8-bit: Pridať v emulátore xterm číslo 128 k zadanému znaku.\n browser-key: \nPočkať na udalosť stlačenia klávesa a prečítať si, čo hovorí prehliadač. (Nebude to správne fungovať v platformách, v ktorých prehliadač vykonáva pre niektoré sekvencie klávesa Alt predvolené akcie.)"
+		"message": "Riadi, ako systém interpretuje kláves Alt.\n\n  escape: Odoslať predponu ESC.\n  8-bit: Pridať v emulátore xterm číslo 128 k zadanému znaku.\n browser-key: \nPočkať na udalosť stlačenia klávesa a prečítať si, čo hovorí prehliadač. (Nebude to správne fungovať v platformách, v ktorých prehliadač vykonáva pre niektoré sekvencie klávesa Alt predvolené akcie.)"
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "Webová adresa zvuku zvonenia terminálu. Prázdny reťazec znamená stlmené zvonenie."
@@ -171,7 +378,7 @@
 		"message": "Farba pozadia pre text bez ďalších farebných atribútov."
 	},
 	"hterm_pref_background_image": {
-		"message": "Hodnota CSS obrázka na pozadí. Prázdny reťazec znamená žiadny obrázok.\n\nNapríklad:\n  url(https://goo.gl/anedTK)\n  linear-gradient(zhora nadol, modrá, červená)"
+		"message": "Hodnota CSS obrázka na pozadí. Ak na pozadí žiadny obrázok zobrazovať nechcete, ponechajte túto hodnotu prázdnu.\n\nPríklad:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Hodnota CSS umiestnenia obrázka na pozadí.\n\nNapríklad:\n  10% 10%\n  stred"
@@ -180,31 +387,31 @@
 		"message": "Hodnota CSS veľkosti obrázka na pozadí."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Ak nastavíte hodnotu True, kláves Backspace by mal odosielať BS (\\x08 čiže ^H). Inak by mal odosielať \\x7f."
+		"message": "Pri hodnote pravda kláves Backspace odošle kód BS (\\x08 alebo ^H). Inak kláves Backspace odošle \\x7f."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "Táto predvoľba je určená ako objekt. Ide o rozptýlené pole, v ktorom jednotlivé vlastnosti prestavuje kód skupiny znakov a hodnota je objekt, ktorý je samotným rozptýleným poľom. V ňom sú jednotlivé vlastnosti prijaté znaky a hodnoty sú zobrazované znaky.\n\nNapríklad:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "Táto predvoľba je určená ako objekt. Ide o rozptýlené pole, v ktorom jednotlivé vlastnosti prestavuje kód znakovej sady a hodnota je objekt, ktorý je rozptýleným poľom. V ňom sú jednotlivé vlastnosti prijaté znaky a hodnoty sú zobrazované znaky.\n\nPríklad:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
-		"message": "Umožňuje nastaviť, či sa má výber po skopírovaní vymazať."
+		"message": "Nastaví, či sa má výber po skopírovaní vymazať."
 	},
 	"hterm_pref_close_on_exit": {
 		"message": "Určuje, či sa má po ukončení spustenia príkazu okno zavrieť."
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "Umožňuje prepísať farby v predvolenej palete.\n\nTúto predvoľbu môžete určiť ako pole alebo objekt. Ak ju určíte ako objekt, bude sa považovať za rozptýlené pole, v ktorom sú jednotlivé vlastnosti číselné indexy palety farieb.\n\nHodnoty môžete určiť ako takmer všetky hodnoty farieb CSS. Zahŕňa to #RGB, #RRGGBB, rgb(...), rgba(...) a názvy všetkých farieb, ktoré sú tiež súčasťou súboru rgb.txt jednotky X11.\n\nPoužitím nuly môžete určiť, aby sa predvolená hodnota nemenila. Je to užitočné na preskočenie malého počtu indexov, keď hodnotu určíte ako pole.\n\nNapríklad oba tieto parametre nastavia farebný index 1 na modrý:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "Prepíše farby v predvolenej palete.\n\nTúto predvoľbu môžete určiť ako pole alebo objekt. Ak ju určíte ako objekt, bude sa považovať za rozptýlené pole, v ktorom sú jednotlivé vlastnosti číselné indexy palety farieb.\n\nHodnoty môžete určiť ako takmer všetky hodnoty farieb CSS. Zahŕňa to #RGB, #RRGGBB, rgb(...), rgba(...) a názvy všetkých farieb, ktoré sú tiež súčasťou súboru rgb.txt jednotky X11.\n\nPoužitím nuly môžete určiť, aby sa predvolená hodnota nemenila. Je to užitočné na preskočenie malého počtu indexov, keď hodnotu určíte ako pole.\n\nNapríklad oba tieto parametre nastavia farebný index 1 na modrý:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
 		"message": "Automaticky kopírovať výber myšou do schránky."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ak nastavíte hodnotu True, kombináciou Ctrl+C budete kopírovať. Ak nastavíte hodnotu False, bude odosielať hostiteľovi ^C.\nAk nastavíte hodnotu True, kombinácia Ctrl+Shift+C bude odosielať hostiteľovi ^C a ak nastavíte hodnotu False, bude kopírovať."
+		"message": "Ak nastavíte hodnotu pravda, kombináciou Ctrl+C budete kopírovať. Ak nastavíte hodnotu nepravda, bude odosielať hostiteľovi ^C.\nAk nastavíte hodnotu pravda, kombinácia Ctrl+Shift+C bude odosielať hostiteľovi ^C a ak nastavíte hodnotu nepravda, bude kopírovať."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Ak nastavíte hodnotu True, kombinácia Ctrl+Plus/Mínus/Nula bude ovládať priblíženie a oddialenie.\nAk nastavíte hodnotu False, kombinácia Ctrl+Shift+Plus/Mínus/Nula bude ovládať priblíženie a oddialenie, kombinácia Ctrl+Mínus bude odosielať výraz ^_ a kombinácia Ctrl+Plus/Nula nebude mať žiadnu funkciu."
+		"message": "Ak nastavíte hodnotu pravda, kombinácia Ctrl+plus, mínus alebo nula bude ovládať priblíženie a oddialenie.\nAk nastavíte hodnotu nepravda, kombinácia Ctrl+Shift+plus, mínus alebo nula bude ovládať priblíženie a oddialenie, kombinácia Ctrl+mínus bude odosielať výraz ^_ a kombinácia Ctrl+plus alebo nula nebude mať žiadnu funkciu."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ak nastavíte hodnotu True, kombináciou Ctrl+V budete prilepovať. Ak nastavíte hodnotu False, bude odosielať hostiteľovi ^V.\nAk nastavíte hodnotu True, kombinácia Ctrl+Shift+V bude odosielať hostiteľovi ^V a ak nastavíte hodnotu False, bude prilepovať."
+		"message": "Ak nastavíte hodnotu pravda, kombináciou Ctrl+V budete prilepovať. Ak nastavíte hodnotu nepravda, bude odosielať hostiteľovi ^V.\nAk nastavíte hodnotu pravda, kombinácia Ctrl+Shift+V bude odosielať hostiteľovi ^V a ak nastavíte hodnotu nepravda, bude prilepovať."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Určuje, či má textový kurzor predvolene blikať. Môžete to prepnúť počas spustenia pomocou sekvencií escape terminálu."
@@ -215,6 +422,9 @@
 	"hterm_pref_cursor_color": {
 		"message": "Farba viditeľného textového kurzora."
 	},
+	"hterm_pref_cursor_shape": {
+		"message": "Tvar viditeľného textového kurzora. Môžete ho zmeniť pri spustení pomocou sekvencií terminálu uvedených špeciálnymi znakmi."
+	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Ak nastavíte hodnotu True, zvonenie terminálu v pozadí vytvorí internetové upozornenie. https://www.w3.org/TR/notifications/\n\nZobrazovanie upozornení vyžaduje povolenie od používateľa. Keď túto možnosť nastavíte na hodnotu True, hterm sa pokúsi používateľa v prípade potreby požiadať o povolenie. Prehliadače nemusia túto žiadosť o povolenie zobraziť, keď nebola spustená akciou používateľa.\n\nRozšírenia pre Chrome s povolením na zobrazovanie upozornení môžu zobrazovať upozornenia."
 	},
@@ -222,25 +432,31 @@
 		"message": "Určuje, či majú mať východoázijské viacvýznamové znaky šírku dvoch stĺpcov."
 	},
 	"hterm_pref_enable_8_bit_control": {
-		"message": "Nastavením hodnoty True povolíte 8-bitové kontrolné znaky, pomocou hodnoty False ich budete ignorovať.\n\nNa dvojbajtové verzie týchto kontrolných znakov sa prihliada bez ohľadu na toto nastavenie."
+		"message": "Nastavením hodnoty pravda povolíte 8-bitové kontrolné znaky, pomocou hodnoty nepravda ich budete ignorovať.\n\nNa dvojbajtové verzie týchto kontrolných znakov sa prihliada bez ohľadu na toto nastavenie."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "Ak nastavíte hodnotu true, bude sa zohľadňovať atribút blikania. Ak ho chcete ignorovať, nastavte hodnotu false."
+		"message": "Ak nastavíte hodnotu pravda, bude sa zohľadňovať atribút blikania. Ak ho chcete ignorovať, nastavte hodnotu nepravda."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Ak nastavíte hodnotu true, použije sa tučné písmo pre text s atribútom tučné/jasné. Ak chcete použiť normálne písmo, nastavte hodnotu false. Ak chcete použiť automatické rozpoznávanie, zadajte nulu."
+		"message": "Ak nastavíte hodnotu pravda, použije sa tučné písmo pre text s atribútom tučné/jasné. Ak chcete použiť normálne písmo, nastavte hodnotu nepravda. Ak chcete použiť automatické rozpoznávanie, zadajte nulu."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "Ak nastavíte hodnotu true, použijú sa jasné farby (8 až 15 na palete 16 farieb) pre akýkoľvek text s atribútom Tučný. V opačnom prípade nastavte hodnotu false."
+		"message": "Ak nastavíte hodnotu pravda, použijú sa jasné farby (8 až 15 na palete 16 farieb) pre akýkoľvek text s atribútom Tučný. V opačnom prípade nastavte hodnotu nepravda."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Určuje, či sa má zobraziť správa v termináli, keď hostiteľ niečo zapíše do schránky."
 	},
 	"hterm_pref_enable_clipboard_write": {
-		"message": "Umožňuje povoliť vzdialenému hostiteľovi priamo zapisovať do schránky miestneho systému.\nPrístup na čítanie sa nikdy neudelí (bez ohľadu na toto nastavenie).\n\nPoužíva sa ovládanie prístupu k funkciám, ako je napríklad OSC-52."
+		"message": "Povolí vzdialenému hostiteľovi priamo zapisovať do schránky miestneho systému.\nPrístup na čítanie sa nikdy neudelí (bez ohľadu na toto nastavenie).\n\nPoužíva sa ovládanie prístupu k funkciám, ako je napríklad OSC-52."
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Určuje, či funkcia vymazania uložených riadkov (režim 3) príkazu na vymazanie obrazovky (CSI-J) môže vymazať vyrovnávaciu pamäť spätného posuvu terminálu.\n\nPredvolené zapnutie tohto režimu je bezpečné."
 	},
 	"hterm_pref_enable_dec12": {
 		"message": "Zohľadňujte pokus hostiteľa zmeniť stav blikania kurzora pomocou režimu DEC Private Mode 12."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Určuje, či sa pri zmene veľkosti terminálu majú zobrazovať jeho rozmery."
 	},
 	"hterm_pref_environment": {
 		"message": "Pôvodná skupina premenných prostredia (objekty)."
@@ -255,22 +471,25 @@
 		"message": "Vlastnosť vyhladzujúca písmo CSS."
 	},
 	"hterm_pref_foreground_color": {
-		"message": "Farba textu v popredí bez ďalších farebných atribútov."
+		"message": "Farba textu v popredí bez ďalších farebných atribútov."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
 		"message": "Určuje, či sa má pri písaní automaticky skrývať kurzor myši. Predvolene sa automaticky rozpozná, či príslušná platforma alebo operačný systém túto funkciu vykonáva.\n\nPoznámka: Niektoré operačné systémy môžu toto nastavenie prepísať, takže ho niekedy nie je možné zakázať."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Ak nastavíte hodnotu true, klávesy Home a End budú ovládať posúvač terminálu a kombinácie klávesov Shift+Home a Shift+End sa odošlú vzdialenému hostiteľovi. Ak nastavíte hodnotu false, klávesy Home a End sa odošlú vzdialenému hostiteľovi a kombinácie klávesov Shift+Home a Shift+End budú ovládať posúvač."
+		"message": "Ak nastavíte hodnotu pravda, klávesy Home a End budú ovládať posúvač terminálu a kombinácie klávesov Shift+Home a Shift+End sa odošlú vzdialenému hostiteľovi. Ak nastavíte hodnotu nepravda, klávesy Home a End sa odošlú vzdialenému hostiteľovi a kombinácie klávesov Shift+Home a Shift+End budú ovládať posúvač."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Mapovanie kombinácie klávesov na akcie. Kombinácia klávesov zahŕňa nula alebo viac modifikačných klávesov nasledovaných kódom klávesa. Kódy klávesov môžu byť decimálne alebo hexadecimálne čísla alebo identifikátory klávesov. Akcie klávesov je možné zadať ako reťazec, ktorý sa má odoslať hostiteľovi, alebo ako identifikátor akcie. Úplné vysvetlenie formátu nájdete na adrese https://goo.gl/LWRndr.\n\nUkážka mapovania klávesov:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Mapovanie kombinácie klávesov na akcie. Kombinácia klávesov zahŕňa nula alebo viac klávesov modifikátora nasledovaných kódom klávesa. Kódy klávesov môžu byť decimálne alebo hexadecimálne čísla či identifikátory klávesov. Akcie klávesov je možné zadať ako reťazec, ktorý sa má odoslať hostiteľovi, alebo ako identifikátor akcie. Úplné vysvetlenie formátu nájdete na https://goo.gl/LWRndr.\n\nUkážka mapovania klávesov:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Určuje, či sa majú bežné klávesové skratky operačného systému zachovať alebo vždy odosielať na použitie terminálom hterm."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
-		"message": "Ak je nastavená hodnota True, mediálne klávesy sa budú premieňať na ekvivalenty Fkey. Ak je nastavená hodnota False, klávesy bude spracovávať prehliadač."
+		"message": "Ak je nastavená hodnota pravda, mediálne klávesy sa budú premieňať na ekvivalenty Fkey. Ak je nastavená hodnota nepravda, klávesy bude spracovávať prehliadač."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Odošle predponu ESC, keď stlačíte kláves a zároveň pridržíte kláves Meta.\n\nKeď túto predvoľbu povolíte, stlačením kombinácie klávesov Meta+K odošlete ^[k, ako keď ste zadali Escape a potom k. Keď ju zakážete, odošle sa iba k."
+		"message": "Odošle predponu ESC, keď stlačíte kláves a zároveň pridržíte kláves Meta.\n\nKeď túto predvoľbu povolíte, stlačením kombinácie klávesov Meta+K odošlete ^[k, ako keby ste zadali Escape a potom k. Keď ju zakážete, odošle sa iba k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Tlačidlo na prilepenie pomocou myši alebo null na automatické rozpoznávanie.\n\nV prípade automatického rozpoznávania použijeme v platformách iných než X11 (vrátane Chrome OS) stredné tlačidlo myši. V platforme X11 použijeme pravé tlačidlo myši (keďže v natívnom správcovi okien by sa na vloženie malo používať stredné tlačidlo).\n\n0 == ľavé (primárne) tlačidlo.\n1 == stredné (pomocné) tlačidlo.\n2 == pravé (sekundárne) tlačidlo.\n\nTáto možnosť je nezávislá na nastavení mouse-paste-button.\n\nPoznámka: Toto nastavenie bude fungovať správne v prípade myší pre ľavákov i pravákov."
@@ -279,19 +498,34 @@
 		"message": "Prilepenie po kliknutiach na pravé tlačidlo myši.\n\nTáto možnosť je nezávislá na nastavení mouse-paste-button.\n\nPoznámka: Toto nastavenie bude fungovať správne v prípade myší pre ľavákov i pravákov."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Ak nastavíte hodnotu true, ovládacie prvky Page Up a Page Down ovládajú posúvač terminálu a kombinácie klávesov Shift+Page Up a Shift+Page Down sa odošlú vzdialenému hostiteľovi. Ak nastavíte hodnotu false, ovládacie prvky Page Up a Page Down sa odošlú vzdialenému hostiteľovi a kombinácie klávesov Shift+Page Up a Shift+Page Down budú ovládať posúvač."
+		"message": "Ak nastavíte hodnotu pravda, ovládacie prvky Page Up a Page Down ovládajú posúvač terminálu a kombinácie klávesov Shift+Page Up a Shift+Page Down sa odošlú vzdialenému hostiteľovi. Ak nastavíte hodnotu nepravda, ovládacie prvky Page Up a Page Down sa odošlú vzdialenému hostiteľovi a kombinácie klávesov Shift+Page Up a Shift+Page Down budú ovládať posúvač."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Určuje, či sa majú kombinácie klávesov Alt+1..9 odovzdávať prehliadaču.\n\nToto správanie je užitočné, keď je program hterm spustený na karte prehliadača, pretože tak v Chrome neprídete o klávesové skratky na prechod na konkrétnu kartu. Keď nie je spustený na karte, je lepšie tieto klávesy odosielať hostiteľovi, aby sa dali použiť v editore Vim alebo Emacs.\n\nAk nastavíte hodnotu true, kombináciu klávesov Alt+1..9 bude spracovávať prehliadač. Ak nastavíte hodnotu false, kombinácie klávesov Alt+1..9 sa budú odosielať hostiteľovi. Ak nie je nastavená žiadna hodnota, správanie sa zistí automaticky podľa platformy prehliadača a typu okna."
+		"message": "Určuje, či sa kombinácie klávesov Alt+1..9 odošlú prehliadaču.\n\nToto správanie je užitočné, keď je program hterm spustený na karte prehliadača, pretože tak v Chrome neprídete o klávesové skratky prechodu na konkrétnu kartu. Keď nie je spustený na karte, je lepšie tieto klávesy odosielať hostiteľovi, aby ich bolo možné používať v editore Vim alebo Emacs.\n\nV prípade hodnoty pravda bude kombinácie klávesov Alt+1..9 spracovávať prehliadač. V prípade hodnoty nepravda sa kombinácie klávesov Alt+1..9 budú odosielať hostiteľovi. Ak nie je nastavená žiadna hodnota, správanie sa zistí automaticky podľa platformy prehliadača a typu okna."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Určuje, či sa kombinácia klávesov Ctrl+N odošle prehliadaču.\n\nAk nastavíte hodnotu pravda, bude kombináciu klávesov Ctrl+N spracúvať prehliadač ako klávesovú skratku otvorenia nového okna. Ak nastavíte hodnotu nepravda, bude sa kombinácia klávesov Ctrl+N odosielať hostiteľovi."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Určuje, či sa majú kombinácie klávesov Ctrl+1..9 odovzdávať prehliadaču.\n\nToto správanie je užitočné, keď je program hterm spustený na karte prehliadača, pretože tak v Chrome neprídete o klávesové skratky prechodu na konkrétnu kartu. Keď nie je spustený na karte, je lepšie tieto klávesy odosielať hostiteľovi, aby ich bolo možné používať v editore Vim alebo Emacs.\n\nAk nastavíte hodnotu true, kombináciu klávesov Ctrl+1..9 bude spracovávať prehliadač. Ak nastavíte hodnotu false, kombinácie klávesov Ctrl+1..9 sa budú odosielať hostiteľovi. Ak nie je nastavená žiadna hodnota, správanie sa zistí automaticky podľa platformy prehliadača a typu okna."
+		"message": "Určuje, či sa kombinácie klávesov Ctrl+1..9 odošlú prehliadaču.\n\nToto správanie je užitočné, keď je program hterm spustený na karte prehliadača, pretože tak v Chrome neprídete o klávesové skratky prechodu na konkrétnu kartu. Keď nie je spustený na karte, je lepšie tieto klávesy odosielať hostiteľovi, aby ich bolo možné používať v editore Vim alebo Emacs.\n\nV prípade hodnoty pravda bude kombinácie klávesov Ctrl+1..9 spracovávať prehliadač. V prípade hodnoty nepravda sa kombinácie klávesov Ctrl+1..9 budú odosielať hostiteľovi. Ak nie je nastavená žiadna hodnota, správanie sa zistí automaticky podľa platformy prehliadača a typu okna."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Určuje, či sa kombinácia klávesov Ctrl+T odošle prehliadaču.\n\nAk nastavíte hodnotu pravda, prehliadač bude kombináciu klávesov Ctrl+T spracúvať ako klávesovú skratku novej karty. Ak nastavíte hodnotu nepravda, kombinácia klávesov Ctrl+T sa bude odosielať hostiteľovi."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Určuje, či sa kombinácie klávesov Ctrl+Tab a Ctrl+Shift+Tab odošlú prehliadaču.\n\nAk nastavíte hodnotu pravda, bude kombinácie klávesov Ctrl+Tab a Ctrl+Shift+Tab spracúvať prehliadač ako klávesové skratky ďalšej alebo predchádzajúcej karty. Ak nastavíte hodnotu nepravda, bude sa kláves Tab odosielať hostiteľovi bez klávesov Ctrl a Shift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Určuje, či sa kombinácia klávesov Ctrl+W odošle prehliadaču.\n\nAk nastavíte hodnotu pravda, bude kombináciu klávesov Ctrl+W spracúvať prehliadač ako klávesovú skratku zavretia karty. Ak nastavíte hodnotu nepravda, bude sa kombinácia klávesov Ctrl+W odosielať hostiteľovi."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Určuje, či sa majú kombinácie klávesov Ctrl+1..9 odovzdávať prehliadaču.\n\nToto správanie je užitočné, keď je program hterm spustený na karte prehliadača, pretože tak v Chrome neprídete o klávesové skratky prechodu na konkrétnu kartu. Keď nie je spustený na karte, je lepšie tieto klávesy odosielať hostiteľovi, aby ich bolo možné používať v editore Vim alebo Emacs.\n\nAk nastavíte hodnotu true, kombináciu klávesov Ctrl+1..9 bude spracovávať prehliadač. Ak nastavíte hodnotu false, kombinácie klávesov Ctrl+1..9 sa budú odosielať hostiteľovi. Ak nie je nastavená žiadna hodnota, správanie sa zistí automaticky podľa platformy prehliadača a typu okna."
+		"message": "Určuje, či sa kombinácie klávesov Meta+1..9 odošlú prehliadaču.\n\nToto správanie je užitočné, keď je program hterm spustený na karte prehliadača, pretože tak v Chrome neprídete o klávesové skratky prechodu na konkrétnu kartu. Keď nie je spustený na karte, je lepšie tieto klávesy odosielať hostiteľovi, aby ich bolo možné používať v editore Vim alebo Emacs.\n\nV prípade hodnoty pravda bude kombinácie klávesov Meta+1..9 spracovávať prehliadač. V prípade hodnoty nepravda sa kombinácie klávesov Meta+1..9 budú odosielať hostiteľovi. Ak nie je nastavená žiadna hodnota, správanie sa zistí automaticky podľa platformy prehliadača a typu okna."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Určuje, či sa má kombinácia klávesov meta-V odovzdávať hostiteľovi."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Ak je nastavená hodnota pravda, presunutý text sa prilepí do terminálu.\nAk je nastavená hodnota nepravda, presunutý text bude ignorovaný."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Nastavte očakávané kódovanie údajov prijatých od hostiteľa.\nAk sa šifrovania nezhodujú, zrejme dôjde k vizuálnym chybám.\n\nPlatné hodnoty sú utf-8 a raw."
@@ -312,10 +546,10 @@
 		"message": "Režim zvislého posúvača."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Určuje, či sa kombinácia klávesov Shift+Insert použije na prilepenie alebo sa odošle vzdialenému hostiteľovi."
+		"message": "Určuje, či kombinácia klávesov Shift+Insert bude znamenať prilepenie alebo sa odošle vzdialenému hostiteľovi."
 	},
 	"hterm_pref_terminal_encoding": {
-		"message": "Predvolené kódovanie terminálu (DOCS).\n\nISO-2022 umožňuje preklady máp znakov (napr. v prípade grafických máp).\nUTF-8 ich podporu zakazuje.\n\nUzamknutý variant znamená, že kódovanie nie je možné zmeniť počas spustenia pomocou sekvencií escape terminálu.\n\nAk nedochádza k chybnému vykresľovaniu v starších aplikáciách, mali by ste ponechať kódovánie UTF-8."
+		"message": "Predvolené kódovanie terminálu (DOCS).\n\nISO-2022 umožňuje preklady máp znakov (napríklad v prípade grafických máp).\nUTF-8 ich podporu zakazuje.\n\nUzamknutý variant znamená, že kódovanie nie je možné zmeniť počas spustenia pomocou sekvencií escape terminálu.\n\nAk nedochádza k chybnému vykresľovaniu v starších aplikáciách, mali by ste ponechať kódovanie UTF-8."
 	},
 	"hterm_pref_use_default_window_copy": {
 		"message": "Určuje, či sa má použiť správanie kopírovania z predvoleného prehliadača alebo operačného systému.\n\nPovoľte prehliadaču alebo operačnému systému priamo spracovávať kopírovanie, čím sa môže zlepšiť kompatibilita s niektorými systémami (v ktorých kopírovanie vôbec nefunguje), ale výber textu bude menej robustný.\n\nNapríklad dlhé riadky, ktoré boli automaticky zalomené, budú skopírované tak, že v nich budú aj nové riadky."
@@ -327,16 +561,16 @@
 		"message": "Vlastný text CSS na nastavenie štýlu terminálu."
 	},
 	"hterm_pref_word_break_match_left": {
-		"message": "Regulárny výraz na zastavenie hľadania zhôd naľavo (smerom k začiatku) od výberu.\n\nObvykle to je trieda znakov na odmietnutie konkrétnych znakov.\nZnaky ~ a . sú v predvolenom nastavení povolené, pretože sa nimi cesty často začínajú."
+		"message": "Regulárny výraz na zastavenie hľadania zhôd naľavo (smerom k začiatku) od výberu.\n\nObvykle je to trieda znakov na odmietnutie konkrétnych znakov.\nZnaky ~ a . sú predvolene povolené, pretože sa nimi cesty často začínajú."
 	},
 	"hterm_pref_word_break_match_middle": {
-		"message": "Regulárny výraz na zhodu všetkých znakov uprostred.\n\nObvykle to je trieda znakov na odmietnutie konkrétnych znakov.\n\nPoužíva sa na rozšírenie výberu okolo počiatočného bodu."
+		"message": "Regulárny výraz na zhodu všetkých znakov uprostred.\n\nObvykle to je trieda znakov na odmietnutie konkrétnych znakov.\n\nRozširuje sa pomocou neho výber okolo počiatočného bodu."
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Regulárny výraz na zastavenie hľadania zhôd napravo (smerom ku koncu) od výberu.\n\nObvykle to je trieda znakov na odmietnutie konkrétnych znakov."
 	},
 	"hterm_space_character": {
-		"message": "Medzera"
+		"message": "Medzerník"
 	},
 	"hterm_title_pref_appearance": {
 		"message": "Vzhľad (písma, farby, obrázky)"
@@ -372,10 +606,10 @@
 		"message": "Importovať..."
 	},
 	"initializing_relay": {
-		"message": "Vyhľadáva sa server typu relay pomocou hostiteľa: $1"
+		"message": "Vyhľadáva sa server typu relay pomocou hostiteľa $1"
 	},
 	"json_parse_error": {
-		"message": "Nepodarilo sa analyzovať JSON v predvoľbe '$1': $2"
+		"message": "Nepodarilo sa analyzovať JSON v predvoľbe $1: $2"
 	},
 	"known_hosts_empty": {
 		"message": "Žiadni známi hostitelia, nie je čo odstrániť."
@@ -386,8 +620,20 @@
 	"known_hosts_title": {
 		"message": "Známi hostitelia:"
 	},
+	"licenses": {
+		"message": "Licencie"
+	},
+	"licenses_expand_link": {
+		"message": "zobraziť licenciu"
+	},
+	"licenses_title": {
+		"message": "Licencie open source"
+	},
 	"loading_label": {
 		"message": "Načítava sa..."
+	},
+	"migrate_to_ext": {
+		"message": "Upozornenie: Vykonajte migráciu na nové rozšírenie zabezpečeného prístupu ($1).\nAplikácie pre Chrome už nie sú podporované, takže táto verzia prestane dostávať aktualizácie.\nĎalšie podrobnosti nájdete v sprievodcovi migráciou ($2)."
 	},
 	"missing_param": {
 		"message": "Chýbajúci parameter: $1"
@@ -401,11 +647,176 @@
 	"mounted_message": {
 		"message": "Pripojený!"
 	},
+	"nasftp_cmd_cat_help": {
+		"message": "Exportuje súbor do terminálu"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Zmení pracovný adresár"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Zmení skupinu ciest"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Zmení povolenia ciest"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Zmení vlastníka ciest"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Vymaže aktuálnu obrazovku terminálu."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Skopírovať súbor do schránky (predvolené: prvých 10 MiB)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "Do schránky bolo skopírovaných $1 bajtov"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Prepne použitie farby"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Skopíruje zdroj do cieľa"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Odstrániť súbory"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Zobrazí štatistiky disku"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Cesta: $1\n Identifikátor systému súborov: $2\n Celkovo: $3\n Použité: $4 ($5 %)\n Dostupné: $6 (pre bežných používateľov)\n $7 (pre používateľa root)"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Odpojiť"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Sťahuje sa súbor: $1 ako $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Stiahne súbory"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Táto obrazovka pomocníka"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Podrobnosti výpisu adresára"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Vytvorí odkaz na ceste ukazujúcej na cieľ"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Vytvorí adresáre"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Premenujú súbor"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Nastaví reťazec pre príkaz prompt"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Nahrá súbory"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Nahráva sa súbor: $1 ako $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Zobrazí aktuálny pracovný adresár"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Vzdialený pracovný adresár: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Prečíta symbolické odkazy"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Kanonizácia ciest"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Obnoví nahrávanie súborov"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Odstrániť súbory"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Odstráni prázdne adresáre"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Zobrazí súbory v texte"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Rozšírenia:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Zobrazí stav súboru"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Súbor: $1\n  Veľkosť: $2 B\n   Identifikátor používateľa: $3\n   Identifikátor skupiny: $4\nPrístup: $5\n Čas prístupu: $6\n Čas úpravy: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Vytvorí symbolický odkaz na ceste ukazujúcej na cieľ"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Skráti cesty na 0 bajtov"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  rozšírenia servera:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Zobrazí aktuálnu verziu protokolu"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Informácie o verzii protokolu SFTP:\n  miestne: $1\n  server: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: koniec súboru"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: súbor sa nenašiel"
+	},
+	"nasftp_error_file_reading": {
+		"message": "Čítanie súboru $1 zlyhalo: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Nespracovaná interná chyba, nahláste ju: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: neplatné číslo: $3"
+	},
+	"nasftp_error_message": {
+		"message": "CHYBA: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: rozšírenie $2 je nedostupné"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: nie je bežný súbor"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: nedostatočný počet argumentov"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: povolenie bolo odmietnuté"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: príliš veľa argumentov"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: neznámy príkaz"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: neznáma značka $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Vynútené ukončenie"
+	},
+	"nasftp_progress_summary": {
+		"message": "Prenieslo sa $1 B za $2 s ($3/s)"
+	},
 	"nassh_options_error": {
-		"message": "Neznáma možnosť prenosu: $1"
+		"message": "Neznáma možnosť: $1"
 	},
 	"nassh_product_name": {
-		"message": "Secure Shell"
+		"message": "Zabezpečený prístup"
 	},
 	"new_window_menu_label": {
 		"message": "Nové okno"
@@ -420,13 +831,13 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Pripojte sa k uloženému profilu alebo novému systému ssh"
 	},
 	"open_as_window_tip": {
-		"message": "[Tip pre profesionálov] Ak chcete zabrániť, aby kombinácia klávesov Ctrl+W zatvorila terminál, použite možnosť Otvoriť ako okno alebo Celá obrazovka.\n[Tip pre profesionálov] Ďalšie informácie nájdete na adrese $1."
+		"message": "[Tip pre profesionálov] Ak chcete zabrániť, aby kombinácia klávesov Ctrl+W zatvorila terminál, použite možnosť Otvoriť ako okno alebo Celá obrazovka.\n[Tip pre profesionálov] Viac sa dozviete na $1."
 	},
 	"options_button_label": {
 		"message": "Možnosti"
 	},
 	"plugin_loading": {
-		"message": "Prebieha načítavanie doplnku NaCl..."
+		"message": "Načítava sa doplnok NaCl..."
 	},
 	"plugin_loading_complete": {
 		"message": " hotovo."
@@ -434,26 +845,59 @@
 	"plugin_loading_failed": {
 		"message": " zlyhanie! :("
 	},
+	"popup_connect_tooltip": {
+		"message": "Pridržaním klávesa Ctrl otvoríte na novej karte."
+	},
 	"pref_backup_filename": {
 		"message": "Záloha predvolieb zabezpečeného prístupu.json"
 	},
+	"preferences_header_ssh_files": {
+		"message": "Súbory SSH"
+	},
 	"preferences_header_terminal": {
-		"message": "Nastavenia profilu"
+		"message": "Nastavenia terminálu"
+	},
+	"preferences_header_uri": {
+		"message": "Obslužné nástroje URI"
 	},
 	"preferences_reset": {
 		"message": "Všetky predvoľby boli obnovené."
 	},
+	"protocol_register_button": {
+		"message": "Registrovať obslužné nástroje protokolu"
+	},
+	"protocol_register_explain": {
+		"message": "Po stlačení tlačidla nižšie sa vykoná pokus o registráciu obslužných nástrojov pre všetky podporované protokoly. Povolí sa tým napríklad priame spracovanie odkazov ssh://. Prehliadač zobrazí výzvu pre každý protokol. Jednotlivé výzvy po ich zobrazení potvrďte. Ak sa nezobrazia žiadne výzvy, prezrite si ďalšiu časť, kde nájdete tipy na riešenie problémov."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Ak už boli obslužné nástroje zaregistrované alebo predchádzajúce pokusy o registráciu boli zamietnuté, nezobrazia sa žiadne ďalšie výzvy. Otvorte dialógové okno nižšie a následne skontrolujte nastavenia registrovaného obslužného nástroja v častiach ssh, sftp a podobných. Ak je tento program blokovaný, môžete tieto nastavenia odstrániť a zopakovať registráciu. Ak už je tento program registrovaný, ale nie je nastavený ako predvolený obslužný nástroj, môžete tento nástroj zmeniť."
+	},
+	"protocol_register_options_link": {
+		"message": "Registrácia protokolu"
+	},
+	"protocol_register_settings_button": {
+		"message": "Otvoriť nastavenia registrovaných obslužných nástrojov"
+	},
+	"protocol_register_title": {
+		"message": "Pomocník registrácie obslužného nástroja protokolu zabezpečeného prístupu"
+	},
+	"read_size_label": {
+		"message": "Veľkosť čítania (KiB)"
+	},
 	"reconnect_message": {
-		"message": "Znova pripojiť (R), vybrať iné pripojenie (C) alebo ukončiť (X)?"
+		"message": "Chcete znova pripojiť (R), vybrať iné pripojenie (C) alebo ukončiť (X)?"
 	},
 	"relay_retry": {
-		"message": "Prebieha ďalší pokus..."
+		"message": "Pokus sa opakuje..."
 	},
 	"request_pin_prompt": {
-		"message": "Zadajte kód PIN na odomknutie kľúča $1 v čítačke $2 (zostávajúce pokusy: $3):"
+		"message": "Zadajte kód PIN na odomknutie kľúča $1 v čítačke $2 ($3) (zostávajúce pokusy: $4):"
 	},
 	"restore_prefs": {
 		"message": "Obnoviť zo zálohy"
+	},
+	"save_label": {
+		"message": "Uložiť"
 	},
 	"shortcut_list_aria_label": {
 		"message": "uložené pripojenia"
@@ -464,8 +908,44 @@
 	"ssh_argstr_label": {
 		"message": "Argumenty SSH"
 	},
+	"stream_open_error": {
+		"message": "Otvorenie streamu $1 zlyhalo: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "Vymazanie terminálu"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "Farby ANSI"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Anti‑aliasing"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Zvonček"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Blikanie"
+	},
+	"terminal_name_pref_color": {
+		"message": "Farba"
+	},
+	"terminal_name_pref_font": {
+		"message": "Písmo"
+	},
+	"terminal_name_pref_image": {
+		"message": "Obrázok"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Tvar"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Viditeľné"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Nastaví farby predvolenej palety."
+	},
+	"terminal_pref_bell": {
+		"message": "Zvuk zvončeka terminálu."
 	},
 	"terminal_preview_label": {
 		"message": "Ukážka"
@@ -476,6 +956,129 @@
 	"terminal_reset_menu_label": {
 		"message": "Resetovanie terminálu"
 	},
+	"terminal_settings_background_image_help": {
+		"message": "Webová adresa obrázka na pozadí. Musí sa začínať reťazcom http:// alebo https://. Ak na pozadí žiadny obrázok zobrazovať nechcete, ponechajte túto hodnotu prázdnu.\n\nPríklad:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Automaticky"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Vypnúť"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Kurzor Beam"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Blokovať"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Podčiarknuté"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Naozaj chcete resetovať motív na predvolené nastavenia?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Resetovanie motívu"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Resetovať"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Klasické"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Tmavý"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Opar"
+	},
+	"terminal_theme_light_label": {
+		"message": "Svetlý"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Presvietený tmavý"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Presvietený svetlý"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "0. farba: čierna"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "1. farba: červená"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "10. farba: svetlozelená"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "11. farba: svetložltá"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "12. farba: svetlomodrá"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "13. farba: svetlopurpurová"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "14. farba: svetloazúrová"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "15. farba: jasno biela"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "2. farba: zelená"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "3. farba: žltá"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "4. farba: modrá"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "5. farba: purpurová"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "6. farba: azúrová"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "7. farba: biela"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "8. farba: svetločierna"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "9. farba: svetločervená"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Vzhľad"
+	},
+	"terminal_title_pref_background": {
+		"message": "Pozadie"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Správanie"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "Kurzor"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Klávesnica"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Klávesnica a myš"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Myš"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Posúvač"
+	},
+	"terminal_title_settings": {
+		"message": "Nastavenia"
+	},
+	"terminal_title_theme": {
+		"message": "Motív"
+	},
 	"tip_1": {
 		"message": "Ak pridržíte kláves Ctrl (Cmd v systéme macOS) a kliknete na odkaz, otvorí sa."
 	},
@@ -483,40 +1086,40 @@
 		"message": "Stlačením kombinácie klávesov Ctrl+Shift+N počas zobrazenia v okne otvoríte novú reláciu."
 	},
 	"tip_11": {
-		"message": "Klávesom alebo skratkám môžete priradiť nové funkcie: https://goo.gl/LWRndr"
+		"message": "Klávesom alebo skratkám môžete pridružiť nové funkcie: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
 		"message": "Na overenie totožnosti prostredníctvom protokolu ssh použite Yubikey a ďalšie inteligentné karty: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
-		"message": "Zobrazovať vložené obrázky: https://goo.gl/MnSysj"
+		"message": "Zobrazujte vložené obrázky na https://goo.gl/MnSysj"
 	},
 	"tip_14": {
-		"message": "Kontextovú ponuku zobrazíte pridržaním klávesa Ctrl (Cmd v systéme macOS) a súčasným kliknutím na pravé tlačidlo myši."
+		"message": "Kontextovú ponuku zobrazíte pridržaním klávesa Ctrl (Cmd v systéme macOS) a súčasným kliknutím pravým tlačidlom."
 	},
 	"tip_2": {
-		"message": "Ak chcete zobrazovať upozornenia v prehliadači, použite parameter hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Ak chcete zobrazovať upozornenia v prehliadači, použite parameter hterm-notify na https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
 		"message": "Pripojte sa zo všeobecného poľa zadaním dopytu „ssh <profile name>“: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS môže pripájať systémy súborov prostredníctvom protokolu SFTP a prehliadať ich prostredníctvom aplikácie Súbory. Použite možnosť „Pripojenie protokolu SFTP“ namiesto „Pripojiť“."
+		"message": "Chrome OS môže pripájať systémy súborov prostredníctvom protokolu SFTP a prehliadať ich prostredníctvom aplikácie Súbory. Použite „Pripojenie protokolu SFTP“ namiesto „Pripojiť“."
 	},
 	"tip_5": {
-		"message": "Pripojte sa pomocou odkazov ssh:// na webových stránkach alebo si uložte záložku: https://goo.gl/zS8EZD"
+		"message": "Pripojte sa pomocou odkazov ssh:// na webových stránkach alebo si uložte záložku na https://goo.gl/zS8EZD"
 	},
 	"tip_6": {
-		"message": "Zafarbite si výstup alebo príkazový riadok základnými 16 a 256 farbami a úplnými 24-bitovými farbami: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+		"message": "Zafarbite si výstup alebo príkazový riadok základnými 16 a 256 farbami a úplnými 24-bitovými farbami na http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopírujte schránku z editorov emacs/vim/atď... pomocou OSC-52: https://goo.gl/XSnyLo"
+		"message": "Kopírujte schránku z editorov emacs/vim/etc... pomocou OSC-52: https://goo.gl/XSnyLo"
 	},
 	"tip_8": {
-		"message": "Četujte so spriaznenými používateľmi hterm / Secure Shell prostredníctvom funkcie chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Četujte so spriaznenými používateľmi hterm alebo zabezpečeného prístupu prostredníctvom funkcie chromium-hterm@chromium.org na https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Našli ste chybu? Požadujete novú funkciu? Dajte nám vedieť: https://goo.gl/vb94JY"
+		"message": "Našli ste chybu? Požadujete novú funkciu? Dajte nám vedieť na https://goo.gl/vb94JY"
 	},
 	"unexpected_error": {
 		"message": "Vyskytla sa neočakávaná chyba. Ďalšie podrobnosti nájdete v konzole JavaScript."
@@ -528,10 +1131,10 @@
 		"message": "Odpojiť protokol SFTP"
 	},
 	"welcome_changelog": {
-		"message": "Denník zmien / poznámky k vydaniu: $1"
+		"message": "Denník zmien alebo poznámky k vydaniu: $1"
 	},
 	"welcome_faq": {
-		"message": "Odpovede na časté otázky: $1 (odkazy otvoríte pomocou klávesa ctrl a kliknutia)"
+		"message": "Odpovede na časté otázky: $1 (odkazy otvoríte kliknutím so stlačným klávesom Ctrl)"
 	},
 	"welcome_release_highlights": {
 		"message": "Veľké zmeny od verzie $1:"
@@ -542,7 +1145,10 @@
 	"welcome_version": {
 		"message": "Predstavujeme $1 verzie $2."
 	},
+	"write_size_label": {
+		"message": "Veľkosť zápisu (KiB)"
+	},
 	"zoom_warning": {
-		"message": "Nastavte priblíženie/oddialenie v Ponuke Chrome na 100 %"
+		"message": "Nastavte priblíženie alebo oddialenie v Ponuke Chrome na 100 %"
 	}
 }

@@ -9,31 +9,25 @@
 		"message": "Nelze analyzovat cíl: $1"
 	},
 	"before_unload": {
-		"message": "Pokud tuto kartu zavřete, bude tato návštěvy odpojena."
+		"message": "Pokud tuto kartu zavřete, bude tato relace odpojena."
 	},
 	"cache_pin_prompt": {
-		"message": "Uložit PIN do mezipaměti pro tuto relaci? (y/N):"
+		"message": "Uložit PIN pro tuto relaci do mezipaměti? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "Zrušit"
 	},
+	"changelog": {
+		"message": "Protokol změn"
+	},
 	"clear_known_hosts_menu_label": {
-		"message": "Vymazat údaje SSH known_hosts"
+		"message": "Vymazat známé hostitelské servery SSH"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "Tento příkaz zobrazuje nabídku známých hostitelů a výzvy k zapomenutí hostitelů."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Zapomenout známého hostitele SSH."
-	},
-	"cmd_ssh_help": {
-		"message": "Parametry |username| a |hostname| jsou povinné, parametr |port| je volitelný. Pokud port není zadán, použije se výchozí hodnota 22."
-	},
-	"cmd_ssh_title": {
-		"message": "Zahájení nové návštěvy SSH."
+	"clear_label": {
+		"message": "Vymazat"
 	},
 	"command_complete": {
-		"message": "Příkaz $1 byl ukončen se stavovým kódem $2."
+		"message": "Příkaz $1 skončil se stavovým kódem $2."
 	},
 	"command_not_supported": {
 		"message": "Příkaz $1 v této verzi Chromu není podporován"
@@ -63,7 +57,7 @@
 		"message": "[DEL]"
 	},
 	"delete_button_label": {
-		"message": "Delete"
+		"message": "Smazat"
 	},
 	"disconnect_message": {
 		"message": "Plugin NaCl byl ukončen se stavovým kódem $1."
@@ -141,7 +135,220 @@
 		"message": "Načtení zdroje $1 se nezdařilo"
 	},
 	"hterm_loading_resource_start": {
-		"message": "Načítání zdroje $1..."
+		"message": "Načítá se $1..."
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Povolit zobrazování obrázků v terminálu"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Backspace je Meta+Backspace"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "Režim klávesy AltGr"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Zpracovávat klávesu Alt jako klávesu Meta"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Zpracování stisku klávesy Alt"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Zvuk zvonku upozornění (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Barva pozadí"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Obrázek na pozadí"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Pozice obrázku na pozadí"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Velikost obrázku na pozadí"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Chování klávesy backspace"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Přepisy znakové sady"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Automaticky vymazat vybraný text"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Při ukončení zavřít okno"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Počáteční barevná paleta"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Automaticky zkopírovat vybraný obsah"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Chování kopírování pomocí Ctrl+C"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Chování přiblížení při Ctrl++/-/0"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Chování vložení pomocí Ctrl+V"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Blikání kurzoru"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Frekvence blikání kurzoru"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Barva textového kurzoru"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Tvar textového kurzoru"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Při zvonku upozornění zobrazit oznámení na ploše"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Nejednoznačné východoasijské znaky používají dva sloupce"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Podporovat řídicí znaky C1, které nepatří do UTF-8"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Povolit blikající text"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Chování tučného textu"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Používat světlé barvy s tučným textem"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Při kopírování obsahu zobrazit oznámení"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Povolit vzdálený zápis do schránky"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Povolit vymazání historie obrazovky (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Povolit změnu blikání textového kurzoru"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Při změně velikosti zobrazit rozměry terminálu"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Proměnné prostředí"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Rodina písem textu"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Velikost písma textu"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Vyhlazování písma textu"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Barva textu"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Během psaní skrýt kurzor myši"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Chování posouvání pomocí kláves Home a End"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Vazby kláves a klávesových zkratek"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Použít výchozí mapování kláves operačního systému"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Mediální klávesy jsou funkční klávesy"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Zpracování modifikační klávesy Meta"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Vložení tlačítkem myši"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Kliknutí pravým tlačítkem myši vkládá obsah"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Chování posouvání klávesami Page Up/Down"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Chování přepínání karet pomocí Alt+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Chování otevření nového okna pomocí Ctrl+N"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Chování přepínání karet pomocí Ctrl+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Chování otevření nové karty pomocí Ctrl+T"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Chování přepínání karet pomocí Ctrl+Tab"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Chování zavření karty pomocí Ctrl+W"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Chování přepínání karet pomocí Meta+1..9"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Chování vložení pomocí Meta+V"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Povolit vložení přetažením"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Přijímané kódování"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Po stisknutí klávesy přejít dolů"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Po novém výstupu přejít dolů"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Emulovat klávesy se šipkami pomocí kolečka myši"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Multiplikátor posouvání kolečkem myší"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Viditelnost posuvníku"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Vložení pomocí Shift+Insert"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Kódování terminálu"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Zpracování kopírování textu ponechat na prohlížeči"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "Vlastní CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "Vlastní CSS (vložený text)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Automatické zastavování výběru (vlevo)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Znaky oddělující slova"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Automatické zastavování výběru (vpravo)"
 	},
 	"hterm_popup_inline_image": {
 		"message": "Vložené obrázky"
@@ -153,7 +360,7 @@
 		"message": "Určuje, zda má mít vzdálený hostitel povoleno zobrazovat v terminálu obrázky.\n\nVe výchozím nastavení zobrazujeme výzvu, dokud si uživatel nevybere."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Pokud je nastavena tato možnost, ruší přemapování Alt + Backspace -> DEL systému Chrome OS, aby Alt + Backspace opravdu fungovalo jako Alt + Backspace."
+		"message": "Tato možnost ruší přemapování Alt+Backspace -> Delete systému Chrome OS, aby Alt+Backspace opravdu fungovalo jako Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Vyberte heuristiku detekce klávesy AltGr.\n\n'null': Zjistit automaticky podle hodnoty navigator.language:\n      'en-us' => 'none', jinak => 'right-alt'\n'none': Zakázat veškerou manipulaci s klávesou AltGr.\n'ctrl- alt': Předpokládat, že Ctrl + Alt znamená AltGr.\n'left-alt': Předpokládat, že levý Alt znamená AltGr.\n'right-alt': Předpokládat, že pravý Alt znamená AltGr."
@@ -165,13 +372,13 @@
 		"message": "Řídí zacházení s klávesou Alt.\n\n  escape: Odeslat předponu ESC.\n  8-bit: Přidat k zadanému znaku 128, jako v emulátoru xterm.\n browser-key: Počkat na událost keypress a zjistit, co řekne prohlížeč. (Tato možnost nebude dobře fungovat na platformách, kde se některé kombinace kláves s klávesou Alt používají pro výchozí akce prohlížeče.)"
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "URL zvuku zvonku terminálu. Prázdný řetězec znamená, že zvonek nebude slyšet."
+		"message": "URL zvuku zvonku terminálu. Pokud žádný zvonek slyšet nechcete, ponechte tuto hodnotu prázdnou."
 	},
 	"hterm_pref_background_color": {
 		"message": "Barva pozadí textu bez dalších atributů barev."
 	},
 	"hterm_pref_background_image": {
-		"message": "Hodnota CSS obrázku na pozadí. Prázdný řetězec znamená, že se žádný obrázek zobrazovat nebude.\n\nPříklad:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Hodnota CSS obrázku na pozadí. Pokud na pozadí žádný obrázek zobrazovat nechcete, ponechte tuto hodnotu prázdnou.\n\nPříklad:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Hodnota CSS pozice obrázku na pozadí.\n\nPříklady:\n  10% 10%\n  center"
@@ -180,10 +387,10 @@
 		"message": "Hodnota CSS velikosti obrázku na pozadí."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Hodnota true znamená, že má klávesa Backspace odeslat kód BS ('\\x08' neboli ^H). Jinak klávesa Backspace odešle '\\x7f'."
+		"message": "Při hodnotě true klávesa Backspace odešle kód BS (\\x08, neboli ^H). Jinak klávesa Backspace odešle kód \\x7f."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "Zadává se jako objekt. Jedná se o řídké pole, v němž jednotlivé vlastnosti představují kódy znakových sad a jejich hodnoty jsou objekty, které jsou samy o sobě řídká pole. V těchto řídkých polích představuje každá vlastnost přijatý znak a každá hodnota zobrazený znak.\n\nPříklad:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "Zadává se jako objekt. Jedná se o řídké pole, v němž jednotlivé vlastnosti představují kódy znakových sad a jejich hodnoty jsou objekty, které jsou samy o sobě řídká pole. V těchto řídkých polích představuje každá vlastnost přijatý znak a každá hodnota zobrazený znak.\n\nPříklad:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "Udává, zda se má výběr po zkopírování vymazat."
@@ -192,7 +399,7 @@
 		"message": "Udává, zda se má po dokončení příkazu zavřít okno."
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "Přepíše barvy ve výchozí paletě.\n\nToto nastavení lze zadat jako pole nebo jako objekt. Pokud je zadáno jako objekt, předpokládá se, že se jedná o řídké pole, v němž je každá vlastnost číselný index v barevné paletě.\n\nHodnoty lze zadat jako téměř jakoukoliv hodnotu barvy CSS. Lze použít formáty #RGB, #RRGGBB, rgb(...), rgba(...) a všechny názvy barev, které jsou také zahrnuty ve standardním souboru rgb.txt terminálu X11.\n\nPomocí hodnoty 'null' můžete zadat, že se výchozí hodnota nemá měnit. Je to užitečné k přeskočení malého počtu indexů, pokud je hodnota zadána jako pole.\n\nObě tyto hodnoty například nastaví barevný index 1 na modrou barvu:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "Přepíše barvy ve výchozí paletě.\n\nToto nastavení lze zadat jako pole nebo jako objekt. Pokud je zadáno jako objekt, předpokládá se, že se jedná o řídké pole, v němž je každá vlastnost číselný index v barevné paletě.\n\nHodnoty lze zadat jako téměř jakoukoliv hodnotu barvy CSS. Lze použít formáty #RGB, #RRGGBB, rgb(...), rgba(...) a všechny názvy barev, které jsou také zahrnuty ve standardním souboru rgb.txt terminálu X11.\n\nPomocí hodnoty „null“ můžete zadat, že se výchozí hodnota nemá měnit. Je to užitečné k přeskočení malého počtu indexů, pokud je hodnota zadána jako pole.\n\nObě tyto hodnoty například nastaví barevný index 1 na modrou barvu:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
 		"message": "Výběr provedený myší automaticky zkopírovat do schránky."
@@ -215,6 +422,9 @@
 	"hterm_pref_cursor_color": {
 		"message": "Barva viditelného textového kurzoru."
 	},
+	"hterm_pref_cursor_shape": {
+		"message": "Tvar viditelného textového kurzoru. Tvar lze měnit za běhu pomocí escape sekvencí terminálu."
+	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Při hodnotě true vytvoří zvonek terminálu na pozadí webové oznámení. https://www.w3.org/TR/notifications/\n\nK zobrazení oznámení je potřeba oprávnění od uživatele. Pokud je tato možnost nastavena na hodnotu true, pokusí se hterm v případě potřeby uživatele o oprávnění požádat. Pokud žádost o oprávnění nebyla vyvolána akcí uživatele, nemusejí ji prohlížeče zobrazit.\n\nRozšíření pro Chrome s oprávněním „notifications“ oprávnění zobrazovat oznámení mají."
 	},
@@ -225,7 +435,7 @@
 		"message": "Hodnota true znamená, že jsou 8bitové řídicí znaky povoleny, hodnota false, že mají být ignorovány.\n\nDvoubajtové verze těchto řídicích znaků budeme respektovat bez ohledu na toto nastavení."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "True, pokud máme respektovat atribut blink.False, pokud ho máme ignorovat."
+		"message": "True, pokud máme respektovat atribut blink. False, pokud ho máme ignorovat."
 	},
 	"hterm_pref_enable_bold": {
 		"message": "True, pokud máme pro text s atributem bold/bright použít tučné písmo. False, pokud máme použít běžnou tloušťku písma. Null, pokud máme nastavení zjistit automaticky."
@@ -239,8 +449,14 @@
 	"hterm_pref_enable_clipboard_write": {
 		"message": "Povolit vzdálenému hostiteli zápis přímo do schránky místního systému.\nPřístup ke čtení není udělen nikdy (bez ohledu na toto nastavení).\n\nToto nastavení se používá k řízení přístupu k funkcím, jako je OSC-52."
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Udává, zda funkce vymazání uložených řádků (režim 3) příkazu k vymazání obrazovky (CSI-J) může vymazat historii obrazovky terminálu.\n\nZapnutí této možnosti ve výchozím nastavení je bezpečné."
+	},
 	"hterm_pref_enable_dec12": {
 		"message": "Respektovat pokus hostitele o změnu stavu blikání textového kurzoru pomocí DEC Private Mode 12."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Určuje, zda se při změně velikosti terminálu mají zobrazit jeho rozměry."
 	},
 	"hterm_pref_environment": {
 		"message": "Výchozí sada proměnných prostředí zadaná jako objekt."
@@ -261,16 +477,19 @@
 		"message": "Udává, zda se při zadávání má automaticky skrýt kurzor myši. Ve výchozím nastavení se automaticky zjišťuje, zda to určuje platforma nebo operační systém.\n\nPoznámka: Některé operační systémy mohou toto nastavení přepsat, a proto ho v některých případech nebude možné zakázat."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Při hodnotě true budou klávesy Home a End ovládat posuvník terminálu a klávesy Shift+Home/End budou odeslány na vzdálený hostitelský server. Při hodnotě false budou klávesy Home a End odesílány na vzdálený hostitelský server a Shift+Home/End bude ovládat posuvník."
+		"message": "Při hodnotě true budou Home a End ovládat posuvník terminálu a Shift+Home a Shift+End se budou odesílat na vzdálený hostitelský server. Při hodnotě false se budou Home a End odesílat na vzdálený hostitelský server a Shift+Home a Shift+End budou ovládat posuvník."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Mapování kombinací kláves na akce. Kombinace kláves zahrnují nula nebo více modifikačních kláves následovaných kódem klávesy. Kódy kláves mohou být decimální nebo hexadecimální čísla nebo identifikátory kláves. Akce kláves lze zadat jako řetězec, který se má odeslat na hostitelský server, nebo jako identifikátor akce. Pro úplné vysvětlení formátu viz https://goo.gl/LWRndr.\n\nUkázkové mapování kláves:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Mapování kombinací kláves na akce. Kombinace kláves tvoří nulu, jednu nebo několik modifikačních kláves následovaných kódem klávesy. Kódy kláves mohou být decimální nebo hexadecimální čísla nebo identifikátory kláves. Akce kláves lze zadat jako řetězec, který se má odeslat na hostitelský server, nebo jako identifikátor akce. Pro úplné vysvětlení formátu viz https://goo.gl/LWRndr.\n\nUkázkové mapování kláves:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Ahoj světe'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Určuje, zda se mají respektovat běžná mapování kláves operačního systému (namísto jejich zachytávání pro vlastní použití terminálem hterm)."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
-		"message": "Pokud je nastaveno na hodnotu true, budou se mediální klávesy převádět na ekvivalenty Fkey. Pokud je nastaveno na hodnotu false, bude klávesy zpracovávat prohlížeč."
+		"message": "Pokud je nastaveno na hodnotu true, budou se mediální klávesy převádět na ekvivalenty funkčních kláves. Pokud je nastaveno na hodnotu false, bude klávesy zpracovávat prohlížeč."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Při podržení klávesy Meta a stisknutí nějaké klávesy bude odeslána předpona ESC.\n\nKdyž bude toto pravidlo povoleno, při stisknutí Meta+K se odešle ^[k, jako kdybyste stiskli Escape a potom K. Když bude zakázáno, odešle se jen K."
+		"message": "Při stisknutí klávesy s podrženou klávesou Meta odeslat předponu ESC.\n\nPokud je tato možnost zapnutá, při stisknutí Meta+K se například odešle ^[k, jako kdybyste stiskli Escape a potom K. Pokud je vypnutá, odešle se jen K."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Tlačítko k vložení pomocí myši nebo null (zjistit automaticky).\n\nV případě automatické detekce použijeme u platforem jiných než X11 (včetně Chrome OS) prostřední tlačítko myši. Na platformě X11 použijeme pravé tlačítko myši (protože v nativním správci oken by se k vložení mělo používat prostřední tlačítko).\n\n0 == levé (primární) tlačítko.\n1 == prostřední (pomocné) tlačítko.\n2 == pravé (sekundární) tlačítko.\n\nTato volba je nezávislá na nastavení vložení pravým tlačítkem myši.\n\nPoznámka: Toto nastavení bude fungovat správně u myší pro leváky i pro praváky."
@@ -279,19 +498,34 @@
 		"message": "Vložení kliknutím pravým tlačítkem.\n\nTato možnost je nezávislá na nastavení mouse-paste-button.\n\nPoznámka: Toto nastavení bude fungovat správně u myší pro leváky i pro praváky."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Při hodnotě true budou klávesy Page Up a Page Down ovládat posuvník terminálu a Shift+Page Up/Down budou odeslány na vzdálený hostitelský server. Při hodnotě false budou klávesy Page Up a Page Down budou odeslány na vzdálený hostitelský server a Shift+Page Up/Down bude ovládat posuvník."
+		"message": "Při hodnotě true budou klávesy Page Up/Down ovládat posuvník terminálu a Shift+Page Up/Down se budou odesílat na vzdálený hostitelský server. Při hodnotě false se klávesy Page Up/Down budou odesílat na vzdálený hostitelský server a Shift+Page Up/Down budou ovládat posuvník."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Určuje, zda budou kombinace kláves Alt+1..9 předávány prohlížeči.\n\nToto chování je užitečné, když je hterm spuštěn na kartě prohlížeče, protože tak v Chromu nepřijdete o klávesové zkratky k přechodu na konkrétní kartu. Když není spuštěn na kartě, je lepší tyto klávesy odesílat na hostitelský server, aby je bylo možné používat v editoru Vim nebo Emacs.\n\nPři hodnotě true bude kombinace kláves Alt+1..9 zpracovávat prohlížeč. Při hodnotě false se kombinace kláves Alt+1..9 budou odesílat na hostitelský server. Pokud není nastavena žádná hodnota, zjistí se chování automaticky podle platformy prohlížeče a typu okna."
+		"message": "Určuje, zda se Alt+1..9 budou předávat prohlížeči.\n\nToto chování je užitečné, když je hterm spuštěn na kartě prohlížeče, protože tak v Chromu nepřijdete o klávesové zkratky k přechodu na konkrétní kartu. Když není spuštěn na kartě, je lepší tyto klávesy odesílat na hostitelský server, aby je bylo možné používat v editoru Vim nebo Emacs.\n\nPři hodnotě true bude Alt+1..9 zpracovávat prohlížeč. Při hodnotě false se Alt+1..9 budou odesílat na hostitelský server. Pokud není nastavena žádná hodnota, zjistí se chování automaticky podle platformy prohlížeče a typu okna."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Určuje, zda se má Ctrl+N předávat prohlížeči.\n\nPři hodnotě true bude Ctrl+N zpracovávat prohlížeč jako klávesovou zkratku k otevření nového okna. Při hodnotě false se Ctrl+N bude odesílat na hostitelský server."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Určuje, zda budou kombinace kláves Ctrl+1..9 předávány prohlížeči.\n\nToto chování je užitečné, když je hterm spuštěn na kartě prohlížeče, protože tak v Chromu nepřijdete o klávesové zkratky k přechodu na konkrétní kartu. Když není spuštěn na kartě, je lepší tyto klávesy odesílat na hostitelský server, aby je bylo možné používat v editoru Vim nebo Emacs.\n\nPři hodnotě true bude kombinace kláves Ctrl+1..9 zpracovávat prohlížeč. Při hodnotě false se kombinace kláves Ctrl+1..9 budou odesílat na hostitelský server. Pokud není nastavena žádná hodnota, zjistí se chování automaticky podle platformy prohlížeče a typu okna."
+		"message": "Určuje, zda se Ctrl+1..9 budou předávat prohlížeči.\n\nToto chování je užitečné, když je hterm spuštěn na kartě prohlížeče, protože tak v Chromu nepřijdete o klávesové zkratky k přechodu na konkrétní kartu. Když není spuštěn na kartě, je lepší tyto klávesy odesílat na hostitelský server, aby je bylo možné používat v editoru Vim nebo Emacs.\n\nPři hodnotě true bude Ctrl+1..9 zpracovávat prohlížeč. Při hodnotě false se Ctrl+1..9 budou odesílat na hostitelský server. Pokud není nastavena žádná hodnota, zjistí se chování automaticky podle platformy prohlížeče a typu okna."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Určuje, zda se má Ctrl+T předávat prohlížeči.\n\nPři hodnotě true bude Ctrl+T zpracovávat prohlížeč jako klávesovou zkratku Nová karta. Při hodnotě false se Ctrl+T bude odesílat na hostitelský server."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Určuje, zda budou kombinace kláves Ctrl+Tab a Ctrl+Shift+Tab předávány prohlížeči.\n\nPři hodnotě true bude kombinace Ctrl+Tab a Ctrl+Shift+Tab zpracovávat prohlížeč jako klávesové zkratky k otevření další/předchozí karty. Při hodnotě false se bude klávesa Tab odesílat na hostitelský server bez modifikátoru Ctrl či Shift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Určuje, zda se má Ctrl+W předávat prohlížeči.\n\nPři hodnotě true bude Ctrl+W zpracovávat prohlížeč jako klávesovou zkratku k zavření karty. Při hodnotě false se Ctrl+W bude odesílat na hostitelský server."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Určuje, zda budou kombinace kláves Meta+1..9 předávány prohlížeči.\n\nToto chování je užitečné, když je hterm spuštěn na kartě prohlížeče, protože tak v Chromu nepřijdete o klávesové zkratky k přechodu na konkrétní kartu. Když není spuštěn na kartě, je lepší tyto klávesy odesílat na hostitelský server, aby je bylo možné používat v editoru Vim nebo Emacs.\n\nPři hodnotě true bude kombinace kláves Meta+1..9 zpracovávat prohlížeč. Při hodnotě false se kombinace kláves Meta+1..9 budou odesílat na hostitelský server. Pokud není nastavena žádná hodnota, zjistí se chování automaticky podle platformy prohlížeče a typu okna."
+		"message": "Určuje, zda se Meta+1..9 budou předávat prohlížeči.\n\nToto chování je užitečné, když je hterm spuštěn na kartě prohlížeče, protože tak v Chromu nepřijdete o klávesové zkratky k přechodu na konkrétní kartu. Když není spuštěn na kartě, je lepší tyto klávesy odesílat na hostitelský server, aby je bylo možné používat v editoru Vim nebo Emacs.\n\nPři hodnotě true bude Meta+1..9 zpracovávat prohlížeč. Při hodnotě false se Meta+1..9 budou odesílat na hostitelský server. Pokud není nastavena žádná hodnota, zjistí se chování automaticky podle platformy prohlížeče a typu okna."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Udává, zda se má kombinace kláves Meta+V předávat na hostitelský server."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "V případě hodnoty true se přetažený text vloží do terminálu.\nPři hodnotě false bude přetažený text ignorován."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Nastavuje očekávané kódování pro data přijatá z hostitelského serveru.\nPokud se kódování nebudou shodovat, lze očekávat vizuální chyby.\n\nPlatné hodnoty jsou utf-8 a raw."
@@ -315,10 +549,10 @@
 		"message": "Udává, zda kombinace kláves Shift+Insert slouží k vkládání, nebo je odesílána na vzdálený hostitelský server."
 	},
 	"hterm_pref_terminal_encoding": {
-		"message": "Výchozí kódování terminálu (DOCS).\n\nISO-2022 umožňuje překlady map znaků (jako u grafických map).\nUTF-8 jejich podporu zakazuje.\n\nUzamknutá varianta znamená, že kódování nelze změnit za běhu pomocí escape sekvencí terminálu.\n\nPokud nedochází k chybnému vykreslování u starších aplikací, měli byste se držet kódování UTF-8."
+		"message": "Výchozí kódování terminálu (DOCS).\n\nISO-2022 umožňuje překlady map znaků (jako u grafických map).\nUTF-8 jejich podporu vypíná.\n\nUzamknutá varianta znamená, že kódování nelze změnit za běhu pomocí escape sekvencí terminálu.\n\nPokud nedochází k chybnému vykreslování u starších aplikací, měli byste se držet kódování UTF-8."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Udává, zda se má používat výchozí chování prohlížeče nebo operačního systému týkající se kopírování.\n\nUmožňuje prohlížeči nebo operačnímu systému zpracovávat událost kopírování přímo, což u některých systémů (kde kopírování nefunguje) může zvýšit kompatibilitu, avšak výběr textu bude méně přesný.\n\nDlouhé řádky mohou být automaticky zkracovány a zkopírovány se značkami newline."
+		"message": "Udává, zda se má používat výchozí chování prohlížeče / operačního systému týkající se kopírování.\n\nUmožňuje prohlížeči nebo operačnímu systému zpracovávat událost kopírování přímo, což u některých systémů (v nichž kopírování vůbec nefunguje) může zvýšit kompatibilitu. Výběr textu však bude méně přesný.\n\nPři kopírování dlouhých řádků, které byly automaticky zalomeny, například mohou být zahrnuty znaky zalomení řádku."
 	},
 	"hterm_pref_user_css": {
 		"message": "Adresa URL uživatelské šablony stylů, která má být zahrnuta v dokumentu terminálu."
@@ -386,8 +620,20 @@
 	"known_hosts_title": {
 		"message": "Známí hostitelé:"
 	},
+	"licenses": {
+		"message": "Licence"
+	},
+	"licenses_expand_link": {
+		"message": "zobrazit licenci"
+	},
+	"licenses_title": {
+		"message": "Licence open source"
+	},
 	"loading_label": {
 		"message": "Načítání..."
+	},
+	"migrate_to_ext": {
+		"message": "Oznámení: Přejděte na nové rozšíření Secure Shell ($1).\nAplikace pro Chrome již nejsou podporovány. Tato verze proto přestane dostávat aktualizace.\nDalší podrobnosti najdete v průvodci migrací ($2)."
 	},
 	"missing_param": {
 		"message": "Chybí parametr: $1"
@@ -401,8 +647,173 @@
 	"mounted_message": {
 		"message": "Připojeno."
 	},
+	"nasftp_cmd_cat_help": {
+		"message": "Vypsat soubor na terminál"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Změnit pracovní adresář"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Změnit skupinu cest"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Změnit oprávnění cest"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Změnit vlastníka cest"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Vymazat aktuální obrazovku terminálu."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Zkopírovat soubor do schránky (výchozí: prvních 10 MiB)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "Do schránky bylo zkopírováno $1 B"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Přepnout používání barev"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Zkopírovat zdroj do cíle"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Smazat soubory"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Zobrazit statistiky disku"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Cesta: $1\n    fsid: $2\n  Celkem: $3\n Použito: $4 ($5 %)\nDostupné: $6 (běžným uživatelům)\n $7 (uživateli root)"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Odpojit"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Stahování souboru: $1 jako $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Stáhnout soubory"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Tato obrazovka nápovědy"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Vypsat podrobnosti o adresáři"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Vytvořit na zadané cestě odkaz na cíl"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Vytvořit adresáře"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Přejmenovat soubor"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Nastavit řetězec výzvy"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Nahrát soubory"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Nahrávání souboru: $1 jako $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Zobrazit aktuální pracovní adresář"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Vzdálený pracovní adresář: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Číst symbolické odkazy"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Kanonizovat cesty"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Obnovit nahrávání souborů"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Odstranit soubory"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Vymazat prázdné adresáře"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Zobrazit v terminálu soubory"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Rozšíření:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Zobrazit stav souboru"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Soubor: $1\nVelikost: $2 B\n     UID: $3\n     GID: $4\n Přístup: $5\n   atime: $6\n   mtime: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Vytvořit na zadané cestě symbolický odkaz na cíl"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Oříznout cesty na 0 bajtů"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  rozšíření serveru:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Zobrazit aktuální verzi protokolu"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Informace o verzi protokolu SFTP:\n  místní: $1\n  server: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: konec souboru"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: soubor nebyl nalezen"
+	},
+	"nasftp_error_file_reading": {
+		"message": "Čtení souboru $1 selhalo: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Neošetřená interní chyba. Nahlaste prosím chybu: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: neplatné číslo: $3"
+	},
+	"nasftp_error_message": {
+		"message": "CHYBA: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: rozšíření $2 není k dispozici"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: nejedná se o běžný soubor"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: málo argumentů"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: přístup odepřen"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: příliš mnoho argumentů"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: neznámý příkaz"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: neznámý příznak $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Vynutit ukončení"
+	},
+	"nasftp_progress_summary": {
+		"message": "Přeneseno: $1 B za $2 s ($3/s)"
+	},
 	"nassh_options_error": {
-		"message": "Neznámá možnost přenosu: $1"
+		"message": "Neznámá možnost: $1"
 	},
 	"nassh_product_name": {
 		"message": "Secure Shell"
@@ -420,7 +831,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Připojte se k uloženému profilu nebo novému systému SSH"
 	},
 	"open_as_window_tip": {
-		"message": "[Tip pro experty] Aby se terminál po stisknutí Ctrl+W nezavřel, použijte možnost Otevřít jako okno nebo Celá obrazovka.\n[Tip pro experty] Další informace, viz $1."
+		"message": "[Tip pro experty] Aby se terminál po stisknutí Ctrl+W nezavřel, použijte možnost Otevřít jako okno nebo Celá obrazovka.\n[Tip pro experty] Další informace naleznete na adrese $1."
 	},
 	"options_button_label": {
 		"message": "Možnosti"
@@ -434,14 +845,44 @@
 	"plugin_loading_failed": {
 		"message": " nezdařilo se. :-("
 	},
+	"popup_connect_tooltip": {
+		"message": "Podržením klávesy Ctrl otevřete na nové kartě."
+	},
 	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
+		"message": "Záloha předvoleb prostředí Secure Shell.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "Soubory SSH"
 	},
 	"preferences_header_terminal": {
-		"message": "Nastavení profilu"
+		"message": "Nastavení terminálu"
+	},
+	"preferences_header_uri": {
+		"message": "Obslužné nástroje pro URI"
 	},
 	"preferences_reset": {
 		"message": "Všechny předvolby byly resetovány."
+	},
+	"protocol_register_button": {
+		"message": "Zaregistrovat obslužné nástroje protokolů"
+	},
+	"protocol_register_explain": {
+		"message": "Pokud stisknete tlačítko níže, pokusíme se zaregistrovat obslužné nástroje pro všechny podporované protokoly. Umožní nám to například zpracovávat odkazy ssh:// přímo. Prohlížeč pro každý protokol zobrazí výzvu k potvrzení/přijetí. Pokud se žádné výzvy nezobrazí, níže si přečtěte tipy k odstraňování problémů."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Pokud již obslužné nástroje byly zaregistrovány nebo předchozí pokusy o registraci byly odmítnuty, výzvy se již nebudou zobrazovat. Otevřete dialogové okno níže a zkontrolujte nastavení zaregistrovaných obslužných nástrojů v sekcích ssh/sftp/apod. Jestliže je tento program blokován, můžete příslušná nastavení smazat. Budete se tak moci o registraci pokusit znovu. Pokud je tento program již zaregistrován, ale není nastaven jako výchozí obslužný nástroj, můžete změnit i výchozí obslužný nástroj."
+	},
+	"protocol_register_options_link": {
+		"message": "Registr protokolů"
+	},
+	"protocol_register_settings_button": {
+		"message": "Otevřít nastavení zaregistrovaných obslužných nástrojů"
+	},
+	"protocol_register_title": {
+		"message": "Pomocník k registraci obslužných nástrojů protokolu Secure Shell"
+	},
+	"read_size_label": {
+		"message": "Velikost ke čtení (KiB)"
 	},
 	"reconnect_message": {
 		"message": "Znovu se připojit (R), vybrat jiné připojení (C) nebo ukončit (X)?"
@@ -450,10 +891,13 @@
 		"message": "Další pokus..."
 	},
 	"request_pin_prompt": {
-		"message": "Zadejte PIN k odemknutí klíče $1 na čtečce $2 (zbývající pokusy: $3):"
+		"message": "Zadejte PIN k odemknutí klíče $1 na čtečce $2 ($3) (zbývající pokusy: $4):"
 	},
 	"restore_prefs": {
 		"message": "Obnovit ze zálohy"
+	},
+	"save_label": {
+		"message": "Uložit"
 	},
 	"shortcut_list_aria_label": {
 		"message": "uložená připojení"
@@ -464,8 +908,44 @@
 	"ssh_argstr_label": {
 		"message": "Argumenty SSH"
 	},
+	"stream_open_error": {
+		"message": "Otevření streamu $1 se nezdařilo: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "Vymazat terminál"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "Barvy ANSI"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Antialiasing"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Zvonek"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Blikání"
+	},
+	"terminal_name_pref_color": {
+		"message": "Barva"
+	},
+	"terminal_name_pref_font": {
+		"message": "Písmo"
+	},
+	"terminal_name_pref_image": {
+		"message": "Obrázek"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Tvar"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Viditelné"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Nastavit barvy výchozí palety."
+	},
+	"terminal_pref_bell": {
+		"message": "Slyšitelný zvonek terminálu."
 	},
 	"terminal_preview_label": {
 		"message": "Náhled"
@@ -475,6 +955,123 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Resetovat terminál"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "Adresa URL obrázku na pozadí. Musí začínat řetězcem „http://“ nebo „https://“. Pokud na pozadí žádný obrázek zobrazovat nechcete, ponechte tuto hodnotu prázdnou.\n\nPříklad:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Zakázat"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Svislá čára"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Obdélník"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Podtržení"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Opravdu motiv chcete resetovat do výchozího nastavení?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Obnovit motiv"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Resetovat"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Klasický"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Tmavý"
+	},
+	"terminal_theme_light_label": {
+		"message": "Světlé"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized (tmavý)"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized (světlý)"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Barva 0: černá"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Barva 1: červená"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Barva 10: světlá zelená"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Barva 11: světlá žlutá"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Barva 12: světlá modrá"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Barva 13: světlá purpurová"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Barva 14: světlá tyrkysová"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Barva 15: světlá bílá"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Barva 2: zelená"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Barva 3: žlutá"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Barva 4: modrá"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Barva 5: purpurová"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Barva 6: azurová"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Barva 7: bílá"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Barva 8: světlá černá"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Barva 9: světlá červená"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Vzhled"
+	},
+	"terminal_title_pref_background": {
+		"message": "Pozadí"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Chování"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "Kurzor"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Klávesnice"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Klávesnice a myš"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Myš"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Posuvník"
+	},
+	"terminal_title_settings": {
+		"message": "Nastavení"
+	},
+	"terminal_title_theme": {
+		"message": "Motiv"
 	},
 	"tip_1": {
 		"message": "Chcete-li otevřít odkaz, podržte klávesu Ctrl (v macOS klávesu Cmd) a klikněte na něj."
@@ -507,7 +1104,7 @@
 		"message": "Připojujte se pomocí odkazů ssh:// na webových stránkách, nebo si uložte záložku: https://goo.gl/zS8EZD"
 	},
 	"tip_6": {
-		"message": "Obarvěte si výstup a příkazový řádek 16 či 256 barvami nebo úplnými 24bitovými barvami: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+		"message": "Obarvěte si výstup a příkazový řádek 16 či 256 barvami nebo úplnými 24bitovými barvami: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
 		"message": "Kopírujte do schránky z emacs/vim/etc... pomocí OSC-52: https://goo.gl/XSnyLo"
@@ -531,7 +1128,7 @@
 		"message": "ChangeLog / poznámky k vydání: $1"
 	},
 	"welcome_faq": {
-		"message": "Odpovědi na časté dotazy: $1 (odkaz otevřete kliknutím s přidrženou klávesou Ctrl)"
+		"message": "Odpovědi na časté dotazy: $1 (odkazy otevřete kliknutím se stisknutou klávesou Ctrl)"
 	},
 	"welcome_release_highlights": {
 		"message": "Hlavní změny oproti verzi $1:"
@@ -541,6 +1138,9 @@
 	},
 	"welcome_version": {
 		"message": "Vítá vás $1 verze $2."
+	},
+	"write_size_label": {
+		"message": "Velikost zápisu (KiB)"
 	},
 	"zoom_warning": {
 		"message": "Otevřete nabídku Chrome a nastavte lupu na 100 %."

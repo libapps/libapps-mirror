@@ -1,6 +1,6 @@
 {
 	"already_mounted_message": {
-		"message": "Filsystemet er allerede tilsluttet."
+		"message": "Filsystemet er allerede isat."
 	},
 	"backup_prefs": {
 		"message": "Gem sikkerhedskopi"
@@ -12,25 +12,19 @@
 		"message": "Hvis denne fane lukkes, afbrydes denne session."
 	},
 	"cache_pin_prompt": {
-		"message": "Vil du gemme pinkoden for denne session i cachen? (y/N):"
+		"message": "Vil du gemme pinkoden til denne SSH-session i cachen? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "Annuller"
 	},
+	"changelog": {
+		"message": "Ændringslog"
+	},
 	"clear_known_hosts_menu_label": {
-		"message": "Ryd SSH known_hosts"
+		"message": "Ryd kendte SSH-hosts"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "Denne kommando viser en menu med kendte værter og beskeder, som værten skal glemme."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Glem en kendt SSH-vært."
-	},
-	"cmd_ssh_help": {
-		"message": "Parametrene |username| og |hostname| er påkrævede, |port| er valgfri. Hvis porten ikke er angivet, sættes 22 som standard."
-	},
-	"cmd_ssh_title": {
-		"message": "Åbner en ny SSH-session."
+	"clear_label": {
+		"message": "Ryd"
 	},
 	"command_complete": {
 		"message": "Kommandoen $1 blev afsluttet med statuskoden $2."
@@ -42,7 +36,7 @@
 		"message": "$1 blev ikke startet: $2"
 	},
 	"connect_button_label": {
-		"message": "Opret forbindelse"
+		"message": "Kontakt"
 	},
 	"connect_or_exit_message": {
 		"message": "Vil du vælge (C) en anden forbindelse eller afslutte (X)?"
@@ -143,6 +137,219 @@
 	"hterm_loading_resource_start": {
 		"message": "Indlæser $1..."
 	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Tillad visning af indlejret billede"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+tilbagetasten er Meta+tilbagetasten"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "Tilstand med AltGr-tasten"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Håndter Alt-tast som Meta-tast"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Håndtering af Alt-tasten til ændring"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Klokkelyd for underretninger (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Baggrundsfarve"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Baggrundsbillede"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Baggrundbilledets position"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Størrelse på baggrundsbillede"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Adfærd for tilbagetasten"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Tilsidesættelse af tilknytning af tegn"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Ryd automatisk tekstvalg"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Luk vinduet ved afslutning"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Oprindelig farvepalet"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Kopiér automatisk det valgte indhold"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Kopiering med Ctrl+C"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Zoom med Ctrl++/-/0"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Indsætning med Ctrl+V"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Markørblink"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Markørens blinkhastighed"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Tekstmarkørens farve"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Tekstmarkørens form"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Opret skrivebordsnotifikationer for at få underretningsklokker"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Tvetydige østasiatiske tegn anvender to kolonner"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Understøt kontroltegn, der ikke er UTF-8 C1"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Aktivér blinkende tekst"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Aktivering af fed tekst"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Brug fed tekst med klare farver"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Vis notifikation, når der kopieres indhold"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Tillad ekstern skrivning af udklipsholder"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Tillad rydning af skærmhistorik (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Tillad redigering af tekstmarkørens blink"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Vis terminalmål, når der ændres størrelse"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Miljøvariabler"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Skrifttypefamilie"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Skriftstørrelse"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Udjævning af tekstskrifttype"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Tekstfarve"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Skjul musemarkør, mens der skrives"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Rulning med Home- og End-tasterne"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Tastaturbindinger/-genveje"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Brug standard-OS-tastaturbindinger/-genveje"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Medietaster er F-taster"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Håndtering af Meta-tasten til ændring"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Indsætning med museknap"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Indsætning af indhold med højreklik på musen"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Rulning med Page Up- og Page Down-tasterne"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Faneskift med Alt+1-9"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Nyt vindue med Ctrl+N"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Faneskift med Ctrl+1-9"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ny fane med Ctrl+T"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Faneskift med Ctrl+tabulatortasten"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Fanelukning med Ctrl+W"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Faneskift med Meta+1-9"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Indsætning med Meta+V"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Tillad træk og slip for at indsætte"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Modtag kodning"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Rul ned til bunden efter tastetryk"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Rul ned til bunden efter nyt output"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Efterlign piletaster via rulning med musehjulet"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Multiplikator for rulning med hjulet på musen"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Rullepanelets synlighed"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Indsætning med Shift+Insert"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Terminalkodning"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Lad browseren håndtere tekstkopiering"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "Tilpasset CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "Tilpasset CSS (indlejret tekst)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Stop automatisk valg (til venstre)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Tegn ved ordombrydning"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Stop automatisk valg (til højre)"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Indlejrede billeder"
 	},
@@ -150,10 +357,10 @@
 		"message": "Indlejrede billeder er deaktiveret"
 	},
 	"hterm_pref_allow_images_inline": {
-		"message": "Angiver, om den eksterne host må vise billeder i terminalen.\n\nVi spørger som standard, indtil der foretages et valg."
+		"message": "Angiv, om den eksterne host må vise billeder i terminalen.\n\nVi spørger som standard, indtil der foretages et valg."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Hvis den angives, annulleres Chrome OS-tilknytningen af Alt + tilbagetasten til DEL, så Alt + tilbagetasten faktisk er Alt + tilbagetasten."
+		"message": "Hvis den angives, annulleres Chrome OS-tilknytningen af Alt+tilbagetasten, så Alt+tilbagetasten faktisk er Alt+tilbagetasten."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Vælg en registreringsheuristik for AltGr.\n\n\"null\": Registrer automatisk baseret på navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n\"none\": Deaktiver enhver omformning i forhold til AltGr.\n\"ctrl-alt\": Gå ud fra, at Ctrl+Alt er AltGr.\n\"left-alt\": Gå ud fra, at venstre Alt-tast er AltGr.\n\"right-alt\": Gå ud fra, at højre Alt-tast er AltGr."
@@ -162,16 +369,16 @@
 		"message": "Angiv, om Alt-tasten skal fungere som metatast eller entydigt som Alt-tast."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Bestemmer, hvordan Alt-tasten håndteres.\n\n  escape: Send et ESC-præfiks.\n  8-bit: Føj 128 til det angivne tegn som i xterm.\n browser-key: Vent, til der trykkes på en tast, og se, hvad browseren\n siger (dette fungerer ikke godt på platforme, hvor browseren\n udfører en standardhandling for nogle kombinationer med Alt.)"
+		"message": "Bestemmer, hvordan Alt-tasten håndteres.\n\n  escape: Send et ESC-præfiks.\n  8-bit: Føj 128 til det angivne tegn som i xterm.\n browser-key: Vent, til der trykkes på en tast, og se, hvad browseren\n siger (dette fungerer ikke godt på platforme, hvor browseren\n udfører en standardhandling for nogle kombinationer med Alt)."
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "Webadresse med terminalens klokkelyd. Hvis strengen er tom, høres ingen klokke."
+		"message": "Webadresse med terminalens klokkelyd. Lad feltet stå tomt, hvis der ikke er nogen klokkelyd."
 	},
 	"hterm_pref_background_color": {
 		"message": "Baggrundsfarven for tekst uden andre farveattributter."
 	},
 	"hterm_pref_background_image": {
-		"message": "CSS-værdi for baggrundsbilledet. Hvis strengen er tom, er der ikke noget billede.\n\nEksempel:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "CSS-værdi for baggrundsbilledet. Lad feltet stå tomt, hvis der ikke er noget billede.\n\nEksempel:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "CSS-værdi for baggrundsbilledets position.\n\nEksempel:\n  10% 10%\n  center"
@@ -180,34 +387,34 @@
 		"message": "CSS-værdi for baggrundsbilledets størrelse."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Hvis den angives som sand, bruges backspace til at sende BS (\"\\x08\" eller ^H). Hvis ikke, bruges backspace til at sende \"\\x7f\"."
+		"message": "Hvis den er angivet som Sand, bruges tilbagetasten til at sende BS (\"\\x08\" eller ^H). Hvis ikke den er angivet som Sand, bruges tilbagetasten til at sende \"\\x7f\"."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "Denne indstilling er specificeret som et objekt. Den er en sparsematrix, hvor hver egenskab er tegnsættets kode, og værdien er et objekt, som i sig selv er en sparsematrix. I denne sparsematrix er hver egenskab det tegn, der modtages, og værdien er det viste tegn.\n\nF.eks.:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "Denne indstilling er specificeret som et objekt. Den er en sparsematrix, hvor hver egenskab er tegnsættets kode, og værdien er et objekt, som i sig selv er en sparsematrix. I denne sparsematrix er hver egenskab det tegn, der modtages, og værdien er det viste tegn.\n\nEksempel:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
-		"message": "Angiver, om markeringen skal fjernes efter kopiering."
+		"message": "Angiv, om markeringen skal fjernes efter kopiering."
 	},
 	"hterm_pref_close_on_exit": {
-		"message": "Om vinduet skal lukkes, når kommandoen er udført."
+		"message": "Angiv, om vinduet skal lukkes, når kommandoen er udført."
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "Tilsidesæt farver i standardpaletten.\n\nDenne kan angives som en matrix eller et objekt. Hvis den angives som et objekt, antages den at være en sparsematrix, hvor hver egenskab er et numerisk indeks i farvepaletten.\n\nVærdierne kan angives som næsten en hvilken som helst css-farveværdi. Det omfatter #RGB, #RRGGBB, rgb(...), rgba(...) og alle farvenavne, der også indgår i standardfilen X11 rgb.txt.\n\nDu kan bruge \"null\" til at angive, at standardværdien ikke skal ændres. Dette er nyttigt, hvis du vil springe over nogle få indekser, når værdien er angivet som en matrix.\n\nDisse angiver f.eks. begge farveindekset 1 som blå:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "Tilsidesæt farver i standardpaletten.\n\nDenne kan angives som en matrix eller et objekt. Hvis den angives som et objekt, antages den at være en sparsematrix, hvor hver egenskab er et numerisk indeks i farvepaletten.\n\nVærdierne kan angives som næsten en hvilken som helst CSS-farveværdi. Det omfatter #RGB, #RRGGBB, rgb(...), rgba(...) og alle farvenavne, der også indgår i standardfilen X11 rgb.txt.\n\nDu kan bruge \"null\" til at angive, at standardværdien ikke skal ændres. Dette er nyttigt, hvis du vil springe over nogle få indekser, når værdien er angivet som en matrix.\n\nDisse angiver f.eks. begge farveindekset 1 som blå:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
 		"message": "Kopiér automatisk markeringer med musen til udklipsholderen."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl + C bruges til kopiere, hvis den indstilles til sand, og til at sende ^C til hosten, hvis den indstilles til falsk.\nCtrl + Shift + C bruges til at sende ^C til hosten, hvis den indstilles til sand, og til at kopiere, hvis den indstilles til falsk."
+		"message": "Ctrl+C bruges til kopiere, hvis den angives som Sand, og til at sende ^C til hosten, hvis den angives som Falsk.\nCtrl+Shift+C bruges til at sende ^C til hosten, hvis den angives som Sand, og til at kopiere, hvis den angives som Falsk."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Hvis den angives som sand, styres zoom via Ctrl + plustegn/minustegn/nul.\nHvis den angives som falsk, styres zoom via Ctrl + Shift + plustegn/minustegn/nul, mens Ctrl + minustegn bruges til at sende ^_, og Ctrl + plustegn/nul ikke gør noget."
+		"message": "Hvis den angives som Sand, styres zoom via Ctrl+plustegn/minustegn/nul.\nHvis den angives som Falsk, styres zoom via Ctrl+Shift+plustegn/minustegn/nul, mens Ctrl+minustegn bruges til at sende ^_, og Ctrl+plustegn/nul ikke gør noget."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl + V indsætter, hvis denne er indstillet til sand, og sender ^V til hosten, hvis den indstilles til falsk.\nCtrl + Shift + V sender ^V til hosten, hvis den indstillet til sand, og indsætter, hvis den indstilles til falsk."
+		"message": "Ctrl+V indsætter, hvis denne er angivet som Sand, og sender ^V til hosten, hvis den er angivet som Falsk.\nCtrl+Shift+V sender ^V til hosten, hvis den er angivet som Sand, og indsætter, hvis den er angivet som Falsk."
 	},
 	"hterm_pref_cursor_blink": {
-		"message": "Angiver, om tekstmarkøren skal blinke som standard. Denne kan slås til/fra på kørselstidspunktet via terminalens escape-sekvenser."
+		"message": "Angiv, om tekstmarkøren skal blinke som standard. Denne kan slås til/fra på kørselstidspunktet via terminalens escape-sekvenser."
 	},
 	"hterm_pref_cursor_blink_cycle": {
 		"message": "Tekstmarkørens blinkhastighed i millisekunder.\n\nEn matrix med to elementer, hvoraf det første angiver, hvor længe tekstmarkøren skal være synlig, og det andet angiver, hvor længe den skal være usynlig."
@@ -215,32 +422,41 @@
 	"hterm_pref_cursor_color": {
 		"message": "Farven på tekstmarkøren, når den er synlig."
 	},
+	"hterm_pref_cursor_shape": {
+		"message": "Formen på tekstmarkøren, når den er synlig. Dette kan ændres på kørselstidspunktet via terminalens escape-sekvenser."
+	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Hvis den angives som sand, opretter terminalklokker i baggrunden en Webnotifikation. https://www.w3.org/TR/notifications/\n\nVisning af notifikationer kræver brugerens tilladelse. Når denne valgmulighed er angivet som sand, forsøger hterm at anmode brugeren om tilladelse, hvis det er nødvendigt. Browsere viser muligvis ikke denne anmodning om tilladelse, hvis den ikke aktiveres af en brugerhandling.\n\nChrome-udvidelser med tilladelsen \"notifikationer\" må vise notifikationer."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Om tvetydige østasiatiske tegn skal have dobbelt kolonnebredde."
+		"message": "Angiv, om tvetydige østasiatiske tegn skal have dobbelt kolonnebredde."
 	},
 	"hterm_pref_enable_8_bit_control": {
-		"message": "Angiv til sand for at aktivere kontroltegn på otte bit, og angiv til falsk for at se bort fra dem.\n\nUanset denne indstilling respekterer vi versioner af disse kontroltegn med to byte."
+		"message": "Angiv som Sand for at aktivere kontroltegn på otte bit, og angiv som Falsk for at se bort fra dem.\n\nUanset denne indstilling respekterer vi versioner af disse kontroltegn med to byte."
 	},
 	"hterm_pref_enable_blink": {
 		"message": "Hvis den er angivet som Sand, skal du respektere blinkattributten. Angiv som Falsk for at ignorere den."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Hvis den er angivet som Sand, skal du bruge fed skrifttype til tekst med attributten fed/klar. Angiv som Falsk, hvis der skal bruges en skrifttype med normal vægt. Angiv som Nul, hvis der skal bruges automatisk registrering."
+		"message": "Hvis den er angivet som Sand, skal du bruge fed skrifttype til tekst med attributten fed/klar. Angiv som Falsk, hvis der skal bruges en skrifttype med normal tykkelse. Angiv som Nul, hvis der skal bruges automatisk registrering."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "Hvis den er angivet som Sand, skal du bruge klare farver (8-15 i en palet med 16 farver) Angiv som Falsk, hvis det ikke er tilfældet."
+		"message": "Hvis den er angivet som Sand, skal du bruge klare farver (8-15 i en palet med 16 farver). Angiv som Falsk, hvis det ikke er tilfældet."
 	},
 	"hterm_pref_enable_clipboard_notice": {
-		"message": "Angiver, om en meddelelse skal vises i terminalen, når hosten skriver til udklipsholderen."
+		"message": "Angiv, om en meddelelse skal vises i terminalen, når hosten skriver til udklipsholderen."
 	},
 	"hterm_pref_enable_clipboard_write": {
 		"message": "Giv den eksterne host tilladelse til at skrive direkte til udklipsholderen på det lokale system.\nDer gives aldrig læseadgang uanset denne indstilling.\n\nDette bruges til at styre adgang til funktioner som OSC-52."
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Angiv, om funktionen til rydning af gemte linjer (tilstand 3) for kommandoen til rydning af visning (CSI-J) kan rydde terminalens skærmhistorik.\n\nDet er sikkert at aktivere dette som standard."
+	},
 	"hterm_pref_enable_dec12": {
 		"message": "Respekter hostens forsøg på at ændre tekstmarkørens blinkstatus ved hjælp af DEC12 (privat tilstand)."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Angiv, om der skal vises terminalmål, når terminalen ændrer størrelse."
 	},
 	"hterm_pref_environment": {
 		"message": "Det første sæt variabler for miljøet angives som et objekt."
@@ -252,7 +468,7 @@
 		"message": "Standardskriftstørrelsen i pixel."
 	},
 	"hterm_pref_font_smoothing": {
-		"message": "Egenskaben udjævning af CSS-skrifttyper."
+		"message": "CSS-egenskaben font-smoothing."
 	},
 	"hterm_pref_foreground_color": {
 		"message": "Forgrundsfarven for tekst uden nogen andre farveattributter."
@@ -261,16 +477,19 @@
 		"message": "Om musemarkøren skal skjules automatisk under indtastning. Registrer automatisk som standard, om platformen/operativsystemet skal håndtere dette.\n\nBemærk! Nogle operativsystemer kan tilsidesætte denne indstilling, og derfor vil du muligvis ikke altid kunne deaktivere den."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Hvis den er angivet som Sand, styrer Home/End terminalens rullepanel, og Shift+Home/Shift+End sendes til den eksterne host. Hvis den er angivet som Falsk, sendes Home/End til den eksterne host, og Shift+Home/Shift+End ruller."
+		"message": "Hvis den er angivet som Sand, styrer Home og End terminalens rullepanel, og Shift+Home og Shift+End sendes til den eksterne host. Hvis den er angivet som Falsk, sendes Home og End til den eksterne host, og Shift+Home og Shift+End ruller."
 	},
 	"hterm_pref_keybindings": {
-		"message": "En oversigt over tasterækkefølgen for tastehandlinger. Tasterækkefølgen omfatter nul eller flere ændringstaster efterfulgt af en tastekode. Tastekoder kan være decimaltal eller hexadecimaltal eller en tastidentifikator. Tastehandlinger kan specificeres som en streng, der skal sendes til hosten, eller en handlingsidentifikator. Se en komplet forklaring af formatet på https://goo.gl/LWRndr.\n\nEksempler på tastbindinger:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\n}"
+		"message": "En oversigt over tasterækkefølgen for tastehandlinger. Tasterækkefølgen omfatter nul eller flere ændringstaster efterfulgt af en tastekode. Tastekoder kan være decimaltal eller hexadecimaltal eller et tast-id. Tastehandlinger kan specificeres som en streng, der skal sendes til hosten, eller et handlings-id. Se en komplet forklaring af formatet på https://goo.gl/LWRndr.\n\nEksempler på tastbindinger:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"Hello World\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Angiv, om almindelige OS-tastaturbindinger skal respekteres i stedet for altid at anvende registrering til hterms egen brug."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
-		"message": "Hvis angivet til sand, skal medietasterne konverteres til deres tilsvarende F-taster. Hvis angivet til falsk, skal browseren styre tasterne."
+		"message": "Hvis den er angivet som Sand, skal medietasterne konverteres til deres tilsvarende F-taster. Hvis den er angivet som Falsk, skal browseren styre tasterne."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Send et ESC-præfiks, når du trykker på en tast, mens du holder metatasten nede.\n\nNår dette er aktiveret, og du f.eks. trykker på Meta+K, sendes ^[k, som om du har tastet Escape og derefter k. Når dette er deaktiveret, sendes kun k."
+		"message": "Send et ESC-præfiks, når du trykker på en tast, mens du holder metatasten nede.\n\nNår dette er aktiveret, og du f.eks. trykker på Meta-K, sendes ^[k, som om du har tastet Escape og derefter k. Når dette er deaktiveret, sendes kun k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Musens knap til at indsætte. Angiv nul for automatisk registrering.\n\nVed automatisk registrering bruger vi den midterste museknap til platforme, der ikke er X11, (bl.a. Chrome OS). På X11 bruger vi den højre museknap (da den indbyggede vinduesadministrator burde indsætte via den midterste museknap).\n\n0 == venstre (primær) knap.\n1 == midterste (ekstra) knap.\n2 == højre (sekundær) knap.\n\nDenne valgmulighed er aktiv uafhængigt af indstillingen af \"mus-højreklik-indsæt\".\n\nBemærk! Dette sikrer, at musen fungerer korrekt for henholdsvis højre- og venstrehåndede."
@@ -279,28 +498,43 @@
 		"message": "Indsæt med klik på højre museknap.\n\nDenne valgmulighed er uafhængig af indstillingen af \"mus-indsæt-knap\".\n\nBemærk! Dette sikrer, at musen fungerer korrekt for henholdsvis højre- og venstrehåndede."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Hvis den er angivet som Sand, styrer Page Up/Page Down terminalens rullepanel, og Shift+Page Up/Shift+Page Down sendes til den eksterne host. Hvis den er angivet som Falsk, sendes Page Up/Page Down til den eksterne host, og Shift+Page Up/Shift+Page Down ruller."
+		"message": "Hvis den er angivet som Sand, styrer Page Up og Page Down terminalens rullepanel, og Shift+Page Up og Shift+Page Down sendes til den eksterne host. Hvis den er angivet som Falsk, sendes Page Up og Page Down til den eksterne host, og Shift+Page Up og Shift+Page Down ruller."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Om Alt+1-9 skal overføres til browseren.\n\nDette er praktisk, når hterm køres i en browserfane, så du ikke mister Chromes \"skift til fane\"-tastaturacceleratorer. Når den ikke køres i en fane, er det bedre at sende disse taster til hosten, så de kan bruges i vim eller emacs.\n\nHvis den er angivet som Sand, håndteres Alt+1-9 af browseren. Hvis den er angivet som Falsk, sendes Alt+1-9 til hosten. Hvis den er angivet som Nul, baseres automatisk registrering på browserplatformen og vinduestypen."
+		"message": "Angiv, om Alt+1-9 skal overføres til browseren.\n\nDette er praktisk, når hterm køres i en browserfane, så du ikke mister Chromes \"skift til fane\"-tastaturgenveje. Når den ikke køres i en fane, er det bedre at sende disse taster til hosten, så de kan bruges i vim eller emacs.\n\nHvis den er angivet som Sand, håndteres Alt+1-9 af browseren. Hvis den er angivet som Falsk, sendes Alt+1-9 til hosten. Hvis den er angivet som Nul, baseres automatisk registrering på browserplatformen og vinduestypen."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Angiv, om Ctrl+N skal overføres til browseren.\n\nHvis den er angivet som Sand, håndteres Ctrl+N af browseren som tastaturgenvejen \"ny fane\". Hvis den er angivet som Falsk, sendes Ctrl+N til hosten."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Om Ctrl+1-9 skal overføres til browseren.\n\nDette er praktisk, når hterm køres i en browserfane, så du ikke mister Chromes \"skift til fane\"-tastaturacceleratorer. Når den ikke kører i en fane, er det bedre at sende disse taster til hosten, så de kan bruges i vim eller emacs.\n\nHvis den er angivet som Sand, håndteres Ctrl+1-9 af browseren. Hvis den er angivet som Falsk, sendes Ctrl+1-9 til hosten. Hvis den er angivet som Nul, baseres automatisk registrering på browserplatformen og vinduestypen."
+		"message": "Angiv, om Ctrl+1-9 skal overføres til browseren.\n\nDette er praktisk, når hterm køres i en browserfane, så du ikke mister Chromes \"skift til fane\"-tastaturgenveje. Når den ikke kører i en fane, er det bedre at sende disse taster til hosten, så de kan bruges i vim eller emacs.\n\nHvis den er angivet som Sand, håndteres Ctrl+1-9 af browseren. Hvis den er angivet som Falsk, sendes Ctrl+1-9 til hosten. Hvis den er angivet som Nul, baseres automatisk registrering på browserplatformen og vinduestypen."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Angiv, om Ctrl+T skal overføres til browseren.\n\nHvis den er angivet som Sand, håndteres Ctrl+T af browseren som tastaturgenvejen \"ny fane\". Hvis den er angivet som Falsk, sendes Ctrl+T til hosten."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Angiv, om Ctrl+tabulatortasten og Ctrl+Shift+tabulatortasten skal overføres til browseren.\n\nHvis den er angivet som Sand, håndteres Ctrl+tabulatortasten og Ctrl+Shift+tabulatortasten af browseren som tastaturgenvejen \"næste/forrige fane\". Hvis den er angivet som Falsk, sendes tabulatortasten til hosten uden Ctrl eller Shift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Angiv, om Ctrl+W skal overføres til browseren.\n\nHvis den er angivet som Sand, håndteres Ctrl+W af browseren som tastaturgenvejen \"luk fane\". Hvis den er angivet som Falsk, sendes Ctrl+W til hosten."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Angiv, om vi skal overføre Meta + 1-9 til browseren.\n\nDette er praktisk, når hterm køres i en browserfane, så du ikke mister Chromes \"skift til fane\"-tastaturacceleratorer. Når den ikke kører i en fane, er det bedre at sende disse taster til hosten, så de kan bruges i vim eller emacs.\n\nHvis den er angivet som Sand, håndteres Meta+1-9 af browseren. Hvis den er angivet som Falsk, sendes Meta+1-9 til hosten. Hvis den er angivet som Nul, baseres automatisk registrering på browserplatformen og vinduestypen."
+		"message": "Angiv, om Meta+1-9 skal overføres til browseren.\n\nDette er praktisk, når hterm køres i en browserfane, så du ikke mister Chromes \"skift til fane\"-tastaturgenveje. Når den ikke kører i en fane, er det bedre at sende disse taster til hosten, så de kan bruges i vim eller emacs.\n\nHvis den er angivet som Sand, håndteres Meta+1-9 af browseren. Hvis den er angivet som Falsk, sendes Meta+1-9 til hosten. Hvis den er angivet som Nul, baseres automatisk registrering på browserplatformen og vinduestypen."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Angiv, om meta+V skal overføres til hosten."
 	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Hvis den er angivet som Sand, indsættes tekst, der trækkes og slippes, i terminalen.\nHvis den er angivet som falsk, ignoreres sluppet tekst."
+	},
 	"hterm_pref_receive_encoding": {
-		"message": "Angiv den forventede kodning for data modtaget fra hosten.\nHvis koderne ikke matcher, kan der sandsynligvis noteres visuelle fejl.\n\nDe gyldige værdier er \"utf-8\" og \"raw\"."
+		"message": "Angiv den forventede kodning for data, der modtages fra hosten.\nHvis koderne ikke matcher, kan der sandsynligvis noteres visuelle fejl.\n\nDe gyldige værdier er \"utf-8\" og \"raw\"."
 	},
 	"hterm_pref_scroll_on_keystroke": {
-		"message": "Angiver, om der skal rulles ned til bunden med ethvert tastetryk."
+		"message": "Angiv, om der skal rulles ned til bunden med ethvert tastetryk."
 	},
 	"hterm_pref_scroll_on_output": {
-		"message": "Angiver, om der skal rulles ned til bunden ved terminaloutput."
+		"message": "Angiv, om der skal rulles ned til bunden ved terminaloutput."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
 		"message": "Når den alternative skærmbuffer bruges, og DECCKM (programmarkørtasten) er aktiv, efterligner rulning med musehjulet piletasterne.\n\nDet kan deaktiveres midlertidigt ved at holde Shift-tasten nede.\n\nDette forekommer ofte ved brug af værktøjer til sideinddeling (less), ved læsning af manualsider eller tekstredigeringsværktøjer (vi/nano) eller ved brug af Screen/tmux."
@@ -318,25 +552,25 @@
 		"message": "Standardterminalkodning (DOCS).\n\nISO-2022 giver mulighed for oversættelser af tegnoversigt (f.eks. grafikoversigter).\nUTF-8 deaktiverer understøttelse af disse.\n\nDen låste variant betyder, at kodningen ikke kan ændres på kørselstidspunktet via terminalens escape-sekvenser.\n\nDu bør holde dig til UTF-8, medmindre du bemærker gengivelsesfejl i forældede apps."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Om browserens/operativsystemets standardadfærd for kopiering skal bruges.\n\nTillad, at browseren/operativsystemet håndterer kopieringshændelsen direkte, hvilket kan forbedre kompatibiliteten i forhold til visse systemer (hvor kopiering ikke fungerer overhovedet), men gør tekstmarkeringen mindre pålidelig.\n\nLange linjer, der automatisk blev linjeindkapslet, bliver f.eks. kopieret med linjeskift integreret."
+		"message": "Angiv, om browserens/operativsystemets standardadfærd for kopiering skal bruges.\n\nTillad, at browseren/operativsystemet håndterer kopieringshændelsen direkte, hvilket kan forbedre kompatibiliteten i forhold til visse systemer (hvor kopiering ikke fungerer overhovedet), men gør tekstmarkeringen mindre pålidelig.\n\nLange linjer, der automatisk blev linjeindkapslet, bliver f.eks. kopieret med linjeskift integreret."
 	},
 	"hterm_pref_user_css": {
-		"message": "Webadressen for brugers typografiark skal inkluderes i terminaldokument."
+		"message": "Webadressen for brugers typografiark skal inkluderes i terminaldokumentet."
 	},
 	"hterm_pref_user_css_text": {
 		"message": "Tilpasset CSS-tekst til formatering af terminalen."
 	},
 	"hterm_pref_word_break_match_left": {
-		"message": "Regulært udtryk, der skal stoppe matching til venstre for (starten af) en markering.\n\nDette er normalt en tegnklasse til at afvise specifikke tegn.\nVi tillader \"~\" og \".\" som standard, da stier ofte starter med disse."
+		"message": "Regulært udtryk, der skal stoppe matchning til venstre for (starten af) en markering.\n\nDette er normalt en tegnklasse til at afvise specifikke tegn.\nVi tillader \"~\" og \".\" som standard, da stier ofte starter med disse."
 	},
 	"hterm_pref_word_break_match_middle": {
 		"message": "Regulært udtryk, der skal matche alle tegnene i midten.\n\nDette er normalt en tegnklasse til at afvise specifikke tegn.\n\nBruges til at udvide det valg, der omgiver startpunktet."
 	},
 	"hterm_pref_word_break_match_right": {
-		"message": "Regulært udtryk, der skal stoppe matching til højre for (slutningen af) en markering.\n\nDette er normalt en tegnklasse til at afvise specifikke tegn."
+		"message": "Regulært udtryk, der skal stoppe matchning til højre for (slutningen af) en markering.\n\nDette er normalt en tegnklasse til at afvise specifikke tegn."
 	},
 	"hterm_space_character": {
-		"message": "Mellemrum"
+		"message": "mellemrumstasten"
 	},
 	"hterm_title_pref_appearance": {
 		"message": "Udseende (skrifttyper, farver, billeder)"
@@ -345,7 +579,7 @@
 		"message": "Kopiér og indsæt"
 	},
 	"hterm_title_pref_encoding": {
-		"message": "Tegnkodning"
+		"message": "Kodning"
 	},
 	"hterm_title_pref_extensions": {
 		"message": "Udvidelser"
@@ -378,31 +612,307 @@
 		"message": "JSON kunne ikke parses i \"$1\": $2"
 	},
 	"known_hosts_empty": {
-		"message": "Ingen kendte værter, intet at glemme."
+		"message": "Der er ingen kendte hosts – intet at glemme."
 	},
 	"known_hosts_prompt": {
-		"message": "Vælg en vært, der skal glemmes [1-$1]:"
+		"message": "Vælg en host, der skal glemmes [1-$1]:"
 	},
 	"known_hosts_title": {
-		"message": "Kendte værter:"
+		"message": "Kendte hosts:"
+	},
+	"licenses": {
+		"message": "Licenser"
+	},
+	"licenses_expand_link": {
+		"message": "vis licens"
+	},
+	"licenses_title": {
+		"message": "Open source-licenser"
 	},
 	"loading_label": {
-		"message": "Indlæser..."
+		"message": "Indlæser…"
+	},
+	"migrate_to_ext": {
+		"message": "Meddelelse: Migrer til den nye Secure Shell-udvidelse ($1).\nChrome-apps udfases, så denne version stopper med at modtage opdateringer.\nSe migreringsvejledningen ($2) for at få flere oplysninger."
 	},
 	"missing_param": {
 		"message": "Manglende parameter: $1"
 	},
 	"mount_button_label": {
-		"message": "SFTP-tilslutning"
+		"message": "SFTP-isætning"
 	},
 	"mount_path_label": {
 		"message": "Isæt sti"
 	},
 	"mounted_message": {
-		"message": "Tilsluttet"
+		"message": "Isat"
+	},
+	"nasftp_cmd_cat": {
+		"message": "filvisning"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "Gem en fil i terminalen"
+	},
+	"nasftp_cmd_cd": {
+		"message": "indeksændring"
+	},
+	"nasftp_cmd_chdir": {
+		"message": "indeksændring"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Skift fungerende indeks"
+	},
+	"nasftp_cmd_chgrp": {
+		"message": "gruppeejerskabsændring"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Skift stigrupper"
+	},
+	"nasftp_cmd_chmod": {
+		"message": "stitilladelsesskift"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Skift tilladelser i stier"
+	},
+	"nasftp_cmd_chown": {
+		"message": "stiejerskift"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Skift stiejer"
+	},
+	"nasftp_cmd_clear": {
+		"message": "ryd"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Ryd den aktuelle terminalskærm."
+	},
+	"nasftp_cmd_clip": {
+		"message": "klip"
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Kopiér en fil til udklipsholderen (standard: 10 MiB i begyndelsen)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "$1 bytes blev kopieret til udklipsholderen"
+	},
+	"nasftp_cmd_color": {
+		"message": "farve"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Slå farvebrug til/fra"
+	},
+	"nasftp_cmd_copy": {
+		"message": "kopiér"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Kopiér kilde til destination"
+	},
+	"nasftp_cmd_del": {
+		"message": "slet"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Slet filer"
+	},
+	"nasftp_cmd_df": {
+		"message": "diskstatistik"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Vis diskstatistik"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Sti: $1\n  fsid: $2\n I alt: $3\n  Anvendt: $4 ($5 %)\n Infodokument: $6 (til brugere uden rettigheder)\n $7 (på rodniveau)"
+	},
+	"nasftp_cmd_exit": {
+		"message": "luk"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Fjern tilknytning"
+	},
+	"nasftp_cmd_get": {
+		"message": "hent"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Downloader filen $1 som $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Download filer"
+	},
+	"nasftp_cmd_help": {
+		"message": "hjælp"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Denne hjælpeskærm"
+	},
+	"nasftp_cmd_list": {
+		"message": "angiv"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Angivelse af oplysninger om indeks"
+	},
+	"nasftp_cmd_ln": {
+		"message": "linkoprettelse"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Opret et link i stien, der henviser til målet"
+	},
+	"nasftp_cmd_mkdir": {
+		"message": "indeksoprettelse"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Opret indekser"
+	},
+	"nasftp_cmd_move": {
+		"message": "flyt"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Omdøb en fil"
+	},
+	"nasftp_cmd_prompt": {
+		"message": "meddelelse"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Angiv meddelelsesstrengen"
+	},
+	"nasftp_cmd_put": {
+		"message": "upload"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Upload filer"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Uploader filen $1 som $2 ($3)"
+	},
+	"nasftp_cmd_pwd": {
+		"message": "indeksvisning"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Vis det aktuelle fungerende indeks"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Eksternt fungerende indeks: $1"
+	},
+	"nasftp_cmd_quit": {
+		"message": "afslut"
+	},
+	"nasftp_cmd_readlink": {
+		"message": "linklæsning"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Læs symbolske links"
+	},
+	"nasftp_cmd_realpath": {
+		"message": "stikanonisering"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Kanoniser stier"
+	},
+	"nasftp_cmd_rename": {
+		"message": "omdøb"
+	},
+	"nasftp_cmd_reput": {
+		"message": "uploadgenoptagelse"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Genoptag upload af filer"
+	},
+	"nasftp_cmd_rm": {
+		"message": "filfjernelse"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Fjern filer"
+	},
+	"nasftp_cmd_rmdir": {
+		"message": "indekssletning"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Slet tomme indekser"
+	},
+	"nasftp_cmd_show": {
+		"message": "vis"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Vis filer som indlejrede"
+	},
+	"nasftp_cmd_stat": {
+		"message": "filstatus"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Udvidelser:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Vis filstatus"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Fil: $1\n  Størrelse: $2 bytes\n   UID: $3\n   GID: $4\nAdgang: $5\n Tilgået tid: $6\n Ændret tid: $7"
+	},
+	"nasftp_cmd_symlink": {
+		"message": "symbolsklink"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Opret et symbolsk link i stien, der henviser til målet"
+	},
+	"nasftp_cmd_truncate": {
+		"message": "afkort"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Afkort stier til 0 bytes"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  serverudvidelser:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Vis den aktuelle protokolversion"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Oplysninger om SFTP-protokolversionen:\n  lokal: $1\n  server: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: Slutningen af filen"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: Filen blev ikke fundet"
+	},
+	"nasftp_error_file_reading": {
+		"message": "$1 blev ikke læst: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Ubehandlet intern fejl. Rapportér en fejl: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: Ugyldigt nummer: $3"
+	},
+	"nasftp_error_message": {
+		"message": "FEJL: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: Udvidelsen \"$2\" er ikke tilgængelig"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: Ikke en normal fil"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: Der er ikke nok argumenter"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: Tilladelsen blev afvist"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: Der er for mange argumenter"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: Ukendt kommando"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: Ukendt flag $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Gennemtving lukning"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 bytes blev overført på $2 sekunder ($3/s)"
 	},
 	"nassh_options_error": {
-		"message": "Ukendt relæmulighed: $1"
+		"message": "Ukendt valgmulighed: $1"
 	},
 	"nassh_product_name": {
 		"message": "Secure Shell"
@@ -434,14 +944,44 @@
 	"plugin_loading_failed": {
 		"message": " mislykkedes"
 	},
+	"popup_connect_tooltip": {
+		"message": "Hold Ctrl nede for at åbne på en ny fane."
+	},
 	"pref_backup_filename": {
 		"message": "Backup af Secure Shell-præferencer.json"
 	},
+	"preferences_header_ssh_files": {
+		"message": "SSH-filer"
+	},
 	"preferences_header_terminal": {
-		"message": "Profilindstillinger"
+		"message": "Terminalindstillinger"
+	},
+	"preferences_header_uri": {
+		"message": "URI-handlere"
 	},
 	"preferences_reset": {
 		"message": "Alle præferencer blev nulstillet"
+	},
+	"protocol_register_button": {
+		"message": "Registrer protokolhandlere"
+	},
+	"protocol_register_explain": {
+		"message": "Knappen nedenfor forsøger at registrere handlere for alle de protokoller, vi understøtter. Dermed kan vi f.eks. håndtere links af typen ssh:// direkte. Der vises en meddelelse i browseren for hver protokol. Du skal derfor bekræfte/acceptere hver meddelelse, når den vises. Hvis der ikke vises nogen meddelelser, kan du se tips til fejlfinding i den næste sektion."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Hvis vi allerede har registreret handlere, eller tidligere forsøg på registrering blev afvist, vises der ikke flere meddelelser. Åbn dialogboksen nedenfor, og tjek derefter indstillingerne for den registrerede handler i sektionerne med SSH, SFTP osv. Hvis programmet er blokeret, kan du slette indstillingerne, hvilket giver dig mulighed for at prøve registrering igen. Hvis programmet allerede er registreret, men ikke er angivet som din standardhandler, kan du også ændre standardhandleren."
+	},
+	"protocol_register_options_link": {
+		"message": "Protokolregistrering"
+	},
+	"protocol_register_settings_button": {
+		"message": "Åbn indstillinger for registrerede handlere"
+	},
+	"protocol_register_title": {
+		"message": "Hjælp til registrering af Secure Shell-protokolhandler"
+	},
+	"read_size_label": {
+		"message": "Læsestørrelse (KiB)"
 	},
 	"reconnect_message": {
 		"message": "Vil du genoprette forbindelsen (R), vælge en anden forbindelse (C) eller afslutte (X)?"
@@ -450,10 +990,13 @@
 		"message": "Prøver igen…"
 	},
 	"request_pin_prompt": {
-		"message": "Angiv pinkode for at oplåse nøglen $1 på \"$2\" ($3 forsøg tilbage):"
+		"message": "Angiv pinkode for at oplåse nøglen $1 på \"$2 ($3)\" ($4 forsøg tilbage):"
 	},
 	"restore_prefs": {
 		"message": "Gendan sikkerhedskopi"
+	},
+	"save_label": {
+		"message": "Gem"
 	},
 	"shortcut_list_aria_label": {
 		"message": "gemte forbindelser"
@@ -464,8 +1007,44 @@
 	"ssh_argstr_label": {
 		"message": "SSH-argumenter"
 	},
+	"stream_open_error": {
+		"message": "Strømmen $1 blev ikke åbnet: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "Terminalen er ryddet"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI-farver"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Antialias"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Klokke"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Blinker"
+	},
+	"terminal_name_pref_color": {
+		"message": "Farve"
+	},
+	"terminal_name_pref_font": {
+		"message": "Skrifttype"
+	},
+	"terminal_name_pref_image": {
+		"message": "Billede"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Form"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Synlig"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Angiv farver for standardpaletten."
+	},
+	"terminal_pref_bell": {
+		"message": "Hørbar terminalklokke"
 	},
 	"terminal_preview_label": {
 		"message": "Forhåndsvisning"
@@ -476,11 +1055,134 @@
 	"terminal_reset_menu_label": {
 		"message": "Terminalen er nulstillet"
 	},
+	"terminal_settings_background_image_help": {
+		"message": "Webadresse for baggrundsbillede (skal starte med \"http://\" eller \"'https://\"). Lad feltet stå tomt, hvis der ikke er noget billede.\n\nEksempel:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Automatisk"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Deaktiver"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Bloker"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Understregning"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Er du sikker på, at du vil nulstille temaet til dets standardværdier?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Nulstil tema"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Nulstil"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Klassisk"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Mørkt"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Tågedis"
+	},
+	"terminal_theme_light_label": {
+		"message": "Lyst"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized i mørk tilstand"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized i lys tilstand"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Farve 0: Sort"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Farve 1: Rød"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Farve 10: Klar grøn"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Farve 11: Klar gul"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Farve 12: Klar blå"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Farve 13: Klar magenta"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Farve 14: Klar grønblå"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Farve 15: Klar hvid"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Farve 2: Grøn"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Farve 3: Gul"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Farve 4: Blå"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Farve 5: Magenta"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Farve 6: Grønblå"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Farve 7: Hvid"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Farve 8: Klar sort"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Farve 9: Klar rød"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Udseende"
+	},
+	"terminal_title_pref_background": {
+		"message": "Baggrund"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Adfærd"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "Markør"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Tastatur"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Tastatur og mus"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Mus"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Rullepanel"
+	},
+	"terminal_title_pref_text": {
+		"message": "Tekst"
+	},
+	"terminal_title_settings": {
+		"message": "Indstillinger"
+	},
+	"terminal_title_theme": {
+		"message": "Tema"
+	},
 	"tip_1": {
 		"message": "Du kan holde Ctrl (Cmd på macOS) nede, mens du klikker på links, for at åben dem."
 	},
 	"tip_10": {
-		"message": "Ved kørsel i et andet vindue kan du trykke Ctrl+Shift+N for at åbne en ny session."
+		"message": "Ved kørsel i et andet vindue kan du trykke på Ctrl+Shift+N for at åbne en ny session."
 	},
 	"tip_11": {
 		"message": "Du kan ændre tilknytningen mellem taster og genveje: https://goo.gl/LWRndr"
@@ -498,10 +1200,10 @@
 		"message": "Vis notifikationer i browseren ved hjælp af hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Opret forbindelse fra omnifeltet ved at skrive \"ssh <profilnavn>\": https://goo.gl/V7o8ki"
+		"message": "Opret forbindelse fra omnifeltet ved at skrive \"ssh <profile name>\": https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS kan isætte filsystemer via SFTP og gennemse via appen Filer. Brug \"SFTP-tilslutning\" i stedet for \"Opret forbindelse\"."
+		"message": "Chrome OS kan isætte filsystemer via SFTP og gennemse via appen Filer. Brug \"SFTP-isætning\" i stedet for \"Opret forbindelse\"."
 	},
 	"tip_5": {
 		"message": "Opret forbindelse ved hjælp af ssh://-links på websider, eller gem et bogmærke: https://goo.gl/zS8EZD"
@@ -516,7 +1218,7 @@
 		"message": "Chat med andre hterm-/Secure Shell-brugere via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Har du fundet en fejl?  Ønsker du en ny funktion?  Giv os besked: https://goo.gl/vb94JY"
+		"message": "Har du fundet en fejl? Ønsker du en ny funktion? Giv os besked: https://goo.gl/vb94JY"
 	},
 	"unexpected_error": {
 		"message": "Der opstod en uventet fejl. Du kan få flere oplysninger i JavaScript-konsollen."
@@ -525,22 +1227,25 @@
 		"message": "Ukendt SSH-version: $1"
 	},
 	"unmount_button_label": {
-		"message": "Fjern tilslutning til SFTP"
+		"message": "Demonter SFTP"
 	},
 	"welcome_changelog": {
-		"message": "ChangeLog/produktbemærkninger: $1"
+		"message": "Ændringslogfil/produktbemærkninger: $1"
 	},
 	"welcome_faq": {
-		"message": "Svar på ofte stillede spørgsmål: $1 (tryk på ctrl, og hold knappen nede, mens du klikker på linket, for at åbne det)"
+		"message": "Svar på ofte stillede spørgsmål: $1 (tryk på Ctrl, og klik på linkene for at åbne dem)"
 	},
 	"welcome_release_highlights": {
 		"message": "Større ændringer siden $1:"
 	},
 	"welcome_tip_of_day": {
-		"message": "Tilfældigt Proftip nr. $1: $2"
+		"message": "Tilfældigt tip nr. $1: $2"
 	},
 	"welcome_version": {
 		"message": "Velkommen til version $2 af $1."
+	},
+	"write_size_label": {
+		"message": "Skrivestørrelse (KiB)"
 	},
 	"zoom_warning": {
 		"message": "Konfigurer Chrome-menuen -> Vælg 100 % zoom"

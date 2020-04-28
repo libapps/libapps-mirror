@@ -53,17 +53,11 @@
 	"console_nassh_options_notice": {
 		"message": "Znate li da postoji posebna stranica s opcijama?\nViše ne morate izravno mijenjati \"term_\"!\n$1"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Izbriši"
 	},
 	"disconnect_message": {
 		"message": "Dodatak NaCl izvršen je sa statusnim kodom $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "Česta pitanja"
@@ -362,9 +356,6 @@
 	"hterm_pref_alt_backspace_is_meta_backspace": {
 		"message": "Ako se postavi, poništava se ponovno mapiranje za Alt + Backspace -> Brisanje u OS-u Chrome tako da je Alt + Backspace zaista Alt + Backspace."
 	},
-	"hterm_pref_alt_gr_mode": {
-		"message": "Odabir heuristike za otkrivanje načina rada tipke AltGr.\n\n\"null\": automatsko otkrivanje na temelju entiteta navigator.language:\n      \"en-us\" => \"none\", inače => \"right-alt\"\n\"none\": onemogućuje svaku izmjenu vezanu uz AltGr.\n\"ctrl- alt\": pretpostavlja da Ctrl + Alt znači AltGr.\n\"left-alt\": pretpostavlja da Alt znači AltGr.\n\"right-alt\": pretpostavlja da desni Alt znači AltGr."
-	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Određuje hoće li tipka Alt djelovati kao metatipka ili kao zasebna Alt tipka."
 	},
@@ -425,9 +416,6 @@
 	"hterm_pref_cursor_shape": {
 		"message": "Oblik vidljivog pokazivača teksta. Može se promijeniti za vrijeme izvođenja putem izlaznih sljedova terminala."
 	},
-	"hterm_pref_desktop_notification_bell": {
-		"message": "Ako je vrijednost \"true\", upozorenja terminala u pozadini izrađivat će web-obavijesti. https://www.w3.org/TR/notifications/\n\nZa prikazivanje obavijesti potrebno je dopuštenje korisnika. Kada je ta opcija postavljena na \"true\", hterm će pokušati tražiti dopuštenje od korisnika ako je potrebno. Preglednici možda neće prikazati zahtjev za dopuštenje ako on nije aktiviran radnjom korisnika.\n\nChromeova proširenja s dopuštenjem za obavijesti smjet će prikazivati obavijesti."
-	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Određuje hoće li istočnoazijski višeznačni znakovi imati širinu od dva stupca."
 	},
@@ -473,9 +461,6 @@
 	"hterm_pref_foreground_color": {
 		"message": "Boja prednjeg plana za tekst bez drugih atributa boje."
 	},
-	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Određuje hoće li se pokazivač miša automatski skrivati prilikom upisivanja. Prema zadanim postavkama automatski se otkriva hoće li time rukovati platforma/OS.\n\nNapomena: neki operativni sustavi mogu nadjačati tu postavku i stoga je možda nećete uvijek moći onemogućiti."
-	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Ako se postavi na True, tipke Home/End kontroliraju klizač terminala, a Shift + Home/Shift + End šalju se udaljenom hostu. Ako se postavi na False, onda se Home/End šalju udaljenom hostu, a Shift + Home/Shift + End služi za pomicanje."
 	},
@@ -490,9 +475,6 @@
 	},
 	"hterm_pref_meta_sends_escape": {
 		"message": "Šalje prefiks ESC kada se pritisne tipka dok se drži tipka Meta.\n\nNa primjer, ako je omogućeno, pritiskom tipki Meta + k poslat će se ^[k kao da ste pritisnuli Escape, a zatim k. Ako je onemogućeno, poslat će se samo k."
-	},
-	"hterm_pref_mouse_paste_button": {
-		"message": "Tipka miša za lijepljenje ili ništa za automatsko otkrivanje.\n\nZa automatsko otkrivanje upotrebljavamo srednju tipku miša za sve platforme osim X11 (uključujući OS Chrome). Na platformi X11 upotrebljavamo desnu tipku miša (jer upravitelj nativnog prozora treba zalijepiti srednjom tipkom miša).\n\n0 == lijeva tipka (primarna).\n1 == srednja tipka (pomoćna).\n2 == desna tipka (sekundarna).\n\nOva je opcija neovisna o postavci lijepljenja desnom tipkom.\n\nNapomena: postavka ispravno funkcionira za miševe za ljevoruke i za desnoruke osobe."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Lijepljenje desnim klikom miša.\n\nOva je opcija neovisna o postavci \"mouse-paste-button\" (gumb miša za lijepljenje).\n\nNapomena: postavka ispravno funkcionira za miševe za ljevoruke i za desnoruke osobe."
@@ -521,9 +503,6 @@
 	"hterm_pref_pass_meta_number": {
 		"message": "Određuje hoće li se Meta + 1..9 prosljeđivati pregledniku.\n\nTo je praktično kad se hterm izvodi na kartici preglednika, tako da se ne izgube Chromeovi tipkovni prečaci za prebacivanje na karticu. Kad se ne izvodi na kartici, bolje je te tipke slati hostu kako bi se mogle upotrebljavati u Vimu ili Emacsu.\n\nAko je vrijednost true, preglednik obrađuje Meta + 1..9. Ako je false, Meta + 1..9 šalje se hostu. Ako nije postavljeno, otkrivanje je automatsko na temelju platforme preglednika i vrste prozora."
 	},
-	"hterm_pref_pass_meta_v": {
-		"message": "Određuje hoće li se \"Meta+V\" prosljeđivati hostu."
-	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Ako je postavljeno na True, povučeni i ispušteni tekst zalijepit će se u terminal.\nAko je postavljeno na False, ispušteni će se tekst zanemariti."
 	},
@@ -535,12 +514,6 @@
 	},
 	"hterm_pref_scroll_on_output": {
 		"message": "Hoće li se klizač pomaknuti na dno na izlaz terminala."
-	},
-	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Kada se upotrebljava međuspremnik zamjenskog zaslona, a DECCKM (tipke pokazivača aplikacije) je aktivan, događaji kotačića miša emuliraju tipke strelica.\n\nTo se može privremeno onemogućiti držanjem tipke Shift.\n\nTo se često pojavljuje pri upotrebi programa za prikaz stranice (less), čitanju man stranica, upotrebi uređivača teksta (vi/nano) ili kada se upotrebljava screen/tmux."
-	},
-	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Množitelj za događaje kotačića za pomicanje kada se mjeri u pikselima.\n\nMijenja brzinu pomicanja stranice."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Način rada vertikalnog klizača."

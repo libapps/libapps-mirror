@@ -9,31 +9,22 @@
 		"message": "Hindi ma-parse ang patutunguhan: $1"
 	},
 	"before_unload": {
-		"message": "Ang pagsasara sa tab na ito ay mag-aalis sa pagkakakonekta ng session na ito."
+		"message": "Madidiskonekta ang session na ito kung isasara ang tab na ito."
 	},
 	"cache_pin_prompt": {
-		"message": "I-cache ang PIN para sa session na ito? (y/N):"
+		"message": "I-cache ang PIN para sa session ng SSH na ito? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "Kanselahin"
 	},
 	"clear_known_hosts_menu_label": {
-		"message": "I-clear ang SSH known_hosts"
+		"message": "I-clear ang mga SSH na known host"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "Nagpapakita ang command na ito ng menu ng mga kilalang host at nagpa-prompt upang makalimot ang host."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Kalimutan ang isang kilalang ssh host."
-	},
-	"cmd_ssh_help": {
-		"message": "Kinakailangan ang mga parameter ng |username| at |hostname|, opsyonal ang |port|. Kung hindi tinukoy ang port, nagde-default ito sa 22."
-	},
-	"cmd_ssh_title": {
-		"message": "Nagbubukas ng bagong session ng SSH."
+	"clear_label": {
+		"message": "I-clear"
 	},
 	"command_complete": {
-		"message": "Nakumpleto na ang command na $1 nang may status code na $2."
+		"message": "Na-exit na ang command na $1 nang may status code na $2."
 	},
 	"command_not_supported": {
 		"message": "Hindi sinusuportahan ang $1 sa bersyong ito ng Chrome"
@@ -66,7 +57,7 @@
 		"message": "I-delete"
 	},
 	"disconnect_message": {
-		"message": "Nakumpleto na ang NaCl plugin nang may status code na $1."
+		"message": "Na-exit na ang NaCl plugin nang may status code na $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -75,7 +66,7 @@
 		"message": "FAQ"
 	},
 	"field_argstr_placeholder": {
-		"message": "mga karagdagang command line na argument"
+		"message": "mga karagdagang argument ng command line"
 	},
 	"field_description_aria_label": {
 		"message": "paglalarawan"
@@ -143,6 +134,216 @@
 	"hterm_loading_resource_start": {
 		"message": "Nilo-load ang $1 ..."
 	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Payagan ang pagpapakita ng inline na larawan"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Ang Alt+Backspace ay Meta+Backspace"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Ituring bilang Meta key ang Alt key"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Pangangasiwa ng modifier ng Alt key"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Tunog ng bell ng alerto (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Kulay ng background"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Imahe sa background"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Posisyon ng imahe sa background"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Laki ng imahe sa background"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Gawi ng key na Backspace"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Mga pag-override ng mapa ng character"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Awtomatikong i-clear ang piniling text"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Isara ang window kapag lumabas"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Unang palette ng kulay"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Awtomatikong kopyahin ang mga napiling content"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Gawi ng pagkopya gamit ang Ctrl+C"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Gawi ng pag-zoom gamit ang Ctrl++/-/0"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Gawi ng pag-paste gamit ang Ctrl+V"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Pag-blink ng cursor"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Rate ng pag-blink ng cursor"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Kulay ng text cursor"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Hugis ng text cursor"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Gumawa ng mga notification sa desktop para sa mga bell ng alerto"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Gumagamit ang East Asian Ambiguous ng dalawang column"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Sumusuporta sa mga hindi UTF-8 C1 na control character"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "I-enable ang nagbi-blink na text"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Gawi ng bold na text"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Gumamit ng matitingkad na kulay sa naka-bold na text"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Magpakita ng notification kapag kumokopya ng content"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Payagan ang mga remote na pag-write sa clipboard"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Payagan ang pag-clear ng buffer ng scrollback (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Payagan ang pagpapalit ng pag-blink ng text cursor"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Ipakita ang mga dimensyon ng terminal kapag na-resize"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Mga variable ng environment"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Pamilya ng font ng text"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Laki ng font ng text"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Font smoothing ng text"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Kulay ng text"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Itago ang cursor ng mouse habang nagta-type"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Gawi ng pag-scroll ng key na Home/End"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Mga binding/shortcut sa keyboard"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Gamitin ang mga default na binding/shortcut sa OS Keyboard"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Mga Fkey ang mga media key"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Pangangasiwa sa modifier ng Meta key"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Pag-paste gamit ang button ng mouse"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Nagpe-paste ng content ang mga pag-right click ng mouse"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Gawi ng pag-scroll ng key na Page Up/Down"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Gawi para sa pag-switch ng tab gamit ang Alt+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Gawi ng bagong window gamit ang Ctrl+N"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Gawi para sa pag-switch ng tab gamit ang Ctrl+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Gawi ng bagong tab gamit ang Ctrl+T"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Gawi para sa pag-switch ng tab gamit ang Ctrl+Tab"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Gawi ng pagsara ng tab gamit ang Ctrl+W"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Gawi para sa pag-switch ng tab gamit ang Meta+1..9"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Gawi ng pag-paste gamit ang Meta+V"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Payagan ang pag-paste sa pamamagitan ng pag-drag at pag-drop"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Tumanggap ng pag-encode"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Mag-scroll sa ibaba pagkatapos ng keystroke"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Mag-scroll pababa pagkatapos ng bagong output"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Gayahin ang mga arrow key sa scroll wheel"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Multiplier ng scroll wheel ng mouse"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Pagiging visible ng scrollbar"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Pag-paste gamit ang Shift+Insert"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Pag-encode ng terminal"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Bigyang-daan ang browser na pangasiwaan ang pagkopya sa text"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "Custom na CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "Custom na CSS (inline na text)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Awtomatikong paghinto sa pagpili (pakaliwa)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Mga character sa pag-word break"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Awtomatikong paghinto sa pagpili (pakanan)"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Mga Inline na Larawan"
 	},
@@ -153,7 +354,7 @@
 		"message": "Kung papayagan ang remote na host na magpakita ng mga larawan sa terminal.\n\nBilang default, magpa-prompt kami hanggang may mapili."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Kung itatakda, maa-undo ang Chrome OS Alt+Backspace->DEL remap, para maging Alt+Backspace talaga ang Alt+Backspace."
+		"message": "Kung itatakda, maa-undo ang Chrome OS Alt+Backspace->Delete remap, para maging Alt+Backspace talaga ang Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Pumipili ng AltGr detection heuristic.\n\n'null': Awtomatikong magde-detect batay sa navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Idi-disable ang anumang munging na nauugnay sa AltGr.\n'ctrl-alt': Ipagpapalagay na ang Ctrl+Alt ay AltGr.\n'left-alt': Ipagpapalagay na ang left Alt ay AltGr.\n'right-alt': Ipagpapalagay na ang right Alt ay AltGr."
@@ -165,34 +366,34 @@
 		"message": "Kinokontrol kung paano ginagamit ang Alt key.\n\n  escape: Magpapadala ng ESC prefix.\n  8-bit: Magdaragdag ng 128 sa na-type na character gaya ng nasa xterm.\n browser-key: Maghihintay sa keypress event at mag-aabang sa sasabihin ng browser\n . (Hindi ito gagana nang maayos sa mga platform kung saan nagsasagawa ang browser\n ng default na pagkilos para sa ilang Alt sequence.)"
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "URL ng tunog ng terminal bell. Walang lamang string para sa walang naririnig na bell."
+		"message": "URL ng tunog ng terminal bell. Iwanang blangko kung walang maririnig na bell."
 	},
 	"hterm_pref_background_color": {
 		"message": "Ang kulay ng background para sa text na walang ibang attribute ng kulay."
 	},
 	"hterm_pref_background_image": {
-		"message": "CSS value ng imahe sa background. Walang lamang string para sa walang larawan.\n\nHalimbawa:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "CSS value ng larawan sa background. Hayaang blangko kung walang larawan.\n\nHalimbawa:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
-		"message": "CSS value ng posisyon ng larawan sa background.\n\nHalimbawa:\n  10% 10%\n  gitna"
+		"message": "CSS value ng posisyon ng imahe sa background.\n\nHalimbawa:\n  10% 10%\n  gitna"
 	},
 	"hterm_pref_background_size": {
 		"message": "CSS value ng laki ng imahe sa background."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Kung true, dapat magpadala ang backspace ng BS ('\\x08', aka ^H). Kung hindi, dapat magpadala ang backspace key ng '\\x7f'."
+		"message": "Kung true, magpapadala ang key na backspace ng BS ('\\x08', aka ^H). Kung hindi, magpapadala ang key na backspace ng BS '\\x7f'."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "Tinutukoy ito bilang object. Isa itong sparse array, kung saan ang bawat property ay ang character set code at ang value ay isang object na isang sparse array mismo. Sa sparse array na iyon, ang bawat property ay ang natanggap na character at ang value ay ang ipinapakitang character.\n\nHalimbawa:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "Tinutukoy ito bilang object. Isa itong sparse array, kung saan ang bawat property ay ang character set code at ang value ay isang object na isang sparse array mismo. Sa sparse array na iyon, ang bawat property ay ang natanggap na character at ang value ay ang ipinapakitang character.\n\nHalimbawa:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "Kung iki-clear o hindi ang napili pagkatapos itong kopyahin."
 	},
 	"hterm_pref_close_on_exit": {
-		"message": "Kung isasara ang window kapag naisakatuparan na ang command."
+		"message": "Kung isasara ang window kapag na-execute na ang command."
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "Nag-o-override sa mga kulay sa default na palette.\n\nMaaari itong tukuyin bilang isang array o object. Kung tutukuyin bilang object, ipagpapalagay na isa itong sparse array, kung saan ang bawat property ay numeric index sa palette ng kulay.\n\nMaaaring tukuyin ang mga value bilang halos kahit anong CSS value ng kulay. Kabilang dito ang #RGB, #RRGGBB, rgb(...), rgba(...), at anumang pangalan ng kulay na bahagi rin ng standard X11 rgb.txt file.\n\nMaaari mong gamitin ang 'null' para tukuying hindi dapat baguhin ang default na value. Kapaki-pakinabang ito para sa paglaktaw ng maliit na bilang ng mga index kapag natukoy ang value bilang array.\n\nHalimbawa, parehong itinatakda ng dalawang ito ang index 1 ng kulay sa asul:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "Mag-override ng mga kulay sa default na palette.\n\nPuwede itong tukuyin bilang isang array o object. Kung tutukuyin bilang object, ipagpapalagay na isa itong sparse array, kung saan ang bawat property ay numeric index sa palette ng kulay.\n\nPuwedeng tukuyin ang mga value bilang halos kahit anong CSS value ng kulay. Kabilang dito ang #RGB, #RRGGBB, rgb(...), rgba(...), at anumang pangalan ng kulay na bahagi rin ng standard X11 rgb.txt file.\n\nPuwede mong gamitin ang 'null' para tukuying hindi dapat baguhin ang default na value. Kapaki-pakinabang ito para sa paglaktaw ng maliit na bilang ng mga index kapag natukoy ang value bilang array.\n\nHalimbawa, parehong itinatakda ng dalawang ito ang index 1 ng kulay sa asul:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
 		"message": "Awtomatikong kopyahin ang napili ng mouse sa clipboard."
@@ -207,13 +408,16 @@
 		"message": "Nagpe-paste ang Ctrl+V kung true, nagpapadala ito ng ^V sa host kung false.\nNagpapadala ang Ctrl+Shift+V ng ^V sa host kung true, nagpe-paste ito kung false."
 	},
 	"hterm_pref_cursor_blink": {
-		"message": "Kung magbi-blink ang text cursor bilang default. Maaari itong i-toggle sa runtime sa pamamagitan ng mga terminal escape sequence."
+		"message": "Kung magbi-blink ang text cursor bilang default. Puwede itong i-toggle sa runtime sa pamamagitan ng mga terminal escape sequence."
 	},
 	"hterm_pref_cursor_blink_cycle": {
 		"message": "Ang rate ng pag-blink ng text cursor sa mga millisecond.\n\nIsang array na may dalawang element, ang una rito ay kung gaano katagal dapat naka-on ang text cursor, ang pangalawa ay kung gaano katagal ito dapat naka-off."
 	},
 	"hterm_pref_cursor_color": {
 		"message": "Ang kulay ng nakikitang text cursor."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "Ang hugis ng nakikitang text cursor. Puwede itong baguhin sa runtime sa pamamagitan ng mga terminal escape sequence."
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Kung true, gagawa ang mga terminal bell sa background ng Web Notification. https://www.w3.org/TR/notifications/\n\nPara makapagpakita ng mga notification, kailangan ng pahintulot mula sa user. Kapag itinakda ang opsyong ito sa true, susubukan ng hterm na humingi ng pahintulot sa user kung kinakailangan. Maaaring hindi ipakita ng mga browser ang kahilingan sa pahintulot na ito kung hindi ito magmumula sa isang pagkilos ng user.\n\nMay pahintulot ang mga extension ng Chrome na may pahintulot na \"mga notification\" na magpakita ng mga notification."
@@ -222,13 +426,13 @@
 		"message": "Kung mayroon o walang lapad na dalawang column ang mga East Asian Ambiguous character."
 	},
 	"hterm_pref_enable_8_bit_control": {
-		"message": "True para ma-enable ang mga 8-bit control character, false para balewalain ang mga ito.\n\nRerespetuhin namin ang mga two-byte na bersyon ng mga control character na ito alinman ang itatakda."
+		"message": "True para ma-enable ang mga 8-bit control character, false para balewalain ang mga ito.\n\nRerespetuhin namin ang mga two-byte na bersyon ng mga control character na ito anuman ang setting na ito."
 	},
 	"hterm_pref_enable_blink": {
 		"message": "Kung true, kilalanin ang attribute ng pag-blink. False para balewalain ito."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Kung true, gumamit ng naka-bold na font para sa text na may attribute na bold/bright. False para gamitin ang normal na font. Null para awtomatikong tumukoy."
+		"message": "Kung true, gumamit ng naka-bold na font para sa text na may attribute na bold/bright. False para gamitin ang normal na font. Null para awtomatikong mag-detect."
 	},
 	"hterm_pref_enable_bold_as_bright": {
 		"message": "Kung true, gumamit ng matitingkad na kulay (8-15 sa palette na may 16 na kulay) para sa anumang text na may attribute na bold. False kung hindi."
@@ -237,22 +441,28 @@
 		"message": "Kung magpapakita ng mensahe sa terminal kapag nag-write ang host sa clipboard."
 	},
 	"hterm_pref_enable_clipboard_write": {
-		"message": "Papayagan ang remote na host na direktang magsulat sa clipboard ng lokal na system.\nHindi kailanman ibibigay ang read access anuman ang itatakda rito.\n\nGinagamit ito para kontrolin ang access sa mga feature tulad ng OSC-52."
+		"message": "Papayagan ang remote na host na direktang mag-write sa clipboard ng lokal na system.\nHindi kailanman ibibigay ang access sa pag-read anuman ang setting na ito.\n\nGinagamit ito para kontrolin ang access sa mga feature tulad ng OSC-52."
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Kung maki-clear ang terminal scrollback buffer ng function na Burahin ang Mga Naka-save na Linya (mode 3) ng command na Burahin ang Display (CSI-J).\n\nLigtas itong i-enable bilang default."
 	},
 	"hterm_pref_enable_dec12": {
-		"message": "Kumikilala sa pagsubok ng host na palitan ang status ng pag-blink ng text cursor gamit ang DEC Private Mode 12."
+		"message": "Kinikilala ang pagsubok ng host na baguhin ang status ng pag-blink ng text cursor gamit ang DEC Private Mode 12."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Kung magpapakita ng mga dimensyon ng terminal kapag nagbabago ang laki ng terminal."
 	},
 	"hterm_pref_environment": {
-		"message": "Ang inisyal na pagtatakda ng mga environment variable, bilang object."
+		"message": "Ang inisyal na set ng mga variable ng environment, bilang object."
 	},
 	"hterm_pref_font_family": {
-		"message": "Default na font family para sa terminal text."
+		"message": "Default na pamilya ng font para sa terminal text."
 	},
 	"hterm_pref_font_size": {
 		"message": "Ang default na laki ng font sa mga pixel."
 	},
 	"hterm_pref_font_smoothing": {
-		"message": "Property ng pagpapakinis ng font ng CSS."
+		"message": "Property ng font-smoothing ng CSS."
 	},
 	"hterm_pref_foreground_color": {
 		"message": "Ang kulay ng foreground para sa text na walang ibang attribute ng kulay."
@@ -261,16 +471,19 @@
 		"message": "Kung awtomatikong itatago ang cursor ng mouse habang nagta-type. Bilang default, awtomatikong tukuyin kung papangasiwaan ito ng platform/OS.\n\nTandaan: Maaaring i-override ng ilang operating system ang setting na ito kung kaya maaaring hindi mo ito madi-disable sa lahat ng oras."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Kung true, ang Home/End ang kokontrol sa terminal scrollbar at ang Shift+Home/Shift+End ang ipapadala sa remote host. Kung false, ang Home/End ang ipapadala sa remote host at ang Shift+Home/Shift+End ang magso-scroll."
+		"message": "Kung true, ang Home/End ang kokontrol sa terminal scrollbar at ang Shift+Home/Shift+End ang ipapadala sa remote na host. Kung false, ang Home/End ang ipapadala sa remote na host at ang Shift+Home/Shift+End ang magso-scroll."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Isang mapa ng key sequence sa mga pagkilos ng key. Kabilang sa mga key sequence ang zero o higit pang modifier key na sinusundan ng key code. Ang mga key code ay maaaring maging mga decimal o hexadecimal number, o key identifier. Matutukoy ang mga pagkilos ng key bilang string na ipapadala sa host, o action identifier. Para sa kumpletong paliwanag ng format, tingnan ang https://goo.gl/LWRndr.\n\nMga sample na keybinding:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal,\"\n  \"Ctrl+Shift+L\": \"PASS,\"\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Isang mapa ng key sequence sa mga pagkilos ng key. Kabilang sa mga key sequence ang zero o higit pang modifier key na sinusundan ng key code. Ang mga key code ay puwedeng maging mga decimal o hexadecimal number, o key identifier. Matutukoy ang mga pagkilos ng key bilang string na ipapadala sa host, o action identifier. Para sa kumpletong paliwanag ng format, tingnan ang https://goo.gl/LWRndr.\n\nMga sample na keybinding:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal,\"\n  \"Ctrl+Shift+L\": \"PASS,\"\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Kung dapat kilalanin ang mga karaniwang binding ng OS keyboard sa halip na palaging kunin para sa sariling paggamit ng hterm."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
-		"message": "Kung true, i-convert ang mga media key sa kanilang katumbas na Fkey. Kung false, hayaan ang browser na mangasiwa sa mga key."
+		"message": "Kung true, i-convert ang mga media key sa mga katumbas na Fkey ng mga ito. Kung false, hayaang pangasiwaan ng browser ang mga key."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Magpadala ng ESC na prefix kapag pumipindot ng key habang pinipindot nang matagal ang Meta key.\n\nHalimbawa, kapag naka-enable, kapag pinindot ang Meta+K, magpapadala ng ^[k gaya kung nag-type ka ng Escape pagkatapos ay k. Kapag naka-disable, k lang ang ipapadala."
+		"message": "Magpadala ng ESC na prefix kapag pumipindot ng key habang pinipindot nang matagal ang Meta key.\n\nHalimbawa, kapag naka-enable, kapag pinindot ang Meta+K, magpapadala ng ^[k gaya kung nag-type ka ng Escape at pagkatapos ay k. Kapag naka-disable, k lang ang ipapadala."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Button ng pag-paste gamit ang mouse, o null para awtomatikong mag-detect.\n\nPara awtomatikong mag-detect, gagamitin namin ang gitnang button ng mouse para sa mga platform na hindi X11 (kabilang ang Chrome OS). Sa X11, gagamitin namin ang kanang button ng mouse (dahil dapat mag-paste ang native na window manager sa pamamagitan ng gitnang button ng mouse).\n\n0 == kaliwang (pangunahing) button.\n1 == gitnang (karagdagang) button.\n2 == kanang (pangalawang) button.\n\nAng opsyong ito ay hiwalay sa setting para sa pag-paste gamit ang right-click.\n\nTandaan: Pangangasiwaan nito ang mga mouse para sa kaliwa at kanang kamay nang tama."
@@ -279,22 +492,37 @@
 		"message": "Mag-paste sa pamamagitan ng mga pag-click sa kanang button ng mouse.\n\nAng opsyong ito ay hiwalay sa setting na \"mouse-paste-button.\"\n\nTandaan: Pangangasiwaan nito ang mga mouse sa kaliwa at kanang kamay nang tama."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Kung true, ang Page Up/Page Down ang kokontrol sa terminal scrollbar at ang Shift+Page Up/Shift+Page Down ang ipapadala sa remote host. Kung false, ang Page Up/Page Down ang ipapadala sa remote host at ang Shift+Page Up/Shift+Page Down ang magso-scroll."
+		"message": "Kung true, ang Page Up/Page Down ang kokontrol sa terminal scrollbar at ang Shift+Page Up/Shift+Page Down ang ipapadala sa remote na host. Kung false, ang Page Up/Page Down ang ipapadala sa remote na host at ang Shift+Page Up/Shift+Page Down ang magso-scroll."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Kung ipapasa ang Alt+1..9 sa browser.\n\nKapaki-pakinabang ito kapag nagpapatakbo ng hterm sa tab ng browser, para hindi mawala ang mga accelerator ng keyboard na \"switch to tab\" ng Chrome. Kapag hindi pinapatakbo sa isang tab, mas mainam kung ipapadala ang mga key na ito sa host para magamit ang mga ito sa vim o mga emac.\n\nKung true, pangangasiwaan ng browser ang Alt+1..9. Kung false, ipapadala ang Alt+1..9 sa host. Kung null, awtomatikong magde-detect batay sa platform ng browser at uri ng window."
+		"message": "Kung ipapasa ang Alt+1..9 sa browser.\n\nMainam ito kapag nagpapatakbo ng hterm sa tab ng browser, para hindi mo mawala ang mga keyboard shortcut na \"lumipat ng tab\" ng Chrome. Kapag hindi pinapatakbo sa isang tab, mas mainam na ipadala ang mga key na ito sa host para magamit ang mga ito sa vim o emacs.\n\nKung true, papangasiwaan ng browser ang Alt+1..9. Kung false, ipapadala ang Alt+1..9 sa host. Kung null, awtomatikong magde-detect batay sa platform ng browser at uri ng window."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Kapag ipapasa ang Ctrl+N sa browser.\n\nKung true, papangasiwaan ng browser ang Ctrl+N bilang keyboard shortcut na \"bagong window.\" Kung false, ipapadala ang Ctrl+N sa host."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Kung ipapasa ang Ctrl+1..9 sa browser.\n\nKapaki-pakinabang ito kapag nagpapatakbo ng hterm sa tab ng browser, para hindi mawala ang mga accelerator ng keyboard na \"switch to tab\" ng Chrome. Kapag hindi pinapatakbo sa isang tab, mas mainam kung ipapadala ang mga key na ito sa host para magamit ang mga ito sa vim o mga emac.\n\nKung true, pangangasiwaan ng browser ang Ctrl+1..9. Kung false, ipapadala ang Ctrl+1..9 sa host. Kung null, awtomatikong magde-detect batay sa platform ng browser at uri ng window."
+		"message": "Kung ipapasa ang Ctrl+1..9 sa browser.\n\nMainam ito kapag nagpapatakbo ng hterm sa tab ng browser, para hindi mo mawala ang mga keyboard shortcut na \"lumipat ng tab\" ng Chrome. Kapag hindi pinapatakbo sa isang tab, mas mainam kung ipapadala ang mga key na ito sa host para magamit ang mga ito sa vim o emacs.\n\nKung true, papangasiwaan ng browser ang Ctrl+1..9. Kung false, ipapadala ang Ctrl+1..9 sa host. Kung null, awtomatikong magde-detect batay sa platform ng browser at uri ng window."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Kung ipapasa ang Ctrl+T sa browser.\n\nKung true, papangasiwaan ng browser ang Ctrl+T bilang keyboard shortcut na \"bagong tab.\" Kung false, ipapadala ang Ctrl+T sa host."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Kung ipapasa ang Ctrl+Tab at Ctrl+Shift+Tab sa browser.\n\nKung true, papangasiwaan ng browser ang Ctrl+Tab at Ctrl+Shift+Tab bilang keyboard shortcut na \"susunod/nakaraang tab.\" Kung false, ipapadala ang key na Tab sa host nang hindi ginagamit ang Ctrl o Shift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Kung ipapasa ang Ctrl+W sa browser.\n\nKung true, papangasiwaan ng browser ang Ctrl+W bilang keyboard shortcut na \"isara ang tab.\" Kung false, ipapadala ang Ctrl+W sa host."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Kung ipapasa ang Meta+1..9 sa browser.\n\nKapaki-pakinabang ito kapag nagpapatakbo ng hterm sa tab ng browser, para hindi mawala ang mga accelerator ng keyboard na \"switch to tab\" ng Chrome. Kapag hindi pinapatakbo sa isang tab, mas mainam kung ipapadala ang mga key na ito sa host para magamit ang mga ito sa vim o mga emac.\n\nKung true, pangangasiwaan ng browser ang Meta+1..9. Kung false, ipapadala ang Meta+1..9 sa host. Kung null, awtomatikong magde-detect batay sa platform ng browser at uri ng window."
+		"message": "Kung ipapasa ang Meta+1..9 sa browser.\n\nMainam ito kapag nagpapatakbo ng hterm sa tab ng browser, para hindi mo mawala ang mga keyboard shortcut na \"lumipat ng tab\" ng Chrome. Kapag hindi pinapatakbo sa isang tab, mas mainam kung ipapadala ang mga key na ito sa host para magamit ang mga ito sa vim o emacs.\n\nKung true, papangasiwaan ng browser ang Meta+1..9. Kung false, ipapadala ang Meta+1..9 sa host. Kung null, awtomatikong magde-detect batay sa platform ng browser at uri ng window."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Kung mapapasa ang Meta+V sa host."
 	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Kung true, ipe-paste ang na-drag at na-drop na text sa terminal.\nKung false, babalewalain ang na-drop na text."
+	},
 	"hterm_pref_receive_encoding": {
-		"message": "Itakda ang inaasahang pag-encode para sa data na natanggap mula sa host.\nKung hindi tumutugma ang mga pag-encode, maaaring makaranas ng mga visual bug.\n\nAng mga valid na value ay 'utf-8' at 'raw.'"
+		"message": "Itakda ang inaasahang pag-encode para sa data na natanggap mula sa host.\nKung hindi tumutugma ang mga pag-encode, posibleng makaranas ng mga visual bug.\n\nAng mga valid na value ay 'utf-8' at 'raw.'"
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Kung magso-scroll hanggang sa ibaba sa anumang keystroke."
@@ -309,16 +537,16 @@
 		"message": "Ang multiplier para sa pag-scroll ng mga event sa wheel kapag sinusukat sa mga pixel.\n\nBinabago kung gaano kabilis mag-scroll ang page."
 	},
 	"hterm_pref_scrollbar_visible": {
-		"message": "Ang patayong scrollbar na mode."
+		"message": "Ang vertical scrollbar mode."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Kung ginagamit ang Shift+Insert para sa pag-paste o kung ipinapadala ito sa remote host."
+		"message": "Kung gagamitin ang Shift+Insert para sa pag-paste o kung ipapadala ito sa remote na host."
 	},
 	"hterm_pref_terminal_encoding": {
-		"message": "Ang default na terminal na pag-e-encode (DOCS).\n\nNag-e-enable ang ISO-2022 ng mga pag-translate ng mapa ng character (tulad ng mga mapa ng graphics).\nNagdi-disable ang UTF-8 ng suporta para sa mga iyon.\n\nAng naka-lock na variant ay nangangahulugang hindi mababago ang pag-e-encode sa runtime sa pamamagitan ng mga terminal na escape sequence.\n\nDapat kang manatili sa UTF-8 maliban na lang kung may mapansin kang sirang pag-render sa mga legacy application."
+		"message": "Ang default na terminal na pag-e-encode (DOCS).\n\nIne-enable ng ISO-2022 ang mga pag-translate ng mapa ng character (tulad ng mga mapa ng graphics).\nDini-disable ng UTF-8 ang suporta para sa mga iyon.\n\nNangangahulugan ang naka-lock na variant na hindi mababago ang pag-e-encode sa runtime sa pamamagitan ng mga terminal escape sequence.\n\nDapat kang manatili sa UTF-8 maliban na lang kung may mapansin kang sirang pag-render sa mga legacy application."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Kung gagamitin ang default na gawi ng pagkopya ng browser/OS.\n\nDirektang payagan ang browser/OS na pangasiwaan ang event ng pagkopya na maaaring magpahusay ng compatibility sa ilang system (kung saan hindi talaga gumagana ang pagkopya), ngunit hindi pinapahirap ang pagpili ng text.\n\nHalimbawa, kokopyahin ang mahahabang linya na awtomatikong na-wrap ng linya nang kasama ang mga newline."
+		"message": "Kung gagamitin ang default na gawi ng pagkopya ng browser/OS.\n\nPayagan ang browser/OS na direktang pangasiwaan ang event ng pagkopya na posibleng magpahusay ng compatibility sa ilang system (kung saan hindi talaga gumagana ang pagkopya), pero hindi pinapahirap ang pagpili ng text.\n\nHalimbawa, kokopyahin ang mahahabang linya na awtomatikong na-wrap ng linya nang kasama ang mga newline."
 	},
 	"hterm_pref_user_css": {
 		"message": "URL ng stylesheet ng user na isasama sa terminal na dokumento."
@@ -327,13 +555,13 @@
 		"message": "Custom na CSS text para sa pag-style ng terminal."
 	},
 	"hterm_pref_word_break_match_left": {
-		"message": "Karaniwang expression para ihinto ang pagtugma hanggang sa kaliwa (simula) ng isang napili.\n\nKaraniwan ay isa itong character class para hindi tanggapin ang mga partikular na character.\nPinapayagan namin ang \"~\" at \".\" bilang default dahil madalas nagsisimula ang mga path sa mga ganito."
+		"message": "Karaniwang expression para ihinto ang pagtugma hanggang sa kaliwa (simula) ng isang seleksyon.\n\nKaraniwan ay isa itong character class para hindi tanggapin ang mga partikular na character.\nPinapayagan namin ang \"~\" at \".\" bilang default dahil madalas nagsisimula ang mga path sa mga ganito."
 	},
 	"hterm_pref_word_break_match_middle": {
-		"message": "Karaniwang expression para tumugma sa lahat ng character sa gitna.\n\nKaraniwan ay isa itong character class para hindi tanggapin ang mga partikular na character.\n\nGinagamit para palawakin ang napili na nakapaligid sa pagmumulan."
+		"message": "Karaniwang expression para tumugma sa lahat ng character sa gitna.\n\nKaraniwan ay isa itong character class para hindi tanggapin ang mga partikular na character.\n\nGinagamit para palawakin ang seleksyong nakapaligid sa pagmumulan."
 	},
 	"hterm_pref_word_break_match_right": {
-		"message": "Karaniwang expression para ihinto ang pagtugma hanggang sa kanan (dulo) ng isang napili.\n\nKaraniwan ay isa itong character class para hindi tanggapin ang mga partikular na character."
+		"message": "Karaniwang expression para ihinto ang pagtugma hanggang sa kanan (dulo) ng isang seleksyon.\n\nKaraniwan ay isa itong character class para hindi tanggapin ang mga partikular na character."
 	},
 	"hterm_space_character": {
 		"message": "Space"
@@ -354,7 +582,7 @@
 		"message": "Keyboard"
 	},
 	"hterm_title_pref_miscellaneous": {
-		"message": "Iba pa"
+		"message": "Iba Pa"
 	},
 	"hterm_title_pref_scrolling": {
 		"message": "Pag-scroll"
@@ -378,16 +606,28 @@
 		"message": "Hindi ma-parse ang JSON sa '$1': $2"
 	},
 	"known_hosts_empty": {
-		"message": "Walang mga kilalang host, walang kakalimutan."
+		"message": "Walang kilalang host, walang kakalimutan."
 	},
 	"known_hosts_prompt": {
-		"message": "Mangyaring pumili ng host na kakalimutan [1-$1]:"
+		"message": "Pakipili ng host na kakalimutan [1-$1]:"
 	},
 	"known_hosts_title": {
 		"message": "Mga kilalang host:"
 	},
+	"licenses": {
+		"message": "Mga Lisensya"
+	},
+	"licenses_expand_link": {
+		"message": "ipakita ang lisensya"
+	},
+	"licenses_title": {
+		"message": "Mga Lisensya ng Open Source"
+	},
 	"loading_label": {
 		"message": "Naglo-load..."
+	},
+	"migrate_to_ext": {
+		"message": "Abiso: Lumipat sa bagong extension ng Secure Shell ($1).\nHindi na ginagamit ang Chrome Apps, kaya hindi na makakatanggap ng mga update ang bersyong ito.\nPakitingnan ang gabay sa paglilipat ($2) para sa higit pang detalye."
 	},
 	"missing_param": {
 		"message": "Nawawalang parameter: $1"
@@ -401,8 +641,218 @@
 	"mounted_message": {
 		"message": "Na-mount na!"
 	},
+	"nasftp_cmd_cat_help": {
+		"message": "Mag-dump ng file sa terminal"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Palitan ang gumaganang directory"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Baguhin ang grupo ng mga path"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Baguhin ang mga pahintulot sa mga path"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Palitan ang may-ari ng mga path"
+	},
+	"nasftp_cmd_clear": {
+		"message": "i-clear"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "I-clear ang kasalukuyang screen ng terminal."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Magkopya ng file sa (default: 10MiB mula sa simula)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "Kinopya ang $1 (na) byte sa clipboard"
+	},
+	"nasftp_cmd_color": {
+		"message": "kulay"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "I-toggle ang paggamit ng kulay"
+	},
+	"nasftp_cmd_copy": {
+		"message": "kopyahin"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Kopyahin ang source sa destinasyon"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Mag-delete ng mga file"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Ipakita ang mga istatistika ng disk"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Path: $1\n  fsid: $2\n Kabuuan: $3\n  Nagamit: $4 ($5%)\n Avail: $6 (sa mga walang pribilehiyong user)\n $7 (sa root)"
+	},
+	"nasftp_cmd_exit": {
+		"message": "lumabas"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Idiskonekta"
+	},
+	"nasftp_cmd_get": {
+		"message": "kunin"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Dina-download ang file: $1 bilang $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Mag-download ng mga file"
+	},
+	"nasftp_cmd_help": {
+		"message": "tulong"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Ang screen ng tulong na ito"
+	},
+	"nasftp_cmd_list": {
+		"message": "listahan"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Ilista ang mga detalye ng directory"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Gumawa ng link sa path na papunta sa target"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Gumawa ng mga directory"
+	},
+	"nasftp_cmd_move": {
+		"message": "ilipat"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Mag-rename ng file"
+	},
+	"nasftp_cmd_prompt": {
+		"message": "i-prompt"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Itakda ang string ng prompt"
+	},
+	"nasftp_cmd_put": {
+		"message": "ilagay"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Mag-upload ng mga file"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Nag-a-upload ng file: $1 bilang $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Ipakita ang kasalukuyang gumaganang directory"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Remote na gumaganang directory: $1"
+	},
+	"nasftp_cmd_quit": {
+		"message": "umalis"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Basahin ang mga symlink"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Mag-canonicalize ng mga path"
+	},
+	"nasftp_cmd_rename": {
+		"message": "i-rename"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Ituloy ang pag-upload ng mga file"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Mag-alis ng mga file"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "I-delete ang mga walang lamang directory"
+	},
+	"nasftp_cmd_show": {
+		"message": "ipakita"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Ipakita ang mga file inline"
+	},
+	"nasftp_cmd_stat": {
+		"message": "istatistika"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Mga Extension:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Ipakita ang status ng file"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  File: $1\n  Laki: $2 (na) byte\n   UID: $3\n   GID: $4\nAccess: $5\n atime: $6\n mtime: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Gumawa ng symlink sa path na papunta sa target"
+	},
+	"nasftp_cmd_truncate": {
+		"message": "putulin"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Gawing 0 byte ang mga path"
+	},
+	"nasftp_cmd_version": {
+		"message": "bersyon"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  mga extension ng server:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Ipakita ang kasalukuyang bersyon ng protocol"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Impormasyon ng bersyon ng protocol ng SFTP:\n  lokal: $1\n  server: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: dulo ng file"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: hindi nahanap ang file"
+	},
+	"nasftp_error_file_reading": {
+		"message": "Hindi nabasa ang $1: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Hindi pinangangasiwaang internal na error; mag-file ng bug: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: invalid na numero: $3"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: hindi available ang extension na '$2'"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: hindi regular na file"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: hindi sapat ang mga argument"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: tinanggihan ang pahintulot"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: masyadong maraming argument"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: hindi alam na command"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: hindi kilalang flag na $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Sapilitang pag-alis"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 (na) byte ang nailipat sa loob ng $2 (na) segundo ($3/s)"
+	},
 	"nassh_options_error": {
-		"message": "Hindi kilalang opsyon ng pag-relay: $1"
+		"message": "Hindi alam na opsyon: $1"
 	},
 	"nassh_product_name": {
 		"message": "Secure Shell"
@@ -420,7 +870,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Kumonekta sa isang naka-save na profile o sa isang bagong ssh system"
 	},
 	"open_as_window_tip": {
-		"message": "[Pro Tip] Gamitin ang 'Buksan bilang Window' o 'Fullscreen' para mapigilan ang Ctrl+W sa pagsara ng iyong terminal!\n[Pro Tip] Tingnan sa $1 para sa higit pang impormasyon."
+		"message": "[Pro Tip] Gamitin ang 'Buksan bilang Window' o 'Fullscreen' para mapigilan ang Ctrl+W na isara ang iyong terminal!\n[Pro Tip] Tingnan ang $1 para sa higit pang impormasyon."
 	},
 	"options_button_label": {
 		"message": "Mga Opsyon"
@@ -434,26 +884,59 @@
 	"plugin_loading_failed": {
 		"message": " hindi nagtagumpay! :("
 	},
+	"popup_connect_tooltip": {
+		"message": "I-hold ang Ctrl para buksan sa bagong tab."
+	},
 	"pref_backup_filename": {
-		"message": "Backup.json ng Mga Kagustuhan ng Secure Shell"
+		"message": "Backup ng Mga Kagustuhan sa Secure Shell.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "Mga File ng SSH"
 	},
 	"preferences_header_terminal": {
-		"message": "Mga Setting ng Profile"
+		"message": "Mga Setting ng Terminal"
+	},
+	"preferences_header_uri": {
+		"message": "Mga Tagapangasiwa ng URI"
 	},
 	"preferences_reset": {
 		"message": "Na-reset na ang lahat ng kagustuhan!"
+	},
+	"protocol_register_button": {
+		"message": "Irehistro ang mga tagapangasiwa ng protocol"
+	},
+	"protocol_register_explain": {
+		"message": "Tatangkain ng button sa ibaba na irehistro ang mga tagapangasiwa para sa lahat ng protocol na sinusuportahan namin. Halimbawa, bibigyang-daan kami nitong direktang pangasiwaan ang mga link na ssh://. Magpapakita ng prompt ang browser para sa bawat protocol, kaya pakikumpirma/pakitanggap ang bawat isa kapag ipinapakita ito. Kung walang ipapakitang prompt, pakitingnan ang susunod na seksyon para sa mga tip sa pag-troubleshoot."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Kung nakapagparehistro na kami ng mga tagapangasiwa, o kung tinanggihan ang mga nakaraang pagsubok na magparehistro, walang ipapakitang karagdagang prompt. Pakibuksan ang dialog sa ibaba, pagkatapos ay tingnan ang mga setting ng nakarehistrong tagapangasiwa sa mga seksyong ssh/sftp/atbp... Kung naka-block ang programang ito, puwede mong i-delete ang mga setting na iyon, na magbibigay-daan sa iyong subukan ulit ang pagpaparehistro. Kung nakarehistro na ang program na ito, pero hindi ito nakatakda bilang default na tagapangasiwa, puwede mo ring baguhin ang default na tagapangasiwa."
+	},
+	"protocol_register_options_link": {
+		"message": "Pagpaparehistro ng Protocol"
+	},
+	"protocol_register_settings_button": {
+		"message": "Buksan ang mga setting ng mga nakarehistrong tagapangasiwa"
+	},
+	"protocol_register_title": {
+		"message": "Helper sa pagpaparehistro ng tagapangasiwa ng protocol ng Secure Shell"
+	},
+	"read_size_label": {
+		"message": "Laki ng Pag-read (KiB)"
 	},
 	"reconnect_message": {
 		"message": "Muling Kumonekta (R), Pumili ng ibang konesyon (C), o Lumabas (X)?"
 	},
 	"relay_retry": {
-		"message": "Muling sinusubukan..."
+		"message": "Sinusubukan ulit..."
 	},
 	"request_pin_prompt": {
-		"message": "Ilagay ang PIN para ma-unlock ang key $1 sa '$2' ($3 (na) pagsubok ang natitira):"
+		"message": "Ilagay ang PIN para ma-unlock ang key na $1 sa '$2 ($3)' ($4 (na) pagsubok ang natitira):"
 	},
 	"restore_prefs": {
 		"message": "I-restore ang Backup"
+	},
+	"save_label": {
+		"message": "I-save"
 	},
 	"shortcut_list_aria_label": {
 		"message": "mga naka-save na koneksyon"
@@ -464,8 +947,35 @@
 	"ssh_argstr_label": {
 		"message": "Mga Argument ng SSH"
 	},
+	"stream_open_error": {
+		"message": "Hindi nabuksan ang stream na $1: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "I-clear ang Terminal"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "Mga kulay ng ANSI"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Nagbi-blink"
+	},
+	"terminal_name_pref_color": {
+		"message": "Kulay"
+	},
+	"terminal_name_pref_image": {
+		"message": "Larawan"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Hugis"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Nakikita"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Itakda ang mga kulay para sa default na palette."
+	},
+	"terminal_pref_bell": {
+		"message": "Naririnig na terminal bell."
 	},
 	"terminal_preview_label": {
 		"message": "I-preview"
@@ -476,17 +986,104 @@
 	"terminal_reset_menu_label": {
 		"message": "I-reset ang Terminal"
 	},
+	"terminal_settings_background_image_help": {
+		"message": "URL ng larawan sa background. Dapat magsimula sa 'http://' o 'https://.' Hayaang blangko kung walang larawan.\n\nHalimbawa:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "I-disable"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "I-block"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Salungguhit"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Sigurado ka bang gusto mong i-reset ang tema sa mga default nito?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "I-reset ang tema"
+	},
+	"terminal_settings_reset_label": {
+		"message": "I-reset"
+	},
+	"terminal_theme_light_label": {
+		"message": "Maliwanag"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Kulay 0: Itim"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Kulay 1: Pula"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Kulay 10: Matingkad na Berde"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Kulay 11: Matingkad na Dilaw"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Kulay 12: Matingkad na Asul"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Kulay 13: Matingkad na Magenta"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Kulay 14: Matingkad na Cyan"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Kulay 15: Matingkad na Puti"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Kulay 2: Berde"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Kulay 3: Dilaw"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Kulay 4: Asul"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Kulay 5: Magenta"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Kulay 6: Cyan"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Kulay 7: White"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Kulay 8: Matingkad na Itim"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Kulay 9: Matingkad na Pula"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Hitsura"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Gawi"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Keyboard at mouse"
+	},
+	"terminal_title_settings": {
+		"message": "Mga Setting"
+	},
+	"terminal_title_theme": {
+		"message": "Tema"
+	},
 	"tip_1": {
-		"message": "Maaari mong pindutin nang matagal ang Ctrl (Cmd sa macOS) habang nagki-click sa mga link upang buksan ang mga ito!"
+		"message": "Puwede mong pindutin nang matagal ang Ctrl (Cmd sa macOS) habang nagki-click sa mga link para buksan ang mga ito!"
 	},
 	"tip_10": {
-		"message": "Kapag nagpapatakbo sa isang window, maaaring magbukas ang Ctrl+Shift+N ng isa pang session."
+		"message": "Kapag pinapatakbo sa isang window, makakapagbukas ang Ctrl+Shift+N ng isa pang session."
 	},
 	"tip_11": {
-		"message": "Maaari mong i-rebind ang mga key/shortcut sa: https://goo.gl/LWRndr"
+		"message": "Puwede mong i-rebind ang mga key/shortcut sa: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Gamitin ang Yubikeys at iba pang smart card para sa ssh authentication: https://goo.gl/Hu2o3v"
+		"message": "Gamitin ang Yubikeys at iba pang smart card para sa pag-authenticate ng ssh: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Magpakita ng mga larawan inline: https://goo.gl/MnSysj"
@@ -501,7 +1098,7 @@
 		"message": "Kumonekta mula sa omnibox sa pamamagitan ng pag-type ng 'ssh <profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Maaaring mag-mount ang Chrome OS ng mga system ng file sa pamamagitan ng SFTP at mag-browse gamit ang Files app. Gamitin ang 'SFTP Mount' sa halip na 'Kumonekta.'"
+		"message": "Puwedeng mag-mount ang Chrome OS ng mga system ng file sa pamamagitan ng SFTP at mag-browse gamit ang Files app. Gamitin ang 'SFTP Mount' sa halip na 'Kumonekta.'"
 	},
 	"tip_5": {
 		"message": "Kumonekta gamit ang mga ssh:// link sa mga web page, o mag-save ng bookmark: https://goo.gl/zS8EZD"
@@ -510,13 +1107,13 @@
 		"message": "Lagyan ng kulay ang iyong output/prompt gamit ang mga pangunahing 16 at 256 na kulay at ang buong 24-bit na mga kulay: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopyahin sa iyong clipboard mula sa emacs/vim/etc... gamit ang OSC-52: https://goo.gl/XSnyLo"
+		"message": "Kopyahin sa iyong clipboard mula sa emacs/vim/atbp... gamit ang OSC-52: https://goo.gl/XSnyLo"
 	},
 	"tip_8": {
 		"message": "Makipag-chat sa mga kapwa user ng hterm/Secure Shell sa pamamagitan ng chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "May nakitang bug?  Humiling ng bagong feature?  Ipagbigay-alam sa amin: https://goo.gl/vb94JY"
+		"message": "May nakitang bug?  Hihiling ng bagong feature?  Ipagbigay-alam sa amin: https://goo.gl/vb94JY"
 	},
 	"unexpected_error": {
 		"message": "Nagkaroon ng hindi inaasahang error, pakitingnan ang JavaScript console para sa higit pang detalye."
@@ -531,7 +1128,7 @@
 		"message": "ChangeLog/mga tala sa paglabas: $1"
 	},
 	"welcome_faq": {
-		"message": "Mga Sagot sa Mga Madalas Itanong: $1 (mag-ctrl+click sa mga link upang buksan)"
+		"message": "Mga Sagot sa Mga Madalas Itanong: $1 (Mag-ctrl+Click sa mga link para buksan)"
 	},
 	"welcome_release_highlights": {
 		"message": "Mga pangunahing pagbabago simula noong $1:"
@@ -542,7 +1139,10 @@
 	"welcome_version": {
 		"message": "Welcome sa $1, bersyon $2."
 	},
+	"write_size_label": {
+		"message": "Laki ng Pag-write (KiB)"
+	},
 	"zoom_warning": {
-		"message": "Pakitakda ang Chrome Menu->Zoom sa 100%"
+		"message": "Pakitakda ang Menu ng Chrome->Zoom sa 100%"
 	}
 }

@@ -12,25 +12,19 @@
 		"message": "Če zaprete ta zavihek, boste prekinili to sejo."
 	},
 	"cache_pin_prompt": {
-		"message": "Želite kodo PIN shraniti v predpomnilnik za to sejo? (d/N):"
+		"message": "Želite kodo PIN shraniti v predpomnilnik za to sejo SSH? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "Prekliči"
 	},
+	"changelog": {
+		"message": "Dnevnik sprememb"
+	},
 	"clear_known_hosts_menu_label": {
 		"message": "Izbriši znane gostitelje SSH"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "Ta ukaz prikaže meni znanih gostiteljev in vas vpraša, katerega naj pozabi."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Pozabi znanega gostitelja ssh."
-	},
-	"cmd_ssh_help": {
-		"message": "Parametra |username| (uporabniško ime) in |hostname| (ime gostitelja) sta obvezna, |port| (vrata) pa je izbiren. Če ne navedete številke vrat, se privzeto uporabi 22."
-	},
-	"cmd_ssh_title": {
-		"message": "Odpre novo sejo SSH."
+	"clear_label": {
+		"message": "Izbriši"
 	},
 	"command_complete": {
 		"message": "Ukaz $1 se je zaprl s kodo stanja $2."
@@ -93,10 +87,10 @@
 		"message": "privzeta pot je uporabnikov domači imenik"
 	},
 	"field_nassh_options_aria_label": {
-		"message": "možnosti strežnika za posredovanje SSH"
+		"message": "Možnosti strežnika za posredovanje SSH"
 	},
 	"field_nassh_options_placeholder": {
-		"message": "možnosti strežnika za posredovanje SSH"
+		"message": "Možnosti strežnika za posredovanje SSH"
 	},
 	"field_port_aria_label": {
 		"message": "vrata"
@@ -117,7 +111,7 @@
 		"message": "Strežnik za posredovanje je bil najden: $1"
 	},
 	"get_profile_error": {
-		"message": "NAPAKA: ni bilo mogoče naložiti profila $1:\n$2"
+		"message": "NAPAKA: Ni bilo mogoče naložiti profila $1:\n$2"
 	},
 	"hterm_announce_current_screen_header": {
 		"message": "Pomaknjeno $1 %,"
@@ -132,16 +126,229 @@
 		"message": "Blokiraj"
 	},
 	"hterm_button_page_down": {
-		"message": "Stran navzdol"
+		"message": "Stran dol"
 	},
 	"hterm_button_page_up": {
-		"message": "Stran navzgor"
+		"message": "Stran gor"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Nalaganje sredstva $1 ni uspelo"
 	},
 	"hterm_loading_resource_start": {
 		"message": "Nalaganje sredstva $1 …"
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Omogočanje prikaza slike v vrstici"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Kombinacija tipke Alt + vračalka je kombinacija metatipke + vračalke"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "Način tipke AltGr"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Obravnavanje tipke Alt kot metatipke"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Obravnava modifikatorja tipke Alt"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Zvok opozorilnega zvonca (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Barva ozadja"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Slika ozadja"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Položaj slike ozadja"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Velikost slike ozadja"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Delovanje vračalke"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Preglasitve tabel znakov"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Samodejno brisanje izbire besedila"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Zapiranje okna ob izhodu"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Prvotna barvna paleta"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Samodejno kopiranje izbrane vsebine"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Delovanje kopiranja s kombinacijo tipk Ctrl + C"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Delovanje povečave/pomanjšave s kombinacijo tipk Ctrl + +/-/0"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Delovanje lepljenja s kombinacijo tipk Ctrl + V"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Utripanje kazalca"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Hitrost utripanja kazalca"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Barva kazalca besedila"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Oblika kazalca besedila"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Ustvarjanje namiznih obvestil za opozorilne zvonce"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Vzhodnoazijski dvoumni znaki uporabljajo dva stolpca"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Podpora za kontrolne znake, ki niso kodirani z UTF-8 C1"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Omogočanje utripajočega besedila"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Delovanje krepkega besedila"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Uporaba svetlih barv pri krepkem besedilu"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Prikaz obvestila pri kopiranju vsebine"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Dovoli oddaljeno pisanje v odložišče"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Omogočanje brisanja zgodovine zaslona (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Omogočanje spreminjanja utripanja kazalca besedila"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Prikaz mer terminala ob spreminjanju velikosti"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Spremenljivke okolja"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Družina pisav besedila"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Velikost pisave"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Glajenje pisave besedila"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Barva besedila"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Skrivanje kazalca miške med vnašanjem"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Delovanje pomikanja s tipko Home/End"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Povezave tipk/bližnjice tipkovnice"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Uporaba privzetih povezav tipk tipkovnice/bližnjic operacijskega sistema"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Predstavnostne tipke so funkcijske tipke"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Obravnava modifikatorja metatipke"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Lepljenje z gumbom miške"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Lepljenje vsebine s klikom desnega gumba miške"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Delovanje tipk za pomikanje Page Up/Down"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Delovanje preklapljanja med zavihki s kombinacijo tipk Alt + 1..9"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Delovanje novega okna s kombinacijo tipk Ctrl + N"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Delovanje preklapljanja med zavihki s kombinacijo tipk Ctrl + 1..9"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Delovanje novega zavihka s kombinacijo tipk Ctrl + T"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Delovanje preklapljanja med zavihki s kombinacijo tipke Ctrl + tabulatorke"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Delovanje zapiranja zavihka s kombinacijo tipk Ctrl + W"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Delovanje preklopa zavihka s kombinacijo metatipke + tipk 1..9"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Delovanje lepljenja s kombinacijo metatipke + tipke V"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Omogočanje lepljenja z vlečenjem in spuščanjem"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Prejemanje kodiranja"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Pomik do dna po pritisku tipke"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Pomik na dno po novem izhodu"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Emulacija puščičnih tipk z drsnim kolescem"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Množitelj drsnega kolesca miške"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Vidnost drsne vrstice"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Lepljenje s kombinacijo tipk Shift + Insert"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Kodiranje terminala"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Omogočanje, da brskalnik obravnava kopiranje besedila"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "CSS po meri (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "CSS po meri (besedilo v vrstici)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Ustavitev samodejne izbire (proti levi)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Znaki za prelom besed"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Ustavitev samodejne izbire (proti desni)"
 	},
 	"hterm_popup_inline_image": {
 		"message": "Slike v vrstici"
@@ -150,49 +357,49 @@
 		"message": "Slike v vrstici so onemogočene"
 	},
 	"hterm_pref_allow_images_inline": {
-		"message": "Ali naj se oddaljenemu gostitelju dovoli prikazovanje slik v terminalu.\n\nPrivzeto je prikazan poziv, dokler ni uveljavljena izbira."
+		"message": "Določa, ali naj se oddaljenemu gostitelju dovoli prikazovanje slik v terminalu.\n\nPrivzeto je prikazan poziv, dokler ni uveljavljena izbira."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Če je to nastavljeno, razveljavi preslikavo kombinacije tipk Alt+vračalka -> DEL v sistemu OS Chrome, tako da se s kombinacijo tipk Alt+vračalka dejansko izvrši kombinacija Alt+vračalka."
+		"message": "Če je to nastavljeno, razveljavi preslikavo kombinacije tipk Alt + vračalka -> Delete v sistemu Chrome OS, tako da se s kombinacijo tipk Alt + vračalka dejansko izvrši kombinacija Alt + vračalka."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Izbira hevrističnega postopka za zaznavanje tipke AltGr.\n\n»null«: samodejno zaznavanje na podlagi parametra »navigator.language«:\n      »en-us« => »none«, drugo => »right-alt«\n»none«: onemogočanje napak, povezanih s tipko AltGr.\n»ctrl- alt«: predvidevanje, da kombinacija tipk Ctrl + Alt pomeni tipko AltGr.\n»left-alt«: predvidevanje, da leva tipka Alt pomeni tipko AltGr.\n»right-alt«: predvidevanje, da desna tipka Alt pomeni tipko AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "Določa, ali naj tipka Alt deluje kot meta tipka ali kot običajna tipka Alt."
+		"message": "Določa, ali naj tipka Alt deluje kot metatipka ali kot običajna tipka Alt."
 	},
 	"hterm_pref_alt_sends_what": {
 		"message": "Nadzira obravnavo tipke Alt.\n\n  escape: Pošlje predpono ESC.\n  8-bit: Doda 128 vnesenemu znaku, kot je to v xtermu.\n browser-key: Čaka na dogodek pritiska tipke in preveri, kako se odzove brskalnik.\n (To ne deluje najbolje v okoljih, v katerih brskalnik\n izvaja privzeto dejanje za nekatera zaporedja s tipko Alt.)"
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "URL zvoka za zvonec terminala. Prazen niz, če je zvonec neslišen."
+		"message": "URL zvoka za zvonec terminala. Pustite prazno, če je zvonec neslišen."
 	},
 	"hterm_pref_background_color": {
 		"message": "Barva ozadja za besedilo brez drugih barvnih atributov."
 	},
 	"hterm_pref_background_image": {
-		"message": "Vrednost CSS slike ozadja. Prazen niz, če ni slike.\n\nNa primer:\n  url (https://goo.gl/anedTK)\n  linear-gradient (zgoraj in spodaj, modro, rdeče)"
+		"message": "Vrednost CSS slike ozadja. Pustite prazno, če ni slike.\n\nPrimer:\n  url (https://goo.gl/anedTK)\n  linear-gradient (zgoraj in spodaj, modro, rdeče)"
 	},
 	"hterm_pref_background_position": {
-		"message": "Vrednost CSS položaja slike ozadja.\n\nNa primer:\n  10 % 10 %\n  sredina"
+		"message": "Vrednost CSS položaja slike ozadja.\n\nNa primer:\n  10% 10%\n  center"
 	},
 	"hterm_pref_background_size": {
 		"message": "Vrednost CSS velikosti slike ozadja."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Če je to omogočeno, naj bi vračalka poslala BS (»\\x08« ali drugače povedano ^H). V nasprotnem primeru naj bi vračalka poslala »\\x7f«."
+		"message": "Če je to omogočeno, vračalka pošlje BS (»\\x08« ali drugače povedano ^H). V nasprotnem primeru vračalka pošlje »\\x7f«."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "To je določeno kot predmet. Je razpršeno polje, na katerem je vsaka lastnost koda nabora znakov in vrednost je predmet, ki je razpršeno polje samo po sebi. V tem razpršenem polju je vsaka lastnost prejeti znak in vrednost je prikazani znak.\n\nNa primer:\n {»0«:{»+«:«\\u2192«,»,«:»\\u2190«,»-«:»\\u2191«,».«:»\\u2193«, »0«:»\\u2588«}}"
+		"message": "To je določeno kot predmet. Je razpršeno polje, na katerem je vsaka lastnost koda nabora znakov in vrednost je predmet, ki je razpršeno polje samo po sebi. V tem razpršenem polju je vsaka lastnost prejeti znak in vrednost je prikazani znak.\n\nPrimer:\n{ »0\": {\n  »+«: »\\u2192«,\n  »,«: »\\u2190«,\n  »-«: »\\u2191«,\n  ».«: »\\u2193«,\n  »0«: »\\u2588«\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
-		"message": "Ali naj se po kopiranju izbor počisti."
+		"message": "Določa, ali naj se po kopiranju izbor počisti."
 	},
 	"hterm_pref_close_on_exit": {
 		"message": "Določa, ali naj se po izvedbi ukaza zapre okno."
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "Preglasitev barv v privzeti paleti.\n\nTo je mogoče določiti kot polje ali predmet. Če je določeno kot predmet, se predvideva, da je razpršeno polje, v katerem je vsaka lastnost številčni seznam z barvne palete.\n\nVrednosti je mogoče določiti kot praktično katero koli vrednost barve CSS. To vključuje #RGB, #RRGGBB, rgb(...), rgba(...) in vsa druga imena barv, ki jih prav tako vsebuje standardna datoteka rgb.txt X11.\n\nČe želite določiti, da se privzeta vrednost ne sme spremeniti, lahko uporabite »null«. To je uporabno pri preskakovanju manjšega števila seznamov, ko je vrednost določena kot polje.\n\nObe ti možnosti na primer nastavita barvni indeks 1 na modro:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "Preglasitev barv v privzeti paleti.\n\nTo je mogoče določiti kot polje ali predmet. Če je določeno kot predmet, se predvideva, da je redko polje, v katerem je vsaka lastnost številčni seznam z barvne palete.\n\nVrednosti je mogoče določiti kot praktično katero koli vrednost barve CSS. To vključuje #RGB, #RRGGBB, rgb(...), rgba(...) in vsa druga imena barv, ki jih prav tako vsebuje standardna datoteka rgb.txt X11.\n\nČe želite določiti, da se privzeta vrednost ne sme spremeniti, lahko uporabite »null«. To je uporabno pri preskakovanju manjšega števila seznamov, ko je vrednost določena kot polje.\n\nObe ti možnosti na primer nastavita barvni indeks 1 na modro:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
 		"message": "Samodejno kopiranje izbora z miško v odložišče."
@@ -201,7 +408,7 @@
 		"message": "Kombinacija tipk Ctrl + C kopira, če je omogočeno, in pošlje gostitelju »^C«, če ni omogočeno.\nKombinacija tipk Ctrl + Shift + C pošlje gostitelju »^C«, če je omogočeno, in kopira, če ni omogočeno."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Če je omogočeno, kombinacija tipk Ctrl+Plus/Minus/0 nadzira povečavo.\nČe ni omogočeno, kombinacija tipk Ctrl+Shift+Plus/Minus/0 nadzira povečavo, kombinacija tipk Ctrl+minus pošlje »^_«, kombinacija tipk Ctrl+Plus/0 pa nima učinka."
+		"message": "Če je omogočeno, kombinacija tipk Ctrl + Plus/Minus/0 nadzira povečavo.\nČe ni omogočeno, kombinacija tipk Ctrl + Shift + Plus/Minus/0 nadzira povečavo, kombinacija tipk Ctrl + minus pošlje »^_«, kombinacija tipk Ctrl + Plus/0 pa nima učinka."
 	},
 	"hterm_pref_ctrl_v_paste": {
 		"message": "Kombinacija tipk Ctrl + V kopira, če je omogočeno, in pošlje gostitelju »^V«, če ni omogočeno.\nKombinacija tipk Ctrl + Shift + V pošlje gostitelju »^V«, če je omogočeno, in prilepi, če ni omogočeno."
@@ -214,6 +421,9 @@
 	},
 	"hterm_pref_cursor_color": {
 		"message": "Barva vidnega kazalca besedila."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "Oblika vidnega kazalca besedila. To je mogoče spremeniti med izvajanjem z ubežnimi zaporedji terminala."
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Če je omogočeno, zvonci terminala v ozadju ustvarijo spletno obvestilo. https://www.w3.org/TR/notifications/\n\nPrikaz obvestil terja dovoljenje uporabnika. Če je ta možnost omogočena, hterm poskusi uporabniku prikazati poziv za dovoljenje, če je to potrebno. Brskalniki te zahteve za dovoljenje morda ne prikažejo, če je ni sprožil uporabnik z dejanjem.\n\nRazširitve za Chrome z dovoljenjem »obvestila« imajo dovoljenje za prikazovanje obvestil."
@@ -237,10 +447,16 @@
 		"message": "Določa, ali naj bo prikazano sporočilo v terminalu, ko gostitelj piše v odložišče."
 	},
 	"hterm_pref_enable_clipboard_write": {
-		"message": "Dovoli oddaljenemu gostitelju, da piše neposredno v odložišče lokalnega sistema.\nDostop za branje ni nikoli dodeljen ne glede na to nastavitev.\n\nTo se uporablja za nadziranje dostop do funkcij, kot je OSC-52."
+		"message": "Dovoli oddaljenemu gostitelju, da piše neposredno v odložišče lokalnega sistema.\nDostop za branje ni nikoli dodeljen ne glede na to nastavitev.\n\nTo se uporablja za nadziranje dostopa do funkcij, kot je OSC-52."
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Določa, ali lahko funkcija »Brisanje shranjenih vrstic« (način 3) ukaza »Izbriši prikaz« (CSI-J) izbriše zgodovino zaslona terminala.\n\nPrivzeto omogočanje te možnosti je varno."
 	},
 	"hterm_pref_enable_dec12": {
 		"message": "Upoštevanje poskusa gostitelja, da spremeni stanje utripanja kazalca besedila z zasebnim načinom DEC 12."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Določa, ali so ob spreminjanju velikosti terminala prikazane mere terminala."
 	},
 	"hterm_pref_environment": {
 		"message": "Prvotni niz spremenljivk okolja kot predmet."
@@ -261,10 +477,13 @@
 		"message": "Določa, ali naj se med tipkanjem samodejno skrije kazalec miške. Privzeto se samodejno zazna, ali to obravnava okolje/operacijski sistem.\n\nOpomba: nekateri operacijski sistemi morda preglasijo to nastavitev, zato je morda včasih ne morete onemogočiti."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Če je omogočeno, tipki Home/End upravljata drsno vrstico terminala, kombinaciji Shift+Home/Shift+End pa sta poslani oddaljenemu gostitelju. Če je onemogočeno, sta tipki Home/End poslani oddaljenemu gostitelju, kombinaciji Shift+Home/Shift+End pa upravljata drsenje."
+		"message": "Če je omogočeno, tipki Home/End upravljata drsno vrstico terminala, kombinaciji Shift + Home/Shift + End pa sta poslani oddaljenemu gostitelju. Če je onemogočeno, sta tipki Home/End poslani oddaljenemu gostitelju, kombinaciji Shift + Home/Shift + End pa upravljata drsenje."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Preslikava zaporedij tipk na dejanja tipk. Zaporedja tipk vključujejo nič ali več modifikatorskih tipk in kodo tipke. Kode tipk so lahko desetiške ali šestnajstiške številke oziroma identifikator tipke. Dejanja tipk so lahko določena kot niz, ki se pošlje gostitelju, ali identifikator dejanja. Celotno pojasnilo oblike zapisa je na voljo tukaj: https://goo.gl/LWRndr.\n\nPrimer povezav tipk:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Preslikava zaporedij tipk na dejanja tipk. Zaporedja tipk vključujejo nič ali več modifikatorskih tipk in kodo tipke. Kode tipk so lahko desetiške ali šestnajstiške številke oziroma identifikator tipke. Dejanja tipk so lahko določena kot niz, ki se pošlje gostitelju, ali identifikator dejanja. Celotno pojasnilo oblike zapisa je na voljo tukaj: https://goo.gl/LWRndr.\n\nPrimer povezav tipk:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Pozdravljen, svet\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Določa, ali naj se upoštevajo običajne povezave tipk tipkovnice operacijskega sistema namesto stalnega zajemanja za lastno uporabo hterma."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Če je omogočeno, pretvori predstavnostne tipke v enakovredne za Fkey. Če je onemogočeno, tipke obdela brskalnik."
@@ -276,22 +495,37 @@
 		"message": "Miškin gumb za lepljenje ali nič za samozaznavanje.\n\nZa samozaznavanje bomo uporabili srednjo miškino tipko za okolja, ki niso X11 (tudi OS Chrome). V okoljih X11 bomo uporabili desno miškino tipko (ker naj bi izvorni upravitelj oken lepil s srednjo miškino tipko).\n\n0 == leva (primarna) tipka\n1 == sredinska (pomožna) tipka\n2 == desna (sekundarna) tipka\n\nTa možnost je neodvisna od nastavitve »right-click-paste«.\n\nOpomba: to pravilno obravnava miške za levičarje in za desničarje."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Lepljenje ob klikih desne miškine tipke.\n\nTa možnost je neodvisna od nastavitve »mouse-paste-button«.\n\nOpomba: to pravilno obravnava miške za levičarje in za desničarje."
+		"message": "Lepljenje ob klikih desne miškine tipke.\n\nTa možnost je neodvisna od nastavitve »mouse-paste-button«.\n\nOpomba: To pravilno obravnava miške za levičarje in za desničarje."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Če je omogočeno, tipki Page Up/Page Down upravljata drsno vrstico terminala, kombinaciji Shift+Page Up/Shift+ Page Down pa sta poslani oddaljenemu gostitelju. Če je onemogočeno, sta tipki Page Up/Page Down poslani oddaljenemu gostitelju, kombinaciji Shift+Page Up/Shift+Page Down pa upravljata drsenje."
+		"message": "Če je omogočeno, tipki Page Up/Page Down upravljata drsno vrstico terminala, kombinaciji Shift-Page Up/Shift + Page Down pa sta poslani oddaljenemu gostitelju. Če je onemogočeno, sta tipki Page Up/Page Down poslani oddaljenemu gostitelju, kombinaciji Shift + Page Up/Shift + Page Down pa upravljata drsenje."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Določa, ali naj se Alt+1..9 posreduje brskalniku.\n\nTo je priročno pri izvajanju terminala hterm na zavihku brskalnika, tako da ne izgubite Chromovih bližnjic za preklop na zavihek. Če se ne izvaja na zavihku, je te tipke bolje poslati gostitelju, da jih je mogoče uporabiti v programih vim ali emacs.\n\nČe je omogočeno, bo Alt+1..9 obdelal brskalnik. Če je onemogočeno, se Alt+1..9 pošlje gostitelju. Če je nastavljeno na nič, se uporabi samozaznavanje na podlagi vrste brskalnika in okna."
+		"message": "Določa, ali naj se kombinacija tipk Alt + 1..9 posreduje brskalniku.\n\nTo je priročno pri izvajanju terminala hterm na zavihku brskalnika, tako da ne izgubite Chromovih bližnjičnih tipk za preklop na zavihek. Če se ne izvaja na zavihku, je te tipke bolje poslati gostitelju, da jih je mogoče uporabiti v programih vim ali emacs.\n\nČe je omogočeno, bo kombinacijo tipk Alt + 1..9 obdelal brskalnik. Če je onemogočeno, se kombinacija tipk Alt + 1..9 pošlje gostitelju. Če je nastavljeno na »null«, se uporabi samozaznavanje na podlagi vrste brskalnika in okna."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Določa, ali se kombinacija tipk Ctrl + N pošlje brskalniku.\n\nČe je nastavitev omogočena, brskalnik kombinacijo tipk Ctrl + N obravnava kot bližnjični tipki za »novo okno«. Če nastavitev ni omogočena, se kombinacija tipk Ctrl + N pošlje gostitelju."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Določa, ali naj se Ctrl+1..9 posreduje brskalniku.\n\nTo je priročno pri izvajanju terminala hterm na zavihku brskalnika, tako da ne izgubite Chromovih bližnjic za preklop na zavihek. Če se ne izvaja na zavihku, je te tipke bolje poslati gostitelju, da jih je mogoče uporabiti v programih vim ali emacs.\n\nČe je omogočeno, bo Ctrl+1..9 obdelal brskalnik. Če je onemogočeno, se Ctrl+1..9 pošlje gostitelju. Če je nastavljeno na nič, se uporabi samozaznavanje na podlagi vrste brskalnika in okna."
+		"message": "Določa, ali naj se kombinacija tipk Ctrl + 1..9 posreduje brskalniku.\n\nTo je priročno pri izvajanju terminala hterm na zavihku brskalnika, tako da ne izgubite Chromovih bližnjičnih tipk za preklop na zavihek. Če se ne izvaja na zavihku, je te tipke bolje poslati gostitelju, da jih je mogoče uporabiti v programih vim ali emacs.\n\nČe je omogočeno, bo kombinacijo tipk Ctrl + 1..9 obdelal brskalnik. Če je onemogočeno, se kombinacija tipk Ctrl + 1..9 pošlje gostitelju. Če je nastavljeno na »null«, se uporabi samozaznavanje na podlagi vrste brskalnika in okna."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Določa, ali naj se kombinacija tipk Ctrl + T pošlje brskalniku.\n\nČe je nastavitev omogočena, brskalnik kombinacijo tipk Ctrl + T obravnava kot bližnjični tipki za »novi zavihek«. Če nastavitev ni omogočena, se kombinacija tipk Ctrl + T pošlje gostitelju."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Določa, ali se kombinaciji tipk Ctrl + tabulatorka in Ctrl + Shift + tabulatorka pošljeta brskalniku.\n\nČe je nastavitev omogočena, brskalnik kombinaciji tipk Ctrl + tabulatorka in Ctrl + Shift + tabulatorka obravnava kot bližnjico za »naslednji/prejšnji zavihek«. Če nastavitev ni omogočena, se tabulatorka gostitelju pošlje brez tipke Ctrl ali Shift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Določa, ali se kombinacija tipk Ctrl + W pošlje brskalniku.\n\nČe je nastavitev omogočena, brskalnik kombinacijo tipk Ctrl + W obravnava kot bližnjični tipki za »zapri zavihek«. Če nastavitev ni omogočena, se kombinacija tipk Ctrl + W pošlje gostitelju."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Določa, ali naj se Meta+1..9 posreduje brskalniku.\n\nTo je priročno pri izvajanju terminala hterm na zavihku brskalnika, tako da ne izgubite Chromovih bližnjic za preklop na zavihek. Če se ne izvaja na zavihku, je te tipke bolje poslati gostitelju, da jih je mogoče uporabiti v programih vim ali emacs.\n\nČe je omogočeno, bo Meta+1..9 obdelal brskalnik. Če je onemogočeno, se Meta+1..9 pošlje gostitelju. Če je nastavljeno na nič, se uporabi samozaznavanje na podlagi vrste brskalnika in okna."
+		"message": "Določa, ali naj se kombinacija metatipke + tipk 1..9 posreduje brskalniku.\n\nTo je priročno pri izvajanju terminala hterm na zavihku brskalnika, tako da ne izgubite Chromovih bližnjičnih tipk za preklop na zavihek. Če se ne izvaja na zavihku, je te tipke bolje poslati gostitelju, da jih je mogoče uporabiti v programih vim ali emacs.\n\nČe je omogočeno, bo kombinacijo metatipke + tipk 1..9 obdelal brskalnik. Če je onemogočeno, se kombinacije metatipke + tipk 1..9 pošlje gostitelju. Če je nastavljeno na »null«, se uporabi samozaznavanje na podlagi vrste brskalnika in okna."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Določa, ali naj se Meta+V pošlje gostitelju."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Če je nastavitev omogočena, se bo vlečeno in spuščeno besedilo kopiralo v terminal.\nČe ni omogočena, bo spuščeno besedilo prezrto."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Nastavitev pričakovanega kodiranja podatkov, prejetih iz gostitelja.\nČe se kodiranja ne ujemajo, so verjetno zaznane vidne napake.\n\nVeljavni vrednosti sta »utf-8« in »raw«."
@@ -309,10 +543,10 @@
 		"message": "Množitelj za dogodke drsnega kolesca, ko je merjen v slikovnih pikah.\n\nSpremeni hitrost drsenja strani."
 	},
 	"hterm_pref_scrollbar_visible": {
-		"message": "Način navpične drsne vrstice"
+		"message": "Način navpične drsne vrstice."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Določa, ali se kombinacija Shift+Insert uporablja za lepljenje ali se pošlje oddaljenemu gostitelju."
+		"message": "Določa, ali se kombinacija Shift + Insert uporablja za lepljenje ali se pošlje oddaljenemu gostitelju."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Privzeto terminalsko kodiranje (DOCS).\n\nISO-2022 omogoča preslikave tabel znakov (npr. grafičnih tabel).\nUTF-8 onemogoča podporo zanje.\n\nZaklenjena možnost pomeni, da kodiranja med izvajanjem ni mogoče spremeniti z ubežnimi zaporedji terminala.\n\nPriporočamo uporabo UTF-8, razen če pri starejših aplikacijah opazite napačno upodabljanje."
@@ -324,7 +558,7 @@
 		"message": "URL uporabnikove datoteke s slogi, ki naj bo vključena v terminalskem dokumentu."
 	},
 	"hterm_pref_user_css_text": {
-		"message": "Besedilo CSS po meri za določanje sloga terminala"
+		"message": "Besedilo CSS po meri za določanje sloga terminala."
 	},
 	"hterm_pref_word_break_match_left": {
 		"message": "Regularni izraz za ustavitev iskanja ujemanj na levi strani (na začetku) izbora.\n\nTo je običajno razred znakov za zavrnitev določenih znakov.\nPrivzeto sta dovoljena znaka »~« in ».«, ker se poti pogosto začnejo z njima."
@@ -342,7 +576,7 @@
 		"message": "Videz (pisava, barve, slike)"
 	},
 	"hterm_title_pref_copypaste": {
-		"message": "Kopiraj in prilepi"
+		"message": "Kopiranje in lepljenje"
 	},
 	"hterm_title_pref_encoding": {
 		"message": "Kodiranje"
@@ -386,8 +620,20 @@
 	"known_hosts_title": {
 		"message": "Znani gostitelji:"
 	},
+	"licenses": {
+		"message": "Licence"
+	},
+	"licenses_expand_link": {
+		"message": "prikaz licence"
+	},
+	"licenses_title": {
+		"message": "Odprtokodne licence"
+	},
 	"loading_label": {
-		"message": "Nalaganje ..."
+		"message": "Nalaganje …"
+	},
+	"migrate_to_ext": {
+		"message": "Obvestilo: Začnite uporabljati novo razširitev Secure Shell ($1).\nAplikacije za Chrome so zastarele, zato bo ta različica prenehala prejemati posodobitve.\nVeč podrobnosti je na voljo v vodniku za selitev ($2)."
 	},
 	"missing_param": {
 		"message": "Manjka parameter: $1"
@@ -401,8 +647,266 @@
 	"mounted_message": {
 		"message": "Vpeto."
 	},
+	"nasftp_cmd_cat": {
+		"message": "nazasl"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "Izvoz datoteke v terminal"
+	},
+	"nasftp_cmd_chdir": {
+		"message": "sprimen"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Spreminjanje delovnega imenika"
+	},
+	"nasftp_cmd_chgrp": {
+		"message": "spskp"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Spreminjanje skupine poti"
+	},
+	"nasftp_cmd_chmod": {
+		"message": "spdov"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Spreminjanje dovoljenj za poti"
+	},
+	"nasftp_cmd_chown": {
+		"message": "sprlas"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Spreminjanje lastnika poti"
+	},
+	"nasftp_cmd_clear": {
+		"message": "izbriši"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Izbris trenutnega zaslona terminala."
+	},
+	"nasftp_cmd_clip": {
+		"message": "izreži"
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Kopiranje datoteke v odložišče (privzeto: prvih 10 MB)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "V odložišče je prekopiranih toliko bajtov: $1"
+	},
+	"nasftp_cmd_color": {
+		"message": "barva"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Preklop uporabe barv"
+	},
+	"nasftp_cmd_copy": {
+		"message": "kopiraj"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Kopiranje vira v cilj"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Brisanje datotek"
+	},
+	"nasftp_cmd_df": {
+		"message": "pd"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Prikaz statističnih podatkov o disku"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Pot: $1\nID datotečnega sistema: $2\nSkupno: $3\nUporabljeno: $4 ($5 %)\nNa voljo: $6 (za običajne uporabnike)\n$7 (za skrbnike)"
+	},
+	"nasftp_cmd_exit": {
+		"message": "izhod"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Prekinitev povezave"
+	},
+	"nasftp_cmd_get": {
+		"message": "pridobi"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Prenos datoteke: $1 kot $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Prenos datotek"
+	},
+	"nasftp_cmd_help": {
+		"message": "pomoč"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Ta zaslon za pomoč"
+	},
+	"nasftp_cmd_list": {
+		"message": "seznam"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Prikaz podrobnosti imenika"
+	},
+	"nasftp_cmd_ln": {
+		"message": "pz"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Ustvarjanje povezave do poti, ki vodi do cilja"
+	},
+	"nasftp_cmd_mkdir": {
+		"message": "usime"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Ustvarjanje imenikov"
+	},
+	"nasftp_cmd_move": {
+		"message": "premakni"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Preimenovanje datoteke"
+	},
+	"nasftp_cmd_prompt": {
+		"message": "poziv"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Nastavitev niza s pozivom"
+	},
+	"nasftp_cmd_put": {
+		"message": "naloži"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Nalaganje datotek"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Nalaganje datoteke: $1 kot $2 ($3)"
+	},
+	"nasftp_cmd_pwd": {
+		"message": "tdi"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Prikaz trenutnega delovnega imenika"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Oddaljeni delovni imenik: $1"
+	},
+	"nasftp_cmd_quit": {
+		"message": "zapri"
+	},
+	"nasftp_cmd_readlink": {
+		"message": "beripovez"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Branje simboličnih povezav"
+	},
+	"nasftp_cmd_realpath": {
+		"message": "pravapot"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Kanonikalizacija poti"
+	},
+	"nasftp_cmd_rename": {
+		"message": "preimenuj"
+	},
+	"nasftp_cmd_reput": {
+		"message": "nadnal"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Nadaljevanje nalaganja datotek"
+	},
+	"nasftp_cmd_rm": {
+		"message": "os"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Odstranjevanje datotek"
+	},
+	"nasftp_cmd_rmdir": {
+		"message": "oddim"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Brisanje praznih imenikov"
+	},
+	"nasftp_cmd_show": {
+		"message": "pokaži"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Prikaz datotek v vrstici"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Razširitve:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Prikaz stanja datoteke"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Datoteka: $1\n  Velikost: $2 b\n   UID: $3\n   GID: $4\nDostop: $5\n Čas dostopanja: $6\n Čas spremembe: $7"
+	},
+	"nasftp_cmd_symlink": {
+		"message": "simpov"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Ustvarjanje simbolične povezave do poti, ki vodi do cilja"
+	},
+	"nasftp_cmd_truncate": {
+		"message": "skrajšaj"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Skrajšanje poti na 0 bajtov"
+	},
+	"nasftp_cmd_version": {
+		"message": "različica"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  razširitve strežnika:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Prikaz trenutne različice protokola"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Podatki o različici protokola SFTP:\n  Lokalno: $1\n  Strežnik: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: Konec datoteke"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: Datoteke ni mogoče najti"
+	},
+	"nasftp_error_file_reading": {
+		"message": "Branje datoteke $1 ni uspelo: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Neobravnavana notranja napaka, prijavite napako: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: Neveljavna številka: $3"
+	},
+	"nasftp_error_message": {
+		"message": "NAPAKA: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: Razširitev »$2« ni na voljo"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: Ni običajna datoteka"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: Premalo argumentov"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: Dovoljenje je bilo zavrnjeno"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: Preveč argumentov"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: Neznan ukaz"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: Neznana zastavica $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Vsiljena ustavitev"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 b, prenesenih v $2 s ($3/s)"
+	},
 	"nassh_options_error": {
-		"message": "Neznana možnost releja: $1"
+		"message": "Neznana možnost: $1"
 	},
 	"nassh_product_name": {
 		"message": "Secure Shell"
@@ -417,7 +921,7 @@
 		"message": "V redu"
 	},
 	"omnibox_default": {
-		"message": "<url><match>user@hostname[:port]</match></url> Vzpostavite povezavo s shranjenim profilom ali novim sistemom ssh"
+		"message": "<url><match>uporabnik@imegostitelja[:vrata]</match></url> Vzpostavite povezavo s shranjenim profilom ali novim sistemom ssh"
 	},
 	"open_as_window_tip": {
 		"message": "[Nasvet strokovnjaka] Uporabite ukaz »Odpri kot okno« ali »Celozaslonsko«, da preprečite zapiranje terminala z bližnjico »CTRL + W«.\n[Nasvet strokovnjaka] Več informacij poiščite na $1."
@@ -432,16 +936,46 @@
 		"message": " končano."
 	},
 	"plugin_loading_failed": {
-		"message": " Ni uspelo :("
+		"message": " ni uspelo :("
+	},
+	"popup_connect_tooltip": {
+		"message": "Pridržite tipko Ctrl za odpiranje na novem zavihku."
 	},
 	"pref_backup_filename": {
 		"message": "Varnostna kopija nastavitev varne lupine.json"
 	},
+	"preferences_header_ssh_files": {
+		"message": "Datoteke SSH"
+	},
 	"preferences_header_terminal": {
-		"message": "Nastavitve profila"
+		"message": "Nastavitve terminala"
+	},
+	"preferences_header_uri": {
+		"message": "Rutine za obravnavo URI-jev"
 	},
 	"preferences_reset": {
 		"message": "Vse nastavitve so ponastavljene."
+	},
+	"protocol_register_button": {
+		"message": "Registracija rutin za obravnavo protokola"
+	},
+	"protocol_register_explain": {
+		"message": "Spodnji gumb poskusi registrirati rutine za obravnavo vseh protokolov, ki jih podpiramo. To nam na primer omogoča neposredno obravnavo povezav ssh://. Brskalnik bo prikazal poziv za posamezne protokole, zato potrdite/sprejmite vsakega, ko bo prikazan. Če pozivi niso prikazani, si oglejte naslednji razdelek z nasveti za odpravljanje težav."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Če so rutine za obravnavo že registrirane ali so bili prejšnji poskusi registracije zavrnjeni, pozivi ne bodo več prikazani. Odprite spodnje pogovorno okno, nato v razdelkih ssh/sftp/etc ... označite nastavitve registrirane rutine za obravnavo. Če je ta program blokiran, lahko izbrišete tiste nastavitve, ki vam bodo omogočile vnovični poskus registracije. Če je ta program že registriran, vendar ni nastavljen kot privzeta rutina za obravnavo, lahko spremenite tudi privzeto rutino za obravnavo."
+	},
+	"protocol_register_options_link": {
+		"message": "Registracija protokola"
+	},
+	"protocol_register_settings_button": {
+		"message": "Odpri nastavitve registriranih rutin za obravnavo"
+	},
+	"protocol_register_title": {
+		"message": "Pomoč pri registraciji rutine za obravnavo protokolov Secure Shell"
+	},
+	"read_size_label": {
+		"message": "Velikost za branje (KiB)"
 	},
 	"reconnect_message": {
 		"message": "Želite znova vzpostaviti povezavo (R), izbrati drugo povezavo (C) ali zapreti (X)?"
@@ -450,10 +984,13 @@
 		"message": "Vnovičen poskus ..."
 	},
 	"request_pin_prompt": {
-		"message": "Vnesite PIN za odklepanje ključa $1 v bralniku »$2« (še toliko poskusov: $3):"
+		"message": "Vnesite kodo PIN za odklepanje ključa $1 v bralniku »$2 ($3)« (še toliko poskusov: $4):"
 	},
 	"restore_prefs": {
 		"message": "Obnovitev varnostne kopije"
+	},
+	"save_label": {
+		"message": "Shrani"
 	},
 	"shortcut_list_aria_label": {
 		"message": "shranjene povezave"
@@ -464,8 +1001,44 @@
 	"ssh_argstr_label": {
 		"message": "Argumenti SSH"
 	},
+	"stream_open_error": {
+		"message": "Odpiranje toka $1 ni uspelo: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "Brisanje vsebine zaslona terminala"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "Barve ANSI"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Glajenje robov"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Zvonec"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Utripanje"
+	},
+	"terminal_name_pref_color": {
+		"message": "Barva"
+	},
+	"terminal_name_pref_font": {
+		"message": "Pisava"
+	},
+	"terminal_name_pref_image": {
+		"message": "Slika"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Oblika"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Vidno"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Nastavite barve za privzeto paleto."
+	},
+	"terminal_pref_bell": {
+		"message": "Slišen zvonec terminala."
 	},
 	"terminal_preview_label": {
 		"message": "Predogled"
@@ -476,11 +1049,137 @@
 	"terminal_reset_menu_label": {
 		"message": "Ponastavitev terminala"
 	},
+	"terminal_settings_background_image_help": {
+		"message": "URL slike ozadja. Začeti se mora s »http://« ali »https://«. Pustite prazno, če ni slike.\n\nPrimer:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Samodejno"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Onemogoči"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Navpična črtica"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Pravokotnik"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Podčrtano"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Ali ste prepričani, da želite ponastaviti temo na privzeto vrednost?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Ponastavitev teme"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Ponastavi"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Klasična"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Temna"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Koprena"
+	},
+	"terminal_theme_light_label": {
+		"message": "Svetla"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Temna Solarized"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Svetla Solarized"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Barva 0: Črna"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Barva 1: Rdeča"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Barva 10: Svetlozelena"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Barva 11: Svetlorumena"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Barva 12: Svetlomodra"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Barva 13: Svetloškrlatna"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Barva 14: Svetlocianova"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Barva 15: Svetlobela"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Barva 2: Zelena"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Barva 3: Rumena"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Barva 4: Modra"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Barva 5: Škrlatna"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Barva 6: Cianova"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Barva 7: Bela"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Barva 8: Svetločrna"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Barva 9: Svetlordeča"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Videz"
+	},
+	"terminal_title_pref_background": {
+		"message": "Ozadje"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Delovanje"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "Kazalec"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Tipkovnica"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Tipkovnica in miška"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Miška"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Drsna vrstica"
+	},
+	"terminal_title_pref_text": {
+		"message": "Besedilo"
+	},
+	"terminal_title_settings": {
+		"message": "Nastavitve"
+	},
+	"terminal_title_theme": {
+		"message": "Tema"
+	},
 	"tip_1": {
 		"message": "Če želite odpreti povezave, medtem ko jih kliknete, lahko pridržite tipko Ctrl (tipko Cmd v sistemu macOS)."
 	},
 	"tip_10": {
-		"message": "Med izvajanjem v oknu lahko s kombinacijo tipk Ctrl, Shift in N odprete novo sejo."
+		"message": "Med izvajanjem v oknu lahko s kombinacijo tipk Ctrl + Shift + N odprete novo sejo."
 	},
 	"tip_11": {
 		"message": "Tipke/bližnjice lahko znova povežete: https://goo.gl/LWRndr"
@@ -498,7 +1197,7 @@
 		"message": "Obvestila v brskalniku lahko prikažete z možnostjo hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Povezavo lahko vzpostavite v naslovni vrstici, tako da vnesete »ssh <ime profila>«: https://goo.gl/V7o8ki"
+		"message": "Povezavo lahko vzpostavite v naslovni vrstici tako, da vnesete »ssh <ime profila>«: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "OS Chrome omogoča vpetje datotečnih sistemov prek SFTP-ja in brskanje z aplikacijo Datoteke. Namesto možnosti »Poveži« uporabite »Vpenjanje SFTP-ja«."
@@ -531,7 +1230,7 @@
 		"message": "Dnevnik sprememb/opombe ob izdaji: $1"
 	},
 	"welcome_faq": {
-		"message": "Odgovori na pogosta vprašanja: $1 (pritisnite tipko CTRL in kliknite povezave, če jih želite odpreti)"
+		"message": "Odgovori na pogosta vprašanja: $1 (pritisnite tipko Ctrl in kliknite povezave, če jih želite odpreti)"
 	},
 	"welcome_release_highlights": {
 		"message": "Pomembne spremembe v primerjavi z različico $1:"
@@ -541,6 +1240,9 @@
 	},
 	"welcome_version": {
 		"message": "Pozdravljeni v aplikaciji $1 različice $2."
+	},
+	"write_size_label": {
+		"message": "Velikost pisanja (KiB)"
 	},
 	"zoom_warning": {
 		"message": "Nastavite povečavo v Chromovem meniju na 100 %"

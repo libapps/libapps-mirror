@@ -2,17 +2,17 @@
 	"backup_prefs": {
 		"message": "Save backup"
 	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Forget a known SSH host."
+	"cache_pin_prompt": {
+		"message": "Cache the PIN for this SSH session? (Y/N):"
 	},
-	"cmd_ssh_help": {
-		"message": "The |username| and |hostname| parameters are required; |port| is optional. If port is not specified, it defaults to 22."
+	"connecting": {
+		"message": "Connecting to $1…"
 	},
 	"connection_dialog_name": {
-		"message": "Connection Dialogue"
+		"message": "Connection dialogue"
 	},
 	"console_crosh_options_notice": {
-		"message": "Did you know that there is a dedicated options page?\nNo need to modify 'term_' directly anymore!\nPress $1 to open it, or click:\n$2"
+		"message": "Did you know that there is a dedicated options page?\nNo need to modify 'term_' directly anymore.\nPress $1 to open it, or click:\n$2"
 	},
 	"console_nassh_options_notice": {
 		"message": "Did you know that there is a dedicated options page?\nNo need to modify 'term_' directly anymore.\n$1"
@@ -20,8 +20,92 @@
 	"disconnect_message": {
 		"message": "NaCl plug-in exited with status code $1."
 	},
+	"faq_menu_label": {
+		"message": "FAQs"
+	},
 	"hterm_loading_resource_start": {
-		"message": "Loading $1 …"
+		"message": "Loading $1…"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Background colour"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Backspace key behaviour"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Initial colour palette"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Ctrl+C copy behaviour"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ctrl++/-/0 zoom behaviour"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Ctrl+V paste behaviour"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Text cursor colour"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian ambiguous use two columns"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Bold text behaviour"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Use bright colours with bold text"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Text colour"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Home/End key scroll behaviour"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Use default OS keyboard bindings/shortcuts"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Mouse right-clicks paste content"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Page Up/Down key scroll behaviour"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Alt+1..9 switch tab behaviour"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Ctrl+N new window behaviour"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Ctrl+1..9 switch tab behaviour"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ctrl+T new tab behaviour"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab switch tab behaviour"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Ctrl+W close tab behaviour"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Meta+1..9 switch tab behaviour"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Meta+V paste behaviour"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Allow drag and drop to paste"
+	},
+	"hterm_popup_inline_image": {
+		"message": "Inline images"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "Inline images disabled"
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "If set, undoes the Chrome OS Alt+Backspace->Delete remap, so that Alt+Backspace is indeed Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Select an AltGr detection heuristic.\n\n'null': Autodetect based on navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Disable any AltGr-related munging.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
@@ -32,8 +116,11 @@
 	"hterm_pref_background_position": {
 		"message": "CSS value of the background image position.\n\nFor example:\n  10% 10%\n  centre"
 	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "If true, the backspace key will send BS ('\\x08', aka ^H). Otherwise the backspace key will send '\\x7f'."
+	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "Override colours in the default palette.\n\nThis can be specified as an array or an object. If specified as an object it is assumed to be a sparse array, where each property is a numeric index into the colour palette.\n\nValues can be specified as almost any CSS colour value. This includes #RGB, #RRGGBB, rgb(...), rgba(...) and any colour names that are also part of the standard X11 rgb.txt file.\n\nYou can use 'null' to specify that the default value should not be changed. This is useful for skipping a small number of indices when the value is specified as an array.\n\nFor example, these set both colour index 1 to blue:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "Override colours in the default palette.\n\nThis can be specified as an array or an object. If specified as an object, it is assumed to be a sparse array, where each property is a numeric index into the colour palette.\n\nValues can be specified as almost any CSS colour value. This includes #RGB, #RRGGBB, rgb(...), rgba(...) and any colour names that are also part of the standard X11 rgb.txt file.\n\nYou can use 'null' to specify that the default value should be not be changed. This is useful for skipping a small number of indices when the value is specified as an array.\n\nFor example, these both set colour index 1 to blue:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_cursor_blink_cycle": {
 		"message": "The text cursor blink rate in milliseconds.\n\nA two element array, the first of which is how long the text cursor should be on, the second is how long it should be off."
@@ -53,23 +140,53 @@
 	"hterm_pref_enable_bold_as_bright": {
 		"message": "If true, use bright colours (8-15 on a 16-colour palette) for any text with the bold attribute. False otherwise."
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Whether the 'Erase saved lines' function (mode 3) of the 'Erase display' command (CSI-J) may clear the terminal scrollback buffer.\n\nEnabling this by default is safe."
+	},
 	"hterm_pref_foreground_color": {
 		"message": "The foreground colour for text with no other colour attributes."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
 		"message": "Whether to automatically hide the mouse cursor when typing. By default, auto-detect whether the platform/OS handles this.\n\nNote: Some operating systems may override this setting and thus you might not always be able to disable it."
 	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Whether common OS keyboard bindings should be respected instead of always capturing for HTerm's own use."
+	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Mouse paste button, or null to auto-detect.\n\nFor auto-detect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the native window manager should paste via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: This will handle left- & right-handed mice correctly."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Paste on right mouse button clicks.\n\nThis option is independent of the 'mouse-paste-button' setting.\n\nNote: This will handle left- & right-handed mice correctly."
+		"message": "Paste on right mouse button clicks.\n\nThis option is independent of the 'mouse-paste-button' setting.\n\nNote: This will handle left- and right-handed mice correctly."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Whether Alt+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard shortcuts. When not running in a tab, it's better to send these keys to the host so that they can be used in Vim or Emacs.\n\nIf true, Alt+1..9 will be handled by the browser. If false, Alt+1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Whether Ctrl+N is passed to the browser.\n\nIf true, Ctrl+N will be handled by the browser as the 'new window' keyboard shortcut. If false, Ctrl+N will be sent to the host."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Whether Ctrl+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard shortcuts. When not running in a tab, it's better to send these keys to the host so that they can be used in Vim or Emacs.\n\nIf true, Ctrl+1..9 will be handled by the browser. If false, Ctrl+1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Whether Ctrl+T is passed to the browser.\n\nIf true, Ctrl+T will be handled by the browser as the 'new tab' keyboard shortcut. If false, Ctrl+T will be sent to the host."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Whether Ctrl+Tab and Ctrl+Shift+Tab are passed to the browser.\n\nIf true, Ctrl+Tab and Ctrl+Shift+Tab will be handled by the browser as the 'next/previous tab' keyboard shortcut. If false, the Tab key is sent to the host without Ctrl or Shift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Whether Ctrl+W is passed to the browser.\n\nIf true, Ctrl+W will be handled by the browser as the 'close tab' keyboard shortcut. If false, Ctrl+W will be sent to the host."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Whether Meta+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard shortcuts. When not running in a tab, it's better to send these keys to the host so that they can be used in Vim or Emacs.\n\nIf true, Meta+1..9 will be handled by the browser. If false, Meta+1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "If true, drag and dropped text will paste into terminal.\nIf false, dropped text will be ignored."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
 		"message": "When using the alternative screen buffer, and DECCKM (Application Cursor Keys) is active, mouse wheel scroll events will emulate arrow keys.\n\nIt can be temporarily disabled by holding the Shift key.\n\nThis frequently comes up when using pagers (less), reading man pages or text editors (vi/nano) or using screen/tmux."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Whether to use the default browser/OS's copy behaviour.\n\nAllow the browser/OS to handle the copy event directly, which might improve compatibility with some systems (where copying doesn't work at all), but makes the text selection less robust.\n\nFor example, long lines that were automatically line wrapped will be copied with the new lines still in them."
+		"message": "Whether to use the default browser/OS's copy behaviour.\n\nAllow the browser/OS to handle the copy event directly which might improve compatibility with some systems (where copying doesn't work at all), but makes the text selection less robust.\n\nFor example, long lines that were automatically line wrapped will be copied with the newlines still in them."
 	},
 	"hterm_pref_word_break_match_left": {
 		"message": "Regular expression to halt matching to the left (start) of a selection.\n\nNormally this is a character class to reject specific characters.\nWe allow '~' and '.' by default as paths frequently start with those."
@@ -78,10 +195,34 @@
 		"message": "Appearance (fonts, colours, images)"
 	},
 	"hterm_title_pref_copypaste": {
-		"message": "Copy & paste"
+		"message": "Copy and paste"
+	},
+	"import_link_label": {
+		"message": "Import…"
+	},
+	"licenses": {
+		"message": "Licences"
+	},
+	"licenses_expand_link": {
+		"message": "show licence"
+	},
+	"licenses_title": {
+		"message": "Open source licences"
+	},
+	"loading_label": {
+		"message": "Loading…"
 	},
 	"mount_button_label": {
 		"message": "SFTP mount"
+	},
+	"nasftp_cmd_color": {
+		"message": "colour"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Toggle colour usage"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Canonicalise paths"
 	},
 	"nassh_product_name": {
 		"message": "Secure Shell"
@@ -92,11 +233,38 @@
 	"notify_copy": {
 		"message": "Selection copied"
 	},
+	"open_as_window_tip": {
+		"message": "[Pro Tip] Use 'Open as window' or 'Fullscreen' to prevent Ctrl+W from closing your terminal!\n[Pro Tip] See $1 for more information."
+	},
 	"plugin_loading": {
-		"message": "Loading NaCl plug-in..."
+		"message": "Loading NaCl plug-in…"
+	},
+	"preferences_header_ssh_files": {
+		"message": "SSH files"
+	},
+	"preferences_header_terminal": {
+		"message": "Terminal settings"
+	},
+	"preferences_header_uri": {
+		"message": "URI handlers"
+	},
+	"protocol_register_explain": {
+		"message": "The button below will attempt to register handlers for all protocols that we support. For example, this allows us to handle ssh:// links directly. A prompt will be displayed by the browser for each protocol, so please confirm/accept each one as it is shown. If no prompts are shown, please see the next section for troubleshooting tips."
+	},
+	"protocol_register_explain_settings": {
+		"message": "If we've already registered handlers, or previous registration attempts were denied, then no further prompts will be displayed. Please open the dialogue below, then check the registered handler settings in the ssh/sftp/etc. sections. If this program is blocked, you can delete those settings which will allow you to retry registration. If this program is already registered, but it isn't set as the default handler, you can change the default handler too."
+	},
+	"protocol_register_options_link": {
+		"message": "Protocol register"
+	},
+	"read_size_label": {
+		"message": "Read size (KB)"
 	},
 	"reconnect_message": {
 		"message": "(R)econnect, (C)hoose another connection or E(x)it?"
+	},
+	"relay_retry": {
+		"message": "Retrying…"
 	},
 	"restore_prefs": {
 		"message": "Restore backup"
@@ -107,19 +275,109 @@
 	"terminal_clear_menu_label": {
 		"message": "Terminal clear"
 	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI colours"
+	},
+	"terminal_name_pref_color": {
+		"message": "Colour"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Set colours for the default palette."
+	},
 	"terminal_reset_menu_label": {
 		"message": "Terminal reset"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Are you sure that you want to reset the theme to its defaults?"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Colour 0: Black"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Colour 1: Red"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Colour 10: Bright Green"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Colour 11: Bright Yellow"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Colour 12: Bright Blue"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Colour 13: Bright Magenta"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Colour 14: Bright Cyan"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Colour 15: Bright White"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Colour 2: Green"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Colour 3: Yellow"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Colour 4: Blue"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Colour 5: Magenta"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Colour 6: Cyan"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Colour 7: White"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Colour 8: Bright Black"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Colour 9: Bright Red"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Behaviour"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Keyboard and mouse"
+	},
+	"tip_12": {
+		"message": "Use Yubikeys and other smart cards for SSH authentication: https://goo.gl/Hu2o3v"
 	},
 	"tip_14": {
 		"message": "Holding Ctrl (Cmd on macOS) while right-clicking brings up a context menu."
 	},
+	"tip_4": {
+		"message": "Chrome OS can mount file systems via SFTP and browse via the Files app. Use 'SFTP mount' instead of 'Connect'."
+	},
 	"tip_6": {
 		"message": "Colour your output/prompt using basic 16 colours & 256 colours & full 24-bit colours: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Copy to your clipboard from Emacs/Vim/etc. using OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Chat with fellow HTerm/Secure Shell users via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Found a bug? Want to request a new feature? Let us know: https://goo.gl/vb94JY"
 	},
 	"unexpected_error": {
 		"message": "An unexpected error occurred; please check the JavaScript console for more details."
 	},
 	"welcome_faq": {
-		"message": "Answers to frequently asked questions: $1 (ctrl+click on links to open)"
+		"message": "Answers to frequently asked questions: $1 (Ctrl+Click on links to open)"
+	},
+	"welcome_tip_of_day": {
+		"message": "Random pro tip #$1: $2"
+	},
+	"write_size_label": {
+		"message": "Write size (KB)"
+	},
+	"zoom_warning": {
+		"message": "Please set Chrome menu->Zoom to 100%"
 	}
 }

@@ -3,70 +3,64 @@
 		"message": "מערכת הקבצים כבר נטענה!"
 	},
 	"backup_prefs": {
-		"message": "שמור עותק לגיבוי"
+		"message": "שמירת עותק לגיבוי"
 	},
 	"bad_destination": {
 		"message": "לא ניתן לנתח יעד: $1"
 	},
 	"before_unload": {
-		"message": "סגירת כרטיסייה זו תנתק את ההפעלה הנוכחית."
+		"message": "סגירת כרטיסייה זו תנתק את הסשן הנוכחי."
 	},
 	"cache_pin_prompt": {
-		"message": "‏לשמור את הקוד של הסשן הזה במטמון? (y/N):"
+		"message": "האם לשמור את קוד האימות של סשן ה-SSH הזה במטמון? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "ביטול"
 	},
+	"changelog": {
+		"message": "יומן_שינויים"
+	},
 	"clear_known_hosts_menu_label": {
-		"message": "‏ניקוי מארחים מוכרים של SSH"
+		"message": "ניקוי מארחים מוכרים של SSH"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "פקודה זו מציגה תפריט של מארחים ידועים ומבקשת מהמארח לשכוח."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "‏שכח מארח ssh ידוע."
-	},
-	"cmd_ssh_help": {
-		"message": "‏הפרמטרים |username| ו-|hostname| נדרשים. הפרמטר |port| אופציונלי. אם היציאה לא מצוינת, ברירת המחדל היא 22."
-	},
-	"cmd_ssh_title": {
-		"message": "‏פותח הפעלת SSH חדשה."
+	"clear_label": {
+		"message": "ניקוי"
 	},
 	"command_complete": {
 		"message": "הפקודה $1 הסתיימה והחזירה את קוד הסטטוס $2."
 	},
 	"command_not_supported": {
-		"message": "‏הפקודה $1 לא נתמכת בגירסה הזו של Chrome"
+		"message": "הפקודה $1 לא נתמכת בגרסה הזו של Chrome"
 	},
 	"command_startup_failed": {
 		"message": "פתיחת $1 נכשלה: $2"
 	},
 	"connect_button_label": {
-		"message": "התחבר"
+		"message": "התחברות"
 	},
 	"connect_or_exit_message": {
-		"message": "‏הקש על C כדי לבחור חיבור אחר או על X כדי לצאת."
+		"message": "יש להקיש על C כדי לבחור חיבור אחר או על X כדי לצאת."
 	},
 	"connecting": {
-		"message": "מתחבר אל $1..."
+		"message": "מתבצעת התחברות אל $1..."
 	},
 	"connection_dialog_name": {
 		"message": "תיבת דו-שיח לחיבור"
 	},
 	"console_crosh_options_notice": {
-		"message": "‏ידעת שיש דף אפשרויות ייעודי?\nכבר אין צורך לשנות את term_‎ באופן ישיר!\nמקישים על $1 כדי לפתוח אותו, או לוחצים על:\n$2"
+		"message": "ידעת שיש דף אפשרויות ייעודי?\nכבר אין צורך לשנות את 'term_‎' באופן ישיר!\nאפשר להקיש על $1 כדי לפתוח אותו, או ללחוץ על:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "‏ידעת שיש דף אפשרויות ייעודי?\nכבר אין צורך לערוך 'term_' באופן ישיר!\n$1"
+		"message": "ידעת שיש דף אפשרויות ייעודי?\nכבר אין צורך לערוך את 'term_‎' באופן ישיר!\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},
 	"delete_button_label": {
-		"message": "מחק"
+		"message": "מחיקה"
 	},
 	"disconnect_message": {
-		"message": "‏פלאגין NaCl נסגר והחזיר את קוד הסטטוס $1."
+		"message": "פלאגין NaCl נסגר והחזיר את קוד הסטטוס $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -81,22 +75,22 @@
 		"message": "תיאור"
 	},
 	"field_description_placeholder": {
-		"message": "‏username@hostname או טקסט חופשי"
+		"message": "username@hostname או טקסט חופשי"
 	},
 	"field_hostname_aria_label": {
-		"message": "שם מארח"
+		"message": "שם_מארח"
 	},
 	"field_hostname_placeholder": {
-		"message": "שם מארח"
+		"message": "שם_מארח"
 	},
 	"field_mount_path_placeholder": {
 		"message": "נתיב ברירת המחדל הוא ספריית הבית של המשתמש"
 	},
 	"field_nassh_options_aria_label": {
-		"message": "‏אפשרויות של שרת ממסר SSH"
+		"message": "אפשרויות של שרת ממסר SSH"
 	},
 	"field_nassh_options_placeholder": {
-		"message": "‏אפשרויות של שרת ממסר SSH"
+		"message": "אפשרויות של שרת ממסר SSH"
 	},
 	"field_port_aria_label": {
 		"message": "יציאה"
@@ -120,7 +114,7 @@
 		"message": "שגיאה: לא ניתן היה לטעון את הפרופיל $1:\n$2"
 	},
 	"hterm_announce_current_screen_header": {
-		"message": "‏גללת ‎$1%‎,"
+		"message": "גללת ‎$1%‎,"
 	},
 	"hterm_button_allow_always": {
 		"message": "אני רוצה לאפשר תמיד"
@@ -132,16 +126,229 @@
 		"message": "חסימה"
 	},
 	"hterm_button_page_down": {
-		"message": "הזזת הדף למטה"
+		"message": "גלילה כלפי מטה"
 	},
 	"hterm_button_page_up": {
-		"message": "הזזת הדף למעלה"
+		"message": "גלילה של דף אחד כלפי מעלה"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "טעינת $1 נכשלה"
 	},
 	"hterm_loading_resource_start": {
 		"message": "טעינת $1 מתבצעת..."
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "מתן אפשרות להציג תמונות מוטבעות"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "הקשה על Alt+Backspace היא הקשה על Meta+Backspace"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "מצב המקש AltGr"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "התייחסות למקש Alt כמקש Meta"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "טיפול במקשי הצירוף של המקש Alt"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "כתובת צליל ההתראה (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "צבע רקע"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "תמונת רקע"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "מיקום תמונת הרקע"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "גודל תמונת הרקע"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "ההתנהגות של המקש Backspace"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "ביטולי מפות תווים"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "ניקוי אוטומטי של בחירת הטקסט"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "סגירת חלון ביציאה"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "לוח צבעים ראשוני"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "העתקה אוטומטית של תוכן שנבחר"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "התנהגות ההעתקה באמצעות Ctrl+C"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "ההתנהגות של שינוי המרחק מהתצוגה באמצעות Ctrl++/-/0"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "התנהגות ההדבקה באמצעות Ctrl+V"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "הבהוב הסמן"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "קצב ההבהוב של הסמן"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "הצבע של סמן הטקסט"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "הצורה של סמן הטקסט"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "יצירת הודעות בשולחן העבודה לצלילי התראה"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "תווי East Asian Ambiguous משתמשים בשתי עמודות"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "תמיכה בתווי בקרה מקבוצת C1 שאינם בפורמט UTF-8"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "הפעלה של טקסט מהבהב"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "התנהגות הטקסט המודגש"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "הצגת טקסט מודגש בצבעים בהירים"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "הצגת התראה כשמעתיקים תוכן"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "מתן אפשרות לכתוב בלוח מרחוק"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "מתן אפשרות למחוק את מאגר הגלילה אחורה (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "מתן אפשרות לשנות את קצב ההבהוב של סמן הטקסט"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "הצגת המידות של הטרמינל במהלך שינוי גודל"
+	},
+	"hterm_name_pref_environment": {
+		"message": "משתני סביבה"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "משפחת גופני טקסט"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "גודל הגופן של הטקסט"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "החלקת הגופנים של הטקסט"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "צבע טקסט"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "הסתרת הסמן של העכבר במהלך הקלדה"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "התנהגות הגלילה של המקשים Home/End"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "קישורי מקשים/מקשי קיצור"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "שימוש בקיצורי/קישורי המקשים של ה-OS שמוגדרים כברירת מחדל"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "מקשי המדיה הם מקשי פונקציות"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "התייחסות למקשי הצירוף של המקש Meta"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "הדבקה באמצעות לחצן העכבר"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "הדבקת תוכן על ידי לחיצה ימנית על העכבר"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "התנהגות הגלילה באמצעות המקשים Page Up/Page Down"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "ההתנהגות של החלפת כרטיסיות באמצעות Alt+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "ההתנהגות של פתיחת חלון חדש באמצעות Ctrl+N"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "התנהגות החלפת הכרטיסייה באמצעות Meta+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "ההתנהגות של פתיחת כרטיסייה חדשה באמצעות Ctrl+T"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "התנהגות החלפת הכרטיסייה באמצעות Ctrl+Tab"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "ההתנהגות של סגירת כרטיסיות באמצעות Ctrl+W"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "ההתנהגות של החלפת כרטיסיות באמצעות Meta+1..9"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "התנהגות ההדבקה באמצעות Meta+V"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "מתן אפשרות לגרור ולשחרר כדי להדביק"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "קבלת קידוד"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "גלילה לתחתית אחרי הקשה על מקש"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "גלילה לתחתית אחרי פלט חדש"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "אמולציה של מקשי החיצים באמצעות גלגל הגלילה"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "מכפיל מהירות של גלגל הגלילה של העכבר"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "הצגת סרגל הגלילה"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "הדבקה באמצעות Shift+Insert"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "קידוד טרמינל"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "הדפדפן מטפל בהעתקת טקסט"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "CSS בהתאמה אישית (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "CSS בהתאמה אישית (טקסט מוטבע)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "עצירה אוטומטית של הבחירה (לשמאל)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "תווי גלישת מילים"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "עצירת הבחירה האוטומטית (לימין)"
 	},
 	"hterm_popup_inline_image": {
 		"message": "תמונות מוטבעות"
@@ -150,40 +357,40 @@
 		"message": "תמונות מוטבעות הושבתו"
 	},
 	"hterm_pref_allow_images_inline": {
-		"message": "בוחרים אם לאפשר למארח המרוחק להציג תמונות במסוף.\n\nברירת המחדל היא להציג הודעה עד שנבחרת אפשרות."
+		"message": "העדפה זו קובעת אם לאפשר למארח המרוחק להציג תמונות בטרמינל.\n\nברירת המחדל היא להציג הודעה עד שנבחרת אפשרות."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "‏אם המדיניות מוגדרת, היא מבטלת את המיפוי מחדש ב-Chrome OS של ‏Alt+Backspace->DEL, כך ש-Alt+Backspace יבצע את הפעולה הרגילה של Alt+Backspace."
+		"message": "אם ההעדפה מוגדרת, היא מבטלת את המיפוי מחדש ב-Chrome OS של ‏Alt+Backspace->Delete, כך שהקשה על Alt+Backspace גורמת לביצוע הפעולה הרגילה שמשויכת ל-Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "‏בחירת היוריסטיקה לזיהוי AltGr.\n\n'null': זיהוי אוטומטי מבוסס על navigator.language:\n      'en-us' => 'none', אחרת => 'right-alt'\n'none': השבתת munging שקשור ל-AltGr.\n'ctrl- alt': ההנחה היא שהמשמעות של Ctrl+Alt היא AltGr.\n'left-alt': ההנחה היא שהמשמעות של Alt שמאלי היא AltGr.\n'right-alt': ההנחה היא שהמשמעות של Alt ימני היא AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
-		"message": "‏אם המקש Alt יפעל כמקש Meta או כמקש Alt נפרד."
+		"message": "אם המקש Alt יפעל כמקש Meta או כמקש Alt ייחודי."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "‏קביעת אופן הטיפול במקש Alt.\n\n  escape: שליחת קידומת ESC.\n  ‎8-bit: הוספת 128 לתו ללא shift כמו ב-xterm.\n  browser-key: המתנה לאירוע ההקשה כדי לבדוק את תגובת הדפדפן (התכונה לא פועלת כמו שצריך בפלטפורמות שבהן הדפדפן מבצע פעולת ברירת מחדל בחלק מרצפי Alt)."
+		"message": "העדפה זו קובעת את אופן הטיפול במקש Alt.\n\n  escape: שליחה של תחילית ESC.\n  ‎8-bit: הוספת 128 לתו שהוקלד כמו ב-xterm.\n  browser-key: המתנה לאירוע ההקשה כדי לבדוק את תגובת הדפדפן. (התכונה לא פועלת כראוי בפלטפורמות שבהן הדפדפן מבצע פעולת ברירת מחדל בחלק מרצפי Alt)."
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "כתובת האתר של צליל הפעמון במסוף. כשהמחרוזת ריקה לא מושמע צליל פעמון."
+		"message": "כתובת ה-URL של צליל הפעמון בטרמינל. יש להשאיר אותה ריקה כדי לא להשמיע צליל פעמון."
 	},
 	"hterm_pref_background_color": {
 		"message": "צבע הרקע של טקסט ללא מאפייני צבע אחרים."
 	},
 	"hterm_pref_background_image": {
-		"message": "‏ערך CSS של תמונת הרקע. כשהמחרוזת ריקה אין תמונה.\n\nלדוגמה:\n  url(https://goo.gl/anedTK)‎\n  linear-gradient(top bottom, blue, red)‎"
+		"message": "ערך CSS של תמונת הרקע. יש להשאיר אותו ריק כדי לא להציג תמונה.\n\nלדוגמה:\n  url(https://goo.gl/anedTK)‎\n  linear-gradient(top bottom, blue, red)‎"
 	},
 	"hterm_pref_background_position": {
-		"message": "‏ערך CSS של מיקום תמונת הרקע.\n\nלדוגמה:\n  10% 10%\n  center"
+		"message": "ערך CSS של מיקום תמונת הרקע.\n\nלדוגמה:\n  10% 10%\n  center"
 	},
 	"hterm_pref_background_size": {
-		"message": "‏ערך CSS של הגודל של תמונת הרקע."
+		"message": "ערך CSS של גודל תמונת הרקע."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "‏אם הערך הוא true, הקשה על Backspace צריכה לשלוח את הפקודה BS ‏('‎\\x08', ידוע גם כ-‎^H). אחרת, הקשה על Backspace צריכה לשלוח את הפקודה '‎'\\x7f."
+		"message": "אם הערך הוא True, הקשה על Backspace תשלח את הפקודה BS ‏('‎\\x08', ידוע גם כ-‎^H). אחרת, הקשה על Backspace תשלח את הפקודה '‎'\\x7f."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "‏מצוין כאובייקט. זוהי מטריצה דלילה שבה כל נכס הוא קוד מערכת התווים והערך הוא אובייקט שהוא מטריצה דלילה בעצמו. במטריצה דלילה הזו, כל תכונה היא התו שהתקבל והערך הוא התו המוצג.\n\nלדוגמה:\n‎ {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}‎"
+		"message": "מצוין כאובייקט. זוהי מטריצה דלילה שבה כל נכס הוא קוד מערכת התווים והערך הוא אובייקט שהוא מטריצה דלילה בעצמו. במטריצה דלילה הזו, כל תכונה היא התו שהתקבל והערך הוא התו המוצג.\n\nלדוגמה:\n‎{ \"0\": {‎\n  ‎\"+\": \"\\u2192\",‎\n  ‎\",\": \"\\u2190\",‎\n  ‎\"-\": \"\\u2191\",‎\n  ‎\".\": \"\\u2193\",‎\n  ‎\"0\": \"\\u2588\"‎\n‎} }‎"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "האם לנקות את הבחירה אחרי העתקה."
@@ -192,67 +399,76 @@
 		"message": "אם לסגור את החלון כשביצוע הפקודה מסתיים."
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "‏עקיפת הצבעים בלוח הצבעים המוגדר כברירת מחדל.\n\nאפשר לציין זאת כמערך או כאובייקט. אם הציון הוא כאובייקט, ההנחה היא שזו מטריצה דלילה, שבה כל נכס הוא אינדקס מספרי בלוח הצבעים.\n\nהערכים יכולים להיות כמעט כל ערך צבע ב-CSS, כולל ‎#RGB‏, ‎#RRGGBB‏, ‎rgb(...)‎‏, ‎rgba(...)‎ וכל שם צבע שהוא חלק מקובץ X11 rgb.txt רגיל.\n\nאפשר להשתמש ב-'null' כדי לציין שאין לשנות את ערך ברירת המחדל. האפשרות זו שימושית כשצריך לדלג על מספר קטן של אינדקסים כשהערך מצוין כמערך.\n\nלדוגמה, כך אינדקס הצבעים 1 מוגדר לכחול:\n  ‎{1: \"#0000ff\"‎‎}‎\n‎‎‎‎  [null, \"#0000ff\"]‎"
+		"message": "עקיפת הצבעים בלוח הצבעים המוגדר כברירת מחדל.\n\nאפשר לציין זאת כמערך או כאובייקט. אם הציון הוא כאובייקט, ההנחה היא שזו מטריצה דלילה, שבה כל נכס הוא אינדקס מספרי בלוח הצבעים.\n\nהערכים יכולים להיות כמעט כל ערך צבע ב-CSS, כולל ‎#RGB‏, ‎#RRGGBB‏, ‎rgb(...)‎‏, ‎rgba(...)‎ וכל שם צבע שהוא חלק מקובץ X11 rgb.txt רגיל.\n\nאפשר להשתמש ב-'null' כדי לציין שאין לשנות את ערך ברירת המחדל. האפשרות הזו שימושית כשצריך לדלג על מספר קטן של אינדקסים כשהערך מצוין כמערך.\n\nלדוגמה, כך אינדקס הצבעים 1 מוגדר לכחול:\n  ‎{1: \"#0000ff\"‎‎}‎\n‎‎‎‎  [null, \"#0000ff\"]‎"
 	},
 	"hterm_pref_copy_on_select": {
-		"message": "העתקה אוטומטית של הפריטים שנבחרו באמצעות העכבר אל לוח העריכה."
+		"message": "העתקה אוטומטית של הפריטים שנבחרו באמצעות העכבר אל הלוח."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "‏Ctrl+C מעתיק אם הערך הוא true, שליחת ‎^C למארח אם הערך הוא false.\nCtrl+Shift+C שולח ‎^C למארח אם הערך הוא true, מעתיק אם הערך הוא false."
+		"message": "Ctrl+C מעתיק אם הערך הוא True. אם הערך הוא False, נשלח ‎^C אל המארח.\nCtrl+Shift+C שולח ‎^C למארח אם הערך הוא True. אם הערך הוא False, מתבצעת העתקה."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "‏אם הערך הוא true, הקשה על ‏Ctrl ופלוס/מינוס/אפס משנה את המרחק מהתצוגה.\nאם הערך הוא false, ‏הקשה על Ctrl, ‏Shift ופלוס/מינוס/אפס משנה את המרחק מהתצוגה, על Ctrl ומינוס מבצעת שליחה של ‎^_‎, ועל Ctrl ופלוס/אפס לא מבצעת אף פעולה."
+		"message": "אם ההעדפה מקבלת את הערך True, הקשה על Ctrl+מקש הפלוס, Ctrl+מקש המינוס או Ctrl+אפס שולטת בשינוי המרחק מהתצוגה.\nאם ההעדפה מקבלת את הערך False, ‏הקשה על Ctrl+Shift+מקש הפלוס, Ctrl+Shift+מקש המינוס או Ctrl+Shift+אפס שולטת בשינוי המרחק מהתצוגה, הקשה על Ctrl+מקש המינוס גורמת לשליחת ‎^_‎ ולהקשה על Ctrl+מקש הפלוס או Ctrl+אפס אין השפעה."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "‏Ctrl+V מדביק אם הערך הוא true, שליחת ‎^V למארח אם הערך הוא false.\nCtrl+Shift+V שולח ‎^V למארח אם הערך הוא true, מדביק אם הערך הוא false."
+		"message": "Ctrl+V מדביק אם הערך הוא true, שליחת ‎^V למארח אם הערך הוא false.\nCtrl+Shift+V שולח ‎^V למארח אם הערך הוא true, מדביק אם הערך הוא false."
 	},
 	"hterm_pref_cursor_blink": {
-		"message": "‏קביעה אם סמן הטקסט מהבהב כברירת מחדל. אפשר להחליף את המצב בזמן הריצה באמצעות רצפים של escape במסוף."
+		"message": "העדפה זו קובעת אם סמן הטקסט מהבהב כברירת מחדל. אפשר להחליף את המצב בזמן הריצה באמצעות רצפים של סימון בתו הבריחה (escape) בטרמינל."
 	},
 	"hterm_pref_cursor_blink_cycle": {
-		"message": "קצב ההבהוב של סמן הטקסט, באלפיות שנייה.\n\nמערך בן שני רכיבים: הראשון הוא משך הזמן שבו הסמן מוצג והשני הוא משך הזמן שבו הסמן  לא מוצג."
+		"message": "קצב ההבהוב של סמן הטקסט, באלפיות שנייה.\n\nמערך בן שני רכיבים: הראשון הוא משך הזמן שבו הסמן מוצג והשני הוא משך הזמן שבו הסמן לא מוצג."
 	},
 	"hterm_pref_cursor_color": {
 		"message": "הצבע של סמן הטקסט כשהוא גלוי."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "הצורה של סמן הטקסט כשהוא גלוי. ניתן לשנות זאת בזמן הריצה באמצעות רצפי escape בטרמינל."
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "‏אם הערך הוא true, פעמוני המסוף ישמיעו ברקע הודעת אינטרנט. https://www.w3.org/TR/notifications/‎\n\nכדי להציג הודעות יש צורך באישור המשתמש. כשהאפשרות הזו מוגדרת עם הערך true,‏ hterm ינסה לבקש מהמשתמש הרשאה במקרה הצורך. ייתכן שהדפדפנים לא יציגו את בקשת ההרשאה הזו אם היא לא הופעלה כתוצאה מפעולה של המשתמש.\n\nלתוספי Chrome עם ההרשאה \"notifications\" יש הרשאה להציג הודעות."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "אם תווים מזרח-אסייתיים בעלי מספר משמעויות יהיו ברוחב של שתי עמודות."
+		"message": "העדפה זו קובעת אם תווי East Asian Ambiguous יהיו ברוחב של שתי עמודות."
 	},
 	"hterm_pref_enable_8_bit_control": {
-		"message": "‏יש לציין את הערך true כדי להפעיל תווי בקרה ב-‎8-bit, ו-false כדי להתעלם מהם.\n\nניישם את גירסאות תווי הבקרה האלה בשני בייט, ללא קשר להגדרה הזו."
+		"message": "יש לציין את הערך true כדי להפעיל תווי בקרה ב-‎8 ביט, ויש לציין false כדי להתעלם מהם.\n\nניישם את גרסאות תווי הבקרה האלה מסוג שני בייט, ללא קשר להגדרה הזו."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "‏אם הוגדרה כ-True, יש ליישם את מאפיין ההבהוב. אם הוגדרה כ-False, יש להתעלם ממנה."
+		"message": "אם הוגדרה כ-True, יש ליישם את מאפיין ההבהוב. אם הוגדרה כ-False, יש להתעלם ממנה."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "‏אם הוגדרה כ-True יש להשתמש בגופן מודגש עם המאפיין 'מודגש/בהיר'. אם הוגדרה כ-False יש להשתמש בגופן רגיל. קביעת הערך null תבצע זיהוי אוטומטי."
+		"message": "אם העדפה זו קיבלה את הערך True יש להשתמש בגופן מודגש עם המאפיין 'מודגש/בהיר'. אם היא קיבלה את הערך False יש להשתמש בגופן רגיל. קביעת הערך Null תבצע זיהוי אוטומטי."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "‏אם הוגדרה כ-True, יש להשתמש בצבעים בהירים (8 עד 15 בלוח עם 16 צבעים) לכל טקסט עם מאפיין ההדגשה. אחרת, צריך להזין את הערך False."
+		"message": "אם העדפה זו קיבלה את הערך True, יש להשתמש בצבעים בהירים (8 עד 15 בלוח עם 16 צבעים) לכל טקסט עם מאפיין ההדגשה. אחרת, צריך להזין את הערך False."
 	},
 	"hterm_pref_enable_clipboard_notice": {
-		"message": "בחירה אם להציג הודעה במסוף כשהמארח כותב אל לוח העריכה."
+		"message": "העדפה זו קובעת אם להציג הודעה בטרמינל כשהמארח כותב אל הלוח."
 	},
 	"hterm_pref_enable_clipboard_write": {
-		"message": "‏מתן הרשאה למארח המרוחק לכתוב ישירות אל לוח העריכה של המערכת המקומית.\nגישת קריאה אף פעם לא מוענקת, ללא קשר להגדרה הזו.\n\nהאפשרות הזו משמשת לשליטה בגישה לתכונות כמו OSC-52."
+		"message": "מתן הרשאה למארח המרוחק לכתוב ישירות אל הלוח של המערכת המקומית.\nגישת קריאה אף פעם לא מוענקת, ללא קשר להגדרה הזו.\n\nהאפשרות הזו משמשת לשליטה בגישה לתכונות כמו OSC-52."
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "העדפה זו קובעת אם הפונקציה 'מחיקה של שורות שנשמרו' (מצב 3) בפקודה 'מחיקת תצוגה' (CSI-J) יכולה למחוק את מאגר הנתונים הזמני שמשמש את הטרמינל לגלילה לאחור.\n\nניתן לאפשר זאת כברירת מחדל בבטחה."
 	},
 	"hterm_pref_enable_dec12": {
-		"message": "‏יישום הניסיון של המארח לשנות את סטטוס ההבהוב של סמן הטקסט באמצעות מצב פרטיות 12 של DEC."
+		"message": "העדפה זו מיישמת את הניסיון של המארח לשנות את סטטוס ההבהוב של סמן הטקסט באמצעות DEC Private Mode 12."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "ההעדפה הזו קובעת אם להציג את המידות של הטרמינל כאשר הגודל שלו משתנה."
 	},
 	"hterm_pref_environment": {
-		"message": "משתני הסביבה הראשונים, כאובייקט."
+		"message": "הקבוצה הראשונה של משתני סביבה, כאובייקט."
 	},
 	"hterm_pref_font_family": {
-		"message": "משפחת גופנים המוגדרת כברירת מחדל בשביל טקסט המסוף."
+		"message": "משפחת גופנים המוגדרת כברירת מחדל בשביל טקסט הטרמינל."
 	},
 	"hterm_pref_font_size": {
 		"message": "גודל הגופן בפיקסלים המוגדר כברירת מחדל."
 	},
 	"hterm_pref_font_smoothing": {
-		"message": "‏תכונת CSS להחלקת גופן."
+		"message": "תכונת CSS להחלקת גופנים."
 	},
 	"hterm_pref_foreground_color": {
 		"message": "צבע החזית של טקסט ללא מאפייני צבע אחרים."
@@ -261,46 +477,64 @@
 		"message": "‏אם להסתיר באופן אוטומטי את סמן העכבר בזמן הקלדה. ברירת המחדל היא לזהות באופן אוטומטי אם הפלטפורמה או ה-OS מטפלים בזה.\n\nהערה: חלק ממערכות ההפעלה עשויות לעקוף את ההגדרה הזו, וכך ייתכן שלא יתאפשר לך תמיד להשבית אותה."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "‏אם הוגדרה כ-True, מקשי Home/End שולטים בסרגל הגלילה של המסוף. המקשים Shift+Home/Shift+End נשלחים אל המארח המרוחק. אם הוגדרה כ-False, המקשים Home/End נשלחים אל המארח המרוחק והמקשים Shift+Home/Shift+End מבצעים גלילה."
+		"message": "אם ההעדפה מקבלת את הערך True, המקשים Home או End שולטים בסרגל הגלילה בטרמינל והקשה על Shift+Home או Shift+End נשלחת אל המארח המרוחק. אם ההעדפה מקבלת את הערך False, הקשה על Home או End נשלחת אל המארח המרוחק והמקשים Shift+Home/Shift+End משמשים לצורך גלילה."
 	},
 	"hterm_pref_keybindings": {
-		"message": "‏מיפוי של צירופי המקשים לפעולות מקשים. צירופי מקשים כוללים אפס או יותר מקשי צירוף ואחריהם קוד מקש. קודי המקשים יכולים להיות מספרים עשרוניים, מספרים הקסדצימליים או מזהי מקשים. אפשר לציין פעולות מקשים כמחרוזת לשליחה אל המארח או כמזהה פעולה. הסבר מלא לגבי הפורמט זמין בכתובת https://goo.gl/LWRndr.\n\nדוגמאות לצירופי מקשים:\n{\n‎  \"Ctrl+Alt+K\": \"clearTerminal\",‎\n‎  \"Ctrl+Shift+L\": \"PASS\",‎\n‎  \"Ctrl+H\": \"'Hello World'\"‎\n}"
+		"message": "מיפוי של צירופי המקשים לפעולות מקשים. צירופי מקשים כוללים אפס או יותר מקשי צירוף ואחריהם קוד מקש. קודי המקשים יכולים להיות מספרים עשרוניים, מספרים הקסדצימליים או מזהי מקשים. אפשר לציין פעולות מקשים כמחרוזת לשליחה אל המארח או כמזהה פעולה. הסבר מלא לגבי הפורמט זמין בכתובת https://goo.gl/LWRndr.\n\nדוגמאות לצירופי מקשים:\n{\n‎  \"Ctrl+Alt+K\": \"clearTerminal\",‎\n‎  \"Ctrl+Shift+L\": \"PASS\",‎\n‎  \"Ctrl+H\": \"'Hello World'\"‎\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "ההעדפה הזו קובעת אם קיצורי המקשים הנפוצים של מערכת ההפעלה מיושמים, או ההגדרות של hterm תמיד יקבלו עדיפות."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
-		"message": "‏אם הוגדרה כ-true, מקשי מדיה מומרים לפעולות שלהן כמקשי פונקציה. אם הוגדרה כ-false, הדפדפן מטפל במקשים."
+		"message": "אם העדפה זו קיבלה את הערך True, הפעולות של מקשי המדיה יבוצעו על ידי מקשי הפונקציות המתאימים. אם היא קיבלה את הערך False, הדפדפן מטפל במקשים."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "‏שליחה של תחילית ESC בהקשה על מקש תוך כדי הקשה על מקש ה-Meta.\n\nלדוגמה, אם תכונה זו הוגדרה, הקשה על Meta+K תשלח ‎^[k כאילו שהקלדת Escape ואז k. אם היא מושבתת, יישלח רק k."
+		"message": "שליחה של תחילית ESC כשמקישים על מקש תוך כדי הקשה על מקש ה-Meta.\n\nלדוגמה, אם האפשרות הזו מופעלת, הקשה על Meta+K תשלח ‎^[k – בדומה להקלדת Escape ולאחר מכן k. אם האפשרות מושבתת, ההקשה תשלח רק k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "‏לחצן הדבקה בעכבר, או null לזיהוי אוטומטי.\n\nלזיהוי אוטומטי, נשתמש בלחצן העכבר האמצעי בשביל פלטפורמות שאינן X11 (כולל Chrome OS). ב-X11, נשתמש בלחצן העכבר הימני (כי מנהל החלונות המקורי צריך להדביק באמצעות לחצן העכבר האמצעי).\n\n0 == לחצן שמאלי (ראשי).\n1 == לחצן אמצעי (עזר).\n2 == לחצן ימני (משני).\n\nהאפשרות הזו לא תלויה בהגדרה להדבקה בלחיצה על לחצן העכבר הימני.\n\nהערה: הגדרה זה תתאים את עצמה באופן תקין לעכברים המיועדים לימניים ושמאליים."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "‏הדבקה בלחיצות על לחצן העכבר הימני.\n\nהאפשרות הזו לא תלויה בהגדרה \"mouse-paste-button\".\n\nהערה: הגדרה זה תתאים את עצמה באופן תקין לעכברים המיועדים לימניים ושמאליים."
+		"message": "הדבקה בלחיצות על לחצן העכבר הימני.\n\nהאפשרות הזו לא תלויה בהגדרה \"mouse-paste-button\".\n\nהערה: הגדרה זה תתאים את עצמה באופן תקין לעכברים המיועדים לימניים ושמאליים."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "‏אם הערך הוא True, הקשה על Page Up או Page Down מבצעת פעולת גלילה במסוף, והקשה על Shift ו-Page Up או Page Down נשלחת אל המארח המרוחק. אם הערך הוא False, הקשה על Page Up או Page Down נשלחת למארח המרוחק והקשה על Shift ו-Page Up או Page Down מבצעת פעולת גלילה."
+		"message": "אם ההעדפה מקבלת את הערך True, המקשים Page Up או Page Down שולטים בסרגל הגלילה בטרמינל והקשה על Shift+Page Up או Shift+Page Down נשלחת אל המארח המרוחק. אם ההעדפה מקבלת את הערך False, הקשה על Page Up או Page Down נשלחת למארח המרוחק וקיצורי המקשים Shift+Page Up או Shift+Page Down משמשים לצורך גלילה."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "‏בחירה אם Alt+1..9 יועברו לדפדפן.\n\nאפשרות זו שימושית כשמפעילים hterm בכרטיסיית דפדפן, כדי לא לאבד את מאיצי המקלדת \"מעבר לכרטיסייה\" של Chrome. כש-hterm לא פועל בכרטיסייה, עדיף לשלוח את המקשים האלה אל המארח כדי שניתן יהיה להשתמש בהם ב-vim או ב-emacs.\n\nאם הערך הוא True, הדפדפן יטפל בפקודות Alt+1..9. אם הערך הוא False, הפקודות‏ Alt+1..9 יישלחו למארח. אם הערך הוא null, יהיה זיהוי אוטומטי בהתאם לפלטפורמת הדפדפן ולסוג החלון."
+		"message": "ההעדפה הזו קובעת אם הקשה על Alt+1..9 מועברת לדפדפן.\n\nהאפשרות הזו שימושית כשמפעילים hterm בכרטיסיית דפדפן, כדי לא לאבד את מקשי הקיצור של פעולת ה\"מעבר לכרטיסייה\" ב-Chrome. כאשר לא מתבצעת הפעלה של hterm בכרטיסייה, עדיף לשלוח את ההקשה על המקשים האלה אל המארח כדי שניתן יהיה להשתמש בהם ב-vim או ב-emacs.\n\nאם ההעדפה מקבלת את הערך True, הקשות על המקשים Alt+1..9 עוברות לטיפול הדפדפן. אם ההעדפה מקבלת את הערך False, הקשות על Alt+1..9 נשלחות למארח. אם ההעדפה מקבלת את הערך Null, מתבצע זיהוי אוטומטי בהתאם לפלטפורמת הדפדפן ולסוג החלון."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "ההעדפה הזו קובעת אם הקשה על Ctrl+N מועברת לדפדפן.\n\nאם ההעדפה מקבלת את הערך True, הקשה על Ctrl+N תטופל על-ידי הדפדפן כהקשה על מקשי הקיצור של הפעולה \"חלון חדש\". אם ההעדפה מקבלת את הערך False, הקשה על Ctrl+N תישלח למארח."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "‏בחירה אם Ctrl+1..9 יועברו לדפדפן.\n\nאפשרות זו שימושית כשמפעילים hterm בכרטיסיית דפדפן, כדי לא לאבד את מאיצי המקלדת \"מעבר לכרטיסייה\" של Chrome. כש-hterm לא פועל בכרטיסייה, עדיף לשלוח את המקשים האלה אל המארח כדי שניתן יהיה להשתמש בהם ב-vim או ב-emacs.\n\nאם הערך הוא True, הדפדפן יטפל בפקודות Ctrl+1..9. אם הערך הוא False, הפקודות‏ Ctrl+1..9 יישלחו למארח. אם הערך הוא null, יהיה זיהוי אוטומטי בהתאם לפלטפורמת הדפדפן ולסוג החלון."
+		"message": "ההעדפה הזו קובעת אם הקשה על Ctrl+1..9 מועברת לדפדפן.\n\nהאפשרות הזו שימושית כשמפעילים hterm בכרטיסיית דפדפן, כדי לא לאבד את מקשי הקיצור של פעולת ה\"מעבר לכרטיסייה\" ב-Chrome. כאשר לא מתבצעת הפעלה של hterm בכרטיסייה, עדיף לשלוח את ההקשה על המקשים האלה אל המארח כדי שניתן יהיה להשתמש בהם ב-vim או ב-emacs.\n\nאם ההעדפה מקבלת את הערך True, הקשות על המקשים Ctrl+1..9 עוברות לטיפול הדפדפן. אם ההעדפה מקבלת את הערך False, הקשות על Ctrl+1..9 נשלחות למארח. אם ההעדפה מקבלת את הערך Null, מתבצע זיהוי אוטומטי בהתאם לפלטפורמת הדפדפן ולסוג החלון."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "ההעדפה הזו קובעת אם הקשה על Ctrl+T מועברת לדפדפן.\n\nאם ההעדפה מקבלת את הערך True, הקשה על Ctrl+T תטופל על-ידי הדפדפן כהקשה על מקש הקיצור של הפעולה \"כרטיסייה חדשה\". אם ההעדפה מקבלת את הערך False, הקשה על Ctrl+T תישלח למארח."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "ההעדפה הזו קובעת אם הקשות על Ctrl+Tab ו-Ctrl+Shift+Tab מועברות לדפדפן.\n\nאם ההעדפה מקבלת את הערך True, הקשות על Ctrl+Tab ו-Ctrl+Shift+Tab יטופלו על-ידי הדפדפן כהקשות על מקשי הקיצור של הפעולה \"מעבר לכרטיסייה הבאה/הקודמת\". אם ההעדפה מקבלת את הערך False, מקש Tab נשלח למארח בלי Ctrl או Shift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "ההעדפה הזו קובעת אם הקשה על Ctrl+W מועברת לדפדפן.\n\nאם ההעדפה מקבלת את הערך True, הקשה על Ctrl+W תטופל על-ידי הדפדפן כהקשה על מקשי הקיצור של הפעולה \"סגירת כרטיסייה\". אם ההעדפה מקבלת את הערך False, הקשה על Ctrl+W נשלחת למארח."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "‏בחירה אם Meta+1..9 יועברו לדפדפן.\n\nאפשרות זו שימושית כשמפעילים hterm בכרטיסיית דפדפן, כדי לא לאבד את מאיצי המקלדת \"מעבר לכרטיסייה\" של Chrome. כש-hterm לא פועל בכרטיסייה, עדיף לשלוח את המקשים האלה אל המארח כדי שניתן יהיה להשתמש בהם ב-vim או ב-emacs.\n\nאם הערך הוא True, הדפדפן יטפל בפקודות Meta+1..9. אם הערך הוא False, הפקודות‏ Meta+1..9 יישלחו למארח. אם הערך הוא null, יהיה זיהוי אוטומטי בהתאם לפלטפורמת הדפדפן ולסוג החלון."
+		"message": "ההעדפה הזו קובעת אם הקשה על Meta+1..9 מועברת לדפדפן.\n\nהאפשרות הזו שימושית כשמפעילים hterm בכרטיסיית דפדפן, כדי לא לאבד את מקשי הקיצור של פעולת ה\"מעבר לכרטיסייה\" ב-Chrome. כאשר לא מתבצעת הפעלה של hterm בכרטיסייה, עדיף לשלוח את ההקשה על המקשים האלה אל המארח כדי שניתן יהיה להשתמש בהם ב-vim או ב-emacs.\n\nאם ההעדפה מקבלת את הערך True, הקשות על המקשים Meta+1..9 עוברות לטיפול הדפדפן. אם ההעדפה מקבלת את הערך False, הקשות על Meta+1..9 נשלחות למארח. אם ההעדפה מקבלת את הערך Null, מתבצע זיהוי אוטומטי בהתאם לפלטפורמת הדפדפן ולסוג החלון."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "‏בחירה אם Meta+V יועבר למארח."
 	},
+	"hterm_pref_paste_on_drop": {
+		"message": "אם ההעדפה הזו מקבלת את הערך True, טקסט שגוררים ומשחררים מודבק בטרמינל.\nאם ההעדפה מקבלת את הערך False, המערכת תתעלם מטקסט שישוחרר."
+	},
 	"hterm_pref_receive_encoding": {
-		"message": "‏הגדרת הקידוד הצפוי בשביל נתונים שהתקבלו מהמארח.\nאם הקידודים לא תואמים, ייתכן שיהיו באגים בתצוגה.\n\nהערכים החוקיים הם 'utf-8' ו-'raw'."
+		"message": "הגדרת הקידוד הצפוי בשביל נתונים שהתקבלו מהמארח.\nאם הקידודים לא תואמים, ייתכן שיהיו באגים בתצוגה.\n\nהערכים החוקיים הם 'utf-8' ו-'raw'."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "בחירה אם לגלול לתחתית המסך בהקשה על מקש כלשהו."
 	},
 	"hterm_pref_scroll_on_output": {
-		"message": "בחירה אם לגלול לתחתית המסך בפלט המסוף."
+		"message": "העדפה זו קובעת אם לגלול לתחתית המסך בפלט הטרמינל."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
 		"message": "‏אם משתמשים במאגר הנתונים החלופי של המסך וההגדרה DECCKM (מקשי סמן של אפליקציה) מופעלת, אירועי גלילה עם העכבר יבצעו פעולות של מקשי חיצים.\n\nאפשר להשבית זאת באופן זמני על ידי הקשה ארוכה על Shift.\n\nמצב זה שכיח במקרים של מספור עמודים (פחות), קריאת דפים שמיועדים למשתמשים אנושיים, קריאת עורכי טקסט (vi/nano) או שימוש ב-screen/tmux."
@@ -312,22 +546,22 @@
 		"message": "מצב סרגל הגלילה האנכי."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "‏קובעת אם הקשה על Shift+Insert משמשת להדבקה או נשלחת אל המארח המרוחק."
+		"message": "ההעדפה הזו קובעת אם הקשה על Shift+Insert משמשת להדבקה או נשלחת אל המארח המרוחק."
 	},
 	"hterm_pref_terminal_encoding": {
-		"message": "‏קידודי המסוף המוגדרים כברירת מחדל (DOCS).\n\nISO-2022 מפעיל תרגומים של מפת תווים (כמו מפות גרפיקה).\nUTF-8 משבית את התמיכה בהם.\n\nמשמעות הווריאציה הנעולה היא שלא ניתן לשנות את הקידוד בזמן ריצה באמצעות רצפים של escape במסוף.\n\nמומלץ להשאיר את ההגדרה UTF-8, אלא אם מבחינים ברינדור פגום באפליקציות מדור קודם."
+		"message": "קידודי הטרמינל המוגדרים כברירת מחדל (DOCS).\n\nISO-2022 מפעיל תרגומים של מפת תווים (כמו מפות גרפיקה).\nUTF-8 משבית את התמיכה בהם.\n\nמשמעות הווריאציה הנעולה היא שלא ניתן לשנות את הקידוד בזמן ריצה באמצעות רצפים של סימון בתו הבריחה (escape) בטרמינל.\n\nמומלץ להשאיר את ההגדרה UTF-8, אלא אם מבחינים ברינדור פגום באפליקציות מדור קודם."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "‏קובעת אם להשתמש בהתנהגות ברירת המחדל להעתקה המוגדרת בדפדפן/OS.\n\nמתירה לדפדפן/מערכת הפעלה לטפל באירוע ההעתקה ישירות. מצב זה יכול לשפר את התאימות עם חלק מהמערכות (כשההעתקה לא פועלת בכלל), אבל בחירת הטקסט פחות יציבה.\n\nלדוגמה, שורות ארוכות שהתפצלו באופן אוטומטי לשורות נפרדות יועתקו עם פקודות newlines."
+		"message": "העדפה זו קובעת אם להשתמש בהתנהגות ברירת המחדל להעתקה המוגדרת בדפדפן/OS.\n\nמתירה לדפדפן/מערכת הפעלה לטפל באירוע ההעתקה ישירות. מצב זה יכול לשפר את התאימות עם חלק מהמערכות (כשההעתקה לא פועלת בכלל), אבל בחירת הטקסט פחות יציבה.\n\nלדוגמה, שורות ארוכות שהתפצלו באופן אוטומטי לשורות נפרדות יועתקו עם פקודות של מעבר לשורה חדשה."
 	},
 	"hterm_pref_user_css": {
-		"message": "כתובת האתר של גיליון סגנונות המשתמש שיש לכלול במסמך המסוף."
+		"message": "כתובת ה-URL של גיליון סגנונות המשתמש שיש לכלול במסמך הטרמינל."
 	},
 	"hterm_pref_user_css_text": {
-		"message": "‏טקסט CSS מותאם אישית בשביל קביעת סגנון המסוף."
+		"message": "טקסט CSS מותאם אישית בשביל קביעת סגנון הטרמינל."
 	},
 	"hterm_pref_word_break_match_left": {
-		"message": "ביטוי רגולרי שמפסיק התאמה לצד שמאל (התחלה) של הבחירה.\n\nבדרך כלל זו מחלקת תווים לדחיית תווים ספציפיים.\nברירת המחדל שלנו היא להתיר את \"~\" ו-\".\", כי נתיבים בדרך כלל מתחילים עם הסימנים האלה."
+		"message": "ביטוי רגולרי שמפסיק התאמה לצד שמאל (התחלה) של בחירה.\n\nבדרך כלל זוהי מחלקת תווים לדחיית תווים ספציפיים.\nברירת המחדל שלנו היא להתיר את \"~\" ואת \".\", מפני שנתיבים לעיתים קרובות מתחילים עם הסימנים האלה."
 	},
 	"hterm_pref_word_break_match_middle": {
 		"message": "ביטוי רגולרי להתאמת כל התווים במרכז.\n\nבדרך כלל זו מחלקת תווים לדחיית תווים ספציפיים.\n\nמשמשת להרחבת הבחירה סביב נקודת ההתחלה."
@@ -366,34 +600,46 @@
 		"message": "זהות"
 	},
 	"import_link_aria_label": {
-		"message": "יבא קובץ"
+		"message": "ייבוא קובץ"
 	},
 	"import_link_label": {
-		"message": "יבא..."
+		"message": "ייבוא..."
 	},
 	"initializing_relay": {
 		"message": "מחפש שרת ממסר באמצעות: $1"
 	},
 	"json_parse_error": {
-		"message": "‏לא ניתן היה לנתח נתוני JSON ב-'$1': $2"
+		"message": "לא ניתן היה לנתח נתוני JSON ב-'$1': $2"
 	},
 	"known_hosts_empty": {
-		"message": "אין מארחים ידועים, אין מה לשכוח."
+		"message": "אין מארחים ידועים, אין מה למחוק."
 	},
 	"known_hosts_prompt": {
-		"message": "בחר מארח כדי לשכוח [1 - $1]:"
+		"message": "יש לבחור מארח למחיקה [1 - $1]:"
 	},
 	"known_hosts_title": {
 		"message": "מארחים ידועים:"
 	},
+	"licenses": {
+		"message": "רישיונות"
+	},
+	"licenses_expand_link": {
+		"message": "הצגת הרישיון"
+	},
+	"licenses_title": {
+		"message": "רישיונות קוד פתוח"
+	},
 	"loading_label": {
-		"message": "טוען..."
+		"message": "טעינה..."
+	},
+	"migrate_to_ext": {
+		"message": "הערה: יש לעבור לתוסף Secure Shell החדש ($1).\nאפליקציות Chrome הוצאו משימוש, כך שהגרסה הזו תפסיק להתעדכן.\nכדי לקבל פרטים נוספים, אפשר לעיין במדריך המעבר ($2)."
 	},
 	"missing_param": {
-		"message": "חסר הפרמטר: $1"
+		"message": "חסר פרמטר: $1"
 	},
 	"mount_button_label": {
-		"message": "‏טעינת SFTP"
+		"message": "טעינת SFTP"
 	},
 	"mount_path_label": {
 		"message": "נתיב טעינה"
@@ -401,8 +647,176 @@
 	"mounted_message": {
 		"message": "נטען!"
 	},
+	"nasftp_cmd_cat_help": {
+		"message": "ייצוא קובץ לטרמינל"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "שינוי ספריית העבודה"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "שינוי קבוצה של נתיבים"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "שינוי הרשאות בנתיבים"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "החלפת הבעלים של נתיבים"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "ניקוי המסך הנוכחי של הטרמינל."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "העתקת קובץ ללוח (ברירת מחדל: 10MiB מההתחלה)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "$1 בייטים הועתקו ללוח"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "החלפת המצב של השימוש בצבע"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "העתקת המקור ליעד"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "מחיקת קבצים"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "הצגת הנתונים הסטטיסטיים של הכונן"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  נתיב: $1\n  מזהה מערכת קבצים: $2\n סה\"כ: $3\n  מנוצל: $4 ‏(‎$5%‎)\n זמין: $6 (למשתמשים ללא הרשאות)\n $7 (לרמה הבסיסית (root))"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "ניתוק"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "מתבצעת הורדה של קובץ: $1 בתור $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "הורדת קבצים"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "מסך העזרה הזה"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "הצגת פרטים על הנתיבים בשרת המרוחק"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "יצירת קישור בנתיב שמפנה ליעד"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "יצירת ספריות"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "שינוי שם של קובץ"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "יש להגדיר את המחרוזת של prompt"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "העלאת קבצים"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "מתבצעת העלאה של קובץ: $1 כ-$2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "הצגת ספריית העבודה הנוכחית"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "ספריית עבודה בשרת מרוחק: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "קריאת קישורים סימבוליים"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "קביעת כתובת ה-URL של נתיבים כגרסה הרשמית (הקנונית)"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "המשך העלאה של קבצים"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "הסרה של קבצים"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "מחיקת ספריות ריקות"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "הצגת קבצים מוטבעים"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "תוספים:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "הצגת סטטוס קובץ"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  קובץ: $1\n  גודל: $2 בייט\n   מזהה משתמש: $3\n   מזהה קבוצה: $4\nהרשאת גישה: $5\n זמן גישה: $6\n זמן שינוי: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "יצירת קישור סימבולי בנתיב שמפנה ליעד"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "קיצור נתיבים ל-0 בייט"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  תוספי שרת:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "הצגת הגרסה הנוכחית של הפרוטוקול"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "פרטי גרסה של פרוטוקול SFTP:\n  מקומי: $1\n  שרת: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: סוף הקובץ"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: הקובץ לא נמצא"
+	},
+	"nasftp_error_file_reading": {
+		"message": "הקריאה של הקובץ $1 נכשלה: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "שגיאה פנימית שלא טופלה. יש לדווח על באג: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: מספר לא חוקי: $3"
+	},
+	"nasftp_error_message": {
+		"message": "שגיאה: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: התוסף '$2' לא זמין"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: לא קובץ רגיל"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: אין מספיק ארגומנטים"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: ההרשאה נדחתה"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: יותר מדי ארגומנטים"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: פקודה לא ידועה"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: סימון לא ידוע $2"
+	},
+	"nasftp_force_quit": {
+		"message": "אילוץ יציאה"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 בייט הועברו תוך $2 שניות ($3 לשנייה)"
+	},
+	"nasftp_prompt": {
+		"message": "‎nasftp $1 >‎"
+	},
 	"nassh_options_error": {
-		"message": "אפשרות ממסר לא ידועה: $1"
+		"message": "אפשרות לא ידועה: $1"
 	},
 	"nassh_product_name": {
 		"message": "Secure Shell"
@@ -411,22 +825,22 @@
 		"message": "חלון חדש"
 	},
 	"notify_copy": {
-		"message": "הטקסט הועתק"
+		"message": "הבחירה הועתקה"
 	},
 	"ok_button_label": {
 		"message": "אישור"
 	},
 	"omnibox_default": {
-		"message": "‏<url><match>user@hostname[:port]</match></url> יש להתחבר אל פרופיל שמור או אל מערכת SSH חדשה."
+		"message": "<url><match>user@hostname[:port]</match></url> יש להתחבר אל פרופיל שמור או אל מערכת SSH חדשה."
 	},
 	"open_as_window_tip": {
-		"message": "‏[טיפ למתקדמים] האפשרות 'פתח כחלון' או 'מסך מלא' מונעת מהקשה על Ctrl+W לסגור את המסוף.\n[טיפ למתקדמים] אפשר לקרוא מידע נוסף בכתובת $1."
+		"message": "[טיפ למתקדמים] אפשר להשתמש ב'פתיחה כחלון' או 'מסך מלא' כדי למנוע סגירה של הטרמינל כשמקישים על Ctrl+W.\n[טיפ למתקדמים] מידע נוסף זמין בכתובת $1."
 	},
 	"options_button_label": {
 		"message": "אפשרויות"
 	},
 	"plugin_loading": {
-		"message": "‏טוען פלאגין של NaCl ..."
+		"message": "טעינת הפלאגין של NaCl מתבצעת..."
 	},
 	"plugin_loading_complete": {
 		"message": " בוצע."
@@ -434,38 +848,107 @@
 	"plugin_loading_failed": {
 		"message": " הטעינה נכשלה :("
 	},
+	"popup_connect_tooltip": {
+		"message": "יש ללחוץ לחיצה ארוכה על Ctrl כדי לפתוח בכרטיסייה חדשה."
+	},
 	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
+		"message": "גיבוי העדפות של Secure Shell.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "קובצי SSH"
 	},
 	"preferences_header_terminal": {
-		"message": "הגדרות פרופיל"
+		"message": "הגדרות טרמינל"
+	},
+	"preferences_header_uri": {
+		"message": "Handlers של URI"
 	},
 	"preferences_reset": {
-		"message": "איפסת את כל ההעדפות."
+		"message": "כל ההעדפות אופסו."
+	},
+	"protocol_register_button": {
+		"message": "רישום handlers של פרוטוקול"
+	},
+	"protocol_register_explain": {
+		"message": "הלחצן שלמטה ינסה לרשום את ה-handlers של כל הפרוטוקולים שאנחנו תומכים בהם. לדוגמה, הרישום מאפשר לנו לטפל בקישורי ‎ssh://‎ בצורה ישירה. הדפדפן יציג הודעה עבור כל פרוטוקול, כך שיש לאשר/לקבל כל הודעה כאשר היא מוצגת. אם לא מוצגות הודעות, ניתן לעבור לקטע הבא כדי לעיין בטיפים לגבי פתרון בעיות."
+	},
+	"protocol_register_explain_settings": {
+		"message": "אם כבר רשמנו handlers או אם ניסיונות רישום קודמים נדחו, לא יוצגו הודעות נוספות. יש לפתוח את תיבת הדו-שיח שלמטה ולסמן את ההגדרות של ה-handlers הרשומים בקטעים ssh/‏sftp וכו'. אם התוכנה הזו חסומה, אפשר למחוק את ההגדרות האלה. פעולה זו תאפשר לך לנסות שוב להירשם. אם התוכנה הזו כבר רשומה, אבל לא הוגדרה בתור ה-handler המשמש כברירת מחדל, אפשר לשנות גם את ה-handler המשמש כברירת מחדל."
+	},
+	"protocol_register_options_link": {
+		"message": "רישום פרוטוקולים"
+	},
+	"protocol_register_settings_button": {
+		"message": "פתיחת ההגדרות של handlers רשומים"
+	},
+	"protocol_register_title": {
+		"message": "כלי העזרה לרישום handlers של פרוטוקול Secure Shell"
+	},
+	"read_size_label": {
+		"message": "גודל הקריאה (KiB)"
 	},
 	"reconnect_message": {
-		"message": "‏הקש על R כדי להתחבר מחדש, על C כדי לבחור חיבור אחר או על X כדי לצאת."
+		"message": "צריך להקיש על R כדי להתחבר מחדש, על C כדי לבחור חיבור אחר או על X כדי לצאת."
 	},
 	"relay_retry": {
-		"message": "מנסה שוב..."
+		"message": "מתבצע ניסיון נוסף..."
 	},
 	"request_pin_prompt": {
-		"message": "יש להזין את הקוד לביטול הנעילה של מפתח $1 ב-'$2' (נותרו $3 ניסיונות):"
+		"message": "יש להזין קוד אימות כדי לבטל את הנעילה של המפתח $1 ב-'$2 ($3)' (נותרו $4 ניסיונות):"
 	},
 	"restore_prefs": {
-		"message": "שחזר את הגיבוי"
+		"message": "שחזור הגיבוי"
+	},
+	"save_label": {
+		"message": "שמירה"
 	},
 	"shortcut_list_aria_label": {
 		"message": "חיבורים שנשמרו"
 	},
 	"smart_card_connector_not_installed": {
-		"message": "‏יש להתקין את האפליקציה Smart Card Connector: $1"
+		"message": "יש להתקין את האפליקציה Smart Card Connector: $1"
 	},
 	"ssh_argstr_label": {
-		"message": "‏ארגומנטים ל-SSH"
+		"message": "ארגומנטים ל-SSH"
+	},
+	"stream_open_error": {
+		"message": "פתיחת מקור הנתונים $1 נכשלה: $2"
 	},
 	"terminal_clear_menu_label": {
-		"message": "ניקוי מסוף"
+		"message": "ניקוי טרמינל"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "צבעי ANSI"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "החלקת גופנים (Anti-alias)"
+	},
+	"terminal_name_pref_bell": {
+		"message": "צליל התראה"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "מהבהב"
+	},
+	"terminal_name_pref_color": {
+		"message": "צבע"
+	},
+	"terminal_name_pref_font": {
+		"message": "גופן"
+	},
+	"terminal_name_pref_image": {
+		"message": "תמונה"
+	},
+	"terminal_name_pref_shape": {
+		"message": "צורה"
+	},
+	"terminal_name_pref_visible": {
+		"message": "גלוי"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "הגדרת הצבעים של לוח הצבעים שמוגדר כברירת מחדל."
+	},
+	"terminal_pref_bell": {
+		"message": "צליל ההתראה של הטרמינל מושמע."
 	},
 	"terminal_preview_label": {
 		"message": "תצוגה מקדימה"
@@ -474,64 +957,187 @@
 		"message": "הפרופיל הנוכחי"
 	},
 	"terminal_reset_menu_label": {
-		"message": "איפוס מסוף"
+		"message": "איפוס הטרמינל"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "כתובת ה-URL של תמונת הרקע: חייבת להתחיל ב-'‎http://‎' או ב-'https://‎'. יש להשאיר ריקה כדי לא להציג תמונה.\n\nלדוגמה:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "אוטומטי"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "השבתה"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "מצביע I"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "מלבן"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "קו תחתון"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "לאפס את העיצוב להגדרת ברירת המחדל?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "איפוס העיצוב"
+	},
+	"terminal_settings_reset_label": {
+		"message": "איפוס"
+	},
+	"terminal_theme_classic_label": {
+		"message": "קלאסי"
+	},
+	"terminal_theme_dark_label": {
+		"message": "כהה"
+	},
+	"terminal_theme_light_label": {
+		"message": "בהיר"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized כהה"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized בהיר"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "צבע 0: שחור"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "צבע 1: אדום"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "צבע 10: ירוק בהיר"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "צבע 11: צהוב בהיר"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "צבע 12: כחול בהיר"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "צבע 13: מגנטה בהיר"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "צבע 14: ציאן בהיר"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "צבע 15: לבן בהיר"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "צבע 2: ירוק"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "צבע 3: צהוב"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "צבע 4: כחול"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "צבע 5: מגנטה"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "צבע 6: ציאן"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "צבע 7: לבן"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "צבע 8: שחור בהיר"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "צבע 9: אדום בהיר"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "מראה"
+	},
+	"terminal_title_pref_background": {
+		"message": "רקע"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "התנהגות"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "סמן"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "מקלדת"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "מקלדת ועכבר"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "עכבר"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "סרגל גלילה"
+	},
+	"terminal_title_pref_text": {
+		"message": "טקסט"
+	},
+	"terminal_title_settings": {
+		"message": "הגדרות"
+	},
+	"terminal_title_theme": {
+		"message": "עיצוב"
 	},
 	"tip_1": {
-		"message": "‏כדי לפתוח קישורים אפשר להקיש הקשה ארוכה על Ctrl (המקש Cmd ב-macOS) תוך כדי לחיצה עליהם."
+		"message": "כדי לפתוח קישורים אפשר להקיש הקשה ארוכה על Ctrl (המקש Cmd ב-macOS) תוך כדי לחיצה עליהם."
 	},
 	"tip_10": {
-		"message": "‏כשהיישום פועל בחלון, אפשר להקיש על Ctrl+Shift+N כדי לפתוח הפעלה חדשה."
+		"message": "במהלך הפעלה בחלון, אפשר להקיש על Ctrl+Shift+N כדי לפתוח סשן חדש."
 	},
 	"tip_11": {
-		"message": "‏אפשר לקשר מחדש מקשים/מקשי קיצור: https://goo.gl/LWRndr"
+		"message": "אפשר לקשר מחדש מקשים/מקשי קיצור: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "‏כדאי להשתמש ב-Yubikeys ובכרטיסים חכמים אחרים לאימות ssh‏: https://goo.gl/Hu2o3v"
+		"message": "כדאי להשתמש ב-Yubikeys ובכרטיסים חכמים אחרים לאימות ssh‏: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
-		"message": "‏מומלץ להציג תמונות במצב מוטבע: https://goo.gl/MnSysj"
+		"message": "טוב לדעת: ניתן להציג תמונות במצב מוטבע, פרטים בכתובת https://goo.gl/MnSysj"
 	},
 	"tip_14": {
-		"message": "‏הקשה ממושכת על Ctrl (‏Cmd ב-macOS) בזמן לחיצה ימנית מציגה את תפריט ההקשר."
+		"message": "הקשה ממושכת על Ctrl (‏Cmd ב-macOS) בזמן לחיצה ימנית מציגה את תפריט ההקשר."
 	},
 	"tip_2": {
-		"message": "‏אפשר להציג הודעות בדפדפן בעזרת hterm-notify‏: https://goo.gl/ZNxGdF"
+		"message": "אפשר להציג הודעות בדפדפן בעזרת hterm-notify‏: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "‏כדי להתחבר מסרגל הכתובות יש להקליד ‎'ssh <profile name>': https://goo.gl/V7o8ki"
+		"message": "כדי להתחבר מסרגל הכתובות יש להקליד 'ssh <שם הפרופיל>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "‏Chrome OS יכול לטעון מערכות קבצים דרך SFTP ולאפשר עיון דרך האפליקציה 'קבצים'. יש להשתמש ב-'SFTP Mount' במקום ב-'Connect'."
+		"message": "Chrome OS יכול לטעון מערכות קבצים דרך SFTP ולאפשר עיון דרך האפליקציה 'קבצים'. יש להשתמש ב-'טעינת SFTP' במקום ב'חיבור'."
 	},
 	"tip_5": {
-		"message": "‏יש להתחבר בעזרת קישורי ssh://‎ בדפי אינטרנט או לשמור סימניה: https://goo.gl/zS8EZD"
+		"message": "יש להתחבר בעזרת קישורי ssh://‎ בדפי אינטרנט או לשמור סימניה: https://goo.gl/zS8EZD"
 	},
 	"tip_6": {
-		"message": "‏אפשר לצבוע את הפלט/הודעה ב-16 צבעים בסיסיים, 256 צבעים וצבעי 24 סיביות מלאים: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+		"message": "אפשר לצבוע את הפלט/הודעה ב-16 צבעים בסיסיים, 256 צבעים וצבעי 24 ביט מלאים: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "‏אפשר להעתיק אל הלוח מ-emacs/vim/etc... בעזרת OSC-52‏: https://goo.gl/XSnyLo"
+		"message": "אפשר להעתיק אל הלוח מ-emacs/vim/etc...‎ בעזרת OSC-52‏: https://goo.gl/XSnyLo"
 	},
 	"tip_8": {
-		"message": "‏אפשר לשוחח בצ'אט עם משתמשי hterm/Secure Shell אחרים דרך  chromium-hterm@chromium.org:‏ https://goo.gl/RYHiK"
+		"message": "אפשר לשוחח בצ'אט עם משתמשי hterm/Secure Shell אחרים דרך chromium-hterm@chromium.org:‏ https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "‏מצאת באג? רוצה לבקש תכונה חדשה? נשמח לשמוע: https://goo.gl/vb94JY"
+		"message": "מצאת באג? רוצה לבקש תכונה חדשה? נשמח לשמוע: https://goo.gl/vb94JY"
 	},
 	"unexpected_error": {
-		"message": "‏אירעה שגיאה לא צפויה, בדוק בלוח JavaScript לקבלת פרטים נוספים."
+		"message": "אירעה שגיאה לא צפויה. יש לעיין בלוח JavaScript לקבלת פרטים נוספים."
 	},
 	"unknown_ssh_client_version": {
-		"message": "‏גירסת SSH לא ידועה: $1"
+		"message": "גירסת SSH לא ידועה: $1"
 	},
 	"unmount_button_label": {
-		"message": "‏בטל את הטעינה של SFTP"
+		"message": "ניתוק SFTP"
 	},
 	"welcome_changelog": {
-		"message": "‏ChangeLog/נתוני גירסה: $1"
+		"message": "יומן שינויים/נתוני גרסה: $1"
 	},
 	"welcome_faq": {
-		"message": "‏תשובות לשאלות נפוצות. $1 (הקש על ctrl ולחץ על קישור כדי לפתוח אותו)"
+		"message": "תשובות לשאלות נפוצות: $1 (כדי לפתוח קישורים יש להקיש על Ctrl וללחוץ עליהם)"
 	},
 	"welcome_release_highlights": {
 		"message": "שינויים משמעותיים מאז $1:"
@@ -540,9 +1146,12 @@
 		"message": "טיפ אקראי למתקדמים מס' $1: $2"
 	},
 	"welcome_version": {
-		"message": "ברוכים הבאים לגרסה $2 של $1."
+		"message": "זוהי גרסה $2 של $1."
+	},
+	"write_size_label": {
+		"message": "גודל כתיבה (KiB)"
 	},
 	"zoom_warning": {
-		"message": "‏עבור אל תפריט Chrome > מרחק מהתצוגה ושנה את ההגדרה ל-100%."
+		"message": "עליך לעבור אל תפריט Chrome > 'מרחק מהתצוגה' ולשנות את ההגדרה ל-100%."
 	}
 }

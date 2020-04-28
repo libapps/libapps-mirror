@@ -12,31 +12,25 @@
 		"message": "ఈ ట్యాబ్‌ను మూసివేయడం వలన ఈ సెషన్ డిస్‌కనెక్ట్ అవుతుంది."
 	},
 	"cache_pin_prompt": {
-		"message": "ఈ సెషన్ కోసం పిన్‌ను క్యాష్ చేయాలా? (y/N):"
+		"message": "ఈ SSH సెషన్‌కి కాష్ పిన్ ఇదేనా? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "రద్దు చేయి"
 	},
+	"changelog": {
+		"message": "మార్పు లాగ్"
+	},
 	"clear_known_hosts_menu_label": {
 		"message": "SSHకి తెలిసిన హోస్ట్‌లను క్లియర్ చేయండి"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "ఈ ఆదేశం, తెలిసిన హోస్ట్‌ల మెనూను ప్రదర్శిస్తుంది మరియు హోస్ట్ మర్చిపోయేందుకు వీలుగా ప్రాంప్ట్ చేస్తుంది."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "తెలిసిన ssh హోస్ట్‌ను మర్చిపోగలరు."
-	},
-	"cmd_ssh_help": {
-		"message": "|username| మరియు |hostname| పారామీట‌ర్‌లు అవసరం, |port| ఐచ్ఛికం. పోర్ట్ పేర్కొనబడకుంటే, ఇది 22కు డిఫాల్ట్ చేస్తుంది."
-	},
-	"cmd_ssh_title": {
-		"message": "కొత్త SSH సెషన్‌ను తెరుస్తుంది."
+	"clear_label": {
+		"message": "క్లియర్ చేయి"
 	},
 	"command_complete": {
-		"message": "ఆదేశం $1 స్థితి కోడ్ $2తో నిష్క్రమించింది."
+		"message": "ఈ $1 ఆదేశ స్టేటస్ కోడ్ $2తో నిష్క్రమించింది."
 	},
 	"command_not_supported": {
-		"message": "ఈ Chrome వెర్షన్‌లో $1కు మద్దతు లేదు"
+		"message": "ఈ Chrome వెర్షన్‌లో $1కు సపోర్ట్ లేదు"
 	},
 	"command_startup_failed": {
 		"message": "$1ని ప్రారంభించడం విఫలమైంది: $2"
@@ -66,16 +60,16 @@
 		"message": "తొలగించు"
 	},
 	"disconnect_message": {
-		"message": "$1 స్థితి కోడ్‌తో NaCl ప్లగిన్ నిష్క్రమించారు."
+		"message": "$1 స్టేటస్ కోడ్‌తో NaCl ప్లగిన్ నిష్క్రమించారు."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
-		"message": "FAQ"
+		"message": "తరచుగా అడిగే ప్రశ్నలు"
 	},
 	"field_argstr_placeholder": {
-		"message": "అదనపు ఆదేశ పంక్తి తర్కాలు"
+		"message": "అదనపు ఆదేశ లైన్ ఆర్గ్యుమెంట్‌లు"
 	},
 	"field_description_aria_label": {
 		"message": "వివరణ"
@@ -108,10 +102,10 @@
 		"message": "డిఫాల్ట్"
 	},
 	"field_username_aria_label": {
-		"message": "వినియోగదారు పేరు"
+		"message": "యూజర్‌నేమ్"
 	},
 	"field_username_placeholder": {
-		"message": "వినియోగదారు పేరు"
+		"message": "యూజర్‌నేమ్"
 	},
 	"found_relay": {
 		"message": "రిలే సర్వర్ కనుగొనబడింది: $1"
@@ -129,7 +123,7 @@
 		"message": "ఈ సెషన్‌ను అనుమతించు"
 	},
 	"hterm_button_block": {
-		"message": "బ్లాక్ చేయి"
+		"message": "బ్లాక్"
 	},
 	"hterm_button_page_down": {
 		"message": "పేజీ దిగువకు"
@@ -143,17 +137,230 @@
 	"hterm_loading_resource_start": {
 		"message": "$1ని లోడ్ చేస్తోంది ..."
 	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "ఇన్‌లైన్ ఇమేజ్ ప్రదర్శనను అనుమతించండి"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Backspace అనేది Meta+Backspace"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "AltGr కీ మోడ్"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Alt కీని Meta కీగా పరిగణిస్తుంది"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Alt కీ మోడిఫయర్‌ను హ్యాండిల్ చేయడం"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "అలర్ట్ బెల్ శబ్దం (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "బ్యాక్‌గ్రౌండ్ రంగు"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "బ్యాక్‌గ్రౌండ్ ఇమేజ్"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "బ్యాక్‌గ్రౌండ్ ఇమేజ్ స్థానం"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "బ్యాక్‌గ్రౌండ్ ఇమేజ్ పరిమాణం"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Backspace కీ ప్రవర్తన"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "అక్షర మ్యాప్ ఓవర్‌రైడ్ చేస్తుంది"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "వచన ఎంపికను ఆటోమేటిక్‌గా తీసివేయండి"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "నిష్క్రమిస్తున్నప్పుడు విండోను మూసివేయండి"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "ప్రారంభ రంగుల పాలెట్"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "ఎంచుకున్న కంటెంట్‌ను ఆటోమేటిక్‌గా కాపీ చేస్తుంది"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Ctrl+C నొక్కడం ద్వారా కాపీ చేయండి"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ctrl++/-/0 నొక్కడం ద్వారా జూమ్ చేయండి"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Ctrl+V నొక్కడం ద్వారా అతికించండి"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "కర్సర్ బ్లింక్ కావడం"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "కర్సర్ బ్లింక్ రేట్"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "వచనం కర్సర్ రంగు"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "వచనం కర్సర్ ఆకారం"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "అలర్ట్ బెల్స్ కోసం డెస్క్‌టాప్ నోటిఫికేషన్‌లను సృష్టించండి"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "తూర్పు ఆసియా అస్పష్టత రెండు నిలువు వరుసలను ఉపయోగిస్తుంది."
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "UTF-8-యేతర C1 నియంత్రణ అక్షరాలకు సపోర్ట్‌ను ఇస్తుంది"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "వచనం బ్లింక్ కావడాన్ని ఎనేబుల్ చేయండి"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "బోల్డ్ టెక్స్ట్ ప్రవర్తన"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "బోల్డ్ వచనంతో ప్రకాశవంతమైన రంగులను ఉపయోగించండి"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "కంటెంట్‌ను కాపీ చేస్తున్నప్పుడు నోటిఫికేషన్‌ను చూపు"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "రిమోట్‌గా క్లిప్‌బోర్డ్‌లో రాయడాన్ని అనుమతించండి"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "స్క్రోల్‌బ్యాక్ బఫర్‌ను (CSI-J-3) క్లియర్ చేయడాన్ని అనుమతించండి"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "వచనం కర్సర్ బ్లింక్ కావడాన్ని మార్చడానికి అనుమతించండి"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "పరిమాణం మార్చినప్పుడు టెర్మినల్ కొలతలను చూపు"
+	},
+	"hterm_name_pref_environment": {
+		"message": "ఎన్విరాన్‌మెంట్ వేరియబుల్‌లు"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "వచన ఫాంట్ ఫ్యామిలీ"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "వచన ఫాంట్ పరిమాణం"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "వచనం ఫాంట్ మృదుత్వం"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "వచన రంగు"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "టైప్ చేస్తున్నప్పుడు మౌస్ కర్సర్‌ను దాచండి"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Home/End కీ నొక్కడం ద్వారా స్క్రోల్ చేయవచ్చు"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "కీబోర్డ్ బైండింగ్‌లు/షార్ట్‌కట్‌లు"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "డిఫాల్ట్ OS కీబోర్డ్ బైండింగ్‌లు/షార్ట్‌కట్‌లను ఉపయోగించండి"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "మీడియా కీలు అనేవి Fకీలు"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "మెటా కీ మోడిఫయర్ హ్యాండిలింగ్"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "మౌస్ బటన్‌ను నొక్కడం ద్వారా అతికించండి"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "మౌస్ కుడి బటన్‌పై క్లిక్ చేయడం ద్వారా అతికించండి"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Page Up/Down కీ నొక్కడం ద్వారా స్క్రోల్ చేయండి"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Alt+1..9 నొక్కడం ద్వారా ట్యాబ్‌ను స్విచ్ చేయవచ్చు"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Ctrl+N నొక్కడం ద్వారా కొత్త విండోను తెరవండి"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Ctrl+1..9 నొక్కడం ద్వారా ట్యాబ్‌ను స్విచ్ చేయవచ్చు"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ctrl+T నొక్కడం ద్వారా కొత్త ట్యాబ్‌ను తెరవండి"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab నొక్కడం ద్వారా ట్యాబ్‌ను స్విచ్ చేయండి"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Ctrl+W నొక్కడం ద్వారా ట్యాబ్ మూసివేయబడుతుంది"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Meta+1..9 నొక్కడం ద్వారా ట్యాబ్‌ను స్విచ్ చేయవచ్చు"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Meta+V నొక్కడం ద్వారా అతికించండి"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "అతికించడానికి లాగి & వదలడాన్ని అనుమతించండి"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "ఎన్‌కోడింగ్‌ను స్వీకరించండి"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "కీస్ట్రోక్ తర్వాత దిగువకు స్క్రోల్ చేయండి"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "కొత్త అవుట్‌పుట్ వచ్చిన తర్వాత దిగువకు స్క్రోల్ చేయండి"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "స్క్రోల్ వీల్‌తో బాణం కీలను అనుకరించండి"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "మౌస్ స్క్రోల్ వీల్ మల్టిప్లయర్"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "స్క్రోల్‌బార్ విజిబిలిటీ"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Shift+Insert నొక్కడం ద్వారా అతికించండి"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "టెర్మినల్ ఎన్‌కోడింగ్"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "వచనాన్ని కాపీ చేయడానికి బ్రౌజర్‌ను అనుమతించండి"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "అనుకూల CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "అనుకూల CSS (ఇన్‌లైన్ వచనం)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "ఆటోమేటిక్ ఎంపిక హాల్టింగ్ (ఎడమవైపుకి)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "పద విరామ అక్షరాలు"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "ఆటోమేటిక్ ఎంపిక హాల్టింగ్ (కుడివైపుకి)"
+	},
 	"hterm_popup_inline_image": {
-		"message": "సందేశంలో చిత్రాలు"
+		"message": "ఇన్‌లైన్ ఇమేజ్‌లు"
 	},
 	"hterm_popup_inline_image_disabled": {
-		"message": "సందేశంలో చిత్రాలు నిలిపివేయబడ్డాయి"
+		"message": "ఇన్‌లైన్ మెసేజ్‌లు నిలిపివేయబడ్డాయి"
 	},
 	"hterm_pref_allow_images_inline": {
-		"message": "టెర్మినల్‌లో చిత్రాలను ప్రదర్శించడానికి రిమోట్ హోస్ట్‌ను అనుమతించాలో లేదో ఎంపిక.\n\nడిఫాల్ట్‌గా, ఏదో ఒక ఎంపికను ఎంచుకునే వరకు మేము ప్రాంప్ట్ చేస్తాము."
+		"message": "టెర్మినల్‌లో ఇమేజ్‌లను ప్రదర్శించడానికి రిమోట్ హోస్ట్‌ను అనుమతించాలో లేదో ఎంపిక.\n\nడిఫాల్ట్‌గా, ఏదో ఒక ఎంపికను ఎంచుకునే వరకు మేము ప్రాంప్ట్ చేస్తాము."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "సెట్ చేసినట్లయితే, Chrome OS Alt+Backspace->DEL రీమ్యాప్‌ని చర్యరద్దు చేస్తుంది, కనుక Alt+Backspace అంటే Alt+Backspace."
+		"message": "ప్రాధాన్యతను సెట్ చేసినట్లయితే, Chrome OS Alt+Backspace->Delete రీమ్యాప్‌ని చర్యరద్దు చేస్తుంది, అప్పుడు Alt+Backspace, Alt+Backspaceగానే ఉంటుంది."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr గుర్తింపు అన్వేషణను ఎంచుకోండి.\n\n'null': Autodetect based on navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Disable any AltGr related munging.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
@@ -165,25 +372,25 @@
 		"message": "Alt కీని ఎలా నిర్వహించాలో నియంత్రిస్తుంది.\n\n  escape: ESC ప్రిఫిక్స్‌ను పంపుతుంది.\n  8-బిట్: xterm లాగా టైప్ చేసిన అక్షరానికి 128 జోడిస్తుంది .\n బ్రౌజర్-కీ: కీని నొక్కే వరకు వేచి ఉంటుంది. బ్రౌజర్ ఏమి చెబుతుందో చూపుతుంది.\n (కొన్ని Alt శ్రేణుల కోసం బ్రౌజర్ డిఫాల్ట్ చర్యలను అమలు చేసే\nప్లాట్‌ఫారమ్‌లలో ఇది అంత సక్రమంగా పని చేయదు.)"
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "టెర్మినల్ గంట శబ్దం యొక్క URL. వినిపించని గంట కోసం ఖాళీ వాక్యం."
+		"message": "టెర్మినల్ గంట శబ్దం యొక్క URL. వినిపించని గంట కోసం ఖాళీగా విడిచిపెట్టండి."
 	},
 	"hterm_pref_background_color": {
-		"message": "మరే ఇతర రంగు విశేషణాలు లేని వచనానికి నేపథ్య రంగు."
+		"message": "మరే ఇతర రంగు విశేషణాలు లేని వచనానికి బ్యాక్‌గ్రౌండ్ రంగు."
 	},
 	"hterm_pref_background_image": {
-		"message": "నేపథ్య చిత్రం యొక్క CSS విలువ. చిత్రం లేకుంటే ఖాళీ వాక్యం.\n\nఉదాహరణకు:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "బ్యాక్‌గ్రౌండ్ ఇమేజ్ CSS విలువ. ఇమేజ్ ఏదీ లేకుంటే ఖాళీగా విడిచిపెట్టండి.\n\nఉదాహరణకు:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "బ్యాక్‌గ్రౌండ్ చిత్ర స్థానం యొక్క CSS విలువ.\n\nఉదాహరణకు:\n  10% 10%\n  మధ్యన"
 	},
 	"hterm_pref_background_size": {
-		"message": "బ్యాక్‌గ్రౌండ్ చిత్ర పరిమాణం యొక్క CSS విలువ."
+		"message": "బ్యాక్‌గ్రౌండ్ ఇమేజ్ పరిమాణం యొక్క CSS విలువ."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "ఒప్పు అయితే, backspace అనేది BS ('\\x08', aka ^H) పంపాలి. లేదంటే, backspace కీ అనేది '\\x7f' పంపాలి."
+		"message": "ఒప్పు అయితే, backspace కీ BS ('\\x08', aka ^H)ను పంపుతుంది. లేదంటే, backspace కీ '\\x7f'ను పంపుతుంది."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "ఇది ఆబ్జెక్ట్‌గా పేర్కొనబడి ఉంటుంది. ఇది ఒక సన్నని శ్రేణి. దీనిలో ప్రతి ఒక్క లక్షణం అక్షర స‌మూహ‌ కోడ్. ఒక‌ విలువగా ఆ సన్నని శ్రేణి లాంటి ఆబ్జెక్ట్ ఉంటుంది. ఆ సన్నని శ్రేణిలో, ప్రతి లక్షణం అనేది అందుకున్న‌ అక్షరం. విలువ అనేది ప్రదర్శిత అక్షరం.\n\nఉదాహరణకు:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "ఇది ఆబ్జెక్ట్‌గా పేర్కొనబడి ఉంటుంది. ఇది ఒక సన్నని శ్రేణి. దీనిలో ప్రతి ఒక్క లక్షణం అక్షర సమూహ కోడ్. ఒక విలువగా ఆ సన్నని శ్రేణి లాంటి ఆబ్జెక్ట్ ఉంటుంది. ఆ సన్నని శ్రేణిలో, ప్రతీ లక్షణమూ అందుకున్న అక్షరం, విలువ అనేది ప్రదర్శిత అక్షరం.\n\nఉదాహరణకు:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "కాపీ చేసిన తర్వాత ఎంపికను తీసివేయాలో లేదో నిర్ధారిస్తుంది."
@@ -201,7 +408,7 @@
 		"message": "ఒప్పు అయితే Ctrl+C కాపీ చేస్తుంది, తప్పు అయితే ^Cని హోస్ట్‌కి పంపుతుంది.\nఒప్పు అయితే Ctrl+Shift+C అనేది ^Cని హోస్ట్‌కి పంపుతుంది, తప్పు అయితే కాపీ చేస్తుంది."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "ఒప్పు అయితే, Ctrl+Plus/Minus/Zero జూమ్‌ని నియంత్రిస్తుంది.\nతప్పు అయితే, Ctrl+Shift+Plus/Minus/Zero జూమ్‌ని నియంత్రిస్తుంది, Ctrl+Minus ^_ని పంపుతుంది, Ctrl+Plus/Zero ఏదీ చేయదు."
+		"message": "ఒప్పు అయితే, Ctrl+Plus/Minus/Zero జూమ్‌ని నియంత్రిస్తుంది.\nతప్పు అయితే, Ctrl+Shift+Plus/Minus/Zero జూమ్‌ని నియంత్రిస్తుంది, Ctrl+Minus ^_ని పంపుతుంది, Ctrl-Plus/Zero ఏదీ చేయదు."
 	},
 	"hterm_pref_ctrl_v_paste": {
 		"message": "ఒప్పు అయితే Ctrl+V అతికిస్తుంది, తప్పు అయితే హోస్ట్‌కి ^Vని పంపుతుంది.\nఒప్పు అయితే Ctrl+Shift+V అనేది ^Vని హోస్ట్‌కి పంపుతుంది, తప్పు అయితే అతికిస్తుంది."
@@ -214,6 +421,9 @@
 	},
 	"hterm_pref_cursor_color": {
 		"message": "కనిపించే వచన కర్సర్ యొక్క రంగు."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "విజిబిల్ టెక్స్ట్ కర్సర్ ఆకారం. రన్‌టైమ్‌లో టెర్మినల్ ఎస్కేప్ శ్రేణుల ద్వారా దీనిని మార్చవచ్చు."
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "ఒప్పు అయితే, బ్యాక్‌గ్రౌండ్‌లోని టెర్మినల్ గంటలు ఒక వెబ్ నోటిఫికేషన్‌ను రూపొందిస్తాయి. https://www.w3.org/TR/notifications/\n\nనోటిఫికేషన్‌లను ప్రదర్శించడానికి వినియోగదారు నుండి అనుమతి అవసరం. ఈ ఎంపికను ఒప్పున‌కు సెట్ చేసినప్పుడు, hterm అవసరమైతే వినియోగదారును అనుమతి కోసం అడగడానికి ప్రయత్నిస్తుంది. ఈ అనుమతి అభ్యర్థన వినియోగదారు చర్య మూలంగా ట్రిగ్గర్ చేయబడి ఉండకపోతే బ్రౌజర్‌లు దీనిని చూపకపోవచ్చు.\n\n\"నోటిఫికేషన్‌లు\" అనుమతి కలిగి ఉన్న Chrome ఎక్స్‌టెన్షన్‌లు నోటిఫికేషన్‌లను ప్రదర్శించడానికి అనుమతి కలిగి ఉంటాయి."
@@ -234,13 +444,19 @@
 		"message": "బోల్డ్ విశేషణాన్ని కలిగి ఉండే ఏదైనా వచనం కోసం మేము ప్రకాశవంతమైన రంగులు (16 రంగుల పాలెట్‌లోని 8-15) ఉపయోగించాలంటే ఒప్పు ఉండాలి. లేదంటే తప్పు ఉండాలి."
 	},
 	"hterm_pref_enable_clipboard_notice": {
-		"message": "హోస్ట్ క్లిప్‌బోర్డ్‌లో వ్రాసినప్పుడు టెర్మినల్‌లో సందేశాన్ని చూపాలో లేదో ఎంపిక."
+		"message": "హోస్ట్ క్లిప్‌బోర్డ్‌లో వ్రాసినప్పుడు టెర్మినల్‌లో మెసేజ్‌ని చూపాలో లేదో ఎంపిక."
 	},
 	"hterm_pref_enable_clipboard_write": {
 		"message": "రిమోట్ హోస్ట్ నేరుగా స్థానిక సిస్టమ్ క్లిప్‌బోర్డ్‌లో వ్రాయడానికి అనుమతిస్తుంది.\nఈ సెట్టింగ్ ఏ విధంగా ఉన్నప్పటికీ ఎన్నటికీ పఠన యాక్సెస్ మంజూరు చేయబడదు.\n\nఇది OSC-52 వంటి ఫీచర్‌లకు యాక్సెస్‌ను నియంత్రించడానికి ఉపయోగించబడుతుంది."
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "డిస్‌ప్లేను తొలగించే కమాండ్ (CSI-J) యొక్క సేవ్ చేసిన పంక్తులను తొలగించే ఫంక్షన్ (mode 3) టెర్మినల్ స్క్రోల్‌బ్యాక్ బఫర్‌ను తీసివేయగలదా లేదా.\n\nడిఫాల్ట్‌గా దీనిని ఎనేబుల్ చేయడం సురక్షితం."
+	},
 	"hterm_pref_enable_dec12": {
-		"message": "వచన కర్సర్ బ్లింక్ స్థితిని DEC ప్రైవేట్ మోడ్ 12 ఉపయోగించి మార్చడానికి హోస్ట్ చేసే ప్రయత్నాన్ని పరిగణిస్తుంది."
+		"message": "వచన కర్సర్ బ్లింక్ స్టేటస్‌ని DEC ప్రైవేట్ మోడ్ 12ని ఉపయోగించి మార్చడానికి హోస్ట్ చేసే ప్రయత్నాన్ని పరిగణిస్తుంది."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "టెర్మినల్ పరిమాణాన్ని మార్చినప్పుడు టెర్మినల్ కొలతలను చూపాలా వద్దా."
 	},
 	"hterm_pref_environment": {
 		"message": "ఆబ్జెక్ట్‌గా ఆవరణ వేరియబుల్‌ల ప్రాథమిక సెట్."
@@ -261,16 +477,19 @@
 		"message": "టైప్ చేసేటప్పుడు ఆటోమేటిక్‌గా మౌస్ కర్సర్ ను దాచిపెట్టాలా లేదా అన్నది నిర్ణయిస్తుంది. డిఫాల్ట్‌గా ప్లాట్‌ఫామ్ / OS దీన్ని నిర్వహిస్తుందా లేదా అని నిర్దారించండి.\n\nగమనిక: కొన్ని ఆపరేటింగ్ సిస్టమ్‌లు ఈ సెట్టింగ్‌ను భర్తీ చేయగలవు కాబట్టి మీరు అన్ని సందర్భాలలో దీనిని నిలిపివేయలేకపోవచ్చు."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "ఒప్పు అయితే, Home/End కీలు టెర్మినల్ స్క్రోల్‌బార్‌ని నియంత్రిస్తాయి మరియు Shift+Home/End కీలు రిమోట్ హోస్ట్‌కు పంపబడతాయి. తప్పు అయితే, Home/End కీలు రిమోట్ హోస్ట్‌కు పంపబడతాయి మరియు Shift+Home/End స్క్రోల్ చేస్తాయి."
+		"message": "ఒప్పు అయితే, Home/End కీలు టెర్మినల్ స్క్రోల్‌బార్‌ని నియంత్రిస్తాయి మరియు Shift+Home/Shift+End కీలు రిమోట్ హోస్ట్‌కు పంపబడతాయి. తప్పు అయితే, Home/End కీలు రిమోట్ హోస్ట్‌కు పంపబడతాయి మరియు Shift+Home/Shift+End స్క్రోల్ చేస్తాయి."
 	},
 	"hterm_pref_keybindings": {
-		"message": "కీ చర్యల కోసం కీల యొక్క శ్రేణి మ్యాప్.  కీ శ్రేణుల్లో సున్నా లేదా మరిన్ని మోడిఫైయర్ కీలు, వాటి ప్రక్కన కీ కోడ్ ఉంటాయి. కీ కోడ్‌లలో డెసిమల్ లేదా హెక్సాడెసిమల్ సంఖ్యలు లేదా కీ ఐడెంటిఫైయర్ ఉంటాయి. కీ చర్యలను హోస్ట్‌కు పంపాల్సిన వాక్యంగా లేదా చర్య ఐడెంటిఫైయర్‌గా పేర్కొనవచ్చు. ఫార్మాట్ గురించిన పూర్తి వివరణ కోసం, https://goo.gl/LWRndr చూడండి.\n\nకీ బైండింగ్‌లకు ఉదాహరణ:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "కీ చర్యల కోసం కీల యొక్క శ్రేణి మ్యాప్. కీ శ్రేణుల్లో సున్నా లేదా మరిన్ని మోడిఫైయర్ కీలు, వాటి ప్రక్కన కీ కోడ్ ఉంటాయి. కీ కోడ్‌లలో డెసిమల్ లేదా హెక్సాడెసిమల్ సంఖ్యలు లేదా కీ ఐడెంటిఫైయర్ ఉంటాయి. కీ చర్యలను హోస్ట్‌కు పంపాల్సిన వాక్యంగా లేదా చర్య ఐడెంటిఫైయర్‌గా పేర్కొనవచ్చు. ఫార్మాట్ గురించిన పూర్తి వివరణ కోసం, https://goo.gl/LWRndr చూడండి.\n\nకీ బైండింగ్‌లకు ఉదాహరణ:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "ఎల్లప్పుడూ hterm స్వంత వినియోగం కోసం క్యాప్చర్ చేయడానికి బదులుగా, OS కీబోర్డ్ బైండింగ్‌లను గౌరవించాలా లేదా."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "ఒప్పు అయితే, మీడియా కీలను వాటి Fkey సమానమైన వాటికి మార్పిడి చేస్తుంది. తప్పు అయితే, కీలను నిర్వహించే సామర్థ్యం బ్రౌజర్‌కు ఇవ్వబడుతుంది."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "మెటా కీని నొక్కి ఉంచి, ఏదైనా కీని నొక్కినప్పుడు ESCను ముందస్తుగా జోడించి పంపుతుంది. \n\nఉదాహరణకు, ఈ ప్రాధాన్యతను ఆరంభించినప్పుడు, మెటా- K ను నొక్కితే ^k ని పంపుతుంది (మీరు Escape కీని నొక్కి ఆ తర్వాత k నొక్కినట్టుగా). నిలిపివేసినప్పుడు k మాత్రమే పంపబడుతుంది."
+		"message": "మెటా కీని నొక్కి ఉంచి, ఏదైనా కీని నొక్కినప్పుడు ESCను ముందస్తుగా జోడించి పంపుతుంది. \n\nఉదాహరణకు, ఈ ప్రాధాన్యతను ఆరంభించినప్పుడు, మెటా+K ను నొక్కితే ^[k ని పంపుతుంది (మీరు Escape కీని నొక్కి ఆ తర్వాత k నొక్కినట్టుగా). నిలిపివేసినప్పుడు k మాత్రమే పంపబడుతుంది."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "మౌస్‌లోని అతికించే బటన్ యాక్టివేట్ అవుతుంది లేదా ఆటోడిటెక్ట్ చేయడానికి శూన్యం లాగా సెట్ చేసి ఉండాలి.\n\nఆటోడిటెక్ట్ చేయడం కోసం, మేము (Chrome OSతో సహా) X11 యేతర ప్లాట్‌ఫామ్‌లలో మధ్య మౌస్ బటన్‌ని ఉపయోగిస్తాము. X11లో, కుడి మౌస్ బటన్‌ని ఉపయోగిస్తాము (ఎందుకంటే, స్థానిక విండో మేనేజర్ మధ్య మౌస్ బటన్ ద్వారా అతికించాలి).\n\n0 == ఎడమ (ప్రాథమిక) బటన్.\n1 == మధ్య (సహాయక) బటన్.\n2 == కుడి (రెండవ) బటన్.\n\n\"మౌస్-కుడి-క్లిక్ ద్వారా అతికించడం\" అనే సెట్టింగ్‌ను ఎలా సెట్ చేశారనేదానిపై ఈ ఎంపిక ఆధారపడదు.\n\nగమనిక: ఇది ఎడమ & కుడి చేతి వాటం ఉన్న మౌస్‌లను సక్రమంగా నిర్వహిస్తుంది."
@@ -279,19 +498,34 @@
 		"message": "కుడి మౌస్ బటన్‌ని క్లిక్ చేసినప్పుడు అతికిస్తుంది.\n\n\"మౌస్-అతికించే-బటన్\" అనే సెట్టింగ్‌ను ఎలా సెట్ చేశారనేదానిపై ఈ ఎంపిక ఆధారపడదు.\n\n\nగమనిక: ఇది ఎడమ & కుడి చేతి వాటం ఉన్న మౌస్‌లను సక్రమంగా నిర్వహిస్తుంది."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "ఒప్పు అయితే, Page Up/Down కీలు టెర్మినల్ స్క్రోల్‌బార్‌ని నియంత్రిస్తాయి మరియు Shift+Page Up/Down కీలు రిమోట్ హోస్ట్‌కు పంపబడతాయి. తప్పు అయితే, Page Up/Down రిమోట్ హోస్ట్‌కు పంపబడతాయి మరియు Shift+Page Up/Down స్క్రోల్ చేస్తాయి."
+		"message": "ఒప్పు అయితే, Page Up/Down కీలు టెర్మినల్ స్క్రోల్‌బార్‌ని నియంత్రిస్తాయి మరియు Shift+Page Up/Shift+Page Down కీలు రిమోట్ హోస్ట్‌కు పంపబడతాయి. తప్పు అయితే, Page Up/Page Down రిమోట్ హోస్ట్‌కు పంపబడతాయి మరియు Shift+Page Up/Shift+Page Down స్క్రోల్ చేస్తాయి."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Alt+1..9ని బ్రౌజర్‌కి పంపాలో లేదో సెట్ చేస్తుంది.\n\nఇది బ్రౌజర్ ట్యాబ్‌లో htermని అమలు చేస్తున్నప్పుడు ఉపయోగపడుతుంది, కాబట్టి మీరు Chrome \"ట్యాబ్‌కి మార్చు\" కీబోర్డ్ యాక్సిలిరేటర్‌లను కోల్పోరు. ట్యాబ్‌లో అమలు చేయనప్పుడు, ఈ కీలను హోస్ట్‌కి పంపడం ఉత్తమం, దీని వలన వీటిని vim లేదా emacsలో వినియోగించగలరు.\n\nఒప్పు అయితే, Alt+1..9 బ్రౌజర్ ద్వారా నిర్వహించబడతాయి. తప్పు అయితే, Alt+1..9 హోస్ట్‌కి పంపబడతాయి. శూన్యం అయితే, బ్రౌజర్ ప్లాట్‌ఫామ్ మరియు విండో రకం ఆధారంగా ఆటోడిటెక్ట్ అవుతాయి."
+		"message": "Alt+1..9 బ్రౌజర్‌కు చేరిందా లేదా.\n\nబ్రౌజర్ ట్యాబ్‌లో hterm రన్ అవుతున్నప్పుడు ఇది ఉపయోగకరంగా ఉంటుంది, కనుక Chrome యొక్క \"ట్యాబ్‌కు స్విచ్ అవ్వండి\" కీబోర్డ్ షార్ట్‌కట్‌లను కోల్పోరు. ట్యాబ్‌లో రన్ అవ్వకపోతే, ఈ కీలను హోస్ట్‌కు పంపడం మంచిది, తద్వారా అవి vim లేదా emacsలో ఉపయోగించబడతాయి.\n\nచేరితే, బ్రౌజర్ Alt+1..9ని హ్యాండిల్ చేస్తుంది. చేరకపోతే, Alt+1..9 హోస్ట్‌కి పంపబడుతుంది. శూన్యం అయితే, బ్రౌజర్ ప్లాట్‌ఫామ్, విండో రకం ఆధారంగా ఆటోమేటిక్‌గా గుర్తించబడుతుంది."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Ctrl+N బ్రౌజర్‌కు చేరిందా లేదా.\n\nచేరితే, Ctrl+Nని బ్రౌజర్ \"కొత్త విండో\" కీబోర్డ్ షార్ట్‌కట్‌గా హ్యాండిల్ చేస్తుంది. చేరకపోతే, Ctrl+N హోస్ట్‌కి పంపబడుతుంది."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Ctrl+1..9ని బ్రౌజర్‌కి పంపాలో లేదో సెట్ చేస్తుంది.\n\nఇది బ్రౌజర్ ట్యాబ్‌లో htermని అమలు చేస్తున్నప్పుడు ఉపయోగపడుతుంది, కాబట్టి మీరు Chrome \"ట్యాబ్‌కి మార్చు\" కీబోర్డ్ యాక్సిలిరేటర్‌లను కోల్పోరు. ట్యాబ్‌లో అమలు చేయనప్పుడు, ఈ కీలను హోస్ట్‌కి పంపడం ఉత్తమం, దీని వలన వీటిని vim లేదా emacsలో వినియోగించగలరు.\n\nఒప్పు అయితే, Ctrl+1..9 బ్రౌజర్ ద్వారా నిర్వహించబడతాయి. తప్పు అయితే, Ctrl+1..9 హోస్ట్‌కి పంపబడతాయి. శూన్యం అయితే, బ్రౌజర్ ప్లాట్‌ఫామ్ మరియు విండో రకం ఆధారంగా ఆటోడిటెక్ట్ అవుతాయి."
+		"message": "Ctrl+1..9 బ్రౌజర్‌కు చేరిందా లేదా.\n\nబ్రౌజర్ ట్యాబ్‌లో hterm రన్ అవుతున్నప్పుడు ఇది ఉపయోగకరంగా ఉంటుంది, కనుక Chrome యొక్క \"ట్యాబ్‌కు స్విచ్ అవ్వండి\" కీబోర్డ్ షార్ట్‌కట్‌లను కోల్పోరు. ట్యాబ్‌లో రన్ అవ్వకపోతే, ఈ కీలను హోస్ట్‌కు పంపడం మంచిది, తద్వారా అవి vim లేదా emacsలో ఉపయోగించబడతాయి.\n\nచేరితే, బ్రౌజర్ Ctrl+1..9ని హ్యాండిల్ చేస్తుంది. చేరకపోతే, Ctrl+1..9 హోస్ట్‌కి పంపబడుతుంది. శూన్యం అయితే, బ్రౌజర్ ప్లాట్‌ఫామ్, విండో రకం ఆధారంగా ఆటోమేటిక్‌గా గుర్తించబడుతుంది."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Ctrl+T బ్రౌజర్‌కు చేరిందా లేదా.\n\nచేరితే, Ctrl+Tని బ్రౌజర్ \"కొత్త ట్యాబ్\" కీబోర్డ్ షార్ట్‌కట్‌గా హ్యాండిల్ చేస్తుంది. చేరకపోతే, Ctrl+T హోస్ట్‌కు పంపబడుతుంది."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab, అలాగే Ctrl+Shift+Tab బ్రౌజర్‌కు చేరిందా లేదా.\n\nచేరితే, బ్రౌజర్ Ctrl+Tab అలాగే Ctrl+Shift+Tabని \"తర్వాతి/మునుపటి ట్యాబ్\" కీబోర్డ్ షార్ట్‌కట్‌గా హ్యాండిల్ చేస్తుంది. చేరకపోతే, Tab కీ Ctrl లేదా Shift లేకుండా హోస్ట్‌కి పంపబడుతుంది."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Ctrl+W బ్రౌజర్‌కు చేరిందా లేదా.\n\nచేరితే, బ్రౌజర్ Ctrl+Wని \"ట్యాబ్‌ను మూసివేయి\" కీబోర్డ్ షార్ట్‌కట్‌గా హ్యాండిల్ చేస్తుంది. చేరకపోతే, Ctrl+W హోస్ట్‌కు పంపబడుతుంది."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Meta+1..9ని బ్రౌజర్‌కి పంపాలో లేదో సెట్ చేస్తుంది.\n\nఇది బ్రౌజర్ ట్యాబ్‌లో htermని అమలు చేస్తున్నప్పుడు ఉపయోగపడుతుంది, కాబట్టి మీరు Chrome \"ట్యాబ్‌కి మార్చు\" కీబోర్డ్ యాక్సిలిరేటర్‌లను కోల్పోరు. ట్యాబ్‌లో అమలు చేయనప్పుడు, ఈ కీలను హోస్ట్‌కి పంపడం ఉత్తమం, దీని వలన వీటిని vim లేదా emacsలో వినియోగించగలరు.\n\nఒప్పు అయితే, Meta+1..9 బ్రౌజర్ ద్వారా నిర్వహించబడతాయి. తప్పు అయితే, Meta+1..9 హోస్ట్‌కి పంపబడతాయి. శూన్యం అయితే, బ్రౌజర్ ప్లాట్‌ఫామ్ మరియు విండో రకం ఆధారంగా ఆటోడిటెక్ట్ అవుతాయి."
+		"message": "Meta+1..9 బ్రౌజర్‌కు చేరిందా లేదా.\n\nబ్రౌజర్ ట్యాబ్‌లో hterm రన్ అవుతున్నప్పుడు ఇది ఉపయోగకరంగా ఉంటుంది, కనుక Chrome యొక్క \"ట్యాబ్‌కు స్విచ్ అవ్వండి\" కీబోర్డ్ షార్ట్‌కట్‌లను కోల్పోరు. ట్యాబ్‌లో రన్ అవ్వకపోతే, ఈ కీలను హోస్ట్‌కు పంపడం మంచిది, తద్వారా అవి vim లేదా emacsలో ఉపయోగించబడతాయి.\n\nచేరితే, బ్రౌజర్ Meta+1..9ని హ్యాండిల్ చేస్తుంది. చేరకపోతే, Meta+1..9 హోస్ట్‌కు పంపబడుతుంది. శూన్యం అయితే, బ్రౌజర్ ప్లాట్‌ఫామ్, విండో రకం ఆధారంగా ఆటోమేటిక్‌గా గుర్తించబడుతుంది."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Meta+Vని హోస్ట్‌కి పంపాలో లేదో సెట్ చేయండి."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "ఒప్పు అయితే, లాగి, వదిలిన వచనం టెర్మినల్‌లో అతికించబడుతుంది.\nతప్పు అయితే, వదిలిన వచనం విస్మరించబడుతుంది."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "హోస్ట్ నుండి అందుకునే డేటా కోసం ఆశించే ఎన్‌కోడింగ్‌ని సెట్ చేయండి.\nఎన్‌కోడింగ్‌లు సరిపోకపోతే, దృశ్య దోషాలు గమనించవచ్చు. \n\n'utf-8' మరియు 'raw' అనేవి చెల్లుబాటు అయ్యే విలువలు."
@@ -312,7 +546,7 @@
 		"message": "నిలువు స్క్రోల్‌బార్ మోడ్"
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "షిఫ్ట్-ఇన్సర్ట్‌ను అతికించడానికి ఉపయోగించాలా లేదా రిమోట్ హోస్ట్‌కు పంపాలా అన్నది నియంత్రిస్తుంది."
+		"message": "షిఫ్ట్+ఇన్సర్ట్‌ను అతికించడానికి ఉపయోగించాలా లేదా రిమోట్ హోస్ట్‌కు పంపాలా అన్నది నియంత్రిస్తుంది."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "డిఫాల్ట్ టెర్మినల్ ఎన్‌కోడింగ్ (DOCS).\n\nISO-2022 అక్షరాల మ్యాపింగ్ అనువాదాలను (గ్రాఫిక్స్ మ్యాప్‌ల వంటివి) ప్రారంభిస్తుంది.\nUTF-8 వాటికి మద్దతును నిలిపివేస్తుంది.\n\nలాక్ చేయబడిన వేరియంట్‌ అంటే అమలు సమయంలో టెర్మినల్ ఎస్కేప్ శ్రేణుల ద్వారా ఎన్‌కోడింగ్ మార్చబడదని సూచిక.\n\nమీరు లెగసీ అప్లికేషన్‌లలో విచ్ఛిన్న అమలు ప్రక్రియను గమనిస్తే మినహా UTF-8కి లోబడి ఉండాలి."
@@ -327,7 +561,7 @@
 		"message": "టెర్మినల్‌ని శైలీకరించడం కోసం అనుకూల CSS వచనం."
 	},
 	"hterm_pref_word_break_match_left": {
-		"message": "ఎంపికలోని ఎడమవైపు (ప్రారంభం)కి విరామ సరిపోలికకు రెగ్యులర్ ఎక్స్‌ప్రెషన్.\n\nసాధారణంగా ఇది నిర్దిష్ట అక్షరాలను తిరస్కరించే అక్షరాల శ్రేణి.\nమేము డిఫాల్ట్‌గా \"~\" మరియు \".\"ని తరచుగా వాటితో ప్రారంభించే పాత్‌లుగా అనుమతిస్తాము."
+		"message": "ఎంపికలోని ఎడమవైపు (ప్రారంభం)న‌కు విరామ సరిపోలికకు రెగ్యులర్ ఎక్స్‌ప్రెషన్.\n\nసాధారణంగా ఇది నిర్దిష్ట అక్షరాలను తిరస్కరించే అక్షరాల శ్రేణి.\nమేము డిఫాల్ట్‌గా \"~\" మరియు \".\"ని తరచుగా వాటితో ప్రారంభించే పాథ్‌లుగా అనుమతిస్తాము."
 	},
 	"hterm_pref_word_break_match_middle": {
 		"message": "మధ్యలో ఉన్న అన్ని అక్షరాలకు సరిపోల్చే రెగ్యులర్ ఎక్స్‌ప్రెషన్.\n\nసాధారణంగా ఇది నిర్దిష్ట అక్షరాలను తిరస్కరించే అక్షరాల శ్రేణి.\n\nప్రారంభ స్థానం చుట్టూ ఎంపికను విస్తృతపరచడానికి ఉపయోగించబడుతుంది."
@@ -336,10 +570,10 @@
 		"message": "ఎంపికలోని కుడివైపు (ముగింపు)కి విరామ సరిపోలికకు రెగ్యులర్ ఎక్స్‌ప్రెషన్.\n\nసాధారణంగా ఇది నిర్దిష్ట అక్షరాలను తిరస్కరించే అక్షరాల శ్రేణి."
 	},
 	"hterm_space_character": {
-		"message": "ఖాళీ"
+		"message": "స్పేస్"
 	},
 	"hterm_title_pref_appearance": {
-		"message": "కనిపించే తీరు (ఫాంట్‌లు, రంగులు, చిత్రాలు)"
+		"message": "కనిపించే తీరు (ఫాంట్‌లు, రంగులు, ఇమేజ్‌లు)"
 	},
 	"hterm_title_pref_copypaste": {
 		"message": "కాపీ చేసి & అతికించు"
@@ -348,7 +582,7 @@
 		"message": "ఎన్‌కోడింగ్"
 	},
 	"hterm_title_pref_extensions": {
-		"message": "పొడిగింపులు"
+		"message": "ఎక్స్‌టెన్షన్‌లు"
 	},
 	"hterm_title_pref_keyboard": {
 		"message": "కీబోర్డ్"
@@ -386,8 +620,20 @@
 	"known_hosts_title": {
 		"message": "తెలిసిన హోస్ట్‌లు:"
 	},
+	"licenses": {
+		"message": "లైసెన్స్‌లు"
+	},
+	"licenses_expand_link": {
+		"message": "లైసెన్స్‌ను చూపు"
+	},
+	"licenses_title": {
+		"message": "ఓపెన్ సోర్స్ లైసెన్స్‌లు"
+	},
 	"loading_label": {
-		"message": "లోడ్ చేస్తోంది..."
+		"message": "లోడ్ అవుతోంది..."
+	},
+	"migrate_to_ext": {
+		"message": "నోటీస్: దయచేసి కొత్త సురక్షిత షెల్ ఎక్స్‌టెన్షన్‌కి ($1) తరలిపోండి.\nChrome యాప్‌లు ఆపివేయబడ్డాయి, కాబట్టి ఈ వెర్షన్ అప్‌డేట్‌లను స్వీకరించడం ఆపివేస్తుంది.\nమరిన్ని వివరాల కోసం దయచేసి తరలింపు గైడ్‌ని ($2) చూడండి."
 	},
 	"missing_param": {
 		"message": "లేని పరామితి: $1"
@@ -396,16 +642,244 @@
 		"message": "SFTPని మౌంట్ చేయి"
 	},
 	"mount_path_label": {
-		"message": "మౌంట్ చేయాల్సిన పాథ్‌"
+		"message": "మౌంట్ చేయాల్సిన పాత్‌"
 	},
 	"mounted_message": {
 		"message": "మౌంట్ చేయబడింది!"
 	},
+	"nasftp_cmd_cat": {
+		"message": "పిల్లి"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "టెర్మినల్‌కు ఫైల్‌ను డంప్ చేయండి"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "అమలవుతున్న డైరెక్టరీని మార్చండి"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "పాత్‌ల సమూహాన్ని మార్చండి"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "పాత్‌ల అనుమతులను మార్చండి"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "పాత్‌ల యజమానిని మార్చండి"
+	},
+	"nasftp_cmd_clear": {
+		"message": "క్లియర్ చేయి"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "ప్రస్తుత టెర్మినల్ స్క్రీన్‌ను క్లియర్ చేయండి."
+	},
+	"nasftp_cmd_clip": {
+		"message": "క్లిప్"
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "క్లిప్‌బోర్డ్‌కి ఫైల్‌ను కాపీ చేయండి (డిఫాల్ట్: ప్రారంభం నుండి 10MiB)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "క్లిప్‌బోర్డ్‌కు $1 బైట్‌లు కాపీ చేయబడ్డాయి"
+	},
+	"nasftp_cmd_color": {
+		"message": "రంగు"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "రంగు వినియోగాన్ని టోగుల్ చేయండి"
+	},
+	"nasftp_cmd_copy": {
+		"message": "కాపీ"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "మూలాన్ని గమ్యస్థానానికి కాపీ చేయండి"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "ఫైల్‌లను తొలగించు"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "డిస్క్ గణాంకాలను చూపు"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  పాత్: $1\n ఎఫ్‌ఎస్‌ఐడి: $2\n మొత్తం: $3\n  ఉపయోగించినది: $4 ($5%)\n లభ్యత: $6 (అర్హత లేని యూజర్‌లకు)\n $7 (రూట్‌కి)"
+	},
+	"nasftp_cmd_exit": {
+		"message": "నిష్క్రమించు"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "డిస్‌కనెక్ట్ చేయండి"
+	},
+	"nasftp_cmd_get": {
+		"message": "పొందు"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "ఫైల్‌ను డౌన్‌లోడ్ చేస్తోంది: $1 $2గా"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "ఫైల్‌లను డౌన్‌లోడ్ చేయండి"
+	},
+	"nasftp_cmd_help": {
+		"message": "సహాయం"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "ఈ సహాయ స్క్రీన్"
+	},
+	"nasftp_cmd_list": {
+		"message": "లిస్ట్"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "డైరెక్టరీ వివరాలతో జాబితాను తయారు చేయండి"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "లక్ష్యానికి పాయింట్ చేసే పాత్ వద్ద లింక్‌ను సృష్టించండి"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "డైరెక్టరీలను సృష్టించండి"
+	},
+	"nasftp_cmd_move": {
+		"message": "తరలించు"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "ఫైల్ పేరు మార్చండి"
+	},
+	"nasftp_cmd_prompt": {
+		"message": "ప్రాంప్ట్"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "ప్రాంప్ట్ స్ట్రింగ్‌ను సెట్ చేయండి"
+	},
+	"nasftp_cmd_put": {
+		"message": "ఉంచు"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "ఫైల్‌లను అప్‌లోడ్ చేయండి"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "ఫైల్ అప్‌లోడ్ అవుతోంది: $1, $2 ($3)గా"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "ప్రస్తుతం అమలవుతున్న డైరెక్టరీని చూపు"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "రిమోట్‌గా పని చేసే డైరెక్టరీ: $1"
+	},
+	"nasftp_cmd_quit": {
+		"message": "నిష్క్రమించు"
+	},
+	"nasftp_cmd_readlink": {
+		"message": "రీడ్‌లింక్"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "symlinksను చదవండి"
+	},
+	"nasftp_cmd_realpath": {
+		"message": "రియల్‌పాత్"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "నియమానుగుణత పాత్‌లు"
+	},
+	"nasftp_cmd_rename": {
+		"message": "పేరుమార్చు"
+	},
+	"nasftp_cmd_reput": {
+		"message": "రీపుట్"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "అప్‌లోడ్ అవుతున్న ఫైల్‌లను కొనసాగించండి"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "ఫైల్‌లను తీసివేయండి"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "ఖాళీ డైరెక్టరీలను తొలగించండి"
+	},
+	"nasftp_cmd_show": {
+		"message": "చూపు"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "ఇన్‌లైన్ ఫైల్‌లను చూపు"
+	},
+	"nasftp_cmd_stat": {
+		"message": "గణాంకం"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "ఎక్స్‌టెన్షన్‌లు:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "ఫైల్ స్థితిని చూపు"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  ఫైల్: $1\n  పరిమాణం: $2 bytes\n   UID $3\n   GID: $4\nయాక్సెస్: $5\n atime: $6\n mtime: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "లక్ష్యానికి పాయింట్ చేసే పాత్ వద్ద symlinkను సృష్టించండి"
+	},
+	"nasftp_cmd_truncate": {
+		"message": "తగ్గించు"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "పాత్‌లను 0 బైట్‌లకు తగ్గించండి"
+	},
+	"nasftp_cmd_version": {
+		"message": "వెర్షన్"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  సర్వర్ ఎక్స్‌టెన్షన్‌ల్‌:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "ప్రస్తుత ప్రోటోకాల్ వెర్షన్‌ను చూపుతుంది"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "SFTP ప్రోటోకాల్ వెర్షన్ సమాచారం:\n  స్థానికం: $1\n  సర్వర్: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: ఫైల్ ముగింపు"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: ఫైల్ కనుగొనబడలేదు"
+	},
+	"nasftp_error_file_reading": {
+		"message": "$1ను చదవడం విఫలమైంది: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "హ్యాండిల్ చేయని అంతర్గత ఎర్రర్; దయచేసి బగ్‌ను ఫైల్ చేయండి: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: నంబర్ చెల్లదు: $3"
+	},
+	"nasftp_error_message": {
+		"message": "ఎర్రర్: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: '$2' ఎక్స్‌టెన్షన్ అందుబాటులో లేదు"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: సాధారణమైన ఫైల్ కాదు"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: తగినన్ని ఆర్గ్యుమెంట్‌లు లేవు"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: అనుమతి తిరస్కరించబడింది"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: చాలా ఆర్గ్యుమెంట్‌లు ఉన్నాయి"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: తెలియని ఆదేశం"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: తెలియని ఫ్లాగ్ $2"
+	},
+	"nasftp_force_quit": {
+		"message": "బలవంతపు నిష్క్రమణ"
+	},
+	"nasftp_progress_summary": {
+		"message": "$2 సెకన్లలో $1 బైట్‌లు ($3/సె) బదిలీ చేయబడ్డాయి"
+	},
 	"nassh_options_error": {
-		"message": "తెలియని రిలే ఎంపిక: $1"
+		"message": "తెలియని ఎంపిక: $1"
 	},
 	"nassh_product_name": {
-		"message": "Secure Shell"
+		"message": "సురక్షిత షెల్"
 	},
 	"new_window_menu_label": {
 		"message": "కొత్త విండో"
@@ -420,7 +894,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> సేవ్ చేసిన ప్రొఫైల్‌కు లేదా కొత్త ssh సిస్టమ్‌కు కనెక్ట్ చేయండి"
 	},
 	"open_as_window_tip": {
-		"message": "[చిట్కా] మీ టెర్మినల్‌ని మూసివేయకుండా Ctrl+Wని నిరోధించడానికి 'విండో వలె తెరువు' లేదా 'పూర్తి స్క్రీన్' ఎంపికలను ఉపయోగించండి!\n[చిట్కా] మరింత సమాచారం కోసం $1ని చూడండి."
+		"message": "[చిట్కా] మీ టెర్మినల్‌ను మూసివేయకుండా Ctrl+Wను నిరోధించడానికి 'విండో లాగా తెరువు' లేదా 'పూర్తి స్క్రీన్' ఎంపికలను ఉపయోగించండి!\n[చిట్కా] మరింత సమాచారం కోసం $1 చూడండి."
 	},
 	"options_button_label": {
 		"message": "ఎంపికలు"
@@ -434,26 +908,59 @@
 	"plugin_loading_failed": {
 		"message": " విఫలమైంది! :("
 	},
+	"popup_connect_tooltip": {
+		"message": "కొత్త ట్యాబ్‌లో తెరవడానికి Ctrlని నొక్కి పట్టుకోండి."
+	},
 	"pref_backup_filename": {
 		"message": "సురక్షిత షెల్ ప్రాధాన్యతల బ్యాకప్.json"
 	},
+	"preferences_header_ssh_files": {
+		"message": "SSH ఫైల్‌లు"
+	},
 	"preferences_header_terminal": {
-		"message": "ప్రొఫైల్ సెట్టింగ్‌లు"
+		"message": "టెర్మినల్ సెట్టింగ్‌లు"
+	},
+	"preferences_header_uri": {
+		"message": "URI హ్యాండ్లర్‌లు"
 	},
 	"preferences_reset": {
 		"message": "అన్ని ప్రాధాన్యతలు రీసెట్ చేయబడ్డాయి!"
+	},
+	"protocol_register_button": {
+		"message": "ప్రోటోకాల్ హ్యాండ్లర్‌లను నమోదు చేయండి"
+	},
+	"protocol_register_explain": {
+		"message": "దిగువన ఉన్న బటన్ మేము సపోర్ట్ చేసే అన్ని ప్రోటోకాల్‌ల కోసం హ్యాండ్లర్‌లను నమోదు చేయడానికి ప్రయత్నిస్తుంది. ఉదాహరణకు, ఇది ssh:// లింక్‌లను నేరుగా హ్యాండిల్ చేయడానికి మమల్ని అనుమతిస్తుంది. ప్రతి ప్రోటోకాల్ కోసం బ్రౌజర్ ప్రాంప్ట్‌ను ప్రదర్శిస్తుంది, కనుక దయచేసి చూపించిన ప్రతిదాన్ని నిర్ధారించండి/స్వీకరించండి. ప్రాంప్ట్‌లు ఏవీ చూపకపోతే, ఆపై పరిష్కార ప్రక్రియ చిట్కాల కోసం దయచేసి తర్వాతి విభాగాన్ని చూడండి."
+	},
+	"protocol_register_explain_settings": {
+		"message": "మేము ఇప్పటికే రిజస్టర్ చేసిన హ్యాండ్లర్‌లను కలిగి ఉంటే లేదా మునుపటి నమోదు ప్రయత్నాలు తిరస్కరించబడి ఉంటే, ఆపై తర్వాత ప్రాంప్ట్‌లు ప్రదర్శించబడవు. దయచేసి దిగువ డైలాగ్‌ను తెరిచి, ఆపై ssh/sftp/etc... విభాగాలలో నమోదైన హ్యాండ్లర్ సెట్టింగ్‌లను చెక్ చేయండి. ఒకవేళ ప్రోగ్రామ్ బ్లాక్ అయితే, మిమ్మల్ని 'రిజస్టర్ చేయడానికి తిరిగి ప్రయత్నించండి'కి అనుమతించే సెట్టింగ్‌లను మీరు తొలగించవచ్చు. ఒకవేళ ఈ ప్రోగ్రామ్ ఇప్పటికే రిజస్టర్ అయ్యి డిఫాల్ట్ హ్యాండ్లర్‌గా సెట్ చేయకపోతే, మీరు డిఫాల్ట్ హ్యాండ్లర్‌ను కూడా మార్చవచ్చు."
+	},
+	"protocol_register_options_link": {
+		"message": "ప్రోటోకాల్ నమోదు"
+	},
+	"protocol_register_settings_button": {
+		"message": "నమోదు చేసిన హ్యాండ్లర్‌ల సెట్టింగ్‌లను తెరవండి"
+	},
+	"protocol_register_title": {
+		"message": "సురక్షిత షెల్ ప్రోటోకాల్ హ్యాండ్లర్ రిజిస్ట్రేషన్ సహాయకం"
+	},
+	"read_size_label": {
+		"message": "చదివే పరిమాణం (KiB)"
 	},
 	"reconnect_message": {
 		"message": "తిరిగి కనెక్ట్ చేయాలా(R), మరో కనెక్షన్‌ని ఎంచుకుంటారా(C), నిష్క్రమిస్తారా(x)?"
 	},
 	"relay_retry": {
-		"message": "తిరిగి ప్రయత్నిస్తోంది..."
+		"message": "మళ్లీ ప్రయత్నిస్తోంది..."
 	},
 	"request_pin_prompt": {
-		"message": "'$2'లో కీ $1 అన్‌లాక్ చేయడానికి పిన్‌ని నమోదు చేయండి ($3 ప్రయత్నాలు మిగిలి ఉన్నాయి):"
+		"message": "'$2($3)'లో కీ $1 అన్‌లాక్ చేయడానికి పిన్‌ని ఎంటర్ చేయండి ($4 ప్రయత్నాలు మిగిలి ఉన్నాయి):"
 	},
 	"restore_prefs": {
 		"message": "బ్యాకప్‌ని పునరుద్ధరించండి"
+	},
+	"save_label": {
+		"message": "సేవ్ చేయి"
 	},
 	"shortcut_list_aria_label": {
 		"message": "సేవ్ చేసిన కనెక్షన్‌లు"
@@ -464,8 +971,44 @@
 	"ssh_argstr_label": {
 		"message": "SSH ఆర్గ్యుమెంట్‌లు"
 	},
+	"stream_open_error": {
+		"message": "ప్రసార $1ని తెరవడం విఫలమైంది: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "టెర్మినల్ క్లియర్"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI రంగులు"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "యాంటీ-అలియాస్"
+	},
+	"terminal_name_pref_bell": {
+		"message": "బెల్"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "బ్లింక్ కావడం"
+	},
+	"terminal_name_pref_color": {
+		"message": "రంగు"
+	},
+	"terminal_name_pref_font": {
+		"message": "ఫాంట్"
+	},
+	"terminal_name_pref_image": {
+		"message": "ఇమేజ్"
+	},
+	"terminal_name_pref_shape": {
+		"message": "ఆకారం"
+	},
+	"terminal_name_pref_visible": {
+		"message": "కనిపించేలా చేయి"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "డిఫాల్ట్ పాలెట్ కోసం రంగులను సెట్ చేయండి."
+	},
+	"terminal_pref_bell": {
+		"message": "వినిపించే టెర్మినల్ బెల్."
 	},
 	"terminal_preview_label": {
 		"message": "ప్రివ్యూ"
@@ -476,20 +1019,146 @@
 	"terminal_reset_menu_label": {
 		"message": "టెర్మినల్ రీసెట్"
 	},
+	"terminal_settings_background_image_help": {
+		"message": "బ్యాక్‌గ్రౌండ్ ఇమేజ్ URL. తప్పనిసరిగా http:// లేదా https://తో ప్రారంభించాలి. ఇమేజ్ ఏదీ లేకుంటే ఖాళీగా విడిచిపెట్టండి.\n\nఉదాహరణకు:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "ఆటో"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "డిజేబుల్ చేయి"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "బీమ్"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "బ్లాక్"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "కింది గీత"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "మీరు ఖచ్చితంగా థీమ్‌ను దాని డిఫాల్ట్‌లకు సెట్ చేయాలనుకుంటున్నారా?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "థీమ్‌ను రీసెట్ చేయండి"
+	},
+	"terminal_settings_reset_label": {
+		"message": "రీసెట్ చేయి"
+	},
+	"terminal_theme_classic_label": {
+		"message": "క్లాసిక్"
+	},
+	"terminal_theme_dark_label": {
+		"message": "ముదురు"
+	},
+	"terminal_theme_haze_label": {
+		"message": "దుమ్మూధూళీ"
+	},
+	"terminal_theme_light_label": {
+		"message": "లేత"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized ముదురు రంగు"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized లైట్"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "రంగు 0: నలుపు"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "రంగు 1: ఎరుపు"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "రంగు 10: ముదురు ఆకుపచ్చ"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "రంగు 11: ముదురు పసుపు"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "రంగు 12: ముదురు నీలం"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "రంగు 13: ముదురు మెజెంటా"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "రంగు 14: ముదురు నీలం"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "రంగు 15: ముదురు తెలుపు"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "రంగు 2: పచ్చరంగు"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "రంగు 3: పసుపు"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "రంగు 4: నీలం"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "రంగు 5: మెజెంటా"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "రంగు 6: ముదురు నీలం"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "రంగు 7: తెలుపు"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "రంగు 8: ముదురు నలుపు"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "రంగు 9: ముదురు ఎరుపు"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "రూపురేఖలు"
+	},
+	"terminal_title_pref_background": {
+		"message": "బ్యాక్‌గ్రౌండ్"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "ప్రవర్తన"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "కర్సర్"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "కీబోర్డ్"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "కీబోర్డ్ & మౌస్"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "మౌస్"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "స్క్రోల్ బార్"
+	},
+	"terminal_title_pref_text": {
+		"message": "వచనం"
+	},
+	"terminal_title_settings": {
+		"message": "సెట్టింగ్‌లు"
+	},
+	"terminal_title_theme": {
+		"message": "థీమ్"
+	},
 	"tip_1": {
 		"message": "మీరు లింక్‌లపై క్లిక్ చేసేటప్పుడు Ctrl (macOSలో అయితే, Cmd) నొక్కి ఉంచడం ద్వారా వాటిని తెరవవచ్చు!"
 	},
 	"tip_10": {
-		"message": "విండోలో పని చేస్తున్నప్పుడు, Ctrl+Shift+N నొక్కడం ద్వారా మరొక సెషన్‌ను తెరవవచ్చు."
+		"message": "విండోలో పని చేస్తున్నప్పుడు, Ctrl-Shift+N నొక్కడం ద్వారా మరొక సెషన్‌ను తెరవవచ్చు."
 	},
 	"tip_11": {
-		"message": "మీరు ఈ లింక్‌లో కీలు/సత్వర మార్గాలను పునర్నిర్వచించవచ్చు: https://goo.gl/LWRndr"
+		"message": "మీరు ఈ లింక్‌లో కీలు/షార్ట్‌కట్‌లను పునర్నిర్వచించవచ్చు: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
 		"message": "ssh ప్రమాణీకరణ కోసం Yubikeys మరియు ఇతర స్మార్ట్ కార్డ్‌లను ఉపయోగించండి: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
-		"message": "రేఖాకృతికి అనుగుణమైన ప్రదర్శన చిత్రాలు: https://goo.gl/MnSysj"
+		"message": "రేఖాకృతికి అనుగుణమైన ప్రదర్శన ఇమేజ్‌లు: https://goo.gl/MnSysj"
 	},
 	"tip_14": {
 		"message": "కుడి క్లిక్ చేసేటప్పుడు Ctrl (macOSలో అయితే, Cmd)ని నొక్కి ఉంచితే ఒక సందర్భోచిత మెనూ తెరుచుకుంటుంది."
@@ -541,6 +1210,9 @@
 	},
 	"welcome_version": {
 		"message": "$1 వెర్షన్ $2కు స్వాగతం."
+	},
+	"write_size_label": {
+		"message": "రాత పరిమాణం (KiB)"
 	},
 	"zoom_warning": {
 		"message": "Chrome మెను->జూమ్‌ని 100%కి సెట్ చేయండి"

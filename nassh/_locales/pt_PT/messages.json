@@ -6,34 +6,28 @@
 		"message": "Guardar cópia de segurança"
 	},
 	"bad_destination": {
-		"message": "Não é possível analisar o destino: $1"
+		"message": "Não é possível analisar o destino: $1."
 	},
 	"before_unload": {
 		"message": "Se fechar este separador, irá encerrar a sessão."
 	},
 	"cache_pin_prompt": {
-		"message": "Pretende colocar o PIN em cache para esta sessão? (s/N):"
+		"message": "Pretende colocar o PIN em cache para esta sessão SSH? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "Cancelar"
 	},
+	"changelog": {
+		"message": "Registo de alterações"
+	},
 	"clear_known_hosts_menu_label": {
-		"message": "Apagar anfitriões conhecidos de SSH"
+		"message": "Limpar anfitriões conhecidos de SSH"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "Este comando apresenta um menu de anfitriões conhecidos e solicita ao anfitrião que esqueça."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Esquecer um anfitrião SSH conhecido."
-	},
-	"cmd_ssh_help": {
-		"message": "Os parâmetros |username| e |hostname| são obrigatórios, |port| é opcional. Se a porta não for especificada, é aplicada a predefinição de 22."
-	},
-	"cmd_ssh_title": {
-		"message": "Abre uma nova sessão SSH."
+	"clear_label": {
+		"message": "Limpar"
 	},
 	"command_complete": {
-		"message": "A instrução $1 foi concluída com o código de estado $2."
+		"message": "O comando $1 foi concluído com o código de estado $2."
 	},
 	"command_not_supported": {
 		"message": "O comando $1 não é suportado nesta versão do Chrome."
@@ -48,16 +42,16 @@
 		"message": "Pretende escolher outra ligação (C) ou sair (X)?"
 	},
 	"connecting": {
-		"message": "A ligar a $1..."
+		"message": "A ligar a $1…"
 	},
 	"connection_dialog_name": {
 		"message": "Caixa de diálogo de ligação"
 	},
 	"console_crosh_options_notice": {
-		"message": "Sabia que existe uma página de opções dedicada?\nJá não precisa de modificar diretamente \"term_\".\nPrima $1 para o abrir ou clique em:\n$2"
+		"message": "Sabia que existe uma página de opções dedicada?\nJá não precisa de modificar diretamente \"term_\".\nPrima $1 para a abrir ou clique em:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Sabia que existe uma página de opções dedicada?\nJá não precisa de trabalhar diretamente com \"term_\"!\n$1"
+		"message": "Sabia que existe uma página de opções dedicada?\nJá não precisa de modificar diretamente \"term_\"!\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -93,10 +87,10 @@
 		"message": "o caminho predefinido é o diretório principal do utilizador"
 	},
 	"field_nassh_options_aria_label": {
-		"message": "Opções do servidor de retransmissão SSH"
+		"message": "Opções do servidor de transmissão SSH"
 	},
 	"field_nassh_options_placeholder": {
-		"message": "Opções do servidor de retransmissão SSH"
+		"message": "Opções do servidor de transmissão SSH"
 	},
 	"field_port_aria_label": {
 		"message": "porta"
@@ -114,7 +108,7 @@
 		"message": "nome de utilizador"
 	},
 	"found_relay": {
-		"message": "Foi encontrado o servidor de retransmissão: $1"
+		"message": "Servidor de transmissão encontrado: $1"
 	},
 	"get_profile_error": {
 		"message": "ERRO: não foi possível carregar o perfil $1:\n$2"
@@ -143,17 +137,230 @@
 	"hterm_loading_resource_start": {
 		"message": "A carregar o recurso $1…"
 	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Permitir apresentação de imagens inline"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Retrocesso é Meta+Retrocesso"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "Modo da tecla AltGr"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Tratar tecla Alt como tecla Meta"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Tratamento do modificador da tecla Alt"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Som de campainha de alerta (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Cor de fundo"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Imagem de fundo"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Posição da imagem de fundo"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Tamanho da imagem de fundo"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Comportamento da tecla de retrocesso"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Substituições do mapa de carateres"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Limpar seleção de texto automaticamente"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Fechar janela ao sair"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Paleta de cores inicial"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Copiar conteúdo selecionado automaticamente"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Ctrl+C, comportamento de cópia"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ctrl++/-/0, comportamento do zoom"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Ctrl+V, comportamento de colagem"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Intermitência do cursor"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Taxa de intermitência do cursor"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Cor do cursor de texto"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Forma do cursor de texto"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Criar notificações no ambiente de trabalho para campainhas de alerta"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Os carateres East Asian Ambiguous utilizam duas colunas"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Suportar carateres de controlo C1 não UTF-8"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Ativar texto intermitente"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Comportamento do texto a negrito"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Utilizar cores vivas com texto a negrito"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Mostrar notificação ao copiar conteúdo"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Permitir escritas na área de transferência remota"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Permitir limpeza do buffer de deslocação para trás (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Permitir alteração do cursor de texto intermitente"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Mostrar dimensões do terminal quando redimensionado"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Variáveis de ambiente"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Família de tipos de letra do texto"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Tamanho do tipo de letra do texto"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Suavização do tipo de letra do texto"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Cor do texto"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Ocultar cursor do rato ao escrever"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Comportamento de deslocamento das teclas Home/End"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Vinculações/atalhos de teclado"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Utilizar vinculações/atalhos de teclado do SO predefinidos"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "As teclas de multimédia são teclas de função"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Tratamento do modificador da tecla Meta"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Colar através do botão do rato"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Cliques com o botão direito do rato para colar conteúdo"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Comportamento de deslocamento das teclas Página para cima/Página para baixo"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Alt+1..9, comportamento de mudança de separador"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Ctrl+N, comportamento da nova janela"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Ctrl+1..9, comportamento de mudança de separador"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ctrl+T, comportamento do novo separador"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab, comportamento de mudança de separador"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Ctrl+W, comportamento de fecho do separador"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Meta+1..9, comportamento de mudança de separador"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Meta+V, comportamento de colagem"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Permitir arrastar e largar para colar"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Receber codificação"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Deslocar para baixo após premir a tecla"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Deslocar para baixo após nova saída"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Emular teclas de seta com roda de deslocamento"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Multiplicador da roda de deslocamento do rato"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Visibilidade da barra de deslocamento"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Shift+Insert, colar"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Codificação do terminal"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Permitir ao navegador tratar da cópia de texto"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "CSS personalizado (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "CSS personalizado (texto inline)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Interrupção da seleção automática (à esquerda)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Carateres de divisão de palavras"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Interrupção da seleção automática (à direita)"
+	},
 	"hterm_popup_inline_image": {
-		"message": "Imagens intercaladas"
+		"message": "Imagens inline"
 	},
 	"hterm_popup_inline_image_disabled": {
-		"message": "Imagens intercaladas desativadas"
+		"message": "Imagens inline desativadas"
 	},
 	"hterm_pref_allow_images_inline": {
 		"message": "Se permite que o anfitrião remoto apresente imagens no terminal.\n\nPor predefinição, perguntamos até escolher uma opção."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Se esta opção estiver definida, anula o remapeamento de Alt+retrocesso->DEL no Chrome OS para que Alt+retrocesso seja mesmo Alt+retrocesso."
+		"message": "Se esta opção estiver definida, anula o remapeamento de Alt+Retrocesso->Eliminar no Chrome OS para que Alt+Retrocesso seja mesmo Alt+Retrocesso."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Selecione um algoritmo de deteção de AltGr.\n\n'null': detetar automaticamente com base em navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': desativar qualquer \"munging\" relacionado com AltGr.\n'ctrl-alt': assumir que Ctrl+Alt significa AltGr.\n'left-alt': assumir que Alt da esquerda significa AltGr.\n'right-alt': assumir que Alt da direita significa AltGr."
@@ -162,16 +369,16 @@
 		"message": "Se a tecla Alt funciona como uma tecla Meta ou como uma tecla Alt distinta."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Controla como é processada a tecla Alt.\n\n  escape: envie um prefixo ESC.\n  8 bits: adicione 128 ao caráter introduzido como no xterm.\n chave para navegador: aguarde o evento de premir as teclas e veja o que o navegador\n indica. (Isto não funciona corretamente nas plataformas em que o navegador\nexecuta uma ação predefinida para algumas sequências de Alt.)"
+		"message": "Controla como é processada a tecla Alt.\n\n  escape: envie um prefixo ESC.\n  8-bit: adicione 128 ao caráter introduzido como no xterm.\n browser-key: aguarde o evento de premir as teclas e veja o que o navegador\n indica. (Isto não funciona corretamente nas plataformas em que o navegador\nexecuta uma ação predefinida para algumas sequências de Alt.)"
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "O URL do som de campainha do terminal. String vazia para a campainha não audível."
+		"message": "O URL do som de campainha do terminal. Deixe-o em branco quando não há uma campainha audível."
 	},
 	"hterm_pref_background_color": {
 		"message": "A cor de fundo para o texto sem outro atributo de cor."
 	},
 	"hterm_pref_background_image": {
-		"message": "O valor CSS da imagem de fundo. String vazia quando não há imagem.\n\nPor exemplo:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Valor CSS da imagem de fundo. Deixe-o vazio quando não há imagem.\n\nPor exemplo:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Valor CSS da posição da imagem de fundo.\n\nPor exemplo:\n  10% 10%\n  center"
@@ -180,10 +387,10 @@
 		"message": "Valor CSS do tamanho da imagem de fundo."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Se for verdadeiro, a tecla de retrocesso deve enviar BS (\"\\x08\", aka ^H). Caso contrário, deve enviar \"\\x7f\"."
+		"message": "Se definido como verdadeiro, a tecla de retrocesso irá enviar BS (\"\\x08\", também conhecido como ^H). Caso contrário, a tecla de retrocesso irá enviar \"\\x7f\"."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "Isto é especificado como um objeto. É uma matriz dispersa, em que cada propriedade é o código do conjunto de carateres e o valor é um objeto que é uma matriz dispersa. Nessa matriz dispersa, cada propriedade é o caráter recebido e o valor é o caráter apresentado.\n\nPor exemplo:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "Isto é especificado como um objeto. É uma matriz dispersa, em que cada propriedade é o código do conjunto de carateres e o valor é um objeto que é uma matriz dispersa. Nessa matriz dispersa, cada propriedade é o caráter recebido e o valor é o caráter apresentado.\n\nPor exemplo:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "Se limpa a seleção após copiar."
@@ -192,19 +399,19 @@
 		"message": "Se fecha a janela depois de o comando ter sido executado."
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "Substituir as cores na paleta predefinida.\n\nEsta operação pode ser especificada como uma matriz ou um objeto. Se for especificada como um objeto, assume-se que é uma matriz dispersa, em que cada propriedade é um índice numérico na paleta de cores.\n\nOs valores podem ser especificados como praticamente qualquer valor de cor CSS, o que inclui #RGB, #RRGGBB, rgb(...), rgba(...) e qualquer nome de cor que também faça parte do ficheiro X11 rgb.txt de origem.\n\nPode utilizar \"null\" para especificar que o valor predefinido não deve ser alterado. Isto é útil para ignorar um pequeno número de índices quando o valor estiver especificado como uma matriz.\n\nPor exemplo, estes dois valores definem o índice de cor 1 para azul:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "Substituir as cores na paleta predefinida.\n\nEsta operação pode ser especificada como uma matriz ou um objeto. Se for especificada como um objeto, assume-se que é uma matriz dispersa, em que cada propriedade é um índice numérico na paleta de cores.\n\nOs valores podem ser especificados como praticamente qualquer valor de cor CSS, o que inclui #RGB, #RRGGBB, rgb(…), rgba(…) e qualquer nome de cor que também faça parte do ficheiro X11 rgb.txt de origem.\n\nPode utilizar \"null\" para especificar que o valor predefinido não deve ser alterado. Isto é útil para ignorar um pequeno número de índices quando o valor estiver especificado como uma matriz.\n\nPor exemplo, estes dois valores definem o índice de cor 1 para azul:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
-		"message": "Copie automaticamente a seleção do rato para a área de transferência."
+		"message": "Copiar automaticamente a seleção do rato para a área de transferência."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl+C copia, se for verdadeiro, e envia ^C para o anfitrião, se for falso.\nCtrl+Shift+C envia ^C para o anfitrião, se for verdadeiro, e copia, se for falso."
+		"message": "Ctrl+C copia se for verdadeiro, e envia ^C para o anfitrião se for falso.\nCtrl+Shift+C envia ^C para o anfitrião se for verdadeiro, e copia se for falso."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
 		"message": "Se for verdadeiro, Ctrl+Sinal de adição/Menos/Zero controla o zoom.\nSe for falso, Ctrl+Shift+Sinal de adição/Menos/Zero controla o zoom, Ctrl+Menos envia ^_, Ctrl+Sinal de adição/Zero não faz nada."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl+V cola, se for verdadeiro, e envia ^V para o anfitrião, se for falso.\nCtrl+Shift+V envia ^V para o anfitrião, se for verdadeiro, e cola, se for falso."
+		"message": "Ctrl+V cola se for verdadeiro, e envia ^V para o anfitrião se for falso.\nCtrl+Shift+V envia ^V para o anfitrião se for verdadeiro, e cola se for falso."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Se o cursor de texto fica intermitente por predefinição. É possível ativar/desativar esta definição no tempo de execução através de sequências de escape do terminal."
@@ -215,11 +422,14 @@
 	"hterm_pref_cursor_color": {
 		"message": "A cor do cursor de texto visível."
 	},
+	"hterm_pref_cursor_shape": {
+		"message": "A forma do cursor de texto visível. Esta funcionalidade pode ser alterada no tempo de execução através de sequências de escape do terminal."
+	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Se for verdadeiro, as campainhas do terminal em segundo plano criam uma notificação Web. https://www.w3.org/TR/notifications/\n\nA apresentação de notificações requer a autorização do utilizador. Quando esta opção está definida como verdadeira, hterm tenta pedir autorização ao utilizador, se necessário. Os navegadores podem não apresentar este pedido de autorização se não tiver tido origem numa ação do utilizador.\n\nAs extensões do Chrome com a autorização \"notificações\" têm autorização para apresentar notificações."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Se os carateres ambíguos do sudeste asiático têm uma largura de duas colunas."
+		"message": "Se os carateres East Asian Ambiguous têm uma largura de duas colunas."
 	},
 	"hterm_pref_enable_8_bit_control": {
 		"message": "Defina como verdadeiro para ativar os carateres de controlo de 8 bits e como falso para os ignorar.\n\nRespeitamos as versões de dois bytes destes carateres de controlo independentemente desta definição."
@@ -239,11 +449,17 @@
 	"hterm_pref_enable_clipboard_write": {
 		"message": "Permita que o anfitrião remoto escreva diretamente na área de transferência do sistema local.\nO acesso de leitura nunca é concedido, independentemente desta definição.\n\nIsto é utilizado para controlar o acesso a funcionalidades como a OSC-52."
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Se a função Apagar linhas guardadas (modo 3) do comando Apagar ecrã (CSI-J) pode limpar o buffer de deslocação para trás do terminal.\n\nÉ seguro ativar esta funcionalidade por predefinição."
+	},
 	"hterm_pref_enable_dec12": {
 		"message": "Respeite a tentativa de o anfitrião alterar o estado de intermitência do cursor de texto através do Modo privado DEC 12."
 	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Se as dimensões do terminal são apresentadas quando o terminal muda de tamanho."
+	},
 	"hterm_pref_environment": {
-		"message": "Definição inicial das variáveis do ambiente como um objeto."
+		"message": "O conjunto inicial das variáveis de ambiente como um objeto."
 	},
 	"hterm_pref_font_family": {
 		"message": "Família de tipos de letra predefinida para o texto do terminal."
@@ -252,22 +468,25 @@
 		"message": "O tamanho do tipo de letra predefinido em píxeis."
 	},
 	"hterm_pref_font_smoothing": {
-		"message": "Propriedade de suavização dos tipos de letra CSS."
+		"message": "Propriedade font-smoothing de CSS."
 	},
 	"hterm_pref_foreground_color": {
-		"message": "A cor de fundo para o texto sem outro atributo de cor."
+		"message": "A cor de primeiro plano para o texto sem outro atributo de cor."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
 		"message": "Se pretender ocultar automaticamente o cursor do rato ao digitar. Por predefinição, detetar automaticamente se a plataforma/o SO processa isto.\n\nNota: alguns sistemas operativos podem substituir esta definição, pelo que nem sempre a poderá desativar."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Se definido como verdadeiro, as teclas Home/End controlam a barra de deslocamento do terminal e o comando Shift+Home/End é enviado para o anfitrião remoto. Se definido como falso, as teclas Home/End são enviadas para o anfitrião remoto e o comando Shift+Home/End efetua o deslocamento."
+		"message": "Se definido como verdadeiro, as teclas Home/End controlam a barra de deslocamento do terminal e o comando Shift+Home/Shift+End é enviado para o anfitrião remoto. Se definido como falso, as teclas Home/End são enviadas para o anfitrião remoto e o comando Shift+Home/Shift+End efetua o deslocamento."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Um mapa da sequência de teclas para as ações das teclas. As sequências de teclas incluem zero ou mais teclas de modificação seguidas de um código de teclas. Os códigos de teclas podem ser números decimais ou hexadecimais, ou um identificador de teclas. As ações das teclas podem ser especificadas por uma string a enviar ao anfitrião ou um identificador de ações. Para obter uma explicação completa do formato, aceda a https://goo.gl/LWRndr.\n\n\n\nExemplos de associações de teclas:\n:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Um mapa da sequência de teclas para as ações das teclas. As sequências de teclas incluem zero ou mais teclas de modificação seguidas de um código de teclas. Os códigos de teclas podem ser números decimais ou hexadecimais, ou um identificador de teclas. As ações das teclas podem ser especificadas por uma string a enviar ao anfitrião ou um identificador de ações. Para obter uma explicação completa do formato, aceda a https://goo.gl/LWRndr.\n\nExemplos de associações de teclas:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Se as vinculações comuns do teclado do SO devem ser respeitadas em vez de serem sempre capturadas para utilização do próprio hterm."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
-		"message": "Se for definida como verdadeira, deve converter as teclas multimédia nas respetivas teclas F equivalentes. Se for definida como falsa, permita que o navegador processe as teclas."
+		"message": "Se for definida como verdadeira, deve converter as teclas multimédia nas respetivas teclas de função equivalentes. Se for definida como falsa, permita que o navegador processe as teclas."
 	},
 	"hterm_pref_meta_sends_escape": {
 		"message": "Envie um prefixo ESC ao premir uma tecla enquanto mantém premida a tecla Meta.\n\nPor exemplo, se estiver ativado, premir Meta+K envia ^[k como se tivesse digitado Escape, seguido de k. Se estiver desativado, apenas k é enviado."
@@ -276,25 +495,40 @@
 		"message": "Botão para colar do rato ou definição nula para a deteção automática.\n\nPara a deteção automática, vamos utilizar o botão do meio do rato para outras plataformas que não o X11 (incluindo o Chrome OS). No X11, vamos utilizar o botão direito do rato (uma vez que o gestor de janela nativo deverá utilizar o botão do meio do rato para colar).\n\n0 == botão esquerdo (principal).\n1 == botão do meio (auxiliar).\n2 == botão direito (secundário).\n\nEsta opção é independente da definição para colar ao clicar no botão direito.\n\nNota: esta opção processa corretamente os ratos para utilizadores canhotos e destros."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Colar ao clicar no botão do lado direito do rato.\n\nEsta opção é independente da definição para colar ao clicar no botão direito.\n\nNota: esta opção processa corretamente os ratos para utilizadores canhotos e destros."
+		"message": "Colar ao clicar no botão do lado direito do rato.\n\nEsta opção é independente da definição \"mouse-paste-button\".\n\nNota: esta opção processa corretamente os ratos para utilizadores canhotos e destros."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Se definido como verdadeiro, as teclas Page Up/Page Down controlam a barra de deslocamento do terminal e o comando Shift+Page Up/Shift+Page Down é enviado para o anfitrião remoto. Se definido como falso, as teclas Page Up/Page Down são enviadas para o anfitrião remoto e o comando Shift+Page Up/Shift+Page Down efetua o deslocamento."
+		"message": "Se definido como verdadeiro, as teclas Página para cima/Página para baixo controlam a barra de deslocamento do terminal e o comando Shift+Página para cima/Shift+Página para baixo é enviado para o anfitrião remoto. Se definido como falso, as teclas Página para cima/Página para baixo são enviadas para o anfitrião remoto e o comando Shift+Página para cima/Shift+Página para baixo efetua o deslocamento."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Se devemos atribuir o comando Alt+1 a 9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os aceleradores do teclado \"mudar para o separador\" do Chrome. Quando não estiver a executar num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou no Emacs.\n\nSe for definida como verdadeira, o comando Alt+1 a 9 é processado pelo navegador. Se for definida como falsa, o comando é enviado ao anfitrião. Se for definida como nula, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
+		"message": "Se devemos atribuir o comando Alt+1..9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os atalhos de teclado \"mudar para o separador\" do Chrome. Quando não estiver a executar num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou Emacs.\n\nSe definido como verdadeiro, o comando Alt+1..9 é processado pelo navegador. Se definido como falso, o comando é enviado ao anfitrião. Se definida como nulo, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Se Ctrl+N é transmitido ao navegador.\n\nSe definido como verdadeiro, Ctrl+N é processado pelo navegador como o atalho de teclado \"nova janela\". Se definido como falso, Ctrl+N é enviado para o anfitrião."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Se devemos atribuir o comando Ctrl+1 a 9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os aceleradores do teclado \"mudar para o separador\" do Chrome. Quando não estiver a ser executada num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou no Emacs.\n\nSe for definida como verdadeira, o comando Ctrl+1 a 9 é processado pelo navegador. Se for definida como falsa, o comando é enviado ao anfitrião. Se for definida como nula, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
+		"message": "Se devemos atribuir o comando Ctrl+1..9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os atalhos de teclado \"mudar para o separador\" do Chrome. Quando não estiver a ser executada num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou Emacs.\n\nSe definido como verdadeiro, o comando Ctrl+1..9 é processado pelo navegador. Se definido como falso, o comando é enviado ao anfitrião. Se definido como nulo, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Se Ctrl+T é transmitido ao navegador.\n\nSe definido como verdadeiro, Ctrl+T é processado pelo navegador como o atalho de teclado \"novo separador\". Se definido como falso, Ctrl+T é enviado para o anfitrião."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Se Ctrl+Tab e Ctrl+Shift+Tab são transmitidos ao navegador.\n\nSe definido como verdadeiro, Ctrl+Tab e Ctrl+Shift+Tab são processados pelo navegador como o atalho de teclado \"separador seguinte/anterior\". Se definido como falso, a tecla Tab é enviada para o anfitrião sem Ctrl ou Shift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Se Ctrl+W é transmitido ao navegador.\n\nSe definido como verdadeiro, Ctrl+W é processado pelo navegador como o atalho de teclado \"fechar separador\". Se definido como falso, Ctrl+W é enviado para o anfitrião."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Se devemos atribuir o comando Meta+1 a 9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os aceleradores do teclado \"mudar para o separador\" do Chrome. Quando não estiver a executar num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou no Emacs.\n\nSe for definida como verdadeira, o comando Meta+1 a 9 é processado pelo navegador. Se for definida como falsa, o comando é enviado ao anfitrião. Se for definida como nula, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
+		"message": "Se devemos atribuir o comando Meta+1..9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os atalhos de teclado \"mudar para o separador\" do Chrome. Quando não estiver a executar num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou Emacs.\n\nSe definido como verdadeiro, o comando Meta+1..9 é processado pelo navegador. Se definido como falso, o comando é enviado ao anfitrião. Se definido como nulo, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Se o comando Meta+V é atribuído ao anfitrião."
 	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Se definido como verdadeiro, o texto arrastado e largado é colado no terminal.\nSe definido como falso, o texto largado é ignorado."
+	},
 	"hterm_pref_receive_encoding": {
-		"message": "Definir a codificação esperada para os dados recebidos do anfitrião.\nSe as codificações não corresponderem, é provável que sejam observados erros visuais.\n\nOs valores válidos são \"utf-8\" e \"raw\"."
+		"message": "Defina a codificação esperada para os dados recebidos do anfitrião.\nSe as codificações não corresponderem, é provável que sejam observados erros visuais.\n\nOs valores válidos são \"utf-8\" e \"raw\"."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Se há deslocamento até à parte inferior ao premir qualquer tecla."
@@ -318,7 +552,7 @@
 		"message": "A codificação do terminal predefinida (DOCS).\n\nA ISO-2022 ativa as traduções dos mapas de carateres (tais como mapas de gráficos).\nA UTF-8 desativa o suporte para as mesmas.\n\nA variante de bloqueio significa que não é possível alterar a codificação no tempo de execução através de sequências de escape do terminal.\n\nDeve utilizar a UTF-8, a menos que se depare com uma renderização danificada das aplicações antigas."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Se pretende utilizar o comportamento de cópia do navegador/SO padrão.\n\nPermitir ao navegador/SO processar o evento de cópia diretamente, o que pode melhorar a compatibilidade com alguns sistemas (onde a cópia não funciona), mas torna a seleção de texto menos robusta.\n\nPor exemplo, linhas compridas que tenham sido automaticamente agrupadas serão copiadas com as novas linhas nas mesmas."
+		"message": "Se pretende utilizar o comportamento de cópia do navegador/SO padrão.\n\nPermita ao navegador/SO processar o evento de cópia diretamente, o que pode melhorar a compatibilidade com alguns sistemas (onde a cópia não funciona), mas torna a seleção de texto menos robusta.\n\nPor exemplo, linhas compridas que tenham sido automaticamente agrupadas serão copiadas com as novas linhas nas mesmas."
 	},
 	"hterm_pref_user_css": {
 		"message": "O URL da folha de estilos do utilizador a incluir no documento do terminal."
@@ -327,7 +561,7 @@
 		"message": "Texto CSS personalizado para definir o estilo do terminal."
 	},
 	"hterm_pref_word_break_match_left": {
-		"message": "Expressão regular para parar a correspondência à esquerda (no início) de uma seleção.\n\nNormalmente, trata-se de uma classe de carateres para rejeitar carateres específicos. Por predefinição, permitimos \"~\" e \".\", uma vez que os caminhos começam, frequentemente, com estes."
+		"message": "Expressão regular para parar a correspondência à esquerda (no início) de uma seleção.\n\nNormalmente, trata-se de uma classe de carateres para rejeitar carateres específicos.\nPor predefinição, permitimos \"~\" e \".\", uma vez que os caminhos começam, frequentemente, com estes."
 	},
 	"hterm_pref_word_break_match_middle": {
 		"message": "Expressão regular para corresponder a todos os carateres no meio.\n\nNormalmente, trata-se de uma classe de carateres para rejeitar carateres específicos.\n\nUtiliza-se para expandir a seleção à volta do ponto de partida."
@@ -369,13 +603,13 @@
 		"message": "importação de ficheiro"
 	},
 	"import_link_label": {
-		"message": "Importar..."
+		"message": "Importar…"
 	},
 	"initializing_relay": {
-		"message": "A procurar o servidor de retransmissão através de: $1"
+		"message": "A procurar o servidor de transmissão através de: $1…"
 	},
 	"json_parse_error": {
-		"message": "Não foi possível analisar os dados JSON em \"$1\": $2"
+		"message": "Não foi possível analisar os dados JSON em \"$1\": $2."
 	},
 	"known_hosts_empty": {
 		"message": "Sem anfitriões conhecidos, nada a esquecer."
@@ -386,11 +620,23 @@
 	"known_hosts_title": {
 		"message": "Anfitriões conhecidos:"
 	},
+	"licenses": {
+		"message": "Licenças"
+	},
+	"licenses_expand_link": {
+		"message": "mostrar licença"
+	},
+	"licenses_title": {
+		"message": "Licenças de código aberto"
+	},
 	"loading_label": {
-		"message": "A carregar..."
+		"message": "A carregar…"
+	},
+	"migrate_to_ext": {
+		"message": "Aviso: migre para a nova extensão do Secure Shell ($1).\nAs Apps do Chrome foram descontinuadas, pelo que esta versão irá deixar de receber atualizações.\nConsulte o guia de migração ($2) para mais detalhes."
 	},
 	"missing_param": {
-		"message": "Parâmetro em falta: $1"
+		"message": "Parâmetro em falta: $1."
 	},
 	"mount_button_label": {
 		"message": "Montar SFTP"
@@ -399,10 +645,178 @@
 		"message": "Caminho de montagem"
 	},
 	"mounted_message": {
-		"message": "Montado"
+		"message": "Montado."
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "Exportar um ficheiro para o terminal"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Alterar diretório de trabalho"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Alterar o grupo de caminhos"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Alterar autorizações nos caminhos"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Alterar proprietário de caminhos"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Limpar o ecrã do terminal atual."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Copiar um ficheiro para a área de transferência (predefinição: 10 MiB ao início)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "$1 bytes copiados para a área de transferência."
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Ativar/desativar utilização de cor"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Copiar origem para destino"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Eliminar ficheiros"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Mostrar estatísticas do disco"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Caminho: $1\n  ID do sistema de ficheiros: $2\n Total: $3\n  Utilizado: $4 ($5%)\n Disponível: $6 (para utilizadores não privilegiados)\n $7 (para a raiz)"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Desligar"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "A transferir o ficheiro $1 como $2…"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Transferir ficheiros"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Este ecrã de ajuda"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Lista de detalhes do diretório"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Criar um link no caminho que aponta para o destino"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Criar diretórios"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Mudar o nome de um ficheiro"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Definir string de pedido"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Carregar ficheiros"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "A carregar ficheiro $1 como $2 ($3)…"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Mostrar diretório de trabalho atual"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Diretório de trabalho remoto: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Ler ligações simbólicas"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Canonicalizar caminhos"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Retomar o carregamento de ficheiros"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Remover ficheiros"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Eliminar diretórios vazios"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Mostrar ficheiros inline"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Extensões:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Mostrar estado do ficheiro"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Ficheiro: $1\n  Tamanho: $2 bytes\n   UID: $3\n   GID: $4\nAcesso: $5\n Hora de acesso: $6\n Hora de modificação: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Criar uma ligação simbólica no caminho que aponta para o destino"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Truncar os caminhos em 0 bytes"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  Extensões de servidor:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Mostrar versão do protocolo atual"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Informações da versão do protocolo SFTP:\n  local: $1\n  servidor: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: fim do ficheiro."
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: ficheiro não encontrado."
+	},
+	"nasftp_error_file_reading": {
+		"message": "Falha ao ler $1: $2."
+	},
+	"nasftp_error_internal": {
+		"message": "Erro interno não tratado; comunique um erro: $1."
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: número inválido: $3."
+	},
+	"nasftp_error_message": {
+		"message": "ERRO: $1."
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: a extensão \"$2\" não está disponível."
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: não é um ficheiro normal."
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: argumentos insuficientes."
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: autorização recusada."
+	},
+	"nasftp_error_server_error": {
+		"message": "$1: $2."
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: demasiados argumentos."
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: comando desconhecido."
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: sinalizador desconhecido $2."
+	},
+	"nasftp_force_quit": {
+		"message": "Forçar saída"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 bytes transferidos em $2 segundos ($3/s)"
 	},
 	"nassh_options_error": {
-		"message": "Opção de retransmissão desconhecida: $1."
+		"message": "Opção desconhecida: $1."
 	},
 	"nassh_product_name": {
 		"message": "Secure Shell"
@@ -420,52 +834,118 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Estabeleça ligação a um perfil guardado ou a um novo sistema SSH"
 	},
 	"open_as_window_tip": {
-		"message": "[Sugestão] Utilize a opção \"Abrir como janela\" ou \"Ecrã inteiro\" para evitar que o comando Control-W feche o terminal.\n[Sugestão] Aceda a $1 para obter mais informações."
+		"message": "[Sugestão] Utilize a opção \"Abrir como janela\" ou \"Ecrã inteiro\" para evitar que o comando Ctrl+W feche o terminal.\n[Sugestão] Aceda a $1 para obter mais informações."
 	},
 	"options_button_label": {
 		"message": "Opções"
 	},
 	"plugin_loading": {
-		"message": "A carregar o plug-in NaCl..."
+		"message": "A carregar o plug-in NaCl…"
 	},
 	"plugin_loading_complete": {
 		"message": " concluído."
 	},
 	"plugin_loading_failed": {
-		"message": " Falhou! :("
+		"message": " falhou! :("
+	},
+	"popup_connect_tooltip": {
+		"message": "Prima sem soltar Ctrl para abrir num novo separador."
 	},
 	"pref_backup_filename": {
-		"message": "Proteger preferências de cópia de segurança de shell.json"
+		"message": "Cópia de segurança das preferências do Secure Shell.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "Ficheiros SSH"
 	},
 	"preferences_header_terminal": {
-		"message": "Definições do perfil"
+		"message": "Definições do terminal"
+	},
+	"preferences_header_uri": {
+		"message": "Controladores de URI"
 	},
 	"preferences_reset": {
 		"message": "Todas as preferências repostas!"
+	},
+	"protocol_register_button": {
+		"message": "Registar controladores de protocolos"
+	},
+	"protocol_register_explain": {
+		"message": "O botão abaixo irá tentar registar os controladores para todos os protocolos suportados. Por exemplo, esta ação permite tratar links ssh:// diretamente. O navegador apresenta um pedido para cada protocolo, pelo que deve confirmar/aceitar cada um conforme mostrado. Se não forem apresentados pedidos, consulte a secção seguinte para obter sugestões de resolução de problemas."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Se os controladores já estiverem registados ou se as tentativas de registo anteriores foram recusadas, não são apresentados mais pedidos. Abra a caixa de diálogo e, em seguida, verifique as definições dos controladores registados nas secções ssh/sftp/etc. Se este programa estiver bloqueado, pode eliminar essas definições, o que lhe permitirá tentar novamente o registo. Se este programa já estiver registado, mas não estiver definido como o controlador predefinido, também pode alterar o controlador predefinido."
+	},
+	"protocol_register_options_link": {
+		"message": "Registo de protocolos"
+	},
+	"protocol_register_settings_button": {
+		"message": "Abrir definições de controladores registados"
+	},
+	"protocol_register_title": {
+		"message": "Ajuda do registo de controladores de protocolos do Secure Shell"
+	},
+	"read_size_label": {
+		"message": "Tamanho de leitura (KiB)"
 	},
 	"reconnect_message": {
 		"message": "Pretende voltar a ligar (R), escolher outra ligação (C) ou sair (X)?"
 	},
 	"relay_retry": {
-		"message": "A tentar novamente..."
+		"message": "A tentar novamente…"
 	},
 	"request_pin_prompt": {
-		"message": "Introduza o PIN para desbloquear a chave $1 no \"$2\" ($3 tentativas restantes):"
+		"message": "Introduza o PIN para desbloquear a chave $1 no \"$2 ($3)\" ($4 tentativas restantes):"
 	},
 	"restore_prefs": {
 		"message": "Restaurar cópia de segurança"
+	},
+	"save_label": {
+		"message": "Guardar"
 	},
 	"shortcut_list_aria_label": {
 		"message": "ligações guardadas"
 	},
 	"smart_card_connector_not_installed": {
-		"message": "Instale a aplicação Smart Card Connector: $1."
+		"message": "Instale a app Smart Card Connector: $1."
 	},
 	"ssh_argstr_label": {
 		"message": "Argumentos SSH"
 	},
+	"stream_open_error": {
+		"message": "Falha ao abrir stream $1: $2."
+	},
 	"terminal_clear_menu_label": {
 		"message": "Apagar terminal"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "Cores ANSI"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Campainha"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Luz intermitente"
+	},
+	"terminal_name_pref_color": {
+		"message": "Cor"
+	},
+	"terminal_name_pref_font": {
+		"message": "Tipo de letra"
+	},
+	"terminal_name_pref_image": {
+		"message": "Imagem"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Forma"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Visível"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Definir as cores para a paleta predefinida."
+	},
+	"terminal_pref_bell": {
+		"message": "Campainha do terminal audível."
 	},
 	"terminal_preview_label": {
 		"message": "Pré-visualização"
@@ -475,6 +955,129 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Repor terminal"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "URL da imagem de fundo. Deve começar com \"http://\" ou \"https://\". Deixe-o vazio quando não há imagem.\n\nPor exemplo:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Automático"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Desativar"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Barra"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Bloco"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Sublinhado"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Tem a certeza de que pretende repor o tema para os valores predefinidos?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Reponha o tema"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Repor"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Clássico"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Escuro"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Neblina"
+	},
+	"terminal_theme_light_label": {
+		"message": "Claro"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Preto Solarized"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Luz Solarized"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Cor 0: preto"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Cor 1: vermelho"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Cor 10: verde vivo"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Cor 11: amarelo vivo"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Cor 12: azul vivo"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Cor 13: magenta vivo"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Cor 14: turquesa vivo"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Cor 15: branco vivo"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Cor 2: verde"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Cor 3: amarelo"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Cor 4: azul"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Cor 5: magenta"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Cor 6: turquesa"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Cor 7: branco"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Cor 8: preto vivo"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Cor 9: vermelho vivo"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Aspeto"
+	},
+	"terminal_title_pref_background": {
+		"message": "Fundo"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Comportamento"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Teclado"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Teclado e rato"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Rato"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Barra de deslocamento"
+	},
+	"terminal_title_pref_text": {
+		"message": "Texto"
+	},
+	"terminal_title_settings": {
+		"message": "Definições"
+	},
+	"terminal_title_theme": {
+		"message": "Tema"
 	},
 	"tip_1": {
 		"message": "Pode premir sem soltar Ctrl (Cmd no macOS) enquanto clica nos links para os abrir."
@@ -486,22 +1089,22 @@
 		"message": "Pode voltar a vincular teclas/atalhos: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Utilizar Yubikeys e outros cartões inteligentes para autenticação ssh: https://goo.gl/Hu2o3v"
+		"message": "Utilize Yubikeys e outros cartões inteligentes para autenticação SSH: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
-		"message": "Apresentar imagens inline: https://goo.gl/MnSysj"
+		"message": "Apresente imagens inline: https://goo.gl/MnSysj"
 	},
 	"tip_14": {
-		"message": "Premir sem soltar Ctrl (Cmd em macOS) enquanto clica com o botão direito apresenta um menu de contexto."
+		"message": "Premir sem soltar Ctrl (Cmd no macOS) enquanto clica com o botão direito do rato apresenta um menu de contexto."
 	},
 	"tip_2": {
 		"message": "Apresente notificações no navegador através de hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Estabeleça ligação a partir da caixa geral ao introduzir \"ssh <profile name>\": https://goo.gl/V7o8ki"
+		"message": "Estabeleça ligação a partir da caixa geral ao introduzir \"ssh <nome do perfil>\": https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "O Chrome OS pode montar sistemas de ficheiros através de SFTP e procurar através da aplicação Ficheiros. Utilize \"Montar SFTP\" em vez de \"Ligar\"."
+		"message": "O Chrome OS pode montar sistemas de ficheiros através de SFTP e procurar através da app Files. Utilize \"Montar SFTP\" em vez de \"Ligar\"."
 	},
 	"tip_5": {
 		"message": "Estabeleça ligação através de links ssh:// em páginas Web ou guarde um marcador: https://goo.gl/zS8EZD"
@@ -510,7 +1113,7 @@
 		"message": "Dê cor à saída/pedido com 16 cores básicas, 256 cores e cores completas de 24 bits: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Copie para a área de transferência a partir de emacs/vim/etc. com OSC-52: https://goo.gl/XSnyLo"
+		"message": "Copie para a área de transferência a partir de Emacs/Vim/etc. com OSC-52: https://goo.gl/XSnyLo"
 	},
 	"tip_8": {
 		"message": "Converse no chat com outros utilizadores de hterm/Secure Shell através de chromium-hterm@chromium.org: https://goo.gl/RYHiK"
@@ -540,7 +1143,10 @@
 		"message": "Sugestão aleatória n.º $1: $2"
 	},
 	"welcome_version": {
-		"message": "Bem-vindo à versão $2 do $1."
+		"message": "Damos-lhe as boas-vindas à versão $2 do $1."
+	},
+	"write_size_label": {
+		"message": "Tamanho de escrita (KiB)"
 	},
 	"zoom_warning": {
 		"message": "Defina o menu do Chrome->Zoom para 100%"

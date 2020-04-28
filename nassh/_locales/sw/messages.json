@@ -12,7 +12,7 @@
 		"message": "Kufunga kichupo hiki kutaondoa kipindi hiki."
 	},
 	"cache_pin_prompt": {
-		"message": "Ungependa kuweka PIN ya kipindi hiki kwenye akiba? (Ndiyo/hapana):"
+		"message": "Ungependa kuweka PIN ya kipindi hiki cha SSH kwenye akiba? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "Ghairi"
@@ -20,17 +20,8 @@
 	"clear_known_hosts_menu_label": {
 		"message": "Futa seva pangishi zinazojulikana za SSH"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "Amri hii huonyesha menyu ya wapangishi wanaojulikana na maombi ya mpangishi wa kusahau."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Sahau mpangishi wa ssh anayejulikana."
-	},
-	"cmd_ssh_help": {
-		"message": "Vigezo vya |username| na |hostname| vinahitajika, si lazima utumie |port|. Iwapo mlango haujabainishwa, itatumia mlango wa 22 kulingana na mipangilio chaguomsingi."
-	},
-	"cmd_ssh_title": {
-		"message": "Hufungua kipindi kipya cha SSH."
+	"clear_label": {
+		"message": "Futa"
 	},
 	"command_complete": {
 		"message": "Amri ya $1 imekamilishwa kwa nambari ya kuonyesha hali $2."
@@ -57,7 +48,7 @@
 		"message": "Je, unajua kwamba kuna ukurasa mahususi wa chaguo?\nHakuna tena haja ya kubadilisha 'term_' moja kwa moja!\nBonyeza $1 ili uufungue au ubofye:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Je, unajua kwamba kuna ukurasa mahususi wa chaguo?\nHakuna tena haja ya kubadilisha 'term_'directly!\n$1"
+		"message": "Je, unajua kwamba kuna ukurasa mahususi wa chaguo?\nHakuna tena haja ya kubadilisha 'term_' moja kwa moja!\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -143,6 +134,219 @@
 	"hterm_loading_resource_start": {
 		"message": "Inapakia $1 ..."
 	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Ruhusu onyesho la picha kulingana na maandishi"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Backspace ni Meta+Backspace"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "Hali ya kitufe cha AltGr"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Chukulia kitufe cha Alt kama kitufe cha Meta"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Kushughulikia kirekebishi cha kitufe cha Alt"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Sauti ya kengele ya arifa (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Rangi ya mandharinyuma"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Picha ya mandharinyuma"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Nafasi ya picha ya mandharinyuma"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Ukubwa wa picha ya mandharinyuma"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Kitendo cha kitufe cha Backspace"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Ubatilishaji wa ramani ya herufi"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Futa uteuzi wa maandishi kiotomatiki"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Funga dirisha unapoondoka"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Safu ya rangi ya awali"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Nakili maudhui uliyochagua kiotomatiki"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Kitendo cha kunakili ukitumia Ctrl+C"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Kitendo cha kukuza ukitumia Ctrl++/-/0"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Kitendo cha kubandika ukitumia Ctrl+V"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Kasi ya kupepesa kwa kiteuzi"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Kasi ya kupepesa kwa kiteuzi"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Rangi ya kiteuzi cha maandishi"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Umbo la kiteuzi cha maandishi"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Tunga arifa za kompyuta ya mezani ili upate kengele za arifa"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Herufi za Asia Mashariki Zisizo Bayana hutumia safu wima mbili"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Inatumia herufi za kudhibiti zisizo za UTF-8 C1"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Ruhusu kupepesa kwa maandishi"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Kitendo cha herufi nzito"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Tumia rangi zinazong'aa pamoja na herufi nzito"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Onyesha arifa inaponakili maudhui"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Ruhusu uandikaji kwenye ubao wa kunakili kutoka mbali"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Ruhusu kufuta akiba ya maandishi yaliyosogezwa nyuma (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Ruhusu ubadilishaji wa kupepesa kwa kiteuzi cha maandishi"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Onyesha vipimo vya sehemu za mwisho ukubwa unapobadilishwa"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Vigezo vya mazingira"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Jamii ya fonti ya maandishi"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Ukubwa wa fonti ya maandishi"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Kulainisha fonti ya maandishi"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Rangi ya maandishi"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Ficha kiteuzi cha kipanya unapoandika"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Kitendo cha kusogeza cha kitufe cha Home au End"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Shurutisho au njia za mikato za kibodi"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Tumia shurutisho au njia za mikato za Mfumo chaguomsingi wa Uendeshaji wa Kibodi"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Vitufe vya maudhui ni Fkeys"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Kitendo cha urekebishaji ukitumia kitufe cha meta"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Kubandika ukitumia kitufe cha kipanya"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Kubofya kipanya kulia hubandika maudhui"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Kitendo cha kusogeza ukitumia kitufe cha Page Up au Page Down"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Kitendo cha kubadilisha kichupo ukitumia Alt+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Kitendo cha dirisha jipya ukitumia Ctrl+N"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Kitendo cha kubadilisha kichupo ukitumia Ctrl+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Kitendo cha kichupo kipya ukitumia Ctrl+T"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Kitendo cha kubadilisha kichupo ukitumia Ctrl+Tab"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Kitendo cha kufunga kichupo ukitumia Ctrl+W"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Kitendo cha kubadilisha kichupo ukitumia Meta+1..9"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Kitendo cha kubandika ukitumia Meta+V"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Ruhusu hatua ya kuburuta na kudondosha ili ubandike"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Pokea usimbaji"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Sogeza hadi chini baada ya kubofya"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Sogeza hadi chini baada ya kifaa kipya cha kutoa maudhui"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Iga vitufe vya vishale ukitumia kigurudumu cha kusogeza"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Kizidishaji cha kasi ya kusogeza kigurudumu cha kipanya"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Uonekanaji wa sehemu ya kusogeza"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Kubandika ukitumia Shift+Insert"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Usimbaji wa sehemu ya mwisho"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Ruhusu kivinjari kishughulikie hatua ya kunakili maandishi"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "CSS Maalum (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "CSS Maalum (kulingana na maandishi)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Kusitisha uteuzi wa kiotomatiki (kuelekea kushoto)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Herufi za kutenganisha maneno"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Kusitisha uteuzi wa kiotomatiki (kuelekea kulia)"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Picha Kulingana na Maandishi"
 	},
@@ -153,7 +357,7 @@
 		"message": "Ikiwa itaruhusu seva pangishi ya mbali ionyeshe picha katika sehemu ya mwisho.\n\nKwa chaguomsingi, tutakudokezea hadi utakapochagua."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Kama sera hii imewekwa, huondoa Mfumo wa Uendeshaji wa Chrome kupitia mabadiliko ya Alt+Backspace->DEL, ili Alt+ Backspace iwe Alt+Backspace katika hali halisi."
+		"message": "Kama sera hii imewekwa, huondoa Mfumo wa Uendeshaji wa Chrome kupitia mabadiliko ya Alt+Backspace->Delete, ili Alt+Backspace iwe Alt+Backspace katika hali halisi."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Chagua mazingira ya utambuzi wa AltGr.\n\n'null': Utambuzi wa kiotomatiki unalingana na navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Zima AltGr yotote inayohusiana na ubadilishaji wa data.\n'ctrl-alt': Chukulia kuwa Ctrl+Alt inamaanisha AltGr.\n'left-alt': Chukulia kuwa Alt ya kushoto inamaanisha AltGr.\n'right-alt': Chukulia kuwa Alt ya kulia inamaanisha AltGr."
@@ -165,25 +369,25 @@
 		"message": "Hudhibiti jinsi kitufe cha Alt kinavyofanya kazi.\n\n  escape: Tuma kiambishi cha awali cha ESC.\n8-bit: Ongeza 128 kwenye herufi ambayo imewekwa kama ilivyo katika x-term.\nbrowser-key: Subiri tukio la kubonyeza kitufe na uangalie maelezo ya kivinjari. (Hii haitafanya kazi vyema kwenye mifumo ambapo kivinjari kinafanya hatua chaguomsingi za mifuatano ya Alt.)"
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "URL ya sehemu ya sauti ya kengele. Mfuatano hauna kitu iwapo kengele haisikiki."
+		"message": "URL ya sehemu ya sauti ya kengele. Iache wazi iwapo kengele haisikiki."
 	},
 	"hterm_pref_background_color": {
 		"message": "Rangi ya mandhari nyuma ya maandishi yasiyo na aina zingine za rangi."
 	},
 	"hterm_pref_background_image": {
-		"message": "Thamani ya CSS ya picha ya mandhari-nyuma. Mfuatano hauna kitu iwapo hamna picha.\n\nKwa mfano:\n  \nurl(https://goo.gl/anedTK)\nlinear-gradient(top bottom, blue, red)"
+		"message": "Thamani ya CSS ya picha ya mandharinyuma. Iache wazi iwapo hamna picha.\n\nKwa mfano:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
-		"message": "Thamani ya CSS ya nafasi ya picha ya mandhari-nyuma\n\nKwa mfano:\n  10% 10%\n  katikati"
+		"message": "Thamani ya CSS ya nafasi ya picha ya mandharinyuma\n\nKwa mfano:\n  10% 10%\n  katikati"
 	},
 	"hterm_pref_background_size": {
-		"message": "Thamani ya CSS ya ukubwa wa picha katika mandhari-nyuma."
+		"message": "Thamani ya CSS ya ukubwa wa picha katika mandharinyuma."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Ikiwa imewekwa kuwa ndivyo, ni sharti kitufe cha backspace kitume BS ('\\x08', aka ^H). Vinginevyo, ni sharti kitufe cha backspace kitume '\\x7f'."
+		"message": "Ikiwa ndivyo, kitufe cha Backspace kitatuma BS ('\\x08', aka ^H). Vinginevyo, kitufe cha Backspace kitatuma '\\x7f'."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "Hii imebainishwa kama kipengee. Ni mfuatano uliotawanyika, ambapo kila kipengele ni msimbo wa herufi uliowekwa na thamani ni kipengee ambacho ni mfuatano uliotawanyika. Katika mfuatano huo uliotawanyika, kila kipengele hupokelewa kama herufi na thamani huwa ni herufi inayoonyeshwa. \n\nKwa mfano:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "Hii imebainishwa kama kipengee. Ni mfuatano uliotawanyika, ambapo kila kipengele ni msimbo wa herufi uliowekwa na thamani ni kipengee ambacho ni mfuatano uliotawanyika. Katika mfuatano huo uliotawanyika, kila kipengele hupokelewa kama herufi na thamani huwa ni herufi inayoonyeshwa.\n\nKwa mfano:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "Ikiwa itafuta iliyochagua baada ya kuyanakili."
@@ -192,7 +396,7 @@
 		"message": "Ikiwa itafunga dirisha wakati amri inakamilisha kutekeleza."
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "Futa rangi kwenye safu ya rangi chaguomsingi.\n\nHii inaweza kubainishwa kuwa mfuatano au kipengee. Kama imebanishwa kuwa kipengee, huchukuliwa kuwa mfuatano uliotengana, ambapo kila kipengele ni nambari kwenye safu ya rangi. \n\nThamani zinaweza kubainishwa kuwa zinazokaribia thamani yoyote ya rangi ya CSS. Hii inajumuisha #RGB, #RRGGBB, rgb(...), rgba(...), na majina yoyote ya rangi ambayo ni sehemu ya faili ya kawaida ya X11 rgb.txt.\n\nUnaweza kutumia 'null' kubainisha kwamba thamani chaguomsingi haipaswi kubadilishwa. Hii ni muhimu wakati wa kuruka idadi ndogo ya herufi ambapo thamani imebainishwa kuwa mfuatano.\n\nMifano hii miwili inaweka thamani ya rangi ya 1 kuwa samawati:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "Futa rangi kwenye safu ya rangi chaguomsingi.\n\nHii inaweza kubainishwa kuwa mfuatano au kipengee. Kama imebanishwa kuwa kipengee, huchukuliwa kuwa mfuatano uliotengana, ambapo kila kipengele ni nambari kwenye safu ya rangi. \n\nThamani zinaweza kubainishwa kuwa zinazokaribia thamani yoyote ya rangi ya CSS. Hii inajumuisha #RGB, #RRGGBB, rgb(...), rgba(...) na majina yoyote ya rangi ambayo ni sehemu ya faili ya kawaida ya X11 rgb.txt.\n\nUnaweza kutumia 'null' kubainisha kwamba thamani chaguomsingi haipaswi kubadilishwa. Hii ni muhimu wakati wa kuruka idadi ndogo ya herufi ambapo thamani imebainishwa kuwa mfuatano.\n\nMifano hii miwili inaweka thamani ya rangi ya 1 kuwa samawati:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
 		"message": "Nakili kiotomatiki sehemu uliyochagua kwa kutumia kipanya kwenye ubao wa kunakili."
@@ -213,7 +417,10 @@
 		"message": "Kasi ya kishale kupepesapepesa katika milisekunde.\n\nMfuatano wa vipengele viwili, cha kwanza ni muda wa kishale cha maandishi kuonekena, cha pili ni muda ambapo kinapaswa kuzima."
 	},
 	"hterm_pref_cursor_color": {
-		"message": "Rangi ya kielekezi cha maandishi kinachoonekana."
+		"message": "Rangi ya kiteuzi cha maandishi kinachoonekana."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "Umbo la kiteuzi cha maandishi kinachoonekana. Hii inaweza kubadilishwa wakati wa utekelezaji kupitia mifuatano ya herufi maalum."
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Ikiwa ndivyo, kengele katika mandhari ya nyuma zitasababisha Arifa ya Wavuti. https://www.w3.org/TR/notifications/\n\nIli kuonyesha arifa, unahitaji ruhusa kutoka kwa mtumiaji. Wakati chaguo hili limewekwa kuwa ndivyo, hterm itajaribu kuuliza mtumiaji ruhusa kama inahitajika. Kumbuka vivinjari huenda visionyeshe ombi hili la ruhusa kama halikutokana na kitendo cha mtumiaji.\n\nViendelezi vya Chrome vyenye ruhusa ya \"arifa\" vina ruhusa ya kuonyesha arifa."
@@ -222,16 +429,16 @@
 		"message": "Iwapo herufi za Asia Mashariki Zinazokanganya zina upana wa safu wima mbili."
 	},
 	"hterm_pref_enable_8_bit_control": {
-		"message": "Weka 'Ndivyo' ili uwashe kidhibiti cha herufi za biti 8, 'Sivyo' ili usitumie.\n\nTutaheshimu matoleo ya baiti mbili ya vidhibiti hivi vya herufi licha ya mipangilio hii."
+		"message": "Weka 'Ndivyo' ili uwashe kidhibiti cha herufi za biti 8, 'Sivyo' ili usitumie.\n\nTutazingatia matoleo ya baiti mbili ya vidhibiti hivi vya herufi licha ya mipangilio hii."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "Ikiwa 'ndivyo', ni sharti uzingatie sifa ya kupepesapepesa. Ikiwa 'Sivyo', usiizingatie."
+		"message": "Ikiwa ndivyo, ni sharti uzingatie sifa ya kupepesapepesa. Ikiwa sivyo, usiizingatie."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Ikiwa 'ndivyo', ni lazima utumie maandishi ya herufi nzito yenye sifa ya uzito au ung'aavu. Ikiwa 'Sivyo' utatumia fonti zenye uzito wa kawaida. Ikiwa haipo, utatumia utambuzi wa kiotomatiki."
+		"message": "Ikiwa ndivyo, ni lazima utumie maandishi ya herufi nzito yenye sifa ya uzito au ung'aavu. Ikiwa Sivyo utatumia fonti zenye uzito wa kawaida. Ikiwa haipo, utatumia utambuzi wa kiotomatiki."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "Ikiwa 'Ndivyo', ni lazima utumie rangi zinazong'aa (kiasi cha 8 -15 kwenye safu ya rangi 16) katika maandishi yenye herufi nzito. Weka 'Sivyo' ikiwa hutaki kuitumia."
+		"message": "Ikiwa ndivyo, ni lazima utumie rangi zinazong'aa (kiasi cha 8 -15 kwenye safu ya rangi 16) katika maandishi yenye herufi nzito. Weka 'Sivyo' ikiwa hutaki kuitumia."
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "Iwapo itaonyesha ujumbe katika sehemu ya mwisho wakati seva pangishi inaandika kwenye ubao wa kunakili."
@@ -239,8 +446,14 @@
 	"hterm_pref_enable_clipboard_write": {
 		"message": "Ruhusu seva pangishi ya mbali iandike moja kwa moja kwenye mfumo wa ubao wa kunakili.\nIdhini ya kusoma haitolewi licha ya mipangilio hii.\n\nHii hutumika ili kudhibiti ufikiaji wa vipengele kama OSC-52."
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Ikiwa kitendo cha \"Futa Mistari Iliyohifadhiwa\" (hali ya tatu) cha amri ya Kufuta Onyesho (CSI-J) kinaweza kufuta historia ya skrini.\n\nNi salama kuwasha kwa chaguomsingi."
+	},
 	"hterm_pref_enable_dec12": {
-		"message": "Zingatia jaribio la seva pangishi la kubadilisha hali ya kupepesapepesa kwa kielekezi ikitumia DEC Private Mode 12."
+		"message": "Zingatia jaribio la seva pangishi la kubadilisha hali ya kupepesapepesa kwa kiteuzi ikitumia DEC Private Mode 12."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Iwapo itaonyesha vipimo vya sehemu ya mwisho wakati sehemu ya mwisho inabadilisha ukubwa."
 	},
 	"hterm_pref_environment": {
 		"message": "Vigezo vya kwanza vya mazingira, kama kipengee."
@@ -252,46 +465,64 @@
 		"message": "Ukubwa chaguomsingi wa fonti katika pikseli."
 	},
 	"hterm_pref_font_smoothing": {
-		"message": "Sifa ya CSS ya kuboresha fonti."
+		"message": "Sifa ya CSS ya font-smoothing."
 	},
 	"hterm_pref_foreground_color": {
-		"message": "Rangi ya mandhari ya mbele ya maandishi yasiyo na aina nyingine za rangi."
+		"message": "Rangi ya mandhari ya mbele ya maandishi yasiyo na sifa zingine za rangi."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
 		"message": "Iwapo utaficha kielekezi cha kipanya kiotomatiki unapoandika. Kwa chaguomsingi, tambua kiotomatiki iwapo mfumo wa uendeshaji unaitumia.\n\nKumbuka: Baadhi ya mifumo ya uendeshaji inaweza kubatilisha mipangilio hii, kwa hivyo huenda usiweze kuizima kila wakati."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Ikiwa ndivyo, kitufe cha Home au End kitadhibiti sehemu ya mwisho ya upau wa kusogeza na vitufe vya Shift+Home au Shift+End vitatumwa kwenye seva pangishi ya mbali. Ikiwa 'sivyo' basi vitufe vya Home au End vitatumwa kwenye seva pangishi ya mbali na Shift+Home au Shift+End vitatumika kusogeza."
+		"message": "Ikiwa ndivyo, kitufe cha Home au End kitadhibiti upau wa kusogeza pembeni na vitufe vya Shift+Home au Shift+End vitatumwa kwenye seva pangishi ya mbali. Ikiwa sivyo, basi vitufe vya Home au End vitatumwa kwenye seva pangishi ya mbali na Shift+Home au Shift+End vitatumika kusogeza."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Ramani ya mifuatano ya funguo kwenye hatua muhimu. Mifuatano ya funguo hujumuisha vitufe vya sufuri au vitufe zaidi vya urekebishaji vikifuatwa na msimbo wa funguo. Misimbo ya funguo inaweza kuwa nambari ya desimali au heksadesimali au kitambulishi cha ufunguo. Hatua za funguo zinaweza kubainisha mfuatano ili kutuma maelezo kwenye seva pangishi au kitambulishi cha hatua. Kwa ufafanuzi kamili wa muundo, angalia https://goo.gl/LWRndr.\n\nMifano ya mifuatano ya funguo:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Ramani ya mifuatano ya vitufe vya kutekeleza hatua muhimu. Mifuatano ya vitufe hujumuisha vitufe vya sufuri au vitufe zaidi vya urekebishaji vikifuatwa na msimbo wa vitufe. Misimbo ya vitufe inaweza kuwa nambari ya desimali au heksadesimali au kitambulishi cha kitufe. Hatua za vitufe zinaweza kubainisha mfuatano ili kutuma maelezo kwenye seva pangishi au kitambulishi cha hatua. Kwa ufafanuzi kamili wa muundo, angalia https://goo.gl/LWRndr.\n\nMifano ya mifuatano ya vitufe:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hamjambo Nyote'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Ikiwa shurutisho za kawaida za Mfumo wa Uendeshaji wa kibodi ni sharti zizingatiwe badala ya kunasa kila wakati kwa matumizi ya hterm."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
-		"message": "Kama ni ndivyo, badilisha funguo za maudhui zilingane na Fkey husika. Kama sivyo, ruhusu kivinjari kishughulikie funguo."
+		"message": "Ikiwa ndivyo, badilisha funguo za maudhui zilingane na Fkey husika. Ikiwa sivyo, ruhusu kivinjari kishughulikie funguo."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Tuma kiambishi cha ESC unapobonyeza kitufe huku ukishikilia kitufe cha Meta.\n\nKwa mfano, ikiwashwa, hatua ya kubonyeza Meta+K itatuma ^[k ni kama kwamba umeandika Escape kisha k. Inapozimwa, ni k pekee itatumwa."
+		"message": "Tuma kiambishi cha ESC unapobonyeza kitufe huku ukishikilia kitufe cha Meta.\n\nKwa mfano, ikiwashwa, hatua ya kubonyeza Meta+K itatuma ^[k kama kwamba umeandika Escape kisha k. Inapozimwa, itatuma k pekee."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Kitufe cha kubandika kupitia kipanya au kutobandika ili kutambua kiotomatiki.\n\nKwa utambuzi wa kiotomatiki, tutatumia kitufe cha katikati cha kipanya katika mifumo isiyo ya X11 (ikiwemo mfumo wa uendeshaji wa Chrome). Kwenye X11, tutatumia kitufe cha kulia cha kipanya (kwa kuwa ni sharti kidhibiti cha dirisha la mfumo kinapaswa kibandikwe kupitia kitufe cha katikati cha kipanya).\n\n0 == kitufe cha kushoto (cha msingi)\n1 == kitufe cha katikati (kisaidizi).\n2 == kitufe cha kulia (cha upili).\n\nChaguo hili huwashwa bila kuzingatia mipangilio ya kubandika kwa kubofya kipanya kulia.\n\nKumbuka: Hali hii itashughulikia vipanya vya kushoto na kulia kwa njia sahihi."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Bandika kupitia mibofyo ya kitufe cha kulia cha kipanya.\n\nChaguo hili hutumika bila kuzingatia mipangilio ya \"mouse-paste-button\".\n\nKumbuka: Hii itashughulikia vipanya vya kushoto na kulia kwa njia sahihi."
+		"message": "Bandika kupitia mibofyo ya kitufe cha kulia cha kipanya.\n\nChaguo hili hutumika bila kuzingatia mipangilio ya \"mouse-paste-button\".\n\nKumbuka: Hali hii itashughulikia vipanya vya kushoto na kulia kwa njia sahihi."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Ikiwa 'ndivyo', vitufe vya Page Up au Page Down vitadhibiti sehemu ya mwisho ya upau wa kusogeza na vitufe vya Shift+Page Up au Shift+Page Down vitatumwa kwenye seva pangishi ya mbali. Ikiwa 'sivyo' basi vitufe vya Page Up au Page Down vitatumwa kwenye seva pangishi ya mbali na vitufe vya Shift+Page Up au Shift+Page Down vitatumika kusogeza."
+		"message": "Ikiwa ndivyo, vitufe vya Page Up au Page Down vitadhibiti sehemu ya mwisho ya upau wa kusogeza na vitufe vya Shift+Page Up au Shift+Page Down vitatumwa kwenye seva pangishi ya mbali. Ikiwa sivyo basi vitufe vya Page Up au Page Down vitatumwa kwenye seva pangishi ya mbali na vitufe vya Shift+Page Up au Shift+Page Down vitatumika kusogeza."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Ikiwa Alt+1..9 inaelekezwa kwenye kivinjari.\n\nHii ni muhimu inapotumia hterm katika kichupo cha kivinjari, ili usipoteze viakibishaji vya kibodi vya \"tumia kichupo\" kwenye Chrome. Wakati hutumii katika kichupo ni vyema utume vitufe hivi kwenye seva pangishi ili vitumiwe katika vim au emacs.\n\nIkiwa 'ndivyo', Alt+1..9 itashughulikiwa kwenye kivinjari. Ikiwa 'sivyo', Alt+1..9 itatumwa kwenye seva pangishi. Kama hujaweka sera hii, itatumia mbinu ya kutambua kiotomatiki kulingana na mfumo wa kivinjari na aina ya dirisha."
+		"message": "Ikiwa kitendo cha Alt+1..9 kinatekelezwa kwenye kivinjari.\n\nHii ni muhimu inapotumia hterm katika kichupo cha kivinjari, ili usipoteze mikato ya kibodi ya \"tumia kichupo\" kwenye Chrome. Wakati hutumii vitufe katika kichupo ni vyema utume vitufe hivi kwenye seva pangishi ili vitumiwe katika vim au emacs.\n\nIkiwa ndivyo, kitendo cha Alt+1..9 kitashughulikiwa kwenye kivinjari. Ikiwa sivyo, kitendo cha Alt+1..9 kitatumwa kwenye seva pangishi. Kama hujaweka sera hii, itatumia mbinu ya kutambua kiotomatiki kulingana na mfumo wa kivinjari na aina ya dirisha."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Ikiwa Ctrl+N inatekelezwa kwenye kivinjari.\n\nIkiwa ndivyo, Ctrl+N itashughulikiwa na kivinjari kama mikato ya kibodi ya \"kichupo kipya\". Ikiwa sivyo, Ctrl+N itatumwa kwenye seva pangishi."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Ikiwa Ctrl+1..9 inaelekezwa kwenye kivinjari.\n\nHii ni muhimu unapotumia hterm kwenye kichupo cha kivinjari, ili usipoteze viakibishaji vya kibodi vya \"tumia kichupo\" kwenye Chrome. Wakati hutumii katika vichupo, ni vyema utume vitufe hivi kwenye seva pangishi ili vitumiwe katika vim au emacs.\n\nIkiwa 'ndivyo', Ctrl+1..9 itashughulikiwa kwenye kivinjari. Ikiwa 'sivyo', Ctrl+1..9 itatumwa kwenye seva pangishi. Kama hujaweka sera hii, itatumia mbinu ya kutambua kiotomatiki kulingana na mfumo wa kivinjari na aina ya dirisha."
+		"message": "Ikiwa Ctrl+1..9 inaelekezwa kwenye kivinjari.\n\nHii ni muhimu unapotumia hterm kwenye kichupo cha kivinjari, ili usipoteze mikato ya kibodi ya \"tumia kichupo\" kwenye Chrome. Wakati hutumii katika vichupo, ni vyema utume vitufe hivi kwenye seva pangishi ili vitumiwe katika vim au emacs.\n\nIkiwa ndivyo, Ctrl+1..9 itashughulikiwa kwenye kivinjari. Ikiwa sivyo, Ctrl+1..9 itatumwa kwenye seva pangishi. Kama hujaweka sera hii, itatumia mbinu ya kutambua kiotomatiki kulingana na mfumo wa kivinjari na aina ya dirisha."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Ikiwa Ctrl+T inatekelezwa kwenye kivinjari.\n\nIkiwa ndivyo, Ctrl+T itashughulikiwa na kivinjari kama mikato ya kibodi ya \"kichupo kipya\". Ikiwa sivyo, Ctrl+T itatumwa kwenye seva pangishi."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Ikiwa Ctrl+Tab na Ctrl+Shift+Tab vinatekelezwa kwenye kivinjari.\n\nIkiwa ndivyo, Ctrl+Tab na Ctrl+Shift+Tab itashughulikiwa na kivinjari kama mikato ya kibodi ya \"kichupo kinachofuata au cha awali\". Ikiwa sivyo, kitufe cha Tab kitatumwa kwenye seva pangishi bila Ctrl au Shift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Ikiwa Ctrl+W inatekelezwa kwenye kivinjari.\n\nIkiwa ndivyo, Ctrl+W itashughulikiwa na kivinjari kama mikato ya kibodi ya \"kichupo cha kufunga\". Ikiwa sivyo, Ctrl+W itatumwa kwenye seva pangishi."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Ikiwa Meta+1..9 inaelekezwa kwenye kivinjari.\n\nHii ni muhimu unapotumia hterm kwenye kichupo cha kivinjari, ili usipoteze viakibishaji vya kibodi vya \"tumia kichupo\" kwenye Chrome. Wakati hutumii katika vichupo, ni vyema utume vitufe hivi kwenye seva pangishi ili vitumiwe katika vim au emacs.\n\nIkiwa 'ndivyo', Meta+1..9 itashughulikiwa kwenye kivinjari. Ikiwa 'sivyo', Meta+1..9 itatumwa kwenye seva pangishi. Kama hujaweka sera hii, itatumia mbinu ya kutambua kiotomatiki kulingana na mfumo wa kivinjari na aina ya dirisha."
+		"message": "Ikiwa Meta+1..9 inaelekezwa kwenye kivinjari.\n\nHii ni muhimu unapotumia hterm kwenye kichupo cha kivinjari, ili usipoteze mikato ya kibodi ya \"tumia kichupo\" kwenye Chrome. Wakati hutumii katika vichupo, ni vyema utume vitufe hivi kwenye seva pangishi ili vitumiwe katika vim au emacs.\n\nIkiwa ndivyo, Meta+1..9 itashughulikiwa kwenye kivinjari. Ikiwa sivyo, Meta+1..9 itatumwa kwenye seva pangishi. Kama hujaweka sera hii, itatumia mbinu ya kutambua kiotomatiki kulingana na mfumo wa kivinjari na aina ya dirisha."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Ikiwa Meta+V itaelekezwa kwenye seva pangishi."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Ikiwa ndivyo, Maandishi uliyoburuta na kudondosha yatabandikwa kwenye sehemu ya mwisho.\nIkiwa sivyo, maandishi uliyodondosha hayatabandikwa."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Weka usimbaji unaotarajiwa wa data iliyopokelewa kutoka seva pangishi.\nIkiwa usimbaji haulingani, huenda ukapata hitilafu ya kuonekana.\n\nThamani sahihi ni 'utf-8' na 'raw'."
@@ -312,10 +543,10 @@
 		"message": "Hali ya kiwima ya sehemu ya kusogeza."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Ikiwa Shift+Insert inatumika kubandika au imetumwa kwenye seva pangishi ya mbali."
+		"message": "Ikiwa Shift_Insert inatumika kubandika au inatumwa kwenye seva pangishi ya mbali."
 	},
 	"hterm_pref_terminal_encoding": {
-		"message": "Usimbaji chaguomsingi wa vipengee vya mwisho (DOCS).\n\nISO-2022 huwasha ramani ya tafsiri ya herufi (kama vile rarmani za picha).\nUTF-8 huzima matumizi yake. \n\nAina zilizofungwa zinaamanisha kwamba usimbaji hauwezi kubadilisha wakati wa utekelezaji kupitia mifuatano ya vipengee vya mwisho. \n\nNi sharti uwe na UTF-8 isipokuwa unapogundua utekelezaji usiokamilika kwenye programu za zamani."
+		"message": "Usimbaji chaguomsingi wa vipengee vya mwisho (DOCS).\n\nISO-2022 huwasha ramani ya tafsiri ya herufi (kama vile ramani za picha).\nUTF-8 huzima matumizi yake. \n\nAina zilizofungwa zinamaanisha kwamba usimbaji hauwezi kubadilisha wakati wa utekelezaji kupitia mifuatano ya vipengee vya mwisho. \n\nNi sharti uwe na UTF-8 isipokuwa unapogundua utekelezaji usiokamilika kwenye programu za zamani."
 	},
 	"hterm_pref_use_default_window_copy": {
 		"message": "Iwapo utatumia hali chaguomsingi ya kunakili kwa kivinjari au mfumo wa uendeshaji.\n\nRuhusu kivinjari au mfumo wa uendeshaji ushughulikie tukio la kunakili moja kwa moja, hali ambayo inaweza kuboresha uoanifu na mifumo mingine (ambapo haiwezi kunakili hata kidogo), lakini huathiri uthabiti wa kuchagua maandishi.\n\nKwa mfano, mistari mirefu iliyofungwa kiotomatiki bado itanakiliwa ikiwa na mistari mipya ndani yake."
@@ -327,7 +558,7 @@
 		"message": "Maandishi maalum ya CSS yanayotumika kurembesha kipengee cha mwisho."
 	},
 	"hterm_pref_word_break_match_left": {
-		"message": "Kilinganishaji cha kukomesha ulinganishaji upande wa kushoto (mwanzo) wa uteuzi.\n\nMara nyingi hii huwa ni aina ya herufi inayotumiwa kukataa herufi zilizobainishwa. \nKwa chaguomsingi, tunaruhusu \"~\" na \".\" kama njia zinazotumika zaidi na herufi hizo."
+		"message": "Kilinganishaji cha kukomesha ulinganishaji upande wa kushoto (mwanzo) wa uteuzi.\n\nMara nyingi hii huwa ni aina ya herufi inayotumiwa kukataa herufi zilizobainishwa. Kwa chaguomsingi, tunaruhusu \"~\" na \".\" kama njia zinazotumika zaidi na herufi hizo."
 	},
 	"hterm_pref_word_break_match_middle": {
 		"message": "Kilinganishaji cha kulinganisha herufi zote katikati.\n\nMara nyingi hii huwa ni aina ya herufi inayotumiwa kukataa herufi zilizobainishwa. \n\nHutumika kupanua uteuzi uliokaribu na sehemu ya mwanzo."
@@ -386,8 +617,20 @@
 	"known_hosts_title": {
 		"message": "Wapangishi wanaojulikana:"
 	},
+	"licenses": {
+		"message": "Leseni"
+	},
+	"licenses_expand_link": {
+		"message": "onyesha leseni"
+	},
+	"licenses_title": {
+		"message": "Leseni za Programu Huria"
+	},
 	"loading_label": {
 		"message": "Inapakia..."
+	},
+	"migrate_to_ext": {
+		"message": "Arifa: Tafadhali hamia kwenye kiendelezi kipya cha Secure Shell ($1).\nProgramu za Chrome zimeacha kutumika, kwa hivyo toleo hili litaacha kupokea masasisho.\nTafadhali angalia mwongozo wa uhamaji ($2) ili upate maelezo zaidi."
 	},
 	"missing_param": {
 		"message": "Kigezo kinakosekana: $1"
@@ -401,8 +644,245 @@
 	"mounted_message": {
 		"message": "Umepachikwa!"
 	},
+	"nasftp_cmd_cat": {
+		"message": "onyesha"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "Weka faili kwenye sehemu ya mwisho"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Badilisha saraka inayofanya kazi"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Badilisha kikundi cha njia"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Badilisha ruhusa kwenye njia"
+	},
+	"nasftp_cmd_chown": {
+		"message": "miliki"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Badilisha mmiliki wa njia"
+	},
+	"nasftp_cmd_clear": {
+		"message": "futa"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Futa skrini ya sasa ya sehemu ya mwisho."
+	},
+	"nasftp_cmd_clip": {
+		"message": "nakili"
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Weka faili kwenye ubao wa kunakili (chaguomsingi: MiB 10 kutoka mwanzo)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "Imeweka baiti $1 kwenye ubao wa kunakili"
+	},
+	"nasftp_cmd_color": {
+		"message": "rangi"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Weka/toa utumiaji wa rangi"
+	},
+	"nasftp_cmd_copy": {
+		"message": "nakili"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Nakili chanzo kwenye sehemu lengwa"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Futa faili"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Onyesha takwimu za diski"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Njia: $1\n  fsid: $2\n Jumla: $3\n  Iliyotumika: $4 ($5%)\n Inayopatikana: $6 (kwa watumiaji wa kawaida)\n $7 (wenye idhini maalum ya kudhibiti)"
+	},
+	"nasftp_cmd_exit": {
+		"message": "funga"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Ondoa"
+	},
+	"nasftp_cmd_get": {
+		"message": "pakua"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Kupakua faili: $1 kama $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Pakua faili"
+	},
+	"nasftp_cmd_help": {
+		"message": "usaidizi"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Skrini hii ya usaidizi"
+	},
+	"nasftp_cmd_list": {
+		"message": "orodha"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Maelezo ya orodha ya saraka"
+	},
+	"nasftp_cmd_ln": {
+		"message": "In"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Buni kiungo kwenye njia ukielekeza kwenye lengo"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Unda saraka"
+	},
+	"nasftp_cmd_move": {
+		"message": "hamisha"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Badilisha jina la faili"
+	},
+	"nasftp_cmd_prompt": {
+		"message": "dokeza"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Weka mfuatano wa kudokeza"
+	},
+	"nasftp_cmd_put": {
+		"message": "pakia"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Pakia faili"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Kupakia faili: $1 kama $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Onyesho saraka ya sasa inayofanya kazi"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Saraka ya kufanya kazi kwa mbali: $1"
+	},
+	"nasftp_cmd_quit": {
+		"message": "ondoka"
+	},
+	"nasftp_cmd_readlink": {
+		"message": "soma kiungo"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Soma viungo vinavyoelekeza kwingine"
+	},
+	"nasftp_cmd_realpath": {
+		"message": "njia halisi"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Njia za kuweka viwango vya kawaida"
+	},
+	"nasftp_cmd_rename": {
+		"message": "badilisha jina"
+	},
+	"nasftp_cmd_reput": {
+		"message": "endelea kupakia"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Endelea kupakia faili"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Ondoa faili"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Futa saraka tupu"
+	},
+	"nasftp_cmd_show": {
+		"message": "onyesha"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Onyesha faili kulingana na maandishi"
+	},
+	"nasftp_cmd_stat": {
+		"message": "takwimu"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Viendelezi:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Onyesha hali ya faili"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Faili: $1\n  Ukubwa: baiti$2 \n   UID: $3\n   GID: $4\nUfikiaji: $5\n wakati wa kufikia: $6\n wakati wa kurekebisha: $7"
+	},
+	"nasftp_cmd_symlink": {
+		"message": "kiungo kinachoelekeza kwingine"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Buni kiungo kinachoelekeza kwingine kwenye njia inayoelekeza katika lengo"
+	},
+	"nasftp_cmd_truncate": {
+		"message": "fupisha"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Fupisha njia kuwa baiti 0"
+	},
+	"nasftp_cmd_version": {
+		"message": "toleo"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  viendelezi vya seva:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Onyesha toleo la sasa la itifaki"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Maelezo ya toleo la itifaki ya SFTP:\n  kifaa: $1\n  seva: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: mwisho wa faili"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: faili haipatikani"
+	},
+	"nasftp_error_file_reading": {
+		"message": "Imeshindwa kusoma $1: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Hitilafu ya ndani ambayo haijashughulikiwa; tafadhali tuma ripoti ya hitilafu: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: nambari isiyo sahihi: $3"
+	},
+	"nasftp_error_message": {
+		"message": "HITILAFU: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: Kiendelezi cha '$2' hakipatikani"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: si faili ya kawaida"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: vipengele havitoshi"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: ruhusa imekataliwa"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: vipengele vingi mno"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: amri isiyojulikana"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: alama isiyojulikana ya $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Lazimisha kufunga"
+	},
+	"nasftp_progress_summary": {
+		"message": "Baiti $1 zinahamishwa kwa sekunde $2 ($3 kwa sekunde)"
+	},
 	"nassh_options_error": {
-		"message": "Chaguo la uwasilishaji lisilojulikana: $1"
+		"message": "Chaguo lisilojulikana: $1"
 	},
 	"nassh_product_name": {
 		"message": "Secure Shell"
@@ -420,7 +900,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Unganisha kwenye wasifu uliohifadhiwa au mfumo mpya wa SSH"
 	},
 	"open_as_window_tip": {
-		"message": "[Pro Tip] Tumia 'Open as Window' au 'Fullscreen' kuzuia Ctrl+W isifunge kipengee chako cha mwisho!\n[Pro Tip] Angalia $1 ili upate maelezo zaidi."
+		"message": "[Kidokezo] Tumia 'Fungua kama Dirisha' au 'Skrini nzima' kuzuia Ctrl+W isifunge sehemu yako ya mwisho!\n[Kidokezo] Angalia $1 ili upate maelezo zaidi."
 	},
 	"options_button_label": {
 		"message": "Chaguo"
@@ -434,14 +914,44 @@
 	"plugin_loading_failed": {
 		"message": " imeshindwa! :("
 	},
+	"popup_connect_tooltip": {
+		"message": "Shikilia Ctrl ili ufungue katika kichupo kipya."
+	},
 	"pref_backup_filename": {
-		"message": "Hifadhi Rudufu ya Mapendeleo ya Secure Shell.json"
+		"message": "Hifadhi ya nakala ya Mapendeleo ya Secure Shell.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "Faili za SSH"
 	},
 	"preferences_header_terminal": {
-		"message": "Mipangilio ya Wasifu"
+		"message": "Mipangilio ya Sehemu ya mwisho"
+	},
+	"preferences_header_uri": {
+		"message": "Vidhibiti vya URI"
 	},
 	"preferences_reset": {
 		"message": "Mapendeleo yote yamewekwa upya!"
+	},
+	"protocol_register_button": {
+		"message": "Sajili vidhibiti vya itifaki"
+	},
+	"protocol_register_explain": {
+		"message": "Kitufe kinachofuata kitajaribu kusajili vidhibiti vya itifaki zote tunazotumia. Kwa mfano, hii inatuonyesha jinsi ya kushughulikia viungo vya ssh:// moja kwa moja. Kidokezo kitaonyeshwa na kivinjari kwa kila itifaki, tafadhali thibitisha au kubali kila kimoja kinapoonyeshwa. Ikiwa hakuna vidokezo vinavyoonyeshwa, basi angalia sehemu inayofuata ili upate vidokezo vya utatuzi."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Ikiwa tayari tumesajili vidhibiti au majaribio ya awali ya usajili yalikataliwa, basi hakuna vidokezo zaidi vitakavyoonyeshwa. Tafadhali fungua kidirisha kilicho hapa chini, kisha uangalie mipangilio ya kidhibiti kilichosajiliwa katika sehemu za ssh/sftp/etc... Ikiwa programu hii imezuiwa, unaweza kufuta mipangilio itakayokuruhusu kujaribu kusajili tena. Ikiwa programu hii imesajiliwa tayari, lakini haijawekwa kuwa kidhibiti chaguomsingi, unaweza kubadilisha kidhibiti chaguomsingi pia."
+	},
+	"protocol_register_options_link": {
+		"message": "Usajili wa Itifaki"
+	},
+	"protocol_register_settings_button": {
+		"message": "Fungua mipangilio ya vidhibiti vilivyosajiliwa"
+	},
+	"protocol_register_title": {
+		"message": "Kisaidizi cha usajili wa kidhibiti cha itifaki ya Secure Shell"
+	},
+	"read_size_label": {
+		"message": "Ukubwa wa Faili ya Kusomwa (KiB)"
 	},
 	"reconnect_message": {
 		"message": "Ungependa kuunganisha tena (R), Kuchagua muunganisho mwingine (C) au Kufunga (X)?"
@@ -450,10 +960,13 @@
 		"message": "Inajaribu tena..."
 	},
 	"request_pin_prompt": {
-		"message": "Weka PIN ili ufungue $1 kwenye '$2' (zimesalia mara $3 za kujaribu):"
+		"message": "Weka PIN ili upate ufunguo wa $1 kwenye '$2 ($3)' (zimesalia mara $4 za kujaribu):"
 	},
 	"restore_prefs": {
-		"message": "Rejesha Hifadhi Rudufu"
+		"message": "Rejesha Hifadhi ya Nakala"
+	},
+	"save_label": {
+		"message": "Hifadhi"
 	},
 	"shortcut_list_aria_label": {
 		"message": "miunganisho iliyohifadhiwa"
@@ -464,8 +977,44 @@
 	"ssh_argstr_label": {
 		"message": "Hoja za SSH"
 	},
+	"stream_open_error": {
+		"message": "Imeshindwa kufungua mtiririko wa $1: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "Kuondoa Kituo"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "Rangi za ANSI"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Haitumii lakabu"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Sauti ya kengele"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Kupepesa"
+	},
+	"terminal_name_pref_color": {
+		"message": "Rangi"
+	},
+	"terminal_name_pref_font": {
+		"message": "Fonti"
+	},
+	"terminal_name_pref_image": {
+		"message": "Picha"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Umbo"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Inaonekana"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Weka rangi za safu chaguomsingi ya rangi."
+	},
+	"terminal_pref_bell": {
+		"message": "Kengele inayosikika ya sehemu ya mwisho."
 	},
 	"terminal_preview_label": {
 		"message": "Onyesho la kuchungulia"
@@ -475,6 +1024,129 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Kubadilisha Mipangilio ya Kituo"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "URL ya picha ya mandharinyuma. Lazima ianze kwa 'http://' au 'https://'. Iache wazi iwapo hamna picha.\n\nKwa mfano:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Otomatiki"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Zima"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Upau wima"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Zuia"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Piga mstari chini"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Je, una uhakika ungependa kurudisha mandhari katika hali chaguomsingi?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Badilisha mandhari"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Weka upya"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Ya Awali"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Meusi"
+	},
+	"terminal_theme_light_label": {
+		"message": "Meupe"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Rangi za Solarized Nyeusi"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Rangi za Solarized Zinazong'aa"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Rangi 0: Nyeusi"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Rangi ya kwanza: Nyekundu"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Rangi ya 10: Kijani Inayong'aa"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Rangi ya 11: Manjano Inayong'aa"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Rangi ya 12: Samawati Inayong'aa"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Rangi ya 13: Majenta Inayong'aa"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Rangi ya 14: Kijani Samawati Inayong'aa"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Rangi ya 15: Nyeupe Inayong'aa"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Rangi ya pili: Kijani"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Rangi ya tatu: Manjano"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Rangi ya nne: Samawati"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Rangi ya tano: Majenta"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Rangi ya sita: Samawati kijani"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Rangi ya saba: Nyeupe"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Rangi ya nane: Nyeusi Inayong'aa"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Rangi ya tisa: Nyekundu Inayong'aa"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Mwonekano"
+	},
+	"terminal_title_pref_background": {
+		"message": "Mandhari"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Kitendo"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "Kiteuzi"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Kibodi"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Kibodi na kipanya"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Kipanya"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Sehemu ya kusogeza"
+	},
+	"terminal_title_pref_text": {
+		"message": "Maandishi"
+	},
+	"terminal_title_settings": {
+		"message": "Mipangilio"
+	},
+	"terminal_title_theme": {
+		"message": "Mandhari"
 	},
 	"tip_1": {
 		"message": "Unaweza kushikilia Ctrl (Cmd kwenye macOS) unapobofya viungo ili uvifungue!"
@@ -522,7 +1194,7 @@
 		"message": "Hitilafu isiyotarajiwa imetokea, tafadhali angalia kidhibiti JavaScript kwa maelezo zaidi."
 	},
 	"unknown_ssh_client_version": {
-		"message": "Toleo la SSH lisiliojulikna: $1"
+		"message": "Toleo la SSH lisilojulikana: $1"
 	},
 	"unmount_button_label": {
 		"message": "Ondoa SFTP"
@@ -531,7 +1203,7 @@
 		"message": "Madokezo ya toleo au ChangeLog: $1"
 	},
 	"welcome_faq": {
-		"message": "Majibu ya Maswali Yanayoulizwa Sana: $1 (shikilia kitufe cha ctrl unapobofya viungo ili uvifungue)"
+		"message": "Majibu ya Maswali Yanayoulizwa Sana: $1 (shikilia kitufe cha Ctrl unapobofya viungo ili uvifungue)"
 	},
 	"welcome_release_highlights": {
 		"message": "Mabadiliko makuu tangu $1:"
@@ -541,6 +1213,9 @@
 	},
 	"welcome_version": {
 		"message": "Karibu kwenye $2 toleo la $1."
+	},
+	"write_size_label": {
+		"message": "Ukubwa wa Faili ya Kuandika (KiB)"
 	},
 	"zoom_warning": {
 		"message": "Tafadhali weka Menyu ya Chrome->Kuza kuwa asilimia 100"

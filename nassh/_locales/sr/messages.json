@@ -12,25 +12,19 @@
 		"message": "Затварањем ове картице прекинућете сесију."
 	},
 	"cache_pin_prompt": {
-		"message": "Желите ли да кеширате PIN за ову сесију? (д/н):"
+		"message": "Желите ли да кеширате PIN за ову SSH сесију? (д/н):"
 	},
 	"cancel_button_label": {
 		"message": "Откажи"
 	},
+	"changelog": {
+		"message": "Евиденција промена"
+	},
 	"clear_known_hosts_menu_label": {
-		"message": "Обриши SSH known_hosts"
+		"message": "Обриши SSH познате хостове"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "Ова команда приказује мени познатих хостова и упита за хост које желите да избришете."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Брисање познатог ssh хоста."
-	},
-	"cmd_ssh_help": {
-		"message": "Параметри |username| и |hostname| су обавезни, а параметар |port| је опционалан. Ако није наведен порт, додељује се подразумевана вредност 22."
-	},
-	"cmd_ssh_title": {
-		"message": "Отварање нове SSH сесије."
+	"clear_label": {
+		"message": "Обриши"
 	},
 	"command_complete": {
 		"message": "Извршавање команде $1 је прекинуто уз кôд статуса $2."
@@ -54,7 +48,7 @@
 		"message": "Дијалог за повезивање"
 	},
 	"console_crosh_options_notice": {
-		"message": "Да ли знате да постоји посебна страница са опцијама?\nВише не морате да модификујете „term_“ директно.\nПритисните $1 да бисте је отворили или кликните на:\n$2"
+		"message": "Да ли знате да постоји посебна страница са опцијама?\nВише не морате да модификујете „term_“ директно!\nПритисните $1 да бисте је отворили или кликните на:\n$2"
 	},
 	"console_nassh_options_notice": {
 		"message": "Знате ли да постоји наменска страница са опцијама?\nВише не морате директно да мењате „term_“!\n$1"
@@ -143,17 +137,230 @@
 	"hterm_loading_resource_start": {
 		"message": "Учитава се ресурс $1..."
 	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Дозволи уграђени приказ слика"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Backspace је Meta+Backspace"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "Режим тастера AltGr"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Третирај тастер Alt као тастер Meta"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Обрада модификације тастером Alt"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Звук звона упозорења (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Боја позадине"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Слика у позадини"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Положај слике у позадини"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Величина слике у позадини"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Понашање тастера Backspace"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Замене мапа знакова"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Аутоматски бриши изабрани текст"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Затвори прозор при изласку"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Почетна палета боја"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Аутоматски копирај изабрани садржај"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Копирање помоћу Ctrl+C"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Зумирање помоћу тастера Ctrl++/-/0"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Налепљивање помоћу Ctrl+V"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Трептање курсора"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Брзина трептања курсора"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Боја курсора за текст"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Облик курсора за текст"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Прави искачућа обавештења за звона упозорења"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Источноазијски вишезначни знакови користе две колоне"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Подржавај C1 контролне знакове који нису UTF-8"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Омогући трептање текста"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Подебљавање текста"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Користи светле боје за подебљан текст"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Приказуј обавештење при копирању садржаја"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Дозволи даљинско уписивање у привремену меморију"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Дозволи брисање међумеморије за враћање (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Дозволи промену треперења курсора за текст"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Приказуј димензије терминала када му се промени величина"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Променљиве окружења"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Породица фонтова текста"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Величина фонта текста"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Умекшавање фонта текста"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Боја текста"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Сакриј курсор миша током куцања"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Померање тастером Home/End"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Тастерске комбинације/пречице"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Користи подразумеване тастерске комбинације/пречице за ОС"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Тастери за медије су функцијски тастери"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Обрада модификације тастером Meta"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Лепљење тастером миша"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Кликови десним тастером миша лепе садржај"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Померање помоћу тастера Page Up/Down"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Промена картице помоћу Alt+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Нов прозор помоћу Ctrl+N"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Промена картице помоћу Ctrl+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Нова картица помоћу Ctrl+T"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Промена картице помоћу Ctrl+Tab"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Затварање картице помоћу Ctrl+W"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Промена картице помоћу Meta+1..9"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Лепљење помоћу Meta+V"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Дозволите лепљење превлачењем и отпуштањем"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Прими кодирање"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Помери на дно после притиска на тастер"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Помери до дна после новог излаза"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Емулирај тастере са стрелицама помоћу точкића за померање"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Множилац брзине померања точкићем миша"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Видљивост траке за померање"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Налепљивање помоћу Shift+Insert"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Кодирање терминала"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Нека прегледач обрађује копирање текста"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "Прилагођени CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "Прилагођени CSS (уграђени текст)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Аутоматско заустављање избора (налево)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Знакови за прелом речи"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Аутоматско заустављање избора (надесно)"
+	},
 	"hterm_popup_inline_image": {
-		"message": "Уметнуте слике"
+		"message": "Уграђене слике"
 	},
 	"hterm_popup_inline_image_disabled": {
-		"message": "Уметнуте слике су онемогућене"
+		"message": "Уграђене слике су онемогућене"
 	},
 	"hterm_pref_allow_images_inline": {
 		"message": "Контролише да ли удаљени хост има дозволу да приказује слике на терминалу.\n\nПодразумевано, постављамо упите док се не донесе одлука."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ако се подеси, опозива се поновно мапирање Alt+Backspace->DEL у Chrome ОС-у, па Alt+Backspace стварно постаје Alt+Backspace."
+		"message": "Ако се подеси, опозива се поновно мапирање Alt+Backspace->Delete у Chrome ОС-у, па Alt+Backspace стварно постаје Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Бира се хеуристичка метода за откривање начина рада тастера AltGr.\n\n„null“: Аутоматско откривање на основу ентитета navigator.language:\n      „en-us“ => „none“, иначе => „right-alt“\n„none“: Онемогућавају се све измене везане за AltGr.\n„ctrl-alt“: Претпоставља се да Ctrl+Alt значи AltGr.\n„left-alt“: Претпоставља се да леви Alt значи AltGr.\n„right-alt“: Претпоставља се да десни Alt значи AltGr."
@@ -162,16 +369,16 @@
 		"message": "Да ли се тастер Alt понаша као тастер Meta или одвојени тастер Alt."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Контролише начин управљања тастером Alt.\n\n  escape: Шаље се префикс ESC.\n  8-bit: Додаје се 128 унетом знаку као у xterm-у.\n browser-key: Чека се догађај притиска на тастер и реакција\n прегледача. (Ово не функционише добро на платформама где прегледач\n изводи подразумевану радњу за неке комбинације са тастером Alt.)"
+		"message": "Контролише начин управљања тастером Alt.\n\n  escape: Шаље се префикс ESC.\n  8-bit: Додаје се 128 унетом знаку као у xterm-у.\n browser-key: Чека се догађај притиска на тастер и реакција\n прегледача. (Ово не ради добро на платформама где прегледач\n изводи подразумевану радњу за неке комбинације са тастером Alt.)"
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "URL за звук упозорења на терминалу. Празан стринг ако нема звучног упозорења."
+		"message": "URL за звук упозорења на терминалу. Оставите празно поље ако нема звучног упозорења."
 	},
 	"hterm_pref_background_color": {
 		"message": "Боја позадине за текст без других атрибута боје."
 	},
 	"hterm_pref_background_image": {
-		"message": "CSS вредност за слику у позадини. Празан стринг ако нема слике.\n\nНа пример:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "CSS вредност за слику у позадини. Оставите празно поље ако нема слике.\n\nНа пример:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "CSS вредност за положај слике у позадини.\n\nНа пример:\n  10% 10%\n  center"
@@ -180,10 +387,10 @@
 		"message": "CSS вредност за величину слике у позадини."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Ако је вредност Тачно, тастер backspace треба да шаље BS („\\x08“ или ^H). У супротном, тастер backspace треба да шаље „\\x7f“."
+		"message": "Ако је вредност Тачно, тастер Backspace шаље BS („\\x08“ или ^H). У супротном, тастер Backspace шаље „\\x7f“."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "Ово се наводи као објекат. То је редак низ где је сваки ентитет скуп знакова кода и вредност је објекат који је и сам редак низ. У том ретком низу сваки ентитет је примљени знак и вредност је приказани знак.\n\nНа пример:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "Ово се наводи као објекат. То је редак низ где је сваки ентитет скуп знакова кода и вредност је објекат који је и сам редак низ. У том ретком низу сваки ентитет је примљени знак и вредност је приказани знак.\n\nНа пример:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "Контролише да ли ће се избор обрисати после копирања."
@@ -192,7 +399,7 @@
 		"message": "Да ли се прозор затвара када се команда изврши."
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "Замењује боје у подразумеваној палети.\n\nОво може да се наведе као низ или објекат. Ако се наведе као објекат, подразумева се да је то редак низ у коме је свако својство нумерички индекс у палети боја.\n\nВредности могу да се наведу као скоро било која CSS вредност боје. То укључује #RGB, #RRGGBB, rgb(...), rgba(...) и све називе боја који су и део стандардне датотеке X11 rgb.txt.\n\nПомоћу „null“ можете да наведете да подразумевана вредност не треба да се мења. То је корисно за прескакање малог броја индекса када је вредност наведена као низ.\n\nНа пример, у оба ова случаја се индекс боје 1 подешава на плаво:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "Замењује боје у подразумеваној палети.\n\nОво може да се наведе као низ или објекат. Ако се наведе као објекат, подразумева се да је то редак низ у коме је свако својство нумерички индекс у палети боја.\n\nВредности могу да се наведу као скоро било која CSS вредност боје. То обухвата #RGB, #RRGGBB, rgb(...), rgba(...) и све називе боја који су и део стандардне датотеке X11 rgb.txt.\n\nПомоћу „null“ можете да наведете да подразумевана вредност не треба да се мења. То је корисно за прескакање малог броја индекса када је вредност наведена као низ.\n\nНа пример, у оба ова случаја се индекс боје 1 подешава на плаво:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
 		"message": "Аутоматски копира избор миша у привремену меморију."
@@ -201,7 +408,7 @@
 		"message": "Ctrl+C копира ако је вредност Тачно, а хосту шаље ^C ако је вредност Нетачно.\nCtrl+Shift+C шаље ^C хосту ако је вредност Тачно, а копира ако је вредност Нетачно."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Ако је вредност Тачно, Ctrl+Plus/Minus/Zero контролише зумирање.\nАко је вредност Нетачно, Ctrl+Shift+Plus/Minus/Zero контролише зумирање, Ctrl+Minus шаље ^_, а Ctrl+Plus/Zero не ради ништа."
+		"message": "Ако је вредност Тачно, Ctrl+плус/минус/нула контролише зумирање.\nАко је вредност Нетачно, Ctrl+Shift+плус/минус/нула контролише зумирање, Ctrl+минус шаље ^_, а Ctrl+плус/нула не ради ништа."
 	},
 	"hterm_pref_ctrl_v_paste": {
 		"message": "Ctrl+V налепљује ако је вредност Тачно, а хосту шаље ^V ако је вредност Нетачно.\nCtrl+Shift+V шаље ^V ако је вредност Тачно, а налепљује ако је вредност Нетачно."
@@ -214,6 +421,9 @@
 	},
 	"hterm_pref_cursor_color": {
 		"message": "Боја видљивог курсора за текст."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "Облик видљивог курсора за текст. Може да се промени током времена извршавања помоћу секвенци за преиначавање терминала."
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Ако је вредност Тачно, упозорења на терминалу у позадини ће направити веб-обавештење. https://www.w3.org/TR/notifications/\n\nЗа приказивање обавештења је потребна дозвола корисника. Када се ова опција подеси на Тачно, hterm ће покушати да затражи дозволу од корисника ако је потребно. Прегледачи можда неће приказати овај захтев за дозволу ако га није покренула радња корисника.\n\nДодаци за Chrome са дозволом за обавештења могу да приказују обавештења."
@@ -237,10 +447,16 @@
 		"message": "Контролише да ли се приказује порука на терминалу када хост уписује у привремену меморију."
 	},
 	"hterm_pref_enable_clipboard_write": {
-		"message": "Дозвољава удаљеном хосту да записује директно у провремену меморију система.\nПриступ за читање се никада не одобрава без обзира на ово подешавање.\n\nОво се користи за контролу приступа функцијама као што је OSC-52."
+		"message": "Дозвољава удаљеном хосту да записује директно у локалну привремену меморију система.\nПриступ за читање се никада не одобрава без обзира на ово подешавање.\n\nОво се користи за контролу приступа функцијама као што је OSC-52."
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Одређује да ли ће функција Избриши сачуване редове (режим 3) команде Избриши екран (CSI-J) може да обрише међумеморију за враћање терминала.\n\nОва опција безбедно може да се омогући као подразумевана."
 	},
 	"hterm_pref_enable_dec12": {
 		"message": "Поштује покушај хоста да промени статус трептања курсора за текст помоћу DEC приватног режима 12."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Да ли се приказују димензије терминала када се промени величина терминала."
 	},
 	"hterm_pref_environment": {
 		"message": "Почетни скуп променљивих окружења, на пример, објекат."
@@ -261,16 +477,19 @@
 		"message": "Да ли да аутоматски сакрива курсор миша током куцања. Подразумевано аутоматски открива да ли платформа/ОС решавају ово.\n\nНапомена: Неки оперативни системи замењују ово подешавање и зато можда не можете увек да га онемогућите."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Ако је Тачно, Home/End контролишу траку за померање терминала, а Shift+Home/Shift+End се шаљу удаљеном хосту. Ако је Нетачно, Home/End се шаљу удаљеном хосту, а Shift+Home/Shift+End померају."
+		"message": "Ако је вредност Тачно, Home или End контролише траку за померање терминала, а Shift+Home или Shift+End се шаље удаљеном хосту. Ако је вредност Нетачно, Home или End се шаље удаљеном хосту, а Shift+Home или Shift+End се помера."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Мапирање секвенци тастера за тастерске радње. Секвенце тастера садрже нула или више модификујућих тастера за којима иде кôд тастера. Кодови тастера могу да буду децимални или хексадецимални бројеви или тастерски идентификатори. За тастерске радње може да буде наведен стринг који се шаље хосту или идентификатор радње. Комплетно објашњење формата потражите на https://goo.gl/LWRndr.\n\nПримери тастерских комбинација:\n{\n  „Ctrl+Alt+K“: „clearTerminal“,\n  „Ctrl+Shift+L“: „PASS“,\n  „Ctrl+H“: „'Hello World'“\n}"
+		"message": "Мапирање секвенци тастера за тастерске радње. Секвенце тастера садрже нула или више модификујућих тастера за којима иде кôд тастера. Кодови тастера могу да буду децимални или хексадецимални бројеви или тастерски идентификатори. За радње тастера може да буде наведен стринг који се шаље хосту или идентификатор радње. Комплетно објашњење формата потражите на https://goo.gl/LWRndr.\n\nПримери тастерских комбинација:\n{\n  „Ctrl+Alt+K“: „clearTerminal“,\n  „Ctrl+Shift+L“: „PASS“,\n  „Ctrl+H“: „'Hello World'“\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Да ли најчешће тастерске пречице у ОС-у треба да се поштују уместо да се увек снимају ради употребе само за hterm."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ако је вредност Тачно, конвертује медијске тастере у еквиваленте њихових комбинација са функцијским тастерима. Ако је вредност Нетачно, допушта да прегледач управља тастерима."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Шаље префикс ESC када се тастер притисне док држите тастер Meta.\n\nНа пример, када је омогућено, притиском на Meta+K шаље се ^[k као да сте унели Escape па k. Када је онемогућено, шаље се само k."
+		"message": "Шаље префикс ESC када притиснете тастер док држите тастер Meta.\n\nНа пример, када је омогућено, притиском на Meta+K шаље се ^[k као да сте унели Escape, па k. Када је онемогућено, шаље се само k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Тастер миша за налепљивање или без вредности за аутоматско откривање.\n\nЗа аутоматско откривање ћемо користити средњи тастер миша за платформе које нису X11 (укључујући и Chrome ОС). На X11 платформама ћемо користити десни тастер миша (пошто менаџер основног прозора треба да налепљује средњим тастером миша).\n\n0 == леви (примарни) тастер.\n1 == средњи (помоћни) тастер.\n2 == десни (секундарни) тастер.\n\nОва опција је независна од подешавања „mouse-right-click-paste“.\n\nНапомена: Овим се исправно подешавају мишеви за леворуке и десноруке кориснике."
@@ -279,19 +498,34 @@
 		"message": "Налепљивање кликом на десни тастер миша.\n\nОва опција је независна од подешавања „mouse-paste-button“.\n\nНапомена: Овим се исправно подешавају мишеви за леворуке и десноруке кориснике."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Ако је Тачно, Page Up/Page Down контролишу траку за померање терминала, а Shift+Page Up/Shift+Page Down се шаљу удаљеном хосту. Ако је Нетачно, онда се Page Up/Page Down шаљу удаљеном хосту, а Shift+Page Up/Shift+Page Down померају."
+		"message": "Ако је вредност Тачно, Page Up или Page Down контролише траку за померање терминала, а Shift+Page Up или Shift+Page Down се шаље удаљеном хосту. Ако је вредност Нетачно, Page Up или Page Down се шаље удаљеном хосту, а Shift+Page Up или Shift+Page Down се помера."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Да ли се Alt+1..9 шаље у прегледач.\n\nОво је корисно када покрећете hterm на картици прегледача јер тако не губите тастерске убрзаваче „пређи на картицу“ у Chrome-у. Када га не покрећете у прегледачу, боље је да шаљете ове тастере хосту да би могли да се користе у уређивачима vim или emacs.\n\nАко је вредност Тачно, прегледач ће управљати комбинацијама Alt+1..9. Ако је вредност Нетачно, Alt+1..9 се шаље хосту. Ако је Без вредности, открива се аутоматски на основу платформе прегледача и типа прозора."
+		"message": "Да ли се Alt+1..9 шаље прегледачу.\n\nОво је корисно када покрећете hterm на картици прегледача јер тако не губите тастерске пречице „пређи на картицу“ у Chrome-у. Када га не покрећете на картици, боље је да шаљете ове тастере хосту да би могли да се користе у уређивачима vim или emacs.\n\nАко је вредност Тачно, прегледач управља комбинацијама Alt+1..9. Ако је вредност Нетачно, Alt+1..9 се шаље хосту. Ако је вредност Ништа, открива се аутоматски на основу платформе прегледача и типа прозора."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Да ли се Ctrl+N шаље прегледачу.\n\nАко је вредност Тачно, прегледач обрађује Ctrl+N као тастерску пречицу за „нов прозор“. Ако је вредност Нетачно, Ctrl+N се шаље хосту."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Да ли се Ctrl+1..9 шаље у прегледач.\n\nОво је корисно када покрећете hterm на картици прегледача јер тако не губите тастерске убрзаваче „пређи на картицу“ у Chrome-у. Када га не покрећете у прегледачу, боље је да шаљете ове тастере хосту да би могли да се користе у уређивачима vim и emacs.\n\nАко је вредност Тачно, прегледач ће управљати комбинацијама Ctrl+1..9. Ако је вредност Нетачно, Ctrl+1..9 се шаљу хосту. Ако је без вредности, открива се аутоматски на основу платформе прегледача и типа прозора."
+		"message": "Да ли се Ctrl+1..9 шаље прегледачу.\n\nОво је корисно када покрећете hterm на картици прегледача јер тако не губите тастерске пречице „пређи на картицу“ у Chrome-у. Када га не покрећете у прегледачу, боље је да шаљете ове тастере хосту да би могли да се користе у уређивачима vim и emacs.\n\nАко је вредност Тачно, прегледач управља комбинацијама Ctrl+1..9. Ако је вредност Нетачно, Ctrl+1..9 се шаљу хосту. Ако је вредност Ништа, открива се аутоматски на основу платформе прегледача и типа прозора."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Да ли се Ctrl+T преноси прегледачу.\n\nАко је вредност Тачно, прегледач обрађује Ctrl+T као тастерску пречицу за „нова картица“. Ако је вредност Нетачно, Ctrl+T се шаље хосту."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Да ли се Ctrl+Tab и Ctrl+Shift+Tab шаљу прегледачу.\n\nАко је вредност Тачно, прегледач обрађује Ctrl+Tab и Ctrl+Shift+Tab као тастерску пречицу за „следећа/претходна картица“. Ако је вредност Нетачно, тастер Tab се шаље хосту без Ctrl или Shift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Да ли се Ctrl+W шаље прегледачу.\n\nАко је вредност Тачно, прегледач обрађује Ctrl+W као тастерску пречицу за „затвори картицу“. Ако је вредност Нетачно, Ctrl+W се шаље хосту."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Да ли се Meta+1..9 шаље у прегледач.\n\nОво је корисно када покрећете hterm на картици прегледача јер тако не губите тастерске убрзаваче „пређи на картицу“ у Chrome-у. Када га не покрећете у прегледачу, боље је да шаљете ове тастере хосту да би могли да се користе у уређивачима vim или emacs.\n\nАко је вредност Тачно, прегледач управља комбинацијама Meta+1..9. Ако је вредност Нетачно, Meta+1..9 се шаље хосту. Ако је Без вредности, открива се аутоматски на основу платформе прегледача и типа прозора."
+		"message": "Да ли се Meta+1..9 шаље прегледачу.\n\nОво је корисно када покрећете hterm на картици прегледача јер тако не губите тастерске пречице „пређи на картицу“ у Chrome-у. Када га не покрећете на картици, боље је да шаљете ове тастере хосту да би могли да се користе у уређивачима vim или emacs.\n\nАко је вредност Тачно, прегледач управља комбинацијама Meta+1..9. Ако је вредност Нетачно, комбинације Meta+1..9 се шаљу хосту. Ако је вредност Ништа, открива се аутоматски на основу платформе прегледача и типа прозора."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Да ли се Meta+V шаље хосту."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Ако је вредност Тачно, текст који се превуче и отпусти се лепи у терминал.\nАко је вредност Нетачно, отпуштени текст се занемарује."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Подесите очекивано кодирање за податке које добијате од хоста.\nАко се кодирања не подударају, вероватно ће се видети визуелне грешке.\n\nВажеће вредности су „utf-8“ и „raw“."
@@ -386,14 +620,26 @@
 	"known_hosts_title": {
 		"message": "Познати хостови:"
 	},
+	"licenses": {
+		"message": "Лиценце"
+	},
+	"licenses_expand_link": {
+		"message": "прикажи лиценцу"
+	},
+	"licenses_title": {
+		"message": "Лиценце отвореног кода"
+	},
 	"loading_label": {
-		"message": "Учитава се..."
+		"message": "Учитава се…"
+	},
+	"migrate_to_ext": {
+		"message": "Напомена: Пређите на нови Secure Shell додатак ($1).\nChrome апликације су застареле, па ће ова верзија престати да прима ажурирања.\nВише детаља потражите у водичу за пренос ($2)."
 	},
 	"missing_param": {
 		"message": "Недостаје параметар: $1"
 	},
 	"mount_button_label": {
-		"message": "Учитавање протокола SFTP није успело"
+		"message": "Учитавање протокола SFTP"
 	},
 	"mount_path_label": {
 		"message": "Путања прикључивања"
@@ -401,8 +647,173 @@
 	"mounted_message": {
 		"message": "Учитан је!"
 	},
+	"nasftp_cmd_cat_help": {
+		"message": "Направите сирову копију датотеке на терминалу"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Промените радни директоријум"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Промените групу путања"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Промените дозволе на путањама"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Промените власника путања"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Обришите актуелни екран терминала."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Копирајте датотеку у привремену меморију (подразумевано: 10 MiB од почетка)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "Копирано је $1 бајт(ов)а у привремену меморију"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Укључите/искључите употребу боја"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Копирајте извор у одредиште"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Избришите датотеке"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Погледајте статистику диска"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Путања: $1\n  ИД система датотека: $2\n Укупно: $3\n  Користи се: $4 ($5%)\n Доступно: $6 (корисницима без привилегија)\n $7 (основном нивоу)"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Прекините везу"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Преузимање датотеке: $1 као $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Преузимајте датотеке"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Овај екран помоћи"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Наведите детаље о директоријумима"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Направите линк на путањи која указује на циљ"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Правите директоријуме"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Преименујте датотеку"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Подесите стринг упита"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Отпремите датотеке"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Отпремање датотеке: $1 као $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Приказује се актуелни радни директоријум"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Удаљени радни директоријум: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Читајте симболичке везе"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Каноникализујте путање"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Наставите отпремање датотека"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Уклоните датотеке"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Избришите празне директоријуме"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Погледајте уграђене датотеке"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Додаци:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Погледајте статус датотека"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Датотека: $1\n  Величина: $2 бајт(ов)а\n   UID: $3\n   GID: $4\nПриступ: $5\n време приступа: $6\n време измене: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Направите симболичку везу на путањи која указује на циљ"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Скратите путање на 0 бајтова"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  додаци сервера:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Погледајте актуелну верзију протокола"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Информације о верзији SFTP протокола:\n  локално: $1\n  сервер: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: крај датотеке"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: датотека није пронађена"
+	},
+	"nasftp_error_file_reading": {
+		"message": "Читање датотеке $1 није успело: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Необрађена интерна грешка; пријавите је: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: неважећи број: $3"
+	},
+	"nasftp_error_message": {
+		"message": "ГРЕШКА: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: додатак „$2“ није доступан"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: није стандардна датотека"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: нема довољно аргумената"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: дозвола је одбијена"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: превише аргумената"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: непозната команда"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: непозната ознака $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Принудно затварање"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 бајт(ов)а је пренето за $2 сек ($3/с)"
+	},
 	"nassh_options_error": {
-		"message": "Непозната опција прослеђивања: $1"
+		"message": "Непозната опција: $1"
 	},
 	"nassh_product_name": {
 		"message": "Secure Shell"
@@ -420,7 +831,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Повежите сачувани профил или нови SSH систем"
 	},
 	"open_as_window_tip": {
-		"message": "[Професионални савет] Користите опцију „Отвори као прозор“ или „Цео екран“ да бисте спречили да комбинација Ctrl+W затвори терминал!\n[Професионални савет] Погледајте $1 за више информација."
+		"message": "[Савет] Користите опцију „Отвори као прозор“ или „Преко целог екрана“ да бисте спречили затварање терминала помоћу Ctrl+W!\n[Савет] Више информација потражите на $1."
 	},
 	"options_button_label": {
 		"message": "Опције"
@@ -434,26 +845,59 @@
 	"plugin_loading_failed": {
 		"message": " није успело! :("
 	},
+	"popup_connect_tooltip": {
+		"message": "Држите Ctrl да бисте отворили на новој картици."
+	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
+	"preferences_header_ssh_files": {
+		"message": "SSH датотеке"
+	},
 	"preferences_header_terminal": {
-		"message": "Подешавања профила"
+		"message": "Подешавања терминала"
+	},
+	"preferences_header_uri": {
+		"message": "URI обрађивачи"
 	},
 	"preferences_reset": {
 		"message": "Сва подешавања су ресетована!"
 	},
+	"protocol_register_button": {
+		"message": "Региструј обрађиваче протокола"
+	},
+	"protocol_register_explain": {
+		"message": "Дугме у наставку ће покушати да региструје обрађиваче за све протоколе које подржавамо. На пример, ово нам омогућава да директно обрађујемо ssh:// линкове. Прегледач ће приказати упит за сваки протокол. Потврдите/прихватите сваки од њих када се прикаже. Ако се не прикаже ниједан, потражите савете за решавање проблема у следећем одељку."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Ако смо већ регистровали обрађиваче или ако су претходни покушаји регистрације одбијени, упити се више не приказују. Отворите дијалог у наставку, па проверите подешавања регистрованих обрађивача у одељцима ssh/sftp/итд... Ако је тај програм блокиран, можете да избришете она подешавања која вам омогућавају да поново пробате да обавите регистрацију. Ако је тај програм већ регистрован, али није подешен као подразумевани обрађивач, можете да промените и подразумевани обрађивач."
+	},
+	"protocol_register_options_link": {
+		"message": "Регистрација протокола"
+	},
+	"protocol_register_settings_button": {
+		"message": "Отвори подешавања регистрованих обрађивача"
+	},
+	"protocol_register_title": {
+		"message": "Помоћник за регистрацију Secure Shell обрађивача протокола"
+	},
+	"read_size_label": {
+		"message": "Величина читања (KiB)"
+	},
 	"reconnect_message": {
-		"message": "Желите ли поново да се повежете (R), да изаберете неку другу везу (C) или да изађете из процеса (x)?"
+		"message": "Желите ли поново да се повежете (R), да одаберете неку другу везу (C) или да изађете из процеса (x)?"
 	},
 	"relay_retry": {
-		"message": "Поновни покушај..."
+		"message": "Покушава се поново..."
 	},
 	"request_pin_prompt": {
-		"message": "Унесите PIN да бисте откључали тастер $1 на читачу „$2“ (преосталих покушаја: $3):"
+		"message": "Унесите PIN да бисте откључали тастер $1 на читачу „$2“ ($3) (преостало покушаја: $4):"
 	},
 	"restore_prefs": {
 		"message": "Врати резервну копију"
+	},
+	"save_label": {
+		"message": "Сачувај"
 	},
 	"shortcut_list_aria_label": {
 		"message": "сачуване везе"
@@ -464,8 +908,44 @@
 	"ssh_argstr_label": {
 		"message": "SSH аргументи"
 	},
+	"stream_open_error": {
+		"message": "Отварање стрима $1 није успело: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "Брисање терминала"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI боје"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Умекшавање ивица"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Звоно"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Трепће"
+	},
+	"terminal_name_pref_color": {
+		"message": "Боја"
+	},
+	"terminal_name_pref_font": {
+		"message": "Фонт"
+	},
+	"terminal_name_pref_image": {
+		"message": "Слика"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Облик"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Видљиво"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Подесите боје за подразумевану палету."
+	},
+	"terminal_pref_bell": {
+		"message": "Звоно терминала се оглашава."
 	},
 	"terminal_preview_label": {
 		"message": "Преглед"
@@ -476,11 +956,137 @@
 	"terminal_reset_menu_label": {
 		"message": "Ресетовање терминала"
 	},
+	"terminal_settings_background_image_help": {
+		"message": "URL слике у позадини. Мора да почиње са http:// или https://. Оставите празно поље ако нема слике.\n\nНа пример:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Аутоматски"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Онемогући"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Греда"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Блокирај"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Подвуци"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Желите ли стварно да ресетујете тему на подразумеване вредности?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Ресетујте тему"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Ресетуј"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Класично"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Тамна"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Измаглица"
+	},
+	"terminal_theme_light_label": {
+		"message": "Светла"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Тамни Solarized"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Светли Solarized"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Боја 0: црна"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Боја 1: црвена"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Боја 10: светлозелена"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Боја 11: светложута"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Боја 12: светлоплава"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Боја 13: светлоциклама"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Боја 14: светлоцијан"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Боја 15: јаркобела"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Боја 2: зелена"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Боја 3: жута"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Боја 4: плава"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Боја 5: циклама"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Боја 6: цијан"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Боја 7: бела"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Боја 8: јаркоцрна"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Боја 9: светлоцрвена"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Изглед"
+	},
+	"terminal_title_pref_background": {
+		"message": "Увод"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Понашање"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "Курсор"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Тастатура"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Тастатура и миш"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Миш"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Трака за померање"
+	},
+	"terminal_title_pref_text": {
+		"message": "Текст"
+	},
+	"terminal_title_settings": {
+		"message": "Подешавања"
+	},
+	"terminal_title_theme": {
+		"message": "Тема"
+	},
 	"tip_1": {
 		"message": "Можете да задржите Ctrl (Cmd на macOS-у) док кликћете на линкове да бисте их отворили!"
 	},
 	"tip_10": {
-		"message": "Ако притиснете Ctrl+Shift+N током рада у прозору, отворићете још једну сесију."
+		"message": "Ако притиснете Ctrl+Shift+N током рада у прозору, можете да отворите још једну сесију."
 	},
 	"tip_11": {
 		"message": "Можете поново да повежете тастере/пречице: https://goo.gl/LWRndr"
@@ -516,7 +1122,7 @@
 		"message": "Ћаскајте са другим корисницима hterm-а/Secure Shell-а путем chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Пронашли сте грешку? Желите да затражите нову функцију? Јавите нам: https://goo.gl/vb94JY"
+		"message": "Пронашли сте грешку?  Желите да затражите нову функцију?  Јавите нам: https://goo.gl/vb94JY"
 	},
 	"unexpected_error": {
 		"message": "Дошло је до неочекиване грешке. Више детаља потражите на JavaScript конзоли."
@@ -531,16 +1137,19 @@
 		"message": "Евиденција промена/напомене о верзији: $1"
 	},
 	"welcome_faq": {
-		"message": "Одговори на Честа питања: $1 (користите ctrl + клик на линкове да бисте их отварали)"
+		"message": "Одговори на Честа питања: $1 (користите Ctrl + клик на линкове да бисте их отварали)"
 	},
 	"welcome_release_highlights": {
 		"message": "Важне промене у односу на $1:"
 	},
 	"welcome_tip_of_day": {
-		"message": "Насумични професионални савет бр. $1: $2"
+		"message": "Насумични савет бр. $1: $2"
 	},
 	"welcome_version": {
 		"message": "Добро дошли у верзију $2 апликације $1."
+	},
+	"write_size_label": {
+		"message": "Величина уписивања (KiB)"
 	},
 	"zoom_warning": {
 		"message": "Идите у Chrome мени и подесите Зумирање на 100%"

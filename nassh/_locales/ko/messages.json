@@ -12,25 +12,19 @@
 		"message": "탭을 닫으면 세션 연결이 끊깁니다."
 	},
 	"cache_pin_prompt": {
-		"message": "이 세션의 PIN을 캐시하시겠습니까? (y/N):"
+		"message": "이 SSH 세션의 PIN을 캐시하시겠습니까? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "취소"
 	},
+	"changelog": {
+		"message": "변경 로그"
+	},
 	"clear_known_hosts_menu_label": {
-		"message": "SSH known_hosts 삭제"
+		"message": "SSH 알려진 호스트 삭제"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "이 명령은 알려진 호스트의 메뉴를 표시하고 호스트를 삭제하도록 요청합니다."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "알려진 ssh 호스트는 삭제합니다."
-	},
-	"cmd_ssh_help": {
-		"message": "|username| 및 |hostname| 매개변수는 필수이며 |port|는 선택사항입니다. 포트가 지정되지 않은 경우 22로 기본 지정됩니다."
-	},
-	"cmd_ssh_title": {
-		"message": "새로운 ssh 세션을 엽니다."
+	"clear_label": {
+		"message": "삭제"
 	},
 	"command_complete": {
 		"message": "$1 명령어가 상태 코드 $2(으)로 종료되었습니다."
@@ -138,10 +132,223 @@
 		"message": "페이지 위로"
 	},
 	"hterm_loading_resource_failed": {
-		"message": "$1을(를) 로드하지 못했습니다."
+		"message": "$1을(를) 로드할 수 없습니다."
 	},
 	"hterm_loading_resource_start": {
 		"message": "$1 로드 중..."
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "인라인 이미지 표시 허용"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt + Backspace는 메타 + Backspace임"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "AltGr 키 모드"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Alt 키를 메타 키로 취급"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Alt 키 특수키 처리"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "알림 벨소리(URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "배경 색상"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "배경 이미지"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "배경 이미지 위치"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "배경 이미지 크기"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Backspace 키 동작"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "문자 맵 재정의"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "텍스트 선택 영역 자동으로 지우기"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "종료 시 창 닫기"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "초기 색상 팔레트"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "선택한 콘텐츠 자동으로 복사"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Ctrl + C 복사 동작"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ctrl + +/-/0 확대/축소 동작"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Ctrl + V 붙여넣기 동작"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "커서 깜박임"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "커서가 깜박이는 속도"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "텍스트 커서 색상"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "텍스트 커서 모양"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "알림 벨용 데스크톱 알림 만들기"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian Ambiguous 문자는 열 2개 사용"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "UTF-8 이외의 C1 제어 문자 지원"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "텍스트 깜박임 사용 설정"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "굵은 텍스트 동작"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "굵은 텍스트에 밝은 색상 사용"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "콘텐츠 복사 시 알림 표시"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "원격 클립보드 쓰기 허용"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "스크롤백 버퍼 지우기 허용(CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "텍스트 커서 깜박임 변경 허용"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "크기 조절 시 터미널 크기 표시"
+	},
+	"hterm_name_pref_environment": {
+		"message": "환경 변수"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "텍스트 글꼴 유형"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "텍스트 글꼴 크기"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "텍스트 글꼴 다듬기"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "텍스트 색상"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "입력 시 마우스 커서 숨기기"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Home/End 키 스크롤 동작"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "키보드 바인딩/단축키"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "기본 OS 키보드 바인딩/단축키 사용"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "미디어 키는 Fkey임"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "메타 키 특수키 처리"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "마우스 버튼 붙여넣기"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "마우스 오른쪽 버튼으로 클릭 시 콘텐츠 붙여넣기"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Page Up/Down 키 스크롤 동작"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Alt + 1~9 탭 전환 동작"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Ctrl + N 새 창 동작"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Ctrl + 1~9 탭 전환 동작"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ctrl + T 새 탭 동작"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Ctrl + Tab 탭 전환 동작"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Ctrl + W 탭 닫기 동작"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "메타 + 1~9 탭 전환 동작"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "메타 + V 붙여넣기 동작"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "드래그 앤 드롭하여 붙여넣기 허용"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "인코딩 수신"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "키 입력 후 하단으로 스크롤"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "새로 출력 후 하단으로 스크롤"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "스크롤 휠로 화살표 키 에뮬레이션"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "마우스 스크롤 휠 배율"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "스크롤바 표시"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Shift + Insert 붙여넣기"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "터미널 인코딩"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "브라우저에서 텍스트 복사를 처리하도록 허용"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "사용자설정 CSS(URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "사용자설정 CSS(인라인 텍스트)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "자동 선택 중지(왼쪽)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "단어 분리 문자"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "자동 선택 중지(오른쪽)"
 	},
 	"hterm_popup_inline_image": {
 		"message": "인라인 이미지"
@@ -153,7 +360,7 @@
 		"message": "원격 호스트가 터미널의 이미지를 표시하도록 허용할지 선택합니다.\n\n기본적으로 선택이 이루어질 때까지 메시지가 표시됩니다."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "설정하면 Chrome OS의 Alt + Backspace -> DEL 재배치가 실행취소되므로 Alt + Backspace가 원래대로 작동하게 됩니다."
+		"message": "설정하면 Chrome OS의 Alt + 백스페이스-> Delete 재배치가 실행취소되므로 Alt + 백스페이스가 원래대로 작동하게 됩니다."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr 감지 휴리스틱을 선택합니다.\n\n'null': 탐색기 언어를 바탕으로 자동 감지합니다.\n      'en-us' => 'none', 기타 => 'right-alt'\n'none': AltGr 관련 멍잉을 사용 중지합니다.\n'ctrl-alt': Ctrl + Alt가 AltGr이라고 가정합니다.\n'left-alt': 왼쪽 Alt가 AltGr이라고 가정합니다.\n'right-alt': 오른쪽 Alt가 AltGr이라고 가정합니다."
@@ -165,13 +372,13 @@
 		"message": "Alt 키 처리 방식을 관리합니다.\n\n  escape: ESC 접두어를 전송합니다.\n  8-bit: xterm에서처럼 입력된 문자에 128을 추가합니다.\n browser-key: 키 누르기 이벤트가 발생할 때까지 기다린 다음\n 브라우저의 메시지를 확인합니다. 브라우저가 일부 Alt 시퀀스에\n 기본 동작을 실행하는 플랫폼에서는 제대로 작동하지 않습니다."
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "터미널 벨소리의 URL입니다. 무음으로 설정하려면 문자열을 비워 두세요."
+		"message": "터미널 벨소리의 URL입니다. 무음으로 설정하려면 비워 두세요."
 	},
 	"hterm_pref_background_color": {
 		"message": "다른 색상 속성이 없는 텍스트의 배경색입니다."
 	},
 	"hterm_pref_background_image": {
-		"message": "배경 이미지의 CSS 값입니다. 이미지를 사용하지 않으려면 문자열을 비워 두세요.\n\n예:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "배경 이미지의 CSS 값입니다. 이미지가 없으면 비워 둡니다.\n\n예:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "배경 이미지 위치의 CSS 값입니다.\n\n예:\n  10% 10%\n  center"
@@ -180,10 +387,10 @@
 		"message": "배경 이미지 크기의 CSS 값입니다."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "True로 설정하면 Backspace 키가 BS('\\x08' 또는 ^H)를 전송합니다. 아니면 Backspace 키가 '\\x7f'를 전송합니다."
+		"message": "true로 설정하면 백스페이스 키가 BS('\\x08' 또는 ^H)를 전송합니다. 아니면 백스페이스 키가 '\\x7f'를 전송합니다."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "객체로 지정되었습니다. 희소 배열로, 각 속성은 문자 집합 코드이고 값은 희소 배열 자체인 객체입니다. 희소 배열에서 각 속성은 수신된 문자이고, 값은 표시된 문자입니다.\n\n예:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "객체로 지정되었습니다. 희소 배열로, 각 속성은 문자 집합 코드이고 값은 희소 배열 자체인 객체입니다. 희소 배열에서 각 속성은 수신된 문자이고, 값은 표시된 문자입니다.\n\n예:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "복사 후 선택된 항목을 삭제할지 선택합니다."
@@ -201,19 +408,22 @@
 		"message": "Ctrl + C: True인 경우 복사를 실행하고, False인 경우 호스트에 ^C를 전송합니다.\nCtrl + Shift + C: True인 경우 호스트에 ^C를 전송하고, False인 경우 복사를 실행합니다."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "True인 경우 Ctrl과 +/-/0 키를 눌러 확대/축소를 제어합니다.\nFalse인 경우 Ctrl, Shift와 +/-/0 키를 눌러 확대/축소를 제어하고, Ctrl과 - 키는 ^_를 전송하며, Ctrl과 +/0 키를 누르면 아무것도 실행되지 않습니다."
+		"message": "True인 경우 Ctrl 키와 +/-/0 키를 눌러 확대/축소를 제어합니다.\nFalse인 경우 Ctrl + Shift 키와 +/-/0 키를 눌러 확대/축소를 제어하고, Ctrl 키와 - 키는 ^_를 전송하며, Ctrl 키와 +/0 키를 누르면 아무것도 실행되지 않습니다."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl+V: Ture인 경우 붙여넣기를 실행하고, False인 경우 호스트에 ^V를 전송합니다.\nCtrl+Shift+V: True인 경우 호스트에 ^V를 전송하고, False인 경우 붙여넣기를 실행합니다."
+		"message": "Ctrl+V: True인 경우 붙여넣기를 실행하고, False인 경우 호스트에 ^V를 전송합니다.\nCtrl+Shift+V: True인 경우 호스트에 ^V를 전송하고, False인 경우 붙여넣기를 실행합니다."
 	},
 	"hterm_pref_cursor_blink": {
-		"message": "텍스트 커서가 기본적으로 깜박일지 선택합니다. 터미널 이스케이프 시퀀스를 통해 런타임 시 전환할 수 있습니다."
+		"message": "텍스트 커서가 기본적으로 깜박이게 할지 선택합니다. 터미널 이스케이프 시퀀스를 통해 런타임 시 전환할 수 있습니다."
 	},
 	"hterm_pref_cursor_blink_cycle": {
 		"message": "텍스트 커서가 깜박이는 속도를 밀리초 단위로 설정합니다.\n\n요소가 2개인 배열에서 첫 번째는 텍스트 커서가 켜져 있는 시간이고, 두 번째는 꺼져 있는 시간입니다."
 	},
 	"hterm_pref_cursor_color": {
 		"message": "표시되는 텍스트 커서의 색상입니다."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "표시되는 텍스트 커서의 모양입니다. 터미널 이스케이프 시퀀스를 통해 런타임 시 변경할 수 있습니다."
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "True인 경우 백그라운드의 터미널 벨소리가 웹 알림을 생성합니다. https://www.w3.org/TR/notifications/\n\n알림을 표시하려면 사용자가 권한을 부여해야 합니다. 이 옵션을 True로 설정하면 필요한 경우 hterm에서 사용자에게 권한을 요청합니다. 사용자 작업으로 트리거되지 않은 경우 브라우저에 이 권한 요청이 표시되지 않을 수도 있습니다.\n\n'알림' 권한이 있는 Chrome 확장 프로그램은 알림을 표시할 수 있습니다."
@@ -225,7 +435,7 @@
 		"message": "True인 경우 8비트 제어 문자를 사용 설정하고 False인 경우 무시합니다.\n\n이 설정과 관계없이 이러한 제어 문자의 2바이트 버전은 유지됩니다."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "True인 경우 깜빡임 속성이 유지됩니다. 무시하려면 False로 설정합니다."
+		"message": "True인 경우 깜박임 속성이 유지됩니다. 무시하려면 False로 설정합니다."
 	},
 	"hterm_pref_enable_bold": {
 		"message": "True인 경우 굵게/밝게 속성이 지정된 텍스트에 굵은 글꼴을 사용합니다. 일반 굵기의 글꼴을 사용하려면 False로, 자동 감지하려면 Null로 설정합니다."
@@ -239,8 +449,14 @@
 	"hterm_pref_enable_clipboard_write": {
 		"message": "원격 호스트가 로컬 시스템 클립보드에 직접 쓸 수 있도록 허용합니다.\n읽기 액세스 권한은 이 설정과 관계없이 허용되지 않습니다.\n\n이 설정은 OSC-52와 같은 기능에 대한 액세스를 제어하는 데 사용됩니다."
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "디스플레이 삭제 명령(CSI-J)의 저장된 행 삭제 함수(모드 3)가 터미널 스크롤백 버퍼를 삭제할 수 있는지 결정합니다.\n\n기본으로 사용 설정하는 것이 안전합니다."
+	},
 	"hterm_pref_enable_dec12": {
 		"message": "DEC 비공개 모드 12를 사용하여 텍스트 커서 깜박임 상태를 변경하는 호스트의 시도를 허용합니다."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "터미널에서 크기를 변경할 경우 터미널 크기를 표시할지 설정합니다."
 	},
 	"hterm_pref_environment": {
 		"message": "객체로서의 환경 변수 초기 세트입니다."
@@ -261,16 +477,19 @@
 		"message": "입력할 때 마우스 커서를 자동으로 숨길지 여부를 선택합니다. 기본적으로 플랫폼/OS에서 이 설정을 처리할지 여부가 자동으로 감지됩니다.\n\n참고: 일부 운영체제에서는 이 설정을 재정의하므로 사용 중지하지 못할 수도 있습니다."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "True인 경우 Home/End 키를 사용해 터미널 스크롤바를 제어하고 Shift와 Home/End 키를 함께 누르면 원격 호스트에 전송됩니다. False인 경우 Home/End 키를 누르면 원격 호스트로 전송되고 Shift와 Home/End 키를 함께 누르면 스크롤됩니다."
+		"message": "True인 경우 Home/End 키를 사용해 터미널 스크롤바를 제어하고 Shift 키와 Home/End 키를 함께 누르면 원격 호스트에 전송됩니다. False인 경우 Home/End 키를 누르면 원격 호스트로 전송되고 Shift 키와 Home/End 키를 함께 누르면 스크롤됩니다."
 	},
 	"hterm_pref_keybindings": {
-		"message": "주요 동작의 키 조합 맵입니다. 키 조합에는 0개 이상의 특수키 및 키 코드가 포함됩니다. 키 코드에는 십진수 또는 16진수 숫자 또는 키 식별자를 사용할 수 있습니다. 주요 동작은 호스트에 전송할 문자열 또는 동작 식별자로 지정할 수 있습니다. https://goo.gl/LWRndr 페이지에서 형식에 관해 자세히 알아볼 수 있습니다.\n\n샘플 키 바인딩:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'HELLO\\n'\"\n}"
+		"message": "키 동작의 키 시퀀스 맵입니다. 키 시퀀스에는 0개 이상의 특수키와 키 코드가 포함됩니다. 키 코드에는 십진수 또는 16진수 숫자 또는 키 식별자를 사용할 수 있습니다. 키 동작은 호스트에 전송할 문자열 또는 동작 식별자로 지정할 수 있습니다. https://goo.gl/LWRndr 페이지에서 형식에 관해 자세히 알아볼 수 있습니다.\n\n샘플 키 바인딩:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "hterm 자체 사용을 항상 캡처하는 대신 일반 OS 키보드 바인딩을 따를지 설정합니다."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "True로 설정하면 미디어 키가 Fkey와 동등한 키로 전환됩니다. False로 설정하면 브라우저에서 키를 처리합니다."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "메타 키를 누르고 있는 동안 키를 누르면 ESC 접두어를 전송합니다.\n\n예를 들어 사용 설정된 경우 메타-K를 누르면 Esc와 k를 입력한 것처럼 ^[k가 전송됩니다. 사용 중지된 경우 k만 전송됩니다."
+		"message": "메타 키를 누르고 있는 동안 키를 누르면 ESC 접두어를 전송합니다.\n\n예를 들어 사용 설정된 경우 메타 + K 키를 누르면 Esc와 k를 입력한 것처럼 ^[k가 전송됩니다. 사용 중지된 경우 k만 전송됩니다."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "마우스 붙여넣기 버튼을 지정합니다. Null로 설정하면 자동 감지됩니다.\n\n자동 감지를 사용하는 경우, Chrome OS 등 X11이 아닌 플랫폼에서는 마우스 가운데 버튼을 사용합니다. X11 플랫폼에서는 마우스 오른쪽 버튼을 사용합니다. 기본 창 관리자에서 마우스 가운데 버튼이 붙여넣기에 사용되기 때문입니다.\n\n0 == 왼쪽(기본) 버튼\n1 == 가운데(보조) 버튼\n2 == 오른쪽(예비) 버튼\n\n이 옵션은 '마우스 오른쪽 버튼 클릭으로 붙여넣기' 설정과 관계없이 작동됩니다.\n\n참고: 이 방법으로 왼손잡이용 및 오른손잡이용 마우스를 올바르게 처리할 수 있습니다."
@@ -282,16 +501,31 @@
 		"message": "True인 경우 Page Up/Page Down 키를 사용해 터미널 스크롤바를 제어하고 Shift 키와 Page Up/Page Down 키를 함께 누르면 원격 호스트에 전송됩니다. False인 경우 Page Up/Page Down 키를 누르면 원격 호스트로 전송되고 Shift 키와 Page Up/Page Down 키를 함께 누르면 스크롤됩니다."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Alt + 1~9 키를 브라우저에서 처리할지 여부를 설정합니다.\n\nChrome의 '탭으로 전환' 키보드 액셀러레이터를 계속 사용할 수 있도록 브라우저 탭에서 hterm을 실행할 때 유용합니다. 탭에서 실행하지 않는 경우에는 이러한 키를 호스트로 전송하여 vim 또는 emacs에서 사용되도록 하는 것이 좋습니다.\n\nTrue로 설정하면 브라우저에서 Alt + 1~9 키를 처리합니다. False로 설정하면 Alt + 1~9 키가 호스트로 전송됩니다. Null로 설정한 경우에는 브라우저 플랫폼 및 창 유형에 따라 자동으로 감지합니다."
+		"message": "Alt + 1~9 키를 브라우저로 전달할지 결정합니다.\n\n브라우저 탭에서 hterm을 실행할 때 Chrome의 '탭으로 전환' 단축키를 계속 사용할 수 있으므로 유용합니다. 탭에서 실행하지 않는 경우에는 이러한 키를 호스트로 전송하여 vim 또는 emacs에서 사용되도록 하는 것이 좋습니다.\n\ntrue인 경우 브라우저에서 Alt + 1~9 키를 처리합니다. false인 경우 Alt + 1~9 키가 호스트로 전송됩니다. null인 경우에는 브라우저 플랫폼 및 창 유형에 따라 자동으로 감지됩니다."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Ctrl + N 키를 브라우저로 전달할지 결정합니다.\n\ntrue인 경우 Ctrl + N 키는 브라우저에서 '새 창' 단축키로 처리됩니다. false인 경우 Ctrl + N 키는 호스트로 전송됩니다."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Ctrl + 1~9 키를 브라우저에서 처리할지 여부를 설정합니다.\n\nChrome의 '탭으로 전환' 키보드 액셀러레이터를 계속 사용할 수 있도록 브라우저 탭에서 hterm을 실행할 때 유용합니다. 탭에서 실행하지 않는 경우에는 이러한 키를 호스트로 전송하여 vim 또는 emacs에서 사용되도록 하는 것이 좋습니다.\n\nTrue로 설정하면 브라우저에서 Ctrl + 1~9 키를 처리합니다. False로 설정하면 Ctrl + 1~9 키가 호스트로 전송됩니다. Null로 설정한 경우에는 브라우저 플랫폼 및 창 유형에 따라 자동으로 감지합니다."
+		"message": "Ctrl + 1~9 키를 브라우저로 전달할지 결정합니다.\n\n브라우저 탭에서 hterm을 실행할 때 Chrome의 '탭으로 전환' 단축키를 계속 사용할 수 있으므로 유용합니다. 탭에서 실행하지 않는 경우에는 이러한 키를 호스트로 전송하여 vim 또는 emacs에서 사용되도록 하는 것이 좋습니다.\n\ntrue인 경우 브라우저에서 Ctrl + 1~9 키를 처리합니다. false인 경우 Ctrl + 1~9 키가 호스트로 전송됩니다. null인 경우에는 브라우저 플랫폼 및 창 유형에 따라 자동으로 감지합니다."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Ctrl + T 키를 브라우저로 전달할지 결정합니다.\n\ntrue인 경우 Ctrl + T 키는 브라우저에서 '새 탭' 단축키로 처리됩니다. false인 경우 Ctrl + T 키는 호스트로 전송됩니다."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Ctrl + Tab 키와 Ctrl + Shift + Tab 키를 브라우저로 전달할지 결정합니다.\n\ntrue인 경우 Ctrl + Tab 키와 Ctrl + Shift + Tab 키는 브라우저에서 '다음/이전 탭' 단축키로 처리됩니다. false인 경우 Tab 키는 Ctrl 또는 Shift 없이 호스트로 전송됩니다."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Ctrl + W 키를 브라우저로 전달할지 결정합니다.\n\ntrue인 경우 Ctrl + W 키는 브라우저에서 '탭 닫기' 단축키로 처리됩니다. false인 경우 Ctrl + W 키는 호스트로 전송됩니다."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "메타 + 1~9 키를 브라우저에서 처리할지 여부를 설정합니다.\n\nChrome의 '탭으로 전환' 키보드 액셀러레이터를 계속 사용할 수 있도록 브라우저 탭에서 hterm을 실행할 때 유용합니다. 탭에서 실행하지 않는 경우에는 이러한 키를 호스트로 전송하여 vim 또는 emacs에서 사용되도록 하는 것이 좋습니다.\n\nTrue로 설정하면 브라우저에서 메타 + 1~9 키를 처리합니다. False로 설정하면 메타 + 1~9 키가 호스트로 전송됩니다. Null로 설정한 경우에는 브라우저 플랫폼 및 창 유형에 따라 자동으로 감지합니다."
+		"message": "메타 + 1~9 키를 브라우저로 전달할지 결정합니다.\n\n브라우저 탭에서 hterm을 실행할 때 Chrome의 '탭으로 전환' 단축키를 계속 사용할 수 있으므로 유용합니다. 탭에서 실행하지 않는 경우에는 이러한 키를 호스트로 전송하여 vim 또는 emacs에서 사용되도록 하는 것이 좋습니다.\n\ntrue인 경우 브라우저에서 메타 + 1~9 키를 처리합니다. false인 경우 메타 + 1~9 키가 호스트로 전송됩니다. null인 경우에는 브라우저 플랫폼 및 창 유형에 따라 자동으로 감지됩니다."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "메타 + V 키를 호스트로 전달할지 여부를 설정합니다."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "True인 경우 드래그 앤 드롭된 텍스트를 터미널에 붙여넣습니다.\nFalse인 경우 드롭된 텍스트는 무시됩니다."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "호스트에서 받은 데이터에 필요한 인코딩을 설정합니다.\n인코딩이 일치하지 않으면 시각적 버그가 발생할 수 있습니다.\n\n유효한 값은 'utf-8' 및 'raw'입니다."
@@ -312,13 +546,13 @@
 		"message": "수직 스크롤바 모드입니다."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Shift/Insert 키를 붙여넣기에 사용할지 원격 호스트에 전송할지 여부를 선택합니다."
+		"message": "Shift + Insert 키를 붙여넣기에 사용할지 원격 호스트로 전송할지 선택합니다."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "기본 터미널 인코딩(DOCS)입니다.\n\nISO-2022를 사용하면 문자 맵 번역(그래픽 맵 등)이 사용 설정됩니다.\nUTF-8을 사용하면 이러한 기능이 지원되지 않습니다.\n\n변형이 잠겨 있는 경우 터미널 이스케이프 시퀀스를 통한 런타임 시 인코딩을 변경할 수 없다는 의미입니다.\n\n이전 애플리케이션에 손상된 렌더링이 없다면 UTF-8을 사용해야 합니다."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "기본 브라우저/OS의 복사 행동을 사용할지 여부를 선택합니다.\n\n브라우저/OS가 복사 이벤트를 직접 처리하도록 허용하여 (복사가 전혀 작동하지 않는) 일부 시스템과의 호환성을 개선할 수 있지만 텍스트 선택 효율은 떨어질 수 있습니다.\n\n예를 들어 자동으로 줄바꿈되었던 긴 줄은 새 줄이 있는 상태로 복사됩니다."
+		"message": "기본 브라우저/OS의 복사 행동을 사용할지 결정합니다.\n\n브라우저/OS가 복사 이벤트를 직접 처리하도록 허용하여 (복사가 전혀 작동하지 않는) 일부 시스템과의 호환성을 개선할 수 있지만 텍스트 선택 효율은 떨어질 수 있습니다.\n\n예를 들어 자동으로 줄바꿈되었던 긴 줄은 새 줄이 있는 상태로 복사됩니다."
 	},
 	"hterm_pref_user_css": {
 		"message": "터미널 문서에 포함할 사용자 스타일시트 URL입니다."
@@ -327,7 +561,7 @@
 		"message": "터미널 스타일링을 위한 사용자설정 CSS 텍스트입니다."
 	},
 	"hterm_pref_word_break_match_left": {
-		"message": "선택 영역의 왼쪽(시작)과의 일치를 중지하기 위한 정규 표현식입니다.\n\n일반적으로 이 정규 표현식은 특정 문자를 거부하는 문자 클래스입니다.\n다음으로 흔히 시작되는 경로로 '~' 및 '.' 기호가 기본적으로 허용됩니다."
+		"message": "선택 영역의 왼쪽(시작)과의 일치를 중지하기 위한 정규 표현식입니다.\n\n일반적으로 이 정규 표현식은 특정 문자를 거부하는 문자 클래스입니다.\n경로가 '~' 및 '.' 기호로 시작되는 경우가 많으므로 이 두 기호가 기본적으로 허용됩니다."
 	},
 	"hterm_pref_word_break_match_middle": {
 		"message": "가운데에 있는 모든 문자와 일치시키기 위한 정규 표현식입니다.\n\n일반적으로 이 정규 표현식은 특정 문자를 거부하는 문자 클래스입니다.\n\n시작점을 둘러싼 선택 영역을 확장하는 데 사용됩니다."
@@ -375,19 +609,31 @@
 		"message": "$1을(를) 사용하여 릴레이 서버를 찾는 중"
 	},
 	"json_parse_error": {
-		"message": "'$1'에서 JSON을 파싱할 수 없음: $2"
+		"message": "‘$1’에서 JSON을 파싱할 수 없음: $2"
 	},
 	"known_hosts_empty": {
 		"message": "알려진 호스트가 없고, 삭제할 것이 없습니다."
 	},
 	"known_hosts_prompt": {
-		"message": "[1-$1]를 삭제하려면 호스트를 선택하세요."
+		"message": "[1-$1]을(를) 삭제하려면 호스트를 선택하세요."
 	},
 	"known_hosts_title": {
 		"message": "알려진 호스트:"
 	},
+	"licenses": {
+		"message": "라이선스"
+	},
+	"licenses_expand_link": {
+		"message": "라이선스 표시"
+	},
+	"licenses_title": {
+		"message": "오픈소스 라이선스"
+	},
 	"loading_label": {
 		"message": "로드 중..."
+	},
+	"migrate_to_ext": {
+		"message": "알림: 새로운 Secure Shell 확장 프로그램($1)으로 이전하세요.\nChrome 앱은 지원 중단되므로 이 버전에서는 업데이트를 수신하지 않습니다.\n자세한 내용은 이전 가이드($2)를 참조하세요."
 	},
 	"missing_param": {
 		"message": "누락된 매개변수: $1"
@@ -401,8 +647,173 @@
 	"mounted_message": {
 		"message": "마운트가 완료되었습니다."
 	},
+	"nasftp_cmd_cat_help": {
+		"message": "파일을 터미널로 덤프합니다."
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "작업 디렉터리를 변경합니다."
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "경로 그룹을 변경합니다."
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "경로에서 권한을 변경합니다."
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "경로의 소유자를 변경합니다."
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "현재 터미널 화면을 삭제합니다."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "파일을 클립보드에 복사(기본: 시작 시 10MiB)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "클립보드에 $1바이트 복사함"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "색상 사용을 전환합니다."
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "소스를 대상에 복사합니다."
+	},
+	"nasftp_cmd_del_help": {
+		"message": "파일 삭제"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "디스크 통계를 표시합니다."
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  경로: $1\n  파일 시스템 ID: $2\n 총계: $3\n  사용됨: $4 ($5%)\n 사용 가능: $6(권한 없는 사용자)\n $7(루트)"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "연결을 해제합니다."
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "$1 파일을 $2(으)로 다운로드 중"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "파일을 다운로드합니다."
+	},
+	"nasftp_cmd_help_help": {
+		"message": "이 도움말 화면"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "디렉터리 세부정보를 나열합니다."
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "타겟으로 연결되는 경로에서 링크를 생성합니다."
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "디렉터리를 만듭니다."
+	},
+	"nasftp_cmd_move_help": {
+		"message": "파일 이름을 바꿉니다."
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "메시지 문자열을 설정합니다."
+	},
+	"nasftp_cmd_put_help": {
+		"message": "파일을 업로드합니다."
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "$1 파일을 $2($3)(으)로 업로드 중"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "현재 작업 디렉터리를 표시합니다."
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "원격 작업 디렉터리: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "심볼릭 링크를 읽습니다."
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "경로를 표준화합니다."
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "파일 업로드를 재개합니다."
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "파일 삭제"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "빈 디렉터리를 삭제합니다."
+	},
+	"nasftp_cmd_show_help": {
+		"message": "파일 인라인을 표시합니다."
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "확장:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "파일 상태를 표시합니다."
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  파일: $1\n  크기: $2바이트\n   UID: $3\n   GID: $4\n액세스 권한: $5\n 액세스 시간: $6\n 수정 시간: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "타겟으로 연결되는 경로에서 심볼릭 링크를 생성합니다."
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "경로를 0바이트로 자릅니다."
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  서버 확장 프로그램:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "현재 프로토콜 버전을 표시합니다."
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "SFTP 프로토콜 버전 정보:\n  로컬: $1\n  서버: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: 파일의 끝"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: 파일을 찾을 수 없음"
+	},
+	"nasftp_error_file_reading": {
+		"message": "$1 읽지 못함: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "처리되지 않은 내부 오류입니다. $1 버그를 제출하세요."
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: 잘못된 숫자: $3"
+	},
+	"nasftp_error_message": {
+		"message": "오류: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: ‘$2’ 확장 프로그램을 사용할 수 없음"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: 일반 파일이 아님"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: 인수 부족"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: 권한 거부됨"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: 인수가 너무 많음"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: 알 수 없는 명령어"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: 알 수 없는 플래그 $2"
+	},
+	"nasftp_force_quit": {
+		"message": "강제 종료"
+	},
+	"nasftp_progress_summary": {
+		"message": "$2초 내 $1바이트 전송됨($3/s)"
+	},
 	"nassh_options_error": {
-		"message": "알 수 없는 릴레이 옵션: $1"
+		"message": "알 수 없는 옵션: $1"
 	},
 	"nassh_product_name": {
 		"message": "Secure Shell"
@@ -417,10 +828,10 @@
 		"message": "확인"
 	},
 	"omnibox_default": {
-		"message": "<url><match>user@hostname[:port]</match></url> 저장된 프로필 또는 새 ssh 시스템에 연결하세요"
+		"message": "<url><match>user@hostname[:port]</match></url> 저장된 프로필 또는 새 SSH시스템에 연결하세요"
 	},
 	"open_as_window_tip": {
-		"message": "[프로 팁] Ctrl+W을 눌러도 터미널이 닫히지 않게 하려면 '창으로 열기' 또는 '전체화면'을 사용하세요.\n[프로 팁] 자세한 내용은 $1 페이지를 참조하세요."
+		"message": "[전문가의 팁] Ctrl + W 키를 눌러도 터미널이 닫히지 않게 하려면 '창으로 열기' 또는 '전체 화면'을 사용하세요.\n[전문가의 팁] 자세한 내용은 $1 페이지를 참조하세요."
 	},
 	"options_button_label": {
 		"message": "옵션"
@@ -429,19 +840,49 @@
 		"message": "NaCl 플러그인 로드 중..."
 	},
 	"plugin_loading_complete": {
-		"message": "완료되었습니다."
+		"message": " 완료되었습니다."
 	},
 	"plugin_loading_failed": {
 		"message": " 실패했습니다! :("
 	},
+	"popup_connect_tooltip": {
+		"message": "Ctrl 키를 누르고 있으면 새 탭에서 열립니다."
+	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
+	"preferences_header_ssh_files": {
+		"message": "SSH 파일"
+	},
 	"preferences_header_terminal": {
-		"message": "프로필 설정"
+		"message": "터미널 설정"
+	},
+	"preferences_header_uri": {
+		"message": "URI 핸들러"
 	},
 	"preferences_reset": {
 		"message": "모든 환경설정이 재설정되었습니다."
+	},
+	"protocol_register_button": {
+		"message": "프로토콜 핸들러 등록"
+	},
+	"protocol_register_explain": {
+		"message": "아래 버튼은 지원되는 모든 프로토콜의 핸들러 등록을 시도합니다. 예를 들면 ssh:// 링크를 직접 처리할 수 있습니다. 각 프로토콜에 관한 메시지가 브라우저에 표시되므로 표시되는 메시지를 확인하고 수락하세요. 메시지가 표시되지 않을 경우 다음 섹션에서 문제해결 팁을 확인하세요."
+	},
+	"protocol_register_explain_settings": {
+		"message": "이미 핸들러를 등록했거나 이전 등록 시도가 거부된 경우 추가 메시지가 표시되지 않습니다. 아래의 대화상자를 열고 ssh/sftp/etc... 섹션에서 등록된 핸들러 설정을 확인하세요. 이 프로그램이 차단된 경우 설정을 삭제하면 등록을 다시 시도할 수 있습니다. 이 프로그램이 이미 등록되어 있지만 기본 핸들러가 아닌 경우 기본 핸들러를 변경할 수도 있습니다."
+	},
+	"protocol_register_options_link": {
+		"message": "프로토콜 등록"
+	},
+	"protocol_register_settings_button": {
+		"message": "등록된 핸들러 설정 열기"
+	},
+	"protocol_register_title": {
+		"message": "Secure Shell 프로토콜 핸들러 등록 도우미"
+	},
+	"read_size_label": {
+		"message": "읽기 크기(KiB)"
 	},
 	"reconnect_message": {
 		"message": "다시 연결(R)하거나 다른 연결을 선택(C)하거나 종료(x)하시겠습니까?"
@@ -450,10 +891,13 @@
 		"message": "다시 시도하는 중..."
 	},
 	"request_pin_prompt": {
-		"message": "'$2'에서 키 $1을(를) 잠금 해제하려면 PIN을 입력하세요(남은 시도 $3회)."
+		"message": "‘$2($3)’에서 $1 키를 잠금 해제하려면 PIN을 입력하세요(남은 시도 $4회)."
 	},
 	"restore_prefs": {
 		"message": "백업 복원"
+	},
+	"save_label": {
+		"message": "저장"
 	},
 	"shortcut_list_aria_label": {
 		"message": "저장된 연결"
@@ -464,8 +908,44 @@
 	"ssh_argstr_label": {
 		"message": "SSH 인수"
 	},
+	"stream_open_error": {
+		"message": "스트림 $1을(를) 열지 못함: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "터미널 삭제"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI 색상"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "안티앨리어싱"
+	},
+	"terminal_name_pref_bell": {
+		"message": "벨"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "깜박임"
+	},
+	"terminal_name_pref_color": {
+		"message": "색상"
+	},
+	"terminal_name_pref_font": {
+		"message": "글꼴"
+	},
+	"terminal_name_pref_image": {
+		"message": "이미지"
+	},
+	"terminal_name_pref_shape": {
+		"message": "모양"
+	},
+	"terminal_name_pref_visible": {
+		"message": "표시"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "기본 팔레트의 색상을 설정합니다."
+	},
+	"terminal_pref_bell": {
+		"message": "터미널 벨을 들을 수 있습니다."
 	},
 	"terminal_preview_label": {
 		"message": "미리보기"
@@ -476,11 +956,131 @@
 	"terminal_reset_menu_label": {
 		"message": "터미널 초기화"
 	},
+	"terminal_settings_background_image_help": {
+		"message": "배경 이미지 URL입니다 'http://' 또는 'https://'로 시작해야 합니다. 이미지가 없으면 비워 둡니다.\n\n예:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "자동"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "사용 중지"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "수직 막대"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "차단"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "밑줄"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "테마를 기본값으로 재설정하시겠습니까?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "테마 재설정"
+	},
+	"terminal_settings_reset_label": {
+		"message": "재설정"
+	},
+	"terminal_theme_classic_label": {
+		"message": "기본"
+	},
+	"terminal_theme_dark_label": {
+		"message": "어둡게"
+	},
+	"terminal_theme_haze_label": {
+		"message": "옅은 안개"
+	},
+	"terminal_theme_light_label": {
+		"message": "밝게"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "색상 0: 검은색"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "색상 1: 빨간색"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "색상 10: 밝은 녹색"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "색상 11: 밝은 노란색"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "색상 12: 밝은 파란색"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "색상 13: 밝은 자홍색"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "색상 14: 밝은 청록색"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "색상 15: 밝은 흰색"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "색상 2: 녹색"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "색상 3: 노란색"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "색상 4: 파란색"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "색상 5: 자홍색"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "색상 6: 청록색"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "색상 7: 흰색"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "색상 8: 밝은 검은색"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "색상 9: 밝은 빨간색"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "디자인"
+	},
+	"terminal_title_pref_background": {
+		"message": "배경"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "동작"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "커서"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "키보드"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "키보드 및 마우스"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "마우스"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "스크롤바"
+	},
+	"terminal_title_pref_text": {
+		"message": "텍스트"
+	},
+	"terminal_title_settings": {
+		"message": "설정"
+	},
+	"terminal_title_theme": {
+		"message": "테마"
+	},
 	"tip_1": {
 		"message": "링크를 열려면 Ctrl(macOS의 경우 Cmd)을 누른 상태로 링크를 클릭하세요."
 	},
 	"tip_10": {
-		"message": "창에서 실행 중인 경우, Ctrl + Shift + N을 눌러서 다른 세션을 열 수 있습니다."
+		"message": "창에서 실행 중인 경우, Ctrl + Shift + N 키를 눌러 다른 세션을 열 수 있습니다."
 	},
 	"tip_11": {
 		"message": "키/단축키를 다시 바인딩할 수 있습니다. https://goo.gl/LWRndr"
@@ -495,25 +1095,25 @@
 		"message": "컨텍스트 메뉴를 불러오려면 마우스 오른쪽 버튼을 클릭한 상태에서 Ctrl(macOS의 경우 Cmd) 키를 누르세요."
 	},
 	"tip_2": {
-		"message": "hterm-notify를 사용하여 브라우저에 알림을 표시하세요. https://goo.gl/ZNxGdF"
+		"message": "hterm-notify를 사용하여 브라우저에 알림을 표시하세요(참고: https://goo.gl/ZNxGdF)."
 	},
 	"tip_3": {
-		"message": "검색주소창에 'ssh <프로필 이름>'을 입력하여 연결하세요. https://goo.gl/V7o8ki"
+		"message": "검색주소창에 'ssh <프로필 이름>'을 입력하여 연결하세요(참고: https://goo.gl/V7o8ki)."
 	},
 	"tip_4": {
 		"message": "Chrome OS에서 SFTP를 통해 파일 시스템을 마운트하고 파일 앱을 통해 탐색할 수 있습니다. '연결' 대신 'SFTP 마운트'를 사용하세요."
 	},
 	"tip_5": {
-		"message": "웹페이지에서 ssh:// 링크를 사용하여 연결하거나 북마크를 저장하세요. https://goo.gl/zS8EZD"
+		"message": "웹페이지에서 ssh:// 링크를 사용하여 연결하거나 북마크를 저장하세요(참고: https://goo.gl/zS8EZD)."
 	},
 	"tip_6": {
 		"message": "기본 16색, 256색 및 전체 24비트 색상을 사용하여 출력/프롬프트 색상을 지정하세요. http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "OSC-52를 사용하여 emacs/vim 등의 내용을 클립보드에 복사하세요. https://goo.gl/XSnyLo"
+		"message": "OSC-52를 사용하여 emacs/vim 등의 내용을 클립보드에 복사하세요(참고: https://goo.gl/XSnyLo)."
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org를 통해 다른 hterm/Secure Shell 사용자와 채팅하세요. https://goo.gl/RYHiK"
+		"message": "chromium-hterm@chromium.org를 통해 다른 hterm/Secure Shell 사용자와 채팅하세요(참고: https://goo.gl/RYHiK)."
 	},
 	"tip_9": {
 		"message": "버그를 발견하셨나요? 아니면 새로운 기능을 요청하고 싶으신가요? Google에 알려 주세요. https://goo.gl/vb94JY"
@@ -531,16 +1131,19 @@
 		"message": "변경 기록/출시 노트: $1"
 	},
 	"welcome_faq": {
-		"message": "자주 묻는 질문(FAQ)의 답변: $1(Ctrl을 누른 상태로 클릭하여 열기)"
+		"message": "자주 묻는 질문(FAQ)의 답변: $1(Ctrl을 누른 상태로 링크 클릭하여 열기)"
 	},
 	"welcome_release_highlights": {
 		"message": "$1 이후 주요 변경사항:"
 	},
 	"welcome_tip_of_day": {
-		"message": "랜덤 프로 팁 #$1: $2"
+		"message": "전문가의 랜덤 팁 #$1: $2"
 	},
 	"welcome_version": {
-		"message": "$1 버전 $2에 오신 것을 환영합니다."
+		"message": "$1 버전 $2을(를) 이용해 주셔서 감사합니다."
+	},
+	"write_size_label": {
+		"message": "쓰기 크기(KiB)"
 	},
 	"zoom_warning": {
 		"message": "Chrome 메뉴에서 확대/축소 설정을 100%로 변경하세요."

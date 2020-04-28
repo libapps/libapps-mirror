@@ -9,28 +9,22 @@
 		"message": "No es pot analitzar la destinació: $1"
 	},
 	"before_unload": {
-		"message": "Si tanqueu aquesta pestanya es desconnectarà la sessió."
+		"message": "Si tanques aquesta pestanya es desconnectarà la sessió."
 	},
 	"cache_pin_prompt": {
-		"message": "Vols desar el PIN d'aquesta sessió a la memòria cau? (y/N):"
+		"message": "Vols desar el PIN d'aquesta sessió SSH a la memòria cau? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "Cancel·la"
 	},
+	"changelog": {
+		"message": "Registre de canvis"
+	},
 	"clear_known_hosts_menu_label": {
 		"message": "Esborra claus d'amfitrió SSH conegudes"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "Aquesta comanda mostra un menú d'amfitrions coneguts i sol·licita l'amfitrió que s'ha d'oblidar."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Oblida un amfitrió SSH conegut."
-	},
-	"cmd_ssh_help": {
-		"message": "Els paràmetres |username| i |hostname| són obligatoris, |port| és opcional. Si no s'especifica el port, el valor predeterminat és 22."
-	},
-	"cmd_ssh_title": {
-		"message": "Obre una sessió de SSH nova."
+	"clear_label": {
+		"message": "Esborra"
 	},
 	"command_complete": {
 		"message": "S'ha sortit de l'ordre $1 amb el codi d'estat $2."
@@ -54,10 +48,10 @@
 		"message": "Quadre de diàleg de connexió"
 	},
 	"console_crosh_options_notice": {
-		"message": "Sabies que hi ha una pàgina d'opcions especial?\nJa no caldrà modificar \"term_\" directament.\nPrem $1 per obrir-la o fes clic a l'enllaç següent:\n$2"
+		"message": "Sabies que hi ha una pàgina d'opcions dedicada?\nJa no caldrà que modifiquis \"term_\" directament.\nPrem $1 per obrir-la o fes clic a l'enllaç següent:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Sabies que hi ha una pàgina d'opcions especial?\nJa no caldrà que modifiquis \"term_\" directament.\n$1"
+		"message": "Sabies que hi ha una pàgina d'opcions dedicada?\nJa no caldrà que modifiquis \"term_\" directament.\n$1"
 	},
 	"del_keycap": {
 		"message": "[SUPR]"
@@ -93,10 +87,10 @@
 		"message": "la ruta predeterminada és el directori d'inici de l'usuari"
 	},
 	"field_nassh_options_aria_label": {
-		"message": "Opcions del servidor de tramesa SSH"
+		"message": "Opcions del servidor de \nretransmissió SSH"
 	},
 	"field_nassh_options_placeholder": {
-		"message": "Opcions del servidor de tramesa SSH"
+		"message": "Opcions del servidor de retransmissió SSH"
 	},
 	"field_port_aria_label": {
 		"message": "port"
@@ -114,7 +108,7 @@
 		"message": "nom d'usuari"
 	},
 	"found_relay": {
-		"message": "S'ha trobat el servidor de tramesa: $1"
+		"message": "S'ha trobat el servidor de retransmissió: $1"
 	},
 	"get_profile_error": {
 		"message": "No s'ha pogut carregar el perfil $1:\n$2"
@@ -132,16 +126,229 @@
 		"message": "Bloqueja"
 	},
 	"hterm_button_page_down": {
-		"message": "Av Pàg"
+		"message": "Av Pàg"
 	},
 	"hterm_button_page_up": {
-		"message": "Re Pàg"
+		"message": "Re Pàg"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "No s'ha pogut carregar $1"
 	},
 	"hterm_loading_resource_start": {
 		"message": "S'està carregant $1..."
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Permet mostrar imatges inserides"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Retrocés és Meta+Retrocés"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "Mode de la tecla Alt Gr"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Tracta la tecla Alt com la tecla Meta"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Gestió de la tecla de modificació Alt"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Timbre de l'alerta (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Color de fons"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Imatge de fons"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Posició de la imatge de fons"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Mida de la imatge de fons"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Comportament de la tecla de retrocés"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Substitucions dels mapes de caràcters"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Esborra automàticament la selecció de text"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Tanca la finestra en sortir"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Paleta de colors inicial"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Copia automàticament el contingut seleccionat"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Comportament de la còpia amb Ctrl+C"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Comportament del zoom amb Ctrl++/-/0"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Comportament d'enganxar amb Ctrl+V"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Parpelleig del cursor"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Velocitat de parpelleig del cursor"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Color del cursor de text"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Forma del cursor de text"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Crea notificacions d'escriptori per als timbres d'alerta"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Els caràcters ambigus de l'est asiàtic fan servir dues columnes"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Admet caràcters de control que no siguin UTF-8 C1"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Activa el parpelleig del text"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Comportament del text en negreta"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Fes servir colors intensos per al text en negreta"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Mostra una notificació en copiar contingut"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Permet l'escriptura remota al porta-retalls"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Permet esborrar la memòria intermèdia de desplaçament (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Permet canviar el parpelleig del cursor de text"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Mostra les dimensions del terminal quan es canvia de mida"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Variables de l'entorn"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Família de tipus de lletra del text"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Mida de la lletra"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Suavització del tipus de lletra de text"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Color del text"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Amaga el cursor del ratolí mentre s'escriu"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Comportament del desplaçament amb les tecles Inici i Fi"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Seqüències de tecles o tecles de drecera"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Utilitza les seqüències de tecles o les tecles de drecera predeterminades del sistema operatiu"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Les tecles multimèdia són tecles de funció"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Gestió de la tecla de modificació Meta"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Botó del ratolí per enganxar"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Enganxa contingut fent clic amb el botó dret al ratolí"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Comportament del desplaçament de les tecles Re Pàg i Av Pàg"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Comportament del canvi de pestanya amb Alt+1…9"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Comportament de la finestra nova amb Ctrl+N"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Comportament del canvi de pestanya amb Ctrl+1…9"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Comportament de la pestanya nova amb Ctrl+T"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Comportament del canvi de pestanya amb Ctrl+Tab"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Comportament del tancament de pestanya amb Ctrl+W"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Comportament del canvi de pestanya amb Meta+1…9"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Comportament d'enganxar amb Meta+V"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Permet arrossegar i deixar anar per enganxar"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Rep la codificació"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Desplaça't a la part inferior després de prémer una tecla"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Desplaça't al final després d'una sortida nova"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Emula les tecles de fletxa amb la roda de desplaçament"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Multiplicador de la roda de desplaçament del ratolí"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Visibilitat de la barra de desplaçament"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Enganxa amb Maj+Insereix"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Codificació del terminal"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Permet que el navegador gestioni la còpia de text"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "CSS personalitzat (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "CSS personalitzat (text inserit)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Parada de la selecció automàtica (a l'esquerra)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Caràcters de divisió de paraules"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Parada de la selecció automàtica (a la dreta)"
 	},
 	"hterm_popup_inline_image": {
 		"message": "Imatges inserides"
@@ -150,10 +357,10 @@
 		"message": "Les imatges inserides estan desactivades"
 	},
 	"hterm_pref_allow_images_inline": {
-		"message": "Defineix si es permet que l'amfitrió remot mostri imatges al terminal.\n\nDe manera predeterminada, es mostra una sol·licitud fins que es tria una opció."
+		"message": "Estableix si es permet que l'amfitrió remot mostri imatges al terminal.\n\nDe manera predeterminada, es mostra una sol·licitud fins que es tria una opció."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Si s'estableix, es desfà la reassignació d'Alt+Retrocés per suprimir contingut a Chrome OS i la drecera Alt+Retrocés recupera la seva funció."
+		"message": "Si s'estableix, desfà el remapatge d'Alt+Retrocés > Supr a Chrome OS, de manera que la drecera Alt+Retrocés funciona com a Alt+Retrocés."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Selecciona una heurística per detectar la tecla AltGr.\n\n\"null\": es detecta automàticament en funció de l'idioma del navegador:\n      \"en-us\" => \"none\"; en cas contrari => \"right-alt\"\n\"none\": es desactiva qualsevol manipulació relacionada amb AltGr.\n\"ctrl-alt\": interpreta que Ctrl+Alt vol dir AltGr.\n\"left-alt\": interpreta que esquerra+Alt vol dir AltGr.\n\"right-alt\": interpreta que dreta+Alt vol dir AltGr."
@@ -165,13 +372,13 @@
 		"message": "Controla el funcionament de la tecla Alt.\n\n  \"escape\": s'envia un prefix ESC.\n  \"8-bit\": s'afegeix 128 al caràcter escrit com a xterm.\n \"browser-key\": s'espera que es premi la tecla per veure el comportament del navegador. Aquesta opció no funciona bé a les plataformes en què el navegador duu a terme una acció predeterminada per a algunes seqüències d'Alt."
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "URL del timbre del terminal. Deixa la cadena buida si no vols que se senti el timbre."
+		"message": "URL del timbre del terminal. Deixa'l en banc si el timbre no és audible."
 	},
 	"hterm_pref_background_color": {
 		"message": "Color de fons per al text que no té cap altre atribut de color."
 	},
 	"hterm_pref_background_image": {
-		"message": "Valor CSS de la imatge de fons. Deixa la cadena buida si no vols que es mostri cap imatge.\n\nPer exemple:\n  \"url(https://goo.gl/anedTK)\"\n  \"linear-gradient(top bottom, blue, red)\""
+		"message": "Valor CSS de la imatge de fons. Deixa'l en blanc si no vols que es mostri cap imatge.\n\nPer exemple:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Valor CSS de la posició de la imatge de fons.\n\nPer exemple:\n  \"10% 10%\"\n  \"center\""
@@ -180,13 +387,13 @@
 		"message": "Valor CSS de la mida de la imatge de fons."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Si s'estableix en \"true\", la tecla Retrocés ha d'enviar BS (\"\\x08\", valor conegut també com a \"^H\"). Amb qualsevol altre valor, ha d'enviar \"\\x7f\"."
+		"message": "Si s'estableix en \"true\", la tecla Retrocés enviarà BS (\"\\x08\", valor conegut també com a \"^H\"). En cas contrari, enviarà \"\\x7f\"."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "S'especifica com a objecte. És una matriu dispersa en què cada propietat és el codi d'un conjunt de caràcters i el valor és un objecte que, al mateix temps, és una matriu dispersa. En aquesta matriu dispersa, cada propietat és el caràcter rebut i el valor és el caràcter mostrat.\n\nPer exemple:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "S'especifica com a objecte. És una matriu dispersa en què cada propietat és el codi d'un conjunt de caràcters i el valor és un objecte que, al mateix temps, és una matriu dispersa. En aquesta matriu dispersa, cada propietat és el caràcter rebut i el valor és el caràcter mostrat.\n\nPer exemple:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
-		"message": "Si s'esborra la selecció després de copiar-la."
+		"message": "Estableix si s'esborra la selecció després de copiar-la."
 	},
 	"hterm_pref_close_on_exit": {
 		"message": "Estableix si es tanca la finestra quan l'ordre acaba d'executar-se."
@@ -207,7 +414,7 @@
 		"message": "Si s'estableix en \"true\", Ctrl+V enganxa la selecció. Si s'estableix en \"false\", envia \"^V\" a l'amfitrió.\nSi s'estableix en \"true\", Ctrl+Maj+V envia \"^V\" a l'amfitrió. Si s'estableix en \"false\", enganxa la selecció."
 	},
 	"hterm_pref_cursor_blink": {
-		"message": "Defineix si el cursor de text parpelleja de manera predeterminada. Aquesta opció es pot activar o desactivar en el temps d'execució mitjançant seqüències d'escapada del terminal."
+		"message": "Estableix si el cursor de text parpelleja de manera predeterminada. Aquesta opció es pot commutar durant l'execució mitjançant seqüències d'escapada del terminal."
 	},
 	"hterm_pref_cursor_blink_cycle": {
 		"message": "Velocitat de parpelleig del cursor de text en mil·lisegons.\n\nMatriu de dos elements: el primer defineix el temps que el cursor està activat i el segon el temps que està desactivat."
@@ -215,32 +422,41 @@
 	"hterm_pref_cursor_color": {
 		"message": "Color del cursor de text visible."
 	},
+	"hterm_pref_cursor_shape": {
+		"message": "Forma del cursor de text visible. Es pot canviar durant l'execució mitjançant les seqüències d'escapada del terminal."
+	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Si s'estableix en \"true\", els timbres en segon pla del terminal creen una notificació web (https://www.w3.org/TR/notifications/).\n\nPer poder mostrar notificacions, l'usuari ha de donar permís. Quan aquesta opció s'estableix en \"true\", hterm prova de sol·licitar permís a l'usuari, si cal. Els navegadors no poden mostrar aquesta sol·licitud de permís si no s'activa per l'acció d'un usuari.\n\nLes extensions de Chrome amb el permís \"notifications\" poden mostrar notificacions."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "Estableix si els caràcters East Asian Ambiguous tenen l'amplada de dues columnes."
+		"message": "Estableix si els caràcters ambigus de l'est asiàtic tenen l'amplada de dues columnes."
 	},
 	"hterm_pref_enable_8_bit_control": {
-		"message": "S'estableix en \"true\" per activar els caràcters de control de 8 bits i en \"false\" per ignorar-los.\n\nIndependentment del valor que s'estableixi, respectem les versions de 2 bits d'aquests caràcters de control."
+		"message": "S'estableix en \"true\" per activar els caràcters de control de 8 bits i en \"false\" per ignorar-los.\n\nIndependentment d'aquesta opció, respectem les versions de 2 bits d'aquests caràcters de control."
 	},
 	"hterm_pref_enable_blink": {
 		"message": "Si s'estableix en \"true\", es respecta l'atribut de parpelleig; si s'estableix en \"false\", s'ignora."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Si s'estableix en \"true\", es fa servir un tipus de lletra en negreta per al text que té l'atribut de negreta o brillantor. Si s'estableix en \"false\", s'utilitza un tipus de lletra normal. Si s'estableix en \"null\", es detecta el gruix automàticament."
+		"message": "Si s'estableix en \"true\", es fa servir un tipus de lletra en negreta per al text que té l'atribut de negreta o brillantor. Si s'estableix en \"false\", s'utilitza un tipus de lletra normal. Si s'estableix en \"null\", es detecta automàticament."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "Si s'estableix en \"true\", s'utilitzen colors brillants (8-15 en una paleta de 16 colors) en qualsevol text amb l'atribut de negreta. Si s'estableix en \"false\", es fan servir altres colors."
+		"message": "Si s'estableix en \"true\", s'utilitzen colors brillants (8-15 en una paleta de 16 colors) en qualsevol text amb l'atribut de negreta. En cas contrari, s'estableix en \"false\"."
 	},
 	"hterm_pref_enable_clipboard_notice": {
-		"message": "Defineix si es mostra un missatge al terminal quan l'amfitrió escriu alguna cosa al porta-retalls."
+		"message": "Estableix si es mostra un missatge al terminal quan l'amfitrió escriu alguna cosa al porta-retalls."
 	},
 	"hterm_pref_enable_clipboard_write": {
 		"message": "Permet que l'amfitrió remot escrigui directament al porta-retalls del sistema local.\nIndependentment d'aquesta opció, mai no es concedeix accés de lectura.\n\nAquesta preferència s'utilitza per controlar l'accés a funcions com ara OSC-52."
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Estableix si la funció per esborrar les línies desades (mode 3) de l'ordre per esborrar la pantalla (CSI-J) pot esborrar la memòria intermèdia de desplaçament del terminal.\n\nÉs segur activar aquesta opció de manera predeterminada."
+	},
 	"hterm_pref_enable_dec12": {
 		"message": "Respecta l'intent de l'amfitrió de canviar l'estat de parpelleig del cursor de text mitjançant el mode privat DEC 12."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Estableix si es mostren les dimensions del terminal quan aquest canvia de mida."
 	},
 	"hterm_pref_environment": {
 		"message": "Conjunt inicial de variables de l'entorn com a objecte."
@@ -264,7 +480,10 @@
 		"message": "Si s'estableix en \"true\", amb les tecles Inici i Fi es controla la barra de desplaçament del terminal, i Maj+Inici i Maj+Fi s'envien a l'amfitrió remot. Si s'estableix en \"false\", les funcions d'aquestes tecles s'intercanvien."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Una assignació de seqüència de tecles amb l'acció corresponent. Les seqüències de tecles inclouen zero o més tecles modificadores seguides d'un codi de tecla. Els codis de tecla poden ser nombres decimals o hexadecimals, o bé un identificador de tecla. Les accions de tecles es poden especificar com a cadena, a fi d'enviar-la a l'amfitrió, o bé com a identificador d'acció. Per veure l'explicació completa del format, consulta https://goo.gl/LWRndr.\n\nExemples de seqüències de tecles i les accions corresponents:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hola a tothom'\"\n}"
+		"message": "Una assignació de seqüència de tecles amb l'acció corresponent. Les seqüències de tecles inclouen zero o més tecles modificadores seguides d'un codi de tecla. Els codis de tecla poden ser nombres decimals o hexadecimals, o bé un identificador de tecla. Les accions de tecles es poden especificar com a cadena, a fi d'enviar-la a l'amfitrió, o bé com a identificador d'acció. Per veure l'explicació completa del format, consulta https://goo.gl/LWRndr.\n\nExemples de seqüències de tecles i les accions corresponents:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Majt+L\": \"PASS\",\n  \"Ctrl+H\": \"Hola a tothom\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Estableix si es respecten les seqüències habituals de tecles del sistema operatiu en lloc de capturar-les sempre perquè les utilitzi hterm."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Si s'estableix en \"true\", converteix les tecles multimèdia en la tecla de funció equivalent. Si s'estableix en \"false\", permet que el navegador gestioni les tecles."
@@ -279,28 +498,43 @@
 		"message": "Enganxa la selecció en fer clic al botó dret del ratolí.\n\nAquesta opció és independent de l'opció \"mouse-paste-button\".\n\nNota: aquesta opció s'adapta correctament a ratolins tant per a dretans com per a esquerrans."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Si s'estableix en \"true\", amb les tecles Re Pàg i Av Pàg es controla la barra de desplaçament del terminal, i Maj+Re Pàg i Maj+Av Pàg s'envien a l'amfitrió remot. Si s'estableix en \"false\", les funcions d'aquestes tecles s'intercanvien."
+		"message": "Si s'estableix en \"true\", amb les tecles Re Pàg i Av Pàg es controla la barra de desplaçament del terminal, i Maj+Re Pàg i Maj+Av Pàg s'envien a l'amfitrió remot. Si s'estableix en \"false\", les funcions d'aquestes tecles s'intercanvien."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Estableix si s'ha de transmetre Alt+1…9 al navegador.\n\nÉs útil quan s'executa hterm en una pestanya del navegador, ja que així no es perden els acceleradors de teclat de Chrome de tipus \"canvia a la pestanya\". Quan no s'executa en una pestanya, és millor enviar aquestes tecles a l'amfitrió perquè es puguin fer servir a vim o emacs.\n\nSi s'estableix en \"true\", el navegador gestiona Alt+1…9. Si s'estableix en \"false\", s'envia Alt+1…9 a l'amfitrió. Si no s'estableix, es detecta automàticament en funció de la plataforma del navegador i del tipus de finestra."
+		"message": "Estableix si s'ha de transmetre Alt+1…9 al navegador.\n\nÉs útil quan s'executa hterm en una pestanya del navegador, ja que així no es perden les tecles de drecera per a \"canvia a la pestanya\" de Chrome. Quan no s'executa en una pestanya, és millor enviar aquestes tecles a l'amfitrió perquè es puguin fer servir a vim o emacs.\n\nSi s'estableix en \"true\", el navegador gestiona Alt+1…9. Si s'estableix en \"false\", s'envia Alt+1…9 a l'amfitrió. \nSi s'estableix en \"null\", es detecta automàticament en funció de la plataforma del navegador i del tipus de finestra."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Estableix si s'ha de transmetre Ctrl+N al navegador.\n\nSi s'estableix en \"true\", el navegador gestiona Ctrl+N com a tecles de drecera per a \"finestra nova\". Si s'estableix en \"false\", s'envia Ctrl+N a l'amfitrió."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Estableix si s'ha de transmetre Ctrl+1…9 al navegador.\n\nÉs útil quan s'executa hterm en una pestanya del navegador, ja que així no es perden els acceleradors de teclat de Chrome de tipus \"canvia a la pestanya\". Quan no s'executa en una pestanya, és millor enviar aquestes tecles a l'amfitrió perquè es puguin fer servir a vim o emacs.\n\nSi s'estableix en \"true\", el navegador gestiona Ctrl+1…9. Si s'estableix en \"false\", s'envia Ctrl+1…9 a l'amfitrió. Si no s'estableix, es detecta automàticament en funció de la plataforma del navegador i del tipus de finestra."
+		"message": "Estableix si s'ha de transmetre Ctrl+1…9 al navegador.\n\nÉs útil quan s'executa hterm en una pestanya del navegador, ja que així no es perden les tecles de drecera per a \"canvia a la pestanya\" de Chrome. Quan no s'executa en una pestanya, és millor enviar aquestes tecles a l'amfitrió perquè es puguin fer servir a vim o emacs.\n\nSi s'estableix en \"true\", el navegador gestiona Ctrl+1…9. Si s'estableix en \"false\", s'envia Ctrl+1…9 a l'amfitrió. Si s'estableix en \"null\", es detecta automàticament en funció de la plataforma del navegador i del tipus de finestra."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Estableix si s'ha de transmetre Ctrl+T al navegador.\n\nSi s'estableix en \"true\", el navegador gestiona Ctrl+T com a tecles de drecera per a \"pestanya nova\". Si s'estableix en \"false\", s'envia Ctrl+T a l'amfitrió."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Estableix si s'ha de transmetre Ctrl+Tab i Ctrl+Maj+Tab al navegador.\n\nSi s'estableix en \"true\", el navegador gestiona Ctrl+Tab i Ctrl+Maj+Tab com a tecles de drecera per a \"pestanya següent o anterior\". Si s'estableix en \"false\", s'envia la tecla Tab a l'amfitrió sense Ctrl ni Maj."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Estableix si s'ha de transmetre Ctrl+W al navegador.\n\nSi s'estableix en \"true\", el navegador gestiona Ctrl+W com a tecles de drecera per a \"tanca la pestanya\". Si s'estableix en \"false\", s'envia Ctrl+W a l'amfitrió."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Estableix si s'ha de transmetre Meta+1…9 al navegador.\n\nÉs útil quan s'executa hterm en una pestanya del navegador, ja que així no es perden els acceleradors de teclat de Chrome de tipus \"canvia a la pestanya\". Quan no s'executa en una pestanya, és millor enviar aquestes tecles a l'amfitrió perquè es puguin fer servir a vim o emacs.\n\nSi s'estableix en \"true\", el navegador gestiona Meta+1…9. Si s'estableix en \"false\", s'envia Meta+1…9 a l'amfitrió. Si no s'estableix, es detecta automàticament en funció de la plataforma del navegador i del tipus de finestra."
+		"message": "Estableix si s'ha de transmetre Meta+1…9 al navegador.\n\nÉs útil quan s'executa hterm en una pestanya del navegador, ja que així no es perden les tecles de drecera per a \"canvia a la pestanya\" de Chrome. Quan no s'executa en una pestanya, és millor enviar aquestes tecles a l'amfitrió perquè es puguin fer servir a vim o emacs.\n\nSi s'estableix en \"true\", el navegador gestiona Meta+1…9. Si s'estableix en \"false\", s'envia Meta+1…9 a l'amfitrió. \nSi s'estableix en \"null\", es detecta automàticament en funció de la plataforma del navegador i del tipus de finestra."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Estableix si s'ha de transmetre Meta+V a l'amfitrió."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Si s'estableix en \"true\", el text que s'arrossegui i es deixi anar s'enganxarà al terminal.\nSi s'estableix en \"false\", el text que es deixi anar s'ignorarà."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Estableix la codificació prevista per a les dades que es reben de l'amfitrió.\nSi la codificació no coincideix, és probable que es produeixin errors visuals.\n\nEls valors vàlids són \"utf-8\" i \"raw\"."
 	},
 	"hterm_pref_scroll_on_keystroke": {
-		"message": "Defineix si es desplaça a la part inferior en prémer qualsevol tecla."
+		"message": "Estableix si es desplaça a la part inferior en prémer qualsevol tecla."
 	},
 	"hterm_pref_scroll_on_output": {
-		"message": "Defineix si es desplaça a la part inferior en rebre una acció del terminal."
+		"message": "Estableix si es desplaça a la part inferior la sortida del terminal."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
 		"message": "Quan s'utilitza la memòria intermèdia de la pantalla alternativa i DECCKM (les tecles de cursor d'aplicacions) està activa, els desplaçaments amb la roda del ratolí emulen les tecles de fletxa.\n\nEs pot mantenir premuda la tecla Maj per desactivar temporalment aquesta preferència.\n\nSe sol donar quan s'utilitzen cercadors de terminal (less), quan es llegeixen manuals o editors de text (vi/nano), o quan s'utilitza Screen o tmux."
@@ -312,10 +546,10 @@
 		"message": "El mode de barra de desplaçament vertical."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Estableix si s'utilitza Maj+Insereix per enganxar o si s'envia a l'amfitrió remot."
+		"message": "Estableix si s'utilitza Maj+Inser per enganxar o si s'envia a l'amfitrió remot."
 	},
 	"hterm_pref_terminal_encoding": {
-		"message": "La codificació predeterminada del terminal (DOCS).\n\nISO-2022 activa les traduccions dels mapes de caràcters (com ara els mapes de gràfics).\nUTF-8 en desactiva la compatibilitat.\n\nLa variant bloquejada indica que no es pot canviar la codificació en temps d'execució a través de les seqüències d'escapada del terminal.\n\nFes servir UTF-8, tret que vegis que les aplicacions heretades es renderitzen de manera incorrecta."
+		"message": "La codificació predeterminada del terminal (DOCS).\n\nISO-2022 activa les traduccions dels mapes de caràcters (com ara els mapes de gràfics).\nUTF-8 en desactiva la compatibilitat.\n\nLa variant bloquejada indica que no es pot canviar la codificació durant l'execució a través de les seqüències d'escapada del terminal.\n\nFes servir UTF-8, tret que vegis que les aplicacions heretades es renderitzen de manera incorrecta."
 	},
 	"hterm_pref_use_default_window_copy": {
 		"message": "Estableix si s'utilitza el comportament predeterminat per copiar contingut al navegador i al sistema operatiu.\n\nPermet que el navegador o el sistema operatiu gestionin l'esdeveniment de còpia directament, cosa que pot millorar la compatibilitat amb alguns sistemes (en què la còpia no funciona), però fa que la selecció de text ofereixi menys possibilitats.\n\nPer exemple, les línies llargues que s'hagin ajustat automàticament es copiaran mantenint els salts de línia."
@@ -372,28 +606,40 @@
 		"message": "Importa..."
 	},
 	"initializing_relay": {
-		"message": "S'està cercant el servidor de tramesa mitjançant: $1"
+		"message": "S'està cercant el servidor de \nretransmissió mitjançant: $1"
 	},
 	"json_parse_error": {
-		"message": "No s'han pogut analitzar les dades JSON a '$1': $2"
+		"message": "No s'han pogut analitzar les dades JSON a \"$1\": $2"
 	},
 	"known_hosts_empty": {
-		"message": "No hi ha amfitrions coneguts; res per oblidar."
+		"message": "No hi ha amfitrions coneguts; no hi ha res per oblidar."
 	},
 	"known_hosts_prompt": {
-		"message": "Seleccioneu un amfitrió per oblidar [1-$1]:"
+		"message": "Selecciona un amfitrió per oblidar [1-$1]:"
 	},
 	"known_hosts_title": {
 		"message": "Amfitrions coneguts:"
 	},
+	"licenses": {
+		"message": "Llicències"
+	},
+	"licenses_expand_link": {
+		"message": "mostra la llicència"
+	},
+	"licenses_title": {
+		"message": "Llicències de programari lliure"
+	},
 	"loading_label": {
 		"message": "S'està carregant..."
+	},
+	"migrate_to_ext": {
+		"message": "Avís: fes la migració a la nova extensió de Secure Shell ($1).\nLes aplicacions de Chrome han deixat d'estar disponibles i, per tant, aquesta versió deixarà de rebre actualitzacions.\nConsulta la guia de migració ($2) per obtenir més informació."
 	},
 	"missing_param": {
 		"message": "Falta el paràmetre: $1"
 	},
 	"mount_button_label": {
-		"message": "Activa l'SFTP"
+		"message": "Activació de l'SFTP"
 	},
 	"mount_path_label": {
 		"message": "Activa el camí"
@@ -401,11 +647,173 @@
 	"mounted_message": {
 		"message": "S'ha activat."
 	},
+	"nasftp_cmd_cat_help": {
+		"message": "Aboca un fitxer al terminal"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Canvia el directori de treball"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Canvia el grup de camins"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Canvia els permisos als camins"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Canvia el propietari dels camins"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Esborra la pantalla del terminal actual."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Copia un fitxer al porta-retalls (valor predeterminat: 10 MiB inicials)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "Bytes copiats al porta-retalls: $1"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Commuta l'ús del color"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Copia la font a la destinació"
+	},
+	"nasftp_cmd_del": {
+		"message": "supr"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Suprimeix els fitxers"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Mostra les estadístiques del disc"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Camí: $1\n  Identificador del sistema de fitxers: $2\n Total: $3\n  Utilitzat: $4 ($5%)\n Disponibilitat: $6 (per a usuaris sense privilegis)\n $7 (a l'arrel)"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Desconnecta"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "S'està baixant el fitxer $1 com a $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Baixa els fitxers"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Aquesta pantalla d'ajuda"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Mostra els detalls del directori"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Crea un enllaç al camí que dirigeix a la destinació"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Crea directoris"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Canvia el nom d'un fitxer"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Estableix la cadena de sol·licitud"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Penja fitxers"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "S'està penjant el fitxer $1 com a $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Mostra el directori de treball actual"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Directori de treball remot: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Llegeix els enllaços simbòlics"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Canonitza els camins"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Reprèn la pujada de fitxers"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Suprimeix els fitxers"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Suprimeix els directoris buits"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Mostra els fitxers inserits"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Mostra l'estat del fitxer"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Fitxer: $1\n  Mida: $2 bytes\n   Identificador de l'usuari: $3\n   Identificador del grup: $4\nAccés: $5\n Hora d'accés: $6\n Hora de modificació: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Crea un enllaç simbòlic al camí que dirigeix a la destinació"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Trunca els camins en 0 bytes"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  extensions de servidor:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Mostra la versió de protocol actual"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Informació de la versió del protocol SFTP:\n  Local: $1\n  Servidor: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: s'ha arribat al final del fitxer"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: no s'ha trobat el fitxer"
+	},
+	"nasftp_error_file_reading": {
+		"message": "No s'ha pogut llegir $1: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "S'ha produït un error intern no gestionat; informa'n: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2 número no vàlid: $3"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: extensió $2 no disponible"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2 no és un fitxer normal"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: no hi ha prou arguments"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: permís denegat"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: hi ha massa arguments"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: ordre desconeguda"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: marca desconeguda $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Força la sortida"
+	},
+	"nasftp_progress_summary": {
+		"message": "S'han transferit $1 bytes en $2 segons ($3/s)"
+	},
 	"nassh_options_error": {
-		"message": "Opció de tramesa desconeguda: $1"
+		"message": "Opció desconeguda: $1"
 	},
 	"nassh_product_name": {
-		"message": "Secure Shell"
+		"message": "Secure Shell"
 	},
 	"new_window_menu_label": {
 		"message": "Finestra nova"
@@ -420,7 +828,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Connecta't a un perfil desat o a un sistema ssh nou"
 	},
 	"open_as_window_tip": {
-		"message": "[Consell professional] Utilitza Obre com a finestra o Pantalla completa per evitar que s'apagui el terminal amb les tecles Ctrl+W.\n[Consell professional] Consulta $1 per obtenir més informació."
+		"message": "[Consell professional] Utilitza Obre com a finestra o Pantalla completa per evitar que es tanqui el terminal amb les tecles Ctrl+W.\n[Consell professional] Consulta $1 per obtenir més informació."
 	},
 	"options_button_label": {
 		"message": "Opcions"
@@ -434,14 +842,44 @@
 	"plugin_loading_failed": {
 		"message": " S'ha produït un error."
 	},
+	"popup_connect_tooltip": {
+		"message": "Mantén premuda la tecla Ctrl per obrir en una pestanya nova."
+	},
 	"pref_backup_filename": {
 		"message": "Còpia de seguretat de les preferències de Secure Shell.json"
 	},
+	"preferences_header_ssh_files": {
+		"message": "Fitxers SSH"
+	},
 	"preferences_header_terminal": {
-		"message": "Configuració del perfil"
+		"message": "Configuració del terminal"
+	},
+	"preferences_header_uri": {
+		"message": "Gestors d'URI"
 	},
 	"preferences_reset": {
 		"message": "S'han restablert totes les preferències."
+	},
+	"protocol_register_button": {
+		"message": "Registra els gestors de protocols"
+	},
+	"protocol_register_explain": {
+		"message": "Amb el botó següent es provaran de registrar els gestors per a tots els protocols que admetem. Per exemple, ens permet gestionar directament els enllaços ssh://. El navegador mostrarà una sol·licitud per a cada protocol; cal que les confirmis o acceptis a mesura que es mostrin. Si no es mostra cap sol·licitud, consulta la secció següent per obtenir consells de resolució de problemes."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Si ja hem registrat gestors o si s'han denegat intents de registre anteriorment, no es mostraran més sol·licituds. Obre el quadre de diàleg següent i, a continuació, comprova la configuració dels gestors registrats a les seccions ssh, sftp, etc. Si aquest programa està bloquejat, pots suprimir aquestes opcions de configuració per tornar a provar de registrar-te. Si el programa ja està registrat, però no està establert com a gestor predeterminat, també pots canviar el gestor predeterminat."
+	},
+	"protocol_register_options_link": {
+		"message": "Registre de protocols"
+	},
+	"protocol_register_settings_button": {
+		"message": "Obre la configuració dels gestors registrats"
+	},
+	"protocol_register_title": {
+		"message": "Aplicació d'ajuda per al registre del gestor de protocols de Secure Shell"
+	},
+	"read_size_label": {
+		"message": "Mida de lectura (KiB)"
 	},
 	"reconnect_message": {
 		"message": "Vols torna(r) a connectar, triar una altra (c)onnexió o sortir (x)?"
@@ -450,13 +888,16 @@
 		"message": "S'està tornant a provar..."
 	},
 	"request_pin_prompt": {
-		"message": "Introdueix el PIN per desbloquejar la clau $1 a $2 (queden $3 intents):"
+		"message": "Introdueix el PIN per desbloquejar la clau $1 a \"$2 ($3)\" (queden $4 intents):"
 	},
 	"restore_prefs": {
 		"message": "Restaura la còpia de seguretat"
 	},
+	"save_label": {
+		"message": "Desa"
+	},
 	"shortcut_list_aria_label": {
-		"message": "s'han desat les connexions"
+		"message": "connexions desades"
 	},
 	"smart_card_connector_not_installed": {
 		"message": "Instal·la l'aplicació Smart Card Connector: $1"
@@ -464,20 +905,170 @@
 	"ssh_argstr_label": {
 		"message": "Arguments SSH"
 	},
+	"stream_open_error": {
+		"message": "No s'ha pogut obrir la reproducció en continu $1: $2"
+	},
 	"terminal_clear_menu_label": {
-		"message": "Esborra el contingut del terminal"
+		"message": "Esborra el terminal"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "Colors ANSI"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Antialiàsing"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Timbre"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Parpelleig"
+	},
+	"terminal_name_pref_font": {
+		"message": "Tipus de lletra"
+	},
+	"terminal_name_pref_image": {
+		"message": "Imatge"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Forma"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Estableix colors per a la paleta predeterminada."
+	},
+	"terminal_pref_bell": {
+		"message": "Timbre audible del terminal."
 	},
 	"terminal_preview_label": {
-		"message": "Previsualització"
+		"message": "Previsualitza"
 	},
 	"terminal_profile_label": {
 		"message": "Perfil actual"
 	},
 	"terminal_reset_menu_label": {
-		"message": "Restableix el terminal"
+		"message": "Restabliment del terminal"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "URL de la imatge de fons. Ha de començar per \"http://\" o \"https://\". Deixa'l en blanc si no vols que es mostri cap imatge.\n\nPer exemple:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Automàtic"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Desactiva"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Barra vertical"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Bloqueja"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Subratlla"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Confirmes que vols restablir el tema als valors predeterminats?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Restableix el tema"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Restableix"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Clàssic"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Fosc"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Lila boirós"
+	},
+	"terminal_theme_light_label": {
+		"message": "Clar"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Fosc solaritzat"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Clar solaritzat"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Color 0: negre"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Color 1: vermell"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Color 10: verd intens"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Color 11: groc intens"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Color 12: blau intens"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Color 13: magenta intens"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Color 14: cian intens"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Color 15: blanc intens"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Color 2: verd"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Color 3: groc"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Color 4: blau"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Color 5: magenta"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Color 6: cian"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Color 7: blanc"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Color 8: negre intens"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Color 9: vermell intens"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Aparença"
+	},
+	"terminal_title_pref_background": {
+		"message": "Fons"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Comportament"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Teclat"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Teclat i ratolí"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Ratolí"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Barra de desplaçament"
+	},
+	"terminal_title_settings": {
+		"message": "Configuració"
+	},
+	"terminal_title_theme": {
+		"message": "Tema"
 	},
 	"tip_1": {
-		"message": "Pots prémer Ctrl (Cmd a macOS) i alhora fer clic als enllaços perquè s'obrin."
+		"message": "Pots prémer Ctrl (Cmd a macOS) i alhora fer clic als enllaços per obrir-los."
 	},
 	"tip_10": {
 		"message": "Quan s'executi en una finestra, la combinació de tecles Ctrl+Maj+N pot obrir una altra sessió."
@@ -501,10 +1092,10 @@
 		"message": "Escriu \"ssh <nom del perfil>\" per connectar-te des de l'omnibox: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS pot activar sistemes de fitxers a través d'SFTP i navegar a través de l'aplicació Fitxers. Utilitza Activa l'SFTP en lloc de Connecta."
+		"message": "Chrome OS pot activar sistemes de fitxers a través d'SFTP i navegar a través de l'aplicació Fitxers. Utilitza Activació de l'SFTP en lloc de Connecta."
 	},
 	"tip_5": {
-		"message": "Connecta't utilitzant enllaços ssh:// a les pàgines web, o desa una adreça d'interès: https://goo.gl/zS8EZD"
+		"message": "Connecta't utilitzant enllaços ssh:// a les pàgines web o desa una adreça d'interès: https://goo.gl/zS8EZD"
 	},
 	"tip_6": {
 		"message": "Dona-li color a la sortida o els advertiments amb els 16 colors bàsics, 256 colors addicionals i els colors de 24 bits: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
@@ -537,10 +1128,13 @@
 		"message": "Canvis importants des de la versió $1:"
 	},
 	"welcome_tip_of_day": {
-		"message": "Consell aleatori núm. $1: $2"
+		"message": "Consell aleatori per a professionals núm. $1: $2"
 	},
 	"welcome_version": {
-		"message": "Et donem la benvinguda a $1 versió $2."
+		"message": "Et donem la benvinguda a $1, versió $2."
+	},
+	"write_size_label": {
+		"message": "Mida d'escriptura (KiB)"
 	},
 	"zoom_warning": {
 		"message": "Al menú de Chrome, estableix l'opció Zoom al 100%"

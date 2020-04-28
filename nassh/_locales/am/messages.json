@@ -12,25 +12,19 @@
 		"message": "ይህን ትር መዝጋት ይህን ክፍለ ጊዜ ግንኙነት ያቋርጣል።"
 	},
 	"cache_pin_prompt": {
-		"message": "ለዚህ ምዕራፍ ፒኑ ይሸጎጥ? (አዎ/አይ)፦"
+		"message": "ለዚህ SSH ክፍለ-ጊዜ ፒኑ ይሸጎጥ? (አዎ/አይ)፦"
 	},
 	"cancel_button_label": {
 		"message": "ይቅር"
 	},
+	"changelog": {
+		"message": "የለውጥ ምዝግብ ማስታወሻ"
+	},
 	"clear_known_hosts_menu_label": {
-		"message": "የSSH የታወቁ_አስተናጋጆች አጽዳ"
+		"message": "የSSH የታወቁ አስተናጋጆችን አጽዳ"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "ይህ ትዕዛዝ የሚታወቁ አስተናጋጆች እና የሚረሳው አስተናጋጅ መጠየቂያ ምናሌ ያሳያል።"
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "አንድ የሚታወቅ የssh አስተናጋጅ እርሳ።"
-	},
-	"cmd_ssh_help": {
-		"message": "የ|username| እና |hostname| ልኬቶች ያስፈልጋሉ፣ |port| ከተፈለገ ነው። ወደብ ካልተገለጸ ወደ ነባሪው 22 ይዋቀራል።"
-	},
-	"cmd_ssh_title": {
-		"message": "አዲስ የSSH ክፍለ ጊዜ ይከፍታል።"
+	"clear_label": {
+		"message": "አጽዳ"
 	},
 	"command_complete": {
 		"message": "ትዕዛዝ $1 ከሁኔታ ኮድ $2 ጋር ወጥቷል።"
@@ -57,7 +51,7 @@
 		"message": "አማራጮችን የሚመለከት ገጽ እንዳለ ያውቃሉ?\nከአሁን በኋላ ከ«ቃል_» ጋር በቀጥታ መለወጥ የለም!\nእሱን ለመክፈት $1ን ጠቅ ያድርጉ፣ ወይም ይህን ጠቅ ያድርጉ፦\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "አማራጮችን የሚመለከት ገጽ እንዳለ ያውቃሉ?\nከአሁን በኋላ ከ«ቃል_» ጋር በቀጥታ መለወጥ የለም!\n$1"
+		"message": "አማራጮችን የሚመለከት ገጽ እንዳለ ያውቃሉ?\nከአሁን በኋላ «term_»ን በቀጥታ መለወጥ አያስፈልግም!\n$1"
 	},
 	"del_keycap": {
 		"message": "[ሰርዝ]"
@@ -81,7 +75,7 @@
 		"message": "መግለጫ"
 	},
 	"field_description_placeholder": {
-		"message": "username@hostname ወይም ነጻ ቅርጽ ያለው ጽሑፍ"
+		"message": "username@hostname ወይም ነፃ ቅርጽ ያለው ጽሑፍ"
 	},
 	"field_hostname_aria_label": {
 		"message": "የአስተናጋጅ ስም"
@@ -143,6 +137,219 @@
 	"hterm_loading_resource_start": {
 		"message": "$1ን በመጫን ላይ ..."
 	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "የመስመር ውስጥ ምስል ማሳያን ይፍቀዱ"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Backspac Meta+Backspace ነው"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "የAltGr ቁልፍ ሁነታ"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "እንደ Meta ቁልፍ Alt ቁልፍን ይጠቀሙበት"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "የAlt ቁልፍ ማሻሻያ አያያዝ"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "የማንቂያ ደወል ድምፅ (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "የጀርባ ቀለም"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "የዳራ ምስል"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "የዳራ ምስል አቀማመጥ"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "የዳራ ምስል መጠን"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "የኋሊት መደምሰሻ ቁልፍ ባህሪ"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "የቁምፊ ካርታ መሻሮች"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "በራስ-ሰር የጽሑፍ ምርጫን አጽዳ"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "በመውጣት ወቅት መስኮትን ዝጋ"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "መነሻ የቀለም ቤተ-ስዕል"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "ራስ-ሰር ቅጂ የተመረጠ ይዘት"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Ctrl+C የቅዳ ባህሪ"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ctrl++/-/0 የማጉላት ባህሪ"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Ctrl+V ለጥፍ ባህሪ"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "የጠቋሚ ብልጭ ድርግም ማለት"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "የጠቋሚ ብልጭ ድርግም የማለት ፍጥነት"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "የጽሑፍ ጠቋሚ ቀለም"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "የጽሑፍ ጠቋሚ ቅርጽ"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "ለማንቂያ ደወሎች የዴስክቶፕ ማሳወቂያዎችን ይፍጠሩ"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "የምሥራቅ እስያ አሻሚ ሁለት ዓምዶች አጠቃቀም"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "UTF-8 C1 ያልሆኑ የቁጥጥር ቁምፊዎችን ደግፍ"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "የጽሑፍ ብልጭ ድርግም ማለትን አንቃ"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "የደማቅ ጽሑፍ ባህሪ"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "ከደማቅ ጽሑፍ ጋር ብሩሕ ቀለማት ይጠቀሙ"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "ይዘትን በመቅዳት ወቅት ማሳወቂያ አሳይ"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "የርቀት የቅንጥብ ሰሌዳ መጻፎችን ይፍቀዱ"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "የኋሊት ሸብላይ ቋትን ማጽዳትን ፍቀድ (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "የጽሑፍ ጠቋሚ ብልጭ ድርግም መለወጥ ይፍቀዱ"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "ዳግም ሲመጣጠን የጣቢያ መጠነ ስፋቶች አሳይ"
+	},
+	"hterm_name_pref_environment": {
+		"message": "የአካባቢ ተለዋዋጮች"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "የጽሑፍ ቅርጸ-ቁምፊ ቤተሰብ"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "የጽሑፍ ቅርጸ-ቁምፊ መጠን"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "የጽሑፍ ቅርጸ-ቁምፊን ማለሳለስ"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "የጽሑፍ ቀለም"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "በትየባ ጊዜ የመዳፊት ጠቋሚውን ደብቅ"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "የHome/End ቁልፍ ሽብለላ ባህሪ"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "የቁልፍ ሰሌዳ ማሰሪያዎች/አቋራጮች"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "ነባሪዎቹን የስርዓተ ክወና ቁልፍ ሰሌዳ ማሰሪያዎች/አቋራጮች ይጠቀሙ"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "የሚዲያ ቁልፎች Fkeys ናቸው"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "ዲበ ቁልፍ ማሻሻያ አያያዝ"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "የመዳፊት አዝራር ለጥፍ"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "የመዳፊት ቀኝ ጠቅታዎች ይዘት ይለጥፋሉ"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "ገጽ ወደ ላይ/ታች ቁልፍ መሸብለያ ባህሪ"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Alt+1..9 የመቀየሪያ ትር ባህሪ"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Ctrl+N አዲስ መስኮት ባህሪ"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Ctrl+1..9 የመቀየሪያ ትር ባህሪ"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ctrl+T አዲስ የትር ባህሪ"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab የመቀየሪያ ትር ባህሪ"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Ctrl+W ዝጋ ትር ባህሪ"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Meta+1..9 የትር ባህሪን ቀይር"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Meta+V የለጥፍ ባህሪ"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "ለመለጠፍ መጎተት እና ጣል ማድረግን ይፍቀዱ"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "ምስጠራን ተቀበል"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "ከቁልፍ ጭረት በኋላ ወደ ግርጌ ይሸብልሉ"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "ከአዲስ ግቤት በኋላ ወደ ግርጌው ይሸብልሉ"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "የቀስት ቁልፎችን በመሸብለያ መሪ አስመስል"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "የመዳፊ ሽብለላ መሪ ማባዣ"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "የመሸብለያ አሞሌ ታይነት"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Shift+Insert ለጥፍ"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "የተርሚናል በኮድ ማስቀመጥ"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "አሳሹ የጽሑፍ መቅዳትን እንዲያስተናግድ ይፍቀዱ"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "ብጁ CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "ብጁ CSS (የመስመር ውስጥ ጽሑፍ)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "ራስ-ሰር የምርጫ ማስቆም (ወደ ግራ)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "የቃል ሰባሪ ቁምፊዎች"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "ራስ-ሰር ምርጫ ማስቆም (ወደ ቀኝ በኩል)"
+	},
 	"hterm_popup_inline_image": {
 		"message": "የውስጠ-መስመር ምስሎች"
 	},
@@ -153,7 +360,7 @@
 		"message": "የርቀት አስተናጋጁ ምስሎችን በማሳያው ውስጥ እንዲያሳይ ይፈቀድለት እንደሆነ።\n\nበነባሪነት አንድ ምርጫ እስኪደረግ ድረስ እንጠይቃለን።"
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "ከተዋቀረ የChrome OS Alt+Backspace->DEL ማዛመጃውን ይቀለብሳል፣ በዚህም alt- backspace በእርግጥ alt-backspace ይሆናል።"
+		"message": "ከተዋቀረ የChrome OS Alt+Backspace->Delete ማዛመጃውን ይቀለብሳል፣ በዚህም alt+backspace በእርግጥ alt+backspace ይሆናል።"
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "አንድ የAltGr ማግኛ ራስ-አስተማሪን ይምረጡ።\n\n'null': በnavigator.language ላይ ተመስርተው በራስ-ያግኙ፦\n      'en-us' => 'none', else => 'right-alt'\n'none': ከAltGr ጋር የሚዛመድ ማንኛውም ውሂብ ማቀናበር አሰናክል።\n'ctrl- alt': Ctrl+Alt ማለት AltGr እንደሆነ ይቁጠሩ።\n'left-alt': የግራ Alt ማለት AltGr እንደሆነ ይቁጠሩ።\n'right-alt': የቀኝ Alt ማለት AltGr እንደሆነ ይቁጠሩ።"
@@ -162,7 +369,7 @@
 		"message": "የAlt ቁልፍ እንደ የዲበ ቁልፍ ወይም እንደ የተለየ የAlt ቁልፍ ይሠራ እንደሆነ።"
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "የAlt ቁልፉ እንዴት እንደሚሰራ ይቆጣጠራል።\n\n  escape....... የESC ቅድመ-ቅጥያ ላክ።\n  8-bit........ በxterm ላይ እንዳለው ቁምፊ በተተየበው ቁምፊ ላይ 128 አክል።\n  browser-key፦ የቁልፍ ጭነት ክስተቱን ይጠብቁና አሳሹ ምን እንደሚል ይመልከቱ። (ይህ አሳሹ ለአንዳንድ የAlt ተከታታዮች ነባሪ እርምጃ በሚያከናውንባቸው የመሣሪያ ስርዓቶች ላይ በደንብ አይሠራም።)"
+		"message": "የAlt ቁልፉ እንዴት እንደሚሰራ ይቆጣጠራል።\n\n  escape፦ የESC ቅድመ-ቅጥያ ላክ።\n  8-bit፦ በxterm ላይ እንዳለው ቁምፊ በተተየበው ቁምፊ ላይ 128 አክል።\n  browser-key፦ የቁልፍ ጭነት ክስተቱን ይጠብቁና አሳሹ ምን እንደሚል ይመልከቱ። (ይህ አሳሹ ለአንዳንድ የAlt ተከታታዮች ነባሪ እርምጃ በሚያከናውንባቸው የመሣሪያ ስርዓቶች ላይ በደንብ አይሠራም።)"
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "የማሳያው ደወል ድምጽ ዩአርኤል። ምንም ለማይሰማ ደወል ባዶ ሕብረቁምፊ።"
@@ -171,7 +378,7 @@
 		"message": "ሌላ ምንም የቀለም አይነታዎች ለሌለው ጽሑፍ የጀርባው ቀለም።"
 	},
 	"hterm_pref_background_image": {
-		"message": "የጀርባው ምስል የCSS እሴት። ምንም ምስል ለሌለው ባዶ ሕብረቁምፊ።\n\nለምሳሌ፦\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "የጀርባው ምስል የCSS እሴት። ምንም ምስል ላለማስቀመጥ ባዶ እንደሆነ ይተዉት።\n\nለምሳሌ፦\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "የጀርባው ምስል አቀማመጥ የCSS እሴት።\n\nለምሳሌ፦\n  10% 10%\n  center"
@@ -180,10 +387,10 @@
 		"message": "የጀርባው ምስል መጠን የCSS እሴት።"
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "እውነት ከሆነ የኋሊት ደምሳሽ BS («\\x08»፣ በሌላ አባባል ^H) መላክ አለበት። አለበለዚያ የኋሊት ደምሳሽ ቁልፉ «\\x7f» መላክ አለበት።"
+		"message": "እውነት ከሆነ የኋሊት ደምሳሽ ቁልፉ BS («\\x08»፣ እንዲሁም ^H በመባል የሚታወቅ) ይልካል። አለበለዚያ የኋሊት ደምሳሽ ቁልፉ «\\x7f» ይልካል።"
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "ይህ ነገር እንደሆነ ነው የተገለጸው። የተበተነ ድርድር ሲሆን እያንዳንዱ ንብረት የቁምፊ ስብስብ ኮድ እና እሴቱ ራሱ የተበተነ ድርድር የሆነበት ነው። በዚህ የተበተነ ድርድር ውስጥ እያንዳንዱ ንብረት የተቀበለው ቁምፊ ሲሆን እሴቱ የሚታየው ቁምፊ ነው።\n\nለምሳሌ፦\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "ይህ ነገር እንደሆነ ነው የተገለጸው። የተበተነ ድርድር ሲሆን እያንዳንዱ ንብረት የቁምፊ ስብስብ ኮድ እና እሴቱ ራሱ የተበተነ ድርድር የሆነበት ነው። በዚህ የተበተነ ድርድር ውስጥ እያንዳንዱ ንብረት የተቀበለው ቁምፊ ሲሆን እሴቱ የሚታየው ቁምፊ ነው።\n\nለምሳሌ፦\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "ከተቀዳ በኋላ ምርጫው ይጸዳ እንደሆነ።"
@@ -201,7 +408,7 @@
 		"message": "እውነት ከሆነ Ctrl+C ይቀዳል፣ ሐሰት ከሆነ ^Cን ወደ አስተናጋጅ ላክ።\nእውነት ከሆነ Ctrl+Shift+C ^Cን ወደ አስተናጋጅ ይላክ። ሐሰት ከሆነ ይቀዳል።"
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "እውነት ከሆነ Ctrl+መደመር/መዘነስ/ዜሮ ማጉላትን ይቆጣጠራል።\nሐሰት ከሆነ Ctrl+Shift+መደመር/መቀነስ/ዜሮ ማጉላትን ይቆጣጠራል፣ Ctrl+Minus ^_ ን ይልካል፣ Ctrl+መደመር/ዜሮ ምንም ነገር አያደርግም።"
+		"message": "እውነት ከሆነ Ctrl+መደመር/መቀነስ/ዜሮ ማጉላትን ይቆጣጠራል።\nሐሰት ከሆነ Ctrl+Shift- መደመር/መቀነስ/ዜሮ ማጉላትን ይቆጣጠራል፣ Ctrl+Minus ^_ ን ይልካል፣ Ctrl+መደመር/ዜሮ ምንም ነገር አያደርግም።"
 	},
 	"hterm_pref_ctrl_v_paste": {
 		"message": "እውነት ከሆነ Ctrl+V ይለጥፋል፣ ሐሰት ከሆነ ^V ይልካል።\nእውነት ከሆነ Ctrl+Shift+V ^Vን ይልካል፣ ሐሰት ከሆነ ይለጥፋል።"
@@ -214,6 +421,9 @@
 	},
 	"hterm_pref_cursor_color": {
 		"message": "የሚታየው የጽሑፍ ጠቋሚ ቀለም።"
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "የሚታየው የጽሑፍ ጠቋሚ ቅርጽ። ይህ በጣቢያ መዝለያ ቅደም-ተከተል በኩል ሊቀየር ይችላል።"
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "እውነት ከሆነ በበስተጀርባው ውስጥ ያሉ የማሳያ ደወሎች የድር ማሳወቂያ ይፈጥራሉ። https://www.w3.org/TR/notifications/\n\nማሳወቂያዎችን ማሳየት ከተጠቃሚው ፈቃድ ያስፈልጋል። ይህ አማራጭ ወደ እውነት ሲዋቀር hterm ካስፈለገ ከተጠቃሚው ፈቃድ ለመጠየቅ ይሞክራል። አሳሾች ይህ ፈቃድ ከተጠቃሚ እርምጃ የመነጨ ካልሆነ ላያሳዩት እንደሚችሉ ልብ ይበሉ።\n\nየ«ማሳወቂያዎች» ፈቃድ ያላቸው የChrome ቅጥያዎች ማሳወቂያዎችን የማሳየት ፈቃድ አላቸው።"
@@ -239,8 +449,14 @@
 	"hterm_pref_enable_clipboard_write": {
 		"message": "የርቀት አስተናጋጁ በቀጥታ ወደ አካባቢያዊ የስርዓት ቅንጥብ ሰሌዳ እንዲጽፍ ፍቀድ።\nይህ ቅንብር ምንም ይሁን ምን የንባብ መዳረሻ በጭራሽ አይሰጥም።\n\nእንደ OSC-52 ያሉ የባህሪያት መዳረሻን ለመቆጣጠር ይህ ስራ ላይ ይውላል።"
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "የማሳያን ደምስስ ትዕዛዙ (CSI-J) የተቀመጡ መስመሮችን ደምስስ ተግባሩ (ሁነታ 3) የተርሚናል ኋላ ሽብለላ ቋቱን ያጸዳው እንደሆነ።\n\nይህን በነባሪ ማንቃት ለደህንነት አስተማማኝ ነው።"
+	},
 	"hterm_pref_enable_dec12": {
 		"message": "አስተናጋጁ የDEC ግላዊ ሁነታ 12ን በመጠቀም የጠቋሚው ብልጭ-ድርግም ሁኔታን ለመቀየር የሚያደርገውን ሙከራ አክብር።"
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "የጣቢያ መጠነ ስፋቶችን ጣቢያው መጠን ሲቀይር ማሳየት ወይም አለማሳየት"
 	},
 	"hterm_pref_environment": {
 		"message": "የመጀመሪያዎቹ የአካባቢ ተለዋዋጮች ስብስብ፣ እንደ ነገር።"
@@ -261,37 +477,55 @@
 		"message": "ሲተይቡ መዳፊቱ በራስ-ሰር ይደበቅ እንደሆነ። በነብሪነት የመሣሪያ ሥርዓቱ/ሥርዓተ ክውናውን ይህን ይቆጣጠር እንደሆነ በራስ-ያግኙ።\n\nማስታወሻ፦ አንዳንድ ሥርዓተ ክወናዎች ይህን ቅንብር ሊሽሩት ይችላሉ፣ እና እርስዎ ሁልጊዜ ማሰናከል ላይችሉ ይችላሉ።"
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "እውነት ከሆነ Home/End የተርሚናል ማሸብለያው ይቆጣጠራል፣ እና Shift+Home/Shift+End ወደ የርቀት አስተናጋጁ ይላካሉ። ሐሰት ከሆነ Home/End ወደ የርቀት አስተናጋጁ ይላኩና Shift+Home/Shift+End ያሸበልላሉ።"
+		"message": "እውነት ከሆነ Home/End የተርሚናል መሸብለያውን ይቆጣጠራል፣ እና Shift+Home/Shift+End ወደ የርቀት አስተናጋጁ ይላካሉ። ሐሰት ከሆነ Home/End ወደ የርቀት አስተናጋጁ ይላኩና Shift+Home/Shift+End ይሸበልላል።"
 	},
 	"hterm_pref_keybindings": {
-		"message": "ከቁልፍ እርምጃዎች ጋር የተሳሰረ የቁልፍ ተከታታይ ካርታ። የቁልፍ ተከታታዮች ዜሮ ወይም ተጨማሪ ቀያሪ ቁልፎችን ያካትቱና የቁልፍ ኮድን ያስከትላሉ። ቁልፍ ኮዶች የአሥርዮሽ ወይም አሥራስድስትዮሽ ቁጥሮች ወይም የቁልፍ ለዪ ሊሆኑ ይችላሉ። ቁልፍ እርምጃዎች ወደ አስተናጋጅ የሚላክ ሕብረቁምፊ ወይም የእርምጃ ለዪ ሊገለጽላቸው ይችላል። ሙሉው የቅርጸት ማብራሪያ ለማግኘት https://goo.gl/LWRndr ይመልከቱ።\n\nየናሙና ቁልፍ ማስተሳሰሪያዎች፦\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'HELLO\\n'\"\n}"
+		"message": "ከቁልፍ እርምጃዎች ጋር የተሳሰረ የቁልፍ ተከታታይ ካርታ። የቁልፍ ተከታታዮች ዜሮ ወይም ተጨማሪ ቀያሪ ቁልፎችን ያካትቱና የቁልፍ ኮድን ያስከትላሉ። ቁልፍ ኮዶች የአሥርዮሽ ወይም አሥራስድስትዮሽ ቁጥሮች ወይም የቁልፍ ለዪ ሊሆኑ ይችላሉ። ቁልፍ እርምጃዎች ወደ ተቆጣጣሪ የሚላክ ሕብረቁምፊ ወይም የእርምጃ ለዪ ሊገለጽላቸው ይችላል። ሙሉው የቅርጸት ማብራሪያ ለማግኘት https://goo.gl/LWRndr ይመልከቱ።\n\nየናሙና ቁልፍ ማስተሳሰሪያዎች፦\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\\n'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "የተለመደ የስርዓተ ክወና ቁልፍ ሰሌዳ ማሰሪያዎች ለhterm የራሱ አጠቃቀም ፎቶ ከማንሳት ይልቅ መከበር እንዳለባቸው እና እንደሌለባቸው።"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "እውነት ከሆነ የሚዲያ ቁልፎችን ወደ የF ቁፍል እኩያቸውን ይለውጡ። ሐሰት ከሆነ አሳሹ ቁልፎቹን ይቆጣጠር።"
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "የዲበ ቁልፉን ተጭነው ሳለ አንድ ቁልፍ ሲጫኑ የESC ቅድመ-ቅጥያ ይላኩ።\n\nለምሳሌ፣ ሲነቃ ዲበ-K መጫን ልክ k እንደተየቡ አድርጎ ^[k ይልካል። ሲሰናከል k ብቻ ነው የሚላከው።"
+		"message": "የዲበ ቁልፉን ተጭነው ሳለ አንድ ቁልፍ ሲጫኑ የESC ቅድመ-ቅጥያ ይላኩ።\n\nለምሳሌ፣ ሲነቃ Meta+K መጫን ልክ k እንደተየቡ አድርጎ ^[k ይልካል። ሲሰናከል k ብቻ ነው የሚላከው።"
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "የመዳፊት ለጥፍ አዝራር፣ ወይም በራስ-ለማግኘት አልቦ።\n\nበራስ-ለማግኘት X-11 ባልሆኑ የመሣሪያ ሥርዓቶች (Chrome OS ጨምሮ) ላይ የመሃል መዳፊት አዝራሩን እንጠቀማለን። በX11 ላይ የቀኝ መዳፊት አዝራሩን ነው የምንጠቀመው (ቤተኛው የመስኮት አስተዳዳሪው በመሃል መዳፊት አዝራሩ መለጠፍ ስላለበት)።\n\n0 == የግራ (ዋና) አዝራር።\n1 == የመሃል (ረዳት) አዝራር።\n2 == የቀኝ (ሁለተኛ) አዝራር።\n\nይህ አማራጭ ከቀኝ-ጠቅታ ለጥፍ ቅንብሩ ነጻ ነው።\n\nማስታወሻ፦ ይህ ባለግራ እና ባለቀኝ እጅ መዳፊትን በትክክል ይይዛል።"
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "በቀኝ መዳፊት አዝራር ጠቅታዎች ላይ ይለጥፉ።\n\nይህ አማራጭ ከ«የመዳፊት-ጠቅታ-ለጥፍ» ቅንብሩ ነጻ ነው።\n\nማስታወሻ፦ ይህ ባለግራ እና ባለቀኝ እጅ መዳፊትን በትክክል ይይዛል።"
+		"message": "በቀኝ መዳፊት አዝራር ጠቅታዎች ላይ ይለጥፉ።\n\nይህ አማራጭ ከ«የመዳፊት-ጠቅታ-ለጥፍ» ቅንብሩ ነፃ ነው።\n\nማስታወሻ፦ ይህ ባለግራ እና ባለቀኝ እጅ መዳፊትን በትክክል ይይዛል።"
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "እውነት ከሆነ ገጽ ላይ/ታች የተርሚናሉን ማሸብለያ ይቆጣጠራል፣ እና Shift+ገጽ ላይ/Shift+ገጽ ታች ወደ የርቀት አስተናጋጁ ይላካሉ። ሐሰት ከሆነ ገጽ ላይ/ታች ወደ የርቀት አስተናጋጁ ይላኩና Shift+ገጽ ላይ/Shift+ገጽ ታች ያሸበልላል።"
+		"message": "እውነት ከሆነ ገጽ ላይ/ታች የተርሚናሉን ማሸብለያ ይቆጣጠራል፣ እና Shift+ገጽ ላይ/Shift-ገጽ ታች ወደ የርቀት አስተናጋጁ ይላካሉ። ሐሰት ከሆነ ገጽ ላይ/ታች ወደ የርቀት አስተናጋጁ ይላኩና Shift+ገጽ ላይ/Shift+ገጽ ታች ያሸበልላል።"
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Alt+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ ማፍጠኛዎችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Alt+1..9 በአሳሹ ነው የሚያዝዘው። ሐሰት ከሆነ Alt+1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ አይነት ላይ የተመሠረተ ይሆናል።"
+		"message": "Meta+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ አቋራጮችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Meta-1..9 በአሳሹ ነው የሚስተናገደው። ሐሰት ከሆነ Meta-1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ አይነት ላይ የተመሠረተ ይሆናል።"
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Ctrl+N ወደ አሳሽ መተላለፍ አለመተላለፉ።\n\nእውነት ከሆነ Ctrl+N እንደ «አዲስ ትር» የቁልፍ ሰሌዳ አቋራጭ ሆኖ በአሳሹ ይስተናገዳል። ሐሰት ከሆነ Ctrl+N ወደ ተቆጣጣሪ ይላካል።"
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Ctrl+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ ማፍጠኛዎችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Ctrl+1..9 በአሳሹ ነው የሚያዝዘው። ሐሰት ከሆነ Ctrl+1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ አይነት ላይ የተመሠረተ ይሆናል።"
+		"message": "Meta+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ አቋራጮችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Meta-1..9 በአሳሹ ነው የሚስተናገደው። ሐሰት ከሆነ Meta-1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ አይነት ላይ የተመሠረተ ይሆናል።"
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Ctrl+T ወደ አሳሽ መተላለፍ አለመተላለፉ።\n\nእውነት ከሆነ Ctrl+T እንደ «አዲስ ትር» የቁልፍ ሰሌዳ አቋራጭ ሆኖ በአሳሹ ይስተናገዳል። ሐሰት ከሆነ Ctrl+T ወደ አስተናጋጁ ይላካል።"
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab እና Ctrl+Shift+Tab ወደ አሳሽ መተላለፍ አለመተላለፉ።\n\nእውነት ከሆነCtrl+Tab እና Ctrl+Shift+Tab እንደ «አዲስ/ ቀዳሚ ትር» የቁልፍ ሰሌዳ አቋራጭ ሆኖ በአሳሹ ይስተናገዳል። ሐሰት ከሆነ Tab key ወደ ተቆጣጣሪ ይላካል።"
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Ctrl+W ወደ አሳሽ መተላለፍ አለመተላለፉ።\n\nእውነት ከሆነ Ctrl+W እንደ «ዝጋ ትር» የቁልፍ ሰሌዳ አቋራጭ ሆኖ በአሳሹ ይስተናገዳል። ሐሰት ከሆነ Ctrl+W ወደ ተቆጣጣሪው ይላካል።"
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Meta+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ ማፍጠኛዎችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Meta+1..9 በአሳሹ ነው የሚያዝዘው። ሐሰት ከሆነ Meta+1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ አይነት ላይ የተመሠረተ ይሆናል።"
+		"message": "Meta+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ አቋራጮችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Meta+1..9 በአሳሹ ነው የሚስተናገደው። ሐሰት ከሆነ Meta-1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ አይነት ላይ የተመሠረተ ይሆናል።"
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Meta+V ወደ አስተናጋጁ ይተላለፍ እንደሆነ።"
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "እውነት ከሆነ ጎትቶ ጣል ማድረግ ተርሚናሉ ላይ ይለጥፋል።\nሐሰት ከሆነ የተጣለው ጽሑፍ ችላ ይባላል።"
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "ከአስተናጋጁ ለመጣው ውሂብ የተጠበቀው ኮድ ቅየራን ያዋቅራል።\nምሥጠራዎቹ የማይዛመዱ ከሆኑ ምስላዊ ሳንካዎቹ የመታየት ዕድላቸው ከፍ ያለ ነው። \n\nየሚሠሩ እሴቶች «utf-8» እና «raw» ናቸው።"
@@ -336,7 +570,7 @@
 		"message": "ከአንድ ምርጫ በስተቀኝ (መጨረሻ) ማዛመድን የሚያቆም መደበኛ የሒሳብ ሐረግ።\n\nይህ በመደበኛነት የተወሰኑ ቁምፊዎችን ውድቅ የሚያደርግ የቁምፊ መደብ ነው።"
 	},
 	"hterm_space_character": {
-		"message": "ክፍተት"
+		"message": "ጠፈር"
 	},
 	"hterm_title_pref_appearance": {
 		"message": "መልክ (ቅርጸ-ቁምፊዎች፣ ቀለማት፣ ምስሎች)"
@@ -386,8 +620,20 @@
 	"known_hosts_title": {
 		"message": "የሚታወቁ አስተናጋጆች፦"
 	},
+	"licenses": {
+		"message": "ፈቃዶች"
+	},
+	"licenses_expand_link": {
+		"message": "ፈቃድ አሳይ"
+	},
+	"licenses_title": {
+		"message": "የክፍት ምንጭ ፈቃዶች"
+	},
 	"loading_label": {
 		"message": "በመጫን ላይ…"
+	},
+	"migrate_to_ext": {
+		"message": "ማስታወቂያ፦ እባክዎ ወደ አዲሱ የደህንነት ቁልፍ ቅጥያ ይስደዱ ($1).\nየChrome መተግበሪያዎች ተቋርጠዋል፣ ስለዚህ ይህ ስሪት ዝማኔዎችን መቀበል ያቆማል።\nለተጨማሪ ዝርዝሮች እባክዎ የስደት መመሪያውን ($2) ይመልከቱ።"
 	},
 	"missing_param": {
 		"message": "የሚጎድል ልኬት፦ $1"
@@ -401,11 +647,191 @@
 	"mounted_message": {
 		"message": "ተፈናጥጧል!"
 	},
+	"nasftp_cmd_cat": {
+		"message": "ድመት"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "አንድ ፋይል ተርሚናል ላይ ጣል ያድርጉ"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "የመሥሪያ ማውጫን ለውጥ"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "የዱካዎች ቡድንን ለውጥ"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "በዱካዎች ፈቃዶች ላይ ለውጥ"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "የዱካዎች ባለቤት ቀይር"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "አሁን ያለውን የጣቢያ ማያ ገጽ አጽዳ።"
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "አንድ ፋይል ወደ ቅንጥብ ሰሌዳው ይቅዱ (ነባሪ፦ ከጅምሩ 10 ሜቢባይት)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "$1 ባይት ወደ ቅንጥብ ሰሌዳው ተቀድቷል"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "የቀለም አጠቃቀምን ቀይር"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "ምንጭን ወደ መድረሻ ቅዳ"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "ፋይሎችን ይሰርዙ"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "የዲስክ ስታቲስቲክስን አሳይ"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  ዱካ፦ $1\n  fsid፦ $2\n ጠቅላላ፦ $3\n  የተጠቀሙበት፦ $4 ($5%)\n የሚገኘው፦ $6 (ልዩ ጥቅም ለማያገኙ ተጠቃሚዎች)\n $7 (ወደ ሥር)"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "ግንኙነት አቋርጥ"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "ፋይል በማውረድ ላይ፦ $1 እንደ $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "ፋይሎችን ያወርዳል"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "ይህ የእገዛ ማያ ገጽ"
+	},
+	"nasftp_cmd_list": {
+		"message": "ዝርዝር"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "የዝርዝር ማውጫ ዝርዝሮች"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "ወደ ዒላማ በዱካ ጥቆማ አደራረግ ላይ አገናኝን ይፍጠሩ"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "ማውጫዎችን ይፍጠሩ"
+	},
+	"nasftp_cmd_move": {
+		"message": "ውሰድ"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "ፋይልን ዳግም ሰይም"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "የጥያቄ ኅብረቁምፊን ያቀናብሩ"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "ፋይሎችን ይስቀሉ"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "ፋይል በመስቀል ላይ፦ $1 እንደ $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "አሁን ያለውን የሚሠራ ማውጫ አሳይ"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "የርቀት መሥሪያ ማውጫ፦ $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "ተምሳሌታዊ መጠሪያዎችን ያንብቡ"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "ዱካዎችን በብዙ ዓይነት ለውጥ"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "ፋይሎችን መስቀል ከቆመበት ቀጥል"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "ፋይሎችን ያስወግዱ"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "ባዶ ማውጫዎችን ሰርዝ"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "ፋይሎችን በመስመር ውስጥ አሳይ"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "ቅጥያዎች፦"
+	},
+	"nasftp_cmd_stat_extensions_line": {
+		"message": "  $1:- $2"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "የፋይል ሁኔታን አሳይ"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  ፋይል፦ $1\n  መጠን፦ $2 ባይት\n   UID፦ $3\n   GID፦ $4\nመዳረሻ፦ $5\n atime፦ $6\n mtime፦ $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "ወደ ዒላማው በሚጠቁም ዱካ ላይ ተምሳሌታዊ መጠሪያን ይፍጠሩ"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "ዱካዎችን ወደ 0 ባይቶች ያሳጥሩ"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  የአገልጋይ ቅጥያዎች፦"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "አሁን ያለውን የፕሮቶኮል ስሪት አሳይ"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "SFTP ፕሮቶኮል ስሪት መረጃ፦\n  አካባቢ፦ $1\n  አገልጋይ፦ $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1፦ የፋይል ማብቂያ"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1፦ ፋይል አልተገኘም"
+	},
+	"nasftp_error_file_reading": {
+		"message": "$1ን ማንበብ አልተሳካም፦ $2"
+	},
+	"nasftp_error_internal": {
+		"message": "ያልተስተናገድ ውስጣዊ ስሕተት፣ እባክዎ ሳንካ ያስገቡ፦ $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: ልክ ያልኾነ ቁጥር: $3"
+	},
+	"nasftp_error_message": {
+		"message": "ስሕተት፦ $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1፦ የ«$2» ቅጥያ አይገኝም"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1፦ $2፦ መደበኛ ፋይል አይደለም"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1፦ በቂ ነጋሪ እሴቶች የሉም"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1፦ ፈቃድ ተከልክሏል"
+	},
+	"nasftp_error_server_error": {
+		"message": "$1፦ $2"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1፦ በጣም ብዙ ነጋሪ እሴቶች"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1፦ ያልታወቀ ትዕዛዝ"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1፦ የማይታወቅ ጠቁም $2"
+	},
+	"nasftp_force_quit": {
+		"message": "ማስቆምን አስገድድ"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 ባይት በ$2 ሰከንዶች ($3/ሰ) ተላልፏል"
+	},
 	"nassh_options_error": {
-		"message": "ያልታወቀ የማበያያ አማራጭ፦ $1"
+		"message": "ያልታወቀ አማራጭ፦ $1"
 	},
 	"nassh_product_name": {
-		"message": "Secure Shell"
+		"message": "ደህንነቱ የተጠበቀ ሼል"
 	},
 	"new_window_menu_label": {
 		"message": "አዲስ መስኮት"
@@ -426,22 +852,52 @@
 		"message": "አማራጮች"
 	},
 	"plugin_loading": {
-		"message": "የ NaCl ተሰኪ በመጫን ላይ..."
+		"message": "የNaCl ተሰኪን በመጫን ላይ..."
 	},
 	"plugin_loading_complete": {
-		"message": " ተጠናቅቋል።"
+		"message": " ተከናውኗል።"
 	},
 	"plugin_loading_failed": {
-		"message": " አልተሳካም :("
+		"message": " አልተሳካም! :("
+	},
+	"popup_connect_tooltip": {
+		"message": "በአዲስ ትር ውስጥ ለመክፈት Ctrlን ይያዙ።"
 	},
 	"pref_backup_filename": {
 		"message": "Secure Shell Preferences Backup.json"
 	},
+	"preferences_header_ssh_files": {
+		"message": "የSSH ፋይሎች"
+	},
 	"preferences_header_terminal": {
-		"message": "የመገለጫ ቅንብሮች"
+		"message": "የተርሚናል ቅንብሮች"
+	},
+	"preferences_header_uri": {
+		"message": "የURI ተቆጣጣሪዎች"
 	},
 	"preferences_reset": {
 		"message": "ሁሉም ምርጫዎች ዳግም ተጀምረዋል!"
+	},
+	"protocol_register_button": {
+		"message": "የፕሮቶኮል ተቆጣጣሪዎችን ያስመዝግቡ"
+	},
+	"protocol_register_explain": {
+		"message": "ከዚህ በታች ያለው አዝራር እኛ ለምንደግፋቸው ሁሉም ፕሮቶኮሎች ተቆጣጣሪዎችን ለመመዝገብ ይሞክራል። ለምሳሌ፣ ይህ እኛ በቀጥታ ssh:// links directly ን እንድንቆጣጠር ያስችለናል። ለእያንዳንዱ ፕሮቶኮል በአሳሹ ጥያቄ ስለሚታይ እባክዎ እንደሚታየው አድርገው እያንዳንዱን ያረጋግጡ/ይቀበሉ። ምንም ጥያቄዎች ካልታዩ እንግዲያው እባክዎ ለመላ መፈለጊያ ጠቃሚ ምክሮች ቀጣዩን ክፍል ይመልከቱ።"
+	},
+	"protocol_register_explain_settings": {
+		"message": "ተቆጣጣሪዎችን አስቀድመን ከመዘገብን ወይም የቀድሞ የምዝገባ ሙከራዎች ከተከለከሉ ምንም ዓይነት ተጨማሪ ጥያቄዎች ከዚህ በኋላ አይታዩም። ከዚህ በታች ያለውን ንግግር እባክዎ ይክፈቱ፣ ከዚያ በ ssh/sftp/etc... ክፍሎች ውስጥ የተመዘገበውን ተቆጣጣሪ ቅንብሮች ምልክት ያድርጉባቸው። ይህ ፕሮግራም ከታገደ ምዝገባን ዳግም እንዲሞክሩ የሚያስችልዎ ቅንብሮቹን መሰረዝ ይችላሉ። ይህ ፕሮግራም አስቀድሞ ከተመዘገበ፣ ነገር ግን እንደ ነባሪው ተቆጣጣሪ ሆኖ ካልተቀናበረ፣ እርስዎ ነባሪውን ተቆጣጣሪም መቀየር ይችላሉ።"
+	},
+	"protocol_register_options_link": {
+		"message": "የፕሮቶኮል ምዝገባ"
+	},
+	"protocol_register_settings_button": {
+		"message": "የተመዘገቡ የተቆጣጣሪዎች ቅንብሮችን ክፈት"
+	},
+	"protocol_register_title": {
+		"message": "ደህንነቱ የተጠበቀ የሼል ፕሮቶኮል ተቆጣጣሪ ምዝገባ አጋዥ"
+	},
+	"read_size_label": {
+		"message": "የንባብ መጠን (ኪቢባይት)"
 	},
 	"reconnect_message": {
 		"message": "ዳግም(R) ይገናኝ፣ ሌላ ግንኙነት ይምረጡ(C) ወይም ይውጡ(X)?"
@@ -450,10 +906,16 @@
 		"message": "ዳግም በመሞከር ላይ..."
 	},
 	"request_pin_prompt": {
-		"message": "ቁልፍ $1 በ«$2» ላይ ለመክፈት ፒን ያስገቡ ($3 ሙከራዎች ይቀራሉ)፦"
+		"message": "ቁልፍ $1ን በ«$2 ($3)» ላይ ለመክፈት ፒን ያስገቡ ($4 ሙከራዎች ይቀራሉ)፦"
 	},
 	"restore_prefs": {
 		"message": "ምትኬ ወደነበረበት መልስ"
+	},
+	"save_label": {
+		"message": "አስቀምጥ"
+	},
+	"sftp_client_button_label": {
+		"message": "ኤስኤፍቲፒ"
 	},
 	"shortcut_list_aria_label": {
 		"message": "የተቀመጡ ግንኙነቶች"
@@ -464,8 +926,44 @@
 	"ssh_argstr_label": {
 		"message": "የSSH ነጋሪ እሴቶች"
 	},
+	"stream_open_error": {
+		"message": "ዥረት $1ን መክፈት አልተሳካም፦ $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "ተርሚናልን ማጽዳት"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "የANSI ቀለማት"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "ምስል ማጥሪያ"
+	},
+	"terminal_name_pref_bell": {
+		"message": "ደወል"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "ብልጭ ድርግም ማለት"
+	},
+	"terminal_name_pref_color": {
+		"message": "ቀለም"
+	},
+	"terminal_name_pref_font": {
+		"message": "ቅርጸ-ቁምፊ"
+	},
+	"terminal_name_pref_image": {
+		"message": "ምስል"
+	},
+	"terminal_name_pref_shape": {
+		"message": "ቅርፅ"
+	},
+	"terminal_name_pref_visible": {
+		"message": "የሚታይ"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "ቀለማትን ለነባሪው የቤተ-ቀለም ያቀናብሩ።"
+	},
+	"terminal_pref_bell": {
+		"message": "ተስሚ የጣቢያ ደውል"
 	},
 	"terminal_preview_label": {
 		"message": "ቅድመ-ዕይታ"
@@ -475,6 +973,132 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "ተርሚናልን ዳግም ማስጀመር"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "የዳራ ምስል ዩአርኤል። በhttp:// ወይም https:// መጀመር አለበት። ምንም ምስል ላለማስቀመጥ ባዶ እንደሆነ ይተዉት።\n\nለምሳሌ፦\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "ራስ-ሰር"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "አሰናክል"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "ሞገድ"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "አግድ"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "ከግርጌ አስምር"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "ገጽታውን ወደ ነባሪው ዳግም ለማቀናበር እንደሚፈልጉ እርግጠኛ ነዎት?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "ገጽታን ዳግም ያቀናብሩ"
+	},
+	"terminal_settings_reset_label": {
+		"message": "ዳግም አስጀምር"
+	},
+	"terminal_theme_classic_label": {
+		"message": "ነባር"
+	},
+	"terminal_theme_dark_label": {
+		"message": "ጨለማ"
+	},
+	"terminal_theme_haze_label": {
+		"message": "ጭጋግ ሐምራዊ"
+	},
+	"terminal_theme_light_label": {
+		"message": "ቀላል"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "የፀሐይ ብርሃን ያለው ጨለማ"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "ከፀሐይ ብርሃን የተገኘ ብርሃን"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "ቀለም 0፦ ጥቁር"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "ቀለም 1፦ ቀይ"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "ቀለም 10፦ ብሩህ አረንጓዴ"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "ቀለም 11፦ ብሩህ ቢጫ"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "ቀለም 12፦ ብሩህ ሰማያዊ"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "ቀለም 13፦ ብሩህ ማጀንታ"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "ቀለም 14፦ ብሩህ ውሃ ሰማያዊ ቀለም"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "ቀለም 15፦ ብሩህ ነጭ"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "ቀለም 2፦ አረንጓዴ"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "ቀለም 3፦ ቢጫ"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "ቀለም 4፦ ሰማያዊ"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "ቀለም 5፦ ማጀንታ"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "ቀለም 6፦ ሳያን"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "ቀለም 7፦ ነጭ"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "ቀለም 8፦ ብሩህ ጥቁር"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "ቀለም 9፦ ብሩህ ቀይ"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "ገጽታ"
+	},
+	"terminal_title_pref_background": {
+		"message": "ዳራ"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "ባህሪ"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "ጠቋሚ"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "የቁልፍ ሰሌዳ"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "ቁልፍ ሰሌዳ እና መዳፊት"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "መዳፊት"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "ማሸብለያ አሞሌ"
+	},
+	"terminal_title_pref_text": {
+		"message": "ጽሑፍ"
+	},
+	"terminal_title_settings": {
+		"message": "ቅንብሮች"
+	},
+	"terminal_title_theme": {
+		"message": "ገፅታ"
 	},
 	"tip_1": {
 		"message": "አገናኞችን ለመክፈት እነሱን ጠቅ እያደረጉ ሳለ Ctrl (በmacOS ላይ Cmd) መያዝ ይችላሉ!"
@@ -531,16 +1155,19 @@
 		"message": "የለውጥ ምዝግብ ማስታወሻ/ልቀት ማስታወሻዎች፦ $1"
 	},
 	"welcome_faq": {
-		"message": "በተደጋጋሚ ለሚጠየቁ ጥያቄዎች መልሶች፦ $1 (ለመክፈት አገናኞች ላይ ctrl+click ይጠቀሙ)"
+		"message": "በተደጋጋሚ ለሚጠየቁ ጥያቄዎች መልሶች፦ $1 (ለመክፈት አገናኞች ላይ Ctrl+ጠቅታ ይጠቀሙ)"
 	},
 	"welcome_release_highlights": {
-		"message": "ከ$1 ጀምሮ ያሉ ዋና ዋና ለውጦች፦"
+		"message": "ከ$1 ጀምሮ ያሉ ዋና ለውጦች፦"
 	},
 	"welcome_tip_of_day": {
 		"message": "የዘፈቀደ የባለሙያ ጠቃሚ ምክር #$1፦ $2"
 	},
 	"welcome_version": {
 		"message": "እንኳን ወደ $1 ስሪት $2 በደህና መጡ።"
+	},
+	"write_size_label": {
+		"message": "የመጻፊያ መጠን (ኪቢባይት)"
 	},
 	"zoom_warning": {
 		"message": "እባክዎ Chrome ምናሌ->አጉላ ወደ 100% ያቀናብሩ"

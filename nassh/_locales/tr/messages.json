@@ -12,28 +12,19 @@
 		"message": "Bu sekmenin kapatılması oturumun bağlantısını keser."
 	},
 	"cache_pin_prompt": {
-		"message": "Bu oturuma ait PIN bilgisi önbelleğe alınsın mı? (e/H):"
+		"message": "Bu SSH oturumuna ait PIN bilgisi önbelleğe alınsın mı? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "İptal"
 	},
 	"clear_known_hosts_menu_label": {
-		"message": "SSH bilinen_ana_makinelerini temizle"
+		"message": "SSH bilinen ana makinelerini temizle"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "Bu komut bilinen ana makinelerin bulunduğu bir menüyü görüntüler ve unutulacak ana makinenin belirtilmesini ister."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Bilinen bir ssh ana makinesini unut."
-	},
-	"cmd_ssh_help": {
-		"message": "|kullanıcıadı| ve |anabilgisayaradı| parametreleri gereklidir. |bağlantınoktası| isteğe bağlıdır. Bağlantı noktası belirtilmezse varsayılan olarak 22 kullanılır."
-	},
-	"cmd_ssh_title": {
-		"message": "Yeni SSH oturumu açar."
+	"clear_label": {
+		"message": "Temizle"
 	},
 	"command_complete": {
-		"message": "$1 komutu kullanılarak $2 durum koduyla çıkış yapıldı."
+		"message": "$1 komutu $2 durum koduyla çıkış yaptı."
 	},
 	"command_not_supported": {
 		"message": "$1 bu Chrome sürümünde desteklenmiyor"
@@ -57,7 +48,7 @@
 		"message": "Seçenekler için özel bir sayfa olduğunu biliyor muydunuz?\nArtık doğrudan \"term_\" öğesini değiştirmenize gerek yok!\nAçmak için $1 tuşuna basın veya şu adresi tıklayın:\n$2"
 	},
 	"console_nassh_options_notice": {
-		"message": "Seçenekler için özel bir sayfa olduğunu biliyor muydunuz?\nArtık \"term_\" ifadesini doğrudan değiştirmeniz gerekmiyor!\n$1"
+		"message": "Seçenekler için özel bir sayfa olduğunu biliyor muydunuz?\nArtık \"term_\" ifadesini doğrudan değiştirmeniz gerekmiyor.\n$1"
 	},
 	"del_keycap": {
 		"message": "[DEL]"
@@ -117,7 +108,7 @@
 		"message": "Bulunan geçiş sunucusu: $1"
 	},
 	"get_profile_error": {
-		"message": "HATA: Profil $1 yüklenemedi:\n$2"
+		"message": "HATA: $1 profili yüklenemedi:\n$2"
 	},
 	"hterm_announce_current_screen_header": {
 		"message": "%$1 kaydırıldı,"
@@ -132,16 +123,229 @@
 		"message": "Engelle"
 	},
 	"hterm_button_page_down": {
-		"message": "Bir sayfa aşağı"
+		"message": "Bir sayfa aşağı gitme"
 	},
 	"hterm_button_page_up": {
-		"message": "Bir sayfa yukarı"
+		"message": "Bir sayfa yukarı gitme"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "$1 yüklenemedi"
 	},
 	"hterm_loading_resource_start": {
 		"message": "$1 yükleniyor..."
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Satır içi resim görüntülemeye izin verir"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Geri Tuşu eşittir Meta+Geri Tuşu"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "AltGr tuş modu"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Alt tuşunu Meta tuşu olarak değerlendirir"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Alt tuş değiştiriciyi kullanma"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Uyarı zili sesi (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Arka plan rengi"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Arka plan resmi"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Arka plan resmi konumu"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Arka plan resmi boyutu"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Geri tuşu davranışı"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Karakter haritası geçersiz kılmaları"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Metin seçimini otomatik olarak temizler"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Çıkarken pencereyi kapatır"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "İlk renk paleti"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Seçilen içeriği otomatik olarak kopyalar"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Ctrl+C kopyalama davranışı"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ctrl++/-/0 yakınlaştırma davranışı"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Ctrl+V yapıştırma davranışı"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "İmlecin yanıp sönmesi"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "İmleç yanıp sönme hızı"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Metin imleci rengi"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Metin imleci şekli"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Uyarı zilleri için masaüstü bildirimleri oluşturur"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Doğu Asya Belirsiz iki sütun kullanır"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "UTF-8 dışı C1 kontrol karakterlerini destekler"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Yanıp sönen metni etkinleştirir"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Kalın metin davranışı"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Kalın metinle parlak renkler kullanır"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "İçerik kopyalarken bildirim gösterir"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Uzaktan panoya yazmaya izin verir"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Geri kaydırma arabelleğinin (CSI-J-3) temizlenmesine izin verir"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Metin imlecinin yanıp sönmesinin değiştirilmesine izin verir"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Boyut değiştiğinde terminal boyutlarını gösterir"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Ortam değişkenleri"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Metin yazı tipi ailesi"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Metin yazı tipi boyutu"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Metin yazı tipi yumuşatma"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Metin rengi"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Yazarken fare imlecini gizler"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Home/End tuşu kaydırma davranışı"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Klavye bağlamaları/kısayolları"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Varsayılan OS Klavye bağlamalarını/kısayollarını kullanır"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Medya tuşları Fkey'lerdir"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Meta tuşu değiştiriciyi kullanma"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Fare düğmesiyle yapıştırma"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Fare sağ tıklandığında içerik yapıştırılır"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Page Up/Down tuşu kaydırma davranışı"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Alt+1..9 sekme değiştirme davranışı"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Ctrl+N yeni pencere davranışı"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Ctrl+1..9 sekme değiştirme davranışı"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ctrl+T yeni sekme davranışı"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Sekme sekme değiştirme davranışı"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Ctrl+W sekmeyi kapatma davranışı"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Meta+1..9 sekme değiştirme davranışı"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Meta+V yapıştırma davranışı"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Sürükleyip bırakarak yapıştırmaya izin verir"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Kodlama alır"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Tuş vuruşundan sonra ekranı aşağı kaydırır"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Yeni çıkıştan sonra ekranı aşağı kaydırır"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Ok tuşlarını kaydırma tekerleğiyle emüle eder"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Fare kaydırma tekerleği çarpanı"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Kaydırma çubuğu görünürlüğü"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Üst Karakter+Insert yapıştırma"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Terminal kodlama"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Metin kopyalamayı tarayıcının yapmasına izin verir"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "Özel CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "Özel CSS (satır içi metin)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Otomatik seçim durdurma (sola)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Kelime ayırma karakterleri"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Otomatik seçim durdurma (sağa)"
 	},
 	"hterm_popup_inline_image": {
 		"message": "Satır İçi Resimler"
@@ -153,7 +357,7 @@
 		"message": "Uzak ana makinenin terminalde resimleri görüntülemesine izin verilip verilmeyeceğini belirler.\n\nVarsayılan olarak, seçim yapılana kadar sormaya devam ederiz."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ayarlanırsa Chrome OS Alt+Geri tuşu->DEL farklı işlev atamasını geri alır. Böylece Alt+Geri tuşu, Alt+Geri tuşu olarak kalır."
+		"message": "Ayarlanırsa Chrome OS Alt+Geri tuşu->Delete tuşu farklı işlev atamasını geri alır. Böylece Alt+Geri tuşu, Alt+Geri tuşu olarak kalır."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr sezgisel algılama seçin.\n\n'null': navigator.language ayarına dayalı olarak otomatik algılama:\n      'en-us' => 'none', else => 'right-alt'\n'none': AltGr ile alakalı değişiklikler devre dışıdır.\n'ctrl-alt': Ctrl+Alt, AltGr demektir.\n'left-alt': Sol Alt, AltGr demektir.\n'right-alt': Sağ Alt, AltGr demektir."
@@ -165,13 +369,13 @@
 		"message": "Alt tuşunun nasıl kullanıldığını kontrol eder.\n\n  escape: ESC ön eki gönderin.\n  8-bit: xterm'de olduğu gibi yazılan karaktere 128 ekleyin.\n browser-key: Tuşa basıldığında ne olacağını bekleyin ve tarayıcının\n ne dediğini görün. (Bu yöntem, tarayıcının bazı Alt dizileri için varsayılan\n işlem gerçekleştirdiği platformlarda fazla işe yaramaz.)"
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "Terminal zil sesinin URL'si. Sesli zil olmadığında boş dize."
+		"message": "Terminal zil sesinin URL'si. Sesli zil olmadığında boş bırakın."
 	},
 	"hterm_pref_background_color": {
 		"message": "Başka renk özelliği olmayan metin için arka plan rengi."
 	},
 	"hterm_pref_background_image": {
-		"message": "Arka plan resminin CSS değeri. Resim olmadığında boş dize.\n\nÖrneğin:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Arka plan resmin CSS değeri. Resim olmadığında boş bırakın.\n\nÖrneğin:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Arka plan resmi konumunun CSS değeri.\n\nÖrneğin:\n  10% 10%\n  center"
@@ -180,10 +384,10 @@
 		"message": "Arka plan resmi boyutunun CSS değeri."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Doğru değerine ayarlanırsa geri tuşu BS (\"\\x08\", yani ^H) göndermelidir. Aksi halde geri tuşu \"\\x7f\" göndermelidir."
+		"message": "True (doğru) değerine ayarlanırsa geri tuşu BS (\"\\x08\", yani ^H) gönderir. Aksi halde geri tuşu \"\\x7f\" gönderir."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "Bu bir nesne olarak belirtilmiştir. Her özelliğin karakter kümesi kodu olduğu ve değerin de kendisi seyrek dizi olan bir nesne olduğu bir seyrek dizidir. Bu seyrek dizide her özellik, alınan karakter, değer de görüntülenen karakterdir.\n\nÖrneğin:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "Bu bir nesne olarak belirtilmiştir. Her özelliğin karakter kümesi kodu olduğu ve değerin de kendisi seyrek dizi olan bir nesne olduğu bir seyrek dizidir. Bu seyrek dizide her özellik, alınan karakter, değer de görüntülenen karakterdir.\n\nÖrneğin:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "Kopyaladıktan sonra seçimin temizlenip temizlenmeyeceğini belirler."
@@ -192,7 +396,7 @@
 		"message": "Komutun yürütülmesi bittiğinde pencerenin kapatılıp kapatılmayacağı."
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "Varsayılan paletteki renkleri geçersiz kılar.\n\nBu bir dizi veya nesne olarak belirtilebilir. Nesne olarak belirtilirse, her özelliğin renk paletinde bir sayısal dizin olduğu seyrek dizin olarak kabul edilir.\n\nDeğerler, neredeyse her CSS renk değeri olarak belirtilebilir. #RGB, #RRGGBB, rgb(...), rgba(...) ve standart X11 rgb.txt dosyasının bir parçası olan tüm renk adları buna dahildir.\n\nVarsayılan değerin değiştirilmemesi gerektiğini belirtmek için \"null\" değerini kullanabilirsiniz. Bu işlem, değer bir dizi olarak belirtildiğinde az sayıda dizinin atlanması açısından kullanışlıdır.\n\nÖrneğin, aşağıdakilerin her ikisi de renk dizini 1'i mavi olarak ayarlar:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "Varsayılan paletteki renkleri geçersiz kılar.\n\nBu bir dizi veya nesne olarak belirtilebilir. Nesne olarak belirtilirse her özelliğin renk paletinde bir sayısal dizin olduğu seyrek dizin olarak kabul edilir.\n\nDeğerler, neredeyse her CSS renk değeri olarak belirtilebilir. #RGB, #RRGGBB, rgb(...), rgba(...) ve standart X11 rgb.txt dosyasının bir parçası olan tüm renk adları buna dahildir.\n\nVarsayılan değerin değiştirilmemesi gerektiğini belirtmek için \"null\" değerini kullanabilirsiniz. Bu işlem, değer bir dizi olarak belirtildiğinde az sayıda dizinin atlanması açısından kullanışlıdır.\n\nÖrneğin, aşağıdakilerin her ikisi de renk dizini 1'i mavi olarak ayarlar:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
 		"message": "Fare seçimini otomatik olarak panoya kopyalar."
@@ -215,6 +419,9 @@
 	"hterm_pref_cursor_color": {
 		"message": "Görünür metin imlecinin rengi."
 	},
+	"hterm_pref_cursor_shape": {
+		"message": "Görünür metin imlecinin şekli. Bu, çalışma zamanında terminal kod dışı bırakma sıraları aracılığıyla değiştirilebilir."
+	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Doğru değerine ayarlanırsa arka plandaki terminal zilleri bir Web Bildirimi oluşturur. https://www.w3.org/TR/notifications/\n\nBildirimlerin görüntülenmesi için kullanıcının izin vermesi gerekir. Bu seçenek doğru değerine ayarlandığında hterm, gerektiğinde kullanıcıdan izin ister. Bu izin isteği bir kullanıcı işlemi tarafından tetiklenmediğinde tarayıcılar bunu göstermeyebilir.\n\n\"Bildirim\" iznine sahip olan Chrome uzantılarının bildirim görüntüleme izni vardır."
 	},
@@ -222,7 +429,7 @@
 		"message": "Doğu Asya Belirsiz karakterlerinin iki sütun genişliğinde olup olmayacağı."
 	},
 	"hterm_pref_enable_8_bit_control": {
-		"message": "Doğru değerine ayarlandığında 8 bit kontrol karakterlerini etkinleştirir, yanlış değerine ayarlandığında bunları yoksayar.\n\nBu ayara bakılmaksızın bu kontrol karakterlerinin iki baytlık sürümlerini geçerli kabul ederiz."
+		"message": "Doğru değerine ayarlandığında 8 bit kontrol karakterlerini etkinleştirir, yanlış değerine ayarlandığında bunları yok sayar.\n\nBu ayara bakılmaksızın bu kontrol karakterlerinin iki baytlık sürümlerini geçerli kabul ederiz."
 	},
 	"hterm_pref_enable_blink": {
 		"message": "True (Doğru) değeri ayarlanırsa yanıp sönme özelliğine dikkat edin. False (Yanlış) değeri ayarlanırsa bunu göz ardı edin."
@@ -239,8 +446,14 @@
 	"hterm_pref_enable_clipboard_write": {
 		"message": "Uzak ana makinenin doğrudan yerel sistem panosuna yazmasına olanak tanır.\nBu ayara bakılmaksızın okuma erişimi hiçbir zaman verilmez.\n\nBu, OSC-52 gibi özeliklere erişimi kontrol etmek için kullanılır."
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Görüntü Silme komutuna (CSI-J) ait Kaydedilen Çizgileri Sil işlevinin (mod 3) terminal geri kaydırma arabelleğini temizleyip temizleyemeyeceği.\n\nVarsayılan olarak bunu etkinleştirmek güvenlidir."
+	},
 	"hterm_pref_enable_dec12": {
 		"message": "Ana makinenin DEC Gizli Modu 12 kullanarak metin imlecinin yanıp sönme durumunu değiştirme girişimini geçerli kabul ederiz."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Terminal boyutu değiştiğinde terminal boyutlarının gösterilip gösterilmeyeceği."
 	},
 	"hterm_pref_environment": {
 		"message": "Nesne olarak başlangıçtaki çevre değişkenleri grubu."
@@ -261,13 +474,16 @@
 		"message": "Yazı yazarken fare imlecinin otomatik olarak gizlenip gizlenmeyeceğini belirler. Varsayılan değer, platform/OS'nin bunu uygulayıp uygulamadığının otomatik olarak algılanmasıdır.\n\nNot: Bu ayarı bazı işletim sistemleri geçersiz kılabilir ve her zaman devre dışı bırakamayabilirsiniz."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "True (Doğru) değerine ayarlanırsa Home/End denetimleri terminal kaydırma çubuğunu kontrol eder ve Üst Karakter-Home/Üst Karakter-End denetimleri uzak ana makineye gönderilir. False (Yanlış) değerine ayarlanırsa Home/End denetimleri uzak ana makineye gönderilir, Üst Karakter-Home/Üst Karakter-End denetimleri kaydırma yapar."
+		"message": "True (Doğru) değerine ayarlanırsa Home/End denetimleri terminal kaydırma çubuğunu kontrol eder ve Üst Karakter+Home/Üst Karakter+End denetimleri uzak ana makineye gönderilir. False (Yanlış) değerine ayarlanırsa Home/End denetimleri uzak ana makineye gönderilir, Üst Karakter+Home/Üst Karakter+End denetimleri kaydırma yapar."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Tuş işlemleri için tuş sırasının bir haritası. Tuş sıraları, sıfır veya daha fazla değiştirici tuş ile ardından gelen bir tuş kodundan oluşur. Tuş kodları ondalık veya onaltılık sayılar ya da bir tuş tanımlayıcı olabilir. Tuş işlemlerine, ana makineye gönderilecek bir dize ya da işlem tanımlayıcı belirlenebilir. Biçimin tam açıklaması için https://goo.gl/LWRndr adresine bakın.\n\nÖrnek tuş ilişkilendirmeleri:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Üst Karakter-L\": \"BAŞARILI\",\n  \"Ctrl+H\": \"'MERHABA\\n'\"\n}"
+		"message": "Tuş işlemleri için tuş sırasının bir haritası. Tuş sıraları, sıfır veya daha fazla değiştirici tuş ile ardından gelen bir tuş kodundan oluşur. Tuş kodları ondalık veya onaltılık sayılar ya da bir tuş tanımlayıcı olabilir. Tuş işlemlerine, ana makineye gönderilecek bir dize ya da işlem tanımlayıcı belirlenebilir. Biçimin tam açıklaması için https://goo.gl/LWRndr adresine bakın.\n\nÖrnek tuş ilişkilendirmeleri:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Üst Karakter+L\": \"BAŞARILI\",\n  \"Ctrl+H\": \"'Merhaba Dünya\\n'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Sürekli hterm'in kendi kullanımı için yakalamak yerine yaygın OS klavye bağlamalarına uyulup uyulmayacağı."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
-		"message": "Doğru değerine ayarlanırsa, medya tuşlarını Fkey eşdeğerlerine dönüştürür. Yanlış değerine ayarlanırsa tarayıcının tuşları ele almasına izin verir."
+		"message": "Doğru değerine ayarlanırsa medya tuşlarını Fkey eşdeğerlerine dönüştürür. Yanlış değerine ayarlanırsa tarayıcının tuşları ele almasına izin verir."
 	},
 	"hterm_pref_meta_sends_escape": {
 		"message": "Meta tuşunu basılı tutarken bir tuşa bastığınızda bir ESC öneki gönderir.\n\nÖrneğin, tercih etkinleştirildiğinde Meta+K tuşlarına basılması, Escape'in ardından k tuşuna basmışsınız gibi ^[k değerini gönderir. Devre dışı bırakıldığında yalnızca k gönderilir."
@@ -279,19 +495,34 @@
 		"message": "Sağ fare düğmesi tıklandığında yapıştırır.\n\nBu seçenek, \"yapıştırma düğmesi\" ayarından bağımsızdır.\n\nNot: Bu, sol ve sağ elli kullanım için ayarlanmış farelerde doğru şekilde kullanılacaktır."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "True (Doğru) değerine ayarlanırsa Page Up/Page Down denetimleri terminal araç çubuğunu kontrol eder, Üst Karakter-Page Up/Üst Karakter-Page Down denetimleri uzak ana makineye gönderilir. False (Yanlış) değerine ayarlanırsa Page Up/Page Down denetimleri uzak ana makineye gönderilir, Üst Karakter-Page Up/Üst Karakter-Page Down denetimleri kaydırma yapar."
+		"message": "True (Doğru) değerine ayarlanırsa Page Up/Page Down denetimleri terminal araç çubuğunu kontrol eder, Üst Karakter+Page Up/Üst Karakter+Page Down denetimleri uzak ana makineye gönderilir. False (Yanlış) değerine ayarlanırsa Page Up/Page Down denetimleri uzak ana makineye gönderilir, Üst Karakter+Page Up/Üst Karakter+Page Down denetimleri kaydırma yapar."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Alt+1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye hızlandırıcılarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nDoğru değerine ayarlanırsa, Alt+1..9 tarayıcı tarafından ele alınır. Yanlış değerine ayarlanırsa, Alt+1..9 ana makineye gönderilir. Boş değerine ayarlanırsa, tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
+		"message": "Alt+1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye kısayollarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nTrue (doğru) değerine ayarlanırsa Alt+1..9 tarayıcı tarafından ele alınır. False (yanlış) değerine ayarlanırsa Alt+1..9 ana makineye gönderilir. Null (boş) değerine ayarlanırsa tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Ctrl+N'nin tarayıcıya aktarılıp aktarılmayacağı.\n\nTrue (doğru) değerine ayarlanırsa Ctrl+N, tarayıcı tarafından \"yeni pencere\" klavye kısayolu olarak ele alınır. False (yanlış) değerine ayarlanırsa Ctrl+N, ana makineye gönderilir."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Ctrl+1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye hızlandırıcılarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nDoğru değerine ayarlanırsa, Ctrl+1..9 tarayıcı tarafından ele alınır. Yanlış değerine ayarlanırsa, Ctrl+1..9 ana makineye gönderilir. Boş değerine ayarlanırsa, tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
+		"message": "Ctrl+1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye kısayollarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nTrue (doğru) değerine ayarlanırsa Ctrl+1..9 tarayıcı tarafından ele alınır. False (yanlış) değerine ayarlanırsa Ctrl+1..9 ana makineye gönderilir. Null (boş) değerine ayarlanırsa tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Ctrl+T'nin tarayıcıya aktarılıp aktarılmayacağı.\n\nTrue (doğru) değerine ayarlanırsa Ctrl+T, tarayıcı tarafından \"yeni sekme\" klavye kısayolu olarak ele alınır. False (yanlış) değerine ayarlanırsa Ctrl+T, ana makineye gönderilir."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Sekme ve Ctrl+Üst Karakter+Sekme kısayollarının tarayıcıya aktarılıp aktarılmayacağı.\n\nTrue (doğru) değerine ayarlanırsa Ctrl+Sekme ve Ctrl+Üst Karakter+Sekme kısayolları tarayıcı tarafından \"sonraki/önceki sekme\" klavye kısayolu olarak ele alınır. False (yanlış) değerine ayarlanırsa Sekme tuşu Ctrl veya Üst Karakter olmadan ana makineye gönderilir."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Ctrl+W'nun tarayıcıya aktarılıp aktarılmayacağı.\n\nTrue (doğru) değerine ayarlanırsa Ctrl+W, tarayıcı tarafından \"sekmeyi kapatma\" klavye kısayolu olarak ele alınır. False (yanlış) değerine ayarlanırsa Ctrl+W, ana makineye gönderilir."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Meta+1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye hızlandırıcılarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nDoğru değerine ayarlanırsa, Meta+1..9 tarayıcı tarafından ele alınır. Yanlış değerine ayarlanırsa, Meta+1..9 ana makineye gönderilir. Boş değerine ayarlanırsa, tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
+		"message": "Meta+1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye kısayollarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nTrue (doğru) değerine ayarlanırsa Meta+1..9 tarayıcı tarafından ele alınır. False (yanlış) değerine ayarlanırsa Meta+1..9 ana makineye gönderilir. Null (boş) değerine ayarlanırsa tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Meta+V'nin ana makineye aktarılıp aktarılmayacağı."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "True (doğru) değerine ayarlanırsa sürüklenip bırakılan metin, terminale yapıştırılır.\nFalse (yanlış) değerine ayarlanırsa bırakılan metin yok sayılır."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Ana makineden alınan veriler için beklenen kodlamayı belirler.\nKodlamalar eşleşmezse görsel hataların gözlemlenme olasılığı artar.\n\nGeçerli değerler \"utf-8\" ve \"raw\" değerleridir."
@@ -312,7 +543,7 @@
 		"message": "Dikey kaydırma çubuğu modu."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Üst Karakter-Insert kombinasyonunun yapıştırma için mi kullanıldığı yoksa uzak ana makineye mi gönderildiği."
+		"message": "Üst Karakter+Insert kombinasyonunun yapıştırma için mi kullanıldığı yoksa uzak ana makineye mi gönderildiği."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Varsayılan terminal kodlaması (DOCS).\n\nISO-2022, karakter haritası çevirilerini (grafik haritaları gibi) etkinleştirir.\nUTF-8 bunlar için desteği devre dışı bırakır.\n\nKilitli değişken, kodlamanın çalışma zamanında terminal kod dışı bırakma sıraları aracılığıyla değiştirilemeyeceği anlamına gelir.\n\nEski uygulamalarda bozuk oluşturma fark etmediğiniz sürece UTF-8'i kullanmalısınız."
@@ -354,7 +585,7 @@
 		"message": "Klavye"
 	},
 	"hterm_title_pref_miscellaneous": {
-		"message": "Çeşitli"
+		"message": "Muhtelif"
 	},
 	"hterm_title_pref_scrolling": {
 		"message": "Kaydırma"
@@ -386,8 +617,20 @@
 	"known_hosts_title": {
 		"message": "Bilinen ana makineler:"
 	},
+	"licenses": {
+		"message": "Lisanslar"
+	},
+	"licenses_expand_link": {
+		"message": "lisansı göster"
+	},
+	"licenses_title": {
+		"message": "Açık Kaynak Lisansları"
+	},
 	"loading_label": {
 		"message": "Yükleniyor..."
+	},
+	"migrate_to_ext": {
+		"message": "Uyarı: Lütfen yeni Güvenli Kabuk (SSH) uzantısına ($1) geçin.\nChrome Uygulamaları kullanımdan kaldırıldığından bu sürüm artık güncelleme almayacaktır.\nAyrıntılı bilgi için geçiş rehberine ($2) bakabilirsiniz."
 	},
 	"missing_param": {
 		"message": "Eksik parametre: $1"
@@ -399,13 +642,178 @@
 		"message": "Ekleme Yolu"
 	},
 	"mounted_message": {
-		"message": "Eklendi!"
+		"message": "Eklendi."
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "Bir dosyayı terminale atar"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Çalışma dizinini değiştirir"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Yol grubunu değiştirir"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Yollardaki izinleri değiştirir"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Yolların sahibini değiştirir"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Mevcut terminal ekranını temizler."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Panoya bir dosya kopyalar (varsayılan: başlangıçtan itibaren ilk 10MiB)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "Panoya $1 bayt kopyalandı"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Renk kullanımını değiştirir"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Kaynağı hedefe kopyalar"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Dosya silme"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Disk istatistiklerini gösterir"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Yol: $1\nfsid: $2\nToplam: $3\nKullanılan: $4 (%$5)\nMevcut: $6 (ayrıcalıksız kullanıcılara)\n$7 (köke)"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Bağlantıyı kes"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "$1 dosyası $2 olarak indiriliyor"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Dosyaları indirme"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Bu yardım ekranı"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Dizin ayrıntılarını listeler"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Yolda hedefe işaret eden bir bağlantı oluşturur"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Dizin oluşturur"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Dosyaları yeniden adlandırma"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "İstem dizesini ayarlar"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Dosyaları yükleme"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "$1 dosyası $2 olarak yükleniyor ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Mevcut çalışma dizinini gösterir"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Uzak çalışma dizini: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Sembolik bağlantıları okur"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Yolları standartlaştırır"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Dosya yüklemeyi devam ettirir"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Dosya kaldırma"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Boş dizinleri siler"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Dosyaları satır içinde gösterir"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Uzantılar:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Dosya durumunu gösterir"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Dosya: $1\nBoyut: $2 bayt\nUID: $3\nGID: $4\nErişim: $5\nerişimzamanı: $6\ndeğiştirmezamanı: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Yolda hedefe işaret eden bir sembolik bağlantı oluşturur"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Yolları 0 bayt olarak kısaltır"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  sunucu uzantıları:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Mevcut protokol sürümünü gösterir"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "SFTP protokolü sürüm bilgileri:\nyerel: $1\nsunucu: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: Dosyanın sonu"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: Dosya bulunamadı"
+	},
+	"nasftp_error_file_reading": {
+		"message": "$1 okunamadı: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Giderilmemiş dahili hata; lütfen hata bildiriminde bulunun: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: Geçersiz sayı: $3"
+	},
+	"nasftp_error_message": {
+		"message": "HATA: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: \"$2\" uzantısı kullanılamıyor"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: Normal bir dosya değil"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: Yeterli bağımsız değişken yok"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: İzin reddedildi"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: Çok fazla bağımsız değişken var"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: Bilinmeyen komut"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: bilinmeyen flag $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Zorla kapat"
+	},
+	"nasftp_progress_summary": {
+		"message": "$2 saniyede $1 bayt aktarıldı ($3/s)"
 	},
 	"nassh_options_error": {
-		"message": "Bilinmeyen geçiş seçeneği: $1"
+		"message": "Bilinmeyen seçenek: $1"
 	},
 	"nassh_product_name": {
-		"message": "Secure Shell"
+		"message": "Güvenli Kabuk (SSH)"
 	},
 	"new_window_menu_label": {
 		"message": "Yeni Pencere"
@@ -420,7 +828,7 @@
 		"message": "<url><match>kullanıcı@anamakineadı[:bağlantinoktasi]</match></url> Kayıtlı bir profile veya yeni bir ssh sistemine bağlan"
 	},
 	"open_as_window_tip": {
-		"message": "[Uzmandan İpucu] Ctrl+W tuşlarının terminalinizi kapatmasını önlemek için \"Pencere Olarak Aç\" veya \"Tam ekran\" seçeneğini kullanın!\n[Uzmandan İpucu] Daha fazla bilgi için $1 adresine bakın."
+		"message": "[Uzman İpucu] Ctrl+W tuşlarının terminalinizi kapatmasını önlemek için \"Pencere Olarak Aç\" veya \"Tam ekran\" seçeneğini kullanın!\n[Uzman İpucu] Daha fazla bilgi için $1 adresine bakın."
 	},
 	"options_button_label": {
 		"message": "Seçenekler"
@@ -434,14 +842,44 @@
 	"plugin_loading_failed": {
 		"message": " başarısız oldu! :("
 	},
+	"popup_connect_tooltip": {
+		"message": "Yeni bir sekme açma için Ctrl tuşunu basılı tutun."
+	},
 	"pref_backup_filename": {
 		"message": "Güvenli Kabuk Tercihleri Yedeği.json"
 	},
+	"preferences_header_ssh_files": {
+		"message": "SSH Dosyaları"
+	},
 	"preferences_header_terminal": {
-		"message": "Profil Ayarları"
+		"message": "Terminal Ayarları"
+	},
+	"preferences_header_uri": {
+		"message": "URI İşleyicileri"
 	},
 	"preferences_reset": {
-		"message": "Tüm tercihler sıfırlandı!"
+		"message": "Tüm tercihler sıfırlandı."
+	},
+	"protocol_register_button": {
+		"message": "Protokol işleyicilerini kaydet"
+	},
+	"protocol_register_explain": {
+		"message": "Aşağıdaki düğme, desteklediğimiz tüm protokoller için işleyici kaydetmeye çalışacaktır. Örneğin, bu, ssh:// bağlantılarını doğrudan ele almamıza olanak tanır. Tarayıcı tarafından her protokol için bir istem görüntülenecektir. Lütfen her birini gösterildiği şekliyle onaylayın/kabul edin. Hiçbir istem gösterilmezse sorun giderme ipuçları için lütfen sonraki bölüme bakın."
+	},
+	"protocol_register_explain_settings": {
+		"message": "İşleyicileri zaten kaydetmişsek ya da önceki kayıt girişimleri reddedilmişse başka istem görüntülenmez. Lütfen aşağıdaki iletişim kutusunu açıp ssh/sftp/vb... bölümlerindeki kayıtlı işleyici ayarlarını kontrol edin. Bu program engellenirse kaydı yeniden denemenize olanak tanıyacak ayarları silebilirsiniz. Bu program zaten kayıtlıysa ancak varsayılan işleyici olarak ayarlanmadıysa varsayılan işleyiciyi de değiştirebilirsiniz."
+	},
+	"protocol_register_options_link": {
+		"message": "Protokol Kaydı"
+	},
+	"protocol_register_settings_button": {
+		"message": "Kayıtlı işleyici ayarlarını aç"
+	},
+	"protocol_register_title": {
+		"message": "Güvenli Kabuk protokol işleyici kaydı yardım aracı"
+	},
+	"read_size_label": {
+		"message": "Okuma Boyutu (KiB)"
 	},
 	"reconnect_message": {
 		"message": "(R) Yeniden bağlan, (C) Başka bir bağlantı seç veya (X) Çık?"
@@ -450,10 +888,13 @@
 		"message": "Yeniden deneniyor..."
 	},
 	"request_pin_prompt": {
-		"message": "\"$2\" üzerinde $1 anahtar kilidini açmak için PIN girin ($3 deneme kaldı):"
+		"message": "\"$2 ($3)\" üzerinde $1 anahtar kilidini açmak için PIN kodu girin ($4 deneme kaldı):"
 	},
 	"restore_prefs": {
 		"message": "Yedeği Geri Yükle"
+	},
+	"save_label": {
+		"message": "Kaydet"
 	},
 	"shortcut_list_aria_label": {
 		"message": "kaydedilen bağlantılar"
@@ -464,11 +905,47 @@
 	"ssh_argstr_label": {
 		"message": "SSH Bağımsız Değişkenleri"
 	},
+	"stream_open_error": {
+		"message": "$1 akışı açılamadı: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "Terminali Temizle"
 	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI renkleri"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Kenar yumuşatma"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Zil"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Yanıp sönüyor"
+	},
+	"terminal_name_pref_color": {
+		"message": "Renk"
+	},
+	"terminal_name_pref_font": {
+		"message": "Yazı tipi"
+	},
+	"terminal_name_pref_image": {
+		"message": "Resim"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Şekil"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Görünür"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Varsayılan palet için renkleri ayarlar."
+	},
+	"terminal_pref_bell": {
+		"message": "Duyulabilir terminal zili."
+	},
 	"terminal_preview_label": {
-		"message": "Önizleme"
+		"message": "Önizle"
 	},
 	"terminal_profile_label": {
 		"message": "Geçerli profil"
@@ -476,11 +953,137 @@
 	"terminal_reset_menu_label": {
 		"message": "Terminali Sıfırla"
 	},
+	"terminal_settings_background_image_help": {
+		"message": "Arka plan resminin URL'si. \"http://\" veya \"https://\" ile başlamalıdır. Resim olmadığında boş bırakın.\n\nÖrneğin:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Otomatik"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Devre dışı bırak"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Dikey"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Engelle"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Altı Çizili"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Temayı varsayılan ayarlarına sıfırlamak istediğinizden emin misiniz?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Temayı sıfırla"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Sıfırla"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Klasik"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Koyu"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Hafif puslu"
+	},
+	"terminal_theme_light_label": {
+		"message": "Açık"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized Koyu"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized Açık"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Renk 0: Siyah"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Renk 1: Kırmızı"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Renk 10: Parlak Yeşil"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Renk 11: Parlak Sarı"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Renk 12: Parlak Mavi"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Renk 13: Parlak Macenta"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Renk 14: Parlak Macenta"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Renk 15: Parlak Beyaz"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Renk 2: Yeşil"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Renk 3: Sarı"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Renk 4: Mavi"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Renk 5: Macenta"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Renk 6: Macenta"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Renk 7: Beyaz"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Renk 8: Parlak Siyah"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Renk 9: Parlak Kırmızı"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Görünüm"
+	},
+	"terminal_title_pref_background": {
+		"message": "Arka plan"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Davranış"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "İmleç"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Klavye"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Klavye ve fare"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Fare"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Kaydırma çubuğu"
+	},
+	"terminal_title_pref_text": {
+		"message": "Metin"
+	},
+	"terminal_title_settings": {
+		"message": "Ayarlar"
+	},
+	"terminal_title_theme": {
+		"message": "Tema"
+	},
 	"tip_1": {
-		"message": "Bağlantıları açmak için, tıklarken Ctrl tuşunu (macOS'de Cmd tuşu) basılı tutabilirsiniz!"
+		"message": "Bağlantıları açmak için, tıklarken Ctrl tuşunu (macOS'ta Cmd tuşu) basılı tutabilirsiniz."
 	},
 	"tip_10": {
-		"message": "Bir pencerede çalışırken, Ctrl+ÜstKrkt-N tuşlarını kullanarak başka bir oturum açabilirsiniz."
+		"message": "Bir pencerede çalışırken, Ctrl+ÜstKrkt+N tuşlarını kullanarak başka bir oturum açabilirsiniz."
 	},
 	"tip_11": {
 		"message": "Tuşları/kısayolları yeniden birleştirebilirsiniz: https://goo.gl/LWRndr"
@@ -531,7 +1134,7 @@
 		"message": "Değişiklik Günlüğü/sürüm notları: $1"
 	},
 	"welcome_faq": {
-		"message": "Sık Sorulan Soruların Yanıtları: $1 (açmak için ctrl tuşunu basılı tutarken bağlantıları tıklayın)"
+		"message": "Sık Sorulan Soruların Yanıtları: $1 (Açmak için ctrl tuşunu basılı tutarken bağlantıları tıklayın)"
 	},
 	"welcome_release_highlights": {
 		"message": "$1 sürümünden beri yapılan önemli değişiklikler:"
@@ -541,6 +1144,9 @@
 	},
 	"welcome_version": {
 		"message": "$1 $2 sürümüne hoş geldiniz."
+	},
+	"write_size_label": {
+		"message": "Yazma Boyutu (KiB)"
 	},
 	"zoom_warning": {
 		"message": "Lütfen Chrome Menüsü->%100'e Yakınlaştır seçeneğini ayarlayın"

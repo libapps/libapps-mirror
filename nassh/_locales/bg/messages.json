@@ -12,25 +12,19 @@
 		"message": "Затварянето на този раздел ще прекъсне връзката със сесията."
 	},
 	"cache_pin_prompt": {
-		"message": "Да се кешира ли ПИН кодът за тази сесия? (Y/N):"
+		"message": "Да се промени ли ПИН кодът за тази SSH сесия? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "Отказ"
 	},
+	"changelog": {
+		"message": "Регистрационен файл с промени"
+	},
 	"clear_known_hosts_menu_label": {
-		"message": "Изчистване на файла known_hosts за SSH"
+		"message": "Изчистване на известните хостове за SSH"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "Тази команда показва меню с известните хостове и подканва да въведете кой от тях да бъде забравен."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Забравяне на известен ssh хост."
-	},
-	"cmd_ssh_help": {
-		"message": "Параметрите |username| и |hostname| са задължителни, а |port| е по избор. Ако портът не е посочен, по подразбиране се задава 22."
-	},
-	"cmd_ssh_title": {
-		"message": "Отваря нова SSH сесия."
+	"clear_label": {
+		"message": "Изчистване"
 	},
 	"command_complete": {
 		"message": "Командата $1 завърши с код на състоянието $2."
@@ -48,7 +42,7 @@
 		"message": "Натиснете C, за да изберете друга връзка, или X за изход."
 	},
 	"connecting": {
-		"message": "Установява се връзка с/ъс $1..."
+		"message": "Установява се връзка с(ъс) $1..."
 	},
 	"connection_dialog_name": {
 		"message": "Диалогов прозорец за връзка"
@@ -93,10 +87,10 @@
 		"message": "стандартният път е основната директория на потребителя"
 	},
 	"field_nassh_options_aria_label": {
-		"message": "Опции за сървъра за прехвърляне на SSH"
+		"message": "Опции за препредаващия сървър за SSH"
 	},
 	"field_nassh_options_placeholder": {
-		"message": "Опции за предаващия SSH сървър"
+		"message": "Опции за препредаващия сървър за SSH"
 	},
 	"field_port_aria_label": {
 		"message": "порт"
@@ -114,10 +108,10 @@
 		"message": "потребителско име"
 	},
 	"found_relay": {
-		"message": "Предаващият сървър е намерен: $1"
+		"message": "Препредаващият сървър е намерен: $1"
 	},
 	"get_profile_error": {
-		"message": "ГРЕШКА: Потребителският профил $1 не можа да се зареди:\n$2"
+		"message": "ГРЕШКА: Зареждането на потребителския профил $1 не бе успешно:\n$2"
 	},
 	"hterm_announce_current_screen_header": {
 		"message": "Превъртяхте $1%,"
@@ -135,13 +129,226 @@
 		"message": "Страница надолу"
 	},
 	"hterm_button_page_up": {
-		"message": "Страница нагоре"
+		"message": "Страница нагоре."
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Зареждането на $1 не бе успешно"
 	},
 	"hterm_loading_resource_start": {
 		"message": "$1 се зарежда..."
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Разрешаване на показване на вградени изображения"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Backspace е Meta+Backspace"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "Режим на клавиша AltGr"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Третиране на клавиша Alt като Meta"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Обработка на модифициращия клавиш Alt"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Звук за сигнала от звънеца (URI адрес)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Цвят на фона"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Фоново изображение"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Позиция на фоновото изображение"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Размер на фоновото изображение"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Поведение на клавиша Backspace"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Замяна на таблицата на знаците"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Автоматично изчистване на избора на текст"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Затваряне на прозореца при излизане"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Първоначална цветова палитра"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Автоматично копиране на избраното съдържание"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Поведение на Ctrl+C (копиране)"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Поведение на Ctrl++/-/0 (промяна на мащаба)"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Поведение на Ctrl+V (поставяне)"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Мигане на курсора"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Честота на мигане на курсора"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Цвят на текстовия курсор"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Форма на текстовия курсор"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Създаване на известия на работния плот за сигнали от звънеца"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Източноазиатските знаци с нееднозначна ширина използват две колони"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Поддръжка на контролни знаци от набора C1, които не са UTF-8"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Активиране на мигащ текст"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Поведение на удебеления текст"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Използване на ярки цветове с удебелен текст"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Показване на известие при копирането на съдържание"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Разрешаване на отдалечен запис в буферната памет"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Разрешаване на изчистването на буфера за превъртане назад (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Разрешаване на промяна на мигането на текстовия курсор"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Показване на размерите на терминала при преоразмеряване"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Променливи на обкръжението"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Шрифтово семейство за текста"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Размер на шрифта на текста"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Изглаждане на шрифтовете"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Цвят на текста"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Скриване на курсора на мишката при въвеждане"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Поведение при превъртане с клавиши Home/End"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Клавишни комбинации"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Използване на стандартните клавишни комбинации в ОС"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Мултимедийните клавиши са функционални"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Обработка на модифициращия клавиш Meta"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Поставяне с бутон на мишката"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Кликването с десния бутон на мишката поставя съдържанието"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Поведение при превъртане с клавиши Page Up/Page Down"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Поведение на Alt+1…9 (превключване между раздели)"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Поведение на Ctrl+N (нов прозорец)"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Поведение на Ctrl+1…9 (превключване между раздели)"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Поведение на Ctrl+T (нов раздел)"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Поведение на Ctrl+Tab (превключване между раздели)"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Поведение на Ctrl+W (затваряне на раздела)"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Поведение на Meta+1…9 (превключване между раздели)"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Поведение на Meta+V (поставяне)"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Разрешаване на поставяне с хващане и преместване с мишката"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Кодировка при получаване"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Превъртане до края след натискане на клавиш"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Превъртане до края след извеждане на нова информация"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Емулиране на клавишите със стрелки чрез колелцето на мишката"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Множител за колелцето за превъртане на мишката"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Видимост на лентата за превъртане"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Shift+Insert (поставяне)"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Кодировка на терминала"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Браузърът да обработва копирането на текст"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "Персонализиран CSS (URI адрес)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "Персонализиран CSS (вграден текст)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Автоматично спиране на избирането (отляво)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Знаци за прекъсване на думата"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Автоматично спиране на избирането (отдясно)"
 	},
 	"hterm_popup_inline_image": {
 		"message": "Изображения в текста"
@@ -153,7 +360,7 @@
 		"message": "Дали да се разреши на отдалечения хост да показва изображения в терминала.\n\nПо подразбиране се извежда подкана за избор."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ако е зададено, отменя съответствието Alt+Backspace->DEL в Chrome OS, така че Alt+Backspace остава непроменено."
+		"message": "Ако е зададено, отменя съответствието Alt+Backspace -> Delete в Chrome OS, така че Alt+Backspace остава непроменено."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Избиране на евристичен метод за откриване на AltGr.\n\n'null': Автоматично откриване въз основа на navigator.language:\n      'en-us' => 'none', друго => 'right-alt'\n'none': Деактивиране на промените, свързани с AltGr.\n'ctrl-alt': Допускане, че Ctrl+Alt означава AltGr.\n'left-alt': Допускане, че левият Alt означава AltGr.\n'right-alt': Допускане, че десният Alt означава AltGr."
@@ -162,7 +369,7 @@
 		"message": "Дали клавишът Alt да действа като клавиш Meta, или като отделен клавиш Alt."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Контролиране на обработката на клавиша Alt.\n\n  escape: Изпращане на префикс ESC.\n  8-bit: Добавяне на 128 към неотместения знак, както в xterm.\n  browser-key: Изчакване на събитието за натиснат клавиш и проверяване на стойността от браузъра. (Това няма да работи добре в платформите, където браузърът изпълнява стандартни действия при някои клавишни комбинации с Alt.)"
+		"message": "Контролиране на обработката на клавиша Alt.\n\n  escape: Изпращане на префикс ESC.\n  8-bit: Добавяне на 128 към кода на въведения знак, както в xterm.\n  browser-key: Изчакване на събитието за натиснат клавиш и проверяване на стойността от браузъра. (Това няма да работи добре в платформите, където браузърът изпълнява стандартни действия при някои клавишни комбинации с Alt.)"
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "URL адресът за звуковия сигнал от терминала. За да няма такъв сигнал, оставете низа празен."
@@ -171,7 +378,7 @@
 		"message": "Цветът на фона на текста, който няма други атрибути за цвят."
 	},
 	"hterm_pref_background_image": {
-		"message": "Стойност в CSS за фоновото изображение. Празен низ, за да няма изображение.\n\nНапример:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Стойност в CSS за фоновото изображение. За да няма изображение, не посочвайте стойност.\n\nНапример:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Стойност в CSS за позицията на фоновото изображение.\n\nНапример:\n  10% 10%\n  center"
@@ -180,10 +387,10 @@
 		"message": "Стойност в CSS за размера на фоновото изображение."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Ако е true, Backspace изпраща код BS („\\x08“, или ^H). В противен случай клавишът Backspace изпраща код „\\x7f“."
+		"message": "Ако е true, при натискане на Backspace се изпраща код BS (\\x08, или ^H). В противен случай клавишът Backspace изпраща код \\x7f."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "Това се определя като обект. Представлява разреден масив, в който всяко свойство е код на знаков набор, а стойността е обект, който също е разреден масив. В този масив всяко свойство е полученият знак, а съответната му стойност е показваният знак.\n\nНапример:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "Това се определя като обект. Представлява разреден масив, в който всяко свойство е код на знаков набор, а стойността е обект, който също е разреден масив. В този масив всяко свойство е полученият знак, а съответната му стойност е показваният знак.\n\nНапример:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "Дали избраното да се изчиства след копиране."
@@ -210,10 +417,13 @@
 		"message": "Дали по подразбиране текстовият курсор мига. Това може да бъде променено по време на изпълнение чрез Escape последователности в терминала."
 	},
 	"hterm_pref_cursor_blink_cycle": {
-		"message": "Честота на мигане на текстовия курсор в милисекунди.\n\nМасив с два елемента, първият от които показва колко време да е включен курсорът, а вторият – колко да е изключен."
+		"message": "Честота на мигане на текстовия курсор в милисекунди.\n\nМасив с два елемента, първият от които показва колко време да е включен курсорът, а вторият – колко да е изключен."
 	},
 	"hterm_pref_cursor_color": {
 		"message": "Цветът на видимия текстов курсор."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "Формата на видимия текстов курсор. Може да бъде променяна по време на работа чрез Escape последователности в терминала."
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Ако е true, звуковите сигнали от терминала на заден фон ще доведат до създаване на уеб известие. https://www.w3.org/TR/notifications/\n\nЗа показването на известия е необходимо разрешение от потребителя. Когато за тази опция бъде зададено true, hterm ще опита да поиска разрешение от потребителя, ако е необходимо. Възможно е браузърите да не покажат това искане за разрешение, ако не е следствие от действие на потребителя.\n\nРазширенията за Chrome с разрешение за известия могат да ги показват."
@@ -225,7 +435,7 @@
 		"message": "True, за да се активират 8-битовите контролни символи, false, за да се пренебрегват.\n\nЩе уважаваме двубайтовите варианти на тези контролни символи независимо от стойността на тази настройка."
 	},
 	"hterm_pref_enable_blink": {
-		"message": "При true атрибутът за Blink ще бъде взет предвид, а при false – пренебрегнат."
+		"message": "При true атрибутът за Blink ще бъде взет предвид, а при false – пренебрегнат."
 	},
 	"hterm_pref_enable_bold": {
 		"message": "Ако е true, се използва удебелен шрифт при текст с атрибута bold/bright. Ако е false, се използва шрифтът с тегло normal. При null се извършва автоматично откриване."
@@ -239,8 +449,14 @@
 	"hterm_pref_enable_clipboard_write": {
 		"message": "Разрешаване на отдалечения хост да пише директно в буферната памет на локалната система.\nНезависимо от тази настройка никога не се предоставя достъп за четене.\n\nТова се използва за контролиране на функции като OSC-52."
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Дали функцията за изтриване на запазените редове (режим 3) на командата за изтриване на екрана (CSI-J) да изчиства буфера на терминала за превъртане назад.\n\nАктивирането на тази настройка по подразбиране е безопасно."
+	},
 	"hterm_pref_enable_dec12": {
 		"message": "Уважаване на опитите на хоста да промени състоянието на мигане на текстовия курсор чрез частен режим 12 на DEC."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Дали да се показват размерите на терминала, когато се променят."
 	},
 	"hterm_pref_environment": {
 		"message": "Първоначалните променливи на обкръжението във вид на обект."
@@ -264,13 +480,16 @@
 		"message": "Ако е true, Home/End ще управляват лентата за превъртане на терминала, а Shift+Home/Shift+End ще се изпращат до отдалечения хост. При false Home/End ще се изпращат до отдалечения хост, а Shift+Home/Shift+End ще служат за превъртане."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Съпоставяне между последователност от клавиши и действия на клавишите. Последователностите от клавиши включват нула или повече модифициращи клавиши, следвани от код на клавиш. Кодовете на клавиши могат да са десетични или шестнадесетични числа или идентификатори на клавиши. Като действие на клавиша може да се посочи низ, който да се изпрати до хоста, или идентификатор на действие. За пълно обяснение на формата вижте https://goo.gl/LWRndr.\n\nПримерни обвързвания на клавиши:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Съпоставяне между последователност от клавиши и действия на клавишите. Последователностите от клавиши включват нула или повече модифициращи клавиши, следвани от код на клавиш. Кодовете на клавиши могат да са десетични или шестнадесетични числа или идентификатори на клавиши. Като действие на клавиша може да се посочи низ, който да се изпрати до хоста, или идентификатор на действие. За пълно обяснение на формата вижте https://goo.gl/LWRndr.\n\nПримерни клавишни комбинации:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Дали често използваните клавишни комбинации в операционната система да бъдат зачитани, вместо винаги да се прихващат за употреба от hterm."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ако е true, мултимедийните клавиши се преобразуват в еквивалентните им функционални. Ако е false, се оставя на браузъра да обработва клавишите."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Изпращане на префикс ESC при натискане на клавиш, докато е задържан клавишът Meta.\n\nАко например тази функция е активирана и натиснете Meta+K, ще се изпрати ^[k – все едно сте натиснали Escape и след това k. Когато функцията е деактивирана, ще се изпрати само k."
+		"message": "Изпращане на префикс ESC при натискане на клавиш, докато е задържан клавишът Meta.\n\nАко например тази функция е активирана и натиснете Meta+K, ще се изпрати ^[k – както ако сте натиснали Escape и след това k. Когато функцията е деактивирана, ще се изпрати само k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Бутон на мишката за поставяне или null за автоматично откриване.\n\nЗа автоматично откриване ще използваме средния бутон на мишката за платформи, различни от X11 (включително Chrome OS). Под X11 ще използваме десния бутон на мишката (тъй като собственият мениджър на прозорци следва да извършва поставяне чрез средния бутон).\n\n0 == левият (основният) бутон.\n1 == средният (спомагателният) бутон.\n2 == десният (вторичният) бутон.\n\nТази опция е независима от настройката за поставяне при кликване с десния бутон на мишката.\n\nЗабележка: Настройката третира правилно мишките за лява и за дясна ръка."
@@ -284,14 +503,29 @@
 	"hterm_pref_pass_alt_number": {
 		"message": "Дали Alt+1...9 да се предават към браузъра.\n\nТова е удобно, когато hterm работи в раздел на браузъра, така че да не загубите клавишните комбинации на Chrome за превключване към раздел. Когато не се работи в раздел, по-добре е тези клавиши да се изпращат към хоста, за да могат да се използват във vim или emacs.\n\nАко е true, Alt+1...9 ще се обработват от браузъра. При false Alt+1...9 ще се изпращат към хоста. Ако е null, ще се извършва автоматично откриване въз основа на платформата на браузъра и типа на прозореца."
 	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Дали Ctrl+N да се предава на браузъра.\n\nАко е true, Ctrl+N ще се обработва от браузъра като клавишната комбинация за нов прозорец. Ако е false, Ctrl+N ще се изпраща до хоста."
+	},
 	"hterm_pref_pass_ctrl_number": {
 		"message": "Дали Ctrl+1...9 да се предават към браузъра.\n\nТова е удобно, когато hterm работи в раздел на браузъра, така че да не загубите клавишните комбинации на Chrome за превключване към раздел. Когато не се работи в раздел, по-добре е тези клавиши да се изпращат към хоста, за да могат да се използват във vim или emacs.\n\nАко е true, Ctrl+1...9 ще се обработват от браузъра. При false Ctrl+1...9 ще се изпращат към хоста. Ако е null, ще се извършва автоматично откриване въз основа на платформата на браузъра и типа на прозореца."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Дали Ctrl+T да се предава на браузъра.\n\nАко е true, Ctrl+T ще се обработва от браузъра като клавишната комбинация за нов раздел. Ако е false, Ctrl+T ще се изпраща до хоста."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Дали Ctrl+Tab и Ctrl+Shift+Tab да се предават на браузъра.\n\nАко е true, Ctrl+Tab и Ctrl+Shift+Tab ще се обработват от браузъра като клавишните комбинации за следващ или предишен раздел. Ако е false, до хоста се изпраща клавишът Tab без Ctrl и Shift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Дали Ctrl+W да се предава на браузъра.\n\nАко е true, Ctrl+W ще се обработва от браузъра като клавишната комбинация за затваряне на раздел. Ако е false, Ctrl+W ще се изпраща до хоста."
 	},
 	"hterm_pref_pass_meta_number": {
 		"message": "Дали Meta+1...9 да се предават към браузъра.\n\nТова е удобно, когато hterm работи в раздел на браузъра, така че да не загубите клавишните комбинации на Chrome за превключване към раздел. Когато не се работи в раздел, по-добре е тези клавиши да се изпращат към хоста, за да могат да се използват във vim или emacs.\n\nАко е true, Meta+1...9 ще се обработват от браузъра. При false Meta+1...9 ще се изпращат към хоста. Ако е null, ще се извършва автоматично откриване въз основа на платформата на браузъра и типа на прозореца."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Дали Meta+V да се предава към хоста."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Ако е true, в терминала ще може да се поставя текст с хващане и преместване с мишката.\nАко е false, така преместеният текст ще бъде пренебрегван."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Задаване на очакваната кодировка за данните, получени от хоста.\nНесъответствието на кодировките може да доведе до грешки при изобразяването.\n\nВалидните стойности са utf-8 и raw."
@@ -315,13 +549,13 @@
 		"message": "Дали Shift+Insert да се използва за поставяне, или да се изпраща до отдалечения хост."
 	},
 	"hterm_pref_terminal_encoding": {
-		"message": "Стандартната кодировка на терминала (DOCS).\n\nISO-2022 активира транслации на таблици на знаците (например графични таблици).\nUTF-8 деактивира поддръжката на това.\n\nЗаключеният вариант означава, че кодировката не може да се променя по време на работа посредством последователности от команди с Escape за терминала.\n\nПридържайте се към UTF-8, освен ако не възникнат проблеми с изобразяването в наследени приложения."
+		"message": "Стандартната кодировка на терминала (DOCS).\n\nISO-2022 активира транслации на таблици на знаците (например графични таблици).\nUTF-8 деактивира поддръжката на това.\n\nЗаключеният вариант означава, че кодировката не може да се променя по време на изпълнение посредством последователности от команди с Escape за терминала.\n\nПридържайте се към UTF-8, освен ако не възникнат проблеми с изобразяването в наследени приложения."
 	},
 	"hterm_pref_use_default_window_copy": {
 		"message": "Дали да се използва стандартното за браузъра/операционната система поведение при копиране.\n\nРазрешаване на браузъра/операционната система да обработват директно събитията за копиране. Това може да подобри съвместимостта с някои системи (където копирането изобщо не работи), но понижава надеждността на функцията за избиране на текст.\n\nНапример дългите редове, които автоматично са пренесени на няколко реда, ще бъдат копирани с новите редове в тях."
 	},
 	"hterm_pref_user_css": {
-		"message": "URL адреса на потребителски стилов лист, който да се включи в документа за терминала."
+		"message": "URL адресът на потребителски стилов лист, който да се включи в документа за терминала."
 	},
 	"hterm_pref_user_css_text": {
 		"message": "Персонализиран CSS текст за определяне на стила на терминала."
@@ -336,7 +570,7 @@
 		"message": "Регулярен израз, който спира търсенето на съответствие вдясно (в края) на избраната област.\n\nТова обикновено е клас от знаци, с който се отхвърлят конкретни знаци."
 	},
 	"hterm_space_character": {
-		"message": "Интервал"
+		"message": "интервал"
 	},
 	"hterm_title_pref_appearance": {
 		"message": "Облик (шрифтове, цветове, изображения)"
@@ -345,7 +579,7 @@
 		"message": "Копиране и поставяне"
 	},
 	"hterm_title_pref_encoding": {
-		"message": "Кодиране"
+		"message": "Кодировка"
 	},
 	"hterm_title_pref_extensions": {
 		"message": "Разширения"
@@ -372,13 +606,13 @@
 		"message": "Импортиране..."
 	},
 	"initializing_relay": {
-		"message": "Търси се предаващ сървър с адрес: $1"
+		"message": "Търси се препредаващ сървър с адрес: $1"
 	},
 	"json_parse_error": {
-		"message": "JSON кодът от „$1“ не можа да бъде анализиран синтактично: $2"
+		"message": "Синтактичният анализ на JSON кода от „$1“ не бе успешен: $2"
 	},
 	"known_hosts_empty": {
-		"message": "Няма известни хостове – нищо за забравяне."
+		"message": "Няма известни хостове – няма нищо за забравяне."
 	},
 	"known_hosts_prompt": {
 		"message": "Моля, изберете хост, който да бъде забравен [1-$1]:"
@@ -386,8 +620,20 @@
 	"known_hosts_title": {
 		"message": "Известни хостове:"
 	},
+	"licenses": {
+		"message": "Лицензи"
+	},
+	"licenses_expand_link": {
+		"message": "показване на лиценза"
+	},
+	"licenses_title": {
+		"message": "Лицензи за отворен код"
+	},
 	"loading_label": {
 		"message": "Зарежда се..."
+	},
+	"migrate_to_ext": {
+		"message": "Съобщение: Моля, преминете към новото разширение за Secure Shell ($1).\nПриложенията за Chrome са оттеглени и тази версия ще престане да получава актуализации.\nЗа повече подробности, моля, вижте ръководството за мигриране ($2)."
 	},
 	"missing_param": {
 		"message": "Липсващ параметър: $1"
@@ -401,8 +647,173 @@
 	"mounted_message": {
 		"message": "Свързването бе успешно!"
 	},
+	"nasftp_cmd_cat_help": {
+		"message": "Извеждане на файл в терминала"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Смяна на работната директория"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Промяна на групата за пътищата"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Промяна на разрешенията за пътищата"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Промяна на собственика на пътищата"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Изчистване на текущия екран на терминала."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Копиране на файл в буферната памет (по подразбиране: 10 МБ от началото)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "$1 байта бяха копирани в буферната памет"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Превключване на използването на цвят"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Копиране на източника към дестинацията"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Изтриване на файлове"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Показване на статистика за диска"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Път: $1\n  fsid: $2\n Общо: $3\n  Използвани: $4 ($5%)\n Налице: $6 (за потребители без привилегии)\n $7 (за root)"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Прекратяване на връзката"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Файлът „$1“ се изтегля като „$2“"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Изтегляне на файлове"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Този помощен екран"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Извеждане на подробности за директорията"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Създава в директорията връзка, водеща към целта"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Създаване на директория"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Преименуване на файл"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Задаване на низа за подканата"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Качване на файлове"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Файлът „$1“ се качва като „$2“ ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Показване на текущата работна директория"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Отдалечена работна директория: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Четене на символичните връзки"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Превръщане на пътищата в канонични"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Възобновяване на качването на файлове"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Премахване на файлове"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Изтриване на празни директории"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Директно показване на файлове"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Разширения:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Показване на състоянието на файл"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Файл: $1\n  Размер: $2 байта\n   UID: $3\n   GID: $4\nДостъп: $5\n Време на достъп: $6\n Време на промяна: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Създава в директорията символична връзка, водеща към целта"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Съкращаване на пътя до 0 байта"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  сървърни разширения:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Показване на текущата версия на протокола"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Информация за версията на протокола SFTP:\n  локално: $1\n  на сървъра: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: край на файла"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: файлът не е намерен"
+	},
+	"nasftp_error_file_reading": {
+		"message": "Четенето на „$1“ не бе успешно: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Необработена вътрешна грешка. Моля, съобщете за програмна грешка: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: невалидно число: $3"
+	},
+	"nasftp_error_message": {
+		"message": "ГРЕШКА: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: разширението $2 не е налице"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: не е обикновен файл"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: недостатъчно аргументи"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: разрешението е отказано"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: твърде много аргументи"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: неизвестна команда"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: неизвестен флаг $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Принудително излизане"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 байта, прехвърлени за $2 секунди ($3/сек)"
+	},
 	"nassh_options_error": {
-		"message": "Неизвестна опция за препредаване: $1"
+		"message": "Неизвестна опция: $1"
 	},
 	"nassh_product_name": {
 		"message": "Secure Shell"
@@ -420,7 +831,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Свържете се със запазен потребителски профил или нова SSH система"
 	},
 	"open_as_window_tip": {
-		"message": "[Експертен съвет] Използвайте „Отваряне като прозорец“, така че терминалът да не се затваря с Ctrl+W.\n[Експертен съвет] За повече информация вижте $1."
+		"message": "[Експертен съвет] Използвайте „Отваряне като прозорец“ или „Цял екран“, така че терминалът да не се затваря с Ctrl+W.\n[Експертен съвет] За повече информация вижте $1."
 	},
 	"options_button_label": {
 		"message": "Опции"
@@ -429,31 +840,64 @@
 		"message": "Приставката NaCl се зарежда..."
 	},
 	"plugin_loading_complete": {
-		"message": " готово."
+		"message": " е готово."
 	},
 	"plugin_loading_failed": {
-		"message": " Неуспешно! :("
+		"message": " не бе успешно! :("
+	},
+	"popup_connect_tooltip": {
+		"message": "Задръжте Ctrl натиснат, за да отворите в нов раздел."
 	},
 	"pref_backup_filename": {
 		"message": "Резервно копие на предпочитанията за Secure Shell.json"
 	},
+	"preferences_header_ssh_files": {
+		"message": "Файлове за SSH"
+	},
 	"preferences_header_terminal": {
-		"message": "Настройки на потребителския профил"
+		"message": "Настройки на терминала"
+	},
+	"preferences_header_uri": {
+		"message": "Манипулатори за URI адреси"
 	},
 	"preferences_reset": {
 		"message": "Всички предпочитания са нулирани!"
+	},
+	"protocol_register_button": {
+		"message": "Регистриране на манипулатори на протоколи"
+	},
+	"protocol_register_explain": {
+		"message": "При натискане на бутона по-долу ще се опита регистриране на манипулатори за всички протоколи, които поддържаме. Например това ни позволява да обработваме връзките от тип ssh:// директно. За всеки протокол браузърът ще показва подкана, затова, моля, потвърдете/приемете всяка. Ако не бъдат показани подкани, вижте следващата секция за съвети за отстраняване на грешки."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Ако вече сме регистрирали манипулатори или предишните опити за регистрация са били отказани, няма да бъдат показани нови подкани. Моля, отворете диалоговия прозорец по-долу и проверете настройките за регистрирани манипулатори в секциите ssh, sftp и т.н. Ако програмата е блокирана, можете да изтриете съответните настройки, което ще ви позволи да опитате отново регистриране. Ако програмата вече е регистрирана, но не е стандартният манипулатор, можете да промените и него."
+	},
+	"protocol_register_options_link": {
+		"message": "Регистриране на протокола"
+	},
+	"protocol_register_settings_button": {
+		"message": "Отваряне на настройките за регистрираните манипулатори"
+	},
+	"protocol_register_title": {
+		"message": "Помощен инструмент за регистриране на манипулатора на протокола Secure Shell"
+	},
+	"read_size_label": {
+		"message": "Размер при четене (КБ)"
 	},
 	"reconnect_message": {
 		"message": "Натиснете R, за да се свържете отново, C за избиране на друга връзка или Х за изход."
 	},
 	"relay_retry": {
-		"message": "Извършва се повторен опит..."
+		"message": "Извършва се нов опит..."
 	},
 	"request_pin_prompt": {
-		"message": "Въведете ПИН за отключване на ключа $1 от „$2“ (остават $3 опита):"
+		"message": "Въведете ПИН за отключване на ключа $1 от „$2 ($3)“ (остават $4 опита):"
 	},
 	"restore_prefs": {
 		"message": "Възстановяване от резервно копие"
+	},
+	"save_label": {
+		"message": "Запазване"
 	},
 	"shortcut_list_aria_label": {
 		"message": "запазени връзки"
@@ -464,8 +908,44 @@
 	"ssh_argstr_label": {
 		"message": "Аргументи за SSH"
 	},
+	"stream_open_error": {
+		"message": "Потокът $1 не бе отворен: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "Изчистване на терминала"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI цветове"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Изглаждане"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Звънец"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Мигане"
+	},
+	"terminal_name_pref_color": {
+		"message": "Цвят"
+	},
+	"terminal_name_pref_font": {
+		"message": "Шрифт"
+	},
+	"terminal_name_pref_image": {
+		"message": "Изображения"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Форма"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Видимо"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Задаване на цветовете за стандартната палитра."
+	},
+	"terminal_pref_bell": {
+		"message": "Звънец на терминала със звук."
 	},
 	"terminal_preview_label": {
 		"message": "Визуализация"
@@ -476,11 +956,134 @@
 	"terminal_reset_menu_label": {
 		"message": "Нулиране на настройките на терминала"
 	},
+	"terminal_settings_background_image_help": {
+		"message": "URL адрес на фоновото изображение. Трябва да започва с http:// или https://. За да няма изображение, не посочвайте стойност.\n\nНапример:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Автоматично"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Деактивиране"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Вертикална черта"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Правоъгълник"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Долна черта"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Наистина ли искате да възстановите повторно стандартните настройки за темата?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Повторно задаване на темата"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Нулиране"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Класически изглед"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Тъмна"
+	},
+	"terminal_theme_light_label": {
+		"message": "Светла"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized – тъмна"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized – светла"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Цвят 0: черно"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Цвят 1: червено"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Цвят 10: яркозелено"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Цвят 11: яркожълто"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Цвят 12: яркосиньо"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Цвят 13: яркопурпурно"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Цвят 14: ярко синьо-зелено"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Цвят 15: яркобяло"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Цвят 2: зелено"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Цвят 3: жълто"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Цвят 4: синьо"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Цвят 5: пурпурно"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Цвят 6: синьо-зелено"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Цвят 7: бяло"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Цвят 8: яркочерно"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Цвят 9: яркочервено"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Облик"
+	},
+	"terminal_title_pref_background": {
+		"message": "Фон"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Поведение"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "Курсор"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Клавиатура"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Клавиатура и мишка"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Мишка"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Лента за превъртане"
+	},
+	"terminal_title_pref_text": {
+		"message": "Текст"
+	},
+	"terminal_title_settings": {
+		"message": "Настройки"
+	},
+	"terminal_title_theme": {
+		"message": "Тема"
+	},
 	"tip_1": {
 		"message": "Можете да задържите Ctrl (Cmd под macOS) при кликване върху връзка, за да я отворите!"
 	},
 	"tip_10": {
-		"message": "При работа в прозорец можете да отворите нов посредством Ctrl+Shift+N."
+		"message": "При работа в прозорец Ctrl+Shift+N може да отвори друга сесия."
 	},
 	"tip_11": {
 		"message": "Можете да преконфигурирате клавиши/клавишни комбинации: https://goo.gl/LWRndr"
@@ -492,7 +1095,7 @@
 		"message": "Показване на изображенията в текста: https://goo.gl/MnSysj"
 	},
 	"tip_14": {
-		"message": "При задържане на Ctrl (Cmd под mac OS) и кликване с десен бутон на мишката се извежда контекстно меню."
+		"message": "При задържане на Ctrl (Cmd под macOS) и кликване с десния бутон на мишката се извежда контекстно меню."
 	},
 	"tip_2": {
 		"message": "Задайте известията да се показват в браузъра посредством hterm-notify: https://goo.gl/ZNxGdF"
@@ -501,7 +1104,7 @@
 		"message": "Свържете се от полето за всичко, като въведете „ssh <име на потребителския профил>“: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Под Chrome OS можете да свържете файлова система през SFTP и да разглеждате съдържанието й посредством приложението Файлове. Използвайте „Свързване през SFTP“ вместо „Свързване“."
+		"message": "Под Chrome OS можете да свържете файлова система през SFTP и да разглеждате съдържанието ѝ посредством приложението „Файлове“. Използвайте „Свързване през SFTP“ вместо „Свързване“."
 	},
 	"tip_5": {
 		"message": "Свързвайте се посредством връзки с ssh:// в уеб страниците или запазвайте отметки: https://goo.gl/zS8EZD"
@@ -528,10 +1131,10 @@
 		"message": "Прекратяване на връзката през SFTP"
 	},
 	"welcome_changelog": {
-		"message": "ChangeLog/бележки по версията: $1"
+		"message": "Регистрационен файл с промени/бележки по версията: $1"
 	},
 	"welcome_faq": {
-		"message": "Отговори на често задавани въпроси: $1 (връзките се отварят чрез задържане на ctrl + кликване)"
+		"message": "Отговори на често задавани въпроси: $1 (връзките се отварят чрез задържане на Ctrl + кликване)"
 	},
 	"welcome_release_highlights": {
 		"message": "Основни промени след версия $1:"
@@ -541,6 +1144,9 @@
 	},
 	"welcome_version": {
 		"message": "Добре дошли във версия $2 на $1."
+	},
+	"write_size_label": {
+		"message": "Размер при запис (КБ)"
 	},
 	"zoom_warning": {
 		"message": "Моля, задайте 100% за „Промяна на мащаба“ в менюто на Chrome"

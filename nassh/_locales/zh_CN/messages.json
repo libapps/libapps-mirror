@@ -1,36 +1,30 @@
 {
 	"already_mounted_message": {
-		"message": "文件系统已安装！"
+		"message": "文件系统已装载完毕！"
 	},
 	"backup_prefs": {
-		"message": "保存备份副本"
+		"message": "保存备份"
 	},
 	"bad_destination": {
 		"message": "无法解析目标：$1"
 	},
 	"before_unload": {
-		"message": "关闭此选项卡将会断开本次会话。"
+		"message": "关闭此标签页会切断本次会话。"
 	},
 	"cache_pin_prompt": {
-		"message": "缓存此会话的 PIN 码？(y/N)："
+		"message": "缓存此 SSH 会话的 PIN 码？(y/N)："
 	},
 	"cancel_button_label": {
 		"message": "取消"
 	},
+	"changelog": {
+		"message": "更新日志"
+	},
 	"clear_known_hosts_menu_label": {
-		"message": "清除 SSH known_hosts"
+		"message": "清除 SSH 已知主机"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "此命令用于显示已知主机的菜单并提示您要删除的主机。"
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "删除已知 SSH 主机。"
-	},
-	"cmd_ssh_help": {
-		"message": "|username| 和 |hostname| 是必需参数，|port| 是可选参数。如果未指定端口，系统会使用默认值 (22)。"
-	},
-	"cmd_ssh_title": {
-		"message": "打开新的 SSH 会话。"
+	"clear_label": {
+		"message": "清除"
 	},
 	"command_complete": {
 		"message": "命令“$1”已完成，状态代码为：$2。"
@@ -45,7 +39,7 @@
 		"message": "连接"
 	},
 	"connect_or_exit_message": {
-		"message": "选择其他连接(C)或退出(E)？"
+		"message": "重选连接(C)还是退出(E)？"
 	},
 	"connecting": {
 		"message": "正在连接到 $1…"
@@ -54,7 +48,7 @@
 		"message": "连接对话框"
 	},
 	"console_crosh_options_notice": {
-		"message": "您知道吗？我们提供了一个专用的选项页面。\n您再也不必直接修改“term_”了！\n要想打开此页面，请按 $1 或点击：\n$2"
+		"message": "您知道吗？我们提供了一个专用的选项页面。\n您再也不必直接修改“term_”了！\n请按 $1 或点击此处的链接打开此页面：\n$2"
 	},
 	"console_nassh_options_notice": {
 		"message": "您知道吗？我们提供了一个专用的选项页面。\n您再也不必直接修改“term_”了！\n$1"
@@ -114,22 +108,22 @@
 		"message": "用户名"
 	},
 	"found_relay": {
-		"message": "发现以下中继服务器：$1"
+		"message": "发现了以下中继服务器：$1"
 	},
 	"get_profile_error": {
 		"message": "错误：无法加载配置文件 $1：\n$2"
 	},
 	"hterm_announce_current_screen_header": {
-		"message": "已滚动 $1%，"
+		"message": "已滚动百分之 $1，"
 	},
 	"hterm_button_allow_always": {
-		"message": "一律允许"
+		"message": "始终允许"
 	},
 	"hterm_button_allow_session": {
-		"message": "仅此次允许"
+		"message": "仅允许本次会话使用"
 	},
 	"hterm_button_block": {
-		"message": "禁止"
+		"message": "禁用"
 	},
 	"hterm_button_page_down": {
 		"message": "向下翻页"
@@ -138,22 +132,235 @@
 		"message": "向上翻页"
 	},
 	"hterm_loading_resource_failed": {
-		"message": "未能成功加载$1"
+		"message": "未能成功加载 $1"
 	},
 	"hterm_loading_resource_start": {
-		"message": "正在加载$1…"
+		"message": "正在加载 $1…"
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "允许内嵌显示图片"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "将 Alt+退格键用作 Meta+退格键"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "AltGr 键模式"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "将 Alt 键当作 Meta 键"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Alt 辅助键处理方式"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "提醒铃声 (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "背景颜色"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "背景图片"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "背景图片位置"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "背景图片大小"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "退格键行为"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "字符映射替换"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "自动清除文本的选中状态"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "退出时关闭窗口"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "初始调色板"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "自动复制所选内容"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Ctrl+C 的复制行为"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ctrl++/-/0 键的缩放行为"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Ctrl+V 的粘贴行为"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "光标闪烁"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "光标闪烁速率"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "文本光标颜色"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "文本光标形状"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "为提醒铃声创建桌面通知"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian Ambiguous 字符占 2 列宽度"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "支持非 UTF-8 C1 控制字符"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "启用闪烁文本"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "粗体文本行为"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "对粗体文本使用明亮色彩"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "复制内容时显示通知"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "允许远程写入剪贴板"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "允许清空回滚缓冲区 (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "允许更改文本光标的闪烁行为"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "调整终端大小时显示终端尺寸"
+	},
+	"hterm_name_pref_environment": {
+		"message": "环境变量"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "文本字体系列"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "文本字体大小"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "文本字体平滑"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "文本颜色"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "输入时隐藏鼠标光标"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Home/End 键的滚动行为"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "键盘绑定关系/快捷键"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "使用默认的操作系统键盘绑定关系/快捷键"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "将媒体键用作功能键 F1..F12"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Meta 辅助键处理方式"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "鼠标按键粘贴"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "点击鼠标右键可粘贴内容"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "PageUp/PageDown 键的滚动行为"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Alt+1..9 的“切换标签页”行为"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Ctrl+N 的“打开新的窗口”行为"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Ctrl+1..9 的“切换标签页”行为"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ctrl+T 的“打开新的标签页”行为"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab 键的“切换标签页”行为"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Ctrl+W 的“关闭标签页”行为"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Meta+1..9 的“切换标签页”行为"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Meta+V 的粘贴行为"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "允许通过拖放进行粘贴"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "接收编码"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "在发生按键操作后滚动到底部"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "在生成新的输出结果后滚动到底部"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "使用滚轮模拟箭头键"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "鼠标滚轮灵敏度系数"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "滚动条是否可见"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Shift+Insert 粘贴"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "终端编码"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "让浏览器处理文本复制"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "自定义 CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "自定义 CSS（内嵌文本）"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "自动选择停顿（向左）"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "断字字符"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "自动选择停顿（向右）"
 	},
 	"hterm_popup_inline_image": {
 		"message": "内嵌图片"
 	},
 	"hterm_popup_inline_image_disabled": {
-		"message": "内嵌图片已被停用"
+		"message": "内嵌图片已停用"
 	},
 	"hterm_pref_allow_images_inline": {
 		"message": "是否允许远程主机在终端中显示图片。\n\n默认情况下，我们会发出提示，直到用户做出选择为止。"
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "如果您设定了此设置，系统即会撤消 Chrome 操作系统中的 Alt+退格键->DEL 这项重新映射，以确保 Alt+退格键确实就是 Alt+退格键。"
+		"message": "设置完成后，系统将撤消 Chrome 操作系统中的 Alt+退格键->Delete 这项重映射，Alt+退格键将不再有映射。"
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "选择一种 AltGr 检测试探法。\n\n'null'：根据 navigator.language 自动检测：\n      'en-us' => 'none', else => 'right-alt'\n'none'：停用任何 AltGr 相关改动。\n'ctrl-alt'：假设 Ctrl+Alt 表示 AltGr。\n'left-alt'：假设左 Alt 键表示 AltGr。\n'right-alt'：假设右 Alt 键表示 AltGr。"
@@ -162,85 +369,94 @@
 		"message": "设定是将 Alt 键用作 Meta 键还是用作独特的 Alt 键。"
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "控制对 Alt 键的处理方式。\n\n  escape：传送 ESC 前缀。\n  8-bit：向所输入的字符添加 128（就像在 xterm 中添加一样）。\n browser-key：等待按键事件发生并观察浏览器如何回应（在浏览器会针对某些 Alt 序列执行默认操作的平台上，此方式不适用。）"
+		"message": "控制对 Alt 键的处理方式。\n\n  escape：传送 ESC 前缀。\n  8-bit：向所输入的字符添加 128，就像在 xterm 中添加一样。\n browser-key：等待按键事件发生并观察浏览器如何回应。（在浏览器会针对某些 Alt 序列执行默认操作的平台上，此值不适用。）"
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "终端铃声的网址。空字符串表示不会有铃声响起。"
+		"message": "终端铃声的网址。留空表示不会有铃声响起。"
 	},
 	"hterm_pref_background_color": {
 		"message": "没有任何其他颜色属性的文本的背景颜色。"
 	},
 	"hterm_pref_background_image": {
-		"message": "背景图片的 CSS 值。空字符串表示没有任何图片。\n\n例如：\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "背景图片的 CSS 值。留空表示无图片。\n\n例如：\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "背景图片位置的 CSS 值。\n\n例如：\n  10% 10%\n  center"
 	},
 	"hterm_pref_background_size": {
-		"message": "背景图片尺寸的 CSS 值。"
+		"message": "背景图片大小的 CSS 值。"
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "如果为 true，退格键应传送 BS（“\\x08”，也称为 ^H）。否则，退格键应传送“\\x7f”。"
+		"message": "如果此设置设为 true，退格键将传送 BS（“\\x08”，也称为 ^H）。否则，退格键将传送“\\x7f”。"
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "以对象形式指定。它是一个稀疏数组，其中的每项属性都是字符集代码，值则是自身亦为稀疏数组的对象。在该稀疏数组中，每项属性都是接收到的字符，值则是显示的字符。\n\n例如：\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "以对象形式指定。它是一个稀疏数组，其中的每项属性都是字符集代码，值则是自身为稀疏数组的对象。在该稀疏数组中，每项属性都是接收到的字符，值则是显示的字符。\n\n例如：\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
-		"message": "完成复制后是否清除所选内容。"
+		"message": "完成复制后是否清除所做选择。"
 	},
 	"hterm_pref_close_on_exit": {
 		"message": "设定在命令执行完毕后是否要关闭窗口。"
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "替换默认调色板中的颜色。\n\n可以数组或对象形式指定。如果以对象形式指定，则会被假定为稀疏数组，其中的每项属性都是调色板中的数字索引。\n\n指定相应值时可使用几乎任何 css 颜色值。这包括 #RGB、#RRGGBB、rgb(...)、rgba(...)，以及也是标准 X11 rgb.txt 文件的一部分的所有颜色名称。\n\n您可以指定值“null”，以禁止更改默认值。这有助于在以数组形式指定相应值的情况下跳过少量索引。\n\n例如，下面这两者都是将颜色索引 1 设成了蓝色：\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "替换默认调色板中的颜色。\n\n您可选择以数组或对象形式指定。如果以对象形式指定，系统会将其假定为稀疏数组，其中的每项属性都是调色板中的数字索引。\n\n指定相应值时可使用几乎任何 CSS 颜色值，包括 #RGB、#RRGGBB、rgb(...)、rgba(...)，以及同样包含于标准 X11 rgb.txt 文件中的所有颜色名称。\n\n您可指定“null”值来禁止更改默认值。这有助于在以数组形式指定相应值的情况下跳过少量索引。\n\n例如，下面两种方式都能将颜色索引 1 设成蓝色：\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
 		"message": "将鼠标所选内容自动复制到剪贴板中。"
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "如果为 true，Ctrl+C 会执行复制操作；如果为 false，则会向主机传送 ^C。\n如果为 true，Ctrl+Shift+C 会向主机传送 ^C；如果为 false，则会执行复制操作。"
+		"message": "如果此设置设为 true，Ctrl+C 会执行复制操作；如果设为 false，Ctrl+C 会向主机传送 ^C。\n如果此设置设为 true，Ctrl+Shift+C 会向主机传送 ^C；如果设为 false，Ctrl+Shift+C 会执行复制操作。"
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "如果为 true，Ctrl+加号键/减号键/0 键会控制缩放。\n如果为 false，Ctrl+Shift+加号键/减号键/0 键会控制缩放，Ctrl+减号键会传送 ^_，Ctrl+加号键/0 键则不会执行任何操作。"
+		"message": "如果此设置设为 true，Ctrl+加号键/减号键/0 键会控制缩放。\n如果设为 false，Ctrl+Shift+加号键/减号键/0 键会控制缩放，Ctrl+减号键会传送 ^_，Ctrl+加号键/0 键则不会执行任何操作。"
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "如果为 true，Ctrl+V 会执行粘贴操作；如果为 false，则会向主机传送 ^V。\n如果为 true，Ctrl+Shift+V 会向主机传送 ^V；如果为 false，则会执行粘贴操作。"
+		"message": "如果此设置设为 true，Ctrl+V 会执行粘贴操作；如果设为 false，Ctrl+V 会向主机传送 ^V。\n如果此设置设为 true，Ctrl+Shift+V 会向主机传送 ^V；如果设为 false，Ctrl+Shift+V 会执行粘贴操作。"
 	},
 	"hterm_pref_cursor_blink": {
-		"message": "默认情况下，文本光标是否会闪烁。可在运行时通过终端转义序列来切换此设置。"
+		"message": "设置在默认情况下，文本光标是否会闪烁。可在运行时通过终端转义序列来切换此设置。"
 	},
 	"hterm_pref_cursor_blink_cycle": {
-		"message": "文本光标闪烁速率（以毫秒为单位）。\n\n一个包含两个元素的数组，第一个元素表示文本光标应开启多久，第二个元素表示文本光标应关闭多久。"
+		"message": "文本光标闪烁速率（以毫秒为单位）。\n\n一个包含两个元素的数组：第一个元素表示文本光标应开启多久，第二个元素表示文本光标应关闭多久。"
 	},
 	"hterm_pref_cursor_color": {
 		"message": "可见文本光标的颜色。"
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "可见文本光标的形状。可在运行时通过终端转义序列来更改此设置。"
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "如果为 true，当终端在后台响铃时，系统即会创建网页通知。https://www.w3.org/TR/notifications/\n\n必须征得用户的许可才能显示通知。如果此选项设为 true，hterm 便会尝试在必要时向用户请求权限。如果此权限请求不是由用户操作触发的，浏览器可能不会显示此请求。\n\n已获“通知”发送权限的 Chrome 扩展程序均有权显示通知。"
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
-		"message": "设定是否让 East Asian Ambiguous 字符占两个列的宽度。"
+		"message": "设定是否让 East Asian Ambiguous 字符占 2 列宽度。"
 	},
 	"hterm_pref_enable_8_bit_control": {
-		"message": "如果为 true，则启用 8 位控制字符；如果为 false，则忽略它们。\n\n无论此设置是怎样设定的，我们都会采用这些控制字符的双字节版本。"
+		"message": "将此设置设为 true 会启用 8 位控制字符，设为 false 则会忽略它们。\n\n无论此设置是怎样设定的，我们都会采用这些控制字符的双字节版本。"
 	},
 	"hterm_pref_enable_blink": {
-		"message": "如果设为 true，则采用闪烁属性；如果要忽略它，则设为 false。"
+		"message": "将此设置设为 true 会遵从 blink 属性，设为 false 则会忽略它。"
 	},
 	"hterm_pref_enable_bold": {
-		"message": "如果设为 true，则对具有粗体/明亮属性的文本使用粗体字型。如果要使用普通粗细的字体，则设为 false。如果要让系统自动检测，则设为 null。"
+		"message": "将此设置设为 true 会对具有粗体/明亮属性的文本使用粗体字型。如果要使用普通粗细的字体，请设为 false。如果要让系统自动检测，请设为 null。"
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "如果设为 true，则对具有粗体属性的所有文本使用明亮的色彩（16 色调色板上的第 8-15 号颜色）；如果不想这样，就设为 false。"
+		"message": "将此设置设为 true 会对具有粗体属性的所有文本使用明亮的色彩（16 色调色板上的第 8-15 号颜色）；如果您不想这样，请将此设置设为 false。"
 	},
 	"hterm_pref_enable_clipboard_notice": {
-		"message": "当主机对剪贴板执行写入操作时，是否在终端中显示消息。"
+		"message": "当主机对剪贴板执行写入操作时，是否要在终端中显示消息。"
 	},
 	"hterm_pref_enable_clipboard_write": {
 		"message": "允许远程主机直接向本地系统剪贴板中写入内容。\n无论此设置是怎样设定的，系统一律不会授予读取权限。\n\n此设置用于控制对 OSC-52 等功能的访问。"
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "设定清屏命令 (CSI-J) 的“清空已保存的行”功能（模式 3）是否可以清空终端回滚缓冲区。\n\n默认启用此设置是安全行为。"
+	},
 	"hterm_pref_enable_dec12": {
 		"message": "允许主机尝试使用 DEC 私密模式 12 更改文本光标的闪烁状态。"
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "设定是否要在终端更改大小时显示终端尺寸。"
 	},
 	"hterm_pref_environment": {
 		"message": "初始的环境变量集，以对象形式指定。"
@@ -252,7 +468,7 @@
 		"message": "默认字体大小（以像素为单位）。"
 	},
 	"hterm_pref_font_smoothing": {
-		"message": "CSS 字体平滑属性。"
+		"message": "CSS font-smoothing 属性。"
 	},
 	"hterm_pref_foreground_color": {
 		"message": "没有任何其他颜色属性的文本的前景颜色。"
@@ -261,16 +477,19 @@
 		"message": "设定在输入时是否要自动隐藏鼠标光标。默认情况下，系统会自动检测平台/操作系统的处理方式。\n\n注意：某些操作系统可能会替换此设置，因此您可能无法始终停用此设置。"
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "如果设为 true，Home/End 键会控制终端滚动条，Shift+Home/Shift+End 会传送到远程主机。如果设为 false，Home/End 键会传送到远程主机，Shift+Home/Shift+End 会控制滚动。"
+		"message": "如果此设置设为 true，Home/End 键会控制终端滚动条，Shift+Home/Shift+End 会传送到远程主机。如果设为 false，Home/End 键会传送到远程主机，Shift+Home/Shift+End 会控制滚动。"
 	},
 	"hterm_pref_keybindings": {
-		"message": "按键序列与按键操作的对应关系。按键序列包含零个或多个辅助键，后跟一个键码。键码可以是十进制或十六进制数字，也可以是按键标识符。按键操作可被指定为要向主机传送的字符串，也可被指定为操作标识符。如需获取完整的格式说明，请访问 https://goo.gl/LWRndr。\n\n按键绑定关系示例：\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "按键序列与按键操作的映射关系。按键序列包含零个或多个辅助键加一个键码。键码可以是十进制或十六进制数字，也可以是按键标识符。按键操作可被指定为要向主机传送的字符串，也可被指定为操作标识符。如需获取完整的格式说明，请访问 https://goo.gl/LWRndr。\n\n按键绑定关系示例：\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "设定是否要遵循常用的操作系统键盘绑定关系，不再始终捕获按键序列供 hterm 使用。"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
-		"message": "如果为 true，则将媒体键转换为与其对应的功能键。如果为 false，则让浏览器处理这些键。"
+		"message": "将此设置设为 true 会使媒体键转换成对应的功能键 F1..F12，设为 false 则会让浏览器处理这些键。"
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "在按住 Meta 键的同时按某个键会传送 ESC 前缀。\n\n例如：启用此设置后，按 Meta+K 将会传送 ^[k，这和您依次按 Esc 键和 k 键的效果一样。停用此设置后，则会仅传送 k。"
+		"message": "在按住 Meta 键的同时按某个键会传送 ESC 前缀。\n\n例如：当您启用此设置后，按 Meta+K 会传送 ^[k，这和您依次按 Esc 键和 K 键的效果一样。当您停用此设置后，按 Meta+K 会仅传送 K 键。"
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "指定用于执行粘贴操作的鼠标按键，设为 null 时可自动检测。\n\n对于自动检测，我们将在非 X11 平台（包括 Chrome 操作系统）上使用鼠标中键。在 X11 上，我们将使用鼠标右键（因为原生窗口管理器需要通过鼠标中键执行粘贴操作）。\n\n0 == 左键（主要）。\n1 == 中键（辅助）。\n2 == 右键（次要）。\n\n此选项不受“mouse-right-click-paste”这项设置的影响。\n\n注意：此选项会正确处理左手鼠标和右手鼠标。"
@@ -279,28 +498,43 @@
 		"message": "在点击鼠标右键时执行粘贴操作。\n\n此选项不受“mouse-paste-button”这项设置的影响。\n\n注意：此选项会正确处理左手鼠标和右手鼠标。"
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "如果设为 true，PageUp/PageDown 键会控制终端滚动条，Shift+PageUp/Shift+PageDown 会传送到远程主机。如果设为 false，PageUp/PageDown 键会传送到远程主机，Shift+PageUp/Shift+PageDown 会控制滚动。"
+		"message": "如果此设置设为 true，PageUp/PageDown 键会控制终端滚动条，Shift+PageUp/Shift+PageDown 会传送到远程主机。如果设为 false，PageUp/PageDown 键会传送到远程主机，Shift+PageUp/Shift+PageDown 会控制滚动。"
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "设定是否应将 Alt+1..9 传递给浏览器。\n\n当在浏览器标签页中运行 hterm 时，此设置非常便于确保您不会失去 Chrome 的“切换至标签页”键盘快捷键。当不在标签页中运行 hterm 时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果设为 true，Alt+1..9 将会由浏览器处理。如果设为 false，Alt+1..9 将会被传送到主机。如果设为 null，则会根据浏览器平台和窗口类型自动检测。"
+		"message": "设定是否将 Alt+1..9 传递给浏览器。\n\n当 hterm 在浏览器标签页中运行时，此设置便于您继续使用 Chrome 的“切换至标签页”键盘快捷键。当 hterm 不在标签页中运行时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果此设置设为 true，Alt+1..9 将会由浏览器处理。如果设为 false，Alt+1..9 将会传送到主机。如果设为 null，系统会根据浏览器平台和窗口类型自动检测。"
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "设定是否将 Ctrl+N 传递给浏览器。\n\n如果此设置设为 true，Ctrl+N 将会作为“打开新的窗口”键盘快捷键由浏览器处理。如果设为 false，Ctrl+N 将会传送到主机。"
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "设定是否应将 Ctrl+1..9 传递给浏览器。\n\n当在浏览器标签页中运行 hterm 时，此设置非常便于确保您不会失去 Chrome 的“切换至标签页”键盘快捷键。当不在标签页中运行 hterm 时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果设为 true，Ctrl+1..9 将会由浏览器处理。如果设为 false，Ctrl+1..9 将会被传送到主机。如果设为 null，则会根据浏览器平台和窗口类型自动检测。"
+		"message": "设定是否将 Ctrl+1..9 传递给浏览器。\n\n当 hterm 在浏览器标签页中运行时，此设置便于您继续使用 Chrome 的“切换至标签页”键盘快捷键。当 hterm 不在标签页中运行时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果此设置设为 true，Ctrl+1..9 将会由浏览器处理。如果设为 false，Ctrl+1..9 将会传送到主机。如果设为 null，系统会根据浏览器平台和窗口类型自动检测。"
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "设定是否将 Ctrl+T 传递给浏览器。\n\n如果此设置设为 true，Ctrl+T 将会作为“打开新的标签页”键盘快捷键由浏览器处理。如果设为 false，Ctrl+T 将会传送到主机。"
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "设定是否将 Ctrl+Tab 和 Ctrl+Shift+Tab 传递给浏览器。\n\n如果此设置设为 true，Ctrl+Tab 和 Ctrl+Shift+Tab 将会作为“下一/上一标签页”键盘快捷键由浏览器处理。如果设为 false，Tab 键将会单独传送到主机，Ctrl 键或 Shift 键不会传送到主机。"
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "设定是否将 Ctrl+W 传递给浏览器。\n\n如果此设置设为 true，Ctrl+W 将会作为“关闭标签页”键盘快捷键由浏览器处理。如果设为 false，Ctrl+W 将会传送到主机。"
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "设定是否将 Meta+1..9 传递给浏览器。\n\n当在浏览器标签页中运行 hterm 时，此设置非常便于确保您不会失去 Chrome 的“切换至标签页”键盘快捷键。当不在标签页中运行 hterm 时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果设为 true，Meta+1..9 将会由浏览器处理。如果设为 false，Meta+1..9 将会被传送到主机。如果设为 null，则会根据浏览器平台和窗口类型自动检测。"
+		"message": "设定是否将 Meta+1..9 传递给浏览器。\n\n当 hterm 在浏览器标签页中运行时，此设置便于您继续使用 Chrome 的“切换至标签页”键盘快捷键。当 hterm 不在标签页中运行时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果此设置设为 true，Meta+1..9 将会由浏览器处理。如果设为 false，Meta+1..9 将会传送到主机。如果设为 null，系统会根据浏览器平台和窗口类型自动检测。"
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "设定是否应将 Meta+V 传递给主机。"
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "如果此设置设为 true，拖放的文本将会粘贴到终端。\n如果设为 false，拖放的文本将会被忽略。"
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "为从主机接收到的数据设定预期编码。\n如果编码不匹配，则可能会出现显而易见的错误。\n\n有效值是“utf-8”和“raw”。"
 	},
 	"hterm_pref_scroll_on_keystroke": {
-		"message": "是否任何按键操作都会导致滚动到页面底部。"
+		"message": "设置是否按任何按键都会滚动到页面底部。"
 	},
 	"hterm_pref_scroll_on_output": {
-		"message": "是否每当终端输出内容时都会导致滚动到页面底部。"
+		"message": "设置是否每当终端输出内容时都滚动到页面底部。"
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
 		"message": "当使用备用屏幕缓冲区且 DECCKM（应用光标键）处于活动状态时，鼠标滚轮事件会模拟箭头键。\n\n您可通过按住 Shift 键暂时停用此功能。\n\n当使用页面调度程序 (less)、查阅手册页面或文本编辑器 (vi/nano) 或者使用 Screen/tmux 时，经常会用到此设置。"
@@ -309,13 +543,13 @@
 		"message": "滚轮事件的调节系数（以像素为单位）。\n\n用于改变页面的滚动速度。"
 	},
 	"hterm_pref_scrollbar_visible": {
-		"message": "垂直滚动条模式。"
+		"message": "竖向滚动条模式。"
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "设定是将 Shift+Insert 用于执行粘贴操作还是传送到远程主机。"
+		"message": "设置按 Shift+Insert 将会执行粘贴操作还是会传送到远程主机。"
 	},
 	"hterm_pref_terminal_encoding": {
-		"message": "默认的终端编码 (DOCS)。\n\nISO-2022 会启用字符映射转换（如图形映射）。\nUTF-8 会停用对此类转换的支持。\n\n已锁定的变体表示无法在运行时通过终端转义序列更改编码。\n\n您应该坚持使用 UTF-8，除非您发现旧版应用无法顺利完成转换。"
+		"message": "默认的终端编码 (DOCS)。\n\nISO-2022 会启用字符映射转换（如图形映射）。\nUTF-8 会停用对此类转换的支持。\n\n已锁定的变体表示无法在运行时通过终端转义序列更改编码。\n\n除非您发现无法顺利呈现旧版应用，否则请始终使用 UTF-8。"
 	},
 	"hterm_pref_use_default_window_copy": {
 		"message": "设定是否使用默认浏览器/操作系统的复制行为。\n\n允许浏览器/操作系统直接处理复制事件，这可能会提高与某些根本无法进行复制的系统的兼容性，但也会降低文本选择的可靠性。\n\n例如，当复制自动换行的长行时，这些行中的换行符也会被一并复制。"
@@ -330,7 +564,7 @@
 		"message": "指定用于停止与所选范围左端（开头）匹配的正则表达式。\n\n通常情况下，这会是一个用于拒绝特定字符的字符类。\n默认情况下，我们允许使用“~”和“.”，因为路径经常以这些字符开头。"
 	},
 	"hterm_pref_word_break_match_middle": {
-		"message": "指定用于匹配所有中间字符的正则表达式。\n\n通常情况下，这会是一个用于拒绝特定字符的字符类。\n\n用于扩大起始点周围的所选范围。"
+		"message": "指定用于匹配中间部分的所有字符的正则表达式。\n\n通常情况下，这会是一个用于拒绝特定字符的字符类。\n\n用于扩大起始点周围的文本选中范围。"
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "指定用于停止与所选范围右端（末尾）匹配的正则表达式。\n\n通常情况下，这会是一个用于拒绝特定字符的字符类。"
@@ -348,7 +582,7 @@
 		"message": "编码"
 	},
 	"hterm_title_pref_extensions": {
-		"message": "扩展程序"
+		"message": "扩展"
 	},
 	"hterm_title_pref_keyboard": {
 		"message": "键盘"
@@ -360,10 +594,10 @@
 		"message": "滚动"
 	},
 	"hterm_title_pref_sounds": {
-		"message": "音效"
+		"message": "声音"
 	},
 	"identity_label": {
-		"message": "身份"
+		"message": "身份信息"
 	},
 	"import_link_aria_label": {
 		"message": "文件导入"
@@ -372,13 +606,13 @@
 		"message": "导入…"
 	},
 	"initializing_relay": {
-		"message": "正在使用“$1”查找中继服务器"
+		"message": "正在使用 $1 查找中继服务器"
 	},
 	"json_parse_error": {
 		"message": "无法解析“$1”中的 JSON：$2"
 	},
 	"known_hosts_empty": {
-		"message": "无已知主机，因此没有主机可删除。"
+		"message": "无已知主机，因此没有要删除的主机。"
 	},
 	"known_hosts_prompt": {
 		"message": "请选择要删除的主机 [1-$1]："
@@ -386,74 +620,290 @@
 	"known_hosts_title": {
 		"message": "已知主机："
 	},
+	"licenses": {
+		"message": "许可"
+	},
+	"licenses_expand_link": {
+		"message": "显示许可"
+	},
+	"licenses_title": {
+		"message": "开源许可"
+	},
 	"loading_label": {
 		"message": "正在加载…"
+	},
+	"migrate_to_ext": {
+		"message": "通知：请迁移到新的安全外壳扩展 ($1)。\nChrome 应用已被弃用，因此该版本不会再收到更新。\n如需了解详情，请参阅迁移指南 ($2)。"
 	},
 	"missing_param": {
 		"message": "缺少参数：$1"
 	},
 	"mount_button_label": {
-		"message": "安装 SFTP"
+		"message": "装载 SFTP"
 	},
 	"mount_path_label": {
-		"message": "安装路径"
+		"message": "装载路径"
 	},
 	"mounted_message": {
-		"message": "已安装！"
+		"message": "已装载完毕！"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "将文件转储到终端"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "更改工作目录"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "更改路径组"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "更改对路径的权限"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "更改路径所有者"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "清空当前的终端屏幕。"
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "将文件复制到剪贴板（默认复制前 10MiB 内容）"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "已将 $1 个字节复制到剪贴板"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "切换使用的颜色"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "将源内容复制到目标位置"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "删除文件"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "显示磁盘统计信息"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  路径：$1\n  文件系统 ID：$2\n 总数：$3\n  已使用：$4 ($5%)\n 可用：$6（针对无特权的用户）\n $7（针对 root 权限用户）"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "断开连接"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "正在下载文件：将 $1 下载为 $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "下载文件"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "此帮助屏幕"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "列出目录详情"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "在路径下创建指向目标的链接"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "创建目录"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "重命名文件"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "设置提示字符串"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "上传文件"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "正在上传文件：将 $1 上传为 $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "显示当前的工作目录"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "远程工作目录：$1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "读取符号链接"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "将路径规范化"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "继续上传文件"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "移除文件"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "删除空目录"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "内嵌显示文件"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "扩展："
+	},
+	"nasftp_cmd_stat_extensions_line": {
+		"message": "  $1：$2"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "显示文件状态"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  文件：$1\n  大小：$2 字节\n   UID：$3\n   GID：$4\n权限：$5\n 访问时间：$6\n 修改时间：$7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "在路径中创建指向目标的符号链接"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "将路径截断为 0 个字节"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  服务器扩展："
+	},
+	"nasftp_cmd_version_help": {
+		"message": "显示当前协议版本"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "SFTP 协议版本信息：\n  本地：$1\n  服务器：$1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1：文件结束"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1：找不到文件"
+	},
+	"nasftp_error_file_reading": {
+		"message": "未能成功读取 $1：$2"
+	},
+	"nasftp_error_internal": {
+		"message": "未处理的内部错误；请提交错误：$1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1：$2：号码无效：$3"
+	},
+	"nasftp_error_message": {
+		"message": "错误：$1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1：“$2”扩展不可用"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1：$2：不是常规文件"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1：参数不足"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1：权限遭拒"
+	},
+	"nasftp_error_server_error": {
+		"message": "$1：$2"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1：参数过多"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1：未知命令"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1：未知标记 $2"
+	},
+	"nasftp_force_quit": {
+		"message": "强行退出"
+	},
+	"nasftp_progress_summary": {
+		"message": "$2 秒内已传输 $1 个字节（$3/秒）"
 	},
 	"nassh_options_error": {
-		"message": "未知的中继选项：$1"
+		"message": "未知选项：$1"
 	},
 	"nassh_product_name": {
-		"message": "Secure Shell"
+		"message": "安全外壳 (SSH)"
 	},
 	"new_window_menu_label": {
-		"message": "打开新窗口"
+		"message": "打开新的窗口"
 	},
 	"notify_copy": {
-		"message": "所选文本已复制"
+		"message": "已复制所选文本"
 	},
 	"ok_button_label": {
 		"message": "确定"
 	},
 	"omnibox_default": {
-		"message": "<url><match>user@hostname[:port]</match></url> 连接到一份已保存的个人资料或一个新的 ssh 系统"
+		"message": "<url><match>user@hostname[:port]</match></url> 连接到一份已保存的配置文件或一个新的 SSH 系统"
 	},
 	"open_as_window_tip": {
-		"message": "[专业提示] 请使用“在窗口中打开”或“全屏”以确保按 Ctrl+W 组合键不会关闭终端！\n[专业提示] 请访问 $1 以了解详情。"
+		"message": "[专业提示] 请使用“在窗口中打开”或“全屏模式”来防止 Ctrl+W 组合键关闭终端！\n[专业提示] 如需了解详情，请访问 $1。"
 	},
 	"options_button_label": {
 		"message": "选项"
 	},
 	"plugin_loading": {
-		"message": "正在加载 NaCl 插件..."
+		"message": "正在加载 NaCl 插件…"
 	},
 	"plugin_loading_complete": {
-		"message": "完成。"
+		"message": " 已完成。"
 	},
 	"plugin_loading_failed": {
-		"message": " 上传失败！:("
+		"message": " 失败了！:("
+	},
+	"popup_connect_tooltip": {
+		"message": "按住 Ctrl 即可在新标签页中打开。"
 	},
 	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
+		"message": "安全外壳 (SSH) 偏好设置备份.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "SSH 文件"
 	},
 	"preferences_header_terminal": {
-		"message": "配置文件设置"
+		"message": "终端设置"
+	},
+	"preferences_header_uri": {
+		"message": "URI 处理程序"
 	},
 	"preferences_reset": {
-		"message": "所有偏好设置均已重置！"
+		"message": "已重置所有偏好设置！"
+	},
+	"protocol_register_button": {
+		"message": "注册协议处理程序"
+	},
+	"protocol_register_explain": {
+		"message": "下方的按钮将尝试为我们支持的所有协议注册处理程序。这会给我们带来很多便利，例如，我们将能够直接处理 ssh:// 链接。浏览器会针对每个协议分别显示一条提示，因此请在每条提示显示时分别进行确认/接受。如果未显示任何提示，请查看下一部分中的问题排查提示。"
+	},
+	"protocol_register_explain_settings": {
+		"message": "如果您已注册处理程序，或者先前尝试注册时遭拒，系统将不会再显示任何提示。请打开下方的对话框，然后检查 ssh 或 sftp 等部分中已注册处理程序的设置。如果此程序已被禁用，您可以删除这些设置，从而重试注册。如果此程序已注册完毕，但未设为默认处理程序，您也可以更改默认处理程序。"
+	},
+	"protocol_register_options_link": {
+		"message": "注册协议"
+	},
+	"protocol_register_settings_button": {
+		"message": "打开已注册的处理程序设置"
+	},
+	"protocol_register_title": {
+		"message": "安全外壳协议处理程序注册助手"
+	},
+	"read_size_label": {
+		"message": "读取大小 (KiB)"
 	},
 	"reconnect_message": {
-		"message": "重新连接(R)、选择其他连接(C)或退出(E)？"
+		"message": "重新连接(R)、重选连接(C)还是退出(E)？"
 	},
 	"relay_retry": {
 		"message": "正在重试…"
 	},
 	"request_pin_prompt": {
-		"message": "请在“$2”上输入 PIN 码以解锁密钥 $1（还可再尝试 $3 次）："
+		"message": "请在“$2 ($3)”上输入 PIN 码以解锁密钥 $1（还可尝试 $4 次）："
 	},
 	"restore_prefs": {
-		"message": "恢复备份副本"
+		"message": "恢复备份"
+	},
+	"save_label": {
+		"message": "保存"
 	},
 	"shortcut_list_aria_label": {
 		"message": "已保存的连接"
@@ -464,8 +914,44 @@
 	"ssh_argstr_label": {
 		"message": "SSH 参数"
 	},
+	"stream_open_error": {
+		"message": "未能成功打开数据流 $1：$2"
+	},
 	"terminal_clear_menu_label": {
-		"message": "清除终端屏幕"
+		"message": "清空终端屏幕"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI 颜色"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "消除锯齿"
+	},
+	"terminal_name_pref_bell": {
+		"message": "铃声"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "闪烁"
+	},
+	"terminal_name_pref_color": {
+		"message": "颜色"
+	},
+	"terminal_name_pref_font": {
+		"message": "字体"
+	},
+	"terminal_name_pref_image": {
+		"message": "图片"
+	},
+	"terminal_name_pref_shape": {
+		"message": "形状"
+	},
+	"terminal_name_pref_visible": {
+		"message": "可见"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "设置默认调色板的颜色。"
+	},
+	"terminal_pref_bell": {
+		"message": "听得见的终端铃声。"
 	},
 	"terminal_preview_label": {
 		"message": "预览"
@@ -476,8 +962,134 @@
 	"terminal_reset_menu_label": {
 		"message": "重置终端设置"
 	},
+	"terminal_settings_background_image_help": {
+		"message": "背景图片网址。必须以“http://”或“https://”开头。留空表示无图片。\n\n例如：\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "自动"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "停用"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "竖条"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "方形"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "下划线"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "确定要将主题背景重置为默认设置吗？"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "重置主题背景"
+	},
+	"terminal_settings_reset_label": {
+		"message": "重置"
+	},
+	"terminal_theme_classic_label": {
+		"message": "传统版"
+	},
+	"terminal_theme_dark_label": {
+		"message": "深色"
+	},
+	"terminal_theme_haze_label": {
+		"message": "紫雾"
+	},
+	"terminal_theme_light_label": {
+		"message": "浅色"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized 深色"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized 浅色"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "颜色 0：黑色"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "颜色 1：红色"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "颜色 10：亮绿色"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "颜色 11：亮黄色"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "颜色 12：亮蓝色"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "颜色 13：亮紫红"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "颜色 14：亮青色"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "颜色 15：亮白色"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "颜色 2：绿色"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "颜色 3：黄色"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "颜色 4：蓝色"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "颜色 5：紫红"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "颜色 6：青色"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "颜色 7：白色"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "颜色 8：亮黑色"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "颜色 9：亮红色"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "外观"
+	},
+	"terminal_title_pref_background": {
+		"message": "背景"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "行为"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "光标"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "键盘"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "键盘和鼠标"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "鼠标"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "滚动条"
+	},
+	"terminal_title_pref_text": {
+		"message": "文本"
+	},
+	"terminal_title_settings": {
+		"message": "设置"
+	},
+	"terminal_title_theme": {
+		"message": "主题背景"
+	},
 	"tip_1": {
-		"message": "在按住 Ctrl 键（如果是 macOS，则请按住 Cmd 键）的同时点击链接，即可将其打开！"
+		"message": "在按住 Ctrl 键（如果是 macOS，则按住 Cmd 键）的同时点击链接，即可将其打开！"
 	},
 	"tip_10": {
 		"message": "在窗口中运行时，按 Ctrl+Shift+N 组合键可以再打开一个会话。"
@@ -486,10 +1098,10 @@
 		"message": "您可以重新绑定组合键/快捷键：https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "使用 Yubikey 和其他智能卡进行 ssh 身份验证：https://goo.gl/Hu2o3v"
+		"message": "使用 Yubikey 和其他智能卡进行 SSH 身份验证：https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
-		"message": "显示内嵌图片：https://goo.gl/MnSysj"
+		"message": "内嵌显示图片：https://goo.gl/MnSysj"
 	},
 	"tip_14": {
 		"message": "在按住 Ctrl 键（如果是 macOS，则按住 Cmd 键）的同时点击右键会显示上下文菜单。"
@@ -498,10 +1110,10 @@
 		"message": "借助 hterm-notify 在浏览器中显示通知：https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "通过输入“ssh <个人资料名称>”从多功能框中进行连接：https://goo.gl/V7o8ki"
+		"message": "通过输入“ssh <配置文件名称>”从多功能框中进行连接：https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome 操作系统可通过 SFTP 安装文件系统，并通过“文件”应用进行浏览。请使用“安装 SFTP”而非“连接”。"
+		"message": "Chrome 操作系统可通过 SFTP 装载文件系统，并通过“文件”应用进行浏览。请使用“装载 SFTP”而非“连接”。"
 	},
 	"tip_5": {
 		"message": "在网页中使用 ssh:// 链接进行连接，或者保存书签：https://goo.gl/zS8EZD"
@@ -513,7 +1125,7 @@
 		"message": "使用 OSC-52 从 emacs 或 vim 等编辑器中复制到剪贴板：https://goo.gl/XSnyLo"
 	},
 	"tip_8": {
-		"message": "通过 chromium-hterm@chromium.org 与其他 hterm/Secure Shell 用户聊天：https://goo.gl/RYHiK"
+		"message": "通过 chromium-hterm@chromium.org 与其他 hterm/SSH 用户聊天：https://goo.gl/RYHiK"
 	},
 	"tip_9": {
 		"message": "发现了错误？想请求新功能？请告诉我们：https://goo.gl/vb94JY"
@@ -528,10 +1140,10 @@
 		"message": "卸载 SFTP"
 	},
 	"welcome_changelog": {
-		"message": "ChangeLog/版本说明：$1"
+		"message": "更新日志/版本说明：$1"
 	},
 	"welcome_faq": {
-		"message": "常见问题解答：$1（按住 Ctrl 键的同时点击链接即可打开）"
+		"message": "常见问题解答：$1（在按住 Ctrl 键的同时点击链接即可打开）"
 	},
 	"welcome_release_highlights": {
 		"message": "自版本 $1 发布以来的重大变化："
@@ -542,7 +1154,10 @@
 	"welcome_version": {
 		"message": "欢迎使用$1（版本：$2）。"
 	},
+	"write_size_label": {
+		"message": "写入大小 (KiB)"
+	},
 	"zoom_warning": {
-		"message": "请转到 Chrome 菜单，并缩放至 100%"
+		"message": "请转到 Chrome 菜单，然后将“缩放”设为 100%"
 	}
 }

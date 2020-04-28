@@ -1,6 +1,6 @@
 {
 	"already_mounted_message": {
-		"message": "Bestandssysteem is al gekoppeld."
+		"message": "Bestandssysteem is al geactiveerd."
 	},
 	"backup_prefs": {
 		"message": "Back-up opslaan"
@@ -12,25 +12,19 @@
 		"message": "Als je dit tabblad sluit, wordt deze sessie beëindigd."
 	},
 	"cache_pin_prompt": {
-		"message": "De pincode voor deze sessie opslaan in het cachegeheugen? (J/N):"
+		"message": "De pincode voor deze SSH-sessie opslaan in het cachegeheugen? (J/N):"
 	},
 	"cancel_button_label": {
 		"message": "Annuleren"
 	},
+	"changelog": {
+		"message": "Wijzigingslogboek"
+	},
 	"clear_known_hosts_menu_label": {
 		"message": "Bekende SSH-hosts wissen"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "Met deze opdracht wordt een menu weergegeven met bekende hosts en prompts die de host moet vergeten."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Een bekende SSH-host vergeten."
-	},
-	"cmd_ssh_help": {
-		"message": "De parameters |username| en |hostname| zijn vereist en |port| is optioneel. Als de poort niet wordt opgegeven, wordt standaard poort 22 gebruikt."
-	},
-	"cmd_ssh_title": {
-		"message": "Een nieuwe SSH-sessie openen."
+	"clear_label": {
+		"message": "Wissen"
 	},
 	"command_complete": {
 		"message": "De opdracht $1 is afgesloten met statuscode $2."
@@ -48,7 +42,7 @@
 		"message": "Een andere verbinding kiezen (C) of afsluiten (X)?"
 	},
 	"connecting": {
-		"message": "Verbinding maken met $1..."
+		"message": "Verbinding maken met $1…"
 	},
 	"connection_dialog_name": {
 		"message": "Dialoogvenster Verbinding"
@@ -90,7 +84,7 @@
 		"message": "hostnaam"
 	},
 	"field_mount_path_placeholder": {
-		"message": "het standaardpad is de home-map van de gebruiker"
+		"message": "het standaardpad is de homedirectory van de gebruiker"
 	},
 	"field_nassh_options_aria_label": {
 		"message": "Opties voor SSH-relayserver"
@@ -141,7 +135,217 @@
 		"message": "Laden van $1 is mislukt"
 	},
 	"hterm_loading_resource_start": {
-		"message": "$1 laden..."
+		"message": "$1 laden…"
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Weergave van inline-afbeeldingen toestaan"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "AltGr-toetsmodus"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Alt-toets verwerken als Meta-toets"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Verwerking van Alt-functietoets"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Belgeluid voor waarschuwingen (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Achtergrondkleur"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Achtergrondafbeelding"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Positie van achtergrondafbeelding"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Formaat achtergrondafbeelding"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Gedrag van Backspace-toets"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Overschrijving van speciale tekens"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Tekstselectie automatisch wissen"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Venster sluiten bij afsluiten"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Oorspronkelijk kleurenpalet"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Geselecteerde content automatisch kopiëren"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Gedrag voor kopiëren via Ctrl + C"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Gedrag voor zoomen via Ctrl + +/-/0"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Gedrag voor plakken met Ctrl+V"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Cursor knipperen"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Knippersnelheid van cursor"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Kleur van tekstcursor"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Vorm van tekstcursor"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Bureaubladmeldingen maken voor waarschuwingsbelgeluiden"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Ambigue Oost-Aziatische tekens gebruiken twee kolommen"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Niet-UTF-8 C1 stuurcodes ondersteunen"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Knipperende tekst inschakelen"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Gedrag voor vetgedrukte tekst"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Heldere kleuren met vetgedrukte tekst gebruiken"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Een melding weergeven tijdens het kopiëren van content"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Schrijven naar extern klembord toestaan"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Wissen van buffer voor terug scrollen toestaan (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Wijzigen van tekstcursor knipperen wijzigen"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Afmetingen van terminal weergeven als de grootte wordt gewijzigd"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Omgevingsvariabelen"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Lettertypefamilie"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Tekengrootte"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Lettertype-afvlakking"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Tekstkleur"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Muiscursor verbergen tijdens het typen"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Gedrag voor scrollen met de toets Home/End"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Toetsenbordbindingen/sneltoetsen"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Standaard OS-toetsenbordbindingen/sneltoetsen gebruiken"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Mediatoetsen zijn functietoetsen"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Verwerking van Meta-functietoets"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Muisknop voor plakken"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Content plakken met de rechtermuisknop"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Gedrag voor scrollen met de toets Page Up/Down"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Gedrag voor tabblad schakelen via Alt + 1..9"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Gedrag voor nieuw venster via Ctrl + N"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Gedrag voor tabblad schakelen via Ctrl + 1..9"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Gedrag voor nieuw tabblad via Ctrl + T"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Gedrag voor schakelen tussen tabbladen via Ctrl + Tab"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Gedrag voor tabblad sluiten via Ctrl + W"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Gedrag voor tabblad schakelen via Meta + 1..9"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Gedrag voor plakken via Meta + V"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Slepen en neerzetten gebruiken om te plakken"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Codering ontvangen"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Omlaag scrollen na toetsaanslag"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Omlaag scrollen na nieuwe uitvoer"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Pijltoetsen emuleren met scrollwiel"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Multiplier voor muisscrollwiel"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Zichtbaarheid van scrollbalk"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Plakken met Shift + Insert"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Terminalcodering"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Hiermee kan de browser tekst kopiëren"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "Aangepaste css (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "Aangepaste css (inline-tekst)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Automatische selectie stopzetten (naar links)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Tekens voor woordafbreking"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Automatische selectie stopzetten (naar rechts)"
 	},
 	"hterm_popup_inline_image": {
 		"message": "Inline afbeeldingen"
@@ -153,7 +357,7 @@
 		"message": "Hiermee wordt bepaald of de externe host afbeeldingen mag bekijken in de terminal.\n\nStandaard vragen we hiernaar totdat een keuze wordt gemaakt."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Als deze optie wordt ingesteld, wordt de toewijzing van Alt + Backspace->DEL in Chrome OS ongedaan gemaakt, zodat Alt + Backspace daadwerkelijk Alt +Backspace is."
+		"message": "Als deze optie is ingesteld, wordt de toewijzing van Alt + Backspace->Delete in Chrome OS ongedaan gemaakt, zodat Alt + Backspace daadwerkelijk Alt + Backspace is."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Selecteer een AltGr-detectieheuristiek.\n\n'null': automatische detectie op basis van navigator.language:\n      'en-us' => 'none', anders => 'right-alt'\n'none': schakelt schadelijke wijzigingen voor AltGr uit.\n'ctrl-alt': veronderstelt dat Ctrl + Alt eigenlijk AltGr betekent.\n'left-alt': veronderstelt dat de linker-Alt eigenlijk AltGr betekent.\n'right-alt': veronderstelt dat de rechter-Alt eigenlijk AltGr betekent."
@@ -162,7 +366,7 @@
 		"message": "Hiermee kun je instellen of de Alt-toets als Meta-toets of specifiek als Alt-toets fungeert."
 	},
 	"hterm_pref_alt_sends_what": {
-		"message": "Hiermee wordt de functie van de Alt-toets bepaald.\n\n  escape: een ESC-voorvoegsel verzenden.\n  8-bit: 128 aan het teken toevoegen zonder Shift, zoals in xterm.\nbrowser-key: Wachten tot een toets wordt ingedrukt om te zien wat de browser doet. (Dit werkt niet goed op platforms waarin de browser een standaardactie uitvoert bij bepaalde Alt-toetscombinaties.)"
+		"message": "Hiermee wordt de functie van de Alt-toets bepaald.\n\n  escape: een ESC-voorvoegsel sturen.\n  8-bit: 128 aan het teken toevoegen zonder Shift, zoals in xterm.\nbrowser-key: Wachten tot een toets wordt ingedrukt om te zien wat de browser doet. (Dit werkt niet goed op platforms waarin de browser een standaardactie uitvoert bij bepaalde Alt-toetscombinaties.)"
 	},
 	"hterm_pref_audible_bell_sound": {
 		"message": "De URL van het geluid van de terminalbel. Een lege tekenreeks betekent dat er geen hoorbare bel is."
@@ -171,19 +375,19 @@
 		"message": "De achtergrondkleur voor tekst zonder andere kleurkenmerken."
 	},
 	"hterm_pref_background_image": {
-		"message": "CSS-waarde van de achtergrondafbeelding. Een lege tekenreeks betekent dat er geen afbeelding is.\n\nBijvoorbeeld:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Css-waarde van de achtergrondafbeelding. Een lege tekenreeks betekent dat er geen afbeelding is.\n\nBijvoorbeeld:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
-		"message": "CSS-waarde van de positie van de achtergrondafbeelding.\n\nBijvoorbeeld:\n  10% 10%\n  center"
+		"message": "Css-waarde van de positie van de achtergrondafbeelding.\n\nBijvoorbeeld:\n  10% 10%\n  center"
 	},
 	"hterm_pref_background_size": {
-		"message": "CSS-waarde van de grootte van de achtergrondafbeelding."
+		"message": "Css-waarde van de grootte van de achtergrondafbeelding."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Als je 'true' hebt ingesteld, verzendt Backspace-toets BS ('\\x08', aka ^H). Anders verzendt de Backspace-toets '\\x7f'."
+		"message": "Als 'true' is ingesteld, stuurt de Backspace-toets BS ('\\x08', aka ^H). Anders stuurt de Backspace-toets '\\x7f'."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "Dit is gespecificeerd als een object. Het is een ijle matrix waarbij elke eigenschap de tekensetcode is en de waarde een object is dat zelf ook een ijle matrix is. In die ijle matrix is elke eigenschap het ontvangen teken en is de waarde het weergegeven teken.\n\nBijvoorbeeld:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "Dit is gespecificeerd als een object. Het is een ijle matrix waarbij elke eigenschap de tekensetcode is en de waarde een object is dat zelf ook een ijle matrix is. In die ijle matrix is elke eigenschap het ontvangen teken en is de waarde het weergegeven teken.\n\nBijvoorbeeld:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "Bepaalt of de selectie moet worden gewist nadat deze is gekopieerd."
@@ -192,19 +396,19 @@
 		"message": "Hiermee bepaal je of het venster wordt gesloten zodra de opdracht is uitgevoerd."
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "De kleuren in het standaardpalet overschrijven.\n\nDit kan worden opgegeven als een matrix of als een object. Als het wordt opgegeven als een object, wordt verondersteld dat het een ijle matrix is, waarbij elke eigenschap een numerieke index in het kleurenpalet is.\n\nWaarden kunnen worden opgegeven als vrijwel elke CSS-kleurwaarde. Dit omvat #RGB, #RRGGBB, rgb(...), rgba(...) en alle kleurnamen die ook deel uitmaken van het standaard X11 rgb.txt-bestand.\n\nMet 'null' kun je opgeven dat de standaardwaarde niet moet worden gewijzigd. Dit is handig om een klein aantal indices over te slaan wanneer de waarde is opgegeven als een matrix.\n\nAls bijvoorbeeld beide onderstaande waarden worden opgegeven, wordt 1 blauw weergegeven:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "De kleuren in het standaardpalet overschrijven.\n\nDit kan worden opgegeven als een matrix of als een object. Als het wordt opgegeven als een object, wordt verondersteld dat het een ijle matrix is, waarbij elke eigenschap een numerieke index in het kleurenpalet is.\n\nWaarden kunnen worden opgegeven als vrijwel elke css-kleurwaarde. Dit omvat #RGB, #RRGGBB, rgb(...), rgba(...) en alle kleurnamen die ook deel uitmaken van het standaard X11 rgb.txt-bestand.\n\nMet 'null' kun je opgeven dat de standaardwaarde niet moet worden gewijzigd. Dit is handig om een klein aantal indices over te slaan als de waarde is opgegeven als een matrix.\n\nAls bijvoorbeeld beide onderstaande waarden worden opgegeven, wordt 1 blauw weergegeven:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
 		"message": "Kopieert de selectie van de muis automatisch naar het klembord."
 	},
 	"hterm_pref_ctrl_c_copy": {
-		"message": "Ctrl+C kopieert indien 'waar' (true), en verzendt ^C naar host indien 'onwaar' (false).\nCtrl+Shift+C verzendt ^C naar host indien 'waar' (true), en kopieert indien 'onwaar' (false)."
+		"message": "Ctrl+C kopieert als 'true' is ingesteld en stuurt ^C naar de host als 'false' is ingesteld.\nCtrl+Shift+C stuurt ^C naar de host als 'true' is ingesteld en kopieert als 'false' is ingesteld."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Als 'true' is ingesteld voor deze voorkeur, wordt met Ctrl + plus/min/nul de zoomfactor bediend.\nAls 'false' is ingesteld, wordt met Ctrl + Shift +plus/min/nul de zoomfactor bediend en wordt met Ctrl + min ^_ verzonden en gebeurt er niks met Ctrl + plus/nul."
+		"message": "Als 'true' is ingesteld, wordt met Ctrl + plus/min/nul de zoomfactor bediend.\nAls 'false' is ingesteld, wordt met Ctrl + Shift + plus/min/nul de zoomfactor bediend, wordt met Ctrl + min ^_ gestuurd en gebeurt er niks met Ctrl + plus/nul."
 	},
 	"hterm_pref_ctrl_v_paste": {
-		"message": "Ctrl+V plakt indien 'waar' (true), en verzendt ^V naar host indien 'onwaar' (false).\nCtrl+Shift+V verzendt ^V naar host indien 'waar' (true), en plakt indien 'onwaar' (false)."
+		"message": "Ctrl+V plakt als 'true' is ingesteld en stuurt ^V naar de host als 'false' is ingesteld.\nCtrl+Shift+V stuurt ^V naar de host als 'true' is ingesteld en plakt als 'false' is ingesteld."
 	},
 	"hterm_pref_cursor_blink": {
 		"message": "Hiermee wordt bepaald of de tekstcursor standaard knippert. Dit kan tijdens runtime via terminal-escapereeksen in en uit worden geschakeld."
@@ -214,6 +418,9 @@
 	},
 	"hterm_pref_cursor_color": {
 		"message": "De kleur van de zichtbare tekstcursor."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "De vorm van de zichtbare tekstcursor. Je kunt deze tijdens runtime via terminal-escapereeksen wijzigen."
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Als 'true' is ingesteld voor deze voorkeur, wordt bij terminalbellen op de achtergrond een webmelding gegenereerd. https://www.w3.org/TR/notifications/\n\nDe gebruiker moet toestemming geven voor de weergave van meldingen. Als deze optie is ingesteld op 'true', probeert hterm de gebruiker indien nodig om toestemming te vragen. Browsers laten dit verzoek om toestemming mogelijk niet zien als het niet het gevolg is van een actie van de gebruiker.\n\nChrome-extensies met een machtiging voor meldingen hebben toestemming om meldingen weer te geven."
@@ -234,13 +441,19 @@
 		"message": "Als 'true' is ingesteld, worden er heldere kleuren gebruikt (acht tot vijftien in een palet met zestien kleuren) voor alle tekst met het kenmerk vet. Anders 'false'."
 	},
 	"hterm_pref_enable_clipboard_notice": {
-		"message": "Hiermee wordt bepaald of een bericht in de terminal moet worden weergegeven wanneer de host iets op het klembord zet."
+		"message": "Hiermee wordt bepaald of een bericht in de terminal moet worden weergegeven als de host iets op het klembord zet."
 	},
 	"hterm_pref_enable_clipboard_write": {
 		"message": "Staat de externe host toe rechtstreeks op het klembord van het lokale systeem te schrijven.\nLeestoegang wordt nooit verleend, ongeacht deze instelling.\n\nWordt gebruikt om toegang tot functies zoals OSC-52 te beheren."
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Hiermee bepaal je of de functie 'Opgeslagen regels wissen' (modus 3) van de opdracht 'Scherm wissen' (CSI-J) de buffer voor terminal terug scrollen mag wissen.\n\nHet is veilig om dit standaard in te schakelen."
+	},
 	"hterm_pref_enable_dec12": {
-		"message": "Geeft toestemming als de host probeert de knipperstatus van de tekstcursor te wijzigen via DEC Private Mode 12."
+		"message": "Geeft toestemming als de host probeert de knipperstatus van de tekstcursor te wijzigen via DEC privémodus 12."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Hiermee bepaal je of de afmetingen van de terminal moeten worden weergegeven als de grootte van de terminal wordt gewijzigd."
 	},
 	"hterm_pref_environment": {
 		"message": "De aanvankelijke omgevingsvariabelen, als een object."
@@ -252,7 +465,7 @@
 		"message": "De standaard lettergrootte in pixels."
 	},
 	"hterm_pref_font_smoothing": {
-		"message": "CSS-eigenschap voor lettertype-afvlakking."
+		"message": "Css-eigenschap voor lettertype-afvlakking."
 	},
 	"hterm_pref_foreground_color": {
 		"message": "De voorgrondkleur voor tekst zonder andere kleurkenmerken."
@@ -261,16 +474,19 @@
 		"message": "Of de muisaanwijzer automatisch moet worden verborgen wanneer je typt. Standaard wordt automatisch gedetecteerd of dit door het platform/OS wordt afgehandeld.\n\nOpmerking: Mogelijk wordt deze instelling door bepaalde besturingssystemen overschreven, waardoor je deze instelling niet altijd kunt uitschakelen."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Als 'true' is ingesteld, wordt met Home/End de scrollbalk van de terminal bediend en worden Shift + Home/Shift + End naar de externe host verzonden. Als 'false' is ingesteld, worden Home/End naar de externe host verzonden en wordt er met Shift + Home/Shift + End gescrolld."
+		"message": "Als 'true' is ingesteld, wordt met Home/End de scrollbalk van de terminal bediend en worden Shift + Home/Shift + End naar de externe host gestuurd. Als 'false' is ingesteld, worden Home/End naar de externe host gestuurd en wordt met Shift + Home/Shift + End gescrolld."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Een toetsencombinatie toewijzen aan toetsacties. Toetsencombinaties bestaan uit nul of meer functietoetsen gevolgd door een toetscode. Toetscodes kunnen bestaan uit decimale of hexadecimale getallen of een toets-ID. Een toetsactie kan een opgegeven tekenreeks zijn die wordt verzonden naar de host, of een actie-ID. Zie https://goo.gl/LWRndr voor een volledige uitleg van de indeling.\n\nVoorbeelden van sneltoetsen:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Een toetsencombinatie toewijzen aan toetsacties. Toetsencombinaties bestaan uit nul of meer functietoetsen gevolgd door een toetscode. Toetscodes kunnen bestaan uit decimale of hexadecimale getallen of een toets-ID. Een toetsactie kan een opgegeven tekenreeks zijn die naar de host wordt gestuurd, of een actie-ID. Zie https://goo.gl/LWRndr voor een volledige uitleg van de indeling.\n\nVoorbeelden van sneltoetsen:\n{\n  \"Ctrl + Alt + K\": \"clearTerminal\",\n  \"Ctrl + Shift + L\": \"PASS\",\n  \"Ctrl + H\": \"'Hello World'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Hiermee bepaal je of veelgebruikte OS-sneltoetsen moeten worden gerespecteerd of dat deze altijd voor hterm zelf moeten worden gebruikt."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
-		"message": "Als dit is ingesteld op 'True', worden mediatoetsen geconverteerd naar de equivalente functietoets. Als dit is ingesteld op 'False', wordt de functie van de toetsen door de browser bepaald."
+		"message": "Als dit is ingesteld op 'true', worden mediatoetsen geconverteerd naar de equivalente functietoets. Als dit is ingesteld op 'false', wordt de functie van de toetsen door de browser bepaald."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Hiermee verzend je een ESC-voorvoegsel als je een toets indrukt terwijl je de Meta+toets ingedrukt houdt.\n\nAls deze optie is ingeschakeld en je bijvoorbeeld op Meta + K drukt, wordt ^[k verzonden alsof je Escape en vervolgens k typt. Als de optie is uitgeschakeld, wordt alleen k verzonden."
+		"message": "Hiermee stuur je een ESC-voorvoegsel als je een toets indrukt terwijl je de Meta-toets ingedrukt houdt.\n\nAls deze optie is ingeschakeld en je bijvoorbeeld op Meta + K drukt, wordt ^[k gestuurd alsof je Escape en vervolgens k typt. Als de optie is uitgeschakeld, wordt alleen k gestuurd."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Plakken met muisknop of 'null' (leeg) voor automatische detectie.\n\nOp niet-X11-platforms (inclusief Chrome OS) gebruiken we de middelste muisknop voor automatisch detecteren. Op X11 gebruiken we de rechtermuisknop (aangezien in de systeemeigen functie voor vensterbeheer de plakbewerking wordt uitgevoerd met de middelste muisknop).\n\n0 == linkermuisknop (primair).\n1 == middelste knop (supplementair).\n2 == rechtermuisknop (secundair).\n\nDeze optie is onafhankelijk van de instelling voor plakken met de rechtermuisknop.\n\nOpmerking: Geschikt voor links- en rechtshandige muizen."
@@ -279,19 +495,34 @@
 		"message": "Plakken door op de rechtermuisknop te klikken.\n\nDe is onafhankelijk van de instelling mouse-paste-button.\n\nOpmerking: Geschikt voor links- en rechtshandige muizen."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Als 'true' is ingesteld, wordt met Page Up/Down de scrollbalk van de terminal beheerd en worden Shift + Page Up/Shift + Page Down naar de externe host verzonden. Als 'false' is ingesteld, worden Page Up/Page Down naar de externe host verzonden en wordt er met Shift + Page Up/Shift + Page Down gescrolld."
+		"message": "Als 'true' is ingesteld, wordt met Page Up/Down de scrollbalk van de terminal beheerd en worden Shift + Page Up/Shift + Page Down naar de externe host gestuurd. Als 'false' is ingesteld, worden Page Up/Page Down naar de externe host gestuurd en wordt met Shift + Page Up/Shift + Page Down gescrolld."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Hiermee kun je instellen of Alt + 1..9 moet worden doorgegeven aan de browser.\n\nDit is handig wanneer hterm wordt uitgevoerd in een browsertabblad, zodat de toetsenbordversnellers van Chrome voor 'Overschakelen naar tabblad' niet verloren gaan. Wanneer hterm niet wordt uitgevoerd op een tabblad, kun je deze toetsen het beste naar een host verzenden, zodat ze kunnen worden gebruikt in vim of emacs.\n\nAls 'true' is ingesteld, wordt Alt + 1..9 verwerkt door de browser. Als 'false' is ingesteld, wordt Alt + 1..9 verzonden naar de host. Als 'null' is ingesteld, wordt op basis van het browserplatform en het venstertype de functie voor automatisch detecteren uitgevoerd."
+		"message": "Hiermee bepaal je of Alt + 1..9 moet worden doorgegeven aan de browser.\n\nDit is handig als hterm wordt uitgevoerd in een browsertabblad, zodat de sneltoetsen van Chrome voor 'Overschakelen naar tabblad' niet verloren gaan. Als hterm niet wordt uitgevoerd in een tabblad, kun je deze toetsen het beste naar een host sturen, zodat ze kunnen worden gebruikt in vim of emacs.\n\nAls 'true' is ingesteld, wordt Alt + 1..9 verwerkt door de browser. Als 'false' is ingesteld, wordt Alt + 1..9 naar de host gestuurd. Als 'null' is ingesteld, wordt op basis van het browserplatform en het venstertype de functie voor automatisch detecteren uitgevoerd."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Hiermee bepaal je of Ctrl + N moet worden doorgegeven aan de browser.\n\nAls 'true' is ingesteld, wordt Ctrl + N door de browser als de sneltoetsen voor 'Nieuw tabblad' verwerkt. Als 'false' is ingesteld, wordt Ctrl + N naar de host gestuurd."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Hiermee kun je instellen of Ctrl + 1..9 moet worden doorgegeven aan de browser.\n\nDit is handig wanneer hterm wordt uitgevoerd in een browsertabblad, zodat de toetsenbordversnellers van Chrome voor 'Overschakelen naar tabblad' niet verloren gaan. Wanneer hterm niet wordt uitgevoerd op een tabblad, kun je deze toetsen het beste naar een host verzenden, zodat ze kunnen worden gebruikt in vim of emacs.\n\nAls 'true' is ingesteld, wordt Ctrl + 1..9 verwerkt door de browser. Als 'false' is ingesteld, wordt Ctrl + 1..9 verzonden naar de host. Als 'null' is ingesteld, wordt op basis van het browserplatform en het venstertype de functie voor automatisch detecteren uitgevoerd."
+		"message": "Hiermee bepaal je of Ctrl + 1..9 moet worden doorgegeven aan de browser.\n\nDit is handig als hterm wordt uitgevoerd in een browsertabblad, zodat de sneltoetsen van Chrome voor 'Overschakelen naar tabblad' niet verloren gaan. Als hterm niet wordt uitgevoerd in een tabblad, kun je deze toetsen het beste naar een host sturen, zodat ze kunnen worden gebruikt in vim of emacs.\n\nAls 'true' is ingesteld, wordt Ctrl + 1..9 verwerkt door de browser. Als 'false' is ingesteld, wordt Ctrl + 1..9 naar de host gestuurd. Als 'null' is ingesteld, wordt op basis van het browserplatform en het venstertype de functie voor automatisch detecteren uitgevoerd."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Hiermee bepaal je of Ctrl + T moet worden doorgegeven aan de browser.\n\nAls 'true' is ingesteld, wordt Ctrl + T door de browser als de sneltoets voor 'Nieuw tabblad' verwerkt. Als 'false' is ingesteld, wordt Ctrl + T naar de host gestuurd."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Hiermee bepaal je of Ctrl + Tab en Ctrl + Shift + Tab moeten worden doorgegeven aan de browser.\n\nAls 'true' is ingesteld, worden Ctrl + Tab en Ctrl + Shift + Tab door de browser als de sneltoetsen voor 'Volgend/vorig tabblad' verwerkt. Als 'false' is ingesteld, wordt de Tab-toets zonder Ctrl of Shift naar de host gestuurd."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Hiermee bepaal je of Ctrl + W moet worden doorgegeven aan de browser.\n\nAls 'true' is ingesteld, wordt Ctrl + W door de browser als de sneltoets voor 'Tabblad sluiten' verwerkt. Als 'false' is ingesteld, wordt Ctrl + W naar de host gestuurd."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Hiermee kunnen instellen of Meta + 1..9 moet worden doorgegeven aan de browser.\n\nDit is handig wanneer hterm wordt uitgevoerd in een browsertabblad, zodat de toetsenbordversnellers van Chrome voor 'Overschakelen naar tabblad' niet verloren gaan. Wanneer hterm niet wordt uitgevoerd in een tabblad, kun je deze toetsen het beste naar een host verzenden, zodat ze kunnen worden gebruikt in vim of emacs.\n\nAls 'true' is ingesteld, wordt Meta + 1..9 verwerkt door de browser. Als 'false' is ingesteld, wordt Meta + 1..9 verzonden naar de host. Als 'null' is ingesteld, wordt op basis van het browserplatform en het venstertype de functie voor automatisch detecteren uitgevoerd."
+		"message": "Hiermee bepaal je of Meta + 1..9 moet worden doorgegeven aan de browser.\n\nDit is handig als hterm wordt uitgevoerd in een browsertabblad, zodat de sneltoetsen van Chrome voor 'Overschakelen naar tabblad' niet verloren gaan. Als hterm niet wordt uitgevoerd in een tabblad, kun je deze toetsen het beste naar een host sturen, zodat ze kunnen worden gebruikt in vim of emacs.\n\nAls 'true' is ingesteld, wordt Meta + 1..9 verwerkt door de browser. Als 'false' is ingesteld, wordt Meta + 1..9 naar de host gestuurd. Als 'null' is ingesteld, wordt op basis van het browserplatform en het venstertype de functie voor automatisch detecteren uitgevoerd."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Hiermee kun je instellen of Meta + V wordt doorgegeven aan de host."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Als 'true' is ingesteld, wordt gesleepte en neergezette tekst in de terminal geplakt.\nAls 'false' is ingesteld, wordt neergezette tekst genegeerd."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Hiermee wordt verwachte codering ingesteld voor gegevens die worden ontvangen van de host.\nAls de coderingen niet overeenkomen, zie je waarschijnlijke visuele bugs.\n\nGeldige waarden zijn utf-8 en raw."
@@ -312,7 +543,7 @@
 		"message": "De verticale scrollbalkmodus."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Of Shift + Insert wordt gebruikt om te plakken of wordt verzonden naar de externe host."
+		"message": "Hiermee bepaal je of Shift + Insert wordt gebruikt om te plakken of naar de externe host wordt gestuurd."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "De standaard terminalcodering (DOCS).\n\nMet ISO-2022 kunnen speciale tekens worden omgezet (zoals het toewijzen van afbeeldingen).\nUTF-8 biedt hier geen ondersteuning voor.\n\nMet de vergrendelde variant kan de codering niet tijdens runtime via terminalescapereeksen worden gewijzigd.\n\nGebruik UTF-8, tenzij er problemen optreden met de weergave van verouderde toepassingen."
@@ -324,7 +555,7 @@
 		"message": "URL van de stylesheet van de gebruiker die moet worden opgenomen in het terminaldocument."
 	},
 	"hterm_pref_user_css_text": {
-		"message": "Aangepaste CSS-tekst voor de vormgeving van de terminal."
+		"message": "Aangepaste css-tekst voor de vormgeving van de terminal."
 	},
 	"hterm_pref_word_break_match_left": {
 		"message": "Reguliere expressie om geen overeenkomsten links (begin) van een selectie te zoeken.\n\nDoorgaans is dit een tekenklasse om bepaalde tekens uit te sluiten.\nDe tekens ~ en . zijn standaard toegestaan, aangezien deze tekens vaak aan het begin van paden staan."
@@ -354,7 +585,7 @@
 		"message": "Toetsenbord"
 	},
 	"hterm_title_pref_miscellaneous": {
-		"message": "Overig"
+		"message": "Diversen"
 	},
 	"hterm_title_pref_scrolling": {
 		"message": "Scrollen"
@@ -369,13 +600,13 @@
 		"message": "bestand importeren"
 	},
 	"import_link_label": {
-		"message": "Importeren..."
+		"message": "Importeren…"
 	},
 	"initializing_relay": {
 		"message": "Relayserver opzoeken met: $1"
 	},
 	"json_parse_error": {
-		"message": "Kan JSON in '$1' niet parseren: $2"
+		"message": "Kan json in '$1' niet parseren: $2"
 	},
 	"known_hosts_empty": {
 		"message": "Geen bekende hosts, niets te vergeten."
@@ -386,23 +617,200 @@
 	"known_hosts_title": {
 		"message": "Bekende hosts:"
 	},
+	"licenses": {
+		"message": "Licenties"
+	},
+	"licenses_expand_link": {
+		"message": "licentie weergeven"
+	},
+	"licenses_title": {
+		"message": "Opensource-licenties"
+	},
 	"loading_label": {
-		"message": "Bezig met laden..."
+		"message": "Laden…"
+	},
+	"migrate_to_ext": {
+		"message": "Kennisgeving: Migreer naar de Secure Shell-extensie ($1).\nChrome-apps zijn verouderd, dus deze versie ontvangt geen updates meer.\nLees de migratiehandleiding ($2) voor meer informatie."
 	},
 	"missing_param": {
 		"message": "Ontbrekende parameter: $1"
 	},
 	"mount_button_label": {
-		"message": "SFTP koppelen"
+		"message": "SFTP activeren"
 	},
 	"mount_path_label": {
 		"message": "Activeringspad"
 	},
 	"mounted_message": {
-		"message": "Gekoppeld."
+		"message": "Geactiveerd."
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "Een bestand naar de terminal dumpen"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Werkdirectory wijzigen"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Groep paden wijzigen"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "De rechten voor paden wijzigen"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Eigenaar van paden wijzigen"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Het huidige terminalscherm wissen."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Een bestand naar het klembord kopiëren (standaard: 10 MiB bij aanvang)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "$1 bytes naar het klembord gekopieerd"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Kleurgebruik in- en uitschakelen"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Bron kopiëren naar bestemming"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Bestanden verwijderen"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Schijfstatistieken weergeven"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Pad: $1\n  fsid: $2\n Totaal: $3\n  Gebruikt: $4 ($5%)\n Beschikbaar: $6 (voor gebruikers zonder rechten)\n $7 (voor root)"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Verbinding verbreken"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Bestand downloaden: $1 als $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Bestanden downloaden"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Dit hulpscherm"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Details van directory weergeven"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Een link voor het pad maken dat naar de bestemming verwijst"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Directory's maken"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "De naam van een bestand wijzigen"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Tekenreeks voor prompt instellen"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Bestanden uploaden"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Bestand uploaden: $1 als $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Huidige werkdirectory weergeven"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Externe werkdirectory: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Symbolische links lezen"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Canonieke paden gebruiken"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Het uploaden van bestanden hervatten"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Bestanden verwijderen"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Lege directory's verwijderen"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Bestanden inline weergeven"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Extensies:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Bestandsstatus weergeven"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Bestand: $1\n  Grootte: $2 bytes\n   UID: $3\n   GID: $4\nToegang: $5\n atime: $6\n mtime: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Een symbolische link voor het pad maken dat naar de bestemming verwijst"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Paden afkappen tot 0 bytes"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  serverextensies:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Huidige protocolversie weergeven"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Versie-info SFTP-protocol:\n  lokaal: $1\n  server: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: einde van bestand"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: bestand niet gevonden."
+	},
+	"nasftp_error_file_reading": {
+		"message": "Lezen van $1 is mislukt: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Onverwerkte interne fout; dien een bug in: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: ongeldig getal: $3"
+	},
+	"nasftp_error_message": {
+		"message": "FOUT: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: extensie '$2' niet beschikbaar"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: geen regulier bestand"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: onvoldoende argumenten"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: rechten geweigerd"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: te veel argumenten"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: onbekende opdracht"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: onbekende markering $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Geforceerd sluiten"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 bytes overgedragen in $2 seconden ($3/s)"
 	},
 	"nassh_options_error": {
-		"message": "Onbekende relayoptie: $1"
+		"message": "Onbekende optie: $1"
 	},
 	"nassh_product_name": {
 		"message": "Secure Shell"
@@ -420,13 +828,13 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Verbinding maken met een opgeslagen profiel of een nieuw SSH-systeem"
 	},
 	"open_as_window_tip": {
-		"message": "[Pro-tip] Gebruik 'Openen als venster' of 'Volledig scherm' om te voorkomen dat de terminal wordt gesloten met Ctrl + W.\n[Pro Tip] Zie $1 voor meer informatie."
+		"message": "[Pro-tip] Gebruik 'Openen als venster' of 'Volledig scherm' om te voorkomen dat de terminal wordt gesloten met Ctrl + W.\n[Pro-tip] Zie $1 voor meer informatie."
 	},
 	"options_button_label": {
 		"message": "Opties"
 	},
 	"plugin_loading": {
-		"message": "NaCl-plug-in laden..."
+		"message": "NaCl-plug-in laden…"
 	},
 	"plugin_loading_complete": {
 		"message": " gereed."
@@ -434,14 +842,44 @@
 	"plugin_loading_failed": {
 		"message": " Mislukt"
 	},
+	"popup_connect_tooltip": {
+		"message": "Houd Ctrl ingedrukt om te openen in een nieuw tabblad."
+	},
 	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
+		"message": "Backup voorkeuren Secure Shell.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "SSH-bestanden"
 	},
 	"preferences_header_terminal": {
-		"message": "Profielinstellingen"
+		"message": "Terminalinstellingen"
+	},
+	"preferences_header_uri": {
+		"message": "URI-handlers"
 	},
 	"preferences_reset": {
 		"message": "Alle voorkeuren zijn gereset."
+	},
+	"protocol_register_button": {
+		"message": "Protocolhandlers registreren"
+	},
+	"protocol_register_explain": {
+		"message": "Met de onderstaande knop wordt geprobeerd handlers te registreren voor alle protocollen die we ondersteunen. Hiermee kunnen we ssh://-links bijvoorbeeld rechtstreeks verwerken. Voor elk protocol wordt door de browser een prompt weergegeven, dus je moet elke prompt die wordt weergegeven bevestigen/accepteren. Als er geen prompts worden weergegeven, bekijk je het volgende gedeelte voor tips om problemen op te lossen."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Als er al geregistreerde handlers zijn, of als eerdere registratiepogingen zijn geweigerd, worden er verder geen prompts meer weergegeven. Open het onderstaande dialoogvenster en check de instellingen van de geregistreerde handler in de gedeelten ssh/sftp/etc... Als dit programma is geblokkeerd, kun je die instellingen verwijderen zodat je opnieuw kunt proberen te registreren. Als dit programma al is geregistreerd, maar niet is ingesteld als de standaardhandler, kun je de standaardhandler ook wijzigen."
+	},
+	"protocol_register_options_link": {
+		"message": "Protocolregister"
+	},
+	"protocol_register_settings_button": {
+		"message": "Instellingen van geregistreerde handlers openen"
+	},
+	"protocol_register_title": {
+		"message": "Registratiehelper voor Secure Shell-protocolhandler"
+	},
+	"read_size_label": {
+		"message": "Grootte voor lezen (KiB)"
 	},
 	"reconnect_message": {
 		"message": "Opnieuw verbinden (R), een andere verbinding kiezen (C) of afsluiten (X)?"
@@ -450,10 +888,13 @@
 		"message": "Opnieuw proberen…"
 	},
 	"request_pin_prompt": {
-		"message": "Voer een pincode in om de $1 voor de sleutel van de $2 te ontgrendelen ($3 pogingen resterend):"
+		"message": "Voer de pincode in om de toets $1 voor '$2 ($3)' te ontgrendelen ($4 pogingen resterend):"
 	},
 	"restore_prefs": {
 		"message": "Back-up terugzetten"
+	},
+	"save_label": {
+		"message": "Opslaan"
 	},
 	"shortcut_list_aria_label": {
 		"message": "opgeslagen verbindingen"
@@ -464,8 +905,41 @@
 	"ssh_argstr_label": {
 		"message": "SSH-argumenten"
 	},
+	"stream_open_error": {
+		"message": "Openen van stream $1 is mislukt: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "Terminal wissen"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI-kleuren"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Bel"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Knipperen"
+	},
+	"terminal_name_pref_color": {
+		"message": "Kleur"
+	},
+	"terminal_name_pref_font": {
+		"message": "Lettertype"
+	},
+	"terminal_name_pref_image": {
+		"message": "Afbeelding"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Vorm"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Zichtbaar"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Kleuren instellen voor het standaard kleurenpalet."
+	},
+	"terminal_pref_bell": {
+		"message": "Hoorbare terminalbel."
 	},
 	"terminal_preview_label": {
 		"message": "Voorbeeld"
@@ -476,11 +950,134 @@
 	"terminal_reset_menu_label": {
 		"message": "Terminal resetten"
 	},
+	"terminal_settings_background_image_help": {
+		"message": "URL achtergrondafbeelding. Moet beginnen met http:// of https://. Een lege tekenreeks betekent dat er geen afbeelding is.\n\nBijvoorbeeld:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Automatisch"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Uitschakelen"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Balk"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Blokkeren"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Onderstrepen"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Weet je zeker dat je de standaardinstellingen van het thema wilt herstellen?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Thema resetten"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Resetten"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Klassieke versie"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Donker"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Nevelig"
+	},
+	"terminal_theme_light_label": {
+		"message": "Licht"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized donker"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized licht"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Kleur 0: Zwart"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Kleur 1: Rood"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Kleur 10: Heldergroen"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Kleur 11: Heldergeel"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Kleur 12: Helderblauw"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Kleur 13: Helder magenta"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Kleur 14: Helder cyaan"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Kleur 15: Helder wit"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Kleur 2: Groen"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Kleur 3: Geel"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Kleur 4: Blauw"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Kleur 5: Magenta"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Kleur 6: Cyaan"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Kleur 7: Wit"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Kleur 8: Helder zwart"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Kleur 9: Helderrood"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Uiterlijk"
+	},
+	"terminal_title_pref_background": {
+		"message": "Achtergrond"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Gedrag"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Toetsenbord"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Toetsenbord en muis"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Muis"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Scrollbalk"
+	},
+	"terminal_title_pref_text": {
+		"message": "Tekst"
+	},
+	"terminal_title_settings": {
+		"message": "Instellingen"
+	},
+	"terminal_title_theme": {
+		"message": "Thema"
+	},
 	"tip_1": {
 		"message": "Je kunt Ctrl (Cmd op macOS) ingedrukt houden terwijl je op links klikt om ze te openen."
 	},
 	"tip_10": {
-		"message": "Wanneer de pagina wordt uitgevoerd in een (incognito)venster, kun je met Ctrl+Shift+N nog een sessie openen."
+		"message": "Als de pagina in een venster wordt uitgevoerd, kun je met Ctrl + Shift + N nog een sessie openen."
 	},
 	"tip_11": {
 		"message": "Je kunt de functionaliteit van toetsen/sneltoetsen aanpassen: https://goo.gl/LWRndr"
@@ -501,10 +1098,10 @@
 		"message": "Maak verbinding vanuit de omnibox door 'ssh <profile name>' te typen: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS kan bestandssystemen activeren via SFTP en browsen via de app Bestanden. Gebruik 'SFTP koppelen' in plaats van 'Verbinden'."
+		"message": "Chrome OS kan bestandssystemen activeren via SFTP en browsen via de app Bestanden. Gebruik 'SFTP activeren' in plaats van 'Verbinden'."
 	},
 	"tip_5": {
-		"message": "Maak verbinding via ssh://-links op webpagina's of sla een bladwijzer op: https://goo.gl/zS8EZD"
+		"message": "Maak verbinding via ssh://-links op webpagina's of sla een bookmark op: https://goo.gl/zS8EZD"
 	},
 	"tip_6": {
 		"message": "Geef je uitvoer/prompt een kleur met de standaard 16 kleuren en 256 kleuren en volledige 24-bits kleuren: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
@@ -525,13 +1122,13 @@
 		"message": "Onbekende SSH-versie: $1"
 	},
 	"unmount_button_label": {
-		"message": "SFTP ontkoppelen"
+		"message": "SFTP deactiveren"
 	},
 	"welcome_changelog": {
 		"message": "ChangeLog/release-opmerkingen: $1"
 	},
 	"welcome_faq": {
-		"message": "Antwoorden op veelgestelde vragen: $1 (Ctrl+klik op links om ze te openen)"
+		"message": "Antwoorden op veelgestelde vragen: $1 (Ctrl + klik op links om ze te openen)"
 	},
 	"welcome_release_highlights": {
 		"message": "Grote wijzigingen sinds $1:"
@@ -541,6 +1138,9 @@
 	},
 	"welcome_version": {
 		"message": "Welkom bij $1-versie $2."
+	},
+	"write_size_label": {
+		"message": "Grootte voor schrijven (KiB)"
 	},
 	"zoom_warning": {
 		"message": "Stel Chrome-menu -> Zoom in op 100%"

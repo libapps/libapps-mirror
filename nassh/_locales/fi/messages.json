@@ -6,40 +6,34 @@
 		"message": "Tallenna varmuuskopio"
 	},
 	"bad_destination": {
-		"message": "Kohteen $1 jäsentäminen epäonnistui."
+		"message": "Kohdetta ei voitu jäsentää: $1"
 	},
 	"before_unload": {
 		"message": "Jos suljet tämän välilehden, käyttökerta päättyy."
 	},
 	"cache_pin_prompt": {
-		"message": "Tallennetaanko PIN-koodi käyttökerran välimuistiin? (y/N):"
+		"message": "Tallennetaanko tämän SSH-käyttökerran PIN-koodi välimuistiin? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "Peruuta"
 	},
+	"changelog": {
+		"message": "Muutosloki"
+	},
 	"clear_known_hosts_menu_label": {
-		"message": "Tyhjennä SSH known_hosts"
+		"message": "Tyhjennä tunnetut SSH-isännät"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "Tämä komento näyttää tunnettujen isäntien luettelon ja kysyy unohtamista isännältä."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Unohda tunnettu ssh-isäntä."
-	},
-	"cmd_ssh_help": {
-		"message": "|username|- ja |hostname|-parametrit ovat pakollisia, |port| on valinnainen. Jos porttia ei ole määritetty, käytetään oletusporttia 22."
-	},
-	"cmd_ssh_title": {
-		"message": "Avaa uuden SSH-istunnon."
+	"clear_label": {
+		"message": "Tyhjennä"
 	},
 	"command_complete": {
-		"message": "Komento $1 suoritettu, tilakoodi $2"
+		"message": "Komento $1 suoritettu loppuun, tilakoodi $2"
 	},
 	"command_not_supported": {
 		"message": "$1 ei ole tämän Chrome-version tukema"
 	},
 	"command_startup_failed": {
-		"message": "Komennon $1 käynnistys epäonnistui: $2"
+		"message": "Komento $1 epäonnistui: $2"
 	},
 	"connect_button_label": {
 		"message": "Yhdistä"
@@ -48,7 +42,7 @@
 		"message": "Haluatko valita toisen yhteystavan (c) vai poistua (x)?"
 	},
 	"connecting": {
-		"message": "Yhdistetään kohteeseen $1…"
+		"message": "Palvelin $1 yhdistetään…"
 	},
 	"connection_dialog_name": {
 		"message": "Yhteyden valintaikkuna"
@@ -75,7 +69,7 @@
 		"message": "Usein kysyttyä"
 	},
 	"field_argstr_placeholder": {
-		"message": "muut komentoriviargumentit"
+		"message": "muut komentorivin argumentit"
 	},
 	"field_description_aria_label": {
 		"message": "kuvaus"
@@ -141,7 +135,220 @@
 		"message": "Lataus epäonnistui: $1"
 	},
 	"hterm_loading_resource_start": {
-		"message": "Ladataan $1…"
+		"message": "$1 ladataan…"
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Salli upotettujen kuvien näyttäminen"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Askelpalautin on Meta+Askelpalautin"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "AltGr-näppäintila"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Kohtele Alt-näppäintä Meta-näppäimenä"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Alt-näppäimen muokkauksen käsittely"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Hälytyskellon ääni (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Taustaväri"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Taustakuva"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Taustakuvan sijainti"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Taustakuvan koko"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Askelpalauttaminen käyttäytyminen"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Merkkikartan ohitukset"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Poista automaattisesti valittu teksti"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Sulje ikkuna poistuttaessa"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Alkuperäinen väripaletti"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Kopioi valittu sisältö automaattisesti"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Ctrl+C: kopioimiskäyttäytyminen"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ctrl++/-/0: zoomauskäyttäytyminen"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Ctrl+V: liittämiskäyttäytyminen"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Vilkkuva osoitin"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Osoittimen vilkkumisnopeus"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Tekstin osoittimen väri"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Tekstin osoittimen muoto"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Luo työpöytäilmoituksia hälytyskelloille"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Itäaasialaiset erikoismerkit käyttävät kahta saraketta"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Tue muita kuin UTF-8 C1 ‑ohjausmerkkejä"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Ota käyttöön vilkkuva teksti"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Lihavoidun tekstin käyttäytyminen"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Käytä kirkkaita värejä lihavoidun tekstin kanssa"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Näytä ilmoitus kopioitaessa sisältöä"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Salli etäleikepöydälle kirjoittaminen"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Salli taaksepäin vierittämisen puskurin tyhjennys (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Salli tekstiosoittimen vilkkumisen muutokset"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Näytä terminaalin mitat, kun sen kokoa muutetaan"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Ympäristömuuttujat"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Tekstin fonttiperhe"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Tekstin fonttikoko"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Tekstin fontin tasoittaminen"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Tekstin väri"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Piilota hiiren osoitin kirjoittaessa"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Home/End-näppäimen vierityskäyttäytyminen"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Sidotut näppäimet / pikanäppäimet"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Käytä oletusarvoisia käyttöjärjestelmän sidontoja/pikanäppäimiä"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Medianäppäimet ovat F-näppäimiä"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Meta-näppäimen muokkauksen käsittely"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Hiiripainike: liitä"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Hiiren kakkospainikkeen klikkaus: liitä sisältö"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Page Up/Down ‑näppäimen vierityskäyttäytyminen"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Alt+1–9: välilehden vaihtamiskäyttäytyminen"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Ctrl+N: uuden ikkunan käyttäytyminen"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Ctrl+1–9: välilehden vaihtamiskäyttäytyminen"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ctrl+T: uuden välilehden käyttäytyminen"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab: välilehden vaihtokäyttäytyminen"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Ctrl+W: välilehden sulkemiskäyttäytyminen"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Meta+1–9: välilehden vaihtamiskäyttäytyminen"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Meta+V: liittämiskäyttäytyminen"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Salli liittäminen vetämällä ja pudottamalla"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Vastaanota merkkijärjestelmä"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Vieritä alareunaan näppäinpainalluksen jälkeen"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Vieritä alareunaan uuden lisäyksen jälkeen"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Emuloi nuolinäppäimiä vieritysrullalla"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Hiiren vieritysrullan kerroin"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Vierityspalkin näkyvyys"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Vaihto+Insert: liitä"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Terminaalin merkkijärjestelmä"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Anna selaimen käsitellä tekstin kopiointi"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "Oma CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "Oma CSS (tekstirivillä)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Automaattinen valinnan pysäytys (vasemmalle)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Sanavälien merkit"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Automaattinen valinnan pysäytys (oikealle)"
 	},
 	"hterm_popup_inline_image": {
 		"message": "Upotetut kuvat"
@@ -150,10 +357,10 @@
 		"message": "Upotetut kuvat estetty"
 	},
 	"hterm_pref_allow_images_inline": {
-		"message": "Määritä, sallitaanko etäisännän näyttää kuvia terminaalissa.\n\nOletuksena lähetämme kehotteita, kunnes valinta tehdään."
+		"message": "Saako etäisäntä näyttää kuvia terminaalissa\n\nOletuksena lähetämme kehotteita, kunnes valinta tehdään."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Jos määritetty, kumoaa Chrome-käyttöjärjestelmän Alt+Askelpalautin->DEL-uudelleenmäärityksen, jolloin Alt+Askelpalautin on oikeasti Alt+Askelpalautin."
+		"message": "Jos määritetty, tämä kumoaa Chrome-käyttöjärjestelmän Alt+Askelpalautin->Del-uudelleenmäärityksen, jolloin Alt+Askelpalautin on oikeasti Alt+Askelpalautin."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Valitse heuristinen AltGr-tunnistus.\n\nnull: Tunnista automaattisesti navigator.language-arvon perusteella:\n      en-us => none, muut arvot => right-alt.\nnone: Poista käytöstä kaikki AltGr-muunnokset.\nctrl-alt: Oleta, että Ctrl+Alt on AltGr.\nleft-alt: Oleta, että vasen Alt on AltGr.\nright-alt: Oleta, että oikea Alt on AltGr."
@@ -165,13 +372,13 @@
 		"message": "Määritä Alt-näppäimen käsittelytapa.\n\n  escape: Lähetä ESC-etuliite.\n  8-bit: Lisää kirjoitettuun merkkiin 128 kuten xtermissä.\n browser-key: Odota näppäinpainallusta ja tarkista selaimen vastaus. (Tämä ei toimi kunnolla käyttöympäristöissä,\n joissa selain suorittaa oletustoiminnon joidenkin Alt-näppäinyhdistelmien yhteydessä.)"
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "Terminaalin äänimerkin URL-osoite. Tyhjä merkkijono merkitsee, että kuuluvaa äänimerkkiä ei ole."
+		"message": "Terminaalin äänimerkin URL-osoite. Jätä se tyhjäksi, jos merkki on äänetön."
 	},
 	"hterm_pref_background_color": {
 		"message": "Tekstin taustaväri, jos muita väriattribuutteja ei ole"
 	},
 	"hterm_pref_background_image": {
-		"message": "Taustakuvan CSS-arvo. Tyhjä merkkijono merkitsee, että kuvaa ei ole.\n\nEsimerkiksi:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Taustakuvan CSS-arvo Jätä se tyhjäksi, jos kuvaa ei ole.\n\nEsimerkiksi:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Taustakuvan sijainnin CSS-arvo\n\nEsimerkki:\n  10% 10%\n  center"
@@ -180,19 +387,19 @@
 		"message": "Taustakuvan koon CSS-arvo"
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Jos tosi, Askelpalautin lähettää Askelpalautin-arvon (\\x08 eli ^H). Muussa tapauksessa Askelpalauttimen lähettämä merkkijono on \\x7f."
+		"message": "Jos tosi, Askelpalautin lähettää Askelpalautin-arvon ('\\x08', aka ^H). Muussa tapauksessa Askelpalauttimen lähettämä merkkijono on '\\x7f'."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "Tämä on määritetty objektiksi. Se on harva matriisi, jonka jokainen ominaisuus on merkkijoukon koodi ja arvo on objekti, joka on itsessään harva matriisi. Tässä harvassa matriisissa jokainen ominaisuus on vastaanotettu merkki ja arvo on näkyvä merkki.\n\nEsimerkki:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "Tämä on määritetty objektiksi. Se on harva taulukko, jonka jokainen ominaisuus on merkkijoukon koodi ja arvo on objekti, joka on itsessään harva taulukko. Tässä harvassa taulukossa jokainen ominaisuus on vastaanotettu merkki ja arvo on näkyvä merkki.\n\nEsimerkki:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
-		"message": "Tyhjennetäänkö valinta kopioinnin jälkeen"
+		"message": "Poistetaanko valittu osio kopioinnin jälkeen"
 	},
 	"hterm_pref_close_on_exit": {
 		"message": "Suljetaanko ikkuna komennon suorittamisen jälkeen"
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "Korvaa oletuspaletin värit.\n\nTämä voidaan määrittää matriisiksi tai objektiksi. Jos se on määritetty objektiksi, sen oletetaan olevan harva matriisi, jonka jokainen ominaisuus on väripaletin numeerinen arvo.\n\nArvo voi olla lähes mikä tahansa CSS-väriarvo, kuten #RGB, #RRGGBB, rgb(...), rgba(...) tai mikä tahansa värin nimi, joka kuuluu tavalliseen X11:n rgb.txt-tiedostoon.\n\nKäyttämällä null-arvoa voit määrittää, että oletusarvoa ei muuteta. Näin voit ohittaa kätevästi joitakin hakemistoja, kun arvo on määritetty matriisiksi.\n\nMolemmat alla olevista esimerkeistä määrittävät värihakemiston 1 arvoksi sininen:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "Korvaa oletuspaletin värit.\n\nTämä voidaan määrittää taulukoksi tai objektiksi. Jos se on määritetty objektiksi, sen oletetaan olevan harva taulukko, jonka jokainen ominaisuus on väripaletin numeerinen arvo.\n\nArvo voi olla lähes mikä tahansa CSS-väriarvo, kuten #RGB, #RRGGBB, rgb(…), rgba(…) tai mikä tahansa värin nimi, joka kuuluu tavalliseen X11:n rgb.txt-tiedostoon.\n\nJos käytät null-arvoa, oletusarvoa ei muuteta. Näin voit ohittaa kätevästi joitakin indeksejä, kun arvo on määritetty taulukoksi.\n\nMolemmat alla olevista esimerkeistä määrittävät väri-indeksin 1 siniseksi:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
 		"message": "Kopioi hiiren valinta automaattisesti leikepöydälle."
@@ -207,13 +414,16 @@
 		"message": "Ctrl+V liittää jos tosi, lähettää ^V:n isännälle jos epätosi.\nCtrl+vaihto+V lähettää ^V:n isännälle jos tosi, liittää jos epätosi."
 	},
 	"hterm_pref_cursor_blink": {
-		"message": "Määritä, vilkkuuko tekstikentän osoitin oletuksena. Asetus voidaan vaihtaa suoritusaikana terminaalin ohjaussekvenssien avulla."
+		"message": "Valitse, vilkkuuko tekstikentän osoitin oletuksena. Asetus voidaan vaihtaa suoritusaikana terminaalista poistumisen sekvensseillä."
 	},
 	"hterm_pref_cursor_blink_cycle": {
-		"message": "Tekstikentän osoittimen vilkkumisnopeus millisekunteina\n\nKahden elementin matriisi, jossa ensimmäinen elementti on osoittimen päälläoloaika ja toinen aika, jonka osoitin on pois päältä."
+		"message": "Tekstikentän osoittimen vilkkumisnopeus millisekunteina\n\nKahden elementin taulukko, jossa ensimmäinen elementti on osoittimen päälläoloaika ja toinen aika, jonka osoitin on pois päältä."
 	},
 	"hterm_pref_cursor_color": {
 		"message": "Tekstikentässä näkyvän osoittimen väri"
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "Tekstikentässä näkyvän osoittimen muoto. Asetus voidaan muuttaa suoritusaikana terminaalista poistumisen sekvensseillä."
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Jos tosi, terminaalin merkkiääni luo taustalla verkkoilmoituksen. https://www.w3.org/TR/notifications/\n\nIlmoitusten näyttäminen edellyttää käyttäjän myöntämää käyttöoikeutta. Kun tämän asetuksen arvo on tosi, hterm yrittää tarvittaessa pyytää käyttöoikeutta käyttäjältä. Jos käyttöoikeuspyyntö ei johdu käyttäjän toiminnasta, selain ei välttämättä näytä sitä.\n\nChrome-laajennukset, joilla on ilmoitusten käyttöoikeus (notifications), saavat näyttää ilmoituksia."
@@ -228,22 +438,28 @@
 		"message": "Jos tosi, vilkkumisattribuuttia on noudatettava. Jos epätosi, se ohitetaan."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Jos tosi, lihavoitua fonttia on käytettävä lihavointi- tai kirkkausattribuutin (bold tai bright) yhteydessä. Epätosi, jos käytetään tavallista fonttipaksuutta. Tyhjä, jos paksuus tunnistetaan automaattisesti."
+		"message": "Jos tosi, lihavoitua fonttia käytetään lihavointi- tai kirkkausattribuutin (bold tai bright) yhteydessä. Jos epätosi, tavallista fonttipaksuutta käytetään. Tyhjä, jos paksuus tunnistetaan automaattisesti."
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "Jos tosi, lihavointiattribuutin (bold) sisältävässä tekstissä käytetään kirkkaita värejä (16 värin paletissa värit 8–15). Muussa tapauksessa epätosi."
+		"message": "Jos tosi, lihavointiattribuutin (bold) sisältävässä tekstissä käytetään kirkkaita värejä (16 värin paletissa värit 8–15). Muussa tapauksessa epätosi."
 	},
 	"hterm_pref_enable_clipboard_notice": {
-		"message": "Määritä, näytetäänkö terminaalissa viesti, kun isäntä kirjoittaa leikepöydälle."
+		"message": "Valitse, näytetäänkö terminaalissa viesti, kun isäntä kirjoittaa leikepöydälle."
 	},
 	"hterm_pref_enable_clipboard_write": {
-		"message": "Salli etäisännän kirjoittaa suoraan paikallisen järjestelmän leikepöydälle.\nLukuoikeutta ei myönnetä koskaan tästä asetuksesta huolimatta.\n\nTällä hallinnoidaan OSC-52:n ja muiden ominaisuuksien käyttöoikeuksia."
+		"message": "Salli etäisännän kirjoittaa suoraan paikallisen järjestelmän leikepöydälle.\nLukuoikeutta ei myönnetä koskaan tästä asetuksesta huolimatta.\n\nTällä hallinnoidaan pääsyä OSC-52:een ja muihin ominaisuuksiin."
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Voiko tyhjennä näyttö ‑komennon (CSI-J) poista tallennetut rivit ‑toiminto (tila 3) tyhjentää taaksepäin vierittämisen puskurin.\n\nTämän käyttöönotto oletuksena on turvallista."
 	},
 	"hterm_pref_enable_dec12": {
-		"message": "Noudata isännän yritystä muuttaa tekstikentän osoittimen vilkkumistila yksityisellä DEC 12 ‑tilalla."
+		"message": "Huomioi isännän yritys muuttaa tekstikentän osoittimen vilkkumistila yksityisellä DEC 12 ‑tilalla."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Näytetäänkö terminaalin mitat, kun terminaalin koko muuttuu."
 	},
 	"hterm_pref_environment": {
-		"message": "Ympäristön oletusmuuttujat objekteina"
+		"message": "Ympäristön alkutilan oletusmuuttujat objektina"
 	},
 	"hterm_pref_font_family": {
 		"message": "Terminaalitekstin oletusfonttiperhe"
@@ -261,16 +477,19 @@
 		"message": "Piilotetaanko hiiren osoitin kirjoittaessa. Oletuksena havaitaan automaattisesti, käsitteleekö käyttöympäristö vai käyttöjärjestelmä tämän.\n\nHuom. Jotkin käyttöjärjestelmät saattavat ohittaa tämän asetuksen, jolloin sen poistaminen käytöstä ei ole aina mahdollista."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Jos tosi, Home- ja End-näppäimiä käytetään terminaalin vierityspalkin ohjaamiseen ja yhdistelmä Vaihto-Home tai Vaihto-End lähetetään etäisännälle. Jos epätosi, Home- ja End-näppäimet lähetetään etäisännälle ja Vaihto-Home tai Vaihto-End vierittävät."
+		"message": "Jos tosi, Home- ja End-näppäimiä käytetään terminaalin vierityspalkin ohjaamiseen ja yhdistelmä Vaihto+Home tai Vaihto+End lähetetään etäisännälle. Jos epätosi, Home- ja End-näppäimet lähetetään etäisännälle ja Vaihto+Home tai Vaihto+End vierittävät."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Näppäinyhdistelmien ja niihin liittyvien näppäintoimintojen kartta. Näppäinyhdistelmä sisältää muokkausnäppäimen painalluksia (nolla tai useampia) sekä niitä seuraavan näppäinkoodin. Näppäinkoodit voivat olla desimaali- tai heksadesimaalilukuja tai näppäintunnisteita. Näppäintoiminnot voidaan määrittää isännälle lähetettäväksi merkkijonoksi tai toimintotunnisteeksi. Voit lukea kattavan esittelyn täältä: https://goo.gl/LWRndr.\n\nEsimerkkejä:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hei maailma'\"\n}"
+		"message": "Näppäinyhdistelmien ja niihin liittyvien näppäintoimintojen kartta. Näppäinyhdistelmä sisältää muokkausnäppäimen painalluksia (nolla tai useampia) sekä niitä seuraavan näppäinkoodin. Näppäinkoodit voivat olla desimaali- tai heksadesimaalilukuja tai näppäintunnisteita. Näppäintoiminnot voidaan määrittää isännälle lähetettäväksi merkkijonoksi tai toimintotunnisteeksi. Voit lukea kattavan esittelyn täältä: https://goo.gl/LWRndr.\n\nEsimerkkejä:\n{\n  \"Ctrl+Alt-K\": \"clearTerminal\",\n  \"Ctrl+Shift-L\": \"PASS\",\n  \"Ctrl+H\": \"'Hei maailma'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Pitääkö yleisiä käyttöjärjestelmän sidontoja noudattaa htermin omaan käyttöön kaappauksen sijaan."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Jos arvo on tosi, medianäppäimet muunnetaan niitä vastaaviksi F-näppäimiksi. Jos arvo on epätosi, selain käsittelee näppäimet."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Lähetä ESC-etuliite, kun näppäintä painetaan Meta+näppäimen ollessa painettuna.\n\nKun se on käytössä, esimerkiksi Meta+K-yhdistelmä lähettää ^[k-yhdistelmän, aivan kuten Esc- ja k-näppäimen painaminen. Jos pois käytöstä, lähetetään vain k."
+		"message": "Lähetä ESC-etuliite, kun näppäintä painetaan Meta-näppäimen ollessa painettuna.\n\nKun se on päällä, esimerkiksi Meta+K-yhdistelmä lähettää ^[k-yhdistelmän, aivan kuten Esc- ja k-näppäimen painaminen. Jos se on pois päältä, lähetetään vain k."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Hiiren liittämispainike. Jos arvo on tyhjä, käytetään automaattista tunnistusta.\n\nJos painike tunnistetaan automaattisesti, muissa kuin X11-käyttöympäristöissä (myös Chrome-käyttöjärjestelmässä) käytetään hiiren keskimmäistä painiketta. X11:ssä käytetään hiiren oikeaa painiketta (sillä ikkunoiden natiivin hallintatoiminnon pitäisi käyttää liittämiseen hiiren keskimmäistä painiketta).\n\n0 == vasen (ensisijainen) painike\n1 == keskimmäinen (täydentävä) painike\n2 == oikea (toissijainen) painike\n\nTämä asetus ei riipu mouse-right-click-paste-asetuksesta.\n\nHuom. Tämä asetus toimii oikein riippumatta siitä, onko hiiri vasen- vai oikeakätinen malli."
@@ -279,28 +498,43 @@
 		"message": "Liittäminen hiiren oikean painikkeen painalluksella\n\nTämä asetus ei riipu mouse-paste-button-asetuksesta.\n\nHuom. Tämä asetus toimii oikein riippumatta siitä, onko hiiri vasen- vai oikeakätinen malli."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Jos tosi, Page Up- ja Page Down ‑näppäimiä käytetään terminaalin vierityspalkin ohjaamiseen and Vaihto-Page Up / Vaihto-Page Down ‑yhdistelmä lähetetään etäisännälle. Jos epätosi, Page Up ja Page Down ‑painallukset lähetetään etäisännälle ja Vaihto-Page Up / Vaihto-Page Down ‑yhdistelmä vierittää."
+		"message": "Jos tosi, Page Up- ja Page Down ‑näppäimiä käytetään terminaalin vierityspalkin ohjaamiseen ja Vaihto+Page Up / Vaihto+Page Down ‑yhdistelmä lähetetään etäisännälle. Jos epätosi, Page Up ja Page Down ‑painallukset lähetetään etäisännälle ja Vaihto+Page Up / Vaihto+Page Down ‑yhdistelmä vierittää."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Lähetetäänkö Alt+1–9-painallukset selaimelle\n\nTästä on hyötyä htermin toimiessa selaimen välilehdellä, sillä tällöin on mahdollista jatkaa Chromen välilehtien pikanäppäinten käyttöä. Kun hterm ei toimi välilehdellä, näppäinpainallukset kannattaa lähettää isännälle, jotta niitä voidaan käyttää vim- tai emacs-toimintojen kanssa.\n\nJos arvo on tosi, selain käsittelee Alt+1–9-painallukset. Jos arvo on epätosi, Alt+1–9-painallukset lähetetään isännälle. Jos arvo on tyhjä, tunnistus suoritetaan automaattisesti selainympäristön ja ikkunatyypin mukaan."
+		"message": "Lähetetäänkö Alt+1–9-painallukset selaimelle\n\nTästä on hyötyä htermin toimiessa selaimen välilehdellä, koska voit jatkaa Chromen välilehtien pikanäppäinten käyttöä. Kun hterm ei toimi välilehdellä, näppäinpainallukset kannattaa lähettää isännälle, jotta niitä voidaan käyttää vim- tai emacs-toimintojen kanssa.\n\nJos arvo on tosi, selain käsittelee Alt+1–9-painallukset. Jos arvo on epätosi, Alt+1–9-painallukset lähetetään isännälle. Jos arvo on tyhjä, tunnistus suoritetaan automaattisesti selainympäristön ja ikkunatyypin mukaan."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Lähetetäänkö Ctrl+N selaimelle\n\nJos tosi, selain käsittelee Ctrl+N-komennon \"uusi ikkuna\" ‑pikanäppäimenä. Jos epätosi, Ctrl+N lähetetään isännälle."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Lähetetäänkö Ctrl+1–9-painallukset selaimelle\n\nTästä on hyötyä htermin toimiessa selaimen välilehdellä, sillä tällöin on mahdollista jatkaa Chromen välilehtien pikanäppäinten käyttöä. Kun hterm ei toimi välilehdellä, näppäinpainallukset kannattaa lähettää isännälle, jotta niitä voidaan käyttää vim- tai emacs-toimintojen kanssa.\n\nJos arvo on tosi, selain käsittelee Ctrl+1–9-painallukset. Jos arvo on epätosi, Ctrl+1–9-painallukset lähetetään isännälle. Jos arvo on tyhjä, tunnistus suoritetaan automaattisesti selainympäristön ja ikkunatyypin mukaan."
+		"message": "Lähetetäänkö Ctrl+1–9-painallukset selaimelle\n\nTästä on hyötyä, kun htermiä käytetään selaimen välilehdellä, koska voit jatkaa Chromen välilehtien pikanäppäinten käyttöä. Kun hterm ei toimi välilehdellä, näppäinpainallukset kannattaa lähettää isännälle, jotta niitä voidaan käyttää vim- tai emacs-toimintojen kanssa.\n\nJos arvo on tosi, selain käsittelee Ctrl+1–9-painallukset. Jos arvo on epätosi, Ctrl+1–9-painallukset lähetetään isännälle. Jos arvo on tyhjä, valinta tehdään automaattisesti tunnistamalla selainympäristö ja ikkunatyyppi."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Lähetetäänkö Ctrl+T selaimelle\n\nJos tosi, selain käsittelee Ctrl+T-komennon \"uusi välilehti\" ‑pikanäppäimenä. Jos epätosi, Ctrl+T lähetetään isännälle."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Lähetetäänkö Ctrl+Sarkain ja Ctrl+Vaihto+Sarkain selaimelle\n\nJos tosi, selain käsittelee Ctrl+Sarkain- ja Ctrl+Vaihto+Sarkain-komennon \"seuraava/edellinen välilehti\" ‑pikanäppäimenä. Jos epätosi, sarkaimen painallus lähetetään isännälle ilman Ctrl- tai Vaihto-komentoa."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Lähetetäänkö Ctrl+W selaimelle\n\nJos tosi, selain käsittelee Ctrl+W-komennon \"sulje välilehti\" ‑pikanäppäimenä. Jos epätosi, Ctrl+W lähetetään isännälle."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Lähetetäänkö Meta+1–9-painallukset selaimelle\n\nTästä on hyötyä htermin toimiessa selaimen välilehdellä, sillä tällöin on mahdollista jatkaa Chromen välilehtien pikanäppäinten käyttöä. Kun hterm ei toimi välilehdellä, näppäinpainallukset kannattaa lähettää isännälle, jotta niitä voidaan käyttää vim- tai emacs-toimintojen kanssa.\n\nJos arvo on tosi, selain käsittelee Meta+1–9-painallukset. Jos arvo on epätosi, Meta+1–9-painallukset lähetetään isännälle. Jos arvo on tyhjä, tunnistus suoritetaan automaattisesti selainympäristön ja ikkunatyypin mukaan."
+		"message": "Lähetetäänkö Meta+1–9-painallukset selaimelle\n\nTästä on hyötyä htermin toimiessa selaimen välilehdellä, koska voit jatkaa Chromen välilehtien pikanäppäinten käyttöä. Kun hterm ei toimi välilehdellä, näppäinpainallukset kannattaa lähettää isännälle, jotta niitä voidaan käyttää vim- tai emacs-toimintojen kanssa.\n\nJos arvo on tosi, selain käsittelee Meta+1–9-painallukset. Jos arvo on epätosi, Meta+1–9-painallukset lähetetään isännälle. Jos arvo on tyhjä, tunnistus suoritetaan automaattisesti selainympäristön ja ikkunatyypin mukaan."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Lähetetäänkö Meta+V isännälle"
 	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Jos tosi, vedetty ja pudotettu teksti liitetään terminaaliin.\nJos epätosi, pudotettu teksti ohitetaan."
+	},
 	"hterm_pref_receive_encoding": {
-		"message": "Määritä merkkijärjestelmä, jota isännältä vastaanotettavien tietojen odotetaan käyttävän. Jos merkkijärjestelmät eivät täsmää, visuaalisia virheitä todennäköisesti havaitaan.\n\nKelvollisia arvoja ovat utf-8 ja raw."
+		"message": "Määritä merkkijärjestelmä, jota odotetaan isännän lähettämältä datalta. Jos merkkijärjestelmät eivät täsmää, visuaalisia virheitä voi ilmetä.\n\nKelvollisia arvoja ovat \"utf-8\" ja \"raw\"."
 	},
 	"hterm_pref_scroll_on_keystroke": {
-		"message": "Määritä, vierittääkö mikä tahansa näppäinpainallus näkymän alareunaan."
+		"message": "Valitse, vierittääkö mikä tahansa näppäinpainallus näkymän alareunaan."
 	},
 	"hterm_pref_scroll_on_output": {
-		"message": "Määritä, vierittääkö terminaalisyöte näkymän alareunaan."
+		"message": "Valitse, vierittääkö terminaalisyöte näkymän alareunaan."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
 		"message": "Kun käytössä on vaihtoehtoinen näyttöpuskuri (alternative screen buffer) ja DECCKM (Application Cursor Keys eli sovelluksen osoitinnäppäimet) on aktiivisena, hiiren rullan vieritystapahtumat emuloivat nuolinäppäimiä.\n\nTämä voidaan poistaa väliaikaisesti käytöstä pitämällä Vaihto-näppäintä painettuna.\n\nTämä nousee usein esiin käytettäessä sivutusohjausta (less), luettaessa man-sivuja tai tekstinkäsittelytyökaluja (vi/nano) tai käytettäessä screen/tmux-toimintoja."
@@ -312,25 +546,25 @@
 		"message": "Pystysuuntainen vierityspalkkitila"
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Liittääkö Vaihto-Insert tiedot vai lähetetäänkö se etäisännälle."
+		"message": "Liittääkö Vaihto+Insert tiedot vai lähetetäänkö se etäisännälle."
 	},
 	"hterm_pref_terminal_encoding": {
-		"message": "Terminaalin oletusmerkkijärjestelmä (DOCS)\n\nISO-2022 ottaa käyttöön merkkikarttojen (kuten grafiikkakarttojen) käännökset.\nUTF-8 poistaa niiden tuen käytöstä.\n\nJos valittuna on lukittu vaihtoehto, merkkijärjestelmää ei voi vaihtaa terminaalin ohjaussekvenssien avulla suoritusaikana.\n\nSuosittelemme käyttämään UTF-8:aa, paitsi jos vanhemmissa sovelluksissa esiintyy renderöintiongelmia."
+		"message": "Terminaalin oletusmerkkijärjestelmä (DOCS)\n\nISO-2022 mahdollistaa merkkikarttojen (kuten grafiikkakarttojen) käännökset.\nUTF-8 poistaa niiden tuen.\n\nJos valittuna on lukittu vaihtoehto, merkkijärjestelmää ei voi vaihtaa terminaalista poistumisen sekvensseillä suoritusaikana.\n\nSuosittelemme käyttämään UTF-8:aa, paitsi jos vanhemmissa sovelluksissa esiintyy renderöintiongelmia."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Käytetäänkö oletusselaimen tai ‑käyttöjärjestelmän kopiointitapaa\n\nSalli selaimen tai käyttöjärjestelmän hoitaa kopiointitapahtuma suoraan, mikä voi parantaa yhteensopivuutta tiettyjen järjestelmien kanssa (joissa kopiointi ei toimi ollenkaan).\n\nEsimerkiksi pitkät, automaattisesti rivitetyt rivit kopioidaan rivitettynä."
+		"message": "Käytetäänkö oletusselaimen tai ‑käyttöjärjestelmän kopiointitapaa\n\nSalli selaimen tai käyttöjärjestelmän hoitaa kopiointitapahtuma suoraan, mikä voi parantaa yhteensopivuutta tiettyjen järjestelmien kanssa (joissa kopiointi ei toimi ollenkaan), mutta heikentää tekstinvalinnan varmuutta.\n\nEsimerkiksi pitkät, automaattisesti rivitetyt rivit kopioidaan rivitettyinä."
 	},
 	"hterm_pref_user_css": {
-		"message": "Terminaalidokumenttiin lisättävän käyttäjän tyylitiedoston URL-osoite"
+		"message": "Terminaalidokumenttiin lisättävän käyttäjän tyyliarkin URL-osoite"
 	},
 	"hterm_pref_user_css_text": {
-		"message": "Muokattu CSS-teksti terminaalin tyyliasetusten määrittämistä varten"
+		"message": "Oma CSS-teksti terminaalin tyyliasetusten valitsemiseksi"
 	},
 	"hterm_pref_word_break_match_left": {
 		"message": "Säännöllinen lauseke, joka keskeyttää vastaavuuksien hakemisen valinnan vasemmalta puolelta (alusta).\n\nTavallisesti tämä on merkkiluokka, jota käytetään tiettyjen merkkien estämiseen.\nMerkit ~ ja . on oletuksena sallittu, sillä ne esiintyvät usein polkujen alussa."
 	},
 	"hterm_pref_word_break_match_middle": {
-		"message": "Säännöllinen lauseke, jolla haetaan vastaavuuksia kaikille keskellä oleville merkeille.\n\nTavallisesti tämä on merkkiluokka, jota käytetään tiettyjen merkkien estämiseen.\n\nTätä käytetään aloituspistettä ympäröivän valinnan laajentamiseen."
+		"message": "Säännöllinen lauseke, joka vastaa kaikkia keskellä olevia merkkejä.\n\nTavallisesti tämä on merkkiluokka, jota käytetään tiettyjen merkkien estämiseen.\n\nTätä käytetään aloituspistettä ympäröivän valinnan laajentamiseen."
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "Säännöllinen lauseke, joka keskeyttää vastaavuuksien hakemisen valinnan oikealta puolelta (lopusta).\n\nTavallisesti tämä on merkkiluokka, jota käytetään tiettyjen merkkien estämiseen."
@@ -354,7 +588,7 @@
 		"message": "Näppäimistö"
 	},
 	"hterm_title_pref_miscellaneous": {
-		"message": "Muu"
+		"message": "Muut"
 	},
 	"hterm_title_pref_scrolling": {
 		"message": "Vieritys"
@@ -366,16 +600,16 @@
 		"message": "Identiteetti"
 	},
 	"import_link_aria_label": {
-		"message": "tiedostojen tuonti"
+		"message": "tuo tiedostoja"
 	},
 	"import_link_label": {
 		"message": "Tuo…"
 	},
 	"initializing_relay": {
-		"message": "$1 etsii välityspalvelinta"
+		"message": "Välityspalvelinta etsitään, $1 käytössä"
 	},
 	"json_parse_error": {
-		"message": "JSON-tiedoston jäsennysvirhe kohdassa '$1': $2"
+		"message": "JSON-jäsennysvirhe, '$1': $2"
 	},
 	"known_hosts_empty": {
 		"message": "Ei tunnettuja isäntiä."
@@ -386,8 +620,20 @@
 	"known_hosts_title": {
 		"message": "Tunnetut isännät:"
 	},
+	"licenses": {
+		"message": "Lisenssit"
+	},
+	"licenses_expand_link": {
+		"message": "näytä lisenssi"
+	},
+	"licenses_title": {
+		"message": "Avoimen lähdekoodin lisenssit"
+	},
 	"loading_label": {
 		"message": "Ladataan…"
+	},
+	"migrate_to_ext": {
+		"message": "Huom. Siirry uuteen Secure Shell ‑laajennukseen ($1).\nChrome-sovellukset poistetaan käytöstä, joten tämä versio ei saa päivityksiä jatkossa.\nKatso lisätietoja siirto-oppaasta ($2)."
 	},
 	"missing_param": {
 		"message": "Puuttuva parametri: $1"
@@ -399,10 +645,175 @@
 		"message": "Käyttöönottopolku"
 	},
 	"mounted_message": {
-		"message": "Käytössä"
+		"message": "Valmis käyttöön"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "Vie tiedosto terminaaliin"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Vaihda työhakemistoa"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Muuta polkujoukkoa"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Muuta polkujen käyttölupia"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Muuta polkujen omistajaa"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Tyhjennä nykyinen terminaalinäyttö."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Kopioi tiedosto leikepöydälle (oletus: 10 MiB alussa)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "$1 tavua kopioitu leikepöydälle"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Värien käyttö päälle/pois"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Kopioi lähde kohteeseen"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Poista tiedostot"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Näytä levyn tilastotiedot"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Polku: $1\n  tiedostojärjestelmän tunnus: $2\n Yhteensä: $3\n  Käytetty: $4 ($5%)\n Käytettävissä: $6 (tavallisille käyttäjille)\n $7 (pääkäyttäjän oikeudet omistaville)"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Katkaise yhteys"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Ladataan tiedostoa: $1 ($2)"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Lataa tiedostoja"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Tämä ohjenäyttö"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Näytä hakemiston tiedot"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Luo polkuun linkki, joka johtaa kohteeseen"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Luo hakemistoja"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Nimeä tiedosto uudelleen"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Aseta kehotteen merkkijono"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Lähetä tiedostoja"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Lähetetään tiedostoa: $1 ($2) ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Näytä nykyinen työhakemisto"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Etätyöhakemisto: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Lue symlinkit"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Ilmoita polkuja ensisijaisiksi"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Jatka tiedostojen lähettämistä"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Poista tiedostoja"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Poista tyhjät hakemistot"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Näytä tiedostot tekstirivillä"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Laajennukset:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Näytä tiedoston tila"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Tiedosto: $1\n  Koko: $2 tavua\n   Käyttäjätunnus: $3\n   Ryhmätunnus: $4\nKäyttöluvat: $5\n käytetty: $6\n muutettu: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Luo polkuun symlink, joka johtaa kohteeseen"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Lyhennä polut 0 tavuun"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  palvelinlaajennukset:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Näytä nykyinen protokollaversio"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "SFTP-protokollan versiotiedot:\n  paikallinen: $1\n  palvelin: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: tiedoston loppu"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: tiedostoa ei löydy"
+	},
+	"nasftp_error_file_reading": {
+		"message": "Tiedoston $1 lukeminen ei onnistunut: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Käsittelemätön sisäinen virhe; ilmoita virheestä: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: virheellinen numero: $3"
+	},
+	"nasftp_error_message": {
+		"message": "VIRHE: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: laajennus $2 ei ole saatavilla"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: ei tavallinen tiedosto"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: ei tarpeeksi argumentteja"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: käyttölupa evätty"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: liikaa argumentteja"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: tuntematon komento"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: tuntematon merkintä $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Pakota lopetus"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 tavua siirretty $2 sekunnissa ($3/s)"
 	},
 	"nassh_options_error": {
-		"message": "Tuntematon välitysasetus: $1"
+		"message": "Tuntematon vaihtoehto: $1"
 	},
 	"nassh_product_name": {
 		"message": "Secure Shell"
@@ -420,13 +831,13 @@
 		"message": "<url><match>käyttäjä@isäntä[:portti]</match></url> Muodosta yhteys tallennettuun profiiliin tai uuteen ssh-järjestelmään."
 	},
 	"open_as_window_tip": {
-		"message": "[Pro-vinkki] Kun käytät Avaa ikkunassa- tai Koko näyttö ‑toimintoa, Ctrl+W ei sulje terminaalia.\n[Pro-vinkki] Saat lisätietoja täältä: $1."
+		"message": "[Pro-vinkki] Kun käytät Avaa ikkunassa- tai Koko näyttö ‑toimintoa, Ctrl+W ei sulje terminaalia.\n[Pro-vinkki] Katso lisätietoja: $1"
 	},
 	"options_button_label": {
-		"message": "Asetukset"
+		"message": "Valinnat"
 	},
 	"plugin_loading": {
-		"message": "Ladataan NaCl-laajennusta..."
+		"message": "Ladataan NaCl-laajennusta…"
 	},
 	"plugin_loading_complete": {
 		"message": " valmis."
@@ -434,14 +845,44 @@
 	"plugin_loading_failed": {
 		"message": " epäonnistui :("
 	},
+	"popup_connect_tooltip": {
+		"message": "Avaa uudelle välilehdellä painamalla Ctrl pitkään."
+	},
 	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
+		"message": "Secure Shell ‑valintojen varmuuskopio.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "SSH-tiedostot"
 	},
 	"preferences_header_terminal": {
-		"message": "Profiilin asetukset"
+		"message": "Terminaalin asetukset"
+	},
+	"preferences_header_uri": {
+		"message": "URI-käsittelijät"
 	},
 	"preferences_reset": {
-		"message": "Asetukset nollattu"
+		"message": "Asetukset on nollattu"
+	},
+	"protocol_register_button": {
+		"message": "Rekisteröi protokollan käsittelijöitä"
+	},
+	"protocol_register_explain": {
+		"message": "Kun painat alla olevaa painiketta, kaikkien tuettujen protokollien käsittelijät yritetään rekisteröidä. Silloin voimme esimerkiksi käsitellä ssh://-linkit suoraan. Selain näyttää kehotteen jokaisen protokollan kohdalla, joten vahvista/hyväksy niitä sitä mukaa, kun niitä näytetään. Jos et näe kehotteita, katso vianetsintäohjeita seuraavasta osiosta."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Jos olemme jo rekisteröineet käsittelijät tai aiemmat rekisteröintiyritykset evättiin, kehotteita ei näytetä jatkossa. Avaa alla oleva valintaikkuna ja tarkista rekisteröityjen käsittelijöiden asetukset ssh/sftp/etc…-osioista. Jos tämä ohjelma on estetty, voit poistaa nämä asetukset, jolloin voit yrittää rekisteröintiä uudelleen. Jos tämä ohjelma on jo rekisteröity, mutta sitä ei ole valittu oletuskäsittelijäksi, voit muuttaa myös oletuskäsittelijän."
+	},
+	"protocol_register_options_link": {
+		"message": "Protokollarekisteri"
+	},
+	"protocol_register_settings_button": {
+		"message": "Avaa rekisteröityjen käsittelijöiden asetukset"
+	},
+	"protocol_register_title": {
+		"message": "Secure Shell ‑protokollan käsittelijöiden rekisteröintiavustaja"
+	},
+	"read_size_label": {
+		"message": "Lukemiskoko (KiB)"
 	},
 	"reconnect_message": {
 		"message": "Haluatko yhdistää uudelleen (r), valita toisen yhteystavan (c) vai poistua (x)?"
@@ -450,10 +891,13 @@
 		"message": "Yritetään uudelleen…"
 	},
 	"request_pin_prompt": {
-		"message": "Avaa avaimen $1 lukitus kohteessa $2 antamalla PIN-koodi ($3 yritystä jäljellä):"
+		"message": "Avaa avaimen $1 lukitus ($2, $3) antamalla PIN-koodi ($4 yritystä jäljellä):"
 	},
 	"restore_prefs": {
 		"message": "Palauta varmuuskopiosta"
+	},
+	"save_label": {
+		"message": "Tallenna"
 	},
 	"shortcut_list_aria_label": {
 		"message": "tallennetut yhteydet"
@@ -464,8 +908,44 @@
 	"ssh_argstr_label": {
 		"message": "SSH-argumentit"
 	},
+	"stream_open_error": {
+		"message": "Striimin $1 avaus ei onnistunut: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "Terminaalin tyhjennys"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI-värit"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Aliaksenesto"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Äänimerkki"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Vilkkuu"
+	},
+	"terminal_name_pref_color": {
+		"message": "Väri"
+	},
+	"terminal_name_pref_font": {
+		"message": "Fontti"
+	},
+	"terminal_name_pref_image": {
+		"message": "Kuva"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Muoto"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Näkyy"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Aseta oletuspaletin värit"
+	},
+	"terminal_pref_bell": {
+		"message": "Terminaalin äänimerkki"
 	},
 	"terminal_preview_label": {
 		"message": "Esikatselu"
@@ -474,13 +954,139 @@
 		"message": "Nykyinen profiili"
 	},
 	"terminal_reset_menu_label": {
-		"message": "Terminaalin palautus"
+		"message": "Terminaalin nollaus"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "Taustakuvan URL-osoite (alussa on oltava http:// tai https://). Jätä se tyhjäksi, jos kuvaa ei ole.\n\nEsimerkki:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Automaattinen"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Pois päältä"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Palkki"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Estä"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Alleviivaa"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Haluatko varmasti palauttaa oletusteeman?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Palauta oletusteema"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Nollaa"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Klassinen"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Tumma"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Usva"
+	},
+	"terminal_theme_light_label": {
+		"message": "Vaalea"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Tumma Solarized"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Vaalea Solarized"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Väri 0: Musta"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Väri 1: Punainen"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Väri 10: Kirkkaanvihreä"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Väri 11: Kirkkaankeltainen"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Väri 12: Kirkkaansininen"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Väri 13: Kirkas magenta"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Väri 14: Kirkas syaani"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Väri 15: Kirkkaanvalkoinen"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Väri 2: Vihreä"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Väri 3: Keltainen"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Väri 4: Sininen"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Väri 5: Magenta"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Väri 6: Syaani"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Väri 7: Valkoinen"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Väri 8: Kirkas musta"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Väri 9: Kirkkaanpunainen"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Ulkoasu"
+	},
+	"terminal_title_pref_background": {
+		"message": "Tausta"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Käyttäytyminen"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "Kohdistin"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Näppäimistö"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Näppäimistö ja hiiri"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Hiiri"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Vierityspalkki"
+	},
+	"terminal_title_pref_text": {
+		"message": "Teksti"
+	},
+	"terminal_title_settings": {
+		"message": "Asetukset"
+	},
+	"terminal_title_theme": {
+		"message": "Teema"
 	},
 	"tip_1": {
 		"message": "Kun painat linkin klikkaamisen yhteydessä Ctrl (Cmd macOS:ssä), linkki avataan."
 	},
 	"tip_10": {
-		"message": "Kun käyttökerta on käynnissä, Ctrl+Vaihto-N avaa uuden sellaisen."
+		"message": "Käyttökerran aikana Ctrl+Vaihto+N avaa uuden sellaisen."
 	},
 	"tip_11": {
 		"message": "Voit yhdistää painikkeita tai pikakomentoja uudelleen: https://goo.gl/LWRndr"
@@ -489,10 +1095,10 @@
 		"message": "Käytä Yubikeysia ja muita älykortteja SSH-todennukseen: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
-		"message": "Näytä upotettuja kuvia: https://goo.gl/MnSysj"
+		"message": "Näytä upotetut kuvat: https://goo.gl/MnSysj"
 	},
 	"tip_14": {
-		"message": "Kun painat linkin klikkaamisen yhteydessä Ctrl (Cmd macOS:ssä), kontekstivalikko avataan."
+		"message": "Kun pidät Controlin (Cmd macOS:ssä) painettuna ja klikkaat kakkospainikkeella, kontekstivalikko avautuu."
 	},
 	"tip_2": {
 		"message": "Näytä ilmoituksia selaimessa hterm-notify-ominaisuudella: https://goo.gl/ZNxGdF"
@@ -501,7 +1107,7 @@
 		"message": "Muodosta yhteys omniboxista käsin kirjoittamalla 'ssh <profiilin nimi>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Voit ottaa tiedostojärjestelmiä käyttöön Chrome-käyttöjärjestelmässä SFTP:llä ja käyttää Tiedostot-sovellusta selaamiseen. Valitse SFTP-käyttöönotto Yhdistä-valinnan sijaan."
+		"message": "Voit ottaa tiedostojärjestelmiä käyttöön Chrome-käyttöjärjestelmässä SFTP:llä ja selata niitä Tiedostot-sovelluksella. Valitse SFTP-käyttöönotto Yhdistä-valinnan sijaan."
 	},
 	"tip_5": {
 		"message": "Muodosta yhteys verkkosivuilla ssh://-linkeillä tai tallenna kirjanmerkki: https://goo.gl/zS8EZD"
@@ -510,10 +1116,10 @@
 		"message": "Väritä kirjoitus tai kehotteet 16 perusvärillä, 256 värillä tai täysillä 24-bittisillä väreillä: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopioi sisältöä leikepöydälle emacs/vim/-sijainnista tai vastaavasta OSC-52:lla: https://goo.gl/XSnyLo"
+		"message": "Kopioi sisältöä leikepöydälle emacs/vim/etc… ‑sijainnista tai vastaavasta OSC-52:lla: https://goo.gl/XSnyLo"
 	},
 	"tip_8": {
-		"message": "Keskustele muiden hterm- ja Secure Shell ‑käyttäjien kanssa chromium-hterm@chromium.org-ryhmässä: https://goo.gl/RYHiK"
+		"message": "Keskustele muiden htermin ja Secure Shellin käyttäjien kanssa chromium-hterm@chromium.org-ryhmässä: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
 		"message": "Kerro meille virheestä tai lähetä ominaisuuspyyntö: https://goo.gl/vb94JY"
@@ -528,7 +1134,7 @@
 		"message": "Poista SFTP käytöstä"
 	},
 	"welcome_changelog": {
-		"message": "ChangeLog/julkaisutiedot: $1"
+		"message": "Muutosloki/julkaisutiedot: $1"
 	},
 	"welcome_faq": {
 		"message": "Vastauksia usein kysyttyihin kysymyksiin: $1 (Avaa linkit Ctrl-klikkaamalla)"
@@ -537,12 +1143,15 @@
 		"message": "Olennaiset muutokset $1:n jälkeen:"
 	},
 	"welcome_tip_of_day": {
-		"message": "Satunnainen ammattilaisvinkki numero $1: $2"
+		"message": "Satunnainen Pro-vinkki numero $1: $2"
 	},
 	"welcome_version": {
-		"message": "Tervetuloa. $1, versio $2"
+		"message": "Tervetuloa! $1, versio $2"
+	},
+	"write_size_label": {
+		"message": "Kirjoituskoko (KiB)"
 	},
 	"zoom_warning": {
-		"message": "Aseta Chrome-valikossa zoomin arvoksi 100 %."
+		"message": "Aseta Chrome-valikossa zoomin arvoksi 100 %"
 	}
 }

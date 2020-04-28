@@ -1,6 +1,6 @@
 {
 	"already_mounted_message": {
-		"message": "A fájlrendszer már be van töltve!"
+		"message": "A fájlrendszer már csatlakoztatva van!"
 	},
 	"backup_prefs": {
 		"message": "Biztonsági másolat készítése"
@@ -12,25 +12,19 @@
 		"message": "A lap bezárásával megszakítja a futó programot."
 	},
 	"cache_pin_prompt": {
-		"message": "Tárolja a PIN-kódot erre a munkamenetre? (I/N):"
+		"message": "Tárolja a PIN-kódot ehhez az SSH-munkamenethez? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "Mégse"
 	},
+	"changelog": {
+		"message": "Változásnapló"
+	},
 	"clear_known_hosts_menu_label": {
-		"message": "Az SSH known_hosts kulcsok törlése"
+		"message": "Az ismert SSH-gazdagépek törlése"
 	},
-	"cmd_ssh_forget_host_help": {
-		"message": "Ez a parancs ismert gazdagépek egy listáját jeleníti meg, és megkérdezi, hogy melyiket felejtse el."
-	},
-	"cmd_ssh_forget_host_title": {
-		"message": "Egy megjegyzett ssh-gazdagép adatainak az elfelejtése."
-	},
-	"cmd_ssh_help": {
-		"message": "A |username| és |hostname| paramétereket kötelező, a |port| értékét nem kötelező megadni. Ha a port nincs meghatározva, akkor alapbeállítás szerint 22 lesz az értéke."
-	},
-	"cmd_ssh_title": {
-		"message": "Új SSH-munkamenet megnyitása."
+	"clear_label": {
+		"message": "Törlés"
 	},
 	"command_complete": {
 		"message": "A(z) $1 parancs a következő állapotkóddal lépett ki: $2."
@@ -75,7 +69,7 @@
 		"message": "GYIK"
 	},
 	"field_argstr_placeholder": {
-		"message": "extra parancssori argumentumok"
+		"message": "Extra parancssori argumentumok"
 	},
 	"field_description_aria_label": {
 		"message": "leírás"
@@ -84,10 +78,10 @@
 		"message": "felhasznalonev@tarhelyszolgaltato vagy szabad formájú szöveg"
 	},
 	"field_hostname_aria_label": {
-		"message": "tárhelyszolgáltató"
+		"message": "gazdagépnév"
 	},
 	"field_hostname_placeholder": {
-		"message": "tárhelyszolgáltató"
+		"message": "gazdagépnév"
 	},
 	"field_mount_path_placeholder": {
 		"message": "az alapértelmezett elérési út a felhasználó kezdőkönyvtára"
@@ -105,7 +99,7 @@
 		"message": "port"
 	},
 	"field_terminal_profile_placeholder": {
-		"message": "alapbeállítás"
+		"message": "alapértelmezett"
 	},
 	"field_username_aria_label": {
 		"message": "felhasználónév"
@@ -129,7 +123,7 @@
 		"message": "Engedélyezés a jelen munkamenetben"
 	},
 	"hterm_button_block": {
-		"message": "Tiltás"
+		"message": "Letiltás"
 	},
 	"hterm_button_page_down": {
 		"message": "Lapozás lefelé"
@@ -143,6 +137,219 @@
 	"hterm_loading_resource_start": {
 		"message": "A(z) $1 betöltése…"
 	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Szövegközi kép megjelenítésének engedélyezése"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Az Alt + Backspace a Meta + Backspace"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "AltGr billentyűmódja"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Az Alt billentyű Meta billentyűként kezelése"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Az Alt billentyűmódosító kezelése"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Értesítő csengés hangja (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Háttérszín"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Háttérkép"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Háttérkép pozíciója"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Háttérkép mérete"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Backspace billentyű viselkedése"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Karakter-hozzárendelések felülírása"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Szöveg kijelölésének automatikus megszüntetése"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Ablak bezárása kilépéskor"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Eredeti színpaletta"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Kiválasztott tartalom automatikus másolása"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Ctrl + C másolási viselkedése"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ctrl + +/-/0 nagyítási viselkedése"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Ctrl + V beilleszkedési viselkedése"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Kurzor villogása"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Kurzor villogási sebessége"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Szövegkurzor színe"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Szövegkurzor alakja"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Asztali értesítések létrehozása az értesítésekhez"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "A nem egyértelmű kelet-ázsiai karakterek két oszlopot használnak"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Nem UTF-8 C1 vezérlőkarakterek támogatása"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Villogó szöveg engedélyezése"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Félkövér szöveg viselkedése"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Világos színek használata félkövér szöveggel"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Értesítés megjelenítése tartalom másolásakor"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "A vágólapra távolról történő írás engedélyezése"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Visszagörgetési puffer (CSI-J-3) törlésének engedélyezése"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "A szövegkurzor-villogás módosításának engedélyezése"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Terminál dimenzióinak megjelenítése átméretezéskor"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Környezeti változók"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Betűtípuscsalád"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Szöveg betűmérete"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Szöveg betűtípusának simítása"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Szöveg színe"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Az egérkurzor elrejtése gépelés közben"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Home/End billentyű görgetési viselkedése"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Billentyűkombinációk/-parancsok"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Az operációs rendszer alapértelmezett billentyűkombinációi/billentyűparancsai"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "A médiabillentyűk F-billentyűkként működnek"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "A Meta módosítóbillentyű kezelése"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Egérgombos beillesztés"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Jobb egérgombos tartalombeillesztés"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Page Up/Down billentyű görgetési viselkedése"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Alt + 1..9 lapváltási viselkedése"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Ctrl + N új ablak viselkedése"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Ctrl + 1..9 lapváltási viselkedése"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ctrl + T új lap viselkedése"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Ctrl + Tab lapváltási viselkedése"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Ctrl + W lapbezárási viselkedése"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Meta + 1..9 lapváltási viselkedése"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Meta + V beillesztési viselkedése"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "A behúzással beillesztés engedélyezése"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Kódolás fogadása"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Görgetés az aljára billentyűleütést követően"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Új kimenet után görgetés az aljára"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Nyílgombok emulációja a görgővel"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Egérgörgő szorzója"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Görgetősáv láthatósága"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Shift + Insert beillesztés"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Terminál kódolása"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "A böngésző kezelheti a szövegmásolást"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "Egyéni CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "Egyéni CSS (szövegközi szöveg)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Automatikus kiválasztási irány (balra)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Szótörő karakterek"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Automatikus kiválasztási irány (jobbra)"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Szövegközi képek"
 	},
@@ -153,7 +360,7 @@
 		"message": "Annak szabályozása, hogy a távoli gazdagép megjeleníthet-e képeket a terminálon.\n\nAlapértelmezés szerint addig kérdezünk rá, amíg nem születik döntés."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ha be van állítva, semmissé teszi a Chrome OS Alt+Backspace->DEL hozzárendelését, így az Alt+Backspace valóban az Alt+Backspace billentyűparancsnak felel meg."
+		"message": "Ha be van állítva, semmissé teszi a Chrome OS Alt + Backspace billentyűparancsának a Delete billentyű szerinti viselkedését, így az Alt + Backspace valóban az Alt + Backspace billentyűparancsnak felel meg."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr-észlelési heurisztika kiválasztása.\n\n„null”: Automatikus észlelés a „navigator.language” alapján:\n      „en-us” => „none”, egyébként => „right-alt”\n„none”: Az AltGr billentyűvel kapcsolatos összes művelet letiltása.\n„ctrl-alt”: A Ctrl+Alt billentyűkombináció AltGr billentyűként kezelése.\n„left-alt”: A bal oldali Alt billentyű AltGr billentyűként kezelése.\n„right-alt”: A jobb oldali Alt billentyű AltGr billentyűként kezelése."
@@ -165,13 +372,13 @@
 		"message": "Az Alt billentyű kezelését szabályozza.\n\n  escape: ESC előtag küldése.\n  8-bit: A 128 érték hozzáadása a beírt karakterhez, mint az xtermben.\n  browser-key: Várjon a gombnyomási eseményre és a böngésző\n válaszára. (Ez nem működik jól olyan platformokon, ahol a\n böngésző alapértelmezett műveletet végez el bizonyos,\n Alt billentyűvel kapcsolatos parancsoknál.)"
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "A terminál hangjelzésének URL-je. Ha nem szeretne hallható hangjelzést, üres karakterláncot kell megadni."
+		"message": "A terminál hangjelzésének URL-címe. Ha nincs hangjelzés, hagyja üresen."
 	},
 	"hterm_pref_background_color": {
 		"message": "A szöveg hátterének színe más színattribútum nélkül."
 	},
 	"hterm_pref_background_image": {
-		"message": "A háttérkép CSS-értéke. Ha nem szeretne képet használni, üres karakterláncot kell megadni.\n\nPéldául:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "A háttérkép CSS-értéke. Ha nincs kép, hagyja üresen.\n\nPéldául:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "A háttérkép pozíciójának CSS-értéke.\n\nPéldául:\n  10% 10%\n  center"
@@ -180,10 +387,10 @@
 		"message": "A háttérkép méretének CSS-értéke."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Ha igaz, a Backspace billentyűnek BS („\\x08”, vagyis ^H) értéket kell küldenie. Egyéb esetben a Backspace billentyűnek „\\x7f” értéket kell küldenie."
+		"message": "Ha igaz, a Backspace billentyű a BS („\\x08”, azaz ^H) értéket küldi el. Egyéb esetben az „\\x7f” értéket küldi el."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "Objektumként van megadva. Ritka mátrix, amelynél az egyes tulajdonságok karakterkészletkódok, az érték pedig az objektum, amely önmaga ritka mátrix. Ebben a ritka mátrixban az egyes tulajdonságok a fogadott karakterek, az érték pedig a megjelenített karakter.\n\nPéldául:\n {\"0\":{\"+\":\"\\u2192\",\",\":\"\\u2190\",\"-\":\"\\u2191\",\".\":\"\\u2193\", \"0\":\"\\u2588\"}}"
+		"message": "Objektumként van megadva. Ritka mátrix, amelynél az egyes tulajdonságok karakterkészletkódok, az érték pedig az objektum, amely önmaga ritka mátrix. Ebben a ritka mátrixban az egyes tulajdonságok a fogadott karakterek, az érték pedig a megjelenített karakter.\n\nPéldául:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "Annak meghatározása, hogy törlődjön-e a kijelölés másolás után."
@@ -201,7 +408,7 @@
 		"message": "A Ctrl+C másol, ha igaz, és a ^C értéket küldi a gazdagépnek, ha hamis.\nA Ctrl+Shift+C a ^C értéket küldi a gazdagépnek, ha igaz, és másol, ha hamis."
 	},
 	"hterm_pref_ctrl_plus_minus_zero_zoom": {
-		"message": "Ha igaz, a Ctrl+plusz/mínusz/nulla szabályozza a kicsinyítés/nagyítás értékét.\nHa hamis, a Ctrl+Shift+plusz/mínusz/nulla szabályozza a kicsinyítés/nagyítás értékét, míg a Ctrl+mínusz az ^_ értéket továbbítja, a Ctrl+plusz/nulla pedig semmit sem csinál."
+		"message": "Ha igaz, a Ctrl + plusz/mínusz/nulla szabályozza a kicsinyítés/nagyítás értékét.\nHa hamis, a Ctrl + Shift + plusz/mínusz/nulla szabályozza a kicsinyítés/nagyítás értékét, míg a Ctrl + mínusz az ^_ értéket továbbítja, a Ctrl + plusz/nulla pedig semmit sem csinál."
 	},
 	"hterm_pref_ctrl_v_paste": {
 		"message": "A Ctrl+V beilleszt, ha igaz, és a ^V értéket küldi a gazdagépnek, ha hamis.\nA Ctrl+Shift+V a ^V értéket küldi a gazdagépnek, ha igaz, és beilleszt, ha hamis."
@@ -215,6 +422,9 @@
 	"hterm_pref_cursor_color": {
 		"message": "A szövegben látható kurzor színe."
 	},
+	"hterm_pref_cursor_shape": {
+		"message": "A szövegben látható kurzor alakja. Ez futtatáskor módosítható a terminál feloldószekvenciáival."
+	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Ha igaz, a terminál hangjelzései a háttérben internetes értesítést hoznak létre. https://www.w3.org/TR/notifications/\n\nAz értesítések megjelenítéséhez a felhasználó engedélyére van szükség. Ha a beállítás igaz értékre van állítva, a hterm szükség esetén megpróbál engedélyt kérni a felhasználótól. Előfordulhat, hogy a böngészők nem jelenítik meg az engedélykérést, ha azt nem felhasználói művelet aktiválta.\n\nAz „értesítések” engedéllyel rendelkező Chrome-bővítményeknek engedélyezett az értesítések megjelenítése."
 	},
@@ -222,13 +432,13 @@
 		"message": "Meghatározza, hogy a nem egyértelmű kelet-ázsiai karakterek két oszlopnyi szélességgel rendelkeznek-e."
 	},
 	"hterm_pref_enable_8_bit_control": {
-		"message": "A 8 bites vezérlőkarakterek engedélyezéséhez igaz, figyelmen kívül hagyásukhoz hamis.\n\nA beállítástól függetlenül figyelembe vesszük a vezérlőkarakterek két bájtos verzióit."
+		"message": "A 8 bites vezérlőkarakterek engedélyezéséhez igaz, figyelmen kívül hagyásukhoz hamis.\n\nA beállítástól függetlenül figyelembe vesszük a vezérlőkarakterek kétbájtos verzióit."
 	},
 	"hterm_pref_enable_blink": {
 		"message": "Igaz beállítás esetén a villogási attribútum figyelembe vétele. Hamis beállítás esetén a figyelmen kívül hagyása."
 	},
 	"hterm_pref_enable_bold": {
-		"message": "Igaz értéknél a félkövér betűtípus használata félkövér/világos attribútumú szöveg esetén. Hamis a normál betűtípus használatához. Nulla érték az automatikus észleléshez."
+		"message": "Igaz értéknél a félkövér betűtípus használata félkövér/világos attribútumú szöveg esetén. Hamis a normál betűtípus használatához. Null érték az automatikus észleléshez."
 	},
 	"hterm_pref_enable_bold_as_bright": {
 		"message": "Igaz értéknél a világos színek használata (8–15. a 16 színű paletta esetén) minden olyan szövegnél, amely rendelkezik a félkövér attribútummal. Más esetben hamis."
@@ -239,8 +449,14 @@
 	"hterm_pref_enable_clipboard_write": {
 		"message": "Annak engedélyezése a távoli gazdagép számára, hogy közvetlenül írjon a helyi rendszer vágólapjára.\nAz olvasási hozzáférés a beállítástól függetlenül sosincs megadva.\n\nEz a beállítás az olyan funkciókhoz való hozzáférést szabályozza, mint például a következő: OSC-52."
 	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Azt jelzi, hogy az Erase Display (Kijelző törlése) parancs (CSI-J) Erase Saved Lines (Mentett sorok törlése) funkciója (3. mód) törölheti-e a terminál visszagörgetési pufferét.\n\nEnnek az alapértelmezés szerinti engedélyezése biztonságos."
+	},
 	"hterm_pref_enable_dec12": {
 		"message": "Figyelembe veszi a gazdagép által a kurzor szövegben való villogási állapotának módosítására tett kísérletet a következő mód használatával: DEC Private Mode 12."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Annak meghatározása, hogy megjelenjenek-e a terminál méretei, amikor változik a terminál mérete."
 	},
 	"hterm_pref_environment": {
 		"message": "A környezeti változók eredeti készlete, objektumként."
@@ -261,16 +477,19 @@
 		"message": "Annak meghatározása, hogy automatikusan elrejti-e a szolgáltatás az egérmutatót gépelés közben. Alapértelmezésként a szolgáltatás automatikusan észleli, hogy a platform/operációs rendszer kezeli-e a beállítást.\n\nMegjegyzés: Egyes operációs rendszerek felülbírálhatják ezt a beállítást, és ilyenkor Ön nem mindig tilthatja le."
 	},
 	"hterm_pref_home_keys_scroll": {
-		"message": "Ha igaz, a Home/End a terminál görgetősávját irányítja, a Shift+Home/Shift+End billentyűparancsokat pedig elküldi a szolgáltatás a távoli gazdagépnek. Ha hamis, akkor a Home/End lenyomását küldi el a szolgáltatás a távoli gazdagépnek, míg a Shift+Home/Shift+End görget."
+		"message": "Ha igaz, a Home/End a terminál görgetősávját irányítja, a Shift + Home/Shift + End billentyűparancsokat pedig elküldi a szolgáltatás a távoli gazdagépnek. Ha hamis, akkor a Home/End lenyomását küldi el a szolgáltatás a távoli gazdagépnek, míg a Shift + Home/Shift + End görget."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Billentyűsorozatok hozzárendelése a billentyűműveletekhez. A billentyűsorozatok nulla vagy több módosító billentyűt tartalmaznak, melyeket billentyűkód követ. A billentyűkódok decimális vagy hexadecimális számok, illetve billentyűk lehetnek. A billentyűműveletek a gazdagép számára küldendő karakterláncokként vagy műveletazonosítókként határozhatók meg. A formátum teljes leírásának megtekintéséhez látogasson el a https://goo.gl/LWRndr címre.\n\nPéldák billentyűsorozatokra:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Helló Világ\\n'\"\n}"
+		"message": "Billentyűsorozatok hozzárendelése a billentyűműveletekhez. A billentyűsorozatok nulla vagy több módosító billentyűt tartalmaznak, melyeket billentyűkód követ. A billentyűkódok decimális vagy hexadecimális számok, illetve billentyűk lehetnek. A billentyűműveletek a gazdagép számára küldendő karakterláncokként vagy műveletazonosítókként határozhatók meg. A formátum teljes leírásának megtekintéséhez látogasson el a https://goo.gl/LWRndr címre.\n\nPéldák billentyűsorozatokra:\n{\n  \"Ctrl + Alt +K\": \"clearTerminal\",\n  \"Ctrl +Shift +L\": \"PASS\",\n  \"Ctrl +H\": \"'Helló Világ\\n'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Annak meghatározása, hogy az operációs rendszer gyakori billentyűkombinációi legyenek-e figyelembe véve ahelyett, hogy mindig a hterm saját használatára lennének lefoglalva."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ha igaz, átalakítja a médiabillentyűket a megfelelő F-billentyűkké. Ha hamis, a böngésző kezeli a billentyűket."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "ESC-előtag elküldése olyankor, amikor megnyomnak egy billentyűt a Meta gomb nyomva tartása közben.\n\nHa engedélyezve van, akkor például a Meta+K elküldi a „^[k” értéket, mintha csak megnyomta volna az Escape, majd a k billentyűket. Letiltása esetén csak a k kerül elküldésre."
+		"message": "ESC-előtag elküldése olyankor, amikor megnyomják valamelyik billentyűt a Meta gomb nyomva tartása közben.\n\nHa engedélyezve van, akkor például a Meta + K elküldi a „^[k” értéket, mintha csak megnyomta volna az Escape, majd a k billentyűket. Letiltása esetén csak a k kerül elküldésre."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "Beillesztés gomb az egéren vagy nulla az automatikus felismeréshez.\n\nAz automatikus felismeréshez az egér középső gombját használjuk a nem X11-platformok esetében (beleértve a Chrome OS-t is). X11-en az egér jobb gombját használjuk (mivel a natív ablakkezelő a középső egérgombbal illeszt be).\n\n0 == bal (elsődleges) gomb.\n1 == középső (kiegészítő) gomb.\n2 == jobb (másodlagos) gomb.\n\nEz a beállítás független a jobb egérgombos beillesztés beállításától.\n\nMegjegyzés: A beállítás megfelelően kezeli a jobb- és balkezes egereket."
@@ -279,19 +498,34 @@
 		"message": "Beillesztés jobb egérgombbal való kattintással.\n\nEz a beállítás független a „mouse-paste-button” beállítástól.\n\nMegjegyzés: A beállítás megfelelően kezeli a jobb- és balkezes egereket."
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "Ha igaz, a Page Up/Page Down a terminál görgetősávját irányítja, a Shift+Page Up/Shift+Page Down billentyűparancsokat pedig elküldi a szolgáltatás a távoli gazdagépnek. Ha hamis, akkor a Page Up/Down lenyomását küldi el a szolgáltatás a távoli gazdagépnek, míg a Shift+Page Up/Shift+Page Down görget."
+		"message": "Ha igaz, a Page Up/Page Down a terminál görgetősávját irányítja, a Shift + Page Up/Shift + Page Down billentyűparancsokat pedig elküldi a szolgáltatás a távoli gazdagépnek. Ha hamis, akkor a Page Up/Down lenyomását küldi el a szolgáltatás a távoli gazdagépnek, míg a Shift + Page Up/Shift + Page Down görget."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Meghatározza, hogy átkerül-e az Alt+1..9 billentyűparancsok kezelése a böngészőhöz.\n\nEz akkor hasznos, ha a hterm böngészőlapon fut, így nem veszíti el a felhasználó a Chrome „váltás lapra” billentyűkombinációját. Ha nem böngészőlapon fut, célszerűbb ezeket a billentyűparancsokat a gazdagépnek küldeni, hogy a vim és az emacs használhassa őket.\n\nHa igaz, az Alt+1..9 billentyűparancsokat a böngésző kezeli. Ha hamis, az Alt+1..9 billentyűparancsokat a rendszer elküldi a gazdagépnek. Ha nulla, automatikus észlelés valósul meg a böngészőplatform és az ablaktípus alapján."
+		"message": "Meghatározza, hogy átkerül-e az Alt + 1..9 billentyűparancsok kezelése a böngészőhöz.\n\nEz akkor hasznos, ha a hterm böngészőlapon fut, így nem veszíti el a felhasználó a Chrome „váltás lapra” billentyűparancsát. Ha nem böngészőlapon fut, célszerűbb ezeket a billentyűparancsokat a gazdagépnek küldeni, hogy a vim és az emacs használhassa őket.\n\nHa igaz, az Alt + 1..9 billentyűparancsokat a böngésző kezeli. Ha hamis, az Alt + 1..9 billentyűparancsokat a rendszer elküldi a gazdagépnek. Ha nulla, automatikus észlelés valósul meg a böngészőplatform és az ablaktípus alapján."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Annak meghatározása, hogy átadásra kerül-e a Ctrl + N a böngészőnek.\n\nHa igaz, a Ctrl + N billentyűparancsot a böngésző kezeli az „új ablak” billentyűparancsaként. Ha hamis, akkor a Ctrl + N a gazdagépnek lesz elküldve."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Meghatározza, hogy átkerül-e a Ctrl+1..9 billentyűparancsok kezelése a böngészőnek.\n\nEz akkor hasznos, ha a hterm böngészőlapon fut, így nem veszíti el a felhasználó a Chrome „váltás lapra” billentyűkombinációját. Ha nem böngészőlapon fut, célszerűbb ezeket a billentyűparancsokat a gazdagépnek küldeni, hogy a vim és az emacs használhassa őket.\n\nHa igaz, a Ctrl+1..9 billentyűparancsokat a böngésző kezeli. Ha hamis, a Ctrl+1..9 billentyűparancsokat a rendszer elküldi a gazdagépnek. Ha nulla, automatikus észlelés valósul meg a böngészőplatform és az ablaktípus alapján."
+		"message": "Meghatározza, hogy átkerül-e a Ctrl + 1..9 billentyűparancsok kezelése a böngészőhöz.\n\nEz akkor hasznos, ha a hterm böngészőlapon fut, így nem veszíti el a felhasználó a Chrome „váltás lapra” billentyűparancsát. Ha nem böngészőlapon fut, célszerűbb ezeket a billentyűparancsokat a gazdagépnek küldeni, hogy a vim és az emacs használhassa őket.\n\nHa igaz, a Ctrl + 1..9 billentyűparancsokat a böngésző kezeli. Ha hamis, a Ctrl + 1..9 billentyűparancsokat a rendszer elküldi a gazdagépnek. Ha nulla, automatikus észlelés valósul meg a böngészőplatform és az ablaktípus alapján."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Annak meghatározása, hogy átadásra kerül-e a Ctrl + T a böngészőnek.\n\nHa igaz, a Ctrl + T billentyűparancsot a böngésző kezeli az „új lap” billentyűparancsaként. Ha hamis, akkor a Ctrl + T a gazdagépnek lesz elküldve."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Annak meghatározása, hogy átadásra kerül-e a Ctrl + Tab és a Ctrl + Shift + Tab a böngészőnek.\n\nHa igaz, a Ctrl + Tab és a Ctrl + Shift + Tab billentyűparancsot a böngésző kezeli a „következő/előző lap” billentyűparancsaként. Ha hamis, akkor a Tab billentyű a gazdagépnek lesz elküldve a Ctrl vagy a Shift nélkül."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Annak meghatározása, hogy átadásra kerül-e a Ctrl + W a böngészőnek.\n\nHa igaz, a Ctrl + W billentyűparancsot a böngésző kezeli a „lap bezárása” billentyűparancsaként. Ha hamis, akkor a Ctrl + W a gazdagépnek lesz elküldve."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Meghatározza, hogy átkerül-e a Meta+1..9 billentyűparancsok kezelése a böngészőnek.\n\nEz akkor hasznos, ha a hterm böngészőlapon fut, így nem veszíti el a felhasználó a Chrome „váltás lapra” billentyűkombinációját. Ha nem böngészőlapon fut, célszerűbb ezeket a billentyűparancsokat a gazdagépnek küldeni, hogy a vim és az emacs használhassa őket.\n\nHa igaz, a Meta+1..9 billentyűparancsokat a böngésző kezeli. Ha hamis, a Meta+1..9 billentyűparancsokat a rendszer elküldi a gazdagépnek. Ha nulla, automatikus észlelés valósul meg a böngészőplatform és az ablaktípus alapján."
+		"message": "Meghatározza, hogy átkerül-e a Meta + 1..9 billentyűparancsok kezelése a böngészőhöz.\n\nEz akkor hasznos, ha a hterm böngészőlapon fut, így nem veszíti el a felhasználó a Chrome „váltás lapra” billentyűparancsát. Ha nem böngészőlapon fut, célszerűbb ezeket a billentyűparancsokat a gazdagépnek küldeni, hogy a vim és az emacs használhassa őket.\n\nHa igaz, a Meta + 1..9 billentyűparancsokat a böngésző kezeli. Ha hamis, a Meta + 1..9 billentyűparancsokat a rendszer elküldi a gazdagépnek. Ha nulla, automatikus észlelés valósul meg a böngészőplatform és az ablaktípus alapján."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Meghatározza, hogy továbbítja-e a rendszer a Meta+V billentyűparancsot a gazdagépnek."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Ha igaz, a behúzott szöveget beilleszti a rendszer a terminálba.\nHa hamis, figyelmen kívül hagyja a húzást."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Meghatározza a gazdagéptől kapott adatok várható kódolását.\nHa a kódolások nem egyeznek, valószínűleg vizuális hibák lesznek tapasztalhatók.\n\nAz érvényes értékek: „utf-8” és „raw”."
@@ -300,7 +534,7 @@
 		"message": "Meghatározza, hogy bármely billentyű lenyomásával az oldal aljára görget-e."
 	},
 	"hterm_pref_scroll_on_output": {
-		"message": "Meghatározza, hogy a terminálkimenettel görget-e az oldal aljára."
+		"message": "Meghatározza, hogy terminálkiírás esetén legörget-e az oldal aljára."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
 		"message": "Alternatív képernyőpuffer használatakor, aktív DECCKM (alkalmazáskurzor-billentyűk) mellett az egér görgője a nyílbillentyűket emulálja.\n\nA Shift billentyű nyomva tartásával ez a funkció ideiglenesen letiltható.\n\nPagerek („less”) használata, referencia-kézikönyvek és szövegszerkesztők olvasása (vi/nano), valamint screen/tmux használata esetében gyakran előfordul."
@@ -312,7 +546,7 @@
 		"message": "Függőleges görgetősáv mód."
 	},
 	"hterm_pref_shift_insert_paste": {
-		"message": "Az, hogy a Shift+Insert billentyűkombináció beillesztést hajt végre, illetve küldést végez a távoli gazdagépre."
+		"message": "Annak meghatározása, hogy a Shift + Insert billentyűkombináció beillesztést hajt végre vagy továbbításra kerül távoli gazdagépre."
 	},
 	"hterm_pref_terminal_encoding": {
 		"message": "Az alapértelmezett terminálkódolás (DOCS).\n\nAz ISO-2022 lehetővé teszi a karakter-hozzárendelések fordítását (például grafikus hozzárendelések).\nAz UTF-8 letiltja ezek támogatását.\n\nA lezárt változó azt jelenti, hogy a kódolást nem lehet módosítani a munkamenet során a terminál feloldószekvenciáival.\n\nHasználja az UTF-8 lehetőséget, ha nem tapasztal hibás megjelenítést a régi alkalmazásoknál."
@@ -363,7 +597,7 @@
 		"message": "Hangok"
 	},
 	"identity_label": {
-		"message": "Azonosság"
+		"message": "Identitás"
 	},
 	"import_link_aria_label": {
 		"message": "fájl importálása"
@@ -381,13 +615,25 @@
 		"message": "Nem található megjegyzett gazdagép; nincs mit elfelejteni."
 	},
 	"known_hosts_prompt": {
-		"message": "Elfelejteni kívánt gazdagép kiválasztása [1--$1]:"
+		"message": "Elfelejteni kívánt gazdagép kiválasztása [1–$1]:"
 	},
 	"known_hosts_title": {
 		"message": "Ismert gazdagépek:"
 	},
+	"licenses": {
+		"message": "Licencek"
+	},
+	"licenses_expand_link": {
+		"message": "licenc megjelenítése"
+	},
+	"licenses_title": {
+		"message": "Nyílt forráskódú licencek"
+	},
 	"loading_label": {
 		"message": "Betöltés…"
+	},
+	"migrate_to_ext": {
+		"message": "Megjegyzés: Álljon át az új Secure Shell-bővítmény ($1) használatára.\nA Chrome-alkalmazásokat megszüntettük, így ez a verzió nem kap többé frissítéseket.\nTovábbi információt az átállási útmutatóban ($2) talál."
 	},
 	"missing_param": {
 		"message": "Hiányzó paraméter: $1"
@@ -396,13 +642,178 @@
 		"message": "SFTP csatlakoztatása"
 	},
 	"mount_path_label": {
-		"message": "Csatolási útvonal"
+		"message": "Csatlakoztatási útvonal"
 	},
 	"mounted_message": {
 		"message": "Csatlakoztatva!"
 	},
+	"nasftp_cmd_cat_help": {
+		"message": "Fájl mozgatása a terminálhoz"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Munkakönyvtár módosítása"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Útvonalcsoport módosítása"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Engedélyek módosítása az útvonalaknál"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Útvonalak tulajdonosának módosítása"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "A terminál jelenlegi képernyőjének törlése."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Fájl másolása a vágólapra (alapértelmezett beállítás: a fájl elejétől számított 10 MiB)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "$1 bájt a vágólapra másolva"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Színhasználat váltása"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Forrás másolása a célhelyre"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Fájlok törlése"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Lemezstatisztikák megjelenítése"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Útvonal: $1\n  Fájlrendszer azonosítója: $2\n Összesen: $3\n  Használatban: $4 ($5%)\n Rendelkezésre áll: $6 (a nem kiemelt felhasználók számára)\n $7 (korlátlan jogosultságú felhasználó számára)"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Leválasztás"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Fájl letöltése: $1, a következőként: $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Fájlok letöltése"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Ez a súgóképernyő"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Könyvtár részleteinek listázása"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Link létrehozása a célra mutató útvonalon"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Könyvtárak létrehozása"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Fájl átnevezése"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Az értesítés karakterláncának beállítása"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Fájlok feltöltése"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Fájl feltöltése: $1 mint $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Jelenlegi munkakönyvtár megjelenítése"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Távoli munkakönyvtár: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Szimlinkek olvasása"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Útvonalak szabványosítása"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Fájlfeltöltés folytatása"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Fájlok eltávolítása"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Üres könyvtárak törlése"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Szövegközi fájlok megjelenítése"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Bővítmények:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Fájl állapotának megjelenítése"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Fájl: $1\n  Méret: $2 bájt\n   Felhasználói azonosító: $3\n   Csoportazonosító: $4\nHozzáférés: $5\n Hozzáférés ideje: $6\n Módosítás ideje: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Szimlink létrehozása a célra mutató útvonalon"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Útvonalak csonkolása 0 bájtra"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  szerverbővítmények:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Jelenlegi protokollverzió megjelenítése"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Információ az SFTP protokollverzióról:\n  helyi: $1\n  szerver: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: a fájl vége"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: a fájl nem található"
+	},
+	"nasftp_error_file_reading": {
+		"message": "Nem sikerült a(z) $1 olvasása: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Kezeletlen belső hiba; kérjük, jelentse be a hibát: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: érvénytelen szám: $3"
+	},
+	"nasftp_error_message": {
+		"message": "HIBA: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: a(z) „$2” bővítmény nem áll rendelkezésre"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: nem megfelelő fájl"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: túl kevés argumentum"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: engedély megtagadva"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: túl sok argumentum"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: ismeretlen parancs"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1 – ismeretlen jelölő: $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Kilépés kényszerítése"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 bájt átvitele megtörtént $2 másodperc alatt ($3/s)"
+	},
 	"nassh_options_error": {
-		"message": "Ismeretlen továbbítási lehetőség: $1"
+		"message": "Ismeretlen lehetőség: $1"
 	},
 	"nassh_product_name": {
 		"message": "Secure Shell"
@@ -420,7 +831,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Csatlakozás mentett profilhoz vagy új SSH-rendszerhez"
 	},
 	"open_as_window_tip": {
-		"message": "[Tipp] Használja a „Megnyitás ablakként” vagy a „Teljes képernyős” lehetőséget, hogy a Ctrl+W ne zárja be a terminált.\n[Tipp] További információt a következő URL-en találhat: $1."
+		"message": "[Profi tipp] Használja a „Megnyitás ablakként” vagy a „Teljes képernyős” lehetőséget, hogy a Ctrl + W ne zárja be a terminált.\n[Profi tipp] További információt a következő URL-en találhat: $1."
 	},
 	"options_button_label": {
 		"message": "Beállítások"
@@ -434,14 +845,44 @@
 	"plugin_loading_failed": {
 		"message": " nem sikerült. :("
 	},
+	"popup_connect_tooltip": {
+		"message": "Új lapon való megnyitáshoz tartsa lenyomva a Ctrl billentyűt."
+	},
 	"pref_backup_filename": {
 		"message": "Biztonságos héj beállításainak biztonsági másolata.json"
 	},
+	"preferences_header_ssh_files": {
+		"message": "SSH-fájlok"
+	},
 	"preferences_header_terminal": {
-		"message": "Profilbeállítások"
+		"message": "Terminálbeállítások"
+	},
+	"preferences_header_uri": {
+		"message": "URI-kezelők"
 	},
 	"preferences_reset": {
 		"message": "Minden beállítás visszaállítva!"
+	},
+	"protocol_register_button": {
+		"message": "Protokollkezelők regisztrálása"
+	},
+	"protocol_register_explain": {
+		"message": "Az alábbi gomb megkísérli a kezelők regisztrációját az összes általunk támogatott protokollnál. Ez lehetővé teszi például, hogy közvetlenül kezeljük az ssh:// linkeket. Minden protokollhoz egy-egy értesítést jelenít meg a böngésző, kérjük, erősítse meg, illetve fogadja el mindegyiket, amikor megjelenik. Ha nem jelenik meg értesítés, a következő szakaszban találja a problémamegoldási tippeket."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Ha már regisztráltunk kezelőket, vagy a korábbi regisztrációs kísérletek meg lettek tagadva, akkor nem jelennek meg további értesítések. Nyissa meg az alábbi párbeszédpanelt, majd jelölje be a regisztrált kezelői beállításokat az ssh/sftp/stb. szakaszokban. Ha ez a program le van tiltva, törölheti a beállításokat, ami után újrapróbálhatja a regisztrációt. Ha a program már regisztrálva van, de nem ez van beállítva alapértelmezett kezelőként, módosíthatja az alapértelmezett kezelőt is."
+	},
+	"protocol_register_options_link": {
+		"message": "Protokollregiszter"
+	},
+	"protocol_register_settings_button": {
+		"message": "Regisztrált kezelők beállításainak megnyitása"
+	},
+	"protocol_register_title": {
+		"message": "Secure Shell protokollkezelési regisztráció súgója"
+	},
+	"read_size_label": {
+		"message": "Olvasási méret (KiB)"
 	},
 	"reconnect_message": {
 		"message": "Újracsatlakozás (r), Másik kapcsolat kiválasztása (c) vagy Kilépés (x)?"
@@ -450,10 +891,13 @@
 		"message": "Újrapróbálkozás…"
 	},
 	"request_pin_prompt": {
-		"message": "Adja meg a PIN-kódot a(z) $1 kulcs feloldásához a(z) „$2” eszközön ($3 próbálkozás van hátra):"
+		"message": "Adja meg a PIN-kódot a(z) $1 kulcs feloldásához a(z) „$2 ($3)” eszközön ($4 próbálkozás van hátra):"
 	},
 	"restore_prefs": {
 		"message": "Biztonsági másolat visszaállítása"
+	},
+	"save_label": {
+		"message": "Mentés"
 	},
 	"shortcut_list_aria_label": {
 		"message": "mentett kapcsolatok"
@@ -464,8 +908,44 @@
 	"ssh_argstr_label": {
 		"message": "SSH-argumentumok"
 	},
+	"stream_open_error": {
+		"message": "Nemsikerült a stream ($1) megnyitása: $2"
+	},
 	"terminal_clear_menu_label": {
 		"message": "Terminálképernyő törlése"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI-színek"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Élsimítás"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Csengő"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Villog"
+	},
+	"terminal_name_pref_color": {
+		"message": "Szín"
+	},
+	"terminal_name_pref_font": {
+		"message": "Betűtípus"
+	},
+	"terminal_name_pref_image": {
+		"message": "Kép"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Alak"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Látható"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Az alapértelmezett paletta színeinek beállítása."
+	},
+	"terminal_pref_bell": {
+		"message": "Hallható terminálcsengő."
 	},
 	"terminal_preview_label": {
 		"message": "Előnézet"
@@ -476,11 +956,137 @@
 	"terminal_reset_menu_label": {
 		"message": "Terminál visszaállítása"
 	},
+	"terminal_settings_background_image_help": {
+		"message": "A háttérkép URL-címe. A „http://” vagy „https://” előtaggal kell kezdődnie. Ha nincs kép, hagyja üresen.\n\nPéldául:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Automatikus"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Letiltás"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Függőleges sáv"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Letiltás"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Aláhúzott"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Biztosan visszaállítja az alapértelmezett témabeállításokat?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Téma visszaállítása"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Visszaállítás"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Hagyományos"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Sötét"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Pára"
+	},
+	"terminal_theme_light_label": {
+		"message": "Világos"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Sötét Solarized"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Világos Solarized"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "0. szín: fekete"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "1. szín: piros"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "10. szín: élénkzöld"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "11. szín: élénksárga"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "12. szín: élénkkék"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "13. szín: élénkmagenta"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "14. szín: élénk ciánkék"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "15. szín: élénkfehér"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "2. szín: zöld"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "3. szín: sárga"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "4. szín: kék"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "5. szín: magenta"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "6. szín: ciánkék"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "7. szín: fehér"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "8. szín: élénkfekete"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "9. szín: élénkpiros"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Megjelenés"
+	},
+	"terminal_title_pref_background": {
+		"message": "Háttér"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Viselkedés"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "Kurzor"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Billentyűzet"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Billentyűzet és egér"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Egér"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Görgetősáv"
+	},
+	"terminal_title_pref_text": {
+		"message": "Szöveg"
+	},
+	"terminal_title_settings": {
+		"message": "Beállítások"
+	},
+	"terminal_title_theme": {
+		"message": "Téma"
+	},
 	"tip_1": {
 		"message": "A linkek megnyitásához a Ctrl (Mac OS rendszeren Cmd) billentyűt is lenyomhatja, miközben rájuk kattint!"
 	},
 	"tip_10": {
-		"message": "Amikor ablakban fut, a Ctrl+Shift+N billentyűparanccsal lehet új munkamenetet indítani."
+		"message": "Amikor ablakban fut, a Ctrl + Shift + N billentyűparanccsal lehet új munkamenetet indítani."
 	},
 	"tip_11": {
 		"message": "Módosíthatja a billentyűket/billentyűparancsokat: https://goo.gl/LWRndr"
@@ -541,6 +1147,9 @@
 	},
 	"welcome_version": {
 		"message": "Üdvözli a(z) $1 ($2)."
+	},
+	"write_size_label": {
+		"message": "Írási méret (KiB)"
 	},
 	"zoom_warning": {
 		"message": "Állítsa be a Chrome Menü -> Nagyítás értékét 100%-ra"
