@@ -1,3 +1,42 @@
+# 6.0.0, 2020-04-29, Tons of linting cleanups.
+
+* externs: Add/fix more APIs.
+* closure: Update to latest v20200406.
+* lit-element: Update to 2.3.1 to get live().
+* closure: Update to v20200204.
+* closure: Update to v20191027.
+* jsdoc: Improve type information.
+* chromeSupported: Fix return value.
+* intl-segmenter: Clean up code a bit.
+* colors: Fix implicit string->number coercion.
+* preference_manager_tests: Workaround bad closure externs.
+* polyfill: Drop Object.{values,enries}.
+* externs: Avoid "const".
+* i18n: Fallback to language if locale is not found.
+* eslint: Enable no-throw-literal check.
+* lint: Add missing dangling commas.
+* eslint: Enable no-empty check.
+* eslint: Enable prefer-rest-params check.
+* mocha: Upgrade to v7.
+* eslint: Enable no-var & prefer-const checks.
+* node: Update to 12.14.1.
+* closure: Update to v20190929.
+* eslint: Disable l/I variable usage by default.
+* lint: Convert var to let/const.
+* fetch: Retry on connection failures.
+* eslint: Enable arrow-parens checks.
+* eslint: Enable one-var-declaration-per-line checks.
+* eslint: Enable comma-dangle checks.
+* eslint: Enable space-infix-ops checks.
+* eslint: Enable comma-spacing checks.
+* colors: hslx/hsla: New helpers.
+* eslint: Enable no-useless-escape checks.
+* lint: Clean up remaining opt_ usage.
+* lint: Add missing braces everywhere per our style guide.
+* wcwidth: Reformat range code style.
+* MessageManager: Normalize message ids to uppercase.
+* colors: luminance/contrastRatio: New helpers.
+
 # 5.0.0, 2020-04-05, Unicode 13.0.0 update, and minor tooling improvements.
 
 * wcwidth: Update to Unicode 13.0.0 release.
