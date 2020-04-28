@@ -1,3 +1,46 @@
+# 0.29, 2020-04-29, Linting cleanups, new buffer logic, and restore window settings.
+
+* prefs: Remember & restore window dimensions per-profile.
+* prefs: Extend openas for fullscreen/maximized state.
+* prefs: Add framework for local (non-syncable) prefs.
+* command_instance: Save active profile id.
+* lit-element: Update to 2.3.1 to get live().
+* mkdeps: Add basic license checking.
+* closure: Update to v20200204.
+* closure: Update to v20191027.
+* sftp: Formalize nassh.sftp.fsp.sftpInstances structure.
+* sftp: Fix outdated string->arraybuffer types.
+* sftp: Tweak FileAttrs/File handling.
+* lint: Fix up various number handling.
+* lint: Avoid date->number coercion.
+* externs: Avoid "const".
+* eslint: Enable default-param-last check.
+* eslint: Enable no-case-declarations checks.
+* eslint: Enable no-throw-literal check.
+* lint: Add missing dangling commas.
+* eslint: Enable prefer-rest-params check.
+* mocha: Upgrade to v7.
+* eslint: Enable no-var & prefer-const checks.
+* lint: Convert var to let/const.
+* docs: Update processes/translations document.
+* prefs: Delete relay-options migration.
+* prefs: Clarify the terminal settings header.
+* import-translations: Handle more edge cases.
+* l10n: Improve some descriptions and translation tips.
+* sftp: Use new nassh.buffer API.
+* corp relay: Use new nassh.buffer API.
+* corpv4 relay: Use new nassh.buffer API.
+* prefs: Fix unselected panels bleeding through.
+* prefs: Fix navigation panel in small windows.
+* identity: Fix refresh when importing.
+* identity: Handle -cert.pub files.
+* prefs: Drop unused auth-agent-appid preference.
+* buffer: Add a scatter/gather buffer.
+* popup: Add tooltip hint for opening in a tab.
+* buffer: New API for managing byte buffers.
+* nassh: Add a basic framework for field trials.
+* streams: Throttle WebSocket sending as needed.
+
 # 0.28, 2020-04-14, Linting & perf fixes for corpv4 relay.
 
 * relay: corp: Rename original corp relay.
