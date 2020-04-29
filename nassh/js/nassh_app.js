@@ -153,10 +153,16 @@ nassh.App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
       // Ideally we'd just call chrome.tabs.update, but that won't focus the
       // new ssh session.  We close the current tab and then open a new one
       // right away -- Chrome will focus the content for us.
-      chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.tabs.remove(tabs[0].id);
+      //
+      // TODO(crbug.com/1075427#c6): Incognito mode is a bit buggy, so we have
+      // to use getCurrent+windowId instead of currentWindow directly for now.
+      chrome.windows.getCurrent((win) => {
+        chrome.tabs.query({active: true, windowId: win.id}, (tabs) => {
+          chrome.tabs.remove(tabs[0].id);
+        });
+
+        chrome.tabs.create({windowId: win.id, url: url, active: true});
       });
-      chrome.tabs.create({url: url, active: true});
       break;
     case 'newBackgroundTab':
       // Fired when pressing Meta+Enter/Command+Enter.
@@ -168,8 +174,13 @@ nassh.App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
       // in case Chrome selects that as the new active tab.  It won't kill us
       // right away though as the JS execution model guarantees we'll finish
       // running this func before the callback runs.
-      chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.tabs.remove(tabs[0].id);
+      //
+      // TODO(crbug.com/1075427#c6): Incognito mode is a bit buggy, so we have
+      // to use getCurrent+windowId instead of currentWindow directly for now.
+      chrome.windows.getCurrent((win) => {
+        chrome.tabs.query({active: true, windowId: win.id}, (tabs) => {
+          chrome.tabs.remove(tabs[0].id);
+        });
       });
       // We'll abuse this to open a window instead of a tab.
       lib.f.openWindow(url, '',

@@ -293,7 +293,11 @@ chrome.tabs.create = function(opts) {};
 chrome.tabs.getCurrent = function(callback) {};
 
 /**
- * @param {{active: boolean, currentWindow: boolean}} query
+ * @param {{
+ *   active: (boolean|undefined),
+ *   currentWindow: (boolean|undefined),
+ *   windowId: (number|undefined)
+ * }} query
  * @param {function({id: string})} callback
  */
 chrome.tabs.query = function(query, callback) {};
