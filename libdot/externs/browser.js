@@ -56,6 +56,9 @@ ChromeBaseEvent.prototype.addListener = function(callback) {};
 /** @param {LISTENER} callback */
 ChromeBaseEvent.prototype.removeListener = function(callback) {};
 
+/** @constructor */
+function MessageSender() {}
+
 var chrome = {};
 
 /** @const */
@@ -210,12 +213,16 @@ chrome.runtime.onInstalled.Details;
 chrome.runtime.onInstalled;
 
 /**
- * @type {!ChromeBaseEvent<function(
- *     {command: string},
- *     {id: string},
- *     function(!Object=)): boolean
- * >}
+ * @interface
+ * @extends {ChromeBaseEvent<function(*, !MessageSender, function(*): void):
+ * (boolean|undefined)>}
  */
+chrome.runtime.MessageSenderEvent = function() {};
+
+/** @type {!chrome.runtime.MessageSenderEvent} */
+chrome.runtime.onMessage;
+
+/** @type {!chrome.runtime.MessageSenderEvent} */
 chrome.runtime.onMessageExternal;
 
 /**

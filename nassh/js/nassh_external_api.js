@@ -30,7 +30,7 @@ nassh.External.COMMANDS.set('hello',
  * Probe the extension.
  *
  * @param {*} request The hello message.
- * @param {{id:string}} sender chrome.runtime.MessageSender
+ * @param {!MessageSender} sender chrome.runtime.MessageSender
  * @param {function(!Object=)} sendResponse called to send response.
  */
 function(request, sender, sendResponse) {
@@ -63,7 +63,7 @@ nassh.External.COMMANDS.set('mount',
  * @param {{username:string, hostname:string, port:(number|undefined),
  *     identityFile:string, knownHosts:string, fileSystemId:string,
  *     displayName:string}} request Request to mount specified host.
- * @param {{id:string}} sender chrome.runtime.MessageSender
+ * @param {!MessageSender} sender chrome.runtime.MessageSender
  * @param {function(!Object=)} sendResponse called to send response.
  */
 function(request, sender, sendResponse) {
@@ -123,7 +123,7 @@ nassh.External.NewWindowSettings;
  * @param {!Object} response The response to send back to the caller.
  * @param {!nassh.External.NewWindowSettings} request Customize the new window
  *     behavior.
- * @param {{id:string}} sender chrome.runtime.MessageSender.
+ * @param {!MessageSender} sender chrome.runtime.MessageSender.
  * @param {function(!Object=)} sendResponse called to send response.
  */
 nassh.External.newWindow_ = function(
@@ -167,7 +167,7 @@ nassh.External.COMMANDS.set('crosh',
  *
  * @param {!nassh.External.NewWindowSettings} request Customize the new window
  *     behavior.
- * @param {{id:string}} sender chrome.runtime.MessageSender.
+ * @param {!MessageSender} sender chrome.runtime.MessageSender.
  * @param {function(!Object=)} sendResponse called to send response.
  */
 function(request, sender, sendResponse) {
@@ -190,7 +190,7 @@ nassh.External.COMMANDS.set('nassh',
  *
  * @param {!nassh.External.NewWindowSettings} request Customize the new window
  *     behavior.
- * @param {{id:string}} sender chrome.runtime.MessageSender.
+ * @param {!MessageSender} sender chrome.runtime.MessageSender.
  * @param {function(!Object=)} sendResponse called to send response.
  */
 function(request, sender, sendResponse) {
@@ -212,7 +212,7 @@ nassh.External.COMMANDS.set('prefsImport',
  * Import new preferences.
  *
  * @param {{prefs:(!Object|string)}} request The preferences to import.
- * @param {{id:string}} sender chrome.runtime.MessageSender
+ * @param {!MessageSender} sender chrome.runtime.MessageSender
  * @param {function(!Object=)} sendResponse called to send response.
  */
 function(request, sender, sendResponse) {
@@ -240,7 +240,7 @@ nassh.External.COMMANDS.set('prefsExport',
  * Export existing preferences.
  *
  * @param {{asJson:boolean}} request How to export the preferences.
- * @param {{id:string}} sender chrome.runtime.MessageSender
+ * @param {!MessageSender} sender chrome.runtime.MessageSender
  * @param {function(!Object=)} sendResponse called to send response.
  */
 function(request, sender, sendResponse) {
@@ -263,7 +263,7 @@ nassh.External.COMMANDS.set('openProtoReg',
  * Show the protocol registration dialog.
  *
  * @param {*} request Not used.
- * @param {{id:string}} sender chrome.runtime.MessageSender
+ * @param {!MessageSender} sender chrome.runtime.MessageSender
  * @param {function(!Object=)} sendResponse Called to send response.
  */
 function(request, sender, sendResponse) {
@@ -287,7 +287,7 @@ nassh.External.OnMessageRequest;
  *
  * @param {boolean} internal Whether the sender is this own extension.
  * @param {!nassh.External.OnMessageRequest} request
- * @param {{id:string}} sender chrome.runtime.MessageSender.
+ * @param {!MessageSender} sender chrome.runtime.MessageSender.
  * @param {function(!Object=)} sendResponse called to send response.
  * @return {boolean} Whether sendResponse will be called asynchronously.
  * @private
@@ -332,30 +332,32 @@ nassh.External.dispatchMessage_ = (internal, request, sender, sendResponse) => {
  * Invoked when external app/extension calls chrome.runtime.sendMessage.
  * https://developer.chrome.com/apps/runtime#event-onMessageExternal.
  *
- * @param {!nassh.External.OnMessageRequest} request
- * @param {{id:string}} sender chrome.runtime.MessageSender.
- * @param {function(!Object=)} sendResponse called to send response.
+ * @param {*} request
+ * @param {!MessageSender} sender chrome.runtime.MessageSender.
+ * @param {function(*)} sendResponse called to send response.
  * @return {boolean} Whether sendResponse will be called asynchronously.
  * @private
  */
 nassh.External.onMessageExternal_ = (request, sender, sendResponse) => {
   return nassh.External.dispatchMessage_.call(
-      this, false, request, sender, sendResponse);
+      this, false, /** @type {!nassh.External.OnMessageRequest} */ (request),
+      sender, /** @type {function(!Object=)} */ (sendResponse));
 };
 
 /**
  * Invoked when internal code calls chrome.runtime.sendMessage.
  * https://developer.chrome.com/apps/runtime#event-onMessage.
  *
- * @param {!nassh.External.OnMessageRequest} request
- * @param {{id:string}} sender chrome.runtime.MessageSender.
- * @param {function(!Object=)} sendResponse called to send response.
+ * @param {*} request
+ * @param {!MessageSender} sender chrome.runtime.MessageSender.
+ * @param {function(*): void} sendResponse called to send response.
  * @return {boolean} Whether sendResponse will be called asynchronously.
  * @private
  */
 nassh.External.onMessage_ = (request, sender, sendResponse) => {
   return nassh.External.dispatchMessage_.call(
-      this, true, request, sender, sendResponse);
+      this, true, /** @type {!nassh.External.OnMessageRequest} */ (request),
+      sender, /** @type {function(!Object=)} */ (sendResponse));
 };
 
 // Initialize nassh.External.
