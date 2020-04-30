@@ -44,85 +44,6 @@ browser.runtime.PlatformInfo;
  */
 browser.runtime.getPlatformInfo = function() {};
 
-var chrome = {};
-
-/** @type {!FileSystemProvider} */
-chrome.fileSystemProvider;
-
-/** @param {function(!Array<FileSystemProvider>)} callback */
-chrome.fileSystemProvider.getAll = function(callback) {};
-
-/** @param {!Object} opts */
-chrome.fileSystemProvider.mount = function(opts) {};
-
-/**
- * @param {{fileSystemId: string}} fileSystem
- * @param {function()} callback
- */
-chrome.fileSystemProvider.unmount = function(fileSystem, callback) {};
-
-/**
- * Pending in cl/309118680.
- *
- * @type {!Object<string, string>}
- */
-chrome.runtime.Manifest.prototype.icons;
-
-chrome.terminalPrivate = {};
-
-/** @param {string} id */
-chrome.terminalPrivate.closeTerminalProcess = function(id) {};
-
-/** @param {function(boolean)} callback */
-chrome.terminalPrivate.getA11yStatus = function(callback) {};
-
-/** @param {function(!Object<string, *>)} callback */
-chrome.terminalPrivate.getCroshSettings = function(callback) {};
-
-/** @param {function(!Object<string, *>)} callback */
-chrome.terminalPrivate.getSettings = function(callback) {};
-
-/** @type {ChromeBaseEvent<function(boolean)>} */
-chrome.terminalPrivate.onA11yStatusChanged;
-
-/** @type {ChromeBaseEvent<function(string, string, string)>} */
-chrome.terminalPrivate.onProcessOutput;
-
-/** @type {ChromeBaseEvent<function(!Object<string, *>)>} */
-chrome.terminalPrivate.onSettingsChanged;
-
-/** @param {!Object<string, *>} callback */
-chrome.terminalPrivate.setSettings = function(prefValue, callback) {};
-
-/**
- * @param {string} commandName
- * @param {!Array<string>} argv
- * @param {function(string)} callback
- */
-chrome.terminalPrivate.openTerminalProcess = function(
-    commandName, argv, callback) {};
-
-/**
- * @param {!Array<string>} argv
- * @param {function(string)} callback
- */
-chrome.terminalPrivate.openVmshellProcess = function(argv, callback) {};
-
-/**
- * @param {string} id
- * @return {string} input
- */
-chrome.terminalPrivate.sendInput = function(id, input) {};
-
-/** @constructor */
-function FileSystemProvider() {}
-
-/** @param {!function()} listener */
-FileSystemProvider.prototype.addListener = function(listener) {};
-
-/** @type {string} */
-FileSystemProvider.prototype.fileSystemId;
-
 var Intl = Intl || {};
 
 /**
@@ -152,9 +73,6 @@ Intl.Segmenter.prototype.segment = function(s) {};
  * }}
  */
 Intl.Segmenter.Segment;
-
-/** @type {boolean} */
-Metadata.prototype.isDirectory;
 
 /**
  * @constructor
