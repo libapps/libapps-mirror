@@ -200,7 +200,7 @@ nassh.sftp.Client.prototype.onPacket = function(packet) {
 
   // Obtain the response packet's constructor and create it.
   const ResponseType = nassh.sftp.packets.ResponsePackets[packetType]
-      || nassh.sftp.UnknownPacket;
+      || nassh.sftp.packets.UnknownPacket;
   const responsePacket = new ResponseType(packet);
 
   // get request id and execute the callback (if found)
