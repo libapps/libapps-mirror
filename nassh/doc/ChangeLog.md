@@ -1,3 +1,9 @@
+# 0.30, 2020-04-30, SFTP regression fix.
+
+* sftp: Fix DataView loading.
+* sftp: Fix typo in packet name.
+* externs: Update chrome.runtime.onMessage APIs.
+
 # 0.29, 2020-04-29, Linting cleanups, new buffer logic, and restore window settings.
 
 * prefs: Remember & restore window dimensions per-profile.
