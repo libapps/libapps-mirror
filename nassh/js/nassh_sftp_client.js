@@ -165,7 +165,7 @@ nassh.sftp.Client.prototype.parseBuffer_ = function() {
 
     // Pull out the 32-bit message length.
     const bytes = this.buffer_.read(4);
-    const dv = new DataView(bytes.buffer);
+    const dv = new DataView(bytes.buffer, bytes.byteOffset);
     this.pendingMessageSize_ = dv.getUint32(0);
   }
 
