@@ -189,13 +189,13 @@ export class TerminalSettingsApp extends LitElement {
     return html`
         <terminal-settings-category-selector
             @category-change="${this.onCategoryChange_}">
-          <terminal-settings-category-option for="appearance">
+          <terminal-settings-category-option role="link" for="appearance">
             <h2 slot="title">${msg('TERMINAL_TITLE_PREF_APPEARANCE')}</h2>
           </terminal-settings-category-option>
-          <terminal-settings-category-option for="mousekeyboard">
+          <terminal-settings-category-option role="link" for="mousekeyboard">
             <h2 slot="title">${msg('TERMINAL_TITLE_PREF_KEYBOARD_MOUSE')}</h2>
           </terminal-settings-category-option>
-          <terminal-settings-category-option for="behavior">
+          <terminal-settings-category-option role="link" for="behavior">
             <h2 slot="title">${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}</h2>
           </terminal-settings-category-option>
         </terminal-settings-category-selector>
