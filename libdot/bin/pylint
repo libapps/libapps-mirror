@@ -10,7 +10,9 @@ from __future__ import print_function
 
 import argparse
 import json
+import logging
 import os
+import shutil
 import sys
 
 import libdot
@@ -61,6 +63,32 @@ def convert_pylint_to_kokoro(data):
         }
 
 
+def find_pylint():
+    """Figure out the name of the pylint tool.
+
+    It keeps changing with Python 2->3 migrations.  Fun.
+    """
+    # Prefer pylint3 as that's what we want.
+    if shutil.which('pylint3'):
+        return 'pylint3'
+
+    # If there's no pylint, give up.
+    if not shutil.which('pylint'):
+        logging.error('unable to locate pylint; please install:\n'
+                      'sudo apt-get install pylint')
+        sys.exit(1)
+
+    # Make sure pylint is using Python 3.
+    result = libdot.run(['pylint', '--version'], capture_output=True,
+                        encoding='utf-8')
+    if 'Python 3' in result.stdout:
+        return 'pylint'
+
+    logging.error('pylint does not support Python 3; please upgrade:\n%s',
+                  result.stdout.strip())
+    sys.exit(1)
+
+
 def run_pylint(opts, pythonpaths=()):
     """Run the pylint tool."""
     ret = True
@@ -79,7 +107,7 @@ def run_pylint(opts, pythonpaths=()):
 
     pylintrc = os.path.relpath(os.path.join(libdot.LIBAPPS_DIR, '.pylintrc'),
                                os.getcwd())
-    cmd = ['pylint3', '--rcfile', pylintrc] + opts.args + opts.paths
+    cmd = [find_pylint(), '--rcfile', pylintrc] + opts.args + opts.paths
     result = libdot.run(cmd, env=env, check=False)
     if result.returncode:
         ret = False
