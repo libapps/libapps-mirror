@@ -5,7 +5,7 @@
 import {terminal} from './terminal.js';
 
 /**
- * @fileoverview chrome://terminal unit tests.
+ * @fileoverview chrome-untrusted://terminal unit tests.
  */
 
 describe('terminal_tests.js', () => {

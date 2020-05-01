@@ -9,14 +9,15 @@
  * so we do it like this instead.
  */
 window.addEventListener('DOMContentLoaded', (event) => {
-  // Modifications if crosh is running as chrome://terminal.
-  if (location.href.startsWith('chrome://terminal/')) {
+  // Modifications if crosh is running as chrome-untrusted://terminal.
+  if (location.href.startsWith('chrome-untrusted://terminal/')) {
     lib.registerInit('terminal-private-storage', (onInit) => {
       hterm.defaultStorage = new lib.Storage.TerminalPrivate(onInit);
     });
     lib.registerInit('messages', nassh.loadMessages);
     // Polyfill chrome.runtime.getManifest since it is not available when
-    // running as chrome://terminal.  We require name, version, and icons.
+    // running as chrome-untrusted://terminal.  We require name, version, and
+    // icons.
     chrome.runtime.getManifest = () => {
       return /** @type {!chrome.runtime.Manifest} */ ({
         'name': 'Terminal',

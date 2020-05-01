@@ -39,8 +39,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   nassh.disableTabDiscarding();
 
-  // Modifications if crosh is running as chrome://terminal.
-  if (location.href.startsWith('chrome://terminal/')) {
+  // Modifications if crosh is running as chrome-untrusted://terminal.
+  if (location.href.startsWith('chrome-untrusted://terminal/')) {
     lib.registerInit('terminal-private-storage', (onInit) => {
       hterm.defaultStorage = new lib.Storage.TerminalPrivate(onInit);
     });
@@ -90,11 +90,12 @@ Crosh.msg = function(name, args) {
 };
 
 /**
- * Migrates settings from crosh extension to chrome://terminal.
+ * Migrates settings from crosh extension to chrome-untrusted://terminal.
  * TODO(crbug.com/1019021): Remove after M83.
  *
  * Copy any settings from the previous crosh extension which were stored in
- * chrome.storage.sync into the current local storage of chrome://terminal.
+ * chrome.storage.sync into the current local storage of
+ * chrome-untrusted://terminal.
  *
  * @param {function():void} callback Invoked when complete.
  */
