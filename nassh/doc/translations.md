@@ -34,7 +34,8 @@ Developers do not need to trigger this flow.
 
 Finally, the [XTB] files are converted back into [messages.json] before being
 merged back into this repository.
-This step is currently run manually by Google developers.
+This step is currently run manually by Google developers, although see the
+[Automatic Updates] section below for more info.
 
 Sometimes, usually when new messages are added, translators will ask for
 clarification and [file localization queries].
@@ -48,7 +49,7 @@ When writing HTML pages, use the `i18n` attribute on elements, and then
 [lib.MessageManager.processI18nAttribute] API will take care of inserting
 the right translations at runtime.
 
-## Updating Translations
+## Updating Translations {#updating-translations}
 
 *   Check on the current status of translations by looking at [tc/nassh].
     *   The [View Translation Percentage] page gives an overview.
@@ -66,6 +67,15 @@ the right translations at runtime.
 *   Upload & land the CL in our git repository.
 
 See the [TC](http://tc/) page for more details.
+
+### Automatic Updates {#automatic-updates}
+
+Our official build/release pipeline will automatically dump the latest
+translations and integrate them into the releases.
+Unfortunately, this means the official releases will always be up-to-date, but
+not the open source code or releases.
+This impacts our integration into CrOS with the crosh and Terminal projects.
+So [periodic manual exports][Updating Translations] are still required.
 
 ## FAQ
 
@@ -93,6 +103,9 @@ For Googlers, at this point the process is:
 *   Fill out the form details and submit it.
     *   Include the original report (bug or forums) if available.
 
+
+[Automatic Updates]: #automatic-updates
+[Updating Translations]: #updating-translations
 
 [new-bug]: https://goo.gl/vb94JY
 [Chrome i18n]: https://developer.chrome.com/extensions/i18n

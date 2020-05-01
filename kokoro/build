@@ -23,6 +23,10 @@ import libdot
 # uploaded & archived, while everything else will be discarded.
 ARTIFACTS_DIR = os.path.join(kokoro.LIBAPPS_DIR, 'artifacts')
 
+# When doing official internal builds, some files might be provided ahead of
+# time via this path.
+INPUT_ARTIFACTS_DIR = os.path.join(kokoro.LIBAPPS_DIR, 'google3-inputs')
+
 # Where we drop all our comment files for passing back to gerrit.
 # Kokoro can handle more than one file, but they must all be named the same
 # "gerrit_comments.json".  So we have to namespace the files under dirs.
@@ -106,8 +110,16 @@ def build():
         libdot.run(['cp', '-r', './ssh_client/output/plugin/', './nassh/'],
                    cwd=kokoro.LIBAPPS_DIR)
 
-    # Build the nassh program.
     nassh_dir = os.path.join(kokoro.LIBAPPS_DIR, 'nassh')
+
+    # If updated translations exist, use them.
+    tot_l10n = os.path.join(INPUT_ARTIFACTS_DIR, 'translations')
+    if os.path.exists(tot_l10n):
+        libdot.run(['./bin/import-translations', '--skip-git',
+                    os.path.join(tot_l10n, 'messages_fs', '_locales')],
+                   cwd=nassh_dir)
+
+    # Build the nassh program.
     dist_dir = os.path.join(nassh_dir, 'dist')
     shutil.rmtree(dist_dir, ignore_errors=True)
     libdot.run(['./bin/mkdist'], cwd=nassh_dir)
