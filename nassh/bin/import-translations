@@ -68,6 +68,12 @@ def main(argv):
         except FileNotFoundError:
             # Completely new translations won't exist yet.
             pass
+
+        # Special case: English messages are our source of truth, so we'd never
+        # import those from the dump.  Do not try to delete the file.
+        if locale == 'en':
+            continue
+
         libdot.unlink(path)
 
         # Prune empty dirs.
