@@ -34,6 +34,8 @@ def get_parser():
                         help='Skip (re)building of dependencies.')
     parser.add_argument('--visible', action='store_true',
                         help='Show the browser window to interact with.')
+    parser.add_argument('--reporter', default='spec',
+                        help='Set the mocha test results report format.')
     # Note: This CLI option matches Chrome's own naming.
     parser.add_argument('--no-sandbox', dest='sandbox',
                         action='store_false', default=True,
@@ -101,8 +103,8 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
             subprocess.Popen([browser, '--user-data-dir=%s' % (profile_dir,),
                               path] + sb_arg)
         else:
-            libdot.run(['mocha-headless-chrome', '-e', browser, '-f', path] +
-                       mocha_sb_arg)
+            libdot.run(['mocha-headless-chrome', '-e', browser, '-f', path,
+                        '--reporter', opts.reporter] + mocha_sb_arg)
     finally:
         # Wait for the server if it exists.
         if serve:
