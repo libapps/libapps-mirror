@@ -12,7 +12,9 @@ import fnmatch
 import glob
 import logging
 import os
+import re
 import shutil
+import subprocess
 import sys
 
 import kokoro
@@ -33,6 +35,17 @@ INPUT_ARTIFACTS_DIR = os.path.join(kokoro.LIBAPPS_DIR, 'google3-inputs')
 # We'll use a convention like gerrit_comments/$PKG/$TOOL/.
 GERRIT_COMMENTS_NAME = 'gerrit_comments.json'
 GERRIT_COMMENTS_DIR = os.path.join(ARTIFACTS_DIR, 'gerrit_comments')
+
+# Where we drop the test results for ingestion into sponge.  Since it only
+# handles XML junit/xunit results, we need to format+output manually.
+# Kokoro can handle more than one file, but they must all be named the same
+# "sponge_log.log" & "sponge_log.xml" (we'll ignore retry support as we don't
+# use it).  So we have to namespace the files under dirs.
+# We'll use a convention like sponge/$PKG/$TOOL/.
+# NB: sponge_log.log is only loaded if sponge_log.xml is found.
+SPONGE_LOG_NAME = 'sponge_log.log'
+SPONGE_XML_NAME = 'sponge_log.xml'
+SPONGE_RESULTS_DIR = os.path.join(ARTIFACTS_DIR, 'sponge')
 
 
 def is_presubmit():
@@ -226,16 +239,46 @@ def test_pylint():
 def test_unittests():
     """Run all the unittests."""
     ret = []
+    test_args = ['--no-sandbox', '--reporter', 'xunit']
     for pkg in ('libdot', 'hterm', 'nassh', 'terminal'):
         pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
         if os.path.exists(os.path.join(pkg_dir, 'package.json')):
-            cmd = ['npm', 'test', '--', '--no-sandbox']
+            cmd = ['npm', 'test', '--'] + test_args
         else:
-            cmd = ['./bin/load_tests', '--no-sandbox']
-        result = libdot.run(cmd, check=False, cwd=pkg_dir)
+            cmd = ['./bin/load_tests'] + test_args
+        result = libdot.run(cmd, check=False, cwd=pkg_dir,
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.STDOUT)
+
         if result.returncode:
             logging.error('%s test suite exited %i', pkg, result.returncode)
             ret.append(('unittests', pkg))
+
+        # Dump the results to log files for sponge to ingest.
+        sponge_dir = os.path.join(SPONGE_RESULTS_DIR, pkg, 'unittests')
+        os.makedirs(sponge_dir)
+        log_file = os.path.join(sponge_dir, SPONGE_LOG_NAME)
+        with open(log_file, 'wb') as fp:
+            fp.write(result.stdout)
+
+        # The test helper will output stuff before/after the XML file, so we
+        # need to scrape it out by hand.
+        m = re.search(br'^(.*)(<testsuite[ >].*</testsuite>)(.*)$',
+                      result.stdout, flags=re.DOTALL)
+        if m:
+            log_header, xml_data, log_footer = m.groups()
+
+            xml_file = os.path.join(sponge_dir, SPONGE_XML_NAME)
+            with open(xml_file, 'wb') as fp:
+                fp.write(xml_data)
+
+            print(log_header.decode('utf-8'))
+            print(f'<xml data is in {xml_file}>')
+            print(log_footer.decode('utf-8'))
+        else:
+            logging.error('Unable to parse xml results from log output!')
+            ret.append(('unittests', pkg))
+
     return ret
 
 
