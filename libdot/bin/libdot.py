@@ -233,8 +233,13 @@ def fetch(uri, output):
     tmpfile = output + '.tmp'
     def _download():
         """Attempt to download a URI."""
+        # This is the timeout used on each blocking operation, not the entire
+        # life of the connection.  So it's used for initial urlopen and for each
+        # read attempt (which may be partial reads).  5 minutes should be fine.
+        TIMEOUT = 5 * 60
+
         with open(tmpfile, 'wb') as outfp:
-            with urllib.request.urlopen(uri) as infp:
+            with urllib.request.urlopen(uri, timeout=TIMEOUT) as infp:
                 mb = 0
                 length = infp.length
                 while True:
