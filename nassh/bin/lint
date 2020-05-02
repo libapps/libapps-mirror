@@ -50,7 +50,7 @@ def main(argv):
 
     externs = ['--js_module_root', JS_DIR] + [
         '--externs=%s' % os.path.relpath(x) for x in
-        glob.glob(os.path.join(nassh.DIR, 'externs', '*.js'))]
+        sorted(glob.glob(os.path.join(nassh.DIR, 'externs', '*.js')))]
     closure_args = list(libdot.lint.DEFAULT_CLOSURE_ARGS) + externs + [
         # TODO(vapier): We want to turn this on at some point.
         '--jscomp_off=strictMissingProperties',

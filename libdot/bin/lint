@@ -231,7 +231,8 @@ def run_closure(opts, extra_args=()):
 
     libdot.closure_compiler.update_externs()
     externs = []
-    for extern in glob.glob(os.path.join(libdot.DIR, 'externs', '*.js')):
+    externs_paths = os.path.join(libdot.DIR, 'externs', '*.js')
+    for extern in sorted(glob.glob(externs_paths)):
         externs += ['--externs', os.path.relpath(extern, os.getcwd())]
 
     cmd = [
