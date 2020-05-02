@@ -43,15 +43,29 @@ def update_externs():
     URI_TEMPLATE = ('https://github.com/google/closure-compiler/raw/'
                     f'v{EXTERNS_VERSION}/contrib/externs/%(name)s.js')
 
-    for name in ('chrome', 'chrome_extensions'):
+    # We pick 50 as the mid point as it allows us to easily add files before
+    # and after the closure modules.
+    ORDER_BASE = 50
+
+    # NB: Order here matters when modules are subsets of others.  For example,
+    # 'chrome.js' defines 'var chrome = {}' which 'chrome_extensions.js' needs.
+    # If we reorder them, closure-compiler might accept it, but then silently
+    # not check some things.  It's kind of buggy that way :(.
+    # https://github.com/google/closure-compiler/issues/3586
+    EXTERNS = (
+        'chrome',
+        'chrome_extensions',
+    )
+
+    for i, name in enumerate(EXTERNS, start=ORDER_BASE):
         uri = URI_TEMPLATE % {'name': name}
         path = os.path.join(EXTERNS_DIR,
-                            f'closure-{name}-v{EXTERNS_VERSION}.js')
+                            f'{i}-closure-{name}-v{EXTERNS_VERSION}.js')
         if os.path.exists(path):
             continue
 
         for oldpath in glob.glob(os.path.join(
-                EXTERNS_DIR, f'closure-{name}-v*.js')):
+                EXTERNS_DIR, f'*closure-{name}-v*.js')):
             os.unlink(oldpath)
         libdot.fetch(uri, path)
 
