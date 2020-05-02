@@ -204,6 +204,13 @@ nassh.openOptionsPage = function() {
   }
 };
 
+/**
+ * Trigger the flow for sending feedback.
+ */
+nassh.sendFeedback = function() {
+  lib.f.openWindow('https://goo.gl/vb94JY');
+};
+
 /** Reload window. */
 nassh.reloadWindow = function() {
   document.location.hash = '';

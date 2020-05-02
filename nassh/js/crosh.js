@@ -180,6 +180,8 @@ Crosh.init = function() {
      }},
     {name: Crosh.msg('OPTIONS_BUTTON_LABEL'),
      action: function() { nassh.openOptionsPage(); }},
+    {name: Crosh.msg('SEND_FEEDBACK_LABEL'),
+     action: nassh.sendFeedback},
   ]);
 
   // Useful for console debugging.

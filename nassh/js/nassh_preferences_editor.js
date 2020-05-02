@@ -67,6 +67,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
     a = document.querySelector('#restore');
     a.onclick = prefsEditor.onRestoreClick.bind(prefsEditor);
 
+    a = document.querySelector('#feedback');
+    a.onclick = prefsEditor.onFeedbackClick.bind(prefsEditor);
+
     // Set up labels.
     document.querySelector('#manifest-name').textContent = manifest.name;
     hterm.messageManager.processI18nAttributes(document);
@@ -223,6 +226,17 @@ nassh.PreferencesEditor.prototype.selectProfile = function(profileId) {
       prefs.notifyAll();
       prefsEditor.syncPage();
     });
+};
+
+/**
+ * Attached to the onclick handler of the "Send Feedback" link.
+ *
+ * @param {?Event} e
+ */
+nassh.PreferencesEditor.prototype.onFeedbackClick = function(e) {
+  nassh.sendFeedback();
+
+  e.preventDefault();
 };
 
 /**

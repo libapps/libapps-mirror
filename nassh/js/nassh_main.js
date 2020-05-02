@@ -113,6 +113,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
        action: function() { terminal.command.removeAllKnownHosts(); }},
       {name: nassh.msg('OPTIONS_BUTTON_LABEL'),
        action: function() { nassh.openOptionsPage(); }},
+      {name: nassh.msg('SEND_FEEDBACK_LABEL'),
+       action: nassh.sendFeedback},
     ]);
 
     // Useful for console debugging.

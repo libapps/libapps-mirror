@@ -54,6 +54,13 @@ terminal.openOptionsPage = function() {
 };
 
 /**
+ * Trigger the flow for sending feedback.
+ */
+terminal.sendFeedback = function() {
+  lib.f.openWindow('https://goo.gl/vb94JY');
+};
+
+/**
  * Static initializer.
  *
  * This constructs a new hterm.Terminal instance and instructs it to run
@@ -130,6 +137,8 @@ terminal.init = function(element) {
      }},
     {name: terminal.msg('OPTIONS_BUTTON_LABEL'),
      action: function() { terminal.openOptionsPage(); }},
+    {name: terminal.msg('SEND_FEEDBACK_LABEL'),
+     action: terminal.sendFeedback},
   ]);
 
   return term;

@@ -63,6 +63,9 @@ popup.prototype.openLink_ = function(e) {
     case 'options':
       nassh.openOptionsPage();
       return;
+    case 'feedback':
+      nassh.sendFeedback();
+      return;
     default: {
       profile = this.localPrefs_.getProfile(id);
       let openas = '';
@@ -115,6 +118,7 @@ popup.prototype.populateList_ = function() {
   const ids = this.prefs_.get('profile-ids');
   ids.unshift('connect-dialog');
   ids.push('options');
+  ids.push('feedback');
 
   for (let i = 0; i < ids.length; i++) {
     const id = ids[i];
@@ -133,6 +137,10 @@ popup.prototype.populateList_ = function() {
         break;
       case 'options':
         link.textContent = nassh.msg('OPTIONS_BUTTON_LABEL');
+        link.style.textAlign = 'center';
+        break;
+      case 'feedback':
+        link.textContent = nassh.msg('SEND_FEEDBACK_LABEL');
         link.style.textAlign = 'center';
         break;
       default: {

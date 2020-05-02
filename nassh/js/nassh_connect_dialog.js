@@ -62,6 +62,7 @@ nassh.ConnectDialog = function(messagePort) {
   this.connectButton_ = lib.notNull(document.querySelector('#connect'));
   this.deleteButton_ = lib.notNull(document.querySelector('#delete'));
   this.optionsButton_ = lib.notNull(document.querySelector('#options'));
+  this.feedbackButton_ = lib.notNull(document.querySelector('#feedback'));
 };
 
 /**
@@ -236,6 +237,8 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
                                       this.onDeleteClick_.bind(this));
   this.optionsButton_.addEventListener('click',
                                        this.onOptionsClick_.bind(this));
+  this.feedbackButton_.addEventListener('click',
+                                        this.onFeedbackClick_.bind(this));
 
   // These fields interact with each-other's placeholder text.
   ['description', 'username', 'hostname', 'port',
@@ -1190,6 +1193,11 @@ nassh.ConnectDialog.prototype.onDeleteClick_ = function(e) {
  * Someone clicked on the options button.
  */
 nassh.ConnectDialog.prototype.onOptionsClick_ = nassh.openOptionsPage;
+
+/**
+ * Someone clicked on the feedback button.
+ */
+nassh.ConnectDialog.prototype.onFeedbackClick_ = nassh.sendFeedback;
 
 /**
  * KeyUp on the form element.
