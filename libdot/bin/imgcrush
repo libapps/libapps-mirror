@@ -14,11 +14,10 @@ We currently support png and jpg files.
 from __future__ import print_function
 
 import base64
-import glob
 import logging
 import multiprocessing
 import os
-import subprocess
+from pathlib import Path
 import sys
 
 import requests
@@ -35,7 +34,7 @@ PNG_CRUSHER_URL = ('https://chromium.googlesource.com/chromium/src/+/%s/tools/'
                    'resources/optimize-png-files.sh' % (CHROMIUM_REF,))
 
 # Our local cache of the script.
-PNG_CRUSHER = os.path.join(libdot.BIN_DIR, '.png.crusher.%s' % (CHROMIUM_REF,))
+PNG_CRUSHER = libdot.BIN_DIR / f'.png.crusher.{CHROMIUM_REF}'
 
 # The tool used to crush jpeg images.
 JPG_CRUSHER = 'jpegoptim'
@@ -43,24 +42,21 @@ JPG_CRUSHER = 'jpegoptim'
 
 def update_png_crusher():
     """Update our local cache of Chromium's png optimizer script."""
-    if os.path.exists(PNG_CRUSHER):
+    if PNG_CRUSHER.exists():
         return
 
-    for path in glob.glob(os.path.join(libdot.BIN_DIR, '.png.crusher.*')):
-        os.unlink(path)
+    for path in libdot.BIN_DIR.glob('.png.crusher.*'):
+        path.unlink()
 
     r = requests.get(PNG_CRUSHER_URL + '?format=TEXT')
-    with open(PNG_CRUSHER, 'wb') as fp:
-        fp.write(base64.b64decode(r.text))
-
-    os.chmod(PNG_CRUSHER, 0o755)
+    PNG_CRUSHER.write_bytes(base64.b64decode(r.text))
+    PNG_CRUSHER.chmod(0o755)
 
 
 def run(path, cmd):
     """Run the |cmd| for the |path| file."""
     logging.info('Processing %s', path)
-    logging.debug('Running: %s', ' '.join(cmd))
-    subprocess.call(cmd)
+    libdot.run([str(x) for x in cmd], check=False)
 
 
 def process_file(pool, path):
@@ -69,29 +65,32 @@ def process_file(pool, path):
     Jobs are thrown into the |pool|, but we don't currently bother checking
     their return values.  General life cycle management is handled by the pool.
     """
-    _, ext = os.path.splitext(path)
-    if ext in ('.png',):
+    if path.suffix in ('.png',):
         update_png_crusher()
         pool.apply_async(run, (path, [PNG_CRUSHER, path]))
-    elif ext in ('.jpg', '.jpeg'):
+    elif path.suffix in ('.jpg', '.jpeg'):
         pool.apply_async(run, (path, [JPG_CRUSHER, path]))
+    else:
+        logging.debug('Skipping unknown file type %s', path.suffix)
 
 
 def process_dir(pool, topdir):
     """Process all the paths under |topdir|."""
     for root, dirs, files in os.walk(topdir):
+        root = Path(root)
+
         # Not really needed, but makes things consistent.
         dirs.sort()
         files.sort()
 
         for path in files:
-            process_file(pool, os.path.join(root, path))
+            process_file(pool, root / path)
 
 
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
-    parser.add_argument('paths', nargs='+',
+    parser.add_argument('paths', nargs='+', type=Path,
                         help='Image files or directories to crush.')
     return parser
 
@@ -105,9 +104,9 @@ def main(argv):
 
     # We walk the top set of args by hand to deref links.
     for path in opts.paths:
-        if os.path.isdir(path):
+        if path.is_dir():
             process_dir(pool, path)
-        elif os.path.isfile(path):
+        elif path.is_file():
             process_file(pool, path)
 
     pool.close()
