@@ -13,10 +13,9 @@ tables.
 
 You'll first want to grab the latest Unicode release.  It's easiest to grab
 the entire archive (it's small) and then extract the few files you want.
-The `UNIDATA` path below is really a symlink to the latest version.
+THe helper script can download & extract the latest files:
 ```
-$ wget https://www.unicode.org/Public/UNIDATA/UCD.zip
-$ unzip -u UCD.zip EastAsianWidth.txt PropList.txt UnicodeData.txt
+$ ./ranges.py download
 ```
 
 Then use the helper script to update the tables in [lib_wc.js](./lib_wc.js).
