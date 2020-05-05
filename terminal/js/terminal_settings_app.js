@@ -82,6 +82,12 @@ export class TerminalSettingsApp extends LitElement {
         top: 0;
       }
 
+      h1 {
+        font-size: 16px;
+        font-weight: 500;
+        padding-left: 24px;
+      }
+
       h4 {
         color: #212121;
         font-weight: 400;
@@ -89,7 +95,7 @@ export class TerminalSettingsApp extends LitElement {
         margin: 12px 0;
       }
 
-      terminal-settings-category-selector {
+      #left-panel {
         min-width: 192px;
       }
 
@@ -187,18 +193,21 @@ export class TerminalSettingsApp extends LitElement {
         );
 
     return html`
-        <terminal-settings-category-selector
-            @category-change="${this.onCategoryChange_}">
-          <terminal-settings-category-option role="link" for="appearance">
-            <h2 slot="title">${msg('TERMINAL_TITLE_PREF_APPEARANCE')}</h2>
-          </terminal-settings-category-option>
-          <terminal-settings-category-option role="link" for="mousekeyboard">
-            <h2 slot="title">${msg('TERMINAL_TITLE_PREF_KEYBOARD_MOUSE')}</h2>
-          </terminal-settings-category-option>
-          <terminal-settings-category-option role="link" for="behavior">
-            <h2 slot="title">${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}</h2>
-          </terminal-settings-category-option>
-        </terminal-settings-category-selector>
+        <div id="left-panel">
+          <h1>${msg('PREFERENCES_HEADER_TERMINAL')}</h1>
+          <terminal-settings-category-selector
+              @category-change="${this.onCategoryChange_}">
+            <terminal-settings-category-option role="link" for="appearance">
+              <h2 slot="title">${msg('TERMINAL_TITLE_PREF_APPEARANCE')}</h2>
+            </terminal-settings-category-option>
+            <terminal-settings-category-option role="link" for="mousekeyboard">
+              <h2 slot="title">${msg('TERMINAL_TITLE_PREF_KEYBOARD_MOUSE')}</h2>
+            </terminal-settings-category-option>
+            <terminal-settings-category-option role="link" for="behavior">
+              <h2 slot="title">${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}</h2>
+            </terminal-settings-category-option>
+          </terminal-settings-category-selector>
+        </div>
 
         <section class="terminal-settings-category"
             ?active-category="${this.activeCategory_ === 'appearance'}">
