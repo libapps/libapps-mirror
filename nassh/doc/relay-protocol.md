@@ -480,7 +480,9 @@ TODO
 
 [FAQ]: ./FAQ.md
 [nassh_relay_corp.js]: ../js/nassh_relay_corp.js
+[nassh_relay_corpv4.js]: ../js/nassh_relay_corpv4.js
 [nassh_relay_sshfe.js]: ../js/nassh_relay_sshfe.js
 [nassh_stream_relay_corp.js]: ../js/nassh_stream_relay_corp.js
+[nassh_stream_relay_corpv4.js]: ../js/nassh_stream_relay_corpv4.js
 [nassh_stream_relay_sshfe.js]: ../js/nassh_stream_relay_sshfe.js
 [Options]: ./options.md
