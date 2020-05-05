@@ -13,6 +13,7 @@ import importlib.machinery
 import logging
 import logging.handlers
 import os
+from pathlib import Path
 import subprocess
 import sys
 import time
@@ -26,9 +27,9 @@ assert (sys.version_info.major, sys.version_info.minor) >= (3, 6), (
     'Python 3.6 or newer is required; found %s' % (sys.version,))
 
 
-BIN_DIR = os.path.dirname(os.path.realpath(__file__))
-DIR = os.path.dirname(BIN_DIR)
-LIBAPPS_DIR = os.path.dirname(DIR)
+BIN_DIR = Path(__file__).resolve().parent
+DIR = BIN_DIR.parent
+LIBAPPS_DIR = DIR.parent
 
 
 class ColoredFormatter(logging.Formatter):
