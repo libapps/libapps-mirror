@@ -20,7 +20,7 @@ from __future__ import print_function
 
 import argparse
 import re
-import os
+from pathlib import Path
 import sys
 
 
@@ -28,8 +28,7 @@ def load_proplist():
     """Return codepoints based on their various properties."""
     db = {}
 
-    with open('PropList.txt', encoding='utf-8') as fp:
-        data = fp.read()
+    data = Path('PropList.txt').read_text(encoding='utf-8')
 
     for line in data.splitlines():
         line = line.split('#', 1)[0].strip()
@@ -93,8 +92,7 @@ def load_unicode_data():
         'Zs': set(),
     }
 
-    with open('UnicodeData.txt', encoding='utf-8') as fp:
-        data = fp.read()
+    data = Path('UnicodeData.txt').read_text(encoding='utf-8')
 
     for line in data.splitlines():
         line = line.split('#', 1)[0].strip()
@@ -128,8 +126,7 @@ def load_east_asian():
         'W': set(),  # Wide.
     }
 
-    with open('EastAsianWidth.txt', encoding='utf-8') as fp:
-        data = fp.read()
+    data = Path('EastAsianWidth.txt').read_text(encoding='utf-8')
 
     for line in data.splitlines():
         line = line.split('#', 1)[0].strip()
@@ -326,8 +323,7 @@ def gen_east_asian_ambiguous(db):
 def find_js(js):
     """Locate the JavaScript file to update."""
     if js is None:
-        js = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                          'lib_wc.js')
+        js = Path(__file__).resolve().parent / 'lib_wc.js'
 
     return js
 
@@ -335,7 +331,7 @@ def find_js(js):
 def get_parser():
     """Return an argparse parser for the CLI."""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--js',
+    parser.add_argument('--js', type=Path,
                         help='JavaScript file to update')
     parser.add_argument('action', choices=('print', 'update'),
                         help='Operating mode')
@@ -362,15 +358,13 @@ def main(argv):
             print(name + ' = ' + text)
     else:
         js = find_js(opts.js)
-        with open(js, encoding='utf-8') as fp:
-            data = fp.read()
+        data = js.read_text(encoding='utf-8')
 
         for name, text in tables:
             data = re.sub(r'^%s = .*?^\];\n$' % name, name + ' = ' + text, data,
                           flags=re.M|re.S)
 
-        with open(js, 'w', encoding='utf-8') as fp:
-            fp.write(data)
+        js.write_text(data, encoding='utf-8')
 
 
 if __name__ == '__main__':
