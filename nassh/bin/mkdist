@@ -361,8 +361,7 @@ def main(argv):
         mkzip('manifest_v1.5.json', True, '-rollback', _rollback)
 
     # Never minify, maybe gzip.
-    # TODO(crbug.com/1023866): Gzip off for now until chrome is ready.
-    mkcrosh(False, False)
+    mkcrosh(False, True)
 
 
 if __name__ == '__main__':
