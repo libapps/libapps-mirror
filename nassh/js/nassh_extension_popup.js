@@ -89,8 +89,14 @@ popup.prototype.openLink_ = function(e) {
     let left = 0;
     let height = 600;
     let width = 900;
-    if (id) {
-      const profile = this.localPrefs_.getProfile(id);
+    let profile;
+    try {
+      profile = this.localPrefs_.getProfile(id);
+    } catch (e) {
+      // Ignore errors here to make the UI more robust.  And this ignores the
+      // saved settings for connect-dialog which we don't track currently.
+    }
+    if (profile) {
       const parseDim = (value, fallback) => {
         const ret = parseInt(value, 10);
         return isNaN(ret) ? fallback : ret;
@@ -115,7 +121,8 @@ popup.prototype.openLink_ = function(e) {
  * Fill the popup with all the connections.
  */
 popup.prototype.populateList_ = function() {
-  const ids = this.prefs_.get('profile-ids');
+  // Create a copy since we're going to modify it in place below.
+  const ids = this.prefs_.get('profile-ids').slice();
   ids.unshift('connect-dialog');
   ids.push('options');
   ids.push('feedback');
