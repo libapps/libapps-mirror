@@ -1,6 +1,6 @@
 {
   "name": "nassh",
-  "version": "0.30.0",
+  "version": "0.31.0",
   "description": "Terminal emulator and SSH and SFTP client",
   "main": "js/nassh.js",
   "repository": {

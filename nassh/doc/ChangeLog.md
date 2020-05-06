@@ -1,3 +1,13 @@
+# 0.31, 2020-05-07, Fresh extension dialog regression fix.
+
+* popup: Save a handle for live debugging.
+* popup: Filter out connection dialog from saved settings.
+* Add Send Feedback buttons everywhere.
+* import-translations: Avoid deleting en locale.
+* kokoro: Use tot translations if available.
+* eslint: Enable no-multi-spacesfix checks.
+* omnibox: Workaround bugs in incognito mode.
+
 # 0.30, 2020-04-30, SFTP regression fix.
 
 * sftp: Fix DataView loading.
