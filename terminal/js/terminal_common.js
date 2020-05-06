@@ -195,3 +195,19 @@ export function watchBackgroundColor(prefs, updateBody) {
     }
   });
 }
+
+/**
+ * Set up a title cache handler, which sets the document title to the cached
+ * value immediately if it exists, and set up a mutation observer to update the
+ * cached value to the *first* new document title.
+ */
+export function setUpTitleCacheHandler() {
+  const cacheTitle = window.localStorage.getItem('cachedTitle');
+  if (cacheTitle !== null) {
+    document.title = cacheTitle;
+  }
+  (new MutationObserver(function(mutations, observer) {
+    observer.disconnect();
+    window.localStorage.setItem('cachedTitle', mutations[0].target.textContent);
+  })).observe(document.querySelector('title'), {childList: true});
+}

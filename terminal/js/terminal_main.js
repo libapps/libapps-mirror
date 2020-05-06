@@ -7,8 +7,13 @@
  */
 
 import {terminal} from './terminal.js';
+import {setUpTitleCacheHandler} from './terminal_common.js';
 import {TerminalDisplayManagerElement as Manager} from
     './terminal_display_manager.js';
+
+// This must be called before we initialize the terminal to ensure capturing the
+// first title that hterm sets.
+setUpTitleCacheHandler();
 
 window.addEventListener('DOMContentLoaded', () => {
   // TODO(crbug.com/999028): Make sure system web apps are not discarded as
