@@ -9,7 +9,10 @@
  * so we do it like this instead.
  */
 window.addEventListener('DOMContentLoaded', (event) => {
-  lib.init(() => new popup());
+  lib.init(() => {
+    // Save a handle for debugging.
+    window.popup_ = new popup();
+  });
 });
 
 /**
