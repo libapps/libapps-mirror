@@ -39,8 +39,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   nassh.disableTabDiscarding();
 
-  // Modifications if crosh is running as chrome-untrusted://terminal.
-  if (location.href.startsWith('chrome-untrusted://terminal/')) {
+  // Modifications if crosh is running as a web app.
+  if (Crosh.isWebApp()) {
     lib.registerInit('terminal-private-storage', (onInit) => {
       hterm.defaultStorage = new lib.Storage.TerminalPrivate(onInit);
     });
@@ -79,6 +79,17 @@ function Crosh(argv) {
 Crosh.croshBuiltinId = 'nkoccljplnhpfnfiajclkommnmllphnl';
 
 /**
+ * Returns true if this is running as a web app in
+ * chrome-untrusted://[crosh|terminal]/, or false if this is running as a nassh
+ * app/extension.
+ *
+ * @return {boolean}
+ */
+Crosh.isWebApp = function() {
+  return location.href.startsWith('chrome-untrusted://');
+};
+
+/**
  * Return a formatted message in the current locale.
  *
  * @param {string} name The name of the message to return.
@@ -90,12 +101,11 @@ Crosh.msg = function(name, args) {
 };
 
 /**
- * Migrates settings from crosh extension to chrome-untrusted://terminal.
+ * Migrates settings from crosh extension on first run as a web app.
  * TODO(crbug.com/1019021): Remove after M83.
  *
  * Copy any settings from the previous crosh extension which were stored in
- * chrome.storage.sync into the current local storage of
- * chrome-untrusted://terminal.
+ * chrome.storage.sync.
  *
  * @param {function():void} callback Invoked when complete.
  */
@@ -129,9 +139,10 @@ Crosh.init = function() {
   const params = new URLSearchParams(document.location.search);
   const profileName = params.get('profile');
   const terminal = new hterm.Terminal(profileName);
+  // Use legacy pasting when running as an extension to avoid prompt.
   // TODO(crbug.com/1063219) We need this to not prompt the user for clipboard
   // permission.
-  terminal.alwaysUseLegacyPasting = true;
+  terminal.alwaysUseLegacyPasting = !Crosh.isWebApp();
 
   // If we want to execute something other than the default crosh.
   const commandName = params.get('command') || 'crosh';
