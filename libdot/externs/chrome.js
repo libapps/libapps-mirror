@@ -47,6 +47,9 @@ chrome.terminalPrivate.onProcessOutput;
 /** @type {ChromeBaseEvent<function(!Object<string, *>)>} */
 chrome.terminalPrivate.onSettingsChanged;
 
+/** @param {function()} callback */
+chrome.terminalPrivate.openOptionsPage = function(callback) {};
+
 /** @param {!Object<string, *>} callback */
 chrome.terminalPrivate.setSettings = function(prefValue, callback) {};
 

@@ -50,11 +50,7 @@ terminal.msg = function(name, args) {
  * Create a new window to the options page for customizing preferences.
  */
 terminal.openOptionsPage = function() {
-  // Use chrome.tabs.create directly rather than lib.f.openWindow to ensure it
-  // opens in the current terminal window. lib.f.openWindow always opens an
-  // empty window first which opens in a NORMAL browser.
-  chrome.tabs.create(
-      {url: 'chrome-untrusted://terminal/html/terminal_settings.html'});
+  chrome.terminalPrivate.openOptionsPage(() => {});
 };
 
 /**
