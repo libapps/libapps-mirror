@@ -1925,6 +1925,10 @@
 		"description": "The menu label to reset the active terminal settings.",
 		"message": "Terminal Reset"
 	},
+	"TERMINAL_SETTINGS_ABOUT_LABEL": {
+		"description": "The label for the settings page 'About' section.  This section will show the version of the application and give links to see licenses and submit feedback.",
+		"message": "About"
+	},
 	"TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP": {
 		"description": "Help text shown for the 'background-image' preference.",
 		"message": "Background image URL. Must start with 'http://' or 'https://'. Leave it blank for no image.\n\nFor example:\n  https://goo.gl/anedTK"

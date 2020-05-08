@@ -8,7 +8,7 @@
  * @suppress {moduleLoad}
  */
 
-import {css, html, LitElement} from './lit_element.js';
+import {css, html, LitElement, unsafeCSS} from './lit_element.js';
 import {SUPPORTED_FONT_SIZES} from './terminal_common.js';
 import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_settings_ansi_colors.js';
@@ -42,6 +42,19 @@ export const BELL_SOUND_CONVERTER = {
   toChecked: (value) => !!value,
   fromChecked: (checked) => checked ? 'lib-resource:hterm/audio/bell' : '',
 };
+
+/**
+ * Open in new window svg icon.
+ *
+ * @type {string}
+ */
+const OPEN_IN_NEW =
+    '<svg width="24px" height="24px" viewBox="0 0 24 24" ' +
+    'fill="rgb(33,33,33)" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M0 0h24v24H0V0z" fill="none"/>' +
+    '<path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 ' +
+    '2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>' +
+    '</svg>';
 
 export class TerminalSettingsApp extends LitElement {
   /** @override */
@@ -177,6 +190,12 @@ export class TerminalSettingsApp extends LitElement {
       terminal-settings-dropdown[preference='font-size'] {
         min-width: 80px;
       }
+
+      .about-link {
+        background: no-repeat right
+          url('data:image/svg+xml;utf8,${unsafeCSS(OPEN_IN_NEW)}');
+        cursor: pointer;
+      }
     `];
   }
 
@@ -205,6 +224,9 @@ export class TerminalSettingsApp extends LitElement {
             </terminal-settings-category-option>
             <terminal-settings-category-option role="link" for="behavior">
               <h2 slot="title">${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}</h2>
+            </terminal-settings-category-option>
+            <terminal-settings-category-option role="link" for="about">
+              <h2 slot="title">${msg('TERMINAL_SETTINGS_ABOUT_LABEL')}</h2>
             </terminal-settings-category-option>
           </terminal-settings-category-selector>
         </div>
@@ -463,6 +485,21 @@ export class TerminalSettingsApp extends LitElement {
                 </terminal-settings-checkbox>
               </li>
             </ul>
+        </section>
+
+        <section class="terminal-settings-category"
+            ?active-category="${this.activeCategory_ === 'about'}">
+          <h3>${msg('TERMINAL_SETTINGS_ABOUT_LABEL')}</h3>
+          <ul class="section-body">
+            <li class="setting-container about-link" role="link"
+                @click="${() => lib.f.openWindow('/html/licenses.html')}">
+                <h4>${msg('LICENSES')}</h4>
+            </li>
+            <li class="setting-container about-link" role="link"
+                @click="${() => lib.f.openWindow('https://goo.gl/vb94JY')}">
+                <h4>${msg('SEND_FEEDBACK_LABEL')}<h4>
+            </li>
+          </ul>
         </section>
     `;
   }
