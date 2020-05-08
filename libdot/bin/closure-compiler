@@ -20,7 +20,7 @@ import libdot
 
 # The version we currently run.  Pinned to make sure everyone gets consistent
 # behavior all the time.
-VERSION = '20200406'
+VERSION = '20200504'
 
 # Full path to Google's closure compiler.
 URI = 'https://dl.google.com/closure-compiler/compiler-%s.tar.gz' % (VERSION,)

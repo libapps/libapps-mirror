@@ -24,13 +24,6 @@ chrome.fileSystemProvider.mount = function(opts) {};
  */
 chrome.fileSystemProvider.unmount = function(fileSystem, callback) {};
 
-/**
- * Pending in cl/309118680.
- *
- * @type {!Object<string, string>}
- */
-chrome.runtime.Manifest.prototype.icons;
-
 chrome.terminalPrivate = {};
 
 /** @param {string} id */
