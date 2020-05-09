@@ -7,11 +7,11 @@
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <netinet/in.h>
 #include <sched.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <netinet/in.h>
 #include <sys/random.h>
 #include <sys/socket.h>
 #include <sys/types.h>
@@ -170,10 +170,10 @@ int main(int argc, char* argv[]) {
   errno = 0;
   ret = connect(sock, &sa.addr, len);
   printf("connect(s_addr[%p]=%#x, port=%i) = %i\nerrno = %i (%s)\n",
-    &sa.in4.sin_addr.s_addr, sa.in4.sin_addr.s_addr, sa.in4.sin_port,
-    ret, errno, strerror(errno));
+         &sa.in4.sin_addr.s_addr, sa.in4.sin_addr.s_addr, sa.in4.sin_port,
+         ret, errno, strerror(errno));
 
-mkdir("/.ssh", 0);
+  mkdir("/.ssh", 0);
 
 #endif
 
