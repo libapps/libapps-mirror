@@ -133,6 +133,9 @@ export class SyscallLock {
     // buffers yet.
     const bytes = this.sabDataArr.slice(0, length);
     const ret = JSON.parse(td.decode(bytes));
+    if (!(ret instanceof Object)) {
+      throw new Error(`Invalid serialized object`);
+    }
     for (const key in ret) {
       if (ret[key].bigint !== undefined) {
         ret[key] = BigInt(ret[key].bigint);

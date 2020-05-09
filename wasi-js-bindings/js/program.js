@@ -53,6 +53,6 @@ export class Program {
    * @return {number} The program exit code.
    */
   run() {
-    return this.instance.exports._start();
+    return this.instance.exports['_start']();
   }
 }

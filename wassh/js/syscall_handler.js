@@ -86,11 +86,12 @@ export class RemoteReceiverWasiUnstable extends SyscallHandler.Base {
       return WASI.errno.ENOTDIR;
     }
 
-    return {
-      filetype: WASI.filetype.DIRECTORY,
-      rights_base: BigInt(0xffffffffff),
-      rights_inheriting: BigInt(0xffffffffff),
-    };
+    return /** @type {!WASI_t.fdstat} */ ({
+      fs_filetype: WASI.filetype.DIRECTORY,
+      fs_flags: 0,
+      fs_rights_base: BigInt(0xffffffffff),
+      fs_rights_inheriting: BigInt(0xffffffffff),
+    });
   }
 
   handle_fd_prestat_dir_name(fd) {

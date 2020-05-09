@@ -27,7 +27,7 @@ export class Base {
    */
   constructor({sys_handlers, process, trace}) {
     this.enableTrace_ = trace;
-    this.process_ = null;
+    this.process_ = process;
     this.bindHandlers_(sys_handlers);
     /** @type {string} */
     this.namespace = '';
@@ -84,7 +84,7 @@ export class Base {
   traceCall(func, prefix, ...args) {
     this.debug(`${prefix}(${args.join(', ')})`);
     const ret = func(...args);
-    if (Number.isInteger(ret)) {
+    if (typeof ret === 'number') {
       this.debug(`  ${prefix} -> ${util.strerror(ret)}`);
     } else {
       this.debug(`  ${prefix} ->`, ret);
@@ -206,7 +206,7 @@ export class WasiUnstable extends Base {
       const buf = this.getMem_(ptr, ptr + len);
       try {
         ret = td.decode(buf);
-      } catch {
+      } catch (e) {
         return WASI.errno.EFAULT;
       }
     }
@@ -216,7 +216,7 @@ export class WasiUnstable extends Base {
   /** @override */
   sys_args_get(argv, argv_buf) {
     const ret = this.handle_args_get();
-    if (Number.isInteger(ret)) {
+    if (typeof ret === 'number') {
       return ret;
     }
 
@@ -243,7 +243,7 @@ export class WasiUnstable extends Base {
   /** @override */
   sys_args_sizes_get(argc, argv_size) {
     const ret = this.handle_args_sizes_get();
-    if (Number.isInteger(ret)) {
+    if (typeof ret === 'number') {
       return ret;
     }
 
@@ -260,7 +260,7 @@ export class WasiUnstable extends Base {
    */
   sys_clock_res_get(clockid, resolution_ptr) {
     const ret = this.handle_clock_res_get(clockid);
-    if (Number.isInteger(ret)) {
+    if (typeof ret === 'number') {
       return ret;
     }
 
@@ -276,7 +276,7 @@ export class WasiUnstable extends Base {
   sys_clock_time_get(clockid, precision, time_ptr) {
     // TODO: Figure out what to do with precision.
     const ret = this.handle_clock_time_get(clockid);
-    if (Number.isInteger(ret)) {
+    if (typeof ret === 'number') {
       return ret;
     }
 
@@ -288,7 +288,7 @@ export class WasiUnstable extends Base {
   /** @override */
   sys_environ_get(envp, env_buf) {
     const ret = this.handle_environ_get();
-    if (Number.isInteger(ret)) {
+    if (typeof ret === 'number') {
       return ret;
     }
 
@@ -318,7 +318,7 @@ export class WasiUnstable extends Base {
   /** @override */
   sys_environ_sizes_get(env_size, env_buf) {
     const ret = this.handle_environ_sizes_get();
-    if (Number.isInteger(ret)) {
+    if (typeof ret === 'number') {
       return ret;
     }
 
@@ -354,7 +354,7 @@ export class WasiUnstable extends Base {
   /** @override */
   sys_fd_fdstat_get(fd, buf) {
     const ret = this.handle_fd_fdstat_get(fd);
-    if (Number.isInteger(ret)) {
+    if (typeof ret === 'number') {
       return ret;
     }
 
@@ -377,7 +377,7 @@ export class WasiUnstable extends Base {
   /** @override */
   sys_fd_filestat_get(fd, filestat_ptr) {
     const ret = this.handle_fd_filestat_get(fd);
-    if (Number.isInteger(ret)) {
+    if (typeof ret === 'number') {
       return ret;
     }
 
@@ -403,8 +403,8 @@ export class WasiUnstable extends Base {
 
   /** @override */
   sys_fd_prestat_dir_name(fd, path_ptr, path_len) {
-    const ret = this.handle_fd_prestat_get(fd);
-    if (Number.isInteger(ret)) {
+    const ret = this.handle_fd_prestat_dir_name(fd);
+    if (typeof ret === 'number') {
       return ret;
     }
 
@@ -417,7 +417,7 @@ export class WasiUnstable extends Base {
   /** @override */
   sys_fd_prestat_get(fd, buf) {
     const ret = this.handle_fd_prestat_get(fd);
-    if (Number.isInteger(ret)) {
+    if (typeof ret === 'number') {
       return ret;
     }
 
@@ -433,7 +433,7 @@ export class WasiUnstable extends Base {
   sys_fd_pwrite(fd, iovs_ptr, iovs_len, offset, nwritten_ptr) {
     let nwritten = 0;
     for (let i = 0; i < iovs_len; ++i) {
-      const dv = this.getView_(iovs + (8 * i), 8);
+      const dv = this.getView_(iovs_ptr + (8 * i), 8);
       const bufptr = dv.getUint32(0, true);
       const buflen = dv.getUint32(4, true);
       if (buflen == 0) {
@@ -461,13 +461,13 @@ export class WasiUnstable extends Base {
     for (let i = 0; i < iovs_len; ++i) {
       const iovec = dvIovs.getIovec(offset);
       const ret = this.handle_fd_read(fd, iovec);
-      if (Number.isInteger(ret) && ret != WASI.errno.ESUCCESS) {
+      if (typeof ret === 'number' && ret != WASI.errno.ESUCCESS) {
         return ret;
       }
 
       nread += ret.nread;
       dvNread.setUint32(0, nread, true);
-      offset += iovec.length;
+      offset += iovec.struct_size;
     }
     return WASI.errno.ESUCCESS;
   }
@@ -476,7 +476,7 @@ export class WasiUnstable extends Base {
   sys_fd_readdir(fd, buf_ptr, buf_len, cookie, size_ptr) {
     const buf = this.getMem_(buf_ptr, buf_ptr + buf_len);
     const ret = this.handle_fd_readdir(fd, buf, cookie);
-    if (Number.isInteger(ret)) {
+    if (typeof ret === 'number') {
       return ret;
     }
 
@@ -496,7 +496,7 @@ export class WasiUnstable extends Base {
    */
   sys_fd_seek(fd, offset, whence, newoffset_ptr) {
     const ret = this.handle_fd_seek(fd, offset, whence);
-    if (Number.isInteger(ret)) {
+    if (typeof ret === 'number') {
       return ret;
     }
 
@@ -514,23 +514,23 @@ export class WasiUnstable extends Base {
    * @override
    * @suppress {checkTypes} https://github.com/google/closure-compiler/commit/ee80bed57fe1ee93876fee66ad77e025a345c7a7
    */
-  sys_fd_tell(fd, filesize_ptr) {
-    const ret = this.handle_fd_sync(fd);
-    if (Number.isInteger(ret)) {
+  sys_fd_tell(fd, offset_ptr) {
+    const ret = this.handle_fd_tell(fd);
+    if (typeof ret === 'number') {
       return ret;
     }
 
-    const dv = this.getView_(filesize_ptr, 8);
-    dv.setBigUint64(0, ret.filesize, true);
+    const dv = this.getView_(offset_ptr, 8);
+    dv.setBigUint64(0, ret.offset, true);
     return WASI.errno.ESUCCESS;
   }
 
   /** @override */
-  sys_fd_write(fd, iovs, iovs_len, nwritten_ptr) {
+  sys_fd_write(fd, iovs_ptr, iovs_len, nwritten_ptr) {
     // const fn = fd == 1 ? console.error : console.info;
     let nwritten = 0;
     for (let i = 0; i < iovs_len; ++i) {
-      const dv = this.getView_(iovs + (8 * i), 8);
+      const dv = this.getView_(iovs_ptr + (8 * i), 8);
       const bufptr = dv.getUint32(0, true);
       const buflen = dv.getUint32(4, true);
       if (buflen == 0) {
@@ -551,7 +551,7 @@ export class WasiUnstable extends Base {
   /** @override */
   sys_path_create_directory(fd, path_ptr, path_len) {
     const path = this.get_nullable_path_(path_ptr, path_len);
-    if (Number.isInteger(path)) {
+    if (typeof path === 'number') {
       return path;
     }
 
@@ -561,12 +561,12 @@ export class WasiUnstable extends Base {
   /** @override */
   sys_path_filestat_get(fd, lookupflags, path_ptr, path_len, filestat_ptr) {
     const path = this.get_nullable_path_(path_ptr, path_len);
-    if (Number.isInteger(path)) {
+    if (typeof path === 'number') {
       return path;
     }
 
     const ret = this.handle_path_filestat_get(fd, lookupflags, path);
-    if (Number.isInteger(ret)) {
+    if (typeof ret === 'number') {
       return ret;
     }
 
@@ -579,7 +579,7 @@ export class WasiUnstable extends Base {
   sys_path_filestat_set_times(fd, flags, path_ptr, path_len, atim, mtim,
                               fst_flags) {
     const path = this.get_nullable_path_(path_ptr, path_len);
-    if (Number.isInteger(path)) {
+    if (typeof path === 'number') {
       return path;
     }
 
@@ -591,12 +591,12 @@ export class WasiUnstable extends Base {
   sys_path_link(old_fd, old_flags, old_path_ptr, old_path_len, new_fd,
                 new_path_ptr, new_path_len) {
     const old_path = this.get_nullable_path_(old_path_ptr, old_path_len);
-    if (Number.isInteger(old_path)) {
+    if (typeof old_path === 'number') {
       return old_path;
     }
 
     const new_path = this.get_nullable_path_(new_path_ptr, new_path_len);
-    if (Number.isInteger(new_path)) {
+    if (typeof new_path === 'number') {
       return new_path;
     }
 
@@ -605,21 +605,21 @@ export class WasiUnstable extends Base {
 
   /** @override */
   sys_path_open(dirfd, dirflags, path_ptr, path_len, o_flags, fs_rights_base,
-                fs_rights_inheriting, fs_flags, fdptr) {
+                fs_rights_inheriting, fdflags, fd_ptr) {
     const path = this.get_nullable_path_(path_ptr, path_len);
-    if (Number.isInteger(path)) {
+    if (typeof path === 'number') {
       return path;
     }
     this.debug(`  path = "${path}"`);
 
     const ret = this.handle_path_open(
         dirfd, dirflags, path, o_flags, fs_rights_base, fs_rights_inheriting,
-        fs_flags);
-    if (Number.isInteger(ret)) {
+        fdflags);
+    if (typeof ret === 'number') {
       return ret;
     }
 
-    const dv = this.getView_(fdptr, 4);
+    const dv = this.getView_(fd_ptr, 4);
     dv.setUint32(0, ret.fd, true);
     return WASI.errno.ESUCCESS;
   }
@@ -627,13 +627,13 @@ export class WasiUnstable extends Base {
   /** @override */
   sys_path_readlink(fd, path_ptr, path_len, buf_ptr, buf_len, bufused_ptr) {
     const path = this.get_nullable_path_(path_ptr, path_len);
-    if (Number.isInteger(path)) {
+    if (typeof path === 'number') {
       return path;
     }
 
     const buf = this.getMem_(buf_ptr, buf_ptr + buf_len);
     const ret = this.handle_path_readlink(fd, path, buf);
-    if (Number.isInteger(ret)) {
+    if (typeof ret === 'number') {
       return ret;
     }
 
@@ -645,7 +645,7 @@ export class WasiUnstable extends Base {
   /** @override */
   sys_path_remove_directory(fd, path_ptr, path_len) {
     const path = this.get_nullable_path_(path_ptr, path_len);
-    if (Number.isInteger(path)) {
+    if (typeof path === 'number') {
       return path;
     }
 
@@ -656,12 +656,12 @@ export class WasiUnstable extends Base {
   sys_path_rename(fd, old_path_ptr, old_path_len, new_fd, new_path_ptr,
                   new_path_len) {
     const old_path = this.get_nullable_path_(old_path_ptr, old_path_len);
-    if (Number.isInteger(old_path)) {
+    if (typeof old_path === 'number') {
       return old_path;
     }
 
     const new_path = this.get_nullable_path_(new_path_ptr, new_path_len);
-    if (Number.isInteger(new_path)) {
+    if (typeof new_path === 'number') {
       return new_path;
     }
 
@@ -671,12 +671,12 @@ export class WasiUnstable extends Base {
   /** @override */
   sys_path_symlink(old_path_ptr, old_path_len, fd, new_path_ptr, new_path_len) {
     const old_path = this.get_nullable_path_(old_path_ptr, old_path_len);
-    if (Number.isInteger(old_path)) {
+    if (typeof old_path === 'number') {
       return old_path;
     }
 
     const new_path = this.get_nullable_path_(new_path_ptr, new_path_len);
-    if (Number.isInteger(new_path)) {
+    if (typeof new_path === 'number') {
       return new_path;
     }
 
@@ -686,7 +686,7 @@ export class WasiUnstable extends Base {
   /** @override */
   sys_path_unlink_file(fd, path_ptr, path_len) {
     const path = this.get_nullable_path_(path_ptr, path_len);
-    if (Number.isInteger(path)) {
+    if (typeof path === 'number') {
       return path;
     }
 

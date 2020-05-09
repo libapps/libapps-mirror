@@ -33,8 +33,12 @@ export class Base {
    * @param {*=} handler_ids
    * @return {!Process.Foreground} The new process.
    */
-  newProcess(executable, argv, environ) {
-    return new Process.Foreground({executable, argv, environ});
+  newProcess(executable, argv, environ, sab = undefined,
+             handler_ids = undefined) {
+    const sys_handlers = [];
+    const sys_entries = [];
+    return new Process.Foreground(
+        {executable, argv, environ, sys_handlers, sys_entries});
   }
 
   /**

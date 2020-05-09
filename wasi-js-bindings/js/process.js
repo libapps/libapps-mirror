@@ -60,8 +60,8 @@ export class Foreground extends Base {
    */
   constructor({executable, argv, environ, sys_handlers, sys_entries}) {
     super({executable, argv, environ});
-    this.sys_handlers_ = sys_handlers;
-    this.sys_entries_ = sys_entries;
+    this.sys_handlers = sys_handlers;
+    this.sys_entries = sys_entries;
     this.instance_ = null;
 
     sys_handlers.forEach((ele) => ele.setProcess(this));
@@ -80,7 +80,7 @@ export class Foreground extends Base {
    * @return {!Object}
    */
   getImports_() {
-    return this.sys_entries_.reduce((ret, sys_entry) => {
+    return this.sys_entries.reduce((ret, sys_entry) => {
       return Object.assign(ret, sys_entry.getImports());
     }, {});
   }
@@ -138,7 +138,7 @@ export class Background extends Base {
 
   onError(e) {
     this.logError('terminating process due to runtime error:', e);
-    this.terminate();
+    this.terminate({message: e.toString()});
   }
 
   /**
@@ -174,16 +174,11 @@ export class Background extends Base {
       try {
         await this[method].apply(this, argv);
       } catch (e) {
-        this.onError(`Error while handling ${name}: ${e}`);
+        this.onError(`Error while handling ${name}: ${e}\n${e.stack}`);
       }
     } else {
       this.onError(`Unknown message "${name}"`);
     }
-  }
-
-  onMessage_error(msg) {
-    this.logError('terminating process due to worker error:', msg);
-    this.terminate();
   }
 
   /**
@@ -195,7 +190,7 @@ export class Background extends Base {
     let ret = WASI.errno.ENOSYS;
     if (method in this.handler) {
       ret = await this.handler[method].apply(this.handler, args);
-      if (!Number.isInteger(ret)) {
+      if (typeof ret !== 'number') {
         this.lock.setData(ret);
         ret = -1;
       }
@@ -218,9 +213,9 @@ export class Background extends Base {
     this.terminate(new util.CompletedProcessError({signal}));
   }
 
-  onMessage_error(msg) {
-    this.logError('terminating process due to worker error:', msg);
-    this.terminate(new util.CompletedProcessError({msg}));
+  onMessage_error(message) {
+    this.logError('terminating process due to worker error:', message);
+    this.terminate(new util.CompletedProcessError({message}));
   }
 
   terminate(reason) {

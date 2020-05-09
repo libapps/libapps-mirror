@@ -85,13 +85,13 @@ export class ProxyWasiUnstable extends Base {
   /** @override */
   handle_proc_exit(status) {
     this.worker.postMessage('exit', status);
-    return new Promise(() => {});
+    return WASI.errno.ESUCCESS;
   }
 
   /** @override */
   handle_proc_raise(signal) {
     this.worker.postMessage('signal', signal);
-    return new Promise(() => {});
+    return WASI.errno.ESUCCESS;
   }
 }
 
@@ -199,7 +199,7 @@ export class DirectWasiUnstable extends Base {
     // to a non-shared type is required. Other types of syscall will be able to
     // operate directly on the memory supplied.
     // https://github.com/w3c/webcrypto/issues/213
-    if (0 && bytes instanceof SharedArrayBuffer) {
+    if (bytes instanceof SharedArrayBuffer) {
       const u8 = new Uint8Array(bytes);
       const temp = new Uint8Array(u8.length);
       crypto.getRandomValues(temp);

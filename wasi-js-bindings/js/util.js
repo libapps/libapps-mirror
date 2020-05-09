@@ -33,12 +33,14 @@ export class CompletedProcessError extends Error {
    * @param {{
    *   status: (number|undefined),
    *   signal: (number|undefined),
+   *   message: (string|undefined),
    * }} param1
    */
-  constructor({status, signal}) {
+  constructor({status, signal, message}) {
     super();
     this.status = status;
     this.signal = signal;
+    this.message_ = message;
     this.message = this.toString();
   }
 
@@ -49,13 +51,18 @@ export class CompletedProcessError extends Error {
    * @return {string}
    */
   toString() {
+    let ret;
     if (this.status !== undefined) {
-      return `Process called exit(${this.status})`;
+      ret = `Process called exit(${this.status})`;
     } else if (this.signal !== undefined) {
-      return `Process exited due to signal ${this.signal}`;
+      ret = `Process exited due to signal ${this.signal}`;
     } else {
-      return 'Process exited for unknown reasons';
+      ret = 'Process exited for unknown reasons';
     }
+    if (this.message_) {
+      ret += `: ${this.message_}`;
+    }
+    return ret;
   }
 }
 

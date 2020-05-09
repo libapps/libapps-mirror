@@ -27,9 +27,9 @@ export class WasiView extends DataView {
     return {
       d_next: this.getBigUint64(byteOffset, littleEndian),
       d_ino: this.getBigUint64(byteOffset + 8, littleEndian),
-      d_namelen: this.getUint32(byteOffset + 16, littleEndian),
+      d_namlen: this.getUint32(byteOffset + 16, littleEndian),
       d_type: /** @type {!WASI_t.filetype} */ (this.getUint8(byteOffset + 20)),
-      length: 24,
+      struct_size: 24,
     };
   }
 
@@ -48,10 +48,11 @@ export class WasiView extends DataView {
      *   __wasi_rights_t fs_rights_inheriting;  u64
      * } __wasi_fdstat_t;
      */
-    this.setUint8(byteOffset, value.filetype, littleEndian);
-    this.setUint16(byteOffset + 2, 0, littleEndian);
-    this.setBigUint64(byteOffset + 8, value.rights_base, littleEndian);
-    this.setBigUint64(byteOffset + 16, value.rights_inheriting, littleEndian);
+    this.setUint8(byteOffset, value.fs_filetype);
+    this.setUint16(byteOffset + 2, value.fs_flags, littleEndian);
+    this.setBigUint64(byteOffset + 8, value.fs_rights_base, littleEndian);
+    this.setBigUint64(byteOffset + 16, value.fs_rights_inheriting,
+                      littleEndian);
   }
 
   /** @override */
@@ -82,7 +83,7 @@ export class WasiView extends DataView {
     return {
       buf: this.getUint32(byteOffset, littleEndian),
       buf_len: this.getUint32(byteOffset + 4, littleEndian),
-      length: 8,
+      struct_size: 8,
     };
   }
 }
