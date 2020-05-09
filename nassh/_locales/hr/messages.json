@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Primanje kodiranja"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Veličina udaljenosti od ruba zaslona"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Pomicanje na dno nakon pritiska tipke"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Zaustavljanje automatskog odabira (udesno)"
 	},
+	"hterm_options_button_label": {
+		"message": "Opcije"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Ugrađene slike"
 	},
@@ -363,7 +369,7 @@
 		"message": "Ako se postavi, poništava se ponovno mapiranje za Alt + Backspace -> Brisanje u OS-u Chrome tako da je Alt + Backspace zaista Alt + Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Odabir heuristike za otkrivanje načina rada tipke AltGr.\n\n\"null\": automatsko otkrivanje na temelju entiteta navigator.language:\n      \"en-us\" => \"none\", inače => \"right-alt\"\n\"none\": onemogućuje svaku izmjenu vezanu uz AltGr.\n\"ctrl- alt\": pretpostavlja da Ctrl + Alt znači AltGr.\n\"left-alt\": pretpostavlja da Alt znači AltGr.\n\"right-alt\": pretpostavlja da desni Alt znači AltGr."
+		"message": "Odabir heuristike za otkrivanje načina rada tipke AltGr.\n\n'null': automatsko otkrivanje na temelju entiteta navigator.language:\n      'en-us' => 'none', inače => 'right-alt'\n'none': onemogućuje svaku emulaciju vezanu uz AltGr.\n'ctrl-alt': pretpostavlja da Ctrl+Alt znači AltGr.\n'left-alt': pretpostavlja da lijevi Alt znači AltGr.\n'right-alt': pretpostavlja da desni Alt znači AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Određuje hoće li tipka Alt djelovati kao metatipka ili kao zasebna Alt tipka."
@@ -474,7 +480,7 @@
 		"message": "Boja prednjeg plana za tekst bez drugih atributa boje."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Određuje hoće li se pokazivač miša automatski skrivati prilikom upisivanja. Prema zadanim postavkama automatski se otkriva hoće li time rukovati platforma/OS.\n\nNapomena: neki operativni sustavi mogu nadjačati tu postavku i stoga je možda nećete uvijek moći onemogućiti."
+		"message": "Određuje hoće li se pokazivač miša automatski skrivati prilikom upisivanja. Prema zadanim postavkama automatski se otkriva hoće li time rukovati platforma/OS.\n\nNapomena: vaš operativni sustav može nadjačati tu postavku i stoga je možda nećete uvijek moći onemogućiti."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Ako se postavi na True, tipke Home/End kontroliraju klizač terminala, a Shift + Home/Shift + End šalju se udaljenom hostu. Ako se postavi na False, onda se Home/End šalju udaljenom hostu, a Shift + Home/Shift + End služi za pomicanje."
@@ -522,13 +528,16 @@
 		"message": "Određuje hoće li se Meta + 1..9 prosljeđivati pregledniku.\n\nTo je praktično kad se hterm izvodi na kartici preglednika, tako da se ne izgube Chromeovi tipkovni prečaci za prebacivanje na karticu. Kad se ne izvodi na kartici, bolje je te tipke slati hostu kako bi se mogle upotrebljavati u Vimu ili Emacsu.\n\nAko je vrijednost true, preglednik obrađuje Meta + 1..9. Ako je false, Meta + 1..9 šalje se hostu. Ako nije postavljeno, otkrivanje je automatsko na temelju platforme preglednika i vrste prozora."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Određuje hoće li se \"Meta+V\" prosljeđivati hostu."
+		"message": "Određuje hoće li se Meta + V prosljeđivati pregledniku.\n\nU nekim sustavima to se upotrebljava za lijepljenje sadržaja."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Ako je postavljeno na True, povučeni i ispušteni tekst zalijepit će se u terminal.\nAko je postavljeno na False, ispušteni će se tekst zanemariti."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Određuje očekivano kodiranje za podatke primljene s hosta.\nAko se kodiranja ne podudaraju, vjerojatno će biti vidljive vizualne pogreške.\n\nVažeće vrijednosti su \"utf-8\" i \"raw\"."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Veličina udaljenosti od ruba zaslona u pikselima oko ruba zaslona terminala.\n\nOvo kontrolira veličinu ruba oko zaslona terminala kako bi korisnik mogao rubovima zaslona dodati vidljivu udaljenost."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Hoće li se klizač pomaknuti na dno pritiskom bilo koje tipke."
@@ -540,7 +549,7 @@
 		"message": "Kada se upotrebljava međuspremnik zamjenskog zaslona, a DECCKM (tipke pokazivača aplikacije) je aktivan, događaji kotačića miša emuliraju tipke strelica.\n\nTo se može privremeno onemogućiti držanjem tipke Shift.\n\nTo se često pojavljuje pri upotrebi programa za prikaz stranice (less), čitanju man stranica, upotrebi uređivača teksta (vi/nano) ili kada se upotrebljava screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Množitelj za događaje kotačića za pomicanje kada se mjeri u pikselima.\n\nMijenja brzinu pomicanja stranice."
+		"message": "Množitelj za događaje kotačića miša za pomicanje kada se mjeri u pikselima.\n\nMijenja brzinu pomicanja stranice."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Način rada vertikalnog klizača."
@@ -690,7 +699,7 @@
 		"message": "Kopiranje datoteke u međuspremnik (zadano: 10 MiB od početka)"
 	},
 	"nasftp_cmd_clip_summary": {
-		"message": "$1 b kopirano u spremnik"
+		"message": "$1 b kopirano u međuspremnik"
 	},
 	"nasftp_cmd_color": {
 		"message": "boja"
@@ -914,9 +923,6 @@
 	"new_window_menu_label": {
 		"message": "Novi prozor"
 	},
-	"notify_copy": {
-		"message": "Odabir kopiran"
-	},
 	"ok_button_label": {
 		"message": "U redu"
 	},
@@ -925,9 +931,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Profesionalni savjet] Upotrijebite \"Otvori kao prozor\" ili \"Na cijelom zaslonu\" da biste spriječili zatvaranje terminala prečacem Ctrl + W.\n[Profesionalni savjet] Više informacija dostupno je na $1."
-	},
-	"options_button_label": {
-		"message": "Opcije"
 	},
 	"plugin_loading": {
 		"message": "Učitavanje dodatka NaCl..."
@@ -992,6 +995,9 @@
 	"save_label": {
 		"message": "Spremi"
 	},
+	"send_feedback_label": {
+		"message": "Pošaljite povratne informacije"
+	},
 	"shortcut_list_aria_label": {
 		"message": "spremljene veze"
 	},
@@ -1006,6 +1012,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Izbriši zaslon terminala"
+	},
+	"terminal_font_unavailable": {
+		"message": "Font \"$1\" nije dostupan"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI boje"
@@ -1028,6 +1037,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Vidljivo"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Odabir heuristike za otkrivanje načina rada tipke AltG.\n\n'Auto': automatsko otkrivanje na temelju entiteta navigator.language:\n      'en-us' => 'Disable', inače => 'right-alt'\n'Disable': onemogućuje svaku emulaciju vezanu uz AltGr.\n'ctrl-alt': pretpostavlja da Ctrl + Alt znači AltGr.\n'left-alt': pretpostavlja da lijevi Alt znači AltGr.\n'right-alt': pretpostavlja da desni Alt znači AltGr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Postavite boje za zadanu paletu."
 	},
@@ -1042,6 +1054,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Vrati terminal na zadano"
+	},
+	"terminal_settings_about_label": {
+		"message": "O aplikaciji"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "URL pozadinske slike. Mora započinjati s \"http://\" ili \"https://\". Neka ostane prazno ako nema slike.\n\nNa primjer:\n  https://goo.gl/anedTK"
@@ -1169,6 +1184,9 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_try_again_with_internet": {
+		"message": "Povežite se s internetom i pokušajte ponovno."
+	},
 	"tip_1": {
 		"message": "Veze možete otvoriti tako da prilikom klika zadržite tipku Ctrl (Cmd na macOS-u)."
 	},
@@ -1224,7 +1242,7 @@
 		"message": "Zapisnik izmjena/napomene o izdanju: $1"
 	},
 	"welcome_faq": {
-		"message": "Odgovori na česta pitanja: $1 (pritisnite Ctrl i kliknite na vezama da biste ih otvorili)"
+		"message": "Odgovori na česta pitanja: $1 (pritisnite Ctrl i kliknite veze da biste ih otvorili)"
 	},
 	"welcome_release_highlights": {
 		"message": "Važne izmjene od verzije $1:"

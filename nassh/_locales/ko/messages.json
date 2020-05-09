@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "인코딩 수신"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "화면 패딩 크기"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "키 입력 후 하단으로 스크롤"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "자동 선택 중지(오른쪽)"
 	},
+	"hterm_options_button_label": {
+		"message": "옵션"
+	},
 	"hterm_popup_inline_image": {
 		"message": "인라인 이미지"
 	},
@@ -363,7 +369,7 @@
 		"message": "설정하면 Chrome OS의 Alt + 백스페이스-> Delete 재배치가 실행취소되므로 Alt + 백스페이스가 원래대로 작동하게 됩니다."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "AltGr 감지 휴리스틱을 선택합니다.\n\n'null': 탐색기 언어를 바탕으로 자동 감지합니다.\n      'en-us' => 'none', 기타 => 'right-alt'\n'none': AltGr 관련 멍잉을 사용 중지합니다.\n'ctrl-alt': Ctrl + Alt가 AltGr이라고 가정합니다.\n'left-alt': 왼쪽 Alt가 AltGr이라고 가정합니다.\n'right-alt': 오른쪽 Alt가 AltGr이라고 가정합니다."
+		"message": "AltGr 감지 휴리스틱을 선택합니다.\n\n'null': navigator.language를 기준으로 자동 감지합니다.\n      'en-us' => 'none', 기타 => 'right-alt'\n'none': AltGr 에뮬레이션을 사용 중지합니다.\n'ctrl-alt': Ctrl + Alt가 AltGr이라고 가정합니다.\n'left-alt': 왼쪽 Alt가 AltGr이라고 가정합니다.\n'right-alt': 오른쪽 Alt가 AltGr이라고 가정합니다."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Alt 키가 메타 키와 별도의 Alt 키 중 무엇으로 작동할지 선택합니다."
@@ -426,7 +432,7 @@
 		"message": "표시되는 텍스트 커서의 모양입니다. 터미널 이스케이프 시퀀스를 통해 런타임 시 변경할 수 있습니다."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "True인 경우 백그라운드의 터미널 벨소리가 웹 알림을 생성합니다. https://www.w3.org/TR/notifications/\n\n알림을 표시하려면 사용자가 권한을 부여해야 합니다. 이 옵션을 True로 설정하면 필요한 경우 hterm에서 사용자에게 권한을 요청합니다. 사용자 작업으로 트리거되지 않은 경우 브라우저에 이 권한 요청이 표시되지 않을 수도 있습니다.\n\n'알림' 권한이 있는 Chrome 확장 프로그램은 알림을 표시할 수 있습니다."
+		"message": "true인 경우 백그라운드의 단말기 벨소리가 웹 알림을 생성합니다(참고: https://www.w3.org/TR/notifications/).\n\n알림을 표시하려면 사용자가 권한을 부여해야 합니다. 이 옵션을 true로 설정하면 필요한 경우 hterm에서 사용자에게 권한을 요청합니다. 사용자 작업으로 실행되지 않은 경우 브라우저에 이 권한 요청이 표시되지 않을 수도 있습니다.\n\n'알림' 권한이 있는 Chrome 확장 프로그램은 알림을 표시할 수 있습니다."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "East Asian Ambiguous 문자에 열 2개 너비를 지정할지 선택합니다."
@@ -474,7 +480,7 @@
 		"message": "다른 색상 속성이 없는 텍스트의 전경색입니다."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "입력할 때 마우스 커서를 자동으로 숨길지 여부를 선택합니다. 기본적으로 플랫폼/OS에서 이 설정을 처리할지 여부가 자동으로 감지됩니다.\n\n참고: 일부 운영체제에서는 이 설정을 재정의하므로 사용 중지하지 못할 수도 있습니다."
+		"message": "입력할 때 마우스 커서를 자동으로 숨길지 결정합니다. 기본적으로 플랫폼/OS에서 이 설정을 처리할지가 자동으로 감지됩니다.\n\n참고: 운영체제에서는 이 설정을 재정의하므로 사용 중지하지 못할 수도 있습니다."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "True인 경우 Home/End 키를 사용해 터미널 스크롤바를 제어하고 Shift 키와 Home/End 키를 함께 누르면 원격 호스트에 전송됩니다. False인 경우 Home/End 키를 누르면 원격 호스트로 전송되고 Shift 키와 Home/End 키를 함께 누르면 스크롤됩니다."
@@ -522,13 +528,16 @@
 		"message": "메타 + 1~9 키를 브라우저로 전달할지 결정합니다.\n\n브라우저 탭에서 hterm을 실행할 때 Chrome의 '탭으로 전환' 단축키를 계속 사용할 수 있으므로 유용합니다. 탭에서 실행하지 않는 경우에는 이러한 키를 호스트로 전송하여 vim 또는 emacs에서 사용되도록 하는 것이 좋습니다.\n\ntrue인 경우 브라우저에서 메타 + 1~9 키를 처리합니다. false인 경우 메타 + 1~9 키가 호스트로 전송됩니다. null인 경우에는 브라우저 플랫폼 및 창 유형에 따라 자동으로 감지됩니다."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "메타 + V 키를 호스트로 전달할지 여부를 설정합니다."
+		"message": "메타 + V 키를 브라우저로 전달할지 결정합니다.\n\n일부 시스템에서는 콘텐츠를 붙여넣기할 때 사용됩니다."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "True인 경우 드래그 앤 드롭된 텍스트를 터미널에 붙여넣습니다.\nFalse인 경우 드롭된 텍스트는 무시됩니다."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "호스트에서 받은 데이터에 필요한 인코딩을 설정합니다.\n인코딩이 일치하지 않으면 시각적 버그가 발생할 수 있습니다.\n\n유효한 값은 'utf-8' 및 'raw'입니다."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "픽셀로 표시된 단말기 화면 테두리 주변의 패딩 크기입니다.\n\n사용자가 화면 가장자리에 눈으로 볼 수 있는 패딩을 추가할 수 있도록 단말기 화면 주변 테두리 크기를 제어합니다."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "아무 키나 입력하면 아래로 스크롤할지 선택합니다."
@@ -537,10 +546,10 @@
 		"message": "터미널 출력 시 아래로 스크롤할지 선택합니다."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "대체 화면 버퍼를 사용할 때 DECCKM(애플리케이션 커서 키)이 활성화되어 있으면 마우스 휠 스크롤 이벤트가 화살표 키처럼 작동합니다.\n\nShift 키를 길게 누르면 일시적으로 사용 중지할 수 있습니다.\n\n이 기능은 매뉴얼 페이지를 읽거나 페이저(less), 텍스트 편집기(vi/nano) 또는 screen/tmux를 사용할 때 자주 발생합니다."
+		"message": "대체 화면 버퍼를 사용할 때 DECCKM(애플리케이션 커서 키)이 활성화되어 있으면 마우스 스크롤 휠 이벤트가 화살표 키처럼 작동합니다.\n\nShift 키를 길게 누르면 일시적으로 사용 중지할 수 있습니다.\n\n이 기능은 매뉴얼 페이지를 읽거나 페이저(less), 텍스트 편집기(vi/nano) 또는 screen/tmux를 사용할 때 자주 발생합니다."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "픽셀로 측정된 스크롤 휠 이벤트 승수입니다.\n\n페이지 스크롤 속도를 변경합니다."
+		"message": "픽셀로 측정된 마우스 스크롤 휠 이벤트의 배율입니다.\n\n페이지 스크롤 속도를 변경합니다."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "수직 스크롤바 모드입니다."
@@ -821,9 +830,6 @@
 	"new_window_menu_label": {
 		"message": "새 창"
 	},
-	"notify_copy": {
-		"message": "선택한 텍스트가 복사됨"
-	},
 	"ok_button_label": {
 		"message": "확인"
 	},
@@ -832,9 +838,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[전문가의 팁] Ctrl + W 키를 눌러도 터미널이 닫히지 않게 하려면 '창으로 열기' 또는 '전체 화면'을 사용하세요.\n[전문가의 팁] 자세한 내용은 $1 페이지를 참조하세요."
-	},
-	"options_button_label": {
-		"message": "옵션"
 	},
 	"plugin_loading": {
 		"message": "NaCl 플러그인 로드 중..."
@@ -899,6 +902,9 @@
 	"save_label": {
 		"message": "저장"
 	},
+	"send_feedback_label": {
+		"message": "의견 보내기"
+	},
 	"shortcut_list_aria_label": {
 		"message": "저장된 연결"
 	},
@@ -913,6 +919,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "터미널 삭제"
+	},
+	"terminal_font_unavailable": {
+		"message": "‘$1’ 글꼴을 사용할 수 없습니다."
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI 색상"
@@ -941,6 +950,9 @@
 	"terminal_name_pref_visible": {
 		"message": "표시"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "AltGr 감지 휴리스틱을 선택합니다.\n\n'자동': navigator.language를 기준으로 자동 감지합니다.\n      'en-us' => '사용 중지', 기타 => 'right-alt'\n'사용 중지': AltGr 에뮬레이션을 모두 사용 중지합니다.\n'ctrl-alt': Ctrl + Alt가 AltGr이라고 가정합니다.\n'left-alt': 왼쪽 Alt가 AltGr이라고 가정합니다.\n'right-alt': 오른쪽 Alt가 AltGr이라고 가정합니다."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "기본 팔레트의 색상을 설정합니다."
 	},
@@ -955,6 +967,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "터미널 초기화"
+	},
+	"terminal_settings_about_label": {
+		"message": "정보"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "배경 이미지 URL입니다 'http://' 또는 'https://'로 시작해야 합니다. 이미지가 없으면 비워 둡니다.\n\n예:\n  https://goo.gl/anedTK"
@@ -1075,6 +1090,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "테마"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "인터넷에 연결하고 다시 시도해 보세요."
 	},
 	"tip_1": {
 		"message": "링크를 열려면 Ctrl(macOS의 경우 Cmd)을 누른 상태로 링크를 클릭하세요."

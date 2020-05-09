@@ -1,0 +1,1199 @@
+{
+	"already_mounted_message": {
+		"message": "Isistimu yefayela isivele ikhweziwe!"
+	},
+	"backup_prefs": {
+		"message": "Londoloza isipele"
+	},
+	"bad_destination": {
+		"message": "Ayikwazi ukucozulula indawo: $1"
+	},
+	"before_unload": {
+		"message": "Ukuvala le thebhu kuzonqamula lesi sikhathi."
+	},
+	"cache_pin_prompt": {
+		"message": "Yenza inqolobane ye-PIN yale seshini ye-SSH? (y/N):"
+	},
+	"cancel_button_label": {
+		"message": "Khansela"
+	},
+	"changelog": {
+		"message": "i-* changelog"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Sula abasingathi abaziwayo be-SSH"
+	},
+	"clear_label": {
+		"message": "Sula"
+	},
+	"command_complete": {
+		"message": "Umyalo $1 uphume ngekhodi yesimo $2."
+	},
+	"command_not_supported": {
+		"message": "I-$1 ayisekelwa kule nguqulo ye-Chrome"
+	},
+	"command_startup_failed": {
+		"message": "Ukuqalisa i-$1 kwehlulekile: $2"
+	},
+	"connect_button_label": {
+		"message": "Xhuma"
+	},
+	"connect_or_exit_message": {
+		"message": "(C)Khetha olunye uxhumo noma (X)Phuma?"
+	},
+	"connecting": {
+		"message": "Ixhuma ku-$1..."
+	},
+	"connection_dialog_name": {
+		"message": "Ibhokisi lokuxhuma"
+	},
+	"console_crosh_options_notice": {
+		"message": "Kade wazi ukuthi kukhona ikhasi lezinketho elikhethekile?\nAsisekho isidingo sokuguqula okuthi 'term_' ngokuqondile!\nCindezela i-$1 ukuyivula, noma chofoza:\n$2"
+	},
+	"console_nassh_options_notice": {
+		"message": "Kade wazi ukuthi kukhona ikhasi lezinketho elikhethekile?\nAsisekho isidingo sokushintsha i-term_' ngokuqondile!\n$1"
+	},
+	"delete_button_label": {
+		"message": "Susa"
+	},
+	"disconnect_message": {
+		"message": "I-plugin ye-NaCl iphume ngekhodi yesimo $1."
+	},
+	"faq_menu_label": {
+		"message": "I-FAQ"
+	},
+	"field_argstr_placeholder": {
+		"message": "ukuphikisana komungqa womyalo owengeziwe"
+	},
+	"field_description_aria_label": {
+		"message": "incazelo"
+	},
+	"field_description_placeholder": {
+		"message": "username@hostname noma umbhalo wefomu yamahhala"
+	},
+	"field_hostname_aria_label": {
+		"message": "igama lomethuleli"
+	},
+	"field_hostname_placeholder": {
+		"message": "igama lomethuleli"
+	},
+	"field_mount_path_placeholder": {
+		"message": "indlela ezenzakalelayo uhla lwemibhalo lwasekhaya lomsebenzisi"
+	},
+	"field_nassh_options_aria_label": {
+		"message": "Izinketho zeseva yokudlulisela ye-SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Izinketho zeseva yokudlulisela ye-SSH"
+	},
+	"field_port_aria_label": {
+		"message": "mbobo"
+	},
+	"field_port_placeholder": {
+		"message": "mbobo"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "okuzenzekelayo"
+	},
+	"field_username_aria_label": {
+		"message": "igama lomsebenzisi"
+	},
+	"field_username_placeholder": {
+		"message": "igama lomsebenzisi"
+	},
+	"found_relay": {
+		"message": "Ithole iseva yokudlulisela: $1"
+	},
+	"get_profile_error": {
+		"message": "IPHTHA: Ayikwazanga ukulayisha iphrofayela $1:\n$2"
+	},
+	"hterm_announce_current_screen_header": {
+		"message": "$1% okuskroliwe,"
+	},
+	"hterm_button_allow_always": {
+		"message": "Vumela njalo"
+	},
+	"hterm_button_allow_session": {
+		"message": "Vumela le seshini"
+	},
+	"hterm_button_block": {
+		"message": "Vimba"
+	},
+	"hterm_button_page_down": {
+		"message": "Yehla ekhasini"
+	},
+	"hterm_button_page_up": {
+		"message": "Khuphuka ekhasini"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "Ukulayisha i-$1 kwehlulekile"
+	},
+	"hterm_loading_resource_start": {
+		"message": "Ilayisha i-$1 ..."
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Vumela ukubonisa isithombe esisemgqeni"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "U-Alt+Backspace ngu-Meta+Backspace"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "Imodi yokhiye ye-AltGr"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Phatha ukhiye othi Alt njengokhiye we-Meta"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Ukubamba isishintshi sokhiye ka-Alt"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Umsindo wesikhalisi sesixwayiso (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Umbala wangemuva"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Umfanekiso ongemuva"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Ukuma komfanekiso ongemuva"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Usayizi womfanekiso ongemuva"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Ukuziphatha kokhiye we-Backspace"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Imephu yezinhlamvu iyakhipha"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Sula ngokuzenzekelayo ukukhetha umbhalo"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Vala iwindi lapho uphuma"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Isiceshana sokuxuba imibala sasekuqaleni"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Kopisha ngokuzenzekelayo okuqukethwe okukhethiwe"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "U-Ctrl+C ukopisha ukuziphatha"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ukuziphatha kokusondeza kwe-Ctrl++/-/0"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "U-Ctrl+V unamathisela ukuziphatha"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Ukubanika kwe-cursor"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Ukulinganisela kokubanika kwe-Cursor"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Umbala we-cursor yombala"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Umumo we-cursor yombhalo"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Dala izaziso zedeskithophu ukuthola izikhalisi zesixwayiso"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "I-East Asian Ambiguous isebenzisa amakholomu amabili"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Sekela izinhlamvu zokulawula ezingeyona i-UTF-8 C1"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Vumela umbhalo obanikayo"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Ukuziphatha kombhalo ogqamile"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Sebenzisa imibala ekhanyayo nombhalo ogqamile"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Bonisa isaziso lapho ukopisha okuqukethwe"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Vumela ukubhala ebhodini lokunamathisela lokulawula kude"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Vumela ukusulwa kwebhafa yokubuyela emuva (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Vumela ukubanika kwe-cursor yombhalo"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Bonisa ubukhulu betheminali lapho kushintshwe usayizi"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Ukwehluka kwendawo"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Umndeni wefonti yombhalo"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Usayizi wefonti yombhalo"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Ukwenza ifonti yombhalo ishelele"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Umbhala wombhalo"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Fihla i-cursor yegundane ngenkathi uthayipha"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Ukuziphatha kokuskrola kokhiye othi Home/End"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Ukubophezela kwekhibhodi/izinqamuleli"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Sebenzisa ukubophezela/izinqamuleli zekhibhodi ye-OS ezenzakalelayo"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Okhiye bemidiya ngabathi Fkeys"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Ukubamba isishintshi sokhiye we-Meta"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Ukunamathisela ngenkinobho yegundane"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Ukuchofoza ngakwesokudla igundane kunamathisela okuqukethwe"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Ukuziphatha kokuskrola kokhiye wokuthi Khuphuka/Yehla Ekhasini"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "U-Alt+1..9 ushintsha ukuziphatha kwethebhu"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "U-Ctrl+N ukuziphatha kwewindi okusha"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "U-Ctrl+1..9 ushintsha ukuziphatha kwethebhu"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ukuziphatha kwethebhu entsha ye-Ctrl+T"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "U-Ctrl+Tab ushintsha ukuziphatha kwethebhu"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "U-Ctrl+W uvala ukuziphatha kwethebhu"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "I-Meta+1..9 ishintsha ukuziphatha kwethebhu"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Ukuziphatha kokunamathisela kwe-Meta+V"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Vumela ukuhudula udedele ukunamathisela"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Thola umbhalo wekhodi"
+	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Usayizi wogqinsi lwesikrini"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Skrolela ngezansi ngemva kokuthinta kokhiye"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Skrolela ngezansi ngemva kokukhiphayo okusha"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Linganisa okhiye bomcibisholo nesondo lokuskrola"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Isiphindi sesondo lokuskrola ngegundane"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Ukubonakala kwebha yokuskrola"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "U-Shift+Insert uyanamathisela"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Umbhalo wekhodi wetheminali"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Vumela isiphequluli sibambe ukukopisha umbhalo"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "I-CSS engokwezifiso (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "I-CSS engokwezifiso (umbhalo osemgqeni)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Ukuyeka ukukhetha ukunweba ngokuzenzekelayo (ngakwesokunxele)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Izinhlamvu zokunqamula igama"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Ukuyeka ukukhetha ukunweba ngokuzenzekelayo (ngakwesokudla)"
+	},
+	"hterm_options_button_label": {
+		"message": "Izinketho"
+	},
+	"hterm_popup_inline_image": {
+		"message": "Izithombe ezisemgqeni"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "Izithombe ezisemgqeni zikhutshaziwe"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "Ukuthi uvumele yini umsingathi wokulawula-kude ukubonisa izithombe kutheminali.\n\nNgokuzenzakalelayo, sixwayisa kuze kube yilapho kwenziwe isinqumo."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "Uma kusethiwe, kuhlehlisa i-Chrome OS Alt+Backspace->Delete kokumepha kabusha, ukuze u-Alt+Backspace abe ngu-Alt+Backspace."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "Khetha ukuthola i-AltGr heuristic.\n\n'null': Thola ngokuzenzekelayo ngokususelwe ku-navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Khubaza noma yikuphi ukulingisa i-AltGr.\n'ctrl-alt': U-Ctrl+Alt usho u-AltGr.\n'left-alt': Iya ngakwesokunxele u-Alt usho AltGr.\n'right-alt': Iya ngakwesokudla u-Alt usho AltGr."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Ukuthi ukhiye we-Alt usebenza njengokhiye we-Meta noma njengokhiye we-Alt ohlukile."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Kulawula indlela ukhiye othi Alt ophathwa ngayo.\n\n  escape: Thumela isiqalo se-ESC.\n  8-bit: Engeza u-128 kuhlamvu oluthayiphiwe njenge-xterm.\n browser-key: Linda umcimbi wokucindezela ukhiye bese ubona lokho okushiwo\n isiphequluli. (Lokhu ngeke kusebenze kuzo zonke izinkundla lapho isiphequluli\n sisebenza khona njengesenzo esizenzakalelayo kokunye ukulandelana kwe-Alt.)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "I-URL yomsindo wesikhalisi setheminali. Kushiye kungenalutho kwisikhalisi esizwakalayo."
+	},
+	"hterm_pref_background_color": {
+		"message": "Umbala wangemuva wombhalo ongenazo ezinye izibaluli zombala."
+	},
+	"hterm_pref_background_image": {
+		"message": "Inani le-CSS lomfanekiso ongemuva Kuyeke kungenaso isithombe.\n\nNgokwesibonelo:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "Inani le-CSS lokuma komfanekiso wangemuva.\n\nNgokwesibonelo:\n  10% 10%\n  center"
+	},
+	"hterm_pref_background_size": {
+		"message": "Inani le-CSS losayizi womfanekiso ongemuva."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "Uma kuyiqiniso, okhiye othi Backspace uzothumela i-BS ('\\x08', aka ^H). Noma ukhiye othi Backspace uzothumela i-'\\x7f'."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "Lokhu kucaciswe njengento. Kunguhlu oluncane, lapho isakhiwo ngasinye siyikhodi yesethi yezinhlamvu futhi inani liyinto enguhlu oluncane ngokwayo. Kulolo uhlu oluncane, isakhiwo ngasinye uhlamvu olutholiwe futhi inani uhlamvu olubonisiwe.\n\nNgokwesibonelo:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "Ukuthi usule yini okukhethiwe ngemva kokukopisha."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "Ukuthi ulivale yini iwindi lapho umyalo uqeda ukusayinda."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "Khipha imibala kwisiceshana sokuxuba imibala esizenzakalelayo.\n\nLokhu kungacaciswa njengohlu noma into. Uma kucacishwe njengento kungase kube uhlu oluncane, lapho isakhiwo ngasinye siyinkomba yezinombolo kwisiceshana sokuxuba imibala.\n\nAmanani angacaciswa cishe njenganoma yiliphi inani lombala we-CSS. Lokhu kuhlanganisa okuthi #RGB, #RRGGBB, rgb(...), rgba(...), nanoma yimaphi amagama ombala ayingxenye yefayela le-X11 rgb.txt elivamile.\n\nUngasebenzisa okuthi 'null' ukucacisa ukuthi inani elizenzakalelayo akufanele lishintshwe. Lokhu kuwusizo ukweqa inani eliphansi lezinkomba lapho inani licaciswe njengohlu.\n\nNgokwesibonelo, lokhu kokubili kusetha inkomba yombala ewu-1 ibe luhlaza okwesibhakabhaka:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "Kopisha ngokuzenzekelayo okukhethiwe kwegundane ebhodi lokunamathisela."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "U-Ctrl+C uyakopisha uma kuyiqiniso, thumela okuthi ^C kumsingathi uma kungamanga.\nU-Ctrl+Shift+C uthumela okuthi ^C kumsingathi uma kuyiqiniso, kuyakopisha uma kungamanga."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Uma kuyiqiniso, u-Ctrl+Plus/Minus/Zero kulawula ukusondeza.\nUma kungamanga, u-Ctrl+Shift+Plus/Minus/Zero kulawula ukusondeza, u-Ctrl+Minus uthumela i-^_, u-Ctrl+Plus/Zero awenzi lutho."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "U-Ctrl+V uyanamathisela uma kuyiqiniso, thumela u-^V kumsingathi uma kungamanga.\nU-Ctrl+Shift+V sends ^V uthumela kumsingathi uma kuyiqiniso, uyanamathisela uma kungamanga."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "Ukuthi i-cursor yombhalo ibanika ngokuzenzakalelayo yini. Lokhu kungaguqulwa ngesikhathi sokusebenzisa ngokulandelana kokuphuma ngetheminali."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "Isilinganisela sokubanika kwe-cursor yombhalo ngama-millisecond.\n\nUhla lwezici ezimbili, esokuqala ukuthi i-cursor kufanele ihlale ivuliwe isikhathi esingakanani, esesibili ukuthi kufanele ihlale ivaliwe isikhathi esingakanani."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "Umbala we-cursor yombhalo obonakalayo."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "Umumo we-cursor yombhalo obonakalayo. Lokhu kungashintsha ngesikhathi sokusebenza ngokulandelana kokuphuma ngetheminali."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "Uma kuyiqiniso, izikhalisi zetheminali zangemuva zizodala Isaziso sewebhu. https://www.w3.org/TR/notifications/\n\nUkubonisa izaziso kudinga imvume kusuka kubasebenzisi. Lapho le nketho isethwe kokuthi iqiniso, i-hterm izozama ukucela umsebenzisi imvume uma kudingekile. Iziphequluli zingase zingasibonisi lesi sicelo semvume uma singazange sibangelwe isenzo somsebenzisi.\n\nIzandiso ze-Chrome ezinemvume \"yezaziso\" zinemvume yokubonisa izaziso."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Ukuthi izinhlamvu ze-East Asian Ambiguous zinabo yini ububanzi bekholomu obubili."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "Kuyiqiniso ukunika amandla izinhlamvu zokulawula kwe-8-bit, kungamanga ukukuziba.\n\nSizohlonipha izinguqulo zamabhayithi amabili walezi zinhlamvu zokulawula kungakhathaliseki isethingi yazo."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "Uma kuyiqiniso, hlonipha isibaluli sokubanika. Uma kungamanga, kuzibe."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "Uma kuyiqiniso, ifonti yesisindo esigqamile yombhalo onesibaluli esigqamile/esikhanyayo. Uma kungamanga, sebenzisa ifonti yesisindo esivamile. Kuyize ekutholeni ngokuzenzakalelayo."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "Uma kuyiqiniso, imibala ekhanyayo (engu-8-15 kwisiceshana sokuxuba imibala esingu-16) kunoma yimuphi umbhalo onesibaluli esigqamile. Uma kungamanga."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "Ukuthi ubonise yini umlayezo kutheminali lapho umsingathi ebhala ebhodini lokunamathisela."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "Vumela umsingathi wokulawula kude ukubhala ngokuqondile ebhodini lokunamathisela lesistimu yendawo.\nUkufinyelela kokufunda akunikezwa ngaphandle kwale sethingi.\n\nLokhu kusetshenziselwa ukulawula ukufinyelela ezicini ezifana ne-OSC-52."
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Ukuthi umsebenzi othi Sula Imigqa Elondoloziwe (imodi 3) yomyalo othi Sula Isiboniso (CSI-J) ungase usule ibhafa yokubuyela emuva yetheminal.\n\nUkunika amandla lokhu ngokuzenzakalela kuphephile."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "Hlonipha umzamo kamsingathi wokushintsha isimo sokubanika kwe-cursor yombhalo usebenzisa i-DEC Private Mode 12."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Ukuthi ukubonise yini ubukhulu betheminali lapho itheminali ishintsha usayizi."
+	},
+	"hterm_pref_environment": {
+		"message": "Isethi yokuqalisa yokwehluka kwendawo, njengento."
+	},
+	"hterm_pref_font_family": {
+		"message": "Umndeni wefonti ozenzakalelayo wombhalo wetheminali."
+	},
+	"hterm_pref_font_size": {
+		"message": "Usayizi wefonti ozenzakalelayo ngama-pixel."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "Isakhiwo se-CSS font-smoothing."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "Umbala ophambili wombhalo ongenazo ezinye izibaluli zombala."
+	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Ukuthi ufihle yini ngokuzenzekelayo i-cursor yombhalo lapho uthayipha. Ngokuzenzakalela, thola ngokuzenzakalelayo noma ngabe inkundla/OS ebamba lokhu.\n\nQaphela: Isistimu yakho yokusebenza ingase ikhiphe le sethingi futhi ungase ungakwazi ukuyikhubaza ngaso sonke isikhathi."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "Uma kuyiqiniso, u-Home/End ulawula ibha yokuskrola yetheminali futhi u-Shift+Home/Shift+End uthunyelwa kumsingathi wokulawula kude. Uma kungamanga, u-Home/End uthunyelwa kumsingathi wokulawula kude futhi u-Shift+Home/Shift+End uyaskrola."
+	},
+	"hterm_pref_keybindings": {
+		"message": "Imephu yokulandelana kokhiye kwizenzo zokhiye. Ukulandelana kokhiye kufaka phakathi okhiye bokushintsha abayiqanda noma ngaphezulu kulandelwa ikhodi yokhiye. Amakhodi wokhiye angaba izinombolo ze-decimal noma ze-hexadecimal, noma inkomba yokhiye. Izenzo zokhiye zingacaciswa njengeyunithi yezinhlamvu yokuthumela kumsingathi, noma inkomba yesenzo. Ukuthola incazelo egcwele yefomethi, bona ku-https://goo.gl/LWRndr.\n\nIsampula lokubhophezela okhiye:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Sawubona Mhlaba'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Ukuthi ukubophezela kwekhibhodi ye-OS kufanele kuhlonishwe yini esikhundleni sokuthathela ukusetshenziswa kwe-hterm ngokwayo."
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "Uma kuyiqiniso, guqula okhiye bemidiya babe okulinganayo kwabo kwe-Fkey. Uma kungamanga, vumela isiphequluli sibambe okhiye."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Thumela isiqalo se-ESC lapho ucindezela ukhiye ngenkathi ubambe ukhiye we-Meta.\n\nNgokwesibonelo, lapho kunikwe amandla, ukucindezela u-Meta+K kuzothumela okuthi ^[k sengathi uthayiphe u-Escape no-k. Lapho kukhutshaziwe, u-k kuphela ozothunyelwa."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "Namathisela ngokuchofoza ngakwesokudla kwinkinobho yegundane .\n\nLe nketho ayisekelwe kwisethingi \"yenkinobho yokunamathisela ngegundane\".\n\nQaphela: Lokhu kuzobamba kahle igundane lesandla esingakwesokunxele nesingakwesokudla."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "Uma kuyiqiniso, u-Page Up/Page Down ulawula ibha yokuskrola yetheminali futhi u-Shift+Page Up/Shift+Page Down uthunyelwa kumsingathi wokulawula kude. Uma kungamanga, u-Page Up/Page Down uthunyelwa kumsingathi wokulawula kude futhi u-Shift+Page Up/Shift+Page Down uyaskrola."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Ukuthi u-Alt+1..9 udluliselwe yini kwisiphequluli.\n\nLokhu kuwusizo lapho usebenzisa i-hterm kuthebhu yesiphequluli, ukuze ungalahlekelwa izinqamuleli zekhibhodi ze-Chrome zokuthi \"shintshela kwithebhu\". Lapho kungasebenzi kuthebhu kungcono ukuthumela labo khiye kumsingathi ukuze basetshenziswe ku-vim noma ku-emacs.\n\nUma kuyiqiniso, u-Alt+1..9 uzosingathwa isiphequluli. Uma kungamanga, u-Alt+1..9 uzothunyelwa kumsingathi. Uma kuyize, thola ngokuzenzekelayo ngokususelwe kwinkundla yesiphequluli nohlobo lewindi."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Ukuthi i-Ctrl+N iyadluliswa yini kwisiphequluli.\n\nUma kuyiqiniso, i-Ctrl+N izobanjwa isiphequluli njengesinqamuleli sekhibhodi \"sewindi elisha\". Uma kungamanga, i-Ctrl+N izothunyelwa kumsingathi."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Ukuthi u-Ctrl+1..9 uyadluliselwa yini kwisiphequluli.\n\nLokhu kuwusizo lapho usebenzisa i-hterm kuthebhu yesiphequluli, ukuze ungalahlekelwa izinqamuleli zekhibhodi ze-Chrome zokuthi \"shintshela kwithebhu\". Lapho kungasebenzi kuthebhu kungcono ukuthumela labo khiye kumsingathi ukuze basetshenziswe ku-vim noma ku-emacs.\n\nUma kuyiqiniso, u-Ctrl+1..9 uzobanjwa isiphequluli. Uma kungamanga, u-Ctrl+1..9 uzothunyelwa kumsingathi. Uma kuyize, thola ngokuzenzekelayo ngokususelwe kwinkundla yesiphequluli nohlobo lewindi."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Ukuthi u-Ctrl+T udlulisiwe yini kwisiphequluli\n\nUma kuyiqiniso, u-Ctrl+T uzophathwa isiphequluli njengesinqamuleli sekhibhodi \"sethebhu entsha\". Uma kungamanga, u-Ctrl+T uzothunyelwa kumsingathi."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Ukuthi u-Ctrl+Tab no-Ctrl+Shift+Tab kuyadluliselwa yini kwisiphequluli.\n\nUma kuyiqiniso, u-Ctrl+Tab no-Ctrl+Shift+Tab kuzobanjwa isiphequluli njengesinqamuleli sekhibhodi \"sethebhu yokulandelayo/okwangaphambilini\". Uma kungamanga, ukhiye wethebhu uthunyelwa kumsingathi ngaphandle kuka-Ctrl noma u-Shift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Ukuthi u-Ctrl+W udluliselwe yini kwisiphequluli.\n\nUma kuyiqiniso, u-Ctrl+W uzosingathwa isiphequluli njengesinqamuleli sekhibhodi \"sokuvala ithebhu\". Uma kungamanga, u-Ctrl+W uzothunyelwa kumsingathi."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Ukuthi i-Meta+1..9 idluliselwe yini kwisiphequluli.\n\nLokhu kuwusizo lapho usebenzisa i-hterm kuthebhu yesiphequluli, ukuze ungalahlekelwa izinqamuleli zekhibhodi ze-Chrome zokuthi \"shintshela kwithebhu\". Lapho kungasebenzi kuthebhu kungcono ukuthumela labo khiye kumsingathi ukuze basetshenziswe ku-vim noma ku-emacs.\n\nUma kuyiqiniso, i-Meta+1..9 izophathwa isiphequluli. Uma kungamanga, i-Meta+1..9 izothunyelwa kumsingathi. Uma kuyize, thola ngokuzenzekelayo ngokususelwe kwinkundla yesiphequluli nohlobo lewindi."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Ukuthi u-Meta+V uyadluliselwa yini isiphequluli.\n\nKwamanye amasistimu, lokhu kusetshenziselwa ukunamathisela okuqukethwe."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Uma kuyiqiniso, Umbhalo ohuduliwe wadedelwa uzonamathisela kwitheminali.\nUma kungamanga, umbhalo odedeliwe uzozitshwa."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "Setha umbhalo wekhodi olindelekile wedatha etholakele kusuka kumsingathi.\nUma umbhalo wekhodi ungafani, iziphazamisi ezibukwayo zingase zingabonwa.\n\nAmanani avumelekile ngu-utf-8' no-'raw'."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Usayizi wogqinsi kuma-pixel ozungeze umngcele wesikrini setheminali.\n\nLokhu kulawula usayizi womngcele ozungeze isikrini setheminali ukuze umsebenzisi akwazi ukwengeza ugqinsi olubonakalayo onqenqemeni lwesikrini."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "Ukuthi uskrole yini ngezansi kunoma yikuphi ukuthinta ukhiye."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "Ukuthi uskrole yini ngezansi kokukhiphayo kwetheminali."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Lapho usebenzisa enye ibhafa yesikrini, futhi i-DECCKM (Application Cursor Keys) isebenza, imicimbi yesondo lokuskrola ngegundane lizolingisa okhiye bomcibisholo.\n\nIngakhutshazwa okwesikhashana, ngokubamba ukhiye othi Shift.\n\nLokhu kuvela njalo lapho usebenzisa amapheyija (less) noma ufunda amakhasi ayinhloko noma abahleli bombhalo (vi/nano) noma usebenzisa isikrini/tmux."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "Isiphindi semicimbi yesondo lokuskrola igundane lapho sikalwe ngama-pixel.\n\nKushintsha indlela ikhasi elishesha ukuskrola ngayo."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "Imodi yebha yokuskrola eqondile."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Ukuthi u-Shift+Insert uyasetshenziswa yini ukunamathisela noma ukuthumela kumsingathi okude."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "Umbhalo wekhodi wetheminali ezenzakalelayo (DOCS).\n\nI-ISO-2022 inika amandla ukuhunyushwa kwemephu yohlamvu (njengamamephu wemifanekiso).\nI-UTF-8 ukusekelwa kwalezo.\n\nUmehluko ovaliwe usho ukuthi umbhalo wekhodi awukwazi ukushintshwa ngesikhathi sokusebenza ngokulandelana kokuphuma ngetheminali.\n\nKufanele uncike ku-UTF-8 ngaphandle uma uqaphela ukunikezela okunqamukile ngezinhlelo zokusebenza zefa."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "Ukuthi usebenzise yini ukukopisha ukuziphatha kwesiphequluli esisenzakalelayo/OS.\n\nVumela isiphequluli/OS ukubamba umcimbi wokukopisha ngokuqondile okungase kuthuthukise ukuhambelana namanye amasistimu (lapho ukukopisha kungasebenzi nhlobo), kodwa kwenza ukukhetha umbhalo kungabi namandla kakhulu.\n\nNgokwesibonelo, imigqa emide ngaphambilini eyayigoqwe emgqeni izokopishwa kanye nemigqa emisha isekhona kuyo."
+	},
+	"hterm_pref_user_css": {
+		"message": "I-URL ye-stylesheet yokuhlanganiswa kwidokhumenti yetheminali."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "Umbhalo we-CSS engokwezifiso wokusitayela itheminali."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "Izengezo ezivamile zokuyeka okufanayo ngakwesokunxele (ukuqala) kokukhethiwe.\n\nNgokuvamile lesi isigaba sohlamvu sokwenqaba izinhlamvu ezithile.\nSivumela okuthi \"~\" nokuthi \".\" ngokuzenzekelayo ngoba ngokuvamile izindlela ziqala ngalokho"
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "Izengezo ezivamile zokufanisa zonke izinhlamvu eziphakathi nendawo.\n\nNgokuvamile lesi isigaba sohlamvu sokwenqaba izinhlamvu ezithile.\n\nKusetshenziselwa ukunweba okukhethiwe okuzungeze iphoyinti lokuqalisa."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "Izengezo ezivamile zokuyeka okufanayo ngakwesokudla (ukuphela) kokukhethiwe.\n\nNgokuvamile lesi isigaba sohlamvu sokwenqaba izinhlamvu ezithile."
+	},
+	"hterm_space_character": {
+		"message": "Umkhathi"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Ukubukeka (amafonti imibalo, izithombe)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Kopisha futhi namathisela"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Ifaka ikhodi"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Izandiso"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Ikhibhodi"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Okwahlukahlukene"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Iyaskrola"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Imisindo"
+	},
+	"identity_label": {
+		"message": "Ukuhlonza"
+	},
+	"import_link_aria_label": {
+		"message": "ukungenisa ifayela"
+	},
+	"import_link_label": {
+		"message": "Ngenisa..."
+	},
+	"initializing_relay": {
+		"message": "Ukufuna iseva yokudlulisela usebenzisa: $1"
+	},
+	"json_parse_error": {
+		"message": "Ayikwazanga ukudlulisela i-JSON ku-'$1': $2"
+	},
+	"known_hosts_empty": {
+		"message": "Azikho izikhungo, akukho ongakukhohlwa."
+	},
+	"known_hosts_prompt": {
+		"message": "Sicela ukhethe usokhaya ongamkhohlwa [1-$1]:"
+	},
+	"known_hosts_title": {
+		"message": "Osokhaya abaziwayo:"
+	},
+	"licenses": {
+		"message": "Amalayisense"
+	},
+	"licenses_expand_link": {
+		"message": "bonisa ilayisensi"
+	},
+	"licenses_title": {
+		"message": "Vula amalayisensi omthombo"
+	},
+	"loading_label": {
+		"message": "Iyalayisha..."
+	},
+	"migrate_to_ext": {
+		"message": "Isaziso: Sicela uthuthele kwisandiso esisha se-Secure Shell ($1).\nIzinhlelo Zokusebenza Ze-Chrome zihoxisiwe, ngakho le nguqulo izoyeka ukuthola izibuyekezo.\nSicela ubone umhlahlandlela wokuthuthela ku-($2) ukuthola imininingwane eyengeziwe."
+	},
+	"missing_param": {
+		"message": "Uhlala olulahlekile: $1"
+	},
+	"mount_button_label": {
+		"message": "Ukukhweza i-SFTP"
+	},
+	"mount_path_label": {
+		"message": "Indlela yokukhweza"
+	},
+	"mounted_message": {
+		"message": "Ikhweziwe!"
+	},
+	"nasftp_cmd_cat": {
+		"message": "ikati"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "Lahla ifayela kwitheminali"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Shintsha uhla lwemibhalo olusebenzayo"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Shintsha amaqembu wezindlela"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Shintsha izimvume kwizindlela"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Shintsha izindlela zomnikazi"
+	},
+	"nasftp_cmd_clear": {
+		"message": "sula"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Sula isikrini setheminali samanje."
+	},
+	"nasftp_cmd_clip": {
+		"message": "namathisela"
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Kopisha ifayela ebhodini lokunamathisela (okuzenzakalelayo: ngu-10MiB kusuka ekuqaleni)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "Ikopishe amabhayithi angu-$1 ebhodini lokunamathisela"
+	},
+	"nasftp_cmd_color": {
+		"message": "umbala"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Guqula ukusetshenziswa kombala"
+	},
+	"nasftp_cmd_copy": {
+		"message": "kopisha"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Kopisha umthombo endaweni"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Susa amafayela"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Bonisa izibalo zediski"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Indlela: $1\n  i-id yesistimu yefayela: $2\n Inani: $3\n  Okusetshenzisiwe: $4 ($5%)\n Okutholakalayo: $6 (kubasebenzisi abangenalo ilungelo)\n $7 (kumphathi)"
+	},
+	"nasftp_cmd_exit": {
+		"message": "phuma"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Nqamula"
+	},
+	"nasftp_cmd_get": {
+		"message": "thola"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Ukulanda ifayela: $1 njenge-$2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Landa amafayela"
+	},
+	"nasftp_cmd_help": {
+		"message": "usizo"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Lesi sikrini sosizo"
+	},
+	"nasftp_cmd_list": {
+		"message": "uhlu"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Yenza uhlu lwemininingwane yohla lwemibhalo"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Dala isixhumanisi kwindlela ekhomba kwithagethi"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Dalal izinhla zemibhalo"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Qamba kabusha ifayela"
+	},
+	"nasftp_cmd_prompt": {
+		"message": "xwayisa"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Setha iyunithi yezinhlamvu yomyalo"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Layisha amafayela"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Ukulayisha ifayela: $1 njenge-$2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Bonisa uhla lwemibhalo olusebenzayo lwamanje"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Uhla lwemibhalo esebenza kude: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Funda i-symlinks"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Izindlela ze-canonicalize"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Qalisa kabusha ukulayisha amafayela"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Khipha amafayela"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Susa izinhla zombhalo"
+	},
+	"nasftp_cmd_show": {
+		"message": "veza"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Bonisa amafayela asemgqeni"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Izandiso:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Bonisa isimo sefayela"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Ifayela: $1\n  Usayizi: Amabhayithi angu-$2\n   I-ID Yomsebenzisi: $3\n   I-ID Yeqembu: $4\nUkufinyelela: $5\n isikhathi sokufinyelelwa: $6\n isikhathi sokuguqulwa: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Dala i-symlink endleleni eya kuthagethi"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Fushanisa izindlela zibe amabhayithi angu-0"
+	},
+	"nasftp_cmd_version": {
+		"message": "inguqulo"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  izandiso zeseva:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Bonisa inguqulo yephrothokholi yamanje"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Ulwazi lwenguqulo yephrothokholi ye-SFTP:\n  indawo: $1\n  iseva: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: ukuphela kwefayela"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: ifayela alitholiwe"
+	},
+	"nasftp_error_file_reading": {
+		"message": "Ukufunda i-$1 kwehlulekile: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Iphutha langaphakathi elingasingathiwe, sicela ubike isiphazamisi: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: inombolo engalungile: $3"
+	},
+	"nasftp_error_message": {
+		"message": "IPHUTHA: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: '$2' isandiso asitholakali"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: akulona ifayela elivamile"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: azikho izimpikiswano ezanele"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: imvume inqatshelwe"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: ukuphikisana okuningi kakhulu"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: umyalo ongaziwa"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: umaka ongaziwa $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Phoqelela ukuyeka"
+	},
+	"nasftp_progress_summary": {
+		"message": "Amabhayithi angu-$1 adluliswe ngamasekhondi angu-$2 ($3/s)"
+	},
+	"nassh_options_error": {
+		"message": "Inketho engaziwa: $1"
+	},
+	"nassh_product_name": {
+		"message": "Vikela i-Shell"
+	},
+	"new_window_menu_label": {
+		"message": "Iwindi Elisha"
+	},
+	"ok_button_label": {
+		"message": "KULUNGILE"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Xhuma kwiphrofayela elondoloziwe noma kwisistimu entsha ye-ssh"
+	},
+	"open_as_window_tip": {
+		"message": "[Ithiphu] Sebenzisa okuthi 'Vula njengewindi' noma 'Isikrini esigcwele' ukugwema i-Ctrl+W ekuvaleni itheminali yakho!\n[Ithiphu] Bona i-$1 ukuthola ulwazi olwengeziwe."
+	},
+	"plugin_loading": {
+		"message": "Ilayisha i-plugin ye-NaCl..."
+	},
+	"plugin_loading_complete": {
+		"message": " kwenziwe."
+	},
+	"plugin_loading_failed": {
+		"message": " kwehlulekile! :("
+	},
+	"popup_connect_tooltip": {
+		"message": "Bamba u-Ctrl ukuvula kuthebhu entsha."
+	},
+	"pref_backup_filename": {
+		"message": "Vikela i-Backup.json yezintandokazi ze-Shell"
+	},
+	"preferences_header_ssh_files": {
+		"message": "Amafayela we-SSH"
+	},
+	"preferences_header_terminal": {
+		"message": "Amasethingi wetheminali"
+	},
+	"preferences_header_uri": {
+		"message": "Izibambi ze-URI"
+	},
+	"preferences_reset": {
+		"message": "Zonke izinketho zisethwe kabsha!"
+	},
+	"protocol_register_button": {
+		"message": "Bhalisa izibambi zephrothokholi"
+	},
+	"protocol_register_explain": {
+		"message": "Inkinobho engezansi izozama ukubhalisa izibambi zawo wonke amaphrothokholi esiwasekelayo. Ngokwesibonelo, lokhu kusivumela ukuthi siphathe izixhumanisi ze-ssh:// ngokuqondile. Isexwayiso sizoboniswa isiphequluli sephrothokholi ngayinye, ngakho sicela uqinisekise/wamukele ngayinye njengoba kubonisiwe. Uma zingekho izexwayiso ezibonisiwe, sicela ubone isigaba esilandelayo ukuthola amathiphu wokuxazulula inkinga."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Uma sesibhalise kakade izibambi, noma uma imizamo yokubhalisa yangaphambilini iye yanqatshelwa, azikho izexwayiso ezengeziwe ezizoboniswa. Sicela uvule ibhokisi ngezansi, bese uhlola amasethingi wesibambi esibhalisiwe ezigabeni zokuthi ssh/sftp/etc... . Uma lolu hlelo luvinjelwe, ungasusa lawo masethingi azokuvumela ukuthi uzame kabusha ukubhalisa. Uma lolu hlelo lubhalisiwe kakade, kodwa lungasethiwe njengesibambi esizenzakalelayo, ungashintsha futhi nesibambi esizenzakalelayo."
+	},
+	"protocol_register_options_link": {
+		"message": "Ukubhalisa iphrothokholi"
+	},
+	"protocol_register_settings_button": {
+		"message": "Vula amasethingi wezibambi ezibhalisiwe"
+	},
+	"protocol_register_title": {
+		"message": "Vikela umsizi wokubhalisa wesibambi sephrothokholi ye-Shell"
+	},
+	"read_size_label": {
+		"message": "Usayizi wokufunda (KiB)"
+	},
+	"reconnect_message": {
+		"message": "(R)Xhuma kabusha, (C)Khetha olunye uxhumo, noma (X)Phuma?"
+	},
+	"relay_retry": {
+		"message": "Izama futhi..."
+	},
+	"request_pin_prompt": {
+		"message": "Faka i-PIN ukuvula ukhiye$1 ku-'$2 ($3)' (ukuzama okungu-$4 okusele):"
+	},
+	"restore_prefs": {
+		"message": "Buyisa isipele"
+	},
+	"save_label": {
+		"message": "Londoloza"
+	},
+	"send_feedback_label": {
+		"message": "Thumela Impendulo"
+	},
+	"shortcut_list_aria_label": {
+		"message": "uxhumo olulondoloziwe"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "Sicela ufake uhlelo lokusebenza Lesixhumi Sekhadi Lesmathi: $1"
+	},
+	"ssh_argstr_label": {
+		"message": "Ukuphikisana kwe-SSH"
+	},
+	"stream_open_error": {
+		"message": "Ukuvula ukusakaza $1 kwehlulekile: $2"
+	},
+	"terminal_clear_menu_label": {
+		"message": "Ukusula itheminali"
+	},
+	"terminal_font_unavailable": {
+		"message": "I-\"$1\" ayitholakali"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "Imibala ye-ANSI"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Okungekhona isibizo"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Isikhalisi"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Ukubanika"
+	},
+	"terminal_name_pref_color": {
+		"message": "Umbala"
+	},
+	"terminal_name_pref_font": {
+		"message": "Ifonti"
+	},
+	"terminal_name_pref_image": {
+		"message": "Isithombe"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Umumo"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Kuyabonakala"
+	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Khetha ukuthola i-AltGr heuristic.\n\n'Okuzenzakalelayo': Thola ngokuzenzekelayo ku-navigator.language:\n      'en-us' => 'Khubaza', okunye => 'right-alt'\n'Khubaza': Khubaza noma yikuphi ukulingisa i-AltGr.\n'ctrl-alt': U-Ctrl+Alt usho u-AltGr.\n'left-alt': Iya ngakwesokunxele u-Alt usho AltGr.\n'right-alt': Iya ngakwesokudla u-Alt usho AltGr."
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Setha imibala yesiceshana semibala exubile ezenzakalelayo."
+	},
+	"terminal_pref_bell": {
+		"message": "Isikhalisi setheminali esizwakalayo."
+	},
+	"terminal_preview_label": {
+		"message": "Buka kuqala"
+	},
+	"terminal_profile_label": {
+		"message": "Iphrofayela yamanje"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Ukusetha kabusha itheminali"
+	},
+	"terminal_settings_about_label": {
+		"message": "Mayelana"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "I-URL yomfanekiso ongemuva. Kumele kuqale ngokuthi 'http://' noma 'https://'. Kuyeke kungenaso isithombe.\n\nNgokwesibonelo:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Okuzenzakalelayo"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Khubaza"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Vumelanisa"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Vimba"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Dwebela"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Uqinisekile ukuthi ufuna ukusetha kabusha itimu ibe okuzenzakalelayo kwayo?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Setha kabusha"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Setha kabusha"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Ezingasoze zabuna"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Okugqwalile"
+	},
+	"terminal_theme_light_label": {
+		"message": "Okukhanyayo"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Okumnyama kwe-solarized"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Ukukhanya kwe-Solarized"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Umnyama 0: Omnyama"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Umbala 1: Okubomvu"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Umbala 10: Okuluhlaza okotshani okukhanyayo"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Umbala 11: Okuliphuzi Okukhanyayo"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Umbala 12: Okuluhlaza okwesibhakabhaka okukhanyayo"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Umbala 13: I-Magenta Ekhanyayo"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Umbala 14: I-Cyan Ekhanyayo"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Umbala 15: Okumhlophe okukhanyayo"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Umbala 2: Okuhlaza okotshani"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Umbala 3: Oliphuzi"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Umbala 4: Okuluhlaza okwesibhakabhaka"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Umbala 5: I-Magenta"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Umbala 6: O-Cyan"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Umbala: Okumhlophe"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Umbala 8: Okumnyama Okukhanyayo"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Umbala 9: Okubomvu Okukhanyayo"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Ukubonakala"
+	},
+	"terminal_title_pref_background": {
+		"message": "Ingemuva"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Ukuziphatha"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "I-cursor"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Ikhibhodi"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Ikhibhdi negundane"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Igundane"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Ibha yokuskrola"
+	},
+	"terminal_title_pref_text": {
+		"message": "Umbhalo"
+	},
+	"terminal_title_settings": {
+		"message": "Izilungiselelo"
+	},
+	"terminal_title_theme": {
+		"message": "Itimu"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Xhuma ku-inthanethi bese uphinde uzame."
+	},
+	"tip_1": {
+		"message": "Ungabamba u-Ctrl (u-Cmd ku-macOS) ngenkathi uchofoza kuzixhumanisi ukuzivula!"
+	},
+	"tip_10": {
+		"message": "Lapho kusebenza kwiwindi, u-Ctrl+Shift+N ungakwazi ukuvula enye iseshini."
+	},
+	"tip_11": {
+		"message": "Ungashintsha ukuziphatha kokhiye/izinqamuleli: https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "Sebenzisa i-Yubikeys namanye amakhadi asmathi ukufakazela ubuqiniso be-ssh: https://goo.gl/Hu2o3v"
+	},
+	"tip_13": {
+		"message": "Bonisa izithombe emgqeni: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Ukubamba u-Ctrl (u-Cmd ku-macOS) ngenkathi uchofoza ngakwesokudla kuletha imenyu yokuqukethwe."
+	},
+	"tip_2": {
+		"message": "Bonisa izaziso kwisiphequluli usebenzisa i-hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Xhuma kusuka ku-omnibox ngokuthayipha okuthi 'ssh <profile name>': https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "I-Chrome OS ingakhweza amasistimu wefayela nge-SFTP futhi iphequlule ngezinhlelo zokusebenza zamafayela. Sebenzisa okuthi 'SFTP Mount' esikhundleni sokuthi 'Xhuma'."
+	},
+	"tip_5": {
+		"message": "Xhuma usebenzisa okuthi sh:// links emakhasini ewebhu, noma londoloza ibhukhimakhi: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Faka umbala kokukhiphayo kwakho/isexwayiso usebenzisa imibala eyinhloko engu-16 nengu-256 kanye nemibala engu-24-bit: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Kopishela ebhodini lakho lokunamathisela kusuka ku-emacs/vim/etc... usebenzisa i-OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Xoxa nabasebenzisi be-hterm/Secure Shell users nge-chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Uthole isiphazamisi?  Cela isici esisha?  Sazise: https://goo.gl/vb94JY"
+	},
+	"unexpected_error": {
+		"message": "Iphutha elingalindelekile livelile, sicela uhlole ikhonsoli ye-JavaScript ngemininingwane eminingi."
+	},
+	"unknown_ssh_client_version": {
+		"message": "Inguqulo ye-SSH engaziwa: $1"
+	},
+	"unmount_button_label": {
+		"message": "Susa ukukhweza i-SFTP"
+	},
+	"welcome_changelog": {
+		"message": "Shintsha ilogi/khulula amanothi: $1"
+	},
+	"welcome_faq": {
+		"message": "Izimpendulo Zemibuzo evamise ukubuzwa: $1 (ctrl+Chofoza izixhumanisi ukuze uvule)"
+	},
+	"welcome_release_highlights": {
+		"message": "Izinguquko eziningi kusuka ku-$1:"
+	},
+	"welcome_tip_of_day": {
+		"message": "Ithiphu Engahleliwe #$1: $2"
+	},
+	"welcome_version": {
+		"message": "Siyakwamukela ku-$1 inguqulo-$2."
+	},
+	"write_size_label": {
+		"message": "Bhala usayizi (KiB)"
+	},
+	"zoom_warning": {
+		"message": "Sicela usethe imenyu ye-Chrome->Sondeza ku-100%"
+	}
+}

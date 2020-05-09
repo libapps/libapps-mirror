@@ -308,6 +308,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Kodlama alır"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Ekran boşluğu boyutu"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Tuş vuruşundan sonra ekranı aşağı kaydırır"
 	},
@@ -347,6 +350,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Otomatik seçim durdurma (sağa)"
 	},
+	"hterm_options_button_label": {
+		"message": "Seçenekler"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Satır İçi Resimler"
 	},
@@ -360,7 +366,7 @@
 		"message": "Ayarlanırsa Chrome OS Alt+Geri tuşu->Delete tuşu farklı işlev atamasını geri alır. Böylece Alt+Geri tuşu, Alt+Geri tuşu olarak kalır."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "AltGr sezgisel algılama seçin.\n\n'null': navigator.language ayarına dayalı olarak otomatik algılama:\n      'en-us' => 'none', else => 'right-alt'\n'none': AltGr ile alakalı değişiklikler devre dışıdır.\n'ctrl-alt': Ctrl+Alt, AltGr demektir.\n'left-alt': Sol Alt, AltGr demektir.\n'right-alt': Sağ Alt, AltGr demektir."
+		"message": "AltGr sezgisel algılama seçin.\n\n'null': navigator.language ayarına dayalı olarak otomatik algıla:\n      'en-us' => 'none', değilse => 'right-alt'\n'none': Tüm AltGr emülasyonlarını devre dışı bırak.\n'ctrl-alt': Ctrl+Alt, AltGr demektir.\n'left-alt': Sol Alt, AltGr demektir.\n'right-alt': Sağ Alt, AltGr demektir."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Alt tuşunun Meta tuş olarak mı yoksa ayrı bir Alt tuşu olarak mı kullanılacağı."
@@ -423,7 +429,7 @@
 		"message": "Görünür metin imlecinin şekli. Bu, çalışma zamanında terminal kod dışı bırakma sıraları aracılığıyla değiştirilebilir."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "Doğru değerine ayarlanırsa arka plandaki terminal zilleri bir Web Bildirimi oluşturur. https://www.w3.org/TR/notifications/\n\nBildirimlerin görüntülenmesi için kullanıcının izin vermesi gerekir. Bu seçenek doğru değerine ayarlandığında hterm, gerektiğinde kullanıcıdan izin ister. Bu izin isteği bir kullanıcı işlemi tarafından tetiklenmediğinde tarayıcılar bunu göstermeyebilir.\n\n\"Bildirim\" iznine sahip olan Chrome uzantılarının bildirim görüntüleme izni vardır."
+		"message": "Doğru değerine ayarlanırsa arka plandaki terminal uyarıları bir Web Bildirimi oluşturur. https://www.w3.org/TR/notifications/\n\nBildirimlerin görüntülenmesi için kullanıcının izin vermesi gerekir. Bu seçenek doğru değerine ayarlandığında hterm, gerektiğinde kullanıcıdan izin ister. Bu izin isteği bir kullanıcı işlemi tarafından tetiklenmediğinde tarayıcılar bunu göstermeyebilir.\n\n\"Bildirim\" iznine sahip olan Chrome uzantılarının bildirim görüntüleme izni vardır."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Doğu Asya Belirsiz karakterlerinin iki sütun genişliğinde olup olmayacağı."
@@ -471,7 +477,7 @@
 		"message": "Başka renk özelliği olmayan metin için ön plan rengi."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Yazı yazarken fare imlecinin otomatik olarak gizlenip gizlenmeyeceğini belirler. Varsayılan değer, platform/OS'nin bunu uygulayıp uygulamadığının otomatik olarak algılanmasıdır.\n\nNot: Bu ayarı bazı işletim sistemleri geçersiz kılabilir ve her zaman devre dışı bırakamayabilirsiniz."
+		"message": "Yazı yazarken fare imlecinin otomatik olarak gizlenip gizlenmeyeceğini belirler. Varsayılan değer, platform/OS'un bunu uygulayıp uygulamadığının otomatik olarak algılanmasıdır.\n\nNot: Bu ayarı işletim sisteminiz geçersiz kılabilir ve her zaman devre dışı bırakamayabilirsiniz."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "True (Doğru) değerine ayarlanırsa Home/End denetimleri terminal kaydırma çubuğunu kontrol eder ve Üst Karakter+Home/Üst Karakter+End denetimleri uzak ana makineye gönderilir. False (Yanlış) değerine ayarlanırsa Home/End denetimleri uzak ana makineye gönderilir, Üst Karakter+Home/Üst Karakter+End denetimleri kaydırma yapar."
@@ -519,13 +525,16 @@
 		"message": "Meta+1..9'un tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, tarayıcı sekmesinde hterm'i çalıştırırken kullanışlıdır. Böylece Chrome'un \"sekmeye geçiş\" klavye kısayollarını kaybetmezsiniz. Sekmede çalıştırılmadığı sırada bu tuşların ana makineye gönderilmesi daha iyi olur. Böylece bu tuşlar vim veya emacs'te kullanılabilir.\n\nTrue (doğru) değerine ayarlanırsa Meta+1..9 tarayıcı tarafından ele alınır. False (yanlış) değerine ayarlanırsa Meta+1..9 ana makineye gönderilir. Null (boş) değerine ayarlanırsa tarayıcı platformu ve pencere türüne göre otomatik algılama gerçekleştirilir."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Meta+V'nin ana makineye aktarılıp aktarılmayacağı."
+		"message": "Meta+V'nin tarayıcıya aktarılıp aktarılmayacağı.\n\nBu, bazı sistemlerde içerik yapıştırmak için kullanılır."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "True (doğru) değerine ayarlanırsa sürüklenip bırakılan metin, terminale yapıştırılır.\nFalse (yanlış) değerine ayarlanırsa bırakılan metin yok sayılır."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Ana makineden alınan veriler için beklenen kodlamayı belirler.\nKodlamalar eşleşmezse görsel hataların gözlemlenme olasılığı artar.\n\nGeçerli değerler \"utf-8\" ve \"raw\" değerleridir."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Terminal ekranı kenarlığının çevresindeki piksel cinsinden dolgu boyutu.\n\nBu, kullanıcının ekranın kenarlarına görünür dolgu ekleyebilmesi için terminal ekranının çevresindeki kenarlığın boyutunu kontrol eder."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Herhangi bir tuş vuruşunda görünümün en alta kaydırılıp kaydırılmayacağını belirler."
@@ -534,7 +543,7 @@
 		"message": "Terminal çıkışında görünümün en alta kaydırılıp kaydırılmayacağını belirler."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Alternatif ekran arabelleğini kullanırken DECCKM (Uygulama İmleç Tuşları) etkinse, fare tekerleği kaydırma etkinlikleri, ok tuşlarını taklit eder.\n\nÜst Karakter tuşunu basılı tutarak bunu geçici bir süreliğine devre dışı bırakabilirsiniz.\n\nBu durum, çağrı cihazları kullanılırken (daha az), kılavuz sayfaları veya metin düzenleyiciler (vi/nano) okunurken ya da ekran/tmux kullanılırken sıklıkla ortaya çıkar."
+		"message": "Alternatif ekran arabelleğini kullanırken DECCKM (Uygulama İmleç Tuşları) etkinse fare kaydırma tekerleği etkinlikleri, ok tuşlarını taklit eder.\n\nÜst Karakter tuşunu basılı tutarak bunu geçici bir süreliğine devre dışı bırakabilirsiniz.\n\nBu durum, sayfalandırıcı kullanılırken (less), referans sayfaları veya metin düzenleyiciler (vi/nano) okunurken ya da screen/tmux kullanılırken sıklıkla ortaya çıkar."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "Piksel cinsinden ölçüldüğünde kaydırma tekerleği etkinliklerinin katsayısı.\n\nSayfanın kaydırma hızını değiştirir."
@@ -818,9 +827,6 @@
 	"new_window_menu_label": {
 		"message": "Yeni Pencere"
 	},
-	"notify_copy": {
-		"message": "Seçim Kopyalandı"
-	},
 	"ok_button_label": {
 		"message": "Tamam"
 	},
@@ -829,9 +835,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Uzman İpucu] Ctrl+W tuşlarının terminalinizi kapatmasını önlemek için \"Pencere Olarak Aç\" veya \"Tam ekran\" seçeneğini kullanın!\n[Uzman İpucu] Daha fazla bilgi için $1 adresine bakın."
-	},
-	"options_button_label": {
-		"message": "Seçenekler"
 	},
 	"plugin_loading": {
 		"message": "NaCl eklentisi yükleniyor..."
@@ -896,6 +899,9 @@
 	"save_label": {
 		"message": "Kaydet"
 	},
+	"send_feedback_label": {
+		"message": "Geri Bildirim Gönder"
+	},
 	"shortcut_list_aria_label": {
 		"message": "kaydedilen bağlantılar"
 	},
@@ -910,6 +916,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Terminali Temizle"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" kullanılamıyor"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI renkleri"
@@ -938,6 +947,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Görünür"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "AltGr sezgisel algılama seçin.\n\n'Auto': navigator.language ayarına göre otomatik algıla:\n      'en-us' => 'Disable', değilse => 'right-alt'\n'Disable': Tüm AltGr emülasyonlarını devre dışı bırak.\n'ctrl-alt': Ctrl+Alt, AltGr demektir.\n'left-alt': Sol Alt, AltGr demektir.\n'right-alt': Sağ Alt, AltGr demektir."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Varsayılan palet için renkleri ayarlar."
 	},
@@ -952,6 +964,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Terminali Sıfırla"
+	},
+	"terminal_settings_about_label": {
+		"message": "Hakkında"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Arka plan resminin URL'si. \"http://\" veya \"https://\" ile başlamalıdır. Resim olmadığında boş bırakın.\n\nÖrneğin:\n  https://goo.gl/anedTK"
@@ -1079,6 +1094,9 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_try_again_with_internet": {
+		"message": "İnternete bağlanıp tekrar deneyin."
+	},
 	"tip_1": {
 		"message": "Bağlantıları açmak için, tıklarken Ctrl tuşunu (macOS'ta Cmd tuşu) basılı tutabilirsiniz."
 	},
@@ -1134,7 +1152,7 @@
 		"message": "Değişiklik Günlüğü/sürüm notları: $1"
 	},
 	"welcome_faq": {
-		"message": "Sık Sorulan Soruların Yanıtları: $1 (Açmak için ctrl tuşunu basılı tutarken bağlantıları tıklayın)"
+		"message": "Sık Sorulan Soruların Yanıtları: $1 (Açmak için Ctrl tuşunu basılı tutarken bağlantıları tıklayın)"
 	},
 	"welcome_release_highlights": {
 		"message": "$1 sürümünden beri yapılan önemli değişiklikler:"

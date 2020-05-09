@@ -141,7 +141,7 @@
 		"message": "የመስመር ውስጥ ምስል ማሳያን ይፍቀዱ"
 	},
 	"hterm_name_pref_alt_backspace_is_meta_backspace": {
-		"message": "Alt+Backspac Meta+Backspace ነው"
+		"message": "Alt+Backspace Meta+Backspace ነው"
 	},
 	"hterm_name_pref_alt_gr_mode": {
 		"message": "የAltGr ቁልፍ ሁነታ"
@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "ምስጠራን ተቀበል"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "የማያ ገጽ ድብዳብ መጠን"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "ከቁልፍ ጭረት በኋላ ወደ ግርጌ ይሸብልሉ"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "ራስ-ሰር ምርጫ ማስቆም (ወደ ቀኝ በኩል)"
 	},
+	"hterm_options_button_label": {
+		"message": "አማራጮች"
+	},
 	"hterm_popup_inline_image": {
 		"message": "የውስጠ-መስመር ምስሎች"
 	},
@@ -363,7 +369,7 @@
 		"message": "ከተዋቀረ የChrome OS Alt+Backspace->Delete ማዛመጃውን ይቀለብሳል፣ በዚህም alt+backspace በእርግጥ alt+backspace ይሆናል።"
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "አንድ የAltGr ማግኛ ራስ-አስተማሪን ይምረጡ።\n\n'null': በnavigator.language ላይ ተመስርተው በራስ-ያግኙ፦\n      'en-us' => 'none', else => 'right-alt'\n'none': ከAltGr ጋር የሚዛመድ ማንኛውም ውሂብ ማቀናበር አሰናክል።\n'ctrl- alt': Ctrl+Alt ማለት AltGr እንደሆነ ይቁጠሩ።\n'left-alt': የግራ Alt ማለት AltGr እንደሆነ ይቁጠሩ።\n'right-alt': የቀኝ Alt ማለት AltGr እንደሆነ ይቁጠሩ።"
+		"message": "አንድ የAltGr ማግኛ ራስ-አስተማሪን ይምረጡ።\n\n'null': በnavigator.language ላይ ተመስርተው በራስ-ያግኙ፦\n      'en-us' => 'none', else => 'right-alt'\n'none': ማንኛውም የAltGr ማስመሰልን ያሰናክሉ።\n'ctrl- alt': Ctrl+Alt ማለት AltGr እንደሆነ ይቁጠሩ።\n'left-alt': የግራ Alt ማለት AltGr እንደሆነ ይቁጠሩ።\n'right-alt': የቀኝ Alt ማለት AltGr እንደሆነ ይቁጠሩ።"
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "የAlt ቁልፍ እንደ የዲበ ቁልፍ ወይም እንደ የተለየ የAlt ቁልፍ ይሠራ እንደሆነ።"
@@ -426,7 +432,7 @@
 		"message": "የሚታየው የጽሑፍ ጠቋሚ ቅርጽ። ይህ በጣቢያ መዝለያ ቅደም-ተከተል በኩል ሊቀየር ይችላል።"
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "እውነት ከሆነ በበስተጀርባው ውስጥ ያሉ የማሳያ ደወሎች የድር ማሳወቂያ ይፈጥራሉ። https://www.w3.org/TR/notifications/\n\nማሳወቂያዎችን ማሳየት ከተጠቃሚው ፈቃድ ያስፈልጋል። ይህ አማራጭ ወደ እውነት ሲዋቀር hterm ካስፈለገ ከተጠቃሚው ፈቃድ ለመጠየቅ ይሞክራል። አሳሾች ይህ ፈቃድ ከተጠቃሚ እርምጃ የመነጨ ካልሆነ ላያሳዩት እንደሚችሉ ልብ ይበሉ።\n\nየ«ማሳወቂያዎች» ፈቃድ ያላቸው የChrome ቅጥያዎች ማሳወቂያዎችን የማሳየት ፈቃድ አላቸው።"
+		"message": "እውነት ከሆነ በበስተጀርባው ውስጥ ያሉ የማሳያ ደወሎች የድር ማሳወቂያ ይፈጥራሉ። https://www.w3.org/TR/notifications/\n\nማሳወቂያዎችን ማሳየት ከተጠቃሚው ፈቃድ ያስፈልጋል። ይህ አማራጭ ወደ እውነት ሲዋቀር ካስፈለገ hterm ከተጠቃሚው ፈቃድ ለመጠየቅ ይሞክራል። አሳሾች ይህ ፈቃድ ከተጠቃሚ እርምጃ የመነጨ ካልሆነ ላያሳዩት እንደሚችሉ ልብ ይበሉ።\n\nየ«ማሳወቂያዎች» ፈቃድ ያላቸው የChrome ቅጥያዎች ማሳወቂያዎችን የማሳየት ፈቃድ አላቸው።"
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "የምሥራቅ እስያ አሻሚ ቁምፊዎች የሁለት አምድ ስፋት ይኖራቸው እንደሆነ።"
@@ -474,7 +480,7 @@
 		"message": "ሌላ ምንም የቀለም አይነታዎች ለሌለው ጽሑፍ የፊት ቀለም።"
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "ሲተይቡ መዳፊቱ በራስ-ሰር ይደበቅ እንደሆነ። በነብሪነት የመሣሪያ ሥርዓቱ/ሥርዓተ ክውናውን ይህን ይቆጣጠር እንደሆነ በራስ-ያግኙ።\n\nማስታወሻ፦ አንዳንድ ሥርዓተ ክወናዎች ይህን ቅንብር ሊሽሩት ይችላሉ፣ እና እርስዎ ሁልጊዜ ማሰናከል ላይችሉ ይችላሉ።"
+		"message": "ሲተይቡ መዳፊቱ በራስ-ሰር ይደበቅ እንደሆነ። በነብሪነት የመሣሪያ ሥርዓቱ/ሥርዓተ ክወናውን ይህን ይቆጣጠር እንደሆነ በራስ-ያግኙ።\n\nማስታወሻ፦ የእርስዎ ሥርዓተ ክወና ይህን ቅንብር ሊሽረው ይችላል፣ እና እርስዎ ሁልጊዜ ማሰናከል ላይችሉ ይችላሉ።"
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "እውነት ከሆነ Home/End የተርሚናል መሸብለያውን ይቆጣጠራል፣ እና Shift+Home/Shift+End ወደ የርቀት አስተናጋጁ ይላካሉ። ሐሰት ከሆነ Home/End ወደ የርቀት አስተናጋጁ ይላኩና Shift+Home/Shift+End ይሸበልላል።"
@@ -522,13 +528,16 @@
 		"message": "Meta+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ አቋራጮችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Meta+1..9 በአሳሹ ነው የሚስተናገደው። ሐሰት ከሆነ Meta-1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ አይነት ላይ የተመሠረተ ይሆናል።"
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Meta+V ወደ አስተናጋጁ ይተላለፍ እንደሆነ።"
+		"message": "Meta+V ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nበአንዳንድ ስርዓቶች ላይ ይህ ይዘትን ለመለጠፍ ስራ ላይ ይውላል።"
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "እውነት ከሆነ ጎትቶ ጣል ማድረግ ተርሚናሉ ላይ ይለጥፋል።\nሐሰት ከሆነ የተጣለው ጽሑፍ ችላ ይባላል።"
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "ከአስተናጋጁ ለመጣው ውሂብ የተጠበቀው ኮድ ቅየራን ያዋቅራል።\nምሥጠራዎቹ የማይዛመዱ ከሆኑ ምስላዊ ሳንካዎቹ የመታየት ዕድላቸው ከፍ ያለ ነው። \n\nየሚሠሩ እሴቶች «utf-8» እና «raw» ናቸው።"
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "በተርሚናል ማያ ገጹ ጠርዝ ዙሪያ ላይ ያለው የድብዳብ መጠን በፒክሰል።\n\nተጠቃሚው አንዳንድ የሚታይ ድብዳብ በማያ ገጹ ጠርዞች ላይ ማከል እንዲችል ይህ በተርሚናል ማያ ገጹ ዙሪያ ያለውን መጠን ይቆጣጠራል።"
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "ማንኛውም ቁልፍ ሲነካ ወደ ታች ይሸበልል እንደሆነ።"
@@ -540,7 +549,7 @@
 		"message": "ተለዋጭ የማያ ገጽ ቋጡን ሲጠቀሙ እና DECCKM (የመተግበሪያ ጠቋሚ ቁልፎች) ገቢር ሲሆን የመዳፊት ጎማ ሽብለላ ክስተቶች የቀስት ቁልፎችን ያስመስላሉ።\n\nየShift ቁልፉን በመያዝ ለጊዜው ሊሰናከል ይችላል።\n\nይህ ጠሪዎችን (ያነሰ) ሲጠቀሙ ወይም የመመሪያ ገጾችን ወይም ጽሑፍ አቀናባሪዎችን (vi/nano) ሲያነብቡ ወይም ማያ ገጽ/tmuxን ሲጠቀሙ በተደጋጋሚነት ይመጣል።"
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "በፒክሰል ሲለካ የአሸብላይ ጎማ ክስተቶች አባዢ።\n\nገጹ በምን ያህል ፍጥነት እንደሚሸበለል ይቀይራል።"
+		"message": "በፒክሰል ሲለካ የመዳፊት አሸብላይ ጎማ ክስተቶች ማባዣ።\n\nገጹ በምን ያህል ፍጥነት እንደሚሸበለል ይቀይራል።"
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "አቀባዊ የማሸብለያ አሞሌ ሁነታ።"
@@ -836,9 +845,6 @@
 	"new_window_menu_label": {
 		"message": "አዲስ መስኮት"
 	},
-	"notify_copy": {
-		"message": "ምርጫ ተቀድቷል"
-	},
 	"ok_button_label": {
 		"message": "እሺ"
 	},
@@ -847,9 +853,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Pro Tip] Ctrl+W ተርሚናልዎን እንዳይዘጋው «እንደ መስኮት ክፈት»ን ወይም «ሙሉ ማያ»ን ይጠቀሙ!\n[Pro Tip] ተጨማሪ መረጃ ለማግኘት $1ን ይመልከቱ።"
-	},
-	"options_button_label": {
-		"message": "አማራጮች"
 	},
 	"plugin_loading": {
 		"message": "የNaCl ተሰኪን በመጫን ላይ..."
@@ -914,6 +917,9 @@
 	"save_label": {
 		"message": "አስቀምጥ"
 	},
+	"send_feedback_label": {
+		"message": "ግብረመልስ ላክ"
+	},
 	"sftp_client_button_label": {
 		"message": "ኤስኤፍቲፒ"
 	},
@@ -931,6 +937,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "ተርሚናልን ማጽዳት"
+	},
+	"terminal_font_unavailable": {
+		"message": "«$1» አይገኝም"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "የANSI ቀለማት"
@@ -959,6 +968,9 @@
 	"terminal_name_pref_visible": {
 		"message": "የሚታይ"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "አንድ የAltGr ማግኛ ራስ-አስተማሪን ይምረጡ።\n\n'ራስሰር': በnavigator.language ላይ ተመስርተው በራስ-ያግኙ፦\n      'en-us' => 'አሰናክል', else => 'right-alt'\n'አሰናክል': ማንኛውም የAltGr ማስመሰልን ያሰናክሉ።\n'ctrl- alt': Ctrl+Alt ማለት AltGr እንደሆነ ይቁጠሩ።\n'left-alt': የግራ Alt ማለት AltGr እንደሆነ ይቁጠሩ።\n'right-alt': የቀኝ Alt ማለት AltGr እንደሆነ ይቁጠሩ።"
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "ቀለማትን ለነባሪው የቤተ-ቀለም ያቀናብሩ።"
 	},
@@ -973,6 +985,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "ተርሚናልን ዳግም ማስጀመር"
+	},
+	"terminal_settings_about_label": {
+		"message": "ስለ"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "የዳራ ምስል ዩአርኤል። በhttp:// ወይም https:// መጀመር አለበት። ምንም ምስል ላለማስቀመጥ ባዶ እንደሆነ ይተዉት።\n\nለምሳሌ፦\n  https://goo.gl/anedTK"
@@ -1099,6 +1114,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "ገፅታ"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "ከበይነመረቡ ጋር ይገናኙና እንደገና ይሞክሩ።"
 	},
 	"tip_1": {
 		"message": "አገናኞችን ለመክፈት እነሱን ጠቅ እያደረጉ ሳለ Ctrl (በmacOS ላይ Cmd) መያዝ ይችላሉ!"

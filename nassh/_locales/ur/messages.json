@@ -1,0 +1,1214 @@
+{
+	"already_mounted_message": {
+		"message": "فائل سسٹم پہلے ہی ماؤنٹ کیا گیا ہے!"
+	},
+	"backup_prefs": {
+		"message": "بیک اپ محفوظ کریں"
+	},
+	"bad_destination": {
+		"message": "منزل کو پارس کرنے سے قاصر: $1"
+	},
+	"before_unload": {
+		"message": "اس ٹیب کو بند کرنے سے یہ سیشن منقطع ہو جائے گا۔"
+	},
+	"cache_pin_prompt": {
+		"message": "کیا آپ اس SSH سیشن کیلئے، PIN کو کیش میموری میں محفوظ کرنا چاہتے ہیں؟ (y/N):"
+	},
+	"cancel_button_label": {
+		"message": "منسوخ کریں"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "SSH کے معلوم میزبانوں کو صاف کریں"
+	},
+	"clear_label": {
+		"message": "صاف کریں"
+	},
+	"command_complete": {
+		"message": "کمانڈ $1 مکمل ہوا اور پروگرام اسٹیٹس کوڈ $2 کے ساتھ بند ہوا۔"
+	},
+	"command_not_supported": {
+		"message": "Chrome کے اس ورژن میں $1 تعاون یافتہ نہیں ہے"
+	},
+	"command_startup_failed": {
+		"message": "$1 لانچ ہونے میں ناکام: $2"
+	},
+	"connect_button_label": {
+		"message": "منسلک کریں"
+	},
+	"connect_or_exit_message": {
+		"message": "کوئی اور کنکشن منتخب کریں (C) یا باہر نکلیں (x)؟"
+	},
+	"connecting": {
+		"message": "$1 سے منسلک ہو رہا ہے..."
+	},
+	"connection_dialog_name": {
+		"message": "کنکشن کا ڈائیلاگ"
+	},
+	"console_crosh_options_notice": {
+		"message": "کیا آپ جانتے ہیں کہ اختیارات کیلئے ایک خاص صفحہ موجود ہے؟\nاب ‎'term_'‎ میں براہ راست ترمیم کی کوئی ضرورت نہیں ہے!\nاسے کھولنے کیلئے $1 دبائیں یا اس پر کلک کریں:\n$2"
+	},
+	"console_nassh_options_notice": {
+		"message": "کیا آپ جانتے ہیں کہ اختیارات کیلئے ایک خاص صفحہ موجود ہے؟\nاب ‎‎'term_'‎ میں براہ راست ترمیم کی کوئی ضرورت نہیں ہے!\n$1"
+	},
+	"delete_button_label": {
+		"message": "حذف کریں"
+	},
+	"disconnect_message": {
+		"message": "NaCl پلگ ان اسٹیٹس کوڈ $1 کے ساتھ بند ہوا۔"
+	},
+	"faq_menu_label": {
+		"message": "اکثر پوچھے گئے سوالات"
+	},
+	"field_argstr_placeholder": {
+		"message": "اضافی کمانڈ لائن کے آرگیومینٹس"
+	},
+	"field_description_aria_label": {
+		"message": "تفصیل"
+	},
+	"field_description_placeholder": {
+		"message": "username@hostname یا فری فارم ٹیکسٹ"
+	},
+	"field_hostname_aria_label": {
+		"message": "میزبان کا نام"
+	},
+	"field_hostname_placeholder": {
+		"message": "میزبان کا نام"
+	},
+	"field_mount_path_placeholder": {
+		"message": "ڈیفالٹ راستہ صارف کی ہوم ڈائرکٹری ہے"
+	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH ریلے سرور کے اختیارات"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH ریلے سرور کے اختیارات"
+	},
+	"field_port_aria_label": {
+		"message": "پورٹ"
+	},
+	"field_port_placeholder": {
+		"message": "پورٹ"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "ڈیفالٹ"
+	},
+	"field_username_aria_label": {
+		"message": "صارف نام"
+	},
+	"field_username_placeholder": {
+		"message": "صارف نام"
+	},
+	"found_relay": {
+		"message": "ریلے سرور ملا: $1"
+	},
+	"get_profile_error": {
+		"message": "خرابی: پروفائل $1 کو لوڈ نہیں کیا جا سکا:\n$2"
+	},
+	"hterm_announce_current_screen_header": {
+		"message": "‎$1%‎ سکرول ہوا،"
+	},
+	"hterm_button_allow_always": {
+		"message": "ہمیشہ اجازت دیں"
+	},
+	"hterm_button_allow_session": {
+		"message": "اس سیشن کو اجازت دیں"
+	},
+	"hterm_button_block": {
+		"message": "مسدود کریں"
+	},
+	"hterm_button_page_down": {
+		"message": "صفحہ نیچے"
+	},
+	"hterm_button_page_up": {
+		"message": "صفحہ اوپر"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "$1 لوڈ کرنے کا عمل ناکام ہو گیا"
+	},
+	"hterm_loading_resource_start": {
+		"message": "$1 لوڈ کیا جا رہا ہے..."
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "تصویر کو ان لائن ڈسپلے کرنے کی اجازت دیں"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Backspace کا مطلب Meta+Backspace ہے"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "AltGr کلید وضع"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Alt کلید کو Meta کلید سمجھ کر استعمال کریں"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Alt کلید موڈیفائر کو ہینڈل کرنا"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "الرٹ گھنٹی کی آواز (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "پس منظر کا رنگ"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "پس منظر کی تصویر"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "پس منظر کی تصویر کی پوزیشن"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "پس منظر کی تصویر کا سائز"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "بیک اسپیس کلید کا برتاؤ"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "حرف کے نقشے کو اوور رائیڈ کرتا ہے"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "منتخب کردہ متن کو خودکار طور پر صاف کریں"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "باہر نکلنے پر ونڈو بند کریں"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "رنگ کا شروعاتی پیلیٹ"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "منتخب کردہ مواد کو خودکار طور پر کاپی کریں"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Ctrl+C کاپی کرنے کا برتاؤ"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ctrl++/-/0 زوم کا برتاؤ"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Ctrl+V پیسٹ کرنے کا برتاؤ"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "کرسر بلِنک ہونے کا عمل"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "کرسر بلِنک کرنے کی شرح"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "ٹیکسٹ کرسر کا رنگ"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "ٹیکسٹ کرسر کی شکل"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "الرٹ کی تمام گھنٹیوں کیلئے ڈیسک ٹاپ نوٹیفیکیشنز تخلیق کریں"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian Ambiguous دو کالمز استعمال کرتے ہیں"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "غیر ‎UTF-8 C1 کنٹرول والے حروف سپورٹ کرتے ہیں"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "بلِنک کرنے والا متن فعال کریں"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "بولڈ ٹیکسٹ برتاؤ"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "بولڈ ٹیکسٹ کے ساتھ شوخ رنگوں کا استعمال کریں"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "مواد کاپی کرتے وقت اطلاع دکھائیں"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "ریموٹ کلپ بورڈ پر لکھنے کی اجازت دیں"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "سکرول بیک بفر کو صاف کرنے کی اجازت دیں (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "ٹیکسٹ کرسر بلِنکنگ میں تبدیلی کی اجازت دیں"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "سائز تبدیل کرنے پر ٹرمینل کے ڈائمینشنز دکھائیں"
+	},
+	"hterm_name_pref_environment": {
+		"message": "ماحول کے متغیرات"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "متن کی فونٹ فیملی"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "متن کا فونٹ سائز"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "متن کے فونٹ کی ہمواری"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "متن کا رنگ"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "ٹائپ کرتے وقت ماؤس کرسر چھپائیں"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Home/End کلید کے سکرول کا برتاؤ"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "کی بورڈ بائنڈنگ/شارٹ کٹس"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "ڈیفالٹ OS کی بورڈ بائنڈنگز/شارٹ کٹس استعمال کریں"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Fkeys میڈیا کی کلیدیں ہیں"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Meta کلید موڈیفائر کو ہینڈل کرنا"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "ماؤس بٹن سے پیسٹ کریں"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "ماؤس پر دائیں طرف کلک کر کے مواد پیسٹ کرنا"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Page Up/Down کلید کے سکرول کا برتاؤ"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Alt+1..9 ٹیب سوئچ کرنے کا برتاؤ"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Ctrl+N سے نئی ونڈو کھولنے کا برتاؤ"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Ctrl+1..9 سوئچ ٹیب کا برتاؤ"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ctrl+T نئے ٹیب کا برتاؤ"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab ٹیب سوئچ کرنے کا برتاؤ"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Ctrl+W ٹیب بند کرنے کا برتاؤ"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Meta+1..9 سوئچ ٹیب کا برتاؤ"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Meta+V پیسٹ کرنے کا برتاؤ"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "پیسٹ کرنے کیلئے گھسیٹنے اور چھوڑنے کی اجازت دیں"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "ان کوڈنگ وصول کریں"
+	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "اسکرین پیڈنگ کا سائز"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "کی سٹروک کے بعد نیچے سکرول کریں"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "نئے آؤٹ پٹ کے بعد نیچے سکرول کریں"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "تیر کی کلیدوں کو سکرول وہیل کے ساتھ امیولیٹ کریں"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "ماؤس سکرول وہیل کا ضارب"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "سکرول بار کی مرئیت"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Shift+Insert سے پیسٹ کرنے کی کارروائی"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "ٹرمینل ان کوڈنگ"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "براؤزر کو متن کاپی کرنے کی سہولت دیں"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "حسب ضرورت CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "حسب ضرورت CSS (ان لائن ٹیکسٹ)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "خودکار انتخاب کو روکنا (بائیں طرف)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "لفظ کو توڑنے والے حروف"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "خودکار انتخاب کو روکنا (دائیں طرف)"
+	},
+	"hterm_options_button_label": {
+		"message": "اختیارات"
+	},
+	"hterm_popup_inline_image": {
+		"message": "ان لائن تصاویر"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "ان لائن تصاویر غیر فعال کر دی گئیں"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "آیا ریموٹ میزبان کو ٹرمینل میں تصاویر ڈسپلے کرنے کی اجازت دی جاتا ہے۔\n\nبذریعہ ڈیفالٹ، ہم ایک انتخاب کئے جانے تک پرامپٹ کرتے ہیں۔"
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "سیٹ کئے جانے پر، Chrome OS میں Alt+Backspace->Delete سے کی گئی تبدیلی کالعدم ہو جاتی ہے، جس کی وجہ سے Alt+Backspace دوبارہ Alt+Backspace کی طرح کام کرنے لگتا ہے۔"
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "ایک AltGr شناخت کا انکشاف منتخب کریں۔\n\n‎'null': navigator.language کی بنیاد پر ازخود شناخت کریں:\n      'en-us' => 'کوئی نہیں'، ورنہ => 'right-alt'\n'کوئی نہیں': کوئی بھی AltGr امیولیشن غیر فعال کریں۔\n'ctrl-alt': مان لیں Ctrl+Alt کا مطلب AltGr ہے۔\n'left-alt': مان لیں بائیں Alt کا مطلب AltGr ہے۔\n'right-alt': مان لیں دائیں Alt کا مطلب AltGr ہے۔"
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "آیا Alt کلید بطور Meta کلید کام کرتی ہے یا نمایاں Alt کلید۔"
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Alt کلید کو ہینڈل کرنے کے طریقے کو کنٹرول کرتا ہے۔\n\n  escape: ایک ESC سابقہ بھیجیں۔\n  8 بِٹ: اس ٹائپ کردہ حرف میں 128 شامل کریں جسے xterm کی طرح لکھا گیا ہے۔\n براؤزر کلید: بٹن دبائے جانے کا انتظار کریں اور دیکھیں کہ براؤزر کیا\n کہتا ہے۔ (یہ ان پلیٹ فارمز پر اچھی طرح کام نہیں کرے گا جہاں براؤزر\n Alt کی کچھ ترتیبات کیلئے ڈیفالٹ کارروائی کرتا ہے۔"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "ٹرمینل گھنٹی کی آواز کا URL۔ قابل سماعت گھنٹی نہ ہونے پر اسے خالی چھوڑ دیں۔"
+	},
+	"hterm_pref_background_color": {
+		"message": "اس متن کیلئے پس منظر رنگ جس کے رنگ کے دیگر انتسابات نہیں ہیں۔"
+	},
+	"hterm_pref_background_image": {
+		"message": "پس منظر کی تصویر کی CSS قدر۔ تصویر نہ ہونے پر اسے خالی چھوڑ دیں۔\n\nمثال کے طور پر:\n  url(https://goo.gl/anedTK)\n  لینیر گریڈئنٹ (اوپر نیچے، نیلا، سرخ)"
+	},
+	"hterm_pref_background_position": {
+		"message": "پس منظر کی تصویر کی پوزیشن کی CSS قدر۔\n\nمثال کے طور پر:\n  10% 10%\n  وسط میں"
+	},
+	"hterm_pref_background_size": {
+		"message": "پس منظر کی تصویر کے سائز کی CSS قدر۔"
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "درست ہونے پر، بیک اسپیس BS بھیجے گا (‎'\\x08'‎، یعنی ‎^H)۔ ورنہ بیک اسپیس '\\x7f' بھیجے گا۔"
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "اس کا بطور آبجیکٹ تعین کیا جاتا ہے۔ یہ ایک اسپارس ایرے ہے جس میں ہر پراپرٹی حرف کا سیٹ کوڈ ہے اور قدر ایک ایسا آبجیکٹ ہے جو بذات خود ایک اسپارس ایرے ہے۔ اس اسپارس ایرے میں، ہر پراپرٹی وصول کردہ حرف ہے اور قدر ڈسپلے کردہ حرف ہے۔\n\nمثال کے طور پر:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "آیا کاپی کرنے کے بعد انتخاب صاف کیا جاتا ہے۔"
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "آیا کمانڈ کے رو بہ عمل ہونے پر ونڈو بند کریں۔"
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "ڈیفالٹ پیلیٹ میں رنگوں کو اوور رائیڈ کریں۔\n\nاس کا تعین ایرے یا آبجیکٹ کے طور پر کیا جا سکتا ہے۔ بطور آبجیکٹ تعین کئے جانے پر اسے اسپارس ایرے سمجھا جاتا ہے، جس میں ہر پراپرٹی رنگ کے پیلیٹ میں موجود ایک عددی انڈیکس ہے۔\n\nCSS رنگ کی تقریباً ہر قدر کے طور پر قدروں کا تعین کیا جا سکتا ہے۔ اس میں ‎#RGB, #RRGGBB, rgb(...), rgba(...)‎ اور ایسے کسی بھی رنگ کا نام شامل ہے جو معیاری X11 rgb.txt فائل کا ایک حصہ بھی ہے۔\n\nآپ اس بات کا تعین کرنے کیلئے 'null' استعمال کر سکتے ہیں کہ ڈیفالٹ قدر تبدیل نہ ہو۔ قدر کا بطور ایرے تعین کئے جانے پر، یہ اشاریات کی چھوٹی تعداد کو نظر کرنے کیلئے کارآمد ہے۔\n\nمثال کے طور پر، یہ دونوں ہی رنگ کے انڈیکس 1 کو نیلے پر سیٹ کرتے ہیں:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "ماؤس کے انتخاب کو خودکار طور پر کلپ بورڈ میں کاپی کریں۔"
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "درست ہونے پر Ctrl+C کاپی کرتا ہے، غلط ہونے پر ‎^C کو میزبان پر بھیجتا ہے۔\nCtrl+Shift+C درست ہونے پر ‎^C کو میزبان پر بھیجتا ہے، غلط ہونے پر کاپی کرتا ہے۔"
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "صحیح ہونے پر، Ctrl+Plus/Minus/Zero زوم کو کنٹرول کرتا ہے۔\nغلط ہونے پر، +Plus/Minus/Zero زوم کو کنٹرول کرتا ہے، Ctrl+Minus ^_, کو بھیجتا ہے Ctrl+Plus/Zero کچھ نہیں کرتا ہے۔"
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "درست ہونے پر Ctrl+V پیسٹ کرتا ہے، غلط ہونے پر ‎^V کو میزبان پر بھیجتا ہے۔\nCtrl+Shift+V درست ہونے پر ‎^V کو میزبان پر بھیجتا ہے، غلط ہونے پر پیسٹ کرتا ہے۔"
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "آیا ٹیکسٹ کرسر بذریعہ ڈیفالٹ بلِنک کرتا ہے۔ اسے ٹرمینل ایسکیپ کی ترتیبات کے ذریعے چلنے کے وقت ٹوگل کیا جا سکتا۔"
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "ٹیکسٹ کرسر کے بلِنک کرنے کی شرح ملی سیکنڈ میں۔\n\nدو عنصر کا ایرے، جس میں پہلے کا تعلق اس بات سے ہے کہ ٹیکسٹ کرسر کو کتنی دیر آن رکھنا چاہیے، جبکہ دوسرا اس تعلق سے ہے کہ اسے کتنی دیر آف رکھنا چاہیے۔"
+	},
+	"hterm_pref_cursor_color": {
+		"message": "مرئی ٹیکسٹ کرسر کا رنگ۔"
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "مرئی ٹیکسٹ کرسر کی شکل۔ اسے ٹرمینل ایسکیپ کی ترتیبات کے ذریعے چلنے کے وقت تبدیل کیا جا سکتا۔"
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "درست ہونے پر، پس منظر میں موجود ٹرمینل کی گھنٹیاں ایک ویب اطلاع تخلیق کریں گی۔ https://www.w3.org/TR/notifications/\n\nاطلاعات ڈسپلے کرنے کیلئے صارف کی اجازت درکار ہے۔ اس اختیار کو 'درست' پر سیٹ کرنے پر، hterm ضروری ہونے پر صارف کی اجازت حاصل کرنے کی کوشش کرے گا۔ اگر اجازت کی یہ درخواست صارف کی کسی کارروائی کے سبب نہیں ہوئی ہے تو ممکن ہے کہ براؤزرز اسے نہ دکھائیں۔\n\n\"اطلاعات\" کی اجازت کے حامل Chrome ایکسٹینشنز کو اطلاعات کو ڈسپلے کرنے کی اجازت حاصل ہے۔"
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "آیا East Asian Ambiguous حروف میں دو کالم کی چوڑائی ہوتی ہے۔"
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "8 بِٹ کنٹرول حروف فعال کرنے کیلئے درست، انہیں نظر انداز کرنے کیلئے غلط۔\n\nاس ترتیب کے باوجود، ہم ان کنٹرول حروف کے دو بائٹ والے ورژنز کا احترام کریں گے۔"
+	},
+	"hterm_pref_enable_blink": {
+		"message": "درست ہونے پر، بلِنک کے انتساب کا احترام کریں۔ غلط ہونے پر، اسے نظر انداز کریں۔"
+	},
+	"hterm_pref_enable_bold": {
+		"message": "درست ہونے پر، بولڈ/چمکدار انتساب والے متن کیلئے بولڈ ویٹ فونٹ کا استعمال کریں۔ غلط ہونے پر، نارمل ویٹ فونٹ کا استعمال کریں۔ خودکار شناخت کیلئے خالی۔"
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "درست ہونے پر، بولڈ انتساب والے کسی بھی متن کیلئے چمکدار رنگوں (16 رنگ کے پیلیٹ پر 8 تا 15) کا استعمال کریں۔ بصورت دیگر غلط۔"
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "آیا میزبان کے کلپ بورڈ پر لکھنے پر ٹرمینل میں ایک پیغام دکھایا جاتا ہے۔"
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "ریموٹ میزبان کو براہ راست مقامی سسٹم کلپ بورڈ پر لکھنے کی سہولت دیں۔\nاس ترتیب کے باوجود پڑھنے کی رسائی کبھی نہیں دی جاتی ہے۔\n\nاسے OSC-52 جیسی خصوصیات تک رسائی کو کنٹرول کرنے کیلئے استعمال کیا جاتا ہے۔"
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "'ڈسپلے کمانڈ مٹائیں' (CSI-J) کا 'محفوظ کردہ لائنز مٹائیں' فنکشن (موڈ 3) ٹرمینل سکرول بیک بفر کو صاف کر سکتا ہے یا نہیں۔\n\nاسے ڈیفالٹ طور پر فعال کرنا محفوظ ہے۔"
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "DEC نجی موڈ 12 کا استعمال کر کے ٹیکسٹ کرسر بلِنک کا اسٹیٹس تبدیل کرنے کی میزبان کی کوشش کا احترام کریں۔"
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "آیا ٹرمینل کے سائز تبدیل کرنے پر ٹرمینل کے ڈائمینشنز دکھائے جائیں۔"
+	},
+	"hterm_pref_environment": {
+		"message": "بطور آبجیکٹ، ماحول کے متغیرات کا شروعاتی سیٹ۔"
+	},
+	"hterm_pref_font_family": {
+		"message": "ٹرمینل ٹیکسٹ کیلئے ڈیفالٹ فونٹ فیملی۔"
+	},
+	"hterm_pref_font_size": {
+		"message": "پکسلز میں فونٹ کا ڈیفالٹ سائز۔"
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "CSS فونٹ ہموار کرنے کی پراپرٹی۔"
+	},
+	"hterm_pref_foreground_color": {
+		"message": "اس متن کیلئے پیش منظر رنگ جس کے رنگ کے دیگر انتسابات نہیں ہیں۔"
+	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "آیا ٹائپ کرتے وقت ماؤس کرسر کو خودکار طور پر چھپایا جاتا ہے۔ بذریعہ ڈیفالٹ، خودکار شناخت کریں کہ آیا پلیٹ فارم/OS اسے ہینڈل کرتا ہے۔\n\nنوٹ: آپ کا آپریٹنگ سسٹم اس ترتیب کو اوور رائیڈ کر سکتا ہے اور اس کی وجہ سے ممکن ہے کہ آپ اسے ہمیشہ غیر فعال نہ کر سکیں۔"
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "درست ہونے پر، Home/End سے ٹرمینل سکرول بار کو کنٹرول کیا جاتا ہے اور Shift+Home/Shift+End کو ریموٹ میزبان پر بھیج دیا جاتا ہے۔ غلط ہونے پر، Home/End کو ریموٹ میزبان پر بھیج دیا جاتا ہے اور Shift+Home/Shift+End سے سکرول کیا جاتا ہے۔"
+	},
+	"hterm_pref_keybindings": {
+		"message": "کلید کی کارروائیوں کیلئے کلید کی ترتیب کا نقشہ۔ کلید کی ترتیبات میں صفر یا اس سے زیادہ موڈیفائر کلیدیں شامل ہوتی ہیں اور اس کے بعد کلید کا کوڈ آتا ہے۔ کلید کے کوڈز اعشاری یا شش اعشاری اعداد یا ایک کلید شناخت کار ہو سکتے ہیں۔ کلید کی کارروائیوں کا تعین میزبان کو بھیجی جانے والی اسٹرنگ یا کارروائی کے شناخت کار کے طور پر کیا جا سکتا ہے۔ فارمیٹ کی مکمل وضاحت کیلئے، https://goo.gl/LWRndr دیکھیں۔\n\nنمونہ کی بائنڈنگز:\n{\n  ‎\"Ctrl+Alt+K\": \"clearTerminal\",‎\n  ‎\"Ctrl+Shift+L\": \"PASS\",‎\n  ‎\"Ctrl+H\": \"'Hello World'\"‎\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "آیا ہمیشہ hterm کے استعمال کو کیپچر کرنے کی بجائے OS کی بورڈ کی عام بائنڈنگز پر عمل کیا جانا چاہیے۔"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "درست ہونے پر، میڈیا کلیدوں کو ان کے مساوی Fkey میں تبدیل کیا جاتا ہے۔ غلط ہونے پر، براؤزر کلیدوں کو استعمال کرنے کی سہولت دیتا ہے۔"
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Meta کلید کو پکڑے رکھتے ہوئے کسی کلید کو دبانے پر ایک ESC سابقہ بھیجیں۔\n\nمثال کے طور پر، فعال ہونے پر، Meta+K کو دبانے سے ‎^[k بھیجا جائے گا، ویسے ہی Escape کے بعد k ٹائپ کرنے پر ہوتا ہے۔ غیر فعال ہونے پر، صرف k بھیجا جائے گا۔"
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "ماؤس کے دائیں بٹن پر کلک کر کے پیسٹ کریں۔\n\nیہ اختیار \"mouse-paste-button\" ترتیب سے آزاد ہے۔\n\nنوٹ: یہ بائیں اور دائیں ہاتھ کے ماؤس کو اچھی طرح ہینڈل کرے گا۔"
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "درست ہونے پر، Page Up/Page Down سے ٹرمینل سکرول بار کو کنٹرول کیا جاتا ہے اور Shift+Page Up/Shift+Page Down کو ریموٹ میزبان پر بھیج دیا جاتا ہے۔ غلط ہونے پر، Page Up/Page Down کو ریموٹ میزبان پر بھیج دیا جاتا ہے اور Shift+Page Up/Shift+Page Down سے سکرول کیا جاتا ہے۔"
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "آیا Alt+1..9 کو براؤزر پر بھیجا جاتا ہے۔\n\nhterm کے براؤزر ٹیب میں چلتے وقت یہ مفید ہوتا ہے، تاکہ آپ Chrome کے \"ٹیب پر سوئچ کریں\" کی بورڈ شارٹ کٹس سے محروم نہ ہوں۔ جب یہ ٹیب میں نہ چل رہے ہوں تو ان کلیدوں کو میزبان پر بھیج دینا بہتر ہے تاکہ vim یا emacs میں ان کا استعمال کیا جا سکے۔\n\nدرست ہونے پر، Alt+1..9 براؤزر کے ذریعے ہینڈل کیا جائے گا۔ غلط ہونے پر، Alt+1..9 کو میزبان پر بھیج دیا جائے گا۔ null ہونے پر، براؤزر کے پلیٹ فارم اور ونڈو کی قسم کی بنیاد پر ازخود شناخت کی جائے گی۔"
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "آیا Ctrl+N کو براؤزر پر بھیجا جاتا ہے۔\n\nدرست ہونے پر، براؤزر Ctrl+N کا استعمال \"نئی ونڈو\" کے کی بورڈ شارٹ کٹ کے طور پر کرے گا۔ غلط ہونے پر، Ctrl+N کو میزبان پر بھیج دیا جائے گا۔"
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "آیا Ctrl+1..9 کو براؤزر پر بھیجا جاتا ہے۔\n\nhterm کے براؤزر ٹیب میں چلتے وقت یہ مفید ہوتا ہے، تاکہ آپ Chrome کے \"ٹیب پر سوئچ کریں\" کی بورڈ شارٹ کٹس سے محروم نہ ہوں۔ جب یہ ٹیب میں نہ چل رہے ہوں تو ان کلیدوں کو میزبان پر بھیج دینا بہتر ہے تاکہ vim یا emacs میں ان کا استعمال کیا جا سکے۔\n\nدرست ہونے پر، Ctrl+1..9 براؤزر کے ذریعے ہینڈل کیا جائے گا۔ غلط ہونے پر، Ctrl+1..9 کو میزبان پر بھیج دیا جائے گا۔ null ہونے پر، براؤزر کے پلیٹ فارم اور ونڈو کی قسم کی بنیاد پر ازخود شناخت کی جائے گی۔"
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "آیا Ctrl+T کو براؤزر پر بھیجا جاتا ہے۔\n\nدرست ہونے پر، براؤزر Ctrl+T کا استعمال \"نیا ٹیب\" کے کی بورڈ شارٹ کٹ کے طور پر کرے گا۔ غلط ہونے پر، Ctrl+T کو میزبان پر بھیج دیا جائے گا۔"
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "آیا Ctrl+Tab اور Ctrl+Shift+Tab کو براؤزر پر بھیجا جاتا ہے۔\n\nدرست ہونے پر، براؤزر Ctrl+Tab اور Ctrl+Shift+Tab کا استعمال \"اگلا/پچھلا ٹیب\" کے کی بورڈ شارٹ کٹ کے طور پر کرے گا۔ غلط ہونے پر، ٹیب کلید کو Ctrl یا Shift کے بغیر میزبان پر بھیج دیا جائے گا۔"
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "آیا Ctrl+W کو براؤزر پر بھیجا جاتا ہے۔\n\nدرست ہونے پر، براؤزر Ctrl+W کا استعمال \"ٹیب بند کریں\" کے کی بورڈ شارٹ کٹ کے طور پر کرے گا۔ غلط ہونے پر، Ctrl+W کو میزبان پر بھیج دیا جائے گا۔"
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "آیا Meta+1..9 کو براؤزر پر بھیجا جاتا ہے۔\n\nhterm کے براؤزر ٹیب میں چلتے وقت یہ مفید ہوتا ہے، تاکہ آپ Chrome کے \"ٹیب پر سوئچ کریں\" کی بورڈ شارٹ کٹس سے محروم نہ ہوں۔ جب یہ ٹیب میں نہ چل رہے ہوں تو ان کلیدوں کو میزبان پر بھیج دینا بہتر ہے تاکہ vim یا emacs میں ان کا استعمال کیا جا سکے۔\n\nدرست ہونے پر، Meta+1..9 براؤزر کے ذریعے ہینڈل کیا جائے گا۔ غلط ہونے پر، Meta+1..9 کو میزبان پر بھیج دیا جائے گا۔ null ہونے پر، براؤزر کے پلیٹ فارم اور ونڈو کی قسم کی بنیاد پر ازخود شناخت کی جائے گی۔"
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "آیا Meta+V کو براؤزر پر بھیجا جاتا ہے۔\n\nکچھ سسٹمز پر، اسے مواد پیسٹ کرنے کیلئے استعمال کیا جاتا ہے۔"
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "درست ہونے پر، کھینچ کر ڈالا گیا متن ٹرمینل میں پیسٹ ہوگا۔\nغلط ہونے پر، ڈالے گئے متن کو نظر انداز کر دیا جائے گا۔"
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "میزبان سے موصول ہونے والے ڈیٹا کیلئے متوقع ان کوڈنگ سیٹ کریں۔\nان کوڈنگز مماثل نہ ہونے پر، ویژوئل بَگز دکھائی دے سکتے ہیں۔\n\n'utf-8' اور 'raw' درست قدریں ہیں۔"
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "ٹرمینل اسکرین کے بارڈر کے اطراف کے پکسلز میں پیڈنگ کا سائز۔\n\nیہ ٹرمینل اسکرین کے اطراف موجود بارڈر کے سائز کو کنٹرول کرتا ہے تاکہ صارف اسکرین کے کناروں میں کچھ مرئی پیڈنگ شامل کر سکے۔"
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "آیا کسی کی اسٹروک پر نچلے حصے تک سکرول کیا جاتا ہے۔"
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "آیا ٹرمینل آؤٹ پٹ پر نچلے حصے تک سکرول کیا جاتا ہے۔"
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "متبادل اسکرین بفر کا استعمال کرتے وقت اور DECCKM (ایپلیکیشن کرسر کی کلیدیں) کے فعال رہنے پر، ماؤس سکرول وہیل کے ایونٹس تیر والی کلیدوں کو امیولیٹ کریں گے۔\n\nShift کلید کو پکڑے رکھ کر اسے عارضی طور پر غیر فعال کیا جا سکتا ہے۔\n\nپیجرز استعمال کرتے (کم) یا مینوئل صفحات یا ٹیکسٹ ایڈیٹرز (vi/nano) پڑھتے یا اسکرین/tmux استعمال کرتے وقت یہ بار بار دکھائی دیتا ہے۔"
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "پکسلز میں پیمائش کرتے وقت ماؤس سکرول وہیل ایونٹس کیلئے ضارب۔\n\nصفحہ کتنی تیز سکرول کرتا ہے، اسے تبدیل کرتا ہے۔"
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "عمودی سکرول بار موڈ۔"
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "آیا Shift+Insert کا استعمال پیسٹ کرنے کیلئے کیا جاتا ہے یا ریموٹ میزبان پر بھیجنے کیلئے۔"
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "ڈیفالٹ ٹرمینل ان کوڈنگ (DOCS)۔\n\nISO-2022 حرف کے نقشے کے تراجم کی سہولت کو فعال کرتا ہے (جیسے گرافکس نقشے)۔\nUTF-8 ان کیلئے سپورٹ کو غیر فعال کرتا ہے۔\n\nمسدود کردہ متغیر کا مطلب یہ ہے کہ ٹرمینل ایسکیپ کی ترتیبات کے ذریعے چلنے کے وقت ان کوڈنگ کو تبدیل نہیں کیا جا سکتا۔\n\nآپ کو اس وقت تک UTF-8 استعمال کرنا لازمی ہے جب تک کہ آپ کو پرانے ایپلیکیشنز کے ساتھ شکستہ رینڈرنگ دکھائی نہ دے۔"
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "آیا ڈیفالٹ براؤزر/OS کے کاپی کرنے کے برتاؤ کا استعمال کیا جاتا ہے۔\n\nبراؤزر/OS کو اس ایونٹ کو براہ راست کاپی کرنے کی اجازت دیں جو ممکنہ طور پر کچھ سسٹمز (جہاں کاپی کرنے کا عمل قطعی طور پر کام نہیں کرتا ہے) کے ساتھ موافقت کو بہتر بنا سکتا ہے، لیکن متن کے انتخاب کو کم مضبوط بناتا ہے۔\n\nمثال کے طور پر، لائن سے خودکار طور پر لپٹی ہوئی لمبی لائنیں اب بھی نئی لائنوں کے ساتھ کاپی ہو جائیں گی۔"
+	},
+	"hterm_pref_user_css": {
+		"message": "صارف کی اسٹائل شیٹ کا وہ URL جسے ٹرمینل کے دستاویز میں شامل کرنا ہے۔"
+	},
+	"hterm_pref_user_css_text": {
+		"message": "ٹرمینل کی اسٹائلنگ کیلئے حسب ضرورت CSS ٹیکسٹ۔"
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "انتخاب کی بائیں طرف (شروع) مماثلت کو روکنے کیلئے ریگولر ایکسپریشن۔\n\nعام طور پر حرف کی یہ جماعت مخصوص حروف کو مسترد کرنے کیلئے ہوتی ہے۔\nہم بذریعہ ڈیفالٹ \"~\" اور \".\" کی اجازت دیتے ہیں کیونکہ راستے اکثر و بیشتر انہیں کے ساتھ شروع ہوتے ہیں۔"
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "درمیان میں آنے والے تمام حروف کی مماثلت کیلئے ریگولر ایکسپریشن۔\n\nعام طور پر حرف کی یہ جماعت مخصوص حروف کو مسترد کرنے کیلئے ہوتی ہے۔\n\nنقطۂ آغاز کے اطراف کے انتخاب کو بڑا کرنے کیلئے استعمال کیا جاتا ہے۔"
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "انتخاب کی دائیں طرف (اختتام) مماثلت کو روکنے کیلئے ریگولر ایکسپریشن۔\n\nعام طور پر حرف کی یہ جماعت مخصوص حروف کو مسترد کرنے کیلئے ہوتی ہے۔"
+	},
+	"hterm_space_character": {
+		"message": "اسپیس"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "ظاہری شکل (فونٹس، رنگ، تصاویر)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "کاپی اور پیسٹ کریں"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "ان کوڈنگ"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "ایکسٹینشنز"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "کی بورڈ"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "متفرقات"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "سکرولنگ"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "آوازیں"
+	},
+	"identity_label": {
+		"message": "شناخت"
+	},
+	"import_link_aria_label": {
+		"message": "فائل در آمد کریں"
+	},
+	"import_link_label": {
+		"message": "درآمد کریں..."
+	},
+	"initializing_relay": {
+		"message": "اس کا استعمال کر کے ریلے سرور تلاش کیا جا رہا ہے: $1"
+	},
+	"json_parse_error": {
+		"message": "'$1' میں JSON کو پارس نہیں کیا جا سکا: $2"
+	},
+	"known_hosts_empty": {
+		"message": "کوئی معلوم میزبان نہیں ہے، بھولنے کیلئے کچھ بھی نہیں ہے۔"
+	},
+	"known_hosts_prompt": {
+		"message": "[‎1-$1‎] کو بھولنے کیلئے، براہ کرم ایک میزبان منتخب کریں:"
+	},
+	"known_hosts_title": {
+		"message": "معلوم میزبان:"
+	},
+	"licenses": {
+		"message": "لائسنسز"
+	},
+	"licenses_expand_link": {
+		"message": "لائسنس دکھائیں"
+	},
+	"licenses_title": {
+		"message": "اوپن سورس لائسنسز"
+	},
+	"loading_label": {
+		"message": "لوڈ کیا جا رہا ہے..."
+	},
+	"migrate_to_ext": {
+		"message": "نوٹس: براہ کرم نئے محفوظ شیل ایکسٹینشن ($1) پر منتقل کریں۔\nChrome ایپس فرسودہ ہو گئی ہیں، اسلئے یہ ورژن اپ ڈیٹس وصول کرنا بند کر دے گی۔\nمزید تفصیلات کیلئے، براہ کرم منتقلی گائیڈ ($2) دیکھیں۔"
+	},
+	"missing_param": {
+		"message": "چھوٹا ہوا پیرامیٹر: $1"
+	},
+	"mount_button_label": {
+		"message": "SFTP ماؤنٹ"
+	},
+	"mount_path_label": {
+		"message": "ماؤنٹ کا راستہ"
+	},
+	"mounted_message": {
+		"message": "ماؤنٹ کردہ!"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "فائل کو ٹرمینل میں ڈمپ کریں"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "کام کرنے والی ڈائرکٹری تبدیل کریں"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "راستوں کا گروپ تبدیل کریں"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "راستوں پر اجازتیں تبدیل کریں"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "راستوں کا مالک تبدیل کریں"
+	},
+	"nasftp_cmd_clear": {
+		"message": "صاف کریں"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "موجودہ ٹرمینل اسکرین صاف کریں۔"
+	},
+	"nasftp_cmd_clip": {
+		"message": "کلپ"
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "ایک فائل کلپ بورڈ پر کاپی کریں (ڈیفالٹ: شروع سے 10MiB)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "کلپ بورڈ پر $1 بائٹس کاپی کئے گئے"
+	},
+	"nasftp_cmd_color": {
+		"message": "رنگ"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "رنگ کا استعمال ٹوگل کریں"
+	},
+	"nasftp_cmd_copy": {
+		"message": "کاپی کریں"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "سورس کو منزل میں کاپی کریں"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "فائلیں حذف کریں"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "ڈسک کے اعداد و شمار دکھائیں"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  راستہ: $1\n  fsid: $2\n کل: $3\n  استعمال شدہ: $4 (‎$5%‎)\n حاصل کریں: $6 (عام صارفین کیلئے)\n $7 (روٹ کیلئے)"
+	},
+	"nasftp_cmd_exit": {
+		"message": "باہر نکلیں"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "غیر منسلک کریں"
+	},
+	"nasftp_cmd_get": {
+		"message": "حاصل کریں"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "فائل ڈاؤن لوڈ ہو رہی ہے: $1 بطور $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "فائلیں ڈاؤن لوڈ کریں"
+	},
+	"nasftp_cmd_help": {
+		"message": "مدد"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "یہ امدادی اسکرین"
+	},
+	"nasftp_cmd_list": {
+		"message": "فہرست"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "ڈائرکٹری کی تفصیلات کی فہرست بنائیں"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "ہدف کی نشاندہی کرنے والے راستے پر ایک لنک تخلیق کریں"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "ڈائرکٹریز تخلیق کریں"
+	},
+	"nasftp_cmd_move": {
+		"message": "منتقل کریں"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "فائل کا نام تبدیل کریں"
+	},
+	"nasftp_cmd_prompt": {
+		"message": "پرامپٹ"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "پرامپٹ اسٹرنگ سیٹ کریں"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "فائلیں اپ لوڈ کریں"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "فائل اپ لوڈ کی جا رہی ہے: $1 بطور $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "موجودہ ورکنگ ڈائرکٹری دکھائیں"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "دور سے کام کرنے والی ڈائرکٹری: $1"
+	},
+	"nasftp_cmd_quit": {
+		"message": "چھوڑیں"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "سِم لنکس پڑھیں"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "راستے کینونکلائز کریں"
+	},
+	"nasftp_cmd_rename": {
+		"message": "نام تبدیل کریں"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "فائلز کو اپ لوڈ کرنا دوبارہ شروع کریں"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "فائلیں ہٹائیں"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "خالی ڈائرکٹریز حذف کریں"
+	},
+	"nasftp_cmd_show": {
+		"message": "دکھائیں"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "فائلز ان لائن دکھائیں"
+	},
+	"nasftp_cmd_stat": {
+		"message": "اعداد و شمار"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "ایکسٹینشنز:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "فائل اسٹیٹس دکھائیں"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  فائل: $1\n  سائز: $2 بائٹس\n   UID: $3\n   GID: $4\nرسائی: $5\n atime: $6\n mtime: $7"
+	},
+	"nasftp_cmd_symlink": {
+		"message": "سِم لنک"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "ہدف کی نشاندہی کرنے والے راستے پر ایک سِم لنک تخلیق کریں"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "راستوں کو 0 بائٹس تک کاٹیں"
+	},
+	"nasftp_cmd_version": {
+		"message": "ورژن"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  سرور ایکسٹینشنز:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "موجودہ پروٹوکول ورژن دکھائیں"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "SFTP پروٹوکول ورژن کی معلومات:\n  مقامی: $1\n  سرور: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: فائل کا اختتام"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: فائل نہیں ملی"
+	},
+	"nasftp_error_file_reading": {
+		"message": "$1 کو پڑھنے کا عمل ناکام ہو گیا: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "غیر ہینڈل کردہ داخلی خرابی، براہ کرم ایک بَگ فائل کریں: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: غلط نمبر: $3"
+	},
+	"nasftp_error_message": {
+		"message": "خرابی: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: '$2' ایکسٹینشن دستیاب نہیں ہے"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: ریگولر فائل نہیں ہے"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: خاطر خواہ آرگیومینٹس نہیں"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: اجازت مسترد ہو گئی"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: کافی زیادہ آرگیومینٹس"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: نامعلوم کمانڈ"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: نامعلوم پرچم $2"
+	},
+	"nasftp_force_quit": {
+		"message": "زبردستی چھوڑیں"
+	},
+	"nasftp_progress_summary": {
+		"message": "$2 سکینڈ میں $1 بائٹس منتقل ہوئے ($3/سیکنڈ)"
+	},
+	"nasftp_prompt": {
+		"message": "‎nasftp $1 >‎"
+	},
+	"nassh_options_error": {
+		"message": "نامعلوم اختیار: $1"
+	},
+	"nassh_product_name": {
+		"message": "محفوظ شیل"
+	},
+	"new_window_menu_label": {
+		"message": "نئی ونڈو"
+	},
+	"ok_button_label": {
+		"message": "ٹھیک ہے"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> کسی محفوظ کردہ پروفائل یا نئے SSH سسٹم سے منسلک کریں"
+	},
+	"open_as_window_tip": {
+		"message": "[Pro Tip] 'بطور ونڈو کھولیں' یا 'مکمل اسکرین' استعمال کر کے Ctrl+W کو اپنا ٹرمینل بند کرنے سے روکیں!\n[Pro Tip] مزید معلومات کیلئے $1 دیکھیں۔"
+	},
+	"plugin_loading": {
+		"message": "NaCl پلگ ان لوڈ ہو رہا ہے..."
+	},
+	"plugin_loading_complete": {
+		"message": " ہو گیا۔"
+	},
+	"plugin_loading_failed": {
+		"message": " ناکام ہو گیا! ‎:(‎"
+	},
+	"popup_connect_tooltip": {
+		"message": "ایک نیا ٹیب کھولنے کیلئے Ctrl پکڑ کر رکھیں۔"
+	},
+	"pref_backup_filename": {
+		"message": "محفوظ شیل کی ترجیحات Backup.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "SSH فائلز"
+	},
+	"preferences_header_terminal": {
+		"message": "ٹرمینل کی ترتیبات"
+	},
+	"preferences_header_uri": {
+		"message": "URI ہینڈلرز"
+	},
+	"preferences_reset": {
+		"message": "تمام ترجیحات ری سیٹ کی گئیں!"
+	},
+	"protocol_register_button": {
+		"message": "پروٹوکول ہینڈلرز کو رجسٹر کریں"
+	},
+	"protocol_register_explain": {
+		"message": "نیچے دیا گیا بٹن ان تمام پروٹوکولز کیلئے ہینڈلرز رجسٹر کرنے کی کوشش کرے گا جنہیں ہم سپورٹ کرتے ہیں۔ مثال کے طور پر، یہ ہمیں ssh:// links directly کو ہینڈل کرنے کی اجازت دیتا ہے۔ براؤزر ہر پروٹوکول کیلئے ایک پرامپٹ ڈسپلے کرے گا، اسلئے براہ کرم ان میں سے ہر ایک کے دکھائی دیتے ہی اس کی تصدیق کریں/اسے قبول کریں۔ کوئی پرامپٹ دکھائی نہ دینے پر، براہ کرم ٹربل شوٹنگ کی تجاویز کیلئے اگلا سیکشن دیکھیں۔"
+	},
+	"protocol_register_explain_settings": {
+		"message": "اگر ہم نے ہینڈلرز کو پہلے ہی رجسٹر کر لیا ہے یا رجسٹریشن کی پچھلی کوششوں کو مسترد کر دیا گیا ہے تو مزید کوئی پرامپٹ ڈسپلے نہیں کیا جائے گا۔ براہ کرم نیچے ڈائیلاگ کھولیں، پھر ssh/sftp/وغیرہ... سیکشنز میں رجسٹرڈ ہینڈلر کی ترتیبات چیک کریں۔ اگر یہ پروگرام مسدود کیا جاتا ہے تو آپ ان ترتیبات کو حذف کر سکتے ہیں جن سے آپ کو دوبارہ رجسٹریشن کرنے کی سہولت ملے گی۔ اگر یہ پروگرام پہلے سے رجسٹرڈ ہے، لیکن اسے بطور ڈیفالٹ ہینڈلر سیٹ نہیں کیا گیا ہے تو آپ ڈیفالٹ ہینڈلر بھی تبدیل کر سکتے ہیں۔"
+	},
+	"protocol_register_options_link": {
+		"message": "پروٹوکول رجسٹر کریں"
+	},
+	"protocol_register_settings_button": {
+		"message": "رجسٹرڈ ہینڈلرز کی ترتیبات کھولیں"
+	},
+	"protocol_register_title": {
+		"message": "محفوظ شیل پروٹوکول ہینڈلر رجسٹریشن کا مددگار"
+	},
+	"read_size_label": {
+		"message": "پڑھنے کا سائز (KiB)"
+	},
+	"reconnect_message": {
+		"message": "دوبارہ منسلک کریں (R)، کوئی اور کنکشن منتخب کریں (C) یا باہر نکلیں (x)؟"
+	},
+	"relay_retry": {
+		"message": "دوبارہ کوشش کی جا رہی ہے..."
+	},
+	"request_pin_prompt": {
+		"message": "'$2 ($3)' پر کلید $1 غیر مقفل کرنے کیلئے PIN درج کریں ($4 کوششیں باقی):"
+	},
+	"restore_prefs": {
+		"message": "بیک اپ بحال کریں"
+	},
+	"save_label": {
+		"message": "محفوظ کریں"
+	},
+	"send_feedback_label": {
+		"message": "تاثرات بھیجیں"
+	},
+	"shortcut_list_aria_label": {
+		"message": "محفوظ کردہ کنکشنز"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "براہ کرم اسمارٹ کارڈ کنیکٹر ایپ انسٹال کریں: $1"
+	},
+	"ssh_argstr_label": {
+		"message": "SSH آرگیومینٹس"
+	},
+	"stream_open_error": {
+		"message": "سلسلہ $1 کھولنے میں ناکام: $2"
+	},
+	"terminal_clear_menu_label": {
+		"message": "ٹرمینل صاف کریں"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" دستیاب نہیں ہے"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI رنگ"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "اینٹی ایلیاس"
+	},
+	"terminal_name_pref_bell": {
+		"message": "گھنٹی"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "بلِنک ہو رہا ہے"
+	},
+	"terminal_name_pref_color": {
+		"message": "رنگ"
+	},
+	"terminal_name_pref_font": {
+		"message": "فونٹ"
+	},
+	"terminal_name_pref_image": {
+		"message": "تصویر"
+	},
+	"terminal_name_pref_shape": {
+		"message": "شکل"
+	},
+	"terminal_name_pref_visible": {
+		"message": "مرئی"
+	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "ایک AltGr شناخت کا انکشاف منتخب کریں۔\n\n'خودکار': navigator.language کی بنیاد پر ازخود شناخت کریں:\n      'en-us' => 'غیر فعال کریں'، ورنہ => 'right-alt'\n'غیر فعال کریں': کوئی بھی AltGr امیولیشن غیر فعال کریں۔\n'ctrl-alt': مان لیں Ctrl+Alt کا مطلب AltGr ہے۔\n'left-alt': مان لیں بائیں Alt کا مطلب AltGr ہے۔\n'right-alt': مان لیں دائیں Alt کا مطلب AltGr ہے۔"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "ڈیفالٹ پیلیٹ کیلئے رنگ سیٹ کریں۔"
+	},
+	"terminal_pref_bell": {
+		"message": "ٹرمینل کی قابل سماعت گھنٹی۔"
+	},
+	"terminal_preview_label": {
+		"message": "پیش منظر"
+	},
+	"terminal_profile_label": {
+		"message": "موجودہ پروفائل"
+	},
+	"terminal_reset_menu_label": {
+		"message": "ٹرمینل ری سیٹ کریں"
+	},
+	"terminal_settings_about_label": {
+		"message": "تعارف"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "پس منظر کی تصویر کا URL۔ ‎'http://'‎ یا ‎'https://'‎ کے ساتھ شروع ہونا ضروری ہے۔ تصویر نہ ہونے پر اسے خالی چھوڑ دیں۔\n\nمثال کے طور پر:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "خودکار"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "غیر فعال کریں"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "بیم"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "مسدود کریں"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "انڈر لائن"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "کیا آپ واقعی تھیم کو اس کے ڈیفالٹس پر ری سیٹ کرنا چاہتے ہیں؟"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "تھیم ری سیٹ کریں"
+	},
+	"terminal_settings_reset_label": {
+		"message": "ری سیٹ کریں"
+	},
+	"terminal_theme_classic_label": {
+		"message": "کلاسک"
+	},
+	"terminal_theme_dark_label": {
+		"message": "گہری"
+	},
+	"terminal_theme_haze_label": {
+		"message": "دُھند"
+	},
+	"terminal_theme_light_label": {
+		"message": "ہلکے رنگ کی تھیم"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "سولرائزڈ ڈارک"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "سولرائزڈ لائٹ"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "رنگ 0: سیاہ"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "رنگ 1: سرخ"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "رنگ 10: چمکدار سبز"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "رنگ 11: چمکدار پیلا"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "رنگ 12: چمکدار نیلا"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "رنگ 13: چمکدار قرمزی"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "رنگ 14: چمکدار سبزی مائل نیلا"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "رنگ 15: چکمدار سفید"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "رنگ 2: سبز"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "رنگ 3: پیلا"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "رنگ 4: نیلا"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "رنگ 5: قرمزی"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "رنگ 6: سبزی مائل نیلا"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "رنگ 7: سفید"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "رنگ 8: چمکدار سیاہ"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "رنگ 9: چمکدار لال"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "ظہور"
+	},
+	"terminal_title_pref_background": {
+		"message": "پس منظر"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "برتاؤ"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "کرسر"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "کی بورڈ"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "کی بورڈ اور ماؤس"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "ماؤس"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "سکرول بار"
+	},
+	"terminal_title_pref_text": {
+		"message": "متن"
+	},
+	"terminal_title_settings": {
+		"message": "ترتیبات"
+	},
+	"terminal_title_theme": {
+		"message": "تھیم"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "انٹرنیٹ سے منسلک کریں اور دوبارہ کوشش کریں۔"
+	},
+	"tip_1": {
+		"message": "آپ لنکس کو کھولنے کیلئے ان پر کلک کرنے کے دوران Ctrl کو (macOS پر Cmd) پکڑے رکھ سکتے ہیں!"
+	},
+	"tip_10": {
+		"message": "کسی ونڈو میں چلنے پر، Ctrl+Shift+N دوسرا سیشن کھول سکتا ہے۔"
+	},
+	"tip_11": {
+		"message": "آپ کلیدوں/شارٹ کٹس کو ری بائنڈ کر سکتے ہیں: https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "ssh کی تصدیق کیلئے Yubikeys اور دیگر اسمارٹ کارڈز استعمال کریں: https://goo.gl/Hu2o3v"
+	},
+	"tip_13": {
+		"message": "تصاویر ان لائن ڈسپلے کریں: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "دائیں طرف کلک کرنے کے دوران Ctrl کو (macOS پر Cmd) پکڑے رکھنے سے سیاق و سباق مینو دکھائی دیتا ہے۔"
+	},
+	"tip_2": {
+		"message": "hterm-notify کا استعمال کر کے براؤزر میں اطلاعات ڈسپلے کریں: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "‎'ssh <profile name>'‎ ٹائپ کر کے اومنی باکس سے منسلک کریں: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS فائل سسٹمز کو SFTP کے ذریعے ماؤنٹ اور فائلز ایپ کے ذریعے براؤز کر سکتا ہے۔ 'Connect' کی بجائے 'SFTP Mount' کا استعمال کریں۔"
+	},
+	"tip_5": {
+		"message": "ویب صفحات میں ‎ssh://‎ لنکس کا استعمال کر کے منسلک کریں یا ایک بُک مارک محفوظ کریں: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "بنیادی 16 رنگ اور 256 رنگوں اور پورے 24 بِٹ والے رنگوں کا استعمال کر کے اپنے آؤٹ پٹ/پرامپٹ کو رنگ کریں: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "OSC-52 کا استعمال کر کے emacs/vim/وغیرہ... سے اپنے کلپ بورڈ کر کاپی کریں: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "chromium-hterm@chromium.org کے ذریعے hterm/محفوظ شیل صارفین کے ساتھ چیٹ کریں: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "بَگ ملا؟  ایک نئی خصوصیت کی دریافت کریں؟  ہمیں مطلع کریں: https://goo.gl/vb94JY"
+	},
+	"unexpected_error": {
+		"message": "ایک غیر متوقع خرابی پیش آ گئی۔ مزید تفصیلات کیلئے، براہ کرم JavaScript کونسول چیک کریں۔"
+	},
+	"unknown_ssh_client_version": {
+		"message": "نامعلوم SSH ورژن: $1"
+	},
+	"unmount_button_label": {
+		"message": "SFTP کا ماؤنٹ ختم کریں"
+	},
+	"welcome_changelog": {
+		"message": "ChangeLog/اجراء کے نوٹس: $1"
+	},
+	"welcome_faq": {
+		"message": "اکثر پوچھے گئے سوالات کے جوابات: $1 (کھولنے کیلئے لنکس پر Ctrl+Click)"
+	},
+	"welcome_release_highlights": {
+		"message": "$1 سے ہونے والی بڑی تبدیلیاں:"
+	},
+	"welcome_tip_of_day": {
+		"message": "بے ترتیب پیشہ ورانہ تجویز #$1: $2"
+	},
+	"welcome_version": {
+		"message": "$1 کے ورژن $2 میں خوش آمدید۔"
+	},
+	"write_size_label": {
+		"message": "لکھنے کا سائز (KiB)"
+	},
+	"zoom_warning": {
+		"message": "براہ کرم Chrome مینو->زوم کو ‎100% پر سیٹ کریں"
+	}
+}

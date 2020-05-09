@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Přijímané kódování"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Velikost odsazení obrazovky"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Po stisknutí klávesy přejít dolů"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Automatické zastavování výběru (vpravo)"
 	},
+	"hterm_options_button_label": {
+		"message": "Možnosti"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Vložené obrázky"
 	},
@@ -363,7 +369,7 @@
 		"message": "Tato možnost ruší přemapování Alt+Backspace -> Delete systému Chrome OS, aby Alt+Backspace opravdu fungovalo jako Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Vyberte heuristiku detekce klávesy AltGr.\n\n'null': Zjistit automaticky podle hodnoty navigator.language:\n      'en-us' => 'none', jinak => 'right-alt'\n'none': Zakázat veškerou manipulaci s klávesou AltGr.\n'ctrl- alt': Předpokládat, že Ctrl + Alt znamená AltGr.\n'left-alt': Předpokládat, že levý Alt znamená AltGr.\n'right-alt': Předpokládat, že pravý Alt znamená AltGr."
+		"message": "Vyberte heuristiku detekce klávesy AltGr.\n\n'null': Zjistit automaticky podle hodnoty navigator.language:\n      'en-us' => 'none', jinak => 'right-alt'\nnone: Zakázat veškerou emulaci pomocí klávesy AltGr.\nctrl-alt: Předpokládat, že Ctrl + Alt znamená AltGr.\nleft-alt: Předpokládat, že levý Alt znamená AltGr.\nright-alt: Předpokládat, že pravý Alt znamená AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Udává, zda klávesa Alt funguje jako klávesa Meta, nebo jako samostatná klávesa Alt."
@@ -474,7 +480,7 @@
 		"message": "Barva popředí textu bez dalších atributů barev."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Udává, zda se při zadávání má automaticky skrýt kurzor myši. Ve výchozím nastavení se automaticky zjišťuje, zda to určuje platforma nebo operační systém.\n\nPoznámka: Některé operační systémy mohou toto nastavení přepsat, a proto ho v některých případech nebude možné zakázat."
+		"message": "Udává, zda se při zadávání má automaticky skrýt kurzor myši. Ve výchozím nastavení se automaticky zjišťuje, zda to určuje platforma nebo operační systém.\n\nPoznámka: Váš operační systém může toto nastavení přepsat, a proto ho v některých případech nebude možné zakázat."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Při hodnotě true budou Home a End ovládat posuvník terminálu a Shift+Home a Shift+End se budou odesílat na vzdálený hostitelský server. Při hodnotě false se budou Home a End odesílat na vzdálený hostitelský server a Shift+Home a Shift+End budou ovládat posuvník."
@@ -522,13 +528,16 @@
 		"message": "Určuje, zda se Meta+1..9 budou předávat prohlížeči.\n\nToto chování je užitečné, když je hterm spuštěn na kartě prohlížeče, protože tak v Chromu nepřijdete o klávesové zkratky k přechodu na konkrétní kartu. Když není spuštěn na kartě, je lepší tyto klávesy odesílat na hostitelský server, aby je bylo možné používat v editoru Vim nebo Emacs.\n\nPři hodnotě true bude Meta+1..9 zpracovávat prohlížeč. Při hodnotě false se Meta+1..9 budou odesílat na hostitelský server. Pokud není nastavena žádná hodnota, zjistí se chování automaticky podle platformy prohlížeče a typu okna."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Udává, zda se má kombinace kláves Meta+V předávat na hostitelský server."
+		"message": "Udává, zda se má kombinace kláves Meta+V předávat do prohlížeče.\n\nV některých systémech se jedná o způsob vkládání obsahu."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "V případě hodnoty true se přetažený text vloží do terminálu.\nPři hodnotě false bude přetažený text ignorován."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Nastavuje očekávané kódování pro data přijatá z hostitelského serveru.\nPokud se kódování nebudou shodovat, lze očekávat vizuální chyby.\n\nPlatné hodnoty jsou utf-8 a raw."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Velikost odsazení v pixelech kolem okraje obrazovky terminálu.\n\nOvládá velikost okraje obrazovky terminálu, aby uživatel na okraje obrazovky mohl přidat viditelné odsazení."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Udává, zda se má při stisknutí libovolné klávesy přejít dolů."
@@ -821,9 +830,6 @@
 	"new_window_menu_label": {
 		"message": "Nové okno"
 	},
-	"notify_copy": {
-		"message": "Výběr byl zkopírován"
-	},
 	"ok_button_label": {
 		"message": "OK"
 	},
@@ -832,9 +838,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Tip pro experty] Aby se terminál po stisknutí Ctrl+W nezavřel, použijte možnost Otevřít jako okno nebo Celá obrazovka.\n[Tip pro experty] Další informace naleznete na adrese $1."
-	},
-	"options_button_label": {
-		"message": "Možnosti"
 	},
 	"plugin_loading": {
 		"message": "Načítání pluginu NaCl..."
@@ -899,6 +902,9 @@
 	"save_label": {
 		"message": "Uložit"
 	},
+	"send_feedback_label": {
+		"message": "Poslat zpětnou vazbu"
+	},
 	"shortcut_list_aria_label": {
 		"message": "uložená připojení"
 	},
@@ -913,6 +919,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Vymazat terminál"
+	},
+	"terminal_font_unavailable": {
+		"message": "Písmo $1 není k dispozici"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Barvy ANSI"
@@ -941,6 +950,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Viditelné"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Vyberte heuristiku detekce klávesy AltGr.\n\nAuto: Zjistit automaticky podle hodnoty navigator.language:\n      'en-us' => 'Vypnuto', jinak => 'right-alt'.\nVypnuto: Zakázat veškerou emulaci pomocí klávesy AltGr.\nctrl-alt: Předpokládat, že Ctrl + Alt znamená AltGr.\nleft-alt: Předpokládat, že levý Alt znamená AltGr.\nright-alt: Předpokládat, že pravý Alt znamená AltGr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Nastavit barvy výchozí palety."
 	},
@@ -955,6 +967,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Resetovat terminál"
+	},
+	"terminal_settings_about_label": {
+		"message": "O aplikaci"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Adresa URL obrázku na pozadí. Musí začínat řetězcem „http://“ nebo „https://“. Pokud na pozadí žádný obrázek zobrazovat nechcete, ponechte tuto hodnotu prázdnou.\n\nPříklad:\n  https://goo.gl/anedTK"
@@ -1072,6 +1087,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Motiv"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Připojte se k internetu a zkuste to znovu."
 	},
 	"tip_1": {
 		"message": "Chcete-li otevřít odkaz, podržte klávesu Ctrl (v macOS klávesu Cmd) a klikněte na něj."

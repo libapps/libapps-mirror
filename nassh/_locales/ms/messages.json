@@ -308,6 +308,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Terima pengekodan"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Saiz pelapik skrin"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Tatal ke bawah selepas ketukan kekunci"
 	},
@@ -347,6 +350,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Pemberhentian pemilihan automatik (ke kanan)"
 	},
+	"hterm_options_button_label": {
+		"message": "Pilihan"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Imej Sebaris"
 	},
@@ -360,7 +366,7 @@
 		"message": "Jika ditetapkan, membuat asal pemetaan semula Alt+Backspace->Delete OS Chrome, supaya Alt+Backspace benar-benar Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Pilih swakaji pengesanan AltGr.\n\n'null': Autokesan berdasarkan navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Lumpuhkan sebarang manipulasi berkaitan AltGr.\n'ctrl-alt': Anggap Ctrl+Alt bermakna AltGr.\n'left-alt': Anggap Alt kiri bermakna AltGr.\n'right-alt': Anggap Alt kanan bermakna AltGr."
+		"message": "Pilih swakaji pengesanan AltGr.\n\n'null': Autokesan berdasarkan navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Lumpuhkan sebarang emulasi AltGr.\n'ctrl-alt': Anggap Ctrl+Alt bermakna AltGr.\n'left-alt': Anggap Alt kiri bermaksud AltGr.\n'right-alt': Anggap Alt kanan bermaksud AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Sama ada kekunci Alt bertindak sebagai kekunci Meta atau sebagai kekunci Alt berbeza."
@@ -471,7 +477,7 @@
 		"message": "Warna latar depan untuk teks yang tiada atribut warna yang lain."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Sama ada hendak menyembunyikan kursor tetikus secara automatik semasa menaip. Secara lalai, mengesan secara autoamtik sama ada platform/OS mengendalikan hal ini.\n\nNota: Sesetengah sistem pengendalian boleh mengatasi tetapan ini, justeru anda mungkin tidak dapat melumpuhkannya sepanjang masa."
+		"message": "Sama ada hendak menyembunyikan kursor tetikus secara automatik atau tidak semasa menaip. Secara lalai, mengesan secara automatik sama ada platform/OS mengendalikan hal ini atau tidak.\n\nNota: Sistem pengendalian anda mungkin mengatasi tetapan ini, oleh itu anda mungkin tidak dapat melumpuhkannya sepanjang masa."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Jika benar, Home/End mengawal bar tatal terminal dan Shift+Home/Shift+End akan dihantar kepada hos jauh. Jika palsu, maka Home/End akan dihantar kepada hos jauh dan Shift+Home/Shift+End akan menatal."
@@ -519,13 +525,16 @@
 		"message": "Sama ada Meta+1..9 dilepaskan kepada penyemak imbas.\n\nPilihan ini berguna apabila menjalankan hterm dalam tab penyemak imbas, supaya anda tidak kehilangan pintasan papan kekunci \"beralih kepada tab\" Chrome. Apabila tidak dijalankan dalam tab, sebaik-baiknya kunci ini dihantar kepada hos supaya dapat digunakan dalam vim atau emacs.\n\nJika benar, Meta+1..9 akan dikendalikan oleh penyemak imbas. Jika palsu, Meta+1..9 akan dihantar kepada hos. Jika nol, autokesan berdasarkan platform penyemak imbas dan jenis tetingkap."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Sama ada Meta+V dilepaskan kepada hos."
+		"message": "Sama ada Meta+V dilepaskan kepada penyemak imbas atau tidak.\n\nPada sesetengah sistem, gabungan ini digunakan untuk menampal kandungan."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Jika benar, teks yang Diseret dan dilepaskan akan ditampal pada terminal.\nJika palsu, teks yang dilepaskan akan diabaikan."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Tetapkan pengekodan yang dijangkakan untuk data yang diterima daripada hos.\nJika pengekodan tidak sepadan, pepijat visual mungkin akan kelihatan.\n\nNilai sah ialah 'utf-8' dan 'raw'."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Saiz pelapik di sekeliling sempadan skrin terminal dalam piksel.\n\nPilihan ini mengawal saiz sempadan di sekeliling skrin terminal supaya pengguna dapat menambahkan beberapa pelapik yang dapat dilihat pada pinggir skrin."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Sama ada hendak menatal ke bahagian bawah atau tidak pada mana-mana ketukan kekunci."
@@ -534,10 +543,10 @@
 		"message": "Sama ada perlu menatal ke bahagian bawah pada output terminal atau tidak."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Semasa menggunakan penimbal skrin alternatif dan DECCKM (Kekunci Kursor Aplikasi) diaktifkan, peristiwa tatal roda tetikus akan mengikut kekunci anak panah.\n\nPeristiwa ini boleh dilumpuhkan sementara dengan menekan kekunci Shift.\n\nHal ini kerap berlaku semasa menggunakan alat kelui (less) atau membaca halaman man atau penyunting teks (vi/nano) atau semasa menggunakan skrin/tmux."
+		"message": "Semasa menggunakan penimbal skrin alternatif dan DECCKM (Kekunci Kursor Aplikasi) diaktifkan, peristiwa roda tatal tetikus akan mengikut kekunci anak panah.\n\nPeristiwa ini boleh dilumpuhkan sementara dengan menekan kekunci Shift.\n\nHal ini kerap berlaku semasa menggunakan alat kelui (less) atau membaca halaman man atau penyunting teks (vi/nano) atau semasa menggunakan skrin/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Pengganda untuk acara roda tatal apabila diukur dalam piksel.\n\nMengubah tahap kelajuan penatalan halaman."
+		"message": "Pengganda untuk peristiwa roda tatal tetikus apabila diukur dalam piksel.\n\nMengubah tahap kelajuan penatalan halaman."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Mod bar tatal menegak."
@@ -824,9 +833,6 @@
 	"new_window_menu_label": {
 		"message": "Tetingkap Baharu"
 	},
-	"notify_copy": {
-		"message": "Pilihan Disalin"
-	},
 	"ok_button_label": {
 		"message": "OK"
 	},
@@ -835,9 +841,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Petua Pro] Gunakan 'Buka sebagai Tetingkap' atau 'Skrin penuh' untuk mengelakkan Ctrl+W daripada menutup terminal anda!\n[Petua Pakar] Lihat $1 untuk mendapatkan maklumat lanjut."
-	},
-	"options_button_label": {
-		"message": "Pilihan"
 	},
 	"plugin_loading": {
 		"message": "Memuatkan pemalam NaCl..."
@@ -902,6 +905,9 @@
 	"save_label": {
 		"message": "Simpan"
 	},
+	"send_feedback_label": {
+		"message": "Hantar Maklum Balas"
+	},
 	"shortcut_list_aria_label": {
 		"message": "sambungan disimpan"
 	},
@@ -916,6 +922,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Pengosongan Terminal"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" tidak tersedia"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Warna ANSI"
@@ -944,6 +953,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Kelihatan"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Pilih swakaji pengesanan AltGr.\n\n'Auto': Autokesan berdasarkan navigator.language:\n      'en-us' => 'Disable', else => 'right-alt'\n'Lumpuhkan': Lumpuhkan sebarang emulasi AltGr.\n'ctrl-alt': Anggap Ctrl+Alt bermaksud AltGr.\n'left-alt': Anggap Alt kiri bermaksud AltGr.\n'right-alt': Anggap Alt kanan bermaksud AltGr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Tetapkan warna untuk palet lalai."
 	},
@@ -958,6 +970,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Penetapan Semula Terminal"
+	},
+	"terminal_settings_about_label": {
+		"message": "Perihal"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "URL imej latar belakang. Mesti bermula dengan 'http://' atau 'https://'. Biarkan kosong jika tiada imej.\n\nContohnya:\n  https://goo.gl/anedTK"
@@ -1081,6 +1096,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Tema"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Sambungkan kepada Internet dan cuba lagi."
 	},
 	"tip_1": {
 		"message": "Anda boleh menahan Ctrl (Cmd pada macOS) sambil mengklik pautan untuk membukanya!"

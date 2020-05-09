@@ -308,6 +308,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Gauti koduotę"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Ekrano užpildymo dydis"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Slinkti į apačią paspaudus klavišą"
 	},
@@ -347,6 +350,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Automatinis pasirinkimo stabdymas (į dešinę)"
 	},
+	"hterm_options_button_label": {
+		"message": "Parinktys"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Įterptieji vaizdai"
 	},
@@ -360,7 +366,7 @@
 		"message": "Jei nustatyta, anuliuojamas „Chrome“ OS „Alt“ + „Backspace“ -> „Delete“ pakartotinis susiejimas, kad „Alt“ + „Backspace“ iš tikrųjų reikštų „Alt“ + „Backspace“."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Pasirinkite euristinį „AltGr“ aptikimą.\n\n„null“: automatiškai aptinkama pagal navigator.language:\n      „en-us“ => „none“, kita => „right-alt“\n„none“: išjungiami bet kokie su „AltGr“ susiję kenksmingi pakeitimai.\n„ctrl-alt“: daroma prielaida, kad „Ctrl“ + „Alt“ reiškia „AltGr“.\n„left-alt“: daroma prielaida, kad kairysis klavišas „Alt“ reiškia „AltGr“.\n„right-alt“: daroma prielaida, kad dešinysis klavišas „Alt“ reiškia „AltGr“."
+		"message": "Pasirinkite euristinį „AltGr“ aptikimą.\n\n„null“: automatiškai aptinkama pagal „navigator.language“:\n      „en-us“ => „none“, kita => „right-alt“\n„none“: išjungiama bet kokia su „AltGr“ susijusi emuliacija.\n„ctrl-alt“: daroma prielaida, kad „Ctrl“ + „Alt“ reiškia „AltGr“.\n„left-alt“: daroma prielaida, kad kairysis klavišas „Alt“ reiškia „AltGr“.\n„right-alt“: daroma prielaida, kad dešinysis klavišas „Alt“ reiškia „AltGr“."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Ar klavišas „Alt“ veikia kaip metaduomenų klavišas, ar kaip atskiras „Alt“ klavišas."
@@ -423,7 +429,7 @@
 		"message": "Matomo teksto žymeklio forma. Ją galima pakeisti vykdymo laiku per terminalo praleidimo sekas."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "Jei nustatyta kaip „Tiesa“, terminalo skambučiai fone sukuria žiniatinklio pranešimą. https://www.w3.org/TR/notifications/\n\nNorint pateikti pranešimus, reikia naudotojo leidimo. Kai ši parinktis nustatyta kaip „Tiesa“, „hterm“ bando prašyti naudotojo leidimo, jei reikia. Atminkite, kad naršyklės gali nerodyti šios leidimo užklausos, jei ji pateikta ne naudotojui atlikus veiksmą.\n\n„Chrome“ plėtiniams su pranešimų leidimu suteiktas leidimas pateikti pranešimus."
+		"message": "Jei nustatyta kaip „true“, terminalo skambučiai fone sukuria žiniatinklio pranešimą. https://www.w3.org/TR/notifications/\n\nNorint pateikti pranešimus, reikia naudotojo leidimo. Kai ši parinktis nustatyta kaip „true“, „hterm“ bando prašyti naudotojo leidimo, jei reikia. Atminkite, kad naršyklės gali nerodyti šios leidimo užklausos, jei ji pateikta ne naudotojui atlikus veiksmą.\n\n„Chrome“ plėtiniams su pranešimų leidimu suteiktas leidimas pateikti pranešimus."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Ar Rytų Azijos nevienareikšmiai simboliai yra dviejų stulpelių pločio."
@@ -471,7 +477,7 @@
 		"message": "Teksto priekinio plano spalva be jokių kitų spalvų atributų."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Ar automatiškai slėpti pelės žymeklį vedant tekstą. Pagal numatytuosius nustatymus automatiškai aptinkama, ar platforma / OS tai apdoroja.\n\nPastaba: kai kurios operacinės sistemos gali nepaisyti šio nustatymo, todėl ne visada gali būti leidžiama jį išjungti."
+		"message": "Ar automatiškai slėpti pelės žymeklį vedant tekstą. Pagal numatytuosius nustatymus automatiškai aptinkama, ar platforma arba OS tai apdoroja.\n\nPastaba: operacinė sistema gali nepaisyti šio nustatymo, todėl ne visada gali būti leidžiama jį išjungti."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Nustačius kaip „true“, klavišais „Home“ arba „End“ valdoma terminalo slinkimo juosta, o klavišais „Shift“ + „Home“ arba „Shift“ + „End“ siunčiama nuotoliniam prieglobos serveriui. Nustačius kaip „false“, klavišais „Home“ arba „End“ siunčiama nuotoliniam prieglobos serveriui, o klavišais „Shift“ + „Home“ arba „Shift“ + „End“ slenkama."
@@ -519,13 +525,16 @@
 		"message": "Ar „Meta“ + 1–9 perduodama naršyklei.\n\nTai naudinga vykdant „hterm“ naršyklės skirtuke, kad neprarastumėte „Chrome“ „perjungimo į skirtuką“ spartieji klavišai. Nevykdant skirtuke geriau siųsti šiuos klavišus prieglobos serveriui, kad juos būtų galima naudoti „Vim“ arba „Emacs“.\n\nNustačius kaip „Tiesa“, naršyklė apdoros klavišus „Meta“ + 1–9. Nustačius kaip „Netiesa“, „Meta“ + 1–9 bus siunčiama į prieglobos serverį. Nustačius kaip „Null“, bus automatiškai aptinkama pagal naršyklės platformą ir lango tipą."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Ar metaduomenų klavišas ir V perduodama į prieglobos serverį."
+		"message": "Ar klavišai „Meta“ + V perduodami į naršyklę.\n\nKai kuriose sistemose taip įklijuojamas turinys."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Nustačius kaip „true“, nuvilktas tekstas bus įklijuotas į terminalą.\nNustačius kaip „false“, tekstas bus ignoruojamas."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Nustatoma numatoma iš prieglobos serverių gautų duomenų koduotė.\nJei koduotės neatitinka, gali būti vaizdinių riktų.\n\nGaliojančios vertės yra „utf-8“ ir „raw“."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Terminalo ekrano kraštinės užpildymo dydis pikseliais.\n\nValdomas kraštinės aplink terminalo ekraną dydis pikseliais, kad naudotojas galėtų pridėti matomą ekrano kraštinių užpildymą."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Ar slinkti žemyn paspaudus bet kurį klavišą."
@@ -534,10 +543,10 @@
 		"message": "Ar slinkti žemyn naudojant terminalo išvestį."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Naudojant alternatyvų ekrano buferį ir suaktyvinus DECCKM (programos žymeklio klavišus), slenkant pelės ratuku atliekami rodyklių klavišų veiksmai.\n\nTai galima laikinai išjungti laikant klavišą „Shift“.\n\nTai dažnai taikoma naudojant pranešimų gaviklius („Less“) arba skaitant neautomatinius puslapius ar naudojant teksto redagavimo priemones („Vi“ / „Nano“) ar „Screen“ / „Tmux“."
+		"message": "Naudojant alternatyvų ekrano buferį ir suaktyvinus DECCKM (programos žymeklio klavišus), slenkant pelės ratuku atliekami rodyklių klavišų veiksmai.\n\nTai galima laikinai išjungti laikant klavišą „Shift“.\n\nTai dažnai taikoma naudojant pranešimų gaviklius („Less“) arba skaitant neautomatinius puslapius ar naudojant teksto redagavimo priemones („Vi“ arba „Nano“) ar „Screen“ arba „Tmux“."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Slenkant ratuku įvykusių įvykių daugiklis, kai matuojama pikseliais.\n\nKeičiama slinkimo puslapiu sparta."
+		"message": "Slenkant pelės ratuku įvykusių įvykių daugiklis, kai matuojama pikseliais.\n\nKeičiama slinkimo puslapiu sparta."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Vertikalios slinkimo juostos režimas."
@@ -869,9 +878,6 @@
 	"new_window_menu_label": {
 		"message": "Naujas langas"
 	},
-	"notify_copy": {
-		"message": "Pasirinkimas nukopijuotas"
-	},
 	"ok_button_label": {
 		"message": "Gerai"
 	},
@@ -880,9 +886,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Pro Tip] Naudokite parinktį „Atidaryti kaip langą“ arba „Visas ekranas“, kad neuždarytumėte terminalo naudodami „Ctrl“ + W!\n[Pro Tip] Jei reikia daugiau informacijos, žr. $1."
-	},
-	"options_button_label": {
-		"message": "Parinktys"
 	},
 	"plugin_loading": {
 		"message": "Įkeliamas papildinys „NaCl“..."
@@ -930,7 +933,7 @@
 		"message": "„Secure Shell“ protokolo doroklės registracijos pagalbos priemonė"
 	},
 	"read_size_label": {
-		"message": "Nuskaityto failo dydis (KB)"
+		"message": "Nuskaityto failo dydis (KiB)"
 	},
 	"reconnect_message": {
 		"message": "Iš naujo prisijungti (R), pasirinkti kitą ryšį (C) ar išeiti (X)?"
@@ -947,6 +950,9 @@
 	"save_label": {
 		"message": "Išsaugoti"
 	},
+	"send_feedback_label": {
+		"message": "Siųsti atsiliepimą"
+	},
 	"shortcut_list_aria_label": {
 		"message": "išsaugoti ryšiai"
 	},
@@ -961,6 +967,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Terminalo valymas"
+	},
+	"terminal_font_unavailable": {
+		"message": "„$1“ nepasiekiamas"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI spalvos"
@@ -989,6 +998,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Matoma"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Pasirinkite euristinį „AltGr“ aptikimą.\n\n„Auto“: automatiškai aptinkama pagal „navigator.language“:\n      'en-us' => 'Disable', else => 'right-alt'\n„Disable“: išjungiamos bet kokios su „AltGr“ susijusios emuliacijos.\n„ctrl-alt“: daroma prielaida, kad „Ctrl“ + „Alt“ reiškia „AltGr“.\n„left-alt“: daroma prielaida, kad kairysis klavišas „Alt“ reiškia „AltGr“.\n„right-alt“: daroma prielaida, kad dešinysis klavišas „Alt“ reiškia „AltGr“."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Nustatykite numatytosios paletės spalvas."
 	},
@@ -1003,6 +1015,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Terminalo nustatymas iš naujo"
+	},
+	"terminal_settings_about_label": {
+		"message": "Apie"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Fono vaizdo UR. Pradžioje turi būti http:// arba https://. Palikite tuščią, jei nėra vaizdo.\n\nPavyzdžiui:\n  https://goo.gl/anedTK"
@@ -1130,6 +1145,9 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_try_again_with_internet": {
+		"message": "Prisijunkite prie interneto ir bandykite dar kartą."
+	},
 	"tip_1": {
 		"message": "Galite laikyti paspaudę „Ctrl“ („Cmd“, jei naudojate „Mac“ OS) ir spustelėti nuorodas, kad jas atidarytumėte!"
 	},
@@ -1197,7 +1215,7 @@
 		"message": "Sveiki, tai – $2 versijos „$1“."
 	},
 	"write_size_label": {
-		"message": "Rašomo failo dydis (KB)"
+		"message": "Rašomo failo dydis (KiB)"
 	},
 	"zoom_warning": {
 		"message": "Nustatykite „Chrome“ mastelį į 100 % pasirinkę meniu -> „Keisti mastelį“"

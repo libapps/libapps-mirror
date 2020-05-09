@@ -1,0 +1,1169 @@
+{
+	"already_mounted_message": {
+		"message": "ਫ਼ਾਈਲ ਸਿਸਟਮ ਨੂੰ ਪਹਿਲਾਂ ਹੀ ਮਾਊਂਟ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ!"
+	},
+	"backup_prefs": {
+		"message": "ਬੈਕਅੱਪ ਰੱਖਿਅਤ ਕਰੋ"
+	},
+	"bad_destination": {
+		"message": "ਮੰਜ਼ਿਲ ਪਾਰਸ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ: $1"
+	},
+	"before_unload": {
+		"message": "ਇਸ ਟੈਬ ਨੂੰ ਬੰਦ ਕਰਨ ਨਾਲ ਇਹ ਸੈਸ਼ਨ ਡਿਸਕਨੈਕਟ ਹੋ ਜਾਵੇਗਾ।"
+	},
+	"cache_pin_prompt": {
+		"message": "ਕੀ ਇਸ SSH ਸੈਸ਼ਨ ਲਈ ਪਿੰਨ ਨੂੰ ਕੈਸ਼ੇ ਕਰਨਾ ਹੈ? (y/N):"
+	},
+	"cancel_button_label": {
+		"message": "ਰੱਦ ਕਰੋ"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "SSH ਦੇ ਜਾਣ-ਪਛਾਣ ਵਾਲੇ ਹੋਸਟ ਕਲੀਅਰ ਕਰੋ"
+	},
+	"clear_label": {
+		"message": "ਕਲੀਅਰ ਕਰੋ"
+	},
+	"command_complete": {
+		"message": "ਆਦੇਸ਼ $1 ਸਥਿਤੀ ਕੋਡ $2 ਨਾਲ ਬਾਹਰ ਹੋ ਗਿਆ।"
+	},
+	"command_not_supported": {
+		"message": "$1 Chrome ਦੇ ਇਸ ਵਰਜਨ 'ਤੇ ਸਮਰਥਿਤ ਨਹੀਂ ਹੈ"
+	},
+	"command_startup_failed": {
+		"message": "$1 ਨੂੰ ਲਾਂਚ ਕਰਨਾ ਅਸਫਲ ਰਿਹਾ: $2"
+	},
+	"connect_button_label": {
+		"message": "ਕਨੈਕਟ ਕਰੋ"
+	},
+	"connect_or_exit_message": {
+		"message": "ਕੀ ਹੋਰ ਕਨੈਕਸ਼ਨ ਚੁਣਨਾ (C) ਹੈ ਜਾਂ ਬਾਹਰ ਨਿਕਲਣਾ (X) ਹੈ?"
+	},
+	"connecting": {
+		"message": "$1 ਨਾਲ ਕਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
+	},
+	"connection_dialog_name": {
+		"message": "ਕਨੈਕਸ਼ਨ ਵਿੰਡੋ"
+	},
+	"console_crosh_options_notice": {
+		"message": "ਕੀ ਤੁਹਾਨੂੰ ਪਤਾ ਹੈ ਕਿ ਵਿਕਲਪਾਂ ਲਈ ਖਾਸ ਤੌਰ 'ਤੇ ਪੰਨਾ ਮੌਜੂਦ ਹੈ?\nਹੁਣ 'term_' ਨੂੰ ਸਿੱਧਾ ਸੋਧਣ ਦੀ ਕੋਈ ਲੋੜ ਨਹੀਂ!\nਇਸਨੂੰ ਖੋਲ੍ਹਣ ਲਈ $1 ਦਬਾਓ, ਜਾਂ ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ:\n$2"
+	},
+	"console_nassh_options_notice": {
+		"message": "ਕੀ ਤੁਹਾਨੂੰ ਪਤਾ ਹੈ ਕਿ ਵਿਕਲਪਾਂ ਲਈ ਖਾਸ ਤੌਰ 'ਤੇ ਪੰਨਾ ਮੌਜੂਦ ਹੈ?\nਹੁਣ 'term_' ਨੂੰ ਸਿੱਧਾ ਸੋਧਣ ਦੀ ਕੋਈ ਲੋੜ ਨਹੀਂ!\n$1"
+	},
+	"delete_button_label": {
+		"message": "ਮਿਟਾਓ"
+	},
+	"disconnect_message": {
+		"message": "NaCl ਪਲੱਗਇਨ ਸਥਿਤੀ ਕੋਡ $1 ਨਾਲ ਬਾਹਰ ਨਿਕਲਿਆ।"
+	},
+	"faq_menu_label": {
+		"message": "ਅਕਸਰ ਪੁੱਛੇ ਜਾਣ ਵਾਲੇ ਸਵਾਲ"
+	},
+	"field_argstr_placeholder": {
+		"message": "ਵਧੀਕ ਆਦੇਸ਼ ਲਾਈਨ ਆਰਗੂਮੈਂਟ"
+	},
+	"field_description_aria_label": {
+		"message": "ਵਰਣਨ"
+	},
+	"field_description_placeholder": {
+		"message": "username@hostname ਜਾਂ ਸੁਤੰਤਰ ਫ਼ਾਰਮ ਲਿਖਤ"
+	},
+	"field_hostname_aria_label": {
+		"message": "ਹੋਸਟਨਾਮ"
+	},
+	"field_hostname_placeholder": {
+		"message": "ਹੋਸਟਨਾਮ"
+	},
+	"field_mount_path_placeholder": {
+		"message": "ਪੂਰਵ-ਨਿਰਧਾਰਤ ਪਾਥ ਵਰਤੋਂਕਾਰ ਦੀ ਹੋਮ ਡਾਇਰੈਕਟਰੀ ਹੈ"
+	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH ਰੀਲੇਅ ਸਰਵਰ ਵਿਕਲਪ"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH ਰੀਲੇਅ ਸਰਵਰ ਵਿਕਲਪ"
+	},
+	"field_port_aria_label": {
+		"message": "ਪੋਰਟ"
+	},
+	"field_port_placeholder": {
+		"message": "ਪੋਰਟ"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "ਪੂਰਵ-ਨਿਰਧਾਰਤ"
+	},
+	"field_username_aria_label": {
+		"message": "ਵਰਤੋਂਕਾਰ ਨਾਮ"
+	},
+	"field_username_placeholder": {
+		"message": "ਵਰਤੋਂਕਾਰ ਨਾਮ"
+	},
+	"found_relay": {
+		"message": "ਰੀਲੇਅ ਸਰਵਰ ਮਿਲਿਆ: $1"
+	},
+	"get_profile_error": {
+		"message": "ਗੜਬੜ: ਪ੍ਰੋਫਾਈਲ ਨੂੰ ਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ $1:\n$2"
+	},
+	"hterm_announce_current_screen_header": {
+		"message": "$1% ਸਕ੍ਰੋਲ ਕੀਤਾ ਗਿਆ,"
+	},
+	"hterm_button_allow_always": {
+		"message": "ਹਮੇਸ਼ਾਂ ਇਜਾਜ਼ਤ ਦਿਓ"
+	},
+	"hterm_button_allow_session": {
+		"message": "ਇਸ ਸੈਸ਼ਨ ਲਈ ਇਜਾਜ਼ਤ ਦਿਓ"
+	},
+	"hterm_button_block": {
+		"message": "ਬਲਾਕ ਕਰੋ"
+	},
+	"hterm_button_page_down": {
+		"message": "ਪੰਨਾ ਹੇਠਾਂ"
+	},
+	"hterm_button_page_up": {
+		"message": "ਪੰਨਾ ਉੱਪਰ"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "$1 ਨੂੰ ਲੋਡ ਕਰਨਾ ਅਸਫਲ ਰਿਹਾ"
+	},
+	"hterm_loading_resource_start": {
+		"message": "$1 ਨੂੰ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ ..."
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "ਇਨਲਾਈਨ ਚਿੱਤਰ ਦਿਖਾਉਣ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Backspace Meta+Backspace ਹੈ"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "AltGr ਕੁੰਜੀ ਮੋਡ"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Alt ਕੁੰਜੀ ਨੂੰ Meta ਕੁੰਜੀ ਵਜੋਂ ਵਰਤੋ"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Alt ਕੁੰਜੀ ਸੋਧਕ ਵਰਤੋ"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "ਸੁਚੇਤਨਾ ਘੰਟੀ ਦੀ ਅਵਾਜ਼ (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "ਬੈਕਗ੍ਰਾਊਂਡ ਦਾ ਰੰਗ"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ ਸਥਿਤੀ"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ ਆਕਾਰ"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Backspace ਕੁੰਜੀ ਦੀ ਕਾਰਵਾਈ"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "ਅੱਖਰ-ਚਿੰਨ੍ਹ ਦੀ ਮੈਪਿੰਗ ਬਦਲ ਦਿੰਦਾ ਹੈ"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "ਸਵੈਚਲਿਤ ਤੌਰ 'ਤੇ ਲਿਖਤ ਚੋਣ ਨੂੰ ਕਲੀਅਰ ਕਰੋ"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "ਬਾਹਰ ਜਾਣ 'ਤੇ ਵਿੰਡੋ ਬੰਦ ਕਰੋ"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "ਸ਼ੁਰੂਆਤੀ ਰੰਗ ਪਟਲ"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "ਚੁਣੀ ਹੋਈ ਸਮੱਗਰੀ ਨੂੰ ਸਵੈਚਲਿਤ ਤੌਰ 'ਤੇ ਕਾਪੀ ਕਰੋ"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Ctrl+C ਕਾਪੀ ਕਰਨ ਦੀ ਕਾਰਵਾਈ"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ctrl++/-/0 ਜ਼ੂਮ ਕਰਨ ਦੀ ਕਾਰਵਾਈ"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Ctrl+V ਪੇਸਟ ਕਰਨ ਦੀ ਕਾਰਵਾਈ"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "ਕਰਸਰ ਦੀ ਜਗਮਗਾਹਟ"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "ਕਰਸਰ ਦੀ ਜਗਮਗਾਹਟ ਦਰ"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "ਲਿਖਤ ਕਰਸਰ ਦਾ ਰੰਗ"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "ਲਿਖਤ ਕਰਸਰ ਦੀ ਆਕ੍ਰਿਤੀ"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "ਸੁਚੇਤਨਾ ਘੰਟੀਆਂ ਲਈ ਡੈਸਕਟਾਪ ਸੂਚਨਾਵਾਂ ਦੀ ਰਚਨਾ ਕਰੋ"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian Ambiguous ਦੋ ਕਾਲਮ ਵਰਤਦੇ ਹਨ"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "ਗੈਰ-UTF-8 C1 ਕੰਟਰੋਲ ਵਾਲੇ ਅੱਖਰ-ਚਿੰਨ੍ਹ ਸਮਰਥਿਤ ਹਨ"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "ਜਗਮਗਾਉਂਦੀ ਲਿਖਤ ਚਾਲੂ ਕਰੋ"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "ਗੂੜ੍ਹੀ ਲਿਖਤ ਕਾਰਵਾਈ"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "ਗੂੜ੍ਹੀ ਲਿਖਤ ਨਾਲ ਚਮਕੀਲੇ ਰੰਗ ਵਰਤੋ"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "ਸਮੱਗਰੀ ਨੂੰ ਕਾਪੀ ਕਰਨ ਵੇਲੇ ਸੂਚਨਾਵਾਂ ਦਿਖਾਓ"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "ਰਿਮੋਟ ਕਲਿੱਪਬੋਰਡ ਲਿਖਤ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "ਸਕ੍ਰੋਲਬੈਕ ਬਫ਼ਰ ਨੂੰ ਕਲੀਅਰ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "ਲਿਖਤ ਕਰਸਰ ਦੀ ਜਗਮਗਾਹਟ ਵਿੱਚ ਤਬਦੀਲੀ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "ਆਕਾਰ ਬਦਲਣ ਦੌਰਾਨ ਟਰਮੀਨਲ ਆਯਾਮ ਦਿਖਾਓ"
+	},
+	"hterm_name_pref_environment": {
+		"message": "ਐਨਵਾਇਰਨਮੈਂਟ ਵੈਰੀਏਬਲ"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "ਲਿਖਤ ਫੌਂਟ ਪਰਿਵਾਰ"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "ਲਿਖਤ ਫੌਂਟ ਆਕਾਰ"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "ਲਿਖਤ ਫ਼ੌਂਟ ਪੱਧਰਾਪਣ"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "ਲਿਖਤ ਦਾ ਰੰਗ"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "ਟਾਈਪ ਕਰਨ ਦੌਰਾਨ ਮਾਊਸ ਕਰਸਰ ਨੂੰ ਲੁਕਾਓ"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Home/End ਕੁੰਜੀ ਨਾਲ ਸਕ੍ਰੋਲ ਕਰਨ ਦੀ ਕਾਰਵਾਈ"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "ਕੀ-ਬੋਰਡ ਬਾਇੰਡਿੰਗ/ਸ਼ਾਰਟਕੱਟ"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "ਪੂਰਵ-ਨਿਰਧਾਰਤ OS ਕੀ-ਬੋਰਡ ਬਾਇੰਡਿੰਗ/ਸ਼ਾਰਟਕੱਟ ਵਰਤੋ"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "ਮੀਡੀਆ ਕੁੰਜੀਆਂ Fkeys ਹੁੰਦੀਆਂ ਹਨ"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Meta ਕੁੰਜੀ ਸੋਧਕ ਵਰਤੋ"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "ਮਾਊਸ ਦੇ ਬਟਨ ਨਾਲ ਪੇਸਟ ਕਰਨਾ"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "ਮਾਊਸ ਦੇ ਸੱਜੇ-ਕਲਿੱਕ ਸਮੱਗਰੀ ਪੇਸਟ ਕਰਦੇ ਹਨ"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Page Up/Down ਕੁੰਜੀ ਨਾਲ ਸਕ੍ਰੋਲ ਕਰਨ ਦੀ ਕਾਰਵਾਈ"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Alt+1..9 ਟੈਬ ਬਦਲਣ ਦੀ ਕਾਰਵਾਈ"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Ctrl+N ਨਵੀਂ ਵਿੰਡੋ ਖੋਲ੍ਹਣ ਦੀ ਕਾਰਵਾਈ"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Ctrl+1..9 ਟੈਬ ਬਦਲਣ ਦੀ ਕਾਰਵਾਈ"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ctrl+T ਨਵੇਂ ਟੈਬ ਦੀ ਕਾਰਵਾਈ"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab ਟੈਬ ਬਦਲਣ ਦੀ ਕਾਰਵਾਈ"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "ਟੈਬ ਕਾਰਵਾਈ ਨੂੰ ਬੰਦ ਕਰਨ ਲਈ Ctrl+W"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Meta+1..9 ਟੈਬ ਬਦਲਣ ਦੀ ਕਾਰਵਾਈ"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Meta+V ਪੇਸਟ ਕਰਨ ਦੀ ਕਾਰਵਾਈ"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "ਪੇਸਟ ਕਰਨ ਲਈ ਘਸੀਟੋ ਅਤੇ ਛੱਡੋ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "ਇਨਕੋਡਿੰਗ ਪ੍ਰਾਪਤ ਕਰੋ"
+	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "ਸਕ੍ਰੀਨ ਪੈਡਿੰਗ ਆਕਾਰ"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "ਕੁੰਜੀ ਦੱਬਣ ਤੋਂ ਬਾਅਦ ਹੇਠਾਂ ਤੱਕ ਸਕ੍ਰੋਲ ਕਰੋ"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "ਨਵੇਂ ਆਊਟਪੁੱਟ ਤੋਂ ਬਾਅਦ ਹੇਠਾਂ ਵੱਲ ਸਕ੍ਰੋਲ ਕਰੋ"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "ਸਕ੍ਰੋਲ ਪਹੀਏ ਨਾਲ ਤੀਰ ਕੁੰਜੀਆਂ ਨੂੰ ਬਰਾਬਰ ਕਰੋ"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "ਮਾਊਸ ਸਕ੍ਰੋਲ ਪਹੀਆ ਗੁਣਕ"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "ਸਕ੍ਰੋਲਬਾਰ ਦਿਖਣਯੋਗਤਾ"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Shift+Insert ਪੇਸਟ ਕਰਨ ਲਈ"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "ਟਰਮੀਨਲ ਇਨਕੋਡਿੰਗ"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "ਬ੍ਰਾਊਜ਼ਰ ਨੂੰ ਲਿਖਤ ਕਾਪੀ ਕਰਨ ਦਿਓ"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "ਵਿਉਂਤਬੱਧ CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "ਵਿਉਂਤਬੱਧ CSS (ਇਨਲਾਈਨ ਲਿਖਤ)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "ਸਵੈਚਲਿਤ ਚੋਣ ਠਹਿਰਾਅ (ਖੱਬੇ ਪਾਸੇ ਵੱਲ)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "ਸ਼ਬਦ ਵਿੱਥ ਅੱਖਰ-ਚਿੰਨ੍ਹ"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "ਸਵੈਚਲਿਤ ਚੋਣ ਠਹਿਰਾਅ (ਸੱਜੇ ਪਾਸੇ ਵੱਲ)"
+	},
+	"hterm_options_button_label": {
+		"message": "ਵਿਕਲਪ"
+	},
+	"hterm_popup_inline_image": {
+		"message": "ਇਨਲਾਈਨ ਚਿੱਤਰ"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "ਇਨਲਾਈਨ ਚਿੱਤਰ ਬੰਦ ਹਨ"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "ਟਰਮੀਨਲ ਵਿੱਚ ਚਿੱਤਰ ਦਿਖਾਉਣ ਲਈ ਰਿਮੋਟ ਹੋਸਟ ਨੂੰ ਇਜਾਜ਼ਤ ਦੇਣੀ ਹੈ ਜਾਂ ਨਹੀਂ।\n\nਪੂਰਵ-ਨਿਰਧਾਰਤ ਤੌਰ 'ਤੇ, ਅਸੀਂ ਉਦੋਂ ਤੱਕ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ ਜਦੋਂ ਤੱਕ ਕੋਈ ਪਸੰਦ ਨਹੀਂ ਚੁਣੀ ਜਾਂਦੀ ਹੈ।"
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "ਜੇ ਸੈੱਟ ਹੈ, Chrome OS ਵਿੱਚ Alt+Backspace->Delete ਦੀ ਮੁੜ-ਮੈਪਿੰਗ ਨੂੰ ਅਣਕੀਤਾ ਕਰਦਾ ਹੈ, ਇਸ ਲਈ Alt+Backspace ਅਸਲ ਵਿੱਚ Alt+Backspace ਵਾਂਗ ਕੰਮ ਕਰਨ ਲੱਗਦਾ ਹੈ।"
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "AltGr ਪਤਾ ਲਗਾਉਣ ਵਾਲੇ ਅੰਦਾਜ਼ੇ ਨੂੰ ਚੁਣੋ।\n\n'null': navigator.language ਦੇ ਆਧਾਰ 'ਤੇ ਸਵੈ ਪਤਾ ਲਗਾਓ:\n      'en-us' => 'none', else => 'right-alt'\n'none': ਕਿਸੇ ਵੀ ਤਰ੍ਹਾਂ ਦੀ AltGr ਬਰਾਬਰੀ ਨੂੰ ਬੰਦ ਕਰੋ।\n'ctrl-alt': Ctrl+Alt ਦਾ ਮਤਲਬ AltGr ਮੰਨੋ।\n'left-alt': ਖੱਬੇ Alt ਦਾ ਮਤਲਬ AltGr ਮੰਨੋ।\n'right-alt': ਸੱਜੇ Alt ਦਾ ਮਤਲਬ AltGr ਮੰਨੋ।"
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Alt ਕੁੰਜੀ Meta ਕੁੰਜੀ ਵਜੋਂ ਕੰਮ ਕਰਦੀ ਹੈ ਜਾਂ ਕਿਸੇ ਨਿਵੇਕਲੀ Alt ਕੁੰਜੀ ਵਜੋਂ ਕੰਮ ਕਰਦੀ ਹੈ।"
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "ਇਹ ਕੰਟਰੋਲ ਕਰਦਾ ਹੈ ਕਿ Alt ਕੁੰਜੀ ਕਿਵੇਂ ਵਰਤੀ ਜਾਂਦੀ ਹੈ।\n\n  escape: ESC ਅਗੇਤਰ ਭੇਜੋ।\n  8-bit: xterm ਵਿੱਚ ਟਾਈਪ ਕੀਤੇ ਮੁਤਾਬਕ ਅੱਖਰ-ਚਿੰਨ੍ਹਾਂ ਵਿੱਚ 128 ਜੋੜੋ।\n browser-key: ਕੀਪ੍ਰੈਸ ਕਾਰਵਾਈ ਲਈ ਉਡੀਕ ਕਰੋ ਅਤੇ ਦੇਖੋ ਕਿ ਬ੍ਰਾਊਜ਼ਰ ਕੀ ਕਹਿੰਦਾ\n ਹੈ। (ਇਹ ਉਹਨਾਂ ਪਲੇਟਫਾਰਮਾਂ 'ਤੇ ਸਹੀ ਤਰੀਕੇ ਨਾਲ ਕੰਮ ਨਹੀਂ ਕਰੇਗਾ ਜਿੱਥੇ ਬ੍ਰਾਊਜ਼ਰ ਕੁਝ Alt ਤਰਤੀਬਾਂ ਲਈ ਪੂਰਵ-ਨਿਰਧਾਰਤ ਕਾਰਵਾਈ ਦਾ ਪ੍ਰਦਰਸ਼ਨ ਕਰਦਾ ਹੈ।)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "ਟਰਮੀਨਲ ਘੰਟੀ ਦੀ ਅਵਾਜ਼ ਦਾ URL. ਕੋਈ ਵੀ ਘੰਟੀ ਨਾ ਸੁਣਨ ਲਈ ਇਸਨੂੰ ਖਾਲੀ ਛੱਡੋ।"
+	},
+	"hterm_pref_background_color": {
+		"message": "ਉਸ ਲਿਖਤ ਦਾ ਬੈਕਗ੍ਰਾਊਂਡ ਰੰਗ ਜਿਸਦੀ ਕੋਈ ਹੋਰ ਰੰਗ ਵਿਸ਼ੇਸ਼ਤਾ ਨਹੀਂ ਹੈ।"
+	},
+	"hterm_pref_background_image": {
+		"message": "ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ ਦਾ CSS ਮੁੱਲ। ਕੋਈ ਚਿੱਤਰ ਨਾ ਹੋਣ 'ਤੇ ਇਸਨੂੰ ਖਾਲੀ ਛੱਡੋ।\n\nਉਦਾਹਰਨ ਦੇ ਤੌਰ 'ਤੇ:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ ਸਥਿਤੀ ਦਾ CSS ਮੁੱਲ।\n\nਉਦਾਹਰਨ ਦੇ ਤੌਰ 'ਤੇ:\n  10% 10%\n  ਕੇਂਦਰ"
+	},
+	"hterm_pref_background_size": {
+		"message": "ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ ਆਕਾਰ ਦਾ CSS ਮੁੱਲ।"
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "ਜੇ ਸਹੀ ਹੈ, ਤਾਂ Backspace ਕੁੰਜੀ BS ('\\x08', ਜਿਸ ਨੂੰ ^H ਵੀ ਕਿਹਾ ਜਾਂਦਾ ਹੈ) ਭੇਜਦੀ ਹੈ। ਨਹੀਂ ਤਾਂ, Backspace ਕੁੰਜੀ '\\x7f' ਭੇਜੇਗੀ।"
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "ਇਸਨੂੰ ਔਬਜੈਕਟ ਵਜੋਂ ਨਿਰਧਾਰਤ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। ਇਹ ਸਪਾਰਸ ਐਰੇ ਹੈ, ਜਿੱਥੇ ਹਰੇਕ ਸੰਪਤੀ ਅੱਖਰ-ਚਿੰਨ੍ਹ ਸੈੱਟ ਕੋਡ ਹੈ ਅਤੇ ਮੁੱਲ ਇੱਕ ਔਬਜੈਕਟ ਹੈ ਜੋ ਕਿ ਸਪਾਰਸ ਐਰੇ ਖੁਦ ਹੈ। ਉਸ ਸਪਾਰਸ ਐਰੇ ਵਿੱਚ, ਹਰੇਕ ਸੰਪਤੀ ਪ੍ਰਾਪਤ ਕੀਤਾ ਹੋਇਆ ਅੱਖਰ-ਚਿੰਨ੍ਹ ਹੈ ਅਤੇ ਦਿਖਾਇਆ ਗਿਆ ਅੱਖਰ-ਚਿੰਨ੍ਹ ਮੁੱਲ ਹੁੰਦਾ ਹੈ।\n\nਉਦਾਹਰਨ ਦੇ ਤੌਰ 'ਤੇ:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "ਕਾਪੀ ਕਰਨ ਤੋਂ ਬਾਅਦ ਚੋਣ ਨੂੰ ਕਲੀਅਰ ਕਰਨਾ ਹੈ ਜਾਂ ਨਹੀਂ।"
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "ਆਦੇਸ਼ ਚੱਲਣਾ ਬੰਦ ਹੋਣ 'ਤੇ ਵਿੰਡੋ ਨੂੰ ਬੰਦ ਕਰਨਾ ਹੈ ਜਾਂ ਨਹੀਂ।"
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "ਪੂਰਵ-ਨਿਰਧਾਰਤ ਪਟਲ ਵਿੱਚ ਰੰਗਾਂ 'ਤੇ ਓਰਵਰਾਈਡ ਕਰਦਾ ਹੈ।\n\nਇਸਨੂੰ ਕਿਸੇ ਐਰੇ ਜਾਂ ਔਬਜੈਕਟ ਵਜੋਂ ਨਿਰਧਾਰਤ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ। ਜੇ ਕਿਸੇ ਔਬਜੈਕਟ ਵਜੋਂ ਨਿਰਧਾਰਤ ਕੀਤਾ ਜਾਂਦਾ ਹੈ ਤਾਂ ਇਸਨੂੰ ਸਪਾਰਸ ਐਰੇ ਮੰਨਿਆ ਜਾ ਸਕਦਾ ਹੈ, ਜਿੱਥੇ ਹਰੇਕ ਸੰਪਤੀ ਰੰਗ ਪਟਲ ਵਿੱਚ ਅੰਕੀ ਕ੍ਰਮ-ਸੂਚੀ ਹੁੰਦੀ ਹੈ।\n\nਮੁੱਲਾਂ ਨੂੰ ਲਗਭਗ ਕਿਸੇ ਵੀ CSS ਰੰਗ ਮੁੱਲ ਵਜੋਂ ਦੱਸਿਆ ਜਾ ਸਕਦਾ ਹੈ। ਇਸ ਵਿੱਚ #RGB, #RRGGBB, rgb(...), rgba(...), ਅਤੇ ਉਹ ਸਾਰੇ ਰੰਗਾਂ ਦੇ ਨਾਮ ਹੁੰਦੇ ਹਨ ਜਿਹੜੇ ਮਿਆਰੀ X11 rgb.txt ਫ਼ਾਈਲ ਦਾ ਹਿੱਸਾ ਹਨ।\n\nਤੁਸੀਂ ਇਹ ਦੱਸਣ ਲਈ \"ਖਾਲੀ\" ਛੱਡ ਸਕਦੇ ਹੋ ਕਿ ਪੂਰਵ-ਨਿਰਧਾਰਤ ਮੁੱਲ ਨੂੰ ਨਹੀਂ ਬਦਲਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਜਦੋਂ ਮੁੱਲ ਐਰੇ ਵਜੋਂ ਦੱਸਿਆ ਜਾਂਦਾ ਹੈ ਤਾਂ ਇਹ ਕ੍ਰਮ-ਸੂਚੀਆਂ ਦੀ ਛੋਟੀ ਗਿਣਤੀ ਨੂੰ ਛੱਡਣ ਲਈ ਲਾਭਕਾਰੀ ਹੁੰਦਾ ਹੈ।\n\nਉਦਾਹਰਨ ਲਈ, ਇਹ ਦੋਵੇਂ ਰੰਗ ਕ੍ਰਮ-ਸੂਚੀ 1 ਨੂੰ ਨੀਲੇ 'ਤੇ ਸੈੱਟ ਕਰਦੇ ਹਨ:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "ਸਵੈਚਲਿਤ ਤੌਰ 'ਤੇ ਮਾਊਸ ਚੋਣ ਨੂੰ ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਕਾਪੀ ਕਰੋ।"
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "ਸਹੀ ਹੋਣ 'ਤੇ Ctrl-C ਨਾਲ ਕਾਪੀ ਹੁੰਦਾ ਹੈ, ਗਲਤ ਹੋਣ 'ਤੇ ^C ਹੋਸਟ ਨੂੰ ਭੇਜਦਾ ਹੈ।\nਸਹੀ ਹੋਣ 'ਤੇ Ctrl-Shift-C ਹੋਸਟ ਨੂੰ ^C ਭੇਜਦਾ ਹੈ, ਗਲਤ ਹੋਣ 'ਤੇ ਕਾਪੀ ਕਰਦਾ ਹੈ।"
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "ਸਹੀ ਹੋਣ 'ਤੇ, Ctrl+Plus/Minus/Zero ਜ਼ੂਮ ਨੂੰ ਕੰਟਰੋਲ ਕਰਦਾ ਹੈ।\nਗਲਤ ਹੋਣ 'ਤੇ, Ctrl+Shift+Plus/Minus/Zero ਜ਼ੂਮ ਨੂੰ ਕੰਟਰੋਲ ਕਰਦਾ ਹੈ, Ctrl+Minus ^_ ਭੇਜਦਾ ਹੈ, Ctrl+Plus/Zero ਕੁਝ ਨਹੀਂ ਕਰਦਾ।"
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "ਸਹੀ ਹੋਣ 'ਤੇ Ctrl+V ਨਾਲ ਪੇਸਟ ਹੁੰਦਾ ਹੈ, ਗਲਤ ਹੋਣ 'ਤੇ ^V ਹੋਸਟ ਨੂੰ ਭੇਜਦਾ ਹੈ।\nਸਹੀ ਹੋਣ 'ਤੇ Ctrl+Shift+V ਹੋਸਟ ਨੂੰ ^V ਭੇਜਦਾ ਹੈ, ਗਲਤ ਹੋਣ 'ਤੇ ਪੇਸਟ ਕਰਦਾ ਹੈ।"
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "ਲਿਖਤ ਕਰਸਰ ਪੂਰਵ-ਨਿਰਧਾਰਤ ਤੌਰ 'ਤੇ ਜਗਮਗਾਹਟ ਕਰਦਾ ਹੈ ਜਾਂ ਨਹੀਂ। ਇਸਨੂੰ ਟਰਮੀਨਲ ਇਸਕੇਪ ਤਰਤੀਬਾਂ ਰਾਹੀਂ ਚੱਲਦੇ ਰਹਿਣ ਦੇ ਸਮੇਂ 'ਤੇ ਟੌਗਲ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ।"
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "ਮਿਲੀਸਕਿੰਟਾਂ ਵਿੱਚ ਲਿਖਤ ਕਰਸਰ ਦੀ ਜਗਮਗਾਹਟ ਦਰ।\n\nਦੋ ਤੱਤਾਂ ਵਾਲਾ ਐਰੇ, ਜਿਸ ਵਿੱਚ ਪਹਿਲੇ ਦਾ ਮਤਲਬ ਹੈ ਕਿ ਲਿਖਤ ਕਰਸਰ ਕਿੰਨੀ ਦੇਰ ਤੱਕ ਚਾਲੂ ਰਹਿਣਾ ਚਾਹੀਦਾ ਹੈ, ਦੂਜੇ ਦਾ ਮਤਲਬ ਹੈ ਕਿ ਇਸਨੂੰ ਕਿੰਨੀ ਦੇਰ ਤੱਕ ਬੰਦ ਰਹਿਣਾ ਚਾਹੀਦਾ ਹੈ।"
+	},
+	"hterm_pref_cursor_color": {
+		"message": "ਦਿਖਣਯੋਗ ਲਿਖਤ ਕਰਸਰ ਦਾ ਰੰਗ।"
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "ਦਿਖਣਯੋਗ ਲਿਖਤ ਕਰਸਰ ਦੀ ਆਕ੍ਰਿਤੀ। ਇਸਨੂੰ ਟਰਮੀਨਲ ਇਸਕੇਪ ਤਰਤੀਬਾਂ ਰਾਹੀਂ ਚੱਲਦੇ ਰਹਿਣ ਦੇ ਸਮੇਂ 'ਤੇ ਬਦਲਿਆ ਜਾ ਸਕਦਾ ਹੈ।"
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "ਜੇ ਸਹੀ ਹੈ, ਤਾਂ ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ ਟਰਮੀਨਲ ਘੰਟੀਆਂ ਵੈੱਬ ਸੂਚਨਾ ਦੀ ਰਚਨਾ ਕਰਨਗੀਆਂ। https://www.w3.org/TR/notifications/\n\nਸੂਚਨਾਵਾਂ ਦਿਖਾਉਣ ਲਈ ਵਰਤੋਂਕਾਰ ਤੋਂ ਇਜਾਜ਼ਤ ਲੋੜੀਂਦੀ ਹੈ। ਜਦੋਂ ਇਸ ਵਿਕਲਪ ਨੂੰ ਸਹੀ 'ਤੇ ਸੈੱਟ ਕੀਤਾ ਜਾਂਦਾ ਹੈ, ਤਾਂ hterm, ਜੇ ਲੋੜ ਹੋਵੇ, ਵਰਤੋਂਕਾਰ ਤੋਂ ਇਜਾਜ਼ਤ ਲੈਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਦਾ ਹੈ। ਜੇ ਇਹ ਇਜਾਜ਼ਤ ਕਿਸੇ ਵਰਤੋਂਕਾਰ ਦੀ ਕਾਰਵਾਈ ਵੱਲੋਂ ਸ਼ੁਰੂ ਨਹੀਂ ਹੋਈ, ਤਾਂ ਸ਼ਾਇਦ ਬ੍ਰਾਊਜ਼ਰ ਇਸ ਇਜਾਜ਼ਤ ਨੂੰ ਨਾ ਦਿਖਾਉਣ।\n\n\"ਸੂਚਨਾਵਾਂ\" ਦੀ ਇਜਾਜ਼ਤ ਵਾਲੇ Chrome ਐਕਸਟੈਂਸ਼ਨ ਕੋਲ ਹੀ ਸੂਚਨਾਵਾਂ ਦਿਖਾਉਣ ਦੀ ਇਜਾਜ਼ਤ ਹੁੰਦੀ ਹੈ।"
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian Ambiguous ਅੱਖਰ-ਚਿੰਨ੍ਹਾਂ ਵਿੱਚ ਦੋ ਕਾਲਮਾਂ ਜਿੰਨੀ ਚੌੜਾਈ ਹੈ ਜਾਂ ਨਹੀਂ।"
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "8-ਬਿਟ ਕੰਟਰੋਲ ਅੱਖਰ-ਚਿੰਨ੍ਹਾਂ ਨੂੰ ਚਾਲੂ ਕਰਨ ਲਈ ਸਹੀ, ਉਹਨਾਂ ਨੂੰ ਅਣਡਿੱਠ ਕਰਨ ਲਈ ਗਲਤ।\n\nਅਸੀਂ ਇਹਨਾਂ ਕੰਟਰੋਲਾਂ ਲਈ ਦੋ-ਬਾਈਟ ਵਰਜਨਾਂ ਨੂੰ ਸਵੀਕਾਰ ਕਰਾਂਗੇ ਭਾਵੇਂ ਇਹ ਸੈਟਿੰਗ ਕੁਝ ਵੀ ਹੋਵੇ।"
+	},
+	"hterm_pref_enable_blink": {
+		"message": "ਜੇ ਸਹੀ ਹੈ, ਤਾਂ ਬਲਿੰਕ ਵਿਸ਼ੇਸ਼ਤਾ ਨੂੰ ਸਵੀਕਾਰ ਕਰੋ। ਗਲਤ ਹੋਣ 'ਤੇ ਅਣਡਿੱਠ ਕਰ ਦਿਓ।"
+	},
+	"hterm_pref_enable_bold": {
+		"message": "ਜੇ ਸਹੀ ਹੈ, ਗੂੜ੍ਹੀ/ਚਮਕੀਲੀ ਵਿਸ਼ੇਸ਼ਤਾ ਵਾਲੀ ਲਿਖਤ ਲਈ ਗੂੜ੍ਹੇ ਭਾਰ ਵਾਲਾ ਫ਼ੋਟ ਵਰਤੋ। ਗਲਤ ਹੋਣ 'ਤੇ ਆਮ ਭਾਰ ਵਾਲਾ ਫ਼ੌਂਟ ਵਰਤੋ। ਸਵੈ ਪਤਾ ਲਗਾਉਣ ਲਈ ਕੁਝ ਨਾ ਵਰਤੋ।"
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "ਜੇ ਸਹੀ ਹੈ, ਤਾਂ ਗੂੜ੍ਹੀ ਵਿਸ਼ੇਸ਼ਤਾ ਵਾਲੀ ਕਿਸੇ ਵੀ ਲਿਖਤ ਲਈ ਚਮਕੀਲੇ ਰੰਗ (16 ਰੰਗ ਪਟਲ 'ਤੇ 8-15) ਵਰਤੋ। ਗਲਤ ਹੋਣ 'ਤੇ ਕੁਝ ਹੋਰ ਵਰਤੋ।"
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "ਹੋਸਟ ਵੱਲੋਂ ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਲਿਖੇ ਜਾਣ 'ਤੇ ਟਰਮੀਨਲ ਵਿੱਚ ਕੋਈ ਸੁਨੇਹਾ ਦਿਖਾਉਣਾ ਹੈ ਜਾਂ ਨਹੀਂ।"
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "ਰਿਮੋਟ ਹੋਸਟ ਨੂੰ ਸਿੱਧਾ ਸਥਾਨਕ ਸਿਸਟਮ ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਲਿਖਣ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ।\nਇਸ ਸੈਟਿੰਗ ਦੇ ਬਾਵਜੂਦ ਵੀ ਪੜ੍ਹਨ ਦੀ ਪਹੁੰਚ ਕਦੇ ਨਹੀਂ ਦਿੱਤੀ ਜਾਂਦੀ।\n\nਇਸ ਦੀ ਵਰਤੋਂ OSC-52 ਵਰਗੀਆਂ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਤੱਕ ਪਹੁੰਚ ਨੂੰ ਕੰਟਰੋਲ ਕਰਨ ਲਈ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।"
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Erase Display ਆਦੇਸ਼ (CSI-J) ਦਾ Erase Saved Lines ਫੰਕਸ਼ਨ (mode 3) ਟਰਮੀਨਲ ਸਕ੍ਰੋਲਬੈਕ ਬਫ਼ਰ ਨੂੰ ਕਲੀਅਰ ਕਰ ਸਕਦਾ ਹੈ ਜਾਂ ਨਹੀਂ।\n\nਇਸਨੂੰ ਪੂਰਵ-ਨਿਰਧਾਰਤ ਤੌਰ 'ਤੇ ਚਾਲੂ ਕਰਨਾ ਸੁਰੱਖਿਅਤ ਹੈ।"
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "DEC Private Mode 12 ਵਰਤ ਕੇ ਹੋਸਟ ਦੇ ਲਿਖਤ ਕਰਸਰ ਦੀ ਜਗਮਗਾਹਟ ਸਥਿਤੀ ਬਦਲਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਨੂੰ ਸਵੀਕਾਰ ਕਰੋ।"
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "ਟਰਮੀਨਲ ਦਾ ਆਕਾਰ ਬਦਲਣ ਵੇਲੇ ਟਰਮੀਨਲ ਆਯਾਮਾਂ ਨੂੰ ਦਿਖਾਉਣਾ ਹੈ ਜਾਂ ਨਹੀਂ।"
+	},
+	"hterm_pref_environment": {
+		"message": "ਇੱਕ ਔਬਜੈਕਟ ਵਜੋਂ, ਐਨਵਾਇਰਨਮੈਂਟ ਵੈਰੀਏਬਲਾਂ ਦਾ ਸ਼ੁਰੂਆਤੀ ਸੈੱਟ।"
+	},
+	"hterm_pref_font_family": {
+		"message": "ਟਰਮੀਨਲ ਲਿਖਤ ਲਈ ਪੂਰਵ-ਨਿਰਧਾਰਤ ਫ਼ੌਂਟ ਪਰਿਵਾਰ।"
+	},
+	"hterm_pref_font_size": {
+		"message": "ਪੂਰਵ-ਨਿਰਧਾਰਤ ਫ਼ੌਂਟ ਦਾ ਆਕਾਰ ਪਿਕਸਲਾਂ ਵਿੱਚ।"
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "CSS font-smoothing ਸੰਪਤੀ।"
+	},
+	"hterm_pref_foreground_color": {
+		"message": "ਉਸ ਲਿਖਤ ਦਾ ਫੋਰਗ੍ਰਾਊਂਡ ਰੰਗ ਜਿਸਦੀ ਕੋਈ ਹੋਰ ਰੰਗ ਵਿਸ਼ੇਸ਼ਤਾ ਨਹੀਂ ਹੈ।"
+	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "ਟਾਈਪ ਕਰਨ ਦੌਰਾਨ ਸਵੈਚਲਿਤ ਤੌਰ 'ਤੇ ਮਾਊਸ ਕਰਸਰ ਨੂੰ ਲੁਕਾਉਣਾ ਹੈ ਜਾਂ ਨਹੀਂ। ਪੂਰਵ-ਨਿਰਧਾਰਤ ਤੌਰ 'ਤੇ, ਇਸ ਚੀਜ਼ ਦਾ ਸਵੈ ਪਤਾ ਲਗਾਉਂਦਾ ਹੈ ਕਿ ਪਲੇਫਾਰਮ/OS ਇਸਨੂੰ ਵਰਤਦਾ ਹੈ ਜਾਂ ਨਹੀਂ।\n\nਨੋਟ ਕਰੋ: ਸ਼ਾਇਦ ਤੁਹਾਡਾ ਓਪਰੇਟਿੰਗ ਸਿਸਟਮ ਇਸ ਸੈਟਿੰਗ ਨੂੰ ਓਵਰਰਾਈਡ ਕਰ ਦੇਵੇ ਅਤੇ ਇਸ ਲਈ ਸ਼ਾਇਦ ਤੁਸੀਂ ਇਸਨੂੰ ਹਮੇਸ਼ਾਂ ਬੰਦ ਨਾ ਕਰ ਸਕੋ।"
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "ਜੇ ਸਹੀ ਹੈ, ਤਾਂ Home/End ਟਰਮੀਨਲ ਸਕ੍ਰੋਲਬਾਰ ਨੂੰ ਕੰਟਰੋਲ ਕਰਦਾ ਹੈ ਅਤੇ Shift+Home/Shift+End ਨੂੰ ਰਿਮੋਟ ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤਾ ਜਾਂਦਾ ਹੈ। ਜੇ ਗਲਤ ਹੈ, ਫਿਰ Home/End ਰਿਮੋਟ ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤੇ ਜਾਂਦੇ ਹਨ ਅਤੇ Shift+Home/Shift+End ਨਾਲ ਸਕ੍ਰੋਲ ਹੁੰਦਾ ਹੈ।"
+	},
+	"hterm_pref_keybindings": {
+		"message": "ਕੁੰਜੀ ਕਾਰਵਾਈਆਂ ਲਈ ਕੁੰਜੀ ਤਰਤੀਬ ਦੀ ਮੈਪਿੰਗ। ਕੁੰਜੀ ਤਰਤੀਬ ਵਿੱਚ ਸਿਫ਼ਰ ਜਾਂ ਹੋਰ ਸੋਧਕ ਕੁੰਜੀਆਂ ਸ਼ਾਮਲ ਹੁੰਦੀਆਂ ਹਨ ਜਿਨ੍ਹਾਂ ਤੋਂ ਬਾਅਦ ਇੱਕ ਕੁੰਜੀ ਕੋਡ ਆਉਂਦਾ ਹੈ। ਕੁੰਜੀ ਕੋਡ ਦਸ਼ਮਕ ਜਾਂ ਛੇ-ਦਸ਼ਮਲਵ ਨੰਬਰ ਜਾਂ ਕੋਈ ਕੁੰਜੀ ਪਛਾਣਕਰਤਾ ਹੋ ਸਕਦਾ ਹੈ। ਕੁੰਜੀ ਕਾਰਵਾਈਆਂ ਹੋਸਟ ਜਾਂ ਕਿਸੇ ਕਾਰਵਾਈ ਪਛਾਣਕਰਤਾ ਨੂੰ ਭੇਜਣ ਲਈ ਕਿਸੇ ਸਤਰ ਵਜੋਂ ਨਿਰਧਾਰਤ ਕੀਤੀਆਂ ਜਾ ਸਕਦੀਆਂ ਹਨ। ਫਾਰਮੈਟ ਦੀ ਪੂਰੀ ਵਿਆਖਿਆ ਲਈ, https://goo.gl/LWRndr ਦੇਖੋ।\n\nਕੁੰਜੀਆਂ ਦੇ ਕੰਮ ਕਰਨ ਦਾ ਨਮੂਨਾ:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "hterm ਦੀ ਆਪਣੀ ਵਰਤੋਂ ਲਈ ਹਮੇਸ਼ਾਂ ਕੈਪਚਰ ਕਰਨ ਦੀ ਬਜਾਏ ਆਮ OS ਕੀ-ਬੋਰਡ ਬਾਇੰਡਿੰਗਾਂ ਨੂੰ ਸਵੀਕਾਰ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ ਜਾਂ ਨਹੀਂ।"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "ਜੇ ਸਹੀ ਹੈ, ਤਾਂ ਮੀਡੀਆ ਕੁੰਜੀਆਂ ਨੂੰ ਉਹਨਾਂ ਦੇ ਬਰਾਬਰ ਵਾਲੀਆਂ Fkey ਵਿੱਚ ਬਦਲੋ। ਜੇ ਗਲਤ ਹੈ, ਤਾਂ ਬ੍ਰਾਊਜ਼ਰ ਨੂੰ ਕੁੰਜੀਆਂ ਵਰਤਣ ਦਿਓ।"
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Meta ਕੁੰਜੀ ਨੂੰ ਦਬਾ ਕੇ ਰੱਖਦੇ ਹੋਏ ਕਿਸੇ ਕੁੰਜੀ ਨੂੰ ਦੱਬਣ ਦੌਰਾਨ ESC ਅਗੇਤਰ ਭੇਜੋ।\n\nਉਦਾਹਰਨ ਦੇ ਤੌਰ 'ਤੇ, ਚਾਲੂ ਹੋਣ 'ਤੇ, Meta+K ਦੱਬਣ 'ਤੇ ^[k ਭੇਜਿਆ ਜਾਵੇਗਾ ਜਿਵੇਂ ਕਿ ਤੁਹਾਡੇ ਵੱਲੋਂ Escape ਟਾਈਪ ਕਰਨ ਤੋਂ ਬਾਅਦ k ਟਾਈਪ ਕਰਨ ਨਾਲ ਹੁੰਦਾ ਹੈ। ਬੰਦ ਹੋਣ 'ਤੇ, ਸਿਰਫ਼ k ਭੇਜਿਆ ਜਾਵੇਗਾ।"
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "ਮਾਊਸ ਦੇ ਸੱਜੇ ਕਲਿੱਕਾਂ ਨਾਲ ਪੇਸਟ ਹੁੰਦਾ ਹੈ।\n\nਇਹ ਵਿਕਲਪ \"mouse-paste-button\" ਸੈਟਿੰਗਾਂ ਤੋਂ ਅਲੱਗ ਹੈ।\n\nਨੋਟ ਕਰੋ: ਇਹ ਖੱਬੇ ਅਤੇ ਸੱਜੇ ਹੱਥਾਂ ਵਾਲੇ ਮਾਊਸਾਂ 'ਤੇ ਸਹੀ ਤਰ੍ਹਾਂ ਕੰਮ ਕਰੇਗਾ।"
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "ਜੇ ਸਹੀ ਹੈ, ਤਾਂ Page Up/Page Down ਟਰਮੀਨਲ ਸਕ੍ਰੋਲਬਾਰ ਨੂੰ ਕੰਟਰੋਲ ਕਰਦਾ ਹੈ ਅਤੇ Shift+Page Up/Shift+Page Down ਨੂੰ ਰਿਮੋਟ ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤਾ ਜਾਂਦਾ ਹੈ। ਜੇ ਗਲਤ ਹੈ, ਫਿਰ Page Up/Page Down ਰਿਮੋਟ ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤੇ ਜਾਂਦੇ ਹਨ ਅਤੇ Shift+Page Up/Shift+Page Down ਨਾਲ ਸਕ੍ਰੋਲ ਹੁੰਦਾ ਹੈ।"
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Alt+1..9 ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਵੱਲ ਭੇਜਿਆ ਜਾਂਦਾ ਹੈ ਜਾਂ ਨਹੀਂ।\n\nhterm ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਟੈਬ ਵਿੱਚ ਚਲਾਉਣ 'ਤੇ ਇਹ ਕੰਮ ਆਉਂਦਾ ਹੈ, ਤਾਂ ਕਿ ਤੁਸੀਂ Chrome ਦੇ \"ਟੈਬ 'ਤੇ ਬਦਲੋ\" ਕੀ-ਬੋਰਡ ਸ਼ਾਰਟਕੱਟਾਂ ਨੂੰ ਨਾ ਗਵਾਓ। ਟੈਬ ਵਿੱਚ ਨਾ ਚੱਲਣ 'ਤੇ, ਬਿਹਤਰ ਹੈ ਕਿ ਇਹ ਕੁੰਜੀਆਂ ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤੀਆਂ ਜਾਣ ਤਾਂ ਕਿ ਉਹਨਾਂ ਨੂੰ vim ਜਾਂ emacs ਵਿੱਚ ਵਰਤਿਆ ਜਾ ਸਕੇ।\n\nਜੇ ਸਹੀ ਹੈ, ਤਾਂ Alt+1..9 ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਰਾਹੀਂ ਵਰਤਿਆ ਜਾਵੇਗਾ। ਜੇ ਗਲਤ ਹੈ, ਤਾਂ Alt+1..9 ਨੂੰ ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤਾ ਜਾਵੇਗਾ। ਖਾਲੀ ਹੋਣ 'ਤੇ, ਬ੍ਰਾਊਜ਼ਰ ਪਲੇਟਫਾਰਮ ਅਤੇ ਵਿੰਡੋ ਕਿਸਮ ਦੇ ਆਧਾਰ 'ਤੇ ਸਵੈ ਪਤਾ ਲਗਾਇਆ ਜਾਂਦਾ ਹੈ।"
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Ctrl+N ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਵੱਲ ਭੇਜਿਆ ਜਾਂਦਾ ਹੈ ਜਾਂ ਨਹੀਂ।\n\nਜੇ ਸਹੀ ਹੈ, ਤਾਂ ਬ੍ਰਾਊਜ਼ਰ ਵੱਲੋਂ Ctrl+N ਨੂੰ \"ਨਵੀਂ ਵਿੰਡੋ\" ਕੀ-ਬੋਰਡ ਸ਼ਾਰਟਕੱਟ ਵਜੋਂ ਵਰਤਿਆ ਜਾਵੇਗਾ। ਜੇ ਗਲਤ ਹੈ, ਤਾਂ Ctrl+N ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤਾ ਜਾਵੇਗਾ।"
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Ctrl+1..9 ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਵੱਲ ਭੇਜਿਆ ਜਾਂਦਾ ਹੈ ਜਾਂ ਨਹੀਂ।\n\nhterm ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਟੈਬ ਵਿੱਚ ਚਲਾਉਣ 'ਤੇ ਇਹ ਕੰਮ ਆਉਂਦਾ ਹੈ, ਤਾਂ ਕਿ ਤੁਸੀਂ Chrome ਦੇ \"ਟੈਬ 'ਤੇ ਬਦਲੋ\" ਕੀ-ਬੋਰਡ ਸ਼ਾਰਟਕੱਟਾਂ ਨੂੰ ਨਾ ਗਵਾਓ। ਟੈਬ ਵਿੱਚ ਨਾ ਚੱਲਣ 'ਤੇ, ਬਿਹਤਰ ਹੈ ਕਿ ਇਹ ਕੁੰਜੀਆਂ ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤੀਆਂ ਜਾਣ ਤਾਂ ਕਿ ਉਹਨਾਂ ਨੂੰ vim ਜਾਂ emacs ਵਿੱਚ ਵਰਤਿਆ ਜਾ ਸਕੇ।\n\nਜੇ ਸਹੀ ਹੈ, ਤਾਂ Ctrl+1..9 ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਰਾਹੀਂ ਵਰਤਿਆ ਜਾਵੇਗਾ। ਜੇ ਗਲਤ ਹੈ, ਤਾਂ Ctrl+1..9 ਨੂੰ ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤਾ ਜਾਵੇਗਾ। ਖਾਲੀ ਹੋਣ 'ਤੇ, ਬ੍ਰਾਊਜ਼ਰ ਪਲੇਟਫਾਰਮ ਅਤੇ ਵਿੰਡੋ ਕਿਸਮ ਦੇ ਆਧਾਰ 'ਤੇ ਸਵੈ ਪਤਾ ਲਗਾਇਆ ਜਾਂਦਾ ਹੈ।"
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Ctrl+T ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਵੱਲ ਭੇਜਿਆ ਜਾਂਦਾ ਹੈ ਜਾਂ ਨਹੀਂ।\n\nਜੇ ਸਹੀ ਹੈ, ਤਾਂ ਬ੍ਰਾਊਜ਼ਰ ਵੱਲੋਂ Ctrl+T ਨੂੰ \"ਨਵਾਂ ਟੈਬ\" ਕੀ-ਬੋਰਡ ਸ਼ਾਰਟਕੱਟ ਵਜੋਂ ਵਰਤਿਆ ਜਾਵੇਗਾ। ਜੇ ਗਲਤ ਹੈ, ਤਾਂ Ctrl+T ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤਾ ਜਾਵੇਗਾ।"
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab ਅਤੇ Ctrl+Shift+Tab ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਵੱਲ ਭੇਜਿਆ ਜਾਂਦਾ ਹੈ ਜਾਂ ਨਹੀਂ।\n\nਜੇ ਸਹੀ ਹੈ, ਤਾਂ ਬ੍ਰਾਊਜ਼ਰ ਵੱਲੋਂ Ctrl+Tab ਅਤੇ Ctrl+Shift+Tab ਨੂੰ \"ਅਗਲਾ/ਪਿਛਲਾ ਟੈਬ\" ਕੀ-ਬੋਰਡ ਸ਼ਾਰਟਕੱਟ ਵਜੋਂ ਵਰਤਿਆ ਜਾਵੇਗਾ। ਜੇ ਗਲਤ ਹੈ, ਤਾਂ Tab ਕੁੰਜੀ ਨੂੰ Ctrl ਜਾਂ Shift ਦੇ ਬਿਨਾਂ ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤਾ ਜਾਂਦਾ ਹੈ।"
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Ctrl+W ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਵੱਲ ਭੇਜਿਆ ਜਾਂਦਾ ਹੈ ਜਾਂ ਨਹੀਂ।\n\nਜੇ ਸਹੀ ਹੈ, ਤਾਂ ਬ੍ਰਾਊਜ਼ਰ ਵੱਲੋਂ Ctrl+W ਨੂੰ \"ਟੈਬ ਬੰਦ ਕਰੋ\" ਕੀ-ਬੋਰਡ ਸ਼ਾਰਟਕੱਟ ਵਜੋਂ ਵਰਤਿਆ ਜਾਵੇਗਾ। ਜੇ ਗਲਤ ਹੈ, ਤਾਂ Ctrl+W ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤਾ ਜਾਵੇਗਾ।"
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Meta+1..9 ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਵੱਲ ਭੇਜਿਆ ਜਾਂਦਾ ਹੈ ਜਾਂ ਨਹੀਂ।\n\nhterm ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਟੈਬ ਵਿੱਚ ਚਲਾਉਣ 'ਤੇ ਇਹ ਕੰਮ ਆਉਂਦਾ ਹੈ, ਤਾਂ ਕਿ ਤੁਸੀਂ Chrome ਦੇ \"ਟੈਬ 'ਤੇ ਬਦਲੋ\" ਕੀ-ਬੋਰਡ ਸ਼ਾਰਟਕੱਟਾਂ ਨੂੰ ਨਾ ਗਵਾਓ। ਟੈਬ ਵਿੱਚ ਨਾ ਚੱਲਣ 'ਤੇ, ਬਿਹਤਰ ਹੈ ਕਿ ਇਹ ਕੁੰਜੀਆਂ ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤੀਆਂ ਜਾਣ ਤਾਂ ਕਿ ਉਹਨਾਂ ਨੂੰ vim ਜਾਂ emacs ਵਿੱਚ ਵਰਤਿਆ ਜਾ ਸਕੇ।\n\nਜੇ ਸਹੀ ਹੈ, ਤਾਂ Meta+1..9 ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਰਾਹੀਂ ਵਰਤਿਆ ਜਾਵੇਗਾ। ਜੇ ਗਲਤ ਹੈ, ਤਾਂ Meta+1..9 ਨੂੰ ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤਾ ਜਾਵੇਗਾ। ਖਾਲੀ ਹੋਣ 'ਤੇ, ਬ੍ਰਾਊਜ਼ਰ ਪਲੇਟਫਾਰਮ ਅਤੇ ਵਿੰਡੋ ਕਿਸਮ ਦੇ ਆਧਾਰ 'ਤੇ ਸਵੈ ਪਤਾ ਲਗਾਇਆ ਜਾਂਦਾ ਹੈ।"
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Meta+V ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਵੱਲ ਭੇਜਿਆ ਜਾਂਦਾ ਹੈ ਜਾਂ ਨਹੀਂ।\n\nਕਈ ਸਿਸਟਮਾਂ 'ਤੇ, ਇਸਨੂੰ ਸਮੱਗਰੀ ਨੂੰ ਪੇਸਟ ਕਰਨ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ।"
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "ਜੇ ਸਹੀ ਹੈ, ਤਾਂ ਘਸੀਟ ਕੇ ਛੱਡੀ ਗਈ ਲਿਖਤ ਨੂੰ ਟਰਮੀਨਲ ਵਿੱਚ ਪੇਸਟ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ।\nਜੇ ਗਲਤ ਹੈ, ਤਾਂ ਛੱਡੀ ਗਈ ਲਿਖਤ ਨੂੰ ਅਣਡਿੱਠ ਕੀਤਾ ਜਾਵੇਗਾ।"
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "ਹੋਸਟ ਵੱਲੋਂ ਪ੍ਰਾਪਤ ਕੀਤੇ ਡਾਟੇ ਲਈ ਸੰਭਾਵਿਤ ਇਨਕੋਡਿੰਗ ਸੈੱਟ ਕਰੋ।\nਜੇ ਇਨਕੋਡਿੰਗਾਂ ਮੇਲ ਨਹੀਂ ਖਾਂਦੀਆਂ, ਤਾਂ ਦਿਖਣ ਵਾਲੇ ਬੱਗਾਂ ਦਾ ਨਿਰੀਖਣ ਕੀਤੇ ਜਾਣ ਦੀ ਸੰਭਾਵਨਾ ਹੁੰਦੀ ਹੈ।\n\nਵੈਧ ਮੁੱਲ 'utf-8' ਅਤੇ 'raw' ਹੁੰਦੇ ਹਨ।"
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "ਟਰਮੀਨਲ ਸਕ੍ਰੀਨ ਦੇ ਚਾਰੇ ਪਾਸੇ ਬਾਰਡਰ 'ਤੇ ਪਿਕਸਲਾਂ ਵਿੱਚ ਪੈਡਿੰਗ ਆਕਾਰ।\n\nਇਹ ਟਰਮੀਨਲ ਸਕ੍ਰੀਨ ਦੇ ਚਾਰੇ ਪਾਸੇ ਬਾਰਡਰ ਦੇ ਆਕਾਰ ਨੂੰ ਕੰਟਰੋਲ ਕਰਦਾ ਹੈ ਤਾਂ ਕਿ ਵਰਤੋਂਕਾਰ ਸਕ੍ਰੀਨ ਦੇ ਕਿਨਾਰਿਆਂ 'ਤੇ ਦਿਖਣਯੋਗ ਪੈਡਿੰਗ ਸ਼ਾਮਲ ਕਰ ਸਕੇ।"
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "ਕੋਈ ਵੀ ਕੁੰਜੀ ਦਬਾਉਣ 'ਤੇ ਹੇਠਾਂ ਤੱਕ ਸਕ੍ਰੋਲ ਕਰਨਾ ਹੈ ਜਾਂ ਨਹੀਂ।"
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "ਟਰਮੀਨਲ ਆਊਟਪੁੱਟ 'ਤੇ ਹੇਠਾਂ ਤੱਕ ਸਕ੍ਰੋਲ ਕਰਨਾ ਹੈ ਜਾਂ ਨਹੀਂ।"
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "ਵਿਕਲਪਿਕ ਸਕ੍ਰੀਨ ਬਫ਼ਰ ਵਰਤਣ ਵੇਲੇ ਅਤੇ ਜਦੋਂ DECCKM (ਐਪਲੀਕੇਸ਼ਨ ਕਰਸਰ ਕੁੰਜੀਆਂ) ਕਿਰਿਆਸ਼ੀਲ ਹੁੰਦਾ ਹੈ, ਤਾਂ ਮਾਊਸ ਸਕ੍ਰੋਲ ਪਹੀਆ ਤੀਰ ਕੁੰਜੀਆਂ ਨੂੰ ਬਰਾਬਰ ਕਰ ਦੇਵੇਗਾ।\n\nਇਸਨੂੰ Shift ਕੁੰਜੀ ਦਬਾ ਕੇ ਰੱਖਣ ਨਾਲ ਅਸਥਾਈ ਤੌਰ 'ਤੇ ਬੰਦ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ।\n\nਇਹ ਅਕਸਰ ਪੇਜਰ ਵਰਤਣ ਦੌਰਾਨ (less) ਜਾਂ ਮੈਨ ਪੰਨੇ ਜਾਂ ਲਿਖਤ ਸੰਪਾਦਕ ਪੜ੍ਹਨ ਦੌਰਾਨ (vi/nano) ਜਾਂ ਸਕ੍ਰੀਨ/tmux ਵਰਤਣ ਦੌਰਾਨ ਆਉਂਦਾ ਹੈ।"
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "ਪਿਕਸਲਾਂ ਵਿੱਚ ਮਾਪਣ 'ਤੇ ਮਾਊਸ ਸਕ੍ਰੋਲ ਕਰਨ ਵਾਲੇ ਪਹੀਏ 'ਤੇ ਹੋਣ ਵਾਲੀਆਂ ਕਾਰਵਾਈਆਂ ਦਾ ਗੁਣਕ।\n\nਇਸ ਚੀਜ਼ ਦੀ ਵਿਵਸਥਿਤ ਕਰਦਾ ਹੈ ਕਿ ਪੰਨਾ ਕਿੰਨੀ ਤੇਜ਼ੀ ਨਾਲ ਸਕ੍ਰੋਲ ਹੁੰਦਾ ਹੈ।"
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "ਖੜ੍ਹਵਾਂ ਸਕ੍ਰੋਲਬਾਰ ਮੋਡ।"
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Shift+Insert ਨੂੰ ਪੇਸਟ ਕਰਨ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ ਜਾਂ ਇਸਨੂੰ ਰਿਮੋਟ ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤਾ ਜਾਂਦਾ ਹੈ।"
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "ਪੂਰਵ-ਨਿਰਧਾਰਤ ਟਰਮੀਨਲ ਇਨਕੋਡਿੰਗ (DOCS)।\n\nISO-2022 ਅੱਖਰ-ਚਿੰਨ੍ਹ ਮੈਪਿੰਗ ਅਨੁਵਾਦ ਨੂੰ ਚਾਲੂ ਕਰਦਾ ਹੈ (ਜਿਵੇਂ ਕਿ ਗ੍ਰਾਫ਼ਿਕ ਮੈਪਿੰਗ)।\nUTF-8 ਉਹਨਾਂ ਲਈ ਸਮਰਥਨ ਬੰਦ ਕਰ ਦਿੰਦਾ ਹੈ।\n\nਲਾਕ ਕੀਤੇ ਵੈਰੀਐਂਟ ਦਾ ਮਤਲਬ ਹੈ ਕਿ ਟਰਮੀਨਲ ਇਸਕੇਪ ਤਰਤੀਬਾਂ ਰਾਹੀਂ ਇਨਕੋਡਿੰਗ ਨੂੰ ਬਦਲਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ।\n\nਜਦੋਂ ਤੱਕ ਤੁਸੀਂ ਵਿਰਾਸਤੀ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨਾਲ ਟੁੱਟੀ ਰੈਂਡਰਿੰਗ ਨੋਟਿਸ ਨਹੀਂ ਕਰਦੇ, ਤੁਹਾਨੂੰ UTF-8 ਨੂੰ ਵਰਤਦੇ ਰਹਿਣਾ ਚਾਹੀਦਾ ਹੈ।"
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "ਪੂਰਵ-ਨਿਰਧਾਰਤ ਬ੍ਰਾਊਜ਼ਰ/OS ਦੀ ਕਾਪੀ ਕਰਨ ਦੀ ਕਾਰਵਾਈ ਨੂੰ ਵਰਤਣਾ ਹੈ ਜਾਂ ਨਹੀਂ।\n\nਬ੍ਰਾਊਜ਼ਰ/OS ਨੂੰ ਸਿੱਧਾ ਕਾਪੀ ਕਰਨ ਦੀ ਕਾਰਵਾਈ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ ਜਿਸ ਨਾਲ ਸ਼ਾਇਦ ਕੁਝ ਸਿਸਟਮਾਂ ਦੀ ਅਨੁਰੂਪਤਾ ਵਿੱਚ ਸੁਧਾਰ ਹੋਵੇ (ਜਿੱਥੇ ਕਾਪੀ ਕਰਨਾ ਬਿਲਕੁਲ ਕੰਮ ਨਹੀਂ ਕਰਦਾ), ਪਰ ਇਸ ਨਾਲ ਲਿਖਤ ਨੂੰ ਚੁਣਨ ਵਿੱਚ ਸਮੱਸਿਆ ਆ ਸਕਦੀ ਹੈ।\n\nਉਦਾਹਰਨ ਦੇ ਤੌਰ 'ਤੇ, ਉਹ ਲੰਬੀਆਂ ਕਤਾਰਾਂ ਜੋ ਸਵੈਚਲਿਤ ਤੌਰ 'ਤੇ ਲਪੇਟੀਆਂ ਜਾਂਦੀਆਂ ਸਨ ਉਹਨਾਂ ਨੂੰ ਉਹਨਾਂ ਵਿੱਚ ਨਵੀਆਂ ਕਤਾਰਾਂ ਨਾਲ ਕਾਪੀ ਕੀਤਾ ਜਾਵੇਗਾ।"
+	},
+	"hterm_pref_user_css": {
+		"message": "ਟਰਮੀਨਲ ਦਸਤਾਵੇਜ਼ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰਨ ਲਈ ਵਰਤੋਂਕਾਰ ਸਟਾਈਲਸ਼ੀਟ ਦਾ URL."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "ਟਰਮੀਨਲ ਨੂੰ ਸਟਾਈਲਬੱਧ ਕਰਨ ਲਈ ਵਿਉਂਤਬੱਧ CSS ਲਿਖਤ।"
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "ਕਿਸੇ ਚੋਣ ਦੇ ਖੱਬੇ ਪਾਸੇ (ਸ਼ੁਰੂ ਵਿੱਚ) ਮਿਲਾਨ ਨੂੰ ਰੋਕਣ ਲਈ ਰੈਗੂਲਰ ਐਕਸਪ੍ਰੈਸ਼ਨ।\n\nਆਮ ਤੌਰ 'ਤੇ ਇਹ ਖਾਸ ਅੱਖਰ-ਚਿੰਨ੍ਹਾਂ ਨੂੰ ਅਸਵੀਕਾਰ ਕਰਨ ਲਈ ਅੱਖਰ-ਚਿੰਨ੍ਹ ਸ਼੍ਰੇਣੀ ਹੈ।\nਅਸੀਂ ਪੂਰਵ-ਨਿਰਧਾਰਤ ਤੌਰ 'ਤੇ \"~\" ਅਤੇ \".\" ਦੀ ਇਜਾਜ਼ਤ ਦਿੰਦੇ ਹਾਂ ਕਿਉਂਕਿ ਪਾਥ ਅਕਸਰ ਇਹਨਾਂ ਨਾਲ ਹੀ ਸ਼ੁਰੂ ਹੁੰਦੇ ਹਨ।"
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "ਵਿਚਕਾਰਲੇ ਸਾਰੇ ਅੱਖਰ-ਚਿੰਨ੍ਹਾਂ ਨੂੰ ਮਿਲਾਉਣ ਲਈ ਰੈਗੂਲਰ ਐਕਸਪ੍ਰੈਸ਼ਨ।\n\nਆਮ ਤੌਰ 'ਤੇ ਇਹ ਖਾਸ ਅੱਖਰ-ਚਿੰਨ੍ਹਾਂ ਨੂੰ ਅਸਵੀਕਾਰ ਕਰਨ ਲਈ ਅੱਖਰ-ਚਿੰਨ੍ਹ ਸ਼੍ਰੇਣੀ ਹੈ।\n\nਸ਼ੁਰੂਆਤੀ ਬਿੰਦੂ ਦੇ ਆਲੇ-ਦੁਆਲੇ ਚੋਣ ਦਾ ਵਿਸਤਾਰ ਕਰਨ ਲਈ ਵਰਤਿਆ ਗਿਆ।"
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "ਕਿਸੇ ਚੋਣ ਦੇ ਸੱਜੇ ਪਾਸੇ (ਅੰਤ ਵਿੱਚ) ਮਿਲਾਨ ਨੂੰ ਰੋਕਣ ਲਈ ਰੈਗੂਲਰ ਐਕਸਪ੍ਰੈਸ਼ਨ।\n\nਆਮ ਤੌਰ 'ਤੇ ਇਹ ਖਾਸ ਅੱਖਰ-ਚਿੰਨ੍ਹਾਂ ਨੂੰ ਅਸਵੀਕਾਰ ਕਰਨ ਲਈ ਅੱਖਰ-ਚਿੰਨ੍ਹ ਸ਼੍ਰੇਣੀ ਹੈ।"
+	},
+	"hterm_space_character": {
+		"message": "ਸਪੇਸ"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "ਦਿੱਖ (ਫ਼ੌਂਟ, ਰੰਗ, ਚਿੱਤਰ)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "ਕਾਪੀ ਅਤੇ ਪੇਸਟ ਕਰੋ"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "ਇਨਕੋਡਿੰਗ"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "ਐਕਸਟੈਂਸ਼ਨਾਂ"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "ਕੀ-ਬੋਰਡ"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "ਫੁਟਕਲ"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "ਸਕ੍ਰੋਲਿੰਗ"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "ਅਵਾਜ਼ਾਂ"
+	},
+	"identity_label": {
+		"message": "ਪਛਾਣ"
+	},
+	"import_link_aria_label": {
+		"message": "ਫ਼ਾਈਲ ਆਯਾਤ ਕਰੋ"
+	},
+	"import_link_label": {
+		"message": "ਆਯਾਤ ਕਰੋ..."
+	},
+	"initializing_relay": {
+		"message": "ਇਸਨੂੰ ਵਰਤਦੇ ਹੋਏ ਰੀਲੇਅ ਸਰਵਰ ਲੱਭਿਆ ਜਾ ਰਿਹਾ ਹੈ: $1"
+	},
+	"json_parse_error": {
+		"message": "'$1' ਵਿੱਚ JSON ਨੂੰ ਪਾਰਸ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: $2"
+	},
+	"known_hosts_empty": {
+		"message": "ਕੋਈ ਜਾਣਿਆ-ਪਛਾਣਿਆ ਹੋਸਟ ਨਹੀਂ, ਭੁੱਲਣ ਲਈ ਕੁਝ ਵੀ ਨਹੀਂ ਹੈ।"
+	},
+	"known_hosts_prompt": {
+		"message": "ਕਿਰਪਾ ਕਰਕੇ ਭੁੱਲਣ ਲਈ ਕੋਈ ਹੋਸਟ ਚੁਣੋ [1-$1]:"
+	},
+	"known_hosts_title": {
+		"message": "ਜਾਣੇ-ਪਛਾਣੇ ਹੋਸਟ:"
+	},
+	"licenses": {
+		"message": "ਲਾਇਸੰਸ"
+	},
+	"licenses_expand_link": {
+		"message": "ਲਾਇਸੰਸ ਦਿਖਾਓ"
+	},
+	"licenses_title": {
+		"message": "ਖੁੱਲ੍ਹਾ ਸਰੋਤ ਲਾਇਸੰਸ"
+	},
+	"loading_label": {
+		"message": "ਲੋਡ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ…"
+	},
+	"migrate_to_ext": {
+		"message": "ਨੋਟਿਸ: ਕਿਰਪਾ ਕਰਕੇ ਨਵੇਂ Secure Shell ਐਕਸਟੈਂਸ਼ਨ ਵਿੱਚ ਮਾਈਗ੍ਰੇਟ ਕਰੋ ($1)।\nChrome ਐਪਾਂ ਨੂੰ ਨਾਪਸੰਦ ਕੀਤਾ ਜਾਂਦਾ ਹੈ, ਇਸ ਲਈ ਇਹ ਵਰਜਨ ਅੱਪਡੇਟ ਪ੍ਰਾਪਤ ਕਰਨੇ ਬੰਦ ਕਰ ਦੇਵੇਗਾ।\nਕਿਰਪਾ ਕਰਕੇ ਹੋਰ ਵੇਰਵਿਆਂ ਲਈ ($2) ਮਾਈਗ੍ਰੇਸ਼ਨ ਗਾਈਡ ਦੇਖੋ।"
+	},
+	"missing_param": {
+		"message": "ਪੈਰਾਮੀਟਰ ਗੁੰਮ ਹੈ: $1"
+	},
+	"mount_button_label": {
+		"message": "SFTP ਮਾਊਂਟ"
+	},
+	"mount_path_label": {
+		"message": "ਮਾਊਂਟ ਕਰਨ ਵਾਲਾ ਪਾਥ"
+	},
+	"mounted_message": {
+		"message": "ਮਾਊਂਟ ਕੀਤਾ ਗਿਆ!"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "ਟਰਮੀਨਲ ਵਿੱਚ ਕੋਈ ਫ਼ਾਈਲ ਲਿਜਾਓ"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "ਕਾਰਜੀ ਡਾਇਰੈਕਟਰੀ ਨੂੰ ਬਦਲੋ"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "ਪਾਥਾਂ ਦੇ ਗਰੁੱਪ ਬਦਲੋ"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "ਪਾਥਾਂ ਦੀਆਂ ਇਜਾਜ਼ਤਾਂ ਬਦਲੋ"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "ਪਾਥਾਂ ਦਾ ਮਾਲਕ ਬਦਲੋ"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "ਮੌਜੂਦਾ ਟਰਮੀਨਲ ਸਕ੍ਰੀਨ ਕਲੀਅਰ ਕਰੋ।"
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਕੋਈ ਫ਼ਾਈਲ ਕਾਪੀ ਕਰੋ (ਪੂਰਵ-ਨਿਰਧਾਰਤ: ਸ਼ੁਰੂਆਤ ਵਿੱਚ 10MiB)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "ਕਲਿੱਪਬੋਰਡ 'ਤੇ $1 ਬਾਈਟਾਂ ਕਾਪੀ ਕੀਤੀਆਂ ਗਈਆਂ"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "ਰੰਗ ਵਰਤੋਂ ਨੂੰ ਟੌਗਲ ਕਰੋ"
+	},
+	"nasftp_cmd_copy": {
+		"message": "ਕਾਪੀ ਕਰੋ"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "ਸਰੋਤ ਨੂੰ ਮੰਜ਼ਿਲ 'ਤੇ ਕਾਪੀ ਕਰੋ"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "ਫ਼ਾਈਲਾਂ ਮਿਟਾਓ"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "ਡਿਸਕ ਸੰਬੰਧੀ ਅੰਕੜੇ ਦਿਖਾਓ"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  ਪਾਥ: $1\n  fsid: $2\n ਕੁੱਲ: $3\n  ਵਰਤੇ ਗਏ: $4 ($5%)\n ਉਪਲਬਧ: $6 (ਆਮ ਵਰਤੋਂਕਾਰਾਂ ਲਈ)\n $7 (ਰੂਟ ਲਈ)"
+	},
+	"nasftp_cmd_exit": {
+		"message": "ਬਾਹਰ ਨਿਕਲੋ"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "ਡਿਸਕਨੈਕਟ ਕਰੋ"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "ਫ਼ਾਈਲ ਡਾਊਨਲੋਡ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ: $1 $2 ਵਜੋਂ"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "ਫ਼ਾਈਲਾਂ ਡਾਊਨਲੋਡ ਕਰੋ"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "ਇਹ ਮਦਦ ਸਕ੍ਰੀਨ"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "ਡਾਇਰੈਕਟਰੀ ਵੇਰਵਿਆਂ ਦੀ ਸੂਚੀ ਬਣਾਓ"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "ਪਾਥ 'ਤੇ ਟੀਚੇ ਵੱਲ ਇਸ਼ਾਰਾ ਕਰਨ ਵਾਲਾ ਲਿੰਕ ਬਣਾਓ"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "ਡਾਇਰੈਕਟਰੀਆਂ ਬਣਾਓ"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "ਕਿਸੇ ਫ਼ਾਈਲ ਦਾ ਨਾਮ ਬਦਲੋ"
+	},
+	"nasftp_cmd_prompt": {
+		"message": "ਉਤਪ੍ਰੇਰਕ"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "ਉਤਪ੍ਰੇਰਕ ਸਤਰ ਸੈੱਟ ਕਰੋ"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "ਫ਼ਾਈਲਾਂ ਅੱਪਲੋਡ ਕਰੋ"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "ਫ਼ਾਈਲ ਅੱਪਲੋਡ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ: $1 $2 ਵਜੋਂ ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "ਮੌਜੂਦਾ ਕਾਰਜ ਡਾਇਰੈਕਟਰੀ ਦਿਖਾਓ"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "ਰਿਮੋਟ ਕਾਰਜਕਾਰੀ ਡਾਇਰੈਕਟਰੀ: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "ਚਿੰਨ੍ਹ ਲਿੰਕ ਪੜ੍ਹੋ"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "ਪਾਥਾਂ ਨੂੰ ਕੈਨੋਨੀਕਲ ਕਰੋ"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "ਫ਼ਾਈਲਾਂ ਅੱਪਲੋਡ ਕਰਨਾ ਮੁੜ-ਚਾਲੂ ਕਰੋ"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "ਫ਼ਾਈਲਾਂ ਹਟਾਓ"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "ਖਾਲੀ ਡਾਇਰੈਕਟਰੀਆਂ ਨੂੰ ਮਿਟਾਓ"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "ਫ਼ਾਈਲਾਂ ਇਨਲਾਈਨ ਦਿਖਾਓ"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "ਐਕਸਟੈਂਸ਼ਨਾਂ:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "ਫ਼ਾਈਲ ਸਥਿਤੀ ਦਿਖਾਓ"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  ਫ਼ਾਈਲ: $1\n  ਆਕਾਰ: $2 ਬਾਈਟਾਂ\n   UID: $3\n   GID: $4\nਪਹੁੰਚ: $5\n atime: $6\n mtime: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "ਪਾਥ 'ਤੇ ਟੀਚੇ ਵੱਲ ਇਸ਼ਾਰਾ ਕਰਨ ਵਾਲਾ ਚਿੰਨ੍ਹ ਲਿੰਕ ਬਣਾਓ"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "ਪਾਥਾਂ ਨੂੰ 0 ਬਾਈਟਾਂ 'ਤੇ ਕੱਟੋ"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  ਸਰਵਰ ਐਕਟੈਂਸ਼ਨਾਂ:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "ਮੌਜੂਦਾ ਪ੍ਰੋਟੋਕੋਲ ਵਰਜਨ ਦਿਖਾਓ"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "SFTP ਪ੍ਰੋਟੋਕੋਲ ਵਰਜਨ ਜਾਣਕਾਰੀ:\n  ਸਥਾਨਕ: $1\n  ਸਰਵਰ: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: ਫ਼ਾਈਲ ਦਾ ਅੰਤ"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: ਫ਼ਾਈਲ ਨਹੀਂ ਮਿਲੀ"
+	},
+	"nasftp_error_file_reading": {
+		"message": "$1 ਨੂੰ ਪੜ੍ਹਨਾ ਅਸਫਲ ਰਿਹਾ: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "ਹੱਲ ਨਾ ਕੀਤੀ ਅੰਦਰੂਨੀ ਗੜਬੜ; ਕਿਰਪਾ ਕਰਕੇ ਬੱਗ ਦਰਜ ਕਰੋ: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: ਅਵੈਧ ਨੰਬਰ: $3"
+	},
+	"nasftp_error_message": {
+		"message": "ਗੜਬੜ: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: '$2' ਐਕਸਟੈਂਸ਼ਨ ਉਪਲਬਧ ਨਹੀਂ ਹੈ"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: ਨਿਯਮਿਤ ਫ਼ਾਈਲ ਨਹੀਂ ਹੈ"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: ਲੋੜੀਂਦੇ ਆਰਗੂਮੈਂਟ ਨਹੀਂ ਹਨ"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: ਇਜਾਜ਼ਤ ਨੂੰ ਅਸਵੀਕਾਰ ਕੀਤਾ ਗਿਆ"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: ਬਹੁਤ ਜ਼ਿਆਦਾ ਆਰਗੂਮੈਂਟ"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: ਅਗਿਆਤ ਆਦੇਸ਼"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: ਅਗਿਆਤ ਫਲੈਗ $2"
+	},
+	"nasftp_force_quit": {
+		"message": "ਜ਼ਬਰਦਸਤੀ ਛੱਡੋ"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 ਬਾਈਟਾਂ $2 ਸਕਿੰਟਾਂ ਵਿੱਚ ਟ੍ਰਾਂਸਫ਼ਰ ਕੀਤੀਆਂ ਗਈਆਂ ($3/ਸਕਿੰਟ)"
+	},
+	"nassh_options_error": {
+		"message": "ਅਗਿਆਤ ਵਿਕਲਪ: $1"
+	},
+	"nassh_product_name": {
+		"message": "Secure Shell"
+	},
+	"new_window_menu_label": {
+		"message": "ਨਵੀਂ ਵਿੰਡੋ"
+	},
+	"ok_button_label": {
+		"message": "ਠੀਕ ਹੈ"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> ਕਿਸੇ ਰੱਖਿਅਤ ਕੀਤੇ ਪ੍ਰੋਫਾਈਲ ਜਾਂ ਨਵੇਂ ssh ਸਿਸਟਮ ਨਾਲ ਕਨੈਕਟ ਕਰੋ"
+	},
+	"open_as_window_tip": {
+		"message": "[ਪੇਸ਼ਾਵਰ ਨੁਕਤਾ] Ctrl-W ਨੂੰ ਤੁਹਾਡਾ ਟਰਮੀਨਲ ਬੰਦ ਕਰਨ ਤੋਂ ਰੋਕਣ ਲਈ 'ਵਿੰਡੋ ਵਜੋਂ ਖੋਲ੍ਹੋ' ਜਾਂ 'ਪੂਰੀ-ਸਕ੍ਰੀਨ' ਵਰਤੋ!\n[ਪੇਸ਼ਾਵਰ ਨੁਕਤਾ] ਵਧੇਰੇ ਜਾਣਕਾਰੀ ਲਈ $1 ਦੇਖੋ।"
+	},
+	"plugin_loading": {
+		"message": "NaCl ਪਲੱਗਇਨ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ..."
+	},
+	"plugin_loading_complete": {
+		"message": " ਹੋ ਗਿਆ।"
+	},
+	"plugin_loading_failed": {
+		"message": " ਅਸਫਲ ਰਿਹਾ! :("
+	},
+	"popup_connect_tooltip": {
+		"message": "ਨਵੇਂ ਟੈਬ ਵਿੱਚ ਖੋਲ੍ਹਣ ਲਈ Ctrl ਦਬਾਈ ਰੱਖੋ।"
+	},
+	"preferences_header_ssh_files": {
+		"message": "SSH ਫ਼ਾਈਲਾਂ"
+	},
+	"preferences_header_terminal": {
+		"message": "ਟਰਮੀਨਲ ਸੈਟਿੰਗਾਂ"
+	},
+	"preferences_header_uri": {
+		"message": "URI ਹੈਂਡਲਰ"
+	},
+	"preferences_reset": {
+		"message": "ਸਾਰੀਆਂ ਤਰਜੀਹਾਂ ਨੂੰ ਰੀਸੈੱਟ ਕੀਤਾ ਗਿਆ!"
+	},
+	"protocol_register_button": {
+		"message": "ਪ੍ਰੋਟੋਕੋਲ ਹੈਂਡਲਰ ਰਜਿਸਟਰ ਕਰੋ"
+	},
+	"protocol_register_explain": {
+		"message": "ਹੇਠਾਂ ਦਿੱਤਾ ਬਟਨ ਸਾਡੇ ਵੱਲੋਂ ਸਮਰਥਿਤ ਕੀਤੇ ਜਾਂਦੇ ਸਾਰੇ ਪ੍ਰੋਟੋਕੋਲਾਂ ਲਈ ਹੈਂਡਲਰਾਂ ਨੂੰ ਰਜਿਸਟਰ ਕਰੇਗਾ। ਉਦਾਹਰਨ ਦੇ ਤੌਰ 'ਤੇ, ਇਹ ਸਾਨੂੰ ਸਿੱਧਾ ssh:// ਲਿੰਕਾਂ ਨੂੰ ਵਰਤਣ ਦਿੰਦਾ ਹੈ। ਹਰੇਕ ਪ੍ਰੋਟੋਕੋਲ ਲਈ ਬ੍ਰਾਊਜ਼ਰ ਵੱਲੋਂ ਉਤਪ੍ਰੇਰਕ ਦਿਖਾਇਆ ਜਾਵੇਗਾ, ਇਸ ਲਈ ਕਿਰਪਾ ਕਰਕੇ ਦਿਖਾਏ ਜਾਣ 'ਤੇ ਹਰੇਕ ਨੂੰ ਤਸਦੀਕ/ਸਵੀਕਾਰ ਕਰੋ। ਜੇ ਕੋਈ ਉਤਪ੍ਰੇਰਕ ਨਹੀਂ ਦਿਖਾਇਆ ਜਾਂਦਾ, ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਸਮੱਸਿਆ-ਨਿਪਟਾਰੇ ਸੰਬੰਧੀ ਨੁਕਤਿਆਂ ਲਈ ਅਗਲਾ ਸੈਕਸ਼ਨ ਦੇਖੋ।"
+	},
+	"protocol_register_explain_settings": {
+		"message": "ਜੇ ਸਾਡੇ ਕੋਲ ਪਹਿਲਾਂ ਤੋਂ ਰਜਿਸਟਰ ਕੀਤੇ ਹੈਂਡਲਰ ਹਨ, ਜਾਂ ਰਜਿਸਟਰ ਕਰਨ ਦੀਆਂ ਪਿਛਲੀਆਂ ਕੋਸ਼ਿਸ਼ਾਂ ਅਸਵੀਕਾਰ ਕਰ ਦਿੱਤੀਆਂ ਗਈਆਂ ਸਨ, ਤਾਂ ਅਗਲਾ ਕੋਈ ਉਤਪ੍ਰੇਰਕ ਨਹੀਂ ਦਿਖਾਇਆ ਜਾਵੇਗਾ। ਕਿਰਪਾ ਕਰਕੇ ਹੇਠਾਂ ਵਿੰਡੋ ਖੋਲ੍ਹੋ, ਫਿਰ ssh/sftp/etc... ਸੈਕਸ਼ਨਾਂ ਵਿੱਚ ਰਜਿਸਟਰ ਕੀਤੇ ਹੈਂਡਲਰ ਸੈਟਿੰਗਾਂ ਦੀ ਜਾਂਚ ਕਰੋ। ਜੇ ਇਹ ਪ੍ਰੋਗਰਾਮ ਬਲਾਕ ਕੀਤਾ ਹੋਇਆ ਹੈ, ਤਾਂ ਤੁਸੀਂ ਉਹਨਾਂ ਸੈਟਿੰਗਾਂ ਨੂੰ ਮਿਟਾ ਸਕਦੇ ਹੋ ਜੋ ਤੁਹਾਨੂੰ ਰਜਿਸਟਰ ਕਰਨ ਦੀ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰਨ ਦੀਆਂ ਇਜਾਜ਼ਤਾਂ ਦੇਣਗੀਆਂ। ਜੇ ਇਹ ਪ੍ਰੋਗਰਾਮ ਪਹਿਲਾਂ ਤੋਂ ਹੀ ਰਜਿਸਟਰ ਹੈ, ਪਰ ਇਸਨੂੰ ਪੂਰਵ-ਨਿਰਧਾਰਤ ਹੈਂਡਲਰ ਵਜੋਂ ਸੈੱਟ ਨਹੀਂ ਕੀਤਾ ਹੋਇਆ, ਤਾਂ ਵੀ ਤੁਸੀਂ ਪੂਰਵ-ਨਿਰਧਾਰਤ ਹੈਂਡਲਰ ਬਦਲ ਸਕਦੇ ਹੋ।"
+	},
+	"protocol_register_options_link": {
+		"message": "ਪ੍ਰੋਟੋਕੋਲ ਰਜਿਸਟਰ"
+	},
+	"protocol_register_settings_button": {
+		"message": "ਰਜਿਸਟਰ ਕੀਤੀਆਂ ਹੈਡਲਰ ਸੈਟਿੰਗਾਂ ਨੂੰ ਖੋਲ੍ਹੋ"
+	},
+	"protocol_register_title": {
+		"message": "Secure Shell ਪ੍ਰੋਟੋਕੋਲ ਹੈਂਡਲਰ ਰਜਿਸਟਰੇਸ਼ਨ ਮਦਦਗਾਰ"
+	},
+	"read_size_label": {
+		"message": "ਪੜ੍ਹਨ ਲਈ ਆਕਾਰ (KiB)"
+	},
+	"reconnect_message": {
+		"message": "ਕੀ ਮੁੜ-ਕਨੈਕਟ (R) ਕਰਨਾ ਹੈ, ਹੋਰ ਕਨੈਕਸ਼ਨ ਚੁਣਨਾ (C) ਹੈ ਜਾਂ ਬਾਹਰ ਨਿਕਲਨਾ (X) ਹੈ?"
+	},
+	"relay_retry": {
+		"message": "ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ..."
+	},
+	"request_pin_prompt": {
+		"message": "'$2 ($3)' 'ਤੇ ਕੁੰਜੀ $1 ਅਣਲਾਕ ਕਰਨ ਲਈ ਪਿੰਨ ਦਾਖਲ ਕਰੋ ($4 ਕੋਸ਼ਿਸ਼ਾਂ ਬਾਕੀ):"
+	},
+	"restore_prefs": {
+		"message": "ਬੈਕਅੱਪ ਨੂੰ ਮੁੜ-ਬਹਾਲ ਕਰੋ"
+	},
+	"save_label": {
+		"message": "ਰੱਖਿਅਤ ਕਰੋ"
+	},
+	"send_feedback_label": {
+		"message": "ਵਿਚਾਰ ਭੇਜੋ"
+	},
+	"shortcut_list_aria_label": {
+		"message": "ਰੱਖਿਅਤ ਕੀਤੇ ਕਨੈਕਸ਼ਨ"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "ਕਿਰਪਾ ਕਰਕੇ ਸਮਾਰਟ ਕਾਰਡ ਕਨੈਕਟਰ ਐਪ ਸਥਾਪਤ ਕਰੋ: $1"
+	},
+	"ssh_argstr_label": {
+		"message": "SSH ਆਰਗੂਮੈਂਟ"
+	},
+	"stream_open_error": {
+		"message": "ਸਟ੍ਰੀਮ $1 ਨੂੰ ਖੋਲ੍ਹਣਾ ਅਸਫਲ ਰਿਹਾ: $2"
+	},
+	"terminal_clear_menu_label": {
+		"message": "ਟਰਮੀਨਲ ਕਲੀਅਰ"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" ਉਪਲਬਧ ਨਹੀਂ ਹੈ"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI ਰੰਗ"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "ਐਂਟੀ-ਏਲੀਅਸ"
+	},
+	"terminal_name_pref_bell": {
+		"message": "ਘੰਟੀ"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "ਜਗਮਗਾਹਟ"
+	},
+	"terminal_name_pref_color": {
+		"message": "ਰੰਗ"
+	},
+	"terminal_name_pref_font": {
+		"message": "ਫੌਂਟ"
+	},
+	"terminal_name_pref_image": {
+		"message": "ਚਿੱਤਰ"
+	},
+	"terminal_name_pref_shape": {
+		"message": "ਆਕ੍ਰਿਤੀ"
+	},
+	"terminal_name_pref_visible": {
+		"message": "ਦਿਖਣਯੋਗ"
+	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "AltGr ਪਤਾ ਲਗਾਉਣ ਵਾਲੇ ਅੰਦਾਜ਼ੇ ਨੂੰ ਚੁਣੋ।\n\n'ਸਵੈਚਲਿਤ': navigator.language ਦੇ ਆਧਾਰ 'ਤੇ ਸਵੈ ਪਤਾ ਲਗਾਓ:\n      'en-us' => 'ਰੱਦ ਕਰੋ', ਨਹੀਂ ਤਾਂ => 'right-alt'\n'ਰੱਦ ਕਰੋ': ਕਿਸੇ ਵੀ ਤਰ੍ਹਾਂ ਦੀ AltGr ਬਰਾਬਰੀ ਨੂੰ ਰੱਦ ਕਰੋ।\n'ctrl-alt': Ctrl+Alt ਦਾ ਮਤਲਬ AltGr ਮੰਨੋ।\n'left-alt': ਖੱਬੇ Alt ਦਾ ਮਤਲਬ AltGr ਮੰਨੋ।\n'right-alt': ਸੱਜੇ Alt ਦਾ ਮਤਲਬ AltGr ਮੰਨੋ।"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "ਪੂਰਵ-ਨਿਰਧਾਰਤ ਪਟਲ ਲਈ ਰੰਗ ਸੈੱਟ ਕਰੋ।"
+	},
+	"terminal_pref_bell": {
+		"message": "ਸੁਣਨਯੋਗ ਟਰਮੀਨਲ ਘੰਟੀ।"
+	},
+	"terminal_preview_label": {
+		"message": "ਪੂਰਵ-ਝਲਕ"
+	},
+	"terminal_profile_label": {
+		"message": "ਮੌਜੂਦਾ ਪ੍ਰੋਫਾਈਲ"
+	},
+	"terminal_reset_menu_label": {
+		"message": "ਟਰਮੀਨਲ ਰੀਸੈੱਟ"
+	},
+	"terminal_settings_about_label": {
+		"message": "ਇਸ ਬਾਰੇ"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ URL. 'http://' or 'https://' ਨਾਲ ਸ਼ੁਰੂ ਹੋਣ ਲਾਜ਼ਮੀ ਹੈ। ਕੋਈ ਚਿੱਤਰ ਨਾ ਹੋਣ 'ਤੇ ਇਸਨੂੰ ਖਾਲੀ ਛੱਡੋ।\n\nਉਦਾਹਰਨ ਦੇ ਤੌਰ 'ਤੇ:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "ਸਵੈਚਲਿਤ"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "ਬੰਦ ਕਰੋ"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "ਬੀਮ"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "ਬਲਾਕ ਕਰੋ"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "ਅੰਡਰਲਾਈਨ"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "ਕੀ ਤੁਸੀਂ ਪੱਕਾ ਥੀਮ ਨੂੰ ਇਸ ਦੇ ਪੂਰਵ-ਨਿਰਧਾਰਤਾਂ 'ਤੇ ਸੈੱਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "ਥੀਮ ਨੂੰ ਰੀਸੈੱਟ ਕਰੋ"
+	},
+	"terminal_settings_reset_label": {
+		"message": "ਰੀਸੈੱਟ ਕਰੋ"
+	},
+	"terminal_theme_classic_label": {
+		"message": "ਕਲਾਸਿਕ"
+	},
+	"terminal_theme_dark_label": {
+		"message": "ਗੂੜ੍ਹਾ"
+	},
+	"terminal_theme_haze_label": {
+		"message": "ਹੇਜ਼"
+	},
+	"terminal_theme_light_label": {
+		"message": "ਹਲਕਾ"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized ਗੂੜ੍ਹਾ"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized ਹਲਕਾ"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "ਰੰਗ 0: ਕਾਲਾ"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "ਰੰਗ 1: ਲਾਲ"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "ਰੰਗ 10: ਚਮਕੀਲਾ ਹਰਾ"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "ਰੰਗ 11: ਚਮਕੀਲਾ ਪੀਲਾ"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "ਰੰਗ 12: ਚਮਕੀਲਾ ਨੀਲਾ"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "ਰੰਗ 13: ਚਮਕੀਲਾ ਮਜੈਂਟਾ"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "ਰੰਗ 14: ਚਮਕੀਲਾ ਹਰਾ ਨੀਲਾ"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "ਰੰਗ 15: ਚਮਕੀਲਾ ਸਫ਼ੈਦ"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "ਰੰਗ 2: ਹਰਾ"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "ਰੰਗ 3: ਪੀਲਾ"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "ਰੰਗ 4: ਨੀਲਾ"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "ਰੰਗ 5: ਮਜੈਂਟਾ"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "ਰੰਗ 6: ਹਰਾ ਨੀਲਾ"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "ਰੰਗ 7: ਸਫ਼ੈਦ"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "ਰੰਗ 8: ਚਮਕੀਲਾ ਕਾਲਾ"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "ਰੰਗ 9: ਚਮਕੀਲਾ ਲਾਲ"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "ਦਿੱਖ"
+	},
+	"terminal_title_pref_background": {
+		"message": "ਬੈਕਗ੍ਰਾਊਂਡ"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "ਕਾਰਵਾਈ"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "ਕਰਸਰ"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "ਕੀ-ਬੋਰਡ"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "ਕੀ-ਬੋਰਡ ਅਤੇ ਮਾਊਸ"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "ਮਾਊਸ"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "ਸਕ੍ਰੋਲ ਬਾਰ"
+	},
+	"terminal_title_pref_text": {
+		"message": "ਲਿਖਤ"
+	},
+	"terminal_title_settings": {
+		"message": "ਸੈਟਿੰਗਾਂ"
+	},
+	"terminal_title_theme": {
+		"message": "ਥੀਮ"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "ਇੰਟਰਨੈੱਟ ਨਾਲ ਕਨੈਕਟ ਕਰ ਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+	},
+	"tip_1": {
+		"message": "ਲਿੰਕਾਂ 'ਤੇ ਕਲਿੱਕ ਕਰਕੇ ਉਹਨਾਂ ਨੂੰ ਖੋਲ੍ਹਣ ਦੌਰਾਨ ਤੁਸੀਂ Ctrl (macOS 'ਤੇ Cmd) ਦਬਾ ਕੇ ਰੱਖ ਸਕਦੇ ਹੋ!"
+	},
+	"tip_10": {
+		"message": "ਕਿਸੇ ਵਿੰਡੋ ਵਿੱਚ ਚਲਾਉਣ ਵੇਲੇ Ctrl-Shift-N ਹੋਰ ਸੈਸ਼ਨ ਖੋਲ੍ਹ ਸਕਦਾ ਹੈ।"
+	},
+	"tip_11": {
+		"message": "ਇੱਥੇ ਤੁਸੀਂ ਕੁੰਜੀਆਂ ਨੂੰ ਮੁੜ-ਨਿਰਧਾਰਤ/ਸ਼ਾਰਟਕੱਟ ਬਣਾ ਸਕਦੇ ਹੋ: https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "ssh ਪ੍ਰਮਾਣੀਕਰਨ ਲਈ Yubikeys ਅਤੇ ਹੋਰ ਸਮਾਰਟ ਕਾਰਡ ਵਰਤੋ: https://goo.gl/Hu2o3v"
+	},
+	"tip_13": {
+		"message": "ਚਿੱਤਰ ਇਨਲਾਈਨ ਦਿਖਾਓ: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "ਸੱਜਾ-ਕਲਿੱਕ ਕਰਨ ਦੌਰਾਨ Ctrl (macOS 'ਤੇ Cmd) ਨੂੰ ਦਬਾ ਕੇ ਰੱਖਣ ਨਾਲ ਸੰਦਰਭੀ ਮੀਨੂ ਸਾਹਮਣੇ ਆਉਂਦਾ ਹੈ।"
+	},
+	"tip_2": {
+		"message": "hterm-notify ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋਏ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਸੂਚਨਾਵਾਂ ਦਿਖਾਓ: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "'ssh <profile name>' ਟਾਈਪ ਕਰਕੇ ਓਮਨੀਬਾਕਸ ਤੋਂ ਕਨੈਕਟ ਕਰੋ: https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS SFTP ਰਾਹੀਂ ਫ਼ਾਈਲ ਸਿਸਟਮਾਂ ਨੂੰ ਮਾਊਂਟ ਕਰ ਸਕਦਾ ਹੈ ਅਤੇ 'ਫ਼ਾਈਲਾਂ' ਐਪ ਰਾਹੀਂ ਬ੍ਰਾਊਜ਼ ਕਰ ਸਕਦਾ ਹੈ। 'ਕਨੈਕਟ ਕਰੋ' ਦੀ ਬਜਾਏ 'SFTP ਮਾਊਂਟ ਕਰੋ' ਵਰਤੋ।"
+	},
+	"tip_5": {
+		"message": "ਵੈੱਬ ਪੰਨਿਆਂ ਵਿੱਚ ssh:// ਲਿੰਕ ਵਰਤ ਕੇ ਕਨੈਕਟ ਕਰੋ, ਜਾਂ ਕੋਈ ਬੁੱਕਮਾਰਕ ਰੱਖਿਅਤ ਕਰੋ: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "ਮੂਲ 16 ਰੰਗਾਂ ਅਤੇ 256 ਰੰਗਾਂ ਅਤੇ ਪੂਰੇ 24-ਬਿਟ ਰੰਗਾਂ ਨੂੰ ਵਰਤ ਕੇ ਆਪਣੇ ਆਊਟਪੁੱਟ/ਉਤਪ੍ਰੇਰਕਾਂ ਨੂੰ ਰੰਗੋ: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "OSC-52: https://goo.gl/XSnyLo ਨੂੰ ਵਰਤਦੇ ਹੋਏ emacs/vim/etc... ਤੋਂ ਆਪਣੇ ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਕਾਪੀ ਕਰੋ"
+	},
+	"tip_8": {
+		"message": "chromium-hterm@chromium.org ਰਾਹੀਂ ਸਾਥੀ hterm/Secure Shell ਵਰਤੋਕਾਰਾਂ ਨਾਲ ਚੈਟ ਕਰੋ: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "ਕੋਈ ਬੱਗ ਮਿਲਿਆ? ਕਿਸੇ ਨਵੀਂ ਵਿਸ਼ੇਸ਼ਤਾ ਲਈ ਬੇਨਤੀ ਕਰਨੀ ਹੈ? ਸਾਨੂੰ ਇੱਥੇ ਦੱਸੋ: https://goo.gl/vb94JY"
+	},
+	"unexpected_error": {
+		"message": "ਕੋਈ ਅਣਕਿਆਸੀ ਗੜਬੜ ਹੋਈ, ਕਿਰਪਾ ਕਰਕੇ ਹੋਰ ਵੇਰਵਿਆਂ ਲਈ JavaScript ਕੰਸੋਲ ਵੇਖੋ।"
+	},
+	"unknown_ssh_client_version": {
+		"message": "ਅਗਿਆਤ SSH ਵਰਜਨ: $1"
+	},
+	"unmount_button_label": {
+		"message": "SFTP ਨੂੰ ਅਣ-ਮਾਊਂਟ ਕਰੋ"
+	},
+	"welcome_changelog": {
+		"message": "ChangeLog/ਰਿਲੀਜ਼ ਨੋਟ-ਕਥਨ: $1"
+	},
+	"welcome_faq": {
+		"message": "ਅਕਸਰ ਪੁੱਛੇ ਜਾਣ ਵਾਲੇ ਸਵਾਲਾਂ ਦੇ ਜਵਾਬ ਦਿਓ: $1 (ਖੋਲ੍ਹਣ ਲਈ ਲਿੰਕਾਂ 'ਤੇ Ctrl+ਕਲਿੱਕ ਕਰੋ)"
+	},
+	"welcome_release_highlights": {
+		"message": "$1 ਤੋਂ ਬਾਅਦ ਵੱਡੀਆਂ ਤਬਦੀਲੀਆਂ:"
+	},
+	"welcome_tip_of_day": {
+		"message": "ਬੇਤਰਤੀਬ ਪੇਸ਼ੇਵਰ ਨੁਕਤਾ #$1: $2"
+	},
+	"welcome_version": {
+		"message": "$1 ਦੇ ਵਰਜਨ $2 ਵਿੱਚ ਜੀ ਆਇਆਂ ਨੂੰ।"
+	},
+	"write_size_label": {
+		"message": "ਲਿਖਤ ਆਕਾਰ (KiB)"
+	},
+	"zoom_warning": {
+		"message": "ਕਿਰਪਾ ਕਰਕੇ Chrome ਮੀਨੂ->ਜ਼ੂਮ 'ਤੇ ਜਾ ਕੇ 100% ਤੱਕ ਜ਼ੂਮ ਕਰੋ"
+	}
+}

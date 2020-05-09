@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Terima encoding"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Ukuran padding layar"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Scroll ke bawah setelah tombol"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Penghentian pemilihan otomatis (ke kanan)"
 	},
+	"hterm_options_button_label": {
+		"message": "Opsi"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Gambar Inline"
 	},
@@ -363,7 +369,7 @@
 		"message": "Jika ditetapkan, pemetaan ulang Chrome OS Alt+Backspace->Delete akan diurungkan, sehingga Alt+Backspace memang Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Memilih heuristik deteksi AltGr.\n\n'null': Mendeteksi otomatis berdasarkan navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Menonaktifkan semua proses munging yang terkait dengan AltGr.\n'ctrl-alt': Mengasumsikan Ctrl+Alt berarti AltGr.\n'left-alt': Mengasumsikan Alt kiri berarti AltGr.\n'right-alt': Mengasumsikan Alt kanan berarti AltGr."
+		"message": "Memilih heuristik deteksi AltGr.\n\n'null': Mendeteksi otomatis berdasarkan navigator.language:\n      'en-us' => 'none', lainnya => 'right-alt'\n'none': Menonaktifkan semua emulasi AltGr.\n'ctrl-alt': Mengasumsikan Ctrl+Alt berarti AltGr.\n'left-alt': Mengasumsikan Alt kiri berarti AltGr.\n'right-alt': Mengasumsikan Alt kanan berarti AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Menentukan apakah tombol Alt akan berfungsi sebagai tombol Meta atau sebagai tombol Alt yang tersendiri."
@@ -426,7 +432,7 @@
 		"message": "Bentuk kursor teks yang terlihat. Ini dapat diubah pada waktu proses melalui urutan escape terminal."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "Jika true, bel terminal di latar belakang akan membuat Notifikasi Web. https://www.w3.org/TR/notifications/\n\nPerlu izin dari pengguna untuk menampilkan notifikasi. Jika opsi ini disetel ke true, hterm akan berupaya meminta izin pengguna jika perlu. Browser mungkin tidak menampilkan permintaan izin ini jika tidak dipicu oleh tindakan pengguna.\n\nEkstensi Chrome dengan izin \"notifikasi\" memiliki izin untuk menampilkan notifikasi."
+		"message": "Jika benar, bel terminal di latar belakang akan membuat Notifikasi Web. https://www.w3.org/TR/notifications/\n\nPerlu izin dari pengguna untuk menampilkan notifikasi. Jika opsi ini disetel ke benar, hterm akan berupaya meminta izin pengguna jika perlu. Browser mungkin tidak menampilkan permintaan izin ini jika tidak dipicu oleh tindakan pengguna.\n\nEkstensi Chrome dengan izin \"notifikasi\" memiliki izin untuk menampilkan notifikasi."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Menentukan apakah Karakter ambigu Asia Timur akan memiliki lebar dua kolom."
@@ -474,7 +480,7 @@
 		"message": "Warna latar depan untuk teks tanpa atribut warna lainnya."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Menentukan apakah akan otomatis menyembunyikan kursor mouse saat mengetik. Secara default, mendeteksi otomatis apakah platform/OS menangani ini.\n\nCatatan: Beberapa sistem operasi dapat mengganti setelan ini sehingga Anda mungkin tidak selalu dapat menonaktifkannya."
+		"message": "Menentukan apakah akan otomatis menyembunyikan kursor mouse saat mengetik. Secara default, mendeteksi otomatis apakah platform/OS akan menangani ini.\n\nCatatan: Sistem operasi Anda dapat mengganti setelan ini sehingga Anda mungkin tidak selalu dapat menonaktifkannya."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Jika benar, Home/End akan mengontrol scroll bar terminal dan Shift+Home/Shift+End akan dikirim ke host jarak jauh. Jika salah, Home/End akan dikirim ke host jarak jauh dan Shift+Home/Shift+End akan men-scroll."
@@ -522,13 +528,16 @@
 		"message": "Menentukan apakah Meta+1-9 diteruskan ke browser.\n\nIni berguna saat menjalankan hterm di tab browser, agar Anda tidak kehilangan pintasan keyboard \"beralih ke tab\" di Chrome. Saat tidak berjalan di tab, sebaiknya kirimkan tombol ini ke host agar dapat digunakan di vim atau emacs.\n\nJika benar, Meta+1-9 akan ditangani oleh browser. Jika salah, Meta+1-9 akan dikirimkan ke host. Jika null, deteksi otomatis berdasarkan platform browser dan jenis jendela."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Menentukan apakah Meta+V diteruskan ke host."
+		"message": "Apakah Meta+V akan diteruskan ke browser.\n\nDi beberapa sistem, ini digunakan untuk menempel konten."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Jika benar, teks yang ditarik lalu dilepas akan ditempel ke terminal.\nJika salah, teks yang dilepas akan diabaikan."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Menyetel encoding yang diharapkan untuk data yang diterima dari host.\nJika encoding tidak cocok, bug visual kemungkinan akan ditemukan.\n\nNilai yang valid adalah 'utf-8' dan 'raw'."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Ukuran padding dalam piksel di sekeliling batas layar terminal.\n\nIni mengontrol ukuran batas di sekeliling layar terminal sehingga pengguna dapat menambahkan beberapa padding yang mudah dilihat ke tepi layar."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Menentukan apakah akan men-scroll ke bawah saat tombol apa pun diketuk."
@@ -537,10 +546,10 @@
 		"message": "Menentukan apakah akan melakukan scroll ke bawah pada output terminal."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Saat menggunakan buffering layar alternatif, dan DECCKM (Tombol Kursor Aplikasi) aktif, peristiwa scroll roda mouse akan meniru tombol panah.\n\nIni dapat dinonaktifkan sementara dengan menahan tombol Shift.\n\nIni sering muncul saat menggunakan pager (lebih sedikit) atau membaca halaman manual atau editor teks (vi/nano) atau menggunakan screen/tmux."
+		"message": "Saat menggunakan buffering layar alternatif, dan DECCKM (Tombol Kursor Aplikasi) aktif, peristiwa roda scroll mouse akan mengemulasi tombol panah.\n\nIni dapat dinonaktifkan sementara dengan menahan tombol Shift.\n\nIni sering muncul saat menggunakan pager (less) atau membaca halaman manual atau editor teks (vi/nano) atau menggunakan screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Pengali untuk aktivitas roda scoll saat diukur dalam piksel.\n\nMengubah seberapa cepat halaman di-scroll."
+		"message": "Pengali untuk peristiwa roda scoll mouse saat diukur dalam piksel.\n\nMengubah seberapa cepat halaman di-scroll."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Mode scroll bar vertikal."
@@ -869,9 +878,6 @@
 	"new_window_menu_label": {
 		"message": "Jendela Baru"
 	},
-	"notify_copy": {
-		"message": "Pilihan Disalin"
-	},
 	"ok_button_label": {
 		"message": "Oke"
 	},
@@ -880,9 +886,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Tips Pro] Gunakan 'Buka sebagai Jendela' atau 'Layar penuh' agar Ctrl+W tidak menutup terminal.\n[Tips Pro] Lihat $1 untuk informasi selengkapnya."
-	},
-	"options_button_label": {
-		"message": "Opsi"
 	},
 	"plugin_loading": {
 		"message": "Memuat plugin NaCl ..."
@@ -947,6 +950,9 @@
 	"save_label": {
 		"message": "Simpan"
 	},
+	"send_feedback_label": {
+		"message": "Kirim Masukan"
+	},
 	"shortcut_list_aria_label": {
 		"message": "koneksi yang tersimpan"
 	},
@@ -961,6 +967,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Penghapusan Terminal"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" tidak tersedia"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Warna ANSI"
@@ -983,6 +992,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Terlihat"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Memilih heuristik deteksi AltGr.\n\n'Otomatis': Mendeteksi otomatis berdasarkan navigator.language:\n      'en-us' => 'Nonaktif', lainnya => 'right-alt'\n'Nonaktif': Menonaktifkan semua emulasi AltGr.\n'ctrl-alt': Mengasumsikan Ctrl+Alt berarti AltGr.\n'left-alt': Mengasumsikan Alt kiri berarti AltGr.\n'right-alt': Mengasumsikan Alt kanan berarti AltGr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Menetapkan warna untuk palet default."
 	},
@@ -997,6 +1009,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Reset Terminal"
+	},
+	"terminal_settings_about_label": {
+		"message": "Tentang"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "URL gambar latar. Harus diawali dengan 'http://' atau 'https://'. Biarkan kosong jika tidak ada gambar.\n\nMisalnya:\n  https://goo.gl/anedTK"
@@ -1102,6 +1117,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Tema"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Hubungkan ke Internet, lalu coba lagi."
 	},
 	"tip_1": {
 		"message": "Anda dapat menekan tombol Ctrl (Cmd di macOS) sambil mengklik link untuk membukanya."

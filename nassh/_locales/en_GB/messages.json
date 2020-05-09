@@ -108,7 +108,7 @@
 		"message": "If set, undoes the Chrome OS Alt+Backspace->Delete remap, so that Alt+Backspace is indeed Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Select an AltGr detection heuristic.\n\n'null': Autodetect based on navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Disable any AltGr-related munging.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
+		"message": "Select an AltGr detection heuristic.\n\n'null': Auto-detect based on navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Disable any AltGr emulation.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
 	},
 	"hterm_pref_background_color": {
 		"message": "The background colour for text with no other colour attributes."
@@ -129,7 +129,7 @@
 		"message": "The colour of the visible text cursor."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "If true, terminal bells in the background will create a Web Notification. https://www.w3.org/TR/notifications/\n\nDisplaying notifications requires permission from the user. When this option is set to true, hterm will attempt to ask the user for permission if necessary. Browsers may not show this permission request if it was not triggered by a user action.\n\nChrome extensions with the 'notifications' permission have permission to display notifications."
+		"message": "If true, terminal bells in the background will create a web notification. https://www.w3.org/TR/notifications/\n\nDisplaying notifications requires permission from the user. When this option is set to true, hterm will attempt to ask the user for permission if necessary. Browsers might not show this permission request if it was not triggered by a user action.\n\nChrome extensions with the 'notifications' permission have permission to display notifications."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Whether East Asian Ambiguous characters have two-column width."
@@ -147,7 +147,7 @@
 		"message": "The foreground colour for text with no other colour attributes."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Whether to automatically hide the mouse cursor when typing. By default, auto-detect whether the platform/OS handles this.\n\nNote: Some operating systems may override this setting and thus you might not always be able to disable it."
+		"message": "Whether to automatically hide the mouse cursor when typing. By default, auto-detect whether the platform/OS handles this.\n\nNote: Your operating system might override this setting and thus you might not always be able to disable it."
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Whether common OS keyboard bindings should be respected instead of always capturing for HTerm's own use."
@@ -182,8 +182,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "If true, drag and dropped text will paste into terminal.\nIf false, dropped text will be ignored."
 	},
+	"hterm_pref_screen_padding_size": {
+		"message": "The padding size in pixels around the border of the terminal screen.\n\nThis controls the size of the border around the terminal screen so that the user can add some visible padding to the edges of the screen."
+	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "When using the alternative screen buffer, and DECCKM (Application Cursor Keys) is active, mouse wheel scroll events will emulate arrow keys.\n\nIt can be temporarily disabled by holding the Shift key.\n\nThis frequently comes up when using pagers (less), reading man pages or text editors (vi/nano) or using screen/tmux."
+		"message": "When using the alternative screen buffer, and DECCKM (application cursor keys) is active, mouse scroll wheel events will emulate arrow keys.\n\nIt can be temporarily disabled by holding the Shift key.\n\nThis frequently comes up when using pagers (less) or reading man pages or text editors (vi/nano) or using screen/tmux."
 	},
 	"hterm_pref_use_default_window_copy": {
 		"message": "Whether to use the default browser/OS's copy behaviour.\n\nAllow the browser/OS to handle the copy event directly which might improve compatibility with some systems (where copying doesn't work at all), but makes the text selection less robust.\n\nFor example, long lines that were automatically line wrapped will be copied with the newlines still in them."
@@ -230,9 +233,6 @@
 	"new_window_menu_label": {
 		"message": "New window"
 	},
-	"notify_copy": {
-		"message": "Selection copied"
-	},
 	"open_as_window_tip": {
 		"message": "[Pro Tip] Use 'Open as window' or 'Fullscreen' to prevent Ctrl+W from closing your terminal!\n[Pro Tip] See $1 for more information."
 	},
@@ -258,7 +258,7 @@
 		"message": "Protocol register"
 	},
 	"read_size_label": {
-		"message": "Read size (KB)"
+		"message": "Read size (KiB)"
 	},
 	"reconnect_message": {
 		"message": "(R)econnect, (C)hoose another connection or E(x)it?"
@@ -269,17 +269,26 @@
 	"restore_prefs": {
 		"message": "Restore backup"
 	},
+	"send_feedback_label": {
+		"message": "Send feedback"
+	},
 	"ssh_argstr_label": {
 		"message": "SSH arguments"
 	},
 	"terminal_clear_menu_label": {
 		"message": "Terminal clear"
 	},
+	"terminal_font_unavailable": {
+		"message": "'$1' is not available"
+	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI colours"
 	},
 	"terminal_name_pref_color": {
 		"message": "Colour"
+	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Select an AltGr detection heuristic.\n\n'Auto': Auto-detect based on navigator.language:\n      'en-us' => 'Disable', else => 'right-alt'\n'Disable': Disable any AltGr emulation.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
 	},
 	"terminal_pref_ansi_colors": {
 		"message": "Set colours for the default palette."
@@ -375,7 +384,7 @@
 		"message": "Random pro tip #$1: $2"
 	},
 	"write_size_label": {
-		"message": "Write size (KB)"
+		"message": "Write size (KiB)"
 	},
 	"zoom_warning": {
 		"message": "Please set Chrome menu->Zoom to 100%"

@@ -1,0 +1,1241 @@
+{
+	"already_mounted_message": {
+		"message": "ගොනු පද්ධතිය දැනටමත් නංවා ඇත!"
+	},
+	"backup_prefs": {
+		"message": "උපස්ථය සුරකින්න"
+	},
+	"bad_destination": {
+		"message": "ගමනාන්තය විග්‍රහ කළ නොහැක: $1"
+	},
+	"before_unload": {
+		"message": "මෙම පටිත්ත වැසීම මෙම සැසිය විසන්ධි කරයි."
+	},
+	"cache_pin_prompt": {
+		"message": "මෙම SSH සැසිය සඳහා රහස් අංකය හැඹිලි ගත කරන්නද? (y/N):"
+	},
+	"cancel_button_label": {
+		"message": "අවලංගු කරන්න"
+	},
+	"changelog": {
+		"message": "වෙනස්කම්"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "SSH දන්නා ධාරක හිස් කරන්න"
+	},
+	"clear_label": {
+		"message": "හිස්"
+	},
+	"command_complete": {
+		"message": "$1 විධානය $2 තත්ත්ව කේතය සමඟ ඉවත් විය."
+	},
+	"command_not_supported": {
+		"message": "Chrome හි මෙම අනුවාදයෙන් $1 හට සහය නොදැක්වේ"
+	},
+	"command_startup_failed": {
+		"message": "$1 දියත් කිරීම අසාර්ථක විය: $2"
+	},
+	"connect_button_label": {
+		"message": "සම්බන්ධ කරන්න"
+	},
+	"connect_or_exit_message": {
+		"message": "වෙනත් සබැඳුමක් තෝරන්නද(C) නැතහොත් ඉවත් වන්නද(X)?"
+	},
+	"connecting": {
+		"message": "$1 වෙත සබැඳෙමින්..."
+	},
+	"connection_dialog_name": {
+		"message": "සබැඳුම් සංවාදය"
+	},
+	"console_crosh_options_notice": {
+		"message": "කැප වූ විකල්ප පිටුවත් ඇති බව ඔබ දන්නේද?\nතවදුරටත් 'term_' ඍජුව වෙනස් කිරීමට අවශ්‍ය නැත!\nඑය විවෘත කිරීමට $1 ඔබන්න, නැති නම් ක්ලික් කරන්න:\n$2"
+	},
+	"console_nassh_options_notice": {
+		"message": "කැප වූ විකල්ප පිටුවත් ඇති බව ඔබ දන්නේද?\nතවදුරටත් 'term_' ඍජුව වෙනස් කිරීමට අවශ්‍ය නැත!\n$1"
+	},
+	"delete_button_label": {
+		"message": "මකන්න"
+	},
+	"disconnect_message": {
+		"message": "NaCl පේනු මෘදුකාංගය $1 තත්ත්ව කේතය සමඟ පිටත් විය."
+	},
+	"faq_menu_label": {
+		"message": "නි.අ.ප්‍ර."
+	},
+	"field_argstr_placeholder": {
+		"message": "අමතර විධාන රේඛා විස්තාරක"
+	},
+	"field_description_aria_label": {
+		"message": "විස්තරය"
+	},
+	"field_description_placeholder": {
+		"message": "username@hostname හෝ නිදහස් ආකෘතියේ පාඨය"
+	},
+	"field_hostname_aria_label": {
+		"message": "ධාරක නාමය"
+	},
+	"field_hostname_placeholder": {
+		"message": "ධාරක නාමය"
+	},
+	"field_mount_path_placeholder": {
+		"message": "පෙරනිමි මඟ පරිශීලකයාගේ මුල් නාමාවලිය වෙයි"
+	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH රිලේ සේවාදායක විකල්ප"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH රිලේ සේවාදායක විකල්ප"
+	},
+	"field_port_aria_label": {
+		"message": "තොට"
+	},
+	"field_port_placeholder": {
+		"message": "තොට"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "පෙරනිමි"
+	},
+	"field_username_aria_label": {
+		"message": "පරිශීලක නම"
+	},
+	"field_username_placeholder": {
+		"message": "පරිශීලක නම"
+	},
+	"found_relay": {
+		"message": "පහත රිලේ සේවාදායකය හමු විය: $1"
+	},
+	"get_profile_error": {
+		"message": "දෝෂය: $1 පැතිකඩ පූරණ කළ නොහැකි විය:\n$2"
+	},
+	"hterm_announce_current_screen_header": {
+		"message": "$1% අනුචලන කළා,"
+	},
+	"hterm_button_allow_always": {
+		"message": "සැමවිටම ඉඩ දෙන්න"
+	},
+	"hterm_button_allow_session": {
+		"message": "මෙම සැසියට ඉඩ දෙන්න"
+	},
+	"hterm_button_block": {
+		"message": "අවහිර කරන්න"
+	},
+	"hterm_button_page_down": {
+		"message": "පිටුව පහළට"
+	},
+	"hterm_button_page_up": {
+		"message": "පිටුව ඉහළට"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "$1 මැකීම අසාර්ථකයි"
+	},
+	"hterm_loading_resource_start": {
+		"message": "$1 පූරණ කෙරේ ..."
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "පේළිගත රූප දර්ශනයට ඉඩ දෙන්න"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Backspace යනු Meta+Backspace වේ"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "AltGr යතුරු ප්‍රකාරය"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Alt යතු Meta යතුර ලෙස සලකන්න"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Alt යතුර සංස්කාරක පරිහරණය"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "ඇඟවීම් සීනු ශබ්දය (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "පසුබිම් වර්ණය"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "පසුබිම් රූපය"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "පසුබිම් රූප ස්ථානය"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "පසුබිම් රූප තරම"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Backspace යතුරු හැසිරීම"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "අනුලකුණු සිතියම ප්‍රතික්ෂේප කරයි"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "පාඨ තේරීම ස්වයංක්‍රීයව හිස් කරන්න"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "පිට වීමේදී කවුළුව වසන්න"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "මූලික වර්ණ ඵලකය"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "තේරූ අන්තර්ගතය ස්වයංක්‍රීයව පිටපත් කරන්න"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Ctrl+C පිටපත් කිරීම හැසිරීම"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ctrl++/-/0 විශාලන හැසිරීම"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Ctrl+V ඇලවීම් හැසිරීම"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "කර්සර නිමීලනය"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "කර්සර නිමීලන අනුපාතය"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "පාඨ කර්සර වර්ණය"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "පාඨ කර්සර හැඩය"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "ඇඟවීම් සීනු සඳහා වැඩතල දැනුම්දීම් සාදන්න"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "නැඟෙනහිර ආසියානු බහ්වර්ථ තීර දෙක භාවිත කිරීම"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "UTF-8 නොවන C1 පාලන අනුලකුණුවලට සහය වන්න"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "පාඨ නිමිලනය සබල කරන්න"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "තදකුරු පාඨ හැසිරීම"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "තද අකුරු පාඨය සමඟ දීප්තිමත් වර්ණ භාවිත කරන්න"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "අන්තර්ගත පිටපත් කරන විට දැනුම්දීම් පෙන්වන්න"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "දුරස්ථ පසුරු පුවරු ලිවීම්වලට ඉඩ දෙන්න"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "ප්‍රතිඅනුචලන අන්තරාච නිෂ්කාශනයට ඉඩ දෙන්න (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "පාඨ කර්සර නිමීලනය වෙනස් කිරීමට ඉඩ දෙන්න"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "ප්‍රතිප්‍රමාණ කළ විට පර්යන්ත මාන පෙන්වන්න"
+	},
+	"hterm_name_pref_environment": {
+		"message": "පාරිසරික විචල්‍ය"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "පාඨ අකුරු වර්ග පවුල"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "පාඨ අකුරු තරම"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "පාඨ අකුරු සියුම් කිරීම"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "පාඨ වර්ණය"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "ටයිප් කරන අතරතුර මූසික කර්සරය සඟවන්න"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Home/End යතුර අනුචලන හැසිරීම"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "යතුරු පුවරු බැඳීම්/කෙටිමං"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "පෙරනිමි OS යතුරු පුවරු බැඳීම්/කෙටිමං භාවිත කරන්න"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "මාධ්‍ය යතුරු Fයතුරු වේ"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Meta යතුර සංස්කාරක පරිහරණය"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "මූසික බොත්තම් ඇලවීම"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "මූසික දකුණු ක්ලික් කිරීම් අන්තර්ගතය අලවයි"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "පිටුව ඉහළට/පහළට යතුර අනුචලන හැසිරීම"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Alt+1..9 පටිති හැසිරීම මාරු කරන්න"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Ctrl+N නව කවුළු හැසිරීම"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Ctrl+1..9 පටිති හැසිරීම මාරු කරන්න"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ctrl+T නව පටිත්ත හැසිරීම"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab පටිති හැසිරීම මාරු කරන්න"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Ctrl+W පටිති හැසිරීම වසන්න"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Meta+1..9 පටිති හැසිරීම මාරු කරන්න"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Meta+V ඇලවීම් හැසිරීම"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "ඇද දැමීමට ඇලවීමට ඉඩ දෙන්න"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "කේතනය ලබා ගන්න"
+	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "පිරවුමේ තරම"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "යතුර එබීමෙන් පසු පහළට අනුචලන කරන්න"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "නව ප්‍රතිදානයට පසුව පහළට අනුචලන කරන්න"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "අනුචලන රෝදය සමඟ ඊතල යතුරු අනුකරණ කරන්න"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "මූසික අනුචලන රෝද ගුණකය"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "අනුචලන තීරු දෘශ්‍යතාව"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Shift+Insert අලවන්න"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "පර්යන්ත කේතනය"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "බ්‍රවුසරයට පාඨ පිටපත් කිරීම පරිහරණයට ඉඩ දෙන්න"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "අභිරුචි CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "අභිරුචි CSS (පේළිගත පාඨය)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "ස්වයංක්‍රීය තේරීම නැවැත්වීම (වමට)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "වචන කැඩීමේ අනුලකුණු"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "ස්වයංක්‍රීය තේරීම නැවැත්වීම (දකුණට)"
+	},
+	"hterm_options_button_label": {
+		"message": "විකල්ප"
+	},
+	"hterm_popup_inline_image": {
+		"message": "පේළිගත රූප"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "පේළිගත රූප අබලයි"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "දුරස්ථ ධාරකයට පර්යන්තය තුළ රූප සංදර්ශන කිරීමට ඉඩ දෙන්නේද යන්න.\n\nපෙරනිමියෙන්, තේරීමක් කරන තෙක් අපි ප්‍රේරණ යවමු."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "සැකසුවේ නම්, Chrome OS Alt+Backspace->Delete ප්‍රතිසිතියම අස් කරයි, එවිට Alt+Backspace නිශ්චිතව Alt+Backspace වෙයි."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "AltGr අනාවරණ ස්වයංගවේෂණයක් තෝරන්න.\n\n'නිෂ්ඵල': navigator.language ට අනුව ස්වයං-අනාවරණ කරන්න:\n      'en-us' => 'කිසික් නැත', else => 'right-alt'\n'කිසිවක් නැත': කිසියම් AltGr අනුකරණය අබල කරන්න.\n'ctrl-alt': Ctrl+Alt යනු AltGr බවට අනුමාන කරයි.\n'left-alt': වම් Alt යනු AltGr බවට අනුමාන කරයි.\n'right-alt': දකුණු Alt යනු AltGr බවට අනුමාන කරයි."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Alt යතුර ක්‍රියා කරන්නේ Meta යතුරක් ලෙසද නැති නම් වෙනස් Alt යතුරක් ලෙසද යන්න."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Alt යතුර පරිහරණ කෙරෙන ආකාරය පාලන කරයි.\n\n  escape: ESC උපසර්ගයක් යවන්න.\n  8-bit: xterm හි පරිදි ටයිප් කළ අනුලකුණට 128 එක් කරන්න.\n browser-key: යතුරු එබීම් සිදුවීමට රැඳී සිට බ්‍රවුසරය කියන දෙය බලන්න. (බ්‍රවසරය යම් Alt අනුක්‍රමවලට පෙරනිමි ක්‍රියාවක් ඉටු කරන වේදිකා මත මෙය හොඳින් ක්‍රියා නොකරයි.)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "පර්යන්ත සීනු ශබ්දයේ URL එක. ශ්‍රව්‍ය සීනු කිසිවක් නොමැති නම් එය හිස්ව තබන්න."
+	},
+	"hterm_pref_background_color": {
+		"message": "වෙනත් වර්ණ ලක්ෂණ නොමැති පාඨය සඳහා පසුබිම් වර්ණය."
+	},
+	"hterm_pref_background_image": {
+		"message": "පසුබිම් රූපයේ CSS අගය. රූපයක් නැති නම් එය හිස්ව තබන්න.\n\nඋදාහරණයක් වශයෙන්:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "පසුබිම් රූප ස්ථානයේ CSS අගය.\n\nඋදාහරණයක් වශයෙන්:\n  10% 10%\n  මැද"
+	},
+	"hterm_pref_background_size": {
+		"message": "පසුබිම් රූප තරමේ CSS අගය."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "සත්‍ය නම්, Backspace යතුර BS ('\\x08', aka ^H) යවයි. එසේ නොහොත්, Backspace යතුර '\\x7f' යවයි."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "මෙය වස්තුවක් ලෙස සඳහන් කෙරේ. එය සෑම ගුණයක්ම අනුලකුණු සැකසුම් කේතයක් සහ අගය විරල පෙළක් වන වස්තුවක් වන විරල පෙළක් වෙයි. එම විරල පෙළ තුළ, සෑම ගුණයක්ම ලබා ගත් අනුලකුණක් වන අතර අගය සංදර්ශන වන අනුලකුණ වෙයි.\n\nඋදාහරණයක් වශයෙන්:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "පිටපත් කළ පසු තේරීම හිස් කරන්නේද යන්න."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "විධානය ඉටු කිරීම අවසන් කළ විට කවුළුව වැසිය යුතුද යන්න."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "පෙරනිමි වර්ණ ඵලකයේ ඇති වර්ණ ප්‍රතික්ෂේප කරන්න.\n\nමෙය පෙළක් හෝ වස්තුවක් ලෙස සඳහන් කළ හැක. වස්තුවක් ලෙස සඳහන් කළේ නම්, එය සෑම ගුණයක්ම වර්ණ ඵලකයට සංඛ්‍යා දර්ශකයක් වන විරල පෙළක් ලෙස අනුමාන කළ හැක.\n\nඅගයවල් බොහෝ දුරට ඕනෑම CSS වර්ණ අගයක් ලෙස සඳහන් කළ හැක. මෙයට #RGB, #RRGGBB, rgb(...), rgba(...), සහ සම්මත X11 rgb.txt ගොනුවේ කොටසක් ද වන ඕනෑම වර්ණ නමක් ඇතුළු වෙයි.\n\nපෙරනිමි අගය වෙනස් නොකළ යුතු බව සඳහන් කිරීමට ඔබට 'නිෂ්ඵල' භාවිත කළ හැක. මෙය අගය පෙළක් ලෙස සඳහන් කෙරෙන විට සුළු සුචි සංඛ්‍යාවක් මඟ හැරීමට ප්‍රයෝජනවත් වෙයි.\n\nඋදාහරණයක් වශයෙන්, මේ දෙකම වර්ණ සුචිය 1 නිල් ලෙස සකසයි:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "මූසික තේරීම ස්වයංක්‍රීයව පසුරු පුවරුවට පිටපත් කරන්න."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "සත්‍ය නම් Ctrl+C පිටපත් කරයි, අසත්‍ය නම් ධාරකය වෙත ^C යවයි.\nසත්‍ය නම් Ctrl+Shift+C ධාරකය වෙත ^C යවයි, අසත්‍ය නම් පිටපත් කරයි."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "සත්‍ය නම්, Ctrl+Plus/Minus/Zero විශාලනය පාලන කරයි.\nඅසත්‍ය නම්, Ctrl+Shift+Plus/Minus/Zero විශාලනය පාලන කරයි, Ctrl+Minus sends ^_, Ctrl+Plus/Zero කිසිවක් නොකරයි."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "සත්‍ය නම් Ctrl+V අලවයි, අසත්‍ය නම් ධාරකය වෙත ^V යවයි.\nසත්‍ය නම් Ctrl+Shift+V ධාරකය වෙත ^V යවයි, අසත්‍ය නම් අලවයි."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "පාඨ කර්සරය පෙරනිමියෙන් නිමීලන්නේද යන්න. පර්යන්ත බේරුම් අනුක්‍රම හරහා කේතනය ධාවන කාලයේ මෙය ටොගල් කළ හැක."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "කර්සර නිමිලන අනුපාතය මිලිතත්පරවලින්.\n\nදෙඅංග පෙළක්, එයින් පළමු එක පාඨ කර්සරය කොපමණ කලක් සක්‍රීය විය යුතුද යන්න, දෙවෙනි එක එය කොපමණ කලක්ද යන්න."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "දෘශ්‍යමාන පාඨ කර්සරයේ වර්ණය."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "දෘශ්‍යමාන පාඨ කර්සරයේ හැඩය. පර්යන්ත බේරුම් අනුක්‍රම හරහා කේතනය ධාවන කාලයේ මෙය වෙනස් කළ හැක."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "සත්‍ය නම්, පසුබිමේ ඇති පර්යන්ත සීනු වෙබ් දැනුම්දීමක් සාදයි. https://www.w3.org/TR/notifications/\n\nදැනුම්දීම් සංදර්ශන කිරීමට පරිශීලකයාගෙන් අවසර අවශ්‍යයි. මෙම විකල්පය සත්‍ය ලෙස සකසා ඇති විට, අවශ්‍ය නම් hterm පරිශීලකයාගෙන් අවසර ඉල්ලීමට උත්සාහ කරයි. පරිශීලක ක්‍රියාවකින් ප්‍රේරණ නොවුවහොත්, බ්‍රවුසර මෙම අවසර ඉල්ලීම නොපෙන්වීමට ඉඩ ඇත.\n\n\"දැනුම්දීම්\" අවසර සහිත Chrome දිගුවලට දැනුම්දීම් සංදර්ශන කිරීමට අවසර ඇත."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "නැඟෙනහිර ආසියානු බහ්වර්ථ අනුලකුණුවලට තීරු දෙකක පළල තිබේද යන්න."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "8-bit පාලන අනුලකුණු සබල කිරීමට සත්‍යය, ඒවා අබල කිරීමට අසත්‍යය.\n\nමෙම සැකසීම කුමක් වූවත් අපි මෙම පාලන අනුලකුණුවල බයිට් දෙකක අනුවාදවලට ගරු කරමු."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "සත්‍ය නම්, නිමීලන ලක්ෂණයට ගරු කරන්න. අසත්‍ය එය නොසලකා හැරීමට."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "සත්‍ය නම්, තද/දීප්ති ලක්ෂණය සහිත පාඨය සඳහා තද බර භාවිත කරන්න. අසත්‍ය බව සාමාන්‍ය බරේ අකුරු වර්ග භාවිත කිරීමට ය. නිෂ්ඵල යනු ස්වයං-අනාවරණයට වෙයි."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "සත්‍ය නම්, තද ලක්ෂණය ඇති ඕනෑම පාඨයක් සඳහා දීප්තිමත් වර්ණ (වර්ණ 16 ඵලයක් මත 8-15) භාවිත කරන්න. නැතහොත් අසත්‍යයි."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "ධාරකය පසුරු පුවරුවට ලියන විට පර්යන්තය තුළ පණිවුඩයක් පෙන්විය යුතුද යන්න."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "දුරස්ථ ධාරකයට ස්ථානික පද්ධති පසුරු පුවරුවට ඍජුව ලිවීමට ඉඩ දෙන්න.\nමෙම සැකසීම කුමක් වූවත් කියවීම් ප්‍රවේශය කිසි විටෙක දෙනු නොලැබේ.\n\nමෙය OSC-52 වැනි විශේෂාංග වෙත ප්‍රවේශය පාලන කිරීමට භාවිත කෙරේ."
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "සංදර්ශක මැකීම විධානයේ (CSI-J) සුරැකි පේළි මැකීම කාර්යය (mode 3) පර්යන්ත ප්‍රතිඅනුචලන අන්තරාචය හිස් කරන්නේද යන්න.\n\nපෙරනිමියෙන් මෙය සබල කිරීම ආරක්ෂිතයි."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "DEC පුද්ගලික ප්‍රකාරය 12 භාවිත කර පාඨ කර්සරයේ නිමිලන තත්ත්වය වෙනස් කිරීම සඳහා වන ධාරකගේ ප්‍රයත්නයට ගරු කරන්න."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "පර්යන්තය තරම වෙනස් කරන විට පර්යන්ත මාන පෙන්විය යුතුද යන්න."
+	},
+	"hterm_pref_environment": {
+		"message": "වස්තුවක් ලෙස පරිසර විචල්‍යවල මුල් කට්ටලය."
+	},
+	"hterm_pref_font_family": {
+		"message": "පර්යන්ත පාඨය සඳහා පෙරනිමි අකුරු වර්ග පවුල"
+	},
+	"hterm_pref_font_size": {
+		"message": "පෙරනිමි අකුරු තරම පික්සල්වලින්."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "CSS අකුරු සියුම් කිරීමේ ගුණය."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "වෙනත් වර්ණ ලක්ෂණ නොමැති පාඨය සඳහා පෙරබිම් වර්ණය."
+	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "ටයිප් කිරීමේදී මූසිකය ස්වයංක්‍රීයව සැඟවිය යුතුද යන්න. පෙරනිමියෙන්, මෙය හසුරුවන්නේ වේදිකාවද/OS ද යන්න ස්වයං-අනාවරණ කරන්න.\n\nසටහන: ඔබේ මෙහෙයුම් පද්ධතිය මෙම සැකසීම ප්‍රතික්ෂේප කළ හැක, එබැවින් ඔබට සැම විටම මෙය අබල කිරීමට නොහැකි වීමට ඉඩ ඇත."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "සත්‍ය නම්, Home/End යතුර පර්යන්ත අනුචලන තීරුව පාලන කරන අතර Shift+Home/Shift+End දුරස්ථ ධාරකයට යැවේ. අසත්‍ය නම්, එවිට Home/End දුරස්ථ ධාරකයට යැවෙන අතර Shift+Home/Shift+End අනුචලන කරයි."
+	},
+	"hterm_pref_keybindings": {
+		"message": "යතුරු ක්‍රියා වෙත යතුරු අනුක්‍රමයේ සිතියමක්. යතුරු අනුක්‍රමවලට යතුරු කේතයකට පසුව සංස්කාරක යතුරු බින්දුවක් හෝ වැඩි ගණනක් ඇතුළු වෙයි. යතුරු කේත දශාංශ හෝ ෂෂ්ඨ දශාංශ අංක, හෝ යතුරු හැඳුනුම්කාරයක් විය හැක. යතුරු ක්‍රියා ධාරකය වෙත යැවෙන තන්තුවක් හෝ ක්‍රියා හැඳුනුම්කාරකයක් ලෙස සඳහන් කළ හැක. ආකෘතියේ පූර්ණ විදහා දැක්වීමකට, https://goo.gl/LWRndr බලන්න.\n\nනියැදි යතුරු බැඳීම්:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'ආයුබෝවන් ලෝක වැසියනි'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "hterm හි භාවිතය සැම විටම ග්‍රහණ කිරීම වෙනුවට පොදු OS යතුරු පුවරු බැඳීම්වලට ගරු කළ යුතුද යන්න."
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "සත්‍ය නම්, මාධ්‍ය යතුරු ඒවායේ Fයතුරු සමකවලට පරිවර්තන කරන්න. අසත්‍ය නම්, බ්‍රවුසරයට යතුරු පරිහරණ කිරීමට ඉඩ දෙන්න."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Meta යතුර ඔබා ගෙන සිටින අතරතුර යතුරක් ඔබන විට ESC උපසර්ගයක් යවන්න.\n\nඋදාහරණයක් වශයෙන්, සබල කළ විට, Meta+K එබීම ^[k ඔබ Escape සහ පසුව k එබූ ලෙස යවයි. අබල කළ විට, k පවණක් යැවේ."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "දකුණු මූසික බොත්තම් ක්ලික් කිරීම්වලදී අලවන්න.\n\nමෙම විකල්පය \"mouse-paste-button\" සැකසීමෙන් ස්වාධීන වෙයි.\n\nසටහන: මෙය වම් සහ දකුණු අත් මූසික නිවැරදිව පරිහරණ කරයි."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "සත්‍ය නම්, පිටුව ඉහළට/පිටුව පහළට යතුර පර්යන්ත අනුචලන තීරුව පාලන කරන අතර Shift+පිටුව ඉහළට/Shift+පිටුව පහළට දුරස්ථ ධාරකයට යැවේ. අසත්‍ය නම්, එවිට පිටුව ඉහළට/පිටුව පහළට දුරස්ථ ධාරකයට යැවෙන අතර Shift+පිටුව ඉහළට/Shift+පිටුව පහළට අනුචලන කරයි."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Alt+1..9 බ්‍රවුසරයට යොමු කෙරෙන්නේද යනු.\n\nඔබට Chrome හි \"පටිත්තට මාරු කරන්න\" යතුරු පුවරු කෙටිමං අහිමි නොවීමට, hterm එක බ්‍රවුසර පටිත්තක් තුළ ධාවන කරන විට මෙය හස්ත වෙයි. පටිත්තක් තුළ ධාවන නොවන විට, මේවා vim හෝ emacs තුළ භාවිත කළ හැකි වීමට, මෙම යතුරු ධාරකය වෙත යැවීම වඩා හොඳ වෙයි.\n\nසත්‍ය නම්, Alt+1..9 බ්‍රවුසරයෙන් පරිහරණ කෙරේ. අසත්‍ය නම්, Alt+1..9 ධාරකයට යැවේ. නිෂ්ඵල නම්, බ්‍රවුසර වේදිකාවට සහ කවුළු වර්ගයට අනුව ස්වයං-අනාවරණ කරන්න."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Ctrl+N බ්‍රවුසරයට යොමු කෙරෙන්නේද යනු.\n\nසත්‍ය නම්, Ctrl+N බ්‍රවුසරයෙන් \"නව කවුළු\" යතුරු පුවරු කෙටි මඟ ලෙස පරිහරණ කෙරේ. අසත්‍ය නම්, Ctrl+N ධාරකය වෙත යවනු ලැබේ."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Ctrl+1..9 බ්‍රවුසරයට යොමු කෙරෙන්නේද යනු.\n\nඔබට Chrome හි \"පටිත්තට මාරු කරන්න\" යතුරු පුවරු කෙටිමං අහිමි නොවීමට, hterm එක බ්‍රවුසර පටිත්තක් තුළ ධාවන කරන විට මෙය හස්ත වෙයි. පටිත්තක් තුළ ධාවන නොවන විට, මේවා vim හෝ emacs තුළ භාවිත කළ හැකි වීමට, මෙම යතුරු ධාරකය වෙත යැවීම වඩා හොඳ වෙයි.\n\nසත්‍ය නම්, Ctrl+1..9 බ්‍රවුසරයෙන් පරිහරණ කෙරේ. අසත්‍ය නම්, Ctrl+1..9 ධාරකයට යැවේ. නිෂ්ඵල නම්, බ්‍රවුසර වේදිකාවට සහ කවුළු වර්ගයට අනුව ස්වයං-අනාවරණ කරන්න."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Ctrl+T බ්‍රවුසරයට යොමු කෙරෙන්නේද යනු.\n\nසත්‍ය නම්, Ctrl+T බ්‍රවුසරයෙන් \"නව පටිත්ත\" යතුරු පුවරු කෙටිමඟ ලෙස පරිහරණ කෙරේ. අසත්‍ය නම්, Ctrl+T ධාරකය වෙත යවනු ලැබේ."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab සහ Ctrl+Shift+Tab බ්‍රවුසරයට යොමු කෙරෙන්නේද යනු.\n\nසත්‍ය නම්, Ctrl+Tab සහ Ctrl+Shift+Tab බ්‍රවුසරයෙන් \"ඊළඟ/පෙර පටිත්ත\" යතුරු පුවරු කෙටිමඟ ලෙස පරිහරණ කෙරේ. අසත්‍ය නම්, Tab යතුර Ctrl හෝ Shift නොමැති ධාරකය වෙත යැවේ."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Ctrl+W බ්‍රවුසරයට යොමු කෙරෙන්නේද යනු.\n\nසත්‍ය නම්, Ctrl+W බ්‍රවුසරයෙන් \"පටිත්ත වසන්න\" යතුරු පුවරු කෙටිමඟ ලෙස පරිහරණ කෙරේ. අසත්‍ය නම්, Ctrl+W ධාරකය වෙත යවනු ලැබේ."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Meta+1..9 බ්‍රවුසරයට යොමු කෙරෙන්නේද යනු.\n\nඔබට Chrome හි \"පටිත්තට මාරු කරන්න\" යතුරු පුවරු කෙටිමං අහිමි නොවීමට, hterm එක බ්‍රවුසර පටිත්තක් තුළ ධාවන කරන විට මෙය හස්ත වෙයි. පටිත්තක් තුළ ධාවන නොවන විට, මේවා vim හෝ emacs තුළ භාවිත කළ හැකි වීමට, මෙම යතුරු ධාරකය වෙත යැවීම වඩා හොඳ වෙයි.\n\nසත්‍ය නම්, Meta+1..9 බ්‍රවුසරයෙන් පරිහරණ කෙරේ. අසත්‍ය නම්, Meta+1..9 ධාරකයට යැවේ. නිෂ්ඵල නම්, බ්‍රවුසර වේදිකාවට සහ කවුළු වර්ගයට අනුව ස්වයං-අනාවරණ කරන්න."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Meta+V බ්‍රවුසරටය යොමු වන්නේද යනු.\n\nසමහර පද්ධති මත, මෙය අන්තර්ගතය ඇලවීමට භාවිත කෙරේ."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "සත්‍ය නම්, ඇද දැමූ පාඨය පර්යන්තය තුළ ඇලවෙයි.\nඅසත්‍ය නම්, දැමූ පාඨය නොසලකා හරිනු ලැබේ."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "ධාරකයෙන් ලැබෙන දත්ත සඳහා අපේක්ෂිත කේතනය සකසන්න.\nකේතනය නොගැළපෙන්නේ නම්, දෘශ්‍ය දෝෂ නිරීක්ෂණ වීමට ඉඩ ඇත.\n\nවලංගු අගයවල් 'utf-8' සහ 'raw' වේ."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "පර්යන්ත තිරයේ මායිම වටා පිරවුමේ තරම පික්සල්වලින්.\n\nමෙය පර්යන්ත තිරය වටා ඇති මායිමයේ තරම පාලන කරයි, එබැවින් පරිශීලකයාට තිරයේ දාරවලට යම් දෘශ්‍යමාන පිරවුම් එක් කළ හැක."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "පෙළ යතුරු එබීම මත පහළට අනුචලන කරන්නේද යන්න."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "පර්යන්ත ප්‍රතිදානයේ පහළට අනුචලන කරන්නේද යන්න."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "වෛකල්පික තිර අන්තරාචය භාවිත කරන විට සහ DECCKM (යෙදුම් කර්සර යතුරු) ක්‍රියාත්මක වූ විට, මූසික අනුචලන රෝද සිදුවීම් ඊතල යතුරු අනුකරණ කරයි.\n\nShift යතුර ඔබා ගෙන සිටීමෙන් එය තාවකාලිකව අබල කළ හැක.\n\nපේජර (less) භාවිත කරන විට හෝ හස්තීය පිටු හෝ පාඨ සංස්කාරකයින් (vi/nano) කියවන විට හෝ screen/tmux භාවිත කරන විට මෙය නිතර සිදු වෙයි."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "පික්සල්වලින් මනිනු ලබන විට මූසික අනුචලන රෝද සිදුවීම් සඳහා වන ගුණකය.\n\nපිටුව කෙතරම් වේගයෙන් අනුචලන වන්නේද යන්න වෙනස් කරයි."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "සිරස් අනුචලන තීරු ප්‍රකාරය."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Shift+Insert ඇලවීමට භාවිත කෙරෙන්නේද හෝ දුරස්ථ ධාරකයට යැවෙන්නේද යන්න."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "පෙරනිමි පර්යන්ත කේතනය (DOCS).\n\nISO-2022 (චිත්‍රක සිතියම් වැනි) අනුලකුණු සිතියම් පරිවර්තන සබල කරයි.\nUTF-8 ඒවාට සහය අබල කරයි.\n\nඅගුලු දැමූ විචලකයේ තේරුම පර්යන්ත බේරුම් අනුක්‍රම හරහා කේතනය ධාවන කාලයේ වෙනස් කළ නොහැකි බව වෙයි.\n\nඔබ ලෙගසි යෙදුම්වල කැඩුණු විදහීම දකින්නේ නම් මිස ඔබ UTF-8 හට ඇලවී සිටිය යුතුය."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "පෙරනිමි බ්‍රවුසරයේ/OS හි පිටපත් හැසිරීම භාවිත කරන්නේද යන්න.\n\nබ්‍රවුසරයට/OS හට පිටපත් කිරීමේ සිදුවීම ඍජුව පරිහරණ කිරීමට ඉඩ දෙන්න, එය (පිටපත් කිරීම කිසි සේත් ක්‍රියා නොකරන) සමහර පද්ධති ගොනු සමඟ ගැළපීම වැඩිදියුණු කළ හැකි නමුත්, පාඨ තේරීමේ හැඩිදැඩි බව අඩු කරයි.\n\nඋදාහරණයක් වශයෙන්, ස්වයංක්‍රීයව පේළිය ඉවත් කළ දිග පේළි ඒවා තුළ නව පේළි සමඟ පිටපත් කෙරේ."
+	},
+	"hterm_pref_user_css": {
+		"message": "පරිශීලක විලාස පත්‍රයේ URL එක පර්යන්ත ලේඛනය තුළට ඇතුළු කිරීම."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "පර්යන්තය මෝස්තර කිරීම සඳහා වන අභිරුචි CSS පාඨය."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "තේරීමක වමට (ආරම්භය) ගැළපීම නැවැත්වීමට විධිමත් ප්‍රකාශනය.\n\nසාමාන්‍යයෙන් මෙය නිශ්චිත අනුලකුණු ප්‍රතික්ෂේප කිරීම ඇති අනුලකුණු පන්තියක් වෙයි.\nඅපි ඒවා සමඟ නිතර ආරම්භ වන මාර්ග ලෙස පෙරනිමියෙන් \"~\" සහ \".\" ට ඉඩ දෙමු."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "මැද ඇති අනුලකුණු ගැළපීමට විධිමත් ප්‍රකාශනය.\n\nසාමාන්‍යයෙන් මෙය නිශ්චිත අනුලකුණු ප්‍රතික්ෂේප කිරීම ඇති අනුලකුණු පන්තියක් වෙයි.\n\nආරම්භක ලක්ෂ්‍යය වටා ඇති තෝරීම දිග හැරීමට භාවිත කෙරේ."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "තේරීමක දකුණට (අවසානය) ගැළපීම නැවැත්වීමට විධිමත් ප්‍රකාශනය.\n\nසාමාන්‍යයෙන් මෙය නිශ්චිත අනුලකුණු ප්‍රතික්ෂේප කිරීම ඇති අනුලකුණු පන්තියක් වෙයි."
+	},
+	"hterm_space_character": {
+		"message": "හිඩැස"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "පෙනුව (අකුරු වර්ග, වර්ණ, රූප)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "පිටපත් කර අලවන්න"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "කේතනය"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "දිගු"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "යතුරු පුවරුව"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "විවිධ"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "අනුචලනය"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "ශබ්ද"
+	},
+	"identity_label": {
+		"message": "අනන්‍යතාව"
+	},
+	"import_link_aria_label": {
+		"message": "ගොනු ආයාතය"
+	},
+	"import_link_label": {
+		"message": "ආයාත කරන්න..."
+	},
+	"initializing_relay": {
+		"message": "මෙය භාවිතයෙන් රිලේ සේවාදායකය සොයන්න: $1"
+	},
+	"json_parse_error": {
+		"message": "'$1' තුළ JSON විග්‍රහ කළ නොහැකි විය: $2"
+	},
+	"known_hosts_empty": {
+		"message": "දන්නා ධාරක නොමැත, අමතක කිරීමට කිසිවක් නැත."
+	},
+	"known_hosts_prompt": {
+		"message": "[1-$1] අමතක කිරීමට ධාරකයක් තෝරන්න:"
+	},
+	"known_hosts_title": {
+		"message": "දන්නා ධාරක:"
+	},
+	"licenses": {
+		"message": "බලපත්‍ර"
+	},
+	"licenses_expand_link": {
+		"message": "බලපත්‍රය පෙන්වන්න"
+	},
+	"licenses_title": {
+		"message": "විවෘත මූලාශ්‍ර බලපත්‍ර"
+	},
+	"loading_label": {
+		"message": "පූරණ වේ..."
+	},
+	"migrate_to_ext": {
+		"message": "සටහන: නව සුරක්ෂිත ෂෙල් දිගුවට සංක්‍රමණ වන්න ($1).\nChrome යෙදුම් අත්හරින ලදි, එබැවින් මෙම අනුවාදයට යාවත්කාලීන ලැබීම නවතියි.\nවැඩි විස්තර සඳහා සංක්‍රමණ මාර්ගෝපදේශය ($2) බලන්න."
+	},
+	"missing_param": {
+		"message": "මඟ හැරුණු පරාමිතිය: $1"
+	},
+	"mount_button_label": {
+		"message": "SFTP නැංවීම"
+	},
+	"mount_path_label": {
+		"message": "නැංවුම් මග"
+	},
+	"mounted_message": {
+		"message": "නැංවිණි!"
+	},
+	"nasftp_cmd_cat": {
+		"message": "ප්‍රවර්ග"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "ගොනුවක් පර්යන්තයට නික්ෂේප කරන්න"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "ක්‍රියාකාරී නාමාවලිය වෙනස් කරන්න"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "මාර්ගවල කණ්ඩායම මාරු කරන්න"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "මාර්ග පිළිබඳ අවසර වෙනස් කරන්න"
+	},
+	"nasftp_cmd_chown": {
+		"message": "හිමිමාරුව"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "මාර්ගවල හිමිකරු මාරු කරන්න"
+	},
+	"nasftp_cmd_clear": {
+		"message": "හිස්"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "වත්මන් පර්යන්ත තිරය හිස් කරන්න."
+	},
+	"nasftp_cmd_clip": {
+		"message": "පසුර"
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "ගොනුවක් පසුරු පුවරුවට පිටපත් කරන්න (පෙරනිමි: ආරම්භයේ සිට 10MiB)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "පසුරු පුවරුවට බයිට් $1 ක් පිටපත් කළා"
+	},
+	"nasftp_cmd_color": {
+		"message": "වර්ණය"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "වර්ණ භාවිතය ටොගල් කරන්න"
+	},
+	"nasftp_cmd_copy": {
+		"message": "පිටපත් කරන්න"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "මූලාශ්‍රය ගමනාන්තයට පිටපත් කරන්න"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "ගොනු මකන්න"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "තැටි සංඛ්‍යාන පෙන්වන්න"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  මග: $1\n  fsid: $2\n එකතුව: $3\n  භාවිත: $4 ($5%)\n තිබෙන: $6 (වරප්‍රසාද රහිත පරිශීලකයින්ට)\n $7 (මුලට)"
+	},
+	"nasftp_cmd_exit": {
+		"message": "පිටවන්න"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "විසන්ධි කරන්න"
+	},
+	"nasftp_cmd_get": {
+		"message": "ලබා ගන්න"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "ගොනුව බාගැනීම: $2 ලෙස $1"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "ගොනු බාගන්න"
+	},
+	"nasftp_cmd_help": {
+		"message": "උදවු"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "මෙම උදවු තිරය"
+	},
+	"nasftp_cmd_list": {
+		"message": "ලැයිස්තුව"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "නාමාවලි විස්තර ලැයිස්තුගත කරන්න"
+	},
+	"nasftp_cmd_ln": {
+		"message": "තුළ"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "ඉලක්කයට යොමු කරන මාර්ගයට සබැඳියක් සාදන්න"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "නාමාවලි සාදන්න"
+	},
+	"nasftp_cmd_move": {
+		"message": "ගෙන යන්න"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "ගොනුවක් යළි නම් කරන්න"
+	},
+	"nasftp_cmd_prompt": {
+		"message": "ප්‍රේරකය"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "ප්‍රේරක තන්තුව සකසන්න"
+	},
+	"nasftp_cmd_put": {
+		"message": "දමන්න"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "ගොනු උඩුගත කරන්න"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "ගොනුව උඩුගත කිරීම: $2 ලෙස $1 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "වත්මන් වැඩ කිරීමේ නාමාවලිය පෙන්වන්න"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "දුරස්ථ ක්‍රියා කිරීමේ නාමාවලිය: $1"
+	},
+	"nasftp_cmd_quit": {
+		"message": "හරින්න"
+	},
+	"nasftp_cmd_readlink": {
+		"message": "කියවීම්-සබැඳිය"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "සංකේතාත්මක සබැඳි කියවන්න"
+	},
+	"nasftp_cmd_realpath": {
+		"message": "සත්මඟ"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "සෞත්‍රික මාර්ග"
+	},
+	"nasftp_cmd_rename": {
+		"message": "ප්‍රතිනම"
+	},
+	"nasftp_cmd_reput": {
+		"message": "යළිදැමීම"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "ගොනු උඩුගත කිරීම නැවත පටන් ගන්න"
+	},
+	"nasftp_cmd_rm": {
+		"message": "දුසේ"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "ගොනු ඉවත් කරන්න"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "හිස් නාමාවලි මකන්න"
+	},
+	"nasftp_cmd_show": {
+		"message": "පෙන්වන්න"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "ගොනු පේළිගතව පෙන්වන්න"
+	},
+	"nasftp_cmd_stat": {
+		"message": "සංඛ්‍යාන"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "දිගු:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "ගොනු තත්ත්‍වය පෙන්වන්න"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  ගොනුව: $1\n  තරම: බයිට් $2\n   UID: $3\n   GID: $4\nප්‍රවේශය: $5\n atime: $6\n mtime: $7"
+	},
+	"nasftp_cmd_symlink": {
+		"message": "සංකේතාත්මක සබැඳිය"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "ඉලක්කයට යොමු කරන මාර්ගයට සංකේතාත්මක සබැඳියක් සාදන්න"
+	},
+	"nasftp_cmd_truncate": {
+		"message": "ලෝපනය"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "මාර්ග බයිට් 0 ට ලොප් කරන්න"
+	},
+	"nasftp_cmd_version": {
+		"message": "අනුවාදය"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  සේවාදායක දිගු:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "වත්මන් ප්‍රොටොකෝල අනුවාදය පෙන්වන්න"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "SFTP ප්‍රොටොකෝල අනුවාද තොරතුරු:\n  ස්ථානික: $1\n  සේවාදායක: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: ගොනුවේ අවසානය"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: ගොනුව හමු නොවිය"
+	},
+	"nasftp_error_file_reading": {
+		"message": "$1 කියවීම අසාර්ථක විය: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "පරිවරණ නොකෙරෙන අභ්‍යන්තර දෝෂය, දෝෂයක් ගොනු කරන්න: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: අවලංගු අංකය: $3"
+	},
+	"nasftp_error_message": {
+		"message": "දෝෂය: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: '$2' දිගුව නොලැබේ"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: ක්‍රමවත් ගොනුවක් නොවේ"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: ප්‍රමාණවත් විස්තාර නැත"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: අවසරය ප්‍රතික්ෂේප විය"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: විස්තාරක සංඛ්‍යාව ඉතා වැඩියි"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: නොදන්නා විධානය"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: නොදන්නා ධජය $2"
+	},
+	"nasftp_force_quit": {
+		"message": "බලාත් නික්මීම"
+	},
+	"nasftp_progress_summary": {
+		"message": "තත්පර $2 ක් ($3/s) තුළ බයිට් $1 ක් මාරු කළා"
+	},
+	"nassh_options_error": {
+		"message": "නොදන්නා විකල්පය: $1"
+	},
+	"nassh_product_name": {
+		"message": "සුරක්ෂිත ෂෙල්"
+	},
+	"new_window_menu_label": {
+		"message": "නව කවුළුව"
+	},
+	"ok_button_label": {
+		"message": "හරි"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> සුරැකි පැතිකඩකට හෝ නව ssh පද්ධතියකට සම්බන්ධ කරන්න"
+	},
+	"open_as_window_tip": {
+		"message": "[Pro Tip] Ctrl+W ඔබේ පර්යන්තය වැසීම වැළැක්වීමට 'කවුළුව ලෙස විවෘත කරන්න' හෝ 'පූර්ණ තිරය' භාවිත කරන්න!\n[Pro Tip] වැඩිදුර තොරතුරු සඳහා $1 බලන්න."
+	},
+	"plugin_loading": {
+		"message": "NaCl පේනු මෘදුකාංගය පූරණ කෙරේ..."
+	},
+	"plugin_loading_complete": {
+		"message": " කළා."
+	},
+	"plugin_loading_failed": {
+		"message": " අසාර්ථකයි! :("
+	},
+	"popup_connect_tooltip": {
+		"message": "නව පටිත්තක් තුළ විවෘත කිරීමට Ctrl අල්ලා ගෙන සිටින්න."
+	},
+	"pref_backup_filename": {
+		"message": "සුරක්ෂිත ෂෙල් මනාප උපස්ථය.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "SSH ගොනු"
+	},
+	"preferences_header_terminal": {
+		"message": "පර්යන්ත සැකසීම්"
+	},
+	"preferences_header_uri": {
+		"message": "URI හසුරුවන්නන්"
+	},
+	"preferences_reset": {
+		"message": "සියලු මනාප නැවත සකසා ඇත!"
+	},
+	"protocol_register_button": {
+		"message": "ප්‍රොටෝකෝල හසුරුවන ලියාපදිංචි කරන්න"
+	},
+	"protocol_register_explain": {
+		"message": "පහත බොත්තම අපි සහය දක්වන සියලුම ප්‍රොටොකෝල සඳහා හසුරුවන්නන් ලියාපදිංචි කිරීමට උත්සාහ කරයි. උදාහරණයක් වශයෙන්, මෙය අපට ssh:// සබැඳි ඍජුව හසුරු වීමට ඉඩ දෙයි. සෑම ප්‍රොටොකෝලයක්ම සඳහා ප්‍රේරකයක් සංදර්ශන කෙරෙන බැවින්, ඒවා පෙන්වනු ලබන විට එකින් එක තහවුරු කරන්න/පිළිගන්න. ප්‍රේරක කිසිවක් පෙන්වනු නොලැබුවහොත්, එවිට දෝෂාවේක්ෂ ඉඟි සඳහා මීළඟ කොටස බලන්න."
+	},
+	"protocol_register_explain_settings": {
+		"message": "අපි දැනටමත් හසුරුවන්නන් ලියාපදිංචි කර, හෝ පෙර ලියාපදිංචි කිරීමේ ප්‍රයත්න ප්‍රතික්ෂේප වී ඇති නම්, එවිට වැඩිදුර ප්‍රේරක කිසිවක් සංදර්ශන නොකෙරේ. පහත සංවාදය විවෘත කරන්න, පසුව ssh/sftp/etc... කොටස් තුළ ලියාපදිංචි හසුරුවන්නා සැකසීම් පරීක්ෂා කරන්න. මෙම වැඩසටහන අවහිර වී ඇති නම්, ඔබට නැවත ලියාපදිංචියට ඉඩ දෙන එම සැකසීම් ඔබට මකා දැමිය හැක. මෙම වැඩසටහන දැනටමත් ලියාපදිංචි කර ඇති නමුත් මෙය පෙරනිමි හසුරුවන්නා ලෙස සකසා නැති නම්, ඔබට පෙරනිමි හසුරුවන්නා ද වෙනස් කළ හැක."
+	},
+	"protocol_register_options_link": {
+		"message": "ප්‍රොටොකෝල ලියාපදිංචිය"
+	},
+	"protocol_register_settings_button": {
+		"message": "ලියාපදිංචි හසුරුවන්නන් සැකසීම් විවෘත කරන්න"
+	},
+	"protocol_register_title": {
+		"message": "සුරක්ෂිත ෂෙල් ප්‍රොටොකෝල පරිහරණ ලියාපදිංචි උපකාරකය"
+	},
+	"read_size_label": {
+		"message": "කියවීම් තරම (KiB)"
+	},
+	"reconnect_message": {
+		"message": "නැවත සබඳින්නද(R), වෙනත් සබැඳුමක් තෝරන්නද(C), නැතහොත් ඉවත් වන්නද(x)?"
+	},
+	"relay_retry": {
+		"message": "යළි උත්සාහ කෙරේ..."
+	},
+	"request_pin_prompt": {
+		"message": "'$2 ($3)' මත $1 යතු අගුලු හැරීමට රහස් අංකය ඇතුළත් කරන්න (ප්‍රයත්න $4 ක් ඉතුරුයි):"
+	},
+	"restore_prefs": {
+		"message": "උපස්ථය ප්‍රතිසාධන කරන්න"
+	},
+	"save_label": {
+		"message": "සුරකින්න"
+	},
+	"send_feedback_label": {
+		"message": "ප්‍රතිපෝෂණ යවන්න"
+	},
+	"shortcut_list_aria_label": {
+		"message": "සුරැකි සබැඳුම්"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "ස්මාර්ට් කාඩ්පත් සම්බන්ධක යෙදුම ස්ථාපන කරන්න: $1"
+	},
+	"ssh_argstr_label": {
+		"message": "SSH විස්තාරක"
+	},
+	"stream_open_error": {
+		"message": "$1 ප්‍රවාහය විවෘත කිරීම අසාර්ථකයි: $2"
+	},
+	"terminal_clear_menu_label": {
+		"message": "පර්යන්ත හිස් කිරීම"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" නොලැබේ"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI වර්ණ"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "ප්‍රතිවිරූපය"
+	},
+	"terminal_name_pref_bell": {
+		"message": "සීනුව"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "නිමීලනය"
+	},
+	"terminal_name_pref_color": {
+		"message": "වර්ණය"
+	},
+	"terminal_name_pref_font": {
+		"message": "අකුරු වර්ගය"
+	},
+	"terminal_name_pref_image": {
+		"message": "රූපය"
+	},
+	"terminal_name_pref_shape": {
+		"message": "හැඩය"
+	},
+	"terminal_name_pref_visible": {
+		"message": "දෘශ්‍යමාන"
+	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "AltGr අනාවරණ ස්වයංගවේෂණයක් තෝරන්න.\n\n'ස්වයං': navigator.language ට අනුව ස්වයං-අනාවරණ කරන්න:\n      'en-us' => 'අබල', else => 'right-alt'\n'අබල': ඕනෑම AltGr අනුකරණයක් අබල කරන්න.\n'ctrl-alt': Ctrl+Alt යනු AltGr බවට අනුමාන කරයි.\n'left-alt': වම් Alt යනු AltGr බවට අනුමාන කරයි.\n'right-alt': දකුණු Alt යනු AltGr බවට අනුමාන කරයි."
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "පෙරනිමි වර්ණ ඵලකයට වර්ණ සකසන්න."
+	},
+	"terminal_pref_bell": {
+		"message": "ශ්‍රව්‍ය පර්යන්ත සීනුව."
+	},
+	"terminal_preview_label": {
+		"message": "පෙරදසුන"
+	},
+	"terminal_profile_label": {
+		"message": "වත්මන් පැතිකඩ"
+	},
+	"terminal_reset_menu_label": {
+		"message": "පර්යන්ත යළි සැකසීම"
+	},
+	"terminal_settings_about_label": {
+		"message": "පිළිබඳ"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "පසුබිම් රූප URL. 'http://' හෝ 'https://' සමඟ ආරම්භ විය යුතුම ය. රූපයක් නැති නම් එය හිස්ව තබන්න.\n\nඋදාහරණයක් වශයෙන්:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "ස්වයං"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "අබල කරන්න"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "කදම්බය"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "අවහිර කරන්න"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "යට ඉර"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "ඔබට තේමාව එහි පෙරනිමිවලට යළි සැකසීමට අවශ්‍ය බව ඔබට තහවුරුද?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "තේමාව යළි සකසන්න"
+	},
+	"terminal_settings_reset_label": {
+		"message": "යළි සකසන්න"
+	},
+	"terminal_theme_classic_label": {
+		"message": "පැරණි"
+	},
+	"terminal_theme_dark_label": {
+		"message": "අඳුරු"
+	},
+	"terminal_theme_haze_label": {
+		"message": "හීන් මීදුම"
+	},
+	"terminal_theme_light_label": {
+		"message": "ආලෝකය"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized අඳුරු"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized ආලෝක"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "වර්ණය 0: කළු"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "වර්ණය 1: රතු"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "වර්ණය 10: දීප්තිමත් කොළ"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "වර්ණය 11: දීප්තිමත් කහ"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "වර්ණය 12: දීප්තිමත් නිල"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "වර්ණය 13: දීප්තිමත් දම් රත"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "වර්ණය 14: දීප්තිමත් මයුර නිල"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "වර්ණය 15: දීප්තිමත් සුද"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "වර්ණය 2: කොළ"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "වර්ණය 3: කහ"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "වර්ණය 4: නිල්"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "වර්ණය 5: දම් රත"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "වර්ණය 6: මයුර නිල්"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "වර්ණය 7: සුදු"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "වර්ණය 8: දීප්තිමත් කළු"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "වර්ණය 9: දීප්තිමත් රතු"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "පෙනුම"
+	},
+	"terminal_title_pref_background": {
+		"message": "පසුබිම"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "හැසිරීම"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "කර්සරය"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "යතුරු පුවරුව"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "යතුර පුවරුව සහ මූසිකය"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "මූසිකය"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "අනුචලන තීරුව"
+	},
+	"terminal_title_pref_text": {
+		"message": "පාඨය"
+	},
+	"terminal_title_settings": {
+		"message": "සැකසීම්"
+	},
+	"terminal_title_theme": {
+		"message": "තේමාව"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "අන්තර්ජාලයට සබැඳි කර නැවත උත්සාහ කරන්න."
+	},
+	"tip_1": {
+		"message": "ඔබට ඒවා විවෘත කිරීමට සබැඳි මත ක්ලික් කරන අතරතුර Ctrl (macOS මත Cmd) ඔබා ගෙන සිටිය හැක!"
+	},
+	"tip_10": {
+		"message": "කවුළුවක් තුළ ධාවන වන විට, Ctrl+Shift+N හට තවත් සැසියක් විවෘත කළ හැක."
+	},
+	"tip_11": {
+		"message": "ඔබට යතුරු/කෙටිමං යළි බැඳිය හැක: https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "ssh සත්‍යාපනය සඳහා Yubikeys සහ අනෙකුත් ස්මාර්ට් කාඩ්පත් භාවිත කරන්න: https://goo.gl/Hu2o3v"
+	},
+	"tip_13": {
+		"message": "රූප පේළිගතව සංදර්ශන කරන්න: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "දකුණට ක්ලික් කරන අතරතුර Ctrl (macOS මත Cmd) ඔබා ගෙන සිටීම ප්‍රකරණ මෙනුව උඩට ගෙන එයි."
+	},
+	"tip_2": {
+		"message": "hterm-notify භාවිත කර බ්‍රවුසරය තුළ දැනුම්දීම් සංදර්ශන කරන්න: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "'ssh <profile name>': https://goo.gl/V7o8ki ටයිප් කිරීමෙන් omnibox වෙතින් සම්බන්ධ කරන්න"
+	},
+	"tip_4": {
+		"message": "Chrome OS හට SFTP හරහා ගොනු පද්ධති නැංවිමටත් Files යෙදුම හරහා බ්‍රවුස් කිරීමටත් හැකිය. 'සම්බන්ධ කරන්න' වෙනුවට 'SFTP නැංවුම' භාවිත කරන්න."
+	},
+	"tip_5": {
+		"message": "වෙබ් පිටු තුළ ssh:// සබැඳි භාවිත කර සම්බන්ධ කරන්න, නැති නම් පිටුසනක් සුරකින්න: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "මූලික වර්ණ 16 සහ වර්ණ 256 සහ පූර්ණ බිටු 24 ක වර්ණ භාවිත කර ඔබේ ප්‍රතිදානය/ප්‍රේරකය වර්ණ ගන්වන්න: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "OSC-52: https://goo.gl/XSnyLo භාවිත කර emacs/vim/etc... වෙතින් ඔබේ පසුරු පුවරුව පිටපත් කරන්න"
+	},
+	"tip_8": {
+		"message": "අනෙකුත් hterm/සුරක්ෂිත ෂෙල් පරිශීලකයින් සමඟ chromium-hterm@chromium.org හරහා පරීක්ෂා කර ගන්න: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "දෝෂයක් සොයා ගත්තේද?  නව විශේෂාංගයක් ඉල්ලන්නේද?  අපට දන්වන්න: https://goo.gl/vb94JY"
+	},
+	"unexpected_error": {
+		"message": "අනපේක්ෂිත දෝෂයක් සිදු විය, වැඩි විස්තර සඳහා ජාවාස්ක්‍රිප්ට් කොන්සෝලය පරීක්ෂා කරන්න."
+	},
+	"unknown_ssh_client_version": {
+		"message": "නොදන්නා SSH අනුවාදය: $1"
+	},
+	"unmount_button_label": {
+		"message": "SFTP ගලවන්න"
+	},
+	"welcome_changelog": {
+		"message": "වෙනස්කම්/නිකුත් කිරීමේ සටහන්: $1"
+	},
+	"welcome_faq": {
+		"message": "නිතර අසන ප්‍රශ්න සඳහා පිළිතුරු: $1 (විවෘත කිරීමට සබැඳිවල Ctrl+ක්ලික් කිරීම)"
+	},
+	"welcome_release_highlights": {
+		"message": "$1 සිට ප්‍රධාන වෙනස්කම්:"
+	},
+	"welcome_tip_of_day": {
+		"message": "අහඹු ප්‍රවීණ ඉඟි #$1: $2"
+	},
+	"welcome_version": {
+		"message": "$1 අනුවාදය $2 වෙත සාදරයෙන් පිළිගනිමු."
+	},
+	"write_size_label": {
+		"message": "ලිවීමේ තරම (KiB)"
+	},
+	"zoom_warning": {
+		"message": "Chrome මෙනුව->විශාලනය 100% වෙත සකසන්න"
+	}
+}

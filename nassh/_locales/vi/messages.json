@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Nhận dữ liệu mã hóa"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Kích thước khoảng đệm trên màn hình"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Cuộn xuống cuối sau thao tác nhấn phím"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Tự động ngừng chọn (về bên phải)"
 	},
+	"hterm_options_button_label": {
+		"message": "Tùy chọn"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Hình ảnh cùng dòng"
 	},
@@ -360,10 +366,10 @@
 		"message": "Xác định xem có cho phép máy chủ từ xa hiển thị hình ảnh trên thiết bị đầu cuối hay không.\n\nTheo mặc định, chúng tôi sẽ nhắc cho đến khi bạn lựa chọn."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Nếu đã đặt, thì tùy chọn này sẽ hủy đặt tổ hợp phím Alt+Backspace của Chrome OS thành Delete để Alt+Backspace đúng là Alt+Backspace."
+		"message": "Nếu đã đặt, thì tùy chọn này sẽ hủy việc ánh xạ lại tổ hợp phím Alt+Backspace của Chrome OS thành phím Delete để Alt+Backspace đúng là Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Chọn phương pháp phỏng đoán phát hiện AltGr.\n\n'null': Tự động phát hiện dựa trên navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Tắt bất kỳ thay đổi định dạng nào có liên quan đến AltGr.\n'ctrl-alt': Giả sử Ctrl+Alt có nghĩa là AltGr.\n'left-alt': Giả sử phím Alt bên trái có nghĩa là AltGr.\n'right-alt': Giả sử phím Alt bên phải có nghĩa là AltGr."
+		"message": "Chọn phương pháp nghiệm suy phát hiện AltGr.\n\n'null': Tự động phát hiện dựa trên navigator.language:\n      'en-us' => 'none', nếu không => 'right-alt'\n'none': Tắt mọi chức năng mô phỏng AltGr.\n'ctrl-alt': Giả định Ctrl+Alt là AltGr.\n'left-alt': Giả định phím Alt bên trái là AltGr.\n'right-alt': Giả định phím Alt bên phải là AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Xác định xem phím Alt có vai trò giống phím Meta hay là một phím Alt riêng biệt."
@@ -426,7 +432,7 @@
 		"message": "Hình dạng hiển thị của con trỏ văn bản. Có thể thay đổi tùy chọn này trong thời gian chạy thông qua chuỗi ký tự thoát của thiết bị đầu cuối."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "Nếu là true, chuông trong nền của thiết bị đầu cuối sẽ tạo Thông báo web. https://www.w3.org/TR/notifications/\n\nViệc hiển thị thông báo yêu cầu quyền từ người dùng. Khi bạn đặt tùy chọn này thành true, hterm sẽ tìm cách yêu cầu người dùng cấp quyền nếu cần thiết. Các trình duyệt có thể không hiển thị yêu cầu quyền này nếu yêu cầu không được kích hoạt bằng hành động của người dùng.\n\nCác tiện ích của Chrome được cấp quyền về \"thông báo\" sẽ có quyền hiển thị thông báo."
+		"message": "Nếu đặt là true, thì chuông trong nền của thiết bị đầu cuối sẽ tạo Thông báo web. https://www.w3.org/TR/notifications/\n\nThông báo chỉ hiển thị khi người dùng cho phép. Khi bạn đặt tùy chọn này thành true, hterm sẽ tìm cách yêu cầu người dùng cho phép nếu cần thiết. Các trình duyệt có thể không hiển thị yêu cầu cho phép này nếu yêu cầu không được kích hoạt bằng hành động của người dùng.\n\nCác tiện ích của Chrome được cho phép \"thông báo\" sẽ có quyền hiển thị thông báo."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Xác định xem các ký tự East Asian Ambiguous có chiều rộng hai cột hay không."
@@ -474,7 +480,7 @@
 		"message": "Màu tiền cảnh của văn bản không có các thuộc tính màu khác."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Xác định xem có tự động ẩn con trỏ chuột khi nhập không. Theo mặc định, hãy tự động phát hiện xem nền tảng/hệ điều hành có xử lý tùy chọn này hay không.\n\nLưu ý: Một số hệ điều hành có thể ghi đè tùy chọn cài đặt này nên không phải lúc nào bạn cũng tắt được tùy chọn đó."
+		"message": "Xác định xem có tự động ẩn con trỏ chuột khi nhập hay không. Theo mặc định, tự động phát hiện xem nền tảng/hệ điều hành có xử lý tùy chọn này hay không.\n\nLưu ý: Hệ điều hành của bạn có thể ghi đè tùy chọn cài đặt này nên không phải lúc nào bạn cũng tắt được."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Nếu đặt là true, thì phím Home/End sẽ điều khiển thanh cuộn của thiết bị đầu cuối và tổ hợp phím Shift+Home/Shift+End sẽ được gửi đến máy chủ từ xa. Nếu đặt là false, thì phím Home/End sẽ được gửi đến máy chủ từ xa và tổ hợp phím Shift+Home/Shift+End sẽ dùng để cuộn."
@@ -501,16 +507,16 @@
 		"message": "Nếu đặt là true, thì phím Page Up/Page Down sẽ điều khiển thanh cuộn của thiết bị đầu cuối và thao tác nhấn tổ hợp phím Shift+Page Up/Shift+Page Down sẽ được gửi đến máy chủ từ xa. Nếu đặt là false, thì phím Page Up/Page Down được gửi đến máy chủ từ xa và tổ hợp phím Shift+Page Up/Shift+Page Down sẽ dùng để cuộn."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Xác định xem có chuyển thao tác nhấn tổ hợp phím Alt+1..9 sang trình duyệt hay không.\n\nTùy chọn này hữu ích khi chạy hterm trong thẻ trình duyệt, nhờ đó bạn sẽ không mất các phím tắt \"chuyển đổi thẻ\" trong Chrome. Khi không chạy trong một thẻ, thao tác nhấn các phím này nên được gửi đến máy chủ để dùng trong vim hoặc emacs.\n\nNếu đặt là true, thì thao tác nhấn tổ hợp phím Alt+1..9 sẽ do trình duyệt xử lý. Nếu đặt là false, thì hệ thống sẽ gửi thao tác nhấn tổ hợp phím Alt+1..9 đến máy chủ. Nếu đặt là null, thì sẽ dùng tính năng tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
+		"message": "Xác định xem có chuyển thao tác nhấn tổ hợp phím Alt+1..9 sang trình duyệt hay không.\n\nTùy chọn này hữu ích khi chạy hterm trong thẻ trình duyệt, nhờ đó bạn sẽ không mất các phím tắt \"chuyển đổi thẻ\" trong Chrome. Khi không chạy trong một thẻ, thao tác nhấn các phím này nên được gửi đến máy chủ để dùng trong vim hoặc emacs.\n\nNếu đặt là true, thì thao tác nhấn tổ hợp phím Alt+1..9 sẽ do trình duyệt xử lý. Nếu đặt là false, thì thao tác nhấn tổ hợp phím Alt+1..9 sẽ được gửi đến máy chủ. Nếu đặt là null, thì hệ thống sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Xác định xem có chuyển thao tác nhấn tổ hợp phím Ctrl+N sang trình duyệt hay không.\n\nNếu đặt là true, thì trình duyệt sẽ xử lý thao tác nhấn tổ hợp phím Ctrl+N như phím tắt \"thêm cửa sổ mới\". Nếu đặt là false, thì hệ thống sẽ gửi thao tác nhấn tổ hợp phím Ctrl+N đến máy chủ."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Xác định xem có chuyển thao tác nhấn tổ hợp phím Ctrl+1..9 sang trình duyệt hay không.\n\nTùy chọn này hữu ích khi chạy hterm trong thẻ trình duyệt, nhờ đó bạn sẽ không mất các phím tắt \"chuyển đổi thẻ\" trong Chrome. Khi không chạy trong một thẻ, thao tác nhấn các phím này nên được gửi đến máy chủ để dùng trong vim hoặc emacs.\n\nNếu đặt là true, thì thao tác nhấn tổ hợp phím Ctrl+1..9 sẽ do trình duyệt xử lý. Nếu đặt là false, thì hệ thống sẽ gửi thao tác nhấn tổ hợp phím Ctrl+1..9 đến máy chủ. Nếu đặt là null, thì sẽ dùng tính năng tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
+		"message": "Xác định xem có chuyển thao tác nhấn tổ hợp phím Ctrl+1..9 sang trình duyệt hay không.\n\nTùy chọn này hữu ích khi chạy hterm trong thẻ trình duyệt, nhờ đó bạn sẽ không mất các phím tắt \"chuyển đổi thẻ\" trong Chrome. Khi không chạy trong một thẻ, thao tác nhấn các phím này nên được gửi đến máy chủ để dùng trong vim hoặc emacs.\n\nNếu đặt là true, thì thao tác nhấn tổ hợp phím Ctrl+1..9 sẽ do trình duyệt xử lý. Nếu đặt là false, thì thao tác nhấn tổ hợp phím Ctrl+1..9 sẽ được gửi đến máy chủ. Nếu đặt là null, thì hệ thống sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
 	},
 	"hterm_pref_pass_ctrl_t": {
-		"message": "Xác định xem có chuyển thao tác nhấn tổ hợp phím Ctrl+T sang trình duyệt hay không.\n\nNếu đặt là true, thì trình duyệt sẽ xử lý thao tác nhấn tổ hợp phím Ctrl+T giống như phím tắt \"thêm thẻ mới\". Nếu đặt là false, thì hệ thống sẽ gửi thao tác nhấn tổ hợp phím Ctrl+T đến máy chủ."
+		"message": "Xác định xem có chuyển thao tác nhấn tổ hợp phím Ctrl+T sang trình duyệt hay không.\n\nNếu đặt là true, thì trình duyệt sẽ xử lý thao tác nhấn tổ hợp phím Ctrl+T giống như phím tắt \"thêm thẻ mới\". Nếu đặt là false, thì thao tác nhấn tổ hợp phím Ctrl+T sẽ được gửi đến máy chủ."
 	},
 	"hterm_pref_pass_ctrl_tab": {
 		"message": "Xác định xem có chuyển thao tác nhấn tổ hợp phím Ctrl+Tab và Ctrl+Shift+Tab sang trình duyệt hay không.\n\nNếu đặt là true, thì trình duyệt sẽ xử lý thao tác nhấn tổ hợp phím Ctrl+Tab và Ctrl+Shift+Tab như phím tắt \"chuyển sang thẻ trước/tiếp theo\". Nếu đặt là false, thì hệ thống sẽ gửi thao tác nhấn phím Tab đến máy chủ mà không cần kèm thêm phím Ctrl hoặc Shift."
@@ -519,16 +525,19 @@
 		"message": "Xác định xem có chuyển thao tác nhấn tổ hợp phím Ctrl+W sang trình duyệt hay không.\n\nNếu đặt là true, thì trình duyệt sẽ xử lý thao tác nhấn tổ hợp phím Ctrl+W như phím tắt \"đóng thẻ\". Nếu đặt là false, thì hệ thống sẽ gửi thao tác nhấn tổ hợp phím Ctrl+W đến máy chủ."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Xác định xem có chuyển thao tác nhấn tổ hợp phím Meta+1..9 sang trình duyệt hay không.\n\nTùy chọn này hữu ích khi chạy hterm trong thẻ trình duyệt, nhờ đó bạn sẽ không mất các phím tắt \"chuyển đổi thẻ\" trong Chrome. Khi không chạy trong một thẻ, thao tác nhấn các phím này nên được gửi đến máy chủ để dùng trong vim hoặc emacs.\n\nNếu đặt là true, thì thao tác nhấn tổ hợp phím Meta+1..9 sẽ do trình duyệt xử lý. Nếu đặt là false, thì hệ thống sẽ gửi thao tác nhấn tổ hợp phím Meta+1..9 đến máy chủ. Nếu đặt là null, thì sẽ dùng tính năng tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
+		"message": "Xác định xem có chuyển thao tác nhấn tổ hợp phím Meta+1..9 sang trình duyệt hay không.\n\nTùy chọn này hữu ích khi chạy hterm trong thẻ trình duyệt, nhờ đó bạn sẽ không mất các phím tắt \"chuyển đổi thẻ\" trong Chrome. Khi không chạy trong một thẻ, thao tác nhấn các phím này nên được gửi đến máy chủ để dùng trong vim hoặc emacs.\n\nNếu đặt là true, thì thao tác nhấn tổ hợp phím Meta+1..9 sẽ do trình duyệt xử lý. Nếu đặt là false, thì thao tác nhấn tổ hợp phím Meta+1..9 sẽ được gửi đến máy chủ. Nếu đặt là null, thì hệ thống sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Xác định xem có chuyển tổ hợp phím Meta+V sang máy chủ hay không."
+		"message": "Xác định xem có chuyển thao tác nhấn tổ hợp phím Meta+V sang trình duyệt hay không.\n\nTrên một số hệ thống, có thể nhấn tổ hợp phím này để dán nội dung."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Nếu đặt là true, hãy kéo và văn bản đã thả sẽ dán vào thiết bị đầu cuối.\nNếu đặt là false, văn bản đã thả sẽ bị bỏ qua."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Đặt chế độ mã hóa mong muốn cho dữ liệu nhận từ máy chủ.\nNếu chế độ mã hóa không khớp, các lỗi về giao diện người dùng sẽ hiển thị.\n\nCác giá trị hợp lệ là 'utf-8' và 'raw'."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Kích thước khoảng đệm (tính bằng pixel) xung quanh đường viền của màn hình thiết bị đầu cuối.\n\nĐây là tùy chọn điều chỉnh kích thước của đường viền xung quanh màn hình thiết bị đầu cuối để người dùng có thể thêm một khoảng đệm có thể nhìn thấy vào các cạnh của màn hình."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Xác định xem có cuộn xuống cuối khi nhấn vào phím bất kỳ hay không."
@@ -537,10 +546,10 @@
 		"message": "Xác định xem có cuộn xuống cuối trên dữ liệu đầu ra của thiết bị đầu cuối."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Khi sử dụng vùng đệm màn hình thay thế, đồng thời DECCKM (Các phím con trỏ của ứng dụng) đang hoạt động, thao tác cuộn con lăn chuột sẽ có chức năng giống phím mũi tên.\n\nBạn có thể tạm thời vô hiệu hóa cài đặt này bằng cách giữ phím Shift.\n\nCài đặt này thường gặp khi sử dụng các chương trình trợ giúp đọc (less) hoặc khi đọc các trang hướng dẫn hay các trình chỉnh sửa văn bản (vi/nano) hoặc khi sử dụng screen/tmux."
+		"message": "Khi sử dụng vùng đệm thay thế trên màn hình, đồng thời DECCKM (Các phím con trỏ của ứng dụng) đang hoạt động, thao tác di chuyển con lăn chuột sẽ có chức năng giống phím mũi tên.\n\nBạn có thể tạm thời vô hiệu hóa tùy chọn cài đặt này bằng cách giữ phím Shift.\n\nTùy chọn cài đặt này thường gặp khi sử dụng các chương trình trợ giúp đọc (less) hoặc khi đọc các trang hướng dẫn hay các trình chỉnh sửa văn bản (vi/nano) hoặc khi sử dụng screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Bội số cho sự kiện cuộn con lăn khi được đo bằng pixel.\n\nThay đổi tốc độ cuộn trang."
+		"message": "Hệ số (tính bằng pixel) cho thao tác di chuyển con lăn chuột.\n\nThay đổi tốc độ cuộn trên trang."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Chế độ thanh cuộn dọc."
@@ -821,9 +830,6 @@
 	"new_window_menu_label": {
 		"message": "Cửa sổ mới"
 	},
-	"notify_copy": {
-		"message": "Đã sao chép văn bản lựa chọn"
-	},
 	"ok_button_label": {
 		"message": "OK"
 	},
@@ -832,9 +838,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Mẹo hay] Hãy sử dụng tùy chọn 'Mở dưới dạng cửa sổ' hoặc 'Toàn màn hình' để ngăn thao tác nhấn tổ hợp phím Ctrl+W đóng thiết bị đầu cuối của bạn!\n[Mẹo hay] Xem $1 để biết thêm thông tin."
-	},
-	"options_button_label": {
-		"message": "Tùy chọn"
 	},
 	"plugin_loading": {
 		"message": "Đang tải trình cắm NaCl..."
@@ -899,6 +902,9 @@
 	"save_label": {
 		"message": "Lưu"
 	},
+	"send_feedback_label": {
+		"message": "Gửi phản hồi"
+	},
 	"sftp_client_button_label": {
 		"message": "Giao thức truyền tệp bảo mật (SFTP)"
 	},
@@ -916,6 +922,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Xóa thiết bị đầu cuối"
+	},
+	"terminal_font_unavailable": {
+		"message": "Không tải được \"$1\""
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Màu theo Viện Tiêu chuẩn Quốc gia Hoa Kỳ (ANSI)"
@@ -944,6 +953,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Hiển thị"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Chọn phương pháp nghiệm suy phát hiện AltGr.\n\n'Tự động': Tự động phát hiện dựa trên navigator.language:\n      'en-us' => 'Disable', nếu không => 'right-alt'\n'Disable': Tắt mọi chức năng mô phỏng AltGr.\n'ctrl-alt': Giả định Ctrl+Alt là AltGr.\n'left-alt': Giả định phím Alt bên trái là AltGr.\n'right-alt': Giả định phím Alt bên phải là AltGr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Thiết lập các màu cho bảng màu mặc định."
 	},
@@ -958,6 +970,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Đặt lại thiết bị đầu cuối"
+	},
+	"terminal_settings_about_label": {
+		"message": "Giới thiệu"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "URL của hình nền. Phải bắt đầu bằng 'http://' hoặc 'https://'. Để trống giá trị này nếu bạn không muốn hiển thị hình nền.\n\nVí dụ:\n  https://goo.gl/anedTK"
@@ -1081,6 +1096,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Giao diện"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Hãy kết nối Internet rồi thử lại."
 	},
 	"tip_1": {
 		"message": "Bạn có thể giữ phím Ctrl (Cmd trên macOS) trong khi nhấp vào các đường liên kết để mở!"

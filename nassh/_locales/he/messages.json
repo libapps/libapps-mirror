@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "קבלת קידוד"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "גודל המרווח הפנימי של המסך"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "גלילה לתחתית אחרי הקשה על מקש"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "עצירת הבחירה האוטומטית (לימין)"
 	},
+	"hterm_options_button_label": {
+		"message": "אפשרויות"
+	},
 	"hterm_popup_inline_image": {
 		"message": "תמונות מוטבעות"
 	},
@@ -363,7 +369,7 @@
 		"message": "אם ההעדפה מוגדרת, היא מבטלת את המיפוי מחדש ב-Chrome OS של ‏Alt+Backspace->Delete, כך שהקשה על Alt+Backspace גורמת לביצוע הפעולה הרגילה שמשויכת ל-Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "‏בחירת היוריסטיקה לזיהוי AltGr.\n\n'null': זיהוי אוטומטי מבוסס על navigator.language:\n      'en-us' => 'none', אחרת => 'right-alt'\n'none': השבתת munging שקשור ל-AltGr.\n'ctrl- alt': ההנחה היא שהמשמעות של Ctrl+Alt היא AltGr.\n'left-alt': ההנחה היא שהמשמעות של Alt שמאלי היא AltGr.\n'right-alt': ההנחה היא שהמשמעות של Alt ימני היא AltGr."
+		"message": "בחירת היוריסטיקה לזיהוי AltGr.\n\n‎'null': ביצוע זיהוי אוטומטי המבוסס על navigator.language:‎\n      'en-us' => 'none', else => 'right-alt'\n‎'none': השבתת כל אמולציה של AltGr.‎\n‎'ctrl-alt': הנחה שהמשמעות של Ctrl+Alt היא AltGr.‎\n‎'left-alt': הנחה שהמשמעות של left Alt היא AltGr.‎\n‎'right-alt': הנחה שהמשמעות של right Alt היא AltGr.‎"
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "אם המקש Alt יפעל כמקש Meta או כמקש Alt ייחודי."
@@ -426,7 +432,7 @@
 		"message": "הצורה של סמן הטקסט כשהוא גלוי. ניתן לשנות זאת בזמן הריצה באמצעות רצפי escape בטרמינל."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "‏אם הערך הוא true, פעמוני המסוף ישמיעו ברקע הודעת אינטרנט. https://www.w3.org/TR/notifications/‎\n\nכדי להציג הודעות יש צורך באישור המשתמש. כשהאפשרות הזו מוגדרת עם הערך true,‏ hterm ינסה לבקש מהמשתמש הרשאה במקרה הצורך. ייתכן שהדפדפנים לא יציגו את בקשת ההרשאה הזו אם היא לא הופעלה כתוצאה מפעולה של המשתמש.\n\nלתוספי Chrome עם ההרשאה \"notifications\" יש הרשאה להציג הודעות."
+		"message": "אם ההעדפה מקבלת את הערך True, התראות הטרמינל ברקע יפיקו הודעה באינטרנט. https://www.w3.org/TR/notifications/‎\n\nכדי להציג הודעות יש צורך לקבל הרשאה מהמשתמש. כשהאפשרות הזו מקבלת את הערך True,‏ hterm ינסה לבקש מהמשתמש הרשאה במקרה הצורך. ייתכן שהדפדפנים לא יציגו את בקשת ההרשאה הזו אם היא לא הופעלה כתוצאה מפעולה של המשתמש.\n\nלתוספים ל-Chrome עם ההרשאה \"התראות\" יש הרשאה להציג התראות."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "העדפה זו קובעת אם תווי East Asian Ambiguous יהיו ברוחב של שתי עמודות."
@@ -474,7 +480,7 @@
 		"message": "צבע החזית של טקסט ללא מאפייני צבע אחרים."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "‏אם להסתיר באופן אוטומטי את סמן העכבר בזמן הקלדה. ברירת המחדל היא לזהות באופן אוטומטי אם הפלטפורמה או ה-OS מטפלים בזה.\n\nהערה: חלק ממערכות ההפעלה עשויות לעקוף את ההגדרה הזו, וכך ייתכן שלא יתאפשר לך תמיד להשבית אותה."
+		"message": "העדפה זו קובעת אם להסתיר באופן אוטומטי את סמן העכבר בזמן הקלדה. ברירת המחדל היא לזהות באופן אוטומטי אם הפלטפורמה או ה-OS מטפלים בכך.\n\nהערה: מערכת ההפעלה שלך עשויה לשנות את ההגדרה הזו, כך שבחלק מהמקרים לא ניתן יהיה להשבית אותה באופן קבוע."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "אם ההעדפה מקבלת את הערך True, המקשים Home או End שולטים בסרגל הגלילה בטרמינל והקשה על Shift+Home או Shift+End נשלחת אל המארח המרוחק. אם ההעדפה מקבלת את הערך False, הקשה על Home או End נשלחת אל המארח המרוחק והמקשים Shift+Home/Shift+End משמשים לצורך גלילה."
@@ -522,13 +528,16 @@
 		"message": "ההעדפה הזו קובעת אם הקשה על Meta+1..9 מועברת לדפדפן.\n\nהאפשרות הזו שימושית כשמפעילים hterm בכרטיסיית דפדפן, כדי לא לאבד את מקשי הקיצור של פעולת ה\"מעבר לכרטיסייה\" ב-Chrome. כאשר לא מתבצעת הפעלה של hterm בכרטיסייה, עדיף לשלוח את ההקשה על המקשים האלה אל המארח כדי שניתן יהיה להשתמש בהם ב-vim או ב-emacs.\n\nאם ההעדפה מקבלת את הערך True, הקשות על המקשים Meta+1..9 עוברות לטיפול הדפדפן. אם ההעדפה מקבלת את הערך False, הקשות על Meta+1..9 נשלחות למארח. אם ההעדפה מקבלת את הערך Null, מתבצע זיהוי אוטומטי בהתאם לפלטפורמת הדפדפן ולסוג החלון."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "‏בחירה אם Meta+V יועבר למארח."
+		"message": "ההעדפה הזו קובעת אם הקשה על Meta+V מועברת לדפדפן.\n\nבחלק מהמערכות שילוב המקשים הזה משמש להדבקת תוכן."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "אם ההעדפה הזו מקבלת את הערך True, טקסט שגוררים ומשחררים מודבק בטרמינל.\nאם ההעדפה מקבלת את הערך False, המערכת תתעלם מטקסט שישוחרר."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "הגדרת הקידוד הצפוי בשביל נתונים שהתקבלו מהמארח.\nאם הקידודים לא תואמים, ייתכן שיהיו באגים בתצוגה.\n\nהערכים החוקיים הם 'utf-8' ו-'raw'."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "הגודל בפיקסלים של המרווח הפנימי מסביב לשוליים של מסך הטרמינל.\n\nההעדפה הזו שולטת בגודל השוליים שמסביב למסך הטרמינל, כדי שהמשתמשים יוכלו להוסיף מרווח פנימי נראה לעין לקצוות של המסך."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "בחירה אם לגלול לתחתית המסך בהקשה על מקש כלשהו."
@@ -537,10 +546,10 @@
 		"message": "העדפה זו קובעת אם לגלול לתחתית המסך בפלט הטרמינל."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "‏אם משתמשים במאגר הנתונים החלופי של המסך וההגדרה DECCKM (מקשי סמן של אפליקציה) מופעלת, אירועי גלילה עם העכבר יבצעו פעולות של מקשי חיצים.\n\nאפשר להשבית זאת באופן זמני על ידי הקשה ארוכה על Shift.\n\nמצב זה שכיח במקרים של מספור עמודים (פחות), קריאת דפים שמיועדים למשתמשים אנושיים, קריאת עורכי טקסט (vi/nano) או שימוש ב-screen/tmux."
+		"message": "כשמשתמשים במאגר הנתונים הזמני של המסך שמוגדר כמאגר החלופי, וכאשר התוכנית DECCKM (מקשי סמן של אפליקציה) מופעלת, אירועי גלגל הגלילה של העכבר יבצעו אמולציה של מקשי החיצים.\n\nאפשר להשבית זאת באופן זמני על ידי הקשה ארוכה על Shift.\n\nמצב זה שכיח כאשר נעשה שימוש בתוכניות pager ‏(less), בעת קריאת דפי תיעוד או עורכי טקסט (vi/nano) או כאשר נעשה שימוש ב-screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "המכפיל של אירועי גלגל גלילה במדידה בפיקסלים.\n\nמשנה את מהירות גלילת הדף."
+		"message": "המכפיל של אירועי גלגל הגלילה של העכבר כאשר המדידה מתבצעת בפיקסלים.\n\nההעדפה הזו משנה את מהירות גלילת הדף."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "מצב סרגל הגלילה האנכי."
@@ -824,9 +833,6 @@
 	"new_window_menu_label": {
 		"message": "חלון חדש"
 	},
-	"notify_copy": {
-		"message": "הבחירה הועתקה"
-	},
 	"ok_button_label": {
 		"message": "אישור"
 	},
@@ -835,9 +841,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[טיפ למתקדמים] אפשר להשתמש ב'פתיחה כחלון' או 'מסך מלא' כדי למנוע סגירה של הטרמינל כשמקישים על Ctrl+W.\n[טיפ למתקדמים] מידע נוסף זמין בכתובת $1."
-	},
-	"options_button_label": {
-		"message": "אפשרויות"
 	},
 	"plugin_loading": {
 		"message": "טעינת הפלאגין של NaCl מתבצעת..."
@@ -902,6 +905,9 @@
 	"save_label": {
 		"message": "שמירה"
 	},
+	"send_feedback_label": {
+		"message": "שליחת משוב"
+	},
 	"shortcut_list_aria_label": {
 		"message": "חיבורים שנשמרו"
 	},
@@ -916,6 +922,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "ניקוי טרמינל"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" לא זמין"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "צבעי ANSI"
@@ -944,6 +953,9 @@
 	"terminal_name_pref_visible": {
 		"message": "גלוי"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "בחירת היוריסטיקה לזיהוי AltGr.\n\n‎'Auto': ביצוע זיהוי אוטומטי המבוסס על navigator.language:‎\n      'en-us' => 'Disable', else => 'right-alt'\n‎'Disable': השבתת כל אמולציה של AltGr.‎\n‎'ctrl-alt': הנחה שהמשמעות של Ctrl+Alt היא AltGr.‎\n‎'left-alt': הנחה שהמשמעות של left Alt היא AltGr.‎\n‎'right-alt': הנחה שהמשמעות של right Alt היא AltGr.‎"
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "הגדרת הצבעים של לוח הצבעים שמוגדר כברירת מחדל."
 	},
@@ -958,6 +970,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "איפוס הטרמינל"
+	},
+	"terminal_settings_about_label": {
+		"message": "מידע כללי"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "כתובת ה-URL של תמונת הרקע: חייבת להתחיל ב-'‎http://‎' או ב-'https://‎'. יש להשאיר ריקה כדי לא להציג תמונה.\n\nלדוגמה:\n  https://goo.gl/anedTK"
@@ -1081,6 +1096,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "עיצוב"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "יש להתחבר לאינטרנט ולנסות שוב."
 	},
 	"tip_1": {
 		"message": "כדי לפתוח קישורים אפשר להקיש הקשה ארוכה על Ctrl (המקש Cmd ב-macOS) תוך כדי לחיצה עליהם."

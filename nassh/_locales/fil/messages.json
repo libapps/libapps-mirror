@@ -305,6 +305,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Tumanggap ng pag-encode"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Laki ng padding ng screen"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Mag-scroll sa ibaba pagkatapos ng keystroke"
 	},
@@ -344,6 +347,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Awtomatikong paghinto sa pagpili (pakanan)"
 	},
+	"hterm_options_button_label": {
+		"message": "Mga Opsyon"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Mga Inline na Larawan"
 	},
@@ -357,7 +363,7 @@
 		"message": "Kung itatakda, maa-undo ang Chrome OS Alt+Backspace->Delete remap, para maging Alt+Backspace talaga ang Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Pumipili ng AltGr detection heuristic.\n\n'null': Awtomatikong magde-detect batay sa navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Idi-disable ang anumang munging na nauugnay sa AltGr.\n'ctrl-alt': Ipagpapalagay na ang Ctrl+Alt ay AltGr.\n'left-alt': Ipagpapalagay na ang left Alt ay AltGr.\n'right-alt': Ipagpapalagay na ang right Alt ay AltGr."
+		"message": "Pumili ng AltGr detection heuristic.\n\n'null': Awtomatikong magde-detect batay sa navigator.language:\n      'en-us' => 'none', iba pa => 'right-alt'\n'none': Idi-disable ang anumang emulation ng AltGr.\n'ctrl-alt': Ipagpapalagay na ang Ctrl+Alt ay AltGr.\n'left-alt': Ipagpapalagay na ang left Alt ay AltGr.\n'right-alt': Ipagpapalagay na ang right Alt ay AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Kung gagana ang Alt key bilang Meta key o bilang natatanging Alt key."
@@ -420,7 +426,7 @@
 		"message": "Ang hugis ng nakikitang text cursor. Puwede itong baguhin sa runtime sa pamamagitan ng mga terminal escape sequence."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "Kung true, gagawa ang mga terminal bell sa background ng Web Notification. https://www.w3.org/TR/notifications/\n\nPara makapagpakita ng mga notification, kailangan ng pahintulot mula sa user. Kapag itinakda ang opsyong ito sa true, susubukan ng hterm na humingi ng pahintulot sa user kung kinakailangan. Maaaring hindi ipakita ng mga browser ang kahilingan sa pahintulot na ito kung hindi ito magmumula sa isang pagkilos ng user.\n\nMay pahintulot ang mga extension ng Chrome na may pahintulot na \"mga notification\" na magpakita ng mga notification."
+		"message": "Kung true, gagawa ang mga terminal bell sa background ng Web Notification. https://www.w3.org/TR/notifications/\n\nPara makapagpakita ng mga notification, kailangan ng pahintulot mula sa user. Kapag itinakda ang opsyong ito sa true, susubukan ng hterm na humingi ng pahintulot sa user kung kinakailangan. Posibleng hindi ipakita ng mga browser ang kahilingan sa pahintulot na ito kung hindi ito magmumula sa isang pagkilos ng user.\n\nMay pahintulot ang mga extension ng Chrome na may pahintulot na \"mga notification\" na magpakita ng mga notification."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Kung mayroon o walang lapad na dalawang column ang mga East Asian Ambiguous character."
@@ -468,7 +474,7 @@
 		"message": "Ang kulay ng foreground para sa text na walang ibang attribute ng kulay."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Kung awtomatikong itatago ang cursor ng mouse habang nagta-type. Bilang default, awtomatikong tukuyin kung papangasiwaan ito ng platform/OS.\n\nTandaan: Maaaring i-override ng ilang operating system ang setting na ito kung kaya maaaring hindi mo ito madi-disable sa lahat ng oras."
+		"message": "Kung awtomatikong itatago ang cursor ng mouse habang nagta-type. Bilang default, awtomatikong i-detect kung papangasiwaan ito ng platform/OS.\n\nTandaan: Posibleng i-override ng iyong operating system ang setting na ito kung kaya't posibleng hindi mo ito ma-disable sa lahat ng oras."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Kung true, ang Home/End ang kokontrol sa terminal scrollbar at ang Shift+Home/Shift+End ang ipapadala sa remote na host. Kung false, ang Home/End ang ipapadala sa remote na host at ang Shift+Home/Shift+End ang magso-scroll."
@@ -516,13 +522,16 @@
 		"message": "Kung ipapasa ang Meta+1..9 sa browser.\n\nMainam ito kapag nagpapatakbo ng hterm sa tab ng browser, para hindi mo mawala ang mga keyboard shortcut na \"lumipat ng tab\" ng Chrome. Kapag hindi pinapatakbo sa isang tab, mas mainam kung ipapadala ang mga key na ito sa host para magamit ang mga ito sa vim o emacs.\n\nKung true, papangasiwaan ng browser ang Meta+1..9. Kung false, ipapadala ang Meta+1..9 sa host. Kung null, awtomatikong magde-detect batay sa platform ng browser at uri ng window."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Kung mapapasa ang Meta+V sa host."
+		"message": "Kung mapapasa ang Meta+V sa browser.\n\nSa ilang system, ginagamit ito para mag-paste ng content."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Kung true, ipe-paste ang na-drag at na-drop na text sa terminal.\nKung false, babalewalain ang na-drop na text."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Itakda ang inaasahang pag-encode para sa data na natanggap mula sa host.\nKung hindi tumutugma ang mga pag-encode, posibleng makaranas ng mga visual bug.\n\nAng mga valid na value ay 'utf-8' at 'raw.'"
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Ang laki ng padding sa mga pixel sa palibot ng border ng screen ng terminal.\n\nKinokontrol nito ang laki ng border sa palibot ng screen ng terminal para makapagdagdag ang user ng nakikitang padding sa mga dulo ng screen."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Kung magso-scroll hanggang sa ibaba sa anumang keystroke."
@@ -531,10 +540,10 @@
 		"message": "Kung magso-scroll hanggang sa ibaba sa terminal na output."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Kapag ginagamit ang alternatibong screen buffer, at aktibo ang DECCKM (Mga Cursor Key ng Application), gagayahin ng mga pag-scroll ng mouse wheel ang mga arrow key.\n\nMaaari itong pansamantalang i-disable sa pamamagitan ng pagpindot nang matagal sa Shift key.\n\nMadalas itong nangyayari kapag gumagamit ng mga pager (less), o nagbabasa ng mga man page o text editor (vi/nano), o gumagamit ng screen/tmux."
+		"message": "Kapag ginagamit ang alternatibong screen buffer, at aktibo ang DECCKM (Mga Cursor Key ng Application), gagayahin ng mga event ng wheel ng pag-scroll ng mouse ang mga arrow key.\n\nPuwede itong pansamantalang i-disable sa pamamagitan ng pagpindot nang matagal sa Shift key.\n\nMadalas itong nangyayari kapag gumagamit ng mga pager (less), o nagbabasa ng mga man page o text editor (vi/nano), o gumagamit ng screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Ang multiplier para sa pag-scroll ng mga event sa wheel kapag sinusukat sa mga pixel.\n\nBinabago kung gaano kabilis mag-scroll ang page."
+		"message": "Ang multiplier para sa mga event ng wheel ng pag-scroll ng mouse kapag sinusukat sa mga pixel.\n\nBinabago kung gaano kabilis mag-scroll ang page."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Ang vertical scrollbar mode."
@@ -860,9 +869,6 @@
 	"new_window_menu_label": {
 		"message": "Bagong Window"
 	},
-	"notify_copy": {
-		"message": "Nakopya ang Pinili"
-	},
 	"ok_button_label": {
 		"message": "OK"
 	},
@@ -871,9 +877,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Pro Tip] Gamitin ang 'Buksan bilang Window' o 'Fullscreen' para mapigilan ang Ctrl+W na isara ang iyong terminal!\n[Pro Tip] Tingnan ang $1 para sa higit pang impormasyon."
-	},
-	"options_button_label": {
-		"message": "Mga Opsyon"
 	},
 	"plugin_loading": {
 		"message": "Nilo-load ang NaCl plugin..."
@@ -938,6 +941,9 @@
 	"save_label": {
 		"message": "I-save"
 	},
+	"send_feedback_label": {
+		"message": "Magpadala ng Feedback"
+	},
 	"shortcut_list_aria_label": {
 		"message": "mga naka-save na koneksyon"
 	},
@@ -952,6 +958,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "I-clear ang Terminal"
+	},
+	"terminal_font_unavailable": {
+		"message": "Hindi available ang \"$1\""
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Mga kulay ng ANSI"
@@ -971,6 +980,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Nakikita"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Pumili ng AltGr detection heuristic.\n\n'Awtomatiko': Awtomatikong magde-detect batay sa navigator.language:\n      'en-us' => 'Disable', iba pa => 'right-alt'\n'I-disable': Idi-disable ang anumang emulation ng AltGr.\n'ctrl-alt': Ipagpapalagay na ang Ctrl+Alt ay AltGr.\n'left-alt': Ipagpapalagay na ang left Alt ay AltGr.\n'right-alt': Ipagpapalagay na ang right Alt ay AltGr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Itakda ang mga kulay para sa default na palette."
 	},
@@ -985,6 +997,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "I-reset ang Terminal"
+	},
+	"terminal_settings_about_label": {
+		"message": "Tungkol Dito"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "URL ng larawan sa background. Dapat magsimula sa 'http://' o 'https://.' Hayaang blangko kung walang larawan.\n\nHalimbawa:\n  https://goo.gl/anedTK"
@@ -1072,6 +1087,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Tema"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Kumonekta sa Internet at subukan ulit."
 	},
 	"tip_1": {
 		"message": "Puwede mong pindutin nang matagal ang Ctrl (Cmd sa macOS) habang nagki-click sa mga link para buksan ang mga ito!"

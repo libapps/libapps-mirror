@@ -1,0 +1,1208 @@
+{
+	"already_mounted_message": {
+		"message": "ລະບົບໄຟລ໌ເຊື່ອມຕໍ່ຢູ່ແລ້ວ!"
+	},
+	"backup_prefs": {
+		"message": "ບັນທຶກການສຳຮອງຂໍ້ມູນ"
+	},
+	"bad_destination": {
+		"message": "ບໍ່ສາມາດແຍກວິເຄາະປາຍທາງໄດ້: $1"
+	},
+	"before_unload": {
+		"message": "ການປິດແຖບນີ້ຈະຕັດການເຊື່ອມຕໍ່ເຊດຊັນນີ້."
+	},
+	"cache_pin_prompt": {
+		"message": "ແຄສ PIN ສຳລັບເຊດຊັນ SSH ນີ້ບໍ? (y/N):"
+	},
+	"cancel_button_label": {
+		"message": "ຍົກເລີກ"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "ລຶບລ້າງໂຮສ SSH ທີ່ຮູ້ຈັກ"
+	},
+	"clear_label": {
+		"message": "ລຶບລ້າງ"
+	},
+	"command_complete": {
+		"message": "ອອກຈາກຄຳສັ່ງ $1 ແລ້ວໂດຍມີລະຫັດສະຖານະ $2."
+	},
+	"command_not_supported": {
+		"message": "ບໍ່ຮອງຮັບ $1 ໃນ Chrome ເວີຊັນນີ້"
+	},
+	"command_startup_failed": {
+		"message": "ເປີດໃຊ້ $1 ບໍ່ສຳເລັດ: $2"
+	},
+	"connect_button_label": {
+		"message": "ເຊື່ອມຕໍ່"
+	},
+	"connect_or_exit_message": {
+		"message": "ເລືອກການເຊື່ອມຕໍ່ອື່ນ (C) ຫຼື ອອກບໍ (X)?"
+	},
+	"connecting": {
+		"message": "ກຳລັງເຊື່ອມຕໍ່ກັບ $1..."
+	},
+	"connection_dialog_name": {
+		"message": "ກ່ອງໂຕ້ຕອບການເຊື່ອມຕໍ່"
+	},
+	"console_crosh_options_notice": {
+		"message": "ທ່ານຮູ້ບໍ່ວ່າມີໜ້າຕົວເລືອກສະເພາະ?\nບໍ່ຈຳເປັນຕ້ອງປັບປ່ຽນ 'term_' ໂດຍກົງອີກຕໍ່ໄປ!\nກົດ $1 ເພື່ອເປີດມັນ ຫຼື ຄລິກ:\n$2"
+	},
+	"console_nassh_options_notice": {
+		"message": "ທ່ານຮູ້ບໍ່ວ່າມີໜ້າຕົວເລືອກສະເພາະ?\nບໍ່ຈຳເປັນຕ້ອງປັບປ່ຽນ 'term_' ໂດຍກົງອີກຕໍ່ໄປ!\n$1"
+	},
+	"del_keycap": {
+		"message": "[ລຶບ]"
+	},
+	"delete_button_label": {
+		"message": "ລຶບ"
+	},
+	"disconnect_message": {
+		"message": "ປລັກອິນ NaCl ອອກໄປແລ້ວໂດຍມີລະຫັດສະຖານະ $1."
+	},
+	"faq_menu_label": {
+		"message": "ຄຳຖາມທີ່ຖາມເລື້ອຍໆ"
+	},
+	"field_argstr_placeholder": {
+		"message": "ຂໍ້ໂຕ້ແຍ່ງແຖວຄຳສັ່ງເພີ່ມເຕີມ"
+	},
+	"field_description_aria_label": {
+		"message": "ລາຍລະອຽດ"
+	},
+	"field_description_placeholder": {
+		"message": "username@hostname ຫຼື ຂໍ້ຄວາມທີ່ມີຮູບແບບອິດສະຫຼະ"
+	},
+	"field_hostname_aria_label": {
+		"message": "ຊື່ໂຮສ"
+	},
+	"field_hostname_placeholder": {
+		"message": "ຊື່ໂຮສ"
+	},
+	"field_mount_path_placeholder": {
+		"message": "ເສັ້ນທາງເລີ່ມຕົ້ນແມ່ນແຟ້ມຫຼັກຂອງຜູ້ໃຊ້"
+	},
+	"field_nassh_options_aria_label": {
+		"message": "ຕົວເລືອກຣີເລເຊີບເວີ SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "ຕົວເລືອກຣີເລເຊີບເວີ SSH"
+	},
+	"field_port_aria_label": {
+		"message": "ຜອດ"
+	},
+	"field_port_placeholder": {
+		"message": "ຜອດ"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "ຄ່າເລີ່ມຕົ້ນ"
+	},
+	"field_username_aria_label": {
+		"message": "ຊື່ຜູ້ໃຊ້"
+	},
+	"field_username_placeholder": {
+		"message": "ຊື່ຜູ້ໃຊ້"
+	},
+	"found_relay": {
+		"message": "ພົບເຊີບເວີການຖ່າຍທອດສັນຍານ: $1"
+	},
+	"get_profile_error": {
+		"message": "ຂໍ້ຜິດພາດ: ບໍ່ສາມາດໂຫຼດໂປຣໄຟລ໌ໄດ້ $1:\n$2"
+	},
+	"hterm_announce_current_screen_header": {
+		"message": "ເລື່ອນແລ້ວ $1%,"
+	},
+	"hterm_button_allow_always": {
+		"message": "ອະນຸຍາດສະເໝີ"
+	},
+	"hterm_button_allow_session": {
+		"message": "ອະນຸຍາດເຊດຊັນນີ້"
+	},
+	"hterm_button_block": {
+		"message": "ບລັອກ"
+	},
+	"hterm_button_page_down": {
+		"message": "ເລື່ອນໜ້າລົງ"
+	},
+	"hterm_button_page_up": {
+		"message": "ເລື່ອນໜ້າຂຶ້ນ"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "ໂຫຼດ $1 ບໍ່ສຳເລັດ"
+	},
+	"hterm_loading_resource_start": {
+		"message": "ກຳລັງໂຫຼດ $1 ..."
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "ອະນຸຍາດການສະແດງຮູບໃນແຖວ"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Backspace ເປັນ Meta+Backspace"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "ໂໝດປຸ່ມ AltGr"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "ດຳເນີນການກັບປຸ່ມ Alt ເປັນປຸ່ມ Meta"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "ການຈັດການຕົວປັບປ່ຽນປຸ່ມ Alt"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "ສຽງກະດິ່ງແຈ້ງເຕືອນ (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "ສີພາບພື້ນຫຼັງ"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "ພາບພື້ນຫລັງ"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "ຕຳແໜ່ງຂອງພາບພື້ນຫຼັງ"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "ຂະໜາພາບພື້ນຫລັງ"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "ລັກສະນະການເຮັດວຽກຂອງປຸ່ມ Backspace"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "ການຍົກເລີກການຈັບຄູ່ຕົວອັກສອນ"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "ລຶບລ້າງການເລືອກຂໍ້ຄວາມໂດຍອັດຕະໂນມັດ"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "ປິດໜ້າຈໍໃນເວລາອອກ"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "ຖາດສີເລີ່ມຕົ້ນ"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "ສຳເນົາຂໍ້ຄວາມທີ່ເລືອກໂດຍອັດຕະໂນມັດ"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "ລັກສະນະການເຮັດວຽກຂອງການສຳເນົາດ້ວຍ Ctrl+C"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "ລັກສະນະການເຮັດວຽກການຊູມຂອງ Ctrl++/-/0"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "ລັກສະນະການເຮັດວຽກຂອງການວາງດ້ວຍ Ctrl+V"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "ການກະພິບຂອງເຄີເຊີ"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "ອັດຕາການກະພິບຂອງເຄີເຊີ"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "ສີເຄີເຊີຂໍ້ຄວາມ"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "ຮູບຮ່າງເຄີເຊີຂອງຂໍ້ຄວາມ"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "ສ້າງການແຈ້ງເຕືອນໃນເດັສທັອບສຳລັບກະດິ່ງເຕືອນ"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian Ambiguous ໃຊ້ສອງຖັນ"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "ຮອງຮັບຕົວອັກສອນຄວບຄຸມທີ່ບໍ່ແມ່ນ UTF-8 C1"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "ເປີດການນຳໃຊ້ຂໍ້ຄວາມກະພິບ"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "ລັກສະນະການເຮັດວຽກຂອງຂໍ້ຄວາມຕົວໜາ"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "ໃຊ້ສີແຈ້ງກັບຂໍ້ຄວາມຕົວໜາ"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "ສະແດງການແຈ້ງເຕືອນເມື່ອສຳເນົາເນື້ອຫາ"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "ອະນຸຍາດການຂຽນຄລິບບອດຈາກທາງໄກ"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "ອະນຸຍາດໃຫ້ລຶບລ້າງບັບເຟີການເລື່ອນກັບ (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "ອະນຸຍາດການປ່ຽນການກະພິບເຄີເຊີຂໍ້ຄວາມ"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "ສະແດງຂະໜາດຂອງເທີມິນອນໃນເວລາປັບຂະໜາດແລ້ວ"
+	},
+	"hterm_name_pref_environment": {
+		"message": "ຕົວປ່ຽນສະພາບແວດລ້ອມ"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "ຕະກູນຟອນຂໍ້ຄວາມ"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "ຂະໜາດຟອນຂອງຂໍ້ຄວາມ"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "ການເຮັດໃຫ້ຟອນຂໍ້ຄວາມຮຽບ"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "ສີຂໍ້ຄວາມ"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "ເຊື່ອງເຄີເຊີເມົ້າໃນຂະນະທີ່ພິມ"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "ລັກສະນະການເຮັດວຽກການເລື່ອນປຸ່ມHome/End"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "ການເຊື່ອມໂຍງ/ທາງລັດແປ້ນພິມ"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "ໃຊ້ການເຊື່ອມໂຍງ/ທາງລັດແປ້ນພິມຂອງລະບົບປະຕິບັດການເລີ່ມຕົ້ນ"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "ປຸ່ມ Media ເປັນ Fkey"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "ການຈັດການຕົວປັບປ່ຽນປຸ່ມ Meta"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "ເມົ້າ ປຸ່ມ ວາງ"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "ການວາງເນື້ອຫາດ້ວຍການຄລິກຂວາທີ່ເມົ້າ"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "ລັກສະນະການເຮັດວຽກຂອງການເລື່ອນປຸ່ມ Page Up/Down"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "ລັກສະນະການເຮັດວຽກຂອງການປ່ຽນດ້ວຍແຖບ Alt+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "ລັກສະນະການເຮັດວຽກຂອງການເປີດໜ້າຈໍໃໝ່ດ້ວຍ Ctrl+N"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "ລັກສະນະການເຮັດວຽກຂອງການປ່ຽນດ້ວຍແຖບ Ctrl+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "ລັກສະນະການເຮັດວຽກຂອງການເປີດແຖບໃໝ່ດ້ວຍ Ctrl+T"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "ລັກສະນະການເຮັດວຽກຂອງການປ່ຽນແຖບດ້ວຍ Ctrl+Tab"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "ລັກສະນະການເຮັດວຽກຂອງການປິດແຖບດ້ວຍ Ctrl+W"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "ລັກສະນະການເຮັດວຽກຂອງການປ່ຽນດ້ວຍແຖບ Meta+1..9"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "ລັກສະນະການເຮັດວຽກຂອງການວາງດ້ວຍ Meta+V"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "ອະນຸຍາດໃຫ້ລາກ ແລະ ວາງເພື່ອວາງເນື້ອຫາ"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "ຮັບການເຂົ້າລະຫັດ"
+	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "ຂະໜາດໄລຍະຫ່າງຈາກຂອບໜ້າຈໍ"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "ເລື່ອນໄປລຸ່ມສຸດຫຼັງກົດປຸ່ມ"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "ເລື່ອນລົງລຸ່ມສຸດຫຼັງຈາກມີເອົ້າພຸດໃໝ່"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "ຈຳລອງປຸ່ມລູກສອນດ້ວຍການໃຊ້ລໍ້ເລື່ອນ"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "ຕົວຄູນການເລື່ອນລໍ້ຂອງເມົ້າ"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "ການເບິ່ງເຫັນແຖບເລື່ອນ"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "ການວາງດ້ວຍ Shift+Insert"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "ການເຂົ້າລະຫັດເທີມິນອນ"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "ອະນຸຍາດໃຫ້ໂປຣແກຣມທ່ອງເວັບຈັດການການສຳເນົາຂໍ້ຄວາມ"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "CSS ແບບກຳນົດເອງ (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "CSS ແບບກຳນົດເອງ (ຂໍ້ຄວາມໃນແຖວ)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "ການຢຸດການເລືອກໂດຍອັດຕະໂນມັດ (ທາງເບື້ອງຊ້າຍ)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "ຕົວອັກສອນໃນການຕັດຄຳ"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "ການຢຸດການເລືອກໂດຍອັດຕະໂນມັດ (ທາງເບື້ອງຂວາ)"
+	},
+	"hterm_options_button_label": {
+		"message": "ຕົວເລືອກ"
+	},
+	"hterm_popup_inline_image": {
+		"message": "ຮູບໃນແຖວ"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "ປິດການນຳໃຊ້ຮູບໃນແຖວແລ້ວ"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "ຈະອະນຸຍາດໃຫ້ໂຮສທາງໄກສະແດງຮູບໃນເທີມິນອນຫຼືບໍ່.\n\nຕາມຄ່າເລີ່ມຕົ້ນ, ພວກເຮົາຈະເຕືນບອກຈົນກວ່າມີການເລືອກ."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "ຖ້າຕັ້ງຄ່າ, ລະບົບຈະຍົກເລີກການຈັດແຜນທີ່ຄືນໃໝ່ Chrome OS Alt+Backspace->Delete, ເພື່ອໃຫ້ Alt+Backspace ເປັນ Alt+Backspace ຈິງໆ."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "ເລືອກຮິວຣິສຕິກການກວດຫາ AltGr.\n\n'null': ກວດຫາໂດຍອັດຕະໂນມັດອີງຕາມ navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': ປິດການນຳໃຊ້ການຈຳລອງ AltGr ໃດໆກໍຕາມ.\n'ctrl-alt': ໃຫ້ Ctrl+Alt ໝາຍເຖິງ AltGr.\n'left-alt': ໃຫ້ Alt ທາງຊ້າຍໝາຍເຖິງ AltGr.\n'right-alt': ໃຫ້ Alt ທາງຂວາໝາຍເຖິງ AltGr."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "ກຳນົດວ່າຈະໃຫ້ປຸ່ມ Alt ເຮັດໜ້າທີ່ເປັນປຸ່ມ Meta ຫຼື ເປັນປຸ່ມ Alt ທີ່ຊັດເຈນຫຼືບໍ່."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "ຄວບຄຸມວິທີຈັດການປຸ່ມ Alt\n\n  escape: ສົ່ງຄຳນຳໜ້າ ESC.\n  8-bit: ເພີ່ມ 128 ໃສ່ຕົວອັກສອນທີ່ພິມຄືກັນກັບໃນ xterm.\n browser-key: ລໍຖ້າໃຫ້ມີການກົດປຸ່ມ ແລະ ເບິ່ງວ່າໂປຣແກຣມທ່ອງເວັບຈະສະແດງຜົນ\n ຫຍັງ. (ນີ້ຈະໃຊ້ບໍ່ໄດ້ດີໃນແພລດຟອມທີ່ໂປຣແກຣມທ່ອງເວັບ\n ດຳເນີນການຕາມຄ່າເລີ່ມຕົ້ນສຳລັບລຳດັບ Alt)."
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "URL ຂອງສຽງກະດິ່ງຂອງເທີມິນອນ. ປະຫວ່າງເປົ່າຖ້າບໍ່ມີກະດິ່ງແບບມີສຽງ."
+	},
+	"hterm_pref_background_color": {
+		"message": "ສີພາບພື້ນຫຼັງສຳລັບຂໍ້ຄວາມທີ່ບໍ່ມີຄຸນສົມບັດສີອື່ນ."
+	},
+	"hterm_pref_background_image": {
+		"message": "ຄ່າ CSS ຂອງພາບພື້ນຫຼັງ. ປະຫວ່າງເປົ່າຖ້າບໍ່ມີຮູບ.\n\nຕົວຢ່າງ:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "ຄ່າ CSS ຂອງຕຳແໜ່ງພາບພື້ນຫຼັງ.\n\nຕົວຢ່າງ:\n  10% 10%\n  ເຄິ່ງກາງ"
+	},
+	"hterm_pref_background_size": {
+		"message": "ຄ່າ CSS ຂອງຂະໜາດພາບພື້ນຫຼັງ."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "ຖ້າເປັນຖືກ, ປຸ່ມ Backspace ຈະສົ່ງ BS ('\\x08', aka ^H). ຖ້າເປັນຄ່າອື່ນ ປຸ່ມ Backspace ຈະສົ່ງ '\\x7f'."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "ລະບຸສິ່ງນີ້ເປັນວັດຖຸ. ມັນເປັນອາເຣແບບກະຈາຍ, ທີ່ແຕ່ລະຄຸນລັກສະນະເປັນລະຫັດຊຸດຕົວອັກສອນ ແລະ ຄ່າເປັນວັດຖຸທີ່ເປັນອາເຣແບບກະຈາຍໃນຕົວ. ໃນອາເຣແບບກະຈາຍນັ້ນ, ແຕ່ລະຄຸນລັກສະນະເປັນຕົວອັກສອນທີ່ໄດ້ຮັບ ແລະ ຄ່າເປັນຕົວອັກສອນທີ່ສະແດງ.\n\nຕົວຢ່າງ:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "ຈະລຶບລ້າງການເລືອກຫຼັງຈາກສຳເນົາໄວ້ແລ້ວ."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "ກຳນົດວ່າຈະປິດໜ້າຈໍຫຼືບໍ່ເມື່ອດຳເນີນຄຳສັ່ງສຳເລັດແລ້ວ."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "ລົບລ້າງສີໃນຊຸດສີເລີ່ມຕົ້ນ.\n\nສາມາດລະບຸສິ່ງນີ້ເປັນອາເຣ ຫຼື ວັດຖຸ. ຖ້າລະບຸເປັນວັດຖຸ ຈະຖືວ່າເປັນອາເຣແບບກະຈາຍທີ່ຄຸນສົມບັດແຕ່ລະຢ່າງເປັນດັດຊະນີຕົວເລກໃນຊຸດສີ.\n\nສາມາດລະບຸຄ່າເກືອບວ່າເປັນຄ່າສີ CSS ໃດໆກໍໄດ້. ນີ້ຮວມມີ #RGB, #RRGGBB, rgb(...), rgba(...) ແລະ ຊື່ສີຕ່າງໆທີ່ຍັງເປັນສ່ວນໜຶ່ງຂອງໄຟລ໌ X11 rgb.txt ມາດຕະຖານ.\n\nທ່ານສາມາດໃຊ້ 'null' ເພື່ອລະບຸວ່າບໍ່ຄວນປ່ຽນແປງຄ່າເລີ່ມຕົ້ນ. ນີ້ຈະເປັນປະໂຫຍດສຳລັບການຂ້າມຕົວເລກຈຳນວນໜ້ອຍໆຂອງດັດຊະນີ ຖ້າລະບຸຄ່າໄວ້ເປັນອາເຣ.\n\nຕົວຢ່າງ: ທັງສອງລາຍການນີ້ຕັ້ງຄ່າດັດຊະນີສີ 1 ເປັນສີຟ້າ:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "ສຳເນົາການເລືອກດ້ວຍເມົ້າໄວ້ໃນຄລິບບອດໂດຍອັດຕະໂນມັດ."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Ctrl+C ຈະສຳເນົາຖ້າເປັນຖືກ, ສົ່ງ ^C ໄປຍັງໂຮສຖ້າເປັນຜິດ.\nCtrl+Shift+C ຈະສົ່ງ ^C ໄປຍັງໂຮສຖ້າເປັນຖືກ, ສຳເນົາຖ້າເປັນຜິດ."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "ຖ້າເປັນຖືກ, Ctrl+Plus/Minus/Zero ຈະຄວບຄຸມການຊູມ.\nຖ້າເປັນຜິດ, Ctrl+Shift+Plus/Minus/Zero ຈະຄວບຄຸມການຊູມ, Ctrl+Minus ຈະສົ່ງ ^_, Ctrl+Plus/Zero ຈະບໍ່ເຮັດຫຍັງ."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Ctrl+V ຈະສຳເນົາຖ້າເປັນຖືກ, ສົ່ງ ^V ໄປຍັງໂຮສຖ້າເປັນຜິດ.\nCtrl+Shift+V ຈະສົ່ງ ^V ໄປຍັງໂຮສຖ້າເປັນຖືກ, ສຳເນົາຖ້າເປັນຜິດ."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "ຈະໃຫ້ເຄີເຊີຂໍ້ຄວາມກະພິບຕາມຄ່າເລີ່ມຕົ້ນຫຼືບໍ່. ສາມາດສະຫຼັບສິ່ງນີ້ໄດ້ໃນເວລາເປີດນຳໃຊ້ຜ່ານການກົດຕົວອັກສອນຫຼີກຕາມລຳດັບໃນເທີມິນອນ."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "ອັດຕາກະພິບຂອງເຄີເຊີຂໍ້ຄວາມເປັນມິລິວິນາທີ.\n\nອາເຣສອງອົງປະກອບ, ອັນທີໜຶ່ງກ່ຽວກັບວ່າເຄີເຊີຂໍ້ຄວາມຄວນເປີດດົນປານໃດ, ອັນທີສອງກ່ຽວກັບວ່າມັນຄວນປິດດົນປານໃດ."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "ສີຂອງເຄີເຊີຂໍ້ຄວາມທີ່ເບິ່ງເຫັນໄດ້."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "ຮູບຮ່າງຂອງເຄີເຊີຂໍ້ຄວາມທີ່ເບິ່ງເຫັນໄດ້. ສາມາດປ່ຽນສິ່ງນີ້ໄດ້ໃນເວລາເປີດນຳໃຊ້ຜ່ານການກົດຕົວອັກສອນຫຼີກຕາມລຳດັບໃນເທີມິນອນ."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "ຖ້າເປັນຈິງ, ກະດິ່ງເຕືອຂອງເທີມິນອນໃນພື້ນຫຼັງຈະສ້າງການແຈ້ງເຕືອນເວັບ. https://www.w3.org/TR/notifications/\n\nການສະແດງການແຈ້ງເຕືອນຈຳເປັນຕ້ອງມີການອະນຸຍາດຈາກຜູ້ໃຊ້. ເມື່ອຕັ້ງຄ່າຕົວເລືອກນີ້ເປັນຖືກ, hterm ຈະພະຍາຍາມຂໍເອົາການອະນຸຍາດຈາກຜູ້ໃຊ້ຖ້າຈຳເປັນ. ໂປຣແກຣມທ່ອງເວັບອາດຈະບໍ່ສະແດງຄຳຂໍການອະນຸຍາດນີ້ຖ້າມັນຖືກກະຕຸ້ນໂດຍຄຳສັ່ງຂອງຜູ້ໃຊ້.\n\nສ່ວນຂະຫຍາຍ Chrome ທີ່ມີການອະນຸຍາດ \"ການແຈ້ງເຕືອນ\" ມີສິດອະນຸຍາດໃຫ້ສະແດງການແຈ້ງເຕືອນໄດ້."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "ຈະໃຫ້ຕົວອັກສອນ East Asian Ambiguous ມີຄວາມກວ້າງສອງຖັນຫຼືບໍ່."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "ຖືກເພື່ອເປີດການນຳໃຊ້ຕົວອັກສອນຄວບຄຸມແບບ 8 ບິດ, ຜິດເພື່ອລະເລີຍພວກມັນ.\n\nພວກເຮົາຈະສະແດງຜົນຕາມເວີຊັນ 2 ໄບຕ໌ຂອງຕົວອັກສອນຄວບຄຸມເຫຼົ່ານີ້ໂດຍບໍ່ສົນເຖິງການຕັ້ງຄ່ານີ້."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "ຖ້າເປັນຖືກ, ລະບົບຈະສະແດງຜົນຕາມຄຸນສົມບັດການກະພິບ. ຖ້າເປັນຜິດ ລະບົບຈະລະເລີຍມັນ."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "ຖ້າເປັນຖືກ, ລະບົບຈະໃຊ້ຟອນຕົວໜາສຳລັບຂໍ້ຄວາມທີ່ມີຄຸນສົມບັດຕົວໜາ/ສະຫວ່າງ. ຖ້າເປັນຜິດ ລະບົບຈະໃຊ້ຟອນຕົວໜາປົກກະຕິ. Null ສຳລັບການກວດຫາອັດຕະໂນມັດ."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "ຖ້າເປັນຖືກ, ກະລຸນາໃຊ້ສີສະຫວ່າງ (8-15 ໃນຖາດສີ 16 ສີ) ສຳລັບຂໍ້ຄວາມໃດໆກໍຕາມທີ່ມີຄຸນສົມບັດຕົວໜາ. ຖ້າເປັນຜິດ ລະບົບຈະບໍ່ໃຊ້ສີສະຫວ່າງ."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "ຈະສະແດງຂໍ້ຄວາມໃນເທີມິນອນຫຼືບໍ່ເມື່ອໂຮສຂຽນໃສ່ຄລິບບອດ."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "ອະນຸຍາດໃຫ້ໂຮສທາງໄກຂຽນໂດຍກົງໃສ່ຄລິບບອດຂອງລະບົບໃນເຄື່ອງ.\nຖ້າບໍ່ມີການຕັ້ງຄ່ານີ້ກໍຈະບໍ່ມີການໃຫ້ສິດເຂົ້າເຖິງການອ່ານ.\n\nໃຊ້ການຕັ້ງຄ່ານີ້ເພື່ອຄວບຄຸມສິດເຂົ້າເຖິງຄຸນສົມບັດຕ່າງໆ ເຊັ່ນ: OSC-52."
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "ກຳນົດວ່າຈະໃຫ້ຟັງຊັນລຶບແຖບທີ່ບັນທຶກໄວ້ (ໂໝດ 3) ຂອງຄຳສັ່ງລຶບການສະແດງຜົນ (CSI-J) ອາດຈະລຶບລ້າງບັບເຟີການເລື່ອນກັບຂອງເທີມິນອນຫຼືບໍ່.\n\nການເປີດການນຳໃຊ້ໄວ້ຕາມຄ່າເລີ່ມຕົ້ນຈະປອດໄພດີ."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "ປະຕິບັດຕາມໂຮສທີ່ຕ້ອງການປ່ຽນສະຖານະການກະພິບເຄີເຊີຂອງຂໍ້ຄວາມໂດຍໃຊ້ DEC Private Mode 12."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "ກຳນົດວ່າຈະກຳນົດຂະໜາດເທີມິນອນຫຼືບໍ່ເມື່ອເທີມິນອນປ່ຽນຂະໜາດ."
+	},
+	"hterm_pref_environment": {
+		"message": "ຊຸດຕົວປ່ຽນຂອງສະພາບແວດລ້ອມເລີ່ມຕົ້ນ, ທີ່ເປັນວັດຖຸ."
+	},
+	"hterm_pref_font_family": {
+		"message": "ຕະກູນຟອນເລີ່ມຕົ້ນສຳລັບຂໍ້ຄວາມປາຍທາງ."
+	},
+	"hterm_pref_font_size": {
+		"message": "ຂະໜາດຟອນຕາມຄ່າເລີ່ມຕົ້ນເປັນພິກເຊວ."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "ຄຸນລັກສະນະ CSS font-smoothing"
+	},
+	"hterm_pref_foreground_color": {
+		"message": "ສີພື້ນໜ້າສຳລັບຂໍ້ຄວາມທີ່ບໍ່ມີຄຸນສົມບັດສີອື່ນ."
+	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "ຈະໃຫ້ເຊື່ອງເຄີເຊີເມົ້າໂດຍອັດຕະໂນມັດໃນເວລາພິມຫຼືບໍ່. ຕາມຄ່າເລີ່ມຕົ້ນແລ້ວ, ຈະກວດຫາອັດຕະໂນມັດບໍ່ວ່າແພລດຟອມ/ລະບົບປະຕິບັດການຈະຈັດການກັບສິ່ງນີ້ຫຼືບໍ່ກໍຕາມ.\n\nໝາຍເຫດ: ລະບົບປະຕິບັດການຂອງທ່ານອາດຈະລົບລ້າງການຕັ້ງຄ່ານີ້ ແລະ ສະນັ້ນທ່ານອາດຈະບໍ່ສາມາດປິດການນຳໃຊ້ມັນໄດ້ທຸກເທື່ອ."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "ຖ້າເປັນຖືກ, Home/End ຈະຄວບຄຸມແຖບການເລື່ອນເທີມິນອນ ແລະ Shift+Home/Shift+End ຈະຖືກສົ່ງໄປຍັງໂຮສທາງໄກ. ຖ້າເປັນຜິດ, Home/End ຈະຖືກສົ່ງໄປຍັງໂຣສທາງໄກ ແລະ Shift+Home/Shift+End ຈະເປັນການເລື່ອນ."
+	},
+	"hterm_pref_keybindings": {
+		"message": "ແຜນທີ່ຂອງລຳດັບປຸ່ມກັບຄຳສັ່ງປຸ່ມ. ລຳດັບປຸ່ມຮວມມີປຸ່ມຕົວດັດແປງແຕ່ສູນຂຶ້ນໄປຕາມດ້ວຍລະຫັດປຸ່ມ. ລະຫັດປຸ່ມສາມາດເປັນຕົວເລກທົດສະນິຍົມ ຫຼື ເລກຖານສິບຫົກ ຫຼື ເປັນຕົວລະບຸປຸ່ມໃດໜຶ່ງ. ສາມາດລະບຸຄຳສັ່ງປຸ່ມເປັນສະຕຣິງເພື່ອສົ່ງໄປຍັງໂຮສ ຫຼື ຕົວລະບຸຄຳສັ່ງໃດໜຶ່ງ. ສຳລັບຄຳອະທິບາຍເຕັມກ່ຽວກັບຮູບແບບ, ກະລຸນາເບິ່ງ https://goo.gl/LWRndr.\n\nຕົວຢ່າງການເຊື່ອມໂຍງປຸ່ມ:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "ກຳນົດວ່າຈະໃຫ້ລະບົບດຳເນີນການຕາມການເຊື່ອມໂຍງແປ້ນພິມຂອງລະບົບປະຕິບັດການໂດຍທົ່ວໄປແທນການບັນທຶກໄວ້ໃນທຸກຄັ້ງເພື່ອການນຳໃຊ້ຂອງ hterm ເອງຫຼືບໍ່."
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "ຖ້າເປັນຖືກ, ປ່ຽນປຸ່ມສື່ເປັນ Fkey ປຸ່ມທຽບເທົ່າ Fkey ຂອງພວກມັນ. ຖ້າເປັນຜິດ, ອະນຸຍາດໃຫ້ໂປຣແກຣມທ່ອງເວັບຈັດການປຸ່ມ."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "ສົ່ງຄຳນຳໜ້າ ESC ໃນເວລາກົດປຸ່ມໃນຂະນະທີ່ກົດປຸ່ມ Meta ຄ້າງໄວ້.\n\nຕົວຢ່າງ: ເມື່ອເປີດການນຳໃຊ້, ການກົດ Meta+K ຈະສົ່ງ ^[k ຄືກັບວ່າທ່ານໄດ້ພິມ Escape ແລ້ວພິມ k. ເມື່ອປິດການນຳໃຊ້, ຈະສົ່ງແຕ່ k ເທົ່ານັ້ນ."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "ການວາງເມື່ອຄລິກຂວາໃສ່ປຸ່ມເມົ້າ.\n\nຕົວເລືອກນີ້ບໍ່ຂຶ້ນກັບການຕັ້ງຄ່າ \"ປຸ່ມວາງໂດຍໃຊ້ເມົ້າ\".\n\nໝາຍເຫດ: ນີ້ຈະຈັດການເມົ້າແບບຖະໜັດຊ້າຍ ແລະ ຂວາຢ່າງຖືກຕ້ອງ."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "ຖ້າເປັນຖືກ, Page Up/Page Down ຈະຄວບຄຸມແຖບການເລື່ອນເທີມິນອນ ແລະ Shift+Page Up/Shift+Page Down ຈະຖືກສົ່ງໄປຍັງໂຮສທາງໄກ. ຖ້າເປັນຜິດ, Page Up/Page Down ຈະຖືກສົ່ງໄປຍັງໂຣສທາງໄກ ແລະ Shift+Page Up/Shift+Page Down ຈະເປັນການເລື່ອນ."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "ຈະສົ່ງຜ່ານ Alt+1..9 ໄປຍັງໂປຣແກຣມທ່ອງເວັບຫຼືບໍ່.\n\nການຕັ້ງຄ່ານີ້ມີປະໂຫຍດເມື່ອເອີ້ນໃຊ້ hterm ໃນແຖບໂປຣແກຣມທ່ອງເວັບ, ເພື່ອວ່າທ່ານຈະບໍ່ເສຍທາງລັດແປ້ນພິມ \"ປ່ຽນເປັນແຖບ\" ຂອງ Chrome. ເມື່ອບໍ່ໄດ້ເອີ້ນໃຊ້ໃນແທັບ ທ່ານຄວນສົ່ງປຸ່ມເຫຼົ່ານີ້ໄປຍັງໂຮສເພື່ອຈະໄດ້ໃຊ້ພວກມັນໃນ Vim ຫຼື Emacs ໄດ້.\n\nຖ້າເປັນຖືກ Alt+1..9 ຈະຖືກຈັດການໂດຍໂປຣແກຣມທ່ອງເວັບ. ຖ້າເປັນຜິດ, Alt+1..9 ຈະຖືກສົ່ງຫາໂຮສ. ຖ້າເປັນ Null, ການກວດຫາອັດຕະໂນມັດຈະອີງຕາມແພລດຟອມຂອງໂປຣແກຣມທ່ອງເວັບ ແລະ ປະເພດໜ້າຈໍ."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "ກຳນົດວ່າຈະສົ່ງຜ່ານ Ctrl+N ໄປຍັງໂປຣແກຣມທ່ອງເວັບຫຼືບໍ່.\n\nຖ້າເປັນຖືກ, Ctrl+N ຈະຖືກຈັດການໂດຍໂປຣແກຣມທ່ອງເວັບເປັນທາງລັດແປ້ນພິມ \"ໜ້າຈໍໃໝ່\". ຖ້າເປັນຜິດ, Ctrl+N ຈະຖືກສົ່ງໄປຍັງໂຮສ."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "ກຳນົດວ່າຈະສົ່ງຜ່ານ Ctrl+1..9 ໄປຍັງໂປຣແກຣມທ່ອງເວັບຫຼືບໍ່.\n\nການຕັ້ງຄ່ານີ້ມີປະໂຫຍດເມື່ອເອີ້ນໃຊ້ hterm ໃນແຖບໂປຣແກຣມທ່ອງເວັບ, ເພື່ອວ່າທ່ານຈະບໍ່ເສຍທາງລັດແປ້ນພິມ \"ປ່ຽນເປັນແຖບ\" ຂອງ Chrome. ເມື່ອບໍ່ໄດ້ເອີ້ນໃຊ້ໃນແທັບ ທ່ານຄວນສົ່ງປຸ່ມເຫຼົ່ານີ້ໄປຍັງໂຮສເພື່ອຈະໄດ້ໃຊ້ພວກມັນໃນ Vim ຫຼື Emacs ໄດ້.\n\nຖ້າເປັນຖືກ Ctrl+1..9 ຈະຖືກຈັດການໂດຍໂປຣແກຣມທ່ອງເວັບ. ຖ້າເປັນຜິດ, Ctrl+1..9 ຈະຖືກສົ່ງຫາໂຮສ. ຖ້າເປັນ Null, ການກວດຫາອັດຕະໂນມັດຈະອີງຕາມແພລດຟອມຂອງໂປຣແກຣມທ່ອງເວັບ ແລະ ປະເພດໜ້າຈໍ."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "ກຳນົດວ່າຈະສົ່ງຜ່ານ Ctrl+T ໄປຍັງໂປຣແກຣມທ່ອງເວັບຫຼືບໍ່.\n\nຖ້າເປັນຖືກ Ctrl+T ຈະຖືກຈັດການໂດຍໂປຣແກຣມທ່ອງເວັບເປັນທາງລັດແປ້ນພິມ \"ແຖບໃໝ່\". ຖ້າເປັນຜິດ, Ctrl+T ຈະຖືກສົ່ງໄປຍັງໂຮສ."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "ຈະສົ່ງຜ່ານ Ctrl+Tab ແລະ Ctrl+Shift+Tab ໄປຍັງໂປຣແກຣມທ່ອງເວັບຫຼືບໍ່.\n\nຖ້າເປັນຖືກ Ctrl+Tab ຈະຖືກຈັດການໂດຍໂປຣແກຣມທ່ອງເວັບເປັນທາງລັດແປ້ນພິມ \"ຕໍ່ໄປ/ກ່ອນໜ້າແຖບ\". ຖ້າເປັນຜິດ, ຈະສົ່ງປຸ່ມ Tab ໄປຍັງໂຮສໂດຍບໍ່ມີ Ctrl ຫຼື Shift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "ກຳນົດວ່າຈະສົ່ງຜ່ານ Ctrl+W ໄປຍັງໂປຣແກຣມທ່ອງເວັບຫຼືບໍ່.\n\nຖ້າເປັນຖືກ Ctrl+W ຈະຖືກຈັດການໂດຍໂປຣແກຣມທ່ອງເວັບເປັນທາງລັດແປ້ນພິມ \"ປິດແຖບ\". ຖ້າເປັນຜິດ, Ctrl+W ຈະຖືກສົ່ງໄປຍັງໂຮສ."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "ກຳນົດວ່າຈະສົ່ງຜ່ານ Meta+1..9 ໄປຍັງໂປຣແກຣມທ່ອງເວັບຫຼືບໍ່.\n\nການຕັ້ງຄ່ານີ້ມີປະໂຫຍດເມື່ອເອີ້ນໃຊ້ hterm ໃນແຖບໂປຣແກຣມທ່ອງເວັບ, ເພື່ອວ່າທ່ານຈະບໍ່ເສຍທາງລັດແປ້ນພິມ \"ປ່ຽນເປັນແຖບ\" ຂອງ Chrome. ເມື່ອບໍ່ໄດ້ເອີ້ນໃຊ້ໃນແທັບ ທ່ານຄວນສົ່ງປຸ່ມເຫຼົ່ານີ້ໄປຍັງໂຮສເພື່ອຈະໄດ້ໃຊ້ພວກມັນໃນ Vim ຫຼື Emacs ໄດ້.\n\nຖ້າເປັນຖືກ Meta+1..9 ຈະຖືກຈັດການໂດຍໂປຣແກຣມທ່ອງເວັບ. ຖ້າເປັນຜິດ, Meta+1..9 ຈະຖືກສົ່ງຫາໂຮສ. ຖ້າເປັນ Null, ການກວດຫາອັດຕະໂນມັດຈະອີງຕາມແພລດຟອມຂອງໂປຣແກຣມທ່ອງເວັບ ແລະ ປະເພດໜ້າຈໍ."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "ຈະສົ່ງຜ່ານ Meta+V ໄປຍັງໂປຣແກຣມທ່ອງເວັບຫຼືບໍ່.\n\nນີ້ຖືກໃຊ້ເພື່ອວາງເນື້ອຫາຢູ່ໃນບາງລະບົບ."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "ຖ້າເປັນຖືກ, ລາກ ແລະ ວາງຂໍ້ຄວາມຈະວາງໃສ່ເທີມິນອນ.\nຖ້າເປັນຜິດ, ຂໍ້ຄວາມທີ່ວາງຈະຖືກລະເລີຍ."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "ຕັ້ງຄ່າການເຂົ້າລະຫັດທີ່ຄາດໄວ້ສຳລັບຂໍ້ມູນທີ່ໄດ້ຮັບຈາກໂຮສ.\nຖ້າການເຂົ້າລະຫັດບໍ່ກົງກັນ, ເປັນໄປໄດ້ວ່າຈະສັງເກດເຫັນຂໍ້ຜິດພາດທາງພາບໄດ້.\n\nຄ່າທີ່ຖືກຕ້ອງແມ່ນ 'utf-8' ແລະ 'raw'."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "ຂະໜາດໄລຍະຫ່າງຈາກເສັ້ນຂອບຂອງໜ້າຈໍເທີມິນັລ ເຊິ່ງມີໜ່ວຍເປັນພິກເຊວ.\n\nນີ້ຄວບຄຸມຂະໜາດຂອງເສັ້ນຂອບອ້ອມໜ້າຈໍເທີມິນອນ ເພື່ອໃຫ້ຜູ້ໃຊ້ສາມາດເພີ່ມໄລຍະຫ່າງຈາກຂອບຂອງໜ້າຈໍໄດ້."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "ຈະເລື່ອນໄປລຸ່ມສຸດຫຼືບໍ່ເມື່ອມີການກົດປຸ່ມໃດໆກໍຕາມ."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "ເລື່ອນລົງຈົນສຸດໃນເທີມິນອນເອົ້າພຸດຫຼືບໍ່."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "ເມື່ອໃຊ້ບັບເຟີໜ້າຈໍສຳຮອງ ແລະ ມີການເປີດນຳໃຊ້ DECCKM (ປຸ່ມເຄີເຊີຂອງແອັບພລິເຄຊັນ), ເຫດການລໍ້ເລື່ອນຂອງເມົ້າຈະຮຽນແບບປຸ່ມລູກສອນ.\n\nສາມາດປິດການນຳໃຊ້ຊົ່ວຄາວໄດ້ໂດຍການກົດປຸ່ມ Shift ຄ້າງໄວ້.\n\nມັກປາກົດຂຶ້ນໃນເວລາໃຊ້ໂປຣແກຣມອ່ານໜ້າ (Less) ຫຼື ເມື່ອອ່ານໜ້າທີ່ກຳນົດເອງ ຫຼື ເມື່ອໃຊ້ເຄື່ອງມືແກ້ໄຂຂໍ້ຄວາມ (Vi/Nano) ຫຼື ໃຊ້ Screen/Tmux."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "ຕົວຄູນສຳລັບເຫດການລໍ້ເລື່ອນເມົ້າເມື່ອວັດແທກເປັນພິກເຊວ.\n\nປ່ຽນວ່າຈະໃຫ້ການເລື່ອນໜ້າໄວປານໃດ"
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "ໂໝດແຖບເລື່ອນແນວຕັ້ງ."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "ຈະໃຊ້ Shift+Insert ສຳລັບການວາງ ຫຼື ຈະສົ່ງໄປຍັງໂຮສທາງໄກ."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "ການເຂົ້າລະຫັດເທີມິນອນເລີ່ມຕົ້ນ (DOCS).\n\nISO-2022 ຈະເປີດການນຳໃຊ້ການແປແຜນທີ່ຕົວອັກສອນ (ເຊັ່ນ: ແຜນທີ່ກຣາຟິກ).\nUTF-8 ຈະປິດການນຳໃຊ້ການຮອງຮັບສຳລັບສິ່ງເຫຼົ່ານັ້ນ.\n\nຕົວປ່ຽນທີ່ລັອກໄວ້ໝາຍຄວາມວ່າບໍ່ສາມາດປ່ຽນການເຂົ້າເຖິງໃນເວລາເປີດນຳໃຊ້ຜ່ານການກົດຕົວອັກສອນຫຼີກຕາມລຳດັບໃນເທີມິນອນໄດ້.\n\nທ່ານຄວນສືບຕໍ່ໃຊ້ UTF-8 ເວັ້ນເສຍແຕ່ວ່າທ່ານພົບເຫັນການສະແດງຜົນເສຍຫາຍກັບແອັບພລິເຄຊັນເດີມ."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "ຈະໃຊ້ລັກສະນະການສຳເນົາຂອງໂປຣແກຣມທ່ອງເວັບ/ລະບົບປະຕິບັດການຫຼືບໍ່.\n\nອະນຸຍາດໃຫ້ໂປຣແກຣມທ່ອງເວັບ/ລະບົບປະຕິບັດການຈັດການເຫດການການສຳເນົາໂດຍກົງ ເຊິ່ງອາດຈະປັບປຸງຄວາມເຂົ້າກັນໄດ້ກັບບາງລະບົບ (ເຊິ່ງໃຊ້ການສຳເນົາບໍ່ໄດ້ເລີຍ)ດ ແຕ່ເຮັດໃຫ້ການເລືອກຂໍ້ຄວາມມີປະສິດທິພາບຫຼຸດລົງ.\n\nຕົວຢ່າງ: ແຖວຍາວໆທີ່ໄດ້ຮັບການຕັດແຖບໂດຍອັດຕະໂນມັດຈະຖືກສຳເນົາໂດຍຍັງມີແຖວໃໝ່ຢູ່ໃນນັ້ນ."
+	},
+	"hterm_pref_user_css": {
+		"message": "URL ຂອງແຜ່ນຮູບແບບຜູ້ໃຊ້ຈະຮວມຢູ່ໃນເອກະສານຂອງເທີມິນອນ."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "ຂໍ້ຄວາມ CSS ແບບກຳນົດເອງສຳລັບການຈັດຮູບແບບເທີມິນອນ."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "ການສະແດງອອກປົກກະຕິເພື່ອຢຸດການຈັບຄູ່ກັບການເລືອກທີ່ຢູ່ຊ້າຍ (ສຸດ).\n\nໂດຍປົກກະຕິແລ້ວ ນີ້ເປັນປະເພດຕົວອັກສອນເພື່ອປະຕິເສດຕົວອັກສອນສະເພາະ.\nພວກເຮົາອະນຸຍາດ \"~\" ແລະ \".\" ຕາມຄ່າເລີ່ມຕົ້ນເປັນເສັ້ນທາງທີ່ເລີ່ມຕົ້ນດ້ວຍສິ່ງເຫຼົ່ານັ້ນເລື້ອຍໆ."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "ການສະແດງອອກປົກກະຕິເພື່ອຈັບຄູ່ກັບຕົວອັກສອນທັງໝົດຢູ່ເຄິ່ງກາງ.\n\nໂດຍປົກກະຕິແລ້ວ ນີ້ເປັນປະເພດຕົວອັກສອນເພື່ອປະຕິເສດຕົວອັກສອນສະເພາະ.\n\nໃຊ້ເພື່ອຂະຫຍາຍການເລືອກທີ່ຢູ່ອ້ອມຈຸດເລີ່ມຕົ້ນ."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "ການສະແດງອອກປົກກະຕິເພື່ອຢຸດການຈັບຄູ່ກັບການເລືອກທີ່ຢູ່ຂວາ (ສຸດ).\n\nໂດຍປົກກະຕິແລ້ວ ນີ້ເປັນປະເພດຕົວອັກສອນເພື່ອປະຕິເສດຕົວອັກສອນສະເພາະ."
+	},
+	"hterm_space_character": {
+		"message": "ພື້ນທີ່"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "ຮູບຮ່າງ (ຟອນ, ສີ, ຮູບ)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "ສຳເນົາ ແລະ ວາງ"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "ການເຂົ້າລະຫັດ"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "ສ່ວນຂະຫຍາຍ"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "ແປ້ນພິມ"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "ອື່ນໆ"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "ການເລື່ອນ"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "ສຽງ"
+	},
+	"identity_label": {
+		"message": "ຕົວຕົນ"
+	},
+	"import_link_aria_label": {
+		"message": "ການນຳເຂົ້າໄຟລ໌"
+	},
+	"import_link_label": {
+		"message": "ນຳເຂົ້າ..."
+	},
+	"initializing_relay": {
+		"message": "ກຳລັງຊອກຫາເຊີບເວີການຖ່າຍທອດສັນຍານໂດຍໃຊ້: $1"
+	},
+	"json_parse_error": {
+		"message": "ບໍ່ສາມາດແຍກວິເຄາະ JSON ໃນ '$1' ໄດ້: $2"
+	},
+	"known_hosts_empty": {
+		"message": "ໂຮສທີ່ບໍ່ຮູ້ຈັກ, ບໍ່ມີຫຍັງໃຫ້ລືມ."
+	},
+	"known_hosts_prompt": {
+		"message": "ກະລຸນາເລືອກໂຮສເພື່ອລືມ [1-$1]:"
+	},
+	"known_hosts_title": {
+		"message": "ໂຮສທີ່ບໍ່ຮູ້ຈັກ:"
+	},
+	"licenses": {
+		"message": "ໃບອະນຸຍາດ"
+	},
+	"licenses_expand_link": {
+		"message": "ສະແດງໃບອະນຸຍາດ"
+	},
+	"licenses_title": {
+		"message": "ໃບອະນຸຍາດໂອເພນຊອດ"
+	},
+	"loading_label": {
+		"message": "ກຳລັງໂຫລດ..."
+	},
+	"migrate_to_ext": {
+		"message": "ແຈ້ງການ: ກະລຸນາຍ້າຍໄປຍັງສ່ວນຂະຫຍາຍ Secure Shell ໃໝ່ ($1).\nລະບົບເຊົາຮອງຮັບແອັບ Chrome ແລ້ວ, ສະນັ້ນ ເວີຊັນນີ້ຈະຢຸດໄດ້ຮັບການອັບເດດ.\nກະລຸນາເບິ່ງຄຳແນະນຳການຍ້າຍ ($2) ສຳລັບລາຍລະອຽດເພີ່ມເຕີມ."
+	},
+	"missing_param": {
+		"message": "ພາຣາມີເຕີຫາຍໄປ: $1"
+	},
+	"mount_button_label": {
+		"message": "ເຊື່ອມຕໍ່ SFTP"
+	},
+	"mount_path_label": {
+		"message": "ເສັ້ນທາງເຊື່ອມຕໍ່"
+	},
+	"mounted_message": {
+		"message": "ເຊື່ອມຕໍ່ແລ້ວ!"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "ສົ່ງອອກໄຟລ໌ໄປຍັງເທີມິນອນ"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "ປ່ຽນແຟ້ມທີ່ນຳໃຊ້ຢູ່"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "ປ່ຽນກຸ່ມເສັ້ນທາງ"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "ປ່ຽນການອະນຸຍາດໃນການເຂົ້າເຖິງເສັ້ນທາງ"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "ປ່ຽນເຈົ້າຂອງເສັ້ນທາງ"
+	},
+	"nasftp_cmd_clear": {
+		"message": "ລຶບລ້າງ"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "ລຶບລ້າງໜ້າຈໍເທີມິນອນປັດຈຸບັນ."
+	},
+	"nasftp_cmd_clip": {
+		"message": "ຄລິບ"
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "ສຳເນົາໄຟລ໌ໄວ້ໃນຄລິບບອດ (ຄ່າເລີ່ມຕົ້ນ: 10MiB ຈາກເລີ່ມຕົ້ນ)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "ສຳເນົາ $1 ໄບຕ໌ໄວ້ໃນຄລິບບອດ"
+	},
+	"nasftp_cmd_color": {
+		"message": "ສີ"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "ສະຫຼັບການໃຊ້ສີ"
+	},
+	"nasftp_cmd_copy": {
+		"message": "ສຳເນົາ"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "ສຳເນົາແຫຼ່ງທີ່ມາໃສ່ປາຍທາງແລ້ວ"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "ລຶບໄຟລ໌"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "ສະແດງສະຖິຕິຂອງດິສ"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  ເສັ້ນທາງ: $1\n  fsid: $2\n ທັງໝົດ: $3\n  ໃຊ້ແລ້ວ: $4 ($5%)\n ຍັງເຫຼືອ: $6 (ຕໍ່ກັບຜູ້ໃຊ້ທີ່ບໍ່ມີສິດທິພິເສດ)\n $7 (ຕໍ່ກັບຣູດ)"
+	},
+	"nasftp_cmd_exit": {
+		"message": "ອອກ"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "ຕັດການເຊື່ອມຕໍ່"
+	},
+	"nasftp_cmd_get": {
+		"message": "ຮັບ"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "ກຳລັງດາວໂຫຼດໄຟລ໌: $1 ເປັນ $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "ດາວໂຫຼດໄຟລ໌"
+	},
+	"nasftp_cmd_help": {
+		"message": "ຊ່ວຍເຫຼືອ"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "ໜ້າຈໍຊ່ວຍເຫຼືອນີ້"
+	},
+	"nasftp_cmd_list": {
+		"message": "ລາຍຊື່"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "ສະແດງລາຍລະອຽດແຟ້ມ"
+	},
+	"nasftp_cmd_ln": {
+		"message": "ໃນ"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "ສ້າງລິ້ງຢູ່ເສັ້ນທາງທີ່ຊີ້ໄປຍັງເປົ້າໝາຍ"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "ສ້າງແຟ້ມ"
+	},
+	"nasftp_cmd_move": {
+		"message": "ຍ້າຍ"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "ປ່ຽນຊື່ໄຟລ໌"
+	},
+	"nasftp_cmd_prompt": {
+		"message": "ການເຕືອນ"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "ຕັ້ງຄ່າສະຕຣິງການເຕືອນບອກ"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "ອັບໂຫລດໄຟລ໌"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "ກຳລັງອັບໂຫຼດໄຟລ໌: $1 ເປັນ $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "ສະແດງແຟ້ມທີ່ນຳໃຊ້ຢູ່ໃນປັດຈຸບັນ"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "ແຟ້ມທີ່ນຳໃຊ້ຢູ່ຈາກທາງໄກ: $1"
+	},
+	"nasftp_cmd_quit": {
+		"message": "ອອກ"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "ອ່ານລິ້ງສັນຍາລັກ"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "ກຳນົດເສັ້ນທາງແບບ Canonical"
+	},
+	"nasftp_cmd_rename": {
+		"message": "ປ່ຽນຊື່"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "ສືບຕໍ່ການອັບໂຫຼດໄຟລ໌"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "ລຶບໄຟລ໌ອອກ"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "ລຶບແຟ້ມທີ່ຫວ່າງເປົ່າ"
+	},
+	"nasftp_cmd_show": {
+		"message": "ສະແດງ"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "ສະແດງໄຟລ໌ແບບໃນແຖວ"
+	},
+	"nasftp_cmd_stat": {
+		"message": "ສະຖິຕິ"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "ສ່ວນຂະຫຍາຍ:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "ສະແດງສະຖານະໄຟລ໌"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  ໄຟລ໌: $1\n  ຂະໜາດ: $2 ໄບຕ໌\n   UID: $3\n   GID: $4\nເຂົ້າເຖິງ: $5\n atime: $6\n mtime: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "ສ້າງລິ້ງສັນຍາລັກຢູ່ເສັ້ນທາງທີ່ຊີ້ໄປຍັງເປົ້າໝາຍ"
+	},
+	"nasftp_cmd_truncate": {
+		"message": "ຕັດ"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "ຕັດເສັ້ນທາງໃຫ້ເຫຼືອ 0 ໄບຕ໌"
+	},
+	"nasftp_cmd_version": {
+		"message": "ເວີຊັນ"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  ສ່ວນຂະຫຍາຍເຊີບເວີ:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "ສະແດງເວີຊັນໂປຣໂຕຄໍປັດຈຸບັນ"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "ຂໍ້ມູນເວີຊັນໂປຣໂຕຄໍ SFTP:\n  ໃນເຄື່ອງ: $1\n  ເຊີບເວີ: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: ສິ້ນສຸດໄຟລ໌"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: ບໍ່ເຫັນໄຟລ໌"
+	},
+	"nasftp_error_file_reading": {
+		"message": "ອ່ານ $1 ບໍ່ສຳເລັດ: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "ຂໍ້ຜິດພາດພາຍໃນທີ່ບໍ່ມີການຈັດການ; ກະລຸນາສົ່ງລາຍງານຂໍ້ຜິດພາດ: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: ເບີໂທບໍ່ຖືກຕ້ອງ: $3"
+	},
+	"nasftp_error_message": {
+		"message": "ຂໍ້ຜິດພາດ: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: ສ່ວນຂະຫຍາຍ '$2' ບໍ່ພ້ອມນຳໃຊ້"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: ບໍ່ເປັນໄຟລ໌ປົກກະຕິ"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: ມີອາກິວເມັນບໍ່ພຽງພໍ"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: ປະຕິເສດການອະນຸຍາດແລ້ວ"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: ອາກິວເມັນຫຼາຍເກີນໄປ"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: ຄຳສັ່ງທີ່ບໍ່ຮູ້ຈັກ"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: ທຸງທີ່ບໍ່ຮູ້ຈັກ $2"
+	},
+	"nasftp_force_quit": {
+		"message": "ບັງຄັບອອກ"
+	},
+	"nasftp_progress_summary": {
+		"message": "ໂອນຍ້າຍ $1 ໄບຕ໌ໃນ $2 ວິນາທີແລ້ວ ($3/ວິ)"
+	},
+	"nassh_options_error": {
+		"message": "ຕົວເລືອກທີ່ບໍ່ຮູ້ຈັກ: $1"
+	},
+	"nassh_product_name": {
+		"message": "Secure Shell"
+	},
+	"new_window_menu_label": {
+		"message": "ໜ້າຈໍໃໝ່"
+	},
+	"ok_button_label": {
+		"message": "ຕົກລົງ"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> ເຊື່ອມຕໍ່ກັບໂປຣໄຟລ໌ທີ່ບັນທຶກໄວ້ ຫຼື ລະບົບ ssh ໃໝ່"
+	},
+	"open_as_window_tip": {
+		"message": "[ເຄັດລັບສຳລັບມືອາຊີບ] ໃຊ້ 'ເປີດເປັນໜ້າຈໍ' ຫຼື 'ເຕັມຈໍ' ເພື່ອປ້ອງກັນບໍ່ໃຫ້ Ctrl+W ປິດເທີມິນອນຂອງທ່ານ!\n[ເຄັດລັບສຳລັບມືອາຊີບ] ເບິ່ງຂໍ້ມູນເພີ່ມເຕີມໄດ້ທີ່ $1."
+	},
+	"plugin_loading": {
+		"message": "ກຳລັງໂຫຼດປລັກອິນ NaCl..."
+	},
+	"plugin_loading_complete": {
+		"message": " ສໍາເລັດ."
+	},
+	"plugin_loading_failed": {
+		"message": " ບໍ່ສຳເລັດ! :("
+	},
+	"popup_connect_tooltip": {
+		"message": "ກົດ Ctrl ຄ້າງໄວ້ເພື່ອເປີດໃນແຖບໃໝ່."
+	},
+	"pref_backup_filename": {
+		"message": "ຂໍ້ມູນສຳຮອງການຕັ້ງຄ່າ Secure Shell.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "ໄຟລ໌ SSH"
+	},
+	"preferences_header_terminal": {
+		"message": "ການຕັ້ງຄ່າເທີມິນອນ"
+	},
+	"preferences_header_uri": {
+		"message": "ຕົວຈັດການ URI"
+	},
+	"preferences_reset": {
+		"message": "ຣີເຊັດທຸກການຕັ້ງຄ່າແລ້ວ!"
+	},
+	"protocol_register_button": {
+		"message": "ລົງທະບຽນຕົວຈັດການໂປຣໂຕຄໍ"
+	},
+	"protocol_register_explain": {
+		"message": "ປຸ່ມຂ້າງລຸ່ມຈະພະຍາຍາມລົງທະບຽນຕົວຈັດການສຳລັບໂປຣໂຕຄໍທັງໝົດທີ່ພວກເຮົາຮອງຮັບ. ຕົວຢ່າງ: ນີ້ອະນຸຍາດໃຫ້ພວກເຮົາຈັດການລິ້ງ sh:// ໂດຍກົງ. ໂປຣແກຣມທ່ອງເວັບຈະສະແດງການເຕືອນບອກສຳລັບແຕ່ລະໂປຣໂຕຄໍ, ສະນັ້ນ ກະລຸນາຢືນຢັນ/ຍອມຮັບແຕ່ລະອັນເມື່ອມັນປາກົດຂຶ້ນມາ. ຖ້າບໍ່ມີການສະແດງການເຕືອນບອກ, ກະລຸນາເບິ່ງພາກສ່ວນຕໍ່ໄປສຳລັບເຄັດລັບການແກ້ໄຂບັນຫາ."
+	},
+	"protocol_register_explain_settings": {
+		"message": "ຖ້າພວກເຮົາລົງທະບຽນຕົວຈັດການຢູ່ກ່ອນແລ້ວ ຫຼື ຄວາມພະຍາຍາມລົງທະບຽນໃນເມື່ອກ່ອນຖືກປະຕິເສດ, ລະບົບຈະບໍ່ສະແດງການເຕືອນບອກເພີ່ມເຕີມໃດໆ. ກະລຸນາເປີດກ່ອງໂຕ້ຕອບຂ້າງລຸ່ມ, ຈາກນັ້ນກວດເບິ່ງການຕັ້ງຄ່າຕົວຈັດການທີ່ລົງທະບຽນແລ້ວໃນພາກສ່ວນ ssh/sftp/etc... ຖ້າໂປຣແກຣມນີ້ຖືກບລັອກໄວ້, ທ່ານສາມາດລຶບການຕັ້ງຄ່າເຫຼົ່ານັ້ນ ເຊິ່ງຈະອະນຸຍາດໃຫ້ທ່ານລອງການລົງທະບຽນຄືນໃໝ່. ຖ້າໄດ້ລົງທະບຽນໂປຣແກຣມນີ້ຢູ່ກ່ອນແລ້ວ, ແຕ່ບໍ່ໄດ້ຕັ້ງຄ່າມັນເປັນຕົວຈັດການເລີ່ມຕົ້ນ, ທ່ານສາມາດປ່ຽນຕົວຈັດການເລີ່ມຕົ້ນໄດ້ເຊັ່ນກັນ."
+	},
+	"protocol_register_options_link": {
+		"message": "ການລົງທະບຽນໂປຣໂຕຄໍ"
+	},
+	"protocol_register_settings_button": {
+		"message": "ເປີດການຕັ້ງຄ່າຕົວຈັດການທີ່ລົງທະບຽນ"
+	},
+	"protocol_register_title": {
+		"message": "ຕົວຊ່ວຍການລົງທະບຽນຕົວຈັດການໂປຣໂຕຄໍ Secure Shell"
+	},
+	"read_size_label": {
+		"message": "ຂະໜາດການອ່ານ (KiB)"
+	},
+	"reconnect_message": {
+		"message": "ເຊື່ອມຕໍ່ຄືນໃໝ່ (R), ເລືອກການເຊື່ອມຕໍ່ອື່ນ (C) ຫຼື ອອກບໍ (X)?"
+	},
+	"relay_retry": {
+		"message": "ກຳລັງລອງໃໝ່..."
+	},
+	"request_pin_prompt": {
+		"message": "ປ້ອນ PIN ເພື່ອປົດລັອກປຸ່ມ $1 ໃນ '$2 ($3)' (ລອງໄດ້ອີກ $4 ຄັ້ງ):"
+	},
+	"restore_prefs": {
+		"message": "ກູ້ຄືນການສຳຮອງ"
+	},
+	"save_label": {
+		"message": "ບັນທຶກ"
+	},
+	"send_feedback_label": {
+		"message": "ສົ່ງຄຳຕິຊົມ"
+	},
+	"shortcut_list_aria_label": {
+		"message": "ການເຊື່ອມຕໍ່ທີ່ບັນທຶກໄວ້"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "ກະລຸນາຕິດຕັ້ງແອັບ Smart Card Connector: $1"
+	},
+	"ssh_argstr_label": {
+		"message": "ອາກິວເມັນ SSH"
+	},
+	"stream_open_error": {
+		"message": "ເປີດການຖ່າຍທອດ $1 ບໍ່ສຳເລັດ: $2"
+	},
+	"terminal_clear_menu_label": {
+		"message": "ການລຶບລ້າງເທີມິນອນ"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" ບໍ່ພ້ອມນຳໃຊ້"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ສີ ANSI"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "ການຫຼຸດຮອຍຍັກ"
+	},
+	"terminal_name_pref_bell": {
+		"message": "ກະດິ່ງ"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "ການກະພິບ"
+	},
+	"terminal_name_pref_color": {
+		"message": "ສີ"
+	},
+	"terminal_name_pref_font": {
+		"message": "ຟອນ"
+	},
+	"terminal_name_pref_image": {
+		"message": "ຮູບພາບ"
+	},
+	"terminal_name_pref_shape": {
+		"message": "ຮູບຮ່າງ"
+	},
+	"terminal_name_pref_visible": {
+		"message": "ເບິ່ງເຫັນ"
+	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "ເລືອກຮິວຣິສຕິກການກວດຫາ AltGr.\n\n'Auto': ກວດຫາໂດຍອັດຕະໂນມັດອີງຕາມ navigator.language:\n      'en-us' => 'Disable', else => 'right-alt'\n'Disable': ປິດການນຳໃຊ້ການຈຳລອງ AltGr ໃດໆກໍຕາມ.\n'ctrl-alt': ໃຫ້ Ctrl+Alt ໝາຍເຖິງ AltGr.\n'left-alt': ໃຫ້ Alt ທາງຊ້າຍໝາຍເຖິງ AltGr.\n'right-alt': ໃຫ້ Alt ທາງຂວາໝາຍເຖິງ AltGr."
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "ຕັ້ງຄ່າສີສຳລັບຖາດສີເລີ່ມຕົ້ນ."
+	},
+	"terminal_pref_bell": {
+		"message": "ກະດິ່ງເທີມິນອນທີ່ມີສຽງ."
+	},
+	"terminal_preview_label": {
+		"message": "ຕົວຢ່າງ"
+	},
+	"terminal_profile_label": {
+		"message": "ໂປຣໄຟລ໌ປັດຈຸບັນ"
+	},
+	"terminal_reset_menu_label": {
+		"message": "ການຣີເຊັດເທີມິນອນ"
+	},
+	"terminal_settings_about_label": {
+		"message": "ກ່ຽວກັບ"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "URL ພາບພື້ນຫລັງ. ຕ້ອງຂຶ້ນຕົ້ນດ້ວຍ 'http://' or 'https://'. ປະຫວ່າງເປົ່າຖ້າບໍ່ມີຮູບ.\n\nຕົວຢ່າງ:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "ອັດຕະໂນມັດ"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "ປິດການນຳໃຊ້"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "ແຖບແນວຕັ້ງ"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "ບລັອກ"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "ຂີດກ້ອງ"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "ທ່ານແນ່ໃຈບໍ່ວ່າທ່ານຕ້ອງການຣີເຊັດຮູບແບບສີສັນເປັນຄ່າເລີ່ມຕົ້ນຂອງມັນ?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "ຣິເຊັດຮູບແບບສີສັນ"
+	},
+	"terminal_settings_reset_label": {
+		"message": "ຣີເຊັດ"
+	},
+	"terminal_theme_classic_label": {
+		"message": "ຄລາດສິກ"
+	},
+	"terminal_theme_dark_label": {
+		"message": "ມືດ"
+	},
+	"terminal_theme_light_label": {
+		"message": "ແຈ້ງ"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "ສີທີ 0: ດຳ"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "ສີທີ 1: ສີແດງ"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "ສີທີ 10: ຂຽວສົດ"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "ສີທີ 11: ສີເຫຼືອງສົດ"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "ສີທີ 12: ສີຟ້າສົດ"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "ສີທີ 13: ມ່ວງແດງສົດ"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "ສີທີ 14: ສີຟ້າສົດ"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "ສີທີ 15: ຂາວສົດ"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "ສີທີ 2: ຂຽວ"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "ສີທີ 3: ສີເຫຼືອງ"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "ສີທີ 4: ສີຟ້າ"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "ສີທີ 5: ມ່ວງແດງ"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "ສີທີ 6: ສີຟ້າຂຽວ"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "ສີທີ 7: ສີຂາວ"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "ສີທີ 8: ສີດຳສົດ"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "ສີທີ 9: ແດງສົດ"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "ຮູບຮ່າງສີສັນ"
+	},
+	"terminal_title_pref_background": {
+		"message": "ພື້ນຫຼັງ"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "ລັກສະນະການເຮັດວຽກ"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "ເຄີເຊີ"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "ແປ້ນພິມ"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "ແປ້ນພິມ ແລະ ເມົ້າ"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "ເມົ້າ"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "ແຖບເລື່ອນ"
+	},
+	"terminal_title_pref_text": {
+		"message": "ຂໍ້ຄວາມ"
+	},
+	"terminal_title_settings": {
+		"message": "ການຕັ້ງຄ່າ"
+	},
+	"terminal_title_theme": {
+		"message": "ຮູບແບບສີສັນ"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "ກະລຸນາເຊື່ອມຕໍ່ອິນເຕີເນັດແລ້ວລອງໃໝ່."
+	},
+	"tip_1": {
+		"message": "ທ່ານສາມາດກົດ Ctrl (Cmd ໃນ macOS) ຄ້າງໄວ້ໃນຂະນະທີ່ຄລິກໃສ່ລິ້ງເພື່ອເປີດພວກມັນ!"
+	},
+	"tip_10": {
+		"message": "ໃນເວລາເປີດນຳໃຊ້ໃນໜ້າຈໍ, Ctrl+Shift+N ສາມາດເປີດເຊດຊັນອື່ນໄດ້."
+	},
+	"tip_11": {
+		"message": "ທ່ານສາມາດຜູກມັດປຸ່ມ/ທາງລັດຄືນໃໝ່ໄດ້ທີ່: https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "ໃຊ້ Yubikey ແລະ ບັດອັດສະລິຍະອື່ນສຳລັບການພິສູດຢືນຢັນ: https://goo.gl/Hu2o3v"
+	},
+	"tip_13": {
+		"message": "ສະແດງຮູບໃນແຖວ: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "ການກົດ Ctrl (Cmd ໃນ macOS) ຄ້າງໄວ້ໃຂະນະທີ່ຄລິກຂວາຈະເປີດເມນູບໍລິບົດຂຶ້ນມາ."
+	},
+	"tip_2": {
+		"message": "ສະແດງການແຈ້ງເຕືອນໃນໂປຣແກຣມທ່ອງເວັບໂດຍໃຊ້ hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "ເຊື່ອມຕໍ່ຈາກ omnibox ໂດຍການພິມ 'ssh <profile name>': https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS ສາມາດເຊື່ອມຕໍ່ລະບົບໄຟລ໌ຜ່ານ SFTP ແລະ ຊອກຫາຜ່ານແອັບ Files ໄດ້. ກະລຸນາໃຊ້ 'ເຊື່ອມຕໍ່ SFTP' ແທນ 'ເຊື່ອມຕໍ່'."
+	},
+	"tip_5": {
+		"message": "ເຊື່ອມຕໍ່ໂດຍໃຊ້ ssh:// links ໃນໜ້າເວັບ ຫຼື ບັນທຶກບຸກມາກ: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "ໃສ່ສີເອົ້າພຸດ/ການເຕືອນບອກຂອງທ່ານໂດຍໃຊ້ 16 ສີພື້ນຖານ ແລະ 256 ສີ ແລະ ສີເຕັມ 24 ບິດ: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "ສຳເນົາໄວ້ໃນຄລິບບອດຂອງທ່ານຈາກ emacs/vim/etc... ໂດຍໃຊ້ OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "ສົນທະນາກັບຜູ້ໃຊ້ hterm/Secure Shell ຜ່ານ chromium-hterm@chromium.org ໄດ້ທີ່: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "ພົບເຫັນຂໍ້ຜິດພາດບໍ?  ຂໍຄຸນສົມບັດໃໝ່ບໍ?  ແຈ້ງໃຫ້ພວກເຮົາຮູ້ທີ່: https://goo.gl/vb94JY"
+	},
+	"unexpected_error": {
+		"message": "ເກີດຄວາມຜິດພາດທີ່ບໍ່ຄາດຄິດຂຶ້ນ, ກະລຸນາກວດເບິ່ງຄອນໂຊ JavaScript ສຳລັບລາຍລະອຽດເພີ່ມເຕີມ."
+	},
+	"unknown_ssh_client_version": {
+		"message": "ເວີຊັນ SSH ທີ່ບໍ່ຮູ້ຈັກ: $1"
+	},
+	"unmount_button_label": {
+		"message": "ຍົກເລີກເຊື່ອມຕໍ່ SFTP"
+	},
+	"welcome_changelog": {
+		"message": "ບັນທຶກການປ່ຽນແປງ/ບັນທຶກປະຈຳຮຸ່ນ: $1"
+	},
+	"welcome_faq": {
+		"message": "ຄຳຕອບຕໍ່ກັບຄຳຖາມທີ່ມັກຖາມ: $1 (Ctrl+ຄລິກໃສ່ລິ້ງເພື່ອເປີດ)"
+	},
+	"welcome_release_highlights": {
+		"message": "ການປ່ຽນແປງສຳຄັນນັບແຕ່ $1:"
+	},
+	"welcome_tip_of_day": {
+		"message": "ເຄັດລັບສຳລັບມືອາຊີບແບບສຸ່ມເລືອກ #$1: $2"
+	},
+	"welcome_version": {
+		"message": "ຍິນດີຕ້ອນຮັບສູ່ $1 ເວີຊັນ $2."
+	},
+	"write_size_label": {
+		"message": "ຂະໜາດການຂຽນ (KiB)"
+	},
+	"zoom_warning": {
+		"message": "ກະລຸນາຕັ້ງຄ່າ ເມນູ Chrome->ຊູມ ເປັນ 100%"
+	}
+}

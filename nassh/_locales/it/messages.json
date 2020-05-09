@@ -308,6 +308,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Ricevi codifica"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Dimensioni spaziatura interna schermo"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Scorri fino in fondo dopo una sequenza di tasti"
 	},
@@ -347,6 +350,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Blocco della selezione automatica (a destra)"
 	},
+	"hterm_options_button_label": {
+		"message": "Opzioni"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Immagini in linea"
 	},
@@ -360,7 +366,7 @@
 		"message": "Se questa preferenza viene impostata, viene annullata la rimappatura della combinazione Alt + Backspace -> Canc in Chrome OS, in modo che Alt + Backspace corrisponda di fatto ad Alt + Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Consente di selezionare una funzione euristica per il rilevamento di ALT GR.\n\n\"null\": consente di attivare il rilevamento automatico in base a navigator.language:\n      \"en-us\" => \"none\", altro => \"right-alt\"\n\"none\": consente di disattivare le manipolazioni correlate ad ALT GR.\n\"ctrl-alt\": consente di presupporre che CTRL + ALT corrisponda ad ALT GR.\n\"left-alt\": consente di presupporre che il tasto ALT di sinistra corrisponda ad ALT GR.\n\"right-alt\": consente di presupporre che il tasto ALT di destra corrisponda ad ALT GR."
+		"message": "Consente di selezionare una funzione euristica per il rilevamento di Alt Gr.\n\n\"null\": consente di attivare il rilevamento automatico in base a navigator.language:\n      \"en-us\" => \"none\", altro => \"right-alt\"\n\"none\": consente di disattivare l'emulazione di Alt Gr.\n\"ctrl-alt\": consente di presupporre che Ctrl + Alt corrisponda ad Alt Gr.\n\"left-alt\": consente di presupporre che il tasto Alt di sinistra corrisponda ad Alt Gr.\n\"right-alt\": consente di presupporre che il tasto Alt di destra corrisponda ad Alt Gr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Consente di stabilire se il tasto Alt si comporta come un tasto Meta o come un tasto Alt distinto."
@@ -423,7 +429,7 @@
 		"message": "Consente di impostare la forma del cursore di testo visibile. È possibile modificare questa preferenza in fase di runtime tramite sequenze di escape del terminale."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "Se il valore è true, la suoneria del terminale sullo sfondo crea una notifica web. https://www.w3.org/TR/notifications/\n\nPer la visualizzazione delle notifiche è richiesta l'autorizzazione dell'utente. Se questa opzione viene impostata su true, hterm tenterà di chiedere l'autorizzazione dell'utente ove necessaria. La richiesta di autorizzazione potrebbe non essere visualizzata da alcuni browser se non è stata attivata dall'azione di un utente.\n\nLe estensioni di Chrome con l'autorizzazione \"notifiche\" sono autorizzate a visualizzare le notifiche."
+		"message": "Se il valore è vero, la suoneria del terminale in sottofondo crea una notifica web. https://www.w3.org/TR/notifications/\n\nPer la visualizzazione delle notifiche è richiesta l'autorizzazione dell'utente. Se questa opzione viene impostata su vero, hterm tenterà di chiedere l'autorizzazione dell'utente ove necessaria. La richiesta di autorizzazione potrebbe non essere visualizzata nei browser se non è stata attivata dall'azione di un utente.\n\nLe estensioni di Chrome con l'autorizzazione \"notifiche\" sono autorizzate a visualizzare le notifiche."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Consente di stabilire se i caratteri East Asian Ambiguous devono avere o meno una larghezza di due colonne."
@@ -471,7 +477,7 @@
 		"message": "Il colore di primo piano di un testo senza altri attributi di colore."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Consente di stabilire se nascondere o meno automaticamente il cursore del mouse durante la digitazione. Se questa preferenza viene gestita dalla piattaforma o dal sistema operativo, viene eseguito per impostazione predefinita il rilevamento automatico.\n\nNota: alcuni sistemi operativi potrebbero eseguire l'override di questa impostazione, pertanto potresti non riuscire sempre a disattivarla."
+		"message": "Consente di stabilire se nascondere o meno automaticamente il puntatore del mouse durante la digitazione. Se questa preferenza viene gestita dalla piattaforma o dal sistema operativo, viene eseguito per impostazione predefinita il rilevamento automatico.\n\nNota: il tuo sistema operativo potrebbe eseguire l'override di questa impostazione, pertanto potresti non riuscire sempre a disattivarla."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Se il valore è vero, con i tasti Inizio/Fine è possibile controllare la barra di scorrimento del terminale e i tasti Maiusc + Inizio/Maiusc + Fine vengono inviati all'host remoto. Se il valore è falso, i tasti Inizio/Fine vengono inviati all'host remoto, mentre i tasti Maiusc + Inizio/Maiusc + Fine consentono di scorrere."
@@ -519,13 +525,16 @@
 		"message": "Consente di stabilire se passare o meno la gestione dei tasti Meta + 1..9 al browser.\n\nQuesta soluzione è pratica se viene eseguito hterm in una scheda del browser perché non si perdono le scorciatoie da tastiera di Chrome per \"passare alla scheda\". Se non viene eseguito in una scheda, è meglio inviare questi tasti all'host per poterli usare in vim o emacs.\n\nSe il valore è true, la gestione dei tasti Meta + 1..9 viene affidata al browser. Se il valore è false, i tasti Meta + 1..9 vengono inviati all'host. Se il valore è null, viene attivato il rilevamento automatico in base al tipo di finestra e alla piattaforma del browser."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Consente di stabilire se passare o meno tasto Meta + V all'host."
+		"message": "Consente di stabilire se passare la gestione di Meta + V al browser.\n\nSu alcuni sistemi, questa funzionalità viene usata per incollare contenuti."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Se il valore è vero, il testo trascinato viene incollato nel terminale.\nSe è falso, il testo trascinato viene ignorato."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Consente di impostare la codifica prevista per i dati ricevuti dall'host.\nSe le codifiche non corrispondono, si potrebbero notare dei bug visivi.\n\nI valori validi sono \"utf-8\" e \"raw\"."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Le dimensioni in pixel della spaziatura interna intorno al bordo dello schermo del terminale.\n\nConsente di regolare le dimensioni del bordo intorno allo schermo del terminale affinché l'utente possa aggiungere spaziatura interna visibile ai bordi dello schermo."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Consente di stabilire se scorrere o meno fino in fondo con qualsiasi tasto."
@@ -534,7 +543,7 @@
 		"message": "Consente di stabilire se scorrere o meno fino in fondo nell'output del terminale."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Se viene usato il buffer dello schermo alternativo ed è attiva la funzione DECCKM (tasti cursore applicazione), gli eventi di scorrimento con la rotellina del mouse emuleranno i tasti freccia.\n\nÈ possibile disattivare temporaneamente la funzionalità tenendo premuto il tasto MAIUSC.\n\nAvviene spesso quando vengono usati pager (less), vengono letti editor di testo o pagine man (vi/nano) oppure viene usato screen/tmux."
+		"message": "Se viene usato il buffer dello schermo alternativo ed è attiva la funzione DECCKM (tasti cursore applicazione), gli eventi della rotellina emuleranno i tasti freccia.\n\nÈ possibile disattivare temporaneamente la funzionalità tenendo premuto il tasto Maiusc.\n\nAvviene spesso quando vengono usati pager (less), vengono letti editor di testo o pagine man (vi/nano) oppure viene usato screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "Il moltiplicatore per gli eventi rotellina quando vengono misurati in pixel.\n\nConsente di modificare la velocità di scorrimento della pagina."
@@ -821,9 +830,6 @@
 	"new_window_menu_label": {
 		"message": "Nuova finestra"
 	},
-	"notify_copy": {
-		"message": "Selezione copiata"
-	},
 	"ok_button_label": {
 		"message": "OK"
 	},
@@ -832,9 +838,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Suggerimento avanzato] Utilizza \"Apri in una finestra\" o \"Schermo intero\" per evitare che Ctrl + W chiuda il terminale.\n[Suggerimento avanzato] Visita la pagina $1 per ulteriori informazioni."
-	},
-	"options_button_label": {
-		"message": "Opzioni"
 	},
 	"plugin_loading": {
 		"message": "Caricamento del plug-in di NaCl…"
@@ -899,6 +902,9 @@
 	"save_label": {
 		"message": "Salva"
 	},
+	"send_feedback_label": {
+		"message": "Invia feedback"
+	},
 	"shortcut_list_aria_label": {
 		"message": "connessioni salvate"
 	},
@@ -913,6 +919,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Cancellazione terminale"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" non disponibile"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Colori ANSI"
@@ -938,6 +947,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Visibile"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Consente di selezionare una funzione euristica per il rilevamento di Alt Gr.\n\n\"Auto\": consente di attivare il rilevamento automatico in base a navigator.language:\n      \"en-us\" => \"Disattiva\", altro => \"right-alt\"\n\"Disattiva\": consente di disattivare l'emulazione di Alt Gr.\n\"ctrl-alt\": consente di presupporre che Ctrl + Alt corrisponda ad Alt Gr.\n\"left-alt\": consente di presupporre che il tasto Alt di sinistra corrisponda ad Alt Gr.\n\"right-alt\": consente di presupporre che il tasto Alt di destra corrisponda ad Alt Gr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Imposta i colori per la tavolozza predefinita."
 	},
@@ -952,6 +964,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Reimpostazione terminale"
+	},
+	"terminal_settings_about_label": {
+		"message": "Informazioni"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "URL dell'immagine di sfondo. Deve iniziare con \"http://\" o \"https://\". Lascia il campo vuoto se non è presente alcuna immagine.\n\nAd esempio:\n  https://goo.gl/anedTK"
@@ -1075,6 +1090,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Tema"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Connettiti a Internet e riprova."
 	},
 	"tip_1": {
 		"message": "Tieni premuto Ctrl (Cmd su macOS) facendo clic sui link per aprirli."

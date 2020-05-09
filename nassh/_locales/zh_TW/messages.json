@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "接收編碼"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "螢幕邊框間距大小"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "使用按鍵後捲動至底部"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "暫停自動選取 (右側)"
 	},
+	"hterm_options_button_label": {
+		"message": "選項"
+	},
 	"hterm_popup_inline_image": {
 		"message": "內嵌圖片"
 	},
@@ -363,7 +369,7 @@
 		"message": "設定後將取消 Chrome 作業系統 Alt + Backspace 鍵與 Delete 鍵的對應關係，讓 Alt + Backspace 鍵確實做為 Alt + Backspace 鍵使用。"
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "選取 AltGr 偵測試誤法。\n\n「null」：根據 navigator.language 自動偵測：\n      「en-us」=>「none」，其他 =>「right-alt」\n「none」：禁止任何 AltGr 相關改寫。\n「ctrl-alt」：假設 Ctrl+Alt 鍵表示 AltGr。\n「left-alt」：假設向左鍵+Alt 鍵表示 AltGr。\n「right-alt」：假設向右鍵+Alt 鍵表示 AltGr。"
+		"message": "選取 AltGr 偵測試誤法。\n\n「null」：根據 navigator.language 自動偵測：\n      「en-us」=>「none」，其他 =>「right-alt」\n「none」：禁止任何 AltGr 模擬。\n「ctrl-alt」：假設 Ctrl + Alt 鍵表示 AltGr。\n「left-alt」：假設左邊 Alt 鍵表示 AltGr。\n「right-alt」：假設右邊 Alt 鍵表示 AltGr。"
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "設定是否要將 Alt 鍵的功能設為 Meta 鍵或僅做為 Alt 鍵使用。"
@@ -426,7 +432,7 @@
 		"message": "文字游標的顯示形狀。可在執行階段透過終端機逸出序列變更這項設定。"
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "如果為 true，背景終端機提示音會建立網路通知。https://www.w3.org/TR/notifications/\n\n必須經使用者授權才能顯示通知。當這個選項設為 true 時，hterm 會視需要嘗試要求使用者授權。如果這項權限要求不是因使用者動作而觸發，則可能不會顯示在瀏覽器中。\n\n擁有「通知」權限的 Chrome 擴充功能可顯示通知。"
+		"message": "如果設為 True，當終端機提示音在背景響起時，系統會建立網路通知。詳情請參閱 https://www.w3.org/TR/notifications/\n\n使用者必須授予權限，系統才能顯示通知。當這個選項設為 True 時，hterm 會視需要嘗試要求使用者授予權限。如果這項權限要求不是因使用者動作而觸發，則可能不會顯示在瀏覽器中。\n\n擁有「通知」權限的 Chrome 擴充功能可顯示通知。"
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "設定是否要讓 East Asian Ambiguous 字元占兩欄寬度。"
@@ -474,7 +480,7 @@
 		"message": "無其他色彩屬性的文字的前景顏色。"
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "設定輸入時是否要隱藏滑鼠游標。根據預設，系統會自動偵測平台/作業系統的處理方式。\n\n注意：部分作業系統會覆寫這項設定，因此你可能無法予以停用。"
+		"message": "設定是否要在輸入時自動隱藏滑鼠游標。根據預設，系統會自動偵測平台/OS 的處理方式。\n\n注意：作業系統可能會覆寫這項設定，因此你可能無法予以停用。"
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "如果設為 True，Home/End 鍵可操控終端機捲軸，且系統會將 Shift + Home/Shift + End 鍵傳送至遠端主機。如果設為 False，系統會將 Home/End 鍵傳送至遠端主機，且可使用 Shift + Home/Shift + End 鍵捲動畫面。"
@@ -522,13 +528,16 @@
 		"message": "設定是否要將 Meta + 1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，以便繼續使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 vim 或 emacs 中使用。\n\n如果設為 True，Meta + 1..9 鍵將由瀏覽器處理。如果設為 False，系統會將 Meta + 1..9 鍵傳送至主機。如果設為 Null，系統會根據瀏覽器平台和視窗類型自動偵測。"
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "設定是否將 Meta + V 鍵傳送至主機。"
+		"message": "設定是否將 Meta + V 鍵傳送至瀏覽器。\n\n在部分系統上，這個按鍵組合可用來貼上內容。"
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "如果設為 True，系統會將拖曳的文字貼到終端機。\n如果設為 False，系統會忽略拖曳的文字。"
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "針對從主機接收的資料設定預期的編碼。\n如果編碼不相符，在視覺呈現上可能會出現錯誤。\n\n有效的值為「utf-8」和「raw」。"
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "終端機螢幕的邊框間距大小 (以像素為單位)。\n\n這項設定可控制終端機螢幕的邊框大小，讓使用者能在螢幕邊緣增加可見邊框間距。"
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "設定是否任何按鍵動作都會捲動至畫面底部。"
@@ -537,7 +546,7 @@
 		"message": "設定是否要在終端機輸出時捲動至畫面底部。"
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "使用替代螢幕緩衝區且 DECCKM (應用程式游標鍵) 啟用時，滑鼠滾輪捲動事件會模擬方向鍵。\n\n按住 Shift 鍵可暫時停用。\n\n這種情形常見於使用呼叫器 (less)、讀取手冊頁或文字編輯器 (vi/nano)，或是使用 screen/tmux 時。"
+		"message": "使用替代螢幕緩衝區且 DECCKM (應用程式游標鍵) 啟用時，滑鼠滾輪捲動事件會模擬方向鍵。\n\n按住 Shift 鍵可暫時停用。\n\n這種情形常見於使用閱讀器 (less)、讀取手冊頁或文字編輯器 (vi/nano)，或是使用 screen/tmux 時。"
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "滑鼠滾輪事件的調節係數 (以像素為單位)。\n\n可調整頁面捲動速度。"
@@ -827,9 +836,6 @@
 	"new_window_menu_label": {
 		"message": "開啟新視窗"
 	},
-	"notify_copy": {
-		"message": "已複製所選內容"
-	},
 	"ok_button_label": {
 		"message": "確定"
 	},
@@ -838,9 +844,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[實用秘訣] 使用「在視窗中開啟」或「全螢幕」可防止 Ctrl + W 鍵關閉終端機！\n[實用秘訣] 詳情請參閱 $1。"
-	},
-	"options_button_label": {
-		"message": "選項"
 	},
 	"plugin_loading": {
 		"message": "正在載入 NaCl 外掛程式..."
@@ -905,6 +908,9 @@
 	"save_label": {
 		"message": "儲存"
 	},
+	"send_feedback_label": {
+		"message": "提供意見"
+	},
 	"shortcut_list_aria_label": {
 		"message": "已儲存的連線"
 	},
@@ -919,6 +925,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "清除終端機"
+	},
+	"terminal_font_unavailable": {
+		"message": "「$1」無法使用"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI 顏色"
@@ -947,6 +956,9 @@
 	"terminal_name_pref_visible": {
 		"message": "顯示"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "選取 AltGr 偵測試誤法。\n\n「自動」：根據 navigator.language 自動偵測：\n      「en-us」=>「停用」，其他 =>「right-alt」\n「停用」：禁止任何 AltGr 模擬。\n「ctrl-alt」：假設 Ctrl + Alt 鍵表示 AltGr。\n「left-alt」：假設左邊 Alt 鍵表示 AltGr。\n「right-alt」：假設右邊 Alt 鍵表示 AltGr。"
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "設定預設調色盤的顏色。"
 	},
@@ -961,6 +973,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "重設終端機"
+	},
+	"terminal_settings_about_label": {
+		"message": "關於"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "背景圖片網址。開頭必須為「http://」或「https://」。留空表示沒有圖片。\n\n例如：\n  https://goo.gl/anedTK"
@@ -1084,6 +1099,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "主題"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "請連線至網際網路，然後再試一次。"
 	},
 	"tip_1": {
 		"message": "按住 Ctrl 鍵 (macOS 則為 Cmd 鍵) 並點選連結即可開啟網址！"

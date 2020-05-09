@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Codierung erhalten"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Bildschirmabstand einstellen"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Nach Tastenanschlag nach unten scrollen"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Automatische Auswahl aussetzen (nach rechts)"
 	},
+	"hterm_options_button_label": {
+		"message": "Optionen"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Inline-Bilder"
 	},
@@ -363,7 +369,7 @@
 		"message": "Durch diese Einstellung wird Alt + Rücktaste nicht mehr die Funktion einer herkömmlichen ENTF-Taste (Löschen nach rechts) in Chrome OS zugewiesen, sodass über die Tastenkombination tatsächlich Alt + Rücktaste ausgeführt und nach links gelöscht wird."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Wählen Sie eine AltGr-Erkennungsheuristik.\n\n\"null\": Automatische Erkennung basiert auf navigator.language:\n      \"en-us\" => \"none\", sonst => \"right-alt\"\n\"none\": Deaktiviert jegliche AltGr-Manipulation.\n\"ctrl-alt\": Es wird angenommen, dass \"Strg + Alt\" für \"AltGr\" steht.\n\"left-alt\": Es wird angenommen, dass \"Alt\" für \"AltGr\" steht.\n\"right-alt\": Es wird angenommen, dass \"Alt\" für \"AltGr\" steht."
+		"message": "Wählen Sie eine Alt Gr-Erkennungsheuristik aus.\n\n\"null\": Automatische Erkennung basiert auf navigator.language:\n      \"en-us\" => \"none\", sonst => \"right-alt\"\n\"none\": Deaktiviert jegliche Alt Gr-Emulation.\n\"ctrl-alt\": Es wird angenommen, dass Strg + Alt für Alt Gr steht.\n\"left-alt\": Es wird angenommen, dass Alt für Alt Gr steht.\n\"right-alt\": Es wird angenommen, dass Alt für Alt Gr steht."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Legt fest, ob die Alt-Taste als Meta- oder als Alt-Taste dient."
@@ -426,7 +432,7 @@
 		"message": "Die Form des sichtbaren Textcursors. Kann zur Laufzeit über Escapesequenzen des Terminals eingestellt werden."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "Wenn die Einstellung \"true\" lautet, erstellt der Terminalton im Hintergrund eine Webbenachrichtigung. https://www.w3.org/TR/notifications/\n\nDamit Benachrichtigungen angezeigt werden können, muss der Nutzer die entsprechende Berechtigung erteilen. Wenn diese Option auf \"true\" festgelegt ist, erhält der Nutzer bei Bedarf über hterm eine Berechtigungsanfrage. In einigen Browsern wird diese Berechtigungsanfrage möglicherweise nicht angezeigt, wenn sie nicht durch eine Nutzeraktion ausgelöst wird.\n\nChrome-Erweiterungen mit der Berechtigung \"Benachrichtigungen\" dürfen Benachrichtigungen einblenden."
+		"message": "Wenn \"true\" festgelegt ist, erstellt der Terminalton im Hintergrund eine Webbenachrichtigung. https://www.w3.org/TR/notifications/\n\nDamit Benachrichtigungen angezeigt werden können, muss der Nutzer die entsprechende Berechtigung erteilen. Wenn diese Option auf \"true\" gesetzt ist, erhält der Nutzer bei Bedarf über HTerm eine Berechtigungsanfrage. In einigen Browsern wird diese Berechtigungsanfrage möglicherweise nicht angezeigt, wenn sie nicht durch eine Nutzeraktion ausgelöst wird.\n\nChrome-Erweiterungen mit der Berechtigung \"Benachrichtigungen\" dürfen Benachrichtigungen einblenden."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Legt fest, ob East Asian Ambiguous-Zeichen eine Breite von zwei Spalten einnehmen."
@@ -474,7 +480,7 @@
 		"message": "Vordergrundfarbe für Text ohne weitere Farbattribute."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Legt fest, ob der Mauszeiger beim Tippen automatisch ausgeblendet wird. Standardmäßig wird automatisch erkannt, ob die Plattform/das Betriebssystem das übernimmt.\n\nHinweis: In einigen Betriebssystemen wird diese Einstellung überschrieben und kann daher nicht immer deaktiviert werden."
+		"message": "Legt fest, ob der Mauszeiger beim Tippen automatisch ausgeblendet wird. Standardmäßig wird automatisch erkannt, ob die Plattform/das Betriebssystem das übernimmt.\n\nHinweis: Ihr Betriebssystemen überschreibt diese Einstellung möglicherweise. Sie kann daher nicht immer deaktiviert werden."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Wenn \"true\" festgelegt ist, wird mit Pos1/Ende die Bildlaufleiste des Terminals gesteuert und Umschalttaste + Pos1/Ende an den Remote-Host gesendet. Bei \"false\" werden Pos1/Ende an den Remote-Host gesendet und mit Umschalttaste + Pos1/Ende wird gescrollt."
@@ -522,13 +528,16 @@
 		"message": "Legt fest, ob Meta + 1 bis 9 an den Browser übergeben wird.\n\nDas ist praktisch, wenn HTerm in einem Browsertab ausgeführt wird. So können weiterhin die Tastenkombinationen zum Wechseln zu Tabs in Chrome verwendet werden. Wird HTerm nicht in einem Tab ausgeführt, ist es besser, diese Tasten an den Host zu senden, damit sie in Vim oder Emacs verwendet werden können.\n\nWenn \"true\" festgelegt ist, wird Meta + 1 bis 9 vom Browser verarbeitet. Bei \"false\" wird Meta + 1 bis 9 an den Host gesendet. Wird \"null\" festgelegt, basiert die automatische Erkennung auf der Browserplattform und dem Fenstertyp."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Legt fest, ob Meta+V an den Host übergeben wird."
+		"message": "Legt fest, ob Meta + V an den Browser übergeben wird.\n\nAuf manchen Systemen werden auf diese Weise Inhalte eingefügt."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Wenn \"true\" festgelegt ist, wird Text per Drag-and-drop im Terminal eingefügt.\nBei \"false\" wird per \"Drop\" abgelegter Text ignoriert."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Legt die erwartete Codierung für vom Host empfangene Daten fest.\nSollten die Codierungen nicht übereinstimmen, kommt es wahrscheinlich zu Fehlern bei der Darstellung.\n\nGültige Werte sind \"utf-8\" und \"raw\"."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Abstand vom Rand des Terminal-Bildschirms in Pixel.\n\nLegt die Größe des Rands um den Terminal-Bildschirm fest. So können Nutzer an den Rändern Abstand hinzufügen."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Legt fest, ob bei einem Tastenanschlag bis zum unteren Ende gescrollt wird."
@@ -537,10 +546,10 @@
 		"message": "Legt fest, ob bei einer Terminalausgabe bis zum unteren Ende gescrollt wird."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Wenn der alternative Bild-Zwischenspeicher verwendet wird und DECCKM (Application Cursor Keys) aktiv ist, werden beim Scrollen mit dem Scrollrad die Pfeiltasten imitiert.\n\nDiese Einstellung kann vorübergehend deaktiviert werden, indem die Umschalttaste gedrückt gehalten wird.\n\nZu dieser Situation kommt es häufig, wenn Pager (less) verwendet, man-Seiten oder Texteditoren (vi/nano) gelesen werden oder screen/tmux verwendet wird."
+		"message": "Wenn der alternative Bildschirm-Zwischenspeicher verwendet wird und DECCKM (Application Cursor Keys) aktiv ist, werden beim Scrollen mit dem Mausrad die Pfeiltasten imitiert.\n\nDiese Einstellung kann vorübergehend deaktiviert werden, indem die Umschalttaste gedrückt gehalten wird.\n\nZu dieser Situation kommt es häufig, wenn Pager (less) verwendet, man-Seiten oder Texteditoren (vi/nano) gelesen werden oder screen/tmux verwendet wird."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Der Multiplikator bei vom Scrollrad verursachten Ereignissen, wenn die Messung in Pixel erfolgt.\n\nHiermit lässt sich die Bildlaufgeschwindigkeit der Seite anpassen."
+		"message": "Der Multiplikator für Mausrad-Ereignisse, wenn die Messung in Pixel erfolgt.\n\nHiermit lässt sich die Bildlaufgeschwindigkeit der Seite anpassen."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Der vertikale Bildlaufleisten-Modus."
@@ -830,9 +839,6 @@
 	"new_window_menu_label": {
 		"message": "Neues Fenster"
 	},
-	"notify_copy": {
-		"message": "Auswahl wurde kopiert"
-	},
 	"ok_button_label": {
 		"message": "Ok"
 	},
@@ -841,9 +847,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Profitipp] Mit \"In Fenster öffnen\" oder \"Vollbild\" wird verhindert, dass mit Strg + W das Terminal geschlossen wird.\n[Profitipp] Weitere Informationen unter $1."
-	},
-	"options_button_label": {
-		"message": "Optionen"
 	},
 	"plugin_loading": {
 		"message": "NaCl-Plug-in wird geladen…"
@@ -908,6 +911,9 @@
 	"save_label": {
 		"message": "Speichern"
 	},
+	"send_feedback_label": {
+		"message": "Feedback geben"
+	},
 	"shortcut_list_aria_label": {
 		"message": "gespeicherte Verbindungen"
 	},
@@ -922,6 +928,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Terminal löschen"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" ist nicht verfügbar"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-Farben"
@@ -950,6 +959,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Sichtbar"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Wählen Sie eine Alt Gr-Erkennungsheuristik aus.\n\n\"Auto\": Automatische Erkennung, basierend auf navigator.language:\n      \"en-us\" => \"Disable\", sonst => \"right-alt\"\n\"Disable\": Deaktiviert jegliche Alt Gr-Emulation.\n\"ctrl-alt\": Es wird angenommen, dass Strg + Alt für Alt Gr steht.\n\"left-alt\": Es wird angenommen, dass die linke Alt-Taste für Alt Gr steht.\n\"right-alt\": Es wird angenommen, dass die rechte Alt-Taste für Alt Gr steht."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Farben für die Standardpalette einstellen."
 	},
@@ -964,6 +976,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Terminal zurücksetzen"
+	},
+	"terminal_settings_about_label": {
+		"message": "Info"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "URL des Hintergrundbilds. Muss mit \"http://\" oder \"https://\" beginnen. Ein leerer String gibt an, dass kein Bild vorhanden ist.\n\nZum Beispiel:\n  https://goo.gl/anedTK"
@@ -1072,6 +1087,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Design"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Stellen Sie eine Internetverbindung her und versuchen Sie es noch einmal."
 	},
 	"tip_1": {
 		"message": "Die Strg-Taste gedrückt halten (Befehlstaste bei Mac OS) und gleichzeitig auf Links klicken, um sie zu öffnen."

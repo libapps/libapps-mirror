@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Receber codificação"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Tamanho do padding da tela"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Rolar para baixo após pressionar tecla"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Interrupção automática de seleção (para a direita)"
 	},
+	"hterm_options_button_label": {
+		"message": "Opções"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Imagens in-line"
 	},
@@ -363,7 +369,7 @@
 		"message": "Se essa opção estiver definida, o Chrome OS desfará o remapeamento de Alt+Backspace->Delete de forma que Alt+Backspace realmente seja Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Selecione uma heurística de detecção AltGr.\n\n\"null\": detecção automática com base em navigator.language:\n      \"en-us\" => \"none\", caso contrário => \"right-alt\"\n\"none\": desativar deterioração relacionada a AltGr.\n\"ctrl-alt\": pressupor que Ctrl+Alt significa AltGr.\n\"left-alt\": pressupor que Alt esquerdo significa AltGr.\n\"right-alt\": pressupor que Alt direito significa AltGr."
+		"message": "Selecione uma heurística de detecção AltGr.\n\n\"null\": detecção automática com base em navigator.language:\n      \"en-us\" => \"none\", caso contrário => \"right-alt\"\n\"none\": desativar qualquer emulação relacionada a AltGr.\n\"ctrl-alt\": pressupor que Ctrl+Alt significa AltGr.\n\"left-alt\": pressupor que Alt esquerdo significa AltGr.\n\"right-alt\": pressupor que Alt direito significa AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Define se a tecla Alt atua como uma tecla Meta ou como uma tecla Alt diferente."
@@ -426,7 +432,7 @@
 		"message": "O formato do cursor de texto visível. Pode ser mudado no momento da execução por meio de sequências de escape do terminal."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "Se verdadeira, os sinos do terminal em segundo plano criarão uma Notificação da Web. https://www.w3.org/TR/notifications/\n\n\nA exibição de notificações requer a permissão do usuário. Quando esta opção estiver definida como verdadeira, hterm tentará pedir permissão ao usuário para isso, se necessário. Os navegadores podem não exibir a solicitação de permissão caso ela não seja originada por uma ação do usuário.\n\nExtensões do Chrome com a permissão \"notificações\" têm permissão para exibir notificações."
+		"message": "Se definida como verdadeira, os sinos do terminal em segundo plano criarão uma Notificação da Web. https://www.w3.org/TR/notifications/\n\nA exibição de notificações requer a permissão do usuário. Quando essa opção estiver definida como verdadeira, hterm tentará pedir permissão ao usuário para isso, se necessário. Os navegadores podem não exibir o pedido de permissão caso ele não seja originado por uma ação do usuário.\n\nExtensões do Chrome com a permissão \"notificações\" estão autorizadas a exibir notificações."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Define se caracteres East Asian Ambiguous têm duas colunas de largura."
@@ -474,7 +480,7 @@
 		"message": "A cor do primeiro plano do texto sem outros atributos de cor."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Define se o cursor do mouse deve ser ocultado automaticamente ao digitar. Por padrão, há detecção automática de se isso é realizado pela plataforma/SO.\n\nObservação: alguns sistemas operacionais podem modificar essa configuração e, portanto, pode não ser possível desativá-la."
+		"message": "Define se o cursor do mouse será ocultado automaticamente ao digitar. Por padrão, há detecção automática se isso é realizado pela plataforma/SO.\n\nObservação: seu sistema operacional pode modificar essa configuração e, portanto, pode não ser possível desativá-la."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Se definida como verdadeira, as teclas Home/End controlam a barra de rolagem do terminal e Shift+Home/Shift+End são enviadas ao host remoto. Se definida como falsa, as teclas Home/End são enviadas ao host remoto, e Shift+Home/Shift+End rolam a tela."
@@ -522,13 +528,16 @@
 		"message": "Define se as teclas Meta+1 a 9 são transmitidas ao navegador.\n\nIsso é útil ao executar o hterm em uma guia do navegador para que você não perca os atalhos \"alternar para guia\" do Chrome. Quando não for executado em uma guia, é melhor enviar essas teclas ao host para que elas possam ser usadas em vim ou emacs.\n\nSe verdadeira, as teclas Meta+1 a 9 serão gerenciadas pelo navegador. Se falsa, essas teclas serão enviadas ao host. Se nula, a detecção será automática com base na plataforma do navegador e no tipo de janela."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Define se Meta+V é transmitida ao host."
+		"message": "Define se Meta+V é transmitido ao navegador.\n\nEm alguns sistemas, isso é usado para colar conteúdo."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Se definida como verdadeira, o texto arrastado e solto será colado no terminal.\nSe definida como falsa, o texto solto será ignorado."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Define a codificação esperada para os dados recebidos do host.\nSe as codificações não corresponderem, é provável que bugs visuais sejam observados.\n\nOs valores válidos são \"utf-8\" e \"raw\"."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Tamanho do padding em pixels em torno da borda da tela do terminal.\n\nControla o tamanho dessa borda para que o usuário possa adicionar padding visível aos limites da tela."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Define se a tela será rolada ou não para baixo quando qualquer tecla for pressionada."
@@ -537,10 +546,10 @@
 		"message": "Define se a tela será rolada ou não para baixo mediante a saída do terminal."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Ao usar o buffer de tela alternativo com o DECCKM (Teclas de cursor do aplicativo) ativo, os eventos de rolagem da roda do mouse emularão as teclas de seta.\n\nEssa opção pode ser desativada temporariamente mantendo a tecla Shift pressionada.\n\nIsso ocorre com frequência ao usar paginadores (less), páginas ou editores de texto de leitura (vi/nano) ou ainda screen/tmux."
+		"message": "Ao usar o buffer de tela alternativo com o DECCKM (Teclas de cursor do aplicativo) ativo, os eventos de rolagem da roda do mouse emularão as teclas de seta.\n\nEssa opção pode ser desativada temporariamente mantendo a tecla Shift pressionada.\n\nIsso ocorre com frequência ao usar paginadores (less), ler páginas de documentação ou editores de texto (vi/nano) ou usar screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "O multiplicador para eventos de roda de rolagem quando medido em pixels.\n\nAltera a velocidade de rolagem da página."
+		"message": "O multiplicador para eventos de rolagem da roda do mouse quando medido em pixels.\n\nMuda a velocidade de rolagem da página."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "O modo de barra de rolagem vertical."
@@ -821,9 +830,6 @@
 	"new_window_menu_label": {
 		"message": "Nova janela"
 	},
-	"notify_copy": {
-		"message": "Seleção copiada"
-	},
 	"ok_button_label": {
 		"message": "OK"
 	},
@@ -832,9 +838,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Dica profissional] Use \"Abrir como janela\" ou \"Tela cheia\" para evitar que Ctrl+W feche o terminal.\n[Dica profissional] Consulte $1 para ver mais informações."
-	},
-	"options_button_label": {
-		"message": "Opções"
 	},
 	"plugin_loading": {
 		"message": "Carregando plug-in NaCl…"
@@ -899,6 +902,9 @@
 	"save_label": {
 		"message": "Salvar"
 	},
+	"send_feedback_label": {
+		"message": "Enviar feedback"
+	},
 	"shortcut_list_aria_label": {
 		"message": "conexões salvas"
 	},
@@ -913,6 +919,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Limpeza de terminal"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" não está disponível"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Cores ANSI"
@@ -941,6 +950,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Visível"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Seleciona uma heurística de detecção AltGr.\n\n\"Auto\": detecção automática com base em navigator.language:\n      \"en-us\" => \"Disable\", caso contrário => \"right-alt\"\n\"Disable\": desativar qualquer emulação relacionada a AltGr.\n\"ctrl-alt\": pressupor que Ctrl+Alt significa AltGr.\n\"left-alt\": pressupor que Alt esquerdo significa AltGr.\n\"right-alt\": pressupor que Alt direito significa AltGr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Definir cores da paleta padrão."
 	},
@@ -955,6 +967,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Redefinição de terminal"
+	},
+	"terminal_settings_about_label": {
+		"message": "Sobre"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "URL da imagem de plano de fundo. Precisa começar com \"http://\" ou \"https://\". Deixe em branco para não adicionar uma imagem.\n\nPor exemplo:\n  https://goo.gl/anedTK"
@@ -1075,6 +1090,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Tema"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Conecte-se à Internet e tente novamente."
 	},
 	"tip_1": {
 		"message": "Você pode manter a tecla Ctrl (ou Cmd no macOS) pressionada ao clicar nos links para abri-los."

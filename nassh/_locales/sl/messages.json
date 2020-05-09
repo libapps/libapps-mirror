@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Prejemanje kodiranja"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Velikost odmika na zaslonu"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Pomik do dna po pritisku tipke"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Ustavitev samodejne izbire (proti desni)"
 	},
+	"hterm_options_button_label": {
+		"message": "Možnosti"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Slike v vrstici"
 	},
@@ -363,7 +369,7 @@
 		"message": "Če je to nastavljeno, razveljavi preslikavo kombinacije tipk Alt + vračalka -> Delete v sistemu Chrome OS, tako da se s kombinacijo tipk Alt + vračalka dejansko izvrši kombinacija Alt + vračalka."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Izbira hevrističnega postopka za zaznavanje tipke AltGr.\n\n»null«: samodejno zaznavanje na podlagi parametra »navigator.language«:\n      »en-us« => »none«, drugo => »right-alt«\n»none«: onemogočanje napak, povezanih s tipko AltGr.\n»ctrl- alt«: predvidevanje, da kombinacija tipk Ctrl + Alt pomeni tipko AltGr.\n»left-alt«: predvidevanje, da leva tipka Alt pomeni tipko AltGr.\n»right-alt«: predvidevanje, da desna tipka Alt pomeni tipko AltGr."
+		"message": "Izbira hevrističnega postopka za zaznavanje tipke AltGr.\n\n»null«: Samodejno zaznavanje na podlagi parametra »navigator.language«:\n      »en-us« => »none«, drugo => »right-alt«\n»none«: Onemogočanje emulacij tipke AltGr.\n»ctrl- alt«: Predvidevanje, da kombinacija tipk Ctrl + Alt pomeni tipko AltGr.\n»left-alt«: Predvidevanje, da leva tipka Alt pomeni tipko AltGr.\n»right-alt«: Predvidevanje, da desna tipka Alt pomeni tipko AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Določa, ali naj tipka Alt deluje kot metatipka ali kot običajna tipka Alt."
@@ -378,7 +384,7 @@
 		"message": "Barva ozadja za besedilo brez drugih barvnih atributov."
 	},
 	"hterm_pref_background_image": {
-		"message": "Vrednost CSS slike ozadja. Pustite prazno, če ni slike.\n\nPrimer:\n  url (https://goo.gl/anedTK)\n  linear-gradient (zgoraj in spodaj, modro, rdeče)"
+		"message": "Vrednost CSS slike ozadja. Pustite prazno, če ni slike.\n\nPrimer:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Vrednost CSS položaja slike ozadja.\n\nNa primer:\n  10% 10%\n  center"
@@ -390,7 +396,7 @@
 		"message": "Če je to omogočeno, vračalka pošlje BS (»\\x08« ali drugače povedano ^H). V nasprotnem primeru vračalka pošlje »\\x7f«."
 	},
 	"hterm_pref_character_map_overrides": {
-		"message": "To je določeno kot predmet. Je razpršeno polje, na katerem je vsaka lastnost koda nabora znakov in vrednost je predmet, ki je razpršeno polje samo po sebi. V tem razpršenem polju je vsaka lastnost prejeti znak in vrednost je prikazani znak.\n\nPrimer:\n{ »0\": {\n  »+«: »\\u2192«,\n  »,«: »\\u2190«,\n  »-«: »\\u2191«,\n  ».«: »\\u2193«,\n  »0«: »\\u2588«\n} }"
+		"message": "To je določeno kot predmet. Je redko polje, na katerem je vsaka lastnost koda nabora znakov in vrednost je predmet, ki je redko polje samo po sebi. V tem redkem polju je vsaka lastnost prejeti znak in vrednost je prikazani znak.\n\nPrimer:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
 	},
 	"hterm_pref_clear_selection_after_copy": {
 		"message": "Določa, ali naj se po kopiranju izbor počisti."
@@ -474,7 +480,7 @@
 		"message": "Barva ospredja za besedilo brez drugih barvnih atributov."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Določa, ali naj se med tipkanjem samodejno skrije kazalec miške. Privzeto se samodejno zazna, ali to obravnava okolje/operacijski sistem.\n\nOpomba: nekateri operacijski sistemi morda preglasijo to nastavitev, zato je morda včasih ne morete onemogočiti."
+		"message": "Določa, ali naj se med tipkanjem samodejno skrije kazalec miške. Privzeto se samodejno zazna, ali to obravnava okolje/operacijski sistem.\n\nOpomba: Vaš operacijski sistem morda preglasi to nastavitev, zato je morda včasih ne morete onemogočiti."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Če je omogočeno, tipki Home/End upravljata drsno vrstico terminala, kombinaciji Shift + Home/Shift + End pa sta poslani oddaljenemu gostitelju. Če je onemogočeno, sta tipki Home/End poslani oddaljenemu gostitelju, kombinaciji Shift + Home/Shift + End pa upravljata drsenje."
@@ -522,13 +528,16 @@
 		"message": "Določa, ali naj se kombinacija metatipke + tipk 1..9 posreduje brskalniku.\n\nTo je priročno pri izvajanju terminala hterm na zavihku brskalnika, tako da ne izgubite Chromovih bližnjičnih tipk za preklop na zavihek. Če se ne izvaja na zavihku, je te tipke bolje poslati gostitelju, da jih je mogoče uporabiti v programih vim ali emacs.\n\nČe je omogočeno, bo kombinacijo metatipke + tipk 1..9 obdelal brskalnik. Če je onemogočeno, se kombinacije metatipke + tipk 1..9 pošlje gostitelju. Če je nastavljeno na »null«, se uporabi samozaznavanje na podlagi vrste brskalnika in okna."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Določa, ali naj se Meta+V pošlje gostitelju."
+		"message": "Določa, ali naj se kombinacija metatipke + tipke V pošlje brskalniku.\n\nV nekaterih sistemih se ta kombinacija uporablja za lepljenje vsebine."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Če je nastavitev omogočena, se bo vlečeno in spuščeno besedilo kopiralo v terminal.\nČe ni omogočena, bo spuščeno besedilo prezrto."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Nastavitev pričakovanega kodiranja podatkov, prejetih iz gostitelja.\nČe se kodiranja ne ujemajo, so verjetno zaznane vidne napake.\n\nVeljavni vrednosti sta »utf-8« in »raw«."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Velikost odmika v slikovnih pikah okoli obrobe zaslona terminala.\n\nS tem se nadzira velikost obrobe zaslona terminala, da lahko uporabnik robovom zaslona doda nekaj vidnega odmika."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Določa, ali naj se ob vsakem pritisku tipk drsi na dno."
@@ -537,10 +546,10 @@
 		"message": "Določa, ali naj se ob terminalskem izpisu drsi na dno."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Če je v uporabi nadomestni medpomnilnik zaslona in je aktivna možnost DECCKM (tipke kazalca v aplikaciji), dogodki drsenja kolesca miške emulirajo puščične tipke.\n\nTo je mogoče začasno omogočiti z držanjem tipke Shift.\n\nTo se pogosto pojavlja pri uporabi pozivnikov (less), branju dokumentacije ali urejevalnikov besedila (vi/nano) oziroma uporabi možnosti screen/tmux."
+		"message": "Če je v uporabi nadomestni medpomnilnik zaslona in je aktivna možnost DECCKM (tipke kazalca v aplikaciji), dogodki drsenja kolesca miške emulirajo puščične tipke.\n\nTo je mogoče začasno onemogočiti z držanjem tipke Shift.\n\nTo se pogosto pojavlja pri uporabi pozivnikov (less), branju dokumentacije ali urejevalnikov besedila (vi/nano) oziroma uporabi možnosti screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Množitelj za dogodke drsnega kolesca, ko je merjen v slikovnih pikah.\n\nSpremeni hitrost drsenja strani."
+		"message": "Množitelj za dogodke drsnega kolesca miške, ko je merjen v slikovnih pikah.\n\nSpremeni hitrost drsenja strani."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Način navpične drsne vrstice."
@@ -687,7 +696,7 @@
 		"message": "izreži"
 	},
 	"nasftp_cmd_clip_help": {
-		"message": "Kopiranje datoteke v odložišče (privzeto: prvih 10 MB)"
+		"message": "Kopiranje datoteke v odložišče (privzeto: prvih 10 MiB)"
 	},
 	"nasftp_cmd_clip_summary": {
 		"message": "V odložišče je prekopiranih toliko bajtov: $1"
@@ -914,9 +923,6 @@
 	"new_window_menu_label": {
 		"message": "Novo okno"
 	},
-	"notify_copy": {
-		"message": "Kopiran izbor"
-	},
 	"ok_button_label": {
 		"message": "V redu"
 	},
@@ -925,9 +931,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Nasvet strokovnjaka] Uporabite ukaz »Odpri kot okno« ali »Celozaslonsko«, da preprečite zapiranje terminala z bližnjico »CTRL + W«.\n[Nasvet strokovnjaka] Več informacij poiščite na $1."
-	},
-	"options_button_label": {
-		"message": "Možnosti"
 	},
 	"plugin_loading": {
 		"message": "Nalaganje vtičnika NaCl ..."
@@ -992,6 +995,9 @@
 	"save_label": {
 		"message": "Shrani"
 	},
+	"send_feedback_label": {
+		"message": "Pošljite povratne informacije"
+	},
 	"shortcut_list_aria_label": {
 		"message": "shranjene povezave"
 	},
@@ -1006,6 +1012,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Brisanje vsebine zaslona terminala"
+	},
+	"terminal_font_unavailable": {
+		"message": "Pisava »$1« ni na voljo"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Barve ANSI"
@@ -1034,6 +1043,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Vidno"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Izbira hevrističnega postopka za zaznavanje tipke AltGr.\n\n»Samodejno«: Samodejno zaznavanje na podlagi parametra navigator.language:\n      »en-us« => »Onemogoči«, sicer => »right-alt«\n»Onemogoči«: Onemogočanje emulacij tipke AltGr.\n»ctrl-alt«: Predvidevanje, da kombinacija tipk Ctrl + Alt pomeni tipko AltGr.\n»left-alt«: Predvidevanje, da leva tipka Alt pomeni tipko AltGr.\n»right-alt«: Predvidevanje, da desna tipka Alt pomeni tipko AltGr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Nastavite barve za privzeto paleto."
 	},
@@ -1048,6 +1060,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Ponastavitev terminala"
+	},
+	"terminal_settings_about_label": {
+		"message": "O aplikaciji"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "URL slike ozadja. Začeti se mora s »http://« ali »https://«. Pustite prazno, če ni slike.\n\nPrimer:\n  https://goo.gl/anedTK"
@@ -1174,6 +1189,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Tema"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Vzpostavite internetno povezavo in poskusite znova."
 	},
 	"tip_1": {
 		"message": "Če želite odpreti povezave, medtem ko jih kliknete, lahko pridržite tipko Ctrl (tipko Cmd v sistemu macOS)."

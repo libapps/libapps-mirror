@@ -308,6 +308,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Saņemt kodējumu"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Ekrāna apmales lielums"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Ritināt līdz apakšai pēc taustiņsitiena"
 	},
@@ -347,6 +350,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Apturēt automātisko atlasi (pa labi)"
 	},
+	"hterm_options_button_label": {
+		"message": "Opcijas"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Iekļautie attēli"
 	},
@@ -360,7 +366,7 @@
 		"message": "Ja šī preference ir iestatīta, tiek atcelta Chrome OS taustiņu Alt+Backspace->Delete pārkartēšana, lai taustiņu kombinācija Alt+Backspace nozīmētu Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Atlasiet AltGr noteikšanas heiristikas metodi.\n\n'null': automātiskās noteikšanas pamatā ir navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': atspējot jebkādas ar AltGr saistītas kaitīgas izmaiņas.\n'ctrl- alt': pieņemt, ka Ctrl+Alt nozīmē AltGr.\n'left-alt': pieņemt, ka kreisais Alt taustiņš nozīmē AltGr.\n'right-alt': pieņemt, ka labais Alt taustiņš nozīmē AltGr."
+		"message": "Atlasiet AltGr noteikšanas heiristikas metodi.\n\n'null': automātiskās noteikšanas pamatā ir navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': atspējot jebkādu ar AltGr saistītu emulāciju.\n'ctrl- alt': pieņemt, ka Ctrl+Alt nozīmē AltGr.\n'left-alt': pieņemt, ka kreisais Alt taustiņš nozīmē AltGr.\n'right-alt': pieņemt, ka labais Alt taustiņš nozīmē AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Norāda, vai taustiņš Alt darbojas kā taustiņš Meta vai kā atsevišķs taustiņš Alt."
@@ -471,7 +477,7 @@
 		"message": "Priekšplāna krāsa tekstam bez citiem krāsu atribūtiem"
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Vai rakstīšanas laikā automātiski slēpt peles kursoru. Pēc noklusējuma automātiski noteikt, vai platforma/operētājsistēma atbalsta to.\n\nPiezīme. Dažas operētājsistēmas var ignorēt šo iestatījumu, tādēļ jūs to ne vienmēr varēsiet to atspējot."
+		"message": "Norāda, vai rakstīšanas laikā automātiski slēpt peles kursoru. Pēc noklusējuma automātiski nosaka, vai to veic platforma/operētājsistēma.\n\nPiezīme. Jūsu operētājsistēmā šis iestatījums var tikt ignorēts, tādēļ jūs to ne vienmēr varēsiet atspējot."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Ja ir iestatīta vērtība “true”, ar taustiņiem Home/End tiek kontrolēta termināļa ritjosla, bet taustiņu kombinācijas Shift+Home/Shift+End tiek nodotas attālajam saimniekdatoram. Ja ir iestatīta vērtība “false”, taustiņi Home/End tiek nodoti attālajam saimniekdatoram, bet ar taustiņu kombinācijām Shift+Home/Shift+End notiek ritināšana."
@@ -519,13 +525,16 @@
 		"message": "Norāda, vai taustiņu kombinācijas Meta+1–Meta+9 tiek nodotas pārlūkprogrammai.\n\nŠis iestatījums ir noderīgs, izpildot komandu “hterm” pārlūkprogrammas cilnē, lai nepazaudētu Chrome tastatūras īsinājumtaustiņus ciļņu pārslēgšanai. Ja nenotiek izpildīšana cilnē, vēlams nodot šos taustiņus saimniekdatoram, lai tos varētu izmantot teksta redaktorā “vim” vai “emacs”.\n\nJa ir iestatīta vērtība “true”, taustiņu kombinācijas Meta+1–Meta+9 tiek apstrādātas pārlūkprogrammā. Ja ir iestatīta vērtība “false”, taustiņu kombinācijas Meta+1–Meta+9 tiek nodotas saimniekdatoram. Ja ir iestatīta vērtība “null”, notiek automātiska noteikšana, pamatojoties uz pārlūkprogrammas platformu un loga veidu."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Vai saimniekdatoram tiek nosūtīta taustiņu kombinācija Meta+V."
+		"message": "Norāda, vai taustiņu kombinācija Meta+V tiek nodota pārlūkprogrammai.\n\nNoteiktās sistēmās tiek izmantots satura ielīmēšanai."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Ja vērtība ir “true”, vilktais un nomestais teksts tiks ielīmēts terminālī.\nJa vērtība ir “false”, nomestais teksts tiks ignorēts."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Iestatiet paredzamo kodējumu no saimnienkdatora saņemtajiem datiem.\nJa kodējums nesakrīt, iespējams, tiks novērotas vizuālas kļūdas.\n\n\nDerīgas vērtības ir “utf-8” un “raw”."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Termināļa ekrāna apmales lielums pikseļos.\n\nTiek kontrolēts termināļa ekrāna apmales lielums, lai lietotājs varētu pievienot redzamu joslu ekrāna malās."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Norāda, vai ritināšana lejup notiek, nospiežot jebkuru taustiņu."
@@ -537,7 +546,7 @@
 		"message": "Ja tiek izmantots alternatīvs ekrāna buferis un ir aktīva funkcija DECCKM (lietojumprogrammas kursora taustiņi), ritinot ar peli, tiek imitētas bulttaustiņu darbības.\n\nŠo iestatījumu var īslaicīgi atspējot, turot nospiestu taustiņu Shift.\n\nTas tiek izmantots, lietojot lapu programmas (less), lasot manuāli veidotas lapas vai teksta redaktorus (vi/nano) vai lietojot screen vai tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Peles ritenīša kustību izraisītas darbības tiek mērītas pikseļos.\nTas maina lapas ritināšanas ātrumu."
+		"message": "Peles ritenīša kustību notikumu reizinātājs, mērot pikseļos.\n\nTiek mainīts lapas ritināšanas ātrums."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Vertikālās ritjoslas režīms"
@@ -821,9 +830,6 @@
 	"new_window_menu_label": {
 		"message": "Jauns logs"
 	},
-	"notify_copy": {
-		"message": "Atlase nokopēta"
-	},
 	"ok_button_label": {
 		"message": "Labi"
 	},
@@ -832,9 +838,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Profesionāļa padoms] Izmantojiet “Atvērt kā logu” vai “Pilnekrāns”, lai ar taustiņu kombināciju Ctrl+W neaizvērtu termināli.\n[Profesionāļa padoms] Plašāku informāciju skatiet vietnē $1."
-	},
-	"options_button_label": {
-		"message": "Opcijas"
 	},
 	"plugin_loading": {
 		"message": "Notiek NaCl spraudņa ielāde..."
@@ -899,6 +902,9 @@
 	"save_label": {
 		"message": "Saglabāt"
 	},
+	"send_feedback_label": {
+		"message": "Sūtīt atsauksmes"
+	},
 	"shortcut_list_aria_label": {
 		"message": "saglabātie savienojumi"
 	},
@@ -913,6 +919,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Notīrīt termināli"
+	},
+	"terminal_font_unavailable": {
+		"message": "Fonts $1 nav pieejams"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI krāsas"
@@ -941,6 +950,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Redzams"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Atlasiet AltGr noteikšanas heiristikas metodi.\n\n'Auto': automātiskās noteikšanas pamatā ir navigator.language:\n      'en-us' => 'Disable', else => 'right-alt'\n'Disable': atspējot jebkādu ar AltGr saistītu emulāciju.\n'ctrl- alt': pieņemt, ka Ctrl+Alt nozīmē AltGr.\n'left-alt': pieņemt, ka kreisais taustiņš Alt nozīmē AltGr.\n'right-alt': pieņemt, ka labais taustiņš Alt nozīmē AltGr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Iestatiet krāsas noklusējuma paletei."
 	},
@@ -955,6 +967,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Atiestatīt termināli"
+	},
+	"terminal_settings_about_label": {
+		"message": "Par"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Fona attēla URL. Tam ir jāsākas ar: http:// vai https://. Ja nav attēla, atstājiet lauku tukšu.\n\nPiemērs:\n  https://goo.gl/anedTK"
@@ -1081,6 +1096,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Motīvs"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Izveidojiet savienojumu ar internetu un mēģiniet vēlreiz."
 	},
 	"tip_1": {
 		"message": "Lai atvērtu saiti, turiet nospiestu taustiņu Ctrl (taustiņu Cmd macOS datorā), vienlaikus noklikšķinot uz attiecīgās saites."

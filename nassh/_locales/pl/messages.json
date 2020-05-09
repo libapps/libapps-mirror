@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Odbierane kodowanie"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Rozmiar dopełnienia ekranu"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Przewiń w dół po naciśnięciu klawisza"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Automatycznie zatrzymaj zaznaczenie (do prawej)"
 	},
+	"hterm_options_button_label": {
+		"message": "Opcje"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Obrazy w treści"
 	},
@@ -363,7 +369,7 @@
 		"message": "Włączenie tej opcji wyłącza mapowanie Alt+Backspace->Delete w Chrome OS, powodując, że Alt+Backspace działa po prostu jako Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Wybierz sposób używania AltGr.\n\n„null”: automatyczne wykrywanie na podstawie parametru navigator.language:\n      „en-us” => „none”, inna wartość => „right-alt”\n„none”: wyłącza obsługę AltGr.\n„ctrl-alt”: Ctrl+Alt działa jako AltGr.\n„left-alt”: lewy Alt działa jako AltGr.\n„right-alt”: prawy Alt działa jako AltGr."
+		"message": "Wybierz sposób używania AltGr.\n\n„null”: automatyczne wykrywanie na podstawie parametru navigator.language:\n      „en-us” => „none”, inna wartość => „right-alt”\n„none”: wyłącza emulację AltGr.\n„ctrl-alt”: Ctrl+Alt działa jako AltGr.\n„left-alt”: lewy Alt działa jako AltGr.\n„right-alt”: prawy Alt działa jako AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Określa, czy klawisz Alt ma działać jako klawisz Meta, czy jako zwykły Alt."
@@ -387,7 +393,7 @@
 		"message": "Wartość CSS rozmiaru obrazu tła."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Wartość prawda powoduje, że klawisz Backspace wysyła BS („\\x08”, czyli ^H). W przeciwnym razie klawisz Backspace wysyła „\\x7f”."
+		"message": "Wartość „prawda” powoduje, że klawisz Backspace wysyła BS („\\x08”, czyli ^H). W przeciwnym razie klawisz Backspace wysyła „\\x7f”."
 	},
 	"hterm_pref_character_map_overrides": {
 		"message": "Wartość tego ustawienia jest obiektem. Jest to tablica rozproszona, w której właściwości to kody zestawu znaków, a wartości to obiekty będące też tablicami rozproszonymi, w których z kolei właściwości to odebrane znaki, a wartości to wyświetlane znaki.\n\nNa przykład:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
@@ -423,7 +429,7 @@
 		"message": "Kolor wyświetlanego kursora tekstowego."
 	},
 	"hterm_pref_cursor_shape": {
-		"message": "Kształt wyświetlanego kursora tekstowego. Tę opcję można zmieniać na bieżąco za pomocą sekwencji zmiany znaczenia w terminalu."
+		"message": "Kształt wyświetlanego kursora tekstowego. Tę opcję można zmieniać na bieżąco za pomocą sekwencji zmieniających znaczenie (escape) w terminalu."
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "Jeśli ma wartość prawda, sygnał terminala w tle wywołuje powiadomienie Web Notification. https://www.w3.org/TR/notifications/\n\nUżytkownik musi zezwolić na wyświetlanie powiadomień. Gdy ta opcja ma wartość prawda, hterm w razie potrzeby zapyta użytkownika o zgodę. Przeglądarki mogą nie wyświetlać tego pytania o zgodę, jeśli nie zostało wywołane przez działania użytkownika.\n\nRozszerzenia do Chrome, które mają uprawnienie do wyświetlania powiadomień, mogą je wyświetlać."
@@ -450,7 +456,7 @@
 		"message": "Zezwól hostowi zdalnemu na zapisywanie danych bezpośrednio w schowku systemu lokalnego.\nBez względu na to ustawienie host zdalny nie ma nigdy uprawnień do odczytu danych ze schowka.\n\nTo ustawienie służy do kontrolowania dostępu do funkcji takich jak OSC-52."
 	},
 	"hterm_pref_enable_csi_j_3": {
-		"message": "Czy funkcja Usuń zapisane wiersze (tryb 3) polecenia Wymazywanie wyświetlacza (CSI-J) może czyścić bufor przewijania terminala.\n\nTen tryb może być domyślnie włączony – jest to bezpieczne."
+		"message": "Określa, czy funkcja usuwania zapisanych wierszy (tryb 3) polecenia, którym dokonuje się wymazywanie wyświetlacza (CSI-J), może czyścić bufor przewijania terminala.\n\nTen tryb może być domyślnie włączony – jest to bezpieczne."
 	},
 	"hterm_pref_enable_dec12": {
 		"message": "Akceptuj dokonywaną przez hosta zmianę stanu migania kursora tekstowego za pomocą trybu prywatnego DEC 12."
@@ -474,7 +480,7 @@
 		"message": "Kolor pierwszego planu dla tekstu bez żadnych innych atrybutów koloru."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Czy automatycznie ukrywać kursor podczas pisania. Domyślnie włączone jest automatyczne wykrywanie, czy platforma / system operacyjny obsługuje tę funkcję.\n\nUwaga: niektóre systemy operacyjne mogą zastępować to ustawienie, przez co nie zawsze możesz je wyłączyć."
+		"message": "Określa, czy automatycznie ukrywać kursor podczas pisania. Domyślnie włączone jest automatyczne wykrywanie, czy platforma / system operacyjny obsługuje tę funkcję.\n\nUwaga: Twój system operacyjny może zastępować to ustawienie, przez co nie zawsze możesz je wyłączyć."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Jeśli wybrano wartość „prawda”, klawisze Home/End przewijają terminal, a kombinacje Shift+Home/End są wysyłane do zdalnego hosta. Jeśli wybrano „fałsz”, klawisze Home/End są wysyłane do zdalnego hosta, a kombinacje Shift+Home/End przewijają."
@@ -501,34 +507,37 @@
 		"message": "Jeśli wybrano wartość „prawda”, klawisze Page Up/Down przewijają terminal, a kombinacje Shift+Page Up/Down są wysyłane do zdalnego hosta. Jeśli wybrano „fałsz”, klawisze Page Up/Down są wysyłane do zdalnego hosta, a kombinacje Shift+Page Up/Down przewijają."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Czy kombinacje Alt+1..9 mają być przekazywane do przeglądarki.\n\nJest to przydatne podczas używania emulatora hterm na karcie przeglądarki – pozwala nadal używać skrótów umożliwiających przełączanie kart w Chrome. Gdy emulator hterm nie jest uruchomiony na karcie, lepiej wysyłać te kombinacje do hosta, by można było używać ich w edytorach vim czy emacs.\n\nJeśli wybrano opcję prawda, kombinacje Alt+1..9 będą obsługiwane przez przeglądarkę. Jeśli wybrano opcję fałsz, kombinacje Alt+1..9 będą wysyłane do hosta. Jeśli wybrano opcję null, stosowane będzie automatyczne wykrywanie na podstawie typu okna i platformy przeglądarki."
+		"message": "Określa, czy kombinacje Alt+1…9 mają być przekazywane do przeglądarki.\n\nJest to przydatne podczas używania emulatora hterm na karcie przeglądarki – pozwala nadal używać skrótów umożliwiających przełączanie kart w Chrome. Gdy emulator hterm nie jest uruchomiony na karcie, lepiej wysyłać te kombinacje do hosta, by można było używać ich w edytorach vim czy emacs.\n\nJeśli wybrano wartość „prawda”, kombinacje Alt+1…9 będą obsługiwane przez przeglądarkę. Jeśli wybrano „fałsz”, kombinacje Alt+1…9 będą wysyłane do hosta. Jeśli wybrano „null”, stosowane będzie automatyczne wykrywanie na podstawie typu okna i platformy przeglądarki."
 	},
 	"hterm_pref_pass_ctrl_n": {
-		"message": "Czy kombinacja Ctrl+N ma być przekazywana do przeglądarki.\n\nJeśli wybrano opcję prawda, kombinacja Ctrl+N będzie uznawana przez przeglądarkę za skrót klawiszowy „nowe okno”. Jeśli wybrano opcję fałsz, kombinacja Ctrl+N będzie przesyłana do hosta."
+		"message": "Określa, czy kombinacja Ctrl+N ma być przekazywana do przeglądarki.\n\nJeśli wybrano wartość „prawda”, kombinacja Ctrl+N będzie uznawana przez przeglądarkę za skrót klawiszowy „Nowe okno”. Jeśli wybrano „fałsz”, kombinacja Ctrl+N będzie przesyłana do hosta."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Czy kombinacje Ctrl+1..9 mają być przekazywane do przeglądarki.\n\nJest to przydatne podczas używania emulatora hterm na karcie przeglądarki – pozwala nadal używać skrótów umożliwiających przełączanie kart w Chrome. Gdy emulator hterm nie jest uruchomiony na karcie, lepiej wysyłać te kombinacje do hosta, by można było używać ich w edytorach vim czy emacs.\n\nJeśli wybrano opcję prawda, kombinacje Ctrl+1..9 będą obsługiwane przez przeglądarkę. Jeśli wybrano opcję fałsz, kombinacje Ctrl+1..9 będą wysyłane do hosta. Jeśli wybrano opcję null, stosowane będzie automatyczne wykrywanie na podstawie typu okna i platformy przeglądarki."
+		"message": "Określa, czy kombinacje Ctrl+1…9 mają być przekazywane do przeglądarki.\n\nJest to przydatne podczas używania emulatora hterm na karcie przeglądarki – pozwala nadal używać skrótów umożliwiających przełączanie kart w Chrome. Gdy emulator hterm nie jest uruchomiony na karcie, lepiej wysyłać te kombinacje do hosta, by można było używać ich w edytorach vim czy emacs.\n\nJeśli wybrano wartość „prawda”, kombinacje Ctrl+1…9 będą obsługiwane przez przeglądarkę. Jeśli wybrano „fałsz”, kombinacje Ctrl+1…9 będą wysyłane do hosta. Jeśli wybrano „null”, stosowane będzie automatyczne wykrywanie na podstawie typu okna i platformy przeglądarki."
 	},
 	"hterm_pref_pass_ctrl_t": {
-		"message": "Czy kombinacja Ctrl+T ma być przekazywana do przeglądarki.\n\nJeśli wybrano opcję prawda, kombinacja Ctrl+T będzie uznawana przez przeglądarkę za skrót klawiszowy „nowa karta”. Jeśli wybrano opcję fałsz, kombinacja Ctrl+T będzie przesyłana do hosta."
+		"message": "Określa, czy kombinacja Ctrl+T ma być przekazywana do przeglądarki.\n\nJeśli wybrano wartość „prawda”, kombinacja Ctrl+T będzie uznawana przez przeglądarkę za skrót klawiszowy „Nowa karta”. Jeśli wybrano opcję fałsz, kombinacja Ctrl+T będzie przesyłana do hosta."
 	},
 	"hterm_pref_pass_ctrl_tab": {
-		"message": "Czy kombinacje Ctrl+Tab i Ctrl+Shift+Tab mają być przekazywane do przeglądarki.\n\nJeśli wybrano opcję prawda, kombinacje Ctrl+Tab i Ctrl+Shift+Tab będą uznawane przez przeglądarkę za skrót klawiszowy „następna/poprzednia karta”. Jeśli wybrano opcję fałsz, naciśnięcia klawisza Tab będą przesyłane do hosta bez klawiszy Ctrl i Shift."
+		"message": "Określa, czy kombinacje Ctrl+Tab i Ctrl+Shift+Tab mają być przekazywane do przeglądarki.\n\nJeśli wybrano wartość „prawda”, kombinacje Ctrl+Tab i Ctrl+Shift+Tab będą uznawane przez przeglądarkę za skrót klawiszowy „Następna/poprzednia karta”. Jeśli wybrano „fałsz”, naciśnięcia klawisza Tab będą przesyłane do hosta bez klawiszy Ctrl i Shift."
 	},
 	"hterm_pref_pass_ctrl_w": {
-		"message": "Czy kombinacja Ctrl+W ma być przekazywana do przeglądarki.\n\nJeśli wybrano opcję prawda, kombinacja Ctrl+W będzie uznawana przez przeglądarkę za skrót klawiszowy „zamknij kartę”. Jeśli wybrano opcję fałsz, kombinacja Ctrl+W będzie przesyłana do hosta."
+		"message": "Określa, czy kombinacja Ctrl+W ma być przekazywana do przeglądarki.\n\nJeśli wybrano wartość „prawda”, kombinacja Ctrl+W będzie uznawana przez przeglądarkę za skrót klawiszowy „Zamknij kartę”. Jeśli wybrano „fałsz”, kombinacja Ctrl+W będzie przesyłana do hosta."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Czy kombinacje Meta+1..9 mają być przekazywane do przeglądarki.\n\nJest to przydatne podczas używania emulatora hterm na karcie przeglądarki – pozwala nadal używać skrótów umożliwiających przełączanie kart w Chrome. Gdy emulator hterm nie jest uruchomiony na karcie, lepiej wysyłać te kombinacje do hosta, by można było używać ich w edytorach vim czy emacs.\n\nJeśli wybrano opcję prawda, kombinacje Meta+1..9 będą obsługiwane przez przeglądarkę. Jeśli wybrano opcję fałsz, kombinacje Meta+1..9 będą wysyłane do hosta. Jeśli wybrano opcję null, stosowane będzie automatyczne wykrywanie na podstawie typu okna i platformy przeglądarki."
+		"message": "Określa, czy kombinacje Meta+1…9 mają być przekazywane do przeglądarki.\n\nJest to przydatne podczas używania emulatora hterm na karcie przeglądarki – pozwala nadal używać skrótów umożliwiających przełączanie kart w Chrome. Gdy emulator hterm nie jest uruchomiony na karcie, lepiej wysyłać te kombinacje do hosta, by można było używać ich w edytorach vim czy emacs.\n\nJeśli wybrano wartość „prawda”, kombinacje Meta+1…9 będą obsługiwane przez przeglądarkę. Jeśli wybrano „fałsz”, kombinacje Meta+1…9 będą wysyłane do hosta. Jeśli wybrano „null”, stosowane będzie automatyczne wykrywanie na podstawie typu okna i platformy przeglądarki."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Czy kombinacja Meta+V ma być przekazywana do hosta."
+		"message": "Określa, czy kombinacja Meta+V ma być przekazywana do przeglądarki.\n\nW niektórych systemach używa się jej do wklejania zawartości."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Jeśli wybrano wartość „prawda”, tekst będzie można wklejać przez przeciąganie i upuszczanie.\nJeśli wybrano „fałsz”, upuszczony tekst będzie ignorowany."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Określa oczekiwane kodowanie danych odbieranych z hosta.\nJeśli używane jest niewłaściwe kodowanie, prawdopodobnie będą widoczne nieprawidłowe znaki.\n\nDozwolone wartości to „utf-8” i „raw”."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Rozmiar dopełnienia wokół obramowania okna terminala w pikselach.\n\nOkreśla rozmiar obramowania wokół okna terminala. Użytkownik może dodać widoczne dopełnienie krawędzi okna."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Określa, czy przewijać na sam dół po naciśnięciu dowolnego klawisza."
@@ -537,10 +546,10 @@
 		"message": "Określa, czy przewijać na sam dół po pojawieniu się danych wyjściowych w terminalu."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Gdy używany jest alternatywny bufor ekranu i włączony jest tryb DECCKM (klawisze kursora aplikacji), zdarzenia przewijania kółkiem myszy powodują emulowanie naciśnięć klawiszy strzałek.\n\nMożna to wyłączyć tymczasowo, przytrzymując klawisz Shift.\n\nPrzydaje się to podczas używania takich programów, jak less, man, edytory tekstu (vi/nano) czy screen/tmux."
+		"message": "Gdy używany jest alternatywny bufor ekranu i włączony jest tryb DECCKM (klawisze kursora aplikacji), zdarzenia przewijania kółkiem myszy powodują emulowanie naciśnięć klawiszy strzałek.\n\nMożna to wyłączyć tymczasowo, przytrzymując klawisz Shift.\n\nPrzydaje się to podczas używania takich programów jak less, man, edytory tekstu (vi/nano) czy screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Mnożnik liczby pikseli w zdarzeniach przewijania kółkiem.\n\nOkreśla szybkość przewijania stron."
+		"message": "Mnożnik liczby pikseli w zdarzeniach przewijania kółkiem myszy.\n\nOkreśla szybkość przewijania stron."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Tryb pionowego paska przewijania."
@@ -821,9 +830,6 @@
 	"new_window_menu_label": {
 		"message": "Nowe okno"
 	},
-	"notify_copy": {
-		"message": "Wybór skopiowany"
-	},
 	"ok_button_label": {
 		"message": "OK"
 	},
@@ -832,9 +838,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Wskazówka] Użyj opcji „Otwórz jako okno” lub „Pełny ekran”, by skrót Ctrl+W nie zamykał terminala.\n[Wskazówka] Więcej informacji znajdziesz na $1."
-	},
-	"options_button_label": {
-		"message": "Opcje"
 	},
 	"plugin_loading": {
 		"message": "Ładuję wtyczkę NaCl…"
@@ -870,7 +873,7 @@
 		"message": "Poniższy przycisk próbuje rejestrować moduły wszystkich obsługiwanych protokołów. Na przykład umożliwia to bezpośrednią obsługę linków ssh://. W przeglądarce pojawi się monit dotyczący każdego protokołu. Potwierdź lub zaakceptuj wszystkie komunikaty. Jeśli nie będzie żadnych monitów, przejdź do następnej sekcji z instrukcjami rozwiązywania problemów."
 	},
 	"protocol_register_explain_settings": {
-		"message": "Jeśli moduły obsługi zostały już zarejestrowane lub wcześniejsze próby rejestracji zostały odrzucone, nie pojawią się żadne dalsze monity. Otwórz okno dialogowe poniżej, a następnie sprawdź ustawienia zarejestrowanych modułów obsługi w sekcjach dotyczących protokołów SSH, SFTP itd. Jeśli ten program jest zablokowany, możesz usunąć te ustawienia, by ponownie spróbować zarejestrować moduł. Jeśli ten program jest już zarejestrowany, ale nie jest ustawiony jako domyślny moduł obsługi, możesz też zmienić domyślny moduł."
+		"message": "Jeśli moduły obsługi zostały już zarejestrowane lub wcześniejsze próby rejestracji zostały odrzucone, nie pojawią się żadne dalsze monity. Otwórz okno poniżej, a następnie sprawdź ustawienia zarejestrowanych modułów obsługi w sekcjach dotyczących protokołów SSH, SFTP itd. Jeśli ten program jest zablokowany, możesz usunąć te ustawienia, by ponownie spróbować zarejestrować moduł. Jeśli ten program jest już zarejestrowany, ale nie jest ustawiony jako domyślny moduł obsługi, możesz też zmienić domyślny moduł."
 	},
 	"protocol_register_options_link": {
 		"message": "Rejestr protokołów"
@@ -899,6 +902,9 @@
 	"save_label": {
 		"message": "Zapisz"
 	},
+	"send_feedback_label": {
+		"message": "Prześlij opinię"
+	},
 	"shortcut_list_aria_label": {
 		"message": "zapisane połączenia"
 	},
@@ -913,6 +919,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Wyczyść terminal"
+	},
+	"terminal_font_unavailable": {
+		"message": "Czcionka „$1” jest niedostępna"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Kolory ANSI"
@@ -941,6 +950,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Widoczne"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Wybierz sposób używania AltGr.\n\n„Automatycznie”: automatyczne wykrywanie na podstawie parametru navigator.language:\n      „en-us” => „Wyłącz”, inna wartość => „right-alt”\n„Wyłącz”: wyłącza emulację AltGr.\n„ctrl-alt”: Ctrl+Alt działa jako AltGr.\n„left-alt”: lewy Alt działa jako AltGr.\n„right-alt”: prawy Alt działa jako AltGr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Ustawianie kolorów palety domyślnej"
 	},
@@ -955,6 +967,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Zresetuj terminal"
+	},
+	"terminal_settings_about_label": {
+		"message": "Informacje"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "URL obrazu tła. Musi rozpoczynać się od „http://” lub „https://”. Pusty ciąg to brak obrazu.\n\nNa przykład:\n  https://goo.gl/anedTK"
@@ -1078,6 +1093,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Motyw"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Połącz się z internetem i spróbuj ponownie."
 	},
 	"tip_1": {
 		"message": "Aby otworzyć linki, podczas ich klikania trzymaj wciśnięty klawisz Ctrl (Cmd na Macu)."

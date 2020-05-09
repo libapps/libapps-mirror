@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Kodeeringu vastuvõtmine"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Ekraanikuva täidise suurus"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Pärast klahvivajutust alaossa kerimine"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Valiku automaatne peatamine (paremale)"
 	},
+	"hterm_options_button_label": {
+		"message": "Valikud"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Tekstisisesed kujutised"
 	},
@@ -363,7 +369,7 @@
 		"message": "Kui see määratakse, võetakse tagasi Chrome OS-i klahvikombinatsiooni Alt + tagasilükkeklahv -> kustutamisklahv ümbermuutmine, nii et Alt + tagasilükkeklahv on ka tegelikult Alt + tagasilükkeklahv."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Valige AltGr-i tuvastamise heuristika.\n\n'null': automaatne tuvastamine toimub järgmise põhjal: navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': keelatakse AltGr-iga seotud muutmised.\n'ctrl- alt': oletatakse, et Ctrl + Alt tähendab klahvi AltGr.\n'left-alt': oletatakse, et vasakpoolne Alt tähendab klahvi AltGr.\n'right-alt': oletatakse, et parempoolne Alt tähendab klahvi AltGr."
+		"message": "Valige klahvi AltGr tuvastamise heuristika.\n\n„null”: automaatne tuvastamine toimub järgmise põhjal: navigator.language:\n      „en-us” => „Disable”, muul juhul => „right-alt”\n„none”: keelatakse AltGr-iga seotud emuleerimine.\n„ctrl-alt”: oletatakse, et Ctrl + Alt tähendab klahvi AltGr.\n„left-alt”: oletatakse, et vasakpoolne Alt tähendab klahvi AltGr.\n„right-alt”: oletatakse, et parempoolne Alt tähendab klahvi AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Määrab, kas Alt-klahv toimib metaklahvina või ainult Alt-klahvina."
@@ -474,7 +480,7 @@
 		"message": "Muude värviatribuutideta teksti esiplaani värv."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Määrab, kas hiirekursor peidetakse teksti sisestamise ajal automaatselt. Vaikimisi tuvastatakse automaatselt, kas platvorm/operatsioonisüsteem haldab seda seadet.\n\nMärkus. Mõned operatsioonisüsteemid võivad seade alistada, mistõttu ei saa te seda võib-olla keelata."
+		"message": "Määrab, kas hiirekursor peidetakse teksti sisestamise ajal automaatselt. Vaikimisi tuvastatakse automaatselt, kas platvorm/operatsioonisüsteem haldab seda seadet.\n\nMärkus. Teie operatsioonisüsteem võib seade alistada, mistõttu ei saa te seda võib-olla keelata."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Kui see on seatud väärtusele Tõene, juhivad klahvid Home/End terminali kerimisriba ning kombinatsioonid tõstuklahv + Home / tõstuklahv + End saadetakse kaughostile. Kui see on seatud väärtusele Väär, saadetakse klahvide Home/End vajutused kaughostile ja kombinatsioone tõstuklahv + Home / tõstuklahv + End kasutatakse kerimiseks."
@@ -522,13 +528,16 @@
 		"message": "Määrab, kas klahvikombinatsioon Meta + 1–9 edastatakse brauserile.\n\nSee on kasulik htermi käitamisel brauseri vahelehel, et te ei kaotaks Chrome'i klaviatuuri otseteid „lülitu vahelehele”. Kui seda vahelehel ei käitata, soovitame need klahvid saata hostile, et neid saaks kasutada tekstiredaktoris vim või emacs.\n\nKui see on tõene, käsitleb brauser klahvikombinatsioone Meta + 1–9. Kui see on väär, saadetakse klahvikombinatsioonid Meta + 1–9 hostile. Kui väärtus on null, tuvastatakse see automaatselt brauseri platvormi ja akna tüübi järgi."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Määrab, kas klahvikombinatsioon Metaklahv + V edastatakse hostile."
+		"message": "Määrab, kas klahvikombinatsioon Meta + V edastatakse brauserile.\n\nMõnes süsteemis kasutatakse seda sisu kleepimiseks."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Kui see on tõene, kleebitakse pukseeritud tekst terminali.\nKui see on väär, eiratakse pukseeritud teksti."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Määratakse eeldatav kodeering hostilt saadud andmetele.\nKui kodeeringud ei kattu, ilmnevad tõenäoliselt visuaalsed vead.\n\nKehtivad väärtused on „utf-8” ja „raw”."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Terminalikuva äärise ümber oleva täidise suurus pikslites.\n\nSee haldab terminalikuva ümbritseva äärise suurust, et kasutaja saaks ekraanikuva servadesse lisada visuaalse täidise."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Määrab, kas iga klahvivajutusega keritakse alaossa."
@@ -537,7 +546,7 @@
 		"message": "Määrab, kas terminali väljundi puhul keritakse alaossa."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Kui kasutate alternatiivset ekraanipuhvrit ja DECCKM (rakenduse kursori klahvid) on aktiivne, emuleeritakse hiirega kerimisel nooleklahvide toiminguid.\n\nSelle saab ajutiselt keelata, hoides all tõstuklahvi.\n\nSee ilmneb sageli siis, kui kasutatakse lehelugejaid (vähem), loetakse manuaalseid lehti, kasutatakse tekstiredaktoreid (vi/nano) või tööriista screen/tmux."
+		"message": "Kui kasutate alternatiivset ekraanipuhvrit ja DECCKM (rakenduse kursori klahvid) on aktiivne, emuleeritakse hiire kerimisrattaga kerimisel nooleklahvide toiminguid.\n\nSelle saab ajutiselt keelata, hoides all tõstuklahvi.\n\nSee ilmneb sageli siis, kui kasutatakse lehelugejaid (vähem), loetakse manuaalseid lehti, kasutatakse tekstiredaktoreid (vi/nano) või tööriista screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "Kerimisratta sündmuste kordistaja pikslites mõõtmise korral.\n\nMuudab lehe kerimiskiirust."
@@ -821,9 +830,6 @@
 	"new_window_menu_label": {
 		"message": "Uus aken"
 	},
-	"notify_copy": {
-		"message": "Valik kopeeriti"
-	},
 	"ok_button_label": {
 		"message": "OK"
 	},
@@ -832,9 +838,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Professionaali nõuanne.] Kasutage valikut „Ava aknana” või „Täisekraan”, et klahvikombinatsioon Ctrl + W ei saaks terminali sulgeda.\n[Professionaali nõuanne.] Lisateave: $1."
-	},
-	"options_button_label": {
-		"message": "Valikud"
 	},
 	"plugin_loading": {
 		"message": "NaCl pistikprogrammi laadimine …"
@@ -899,6 +902,9 @@
 	"save_label": {
 		"message": "Salvesta"
 	},
+	"send_feedback_label": {
+		"message": "Tagasiside saatmine"
+	},
 	"shortcut_list_aria_label": {
 		"message": "salvestatud ühendused"
 	},
@@ -913,6 +919,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Tühjenda terminal"
+	},
+	"terminal_font_unavailable": {
+		"message": "„$1” ei ole saadaval"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-värvid"
@@ -938,6 +947,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Nähtav"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Valige klahvi AltGr tuvastamise heuristika.\n\n„Automaatne”: automaatne tuvastamine toimub järgmise põhjal: navigator.language:\n      „en-us” => „Keela”, muul juhul => „right-alt”\n„Keela”: keelatakse AltGr-iga seotud emuleerimine.\n„ctrl- alt”: oletatakse, et Ctrl + Alt tähendab klahvi AltGr.\n„left-alt”: oletatakse, et vasakpoolne Alt tähendab klahvi AltGr.\n„right-alt”: oletatakse, et parempoolne Alt tähendab klahvi AltGr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Määrake vaikepaleti värvid."
 	},
@@ -952,6 +964,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Lähtesta terminal"
+	},
+	"terminal_settings_about_label": {
+		"message": "Teave"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Taustkujutise URL. Peab algama kujul „http://” või „https://”. Kui kujutist ei ole, jätke see tühjaks.\n\nNäide:\n  https://goo.gl/anedTK"
@@ -1069,6 +1084,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Teema"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Looge ühendus internetiga ja proovige uuesti."
 	},
 	"tip_1": {
 		"message": "Linkide avamiseks hoidke nendel klõpsamisel all klahvi Ctrl (Mac OS-is klahvi Cmd)."

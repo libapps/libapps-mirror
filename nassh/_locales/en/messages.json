@@ -1877,10 +1877,6 @@
 			}
 		}
 	},
-	"TERMINAL_TRY_AGAIN_WITH_INTERNET": {
-		"description": "Message shown to the user to ask them to try again with the Internet.",
-		"message": "Connect to the Internet and try again."
-	},
 	"TERMINAL_NAME_PREF_ANSI_COLORS": {
 		"description": "Label text shown for the preference to set ANSI colors.  ANSI is an acronym for American National Standards Institute.  Terminals specify a default 16 colors for their display, this configuration allows users to override the default colors.",
 		"message": "ANSI colors"
@@ -2112,6 +2108,10 @@
 	"TERMINAL_TITLE_THEME": {
 		"description": "Title for terminal theme section.  This section shows a list of color themes for styling the terminal",
 		"message": "Theme"
+	},
+	"TERMINAL_TRY_AGAIN_WITH_INTERNET": {
+		"description": "Message shown to the user to ask them to try again with the Internet.",
+		"message": "Connect to the Internet and try again."
 	},
 	"TIP_1": {
 		"description": "Helpful tip shown to user advertising features. 'macOS' is Apple's operating system also known as 'Mac OS X' and should only be translated if an official translation exists.",

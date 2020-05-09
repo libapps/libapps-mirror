@@ -1,0 +1,1202 @@
+{
+	"already_mounted_message": {
+		"message": "Lêerstelsel is reeds gemonteer!"
+	},
+	"backup_prefs": {
+		"message": "Stoor rugsteun"
+	},
+	"bad_destination": {
+		"message": "Kan nie bestemming ontleed nie: $1"
+	},
+	"before_unload": {
+		"message": "As jy hierdie oortjie toemaak, sal hierdie sessie ontkoppel word."
+	},
+	"cache_pin_prompt": {
+		"message": "Kas die PIN vir hierdie SSH-sessie? (y/N):"
+	},
+	"cancel_button_label": {
+		"message": "Kanselleer"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Vee SSH-bekende gashere uit"
+	},
+	"clear_label": {
+		"message": "Vee uit"
+	},
+	"command_complete": {
+		"message": "Die bevel $1 het uitgegaan met statuskode $2."
+	},
+	"command_not_supported": {
+		"message": "$1 word nie op hierdie weergawe van Chrome gesteun nie"
+	},
+	"command_startup_failed": {
+		"message": "Kon nie $1 begin nie: $2"
+	},
+	"connect_button_label": {
+		"message": "Koppel"
+	},
+	"connect_or_exit_message": {
+		"message": "Kies (C) 'n ander verbinding of Gaan uit (X)?"
+	},
+	"connecting": {
+		"message": "Koppel tans aan $1 …"
+	},
+	"connection_dialog_name": {
+		"message": "Verbindingdialoog"
+	},
+	"console_crosh_options_notice": {
+		"message": "Het jy geweet dat daar 'n \"toegewyde opsies\"-bladsy is?\nNie meer nodig om \"term_\" direk te wysig nie!\nDruk $1 om dit oop te maak, of klik:\n$2"
+	},
+	"console_nassh_options_notice": {
+		"message": "Het jy geweet dat daar 'n \"toegewyde opsies\"-bladsy is?\nNie meer nodig om \"term_\" direk te verander nie!\n$1"
+	},
+	"delete_button_label": {
+		"message": "Vee uit"
+	},
+	"disconnect_message": {
+		"message": "NaCl-inprop het uitgegaan met statuskode $1."
+	},
+	"faq_menu_label": {
+		"message": "Gereelde vrae"
+	},
+	"field_argstr_placeholder": {
+		"message": "bykomende bevellynargumente"
+	},
+	"field_description_aria_label": {
+		"message": "beskrywing"
+	},
+	"field_description_placeholder": {
+		"message": "gebruikernaam@gasheernaam of vryevormteks"
+	},
+	"field_hostname_aria_label": {
+		"message": "gasheernaam"
+	},
+	"field_hostname_placeholder": {
+		"message": "gasheernaam"
+	},
+	"field_mount_path_placeholder": {
+		"message": "die verstekpad is die gebruiker se tuisgids"
+	},
+	"field_nassh_options_aria_label": {
+		"message": "Opsies vir SSH-herleidingbediener"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Opsies vir SSH-herleidingbediener"
+	},
+	"field_port_aria_label": {
+		"message": "poort"
+	},
+	"field_port_placeholder": {
+		"message": "poort"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "verstek"
+	},
+	"field_username_aria_label": {
+		"message": "gebruikernaam"
+	},
+	"field_username_placeholder": {
+		"message": "gebruikernaam"
+	},
+	"found_relay": {
+		"message": "Het herleidingbediener gekry: $1"
+	},
+	"get_profile_error": {
+		"message": "FOUT: Kon nie profiel-$1 laai nie:\n$2"
+	},
+	"hterm_announce_current_screen_header": {
+		"message": "$1% gerollees,"
+	},
+	"hterm_button_allow_always": {
+		"message": "Laat altyd toe"
+	},
+	"hterm_button_allow_session": {
+		"message": "Laat hierdie sessie toe"
+	},
+	"hterm_button_block": {
+		"message": "Blokkeer"
+	},
+	"hterm_button_page_down": {
+		"message": "Blaai af"
+	},
+	"hterm_button_page_up": {
+		"message": "Blaai op"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "Kon nie $1 laai nie"
+	},
+	"hterm_loading_resource_start": {
+		"message": "Laai tans $1 …"
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Laat toe dat prente direk gewys word"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "AltGr-sleutelmodus"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Gebruik Alt-sleutel as Meta-sleutel"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Hantering van Alt-sleutelwysiger"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Opletberigklokkie se klank (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Agtergrondkleur"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Agtergrondprent"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Agtergrondprent se posisie"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Agtergrondprent se grootte"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Backspace-sleutel se gedrag"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Karaktertabel oorheers"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Vee teksseleksie outomaties uit"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Maak venster toe as jy uitgaan"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Oorspronklike kleurpalet"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Kopieer outomaties geselekteerde inhoud"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Ctrl+C-kopieergedrag"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ctrl++/-/0 zoemgedrag"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Ctrl+V-plakgedrag"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Skermpyltjieflikker"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Skermpyltjie se flikkertempo"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Teksskermpyltjie se kleur"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Teksskermpyltjie se vorm"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Skep werkskermkennisgewings vir opletberigklokkies"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian Ambiguous gebruik twee kolomme"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Steun nie-UTF-8 C1-beheerkarakters"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Aktiveer flikkerteks"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Vetdrukteksgedrag"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Gebruik helderkleure met vetdrukteks"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Wys kennisgewing wanneer inhoud gekopieer word"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Laat skryf op knipbord oor afstand toe"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Laat uitvee van terugrolbuffer toe (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Laat toe dat teksskermpyltjie se flikkering verander word"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Wys terminaaldimensies wanneer grootte verander is"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Omgewingveranderlikes"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Tekslettertipefamilie"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Tekslettertipegrootte"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Tekslettertipegladstryking"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Tekskleur"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Versteek muisskermpyltjie terwyl jy tik"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Home-/End-sleutel se rolgedrag"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Sleutelbordbindings/-kortpaaie"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Gebruik verstekbedryfstelselsleutelbordbindings/-kortpaaie"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Mediasleutels is F-sleutels"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Hantering van Meta-sleutelwysiger"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Muisknoppie vir plak"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Regsklikke met muis plak inhoud"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Blaai op-/af-sleutel se rolgedrag"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Alt+1..9 \"wissel oortjie\"-gedrag"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Ctrl+N \"nuwe venster\"-gedrag"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Ctrl+1..9 \"wissel oortjie\"-gedrag"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ctrl+T \"nuwe oortjie\"-gedrag"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab \"wissel oortjie\"-gedrag"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Ctrl+W \"maak oortjie toe\"-gedrag"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Meta+1..9 \"wissel oortjie\"-gedrag"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Meta+V-plakgedrag"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Laat sleep-en-los om te plak toe"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Ontvang enkodering"
+	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Grootte van skermopvulling"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Rollees na onder ná sleuteldruk"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Rollees na onder ná nuwe uitvoer"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Emuleer pylsleutels met rolwiel"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Muisrolwielvermenigvuldiger"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Rolbalksigbaarheid"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Shift+Insert-plak"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Terminaal-enkodering"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Laat die blaaier tekskopiëring hanteer"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "Gepasmaakte CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "Gepasmaakte CSS (direkte teks)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Stop outomatiese seleksie (na links)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Woordbreekkarakters"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Stop outomatiese seleksie (na regs)"
+	},
+	"hterm_options_button_label": {
+		"message": "Opsies"
+	},
+	"hterm_popup_inline_image": {
+		"message": "Regstreekse prente"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "Regstreekse prente gedeaktiveer"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "Of die afstandgasheer toegelaat moet word om prente in die terminaal te wys.\n\nBy verstek vra ons totdat 'n keuse gemaak word."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "Indien gestel, word die herafbeelding van Chrome-bedryfstelsel se Alt+Backspace->Delete ontdoen, sodat Alt+Backspace inderdaad Alt+Backspace is."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "Kies 'n AltGr-bespeuringheuristiek.\n\n\"null\": Outobespeur gegrond op navigator.language:\n      \"en-us\" => 'none', else => \"right-alt\"\n\"none\": Deaktiveer enige AltGr-emulering.\n\"ctrl-alt\": Aanvaar Ctrl+Alt beteken AltGr.\n\"left-alt\": Aanvaar links-Alt beteken AltGr.\n\"right-alt\": Aanvaar regs-Alt beteken AltGr."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Of die Alt-sleutel as 'n Meta-sleutel of as 'n afsonderlike Alt-sleutel optree."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Beheer hoe die Alt-sleutel hanteer word.\n\n  ontsnap: Stuur 'n ESC-voorvoegsel.\n  8-bis: Voeg 128 by die getikte karakter soos in xterm.\n blaaier-sleutel: Wag vir die sleuteldrukgebeurtenis en kyk wat die blaaier\n sê. (Dit sal nie goed werk op platforms waar die blaaier 'n\n verstekhandeling vir sommige Alt-sekwensies uitvoer nie.)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "URL van die terminaalklokkieklank. Los dit leeg as daar geen hoorbare klokkie is nie."
+	},
+	"hterm_pref_background_color": {
+		"message": "Die agtergrondkleur vir teks sonder enige ander kleurkenmerke."
+	},
+	"hterm_pref_background_image": {
+		"message": "CSS-waarde van die agtergrondprent. Los dit leeg as daar geen prent is nie.\n\nByvoorbeeld:\n  url(https://goo.gl/anedTK)\n  lineêre gradiënt(bo, onder, blou, rooi)"
+	},
+	"hterm_pref_background_position": {
+		"message": "CSS-waarde van die agtergrondprent se posisie.\n\nByvoorbeeld:\n  10% 10%\n  center"
+	},
+	"hterm_pref_background_size": {
+		"message": "CSS-waarde van die agtergrondprent se grootte."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "Indien waar, sal die Backspace-sleutel BS (\"\\x08\", ook bekend as ^H) stuur. Anders sal die Backspace-sleutel \"\\x7f\" stuur."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "Dit word as 'n voorwerp gespesifiseer. Dit is 'n yl skikking waarin elke eienskap die karakterstelkode is en die waarde 'n voorwerp is wat op sigself 'n yl skikking is. In daardie yl skikking is elke eienskap die karakter wat ontvang is en die waarde is die karakter wat vertoon word.\n\nByvoorbeeld:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "Of die seleksie ná kopiëring uitgevee moet word."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "Of die venster toegemaak moet word wanneer die bevel klaar uitgevoer is."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "Ignoreer kleure in die verstekpalet.\n\nDit kan gespesifiseer word as 'n skikking of 'n voorwerp. As dit as 'n voorwerp gespesifiseer word, word aanvaar dat dit 'n yl skikking is waarvan elke eienskap 'n numeriese indeks in die kleurpalet is.\n\nWaardes kan as amper enige CSS-kleurwaarde gespesifiseer word. Dit sluit in #RGB, #RRGGBB, rgb(...), rgba(...), en enige kleurname wat ook deel van die standaard- X11 rgb.txt-lêer is.\n\nJy kan \"null\" gebruik om te spesifiseer dat die verstekwaarde nie verander moet word nie. Dit is nuttig om 'n klein aantal indekse oor te slaan wanneer die waarde as 'n skikking gespesifiseer is.\n\nByvoorbeeld, albei stel kleurindeks 1 na blou:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "Kopieer muiskeuse outomaties na die knipbord."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Ctrl+C kopieer indien waar, stuur ^C na gasheer indien vals.\nCtrl+Shift+C stuur ^C na gasheer indien \"waar\", kopieer indien \"vals\"."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Indien waar: Ctrl+Plus/Minus/Zero beheer zoem.\nIndien vals: Ctrl+Shift+Plus/Minus/Zero beheer zoem, Ctrl+Minus stuur ^_ en Ctrl+Plus/Zero doen niks nie."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Ctrl+V plak indien waar, stuur ^V na gasheer indien vals.\nCtrl+Shift+V stuur ^V na gasheer indien waar, plak indien vals."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "Of die teksskermpyltjie by verstek flikker. Dit kan in looptyd via terminaalontsnapsekwensies gewissel word."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "Die teksskermpyltjie se flikkertempo in millisekondes.\n\n'n Twee-elementskikking: Die eerste een is hoe lank die teksskermpyltjie moet aan wees, en die tweede hoe lank dit moet af wees."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "Die sigbare teksskermpyltjie se kleur."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "Die sigbare teksskermpyltjie se vorm. Dit kan in looptyd via terminaalontsnapsekwensies verander word."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "Indien waar, sal terminaalklokkies op die agtergrond 'n webkennisgewing skep. https://www.w3.org/TR/notifications/\n\nDie gebruiker moet toestemming gee dat kennisgewings gewys mag word. Wanneer hierdie opsie na waar gestel is, sal hterm probeer om die gebruiker vir toestemming te vra indien nodig. Blaaiers sal dalk nie hierdie toestemmingversoek wys as dit nie deur 'n gebruiker se handeling veroorsaak is nie.\n\nChrome-uitbreidings met die \"kennisgewings\"-toestemming het toestemming om kennisgewings te wys."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Of East Asian Ambiguous twee kolomme moet gebruik."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "\"Waar\" om 8-bis-beheerkarakters te aktiveer; \"vals\" om hulle te ignoreer.\n\nOns sal die tweegreepweergawes van hierdie beheerkarakters respekteer, ongeag die instelling."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "Indien waar, word die flikkerkenmerk gerespekteer. Indien vals, word dit geïgnoreer."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "Indien waar, moet jy vetdrukgewiglettertipe gebruik vir teks met die vetdruk-/helderkenmerk. \"Vals\" om normalegewiglettertipe te gebruik. \"Null\" vir outobespeur."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "Indien waar, moet helder kleure (8-15 op 'n 16-kleurpalet) vir enige teks met die vetdrukkenmerk gebruik word. Andersins, vals."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "Of 'n boodskap in die terminaal gewys moet word wanneer die gasheer op die knipbord skryf."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "Laat die afstandgasheer toe om direk na die plaaslike stelsel se knipbord te skryf.\nLeestoegang word nooit toegestaan nie, ongeag hierdie instelling.\n\nDit word gebruik om toegang tot kenmerke soos OSC-52 te beheer."
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Of die \"Vee gestoorde reëls uit\"-funksie (modus 3) van die \"Vee skerm uit\"-bevel (CSI-J) die terminaal se terugrolbuffer kan uitvee.\n\nDit is veilig om dit by verstek te aktiveer."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "Respekteer die gasheer se poging om die teksskermpyltjie se flikkerstatus met DEC Privaatmodus 12 te verander."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Of terminaaldimensies gewys moet word wanneer die terminaal se grootte verander."
+	},
+	"hterm_pref_environment": {
+		"message": "Die oorspronklike stel omgewingveranderlikes, as 'n voorwerp."
+	},
+	"hterm_pref_font_family": {
+		"message": "Versteklettertipefamilie vir die terminaalteks."
+	},
+	"hterm_pref_font_size": {
+		"message": "Die versteklettertipegrootte in pieksels."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "Lettertipegladstrykingeienskap."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "Die voorgrondkleur vir teks sonder enige ander kleurkenmerke."
+	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Of die muisskermpyltjie outomaties versteek moet word terwyl jy tik. Outobespeur by verstek of die platform/bedryfstelsel dit hanteer.\n\nLet wel: Jou bedryfstesel kan dalk hierdie instelling ignoreer en daarom sal jy dit nie altyd kan deaktiveer nie."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "Indien waar, beheer Home/End die terminaal se rolbalk en word Shift+Home/Shift+End na die afstandgasheer gestuur. Indien vals, word Home/End na die afstandgasheer gestuur en Shift+Home/Shift+End rollees."
+	},
+	"hterm_pref_keybindings": {
+		"message": "'n Kaart van sleutelsekwensie na sleutelhandelinge. Sleutelsekwensies sluit nul- of wysigersleutels in gevolg deur 'n sleutelkode. Sleutelkodes kan desimale of heksadesimale syfers wees, of 'n sleutelidentifiseerder. Sleutelhandelinge kan as 'n string gespesifiseer word om na die gasheer te stuur, of 'n handelingidentifiseerder. Sien https://goo.gl/LWRndr vir 'n volledige verduideliking van die formaat.\n\nVoorbeeldsleutelbindings:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hallo Wêreld'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Of gewone bedryfstelselsleutelbordbindings gerespekteer moet word eerder as om altyd vasgevang te word vir hterm se eie gebruik."
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "Indien waar, moet jy mediasleutels na hul F-sleutelekwivalent omskakel. Indien vals, moet jy dat die blaaier die sleutels hanteer."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Stuur 'n ESC-voorvoegsel wanneer jy 'n sleutel druk terwyl jy die Meta-sleutel hou.\n\nByvoorbeeld, wanneer dit geaktiveer is, sal Meta+K as jy dit druk ^[k stuur asof jy Escape en dan k getik het. Wanneer dit gedeaktiveer is, sal net k gestuur word."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "Plak is op muis se regterknoppieklikke.\n\nHierdie opsie is onafhanklik van die \"mouse-paste-button\"-instelling.\n\nLet wel: Dit sal links- en regshandige muise reg hanteer."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "Indien waar, beheer Blaai op/Blaai af die terminaal se rolbalk en Shift+Blaai op/Shift+Blaai af word na die afstandgasheer gestuur. Indien vals, word Page Up/Page Down na die afstandgasheer gestuur en Shift+Home/Shift+End rollees."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Of Alt+1..9 na die blaaier aangestuur word.\n\nDit is handig wanneer hterm in 'n blaaieroortjie laat loop word, sodat jy nie Chrome se \"wissel na oortjie\"-sleutelbordkortpaaie verloor nie. Wanneer dit nie in 'n oortjie laat loop word nie, is dit beter om hierdie sleutels na die gasheer te stuur sodat hulle in vim of emacs gebruik kan word.\n\nIndien waar, sal Alt+1..9 deur die blaaier hanteer word. Indien vals, sal Alt+1..9 na die gasheer gestuur word. Indien \"null\", is outobespeur gegrond op blaaierplatform en venstertipe."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Of Ctrl+N na die blaaier aangestuur word.\n\nIndien waar, sal Ctrl+N deur die blaaier as die \"nuwe venster\"-sleutelbordkortpad hanteer word. Indien vals, sal Ctrl+N na die gasheer gestuur word."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Of Ctrl+1..9 na die blaaier aangestuur word.\n\nDit is handig wanneer hterm in 'n blaaieroortjie laat loop word, sodat jy nie Chrome se \"wissel na oortjie\"-sleutelbordkortpaaie verloor nie. Wanneer dit nie in 'n oortjie laat loop word nie, is dit beter om hierdie sleutels na die gasheer te stuur sodat hulle in vim of emacs gebruik kan word.\n\nIndien waar, sal Ctrl+1..9 deur die blaaier hanteer word. Indien vals, sal Ctrl+1..9 na die gasheer gestuur word. Indien \"null\", is outobespeur gegrond op blaaierplatform en venstertipe."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Of Ctrl+T na die blaaier aangestuur word.\n\nIndien waar, sal Ctrl+T deur die blaaier hanteer word as die \"nuwe oortjie\"-sleutelbordkortpad. Indien vals, sal Ctrl+T na die gasheer gestuur word."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Of Ctrl+Tab en Ctrl+Shift+Tab na die blaaier aangestuur word.\n\nIndien waar, sal Ctrl+Tab en Ctrl+Shift+Tab deur die blaaier as die \"volgende/vorige oortjie\" se sleutelbordkortpad hanteer word. Indien vals, word die Tab-sleutel na die gasheer gestuur sonder Ctrl of Shift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Of Ctrl+W na die blaaier aangestuur word.\n\nIndien waar, sal Ctrl+W deur die blaaier hanteer word as die \"maak oortjie toe\"-sleutelbordkortpad. Indien vals, sal Ctrl+W na die gasheer gestuur word."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Of Meta+1..9 na die blaaier aangestuur word.\n\nDit is handig wanneer hterm in 'n blaaieroortjie laat loop word, sodat jy nie Chrome se \"wissel na oortjie\"-sleutelbordkortpaaie verloor nie. Wanneer dit nie in 'n oortjie laat loop word nie, is dit beter om hierdie sleutels na die gasheer te stuur sodat hulle in vim of emacs gebruik kan word.\n\nIndien waar, sal Meta+1..9 deur die blaaier hanteer word. Indien vals, sal Meta+1..9 na die gasheer gestuur word. Indien \"null\", is outobespeur gegrond op blaaierplatform en venstertipe."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Of Meta+V na die blaaier aangestuur word.\n\nDit word in sommige stelsels gebruik om inhoud te plak."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Indien waar, sal sleep-en-los-teks binne-in terminaal geplak word.\nIndien vals, sal teks wat gelos is, geïgnoreer word."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "Stel die verwagte enkodering vir data wat van die gasheer af ontvang word.\nAs die enkoderings nie pas nie, sal visuele foute waarskynlik voorkom.\n\nGeldige waardes is \"utf-8\" en \"raw\"."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Die opvullinggrootte, in pieksels, rondom die rand van die terminaalskerm.\n\nDit beheer die grootte van die rand rondom die terminaalskerm sodat die gebruiker 'n stukkie sigbare opvulling aan die kante van die skerm kan byvoeg."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "Of daar op enige sleuteldruk na onder gerol moet word."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "Of daar gerol moet word na die onderkant van die terminaaluitvoer."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Wanneer die alternatiewe skermbuffer gebruik word, en DECCKM (programskermpyltjiesleutels) aktief is, sal muisrolwielgebeurtenisse pylsleutels emuleer.\n\nDit kan tydelik gedeaktiveer word deur die Shift-sleutel in te hou.\n\nDit kom dikwels voor wanneer roepers (minder) gebruik word; of handbladsye of teksredigeerders (vi/nano) gelees word, of skerm/tmux gebruik word."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "Die vermenigvuldiger vir muisrolwielgebeurtenisse wanneer dit in pieksels gemeet word.\n\nVerander hoe vinnig die bladsy rol."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "Die vertikale rolbalkmodus."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Of Shift+Insert gebruik word vir plak of na die afstandgasheer gestuur word."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "Die verstekterminaalenkodering (DOCS).\n\nISO-2022 aktiveer karakterkaartvertalings (soos grafiese kaarte).\nUTF-8 deaktiveer steun daarvoor.\n\nDie geslote variant beteken die enkodering kan nie in looptyd via terminaalontsnapsekwensies verander word nie.\n\nJy moet met UTF-8 volhard tensy jy opmerk dat lewering met vorige programme gebreek is."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "Of die verstekblaaier/bedryfstelsel se kopieergedrag gebruik moet word.\n\nLaat die blaaier/bedryfstelsel toe om die kopieergebeurtenis direk te hanteer. Dit kan dalk versoenbaarheid met sommige stelsels (waar kopiëring glad nie werk nie) verbeter, maar die teksseleksie minder robuus maak.\n\nByvoorbeeld, lang reëls wat outomaties omgevou is, sal gekopieer word terwyl die nuwe reëls nog in hulle is."
+	},
+	"hterm_pref_user_css": {
+		"message": "URL van gebruiker se stylblad moet in die terminaaldokument ingesluit wees."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "Gepasmaakte CSS-teks om die terminaal te stileer."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "Gewone uitdrukking om passing na links (begin) van 'n seleksie te stop.\n\nDit is gewoonlik 'n karakterklas om spesifieke karakters te verwerp.\nOns laat \"~\" en \".\" by verstek toe omdat paaie dikwels daarmee begin."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "Gewone uitdrukking moet by al die karakters in die middel pas.\n\nDit is gewoonlik 'n karakterklas om spesifieke karakters te verwerp.\n\nWord gebruik om die seleksie rondom die beginpunt uit te vou."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "Gewone uitdrukking om passing na regs (einde) van 'n seleksie te stop.\n\nDit is gewoonlik 'n karakterklas om spesifieke karakters te verwerp."
+	},
+	"hterm_space_character": {
+		"message": "Spasie"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Voorkoms (lettertipes, kleure, prente)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Kopieer en plak"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Enkodering"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Uitbreidings"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Sleutelbord"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Diverse"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Rollees"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Klanke"
+	},
+	"identity_label": {
+		"message": "Identiteit"
+	},
+	"import_link_aria_label": {
+		"message": "lêerinvoer"
+	},
+	"import_link_label": {
+		"message": "Voer tans in …"
+	},
+	"initializing_relay": {
+		"message": "Spoor tans herleidingbediener op met gebruik van: $1"
+	},
+	"json_parse_error": {
+		"message": "Kon nie JSON in \"$1\" ontleed nie: $2"
+	},
+	"known_hosts_empty": {
+		"message": "Geen bekende gashere nie; niks om te vergeet nie."
+	},
+	"known_hosts_prompt": {
+		"message": "Kies 'n gasheer om te vergeet [1-$1]:"
+	},
+	"known_hosts_title": {
+		"message": "Bekende gashere:"
+	},
+	"licenses": {
+		"message": "Lisensies"
+	},
+	"licenses_expand_link": {
+		"message": "wys lisensie"
+	},
+	"licenses_title": {
+		"message": "Oopbronlisensies"
+	},
+	"loading_label": {
+		"message": "Laai tans …"
+	},
+	"migrate_to_ext": {
+		"message": "Let wel: Migreer asseblief na die nuwe Secure Shell-uitbreiding ($1).\nChrome-programme word opgeskort en hierdie weergawe gaan dus nie meer opdaterings ontvang nie.\nSien asseblief die migrasiegids ($2) vir meer besonderhede."
+	},
+	"missing_param": {
+		"message": "Ontbrekende parameter: $1"
+	},
+	"mount_button_label": {
+		"message": "SFTP-montering"
+	},
+	"mount_path_label": {
+		"message": "Monteerpad"
+	},
+	"mounted_message": {
+		"message": "Gemonteer!"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "Stort 'n lêer na die terminaal"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Verander werkgids"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Verander groep paaie"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Verander toestemmings op paaie"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Verander eienaar van paaie"
+	},
+	"nasftp_cmd_clear": {
+		"message": "vee uit"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Maak die huidige terminaalskerm skoon."
+	},
+	"nasftp_cmd_clip": {
+		"message": "knip"
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Kopieer 'n lêer na die knipbord (verstek: 10 MiB van die begin af)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "Het $1 grepe na die knipbord gekopieer"
+	},
+	"nasftp_cmd_color": {
+		"message": "kleur"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Wissel kleurgebruik"
+	},
+	"nasftp_cmd_copy": {
+		"message": "kopieer"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Kopieer bron na bestemming"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Vee lêers uit"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Wys skyfstatistieke"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Pad: $1\n lêerstelsel-ID: $2\n Totaal: $3\n Gebruik: $4 ($5%)\n Beskikbaar: $6 (aan gewone gebruikers)\n $7 (aan kerngebruikers)"
+	},
+	"nasftp_cmd_exit": {
+		"message": "gaan uit"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Ontkoppel"
+	},
+	"nasftp_cmd_get": {
+		"message": "kry"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Laai tans lêer af: $1 as $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Laai lêers af"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Hierdie hulpskerm"
+	},
+	"nasftp_cmd_list": {
+		"message": "lys"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Lys gidsbesonderhede"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Skep 'n skakel by pad wat na die teiken wys"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Skep gidse"
+	},
+	"nasftp_cmd_move": {
+		"message": "skuif"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Hernoem 'n lêer"
+	},
+	"nasftp_cmd_prompt": {
+		"message": "aanpor"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Stel die porbevelstring"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Laai lêers op"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Laai tans lêer op: $1 as $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Wys huidige werkgids"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Gids wat van afstand af werk: $1"
+	},
+	"nasftp_cmd_quit": {
+		"message": "verlaat"
+	},
+	"nasftp_cmd_readlink": {
+		"message": "leesskakel"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Lees simboliese skakels"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Kanoniseer paaie"
+	},
+	"nasftp_cmd_rename": {
+		"message": "hernoem"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Hervat oplaai van lêers"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Verwyder lêers"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Vee leë gidse uit"
+	},
+	"nasftp_cmd_show": {
+		"message": "wys"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Wys lêers direk"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Uitbreidings:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Wys lêerstatus"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Lêer: $1\nGrootte: $2 grepe\nGebruiker-ID: $3\nGroep-ID: $4\nToegang: $5\ntoegangtyd: $6\nwysigtyd: $7"
+	},
+	"nasftp_cmd_symlink": {
+		"message": "simboliese skakel"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Skep 'n simboliese skakel op pad wat na teiken wys"
+	},
+	"nasftp_cmd_truncate": {
+		"message": "afkap"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Kap paaie af tot 0 grepe"
+	},
+	"nasftp_cmd_version": {
+		"message": "weergawe"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  bedieneruitbreidings:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Wys huidige protokolweergawe"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Inligting vir SFTP-protokolweergawe:\n  plaaslik: $1\n  bediener: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: einde van lêer"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: lêer nie gevind nie"
+	},
+	"nasftp_error_file_reading": {
+		"message": "Kon nie $1 lees nie: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Interne fout nie hanteer nie; dien asseblief 'n fout in: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: ongeldige nommer: $3"
+	},
+	"nasftp_error_message": {
+		"message": "FOUT: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: \"$2\" uitbreiding onbeskikbaar"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: Nie 'n gewone lêer nie"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: nie genoeg argumente nie"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: toestemming is geweier"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: te veel argumente"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: Onbekende bevel"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: onbekende vlag $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Dwing uitgaan"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 grepe in $2 sekondes ($3/s) oorgedra"
+	},
+	"nassh_options_error": {
+		"message": "Onbekende opsie: $1"
+	},
+	"nassh_product_name": {
+		"message": "Secure Shell"
+	},
+	"new_window_menu_label": {
+		"message": "Nuwe venster"
+	},
+	"omnibox_default": {
+		"message": "<url><match>gebruiker@gasheernaam[:poort]</match></url> Koppel aan 'n gestoorde profiel of 'n nuwe ssh-stelsel"
+	},
+	"open_as_window_tip": {
+		"message": "[Wenk] Gebruik \"Maak oop as Venster\" of \"Volskerm\" om te keer dat Ctrl+W jou terminaal toemaak!\n[Wenk] Sien $1 vir nog inligting."
+	},
+	"plugin_loading": {
+		"message": "Laai tans NaCl-inprop …"
+	},
+	"plugin_loading_complete": {
+		"message": " klaar."
+	},
+	"plugin_loading_failed": {
+		"message": " het misluk! :("
+	},
+	"popup_connect_tooltip": {
+		"message": "Hou Ctrl in om 'n nuwe oortjie oop te maak."
+	},
+	"pref_backup_filename": {
+		"message": "Beveilig Shell-voorkeure Backup.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "SSH-lêers"
+	},
+	"preferences_header_terminal": {
+		"message": "Terminaal-instellings"
+	},
+	"preferences_header_uri": {
+		"message": "URI-hanteerders"
+	},
+	"preferences_reset": {
+		"message": "Alle voorkeure is teruggestel!"
+	},
+	"protocol_register_button": {
+		"message": "Registreer protokolhanteerders"
+	},
+	"protocol_register_explain": {
+		"message": "Die knoppie hieronder sal probeer om die hanteerders te registreer vir alle protokolle wat ons steun. Byvoorbeeld, dit laat ons toe om ssh://-skakels direk te hanteer. Die blaaier sal vir elke protokol 'n porboodskap wys; bevestig/aanvaar dus elkeen soos dit gewys word. As die blaaier geen porboodskappe wys nie, moet jy die volgende afdeling raadpleeg vir foutsporingwenke."
+	},
+	"protocol_register_explain_settings": {
+		"message": "As ons reeds hanteerders geregistreer het, of as vorige registrasiepogings afgekeur is, sal ons nie meer porboodskappe wys nie. Maak asseblief die dialoog hieronder oop en gaan die geregistreerde hanteerderinstellings na in die ssh-/sftp-/ens. … afdelings. As hierdie program geblokkeer is, kan jy daardie instellings uitvee. Dit sal jou toelaat om weer te probeer registreer. As hierdie program reeds geregistreer is, maar nie as die verstekhanteerder gestel is nie, kan jy die verstekhanteerder ook verander."
+	},
+	"protocol_register_options_link": {
+		"message": "Protokolregistrasie"
+	},
+	"protocol_register_settings_button": {
+		"message": "Maak geregistreerde hanteerder-instellings oop"
+	},
+	"protocol_register_title": {
+		"message": "Secure Shell Preferences Backup.json"
+	},
+	"read_size_label": {
+		"message": "Leesgrootte (KiB)"
+	},
+	"reconnect_message": {
+		"message": "Herkoppel (R), Kies (C) 'n ander verbinding of Gaan uit (X)?"
+	},
+	"relay_retry": {
+		"message": "Herprobeer tans …"
+	},
+	"request_pin_prompt": {
+		"message": "Voer PIN in om sleutel $1 op \"$2 ($3)\" te ontsluit ($4 pogings oor):"
+	},
+	"restore_prefs": {
+		"message": "Laai rugsteun terug"
+	},
+	"save_label": {
+		"message": "Stoor"
+	},
+	"send_feedback_label": {
+		"message": "Stuur terugvoer"
+	},
+	"shortcut_list_aria_label": {
+		"message": "gestoorde verbindings"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "Installeer asseblief die Smart Card Connector-program: $1"
+	},
+	"ssh_argstr_label": {
+		"message": "SSH-argumente"
+	},
+	"stream_open_error": {
+		"message": "Kon nie stroom $1 oopmaak nie: $2"
+	},
+	"terminal_clear_menu_label": {
+		"message": "Maak terminaalskerm skoon"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" is nie beskikbaar nie"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI-kleure"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Klokkie"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Flikker"
+	},
+	"terminal_name_pref_color": {
+		"message": "Kleur"
+	},
+	"terminal_name_pref_font": {
+		"message": "Lettertipe"
+	},
+	"terminal_name_pref_image": {
+		"message": "Prent"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Vorm"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Sigbaar"
+	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Kies 'n AltGr-bespeuringheuristiek.\n\n\"Outo\": Outobespeur gegrond op navigator.language:\n      'en-us' => \"Deaktiveer\", ander => \"right-alt\"\n\"Deaktiveer\": Deaktiveer enige AltGr-emulering.\n\"ctrl-alt\": Aanvaar Ctrl+Alt beteken AltGr.\n\"left-alt\": Aanvaar links-Alt beteken AltGr.\n\"right-alt\": Aanvaar regs-Alt beteken AltGr."
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Stel kleure vir die verstekpalet."
+	},
+	"terminal_pref_bell": {
+		"message": "Hoorbare terminaalklokkie."
+	},
+	"terminal_preview_label": {
+		"message": "Voorskou"
+	},
+	"terminal_profile_label": {
+		"message": "Huidige profiel"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Terminaal is teruggestel"
+	},
+	"terminal_settings_about_label": {
+		"message": "Meer oor"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "Agtergrondprent-URL. Moet begin met http:// of https:// Los dit leeg as daar geen prent is nie.\n\nByvoorbeeld:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Outomaties"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Deaktiveer"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Straal"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Blokkeer"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Onderstreep"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Is jy seker jy wil die tema na sy verstekkleure terugstel?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Stel tema terug"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Stel terug"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Klassiek"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Donker"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Wasig"
+	},
+	"terminal_theme_light_label": {
+		"message": "Lig"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Gesolariseerd: Donker"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Gesolariseerd: Lig"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Kleur 0: Swart"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Kleur 1: Rooi"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Kleur 10: Heldergroen"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Kleur 11: Heldergeel"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Kleur 12: Helderblou"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Kleur 13: Heldermagenta"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Kleur 14: Heldersiaan"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Kleur 15: Helderwit"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Kleur 2: Groen"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Kleur 3: Geel"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Kleur 4: Blou"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Kleur 5: Magenta"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Kleur 6: Siaan"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Kleur 7: Wit"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Kleur 8: Helderswart"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Kleur 9: Helderrooi"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Voorkoms"
+	},
+	"terminal_title_pref_background": {
+		"message": "Agtergrond"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Gedrag"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "Skermpyltjie"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Sleutelbord"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Sleutelbord en muis"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Muis"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Rolbalk"
+	},
+	"terminal_title_pref_text": {
+		"message": "Teks"
+	},
+	"terminal_title_settings": {
+		"message": "Instellings"
+	},
+	"terminal_title_theme": {
+		"message": "Tema"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Koppel aan die internet en probeer weer."
+	},
+	"tip_1": {
+		"message": "Jy kan Ctrl (Cmd op macOS) hou terwyl jy op die skakels klik om hulle oop te maak!"
+	},
+	"tip_10": {
+		"message": "Terwyl dit in 'n venster loop, kan Ctrl+Shift+N 'n ander sessie oopmaak."
+	},
+	"tip_11": {
+		"message": "Jy kan sleutels/kortpaaie herbind: https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "Gebruik Yubikeys en ander slimkaarte vir ssh-stawing: https://goo.gl/Hu2o3v"
+	},
+	"tip_13": {
+		"message": "Wys prente direk: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "As jy Ctrl (Cmd op macOS) hou terwyl jy regsklik sal die inhoudkieslys verskyn."
+	},
+	"tip_2": {
+		"message": "Wys kennisgewings in die blaaier met hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Koppel van die omniboks af deur \"ssh <profielnaam>\": https://goo.gl/V7o8ki in te tik"
+	},
+	"tip_4": {
+		"message": "Chrome-bedryfstelsel kan lêerstelsels via SFTP monteer en via die Lêers-program deurblaai. Gebruik \"SFTP-monteer\" pleks van \"Koppel\"."
+	},
+	"tip_5": {
+		"message": "Koppel deur ssh://-skakels in webblaaie te gebruik, of stoor 'n boekmerk: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Kleur jou uitvoer/porboodskap met 16 basiese kleure en 256 kleure en volle 24-bis-kleure: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Kopieer na jou knipbord vanaf emacs/vim/ens. … met OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Klets met medegebruikers van hterm/Secure Shell via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "'n Fout gekry?  Versoek 'n nuwe kenmerk?  Laat weet ons: https://goo.gl/vb94JY"
+	},
+	"unexpected_error": {
+		"message": "'n Onvoorsiene fout het voorgekom. Gaan die JavaScript-konsole na vir meer besonderhede."
+	},
+	"unknown_ssh_client_version": {
+		"message": "Onbekende SSH-weergawe: $1"
+	},
+	"unmount_button_label": {
+		"message": "Demonteer SFTP"
+	},
+	"welcome_changelog": {
+		"message": "ChangeLog/vrystellingnotas: $1"
+	},
+	"welcome_faq": {
+		"message": "Antwoorde op Gereelde vrae: $1 (Ctrl+klik op skakels om dit oop te maak)"
+	},
+	"welcome_release_highlights": {
+		"message": "Groot veranderinge sedert $1:"
+	},
+	"welcome_tip_of_day": {
+		"message": "Lukrake wenk #$1: $2"
+	},
+	"welcome_version": {
+		"message": "Welkom by $1-weergawe $2."
+	},
+	"write_size_label": {
+		"message": "Skryfgrootte (KiB)"
+	},
+	"zoom_warning": {
+		"message": "Stel asseblief Chrome-kieslys->Zoem tot 100%"
+	}
+}

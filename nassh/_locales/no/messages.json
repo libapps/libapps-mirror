@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Motta omgjøring til kode"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Størrelsen på skjermutfyllingen"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Rull ned til bunnen ved tastetrykk"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Automatisk stans av merking (til høyre)"
 	},
+	"hterm_options_button_label": {
+		"message": "Alternativer"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Innebygde bilder"
 	},
@@ -363,7 +369,7 @@
 		"message": "Hvis dette er angitt, oppheves tilordningen av Alt+tilbaketasten -> Delete i Chrome OS, slik at Alt+tilbaketasten faktisk fungerer som Alt+tilbaketasten."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Velg en heuristisk algoritme for gjenkjenning av AltGr.\n\n«null»: automatisk gjenkjenning basert på navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n«none»: Slår av eventuell AltGr-relatert arrangering.\n«ctrl-alt»: Antar at Ctrl+Alt betyr AltGr.\n«left-alt»: Antar at venstre Alt betyr AltGr.\n«right-alt»: Antar at høyre Alt betyr AltGr."
+		"message": "Velg en heuristisk algoritme for gjenkjenning av AltGr.\n\n«null»: automatisk gjenkjenning basert på navigator.language:\n      'en-us' => 'none', ellers => 'right-alt'\n«none»: Slår av eventuell AltGr-emulering.\n«ctrl-alt»: Antar at Ctrl+Alt betyr AltGr.\n«left-alt»: Antar at venstre Alt betyr AltGr.\n«right-alt»: Antar at høyre Alt betyr AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Om Alt-tasten skal fungere som en Meta-tast eller en unik Alt-tast."
@@ -426,7 +432,7 @@
 		"message": "Formen på den synlige tekstmarkøren. Dette kan endres under kjøring ved bruk av escape-tegnsekvenser i terminalen."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "Hvis verdien er «true» (sann), danner terminalbjeller i bakgrunnen et nettvarsel. https://www.w3.org/TR/notifications/\n\nBrukeren må gi tillatelse før varsler kan vises. Når dette alternativet er angitt som «true» (sant), prøver hterm ved behov å be brukeren om tillatelse. Vær oppmerksom på at det ikke er sikkert at nettlesere viser denne tillatelsesforespørselen hvis den ikke kommer som følge av en brukerhandling.\n\nChrome-utvidelser med «notifications»-tillatelsen (varsler) har tillatelse til å vise varsler."
+		"message": "Hvis verdien er «true» (sann), danner terminalbjeller i bakgrunnen et nettvarsel. https://www.w3.org/TR/notifications/\n\nBrukeren må gi tillatelse før varsler kan vises. Når dette alternativet er angitt som «true» (sant), prøver hterm ved behov å be brukeren om tillatelse. Vær oppmerksom på at det ikke er sikkert at nettlesere viser denne tillatelsesforespørselen hvis den ikke kommer som følge av en brukerhandling.\n\nChrome-utvidelser med tillatelsen «notifications» (varsler) har tillatelse til å vise varsler."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Om East Asian Ambiguous-tegn har bredde på to kolonner."
@@ -474,7 +480,7 @@
 		"message": "Forgrunnsfargen for tekst uten andre fargeattributter."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Om musepilen skal skjules automatisk når du skriver. Som standard gjenkjennes det automatisk om plattformen/OS-et kan håndtere dette.\n\nMerk: Enkelte operativsystemer kan overstyre denne innstillingen, og i noen tilfeller kan den ikke slås av."
+		"message": "Om musepilen skal skjules automatisk når du skriver. Som standard gjenkjennes det automatisk om plattformen/OS-et kan håndtere dette.\n\nMerk: Operativsystemet ditt kan overstyre denne innstillingen, og i noen tilfeller kan den ikke slås av."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Hvis «true» (sant) er valgt, kontrollerer Home/End terminalens rullefelt, og Shift+Home/Shift+End sendes til den eksterne verten. Hvis «false» (usant) er valgt, sendes Home/End til den eksterne verten, og Shift+Home/Shift+End ruller."
@@ -522,13 +528,16 @@
 		"message": "Om Meta+1..9 sendes til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sant) er valgt, håndteres Meta+1..9 av nettleseren. Hvis «false» (usant) er valgt, sendes Meta+1..9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Om Meta+V skal sendes til verten."
+		"message": "Om Meta+V skal sendes til nettleseren.\n\nI enkelte systemer brukes dette til å lime inn innhold."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Hvis «true» (sant) er valgt, kan tekst limes inn i terminalen ved bruk av dra-og-slipp.\nHvis «false» (usant) er valgt, ignoreres tekst som slippes."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Angi forventet koding for data som mottas fra verten.\nHvis kodingene ikke samsvarer, er det sannsynlig at visuelle feil oppstår.\n\nGyldige verdier er «utf-8» og «raw»."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Størrelsen på utfyllingen i piksler rundt kantlinjen på terminalskjermen.\n\nDette kontrollerer størrelsen på kantlinjen rundt terminalskjermen, slik at brukerne kan legge til synlig utfylling i kantene på skjermen."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Angir om det skal rulles til bunnen ved alle tastetrykk."
@@ -537,7 +546,7 @@
 		"message": "Angir om det skal rulles til bunnen ved terminalutdata."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Når du bruker den alternative skjermbufferen og DECCKM (appmarkørtaster) er aktivert, emulerer rulling på musehjulet piltastene.\n\nDu kan deaktivere dette midlertidig ved å trykke og holde på Shift-tasten.\n\nDette kommer ofte opp når du bruker sidevekslingskontroller (less), leser man-sider eller tekstredigeringsprogrammer (vi/nano) eller bruker screen/tmux."
+		"message": "Når du bruker den alternative skjermbufferen og DECCKM (appmarkørtaster) er aktivert, emulerer rulling på musehjulet piltastene.\n\nDu kan deaktivere dette midlertidig ved å trykke på og holde inne Shift-tasten.\n\nDette kommer ofte opp når du bruker sidevekslingskontroller (less), leser man-sider eller tekstredigeringsprogrammer (vi/nano) eller bruker screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "Multiplikatoren for rullehjulhendelser, målt i piksler.\n\nEndrer hvor raskt du kan rulle på siden."
@@ -821,9 +830,6 @@
 	"new_window_menu_label": {
 		"message": "Nytt vindu"
 	},
-	"notify_copy": {
-		"message": "Utvalget er kopiert"
-	},
 	"ok_button_label": {
 		"message": "OK"
 	},
@@ -832,9 +838,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Profftips] Bruk «Åpne som vindu» eller «Fullskjerm» for å hindre at terminalen lukkes med Ctrl+W.\n[Profftips] Se $1 for mer informasjon."
-	},
-	"options_button_label": {
-		"message": "Alternativer"
 	},
 	"plugin_loading": {
 		"message": "Laster inn NaCl-programtillegget …"
@@ -899,6 +902,9 @@
 	"save_label": {
 		"message": "Lagre"
 	},
+	"send_feedback_label": {
+		"message": "Send tilbakemelding"
+	},
 	"shortcut_list_aria_label": {
 		"message": "lagrede tilkoblinger"
 	},
@@ -913,6 +919,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Tøm terminalen"
+	},
+	"terminal_font_unavailable": {
+		"message": "«$1» er ikke tilgjengelig"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-farger"
@@ -938,6 +947,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Synlig"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Velg en heuristisk algoritme for gjenkjenning av AltGr.\n\n«Auto»: automatisk gjenkjenning basert på navigator.language:\n      «en-us» => «Slå av», ellers => «right-alt»\n«Slå av»: Slår av eventuell AltGr-emulering.\n«ctrl-alt»: Antar at Ctrl+Alt betyr AltGr.\n«left-alt»: Antar at venstre Alt betyr AltGr.\n«right-alt»: Antar at høyre Alt betyr AltGr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Angi farger for standardpaletten."
 	},
@@ -952,6 +964,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Tilbakestill terminalen"
+	},
+	"terminal_settings_about_label": {
+		"message": "Info"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Nettadressen til bakgrunnsbildet. Må begynne med «http://» eller «https://». La den stå tom hvis du ikke vil bruke noe bilde.\n\nFor eksempel:\n  https://goo.gl/anedTK"
@@ -1078,6 +1093,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Tema"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Koble til internett og prøv på nytt."
 	},
 	"tip_1": {
 		"message": "Du kan holde inne Ctrl (Cmd på macOS) mens du klikker på linkene for å åpne dem."

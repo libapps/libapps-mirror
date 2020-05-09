@@ -1,0 +1,1175 @@
+{
+	"already_mounted_message": {
+		"message": "Sistemi i skedarëve është montuar tashmë!"
+	},
+	"backup_prefs": {
+		"message": "Ruaj një rezervë"
+	},
+	"bad_destination": {
+		"message": "Destinacioni nuk mund të interpretohet: $1"
+	},
+	"before_unload": {
+		"message": "Mbyllja e kësaj skede do ta shkëpusë këtë sesion."
+	},
+	"cache_pin_prompt": {
+		"message": "Do ta ruash kodin PIN në memorien specifike për këtë sesion SSH? (y/N):"
+	},
+	"cancel_button_label": {
+		"message": "Anulo"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Pastro pritësit e njohur të SSH"
+	},
+	"clear_label": {
+		"message": "Pastro"
+	},
+	"command_complete": {
+		"message": "Komanda $1 u mbyll me kodin e statusit $2."
+	},
+	"command_not_supported": {
+		"message": "$1 nuk mbështetet nga ky version i Chrome"
+	},
+	"command_startup_failed": {
+		"message": "Hapja e $1 dështoi: $2"
+	},
+	"connect_button_label": {
+		"message": "Lidh"
+	},
+	"connect_or_exit_message": {
+		"message": "Të zgjidhet një lidhje tjetër (C) apo të dilet (X)?"
+	},
+	"connecting": {
+		"message": "Po lidhet me $1..."
+	},
+	"connection_dialog_name": {
+		"message": "Dialogu i lidhjes"
+	},
+	"console_crosh_options_notice": {
+		"message": "A e dije se ka një faqe të dedikuar për opsionet?\nNuk është nevoja të modifikosh më drejtpërdrejt \"term_\"!\nShtyp $1 për ta hapur ose kliko:\n$2"
+	},
+	"console_nassh_options_notice": {
+		"message": "A e dije se ka një faqe të dedikuar për opsionet?\nNuk është nevoja të modifikosh më drejtpërdrejt \"term_\"!\n$1"
+	},
+	"delete_button_label": {
+		"message": "Fshi"
+	},
+	"disconnect_message": {
+		"message": "Përbërësi shtesë NaCl u mbyll me kodin e statusit $1."
+	},
+	"faq_menu_label": {
+		"message": "Pyetjet e shpeshta"
+	},
+	"field_argstr_placeholder": {
+		"message": "argumente shtesë të rreshtit të komandës"
+	},
+	"field_description_aria_label": {
+		"message": "përshkrimi"
+	},
+	"field_description_placeholder": {
+		"message": "emriipërdoruesit@emriipritësit ose tekst i lirë"
+	},
+	"field_hostname_aria_label": {
+		"message": "emri i pritësit"
+	},
+	"field_hostname_placeholder": {
+		"message": "emri i pritësit"
+	},
+	"field_mount_path_placeholder": {
+		"message": "shtegu i parazgjedhur është direktoria bazë e përdoruesit"
+	},
+	"field_nassh_options_aria_label": {
+		"message": "Opsionet e serverit të ridrejtimit SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "Opsionet e serverit të ridrejtimit SSH"
+	},
+	"field_port_aria_label": {
+		"message": "porta"
+	},
+	"field_port_placeholder": {
+		"message": "porta"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "i parazgjedhur"
+	},
+	"field_username_aria_label": {
+		"message": "emri i përdoruesit"
+	},
+	"field_username_placeholder": {
+		"message": "emri i përdoruesit"
+	},
+	"found_relay": {
+		"message": "U gjet serveri i ridrejtimit: $1"
+	},
+	"get_profile_error": {
+		"message": "GABIM: Profili nuk mund të ngarkohej $1:\n$2"
+	},
+	"hterm_announce_current_screen_header": {
+		"message": "$1% është lëvizur,"
+	},
+	"hterm_button_allow_always": {
+		"message": "Lejo gjithmonë"
+	},
+	"hterm_button_allow_session": {
+		"message": "Lejo këtë sesion"
+	},
+	"hterm_button_block": {
+		"message": "Blloko"
+	},
+	"hterm_button_page_down": {
+		"message": "Faqja poshtë"
+	},
+	"hterm_button_page_up": {
+		"message": "Faqja lart"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "Ngarkimi i $1 dështoi"
+	},
+	"hterm_loading_resource_start": {
+		"message": "Po ngarkohet $1 ..."
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Lejo shfaqjen e imazhit të ndërfutur"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Backspace është Meta+Backspace"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "Modaliteti i tastit AltGr"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Trajtoje tastin Alt si tast Meta"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Menaxhimi i modifikuesit të tastit Alt"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Tingulli i ziles së sinjalizimit (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Ngjyra e sfondit"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Imazhi i sfondit"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Pozicioni i imazhit në sfond"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Madhësia e imazhit të sfondit"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Sjellja e tastit Backspace"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Mbivendosjet e hartës së karaktereve"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Pastro automatikisht zgjedhjen e tekstit"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Mbylle dritaren kur të dalësh"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Paleta fillestare e ngjyrave"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Kopjo automatikisht përmbajtjen e zgjedhur"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Sjellja e kopjimit me Ctrl+C"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Sjellja e zmadhimit me Ctrl++/-/0"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Sjellja e ngjitjes së Ctrl+V"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Pulsimi i kursorit"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Shpejtësia e pulsimit të kursorit"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Ngjyra e kursorit të tekstit"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Forma e kursorit të tekstit"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Krijo njoftimet në desktop për zilet e sinjalizimit"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian Ambiguous përdor dy kolona"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Mbështet karakteret e kontrollit C1 jo UTF-8"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Aktivizo tekstin pulsues"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Sjellja e tekstit të trashësuar"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Përdor ngjyra të ndezura me tekstin e trashësuar"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Shfaq njoftimin kur kopjon përmbajtjen"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Lejo shkrimin në kujtesën e fragmenteve në distancë"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Lejo pastrimin e ndërmemories së lëvizjes prapa (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Lejo ndryshimin e pulsimit të kursorit të tekstit"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Shfaq përmasat e terminalit kur ndryshon përmasat"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Ndryshoret e mjedisit"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Familja e fontit të tekstit"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Madhësia e fontit të tekstit"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Zbutja e fontit të tekstit"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Ngjyra e tekstit"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Fshihe kursorin e miut kur shkruan"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Sjellja e lëvizjes së tastit Home/End"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Lidhjet/shkurtoret e tastierës"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Përdor shkurtoret/lidhjet e parazgjedhura të tastierës së sistemit operativ"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Tastet e medias janë tastet F"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Menaxhimi i modifikuesit të tastit Meta"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Butoni i ngjitjes së miut"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Klikimet me butonin e djathtë të miut ngjitin përmbajtjen"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Sjellja e lëvizjes së tastit Page Up/Down"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Sjellja e ndërrimit së skedës Alt+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Sjellja e dritares së re Ctrl+N"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Sjellja e skedës së çelësit Ctrl+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Sjellja e skedës së re me Ctrl+T"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Sjellja e skedës së çelësit Ctrl+Tab"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Sjellja e mbylljes së skedës Ctrl+W"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Sjellja e skedës së çelësit Meta+1..9"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Sjellja e ngjitjes së Meta+V"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Lejo zvarritjen dhe lëshimin për të ngjitur"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "Merr kodimin"
+	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Madhësia e mbushjes së ekranit"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Lëviz në fund pas shtypjes së tastit"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Lëviz në fund pas daljes së re"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Imito tastet e shigjetës me rrotën e lëvizjes"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Shumëfishuesi i rrotës së lëvizjes së miut"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Dukshmëria e shiritit të lëvizjes"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Ngjitja me tastet Shift+Insert"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Kodimi i terminalit"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Lejo që shfletuesi të menaxhojë kopjimin e tekstit"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "CSS e personalizuar (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "CSS e personalizuar (teksti i ndërfutur)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Zbulimi automatik po ndalon (në të majtë)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Karakteret e ndarjes së fjalëve"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Zbulimi automatik po ndalon (në të djathtë)"
+	},
+	"hterm_options_button_label": {
+		"message": "Opsionet"
+	},
+	"hterm_popup_inline_image": {
+		"message": "Imazhet e ndërfutura"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "Imazhet e ndërfutura janë çaktivizuar"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "Nëse lejohet që pritësi në distancë të shfaqë imazhet në terminal.\n\nSi parazgjedhje, ne e kërkojmë derisa të bëhet një zgjedhje."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "Nëse caktohet, zhbën rishoqërimin e Alt+Backspace->Delete në Chrome OS, kështu që Alt+Backspace është në të vërtetë Alt+Backspace."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "Zgjidh një mënyrë deduktive zbulimi për AltGr.\n\n\"null\": Zbulo automatikisht në bazë të gjuhës së navigatorit:\n      \"en-us\" => \"none\", ose => \"right-alt\"\n\"none\": Çaktivizo çdo imitim të tastit AltGr.\n\"ctrl-alt\": Supozo se Ctrl+Alt nënkupton AltGr.\n\"left-alt\": Supozo se Alt i majtë nënkupton AltGr.\n\"right-alt\": Supozo se Alt i djathtë nënkupton AltGr."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Nëse tasti Alt vepron si tast Meta ose si tast i veçantë Alt."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Kontrollon si përpunohet tasti Alt.\n\n  escape: Dërgo një parashtesë ESC.\n  8-bit: Shto 128 në karakterin e shkruar si xterm.\n browser-key: Prit për ngjarjen e shtypjes së tastit dhe shiko se çfarë thotë shfletuesi. (Kjo nuk do të funksionojë mirë në platformat ku shfletuesi kryen një veprim të parazgjedhur për disa sekuenca Alt.)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "URL-ja e tingullit të ziles së terminalit. Lëre bosh kur nuk ka zile të dëgjueshme."
+	},
+	"hterm_pref_background_color": {
+		"message": "Ngjyra e sfondit për tekstin pa asnjë atribut tjetër të ngjyrës."
+	},
+	"hterm_pref_background_image": {
+		"message": "Vlera CSS e imazhit në sfond. Lëre bosh kur nuk ka imazh.\n\nPër shembull:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "Vlera CSS e pozicionit të imazhit në sfond.\n\nPër shembull:\n  10% 10%\n  në qendër"
+	},
+	"hterm_pref_background_size": {
+		"message": "Vlera CSS e madhësisë së imazhit në sfond."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "Nëse është e vërtetë, tasti Backspace do të dërgojë BS (\"\\x08\", e njohur edhe si \"^H\"). Ndryshe, tasti Backspace do të dërgojë \"\\x7f\"."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "Ky është specifikuar si një objekt. Ai është një grupim i shpërndarë ku çdo veti është kodi i grupit të karaktereve dhe vlera është një objekt që është vetë një grupim i shpërndarë. Në atë grupim të shpërndarë, çdo veti është karakteri i marrë dhe vlera është karakteri i shfaqur.\n\nPër shembull:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "Nëse do ta pastrosh zgjedhjen pas kopjimit."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "Nëse mbyllet dritarja kur komanda të përfundojë ekzekutimin."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "Mbivendos ngjyrat në paletën e parazgjedhur.\n\nKjo mund të specifikohet si një grupim ose objekt. Nëse specifikohet si objekt, supozohet se është një grupim i shpërndarë, ku secila veti është një indeks numerik në paletën e ngjyrave.\n\nVlerat mund të specifikohen si pothuajse çdo vlerë ngjyre CSS. Kjo përfshin #RGB, #RRGGBB, rgb(...), rgba(...) dhe çdo emër ngjyre që është gjithashtu pjesë e skedarit standard X11 rgb.txt.\n\nMund të përdorësh \"null\" për të specifikuar se vlera e parazgjedhur nuk duhet të ndryshohet. Kjo është e dobishme për të kapërcyer një numër të vogël indeksesh kur vlera specifikohet si grupim.\n\nPër shembull, këto të dyja e caktojnë indeksin e ngjyrës 1 në blu:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "Kopjo automatikisht përzgjedhjen e miut në kujtesën e fragmenteve."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Ctrl+C kopjon nëse është e vërtetë, dërgon ^C te pritësi nëse është jo e vërtetë.\nCtrl+Shift+C dërgon ^C te pritësi bëse është e vërtetë, kopjon nëse është jo e vërtetë."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Nëse është e vërtetë, Ctrl+Plus/Minus/Zero kontrollon zmadhimin.\nNëse është jo e vërtetë, Ctrl+Shift+Plus/Minus/Zero kontrollon zmadhimin, Ctrl+Minus dërgon ^_, Ctrl+Plus/Zero nuk bën asgjë."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Ctrl+V ngjit nëse është e vërtetë, dërgon ^V te pritësi nëse është jo e vërtetë.\nCtrl+Shift+V dërgon ^V te pritësi nëse është e vërtetë, e ngjit nëse është jo e vërtetë."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "Nëse kursori i tekstit pulson në mënyrë të parazgjedhur. Kjo mund të ndryshohet në kohën e ekzekutimit nëpërmjet sekuencave të shmangies së terminalit."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "Shpejtësia e pulsimit të kursorit të tekstit në milisekonda.\n\nNjë grupim me dy elemente, nga të cilët i pari tregon se për sa kohë duhet të jetë aktiv kursori i tekstit dhe i dyti tregon se për sa kohë duhet të jetë joaktiv ai."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "Ngjyra e kursorit të dukshëm të tekstit."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "Forma e kursit të dukshëm të tekstit. Kjo mund të ndryshohet në kohën e ekzekutimit nëpërmjet sekuencave të shmangies së terminalit."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "Nëse është e vërtetë, zilet e terminalit në sfond do të krijojnë një njoftim uebi. https://www.w3.org/TR/notifications/\n\nShfaqja e kërkesave kërkon leje nga përdoruesi. Kur ky opsion caktohet si i vërtetë, hterm do të përpiqet t'i kërkojë përdoruesit leje nëse është e nevojshme. Shfletuesit mund të mos e shfaqin këtë kërkesë për leje nëse nuk është aktivizuar nga një veprim i përdoruesit.\n\nShtesat e Chrome me lejen e \"njoftimeve\" kanë leje që të shfaqin njoftimet."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "Nëse karakteret East Asian Ambiguous kanë një gjerësi me dy kolona."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "E vërtetë për të aktivizuar karakteret e kontrollit me 8 bite, jo e vërtetë për t'i shpërfillur.\n\nNe do të respektojmë versionet me dy bajte të këtyre karaktereve të kontrollit pavarësisht nga ky cilësim."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "Nëse është e vërtetë, respekto atributin e pulsimit. Nëse nuk është e vërtetë, shpërfille."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "Nëse është e vërtetë, përdor një font të trashësuar për tekstin me atributin e trashësuar/të ndritshëm. Jo e vërtetë për të përdorur fontin normal. Pa asnjë vlerë për zbulimin automatik."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "Nëse është e vërtetë, përdor ngjyra të ndritshme (8-15 në një paletë me 16 ngjyra) për çdo tekst me atributin e shkronjave të trashësuara. Në rast të kundërt nuk është e vërtetë."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "Nëse do të shfaqet një mesazh në terminal kur pritësi shkruan në kujtesën e fragmenteve."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "Lejo që pritësi në distancë të shkruajë direkt në kujtesën lokale të fragmenteve të sistemit.\nQasja në lexim nuk jepet asnjëherë, pavarësisht këtij cilësimi.\n\nKjo përdoret për të kontrolluar qasjen në veçori të tilla si OSC-52."
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Nëse funksioni \"Spastro vijat e ruajtura\" (modaliteti 3) i komandës \"Spastro ekranin\" (CSI-J) mund të pastrojë ndërmemorien e lëvizjes pas të terminalit.\n\nAktivizimi i kësaj si parazgjedhje nuk është i dëmshëm."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "Respekto përpjekjen e pritësit për të ndryshuar statusin e pulsimit të kursorit të tekstit duke përdorur modalitetin privat DEC 12."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Nëse do të shfaqen përmasat e terminaleve kur terminali ndryshon madhësinë."
+	},
+	"hterm_pref_environment": {
+		"message": "Kompleti fillestar i ndryshoreve të mjedisit, si objekt."
+	},
+	"hterm_pref_font_family": {
+		"message": "Familja e parazgjedhur e fonteve për tekstin e terminalit."
+	},
+	"hterm_pref_font_size": {
+		"message": "Madhësia e parazgjedhur e fontit në pikselë."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "Vetia e zbutjes së fontit CSS."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "Ngjyra e planit të parë për tekstin pa asnjë atribut tjetër të ngjyrës."
+	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Nëse kursori i miut fshihet automatikisht kur shkruan. Si parazgjedhje, zbulo automatikisht nëse kjo menaxhohet nga platforma/sistemi operativ.\n\nShënim: Sistemi yt operativ mund ta anulojë këtë cilësim dhe mund të mos arrish ta çaktivizosh gjithmonë."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "Nëse është e vërtetë, tastet Home/End kontrollojnë shiritin e lëvizjes së terminalit dhe Shift+Home/Shift+End dërgohen te pritësi në distancë. Nëse nuk është e vërtetë, atëherë Home/End dërgohen te pritësi në distancë dhe Shift+Home/Shift+End kryejnë lëvizjen."
+	},
+	"hterm_pref_keybindings": {
+		"message": "Një hartë e sekuencave të tasteve të veprimeve të tasteve. Sekuencat e tasteve përfshijnë zero ose më shumë taste modifikues të ndjekura nga kodi i tastit. Kodet e tasteve mund të jenë numra dhjetorë ose heksadhjetorë ose një identifikues tasti. Veprimet e tasteve mund të specifikohen si varg për t'u dërguar te pritësi ose identifikues veprimi. Për një shpjegim të plotë të formatit, shiko https://goo.gl/LWRndr.\n\nShembuj të lidhjeve me tastet:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Nëse lidhjet e zakonshme me tastierën me sistemin operativ duhet të respektohen në vend që të regjistrohen për përdorim nga hterm."
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "Nëse është e vërtetë, konverto tastet e medias në tastet ekuivalente F. Nëse nuk është e vërtetë, lejo që shfletuesi t'i menaxhojë tastet."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Dërgo një parashtesë ESC kur shtyp një tast ndërkohë që mban të shtypur tastin Meta.\n\nPër shembull, kur është aktivizuar, shtypja e Meta+K do të dërgojë ^[k ashtu si kur shtyp Esc dhe më pas k. Kur është çaktivizuar, do të dërgohet vetëm k."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "Ngjit me klikimet e butonit të djathtë të miut.\n\nKy opsion është i pavarur nga cilësimi i \"mouse-paste-button\".\n\nShënim. Kjo do t'i menaxhojë si duhet minjtë e krahut të majtë dhe të djathtë."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "Nëse është e vërtetë, tastet Page Up/Page Down kontrollojnë shiritin e lëvizjes së terminalit dhe Shift+Page Up/Shift+Page Down dërgohen te pritësi në distancë. Nëse nuk është e vërtetë, atëherë Page Up/Page Down dërgohen te pritësi në distancë dhe Shift+Page Up/Shift+Page Down kryejnë lëvizjen."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Nëse Alt+1..9 i kalohet shfletuesit.\n\nKjo është e dobishme kur ekzekutohet hterm në një skedë shfletuesi, në mënyrë që të mos humbësh shkurtoret e tastierës së Chrome \"kalo te skeda\". Kur nuk ekzekutohen në një skedë, është më mirë që të dërgohen këto taste te një pritës në mënyrë që të mund të përdoren në vim ose emacs.\n\nNëse është e vërtetë, Alt+1..9 do të përpunohet nga shfletuesi. Nëse është jo e vërtetë, Alt+1..9 do t'i dërgohet pritësit. Nëse është \"null\", zbulohet automatikisht bazuar në platformën e shfletuesit dhe llojin e dritares."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Nëse Ctrl+N i kalohet shfletuesit.\n\nNëse është e vërtetë, Ctrl+N do të përpunohet nga shfletuesi si shkurtore tastiere në \"dritare të re\". Nëse është jo e vërtetë, Ctrl+N do t'i dërgohet pritësit."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Nëse Ctrl+1..9 i kalohet shfletuesit.\n\nKjo është e dobishme kur ekzekutohet hterm në një skedë shfletuesi, në mënyrë që të mos humbësh shkurtoret e tastierës së Chrome \"kalo te skeda\". Kur nuk ekzekutohen në një skedë, është më mirë që të dërgohen këto taste te një pritës në mënyrë që të mund të përdoren në vim ose emacs.\n\nNëse është e vërtetë, Ctrl+1..9 do të përpunohet nga shfletuesi. Nëse është jo e vërtetë, Ctrl+1..9 do t'i dërgohet pritësit. Nëse është \"null\", zbulohet automatikisht bazuar në platformën e shfletuesit dhe llojin e dritares."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Nëse Ctrl+T i kalohet shfletuesit.\n\nNëse është e vërtetë, Ctrl+T do të përpunohet nga shfletuesi si shkurtore tastiere për \"skedë e re\". Nëse nuk është e vërtetë, Ctrl+T do t'i dërgohet pritësit."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Nëse Ctrl+Tab dhe Ctrl+Shift+Tab i kalohen shfletuesit.\n\nNëse është e vërtetë, Ctrl+Tab dhe Ctrl+Shift+Tab do të përpunohen nga shfletuesi si shkurtore tastiere për \"skedën tjetër/të mëparshme\". Nëse nuk është e vërtetë, tasti Tab dërgohet te pritësi pa Ctrl ose Shift."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Nëse Ctrl+W i kalohet shfletuesit.\n\nNëse është e vërtetë, Ctrl+W do të përpunohet nga shfletuesi si shkurtore tastiere për \"mbyll skedën\". Nëse nuk është e vërtetë, Ctrl+W do t'i dërgohet pritësit."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Nëse Meta+1..9 i kalohet shfletuesit.\n\nKjo është e dobishme kur ekzekutohet hterm në një skedë shfletuesi, në mënyrë që të mos humbësh shkurtoret e tastierës së Chrome \"kalo te skeda\". Kur nuk ekzekutohen në një skedë, është më mirë që të dërgohen këto taste te një pritës në mënyrë që të mund të përdoren në vim ose emacs.\n\nNëse është e vërtetë, Meta+1..9 do të përpunohet nga shfletuesi. Nëse është jo e vërtetë, Meta+1..9 do t'i dërgohet pritësit. Nëse është \"null\", zbulohet automatikisht bazuar në platformën e shfletuesit dhe llojin e dritares."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Nëse Meta+V i kalohet shfletuesit.\n\nNë disa sisteme, kjo përdoret për të ngjitur përmbajtjen."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Nëse është e vërtetë, teksti me zvarritje dhe lëshim do të ngjitet te terminali.\nNëse nuk është e vërtetë, teksti i lëshuar do të shpërfillet."
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "Cakto kodimin e pritur për të dhënat e marra nga pritësi.\nNëse kodimet nuk përputhen, mund të vihen re gabime vizuale.\n\nVlerat e vlefshme janë \"utf-8\" dhe \"raw\"."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Madhësia e mbushjes në pikselë rrotull bordurës së ekranit të terminalit.\n\nKjo kontrollon madhësinë e bordurës rrotull ekranit të terminalit në mënyrë që përdoruesi të mund të shtojë mbushje të dukshme në skajet e ekranit."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "Nëse lëvizet në fund me çdo goditje tasti."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "Nëse lëvizet në fund në daljen e terminalit."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Kur përdoret ndërmemoria aktive e ekranit dhe DECCKM (tastet e kursorit të aplikacionit) është aktive, ngjarjet e rrotës së lëvizjes së miut do të imitojnë tastet e shigjetave.\n\nKjo mund të çaktivizohet përkohësisht duke mbajtur shtypur tastin Shift.\n\nKjo përsëritet shpesh kur përdoren biperët (less) ose kur lexohen faqet man ose redaktorët e tekstit (vi/nano) ose kur përdoren screen/tmux."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "Ngjarjet e shumëfishuesit për rrotën e lëvizjes së miut kur matet në pikselë.\n\nNdryshon se sa shpejt lëviz faqja."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "Modaliteti i shiritit vertikal të lëvizjes."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Nëse Shift+Insert përdoret për ngjitjen ose nëse dërgohet te pritësi në distancë."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "Kodimi i parazgjedhur i terminalit (DOCS).\n\nISO-2022 bën të mundur përkthimet e hartës së karaktereve (si p.sh. hartat e grafikës).\nUTF-8 e çaktivizon mbështetjen për to.\n\nVarianti i kyçur nënkupton se kodimi nuk mund të ndryshohet në kohën e ekzekutimit nëpërmjet sekuencave të shmangies së terminalit.\n\nDuhet të vazhdosh me UTF-8 përveçse nëse vë re ndërprerje të paraqitjes me aplikacionet e vjetra."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "Nëse përdoret sjellja e parazgjedhur e kopjimit të shfletuesit/sistemit operativ.\n\nLejo që shfletuesi/sistemi operativ ta menaxhojë drejtpërdrejt ngjarjen e kopjimit, e cila mund të përmirësojë përputhshmërinë me disa sisteme (ku kopjimi nuk funksionon aspak), por e bën më pak të vështirë zgjedhjen e tekstit.\n\nPër shembull, rreshtat e gjatë që janë thyer automatikisht sipas rreshtave do të kopjohen me rreshtat e rinj të përfshira përsëri."
+	},
+	"hterm_pref_user_css": {
+		"message": "URL e fletët së stilit të përdoruesit për t'u përfshirë në dokumentin e terminalit."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "Teksti i personalizuar CSS për stilimin e terminalit."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "Shprehja e rregullt për të ndaluar përputhjen në të majtë (fillimin) të një zgjedhjeje.\n\nZakonisht kjo është një klasë karakteresh për të refuzuar karaktere specifike.\nSi parazgjedhje, ne lejojmë \"~\" dhe \".\" pasi shtigjet shpesh fillojnë me to."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "Shprehja e rregullt për përputhjen me të gjitha karakteret në mes.\n\nZakonisht kjo është një klasë karakteresh për të refuzuar karaktere specifike.\n\nPërdoret për të zgjeruar përzgjedhjen rreth pikës së nisjes."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "Shprehja e rregullt për të ndaluar përputhjen në të djathtë (fundin) të një zgjedhjeje.\n\nZakonisht kjo është një klasë karakteresh për të refuzuar karaktere specifike."
+	},
+	"hterm_space_character": {
+		"message": "Hapësirë"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Paraqitja (fontet, ngjyrat, imazhet)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Kopjo dhe ngjit"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Kodimi"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Shtesat"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Tastiera"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Të ndryshme"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Me lëvizje"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Tingujt"
+	},
+	"identity_label": {
+		"message": "Identiteti"
+	},
+	"import_link_aria_label": {
+		"message": "importimi i skedarit"
+	},
+	"import_link_label": {
+		"message": "Importo..."
+	},
+	"initializing_relay": {
+		"message": "Serveri i ridrejtimit po kërkohet me: $1"
+	},
+	"json_parse_error": {
+		"message": "Nuk mund të analizohej hyrja JSON në \"$1\": $2"
+	},
+	"known_hosts_empty": {
+		"message": "Nuk ka asnjë pritës të njohur. Nuk ka asgjë për të harruar."
+	},
+	"known_hosts_prompt": {
+		"message": "Zgjidh një pritës për ta harruar [1-$1]:"
+	},
+	"known_hosts_title": {
+		"message": "Pritësit e njohur:"
+	},
+	"licenses": {
+		"message": "Licencat"
+	},
+	"licenses_expand_link": {
+		"message": "shfaq licencën"
+	},
+	"licenses_title": {
+		"message": "Licencat me burim të hapur"
+	},
+	"loading_label": {
+		"message": "Po ngarkohet..."
+	},
+	"migrate_to_ext": {
+		"message": "Njoftim: Migroje te një prapashtesë e re e Secure Shell ($1).\nAplikacionet e Chrome janë të vjetruara, kështu që ky version nuk do të marrë më përditësime.\nShiko udhëzuesin e migrimit ($2) për më shumë detaje."
+	},
+	"missing_param": {
+		"message": "Parametri i munguar: $1"
+	},
+	"mount_button_label": {
+		"message": "Montimi i protokollit SFTP"
+	},
+	"mount_path_label": {
+		"message": "Shtegu i montimit"
+	},
+	"mounted_message": {
+		"message": "U montua!"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "Hidhe një skedar në terminal"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Ndrysho direktorinë e punës"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Ndrysho grupin e shtigjeve"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Ndrysho lejet te shtigjet"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Ndrysho zotëruesin e skedarëve"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Pastro ekranin aktual të terminalit."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Kopjo një skedar në kujtesën e fragmenteve (parazgjedhja: 10 MiB nga fillimi)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "Kopjon $1 bajte te kujtesa e fragmenteve"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Ndrysho përdorimin e ngjyrës"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Kopjo burimin te destinacioni"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Fshi skedarët"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Shfaq statistikat e diskut"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Shtegu: $1\n  ID-ja e sistemit të skedarëve: $2\n Totali: $3\n  Përdorur: $4 ($5%)\n Në dispozicion: $6 (për përdoruesit pa privilegje)\n $7 (te rrënja)"
+	},
+	"nasftp_cmd_exit": {
+		"message": "dil"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Shkëput"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Po shkarkohet skedari: $1 si $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Shkarko skedarët"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Ky ekran ndihme"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Listo detajet e direktorisë"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Krijo një lidhje te shtegu që tregon drejt objektivit"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Krijo direktoritë"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Riemërto një skedar"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Cakto vargun e kërkesës"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Ngarko skedarët"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Po ngarkohet skedari: $1 si $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Shfaq direktorinë aktuale të punës"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Direktoria e punës në distancë: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Lexo lidhjet simbolike"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Kanonikalizo shtigjet"
+	},
+	"nasftp_cmd_rename": {
+		"message": "riemërto"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Vazhdo ngarkimin e skedarëve"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Hiq skedarët"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Fshi direktoritë boshe"
+	},
+	"nasftp_cmd_show": {
+		"message": "shfaq"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Shfaq skedarët me ndërfutje"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Shtesat:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Shfaq statusin e skedarit"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Skedari: $1\n  Madhësia: $2 bajte\n   UID: $3\n   GID: $4\nQasja: $5\n Koha e qasjes: $6\n Koha e modifikimit: $7"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Krijo një lidhje simbolike te shtegu që tregon drejt objektivit"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Shkurto shtigjet në 0 bajte"
+	},
+	"nasftp_cmd_version": {
+		"message": "versioni"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  Shtesat e serverit:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Shfaq versionin aktual të protokollit"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "Informacione për versionin e protokollit SFTP:\n  lokal: $1\n  serveri: $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: fundi i skedarit"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: skedari nuk u gjet"
+	},
+	"nasftp_error_file_reading": {
+		"message": "Leximi i $1 dështoi: $2"
+	},
+	"nasftp_error_internal": {
+		"message": "Gabim i brendshëm i patrajtuar. Raporto një defekt në kod: $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: numër i pavlefshëm: $3"
+	},
+	"nasftp_error_message": {
+		"message": "GABIM: $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: shtesa \"$2\" nuk ofrohet"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: nuk është një skedar i rregullt"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: nuk ka argumente të mjaftueshme"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: leja u refuzua"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: shumë argumente"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: komandë e panjohur"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: flamur i panjohur $2"
+	},
+	"nasftp_force_quit": {
+		"message": "Mbylle me forcë"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 bajte të transferuara në $2 sekonda ($3/s)"
+	},
+	"nassh_options_error": {
+		"message": "Opsion i panjohur: $1"
+	},
+	"nassh_product_name": {
+		"message": "Secure Shell"
+	},
+	"new_window_menu_label": {
+		"message": "Dritare e re"
+	},
+	"ok_button_label": {
+		"message": "Në rregull"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Lidhu me një profil të ruajtur ose një sistem të ri ssh"
+	},
+	"open_as_window_tip": {
+		"message": "[Këshillë profesioniste] Përdor \"Hap si dritare\" ose \"Ekrani i plotë\" për të parandaluar mbylljen e terminalit tënd nga Ctrl+W!\n[Këshillë profesioniste] Shiko $1 për më shumë informacion."
+	},
+	"plugin_loading": {
+		"message": "Po ngarkon përbërësin shtesë NaCl..."
+	},
+	"plugin_loading_complete": {
+		"message": " u krye."
+	},
+	"plugin_loading_failed": {
+		"message": " dështoi! :("
+	},
+	"popup_connect_tooltip": {
+		"message": "Mbaj shtypur Ctrl për të hapur në një skedë të re."
+	},
+	"pref_backup_filename": {
+		"message": "Rezerva e preferencave të Secure Shell.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "Skedarët SSH"
+	},
+	"preferences_header_terminal": {
+		"message": "Cilësimet e terminalit"
+	},
+	"preferences_header_uri": {
+		"message": "Përpunuesit e URI-së"
+	},
+	"preferences_reset": {
+		"message": "Të gjitha preferencat u rivendosën!"
+	},
+	"protocol_register_button": {
+		"message": "Regjistro përpunuesit e protokollit"
+	},
+	"protocol_register_explain": {
+		"message": "Butoni më poshtë do të përpiqet të regjistrojë përpunuesit për të gjitha protokollet që mbështesim. Për shembull, kjo na lejon të përpunojmë direkt lidhjet ssh://. Një kërkesë do të shfaqet nga shfletuesi për çdo protokoll, prandaj konfirmo/prano secilin siç shfaqet. Nëse nuk shfaqen kërkesa, atëherë shiko seksionin e radhës për këshilla rreth zgjidhjes së problemeve."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Nëse ke regjistruar tashmë përpunues ose nëse janë refuzuar përpjekjet e mëparshme të regjistrimit, atëherë nuk do të shfaqen kërkesa të tjera. Hap dialogun më poshtë dhe më pas kontrollo cilësimet e përpunuesit të regjistruar në seksionet ssh/sftp/etc.... Nëse ky program është i bllokuar, mund t'i fshish ato cilësime që të lejojnë të provosh përsëri regjistrimin. Nëse ky program është regjistruar tashmë, por është caktuar akoma si përpunuesi i parazgjedhur, mund ta ndryshosh edhe përpunuesin e parazgjedhur."
+	},
+	"protocol_register_options_link": {
+		"message": "Regjistri i protokollit"
+	},
+	"protocol_register_settings_button": {
+		"message": "Hap cilësimet e përpunuesve të regjistruar"
+	},
+	"protocol_register_title": {
+		"message": "Ndihmësi për regjistrimin e përpunuesit të protokollit të Secure Shell"
+	},
+	"read_size_label": {
+		"message": "Madhësia e leximit (KiB)"
+	},
+	"reconnect_message": {
+		"message": "Të rilidhet (R), të zgjidhet një lidhje tjetër (C) apo të dilet (X)?"
+	},
+	"relay_retry": {
+		"message": "Po riprovon..."
+	},
+	"request_pin_prompt": {
+		"message": "Fut kodin PIN për të shkyçur tastin $1 në \"$2 ($3)\" ($4 prova të mbetura):"
+	},
+	"restore_prefs": {
+		"message": "Restauro rezervën"
+	},
+	"save_label": {
+		"message": "Ruaj"
+	},
+	"send_feedback_label": {
+		"message": "Dërgo komente"
+	},
+	"shortcut_list_aria_label": {
+		"message": "lidhjet e ruajtura"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "Instalo aplikacionin Smart Card Connector: $1"
+	},
+	"ssh_argstr_label": {
+		"message": "Argumentet e protokollit SSH"
+	},
+	"stream_open_error": {
+		"message": "Hapja e transmetimit $1 dështoi: $2"
+	},
+	"terminal_clear_menu_label": {
+		"message": "Pastro terminalin"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" nuk ofrohet"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "Ngjyrat ANSI"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Me lëmim"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Zilja"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Pulson"
+	},
+	"terminal_name_pref_color": {
+		"message": "Ngjyra"
+	},
+	"terminal_name_pref_font": {
+		"message": "Fonti"
+	},
+	"terminal_name_pref_image": {
+		"message": "Imazh"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Forma"
+	},
+	"terminal_name_pref_visible": {
+		"message": "E dukshme"
+	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Zgjidh një mënyrë deduktive zbulimi për AltGr.\n\n\"Auto\": Zbulo automatikisht bazuar në navigator.language:\n      \"en-us\" => \"Disable\", else => \"right-alt\"\n\"Disable\": Çaktivizo çdo imitim të AltGr.\n\"ctrl-alt\": Supozo se Ctrl+Alt nënkupton AltGr.\n\"left-alt\": Supozo se Alt i majtë nënkupton AltGr.\n\"right-alt\": Supozo se Alt i djathtë nënkupton AltGr."
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Cakto ngjyrat për paletën e parazgjedhur."
+	},
+	"terminal_pref_bell": {
+		"message": "Zilja e dëgjueshme e terminalit."
+	},
+	"terminal_preview_label": {
+		"message": "Pamja paraprake"
+	},
+	"terminal_profile_label": {
+		"message": "Profili aktual"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Rivendosja e terminalit"
+	},
+	"terminal_settings_about_label": {
+		"message": "Rreth"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "URL-ja e imazhit të sfondit. Duhet të fillojë me \"http://\" ose \"https://\". Lëre bosh kur nuk ka imazh.\n\nPër shembull:\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Automatik"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Çaktivizo"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Rreze"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Blloko"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Nënvizo"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Je i sigurt që dëshiron ta rivendosësh temën te parazgjedhjet?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Rivendos temën"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Rivendos"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Klasike"
+	},
+	"terminal_theme_dark_label": {
+		"message": "E errët"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Mjegull"
+	},
+	"terminal_theme_light_label": {
+		"message": "E çelur"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized e errët"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized e çelur"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Ngjyra 0: E zezë"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "Ngjyra 1: E kuqe"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "Ngjyra 10: E gjelbër e ndezur"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "Ngjyra 11: E verdhë e ndezur"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "Ngjyra 12: Blu e ndezur"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "Ngjyra 13: E purpurt e errët e ndezur"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "Ngjyra 14: Gurkali e ndezur"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "Ngjyra 15: E bardhë e ndezur"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "Ngjyra 2: E gjelbër"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "Ngjyra 3: E verdhë"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "Ngjyra 4: Blu"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "Ngjyra 5: E purpurt e errët"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "Ngjyra 6: Gurkali"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "Ngjyra 7: E bardhë"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "Ngjyra 8: E zezë e ndezur"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "Ngjyra 9: E kuqe e ndezur"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Paraqitja"
+	},
+	"terminal_title_pref_background": {
+		"message": "Sfondi"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Sjellja"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "Kursori"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Tastiera"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Tastiera dhe miu"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Miu"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Shiriti i lëvizjes"
+	},
+	"terminal_title_pref_text": {
+		"message": "Tekst"
+	},
+	"terminal_title_settings": {
+		"message": "Cilësimet"
+	},
+	"terminal_title_theme": {
+		"message": "Tema"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Lidhu me internetin dhe provo sërish"
+	},
+	"tip_1": {
+		"message": "Mund të mbash të shtypur Ctrl (Cmd në macOS) kur klikon te lidhjet për t'i hapur ato!"
+	},
+	"tip_10": {
+		"message": "Kur ekzekutohet në një dritare, Ctrl+Shift+N mund të hapë një sesion tjetër."
+	},
+	"tip_11": {
+		"message": "Mund ta ndryshosh sjelljen e tasteve/shkurtoreve: https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "Përdor Yubikeys dhe karta të tjera inteligjente për vërtetimin e SSH-së: https://goo.gl/Hu2o3v"
+	},
+	"tip_13": {
+		"message": "Shfaq imazhet e ndërfutura: https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "Mbajtja shtypur e tastit Ctrl (Cmd në macOS) kur klikon me të djathtin hap një meny kontekstuale."
+	},
+	"tip_2": {
+		"message": "Shfaq njoftimet në shfletues duke përdorur hterm-notify: https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "Lidhu nga shiriti omnibox duke shkruar \"ssh <emri i profilit>\": https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Sistemi operativ i Chrome mund të montojë sisteme skedarësh përmes SFTP dhe të shfletojë përmes aplikacionit Files. Përdor \"Montimi i protokollit SFTP\" në vend të \"Lidhu\"."
+	},
+	"tip_5": {
+		"message": "Lidhu duke përdorur lidhjet ssh:// në faqet e uebit ose ruaj një faqeshënues: https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "Përdor ngjyrën për daljen/kërkesën duke përdorur 16 ngjyrat bazë dhe 256 ngjyrat dhe ngjyrat e plota me 24 bite: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "Kopjo te kujtesa e fragmenteve nga emacs/vim/etc... duke përdorur OSC-52: https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "Bisedo me përdoruesit e hterm/Secure Shell që ke shokë nëpërmjet chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "Gjete një defekt në kod?  Kërko një veçori të re?  Na trego: https://goo.gl/vb94JY"
+	},
+	"unexpected_error": {
+		"message": "Ndodhi një gabim i papritur. Kontrollo panelin e JavaScript-it për më shumë detaje."
+	},
+	"unknown_ssh_client_version": {
+		"message": "Version i panjohur i SSH: $1"
+	},
+	"unmount_button_label": {
+		"message": "Çmonto protokollin SFTP"
+	},
+	"welcome_changelog": {
+		"message": "ChangeLog/shënimet e versionit: $1"
+	},
+	"welcome_faq": {
+		"message": "Përgjigjet për pyetjet më të shpeshta: $1 (Ctrl+Kliko te lidhjet për t'i hapur)"
+	},
+	"welcome_release_highlights": {
+		"message": "Ndryshimet kryesore që nga $1:"
+	},
+	"welcome_tip_of_day": {
+		"message": "Këshillë profesionale e rastësishme nr. $1: $2"
+	},
+	"welcome_version": {
+		"message": "Mirë se erdhe në $1 versioni $2."
+	},
+	"write_size_label": {
+		"message": "Madhësia e shkrimit (KiB)"
+	},
+	"zoom_warning": {
+		"message": "Cakto Menyja e Chrome->Zmadho në 100%"
+	}
+}

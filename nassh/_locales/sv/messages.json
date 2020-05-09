@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Ta emot kodning"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Skärmens utfyllnadsstorlek"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Scrolla längst ned efter tangenttryckning"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Automatiskt markeringsstopp (till höger)"
 	},
+	"hterm_options_button_label": {
+		"message": "Alternativ"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Infogade bilder"
 	},
@@ -363,7 +369,7 @@
 		"message": "När detta alternativ har ställts in åsidosätts ommappningen av Alt+Backsteg till Delete i Chrome OS så att kombinationen Alt+Backsteg verkligen ger Alt+Backsteg."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Välj heuristisk metod för identifiering av AltGr-tangent.\n\n'null': Automatisk identifiering utifrån navigator.language:\n      'en-us' => 'none', övriga => 'right-alt'\n'none': Inaktivera alla AltGr-relaterade ändringar.\n'ctrl-alt': Anta att Ctrl+Alt används som AltGr.\n'left-alt': Anta att vänster Alt-tangent används som AltGr.\n'right-alt': Anta att höger Alt-tangent används som AltGr."
+		"message": "Välj heuristisk metod för identifiering av AltGr-tangent.\n\n'null': Automatisk identifiering utifrån navigator.language:\n      'en-us' => 'none', övriga => 'right-alt'\n'none': Inaktivera all AltGr-emulering.\n'ctrl-alt': Anta att Ctrl+Alt används som AltGr.\n'left-alt': Anta att vänster Alt-tangent används som AltGr.\n'right-alt': Anta att höger Alt-tangent används som AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Om Alt-tangenten används som Meta-tangent eller som Alt-tangent."
@@ -450,7 +456,7 @@
 		"message": "Tillåt fjärrvärden att skrivas direkt i Urklipp på det lokala systemet.\nLäsbehörighet medges aldrig, oavsett denna inställning.\n\nDetta används för att styra funktioner som OSC-52."
 	},
 	"hterm_pref_enable_csi_j_3": {
-		"message": "Om CSI-J-kommandot (rensa skärmen) med 3 som argument (rensa sparade rader) får rensa terminalens bakåtrullningsbuffert.\n\nDet är säkert att aktivera detta som standard."
+		"message": "Om CSI-J-kommandot (rensa skärmen) med 3 som argument (rensa sparade rader) får rensa terminalens bakåtscrollningsbuffert.\n\nDet är säkert att aktivera detta som standard."
 	},
 	"hterm_pref_enable_dec12": {
 		"message": "Följ ändringar av textmarkörens blinkstatus som görs på värden med DEC:s privata läge 12."
@@ -474,7 +480,7 @@
 		"message": "Förgrundsfärg för text utan andra färgattribut."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Om muspekaren ska döljas automatiskt när tangentbordet används. Standardinställningen är att identifiera automatiskt om plattformen/operativsystemet hanterar detta.\n\nObs! Inställningen kan åsidosättas i vissa operativsystem. I så fall går det kanske inte att inaktivera den permanent."
+		"message": "Om muspekaren ska döljas automatiskt när tangentbordet används. Standardinställningen är att identifiera automatiskt om plattformen/operativsystemet hanterar detta.\n\nObs! Inställningen kanske åsidosätts i operativsystemet. I så fall går det kanske inte att inaktivera den permanent."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "När detta är inställt på sant styr tangenterna Home/End terminalens rullningslist och teckensekvenserna Skift + Home/End skickas till den virtuella terminalen. Med inställningen falskt skickas Home/End till fjärrvärden och Skift + Home/End används för att scrolla."
@@ -522,13 +528,16 @@
 		"message": "Om Meta+1–9 ska skickas till webbläsaren eller inte.\n\nDetta är praktiskt om du kör hterm på en webbläsarflik så att du kan fortsätta att använda Chromes kortkommandon för att byta flik. Om hterm inte körs på en flik är det bättre att skicka tangenttryckningarna till värden, så de kan användas i vim eller emacs.\n\nNär detta är inställt på sant hanteras Meta+1–9 i webbläsaren. Med inställningen falskt skickas Meta+1–9 till värden. Om inställningen lämnas utan värde används automatisk identifiering utifrån webbläsarplattform och fönstertyp."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Om Meta+V ska skickas till fjärrvärden eller inte."
+		"message": "Om Meta+V ska skickas till webbläsaren eller inte.\n\nDetta används till att klistra in innehåll i vissa system."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "När detta är inställt på sant klistras text in i terminalen när du drar och släpper.\nMed inställningen falskt ignoreras texten som släpps."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Ange den förväntade teckenkodningen för data från värden.Om teckenkodningarna inte stämmer överens blir det sannolikt problem med visningen av vissa tecken.\n\nDe giltiga värdena är utf-8 och raw."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Utfyllnadsstorlek i pixlar för terminalskärmens kant.\n\nDetta styr kantstorleken för terminalskärmen så att användare kan lägga till synlig utfyllnad i skärmens kanter."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Scrolla längst ned varje gång en tangent trycks ned."
@@ -537,10 +546,10 @@
 		"message": "Scrolla längst ned vid utdata från terminalen."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "När du använder den alternativa skärmbufferten och DECCKM (Application Cursor Keys) har aktiverats används mushjulet för att emulera piltangenterna.\n\nDu kan inaktivera detta tillfälligt genom att hålla ned Skift.\n\nDetta behövs ofta vid användning av program som visar en sida i taget (t.ex. less), vid läsning av manualsidor med man, i textredigerare (vi, nano), eller med screen/tmux."
+		"message": "När du använder den alternativa skärmbufferten och DECCKM (Application Cursor Keys) har aktiverats används musens scrollhjul för att emulera piltangenterna.\n\nDu kan inaktivera detta tillfälligt genom att hålla ned Skift.\n\nDetta behövs ofta vid användning av program som visar en sida i taget (t.ex. less), vid läsning av manualsidor med man, i textredigerare (vi, nano), eller med screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Multiplikator för rullningshjulshändelser som mäts i pixlar.\n\nDetta ändrar hur snabbt sidan rullas."
+		"message": "Multiplikator för musens scrollhjulshändelser som mäts i pixlar.\n\nDetta ändrar hur snabbt sidan scrollas."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Läge för den lodräta rullningslisten."
@@ -821,9 +830,6 @@
 	"new_window_menu_label": {
 		"message": "Nytt fönster"
 	},
-	"notify_copy": {
-		"message": "Valet har kopierats"
-	},
 	"ok_button_label": {
 		"message": "OK"
 	},
@@ -832,9 +838,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Tips] Du kan förhindra att Ctrl+W stänger terminalen genom att använda Öppna som fönster eller Helskärm.\n[Tips] Mer information finns på $1."
-	},
-	"options_button_label": {
-		"message": "Alternativ"
 	},
 	"plugin_loading": {
 		"message": "Läser in plugin-programmet NaCl ..."
@@ -899,6 +902,9 @@
 	"save_label": {
 		"message": "Spara"
 	},
+	"send_feedback_label": {
+		"message": "Skicka feedback"
+	},
 	"shortcut_list_aria_label": {
 		"message": "sparade anslutningar"
 	},
@@ -913,6 +919,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Rensa terminal"
+	},
+	"terminal_font_unavailable": {
+		"message": "$1 är inte tillgängligt"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-färger"
@@ -941,6 +950,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Synlig"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Välj heuristisk metod för identifiering av AltGr-tangent.\n\n'Auto': Automatisk identifiering utifrån navigator.language:\n      'en-us' => 'Inaktivera', övriga => 'right-alt'\n'Inaktivera': Inaktivera all AltGr-emulering.\n'ctrl-alt': Anta att Ctrl+Alt används som AltGr.\n'left-alt': Anta att vänster Alt-tangent används som AltGr.\n'right-alt': Anta att höger Alt-tangent används som AltGr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Ange färger för standardpaletten."
 	},
@@ -955,6 +967,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Återställ terminal"
+	},
+	"terminal_settings_about_label": {
+		"message": "Om"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Webbadress för bakgrundsbild. Måste börja med http:// eller https://. En tom sträng ger ingen bild.\n\nExempel:\n  https://goo.gl/anedTK"
@@ -1075,6 +1090,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Tema"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Anslut till internet och försök igen."
 	},
 	"tip_1": {
 		"message": "Du kan hålla ned Ctrl (Cmd på macOS) när du klickar på länkar för att öppna dem."

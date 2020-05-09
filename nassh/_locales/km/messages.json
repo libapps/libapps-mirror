@@ -1,0 +1,1181 @@
+{
+	"already_mounted_message": {
+		"message": "បានភ្ជាប់ប្រព័ន្ធឯកសាររួចហើយ!"
+	},
+	"backup_prefs": {
+		"message": "រក្សាទុកការបម្រុងទុក"
+	},
+	"bad_destination": {
+		"message": "មិនអាចញែកគោលដៅបានទេ៖ $1"
+	},
+	"before_unload": {
+		"message": "ការបិទផ្ទាំងនេះនឹងផ្តាច់វគ្គនេះ។"
+	},
+	"cache_pin_prompt": {
+		"message": "ផ្ទុកទិន្នន័យកូដ PIN សម្រាប់វគ្គ SSH នេះឬ? (y/N)៖"
+	},
+	"cancel_button_label": {
+		"message": "បោះបង់"
+	},
+	"changelog": {
+		"message": "កំណត់ហេតុ​នៃការ​ផ្លាស់ប្ដូរ"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "សម្អាតម៉ាស៊ីនដែលស្គាល់ SSH"
+	},
+	"clear_label": {
+		"message": "សម្អាត"
+	},
+	"command_complete": {
+		"message": "ពាក្យបញ្ជា $1 បានចាកចេញដោយប្រើលេខកូដស្ថានភាព $2។"
+	},
+	"command_not_supported": {
+		"message": "$1 មិនអាចប្រើនៅក្នុង​កំណែ Chrome នេះបានទេ"
+	},
+	"command_startup_failed": {
+		"message": "ការចាប់ផ្តើម $1 មិនបានសម្រេចទេ៖ $2"
+	},
+	"connect_button_label": {
+		"message": "ភ្ជាប់"
+	},
+	"connect_or_exit_message": {
+		"message": "(C) ជ្រើសរើសការតភ្ជាប់ផ្សេងទៀត ឬ (X) ចាកចេញ?"
+	},
+	"connecting": {
+		"message": "កំពុងភ្ជាប់ទៅ $1..."
+	},
+	"connection_dialog_name": {
+		"message": "ប្រអប់តភ្ជាប់"
+	},
+	"console_crosh_options_notice": {
+		"message": "តើអ្នកបានដឹងថាមានទំព័រជម្រើស​ដាច់ដោយឡែកដែរទេ?\nមិនចាំបាច់កែប្រែ 'term_' ដោយផ្ទាល់ទៀតទេ!\nចុច $1 ដើម្បីបើកវា ឬចុច៖\n$2"
+	},
+	"console_nassh_options_notice": {
+		"message": "តើអ្នកបានដឹងថាមានទំព័រជម្រើស​ដាច់ដោយឡែកដែរទេ?\nមិនចាំបាច់កែប្រែ 'term_' ដោយផ្ទាល់ទៀតទេ!\n$1"
+	},
+	"delete_button_label": {
+		"message": "លុប"
+	},
+	"disconnect_message": {
+		"message": "កម្មវិធីជំនួយ NaCl បានចាកចេញដោយប្រើលេខកូដស្ថានភាព $1។"
+	},
+	"faq_menu_label": {
+		"message": "សំណួរ​ដែល​សួរ​ញឹកញាប់"
+	},
+	"field_argstr_placeholder": {
+		"message": "អញ្ញត្តិជួរពាក្យបញ្ជាបន្ថែម"
+	},
+	"field_description_aria_label": {
+		"message": "ការពណ៌នា"
+	},
+	"field_description_placeholder": {
+		"message": "username@hostname ឬអក្សរទម្រង់សេរី"
+	},
+	"field_hostname_aria_label": {
+		"message": "ឈ្មោះ​ម៉ាស៊ីន"
+	},
+	"field_hostname_placeholder": {
+		"message": "ឈ្មោះ​ម៉ាស៊ីន"
+	},
+	"field_mount_path_placeholder": {
+		"message": "ផ្លូវលំនាំដើមគឺជាបញ្ជីប្រព័ន្ធឯកសាររបស់អ្នកប្រើប្រាស់"
+	},
+	"field_nassh_options_aria_label": {
+		"message": "ជម្រើសម៉ាស៊ីនមេបញ្ជូនបន្ត SSH"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "ជម្រើសម៉ាស៊ីនមេបញ្ជូនបន្ត SSH"
+	},
+	"field_port_aria_label": {
+		"message": "ច្រក"
+	},
+	"field_port_placeholder": {
+		"message": "ច្រក"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "លំនាំដើម"
+	},
+	"field_username_aria_label": {
+		"message": "ឈ្មោះ​អ្នក​ប្រើប្រាស់"
+	},
+	"field_username_placeholder": {
+		"message": "ឈ្មោះ​អ្នក​ប្រើប្រាស់"
+	},
+	"found_relay": {
+		"message": "បានរកឃើញម៉ាស៊ីនមេបញ្ជូនបន្ត៖ $1"
+	},
+	"get_profile_error": {
+		"message": "បញ្ហា៖ មិន​អាចផ្ទុក​កម្រងព័ត៌មាន $1 បានទេ៖\n$2"
+	},
+	"hterm_announce_current_screen_header": {
+		"message": "បានរំកិល $1%"
+	},
+	"hterm_button_allow_always": {
+		"message": "អនុញ្ញាត​ជា​និច្ច"
+	},
+	"hterm_button_allow_session": {
+		"message": "អនុញ្ញាតវគ្គនេះ"
+	},
+	"hterm_button_block": {
+		"message": "ទប់ស្កាត់"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "ការផ្ទុក $1 ​មិន​បាន​សម្រេច​ទេ"
+	},
+	"hterm_loading_resource_start": {
+		"message": "កំពុង​ផ្ទុក $1 ..."
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "អនុញ្ញាតឱ្យបង្ហាញរូបភាពក្នុងជួរ"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Backspace ស្មើនឹង Meta+Backspace"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "មុខងារគ្រាប់ចុច AltGr"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "ចាត់ទុកគ្រាប់ចុច Alt ជាគ្រាប់ចុច Meta"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "ការចាត់ចែងឧបករណ៍កែសម្រួលគ្រាប់ចុច Alt"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "សំឡេងកណ្ដឹងជូនដំណឹង (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "ពណ៌​ផ្ទៃ​ខាង​ក្រោយ"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "រូបភាព​ផ្ទៃ​ខាង​ក្រោយ"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "ទីតាំងរូបភាព​ផ្ទៃ​ខាង​ក្រោយ"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "ទំហំរូបភាព​ផ្ទៃ​ខាង​ក្រោយ"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "សកម្មភាពគ្រាប់ចុច Backspace"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "ផែនទីតួ​អក្សរ​លុបពីលើ"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "សម្អាតការជ្រើសរើស​អក្សរដោយស្វ័យប្រវត្តិ"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "បិទវិនដូនៅពេលចាកចេញ"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "ក្ដារ​លាយ​ពណ៌ដំបូង"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "ចម្លងខ្លឹមសារ​ដែលបានជ្រើសរើស​ដោយស្វ័យប្រវត្តិ"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "សកម្មភាពចម្លង Ctrl+C"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "សកម្មភាពពង្រីកបង្រួម Ctrl++/-/0"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "សកម្មភាពដាក់ចូល Ctrl+V"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "ពន្លឺភ្លឹបភ្លែតរបស់ទស្សន៍ទ្រនិច​"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "អត្រាបញ្ចេញពន្លឺភ្លឹបភ្លែតរបស់ទស្សន៍ទ្រនិច​"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "ពណ៌ទស្សន៍ទ្រនិច​អក្សរ"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "រូបរាងទស្សន៍ទ្រនិច​អក្សរ"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "បង្កើត​ការជូនដំណឹង​នៅលើអេក្រង់ដើមសម្រាប់កណ្ដឹងជូនដំណឹង"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian Ambiguous ប្រើជួរឈរពីរ"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "អាចប្រើតួអក្សរគ្រប់គ្រងដែលមិនមែនជា UTF-8 C1"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "បើកអក្សរបញ្ចេញពន្លឺភ្លឹបភ្លែត"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "សកម្មភាព​អក្សរដិត"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "ប្រើពណ៌ភ្លឺ​ជាមួយអក្សរដិត"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "បង្ហាញការជូនដំណឹង នៅពេលចម្លងខ្លឹមសារ"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "អនុញ្ញាតឱ្យឃ្លីបបតពីចម្ងាយសរសេរ"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "អនុញ្ញាតឱ្យសម្អាតកន្លែងផ្ទុកការរំកិលថយក្រោយ (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "អនុញ្ញាតឱ្យប្ដូរ​ពន្លឺភ្លឹបភ្លែតរបស់ទស្សន៍ទ្រនិច​អក្សរ"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "បង្ហាញទំហំស្ថានីយ នៅពេលប្ដូរទំហំ"
+	},
+	"hterm_name_pref_environment": {
+		"message": "អថេរមជ្ឈដ្ឋាន"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "អំបូរ​ពុម្ពអក្សរ"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "ទំហំ​ពុម្ព​អក្សរ​"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "ការធ្វើឱ្យ​ពុម្ពអក្សរម៉ត់"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "ពណ៌អក្សរ"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "លាក់ទស្សន៍ទ្រនិចកណ្ដុរ​ នៅពេលវាយបញ្ចូល"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "សកម្មភាពរំកិលគ្រាប់ចុច Home/End"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "ផ្លូវកាត់/ការចង​ក្ដារចុច"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "ប្រើផ្លូវកាត់/ការចងក្ដារចុចប្រព័ន្ធប្រតិបត្តិការលំនាំដើម"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "គ្រាប់ចុចមេឌៀគឺ Fkey"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "ការចាត់ចែងឧបករណ៍កែសម្រួលគ្រាប់ចុច Meta"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "ប៊ូតុង​កណ្ដុរ​សម្រាប់ដាក់ចូល"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "ការចុចកណ្ដុរខាងស្ដាំនឹងដាក់ចូលខ្លឹមសារ"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "សកម្មភាពរំកិលគ្រាប់ចុច Page Up/Down"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "សកម្មភាពប្ដូរ​ផ្ទាំង Alt+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "សកម្មភាពវិនដូថ្មី Ctrl+N"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "សកម្មភាពប្ដូរផ្ទាំង Ctrl+1..9"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "សកម្មភាពផ្ទាំងថ្មី Ctrl+T"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "សកម្មភាពប្ដូរ​ផ្ទាំង Ctrl+Tab"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "សកម្មភាពបិទផ្ទាំង Ctrl+W"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "សកម្មភាពប្ដូរផ្ទាំង Meta+1..9"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "សកម្មភាពដាក់ចូល Meta+V"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "អនុញ្ញាតឱ្យអូស​ហើយ​ទម្លាក់ ដើម្បីដាក់ចូល"
+	},
+	"hterm_name_pref_receive_encoding": {
+		"message": "ទទួលការបំប្លែងកូដ"
+	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "ទំហំស៊ុមគែមអេក្រង់"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "រំកិលទៅផ្នែកខាងក្រោម បន្ទាប់ពីចុចគ្រាប់ចុច"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "រំកិលទៅផ្នែកខាងក្រោម បន្ទាប់ពីបង្ហាញលទ្ធផលថ្មី"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "ធ្វើត្រាប់តាមគ្រាប់ចុចព្រួញដែលមានកងរំកិល"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "មេគុណកងរំកិល​កណ្ដុរ"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "លទ្ធភាពមើលឃើញរបាររំកិល"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Shift+Insert ដាក់ចូល"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "ការបំប្លែងកូដស្ថានីយ"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "អនុញ្ញាតឱ្យកម្មវិធីរុករកតាមអ៊ីនធឺណិតចាត់ចែងការចម្លងអត្ថបទ"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "CSS ផ្ទាល់ខ្លួន (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "CSS ផ្ទាល់ខ្លួន (អក្សរក្នុងជួរ)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "ការបញ្ឈប់​ការជ្រើសរើសដោយស្វ័យប្រវត្តិ (ទៅឆ្វេង)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "តួ​អក្សរ​បំបែកពាក្យ"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "ការបញ្ឈប់​ការជ្រើសរើសដោយស្វ័យប្រវត្តិ (ទៅស្ដាំ)"
+	},
+	"hterm_options_button_label": {
+		"message": "ជម្រើស"
+	},
+	"hterm_popup_inline_image": {
+		"message": "រូបភាពក្នុងជួរ"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "បានបិទរូបភាពក្នុងជួរ"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "ថាតើត្រូវអនុញ្ញាតឱ្យម៉ាស៊ីនពីចម្ងាយ​បង្ហាញរូបភាពនៅក្នុងស្ថានីយឬអត់។\n\nតាមលំនាំដើម យើងជំរុញរហូតទាល់តែធ្វើការជ្រើសរើសរួច។"
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "ប្រសិនបើកំណត់ ត្រឡប់ការកំណត់វិញចំពោះ Alt+Backspace->លុបការកំណត់មុខងារគ្រាប់ចុចឡើងវិញរបស់ Chrome OS ដើម្បីឱ្យ Alt+Backspace ក្លាយជា Alt+Backspace ពិតប្រាកដ។"
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "ជ្រើសរើសការចាប់ឬរកឃើញ AltGr ដោយស្វ័យប្រវត្តិ។\n\n'null'៖ ការចាប់ឬរកឃើញដោយស្វ័យប្រវត្តិគឺផ្អែកលើ navigator.language៖\n      'en-us' => 'none', ផ្សេងទៀត => 'right-alt'\n'none'៖ បិទការត្រាប់តាម AltGr ទាំងឡាយ។\n'ctrl-alt'៖ សន្មតថា Ctrl+Alt មានន័យថា AltGr។\n'left-alt'៖ សន្មតថា Alt ខាងឆ្វេងមានន័យថា AltGr។\n'right-alt'៖ សន្មតថា Alt ខាងស្ដាំមានន័យថា AltGr។"
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "ថាតើគ្រាប់ចុច Alt ដំណើរការជាគ្រាប់ចុច Meta ឬជាគ្រាប់ចុច Alt ច្បាស់លាស់ឬអត់។"
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "គ្រប់គ្រងរបៀបចាត់ចែងគ្រាប់ចុច Alt។\n\n  escape៖ បញ្ជូនបុព្វបទ ESC។\n  8-bit៖ បញ្ចូល 128 ទៅក្នុងតួអក្សរដែលបានវាយបញ្ចូលដូចនៅក្នុង xterm។\n browser-key៖ រង់ចាំដល់ពេលចុចគ្រាប់ចុច រួចមើលអ្វីដែលកម្មវិធីរុករកតាមអ៊ីនធឺណិត\n និយាយ។ (វានឹងមិនដំណើរការបានល្អនៅលើប្រព័ន្ធ ដែលកម្មវិធីរុករកតាមអ៊ីនធឺណិត\n ដំណើរការសកម្មភាពលំនាំដើមសម្រាប់លំដាប់ Alt មួយចំនួនទេ។)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "URL នៃសំឡេងកណ្ដឹងស្ថានីយ។ ទុកឱ្យទទេ ដើម្បីបញ្ជាក់ថាគ្មានកណ្ដឹងមានសំឡេងទេ។"
+	},
+	"hterm_pref_background_color": {
+		"message": "ពណ៌ផ្ទៃខាងក្រោយសម្រាប់អក្សរ ដែលគ្មានលក្ខណៈពណ៌ផ្សេងទៀត។"
+	},
+	"hterm_pref_background_image": {
+		"message": "តម្លៃ CSS នៃរូបភាពផ្ទៃខាងក្រោយ។ ទុកឱ្យទទេ ដើម្បីបញ្ជាក់ថាគ្មានរូបភាព។\n\nឧទាហរណ៍៖\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "តម្លៃ CSS នៃទីតាំងរូបភាព​ផ្ទៃ​ខាង​ក្រោយ។\n\nឧទាហរណ៍៖\n  10% 10%\n  កណ្ដាល"
+	},
+	"hterm_pref_background_size": {
+		"message": "តម្លៃ CSS នៃទំហំរូបភាព​ផ្ទៃ​ខាង​ក្រោយ។"
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "ប្រសិនបើពិត នោះគ្រាប់ចុច Backspace នឹងបញ្ជូន BS ('\\x08' ដែលអាចហៅម្យ៉ាងទៀតថា ^H)។ បើ​មិនដូច្នោះទេ គ្រាប់ចុច Backspace នឹងបញ្ជូន '\\x7f'។"
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "វាត្រូវបានបញ្ជាក់ថាជាវត្ថុមួយ។ វាគឺជាការរៀបចំតាមលំដាប់តូចមួយ ដែលធាតុនីមួយៗគឺជាកូដសំណុំ​តួអក្សរ ហើយតម្លៃគឺជាវត្ថុមួយ ដែលជាការរៀបចំតាមលំដាប់តូចរបស់វាដោយផ្ទាល់។ នៅក្នុងការរៀបចំតាមលំដាប់តូចនោះ ធាតុនីមួយៗគឺជាតួអក្សរដែលបានទទួល ហើយតម្លៃគឺជាតួអក្សរដែលបានបង្ហាញ។\n\nឧទាហរណ៍៖\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "ថាតើត្រូវសម្អាតការជ្រើសរើស បន្ទាប់ពីចម្លងឬអត់។"
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "ថាតើត្រូវបិទវិនដូ នៅពេលពាក្យបញ្ជាបញ្ចប់ប្រតិបត្តិការឬអត់។"
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "លុបពីលើពណ៌នៅក្នុងក្ដារ​លាយ​ពណ៌លំនាំដើម។\n\nអាចបញ្ជាក់វា​ថាជាការរៀបចំតាមលំដាប់ ឬវត្ថុមួយ។ ប្រសិនបើបញ្ជាក់ថាជាវត្ថុមួយ វាត្រូវបានសន្មតថាជាការរៀបចំតាមលំដាប់តូចមួយ ដែលធាតុនីមួយៗគឺជាសន្ទស្សន៍លេខ នៅក្នុងក្ដារ​លាយ​ពណ៌។\n\nអាចបញ្ជាក់ថាជាតម្លៃស្ទើរគ្រប់តម្លៃពណ៌ CSS ទាំងអស់។ តម្លៃនេះរួមមាន #RGB, #RRGGBB, rgb(...), rgba(...) និងឈ្មោះ​ពណ៌ទាំងឡាយ ដែលជាផ្នែកនៃឯកសារ X11 rgb.txt ស្ដង់ដារ​ផងដែរ។\n\nអ្នកអាចប្រើ 'null' ដើម្បីបញ្ជាក់ថា មិនគួរផ្លាស់ប្ដូរតម្លៃលំនាំដើមនោះទេ។ ការបញ្ជាក់នេះមានប្រយោជន៍​ក្នុងការរំលងសន្ទស្សន៍មួយចំនួនតូច នៅពេលតម្លៃត្រូវបានបញ្ជាក់​ថាជាការរៀបចំតាមលំដាប់។\n\nឧទាហរណ៍ តម្លៃទាំងពីរនេះកំណត់​សន្ទស្សន៍ពណ៌ទី 1 ទៅពណ៌ខៀវ៖\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "ចម្លងការជ្រើសរើស​របស់កណ្ដុរ​ទៅឃ្លីបបតដោយស្វ័យប្រវត្តិ។"
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Ctrl+C ចម្លង ប្រសិនបើពិត, បញ្ជូន ^C ទៅម៉ាស៊ីន ប្រសិនបើមិនពិត។\nCtrl+Shift+C បញ្ជូន ^C ទៅម៉ាស៊ីន ប្រសិនបើពិត, ចម្លង ប្រសិនបើមិនពិត។"
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "ប្រសិនបើពិត នោះ Ctrl+Plus/Minus/Zero នឹងគ្រប់គ្រងការពង្រីកបង្រួម។\nប្រសិនបើមិនពិត នោះ Ctrl+Shift+Plus/Minus/Zero នឹងគ្រប់គ្រងការពង្រីកបង្រួម, Ctrl+Minus នឹងបញ្ជូន ^_, Ctrl+Plus/Zero នឹងមិនធ្វើសកម្មភាពអ្វីទាំងអស់។"
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Ctrl+V ដាក់ចូល ប្រសិនបើពិត, បញ្ជូន ^V ទៅម៉ាស៊ីន ប្រសិនបើមិនពិត។\nCtrl+Shift+V បញ្ជូន ^V ទៅម៉ាស៊ីន ប្រសិនបើពិត, ដាក់ចូល​ ប្រសិនបើមិនពិត។"
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "ថាតើទស្សន៍ទ្រនិច​អក្សរ​បញ្ចេញពន្លឺភ្លឹបភ្លែតតាមលំនាំដើមឬអត់។ អាចបិទ/បើកវានៅពេលដំណើរការតាមរយៈលំដាប់គេចរបស់ស្ថានីយ។"
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "អត្រាបញ្ចេញពន្លឺភ្លឹបភ្លែតរបស់ទស្សន៍ទ្រនិចអក្សរក្នុងរយៈពេលជាមិល្លីវិនាទី។\n\nមានការរៀបចំតាមលំដាប់នៃធាតុពីរ ដោយទីមួយគឺរយៈពេលដែលគួរបើកទស្សន៍ទ្រនិច​អក្សរ ហើយទីពីរគឺរយៈពេលដែលគួរបិទទស្សន៍ទ្រនិច​អក្សរនោះ។"
+	},
+	"hterm_pref_cursor_color": {
+		"message": "ពណ៌នៃទស្សន៍ទ្រនិច​អក្សរដែលអាចមើលឃើញ។"
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "រូបរាងទស្សន៍ទ្រនិច​អក្សរដែលអាចមើលឃើញ។ អាចផ្លាស់ប្ដូរវានៅពេលដំណើរការតាមរយៈលំដាប់គេចរបស់ស្ថានីយ។"
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "ប្រសិនបើពិត នោះកណ្ដឹងស្ថានីយនៅផ្ទៃខាងក្រោយនឹងបង្កើតការជូនដំណឹងបណ្ដាញមួយ។ https://www.w3.org/TR/notifications/\n\nការបង្ហាញការជូនដំណឹង​តម្រូវឱ្យមានការអនុញ្ញតពីអ្នកប្រើប្រាស់។ នៅពេលជម្រើសនេះត្រូវបានកំណត់ទៅពិត នោះ hterm នឹងព្យាយាមស្នើសុំការអនុញ្ញាតពីអ្នកប្រើប្រាស់ ប្រសិនបើចាំបាច់។ កម្មវិធីរុករកតាមអ៊ីនធឺណិតអាចនឹងមិនបង្ហាញសំណើសុំការអនុញ្ញាតនេះទេ ប្រសិនបើវាមិនមានការជំរុញពីសកម្មភាពរបស់អ្នកប្រើប្រាស់។\n\nកម្មវិធីបន្ថែមលើ Chrome ដែលមាន​ការអនុញ្ញាត \"ការជូនដំណឹង\" មានការអនុញ្ញាតបង្ហាញការជូនដំណឹង។"
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "ថាតើតួអក្សរ East Asian Ambiguous មានទទឹងជួរឈរពីរឬអត់។"
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "ប្រសិនបើពិត បើក​តួអក្សរគ្រប់គ្រង 8-bit, ប្រសិនបើមិនពិត មិនអើពើលើតួអក្សរទាំងនោះទេ។\n\nយើងនឹងគោរពតាមកំណែពីរបៃនៃតួអក្សរគ្រប់គ្រងទាំងនេះ ទោះបីជាការកំណត់នេះមានលក្ខណៈដូចម្ដេចក៏ដោយ។"
+	},
+	"hterm_pref_enable_blink": {
+		"message": "ប្រសិនបើពិត គោរពលក្ខណៈរបស់ពន្លឺភ្លឹបភ្លែត។ ប្រសិនបើមិនពិត លក្ខណៈនេះនឹងមិនត្រូវបានអើពើទេ។"
+	},
+	"hterm_pref_enable_bold": {
+		"message": "ប្រសិនបើពិត ប្រើពុម្ព​អក្សរ​កម្រាស់ដិតសម្រាប់អក្សរដែលមានលក្ខណៈដិត/ភ្លឺ។ ប្រសិនបើមិនពិត ប្រើពុម្ព​អក្សរកម្រាស់ធម្មតា។ ប្រសិនបើ Null ប្រើការចាប់ឬរកឃើញដោយស្វ័យប្រវត្តិ។"
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "ប្រសិនបើពិត ប្រើពណ៌ភ្លឺ (8-15 នៅលើក្ដារ​លាយ​ពណ៌ 16 ពណ៌) សម្រាប់អក្សរដែលមានលក្ខណៈដិត។ ប្រសិនបើមិនពិត ការកំណត់នឹងខុសពីនេះ។"
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "ថាតើត្រូវបង្ហាញសារនៅក្នុងស្ថានីយឬអត់ នៅពេលម៉ាស៊ីនសរសេរទៅកាន់ឃ្លីបបត។"
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "អនុញ្ញាតឱ្យម៉ាស៊ីនពីចម្ងាយសរសេរដោយផ្ទាល់ទៅក្នុងឃ្លីបបតរបស់ប្រព័ន្ធមូលដ្ឋាន។\nមិនផ្ដល់សិទ្ធិឱ្យចូលអានទេ ទោះបីជាការកំណត់នេះមានលក្ខណៈដូចម្ដេចក៏ដោយ។\n\nវាត្រូវបានប្រើ ដើម្បីគ្រប់គ្រងការចូលប្រើមុខងារផ្សេងៗដូចជា OSC-52 ជាដើម។"
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "ថាតើ​មុខងារ \"លុបជួរដែលបានរក្សាទុក\" (មុខងារទី 3) នៃពាក្យបញ្ជា \"លុបការបង្ហាញ\" (CSI-J) អាចសម្អាតកន្លែងផ្ទុកការរំកិលថយក្រោយរបស់ស្ថានីយឬអត់។\n\nការបើក​មុខងារនេះតាមលំនាំដើមមិនមានគ្រោះថ្នាក់ទេ។"
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "គោរព​លើការព្យាយាមរបស់ម៉ាស៊ីនក្នុងការផ្លាស់ប្ដូរ​ស្ថានភាពបញ្ចេញពន្លឺភ្លឹបភ្លែត​របស់ទស្សន៍ទ្រនិច​អក្សរ ដោយប្រើមុខងារឯកជន DEC 12។"
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "ថាតើត្រូវបង្ហាញ​ទំហំស្ថានីយឬអត់ នៅពេលស្ថានីយនោះប្ដូរទំហំ។"
+	},
+	"hterm_pref_environment": {
+		"message": "សំណុំចាប់ផ្ដើមនៃអថេរមជ្ឈដ្ឋាន ជាវត្ថុមួយ។"
+	},
+	"hterm_pref_font_family": {
+		"message": "អំបូរ​ពុម្ពអក្សរលំនាំដើម​សម្រាប់អក្សររបស់ស្ថានីយ។"
+	},
+	"hterm_pref_font_size": {
+		"message": "ទំហំពុម្ពអក្សរលំនាំដើមជាភីកសែល។"
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "ធាតុធ្វើឱ្យពុម្ពអក្សរ CSS ម៉ត់។"
+	},
+	"hterm_pref_foreground_color": {
+		"message": "ពណ៌ផ្ទៃខាងមុខសម្រាប់អក្សរ ដែលគ្មានលក្ខណៈពណ៌ផ្សេងទៀត។"
+	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "ថាតើត្រូវលាក់ទស្សន៍ទ្រនិច​កណ្ដុរដោយស្វ័យប្រវត្តិ នៅពេលវាយបញ្ចូលឬអត់។ តាមលំនាំដើម ចាប់ឬរកឃើញដោយស្វ័យប្រវត្តិថាតើប្រព័ន្ធ/ប្រព័ន្ធ​ប្រតិបត្តិការចាត់ចែងការកំណត់នេះឬអត់។\n\nចំណាំ៖ ប្រព័ន្ធ​ប្រតិបត្តិការរបស់អ្នក​អាចលុបពីលើការកំណត់នេះ ដូច្នេះអ្នកប្រហែលជាមិនអាចបិទវាបានជានិច្ចនោះទេ។"
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "ប្រសិនបើពិត នោះ Home/End នឹងគ្រប់គ្រងរបាររំកិលស្ថានីយ ហើយ Shift+Home/Shift+End ត្រូវបានបញ្ជូនទៅម៉ាស៊ីនពីចម្ងាយ។ ប្រសិនបើមិនពិត នោះ Home/End ត្រូវបានបញ្ជូនទៅម៉ាស៊ីនពីចម្ងាយ ហើយ Shift+Home/Shift+End នឹងរំកិល។"
+	},
+	"hterm_pref_keybindings": {
+		"message": "ផែនទីនៃលំដាប់គ្រាប់ចុចរហូតដល់សកម្មភាពគ្រាប់ចុច។ លំដាប់គ្រាប់ចុចរួមបញ្ចូលសូន្យ ឬប៊ូតុងឧបករណ៍កែសម្រួលច្រើនទៀត ដែលមានកូដគ្រាប់ចុចនៅបន្ទាប់ពីនោះ។ កូដគ្រាប់ចុចអាចជាលេខគោលដប់ប្រាំមួយ ឬលេខទសភាគ ឬព័ត៌មានសម្គាល់គ្រាប់ចុច។ អាចបញ្ជាក់សកម្មភាពគ្រាប់ចុចជាជួរអក្សរមួយ ដើម្បីបញ្ជូនទៅម៉ាស៊ីន ឬព័ត៌មានសម្គាល់សកម្មភាព។ សម្រាប់ការពន្យល់ពេញលេញអំពីទម្រង់ សូមមើល https://goo.gl/LWRndr។\n\nការចងគ្រាប់ចុចគំរូ៖\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'សួស្ដី ពិភពលោក'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "ថាតើគួរតែគោរពតាមការចងក្ដារចុចប្រព័ន្ធប្រតិបត្តិការទូទៅជំនួសឱ្យការថតការប្រើប្រាស់ផ្ទាល់របស់ hterm ជានិច្ចឬអត់។"
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "ប្រសិនបើពិត បំប្លែងគ្រាប់ចុចមេឌៀទៅ Fkey ដែលមានមុខងារដូចគ្នា។ ប្រសិនបើមិនពិត អនុញ្ញាតឱ្យកម្មវិធីរុករកតាមអ៊ីនធឺណិតចាត់ចែងគ្រាប់ចុចទាំងនោះ។"
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "បញ្ជូនបុព្វបទ ESC នៅពេលចុចគ្រាប់ចុច ពេលកំពុងចុចគ្រាប់ចុច Meta ឱ្យជាប់។\n\nឧទាហរណ៍ នៅពេលបើក នោះការចុច Meta+K នឹងបញ្ជូន ^[k ដូចដែលអ្នកវាយបញ្ចូល Escape រួច k ដូច្នោះដែរ។ នៅពេលបិទ នោះនឹងបញ្ជូនតែ k ប៉ុណ្ណោះ។"
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "ដាក់ចូលនៅពេលចុច​ប៊ូតុងកណ្ដុរខាងស្ដាំ។\n\nជម្រើសនេះគឺមានភាពឯករាជ្យ​ពីការកំណត់ \"mouse-paste-button\"។\n\nចំណាំ៖ ជម្រើសនេះនឹងចាត់ចែងកណ្ដុរខាងស្ដាំ និងខាងឆ្វេងបានយ៉ាងត្រឹមត្រូវ។"
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "ប្រសិនបើពិត នោះ Page Up/Page Down នឹងគ្រប់គ្រងរបាររំកិលស្ថានីយ ហើយ Shift+Page Up/Shift+Page Down ត្រូវបានបញ្ជូនទៅម៉ាស៊ីនពីចម្ងាយ។ ប្រសិនបើមិនពិត នោះ Page Up/Page Down ត្រូវបានបញ្ជូនទៅម៉ាស៊ីនពីចម្ងាយ ហើយ Shift+Page Up/Shift+Page Down នឹងរំកិល។"
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "ថាតើ Alt+1..9 ត្រូវបានបញ្ជូនទៅកម្មវិធីរុករកតាមអ៊ីនធឺណិតឬអត់។\n\nវាមានប្រយោជន៍ នៅពេលដំណើរការ hterm នៅក្នុងផ្ទាំងកម្មវិធីរុករកតាមអ៊ីនធឺណិត ដូច្នេះអ្នកមិនបាត់បង់ផ្លូវកាត់​ក្ដារ​ចុច \"ប្ដូរទៅផ្ទាំង\" របស់ Chrome ទេ។ នៅពេលមិនដំណើរការនៅក្នុងផ្ទាំងទេ គួរតែបញ្ជូនគ្រាប់ចុចទាំងនេះទៅម៉ាស៊ីន ដើម្បីអាចប្រើគ្រាប់ចុចទាំងនេះនៅក្នុង vim ឬ emacs។\n\nប្រសិនបើពិត នោះ Alt+1..9 នឹងត្រូវបានចាត់ចែងដោយ​កម្មវិធីរុករកតាមអ៊ីនធឺណិត។ ប្រសិនបើមិនពិត នោះ Alt+1..9 នឹងត្រូវបានបញ្ជូនទៅម៉ាស៊ីន។ ប្រសិនបើ null នោះការចាប់ឬរកឃើញដោយស្វ័យប្រវត្តិគឺផ្អែកលើប្រភេទវិនដូ និងប្រព័ន្ធកម្មវិធីរុករកតាមអ៊ីនធឺណិត។"
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "ថាតើ Ctrl+N ត្រូវបានបញ្ជូនទៅកម្មវិធីរុករកតាមអ៊ីនធឺណិតឬអត់។\n\nប្រសិនបើពិត នោះកម្មវិធីរុករកតាមអ៊ីនធឺណិត​នឹងចាត់ទុក Ctrl+N ជាផ្លូវកាត់ក្ដារចុច \"វិនដូថ្មី\"។ ប្រសិនបើមិនពិត នោះ Ctrl+N នឹងត្រូវបានបញ្ជូនទៅម៉ាស៊ីន។"
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "ថាតើ Ctrl+1..9 ត្រូវបានបញ្ជូនទៅកម្មវិធីរុករកតាមអ៊ីនធឺណិតឬអត់។\n\nវាមានប្រយោជន៍ នៅពេលដំណើរការ hterm នៅក្នុងផ្ទាំងកម្មវិធីរុករកតាមអ៊ីនធឺណិត ដូច្នេះអ្នកមិនបាត់បង់ផ្លូវកាត់​ក្ដារ​ចុច \"ប្ដូរទៅផ្ទាំង\" របស់ Chrome ទេ។ នៅពេលមិនដំណើរការនៅក្នុងផ្ទាំងទេ គួរតែបញ្ជូនគ្រាប់ចុចទាំងនេះទៅម៉ាស៊ីន ដើម្បីអាចប្រើគ្រាប់ចុចទាំងនេះនៅក្នុង vim ឬ emacs។\n\nប្រសិនបើពិត នោះ Ctrl+1..9 នឹងត្រូវបានចាត់ចែងដោយកម្មវិធីរុករកតាមអ៊ីនធឺណិត។ ប្រសិនបើមិនពិត នោះ Ctrl+1..9 នឹងត្រូវបានបញ្ជូនទៅម៉ាស៊ីន។ ប្រសិនបើ null នោះការចាប់ឬរកឃើញដោយស្វ័យប្រវត្តិគឺផ្អែកលើប្រភេទវិនដូ និងប្រព័ន្ធកម្មវិធីរុករកតាមអ៊ីនធឺណិត។"
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "ថាតើ Ctrl+T ត្រូវបានបញ្ជូនទៅកម្មវិធីរុករកតាមអ៊ីនធឺណិតឬអត់។\n\nប្រសិនបើពិត នោះកម្មវិធីរុករកតាមអ៊ីនធឺណិតនឹងចាត់ទុក Ctrl+T ជាផ្លូវកាត់ក្ដារចុច \"ផ្ទាំងថ្មី\"។ ប្រសិនបើមិនពិត នោះ Ctrl+T នឹងត្រូវបានបញ្ជូនទៅម៉ាស៊ីន។"
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "ថាតើ Ctrl+Tab និង Ctrl+Shift+Tab ត្រូវបានបញ្ជូនទៅកម្មវិធីរុករកតាមអ៊ីនធឺណិតឬអត់។\n\nប្រសិនបើពិត នោះកម្មវិធីរុករកតាមអ៊ីនធឺណិតនឹងចាត់ទុក Ctrl+Tab និង Ctrl+Shift+Tab ជាផ្លូវកាត់​ក្ដារ​ចុច \"ផ្ទាំងបន្ទាប់/មុន\"។ ប្រសិនបើមិនពិត នោះគ្រាប់ចុច Tab ត្រូវបានបញ្ជូនទៅម៉ាស៊ីនដោយមិនចាំបាច់ប្រើ Ctrl ឬ Shift​ នោះទេ។"
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "ថាតើ Ctrl+W ត្រូវបានបញ្ជូនទៅកម្មវិធីរុករកតាមអ៊ីនធឺណិតឬអត់។\n\nប្រសិនបើពិត នោះកម្មវិធីរុករកតាមអ៊ីនធឺណិតនឹងចាត់ទុក Ctrl+W ជាផ្លូវកាត់ក្ដារចុច \"បិទផ្ទាំង\"។ ប្រសិនបើមិនពិត នោះ Ctrl+W នឹងត្រូវបានបញ្ជូនទៅម៉ាស៊ីន។"
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "ថាតើ Meta+1..9 ត្រូវបានបញ្ជូនទៅកម្មវិធីរុករកតាមអ៊ីនធឺណិតឬអត់។\n\nវាមានប្រយោជន៍ នៅពេលដំណើរការ hterm នៅក្នុងផ្ទាំងកម្មវិធីរុករកតាមអ៊ីនធឺណិត ដូច្នេះអ្នកមិនបាត់បង់ផ្លូវកាត់​ក្ដារ​ចុច \"ប្ដូរទៅផ្ទាំង\" របស់ Chrome ទេ។ នៅពេលមិនដំណើរការនៅក្នុងផ្ទាំងទេ គួរតែបញ្ជូនគ្រាប់ចុចទាំងនេះទៅម៉ាស៊ីន ដើម្បីអាចប្រើគ្រាប់ចុចទាំងនេះនៅក្នុង vim ឬ emacs។\n\nប្រសិនបើពិត នោះ Meta+1..9 នឹងត្រូវបានចាត់ចែងដោយ​កម្មវិធីរុករកតាមអ៊ីនធឺណិត។ ប្រសិនបើមិនពិត នោះ Meta+1..9 នឹងត្រូវបានបញ្ជូនទៅម៉ាស៊ីន។ ប្រសិនបើ null នោះការចាប់ឬរកឃើញដោយស្វ័យប្រវត្តិគឺផ្អែកលើប្រភេទវិនដូ និងប្រព័ន្ធកម្មវិធីរុករកតាមអ៊ីនធឺណិត។"
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "ថាតើ Meta+V ត្រូវបានបញ្ជូនទៅកម្មវិធីរុករកតាមអ៊ីនធឺណិតឬអត់។\n\nនៅលើប្រព័ន្ធមួយចំនួន វាត្រូវបានប្រើ ដើម្បីដាក់ចូលខ្លឹមសារ។"
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "ប្រសិនបើពិត អក្សរដែលបានអូស​ហើយ​ទម្លាក់នឹងដាក់ចូលទៅក្នុងស្ថានីយ។\nប្រសិនបើមិនពិត អក្សរដែលបានទម្លាក់​នឹងមិនត្រូវបានអើពើទេ។"
+	},
+	"hterm_pref_receive_encoding": {
+		"message": "កំណត់​ការបំប្លែងកូដដែលបានរំពឹងទុកសម្រាប់ទិន្នន័យ ដែលបានទទួលពីម៉ាស៊ីន។\nប្រសិនបើការបំប្លែងកូដមិនត្រូវគ្នាទេ បញ្ហាផ្នែករូបភាពទំនងជានឹងត្រូវបានសង្កេត។\n\nតម្លៃដែលត្រឹមត្រូវគឺ 'utf-8' និង 'raw'។"
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "ទំហំស៊ុមគែមជាភីកសែលនៅជុំវិញស៊ុមអេក្រង់ស្ថានីយ។\n\nវាគ្រប់គ្រងទំហំស៊ុមនៅជុំវិញអេក្រង់ស្ថានីយ ដូច្នេះអ្នកប្រើប្រាស់អាចបញ្ចូលស៊ុមគែមដែលអាចមើលឃើញមួយចំនួនទៅគែមអេក្រង់។"
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "ថាតើត្រូវរំកិលទៅផ្នែកខាងក្រោម នៅពេលចុចគ្រាប់ចុចឬអត់។"
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "ថាតើត្រូវរំកិលទៅផ្នែកខាងក្រោមនៃលទ្ធផលស្ថានីយឬអត់។"
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "នៅពេលប្រើកន្លែងផ្ទុករបស់អេក្រង់ជំនួស ហើយ DECCKM (គ្រាប់ចុចទស្សន៍ទ្រនិច​របស់កម្មវិធី) ត្រូវបានបើកដំណើរការ នោះសកម្មភាពកងរំកិលកណ្ដុរនឹងធ្វើត្រាប់តាមគ្រាប់ចុចព្រួញ។\n\nអាចបិទវាជាបណ្ដោះអាសន្នបានដោយចុចគ្រាប់ចុច Shift ឱ្យជាប់។\n\nវាបង្ហាញ​ជាញឹកញាប់ នៅពេលប្រើភេយ័រ (less) ឬអានទំព័រយោង ឬកម្មវិធី​កែ​អត្ថបទ (vi/nano) ឬប្រើ screen/tmux។"
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "មេគុណសម្រាប់សកម្មភាពកងរំកិលកណ្ដុរ នៅពេលវាស់ស្ទង់ជាភីកសែល។\n\nផ្លាស់ប្ដូរល្បឿននៃការរំកិលទំព័រ។"
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "មុខងាររបាររំកិលបញ្ឈរ។"
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "ថាតើ Shift+Insert ត្រូវបានប្រើសម្រាប់ដាក់ចូល ឬត្រូវបានបញ្ជូនទៅម៉ាស៊ីនពីចម្ងាយឬអត់។"
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "ការបំប្លែងកូដស្ថានីយលំនាំដើម (DOCS)។\n\nISO-2022 បើកការបកប្រែផែនទីតួអក្សរ (ដូចជាផែនទីក្រាហ្វិកជាដើម)។\nUTF-8 បិទជំនួយសម្រាប់ការបកប្រែទាំងនោះ។\n\nប្រភេទដែលបានចាក់សោមានន័យថា មិនអាចផ្លាស់ប្ដូរការបំប្លែងកូដនៅពេលដំណើរការតាមរយៈលំដាប់គេចរបស់ស្ថានីយបានទេ។\n\nអ្នកគួរតែបន្តប្រើ UTF-8 លើកលែងតែអ្នកសង្កេតឃើញការបំប្លែងដែលមានបញ្ហានៅក្នុងកម្មវិធីចាស់តែប៉ុណ្ណោះ។"
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "ថាតើត្រូវប្រើសកម្មភាពចម្លងរបស់ប្រព័ន្ធ​ប្រតិបត្តិការ/កម្មវិធីរុករកតាមអ៊ីនធឺណិតលំនាំដើមឬអត់។\n\nអនុញ្ញាតឱ្យប្រព័ន្ធ​ប្រតិបត្តិការ/កម្មវិធីរុករកតាមអ៊ីនធឺណិតចាត់ចែងសកម្មភាពចម្លងដោយផ្ទាល់ ដែលអាចកែលម្អភាពត្រូវគ្នាជាមួយប្រព័ន្ធមួយចំនួន (ដែលការចម្លងមិនដំណើរការទាំងស្រុង) ប៉ុន្តែធ្វើឱ្យការជ្រើសរើសអក្សរខ្សោយជាងមុន។\n\nឧទាហរណ៍ ជួរវែងដែលត្រូវបានតម្រឹមជាជួរដោយស្វ័យប្រវត្តិ នឹងចម្លងដោយមានជួរថ្មីនៅក្នុងជួរទាំងនោះដដែល។"
+	},
+	"hterm_pref_user_css": {
+		"message": "URL នៃបញ្ជីរចនាប័ទ្មរបស់អ្នកប្រើប្រាស់ ដែលត្រូវរួមបញ្ចូលនៅក្នុងឯកសារស្ថានីយ។"
+	},
+	"hterm_pref_user_css_text": {
+		"message": "អត្ថបទ CSS ផ្ទាល់ខ្លួន​សម្រាប់ការបង្កើតរចនាប័ទ្មស្ថានីយ។"
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "កន្សោម​ធម្មតាដែលត្រូវបញ្ឈប់ការផ្គូផ្គងទៅខាងឆ្វេង (ចាប់ផ្ដើម) នៃការជ្រើសរើស។\n\nជាធម្មតា នេះគឺជាលំដាប់ថ្នាក់តួអក្សរសម្រាប់បដិសេធតួអក្សរជាក់លាក់។\nយើងអនុញ្ញាត \"~\" និង \".\" តាមលំនាំដើម ដោយសារជាញឹកញាប់ផ្លូវចាប់ផ្ដើមដោយសញ្ញាទាំងនោះ។"
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "កន្សោម​ធម្មតាដែលត្រូវផ្គូផ្គងតួអក្សរទាំងអស់ដែលនៅកណ្ដាល។\n\nជាធម្មតា នេះគឺជាលំដាប់ថ្នាក់តួអក្សរសម្រាប់បដិសេធតួអក្សរជាក់លាក់។\n\nប្រើដើម្បីពង្រីកការជ្រើសរើសដែលនៅជុំវិញចំណុច​ចាប់ផ្តើម។"
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "កន្សោម​ធម្មតាដែលត្រូវបញ្ឈប់ការផ្គូផ្គងទៅខាងស្ដាំ (បញ្ចប់) នៃការជ្រើសរើស។\n\nជាធម្មតា នេះគឺជាលំដាប់ថ្នាក់តួអក្សរសម្រាប់បដិសេធតួអក្សរជាក់លាក់។"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "រូបរាង (ពុម្ពអក្សរ ពណ៌ រូបភាព)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "ចម្លង និង​ដាក់​ចូល"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "ការបំប្លែងកូដ"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "កម្មវិធីបន្ថែម"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "ក្ដារចុច"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "ផ្សេងៗ"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "ការរំកិល"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "សំឡេង"
+	},
+	"identity_label": {
+		"message": "អត្តសញ្ញាណ"
+	},
+	"import_link_aria_label": {
+		"message": "ការនាំចូលឯកសារ"
+	},
+	"import_link_label": {
+		"message": "នាំចូល..."
+	},
+	"initializing_relay": {
+		"message": "កំពុងរកមើលម៉ាស៊ីនមេបញ្ជូនបន្តដោយប្រើ៖ $1"
+	},
+	"json_parse_error": {
+		"message": "មិនអាចញែក JSON នៅក្នុង '$1' បានទេ៖ $2"
+	},
+	"known_hosts_empty": {
+		"message": "គ្មានម៉ាស៊ីនដែលស្គាល់ទេ ដូច្នេះក៏គ្មានអ្វីត្រូវបំភ្លេចដែរ។"
+	},
+	"known_hosts_prompt": {
+		"message": "សូមជ្រើសរើសម៉ាស៊ីនមួយ ដើម្បីបំភ្លេច [1-$1]៖"
+	},
+	"known_hosts_title": {
+		"message": "ម៉ាស៊ីនដែលស្គាល់៖"
+	},
+	"licenses": {
+		"message": "អាជ្ញាបណ្ណ"
+	},
+	"licenses_expand_link": {
+		"message": "បង្ហាញអាជ្ញាបណ្ណ"
+	},
+	"licenses_title": {
+		"message": "អាជ្ញាបណ្ណ​កម្មវិធី​កូដ​ចំហ"
+	},
+	"loading_label": {
+		"message": "កំពុង​ផ្ទុក..."
+	},
+	"migrate_to_ext": {
+		"message": "ការជូនដំណឹង​៖ សូមផ្ទេរទៅកម្មវិធីបន្ថែម Secure Shell ថ្មី ($1)។\nកម្មវិធី​ Chrome ត្រូវបានបញ្ឈប់ ដូច្នេះកំណែនេះនឹងឈប់ទទួលបានកំណែថ្មីៗហើយ។\nសូមមើលការណែនាំអំពីការផ្ទេរ ($2) ដើម្បីទទួលបានព័ត៌មានលម្អិតបន្ថែម។"
+	},
+	"missing_param": {
+		"message": "បាត់ប៉ារ៉ាម៉ែត្រ៖ $1"
+	},
+	"mount_button_label": {
+		"message": "ការភ្ជាប់ SFTP"
+	},
+	"mount_path_label": {
+		"message": "ផ្លូវភ្ជាប់"
+	},
+	"mounted_message": {
+		"message": "បានភ្ជាប់ហើយ!"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "បោះចោលឯកសារទៅក្នុងស្ថានីយ"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "ប្ដូរបញ្ជីដែលដំណើរការ"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "ប្ដូរក្រុមរបស់ផ្លូវ"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "ប្ដូរការអនុញ្ញាត​សម្រាប់ផ្លូវ"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "ប្ដូរម្ចាស់ផ្លូវ"
+	},
+	"nasftp_cmd_clear": {
+		"message": "សម្អាត"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "សម្អាតអេក្រង់ស្ថានីយបច្ចុប្បន្ន។"
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "ចម្លងឯកសារទៅឃ្លីបបត (លំនាំដើម៖ ចម្លង 10MiB ដំបូងនៃឯកសារ)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "បានចម្លង $1 បៃទៅឃ្លីបបត"
+	},
+	"nasftp_cmd_color": {
+		"message": "ពណ៌"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "បិទ/បើកការប្រើប្រាស់ពណ៌"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "ចម្លងប្រភពទៅគោលដៅ"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "លុបឯកសារ"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "បង្ហាញស្ថិតិថាស"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  ផ្លូវ៖ $1\n  fsid៖ $2\n សរុប៖ $3\n  បានប្រើ៖ $4 ($5%)\n អាចប្រើ៖ $6 (សម្រាប់អ្នកប្រើប្រាស់ធម្មតា)\n $7 (សម្រាប់អ្នកគ្រប់គ្រង)"
+	},
+	"nasftp_cmd_exit": {
+		"message": "ចាកចេញ"
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "ផ្ដាច់"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "កំពុងទាញយកឯកសារ៖ $1 ជា $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "ទាញយក​ឯកសារ"
+	},
+	"nasftp_cmd_help": {
+		"message": "ជំនួយ"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "អេក្រង់ជំនួយនេះ"
+	},
+	"nasftp_cmd_list": {
+		"message": "បញ្ជី"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "ព័ត៌មានលម្អិតអំពីបញ្ជី"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "បង្កើត​តំណនៅផ្លូវដែលបង្ហាញទៅគោលដៅ"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "បង្កើតបញ្ជី"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "ប្ដូរឈ្មោះឯកសារ"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "កំណត់​ជួរអក្សរសារ"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "បង្ហោះ​ឯកសារ"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "កំពុងបង្ហោះឯកសារ៖ $1 ជា $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "បង្ហាញបញ្ជីដែលដំណើរការបច្ចុប្បន្ន"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "បញ្ជីដែលដំណើរការពីចម្ងាយ៖ $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "អានតំណតំណាង"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "ជ្រើសរើសផ្លូវល្អបំផុត"
+	},
+	"nasftp_cmd_rename": {
+		"message": "ប្ដូរឈ្មោះ"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "បន្ត​ការបង្ហោះឯកសារ"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "លុប​ឯកសារ​ចេញ"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "លុបបញ្ជីទទេ"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "បង្ហាញឯកសារក្នុងជួរ"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "កម្មវិធីបន្ថែម៖"
+	},
+	"nasftp_cmd_stat_extensions_line": {
+		"message": "  $1៖ $2"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "បង្ហាញស្ថានភាពឯកសារ"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  ឯកសារ៖ $1\n  ទំហំ៖ $2 បៃ\n   UID៖ $3\n   GID៖ $4\nការចូលប្រើ៖ $5\n atime៖ $6\n mtime៖ $7"
+	},
+	"nasftp_cmd_symlink": {
+		"message": "តំណតំណាង"
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "បង្កើតតំណតំណាងនៅផ្លូវដែលបង្ហាញទៅគោលដៅ"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "បន្ថយផ្លូវឱ្យខ្លីទៅ 0 បៃ"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  កម្មវិធីបន្ថែមសម្រាប់ម៉ាស៊ីនមេ៖"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "បង្ហាញកំណែប្រូតូកូលបច្ចុប្បន្ន"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "ព័ត៌មានអំពីកំណែប្រូតូកូល SFTP៖\n  មូលដ្ឋាន៖ $1\n  ម៉ាស៊ីនមេ៖ $1"
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1៖ ផ្នែកបញ្ចប់នៃឯកសារ"
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1៖ រកឯកសារមិនឃើញទេ"
+	},
+	"nasftp_error_file_reading": {
+		"message": "ការអាន $1 មិនបានសម្រេចទេ៖ $2"
+	},
+	"nasftp_error_internal": {
+		"message": "មានបញ្ហាផ្ទៃក្នុងដែលមិនបានដោះស្រាយ​ សូមដាក់បញ្ជូនបញ្ហា៖ $1"
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1៖ $2៖ លេខមិនត្រឹមត្រូវ៖ $3"
+	},
+	"nasftp_error_message": {
+		"message": "បញ្ហា៖ $1"
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1៖ មិនអាចប្រើកម្មវិធីបន្ថែម '$2' បានទេ"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1៖ $2៖ មិនមែនជាឯកសារធម្មតាទេ"
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1៖ មិនមានអញ្ញត្តិគ្រប់គ្រាន់ទេ"
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1៖ បានបដិសេធការអនុញ្ញាត"
+	},
+	"nasftp_error_server_error": {
+		"message": "$1៖ $2"
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1៖ អញ្ញត្តិ​ច្រើន​ពេក"
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1៖ ពាក្យបញ្ជាមិនស្គាល់"
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1៖ ទង់មិនស្គាល់ $2"
+	},
+	"nasftp_force_quit": {
+		"message": "បង្ខំឱ្យចាកចេញ"
+	},
+	"nasftp_progress_summary": {
+		"message": "បានផ្ទេរ $1 បៃក្នុងរយៈពេល $2 វិនាទី ($3/វិ)"
+	},
+	"nassh_options_error": {
+		"message": "ជម្រើសមិនស្គាល់៖ $1"
+	},
+	"nassh_product_name": {
+		"message": "Secure Shell"
+	},
+	"new_window_menu_label": {
+		"message": "វិនដូ​ថ្មី"
+	},
+	"ok_button_label": {
+		"message": "យល់ព្រម"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> ភ្ជាប់ជាមួយកម្រងព័ត៌មានដែលបានរក្សាទុក ឬប្រព័ន្ធ ssh ថ្មី"
+	},
+	"open_as_window_tip": {
+		"message": "[គន្លឹះ] ប្រើ 'បើកជាវិនដូ' ឬ 'អេក្រង់ពេញ' ដើម្បីទប់ស្កាត់កុំឱ្យ Ctrl+W បិទស្ថានីយរបស់អ្នក!\n[គន្លឹះ] សូមមើល $1 ដើម្បីទទួលបានព័ត៌មានបន្ថែម។"
+	},
+	"plugin_loading": {
+		"message": "កំពុងផ្ទុកកម្មវិធីជំនួយ NaCl..."
+	},
+	"plugin_loading_complete": {
+		"message": " រួចរាល់។"
+	},
+	"plugin_loading_failed": {
+		"message": " បរាជ័យ! :("
+	},
+	"popup_connect_tooltip": {
+		"message": "ចុច Ctrl ឱ្យជាប់ ដើម្បីបើកនៅក្នុងផ្ទាំងថ្មី។"
+	},
+	"pref_backup_filename": {
+		"message": "ការបម្រុងទុកចំណូលចិត្ត Secure Shell.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "ឯកសារ SSH"
+	},
+	"preferences_header_terminal": {
+		"message": "ការកំណត់ស្ថានីយ"
+	},
+	"preferences_header_uri": {
+		"message": "ឧបករណ៍ដោះស្រាយ​ URI"
+	},
+	"preferences_reset": {
+		"message": "បានកំណត់ចំណូលចិត្តទាំងអស់ឡើងវិញហើយ!"
+	},
+	"protocol_register_button": {
+		"message": "ចុះឈ្មោះឧបករណ៍ដោះស្រាយប្រូតូកូល"
+	},
+	"protocol_register_explain": {
+		"message": "ប៊ូតុងខាងក្រោមនឹងព្យាយាមចុះឈ្មោះឧបករណ៍ដោះស្រាយសម្រាប់ប្រូតូកូលទាំងអស់ ដែលយើងស្គាល់។ ឧទាហរណ៍ វាអនុញ្ញាតឱ្យយើង​ចាត់ចែងតំណ ssh:// ដោយផ្ទាល់។ កម្មវិធីរុករកតាមអ៊ីនធឺណិតនឹងបង្ហាញសារ​សម្រាប់​ប្រូតូកូលនីមួយៗ ដូច្នេះសូមបញ្ជាក់/ទទួលយក​សារនីមួយៗ នៅពេលសារនោះបង្ហាញ។ ប្រសិនបើសារមិនបង្ហាញទេ សូមមើលផ្នែកបន្ទាប់ ដើម្បីទទួលបានគន្លឹះ​​ដោះស្រាយ​បញ្ហា។"
+	},
+	"protocol_register_explain_settings": {
+		"message": "ប្រសិនបើយើងបានចុះឈ្មោះឧបករណ៍ដោះស្រាយរួចហើយ ឬការព្យាយាមចុះឈ្មោះពីមុន​ត្រូវបានបដិសេធ នោះនឹងមិនមានការបង្ហាញសារទៀតទេ។ សូមបើក​ប្រអប់ខាងក្រោម បន្ទាប់មកពិនិត្យមើលការកំណត់​ឧបករណ៍ដោះស្រាយដែលបានចុះឈ្មោះនៅក្នុងផ្នែក ssh/sftp/etc...។ ប្រសិនបើ​កម្មវិធីនេះត្រូវបានទប់ស្កាត់ អ្នកអាចលុបការកំណត់ទាំងនោះ ដែលនឹងអនុញ្ញាតឱ្យអ្នក​ព្យាយាមចុះឈ្មោះម្ដងទៀត។ ប្រសិនបើ​កម្មវិធីនេះត្រូវបានចុះឈ្មោះរួចហើយ ប៉ុន្តែមិនបានកំណត់ជាឧបករណ៍ដោះស្រាយលំនាំដើម អ្នកក៏អាចផ្លាស់ប្ដូរឧបករណ៍ដោះស្រាយលំនាំដើមបានផងដែរ។"
+	},
+	"protocol_register_options_link": {
+		"message": "ការចុះឈ្មោះប្រូតូកូល"
+	},
+	"protocol_register_settings_button": {
+		"message": "បើក​ការកំណត់ឧបករណ៍ដោះស្រាយដែលបានចុះឈ្មោះ"
+	},
+	"protocol_register_title": {
+		"message": "ទំព័រជំនួយសម្រាប់ការចុះឈ្មោះឧបករណ៍ដោះស្រាយប្រូតូកូល Secure Shell"
+	},
+	"read_size_label": {
+		"message": "ទំហំនៃការអាន (KiB)"
+	},
+	"reconnect_message": {
+		"message": "(R) ភ្ជាប់ឡើងវិញ, (C) ជ្រើសរើសការតភ្ជាប់ផ្សេងទៀត ឬ (X) ចាកចេញ?"
+	},
+	"relay_retry": {
+		"message": "កំពុង​ព្យាយាម​​ម្ដង​ទៀត..."
+	},
+	"request_pin_prompt": {
+		"message": "បញ្ចូលកូដ PIN ដើម្បីដោះសោគ្រាប់ចុច $1 នៅលើ '$2 ($3)' (អាចព្យាយាមបាន $4 ដងទៀត)៖"
+	},
+	"restore_prefs": {
+		"message": "ស្ដារការបម្រុងទុក"
+	},
+	"save_label": {
+		"message": "រក្សាទុក"
+	},
+	"send_feedback_label": {
+		"message": "ផ្ញើ​មតិកែលម្អ"
+	},
+	"shortcut_list_aria_label": {
+		"message": "ការតភ្ជាប់ដែលបានរក្សាទុក"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "សូម​ដំឡើង​កម្មវិធីតភ្ជាប់កាតឆ្លាតវៃ៖ $1"
+	},
+	"ssh_argstr_label": {
+		"message": "អញ្ញត្តិ SSH"
+	},
+	"stream_open_error": {
+		"message": "ការបើកការផ្សាយ $1 មិនបានសម្រេចទេ៖ $2"
+	},
+	"terminal_clear_menu_label": {
+		"message": "ការសម្អាតស្ថានីយ"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" មិន​អាចប្រើបានទេ"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ពណ៌ ANSI"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "បច្ចេកទេសលុបបំបាត់ភាពគ្រើម"
+	},
+	"terminal_name_pref_bell": {
+		"message": "កណ្ដឹង"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "បញ្ចេញពន្លឺភ្លឹបភ្លែត"
+	},
+	"terminal_name_pref_color": {
+		"message": "ពណ៌"
+	},
+	"terminal_name_pref_font": {
+		"message": "ពុម្ព​អក្សរ"
+	},
+	"terminal_name_pref_image": {
+		"message": "រូបភាព"
+	},
+	"terminal_name_pref_shape": {
+		"message": "រូបរាង"
+	},
+	"terminal_name_pref_visible": {
+		"message": "​អាច​មើល​ឃើញ"
+	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "ជ្រើសរើសការចាប់ឬរកឃើញ AltGr ដោយស្វ័យប្រវត្តិ។\n\n'ស្វ័យប្រវត្តិ'៖ ការចាប់ឬរកឃើញដោយស្វ័យប្រវត្តិគឺផ្អែកលើ navigator.language៖\n      'en-us' => 'បិទ', ផ្សេងទៀត => 'right-alt'\n'បិទ'៖ បិទការត្រាប់តាម AltGr ទាំងឡាយ។\n'ctrl-alt'៖ សន្មតថា Ctrl+Alt មានន័យថា AltGr។\n'left-alt'៖ សន្មតថា Alt ខាងឆ្វេងមានន័យថា AltGr។\n'right-alt'៖ សន្មតថា Alt ខាងស្ដាំមានន័យថា AltGr។"
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "កំណត់ពណ៌សម្រាប់ក្ដារ​លាយ​ពណ៌លំនាំដើម។"
+	},
+	"terminal_pref_bell": {
+		"message": "កណ្ដឹងស្ថានីយដែលអាចស្ដាប់ឮ។"
+	},
+	"terminal_preview_label": {
+		"message": "មើលសាកល្បង"
+	},
+	"terminal_profile_label": {
+		"message": "កម្រងព័ត៌មានបច្ចុប្បន្ន"
+	},
+	"terminal_reset_menu_label": {
+		"message": "កំណត់ស្ថានីយឡើងវិញ"
+	},
+	"terminal_settings_about_label": {
+		"message": "អំពី"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "URL រូបភាព​ផ្ទៃ​ខាងក្រោយ។ ត្រូវ​តែ​ចាប់ផ្ដើម​ដោយ 'http://' ឬ 'https://'។ ទុកឱ្យទទេ ដើម្បីបញ្ជាក់ថាគ្មានរូបភាព។\n\nឧទាហរណ៍៖\n  https://goo.gl/anedTK"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "ស្វ័យប្រវត្តិ"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "បិទ"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "របារបញ្ឈរ"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "ទប់ស្កាត់"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "គូសពីក្រោម"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "តើអ្នកពិតជាចង់កំណត់រចនាប័ទ្មទៅលំនាំដើមវិញមែនឬ?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "កំណត់រចនាប័ទ្មឡើងវិញ"
+	},
+	"terminal_settings_reset_label": {
+		"message": "កំណត់​ឡើងវិញ"
+	},
+	"terminal_theme_classic_label": {
+		"message": "ចាស់"
+	},
+	"terminal_theme_dark_label": {
+		"message": "ងងឹត"
+	},
+	"terminal_theme_light_label": {
+		"message": "ភ្លឺ"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized ងងឹត"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized ភ្លឺ"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "ពណ៌ 0៖ ខ្មៅ"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "ពណ៌ 1៖ ក្រហម"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "ពណ៌ 10៖ បៃតងភ្លឺ"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "ពណ៌ 11៖ លឿងភ្លឺ"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "ពណ៌ 12៖ ខៀវភ្លឺ"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "ពណ៌ 13៖ ស្វាយខ្ចីភ្លឺ"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "ពណ៌ 14៖ ស៊ីលៀបភ្លឺ"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "ពណ៌ 15៖ សភ្លឺ"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "ពណ៌ 2៖ បៃតង"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "ពណ៌ 3៖ លឿង"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "ពណ៌ 4៖ ខៀវ"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "ពណ៌ 5៖ ស្វាយខ្ចី"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "ពណ៌ 6៖ ស៊ីលៀប"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "ពណ៌ 7៖ ស"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "ពណ៌ 8៖ ខ្មៅភ្លឺ"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "ពណ៌ 9៖ ក្រហមភ្លឺ"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "រូបរាង"
+	},
+	"terminal_title_pref_background": {
+		"message": "ផ្ទៃខាងក្រោយ​"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "សកម្មភាព"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "ទស្សន៍ទ្រនិច​"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "ក្ដារចុច"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "ក្ដារចុច និងកណ្ដុរ"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "កណ្ដុរ"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "របារ​រំកិល"
+	},
+	"terminal_title_pref_text": {
+		"message": "អក្សរ"
+	},
+	"terminal_title_settings": {
+		"message": "ការកំណត់"
+	},
+	"terminal_title_theme": {
+		"message": "រចនាប័ទ្ម"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "ភ្ជាប់​អ៊ីនធឺណិត រួច​ព្យាយាម​ម្ដង​ទៀត។"
+	},
+	"tip_1": {
+		"message": "អ្នកអាចចុច Ctrl (Cmd នៅលើ macOS) ឱ្យជាប់ នៅពេលចុចលើតំណ ដើម្បីបើកវា។"
+	},
+	"tip_10": {
+		"message": "នៅពេលដំណើរការនៅក្នុងវិនដូ, Ctrl+Shift+N អាចបើកវគ្គមួយផ្សេងទៀត។"
+	},
+	"tip_11": {
+		"message": "អ្នកអាចប្ដូរសកម្មភាពគ្រាប់ចុច/ផ្លូវកាត់បាន៖ https://goo.gl/LWRndr"
+	},
+	"tip_12": {
+		"message": "ប្រើ Yubikey និងកាតឆ្លាតវៃផ្សេងទៀតសម្រាប់ការផ្ទៀងផ្ទាត់ ssh៖ https://goo.gl/Hu2o3v"
+	},
+	"tip_13": {
+		"message": "បង្ហាញរូបភាពក្នុងជួរ៖ https://goo.gl/MnSysj"
+	},
+	"tip_14": {
+		"message": "ការចុច Ctrl (Cmd នៅលើ macOS) ​ឱ្យជាប់ នៅពេលចុចកណ្ដុរខាងស្ដាំនឹងបង្ហាញម៉ឺនុយ​បរិបទ។"
+	},
+	"tip_2": {
+		"message": "បង្ហាញ​ការ​ជូនដំណឹងនៅក្នុងកម្មវិធីរុករកតាមអ៊ីនធឺណិតដោយប្រើ hterm-notify៖ https://goo.gl/ZNxGdF"
+	},
+	"tip_3": {
+		"message": "ភ្ជាប់ពីពហុប្រអប់ដោយវាយបញ្ចូល 'ssh <profile name>'៖ https://goo.gl/V7o8ki"
+	},
+	"tip_4": {
+		"message": "Chrome OS អាចភ្ជាប់ប្រព័ន្ធឯកសារតាមរយៈ SFTP និងរុករកតាមរយៈកម្មវិធី Files។ ប្រើ 'ការភ្ជាប់ SFTP' ជំនួសឱ្យ 'ភ្ជាប់'។"
+	},
+	"tip_5": {
+		"message": "ភ្ជាប់ដោយប្រើតំណ ssh:// នៅក្នុងទំព័របណ្ដាញ ឬរក្សាទុកចំណាំ៖ https://goo.gl/zS8EZD"
+	},
+	"tip_6": {
+		"message": "កំណត់ពណ៌សារ/លទ្ធផលរបស់អ្នក ដោយប្រើពណ៌ 16 និងពណ៌ 256​ មូលដ្ឋាន និងពណ៌ 24-bit ពេញលេញ៖ http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
+	},
+	"tip_7": {
+		"message": "ចម្លងទៅឃ្លីបបតរបស់អ្នកពី emacs/vim/etc... ដោយប្រើ OSC-52៖ https://goo.gl/XSnyLo"
+	},
+	"tip_8": {
+		"message": "ជជែកជាមួយអ្នកប្រើប្រាស់ hterm/Secure Shell ដូចគ្នាតាមរយៈ chromium-hterm@chromium.org៖ https://goo.gl/RYHiK"
+	},
+	"tip_9": {
+		"message": "រកឃើញបញ្ហាមែនទេ?  ស្នើសុំមុខងារថ្មីមែនទេ?  សូមជម្រាបឱ្យយើងដឹងតាមរយៈ៖ https://goo.gl/vb94JY"
+	},
+	"unexpected_error": {
+		"message": "មានបញ្ហាដែល​មិន​បាន​រំពឹង​ទុក​បានកើតឡើង។ សូមពិនិត្យខនសូល JavaScript ដើម្បីទទួលបានព័ត៌មានលម្អិតបន្ថែម។"
+	},
+	"unknown_ssh_client_version": {
+		"message": "កំណែ SSH មិនស្គាល់៖ $1"
+	},
+	"unmount_button_label": {
+		"message": "ផ្ដាច់ SFTP"
+	},
+	"welcome_changelog": {
+		"message": "កំណត់ហេតុ​នៃការ​ផ្លាស់ប្ដូរ/កំណត់ហេតុចេញផ្សាយ៖ $1"
+	},
+	"welcome_faq": {
+		"message": "ចម្លើយសម្រាប់សំណួរដែលសួរញឹកញាប់៖ $1 (Ctrl+ចុចលើតំណដើម្បីបើក)"
+	},
+	"welcome_release_highlights": {
+		"message": "ការផ្លាស់ប្ដូរសំខាន់ៗចាប់តាំងពី $1៖"
+	},
+	"welcome_tip_of_day": {
+		"message": "គន្លឹះផ្សេងៗ #$1៖ $2"
+	},
+	"welcome_version": {
+		"message": "សូមស្វាគមន៍មកកាន់ $1 កំណែ $2។"
+	},
+	"write_size_label": {
+		"message": "ទំហំនៃការសរសេរ (KiB)"
+	},
+	"zoom_warning": {
+		"message": "សូមកំណត់ម៉ឺនុយ Chrome->ពង្រីកទៅ 100%"
+	}
+}

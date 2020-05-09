@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Vastaanota merkkijärjestelmä"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Näytön täytteiden koko"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Vieritä alareunaan näppäinpainalluksen jälkeen"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Automaattinen valinnan pysäytys (oikealle)"
 	},
+	"hterm_options_button_label": {
+		"message": "Valinnat"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Upotetut kuvat"
 	},
@@ -363,7 +369,7 @@
 		"message": "Jos määritetty, tämä kumoaa Chrome-käyttöjärjestelmän Alt+Askelpalautin->Del-uudelleenmäärityksen, jolloin Alt+Askelpalautin on oikeasti Alt+Askelpalautin."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Valitse heuristinen AltGr-tunnistus.\n\nnull: Tunnista automaattisesti navigator.language-arvon perusteella:\n      en-us => none, muut arvot => right-alt.\nnone: Poista käytöstä kaikki AltGr-muunnokset.\nctrl-alt: Oleta, että Ctrl+Alt on AltGr.\nleft-alt: Oleta, että vasen Alt on AltGr.\nright-alt: Oleta, että oikea Alt on AltGr."
+		"message": "Valitse heuristinen AltGr-tunnistus.\n\nnull: Tunnista automaattisesti navigator.language-arvon perusteella:\n      en-us => none, muut arvot => right-alt.\nnone: Laita kaikki AltGr-emulointi pois päältä.\nctrl-alt: Oleta, että Ctrl+Alt on AltGr.\nleft-alt: Oleta, että vasen Alt on AltGr.\nright-alt: Oleta, että oikea Alt on AltGr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Toimiiko Alt-näppäin Meta-näppäimenä vai oikeana Alt-näppäimenä"
@@ -426,7 +432,7 @@
 		"message": "Tekstikentässä näkyvän osoittimen muoto. Asetus voidaan muuttaa suoritusaikana terminaalista poistumisen sekvensseillä."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "Jos tosi, terminaalin merkkiääni luo taustalla verkkoilmoituksen. https://www.w3.org/TR/notifications/\n\nIlmoitusten näyttäminen edellyttää käyttäjän myöntämää käyttöoikeutta. Kun tämän asetuksen arvo on tosi, hterm yrittää tarvittaessa pyytää käyttöoikeutta käyttäjältä. Jos käyttöoikeuspyyntö ei johdu käyttäjän toiminnasta, selain ei välttämättä näytä sitä.\n\nChrome-laajennukset, joilla on ilmoitusten käyttöoikeus (notifications), saavat näyttää ilmoituksia."
+		"message": "Jos tosi, terminaalin merkkiääni luo taustalla verkkoilmoituksen. https://www.w3.org/TR/notifications/\n\nIlmoitusten näyttäminen edellyttää käyttäjän antamaa lupaa. Kun tämän asetuksen arvo on tosi, hterm yrittää tarvittaessa pyytää käyttäjältä lupaa. Jos lupapyyntö ei johdu käyttäjän toiminnasta, selain ei välttämättä näytä sitä.\n\nChrome-laajennukset, joilla on ilmoituslupa, saavat näyttää ilmoituksia."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Ovatko itäaasialaiset erikoismerkit kahden sarakkeen levyisiä"
@@ -474,7 +480,7 @@
 		"message": "Etualan väri, kun tekstillä ei ole muita väriattribuutteja"
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Piilotetaanko hiiren osoitin kirjoittaessa. Oletuksena havaitaan automaattisesti, käsitteleekö käyttöympäristö vai käyttöjärjestelmä tämän.\n\nHuom. Jotkin käyttöjärjestelmät saattavat ohittaa tämän asetuksen, jolloin sen poistaminen käytöstä ei ole aina mahdollista."
+		"message": "Piilotetaanko hiiren osoitin kirjoittaessa. Oletuksena havaitaan automaattisesti, käsitteleekö käyttöympäristö vai käyttöjärjestelmä tämän.\n\nHuom. Käyttöjärjestelmäsi saattaa ohittaa tämän asetuksen, joten sen pois päältä laittaminen ei aina ole mahdollista."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Jos tosi, Home- ja End-näppäimiä käytetään terminaalin vierityspalkin ohjaamiseen ja yhdistelmä Vaihto+Home tai Vaihto+End lähetetään etäisännälle. Jos epätosi, Home- ja End-näppäimet lähetetään etäisännälle ja Vaihto+Home tai Vaihto+End vierittävät."
@@ -522,13 +528,16 @@
 		"message": "Lähetetäänkö Meta+1–9-painallukset selaimelle\n\nTästä on hyötyä htermin toimiessa selaimen välilehdellä, koska voit jatkaa Chromen välilehtien pikanäppäinten käyttöä. Kun hterm ei toimi välilehdellä, näppäinpainallukset kannattaa lähettää isännälle, jotta niitä voidaan käyttää vim- tai emacs-toimintojen kanssa.\n\nJos arvo on tosi, selain käsittelee Meta+1–9-painallukset. Jos arvo on epätosi, Meta+1–9-painallukset lähetetään isännälle. Jos arvo on tyhjä, tunnistus suoritetaan automaattisesti selainympäristön ja ikkunatyypin mukaan."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Lähetetäänkö Meta+V isännälle"
+		"message": "Lähetetäänkö Meta+V selaimelle.\n\nJoissakin järjestelmissä tällä komennolla liitetään sisältöä."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Jos tosi, vedetty ja pudotettu teksti liitetään terminaaliin.\nJos epätosi, pudotettu teksti ohitetaan."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Määritä merkkijärjestelmä, jota odotetaan isännän lähettämältä datalta. Jos merkkijärjestelmät eivät täsmää, visuaalisia virheitä voi ilmetä.\n\nKelvollisia arvoja ovat \"utf-8\" ja \"raw\"."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Terminaalinäytön rajoja ympäröivä täyte pikseleinä.\n\nTämä vaikuttaa terminaalinäyttöä ympäröivään rajaan, ja käyttäjä voi lisätä näytön reunoille näkyvää täytettä."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Valitse, vierittääkö mikä tahansa näppäinpainallus näkymän alareunaan."
@@ -537,10 +546,10 @@
 		"message": "Valitse, vierittääkö terminaalisyöte näkymän alareunaan."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Kun käytössä on vaihtoehtoinen näyttöpuskuri (alternative screen buffer) ja DECCKM (Application Cursor Keys eli sovelluksen osoitinnäppäimet) on aktiivisena, hiiren rullan vieritystapahtumat emuloivat nuolinäppäimiä.\n\nTämä voidaan poistaa väliaikaisesti käytöstä pitämällä Vaihto-näppäintä painettuna.\n\nTämä nousee usein esiin käytettäessä sivutusohjausta (less), luettaessa man-sivuja tai tekstinkäsittelytyökaluja (vi/nano) tai käytettäessä screen/tmux-toimintoja."
+		"message": "Kun käytössä on vaihtoehtoinen näyttöpuskuri ja DECCKM (Application Cursor Keys eli sovelluksen osoitinnäppäimet) on aktiivisena, hiiren vieritysrullan tapahtumat emuloivat nuolinäppäimiä.\n\nTämän saa väliaikaisesti pois päältä pitämällä Vaihto-näppäintä painettuna.\n\nTämä on usein tarpeen käytettäessä sivutusohjausta (less), luettaessa man-sivuja tai tekstieditoreita (vi/nano) tai screen/tmux-toimintojen kanssa."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Vieritystapahtumien kerroin, joka mitataan pikseleinä\n\nTämä vaikuttaa sivun vieritysnopeuteen."
+		"message": "Vieritystapahtumien kerroin, joka mitataan pikseleinä.\n\nTämä vaikuttaa sivun vieritysnopeuteen."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "Pystysuuntainen vierityspalkkitila"
@@ -821,9 +830,6 @@
 	"new_window_menu_label": {
 		"message": "Uusi ikkuna"
 	},
-	"notify_copy": {
-		"message": "Valinta kopioitu"
-	},
 	"ok_button_label": {
 		"message": "OK"
 	},
@@ -832,9 +838,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Pro-vinkki] Kun käytät Avaa ikkunassa- tai Koko näyttö ‑toimintoa, Ctrl+W ei sulje terminaalia.\n[Pro-vinkki] Katso lisätietoja: $1"
-	},
-	"options_button_label": {
-		"message": "Valinnat"
 	},
 	"plugin_loading": {
 		"message": "Ladataan NaCl-laajennusta…"
@@ -899,6 +902,9 @@
 	"save_label": {
 		"message": "Tallenna"
 	},
+	"send_feedback_label": {
+		"message": "Lähetä palautetta"
+	},
 	"shortcut_list_aria_label": {
 		"message": "tallennetut yhteydet"
 	},
@@ -913,6 +919,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Terminaalin tyhjennys"
+	},
+	"terminal_font_unavailable": {
+		"message": "$1 ei ole käytettävissä"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-värit"
@@ -941,6 +950,9 @@
 	"terminal_name_pref_visible": {
 		"message": "Näkyy"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Valitse heuristinen AltGr-tunnistus.\n\nAuto: Tunnista automaattisesti navigator.language-arvon perusteella:\n      en-us => Pois päältä, muut arvot => right-alt.\nDisable: Laita kaikki AltGr-emulointi pois päältä.\nctrl-alt: Oleta, että Ctrl+Alt on AltGr.\nleft-alt: Oleta, että vasen Alt on AltGr.\nright-alt: Oleta, että oikea Alt on AltGr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Aseta oletuspaletin värit"
 	},
@@ -955,6 +967,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Terminaalin nollaus"
+	},
+	"terminal_settings_about_label": {
+		"message": "Tietoja"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Taustakuvan URL-osoite (alussa on oltava http:// tai https://). Jätä se tyhjäksi, jos kuvaa ei ole.\n\nEsimerkki:\n  https://goo.gl/anedTK"
@@ -1081,6 +1096,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Teema"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Muodosta internetyhteys ja yritä uudelleen."
 	},
 	"tip_1": {
 		"message": "Kun painat linkin klikkaamisen yhteydessä Ctrl (Cmd macOS:ssä), linkki avataan."

@@ -311,6 +311,9 @@
 	"hterm_name_pref_receive_encoding": {
 		"message": "Recevoir l'encodage"
 	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Taille de la marge intérieure de l'écran"
+	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "Faire défiler vers le bas après appui sur une touche"
 	},
@@ -350,6 +353,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Arrêt de la sélection automatique (vers la droite)"
 	},
+	"hterm_options_button_label": {
+		"message": "Options"
+	},
 	"hterm_popup_inline_image": {
 		"message": "Images intégrées"
 	},
@@ -363,7 +369,7 @@
 		"message": "Si la préférence est configurée, elle annule le remappage Chrome OS Alt+Retour arrière->Suppr, de sorte que le raccourci Alt+Retour arrière corresponde effectivement à Alt+Retour arrière."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Permet de sélectionner une heuristique de détection Alt Gr.\n\n'null' : active l'autodétection en fonction de l'attribut navigator.language :\n      'en-us' => 'none', autre => 'right-alt'\n'none' : désactive toute manipulation liée à Alt Gr.\n'ctrl-alt' : suppose que Ctrl+Alt signifie Alt Gr.\n'left-alt' : suppose que Alt gauche signifie Alt Gr.\n'right-alt' : suppose que Alt droite signifie Alt Gr."
+		"message": "Permet de sélectionner une heuristique de détection Alt Gr.\n\n\"null\" : active l'autodétection en fonction de l'attribut navigator.language :\n      \"en-us\" => \"none\", sinon => \"right-alt\"\n\"none\" : désactive toute émulation liée à Alt Gr.\n\"ctrl-alt\" : suppose que Ctrl+Alt signifie Alt Gr.\n\"left-alt\" : suppose qu'Alt gauche signifie Alt Gr.\n\"right-alt\" : suppose qu'Alt droite signifie Alt Gr."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Permet de définir si la touche Alt joue le rôle de touche Méta ou de touche Alt distincte."
@@ -387,7 +393,7 @@
 		"message": "Valeur CSS de la taille de l'image de fond."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Si la préférence est définie sur \"vrai\", le retour arrière envoie BS (\"\\x08\", l'équivalent de ^H). Dans le cas contraire, il envoie \"\\x7f\"."
+		"message": "Si la préférence est définie sur \"true\", le retour arrière envoie BS (\"\\x08\", l'équivalent de ^H). Dans le cas contraire, il envoie \"\\x7f\"."
 	},
 	"hterm_pref_character_map_overrides": {
 		"message": "Cet élément est spécifié en tant qu'objet. Il s'agit d'une matrice creuse, où chaque propriété est le code du jeu de caractères et où la valeur correspond à un objet qui est également une matrice creuse. Dans cette matrice, chaque propriété désigne le caractère reçu, tandis que la valeur correspond au caractère affiché.\n\nPar exemple :\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
@@ -426,7 +432,7 @@
 		"message": "Forme du curseur visible. Elle peut être modifiée en cours d'exécution par des séquences d'échappement dans le terminal."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "Si ce paramètre indique \"true\", les sonneries en arrière-plan du terminal créent une notification Web. https://www.w3.org/TR/notifications/\n\nL'affichage des notifications nécessite l'autorisation de l'utilisateur. Lorsque cette option est définie sur \"true\", hterm tente de demander à l'utilisateur son autorisation, le cas échéant. Certains navigateurs n'affichent pas cette demande d'autorisation lorsqu'elle n'est pas déclenchée par une action de l'utilisateur.\n\nLes extensions Chrome avec l'autorisation \"notifications\" sont autorisées à afficher les notifications."
+		"message": "Si la préférence est définie sur \"true\", les sonneries en arrière-plan du terminal créent une notification Web. https://www.w3.org/TR/notifications/\n\nL'affichage des notifications nécessite l'autorisation de l'utilisateur. Lorsque cette option est définie sur \"true\", hterm tente de demander à l'utilisateur son autorisation, le cas échéant. Certains navigateurs n'affichent pas cette demande d'autorisation lorsqu'elle n'est pas déclenchée par une action de l'utilisateur.\n\nLes extensions Chrome avec l'autorisation \"notifications\" sont autorisées à afficher les notifications."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Permet de définir si les caractères \"East Asian Ambiguous\" ont une largeur de deux colonnes."
@@ -474,7 +480,7 @@
 		"message": "Couleur de premier plan du texte sans aucun autre attribut de couleur."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Définit s'il faut masquer automatiquement le curseur de la souris lors de la saisie. Par défaut, autodétection si la plate-forme/l'OS est compatible.\n\nRemarque : Certains systèmes d'exploitation peuvent remplacer ce paramètre ; vous ne pourrez peut-être pas toujours le désactiver."
+		"message": "Permet de définir s'il faut masquer automatiquement le curseur de la souris lors de la saisie. Par défaut, l'autodétection est activée si la plate-forme/l'OS est compatible.\n\nRemarque : Votre système d'exploitation peut remplacer ce paramètre. Vous ne pourrez donc peut-être pas toujours le désactiver."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Si la préférence est définie sur \"true\", les touches Début/Fin contrôlent la barre de défilement du terminal et les raccourcis Maj+Début/Maj+Fin sont envoyés à l'hôte distant. Si elle est définie sur \"false\", les touches Début/Fin sont envoyées à l'hôte distant et les raccourcis Maj+Début/Maj+Fin contrôlent le défilement."
@@ -501,34 +507,37 @@
 		"message": "Si la préférence est définie sur \"true\", les touches Page précédente/Page suivante contrôlent la barre de défilement du terminal, et les raccourcis Maj+Page précédente/Maj+Page suivante sont envoyés à l'hôte distant. Si elle est définie sur \"false\", les touches Page précédente/Page suivante sont envoyées à l'hôte distant, et les raccourcis Maj+Page précédente/Maj+Page suivante contrôlent le défilement."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Permet de spécifier si les raccourcis Alt+[1 à 9] sont transmis au navigateur.\n\nCette préférence est utile lorsque le terminal hterm est ouvert dans un onglet du navigateur, car elle permet de conserver les raccourcis clavier de Chrome pour changer d'onglet. Si le terminal n'est pas ouvert dans un onglet, il est préférable d'envoyer ces combinaisons de touches à l'hôte afin qu'elles puissent être utilisées dans vim ou emacs.\n\nSi la préférence est définie sur \"vrai\", les raccourcis Alt+[1 à 9] sont gérés par le navigateur. Si elle est définie sur \"faux\", ils sont envoyés à l'hôte. La valeur \"nul\" déclenche la détection automatique, en fonction de la plate-forme de navigateur et du type de fenêtre."
+		"message": "Permet de spécifier si les raccourcis Alt+[1 à 9] sont transmis au navigateur.\n\nCette préférence est utile lorsque le terminal hterm est ouvert dans un onglet du navigateur, car elle permet de conserver les raccourcis clavier de Chrome pour changer d'onglet. Si le terminal n'est pas ouvert dans un onglet, il est préférable d'envoyer ces combinaisons de touches à l'hôte afin qu'elles puissent être utilisées dans vim ou emacs.\n\nSi la préférence est définie sur \"true\", les raccourcis Alt+[1 à 9] sont gérés par le navigateur. Si elle est définie sur \"false\", ils sont envoyés à l'hôte. La valeur \"null\" déclenche la détection automatique, en fonction de la plate-forme de navigateur et du type de fenêtre."
 	},
 	"hterm_pref_pass_ctrl_n": {
-		"message": "Permet de spécifier si le raccourci Ctrl+N est transmis au navigateur.\n\nSi la préférence est définie sur \"vrai\", le raccourci Ctrl+N est traité par le navigateur comme un raccourci clavier permettant d'ouvrir une nouvelle fenêtre. Si elle est définie sur \"faux\", le raccourci Ctrl+N est envoyé à l'hôte."
+		"message": "Permet de spécifier si le raccourci Ctrl+N est transmis au navigateur.\n\nSi la préférence est définie sur \"true\", le raccourci Ctrl+N est traité par le navigateur comme un raccourci clavier permettant d'ouvrir une nouvelle fenêtre. Si elle est définie sur \"false\", le raccourci Ctrl+N est envoyé à l'hôte."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Permet de spécifier si les raccourcis Ctrl+[1 à 9] sont transmis au navigateur.\n\nCette préférence est utile lorsque le terminal hterm est ouvert dans un onglet du navigateur, car elle permet de conserver les raccourcis clavier de Chrome pour changer d'onglet. Si le terminal n'est pas ouvert dans un onglet, il est préférable d'envoyer ces combinaisons de touches à l'hôte afin qu'elles puissent être utilisées dans vim ou emacs.\n\nSi la préférence est définie sur \"vrai\", les raccourcis Ctrl+[1 à 9] sont gérés par le navigateur. Si elle est définie sur \"faux\", ils sont envoyés à l'hôte. La valeur \"nul\" déclenche la détection automatique, en fonction de la plate-forme de navigateur et du type de fenêtre."
+		"message": "Permet de spécifier si les raccourcis Ctrl+[1 à 9] sont transmis au navigateur.\n\nCette préférence est utile lorsque le terminal hterm est ouvert dans un onglet du navigateur, car elle permet de conserver les raccourcis clavier de Chrome pour changer d'onglet. Si le terminal n'est pas ouvert dans un onglet, il est préférable d'envoyer ces combinaisons de touches à l'hôte afin qu'elles puissent être utilisées dans vim ou emacs.\n\nSi la préférence est définie sur \"true\", les raccourcis Ctrl+[1 à 9] sont gérés par le navigateur. Si elle est définie sur \"false\", ils sont envoyés à l'hôte. La valeur \"null\" déclenche la détection automatique, en fonction de la plate-forme de navigateur et du type de fenêtre."
 	},
 	"hterm_pref_pass_ctrl_t": {
-		"message": "Permet de spécifier si le raccourci Ctrl+T est transmis au navigateur.\n\nSi la préférence est définie sur \"vrai\", le raccourci Ctrl+T est traité par le navigateur comme un raccourci clavier permettant d'ouvrir un nouvel onglet. Si elle est définie sur \"faux\", le raccourci Ctrl+T est envoyé à l'hôte."
+		"message": "Permet de spécifier si le raccourci Ctrl+T est transmis au navigateur.\n\nSi la préférence est définie sur \"true\", le raccourci Ctrl+T est traité par le navigateur comme un raccourci clavier permettant d'ouvrir un nouvel onglet. Si elle est définie sur \"false\", le raccourci Ctrl+T est envoyé à l'hôte."
 	},
 	"hterm_pref_pass_ctrl_tab": {
-		"message": "Permet de spécifier si les raccourcis Ctrl+Tabulation et Ctrl+Maj+Tabulation sont transmis au navigateur.\n\nSi la préférence est définie sur \"vrai\", les raccourcis Ctrl+Tabulation et Ctrl+Maj+Tabulation sont traités par le navigateur comme des raccourcis clavier permettant d'accéder à l'onglet suivant/précédent. Si la préférence est définie sur \"faux\", la touche de tabulation est envoyée à l'hôte sans les touches Ctrl et Maj."
+		"message": "Permet de spécifier si les raccourcis Ctrl+Tabulation et Ctrl+Maj+Tabulation sont transmis au navigateur.\n\nSi la préférence est définie sur \"true\", les raccourcis Ctrl+Tabulation et Ctrl+Maj+Tabulation sont traités par le navigateur comme des raccourcis clavier permettant d'accéder à l'onglet suivant/précédent. Si la préférence est définie sur \"false\", la touche de tabulation est envoyée à l'hôte sans les touches Ctrl et Maj."
 	},
 	"hterm_pref_pass_ctrl_w": {
-		"message": "Permet de spécifier si le raccourci Ctrl+W est transmis au navigateur.\n\nSi la préférence est définie sur \"vrai\", le raccourci Ctrl+W est traité par le navigateur comme un raccourci clavier permettant de fermer un onglet. Si elle est définie sur \"faux\", le raccourci Ctrl+W est envoyé à l'hôte."
+		"message": "Permet de spécifier si le raccourci Ctrl+W est transmis au navigateur.\n\nSi la préférence est définie sur \"true\", le raccourci Ctrl+W est traité par le navigateur comme un raccourci clavier permettant de fermer un onglet. Si elle est définie sur \"false\", le raccourci Ctrl+W est envoyé à l'hôte."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Permet de spécifier si les raccourcis Méta+[1 à 9] sont transmis au navigateur.\n\nCette préférence est utile lorsque le terminal hterm est ouvert dans un onglet du navigateur, car elle permet de conserver les raccourcis clavier de Chrome pour changer d'onglet. Si le terminal n'est pas ouvert dans un onglet, il est préférable d'envoyer ces combinaisons de touches à l'hôte afin qu'elles puissent être utilisées dans vim ou emacs.\n\nSi la préférence est définie sur \"vrai\", les raccourcis Méta+[1 à 9] sont gérés par le navigateur. Si elle est définie sur \"faux\", ils sont envoyés à l'hôte. La valeur \"nul\" déclenche la détection automatique, en fonction de la plate-forme de navigateur et du type de fenêtre."
+		"message": "Permet de spécifier si les raccourcis Méta+[1 à 9] sont transmis au navigateur.\n\nCette préférence est utile lorsque le terminal hterm est ouvert dans un onglet du navigateur, car elle permet de conserver les raccourcis clavier de Chrome pour changer d'onglet. Si le terminal n'est pas ouvert dans un onglet, il est préférable d'envoyer ces combinaisons de touches à l'hôte afin qu'elles puissent être utilisées dans vim ou emacs.\n\nSi la préférence est définie sur \"true\", les raccourcis Méta+[1 à 9] sont gérés par le navigateur. Si elle est définie sur \"false\", ils sont envoyés à l'hôte. La valeur \"null\" déclenche la détection automatique, en fonction de la plate-forme de navigateur et du type de fenêtre."
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Permet de définir si la combinaison de touches Méta+V est envoyée à l'hôte."
+		"message": "Permet de spécifier si le raccourci Méta+V est transmis au navigateur.\n\nSur certains systèmes, il est utilisé pour coller le contenu du presse-papiers."
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "Si la préférence est définie sur \"true\", le texte glissé-déposé sera collé dans le terminal.\nSi elle est définie sur \"false\", ce texte sera ignoré."
 	},
 	"hterm_pref_receive_encoding": {
 		"message": "Permet d'identifier l'encodage des données envoyées par l'hôte.\nSi les encodages ne correspondent pas, des bugs visuels sont susceptibles de survenir.\n\nLes valeurs acceptées sont \"utf-8\" et \"raw\"."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Taille en pixels de la marge intérieure autour de la bordure de l'écran du terminal.\n\nCette préférence permet de contrôler la taille de la bordure autour de l'écran du terminal afin que l'utilisateur puisse ajouter une marge intérieure visible aux bords de l'écran."
 	},
 	"hterm_pref_scroll_on_keystroke": {
 		"message": "Permet de spécifier si l'action d'appuyer sur n'importe quelle touche fera défiler le contenu de l'écran jusqu'en bas."
@@ -537,7 +546,7 @@
 		"message": "Permet de spécifier si le contenu de l'écran défilera vers le bas à chaque sortie de commande sur le terminal."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Lorsqu'on utilise la mémoire tampon écran alternative, si DECCKM (touches de déplacement du curseur) est actif, les événements de défilement de la molette de la souris émuleront les touches fléchées.\n\nCela peut être désactivé provisoirement en maintenant le touche Maj enfoncée.\n\nCette fonctionnalité est utile lorsqu'on utilise des programmes de pagination (comme less), lorsqu'on visionne des pages man ou des éditeurs de texte (comme vi ou nano) ou lorsqu'on exécute des multiplexeurs de terminaux (comme screen ou tmux)."
+		"message": "Lorsque vous utilisez la mémoire tampon écran alternative et si DECCKM (touches de déplacement du curseur) est actif, les événements de défilement de la molette de la souris émuleront les touches fléchées.\n\nVous pouvez désactiver cela provisoirement en maintenant la touche Maj enfoncée.\n\nCette fonctionnalité est utile lorsque vous utilisez des programmes de pagination (comme less), lorsque vous visionnez des pages man ou des éditeurs de texte (comme vi ou nano), ou lorsque vous exécutez des multiplexeurs de terminaux (comme screen ou tmux)."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "Coefficient multiplicateur pour les événements associés à la molette de la souris mesurés en pixels.\n\nModifie la vitesse de défilement de la page."
@@ -738,7 +747,7 @@
 		"message": "Permet de reprendre l'importation de fichiers"
 	},
 	"nasftp_cmd_rm_help": {
-		"message": "Permet de supprimer des fichiers"
+		"message": "Permet de retirer des fichiers"
 	},
 	"nasftp_cmd_rmdir_help": {
 		"message": "Permet de supprimer les répertoires vides"
@@ -836,9 +845,6 @@
 	"new_window_menu_label": {
 		"message": "Nouvelle fenêtre"
 	},
-	"notify_copy": {
-		"message": "Sélection copiée"
-	},
 	"ok_button_label": {
 		"message": "OK"
 	},
@@ -847,9 +853,6 @@
 	},
 	"open_as_window_tip": {
 		"message": "[Conseil de pro] Utilisez \"Ouvrir dans une fenêtre\" ou \"Plein écran\" pour éviter que le raccourci Ctrl+W ne ferme votre terminal.\n[Conseil de pro] Pour en savoir plus, accédez à l'adresse $1."
-	},
-	"options_button_label": {
-		"message": "Options"
 	},
 	"plugin_loading": {
 		"message": "Chargement du plug-in NaCl en cours…"
@@ -914,6 +917,9 @@
 	"save_label": {
 		"message": "Enregistrer"
 	},
+	"send_feedback_label": {
+		"message": "Envoyer des commentaires"
+	},
 	"shortcut_list_aria_label": {
 		"message": "Connexions enregistrées"
 	},
@@ -928,6 +934,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Effacement de l'écran du terminal"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" n'est pas disponible"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Couleurs ANSI"
@@ -950,6 +959,9 @@
 	"terminal_name_pref_shape": {
 		"message": "Forme"
 	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Permet de sélectionner une heuristique de détection Alt Gr.\n\n\"Auto\" : active la détection automatique en fonction de l'attribut navigator.language :\n      \"en-us\" => \"Désactiver\", sinon => \"right-alt\"\n\"Désactiver\" : désactive toute émulation liée à Alt Gr.\n\"ctrl-alt\" : suppose que Ctrl+Alt signifie Alt Gr.\n\"left-alt\" : suppose qu'Alt gauche signifie Alt Gr.\n\"right-alt\" : suppose qu'Alt droite signifie Alt Gr."
+	},
 	"terminal_pref_ansi_colors": {
 		"message": "Permet de définir les couleurs de la palette par défaut."
 	},
@@ -964,6 +976,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Réinitialisation des paramètres du terminal"
+	},
+	"terminal_settings_about_label": {
+		"message": "À propos"
 	},
 	"terminal_settings_background_image_help": {
 		"message": "URL de l'image de fond. Elle doit commencer par \"http://\" ou \"https://\". N'indiquez rien s'il n'y a pas d'image.\n\nPar exemple :\n  https://goo.gl/anedTK"
@@ -1087,6 +1102,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "Thème"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Connectez-vous à Internet et réessayez."
 	},
 	"tip_1": {
 		"message": "Vous pouvez maintenir la touche Ctrl (Cmd sur macOS) enfoncée pendant que vous cliquez sur les liens pour les ouvrir."
