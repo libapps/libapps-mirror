@@ -28,8 +28,8 @@ The API will then respond with an object of the basic form
 External callers can make requests like:
 
 ```js
-// Extension id for stable Secure Shell app.
-const id = 'pnhechapfaindjhompbnflcldabbghjo';
+// Extension id for stable Secure Shell.
+const id = 'iodihamcpbpeioajjeobimgagajmlibd';
 
 // Open a new crosh window.
 const msg = {

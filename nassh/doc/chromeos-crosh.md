@@ -51,13 +51,13 @@ that it applies to Chromium OS as well.
 ## The "Secure Shell" application.
 
    The Secure Shell application is a dedicated ssh client that works on Chrome
-   OS as well as Chrome on other platforms.
+   on all platforms (Windows/Linux/macOS/Chrome OS/etc...).
 
    Unlike the crosh shell, the Secure Shell application does NOT ship with
    Chrome OS.  You've got to manually install it from the Chrome Web Store
    from this link:
 
-   https://chrome.google.com/webstore/detail/pnhechapfaindjhompbnflcldabbghjo
+   https://chrome.google.com/webstore/detail/iodihamcpbpeioajjeobimgagajmlibd
 
    Once installed you should see a new "Secure Shell" icon in your application
    launcher.

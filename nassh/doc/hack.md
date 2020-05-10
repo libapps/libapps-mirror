@@ -67,7 +67,7 @@ $ tar -xvf 0.27.tar.xz plugin/
 3. Copy the `plugin/` directory from the latest version of Secure Shell.
 If you have Secure Shell installed, the plugin can be found in your profile
 directory, under
-`Default/Extensions/pnhechapfaindjhompbnflcldabbghjo/<version>/plugin/`.
+`Default/Extensions/iodihamcpbpeioajjeobimgagajmlibd/<version>/plugin/`.
 
 # Dev-Test cycle
 

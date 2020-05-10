@@ -84,7 +84,7 @@ guarantees can be given. If in doubt, do not use this feature.
 
 [OpenPGP card specification]: https://gnupg.org/ftp/specs/OpenPGP-smart-card-application-2.0.pdf
 [PC/SC API]: https://en.wikipedia.org/wiki/PC/SC
-[Secure Shell]: https://chrome.google.com/webstore/detail/pnhechapfaindjhompbnflcldabbghjo
+[Secure Shell]: https://chrome.google.com/webstore/detail/iodihamcpbpeioajjeobimgagajmlibd
 [Smart Card Connector app]: https://chrome.google.com/webstore/detail/khpfeaanjngmcnplbdlpegiifgpfgdco
 [Yubico]: https://www.yubico.com/support/knowledge-base/categories/articles/use-yubikey-openpgp/
 [WebCrypto]: https://en.wikipedia.org/wiki/Web_cryptography_API

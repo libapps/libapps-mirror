@@ -435,10 +435,10 @@ have to re-import them.
 In the examples below, the *[ID]* field will need adjusting based on the
 version you have installed:
 
-* `pnhechapfaindjhompbnflcldabbghjo`: Secure Shell App (stable)
-* `okddffdblfhhnmhodogpojmfkjmhinfp`: Secure Shell App (dev)
-* `iodihamcpbpeioajjeobimgagajmlibd`: Secure Shell Extension (stable)
-* `algkcnfjnajfhgimadimbjhmpaeohhln`: Secure Shell Extension (dev)
+* `iodihamcpbpeioajjeobimgagajmlibd`: Secure Shell (stable)
+* `algkcnfjnajfhgimadimbjhmpaeohhln`: Secure Shell (dev)
+* `pnhechapfaindjhompbnflcldabbghjo`: Secure Shell Legacy App (stable)
+* `okddffdblfhhnmhodogpojmfkjmhinfp`: Secure Shell Legacy App (dev)
 ***
 
 #### Direct links
