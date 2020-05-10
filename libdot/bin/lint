@@ -11,6 +11,7 @@ We'll run through eslint & closure-compiler.
 
 from __future__ import print_function
 
+import fnmatch
 import glob
 import json
 import logging
@@ -31,6 +32,17 @@ def kokoro_comments_path(path, tool):
         return None
     else:
         return path.replace('%(tool)', tool)
+
+
+def is_generated_path(path):
+    """Return True if |path| is generated.
+
+    Useful for filtering out comments for files not in the tree.
+    """
+    return (
+        fnmatch.fnmatch(path, '*.concat.js') or
+        fnmatch.fnmatch(path, '*.rollup.js')
+    )
 
 
 def convert_eslint_to_kokoro(data):
@@ -111,6 +123,10 @@ def convert_eslint_to_kokoro(data):
     SEVERITY_TO_HEADER = {1: 'Warning', 2: 'Error'}
 
     for file_results in data:
+        # Ignore generated files not in git.
+        if is_generated_path(file_results['filePath']):
+            continue
+
         for message in file_results['messages']:
             msg = '[eslint] %s: %s' % (
                 SEVERITY_TO_HEADER[message['severity']],
@@ -205,6 +221,10 @@ def convert_closure_to_kokoro(data):
     for result in data:
         # Ignore info lines.
         if result['level'] == 'info':
+            continue
+
+        # Ignore generated files not in git.
+        if is_generated_path(result['source']):
             continue
 
         # Add leading space prefix to results to get code text.
