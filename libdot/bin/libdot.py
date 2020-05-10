@@ -93,24 +93,32 @@ def setup_logging(debug=False, quiet=0):
 class ArgumentParser(argparse.ArgumentParser):
     """Custom parser to hold a consistent set of options & runtime env."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, short_options=True, **kwargs):
         """Initialize!"""
         super(ArgumentParser, self).__init__(**kwargs)
 
-        self.add_common_arguments()
+        self.add_common_arguments(short_options=short_options)
 
     def parse_args(self, args=None, namespace=None):
         """Parse all the |args| and save the results to |namespace|."""
+        # This will call our parse_known_args below, so don't use setup_logging.
         namespace = argparse.ArgumentParser.parse_args(
             self, args=args, namespace=namespace)
-        setup_logging(debug=namespace.debug, quiet=namespace.quiet)
         return namespace
 
-    def add_common_arguments(self):
+    def parse_known_args(self, args=None, namespace=None):
+        """Parse all the |args| and save the results to |namespace|."""
+        namespace, unknown_args = argparse.ArgumentParser.parse_known_args(
+            self, args=args, namespace=namespace)
+        setup_logging(debug=namespace.debug, quiet=namespace.quiet)
+        return (namespace, unknown_args)
+
+    def add_common_arguments(self, short_options=True):
         """Add our custom/consistent set of command line flags."""
-        self.add_argument('-d', '--debug', action='store_true',
+        getopts = lambda *args: args if short_options else args[1:]
+        self.add_argument(*getopts('-d', '--debug'), action='store_true',
                           help='Run with debug output.')
-        self.add_argument('-q', '--quiet', action='count', default=0,
+        self.add_argument(*getopts('-q', '--quiet'), action='count', default=0,
                           help='Use once to hide info messages, twice to hide '
                                'warnings, and thrice to hide errors.')
 

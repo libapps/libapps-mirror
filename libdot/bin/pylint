@@ -8,7 +8,7 @@
 
 from __future__ import print_function
 
-import argparse
+import functools
 import json
 import logging
 import os
@@ -26,7 +26,7 @@ MAIN_DOCS = ('http://pylint.pycqa.org/en/latest/technical_reference/'
 USER_BASE_URI = 'http://pylint-messages.wikidot.com/messages:%s'
 
 
-def convert_pylint_to_kokoro(data):
+def convert_to_kokoro(data):
     """Take pylint JSON output and convert it to kokoro comment format.
 
     The |data| input will look like:
@@ -63,6 +63,7 @@ def convert_pylint_to_kokoro(data):
         }
 
 
+@functools.lru_cache(maxsize=1)
 def find_pylint():
     """Figure out the name of the pylint tool.
 
@@ -89,26 +90,44 @@ def find_pylint():
     sys.exit(1)
 
 
-def run_pylint(opts, pythonpaths=()):
-    """Run the pylint tool."""
-    ret = True
+def setup():
+    """Initialize the tool settings."""
+    find_pylint()
 
-    comments_path = libdot.lint.kokoro_comments_path(
-        opts.gerrit_comments_file, 'pylint')
+
+def run(argv=(), pythonpaths=(), **kwargs):
+    """Run the tool directly."""
+    setup()
 
     # Add libdot to search path so pylint can find it.  Any subproject that
     # uses us will make sure it's in the search path too.
-    env = os.environ.copy()
-    path = env.get('PYTHONPATH', '')
+    path = os.environ.get('PYTHONPATH', '')
     paths = [libdot.BIN_DIR] + list(pythonpaths)
     if path is not None:
         paths.append(path)
-    env['PYTHONPATH'] = os.pathsep.join(str(x) for x in paths)
+    extra_env = kwargs.pop('extra_env', {})
+    assert 'PYTHONPATH' not in extra_env
+    kwargs['extra_env'] = {
+        'PYTHONPATH': os.pathsep.join(str(x) for x in paths),
+        **extra_env,
+    }
 
     pylintrc = os.path.relpath(os.path.join(libdot.LIBAPPS_DIR, '.pylintrc'),
                                os.getcwd())
-    cmd = [find_pylint(), '--rcfile', pylintrc] + opts.args + opts.paths
-    result = libdot.run(cmd, env=env, check=False)
+    cmd = [find_pylint(), '--rcfile', pylintrc] + list(argv)
+    return libdot.run(cmd, **kwargs)
+
+
+def perform(argv=(), paths=(), pythonpaths=(), gerrit_comments_file=None):
+    """Run high level tool logic."""
+    ret = True
+    argv = list(argv)
+    paths = list(paths)
+
+    comments_path = libdot.lint.kokoro_comments_path(
+        gerrit_comments_file, 'pylint')
+
+    result = run(argv + paths, pythonpaths=pythonpaths, check=False)
     if result.returncode:
         ret = False
 
@@ -119,15 +138,16 @@ def run_pylint(opts, pythonpaths=()):
             if dirname:
                 os.makedirs(dirname, exist_ok=True)
 
-            cmd += ['--output-format=json']
-            result = libdot.run(cmd, env=env, check=False, capture_output=True)
+            argv += ['--output-format=json']
+            result = run(argv + paths, pythonpaths=pythonpaths, check=False,
+                         capture_output=True)
 
             # Save a copy for debugging later.
             with open(comments_path + '.in', 'wb') as fp:
                 fp.write(result.stdout)
 
             data = json.loads(result.stdout.decode('utf-8'))
-            comments = list(convert_pylint_to_kokoro(data))
+            comments = list(convert_to_kokoro(data))
             with open(comments_path, 'w', encoding='utf-8') as fp:
                 json.dump(comments, fp, sort_keys=True)
     elif comments_path:
@@ -141,11 +161,9 @@ def run_pylint(opts, pythonpaths=()):
 
 def get_parser():
     """Get a command line parser."""
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = libdot.ArgumentParser(description=__doc__, short_options=False)
     parser.add_argument('--gerrit-comments-file',
                         help='Save errors for posting files to Gerrit.')
-    parser.add_argument('--debug', action='store_true',
-                        help='Run with debug output.')
     parser.add_argument('paths', nargs='*',
                         help='Paths to lint.')
     return parser
@@ -155,10 +173,10 @@ def main(argv, pythonpaths=()):
     """The main func!"""
     parser = get_parser()
     opts, args = parser.parse_known_args(argv)
-    opts.args = args
-    libdot.setup_logging(debug=opts.debug)
 
-    return 0 if run_pylint(opts, pythonpaths=pythonpaths) else 1
+    return 0 if perform(argv=args, paths=opts.paths,
+                        pythonpaths=pythonpaths,
+                        gerrit_comments_file=opts.gerrit_comments_file) else 1
 
 
 if __name__ == '__main__':
