@@ -975,6 +975,28 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   section below.
 
 
+### How do I use Chrome OS window manager shortcuts?
+
+  In Chrome OS, Alt+- & Alt+= & Alt+[ & Alt+] are used to move windows around.
+  By default, hterm will capture these when using the Left Alt key.
+  In recent Chrome OS versions, the Right Alt key is not captured.
+  So you can use RightAlt+-/=/[/] keys even when running Secure Shell.
+
+  If you really want to use the Left Alt key too, you can add custom bindings in
+  the 'keybindings' settings to pass them along to the OS instead.
+  We have to use the keyCode number though.
+
+     {
+       "Alt+187": "PASS",
+       "Alt+189": "PASS",
+       "Alt+219": "PASS",
+       "Alt+221": "PASS"
+     }
+
+  For more details, see the [Can I rebind keys/shortcuts](#keybindings)
+  section below.
+
+
 ### Why doesn't autorepeat work under macOS?
 
   In newer versions of macOS, holding down many keys (like `a`) won't repeat
