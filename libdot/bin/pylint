@@ -44,7 +44,7 @@ def convert_to_kokoro(data):
       }
     ]
 
-    See lint.convert_eslint_to_kokoro for example return value.
+    See eslint.convert_to_kokoro for example return value.
     """
     for result in data:
         msg = '[pylint] %s (%s)\n%s\n%s\n%s' % (

@@ -45,156 +45,6 @@ def is_generated_path(path):
     )
 
 
-def convert_eslint_to_kokoro(data):
-    """Take eslint JSON output and convert it to kokoro comment format.
-
-    The |data| input will look like:
-    [
-        {
-            "errorCount": <total number of errors>,
-            "filePath": ".../libapps/libdot/js/lib_f.js",
-            "fixableErrorCount": 1,
-            "fixableWarningCount": 0,
-            "messages": [  // This contains errors & warnings.
-                {
-                    "column": 2,
-                    "endColumn": 57,
-                    "endLine": 1,
-                    "line": 1,
-                    "message": "Missing semicolon.",
-                    "nodeType": "ExpressionStatement",
-                    "ruleId": "semi",
-                    "severity": <1=warning 2=error>
-                }
-            ],
-            "source": "...the entire source file...",
-            "warningCount": <total number of warnings>
-        },
-        {
-            "errorCount": <total number of errors>,
-            "filePath": ".../libapps/libdot/js/lib_fs.js",
-            "fixableErrorCount": 2,
-            "fixableWarningCount": 0,
-            "messages": [  // This contains errors & warnings.
-                {
-                    "column": 2,
-                    "fix": {
-                        "range": [8180, 8180],
-                        "text": ";"
-                    },
-                    "line": 262,
-                    "message": "Missing semicolon.",
-                    "nodeType": "ExpressionStatement",
-                    "ruleId": "semi",
-                    "severity": <1=warning 2=error>
-                },
-                {
-                    "column": 10,
-                    "fix": {
-                        "range": [8436, 8436],
-                        "text": ";"
-                    },
-                    "line": 271,
-                    "message": "Missing semicolon.",
-                    "nodeType": "VariableDeclaration",
-                    "ruleId": "semi",
-                    "severity": <1=warning 2=error>
-                }
-            ],
-            "source": "...the entire source file...",
-            "warningCount":  <total number of warnings>
-        }
-    ]
-
-    We want to return a list of results like:
-    [
-        {
-           path: "relative/path/to/source/file",
-           message: "Content of the inline comment."
-           startLine: <integer line number>,
-           startCharacter: <integer column number>,
-           endLine: <integer line number>,
-           endCharacter: <integer column number>
-        },
-        { ... more results above ... }
-    ]
-    """
-    RULES_URI_BASE = 'https://eslint.org/docs/rules/'
-    SEVERITY_TO_HEADER = {1: 'Warning', 2: 'Error'}
-
-    for file_results in data:
-        # Ignore generated files not in git.
-        if is_generated_path(file_results['filePath']):
-            continue
-
-        for message in file_results['messages']:
-            msg = '[eslint] %s: %s' % (
-                SEVERITY_TO_HEADER[message['severity']],
-                message['message'],
-            )
-
-            # For syntax errors, this will be omitted.
-            ruleId = message.get('ruleId')
-            if ruleId:
-                msg += '\n%s%s' % (RULES_URI_BASE, ruleId)
-
-            # Gerrit comments appear to count columns from 0 while eslint counts
-            # from 1.  Adjust them down by one to handle.
-            yield {
-                'path': os.path.relpath(file_results['filePath'],
-                                        libdot.LIBAPPS_DIR),
-                'message': msg,
-                'startLine': message['line'],
-                'endLine': message.get('endLine', message['line']),
-                'startCharacter': message['column'] - 1,
-                'endCharacter': message.get('endColumn', message['column']),
-            }
-
-
-def run_eslint(opts, extra_args=()):
-    """Run the eslint tool."""
-    ret = True
-
-    comments_path = kokoro_comments_path(opts.gerrit_comments_file, 'eslint')
-
-    cmd = ['eslint'] + list(extra_args)
-    if comments_path:
-        cmd += ['--max-warnings=0']
-    if opts.fix:
-        cmd += ['--fix']
-
-    result = libdot.node.run(cmd + opts.paths, check=False)
-    if result.returncode:
-        ret = False
-
-        # Rerun for Gerrit.
-        if comments_path:
-            # Handle relative paths like "foo.json".
-            dirname = os.path.dirname(comments_path)
-            if dirname:
-                os.makedirs(dirname, exist_ok=True)
-
-            cmd += ['--format=json']
-            result = libdot.node.run(cmd + opts.paths, check=False,
-                                     capture_output=True)
-
-            # Save a copy for debugging later.
-            with open(comments_path + '.in', 'wb') as fp:
-                fp.write(result.stdout)
-
-            data = json.loads(result.stdout.decode('utf-8'))
-            comments = list(convert_eslint_to_kokoro(data))
-            with open(comments_path, 'w', encoding='utf-8') as fp:
-                json.dump(comments, fp, sort_keys=True)
-    elif comments_path:
-        # If there were no failures, clear the files to avoid leaving previous
-        # results laying around & confuse devs.
-        libdot.unlink(comments_path)
-        libdot.unlink(comments_path + '.in')
-
-    return ret
-
-
 def convert_closure_to_kokoro(data):
     """Take closure JSON output and convert it to kokoro comment format.
 
@@ -310,7 +160,7 @@ def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
     parser.add_argument('--fix', action='store_true',
-                        help='Run just eslint with --fix setting.')
+                        help='Run linters with --fix setting if possible.')
     parser.add_argument('--gerrit-comments-file',
                         help='Save errors for posting files to Gerrit.')
     parser.add_argument('paths', nargs='*',
@@ -321,8 +171,7 @@ def get_parser():
     return parser
 
 
-def main(argv, paths=(), mkdeps=None, eslint_args=(),
-         closure_args=DEFAULT_CLOSURE_ARGS):
+def main(argv, paths=(), mkdeps=None, closure_args=DEFAULT_CLOSURE_ARGS):
     """The common main func for all linters.
 
     Args:
@@ -330,7 +179,6 @@ def main(argv, paths=(), mkdeps=None, eslint_args=(),
       paths: The default set of files to lint.  If the user doesn't specify
           any, we'll use these instead.
       mkdeps: Callback to build dependencies after we've initialized.
-      eslint_args: Extra arguments to pass to eslint.
       closure_args: Extra arguments to pass to closure-compiler.
     """
     parser = get_parser()
@@ -350,7 +198,10 @@ def main(argv, paths=(), mkdeps=None, eslint_args=(),
         else:
             logging.info('Skipping building dependencies due to --skip-mkdeps')
 
-    checks = [run_eslint(opts, eslint_args)]
+    checks = [
+        libdot.eslint.perform(paths=opts.paths, fix=opts.fix,
+                              gerrit_comments_file=opts.gerrit_comments_file),
+    ]
     if not opts.fix:
         checks += [run_closure(opts, closure_args)]
     return 0 if all(checks) else 1
