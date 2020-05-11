@@ -444,6 +444,12 @@ export class TerminalSettingsApp extends LitElement {
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
+                  title="${msg('HTERM_PREF_ENABLE_RESIZE_STATUS')}">
+                <h4>${msg('HTERM_NAME_PREF_ENABLE_RESIZE_STATUS')}</h4>
+                <terminal-settings-checkbox preference="enable-resize-status">
+                </terminal-settings-checkbox>
+              </li>
+              <li class="setting-container"
                   title="${msg('HTERM_PREF_CLOSE_ON_EXIT')}">
                 <h4>${msg('HTERM_NAME_PREF_CLOSE_ON_EXIT')}</h4>
                 <terminal-settings-checkbox preference="close-on-exit">
