@@ -18,6 +18,7 @@ import subprocess
 import sys
 import time
 import types
+from typing import Dict, List
 import urllib.request
 
 
@@ -158,8 +159,29 @@ def cmdstr(cmd):
     return ' '.join(quoted)
 
 
-def run(cmd, check=True, cwd=None, extra_env=None, **kwargs):
-    """Run |cmd| inside of |cwd| and exit if it fails."""
+def run(cmd: List[str],
+        cmd_prefix: List[str] = None,
+        log_prefix: List[str] = None,
+        check: bool = True,
+        cwd: str = None,
+        extra_env: Dict[str, str] = None,
+        **kwargs):
+    """Run |cmd| inside of |cwd| and exit if it fails.
+
+
+    Args:
+      cmd: The command to run.
+      cmd_prefix: (Unlogged) prefix for the command to run.  Useful for passing
+          interpreters like `java` or `python` but omitting from default output.
+      log_prefix: Prefix for logging the command, but not running.  Useful for
+          wrapper scripts that get executed directly and use |cmd_prefix|.
+      check: Whether to exit if |cmd| execution fails.
+      cwd: The working directory to run |cmd| inside of.
+      extra_env: Extra environment settings to set before running.
+
+    Returns:
+      A subprocess.CompletedProcess instance.
+    """
     # Python 3.6 doesn't support capture_output.
     if sys.version_info < (3, 7):
         capture_output = kwargs.pop('capture_output', None)
@@ -176,12 +198,21 @@ def run(cmd, check=True, cwd=None, extra_env=None, **kwargs):
         env.update(extra_env)
         kwargs['env'] = env
 
+    if not log_prefix:
+        log_prefix = []
+    log_cmd = log_prefix + cmd
+    if not cmd_prefix:
+        cmd_prefix = []
+    real_cmd = cmd_prefix + cmd
+
     if cwd is None:
         cwd = os.getcwd()
-    logging.info('Running: %s\n  (cwd = %s)', cmdstr(cmd), cwd)
-    result = subprocess.run(cmd, cwd=cwd, **kwargs)
+    logging.info('Running: %s\n  (cwd = %s)', cmdstr(log_cmd), cwd)
+    if cmd_prefix:
+        logging.debug('Real full command: %s', cmdstr(real_cmd))
+    result = subprocess.run(real_cmd, cwd=cwd, **kwargs)
     if check and result.returncode:
-        logging.error('Running %s failed!', cmd[0])
+        logging.error('Running %s failed!', log_cmd[0])
         if result.stdout is not None:
             logging.error('stdout:\n%s', result.stdout)
         if result.stderr is not None:
