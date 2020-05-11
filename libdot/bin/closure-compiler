@@ -12,6 +12,7 @@ https://github.com/google/closure-compiler/wiki/Binary-Downloads
 from __future__ import print_function
 
 import glob
+import json
 import os
 import sys
 
@@ -91,15 +92,127 @@ def update_closure():
     os.rename(fullsrc, CLOSURE)
 
 
-def main(argv):
-    """The main func!"""
-    libdot.setup_logging()
+def convert_to_kokoro(data):
+    """Take closure JSON output and convert it to kokoro comment format.
 
+    The |data| input will look like:
+    [
+      {
+        "column": 21,
+        "context": " * @return {!Promise<FileSystemFileEntry>}\n...",
+        "description": "FileSystemFileEntry is a reference type with ...",
+        "key": "JSC_MISSING_NULLABILITY_MODIFIER_JSDOC",
+        "level": "error",
+        "line": 174,
+        "source": "js/lib_fs.js"
+      },
+      {
+        "description": "1 error(s), 0 warning(s)",
+        "level": "info"
+      }
+    ]
+
+    See convert_eslint_to_kokoro for example return value.
+    """
+    for result in data:
+        # Ignore info lines.
+        if result['level'] == 'info':
+            continue
+
+        # Ignore generated files not in git.
+        if libdot.lint.is_generated_path(result['source']):
+            continue
+
+        # Add leading space prefix to results to get code text.
+        msg = '[closure] %s: %s\n%s\n\n %s' % (
+            result['level'], result['key'], result['description'],
+            '\n '.join(result['context'].splitlines()),
+        )
+
+        yield {
+            'path': os.path.relpath(result['source'], libdot.LIBAPPS_DIR),
+            'message': msg,
+            'startLine': result['line'],
+            'endLine': result.get('endline', result['line']),
+            'startCharacter': result['column'],
+            'endCharacter': result['column'],
+        }
+
+
+def setup():
+    """Initialize the tool settings."""
     update_closure()
     update_externs()
 
-    # Run it!
-    os.execvp('java', ['java', '-jar', CLOSURE] + argv)
+
+def run(argv=(), **kwargs):
+    """Run the tool directly."""
+    setup()
+    return libdot.run(
+        list(argv),
+        cmd_prefix=['java', '-jar', CLOSURE],
+        log_prefix=['closure-compiler'],
+        **kwargs)
+
+
+def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):
+    """Run high level tool logic."""
+    ret = True
+    argv = list(argv)
+    paths = list(paths)
+
+    comments_path = libdot.lint.kokoro_comments_path(
+        gerrit_comments_file, 'closure')
+
+    # Closure doesn't have any automatic fixing logic.
+    if fix:
+        return ret
+
+    update_externs()
+    externs = []
+    externs_paths = os.path.join(libdot.DIR, 'externs', '*.js')
+    for extern in sorted(glob.glob(externs_paths)):
+        externs += ['--externs', os.path.relpath(extern, os.getcwd())]
+
+    argv += [
+        '--checks-only',
+        '--language_in=ECMASCRIPT_2018',
+    ] + externs
+    result = run(argv + paths, check=False)
+    if result.returncode:
+        ret = False
+
+        # Rerun for Gerrit.
+        if comments_path:
+            # Handle relative paths like "foo.json".
+            dirname = os.path.dirname(comments_path)
+            if dirname:
+                os.makedirs(dirname, exist_ok=True)
+
+            argv += ['--error_format=JSON']
+            result = run(argv + paths, check=False, capture_output=True)
+
+            # Save a copy for debugging later.
+            with open(comments_path + '.in', 'wb') as fp:
+                fp.write(result.stderr)
+
+            data = json.loads(result.stderr.decode('utf-8'))
+            comments = list(convert_to_kokoro(data))
+            with open(comments_path, 'w', encoding='utf-8') as fp:
+                json.dump(comments, fp, sort_keys=True)
+    elif comments_path:
+        # If there were no failures, clear the files to avoid leaving previous
+        # results laying around & confuse devs.
+        libdot.unlink(comments_path)
+        libdot.unlink(comments_path + '.in')
+
+    return ret
+
+
+def main(argv):
+    """The main func!"""
+    libdot.setup_logging()
+    run(argv)
 
 
 if __name__ == '__main__':

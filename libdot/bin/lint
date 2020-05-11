@@ -13,7 +13,6 @@ from __future__ import print_function
 
 import fnmatch
 import glob
-import json
 import logging
 import os
 import sys
@@ -43,102 +42,6 @@ def is_generated_path(path):
         fnmatch.fnmatch(path, '*.concat.js') or
         fnmatch.fnmatch(path, '*.rollup.js')
     )
-
-
-def convert_closure_to_kokoro(data):
-    """Take closure JSON output and convert it to kokoro comment format.
-
-    The |data| input will look like:
-    [
-      {
-        "column": 21,
-        "context": " * @return {!Promise<FileSystemFileEntry>}\n...",
-        "description": "FileSystemFileEntry is a reference type with ...",
-        "key": "JSC_MISSING_NULLABILITY_MODIFIER_JSDOC",
-        "level": "error",
-        "line": 174,
-        "source": "js/lib_fs.js"
-      },
-      {
-        "description": "1 error(s), 0 warning(s)",
-        "level": "info"
-      }
-    ]
-
-    See convert_eslint_to_kokoro for example return value.
-    """
-    for result in data:
-        # Ignore info lines.
-        if result['level'] == 'info':
-            continue
-
-        # Ignore generated files not in git.
-        if is_generated_path(result['source']):
-            continue
-
-        # Add leading space prefix to results to get code text.
-        msg = '[closure] %s: %s\n%s\n\n %s' % (
-            result['level'], result['key'], result['description'],
-            '\n '.join(result['context'].splitlines()),
-        )
-
-        yield {
-            'path': os.path.relpath(result['source'], libdot.LIBAPPS_DIR),
-            'message': msg,
-            'startLine': result['line'],
-            'endLine': result.get('endline', result['line']),
-            'startCharacter': result['column'],
-            'endCharacter': result['column'],
-        }
-
-
-def run_closure(opts, extra_args=()):
-    """Run the closure-compiler tool."""
-    ret = True
-
-    comments_path = kokoro_comments_path(opts.gerrit_comments_file, 'closure')
-
-    libdot.closure_compiler.update_externs()
-    externs = []
-    externs_paths = os.path.join(libdot.DIR, 'externs', '*.js')
-    for extern in sorted(glob.glob(externs_paths)):
-        externs += ['--externs', os.path.relpath(extern, os.getcwd())]
-
-    cmd = [
-        os.path.join(libdot.BIN_DIR, 'closure-compiler'),
-        '--checks-only',
-        '--language_in=ECMASCRIPT_2018',
-    ] + externs + list(extra_args)
-    result = libdot.run(cmd + opts.paths, check=False)
-    if result.returncode:
-        ret = False
-
-        # Rerun for Gerrit.
-        if comments_path:
-            # Handle relative paths like "foo.json".
-            dirname = os.path.dirname(comments_path)
-            if dirname:
-                os.makedirs(dirname, exist_ok=True)
-
-            cmd += ['--error_format=JSON']
-            result = libdot.run(cmd + opts.paths, check=False,
-                                capture_output=True)
-
-            # Save a copy for debugging later.
-            with open(comments_path + '.in', 'wb') as fp:
-                fp.write(result.stderr)
-
-            data = json.loads(result.stderr.decode('utf-8'))
-            comments = list(convert_closure_to_kokoro(data))
-            with open(comments_path, 'w', encoding='utf-8') as fp:
-                json.dump(comments, fp, sort_keys=True)
-    elif comments_path:
-        # If there were no failures, clear the files to avoid leaving previous
-        # results laying around & confuse devs.
-        libdot.unlink(comments_path)
-        libdot.unlink(comments_path + '.in')
-
-    return ret
 
 
 def _get_default_paths():
@@ -198,12 +101,15 @@ def main(argv, paths=(), mkdeps=None, closure_args=DEFAULT_CLOSURE_ARGS):
         else:
             logging.info('Skipping building dependencies due to --skip-mkdeps')
 
+    kwargs = {
+        'paths': opts.paths,
+        'fix': opts.fix,
+        'gerrit_comments_file': opts.gerrit_comments_file,
+    }
     checks = [
-        libdot.eslint.perform(paths=opts.paths, fix=opts.fix,
-                              gerrit_comments_file=opts.gerrit_comments_file),
+        libdot.eslint.perform(**kwargs),
+        libdot.closure_compiler.perform(argv=closure_args, **kwargs),
     ]
-    if not opts.fix:
-        checks += [run_closure(opts, closure_args)]
     return 0 if all(checks) else 1
 
 
