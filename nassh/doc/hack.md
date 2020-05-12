@@ -36,11 +36,7 @@ The Secure Shell app depends on some library code from
     nassh$ ./bin/mkdeps
 
 This will create the `nassh/js/nassh_deps.concat.js` file containing all of the
-necessary libdot and hterm source.  If you find yourself changing a lot of
-libdot or hterm code and testing those changes in Secure Shell you can run this
-script with the "--forever" (aka -f) option.  When run in this manner it will
-automatically re-create nassh_deps.concat.js file whenever one of the source
-files is changed.
+necessary libdot and hterm source.
 
 ## The NaCl plugin dependency
 
