@@ -31,7 +31,7 @@ NODE_VER = '12.14.1'
 # Run `./node_sync_with_chromium` to update these hashes.
 NODE_LINUX_HASH = '4572d3801500bcbebafadf203056d6263c840cda'
 NODE_MAC_HASH = '6b9eefd982e255d639234acfa1d772c34a2529cb'
-NODE_WIN_HASH = '8853bd913cd387c2f88a1ab307780278e16caa69'
+NODE_WIN_HASH = 'a25b445d6e02de0fdbf426d5cfd193702351989e'
 
 # Bucket maintained by Chromium.
 # gsutil ls gs://chromium-nodejs/

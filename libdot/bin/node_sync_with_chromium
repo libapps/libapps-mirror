@@ -81,8 +81,7 @@ def main(argv):
 
     update(URI_LIN, 'NODE_LINUX_HASH')
     update(URI_MAC, 'NODE_MAC_HASH')
-    # We don't support Windows yet.
-    #update(URI_WIN, 'NODE_WIN_HASH')
+    update(URI_WIN, 'NODE_WIN_HASH')
 
 
 if __name__ == '__main__':
