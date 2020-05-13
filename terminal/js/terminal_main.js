@@ -8,8 +8,6 @@
 
 import {terminal} from './terminal.js';
 import {setUpTitleCacheHandler} from './terminal_common.js';
-import {TerminalDisplayManagerElement as Manager} from
-    './terminal_display_manager.js';
 
 // This must be called before we initialize the terminal to ensure capturing the
 // first title that hterm sets.
@@ -38,17 +36,7 @@ window.addEventListener('DOMContentLoaded', () => {
   lib.registerInit('migrate-settings', terminal.migrateSettings);
 
   lib.init(() => {
-    document.querySelector(Manager.is)
-        .addEventListener('terminal-window-ready', (event) => {
-      const element = document.createElement('div');
-      element.style.width = element.style.height = '100%';
-      element.addEventListener('terminal-closing', () => {
-        event.target.destroySlot(event.detail.slot);
-      });
-      element.setAttribute('slot', event.detail.slot);
-      event.target.appendChild(element);
-      window.term_ = terminal.init(element);
-    });
-    customElements.define(Manager.is, Manager);
+    window.term_ = terminal.init(
+        lib.notNull(document.querySelector('#terminal')));
   });
 });

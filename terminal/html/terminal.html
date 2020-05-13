@@ -5,7 +5,7 @@
     <meta id='meta-theme-color' name='theme-color' content='$i18n{themeColor}'>
 
     <script src='../js/nassh_deps.concat.js'></script>
-    <script type="module" src='../js/terminal_main.js'></script>
+    <script type='module' src='../js/terminal_main.js'></script>
 
     <style>
       body {
@@ -18,7 +18,7 @@
         width: 100%;
       }
 
-      terminal-display-manager {
+      #terminal {
         display: block;
         position: relative;
         width: 100%;
@@ -29,7 +29,6 @@
   </head>
 
   <body>
-    <terminal-display-manager>
-    </terminal-display-manager>
+    <div id='terminal'></div>
   </body>
 </html>
