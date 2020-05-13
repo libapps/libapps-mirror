@@ -261,7 +261,7 @@ Crosh.prototype.run = function() {
 
   // We're not currently a window, so show a message to the user with a link to
   // open as a new window.
-  if (hterm.windowType != 'popup') {
+  if (hterm.windowType != 'popup' && !Crosh.isWebApp()) {
     const params = new URLSearchParams(document.location.search);
     params.set('openas', 'window');
     const url = new URL(document.location.toString());
