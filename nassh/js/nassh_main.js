@@ -110,7 +110,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
        }},
       {name: nassh.msg('CLEAR_KNOWN_HOSTS_MENU_LABEL'),
        action: function() { terminal.command.removeAllKnownHosts(); }},
-      {name: nassh.msg('OPTIONS_BUTTON_LABEL'),
+      {name: nassh.msg('HTERM_OPTIONS_BUTTON_LABEL'),
        action: function() { nassh.openOptionsPage(); }},
       {name: nassh.msg('SEND_FEEDBACK_LABEL'),
        action: nassh.sendFeedback},

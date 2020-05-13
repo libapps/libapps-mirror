@@ -202,7 +202,7 @@ Crosh.init = function() {
      action: function() {
        lib.f.openWindow('https://goo.gl/muppJj', '_blank');
      }},
-    {name: Crosh.msg('OPTIONS_BUTTON_LABEL'),
+    {name: Crosh.msg('HTERM_OPTIONS_BUTTON_LABEL'),
      action: function() { nassh.openOptionsPage(); }},
     {name: Crosh.msg('SEND_FEEDBACK_LABEL'),
      action: nassh.sendFeedback},

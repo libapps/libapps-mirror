@@ -146,7 +146,7 @@ popup.prototype.populateList_ = function() {
         link.style.textAlign = 'center';
         break;
       case 'options':
-        link.textContent = nassh.msg('OPTIONS_BUTTON_LABEL');
+        link.textContent = nassh.msg('HTERM_OPTIONS_BUTTON_LABEL');
         link.style.textAlign = 'center';
         break;
       case 'feedback':

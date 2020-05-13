@@ -577,6 +577,10 @@
 		"description": "Short status message displayed in a terminal overlay when text is automatically copied to the clipboard.",
 		"message": "Copied"
 	},
+	"HTERM_OPTIONS_BUTTON_LABEL": {
+		"description": "The label for the options button. This opens the program's settings/options/preferences page.",
+		"message": "Options"
+	},
 	"HTERM_POPUP_INLINE_IMAGE": {
 		"description": "Message shown when asking users how they want to display inline images. 'inline' means the images will be displayed directly instead of being downloaded.",
 		"message": "Inline Images"
@@ -1716,10 +1720,6 @@
 				"example": "https://goo.gl/mHrbej"
 			}
 		}
-	},
-	"OPTIONS_BUTTON_LABEL": {
-		"description": "The label for the options button. This opens the program's settings/options/preferences page.",
-		"message": "Options"
 	},
 	"PLUGIN_LOADING": {
 		"description": "Status message displayed while loading the plugin.",
