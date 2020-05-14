@@ -8,15 +8,15 @@
 
 from __future__ import print_function
 
-import os
+from pathlib import Path
 import sys
 
 
-DIR = os.path.dirname(os.path.realpath(__file__))
-LIBAPPS_DIR = os.path.dirname(DIR)
+DIR = Path(__file__).resolve().parent
+LIBAPPS_DIR = DIR.parent
 
 
-sys.path.insert(0, os.path.join(LIBAPPS_DIR, 'libdot', 'bin'))
+sys.path.insert(0, str(LIBAPPS_DIR / 'libdot' / 'bin'))
 
 # pylint: disable=unused-import
 import libdot  # pylint: disable=wrong-import-position

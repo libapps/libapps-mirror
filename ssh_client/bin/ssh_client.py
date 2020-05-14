@@ -11,17 +11,18 @@ from __future__ import print_function
 import logging
 import multiprocessing
 import os
+from pathlib import Path
 import re
 import shutil
 import sys
 
 
-BIN_DIR = os.path.dirname(os.path.realpath(__file__))
-DIR = os.path.dirname(BIN_DIR)
-LIBAPPS_DIR = os.path.dirname(DIR)
+BIN_DIR = Path(__file__).resolve().parent
+DIR = BIN_DIR.parent
+LIBAPPS_DIR = DIR.parent
 
 
-sys.path.insert(0, os.path.join(LIBAPPS_DIR, 'libdot', 'bin'))
+sys.path.insert(0, str(LIBAPPS_DIR / 'libdot' / 'bin'))
 
 import libdot  # pylint: disable=wrong-import-position
 

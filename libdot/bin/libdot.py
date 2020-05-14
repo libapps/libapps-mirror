@@ -153,6 +153,8 @@ def cmdstr(cmd):
 
     quoted = []
     for arg in cmd:
+        if isinstance(arg, Path):
+            arg = str(arg)
         if ' ' in arg:
             arg = '"%s"' % (arg,)
         quoted.append(arg)
