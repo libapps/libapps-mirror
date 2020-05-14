@@ -4,18 +4,16 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-"""Lint our source files.
-
-We'll run through eslint & closure-compiler.
-"""
+"""Lint our source files."""
 
 from __future__ import print_function
 
 import fnmatch
-import glob
 import logging
 import os
+from pathlib import Path
 import sys
+from typing import List
 
 import libdot
 
@@ -44,19 +42,39 @@ def is_generated_path(path):
     )
 
 
-def _get_default_paths():
+def get_known_files(basedir: Path) -> List[Path]:
+    """Return list of files committed to the tree."""
+    # -z appends \0 to each path, it doesn't delimit them.  So strip off the
+    # trailing \0 to avoid a spurious '' entry at the end.
+    all_files = libdot.run(
+        ['git', 'ls-tree', '--name-only', '-r', '-z', 'HEAD'], cwd=basedir,
+        capture_output=True, encoding='utf-8').stdout[:-1].split('\0')
+    return [basedir / x for x in all_files]
+
+
+def get_known_sources(basedir: Path) -> List[Path]:
+    """Get list of committed files that we could possibly lint."""
+    return (x for x in get_known_files(basedir)
+            if x.suffix not in {
+                '.log', '.jpg', '.ogg', '.png', '.svg', '.txt', '.webp'})
+
+
+def _get_default_paths(basedir: Path) -> List[Path]:
     """Get list of paths to lint by default."""
+    most_files = sorted(x for x in get_known_sources(basedir)
+                        if x.suffix not in {'.js'})
+
     # All files in js/*.js excluding generated files.
     # Use relpath for nicer default output.
     # Sort to ensure lib.js comes before lib_array.js, etc.
     # Filter out the generated libdot.js/libdot.min.js/etc...
-    all_paths = (
-        glob.glob(os.path.join(libdot.DIR, 'js', '*.js')) +
-        glob.glob(os.path.join(libdot.DIR, 'third_party', '*', '*.js')))
-    return sorted(
-        os.path.relpath(x, os.getcwd())
-        for x in all_paths
-        if not os.path.basename(x).startswith('libdot.'))
+    js_files = (
+        list((libdot.DIR / 'js').glob('*.js')) +
+        list((libdot.DIR / 'third_party').glob('*/*.js')))
+    js_files = sorted(x for x in js_files
+                      if not x.name.startswith('libdot.'))
+
+    return [os.path.relpath(x) for x in most_files + js_files]
 
 
 def get_parser():
@@ -74,13 +92,15 @@ def get_parser():
     return parser
 
 
-def main(argv, paths=(), mkdeps=None, closure_args=DEFAULT_CLOSURE_ARGS):
+def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
+         closure_args=DEFAULT_CLOSURE_ARGS):
     """The common main func for all linters.
 
     Args:
       argv: The command line to process.
       paths: The default set of files to lint.  If the user doesn't specify
           any, we'll use these instead.
+      basedir: The base source tree to search for default set of files to lint.
       mkdeps: Callback to build dependencies after we've initialized.
       closure_args: Extra arguments to pass to closure-compiler.
     """
@@ -89,9 +109,8 @@ def main(argv, paths=(), mkdeps=None, closure_args=DEFAULT_CLOSURE_ARGS):
     libdot.node_and_npm_setup()
 
     if not opts.paths:
-        if paths:
-            opts.paths = paths
-        else:
+        opts.paths = [str(x) for x in get_default_paths(basedir)]
+        if not opts.paths:
             print('No files to lint.')
             return 0
 
@@ -101,17 +120,29 @@ def main(argv, paths=(), mkdeps=None, closure_args=DEFAULT_CLOSURE_ARGS):
         else:
             logging.info('Skipping building dependencies due to --skip-mkdeps')
 
+    tolint_paths = set(opts.paths)
     kwargs = {
-        'paths': opts.paths,
         'fix': opts.fix,
         'gerrit_comments_file': opts.gerrit_comments_file,
     }
-    checks = [
-        libdot.eslint.perform(**kwargs),
-        libdot.closure_compiler.perform(argv=closure_args, **kwargs),
-    ]
+    checks = []
+
+    js_files = [x for x in opts.paths if x.endswith('.js')]
+    if js_files:
+        tolint_paths -= set(js_files)
+        js_kwargs = {'paths': js_files, **kwargs}
+        checks += [
+            libdot.eslint.perform(**js_kwargs),
+            libdot.closure_compiler.perform(argv=closure_args, **js_kwargs),
+        ]
+
+    if tolint_paths:
+        # TODO(vapier): Change this to warning once we have most files linted.
+        logging.debug('Linting skipped:\n%s', ' '.join(sorted(tolint_paths)))
+
     return 0 if all(checks) else 1
 
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:], paths=_get_default_paths()))
+    sys.exit(main(sys.argv[1:], basedir=libdot.DIR,
+                  get_default_paths=_get_default_paths))

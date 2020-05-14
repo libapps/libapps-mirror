@@ -16,21 +16,24 @@ import nassh
 import libdot
 
 
-JS_DIR = os.path.join(nassh.DIR, 'js')
+JS_DIR = nassh.DIR / 'js'
 
 # Path to generated deps file that terminal uses for libdot/hterm/etc...
 DEPS_FILE = os.path.join(JS_DIR, 'nassh_deps.concat.js')
 
 
-def _get_default_paths():
+def _get_default_paths(basedir):
     """Get list of paths to lint by default."""
+    most_files = sorted(x for x in libdot.lint.get_known_sources(basedir)
+                        if x.suffix not in {'.js'})
+
     # All files in js/*.js excluding generated files.
     # Use relpath for nicer default output.
     # Sort to ensure nasftp.js comes before nasftp_cli.js, etc.
-    return sorted(
-        os.path.relpath(x, os.getcwd())
-        for x in glob.glob(os.path.join(JS_DIR, '*.js'))
-        if not os.path.basename(x).startswith('nassh_deps'))
+    js_files = sorted(x for x in JS_DIR.glob('*.js')
+                      if not x.name.startswith('nassh_deps'))
+
+    return [os.path.relpath(x) for x in most_files + js_files]
 
 
 def mkdeps(_opts):
@@ -55,7 +58,8 @@ def main(argv):
         # TODO(vapier): We want to turn this on at some point.
         '--jscomp_off=strictMissingProperties',
         os.path.relpath(DEPS_FILE)]
-    return libdot.lint.main(argv, paths=_get_default_paths(), mkdeps=mkdeps,
+    return libdot.lint.main(argv, basedir=nassh.DIR,
+                            get_default_paths=_get_default_paths, mkdeps=mkdeps,
                             closure_args=closure_args)
 
 

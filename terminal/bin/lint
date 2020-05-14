@@ -16,21 +16,24 @@ import terminal
 import libdot
 
 
-JS_DIR = os.path.join(terminal.DIR, 'js')
+JS_DIR = terminal.DIR / 'js'
 
 # Path to generated deps file that terminal uses for libdot/hterm/etc...
 NASSH_DIR = os.path.join(libdot.LIBAPPS_DIR, 'nassh')
 DEPS_FILE = os.path.join(NASSH_DIR, 'js', 'nassh_deps.concat.js')
 
 
-def _get_default_paths():
+def _get_default_paths(basedir):
     """Get list of paths to lint by default."""
+    most_files = sorted(x for x in libdot.lint.get_known_sources(basedir)
+                        if x.suffix not in {'.js'})
+
     # All files in js/*.js.
     # Use relpath for nicer default output.
     # Sort to ensure consistent order.
-    return sorted(
-        os.path.relpath(x)
-        for x in glob.glob(os.path.join(JS_DIR, 'terminal*.js')))
+    js_files = sorted(x for x in JS_DIR.glob('terminal*.js'))
+
+    return [os.path.relpath(x) for x in most_files + js_files]
 
 
 def mkdeps(_opts):
@@ -54,7 +57,8 @@ def main(argv):
         # TODO(vapier): We want to turn this on at some point.
         '--jscomp_off=strictMissingProperties',
         os.path.relpath(DEPS_FILE)]
-    return libdot.lint.main(argv, paths=_get_default_paths(), mkdeps=mkdeps,
+    return libdot.lint.main(argv, basedir=terminal.DIR,
+                            get_default_paths=_get_default_paths, mkdeps=mkdeps,
                             closure_args=closure_args)
 
 
