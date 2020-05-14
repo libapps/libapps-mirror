@@ -766,8 +766,8 @@
 		"message": "Send an ESC prefix when pressing a key while holding the Meta key.\n\nFor example, when enabled, pressing Meta+K will send ^[k as if you typed Escape then k. When disabled, only k will be sent."
 	},
 	"HTERM_PREF_MOUSE_PASTE_BUTTON": {
-		"description": "Help text shown for the 'mouse-paste-button' preference. Do not translate 'X11'.",
-		"message": "The mouse button to use for pasting.\n\nFor autodetect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the window manager should paste via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: This will handle left & right handed mice correctly."
+		"description": "Help text shown for the 'mouse-paste-button' preference. Do not translate 'X11'. The window manager is the user's standard desktop interface for interacting with their OS.",
+		"message": "The mouse button to use for pasting.\n\nFor autodetect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the window manager should handle pasting via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: This will handle left & right handed mice correctly."
 	},
 	"HTERM_PREF_MOUSE_RIGHT_CLICK_PASTE": {
 		"description": "Help text shown for the 'mouse-right-click-paste' preference. The quote style may be changed as needed. Do not translate 'mouse-paste-button'.",
@@ -826,7 +826,7 @@
 		"message": "The border size in pixels around the terminal screen.\n\nThis controls the size of the border around the terminal screen to create a visible line at the edges of the screen."
 	},
 	"HTERM_PREF_SCREEN_PADDING_SIZE": {
-		"description": "Help text shown for the 'padding-size' preference.",
+		"description": "Help text shown for the 'padding-size' preference. The terminal screen is referring to the terminal emulator's UI which is a text interface.",
 		"message": "The padding size in pixels around the border of the terminal screen.\n\nThis controls the size of the border around the terminal screen so the user can add some visible padding to the edges of the screen."
 	},
 	"HTERM_PREF_SCROLLBAR_VISIBLE": {
@@ -846,7 +846,7 @@
 		"message": "When using the alternative screen buffer, and DECCKM (Application Cursor Keys) is active, mouse scroll wheel events will emulate arrow keys.\n\nIt can be temporarily disabled by holding the Shift key.\n\nThis frequently comes up when using pagers (less) or reading man pages or text editors (vi/nano) or using screen/tmux."
 	},
 	"HTERM_PREF_SCROLL_WHEEL_MOVE_MULTIPLIER": {
-		"description": "Help text shown for the 'scroll-wheel-move-multiplier' preference. This is a numeric value the user enters and is used as a multiplier. 'mouse scroll wheel' and 'pixels' refer to the normal computing terms, so everything here may be translated as makes sense.",
+		"description": "Help text shown for the 'scroll-wheel-move-multiplier' preference. This is a numeric value the user enters and is used as a multiplier to control how fast the page scrolls. 'mouse scroll wheel' and 'pixels' refer to the normal computing terms, so everything here may be translated as makes sense.",
 		"message": "The multiplier for mouse scroll wheel events when measured in pixels.\n\nAlters how fast the page scrolls."
 	},
 	"HTERM_PREF_SHIFT_INSERT_PASTE": {
@@ -1326,7 +1326,7 @@
 		"message": "realpath"
 	},
 	"NASFTP_CMD_REALPATH_HELP": {
-		"description": "Help text for the 'realpath' command.",
+		"description": "Help text for the 'realpath' command. 'Canonicalize' is the standard computing term that is like normalization.",
 		"message": "Canonicalize paths"
 	},
 	"NASFTP_CMD_RENAME": {
