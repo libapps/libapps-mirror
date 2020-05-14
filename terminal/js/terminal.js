@@ -54,13 +54,6 @@ terminal.openOptionsPage = function() {
 };
 
 /**
- * Trigger the flow for sending feedback.
- */
-terminal.sendFeedback = function() {
-  lib.f.openWindow('https://goo.gl/vb94JY');
-};
-
-/**
  * Either send a ^N or open a new tabbed terminal window.
  *
  * @this {!hterm.Keyboard.KeyMap}
@@ -151,14 +144,8 @@ terminal.init = function(element) {
      action: function() { term.wipeContents(); }},
     {name: terminal.msg('TERMINAL_RESET_MENU_LABEL'),
      action: function() { term.reset(); }},
-    {name: terminal.msg('FAQ_MENU_LABEL'),
-     action: function() {
-       lib.f.openWindow('https://goo.gl/muppJj', '_blank');
-     }},
-    {name: terminal.msg('OPTIONS_BUTTON_LABEL'),
+    {name: terminal.msg('TERMINAL_TITLE_SETTINGS'),
      action: function() { terminal.openOptionsPage(); }},
-    {name: terminal.msg('SEND_FEEDBACK_LABEL'),
-     action: terminal.sendFeedback},
   ]);
 
   return term;
