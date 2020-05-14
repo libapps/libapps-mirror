@@ -565,6 +565,10 @@
 		"description": "Label text shown for the 'word-break-match-right' preference. When automatically expanding the user's selection, this controls when to stop expanding the selection to the right of content. This will be used when double clicking text and deciding how much text to the right of he cursor to automatically select.",
 		"message": "Automatic selection halting (to the right)"
 	},
+	"HTERM_NOTIFY_COPY": {
+		"description": "Short status message displayed in a terminal overlay when text is automatically copied to the clipboard.",
+		"message": "Copied"
+	},
 	"HTERM_POPUP_INLINE_IMAGE": {
 		"description": "Message shown when asking users how they want to display inline images. 'inline' means the images will be displayed directly instead of being downloaded.",
 		"message": "Inline Images"
@@ -1678,10 +1682,6 @@
 	"NEW_WINDOW_MENU_LABEL": {
 		"description": "The menu label to open a new window for a new Secure Shell session.",
 		"message": "New Window"
-	},
-	"NOTIFY_COPY": {
-		"description": "Short status message displayed in a terminal overlay when text is automatically copied to the clipboard.",
-		"message": "Selection Copied"
 	},
 	"OK_BUTTON_LABEL": {
 		"description": "The label for the OK button in dialogs when confirming user input. It will be shown along with a 'Cancel' button.",

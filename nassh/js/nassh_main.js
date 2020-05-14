@@ -70,7 +70,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const profileName = params.get('profile');
 
     hterm.zoomWarningMessage = nassh.msg('ZOOM_WARNING');
-    hterm.notifyCopyMessage = nassh.msg('NOTIFY_COPY');
 
     const terminal = new hterm.Terminal(profileName);
     // TODO(crbug.com/1063219) We need this to not prompt the user for clipboard
