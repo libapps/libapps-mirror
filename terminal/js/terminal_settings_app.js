@@ -495,10 +495,6 @@ export class TerminalSettingsApp extends LitElement {
                 @click="${() => lib.f.openWindow('/html/licenses.html')}">
                 <h4>${msg('LICENSES')}</h4>
             </li>
-            <li class="setting-container about-link" role="link"
-                @click="${() => lib.f.openWindow('https://goo.gl/vb94JY')}">
-                <h4>${msg('SEND_FEEDBACK_LABEL')}<h4>
-            </li>
           </ul>
         </section>
     `;
