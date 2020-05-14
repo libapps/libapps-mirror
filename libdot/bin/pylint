@@ -12,8 +12,10 @@ import functools
 import json
 import logging
 import os
+from pathlib import Path
 import shutil
 import sys
+from typing import List
 
 import libdot
 
@@ -61,6 +63,37 @@ def convert_to_kokoro(data):
             'startCharacter': result['column'],
             'endCharacter': result['column'],
         }
+
+
+def filter_known_files(paths: List[Path]) -> List[Path]:
+    """Figure out what files this linter supports."""
+    ret = []
+    for path in paths:
+        path = Path(path)
+
+        # TODO(vapier): Figure out why pylint hates us.  Running in the
+        # container on these modules fails with "internal errors:
+        # maximum recursion depth exceeded.".
+        spec = (path.parent.parent.name, path.parent.name, path.name)
+        if spec == ('libdot', 'bin', 'node'):
+            continue
+        elif spec == ('ssh_client', 'bin', 'ssh_client.py'):
+            continue
+
+        if path.suffix == '.py':
+            # Add all .py files as they should only be Python.
+            ret += [path]
+        elif path.is_symlink():
+            # Ignore symlinks.
+            pass
+        elif path.stat().st_mode & 0o111:
+            # Add executable programs with python shebangs.
+            with path.open('rb') as fp:
+                shebang = fp.readline()
+            if b'python' in shebang:
+                ret += [path]
+
+    return [str(x) for x in ret]
 
 
 @functools.lru_cache(maxsize=1)
@@ -118,11 +151,16 @@ def run(argv=(), pythonpaths=(), **kwargs):
     return libdot.run(cmd, **kwargs)
 
 
-def perform(argv=(), paths=(), pythonpaths=(), gerrit_comments_file=None):
+def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None,
+            pythonpaths=()):
     """Run high level tool logic."""
     ret = True
     argv = list(argv)
     paths = list(paths)
+
+    # Pylint doesn't have any automatic fixing logic.
+    if fix:
+        return ret
 
     comments_path = libdot.lint.kokoro_comments_path(
         gerrit_comments_file, 'pylint')

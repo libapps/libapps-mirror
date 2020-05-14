@@ -207,6 +207,12 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
             libdot.closure_compiler.perform(argv=closure_args, **js_kwargs),
         ]
 
+    py_files = libdot.pylint.filter_known_files(opts.paths)
+    if py_files:
+        tolint_paths -= set(py_files)
+        py_kwargs = {'paths': py_files, **kwargs}
+        checks += [libdot.pylint.perform(**py_kwargs)]
+
     html_files = [x for x in opts.paths
                   if x.endswith('.html') or x.endswith('.html.in')]
     if html_files:
