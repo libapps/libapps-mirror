@@ -102,4 +102,50 @@ it('migrates-settings-on-first-run-only', async function() {
   assert.deepInclude(settings, {'test': 1, 'crosh.settings.migrated': true});
 });
 
+it('overrides-ctrl-n-keymap-and-calls-openWindow', async function() {
+  let callCount = 0;
+  mockTerminalPrivateController.addObserver('openWindow', () => {
+    ++callCount;
+  });
+
+  const term = terminal.init(div);
+  await mockTerminalPrivateController.on('openVmshellProcess');
+
+  const keyDef = term.keyboard.keyMap.keyDefs[78]; // N.
+
+  /**
+   * Get the action with shiftKey set as indicated.
+   *
+   * @param {boolean} shiftKey
+   * @return {!hterm.Keyboard.KeyDefAction}
+   */
+  function action(shiftKey) {
+    const e = new KeyboardEvent('keydown', {shiftKey});
+    let control = keyDef.control;
+    while (typeof control == 'function') {
+      control = control.call(term.keyboard.keyMap, e, keyDef);
+    }
+    return control;
+  }
+
+  // passCtrlN = false, Ctrl+N should send char to terminal.
+  term.passCtrlN = false;
+  assert.equal('\x0e', action(false));
+
+  // passCtrlN = false, Ctrl+Shift+N should open window.
+  assert.equal(hterm.Keyboard.KeyActions.CANCEL, action(true));
+  await mockTerminalPrivateController.on('openWindow');
+  assert.equal(1, callCount);
+
+  // passCtrlN = true, Ctrl+N should open window.
+  term.passCtrlN = true;
+  assert.equal(hterm.Keyboard.KeyActions.CANCEL, action(false));
+  await mockTerminalPrivateController.on('openWindow');
+  assert.equal(2, callCount);
+
+  // passCtrlN = true, Ctrl+Shift+N should open window.
+  assert.equal(hterm.Keyboard.KeyActions.CANCEL, action(true));
+  await mockTerminalPrivateController.on('openWindow');
+  assert.equal(3, callCount);
+});
 });

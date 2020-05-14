@@ -265,6 +265,30 @@ MockTerminalPrivate.prototype.getA11yStatus = function(callback) {
 };
 
 /**
+ * Open the Terminal Settings page.
+ *
+ * @param {function()} callback Callback that will be called when complete.
+ */
+MockTerminalPrivate.prototype.openOptionsPage = function(callback) {
+  setTimeout(() => {
+    callback();
+    this.notifyObservers_('openOptionsPage', [callback]);
+  }, 0);
+};
+
+/**
+ * Open the Terminal tabbed window.
+ *
+ * @param {function()} callback Callback that will be called when complete.
+ */
+MockTerminalPrivate.prototype.openWindow = function(callback) {
+  setTimeout(() => {
+    callback();
+    this.notifyObservers_('openWindow', [callback]);
+  }, 0);
+};
+
+/**
  * Mock Window.
  *
  * @extends {Window}

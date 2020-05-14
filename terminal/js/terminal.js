@@ -61,6 +61,25 @@ terminal.sendFeedback = function() {
 };
 
 /**
+ * Either send a ^N or open a new tabbed terminal window.
+ *
+ * @this {!hterm.Keyboard.KeyMap}
+ * @param {!KeyboardEvent} e The event to process.
+ * @param {!hterm.Keyboard.KeyDef} k
+ * @return {!hterm.Keyboard.KeyDefFunction|string} Key action or sequence.
+ */
+terminal.onCtrlN = function(e, k) {
+  if (e.shiftKey || this.keyboard.terminal.passCtrlN) {
+    return function(e, k) {
+      chrome.terminalPrivate.openWindow(() => {});
+      return hterm.Keyboard.KeyActions.CANCEL;
+    };
+  }
+
+  return '\x0e';
+};
+
+/**
  * Static initializer.
  *
  * This constructs a new hterm.Terminal instance and instructs it to run
@@ -81,6 +100,7 @@ terminal.init = function(element) {
     });
 
     term.onOpenOptionsPage = terminal.openOptionsPage;
+    term.keyboard.keyMap.keyDefs[78].control = terminal.onCtrlN;
     term.setCursorPosition(0, 0);
     term.setCursorVisible(true);
     term.runCommandClass(
