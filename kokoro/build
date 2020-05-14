@@ -155,6 +155,9 @@ def _run_linter(cmd, cwd):
 
 def test_jslint():
     """Lint all our JS files."""
+    # Log versions of linter tools since we pull some from the container.
+    libdot.run([kokoro.DIR / 'lint', '--version'])
+
     ret = []
     for pkg in ('libdot', 'hterm', 'nassh', 'terminal'):
         pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
@@ -173,9 +176,7 @@ def test_pylint():
     """Run pylint over all the Python files in the tree."""
     logging.info('Linting all Python files')
 
-    # Log the linter version since we pull it from the container.
     pylint_libdot = os.path.join(kokoro.LIBAPPS_DIR, 'libdot', 'bin', 'pylint')
-    libdot.run([pylint_libdot, '--version'])
 
     def find_pyfiles(pkg, topdir):
         """Walk |topdir| and find all Python files under it."""

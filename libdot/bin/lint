@@ -140,6 +140,8 @@ def _get_default_paths(basedir: Path) -> List[Path]:
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
+    parser.add_argument('--version', action='store_true',
+                        help='Show linter versions.')
     parser.add_argument('--fix', action='store_true',
                         help='Run linters with --fix setting if possible.')
     parser.add_argument('--gerrit-comments-file',
@@ -167,6 +169,15 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
     parser = get_parser()
     opts = parser.parse_args(argv)
     libdot.node_and_npm_setup()
+
+    if opts.version:
+        for func in (
+                libdot.eslint.run,
+                libdot.closure_compiler.run,
+                libdot.pylint.run,
+        ):
+            func(['--version'])
+        return 0
 
     if not opts.paths:
         opts.paths = [str(x) for x in get_default_paths(basedir)]
