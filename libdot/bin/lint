@@ -59,6 +59,64 @@ def get_known_sources(basedir: Path) -> List[Path]:
                 '.log', '.jpg', '.ogg', '.png', '.svg', '.txt', '.webp'})
 
 
+def lint_whitespace_data(path: Path, data: str) -> bool:
+    """Basic whitespace checks on text files."""
+    ret = True
+
+    if '\r' in data:
+        ret = False
+        logging.error(r'%s: \r not allowed in text files', path)
+
+    if data.startswith('\n'):
+        ret = False
+        logging.error('%s: No leading blank lines allowed', path)
+
+    if not data.endswith('\n'):
+        ret = False
+        logging.error('%s: Files must end with a newline', path)
+
+    return ret
+
+
+def lint_whitespace_files(paths: List[Path]) -> bool:
+    """Basic whitespace checks on text files."""
+    ret = True
+
+    for path in paths:
+        with open(path, mode='r', encoding='utf-8') as fp:
+            data = fp.read()
+
+        ret &= lint_whitespace_data(path, data)
+
+    return ret
+
+
+def lint_html_files(paths: List[Path]) -> bool:
+    """Basic lint checks on HTML files."""
+    logging.info('Linting HTML files %s', libdot.cmdstr(paths))
+    ret = True
+
+    META_CHARSET_TAG = "<meta charset='utf-8'/>"
+
+    for path in paths:
+        with open(path, mode='r', encoding='utf-8') as fp:
+            data = fp.read()
+
+        if META_CHARSET_TAG not in data:
+            ret = False
+            logging.error('%s: <head>: missing %s tag', path, META_CHARSET_TAG)
+
+        ret &= lint_whitespace_data(path, data)
+
+    return ret
+
+
+def lint_text_files(paths: List[Path]) -> bool:
+    """Basic lint checks on HTML files."""
+    logging.info('Linting text files %s', libdot.cmdstr(paths))
+    return lint_whitespace_files(paths)
+
+
 def _get_default_paths(basedir: Path) -> List[Path]:
     """Get list of paths to lint by default."""
     most_files = sorted(x for x in get_known_sources(basedir)
@@ -135,6 +193,22 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
             libdot.eslint.perform(**js_kwargs),
             libdot.closure_compiler.perform(argv=closure_args, **js_kwargs),
         ]
+
+    html_files = [x for x in opts.paths
+                  if x.endswith('.html') or x.endswith('.html.in')]
+    if html_files:
+        tolint_paths -= set(html_files)
+        checks += [lint_html_files(html_files)]
+
+    # TODO(vapier): Add smarter JSON & markdown linters.
+    TEXT_FILENAMES = {'.gitignore', 'LICENSE', 'METADATA'}
+    TEXT_EXTENSIONS = {'.concat', '.css', '.el', '.json', '.md', '.sh', '.vim'}
+    text_files = [x for x in opts.paths
+                  if (os.path.basename(x) in TEXT_FILENAMES or
+                      os.path.splitext(x)[1] in TEXT_EXTENSIONS)]
+    if text_files:
+        tolint_paths -= set(text_files)
+        checks += [lint_text_files(text_files)]
 
     if tolint_paths:
         # TODO(vapier): Change this to warning once we have most files linted.
