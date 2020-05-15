@@ -95,7 +95,6 @@ export function definePrefs(prefs) {
   prefs.definePreference('background-size', DEFAULT_BACKGROUND_SIZE);
   prefs.definePreference('cursor-color', DEFAULT_CURSOR_COLOR);
   prefs.definePreference('color-palette-overrides', DEFAULT_ANSI_COLORS);
-  prefs.definePreference('enable-resize-status', true);
   prefs.definePreference('font-family', fontFamilyToCSS(DEFAULT_FONT_FAMILY));
   prefs.definePreference('font-size', DEFAULT_FONT_SIZE);
   prefs.definePreference('foreground-color', DEFAULT_FOREGROUND_COLOR);
