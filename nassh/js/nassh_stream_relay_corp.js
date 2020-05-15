@@ -497,7 +497,7 @@ nassh.Stream.RelayCorpWS.prototype.onSocketData_ = function(e) {
 
   // Unsigned 24 bits wrap-around delta.
   const delta = ((ack & 0xffffff) - (this.writeCount_ & 0xffffff)) & 0xffffff;
-  this.writeBuffer_.read(delta);
+  this.writeBuffer_.ack(delta);
   this.sentCount_ -= delta;
   this.writeCount_ += delta;
 
