@@ -212,7 +212,7 @@ def run(cmd: List[str],
     logging.info('Running: %s\n  (cwd = %s)', cmdstr(log_cmd), cwd)
     if cmd_prefix:
         logging.debug('Real full command: %s', cmdstr(real_cmd))
-    result = subprocess.run(real_cmd, cwd=cwd, **kwargs)
+    result = subprocess.run(real_cmd, cwd=cwd, check=False, **kwargs)
     if check and result.returncode:
         logging.error('Running %s failed!', log_cmd[0])
         if result.stdout is not None:
