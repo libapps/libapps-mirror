@@ -56,7 +56,9 @@ def get_known_sources(basedir: Path) -> List[Path]:
     """Get list of committed files that we could possibly lint."""
     return (x for x in get_known_files(basedir)
             if x.suffix not in {
-                '.log', '.jpg', '.ogg', '.png', '.svg', '.txt', '.webp'})
+                '.log', '.jpg', '.ogg', '.patch', '.png', '.svg', '.txt',
+                '.webp',
+            })
 
 
 def lint_whitespace_data(path: Path, data: str) -> bool:
