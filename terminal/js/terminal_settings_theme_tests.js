@@ -85,14 +85,12 @@ describe('terminal_settings_theme_tests.js', () => {
     // Check hterm settings are changed.
     assert.equal('#FFFFFF', window.preferenceManager.get('background-color'));
     assert.equal('#000000', window.preferenceManager.get('foreground-color'));
-    assert.equal(
-        'rgba(66, 133, 243, 0.5)',
-        window.preferenceManager.get('cursor-color'));
+    assert.equal('#1967D2', window.preferenceManager.get('cursor-color'));
     assert.deepEqual(
-        ['#425B74', '#B42D25', '#1967D2', '#935236',
-         '#6355BA', '#A51BB5', '#53671E', '#363A3D',
-         '#4B6A88', '#D93025', '#1A73E8', '#B05E3B',
-         '#7462E0', '#C61AD9', '#60781D', '#3C4043'],
+        ['#E8EAED', '#F28B82', '#108468', '#F29900',
+         '#8AB4F8', '#F882FF', '#03BFC8', '#202124',
+         '#F8F9FA', '#EE675C', '#108468', '#DB7000',
+         '#1A73E8', '#AA00B8', '#009099', '#9AA0A6'],
         window.preferenceManager.get('color-palette-overrides'));
   });
 

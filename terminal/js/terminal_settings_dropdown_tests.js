@@ -349,17 +349,10 @@ describe('terminal_settings_dropdown_tests.js', () => {
     assert.equal(this.getNthLiElement(0).getAttribute('style'), style);
     assert.equal(this.getNthLiElement(1).getAttribute('style'), '');
 
-    // Style also apply to the "current value" <div> in additional to the
-    // corresponding <li>.
-    const getCurrentValueDivStyle = () => this.el.shadowRoot.querySelector(
-        '#current-value').getAttribute('style');
+    // Style does not apply to the "current value" <div>, only the <li>.
     assert.equal(this.el.value, newOptions[0].value);
-    assert.equal(getCurrentValueDivStyle(), style);
-
-    // Select another option and see the style goes away.
-    await window.preferenceManager.set(preference, options[1].value);
-    await this.el.updateComplete;
-    assert.equal(getCurrentValueDivStyle(), '');
+    const currentValue = this.el.shadowRoot.querySelector('#current-value');
+    assert.isNull(currentValue.getAttribute('style'));
   });
 
   // This only test that the attr is set. The behavior for disabled <li> element

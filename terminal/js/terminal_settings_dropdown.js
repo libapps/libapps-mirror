@@ -122,7 +122,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
         }
 
         .option[aria-selected="true"] {
-          background-color: rgb(213, 229, 255);
+          background-color: rgb(232, 240, 254);
         }
 
         .option:not([disabled]):hover {
@@ -154,19 +154,15 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
     `;
 
     let selectedLabel = '';
-    let selectedStyle = '';
     let selectedDisabled = false;
     if (selectedIndex !== -1) {
       const option = this.options[selectedIndex];
       selectedLabel = nullishCoalescing(option.label, option.value);
-      selectedStyle = nullishCoalescing(option.style, '');
       selectedDisabled = option.disabled === true;
     }
     return html`
         <div id="container" role="button" aria-expanded="${this.expanded}" >
-          <div id="current-value" style="${selectedStyle}"
-              ?data-disabled="${selectedDisabled}"
-          >
+          <div id="current-value" ?data-disabled="${selectedDisabled}">
             ${selectedLabel}
           </div>
           <ul id="options" role="listbox">

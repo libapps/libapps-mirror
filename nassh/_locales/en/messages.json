@@ -1985,8 +1985,16 @@
 		"description": "Label for dark theme.  The dark theme uses a black background and darker colors.",
 		"message": "Dark"
 	},
+	"TERMINAL_THEME_DUSK_LABEL": {
+		"description": "Label for 'Dusk' theme.  It is OK to translate this name in any way.  Use a short name, or it is also OK to not translate",
+		"message": "Dusk"
+	},
+	"TERMINAL_THEME_FOREST_LABEL": {
+		"description": "Label for 'Forest' theme.  It is OK to translate this name in any way.  Use a short name, or it is also OK to not translate",
+		"message": "Forest"
+	},
 	"TERMINAL_THEME_HAZE_LABEL": {
-		"description": "Label for haze theme.  It is OK to translate this name in any way.  Use a short name, or it is also OK to not translate",
+		"description": "Label for 'Haze' theme.  It is OK to translate this name in any way.  Use a short name, or it is also OK to not translate",
 		"message": "Haze"
 	},
 	"TERMINAL_THEME_LIGHT_LABEL": {

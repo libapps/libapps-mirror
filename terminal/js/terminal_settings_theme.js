@@ -179,12 +179,11 @@ const THEMES = {
       'TERMINAL_THEME_DARK_LABEL', DEFAULT_BACKGROUND_COLOR,
       DEFAULT_FOREGROUND_COLOR, DEFAULT_CURSOR_COLOR, DEFAULT_ANSI_COLORS),
   'light': new Theme('light',
-      'TERMINAL_THEME_LIGHT_LABEL', '#FFFFFF', '#000000',
-      'rgba(66, 133, 243, 0.5)',
-      ['#425B74', '#B42D25', '#1967D2', '#935236',
-       '#6355BA', '#A51BB5', '#53671E', '#363A3D',
-       '#4B6A88', '#D93025', '#1A73E8', '#B05E3B',
-       '#7462E0', '#C61AD9', '#60781D', '#3C4043']),
+      'TERMINAL_THEME_LIGHT_LABEL', '#FFFFFF', '#000000', '#1967D2',
+      ['#E8EAED', '#F28B82', '#108468', '#F29900',
+       '#8AB4F8', '#F882FF', '#03BFC8', '#202124',
+       '#F8F9FA', '#EE675C', '#108468', '#DB7000',
+       '#1A73E8', '#AA00B8', '#009099', '#9AA0A6']),
   'classic': new Theme('classic',
       'TERMINAL_THEME_CLASSIC_LABEL', '#101010', '#FFFFFF',
       'rgba(255, 0, 0, 0.5)', lib.colors.stockColorPalette.slice(0, 16)),
@@ -202,13 +201,24 @@ const THEMES = {
        '#268BD2', '#D33682', '#2AA198', '#073642',
        '#FDF6E3', '#CB4B16', '#93A1A1', '#839496',
        '#657B83', '#6C71C4', '#586E75', '#002B36']),
+  'dusk': new Theme('dusk',
+      'TERMINAL_THEME_DUSK_LABEL', '#22273E', '#FFFFFF', '#87FFC5',
+      ['#2D3452', '#F4B5FB', '#E3FEEF', '#E7F936',
+       '#9573F5', '#FFA08B', '#30E2EA', '#434D7B',
+       '#8D9CF6', '#F882FF', '#87FFC5', '#F1FF67',
+       '#B39AF5', '#FFBCAD', '#80F9F9', '#414976']),
   'haze': new Theme('haze',
-      'TERMINAL_THEME_HAZE_LABEL', '#31375A', '#E8EAED',
-      'rgba(235, 189, 252, 0.5)',
-      ['#FF8BCB', '#FFA07A', '#25E387', '#CEE000',
-       '#8AB4F8', '#E3A1FA', '#30E2EA', '#BDC1C6',
-       '#FBA9D6', '#FFB395', '#87FFC5', '#F1FF67',
-       '#AECBFA', '#F1D0FD', '#80F9F9', '#F8F9FA']),
+      'TERMINAL_THEME_HAZE_LABEL', '#3E1C43', '#FFFFFF', '#FEEFC3',
+      ['#5B3062', '#F6AEA9', '#CDD8FA', '#F7FFA4',
+       '#956FE4', '#F994FF', '#87FFC5', '#2C222E',
+       '#FBE1FF', '#F9C6C3', '#97B0FC', '#F1FF67',
+       '#D3BEFF', '#FBB4FF', '#ABFFD6', '#76427D']),
+  'forest': new Theme('forest',
+      'TERMINAL_THEME_FOREST_LABEL', '#1F3334', '#FFFFFF', '#CCB4FF',
+      ['#2B4E50', '#FFA07A', '#7097B0', '#F1FF67',
+       '#C6FFE3', '#FAA5FF', '#8584CD', '#202124',
+       '#AAFCFF', '#FFB79A', '#A2D3F2', '#DCF775',
+       '#87FFC5', '#FBB4FF', '#8B88FF', '#486B6C']),
 };
 
 /**
@@ -217,9 +227,9 @@ const THEMES = {
  * @type {string}
  */
 const RESET =
-    '<svg width="16px" height="16px" xmlns="http://www.w3.org/2000/svg">' +
+    '<svg width="20px" height="20px" xmlns="http://www.w3.org/2000/svg">' +
     '<path d="M3,5 A6,6 0 1,1 2,9 M2,2 v4 h4" ' +
-    'fill="none" stroke-width="2" stroke="white"/></svg>';
+    'fill="none" stroke-width="1.75" stroke="white"/></svg>';
 
 export class TerminalSettingsThemeElement extends LitElement {
   static get is() { return 'terminal-settings-theme'; }
@@ -260,16 +270,39 @@ export class TerminalSettingsThemeElement extends LitElement {
   /** @override */
   static get styles() {
     return [stylesVars, stylesButtonContainer, stylesDialog, css`
+      #themes {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        max-width: 600px;
+        width: 100%;
+      }
+
       .theme {
-        border: 1px solid #e5e5e5;
+        cursor: pointer;
+        flex-basis: 25%;
+        margin: 0;
+        max-width: 150px;
+      }
+
+      .theme-inner {
+        border: 1px solid #E5E5E5;
         border-radius: 8px;
         cursor: pointer;
-        display: inline-block;
-        margin: 0 8px 8px 0;
+        height: 88px;
+        margin: 8px 0 0 8px;
         overflow: hidden;
+        position: relative;
+      }
+
+      .theme:nth-child(-n+4) > .theme-inner {
+        margin: 0 0 0 8px;
       }
 
       .preview {
+        height: 48px;
+        min-width: 100%;
+        overflow: hidden;
         position: relative;
       }
 
@@ -278,13 +311,26 @@ export class TerminalSettingsThemeElement extends LitElement {
         font-size: 5px;
         line-height: 6px;
         margin: 0;
-        padding: 4px;
+        padding: 6px 8px;
+        position: absolute;
+        white-space: pre;
       }
 
       .label {
-        color: rgb(95, 99, 104);
-        font-weight: 500;
-        padding: 10px;
+        background-color: #FFF;
+        bottom: 0;
+        color: #202124;
+        font-weight: 400;
+        line-height: 40px;
+        position: absolute;
+        width: 100%;
+      }
+
+      .label p {
+        margin: 0 10px;
+        overflow: hidden; 
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .theme[active-theme] .label {
@@ -293,19 +339,29 @@ export class TerminalSettingsThemeElement extends LitElement {
       }
 
       .reset {
-        background: rgba(0, 0, 0, 0.5) no-repeat 16px 12px
-          url('data:image/svg+xml;utf8,${unsafeCSS(RESET)}');
+        background-color: rgba(0, 0, 0, 0.6);
         bottom: 0;
         color: #fff;
         display: none;
-        font-weight: bold;
+        font-size: 13px;
+        font-weight: 500;
         left: 0;
         margin: 0;
-        padding: 12px 0 0 40px;
+        padding: 0;
         position: absolute;
         right: 0;
         top: 0;
+        width: 100%;
         z-index: 10;
+      }
+
+      .reset div {
+        background: url('data:image/svg+xml;utf8,${unsafeCSS(RESET)}')
+                    no-repeat left;
+        line-height: 20px;
+        margin: 14px auto;
+        padding: 0 0 0 28px;
+        width: 38px;
       }
 
       .theme[active-theme][reset-theme] .reset {
@@ -325,18 +381,22 @@ export class TerminalSettingsThemeElement extends LitElement {
               @click="${this.onClicked_.bind(this, t.id)}"
               ?active-theme="${this.theme_.id === t.id}"
               ?reset-theme="${this.theme_.hasVariations()}">
-          <div class="preview" aria-hidden="true"
-              style="background-color:${t.background};color:${t.font}">
+            <div class="theme-inner">
+              <div class="preview" aria-hidden="true"
+                  style="background-color:${t.background};color:${t.font}">
 <pre>drwxr-xr-x 1 joel 13:28 ${span(t.ansi[12], '.')}
 drwxr-xr-x 1 root 07:00 ${span(t.ansi[12], '..')}
 -rw-r--r-- 1 joel 15:24 .bashrc
 drwxr-xr-x 1 joel 10:38 ${span(t.ansi[12], '.config')}
--rwxr-xr-x 1 joel 14:30 ${span(t.ansi[10], 'autoexec.bat')}
+-rwxr-xr-x 1 joel 14:30 ${span(t.ansi[10], 'a.out')}
 ${span(t.ansi[10], 'joel@penguin')}:${span(t.ansi[12], '~')
 }$ ls -al<span style="background:${t.cursor}"> </span></pre>
-              <div class="reset">${msg('TERMINAL_SETTINGS_RESET_LABEL')}</div>
+                <div class="reset">
+                  <div>${msg('TERMINAL_SETTINGS_RESET_LABEL')}</div>
+                </div>
+              </div>
+              <div class="label"><p>${msg(t.translationKey)}</p></div>
             </div>
-            <div class="label">${msg(t.translationKey)}</div>
           </div>`)}
         </div>
         <dialog>

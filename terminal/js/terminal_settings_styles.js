@@ -12,7 +12,7 @@ import {css} from './lit_element.js';
 
 export const stylesVars = css`
   :host {
-    --active-bg: rgb(210, 227, 252);
+    --active-bg: rgb(232, 240, 254);
     --google-blue-600: rgb(26, 115, 232);
     --google-blue-600-rgb: 26, 115, 232;
     --google-blue-refresh-500-rgb: 66, 133, 244;

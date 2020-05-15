@@ -26,19 +26,19 @@ export const SUPPORTED_FONT_SIZES = [10, 11, 12, 13, 14, 16, 18, 20];
 
 /** @type {!Array<string>} */
 export const DEFAULT_ANSI_COLORS = [
-  '#80868B',
-  '#EE675C',
-  '#0AA882',
-  '#F9AB00',
-  '#669DF6',
+  '#3C4043',
+  '#F28B82',
+  '#137356',
+  '#E37400',
+  '#8AB4F8',
   '#EE5FFA',
   '#03BFC8',
-  '#BDC1C6',
+  '#FFFFFF',
   '#9AA0A6',
-  '#F28B82',
+  '#F6AEA9',
   '#87FFC5',
   '#FDD663',
-  '#8AB4F8',
+  '#AECBFA',
   '#F4B5FB',
   '#80F9F9',
   '#F8F9FA',
@@ -46,7 +46,7 @@ export const DEFAULT_ANSI_COLORS = [
 export const DEFAULT_BACKGROUND_COLOR = '#202124';
 export const DEFAULT_BACKGROUND_SIZE = '100% 100%';
 export const DEFAULT_FOREGROUND_COLOR = '#FFFFFF';
-export const DEFAULT_CURSOR_COLOR = 'rgba(174, 203, 250, 0.5)';
+export const DEFAULT_CURSOR_COLOR = '#669DF6';
 export const DEFAULT_FONT_SIZE = 13;
 export const DEFAULT_SCREEN_PADDING_SIZE = 8;
 export const DEFAULT_THEME = 'dark';

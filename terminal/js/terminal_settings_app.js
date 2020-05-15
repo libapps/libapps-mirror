@@ -49,8 +49,8 @@ export const BELL_SOUND_CONVERTER = {
  * @type {string}
  */
 const OPEN_IN_NEW =
-    '<svg width="24px" height="24px" viewBox="0 0 24 24" ' +
-    'fill="rgb(33,33,33)" xmlns="http://www.w3.org/2000/svg">' +
+    '<svg width="20px" height="20px" viewBox="0 0 24 24" ' +
+    'fill="rgb(95,99,104)" xmlns="http://www.w3.org/2000/svg">' +
     '<path d="M0 0h24v24H0V0z" fill="none"/>' +
     '<path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 ' +
     '2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>' +
@@ -82,7 +82,7 @@ export class TerminalSettingsApp extends LitElement {
     return [stylesVars, css`
       :host {
         bottom: 0;
-        color: #80868B;
+        color: rgb(95, 99, 104);
         display: flex;
         flex-wrap: nowrap;
         font-family: 'Roboto';
@@ -98,6 +98,8 @@ export class TerminalSettingsApp extends LitElement {
       h1 {
         font-size: 16px;
         font-weight: 500;
+        line-height: 20px;
+        margin: 18px 0 23px 0;
         padding-left: 24px;
       }
 
@@ -120,6 +122,7 @@ export class TerminalSettingsApp extends LitElement {
       terminal-settings-category-option > h2 {
         border-radius: 0 16px 16px 0;
         font-size: 13px;
+        font-weight: 500;
         line-height: 32px;
         margin: 8px 0;
         padding: 0 24px 0 32px;
@@ -139,11 +142,12 @@ export class TerminalSettingsApp extends LitElement {
         display: none;
         flex-grow: 1;
         overflow: auto;
-        padding: 0 40px;
+        padding: 4px 40px;
       }
 
       .terminal-settings-category > section {
         margin-bottom: 20px;
+        width: 100%;
       }
 
       .terminal-settings-category[active-category] {
@@ -196,6 +200,16 @@ export class TerminalSettingsApp extends LitElement {
           url('data:image/svg+xml;utf8,${unsafeCSS(OPEN_IN_NEW)}');
         cursor: pointer;
       }
+
+      @media(max-width: 680px) {
+        #left-panel {
+          min-width: 168px;
+        }
+
+        .terminal-settings-category {
+          padding: 4px 16px;
+        }
+      }
     `];
   }
 
@@ -235,11 +249,7 @@ export class TerminalSettingsApp extends LitElement {
             ?active-category="${this.activeCategory_ === 'appearance'}">
           <section>
             <h3>${msg('TERMINAL_TITLE_THEME')}</h3>
-            <ul class="section-body">
-              <li class="setting-container">
-                <terminal-settings-theme />
-              </li>
-            </ul>
+            <terminal-settings-theme />
           </section>
 
           <section>
