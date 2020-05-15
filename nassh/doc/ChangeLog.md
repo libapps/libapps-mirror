@@ -1,3 +1,16 @@
+# 0.32, 2020-05-16, Fix relay buffer accumulation.
+
+* corp relay: Fix ack-vs-read typo.
+* l10n: Improve some descriptions and translation tips.
+* popup: Add missing <meta charset=utf-8/> tag.
+* npm: Rework how we invoke node programs.
+* crosh: Use terminalPrivate a11y functions.
+* crosh: No open as window tip for chrome-untrusted.
+* doc: Switch docs to Secure Shell extension variant.
+* crosh: gzip resources in dist to save rootfs space.
+* closure: Update to v20200504.
+* crosh: Modify to run as chrome-untrusted://crosh/.
+
 # 0.31, 2020-05-07, Fresh extension dialog regression fix.
 
 * popup: Save a handle for live debugging.
