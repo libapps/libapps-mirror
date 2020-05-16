@@ -20,8 +20,6 @@ import os
 from pathlib import Path
 import sys
 
-import requests
-
 import libdot
 
 
@@ -48,8 +46,8 @@ def update_png_crusher():
     for path in libdot.BIN_DIR.glob('.png.crusher.*'):
         path.unlink()
 
-    r = requests.get(PNG_CRUSHER_URL + '?format=TEXT')
-    PNG_CRUSHER.write_bytes(base64.b64decode(r.text))
+    data = libdot.fetch_data(f'{PNG_CRUSHER_URL}?format=TEXT')
+    PNG_CRUSHER.write_bytes(base64.b64decode(data.getbuffer()))
     PNG_CRUSHER.chmod(0o755)
 
 

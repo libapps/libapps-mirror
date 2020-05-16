@@ -13,7 +13,6 @@ import logging
 import os
 import re
 import sys
-import urllib.request
 
 import libdot
 
@@ -62,10 +61,9 @@ def update(uri, var):
 
 def fetch_data(uri):
     """Read the gitiles base64 encoded data from |uri|."""
-    with urllib.request.urlopen(uri + '?format=TEXT') as fp:
-        b64data = fp.read()
-        data = base64.b64decode(b64data)
-        return data.decode('utf-8').strip()
+    b64data = libdot.fetch_data(f'{uri}?format=TEXT')
+    data = base64.b64decode(b64data.getbuffer())
+    return data.decode('utf-8').strip()
 
 
 def get_parser():

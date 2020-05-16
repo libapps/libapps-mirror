@@ -10,6 +10,7 @@ from __future__ import print_function
 
 import argparse
 import importlib.machinery
+import io
 import logging
 import logging.handlers
 import os
@@ -246,6 +247,36 @@ def unpack(archive, cwd=None, files=()):
     run(['tar', '-xf', src] + files, cwd=cwd, extra_env=extra_env)
 
 
+def fetch_data(uri: str, output=None, verbose: bool = False):
+    """Fetch |uri| and write the results to |output| (or return BytesIO)."""
+    # This is the timeout used on each blocking operation, not the entire
+    # life of the connection.  So it's used for initial urlopen and for each
+    # read attempt (which may be partial reads).  5 minutes should be fine.
+    TIMEOUT = 5 * 60
+
+    if output is None:
+        output = io.BytesIO()
+
+    with urllib.request.urlopen(uri, timeout=TIMEOUT) as infp:
+        mb = 0
+        length = infp.length
+        while True:
+            data = infp.read(1024 * 1024)
+            if not data:
+                break
+            # Show a simple progress bar if the user is interactive.
+            if verbose:
+                mb += 1
+                print('~%i MiB downloaded' % (mb,), end='')
+                if length:
+                    percent = mb * 1024 * 1024 * 100 / length
+                    print(' (%.2f%%)' % (percent,), end='')
+                print('\r', end='', flush=True)
+            output.write(data)
+
+    return output
+
+
 def fetch(uri, output):
     """Download |uri| and save it to |output|."""
     output = os.path.abspath(output)
@@ -273,34 +304,10 @@ def fetch(uri, output):
     # We use urllib rather than wget or curl to avoid external utils & libs.
     # This seems to be good enough for our needs.
     tmpfile = output + '.tmp'
-    def _download():
-        """Attempt to download a URI."""
-        # This is the timeout used on each blocking operation, not the entire
-        # life of the connection.  So it's used for initial urlopen and for each
-        # read attempt (which may be partial reads).  5 minutes should be fine.
-        TIMEOUT = 5 * 60
-
-        with open(tmpfile, 'wb') as outfp:
-            with urllib.request.urlopen(uri, timeout=TIMEOUT) as infp:
-                mb = 0
-                length = infp.length
-                while True:
-                    data = infp.read(1024 * 1024)
-                    if not data:
-                        break
-                    # Show a simple progress bar if the user is interactive.
-                    if verbose:
-                        mb += 1
-                        print('~%i MiB downloaded' % (mb,), end='')
-                        if length:
-                            percent = mb * 1024 * 1024 * 100 / length
-                            print(' (%.2f%%)' % (percent,), end='')
-                        print('\r', end='', flush=True)
-                    outfp.write(data)
-
     for _ in range(0, 5):
         try:
-            _download()
+            with open(tmpfile, 'wb') as outfp:
+                fetch_data(uri, outfp, verbose=verbose)
             break
         except ConnectionError as e:
             time.sleep(1)
