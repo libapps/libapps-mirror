@@ -206,7 +206,8 @@ int tcgetattr(int fd, struct termios* termios_p) {
   STUB_RETURN(0, "fd=%i termios=%p", fd, termios_p);
 }
 int tcsetattr(int fd, int optional_actions, const struct termios* termios_p) {
-  STUB_RETURN(0, "fd=%i actions=%i termios=%p", fd, optional_actions, termios_p);
+  STUB_RETURN(0, "fd=%i actions=%i termios=%p",
+              fd, optional_actions, termios_p);
 }
 
 struct passwd* getpwuid(uid_t uid) {  // NOLINT(runtime/threadsafe_fn)

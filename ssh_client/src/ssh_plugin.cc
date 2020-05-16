@@ -302,8 +302,9 @@ void SshPluginInstance::StartSession(const pp::VarArray& args) {
       session_args_.Get(kTerminalWidthAttr).is_number() &&
       session_args_.HasKey(kTerminalHeightAttr) &&
       session_args_.Get(kTerminalHeightAttr).is_number()) {
-    file_system_.SetTerminalSize(session_args_.Get(kTerminalWidthAttr).AsInt(),
-                                 session_args_.Get(kTerminalHeightAttr).AsInt());
+    file_system_.SetTerminalSize(
+        session_args_.Get(kTerminalWidthAttr).AsInt(),
+        session_args_.Get(kTerminalHeightAttr).AsInt());
   }
   if (session_args_.HasKey(kUseJsSocketAttr) &&
       session_args_.Get(kUseJsSocketAttr).is_bool()) {

@@ -62,7 +62,7 @@ class Mutex {
 
   class Lock {
    public:
-    Lock(Mutex& mutex) : mutex_(mutex) {
+    explicit Lock(Mutex& mutex) : mutex_(mutex) {
       pthread_mutex_lock(mutex_.get());
     }
 
@@ -102,11 +102,12 @@ class Cond {
     pthread_cond_signal(&cond_);
   }
 
-  int wait(Mutex& mutex) {
+  int wait(Mutex& mutex) {  // NOLINT(runtime/references)
     return _PTHREAD_HANDLE_ERRNO(pthread_cond_wait(&cond_, mutex.get()));
   }
 
-  int timedwait(Mutex& mutex, const timespec* abstime) {
+  int timedwait(Mutex& mutex,  // NOLINT(runtime/references)
+                const timespec* abstime) {
     return _PTHREAD_HANDLE_ERRNO(
         pthread_cond_timedwait(&cond_, mutex.get(), abstime));
   }

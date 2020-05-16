@@ -17,7 +17,7 @@
 
 #ifndef nacl_abi___dev_t_defined
 #define nacl_abi___dev_t_defined
-typedef int64_t       nacl_abi___dev_t;
+typedef int64_t nacl_abi___dev_t;
 typedef nacl_abi___dev_t nacl_abi_dev_t;
 #endif
 
@@ -29,25 +29,25 @@ typedef nacl_abi___ino_t nacl_abi_ino_t;
 
 #ifndef nacl_abi___mode_t_defined
 #define nacl_abi___mode_t_defined
-typedef uint32_t      nacl_abi___mode_t;
+typedef uint32_t nacl_abi___mode_t;
 typedef nacl_abi___mode_t nacl_abi_mode_t;
 #endif
 
 #ifndef nacl_abi___nlink_t_defined
 #define nacl_abi___nlink_t_defined
-typedef unsigned int  nacl_abi___nlink_t;
+typedef unsigned int nacl_abi___nlink_t;
 typedef nacl_abi___nlink_t nacl_abi_nlink_t;
 #endif
 
 #ifndef nacl_abi___uid_t_defined
 #define nacl_abi___uid_t_defined
-typedef uint32_t      nacl_abi___uid_t;
+typedef uint32_t nacl_abi___uid_t;
 typedef nacl_abi___uid_t nacl_abi_uid_t;
 #endif
 
 #ifndef nacl_abi___gid_t_defined
 #define nacl_abi___gid_t_defined
-typedef uint32_t      nacl_abi___gid_t;
+typedef uint32_t nacl_abi___gid_t;
 typedef nacl_abi___gid_t nacl_abi_gid_t;
 #endif
 
@@ -59,13 +59,13 @@ typedef nacl_abi__off_t nacl_abi_off_t;
 
 #ifndef nacl_abi___blksize_t_defined
 #define nacl_abi___blksize_t_defined
-typedef long int      nacl_abi___blksize_t;
+typedef long int nacl_abi___blksize_t;
 typedef nacl_abi___blksize_t nacl_abi_blksize_t;
 #endif
 
 #ifndef nacl_abi___blkcnt_t_defined
 #define nacl_abi___blkcnt_t_defined
-typedef long int      nacl_abi___blkcnt_t;
+typedef long int nacl_abi___blkcnt_t;
 typedef nacl_abi___blkcnt_t nacl_abi_blkcnt_t;
 #endif
 
@@ -98,6 +98,6 @@ struct nacl_abi_stat {  /* must be renamed when ABI is exported */
 };
 
 /* Converts struct nacl_abi_stat to struct stat. Implemented in fxstat.c */
-void __nacl_abi_stat_to_stat (struct nacl_abi_stat *nacl_st,
-                                struct stat *st);
+void __nacl_abi_stat_to_stat(struct nacl_abi_stat *nacl_st,
+                             struct stat *st);
 #endif

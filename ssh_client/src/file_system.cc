@@ -38,7 +38,7 @@ uint16_t strtoport(const char* servname) {
 
   if (servname != NULL) {
     char* cp;
-    port = strtol(servname, &cp, 10);  // NOLINT(runtime/deprecated_fn)
+    port = strtol(servname, &cp, 10);
     if (port <= 0 || port > 65535 || *cp != '\0') {
       LOG("Bad port number %s\n", servname);
       port = 0;
@@ -498,8 +498,9 @@ addrinfo* FileSystem::CreateAddrInfo(const PP_NetAddress_Private& netaddr,
     pp::NetAddressPrivate::GetAddress(
         netaddr, &addr->sin6_addr, sizeof(in6_addr));
   } else {
+    sockaddr_in* addr_in = reinterpret_cast<sockaddr_in*>(addr);
     pp::NetAddressPrivate::GetAddress(
-        netaddr, &((sockaddr_in*)addr)->sin_addr, sizeof(in_addr));
+        netaddr, &addr_in->sin_addr, sizeof(in_addr));
   }
 
   if (hints && hints->ai_socktype)
@@ -730,14 +731,17 @@ int FileSystem::getnameinfo(const sockaddr* sa, socklen_t salen,
   if (sa->sa_family != AF_INET && sa->sa_family != AF_INET6)
     return EAI_FAMILY;
 
+  const sockaddr_in6* sin6 = reinterpret_cast<const sockaddr_in6*>(sa);
+  const sockaddr_in* sin = reinterpret_cast<const sockaddr_in*>(sa);
+
   if (serv)
-    snprintf(serv, servlen, "%d", ntohs(((sockaddr_in*)sa)->sin_port));
+    snprintf(serv, servlen, "%d", ntohs(sin->sin_port));
 
   if (host) {
     if (sa->sa_family == AF_INET6)
-      inet_ntop(AF_INET6, &((sockaddr_in6*)sa)->sin6_addr, host, hostlen);
+      inet_ntop(AF_INET6, &sin6->sin6_addr, host, hostlen);
     else
-      inet_ntop(AF_INET, &((sockaddr_in*)sa)->sin_addr, host, hostlen);
+      inet_ntop(AF_INET, &sin->sin_addr, host, hostlen);
   }
 
   return 0;
