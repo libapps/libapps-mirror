@@ -226,7 +226,7 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
         checks += [lint_html_files(html_files)]
 
     # TODO(vapier): Add smarter JSON & markdown linters.
-    TEXT_FILENAMES = {'.gitignore', 'LICENSE', 'Makefile', 'METADATA'}
+    TEXT_FILENAMES = {'.gitignore', 'LICENSE', 'Makefile', 'METADATA', 'OWNERS'}
     TEXT_EXTENSIONS = {'.concat', '.css', '.el', '.json', '.md', '.sh', '.vim'}
     text_files = [x for x in opts.paths
                   if (os.path.basename(x) in TEXT_FILENAMES or
@@ -236,8 +236,7 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
         checks += [lint_text_files(text_files)]
 
     if tolint_paths:
-        # TODO(vapier): Change this to warning once we have most files linted.
-        logging.debug('Linting skipped:\n%s', ' '.join(sorted(tolint_paths)))
+        logging.warning('Linting skipped:\n%s', ' '.join(sorted(tolint_paths)))
 
     return 0 if all(checks) else 1
 
