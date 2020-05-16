@@ -390,6 +390,7 @@ class HelperProgram:
 # Wrappers around libdot/bin/ programs for other tools to access directly.
 closure_compiler = HelperProgram('closure-compiler')
 concat = HelperProgram('concat')
+cpplint = HelperProgram('cpplint')
 eslint = HelperProgram('eslint')
 headless_chrome = HelperProgram('headless-chrome')
 lint = HelperProgram('lint')

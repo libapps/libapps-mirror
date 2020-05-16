@@ -49,7 +49,7 @@ def get_known_files(basedir: Path) -> List[Path]:
     all_files = libdot.run(
         ['git', 'ls-tree', '--name-only', '-r', '-z', 'HEAD'], cwd=basedir,
         capture_output=True, encoding='utf-8').stdout[:-1].split('\0')
-    return [basedir / x for x in all_files]
+    return [basedir / x for x in all_files if (basedir / x).exists()]
 
 
 def get_known_sources(basedir: Path) -> List[Path]:
@@ -213,6 +213,12 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
         py_kwargs = {'paths': py_files, **kwargs}
         checks += [libdot.pylint.perform(**py_kwargs)]
 
+    cpp_files = libdot.cpplint.filter_known_files(opts.paths)
+    if cpp_files:
+        tolint_paths -= set(cpp_files)
+        cpp_kwargs = {'paths': cpp_files, **kwargs}
+        checks += [libdot.cpplint.perform(**cpp_kwargs)]
+
     html_files = [x for x in opts.paths
                   if x.endswith('.html') or x.endswith('.html.in')]
     if html_files:
@@ -220,7 +226,7 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
         checks += [lint_html_files(html_files)]
 
     # TODO(vapier): Add smarter JSON & markdown linters.
-    TEXT_FILENAMES = {'.gitignore', 'LICENSE', 'METADATA'}
+    TEXT_FILENAMES = {'.gitignore', 'LICENSE', 'Makefile', 'METADATA'}
     TEXT_EXTENSIONS = {'.concat', '.css', '.el', '.json', '.md', '.sh', '.vim'}
     text_files = [x for x in opts.paths
                   if (os.path.basename(x) in TEXT_FILENAMES or

@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Run cpplint with the right settings."""
+
+from pathlib import Path
+import sys
+from typing import List
+
+import libdot
+
+
+# The set of file extensions we support as cpplint needs to be told explicitly.
+EXTENSIONS = {'c', 'cc', 'cpp', 'h', 'hpp'}
+
+
+# The commit in depot_tools that we're pinned to.
+CHROMIUM_REF = 'c4fb1974191f0d09fcb932f76ae7b5abce1f0ce5'
+
+# Full path to Chromium's fork of the cpplint.py script.
+CPPLINT_URL = ('https://chromium.googlesource.com/chromium/tools/depot_tools/+/'
+               f'{CHROMIUM_REF}/cpplint.py')
+
+# Our local cache of the script.
+CPPLINT = libdot.BIN_DIR / f'.cpplint.{CHROMIUM_REF}'
+
+
+def filter_known_files(paths: List[Path]) -> List[Path]:
+    """Figure out what files this linter supports."""
+    ret = []
+    for path in paths:
+        path = Path(path)
+
+        if 'third_party' in path.parts:
+            # Ignore code we didn't author.
+            continue
+        elif path.suffix[1:] in EXTENSIONS:
+            ret += [path]
+
+    return [str(x) for x in ret]
+
+
+def setup():
+    """Initialize the tool settings."""
+    if CPPLINT.exists():
+        return
+
+    for path in libdot.BIN_DIR.glob('.cpplint.*'):
+        path.unlink()
+
+    libdot.fetch(f'{CPPLINT_URL}?format=TEXT', CPPLINT, b64=True)
+    CPPLINT.chmod(0o755)
+
+
+def run(argv=(), **kwargs):
+    """Run the tool directly."""
+    setup()
+
+    cmd = [CPPLINT, f'--extensions={",".join(EXTENSIONS)}'] + list(argv)
+    return libdot.run(cmd, **kwargs)
+
+
+def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):  # pylint: disable=unused-argument
+    """Run high level tool logic."""
+    ret = True
+    argv = list(argv)
+    paths = list(paths)
+
+    # Cpplint doesn't have any automatic fixing logic.
+    if fix:
+        return ret
+
+    # TODO(vapier): Add support for Gerrit comments.
+
+    result = run(argv + paths, check=False)
+    return result.returncode == 0
+
+
+def get_parser():
+    """Get a command line parser."""
+    parser = libdot.ArgumentParser(description=__doc__, short_options=False)
+    parser.add_argument('--gerrit-comments-file',
+                        help='Save errors for posting files to Gerrit.')
+    parser.add_argument('paths', nargs='*',
+                        help='Paths to lint.')
+    return parser
+
+
+def main(argv):
+    """The main func!"""
+    parser = get_parser()
+    opts, args = parser.parse_known_args(argv)
+
+    return 0 if perform(argv=args, paths=opts.paths,
+                        gerrit_comments_file=opts.gerrit_comments_file) else 1
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))
