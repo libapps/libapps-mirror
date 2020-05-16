@@ -5,15 +5,38 @@
 
 """Lint our source files."""
 
+from pathlib import Path
 import sys
+from typing import List
 
 import kokoro
 import libdot
 
 
+def _get_default_paths(basedir: Path) -> List[Path]:
+    """Get list of paths to lint by default."""
+    kokoro_files = sorted(libdot.lint.get_known_sources(basedir))
+
+    # Our JS linters don't handle this atm.
+    IGNORE_FILES = {'.eslintrc.js'}
+
+    # Include files in the root dir as they have no other home.
+    topdir = kokoro.LIBAPPS_DIR
+    top_paths = libdot.run(
+        ['git', 'ls-tree', '--name-only', '-z', 'HEAD'], cwd=topdir,
+        capture_output=True, encoding='utf-8').stdout[:-1].split('\0')
+    top_files = [topdir / x for x in top_paths
+                 if ((topdir / x).exists() and
+                     (topdir / x).is_file() and
+                     x not in IGNORE_FILES)]
+
+    return top_files + kokoro_files
+
+
 def main(argv):
     """The main func!"""
-    return libdot.lint.main(argv, basedir=kokoro.DIR)
+    return libdot.lint.main(argv, basedir=kokoro.DIR,
+                            get_default_paths=_get_default_paths)
 
 
 if __name__ == '__main__':

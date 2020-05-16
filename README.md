@@ -1,4 +1,3 @@
-
 # Hello
 
 This repository contains the libdot JavaScript library and some web applications
