@@ -17,6 +17,8 @@ import libdot
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
+    parser.add_argument('--base64', action='store_true',
+                        help='Decode file using base64.')
     parser.add_argument('-o', '--output', type=str,
                         help='Alternative path to save to.')
     parser.add_argument('args', nargs='+',
@@ -33,7 +35,7 @@ def main(argv):
         output = opts.output
         if not output:
             output = os.path.basename(uri)
-        libdot.fetch(uri, output)
+        libdot.fetch(uri, output, b64=opts.base64)
 
 
 if __name__ == '__main__':

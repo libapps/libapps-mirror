@@ -13,7 +13,6 @@ We currently support png and jpg files.
 
 from __future__ import print_function
 
-import base64
 import logging
 import multiprocessing
 import os
@@ -46,8 +45,7 @@ def update_png_crusher():
     for path in libdot.BIN_DIR.glob('.png.crusher.*'):
         path.unlink()
 
-    data = libdot.fetch_data(f'{PNG_CRUSHER_URL}?format=TEXT')
-    PNG_CRUSHER.write_bytes(base64.b64decode(data.getbuffer()))
+    libdot.fetch(f'{PNG_CRUSHER_URL}?format=TEXT', PNG_CRUSHER, b64=True)
     PNG_CRUSHER.chmod(0o755)
 
 

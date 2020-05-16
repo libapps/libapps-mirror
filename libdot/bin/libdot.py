@@ -9,6 +9,7 @@
 from __future__ import print_function
 
 import argparse
+import base64
 import importlib.machinery
 import io
 import logging
@@ -247,7 +248,7 @@ def unpack(archive, cwd=None, files=()):
     run(['tar', '-xf', src] + files, cwd=cwd, extra_env=extra_env)
 
 
-def fetch_data(uri: str, output=None, verbose: bool = False):
+def fetch_data(uri: str, output=None, verbose: bool = False, b64: bool = False):
     """Fetch |uri| and write the results to |output| (or return BytesIO)."""
     # This is the timeout used on each blocking operation, not the entire
     # life of the connection.  So it's used for initial urlopen and for each
@@ -272,12 +273,14 @@ def fetch_data(uri: str, output=None, verbose: bool = False):
                     percent = mb * 1024 * 1024 * 100 / length
                     print(' (%.2f%%)' % (percent,), end='')
                 print('\r', end='', flush=True)
+            if b64:
+                data = base64.b64decode(data)
             output.write(data)
 
     return output
 
 
-def fetch(uri, output):
+def fetch(uri, output, b64=False):
     """Download |uri| and save it to |output|."""
     output = os.path.abspath(output)
     distdir, name = os.path.split(output)
@@ -307,7 +310,7 @@ def fetch(uri, output):
     for _ in range(0, 5):
         try:
             with open(tmpfile, 'wb') as outfp:
-                fetch_data(uri, outfp, verbose=verbose)
+                fetch_data(uri, outfp, verbose=verbose, b64=b64)
             break
         except ConnectionError as e:
             time.sleep(1)

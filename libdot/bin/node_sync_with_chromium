@@ -8,7 +8,6 @@
 
 from __future__ import print_function
 
-import base64
 import logging
 import os
 import re
@@ -61,9 +60,8 @@ def update(uri, var):
 
 def fetch_data(uri):
     """Read the gitiles base64 encoded data from |uri|."""
-    b64data = libdot.fetch_data(f'{uri}?format=TEXT')
-    data = base64.b64decode(b64data.getbuffer())
-    return data.decode('utf-8').strip()
+    data = libdot.fetch_data(f'{uri}?format=TEXT', b64=True)
+    return data.getvalue().decode('utf-8').strip()
 
 
 def get_parser():
