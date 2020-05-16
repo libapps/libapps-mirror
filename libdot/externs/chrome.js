@@ -24,58 +24,6 @@ chrome.fileSystemProvider.mount = function(opts) {};
  */
 chrome.fileSystemProvider.unmount = function(fileSystem, callback) {};
 
-chrome.terminalPrivate = {};
-
-/** @param {string} id */
-chrome.terminalPrivate.closeTerminalProcess = function(id) {};
-
-/** @param {function(boolean)} callback */
-chrome.terminalPrivate.getA11yStatus = function(callback) {};
-
-/** @param {function(!Object<string, *>)} callback */
-chrome.terminalPrivate.getCroshSettings = function(callback) {};
-
-/** @param {function(!Object<string, *>)} callback */
-chrome.terminalPrivate.getSettings = function(callback) {};
-
-/** @type {ChromeBaseEvent<function(boolean)>} */
-chrome.terminalPrivate.onA11yStatusChanged;
-
-/** @type {ChromeBaseEvent<function(string, string, string)>} */
-chrome.terminalPrivate.onProcessOutput;
-
-/** @type {ChromeBaseEvent<function(!Object<string, *>)>} */
-chrome.terminalPrivate.onSettingsChanged;
-
-/** @param {function()} callback */
-chrome.terminalPrivate.openOptionsPage = function(callback) {};
-
-/** @param {function()} callback */
-chrome.terminalPrivate.openWindow = function(callback) {};
-
-/** @param {!Object<string, *>} callback */
-chrome.terminalPrivate.setSettings = function(prefValue, callback) {};
-
-/**
- * @param {string} commandName
- * @param {!Array<string>} argv
- * @param {function(string)} callback
- */
-chrome.terminalPrivate.openTerminalProcess = function(
-    commandName, argv, callback) {};
-
-/**
- * @param {!Array<string>} argv
- * @param {function(string)} callback
- */
-chrome.terminalPrivate.openVmshellProcess = function(argv, callback) {};
-
-/**
- * @param {string} id
- * @return {string} input
- */
-chrome.terminalPrivate.sendInput = function(id, input) {};
-
 /** @constructor */
 function FileSystemProvider() {}
 

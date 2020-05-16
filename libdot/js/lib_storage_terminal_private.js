@@ -39,7 +39,7 @@ lib.Storage.TerminalPrivate = function(callback) {
     if (chrome.runtime.lastError) {
       console.error(chrome.runtime.lastError.message);
     } else {
-      this.prefValue_ = settings;
+      this.prefValue_ = lib.notNull(settings);
     }
     chrome.terminalPrivate.onSettingsChanged.addListener(
         this.onSettingsChanged_.bind(this));

@@ -38,15 +38,23 @@ EXTERNS_DIR = os.path.join(libdot.DIR, 'externs')
 # closure version for stability, but this can be updated independently.
 EXTERNS_VERSION = VERSION
 
+# The version of Chrome externs that we pull from Chromium directly.
+CHROME_EXTERNS_VERSION = '18029c0278c7da713fb6b629e84992ceabda7ae2'
 
-def update_externs():
+
+# We pick 50 as the mid point as it allows us to easily add files before and
+# after the closure modules.
+CLOSURE_ORDER_BASE = 50
+
+# Load the Chrome externs after the closure ones.  We'll prob never have 10
+# closure modules, but if we do, we can increase that here.
+CHROME_ORDER_BASE = CLOSURE_ORDER_BASE + 10
+
+
+def update_closure_externs():
     """Update our local cache of externs."""
     URI_TEMPLATE = ('https://github.com/google/closure-compiler/raw/'
                     f'v{EXTERNS_VERSION}/contrib/externs/%(name)s.js')
-
-    # We pick 50 as the mid point as it allows us to easily add files before
-    # and after the closure modules.
-    ORDER_BASE = 50
 
     # NB: Order here matters when modules are subsets of others.  For example,
     # 'chrome.js' defines 'var chrome = {}' which 'chrome_extensions.js' needs.
@@ -58,7 +66,7 @@ def update_externs():
         'chrome_extensions',
     )
 
-    for i, name in enumerate(EXTERNS, start=ORDER_BASE):
+    for i, name in enumerate(EXTERNS, start=CLOSURE_ORDER_BASE):
         uri = URI_TEMPLATE % {'name': name}
         path = os.path.join(EXTERNS_DIR,
                             f'{i}-closure-{name}-v{EXTERNS_VERSION}.js')
@@ -69,6 +77,30 @@ def update_externs():
                 EXTERNS_DIR, f'*closure-{name}-v*.js')):
             os.unlink(oldpath)
         libdot.fetch(uri, path)
+
+
+def update_chrome_externs():
+    """Update our local cache of externs from Chrome."""
+    URI_TEMPLATE = ('https://chromium.googlesource.com/chromium/src/+/'
+                    f'{CHROME_EXTERNS_VERSION}/third_party/closure_compiler/'
+                    'externs/%(name)s.js?format=TEXT')
+
+    # Order here shouldn't matter as each file shouldn't have overlapping APIs.
+    EXTERNS = (
+        'terminal_private',
+    )
+
+    for i, name in enumerate(EXTERNS, start=CHROME_ORDER_BASE):
+        uri = URI_TEMPLATE % {'name': name}
+        path = os.path.join(EXTERNS_DIR,
+                            f'{i}-chrome-{name}-v{CHROME_EXTERNS_VERSION}.js')
+        if os.path.exists(path):
+            continue
+
+        for oldpath in glob.glob(os.path.join(
+                EXTERNS_DIR, f'*-chrome-{name}-v*.js')):
+            os.unlink(oldpath)
+        libdot.fetch(uri, path, b64=True)
 
 
 def update_closure():
@@ -142,7 +174,8 @@ def convert_to_kokoro(data):
 def setup():
     """Initialize the tool settings."""
     update_closure()
-    update_externs()
+    update_closure_externs()
+    update_chrome_externs()
 
 
 def run(argv=(), **kwargs):
@@ -168,7 +201,7 @@ def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):
     if fix:
         return ret
 
-    update_externs()
+    setup()
     externs = []
     externs_paths = os.path.join(libdot.DIR, 'externs', '*.js')
     for extern in sorted(glob.glob(externs_paths)):
