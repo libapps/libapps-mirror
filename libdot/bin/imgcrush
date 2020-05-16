@@ -24,7 +24,7 @@ import libdot
 
 # We pick a recent Chromium commit.  It doesn't change much so shouldn't matter.
 # Updating to the latest version shouldn't cause problems.
-CHROMIUM_REF = '69.0.3460.0'
+CHROMIUM_REF = '85.0.4148.0'
 
 # Full path to Chromium's png crush script.
 PNG_CRUSHER_URL = ('https://chromium.googlesource.com/chromium/src/+/%s/tools/'
