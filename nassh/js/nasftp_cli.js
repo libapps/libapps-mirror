@@ -315,23 +315,11 @@ nasftp.Cli.prototype.onInputChar_ = function(ch) {
         resolve();
 
         if (e) {
-          /**
-           * Suppress checks to workaround bug:
-           * https://github.com/google/closure-compiler/issues/3572
-           * We need a function because closure doesn't support suppressing this
-           * particular check at the line level, only the func level.
-           *
-           * @param {!Event} e
-           * @suppress {checkTypes}
-           */
-          const handleError = (e) => {
-            if (e.reason instanceof nassh.sftp.StatusError) {
-              this.showSftpStatusError_(e.reason, data);
-            } else {
-              this.showError_(nassh.msg('NASFTP_ERROR_INTERNAL', [e.reason]));
-            }
-          };
-          handleError(e);
+          if (e.reason instanceof nassh.sftp.StatusError) {
+            this.showSftpStatusError_(e.reason, data);
+          } else {
+            this.showError_(nassh.msg('NASFTP_ERROR_INTERNAL', [e.reason]));
+          }
         }
 
         // Add non-empty entries into the history.
