@@ -42,6 +42,32 @@ lib.registerInit(
     });
 
 /**
+ * Modify if running in chrome-untrusted://.  We will use
+ * lib.Storage.TerminalPrivate as the default storage, load messages via XHR,
+ * and polyfill chrome.runtime.getManifest.
+ */
+nassh.setupForWebApp = function() {
+  // Modifications if running as a web app.
+  if (location.href.startsWith('chrome-untrusted://')) {
+    lib.registerInit('terminal-private-storage', (onInit) => {
+      hterm.defaultStorage = new lib.Storage.TerminalPrivate(onInit);
+    });
+    lib.registerInit('messages', nassh.loadMessages);
+    // Polyfill chrome.runtime.getManifest since it is not available when
+    // We require name, version, and icons.
+    if (chrome && chrome.runtime && !chrome.runtime.getManifest) {
+      chrome.runtime.getManifest = () => {
+        return /** @type {!chrome.runtime.Manifest} */ ({
+          'name': 'Terminal',
+          'version': 'system',
+          'icons': {'192': '/images/dev/crostini-192.png'},
+        });
+      };
+    }
+  }
+};
+
+/**
  * Loads messages for when chrome.i18n is not available.
  *
  * This should only be used in contexts outside of extensions/apps.

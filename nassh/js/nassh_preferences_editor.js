@@ -9,22 +9,7 @@
  * so we do it like this instead.
  */
 window.addEventListener('DOMContentLoaded', (event) => {
-  // Modifications if running as a web app.
-  if (location.href.startsWith('chrome-untrusted://')) {
-    lib.registerInit('terminal-private-storage', (onInit) => {
-      hterm.defaultStorage = new lib.Storage.TerminalPrivate(onInit);
-    });
-    lib.registerInit('messages', nassh.loadMessages);
-    // Polyfill chrome.runtime.getManifest since it is not available when
-    // We require name, version, and icons.
-    chrome.runtime.getManifest = () => {
-      return /** @type {!chrome.runtime.Manifest} */ ({
-        'name': 'Terminal',
-        'version': 'system',
-        'icons': {'192': '/images/dev/crostini-192.png'},
-      });
-    };
-  }
+  nassh.setupForWebApp();
 
   // Support multiple settings subpages.
   document.querySelectorAll('.navigation > .menu > li > a').forEach((ele) => {

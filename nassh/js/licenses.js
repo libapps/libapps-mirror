@@ -9,6 +9,7 @@
  * so we do it like this instead.
  */
 window.addEventListener('DOMContentLoaded', (event) => {
+  nassh.setupForWebApp();
   lib.init(() => {
     hterm.messageManager.processI18nAttributes(document);
   });
