@@ -84,7 +84,7 @@ nassh.sftp.fsp.sanitizeMetadata = function(file, options) {
  * file path.
  *
  * @param {!Object} options
- * @param {function(!Metadata)} onSuccess
+ * @param {function(!chrome.fileSystemProvider.EntryMetadata)} onSuccess
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  */
 nassh.sftp.fsp.onGetMetadataRequested = function(options, onSuccess, onError) {
@@ -114,7 +114,9 @@ nassh.sftp.fsp.onGetMetadataRequested = function(options, onSuccess, onError) {
  * directory.
  *
  * @param {!Object} options
- * @param {function(!Array<!Entry>, boolean)} onSuccess
+ * @param {
+ *   function(!Array<!chrome.fileSystemProvider.EntryMetadata>, boolean)
+ * } onSuccess
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  */
 nassh.sftp.fsp.onReadDirectoryRequested = function(
