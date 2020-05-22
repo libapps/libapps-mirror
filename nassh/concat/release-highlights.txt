@@ -1,4 +1,4 @@
-0.19
+0.32
 
 # The first line tracks the last version that went stable.
 # Only features added since then should be kept here.
@@ -10,5 +10,5 @@
 # Only list significant changes that matter to the user.
 # The more lines that we have here, the more cluttered the output.
 
-# release: 0.23
-% \x1b]8;;https://www.openssh.com/txt/release-8.2\x07OpenSSH upgraded to 8.2p1\x1b]8;;\x07.
+# release: 0.33
+% Internal Google Cloud VMs default to corp-relay-v4 proxy mode.

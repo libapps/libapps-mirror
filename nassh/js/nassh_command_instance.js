@@ -1241,11 +1241,14 @@ nassh.CommandInstance.postProcessOptions = function(
     ].reduce((ret, host) => ret || hostname.endsWith(host), false);
     const proxyHost = useSupSshRelay ?
         'sup-ssh-relay.corp.google.com' : 'ssh-relay.corp.google.com';
+    const proxyMode = useSupSshRelay ?
+        'corp-relay-v4@google.com' : 'corp-relay@google.com';
 
     rv = Object.assign({
       'auth-agent-forward': forwardAgent,
       '--proxy-host': proxyHost,
       '--proxy-port': '443',
+      '--proxy-mode': proxyMode,
       '--use-ssl': true,
       '--report-ack-latency': true,
       '--report-connect-attempts': true,
