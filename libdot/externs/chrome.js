@@ -12,6 +12,13 @@ var chrome = {};
 /** @type {!FileSystemProvider} */
 chrome.fileSystemProvider;
 
+/** @enum {string} */
+chrome.fileSystemProvider.ProviderError = {
+  NOT_FOUND: '',
+  FAILED: '',
+  INVALID_OPERATION: '',
+};
+
 /** @param {function(!Array<FileSystemProvider>)} callback */
 chrome.fileSystemProvider.getAll = function(callback) {};
 
