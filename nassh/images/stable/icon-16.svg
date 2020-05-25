@@ -1,0 +1,28 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="16pt" height="16pt" viewBox="0 0 16 16"
+     version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+<style>
+  <!-- Chrome colors -->
+  .blue { stroke: #4285F4; }
+  .red { stroke: #DB4437; }
+  .yellow { stroke: #FFCD40; }
+  .green { stroke: #0F9D58; }
+</style>
+
+<defs>
+  <linearGradient id="bgGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#404040" />
+    <stop offset="100%" stop-color="#101010" />
+  </linearGradient>
+</defs>
+
+<rect x="5%" y="10%" width="90%" height="80%" rx="10%" fill="url(#bgGradient)" />
+
+<polyline points="4,5 6,7 4,9" shape-rendering="crispEdges"
+          stroke-width="1" fill="none" class="red" />
+
+<line x1="8" y1="8" x2="11" y2="8" shape-rendering="crispEdges"
+      stroke-width="1" class="yellow" />
+
+</svg>

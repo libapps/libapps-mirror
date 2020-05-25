@@ -8,7 +8,9 @@
   "default_locale": "en",
   "icons": {
     "128": "images/dev/icon-128.png",
+    "48": "images/dev/icon-48.png",
     "32": "images/dev/icon-32.png",
+    "24": "images/dev/icon-24.png",
     "16": "images/dev/icon-16.png"
   },
   "description": "Terminal emulator and SSH and SFTP client.",
