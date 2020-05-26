@@ -20,8 +20,7 @@ nassh.relay.Sshfe = function(io, options) {
   this.proxyHost = options['--proxy-host'];
   this.proxyPort = options['--proxy-port'] || 443;
   this.username = options['--proxy-user'];
-  this.sshAgent_ = options['--ssh-agent'] ||
-      nassh.relay.Corp.defaultGnubbyExtension;
+  this.sshAgent_ = options['--ssh-agent'] || nassh.goog.defaultGnubbyExtension;
   this.relayServer = `wss://${this.proxyHost}:${this.proxyPort}`;
 };
 
