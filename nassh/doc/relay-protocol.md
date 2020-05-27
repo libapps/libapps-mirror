@@ -328,7 +328,7 @@ service as the older [Corp Relay].
 
 ### /v4/connect Protocol
 
-Using [WebSockets], make one connection to `/connect` to the
+Using [WebSockets], make one connection to `/v4/connect` to the
 `RELAY_PROTOCOL://RELAY_HOST:RELAY_PORT` host to create a bidirectional socket.
 Use `arraybuffer` for the `binaryType` field and `['ssh']` for the `protocols`
 field.
