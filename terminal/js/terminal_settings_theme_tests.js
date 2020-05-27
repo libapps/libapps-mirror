@@ -85,7 +85,7 @@ describe('terminal_settings_theme_tests.js', () => {
     // Check hterm settings are changed.
     assert.equal('#FFFFFF', window.preferenceManager.get('background-color'));
     assert.equal('#000000', window.preferenceManager.get('foreground-color'));
-    assert.equal('#1967D2', window.preferenceManager.get('cursor-color'));
+    assert.equal('#1967D280', window.preferenceManager.get('cursor-color'));
     assert.deepEqual(
         ['#E8EAED', '#F28B82', '#108468', '#F29900',
          '#8AB4F8', '#F882FF', '#03BFC8', '#202124',
