@@ -503,3 +503,24 @@ nassh.loadWebFonts = function(document) {
   style.textContent = imports.join('\n') + fontFaces.join('');
   document.head.appendChild(style);
 };
+
+/**
+ * A Promise wrapper for the chrome.runtime.sendMessage API.
+ *
+ * @param {*} args The arguments to sendMessage.
+ * @return {!Promise<*>} A promise to resolve with the remote's response.
+ */
+nassh.runtimeSendMessage = function(...args) {
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage(...args, (response) => {
+      // If the remote side doesn't exist (which is normal), Chrome complains
+      // if we don't read the lastError.  Clear that here.
+      const err = lib.f.lastError();
+      if (err) {
+        reject(err);
+      } else {
+        resolve(response);
+      }
+    });
+  });
+};

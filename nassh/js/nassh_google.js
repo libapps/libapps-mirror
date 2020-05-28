@@ -51,28 +51,22 @@ nassh.goog.gnubby.findExtension = function() {
   ];
 
   // Ping the extension to see if it's installed/enabled/alive.
-  const check = (id) => new Promise((resolve, reject) => {
-    chrome.runtime.sendMessage(id, {'type': 'HELLO'}, (result) => {
-      // If the remote side doesn't exist (which is normal), Chrome complains
-      // if we don't read the lastError.  Clear that here.
-      lib.f.lastError();
-
+  const check = (id) => {
+    return nassh.runtimeSendMessage(id, {'type': 'HELLO'}).then((result) => {
       // If the probe worked, return the id, else return nothing so we can
       // clear out all the pending promises.
       if (result !== undefined && result['rc'] == 0) {
-        resolve(id);
-      } else {
-        resolve();
+        return id;
       }
-    });
-  });
+    }).catch((e) => {});
+  };
 
   // Guess a reasonable default based on the OS.
   nassh.goog.gnubby.defaultExtension =
       (hterm.os == 'cros' ? stableAppId : stableExtId);
 
   // We don't set a timeout here as it doesn't block overall execution.
-  Promise.all(extensions.map((id) => check(id))).then((results) => {
+  Promise.all(extensions.map(check)).then((results) => {
     console.log(`gnubby probe results: ${results}`);
     for (let i = 0; i < extensions.length; ++i) {
       const extId = extensions[i];

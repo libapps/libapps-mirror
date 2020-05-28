@@ -16,20 +16,17 @@
  * @return {!Promise} A promise resolving once the window opens.
  */
 const openNewWindow = function(url) {
-  return new Promise((resolve, reject) => {
-    chrome.runtime.sendMessage({
-      command: 'nassh',
-      width: window.innerWidth,
-      height: window.innerHeight,
-      url: url,
-      window: true,
-    }, null, (response) => {
-      if (response.error) {
-        reject(`request failed: ${response.message}`);
-      } else {
-        resolve();
-      }
-    });
+  const msg = {
+    command: 'nassh',
+    width: window.innerWidth,
+    height: window.innerHeight,
+    url: url,
+    window: true,
+  };
+  return nassh.runtimeSendMessage(msg).then((response) => {
+    if (response && response.error) {
+      throw new Error(`request failed: ${response.message}`);
+    }
   });
 };
 

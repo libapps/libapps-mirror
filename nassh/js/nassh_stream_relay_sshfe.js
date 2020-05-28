@@ -154,13 +154,9 @@ nassh.Stream.RelaySshfeWS.AgentResponse;
  *    resolve with the agent's response.
  */
 nassh.Stream.RelaySshfeWS.prototype.sendAgentMessage_ = function(data) {
-  // The Chrome message API uses callbacks, so wrap in a Promise ourselves.
-  return new Promise((resolve, reject) => {
-    chrome.runtime.sendMessage(
-        this.sshAgent_,
-        {'type': 'auth-agent@openssh.com', 'data': data},
-        resolve);
-  });
+  return /** @type {!Promise<!nassh.Stream.RelaySshfeWS.AgentResponse>} */ (
+      nassh.runtimeSendMessage(
+          this.sshAgent_, {'type': 'auth-agent@openssh.com', 'data': data}));
 };
 
 /**

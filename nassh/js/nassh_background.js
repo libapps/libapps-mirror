@@ -83,20 +83,14 @@ chrome.runtime.onInstalled.addListener((details) => {
      * @param {string} srcId The extension to import from.
      * @param {function()=} onError Callback if extension doesn't exist.
      */
-    const migrate = (srcId, onError) => {
+    const migrate = (srcId, onError = () => {}) => {
       console.log(`Trying to sync prefs from ${srcId}`);
-      const cmdExport = {command: 'prefsExport'};
-      chrome.runtime.sendMessage(srcId, cmdExport, (response) => {
-        const err = lib.f.lastError();
-        if (err) {
-          if (onError) {
-            onError();
-          }
-        } else {
+      nassh.runtimeSendMessage(srcId, {command: 'prefsExport'})
+        .then((response) => {
           const {prefs} = response;
           nassh.importPreferences(prefs);
-        }
-      });
+        })
+        .catch(onError);
     };
 
     switch (chrome.runtime.id) {
