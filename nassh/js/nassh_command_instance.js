@@ -996,7 +996,13 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     return;
   }
 
-  this.connectToFinalize_(params, options);
+  // Attempt to refresh certificates if need be.
+  const refresh = options['cert-refresh'] ?
+      nassh.goog.gcse.refresh(this.io) : Promise.resolve();
+  // Even if refreshing went horribly, attempt the connection anyways.
+  refresh.finally(() => {
+    this.connectToFinalize_(params, options);
+  });
 };
 
 /**
@@ -1206,6 +1212,7 @@ nassh.CommandInstance.postProcessOptions = function(
       '--report-connect-attempts': true,
       '--relay-protocol': 'v2',
       '--ssh-agent': 'gnubby',
+      'cert-refresh': true,
     }, rv);
 
     // Default enable connection resumption when using newer proxy mode.

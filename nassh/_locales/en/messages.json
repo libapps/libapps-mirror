@@ -1921,6 +1921,34 @@
 		"description": "Label for the optional ssh arguments field. These are command line flags to the ssh program itself.",
 		"message": "SSH Arguments"
 	},
+	"SSH_CERT_CHECK_ERROR": {
+		"description": "Error message shown to the user when checking the SSH certificate status failed. The message parameter will come directly from the OS or other programs and might be a translated string itself.",
+		"message": " failed: $MSG$",
+		"placeholders": {
+			"MSG": {
+				"content": "$1",
+				"example": "Unable to determine expiry"
+			}
+		}
+	},
+	"SSH_CERT_CHECK_REFRESH": {
+		"description": "Status message shown to the user when we initiate the process to refresh the user's SSH certificates (credentials). This lets them know that other external programs or websites might popup that they need to navigate/approve. This is displayed in an overlay that will automatically hide itself, so no further messages will be shown or appended to it.",
+		"message": "Refreshing SSH certificate..."
+	},
+	"SSH_CERT_CHECK_RESULT": {
+		"description": "Status message shown to the user after checking the expiration time of the user's SSH certificates (credentials). The ~ indicates the time is a rough approximation. Everything here may be translated or adjusted as makes sense.",
+		"message": " ~$HOURS$ hours until expiration",
+		"placeholders": {
+			"HOURS": {
+				"content": "$1",
+				"example": "10"
+			}
+		}
+	},
+	"SSH_CERT_CHECK_START": {
+		"description": "Status message shown to the user when we start to check the expiration time of the user's SSH certificates (credentials). A status message will be shown independently after this. Everything here may be translated as makes sense.",
+		"message": "Checking SSH certificate freshness..."
+	},
 	"STREAM_OPEN_ERROR": {
 		"description": "Error message displayed when opening a stream (e.g. a file or a network connection) fails. The stream will be a short internal identifier code (always lower case), while the error message will be an error message from the operating system itself (whose translation will be left to the OS if available). Everything may be translated.",
 		"message": "Opening stream $ID$ failed: $ERROR$",
