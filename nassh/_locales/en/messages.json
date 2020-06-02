@@ -574,7 +574,7 @@
 		"message": "Automatic selection halting (to the right)"
 	},
 	"HTERM_NOTIFY_COPY": {
-		"description": "Short status message displayed in a terminal overlay when text is automatically copied to the clipboard.",
+		"description": "Short status message displayed in a terminal overlay/popup/toast when the user's selection is automatically copied to the clipboard.",
 		"message": "Copied"
 	},
 	"HTERM_OPTIONS_BUTTON_LABEL": {
@@ -770,12 +770,12 @@
 		"message": "Send an ESC prefix when pressing a key while holding the Meta key.\n\nFor example, when enabled, pressing Meta+K will send ^[k as if you typed Escape then k. When disabled, only k will be sent."
 	},
 	"HTERM_PREF_MOUSE_PASTE_BUTTON": {
-		"description": "Help text shown for the 'mouse-paste-button' preference. Do not translate 'X11'. The window manager is the user's standard desktop interface for interacting with their OS.",
-		"message": "The mouse button to use for pasting.\n\nFor autodetect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the window manager should handle pasting via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: This will handle left & right handed mice correctly."
+		"description": "Help text shown for the 'mouse-paste-button' preference. Do not translate 'X11', '0', '1', or '2'. The '==' and general layout of the message and options may be formatted however makes sense. The window manager is the user's standard desktop interface for interacting with their OS.",
+		"message": "The mouse button to use for pasting.\n\nFor autodetect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the window manager should handle pasting via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: The primary & secondary buttons are handled for you with left & right handed mice."
 	},
 	"HTERM_PREF_MOUSE_RIGHT_CLICK_PASTE": {
 		"description": "Help text shown for the 'mouse-right-click-paste' preference. The quote style may be changed as needed. Do not translate 'mouse-paste-button'.",
-		"message": "Paste on right mouse button clicks.\n\nThis option is independent of the \"mouse-paste-button\" setting.\n\nNote: This will handle left & right handed mice correctly."
+		"message": "Paste on right mouse button clicks.\n\nThis option is independent of the \"mouse-paste-button\" setting.\n\nNote: The primary & secondary buttons are handled for you with left & right handed mice."
 	},
 	"HTERM_PREF_PAGE_KEYS_SCROLL": {
 		"description": "Help text shown for the 'page-keys-scroll' preference. 'Page Up', 'Page Down', and 'Shift' are the keyboard buttons and may be translated as makes sense.",
