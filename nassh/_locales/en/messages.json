@@ -249,6 +249,18 @@
 		"description": "Button label for blocking the requested feature.",
 		"message": "Block"
 	},
+	"HTERM_BUTTON_CLOSE": {
+		"description": "Button label for closing the currently focused visual element.",
+		"message": "Close"
+	},
+	"HTERM_BUTTON_FIND": {
+		"description": "Button label for finding text in the terminal output.",
+		"message": "Find"
+	},
+	"HTERM_BUTTON_NEXT": {
+		"description": "Button label for moving to the next found entry when finding text in the terminal output.",
+		"message": "Next"
+	},
 	"HTERM_BUTTON_PAGE_DOWN": {
 		"description": "Button label for scrolling down one page in the terminal output history. It is meant to be read out loud by screen readers so users can interact with the element. It does not refer to the keyboard button.",
 		"message": "Page down"
@@ -256,6 +268,10 @@
 	"HTERM_BUTTON_PAGE_UP": {
 		"description": "Button label for scrolling up one page in the terminal output history. It is meant to be read out loud by screen readers so users can interact with the element. It does not refer to the keyboard button.",
 		"message": "Page up"
+	},
+	"HTERM_BUTTON_PREVIOUS": {
+		"description": "Button label for moving to the previous found entry when finding text in the terminal output.",
+		"message": "Previous"
 	},
 	"HTERM_LOADING_RESOURCE_FAILED": {
 		"description": "Message shown to the user when loading a resource (image, audio file, video, etc...) failed for any reason.",

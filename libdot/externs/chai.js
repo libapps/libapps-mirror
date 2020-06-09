@@ -30,6 +30,7 @@ chai.assert.deepInclude =
 chai.assert.deepStrictEqual =
 chai.assert.equal =
 chai.assert.include =
+chai.assert.notInclude =
 chai.assert.isAbove =
 chai.assert.lengthOf =
 chai.assert.notEqual =
