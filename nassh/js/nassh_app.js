@@ -33,7 +33,7 @@ nassh.App.prototype.omniboxOnInputStarted_ = function() {
   this.omniDefault_ = null;
 
   // Convert a nassh profile into an object we can easily match later on.
-  const profileIdToOmni = function(id) {
+  const profileIdToOmni = (id) => {
     const profile = this.prefs_.getProfile(id);
 
     let port = profile.get('port') || '';
@@ -53,14 +53,14 @@ nassh.App.prototype.omniboxOnInputStarted_ = function() {
   this.prefs_.readStorage(() => {
     const ids = this.prefs_.get('profile-ids');
     for (let i = 0; i < ids.length; ++i) {
-      this.omniMatches_.push(profileIdToOmni.call(this, ids[i]));
+      this.omniMatches_.push(profileIdToOmni(ids[i]));
     }
 
     chrome.storage.local.get('/nassh/connectDialog/lastProfileId',
       (items) => {
         const lastProfileId = items['/nassh/connectDialog/lastProfileId'];
         if (lastProfileId) {
-          this.omniDefault_ = profileIdToOmni.call(this, lastProfileId);
+          this.omniDefault_ = profileIdToOmni(lastProfileId);
         }
       });
   });
