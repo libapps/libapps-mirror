@@ -23,7 +23,7 @@ body {
 }
 
 :focus {
-  outline: 2px var(--nassh-cursor-color-50) solid;
+  outline: 2px var(--nassh-fg-color) solid;
 }
 
 .dialog-body {
@@ -52,7 +52,11 @@ input[type="file"] {
 input:invalid {
   font-weight: bold;
   color: red;
-  border: 1px solid red;
+  border: 2px solid red;
+}
+
+input:invalid:focus {
+  outline: 2px solid red;
 }
 
 div[role="button"] {
