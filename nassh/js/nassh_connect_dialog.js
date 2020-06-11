@@ -113,6 +113,11 @@ nassh.ConnectDialog.prototype.onPreferencesReady_ = function() {
     });
   }
 
+  // Make sure the buttons initial state is sane if we don't switch profiles
+  // (which refreshes the UI for us).
+  if (profileIndex === 0) {
+    this.syncButtons_();
+  }
   this.shortcutList_.setActiveIndex(profileIndex);
   // The shortcut list will eventually do this async, but we want it now...
   this.setCurrentProfileRecord(this.profileList_[profileIndex]);
