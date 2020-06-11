@@ -148,6 +148,11 @@ nassh.LocalPreferenceManager = function(storage = undefined) {
   }
   lib.PreferenceManager.call(this, storage, '/nassh/');
 
+  this.definePreferences([
+    /* The last profile the user selected. */
+    ['connectDialog/lastProfileId', ''],
+  ]);
+
   this.defineChildren('profile-ids', function(parent, id) {
     return new nassh.ProfileLocalPreferenceManager(parent, id);
   });

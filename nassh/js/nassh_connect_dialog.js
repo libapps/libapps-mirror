@@ -99,19 +99,10 @@ nassh.ConnectDialog.prototype.onPreferencesReady_ = function() {
   // Install various (DOM and non-DOM) event handlers.
   this.installHandlers_();
 
-  let profileIndex = 0;
-
-  if (this.profileList_.length > 1) {
-    chrome.storage.local.get('/nassh/connectDialog/lastProfileId', (items) => {
-      const lastProfileId = items['/nassh/connectDialog/lastProfileId'];
-      if (lastProfileId) {
-        profileIndex = Math.max(0, this.getProfileIndex_(lastProfileId));
-      }
-
-      this.shortcutList_.setActiveIndex(profileIndex);
-      this.setCurrentProfileRecord(this.profileList_[profileIndex]);
-    });
-  }
+  const lastProfileId = /** @type {string} */ (
+      this.localPrefs_.get('connectDialog/lastProfileId'));
+  const profileIndex = lib.f.clamp(
+      this.getProfileIndex_(lastProfileId), 0, this.profileList_.length);
 
   // Make sure the buttons initial state is sane if we don't switch profiles
   // (which refreshes the UI for us).
@@ -483,10 +474,8 @@ nassh.ConnectDialog.prototype.startup_ = function(message, proto) {
   // Since the user has initiated this connection, register the protocol.
   nassh.registerProtocolHandler(proto);
 
-  const items = {
-    '/nassh/connectDialog/lastProfileId': this.currentProfileRecord_.id,
-  };
-  chrome.storage.local.set(items);
+  this.localPrefs_.set(
+      'connectDialog/lastProfileId', this.currentProfileRecord_.id);
 
   if (this.form_.checkValidity()) {
     this.postMessage(message, [this.currentProfileRecord_.id]);

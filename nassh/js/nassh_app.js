@@ -12,6 +12,7 @@
  */
 nassh.App = function() {
   this.prefs_ = new nassh.PreferenceManager();
+  this.localPrefs_ = new nassh.LocalPreferenceManager();
   this.omniMatches_ = [];
   this.omniDefault_ = null;
 };
@@ -56,13 +57,10 @@ nassh.App.prototype.omniboxOnInputStarted_ = function() {
       this.omniMatches_.push(profileIdToOmni(ids[i]));
     }
 
-    chrome.storage.local.get('/nassh/connectDialog/lastProfileId',
-      (items) => {
-        const lastProfileId = items['/nassh/connectDialog/lastProfileId'];
-        if (lastProfileId) {
-          this.omniDefault_ = profileIdToOmni(lastProfileId);
-        }
-      });
+    this.localPrefs_.readStorage(() => {
+      this.omniDefault_ = profileIdToOmni(
+          this.localPrefs_.get('connectDialog/lastProfileId'));
+    });
   });
 };
 
