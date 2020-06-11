@@ -719,7 +719,7 @@ nassh.ConnectDialog.prototype.checkMountable_ = function() {
 nassh.ConnectDialog.prototype.syncButtons_ = function() {
   this.enableButton_(
       this.deleteButton_,
-      document.activeElement.getAttribute('id') == 'shortcut-list');
+      this.shortcutList_.activeIndex != 0);
 
   const validForm = this.form_.checkValidity();
   this.enableButton_(this.connectButton_, validForm);
