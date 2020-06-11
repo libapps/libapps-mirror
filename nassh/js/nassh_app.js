@@ -15,6 +15,9 @@ nassh.App = function() {
   this.localPrefs_ = new nassh.LocalPreferenceManager();
   this.omniMatches_ = [];
   this.omniDefault_ = null;
+
+  this.prefs_.readStorage();
+  this.localPrefs_.readStorage();
 };
 
 /**
@@ -51,17 +54,13 @@ nassh.App.prototype.omniboxOnInputStarted_ = function() {
 
   // Read our saved settings and construct the partial matches from all of
   // our active profiles.
-  this.prefs_.readStorage(() => {
-    const ids = this.prefs_.get('profile-ids');
-    for (let i = 0; i < ids.length; ++i) {
-      this.omniMatches_.push(profileIdToOmni(ids[i]));
-    }
+  const ids = this.prefs_.get('profile-ids');
+  for (let i = 0; i < ids.length; ++i) {
+    this.omniMatches_.push(profileIdToOmni(ids[i]));
+  }
 
-    this.localPrefs_.readStorage(() => {
-      this.omniDefault_ = profileIdToOmni(
-          this.localPrefs_.get('connectDialog/lastProfileId'));
-    });
-  });
+  this.omniDefault_ = profileIdToOmni(
+      this.localPrefs_.get('connectDialog/lastProfileId'));
 };
 
 /**
