@@ -86,6 +86,9 @@ def filter_known_files(paths: List[Path]) -> List[Path]:
         elif path.is_symlink():
             # Ignore symlinks.
             pass
+        elif not path.exists():
+            # Ignore missing files here (caller will handle it).
+            pass
         elif path.stat().st_mode & 0o111:
             # Add executable programs with python shebangs.
             with path.open('rb') as fp:
