@@ -370,7 +370,7 @@ have to re-import them.
   See the [OpenSSH legacy options] page for more details.
 
 
-### How do I remove a key?
+### How do I remove an identity (ssh key)?
 
   The easiest way is to visit the options page and select the "SSH Files"
   section on the left.  From there you will find a list of all the identities
@@ -379,16 +379,6 @@ have to re-import them.
   From the connection dialog, select an identity from the dropdown and press
   the DELETE key.  This will remove both the private and public key files from
   the HTML5 filesystem.
-
-
-### How do I remove ALL keys?
-
-  Open the JavaScript console and type...
-
-    term_.command.removeDirectory('/.ssh/')
-
-  This will remove any non-key files you may have uploaded as well.  It will
-  *not* affect your preferences.
 
 
 ### Is there support for keychains?
