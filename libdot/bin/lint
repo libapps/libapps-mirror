@@ -56,7 +56,7 @@ def get_known_sources(basedir: Path) -> List[Path]:
     """Get list of committed files that we could possibly lint."""
     return (x for x in get_known_files(basedir)
             if x.suffix not in {
-                '.log', '.jpg', '.ogg', '.patch', '.png', '.svg', '.webp',
+                '.log', '.jpg', '.ogg', '.patch', '.png', '.webp',
             })
 
 
@@ -249,7 +249,8 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
         'Dockerfile', 'LICENSE', 'Makefile', 'METADATA', 'OWNERS',
     }
     TEXT_EXTENSIONS = {
-        '.cfg', '.concat', '.css', '.el', '.json', '.md', '.sh', '.txt', '.vim',
+        '.cfg', '.concat', '.css', '.el', '.json', '.md', '.sh', '.svg', '.txt',
+        '.vim', '.xml',
     }
     text_files = [x for x in opts.paths
                   if (os.path.basename(x) in TEXT_FILENAMES or
