@@ -116,7 +116,10 @@ nassh.getFileSystem = function() {
     requestFS(window.PERSISTENT,
               16 * 1024 * 1024,
               onFileSystem,
-              lib.fs.err('Error initializing filesystem', reject));
+              (e) => {
+                console.error(`Error initializing filesystem: ${e}`);
+                reject(e);
+              });
   });
 };
 

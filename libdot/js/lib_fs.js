@@ -10,54 +10,6 @@
 lib.fs = {};
 
 /**
- * Returns a function that console.log()'s its arguments, prefixed by |msg|.
- *
- * This is a useful utility function when working with the FileSystem's many
- * async, callbacktastic methods.
- *
- * * Use it when you don't think you care about a callback.  If it ever gets
- *   called, you get a log message that includes any parameters passed to the
- *   callback.
- *
- * * Use it as your "log a messages, then invoke this other method" pattern.
- *   Great for debugging or times when you want to log a message before
- *   invoking a callback passed in to your method.
- *
- * @template T
- * @param {string} msg The message prefix to use in the log.
- * @param {T=} callback A function to invoke after logging.
- * @return {T} The wrapper function to call.
- */
-lib.fs.log = function(msg, callback) {
-  return function(...args) {
-    console.log(msg + ': ' + args.join(', '));
-    if (callback) {
-      callback.apply(null, args);
-    }
-  };
-};
-
-/**
- * Returns a function that console.error()'s its arguments, prefixed by |msg|.
- *
- * This is exactly like fs.log(), except the message in the JS console will
- * be styled as an error.  See fs.log() for some use cases.
- *
- * @template T
- * @param {string} msg The message prefix to use in the log.
- * @param {T=} callback A function to invoke after logging.
- * @return {T} The wrapper function to call.
- */
-lib.fs.err = function(msg, callback) {
-  return function(...args) {
-    console.error(msg + ': ' + args.join(', '), lib.f.getStack());
-    if (callback) {
-      callback.apply(null, args);
-    }
-  };
-};
-
-/**
  * Overwrite a file on an HTML5 filesystem.
  *
  * Replace the contents of a file with the string provided.  If the file
