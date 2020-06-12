@@ -1186,7 +1186,9 @@ nassh.ConnectDialog.prototype.onDeleteClick_ = function(e) {
 /**
  * Someone clicked on the options button.
  */
-nassh.ConnectDialog.prototype.onOptionsClick_ = nassh.openOptionsPage;
+nassh.ConnectDialog.prototype.onOptionsClick_ = function() {
+  nassh.openOptionsPage();
+};
 
 /**
  * Someone clicked on the feedback button.

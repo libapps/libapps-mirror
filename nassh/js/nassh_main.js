@@ -109,7 +109,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
          lib.f.openWindow('https://goo.gl/muppJj', '_blank');
        }},
       {name: nassh.msg('CLEAR_KNOWN_HOSTS_MENU_LABEL'),
-       action: function() { terminal.command.removeAllKnownHosts(); }},
+       action: function() { nassh.openOptionsPage('ssh-files'); }},
       {name: nassh.msg('HTERM_OPTIONS_BUTTON_LABEL'),
        action: function() { nassh.openOptionsPage(); }},
       {name: nassh.msg('SEND_FEEDBACK_LABEL'),
