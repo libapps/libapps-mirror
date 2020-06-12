@@ -114,6 +114,7 @@ module.exports = {
     'semi': ['error', 'always'],
     'semi-spacing': 'error',
     'semi-style': ['error', 'last'],
+    'space-before-blocks': ['error', 'always'],
     'space-before-function-paren': [
       'error', {
         'anonymous': 'never',
