@@ -1,0 +1,56 @@
+From 30ef0c5f1a958132ca4e7c175d28dacc773c1110 Mon Sep 17 00:00:00 2001
+From: Joel Hockey <joelhockey@chromium.org>
+Date: Mon, 15 Jun 2020 14:11:12 -0700
+Subject: [PATCH] Generate Powerline fonts for nassh
+
+---
+ font-patcher | 19 +++++++++++++++----
+ 1 file changed, 15 insertions(+), 4 deletions(-)
+
+diff --git a/font-patcher b/font-patcher
+index dbecf605..058971ce 100755
+--- a/font-patcher
++++ b/font-patcher
+@@ -374,8 +374,7 @@ class font_patcher:
+         fontname   = replace_font_name(fontname,   additionalFontNameReplacements2)
+ 
+         # replace any extra whitespace characters:
+-        self.sourceFont.familyname = " ".join(familyname.split())
+-        self.sourceFont.fullname   = " ".join(fullname.split())
++        self.sourceFont.fullname = self.sourceFont.fullname.replace(' ', '')
+         self.sourceFont.fontname   = " ".join(fontname.split())
+ 
+         self.sourceFont.appendSFNTName(str('English (US)'), str('Preferred Family'), self.sourceFont.familyname)
+@@ -513,8 +512,8 @@ class font_patcher:
+         # Define the character ranges
+         # Symbol font ranges
+         self.patch_set = [
+-            {'Enabled': True,                           'Name': "Seti-UI + Custom",        'Filename': "original-source.otf",              'Exact': False,                               'SymStart': 0xE4FA, 'SymEnd': 0xE52F, 'SrcStart': 0xE5FA, 'SrcEnd': 0xE62F, 'ScaleGlyph': None,             'Attributes': SYM_ATTR_DEFAULT},
+-            {'Enabled': True,                           'Name': "Devicons",                'Filename': "devicons.ttf",                     'Exact': False,                               'SymStart': 0xE600, 'SymEnd': 0xE6C5, 'SrcStart': 0xE700, 'SrcEnd': 0xE7C5, 'ScaleGlyph': DEVI_SCALE_LIST,  'Attributes': SYM_ATTR_DEFAULT},
++            {'Enabled': False,                           'Name': "Seti-UI + Custom",        'Filename': "original-source.otf",              'Exact': False,                               'SymStart': 0xE4FA, 'SymEnd': 0xE52F, 'SrcStart': 0xE5FA, 'SrcEnd': 0xE62F, 'ScaleGlyph': None,             'Attributes': SYM_ATTR_DEFAULT},
++            {'Enabled': False,                           'Name': "Devicons",                'Filename': "devicons.ttf",                     'Exact': False,                               'SymStart': 0xE600, 'SymEnd': 0xE6C5, 'SrcStart': 0xE700, 'SrcEnd': 0xE7C5, 'ScaleGlyph': DEVI_SCALE_LIST,  'Attributes': SYM_ATTR_DEFAULT},
+             {'Enabled': self.args.powerline,            'Name': "Powerline Symbols",       'Filename': "PowerlineSymbols.otf",             'Exact': True,                                'SymStart': 0xE0A0, 'SymEnd': 0xE0A2, 'SrcStart': None,   'SrcEnd': None,   'ScaleGlyph': None,             'Attributes': SYM_ATTR_POWERLINE},
+             {'Enabled': self.args.powerline,            'Name': "Powerline Symbols",       'Filename': "PowerlineSymbols.otf",             'Exact': True,                                'SymStart': 0xE0B0, 'SymEnd': 0xE0B3, 'SrcStart': None,   'SrcEnd': None,   'ScaleGlyph': None,             'Attributes': SYM_ATTR_POWERLINE},
+             {'Enabled': self.args.powerlineextra,       'Name': "Powerline Extra Symbols", 'Filename': "PowerlineExtraSymbols.otf",        'Exact': True,                                'SymStart': 0xE0A3, 'SymEnd': 0xE0A3, 'SrcStart': None,   'SrcEnd': None,   'ScaleGlyph': None,             'Attributes': SYM_ATTR_POWERLINE},
+@@ -536,6 +535,18 @@ class font_patcher:
+             {'Enabled': self.args.custom,               'Name': "Custom",                  'Filename': self.args.custom,                   'Exact': True,                                'SymStart': 0x0000, 'SymEnd': 0x0000, 'SrcStart': 0x0000, 'SrcEnd': 0x0000, 'ScaleGlyph': None,             'Attributes': CUSTOM_ATTR}
+         ]
+ 
++        for (c) in (0x2693,0x26A1,0x2699,0x270E,0x2714,0x2718,0x273C,0x279C,0x27A6,0x2B06,0x2B07):
++            self.patch_set.append({
++                'Enabled': self.args.powerline,
++                'Name': "Powerline Symbols",
++                'Filename': "../../patched-fonts/DejaVuSansMono/Bold/complete/DejaVu Sans Mono Bold Nerd Font Complete Mono.ttf",
++                'Exact': True,
++                'SymStart': c, 'SymEnd': c,
++                'SrcStart': None,
++                'SrcEnd': None,
++                'ScaleGlyph': None,
++                'Attributes': SYM_ATTR_POWERLINE})
++
+ 
+     def setup_line_dimensions(self):
+         # win_ascent and win_descent are used to set the line height for windows fonts.
+-- 
+2.27.0.290.gba653c62da-goog
+

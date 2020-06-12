@@ -184,6 +184,7 @@ def main(argv):
     parser = get_parser()
     opts = parser.parse_args(argv)
     libdot.node_and_npm_setup()
+    nassh.fonts.fonts_update()
     mkdeps(rollup=opts.rollup)
     nassh.generate_changelog.generate_changelog()
 

@@ -22,6 +22,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // Create a local hterm instance so people can see their changes live.
     const term = new hterm.Terminal();
     term.onTerminalReady = function() {
+        nassh.loadWebFonts(term.getDocument());
         const io = term.io.push();
         io.onVTKeystroke = io.print;
         io.sendString = io.print;

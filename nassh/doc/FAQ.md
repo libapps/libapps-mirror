@@ -670,6 +670,22 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   this.  It will also disable "real" bold characters, using only bright
   colors to indicate bold.
 
+### Which fonts are supported?
+
+  The following fonts are loaded automatically as web fonts with Secure Shell.
+  * Cousine
+  * Inconsolata
+  * Roboto Mono
+  * Source Code Pro
+
+  In addition, Powerline symbol fonts are bundled and loaded as web fonts for:
+  * Powerline For Cousine
+  * Powerline For Inconsolata
+  * Powerline For Noto Sans Mono
+  * Powerline For Roboto Mono
+  * Powerline For Source Code Pro
+
+  You can also specify other fonts if they are installed on your system.
 
 ### How do I change the default font size?
 

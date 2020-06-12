@@ -455,3 +455,51 @@ nassh.osc8Link = function(url, text = url) {
   }
   return `\x1b]8;;${url}\x07${text}\x1b]8;;\x07`;
 };
+
+/**
+ * @typedef {{
+ *     name: string,
+ *     isWebFont: boolean,
+ * }}
+ */
+nassh.Font;
+
+/** @type {!Array<!nassh.Font>} */
+nassh.FONTS = [
+  {name: 'Noto Sans Mono', isWebFont: false},
+  {name: 'Cousine', isWebFont: true},
+  {name: 'Inconsolata', isWebFont: true},
+  {name: 'Roboto Mono', isWebFont: true},
+  {name: 'Source Code Pro', isWebFont: true},
+];
+
+/**
+ * Add css to load web fonts from fonts.googleapis.com.
+ *
+ * @param {!Document} document The document to load into.
+ */
+nassh.loadWebFonts = function(document) {
+  const imports = [];
+  const fontFaces = [];
+  for (const font of nassh.FONTS) {
+    if (font.isWebFont) {
+      // Load normal (400) and bold (700).
+      imports.push(`@import url('https://fonts.googleapis.com/css2?family=` +
+        `${encodeURIComponent(font.name)}:wght@400;700&display=swap');`);
+    }
+    fontFaces.push(`
+      @font-face {
+        font-family: 'Powerline For ${font.name}';
+        src: url('../fonts/PowerlineFor${font.name.replace(/\s/g, '')}.woff2')
+             format('woff2');
+        font-weight: normal bold;
+        unicode-range:
+            U+2693,U+26A1,U+2699,U+270E,U+2714,U+2718,U+273C,U+279C,U+27A6,
+            U+2B06-2B07,U+E0A0-E0D4;
+      }`);
+  }
+
+  const style = document.createElement('style');
+  style.textContent = imports.join('\n') + fontFaces.join('');
+  document.head.appendChild(style);
+};

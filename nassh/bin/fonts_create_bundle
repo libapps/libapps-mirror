@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Update our nassh fonts bundle. See ../doc/fonts.md."""
+
+import logging
+import os
+import sys
+
+import nassh
+import libdot
+
+
+def get_parser():
+    """Get a command line parser."""
+    parser = libdot.ArgumentParser(description=__doc__)
+    return parser
+
+
+def main(argv):
+    """The main func!"""
+    parser = get_parser()
+    _opts = parser.parse_args(argv)
+
+    tar = nassh.LIBAPPS_DIR / 'fonts.tar.xz'
+
+    libdot.pack(tar, ['fonts'], exclude=['fonts/.hash'], cwd=nassh.DIR)
+
+    new_hash = libdot.sha256(tar)
+    final_tar = nassh.LIBAPPS_DIR / f'fonts-{new_hash}.tar.xz'
+    os.rename(tar, final_tar)
+
+    logging.info(
+        'To update the hash, run:\n'
+        "sed -i \"/^FONTS_HASH *=/s:=.*:= '%s':\" '%s/fonts'",
+        new_hash, nassh.BIN_DIR)
+    logging.info('To upload the new fonts:\ngsutil cp -a public-read %s %s/',
+                 final_tar, nassh.fonts.FONTS_GS_URI)
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))

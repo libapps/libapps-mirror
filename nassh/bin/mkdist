@@ -26,6 +26,7 @@ import libdot
 # List of files to be included in the zip file as globs.
 INCLUDE_PATTERNS = (
     os.path.join('css', '*.css'),
+    os.path.join('fonts', '*.woff2'),
     os.path.join('html', '*.html'),
     os.path.join('images', '*', '*.png'),
     os.path.join('js', '*.js'),

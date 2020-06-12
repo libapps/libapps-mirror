@@ -29,4 +29,5 @@ class HelperProgram(libdot.HelperProgram):
     _BIN_DIR = BIN_DIR
 
 generate_changelog = HelperProgram('generate-changelog')
+fonts = HelperProgram('fonts')
 mkdeps = HelperProgram('mkdeps')

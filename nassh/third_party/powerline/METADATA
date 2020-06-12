@@ -1,0 +1,11 @@
+name: "Powerline"
+description: "Powerline is a statusline plugin for vim"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://github.com/powerline/powerline"
+  }
+  version: "2.8.1"
+  last_upgrade_date { year: 2019 month: 07 day: 15 }
+}

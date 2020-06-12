@@ -165,6 +165,7 @@ Crosh.init = function() {
     terminal.command.keyboard_ = terminal.keyboard;
   };
   terminal.onTerminalReady = function() {
+    nassh.loadWebFonts(terminal.getDocument());
     // TODO(crbug.com/1019034): chrome.terminalPrivate a11y was added in M82.
     // We can migrate fully to it and remove chrome.accessibilityFeatures once
     // M82 is stable.

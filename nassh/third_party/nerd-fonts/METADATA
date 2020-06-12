@@ -1,0 +1,11 @@
+name: "Nerd Fonts"
+description: "Iconic font aggregator, collection, and patcher"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://github.com/ryanoasis/nerd-fonts"
+  }
+  version: "2.0.0"
+  last_upgrade_date { year: 2019 month: 07 day: 15 }
+}

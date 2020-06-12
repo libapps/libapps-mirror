@@ -11,7 +11,8 @@ js/*.rollup.js
 /plugin/
 
 # Stuff we build for distribution
-dist
+/dist
+/fonts
 /nassh-*.tgz
 
 # npm related dirs.

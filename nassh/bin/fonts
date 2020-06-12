@@ -1,0 +1,74 @@
+#!/usr/bin/env python3
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Download web fonts to bundle with nassh. See ../doc/fonts.md"""
+
+import os
+import shutil
+import sys
+
+import nassh
+import libdot
+
+
+# The hash of the fonts that we maintain.
+# Allow a long line for easy automated updating.
+# pylint: disable=line-too-long
+FONTS_HASH = 'd6dc5eaf459abd058cd3aef1e25963fde893f9d87f5f55f340431697ce4b3506'
+# pylint: enable=line-too-long
+
+# Bucket maintained by us.
+FONTS_GS_FRAGMENT = 'chromeos-localmirror/secureshell/distfiles'
+FONTS_GS_URI = f'gs://{FONTS_GS_FRAGMENT}'
+FONTS_BASE_URI = f'https://storage.googleapis.com/{FONTS_GS_FRAGMENT}'
+
+# The nassh fonts path.
+FONTS_DIR = nassh.DIR / 'fonts'
+
+
+def fonts_update():
+    """Download & update our copy of fonts."""
+    hash_file = FONTS_DIR / '.hash'
+    old_hash = None
+    try:
+        with open(hash_file, 'r', encoding='utf-8') as fp:
+            old_hash = fp.read().strip()
+    except FileNotFoundError:
+        pass
+
+    # In case of an upgrade, nuke existing dir.
+    if old_hash != FONTS_HASH:
+        shutil.rmtree(FONTS_DIR, ignore_errors=True)
+
+    if not os.path.exists(hash_file):
+        # Download & unpack the archive.
+        tar = f'fonts-{FONTS_HASH}.tar.xz'
+        uri = '/'.join((FONTS_BASE_URI, tar))
+        output = nassh.LIBAPPS_DIR / tar
+        libdot.fetch(uri, output)
+        libdot.unpack(output, cwd=nassh.DIR)
+        libdot.unlink(output)
+
+        # Mark the hash of this checkout.
+        with open(hash_file, 'w', encoding='utf-8') as fp:
+            fp.write(FONTS_HASH)
+
+
+def get_parser():
+    """Get a command line parser."""
+    parser = libdot.ArgumentParser(description=__doc__)
+    return parser
+
+
+def main(argv):
+    """The main func!"""
+    parser = get_parser()
+    _opts = parser.parse_args(argv)
+
+    fonts_update()
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))

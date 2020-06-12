@@ -25,6 +25,7 @@ to the right people.
 * [ChangeLog](./doc/ChangeLog.md) -- List of interesting changes in each release
 * [Crosh (Chrome OS shell)](./doc/chromeos-crosh.md) -- Interactions with the crosh command on Chrome OS
 * [FAQ](./doc/FAQ.md) -- Frequently Asked Questions
+* [Fonts](./doc/fonts.md) -- Fonts including Powerline symbols bundled with Secure Shell
 * [Hacking](./doc/hack.md) -- Developing the Secure Shell source
 * [Hardware keys](./doc/hardware-keys.md) -- Using smart cards and hardware tokens with Secure Shell
 * [Options](./doc/options.md) -- Secure Shell command line options
