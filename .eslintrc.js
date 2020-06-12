@@ -132,6 +132,7 @@ module.exports = {
     'unicode-bom': ['error', 'never'],
     'use-isnan': 'error',
     'valid-typeof': 'error',
+    'yield-star-spacing': ['error', 'after'],
     'yoda': 'error',
 
     'jsdoc/check-alignment': 2,
