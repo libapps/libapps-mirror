@@ -36,6 +36,6 @@ This has only been tested with Chrome.  We know the following is needed:
 
 * Native Client (NaCl)
 * Pepper Plugin API (PPAPI)
-* ECMAScript 6 (ES6)
+* ECMAScript 2018
 
 [chromium-hterm mailing list]: https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-hterm

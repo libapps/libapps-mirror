@@ -33,66 +33,6 @@ describe('lib_polyfill_tests.js', () => {
     obj[prop] = original;
   }
 
-it('polyfills-string-pad-start', async () => {
-  function test() {
-    assert.equal('23'.padStart(7, '01'), '0101023');
-  }
-  await polyfillTest(
-      String.prototype, 'padStart', lib.polyfill.stringPadStart, test);
-});
-
-it('polyfills-string-pad-end', async () => {
-  function test() {
-    assert.equal('23'.padEnd(7, '01'), '2301010');
-  }
-  await polyfillTest(
-      String.prototype, 'padEnd', lib.polyfill.stringPadEnd, test);
-});
-
-it('polyfills-promise-finally', async () => {
-  const err = new Error('then2error');
-  async function test() {
-    const stack = [];
-    const result = await new Promise((resolve, reject) => {
-      stack.push('constructor');
-      resolve('constructor');
-    })
-    .then((p) => {
-      stack.push(p, 'then1');
-      return 'then1';
-    })
-    .then((p) => {
-      stack.push(p, 'then2');
-      throw err;
-    })
-    .then((p) => {
-      stack.push(p, 'then3');
-      return 'then3';
-    })
-    .catch((p) => {
-      stack.push(p, 'catch');
-      return 'catch';
-    })
-    .finally(function(ret = undefined) {
-      stack.push(ret, 'finally');
-      return 'finally';
-    }).then((p) => {
-      stack.push(p, 'then4');
-      return 'then4';
-    });
-    assert.equal('then4', result);
-    assert.deepEqual(stack, [
-        'constructor',
-        'constructor', 'then1',
-        'then1', 'then2',
-        err, 'catch',
-        undefined, 'finally',
-        'catch', 'then4']);
-  }
-  await polyfillTest(
-      Promise.prototype, 'finally', lib.polyfill.promiseFinally, test);
-});
-
 it('Blob.arrayBuffer', async () => {
   const blob = new Blob(['ab12']);
   const exp = new Uint8Array([97, 98, 49, 50]);
