@@ -30,13 +30,13 @@ lib.Storage.TerminalPrivate = function(storage = chrome.terminalPrivate) {
   this.prefValue_ = {};
 
   /**
-   * We do async writes to terminalPrivate.setSettings to allow multiple
-   * sync writes to be batched.  This array holds the list of optional callbacks
-   * for the changes that are in the current batch.
+   * We do async writes to terminalPrivate.setSettings to allow multiple sync
+   * writes to be batched.  This array holds the list of pending resolve calls
+   * that we'll invoke when the current write finishes.
    *
-   * @private {!Array<function()|undefined>}
+   * @private {!Array<function()>}
    */
-  this.prefValueWriteCallbacks_ = [];
+  this.prefValueWriteToResolve_ = [];
 
   /** @type {boolean} */
   this.prefsLoaded_ = false;
@@ -116,26 +116,32 @@ lib.Storage.TerminalPrivate.prototype.onSettingsChanged_ = function(settings) {
  * Set pref then run callback.  Writes are done async to allow multiple
  * concurrent calls to this function to be batched into a single write.
  *
- * @param {function()=} callback Callback to run once pref is set.
+ * @return {!Promise<void>} Resolves once the pref is set.
  * @private
  */
-lib.Storage.TerminalPrivate.prototype.setPref_ = function(callback) {
+lib.Storage.TerminalPrivate.prototype.setPref_ = function() {
   lib.assert(this.prefsLoaded_);
-  this.prefValueWriteCallbacks_.push(callback);
-  if (this.prefValueWriteCallbacks_.length > 1) {
-    return;
-  }
-  setTimeout(() => {
-    const callbacks = this.prefValueWriteCallbacks_;
-    this.prefValueWriteCallbacks_ = [];
-    this.storage_.setSettings(this.prefValue_, () => {
-      const err = lib.f.lastError();
-      if (err) {
-        console.error(err);
-      }
-      callbacks.forEach((c) => c && c());
+
+  return new Promise((resolve) => {
+    this.prefValueWriteToResolve_.push(resolve);
+    if (this.prefValueWriteToResolve_.length > 1) {
+      return;
+    }
+
+    // Force deferment to help coalesce.
+    setTimeout(() => {
+      this.storage_.setSettings(this.prefValue_, () => {
+        const err = lib.f.lastError();
+        if (err) {
+          console.error(err);
+        }
+        // Resolve all the pending promises so their callbacks will be invoked
+        // once this function returns.
+        this.prefValueWriteToResolve_.forEach((r) => r());
+        this.prefValueWriteToResolve_ = [];
+      });
     });
-  }, 0);
+  });
 };
 
 /**
@@ -172,7 +178,11 @@ lib.Storage.TerminalPrivate.prototype.removeObserver = function(callback) {
 lib.Storage.TerminalPrivate.prototype.clear = function(callback) {
   this.initCache_().then(() => {
     this.prefValue_ = {};
-    this.setPref_(callback);
+    this.setPref_().then(() => {
+      if (callback) {
+        callback();
+      }
+    });
   });
 };
 
@@ -246,9 +256,12 @@ lib.Storage.TerminalPrivate.prototype.setItems = function(obj, callback) {
       this.prefValue_[key] = obj[key];
     }
 
-    this.setPref_(callback);
-
-    return e;
+    return this.setPref_().then(() => {
+      if (callback) {
+        callback();
+      }
+      return e;
+    });
   })
   .then((e) => {
     for (const observer of this.observers_) {
@@ -284,6 +297,10 @@ lib.Storage.TerminalPrivate.prototype.removeItems = function(keys, callback) {
     for (const key of keys) {
       delete this.prefValue_[key];
     }
-    this.setPref_(callback);
+    this.setPref_().then(() => {
+      if (callback) {
+        callback();
+      }
+    });
   });
 };

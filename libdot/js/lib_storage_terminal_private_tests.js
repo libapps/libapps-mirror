@@ -54,10 +54,72 @@ class StorageAreaFake {
  * Initialize the storage fakes & APIs.
  */
 beforeEach(function() {
-  const fake = new StorageAreaFake();
-  this.storage = new lib.Storage.TerminalPrivate(fake);
+  this.fake = new StorageAreaFake();
+  this.storage = new lib.Storage.TerminalPrivate(this.fake);
 });
 
 lib.Storage.ApiTest();
+
+/**
+ * Make sure multiple writes collapse into one.
+ */
+it('coalesce-writes', function(done) {
+  const storage = this.storage;
+
+  let called = 0;
+  this.fake.setSettings = (items, callback = () => {}) => {
+    ++called;
+    callback();
+  };
+  storage.setItem('1', 2);
+  storage.setItem('3', 2);
+  storage.setItem('4', 2);
+
+  // Poll to finish asap, but don't give up too soon.
+  let retry = 200;
+  const check = () => {
+    if (called === 1) {
+      done();
+    } else if (retry-- > 0) {
+      setTimeout(check, 1);
+    } else {
+      assert.fail();
+    }
+  };
+  check();
+});
+
+/**
+ * Make sure recursive writes are handled.
+ */
+it('recursive-writes', function(done) {
+  const storage = this.storage;
+
+  let recursive_called = false;
+  let called = 0;
+  this.fake.setSettings = (items, callback = () => {}) => {
+    ++called;
+    callback();
+  };
+  storage.setItem('1', 2, () => {
+    storage.setItem('3', 2, () => {
+      recursive_called = true;
+    });
+  });
+  storage.setItem('2', 2);
+
+  // Poll to finish asap, but don't give up too soon.
+  let retry = 200;
+  const check = () => {
+    if (called === 2 && recursive_called) {
+      done();
+    } else if (retry-- > 0) {
+      setTimeout(check, 1);
+    } else {
+      this.fail();
+    }
+  };
+  check();
+});
 
 });
