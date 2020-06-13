@@ -57,16 +57,12 @@ lib.Storage.Chrome.prototype.removeObserver = function(callback) {
 /**
  * Delete everything in this storage.
  *
- * @param {function()=} callback The function to invoke when the delete has
- *     completed.
  * @override
  */
-lib.Storage.Chrome.prototype.clear = function(callback) {
-  this.storage_.clear();
-
-  if (callback) {
-    setTimeout(callback, 0);
-  }
+lib.Storage.Chrome.prototype.clear = async function() {
+  return new Promise((resolve) => {
+    this.storage_.clear(resolve);
+  });
 };
 
 /**

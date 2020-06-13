@@ -75,16 +75,13 @@ lib.Storage.Local.prototype.removeObserver = function(callback) {
 /**
  * Delete everything in this storage.
  *
- * @param {function()=} callback The function to invoke when the delete has
- *     completed.
  * @override
  */
-lib.Storage.Local.prototype.clear = function(callback) {
+lib.Storage.Local.prototype.clear = async function() {
   this.storage_.clear();
 
-  if (callback) {
-    setTimeout(callback, 0);
-  }
+  // Force deferment for the standard API.
+  await 0;
 };
 
 /**

@@ -171,19 +171,12 @@ lib.Storage.TerminalPrivate.prototype.removeObserver = function(callback) {
 /**
  * Delete everything in this storage.
  *
- * @param {function()=} callback The function to invoke when the delete has
- *     completed.
  * @override
  */
-lib.Storage.TerminalPrivate.prototype.clear = function(callback) {
-  this.initCache_().then(() => {
-    this.prefValue_ = {};
-    this.setPref_().then(() => {
-      if (callback) {
-        callback();
-      }
-    });
-  });
+lib.Storage.TerminalPrivate.prototype.clear = async function() {
+  await this.initCache_();
+  this.prefValue_ = {};
+  return this.setPref_();
 };
 
 /**

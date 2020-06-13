@@ -154,7 +154,7 @@ it('clear', function(done) {
       assert.deepEqual(value, {'foo': 1, 'bar': 2, 'cow': 3});
 
       // Remove all items.
-      storage.clear(() => {
+      storage.clear().then(() => {
         // Make sure it's gone.
         storage.getItems(null, (value) => {
           assert.deepEqual(value, {});

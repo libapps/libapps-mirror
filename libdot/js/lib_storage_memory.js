@@ -43,11 +43,9 @@ lib.Storage.Memory.prototype.removeObserver = function(callback) {
 /**
  * Delete everything in this storage.
  *
- * @param {function()=} callback The function to invoke when the delete has
- *     completed.
  * @override
  */
-lib.Storage.Memory.prototype.clear = function(callback) {
+lib.Storage.Memory.prototype.clear = async function() {
   const e = {};
   for (const key in this.storage_) {
     e[key] = {oldValue: this.storage_[key], newValue: undefined};
@@ -55,15 +53,10 @@ lib.Storage.Memory.prototype.clear = function(callback) {
 
   this.storage_ = {};
 
-  setTimeout(function() {
-    for (let i = 0; i < this.observers_.length; i++) {
-      this.observers_[i](e);
-    }
-  }.bind(this), 0);
+  // Force deferment for the standard API.
+  await 0;
 
-  if (callback) {
-    setTimeout(callback, 0);
-  }
+  this.observers_.forEach((o) => o(e));
 };
 
 /**
