@@ -12,6 +12,13 @@
 nassh.goog = {};
 
 /**
+ * Namespace for the gnubby extension.
+ *
+ * @const
+ */
+nassh.goog.gnubby = {};
+
+/**
  * The default extension id for talking to the gnubby.
  *
  * Users can override this if needed on a per-connection basis, but probing
@@ -19,12 +26,12 @@ nassh.goog = {};
  *
  * @type {string}
  */
-nassh.goog.defaultGnubbyExtension = '';
+nassh.goog.gnubby.defaultExtension = '';
 
 /**
  * Find a usable gnubby extension.
  */
-nassh.goog.findGnubbyExtension = function() {
+nassh.goog.gnubby.findExtension = function() {
   // If we're not in an extension context, nothing to do.
   if (!window.chrome || !chrome.runtime) {
     return;
@@ -61,7 +68,7 @@ nassh.goog.findGnubbyExtension = function() {
   });
 
   // Guess a reasonable default based on the OS.
-  nassh.goog.defaultGnubbyExtension =
+  nassh.goog.gnubby.defaultExtension =
       (hterm.os == 'cros' ? stableAppId : stableExtId);
 
   // We don't set a timeout here as it doesn't block overall execution.
@@ -70,7 +77,7 @@ nassh.goog.findGnubbyExtension = function() {
     for (let i = 0; i < extensions.length; ++i) {
       const extId = extensions[i];
       if (results.includes(extId)) {
-        nassh.goog.defaultGnubbyExtension = extId;
+        nassh.goog.gnubby.defaultExtension = extId;
         break;
       }
     }
@@ -84,7 +91,7 @@ nassh.goog.findGnubbyExtension = function() {
  * It resolves using promises in the background, so this is OK.
  */
 lib.registerInit('goog init', function(onInit) {
-  nassh.goog.findGnubbyExtension();
+  nassh.goog.gnubby.findExtension();
 
   onInit();
 });

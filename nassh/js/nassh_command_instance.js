@@ -1202,7 +1202,7 @@ nassh.CommandInstance.postProcessOptions = function(
   // Turn 'gnubby' into the default id.  We do it here because we haven't yet
   // ported the gnubbyd logic to the new ssh-agent frameworks.
   if (rv['--ssh-agent'] == 'gnubby') {
-    rv['--ssh-agent'] = nassh.goog.defaultGnubbyExtension;
+    rv['--ssh-agent'] = nassh.goog.gnubby.defaultExtension;
   }
 
   // Default the relay username to the ssh username.
