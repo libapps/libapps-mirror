@@ -28,7 +28,7 @@ nassh.ConfigDialog = function(client) {
  * Translate the dialog.
  */
 nassh.ConfigDialog.prototype.updateLabels_ = function() {
-  lib.i18n.getAcceptLanguages((languages) => {
+  lib.i18n.getAcceptLanguages().then((languages) => {
     const mm = new lib.MessageManager(languages);
     mm.processI18nAttributes(document.body);
 

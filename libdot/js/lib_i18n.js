@@ -33,15 +33,17 @@ lib.i18n.browserSupported = function() {
  *
  * https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/i18n/getAcceptLanguages
  *
- * @param {function(!Array<string>)} callback Function to invoke with the
- *     results.  The parameter is a list of locale names.
+ * @return {!Promise<!Array<string>>} Promise resolving to the list of locale
+ *     names.
  */
-lib.i18n.getAcceptLanguages = function(callback) {
+lib.i18n.getAcceptLanguages = function() {
   if (lib.i18n.browser_) {
-    lib.i18n.browser_.getAcceptLanguages(callback);
+    return new Promise((resolve) => {
+      lib.i18n.browser_.getAcceptLanguages(resolve);
+    });
   } else {
     const languages = navigator.languages || [navigator.language];
-    setTimeout(() => callback(languages), 0);
+    return Promise.resolve(languages);
   }
 };
 

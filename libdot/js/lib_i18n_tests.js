@@ -15,7 +15,7 @@ describe('lib_i18n_tests.js', () => {
  */
 it('getAcceptLanguages', (done) => {
   // Just make sure we're called with an array of some sort.
-  lib.i18n.getAcceptLanguages((langs) => {
+  lib.i18n.getAcceptLanguages().then((langs) => {
     assert.isTrue(Array.isArray(langs));
     done();
   });
