@@ -25,11 +25,8 @@ lib.registerInit(
     'nassh',
     /**
      * Register a static initializer for nassh.*.
-     *
-     * @param {function()} onInit The function lib.init() wants us to invoke
-     *     when initialization is complete.
      */
-    function(onInit) {
+    () => {
       if (!nassh.defaultStorage) {
         nassh.defaultStorage = hterm.defaultStorage;
       }
@@ -37,8 +34,6 @@ lib.registerInit(
       // Since our translation process only preserves \n (and discards \r), we
       // have to manually insert them ourselves.
       hterm.messageManager.useCrlf = true;
-
-      onInit();
     });
 
 /**
@@ -49,9 +44,8 @@ lib.registerInit(
 nassh.setupForWebApp = function() {
   // Modifications if running as a web app.
   if (location.href.startsWith('chrome-untrusted://')) {
-    lib.registerInit('terminal-private-storage', (onInit) => {
+    lib.registerInit('terminal-private-storage', () => {
       hterm.defaultStorage = new lib.Storage.TerminalPrivate();
-      onInit();
     });
     lib.registerInit('messages', nassh.loadMessages);
     // Polyfill chrome.runtime.getManifest since it is not available when
@@ -72,15 +66,12 @@ nassh.setupForWebApp = function() {
  * Loads messages for when chrome.i18n is not available.
  *
  * This should only be used in contexts outside of extensions/apps.
- *
- * @param {function()} callback Invoked when message loading is complete.
  */
-nassh.loadMessages = async function(callback) {
+nassh.loadMessages = async function() {
   // Load hterm.messageManager from /_locales/<lang>/messages.json.
   hterm.messageManager.useCrlf = true;
   const url = lib.f.getURL('/_locales/$1/messages.json');
   await hterm.messageManager.findAndLoadMessages(url);
-  callback();
 };
 
 /**

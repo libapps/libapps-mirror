@@ -289,22 +289,23 @@ terminal.Command.prototype.exit = function(code) {
  * Migrates settings from crosh.
  * TODO(crbug.com/1019021): Remove after M83.
  *
- * @param {function():void} callback Invoked when complete.
+ * @return {!Promise<void>}
  */
-terminal.migrateSettings = function(callback) {
+terminal.migrateSettings = function() {
   if (!chrome.terminalPrivate.getCroshSettings) {
-    callback();
-    return;
+    return Promise.resolve();
   }
 
-  hterm.defaultStorage.getItem('crosh.settings.migrated', (migrated) => {
-    if (migrated) {
-      callback();
-      return;
-    }
-    chrome.terminalPrivate.getCroshSettings((settings) => {
-      settings['crosh.settings.migrated'] = true;
-      hterm.defaultStorage.setItems(settings, callback);
+  return new Promise((resolve) => {
+    hterm.defaultStorage.getItem('crosh.settings.migrated', (migrated) => {
+      if (migrated) {
+        resolve();
+        return;
+      }
+      chrome.terminalPrivate.getCroshSettings((settings) => {
+        settings['crosh.settings.migrated'] = true;
+        hterm.defaultStorage.setItems(settings, resolve);
+      });
     });
   });
 };

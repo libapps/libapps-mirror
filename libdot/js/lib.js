@@ -24,13 +24,10 @@ lib.initCallbacks_ = [];
  *
  * @param {string} name A short descriptive name of the init routine useful for
  *     debugging.
- * @param {function(function())} callback The initialization function to
- *     register.
- * @return {function(function())} The callback parameter.
+ * @param {function()} callback The initialization function to register.
  */
 lib.registerInit = function(name, callback) {
   lib.initCallbacks_.push([name, callback]);
-  return callback;
 };
 
 /**
@@ -40,33 +37,24 @@ lib.registerInit = function(name, callback) {
  * invoke any registered initialization functions.
  *
  * Initialization is asynchronous.  The library is not ready for use until
- * the onInit function is invoked.
+ * the returned promise resolves.
  *
- * @param {function()} onInit The function to invoke when initialization is
- *     complete.
  * @param {function(*)=} logFunction An optional function to send initialization
  *     related log messages to.
+ * @return {!Promise<void>} Promise that resolves once all inits finish.
  */
-lib.init = function(onInit, logFunction) {
+lib.init = async function(logFunction = undefined) {
   const ary = lib.initCallbacks_;
-
-  const initNext = function() {
-    if (ary.length) {
-      const rec = ary.shift();
-      if (logFunction) {
-        logFunction(`init: ${rec[0]}`);
-      }
-      rec[1](initNext);
-    } else {
-      onInit();
+  while (ary.length) {
+    const [name, init] = ary.shift();
+    if (logFunction) {
+      logFunction(`init: ${name}`);
     }
-  };
-
-  if (typeof onInit != 'function') {
-    throw new Error('Missing or invalid argument: onInit');
+    const ret = init();
+    if (ret && typeof ret.then === 'function') {
+      await ret;
+    }
   }
-
-  setTimeout(initNext, 0);
 };
 
 /**

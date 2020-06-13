@@ -361,7 +361,7 @@ nassh.External.onMessage_ = (request, sender, sendResponse) => {
 };
 
 // Initialize nassh.External.
-lib.registerInit('external api', (onInit) => {
+lib.registerInit('external api', () => {
   // Create hterm.Terminal.IO required for SFTP using a mock hterm.Terminal.
   // External API calls will not require user IO to enter password, etc.
   /** @private */
@@ -372,7 +372,7 @@ lib.registerInit('external api', (onInit) => {
   }));
 
   // Get handle on FileSystem, cleanup files, and register listener.
-  nassh.getFileSystem().then((fileSystem) => {
+  return nassh.getFileSystem().then((fileSystem) => {
     /** @private */
     nassh.External.fileSystem_ = fileSystem;
     return new Promise((deleteDone) => {
@@ -385,9 +385,6 @@ lib.registerInit('external api', (onInit) => {
     }).then(() => {
       // We can start processing messages now.
       messageHandlersReady = true;
-
-      // Init complete.
-      onInit();
     });
   });
 });

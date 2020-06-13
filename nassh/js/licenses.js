@@ -10,7 +10,7 @@
  */
 window.addEventListener('DOMContentLoaded', (event) => {
   nassh.setupForWebApp();
-  lib.init(() => {
+  lib.init().then(() => {
     hterm.messageManager.processI18nAttributes(document);
   });
 

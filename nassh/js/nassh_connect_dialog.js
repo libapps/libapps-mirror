@@ -78,7 +78,7 @@ nassh.ConnectDialog.onWindowMessage = function(e) {
 
   window.removeEventListener('message', nassh.ConnectDialog.onWindowMessage);
 
-  lib.init(function() {
+  lib.init().then(() => {
     window.dialog_ = new nassh.ConnectDialog(e.data.argv[0].messagePort);
   });
 };

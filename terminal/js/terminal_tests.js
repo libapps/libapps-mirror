@@ -89,14 +89,14 @@ it('migrates-settings-on-first-run-only', async function() {
 
   // First time calls getCroshSettings and copies settings.
   mockTerminalPrivate.croshSettings = {'test': 1};
-  await new Promise((resolve) => terminal.migrateSettings(resolve));
+  await terminal.migrateSettings();
   assert.equal(callCount, 1);
   let settings = await getItems();
   assert.deepInclude(settings, {'test': 1, 'crosh.settings.migrated': true});
 
   // Once migrated, doesn't call getCroshSettings again, or update settings.
   mockTerminalPrivate.croshSettings = {'test': 2};
-  await new Promise((resolve) => terminal.migrateSettings(resolve));
+  await terminal.migrateSettings();
   assert.equal(callCount, 1);
   settings = await getItems();
   assert.deepInclude(settings, {'test': 1, 'crosh.settings.migrated': true});

@@ -90,8 +90,6 @@ nassh.goog.gnubby.findExtension = function() {
  * This could take time to resolve, so do it as part of start up.
  * It resolves using promises in the background, so this is OK.
  */
-lib.registerInit('goog init', function(onInit) {
+lib.registerInit('goog init', () => {
   nassh.goog.gnubby.findExtension();
-
-  onInit();
 });

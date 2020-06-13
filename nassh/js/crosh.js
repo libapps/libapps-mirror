@@ -41,15 +41,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   // Modifications if crosh is running as a web app.
   if (Crosh.isWebApp()) {
-    lib.registerInit('terminal-private-storage', (onInit) => {
+    lib.registerInit('terminal-private-storage', () => {
       hterm.defaultStorage = new lib.Storage.TerminalPrivate();
-      onInit();
     });
     lib.registerInit('messages', nassh.loadMessages);
     lib.registerInit('migrate-settings', Crosh.migrateSettings);
   }
 
-  lib.init(Crosh.init);
+  lib.init().then(Crosh.init);
 });
 
 /**
@@ -108,22 +107,24 @@ Crosh.msg = function(name, args) {
  * Copy any settings from the previous crosh extension which were stored in
  * chrome.storage.sync.
  *
- * @param {function():void} callback Invoked when complete.
+ * @return {!Promise<void>}
  */
-Crosh.migrateSettings = function(callback) {
+Crosh.migrateSettings = function() {
   if (!chrome.terminalPrivate || !chrome.terminalPrivate.getCroshSettings) {
-    callback();
-    return;
+    return Promise.resolve();
   }
 
-  hterm.defaultStorage.getItem('crosh.settings.migrated', (migrated) => {
-    if (migrated) {
-      callback();
-      return;
-    }
-    chrome.terminalPrivate.getCroshSettings((settings) => {
-      settings['crosh.settings.migrated'] = true;
-      hterm.defaultStorage.setItems(settings, callback);
+  return new Promise((resolve) => {
+    hterm.defaultStorage.getItem('crosh.settings.migrated', (migrated) => {
+      if (migrated) {
+        resolve();
+        return;
+      }
+
+      chrome.terminalPrivate.getCroshSettings((settings) => {
+        settings['crosh.settings.migrated'] = true;
+        hterm.defaultStorage.setItems(settings, resolve);
+      });
     });
   });
 };

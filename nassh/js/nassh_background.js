@@ -20,7 +20,7 @@
    * The window.app_ property will contain the new app instance so it can be
    * reached from the background page's JS console.
    */
-  lib.init(function() {
+  lib.init(console.log.bind(console)).then(() => {
     const app = new nassh.App();
 
     // If omnibox is enabled, set it up.
@@ -46,7 +46,7 @@
     // A flag for people who need to load us dynamically to know we're ready.
     // See nassh.getBackgroundPage for the user.
     window.loaded = true;
-  }, console.log.bind(console));
+  });
 })();
 
 /**

@@ -20,23 +20,21 @@ window.addEventListener('DOMContentLoaded', () => {
   chrome.tabs.getCurrent(
       (tab) => { chrome.tabs.update(tab.id, {autoDiscardable: false}); });
 
-  lib.registerInit('terminal-private-storage', (onInit) => {
+  lib.registerInit('terminal-private-storage', () => {
     hterm.defaultStorage = new lib.Storage.TerminalPrivate();
-    onInit();
   });
 
   // Load i18n messages.
-  lib.registerInit('messages', async (onInit) => {
+  lib.registerInit('messages', async () => {
     // Load hterm.messageManager from /_locales/<lang>/messages.json.
     hterm.messageManager.useCrlf = true;
     const url = lib.f.getURL('/_locales/$1/messages.json');
     await hterm.messageManager.findAndLoadMessages(url);
-    onInit();
   });
 
   lib.registerInit('migrate-settings', terminal.migrateSettings);
 
-  lib.init(() => {
+  lib.init().then(() => {
     window.term_ = terminal.init(
         lib.notNull(document.querySelector('#terminal')));
   });

@@ -120,7 +120,7 @@ nassh.ConfigDialog.fromBackgroundPage = function(bg, fsId) {
  * Event when the window finishes loading.
  */
 window.addEventListener('DOMContentLoaded', (event) => {
-  lib.init(() => {
+  lib.init().then(() => {
     const params = new URLSearchParams(document.location.search);
     const profileId = lib.notNull(params.get('profile-id'));
     document.title = `SFTP: ${profileId}`;

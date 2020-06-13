@@ -695,12 +695,10 @@ nasftp.Cli.colorMap_ = {
 /**
  * Cache the SGR sequences.
  */
-lib.registerInit('nasftp color cache', (onInit) => {
+lib.registerInit('nasftp color cache', () => {
   Object.entries(nasftp.Cli.colorMap_).forEach(([key, setting]) => {
     nasftp.Cli.colorMap_[key] = nassh.sgrSequence(setting);
   });
-
-  onInit();
 });
 
 /**

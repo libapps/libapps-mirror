@@ -27,12 +27,11 @@ window.onerror = function(...args) {
 };
 
 /** Run the test framework once everything is finished. */
-window.onload = function() {
-  lib.init(() => {
-    mocha.run();
+window.onload = async function() {
+  await lib.init();
+  mocha.run();
 
-    if (earlyError !== null) {
-      assert.fail(`uncaught exception detected:\n${earlyError.join('\n')}\n`);
-    }
-  });
+  if (earlyError !== null) {
+    assert.fail(`uncaught exception detected:\n${earlyError.join('\n')}\n`);
+  }
 };

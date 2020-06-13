@@ -103,7 +103,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
   }
 
-  lib.init(setupPreferences);
+  lib.init().then(setupPreferences);
 });
 
 /**

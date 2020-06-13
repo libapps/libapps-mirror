@@ -26,13 +26,12 @@ window.webFontPromises = new Map(
 );
 
 window.addEventListener('DOMContentLoaded', (event) => {
-  lib.registerInit('terminal-private-storage', (onInit) => {
+  lib.registerInit('terminal-private-storage', () => {
     hterm.defaultStorage = new lib.Storage.TerminalPrivate();
-    onInit();
   });
 
   // Load i18n messages.
-  lib.registerInit('messages', async (onInit) => {
+  lib.registerInit('messages', async () => {
     // Load hterm.messageManager from /_locales/<lang>/messages.json.
     // Set "useCrlf" to match how the terminal is using it, although we don't
     // actually need it for settings.
@@ -40,9 +39,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const url = lib.f.getURL('/_locales/$1/messages.json');
     await hterm.messageManager.findAndLoadMessages(url);
     document.title = hterm.messageManager.get('TERMINAL_TITLE_SETTINGS');
-    onInit();
   });
-  lib.init(() => {
+  lib.init().then(() => {
     window.PreferenceManager = hterm.PreferenceManager;
     window.preferenceManager = new window.PreferenceManager('default');
     definePrefs(window.preferenceManager);
