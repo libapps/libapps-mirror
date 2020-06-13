@@ -21,7 +21,8 @@ window.addEventListener('DOMContentLoaded', () => {
       (tab) => { chrome.tabs.update(tab.id, {autoDiscardable: false}); });
 
   lib.registerInit('terminal-private-storage', (onInit) => {
-    hterm.defaultStorage = new lib.Storage.TerminalPrivate(onInit);
+    hterm.defaultStorage = new lib.Storage.TerminalPrivate();
+    onInit();
   });
 
   // Load i18n messages.

@@ -7,11 +7,10 @@
 /**
  * Storage implementation using chrome.settingsPrivate.
  *
- * @param {function()} callback Callback invoked when object is ready.
  * @constructor
  * @implements {lib.Storage}
  */
-lib.Storage.TerminalPrivate = function(callback) {
+lib.Storage.TerminalPrivate = function() {
   /**
    * @const
    * @private
@@ -34,16 +33,36 @@ lib.Storage.TerminalPrivate = function(callback) {
    */
   this.prefValueWriteCallbacks_ = [];
 
-  // Load.
-  chrome.terminalPrivate.getSettings((settings) => {
-    if (chrome.runtime.lastError) {
-      console.error(chrome.runtime.lastError.message);
-    } else {
-      this.prefValue_ = lib.notNull(settings);
+  /** @type {boolean} */
+  this.prefsLoaded_ = false;
+
+  chrome.terminalPrivate.onSettingsChanged.addListener(
+      this.onSettingsChanged_.bind(this));
+};
+
+/**
+ * Load the settings into our local cache.
+ *
+ * @return {!Promise<void>} Resolves when settings have been loaded.
+ */
+lib.Storage.TerminalPrivate.prototype.initCache_ = function() {
+  return new Promise((resolve) => {
+    // NB: This doesn't return Promise.resolve so we're guaranteed to have the
+    // initCache_ call always return deferred execution.
+    if (this.prefsLoaded_) {
+      resolve();
+      return;
     }
-    chrome.terminalPrivate.onSettingsChanged.addListener(
-        this.onSettingsChanged_.bind(this));
-    callback();
+
+    chrome.terminalPrivate.getSettings((settings) => {
+      if (chrome.runtime.lastError) {
+        console.error(chrome.runtime.lastError.message);
+      } else {
+        this.prefValue_ = lib.notNull(settings);
+      }
+      this.prefsLoaded_ = true;
+      resolve();
+    });
   });
 };
 
@@ -92,6 +111,7 @@ lib.Storage.TerminalPrivate.prototype.onSettingsChanged_ = function(settings) {
  * @private
  */
 lib.Storage.TerminalPrivate.prototype.setPref_ = function(callback) {
+  lib.assert(this.prefsLoaded_);
   this.prefValueWriteCallbacks_.push(callback);
   if (this.prefValueWriteCallbacks_.length > 1) {
     return;
@@ -140,8 +160,10 @@ lib.Storage.TerminalPrivate.prototype.removeObserver = function(callback) {
  * @override
  */
 lib.Storage.TerminalPrivate.prototype.clear = function(callback) {
-  this.prefValue_ = {};
-  this.setPref_(callback);
+  this.initCache_().then(() => {
+    this.prefValue_ = {};
+    this.setPref_(callback);
+  });
 };
 
 /**
@@ -153,7 +175,7 @@ lib.Storage.TerminalPrivate.prototype.clear = function(callback) {
  * @override
  */
 lib.Storage.TerminalPrivate.prototype.getItem = function(key, callback) {
-  setTimeout(() => callback(this.prefValue_[key]), 0);
+  this.initCache_().then(() => callback(this.prefValue_[key]));
 };
 
 /**
@@ -165,18 +187,20 @@ lib.Storage.TerminalPrivate.prototype.getItem = function(key, callback) {
  * @override
  */
 lib.Storage.TerminalPrivate.prototype.getItems = function(keys, callback) {
-  const rv = {};
-  if (!keys) {
-    keys = Object.keys(this.prefValue_);
-  }
-
-  for (const key of keys) {
-    if (this.prefValue_.hasOwnProperty(key)) {
-      rv[key] = this.prefValue_[key];
+  this.initCache_().then(() => {
+    const rv = {};
+    if (!keys) {
+      keys = Object.keys(this.prefValue_);
     }
-  }
 
-  setTimeout(() => callback(rv), 0);
+    for (const key of keys) {
+      if (this.prefValue_.hasOwnProperty(key)) {
+        rv[key] = this.prefValue_[key];
+      }
+    }
+
+    callback(rv);
+  });
 };
 
 /**
@@ -204,20 +228,23 @@ lib.Storage.TerminalPrivate.prototype.setItem = function(key, value, callback) {
  * @override
  */
 lib.Storage.TerminalPrivate.prototype.setItems = function(obj, callback) {
-  const e = {};
+  this.initCache_().then(() => {
+    const e = {};
 
-  for (const key in obj) {
-    e[key] = {oldValue: this.prefValue_[key], newValue: obj[key]};
-    this.prefValue_[key] = obj[key];
-  }
+    for (const key in obj) {
+      e[key] = {oldValue: this.prefValue_[key], newValue: obj[key]};
+      this.prefValue_[key] = obj[key];
+    }
 
-  setTimeout(() => {
+    this.setPref_(callback);
+
+    return e;
+  })
+  .then((e) => {
     for (const observer of this.observers_) {
       observer(e);
     }
   });
-
-  this.setPref_(callback);
 };
 
 /**
@@ -243,8 +270,10 @@ lib.Storage.TerminalPrivate.prototype.removeItem = function(key, callback) {
  * @override
  */
 lib.Storage.TerminalPrivate.prototype.removeItems = function(keys, callback) {
-  for (const key of keys) {
-    delete this.prefValue_[key];
-  }
-  this.setPref_(callback);
+  this.initCache_().then(() => {
+    for (const key of keys) {
+      delete this.prefValue_[key];
+    }
+    this.setPref_(callback);
+  });
 };

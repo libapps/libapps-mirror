@@ -50,7 +50,8 @@ nassh.setupForWebApp = function() {
   // Modifications if running as a web app.
   if (location.href.startsWith('chrome-untrusted://')) {
     lib.registerInit('terminal-private-storage', (onInit) => {
-      hterm.defaultStorage = new lib.Storage.TerminalPrivate(onInit);
+      hterm.defaultStorage = new lib.Storage.TerminalPrivate();
+      onInit();
     });
     lib.registerInit('messages', nassh.loadMessages);
     // Polyfill chrome.runtime.getManifest since it is not available when

@@ -42,7 +42,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
   // Modifications if crosh is running as a web app.
   if (Crosh.isWebApp()) {
     lib.registerInit('terminal-private-storage', (onInit) => {
-      hterm.defaultStorage = new lib.Storage.TerminalPrivate(onInit);
+      hterm.defaultStorage = new lib.Storage.TerminalPrivate();
+      onInit();
     });
     lib.registerInit('messages', nassh.loadMessages);
     lib.registerInit('migrate-settings', Crosh.migrateSettings);
