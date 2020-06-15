@@ -22,6 +22,7 @@
     "csso": ">=3",
     "csso-cli": ">=2",
     "eslint": "~7",
+    "eslint-plugin-html": "~6",
     "eslint-plugin-jsdoc": "~27",
     "firebase-tools": ">=7",
     "http-server": "~0",

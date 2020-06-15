@@ -128,6 +128,7 @@ def _get_default_paths(basedir: Path) -> List[Path]:
     # Sort to ensure lib.js comes before lib_array.js, etc.
     # Filter out the generated libdot.js/libdot.min.js/etc...
     js_files = (
+        list((libdot.DIR / 'html').glob('*.html')) +
         list((libdot.DIR / 'js').glob('*.js')) +
         list((libdot.DIR / 'third_party').glob('*/*.js')))
     js_files = sorted(x for x in js_files
@@ -216,12 +217,16 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
     }
     checks = []
 
+    html_files = [x for x in opts.paths
+                  if x.endswith('.html') or x.endswith('.html.in')]
+
     js_files = [x for x in opts.paths if x.endswith('.js')]
     tolint_paths -= set(js_files)
     if js_files and opts.js:
         js_kwargs = {'paths': js_files, **kwargs}
+        html_js_kwargs = {'paths': html_files + js_files, **kwargs}
         checks += [
-            libdot.eslint.perform(**js_kwargs),
+            libdot.eslint.perform(**html_js_kwargs),
             libdot.closure_compiler.perform(argv=closure_args, **js_kwargs),
         ]
 
@@ -237,8 +242,6 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
         cpp_kwargs = {'paths': cpp_files, **kwargs}
         checks += [libdot.cpplint.perform(**cpp_kwargs)]
 
-    html_files = [x for x in opts.paths
-                  if x.endswith('.html') or x.endswith('.html.in')]
     tolint_paths -= set(html_files)
     if html_files and opts.txt:
         checks += [lint_html_files(html_files)]

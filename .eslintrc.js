@@ -16,6 +16,7 @@ module.exports = {
   },
 
   'plugins': [
+    'html',
     'jsdoc',
   ],
 
@@ -174,6 +175,14 @@ module.exports = {
   },
 
   'settings': {
+    // https://github.com/BenoitZugmeyer/eslint-plugin-html#settings
+    'html': {
+      // TODO(vapier): Would like to use .html.in, but doesn't work right.
+      // https://github.com/BenoitZugmeyer/eslint-plugin-html/issues/127
+      'html-extensions': ['.html', '.in'],
+    },
+
+    // https://github.com/gajus/eslint-plugin-jsdoc#eslint-plugin-jsdoc
     'jsdoc': {
       'mode': 'closure',
       'preferredTypes': {
