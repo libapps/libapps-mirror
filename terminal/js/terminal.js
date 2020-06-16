@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {definePrefs, loadWebFont, normalizeCSSFontFamily, normalizePrefsInPlace,
-  watchBackgroundColor} from './terminal_common.js';
+import {definePrefs, loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily,
+  normalizePrefsInPlace, watchBackgroundColor} from './terminal_common.js';
 
 export const terminal = {};
 
@@ -107,18 +107,16 @@ terminal.init = function(element) {
     normalizePrefsInPlace(prefs);
     watchBackgroundColor(prefs, /* updateBody= */ true);
 
+    loadPowerlineWebFonts(term.getDocument());
     const onFontFamilyChanged = async (cssFontFamily) => {
       const fontFamily = normalizeCSSFontFamily(cssFontFamily);
       // If the user changes font quickly enough, we might have a pending
       // loadWebFont() task, but it should be harmless. Potentially, we can
       // implement a cancellable promise so that we can cancel it.
       try {
-        if (await loadWebFont(element.querySelector('iframe').contentDocument,
-              fontFamily)) {
-          term.syncFontFamily();
-        }
+        await loadWebFont(term.getDocument(), fontFamily);
       } catch (error) {
-        /* eslint-disable no-new */
+        /* eslint-disable-next-line no-new */
         new Notification(
             terminal.msg('TERMINAL_FONT_UNAVAILABLE', [fontFamily]),
             {

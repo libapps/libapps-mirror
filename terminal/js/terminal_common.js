@@ -59,9 +59,10 @@ export const DEFAULT_THEME = 'dark';
  */
 export function fontFamilyToCSS(fontFamily) {
   if (fontFamily === DEFAULT_FONT_FAMILY) {
-    return fontFamily;
+    return `'${fontFamily}', 'Powerline For ${fontFamily}'`;
   }
-  return `'${fontFamily}', '${DEFAULT_FONT_FAMILY}'`;
+  return `'${fontFamily}', 'Powerline For ${fontFamily}', ` +
+      `'${DEFAULT_FONT_FAMILY}'`;
 }
 
 /**
@@ -176,6 +177,27 @@ export function loadWebFont(document, fontFamily, link_id) {
         () => reject(new Error('Unable to load css')));
     head.appendChild(link);
   });
+}
+
+/**
+ * Load local Powerline web fonts.
+ *
+ * @param {!Document} document The document to load into.
+ */
+export function loadPowerlineWebFonts(document) {
+  const style = document.createElement('style');
+  style.textContent = Array.from(SUPPORTED_FONT_FAMILIES.keys()).map((f) => `
+      @font-face {
+        font-family: 'Powerline For ${f}';
+        src: url('../fonts/PowerlineFor${f.replace(/\s/g, '')}.woff2')
+             format('woff2');
+        font-weight: normal bold;
+        unicode-range:
+            U+2693,U+26A1,U+2699,U+270E,U+2714,U+2718,U+273C,U+279C,U+27A6,
+            U+2B06-2B07,U+E0A0-E0D4;
+      }
+  `).join('');
+  document.head.appendChild(style);
 }
 
 /**

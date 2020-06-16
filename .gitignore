@@ -1,10 +1,11 @@
-# Various temp files.
+# Various temp files and editor configs.
 *~
 \#*
 .#*
 __pycache__/
 *.py[co]
 *.swp
+.vscode
 
 # Stuff we build for distribution
 /artifacts/
@@ -15,9 +16,6 @@ dist
 node_modules
 package-lock.json
 
-# Stuff left over from unit tests
-terminal/js/nassh_deps.concat.js
-terminal/js/nassh_deps.rollup.js
-
-# .vscode folder created by VS Code
-.vscode
+# Terminal settings page can be run from a local server if you make some of the
+# nassh dirs available at the right path.
+/_locales
