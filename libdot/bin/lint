@@ -157,6 +157,8 @@ def get_parser():
                        help='Lint C/C++ files.')
     group.add_argument('--js', action='store_true',
                        help='Lint JavaScript files.')
+    group.add_argument('--md', action='store_true',
+                       help='Lint Markdown files.')
     group.add_argument('--py', action='store_true',
                        help='Lint Python files.')
     group.add_argument('--txt', action='store_true',
@@ -205,7 +207,7 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
         else:
             logging.info('Skipping building dependencies due to --skip-mkdeps')
 
-    lint_groups = {'cpp', 'js', 'py', 'txt'}
+    lint_groups = {'cpp', 'js', 'md', 'py', 'txt'}
     lint_all = all(not getattr(opts, x) for x in lint_groups)
     for group in lint_groups:
         setattr(opts, group, lint_all or getattr(opts, group))
@@ -246,13 +248,23 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
     if html_files and opts.txt:
         checks += [lint_html_files(html_files)]
 
-    # TODO(vapier): Add smarter JSON & markdown linters.
+    md_files = libdot.mdlint.filter_known_files(opts.paths)
+    tolint_paths -= set(md_files)
+    if md_files and opts.md:
+        md_kwargs = {'paths': md_files, **kwargs}
+        checks += [
+            lint_text_files(md_files),
+            libdot.mdlint.perform(**md_kwargs),
+        ]
+
+    # TODO(vapier): Add smarter JSON linters.
     TEXT_FILENAMES = {
-        '.clang-format', '.gitignore', '.npmrc', '.pylintrc',
+        '.clang-format', '.eslintrc.js', '.gitignore', '.markdownlintrc',
+        '.npmrc', '.pylintrc',
         'Dockerfile', 'LICENSE', 'Makefile', 'METADATA', 'OWNERS',
     }
     TEXT_EXTENSIONS = {
-        '.cfg', '.concat', '.css', '.el', '.json', '.md', '.sh', '.svg', '.txt',
+        '.cfg', '.concat', '.css', '.el', '.json', '.sh', '.svg', '.txt',
         '.vim', '.xml',
     }
     text_files = [x for x in opts.paths

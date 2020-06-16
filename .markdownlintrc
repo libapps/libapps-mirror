@@ -1,0 +1,4 @@
+; https://github.com/DavidAnson/markdownlint/blob/HEAD/doc/Rules.md
+
+; We disable all rules currently.  We'll slowly turn them back on.
+default = false

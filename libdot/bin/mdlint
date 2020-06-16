@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Run markdownlint with our settings."""
+
+from pathlib import Path
+import sys
+from typing import List
+
+import libdot
+
+
+def filter_known_files(paths: List[Path]) -> List[Path]:
+    """Figure out what files this linter supports."""
+    ret = []
+    for path in paths:
+        path = Path(path)
+
+        if path.suffix[1:] in {'md'}:
+            ret += [path]
+
+    return [str(x) for x in ret]
+
+
+def setup():
+    """Initialize the tool settings."""
+    libdot.node_and_npm_setup()
+
+
+def run(argv=(), **kwargs):
+    """Run the tool directly."""
+    setup()
+    return libdot.node.run(['markdownlint'] + list(argv), **kwargs)
+
+
+def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):  # pylint: disable=unused-argument
+    """Run high level tool logic."""
+    argv = list(argv)
+    paths = list(paths)
+
+    if fix:
+        argv += ['--fix']
+
+    # TODO(vapier): Add support for Gerrit comments.
+
+    result = run(argv + paths, check=False)
+    return result.returncode == 0
+
+
+def get_parser():
+    """Get a command line parser."""
+    parser = libdot.ArgumentParser(description=__doc__, short_options=False)
+    parser.add_argument('--gerrit-comments-file',
+                        help='Save errors for posting files to Gerrit.')
+    parser.add_argument('paths', nargs='*',
+                        help='Paths to lint.')
+    return parser
+
+
+def main(argv):
+    """The main func!"""
+    parser = get_parser()
+    opts, args = parser.parse_known_args(argv)
+
+    return 0 if perform(argv=args, paths=opts.paths,
+                        gerrit_comments_file=opts.gerrit_comments_file) else 1
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))

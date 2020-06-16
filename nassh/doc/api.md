@@ -114,7 +114,7 @@ Open a new ssh session.
 ### Import Preferences
 
 *** note
-*NB*: This is only available to Secure Shell itself.
+**NB**: This is only available to Secure Shell itself.
 ***
 
 Import saved preferences for nassh & hterm.
@@ -128,7 +128,7 @@ Import saved preferences for nassh & hterm.
 ### Export Preferences
 
 *** note
-*NB*: This is only available to Secure Shell itself.
+**NB**: This is only available to Secure Shell itself.
 ***
 
 Export saved preferences for nassh & hterm.
