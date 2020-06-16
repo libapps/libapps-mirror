@@ -26,9 +26,11 @@ window.webFontPromises = new Map(
 );
 
 window.addEventListener('DOMContentLoaded', (event) => {
-  lib.registerInit('terminal-private-storage', () => {
-    hterm.defaultStorage = new lib.Storage.TerminalPrivate();
-  });
+  if (chrome.terminalPrivate) {
+    lib.registerInit('terminal-private-storage', () => {
+      hterm.defaultStorage = new lib.Storage.TerminalPrivate();
+    });
+  }
 
   // Load i18n messages.
   lib.registerInit('messages', async () => {
