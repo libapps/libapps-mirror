@@ -22,22 +22,6 @@ import './terminal_settings_textfield.js';
 import './terminal_settings_theme.js';
 import './terminal_settings_transparency_slider.js';
 
-export const BACKGROUND_IMAGE_CONVERTER = {
-  preferenceToDisplay: (preference) => {
-    preference = preference ? preference.toString().trim() : '';
-    const result = preference.match(/^url\(['"]?(.*?)['"]?\)$/i);
-    return result ? result[1] : preference;
-  },
-  displayToPreference: (display) => {
-    display = display.trim();
-    if (!display) {
-      return '';
-    }
-    const prefix = RegExp('^https?://', 'i').test(display) ? '' : 'http://';
-    return `url(${prefix}${display})`;
-  },
-};
-
 export const BELL_SOUND_CONVERTER = {
   toChecked: (value) => !!value,
   fromChecked: (checked) => checked ? 'lib-resource:hterm/audio/bell' : '',
@@ -262,13 +246,6 @@ export class TerminalSettingsApp extends LitElement {
                 <terminal-settings-colorpicker preference="background-color"
                     disableTransparency>
                 </terminal-settings-colorpicker>
-              </li>
-              <li class="setting-container"
-                  title="${msg('TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP')}">
-                <h4>${msg('TERMINAL_NAME_PREF_IMAGE')}</h4>
-                <terminal-settings-textfield preference="background-image"
-                    .converter=${BACKGROUND_IMAGE_CONVERTER}>
-                </terminal-settings-textfield>
               </li>
             </ul>
           </section>
