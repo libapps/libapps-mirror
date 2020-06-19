@@ -10,6 +10,7 @@ from __future__ import print_function
 
 import argparse
 import base64
+import hashlib
 import importlib.machinery
 import io
 import logging
@@ -20,7 +21,7 @@ import subprocess
 import sys
 import time
 import types
-from typing import Dict, List
+from typing import Dict, List, Optional, Union
 import urllib.request
 
 
@@ -225,10 +226,23 @@ def run(cmd: List[str],
     return result
 
 
-def unpack(archive, cwd=None, files=()):
+def sha256(path: Union[Path, str]) -> str:
+    """Return sha256 hex digest of |path|."""
+    # The file shouldn't be too big to load into memory, so be lazy.
+    with open(path, 'rb') as fp:
+        data = fp.read()
+    m = hashlib.sha256()
+    m.update(data)
+    return m.hexdigest()
+
+
+def unpack(archive: Union[Path, str],
+           cwd: Optional[Path] = None,
+           files: Optional[List[Union[Path, str]]] = ()):
     """Unpack |archive| into |cwd|."""
+    archive = Path(archive)
     if cwd is None:
-        cwd = os.getcwd()
+        cwd = Path.cwd()
     if files:
         files = ['--'] + list(files)
     else:
@@ -239,13 +253,69 @@ def unpack(archive, cwd=None, files=()):
         'MSYS': 'winsymlinks:nativestrict',
     }
 
-    logging.info('Unpacking %s', os.path.basename(archive))
+    logging.info('Unpacking %s', archive.name)
     # We use relpath here to help out tar on platforms where it doesn't like
     # paths with colons in them (e.g. Windows).  We have to construct the full
     # before running through relpath as relative archives will implicitly be
     # checked against os.getcwd rather than the explicit cwd.
-    src = os.path.relpath(os.path.join(cwd, archive), cwd)
-    run(['tar', '-xf', src] + files, cwd=cwd, extra_env=extra_env)
+    src = os.path.relpath(cwd / archive, cwd)
+    run(['tar', '--no-same-owner', '-xf', src] + files, cwd=cwd,
+        extra_env=extra_env)
+
+
+def pack(archive: Union[Path, str],
+         paths: List[Union[Path, str]],
+         cwd: Optional[Path] = None,
+         exclude: Optional[List[Union[Path, str]]] = ()):
+    """Create an |archive| with |paths| in |cwd|.
+
+    The output will use XZ compression.
+    """
+    archive = Path(archive)
+    if cwd is None:
+        cwd = Path.cwd()
+    if archive.suffix == '.xz':
+        archive = archive.with_suffix('')
+
+    # Make sure all the paths have sane permissions.
+    def walk(path):
+        if path.is_symlink():
+            return
+        elif path.is_dir():
+            # All dirs should be 755.
+            mode = path.stat().st_mode & 0o777
+            if mode != 0o755:
+                path.chmod(0o755)
+
+            for subpath in path.glob('*'):
+                walk(subpath)
+        elif path.is_file():
+            # All scripts should be 755 while other files should be 644.
+            mode = path.stat().st_mode & 0o777
+            if mode in (0o755, 0o644):
+                return
+            if mode & 0o111:
+                path.chmod(0o755)
+            else:
+                path.chmod(0o644)
+        else:
+            raise ValueError(f'{path}: unknown file type')
+
+    logging.info('Forcing sane permissions on inputs')
+    for path in paths:
+        walk(cwd / path)
+
+    logging.info('Creating %s tarball', archive.name)
+    # We use relpath here to help out tar on platforms where it doesn't like
+    # paths with colons in them (e.g. Windows).  We have to construct the full
+    # before running through relpath as relative archives will implicitly be
+    # checked against os.getcwd rather than the explicit cwd.
+    tar = os.path.relpath(cwd / archive, cwd)
+    run(['tar', '--owner=0', '--group=0', '-cf', tar] +
+        [f'--exclude={x}' for x in exclude] + ['--'] + paths, cwd=cwd)
+
+    logging.info('Compressing tarball')
+    run(['xz', '-f', '-T0', '-9', tar], cwd=cwd)
 
 
 def fetch_data(uri: str, output=None, verbose: bool = False, b64: bool = False):
