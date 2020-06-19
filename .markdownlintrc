@@ -1,4 +1,67 @@
 ; https://github.com/DavidAnson/markdownlint/blob/HEAD/doc/Rules.md
 
-; We disable all rules currently.  We'll slowly turn them back on.
+; We disable all rules and only turn on the ones we care about.
+; Rules we disable below we want to turn on at some point.
 default = false
+
+;blanks-around-fences = true
+blanks-around-headers = true
+;blanks-around-lists = true
+;code-block-style = fenced
+; Not sure Gitiles & GH & others have standard names.
+fenced-code-language = false
+;first-line-h1 = true
+header-increment = true
+header-start-left = true
+hr-style = ---
+list-indent = true
+no-alt-text = true
+; Gitiles auto renders bare URLs, but not GH.  Maybe we should enforce <>.
+no-bare-urls = false
+no-blanks-blockquote = true
+;no-duplicate-header = true
+no-emphasis-as-header = true
+no-empty-links = true
+no-hard-tabs = true
+no-missing-space-atx = true
+no-missing-space-closed-atx = true
+;no-multiple-blanks = true
+no-multiple-space-atx = true
+no-multiple-space-blockquote = true
+no-multiple-space-closed-atx = true
+no-reversed-links = true
+;no-space-in-code = true
+;no-space-in-emphasis = true
+no-space-in-links = true
+; We allow this for FAQs.
+no-trailing-punctuation = false
+; Our ChangeLog file format breaks this a lot.
+;single-h1 = true
+single-trailing-newline = true
+
+[code-fence-style]
+style = backtick
+
+[header-style]
+style = atx
+
+; This would be nice, but we've been super inconsistent.
+;[list-marker-space]
+;ol_single = 1
+;ul_single = 1
+;ol_multi = 3
+;ul_multi = 3
+
+;[no-inline-html]
+;allowed_elements[] = br
+
+[no-trailing-spaces]
+br_spaces = 0
+strict = true
+
+; This would be nice, but we've been super inconsistent.
+;[ol-prefix]
+;style = one_or_ordered
+
+;[ul-style]
+;style = asterisk

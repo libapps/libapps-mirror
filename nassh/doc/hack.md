@@ -279,12 +279,12 @@ The vast majority of the code here lives under [js/].
   * [nassh_relay_corp.js]: Web relay `nassh.relay.Corp` code for proxying
     connections via [Corp Relay] protocol.
 * Extension glue code
-  * [nassh_background.js]: Background extension code.  
+  * [nassh_background.js]: Background extension code.
   * [nassh_main.js]: Main code to initialize a new connection and hand off.
 * Stream (I/O) related code
   * [nassh_stream.js]: Basic class for implementing all `nassh.Stream` streams.
   * [nassh_stream_relay_corp.js]: Stream for [Corp Relay] connections.
-  * [nassh_stream_set.js]: 
+  * [nassh_stream_set.js]:
   * [nassh_stream_sftp.js]: Stream for passing binary SFTP data through.
   * [nassh_stream_sshagent.js]:
     SSH agent implementation using nassh.agent.Agent to relay requests to
