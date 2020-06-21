@@ -150,30 +150,23 @@ lib.Storage.Memory.prototype.setItems = function(obj, callback) {
  * Remove an item from storage.
  *
  * @param {string} key The key to be removed.
- * @param {function()=} callback Function to invoke when the remove is complete.
- *     The local cache is updated synchronously, so reads will immediately
- *     return undefined for this item even before removeItem completes.
  * @override
  */
-lib.Storage.Memory.prototype.removeItem = function(key, callback) {
-  this.removeItems([key], callback);
+lib.Storage.Memory.prototype.removeItem = async function(key) {
+  return this.removeItems([key]);
 };
 
 /**
  * Remove multiple items from storage.
  *
  * @param {!Array<string>} keys The keys to be removed.
- * @param {function()=} callback Function to invoke when the remove is complete.
- *     The local cache is updated synchronously, so reads will immediately
- *     return undefined for these items even before removeItems completes.
  * @override
  */
-lib.Storage.Memory.prototype.removeItems = function(keys, callback) {
+lib.Storage.Memory.prototype.removeItems = async function(keys) {
   for (let i = 0; i < keys.length; i++) {
     delete this.storage_[keys[i]];
   }
 
-  if (callback) {
-    setTimeout(callback, 0);
-  }
+  // Force deferment for the standard API.
+  await 0;
 };

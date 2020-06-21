@@ -169,30 +169,23 @@ lib.Storage.Local.prototype.setItems = function(obj, callback) {
  * Remove an item from storage.
  *
  * @param {string} key The key to be removed.
- * @param {function()=} callback Function to invoke when the remove is complete.
- *     You don't have to wait for the set to complete in order to read the value
- *     since the local cache is updated synchronously.
  * @override
  */
-lib.Storage.Local.prototype.removeItem = function(key, callback) {
-  this.removeItems([key], callback);
+lib.Storage.Local.prototype.removeItem = async function(key) {
+  return this.removeItems([key]);
 };
 
 /**
  * Remove multiple items from storage.
  *
  * @param {!Array<string>} keys The keys to be removed.
- * @param {function()=} callback Function to invoke when the remove is complete.
- *     You don't have to wait for the set to complete in order to read the value
- *     since the local cache is updated synchronously.
  * @override
  */
-lib.Storage.Local.prototype.removeItems = function(keys, callback) {
+lib.Storage.Local.prototype.removeItems = async function(keys) {
   for (let i = 0; i < keys.length; i++) {
     this.storage_.removeItem(keys[i]);
   }
 
-  if (callback) {
-    setTimeout(callback, 0);
-  }
+  // Force deferment for the standard API.
+  await 0;
 };

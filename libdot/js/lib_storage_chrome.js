@@ -142,24 +142,20 @@ lib.Storage.Chrome.prototype.setItems = function(obj, callback) {
  * Remove an item from storage.
  *
  * @param {string} key The key to be removed.
- * @param {function()=} callback Function to invoke when the remove is complete.
- *     You don't have to wait for the set to complete in order to read the value
- *     since the local cache is updated synchronously.
  * @override
  */
-lib.Storage.Chrome.prototype.removeItem = function(key, callback) {
-  this.removeItems([key], callback);
+lib.Storage.Chrome.prototype.removeItem = async function(key) {
+  return this.removeItems([key]);
 };
 
 /**
  * Remove multiple items from storage.
  *
  * @param {!Array<string>} keys The keys to be removed.
- * @param {function()=} callback Function to invoke when the remove is complete.
- *     You don't have to wait for the set to complete in order to read the value
- *     since the local cache is updated synchronously.
  * @override
  */
-lib.Storage.Chrome.prototype.removeItems = function(keys, callback) {
-  this.storage_.remove(keys, callback);
+lib.Storage.Chrome.prototype.removeItems = async function(keys) {
+  return new Promise((resolve) => {
+    this.storage_.remove(keys, resolve);
+  });
 };

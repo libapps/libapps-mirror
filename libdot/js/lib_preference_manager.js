@@ -720,7 +720,7 @@ lib.PreferenceManager.prototype.set = function(
   } else {
     record.currentValue = this.DEFAULT_VALUE;
     if (saveToStorage) {
-      this.storage.removeItem(this.prefix + name, onComplete);
+      this.storage.removeItem(this.prefix + name).then(onComplete);
     }
   }
 

@@ -77,18 +77,12 @@ lib.Storage.prototype.setItems = function(obj, callback) {};
  * Remove an item from storage.
  *
  * @param {string} key The key to be removed.
- * @param {function()=} callback Function to invoke when the remove is complete.
- *     You don't have to wait for the set to complete in order to read the value
- *     since the local cache is updated synchronously.
  */
-lib.Storage.prototype.removeItem = function(key, callback) {};
+lib.Storage.prototype.removeItem = async function(key) {};
 
 /**
  * Remove multiple items from storage.
  *
  * @param {!Array<string>} keys The keys to be removed.
- * @param {function()=} callback Function to invoke when the remove is complete.
- *     You don't have to wait for the set to complete in order to read the value
- *     since the local cache is updated synchronously.
  */
-lib.Storage.prototype.removeItems = function(keys, callback) {};
+lib.Storage.prototype.removeItems = async function(keys) {};

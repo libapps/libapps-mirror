@@ -267,33 +267,22 @@ lib.Storage.TerminalPrivate.prototype.setItems = function(obj, callback) {
  * Remove an item from storage.
  *
  * @param {string} key The key to be removed.
- * @param {function()=} callback Function to invoke when the remove is complete.
- *     The local cache is updated synchronously, so reads will immediately
- *     return undefined for this item even before removeItem completes.
  * @override
  */
-lib.Storage.TerminalPrivate.prototype.removeItem = function(key, callback) {
-  this.removeItems([key], callback);
+lib.Storage.TerminalPrivate.prototype.removeItem = async function(key) {
+  return this.removeItems([key]);
 };
 
 /**
  * Remove multiple items from storage.
  *
  * @param {!Array<string>} keys The keys to be removed.
- * @param {function()=} callback Function to invoke when the remove is complete.
- *     The local cache is updated synchronously, so reads will immediately
- *     return undefined for these items even before removeItems completes.
  * @override
  */
-lib.Storage.TerminalPrivate.prototype.removeItems = function(keys, callback) {
-  this.initCache_().then(() => {
-    for (const key of keys) {
-      delete this.prefValue_[key];
-    }
-    this.setPref_().then(() => {
-      if (callback) {
-        callback();
-      }
-    });
-  });
+lib.Storage.TerminalPrivate.prototype.removeItems = async function(keys) {
+  await this.initCache_();
+  for (const key of keys) {
+    delete this.prefValue_[key];
+  }
+  return this.setPref_();
 };

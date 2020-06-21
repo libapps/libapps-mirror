@@ -79,7 +79,7 @@ it('remove', function(done) {
       assert.deepEqual(value, {'foo': 1, 'bar': 2});
 
       // Remove the item.
-      storage.removeItem('foo', () => {
+      storage.removeItem('foo').then(() => {
         // Make sure it's gone.
         storage.getItems(null, (value) => {
           assert.deepEqual(value, {'bar': 2});
@@ -104,7 +104,7 @@ it('remove-missing', function(done) {
       assert.deepEqual(value, {'foo': 1, 'bar': 2});
 
       // Remove unrelated item.
-      storage.removeItem('f00', () => {
+      storage.removeItem('f00').then(() => {
         // Make sure nothing is changed.
         storage.getItems(null, (value) => {
           assert.deepEqual(value, {'foo': 1, 'bar': 2});
@@ -129,7 +129,7 @@ it('removes', function(done) {
       assert.deepEqual(value, {'foo': 1, 'bar': 2, 'cow': 3});
 
       // Remove some items.
-      storage.removeItems(['foo', 'bar', 'blah'], () => {
+      storage.removeItems(['foo', 'bar', 'blah']).then(() => {
         // Make sure it's gone.
         storage.getItems(null, (value) => {
           assert.deepEqual(value, {'cow': 3});
