@@ -86,7 +86,7 @@ lib.Storage.Chrome.prototype.clear = function(callback) {
  * @override
  */
 lib.Storage.Chrome.prototype.getItem = function(key, callback) {
-  this.storage_.get(key, callback);
+  this.getItems([key], callback);
 };
 
 /**
@@ -134,7 +134,7 @@ lib.Storage.Chrome.prototype.setItem = function(key, value, callback) {
 
   const obj = {};
   obj[key] = value;
-  this.storage_.set(obj, onComplete);
+  this.setItems(obj, onComplete);
 };
 
 /**
@@ -160,7 +160,7 @@ lib.Storage.Chrome.prototype.setItems = function(obj, callback) {
  * @override
  */
 lib.Storage.Chrome.prototype.removeItem = function(key, callback) {
-  this.storage_.remove(key, callback);
+  this.removeItems([key], callback);
 };
 
 /**

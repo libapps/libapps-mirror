@@ -96,17 +96,7 @@ lib.Storage.Local.prototype.clear = function(callback) {
  * @override
  */
 lib.Storage.Local.prototype.getItem = function(key, callback) {
-  let value = this.storage_.getItem(key);
-
-  if (typeof value == 'string') {
-    try {
-      value = JSON.parse(value);
-    } catch (e) {
-      // If we can't parse the value, just return it unparsed.
-    }
-  }
-
-  setTimeout(callback.bind(null, value), 0);
+  this.getItems([key], (items) => callback(items[key]));
 };
 
 /**
@@ -156,11 +146,7 @@ lib.Storage.Local.prototype.getItems = function(keys, callback) {
  * @override
  */
 lib.Storage.Local.prototype.setItem = function(key, value, callback) {
-  this.storage_.setItem(key, JSON.stringify(value));
-
-  if (callback) {
-    setTimeout(callback, 0);
-  }
+  this.setItems({[key]: value}, callback);
 };
 
 /**
@@ -192,25 +178,21 @@ lib.Storage.Local.prototype.setItems = function(obj, callback) {
  * @override
  */
 lib.Storage.Local.prototype.removeItem = function(key, callback) {
-  this.storage_.removeItem(key);
-
-  if (callback) {
-    setTimeout(callback, 0);
-  }
+  this.removeItems([key], callback);
 };
 
 /**
  * Remove multiple items from storage.
  *
- * @param {!Array<string>} ary The keys to be removed.
+ * @param {!Array<string>} keys The keys to be removed.
  * @param {function()=} callback Function to invoke when the remove is complete.
  *     You don't have to wait for the set to complete in order to read the value
  *     since the local cache is updated synchronously.
  * @override
  */
-lib.Storage.Local.prototype.removeItems = function(ary, callback) {
-  for (let i = 0; i < ary.length; i++) {
-    this.storage_.removeItem(ary[i]);
+lib.Storage.Local.prototype.removeItems = function(keys, callback) {
+  for (let i = 0; i < keys.length; i++) {
+    this.storage_.removeItem(keys[i]);
   }
 
   if (callback) {

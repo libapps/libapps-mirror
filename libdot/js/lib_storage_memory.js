@@ -75,17 +75,7 @@ lib.Storage.Memory.prototype.clear = function(callback) {
  * @override
  */
 lib.Storage.Memory.prototype.getItem = function(key, callback) {
-  let value = this.storage_[key];
-
-  if (typeof value == 'string') {
-    try {
-      value = JSON.parse(value);
-    } catch (e) {
-      // If we can't parse the value, just return it unparsed.
-    }
-  }
-
-  setTimeout(callback.bind(null, value), 0);
+  this.getItems([key], (items) => callback(items[key]));
 };
 
 /**
@@ -132,21 +122,7 @@ lib.Storage.Memory.prototype.getItems = function(keys, callback) {
  * @override
  */
 lib.Storage.Memory.prototype.setItem = function(key, value, callback) {
-  const oldValue = this.storage_[key];
-  this.storage_[key] = JSON.stringify(value);
-
-  const e = {};
-  e[key] = {oldValue: oldValue, newValue: value};
-
-  setTimeout(function() {
-    for (let i = 0; i < this.observers_.length; i++) {
-      this.observers_[i](e);
-    }
-  }.bind(this), 0);
-
-  if (callback) {
-    setTimeout(callback, 0);
-  }
+  this.setItems({[key]: value}, callback);
 };
 
 /**
@@ -187,25 +163,21 @@ lib.Storage.Memory.prototype.setItems = function(obj, callback) {
  * @override
  */
 lib.Storage.Memory.prototype.removeItem = function(key, callback) {
-  delete this.storage_[key];
-
-  if (callback) {
-    setTimeout(callback, 0);
-  }
+  this.removeItems([key], callback);
 };
 
 /**
  * Remove multiple items from storage.
  *
- * @param {!Array<string>} ary The keys to be removed.
+ * @param {!Array<string>} keys The keys to be removed.
  * @param {function()=} callback Function to invoke when the remove is complete.
  *     The local cache is updated synchronously, so reads will immediately
  *     return undefined for these items even before removeItems completes.
  * @override
  */
-lib.Storage.Memory.prototype.removeItems = function(ary, callback) {
-  for (let i = 0; i < ary.length; i++) {
-    delete this.storage_[ary[i]];
+lib.Storage.Memory.prototype.removeItems = function(keys, callback) {
+  for (let i = 0; i < keys.length; i++) {
+    delete this.storage_[keys[i]];
   }
 
   if (callback) {

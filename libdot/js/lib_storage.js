@@ -88,9 +88,9 @@ lib.Storage.prototype.removeItem = function(key, callback) {};
 /**
  * Remove multiple items from storage.
  *
- * @param {!Array<string>} ary The keys to be removed.
+ * @param {!Array<string>} keys The keys to be removed.
  * @param {function()=} callback Function to invoke when the remove is complete.
  *     You don't have to wait for the set to complete in order to read the value
  *     since the local cache is updated synchronously.
  */
-lib.Storage.prototype.removeItems = function(ary, callback) {};
+lib.Storage.prototype.removeItems = function(keys, callback) {};
