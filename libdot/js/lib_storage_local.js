@@ -8,12 +8,14 @@
  * window.localStorage based class with an async interface that is
  * interchangeable with other lib.Storage.* implementations.
  *
+ * @param {!Storage=} storage The backing storage.
  * @implements {lib.Storage}
  * @constructor
  */
-lib.Storage.Local = function() {
+lib.Storage.Local = function(storage = undefined) {
   this.observers_ = [];
-  this.storage_ = window.localStorage;
+  /** @type {!Storage} */
+  this.storage_ = storage ? storage : lib.notNull(window.localStorage);
   // Closure thinks all addEventListener calls take Events.
   window.addEventListener(
       'storage',

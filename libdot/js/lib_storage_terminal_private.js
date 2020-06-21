@@ -7,10 +7,15 @@
 /**
  * Storage implementation using chrome.settingsPrivate.
  *
+ * @param {{
+ *  getSettings: function(function(?Object)),
+ *  setSettings: function(!Object, function()),
+ *  onSettingsChanged: !ChromeEvent,
+ * }=} storage
  * @constructor
  * @implements {lib.Storage}
  */
-lib.Storage.TerminalPrivate = function() {
+lib.Storage.TerminalPrivate = function(storage = chrome.terminalPrivate) {
   /**
    * @const
    * @private
@@ -36,7 +41,10 @@ lib.Storage.TerminalPrivate = function() {
   /** @type {boolean} */
   this.prefsLoaded_ = false;
 
-  chrome.terminalPrivate.onSettingsChanged.addListener(
+  /** @const */
+  this.storage_ = storage;
+
+  this.storage_.onSettingsChanged.addListener(
       this.onSettingsChanged_.bind(this));
 };
 
@@ -54,7 +62,7 @@ lib.Storage.TerminalPrivate.prototype.initCache_ = function() {
       return;
     }
 
-    chrome.terminalPrivate.getSettings((settings) => {
+    this.storage_.getSettings((settings) => {
       if (chrome.runtime.lastError) {
         console.error(chrome.runtime.lastError.message);
       } else {
@@ -119,7 +127,7 @@ lib.Storage.TerminalPrivate.prototype.setPref_ = function(callback) {
   setTimeout(() => {
     const callbacks = this.prefValueWriteCallbacks_;
     this.prefValueWriteCallbacks_ = [];
-    chrome.terminalPrivate.setSettings(this.prefValue_, () => {
+    this.storage_.setSettings(this.prefValue_, () => {
       if (chrome.runtime.lastError) {
         console.error(chrome.runtime.lastError.message);
       }
