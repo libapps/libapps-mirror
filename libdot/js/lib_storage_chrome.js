@@ -86,7 +86,7 @@ lib.Storage.Chrome.prototype.clear = function(callback) {
  * @override
  */
 lib.Storage.Chrome.prototype.getItem = function(key, callback) {
-  this.getItems([key], callback);
+  this.getItems([key], (items) => callback(items[key]));
 };
 
 /**
