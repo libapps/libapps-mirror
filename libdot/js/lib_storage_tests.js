@@ -18,152 +18,123 @@ lib.Storage.ApiTest = function() {
 /**
  * Verify single get/set APIs.
  */
-it('get-set', function(done) {
+it('get-set', async function() {
   const storage = this.storage;
 
   // Make sure we can set an item and read it back out.
-  storage.getItem('foo', (value) => {
-    assert.isUndefined(value);
+  let value = await storage.getItem('foo');
+  assert.isUndefined(value);
 
-    storage.setItem('foo', 1).then(() => {
-      storage.getItem('foo', (value) => {
-        assert.equal(value, 1);
-
-        done();
-      });
-    });
-  });
+  await storage.setItem('foo', 1);
+  value = await storage.getItem('foo');
+  assert.equal(value, 1);
 });
 
 /**
  * Verify multiple get/set APIs.
  */
-it('gets-sets', function(done) {
+it('gets-sets', async function() {
   const storage = this.storage;
 
-  storage.getItems(null, (value) => {
-    assert.deepEqual(value, {});
+  let value = await storage.getItems(null);
+  assert.deepEqual(value, {});
 
-    storage.getItems(['foo'], (value) => {
-      assert.deepEqual(value, {});
+  value = await storage.getItems(['foo']);
+  assert.deepEqual(value, {});
 
-      storage.setItems({'foo': 1, 'bar': 2, 'cow': 3}).then(() => {
-        storage.getItems(['foo'], (value) => {
-          assert.deepEqual(value, {'foo': 1});
+  await storage.setItems({'foo': 1, 'bar': 2, 'cow': 3});
+  value = await storage.getItems(['foo']);
+  assert.deepEqual(value, {'foo': 1});
 
-          storage.getItems(['foo', 'bar'], (value) => {
-            assert.deepEqual(value, {'foo': 1, 'bar': 2});
+  value = await storage.getItems(['foo', 'bar']);
+  assert.deepEqual(value, {'foo': 1, 'bar': 2});
 
-            storage.getItems(null, (value) => {
-              assert.deepEqual(value, {'foo': 1, 'bar': 2, 'cow': 3});
-
-              done();
-            });
-          });
-        });
-      });
-    });
-  });
+  value = await storage.getItems(null);
+  assert.deepEqual(value, {'foo': 1, 'bar': 2, 'cow': 3});
 });
 
 /**
  * Verify remove API.
  */
-it('remove', function(done) {
+it('remove', async function() {
   const storage = this.storage;
 
   // Add some items.
-  storage.setItems({'foo': 1, 'bar': 2}).then(() => {
-    // Make sure things are in there.
-    storage.getItems(null, (value) => {
-      assert.deepEqual(value, {'foo': 1, 'bar': 2});
+  await storage.setItems({'foo': 1, 'bar': 2});
 
-      // Remove the item.
-      storage.removeItem('foo').then(() => {
-        // Make sure it's gone.
-        storage.getItems(null, (value) => {
-          assert.deepEqual(value, {'bar': 2});
+  // Make sure things are in there.
+  let value = await storage.getItems(null);
+  assert.deepEqual(value, {'foo': 1, 'bar': 2});
 
-          done();
-        });
-      });
-    });
-  });
+  // Remove the item.
+  await storage.removeItem('foo');
+
+  // Make sure it's gone.
+  value = await storage.getItems(null);
+  assert.deepEqual(value, {'bar': 2});
 });
 
 /**
  * Verify remove API with missing values.
  */
-it('remove-missing', function(done) {
+it('remove-missing', async function() {
   const storage = this.storage;
 
   // Add some items.
-  storage.setItems({'foo': 1, 'bar': 2}).then(() => {
-    // Make sure things are in there.
-    storage.getItems(null, (value) => {
-      assert.deepEqual(value, {'foo': 1, 'bar': 2});
+  await storage.setItems({'foo': 1, 'bar': 2});
 
-      // Remove unrelated item.
-      storage.removeItem('f00').then(() => {
-        // Make sure nothing is changed.
-        storage.getItems(null, (value) => {
-          assert.deepEqual(value, {'foo': 1, 'bar': 2});
+  // Make sure things are in there.
+  let value = await storage.getItems(null);
+  assert.deepEqual(value, {'foo': 1, 'bar': 2});
 
-          done();
-        });
-      });
-    });
-  });
+  // Remove unrelated item.
+  await storage.removeItem('f00');
+
+  // Make sure nothing is changed.
+  value = await storage.getItems(null);
+  assert.deepEqual(value, {'foo': 1, 'bar': 2});
 });
 
 /**
  * Verify removes API.
  */
-it('removes', function(done) {
+it('removes', async function() {
   const storage = this.storage;
 
   // Add some items.
-  storage.setItems({'foo': 1, 'bar': 2, 'cow': 3}).then(() => {
-    // Make sure things are in there.
-    storage.getItems(null, (value) => {
-      assert.deepEqual(value, {'foo': 1, 'bar': 2, 'cow': 3});
+  await storage.setItems({'foo': 1, 'bar': 2, 'cow': 3});
 
-      // Remove some items.
-      storage.removeItems(['foo', 'bar', 'blah']).then(() => {
-        // Make sure it's gone.
-        storage.getItems(null, (value) => {
-          assert.deepEqual(value, {'cow': 3});
+  // Make sure things are in there.
+  let value = await storage.getItems(null);
+  assert.deepEqual(value, {'foo': 1, 'bar': 2, 'cow': 3});
 
-          done();
-        });
-      });
-    });
-  });
+  // Remove some items.
+  await storage.removeItems(['foo', 'bar', 'blah']);
+
+  // Make sure it's gone.
+  value = await storage.getItems(null);
+  assert.deepEqual(value, {'cow': 3});
 });
 
 /**
  * Verify clear API.
  */
-it('clear', function(done) {
+it('clear', async function() {
   const storage = this.storage;
 
   // Add some items.
-  storage.setItems({'foo': 1, 'bar': 2, 'cow': 3}).then(() => {
-    // Make sure things are in there.
-    storage.getItems(null, (value) => {
-      assert.deepEqual(value, {'foo': 1, 'bar': 2, 'cow': 3});
+  await storage.setItems({'foo': 1, 'bar': 2, 'cow': 3});
 
-      // Remove all items.
-      storage.clear().then(() => {
-        // Make sure it's gone.
-        storage.getItems(null, (value) => {
-          assert.deepEqual(value, {});
+  // Make sure things are in there.
+  let value = await storage.getItems(null);
+  assert.deepEqual(value, {'foo': 1, 'bar': 2, 'cow': 3});
 
-          done();
-        });
-      });
-    });
-  });
+  // Remove all items.
+  await storage.clear();
+
+  // Make sure it's gone.
+  value = await storage.getItems(null);
+  assert.deepEqual(value, {});
 });
 
 };

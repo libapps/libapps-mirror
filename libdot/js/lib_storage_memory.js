@@ -63,23 +63,19 @@ lib.Storage.Memory.prototype.clear = async function() {
  * Return the current value of a storage item.
  *
  * @param {string} key The key to look up.
- * @param {function(*)} callback The function to invoke when the value has
- *     been retrieved.
  * @override
  */
-lib.Storage.Memory.prototype.getItem = function(key, callback) {
-  this.getItems([key], (items) => callback(items[key]));
+lib.Storage.Memory.prototype.getItem = async function(key) {
+  return this.getItems([key]).then((items) => items[key]);
 };
 
 /**
  * Fetch the values of multiple storage items.
  *
  * @param {?Array<string>} keys The keys to look up.  Pass null for all keys.
- * @param {function(!Object)} callback The function to invoke when the values
- *     have been retrieved.
  * @override
  */
-lib.Storage.Memory.prototype.getItems = function(keys, callback) {
+lib.Storage.Memory.prototype.getItems = async function(keys) {
   const rv = {};
   if (!keys) {
     keys = Object.keys(this.storage_);
@@ -100,7 +96,10 @@ lib.Storage.Memory.prototype.getItems = function(keys, callback) {
     }
   }
 
-  setTimeout(callback.bind(null, rv), 0);
+  // Force deferment for the standard API.
+  await 0;
+
+  return rv;
 };
 
 /**

@@ -76,12 +76,6 @@ it('does-not-exit-on-first-output', async function() {
 });
 
 it('migrates-settings-on-first-run-only', async function() {
-  const getItems = async () => {
-    return new Promise((resolve) => {
-      hterm.defaultStorage.getItems(null, resolve);
-    });
-  };
-
   let callCount = 0;
   mockTerminalPrivateController.addObserver('getCroshSettings', () => {
     ++callCount;
@@ -91,14 +85,14 @@ it('migrates-settings-on-first-run-only', async function() {
   mockTerminalPrivate.croshSettings = {'test': 1};
   await terminal.migrateSettings();
   assert.equal(callCount, 1);
-  let settings = await getItems();
+  let settings = await hterm.defaultStorage.getItems(null);
   assert.deepInclude(settings, {'test': 1, 'crosh.settings.migrated': true});
 
   // Once migrated, doesn't call getCroshSettings again, or update settings.
   mockTerminalPrivate.croshSettings = {'test': 2};
   await terminal.migrateSettings();
   assert.equal(callCount, 1);
-  settings = await getItems();
+  settings = await hterm.defaultStorage.getItems(null);
   assert.deepInclude(settings, {'test': 1, 'crosh.settings.migrated': true});
 });
 

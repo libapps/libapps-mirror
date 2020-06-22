@@ -37,19 +37,18 @@ lib.Storage.prototype.clear = async function() {};
  * Return the current value of a storage item.
  *
  * @param {string} key The key to look up.
- * @param {function(*)} callback The function to invoke when the value has
- *     been retrieved.
+ * @return {!Promise<*>} A promise resolving to the requested item.
  */
-lib.Storage.prototype.getItem = function(key, callback) {};
+lib.Storage.prototype.getItem = async function(key) {};
 
 /**
  * Fetch the values of multiple storage items.
  *
  * @param {?Array<string>} keys The keys to look up.  Pass null for all keys.
- * @param {function(!Object)} callback The function to invoke when the values
- *     have been retrieved.
+ * @return {!Promise<!Object<string, *>>} A promise resolving to the requested
+ *     items.
  */
-lib.Storage.prototype.getItems = function(keys, callback) {};
+lib.Storage.prototype.getItems = async function(keys) {};
 
 /**
  * Set a value in storage.

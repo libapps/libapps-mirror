@@ -209,7 +209,7 @@ lib.PreferenceManager.prototype.readStorage = function(callback = undefined) {
     console.log('Preferences read: ' + this.prefix);
   }
 
-  this.storage.getItems(keys, function(items) {
+  this.storage.getItems(keys).then((items) => {
       const prefixLength = this.prefix.length;
 
       for (const key in items) {
@@ -231,7 +231,7 @@ lib.PreferenceManager.prototype.readStorage = function(callback = undefined) {
       if (pendingChildren == 0 && callback) {
         setTimeout(callback);
       }
-    }.bind(this));
+    });
 };
 
 /**

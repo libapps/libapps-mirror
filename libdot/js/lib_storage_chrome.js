@@ -69,24 +69,22 @@ lib.Storage.Chrome.prototype.clear = async function() {
  * Return the current value of a storage item.
  *
  * @param {string} key The key to look up.
- * @param {function(*)} callback The function to invoke when the value has
- *     been retrieved.
  * @override
  */
-lib.Storage.Chrome.prototype.getItem = function(key, callback) {
-  this.getItems([key], (items) => callback(items[key]));
+lib.Storage.Chrome.prototype.getItem = async function(key) {
+  return this.getItems([key]).then((items) => items[key]);
 };
 
 /**
  * Fetch the values of multiple storage items.
  *
  * @param {?Array<string>} keys The keys to look up.  Pass null for all keys.
- * @param {function(!Object)} callback The function to invoke when the values
- *     have been retrieved.
  * @override
  */
-lib.Storage.Chrome.prototype.getItems = function(keys, callback) {
-  this.storage_.get(keys, callback);
+lib.Storage.Chrome.prototype.getItems = async function(keys) {
+  return new Promise((resolve) => {
+    this.storage_.get(keys, resolve);
+  });
 };
 
 /**

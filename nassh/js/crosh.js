@@ -107,24 +107,23 @@ Crosh.msg = function(name, args) {
  * Copy any settings from the previous crosh extension which were stored in
  * chrome.storage.sync.
  *
- * @return {!Promise<void>}
+ * @return {!Promise<void>} Resolves once settings have been migrated.
  */
-Crosh.migrateSettings = function() {
+Crosh.migrateSettings = async function() {
   if (!chrome.terminalPrivate || !chrome.terminalPrivate.getCroshSettings) {
-    return Promise.resolve();
+    return;
+  }
+
+  const migrated = await hterm.defaultStorage.getItem(
+      'crosh.settings.migrated');
+  if (migrated) {
+    return;
   }
 
   return new Promise((resolve) => {
-    hterm.defaultStorage.getItem('crosh.settings.migrated', (migrated) => {
-      if (migrated) {
-        resolve();
-        return;
-      }
-
-      chrome.terminalPrivate.getCroshSettings((settings) => {
-        settings['crosh.settings.migrated'] = true;
-        hterm.defaultStorage.setItems(settings).then(resolve);
-      });
+    chrome.terminalPrivate.getCroshSettings((settings) => {
+      settings['crosh.settings.migrated'] = true;
+      hterm.defaultStorage.setItems(settings).then(resolve);
     });
   });
 };

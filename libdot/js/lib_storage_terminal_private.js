@@ -183,37 +183,34 @@ lib.Storage.TerminalPrivate.prototype.clear = async function() {
  * Return the current value of a storage item.
  *
  * @param {string} key The key to look up.
- * @param {function(*)} callback The function to invoke when the value has
- *     been retrieved.
  * @override
  */
-lib.Storage.TerminalPrivate.prototype.getItem = function(key, callback) {
-  this.initCache_().then(() => callback(this.prefValue_[key]));
+lib.Storage.TerminalPrivate.prototype.getItem = async function(key) {
+  await this.initCache_();
+  return this.prefValue_[key];
 };
 
 /**
  * Fetch the values of multiple storage items.
  *
  * @param {?Array<string>} keys The keys to look up.  Pass null for all keys.
- * @param {function(!Object)} callback The function to invoke when the values
- *     have been retrieved.
  * @override
  */
-lib.Storage.TerminalPrivate.prototype.getItems = function(keys, callback) {
-  this.initCache_().then(() => {
-    const rv = {};
-    if (!keys) {
-      keys = Object.keys(this.prefValue_);
-    }
+lib.Storage.TerminalPrivate.prototype.getItems = async function(keys) {
+  await this.initCache_();
 
-    for (const key of keys) {
-      if (this.prefValue_.hasOwnProperty(key)) {
-        rv[key] = this.prefValue_[key];
-      }
-    }
+  const rv = {};
+  if (!keys) {
+    keys = Object.keys(this.prefValue_);
+  }
 
-    callback(rv);
-  });
+  for (const key of keys) {
+    if (this.prefValue_.hasOwnProperty(key)) {
+      rv[key] = this.prefValue_[key];
+    }
+  }
+
+  return rv;
 };
 
 /**

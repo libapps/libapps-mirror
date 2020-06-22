@@ -88,23 +88,19 @@ lib.Storage.Local.prototype.clear = async function() {
  * Return the current value of a storage item.
  *
  * @param {string} key The key to look up.
- * @param {function(*)} callback The function to invoke when the value has
- *     been retrieved.
  * @override
  */
-lib.Storage.Local.prototype.getItem = function(key, callback) {
-  this.getItems([key], (items) => callback(items[key]));
+lib.Storage.Local.prototype.getItem = async function(key) {
+  return this.getItems([key]).then((items) => items[key]);
 };
 
 /**
  * Fetch the values of multiple storage items.
  *
  * @param {?Array<string>} keys The keys to look up.  Pass null for all keys.
- * @param {function(!Object)} callback The function to invoke when the values
- *     have been retrieved.
  * @override
  */
-lib.Storage.Local.prototype.getItems = function(keys, callback) {
+lib.Storage.Local.prototype.getItems = async function(keys) {
   const rv = {};
   if (!keys) {
     keys = [];
@@ -128,7 +124,10 @@ lib.Storage.Local.prototype.getItems = function(keys, callback) {
     }
   }
 
-  setTimeout(callback.bind(null, rv), 0);
+  // Force deferment for the standard API.
+  await 0;
+
+  return rv;
 };
 
 /**
