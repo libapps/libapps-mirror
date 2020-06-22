@@ -63,8 +63,9 @@ lib.Storage.TerminalPrivate.prototype.initCache_ = function() {
     }
 
     this.storage_.getSettings((settings) => {
-      if (chrome.runtime.lastError) {
-        console.error(chrome.runtime.lastError.message);
+      const err = lib.f.lastError();
+      if (err) {
+        console.error(err);
       } else {
         this.prefValue_ = lib.notNull(settings);
       }
@@ -128,8 +129,9 @@ lib.Storage.TerminalPrivate.prototype.setPref_ = function(callback) {
     const callbacks = this.prefValueWriteCallbacks_;
     this.prefValueWriteCallbacks_ = [];
     this.storage_.setSettings(this.prefValue_, () => {
-      if (chrome.runtime.lastError) {
-        console.error(chrome.runtime.lastError.message);
+      const err = lib.f.lastError();
+      if (err) {
+        console.error(err);
       }
       callbacks.forEach((c) => c && c());
     });
