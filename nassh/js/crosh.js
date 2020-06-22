@@ -123,7 +123,7 @@ Crosh.migrateSettings = function() {
 
       chrome.terminalPrivate.getCroshSettings((settings) => {
         settings['crosh.settings.migrated'] = true;
-        hterm.defaultStorage.setItems(settings, resolve);
+        hterm.defaultStorage.setItems(settings).then(resolve);
       });
     });
   });

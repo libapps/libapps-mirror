@@ -25,7 +25,7 @@ it('get-set', function(done) {
   storage.getItem('foo', (value) => {
     assert.isUndefined(value);
 
-    storage.setItem('foo', 1, () => {
+    storage.setItem('foo', 1).then(() => {
       storage.getItem('foo', (value) => {
         assert.equal(value, 1);
 
@@ -47,7 +47,7 @@ it('gets-sets', function(done) {
     storage.getItems(['foo'], (value) => {
       assert.deepEqual(value, {});
 
-      storage.setItems({'foo': 1, 'bar': 2, 'cow': 3}, () => {
+      storage.setItems({'foo': 1, 'bar': 2, 'cow': 3}).then(() => {
         storage.getItems(['foo'], (value) => {
           assert.deepEqual(value, {'foo': 1});
 
@@ -73,7 +73,7 @@ it('remove', function(done) {
   const storage = this.storage;
 
   // Add some items.
-  storage.setItems({'foo': 1, 'bar': 2}, () => {
+  storage.setItems({'foo': 1, 'bar': 2}).then(() => {
     // Make sure things are in there.
     storage.getItems(null, (value) => {
       assert.deepEqual(value, {'foo': 1, 'bar': 2});
@@ -98,7 +98,7 @@ it('remove-missing', function(done) {
   const storage = this.storage;
 
   // Add some items.
-  storage.setItems({'foo': 1, 'bar': 2}, () => {
+  storage.setItems({'foo': 1, 'bar': 2}).then(() => {
     // Make sure things are in there.
     storage.getItems(null, (value) => {
       assert.deepEqual(value, {'foo': 1, 'bar': 2});
@@ -123,7 +123,7 @@ it('removes', function(done) {
   const storage = this.storage;
 
   // Add some items.
-  storage.setItems({'foo': 1, 'bar': 2, 'cow': 3}, () => {
+  storage.setItems({'foo': 1, 'bar': 2, 'cow': 3}).then(() => {
     // Make sure things are in there.
     storage.getItems(null, (value) => {
       assert.deepEqual(value, {'foo': 1, 'bar': 2, 'cow': 3});
@@ -148,7 +148,7 @@ it('clear', function(done) {
   const storage = this.storage;
 
   // Add some items.
-  storage.setItems({'foo': 1, 'bar': 2, 'cow': 3}, () => {
+  storage.setItems({'foo': 1, 'bar': 2, 'cow': 3}).then(() => {
     // Make sure things are in there.
     storage.getItems(null, (value) => {
       assert.deepEqual(value, {'foo': 1, 'bar': 2, 'cow': 3});

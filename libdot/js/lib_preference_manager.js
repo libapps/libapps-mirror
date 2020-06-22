@@ -715,7 +715,7 @@ lib.PreferenceManager.prototype.set = function(
   if (this.diff(record.defaultValue, newValue)) {
     record.currentValue = newValue;
     if (saveToStorage) {
-      this.storage.setItem(this.prefix + name, newValue, onComplete);
+      this.storage.setItem(this.prefix + name, newValue).then(onComplete);
     }
   } else {
     record.currentValue = this.DEFAULT_VALUE;

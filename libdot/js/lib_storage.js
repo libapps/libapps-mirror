@@ -54,24 +54,24 @@ lib.Storage.prototype.getItems = function(keys, callback) {};
 /**
  * Set a value in storage.
  *
+ * You don't have to wait for the set to complete in order to read the value
+ * since the local cache is updated synchronously.
+ *
  * @param {string} key The key for the value to be stored.
  * @param {*} value The value to be stored.  Anything that can be serialized
  *     with JSON is acceptable.
- * @param {function()=} callback Function to invoke when the set is complete.
- *     You don't have to wait for the set to complete in order to read the value
- *     since the local cache is updated synchronously.
  */
-lib.Storage.prototype.setItem = function(key, value, callback) {};
+lib.Storage.prototype.setItem = async function(key, value) {};
 
 /**
  * Set multiple values in storage.
  *
+ * You don't have to wait for the set to complete in order to read the value
+ * since the local cache is updated synchronously.
+ *
  * @param {!Object} obj A map of key/values to set in storage.
- * @param {function()=} callback Function to invoke when the set is complete.
- *     You don't have to wait for the set to complete in order to read the value
- *     since the local cache is updated synchronously.
  */
-lib.Storage.prototype.setItems = function(obj, callback) {};
+lib.Storage.prototype.setItems = async function(obj) {};
 
 /**
  * Remove an item from storage.

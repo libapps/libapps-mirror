@@ -95,47 +95,41 @@ lib.Storage.Chrome.prototype.getItems = function(keys, callback) {
  * @param {string} key The key for the value to be stored.
  * @param {*} value The value to be stored.  Anything that can be serialized
  *     with JSON is acceptable.
- * @param {function()=} callback Function to invoke when the set is complete.
- *     You don't have to wait for the set to complete in order to read the
- *     value since the local cache is updated synchronously.
  * @override
  */
-lib.Storage.Chrome.prototype.setItem = function(key, value, callback) {
-  const onComplete = () => {
-    const err = lib.f.lastError();
-    if (err) {
-      // Doesn't seem to be any better way of handling this.
-      // https://crbug.com/764759
-      if (err.indexOf('MAX_WRITE_OPERATIONS')) {
-        console.warn(`Will retry save of ${key} after exceeding quota: ${err}`);
-        setTimeout(() => this.setItem(key, value, onComplete), 1000);
-        return;
-      } else {
-        console.error(`Unknown runtime error: ${err}`);
+lib.Storage.Chrome.prototype.setItem = async function(key, value) {
+  return new Promise((resolve) => {
+    const onComplete = () => {
+      const err = lib.f.lastError();
+      if (err) {
+        // Doesn't seem to be any better way of handling this.
+        // https://crbug.com/764759
+        if (err.indexOf('MAX_WRITE_OPERATIONS')) {
+          console.warn(`Will retry '${key}' save after exceeding quota:`, err);
+          setTimeout(() => this.setItem(key, value).then(onComplete), 1000);
+          return;
+        } else {
+          console.error(`Unknown runtime error: ${err}`);
+        }
       }
-    }
 
-    if (callback) {
-      callback();
-    }
-  };
+      resolve();
+    };
 
-  const obj = {};
-  obj[key] = value;
-  this.setItems(obj, onComplete);
+    this.setItems({[key]: value}).then(onComplete);
+  });
 };
 
 /**
  * Set multiple values in storage.
  *
  * @param {!Object} obj A map of key/values to set in storage.
- * @param {function()=} callback Function to invoke when the set is complete.
- *     You don't have to wait for the set to complete in order to read the
- *     value since the local cache is updated synchronously.
  * @override
  */
-lib.Storage.Chrome.prototype.setItems = function(obj, callback) {
-  this.storage_.set(obj, callback);
+lib.Storage.Chrome.prototype.setItems = async function(obj) {
+  return new Promise((resolve) => {
+    this.storage_.set(obj, resolve);
+  });
 };
 
 /**

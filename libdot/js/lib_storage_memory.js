@@ -109,25 +109,19 @@ lib.Storage.Memory.prototype.getItems = function(keys, callback) {
  * @param {string} key The key for the value to be stored.
  * @param {*} value The value to be stored.  Anything that can be serialized
  *     with JSON is acceptable.
- * @param {function()=} callback Function to invoke when the set is complete.
- *     You don't have to wait for the set to complete in order to read the value
- *     since the local cache is updated synchronously.
  * @override
  */
-lib.Storage.Memory.prototype.setItem = function(key, value, callback) {
-  this.setItems({[key]: value}, callback);
+lib.Storage.Memory.prototype.setItem = async function(key, value) {
+  return this.setItems({[key]: value});
 };
 
 /**
  * Set multiple values in storage.
  *
  * @param {!Object} obj A map of key/values to set in storage.
- * @param {function()=} callback Function to invoke when the set is complete.
- *     You don't have to wait for the set to complete in order to read the value
- *     since the local cache is updated synchronously.
  * @override
  */
-lib.Storage.Memory.prototype.setItems = function(obj, callback) {
+lib.Storage.Memory.prototype.setItems = async function(obj) {
   const e = {};
 
   for (const key in obj) {
@@ -135,15 +129,10 @@ lib.Storage.Memory.prototype.setItems = function(obj, callback) {
     this.storage_[key] = JSON.stringify(obj[key]);
   }
 
-  setTimeout(function() {
-    for (let i = 0; i < this.observers_.length; i++) {
-      this.observers_[i](e);
-    }
-  }.bind(this));
+  // Force deferment for the standard API.
+  await 0;
 
-  if (callback) {
-    setTimeout(callback, 0);
-  }
+  this.observers_.forEach((o) => o(e));
 };
 
 /**

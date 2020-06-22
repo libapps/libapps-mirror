@@ -222,45 +222,30 @@ lib.Storage.TerminalPrivate.prototype.getItems = function(keys, callback) {
  * @param {string} key The key for the value to be stored.
  * @param {*} value The value to be stored.  Anything that can be serialized
  *     with JSON is acceptable.
- * @param {function()=} callback Function to invoke when the set is complete.
- *     You don't have to wait for the set to complete in order to read the value
- *     since the local cache is updated synchronously.
  * @override
  */
-lib.Storage.TerminalPrivate.prototype.setItem = function(key, value, callback) {
-  this.setItems({[key]: value}, callback);
+lib.Storage.TerminalPrivate.prototype.setItem = async function(key, value) {
+  return this.setItems({[key]: value});
 };
 
 /**
  * Set multiple values in storage.
  *
  * @param {!Object} obj A map of key/values to set in storage.
- * @param {function()=} callback Function to invoke when the set is complete.
- *     You don't have to wait for the set to complete in order to read the value
- *     since the local cache is updated synchronously.
  * @override
  */
-lib.Storage.TerminalPrivate.prototype.setItems = function(obj, callback) {
-  this.initCache_().then(() => {
-    const e = {};
+lib.Storage.TerminalPrivate.prototype.setItems = async function(obj) {
+  await this.initCache_();
 
-    for (const key in obj) {
-      e[key] = {oldValue: this.prefValue_[key], newValue: obj[key]};
-      this.prefValue_[key] = obj[key];
-    }
+  const e = {};
+  for (const key in obj) {
+    e[key] = {oldValue: this.prefValue_[key], newValue: obj[key]};
+    this.prefValue_[key] = obj[key];
+  }
 
-    return this.setPref_().then(() => {
-      if (callback) {
-        callback();
-      }
-      return e;
-    });
-  })
-  .then((e) => {
-    for (const observer of this.observers_) {
-      observer(e);
-    }
-  });
+  await this.setPref_();
+
+  this.observers_.forEach((o) => o(e));
 };
 
 /**

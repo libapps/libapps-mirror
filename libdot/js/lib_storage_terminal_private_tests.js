@@ -71,22 +71,14 @@ it('coalesce-writes', function(done) {
     ++called;
     callback();
   };
-  storage.setItem('1', 2);
-  storage.setItem('3', 2);
-  storage.setItem('4', 2);
-
-  // Poll to finish asap, but don't give up too soon.
-  let retry = 200;
-  const check = () => {
-    if (called === 1) {
-      done();
-    } else if (retry-- > 0) {
-      setTimeout(check, 1);
-    } else {
-      assert.fail();
-    }
-  };
-  check();
+  Promise.all([
+    storage.setItem('1', 2),
+    storage.setItem('3', 2),
+    storage.setItem('4', 2),
+  ]).then(() => {
+    assert.equal(called, 1);
+    done();
+  });
 });
 
 /**
@@ -101,8 +93,8 @@ it('recursive-writes', function(done) {
     ++called;
     callback();
   };
-  storage.setItem('1', 2, () => {
-    storage.setItem('3', 2, () => {
+  storage.setItem('1', 2).then(() => {
+    storage.setItem('3', 2).then(() => {
       recursive_called = true;
     });
   });
