@@ -16,7 +16,7 @@ lib.Storage.Chrome = function(storage) {
   this.storage_ = storage;
   this.observers_ = [];
 
-  chrome.storage.onChanged.addListener(this.onChanged_.bind(this));
+  storage.onChanged.addListener(this.onChanged_.bind(this));
 };
 
 /**

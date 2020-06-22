@@ -82,3 +82,6 @@ function SVGSVGElement() {}
 
 /** @type {number} */
 SVGSVGElement.prototype.currentScale;
+
+/** @type {!ChromeEvent} */
+StorageArea.prototype.onChanged;
