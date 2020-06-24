@@ -99,7 +99,7 @@ nassh.Stream.RelayCorpv4.ClientDataPacket = class {
  */
 nassh.Stream.RelayCorpv4.ClientAckPacket = class {
   /**
-   * @param {number} ack The ack to packetize.
+   * @param {!bigint} ack The ack to packetize.
    * @suppress {missingProperties} closure is missing BigInt
    */
   constructor(ack) {
@@ -107,6 +107,7 @@ nassh.Stream.RelayCorpv4.ClientAckPacket = class {
     this.frame = new ArrayBuffer(10);
     const dv = new DataView(this.frame);
     this.tag = nassh.Stream.RelayCorpv4.PacketTag.ACK;
+    /** @const {!bigint} */
     this.ack = ack;
 
     dv.setUint16(0, this.tag);
@@ -143,16 +144,32 @@ nassh.Stream.RelayCorpv4WS = function(fd) {
   // Callback function when asyncWrite is used.
   this.onWriteSuccess_ = null;
 
-  // The total byte count we've written during this session.
+  /**
+   * The total byte count we've written during this session.
+   *
+   * @type {number}
+   */
   this.writeCount_ = 0;
 
-  // Data we've read so we can ack it to the server.
+  /**
+   * Data we've read so we can ack it to the server.
+   *
+   * @type {!bigint}
+   */
   this.readCount_ = BigInt(0);
 
-  // Data we've written that the server has acked.
+  /**
+   * Data we've written that the server has acked.
+   *
+   * @type {!bigint}
+   */
   this.writeAckCount_ = BigInt(0);
 
-  // Session id for reconnecting.
+  /**
+   * Session id for reconnecting.
+   *
+   * @type {?string}
+   */
   this.sid_ = null;
 
   // Keep track of overall connection to avoid infinite recursion.
@@ -370,6 +387,12 @@ nassh.Stream.RelayCorpv4WS.prototype.onSocketData_ = function(e) {
       // Fallthrough.
 
     case nassh.Stream.RelayCorpv4.PacketTag.ACK: {
+      /**
+       * Closure compiler hasn't finished bigint support yet, so this expression
+       * between 2 bigints is unknown.  Disable for now.
+       *
+       * @suppress {strictPrimitiveOperators}
+       */
       const acked = Number(packet.ack - this.writeAckCount_);
       if (acked == 0) {
         // This can come up with reconnects, but should handle it either way.

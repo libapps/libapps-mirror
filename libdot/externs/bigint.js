@@ -10,7 +10,7 @@
  */
 
 /**
- * @param {number} n
- * @return {number}
+ * @param {*=} n
+ * @return {bigint}
  */
 var BigInt = function(n) {};
