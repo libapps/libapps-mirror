@@ -15,15 +15,16 @@ lib.Storage = function() {};
 /**
  * Register a function to observe storage changes.
  *
- * @param {function(!Object)} callback The function to invoke when the storage
- *     changes.
+ * @param {function(!Object<string, !StorageChange>)} callback The function to
+ *     invoke when the storage changes.
  */
 lib.Storage.prototype.addObserver = function(callback) {};
 
 /**
  * Unregister a change observer.
  *
- * @param {function(!Object)} callback A previously registered callback.
+ * @param {function(!Object<string, !StorageChange>)} callback A previously
+ *     registered callback.
  */
 lib.Storage.prototype.removeObserver = function(callback) {};
 

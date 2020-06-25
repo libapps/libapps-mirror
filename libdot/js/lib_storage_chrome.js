@@ -24,17 +24,9 @@ lib.Storage.Chrome = function(storage) {
  *
  * @param {!Object<string, !StorageChange>} changes Object mapping each key that
  *     changed to its corresponding StorageChange for that item.
- * @param {string} areaname The name of the storage area ("sync", "local",
- *     or "managed") the changes are for.
  */
-lib.Storage.Chrome.prototype.onChanged_ = function(changes, areaname) {
-  if (chrome.storage[areaname] != this.storage_) {
-    return;
-  }
-
-  for (let i = 0; i < this.observers_.length; i++) {
-    this.observers_[i](changes);
-  }
+lib.Storage.Chrome.prototype.onChanged_ = function(changes) {
+  this.observers_.forEach((o) => o(changes));
 };
 
 /**
