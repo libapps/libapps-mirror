@@ -83,33 +83,15 @@ lib.Storage.TerminalPrivate.prototype.initCache_ = function() {
  */
 lib.Storage.TerminalPrivate.prototype.onSettingsChanged_ = function(settings) {
   // Check what is deleted.
-  const e = {};
-  for (const key in this.prefValue_) {
-    if (!settings.hasOwnProperty(key)) {
-      e[key] = {oldValue: this.prefValue_[key], newValue: undefined};
-    }
-  }
-  for (const key in e) {
-    delete this.prefValue_[key];
-  }
+  const changes = lib.Storage.generateStorageChanges(this.prefValue_, settings);
+  this.prefValue_ = settings;
 
-  // Check what has changed.
-  for (const key in settings) {
-    const oldValue = this.prefValue_[key];
-    const newValue = settings[key];
-    if (newValue === oldValue ||
-        JSON.stringify(newValue) === JSON.stringify(oldValue)) {
-      continue;
-    }
-    e[key] = {oldValue, newValue};
-    this.prefValue_[key] = newValue;
+  // Don't bother notifying if there are no changes.
+  if (Object.keys(changes).length) {
+    setTimeout(() => {
+      this.observers_.forEach((o) => o(changes));
+    });
   }
-
-  setTimeout(() => {
-    for (const observer of this.observers_) {
-      observer(e);
-    }
-  }, 0);
 };
 
 /**
@@ -234,11 +216,9 @@ lib.Storage.TerminalPrivate.prototype.setItem = async function(key, value) {
 lib.Storage.TerminalPrivate.prototype.setItems = async function(obj) {
   await this.initCache_();
 
-  const e = {};
-  for (const key in obj) {
-    e[key] = {oldValue: this.prefValue_[key], newValue: obj[key]};
-    this.prefValue_[key] = obj[key];
-  }
+  const newStorage = Object.assign({}, this.prefValue_, obj);
+  const e = lib.Storage.generateStorageChanges(this.prefValue_, newStorage);
+  this.prefValue_ = newStorage;
 
   await this.setPref_();
 

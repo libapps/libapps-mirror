@@ -46,10 +46,7 @@ lib.Storage.Memory.prototype.removeObserver = function(callback) {
  * @override
  */
 lib.Storage.Memory.prototype.clear = async function() {
-  const e = {};
-  for (const key in this.storage_) {
-    e[key] = {oldValue: this.storage_[key], newValue: undefined};
-  }
+  const e = lib.Storage.generateStorageChanges(this.storage_, {});
 
   this.storage_ = {};
 
@@ -112,14 +109,13 @@ lib.Storage.Memory.prototype.setItem = async function(key, value) {
  * @override
  */
 lib.Storage.Memory.prototype.setItems = async function(obj) {
-  const e = {};
-
+  const newStorage = Object.assign({}, this.storage_);
   for (const key in obj) {
     // Normalize through JSON to mimic Local/Chrome backends.
-    const newValue = JSON.parse(JSON.stringify(obj[key]));
-    e[key] = {oldValue: this.storage_[key], newValue: newValue};
-    this.storage_[key] = newValue;
+    newStorage[key] = JSON.parse(JSON.stringify(obj[key]));
   }
+  const e = lib.Storage.generateStorageChanges(this.storage_, newStorage);
+  this.storage_ = newStorage;
 
   // Force deferment for the standard API.
   await 0;

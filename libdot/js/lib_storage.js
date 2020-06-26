@@ -85,3 +85,42 @@ lib.Storage.prototype.removeItem = async function(key) {};
  * @param {!Array<string>} keys The keys to be removed.
  */
 lib.Storage.prototype.removeItems = async function(keys) {};
+
+/**
+ * Create the set of changes between two states.
+ *
+ * This is used to synthesize the equivalent of Chrome's StorageEvent for use
+ * by our stub APIs and testsuites.  We expect Chrome's StorageEvent to also
+ * match the web's Storage API & window.onstorage events.
+ *
+ * @param {!Object<string, *>} oldStorage The old storage state.
+ * @param {!Object<string, *>} newStorage The new storage state.
+ * @return {!Object<string, {oldValue: ?, newValue: ?}>} The changes.
+ */
+lib.Storage.generateStorageChanges = function(oldStorage, newStorage) {
+  const changes = {};
+
+  // See what's changed.
+  for (const key in newStorage) {
+    const newValue = newStorage[key];
+    if (oldStorage.hasOwnProperty(key)) {
+      // Key has been updated.
+      const oldValue = oldStorage[key];
+      if (oldValue !== newValue) {
+        changes[key] = {oldValue, newValue};
+      }
+    } else {
+      // Key has been added.
+      changes[key] = {newValue};
+    }
+  }
+
+  // See what's deleted.
+  for (const key in oldStorage) {
+    if (!newStorage.hasOwnProperty(key)) {
+      changes[key] = {oldValue: oldStorage[key]};
+    }
+  }
+
+  return changes;
+};
