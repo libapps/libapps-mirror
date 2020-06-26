@@ -15,14 +15,18 @@ describe('lib_storage_terminal_private_tests.js', () => {
  */
 class StorageAreaFake {
   constructor() {
+    /** @private {!Object<string, *>} */
     this.storage_ = {};
+
+    /** @const @private {!Array<function(!Object)>} */
+    this.listeners_ = [];
 
     /**
      * @type {!ChromeEvent}
      * @suppress {checkTypes} The mock is not an exact match.
      */
     this.onSettingsChanged = {
-      addListener: () => {},
+      addListener: (listener) => this.listeners_.push(listener),
     };
   }
 
@@ -46,6 +50,7 @@ class StorageAreaFake {
     assert.equal('function', typeof callback);
 
     this.storage_ = Object.assign({}, items);
+    this.listeners_.forEach((listener) => listener(this.storage_));
     setTimeout(callback);
   }
 }

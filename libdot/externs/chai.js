@@ -35,7 +35,9 @@ chai.assert.isAbove =
 chai.assert.lengthOf =
 chai.assert.notEqual =
 chai.assert.notStrictEqual =
-chai.assert.strictEqual = function(actual, expected, message) {};
+chai.assert.strictEqual =
+chai.assert.typeOf =
+    function(actual, expected, message) {};
 
 /**
  * @param {*} actual
@@ -44,7 +46,10 @@ chai.assert.strictEqual = function(actual, expected, message) {};
  */
 chai.assert.match = function(actual, expected, message) {};
 
-/** @param {string=} message */
+/**
+ * @param {string=} message
+ * @closurePrimitive {asserts.fail}
+ */
 chai.assert.fail = function(message) {};
 
 /**
