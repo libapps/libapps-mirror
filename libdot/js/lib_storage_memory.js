@@ -81,20 +81,11 @@ lib.Storage.Memory.prototype.getItems = async function(keys) {
     keys = Object.keys(this.storage_);
   }
 
-  for (let i = keys.length - 1; i >= 0; i--) {
-    const key = keys[i];
-    const value = this.storage_[key];
-    if (typeof value == 'string') {
-      try {
-        rv[key] = JSON.parse(value);
-      } catch (e) {
-        // If we can't parse the value, just return it unparsed.
-        rv[key] = value;
-      }
-    } else {
-      keys.splice(i, 1);
+  keys.forEach((key) => {
+    if (this.storage_.hasOwnProperty(key)) {
+      rv[key] = this.storage_[key];
     }
-  }
+  });
 
   // Force deferment for the standard API.
   await 0;
@@ -124,8 +115,10 @@ lib.Storage.Memory.prototype.setItems = async function(obj) {
   const e = {};
 
   for (const key in obj) {
-    e[key] = {oldValue: this.storage_[key], newValue: obj[key]};
-    this.storage_[key] = JSON.stringify(obj[key]);
+    // Normalize through JSON to mimic Local/Chrome backends.
+    const newValue = JSON.parse(JSON.stringify(obj[key]));
+    e[key] = {oldValue: this.storage_[key], newValue: newValue};
+    this.storage_[key] = newValue;
   }
 
   // Force deferment for the standard API.
