@@ -151,14 +151,31 @@ lib.Storage.TerminalPrivate.prototype.removeObserver = function(callback) {
 };
 
 /**
+ * Update the internal storage state and generate change events for it.
+ *
+ * @param {!Object<string, *>} newStorage
+ */
+lib.Storage.TerminalPrivate.prototype.update_ = async function(newStorage) {
+  const changes = lib.Storage.generateStorageChanges(
+      this.prefValue_, newStorage);
+  this.prefValue_ = newStorage;
+
+  await this.setPref_();
+
+  // Don't bother notifying if there are no changes.
+  if (Object.keys(changes).length) {
+    this.observers_.forEach((o) => o(changes));
+  }
+};
+
+/**
  * Delete everything in this storage.
  *
  * @override
  */
 lib.Storage.TerminalPrivate.prototype.clear = async function() {
   await this.initCache_();
-  this.prefValue_ = {};
-  return this.setPref_();
+  return this.update_({});
 };
 
 /**
@@ -215,14 +232,7 @@ lib.Storage.TerminalPrivate.prototype.setItem = async function(key, value) {
  */
 lib.Storage.TerminalPrivate.prototype.setItems = async function(obj) {
   await this.initCache_();
-
-  const newStorage = Object.assign({}, this.prefValue_, obj);
-  const e = lib.Storage.generateStorageChanges(this.prefValue_, newStorage);
-  this.prefValue_ = newStorage;
-
-  await this.setPref_();
-
-  this.observers_.forEach((o) => o(e));
+  return this.update_(Object.assign({}, this.prefValue_, obj));
 };
 
 /**
@@ -243,8 +253,7 @@ lib.Storage.TerminalPrivate.prototype.removeItem = async function(key) {
  */
 lib.Storage.TerminalPrivate.prototype.removeItems = async function(keys) {
   await this.initCache_();
-  for (const key of keys) {
-    delete this.prefValue_[key];
-  }
-  return this.setPref_();
+  const newStorage = Object.assign({}, this.prefValue_);
+  keys.forEach((key) => delete newStorage[key]);
+  return this.update_(newStorage);
 };

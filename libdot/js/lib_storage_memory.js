@@ -41,19 +41,30 @@ lib.Storage.Memory.prototype.removeObserver = function(callback) {
 };
 
 /**
+ * Update the internal storage state and generate change events for it.
+ *
+ * @param {!Object<string, *>} newStorage
+ */
+lib.Storage.Memory.prototype.update_ = async function(newStorage) {
+  const changes = lib.Storage.generateStorageChanges(this.storage_, newStorage);
+  this.storage_ = newStorage;
+
+  // Force deferment for the standard API.
+  await 0;
+
+  // Don't bother notifying if there are no changes.
+  if (Object.keys(changes).length) {
+    this.observers_.forEach((o) => o(changes));
+  }
+};
+
+/**
  * Delete everything in this storage.
  *
  * @override
  */
 lib.Storage.Memory.prototype.clear = async function() {
-  const e = lib.Storage.generateStorageChanges(this.storage_, {});
-
-  this.storage_ = {};
-
-  // Force deferment for the standard API.
-  await 0;
-
-  this.observers_.forEach((o) => o(e));
+  return this.update_({});
 };
 
 /**
@@ -114,13 +125,7 @@ lib.Storage.Memory.prototype.setItems = async function(obj) {
     // Normalize through JSON to mimic Local/Chrome backends.
     newStorage[key] = JSON.parse(JSON.stringify(obj[key]));
   }
-  const e = lib.Storage.generateStorageChanges(this.storage_, newStorage);
-  this.storage_ = newStorage;
-
-  // Force deferment for the standard API.
-  await 0;
-
-  this.observers_.forEach((o) => o(e));
+  return this.update_(newStorage);
 };
 
 /**
@@ -140,10 +145,7 @@ lib.Storage.Memory.prototype.removeItem = async function(key) {
  * @override
  */
 lib.Storage.Memory.prototype.removeItems = async function(keys) {
-  for (let i = 0; i < keys.length; i++) {
-    delete this.storage_[keys[i]];
-  }
-
-  // Force deferment for the standard API.
-  await 0;
+  const newStorage = Object.assign({}, this.storage_);
+  keys.forEach((key) => delete newStorage[key]);
+  return this.update_(newStorage);
 };
