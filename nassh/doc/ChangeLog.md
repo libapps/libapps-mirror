@@ -1,3 +1,39 @@
+# 0.33, 2020-07-06, OpenSSH 8.3p1, UI tweaks, bug fixes, and internal cleanups.
+
+* Update to hterm 1.90.  Material design theming.
+* Update to libdot 7.0.0.  Tooling updates.
+* storage: Convert get APIs to promises.
+* storage: Convert set APIs to promises.
+* fonts: Load web fonts in css and package powerline fonts.
+* npm: Refresh tool versions.
+* lib.init: Rewrite from callbacks to promises.
+* gnubby: Give it a dedicated namespace.
+* terminal: Pull init out of constructor.
+* i18n: change getAcceptLanguages from callbacks to promises.
+* Make ES2018 requirement official.
+* command: Remove unused FS helpers.
+* contextmenu: Send known_hosts context menu to options page.
+* google: Split common logic out of the relay module.
+* omnibox: Read storage at startup.
+* connect: Move lastProfileId to local prefs.
+* omnibox: Use arrow funcs.
+* connect: Make focused inputs less confusing.
+* connect: Fix button init on first run.
+* connect: Make DEL button enablement more robust.
+* l10n: Improve some descriptions and translation tips.
+* ssh_client: Upgrade to OpenSSH 8.3p1.
+* command: Fix --no-proxy-host handling.
+* docs: Fix the `/v4/connect` path on documentation.
+* google: Default internal Google Cloud VM users to new proxy protocol.
+* icons: Refresh stable icon themes.
+* fsp: Switch to Chrome error constants.
+* nasftp: Drop Event.reason externs workaround.
+* licenses: Fix to be able to load in chrome-untrusted.
+* ssh_client: Clean up cpplint warnings.
+* SSHAgentRelay: Use new nassh.buffer API.
+* l10n: Update translations.
+* l10n: Rename the OPTIONS_BUTTON_LABEL to HTERM_OPTIONS_BUTTON_LABEL.
+
 # 0.32, 2020-05-16, Fix relay buffer accumulation.
 
 * corp relay: Fix ack-vs-read typo.
