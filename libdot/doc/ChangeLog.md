@@ -1,3 +1,70 @@
+# 7.0.0, 2020-07-06, ES2018, lint/tooling updates, and rewrite storage & init APIs to Promises.
+
+* tests: storage: Add observer/change event coverage.
+* storage: memory/terminal: Fix missing change events for clear/remove.
+* storage: Add helper for generating change events.
+* storage: memory: Simplify JSON serialization logic to fix change events.
+* storage: Convert get APIs to promises.
+* storage: Convert set APIs to promises.
+* storage: Convert remove APIs to promises.
+* storage: Convert clear API to promises.
+* storage: terminal: Change setPref to promises.
+* closure: Update to v20200614.
+* tests: storage: Add coverage for all backends.
+* storage: terminal: Fix chrome.runtime.lastError handling.
+* storage: chrome: Listen to the storage directly.
+* storage: chrome: Fix getItem API.
+* storage: chrome/local/memory: Simplify get/set/remove item helpers.
+* storage: local/terminal: Make backing storage an argument.
+* libdot.py: Add helpers for creating archiving.
+* mdlint: New tool for linting markdown files.
+* eslint: Check embedded <script> content.
+* npm: Refresh tool versions.
+* lib.init: Rewrite from callbacks to promises.
+* storage: terminal: Pull init out of constructor.
+* i18n: Change getAcceptLanguages from callbacks to promises.
+* Make ES2018 requirement official.
+* fs: Drop unused log & err helpers.
+* lint: Run whitespace checks on svg/xml files.
+* pylint: Do not crash on missing files.
+* gitignore: Split bin/ out.
+* externs: Switch to generated terminalPrivate externs.
+* lint: Add shortcuts to narrow down selection.
+* lint: Also lint the top level files.
+* lint: Make unlinted files into warnings.
+* cpplint: Promote from ssh_client.
+* imgcrush: Update to latest version.
+* libdot.py: fetch: Add base64 support.
+* libdot.py: fetch_data: New helper for fetching data directly.
+* lint/pylint: Pull dynamic logic out of kokoro.
+* link: Add --version to show all tools we use.
+* lint: Do not try to lint .patch files.
+* lint: Add basic html & text file checks.
+* lint: Change default behavior to look at all files.
+* closure-compiler: Merge with dedicated tool.
+* eslint: Split out into dedicated tool.
+* npm: Rework how we invoke node programs.
+* libdot.py: run: Extend API for nicer logging.
+* node: Fix Windows syncing.
+* pylint: Refactor to use new tool guidelines.
+* docs: Add guidelines for tools.
+* lint: Filter out generated paths from Gerrit comments.
+* imgcrush: Rewrite using pathlib.
+* libdot.py: Convert constants to pathlib.Path.
+* wcwidth: Add logic to automate downloading.
+* wcwidth: Rewrite using pathlib.
+* wcwidth: Update to Unicode 13.0.0 release.
+* get_relative_path: Drop unused helper.
+* externs: Force ordering of modules.
+* lint: closure: Sort externs paths.
+* fetch: Add a 5 min timeout.
+* load_tests: Pass through mocha --reporter setting.
+* closure-compiler: Pull Chrome externs from upstream.
+* externs: browser/chrome: Drop custom Chrome externs.
+* eslint: Enable no-multi-spacesfix checks.
+* pylint: Handle newer systems w/out pylint3.
+* storage: chrome: Fix JSDoc event type annotations.
+
 # 6.0.0, 2020-04-29, Tons of linting cleanups.
 
 * externs: Add/fix more APIs.
