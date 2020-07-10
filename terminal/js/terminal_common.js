@@ -99,6 +99,8 @@ export function definePrefs(prefs) {
   prefs.definePreference('font-family', fontFamilyToCSS(DEFAULT_FONT_FAMILY));
   prefs.definePreference('font-size', DEFAULT_FONT_SIZE);
   prefs.definePreference('foreground-color', DEFAULT_FOREGROUND_COLOR);
+  prefs.definePreference('pass-alt-number', false);
+  prefs.definePreference('pass-ctrl-number', false);
   prefs.definePreference('pass-ctrl-tab', true);
   prefs.definePreference('screen-padding-size', DEFAULT_SCREEN_PADDING_SIZE);
   prefs.definePreference('theme', DEFAULT_THEME);
