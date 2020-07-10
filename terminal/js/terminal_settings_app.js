@@ -373,6 +373,12 @@ export class TerminalSettingsApp extends LitElement {
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
+                  title="${msg('HTERM_PREF_PASS_ALT_NUMBER')}">
+                <h4>${msg('HTERM_NAME_PREF_PASS_ALT_NUMBER')}</h4>
+                <terminal-settings-checkbox preference="pass-alt-number">
+                </terminal-settings-checkbox>
+              </li>
+              <li class="setting-container"
                   title="${msg('HTERM_PREF_CTRL_PLUS_MINUS_ZERO_ZOOM')}">
                 <h4>${msg('HTERM_NAME_PREF_CTRL_PLUS_MINUS_ZERO_ZOOM')}</h4>
                 <terminal-settings-checkbox
