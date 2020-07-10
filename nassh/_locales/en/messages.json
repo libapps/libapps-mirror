@@ -491,7 +491,7 @@
 	},
 	"HTERM_NAME_PREF_PASS_ALT_NUMBER": {
 		"description": "Label text shown for the 'pass-alt-number' preference. 'Alt' is the name of the keyboard button and may be translated as makes sense.",
-		"message": "Alt+1..9 switch tab behavior"
+		"message": "Alt+1..9 switch tab/app behavior"
 	},
 	"HTERM_NAME_PREF_PASS_CTRL_N": {
 		"description": "Label text shown for the 'pass-ctrl-n' preference.",
@@ -807,7 +807,7 @@
 	},
 	"HTERM_PREF_PASS_ALT_NUMBER": {
 		"description": "Help text shown for the 'pass-alt-number' preference. 'Alt' is the name of the keyboard button and may be translated as makes sense.",
-		"message": "Whether Alt+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab\" keyboard shortcuts. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Alt+1..9 will be handled by the browser. If false, Alt+1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
+		"message": "Whether Alt+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's \"switch to tab/app\" keyboard shortcuts. When not running in a tab it's better to send these keys to the host so they can be used in vim or emacs.\n\nIf true, Alt+1..9 will be handled by the browser. If false, Alt+1..9 will be sent to the host. If null, autodetect based on browser platform and window type."
 	},
 	"HTERM_PREF_PASS_CTRL_N": {
 		"description": "Help text shown for the 'pass-ctrl-n' preference. 'Ctrl' is the name of the keyboard button and may be translated as makes sense.",
