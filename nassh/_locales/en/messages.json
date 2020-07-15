@@ -272,7 +272,21 @@
 	"HTERM_BUTTON_PREVIOUS": {
 		"description": "Button label for moving to the previous found entry when finding text in the terminal output.",
 		"message": "Previous"
-	},
+  },
+  "HTERM_FIND_MATCH_COUNT" : {
+    "description": "Text displayed in the find bar to show how many matches were found, and which is currently selected. E.g '1/3' means 'the 1st of 3 results'.",
+    "message": "$ORDINAL$/$COUNT$",
+    "placeholders": {
+			"ORDINAL": {
+				"content": "$1",
+				"example": "1"
+			},
+			"COUNT": {
+				"content": "$2",
+				"example": "3"
+			}
+		}
+  },
 	"HTERM_LOADING_RESOURCE_FAILED": {
 		"description": "Message shown to the user when loading a resource (image, audio file, video, etc...) failed for any reason.",
 		"message": "Loading $RESOURCE$ failed",
