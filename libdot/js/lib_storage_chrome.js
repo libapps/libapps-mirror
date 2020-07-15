@@ -16,7 +16,19 @@ lib.Storage.Chrome = function(storage) {
   this.storage_ = storage;
   this.observers_ = [];
 
-  storage.onChanged.addListener(this.onChanged_.bind(this));
+  // R73 introduced onChanged for the storage area.  Keep backwards compat
+  // for EOL systems until we drop app support completely.
+  if (storage.onChanged) {
+    // Newer R73+ code.
+    storage.onChanged.addListener(this.onChanged_.bind(this));
+  } else {
+    // Older <R73 code.
+    chrome.storage.onChanged.addListener((changes, areaname) => {
+      if (chrome.storage[areaname] === this.storage_) {
+        this.onChanged_(changes);
+      }
+    });
+  }
 };
 
 /**
