@@ -436,6 +436,10 @@
 	"HTERM_NAME_PREF_FIND_RESULT_COLOR": {
 		"description": "Label text shown for the 'find-result-color' preference.",
 		"message": "Find results highlight color"
+  },
+	"HTERM_NAME_PREF_FIND_RESULT_SELECTED_COLOR": {
+		"description": "Label text shown for the 'find-result-selected-color' preference.",
+		"message": "Find results selected highlight color"
 	},
 	"HTERM_NAME_PREF_FONT_FAMILY": {
 		"description": "Label text shown for the 'font-family' preference.",
@@ -752,6 +756,10 @@
 	"HTERM_PREF_FIND_RESULT_COLOR": {
 		"description": "Help text shown for the 'find-result-color' preference.",
 		"message": "The background color to highlight find results."
+  },
+	"HTERM_PREF_FIND_RESULT_SELECTED_COLOR": {
+		"description": "Help text shown for the 'find-result-selected-color' preference.",
+		"message": "The background color to highlight the selected find result."
 	},
 	"HTERM_PREF_FONT_FAMILY": {
 		"description": "Help text shown for the 'font-family' preference.",
