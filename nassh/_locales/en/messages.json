@@ -273,7 +273,7 @@
 		"description": "Button label for moving to the previous found entry when finding text in the terminal output.",
 		"message": "Previous"
 	},
-	"HTERM_FIND_MATCH_COUNT": {
+	"HTERM_FIND_COUNTER_LABEL": {
 		"description": "Text displayed in the find bar to show how many matches were found, and which is currently selected. E.g '1/3' means 'the 1st of 3 results'.",
 		"message": "$ORDINAL$/$COUNT$",
 		"placeholders": {
@@ -284,6 +284,16 @@
 			"ORDINAL": {
 				"content": "$1",
 				"example": "1"
+			}
+		}
+	},
+	"HTERM_FIND_RESULT_COUNT": {
+		"description": "Text displayed in the find bar to show how many matches were found. E.g '3 matches' means '3 results'.",
+		"message": "$COUNT$ matches",
+		"placeholders": {
+			"COUNT": {
+				"content": "$1",
+				"example": "3"
 			}
 		}
 	},
