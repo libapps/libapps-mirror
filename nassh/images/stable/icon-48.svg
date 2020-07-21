@@ -17,12 +17,12 @@
   </linearGradient>
 </defs>
 
-<rect x="5%" y="10%" width="90%" height="80%" rx="10%" fill="url(#bgGradient)" />
+<rect x="2%" y="4%" width="96%" height="92%" rx="10%" fill="url(#bgGradient)" />
 
-<polyline points="12,18 18,24 12,30" shape-rendering="crispEdges"
-          stroke-width="2" fill="none" class="red" />
+<polyline points="9,15 18,24 9,33" shape-rendering="crispEdges"
+          stroke-width="4" fill="none" class="red" />
 
-<line x1="25" y1="27" x2="36" y2="27" shape-rendering="crispEdges"
-      stroke-width="3" class="yellow" />
+<line x1="25" y1="28" x2="40" y2="28" shape-rendering="crispEdges"
+      stroke-width="5" class="yellow" />
 
 </svg>
