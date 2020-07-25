@@ -1179,9 +1179,13 @@ nassh.CommandInstance.postProcessOptions = function(
       '--use-ssl': true,
       '--report-ack-latency': true,
       '--report-connect-attempts': true,
-      '--resume-connection': false,
       '--relay-protocol': 'v2',
       '--ssh-agent': 'gnubby',
+    }, rv);
+
+    // Default enable connection resumption when using newer proxy mode.
+    rv = Object.assign({
+      '--resume-connection': rv['--proxy-mode'] === 'corp-relay-v4@google.com',
     }, rv);
   }
 

@@ -286,41 +286,57 @@ describe('proxy-host-addresses', () => {
  * Verify default proxy-host settings.
  */
 describe('default-proxy-host', () => {
+  const modeOld = 'corp-relay@google.com';
+  const modev4 = 'corp-relay-v4@google.com';
   const tests = [
     // Proxy host unrelated to Google.
     ['--proxy-host=proxy.example.com', 'example.com',
-     undefined, 'proxy.example.com', 'root'],
+     undefined, 'proxy.example.com', 'root', modeOld, undefined],
 
     // Default Google settings.
     ['--config=google', 'example.com',
-     '443', 'ssh-relay.corp.google.com', 'root'],
+     '443', 'ssh-relay.corp.google.com', 'root', modeOld, false],
 
     // Default cloudtop Google settings.
     ['--config=google', 'example.c.googlers.com',
-     '443', 'sup-ssh-relay.corp.google.com', 'root'],
+     '443', 'sup-ssh-relay.corp.google.com', 'root', modev4, true],
 
     // Default internal GCE settings.
     ['--config=google', 'example.internal.gcpnode.com',
-     '443', 'sup-ssh-relay.corp.google.com', 'root'],
+     '443', 'sup-ssh-relay.corp.google.com', 'root', modev4, true],
     ['--config=google', 'example.proxy.gcpnode.com',
-     '443', 'sup-ssh-relay.corp.google.com', 'root'],
+     '443', 'sup-ssh-relay.corp.google.com', 'root', modev4, true],
 
     // Explicit proxy settings override defaults.
     ['--config=google --proxy-host=example.com', 'example.c.googlers.com',
-     '443', 'example.com', 'root'],
+     '443', 'example.com', 'root', modev4, true],
 
     // Username settings.
     ['--config=google --proxy-host=example.com --proxy-user=user',
-     'example.c.googlers.com', '443', 'example.com', 'user'],
+     'example.c.googlers.com', '443', 'example.com', 'user', modev4, true],
+
+    // Mode settings.
+    ['--config=google --proxy-mode=foo', 'example.com',
+     '443', 'ssh-relay.corp.google.com', 'root', 'foo', false],
+    ['--config=google --proxy-mode=foo', 'example.internal.gcpnode.com',
+     '443', 'sup-ssh-relay.corp.google.com', 'root', 'foo', false],
+
+    // Resume settings.
+    ['--config=google --resume-connection', 'example.com',
+     '443', 'ssh-relay.corp.google.com', 'root', modeOld, true],
+    ['--config=google --no-resume-connection', 'example.internal.gcpnode.com',
+     '443', 'sup-ssh-relay.corp.google.com', 'root', modev4, false],
   ];
 
-  tests.forEach(([options, host, port, relay, user]) => {
+  tests.forEach(([options, host, port, relay, user, mode, resume]) => {
     it(`default relay for '${options}' & '${host}'`, () => {
       let rv = nassh.CommandInstance.tokenizeOptions(options);
       rv = nassh.CommandInstance.postProcessOptions(rv, host, 'root');
       assert.equal(port, rv['--proxy-port']);
       assert.equal(relay, rv['--proxy-host']);
       assert.equal(user, rv['--proxy-user']);
+      assert.equal(mode, rv['--proxy-mode']);
+      assert.equal(resume, rv['--resume-connection']);
     });
   });
 });
