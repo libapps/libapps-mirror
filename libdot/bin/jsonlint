@@ -1,0 +1,142 @@
+#!/usr/bin/env python3
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Lint various JSON files."""
+
+import collections
+import difflib
+import json
+import logging
+from pathlib import Path
+import sys
+from typing import List
+
+import libdot
+
+
+def filter_known_files(paths: List[Path]) -> List[Path]:
+    """Figure out what files this linter supports."""
+    ret = []
+    for path in paths:
+        path = Path(path)
+
+        if path.suffix[1:] in {'json'} and path.exists():
+            ret += [path]
+
+    return [str(x) for x in ret]
+
+
+def setup():
+    """Initialize the tool settings."""
+
+
+def check_common(path: Path, old_data: bytes, new_data: bytes,
+                 fix: bool = False) -> bool:
+    """Verify the style is what we want."""
+    # We want a trailing new line on all text files.
+    new_data += '\n'
+
+    if old_data == new_data:
+        return True
+
+    if fix:
+        with open(path, 'w', encoding='utf-8') as fp:
+            fp.write(new_data)
+        return True
+
+    diff = difflib.unified_diff(old_data.splitlines(), new_data.splitlines(),
+                                n=2, lineterm='')
+    # Skip the --- line.
+    next(diff)
+    # Skip the +++ line.
+    next(diff)
+    logging.error('%s: needs reformatting\n%s', path, '\n'.join(diff))
+    return False
+
+
+def check_generic(path: Path, fix: bool = False) -> bool:
+    """Check style on a JSON file."""
+    with open(path, 'r', encoding='utf-8') as fp:
+        old_data = fp.read()
+
+    # We use 2 space tab indents for most files, and we do not require keys be
+    # sorted so they can be logically grouped.
+    data = json.loads(old_data, object_pairs_hook=collections.OrderedDict)
+    new_data = json.dumps(data, ensure_ascii=False, indent=2, sort_keys=False)
+
+    return check_common(path, old_data, new_data, fix=fix)
+
+
+def check_messages(path: Path, fix: bool = False) -> bool:
+    """Check style on a messages.json file."""
+    with open(path, 'r', encoding='utf-8') as fp:
+        old_data = fp.read()
+
+    # We use tabs for messages.json to save a little on disk, and keep the keys
+    # sorted as this content is mostly machine managed.
+    data = json.loads(old_data)
+    new_data = json.dumps(data, ensure_ascii=False, indent='\t', sort_keys=True)
+
+    return check_common(path, old_data, new_data, fix=fix)
+
+
+def check_files(paths: List[Path], fix: bool = False) -> bool:
+    """Check all the JSON files."""
+    ret = True
+    for path in paths:
+        path = Path(path)
+        if not path.exists():
+            logging.error('%s: file does not exist', path)
+            ret = False
+            continue
+
+        logging.debug('Checking %s', path)
+        if path.name == 'messages.json':
+            ret &= check_messages(path, fix=fix)
+        else:
+            ret &= check_generic(path, fix=fix)
+    return ret
+
+
+def run(argv=(), **kwargs):
+    """Run the tool directly."""
+    setup()
+    logging.info('Linting JSON files %s', libdot.cmdstr(argv))
+    return check_files(argv, **kwargs)
+
+
+def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):  # pylint: disable=unused-argument
+    """Run high level tool logic."""
+    argv = list(argv)
+    paths = list(paths)
+
+    # TODO(vapier): Add support for Gerrit comments.
+
+    return check_files(argv + paths, fix=fix)
+
+
+def get_parser():
+    """Get a command line parser."""
+    parser = libdot.ArgumentParser(description=__doc__, short_options=False)
+    parser.add_argument('--fix', action='store_true',
+                        help='Autofix format errors.')
+    parser.add_argument('--gerrit-comments-file',
+                        help='Save errors for posting files to Gerrit.')
+    parser.add_argument('paths', nargs='*',
+                        help='Paths to lint.')
+    return parser
+
+
+def main(argv):
+    """The main func!"""
+    parser = get_parser()
+    opts, args = parser.parse_known_args(argv)
+
+    return 0 if perform(argv=args, paths=opts.paths, fix=opts.fix,
+                        gerrit_comments_file=opts.gerrit_comments_file) else 1
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))

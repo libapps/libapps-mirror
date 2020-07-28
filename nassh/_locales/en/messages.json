@@ -272,21 +272,21 @@
 	"HTERM_BUTTON_PREVIOUS": {
 		"description": "Button label for moving to the previous found entry when finding text in the terminal output.",
 		"message": "Previous"
-  },
-  "HTERM_FIND_MATCH_COUNT" : {
-    "description": "Text displayed in the find bar to show how many matches were found, and which is currently selected. E.g '1/3' means 'the 1st of 3 results'.",
-    "message": "$ORDINAL$/$COUNT$",
-    "placeholders": {
-			"ORDINAL": {
-				"content": "$1",
-				"example": "1"
-			},
+	},
+	"HTERM_FIND_MATCH_COUNT": {
+		"description": "Text displayed in the find bar to show how many matches were found, and which is currently selected. E.g '1/3' means 'the 1st of 3 results'.",
+		"message": "$ORDINAL$/$COUNT$",
+		"placeholders": {
 			"COUNT": {
 				"content": "$2",
 				"example": "3"
+			},
+			"ORDINAL": {
+				"content": "$1",
+				"example": "1"
 			}
 		}
-  },
+	},
 	"HTERM_LOADING_RESOURCE_FAILED": {
 		"description": "Message shown to the user when loading a resource (image, audio file, video, etc...) failed for any reason.",
 		"message": "Loading $RESOURCE$ failed",
@@ -446,11 +446,11 @@
 	"HTERM_NAME_PREF_ENVIRONMENT": {
 		"description": "Label text shown for the 'environment' preference.",
 		"message": "Environment variables"
-  },
+	},
 	"HTERM_NAME_PREF_FIND_RESULT_COLOR": {
 		"description": "Label text shown for the 'find-result-color' preference.",
 		"message": "Find results highlight color"
-  },
+	},
 	"HTERM_NAME_PREF_FIND_RESULT_SELECTED_COLOR": {
 		"description": "Label text shown for the 'find-result-selected-color' preference.",
 		"message": "Find results selected highlight color"
@@ -766,11 +766,11 @@
 	"HTERM_PREF_ENVIRONMENT": {
 		"description": "Help text shown for the 'environment' preference.",
 		"message": "The initial set of environment variables, as an object."
-  },
+	},
 	"HTERM_PREF_FIND_RESULT_COLOR": {
 		"description": "Help text shown for the 'find-result-color' preference.",
 		"message": "The background color to highlight find results."
-  },
+	},
 	"HTERM_PREF_FIND_RESULT_SELECTED_COLOR": {
 		"description": "Help text shown for the 'find-result-selected-color' preference.",
 		"message": "The background color to highlight the selected find result."

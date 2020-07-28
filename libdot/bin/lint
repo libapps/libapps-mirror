@@ -157,6 +157,8 @@ def get_parser():
                        help='Lint C/C++ files.')
     group.add_argument('--js', action='store_true',
                        help='Lint JavaScript files.')
+    group.add_argument('--json', action='store_true',
+                       help='Lint JSON files.')
     group.add_argument('--md', action='store_true',
                        help='Lint Markdown files.')
     group.add_argument('--py', action='store_true',
@@ -207,7 +209,7 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
         else:
             logging.info('Skipping building dependencies due to --skip-mkdeps')
 
-    lint_groups = {'cpp', 'js', 'md', 'py', 'txt'}
+    lint_groups = {'cpp', 'js', 'json', 'md', 'py', 'txt'}
     lint_all = all(not getattr(opts, x) for x in lint_groups)
     for group in lint_groups:
         setattr(opts, group, lint_all or getattr(opts, group))
@@ -253,19 +255,26 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
     if md_files and opts.md:
         md_kwargs = {'paths': md_files, **kwargs}
         checks += [
-            lint_text_files(md_files),
+            lint_whitespace_files(md_files),
             libdot.mdlint.perform(**md_kwargs),
         ]
 
-    # TODO(vapier): Add smarter JSON linters.
+    json_files = libdot.jsonlint.filter_known_files(opts.paths)
+    tolint_paths -= set(json_files)
+    if json_files and opts.json:
+        json_kwargs = {'paths': json_files, **kwargs}
+        checks += [
+            lint_whitespace_files(json_files),
+            libdot.jsonlint.perform(**json_kwargs),
+        ]
+
     TEXT_FILENAMES = {
         '.clang-format', '.eslintrc.js', '.gitignore', '.markdownlintrc',
         '.npmrc', '.pylintrc',
         'Dockerfile', 'LICENSE', 'Makefile', 'METADATA', 'OWNERS',
     }
     TEXT_EXTENSIONS = {
-        '.cfg', '.concat', '.css', '.el', '.json', '.sh', '.svg', '.txt',
-        '.vim', '.xml',
+        '.cfg', '.concat', '.css', '.el', '.sh', '.svg', '.txt', '.vim', '.xml',
     }
     text_files = [x for x in opts.paths
                   if (os.path.basename(x) in TEXT_FILENAMES or

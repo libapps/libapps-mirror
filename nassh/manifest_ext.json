@@ -32,14 +32,22 @@
   ],
   "sockets": {
     "tcp": {
-      "connect": ["*:*"]
+      "connect": [
+        "*:*"
+      ]
     },
     "tcpServer": {
-      "listen": ["*:*"]
+      "listen": [
+        "*:*"
+      ]
     },
     "udp": {
-      "bind": ["*:*"],
-      "send": ["*:*"]
+      "bind": [
+        "*:*"
+      ],
+      "send": [
+        "*:*"
+      ]
     }
   },
   "file_system_provider_capabilities": {
