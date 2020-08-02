@@ -105,6 +105,7 @@ terminal.init = function(element) {
     const prefs = term.getPrefs();
     definePrefs(prefs);
     watchBackgroundColor(prefs, /* updateBody= */ true);
+    terminal.watchLocalStorageBackgroundImage(term);
 
     loadPowerlineWebFonts(term.getDocument());
     const onFontFamilyChanged = async (cssFontFamily) => {
@@ -307,3 +308,21 @@ terminal.migrateSettings = async function() {
   });
 };
 
+/**
+ * Set background image from local storage and listen for changes.
+ *
+ * @param {!hterm.Terminal} term
+ */
+terminal.watchLocalStorageBackgroundImage = function(term) {
+  const setBackgroundImage = (dataUrl) => {
+    if (!term.getPrefs().get('background-image')) {
+      term.setBackgroundImage(dataUrl ? `url(${dataUrl})` : '');
+    }
+  };
+  setBackgroundImage(window.localStorage.getItem('background-image'));
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'background-image') {
+      setBackgroundImage(e.newValue);
+    }
+  });
+};

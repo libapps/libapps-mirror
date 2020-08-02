@@ -13,6 +13,7 @@ import {SUPPORTED_FONT_SIZES} from './terminal_common.js';
 import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_settings_ansi_colors.js';
 import './terminal_settings_app.js';
+import './terminal_settings_background_image.js';
 import './terminal_settings_category_selector.js';
 import './terminal_settings_checkbox.js';
 import './terminal_settings_colorpicker.js';
@@ -246,6 +247,11 @@ export class TerminalSettingsApp extends LitElement {
                 <terminal-settings-colorpicker preference="background-color"
                     disableTransparency>
                 </terminal-settings-colorpicker>
+              </li>
+              <li class="setting-container"
+                  title="${msg('TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP')}">
+                <h4>${msg('TERMINAL_NAME_PREF_IMAGE')}</h4>
+                <terminal-settings-background-image />
               </li>
             </ul>
           </section>

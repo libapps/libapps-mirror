@@ -203,6 +203,10 @@
 		"description": "Placeholder for the remote username for accessing the SSH server.",
 		"message": "username"
 	},
+	"FILE_LABEL": {
+		"description": "The label for the file upload button. The file button is used for the background image to open the file dialog and choose a file from the local computer.",
+		"message": "File"
+	},
 	"FOUND_RELAY": {
 		"description": "Text displayed in the terminal when the user is connecting through a relay server (which is like a web proxy for connections). This shows the user the relay server that was found and will be used.",
 		"message": "Found relay server: $URL$",
@@ -1849,6 +1853,10 @@
 		"description": "Displayed in a text overlay when we experience an error talking to the relay server (which is like a web proxy for connections).",
 		"message": "Retrying..."
 	},
+	"REMOVE_LABEL": {
+		"description": "The label for the remove button. The remove button is used for the background image to remove any current image.",
+		"message": "Remove"
+	},
 	"REQUEST_PIN_PROMPT": {
 		"description": "Prompt shown when the user is requested to enter a smart card's PIN (i.e. a password) to unlock a specific stored key.",
 		"message": "Enter PIN to unlock key $FINGERPRINT$ on '$READER$ ($APPLET$)' ($NUM_TRIES$ tries remaining):",
@@ -1997,9 +2005,13 @@
 		"description": "The label for the settings page 'About' section.  This section will show the version of the application and give links to see licenses and submit feedback.",
 		"message": "About"
 	},
+	"TERMINAL_SETTINGS_BACKGROUND_IMAGE_ERROR_SIZE": {
+		"description": "Error text shown when the background image is too large to store.",
+		"message": "Image is too large"
+	},
 	"TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP": {
 		"description": "Help text shown for the 'background-image' preference.",
-		"message": "Background image URL. Must start with 'http://' or 'https://'. Leave it blank for no image.\n\nFor example:\n  https://goo.gl/anedTK"
+		"message": "Background image File or URL. Select a file from your computer, or enter a URL. The URL must start with 'http://' or 'https://'.\n\nFor example:\n  https://goo.gl/anedTK"
 	},
 	"TERMINAL_SETTINGS_DROPDOWN_ALT_GR_MODE_AUTO": {
 		"description": "Label for AltGr key mode 'Auto' option. See TERMINAL_PREF_ALT_GR_MODE.",
@@ -2250,6 +2262,10 @@
 	"UNMOUNT_BUTTON_LABEL": {
 		"description": "The label for the unmount button. Used to access (mount) remote directories over SSH.",
 		"message": "Unmount SFTP"
+	},
+	"URL_LABEL": {
+		"description": "The label for a URL. Used to label the URL of a background image. e.g. URL: https://goo.gl/anedTK",
+		"message": "URL"
 	},
 	"WELCOME_CHANGELOG": {
 		"description": "A link to the ChangeLog file, displayed at startup. All the text here may be translated as makes sense.",
