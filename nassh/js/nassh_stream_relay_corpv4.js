@@ -54,7 +54,10 @@ nassh.Stream.RelayCorpv4.ServerPacket = class {
       }
 
       case nassh.Stream.RelayCorpv4.PacketTag.RECONNECT_SUCCESS:
-        /** @suppress {missingProperties} closure is missing BigInt */
+        /**
+         * @suppress {missingProperties} closure is missing BigInt
+         * @type {!bigint}
+         */
         this.ack = dv.getBigUint64(2);
         break;
 
