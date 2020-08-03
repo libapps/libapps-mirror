@@ -32,8 +32,6 @@ window.addEventListener('DOMContentLoaded', () => {
     await hterm.messageManager.findAndLoadMessages(url);
   });
 
-  lib.registerInit('migrate-settings', terminal.migrateSettings);
-
   lib.init().then(() => {
     window.term_ = terminal.init(
         lib.notNull(document.querySelector('#terminal')));

@@ -284,31 +284,6 @@ terminal.Command.prototype.exit = function(code) {
 };
 
 /**
- * Migrates settings from crosh.
- * TODO(crbug.com/1019021): Remove after M83.
- *
- * @return {!Promise<void>} Resolves once settings have been migrated.
- */
-terminal.migrateSettings = async function() {
-  if (!chrome.terminalPrivate.getCroshSettings) {
-    return;
-  }
-
-  const migrated = await hterm.defaultStorage.getItem(
-      'crosh.settings.migrated');
-  if (migrated) {
-    return;
-  }
-
-  return new Promise((resolve) => {
-    chrome.terminalPrivate.getCroshSettings((settings) => {
-      settings['crosh.settings.migrated'] = true;
-      hterm.defaultStorage.setItems(settings).then(resolve);
-    });
-  });
-};
-
-/**
  * Set background image from local storage and listen for changes.
  *
  * @param {!hterm.Terminal} term

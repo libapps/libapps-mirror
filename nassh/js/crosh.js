@@ -45,7 +45,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
       hterm.defaultStorage = new lib.Storage.TerminalPrivate();
     });
     lib.registerInit('messages', nassh.loadMessages);
-    lib.registerInit('migrate-settings', Crosh.migrateSettings);
   }
 
   lib.init().then(Crosh.init);
@@ -98,34 +97,6 @@ Crosh.isWebApp = function() {
  */
 Crosh.msg = function(name, args) {
   return hterm.messageManager.get(name, args);
-};
-
-/**
- * Migrates settings from crosh extension on first run as a web app.
- * TODO(crbug.com/1019021): Remove after M83.
- *
- * Copy any settings from the previous crosh extension which were stored in
- * chrome.storage.sync.
- *
- * @return {!Promise<void>} Resolves once settings have been migrated.
- */
-Crosh.migrateSettings = async function() {
-  if (!chrome.terminalPrivate || !chrome.terminalPrivate.getCroshSettings) {
-    return;
-  }
-
-  const migrated = await hterm.defaultStorage.getItem(
-      'crosh.settings.migrated');
-  if (migrated) {
-    return;
-  }
-
-  return new Promise((resolve) => {
-    chrome.terminalPrivate.getCroshSettings((settings) => {
-      settings['crosh.settings.migrated'] = true;
-      hterm.defaultStorage.setItems(settings).then(resolve);
-    });
-  });
 };
 
 /**
