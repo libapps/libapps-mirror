@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import {definePrefs, loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily,
-  normalizePrefsInPlace, watchBackgroundColor} from './terminal_common.js';
+  watchBackgroundColor} from './terminal_common.js';
 
 export const terminal = {};
 
@@ -104,7 +104,6 @@ terminal.init = function(element) {
   term.onTerminalReady = function() {
     const prefs = term.getPrefs();
     definePrefs(prefs);
-    normalizePrefsInPlace(prefs);
     watchBackgroundColor(prefs, /* updateBody= */ true);
 
     loadPowerlineWebFonts(term.getDocument());
