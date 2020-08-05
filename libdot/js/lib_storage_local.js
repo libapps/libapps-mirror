@@ -23,6 +23,23 @@ lib.Storage.Local = function(storage = undefined) {
 };
 
 /**
+ * Returns parsed JSON, or original value if JSON.parse fails.
+ *
+ * @param {?string} jsonString The string to parse.
+ * @return {*}
+ */
+lib.Storage.Local.prototype.parseJson_ = function(jsonString) {
+  if (jsonString !== null) {
+    try {
+      return JSON.parse(jsonString);
+    } catch (e) {
+      // Ignore and return jsonString.
+    }
+  }
+  return jsonString;
+};
+
+/**
  * Called by the storage implementation when the storage is modified.
  *
  * @param {!StorageEvent} e The setting that has changed.
@@ -32,15 +49,10 @@ lib.Storage.Local.prototype.onStorage_ = function(e) {
     return;
   }
 
-  // JS throws an exception if JSON.parse is given an empty string. So here we
-  // only parse if the value is truthy. This mean the empty string, undefined
-  // and null will not be parsed.
-  const prevValue = e.oldValue ? JSON.parse(e.oldValue) : e.oldValue;
-  const curValue = e.newValue ? JSON.parse(e.newValue) : e.newValue;
   const o = {};
   o[e.key] = {
-    oldValue: prevValue,
-    newValue: curValue,
+    oldValue: this.parseJson_(e.oldValue),
+    newValue: this.parseJson_(e.newValue),
   };
 
   for (let i = 0; i < this.observers_.length; i++) {
@@ -113,12 +125,7 @@ lib.Storage.Local.prototype.getItems = async function(keys) {
     const key = keys[i];
     const value = this.storage_.getItem(key);
     if (typeof value == 'string') {
-      try {
-        rv[key] = JSON.parse(value);
-      } catch (e) {
-        // If we can't parse the value, just return it unparsed.
-        rv[key] = value;
-      }
+      rv[key] = this.parseJson_(value);
     } else {
       keys.splice(i, 1);
     }
