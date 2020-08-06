@@ -1887,6 +1887,10 @@
 		"description": "Label for saving the user's input to a file.",
 		"message": "Save"
 	},
+	"SELECT_LABEL": {
+		"description": "Label for selecting a URL or local file to use as the background image.",
+		"message": "Select"
+	},
 	"SEND_FEEDBACK_LABEL": {
 		"description": "Label for triggering feedback flow where users may submit comments, bug reports, etc...  This is used for standalone button labels and menu entries, so case may be adjusted as makes sense in those situations.",
 		"message": "Send Feedback"

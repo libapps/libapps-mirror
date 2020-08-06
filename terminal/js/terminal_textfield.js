@@ -13,6 +13,9 @@ export class TerminalTextfieldElement extends LitElement {
   /** @override */
   static get properties() {
     return {
+      placeholder: {
+        type: String,
+      },
       value: {
         type: String,
       },
@@ -77,6 +80,7 @@ export class TerminalTextfieldElement extends LitElement {
   constructor() {
     super();
 
+    this.placeholder = '';
     this.value = '';
     this.focused_ = false;
   }
@@ -86,6 +90,7 @@ export class TerminalTextfieldElement extends LitElement {
     return html`
         <div id="container">
           <input type="text"
+              .placeholder="${this.placeholder}"
               .value="${live(this.value)}"
               @blur=${() => this.focused_ = false}
               @focus=${() => this.focused_ = true}

@@ -25,6 +25,7 @@ export class TerminalSettingsTextfieldElement extends TerminalSettingsElement {
       preference: {
         type: String,
       },
+      placeholder: {},
       // The preference value. See property |converter|.
       value: {},
       // An optional converter, which converts preference value to/from display.
@@ -38,6 +39,7 @@ export class TerminalSettingsTextfieldElement extends TerminalSettingsElement {
   constructor() {
     super();
 
+    this.placeholder = '';
     /**
      * @public {{preferenceToDisplay: function(*): string,
      *           displayToPreference: function(string): *}}
@@ -49,6 +51,7 @@ export class TerminalSettingsTextfieldElement extends TerminalSettingsElement {
   render() {
     return html`
         <terminal-textfield
+            .placeholder="${this.placeholder}"
             .value="${this.converter.preferenceToDisplay(this.value)}"
             @change="${this.onUiChanged_}"
         >

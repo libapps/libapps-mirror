@@ -54,7 +54,7 @@ describe('terminal_settings_background_image_tests.js', () => {
 
   it('updates-ui-when-preference-changes', async function() {
     assert.equal(window.preferenceManager.get('background-image'), '');
-    assert.equal(this.el.imagePreviewSrc, null);
+    assert.equal('', this.el.imagePreviewSrc);
 
     await window.preferenceManager.set('background-image', `url(${hubble})`);
     assert.equal(this.el.imagePreviewSrc, hubble);
@@ -67,15 +67,6 @@ describe('terminal_settings_background_image_tests.js', () => {
 
     await window.preferenceManager.set('background-image', '');
     assert.equal(this.el.imagePreviewSrc, svgDataUrl);
-  });
-
-  it('shows-textfield-on-url-click', async function() {
-    assert.isNull(this.el.querySelector('terminal-settings-textfield'));
-    this.el.shadowRoot.querySelector('#bg-url').click();
-
-    await this.el.updateComplete;
-    assert.isNotNull(
-        this.el.shadowRoot.querySelector('terminal-settings-textfield'));
   });
 
   it('clears-pref-and-storage-on-remove-click', async function() {
@@ -91,11 +82,8 @@ describe('terminal_settings_background_image_tests.js', () => {
 
   it('shows-correct-elements', async function() {
     // No image is set.
-    assert.isNull(
-        this.el.shadowRoot.querySelector('terminal-settings-textfield'));
+    assert.isNotNull(this.el.shadowRoot.querySelector('#bg-select'));
     assert.isNull(this.el.shadowRoot.querySelector('img'));
-    assert.isNotNull(this.el.shadowRoot.querySelector('#bg-url'));
-    assert.isNotNull(this.el.shadowRoot.querySelector('#bg-file'));
     assert.isNull(this.el.shadowRoot.querySelector('#bg-remove'));
 
     // Image from local storage.
@@ -103,22 +91,41 @@ describe('terminal_settings_background_image_tests.js', () => {
     this.el.preferenceChanged_('');
     await this.el.updateComplete;
 
-    assert.isNull(
-        this.el.shadowRoot.querySelector('terminal-settings-textfield'));
+    assert.isNull(this.el.shadowRoot.querySelector('#bg-select'));
     assert.isNotNull(this.el.shadowRoot.querySelector('img'));
-    assert.isNull(this.el.shadowRoot.querySelector('#bg-url'));
-    assert.isNull(this.el.shadowRoot.querySelector('#bg-file'));
     assert.isNotNull(this.el.shadowRoot.querySelector('#bg-remove'));
 
     // Image from prefs.
     await window.preferenceManager.set('background-image', `url(${hubble})`);
     await this.el.updateComplete;
 
-    assert.isNotNull(
-        this.el.shadowRoot.querySelector('terminal-settings-textfield'));
+    assert.isNull(this.el.shadowRoot.querySelector('#bg-select'));
     assert.isNotNull(this.el.shadowRoot.querySelector('img'));
-    assert.isNull(this.el.shadowRoot.querySelector('#bg-url'));
-    assert.isNull(this.el.shadowRoot.querySelector('#bg-file'));
     assert.isNotNull(this.el.shadowRoot.querySelector('#bg-remove'));
+  });
+
+  it('restores-pref-on-cancel', async function() {
+    await window.preferenceManager.set('background-image', `url(${hubble})`);
+    assert.equal(
+        `url(${hubble})`, window.preferenceManager.get('background-image'));
+    await this.el.updateComplete;
+
+    this.el.openDialog();
+    const prefChanged1 = test.listenForPrefChange(
+        window.preferenceManager, 'background-image');
+    const textfield =
+        this.el.shadowRoot.querySelector('terminal-settings-textfield')
+            .shadowRoot.querySelector('terminal-textfield');
+    textfield.value = 'foo';
+    textfield.dispatchEvent(new Event('change'));
+    await prefChanged1;
+    assert.equal('url(http://foo)', window.preferenceManager.get('background-image'));
+
+    const prefChanged2 = test.listenForPrefChange(
+        window.preferenceManager, 'background-image');
+    this.el.shadowRoot.querySelector('terminal-settings-button.cancel').click();
+    await prefChanged2;
+    assert.equal(
+        `url(${hubble})`, window.preferenceManager.get('background-image'));
   });
 });
