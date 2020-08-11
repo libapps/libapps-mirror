@@ -1,3 +1,9 @@
+# 0.34, 2020-08-12, Some regression fixes.
+
+* icons: Increase >_ in 24px-64px icons to help with contrast.
+* Fix capturing of keyboard shortcuts in windows.
+* storage: Fix running on Chrome <R73 versions.
+
 # 0.33, 2020-07-06, OpenSSH 8.3p1, UI tweaks, bug fixes, and internal cleanups.
 
 * Update to hterm 1.90.  Material design theming.
