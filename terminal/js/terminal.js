@@ -73,6 +73,29 @@ terminal.onCtrlN = function(e, k) {
 };
 
 /**
+ * Adds some extra Chrome OS system key bindings when 'keybindings-os-defaults'
+ * pref is set. Reloads current bindings if needed.
+ *
+ * @param {!hterm.Terminal} term
+ */
+terminal.addBindings = function(term) {
+  Object.assign(hterm.Keyboard.Bindings.OsDefaults['cros'], {
+    // Dock window left/right.
+    'Alt+BRACKET_LEFT': 'PASS',
+    'Alt+BRACKET_RIGHT': 'PASS',
+    // Maximize/minimize window.
+    'Alt+EQUAL': 'PASS',
+    'Alt+MINUS': 'PASS',
+  });
+  if (term.getPrefs().get('keybindings-os-defaults')) {
+    term.keyboard.bindings.clear();
+    term.keyboard.bindings.addBindings(
+        /** @type {!Object} */ (term.getPrefs().get('keybindings') || {}),
+        true);
+  }
+};
+
+/**
  * Static initializer.
  *
  * This constructs a new hterm.Terminal instance and instructs it to run
@@ -94,6 +117,7 @@ terminal.init = function(element) {
 
     term.onOpenOptionsPage = terminal.openOptionsPage;
     term.keyboard.keyMap.keyDefs[78].control = terminal.onCtrlN;
+    terminal.addBindings(term);
     term.setCursorPosition(0, 0);
     term.setCursorVisible(true);
     term.runCommandClass(
