@@ -10,7 +10,7 @@ import {BACKGROUND_IMAGE_CONVERTER, TerminalSettingsBackgroundImageElement}
     from './terminal_settings_background_image.js';
 
 describe('terminal_settings_background_image_tests.js', () => {
-  const hubble = 'https://goo.gl/anedTK';
+  const hubble = 'https://www.google.com/earth/images/hubble_crab_neb-lg.jpg';
   const svgDataUrl = 'data:image/svg+xml;base64,' +
       'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciLz4=';
 
@@ -60,16 +60,18 @@ describe('terminal_settings_background_image_tests.js', () => {
     assert.equal(this.el.imagePreviewSrc, hubble);
   });
 
-  it('shows-pref-or-local-storage', async function() {
-    window.localStorage.setItem('background-image', svgDataUrl);
+  it('shows-preview-local-storage-if-exists-else-pref', async function() {
     await window.preferenceManager.set('background-image', `url(${hubble})`);
     assert.equal(this.el.imagePreviewSrc, hubble);
-
     await window.preferenceManager.set('background-image', '');
+    assert.equal(this.el.imagePreviewSrc, '');
+
+    window.localStorage.setItem('background-image', svgDataUrl);
+    await window.preferenceManager.set('background-image', `url(${hubble})`);
     assert.equal(this.el.imagePreviewSrc, svgDataUrl);
   });
 
-  it('clears-pref-and-storage-on-remove-click', async function() {
+  it('clears-pref-and-storage-and-preview-on-remove-click', async function() {
     window.localStorage.setItem('background-image', svgDataUrl);
     await window.preferenceManager.set('background-image', `url(${hubble})`);
 
@@ -78,6 +80,7 @@ describe('terminal_settings_background_image_tests.js', () => {
     await this.el.updateComplete;
     assert.isNull(window.localStorage.getItem('background-image'));
     assert.equal('', window.preferenceManager.get('background-image'));
+    assert.equal('', this.el.imagePreviewSrc);
   });
 
   it('shows-correct-elements', async function() {
@@ -94,6 +97,7 @@ describe('terminal_settings_background_image_tests.js', () => {
     assert.isNull(this.el.shadowRoot.querySelector('#bg-select'));
     assert.isNotNull(this.el.shadowRoot.querySelector('img'));
     assert.isNotNull(this.el.shadowRoot.querySelector('#bg-remove'));
+    window.localStorage.removeItem('background-image');
 
     // Image from prefs.
     await window.preferenceManager.set('background-image', `url(${hubble})`);
@@ -127,5 +131,24 @@ describe('terminal_settings_background_image_tests.js', () => {
     await prefChanged2;
     assert.equal(
         `url(${hubble})`, window.preferenceManager.get('background-image'));
+  });
+
+  it('clears-pref-and-updates-preview-when-local-selected', async function() {
+    await window.preferenceManager.set('background-image', `url(${hubble})`);
+    assert.equal(
+        `url(${hubble})`, window.preferenceManager.get('background-image'));
+    await this.el.updateComplete;
+
+    this.el.onFileLoad_(svgDataUrl);
+    assert.equal('', window.preferenceManager.get('background-image'));
+    assert.equal(svgDataUrl, this.el.imagePreviewSrc);
+  });
+
+  it('clears-local-and-updates-preview-when-pref-set', async function() {
+    window.localStorage.setItem('background-image', svgDataUrl);
+    this.el.value = `url(${hubble})`;
+    this.el.onOk_();
+    assert.isNull(window.localStorage.getItem('background-image'));
+    assert.equal(hubble, this.el.imagePreviewSrc);
   });
 });

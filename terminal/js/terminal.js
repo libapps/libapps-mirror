@@ -130,7 +130,7 @@ terminal.init = function(element) {
     const prefs = term.getPrefs();
     definePrefs(prefs);
     watchBackgroundColor(prefs, /* updateBody= */ true);
-    terminal.watchLocalStorageBackgroundImage(term);
+    terminal.watchBackgroundImage(term);
 
     loadPowerlineWebFonts(term.getDocument());
     const onFontFamilyChanged = async (cssFontFamily) => {
@@ -309,20 +309,25 @@ terminal.Command.prototype.exit = function(code) {
 };
 
 /**
- * Set background image from local storage and listen for changes.
+ * Set background image from local storage if exists, else use pref.
  *
  * @param {!hterm.Terminal} term
  */
-terminal.watchLocalStorageBackgroundImage = function(term) {
+terminal.watchBackgroundImage = function(term) {
+  const key = 'background-image';
   const setBackgroundImage = (dataUrl) => {
-    if (!term.getPrefs().get('background-image')) {
-      term.setBackgroundImage(dataUrl ? `url(${dataUrl})` : '');
-    }
+    term.setBackgroundImage(
+        dataUrl ? `url(${dataUrl})` : term.getPrefs().getString(key));
   };
-  setBackgroundImage(window.localStorage.getItem('background-image'));
+  setBackgroundImage(window.localStorage.getItem(key));
   window.addEventListener('storage', (e) => {
-    if (e.key === 'background-image') {
+    if (e.key === key) {
       setBackgroundImage(e.newValue);
     }
+  });
+  // hterm also observers pref, but we register after it, so we run after it,
+  // so terminal will always use a file from localStorage if it exists.
+  term.getPrefs().addObserver(key, () => {
+    setBackgroundImage(window.localStorage.getItem(key));
   });
 };

@@ -156,12 +156,9 @@ export class TerminalSettingsBackgroundImageElement extends
   /** @override */
   preferenceChanged_(prefValue) {
     super.preferenceChanged_(prefValue);
-    const prefImage = BACKGROUND_IMAGE_CONVERTER.preferenceToDisplay(prefValue);
-    if (prefImage) {
-      this.imagePreviewSrc = prefImage;
-    } else {
-      this.imagePreviewSrc = window.localStorage.getItem(this.preference) || '';
-    }
+    // Update preview img only if we don't have a local image set.
+    this.imagePreviewSrc = window.localStorage.getItem(this.preference) ||
+        BACKGROUND_IMAGE_CONVERTER.preferenceToDisplay(prefValue);
   }
 
   openDialog() {
@@ -187,8 +184,10 @@ export class TerminalSettingsBackgroundImageElement extends
 
   onOk_(event) {
     this.closeDialog();
-    if (BACKGROUND_IMAGE_CONVERTER.preferenceToDisplay(this.value)) {
+    const url = BACKGROUND_IMAGE_CONVERTER.preferenceToDisplay(this.value);
+    if (url) {
       window.localStorage.removeItem(this.preference);
+      this.imagePreviewSrc = url;
     }
   }
 
@@ -210,19 +209,24 @@ export class TerminalSettingsBackgroundImageElement extends
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.addEventListener('load', () => {
-      const dataUrl = /** @type {string} */ (reader.result);
-      try {
-        window.localStorage.setItem(this.preference, dataUrl);
-        this.imagePreviewSrc = dataUrl;
-      } catch (e) {
-        console.error(e);
-        this.errorMsg = hterm.messageManager.get(
-            'TERMINAL_SETTINGS_BACKGROUND_IMAGE_ERROR_SIZE');
-      }
+      this.onFileLoad_(reader.result.toString());
     });
     reader.readAsDataURL(file);
     event.target.value = null;
     this.closeDialog();
+  }
+
+  /** @param {string} dataUrl */
+  onFileLoad_(dataUrl) {
+    try {
+      window.localStorage.setItem(this.preference, dataUrl);
+      this.imagePreviewSrc = dataUrl;
+      this.uiChanged_('');
+    } catch (e) {
+      console.error(e);
+      this.errorMsg = hterm.messageManager.get(
+          'TERMINAL_SETTINGS_BACKGROUND_IMAGE_ERROR_SIZE');
+    }
   }
 }
 
