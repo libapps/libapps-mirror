@@ -73,8 +73,9 @@ terminal.onCtrlN = function(e, k) {
 };
 
 /**
- * Adds some extra Chrome OS system key bindings when 'keybindings-os-defaults'
- * pref is set. Reloads current bindings if needed.
+ * Adds bindings for terminal such as options page and some extra Chrome OS
+ * system key bindings when 'keybindings-os-defaults' pref is set. Reloads
+ * current bindings if needed.
  *
  * @param {!hterm.Terminal} term
  */
@@ -93,6 +94,11 @@ terminal.addBindings = function(term) {
         /** @type {!Object} */ (term.getPrefs().get('keybindings') || {}),
         true);
   }
+
+  term.keyboard.bindings.addBinding('Ctrl+Shift+P', function() {
+    terminal.openOptionsPage();
+    return hterm.Keyboard.KeyActions.CANCEL;
+  });
 };
 
 /**
@@ -110,11 +116,6 @@ terminal.init = function(element) {
 
   term.decorate(element);
   const runTerminal = function() {
-    term.keyboard.bindings.addBinding('Ctrl+Shift+P', function() {
-      terminal.openOptionsPage();
-      return hterm.Keyboard.KeyActions.CANCEL;
-    });
-
     term.onOpenOptionsPage = terminal.openOptionsPage;
     term.keyboard.keyMap.keyDefs[78].control = terminal.onCtrlN;
     terminal.addBindings(term);
