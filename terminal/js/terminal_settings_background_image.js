@@ -9,8 +9,7 @@
  */
 import {css, html, unsafeCSS} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
-import {stylesButtonContainer, stylesDialog}
-    from './terminal_settings_styles.js';
+import {stylesDialog} from './terminal_settings_styles.js';
 import './terminal_settings_button.js';
 import './terminal_settings_textfield.js';
 
@@ -54,7 +53,7 @@ export class TerminalSettingsBackgroundImageElement extends
 
   /** @override */
   static get styles() {
-    return [stylesButtonContainer, stylesDialog, css`
+    return [stylesDialog, css`
       :host {
         align-items: center;
         display: flex;
@@ -70,7 +69,7 @@ export class TerminalSettingsBackgroundImageElement extends
         border-radius: 8px;
         cursor: pointer;
         margin-left: 6px;
-        max-height: 40px;
+        max-height: 33px;
         max-width: 100px;
       }
 
@@ -82,7 +81,6 @@ export class TerminalSettingsBackgroundImageElement extends
         align-items: center;
         display: flex;
         flex-wrap: nowrap;
-        padding-top: 24px;
       }
 
       .open-folder {
@@ -92,8 +90,8 @@ export class TerminalSettingsBackgroundImageElement extends
         padding-left: 30px;
       }
 
-      terminal-settings-button {
-        margin-left: 6px;
+      .button-left-margin {
+        margin-left: 8px;
       }
     `];
   }
@@ -114,7 +112,8 @@ export class TerminalSettingsBackgroundImageElement extends
 
     const previewRemove = html`
       <img src="${this.imagePreviewSrc}" @click="${this.openDialog}">
-      <terminal-settings-button id="bg-remove" @click="${this.onRemove_}">
+      <terminal-settings-button id="bg-remove" class="button-left-margin"
+         @click="${this.onRemove_}">
         ${msg('REMOVE_LABEL')}
       </terminal-settings-button>
     `;
@@ -129,21 +128,25 @@ export class TerminalSettingsBackgroundImageElement extends
       ${this.imagePreviewSrc ? previewRemove : select}
       <input id="upload" type="file" @change="${this.onFileChange_}"/>
       <dialog>
+        <div class="dialog-title">
+          ${msg('TERMINAL_SETTINGS_BACKGROUND_IMAGE_DIALOG_TITLE')}
+        </div>
         <div class="dialog-row">
           <terminal-settings-textfield preference="background-image"
               .placeholder="${msg('URL_LABEL')}"
               .converter=${BACKGROUND_IMAGE_CONVERTER}>
           </terminal-settings-textfield>
-          <terminal-settings-button @click="${this.onOpenFile_}">
+          <terminal-settings-button class="button-left-margin"
+              @click="${this.onOpenFile_}">
             <span class="open-folder">${msg('SELECT_LABEL')}</span>
           </terminal-settings-button>
         </div>
-        <div class="button-container">
+        <div class="dialog-button-container">
           <terminal-settings-button class="cancel" @click="${this.onCancel_}">
             ${msg('CANCEL_BUTTON_LABEL')}
           </terminal-settings-button>
           <terminal-settings-button class="action" @click="${this.onOk_}">
-            ${msg('OK_BUTTON_LABEL')}
+            ${msg('CONFIRM_BUTTON_LABEL')}
           </terminal-settings-button>
         </div>
       </dialog>

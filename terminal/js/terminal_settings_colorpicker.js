@@ -9,8 +9,7 @@
  */
 import {LitElement, css, html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
-import {stylesButtonContainer, stylesDialog}
-    from './terminal_settings_styles.js';
+import {stylesDialog} from './terminal_settings_styles.js';
 import './terminal_settings_button.js';
 import './terminal_settings_hue_slider.js';
 import './terminal_settings_saturation_value_picker.js';
@@ -95,7 +94,7 @@ export class TerminalColorpickerElement extends LitElement {
 
   /** @override */
   static get styles() {
-    return [stylesButtonContainer, stylesDialog, css`
+    return [stylesDialog, css`
         #smallview {
           align-items: center;
           display: flex;
@@ -184,7 +183,7 @@ export class TerminalColorpickerElement extends LitElement {
           </hue-slider>
           ${transparency}
           ${this.inputInDialog ? input : ''}
-          <div class="button-container">
+          <div class="dialog-button-container">
             <terminal-settings-button class="cancel"
                 @click="${this.onCancelClick_}">
               ${msg('CANCEL_BUTTON_LABEL')}

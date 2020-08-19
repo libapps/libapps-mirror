@@ -10,7 +10,7 @@
 import {LitElement, css, html, unsafeCSS} from './lit_element.js';
 import {DEFAULT_THEME, DEFAULT_ANSI_COLORS, DEFAULT_BACKGROUND_COLOR,
     DEFAULT_CURSOR_COLOR, DEFAULT_FOREGROUND_COLOR} from './terminal_common.js';
-import {stylesVars, stylesButtonContainer, stylesDialog}
+import {stylesVars, stylesDialog}
     from './terminal_settings_styles.js';
 import './terminal_settings_button.js';
 
@@ -268,7 +268,7 @@ export class TerminalSettingsThemeElement extends LitElement {
 
   /** @override */
   static get styles() {
-    return [stylesVars, stylesButtonContainer, stylesDialog, css`
+    return [stylesVars, stylesDialog, css`
       #themes {
         display: flex;
         flex-wrap: wrap;
@@ -399,13 +399,13 @@ ${span(t.ansi[10], 'joel@penguin')}:${span(t.ansi[12], '~')
           </div>`)}
         </div>
         <dialog>
-          <div id="dialog-title">
+          <div class="dialog-title">
             ${msg('TERMINAL_SETTINGS_RESET_DIALOG_TITLE')}
           </div>
           <div id="dialog-message">
             ${msg('TERMINAL_SETTINGS_RESET_DIALOG_MESSAGE')}
           </div>
-          <div class="button-container">
+          <div class="dialog-button-container">
             <terminal-settings-button class="cancel"
                 @click="${this.onCancelClick_}">
               ${msg('CANCEL_BUTTON_LABEL')}

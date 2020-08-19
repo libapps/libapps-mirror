@@ -79,6 +79,10 @@
 			}
 		}
 	},
+	"CONFIRM_BUTTON_LABEL": {
+		"description": "The label for the confirm button in dialogs when confirming user input. It will be shown along with a 'Cancel' button.",
+		"message": "Confirm"
+	},
 	"CONNECTING": {
 		"description": "Status message shown when connecting to a SSH server.",
 		"message": "Connecting to $DESTINATION$...",
@@ -2008,6 +2012,10 @@
 	"TERMINAL_SETTINGS_ABOUT_LABEL": {
 		"description": "The label for the settings page 'About' section.  This section will show the version of the application and give links to see licenses and submit feedback.",
 		"message": "About"
+	},
+	"TERMINAL_SETTINGS_BACKGROUND_IMAGE_DIALOG_TITLE": {
+		"description": "Title for the background image dialog. The dialog allows the user to enter image URL manually or select a background image file.",
+		"message": "Enter image URL"
 	},
 	"TERMINAL_SETTINGS_BACKGROUND_IMAGE_ERROR_SIZE": {
 		"description": "Error text shown when the background image is too large to store.",

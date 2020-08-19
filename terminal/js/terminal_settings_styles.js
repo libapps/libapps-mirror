@@ -16,16 +16,9 @@ export const stylesVars = css`
     --google-blue-600: rgb(26, 115, 232);
     --google-blue-600-rgb: 26, 115, 232;
     --google-blue-refresh-500-rgb: 66, 133, 244;
+    --cr-primary-text-color: rgb(32, 33, 36);
+    --cr-secondary-text-color: rgb(95, 99, 104);
     --font: 'Roboto';
-  }
-`;
-
-export const stylesButtonContainer = css`
-  .button-container {
-    display: flex;
-    justify-content: flex-end;
-    padding-bottom: 16px;
-    padding-top: 24px;
   }
 `;
 
@@ -35,11 +28,19 @@ export const stylesDialog = css`
     border-radius: 8px;
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.12),
                 0 16px 16px rgba(0, 0, 0, 0.24);
-    padding: 20px;
+    color: var(--cr-secondary-text-color);
+    padding: 20px 20px 16px 20px;
   }
 
-  #dialog-title {
-    font-weight: bold;
-    padding: 0 0 20px 0;
+  .dialog-title {
+    color: var(--cr-primary-text-color);
+    font-size: calc(15 / 13 * 100%);
+    padding-bottom: 16px;
+  }
+
+  .dialog-button-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 24px;
   }
 `;
