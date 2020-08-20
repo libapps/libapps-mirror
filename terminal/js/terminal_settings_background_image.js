@@ -86,6 +86,7 @@ export class TerminalSettingsBackgroundImageElement extends LitElement {
 
     const select = html`
       <terminal-settings-button id='bg-select' class="button-left-margin"
+        aria-description="${msg('TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP')}"
         @click="${this.onOpenFile_}">
         <span class="open-folder">${msg('SELECT_LABEL')}</span>
       </terminal-settings-button>

@@ -79,6 +79,10 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
           user-select: none;
         }
 
+        :host(:focus-visible) #container {
+          box-shadow: 0 0 0 2px var(--focus-shadow-color);
+        }
+
         #container:after {
           content: "⯆";
           position: absolute;
@@ -161,7 +165,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
       selectedDisabled = option.disabled === true;
     }
     return html`
-        <div id="container" role="button" aria-expanded="${this.expanded}" >
+        <div id="container" role="button" aria-expanded="${this.expanded}">
           <div id="current-value" ?data-disabled="${selectedDisabled}">
             ${selectedLabel}
           </div>

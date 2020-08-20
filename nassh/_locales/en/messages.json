@@ -2019,7 +2019,7 @@
 	},
 	"TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP": {
 		"description": "Help text shown for the 'background-image' preference.",
-		"message": "Select a file from your computer, or enter a URL. The URL must start with 'http://' or 'https://'.\n\nFor example:\n  https://goo.gl/anedTK"
+		"message": "Select a background image file from your computer."
 	},
 	"TERMINAL_SETTINGS_DROPDOWN_ALT_GR_MODE_AUTO": {
 		"description": "Label for AltGr key mode 'Auto' option. See TERMINAL_PREF_ALT_GR_MODE.",

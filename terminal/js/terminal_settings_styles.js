@@ -18,6 +18,7 @@ export const stylesVars = css`
     --google-blue-refresh-500-rgb: 66, 133, 244;
     --cr-primary-text-color: rgb(32, 33, 36);
     --cr-secondary-text-color: rgb(95, 99, 104);
+    --focus-shadow-color: rgba(26, 115, 232, .4);
     --font: 'Roboto';
   }
 `;
