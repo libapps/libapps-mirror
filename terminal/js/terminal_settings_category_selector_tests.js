@@ -34,53 +34,47 @@ describe('terminal_settings_category_selector_tests.js', () => {
     this.selectorEl.addEventListener('category-change',
         (e) => this.categoryChanges.push(e.detail.category));
     this.selectorEl.innerHTML = categories.map((category) => `
-        <terminal-settings-category-option for='${category.id}'>
-          <h1 slot='title' id='${category.titleId}'>A Title</h1>
-        </terminal-settings-category-option>
+        <div id='${category.titleId}' data-name='${category.id}'>
+          A Title
+        </div>
     `).join('');
+
+    document.body.append(this.selectorEl);
+    return this.selectorEl.updateComplete;
   });
 
   afterEach(function() {
-    const parentElement = this.selectorEl.parentElement;
-    if (parentElement) {
-      parentElement.removeChild(this.selectorEl);
-    }
+    document.body.removeChild(this.selectorEl);
   });
 
-  it('sets-first-elements-active-attibute-on-construction', function() {
-    assert.isEmpty(this.categoryChanges);
-    assert.isEmpty(document.querySelectorAll('[active]'));
-
-    document.body.appendChild(this.selectorEl);
+  it('sets-first-elements-active-attibute-on-first-render', function() {
     assert.deepEqual(this.categoryChanges, [categories[0].id]);
     assertQueriedElementIs('[active]',
-        document.getElementById(categories[0].titleId).parentElement);
+        document.getElementById(categories[0].titleId));
   });
 
   it('updates-elements-active-attribute-on-click', function() {
-    document.body.appendChild(this.selectorEl);
     assert.deepEqual(this.categoryChanges, [categories[0].id]);
     assertQueriedElementIs('[active]',
-        document.getElementById(categories[0].titleId).parentElement);
+        document.getElementById(categories[0].titleId));
 
     document.getElementById(categories[1].titleId).click();
     assert.deepEqual(this.categoryChanges,
         [categories[0].id, categories[1].id]);
     assertQueriedElementIs('[active]',
-        document.getElementById(categories[1].titleId).parentElement);
+        document.getElementById(categories[1].titleId));
 
     document.getElementById(categories[2].titleId).click();
     assert.deepEqual(this.categoryChanges,
         [categories[0].id, categories[1].id, categories[2].id]);
     assertQueriedElementIs('[active]',
-        document.getElementById(categories[2].titleId).parentElement);
+        document.getElementById(categories[2].titleId));
   });
 
   it('updates-elements-active-attribute-on-enter-and-space', function() {
-    document.body.appendChild(this.selectorEl);
     assert.deepEqual(this.categoryChanges, [categories[0].id]);
     assertQueriedElementIs('[active]',
-        document.getElementById(categories[0].titleId).parentElement);
+        document.getElementById(categories[0].titleId));
 
     document.getElementById(categories[1].titleId)
         .dispatchEvent(
@@ -88,7 +82,7 @@ describe('terminal_settings_category_selector_tests.js', () => {
     assert.deepEqual(this.categoryChanges,
         [categories[0].id, categories[1].id]);
     assertQueriedElementIs('[active]',
-        document.getElementById(categories[1].titleId).parentElement);
+        document.getElementById(categories[1].titleId));
 
     document.getElementById(categories[2].titleId)
         .dispatchEvent(
@@ -96,6 +90,6 @@ describe('terminal_settings_category_selector_tests.js', () => {
     assert.deepEqual(this.categoryChanges,
         [categories[0].id, categories[1].id, categories[2].id]);
     assertQueriedElementIs('[active]',
-        document.getElementById(categories[2].titleId).parentElement);
+        document.getElementById(categories[2].titleId));
   });
 });

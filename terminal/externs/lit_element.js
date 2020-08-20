@@ -56,6 +56,9 @@ class LitElement$$module$js$lit_element{
 
   /** @return {!Promise<boolean>} */
   updateComplete() {}
+
+  /* @param {!Map<string,*>} changedProperties */
+  firstUpdated(changedProperties) {}
 }
 
 /**
