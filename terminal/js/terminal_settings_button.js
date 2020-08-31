@@ -20,7 +20,7 @@ export class TerminalSettingsButtonElement extends LitElement {
         :host {
           --button-bg: white;
           --button-bg-action: var(--google-blue-600);
-          --button-border-color: var(--google-blue-600);
+          --button-border-color: var(--google-grey-300);
           --button-hover-bg: rgba(var(--google-blue-refresh-500-rgb), .04);
           --button-hover-bg-action: rgba(var(--google-blue-600-rgb), .9);
           --button-text-color: var(--google-blue-600);
@@ -37,7 +37,7 @@ export class TerminalSettingsButtonElement extends LitElement {
           font-weight: 500;
           min-width: 5.14em;
           outline: none;
-          padding: 8px 16px;
+          padding: 7px 15px;
         }
 
         button:focus-visible {

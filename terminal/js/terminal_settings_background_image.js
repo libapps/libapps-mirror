@@ -7,14 +7,8 @@
  *
  * @suppress {moduleLoad}
  */
-import {css, html, LitElement, unsafeCSS} from './lit_element.js';
+import {css, html, LitElement} from './lit_element.js';
 import './terminal_settings_button.js';
-
-const FOLDER_OPEN =
-    '<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">' +
-    '<path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 ' +
-    '0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" fill="rgb(26, 115, 232)"/>' +
-    '</svg>';
 
 const PREFERENCE = 'background-image';
 
@@ -59,13 +53,6 @@ export class TerminalSettingsBackgroundImageElement extends LitElement {
         display: none;
       }
 
-      .open-folder {
-        background: url('data:image/svg+xml;utf8,${unsafeCSS(FOLDER_OPEN)}')
-            no-repeat left;
-        display: inline-block;
-        padding-left: 30px;
-      }
-
       .button-left-margin {
         margin-left: 8px;
       }
@@ -88,7 +75,7 @@ export class TerminalSettingsBackgroundImageElement extends LitElement {
       <terminal-settings-button id='bg-select' class="button-left-margin"
         aria-description="${msg('TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP')}"
         @click="${this.onOpenFile_}">
-        <span class="open-folder">${msg('SELECT_LABEL')}</span>
+        ${msg('SELECT_LABEL')}
       </terminal-settings-button>
     `;
     const previewRemove = html`
