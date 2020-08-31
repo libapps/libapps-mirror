@@ -203,25 +203,6 @@ export function loadPowerlineWebFonts(document) {
 }
 
 /**
- * Add a listener to 'background-color' pref and set
- * <meta id='meta-theme-color' name='theme-color' content="#...">
- * to update tab and frame colors.
- *
- * @param {!lib.PreferenceManager} prefs The preference manager.
- * @param {boolean} updateBody Whether body background should be updated when
- *     background-color pref changes.
- */
-export function watchBackgroundColor(prefs, updateBody) {
-  prefs.addObserver('background-color', (color) => {
-    document.getElementById('meta-theme-color')
-        .setAttribute('content', /** @type {string} */ (color));
-    if (updateBody) {
-      document.body.style.backgroundColor = /** @type {string} */ (color);
-    }
-  });
-}
-
-/**
  * Set up a title cache handler, which sets the document title to the cached
  * value immediately if it exists, and set up a mutation observer to update the
  * cached value to the *first* new document title.

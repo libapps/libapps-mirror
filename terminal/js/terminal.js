@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {definePrefs, loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily,
-  watchBackgroundColor} from './terminal_common.js';
+import {definePrefs, loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily}
+    from './terminal_common.js';
 
 export const terminal = {};
 
@@ -129,7 +129,7 @@ terminal.init = function(element) {
   term.onTerminalReady = function() {
     const prefs = term.getPrefs();
     definePrefs(prefs);
-    watchBackgroundColor(prefs, /* updateBody= */ true);
+    terminal.watchBackgroundColor(prefs);
     terminal.watchBackgroundImage(term);
 
     loadPowerlineWebFonts(term.getDocument());
@@ -306,6 +306,18 @@ terminal.Command.prototype.exit = function(code) {
       this.argv_.onExit(code);
     }
   }
+};
+
+/**
+ * Add a listener to 'background-color' pref and set it on the outer body.
+ * to update tab and frame colors.
+ *
+ * @param {!lib.PreferenceManager} prefs The preference manager.
+ */
+terminal.watchBackgroundColor = function(prefs) {
+  prefs.addObserver('background-color', (color) => {
+    document.body.style.backgroundColor = /** @type {string} */ (color);
+  });
 };
 
 /**
