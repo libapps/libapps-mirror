@@ -356,6 +356,10 @@ nassh.agent.messages.OidToCurveInfo = {
   '1.3.6.1.4.1.11591.15.1': {
     prefix: 'ssh-ed25519',
   },
+  // Non-standard curve25519 OID used by YubiKeys.
+  '1.3.6.1.4.1.11591.15.1.0': {
+    prefix: 'ssh-ed25519',
+  },
 };
 
 /**
