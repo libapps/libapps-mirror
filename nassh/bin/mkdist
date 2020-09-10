@@ -267,7 +267,6 @@ def mkcrosh(enable_minify, enable_gzip):
         for path in glob.glob(os.path.join(terminal, subdir, '*')):
             if not fnmatch.fnmatch(path, '*_test*'):
                 shutil.copy(path, os.path.join(tmpdir, subdir))
-    shutil.copy(os.path.join(terminal, 'terminal_pwa_manifest.json'), tmpdir)
 
     if enable_minify:
         minify(tmpdir)
