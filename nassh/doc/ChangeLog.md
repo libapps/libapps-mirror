@@ -1,3 +1,11 @@
+# 0.35, 2020-09-14, Some bug fixes.
+
+* hterm: Fix scrolling with newer Chrome.
+* libdot: intl: Fix with newer Chrome & v8.
+* prefs: Fix color input syncing.
+* google: Enable connection resumption by default with v4 relays.
+* agent: Add ed25519 mapping for non-standard Yubikey OID.
+
 # 0.34, 2020-08-12, Some regression fixes.
 
 * icons: Increase >_ in 24px-64px icons to help with contrast.
