@@ -65,4 +65,34 @@ it('decodeOid', () => {
       '1.2.840.10045.3.1.7');
 });
 
+it('decodeCurveOidWithVendorFixes', () => {
+  const OID_ED25519 = '1.3.6.1.4.1.11591.15.1';
+  const RAW_OID_ED25519 = new Uint8Array(
+      [0x2B, 0x06, 0x01, 0x04, 0x01, 0xDA, 0x47, 0x0F, 0x01]);
+  const RAW_OID_ED25519_YK_1 = new Uint8Array(
+      [0x2B, 0x06, 0x01, 0x04, 0x01, 0xDA, 0x47, 0x0F, 0x01, 0x00]);
+  const RAW_OID_ED25519_YK_2 = new Uint8Array(
+      [0x2B, 0x06, 0x01, 0x04, 0x01, 0xDA, 0x47, 0x0F, 0x01, 0x09]);
+  const RAW_OID_ED25519_YK_3 = new Uint8Array(
+      [0x2B, 0x06, 0x01, 0x04, 0x01, 0xDA, 0x47, 0x0F, 0x01, 0xFF]);
+
+  assert.strictEqual(nassh.agent.messages.decodeCurveOidWithVendorFixes(
+      RAW_OID_ED25519, 'generic'), OID_ED25519);
+  assert.notStrictEqual(nassh.agent.messages.decodeCurveOidWithVendorFixes(
+      RAW_OID_ED25519_YK_1, 'generic'), OID_ED25519);
+  assert.notStrictEqual(nassh.agent.messages.decodeCurveOidWithVendorFixes(
+      RAW_OID_ED25519_YK_2, 'generic'), OID_ED25519);
+  assert.notStrictEqual(nassh.agent.messages.decodeCurveOidWithVendorFixes(
+      RAW_OID_ED25519_YK_3, 'generic'), OID_ED25519);
+
+  assert.strictEqual(nassh.agent.messages.decodeCurveOidWithVendorFixes(
+      RAW_OID_ED25519, 'Yubico YubiKey 42'), OID_ED25519);
+  assert.strictEqual(nassh.agent.messages.decodeCurveOidWithVendorFixes(
+      RAW_OID_ED25519_YK_1, 'Yubico YubiKey 42'), OID_ED25519);
+  assert.strictEqual(nassh.agent.messages.decodeCurveOidWithVendorFixes(
+      RAW_OID_ED25519_YK_2, 'Yubico YubiKey 42'), OID_ED25519);
+  assert.strictEqual(nassh.agent.messages.decodeCurveOidWithVendorFixes(
+      RAW_OID_ED25519_YK_3, 'Yubico YubiKey 42'), OID_ED25519);
+});
+
 });

@@ -1389,7 +1389,8 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
         case nassh.agent.messages.KeyTypes.EDDSA: {
           // Curve is determined by the subsequent bytes encoding the OID.
           const curveOidBytes = appRelatedData.lookup(0xC3).value.slice(1);
-          curveOid = nassh.agent.messages.decodeOid(curveOidBytes);
+          curveOid = nassh.agent.messages.decodeCurveOidWithVendorFixes(
+              curveOidBytes, this.reader());
           if (!(curveOid in nassh.agent.messages.OidToCurveInfo)) {
             throw new Error(
                 `SmartCardManager.fetchKeyInfo: unsupported curve OID: ` +

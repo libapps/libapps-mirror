@@ -356,10 +356,47 @@ nassh.agent.messages.OidToCurveInfo = {
   '1.3.6.1.4.1.11591.15.1': {
     prefix: 'ssh-ed25519',
   },
-  // Non-standard curve25519 OID used by YubiKeys.
-  '1.3.6.1.4.1.11591.15.1.0': {
-    prefix: 'ssh-ed25519',
-  },
+};
+
+/**
+ * Decodes an ASN.1-encoded OID designating an elliptic curve into human-
+ * readable dot notation, taking into account that some hardware tokens by
+ * specific vendors are known to return incorrect OIDs that require further
+ * processing to become valid.
+ *
+ * Currently, this function takes the following quirks into account:
+ * - The OpenPGP applet of a Yubikey with firmware version below 5.2.8 appends
+ *   a potentially arbitrary byte to the intended byte representation of an ECC
+ *   curve OID. This case is handled by retrying the decoding with the last
+ *   byte stripped if the resulting OID does not label a known curve. This fix
+ *   applies to all readers that contain "yubikey" in their name (case-
+ *   insensitively).
+ *
+ * @param {!Uint8Array} asn1Bytes Individual bytes of an ASN.1-encoded OID as
+ *     returned by the specified reader (i.e., hardware token).
+ * @param {?string} reader The name of the reader (i.e., hardware token), which
+ *     determines the set of fixes to apply.
+ * @return {?string} The decoded human-readable OID; null if the byte
+ *     representation is invalid.
+ * @see https://docs.microsoft.com/en-us/windows/desktop/SecCertEnroll/about-object-identifier
+ * @see https://crbug.com/1120933#c10:
+ */
+nassh.agent.messages.decodeCurveOidWithVendorFixes =
+    function(asn1Bytes, reader) {
+  let curveOid = nassh.agent.messages.decodeOid(asn1Bytes);
+  if (!(curveOid in nassh.agent.messages.OidToCurveInfo) &&
+      reader != null &&
+      reader.toLowerCase().includes('yubikey') &&
+      asn1Bytes.length > 0) {
+    // https://crbug.com/1120933#c10:
+    // Certain Yubikeys (those with firmware version below 5.2.8) may
+    // return an additional uninitialized byte with the OID that should
+    // be ignored. Since there are no curve OIDs that are prefixes of
+    // other valid curve OIDs, we get by without detecting the firmware
+    // version explicitly.
+    curveOid = nassh.agent.messages.decodeOid(asn1Bytes.slice(0, -1));
+  }
+  return curveOid;
 };
 
 /**
