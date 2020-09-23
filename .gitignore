@@ -5,6 +5,7 @@
 __pycache__/
 *.py[co]
 *.swp
+.eslintcache
 .vscode
 
 # Stuff we build for distribution

@@ -23,6 +23,13 @@ DEFAULT_CLOSURE_ARGS = (
     '--jscomp_error=*', '--jscomp_off=strictMissingRequire')
 
 
+# Options passed when invoking eslint.
+ESLINT_ARGS = (
+    '--cache',
+    '--cache-location', libdot.LIBAPPS_DIR / '.eslintcache',
+)
+
+
 def kokoro_comments_path(path, tool):
     """Expand % markers that might exist in |path|."""
     if not path:
@@ -230,7 +237,7 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
         js_kwargs = {'paths': js_files, **kwargs}
         html_js_kwargs = {'paths': html_files + js_files, **kwargs}
         checks += [
-            libdot.eslint.perform(**html_js_kwargs),
+            libdot.eslint.perform(argv=ESLINT_ARGS, **html_js_kwargs),
             libdot.closure_compiler.perform(argv=closure_args, **js_kwargs),
         ]
 
