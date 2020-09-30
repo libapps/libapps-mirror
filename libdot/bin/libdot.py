@@ -22,6 +22,7 @@ import sys
 import time
 import types
 from typing import Dict, List, Optional, Union
+import urllib.error
 import urllib.request
 
 
@@ -328,24 +329,28 @@ def fetch_data(uri: str, output=None, verbose: bool = False, b64: bool = False):
     if output is None:
         output = io.BytesIO()
 
-    with urllib.request.urlopen(uri, timeout=TIMEOUT) as infp:
-        mb = 0
-        length = infp.length
-        while True:
-            data = infp.read(1024 * 1024)
-            if not data:
-                break
-            # Show a simple progress bar if the user is interactive.
-            if verbose:
-                mb += 1
-                print('~%i MiB downloaded' % (mb,), end='')
-                if length:
-                    percent = mb * 1024 * 1024 * 100 / length
-                    print(' (%.2f%%)' % (percent,), end='')
-                print('\r', end='', flush=True)
-            if b64:
-                data = base64.b64decode(data)
-            output.write(data)
+    try:
+        with urllib.request.urlopen(uri, timeout=TIMEOUT) as infp:
+            mb = 0
+            length = infp.length
+            while True:
+                data = infp.read(1024 * 1024)
+                if not data:
+                    break
+                # Show a simple progress bar if the user is interactive.
+                if verbose:
+                    mb += 1
+                    print('~%i MiB downloaded' % (mb,), end='')
+                    if length:
+                        percent = mb * 1024 * 1024 * 100 / length
+                        print(' (%.2f%%)' % (percent,), end='')
+                    print('\r', end='', flush=True)
+                if b64:
+                    data = base64.b64decode(data)
+                output.write(data)
+    except urllib.error.HTTPError as e:
+        logging.error('%s: %s', uri, e)
+        sys.exit(1)
 
     return output
 
