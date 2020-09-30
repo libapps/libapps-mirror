@@ -11,7 +11,6 @@ https://github.com/google/closure-compiler/wiki/Binary-Downloads
 
 from __future__ import print_function
 
-import glob
 import json
 import os
 import sys
@@ -29,11 +28,11 @@ URI = ('https://repo1.maven.org/maven2/com/google/javascript/closure-compiler/'
 
 
 # Where we cache our copy of closure.
-CLOSURE = os.path.join(libdot.BIN_DIR, '.closure-compiler.%s.jar' % (VERSION,))
+CLOSURE = libdot.BIN_DIR / f'.closure-compiler.{VERSION}.jar'
 
 
 # Where we store externs files.
-EXTERNS_DIR = os.path.join(libdot.DIR, 'externs')
+EXTERNS_DIR = libdot.DIR / 'externs'
 
 # The version of externs that we pull in from closure.  We normally pin to the
 # closure version for stability, but this can be updated independently.
@@ -69,14 +68,12 @@ def update_closure_externs():
 
     for i, name in enumerate(EXTERNS, start=CLOSURE_ORDER_BASE):
         uri = URI_TEMPLATE % {'name': name}
-        path = os.path.join(EXTERNS_DIR,
-                            f'{i}-closure-{name}-v{EXTERNS_VERSION}.js')
-        if os.path.exists(path):
+        path = EXTERNS_DIR / f'{i}-closure-{name}-v{EXTERNS_VERSION}.js'
+        if path.exists():
             continue
 
-        for oldpath in glob.glob(os.path.join(
-                EXTERNS_DIR, f'*closure-{name}-v*.js')):
-            os.unlink(oldpath)
+        for oldpath in EXTERNS_DIR.glob(f'*closure-{name}-v*.js'):
+            oldpath.unlink()
         libdot.fetch(uri, path)
 
 
@@ -93,25 +90,22 @@ def update_chrome_externs():
 
     for i, name in enumerate(EXTERNS, start=CHROME_ORDER_BASE):
         uri = URI_TEMPLATE % {'name': name}
-        path = os.path.join(EXTERNS_DIR,
-                            f'{i}-chrome-{name}-v{CHROME_EXTERNS_VERSION}.js')
-        if os.path.exists(path):
+        path = EXTERNS_DIR / f'{i}-chrome-{name}-v{CHROME_EXTERNS_VERSION}.js'
+        if path.exists():
             continue
 
-        for oldpath in glob.glob(os.path.join(
-                EXTERNS_DIR, f'*-chrome-{name}-v*.js')):
-            os.unlink(oldpath)
+        for oldpath in EXTERNS_DIR.glob(f'*-chrome-{name}-v*.js'):
+            oldpath.unlink()
         libdot.fetch(uri, path, b64=True)
 
 
 def update_closure():
     """Update our local cache of Google's closure compiler."""
-    if os.path.exists(CLOSURE):
+    if CLOSURE.exists():
         return
 
-    for path in glob.glob(os.path.join(
-            libdot.BIN_DIR, '.closure-compiler.*.jar')):
-        os.unlink(path)
+    for path in libdot.BIN_DIR.glob('.closure-compiler.*.jar'):
+        path.unlink()
 
     libdot.fetch(URI, CLOSURE)
 
@@ -195,9 +189,9 @@ def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):
 
     setup()
     externs = []
-    externs_paths = os.path.join(libdot.DIR, 'externs', '*.js')
-    for extern in sorted(glob.glob(externs_paths)):
-        externs += ['--externs', os.path.relpath(extern, os.getcwd())]
+    externs_paths = libdot.DIR / 'externs'
+    for extern in externs_paths.glob('*.js'):
+        externs += ['--externs', os.path.relpath(extern)]
 
     argv += [
         '--checks-only',
