@@ -225,10 +225,14 @@ def _toolchain_wasm_env():
         'PKG_CONFIG_SYSROOT_DIR': sysroot,
         'PKG_CONFIG_LIBDIR': pcdir,
         'SYSROOT': sysroot,
-        'CPPFLAGS': '-isystem %s' % (os.path.join(incdir, 'wassh-libc-sup'),),
+        'CPPFLAGS': ' '.join((
+            '-D_WASI_EMULATED_SIGNAL',
+            f'-isystem {os.path.join(incdir, "wassh-libc-sup")}',
+        )),
         'LDFLAGS': ' '.join([
             '-L%s' % (libdir,),
             '-lwassh-libc-sup',
+            '-lwasi-emulated-signal',
             '-Wl,--allow-undefined-file=%s' % (
                 os.path.join(libdir, 'wassh-libc-sup.imports'),),
             '-Wl,--export=__wassh_signal_handlers',

@@ -7,6 +7,9 @@
 #ifndef WASSH_SIGNAL_H
 #define WASSH_SIGNAL_H
 
+// Force sigset/etc... definition ourselves as wasi-sdk elides it atm.
+#include <sys/types.h>
+
 #include_next <signal.h>
 
 #include <sys/cdefs.h>
@@ -14,12 +17,6 @@
 __BEGIN_DECLS
 
 #define kill(...) 0
-
-// Signal dispositions.
-// NB: SIG_DFL must be zero for __wassh_signal_handlers to work.
-#define SIG_ERR  ((void*)(uintptr_t)-1)
-#define SIG_DFL  ((void*)(uintptr_t)0)
-#define SIG_IGN  ((void*)(uintptr_t)1)
 
 // Flags for sa_flags.
 #define SA_NOCLDSTOP 0x0001
@@ -32,6 +29,31 @@ __BEGIN_DECLS
 
 typedef void (*sighandler_t)(int);
 sighandler_t signal(int signum, sighandler_t handler);
+
+union sigval {
+  int sival_int;
+  void* sival_ptr;
+};
+
+typedef struct {
+  int si_signo;
+  int si_code;
+  int si_errno;
+  pid_t si_pid;
+  uid_t si_uid;
+  void* si_addr;
+  int si_status;
+  union sigval si_value;
+} siginfo_t;
+
+struct sigaction {
+  union {
+    void (*sa_handler)(int);
+    void (*sa_sigaction)(int, siginfo_t*, void*);
+  };
+  sigset_t sa_mask;
+  int sa_flags;
+};
 
 int sigaction(int, const struct sigaction*, struct sigaction*);
 

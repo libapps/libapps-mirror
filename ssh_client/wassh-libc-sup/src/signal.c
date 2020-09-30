@@ -65,17 +65,6 @@ int sigismember(const sigset_t* set, int signum) {
   return *set | sigmask(signum);
 }
 
-sighandler_t signal(int signum, sighandler_t handler) {
-  if (signum < 0 || signum >= 64) {
-    errno = EINVAL;
-    return SIG_ERR;
-  }
-
-  sighandler_t old = __wassh_signal_handlers[signum];
-  __wassh_signal_handlers[signum] = handler;
-  return old;
-}
-
 int sigaction(int signum, const struct sigaction* act,
               struct sigaction* oldact) {
   if (oldact) {
