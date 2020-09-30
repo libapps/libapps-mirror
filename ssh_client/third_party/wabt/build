@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
 import ssh_client  # pylint: disable=wrong-import-position
 
 
-ARCHIVES = ('%(P)s-linux.tar.gz',)
+ARCHIVES = ('%(P)s-ubuntu.tar.gz',)
 
 
 def src_install(metadata):
