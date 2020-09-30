@@ -21,8 +21,9 @@ S = '%(workdir)s/%(PN)s-version_%(PV)s'
 def src_install(metadata):
     """Install the package."""
     # For now we assume everything in here is a program.
-    for prog in os.listdir(metadata['S']):
-        target = os.path.join(metadata['S'], prog)
+    srcbindir = os.path.join(metadata['S'], 'bin')
+    for prog in os.listdir(srcbindir):
+        target = os.path.join(srcbindir, prog)
         path = os.path.join(ssh_client.BUILD_BINDIR, prog)
         ssh_client.symlink(target, path)
 
