@@ -21,10 +21,11 @@ import libdot
 
 # The version we currently run.  Pinned to make sure everyone gets consistent
 # behavior all the time.
-VERSION = '20200719'
+VERSION = '20200927'
 
 # Full path to Google's closure compiler.
-URI = 'https://dl.google.com/closure-compiler/compiler-%s.tar.gz' % (VERSION,)
+URI = ('https://repo1.maven.org/maven2/com/google/javascript/closure-compiler/'
+       f'v{VERSION}/closure-compiler-v{VERSION}.jar')
 
 
 # Where we cache our copy of closure.
@@ -112,16 +113,7 @@ def update_closure():
             libdot.BIN_DIR, '.closure-compiler.*.jar')):
         os.unlink(path)
 
-    tar = os.path.join(libdot.BIN_DIR, '.closure-compiler.tar')
-    libdot.fetch(URI, tar)
-
-    src = 'closure-compiler-v%s.jar' % (VERSION,)
-    libdot.unpack(tar, cwd=libdot.BIN_DIR, files=(src,))
-    libdot.unlink(tar)
-    fullsrc = os.path.join(libdot.BIN_DIR, src)
-    # Sometimes the tarball has more restrictive permissions.
-    os.chmod(fullsrc, 0o644)
-    os.rename(fullsrc, CLOSURE)
+    libdot.fetch(URI, CLOSURE)
 
 
 def convert_to_kokoro(data):
