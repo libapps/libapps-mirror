@@ -5,8 +5,6 @@
 
 """Utility code for creating and maintaining extension zip files."""
 
-from __future__ import print_function
-
 import datetime
 import fnmatch
 import glob

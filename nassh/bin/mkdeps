@@ -5,8 +5,6 @@
 
 """Build the project's dependencies."""
 
-from __future__ import print_function
-
 import html
 import json
 import logging

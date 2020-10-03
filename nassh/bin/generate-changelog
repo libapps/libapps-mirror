@@ -5,8 +5,6 @@
 
 """Utility code for generating ChangeLog.html."""
 
-from __future__ import print_function
-
 import html
 import logging
 import os

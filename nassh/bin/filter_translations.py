@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 # Copyright 2017 The Chromium OS Authors. All rights reserved.
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
@@ -9,8 +8,6 @@
 Use pure UTF-8, pretty-print, and sort.  This should (hopefully) make diffs in
 future updates smaller, and shrink the size of the file itself in the extension.
 """
-
-from __future__ import print_function
 
 import json
 import re

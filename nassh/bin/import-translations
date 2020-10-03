@@ -5,8 +5,6 @@
 
 """Import generated translations from Google's internal Translation Console."""
 
-from __future__ import print_function
-
 import glob
 import json
 import logging
