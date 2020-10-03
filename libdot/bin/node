@@ -8,7 +8,6 @@
 
 from __future__ import print_function
 
-import glob
 import os
 import platform
 import shutil
@@ -39,17 +38,17 @@ NODE_BASE_URI = 'https://storage.googleapis.com/chromium-nodejs'
 
 # Bucket maintained by us.
 NODE_MODULES_GS_FRAGMENT = 'chromeos-localmirror/secureshell/distfiles'
-NODE_MODULES_GS_URI = 'gs://%s' % (NODE_MODULES_GS_FRAGMENT,)
-NODE_MODULES_BASE_URI = ('https://storage.googleapis.com/%s'
-                         % (NODE_MODULES_GS_FRAGMENT,))
+NODE_MODULES_GS_URI = f'gs://{NODE_MODULES_GS_FRAGMENT}'
+NODE_MODULES_BASE_URI = (
+    f'https://storage.googleapis.com/{NODE_MODULES_GS_FRAGMENT}')
 
 # The node_modules & node/npm paths.
-NODE_MODULES_DIR = os.path.join(libdot.LIBAPPS_DIR, 'node_modules')
-NODE_BIN_DIR = os.path.join(NODE_MODULES_DIR, '.bin')
-NODE = os.path.join(NODE_BIN_DIR, 'node')
-NPM = os.path.join(NODE_BIN_DIR, 'npm')
+NODE_MODULES_DIR = libdot.LIBAPPS_DIR / 'node_modules'
+NODE_BIN_DIR = NODE_MODULES_DIR / '.bin'
+NODE = NODE_BIN_DIR / 'node'
+NPM = NODE_BIN_DIR / 'npm'
 # Use a dotdir as npm expects to manage everything under node_modules/.
-NODE_DIR = os.path.join(NODE_MODULES_DIR, '.node')
+NODE_DIR = NODE_MODULES_DIR / '.node'
 
 
 def run(cmd, **kwargs):
@@ -62,10 +61,10 @@ def run(cmd, **kwargs):
     # will try to run other npm packages directly.
     extra_env = kwargs.setdefault('extra_env', {})
     assert 'PATH' not in extra_env
-    extra_env['PATH'] = os.pathsep.join([NODE_BIN_DIR, os.getenv('PATH')])
+    extra_env['PATH'] = os.pathsep.join((str(NODE_BIN_DIR), os.getenv('PATH')))
     return libdot.run(
         cmd[1:],
-        cmd_prefix=[NODE, os.path.join(NODE_BIN_DIR, cmd[0])],
+        cmd_prefix=[NODE, NODE_BIN_DIR / cmd[0]],
         log_prefix=[cmd[0]],
         **kwargs)
 
@@ -83,38 +82,33 @@ def update():
         raise RuntimeError('Unknown OS %s' % (osname,))
 
     # In case of an upgrade, nuke existing dir.
-    hash_file = os.path.join(NODE_DIR, node_hash)
-    if not os.path.exists(hash_file):
+    hash_file = NODE_DIR / node_hash
+    if not hash_file.exists():
         shutil.rmtree(NODE_DIR, ignore_errors=True)
 
     node = NODE
     if osname == 'Windows':
-        node += '.exe'
-    if not os.path.exists(node):
+        node = node.with_suffix('.exe')
+    if not node.exists():
         os.makedirs(NODE_BIN_DIR, exist_ok=True)
         os.makedirs(NODE_DIR, exist_ok=True)
 
         # Download & unpack the archive.
         uri = '/'.join((NODE_BASE_URI, NODE_VER, node_hash))
-        output = os.path.join(NODE_DIR, node_hash)
+        output = NODE_DIR / node_hash
         libdot.fetch(uri, output)
         if osname == 'Windows':
             libdot.unlink(node)
-            os.rename(output, node)
+            output.rename(node)
         else:
             libdot.unpack(output, cwd=NODE_DIR)
             libdot.unlink(output)
 
             # Create canonical symlinks for node & npm.
-            paths = glob.glob(os.path.join(NODE_DIR, '*', 'bin', 'node'))
-            #relpath = os.path.relpath(paths[0], NODE_BIN_DIR)
-            #os.symlink(relpath, NODE)
-            libdot.symlink(paths[0], NODE)
-            paths = glob.glob(os.path.join(NODE_DIR, '*', '*', 'node_modules',
-                                           'npm', 'bin', 'npm-cli.js'))
-            #relpath = os.path.relpath(paths[0], NODE_BIN_DIR)
-            #os.symlink(relpath, NPM)
-            libdot.symlink(paths[0], NPM)
+            path = next(NODE_DIR.glob('*/bin/node'))
+            libdot.symlink(path, NODE)
+            path = next(NODE_DIR.glob('*/*/node_modules/npm/bin/npm-cli.js'))
+            libdot.symlink(path, NPM)
 
         # Mark the hash of this checkout.
         libdot.touch(hash_file)
@@ -122,11 +116,10 @@ def update():
 
 def modules_update():
     """Download & update our copy of node_modules."""
-    hash_file = os.path.join(NODE_MODULES_DIR, '.hash')
+    hash_file = NODE_MODULES_DIR / '.hash'
     old_hash = None
     try:
-        with open(hash_file, 'r', encoding='utf-8') as fp:
-            old_hash = fp.read().strip()
+        old_hash = hash_file.read_text(encoding='utf-8').strip()
     except FileNotFoundError:
         pass
 
@@ -134,18 +127,17 @@ def modules_update():
     if old_hash != NODE_MODULES_HASH:
         shutil.rmtree(NODE_MODULES_DIR, ignore_errors=True)
 
-    if not os.path.exists(hash_file):
+    if not hash_file.exists():
         # Download & unpack the archive.
-        tar = 'node_modules-%s.tar.xz' % (NODE_MODULES_HASH,)
+        tar = f'node_modules-{NODE_MODULES_HASH}.tar.xz'
         uri = '/'.join((NODE_MODULES_BASE_URI, tar))
-        output = os.path.join(libdot.LIBAPPS_DIR, tar)
+        output = libdot.LIBAPPS_DIR / tar
         libdot.fetch(uri, output)
         libdot.unpack(output, cwd=libdot.LIBAPPS_DIR)
         libdot.unlink(output)
 
         # Mark the hash of this checkout.
-        with open(hash_file, 'w', encoding='utf-8') as fp:
-            fp.write(NODE_MODULES_HASH)
+        hash_file.write_text(NODE_MODULES_HASH, encoding='utf-8')
 
 
 def main(argv):
