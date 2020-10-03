@@ -68,12 +68,7 @@ for pkg in "${pkgs[@]}"; do
   ./third_party/${pkg}/build --toolchain wasm
 done
 
-# Install the WASM programs.  We run them through the legalize process so we
-# split the i64 in the WASI syscall layers to two i32's.  This is a bit of a
-# hack, but it should be good enough for now.  We won't be able to run the
-# resulting files through wasmtime, but we still have the sources.
-# https://github.com/WebAssembly/proposals/issues/7
-# https://github.com/WebAssembly/WASI/issues/54
+# Install the WASM programs.
 #
 # We use -O2 as that seems to provide good enough shrinkage.  -O3/-O4 take
 # much longer but don't produce singificnatly larger/smaller files.  -Os/-Oz
@@ -104,7 +99,7 @@ for version in "${SSH_VERSIONS[@]}"; do
 
   for prog in scp sftp ssh ssh-keygen; do
     wasm-opt \
-      "${WASM_OPTS[@]}" --legalize-js-interface \
+      "${WASM_OPTS[@]}" \
       build/wasm/openssh-${version}*/work/openssh-*/${prog} \
       -o "${dir}/${prog}.wasm"
   done

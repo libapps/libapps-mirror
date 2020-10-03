@@ -11,20 +11,6 @@ import * as util from './util.js';
 import * as WASI from './wasi.js';
 
 /**
- * Shim for combining two 32-bit ints into a BigInt.
- *
- * This works around limitations in WASM<->JS; hopefully this will be fixed:
- * https://github.com/WebAssembly/JS-BigInt-integration
- *
- * @param {number} lo The lower 32-bit half.
- * @param {number} hi The higher 32-bit half.
- * @return {BigInt} The combined 64-bit number.
- */
-function makeBigInt(lo, hi) {
-  return BigInt(lo) | (BigInt(hi) << BigInt(32));
-}
-
-/**
  * Base class for creating syscall entries.
  */
 export class Base {
@@ -224,9 +210,8 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  sys_clock_time_get(clockid, precisionLo, precisionHi, time_ptr) {
+  sys_clock_time_get(clockid, precision, time_ptr) {
     // TODO: Figure out what to do with precision.
-    const precision = makeBigInt(precisionLo, precisionHi);
     const ret = this.handle_clock_time_get(clockid);
     if (Number.isInteger(ret)) {
       return ret;
@@ -281,15 +266,11 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  sys_fd_advise(fd, offsetLo, offsetHi, lenLo, lenHi, advice) {
-    const offset = makeBigInt(offsetLo, offsetHi);
-    const len = makeBigInt(lenLo, lenHi);
+  sys_fd_advise(fd, offset, len, advice) {
     return this.handle_fd_advise(fd, offset, len, advice);
   }
 
-  sys_fd_allocate(fd, offsetLo, offsetHi, lenLo, lenHi) {
-    const offset = makeBigInt(offsetLo, offsetHi);
-    const len = makeBigInt(lenLo, lenHi);
+  sys_fd_allocate(fd, offset, len) {
     return this.handle_fd_allocate(fd, offset, len);
   }
 
@@ -316,11 +297,7 @@ export class WasiUnstable extends Base {
     return this.handle_fd_fdstat_set_flags(fd, fdflags);
   }
 
-  sys_fd_fdstat_set_rights(fd, fs_rights_baseLo, fs_rights_baseHi,
-                           fs_rights_inheritingLo, fs_rights_inheritingHi) {
-    const fs_rights_base = makeBigInt(fs_rights_baseLo, fs_rights_baseHi);
-    const fs_rights_inheriting = makeBigInt(fs_rights_inheritingLo,
-                                          fs_rights_inheritingHi);
+  sys_fd_fdstat_set_rights(fd, fs_rights_base, fs_rights_inheriting) {
     return this.handle_fd_fdstat_set_rights(
         fd, fs_rights_base, fs_rights_inheriting);
   }
@@ -336,19 +313,15 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  sys_fd_filestat_set_size(fd, sizeLo, sizeHi) {
-    const size = makeBigInt(sizeLo, sizeHi);
+  sys_fd_filestat_set_size(fd, size) {
     return this.handle_fd_filestat_set_size(fd, size);
   }
 
-  sys_fd_filestat_set_times(fd, atimLo, atimHi, mtimLo, mtimHi, fst_flags) {
-    const atim = makeBigInt(atimLo, atimHi);
-    const mtim = makeBigInt(mtimLo, mtimHi);
+  sys_fd_filestat_set_times(fd, atim, mtim, fst_flags) {
     return this.handle_fd_filestat_set_times(fd, atim, mtim, fst_flags);
   }
 
-  sys_fd_pread(fd, iovs_ptr, iovs_len, offsetLo, offsetHi, nread_ptr) {
-    const offset = makeBigInt(offsetLo, offsetHi);
+  sys_fd_pread(fd, iovs_ptr, iovs_len, offset, nread_ptr) {
     return WASI.errno.ENOSYS;
   }
 
@@ -378,8 +351,7 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  sys_fd_pwrite(fd, iovs_ptr, iovs_len, offsetLo, offsetHi, nwritten_ptr) {
-    const offset = makeBigInt(offsetLo, offsetHi);
+  sys_fd_pwrite(fd, iovs_ptr, iovs_len, offset, nwritten_ptr) {
     let nwritten = 0;
     for (let i = 0; i < iovs_len; ++i) {
       const dv = this.getView_(iovs + (8 * i), 8);
@@ -420,8 +392,7 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  sys_fd_readdir(fd, buf_ptr, buf_len, cookieLo, cookieHi, size_ptr) {
-    const cookie = makeBigInt(cookieLo, cookieHi);
+  sys_fd_readdir(fd, buf_ptr, buf_len, cookie, size_ptr) {
     const buf = this.getMem_(buf_ptr, buf_ptr + buf_len);
     const ret = this.handle_fd_readdir(fd, buf, cookie);
     if (Number.isInteger(ret)) {
@@ -510,15 +481,13 @@ export class WasiUnstable extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  sys_path_filestat_set_times(fd, flags, path_ptr, path_len, atimLo, atimHi,
-                              mtimLo, mtimHi, fst_flags) {
+  sys_path_filestat_set_times(fd, flags, path_ptr, path_len, atim, mtim,
+                              fst_flags) {
     const path = this.get_nullable_path_(path_ptr, path_len);
     if (Number.isInteger(path)) {
       return path;
     }
 
-    const atim = makeBigInt(atimLo, atimHi);
-    const mtim = makeBigInt(mtimLo, mtimHi);
     return this.handle_path_filestat_set_times(fd, flags, path, atim, mtim, fst_flags);
   }
 
@@ -537,10 +506,8 @@ export class WasiUnstable extends Base {
     return this.handle_path_link(old_fd, old_flags, old_path, new_fd, new_path);
   }
 
-  sys_path_open(dirfd, dirflags, path_ptr, path_len, o_flags,
-                fs_rights_baseLo, fs_rights_baseHi,
-                fs_rights_inheritingLo, fs_rights_inheritingHi,
-                fs_flags, fdptr) {
+  sys_path_open(dirfd, dirflags, path_ptr, path_len, o_flags, fs_rights_base,
+                fs_rights_inheriting, fs_flags, fdptr) {
     const path = this.get_nullable_path_(path_ptr, path_len);
     if (Number.isInteger(path)) {
       return path;
@@ -548,9 +515,7 @@ export class WasiUnstable extends Base {
     this.debug(`  path = "${path}"`);
 
     const ret = this.handle_path_open(
-        dirfd, dirflags, path, o_flags,
-        makeBigInt(fs_rights_baseLo, fs_rights_baseHi),
-        makeBigInt(fs_rights_inheritingLo, fs_rights_inheritingHi),
+        dirfd, dirflags, path, o_flags, fs_rights_base, fs_rights_inheriting,
         fs_flags);
     if (Number.isInteger(ret)) {
       return ret;
