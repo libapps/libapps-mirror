@@ -34,7 +34,7 @@ We follow the [Chromium style guide] (which in turn follows the
 those, but it's most likely due to lack of tools automatically checking and
 enforcing rather than being done on purpose.
 
-[Chromium style guide]: https://chromium.googlesource.com/chromium/src/+/master/styleguide/web/web.md#JavaScript
+[Chromium style guide]: https://chromium.googlesource.com/chromium/src/+/HEAD/styleguide/web/web.md#JavaScript
 [Google style guide]: https://google.github.io/styleguide/jsguide.html
 
 * Do not one-line if statements.
@@ -63,7 +63,7 @@ You can use [eslint](https://eslint.org/) to quickly check code, or
 The [bin/lint](./libdot/bin/lint) helper script will run both for you.
 
 The [.eslintrc.js](./.eslintrc.js) was based on the
-[Chromium project](https://chromium.googlesource.com/chromium/src/+/master/.eslintrc.js).
+[Chromium project](https://chromium.googlesource.com/chromium/src/+/HEAD/.eslintrc.js).
 
 For build tools written in Python, you can use [bin/pylint](./libdot/bin/pylint)
 to run [pylint](https://www.pylint.org/) with the right settings.
@@ -193,7 +193,7 @@ with...
     $ git push origin HEAD:refs/for/master
 
 This will push the current branch to Gerrit for review.  Once the change has
-passed review it will be cherry-picked onto the master branch of the official
+passed review it will be cherry-picked onto the latest branch of the official
 repository.
 
 The output of this command should include a url to Gerrit web page for the
@@ -230,7 +230,7 @@ to take a look.
 
 Some tips in case things are still failing:
 *    Make sure your commit is based on the latest tree state.
-     *   Try clicking the "Rebase" button to get onto the latest master easily.
+     *   Try clicking the "Rebase" button to get onto the latest tree easily.
 *    If kokoro's build flaked, post the message "kokoro rerun" to retry.
 
 ### Merging

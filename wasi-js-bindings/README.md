@@ -176,7 +176,7 @@ See the common [libapps HACK.md](../HACK.md) for details.
 [emscripten]: https://emscripten.org/
 [ES2020]: https://tc39.es/ecma262/
 [WASI]: https://wasi.dev/
-[WASI API]: https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md
+[WASI API]: https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md
 [WASI C library]: https://github.com/WebAssembly/wasi-libc
 [WASI SDK]: https://github.com/WebAssembly/wasi-sdk
 [WASM]: https://webassembly.org/

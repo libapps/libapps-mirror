@@ -32,6 +32,6 @@ header if it exists, and then our additional features come after.
 
 
 [Chromium C++ style guide]: https://chromium.googlesource.com/chromium/src/+/HEAD/styleguide/c++/c++.md
-[WASI Core API]: https://github.com/CraneStation/wasmtime/blob/master/docs/WASI-api.md
+[WASI Core API]: https://github.com/CraneStation/wasmtime/blob/HEAD/docs/WASI-api.md
 [WASI Libc]: https://github.com/CraneStation/wasi-libc
 [WASI SDK]: https://github.com/CraneStation/wasi-sdk

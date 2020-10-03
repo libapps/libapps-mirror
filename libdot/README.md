@@ -25,7 +25,7 @@ to the right people.
 
 # Mirrors & Packaging
 
-* https://chromium.googlesource.com/apps/libapps/+/master/libdot: Main project site.
+* https://chromium.googlesource.com/apps/libapps/+/HEAD/libdot: Main project site.
 * https://github.com/libapps/libdot: Mirror of just the libdot/ subdir.
   Updated from time to time by developers.
 * https://www.npmjs.com/package/libdot: Packaging for npm installs.

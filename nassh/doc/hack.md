@@ -578,7 +578,7 @@ Here's a random list of documents which would be useful to people.
 [NaCl]: https://developer.chrome.com/native-client
 [Native Sockets]: https://crbug.com/909927
 [OpenSSH]: https://www.openssh.com/
-[OpenSSH SFTP Protocol]: https://github.com/openssh/openssh-portable/blob/master/PROTOCOL
+[OpenSSH SFTP Protocol]: https://github.com/openssh/openssh-portable/blob/HEAD/PROTOCOL
 [SFTPv3]: https://tools.ietf.org/html/draft-ietf-secsh-filexfer-02
 [SFTPv6]: https://tools.ietf.org/html/draft-ietf-secsh-filexfer-13
 [ssh_client]: ../../ssh_client/

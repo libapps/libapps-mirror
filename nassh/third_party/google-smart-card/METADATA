@@ -4,7 +4,7 @@ description: "Client library for the Smart Card Connector App for Chrome OS"
 third_party {
   url {
     type: HOMEPAGE
-    value: "https://github.com/GoogleChrome/chromeos_smart_card_connector/tree/master/example_js_standalone_smart_card_client_library"
+    value: "https://github.com/GoogleChrome/chromeos_smart_card_connector/tree/HEAD/example_js_standalone_smart_card_client_library"
   }
   url {
     type: GIT

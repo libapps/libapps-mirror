@@ -175,7 +175,7 @@ Send the same announcement as before but to the the public
 
 ## Branches
 
-We don't currently have any.  We strive to keep the master branch stable.
+We don't currently have any.  We strive to keep the latest tree stable.
 You should too!
 
 ## Translations

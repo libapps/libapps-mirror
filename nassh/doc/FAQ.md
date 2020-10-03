@@ -1222,7 +1222,7 @@ You'll have to adjust your keyboard/muscle memory accordingly.
     # Send a notification straight to hterm.
     $ printf '\033P\033\033]777;notify;title;body\a\033\\'
 
-  Under [tmux](https://github.com/tmux/tmux/blob/master/tools/ansicode.txt),
+  Under [tmux](https://github.com/tmux/tmux/blob/HEAD/tools/ansicode.txt),
   you can use a DCS sequence too, but using the `tmux` subcommand.  Replace
   the `...` part with what you want to send (and remember to escape the
   escapes).

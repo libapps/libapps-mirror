@@ -1,6 +1,6 @@
 // Rough polyfill for Intl.Segmenter proposal
 //
-// https://github.com/tc39/proposal-intl-segmenter/blob/master/README.md
+// https://github.com/tc39/proposal-intl-segmenter/blob/HEAD/README.md
 //
 // Caveats and Limitations
 //  * granularity: 'line': 'strictness' option is not supported (ignored)

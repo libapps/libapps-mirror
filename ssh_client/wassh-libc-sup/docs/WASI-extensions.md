@@ -48,4 +48,4 @@ If the connection is successful, `ESUCCESS` will be returned.
 Any other return value is an error.
 
 
-[WASI Core API]: https://github.com/CraneStation/wasmtime/blob/master/docs/WASI-api.md
+[WASI Core API]: https://github.com/CraneStation/wasmtime/blob/HEAD/docs/WASI-api.md

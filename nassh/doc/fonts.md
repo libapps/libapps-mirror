@@ -59,7 +59,7 @@ are being used with.
 ## Steps to create font
 
 1. Download the font to match - e.g. `NotoSansMono-Regular.ttf` from
-   https://github.com/googlefonts/noto-fonts/blob/master/hinted/NotoSansMono.
+   https://github.com/googlefonts/noto-fonts/blob/HEAD/hinted/NotoSansMono.
 2. Install FontForge - `sudo apt install fontforge`.
 3. Get Nerd Fonts - `git clone https://github.com/ryanoasis/nerd-fonts.git`.
 4. Apply Nerd Fonts patch -

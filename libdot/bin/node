@@ -25,7 +25,7 @@ NODE_MODULES_HASH = '2cd2dd365999ae139b6b0fb62a5a09e2a7fb5ab1c0926cf1968a1dec9b7
 
 # In sync with Chromium's DEPS file because it's easier to use something that
 # already exists than maintain our own.  Look for 'node_linux64' here:
-# https://chromium.googlesource.com/chromium/src/+/master/DEPS
+# https://chromium.googlesource.com/chromium/src/+/HEAD/DEPS
 NODE_VER = '12.14.1'
 
 # Run `./node_sync_with_chromium` to update these hashes.

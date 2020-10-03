@@ -13,7 +13,7 @@ export class WasiView extends DataView {
   /**
    * Read a dirent structure.
    *
-   * https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#-dirent-struct
+   * https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#-dirent-struct
    */
   getDirent(byteOffset, littleEndian = false) {
     /*
@@ -38,7 +38,7 @@ export class WasiView extends DataView {
   /**
    * Write a fdstat structure.
    *
-   * https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#fdstat
+   * https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#fdstat
    */
   setFdstat(byteOffset, value, littleEndian = false) {
     /*
@@ -60,7 +60,7 @@ export class WasiView extends DataView {
   /**
    * Write a filestat structure.
    *
-   * https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#filestat
+   * https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#filestat
    */
   setFilestat(byteOffset, value, littleEndian = false) {
     /*
@@ -81,8 +81,8 @@ export class WasiView extends DataView {
   /**
    * Read an iovec/ciovec structure.
    *
-   * https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#-iovec-struct
-   * https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#-ciovec-struct
+   * https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#-iovec-struct
+   * https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#-ciovec-struct
    */
   getIovec(byteOffset, littleEndian = false) {
     /*

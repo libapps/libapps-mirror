@@ -246,7 +246,7 @@ nassh.reloadWindow = function() {
  *
  * The protocol should be one allowed by the specifications:
  * https://html.spec.whatwg.org/multipage/webappapis.html#webappapis
- * https://chromium.googlesource.com/chromium/src/+blame/master/third_party/WebKit/Source/modules/navigatorcontentutils/NavigatorContentUtils.cpp
+ * https://chromium.googlesource.com/chromium/src/+blame/HEAD/third_party/WebKit/Source/modules/navigatorcontentutils/NavigatorContentUtils.cpp
  * https://www.iana.org/assignments/uri-schemes/prov/sftp
  *
  * @param {string} proto The protocol name to register.

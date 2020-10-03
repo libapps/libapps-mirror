@@ -1,7 +1,7 @@
 # chrome-untrusted://terminal
 
 The chrome-untrusted://terminal System Web App is the default
-[Chrome OS Linux (crostini)](https://chromium.googlesource.com/chromiumos/docs/+/master/containers_and_vms.md)
+[Chrome OS Linux (crostini)](https://chromium.googlesource.com/chromiumos/docs/+/HEAD/containers_and_vms.md)
 terminal.
 
 # Contact
