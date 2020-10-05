@@ -136,42 +136,42 @@ module.exports = {
     'yield-star-spacing': ['error', 'after'],
     'yoda': 'error',
 
-    'jsdoc/check-alignment': 2,
-    'jsdoc/check-examples': 2,
+    'jsdoc/check-alignment': 'error',
+    'jsdoc/check-examples': 'error',
     // We want hanging indentation, but this check requires none everywhere.
-    'jsdoc/check-indentation': 0,
-    'jsdoc/check-param-names': 2,
+    'jsdoc/check-indentation': 'off',
+    'jsdoc/check-param-names': 'error',
     // Make sure this is disabled as this rejects closure syntax.
-    'jsdoc/check-syntax': 0,
-    'jsdoc/check-tag-names': 2,
+    'jsdoc/check-syntax': 'off',
+    'jsdoc/check-tag-names': 'error',
     // This is disabled until this crash is resolved:
     // https://github.com/gajus/eslint-plugin-jsdoc/issues/389
-    'jsdoc/check-types': 0,
-    'jsdoc/implements-on-classes': 2,
-    'jsdoc/newline-after-description': 2,
+    'jsdoc/check-types': 'off',
+    'jsdoc/implements-on-classes': 'error',
+    'jsdoc/newline-after-description': 'error',
     // This is only for TypeScript which we don't care about.
-    'jsdoc/no-types': 0,
+    'jsdoc/no-types': 'off',
     // TODO(vapier): Turn this on.
-    'jsdoc/require-description': 0,
+    'jsdoc/require-description': 'off',
     // TODO(vapier): Turn this on.
-    'jsdoc/require-description-complete-sentence': 0,
+    'jsdoc/require-description-complete-sentence': 'off',
     // We don't want to require examples.
-    'jsdoc/require-example': 0,
+    'jsdoc/require-example': 'off',
     'jsdoc/require-hyphen-before-param-description': ['error', 'never'],
     // TODO(vapier): Turn this on.
-    'jsdoc/require-jsdoc': 0,
-    'jsdoc/require-param': 1,
+    'jsdoc/require-jsdoc': 'off',
+    'jsdoc/require-param': 'error',
     // TODO(vapier): Turn this on.
-    'jsdoc/require-param-description': 0,
-    'jsdoc/require-param-name': 2,
-    'jsdoc/require-param-type': 2,
-    'jsdoc/require-returns': 2,
-    'jsdoc/require-returns-check': 2,
+    'jsdoc/require-param-description': 'off',
+    'jsdoc/require-param-name': 'error',
+    'jsdoc/require-param-type': 'error',
+    'jsdoc/require-returns': 'error',
+    'jsdoc/require-returns-check': 'error',
     // TODO(vapier): Turn this on.
-    'jsdoc/require-returns-description': 0,
-    'jsdoc/require-returns-type': 2,
+    'jsdoc/require-returns-description': 'off',
+    'jsdoc/require-returns-type': 'error',
     // This would be nice to turn on, but requires a lot more research.
-    'jsdoc/valid-types': 0,
+    'jsdoc/valid-types': 'off',
   },
 
   'settings': {
