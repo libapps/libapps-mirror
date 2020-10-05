@@ -8,7 +8,7 @@
  */
 
 import {terser} from 'rollup-plugin-terser';
-import resolve from 'rollup-plugin-node-resolve';
+import resolve from '@rollup/plugin-node-resolve';
 
 export default {
   input: 'js/nassh_deps_rollup_shim.js',
