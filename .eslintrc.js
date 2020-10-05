@@ -136,27 +136,39 @@ module.exports = {
     'yield-star-spacing': ['error', 'after'],
     'yoda': 'error',
 
+    'jsdoc/check-access': 'error',
     'jsdoc/check-alignment': 'error',
     'jsdoc/check-examples': 'error',
     // We want hanging indentation, but this check requires none everywhere.
     'jsdoc/check-indentation': 'off',
     'jsdoc/check-param-names': 'error',
+    'jsdoc/check-property-names': 'error',
     // Make sure this is disabled as this rejects closure syntax.
     'jsdoc/check-syntax': 'off',
     'jsdoc/check-tag-names': 'error',
     // This is disabled until this crash is resolved:
     // https://github.com/gajus/eslint-plugin-jsdoc/issues/389
     'jsdoc/check-types': 'off',
+    // We don't use these tags in the project.
+    'jsdoc/check-values': 'off',
+    'jsdoc/empty-tags': 'error',
     'jsdoc/implements-on-classes': 'error',
+    // Can't turn on until require-description is enabled.
+    'jsdoc/match-description': 'off',
     'jsdoc/newline-after-description': 'error',
     // This is only for TypeScript which we don't care about.
     'jsdoc/no-types': 'off',
+    // This would be nice to turn on, but requires a lot more research.
+    // See valid-types setting below too.
+    'jsdoc/no-undefined-types': 'off',
     // TODO(vapier): Turn this on.
     'jsdoc/require-description': 'off',
     // TODO(vapier): Turn this on.
     'jsdoc/require-description-complete-sentence': 'off',
     // We don't want to require examples.
     'jsdoc/require-example': 'off',
+    // TODO(vapier): Turn this on.
+    'jsdoc/require-file-overview': 'off',
     'jsdoc/require-hyphen-before-param-description': ['error', 'never'],
     // TODO(vapier): Turn this on.
     'jsdoc/require-jsdoc': 'off',
