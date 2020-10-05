@@ -156,7 +156,8 @@ def test_lint():
     libdot.run([kokoro.DIR / 'lint', '--version'])
 
     ret = []
-    for pkg in ('kokoro', 'libdot', 'hterm', 'nassh', 'ssh_client', 'terminal'):
+    for pkg in ('kokoro', 'libdot', 'hterm', 'nassh', 'ssh_client', 'terminal',
+                'wasi-js-bindings', 'wassh'):
         pkg_dir = kokoro.LIBAPPS_DIR / pkg
         linter = pkg_dir / 'lint'
         if not linter.exists():

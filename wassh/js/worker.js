@@ -5,6 +5,7 @@
 /**
  * @fileoverview
  * @suppress {moduleLoad}
+ * @suppress {checkTypes} module$__$wasi_js_bindings$js naming confusion.
  */
 
 import * as BackgroundWorker from '../../wasi-js-bindings/js/worker.js';

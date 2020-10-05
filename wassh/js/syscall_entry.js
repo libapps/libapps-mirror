@@ -5,6 +5,7 @@
 /**
  * @fileoverview Handlers for the custom wassh syscalls.
  * @suppress {moduleLoad}
+ * @suppress {checkTypes} module$__$wasi_js_bindings$js naming confusion.
  */
 
 import * as SyscallEntry from '../../wasi-js-bindings/js/syscall_entry.js';
