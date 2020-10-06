@@ -18,11 +18,11 @@ import * as WasshSyscallHandler from './syscall_handler.js';
 class WasshWorker extends BackgroundWorker.Base {
   newProcess(executable, argv, environ, sab, handler_ids) {
     const sys_handlers = [
-      new SyscallHandler.ProxyWasiUnstable(this, sab, handler_ids),
-      new WasshSyscallHandler.DirectWasiUnstable(),
+      new SyscallHandler.ProxyWasiPreview1(this, sab, handler_ids),
+      new WasshSyscallHandler.DirectWasiPreview1(),
     ];
     const sys_entries = [
-      new SyscallEntry.WasiUnstable({sys_handlers, trace: true}),
+      new SyscallEntry.WasiPreview1({sys_handlers, trace: true}),
       new WasshSyscallEntry.WasshExperimental({}),
     ];
     return new Process.Foreground(

@@ -54,7 +54,7 @@ export class Base {
  *
  * @unrestricted https://github.com/google/closure-compiler/issues/1737
  */
-export class ProxyWasiUnstable extends Base {
+export class ProxyWasiPreview1 extends Base {
   constructor(worker, sab, handlers) {
     super();
 
@@ -103,7 +103,7 @@ const kNanosecToMillisec = 1000000;
 /**
  * This handler implements syscalls directly.
  */
-export class DirectWasiUnstable extends Base {
+export class DirectWasiPreview1 extends Base {
   /** @override */
   handle_args_get() {
     return {argv: this.process_.argv};

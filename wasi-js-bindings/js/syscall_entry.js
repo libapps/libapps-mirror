@@ -188,10 +188,10 @@ export class Base {
 /**
  * WASI syscall entries.
  */
-export class WasiUnstable extends Base {
+export class WasiPreview1 extends Base {
   constructor(...args) {
     super(...args);
-    this.namespace = 'wasi_unstable';
+    this.namespace = 'wasi_snapshot_preview1';
   }
 
   /**

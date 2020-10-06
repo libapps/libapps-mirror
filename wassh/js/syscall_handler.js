@@ -49,7 +49,7 @@ class FdMap extends Map {
  *
  * These must all be synchronous.
  */
-export class DirectWasiUnstable extends SyscallHandler.DirectWasiUnstable {
+export class DirectWasiPreview1 extends SyscallHandler.DirectWasiPreview1 {
 }
 
 /**
@@ -57,7 +57,7 @@ export class DirectWasiUnstable extends SyscallHandler.DirectWasiUnstable {
  *
  * These may be asynchronous.
  */
-export class RemoteReceiverWasiUnstable extends SyscallHandler.Base {
+export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   constructor(...args) {
     super(...args);
     this.term = document.getElementById('terminal');

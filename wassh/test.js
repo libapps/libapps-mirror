@@ -37,16 +37,16 @@ window.onload = async function() {
   let proc;
   if (foreground) {
     const sys_handlers = [
-      new WasshSyscallHandler.DirectWasiUnstable(),
+      new WasshSyscallHandler.DirectWasiPreview1(),
     ];
     settings.sys_handlers = sys_handlers;
     settings.sys_entries = [
-      new SyscallEntry.WasiUnstable({sys_handlers, trace: true}),
+      new SyscallEntry.WasiPreview1({sys_handlers, trace: true}),
       new WasshSyscallEntry.WasshExperimental({}),
     ];
     proc = new Process.Foreground(settings);
   } else {
-    settings.handler = new WasshSyscallHandler.RemoteReceiverWasiUnstable();
+    settings.handler = new WasshSyscallHandler.RemoteReceiverWasiPreview1();
     proc = new Process.Background('./js/worker.js', settings);
   }
   term.innerText += `> Running ${prog}\n`;

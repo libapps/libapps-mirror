@@ -78,12 +78,12 @@ see the [API Reference] for more details.
 *   SyscallEntry: The initial entry point from the WASM world into JS.
     Takes care of reading/writing content to the WASM side and handing off
     to syscall handlers to implement things (using normal JS APIs).
-    *   WasiUnstable: Implementation of the [WASI API].
+    *   WasiPreview1: Implementation of the (snapshot preview1) [WASI API].
 *   SyscallHandler: The code that handles syscall requests using JS APIs.
     Does not speak to the WASM side at all -- everything is via standard JS.
-    *   DirectWasiUnstable: Handlers [WASI API] calls directly when possible
+    *   DirectWasiPreview1: Handlers [WASI API] calls directly when possible
         (i.e. there is a general web platform implementation).
-    *   ProxyWasiUnstable: Dispatches [WASI API] calls via message passing and
+    *   ProxyWasiPreview1: Dispatches [WASI API] calls via message passing and
         shared memory to a different thread so calls may be implemented
         asynchronously; does not provide any implementations itself.
 *   Worker: Framework for implementing background web worker as
@@ -96,13 +96,13 @@ It is responsible for actually handling the syscalls via whatever unique state
 or paradigms used in your JS application.
 
 For simple programs, it is expected that people will use Process.Foreground and
-SyscallEntry.WasiUnstable and SyscallHandler.DirectWasiUnstable APIs unmodified,
+SyscallEntry.WasiPreview1 and SyscallHandler.DirectWasiPreview1 APIs unmodified,
 perhaps with their own additional SyscallHandler class for things
-DirectWasiUnstable does not support.
+DirectWasiPreview1 does not support.
 
 For complicated programs, it is expected that people will use Process.Background
-SyscallEntry.WasiUnstable and SyscallHandler.ProxyWasiUnstable and
-SyscallHandler.DirectWasiUnstable APIs unmodified, and provide their own Worker
+SyscallEntry.WasiPreview1 and SyscallHandler.ProxyWasiPreview1 and
+SyscallHandler.DirectWasiPreview1 APIs unmodified, and provide their own Worker
 and SyscallHandler implementations to round things out.
 
 ## Examples
@@ -166,7 +166,7 @@ rejecting the promise).
 
 *   WasiView: [DataView] class with extensions for [WASI C library] structures.
 *   SyscallLock: Utility class for managing shared memory/IPC between
-    SyscallHandler.ProxyWasiUnstable and your syscall handler in another thread.
+    SyscallHandler.ProxyWasiPreview1 and your syscall handler in another thread.
     Takes care of locking, passing return/error codes, and serializing objects.
 
 ## Contact
