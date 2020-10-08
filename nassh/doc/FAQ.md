@@ -58,31 +58,14 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 
 ### What's the difference between the Secure Shell App and Extension? {#app-vs-ext}
 
-  [Chrome Apps](https://developer.chrome.com/apps/about_apps)
-  [were launched](https://blog.chromium.org/2013/02/chrome-app-launcher-developer-preview.html)
-  to create applications using web technology that would work like native apps
-  on any platform Chrome runs on.  Secure Shell was built on that technology.
+  Everyone should install & use the extension variant now:
 
-  Fast forward a few years and
-  [Chrome Apps were deprecated](https://blog.chromium.org/2016/08/from-chrome-apps-to-web.html)
-  on all non-Chrome OS platforms.  That means the Secure Shell App would only
-  be available on Chrome OS.
+  https://chrome.google.com/webstore/detail/iodihamcpbpeioajjeobimgagajmlibd
 
-  In order to work on non-Chrome OS platforms, we need to migrate it to an
-  extension.  Unfortunately, doing so means we'd lose access to some APIs that
-  we use on Chrome OS specifically.  The only option we're left with is to
-  maintain both an extension and an app at the same time.
+  As of Dec 2019, the two variants have complete feature parity.
 
-  If you do not care about the Chrome OS specific features, then the two
-  versions are equivalent.  Here are the few features available in the App:
-
-  * SFTP mounting
-  * Access to [crosh](chromeos-crosh.md)
-  * Icon shows up in the chrome://apps list (vs in the extension bar)
-
-  That is why we have a "Secure Shell App" and a "Secure Shell Extension" in
-  the store (as well as "dev" versions of each).  You can safely have any of
-  them installed simultaneously.
+  For more historical details, please see our
+  [Chrome Apps Deprecation guide](./app-to-ext-migration.md).
 
 
 ### How do hterm and Secure Shell differ from existing web terminals?
