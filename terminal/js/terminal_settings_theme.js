@@ -278,7 +278,6 @@ export class TerminalSettingsThemeElement extends LitElement {
       }
 
       .theme {
-        cursor: pointer;
         flex-basis: 25%;
         margin: 0;
         max-width: 150px;
@@ -290,8 +289,13 @@ export class TerminalSettingsThemeElement extends LitElement {
         cursor: pointer;
         height: 88px;
         margin: 8px 0 0 8px;
+        outline: none;
         overflow: hidden;
         position: relative;
+      }
+
+      .theme-inner:focus-visible {
+        box-shadow: 0 0 0 2px var(--focus-shadow-color);
       }
 
       .theme:nth-child(-n+4) > .theme-inner {
@@ -377,10 +381,11 @@ export class TerminalSettingsThemeElement extends LitElement {
     return html`
         <div id="themes">${Object.values(THEMES).map((t) => html`
           <div id="${t.id}" class="theme"
-              @click="${this.onClicked_.bind(this, t.id)}"
               ?active-theme="${this.theme_.id === t.id}"
               ?reset-theme="${this.theme_.hasVariations()}">
-            <div class="theme-inner">
+            <div class="theme-inner" tabindex="0"
+                @click="${this.onClicked_}"
+                @keydown="${this.onKeydown_}">
               <div class="preview" aria-hidden="true"
                   style="background-color:${t.background};color:${t.font}">
 <pre>drwxr-xr-x 1 joel 13:28 ${span(t.ansi[12], '.')}
@@ -410,7 +415,7 @@ ${span(t.ansi[10], 'joel@penguin')}:${span(t.ansi[12], '~')
    * @param {string} id Theme clicked.
    * @private
    */
-  onClicked_(id) {
+  onActivated_(id) {
     if (!THEMES.hasOwnProperty(id)) {
       console.error(`Unknown theme: ${id}`);
       return;
@@ -420,6 +425,29 @@ ${span(t.ansi[10], 'joel@penguin')}:${span(t.ansi[12], '~')
     } else {
       this.theme_ = THEMES[id];
       this.theme_.writeToPrefs();
+    }
+  }
+
+  /**
+   * @param {!Event} event
+   * @private
+   */
+  onClicked_(event) {
+    this.onActivated_(event.currentTarget.parentNode.id);
+    event.preventDefault();
+  }
+
+  /**
+   * @param {!Event} event
+   * @private
+   */
+  onKeydown_(event) {
+    switch (event.code) {
+      case 'Enter':
+      case 'Space':
+        this.onActivated_(event.currentTarget.parentNode.id);
+        event.preventDefault();
+        break;
     }
   }
 
