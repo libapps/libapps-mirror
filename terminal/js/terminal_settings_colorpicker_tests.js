@@ -162,6 +162,29 @@ describe('terminal_settings_colorpicker.js', () => {
     assert.isNull(getElement(this.el, 'transparency-slider'));
   });
 
+  it('open-dialog-on-swatch-clicked', async function() {
+    const swatch = getElement(this.el, '#swatch');
+    const dialog = getElement(this.el, 'terminal-dialog');
+
+    assert.isFalse(dialog.hasAttribute('open'));
+
+    swatch.dispatchEvent(new MouseEvent('click'));
+    await this.el.updateComplete;
+    assert.isTrue(dialog.hasAttribute('open'));
+  });
+
+  ['Enter', 'Space'].forEach((key) => it(`open-dialog-on-swatch-${key}-keydown`,
+        async function() {
+          const swatch = getElement(this.el, '#swatch');
+          const dialog = getElement(this.el, 'terminal-dialog');
+
+          assert.isFalse(dialog.hasAttribute('open'));
+
+          swatch.dispatchEvent(new KeyboardEvent('keydown', {code: key}));
+          await this.el.updateComplete;
+          assert.isTrue(dialog.hasAttribute('open'));
+        }));
+
   it('updates-and-closes-dialog-when-enter-pressed-in-input', async function() {
     const dialog = getElement(this.el, 'terminal-dialog');
     const swatch = getElement(this.el, '#swatch');
@@ -176,6 +199,7 @@ describe('terminal_settings_colorpicker.js', () => {
     // Modify input and press enter.
     hi.value = 'purple';
     hi.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
+    await this.waitDialogClose();
     await allUpdatesComplete(this.el);
 
     // Dialog closed and value updated.

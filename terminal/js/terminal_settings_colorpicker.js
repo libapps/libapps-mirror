@@ -8,6 +8,7 @@
  * @suppress {moduleLoad}
  */
 import {LitElement, css, html} from './lit_element.js';
+import {CHROME_VERSION} from './terminal_common.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
 import './terminal_settings_button.js';
 import './terminal_settings_hue_slider.js';
@@ -35,10 +36,10 @@ function cssToHex(css) {
  * Return a css string for the swatch's style attribute.
  *
  * @param {string} color the css color.
- * @param {boolean} dialogIsOpened whether dialog is opened.
+ * @param {boolean} showFocusRing
  * @return {string}
  */
-function swatchStyle(color, dialogIsOpened) {
+function swatchStyle(color, showFocusRing) {
   const boxShadows = [];
 
   if (color) {
@@ -52,7 +53,7 @@ function swatchStyle(color, dialogIsOpened) {
     }
   }
 
-  if (dialogIsOpened) {
+  if (showFocusRing) {
     boxShadows.push(FOCUS_BOX_SHADOW);
   }
 
@@ -90,6 +91,9 @@ export class TerminalColorpickerElement extends LitElement {
       dialogIsOpened_: {
         type: Boolean,
       },
+      swatchFocusVisible_: {
+        type: Boolean,
+      },
     };
   }
 
@@ -124,6 +128,7 @@ export class TerminalColorpickerElement extends LitElement {
           display: inline-block;
           height: 24px;
           margin: 6px;
+          outline: none;
           position: relative;
           user-select: none;
           width: 24px;
@@ -166,9 +171,15 @@ export class TerminalColorpickerElement extends LitElement {
             @keydown="${this.onInputKeydown_}"/>`;
     return html`
         <div id="smallview">
-          <div id="swatch" @click="${this.onSwatchClick_}">
+          <div id="swatch" tabindex="0"
+              @blur="${this.onSwatchBlur_}"
+              @click="${this.onSwatchActivated_}"
+              @focus="${this.onSwatchFocus_}"
+              @keydown="${this.onSwatchKeydown_}"
+          >
             <div id="swatchdisplay"
-                style="${swatchStyle(this.value, this.dialogIsOpened_)}">
+                style="${swatchStyle(this.value,
+                    this.dialogIsOpened_ || this.swatchFocusVisible_)}">
             </div>
           </div>
           ${this.inputInDialog ? '' : input}
@@ -185,6 +196,25 @@ export class TerminalColorpickerElement extends LitElement {
           ${this.inputInDialog ? input : ''}
         </terminal-dialog>
     `;
+  }
+
+  onSwatchFocus_(event) {
+    this.swatchFocusVisible_ = event.target.matches(
+        CHROME_VERSION >= 87 ? ':focus-visible' : ':focus');
+  }
+
+  onSwatchBlur_(event) {
+    this.swatchFocusVisible_ = false;
+  }
+
+  onSwatchKeydown_(event) {
+    switch (event.code) {
+      case 'Enter':
+      case 'Space':
+        this.onSwatchActivated_();
+        event.preventDefault();
+        break;
+    }
   }
 
   constructor() {
@@ -208,6 +238,8 @@ export class TerminalColorpickerElement extends LitElement {
     this.cancelValue_;
     /** @private {boolean} */
     this.dialogIsOpened_ = false;
+    /** @private {boolean} */
+    this.swatchFocusVisible_ = false;
   }
 
   /**
@@ -260,8 +292,7 @@ export class TerminalColorpickerElement extends LitElement {
     return this.value_;
   }
 
-  /** @param {!Event} event */
-  onSwatchClick_(event) {
+  onSwatchActivated_() {
     this.openDialog();
     this.cancelValue_ = this.value;
   }
