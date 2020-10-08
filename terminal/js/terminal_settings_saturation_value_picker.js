@@ -8,6 +8,9 @@
  * @suppress {moduleLoad}
  */
 import {LitElement, css, html} from './lit_element.js';
+import './terminal_knob.js';
+
+export const ARROW_KEY_OFFSET = 1;
 
 export class SaturationValuePickerElement extends LitElement {
   static get is() { return 'saturation-value-picker'; }
@@ -41,18 +44,10 @@ export class SaturationValuePickerElement extends LitElement {
         }
 
         #picker {
-          border-radius: 100%;
-          border: 3px solid white;
-          box-shadow: 0 0 0 1px #5F6368;
-          box-sizing: border-box;
-          cursor: pointer;
-          height: 32px;
           left: 50%;
           pointer-events: none;
           position: absolute;
           top: 50%;
-          transform: translate(-50%, -50%);
-          width: 32px;
           z-index: 2;
         }
 
@@ -85,7 +80,9 @@ export class SaturationValuePickerElement extends LitElement {
     return html`
         <div id="black-to-transparent"></div>
         <div id="white-to-pure" style="${whiteToPureStyle}"></div>
-        <div id="picker" style="${pickerStyle}"></div>
+        <terminal-knob id="picker" tabindex="0" style="${pickerStyle}"
+            @keydown="${this.onKeydown_}">
+        </terminal-knob>
     `;
   }
 
@@ -120,30 +117,58 @@ export class SaturationValuePickerElement extends LitElement {
   onPointerDown_(event) {
     this.addEventListener('pointermove', this.onPointerMove_);
     this.setPointerCapture(event.pointerId);
-    this.update_(event);
+    this.onPointerEvent_(event);
   }
 
   /** @param {!Event} event */
   onPointerMove_(event) {
-    this.update_(event);
+    this.onPointerEvent_(event);
   }
 
   /** @param {!Event} event */
   onPointerUp_(event) {
     this.removeEventListener('pointermove', this.onPointerMove_);
     this.releasePointerCapture(event.pointerId);
-    this.update_(event);
+    this.onPointerEvent_(event);
+    this.shadowRoot.getElementById('picker').focus();
+  }
+
+  onKeydown_(event) {
+    switch (event.code) {
+      case 'ArrowLeft':
+        this.update_(this.saturation - ARROW_KEY_OFFSET, this.value);
+        event.preventDefault();
+        break;
+      case 'ArrowRight':
+        this.update_(this.saturation + ARROW_KEY_OFFSET, this.value);
+        event.preventDefault();
+        break;
+      case 'ArrowUp':
+        this.update_(this.saturation, this.value + ARROW_KEY_OFFSET);
+        event.preventDefault();
+        break;
+      case 'ArrowDown':
+        this.update_(this.saturation, this.value - ARROW_KEY_OFFSET);
+        event.preventDefault();
+        break;
+    }
   }
 
   /** @param {!Event} event */
-  update_(event) {
-    const xPercent = lib.f.clamp(event.offsetX / this.clientWidth, 0, 1);
-    const yPercent = lib.f.clamp(event.offsetY / this.clientHeight, 0, 1);
+  onPointerEvent_(event) {
+    this.update_(100 * (event.offsetX / this.clientWidth),
+        100 * (1 - event.offsetY / this.clientHeight));
+  }
 
-    this.saturation = 100 * xPercent;
-    this.value = 100 * (1 - yPercent);
+  /**
+   * @param {number} saturation
+   * @param {number} value
+   */
+  update_(saturation, value) {
+    this.saturation = lib.f.clamp(saturation, 0, 100);
+    this.value = lib.f.clamp(value, 0, 100);
 
-    this.dispatchEvent(new CustomEvent('updated', {bubbles: true}));
+    this.dispatchEvent(new CustomEvent('change', {bubbles: true}));
   }
 }
 

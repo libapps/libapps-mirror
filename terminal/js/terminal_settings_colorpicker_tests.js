@@ -108,7 +108,7 @@ describe('terminal_settings_colorpicker.js', () => {
     const svp = getElement(this.el, 'saturation-value-picker');
     svp.saturation = 20;
     svp.value = 80;
-    svp.dispatchEvent(new CustomEvent('updated'));
+    svp.dispatchEvent(new CustomEvent('change'));
     await allUpdatesComplete(this.el);
 
     assertInternals(this.el, '#CCBEA3', 39, 20, 80, 1);
@@ -222,7 +222,7 @@ describe('terminal_settings_colorpicker.js', () => {
     // Modify input and click OK.
     svp.saturation = 20;
     svp.value = 80;
-    svp.dispatchEvent(new CustomEvent('updated'));
+    svp.dispatchEvent(new CustomEvent('change'));
     await allUpdatesComplete(this.el);
     dialog.accept();
     await this.waitDialogClose();
@@ -248,7 +248,7 @@ describe('terminal_settings_colorpicker.js', () => {
     // Modify input and click OK.
     svp.saturation = 20;
     svp.value = 80;
-    svp.dispatchEvent(new CustomEvent('updated'));
+    svp.dispatchEvent(new CustomEvent('change'));
     await allUpdatesComplete(this.el);
     dialog.cancel();
     await this.waitDialogClose();

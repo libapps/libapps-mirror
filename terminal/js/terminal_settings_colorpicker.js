@@ -187,7 +187,7 @@ export class TerminalColorpickerElement extends LitElement {
         </div>
         <terminal-dialog @close="${this.onDialogClose_}">
           <saturation-value-picker
-              @updated="${this.onSaturationValue_}"
+              @change="${this.onSaturationValue_}"
               hue="${this.hue_}" saturation="${this.saturation_}"
               value="${this.hsvValue_}">
           </saturation-value-picker>
@@ -257,7 +257,7 @@ export class TerminalColorpickerElement extends LitElement {
           this.saturation_, this.hsvValue_, this.transparency_]);
       this.value = lib.colors.arrayToHSLA(hslaArray);
     }
-    this.dispatchEvent(new CustomEvent('updated'));
+    this.dispatchEvent(new CustomEvent('change'));
   }
 
   /** @param {string} value */
@@ -379,7 +379,7 @@ export class TerminalSettingsColorpickerElement extends
   /** @override */
   render() {
     return html`
-        <terminal-colorpicker @updated="${this.scheduleUpdate_}"
+        <terminal-colorpicker @change="${this.scheduleUpdate_}"
             value="${this.value}"
             ?disableTransparency="${this.disableTransparency}"/>
     `;

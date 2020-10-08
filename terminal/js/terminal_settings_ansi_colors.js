@@ -46,7 +46,7 @@ export class TerminalSettingsAnsiColorsElement extends
         <div class="color-row">${row.map((i) => html`
           <terminal-colorpicker data-index="${i}" value="${this.value[i]}"
               title="${msg(`TERMINAL_TITLE_ANSI_COLOR_TOOLTIP_${i}`)}"
-              @updated="${this.onColorChanged_}" inputInDialog/>`)}
+              @change="${this.onColorChanged_}" inputInDialog/>`)}
         </div>`)}`;
   }
 
@@ -60,7 +60,7 @@ export class TerminalSettingsAnsiColorsElement extends
   }
 
   /**
-   * Handle 'updated' event when one of the colors changes.
+   * Handle 'change' event when one of the colors changes.
    *
    * @param {!CustomEvent} event Event with index and value.
    * @private

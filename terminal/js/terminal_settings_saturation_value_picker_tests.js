@@ -6,10 +6,11 @@
  * @fileoverview Sauration Value Picker unit tests
  */
 
-import {SaturationValuePickerElement as Element} from
+import {SaturationValuePickerElement as Element, ARROW_KEY_OFFSET} from
     './terminal_settings_saturation_value_picker.js';
 
 describe('saturation_value_picker.js', () => {
+  const ERROR = 1;
   const createElement = (saturation, value) => {
     const el = document.createElement(Element.is);
     el.setAttribute('saturation', saturation);
@@ -18,6 +19,11 @@ describe('saturation_value_picker.js', () => {
   };
 
   const getPicker = (el) => el.shadowRoot.getElementById('picker');
+
+  const assertPickerPositionCloseTo = (el, saturation, value) => {
+    assert.closeTo(parseFloat(getPicker(el).style.left), saturation, ERROR);
+    assert.closeTo(100 - parseFloat(getPicker(el).style.top), value, ERROR);
+  };
 
   afterEach(function() {
     document.querySelectorAll(Element.is)
@@ -76,43 +82,62 @@ describe('saturation_value_picker.js', () => {
     assert.equal(getPicker(el).style.top, '25%');
   });
 
-  it('updates-picker-location-on-pointer-event', async function() {
-    const el = createElement(25, 25);
+  it('updates-on-pointer-event', async function() {
+    const saturation = 25;
+    const value = 75;
+    const newSaturation = 40;
+    const newValue = 10;
+    const el = createElement(saturation, value);
 
     document.body.appendChild(el);
     await el.updateComplete;
-
-    assert.equal(getPicker(el).style.left, '25%');
-    assert.equal(getPicker(el).style.top, '75%');
-
-    // Manually call handler, as you can't set offsetX/offsetY on a custom
-    // pointer event, and the event handlers may throw an error for a fake
-    // pointerId.
-    el.update_(
-        {offsetX: el.clientWidth * 0.75, offsetY: el.clientHeight * 0.25});
-    await el.updateComplete;
-
-    assert.equal(getPicker(el).style.left, '75%');
-    assert.equal(getPicker(el).style.top, '25%');
-    assert.equal(el.getAttribute('saturation'), 75);
-    assert.equal(el.getAttribute('value'), 75);
-  });
-
-  it('publishes-event-on-pointer-event', async function() {
-    const el = createElement(25, 25);
-
-    document.body.appendChild(el);
-    await el.updateComplete;
+    assertPickerPositionCloseTo(el, saturation, value);
 
     let listenerInvocations = 0;
-    el.addEventListener('updated', () => ++listenerInvocations);
+    el.addEventListener('change', () => {
+      assert.closeTo(el.saturation, newSaturation, ERROR);
+      assert.closeTo(el.value, newValue, ERROR);
+      ++listenerInvocations;
+    });
     // Manually call handler, as you can't set offsetX/offsetY on a custom
     // pointer event, and the event handlers may throw an error for a fake
     // pointerId.
-    el.update_(
-        {offsetX: el.clientWidth * 0.75, offsetY: el.clientHeight * 0.25});
+    el.onPointerEvent_({
+      offsetX: el.clientWidth * newSaturation / 100,
+      offsetY: el.clientHeight * (100 - newValue) / 100,
+    });
     await el.updateComplete;
-
+    assertPickerPositionCloseTo(el, newSaturation, newValue);
     assert.equal(listenerInvocations, 1);
   });
+
+  [
+      ['ArrowLeft', -ARROW_KEY_OFFSET, 0],
+      ['ArrowRight', ARROW_KEY_OFFSET, 0],
+      ['ArrowUp', 0, ARROW_KEY_OFFSET],
+      ['ArrowDown', 0, -ARROW_KEY_OFFSET],
+  ].forEach(([key, saturationOffset, valueOffset]) => it(
+      `updates-on-${key}`, async function() {
+        const saturation = 25;
+        const value = 75;
+        const newSaturation = saturation + saturationOffset;
+        const newValue = value + valueOffset;
+        const el = createElement(saturation, value);
+
+        document.body.appendChild(el);
+        await el.updateComplete;
+        assertPickerPositionCloseTo(el, saturation, value);
+
+        let listenerInvocations = 0;
+        el.addEventListener('change', () => {
+          assert.closeTo(el.saturation, newSaturation, ERROR);
+          assert.closeTo(el.value, newValue, ERROR);
+          ++listenerInvocations;
+        });
+        getPicker(el).dispatchEvent(new KeyboardEvent('keydown', {code: key}));
+        await el.updateComplete;
+        assertPickerPositionCloseTo(el, newSaturation, newValue);
+        assert.equal(listenerInvocations, 1);
+      }));
+
 });
