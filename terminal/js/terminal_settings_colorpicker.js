@@ -9,15 +9,16 @@
  */
 import {LitElement, css, html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
-import {stylesDialog} from './terminal_settings_styles.js';
 import './terminal_settings_button.js';
 import './terminal_settings_hue_slider.js';
 import './terminal_settings_saturation_value_picker.js';
 import './terminal_textfield.js';
+import './terminal_dialog.js';
 
+// Export for testing.
 export const TOO_WHITE_BOX_SHADOW = 'inset 0 0 0 1px black';
 export const FOCUS_BOX_SHADOW =
-    '0 0 0 2px rgba(var(--google-blue-600-rgb), .4)';
+    '0 0 0 2px var(--focus-shadow-color)';
 
 /**
  * Convert CSS color to hex color.  Always use uppercase for display.
@@ -94,7 +95,7 @@ export class TerminalColorpickerElement extends LitElement {
 
   /** @override */
   static get styles() {
-    return [stylesDialog, css`
+    return css`
         #smallview {
           align-items: center;
           display: flex;
@@ -145,15 +146,14 @@ export class TerminalColorpickerElement extends LitElement {
           margin: 24px 0;
         }
 
-        dialog #hexinput {
+        terminal-dialog #hexinput {
           margin: 0;
         }
-    `];
+    `;
   }
 
   /** @override */
   render() {
-    const msg = hterm.messageManager.get.bind(hterm.messageManager);
     const transparency = this.disableTransparency ? '' : html`
         <transparency-slider hue="${this.hue_}"
             @updated="${this.onTransparency_}"
@@ -173,7 +173,7 @@ export class TerminalColorpickerElement extends LitElement {
           </div>
           ${this.inputInDialog ? '' : input}
         </div>
-        <dialog>
+        <terminal-dialog @close="${this.onDialogClose_}">
           <saturation-value-picker
               @updated="${this.onSaturationValue_}"
               hue="${this.hue_}" saturation="${this.saturation_}"
@@ -183,17 +183,7 @@ export class TerminalColorpickerElement extends LitElement {
           </hue-slider>
           ${transparency}
           ${this.inputInDialog ? input : ''}
-          <div class="dialog-button-container">
-            <terminal-settings-button class="cancel"
-                @click="${this.onCancelClick_}">
-              ${msg('CANCEL_BUTTON_LABEL')}
-            </terminal-settings-button>
-            <terminal-settings-button class="action"
-                @click="${this.onOkClick_}">
-              ${msg('OK_BUTTON_LABEL')}
-            </terminal-settings-button>
-          </div>
-        </dialog>
+        </terminal-dialog>
     `;
   }
 
@@ -310,35 +300,25 @@ export class TerminalColorpickerElement extends LitElement {
   onInputKeydown_(event) {
     if (event.key === 'Enter') {
       this.onInputChange_(event);
-      this.onOkClick_();
+      this.shadowRoot.querySelector('terminal-dialog').accept();
     }
   }
 
   /**
-   * Detects clicks on the dialog cancel button.
+   * Handles dialog close.
    *
    * @param {!Event} event
    */
-  onCancelClick_(event) {
-    this.closeDialog();
-    this.onUiChanged_(this.cancelValue_);
-  }
-
-  /**
-   * Detects clicks on the dialog cancel button.
-   */
-  onOkClick_() {
-    this.closeDialog();
+  onDialogClose_(event) {
+    this.dialogIsOpened_ = false;
+    if (!event.detail.accept) {
+      this.onUiChanged_(this.cancelValue_);
+    }
   }
 
   openDialog() {
     this.dialogIsOpened_ = true;
-    this.shadowRoot.querySelector('dialog').showModal();
-  }
-
-  closeDialog() {
-    this.dialogIsOpened_ = false;
-    this.shadowRoot.querySelector('dialog').close();
+    this.shadowRoot.querySelector('terminal-dialog').show();
   }
 }
 

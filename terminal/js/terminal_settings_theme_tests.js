@@ -133,6 +133,7 @@ describe('terminal_settings_theme_tests.js', () => {
   });
 
   it('resets', async function() {
+    const dialog = this.el.shadowRoot.querySelector('terminal-dialog');
     assert.equal(window.preferenceManager.get('theme'), 'dark');
     await window.preferenceManager.set('background-color', 'purple');
     assert.isTrue(
@@ -144,12 +145,12 @@ describe('terminal_settings_theme_tests.js', () => {
         this.el.shadowRoot.getElementById('dark').hasAttribute('reset-theme'));
 
     this.el.shadowRoot.getElementById('dark').click();
-    assert.isTrue(
-        this.el.shadowRoot.querySelector('dialog').hasAttribute('open'));
+    await this.el.updateComplete;
+    assert.isTrue(dialog.hasAttribute('open'));
 
     const prefChanged = test.listenForPrefChange(
         window.preferenceManager, 'background-color');
-    this.el.shadowRoot.querySelector('terminal-settings-button.action').click();
+    dialog.accept();
     await prefChanged;
     assert.isTrue(
         this.el.shadowRoot.getElementById('dark').hasAttribute('active-theme'));

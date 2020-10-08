@@ -10,9 +10,9 @@
 import {LitElement, css, html, unsafeCSS} from './lit_element.js';
 import {DEFAULT_THEME, DEFAULT_ANSI_COLORS, DEFAULT_BACKGROUND_COLOR,
     DEFAULT_CURSOR_COLOR, DEFAULT_FOREGROUND_COLOR} from './terminal_common.js';
-import {stylesVars, stylesDialog}
-    from './terminal_settings_styles.js';
+import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_settings_button.js';
+import './terminal_dialog.js';
 
 /** @typedef {!Object<string, *>} */
 let ThemeVariation;
@@ -268,7 +268,7 @@ export class TerminalSettingsThemeElement extends LitElement {
 
   /** @override */
   static get styles() {
-    return [stylesVars, stylesDialog, css`
+    return [stylesVars, css`
       #themes {
         display: flex;
         flex-wrap: wrap;
@@ -398,24 +398,11 @@ ${span(t.ansi[10], 'joel@penguin')}:${span(t.ansi[12], '~')
             </div>
           </div>`)}
         </div>
-        <dialog>
-          <div class="dialog-title">
-            ${msg('TERMINAL_SETTINGS_RESET_DIALOG_TITLE')}
-          </div>
-          <div id="dialog-message">
-            ${msg('TERMINAL_SETTINGS_RESET_DIALOG_MESSAGE')}
-          </div>
-          <div class="dialog-button-container">
-            <terminal-settings-button class="cancel"
-                @click="${this.onCancelClick_}">
-              ${msg('CANCEL_BUTTON_LABEL')}
-            </terminal-settings-button>
-            <terminal-settings-button class="action"
-                @click="${this.onResetClick_}">
-              ${msg('TERMINAL_SETTINGS_RESET_LABEL')}
-            </terminal-settings-button>
-          </div>
-        </dialog>
+        <terminal-dialog acceptText="${msg('TERMINAL_SETTINGS_RESET_LABEL')}"
+            @close=${this.onDialogClose}>
+          <div slot="title">${msg('TERMINAL_SETTINGS_RESET_DIALOG_TITLE')}</div>
+          ${msg('TERMINAL_SETTINGS_RESET_DIALOG_MESSAGE')}
+        </terminal-dialog>
     `;
   }
 
@@ -429,7 +416,7 @@ ${span(t.ansi[10], 'joel@penguin')}:${span(t.ansi[12], '~')
       return;
     }
     if (this.theme_.id === id && this.theme_.hasVariations()) {
-      this.shadowRoot.querySelector('dialog').showModal();
+      this.shadowRoot.querySelector('terminal-dialog').show();
     } else {
       this.theme_ = THEMES[id];
       this.theme_.writeToPrefs();
@@ -453,23 +440,10 @@ ${span(t.ansi[10], 'joel@penguin')}:${span(t.ansi[12], '~')
     this.requestUpdate();
   }
 
-  /**
-   * Detects clicks on the dialog cancel button.
-   *
-   * @param {!Event} event
-   */
-  onCancelClick_(event) {
-    this.shadowRoot.querySelector('dialog').close();
-  }
-
-  /**
-   * Detects clicks on the dialog cancel button.
-   *
-   * @param {!Event} event
-   */
-  onResetClick_(event) {
-    this.shadowRoot.querySelector('dialog').close();
-    this.theme_.clearVariations();
+  onDialogClose(event) {
+    if (event.detail.accept) {
+      this.theme_.clearVariations();
+    }
   }
 }
 
