@@ -13,6 +13,7 @@ import {TerminalSettingsElement} from './terminal_settings_element.js';
 import './terminal_settings_button.js';
 import './terminal_settings_hue_slider.js';
 import './terminal_settings_saturation_value_picker.js';
+import './terminal_settings_transparency_slider.js';
 import './terminal_textfield.js';
 import './terminal_dialog.js';
 
@@ -160,9 +161,9 @@ export class TerminalColorpickerElement extends LitElement {
   /** @override */
   render() {
     const transparency = this.disableTransparency ? '' : html`
-        <transparency-slider hue="${this.hue_}"
-            @updated="${this.onTransparency_}"
-            transparency="${this.transparency_}">
+        <transparency-slider color="${this.value}"
+            transparency="${this.transparency_}"
+            @change="${this.onTransparency_}">
         </transparency-slider>`;
     const input = html`
         <terminal-textfield id="hexinput"
@@ -190,8 +191,7 @@ export class TerminalColorpickerElement extends LitElement {
               hue="${this.hue_}" saturation="${this.saturation_}"
               value="${this.hsvValue_}">
           </saturation-value-picker>
-          <hue-slider hue="${this.hue_}" @updated="${this.onHue_}" >
-          </hue-slider>
+          <hue-slider hue="${this.hue_}" @change="${this.onHue_}"></hue-slider>
           ${transparency}
           ${this.inputInDialog ? input : ''}
         </terminal-dialog>

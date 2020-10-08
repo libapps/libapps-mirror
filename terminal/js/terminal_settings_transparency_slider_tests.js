@@ -6,77 +6,65 @@
  * @fileoverview Transparency Slider unit tests
  */
 
-import {TransparencySliderElement as Element} from
-    './terminal_settings_transparency_slider.js';
+import './terminal_settings_hue_slider.js';
 
 describe('transparency_slider_tests.js', () => {
-  const createElement = (transparency) => {
-    const el = document.createElement(Element.is);
-    el.setAttribute('transparency', transparency);
-    return el;
-  };
+  const PERCENTAGE_ERROR = 0.01;
 
-  const getPicker = (el) => el.shadowRoot.getElementById('picker');
+  beforeEach(async function() {
+    this.el = document.createElement('transparency-slider');
+    this.el.setAttribute('transparency', 0.2);
+    document.body.appendChild(this.el);
+    await this.el.updateComplete;
+    this.innerSlider = this.el.shadowRoot.querySelector('terminal-slider');
+
+    this.assertInternals = function(transparency) {
+      assert.closeTo(transparency, this.el.transparency, PERCENTAGE_ERROR);
+      assert.closeTo(transparency, this.innerSlider.value, PERCENTAGE_ERROR);
+    };
+  });
 
   afterEach(function() {
-    document.querySelectorAll(Element.is)
-        .forEach((el) => el.parentElement.removeChild(el));
+    document.body.removeChild(this.el);
   });
 
-  it('initialises-the-picker-to-the-correct-x-coordinates', async function() {
-    const els = [createElement(0), createElement(0.5), createElement(1)];
+  it('update-slider-on-transparency-changed', async function() {
+    this.assertInternals(0.2);
 
-    els.forEach((el) => document.body.appendChild(el));
-    await Promise.all(els.map((el) => el.updateComplete));
-
-    assert.deepEqual(
-        els.map((el) => getPicker(el).style.left), ['0%', '50%', '100%']);
+    this.el.setAttribute('transparency', 0.5);
+    await this.el.updateComplete;
+    this.assertInternals(0.5);
   });
 
-  it('updates-picker-location-when-attribute-changed', async function() {
-    const el = createElement(0.25);
+  it('updates-transparency-and-pass-through-event-on-slider-change',
+      async function() {
+        this.assertInternals(0.2);
 
-    document.body.appendChild(el);
-    await el.updateComplete;
+        let listenerInvocations = 0;
+        this.el.addEventListener('change', () => {
+          this.assertInternals(0.6);
+          ++listenerInvocations;
+        });
 
-    assert.equal(getPicker(el).style.left, '25%');
+        this.innerSlider.value = 0.6;
+        this.innerSlider.dispatchEvent(new Event('change'));
+        assert.equal(listenerInvocations, 1);
+      });
 
-    el.setAttribute('transparency', 0.75);
-    await el.updateComplete;
+  it('background-color', async function() {
+    this.el.setAttribute('color', 'rgba(12, 34, 56, 78)');
+    this.el.setAttribute('transparency', 0.5);
+    await this.el.updateComplete;
 
-    assert.equal(getPicker(el).style.left, '75%');
-  });
+    // #display has opaque color at the right end.
+    assert.equal(
+        this.el.shadowRoot.getElementById('display').getAttribute('style'),
+        'background-image: linear-gradient(to right, transparent, ' +
+          'rgba(12, 34, 56, 1));');
 
-  it('updates-picker-location-on-pointer-event', async function() {
-    const el = createElement(0.25);
-
-    document.body.appendChild(el);
-    await el.updateComplete;
-
-    assert.equal(getPicker(el).style.left, '25%');
-
-    // Manually call handler, as you can't set offsetX on a custom pointer
-    // event, and the event handlers may throw an error for a fake pointerId.
-    el.update_({offsetX: el.clientWidth * 0.75});
-    await el.updateComplete;
-
-    assert.equal(getPicker(el).style.left, '75%');
-    assert.equal(el.getAttribute('transparency'), 0.75);
-  });
-
-  it('publishes-event-on-pointer-event', async function() {
-    const el = createElement(0.25);
-
-    document.body.appendChild(el);
-    await el.updateComplete;
-
-    let listenerInvocations = 0;
-    el.addEventListener('updated', () => ++listenerInvocations);
-    // Manually call handler, as you can't set offsetX on a custom pointer
-    // event, and the event handlers may throw an error for a fake pointerId.
-    el.update_({offsetX: el.clientWidth * 0.75});
-    await el.updateComplete;
-
-    assert.equal(listenerInvocations, 1);
+    // knob has the current transparency.
+    assert.equal(
+        this.el.shadowRoot.querySelector('terminal-knob').getAttribute('style'),
+        'background-color: rgba(12, 34, 56, 0.5);');
   });
 });

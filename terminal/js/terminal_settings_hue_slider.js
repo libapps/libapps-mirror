@@ -8,6 +8,9 @@
  * @suppress {moduleLoad}
  */
 import {LitElement, css, html} from './lit_element.js';
+import {redispatchEvent} from './terminal_common.js';
+import './terminal_knob.js';
+import './terminal_slider.js';
 
 export class HueSliderElement extends LitElement {
   static get is() { return 'hue-slider'; }
@@ -42,81 +45,37 @@ export class HueSliderElement extends LitElement {
           position: relative;
           width: 200px;
         }
-
-        #picker {
-          border-radius: 100%;
-          border: 3px solid white;
-          box-shadow: 0 0 0 1px #5F6368;
-          box-sizing: border-box;
-          cursor: pointer;
-          height: 32px;
-          left: 50%;
-          pointer-events: none;
-          position: absolute;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          width: 32px;
-          z-index: 2;
-        }
     `;
   }
 
   /** @override */
   render() {
     return html`
-        <div id="picker" style="left: ${100 * this.hue / 360}%;
-            background-color: hsl(${this.hue}, 100%, 50%);">
-        </div>
+        <terminal-slider value=${this.hue / 360} @change="${this.onChange_}">
+          <terminal-knob slot="knob"
+              style="background-color: hsl(${this.hue}, 100%, 50%);">
+          </terminal-knob>
+        </terminal-slider>
     `;
   }
 
   constructor() {
     super();
 
-    /** @private {number} */
+    /** @public {number} */
     this.hue;
+    /** @private {?Element} */
+    this.slider_;
   }
 
   /** @override */
-  connectedCallback() {
-    super.connectedCallback();
-
-    this.addEventListener('pointerdown', this.onPointerDown_);
-    this.addEventListener('pointerup', this.onPointerUp_);
+  firstUpdated() {
+    this.slider_ = this.shadowRoot.querySelector('terminal-slider');
   }
 
-  /** @override */
-  disconnectedCallback() {
-    this.removeEventListener('pointerdown', this.onPointerDown_);
-    this.removeEventListener('pointerup', this.onPointerUp_);
-
-    super.disconnectedCallback();
-  }
-
-  /** @param {!Event} event */
-  onPointerDown_(event) {
-    this.addEventListener('pointermove', this.onPointerMove_);
-    this.setPointerCapture(event.pointerId);
-    this.update_(event);
-  }
-
-  /** @param {!Event} event */
-  onPointerMove_(event) {
-    this.update_(event);
-  }
-
-  /** @param {!Event} event */
-  onPointerUp_(event) {
-    this.removeEventListener('pointermove', this.onPointerMove_);
-    this.releasePointerCapture(event.pointerId);
-    this.update_(event);
-  }
-
-  /** @param {!Event} event */
-  update_(event) {
-    this.hue = 360 * lib.f.clamp(
-        event.offsetX / this.clientWidth, 0, 1);
-    this.dispatchEvent(new CustomEvent('updated', {bubbles: true}));
+  onChange_(event) {
+    this.hue = this.slider_.value * 360;
+    redispatchEvent(this, event);
   }
 }
 

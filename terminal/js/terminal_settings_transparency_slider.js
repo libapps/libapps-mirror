@@ -8,6 +8,11 @@
  * @suppress {moduleLoad}
  */
 import {LitElement, css, html} from './lit_element.js';
+import {redispatchEvent} from './terminal_common.js';
+import './terminal_knob.js';
+import './terminal_slider.js';
+
+const setAlpha = lib.colors.setAlpha;
 
 export class TransparencySliderElement extends LitElement {
   static get is() { return 'transparency-slider'; }
@@ -15,12 +20,12 @@ export class TransparencySliderElement extends LitElement {
   /** @override */
   static get properties() {
     return {
+      color: {
+        type: String,
+      },
       transparency: {
         type: Number,
         reflect: true,
-      },
-      hue: {
-        type: Number,
       },
     };
   }
@@ -45,101 +50,55 @@ export class TransparencySliderElement extends LitElement {
           background-position: 0px 0, 5px 5px;
           background-size: 10px 10px, 10px 10px;
           border-radius: 4px;
-          cursor: pointer;
           display: block;
-          height: 16px;
-          position: relative;
           width: 200px;
         }
 
         #display {
-          border-radius: inherit;
+          border-radius: 4px;
           height: 100%;
           pointer-events: none;
           width: 100%;
-        }
-
-        #picker {
-          border-radius: 100%;
-          border: 2px solid white;
-          border: 4px solid white;
-          box-shadow: 0 0 0 1px #5F6368;
-          box-sizing: border-box;
-          cursor: pointer;
-          height: 32px;
-          left: 50%;
-          pointer-events: none;
-          position: absolute;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          width: 32px;
-          z-index: 2;
         }
     `;
   }
 
   /** @override */
   render() {
+    const color = lib.notNull(lib.colors.normalizeCSS(
+        this.color || 'rgb(0, 0, 0)'));
+    const displayStyle = `background-image: linear-gradient(to right, ` +
+        `transparent, ${setAlpha(color, 1)});`;
     return html`
-        <div id="display" style="background-image: linear-gradient(to right,
-            transparent, hsl(${this.hue}, 100%, 50%));">
-        </div>
-        <div id="picker" style="left: ${100 * this.transparency}%;
-            background-color: hsl(${this.hue}, 100%, 50%);">
-        </div>
+        <terminal-slider value=${this.transparency} @change=${this.onChange_}>
+          <div id="display" style="${displayStyle}"></div>
+          <terminal-knob slot="knob"
+              style="background-color: ${setAlpha(color, this.transparency)};">
+          </terminal-knob>
+        </terminal-slider>
     `;
   }
 
   constructor() {
     super();
 
+    /** @public {string} */
+    this.color;
     /** @private {number} */
-    this.hue;
-    /** @private {number} */
-    this.transparency;
+    this.transparency = 0;
+    /** @private {?Element} */
+    this.slider_;
   }
 
   /** @override */
-  connectedCallback() {
-    super.connectedCallback();
-
-    this.addEventListener('pointerdown', this.onPointerDown_);
-    this.addEventListener('pointerup', this.onPointerUp_);
+  firstUpdated() {
+    this.slider_ = this.shadowRoot.querySelector('terminal-slider');
   }
 
-  /** @override */
-  disconnectedCallback() {
-    this.removeEventListener('pointerdown', this.onPointerDown_);
-    this.removeEventListener('pointerup', this.onPointerUp_);
-
-    super.disconnectedCallback();
+  onChange_(event) {
+    this.transparency = this.slider_.value;
+    redispatchEvent(this, event);
   }
 
-  /** @param {!Event} event */
-  onPointerDown_(event) {
-    this.addEventListener('pointermove', this.onPointerMove_);
-    this.setPointerCapture(event.pointerId);
-    this.update_(event);
-  }
-
-  /** @param {!Event} event */
-  onPointerMove_(event) {
-    this.update_(event);
-  }
-
-  /** @param {!Event} event */
-  onPointerUp_(event) {
-    this.removeEventListener('pointermove', this.onPointerMove_);
-    this.releasePointerCapture(event.pointerId);
-    this.update_(event);
-  }
-
-  /** @param {!Event} event */
-  update_(event) {
-    this.transparency = lib.f.clamp(
-        event.offsetX / this.clientWidth, 0, 1);
-    this.dispatchEvent(new CustomEvent('updated', {bubbles: true}));
-  }
 }
-
 customElements.define(TransparencySliderElement.is, TransparencySliderElement);

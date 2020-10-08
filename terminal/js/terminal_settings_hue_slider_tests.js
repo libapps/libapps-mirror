@@ -6,76 +6,47 @@
  * @fileoverview Hue Slider unit tests
  */
 
-import {HueSliderElement as Element} from './terminal_settings_hue_slider.js';
+import './terminal_settings_hue_slider.js';
 
 describe('hue_slider_tests.js', () => {
-  const createElement = (hue) => {
-    const el = document.createElement(Element.is);
-    el.setAttribute('hue', hue);
-    return el;
-  };
+  const PERCENTAGE_ERROR = 0.01;
 
-  const getPicker = (el) => el.shadowRoot.getElementById('picker');
+  beforeEach(async function() {
+    this.el = document.createElement('hue-slider');
+    this.el.setAttribute('hue', 100);
+    document.body.appendChild(this.el);
+    await this.el.updateComplete;
+    this.innerSlider = this.el.shadowRoot.querySelector('terminal-slider');
+
+    this.assertInternals = function(hue) {
+      assert.closeTo(hue, this.el.hue, 360 * PERCENTAGE_ERROR);
+      assert.closeTo(hue / 360, this.innerSlider.value, PERCENTAGE_ERROR);
+    };
+  });
 
   afterEach(function() {
-    document.querySelectorAll(Element.is)
-        .forEach((el) => el.parentElement.removeChild(el));
+    document.body.removeChild(this.el);
   });
 
-  it('initialises-the-picker-to-the-correct-x-coordinates', async function() {
-    const els = [createElement(0), createElement(180), createElement(360)];
+  it('update-slider-on-hue-changed', async function() {
+    this.assertInternals(100);
 
-    els.forEach((el) => document.body.appendChild(el));
-    await Promise.all(els.map((el) => el.updateComplete));
-
-    assert.deepEqual(
-        els.map((el) => getPicker(el).style.left), ['0%', '50%', '100%']);
+    this.el.setAttribute('hue', 200);
+    await this.el.updateComplete;
+    this.assertInternals(200);
   });
 
-  it('updates-picker-location-when-attribute-changed', async function() {
-    const el = createElement(90);
-
-    document.body.appendChild(el);
-    await el.updateComplete;
-
-    assert.equal(getPicker(el).style.left, '25%');
-
-    el.setAttribute('hue', 270);
-    await el.updateComplete;
-
-    assert.equal(getPicker(el).style.left, '75%');
-  });
-
-  it('updates-picker-location-on-pointer-event', async function() {
-    const el = createElement(90);
-
-    document.body.appendChild(el);
-    await el.updateComplete;
-
-    assert.equal(getPicker(el).style.left, '25%');
-
-    // Manually call handler, as you can't set offsetX on a custom pointer
-    // event, and the event handlers may throw an error for a fake pointerId.
-    el.update_({offsetX: el.clientWidth * 0.75});
-    await el.updateComplete;
-
-    assert.equal(getPicker(el).style.left, '75%');
-    assert.equal(el.getAttribute('hue'), 270);
-  });
-
-  it('publishes-event-on-pointer-event', async function() {
-    const el = createElement(90);
-
-    document.body.appendChild(el);
-    await el.updateComplete;
+  it('updates-hue-and-pass-through-event-on-slider-change', async function() {
+    this.assertInternals(100);
 
     let listenerInvocations = 0;
-    el.addEventListener('updated', () => ++listenerInvocations);
-    // Manually call handler, as you can't set offsetX on a custom pointer
-    // event, and the event handlers may throw an error for a fake pointerId.
-    el.update_({offsetX: el.clientWidth * 0.75});
-    await el.updateComplete;
+    this.el.addEventListener('change', () => {
+      this.assertInternals(200);
+      ++listenerInvocations;
+    });
 
+    this.innerSlider.value = 200 / 360;
+    this.innerSlider.dispatchEvent(new Event('change'));
     assert.equal(listenerInvocations, 1);
   });
 });

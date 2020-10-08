@@ -225,3 +225,13 @@ export function setUpTitleCacheHandler() {
     window.localStorage.setItem('cachedTitle', mutations[0].target.textContent);
   })).observe(document.querySelector('title'), {childList: true});
 }
+
+/**
+ * Re-dispatch an event on the element.
+ *
+ * @param {!HTMLElement} element
+ * @param {!Event} event
+ */
+export function redispatchEvent(element, event) {
+    element.dispatchEvent(new event.constructor(event.type, event));
+}

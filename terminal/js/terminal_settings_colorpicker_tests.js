@@ -44,7 +44,7 @@ describe('terminal_settings_colorpicker.js', () => {
     assert.closeTo(+svp.getAttribute('saturation'), saturation, error);
     assert.closeTo(+svp.getAttribute('value'), value, error);
     assert.closeTo(+hs.getAttribute('hue'), hue, error);
-    assert.closeTo(+ts.getAttribute('hue'), hue, error);
+    assert.equal(ts.getAttribute('color'), el.value);
     assert.closeTo(+ts.getAttribute('transparency'), transparency, error);
   }
 
@@ -120,7 +120,7 @@ describe('terminal_settings_colorpicker.js', () => {
 
     const hs = getElement(this.el, 'hue-slider');
     hs.hue = 222;
-    hs.dispatchEvent(new CustomEvent('updated'));
+    hs.dispatchEvent(new CustomEvent('change'));
     await allUpdatesComplete(this.el);
 
     assertInternals(this.el, '#004CFF', 222, 100, 100, 1);
@@ -132,7 +132,7 @@ describe('terminal_settings_colorpicker.js', () => {
 
     const ts = getElement(this.el, 'transparency-slider');
     ts.transparency = 0.5;
-    ts.dispatchEvent(new CustomEvent('updated'));
+    ts.dispatchEvent(new CustomEvent('change'));
     await allUpdatesComplete(this.el);
 
     assertInternals(this.el, '#FFA60080', 39, 100, 100, 0.5);
