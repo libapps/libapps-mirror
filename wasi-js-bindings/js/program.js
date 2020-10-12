@@ -6,12 +6,16 @@
  * @fileoverview Programs for encapsulating WASM programs.
  */
 
+import * as util from './util.js';
+
 /**
  * A program API encapsulating a WASM program.
  */
 export class Program {
   /**
-   * @param {string} source Path to the WASM program to fetch/load.
+   * @param {string|!Promise<!Response>|!Response|!ArrayBuffer} source The WASM
+   *     program to run.  Strings will automatically be fetched, responses will
+   *     be processed, and ArrayBuffers used directly.
    * @param {boolean=} stream Whether to use WebAssembly.instantiateStreaming.
    */
   constructor(source, stream = false) {
@@ -32,14 +36,38 @@ export class Program {
    */
   async instantiate(imports) {
     let result;
-    if (this.stream_) {
-      result = await WebAssembly.instantiateStreaming(
-        fetch(this.source), imports,
-      );
+
+    let stream = this.stream_;
+    if (this.source instanceof ArrayBuffer) {
+      stream = false;
+    }
+
+    let source;
+    if (typeof this.source === 'string') {
+      source = fetch(this.source);
     } else {
-      result = await fetch(this.source)
-        .then((response) => response.arrayBuffer())
-        .then((bytes) => WebAssembly.instantiate(bytes, imports));
+      source = this.source;
+    }
+
+    if (stream) {
+      if (source instanceof ArrayBuffer) {
+        throw new util.ApiViolation(
+            'source cannot be an ArrayBuffer when streaming');
+      }
+      /** @suppress {checkTypes} Closure externs are missing Response. */
+      result = await WebAssembly.instantiateStreaming(source, imports);
+    } else {
+      let buffer;
+      if (this.source instanceof ArrayBuffer) {
+        buffer = this.source;
+      } else {
+        if (source instanceof Promise) {
+          source = await source;
+        }
+        buffer = await source.arrayBuffer();
+      }
+
+      result = await WebAssembly.instantiate(buffer, imports);
     }
     this.instance = result.instance;
     return /** @type {!WebAssembly.Instance} */ (this.instance);

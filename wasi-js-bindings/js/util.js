@@ -67,6 +67,11 @@ export class CompletedProcessError extends Error {
 }
 
 /**
+ * Exception when a documented API is used incorrectly.
+ */
+export class ApiViolation extends Error {}
+
+/**
  * Turn error number into symbolic constant.
  *
  * @param {number} errno The error number.

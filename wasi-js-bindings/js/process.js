@@ -20,15 +20,34 @@ import * as WASI from './wasi.js';
 class Base {
   /**
    * @param {{
-   *   executable: string,
-   *   argv: !Array<string>,
-   *   environ: !Object<string, string>,
+   *   executable: (string|!Promise<!Response>|!Response|!ArrayBuffer),
+   *   argv: (!Array<string>|undefined),
+   *   environ: (!Object<string, string>|undefined),
    * }} param1
    */
   constructor({executable, argv, environ}) {
     this.executable = executable;
-    this.argv = argv;
-    this.environ = environ;
+    if (argv === undefined) {
+      if (typeof executable === 'string') {
+        this.argv = [executable];
+      } else {
+        this.argv = ['wasi-program'];
+      }
+    } else {
+      if (!Array.isArray(argv)) {
+        throw new util.ApiViolation('argv must be an Array');
+      }
+      for (let i = 0; i < argv.length; ++i) {
+        if (typeof argv[i] !== 'string') {
+          throw new util.ApiViolation(
+              `argv must be an Array of strings; argv[${i}] is a ` +
+              `"${typeof argv[i]}" instead!`);
+        }
+      }
+
+      this.argv = argv;
+    }
+    this.environ = environ || {};
   }
 
   /** @override */
@@ -51,9 +70,9 @@ class Base {
 export class Foreground extends Base {
   /**
    * @param {{
-   *   executable: string,
-   *   argv: !Array<string>,
-   *   environ: !Object<string, string>,
+   *   executable: (string|!Promise<!Response>|!Response|!ArrayBuffer),
+   *   argv: (!Array<string>|undefined),
+   *   environ: (!Object<string, string>|undefined),
    *   sys_handlers: !Array<!SyscallHandler>,
    *   sys_entries: !Array<!SyscallEntry>,
    * }} param1

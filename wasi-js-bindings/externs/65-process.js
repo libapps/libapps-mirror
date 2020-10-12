@@ -11,13 +11,13 @@
 class Process {
   /**
    * @param {{
-   *   executable: string,
-   *   argv: !Array<string>,
-   *   environ: !Object<string, string>,
+   *   executable: (string|!Promise<!Response>|!Response|!ArrayBuffer),
+   *   argv: (!Array<string>|undefined),
+   *   environ: (!Object<string, string>|undefined),
    * }} param1
    */
   constructor({executable, argv, environ}) {
-    /** @type {string} */
+    /** @type {(string|!Promise<!Response>|!Response|!ArrayBuffer)} */
     this.executable = '';
     /** @type {!Array<string>} */
     this.argv = [];
