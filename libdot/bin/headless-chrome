@@ -21,7 +21,7 @@ import libdot
 # $ wget "${uribase}/${filename}"
 # $ gsutil cp -a public-read google-chrome-stable_*.deb \
 #       gs://chromeos-localmirror/secureshell/distfiles/
-CHROME_VERSION = 'google-chrome-stable_75.0.3770.142-1'
+CHROME_VERSION = 'google-chrome-stable_86.0.4240.75-1'
 
 
 def chrome_setup():
