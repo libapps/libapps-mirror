@@ -7,6 +7,8 @@ __pycache__/
 *.swp
 .eslintcache
 .vscode
+*.wasm
+*.wasm.dbg
 
 # Stuff we build for distribution
 /artifacts/

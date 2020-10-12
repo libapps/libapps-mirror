@@ -11,6 +11,15 @@
 var chai = {};
 
 /**
+ * @type {{
+ *   includeStack: boolean,
+ *   showDiff: boolean,
+ *   truncateThreshold: number,
+ * }}
+ */
+chai.config;
+
+/**
  * @param {*} expression
  * @param {string=} message
  */

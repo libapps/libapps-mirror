@@ -5,6 +5,7 @@
 
 """Lint our source files."""
 
+import itertools
 import os
 from pathlib import Path
 import sys
@@ -24,7 +25,9 @@ def _get_default_paths(basedir):
 
     # All files in js/*.js.
     # Use relpath for nicer default output.
-    js_files = sorted(JS_DIR.glob('**/*.js'))
+    test_dir = wjb.DIR / 'test'
+    js_files = sorted(itertools.chain(
+        JS_DIR.glob('**/*.js'), test_dir.glob('**/*.js')))
 
     return [os.path.relpath(x) for x in most_files + js_files]
 
