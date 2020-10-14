@@ -190,10 +190,9 @@ def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):
     for extern in externs_paths.glob('*.js'):
         externs += ['--externs', os.path.relpath(extern)]
 
-    argv += [
-        '--checks-only',
-        '--language_in=ECMASCRIPT_2018',
-    ] + externs
+    # Set the language first so projects can override it.
+    argv = (['--language_in=ECMASCRIPT_2020'] + argv + ['--checks-only'] +
+            externs)
     result = run(argv + paths, check=False)
     if result.returncode:
         ret = False
