@@ -22,24 +22,6 @@
 
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof(*(x)))
 
-#define __WASI_SYSCALL_NAME(name) \
-    __attribute__((__import_module__("wassh_experimental"), \
-                   __import_name__(#name)))
-
-__wasi_errno_t __wassh_test_func(
-    int in,
-    int* out
-) __WASI_SYSCALL_NAME(test_func) __attribute__((__warn_unused_result__));
-
-int test_func(int in, int* out) {
-  __wasi_errno_t error = __wassh_test_func(in, out);
-  if (error != 0) {
-    errno = error;
-    return -1;
-  }
-  return 0;
-}
-
 int main(int argc, char* argv[]) {
   setbuf(stdout, NULL);
   setbuf(stderr, NULL);
@@ -132,14 +114,6 @@ int main(int argc, char* argv[]) {
     printf("open(%s) = %i (%i = %s)\n", path, open(path, O_RDONLY),
            errno, strerror(errno));
   }
-#endif
-
-#if 1
-  errno = 0;
-  int out = -100;
-  int ret = test_func(argc, &out);
-  printf("test_func() = %i\nerrno = %i (%s)\nout = %i %#x\n", ret, errno,
-         strerror(errno), out, out);
 #endif
 
 #if 1

@@ -15,7 +15,6 @@ doit \
   -o test.wasm.i64 \
   -s \
   -Wl,--allow-undefined-file="${OUT}/wasi-sdk/share/wasi-sysroot/lib/wassh-libc-sup.imports" \
-  -Wl,--allow-undefined-file=<(echo __wassh_test_func) \
   -L"${OUT}/wasi-sdk/share/wasi-sysroot/lib" \
   -lwassh-libc-sup
 
