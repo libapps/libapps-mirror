@@ -35,11 +35,6 @@ const openNewWindow = function(url) {
  * so we do it like this instead.
  */
 window.addEventListener('DOMContentLoaded', (event) => {
-  // Workaround https://crbug.com/924656.
-  if (nassh.workaroundMissingChromeRuntime()) {
-    return;
-  }
-
   const params = new URLSearchParams(document.location.search);
 
   // Allow users to bookmark links that open as a window.

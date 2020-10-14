@@ -1768,10 +1768,7 @@ nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
  */
 nassh.CommandInstance.prototype.onSftpInitialised = function(callback) {
   if (this.isMount) {
-    // Newer versions of Chrome support this API, but olders will error out.
-    if (lib.f.getChromeMilestone() >= 64) {
-      this.mountOptions['persistent'] = false;
-    }
+    this.mountOptions['persistent'] = false;
 
     // Mount file system.
     chrome.fileSystemProvider.mount(this.mountOptions);

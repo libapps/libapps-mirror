@@ -331,31 +331,6 @@ nassh.base64ToBase64Url = function(data) {
 };
 
 /**
- * Workaround missing chrome.runtime in older versions of Chrome.
- *
- * As detailed in https://crbug.com/925118, the chrome.runtime object might be
- * missing when we run.  In order to workaround it, we need to reload the page.
- * While this is fixed in R72+, we unfortunately have EOL Chromebooks that will
- * never be able to upgrade to that version, so we have to keep this around for
- * a long time -- once we update minimum_chrome_version in the manifest to 72+.
- *
- * @return {boolean} True if bug was detected and the caller should halt all
- *     processing.
- */
-nassh.workaroundMissingChromeRuntime = function() {
-  // Chrome has a bug where it sometimes doesn't initialize chrome.runtime.
-  // Try and workaround it by forcing a refresh.  https://crbug.com/924656
-  if (window.chrome && !window.chrome.runtime) {
-    console.warn('chrome.runtime is undefined; reloading to workaround ' +
-                 'https://crbug.com/925118');
-    document.location.reload();
-    return true;
-  }
-
-  return false;
-};
-
-/**
  * Generate an SGR escape sequence.
  *
  * @param {!Object=} settings

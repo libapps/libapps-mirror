@@ -1,6 +1,6 @@
 {
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl8sdzpPbCg8pDh/1zrwU17WdrQROlsJsuxGA0RkMX0T0+b/Tarh4YcSA5NDhAqVO3hA8acmYnjkCCOMpP0roceVLBUOag9WxhpXak4A0ZPrwZi2bLPjx+gxkccyAp8bXwskSvjaL+vF/+zN8PT9yDz/Np7WJmfakksDPAZSoCnbykVbaEtpG8qbbUPgmjndrHkgV9cMjpNLAd+GnlARyQ/DceBPtA27z06N/nV+hS7TRIQJTx7XwH6rGKSJ1gn61/wtBWqZQyL3PA6997++55GYtWVB4pmLPXa0vog3GF2wFYf3geD9v2jfP4t9PhPZy9zESr6fP4nqd1HXd6pzamwIDAQAB",
-  "minimum_chrome_version": "65",
+  "minimum_chrome_version": "86",
   "manifest_version": 2,
   "content_security_policy": "script-src 'self'; object-src 'self'",
   "name": "__MSG_nassh_product_name__ (tot)",

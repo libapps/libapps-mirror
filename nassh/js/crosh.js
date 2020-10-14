@@ -9,11 +9,6 @@
  * so we do it like this instead.
  */
 window.addEventListener('DOMContentLoaded', (event) => {
-  // Workaround https://crbug.com/928045.
-  if (nassh.workaroundMissingChromeRuntime()) {
-    return;
-  }
-
   const params = new URLSearchParams(document.location.search);
 
   // Make it easy to re-open as a window.
