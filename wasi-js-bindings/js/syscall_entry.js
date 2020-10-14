@@ -7,6 +7,7 @@
  * rely on syscall handlers to implement the actual syscall.
  */
 
+import {WasiView} from './dataview.js';
 import * as util from './util.js';
 import * as WASI from './wasi.js';
 
@@ -694,8 +695,38 @@ export class WasiPreview1 extends Base {
   }
 
   /** @override */
-  sys_poll_oneoff(...args) {
-    return WASI.errno.ENOSYS;
+  sys_poll_oneoff(subscriptions_ptr, events_ptr, nsubscriptions, nevents_ptr) {
+    const dvNevents = this.getView_(nevents_ptr);
+    if (nsubscriptions <= 0) {
+      dvNevents.setUint32(0, 0, true);
+      return WASI.errno.ESUCCESS;
+    }
+
+    const subscriptions = Array(nsubscriptions);
+    const dvSubscriptions = this.getView_(subscriptions_ptr);
+    let offset = 0;
+    for (let i = 0; i < nsubscriptions; ++i) {
+      const subscription = dvSubscriptions.getSubscription(offset, true);
+      if (subscription.tag > WASI.eventtype.ENUM_END) {
+        return WASI.errno.EINVAL;
+      }
+      subscriptions[i] = subscription;
+      offset += subscription.struct_size;
+    }
+
+    const ret = this.handle_poll_oneoff(subscriptions);
+    if (typeof ret === 'number') {
+      return ret;
+    }
+
+    const dvEvents = this.getView_(events_ptr);
+    offset = 0;
+    ret.events.forEach((event) => {
+      dvEvents.setEvent(offset, event, true);
+      offset += WasiView.event_t.struct_size;
+    });
+    dvNevents.setUint32(0, ret.events.length, true);
+    return WASI.errno.ESUCCESS;
   }
 
   /** @override */

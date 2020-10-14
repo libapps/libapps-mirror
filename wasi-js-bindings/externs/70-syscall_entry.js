@@ -336,7 +336,14 @@ class SyscallEntry {
    */
   sys_path_unlink_file(fd, path_ptr, path_len) {}
 
-  sys_poll_oneoff(...args) {}
+  /**
+   * @param {!WASI_t.pointer} subscriptions_ptr
+   * @param {!WASI_t.pointer} events_ptr
+   * @param {!WASI_t.size} nsubscriptions
+   * @param {!WASI_t.pointer} nevents_ptr
+   * @return {!WASI_t.errno}
+   */
+  sys_poll_oneoff(subscriptions_ptr, events_ptr, nsubscriptions, nevents_ptr) {}
 
   /**
    * @param {!WASI_t.exitcode} status

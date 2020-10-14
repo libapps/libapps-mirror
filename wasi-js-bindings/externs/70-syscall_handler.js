@@ -260,8 +260,11 @@ class SyscallHandler {
    */
   handle_path_unlink_file(fd, path) {}
 
-  /** @return {!WASI_t.errno} */
-  handle_poll_oneoff(...args) {}
+  /**
+   * @param {!Array<!WASI_t.subscription>} subscriptions
+   * @return {!WASI_t.errno|{events: !Array<!WASI_t.event>}}
+   */
+  handle_poll_oneoff(subscriptions) {}
 
   /**
    * @param {!WASI_t.exitcode} status

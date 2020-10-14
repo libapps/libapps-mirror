@@ -189,6 +189,62 @@ export class DirectWasiPreview1 extends Base {
   }
 
   /** @override */
+  handle_poll_oneoff(subscriptions) {
+    // We can handle clock events only.
+    const events = [];
+    const now = BigInt(Date.now());
+
+    // Find the earliest clock timeout.
+    let timeout;
+    let userdata;
+    subscriptions.forEach((subscription) => {
+      if (subscription.tag === WASI.eventtype.CLOCK) {
+        // The standard C lib doesn't use other clocks, so this is future-proof.
+        if (subscription.clock.id !== WASI.clock.REALTIME) {
+          return WASI.errno.ENOTSUP;
+        }
+
+        let subTimeout;
+        // The timeout is in nanoseconds.  We can do milliseconds at best.
+        subTimeout = subscription.clock.timeout / BigInt(kNanosecToMillisec);
+        if ((subscription.clock.flags & 1) === 0) {
+          // The timeout is relative.
+          subTimeout += now;
+        }
+
+        if (!timeout || subTimeout < timeout) {
+          userdata = subscription.userdata;
+          timeout = subTimeout;
+        }
+      }
+    });
+
+    // If there's a timeout, wait for it.
+    if (timeout !== undefined) {
+      events.push(/** @type {!WASI_t.event} */({
+        userdata: userdata,
+        error: WASI.errno.ESUCCESS,
+        type: WASI.eventtype.CLOCK,
+        fd_readwrite: {
+          flags: 0,
+          nbytes: 0n,
+        },
+      }));
+
+      while (Date.now() < timeout) {
+        // Burn the cpu.
+      }
+    } else {
+      // If we found no clock events, but there are other events, then fail.
+      if (subscriptions.length) {
+        return WASI.errno.ENOTSUP;
+      }
+    }
+
+    return {events};
+  }
+
+  /** @override */
   handle_proc_raise(signal) {
     throw new util.CompletedProcessError({signal});
   }

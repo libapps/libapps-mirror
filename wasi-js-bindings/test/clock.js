@@ -124,9 +124,8 @@ it('monotonic', async function() {
 
 /**
  * Verify realtime clock behavior.
- * NB: Requires poll_oneoff() to be implemented.
  */
-it.skip('realtime', async function() {
+it('realtime', async function() {
   const result = await run(this.prog, ['realtime']);
   const data = result.data;
 

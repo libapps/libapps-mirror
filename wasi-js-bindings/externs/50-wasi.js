@@ -202,7 +202,7 @@ WASI_t.event_fd_readwrite;
  *   struct_size: number,
  *   userdata: WASI_t.userdata,
  *   error: WASI_t.errno,
- *   type: WASI_t.clockid,
+ *   type: WASI_t.eventtype,
  *   fd_readwrite: WASI_t.event_fd_readwrite,
  * }}
  */
