@@ -338,7 +338,7 @@ def download(version):
 
     if version == 'latest':
         uri = 'https://www.unicode.org/Public/UNIDATA/UCD.zip'
-        output = Path.cwd() / f'UCD.zip'
+        output = Path.cwd() / 'UCD.zip'
 
         if output.exists():
             req = urllib.request.Request(uri, method='HEAD')

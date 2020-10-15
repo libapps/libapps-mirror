@@ -68,15 +68,6 @@ def filter_known_files(paths: List[Path]) -> List[Path]:
     for path in paths:
         path = Path(path)
 
-        # TODO(vapier): Figure out why pylint hates us.  Running in the
-        # container on these modules fails with "internal errors:
-        # maximum recursion depth exceeded.".
-        spec = (path.parent.parent.name, path.parent.name, path.name)
-        if spec == ('libdot', 'bin', 'node'):
-            continue
-        elif spec == ('ssh_client', 'bin', 'ssh_client.py'):
-            continue
-
         if path.suffix == '.py':
             # Add all .py files as they should only be Python.
             ret += [path]

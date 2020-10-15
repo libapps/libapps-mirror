@@ -27,7 +27,9 @@ Actions:
 
 import argparse
 import grp
+import logging
 import os
+import subprocess
 import sys
 
 import kokoro  # pylint: disable=unused-import
@@ -66,10 +68,17 @@ def build(opts):
     """Build the container."""
     sudo_run(opts, ['docker', 'build', '--no-cache', '-t', CONTAINER_NAME, '.'],
              cwd=libdot.LIBAPPS_DIR)
-    # Would be nice to not use shell=True here.
     with open(IMAGE_NAME, 'wb') as fp:
-        sudo_run(opts, 'docker save ssh_client | xz -T0 -9 -v',
-                 cwd=libdot.LIBAPPS_DIR, shell=True, stdout=fp)
+        xz = subprocess.Popen(
+            ['xz', '-T0', '-9', '-v'], cwd=libdot.LIBAPPS_DIR, stdout=fp,
+            stdin=subprocess.PIPE)
+        logging.info('Starting: %s\n  (cwd = %s)', libdot.cmdstr(xz.args),
+                     libdot.LIBAPPS_DIR)
+        sudo_run(opts, ['docker', 'save', 'ssh_client'],
+                 cwd=libdot.LIBAPPS_DIR, stdout=xz.stdin)
+        logging.info('Waiting for xz to finish ...')
+        xz.stdin.close()
+        xz.wait()
     sudo_run(opts, ['docker', 'load', '--input', IMAGE_NAME],
              cwd=libdot.LIBAPPS_DIR)
 
