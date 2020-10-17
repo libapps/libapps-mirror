@@ -23,7 +23,7 @@ class WasshWorker extends BackgroundWorker.Base {
     ];
     const sys_entries = [
       new SyscallEntry.WasiPreview1({sys_handlers, trace: true}),
-      new WasshSyscallEntry.WasshExperimental({}),
+      new WasshSyscallEntry.WasshExperimental({sys_handlers, trace: true}),
     ];
     return new Process.Foreground(
         {executable, argv, environ, sys_handlers, sys_entries});

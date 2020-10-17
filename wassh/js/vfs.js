@@ -69,18 +69,18 @@ export class PathHandle {
 
   /**
    * @param {!TypedArray} buf
-   * @return {!WASI_t.errno|{nwritten: number}}
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
    */
-  write(buf) {
+  async write(buf) {
     return WASI.errno.EBADF;
   }
 
   /**
    * @param {!TypedArray} buf
    * @param {number|bigint} offset
-   * @return {!WASI_t.errno|{nwritten: number}}
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
    */
-  pwrite(buf, offset) {
+  async pwrite(buf, offset) {
     return WASI.errno.EBADF;
   }
 
@@ -144,7 +144,7 @@ export class FileHandle extends PathHandle {
   }
 
   /** @override */
-  write(buf) {
+  async write(buf) {
     buf = new Uint8Array(buf);
     const ret = this.pwrite(buf, this.pos);
     this.pos += BigInt(buf.byteLength);
@@ -152,7 +152,7 @@ export class FileHandle extends PathHandle {
   }
 
   /** @override */
-  pwrite(buf, offset) {
+  async pwrite(buf, offset) {
     buf = new Uint8Array(buf);
     offset = Number(offset);
     if (this.data.length < offset + buf.length) {
@@ -240,12 +240,12 @@ export class DirectoryHandle extends PathHandle {
   }
 
   /** @override */
-  write(buf) {
+  async write(buf) {
     return WASI.errno.EISDIR;
   }
 
   /** @override */
-  pwrite(buf, offset) {
+  async pwrite(buf, offset) {
     return WASI.errno.EISDIR;
   }
 
@@ -361,12 +361,12 @@ export class DevNullHandler extends PathHandler {
 
 export class DevNullHandle extends PathHandle {
   /** @override */
-  write(buf) {
+  async write(buf) {
     return {nwritten: buf.length};
   }
 
   /** @override */
-  pwrite(buf, offset) {
+  async pwrite(buf, offset) {
     return {nwritten: buf.length};
   }
 

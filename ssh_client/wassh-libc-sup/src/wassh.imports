@@ -3,3 +3,5 @@ __wassh_fd_dup
 __wassh_fd_dup2
 __wassh_sock_create
 __wassh_sock_connect
+__wassh_sock_get_opt
+__wassh_sock_set_opt

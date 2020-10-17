@@ -23,7 +23,7 @@ int connect(int sock, const struct sockaddr* addr, socklen_t addrlen) {
   case AF_INET: {
     const struct sockaddr_in* sin = (void*)addr;
     sys_addr = (const uint8_t*)&sin->sin_addr.s_addr;
-    sys_port = sin->sin_port;
+    sys_port = ntohs(sin->sin_port);
     break;
   }
 
@@ -41,7 +41,7 @@ int connect(int sock, const struct sockaddr* addr, socklen_t addrlen) {
       return -1;
     }
     sys_addr = (const uint8_t*)&sin6->sin6_addr.s6_addr;
-    sys_port = sin6->sin6_port;
+    sys_port = ntohs(sin6->sin6_port);
     break;
   }
 

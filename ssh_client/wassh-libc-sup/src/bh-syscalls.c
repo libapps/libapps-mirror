@@ -77,3 +77,23 @@ int sock_connect(__wasi_fd_t sock, int domain, const uint8_t* addr,
   }
   return 0;
 }
+
+SYSCALL(sock_get_opt)(__wasi_fd_t sock, int level, int optname, int* optvalue);
+int sock_get_opt(__wasi_fd_t sock, int level, int optname, int* optvalue) {
+  __wasi_errno_t error = __wassh_sock_get_opt(sock, level, optname, optvalue);
+  if (error != 0) {
+    errno = error;
+    return -1;
+  }
+  return 0;
+}
+
+SYSCALL(sock_set_opt)(__wasi_fd_t sock, int level, int optname, int optvalue);
+int sock_set_opt(__wasi_fd_t sock, int level, int optname, int optvalue) {
+  __wasi_errno_t error = __wassh_sock_set_opt(sock, level, optname, optvalue);
+  if (error != 0) {
+    errno = error;
+    return -1;
+  }
+  return 0;
+}

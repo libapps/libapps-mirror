@@ -21,6 +21,8 @@ C_SOURCES := \
 	connect.c \
 	dup.c \
 	dup2.c \
+	getsockopt.c \
+	setsockopt.c \
 	signal.c \
 	socket.c \
 	stubs.c \

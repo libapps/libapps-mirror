@@ -16,6 +16,7 @@
 #include <syslog.h>
 #include <termios.h>
 
+#include <arpa/inet.h>
 #include <netinet/in.h>
 #include <netinet/ip.h>
 #include <sys/socket.h>
@@ -60,37 +61,6 @@ ssize_t recvfrom(int sockfd, void* buf, size_t len, int flags,
 }
 // ssize_t recvmsg(int sockfd, struct msghdr* msg, int flags);
 
-int getsockopt(int sockfd, int level, int optname, void* optval,
-               socklen_t* optlen) {
-  _ENTER("sockfd=%i level=%#x optname=%i optval=%p optlen=%p",
-         sockfd, level, optname, optval, optlen);
-
-  _MID("ignoring level/optname; setting optval to zero");
-  memset(optval, 0, *optlen);
-
-  _EXIT("return 0");
-  return 0;
-}
-
-int setsockopt(int sockfd, int level, int optname, const void* optval,
-               socklen_t optlen) {
-  _ENTER("sockfd=%i level=%#x optname=%i optval=%p optlen=%i",
-         sockfd, level, optname, optval, optlen);
-
-  switch (optname) {
-  case SO_KEEPALIVE:
-    _MID("option SO_KEEPALIVE");
-    break;
-  default:
-    _EXIT("option not supported");
-    errno = EINVAL;
-    return -1;
-  }
-
-  _EXIT("return 0");
-  return 0;
-}
-
 int socketpair(int domain, int type, int protocol, int sv[2]) {
   STUB_ENOSYS(-1, "domain=%i type=%i protocol=%i sv=%p",
               domain, type, protocol, sv);
@@ -132,8 +102,19 @@ const char* gai_strerror(int errcode) {
 int getaddrinfo(const char* node, const char* service,
                 const struct addrinfo* hints, struct addrinfo** res) {
   _ENTER("node={%s} service={%s} hints=%p res=%p", node, service, hints, res);
-  if (strcmp(node, "localhost") || strcmp(service, "22")) {
-    _EXIT("EAI_FAIL");
+
+  char* endptr;
+  long sin_port = strtol(service, &endptr, 10);
+  if (*endptr != '\0' || sin_port < 1 || sin_port > 0xffff) {
+    _EXIT("EAI_FAIL: bad service");
+    return EAI_FAIL;
+  }
+
+  uint32_t s_addr;
+  if (!strcmp(node, "localhost")) {
+    s_addr = htonl(0x7f000001);
+  } else if (inet_pton(AF_INET, node, &s_addr) != 1) {
+    _EXIT("EAI_FAIL: bad IPv4 addr");
     return EAI_FAIL;
   }
 
@@ -151,8 +132,8 @@ int getaddrinfo(const char* node, const char* service,
   memset(sa, 0, sizeof(*sa));
   struct sockaddr_in* sin = &sa->sin;
   sin->sin_family = AF_INET;
-  sin->sin_port = htons(22);
-  sin->sin_addr.s_addr = htonl(0x7f000001);
+  sin->sin_port = htons(sin_port);
+  sin->sin_addr.s_addr = s_addr;
   ret->ai_addrlen = sizeof(*sa);
   ret->ai_addr = &sa->sa;
   ret->ai_canonname = NULL;
