@@ -1,3 +1,5 @@
 # These are syscalls that the WASI runtime must provide to us.
+__wassh_fd_dup
+__wassh_fd_dup2
 __wassh_sock_create
 __wassh_sock_connect

@@ -47,6 +47,7 @@ window.onload = async function() {
     proc = new Process.Foreground(settings);
   } else {
     settings.handler = new WasshSyscallHandler.RemoteReceiverWasiPreview1();
+    await settings.handler.init();
     proc = new Process.Background('./js/worker.js', settings);
   }
   term.innerText += `> Running ${prog}\n`;

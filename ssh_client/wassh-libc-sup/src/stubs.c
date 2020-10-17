@@ -183,12 +183,6 @@ void closelog(void) {}
 int pipe(int pipefd[2]) {
   STUB_ENOSYS(-1, "");
 }
-int dup(int oldfd) {
-  STUB_ENOSYS(-1, "");
-}
-int dup2(int oldfd, int newfd) {
-  STUB_ENOSYS(-1, "");
-}
 
 speed_t cfgetispeed(const struct termios* termios_p) {
   STUB_RETURN(B0, "termios=%p", termios_p);

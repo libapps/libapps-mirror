@@ -23,6 +23,8 @@ __BEGIN_DECLS
 __wasi_fd_t sock_create(int domain, int type);
 int sock_connect(__wasi_fd_t sock, int domain, const uint8_t* addr,
                  uint16_t port);
+__wasi_fd_t fd_dup(__wasi_fd_t oldfd);
+__wasi_fd_t fd_dup2(__wasi_fd_t oldfd, __wasi_fd_t newfd);
 
 __END_DECLS
 

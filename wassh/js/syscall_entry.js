@@ -27,4 +27,19 @@ export class WasshExperimental extends SyscallEntry.Base {
   sys_sock_connect(sock, domain, addr, port) {
     return WASI.errno.ENOSYS;
   }
+
+  sys_fd_dup(oldfd, newfd_ptr) {
+    const ret = this.handle_fd_dup(oldfd);
+    if (typeof ret === 'number') {
+      return ret;
+    }
+
+    const dv = this.getView_(newfd_ptr);
+    dv.setFd(0, ret.fd, true);
+    return WASI.errno.ESUCCESS;
+  }
+
+  sys_fd_dup2(oldfd, newfd) {
+    return this.handle_fd_dup2(oldfd, newfd);
+  }
 }

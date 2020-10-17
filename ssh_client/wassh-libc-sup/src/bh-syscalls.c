@@ -34,6 +34,27 @@
     __attribute__((__warn_unused_result__)) \
     __wasi_errno_t __wassh_##name
 
+SYSCALL(fd_dup)(__wasi_fd_t oldfd, __wasi_fd_t* newfd);
+__wasi_fd_t fd_dup(__wasi_fd_t oldfd) {
+  __wasi_fd_t ret;
+  __wasi_errno_t error = __wassh_fd_dup(oldfd, &ret);
+  if (error != 0) {
+    errno = error;
+    return -1;
+  }
+  return ret;
+}
+
+SYSCALL(fd_dup2)(__wasi_fd_t oldfd, __wasi_fd_t newfd);
+__wasi_fd_t fd_dup2(__wasi_fd_t oldfd, __wasi_fd_t newfd) {
+  __wasi_errno_t error = __wassh_fd_dup2(oldfd, newfd);
+  if (error != 0) {
+    errno = error;
+    return -1;
+  }
+  return newfd;
+}
+
 SYSCALL(sock_create)(__wasi_fd_t* sock, int domain, int type);
 __wasi_fd_t sock_create(int domain, int type) {
   __wasi_fd_t ret;
