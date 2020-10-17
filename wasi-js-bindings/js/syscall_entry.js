@@ -399,7 +399,36 @@ export class WasiPreview1 extends Base {
 
   /** @override */
   sys_fd_pread(fd, iovs_ptr, iovs_len, offset, nread_ptr) {
-    return WASI.errno.ENOSYS;
+    const dvIovs = this.getView_(iovs_ptr);
+    let nread = 0;
+    let iovs_off = 0;
+    for (let i = 0; i < iovs_len; ++i) {
+      const iovec = dvIovs.getIovec(iovs_off, true);
+      const buf = this.getMem_(iovec.buf, iovec.buf + iovec.buf_len);
+      const ret = this.handle_fd_pread(fd, iovec.buf_len, offset);
+      if (typeof ret === 'number') {
+        if (ret === WASI.errno.ESUCCESS) {
+          nread += iovec.buf_len;
+        } else {
+          return ret;
+        }
+      } else {
+        if (ret.buf !== undefined) {
+          const u8 = new Uint8Array(ret.buf);
+          buf.set(u8);
+          if (ret.nread === undefined) {
+            ret.nread = u8.length;
+          }
+        }
+        nread += ret.nread;
+      }
+      offset += BigInt(nread);
+      iovs_off += iovec.struct_size;
+    }
+
+    const dvNread = this.getView_(nread_ptr, 4);
+    dvNread.setUint32(0, nread, true);
+    return WASI.errno.ESUCCESS;
   }
 
   /** @override */
@@ -432,21 +461,26 @@ export class WasiPreview1 extends Base {
 
   /** @override */
   sys_fd_pwrite(fd, iovs_ptr, iovs_len, offset, nwritten_ptr) {
+    const dvIovs = this.getView_(iovs_ptr);
     let nwritten = 0;
+    let iovs_off = 0;
     for (let i = 0; i < iovs_len; ++i) {
-      const dv = this.getView_(iovs_ptr + (8 * i), 8);
-      const bufptr = dv.getUint32(0, true);
-      const buflen = dv.getUint32(4, true);
-      if (buflen == 0) {
-        continue;
+      const iovec = dvIovs.getIovec(iovs_off, true);
+      const buf = this.getMem_(iovec.buf, iovec.buf + iovec.buf_len);
+      const ret = this.handle_fd_pwrite(fd, Uint8Array.from(buf), offset);
+      if (typeof ret === 'number') {
+        if (ret === WASI.errno.ESUCCESS) {
+          nwritten += iovec.buf_len;
+        } else {
+          return ret;
+        }
+      } else {
+        nwritten += ret.nwritten;
       }
-      const buf = this.getMem_(bufptr, bufptr + buflen);
-      const ret = this.handle_fd_pwrite(fd, offset, buf);
-      if (ret != WASI.errno.ESUCCESS) {
-        return ret;
-      }
-      nwritten += buflen;
+      offset += BigInt(nwritten);
+      iovs_off += iovec.struct_size;
     }
+
     const dvWritten = this.getView_(nwritten_ptr, 4);
     dvWritten.setUint32(0, nwritten, true);
     return WASI.errno.ESUCCESS;
@@ -455,21 +489,33 @@ export class WasiPreview1 extends Base {
   /** @override */
   sys_fd_read(fd, iovs_ptr, iovs_len, nread_ptr) {
     const dvIovs = this.getView_(iovs_ptr);
-    const dvNread = this.getView_(nread_ptr, 4);
     let nread = 0;
-    dvNread.setUint32(0, nread, true);
-    let offset = 0;
+    let iovs_off = 0;
     for (let i = 0; i < iovs_len; ++i) {
-      const iovec = dvIovs.getIovec(offset);
-      const ret = this.handle_fd_read(fd, iovec);
-      if (typeof ret === 'number' && ret != WASI.errno.ESUCCESS) {
-        return ret;
+      const iovec = dvIovs.getIovec(iovs_off, true);
+      const buf = this.getMem_(iovec.buf, iovec.buf + iovec.buf_len);
+      const ret = this.handle_fd_read(fd, iovec.buf_len);
+      if (typeof ret === 'number') {
+        if (ret === WASI.errno.ESUCCESS) {
+          nread += iovec.buf_len;
+        } else {
+          return ret;
+        }
+      } else {
+        if (ret.buf !== undefined) {
+          const u8 = new Uint8Array(ret.buf);
+          buf.set(u8);
+          if (ret.nread === undefined) {
+            ret.nread = u8.length;
+          }
+        }
+        nread += ret.nread;
       }
-
-      nread += ret.nread;
-      dvNread.setUint32(0, nread, true);
-      offset += iovec.struct_size;
+      iovs_off += iovec.struct_size;
     }
+
+    const dvNread = this.getView_(nread_ptr, 4);
+    dvNread.setUint32(0, nread, true);
     return WASI.errno.ESUCCESS;
   }
 
@@ -496,6 +542,10 @@ export class WasiPreview1 extends Base {
    * @suppress {checkTypes} https://github.com/google/closure-compiler/commit/ee80bed57fe1ee93876fee66ad77e025a345c7a7
    */
   sys_fd_seek(fd, offset, whence, newoffset_ptr) {
+    if (whence < 0 || whence > 2) {
+      return WASI.errno.EINVAL;
+    }
+
     const ret = this.handle_fd_seek(fd, offset, whence);
     if (typeof ret === 'number') {
       return ret;
@@ -528,22 +578,25 @@ export class WasiPreview1 extends Base {
 
   /** @override */
   sys_fd_write(fd, iovs_ptr, iovs_len, nwritten_ptr) {
-    // const fn = fd == 1 ? console.error : console.info;
+    const dvIovs = this.getView_(iovs_ptr);
     let nwritten = 0;
+    let iovs_off = 0;
     for (let i = 0; i < iovs_len; ++i) {
-      const dv = this.getView_(iovs_ptr + (8 * i), 8);
-      const bufptr = dv.getUint32(0, true);
-      const buflen = dv.getUint32(4, true);
-      if (buflen == 0) {
-        continue;
+      const iovec = dvIovs.getIovec(iovs_off, true);
+      const buf = this.getMem_(iovec.buf, iovec.buf + iovec.buf_len);
+      const ret = this.handle_fd_write(fd, Uint8Array.from(buf));
+      if (typeof ret === 'number') {
+        if (ret === WASI.errno.ESUCCESS) {
+          nwritten += iovec.buf_len;
+        } else {
+          return ret;
+        }
+      } else {
+        nwritten += ret.nwritten;
       }
-      const buf = this.getMem_(bufptr, bufptr + buflen);
-      const ret = this.handle_fd_write(fd, buf);
-      if (ret != WASI.errno.ESUCCESS) {
-        return ret;
-      }
-      nwritten += buflen;
+      iovs_off += iovec.struct_size;
     }
+
     const dvWritten = this.getView_(nwritten_ptr, 4);
     dvWritten.setUint32(0, nwritten, true);
     return WASI.errno.ESUCCESS;

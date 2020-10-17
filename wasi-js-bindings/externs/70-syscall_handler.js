@@ -109,8 +109,13 @@ class SyscallHandler {
    */
   handle_fd_filestat_set_times(fd, atim, mtim, fst_flags) {}
 
-  /** @return {!WASI_t.errno} */
-  handle_fd_pread(fd, offset) {}
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.size} length
+   * @param {!WASI_t.filesize} offset
+   * @return {!WASI_t.errno|{buf: !ArrayBufferView, nread: !WASI_t.size}}
+   */
+  handle_fd_pread(fd, length, offset) {}
 
   /**
    * @param {!WASI_t.fd} fd
@@ -124,15 +129,20 @@ class SyscallHandler {
    */
   handle_fd_prestat_get(fd) {}
 
-  /** @return {!WASI_t.errno} */
-  handle_fd_pwrite(fd, offset, buf) {}
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!ArrayBufferView} buf
+   * @param {!WASI_t.filesize} offset
+   * @return {!WASI_t.errno|{nwritten: !WASI_t.size}}
+   */
+  handle_fd_pwrite(fd, buf, offset) {}
 
   /**
    * @param {!WASI_t.fd} fd
-   * @param {!WASI_t.iovec} iovec
-   * @return {!WASI_t.errno|{nread: !WASI_t.size}}
+   * @param {!WASI_t.size} length
+   * @return {!WASI_t.errno|{buf: !ArrayBufferView, nread: !WASI_t.size}}
    */
-  handle_fd_read(fd, iovec) {}
+  handle_fd_read(fd, length) {}
 
   /** @return {!WASI_t.errno|{length: !WASI_t.size}} */
   handle_fd_readdir(fd, buf, cookie) {}
@@ -167,7 +177,7 @@ class SyscallHandler {
   /**
    * @param {!WASI_t.fd} fd
    * @param {!ArrayBufferView} buf
-   * @return {!WASI_t.errno}
+   * @return {!WASI_t.errno|{nwritten: !WASI_t.size}}
    */
   handle_fd_write(fd, buf) {}
 
