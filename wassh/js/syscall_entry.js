@@ -118,4 +118,28 @@ export class WasshExperimental extends SyscallEntry.Base {
   sys_fd_dup2(oldfd, newfd) {
     return this.handle_fd_dup2(oldfd, newfd);
   }
+
+  sys_readpassphrase(prompt_ptr, prompt_len, buf_ptr, buf_len, echo) {
+    let prompt = '';
+    if (prompt_ptr) {
+      const td = new TextDecoder();
+      const prompt_buf = this.getMem_(prompt_ptr, prompt_ptr + prompt_len);
+      try {
+        prompt = td.decode(prompt_buf);
+      } catch (e) {
+        return WASI.errno.EFAULT;
+      }
+    }
+
+    const ret = this.handle_readpassphrase(prompt, buf_len - 1, !!echo);
+    if (typeof ret === 'number') {
+      return ret;
+    }
+
+    const buf = this.getMem_(buf_ptr, buf_ptr + buf_len);
+    const te = new TextEncoder();
+    const written = te.encodeInto(ret.pass, buf).written;
+    buf[written] = 0;
+    return WASI.errno.ESUCCESS;
+  }
 }

@@ -468,4 +468,19 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       this.notify_();
     }
   }
+
+  /**
+   * @param {!Uint8Array} prompt The string to display to the user.
+   * @param {number} max_len The max number of bytes to let the user enter.
+   * @param {boolean} echo Whether to display the user input by default.
+   * @return {{pass: string}} The user input.
+   */
+  async handle_readpassphrase(prompt, max_len, echo) {
+    const fh = this.vfs.getFileHandle(1);
+    const te = new TextEncoder();
+    fh.write(te.encode(prompt));
+    // TODO(vapier): Connect this to the terminal's secure input.  See nassh's
+    // secureInput_() API for an example.
+    return {pass: 'yes'};
+  }
 }
