@@ -29,7 +29,7 @@ def _get_default_paths(basedir):
     js_files = sorted(itertools.chain(
         JS_DIR.glob('**/*.js'), test_dir.glob('**/*.js')))
 
-    return [os.path.relpath(x) for x in most_files + js_files]
+    return ['index.js'] + [os.path.relpath(x) for x in most_files + js_files]
 
 
 def main(argv):

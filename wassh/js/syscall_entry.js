@@ -8,8 +8,7 @@
  * @suppress {checkTypes} module$__$wasi_js_bindings$js naming confusion.
  */
 
-import * as SyscallEntry from '../../wasi-js-bindings/js/syscall_entry.js';
-import * as WASI from '../../wasi-js-bindings/js/wasi.js';
+import {SyscallEntry, WASI} from '../../wasi-js-bindings/index.js';
 
 // const AF_UNSPEC = 0;
 const AF_INET = 1;

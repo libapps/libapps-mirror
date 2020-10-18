@@ -6,11 +6,8 @@
  * @fileoverview Tests for structures shared between JS & WASM worlds.
  */
 
-import {WasiView} from '../js/dataview.js';
-import * as Process from '../js/process.js';
-import * as SyscallEntry from '../js/syscall_entry.js';
-import * as SyscallHandler from '../js/syscall_handler.js';
-import * as WASI from '../js/wasi.js';
+import {Process, SyscallEntry, SyscallHandler, WASI,
+        WasiView} from '../index.js';
 
 describe('structs.js', () => {
 

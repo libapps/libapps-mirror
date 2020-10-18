@@ -6,7 +6,7 @@
  * @fileoverview Tests for the WasiView API.
  */
 
-import {WasiView} from '../js/dataview.js';
+import {WasiView} from '../index.js';
 
 describe('dataview.js', () => {
 

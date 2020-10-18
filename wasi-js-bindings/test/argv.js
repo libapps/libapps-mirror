@@ -6,11 +6,7 @@
  * @fileoverview Tests for initial argument passing.
  */
 
-import * as Process from '../js/process.js';
-import * as SyscallEntry from '../js/syscall_entry.js';
-import * as SyscallHandler from '../js/syscall_handler.js';
-import * as util from '../js/util.js';
-import * as WASI from '../js/wasi.js';
+import {Process, SyscallEntry, SyscallHandler, util, WASI} from '../index.js';
 
 describe('argv.js', () => {
 

@@ -8,9 +8,7 @@
  * @suppress {checkTypes} module$__$wasi_js_bindings$js naming confusion.
  */
 
-import * as SyscallEntry from '../../wasi-js-bindings/js/syscall_entry.js';
-import * as SyscallHandler from '../../wasi-js-bindings/js/syscall_handler.js';
-import * as WASI from '../../wasi-js-bindings/js/wasi.js';
+import {SyscallHandler, WASI} from '../../wasi-js-bindings/index.js';
 import * as Sockets from './sockets.js';
 import * as VFS from './vfs.js';
 

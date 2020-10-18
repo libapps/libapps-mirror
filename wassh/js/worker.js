@@ -8,10 +8,8 @@
  * @suppress {checkTypes} module$__$wasi_js_bindings$js naming confusion.
  */
 
-import * as BackgroundWorker from '../../wasi-js-bindings/js/worker.js';
-import * as Process from '../../wasi-js-bindings/js/process.js';
-import * as SyscallEntry from '../../wasi-js-bindings/js/syscall_entry.js';
-import * as SyscallHandler from '../../wasi-js-bindings/js/syscall_handler.js';
+import {BackgroundWorker, Process, SyscallEntry,
+        SyscallHandler} from '../../wasi-js-bindings/index.js';
 import * as WasshSyscallEntry from './syscall_entry.js';
 import * as WasshSyscallHandler from './syscall_handler.js';
 

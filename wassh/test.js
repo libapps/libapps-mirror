@@ -2,8 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import * as Process from '../../wasi-js-bindings/js/process.js';
-import * as SyscallEntry from '../../wasi-js-bindings/js/syscall_entry.js';
+import {Process, SyscallEntry} from '../wasi-js-bindings/index.js';
 import * as WasshSyscallEntry from './js/syscall_entry.js';
 import * as WasshSyscallHandler from './js/syscall_handler.js';
 
