@@ -56,6 +56,11 @@ class Base {
   }
 
   /** @override */
+  logGroup(...args) {
+    console.group(...args);
+  }
+
+  /** @override */
   logError(...args) {
     console.error(...args);
   }

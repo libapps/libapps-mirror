@@ -68,6 +68,15 @@ export class Base {
   }
 
   /**
+   * Start a group of log messages.
+   *
+   * @param {*} args The header message to log.
+   */
+  logGroup(...args) {
+    this.process_.logGroup(...args);
+  }
+
+  /**
    * Log an error message.
    *
    * @param {*} args The message to log.
@@ -83,13 +92,26 @@ export class Base {
    * @return {!WASI_t.errno}
    */
   traceCall(func, prefix, ...args) {
-    this.debug(`${prefix}(${args.join(', ')})`);
+    this.logGroup(`${prefix}(${args.join(', ')})`);
     const ret = func(...args);
     if (typeof ret === 'number') {
-      this.debug(`  ${prefix} -> ${util.strerror(ret)}`);
+      let style;
+      switch (ret) {
+        case WASI.errno.ESUCCESS:
+          style = '';
+          break;
+        case WASI.errno.ENOSYS:
+          style = 'font-weight: bold; color: #fc036f';
+          break;
+        default:
+          style = 'color: #d44';
+          break;
+      }
+      this.debug(`${prefix} -> %c${util.strerror(ret)}`, style);
     } else {
-      this.debug(`  ${prefix} ->`, ret);
+      this.debug(`${prefix} ->`, ret);
     }
+    console.groupEnd();
     return ret;
   }
 

@@ -29,6 +29,9 @@ class Process {
   debug(...args) {}
 
   /** @param {*} args */
+  logGroup(...args) {}
+
+  /** @param {*} args */
   logError(...args) {}
 
   /**
