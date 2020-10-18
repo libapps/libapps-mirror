@@ -8,6 +8,11 @@
  */
 
 /**
+ * A magic string to mark bigints serialized in JSON as a string.
+ */
+const BIGINT_MAGIC = '_WASI\x00BigInt\x01';
+
+/**
  * Locking type that's more analagous to a Win32-style signal. This class
  * creates locking semantics and a return code around a piece of shared memory
  * supplied at construction time. This lets two threads share a communications
@@ -108,7 +113,8 @@ export class SyscallLock {
     const te = new TextEncoder();
     /** @suppress {checkTypes} https://github.com/google/closure-compiler/issues/3701 */
     const str = JSON.stringify(obj, (key, value) => {
-      return (typeof value === 'bigint') ? {'bigint': value.toString()} : value;
+      return (typeof value === 'bigint') ?
+          BIGINT_MAGIC + value.toString() : value;
     });
     // encodeInto doesn't support shared array buffers yet.
     const bytes = te.encode(str);
@@ -132,14 +138,12 @@ export class SyscallLock {
     // We have to use slice to get a copy as decode doesn't support shared array
     // buffers yet.
     const bytes = this.sabDataArr.slice(0, length);
-    const ret = JSON.parse(td.decode(bytes));
+    const ret = JSON.parse(td.decode(bytes), (key, value) => {
+      return (typeof value === 'string' && value.startsWith(BIGINT_MAGIC)) ?
+          BigInt(value.substr(BIGINT_MAGIC.length)) : value;
+    });
     if (!(ret instanceof Object)) {
       throw new Error(`Invalid serialized object`);
-    }
-    for (const key in ret) {
-      if (ret[key].bigint !== undefined) {
-        ret[key] = BigInt(ret[key].bigint);
-      }
     }
     return ret;
   }
