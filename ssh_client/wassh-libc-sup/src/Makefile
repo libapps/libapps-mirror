@@ -26,6 +26,7 @@ C_SOURCES := \
 	signal.c \
 	socket.c \
 	stubs.c \
+	termios.c \
 
 C_OBJECTS := $(patsubst %.c,$(OUTPUT)/%.o,$(C_SOURCES))
 OBJECTS = $(C_OBJECTS)

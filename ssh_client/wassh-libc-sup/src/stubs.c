@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <syslog.h>
-#include <termios.h>
 
 #include <arpa/inet.h>
 #include <netinet/in.h>
@@ -163,26 +162,6 @@ void closelog(void) {}
 
 int pipe(int pipefd[2]) {
   STUB_ENOSYS(-1, "");
-}
-
-speed_t cfgetispeed(const struct termios* termios_p) {
-  STUB_RETURN(B0, "termios=%p", termios_p);
-}
-speed_t cfgetospeed(const struct termios* termios_p) {
-  STUB_RETURN(B0, "termios=%p", termios_p);
-}
-int cfsetispeed(struct termios* termios_p, speed_t speed) {
-  STUB_RETURN(0, "termios=%p speed=%i", termios_p, speed);
-}
-int cfsetospeed(struct termios* termios_p, speed_t speed) {
-  STUB_RETURN(0, "termios=%p speed=%i", termios_p, speed);
-}
-int tcgetattr(int fd, struct termios* termios_p) {
-  STUB_RETURN(0, "fd=%i termios=%p", fd, termios_p);
-}
-int tcsetattr(int fd, int optional_actions, const struct termios* termios_p) {
-  STUB_RETURN(0, "fd=%i actions=%i termios=%p",
-              fd, optional_actions, termios_p);
 }
 
 struct passwd* getpwuid(uid_t uid) {  // NOLINT(runtime/threadsafe_fn)
