@@ -19,7 +19,7 @@
   do { \
     if (!DEBUG_ENABLED) \
       break; \
-    fprintf(stderr, "%s:%i:%s(): ENTER " fmt "\n", \
+    fprintf(stderr, "%s:%i:%s(): ENTER " fmt "\r\n", \
             __FILE__, __LINE__, __func__, ##args); \
   } while (0)
 
@@ -27,14 +27,14 @@
   do { \
     if (!DEBUG_ENABLED) \
       break; \
-    fprintf(stderr, "  | " fmt "\n", ##args); \
+    fprintf(stderr, "  | " fmt "\r\n", ##args); \
   } while (0)
 
 #define _EXIT(fmt, args...) \
   do { \
     if (!DEBUG_ENABLED) \
       break; \
-    fprintf(stderr, "  `-> EXIT " fmt "\n", ##args); \
+    fprintf(stderr, "  `-> EXIT " fmt "\r\n", ##args); \
   } while (0)
 
 #endif

@@ -7,7 +7,17 @@ import * as WasshSyscallEntry from './js/syscall_entry.js';
 import * as WasshSyscallHandler from './js/syscall_handler.js';
 
 window.onload = async function() {
-  const term = document.getElementById('terminal');
+  await lib.init();
+
+  const term = new hterm.Terminal();
+  term.onTerminalReady = run;
+  term.decorate(document.querySelector('#terminal'));
+  term.installKeyboard();
+  window.term_ = term;
+};
+
+const run = async function() {
+  const io = this.io.push();
 
   const foreground = false;
 
@@ -32,7 +42,7 @@ window.onload = async function() {
     environ: environ,
   };
 
-  term.innerText += `> Loading ${prog}\n`;
+  io.println(`> Loading ${prog}`);
   let proc;
   if (foreground) {
     const sys_handlers = [
@@ -49,7 +59,7 @@ window.onload = async function() {
     await settings.handler.init();
     proc = new Process.Background('./js/worker.js', settings);
   }
-  term.innerText += `> Running ${prog}\n`;
+  io.println(`> Running ${prog}`);
   const ret = await proc.run();
-  term.innerText += `\n> finished: ret = ${ret}`;
+  io.println(`\n> finished: ret = ${ret}`);
 };

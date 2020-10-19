@@ -2,9 +2,31 @@
 <html>
   <head>
     <meta charset='utf-8'/>
+    <script src='../nassh/js/nassh_deps.concat.js'></script>
     <script type='module' src='test.js'></script>
+<style>
+html {
+  height: 100%;
+}
+body {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
+}
+#terminal {
+  display: block;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+</style>
   </head>
-  <body style='color:white; background-color:black;'>
+  <body>
   <pre id='terminal'></pre>
   </body>
 </html>
