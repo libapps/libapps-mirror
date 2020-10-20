@@ -97,7 +97,6 @@ body {
 #options section {
   max-width: inherit;
   margin-bottom: 0;
-  -webkit-user-select: none;
 }
 
 #options h1 {
