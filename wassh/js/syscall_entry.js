@@ -177,6 +177,40 @@ export class WasshExperimental extends SyscallEntry.Base {
     return this.handle_fd_dup2(oldfd, newfd);
   }
 
+  /**
+   * Get the terminal window size.
+   *
+   * @param {!WASI_t.fd} fd Open file descriptor bound to the tty.
+   * @param {!WASI_t.pointer} winsize_ptr Pointer to struct to store results.
+   * @return {!WASI_t.errno}
+   */
+  sys_tty_get_window_size(fd, winsize_ptr) {
+    const ret = this.handle_tty_get_window_size(fd);
+    if (typeof ret === 'number') {
+      return ret;
+    }
+
+    // Structure is 4 shorts (16-bit) values.
+    const dv = this.getView_(winsize_ptr);
+    dv.setUint16(0, ret.row, true);
+    dv.setUint16(2, ret.col, true);
+    dv.setUint16(4, ret.xpixel, true);
+    dv.setUint16(6, ret.ypixel, true);
+    return WASI.errno.ESUCCESS;
+  }
+
+  /**
+   * Set the terminal window sie
+   *
+   * @param {!WASI_t.fd} fd Open file descriptor bound to the tty.
+   * @param {!WASI_t.pointer} winsize_ptr Pointer to struct to store results.
+   * @return {!WASI_t.errno}
+   */
+  sys_tty_set_window_size(fd, winsize_ptr) {
+    // Not sure we want to support this.
+    return WASI.errno.ENOTTY;
+  }
+
   sys_readpassphrase(prompt_ptr, prompt_len, buf_ptr, buf_len, echo) {
     let prompt = '';
     if (prompt_ptr) {

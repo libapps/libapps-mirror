@@ -140,3 +140,23 @@ int sock_set_opt(__wasi_fd_t sock, int level, int optname, int optvalue) {
   }
   return 0;
 }
+
+SYSCALL(tty_get_window_size)(__wasi_fd_t fd, struct winsize* winsize);
+int tty_get_window_size(__wasi_fd_t fd, struct winsize* winsize) {
+  __wasi_errno_t error = __wassh_tty_get_window_size(fd, winsize);
+  if (error != 0) {
+    errno = error;
+    return -1;
+  }
+  return 0;
+}
+
+SYSCALL(tty_set_window_size)(__wasi_fd_t fd, const struct winsize* winsize);
+int tty_set_window_size(__wasi_fd_t fd, const struct winsize* winsize) {
+  __wasi_errno_t error = __wassh_tty_set_window_size(fd, winsize);
+  if (error != 0) {
+    errno = error;
+    return -1;
+  }
+  return 0;
+}

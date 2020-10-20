@@ -565,6 +565,26 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   }
 
   /**
+   * Get the terminal window size.
+   *
+   * @param {!WASI_t.fd} fd Open file descriptor bound to the tty.
+   * @return {{row: number, col: number, xpixel: number, ypixel: number}} The
+   *     terminal window metrics.
+   */
+  async handle_tty_get_window_size(fd) {
+    // TODO(vapier): Should this utilize fd?  We only ever have one tty ...
+    const size = this.term_.screenSize;
+    return {
+      row: size.height,
+      col: size.width,
+      // TODO(vapier): Add info to hterm and return it here.  Needed for SIXEL,
+      // but not much else atm.
+      xpixel: 0,
+      ypixel: 0,
+    };
+  }
+
+  /**
    * @param {!Uint8Array} prompt The string to display to the user.
    * @param {number} max_len The max number of bytes to let the user enter.
    * @param {boolean} echo Whether to display the user input by default.

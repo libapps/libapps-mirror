@@ -25,6 +25,7 @@ C_SOURCES := \
 	getaddrinfo.c \
 	getsockname.c \
 	getsockopt.c \
+	ioctl.c \
 	setsockopt.c \
 	signal.c \
 	socket.c \

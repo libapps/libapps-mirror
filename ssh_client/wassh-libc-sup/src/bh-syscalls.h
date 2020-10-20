@@ -20,6 +20,8 @@
 
 __BEGIN_DECLS
 
+struct winsize;
+
 void sock_register_fake_addr(int idx, const char* name);
 __wasi_fd_t sock_create(int domain, int type, int protocol);
 int sock_connect(__wasi_fd_t sock, int domain, const uint8_t* addr,
@@ -30,6 +32,8 @@ int sock_get_opt(__wasi_fd_t sock, int level, int optname, int* optvalue);
 int sock_set_opt(__wasi_fd_t sock, int level, int optname, int optvalue);
 __wasi_fd_t fd_dup(__wasi_fd_t oldfd);
 __wasi_fd_t fd_dup2(__wasi_fd_t oldfd, __wasi_fd_t newfd);
+int tty_get_window_size(__wasi_fd_t fd, struct winsize* winsize);
+int tty_set_window_size(__wasi_fd_t fd, const struct winsize* winsize);
 
 __END_DECLS
 
