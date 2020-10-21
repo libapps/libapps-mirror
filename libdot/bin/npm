@@ -10,11 +10,16 @@ import sys
 import libdot
 
 
+def run(cmd, **kwargs):
+    """Run the npm |cmd|."""
+    libdot.node.run(['npm'] + cmd, **kwargs)
+
+
 def main(argv):
     """The main func!"""
     libdot.setup_logging()
     libdot.node_and_npm_setup()
-    libdot.node.run(['npm'] + argv)
+    run(argv)
 
 
 if __name__ == '__main__':
