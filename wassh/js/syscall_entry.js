@@ -107,6 +107,46 @@ export class WasshExperimental extends SyscallEntry.Base {
     return this.handle_sock_connect(sock, address, port);
   }
 
+  /**
+   * @param {!WASI_t.fd} sock
+   * @param {!WASI_t.pointer} family_ptr
+   * @param {!WASI_t.pointer} port_ptr
+   * @param {!WASI_t.pointer} addr_ptr
+   * @param {!WASI_t.size} remote
+   * @return {!WASI_t.errno}
+   */
+  sys_sock_get_name(sock, family_ptr, port_ptr, addr_ptr, remote) {
+    const ret = this.handle_sock_get_name(sock, remote);
+    if (typeof ret === 'number') {
+      return ret;
+    }
+
+    const dvFamily = this.getView_(family_ptr, 4);
+    const dvPort = this.getView_(port_ptr, 2);
+    let addrLen;
+
+    switch (ret.family) {
+      case Sockets.AF_INET:
+        addrLen = 4;
+        break;
+
+      case Sockets.AF_INET6:
+        addrLen = 16;
+        break;
+
+      default:
+        return WASI.errno.EPROTONOSUPPORT;
+    }
+
+    dvFamily.setInt32(0, ret.family, true);
+    dvPort.setUint16(0, ret.port, true);
+
+    const bytes = this.getMem_(addr_ptr, addr_ptr + addrLen);
+    bytes.set(ret.address);
+
+    return WASI.errno.ESUCCESS;
+  }
+
   sys_sock_get_opt(sock, level, name, value_ptr) {
     const ret = this.handle_sock_get_opt(sock, level, name);
     if (typeof ret === 'number') {

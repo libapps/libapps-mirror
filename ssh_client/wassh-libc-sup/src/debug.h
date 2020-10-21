@@ -37,4 +37,15 @@
     fprintf(stderr, "  `-> EXIT " fmt "\r\n", ##args); \
   } while (0)
 
+#define _EXIT_ERRNO(ret, fmt, args...) \
+  do { \
+    if (!DEBUG_ENABLED) \
+      break; \
+    fprintf(stderr, "  `-> EXIT ret = %i", ret); \
+    if (ret) { \
+      fprintf(stderr, " [%i:%s]", errno, strerror(errno)); \
+    } \
+    fprintf(stderr, fmt "\r\n", ##args); \
+  } while (0)
+
 #endif

@@ -65,22 +65,6 @@ int socketpair(int domain, int type, int protocol, int sv[2]) {
               domain, type, protocol, sv);
 }
 
-int getsockname(int sockfd, struct sockaddr* addr, socklen_t* addrlen) {
-  _ENTER("sockfd=%i addr=%p addrlen=%p[%i]", sockfd, addr, addrlen, *addrlen);
-  struct sockaddr_in* sin = (struct sockaddr_in*)addr;
-  memset(sin, 0, sizeof(*sin));
-  *addrlen = sizeof(*sin);
-  sin->sin_family = AF_INET;
-  sin->sin_port = htons(22);
-  sin->sin_addr.s_addr = htonl(0x7f000001);
-  _EXIT("return 0 {IPv4, localhost, 22}");
-  return 0;
-}
-int getpeername(int sockfd, struct sockaddr* addr, socklen_t* addrlen) {
-  STUB_ENOSYS(-1, "sockfd=%i addr=%p addrlen=%p[%i]",
-              sockfd, addr, addrlen, *addrlen);
-}
-
 struct servent* getservbyname(const char* name, const char* proto) {
   STUB_ENOSYS(NULL, "name={%s} proto={%s}", name, proto);
 }

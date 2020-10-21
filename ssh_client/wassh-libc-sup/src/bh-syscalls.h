@@ -24,6 +24,8 @@ void sock_register_fake_addr(int idx, const char* name);
 __wasi_fd_t sock_create(int domain, int type, int protocol);
 int sock_connect(__wasi_fd_t sock, int domain, const uint8_t* addr,
                  uint16_t port);
+int sock_get_name(__wasi_fd_t sock, int* family, uint16_t* port, uint8_t* addr,
+                  bool remote);
 int sock_get_opt(__wasi_fd_t sock, int level, int optname, int* optvalue);
 int sock_set_opt(__wasi_fd_t sock, int level, int optname, int optvalue);
 __wasi_fd_t fd_dup(__wasi_fd_t oldfd);

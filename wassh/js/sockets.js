@@ -152,6 +152,15 @@ export class TcpSocket extends Socket {
   }
 
   /**
+   * @return {!Promise<!chrome.socket.SocketInfo>}
+   */
+  async getSocketInfo() {
+    return new Promise((resolve) => {
+      chrome.sockets.tcp.getInfo(this.socketId, resolve);
+    });
+  }
+
+  /**
    * @param {number} level
    * @param {number} name
    * @return {!Promise<{option: number}>}

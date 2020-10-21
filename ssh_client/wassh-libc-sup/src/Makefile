@@ -23,6 +23,7 @@ C_SOURCES := \
 	dup2.c \
 	err.c \
 	getaddrinfo.c \
+	getsockname.c \
 	getsockopt.c \
 	setsockopt.c \
 	signal.c \

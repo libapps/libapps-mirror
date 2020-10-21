@@ -492,6 +492,41 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     return handle.connect(address, port);
   }
 
+  /**
+   * @param {!WASI_t.fd} socket
+   * @param {!WASI_t.size} remote
+   * @return {!Promise<{family: number, address: !Array<number>, port: number}>}
+   */
+  async handle_sock_get_name(socket, remote) {
+    const handle = this.vfs.getFileHandle(socket);
+    if (handle === undefined) {
+      return WASI.errno.EBADF;
+    }
+    if (!(handle instanceof Sockets.Socket)) {
+      return WASI.errno.ENOTSOCK;
+    }
+
+    const info = await handle.getSocketInfo();
+    if (!info.connected) {
+      return WASI.errno.ENOTCONN;
+    }
+
+    const strAddress = remote ? info.peerAddress : info.localAddress;
+    let address;
+    let family;
+    if (info.peerAddress.includes('.')) {
+      family = Sockets.AF_INET;
+      address = strAddress.split('.').map((x) => parseInt(x, 10));
+    } else {
+      family = Sockets.AF_INET6;
+      // TODO(vapier): Verify return value of getSocketInfo.
+      address = strAddress.split(':').map((x) => parseInt(x, 16));
+    }
+
+    const port = remote ? info.peerPort : info.localPort;
+    return {family, address, port};
+  }
+
   async handle_sock_get_opt(socket, level, name) {
     const handle = this.vfs.getFileHandle(socket);
     if (handle === undefined) {
