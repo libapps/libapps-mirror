@@ -186,7 +186,7 @@ const THEMES = {
        '#1A73E8', '#AA00B8', '#009099', '#9AA0A6']),
   'classic': new Theme('classic',
       'TERMINAL_THEME_CLASSIC_LABEL', '#101010', '#FFFFFF', '#FF000080',
-      lib.colors.stockColorPalette.slice(0, 16)),
+      lib.colors.stockPalette.slice(0, 16)),
   'solarizedDark': new Theme('solarizedDark',
       'TERMINAL_THEME_SOLARIZED_DARK_LABEL', '#002B36', '#83949680',
       '#93A1A180',
