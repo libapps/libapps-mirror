@@ -66,8 +66,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const execNaSSH = function() {
     const profileName = params.get('profile');
 
-    hterm.zoomWarningMessage = nassh.msg('ZOOM_WARNING');
-
     const terminal = new hterm.Terminal(profileName);
     // TODO(crbug.com/1063219) We need this to not prompt the user for clipboard
     // permission.
