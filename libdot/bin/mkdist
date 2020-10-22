@@ -34,7 +34,7 @@ def main(argv):
     opts = parser.parse_args(argv)
 
     # TODO(vapier): Move more logic out of package.json here, maybe?
-    opts.output.mkdir(parents=True, exist_ok=True)
+    libdot.node.run(["rollup", "-c"], cwd=libdot.DIR)
     libdot.concat.concat(
         libdot.DIR / "concat" / "libdot.concat", opts.output / "libdot.js"
     )
