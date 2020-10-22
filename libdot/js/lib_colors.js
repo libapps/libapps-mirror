@@ -753,11 +753,6 @@ lib.colors.stockPalette = [
    ].map(lib.colors.hexToRGB);
 
 /**
- * The current color palette, possibly with user changes.
- */
-lib.colors.colorPalette = lib.colors.stockPalette;
-
-/**
  * Named colors according to the stock X11 rgb.txt file.
  */
 lib.colors.colorNames = {
