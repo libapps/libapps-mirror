@@ -9,13 +9,14 @@
  *
  * This is currently just an ordered list of known connection profiles.
  *
+ * @param {!lib.Storage} storage Where to store preferences.
  * @param {string=} profileId Uses 'default' if not specified.
  * @extends {lib.PreferenceManager}
  * @constructor
  */
 hterm.PreferenceManager = function(
-    profileId = hterm.Terminal.DEFAULT_PROFILE_ID) {
-  lib.PreferenceManager.call(this, hterm.defaultStorage,
+    storage, profileId = hterm.Terminal.DEFAULT_PROFILE_ID) {
+  lib.PreferenceManager.call(this, storage,
                              hterm.PreferenceManager.prefix_ + profileId);
   Object.entries(hterm.PreferenceManager.defaultPreferences).forEach(
       ([key, entry]) => {

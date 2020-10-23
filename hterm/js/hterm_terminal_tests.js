@@ -38,7 +38,7 @@ beforeEach(function(done) {
 
   document.body.appendChild(div);
 
-  this.terminal = new hterm.Terminal();
+  this.terminal = new hterm.Terminal({storage: new lib.Storage.Memory()});
 
   this.terminal.decorate(div);
   // Set some fairly large padding and border which are hopefully more

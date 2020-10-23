@@ -209,7 +209,7 @@ nassh.PreferencesEditor.debounce = function(input, callback, timeout = 500) {
  */
 nassh.PreferencesEditor.prototype.selectProfile = function(profileId) {
   window.term_.setProfile(profileId);
-  const prefs = new hterm.PreferenceManager(profileId);
+  const prefs = new hterm.PreferenceManager(hterm.defaultStorage, profileId);
   this.prefs_ = prefs;
   prefs.readStorage(() => {
     prefs.notifyAll();

@@ -26,7 +26,7 @@ beforeEach(function(done) {
 
   document.body.appendChild(div);
 
-  this.terminal = new hterm.Terminal();
+  this.terminal = new hterm.Terminal({storage: new lib.Storage.Memory()});
   this.terminal.decorate(div);
   this.terminal.setWidth(width);
   this.terminal.setHeight(height);

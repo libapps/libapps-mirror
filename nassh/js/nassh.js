@@ -23,6 +23,11 @@ lib.registerInit(
      * Register a static initializer for nassh.*.
      */
     () => {
+      // TODO(vapier): Delete this fallback.
+      if (window?.chrome?.storage?.sync !== undefined) {
+        hterm.defaultStorage = new lib.Storage.Chrome(chrome.storage.sync);
+      }
+
       // Since our translation process only preserves \n (and discards \r), we
       // have to manually insert them ourselves.
       hterm.messageManager.useCrlf = true;
@@ -167,7 +172,8 @@ nassh.exportPreferences = function(onComplete) {
     hterm.PreferenceManager.listProfiles(nasshPrefs.storage, (profiles) => {
       profiles.forEach((profile) => {
         rv.hterm[profile] = null;
-        const prefs = new hterm.PreferenceManager(profile);
+        const prefs = new hterm.PreferenceManager(
+            hterm.defaultStorage, profile);
         prefs.readStorage(onReadStorage.bind(null, profile, prefs));
         pendingReads++;
       });
@@ -210,7 +216,8 @@ nassh.importPreferences = function(prefsObject, onComplete) {
   const nasshPrefs = new nassh.PreferenceManager();
   nasshPrefs.importFromJson(prefsObject.nassh, () => {
     for (const terminalProfile in prefsObject.hterm) {
-      const prefs = new hterm.PreferenceManager(terminalProfile);
+      const prefs = new hterm.PreferenceManager(
+          hterm.defaultStorage, terminalProfile);
       prefs.readStorage(onReadStorage.bind(null, terminalProfile, prefs));
       pendingReads++;
     }

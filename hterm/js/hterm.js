@@ -85,14 +85,6 @@ lib.registerInit(
         }
       }
 
-      if (!hterm.defaultStorage) {
-        if (window.chrome && chrome.storage && chrome.storage.sync) {
-          hterm.defaultStorage = new lib.Storage.Chrome(chrome.storage.sync);
-        } else {
-          hterm.defaultStorage = new lib.Storage.Local();
-        }
-      }
-
       return new Promise((resolve) => {
         if (window.chrome && chrome.tabs) {
           // The getCurrent method gets the tab that is "currently running",

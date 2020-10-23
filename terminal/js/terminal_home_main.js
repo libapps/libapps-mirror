@@ -28,7 +28,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     document.title = hterm.messageManager.get('TERMINAL_TITLE_TERMINAL');
   });
   lib.init().then(() => {
-    const prefs = window.preferenceManager = new hterm.PreferenceManager();
+    const prefs = window.preferenceManager = new hterm.PreferenceManager(
+        hterm.defaultStorage);
     definePrefs(prefs);
     // Dynamically change colors if settings change.
     const setColorRgbCssVar = (name, color) => {

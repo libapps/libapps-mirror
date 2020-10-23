@@ -62,19 +62,15 @@ You'll need to choose a storage implementation.
 This is the backing store that hterm will use to read and write preferences.
 This should be one of:
 
-```js
-// If you are a cross-browser web app and want to use window.localStorage.
-hterm.defaultStorage = new lib.Storage.Local();
-
-// If you are a cross-browser web app and want in-memory storage only.
-hterm.defaultStorage = new lib.Storage.Memory();
-
-// If you are a Chrome app and want sync storage.
-hterm.defaultStorage = new lib.Storage.Chrome(chrome.storage.sync);
-
-// If you are a Chrome app and want local storage.
-hterm.defaultStorage = new lib.Storage.Chrome(chrome.storage.local);
-```
+*   `lib.Storage.Local()` (**default**): If you are a cross-browser web app and
+    want to use `window.localStorage` (i.e. settings will persist across local
+    page loads).
+*   `lib.Storage.Memory()`: If you are a cross-browser web app and want
+    in-memory storage only (i.e. all settings will be lost on reload).
+*   `lib.Storage.Chrome(chrome.storage.sync)`: If you are a Chrome extension
+    and want sync storage (i.e. settings sync between devices).
+*   `lib.Storage.Chrome(chrome.storage.local)`: If you are a Chrome extension
+    and want local storage (i.e. settings are per-device).
 
 ### Framework initialization
 
@@ -105,6 +101,9 @@ Create an instance of `hterm.Terminal`:
 // not specified.  If you're using one of the persistent storage
 // implementations then this will scope all preferences read/writes to this
 // name.
+//
+// To change the storage settings, pass it as an option here.
+// {storage: new lib.Storage.Memory()}
 const t = new hterm.Terminal({profileId});
 ```
 

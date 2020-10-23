@@ -23,16 +23,20 @@
  *
  * @param {{
  *   profileId: (?string|undefined),
+ *   storage: (!lib.Storage|undefined),
  * }=} options Various settings to control behavior.
  *     profileId: The preference profile name.  Defaults to "default".
+ *     storage: The backing storage for preferences.  Defaults to local.
  * @constructor
  * @implements {hterm.RowProvider}
  */
-hterm.Terminal = function({profileId} = {}) {
+hterm.Terminal = function({profileId, storage} = {}) {
   // Set to true once terminal is initialized and onTerminalReady() is called.
   this.ready_ = false;
 
   this.profileId_ = null;
+  // TODO(vapier): Delete the hterm.defaultStorage fallback.
+  this.storage_ = storage || hterm.defaultStorage || new lib.Storage.Local();
 
   /** @type {?hterm.PreferenceManager} */
   this.prefs_ = null;
@@ -255,7 +259,7 @@ hterm.Terminal.prototype.setProfile = function(
     this.prefs_.deactivate();
   }
 
-  this.prefs_ = new hterm.PreferenceManager(this.profileId_);
+  this.prefs_ = new hterm.PreferenceManager(this.storage_, this.profileId_);
 
   /**
    * Clears and reloads key bindings.  Used by preferences

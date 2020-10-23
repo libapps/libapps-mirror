@@ -44,7 +44,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
   });
   lib.init().then(() => {
     window.PreferenceManager = hterm.PreferenceManager;
-    window.preferenceManager = new window.PreferenceManager();
+    window.preferenceManager = new window.PreferenceManager(
+        hterm.defaultStorage);
     definePrefs(window.preferenceManager);
     window.preferenceManager.readStorage(() => {
       normalizePrefsInPlace(window.preferenceManager);

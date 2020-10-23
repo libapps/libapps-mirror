@@ -85,7 +85,7 @@ beforeEach(function(done) {
 
   this.div = div;
 
-  this.terminal = new hterm.Terminal();
+  this.terminal = new hterm.Terminal({storage: new lib.Storage.Memory()});
 
   // Allow column width changes by default so the canned data can request a
   // known terminal width.

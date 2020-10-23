@@ -1,8 +1,7 @@
 # JS Life cycle
 
 The [hterm.js] code will initialize defaults for the various objects.  You can
-override them yourself (such as setting up `hterm.defaultStorage`) before you
-instantiate anything.
+override them yourself before you instantiate anything.
 
 An `hterm.Terminal` instance is created and initialization code attached to
 `onTerminalReady`.  That callback creates a new `hterm.Terminal.IO` object by
