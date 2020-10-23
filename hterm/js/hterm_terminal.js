@@ -35,8 +35,7 @@ hterm.Terminal = function({profileId, storage} = {}) {
   this.ready_ = false;
 
   this.profileId_ = null;
-  // TODO(vapier): Delete the hterm.defaultStorage fallback.
-  this.storage_ = storage || hterm.defaultStorage || new lib.Storage.Local();
+  this.storage_ = storage || new lib.Storage.Local();
 
   /** @type {?hterm.PreferenceManager} */
   this.prefs_ = null;

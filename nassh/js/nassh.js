@@ -23,11 +23,6 @@ lib.registerInit(
      * Register a static initializer for nassh.*.
      */
     () => {
-      // TODO(vapier): Delete this fallback.
-      if (window?.chrome?.storage?.sync !== undefined) {
-        hterm.defaultStorage = new lib.Storage.Chrome(chrome.storage.sync);
-      }
-
       // Since our translation process only preserves \n (and discards \r), we
       // have to manually insert them ourselves.
       hterm.messageManager.useCrlf = true;
