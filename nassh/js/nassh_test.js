@@ -29,7 +29,6 @@ window.onerror = function(...args) {
 /** Run the test framework once everything is finished. */
 window.onload = async function() {
   hterm.defaultStorage = new lib.Storage.Memory();
-  nassh.defaultStorage = new lib.Storage.Memory();
 
   await lib.init();
   mocha.run();

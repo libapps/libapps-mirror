@@ -27,10 +27,6 @@ lib.registerInit(
      * Register a static initializer for nassh.*.
      */
     () => {
-      if (!nassh.defaultStorage) {
-        nassh.defaultStorage = hterm.defaultStorage;
-      }
-
       // Since our translation process only preserves \n (and discards \r), we
       // have to manually insert them ourselves.
       hterm.messageManager.useCrlf = true;
