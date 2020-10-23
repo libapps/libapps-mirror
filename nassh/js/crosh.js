@@ -109,8 +109,8 @@ Crosh.msg = function(name, args) {
  */
 Crosh.init = function() {
   const params = new URLSearchParams(document.location.search);
-  const profileName = params.get('profile');
-  const terminal = new hterm.Terminal(profileName);
+  const profileId = params.get('profile');
+  const terminal = new hterm.Terminal({profileId});
   // Use legacy pasting when running as an extension to avoid prompt.
   // TODO(crbug.com/1063219) We need this to not prompt the user for clipboard
   // permission.

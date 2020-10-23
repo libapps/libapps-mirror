@@ -64,9 +64,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
   }
 
   const execNaSSH = function() {
-    const profileName = params.get('profile');
+    const profileId = params.get('profile');
 
-    const terminal = new hterm.Terminal(profileName);
+    const terminal = new hterm.Terminal({profileId});
     // TODO(crbug.com/1063219) We need this to not prompt the user for clipboard
     // permission.
     terminal.alwaysUseLegacyPasting = true;
