@@ -2,57 +2,61 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
+import {App} from './nassh_app.js';
 
-(function() {
-  let didLaunch = false;
-  const onLaunched = () => { didLaunch = true; };
+let didLaunch = false;
 
-  // We have to turn on listeners here so we can handle messages when first
-  // launched (but before lib.registerInit finishes).
-  nassh.External.addListeners();
+/**
+ * Mark the app as having been launched by the user before we were ready.
+ */
+function onLaunched() {
+  didLaunch = true;
+}
 
-  // Used to watch for launch events that occur before we're ready to handle
-  // them.  We'll clean this up below during init.
-  if (nassh.browserAction) {
-    nassh.browserAction.onClicked.addListener(onLaunched);
+// We have to turn on listeners here so we can handle messages when first
+// launched (but before lib.registerInit finishes).
+nassh.External.addListeners();
+
+// Used to watch for launch events that occur before we're ready to handle
+// them.  We'll clean this up below during init.
+if (nassh.browserAction) {
+  nassh.browserAction.onClicked.addListener(onLaunched);
+}
+
+/**
+ * Perform any required async initialization, then create our app instance.
+ *
+ * The window.app_ property will contain the new app instance so it can be
+ * reached from the background page's JS console.
+ */
+lib.init(console.log.bind(console)).then(() => {
+  const app = new App();
+
+  // Register our context menus.
+  app.installContextMenus();
+
+  // If omnibox is enabled, set it up.
+  if (window.chrome && chrome.omnibox) {
+    app.installOmnibox(chrome.omnibox);
   }
 
-  /**
-   * Perform any required async initialization, then create our app instance.
-   *
-   * The window.app_ property will contain the new app instance so it can be
-   * reached from the background page's JS console.
-   */
-  lib.init(console.log.bind(console)).then(() => {
-    const app = new nassh.App();
+  // Bind the FSP APIs.
+  app.installFsp();
 
-    // If omnibox is enabled, set it up.
-    if (window.chrome && chrome.omnibox) {
-      app.installOmnibox(chrome.omnibox);
-    }
+  // If we're running as an extension, finish setup.
+  if (nassh.browserAction) {
+    nassh.browserAction.onClicked.removeListener(onLaunched);
+    app.installBrowserAction();
+  }
 
-    // Bind the FSP APIs.
-    app.installFsp();
+  // If the user tried to run us while we were initializing, run it now.
+  if (didLaunch) {
+    app.onLaunched();
+  }
 
-    // Register our context menus.
-    app.installContextMenus();
-
-    // If we're running as an extension, finish setup.
-    if (nassh.browserAction) {
-      nassh.browserAction.onClicked.removeListener(onLaunched);
-      app.installBrowserAction();
-    }
-
-    // If the user tried to run us while we were initializing, run it now.
-    if (didLaunch) {
-      app.onLaunched();
-    }
-
-    // Help with live debugging.
-    window.app_ = app;
-  });
-})();
+  // Help with live debugging.
+  window.app_ = app;
+});
 
 /**
  * Sync prefs between versions automatically.

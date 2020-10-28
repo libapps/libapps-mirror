@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * The singleton app instance for the nassh packaged app, created by the
  * background page.
@@ -11,7 +9,7 @@
  * @param {!lib.Storage=} storage Storage for sync settings.
  * @constructor
  */
-nassh.App = function(storage = undefined) {
+export function App(storage = undefined) {
   this.prefs_ = new nassh.PreferenceManager(storage);
   this.localPrefs_ = new nassh.LocalPreferenceManager();
   this.omniMatches_ = [];
@@ -19,12 +17,12 @@ nassh.App = function(storage = undefined) {
 
   this.prefs_.readStorage();
   this.localPrefs_.readStorage();
-};
+}
 
 /**
  * Set up the file system provider APIs.
  */
-nassh.App.prototype.installFsp = function() {
+App.prototype.installFsp = function() {
   nassh.sftp.fsp.addListeners();
 };
 
@@ -33,7 +31,7 @@ nassh.App.prototype.installFsp = function() {
  *
  * NB: We omit "Options" because Chrome takes care of populating that entry.
  */
-nassh.App.prototype.installContextMenus = function() {
+App.prototype.installContextMenus = function() {
   // Remove any previous entries.  This comes up when reloading the page.
   chrome.contextMenus.removeAll();
 
@@ -69,7 +67,7 @@ nassh.App.prototype.installContextMenus = function() {
  * @param {!Object} info The item clicked.
  * @param {!Tab=} tab When relevant, the active tab.
  */
-nassh.App.prototype.onContextMenu_ = function(info, tab = undefined) {
+App.prototype.onContextMenu_ = function(info, tab = undefined) {
   switch (info.menuItemId) {
     case 'connect-dialog':
       lib.f.openWindow(chrome.runtime.getURL('/html/nassh.html'), '',
@@ -94,7 +92,7 @@ nassh.App.prototype.onContextMenu_ = function(info, tab = undefined) {
 /**
  * Set the default help text in the omnibox when completing an ssh connection.
  */
-nassh.App.prototype.setDefaultOmnibox_ = function() {
+App.prototype.setDefaultOmnibox_ = function() {
   this.omnibox_.setDefaultSuggestion({
     description: nassh.msg('OMNIBOX_DEFAULT'),
   });
@@ -103,7 +101,7 @@ nassh.App.prototype.setDefaultOmnibox_ = function() {
 /**
  * Callback when user first interacts with the ssh shortcut.
  */
-nassh.App.prototype.omniboxOnInputStarted_ = function() {
+App.prototype.omniboxOnInputStarted_ = function() {
   this.omniMatches_.length = 0;
   this.omniDefault_ = null;
 
@@ -144,7 +142,7 @@ nassh.App.prototype.omniboxOnInputStarted_ = function() {
  * @param {function(!Array<{content: string, description: string}>)} suggest
  *     Function for us to call to notify of our matches against the text.
  */
-nassh.App.prototype.omniboxOnInputChanged_ = function(text, suggest) {
+App.prototype.omniboxOnInputChanged_ = function(text, suggest) {
   const resultsUhp = [];
   const resultsDescLeading = [];
   const resultsDescSubstr = [];
@@ -202,7 +200,7 @@ nassh.App.prototype.omniboxOnInputChanged_ = function(text, suggest) {
  * @param {string} text The text to operate on.
  * @param {string} disposition Mode the user wants us to open as.
  */
-nassh.App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
+App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
   // If the user types out the profile name exactly, connect to it.  It might
   // overlap with a valid URI, but if that's a problem, they can change the
   // description to something else.
@@ -264,7 +262,7 @@ nassh.App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
 /**
  * Callback when the user has aborted input.
  */
-nassh.App.prototype.omniboxOnInputCancelled_ = function() {
+App.prototype.omniboxOnInputCancelled_ = function() {
 //  this.setDefaultOmnibox_(); needed?
   this.omniMatches_.length = 0;
   this.omniDefault_ = null;
@@ -275,7 +273,7 @@ nassh.App.prototype.omniboxOnInputCancelled_ = function() {
  *
  * @param {!typeof chrome.omnibox} omnibox The omnibox instance to bind to.
  */
-nassh.App.prototype.installOmnibox = function(omnibox) {
+App.prototype.installOmnibox = function(omnibox) {
   this.omnibox_ = omnibox;
   this.setDefaultOmnibox_();
   omnibox.onInputStarted.addListener(this.omniboxOnInputStarted_.bind(this));
@@ -288,7 +286,7 @@ nassh.App.prototype.installOmnibox = function(omnibox) {
 /**
  * Bind our callbacks to the browser action button (for extensions).
  */
-nassh.App.prototype.installBrowserAction = function() {
+App.prototype.installBrowserAction = function() {
   if (!nassh.browserAction) {
     return;
   }
@@ -299,7 +297,7 @@ nassh.App.prototype.installBrowserAction = function() {
 /**
  * Called on app launch.
  */
-nassh.App.prototype.onLaunched = function() {
+App.prototype.onLaunched = function() {
   const width = 900;
   const height = 600;
   lib.f.openWindow(lib.f.getURL('/html/nassh.html'), '',

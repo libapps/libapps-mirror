@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
+import {App} from './nassh_app.js';
 
 /**
  * @fileoverview Test suite for the App.
@@ -15,7 +15,7 @@ describe('nassh_app_tests.js', () => {
  */
 beforeEach(function() {
   this.storage = new lib.Storage.Memory();
-  this.app = new nassh.App(this.storage);
+  this.app = new App(this.storage);
 });
 
 /**
