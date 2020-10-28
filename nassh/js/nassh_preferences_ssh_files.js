@@ -2,21 +2,14 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview SSH file editing helper.
  */
 
 /**
- * Container for all the dialog settings.
- */
-nassh.SshFiles = {};
-
-/**
  * A cached handle to the filesystem.
  */
-nassh.SshFiles.filesystem = null;
+let filesystem = null;
 
 /**
  * Utility class to bind a file to some basic UI tools.
@@ -56,7 +49,7 @@ class FileWatcher {
    * @return {!Promise<void>} Promise that resolves when the load finishes.
    */
   load() {
-    return lib.fs.readFile(nassh.SshFiles.filesystem.root, this.path)
+    return lib.fs.readFile(filesystem.root, this.path)
       .then((contents) => this.element.value = contents)
       .catch(() => {});
   }
@@ -67,8 +60,7 @@ class FileWatcher {
    * @return {!Promise<void>} Promise that resolves when the save finishes.
    */
   save() {
-    return lib.fs.overwriteFile(nassh.SshFiles.filesystem.root, this.path,
-                                this.element.value);
+    return lib.fs.overwriteFile(filesystem.root, this.path, this.element.value);
   }
 
   /**
@@ -120,7 +112,7 @@ class DirWatcher {
    * @return {!Promise<void>} Promise that resolves when the load finishes.
    */
   load() {
-    return lib.fs.readDirectory(nassh.SshFiles.filesystem.root, this.path)
+    return lib.fs.readDirectory(filesystem.root, this.path)
       .then((contents) => contents.forEach((path) => this.addFile_(path)));
   }
 
@@ -156,10 +148,15 @@ class DirWatcher {
    */
   deleteFile_(elementTree, path) {
     // Delete the file, and then remove the UI element.
-    lib.fs.removeFile(nassh.SshFiles.filesystem.root, path)
+    lib.fs.removeFile(filesystem.root, path)
       .then(() => elementTree.remove());
   }
 }
+
+/**
+ * Name to help with debugging in the terminal.
+ */
+const watched = {};
 
 /**
  * Event when the window finishes loading.
@@ -167,12 +164,12 @@ class DirWatcher {
 window.addEventListener('DOMContentLoaded', (event) => {
   // Load all the ~/.ssh files into the UI.
   nassh.getFileSystem().then((fs) => {
-    nassh.SshFiles.filesystem = fs;
-    nassh.SshFiles.knowHosts = new FileWatcher(
+    filesystem = fs;
+    watched.knowHosts = new FileWatcher(
         'ssh-files-known-hosts', '/.ssh/known_hosts');
-    nassh.SshFiles.sshConfig = new FileWatcher(
+    watched.sshConfig = new FileWatcher(
         'ssh-files-config', '/.ssh/config');
-    nassh.SshFiles.identities = new DirWatcher(
+    watched.identities = new DirWatcher(
         'ssh-files-identities', '/.ssh/identity/');
   });
 });
