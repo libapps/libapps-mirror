@@ -6,6 +6,8 @@
  * @fileoverview Runtime SFTP connect dialog.
  */
 
+import {MountInfo} from './nassh_external_api.js';
+
 /**
  * Constructor for the ConfigDialog instance.
  *
@@ -13,7 +15,7 @@
  * current window.
  *
  * @param {string} fsId The filesystem mount id.
- * @param {!nassh.External.MountInfo} info The mount information.
+ * @param {!MountInfo} info The mount information.
  * @constructor
  */
 export function ConfigDialog(fsId, info) {

@@ -3,6 +3,8 @@
 // found in the LICENSE file.
 
 import {App} from './nassh_app.js';
+import {addListeners as externalAddListeners,
+        initApi} from './nassh_external_api.js';
 
 let didLaunch = false;
 
@@ -15,7 +17,7 @@ function onLaunched() {
 
 // We have to turn on listeners here so we can handle messages when first
 // launched (but before lib.registerInit finishes).
-nassh.External.addListeners();
+externalAddListeners();
 
 // Used to watch for launch events that occur before we're ready to handle
 // them.  We'll clean this up below during init.
@@ -30,7 +32,7 @@ if (nassh.browserAction) {
  * reached from the background page's JS console.
  */
 lib.init(console.log.bind(console)).then(() => {
-  nassh.External.initApi();
+  initApi();
 
   const app = new App();
 
