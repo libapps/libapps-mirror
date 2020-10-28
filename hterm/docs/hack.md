@@ -49,7 +49,7 @@ in an isolated profile, with the necessary command line arguments, and load the
 hterm test cases.  Test results will appear in the JavaScript console.
 
 You can re-run the tests by reloading the web page as long as you haven't made
-changes to `hterm/concat/hterm_resources.concat`.  If you *do* change resources,
+changes to `hterm/js/deps_resources.shim.js`.  If you *do* change resources,
 run `./bin/mkdist` to re-create them.
 
 # Debugging escape sequences

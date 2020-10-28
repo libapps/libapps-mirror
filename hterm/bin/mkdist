@@ -56,7 +56,7 @@ def main(argv):
         opts.dist_files = [x.resolve() for x in opts.dist_files]
 
     libdot.run([libdot.BIN_DIR / "mkdist"])
-    opts.output.mkdir(parents=True, exist_ok=True)
+    libdot.node.run(["rollup", "-c"], cwd=hterm.DIR)
     for concat_file in opts.dist_files:
         libdot.concat.concat(
             concat_file, opts.output / f"{concat_file.stem}.js"

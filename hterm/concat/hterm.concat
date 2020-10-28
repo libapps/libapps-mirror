@@ -33,4 +33,4 @@ hterm/js/hterm_vt_character_map.js
 hterm/third_party/intl-segmenter/intl-segmenter.js
 hterm/third_party/wcwidth/wc.js
 
-@include hterm/concat/hterm_resources.concat
+hterm/dist/js/hterm_resources.js
