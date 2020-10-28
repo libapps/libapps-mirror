@@ -103,8 +103,12 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
             subprocess.Popen([browser, '--user-data-dir=%s' % (profile_dir,),
                               path] + sb_arg)
         else:
+            # The standalone mocha runner doesn't have a timeout.  The headless
+            # one defaults to 1 minute which is too slow for some of our suites.
+            # Increase it to 5 minutes as that should be good enough for all.
             libdot.node.run(['mocha-headless-chrome', '-e', browser, '-f', path,
-                             '--reporter', opts.reporter] + mocha_sb_arg)
+                             '--reporter', opts.reporter, '--timeout=300000'] +
+                            mocha_sb_arg)
     finally:
         # Wait for the server if it exists.
         if serve:
