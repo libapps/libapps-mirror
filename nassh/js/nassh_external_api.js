@@ -108,6 +108,24 @@ function(request, sender, sendResponse) {
   });
 });
 
+nassh.External.COMMANDS.set('unmount',
+/**
+ * Unmount an existing SFTP mount.
+ *
+ * @param {{fileSystemId:string}} request Request to unmount specified mount.
+ * @param {!MessageSender} sender chrome.runtime.MessageSender
+ * @param {function(!Object=)} sendResponse called to send response.
+ */
+function(request, sender, sendResponse) {
+  const {fileSystemId} = request;
+  // Always call the unmount API.  It will handle unknown mounts for us, and
+  // will clean up FSP state that Chrome knows about but we don't.
+  nassh.sftp.fsp.onUnmountRequested(
+      {fileSystemId},
+      () => sendResponse({error: false, message: `unmounted ${fileSystemId}`}),
+      (message) => sendResponse({error: true, message: message}));
+});
+
 /**
  * @typedef {{
  *     url: string,

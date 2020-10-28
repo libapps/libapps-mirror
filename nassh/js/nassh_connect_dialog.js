@@ -494,14 +494,15 @@ nassh.ConnectDialog.prototype.mount = function() {
  * Unmount the SFTP connection.
  */
 nassh.ConnectDialog.prototype.unmount = function() {
-  const options = {fileSystemId: this.currentProfileRecord_.id};
-  // TODO: Turn this into an external message API.
-  nassh.getBackgroundPage()
-    .then((bg) => {
-      bg.nassh.sftp.fsp.onUnmountRequested(
-          options,
-          (success) => this.displayMountButton_(true),
-          (error) => { /* do nothing */ });
+  nassh.runtimeSendMessage({
+    command: 'unmount', fileSystemId: this.currentProfileRecord_.id,
+  })
+    .then(({error, message}) => {
+      if (error) {
+        console.warn(message);
+      }
+      // Always refresh button display if internal state changed.
+      this.displayMountButton_(true);
     });
 };
 

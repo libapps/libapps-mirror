@@ -90,6 +90,15 @@ On Chrome OS, trigger a SFTP filesystem mount with the Files app.
 | `fileSystemId` | !string | ID used for Chrome OS mounted filesystem |
 | `displayName`  | !string | Display name in Chrome OS Files.app for mounted filesystem |
 
+### Unmount
+
+On Chrome OS, unmount an existing SFTP filesystem mount.
+
+| Field name     | Type    | Description |
+|----------------|---------|-------------|
+| `command`      | !string | Must be `unmount`. |
+| `fileSystemId` | !string | ID used for Chrome OS mounted filesystem. |
+
 ### Crosh
 
 On Chrome OS, open a new [crosh] session.
