@@ -8,6 +8,7 @@
  */
 
 import {punycode} from './nassh_deps.rollup.js';
+import {Cli as nasftpCli} from './nasftp_cli.js';
 
 /**
  * The NaCl-ssh-powered terminal command.
@@ -1870,7 +1871,7 @@ nassh.CommandInstance.prototype.onSftpInitialised = function(callback) {
     };
   } else {
     // Interactive SFTP client case.
-    this.sftpCli_ = new nasftp.Cli(this);
+    this.sftpCli_ = new nasftpCli(this);
 
     // Useful for console debugging.
     this.terminalWindow.nasftp_ = this.sftpCli_;

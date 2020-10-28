@@ -2,11 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview nasftp tests.
  */
+
+import {Cli, ProgressBar} from './nasftp_cli.js';
 
 describe('nasftp_cli_tests.js', () => {
 
@@ -90,7 +90,7 @@ after(function() {
 beforeEach(function() {
   this.terminal.reset();
   this.instance = new MockSftpCommandInstance(this.terminal);
-  this.cli = new nasftp.Cli(this.instance);
+  this.cli = new Cli(this.instance);
   this.client = this.cli.client;
 });
 
@@ -98,7 +98,7 @@ beforeEach(function() {
  * Check random progressbar handling.
  */
 it('nasftp-progressbar-random', function() {
-  const spinner = new nasftp.ProgressBar(this.terminal);
+  const spinner = new ProgressBar(this.terminal);
   spinner.update();
   spinner.update();
   spinner.update();
@@ -109,7 +109,7 @@ it('nasftp-progressbar-random', function() {
  * Check percent progressbar handling.
  */
 it('nasftp-progressbar-percent', function() {
-  const spinner = new nasftp.ProgressBar(this.terminal, 10);
+  const spinner = new ProgressBar(this.terminal, 10);
   spinner.update(1);
   spinner.update(5);
   spinner.update(9);
@@ -461,7 +461,7 @@ it('nasftp-complete-options', function() {
  *
  * @param {!Array<!nassh.sftp.FileAttrs>=} entries The remote paths.  If none
  *     are specified, a default set will be used.
- * @this {nasftp.Cli}
+ * @this {Cli}
  */
 function mockCompleteRemotePath(entries = undefined) {
   if (entries === undefined) {
