@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 // This file handles the onload event for google_relay.html.  It would have
 // been included inline in the html file if Content Security Policy (CSP) didn't
 // forbid it.

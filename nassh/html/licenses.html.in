@@ -8,7 +8,7 @@
   <script src='../js/nassh_deps.concat.js'></script>
 
   <script src='../js/nassh.js'></script>
-  <script src='../js/licenses.js'></script>
+  <script type='module' src='../js/licenses.js'></script>
 
   <style>
     body {
