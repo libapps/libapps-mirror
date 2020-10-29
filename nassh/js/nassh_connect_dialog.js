@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {ColumnList} from './nassh_column_list.js';
+
 /**
  * Constructor a new ConnectDialog instance.
  *
@@ -90,7 +92,7 @@ window.addEventListener('message', ConnectDialog.onWindowMessage);
  */
 ConnectDialog.prototype.onPreferencesReady_ = function() {
   // Create and draw the shortcut list.
-  this.shortcutList_ = new nassh.ColumnList(
+  this.shortcutList_ = new ColumnList(
       lib.notNull(document.querySelector('#shortcut-list')),
       this.profileList_);
 
@@ -1108,7 +1110,7 @@ ConnectDialog.prototype.onShortcutListDblClick_ = function(e) {
 /**
  * Called when the ColumnList says the active profile changed.
  *
- * @param {!nassh.ColumnList.ActiveIndexChangedEvent} e
+ * @param {!ColumnList.ActiveIndexChangedEvent} e
  */
 ConnectDialog.prototype.onProfileIndexChanged = function(e) {
   this.setCurrentProfileRecord(this.profileList_[e.now]);

@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * UI Element that controls the multi-column list in the connect dialog.
  *
@@ -14,7 +12,7 @@
  * @param {number=} columnCount
  * @constructor
  */
-nassh.ColumnList = function(div, items, columnCount = 2) {
+export function ColumnList(div, items, columnCount = 2) {
   this.div_ = div || null;
   this.items_ = items;
   this.columnCount = columnCount;
@@ -28,14 +26,14 @@ nassh.ColumnList = function(div, items, columnCount = 2) {
   if (div) {
     this.decorate(div);
   }
-};
+}
 
 /**
  * Turn a div into a ColumnList.
  *
  * @param {!Element} div
  */
-nassh.ColumnList.prototype.decorate = function(div) {
+ColumnList.prototype.decorate = function(div) {
   this.div_ = div;
   this.document_ = div.ownerDocument;
 
@@ -59,7 +57,7 @@ nassh.ColumnList.prototype.decorate = function(div) {
 /**
  * Focus the ColumnList.
  */
-nassh.ColumnList.prototype.focus = function() {
+ColumnList.prototype.focus = function() {
   if (!this.div_) {
     throw new Error('Not initialized.');
   }
@@ -72,7 +70,7 @@ nassh.ColumnList.prototype.focus = function() {
  *
  * @param {...*} args
  */
-nassh.ColumnList.prototype.addEventListener = function(...args) {
+ColumnList.prototype.addEventListener = function(...args) {
   if (!this.div_) {
     throw new Error('Not initialized.');
   }
@@ -85,7 +83,7 @@ nassh.ColumnList.prototype.addEventListener = function(...args) {
  *
  * Coalesces multiple invocations during the timeout period.
  */
-nassh.ColumnList.prototype.scheduleRedraw = function() {
+ColumnList.prototype.scheduleRedraw = function() {
   if (this.redrawTimeout_) {
     return;
   }
@@ -99,7 +97,7 @@ nassh.ColumnList.prototype.scheduleRedraw = function() {
 /**
  * Emoty out and redraw the list.
  */
-nassh.ColumnList.prototype.redraw = function() {
+ColumnList.prototype.redraw = function() {
   const div = this.div_;
 
   while (div.firstChild) {
@@ -168,19 +166,19 @@ nassh.ColumnList.prototype.redraw = function() {
  *
  * @param {function()} callback
  */
-nassh.ColumnList.prototype.afterNextRedraw = function(callback) {
+ColumnList.prototype.afterNextRedraw = function(callback) {
   this.afterRedraw_.push(callback);
 };
 
 /** @typedef {{before: number, now: number}} */
-nassh.ColumnList.ActiveIndexChangedEvent;
+ColumnList.ActiveIndexChangedEvent;
 
 /**
  * Set the index of the item that should be considered "active".
  *
  * @param {number} i
  */
-nassh.ColumnList.prototype.setActiveIndex = function(i) {
+ColumnList.prototype.setActiveIndex = function(i) {
   if (isNaN(i)) {
     throw new Error('Index is NaN');
   }
@@ -210,7 +208,7 @@ nassh.ColumnList.prototype.setActiveIndex = function(i) {
  *
  * @return {!Node}
  */
-nassh.ColumnList.prototype.getActiveNode_ = function() {
+ColumnList.prototype.getActiveNode_ = function() {
   return this.getNodeByIndex_(this.activeIndex);
 };
 
@@ -220,7 +218,7 @@ nassh.ColumnList.prototype.getActiveNode_ = function() {
  * @param {number} i
  * @return {{row:number, column:number}}
  */
-nassh.ColumnList.prototype.getRowColByIndex_ = function(i) {
+ColumnList.prototype.getRowColByIndex_ = function(i) {
   return {
     row: parseInt(i / this.columnCount, 10),
     column: i % this.columnCount,
@@ -233,7 +231,7 @@ nassh.ColumnList.prototype.getRowColByIndex_ = function(i) {
  * @param {number} i
  * @return {!Node}
  */
-nassh.ColumnList.prototype.getNodeByIndex_ = function(i) {
+ColumnList.prototype.getNodeByIndex_ = function(i) {
   const rc = this.getRowColByIndex_(i);
   return this.getNodeByRowCol_(rc.row, rc.column);
 };
@@ -245,8 +243,7 @@ nassh.ColumnList.prototype.getNodeByIndex_ = function(i) {
  * @param {number} column
  * @return {number}
  */
-nassh.ColumnList.prototype.getIndexByRowCol_ = function(
-    row, column) {
+ColumnList.prototype.getIndexByRowCol_ = function(row, column) {
   return this.columnCount * row + column;
 };
 
@@ -257,7 +254,7 @@ nassh.ColumnList.prototype.getIndexByRowCol_ = function(
  * @param {number} column
  * @return {!Element}
  */
-nassh.ColumnList.prototype.getNodeByRowCol_ = function(row, column) {
+ColumnList.prototype.getNodeByRowCol_ = function(row, column) {
   return lib.notNull(this.div_.querySelector(
       '[row="' + row + '"][column="' + column + '"]'));
 };
@@ -269,7 +266,7 @@ nassh.ColumnList.prototype.getNodeByRowCol_ = function(row, column) {
  * @param {!Event} e
  * @return {boolean}
  */
-nassh.ColumnList.prototype.onItemClick_ = function(srcNode, e) {
+ColumnList.prototype.onItemClick_ = function(srcNode, e) {
   const i = this.getIndexByRowCol_(
       parseInt(srcNode.getAttribute('row'), 10),
       parseInt(srcNode.getAttribute('column'), 10));
@@ -285,7 +282,7 @@ nassh.ColumnList.prototype.onItemClick_ = function(srcNode, e) {
  * @param {number} column
  * @return {number}
  */
-nassh.ColumnList.prototype.getColumnHeight_ = function(column) {
+ColumnList.prototype.getColumnHeight_ = function(column) {
   const tallestColumn = Math.ceil(this.items_.length / this.columnCount);
 
   if (column + 1 <= Math.floor(this.columnCount / column + 1)) {
@@ -298,9 +295,9 @@ nassh.ColumnList.prototype.getColumnHeight_ = function(column) {
 /**
  * Clients can override this to learn when the active index changes.
  *
- * @param {!nassh.ColumnList.ActiveIndexChangedEvent} e
+ * @param {!ColumnList.ActiveIndexChangedEvent} e
  */
-nassh.ColumnList.prototype.onActiveIndexChanged = function(e) { };
+ColumnList.prototype.onActiveIndexChanged = function(e) {};
 
 /**
  * Clients can override this to handle onKeyDown events.
@@ -310,14 +307,14 @@ nassh.ColumnList.prototype.onActiveIndexChanged = function(e) { };
  *
  * @param {!KeyboardEvent} e
  */
-nassh.ColumnList.prototype.onKeyDown = function(e) { };
+ColumnList.prototype.onKeyDown = function(e) {};
 
 /**
  * Handle a key down event on the div.
  *
  * @param {!KeyboardEvent} e
  */
-nassh.ColumnList.prototype.onKeyDown_ = function(e) {
+ColumnList.prototype.onKeyDown_ = function(e) {
   if (this.onKeyDown(e) === false) {
     return;
   }
