@@ -6,6 +6,8 @@
  * @fileoverview Common relay logic.
  */
 
+import {StreamSet} from './nassh_stream_set.js';
+
 /**
  * Interface that all relays must implement.
  *
@@ -69,7 +71,7 @@ export class Relay {
    * @param {number} fd
    * @param {string} host
    * @param {number} port
-   * @param {!nassh.StreamSet} streams
+   * @param {!StreamSet} streams
    * @param {function(boolean, ?string=)} onOpen
    * @return {!nassh.Stream}
    */

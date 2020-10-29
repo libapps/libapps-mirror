@@ -2,14 +2,12 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * A set of open streams for a command instance.
  *
  * @constructor
  */
-nassh.StreamSet = function() {
+export function StreamSet() {
   /**
    * Collection of currently open stream instances.
    *
@@ -17,7 +15,7 @@ nassh.StreamSet = function() {
    * @const
    */
   this.openStreams_ = {};
-};
+}
 
 /**
  * Open a new stream instance of a given class.
@@ -28,7 +26,7 @@ nassh.StreamSet = function() {
  * @param {function(boolean, ?string=)} onOpen
  * @return {!nassh.Stream}
  */
-nassh.StreamSet.prototype.openStream = function(streamClass, fd, arg, onOpen) {
+StreamSet.prototype.openStream = function(streamClass, fd, arg, onOpen) {
   if (this.openStreams_[fd]) {
     throw nassh.Stream.ERR_FD_IN_USE;
   }
@@ -52,7 +50,7 @@ nassh.StreamSet.prototype.openStream = function(streamClass, fd, arg, onOpen) {
  *
  * @param {number} fd
  */
-nassh.StreamSet.prototype.closeStream = function(fd) {
+StreamSet.prototype.closeStream = function(fd) {
   const stream = this.openStreams_[fd];
   stream.close();
   stream.open = false;
@@ -62,7 +60,7 @@ nassh.StreamSet.prototype.closeStream = function(fd) {
 /**
  * Closes all stream instances.
  */
-nassh.StreamSet.prototype.closeAllStreams = function() {
+StreamSet.prototype.closeAllStreams = function() {
   for (const fd in this.openStreams_) {
     this.closeStream(Number(fd));
   }
@@ -74,6 +72,6 @@ nassh.StreamSet.prototype.closeAllStreams = function() {
  * @param {number} fd
  * @return {!nassh.Stream}
  */
-nassh.StreamSet.prototype.getStreamByFd = function(fd) {
+StreamSet.prototype.getStreamByFd = function(fd) {
   return this.openStreams_[fd];
 };

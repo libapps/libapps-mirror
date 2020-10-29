@@ -12,6 +12,7 @@ import {Cli as nasftpCli} from './nasftp_cli.js';
 import {Corp as RelayCorp} from './nassh_relay_corp.js';
 import {Corpv4 as RelayCorpv4} from './nassh_relay_corpv4.js';
 import {Sshfe as RelaySshfe} from './nassh_relay_sshfe.js';
+import {StreamSet} from './nassh_stream_set.js';
 
 /**
  * The NaCl-ssh-powered terminal command.
@@ -47,7 +48,7 @@ nassh.CommandInstance = function({io, ...argv}) {
   this.fileSystem_ = null;
 
   // A set of open streams for this instance.
-  this.streams_ = new nassh.StreamSet();
+  this.streams_ = new StreamSet();
 
   // The version of the ssh client to load.
   this.sshClientVersion_ = 'pnacl';
