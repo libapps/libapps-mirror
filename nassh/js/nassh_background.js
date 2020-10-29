@@ -28,6 +28,9 @@
       app.installOmnibox(chrome.omnibox);
     }
 
+    // Bind the FSP APIs.
+    app.installFsp();
+
     // If we're running as an extension, finish setup.
     if (nassh.browserAction) {
       nassh.browserAction.onClicked.removeListener(onLaunched);

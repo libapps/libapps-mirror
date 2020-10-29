@@ -21,6 +21,13 @@ nassh.App = function() {
 };
 
 /**
+ * Set up the file system provider APIs.
+ */
+nassh.App.prototype.installFsp = function() {
+  nassh.sftp.fsp.addListeners();
+};
+
+/**
  * Set the default help text in the omnibox when completing an ssh connection.
  */
 nassh.App.prototype.setDefaultOmnibox_ = function() {

@@ -708,9 +708,13 @@ nassh.sftp.fsp.providerMethods = [
   'onConfigureRequested',
 ];
 
-// Loop over the provider methods and link them to their handlers.
-if (window.chrome && chrome.fileSystemProvider) {
-  nassh.sftp.fsp.providerMethods.forEach(function(provider) {
-    chrome.fileSystemProvider[provider].addListener(nassh.sftp.fsp[provider]);
-  });
-}
+/**
+ * Loop over the provider methods and link them to their handlers.
+ */
+nassh.sftp.fsp.addListeners = function() {
+  if (window.chrome && chrome.fileSystemProvider) {
+    nassh.sftp.fsp.providerMethods.forEach(function(provider) {
+      chrome.fileSystemProvider[provider].addListener(nassh.sftp.fsp[provider]);
+    });
+  }
+};
