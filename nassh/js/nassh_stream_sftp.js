@@ -2,11 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Stream for passing binary SFTP data through.
  */
+
+import {Stream} from './nassh_stream.js';
 
 /**
  * The sftp packet stream.
@@ -14,18 +14,18 @@
  * @param {number} fd
  * @param {{client: !nassh.sftp.Client}} info
  * @constructor
- * @extends {nassh.Stream}
+ * @extends {Stream}
  */
-nassh.Stream.Sftp = function(fd, info) {
-  nassh.Stream.apply(this, [fd]);
+export function SftpStream(fd, info) {
+  Stream.apply(this, [fd]);
 
   this.acknowledgeCount_ = 0;
   this.client_ = info.client;
-};
+}
 
-nassh.Stream.Sftp.prototype = Object.create(nassh.Stream.prototype);
+SftpStream.prototype = Object.create(Stream.prototype);
 /** @override */
-nassh.Stream.Sftp.constructor = nassh.Stream.Sftp;
+SftpStream.constructor = SftpStream;
 
 /**
  * Open the stream asynchronously.
@@ -34,7 +34,7 @@ nassh.Stream.Sftp.constructor = nassh.Stream.Sftp;
  * @param {function(boolean)} onOpen
  * @override
  */
-nassh.Stream.Sftp.prototype.asyncOpen = async function(settings, onOpen) {
+SftpStream.prototype.asyncOpen = async function(settings, onOpen) {
   this.acknowledgeCount_ = 0;
 
   setTimeout(() => onOpen(true), 0);
@@ -47,9 +47,9 @@ nassh.Stream.Sftp.prototype.asyncOpen = async function(settings, onOpen) {
  * @param {function(number)} onSuccess
  * @override
  */
-nassh.Stream.Sftp.prototype.asyncWrite = function(data, onSuccess) {
+SftpStream.prototype.asyncWrite = function(data, onSuccess) {
   if (!this.open) {
-    throw nassh.Stream.ERR_STREAM_CLOSED;
+    throw Stream.ERR_STREAM_CLOSED;
   }
 
   this.acknowledgeCount_ += data.byteLength;

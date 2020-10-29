@@ -6,6 +6,7 @@
  * @fileoverview Common relay logic.
  */
 
+import {Stream} from './nassh_stream.js';
 import {StreamSet} from './nassh_stream_set.js';
 
 /**
@@ -64,8 +65,7 @@ export class Relay {
   async init() {}
 
   /**
-   * Return an nassh.Stream object that will handle the socket stream
-   * for this relay.
+   * Return a Stream object that will handle the socket stream for this relay.
    *
    * @abstract
    * @param {number} fd
@@ -73,7 +73,7 @@ export class Relay {
    * @param {number} port
    * @param {!StreamSet} streams
    * @param {function(boolean, ?string=)} onOpen
-   * @return {!nassh.Stream}
+   * @return {!Stream}
    */
   openSocket(fd, host, port, streams, onOpen) {}
 

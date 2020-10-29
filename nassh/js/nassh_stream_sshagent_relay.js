@@ -2,30 +2,30 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
+import {Stream} from './nassh_stream.js';
 
 /**
  * Relay ssh-agent messages to another app.
  *
  * @param {number} fd
  * @constructor
- * @extends {nassh.Stream}
+ * @extends {Stream}
  */
-nassh.Stream.SSHAgentRelay = function(fd) {
-  nassh.Stream.apply(this, [fd]);
+export function SshAgentRelayStream(fd) {
+  Stream.apply(this, [fd]);
 
   this.authAgentAppID_ = null;
   this.port_ = null;
   this.pendingMessageSize_ = null;
   this.writeBuffer_ = nassh.buffer.new(/* autoack= */ true);
-};
+}
 
 /**
- * We are a subclass of nassh.Stream.
+ * We are a subclass of Stream.
  */
-nassh.Stream.SSHAgentRelay.prototype = Object.create(nassh.Stream.prototype);
+SshAgentRelayStream.prototype = Object.create(Stream.prototype);
 /** @override */
-nassh.Stream.SSHAgentRelay.constructor = nassh.Stream.SSHAgentRelay;
+SshAgentRelayStream.constructor = SshAgentRelayStream;
 
 /**
  * Open a connection to agent.
@@ -34,8 +34,7 @@ nassh.Stream.SSHAgentRelay.constructor = nassh.Stream.SSHAgentRelay;
  * @param {function(boolean, ?string=)} onComplete
  * @override
  */
-nassh.Stream.SSHAgentRelay.prototype.asyncOpen =
-    async function(settings, onComplete) {
+SshAgentRelayStream.prototype.asyncOpen = async function(settings, onComplete) {
   this.authAgentAppID_ = settings.authAgentAppID;
   this.port_ = chrome.runtime.connect(this.authAgentAppID_);
 
@@ -92,18 +91,18 @@ nassh.Stream.SSHAgentRelay.prototype.asyncOpen =
 /**
  * @override
  */
-nassh.Stream.SSHAgentRelay.prototype.close = function() {
+SshAgentRelayStream.prototype.close = function() {
   if (this.port_) {
     this.port_.disconnect();
   }
-  nassh.Stream.prototype.close.call(this);
+  Stream.prototype.close.call(this);
 };
 
 /**
  * Check whether there is enough data in the write buffer to constitute a
  * packet. If so, send packet and handle reply.
  */
-nassh.Stream.SSHAgentRelay.prototype.trySendPacket_ = function() {
+SshAgentRelayStream.prototype.trySendPacket_ = function() {
   // See if we've scanned the message length yet (first 4 bytes).
   if (this.pendingMessageSize_ === null) {
     if (this.writeBuffer_.getUnreadCount() < 4) {
@@ -145,7 +144,7 @@ nassh.Stream.SSHAgentRelay.prototype.trySendPacket_ = function() {
  * @param {function(number)} onSuccess
  * @override
  */
-nassh.Stream.SSHAgentRelay.prototype.asyncWrite = function(data, onSuccess) {
+SshAgentRelayStream.prototype.asyncWrite = function(data, onSuccess) {
   if (!data.byteLength) {
     return;
   }

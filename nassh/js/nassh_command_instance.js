@@ -14,6 +14,10 @@ import {Corp as RelayCorp} from './nassh_relay_corp.js';
 import {Corpv4 as RelayCorpv4} from './nassh_relay_corpv4.js';
 import {Sshfe as RelaySshfe} from './nassh_relay_sshfe.js';
 import {StreamSet} from './nassh_stream_set.js';
+import {SftpStream} from './nassh_stream_sftp.js';
+import {SshAgentStream} from './nassh_stream_sshagent.js';
+import {SshAgentRelayStream} from './nassh_stream_sshagent_relay.js';
+import {InputBuffer, TtyStream} from './nassh_stream_tty.js';
 
 /**
  * The NaCl-ssh-powered terminal command.
@@ -94,7 +98,7 @@ nassh.CommandInstance = function({io, ...argv}) {
   this.exited_ = false;
 
   // Buffer for data coming from the terminal.
-  this.inputBuffer_ = new nassh.InputBuffer();
+  this.inputBuffer_ = new InputBuffer();
 };
 
 /**
@@ -1468,6 +1472,7 @@ nassh.CommandInstance.prototype.onVTKeystroke_ = function(data) {
  * @param {function(boolean, ?string=)} onOpen Callback to call when the
  *     stream is opened.
  * @return {!Object} The newly created stream.
+ * @suppress {missingProperties} https://github.com/google/closure-compiler/issues/946
  */
 nassh.CommandInstance.prototype.createTtyStream = function(
     fd, allowRead, allowWrite, onOpen) {
@@ -1479,7 +1484,7 @@ nassh.CommandInstance.prototype.createTtyStream = function(
     io: this.io,
   };
 
-  const stream = this.streams_.openStream(nassh.Stream.Tty, fd, arg, onOpen);
+  const stream = this.streams_.openStream(TtyStream, fd, arg, onOpen);
   if (allowRead) {
     const onDataAvailable = (isAvailable) => {
       // Send current read status to plugin.
@@ -1760,7 +1765,7 @@ nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
     const info = {
       client: this.sftpClient,
     };
-    this.streams_.openStream(nassh.Stream.Sftp, fd, info, onOpen);
+    this.streams_.openStream(SftpStream, fd, info, onOpen);
   } else if (path == DEV_STDIN || path == DEV_STDOUT || path == DEV_STDERR) {
     isAtty = !this.isSftp;
     const allowRead = path == DEV_STDIN;
@@ -1796,10 +1801,10 @@ nassh.CommandInstance.prototype.onPlugin_.openSocket = function(
     // Request for auth-agent connection.
     if (this.authAgent_) {
       stream = this.streams_.openStream(
-          nassh.Stream.SSHAgent, fd, {authAgent: this.authAgent_}, onOpen);
+          SshAgentStream, fd, {authAgent: this.authAgent_}, onOpen);
     } else {
       stream = this.streams_.openStream(
-          nassh.Stream.SSHAgentRelay, fd,
+          SshAgentRelayStream, fd,
           {authAgentAppID: this.authAgentAppID_}, onOpen);
     }
   } else {

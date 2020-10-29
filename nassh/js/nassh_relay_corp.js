@@ -7,6 +7,9 @@
  */
 
 import {Relay} from './nassh_relay.js';
+import {Stream} from './nassh_stream.js';
+import {RelayCorpWsStream,
+        RelayCorpXhrStream} from './nassh_stream_relay_corp.js';
 
 /**
  * Corp Relay implementation.
@@ -143,13 +146,12 @@ export class Corp extends Relay {
   }
 
   /**
-   * Return nassh.Stream class to use.
+   * Return Stream class to use.
    *
-   * @return {function(new:nassh.Stream, number, ?)}
+   * @return {function(new:Stream, number, ?)}
    */
   getStreamClass() {
-    return this.useWebsocket ? nassh.Stream.RelayCorpWS :
-                               nassh.Stream.RelayCorpXHR;
+    return this.useWebsocket ? RelayCorpWsStream : RelayCorpXhrStream;
   }
 
   /** @inheritDoc */

@@ -8,6 +8,7 @@
 
 import {getGnubbyExtension} from './nassh_google.js';
 import {Relay} from './nassh_relay.js';
+import {RelaySshfeWsStream} from './nassh_stream_relay_sshfe.js';
 
 /**
  * SSH-FE relay implementation.
@@ -49,6 +50,6 @@ export class Sshfe extends Relay {
       port: port,
       sshAgent: this.sshAgent_,
     };
-    return streams.openStream(nassh.Stream.RelaySshfeWS, fd, settings, onOpen);
+    return streams.openStream(RelaySshfeWsStream, fd, settings, onOpen);
   }
 }

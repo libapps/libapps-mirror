@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {Stream} from './nassh_stream.js';
 
 /**
  * The buffer for input from a terminal.
@@ -12,7 +13,7 @@
  *
  * @constructor
  */
-nassh.InputBuffer = function() {
+export function InputBuffer() {
   // The buffered data.
   this.data_ = '';
 
@@ -28,7 +29,7 @@ nassh.InputBuffer = function() {
   // read, and false when the buffer is empty. It is only fired when this
   // status changes.
   this.onDataAvailable = lib.Event();
-};
+}
 
 /**
  * Write data to the input buffer.
@@ -37,7 +38,7 @@ nassh.InputBuffer = function() {
  *
  * @param {string} data
  */
-nassh.InputBuffer.prototype.write = function(data) {
+InputBuffer.prototype.write = function(data) {
   const wasAvailable = this.data_.length != 0;
   this.data_ += data;
 
@@ -81,7 +82,7 @@ nassh.InputBuffer.prototype.write = function(data) {
  * @param {number} size
  * @param {function(string)} onRead
  */
-nassh.InputBuffer.prototype.read = function(size, onRead) {
+InputBuffer.prototype.read = function(size, onRead) {
   const avail = this.data_.length;
 
   if (avail == 0) {
@@ -108,31 +109,31 @@ nassh.InputBuffer.prototype.read = function(size, onRead) {
 /**
  * The /dev/tty stream.
  *
- * This stream allows reads (from an nassh.InputBuffer) and writes (to a
+ * This stream allows reads (from an InputBuffer) and writes (to a
  * hterm.Terminal.IO). It is used for /dev/tty, as well as stdin, stdout and
  * stderr when they are reading from/writing to a terminal.
  *
  * @param {number} fd
  * @param {!Object} info
  * @constructor
- * @extends {nassh.Stream}
+ * @extends {Stream}
  */
-nassh.Stream.Tty = function(fd, info) {
-  nassh.Stream.apply(this, [fd]);
+export function TtyStream(fd, info) {
+  Stream.apply(this, [fd]);
 
   this.encoder_ = new TextEncoder();
-};
+}
 
-nassh.Stream.Tty.prototype = Object.create(nassh.Stream.prototype);
+TtyStream.prototype = Object.create(Stream.prototype);
 /** @override */
-nassh.Stream.Tty.constructor = nassh.Stream.Tty;
+TtyStream.constructor = TtyStream;
 
 /**
  * @param {!Object} settings
  * @param {function(boolean)} onOpen
  * @override
  */
-nassh.Stream.Tty.prototype.asyncOpen = async function(settings, onOpen) {
+TtyStream.prototype.asyncOpen = async function(settings, onOpen) {
   this.allowRead_ = settings.allowRead;
   this.allowWrite_ = settings.allowWrite;
   this.inputBuffer_ = settings.inputBuffer;
@@ -147,13 +148,13 @@ nassh.Stream.Tty.prototype.asyncOpen = async function(settings, onOpen) {
  * @param {function(!ArrayBuffer)} onRead
  * @override
  */
-nassh.Stream.Tty.prototype.asyncRead = function(size, onRead) {
+TtyStream.prototype.asyncRead = function(size, onRead) {
   if (!this.open) {
-    throw nassh.Stream.ERR_STREAM_CLOSED;
+    throw Stream.ERR_STREAM_CLOSED;
   }
 
   if (!this.allowRead_) {
-    throw nassh.Stream.ERR_STREAM_CANT_READ;
+    throw Stream.ERR_STREAM_CANT_READ;
   }
 
   this.inputBuffer_.read(size, (data) => {
@@ -173,13 +174,13 @@ nassh.Stream.Tty.prototype.asyncRead = function(size, onRead) {
  * @param {function(number)} onSuccess
  * @override
  */
-nassh.Stream.Tty.prototype.asyncWrite = function(data, onSuccess) {
+TtyStream.prototype.asyncWrite = function(data, onSuccess) {
   if (!this.open) {
-    throw nassh.Stream.ERR_STREAM_CLOSED;
+    throw Stream.ERR_STREAM_CLOSED;
   }
 
   if (!this.allowWrite_) {
-    throw nassh.Stream.ERR_STREAM_CANT_WRITE;
+    throw Stream.ERR_STREAM_CANT_WRITE;
   }
 
   this.acknowledgeCount_ += data.byteLength;

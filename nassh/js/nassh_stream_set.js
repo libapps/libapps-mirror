@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {Stream} from './nassh_stream.js';
+
 /**
  * A set of open streams for a command instance.
  *
@@ -11,7 +13,7 @@ export function StreamSet() {
   /**
    * Collection of currently open stream instances.
    *
-   * @private {!Object<number, !nassh.Stream>}
+   * @private {!Object<number, !Stream>}
    * @const
    */
   this.openStreams_ = {};
@@ -20,15 +22,15 @@ export function StreamSet() {
 /**
  * Open a new stream instance of a given class.
  *
- * @param {function(new:nassh.Stream, number, ?)} streamClass
+ * @param {function(new:Stream, number, ?)} streamClass
  * @param {number} fd
  * @param {!Object} arg
  * @param {function(boolean, ?string=)} onOpen
- * @return {!nassh.Stream}
+ * @return {!Stream}
  */
 StreamSet.prototype.openStream = function(streamClass, fd, arg, onOpen) {
   if (this.openStreams_[fd]) {
-    throw nassh.Stream.ERR_FD_IN_USE;
+    throw Stream.ERR_FD_IN_USE;
   }
 
   const stream = new streamClass(fd, arg);
@@ -70,7 +72,7 @@ StreamSet.prototype.closeAllStreams = function() {
  * Returns a stream instance.
  *
  * @param {number} fd
- * @return {!nassh.Stream}
+ * @return {!Stream}
  */
 StreamSet.prototype.getStreamByFd = function(fd) {
   return this.openStreams_[fd];

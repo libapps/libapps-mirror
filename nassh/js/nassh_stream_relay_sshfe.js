@@ -2,11 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Stream for connecting to a ssh server via a SSH-FE relay.
  */
+
+import {Stream} from './nassh_stream.js';
 
 /**
  * WebSocket backed stream.
@@ -18,10 +18,10 @@
  *
  * @param {number} fd
  * @constructor
- * @extends {nassh.Stream}
+ * @extends {Stream}
  */
-nassh.Stream.RelaySshfeWS = function(fd) {
-  nassh.Stream.call(this, fd);
+export function RelaySshfeWsStream(fd) {
+  Stream.call(this, fd);
 
   // The relay connection settings.
   this.io_ = null;
@@ -49,14 +49,14 @@ nassh.Stream.RelaySshfeWS = function(fd) {
 
   // The actual WebSocket connected to the ssh server.
   this.socket_ = null;
-};
+}
 
 /**
- * We are a subclass of nassh.Stream.
+ * We are a subclass of Stream.
  */
-nassh.Stream.RelaySshfeWS.prototype = Object.create(nassh.Stream.prototype);
+RelaySshfeWsStream.prototype = Object.create(Stream.prototype);
 /** @override */
-nassh.Stream.RelaySshfeWS.constructor = nassh.Stream.RelaySshfeWS;
+RelaySshfeWsStream.constructor = RelaySshfeWsStream;
 
 /**
  * Open a relay socket.
@@ -65,8 +65,7 @@ nassh.Stream.RelaySshfeWS.constructor = nassh.Stream.RelaySshfeWS;
  * @param {function(boolean, string=)} onComplete
  * @override
  */
-nassh.Stream.RelaySshfeWS.prototype.asyncOpen =
-    async function(settings, onComplete) {
+RelaySshfeWsStream.prototype.asyncOpen = async function(settings, onComplete) {
   this.io_ = settings.io;
   this.relayHost_ = settings.relayHost;
   this.relayPort_ = settings.relayPort;
@@ -98,7 +97,7 @@ nassh.Stream.RelaySshfeWS.prototype.asyncOpen =
 /**
  * URI to get a new challenge for connecting through the relay.
  */
-nassh.Stream.RelaySshfeWS.prototype.challengeTemplate_ =
+RelaySshfeWsStream.prototype.challengeTemplate_ =
     `%(protocol)://%(relayHost):%(relayPort)` +
     `/challenge?user=%encodeURIComponent(relayUser)`;
 
@@ -107,7 +106,7 @@ nassh.Stream.RelaySshfeWS.prototype.challengeTemplate_ =
  *
  * @return {!Promise} A promise to resolve with the server's challenge.
  */
-nassh.Stream.RelaySshfeWS.prototype.getChallenge_ = function() {
+RelaySshfeWsStream.prototype.getChallenge_ = function() {
   // Send the current user to the relay to get the challenge.
   const uri = lib.f.replaceVars(this.challengeTemplate_, {
     protocol: 'https',
@@ -145,17 +144,17 @@ nassh.Stream.RelaySshfeWS.prototype.getChallenge_ = function() {
  *     data: !Array
  * }}
  */
-nassh.Stream.RelaySshfeWS.AgentResponse;
+RelaySshfeWsStream.AgentResponse;
 
 /**
  * Send a message to the ssh agent.
  *
  * @param {!Array} data The object to send to the agent.
- * @return {!Promise<!nassh.Stream.RelaySshfeWS.AgentResponse>} A promise to
+ * @return {!Promise<!RelaySshfeWsStream.AgentResponse>} A promise to
  *    resolve with the agent's response.
  */
-nassh.Stream.RelaySshfeWS.prototype.sendAgentMessage_ = function(data) {
-  return /** @type {!Promise<!nassh.Stream.RelaySshfeWS.AgentResponse>} */ (
+RelaySshfeWsStream.prototype.sendAgentMessage_ = function(data) {
+  return /** @type {!Promise<!RelaySshfeWsStream.AgentResponse>} */ (
       nassh.runtimeSendMessage(
           this.sshAgent_, {'type': 'auth-agent@openssh.com', 'data': data}));
 };
@@ -169,7 +168,7 @@ nassh.Stream.RelaySshfeWS.prototype.sendAgentMessage_ = function(data) {
  * @param {string} challenge The server challenge
  * @return {!Promise} A promise to resolve with the signed result.
  */
-nassh.Stream.RelaySshfeWS.prototype.signChallenge_ = function(challenge) {
+RelaySshfeWsStream.prototype.signChallenge_ = function(challenge) {
   // Construct a SSH_AGENTC_PUBLIC_KEY_CHALLENGE packet.
   //   byte    code
   //   byte    slot
@@ -227,7 +226,7 @@ nassh.Stream.RelaySshfeWS.prototype.signChallenge_ = function(challenge) {
 /**
  * Maximum length of message that can be sent to avoid request limits.
  */
-nassh.Stream.RelaySshfeWS.prototype.maxMessageLength = 64 * 1024;
+RelaySshfeWsStream.prototype.maxMessageLength = 64 * 1024;
 
 /**
  * URI to establish a connection to the ssh server via the relay.
@@ -235,7 +234,7 @@ nassh.Stream.RelaySshfeWS.prototype.maxMessageLength = 64 * 1024;
  * Note: The user field here isn't really needed.  We pass it along to help
  * with remote logging on the server.
  */
-nassh.Stream.RelaySshfeWS.prototype.connectTemplate_ =
+RelaySshfeWsStream.prototype.connectTemplate_ =
     `%(protocol)://%(relayHost):%(relayPort)/connect` +
     `?ssh-fe-challenge=%encodeURIComponent(challenge)` +
     `&ssh-fe-signature=%encodeURIComponent(signature)` +
@@ -251,7 +250,7 @@ nassh.Stream.RelaySshfeWS.prototype.connectTemplate_ =
  * @param {string} challenge
  * @param {string} signature
  */
-nassh.Stream.RelaySshfeWS.prototype.connect_ = function(challenge, signature) {
+RelaySshfeWsStream.prototype.connect_ = function(challenge, signature) {
   if (this.socket_) {
     throw new Error('stream already connected');
   }
@@ -282,7 +281,7 @@ nassh.Stream.RelaySshfeWS.prototype.connect_ = function(challenge, signature) {
  *
  * @param {string} reason A short message explaining the reason for closing.
  */
-nassh.Stream.RelaySshfeWS.prototype.close_ = function(reason) {
+RelaySshfeWsStream.prototype.close_ = function(reason) {
   // If we aren't open, there's nothing to do.  This allows us to call it
   // multiple times, perhaps from cascading events (write error/close/etc...).
   if (!this.socket_) {
@@ -292,7 +291,7 @@ nassh.Stream.RelaySshfeWS.prototype.close_ = function(reason) {
   console.log(`Closing socket due to ${reason}`);
   this.socket_.close();
   this.socket_ = null;
-  nassh.Stream.prototype.close.call(this);
+  Stream.prototype.close.call(this);
 };
 
 /**
@@ -300,7 +299,7 @@ nassh.Stream.RelaySshfeWS.prototype.close_ = function(reason) {
  *
  * @param {!Event} e The event details.
  */
-nassh.Stream.RelaySshfeWS.prototype.onSocketOpen_ = function(e) {
+RelaySshfeWsStream.prototype.onSocketOpen_ = function(e) {
   // If we had any pending writes, kick them off.  We can't call sendWrite
   // directly as the socket isn't in the correct state until after this handler
   // finishes executing.
@@ -312,7 +311,7 @@ nassh.Stream.RelaySshfeWS.prototype.onSocketOpen_ = function(e) {
  *
  * @param {!CloseEvent} e The event details.
  */
-nassh.Stream.RelaySshfeWS.prototype.onSocketClose_ = function(e) {
+RelaySshfeWsStream.prototype.onSocketClose_ = function(e) {
   this.close_('server closed socket');
 };
 
@@ -321,7 +320,7 @@ nassh.Stream.RelaySshfeWS.prototype.onSocketClose_ = function(e) {
  *
  * @param {!Event} e The event details.
  */
-nassh.Stream.RelaySshfeWS.prototype.onSocketError_ = function(e) {
+RelaySshfeWsStream.prototype.onSocketError_ = function(e) {
   this.close_('server sent an error');
 };
 
@@ -330,7 +329,7 @@ nassh.Stream.RelaySshfeWS.prototype.onSocketError_ = function(e) {
  *
  * @param {!MessageEvent} e The message with data to read.
  */
-nassh.Stream.RelaySshfeWS.prototype.onSocketData_ = function(e) {
+RelaySshfeWsStream.prototype.onSocketData_ = function(e) {
   const dv = new DataView(e.data);
   const ack = dv.getUint32(0);
 
@@ -356,7 +355,7 @@ nassh.Stream.RelaySshfeWS.prototype.onSocketData_ = function(e) {
  * @param {function(number)=} onSuccess Optional callback.
  * @override
  */
-nassh.Stream.RelaySshfeWS.prototype.asyncWrite = function(data, onSuccess) {
+RelaySshfeWsStream.prototype.asyncWrite = function(data, onSuccess) {
   if (!data.byteLength) {
     return;
   }
@@ -369,7 +368,7 @@ nassh.Stream.RelaySshfeWS.prototype.asyncWrite = function(data, onSuccess) {
 /**
  * Send out any queued data.
  */
-nassh.Stream.RelaySshfeWS.prototype.sendWrite_ = function() {
+RelaySshfeWsStream.prototype.sendWrite_ = function() {
   if (!this.socket_ || this.socket_.readyState != 1 ||
       this.writeBuffer_.isEmpty()) {
     // Nothing to write or socket is not ready.

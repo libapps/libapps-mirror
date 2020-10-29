@@ -2,12 +2,12 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview SSH agent implementation using nassh.agent.Agent to relay
  * requests to backends.
  */
+
+import {Stream} from './nassh_stream.js';
 
 /**
  * Relay ssh-agent messages to an nassh.agent.Agent instance.
@@ -15,19 +15,19 @@
  * @param {number} fd
  * @param {{authAgent: !nassh.agent.Agent}} args
  * @constructor
- * @extends {nassh.Stream}
+ * @extends {Stream}
  */
-nassh.Stream.SSHAgent = function(fd, args) {
-  nassh.Stream.apply(this, [fd]);
+export function SshAgentStream(fd, args) {
+  Stream.apply(this, [fd]);
 
   this.authAgent_ = args.authAgent;
   this.pendingMessageSize_ = null;
   this.writeBuffer_ = new Uint8Array(0);
-};
+}
 
-nassh.Stream.SSHAgent.prototype = Object.create(nassh.Stream.prototype);
+SshAgentStream.prototype = Object.create(Stream.prototype);
 /** @override */
-nassh.Stream.SSHAgent.constructor = nassh.Stream.SSHAgent;
+SshAgentStream.constructor = SshAgentStream;
 
 /**
  * Open a connection to the agent and let it initialize its backends.
@@ -36,8 +36,7 @@ nassh.Stream.SSHAgent.constructor = nassh.Stream.SSHAgent;
  * @param {function(boolean, ?string=)} onComplete
  * @override
  */
-nassh.Stream.SSHAgent.prototype.asyncOpen =
-    async function(settings, onComplete) {
+SshAgentStream.prototype.asyncOpen = async function(settings, onComplete) {
   try {
     this.authAgent_.ping().then(() => onComplete(true));
   } catch (e) {
@@ -52,7 +51,7 @@ nassh.Stream.SSHAgent.prototype.asyncOpen =
  *
  * @private
  */
-nassh.Stream.SSHAgent.prototype.trySendPacket_ = function() {
+SshAgentStream.prototype.trySendPacket_ = function() {
   // See if we've scanned the message length yet (first 4 bytes).
   if (this.pendingMessageSize_ === null) {
     if (this.writeBuffer_.length < 4) {
@@ -89,7 +88,7 @@ nassh.Stream.SSHAgent.prototype.trySendPacket_ = function() {
  * @param {function(number)} onSuccess Callback once the data is queued.
  * @override
  */
-nassh.Stream.SSHAgent.prototype.asyncWrite = function(data, onSuccess) {
+SshAgentStream.prototype.asyncWrite = function(data, onSuccess) {
   if (!data.byteLength) {
     return;
   }

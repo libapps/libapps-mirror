@@ -2,13 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Stream for connecting to a ssh server via a Corp v4 relay.
  */
 
-nassh.Stream.RelayCorpv4 = {};
+import {Stream} from './nassh_stream.js';
 
 /**
  * Some constants for packets.
@@ -16,7 +14,7 @@ nassh.Stream.RelayCorpv4 = {};
  * TODO(vapier): Switch to classes once this hits stage4:
  * https://github.com/tc39/proposal-class-fields
  */
-nassh.Stream.RelayCorpv4.PacketTag = {
+const PacketTag = {
   // Unused tag: should never show up.
   UNUSED: 0,
   // Session ID sent when connect works.
@@ -32,7 +30,7 @@ nassh.Stream.RelayCorpv4.PacketTag = {
 /**
  * Parse a packet from the server.
  */
-nassh.Stream.RelayCorpv4.ServerPacket = class {
+export class ServerPacket {
   /**
    * @param {!ArrayBuffer} data The array buffer to parse.
    */
@@ -43,7 +41,7 @@ nassh.Stream.RelayCorpv4.ServerPacket = class {
     // Handle normal frames.
     this.tag = dv.getUint16(0);
     switch (this.tag) {
-      case nassh.Stream.RelayCorpv4.PacketTag.CONNECT_SUCCESS: {
+      case PacketTag.CONNECT_SUCCESS: {
         this.length = dv.getUint32(2);
         const td = new TextDecoder();
         // The sid array is after the tag (2 bytes) & length (4 bytes).
@@ -53,27 +51,27 @@ nassh.Stream.RelayCorpv4.ServerPacket = class {
         break;
       }
 
-      case nassh.Stream.RelayCorpv4.PacketTag.RECONNECT_SUCCESS:
+      case PacketTag.RECONNECT_SUCCESS:
         this.ack = dv.getBigUint64(2);
         break;
 
-      case nassh.Stream.RelayCorpv4.PacketTag.DATA:
+      case PacketTag.DATA:
         this.length = dv.getUint32(2);
         // The data array is after the tag (2 bytes) & length (4 bytes).
         this.data = new Uint8Array(this.frame, 6, this.length);
         break;
 
-      case nassh.Stream.RelayCorpv4.PacketTag.ACK:
+      case PacketTag.ACK:
         this.ack = dv.getBigUint64(2);
         break;
     }
   }
-};
+}
 
 /**
  * A DATA packet to send to the server.
  */
-nassh.Stream.RelayCorpv4.ClientDataPacket = class {
+export class ClientDataPacket {
   /**
    * @param {!Uint8Array} data The data buffer to packetize.
    */
@@ -81,7 +79,7 @@ nassh.Stream.RelayCorpv4.ClientDataPacket = class {
     // Space for the tag (2 bytes) & length (4 bytes) & array.
     this.frame = new ArrayBuffer(6 + data.length);
     const dv = new DataView(this.frame);
-    this.tag = nassh.Stream.RelayCorpv4.PacketTag.DATA;
+    this.tag = PacketTag.DATA;
     this.length = data.length;
     // The data array is after the tag (2 bytes) & length (4 bytes).
     this.data = new Uint8Array(this.frame, 6);
@@ -90,12 +88,12 @@ nassh.Stream.RelayCorpv4.ClientDataPacket = class {
     dv.setUint32(2, this.length);
     this.data.set(data);
   }
-};
+}
 
 /**
  * An ACK packet to send to the server.
  */
-nassh.Stream.RelayCorpv4.ClientAckPacket = class {
+export class ClientAckPacket {
   /**
    * @param {bigint} ack The ack to packetize.
    */
@@ -103,14 +101,14 @@ nassh.Stream.RelayCorpv4.ClientAckPacket = class {
     // Space for the tag (2 bytes) & ack (8 bytes).
     this.frame = new ArrayBuffer(10);
     const dv = new DataView(this.frame);
-    this.tag = nassh.Stream.RelayCorpv4.PacketTag.ACK;
+    this.tag = PacketTag.ACK;
     /** @const {bigint} */
     this.ack = ack;
 
     dv.setUint16(0, this.tag);
     dv.setBigUint64(2, this.ack);
   }
-};
+}
 
 /**
  * WebSocket backed stream.
@@ -120,10 +118,10 @@ nassh.Stream.RelayCorpv4.ClientAckPacket = class {
  *
  * @param {number} fd
  * @constructor
- * @extends {nassh.Stream}
+ * @extends {Stream}
  */
-nassh.Stream.RelayCorpv4WS = function(fd) {
-  nassh.Stream.call(this, fd);
+export function RelayCorpv4WsStream(fd) {
+  Stream.call(this, fd);
 
   // The relay connection settings.
   this.io_ = null;
@@ -198,14 +196,14 @@ nassh.Stream.RelayCorpv4WS = function(fd) {
    * @type {?nassh.GoogMetricsReporter}
    */
    this.googMetricsReporter_ = null;
-};
+}
 
 /**
- * We are a subclass of nassh.Stream.
+ * We are a subclass of Stream.
  */
-nassh.Stream.RelayCorpv4WS.prototype = Object.create(nassh.Stream.prototype);
+RelayCorpv4WsStream.prototype = Object.create(Stream.prototype);
 /** @override */
-nassh.Stream.RelayCorpv4WS.constructor = nassh.Stream.RelayCorpv4WS;
+RelayCorpv4WsStream.constructor = RelayCorpv4WsStream;
 
 /**
  * Open a relay socket.
@@ -214,8 +212,7 @@ nassh.Stream.RelayCorpv4WS.constructor = nassh.Stream.RelayCorpv4WS;
  * @param {function(boolean, ?string=)} onComplete
  * @override
  */
-nassh.Stream.RelayCorpv4WS.prototype.asyncOpen =
-    async function(settings, onComplete) {
+RelayCorpv4WsStream.prototype.asyncOpen = async function(settings, onComplete) {
   this.io_ = settings.io;
   this.relayServerSocket_ = settings.relayServerSocket;
   this.relayUser_ = settings.relayUser;
@@ -236,12 +233,12 @@ nassh.Stream.RelayCorpv4WS.prototype.asyncOpen =
  * packet itself.  The only time this limit really comes up is when we're
  * creating DATA packets ourselves.
  */
-nassh.Stream.RelayCorpv4WS.prototype.maxDataWriteLength = 16 * 1024;
+RelayCorpv4WsStream.prototype.maxDataWriteLength = 16 * 1024;
 
 /**
  * URI to establish a new connection to the ssh server via the relay.
  */
-nassh.Stream.RelayCorpv4WS.prototype.connectTemplate_ =
+RelayCorpv4WsStream.prototype.connectTemplate_ =
     `%(relay)v4/connect` +
     `?host=%encodeURIComponent(host)` +
     `&port=%encodeURIComponent(port)` +
@@ -250,7 +247,7 @@ nassh.Stream.RelayCorpv4WS.prototype.connectTemplate_ =
 /**
  * Start a new connection to the proxy server.
  */
-nassh.Stream.RelayCorpv4WS.prototype.connect_ = function() {
+RelayCorpv4WsStream.prototype.connect_ = function() {
   if (this.socket_) {
     throw new Error('stream already connected');
   }
@@ -274,7 +271,7 @@ nassh.Stream.RelayCorpv4WS.prototype.connect_ = function() {
 /**
  * URI to reconnect to an existing session.
  */
-nassh.Stream.RelayCorpv4WS.prototype.reconnectTemplate_ =
+RelayCorpv4WsStream.prototype.reconnectTemplate_ =
     `%(relay)v4/reconnect` +
     `?sid=%encodeURIComponent(sid)` +
     `&ack=%(ack)`;
@@ -285,7 +282,7 @@ nassh.Stream.RelayCorpv4WS.prototype.reconnectTemplate_ =
  * @return {boolean} returns false if resume is not set for this connection,
  *     or reconnect already in progress.
  */
-nassh.Stream.RelayCorpv4WS.prototype.reconnect_ = function() {
+RelayCorpv4WsStream.prototype.reconnect_ = function() {
   if (!this.resume_ || this.connecting_ || !this.sid_) {
     return false;
   }
@@ -317,7 +314,7 @@ nassh.Stream.RelayCorpv4WS.prototype.reconnect_ = function() {
  *
  * @param {string} reason A short message explaining the reason for closing.
  */
-nassh.Stream.RelayCorpv4WS.prototype.close_ = function(reason) {
+RelayCorpv4WsStream.prototype.close_ = function(reason) {
   // If we aren't open, there's nothing to do.  This allows us to call it
   // multiple times, perhaps from cascading events (write error/close/etc...).
   if (!this.socket_) {
@@ -342,7 +339,7 @@ nassh.Stream.RelayCorpv4WS.prototype.close_ = function(reason) {
  *
  * @param {!Event} e The event details.
  */
-nassh.Stream.RelayCorpv4WS.prototype.onSocketOpen_ = function(e) {
+RelayCorpv4WsStream.prototype.onSocketOpen_ = function(e) {
   if (this.openCallback_) {
     this.openCallback_(true);
     this.openCallback_ = null;
@@ -367,7 +364,7 @@ nassh.Stream.RelayCorpv4WS.prototype.onSocketOpen_ = function(e) {
  *
  * @param {!CloseEvent} e The event details.
  */
-nassh.Stream.RelayCorpv4WS.prototype.onSocketClose_ = function(e) {
+RelayCorpv4WsStream.prototype.onSocketClose_ = function(e) {
   // When a socket closes uncleanly, CloseEvent.wasClean is false.
   // Treat this like an error and possibly reconnect.
   if (e.wasClean || !this.reconnect_()) {
@@ -380,7 +377,7 @@ nassh.Stream.RelayCorpv4WS.prototype.onSocketClose_ = function(e) {
  *
  * @param {!Event} e The event details.
  */
-nassh.Stream.RelayCorpv4WS.prototype.onSocketError_ = function(e) {
+RelayCorpv4WsStream.prototype.onSocketError_ = function(e) {
   if (!this.reconnect_()) {
     this.close_('server sent an error');
   }
@@ -391,15 +388,15 @@ nassh.Stream.RelayCorpv4WS.prototype.onSocketError_ = function(e) {
  *
  * @param {!MessageEvent} e The message with data to read.
  */
-nassh.Stream.RelayCorpv4WS.prototype.onSocketData_ = function(e) {
-  const packet = new nassh.Stream.RelayCorpv4.ServerPacket(e.data);
+RelayCorpv4WsStream.prototype.onSocketData_ = function(e) {
+  const packet = new ServerPacket(e.data);
 
   switch (packet.tag) {
-    case nassh.Stream.RelayCorpv4.PacketTag.CONNECT_SUCCESS:
+    case PacketTag.CONNECT_SUCCESS:
       this.sid_ = packet.sid;
       break;
 
-    case nassh.Stream.RelayCorpv4.PacketTag.DATA: {
+    case PacketTag.DATA: {
       // This creates a copy of the ArrayBuffer, but there doesn't seem to be an
       // alternative -- PPAPI doesn't accept views like Uint8Array.  If it did,
       // it would probably still serialize the entire underlying ArrayBuffer
@@ -407,18 +404,17 @@ nassh.Stream.RelayCorpv4WS.prototype.onSocketData_ = function(e) {
       this.onDataAvailable(Array.from(packet.data));
 
       this.readCount_ += BigInt(packet.length);
-      const ackPacket = new nassh.Stream.RelayCorpv4.ClientAckPacket(
-          this.readCount_);
+      const ackPacket = new ClientAckPacket(this.readCount_);
       this.socket_.send(ackPacket.frame);
       break;
     }
 
-    case nassh.Stream.RelayCorpv4.PacketTag.RECONNECT_SUCCESS:
+    case PacketTag.RECONNECT_SUCCESS:
       // Queue the output after we resync our ack state below.
       setTimeout(this.sendWrite_.bind(this), 0);
       // Fallthrough.
 
-    case nassh.Stream.RelayCorpv4.PacketTag.ACK: {
+    case PacketTag.ACK: {
       const acked = Number(packet.ack - this.writeAckCount_);
       if (acked == 0) {
         // This can come up with reconnects, but should handle it either way.
@@ -455,7 +451,7 @@ nassh.Stream.RelayCorpv4WS.prototype.onSocketData_ = function(e) {
  * @param {function(number)=} onSuccess Optional callback.
  * @override
  */
-nassh.Stream.RelayCorpv4WS.prototype.asyncWrite = function(data, onSuccess) {
+RelayCorpv4WsStream.prototype.asyncWrite = function(data, onSuccess) {
   if (!data.byteLength) {
     return;
   }
@@ -468,7 +464,7 @@ nassh.Stream.RelayCorpv4WS.prototype.asyncWrite = function(data, onSuccess) {
 /**
  * Send out any queued data.
  */
-nassh.Stream.RelayCorpv4WS.prototype.sendWrite_ = function() {
+RelayCorpv4WsStream.prototype.sendWrite_ = function() {
   if (!this.socket_ || this.socket_.readyState != WebSocket.OPEN ||
       this.writeBuffer_.isEmpty()) {
     // Nothing to write or socket is not ready.
@@ -485,7 +481,7 @@ nassh.Stream.RelayCorpv4WS.prototype.sendWrite_ = function() {
 
   // Send the data packet.
   const readBuffer = this.writeBuffer_.read(this.maxDataWriteLength);
-  const dataPacket = new nassh.Stream.RelayCorpv4.ClientDataPacket(readBuffer);
+  const dataPacket = new ClientDataPacket(readBuffer);
   this.socket_.send(dataPacket.frame);
   this.previousWriteCount_ = this.writeCount_;
   this.writeCount_ += dataPacket.length;
@@ -512,7 +508,7 @@ nassh.Stream.RelayCorpv4WS.prototype.sendWrite_ = function() {
  *
  * @param {number} deltaTime Time elapsed before ack is received.
  */
-nassh.Stream.RelayCorpv4WS.prototype.recordAckTime_ = function(deltaTime) {
+RelayCorpv4WsStream.prototype.recordAckTime_ = function(deltaTime) {
   this.ackTimes_[this.ackTimesIndex_] = deltaTime;
   this.ackTimesIndex_ = (this.ackTimesIndex_ + 1) % this.ackTimes_.length;
 

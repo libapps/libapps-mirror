@@ -2,11 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Stream for connecting to a ssh server via a Corp relay.
  */
+
+import {Stream} from './nassh_stream.js';
 
 /**
  * Base class of XHR or WebSocket backed streams.
@@ -16,10 +16,10 @@
  *
  * @param {number} fd
  * @constructor
- * @extends {nassh.Stream}
+ * @extends {Stream}
  */
-nassh.Stream.RelayCorp = function(fd) {
-  nassh.Stream.apply(this, [fd]);
+export function RelayCorpStream(fd) {
+  Stream.apply(this, [fd]);
 
   this.io_ = null;
   this.host_ = null;
@@ -40,14 +40,14 @@ nassh.Stream.RelayCorp = function(fd) {
   this.onWriteSuccess_ = null;
 
   this.readCount_ = 0;
-};
+}
 
 /**
- * We are a subclass of nassh.Stream.
+ * We are a subclass of Stream.
  */
-nassh.Stream.RelayCorp.prototype = Object.create(nassh.Stream.prototype);
+RelayCorpStream.prototype = Object.create(Stream.prototype);
 /** @override */
-nassh.Stream.RelayCorp.constructor = nassh.Stream.RelayCorp;
+RelayCorpStream.constructor = RelayCorpStream;
 
 /**
  * Open a relay socket.
@@ -59,8 +59,7 @@ nassh.Stream.RelayCorp.constructor = nassh.Stream.RelayCorp;
  * @param {function(boolean, ?string=)} onComplete
  * @override
  */
-nassh.Stream.RelayCorp.prototype.asyncOpen =
-    async function(settings, onComplete) {
+RelayCorpStream.prototype.asyncOpen = async function(settings, onComplete) {
   this.io_ = settings.io;
   this.relayServer_ = settings.relayServer;
   this.relayServerSocket_ = settings.relayServerSocket;
@@ -103,8 +102,8 @@ nassh.Stream.RelayCorp.prototype.asyncOpen =
 };
 
 /** Resume read. */
-nassh.Stream.RelayCorp.prototype.resumeRead_ = function() {
-  throw nassh.Stream.ERR_NOT_IMPLEMENTED;
+RelayCorpStream.prototype.resumeRead_ = function() {
+  throw Stream.ERR_NOT_IMPLEMENTED;
 };
 
 /**
@@ -114,7 +113,7 @@ nassh.Stream.RelayCorp.prototype.resumeRead_ = function() {
  * @param {function(number)} onSuccess
  * @override
  */
-nassh.Stream.RelayCorp.prototype.asyncWrite = function(data, onSuccess) {
+RelayCorpStream.prototype.asyncWrite = function(data, onSuccess) {
   if (!data.byteLength) {
     return;
   }
@@ -130,8 +129,8 @@ nassh.Stream.RelayCorp.prototype.asyncWrite = function(data, onSuccess) {
 /**
  * Send the next pending write.
  */
-nassh.Stream.RelayCorp.prototype.sendWrite_ = function() {
-  throw nassh.Stream.ERR_NOT_IMPLEMENTED;
+RelayCorpStream.prototype.sendWrite_ = function() {
+  throw Stream.ERR_NOT_IMPLEMENTED;
 };
 
 /**
@@ -140,7 +139,7 @@ nassh.Stream.RelayCorp.prototype.sendWrite_ = function() {
  * This does not guarantee that communications have been restored, only
  * that we can try again.
  */
-nassh.Stream.RelayCorp.prototype.onBackoffExpired_ = function() {
+RelayCorpStream.prototype.onBackoffExpired_ = function() {
   this.backoffTimeout_ = null;
   this.resumeRead_();
   this.sendWrite_();
@@ -152,7 +151,7 @@ nassh.Stream.RelayCorp.prototype.onBackoffExpired_ = function() {
  *
  * @param {boolean} isRead
  */
-nassh.Stream.RelayCorp.prototype.requestSuccess_ = function(isRead) {
+RelayCorpStream.prototype.requestSuccess_ = function(isRead) {
   this.backoffMS_ = 0;
 
   if (this.backoffTimeout_) {
@@ -174,7 +173,7 @@ nassh.Stream.RelayCorp.prototype.requestSuccess_ = function(isRead) {
 };
 
 /** @param {boolean} isRead */
-nassh.Stream.RelayCorp.prototype.requestError_ = function(isRead) {
+RelayCorpStream.prototype.requestError_ = function(isRead) {
   if (!this.sessionID_ || this.backoffTimeout_) {
     return;
   }
@@ -212,10 +211,10 @@ nassh.Stream.RelayCorp.prototype.requestError_ = function(isRead) {
  *
  * @param {number} fd
  * @constructor
- * @extends {nassh.Stream.RelayCorp}
+ * @extends {RelayCorpStream}
  */
-nassh.Stream.RelayCorpXHR = function(fd) {
-  nassh.Stream.RelayCorp.apply(this, [fd]);
+export function RelayCorpXhrStream(fd) {
+  RelayCorpStream.apply(this, [fd]);
 
   this.writeRequest_ = new XMLHttpRequest();
   this.writeRequest_.ontimeout = this.writeRequest_.onabort =
@@ -228,27 +227,26 @@ nassh.Stream.RelayCorpXHR = function(fd) {
   this.readRequest_.onloadend = this.onReadReady_.bind(this);
 
   this.lastWriteSize_ = 0;
-};
+}
 
 /**
- * We are a subclass of nassh.Stream.RelayCorp.
+ * We are a subclass of RelayCorpStream.
  */
-nassh.Stream.RelayCorpXHR.prototype =
-    Object.create(nassh.Stream.RelayCorp.prototype);
+RelayCorpXhrStream.prototype = Object.create(RelayCorpStream.prototype);
 /** @override */
-nassh.Stream.RelayCorpXHR.constructor = nassh.Stream.RelayCorpXHR;
+RelayCorpXhrStream.constructor = RelayCorpXhrStream;
 
 /**
  * Maximum length of message that can be sent to avoid request limits.
  */
-nassh.Stream.RelayCorpXHR.prototype.maxMessageLength = 1024;
+RelayCorpXhrStream.prototype.maxMessageLength = 1024;
 
 /**
  * Resume read.
  *
  * @override
  */
-nassh.Stream.RelayCorpXHR.prototype.resumeRead_ = function() {
+RelayCorpXhrStream.prototype.resumeRead_ = function() {
   if (this.isRequestBusy_(this.readRequest_)) {
     // Read request is in progress.
     return;
@@ -271,7 +269,7 @@ nassh.Stream.RelayCorpXHR.prototype.resumeRead_ = function() {
  *
  * @override
  */
-nassh.Stream.RelayCorpXHR.prototype.sendWrite_ = function() {
+RelayCorpXhrStream.prototype.sendWrite_ = function() {
   if (this.writeBuffer_.isEmpty() || this.isRequestBusy_(this.writeRequest_)) {
     // Nothing to write, or a write is in progress.
     return;
@@ -302,7 +300,7 @@ nassh.Stream.RelayCorpXHR.prototype.sendWrite_ = function() {
  *
  * @param {!Event} e
  */
-nassh.Stream.RelayCorpXHR.prototype.onReadReady_ = function(e) {
+RelayCorpXhrStream.prototype.onReadReady_ = function(e) {
   if (this.readRequest_.readyState != XMLHttpRequest.DONE) {
     return;
   }
@@ -335,7 +333,7 @@ nassh.Stream.RelayCorpXHR.prototype.onReadReady_ = function(e) {
  *
  * @param {!Event} e
  */
-nassh.Stream.RelayCorpXHR.prototype.onWriteDone_ = function(e) {
+RelayCorpXhrStream.prototype.onWriteDone_ = function(e) {
   if (this.writeRequest_.readyState != XMLHttpRequest.DONE) {
     return;
   }
@@ -362,7 +360,7 @@ nassh.Stream.RelayCorpXHR.prototype.onWriteDone_ = function(e) {
 };
 
 /** @param {!Event} e */
-nassh.Stream.RelayCorpXHR.prototype.onRequestError_ = function(e) {
+RelayCorpXhrStream.prototype.onRequestError_ = function(e) {
   this.requestError_(e.target == this.readRequest_);
 };
 
@@ -372,7 +370,7 @@ nassh.Stream.RelayCorpXHR.prototype.onRequestError_ = function(e) {
  * @param {!XMLHttpRequest} r
  * @return {boolean}
  */
-nassh.Stream.RelayCorpXHR.prototype.isRequestBusy_ = function(r) {
+RelayCorpXhrStream.prototype.isRequestBusy_ = function(r) {
   return (r.readyState != XMLHttpRequest.DONE &&
           r.readyState != XMLHttpRequest.UNSENT);
 };
@@ -385,10 +383,10 @@ nassh.Stream.RelayCorpXHR.prototype.isRequestBusy_ = function(r) {
  *
  * @param {number} fd
  * @constructor
- * @extends {nassh.Stream.RelayCorp}
+ * @extends {RelayCorpStream}
  */
-nassh.Stream.RelayCorpWS = function(fd) {
-  nassh.Stream.RelayCorp.apply(this, [fd]);
+export function RelayCorpWsStream(fd) {
+  RelayCorpStream.apply(this, [fd]);
 
   this.socket_ = null;
 
@@ -409,28 +407,27 @@ nassh.Stream.RelayCorpWS = function(fd) {
 
   // Number of connect attempts made.
   this.connectCount_ = 0;
-};
+}
 
 /**
- * We are a subclass of nassh.Stream.RelayCorp.
+ * We are a subclass of RelayCorpStream.
  */
-nassh.Stream.RelayCorpWS.prototype =
-    Object.create(nassh.Stream.RelayCorp.prototype);
+RelayCorpWsStream.prototype = Object.create(RelayCorpStream.prototype);
 /** @override */
-nassh.Stream.RelayCorpWS.constructor = nassh.Stream.RelayCorpWS;
+RelayCorpWsStream.constructor = RelayCorpWsStream;
 
 /**
  * Maximum length of message that can be sent to avoid request limits.
  * -4 for 32-bit ack that is sent before payload.
  */
-nassh.Stream.RelayCorpWS.prototype.maxMessageLength = 32 * 1024 - 4;
+RelayCorpWsStream.prototype.maxMessageLength = 32 * 1024 - 4;
 
 /**
  * Resume read.
  *
  * @override
  */
-nassh.Stream.RelayCorpWS.prototype.resumeRead_ = function() {
+RelayCorpWsStream.prototype.resumeRead_ = function() {
   if (this.backoffTimeout_) {
     console.warn('Attempt to read while backing off.');
     return;
@@ -454,7 +451,7 @@ nassh.Stream.RelayCorpWS.prototype.resumeRead_ = function() {
 };
 
 /** @param {!Event} e */
-nassh.Stream.RelayCorpWS.prototype.onSocketOpen_ = function(e) {
+RelayCorpWsStream.prototype.onSocketOpen_ = function(e) {
   if (e.target !== this.socket_) {
     return;
   }
@@ -464,7 +461,7 @@ nassh.Stream.RelayCorpWS.prototype.onSocketOpen_ = function(e) {
 };
 
 /** @param {number} deltaTime */
-nassh.Stream.RelayCorpWS.prototype.recordAckTime_ = function(deltaTime) {
+RelayCorpWsStream.prototype.recordAckTime_ = function(deltaTime) {
   this.ackTimes_[this.ackTimesIndex_] = deltaTime;
   this.ackTimesIndex_ = (this.ackTimesIndex_ + 1) % this.ackTimes_.length;
 
@@ -486,7 +483,7 @@ nassh.Stream.RelayCorpWS.prototype.recordAckTime_ = function(deltaTime) {
 };
 
 /** @param {!Event} e */
-nassh.Stream.RelayCorpWS.prototype.onSocketData_ = function(e) {
+RelayCorpWsStream.prototype.onSocketData_ = function(e) {
   if (e.target !== this.socket_) {
     return;
   }
@@ -529,7 +526,7 @@ nassh.Stream.RelayCorpWS.prototype.onSocketData_ = function(e) {
 };
 
 /** @param {!Event} e */
-nassh.Stream.RelayCorpWS.prototype.onSocketError_ = function(e) {
+RelayCorpWsStream.prototype.onSocketError_ = function(e) {
   if (e.target !== this.socket_) {
     return;
   }
@@ -539,7 +536,7 @@ nassh.Stream.RelayCorpWS.prototype.onSocketError_ = function(e) {
   if (this.resume_) {
     this.requestError_(true);
   } else {
-    nassh.Stream.prototype.close.call(this);
+    Stream.prototype.close.call(this);
   }
 };
 
@@ -548,7 +545,7 @@ nassh.Stream.RelayCorpWS.prototype.onSocketError_ = function(e) {
  *
  * @override
  */
-nassh.Stream.RelayCorpWS.prototype.sendWrite_ = function() {
+RelayCorpWsStream.prototype.sendWrite_ = function() {
   if (!this.socket_ || this.socket_.readyState != 1 ||
       this.writeBuffer_.isEmpty()) {
     // Nothing to write or socket is not ready.

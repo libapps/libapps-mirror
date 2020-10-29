@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview The NaCl plugin leans on its host to provide some basic
  * stream-like objects.
@@ -16,21 +14,21 @@
  * @param {string=} path
  * @constructor
  */
-nassh.Stream = function(fd, path) {
+export function Stream(fd, path) {
   this.fd_ = fd;
   this.path = path;
   this.open = false;
-};
+}
 
 /**
  * Errors we may raise.
  */
-nassh.Stream.ERR_STREAM_CLOSED = 'Stream closed';
-nassh.Stream.ERR_STREAM_OPENED = 'Stream opened';
-nassh.Stream.ERR_FD_IN_USE = 'File descriptor in use';
-nassh.Stream.ERR_NOT_IMPLEMENTED = 'Not implemented';
-nassh.Stream.ERR_STREAM_CANT_READ = 'Stream has no read permission';
-nassh.Stream.ERR_STREAM_CANT_WRITE = 'Stream has no write permission';
+Stream.ERR_STREAM_CLOSED = 'Stream closed';
+Stream.ERR_STREAM_OPENED = 'Stream opened';
+Stream.ERR_FD_IN_USE = 'File descriptor in use';
+Stream.ERR_NOT_IMPLEMENTED = 'Not implemented';
+Stream.ERR_STREAM_CANT_READ = 'Stream has no read permission';
+Stream.ERR_STREAM_CANT_WRITE = 'Stream has no write permission';
 
 /**
  * Maximum number of queued bytes allowed in a WebSocket.
@@ -49,17 +47,17 @@ nassh.Stream.ERR_STREAM_CANT_WRITE = 'Stream has no write permission';
  * use message sizes well below this limit.  Plus, if the platform is unable
  * to send/drain the data, us queuing more won't really help either.
  */
-nassh.Stream.prototype.maxWebSocketBufferLength = 64 * 1024;
+Stream.prototype.maxWebSocketBufferLength = 64 * 1024;
 
 /**
  * Open a stream, calling back when complete.
  *
- * @param {!Object} settings Each subclass of nassh.Stream defines its own
- *     set of properties to be included in settings.
+ * @param {!Object} settings Each subclass of Stream defines its own set of
+ *     properties to be included in settings.
  * @param {function(boolean, ?string=)} onOpen
  */
-nassh.Stream.prototype.asyncOpen = async function(settings, onOpen) {
-  setTimeout(() => onOpen(false, 'nassh.Stream.ERR_NOT_IMPLEMENTED'), 0);
+Stream.prototype.asyncOpen = async function(settings, onOpen) {
+  setTimeout(() => onOpen(false, 'Stream.ERR_NOT_IMPLEMENTED'), 0);
 };
 
 /**
@@ -72,9 +70,9 @@ nassh.Stream.prototype.asyncOpen = async function(settings, onOpen) {
  * @param {number} size
  * @param {function(!ArrayBuffer)} onRead
  */
-nassh.Stream.prototype.asyncRead = function(size, onRead) {
+Stream.prototype.asyncRead = function(size, onRead) {
   if (this.onDataAvailable === undefined) {
-    throw nassh.Stream.ERR_NOT_IMPLEMENTED;
+    throw Stream.ERR_NOT_IMPLEMENTED;
   }
 
   setTimeout(() => onRead(new ArrayBuffer(0)), 0);
@@ -86,14 +84,14 @@ nassh.Stream.prototype.asyncRead = function(size, onRead) {
  * @param {!ArrayBuffer} data
  * @param {function(number)} onSuccess
  */
-nassh.Stream.prototype.asyncWrite = function(data, onSuccess) {
-  throw nassh.Stream.ERR_NOT_IMPLEMENTED;
+Stream.prototype.asyncWrite = function(data, onSuccess) {
+  throw Stream.ERR_NOT_IMPLEMENTED;
 };
 
 /**
  * Close a stream.
  */
-nassh.Stream.prototype.close = function() {
+Stream.prototype.close = function() {
   if (this.onClose) {
     this.onClose();
   }

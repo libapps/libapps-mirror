@@ -2,11 +2,12 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Corp v4 relay stream tests.
  */
+
+import {ClientAckPacket, ClientDataPacket, RelayCorpv4WsStream,
+        ServerPacket} from './nassh_stream_relay_corpv4.js';
 
 describe('nassh_stream_relay_corpv4_tests.js', () => {
 
@@ -16,7 +17,7 @@ describe('nassh_stream_relay_corpv4_tests.js', () => {
 it('ServerPacket empty', () => {
   // Big enough for the 16-bit tag.
   const buffer = new ArrayBuffer(2);
-  const packet = new nassh.Stream.RelayCorpv4.ServerPacket(buffer);
+  const packet = new ServerPacket(buffer);
   assert.equal(0, packet.tag);
 });
 
@@ -28,7 +29,7 @@ it('ServerPacket unknown', () => {
     // Tag.
     0x12, 0x34,
   ]);
-  const packet = new nassh.Stream.RelayCorpv4.ServerPacket(u8.buffer);
+  const packet = new ServerPacket(u8.buffer);
   assert.equal(0x1234, packet.tag);
 });
 
@@ -45,7 +46,7 @@ it('ServerPacket connect success', () => {
     // SID.
     ...te.encode('abc_d-ef$'),
   ]);
-  const packet = new nassh.Stream.RelayCorpv4.ServerPacket(u8.buffer);
+  const packet = new ServerPacket(u8.buffer);
   assert.equal(1, packet.tag);
   assert.equal('abc_d-ef$', packet.sid);
 });
@@ -60,7 +61,7 @@ it('ServerPacket reconnect success', () => {
     // Ack.
     0x00, 0x01, 0x20, 0x00, 0x30, 0x00, 0x40, 0x00,
   ]);
-  const packet = new nassh.Stream.RelayCorpv4.ServerPacket(u8.buffer);
+  const packet = new ServerPacket(u8.buffer);
   assert.equal(2, packet.tag);
   assert.equal(0x1200030004000, packet.ack);
 });
@@ -77,7 +78,7 @@ it('ServerPacket data', () => {
     // Data.
     0xf0, 0xff, 0xfe, 0xa0, 0x00, 0x10, 0x20, 0x01, 0x3f,
   ]);
-  const packet = new nassh.Stream.RelayCorpv4.ServerPacket(u8.buffer);
+  const packet = new ServerPacket(u8.buffer);
   assert.equal(4, packet.tag);
   assert.equal(9, packet.length);
   assert.deepStrictEqual(
@@ -95,7 +96,7 @@ it('ServerPacket ack', () => {
     // Ack.
     0x00, 0x01, 0x20, 0x00, 0x30, 0x00, 0x40, 0x00,
   ]);
-  const packet = new nassh.Stream.RelayCorpv4.ServerPacket(u8.buffer);
+  const packet = new ServerPacket(u8.buffer);
   assert.equal(7, packet.tag);
   assert.equal(0x1200030004000, packet.ack);
 });
@@ -105,7 +106,7 @@ it('ServerPacket ack', () => {
  */
 it('ClientDataPacket', () => {
   const data = new Uint8Array([0xf0, 0xff, 0xfe, 0xa0, 0x00, 0x10, 0x01, 0x3f]);
-  const packet = new nassh.Stream.RelayCorpv4.ClientDataPacket(data);
+  const packet = new ClientDataPacket(data);
   assert.equal(4, packet.tag);
   assert.equal(8, packet.length);
   assert.deepStrictEqual(data, packet.data);
@@ -120,7 +121,7 @@ it('ClientDataPacket', () => {
  * Check creating ack packets.
  */
 it('ClientAckPacket', () => {
-  const packet = new nassh.Stream.RelayCorpv4.ClientAckPacket(BigInt(0x123678));
+  const packet = new ClientAckPacket(BigInt(0x123678));
   assert.equal(7, packet.tag);
   assert.equal(0x123678, packet.ack);
   assert.deepStrictEqual(new Uint8Array([
@@ -149,8 +150,8 @@ it('RelayCorpv4WS basic', (done) => {
   }
 
   // Initialize state.
-  const stream = new nassh.Stream.RelayCorpv4WS(100);
-  /** @this {nassh.Stream.RelayCorpv4WS} */
+  const stream = new RelayCorpv4WsStream(100);
+  /** @this {RelayCorpv4WsStream} */
   stream.connect_ = function() {
     this.socket_ = new WebSocketMock();
   };
@@ -240,7 +241,7 @@ it('RelayCorpv4WS basic', (done) => {
  */
 it('RelayCorpv4WS error in connect', () => {
   // Initialize state.
-  const stream = new nassh.Stream.RelayCorpv4WS(100);
+  const stream = new RelayCorpv4WsStream(100);
   stream.connect_ = () => {};
   let closeReason;
   stream.close_ = (reason) => {
@@ -258,7 +259,7 @@ it('RelayCorpv4WS error in connect', () => {
  */
 it('RelayCorpv4WS reconnect on dirty close', () => {
   // Initialize state.
-  const stream = new nassh.Stream.RelayCorpv4WS(100);
+  const stream = new RelayCorpv4WsStream(100);
   stream.connect_ = () => {};
   let closeReason;
   stream.close_ = (reason) => {
