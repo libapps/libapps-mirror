@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Runtime SFTP connect dialog.
  */
@@ -18,18 +16,18 @@
  * @param {!nassh.External.MountInfo} info The mount information.
  * @constructor
  */
-nassh.ConfigDialog = function(fsId, info) {
+export function ConfigDialog(fsId, info) {
   this.fsId_ = fsId;
   this.info_ = info;
   this.updateLabels_();
   this.bindInputs_();
   this.refresh_();
-};
+}
 
 /**
  * Translate the dialog.
  */
-nassh.ConfigDialog.prototype.updateLabels_ = function() {
+ConfigDialog.prototype.updateLabels_ = function() {
   lib.i18n.getAcceptLanguages().then((languages) => {
     const mm = new lib.MessageManager(languages);
     mm.processI18nAttributes(document.body);
@@ -44,7 +42,7 @@ nassh.ConfigDialog.prototype.updateLabels_ = function() {
 /**
  * Bind all the labels and inputs to our runtime state.
  */
-nassh.ConfigDialog.prototype.bindInputs_ = function() {
+ConfigDialog.prototype.bindInputs_ = function() {
   this.fieldMountPath_ = document.querySelector('#field-mount-path');
   this.fieldMountPath_.onchange = this.onInputChange_.bind(this);
   this.fieldReadSize_ = document.querySelector('#field-read-size');
@@ -59,7 +57,7 @@ nassh.ConfigDialog.prototype.bindInputs_ = function() {
  *
  * Sync the data from the forms to our SFTP client runtime.
  */
-nassh.ConfigDialog.prototype.onInputChange_ = function() {
+ConfigDialog.prototype.onInputChange_ = function() {
   this.info_.basePath = this.fieldMountPath_.value;
   this.info_.readChunkSize = parseInt(this.fieldReadSize_.value, 10) * 1024;
   this.info_.writeChunkSize = parseInt(this.fieldWriteSize_.value, 10) * 1024;
@@ -79,7 +77,7 @@ nassh.ConfigDialog.prototype.onInputChange_ = function() {
  *
  * Sync the SFTP client runtime to the forms.
  */
-nassh.ConfigDialog.prototype.refresh_ = function() {
+ConfigDialog.prototype.refresh_ = function() {
   this.fieldMountPath_.value = this.info_.basePath;
   this.fieldReadSize_.value = this.info_.readChunkSize / 1024;
   this.fieldWriteSize_.value = this.info_.writeChunkSize / 1024;
@@ -113,7 +111,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
           console.error(message);
           window.close();
         } else {
-          window.dialog_ = new nassh.ConfigDialog(profileId, info);
+          window.dialog_ = new ConfigDialog(profileId, info);
         }
       });
   });
