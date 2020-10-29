@@ -9,6 +9,7 @@
 
 import {punycode} from './nassh_deps.rollup.js';
 import {Cli as nasftpCli} from './nasftp_cli.js';
+import {gcseRefreshCert, getGnubbyExtension} from './nassh_google.js';
 import {Corp as RelayCorp} from './nassh_relay_corp.js';
 import {Corpv4 as RelayCorpv4} from './nassh_relay_corpv4.js';
 import {Sshfe as RelaySshfe} from './nassh_relay_sshfe.js';
@@ -1119,7 +1120,7 @@ nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
 
   // Attempt to refresh certificates if need be.
   const refresh = options['cert-refresh'] ?
-      nassh.goog.gcse.refresh(this.io) : Promise.resolve();
+      gcseRefreshCert(this.io) : Promise.resolve();
   // Even if refreshing went horribly, attempt the connection anyways.
   refresh.finally(() => {
     if (finalize) {
@@ -1377,7 +1378,7 @@ nassh.CommandInstance.postProcessOptions = function(
   // Turn 'gnubby' into the default id.  We do it here because we haven't yet
   // ported the gnubbyd logic to the new ssh-agent frameworks.
   if (rv['--ssh-agent'] == 'gnubby') {
-    rv['--ssh-agent'] = nassh.goog.gnubby.defaultExtension;
+    rv['--ssh-agent'] = getGnubbyExtension();
   }
 
   // Default the relay username to the ssh username.

@@ -11,10 +11,10 @@
 /**
  * Reports Google session metrics.
  */
-nassh.goog.GoogMetricsReporter = class {
+nassh.GoogMetricsReporter = class {
   constructor() {
-    /** @type {!nassh.goog.Distribution} */
-    this.distribution = new nassh.goog.Distribution();
+    /** @type {!nassh.Distribution} */
+    this.distribution = new nassh.Distribution();
   }
 
   /**
@@ -32,7 +32,7 @@ nassh.goog.GoogMetricsReporter = class {
  * Stores and manages latency data in the form of a distribution.
  * Based on this implementation of a distribution: http://shortn/_apyKoGGwAn.
  */
-nassh.goog.Distribution = class {
+nassh.Distribution = class {
   constructor() {
     /**
      * Bucket incremented when sample is less than lower bound.

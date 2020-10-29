@@ -194,7 +194,7 @@ nassh.Stream.RelayCorpv4WS = function(fd) {
   /**
    * Sends metrics to designated storage.
    *
-   * @type {?nassh.goog.GoogMetricsReporter}
+   * @type {?nassh.GoogMetricsReporter}
    */
    this.googMetricsReporter_ = null;
 };
@@ -221,7 +221,7 @@ nassh.Stream.RelayCorpv4WS.prototype.asyncOpen =
   this.host_ = settings.host;
   this.port_ = settings.port;
   if (settings.reportAckLatency) {
-    this.googMetricsReporter_ = new nassh.goog.GoogMetricsReporter();
+    this.googMetricsReporter_ = new nassh.GoogMetricsReporter();
   }
   this.openCallback_ = onComplete;
   this.connect_();

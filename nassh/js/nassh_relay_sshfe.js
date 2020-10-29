@@ -6,6 +6,7 @@
  * @fileoverview Implementation for the ssh-fe@google.com proxy.
  */
 
+import {getGnubbyExtension} from './nassh_google.js';
 import {Relay} from './nassh_relay.js';
 
 /**
@@ -15,8 +16,7 @@ export class Sshfe extends Relay {
   /** @inheritDoc */
   constructor(io, options, location, storage) {
     super(io, options, location, storage);
-    this.sshAgent_ = options['--ssh-agent'] ||
-        nassh.goog.gnubby.defaultExtension;
+    this.sshAgent_ = options['--ssh-agent'] || getGnubbyExtension();
     this.relayServer = `wss://${this.proxyHost}:${this.proxyPort}`;
   }
 

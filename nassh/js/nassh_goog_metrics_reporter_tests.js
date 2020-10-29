@@ -5,15 +5,15 @@
 'use strict';
 
 /**
- * @fileoverview `nassh.goog.GoogMetricsReporter` unit tests.
+ * @fileoverview `nassh.GoogMetricsReporter` unit tests.
  */
 
-describe('nassh_goog_metrics_reporter_tests.js', () => {
+describe('nassh.metrics_reporter_tests.js', () => {
   describe('reportLatency', () => {
     let reporter;
 
     beforeEach(() => {
-      reporter = new nassh.goog.GoogMetricsReporter();
+      reporter = new nassh.GoogMetricsReporter();
     });
 
     it('increments underflow bucket for sample less than lower bound', () => {
@@ -91,7 +91,7 @@ describe('nassh_goog_metrics_reporter_tests.js', () => {
     let distribution;
 
     beforeEach(() => {
-      distribution = new nassh.goog.Distribution();
+      distribution = new nassh.Distribution();
     });
 
     it('finds index for value equal to first element', () => {

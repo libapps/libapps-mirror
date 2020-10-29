@@ -2,21 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Misc logic for Google-specific integration.
  */
-
-/** @const */
-nassh.goog = {};
-
-/**
- * Namespace for the gnubby extension.
- *
- * @const
- */
-nassh.goog.gnubby = {};
 
 /**
  * The default extension id for talking to the gnubby.
@@ -26,12 +14,21 @@ nassh.goog.gnubby = {};
  *
  * @type {string}
  */
-nassh.goog.gnubby.defaultExtension = '';
+let defaultGnubbyExtension = '';
+
+/**
+ * Return the current gnubby extension id.
+ *
+ * @return {string} The extension id.
+ */
+export function getGnubbyExtension() {
+  return defaultGnubbyExtension;
+}
 
 /**
  * Find a usable gnubby extension.
  */
-nassh.goog.gnubby.findExtension = function() {
+function findGnubbyExtension() {
   // If we're not in an extension context, nothing to do.
   if (!window.chrome || !chrome.runtime) {
     return;
@@ -62,8 +59,7 @@ nassh.goog.gnubby.findExtension = function() {
   };
 
   // Guess a reasonable default based on the OS.
-  nassh.goog.gnubby.defaultExtension =
-      (hterm.os == 'cros' ? stableAppId : stableExtId);
+  defaultGnubbyExtension = (hterm.os == 'cros' ? stableAppId : stableExtId);
 
   // We don't set a timeout here as it doesn't block overall execution.
   Promise.all(extensions.map(check)).then((results) => {
@@ -71,15 +67,12 @@ nassh.goog.gnubby.findExtension = function() {
     for (let i = 0; i < extensions.length; ++i) {
       const extId = extensions[i];
       if (results.includes(extId)) {
-        nassh.goog.gnubby.defaultExtension = extId;
+        defaultGnubbyExtension = extId;
         break;
       }
     }
   });
-};
-
-/** @const */
-nassh.goog.gcse = {};
+}
 
 /**
  * The default extension id for managing certs.
@@ -90,12 +83,12 @@ nassh.goog.gcse = {};
  *
  * @type {string}
  */
-nassh.goog.gcse.defaultExtension = 'cfmgaohenjcikllcgjpepfadgbflcjof';
+let defaultGcseExtension = 'cfmgaohenjcikllcgjpepfadgbflcjof';
 
 /**
  * Find a usable GCSE extension.
  */
-nassh.goog.gcse.findExtension = function() {
+function findGcseExtension() {
   // If we're not in an extension context, nothing to do.
   if (!window.chrome || !chrome.runtime) {
     return;
@@ -111,10 +104,10 @@ nassh.goog.gcse.findExtension = function() {
     // "hello" action is specifically reserved, it isn't handled :).
     if (result !== undefined && result['status']) {
       console.log(`found GCSE dev extension ${devId}`);
-      nassh.goog.gcse.defaultExtension = devId;
+      defaultGcseExtension = devId;
     }
   }).catch((e) => {});
-};
+}
 
 /**
  * Try to refresh the SSH cert if it's old.
@@ -125,9 +118,9 @@ nassh.goog.gcse.findExtension = function() {
  * @param {!hterm.Terminal.IO} io Handle to the terminal for showing status.
  * @return {!Promise<void>} Resolve once things are in sync.
  */
-nassh.goog.gcse.refresh = function(io) {
+export function gcseRefreshCert(io) {
   io.print(nassh.msg('SSH_CERT_CHECK_START'));
-  return nassh.runtimeSendMessage(nassh.goog.gcse.defaultExtension,
+  return nassh.runtimeSendMessage(defaultGcseExtension,
                                   {'action': 'certificate_expiry'})
     .then((result) => {
       if (result.status === 'OK') {
@@ -138,7 +131,7 @@ nassh.goog.gcse.refresh = function(io) {
         if (hoursLeft < 1) {
           io.showOverlay(nassh.msg('SSH_CERT_CHECK_REFRESH'));
           return nassh.runtimeSendMessage(
-              nassh.goog.gcse.defaultExtension,
+              defaultGcseExtension,
               {action: 'request_certificate', wait: true});
         }
       } else {
@@ -146,7 +139,7 @@ nassh.goog.gcse.refresh = function(io) {
       }
     })
     .catch((result) => io.println(nassh.msg('SSH_CERT_CHECK_ERROR', [result])));
-};
+}
 
 /**
  * Register various Google extension probing.
@@ -155,6 +148,6 @@ nassh.goog.gcse.refresh = function(io) {
  * It resolves using promises in the background, so this is OK.
  */
 lib.registerInit('goog init', () => {
-  nassh.goog.gnubby.findExtension();
-  nassh.goog.gcse.findExtension();
+  findGnubbyExtension();
+  findGcseExtension();
 });
