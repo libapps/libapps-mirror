@@ -2,16 +2,16 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Implementation for the corp-relay@google.com proxy.
  */
 
+import {Relay} from './nassh_relay.js';
+
 /**
  * Corp Relay implementation.
  */
-nassh.relay.Corp = class extends nassh.Relay {
+export class Corp extends Relay {
   /** @inheritDoc */
   constructor(io, options, location, storage) {
     super(io, options, location, storage);
@@ -329,13 +329,13 @@ nassh.relay.Corp = class extends nassh.Relay {
       chrome.windows.onRemoved.addListener(listener);
     });
   }
-};
+}
 
 /**
  * @override
  * @type {number}
  */
-nassh.relay.Corp.prototype.defaultProxyPort = 8022;
+Corp.prototype.defaultProxyPort = 8022;
 
 /**
  * The pattern for XHR relay server's url.
@@ -344,5 +344,4 @@ nassh.relay.Corp.prototype.defaultProxyPort = 8022;
  *
  * @const {string}
  */
-nassh.relay.Corp.prototype.relayServerPattern =
-    '%(protocol)://%(host):%(port)/';
+Corp.prototype.relayServerPattern = '%(protocol)://%(host):%(port)/';

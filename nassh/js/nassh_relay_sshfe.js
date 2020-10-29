@@ -2,16 +2,16 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Implementation for the ssh-fe@google.com proxy.
  */
 
+import {Relay} from './nassh_relay.js';
+
 /**
  * SSH-FE relay implementation.
  */
-nassh.relay.Sshfe = class extends nassh.Relay {
+export class Sshfe extends Relay {
   /** @inheritDoc */
   constructor(io, options, location, storage) {
     super(io, options, location, storage);
@@ -51,4 +51,4 @@ nassh.relay.Sshfe = class extends nassh.Relay {
     };
     return streams.openStream(nassh.Stream.RelaySshfeWS, fd, settings, onOpen);
   }
-};
+}

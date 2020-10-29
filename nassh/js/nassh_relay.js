@@ -2,20 +2,16 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Common relay logic.
  */
-
-nassh.relay = {};
 
 /**
  * Interface that all relays must implement.
  *
  * @abstract
  */
-nassh.Relay = class {
+export class Relay {
   /**
    * @param {!hterm.Terminal.IO} io Interface for showing updates.  Only output
    *     via print or overlays is utilized.
@@ -100,7 +96,7 @@ nassh.Relay = class {
    * @param {!Object} state The relay state.
    */
   loadState(state) {}
-};
+}
 
 /**
  * The default proxy server port.
@@ -109,4 +105,4 @@ nassh.Relay = class {
  *
  * @type {number}
  */
-nassh.Relay.prototype.defaultProxyPort = 443;
+Relay.prototype.defaultProxyPort = 443;

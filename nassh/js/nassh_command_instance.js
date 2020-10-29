@@ -9,6 +9,9 @@
 
 import {punycode} from './nassh_deps.rollup.js';
 import {Cli as nasftpCli} from './nasftp_cli.js';
+import {Corp as RelayCorp} from './nassh_relay_corp.js';
+import {Corpv4 as RelayCorpv4} from './nassh_relay_corpv4.js';
+import {Sshfe as RelaySshfe} from './nassh_relay_sshfe.js';
 
 /**
  * The NaCl-ssh-powered terminal command.
@@ -1056,7 +1059,7 @@ nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
     // Do nothing when disabled.  We check this first to avoid excessive
     // indentation or redundant checking of the proxy-host setting below.
   } else if (options['--proxy-mode'] == 'ssh-fe@google.com') {
-    this.relay_ = new nassh.relay.Sshfe(
+    this.relay_ = new RelaySshfe(
         this.io, options, this.terminalLocation, this.storage);
     this.io.println(nassh.msg(
         'FOUND_RELAY',
@@ -1065,13 +1068,11 @@ nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
   } else if (options['--proxy-mode'] == 'corp-relay@google.com' ||
              options['--proxy-mode'] == 'corp-relay-v4@google.com') {
     if (options['--proxy-mode'] == 'corp-relay@google.com') {
-      this.relay_ = new nassh.relay.Corp(this.io, options,
-                                          this.terminalLocation,
-                                          this.storage);
+      this.relay_ = new RelayCorp(this.io, options, this.terminalLocation,
+                                  this.storage);
     } else {
-      this.relay_ = new nassh.relay.Corpv4(this.io, options,
-                                           this.terminalLocation,
-                                           this.storage);
+      this.relay_ = new RelayCorpv4(this.io, options, this.terminalLocation,
+                                    this.storage);
     }
 
     this.io.println(nassh.msg(
