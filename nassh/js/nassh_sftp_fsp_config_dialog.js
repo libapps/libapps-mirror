@@ -14,11 +14,13 @@
  * There should only be one of these, and it assumes there is only one in the
  * current window.
  *
- * @param {!nassh.sftp.Client} client The SFTP client to dynamically config.
+ * @param {string} fsId The filesystem mount id.
+ * @param {!nassh.External.MountInfo} info The mount information.
  * @constructor
  */
-nassh.ConfigDialog = function(client) {
-  this.client_ = client;
+nassh.ConfigDialog = function(fsId, info) {
+  this.fsId_ = fsId;
+  this.info_ = info;
   this.updateLabels_();
   this.bindInputs_();
   this.refresh_();
@@ -58,9 +60,18 @@ nassh.ConfigDialog.prototype.bindInputs_ = function() {
  * Sync the data from the forms to our SFTP client runtime.
  */
 nassh.ConfigDialog.prototype.onInputChange_ = function() {
-  this.client_.basePath_ = this.fieldMountPath_.value;
-  this.client_.readChunkSize = parseInt(this.fieldReadSize_.value, 10) * 1024;
-  this.client_.writeChunkSize = parseInt(this.fieldWriteSize_.value, 10) * 1024;
+  this.info_.basePath = this.fieldMountPath_.value;
+  this.info_.readChunkSize = parseInt(this.fieldReadSize_.value, 10) * 1024;
+  this.info_.writeChunkSize = parseInt(this.fieldWriteSize_.value, 10) * 1024;
+
+  nassh.runtimeSendMessage({
+    command: 'setMountInfo', fileSystemId: this.fsId_, info: this.info_,
+  })
+    .then(({error, message}) => {
+      if (error) {
+        console.error(message);
+      }
+    });
 };
 
 /**
@@ -69,51 +80,21 @@ nassh.ConfigDialog.prototype.onInputChange_ = function() {
  * Sync the SFTP client runtime to the forms.
  */
 nassh.ConfigDialog.prototype.refresh_ = function() {
-  this.fieldMountPath_.value = this.client_.basePath_;
-  this.fieldReadSize_.value = this.client_.readChunkSize / 1024;
-  this.fieldWriteSize_.value = this.client_.writeChunkSize / 1024;
+  this.fieldMountPath_.value = this.info_.basePath;
+  this.fieldReadSize_.value = this.info_.readChunkSize / 1024;
+  this.fieldWriteSize_.value = this.info_.writeChunkSize / 1024;
 
   // Dump internal state.  Because why not.
-  let summary = '';
-  const append = (name, obj) => {
-    const entries = Object.entries(obj);
-    summary += `${name}:`;
-    if (entries.length == 0) {
-      summary += ' <empty>\n';
-    } else {
-      summary += '\n';
-      entries.forEach(([key, value]) => {
-        summary += `  ${key} = ${value}\n`;
-      });
-    }
-  };
-  summary =
-      `protocolClientVersion: ${this.client_.protocolClientVersion}\n` +
-      `protocolServerVersion: ${this.client_.protocolServerVersion}\n`;
-  append('protocolServerExtensions', this.client_.protocolServerExtensions);
-  summary += '\n';
-  summary +=
-      `requestId: ${this.client_.requestId_}\n` +
-      `buffer: [${this.client_.buffer_}]\n`;
-  append('pendingRequests', this.client_.pendingRequests_);
-  append('openedFiles', this.client_.openedFiles);
-  this.rawStats_.textContent = summary;
-};
-
-/**
- * Get the SFTP client from the background page handle.
- *
- * @param {!Window} bg The extension's background page.
- * @param {string} fsId The unique filesystem id.
- * @return {?nassh.ConfigDialog} The new runtime dialog.
- */
-nassh.ConfigDialog.fromBackgroundPage = function(bg, fsId) {
-  if (!bg.nassh.sftp.fsp.sftpInstances[fsId]) {
-    return null;
-  }
-
-  const client = bg.nassh.sftp.fsp.sftpInstances[fsId].sftpClient;
-  return new nassh.ConfigDialog(client);
+  this.rawStats_.textContent =
+      `protocolClientVersion: ${this.info_.protocolClientVersion}\n` +
+      `protocolServerVersion: ${this.info_.protocolServerVersion}\n` +
+      'protocolServerExtensions:\n' +
+      this.info_.protocolServerExtensions.map(
+          (x) => `  ${x[0]} = ${x[1]}`).join('\n') + '\n' +
+      `requestId: ${this.info_.requestId}\n` +
+      `buffer: ${this.info_.buffer}\n` +
+      `pendingRequests: ${this.info_.pendingRequests}\n` +
+      `openedFiles: ${this.info_.openedFiles}`;
 };
 
 /**
@@ -124,11 +105,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const params = new URLSearchParams(document.location.search);
     const profileId = lib.notNull(params.get('profile-id'));
     document.title = `SFTP: ${profileId}`;
-    nassh.getBackgroundPage()
-      .then((bg) => {
-        window.dialog_ = nassh.ConfigDialog.fromBackgroundPage(bg, profileId);
-        if (!window.dialog_) {
+    nassh.runtimeSendMessage({
+      command: 'getMountInfo', fileSystemId: profileId,
+    })
+      .then(({error, message, info}) => {
+        if (error) {
+          console.error(message);
           window.close();
+        } else {
+          window.dialog_ = new nassh.ConfigDialog(profileId, info);
         }
       });
   });

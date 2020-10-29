@@ -99,6 +99,34 @@ On Chrome OS, unmount an existing SFTP filesystem mount.
 | `command`      | !string | Must be `unmount`. |
 | `fileSystemId` | !string | ID used for Chrome OS mounted filesystem. |
 
+### Get Mount Info
+
+On Chrome OS, return information about a particular mount.
+
+On success, the information will be returned in the `data` field.
+
+| Field name     | Type    | Description |
+|----------------|---------|-------------|
+| `command`      | !string | Must be `getMountInfo`. |
+| `fileSystemId` | !string | ID used for Chrome OS mounted filesystem. |
+
+The response will have these additional fields:
+
+| Field name     | Type    | Description |
+|----------------|---------|-------------|
+| `info`         | ?Object | The mount information. |
+
+### Set Mount Info
+
+On Chrome OS, update configuration for a particular mount.
+Note: Not all fields are configurable.
+
+| Field name     | Type    | Description |
+|----------------|---------|-------------|
+| `command`      | !string | Must be `setMountInfo`. |
+| `fileSystemId` | !string | ID used for Chrome OS mounted filesystem. |
+| `info`         | !Object | New settings to use. |
+
 ### Crosh
 
 On Chrome OS, open a new [crosh] session.

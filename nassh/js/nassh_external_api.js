@@ -127,6 +127,149 @@ function(request, sender, sendResponse) {
 });
 
 /**
+ * Container for holding mount information.
+ */
+nassh.External.MountInfo = class {
+  /**
+   * @param {!nassh.sftp.Client=} client Where to get info from.
+   */
+  constructor(client = undefined) {
+    /** @type {string} */
+    this.basePath = '';
+    /** @type {number} */
+    this.readChunkSize = 0;
+    /** @type {number} */
+    this.writeChunkSize = 0;
+    /** @type {number} */
+    this.protocolClientVersion = 0;
+    /** @type {number} */
+    this.protocolServerVersion = 0;
+    /** @type {!Array<!Array<string>>} */
+    this.protocolServerExtensions = [];
+    /** @type {number} */
+    this.requestId = 0;
+    /** @type {string} */
+    this.buffer = '';
+    /** @type {!Array<string>} */
+    this.pendingRequests = [];
+    /** @type {!Array<string>} */
+    this.openedFiles = [];
+
+    if (client) {
+      this.fromClient(client);
+    }
+  }
+
+  /**
+   * Extract details from a mount.
+   *
+   * @param {!nassh.sftp.Client} client The mount client to read.
+   */
+  fromClient(client) {
+    this.basePath = client.basePath_;
+    this.readChunkSize = client.readChunkSize;
+    this.writeChunkSize = client.writeChunkSize;
+    this.protocolClientVersion = client.protocolClientVersion;
+    this.protocolServerVersion = client.protocolServerVersion;
+    this.protocolServerExtensions =
+        Object.entries(client.protocolServerExtensions);
+    this.requestId = client.requestId_;
+    this.buffer = client.buffer_.toString();
+    this.pendingRequests = Object.keys(client.pendingRequests_);
+    this.openedFiles = Object.keys(client.openedFiles);
+  }
+
+  /**
+   * Update configurable mount settings.
+   *
+   * @param {!nassh.External.MountInfo} info The settings to update from.
+   * @param {!nassh.sftp.Client} client The mount client to update.
+   */
+  static toClient(info, client) {
+    if (info.basePath !== undefined) {
+      if (typeof info.basePath !== 'string') {
+        throw new Error('basePath must be a string');
+      }
+      // The path has to always have a trailing slash.
+      if (info.basePath.length && info.basePath[-1] != '/') {
+        info.basePath += '/';
+      }
+      client.basePath_ = info.basePath;
+    }
+
+    if (client.readChunkSize !== undefined) {
+      if (typeof client.readChunkSize !== 'number') {
+        throw new Error('readChunkSize must be a number');
+      }
+      client.readChunkSize = info.readChunkSize;
+    }
+
+    if (client.writeChunkSize !== undefined) {
+      if (typeof client.writeChunkSize !== 'number') {
+        throw new Error('writeChunkSize must be a number');
+      }
+      client.writeChunkSize = info.writeChunkSize;
+    }
+  }
+};
+
+nassh.External.COMMANDS.set('getMountInfo',
+/**
+ * Get information about an existing mount.
+ *
+ * @param {{fileSystemId:string}} request Request to find the mount.
+ * @param {!MessageSender} sender chrome.runtime.MessageSender
+ * @param {function(!Object=)} sendResponse called to send response.
+ */
+function(request, sender, sendResponse) {
+  if (!sender.internal && !nassh.External.SelfExtIds.has(sender.id)) {
+    sendResponse(
+        {error: true, message: 'getMountInfo: External access not allowed'});
+    return;
+  }
+
+  const {fileSystemId} = request;
+  const sftpInstance = nassh.sftp.fsp.sftpInstances[fileSystemId];
+  if (sftpInstance === undefined) {
+    sendResponse({error: true, message: `mount ${fileSystemId} not found`});
+    return;
+  }
+
+  sendResponse({
+    error: false,
+    message: `info for ${fileSystemId} found`,
+    info: new nassh.External.MountInfo(sftpInstance.sftpClient),
+  });
+});
+
+nassh.External.COMMANDS.set('setMountInfo',
+/**
+ * Set information in an existing mount.
+ *
+ * @param {{fileSystemId:string, info:!nassh.External.MountInfo}} request
+ *     Request to find and update the mount.
+ * @param {!MessageSender} sender chrome.runtime.MessageSender
+ * @param {function(!Object=)} sendResponse called to send response.
+ */
+function(request, sender, sendResponse) {
+  if (!sender.internal && !nassh.External.SelfExtIds.has(sender.id)) {
+    sendResponse(
+        {error: true, message: 'setMountInfo: External access not allowed'});
+    return;
+  }
+
+  const {fileSystemId, info} = request;
+  const sftpInstance = nassh.sftp.fsp.sftpInstances[fileSystemId];
+  if (sftpInstance === undefined) {
+    sendResponse({error: true, message: `mount ${fileSystemId} not found`});
+    return;
+  }
+
+  nassh.External.MountInfo.toClient(info, sftpInstance.sftpClient);
+  sendResponse({error: false, message: `mount ${fileSystemId} updated`});
+});
+
+/**
  * @typedef {{
  *     url: string,
  *     width: (number|undefined),
