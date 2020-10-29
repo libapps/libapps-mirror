@@ -314,7 +314,9 @@ nassh.External.dispatchMessage_ = (internal, request, sender, sendResponse) => {
         {error: true, message: `unsupported command '${request.command}'`});
     return false;
   }
-  console.log(`API: ${request.command}`);
+  const senderInfo = `[id:${sender.id} internal:${sender.internal} ` +
+                     `url:${sender.url} origin:${sender.origin}]`;
+  console.log(`API: ${request.command} from ${senderInfo}`);
   try {
     nassh.External.COMMANDS.get(request.command).call(
         this, request, sender, sendResponse);
