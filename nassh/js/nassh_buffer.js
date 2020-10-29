@@ -81,6 +81,11 @@ nassh.buffer.Interface = class {
    * @param {number} length How many bytes to ack.
    */
   ack(length) {}
+
+  /** @override */
+  toString() {
+    return `[nassh.buffer: ${this.getUnreadCount()} unread]`;
+  }
 };
 
 /**
