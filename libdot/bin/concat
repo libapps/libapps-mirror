@@ -298,6 +298,9 @@ def process_concat_line(line, seen_files, header_files):
 
             ret += ''.join(lines)
 
+        # Make sure we always emit a trailing newline even if the input didn't.
+        ret = ret.rstrip() + '\n'
+
     elif mode == '@resource':
         name, mime, resource = arg.split(' ', 2)
         ret += append_resource(name, mime, resource, header_files)
