@@ -6,6 +6,8 @@
  * @fileoverview A remote API for external apps/extensions.
  */
 
+import {fsp, onUnmountRequested} from './nassh_sftp_fsp.js';
+
 /**
  * Commands available.
  */
@@ -132,7 +134,7 @@ function(request, sender, sendResponse) {
   const {fileSystemId} = request;
   // Always call the unmount API.  It will handle unknown mounts for us, and
   // will clean up FSP state that Chrome knows about but we don't.
-  nassh.sftp.fsp.onUnmountRequested(
+  onUnmountRequested(
       {fileSystemId},
       () => sendResponse({error: false, message: `unmounted ${fileSystemId}`}),
       (message) => sendResponse({error: true, message: message}));
@@ -241,7 +243,7 @@ function(request, sender, sendResponse) {
   }
 
   const {fileSystemId} = request;
-  const sftpInstance = nassh.sftp.fsp.sftpInstances[fileSystemId];
+  const sftpInstance = fsp.sftpInstances[fileSystemId];
   if (sftpInstance === undefined) {
     sendResponse({error: true, message: `mount ${fileSystemId} not found`});
     return;
@@ -271,7 +273,7 @@ function(request, sender, sendResponse) {
   }
 
   const {fileSystemId, info} = request;
-  const sftpInstance = nassh.sftp.fsp.sftpInstances[fileSystemId];
+  const sftpInstance = fsp.sftpInstances[fileSystemId];
   if (sftpInstance === undefined) {
     sendResponse({error: true, message: `mount ${fileSystemId} not found`});
     return;

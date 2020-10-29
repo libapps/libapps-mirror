@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {addListeners} from './nassh_sftp_fsp.js';
+
 /**
  * The singleton app instance for the nassh packaged app, created by the
  * background page.
@@ -23,7 +25,7 @@ export function App(storage = undefined) {
  * Set up the file system provider APIs.
  */
 App.prototype.installFsp = function() {
-  nassh.sftp.fsp.addListeners();
+  addListeners();
 };
 
 /**

@@ -2,15 +2,16 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
-nassh.sftp.fsp = {};
-
 /**
  * @fileoverview This file manages the File System Provider API requests and
  *                currently active SFTP instances. File system requests are
  *                handled by their respective SFTP clients.
  */
+
+/**
+ * Namespace for the state in here.
+ */
+export const fsp = {};
 
 /**
  * Map of file system ids to their SFTP instances.
@@ -20,7 +21,7 @@ nassh.sftp.fsp = {};
  *   sftpClient: !nassh.sftp.Client,
  * }>}
  */
-nassh.sftp.fsp.sftpInstances = {};
+fsp.sftpInstances = {};
 
 /**
  * Sanitizes the provided file's metadata to the requirements specified in
@@ -42,7 +43,7 @@ nassh.sftp.fsp.sftpInstances = {};
  *     modificationTime: (!Date|undefined),
  * }}
  */
-nassh.sftp.fsp.sanitizeMetadata = function(file, options) {
+export function sanitizeMetadata(file, options) {
   const metadata = {};
   if (options.name) {
     if (file.filename) {
@@ -64,7 +65,7 @@ nassh.sftp.fsp.sanitizeMetadata = function(file, options) {
         new Date(lib.notUndefined(file.lastModified) * 1000);
   }
   return metadata;
-};
+}
 
 /**
  * Metadata Requested handler. Retrieves the file attributes of the requested
@@ -74,15 +75,15 @@ nassh.sftp.fsp.sanitizeMetadata = function(file, options) {
  * @param {function(!chrome.fileSystemProvider.EntryMetadata)} onSuccess
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  */
-nassh.sftp.fsp.onGetMetadataRequested = function(options, onSuccess, onError) {
-  if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+export function onGetMetadataRequested(options, onSuccess, onError) {
+  if (!checkInstanceExists(options.fileSystemId, onError)) {
     return;
   }
 
-  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const client = fsp.sftpInstances[options.fileSystemId].sftpClient;
   const path = '.' + options.entryPath; // relative path
   client.fileStatus(path)
-    .then((metadata) => nassh.sftp.fsp.sanitizeMetadata(metadata, options))
+    .then((metadata) => sanitizeMetadata(metadata, options))
     .then(onSuccess)
     .catch((response) => {
         // If file not found
@@ -94,7 +95,7 @@ nassh.sftp.fsp.onGetMetadataRequested = function(options, onSuccess, onError) {
       console.warn(response.name + ': ' + response.message);
       onError(chrome.fileSystemProvider.ProviderError.FAILED);
     });
-};
+}
 
 /**
  * Read Directory Requested handler. Retrieves the entries of the requested
@@ -106,13 +107,12 @@ nassh.sftp.fsp.onGetMetadataRequested = function(options, onSuccess, onError) {
  * } onSuccess
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  */
-nassh.sftp.fsp.onReadDirectoryRequested = function(
-    options, onSuccess, onError) {
-  if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+export function onReadDirectoryRequested(options, onSuccess, onError) {
+  if (!checkInstanceExists(options.fileSystemId, onError)) {
     return;
   }
 
-  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const client = fsp.sftpInstances[options.fileSystemId].sftpClient;
   let directoryHandle;
   const path = '.' + options.directoryPath; // relative path
   client.openDirectory(path)
@@ -132,7 +132,7 @@ nassh.sftp.fsp.onReadDirectoryRequested = function(
               // will make it look like the symlink is a real path with the
               // target's settings.  This is more natural for users.
               Object.assign(entry, attrs);
-              return nassh.sftp.fsp.sanitizeMetadata(entry, options);
+              return sanitizeMetadata(entry, options);
             })
             .catch(() => {
               // If reading the symlink target failed (e.g. it's a broken
@@ -142,7 +142,7 @@ nassh.sftp.fsp.onReadDirectoryRequested = function(
             });
         }
 
-        return nassh.sftp.fsp.sanitizeMetadata(entry, options);
+        return sanitizeMetadata(entry, options);
       });
     })
     .then((entries) => { onSuccess(entries, false); })
@@ -155,7 +155,7 @@ nassh.sftp.fsp.onReadDirectoryRequested = function(
         return client.closeFile(directoryHandle);
       }
     });
-};
+}
 
 /**
  * Write File Requested handler. Writes to the requested file.
@@ -164,12 +164,12 @@ nassh.sftp.fsp.onReadDirectoryRequested = function(
  * @param {function()} onSuccess
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  */
-nassh.sftp.fsp.onWriteFileRequested = function(options, onSuccess, onError) {
-  if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+export function onWriteFileRequested(options, onSuccess, onError) {
+  if (!checkInstanceExists(options.fileSystemId, onError)) {
     return;
   }
 
-  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const client = fsp.sftpInstances[options.fileSystemId].sftpClient;
   const fileHandle = client.openedFiles[options.openRequestId];
   if (!fileHandle) {
     onError(chrome.fileSystemProvider.ProviderError.INVALID_OPERATION);
@@ -193,7 +193,7 @@ nassh.sftp.fsp.onWriteFileRequested = function(options, onSuccess, onError) {
       console.warn(response.name + ': ' + response.message);
       onError(chrome.fileSystemProvider.ProviderError.FAILED);
     });
-};
+}
 
 /**
  * Open File Requested handler. Opens the requested file and saves its handle.
@@ -202,12 +202,12 @@ nassh.sftp.fsp.onWriteFileRequested = function(options, onSuccess, onError) {
  * @param {function()} onSuccess
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  */
-nassh.sftp.fsp.onOpenFileRequested = function(options, onSuccess, onError) {
-  if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+export function onOpenFileRequested(options, onSuccess, onError) {
+  if (!checkInstanceExists(options.fileSystemId, onError)) {
     return;
   }
 
-  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const client = fsp.sftpInstances[options.fileSystemId].sftpClient;
   let pflags = 0;
   if (options.mode == 'READ') {
     pflags |= nassh.sftp.packets.OpenFlags.READ;
@@ -223,7 +223,7 @@ nassh.sftp.fsp.onOpenFileRequested = function(options, onSuccess, onError) {
       console.warn(response.name + ': ' + response.message);
       onError(chrome.fileSystemProvider.ProviderError.FAILED);
     });
-};
+}
 
 /**
  * Create File Requested handler. Creates a file at the requested file path and
@@ -233,12 +233,12 @@ nassh.sftp.fsp.onOpenFileRequested = function(options, onSuccess, onError) {
  * @param {function()} onSuccess
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  */
-nassh.sftp.fsp.onCreateFileRequested = function(options, onSuccess, onError) {
-  if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+export function onCreateFileRequested(options, onSuccess, onError) {
+  if (!checkInstanceExists(options.fileSystemId, onError)) {
     return;
   }
 
-  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const client = fsp.sftpInstances[options.fileSystemId].sftpClient;
   const pflags = nassh.sftp.packets.OpenFlags.CREAT |
                nassh.sftp.packets.OpenFlags.EXCL;
 
@@ -250,7 +250,7 @@ nassh.sftp.fsp.onCreateFileRequested = function(options, onSuccess, onError) {
       console.warn(response.name + ': ' + response.message);
       onError(chrome.fileSystemProvider.ProviderError.FAILED);
     });
-};
+}
 
 /**
  * Truncate File Requested handler. Truncates the requested file path to 0
@@ -260,12 +260,12 @@ nassh.sftp.fsp.onCreateFileRequested = function(options, onSuccess, onError) {
  * @param {function()} onSuccess
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  */
-nassh.sftp.fsp.onTruncateRequested = function(options, onSuccess, onError) {
-  if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+export function onTruncateRequested(options, onSuccess, onError) {
+  if (!checkInstanceExists(options.fileSystemId, onError)) {
     return;
   }
 
-  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const client = fsp.sftpInstances[options.fileSystemId].sftpClient;
   const pflags = nassh.sftp.packets.OpenFlags.CREAT |
                nassh.sftp.packets.OpenFlags.TRUNC;
 
@@ -277,7 +277,7 @@ nassh.sftp.fsp.onTruncateRequested = function(options, onSuccess, onError) {
       console.warn(response.name + ': ' + response.message);
       onError(chrome.fileSystemProvider.ProviderError.FAILED);
     });
-};
+}
 
 /**
  * Delete Entry Requested handler. Deletes the entry of the requested file path.
@@ -288,12 +288,12 @@ nassh.sftp.fsp.onTruncateRequested = function(options, onSuccess, onError) {
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  * @return {!Promise}
  */
-nassh.sftp.fsp.onDeleteEntryRequested = function(options, onSuccess, onError) {
-  if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+export function onDeleteEntryRequested(options, onSuccess, onError) {
+  if (!checkInstanceExists(options.fileSystemId, onError)) {
     return Promise.resolve();
   }
 
-  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const client = fsp.sftpInstances[options.fileSystemId].sftpClient;
   const path = '.' + options.entryPath; // relative path
 
   let ret;
@@ -323,7 +323,7 @@ nassh.sftp.fsp.onDeleteEntryRequested = function(options, onSuccess, onError) {
       console.warn(response.name + ': ' + response.message);
       onError(chrome.fileSystemProvider.ProviderError.FAILED);
     });
-};
+}
 
 /**
  * Close File Requested handler. Closes the requested file and removes its
@@ -333,12 +333,12 @@ nassh.sftp.fsp.onDeleteEntryRequested = function(options, onSuccess, onError) {
  * @param {function()} onSuccess
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  */
-nassh.sftp.fsp.onCloseFileRequested = function(options, onSuccess, onError) {
-  if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+export function onCloseFileRequested(options, onSuccess, onError) {
+  if (!checkInstanceExists(options.fileSystemId, onError)) {
     return;
   }
 
-  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const client = fsp.sftpInstances[options.fileSystemId].sftpClient;
   if (!client.openedFiles[options.openRequestId]) {
     console.warn('File handle not found');
     onError(chrome.fileSystemProvider.ProviderError.INVALID_OPERATION);
@@ -352,7 +352,7 @@ nassh.sftp.fsp.onCloseFileRequested = function(options, onSuccess, onError) {
       console.warn(response.name + ': ' + response.message);
       onError(chrome.fileSystemProvider.ProviderError.FAILED);
     });
-};
+}
 
 /**
  * Create Directory Requested handler. Creates a directory at the requested
@@ -362,13 +362,12 @@ nassh.sftp.fsp.onCloseFileRequested = function(options, onSuccess, onError) {
  * @param {function()} onSuccess
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  */
-nassh.sftp.fsp.onCreateDirectoryRequested = function(
-    options, onSuccess, onError) {
-  if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+export function onCreateDirectoryRequested(options, onSuccess, onError) {
+  if (!checkInstanceExists(options.fileSystemId, onError)) {
     return;
   }
 
-  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const client = fsp.sftpInstances[options.fileSystemId].sftpClient;
   if (options.recursive) { // Not supported/implemented.
     onError(chrome.fileSystemProvider.ProviderError.INVALID_OPERATION);
     return;
@@ -381,7 +380,7 @@ nassh.sftp.fsp.onCreateDirectoryRequested = function(
       console.warn(response.name + ': ' + response.message);
       onError(chrome.fileSystemProvider.ProviderError.FAILED);
     });
-};
+}
 
 /**
  * Move Requested handler. Moves (renames) the requested source file path to the
@@ -391,12 +390,12 @@ nassh.sftp.fsp.onCreateDirectoryRequested = function(
  * @param {function()} onSuccess
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  */
-nassh.sftp.fsp.onMoveEntryRequested = function(options, onSuccess, onError) {
-  if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+export function onMoveEntryRequested(options, onSuccess, onError) {
+  if (!checkInstanceExists(options.fileSystemId, onError)) {
     return;
   }
 
-  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const client = fsp.sftpInstances[options.fileSystemId].sftpClient;
   const sourcePath = '.' + options.sourcePath; // relative path
   const targetPath = '.' + options.targetPath; // relative path
   client.renameFile(sourcePath, targetPath)
@@ -405,7 +404,7 @@ nassh.sftp.fsp.onMoveEntryRequested = function(options, onSuccess, onError) {
       console.warn(response.name + ': ' + response.message);
       onError(chrome.fileSystemProvider.ProviderError.FAILED);
     });
-};
+}
 
 /**
  * Read File Requested handler. Reads the requested file and returns its data.
@@ -414,12 +413,12 @@ nassh.sftp.fsp.onMoveEntryRequested = function(options, onSuccess, onError) {
  * @param {function(!ArrayBuffer, boolean)} onSuccess
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  */
-nassh.sftp.fsp.onReadFileRequested = function(options, onSuccess, onError) {
-  if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+export function onReadFileRequested(options, onSuccess, onError) {
+  if (!checkInstanceExists(options.fileSystemId, onError)) {
     return;
   }
 
-  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const client = fsp.sftpInstances[options.fileSystemId].sftpClient;
   const fileHandle = client.openedFiles[options.openRequestId];
   if (!fileHandle) {
     onError(chrome.fileSystemProvider.ProviderError.INVALID_OPERATION);
@@ -433,7 +432,7 @@ nassh.sftp.fsp.onReadFileRequested = function(options, onSuccess, onError) {
       console.warn(response.name + ': ' + response.message);
       onError(chrome.fileSystemProvider.ProviderError.FAILED);
     });
-};
+}
 
 /**
  * Copy Entry Requested handler. Copies the entry of the requested file path.
@@ -444,12 +443,12 @@ nassh.sftp.fsp.onReadFileRequested = function(options, onSuccess, onError) {
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  * @return {!Promise}
  */
-nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
-  if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+export function onCopyEntryRequested(options, onSuccess, onError) {
+  if (!checkInstanceExists(options.fileSystemId, onError)) {
     return Promise.resolve();
   }
 
-  const client = nassh.sftp.fsp.sftpInstances[options.fileSystemId].sftpClient;
+  const client = fsp.sftpInstances[options.fileSystemId].sftpClient;
   const sourcePath = '.' + options.sourcePath; // relative path
   const targetPath = '.' + options.targetPath; // relative path
   return client.linkStatus(sourcePath)
@@ -460,9 +459,9 @@ nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
             return client.symLink(response.files[0].filename, targetPath);
           });
       } else if (metadata.isDirectory) {
-        return nassh.sftp.fsp.copyDirectory_(sourcePath, targetPath, client);
+        return copyDirectory(sourcePath, targetPath, client);
       } else {
-        return nassh.sftp.fsp.copyFile_(
+        return copyFile(
             sourcePath, targetPath, lib.notUndefined(metadata.size), client);
       }
     })
@@ -471,7 +470,7 @@ nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
       console.warn(response.name + ': ' + response.message);
       onError(chrome.fileSystemProvider.ProviderError.FAILED);
     });
-};
+}
 
 /**
  * Copies the file at the remote source path to the remote target path.
@@ -482,7 +481,7 @@ nassh.sftp.fsp.onCopyEntryRequested = function(options, onSuccess, onError) {
  * @param {!nassh.sftp.Client} client
  * @return {!Promise}
  */
-nassh.sftp.fsp.copyFile_ = function(sourcePath, targetPath, size, client) {
+function copyFile(sourcePath, targetPath, size, client) {
   let sourceHandle;
   let targetHandle;
   return client.openFile(sourcePath, nassh.sftp.packets.OpenFlags.READ)
@@ -531,7 +530,7 @@ nassh.sftp.fsp.copyFile_ = function(sourcePath, targetPath, size, client) {
         return client.closeFile(targetHandle);
       }
     });
-};
+}
 
 /**
  * Reads the remote directory and copies all of its entries before copying
@@ -542,7 +541,7 @@ nassh.sftp.fsp.copyFile_ = function(sourcePath, targetPath, size, client) {
  * @param {!nassh.sftp.Client} client
  * @return {!Promise}
  */
-nassh.sftp.fsp.copyDirectory_ = function(sourcePath, targetPath, client) {
+function copyDirectory(sourcePath, targetPath, client) {
   let sourceHandle;
   return client.openDirectory(sourcePath)
     .then((handle) => { sourceHandle = handle; })
@@ -568,10 +567,10 @@ nassh.sftp.fsp.copyDirectory_ = function(sourcePath, targetPath, client) {
               }),
           );
         } else if (file.isDirectory) {
-          copyPromises.push(nassh.sftp.fsp.copyDirectory_(
+          copyPromises.push(copyDirectory(
               fileSourcePath, fileTargetPath, client));
         } else {
-          copyPromises.push(nassh.sftp.fsp.copyFile_(
+          copyPromises.push(copyFile(
               fileSourcePath, fileTargetPath, file.size, client));
         }
       }
@@ -583,7 +582,7 @@ nassh.sftp.fsp.copyDirectory_ = function(sourcePath, targetPath, client) {
         return client.closeFile(sourceHandle);
       }
     });
-};
+}
 
 /**
  * Mount Requested handler. Opens the Secure Shell main page which prompts the
@@ -595,9 +594,9 @@ nassh.sftp.fsp.copyDirectory_ = function(sourcePath, targetPath, client) {
  * @param {function()} onSuccess
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  */
-nassh.sftp.fsp.onMountRequested = function(onSuccess, onError) {
+export function onMountRequested(onSuccess, onError) {
   lib.f.openWindow('/html/nassh.html');
-};
+}
 
 /**
  * Unmount Requested handler. Closes the SFTP connection and removes the SFTP
@@ -607,18 +606,18 @@ nassh.sftp.fsp.onMountRequested = function(onSuccess, onError) {
  * @param {function()} onSuccess
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  */
-nassh.sftp.fsp.onUnmountRequested = function(options, onSuccess, onError) {
+export function onUnmountRequested(options, onSuccess, onError) {
   // We don't return immediately on errors.  If the caller is trying to unmount
   // us, then usually it means they think we're mounted even if we don't think
   // we are.  This can happen if the Secure Shell background page is killed, but
   // the Files app remembers all the connections.  Either way, it's more robust
   // for us to always unmount with the FSP layer.
-  if (nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+  if (checkInstanceExists(options.fileSystemId, onError)) {
     // Only clear local state if we know about the mount.
-    const sftpInstance = nassh.sftp.fsp.sftpInstances[options.fileSystemId];
+    const sftpInstance = fsp.sftpInstances[options.fileSystemId];
     if (sftpInstance !== undefined) {
       sftpInstance.exit(0, true); // exit NaCl plugin
-      delete nassh.sftp.fsp.sftpInstances[options.fileSystemId];
+      delete fsp.sftpInstances[options.fileSystemId];
     }
   }
 
@@ -634,7 +633,7 @@ nassh.sftp.fsp.onUnmountRequested = function(options, onSuccess, onError) {
         }
       });
   }
-};
+}
 
 /**
  * Configure Requested handler.
@@ -645,8 +644,8 @@ nassh.sftp.fsp.onUnmountRequested = function(options, onSuccess, onError) {
  * @param {function()} onSuccess
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  */
-nassh.sftp.fsp.onConfigureRequested = function(options, onSuccess, onError) {
-  if (!nassh.sftp.fsp.checkInstanceExists(options.fileSystemId, onError)) {
+export function onConfigureRequested(options, onSuccess, onError) {
+  if (!checkInstanceExists(options.fileSystemId, onError)) {
     return;
   }
 
@@ -656,7 +655,7 @@ nassh.sftp.fsp.onConfigureRequested = function(options, onSuccess, onError) {
       'chrome=no,close=yes,resize=yes,scrollbars=yes,minimizable=yes,' +
       'width=600,height=400');
   onSuccess();
-};
+}
 
 /**
  * Checks if the file system id has an associated SFTP instance.
@@ -665,43 +664,43 @@ nassh.sftp.fsp.onConfigureRequested = function(options, onSuccess, onError) {
  * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
  * @return {boolean}
  */
-nassh.sftp.fsp.checkInstanceExists = function(fsId, onError) {
-  if (!nassh.sftp.fsp.sftpInstances[fsId]) {
+export function checkInstanceExists(fsId, onError) {
+  if (!fsp.sftpInstances[fsId]) {
     console.warn('SFTP Instance for file system id "' + fsId + '" not found!');
     onError(chrome.fileSystemProvider.ProviderError.FAILED);
     return false;
   }
   return true;
-};
+}
 
 /**
  * Object containing all supported File System Provider API methods.
  */
-nassh.sftp.fsp.providerMethods = [
-  'onGetMetadataRequested',
-  'onReadDirectoryRequested',
-  'onOpenFileRequested',
-  'onCloseFileRequested',
-  'onReadFileRequested',
-  'onMountRequested',
-  'onUnmountRequested',
-  'onMoveEntryRequested',
-  'onDeleteEntryRequested',
-  'onWriteFileRequested',
-  'onCreateFileRequested',
-  'onTruncateRequested',
-  'onCopyEntryRequested',
-  'onCreateDirectoryRequested',
-  'onConfigureRequested',
+export const providerMethods = [
+  onGetMetadataRequested,
+  onReadDirectoryRequested,
+  onOpenFileRequested,
+  onCloseFileRequested,
+  onReadFileRequested,
+  onMountRequested,
+  onUnmountRequested,
+  onMoveEntryRequested,
+  onDeleteEntryRequested,
+  onWriteFileRequested,
+  onCreateFileRequested,
+  onTruncateRequested,
+  onCopyEntryRequested,
+  onCreateDirectoryRequested,
+  onConfigureRequested,
 ];
 
 /**
  * Loop over the provider methods and link them to their handlers.
  */
-nassh.sftp.fsp.addListeners = function() {
+export function addListeners() {
   if (window.chrome && chrome.fileSystemProvider) {
-    nassh.sftp.fsp.providerMethods.forEach(function(provider) {
-      chrome.fileSystemProvider[provider].addListener(nassh.sftp.fsp[provider]);
+    providerMethods.forEach((method) => {
+      chrome.fileSystemProvider[method.name].addListener(method);
     });
   }
-};
+}

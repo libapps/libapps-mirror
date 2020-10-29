@@ -17,6 +17,7 @@ import {Corp as RelayCorp} from './nassh_relay_corp.js';
 import {Corpv4 as RelayCorpv4} from './nassh_relay_corpv4.js';
 import {Sshfe as RelaySshfe} from './nassh_relay_sshfe.js';
 import {Websockify as RelayWebsockify} from './nassh_relay_websockify.js';
+import {fsp} from './nassh_sftp_fsp.js';
 
 /**
  * The ssh terminal command.
@@ -1505,8 +1506,8 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
   this.removePlugin_();
 
   if (this.isMount) {
-    if (nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId]) {
-      delete nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId];
+    if (fsp.sftpInstances[this.mountOptions.fileSystemId]) {
+      delete fsp.sftpInstances[this.mountOptions.fileSystemId];
     }
     if (this.argv_.onExit) {
       this.argv_.onExit(code);
@@ -1643,7 +1644,7 @@ nassh.CommandInstance.prototype.onSftpInitialised = function(callback) {
     chrome.fileSystemProvider.mount(this.mountOptions);
 
     // Add this instance to list of SFTP instances.
-    nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId] = {
+    fsp.sftpInstances[this.mountOptions.fileSystemId] = {
       sftpClient: lib.notNull(this.sftpClient),
       exit: this.exit.bind(this),
     };

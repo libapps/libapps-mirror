@@ -7,6 +7,7 @@
  */
 
 import {Cli, ProgressBar} from './nasftp_cli.js';
+import {MockSftpClient} from './nassh_sftp_fsp_tests.js';
 
 describe('nasftp_cli_tests.js', () => {
 
