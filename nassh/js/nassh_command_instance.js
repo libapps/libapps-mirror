@@ -1414,7 +1414,8 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
     switch (ch) {
       case 'c':
       case '\x12': // ctrl-r
-        nassh.reloadWindow();
+        document.location.hash = '';
+        document.location.reload();
         break;
 
       case 'e':

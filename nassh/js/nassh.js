@@ -231,12 +231,6 @@ nassh.sendFeedback = function() {
   lib.f.openWindow('https://goo.gl/vb94JY');
 };
 
-/** Reload window. */
-nassh.reloadWindow = function() {
-  document.location.hash = '';
-  document.location.reload();
-};
-
 /**
  * Register this extension to handle URIs like ssh://.
  *
