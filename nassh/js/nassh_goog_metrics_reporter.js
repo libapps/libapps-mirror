@@ -8,6 +8,8 @@
  * Corp SSH relays. It will never be used for non-Googlers.
  */
 
+import {LocalPreferenceManager} from './nassh_preference_manager.js';
+
 /**
  * Host and client metadata.
  *
@@ -76,8 +78,8 @@ export class GoogMetricsReporter {
   /**
    * @param {!hterm.Terminal.IO} io Interface to display prompts to users.
    * @param {string} hostname Name of remote host.
-   * @param {!nassh.LocalPreferenceManager} localPrefs Manager of nassh
-   *     preferences that are not synced between systems.
+   * @param {!LocalPreferenceManager} localPrefs Manager of nassh preferences
+   *     that are not synced between systems.
    */
   constructor(io, hostname, localPrefs) {
     /**

@@ -3,6 +3,9 @@
 // found in the LICENSE file.
 
 import {browserAction, localize, sendFeedback} from './nassh.js';
+import {
+  LocalPreferenceManager, PreferenceManager,
+} from './nassh_preference_manager.js';
 import {addListeners} from './nassh_sftp_fsp.js';
 
 /**
@@ -13,8 +16,8 @@ import {addListeners} from './nassh_sftp_fsp.js';
  * @constructor
  */
 export function App(storage) {
-  this.prefs_ = new nassh.PreferenceManager(storage);
-  this.localPrefs_ = new nassh.LocalPreferenceManager();
+  this.prefs_ = new PreferenceManager(storage);
+  this.localPrefs_ = new LocalPreferenceManager();
   this.omniMatches_ = [];
   this.omniDefault_ = null;
 

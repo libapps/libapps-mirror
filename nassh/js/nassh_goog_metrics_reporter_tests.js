@@ -8,6 +8,7 @@
 
 import {Distribution, GoogMetricsReporter}
     from './nassh_goog_metrics_reporter.js';
+import {LocalPreferenceManager} from './nassh_preference_manager.js';
 
 /*
  * Create a new hterm.Terminal instance for testing.
@@ -16,7 +17,7 @@ import {Distribution, GoogMetricsReporter}
  */
 beforeEach(function() {
   this.terminalIO = new hterm.Terminal.IO(this);
-  this.localPrefs = new nassh.LocalPreferenceManager();
+  this.localPrefs = new LocalPreferenceManager();
 });
 
 describe('nassh_goog_metrics_reporter_tests.js', () => {

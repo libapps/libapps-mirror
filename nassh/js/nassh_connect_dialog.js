@@ -9,6 +9,9 @@ import {
 import {ColumnList} from './nassh_column_list.js';
 import {deleteIdentityFiles, getIdentityFileNames, importIdentityFiles} from
     './nassh_fs.js';
+import {
+  LocalPreferenceManager, PreferenceManager,
+} from './nassh_preference_manager.js';
 
 /**
  * Constructor a new ConnectDialog instance.
@@ -35,8 +38,8 @@ function ConnectDialog(messagePort) {
 
   // The nassh global pref manager.
   const storage = new lib.Storage.Chrome(chrome.storage.sync);
-  this.prefs_ = new nassh.PreferenceManager(storage);
-  this.localPrefs_ = new nassh.LocalPreferenceManager();
+  this.prefs_ = new PreferenceManager(storage);
+  this.localPrefs_ = new LocalPreferenceManager();
   this.prefs_.readStorage(() => {
     this.syncProfiles_(this.onPreferencesReady_.bind(this));
     this.localPrefs_.readStorage(() => {

@@ -6,6 +6,7 @@
  * @fileoverview Common relay logic.
  */
 
+import {LocalPreferenceManager} from './nassh_preference_manager.js';
 import {Stream} from './nassh_stream.js';
 import {StreamSet} from './nassh_stream_set.js';
 
@@ -22,8 +23,8 @@ export class Relay {
    * @param {!Location} location Interface for redirecting to auth pages.
    * @param {!Storage} storage Temporary storage for relays when redirecting.
    *     Should be sessionStorage or equiv lifespan & isolation.
-   * @param {!nassh.LocalPreferenceManager} localPrefs Manager of nassh
-   *     preferences that are not synced between systems.
+   * @param {!LocalPreferenceManager} localPrefs Manager of nassh preferences
+   *     that are not synced between systems.
    */
   constructor(io, options, location, storage, localPrefs) {
     /** @type {!hterm.Terminal.IO} */
@@ -40,7 +41,7 @@ export class Relay {
     this.location = location;
     /** @type {!Storage} */
     this.storage = storage;
-    /** @type {!nassh.LocalPreferenceManager} */
+    /** @type {!LocalPreferenceManager} */
     this.localPrefs = localPrefs;
   }
 

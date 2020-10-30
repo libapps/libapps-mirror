@@ -3,6 +3,9 @@
 // found in the LICENSE file.
 
 import {localize, openOptionsPage, sendFeedback} from './nassh.js';
+import {
+  LocalPreferenceManager, PreferenceManager,
+} from './nassh_preference_manager.js';
 
 /**
  * CSP means that we can't kick off the initialization from the html file,
@@ -24,8 +27,8 @@ function popup() {
   const storage = new lib.Storage.Chrome(chrome.storage.sync);
 
   // The nassh global preference managers.
-  this.prefs_ = new nassh.PreferenceManager(storage);
-  this.localPrefs_ = new nassh.LocalPreferenceManager();
+  this.prefs_ = new PreferenceManager(storage);
+  this.localPrefs_ = new LocalPreferenceManager();
   // The hterm pref manager.  We use the 'default' profile to theme.
   this.htermPrefs_ = new hterm.PreferenceManager(storage);
 

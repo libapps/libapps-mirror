@@ -17,6 +17,9 @@ import {Cli as nasftpCli} from './nasftp_cli.js';
 import {gcseRefreshCert, getGnubbyExtension} from './nassh_google.js';
 import {Plugin as NaclPlugin} from './nassh_plugin_nacl.js';
 import {Plugin as WasmPlugin} from './nassh_plugin_wasm.js';
+import {
+  LocalPreferenceManager, PreferenceManager,
+} from './nassh_preference_manager.js';
 import {Corp as RelayCorp} from './nassh_relay_corp.js';
 import {Corpv4 as RelayCorpv4} from './nassh_relay_corpv4.js';
 import {Sshfe as RelaySshfe} from './nassh_relay_sshfe.js';
@@ -100,8 +103,8 @@ export function CommandInstance({io, ...argv}) {
   this.profileId_ = null;
 
   // Root preference managers.
-  this.prefs_ = new nassh.PreferenceManager(this.syncStorage);
-  this.localPrefs_ = new nassh.LocalPreferenceManager();
+  this.prefs_ = new PreferenceManager(this.syncStorage);
+  this.localPrefs_ = new LocalPreferenceManager();
 
   // Prevent us from reporting an exit twice.
   this.exited_ = false;
@@ -432,8 +435,8 @@ CommandInstance.prototype.connectToArgString = function(argstr) {
  * Common phases that we run before making an actual connection.
  *
  * @param {string} profileID Terminal preference profile name.
- * @param {function(!nassh.PreferenceManager)} callback Callback when the prefs
- *     have finished loading.
+ * @param {function(!PreferenceManager)} callback Callback when the prefs have
+ *     finished loading.
  */
 CommandInstance.prototype.commonProfileSetup_ = function(profileID, callback) {
   const onReadStorage = () => {

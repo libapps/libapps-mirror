@@ -2,11 +2,12 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview nassh preference manager tests.
  */
+
+import {LocalPreferenceManager,
+        PreferenceManager} from './nassh_preference_manager.js';
 
 describe('nassh_preference_manager_tests.js', () => {
 
@@ -14,7 +15,7 @@ describe('nassh_preference_manager_tests.js', () => {
  * Check basic init/empty behavior.
  */
 it('pref-manager-init', () => {
-  const prefs = new nassh.PreferenceManager(new lib.Storage.Memory());
+  const prefs = new PreferenceManager(new lib.Storage.Memory());
 
   // Default settings should work but be empty.
   assert.deepEqual([], prefs.get('profile-ids'));
@@ -25,7 +26,7 @@ it('pref-manager-init', () => {
  * Check profile handling.
  */
 it('pref-manager-profiles', () => {
-  const prefs = new nassh.PreferenceManager(new lib.Storage.Memory());
+  const prefs = new PreferenceManager(new lib.Storage.Memory());
 
   // Create a profile and check its state.
   let profile = prefs.createProfile();
@@ -48,7 +49,7 @@ it('pref-manager-profiles', () => {
  * Check basic init/empty behavior.
  */
 it('local-pref-manager-init', () => {
-  const prefs = new nassh.LocalPreferenceManager(new lib.Storage.Memory());
+  const prefs = new LocalPreferenceManager(new lib.Storage.Memory());
 
   // Default settings should work but be empty.
   assert.deepEqual([], prefs.get('profile-ids'));
@@ -58,7 +59,7 @@ it('local-pref-manager-init', () => {
  * Check profile handling.
  */
 it('local-pref-manager-profiles', () => {
-  const prefs = new nassh.LocalPreferenceManager(new lib.Storage.Memory());
+  const prefs = new LocalPreferenceManager(new lib.Storage.Memory());
 
   // Create a profile and check its state.
   let profile = prefs.createProfile('foo');
@@ -82,8 +83,8 @@ it('local-pref-manager-profiles', () => {
  * Check profile syncing.
  */
 it('local-pref-manager-profiles', () => {
-  const remotePrefs = new nassh.PreferenceManager(new lib.Storage.Memory());
-  const localPrefs = new nassh.LocalPreferenceManager(new lib.Storage.Memory());
+  const remotePrefs = new PreferenceManager(new lib.Storage.Memory());
+  const localPrefs = new LocalPreferenceManager(new lib.Storage.Memory());
 
   // Create remote profiles.
   const rprof1 = remotePrefs.createProfile();

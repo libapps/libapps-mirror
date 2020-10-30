@@ -2,10 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
-const nassh = {};
-
 /**
  * PreferenceManager subclass managing global NaSSH preferences.
  *
@@ -15,11 +11,11 @@ const nassh = {};
  * @constructor
  * @extends {lib.PreferenceManager}
  */
-nassh.PreferenceManager = function(storage) {
+export function PreferenceManager(storage) {
   lib.PreferenceManager.call(this, storage, '/nassh/');
 
   this.defineChildren('profile-ids', function(parent, id) {
-    return new nassh.ProfilePreferenceManager(parent, id);
+    return new ProfilePreferenceManager(parent, id);
   });
 
   this.definePreferences([
@@ -33,31 +29,28 @@ nassh.PreferenceManager = function(storage) {
      */
     ['welcome/show-count', 0],
   ]);
-};
+}
 
-nassh.PreferenceManager.prototype =
-    Object.create(lib.PreferenceManager.prototype);
+PreferenceManager.prototype = Object.create(lib.PreferenceManager.prototype);
 /** @override */
-nassh.PreferenceManager.constructor = nassh.PreferenceManager;
+PreferenceManager.constructor = PreferenceManager;
 
-/** @return {!nassh.PreferenceManager} */
-nassh.PreferenceManager.prototype.createProfile = function() {
-  return /** @type {!nassh.PreferenceManager} */ (
-      this.createChild('profile-ids'));
+/** @return {!PreferenceManager} */
+PreferenceManager.prototype.createProfile = function() {
+  return /** @type {!PreferenceManager} */ (this.createChild('profile-ids'));
 };
 
 /** @param {string} id */
-nassh.PreferenceManager.prototype.removeProfile = function(id) {
+PreferenceManager.prototype.removeProfile = function(id) {
   this.removeChild('profile-ids', id);
 };
 
 /**
  * @param {string} id
- * @return {!nassh.PreferenceManager}
+ * @return {!PreferenceManager}
  */
-nassh.PreferenceManager.prototype.getProfile = function(id) {
-  return /** @type {!nassh.PreferenceManager} */ (
-      this.getChild('profile-ids', id));
+PreferenceManager.prototype.getProfile = function(id) {
+  return /** @type {!PreferenceManager} */ (this.getChild('profile-ids', id));
 };
 
 /**
@@ -68,7 +61,7 @@ nassh.PreferenceManager.prototype.getProfile = function(id) {
  * @constructor
  * @extends {lib.PreferenceManager}
  */
-nassh.ProfilePreferenceManager = function(parent, id) {
+export function ProfilePreferenceManager(parent, id) {
   lib.PreferenceManager.call(this, parent.storage,
                              '/nassh/profiles/' + id);
 
@@ -124,24 +117,24 @@ nassh.ProfilePreferenceManager = function(parent, id) {
      */
     ['mount-path', ''],
   ]);
-};
+}
 
-nassh.ProfilePreferenceManager.prototype =
+ProfilePreferenceManager.prototype =
     Object.create(lib.PreferenceManager.prototype);
 /** @override */
-nassh.ProfilePreferenceManager.constructor = nassh.ProfilePreferenceManager;
+ProfilePreferenceManager.constructor = ProfilePreferenceManager;
 
 /**
  * Settings that are not synced between systems.
  *
- * Most code should use nassh.PreferenceManager instead which syncs user
+ * Most code should use PreferenceManager instead which syncs user
  * settings between systems.
  *
  * @param {!lib.Storage=} storage
  * @constructor
  * @extends {lib.PreferenceManager}
  */
-nassh.LocalPreferenceManager = function(storage = undefined) {
+export function LocalPreferenceManager(storage = undefined) {
   if (!storage) {
     storage = new lib.Storage.Local();
   }
@@ -162,22 +155,22 @@ nassh.LocalPreferenceManager = function(storage = undefined) {
   ]);
 
   this.defineChildren('profile-ids', function(parent, id) {
-    return new nassh.ProfileLocalPreferenceManager(parent, id);
+    return new ProfileLocalPreferenceManager(parent, id);
   });
-};
+}
 
-nassh.LocalPreferenceManager.prototype =
+LocalPreferenceManager.prototype =
     Object.create(lib.PreferenceManager.prototype);
 /** @override */
-nassh.LocalPreferenceManager.constructor = nassh.LocalPreferenceManager;
+LocalPreferenceManager.constructor = LocalPreferenceManager;
 
 /**
  * Sync remote & local profiles to simplify code.
  *
- * @param {!nassh.PreferenceManager} remotePrefs The remote set of profiles to
- *     sync against.
+ * @param {!PreferenceManager} remotePrefs The remote set of profiles to sync
+ *     against.
  */
-nassh.LocalPreferenceManager.prototype.syncProfiles = function(remotePrefs) {
+LocalPreferenceManager.prototype.syncProfiles = function(remotePrefs) {
   const localIds = new Set(
       /** @type {!Array<string>} */ (this.get('profile-ids')));
   const remoteIds = new Set(
@@ -202,25 +195,24 @@ nassh.LocalPreferenceManager.prototype.syncProfiles = function(remotePrefs) {
  * Create a new profile child.
  *
  * @param {string=} id The specific profile id to use.
- * @return {!nassh.LocalPreferenceManager}
+ * @return {!LocalPreferenceManager}
  */
-nassh.LocalPreferenceManager.prototype.createProfile = function(
-    id = undefined) {
-  return /** @type {!nassh.LocalPreferenceManager} */ (
+LocalPreferenceManager.prototype.createProfile = function(id = undefined) {
+  return /** @type {!LocalPreferenceManager} */ (
       this.createChild('profile-ids', undefined, id));
 };
 
 /** @param {string} id */
-nassh.LocalPreferenceManager.prototype.removeProfile = function(id) {
+LocalPreferenceManager.prototype.removeProfile = function(id) {
   this.removeChild('profile-ids', id);
 };
 
 /**
  * @param {string} id
- * @return {!nassh.LocalPreferenceManager}
+ * @return {!LocalPreferenceManager}
  */
-nassh.LocalPreferenceManager.prototype.getProfile = function(id) {
-  return /** @type {!nassh.LocalPreferenceManager} */ (
+LocalPreferenceManager.prototype.getProfile = function(id) {
+  return /** @type {!LocalPreferenceManager} */ (
       this.getChild('profile-ids', id));
 };
 
@@ -232,7 +224,7 @@ nassh.LocalPreferenceManager.prototype.getProfile = function(id) {
  * @constructor
  * @extends {lib.PreferenceManager}
  */
-nassh.ProfileLocalPreferenceManager = function(parent, id) {
+export function ProfileLocalPreferenceManager(parent, id) {
   lib.PreferenceManager.call(this, parent.storage, `/nassh/profiles/${id}`);
 
   this.id = id;
@@ -244,10 +236,9 @@ nassh.ProfileLocalPreferenceManager = function(parent, id) {
     ['win/width', '900'],
     ['win/state', 'normal'],
   ]);
-};
+}
 
-nassh.ProfileLocalPreferenceManager.prototype =
+ProfileLocalPreferenceManager.prototype =
     Object.create(lib.PreferenceManager.prototype);
 /** @override */
-nassh.ProfileLocalPreferenceManager.constructor =
-    nassh.ProfileLocalPreferenceManager;
+ProfileLocalPreferenceManager.constructor = ProfileLocalPreferenceManager;

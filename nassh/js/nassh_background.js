@@ -6,6 +6,8 @@
  * @fileoverview Utility code for the background page.
  */
 
+import {PreferenceManager} from './nassh_preference_manager.js';
+
 /**
  * Export the current list of nassh connections, and any hterm profiles
  * they reference.
@@ -16,8 +18,7 @@
  * @param {function(!Object)} onComplete Callback to be invoked when export is
  *     complete.
  *   The callback will receive a plain JS object representing the state of
- *   nassh preferences.  The object can be passed back to
- *   nassh.importPreferences.
+ *   nassh preferences.  The object can be passed back to importPreferences.
  */
 export function exportPreferences(onComplete) {
   let pendingReads = 0;
@@ -34,7 +35,7 @@ export function exportPreferences(onComplete) {
   rv.version = 1;
 
   const storage = new lib.Storage.Chrome(chrome.storage.sync);
-  const nasshPrefs = new nassh.PreferenceManager(storage);
+  const nasshPrefs = new PreferenceManager(storage);
   nasshPrefs.readStorage(function() {
     // Export all the connection settings.
     rv.nassh = nasshPrefs.exportAsJson();
@@ -62,7 +63,7 @@ export function exportPreferences(onComplete) {
  * This will not overwrite any existing preferences.
  *
  * @param {!Object} prefsObject A preferences object created with
- *     nassh.exportPreferences.
+ *     exportPreferences.
  * @return {!Promise<void>} A promise that resolves once the import completes.
  */
 export function importPreferences(prefsObject) {
@@ -75,7 +76,7 @@ export function importPreferences(prefsObject) {
   }
 
   const storage = new lib.Storage.Chrome(chrome.storage.sync);
-  const nasshPrefs = new nassh.PreferenceManager(storage);
+  const nasshPrefs = new PreferenceManager(storage);
   return new Promise(async (resolve) => {
     // First import the nassh settings.
     await nasshPrefs.importFromJson(prefsObject.nassh);
