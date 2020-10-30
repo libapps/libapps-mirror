@@ -34,7 +34,7 @@ import {fsp} from './nassh_sftp_fsp.js';
  * @param {!Object} argv The argument object passed in from the Terminal.
  * @constructor
  */
-nassh.CommandInstance = function({io, ...argv}) {
+export function CommandInstance({io, ...argv}) {
   // Command arguments.
   this.argv_ = argv;
 
@@ -99,7 +99,7 @@ nassh.CommandInstance = function({io, ...argv}) {
 
   // Prevent us from reporting an exit twice.
   this.exited_ = false;
-};
+}
 
 /**
  * The name of this command used in messages to the user.
@@ -107,30 +107,30 @@ nassh.CommandInstance = function({io, ...argv}) {
  * Perhaps this will also be used by the user to invoke this command if we
  * build a command line shell.
  */
-nassh.CommandInstance.prototype.commandName = 'nassh';
+CommandInstance.prototype.commandName = 'nassh';
 
 /**
  * Static run method invoked by the terminal.
  *
  * @param {!Object} argv
- * @return {!nassh.CommandInstance}
+ * @return {!CommandInstance}
  */
-nassh.CommandInstance.run = function(argv) {
-  return new nassh.CommandInstance(argv);
+CommandInstance.run = function(argv) {
+  return new CommandInstance(argv);
 };
 
 /**
  * When the command exit is from nassh instead of ssh_client.  The ssh module
  * can only ever exit with positive values, so negative values are reserved.
  */
-nassh.CommandInstance.EXIT_INTERNAL_ERROR = -1;
+const EXIT_INTERNAL_ERROR = -1;
 
 /**
  * Start the nassh command.
  *
- * Instance run method invoked by the nassh.CommandInstance ctor.
+ * Instance run method invoked by the CommandInstance ctor.
  */
-nassh.CommandInstance.prototype.run = function() {
+CommandInstance.prototype.run = function() {
   // Useful for console debugging.
   window.nassh_ = this;
 
@@ -278,7 +278,7 @@ nassh.CommandInstance.prototype.run = function() {
  *
  * @param {string} argstr The connection ArgString.
  */
-nassh.CommandInstance.prototype.reconnect = function(argstr) {
+CommandInstance.prototype.reconnect = function(argstr) {
   // Terminal reset.
   if (!this.resetTerminal()) {
     this.io.print('\x1b[!p');
@@ -297,7 +297,7 @@ nassh.CommandInstance.prototype.reconnect = function(argstr) {
 /**
  * Event for when the window dimensions change.
  */
-nassh.CommandInstance.prototype.updateWindowDimensions_ = function() {
+CommandInstance.prototype.updateWindowDimensions_ = function() {
   if (!this.profileId_) {
     // We haven't connected yet, so nothing to save.
     return;
@@ -327,7 +327,7 @@ nassh.CommandInstance.prototype.updateWindowDimensions_ = function() {
 };
 
 /** Prompt for destination */
-nassh.CommandInstance.prototype.promptForDestination_ = function() {
+CommandInstance.prototype.promptForDestination_ = function() {
   const connectDialog = this.io.createFrame(
       lib.f.getURL('/html/nassh_connect_dialog.html'), null);
 
@@ -388,14 +388,14 @@ nassh.CommandInstance.prototype.promptForDestination_ = function() {
  *
  * @param {string} hash The new subpage to navigate to.
  */
-nassh.CommandInstance.prototype.navigate_ = function(hash) {
+CommandInstance.prototype.navigate_ = function(hash) {
   const url = new URL(this.terminalLocation);
   url.hash = hash;
   this.terminalLocation.replace(url);
 };
 
 /** @param {string} argstr */
-nassh.CommandInstance.prototype.connectToArgString = function(argstr) {
+CommandInstance.prototype.connectToArgString = function(argstr) {
   const isMount = (this.storage.getItem('nassh.isMount') == 'true');
   const isSftp = (this.storage.getItem('nassh.isSftp') == 'true');
   this.storage.removeItem('nassh.isMount');
@@ -429,16 +429,14 @@ nassh.CommandInstance.prototype.connectToArgString = function(argstr) {
  * @param {function(!nassh.PreferenceManager)} callback Callback when the prefs
  *     have finished loading.
  */
-nassh.CommandInstance.prototype.commonProfileSetup_ = function(
-    profileID, callback) {
-
+CommandInstance.prototype.commonProfileSetup_ = function(profileID, callback) {
   const onReadStorage = () => {
     let prefs;
     try {
       prefs = this.prefs_.getProfile(profileID);
     } catch (e) {
       this.io.println(nassh.msg('GET_PROFILE_ERROR', [profileID, e]));
-      this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+      this.exit(EXIT_INTERNAL_ERROR, true);
       return;
     }
 
@@ -463,7 +461,7 @@ nassh.CommandInstance.prototype.commonProfileSetup_ = function(
  * @param {!Object} prefs
  * @return {!Object}
  */
-nassh.CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
+CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
   return {
     username: prefs.get('username'),
     hostname: prefs.get('hostname'),
@@ -481,7 +479,7 @@ nassh.CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
  *
  * @param {string} profileID Terminal preference profile name.
  */
-nassh.CommandInstance.prototype.mountProfile = function(profileID) {
+CommandInstance.prototype.mountProfile = function(profileID) {
   const port = chrome.runtime.connect({name: 'mount'});
 
   // The main event loop -- process messages from the bg page.
@@ -492,7 +490,7 @@ nassh.CommandInstance.prototype.mountProfile = function(profileID) {
     if (error) {
       io.println(message);
       io.pop();
-      this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+      this.exit(EXIT_INTERNAL_ERROR, true);
       port.disconnect();
       return;
     }
@@ -600,7 +598,7 @@ nassh.CommandInstance.prototype.mountProfile = function(profileID) {
  *
  * @param {string} profileID Terminal preference profile name.
  */
-nassh.CommandInstance.prototype.sftpConnectToProfile = function(profileID) {
+CommandInstance.prototype.sftpConnectToProfile = function(profileID) {
   const onStartup = (prefs) => {
     this.isSftp = true;
     this.sftpClient = new sftpClient();
@@ -616,7 +614,7 @@ nassh.CommandInstance.prototype.sftpConnectToProfile = function(profileID) {
  *
  * @param {string} profileID Terminal preference profile name.
  */
-nassh.CommandInstance.prototype.connectToProfile = function(profileID) {
+CommandInstance.prototype.connectToProfile = function(profileID) {
   const onStartup = (prefs) => {
     this.connectTo(this.prefsToConnectParams_(prefs));
   };
@@ -643,8 +641,7 @@ nassh.CommandInstance.prototype.connectToProfile = function(profileID) {
  * @return {?Object} Returns null if we couldn't parse the destination.
  *     An object if we were able to parse out the connect settings.
  */
-nassh.CommandInstance.parseURI = function(uri, stripSchema = true,
-                                          decodeComponents = false) {
+export function parseURI(uri, stripSchema = true, decodeComponents = false) {
   let schema;
   if (stripSchema) {
     schema = uri.split(':', 1)[0];
@@ -752,7 +749,7 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema = true,
     schema: schema,
     uri: uri,
   }, params);
-};
+}
 
 /**
  * Parse the destination string.
@@ -765,7 +762,7 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema = true,
  * @return {?Object} Returns null if we couldn't parse the destination.
  *     An object if we were able to parse out the connect settings.
  */
-nassh.CommandInstance.parseDestination = function(destination) {
+export function parseDestination(destination) {
   let stripSchema = false;
   let decodeComponents = false;
 
@@ -784,8 +781,7 @@ nassh.CommandInstance.parseDestination = function(destination) {
     decodeComponents = true;
   }
 
-  const rv = nassh.CommandInstance.parseURI(destination, stripSchema,
-                                            decodeComponents);
+  const rv = parseURI(destination, stripSchema, decodeComponents);
   if (rv === null) {
     return rv;
   }
@@ -806,23 +802,23 @@ nassh.CommandInstance.parseDestination = function(destination) {
   // If the fingerprint is set, maybe add it to the known keys list.
 
   return rv;
-};
+}
 
 /**
  * Initiate a connection to a remote host given a destination string.
  *
  * @param {string} destination A string of the form username@host[:port].
  */
-nassh.CommandInstance.prototype.connectToDestination = function(destination) {
+CommandInstance.prototype.connectToDestination = function(destination) {
   if (destination == 'crosh') {
     this.terminalLocation.href = 'crosh.html';
     return;
   }
 
-  const rv = nassh.CommandInstance.parseDestination(destination);
+  const rv = parseDestination(destination);
   if (rv === null) {
     this.io.println(nassh.msg('BAD_DESTINATION', [destination]));
-    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+    this.exit(EXIT_INTERNAL_ERROR, true);
     return;
   }
   if (rv.schema === 'sftp') {
@@ -842,11 +838,11 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
  *
  * @param {string} destination A string of the form username@host[:port].
  */
-nassh.CommandInstance.prototype.mountDestination = function(destination) {
+CommandInstance.prototype.mountDestination = function(destination) {
   // This code path should currently be unreachable.  If that ever changes,
   // we can look at merging with the mountProfile code.
   this.io.println('Not implemented; please file a bug.');
-  this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+  this.exit(EXIT_INTERNAL_ERROR, true);
 };
 
 /**
@@ -859,7 +855,7 @@ nassh.CommandInstance.prototype.mountDestination = function(destination) {
  * @param {string} argstr The full ssh command line.
  * @return {!Object} The various components.
  */
-nassh.CommandInstance.splitCommandLine = function(argstr) {
+export function splitCommandLine(argstr) {
   let args = argstr || '';
   let command = '';
 
@@ -896,19 +892,18 @@ nassh.CommandInstance.splitCommandLine = function(argstr) {
     args: ary,
     command: command,
   };
-};
+}
 
 /**
  * Initiate a SFTP connection to a remote host.
  *
  * @param {string} destination A string of the form username@host[:port].
  */
-nassh.CommandInstance.prototype.sftpConnectToDestination = function(
-    destination) {
-  const rv = nassh.CommandInstance.parseDestination(destination);
+CommandInstance.prototype.sftpConnectToDestination = function(destination) {
+  const rv = parseDestination(destination);
   if (rv === null) {
     this.io.println(nassh.msg('BAD_DESTINATION', [destination]));
-    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+    this.exit(EXIT_INTERNAL_ERROR, true);
     return;
   }
 
@@ -930,7 +925,7 @@ nassh.CommandInstance.prototype.sftpConnectToDestination = function(
  * @param {function(!Object, !Object): !Promise<void>=} finalize Call this
  *     instead of the normal connectToFinalize_.
  */
-nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
+CommandInstance.prototype.connectTo = async function(params, finalize) {
   if (params.hostname == '>crosh') {
     // TODO: This should be done better.
     const template = 'crosh.html?profile=%encodeURIComponent(terminalProfile)';
@@ -980,20 +975,19 @@ nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
   // First tokenize the options into an object we can work with more easily.
   let /** @type {!Object<string, string>} */ options = {};
   try {
-    options = nassh.CommandInstance.tokenizeOptions(params.nasshOptions);
+    options = tokenizeOptions(params.nasshOptions);
   } catch (e) {
     this.io.println(nassh.msg('NASSH_OPTIONS_ERROR', [e]));
-    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+    this.exit(EXIT_INTERNAL_ERROR, true);
     return;
   }
 
   let /** @type {!Object<string, string>} */ userOptions = {};
   try {
-    userOptions = nassh.CommandInstance.tokenizeOptions(
-        params.nasshUserOptions);
+    userOptions = tokenizeOptions(params.nasshUserOptions);
   } catch (e) {
     this.io.println(nassh.msg('NASSH_OPTIONS_ERROR', [e]));
-    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+    this.exit(EXIT_INTERNAL_ERROR, true);
     return;
   }
 
@@ -1011,13 +1005,11 @@ nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
   });
 
   // Finally post process the combined result.
-  options = nassh.CommandInstance.postProcessOptions(
-      options, params.hostname, params.username);
+  options = postProcessOptions(options, params.hostname, params.username);
 
   // Merge ssh options from the ssh:// URI that we believe are safe.
   params.userSshArgs = [];
-  const userSshOptionsList = nassh.CommandInstance.splitCommandLine(
-      params.nasshUserSshOptions).args;
+  const userSshOptionsList = splitCommandLine(params.nasshUserSshOptions).args;
   const safeSshOptions = new Set([
     '-4', '-6', '-a', '-A', '-C', '-q', '-Q', '-v', '-V',
   ]);
@@ -1111,7 +1103,7 @@ nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
         this.io.println(nassh.msg(
             'RELAY_AUTH_ERROR',
             [`${this.relay_.proxyHost}:${this.relay_.proxyPort}`]));
-        this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+        this.exit(EXIT_INTERNAL_ERROR, true);
         return;
       }
 
@@ -1128,7 +1120,7 @@ nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
       this.storage.setItem('nassh.isSftp', this.isSftp);
 
       if (!this.relay_.redirect()) {
-        this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+        this.exit(EXIT_INTERNAL_ERROR, true);
       }
       return;
     }
@@ -1136,7 +1128,7 @@ nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
     // Unknown proxy mode.
     this.io.println(nassh.msg('NASSH_OPTIONS_ERROR',
                               [`--proxy-mode=${options['--proxy-mode']}`]));
-    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+    this.exit(EXIT_INTERNAL_ERROR, true);
     return;
   }
 
@@ -1162,8 +1154,7 @@ nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
  *    prefsToConnectParams_ helper.
  * @param {!Object} options The nassh specific options.
  */
-nassh.CommandInstance.prototype.connectToFinalize_ = async function(
-    params, options) {
+CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
   // Make sure the selected ssh-client version is somewhat valid.
   if (options['--ssh-client-version']) {
     this.sshClientVersion_ = options['--ssh-client-version'];
@@ -1236,7 +1227,7 @@ nassh.CommandInstance.prototype.connectToFinalize_ = async function(
 
   // Finally, we append the custom command line the user has constructed.
   // This matches native `ssh` behavior and makes our lives simpler.
-  const extraArgs = nassh.CommandInstance.splitCommandLine(params.argstr);
+  const extraArgs = splitCommandLine(params.argstr);
   if (extraArgs.args) {
     argv.arguments = argv.arguments.concat(extraArgs.args);
   }
@@ -1273,7 +1264,7 @@ nassh.CommandInstance.prototype.connectToFinalize_ = async function(
         this.onSftpInitialised(params.sftpCallback);
       } catch (e) {
         this.io.println(nassh.msg('NASFTP_ERROR_MESSAGE', [e]));
-        this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+        this.exit(EXIT_INTERNAL_ERROR, true);
       }
     }
   });
@@ -1285,7 +1276,7 @@ nassh.CommandInstance.prototype.connectToFinalize_ = async function(
  * @param {string=} optionString The set of --long options to parse.
  * @return {!Object<string, string>} A map of --option to its value.
  */
-nassh.CommandInstance.tokenizeOptions = function(optionString = '') {
+export function tokenizeOptions(optionString = '') {
   const rv = {};
 
   // If it's empty, return right away else the regex split below will create
@@ -1319,7 +1310,7 @@ nassh.CommandInstance.tokenizeOptions = function(optionString = '') {
   }
 
   return rv;
-};
+}
 
 /**
  * Expand & process nassh options.
@@ -1329,8 +1320,7 @@ nassh.CommandInstance.tokenizeOptions = function(optionString = '') {
  * @param {string} username The ssh username we're using.
  * @return {!Object<string, *>} A map of --option to its value.
  */
-nassh.CommandInstance.postProcessOptions = function(
-    options, hostname, username) {
+export function postProcessOptions(options, hostname, username) {
   let rv = Object.assign(options);
 
   // Handle various named "configs" we have.
@@ -1402,7 +1392,7 @@ nassh.CommandInstance.postProcessOptions = function(
   }
 
   return rv;
-};
+}
 
 /**
  * Dispatch a "message" to one of a collection of message handlers.
@@ -1411,8 +1401,7 @@ nassh.CommandInstance.postProcessOptions = function(
  * @param {!Object} handlers
  * @param {!Object} msg
  */
-nassh.CommandInstance.prototype.dispatchMessage_ = function(
-    desc, handlers, msg) {
+CommandInstance.prototype.dispatchMessage_ = function(desc, handlers, msg) {
   if (msg.name in handlers) {
     handlers[msg.name].apply(this, msg.argv);
   } else {
@@ -1425,7 +1414,7 @@ nassh.CommandInstance.prototype.dispatchMessage_ = function(
  * @param {!Object<string, string>} environ SSH environment variables.
  * @return {!Promise<void>}
  */
-nassh.CommandInstance.prototype.initWasmPlugin_ =
+CommandInstance.prototype.initWasmPlugin_ =
     async function(argv, environ) {
   this.plugin_ = new WasmPlugin({
     executable: `../../plugin/${this.sshClientVersion_}/ssh.wasm`,
@@ -1444,7 +1433,7 @@ nassh.CommandInstance.prototype.initWasmPlugin_ =
  * @param {!Object} argv Plugin arguments.
  * @param {function()} onComplete
  */
-nassh.CommandInstance.prototype.initNaclPlugin_ = function(argv, onComplete) {
+CommandInstance.prototype.initNaclPlugin_ = function(argv, onComplete) {
   this.plugin_ = new NaclPlugin({
     io: this.io,
     sshClientVersion: this.sshClientVersion_,
@@ -1467,7 +1456,7 @@ nassh.CommandInstance.prototype.initNaclPlugin_ = function(argv, onComplete) {
  * @param {function()} onComplete
  * @return {!Promise<void>}
  */
-nassh.CommandInstance.prototype.initPlugin_ = async function(argv, onComplete) {
+CommandInstance.prototype.initPlugin_ = async function(argv, onComplete) {
   this.io.print(nassh.msg('PLUGIN_LOADING', [this.sshClientVersion_]));
   if (this.sshClientVersion_.startsWith('pnacl')) {
     this.initNaclPlugin_(argv, () => {
@@ -1488,7 +1477,7 @@ nassh.CommandInstance.prototype.initPlugin_ = async function(argv, onComplete) {
 /**
  * Remove the plugin from the runtime.
  */
-nassh.CommandInstance.prototype.removePlugin_ = function() {
+CommandInstance.prototype.removePlugin_ = function() {
   if (this.plugin_) {
     this.plugin_.remove();
     this.plugin_ = null;
@@ -1501,7 +1490,7 @@ nassh.CommandInstance.prototype.removePlugin_ = function() {
  * @param {number} code Exit code, 0 for success.
  * @param {boolean} noReconnect
  */
-nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
+CommandInstance.prototype.exit = function(code, noReconnect) {
   if (this.exited_) {
     return;
   }
@@ -1569,7 +1558,7 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
  * @param {!Event} e Before unload event.
  * @return {string|undefined} Message to display.
  */
-nassh.CommandInstance.prototype.onBeforeUnload_ = function(e) {
+CommandInstance.prototype.onBeforeUnload_ = function(e) {
   if (hterm.windowType == 'popup') {
     return;
   }
@@ -1584,16 +1573,16 @@ nassh.CommandInstance.prototype.onBeforeUnload_ = function(e) {
  *
  * @suppress {lintChecks} Allow non-primitive prototype property.
  */
-nassh.CommandInstance.prototype.onConnectDialog_ = {};
+CommandInstance.prototype.onConnectDialog_ = {};
 
 /**
  * Sent from the dialog when the user chooses to switch to mosh.
  *
- * @this {nassh.CommandInstance}
+ * @this {CommandInstance}
  * @param {!hterm.Frame} dialogFrame
  * @param {string} profileID Terminal preference profile name.
  */
-nassh.CommandInstance.prototype.onConnectDialog_.mosh = function(
+CommandInstance.prototype.onConnectDialog_.mosh = function(
     dialogFrame, profileID) {
   dialogFrame.close();
 
@@ -1603,11 +1592,11 @@ nassh.CommandInstance.prototype.onConnectDialog_.mosh = function(
 /**
  * Sent from the dialog when the user chooses to mount a profile.
  *
- * @this {nassh.CommandInstance}
+ * @this {CommandInstance}
  * @param {!hterm.Frame} dialogFrame
  * @param {string} profileID Terminal preference profile name.
  */
-nassh.CommandInstance.prototype.onConnectDialog_.mountProfile = function(
+CommandInstance.prototype.onConnectDialog_.mountProfile = function(
     dialogFrame, profileID) {
   dialogFrame.close();
 
@@ -1617,11 +1606,11 @@ nassh.CommandInstance.prototype.onConnectDialog_.mountProfile = function(
 /**
  * Sent from the dialog when the user chooses to connect to a profile via sftp.
  *
- * @this {nassh.CommandInstance}
+ * @this {CommandInstance}
  * @param {!hterm.Frame} dialogFrame
  * @param {string} profileID Terminal preference profile name.
  */
-nassh.CommandInstance.prototype.onConnectDialog_.sftpConnectToProfile =
+CommandInstance.prototype.onConnectDialog_.sftpConnectToProfile =
     function(dialogFrame, profileID) {
   dialogFrame.close();
 
@@ -1631,11 +1620,11 @@ nassh.CommandInstance.prototype.onConnectDialog_.sftpConnectToProfile =
 /**
  * Sent from the dialog when the user chooses to connect to a profile.
  *
- * @this {nassh.CommandInstance}
+ * @this {CommandInstance}
  * @param {!hterm.Frame} dialogFrame
  * @param {string} profileID Terminal preference profile name.
  */
-nassh.CommandInstance.prototype.onConnectDialog_.connectToProfile = function(
+CommandInstance.prototype.onConnectDialog_.connectToProfile = function(
     dialogFrame, profileID) {
   dialogFrame.close();
 
@@ -1647,7 +1636,7 @@ nassh.CommandInstance.prototype.onConnectDialog_.connectToProfile = function(
  *
  * @param {function()=} callback Callback when initialization finishes.
  */
-nassh.CommandInstance.prototype.onSftpInitialised = function(callback) {
+CommandInstance.prototype.onSftpInitialised = function(callback) {
   if (this.isMount) {
     this.mountOptions['persistent'] = false;
 
@@ -1683,7 +1672,7 @@ nassh.CommandInstance.prototype.onSftpInitialised = function(callback) {
  * @param {boolean} echo Whether to echo the user input.
  * @param {function(string)} callback Called with the user's input.
  */
-nassh.CommandInstance.prototype.secureInput_ = function(
+CommandInstance.prototype.secureInput_ = function(
     prompt, buf_len, echo, callback) {
   const io = this.io.push();
 
@@ -1775,7 +1764,7 @@ nassh.CommandInstance.prototype.secureInput_ = function(
  * @param {boolean} echo Whether to echo the user input.
  * @return {!Promise<string>} A Promise that resolves to the user's input.
  */
-nassh.CommandInstance.prototype.secureInput = function(prompt, buf_len, echo) {
+CommandInstance.prototype.secureInput = function(prompt, buf_len, echo) {
   return new Promise((resolve) => {
     this.secureInput_(prompt, buf_len, echo, resolve);
   });
@@ -1787,7 +1776,7 @@ nassh.CommandInstance.prototype.secureInput = function(prompt, buf_len, echo) {
  *
  * @param {number} code The exit code.
  */
-nassh.CommandInstance.prototype.onPluginExit = function(code) {};
+CommandInstance.prototype.onPluginExit = function(code) {};
 
 /**
  * A user should override this if they want to handle resetting the terminal.
@@ -1795,6 +1784,6 @@ nassh.CommandInstance.prototype.onPluginExit = function(code) {};
  *
  * @return {boolean} Return true if the function is able to reset the terminal.
  */
-nassh.CommandInstance.prototype.resetTerminal = function() {
+CommandInstance.prototype.resetTerminal = function() {
   return false;
 };

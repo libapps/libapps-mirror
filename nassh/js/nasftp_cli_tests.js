@@ -7,6 +7,7 @@
  */
 
 import {Cli, ProgressBar} from './nasftp_cli.js';
+import {CommandInstance} from './nassh_command_instance.js';
 import {MockSftpClient} from './nassh_sftp_fsp_tests.js';
 import {FileAttrs} from './nassh_sftp_packet_types.js';
 
@@ -17,7 +18,7 @@ describe('nasftp_cli_tests.js', () => {
  *
  * @param {!hterm.Terminal} terminal The terminal to display to.
  * @constructor
- * @extends {nassh.CommandInstance}
+ * @extends {CommandInstance}
  */
 const MockSftpCommandInstance = function(terminal) {
   this.terminal = terminal;

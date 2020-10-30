@@ -245,7 +245,7 @@ The vast majority of the code here lives under [js/].
 * Main Secure Shell code
   * [nassh.js]: Main `nassh` object setup and glue code to Chrome runtime.
   * [nassh_app.js]: Main `nassh.App` code.
-  * [nassh_command_instance.js]: Main `nassh.CommandInstance` launching code.
+  * [nassh_command_instance.js]: Main `CommandInstance` launching code.
   * [nassh_preference_manager.js]: Logic holding user preferences.
 * Relay code.
   * [nassh_relay_corp.js]: Web relay `nassh.relay.Corp` code for proxying
@@ -336,7 +336,7 @@ It doesn't matter too much as the exit values are purely for showing the user.
 Here is the API that the JS code uses to communicate with the NaCl [ssh_client]
 module.
 
-The `nassh.CommandInstance.prototype.sendToPlugin_` function in
+The `CommandInstance.prototype.sendToPlugin_` function in
 [nassh_command_instance.js] is used to package up and make all the calls.
 Helper functions are also provided in that file to avoid a JS API to callers.
 

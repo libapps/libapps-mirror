@@ -85,7 +85,7 @@ export class Plugin {
     const errorHandler = (ev) => {
       this.io.println(nassh.msg('PLUGIN_LOADING_FAILED'));
       console.error('loading plugin failed', ev);
-      this.onExit_(-1 /* nassh.CommandInstance.EXIT_INTERNAL_ERROR */);
+      this.onExit_(-1 /* CommandInstance.EXIT_INTERNAL_ERROR */);
     };
     this.plugin_.addEventListener('crash', errorHandler);
     this.plugin_.addEventListener('error', errorHandler);

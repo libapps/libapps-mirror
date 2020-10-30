@@ -6,6 +6,7 @@
  * @fileoverview A remote API for external apps/extensions.
  */
 
+import {CommandInstance} from './nassh_command_instance.js';
 import {Client as sftpClient} from './nassh_sftp_client.js';
 import {fsp, onUnmountRequested} from './nassh_sftp_fsp.js';
 
@@ -113,7 +114,7 @@ function(request, sender, sendResponse) {
       port: request.port,
       argstr: `-i${identityFile} -oUserKnownHostsFile=${knownHosts}`,
     };
-    const instance = new nassh.CommandInstance(argv);
+    const instance = new CommandInstance(argv);
     instance.connectTo(connectOptions);
     // TODO(vapier): Plumb back up success/failure.
     sendResponse({error: false, message: 'createSftpInstance'});
@@ -590,7 +591,7 @@ function(port) {
     return;
   }
 
-  // The nassh CommandInstance pokes the terminal a little more than it should.
+  // The CommandInstance pokes the terminal a little more than it should.
   // Until we clean that up, set up a stub object.
   const stubTerminal = /** @type {!hterm.Terminal} */ ({
     interpret: (message) => {
@@ -626,7 +627,7 @@ function(port) {
           post({error: false, command: 'done'});
           port.disconnect();
         };
-        instance = new nassh.CommandInstance(argv);
+        instance = new CommandInstance(argv);
         instance.secureInput = (message, buf_len, echo) => {
           post({error: false, command: 'input', message, echo, buf_len});
           return new Promise((resolve) => {

@@ -2,11 +2,12 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview nassh command instance tests.
  */
+
+import {parseDestination, parseURI, postProcessOptions, splitCommandLine,
+        tokenizeOptions} from './nassh_command_instance.js';
 
 describe('nassh_command_instance_tests.js', () => {
 
@@ -50,7 +51,7 @@ it('splitCommandLine', () => {
   ];
 
   data.forEach((dataSet) => {
-    const opts = nassh.CommandInstance.splitCommandLine(dataSet[0]);
+    const opts = splitCommandLine(dataSet[0]);
     assert.deepStrictEqual(dataSet[1], opts.args);
     assert.deepStrictEqual(dataSet[2], opts.command);
   });
@@ -196,7 +197,7 @@ describe('parseURI', () => {
 
   data.forEach(([uri, fields]) => {
     it(uri, () => {
-      const rv = nassh.CommandInstance.parseURI(uri, true, true);
+      const rv = parseURI(uri, true, true);
       if (rv === null) {
         assert.isNull(fields);
       } else {
@@ -263,7 +264,7 @@ describe('parseDestination', () => {
 
   data.forEach((dataSet) => {
     it(dataSet[0], () => {
-      const rv = nassh.CommandInstance.parseDestination(dataSet[0]);
+      const rv = parseDestination(dataSet[0]);
       if (rv === null) {
         assert.isNull(dataSet[1], dataSet[0]);
       } else {
@@ -283,15 +284,15 @@ it('tokenizeOptions', () => {
   let rv;
 
   // Check the empty set.  This should not fail.
-  rv = nassh.CommandInstance.tokenizeOptions();
+  rv = tokenizeOptions();
   assert.equal('object', typeof rv);
-  rv = nassh.CommandInstance.tokenizeOptions('');
+  rv = tokenizeOptions('');
   assert.equal('object', typeof rv);
-  rv = nassh.CommandInstance.tokenizeOptions(' ');
+  rv = tokenizeOptions(' ');
   assert.equal('object', typeof rv);
 
   // Check the meaning of the options.
-  rv = nassh.CommandInstance.tokenizeOptions(
+  rv = tokenizeOptions(
       // Check plain options.
       '--report-ack-latency ' +
       // Check options w/values.
@@ -305,7 +306,7 @@ it('tokenizeOptions', () => {
   assert.isFalse(rv['--use-xhr']);
 
   // Check for bad options.
-  assert.throws(() => nassh.CommandInstance.tokenizeOptions('blah'));
+  assert.throws(() => tokenizeOptions('blah'));
 });
 
 /**
@@ -327,10 +328,10 @@ describe('proxy-host-addresses', () => {
   data.forEach(([host, expected]) => {
     it(`--proxy-host=${host}`, () => {
       // First verify the tokenization phase.
-      let rv = nassh.CommandInstance.tokenizeOptions(`--proxy-host=${host}`);
+      let rv = tokenizeOptions(`--proxy-host=${host}`);
       assert.equal(rv['--proxy-host'], host);
       // Then verify the post processing phase.
-      rv = nassh.CommandInstance.postProcessOptions(rv, host, '');
+      rv = postProcessOptions(rv, host, '');
       assert.equal(rv['--proxy-host'], expected);
     });
   });
@@ -384,8 +385,8 @@ describe('default-proxy-host', () => {
 
   tests.forEach(([options, host, port, relay, user, mode, resume]) => {
     it(`default relay for '${options}' & '${host}'`, () => {
-      let rv = nassh.CommandInstance.tokenizeOptions(options);
-      rv = nassh.CommandInstance.postProcessOptions(rv, host, 'root');
+      let rv = tokenizeOptions(options);
+      rv = postProcessOptions(rv, host, 'root');
       assert.equal(port, rv['--proxy-port']);
       assert.equal(relay, rv['--proxy-host']);
       assert.equal(user, rv['--proxy-user']);
@@ -413,8 +414,8 @@ describe('default-ssh-agent', () => {
 
   tests.forEach(([host, expected]) => {
     it(`forwarding for ${host}`, () => {
-      let rv = nassh.CommandInstance.tokenizeOptions('--config=google');
-      rv = nassh.CommandInstance.postProcessOptions(rv, host, '');
+      let rv = tokenizeOptions('--config=google');
+      rv = postProcessOptions(rv, host, '');
       assert.equal(rv['auth-agent-forward'], expected);
     });
   });

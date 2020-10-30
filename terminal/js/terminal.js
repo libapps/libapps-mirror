@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {CommandInstance} from './nassh_command_instance.js';
 import {composeTmuxUrl, definePrefs, getTmuxIntegrationEnabled,
   loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily}
     from './terminal_common.js';
@@ -422,7 +423,7 @@ function runNassh(term, tmuxControllerDriver) {
   }
 
   /** @suppress {undefinedVars|missingProperties} */
-  const nasshCommand = new nassh.CommandInstance({
+  const nasshCommand = new CommandInstance({
     io: term.io,
     args: [document.location.hash.substr(1)],
     environment: environment,

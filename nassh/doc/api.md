@@ -295,9 +295,9 @@ These are messages sent to the background page.
 # Create a new mount connection.
 {
   command: 'connect',
-  # Arguments to nassh.CommandInstance.
+  # Arguments to CommandInstance.
   argv: {...},
-  # Arguments to nassh.CommandInstance.connectTo.
+  # Arguments to CommandInstance.connectTo.
   connectOptions: {...},
 }
 ```

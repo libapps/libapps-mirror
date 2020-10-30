@@ -8,6 +8,7 @@
  *                only.
  */
 
+import {CommandInstance, splitCommandLine} from './nassh_command_instance.js';
 import {Client as sftpClient} from './nassh_sftp_client.js';
 // Normally the FSP code is only in the background page, so load it on demand
 // so we can run our FSP tests against the APIs.  We can't use import() as
@@ -115,7 +116,7 @@ ProgressBar.prototype.summarize = function(max) {
 /**
  * The command line sftp client.
  *
- * @param {!nassh.CommandInstance} commandInstance The command instance to bind.
+ * @param {!CommandInstance} commandInstance The command instance to bind.
  * @constructor
  */
 export function Cli(commandInstance) {
@@ -263,7 +264,7 @@ Cli.prototype.dispatchCommand_ = function(userArgs) {
   let args;
   if (typeof userArgs == 'string') {
     // The existing func isn't great, but it's better than nothing.
-    const cmdline = nassh.CommandInstance.splitCommandLine(userArgs);
+    const cmdline = splitCommandLine(userArgs);
     args = cmdline.args;
   } else if (Array.isArray(userArgs)) {
     args = Array.from(userArgs);

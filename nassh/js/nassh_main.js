@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {CommandInstance} from './nassh_command_instance.js';
+
 /**
  * Open a new window to the specified URL.
  *
@@ -75,7 +77,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         environment = {};
       }
 
-      const nasshCommand = new nassh.CommandInstance({
+      const nasshCommand = new CommandInstance({
         io: terminal.io,
         args: [document.location.hash.substr(1)],
         environment: environment,
