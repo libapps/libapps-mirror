@@ -9,8 +9,6 @@
  */
 const nassh = {};
 
-nassh.sftp = {};
-
 /**
  * Non-null if nassh is running as an extension.
  */

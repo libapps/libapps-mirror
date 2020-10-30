@@ -9,6 +9,9 @@
  */
 
 import {Client as sftpClient} from './nassh_sftp_client.js';
+import {
+  File, FileAttrs, OpenFlags, StatusCodes,
+} from './nassh_sftp_packet_types.js';
 import {StatusError} from './nassh_sftp_status.js';
 
 /**
@@ -30,7 +33,7 @@ fsp.sftpInstances = {};
  * Sanitizes the provided file's metadata to the requirements specified in
  * 'options'.
  *
- * @param {!nassh.sftp.File|!nassh.sftp.FileAttrs} file
+ * @param {!File|!FileAttrs} file
  * @param {{
  *     name: (boolean|undefined),
  *     directoryPath: (string|undefined),
@@ -91,7 +94,7 @@ export function onGetMetadataRequested(options, onSuccess, onError) {
     .catch((response) => {
         // If file not found
       if (response instanceof StatusError &&
-          response.code == nassh.sftp.packets.StatusCodes.NO_SUCH_FILE) {
+          response.code == StatusCodes.NO_SUCH_FILE) {
         onError(chrome.fileSystemProvider.ProviderError.NOT_FOUND);
         return;
       }
@@ -213,9 +216,9 @@ export function onOpenFileRequested(options, onSuccess, onError) {
   const client = fsp.sftpInstances[options.fileSystemId].sftpClient;
   let pflags = 0;
   if (options.mode == 'READ') {
-    pflags |= nassh.sftp.packets.OpenFlags.READ;
+    pflags |= OpenFlags.READ;
   } else if (options.mode == 'WRITE') {
-    pflags |= nassh.sftp.packets.OpenFlags.WRITE;
+    pflags |= OpenFlags.WRITE;
   }
 
   const path = '.' + options.filePath; // relative path
@@ -242,8 +245,7 @@ export function onCreateFileRequested(options, onSuccess, onError) {
   }
 
   const client = fsp.sftpInstances[options.fileSystemId].sftpClient;
-  const pflags = nassh.sftp.packets.OpenFlags.CREAT |
-               nassh.sftp.packets.OpenFlags.EXCL;
+  const pflags = OpenFlags.CREAT | OpenFlags.EXCL;
 
   const path = '.' + options.filePath; // relative path
   client.openFile(path, pflags)
@@ -269,8 +271,7 @@ export function onTruncateRequested(options, onSuccess, onError) {
   }
 
   const client = fsp.sftpInstances[options.fileSystemId].sftpClient;
-  const pflags = nassh.sftp.packets.OpenFlags.CREAT |
-               nassh.sftp.packets.OpenFlags.TRUNC;
+  const pflags = OpenFlags.CREAT | OpenFlags.TRUNC;
 
   const path = '.' + options.filePath; // relative path
   client.openFile(path, pflags)
@@ -319,7 +320,7 @@ export function onDeleteEntryRequested(options, onSuccess, onError) {
     .catch((response) => {
       // If file not found.
       if (response instanceof StatusError &&
-          response.code == nassh.sftp.packets.StatusCodes.NO_SUCH_FILE) {
+          response.code == StatusCodes.NO_SUCH_FILE) {
         onError(chrome.fileSystemProvider.ProviderError.NOT_FOUND);
         return;
       }
@@ -487,14 +488,12 @@ export function onCopyEntryRequested(options, onSuccess, onError) {
 function copyFile(sourcePath, targetPath, size, client) {
   let sourceHandle;
   let targetHandle;
-  return client.openFile(sourcePath, nassh.sftp.packets.OpenFlags.READ)
+  return client.openFile(sourcePath, OpenFlags.READ)
     .then((handle) => {
 
       sourceHandle = handle;
-      const pflags = nassh.sftp.packets.OpenFlags.WRITE |
-                   nassh.sftp.packets.OpenFlags.APPEND |
-                   nassh.sftp.packets.OpenFlags.CREAT |
-                   nassh.sftp.packets.OpenFlags.EXCL;
+      const pflags = OpenFlags.WRITE | OpenFlags.APPEND | OpenFlags.CREAT |
+          OpenFlags.EXCL;
       return client.openFile(targetPath, pflags);
 
     })

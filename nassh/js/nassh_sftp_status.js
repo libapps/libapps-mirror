@@ -3,9 +3,9 @@
 // found in the LICENSE file.
 
 /**
- * The SFTP Status Error extends the Error class. It takes a
- * nassh.sftp.statusPacket and an expectedPacketType and creates an informative
- * Error message while preserving the status code.
+ * The SFTP Status Error extends the Error class. It takes a StatusPacket and
+ * an expectedPacketType and creates an informative Error message while
+ * preserving the status code.
  */
 export class StatusError {
   /**

@@ -4,8 +4,8 @@
 
 /**
  * @fileoverview This file manages the command line sftp client logic.  Not to
- *                be confused with the nassh.sftp.client class which provides a
- *                JS API only.
+ *                be confused with the sftpClient class which provides a JS API
+ *                only.
  */
 
 import {Client as sftpClient} from './nassh_sftp_client.js';
@@ -18,6 +18,10 @@ import {
   onMoveEntryRequested, onOpenFileRequested, onReadDirectoryRequested,
   onReadFileRequested, onTruncateRequested, onWriteFileRequested,
 } from './nassh_sftp_fsp.js';
+import {
+  bitsToUnixModeLine, epochToLocal, File, FileAttrs, FileXferAttrs, OpenFlags,
+  StatusCodes,
+} from './nassh_sftp_packet_types.js';
 import {StatusError} from './nassh_sftp_status.js';
 
 /**
@@ -123,7 +127,7 @@ export function Cli(commandInstance) {
   this.io = this.commandInstance_.io;
   this.terminal = this.io.terminal_;
 
-  // The nassh.sftp.client object.
+  // The sftpClient object.
   // A local shortcut since we use it often in this class.
   this.client = this.commandInstance_.sftpClient;
 
@@ -626,8 +630,8 @@ Cli.prototype.completeCommandOptions_ = function(args, opts) {
  * Complete paths against the remote system.
  *
  * @param {!Array<string>} args The current command line arguments.
- * @param {function((!nassh.sftp.File|!nassh.sftp.FileAttrs))=} filter Optional
- *     callback to filter possible matches.
+ * @param {function((!File|!FileAttrs))=} filter Callback to filter possible
+ *     matches.
  * @return {!Promise<!Cli.Completion>} The remote paths that match.
  */
 Cli.prototype.completeRemotePath_ = async function(
@@ -958,13 +962,13 @@ Cli.prototype.showSftpStatusError_ = function(response, cmd) {
   let msgId;
   const msgArgs = [cmd];
   switch (response.code) {
-    case nassh.sftp.packets.StatusCodes.EOF:
+    case StatusCodes.EOF:
       msgId = 'NASFTP_ERROR_END_OF_FILE';
       break;
-    case nassh.sftp.packets.StatusCodes.NO_SUCH_FILE:
+    case StatusCodes.NO_SUCH_FILE:
       msgId = 'NASFTP_ERROR_FILE_NOT_FOUND';
       break;
-    case nassh.sftp.packets.StatusCodes.PERMISSION_DENIED:
+    case StatusCodes.PERMISSION_DENIED:
       msgId = 'NASFTP_ERROR_PERMISSION_DENIED';
       break;
     default:
@@ -1352,7 +1356,7 @@ Cli.commandChmod_ = function(args) {
   }
 
   const attrs = {
-    'flags': nassh.sftp.packets.FileXferAttrs.PERMISSIONS,
+    'flags': FileXferAttrs.PERMISSIONS,
     'permissions': mode,
   };
 
@@ -1398,8 +1402,8 @@ Cli.commandChown_ = function(args) {
       .then((attrs) => {
         // Need the lib.notNull again as closure compiler is unable to handle
         // the check above for some reason.
-        const /** @type {!nassh.sftp.FileAttrs} */ newAttrs = {
-          'flags': nassh.sftp.packets.FileXferAttrs.UIDGID,
+        const /** @type {!FileAttrs} */ newAttrs = {
+          'flags': FileXferAttrs.UIDGID,
           'uid': args.cmd === 'chown' ? lib.notNull(account) : attrs.uid,
           'gid': args.cmd !== 'chown' ? lib.notNull(account) : attrs.gid,
         };
@@ -1546,13 +1550,11 @@ Cli.commandCopy_ = function(args) {
 
       // Open the source file for reading.
       let readHandle;
-      return this.client.openFile(src, nassh.sftp.packets.OpenFlags.READ)
+      return this.client.openFile(src, OpenFlags.READ)
         .then((handle) => {
           readHandle = handle;
 
-          const flags = nassh.sftp.packets.OpenFlags.WRITE |
-              nassh.sftp.packets.OpenFlags.CREAT |
-              nassh.sftp.packets.OpenFlags.TRUNC;
+          const flags = OpenFlags.WRITE | OpenFlags.CREAT | OpenFlags.TRUNC;
 
           // Open the destination file for writing.
           let writeHandle;
@@ -1853,14 +1855,12 @@ Cli.commandList_ = function(args, opts) {
       .catch((response) => {
         if (response instanceof StatusError) {
           // Maybe they tried to list a file.  Synthesize a result.
-          if (response.code == nassh.sftp.packets.StatusCodes.NO_SUCH_FILE) {
+          if (response.code == StatusCodes.NO_SUCH_FILE) {
             return this.client.linkStatus(path)
               .then((attrs) => {
                 const basename = this.basename(path);
-                const mode =
-                    nassh.sftp.packets.bitsToUnixModeLine(attrs.permissions);
-                const date =
-                    nassh.sftp.packets.epochToLocal(attrs.lastModified);
+                const mode = bitsToUnixModeLine(attrs.permissions);
+                const date = epochToLocal(attrs.lastModified);
                 const longFilename =
                     `${mode}  ${attrs.uid} ${attrs.gid}  ${attrs.size}  ` +
                     `${date.toDateString()}  ${basename}`;
@@ -2189,13 +2189,13 @@ Cli.commandPut_ = function(args, opts) {
           let offset = 0;
 
           // Figure out whether to resume or clobber the file.
-          let flags = nassh.sftp.packets.OpenFlags.WRITE;
+          let flags = OpenFlags.WRITE;
           let resume = opts.resume;
           if (resume) {
             try {
               const attrs = await this.client.fileStatus(path);
               offset = attrs.size;
-              flags |= nassh.sftp.packets.OpenFlags.APPEND;
+              flags |= OpenFlags.APPEND;
             } catch (e) {
               // File doesn't exist, so disable resuming.
               if (e instanceof StatusError) {
@@ -2206,8 +2206,7 @@ Cli.commandPut_ = function(args, opts) {
             }
           }
           if (!resume) {
-            flags |= nassh.sftp.packets.OpenFlags.CREAT |
-                nassh.sftp.packets.OpenFlags.TRUNC;
+            flags |= OpenFlags.CREAT | OpenFlags.TRUNC;
           }
 
           // Start by opening the remote path.
@@ -2510,11 +2509,11 @@ Cli.commandStat_ = function(args) {
           attrs.uid,
           attrs.gid,
           `0${lib.f.zpad(attrs.permissions.toString(8), 7)} ` +
-          `(${nassh.sftp.packets.bitsToUnixModeLine(attrs.permissions)})`,
+          `(${bitsToUnixModeLine(attrs.permissions)})`,
           `${attrs.lastAccessed} (` +
-          `${nassh.sftp.packets.epochToLocal(attrs.lastAccessed)})`,
+          `${epochToLocal(attrs.lastAccessed)})`,
           `${attrs.lastModified} (` +
-          `${nassh.sftp.packets.epochToLocal(attrs.lastModified)})`,
+          `${epochToLocal(attrs.lastModified)})`,
         ]));
         if (attrs.extensions) {
           this.io.println(nassh.msg('NASFTP_CMD_STAT_EXTENSIONS_HEADER'));
@@ -2559,9 +2558,8 @@ Cli.commandTruncate_ = function(args, opts) {
   // Create a chain of promises by processing each path in serial.
   return args.reduce((chain, path) => chain.then(() => {
     // Clobber whatever file might already exist.
-    const flags = nassh.sftp.packets.OpenFlags.CREAT |
-      (size ? nassh.sftp.packets.OpenFlags.WRITE :
-              nassh.sftp.packets.OpenFlags.TRUNC);
+    const flags = OpenFlags.CREAT |
+      (size ? OpenFlags.WRITE : OpenFlags.TRUNC);
 
     // Final promise series sends open(trunc)+close packets.
     let writeHandle;
@@ -2573,7 +2571,7 @@ Cli.commandTruncate_ = function(args, opts) {
         // Otherwise, the open itself truncated down to 0 bytes already.
         if (size) {
           const attrs = {
-            flags: nassh.sftp.packets.FileXferAttrs.SIZE,
+            flags: FileXferAttrs.SIZE,
             size,
           };
           return this.client.setFileHandleStatus(handle, attrs);

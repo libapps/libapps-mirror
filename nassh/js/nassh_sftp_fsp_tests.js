@@ -14,6 +14,10 @@ import {
   onReadDirectoryRequested, onReadFileRequested, onTruncateRequested,
   onUnmountRequested, onWriteFileRequested, providerMethods, sanitizeMetadata,
 } from './nassh_sftp_fsp.js';
+import {Packet} from './nassh_sftp_packet.js';
+import {
+  File, FileAttrs, OpenFlags, StatusCodes, StatusPacket,
+} from './nassh_sftp_packet_types.js';
 import {StatusError} from './nassh_sftp_status.js';
 
 /**
@@ -56,7 +60,7 @@ MockSftpClient.prototype.automock_ = function(method, ...args) {
     }
 
     throw new StatusError({
-      'code': nassh.sftp.packets.StatusCodes.NO_SUCH_FILE,
+      'code': StatusCodes.NO_SUCH_FILE,
       'message': 'no mock data',
     }, method);
   });
@@ -75,7 +79,7 @@ beforeEach(function() {
     },
   };
 
-  const packet = new nassh.sftp.Packet([
+  const packet = new Packet([
       // 32-bit request id.
       0x01, 0x02, 0x03, 0x04,
       // 32-bit code.
@@ -85,7 +89,7 @@ beforeEach(function() {
       // Language string.
       0x00, 0x00, 0x00, 0x00,
   ]);
-  this.eofPacket = new nassh.sftp.packets.StatusPacket(packet);
+  this.eofPacket = new StatusPacket(packet);
 });
 
 /**
@@ -153,23 +157,23 @@ it('fsp-instance-check', function() {
  * Verify the sanitizeMetadata utility function.
  */
 it('fsp-sanitize-metadata', function() {
-  // Reduced mock for nassh.sftp.packets.getFileAttrs like fileStatus returns.
-  const /** @type {!nassh.sftp.FileAttrs} */ fileStat = {
+  // Reduced mock for getFileAttrs like fileStatus returns.
+  const /** @type {!FileAttrs} */ fileStat = {
     flags: 0,
     size: 1024,
     isDirectory: false,
     lastModified: 100,
   };
-  const /** @type {!nassh.sftp.FileAttrs} */ dirStat = {
+  const /** @type {!FileAttrs} */ dirStat = {
     flags: 0,
     size: 0,
     isDirectory: true,
     lastModified: 200,
   };
   // Mock for directory entry like readDirectory returns.
-  const fileEntry = /** @type {!nassh.sftp.File} */ (
+  const fileEntry = /** @type {!File} */ (
       Object.assign({filename: 'foo.txt'}, fileStat));
-  const dirEntry = /** @type {!nassh.sftp.File} */ (
+  const dirEntry = /** @type {!File} */ (
       Object.assign({filename: 'dir'}, dirStat));
 
   let ret;
@@ -474,7 +478,7 @@ it('fsp-onOpenFile-read', function(done) {
 
   this.client.openFile.return = (path, pflags) => {
     assert.equal('./foo', path);
-    assert.equal(nassh.sftp.packets.OpenFlags.READ, pflags);
+    assert.equal(OpenFlags.READ, pflags);
     return 'handle';
   };
   onOpenFileRequested(
@@ -499,7 +503,7 @@ it('fsp-onOpenFile-write', function(done) {
 
   this.client.openFile.return = (path, pflags) => {
     assert.equal('./foo', path);
-    assert.equal(nassh.sftp.packets.OpenFlags.WRITE, pflags);
+    assert.equal(OpenFlags.WRITE, pflags);
     return 'handle';
   };
   onOpenFileRequested(
@@ -538,8 +542,7 @@ it('fsp-onCreateFile-found', function(done) {
 
   this.client.openFile.return = (path, pflags) => {
     assert.equal('./foo', path);
-    assert.equal(nassh.sftp.packets.OpenFlags.CREAT |
-                 nassh.sftp.packets.OpenFlags.EXCL, pflags);
+    assert.equal(OpenFlags.CREAT | OpenFlags.EXCL, pflags);
     return 'handle';
   };
   onCreateFileRequested(
@@ -682,8 +685,7 @@ it('fsp-onTruncate-found', function(done) {
 
   this.client.openFile.return = (path, pflags) => {
     assert.equal('./foo', path);
-    assert.equal(nassh.sftp.packets.OpenFlags.CREAT |
-                 nassh.sftp.packets.OpenFlags.TRUNC, pflags);
+    assert.equal(OpenFlags.CREAT | OpenFlags.TRUNC, pflags);
     return 'handle';
   };
   this.client.closeFile.return = (handle) => {

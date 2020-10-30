@@ -8,6 +8,7 @@
 
 import {Cli, ProgressBar} from './nasftp_cli.js';
 import {MockSftpClient} from './nassh_sftp_fsp_tests.js';
+import {FileAttrs} from './nassh_sftp_packet_types.js';
 
 describe('nasftp_cli_tests.js', () => {
 
@@ -460,8 +461,8 @@ it('nasftp-complete-options', function() {
 /**
  * Helper to mock remote path completion.
  *
- * @param {!Array<!nassh.sftp.FileAttrs>=} entries The remote paths.  If none
- *     are specified, a default set will be used.
+ * @param {!Array<!FileAttrs>=} entries The remote paths.  If none are
+ *     specified, a default set will be used.
  * @this {Cli}
  */
 function mockCompleteRemotePath(entries = undefined) {

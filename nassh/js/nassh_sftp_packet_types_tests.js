@@ -2,11 +2,17 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview SFTP low level protocol tests.
  */
+
+import {Packet} from './nassh_sftp_packet.js';
+import {
+  AttrsPacket, bitsToUnixModeLine, DataPacket, epochToLocal,
+  ExtendedReplyPacket, FileXferAttrs, getFileAttrs, HandlePacket, LimitsPacket,
+  NamePacket, PermissionBits, setFileAttrs, StatusPacket, UnknownPacket,
+  ValidExtension, VersionPacket,
+} from './nassh_sftp_packet_types.js';
 
 describe('nassh_sftp_packet_types_tests.js', () => {
 
@@ -15,7 +21,7 @@ describe('nassh_sftp_packet_types_tests.js', () => {
  */
 it('sftpStatusPacket', () => {
   const te = new TextEncoder();
-  const dataPacket = new nassh.sftp.Packet([
+  const dataPacket = new Packet([
       // 32-bit request id.
       0x01, 0x02, 0x03, 0x04,
       // 32-bit code.
@@ -26,7 +32,7 @@ it('sftpStatusPacket', () => {
       0x00, 0x00, 0x00, 0x00,
   ]);
 
-  const packet = new nassh.sftp.packets.StatusPacket(dataPacket);
+  const packet = new StatusPacket(dataPacket);
   assert.isTrue(dataPacket.eod());
 
   assert.equal(0x01020304, packet.requestId);
@@ -40,14 +46,14 @@ it('sftpStatusPacket', () => {
  */
 it('sftpDataPacket', () => {
   const te = new TextEncoder();
-  const dataPacket = new nassh.sftp.Packet([
+  const dataPacket = new Packet([
       // 32-bit request id.
       0x01, 0x02, 0x03, 0x04,
       // Data string.
       0x00, 0x00, 0x00, 0x04, ...te.encode('data'),
   ]);
 
-  const packet = new nassh.sftp.packets.DataPacket(dataPacket);
+  const packet = new DataPacket(dataPacket);
   assert.isTrue(dataPacket.eod());
 
   assert.equal(0x01020304, packet.requestId);
@@ -59,14 +65,14 @@ it('sftpDataPacket', () => {
  */
 it('sftpHandlePacket', () => {
   const te = new TextEncoder();
-  const dataPacket = new nassh.sftp.Packet([
+  const dataPacket = new Packet([
       // 32-bit request id.
       0x01, 0x02, 0x03, 0x04,
       // Handle string.
       0x00, 0x00, 0x00, 0x04, ...te.encode('data'),
   ]);
 
-  const packet = new nassh.sftp.packets.HandlePacket(dataPacket);
+  const packet = new HandlePacket(dataPacket);
   assert.isTrue(dataPacket.eod());
 
   assert.equal(0x01020304, packet.requestId);
@@ -77,14 +83,14 @@ it('sftpHandlePacket', () => {
  * Verify empty NamePacket deserialization.
  */
 it('sftpNamePacketEmpty', () => {
-  const dataPacket = new nassh.sftp.Packet([
+  const dataPacket = new Packet([
       // 32-bit request id.
       0x01, 0x02, 0x03, 0x04,
       // 32-bit file count.
       0x00, 0x00, 0x00, 0x00,
   ]);
 
-  const packet = new nassh.sftp.packets.NamePacket(dataPacket);
+  const packet = new NamePacket(dataPacket);
   assert.isTrue(dataPacket.eod());
 
   assert.equal(0x01020304, packet.requestId);
@@ -97,7 +103,7 @@ it('sftpNamePacketEmpty', () => {
  */
 it('sftpNamePacket', () => {
   const te = new TextEncoder();
-  const dataPacket = new nassh.sftp.Packet([
+  const dataPacket = new Packet([
       // 32-bit request id.
       0x01, 0x02, 0x03, 0x04,
       // 32-bit file count.
@@ -123,7 +129,7 @@ it('sftpNamePacket', () => {
       0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03,
   ]);
 
-  const packet = new nassh.sftp.packets.NamePacket(dataPacket);
+  const packet = new NamePacket(dataPacket);
   assert.isTrue(dataPacket.eod());
 
   assert.equal(0x01020304, packet.requestId);
@@ -156,14 +162,14 @@ it('sftpNamePacket', () => {
  * This test is a bit light as we unit test getFileAttrs directly.
  */
 it('sftpAttrsPacket', () => {
-  const dataPacket = new nassh.sftp.Packet([
+  const dataPacket = new Packet([
       // 32-bit request id.
       0x01, 0x02, 0x03, 0x04,
       // Attrs: no bits sent.
       0x00, 0x00, 0x00, 0x00,
   ]);
 
-  const packet = new nassh.sftp.packets.AttrsPacket(dataPacket);
+  const packet = new AttrsPacket(dataPacket);
   assert.isTrue(dataPacket.eod());
 
   // Check empty attrs.
@@ -175,7 +181,7 @@ it('sftpAttrsPacket', () => {
  * Verify basic LimitsPacket deserialization.
  */
 it('sftpLimitsPacket', () => {
-  const dataPacket = new nassh.sftp.Packet([
+  const dataPacket = new Packet([
       // 32-bit request id.
       0x01, 0x02, 0x03, 0x04,
       // 64-bit max packet length.
@@ -188,8 +194,8 @@ it('sftpLimitsPacket', () => {
       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0xfb,
   ]);
 
-  const extPacket = new nassh.sftp.packets.ExtendedReplyPacket(dataPacket);
-  const packet = new nassh.sftp.packets.LimitsPacket(extPacket);
+  const extPacket = new ExtendedReplyPacket(dataPacket);
+  const packet = new LimitsPacket(extPacket);
 
   // Check the fields.
   assert.equal(0x01020304, packet.requestId);
@@ -203,12 +209,12 @@ it('sftpLimitsPacket', () => {
  * Verify basic VersionPacket deserialization.
  */
 it('sftpVersionPacket', () => {
-  const dataPacket = new nassh.sftp.Packet([
+  const dataPacket = new Packet([
       // 32-bit version.
       0x00, 0x00, 0x00, 0x03,
   ]);
 
-  const packet = new nassh.sftp.packets.VersionPacket(dataPacket);
+  const packet = new VersionPacket(dataPacket);
   assert.isTrue(dataPacket.eod());
 
   // Check the fields.
@@ -224,7 +230,7 @@ it('sftpVersionPacket', () => {
  */
 it('sftpVersionPacketExt', () => {
   const te = new TextEncoder();
-  const dataPacket = new nassh.sftp.Packet([
+  const dataPacket = new Packet([
       // 32-bit version.
       0x00, 0x00, 0x00, 0x06,
       // Extension 1: name.
@@ -241,7 +247,7 @@ it('sftpVersionPacketExt', () => {
       0x00, 0x00, 0x00, 0x04, ...te.encode('blah'),
   ]);
 
-  const packet = new nassh.sftp.packets.VersionPacket(dataPacket);
+  const packet = new VersionPacket(dataPacket);
   assert.isTrue(dataPacket.eod());
 
   // Check the fields.
@@ -272,7 +278,7 @@ it('sftpValidExtension', () => {
     'na\x7fme',
   ];
   invalidExtensions.forEach((ext) => {
-    assert.isFalse(nassh.sftp.packets.ValidExtension(ext), ext);
+    assert.isFalse(ValidExtension(ext), ext);
   });
 
   const validExtensions = [
@@ -285,7 +291,7 @@ it('sftpValidExtension', () => {
     'x@blah.blah.www.org',
   ];
   validExtensions.forEach((ext) => {
-    assert.isTrue(nassh.sftp.packets.ValidExtension(ext), ext);
+    assert.isTrue(ValidExtension(ext), ext);
   });
 });
 
@@ -294,14 +300,14 @@ it('sftpValidExtension', () => {
  */
 it('sftpUnknownPacket', () => {
   const te = new TextEncoder();
-  const dataPacket = new nassh.sftp.Packet([
+  const dataPacket = new Packet([
       // 32-bit request id.
       0x01, 0x02, 0x03, 0x04,
       // Whatever is left.
       ...te.encode('abc'),
   ]);
 
-  const packet = new nassh.sftp.packets.UnknownPacket(dataPacket);
+  const packet = new UnknownPacket(dataPacket);
   assert.isTrue(dataPacket.eod());
 
   assert.equal(0x01020304, packet.requestId);
@@ -318,13 +324,13 @@ it('sftpBitsToUnixModeLine', () => {
     // All mode bits.
     ['?rwsrwsrwt', 0o7777],
     // Check the file types.
-    ['c---------', 0o0000 | nassh.sftp.packets.PermissionBits.IFCHR],
-    ['d---------', 0o0000 | nassh.sftp.packets.PermissionBits.IFDIR],
-    ['b---------', 0o0000 | nassh.sftp.packets.PermissionBits.IFBLK],
-    ['----------', 0o0000 | nassh.sftp.packets.PermissionBits.IFREG],
-    ['p---------', 0o0000 | nassh.sftp.packets.PermissionBits.IFIFO],
-    ['l---------', 0o0000 | nassh.sftp.packets.PermissionBits.IFLNK],
-    ['s---------', 0o0000 | nassh.sftp.packets.PermissionBits.IFSOCK],
+    ['c---------', 0o0000 | PermissionBits.IFCHR],
+    ['d---------', 0o0000 | PermissionBits.IFDIR],
+    ['b---------', 0o0000 | PermissionBits.IFBLK],
+    ['----------', 0o0000 | PermissionBits.IFREG],
+    ['p---------', 0o0000 | PermissionBits.IFIFO],
+    ['l---------', 0o0000 | PermissionBits.IFLNK],
+    ['s---------', 0o0000 | PermissionBits.IFSOCK],
     // Check the extended bits.
     ['?--s--x--x', 0o4111],
     ['?--x--s--x', 0o2111],
@@ -336,7 +342,7 @@ it('sftpBitsToUnixModeLine', () => {
     ['?rw-r--r--', 0o0644],
   ];
   data.forEach(([expected, mode]) => {
-    assert.equal(expected, nassh.sftp.packets.bitsToUnixModeLine(mode));
+    assert.equal(expected, bitsToUnixModeLine(mode));
   });
 });
 
@@ -345,8 +351,8 @@ it('sftpBitsToUnixModeLine', () => {
  */
 it('sftpGetFileAttrs', () => {
   // Start with a simple packet.
-  let packet = new nassh.sftp.Packet([0x00, 0x00, 0x00, 0x00]);
-  let attrs = nassh.sftp.packets.getFileAttrs(packet);
+  let packet = new Packet([0x00, 0x00, 0x00, 0x00]);
+  let attrs = getFileAttrs(packet);
   assert.isTrue(packet.eod());
   assert.equal(0, attrs.flags);
   assert.isUndefined(attrs.size);
@@ -357,53 +363,53 @@ it('sftpGetFileAttrs', () => {
   assert.isUndefined(attrs.lastModified);
 
   // Check size handling.
-  packet = new nassh.sftp.Packet(
+  packet = new Packet(
       [0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x12, 0x34, 0x56, 0x78]);
-  attrs = nassh.sftp.packets.getFileAttrs(packet);
+  attrs = getFileAttrs(packet);
   assert.isTrue(packet.eod());
-  assert.equal(nassh.sftp.packets.FileXferAttrs.SIZE, attrs.flags);
+  assert.equal(FileXferAttrs.SIZE, attrs.flags);
   assert.equal(0x12345678, attrs.size);
 
   // Check uid/gid handling.
-  packet = new nassh.sftp.Packet(
+  packet = new Packet(
       [0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x03, 0xe8, 0x00, 0x00, 0x13, 0x88]);
-  attrs = nassh.sftp.packets.getFileAttrs(packet);
+  attrs = getFileAttrs(packet);
   assert.isTrue(packet.eod());
-  assert.equal(nassh.sftp.packets.FileXferAttrs.UIDGID, attrs.flags);
+  assert.equal(FileXferAttrs.UIDGID, attrs.flags);
   assert.equal(1000, attrs.uid);
   assert.equal(5000, attrs.gid);
 
   // Check permissions handling.
-  packet = new nassh.sftp.Packet(
+  packet = new Packet(
       [0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x0f, 0xff]);
-  attrs = nassh.sftp.packets.getFileAttrs(packet);
+  attrs = getFileAttrs(packet);
   assert.isTrue(packet.eod());
-  assert.equal(nassh.sftp.packets.FileXferAttrs.PERMISSIONS, attrs.flags);
+  assert.equal(FileXferAttrs.PERMISSIONS, attrs.flags);
   assert.equal(0o7777, attrs.permissions);
 
   // Check time handling.
-  packet = new nassh.sftp.Packet(
+  packet = new Packet(
       [0x00, 0x00, 0x00, 0x08, 0x3b, 0x9a, 0xca, 0x00, 0x59, 0x68, 0x2f, 0x00]);
-  attrs = nassh.sftp.packets.getFileAttrs(packet);
+  attrs = getFileAttrs(packet);
   assert.isTrue(packet.eod());
-  assert.equal(nassh.sftp.packets.FileXferAttrs.ACMODTIME, attrs.flags);
+  assert.equal(FileXferAttrs.ACMODTIME, attrs.flags);
   assert.equal(1000000000, attrs.lastAccessed);
   assert.equal(1500000000, attrs.lastModified);
 
   // Now altogether!
-  packet = new nassh.sftp.Packet([
+  packet = new Packet([
       0x00, 0x00, 0x00, 0x0f,
       0x00, 0x00, 0x00, 0x00, 0x12, 0x34, 0x56, 0x78,
       0x00, 0x00, 0x03, 0xe8, 0x00, 0x00, 0x13, 0x88,
       0x00, 0x00, 0x0f, 0xff,
       0x3b, 0x9a, 0xca, 0x00, 0x59, 0x68, 0x2f, 0x00,
   ]);
-  attrs = nassh.sftp.packets.getFileAttrs(packet);
+  attrs = getFileAttrs(packet);
   assert.isTrue(packet.eod());
-  assert.equal(nassh.sftp.packets.FileXferAttrs.SIZE |
-               nassh.sftp.packets.FileXferAttrs.UIDGID |
-               nassh.sftp.packets.FileXferAttrs.PERMISSIONS |
-               nassh.sftp.packets.FileXferAttrs.ACMODTIME, attrs.flags);
+  assert.equal(FileXferAttrs.SIZE |
+               FileXferAttrs.UIDGID |
+               FileXferAttrs.PERMISSIONS |
+               FileXferAttrs.ACMODTIME, attrs.flags);
   assert.equal(0x12345678, attrs.size);
   assert.equal(1000, attrs.uid);
   assert.equal(5000, attrs.gid);
@@ -417,16 +423,16 @@ it('sftpGetFileAttrs', () => {
  */
 it('sftpSetFileAttrs', () => {
   // Start with a simple packet.
-  let packet = new nassh.sftp.Packet();
-  nassh.sftp.packets.setFileAttrs(packet, {flags: 0});
+  let packet = new Packet();
+  setFileAttrs(packet, {flags: 0});
   assert.equal(4, packet.getLength());
   assert.deepStrictEqual(new Uint8Array([0x00, 0x00, 0x00, 0x00]),
                          packet.toByteArray());
 
   // Check size handling.
-  packet = new nassh.sftp.Packet();
-  nassh.sftp.packets.setFileAttrs(packet, {
-    flags: nassh.sftp.packets.FileXferAttrs.SIZE,
+  packet = new Packet();
+  setFileAttrs(packet, {
+    flags: FileXferAttrs.SIZE,
     size: 0x12345678,
   });
   assert.equal(12, packet.getLength());
@@ -436,9 +442,9 @@ it('sftpSetFileAttrs', () => {
       packet.toByteArray());
 
   // Check uid/gid handling.
-  packet = new nassh.sftp.Packet();
-  nassh.sftp.packets.setFileAttrs(packet, {
-    flags: nassh.sftp.packets.FileXferAttrs.UIDGID,
+  packet = new Packet();
+  setFileAttrs(packet, {
+    flags: FileXferAttrs.UIDGID,
     uid: 1000,
     gid: 5000,
   });
@@ -449,9 +455,9 @@ it('sftpSetFileAttrs', () => {
       packet.toByteArray());
 
   // Check permissions handling.
-  packet = new nassh.sftp.Packet();
-  nassh.sftp.packets.setFileAttrs(packet, {
-    flags: nassh.sftp.packets.FileXferAttrs.PERMISSIONS,
+  packet = new Packet();
+  setFileAttrs(packet, {
+    flags: FileXferAttrs.PERMISSIONS,
     permissions: 0o7777,
   });
   assert.equal(8, packet.getLength());
@@ -460,9 +466,9 @@ it('sftpSetFileAttrs', () => {
       packet.toByteArray());
 
   // Check time handling.
-  packet = new nassh.sftp.Packet();
-  nassh.sftp.packets.setFileAttrs(packet, {
-    flags: nassh.sftp.packets.FileXferAttrs.ACMODTIME,
+  packet = new Packet();
+  setFileAttrs(packet, {
+    flags: FileXferAttrs.ACMODTIME,
     lastAccessed: 1000000000,
     lastModified: 1500000000,
   });
@@ -473,12 +479,12 @@ it('sftpSetFileAttrs', () => {
       packet.toByteArray());
 
   // Now altogether!
-  packet = new nassh.sftp.Packet();
-  nassh.sftp.packets.setFileAttrs(packet, {
-    flags: nassh.sftp.packets.FileXferAttrs.SIZE |
-           nassh.sftp.packets.FileXferAttrs.UIDGID |
-           nassh.sftp.packets.FileXferAttrs.PERMISSIONS |
-           nassh.sftp.packets.FileXferAttrs.ACMODTIME,
+  packet = new Packet();
+  setFileAttrs(packet, {
+    flags: FileXferAttrs.SIZE |
+           FileXferAttrs.UIDGID |
+           FileXferAttrs.PERMISSIONS |
+           FileXferAttrs.ACMODTIME,
     size: 0x12345678,
     uid: 1000,
     gid: 5000,
@@ -506,8 +512,7 @@ it('sftpEpochToLocal', () => {
     ['Fri, 14 Jul 2017 02:40:00 GMT', 1500000000],
   ];
   data.forEach(([expected, seconds]) => {
-    assert.equal(expected,
-                 nassh.sftp.packets.epochToLocal(seconds).toUTCString());
+    assert.equal(expected, epochToLocal(seconds).toUTCString());
   });
 });
 

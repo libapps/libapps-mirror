@@ -2,16 +2,47 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
+import {Packet} from './nassh_sftp_packet.js';
 
-nassh.sftp.packets = {};
+/**
+ * @typedef {{
+ *     flags: number,
+ *     size: (number|undefined),
+ *     uid: (number|undefined),
+ *     gid: (number|undefined),
+ *     permissions: (number|undefined),
+ *     isCharacterDevice: (boolean|undefined),
+ *     isDirectory: (boolean|undefined),
+ *     isBlockDevice: (boolean|undefined),
+ *     isRegularFile: (boolean|undefined),
+ *     isFifo: (boolean|undefined),
+ *     isLink: (boolean|undefined),
+ *     isSocket: (boolean|undefined),
+ *     lastAccessed: (number|undefined),
+ *     lastModified: (number|undefined),
+ *     extendedCount: (number|undefined),
+ *     extensions: (!Array<{type: string, data: string}>|undefined),
+ * }}
+ */
+export const FileAttrs = {};
+
+/**
+ * @typedef {{
+ *     filename: string,
+ *     longFilename: string,
+ * }}
+ */
+export const File = {};
+
+/** @typedef {string} */
+export const FileHandle = {};
 
 /**
  * Possible status code values.
  *
  * @enum {number}
  */
-nassh.sftp.packets.StatusCodes = {
+export const StatusCodes = {
   OK:                0,
   EOF:               1,
   NO_SUCH_FILE:      2,
@@ -27,80 +58,80 @@ nassh.sftp.packets.StatusCodes = {
  * SFTP Status Packet containing the request id, status codes, status message
  * and language.
  *
- * @param {!nassh.sftp.Packet} packet
+ * @param {!Packet} packet
  * @constructor
- * @extends {nassh.sftp.Packet}
+ * @extends {Packet}
  */
-nassh.sftp.packets.StatusPacket = function(packet) {
+export function StatusPacket(packet) {
   this.requestId = packet.getUint32();
   this.code = packet.getUint32();
   this.message = packet.getString();
   this.lang = packet.getString();
-};
+}
 
 /**
  * SFTP Data Packet containing the request id and associated data.
  *
- * @param {!nassh.sftp.Packet} packet
+ * @param {!Packet} packet
  * @constructor
- * @extends {nassh.sftp.Packet}
+ * @extends {Packet}
  */
-nassh.sftp.packets.DataPacket = function(packet) {
+export function DataPacket(packet) {
   this.requestId = packet.getUint32();
   this.length = packet.getUint32();
   this.data = packet.getData(this.length);
-};
+}
 
 /**
  * SFTP Handle Packet containing the request id and a file handle.
  *
- * @param {!nassh.sftp.Packet} packet
+ * @param {!Packet} packet
  * @constructor
- * @extends {nassh.sftp.Packet}
+ * @extends {Packet}
  */
-nassh.sftp.packets.HandlePacket = function(packet) {
+export function HandlePacket(packet) {
   this.requestId = packet.getUint32();
   this.handle = packet.getString();
-};
+}
 
 /**
  * SFTP Name Packet containing the request id, file count and an array of file
  * attributes.
  *
- * @param {!nassh.sftp.Packet} packet
+ * @param {!Packet} packet
  * @constructor
- * @extends {nassh.sftp.Packet}
+ * @extends {Packet}
  */
-nassh.sftp.packets.NamePacket = function(packet) {
+export function NamePacket(packet) {
   this.requestId = packet.getUint32();
   this.fileCount = packet.getUint32();
-  /* @type {!Array<!nassh.sftp.File>} */
+  /* @type {!Array<!File|!FileAttrs>} */
   this.files = [];
 
   for (let i = 0; i < this.fileCount; i++) {
     const fileName = packet.getUtf8String();
     const longFileName = packet.getUtf8String();
 
-    const fileData = nassh.sftp.packets.getFileAttrs(packet);
+    const fileData = getFileAttrs(packet);
 
     fileData.filename = fileName;
     fileData.longFilename = longFileName;
 
     this.files.push(fileData);
   }
-};
+}
 
 /**
  * SFTP Attrs Packet containing the request id and a file's attributes.
  *
- * @param {!nassh.sftp.Packet} packet
+ * @param {!Packet} packet
  * @constructor
- * @extends {nassh.sftp.Packet}
+ * @extends {Packet}
  */
-nassh.sftp.packets.AttrsPacket = function(packet) {
+export function AttrsPacket(packet) {
   this.requestId = packet.getUint32();
-  this.attrs = nassh.sftp.packets.getFileAttrs(packet);
-};
+  this.attrs = getFileAttrs(packet);
+}
 
 /**
  * SFTP Extended Reply Packet.
@@ -108,23 +139,23 @@ nassh.sftp.packets.AttrsPacket = function(packet) {
  * Since extended replies need specific parsers, we just save a reference to the
  * original packet and delay parsing to whatever call made the extended request.
  *
- * @param {!nassh.sftp.Packet} packet The source packet to read from.
+ * @param {!Packet} packet The source packet to read from.
  * @constructor
- * @extends {nassh.sftp.Packet}
+ * @extends {Packet}
  */
-nassh.sftp.packets.ExtendedReplyPacket = function(packet) {
+export function ExtendedReplyPacket(packet) {
   this.requestId = packet.getUint32();
   this.rawPacket = packet;
-};
+}
 
 /**
  * SFTP response to statvfs@openssh.com packets.
  *
- * @param {!nassh.sftp.packets.ExtendedReplyPacket} packet The extended reply.
+ * @param {!ExtendedReplyPacket} packet The extended reply.
  * @constructor
- * @extends {nassh.sftp.Packet}
+ * @extends {Packet}
  */
-nassh.sftp.packets.DiskFreePacket = function(packet) {
+export function DiskFreePacket(packet) {
   const p = packet.rawPacket;
   this.requestId = packet.requestId;
   this.bsize = p.getUint64();
@@ -142,23 +173,23 @@ nassh.sftp.packets.DiskFreePacket = function(packet) {
 
   this.st_rdonly = !!(this.flag & 0x1);
   this.st_nosuid = !!(this.flag & 0x2);
-};
+}
 
 /**
  * SFTP response to limits@openssh.com packets.
  *
- * @param {!nassh.sftp.packets.ExtendedReplyPacket} packet The extended reply.
+ * @param {!ExtendedReplyPacket} packet The extended reply.
  * @constructor
- * @extends {nassh.sftp.Packet}
+ * @extends {Packet}
  */
-nassh.sftp.packets.LimitsPacket = function(packet) {
+export function LimitsPacket(packet) {
   const p = packet.rawPacket;
   this.requestId = packet.requestId;
   this.maxPacketLength = p.getUint64();
   this.maxReadLength = p.getUint64();
   this.maxWriteLength = p.getUint64();
   this.maxOpenHandles = p.getUint64();
-};
+}
 
 /**
  * Make sure the name conforms to the specification.
@@ -176,7 +207,7 @@ nassh.sftp.packets.LimitsPacket = function(packet) {
  * @param {string} ext The protocol name to check.
  * @return {boolean} True if the name is valid.
  */
-nassh.sftp.packets.ValidExtension = function(ext) {
+export function ValidExtension(ext) {
   // The RFC is a little ambiguous, but it uses "name" to refer to the entire
   // extension name, not just sub-components (when using the @ form).
   if (ext.length > 64) {
@@ -207,16 +238,16 @@ nassh.sftp.packets.ValidExtension = function(ext) {
   }
 
   return true;
-};
+}
 
 /**
  * SFTP Version Packet containing the version and possible extensions.
  *
- * @param {!nassh.sftp.Packet} packet
+ * @param {!Packet} packet
  * @constructor
- * @extends {nassh.sftp.Packet}
+ * @extends {Packet}
  */
-nassh.sftp.packets.VersionPacket = function(packet) {
+export function VersionPacket(packet) {
   this.requestId = 'init';
   this.version = packet.getUint32();
 
@@ -226,31 +257,31 @@ nassh.sftp.packets.VersionPacket = function(packet) {
     const name = packet.getString();
     const data = packet.getString();
     // The SFTP RFC says we should silently ignore unknown/invalid entries.
-    if (nassh.sftp.packets.ValidExtension(name)) {
+    if (ValidExtension(name)) {
       this.extensions[name] = data;
     }
   }
-};
+}
 
 /**
  * Unknown Packet containing the request id (potentially garbage) and associated
  * data (also potentially garbage).
  *
- * @param {!nassh.sftp.Packet} packet
+ * @param {!Packet} packet
  * @constructor
- * @extends {nassh.sftp.Packet}
+ * @extends {Packet}
  */
-nassh.sftp.packets.UnknownPacket = function(packet) {
+export function UnknownPacket(packet) {
   this.requestId = packet.getUint32();
   this.data = packet.getData();
-};
+}
 
 /**
  * Possible SFTP File Transfer flags attributes (SSH_FILEXFER_ATTR_XXX).
  *
  * @enum {number}
  */
-nassh.sftp.packets.FileXferAttrs = {
+export const FileXferAttrs = {
   SIZE:        0x00000001,
   UIDGID:      0x00000002,
   PERMISSIONS: 0x00000004,
@@ -268,7 +299,7 @@ nassh.sftp.packets.FileXferAttrs = {
  * start with S_Ixxx).  It does not define the bit values for file types
  * (ones that start with S_IFxxx).  We use "common" Linux ones for that.
  */
-nassh.sftp.packets.PermissionBits = {
+export const PermissionBits = {
   SMODE:  0o007777,  // Mask for file mode bits.
   ISVTX:  0o001000,  // Sticky directory.
   ISGID:  0o002000,  // Setgid.
@@ -294,19 +325,19 @@ nassh.sftp.packets.PermissionBits = {
  * @param {number=} bits The permission bits to convert.
  * @return {string} The short `ls -l`-like summary.
  */
-nassh.sftp.packets.bitsToUnixModeLine = function(bits = 0) {
+export function bitsToUnixModeLine(bits = 0) {
   let ret = '';
 
   // First handle the file type.
-  const ifmt = bits & nassh.sftp.packets.PermissionBits.IFMT;
+  const ifmt = bits & PermissionBits.IFMT;
   const fmtMap = {
-    [nassh.sftp.packets.PermissionBits.IFCHR]: 'c',
-    [nassh.sftp.packets.PermissionBits.IFDIR]: 'd',
-    [nassh.sftp.packets.PermissionBits.IFBLK]: 'b',
-    [nassh.sftp.packets.PermissionBits.IFREG]: '-',
-    [nassh.sftp.packets.PermissionBits.IFIFO]: 'p',
-    [nassh.sftp.packets.PermissionBits.IFLNK]: 'l',
-    [nassh.sftp.packets.PermissionBits.IFSOCK]: 's',
+    [PermissionBits.IFCHR]: 'c',
+    [PermissionBits.IFDIR]: 'd',
+    [PermissionBits.IFBLK]: 'b',
+    [PermissionBits.IFREG]: '-',
+    [PermissionBits.IFIFO]: 'p',
+    [PermissionBits.IFLNK]: 'l',
+    [PermissionBits.IFSOCK]: 's',
   };
   if (fmtMap[ifmt] === undefined) {
     ret += '?';
@@ -325,49 +356,46 @@ nassh.sftp.packets.bitsToUnixModeLine = function(bits = 0) {
            ((bits & 0o1) ? x : X);
   }
 
-  ret += threebits(bits >> 6, (bits & nassh.sftp.packets.PermissionBits.ISUID),
-                   's', 'S');
-  ret += threebits(bits >> 3, (bits & nassh.sftp.packets.PermissionBits.ISGID),
-                   's', 'S');
-  ret += threebits(bits >> 0, (bits & nassh.sftp.packets.PermissionBits.ISVTX),
-                   't', 'T');
+  ret += threebits(bits >> 6, (bits & PermissionBits.ISUID), 's', 'S');
+  ret += threebits(bits >> 3, (bits & PermissionBits.ISGID), 's', 'S');
+  ret += threebits(bits >> 0, (bits & PermissionBits.ISVTX), 't', 'T');
 
   return ret;
-};
+}
 
 /**
  * Given a packet (at the correct offset), will read one file's attributes.
  *
- * @param {!nassh.sftp.Packet} packet
- * @return {!nassh.sftp.FileAttrs}
+ * @param {!Packet} packet
+ * @return {!FileAttrs}
  */
-nassh.sftp.packets.getFileAttrs = function(packet) {
+export function getFileAttrs(packet) {
   const attrs = {};
 
   attrs.flags = packet.getUint32();
-  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.SIZE) {
+  if (attrs.flags & FileXferAttrs.SIZE) {
     attrs.size = packet.getUint64();
   }
-  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.UIDGID) {
+  if (attrs.flags & FileXferAttrs.UIDGID) {
     attrs.uid = packet.getUint32();
     attrs.gid = packet.getUint32();
   }
-  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.PERMISSIONS) {
+  if (attrs.flags & FileXferAttrs.PERMISSIONS) {
     attrs.permissions = packet.getUint32();
-    const fmt = attrs.permissions & nassh.sftp.packets.PermissionBits.IFMT;
-    attrs.isCharacterDevice = (fmt == nassh.sftp.packets.PermissionBits.IFCHR);
-    attrs.isDirectory = (fmt == nassh.sftp.packets.PermissionBits.IFDIR);
-    attrs.isBlockDevice = (fmt == nassh.sftp.packets.PermissionBits.IFBLK);
-    attrs.isRegularFile = (fmt == nassh.sftp.packets.PermissionBits.IFREG);
-    attrs.isFifo = (fmt == nassh.sftp.packets.PermissionBits.IFIFO);
-    attrs.isLink = (fmt == nassh.sftp.packets.PermissionBits.IFLNK);
-    attrs.isSocket = (fmt == nassh.sftp.packets.PermissionBits.IFSOCK);
+    const fmt = attrs.permissions & PermissionBits.IFMT;
+    attrs.isCharacterDevice = (fmt == PermissionBits.IFCHR);
+    attrs.isDirectory = (fmt == PermissionBits.IFDIR);
+    attrs.isBlockDevice = (fmt == PermissionBits.IFBLK);
+    attrs.isRegularFile = (fmt == PermissionBits.IFREG);
+    attrs.isFifo = (fmt == PermissionBits.IFIFO);
+    attrs.isLink = (fmt == PermissionBits.IFLNK);
+    attrs.isSocket = (fmt == PermissionBits.IFSOCK);
   }
-  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.ACMODTIME) {
+  if (attrs.flags & FileXferAttrs.ACMODTIME) {
     attrs.lastAccessed = packet.getUint32();
     attrs.lastModified = packet.getUint32();
   }
-  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.EXTENDED) {
+  if (attrs.flags & FileXferAttrs.EXTENDED) {
     const extendedCount = packet.getUint32();
     attrs.extendedCount = extendedCount;
     const extendedData = [];
@@ -383,38 +411,38 @@ nassh.sftp.packets.getFileAttrs = function(packet) {
   }
 
   return attrs;
-};
+}
 
 /**
  * Serialize an attribute object back into a packet.
  *
- * @param {!nassh.sftp.Packet} packet
- * @param {!nassh.sftp.FileAttrs} attrs
+ * @param {!Packet} packet
+ * @param {!FileAttrs} attrs
  */
-nassh.sftp.packets.setFileAttrs = function(packet, attrs) {
+export function setFileAttrs(packet, attrs) {
   // We only add fields we know how to handle.
   packet.setUint32(attrs.flags & (
-    nassh.sftp.packets.FileXferAttrs.SIZE |
-    nassh.sftp.packets.FileXferAttrs.UIDGID |
-    nassh.sftp.packets.FileXferAttrs.PERMISSIONS |
-    nassh.sftp.packets.FileXferAttrs.ACMODTIME
+    FileXferAttrs.SIZE |
+    FileXferAttrs.UIDGID |
+    FileXferAttrs.PERMISSIONS |
+    FileXferAttrs.ACMODTIME
   ));
 
-  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.SIZE) {
+  if (attrs.flags & FileXferAttrs.SIZE) {
     packet.setUint64(lib.notUndefined(attrs.size));
   }
-  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.UIDGID) {
+  if (attrs.flags & FileXferAttrs.UIDGID) {
     packet.setUint32(lib.notUndefined(attrs.uid));
     packet.setUint32(lib.notUndefined(attrs.gid));
   }
-  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.PERMISSIONS) {
+  if (attrs.flags & FileXferAttrs.PERMISSIONS) {
     packet.setUint32(lib.notUndefined(attrs.permissions));
   }
-  if (attrs.flags & nassh.sftp.packets.FileXferAttrs.ACMODTIME) {
+  if (attrs.flags & FileXferAttrs.ACMODTIME) {
     packet.setUint32(lib.notUndefined(attrs.lastAccessed));
     packet.setUint32(lib.notUndefined(attrs.lastModified));
   }
-};
+}
 
 /**
  * Convert UTC epoch timestamps that we get from the server to local time.
@@ -425,18 +453,18 @@ nassh.sftp.packets.setFileAttrs = function(packet, attrs) {
  * @param {number=} epoch The epoch time to convert.
  * @return {!Date} A standard Date object.
  */
-nassh.sftp.packets.epochToLocal = function(epoch = 0) {
+export function epochToLocal(epoch = 0) {
   const date = new Date(0);
   date.setUTCSeconds(epoch);
   return date;
-};
+}
 
 /**
  * Possible SFTP Request Packet types
  *
  * @enum {number}
  */
-nassh.sftp.packets.RequestPackets = {
+export const RequestPackets = {
   INIT:     1,
   VERSION:  2,
   OPEN:     3,
@@ -463,17 +491,17 @@ nassh.sftp.packets.RequestPackets = {
 /**
  * Possible SFTP Response Packet types
  *
- * @type {!Object<number, function(new:nassh.sftp.Packet, !nassh.sftp.Packet)>}
+ * @type {!Object<number, function(new:Packet, !Packet)>}
  * @const
  */
-nassh.sftp.packets.ResponsePackets = {
-  2: nassh.sftp.packets.VersionPacket,
-  101: nassh.sftp.packets.StatusPacket,
-  102: nassh.sftp.packets.HandlePacket,
-  103: nassh.sftp.packets.DataPacket,
-  104: nassh.sftp.packets.NamePacket,
-  105: nassh.sftp.packets.AttrsPacket,
-  201: nassh.sftp.packets.ExtendedReplyPacket,
+export const ResponsePackets = {
+  2: VersionPacket,
+  101: StatusPacket,
+  102: HandlePacket,
+  103: DataPacket,
+  104: NamePacket,
+  105: AttrsPacket,
+  201: ExtendedReplyPacket,
 };
 
 /**
@@ -481,7 +509,7 @@ nassh.sftp.packets.ResponsePackets = {
  *
  * @enum {number}
  */
-nassh.sftp.packets.OpenFlags = {
+export const OpenFlags = {
   READ:   0x00000001,
   WRITE:  0x00000002,
   APPEND: 0x00000004,
