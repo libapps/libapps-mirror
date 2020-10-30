@@ -2,30 +2,29 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview A dummy backend for the SSH agent from which all other backends
  * derive.
  */
 
-nassh.agent.backends = {};
+import {UserIO} from './nassh_agent.js';
+import {Identity} from './nassh_agent_message_types.js';
 
 /**
- * Base class for SSH agent backends compatible with nassh.agent.Agent.
+ * Base class for SSH agent backends compatible with Agent.
  *
- * @param {!nassh.agent.Agent.UserIO} userIO Used for user-facing terminal IO.
+ * @param {!UserIO} userIO Used for user-facing terminal IO.
  * @constructor
  */
-nassh.agent.Backend = function(userIO) {
+export function Backend(userIO) {
   /**
    * Reference to object with terminal IO functions.
    *
-   * @private {!nassh.agent.Agent.UserIO}
+   * @private {!UserIO}
    * @const
    */
   this.userIO_ = userIO;
-};
+}
 
 /**
  * The unique ID of the backend. This is used to reference the backend in the
@@ -33,17 +32,14 @@ nassh.agent.Backend = function(userIO) {
  *
  * @type {string}
  */
-nassh.agent.Backend.prototype.BACKEND_ID = 'stub';
+Backend.prototype.BACKEND_ID = 'stub';
 
 /**
  *  Generic response for request types that are not implemented.
  *
  * @const {!Error}
  */
-nassh.agent.Backend.ERR_NOT_IMPLEMENTED = new Error('not implemented');
-
-// Register the backend for use by nassh.agent.Agent.
-nassh.agent.registerBackend(nassh.agent.Backend);
+Backend.ERR_NOT_IMPLEMENTED = new Error('not implemented');
 
 /**
  * Called once when the client connects to the agent.
@@ -53,7 +49,7 @@ nassh.agent.registerBackend(nassh.agent.Backend);
  * @return {!Promise<void>} A resolving promise if the
  *     backend initialized successfully; a rejecting promise otherwise.
  */
-nassh.agent.Backend.prototype.ping = function() {
+Backend.prototype.ping = function() {
   return Promise.resolve();
 };
 
@@ -61,12 +57,12 @@ nassh.agent.Backend.prototype.ping = function() {
  * Called when the client sends an AGENTC_REQUEST_IDENTITIES request.
  *
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
- * @return {!Promise<!Array<!nassh.agent.messages.Identity>>} A promise
- *     resolving to an array of SSH identities; a rejecting promise with an
- *     error message if the request could not be handled.
+ * @return {!Promise<!Array<!Identity>>} A promise resolving to an array of SSH
+ *     identities; a rejecting promise with an error message if the request
+ *     could not be handled.
  */
-nassh.agent.Backend.prototype.requestIdentities = function() {
-  return Promise.reject(nassh.agent.Backend.ERR_NOT_IMPLEMENTED);
+Backend.prototype.requestIdentities = function() {
+  return Promise.reject(Backend.ERR_NOT_IMPLEMENTED);
 };
 
 /**
@@ -81,8 +77,8 @@ nassh.agent.Backend.prototype.requestIdentities = function() {
  *     the computed signature; a rejecting promise with an error message if the
  *     request could not be handled.
  */
-nassh.agent.Backend.prototype.signRequest = function(keyBlob, data, flags) {
-  return Promise.reject(nassh.agent.Backend.ERR_NOT_IMPLEMENTED);
+Backend.prototype.signRequest = function(keyBlob, data, flags) {
+  return Promise.reject(Backend.ERR_NOT_IMPLEMENTED);
 };
 
 /**
@@ -91,7 +87,7 @@ nassh.agent.Backend.prototype.signRequest = function(keyBlob, data, flags) {
  * @param {string} message The message to be shown. Note: The message should
  *     consist of a localized string obtained via nassh.msg.
  */
-nassh.agent.Backend.prototype.showMessage = function(message) {
+Backend.prototype.showMessage = function(message) {
   this.userIO_.showMessage(this.BACKEND_ID, message);
 };
 
@@ -105,6 +101,6 @@ nassh.agent.Backend.prototype.showMessage = function(message) {
  *     if the user confirms it by pressing enter; a rejecting promise if the
  *     user cancels the prompt by pressing ESC.
  */
-nassh.agent.Backend.prototype.promptUser = async function(promptMessage) {
+Backend.prototype.promptUser = async function(promptMessage) {
   return this.userIO_.promptUser(this.BACKEND_ID, promptMessage);
 };

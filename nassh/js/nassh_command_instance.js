@@ -8,6 +8,7 @@
  */
 
 import {punycode} from './nassh_deps.rollup.js';
+import {Agent} from './nassh_agent.js';
 import {Cli as nasftpCli} from './nasftp_cli.js';
 import {gcseRefreshCert, getGnubbyExtension} from './nassh_google.js';
 import {Plugin as NaclPlugin} from './nassh_plugin_nacl.js';
@@ -1228,8 +1229,7 @@ nassh.CommandInstance.prototype.connectToFinalize_ = async function(
     const enableForward = argv.arguments.lastIndexOf('-A');
     const disableForward = argv.arguments.lastIndexOf('-a');
     const forwardAgent = enableForward > disableForward;
-    this.authAgent_ = new nassh.agent.Agent(
-        backendIDs, this.io.terminal_, forwardAgent);
+    this.authAgent_ = new Agent(backendIDs, this.io.terminal_, forwardAgent);
   }
 
   this.initPlugin_(argv, async () => {

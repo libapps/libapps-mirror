@@ -2,33 +2,37 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview An SSH agent that aggregates responses from multiple
  * dynamically loaded backends.
  */
 
+import {Backend} from './nassh_agent_backend.js';
+import {GSC} from './nassh_agent_backend_gsc.js';
+import {Message} from './nassh_agent_message.js';
+import {FAILURE, MessageNumbers,
+        writeMessage} from './nassh_agent_message_types.js';
+
 /**
- * Map backend IDs to the respective classes inheriting from
- * nassh.agent.Backend.
+ * Map backend IDs to the respective classes inheriting from Backend.
  *
- * @type {!Object<string, function(new:nassh.agent.Backend,
- *     !nassh.agent.Agent.UserIO, boolean)>}
+ * @type {!Object<string, function(new:Backend, !UserIO, boolean)>}
  * @private
  */
-nassh.agent.registeredBackends_ = {};
+const registeredBackends = {};
 
 /**
  * Used by a backend to register itself with the agent.
  *
- * @param {function(new:nassh.agent.Backend,
- *     !nassh.agent.Agent.UserIO, boolean)} backendClass
+ * @param {function(new:Backend, !UserIO, boolean)} backendClass
  */
-nassh.agent.registerBackend = function(backendClass) {
-  nassh.agent.registeredBackends_[backendClass.prototype.BACKEND_ID] =
-      backendClass;
-};
+function registerBackend(backendClass) {
+  registeredBackends[backendClass.prototype.BACKEND_ID] = backendClass;
+}
+
+// Register the backend for use by Agent.
+registerBackend(Backend);
+registerBackend(GSC);
 
 /**
  * Check whether a list of backend IDs is valid.
@@ -38,10 +42,10 @@ nassh.agent.registerBackend = function(backendClass) {
  *     an entry is true if and only if its backend ID corresponds to a
  *     registered backend.
  */
-nassh.agent.checkBackendIDs = function(backendIDs) {
+export function checkBackendIDs(backendIDs) {
   return backendIDs.map(
-      (backendID) => nassh.agent.registeredBackends_.hasOwnProperty(backendID));
-};
+      (backendID) => registeredBackends.hasOwnProperty(backendID));
+}
 
 /**
  * Manage multiples SSH agent backends and aggregates their results.
@@ -53,24 +57,23 @@ nassh.agent.checkBackendIDs = function(backendIDs) {
  *     server.
  * @constructor
  */
-nassh.agent.Agent = function(backendIDs, term, isForwarded) {
-  console.log(
-      'agent.Agent: registered backends:', nassh.agent.registeredBackends_);
+export function Agent(backendIDs, term, isForwarded) {
+  console.log('agent.Agent: registered backends:', registeredBackends);
 
   /**
    * The collection of instantiated backends that the agent is using to respond
    * to requests.
    *
-   * @private {!Array<!nassh.agent.Backend>}
+   * @private {!Array<!Backend>}
    * @const
    */
   this.backends_ =
       backendIDs
           .map((backendID) => {
-            if (nassh.agent.registeredBackends_.hasOwnProperty(backendID)) {
+            if (registeredBackends.hasOwnProperty(backendID)) {
               console.log(`agent.Agent: loading backend '${backendID}'`);
-              return new nassh.agent.registeredBackends_[backendID](
-                  new nassh.agent.Agent.UserIO(term), isForwarded);
+              return new registeredBackends[backendID](
+                  new UserIO(term), isForwarded);
             } else {
               console.error(`agent.Agent: unknown backend ID '${backendID}'`);
               return null;
@@ -84,7 +87,7 @@ nassh.agent.Agent = function(backendIDs, term, isForwarded) {
   /**
    * Map backend IDs to the instantiated backend.
    *
-   * @private {!Object<string, !nassh.agent.Backend>}
+   * @private {!Object<string, !Backend>}
    * @const
    */
   this.idToBackend_ = {};
@@ -99,7 +102,7 @@ nassh.agent.Agent = function(backendIDs, term, isForwarded) {
    * @private {!Object<string, string>}
    */
   this.identityToBackendID_ = {};
-};
+}
 
 /**
  * Initialize all backends by calling their ping function.
@@ -107,7 +110,7 @@ nassh.agent.Agent = function(backendIDs, term, isForwarded) {
  * @return {!Promise<!Array<undefined>>} A resolving promise if all backends
  *     initialized successfully; a rejecting promise otherwise.
  */
-nassh.agent.Agent.prototype.ping = function() {
+Agent.prototype.ping = function() {
   return Promise.all(this.backends_.map((backend) => backend.ping()));
 };
 
@@ -116,14 +119,14 @@ nassh.agent.Agent.prototype.ping = function() {
  *
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.3
  * @param {!Uint8Array} rawRequest The bytes of a raw request.
- * @return {!Promise<!nassh.agent.Message>} A Message object containing the
- *     aggregate responses of all backends.
+ * @return {!Promise<!Message>} A Message object containing the aggregate
+ *     responses of all backends.
  */
-nassh.agent.Agent.prototype.handleRequest = function(rawRequest) {
-  const request = nassh.agent.Message.fromRawMessage(rawRequest);
+Agent.prototype.handleRequest = function(rawRequest) {
+  const request = Message.fromRawMessage(rawRequest);
   if (!request) {
     console.error('Agent.handleRequest: invalid request', rawRequest);
-    return Promise.resolve(nassh.agent.messages.FAILURE);
+    return Promise.resolve(FAILURE);
   } else {
     return this.handleRequest_(request);
   }
@@ -132,30 +135,30 @@ nassh.agent.Agent.prototype.handleRequest = function(rawRequest) {
 /**
  * Map message (request) types to handler functions.
  *
- * @type {!Object<!nassh.agent.messages.Numbers,
- *     function(this:nassh.agent.Agent, !nassh.agent.Message):
- *     !Promise<!nassh.agent.Message>>}
+ * @type {!Object<!MessageNumbers,
+ *     function(this:Agent, !Message):
+ *     !Promise<!Message>>}
  * @private
  * @suppress {lintChecks} Allow non-primitive prototype property.
  */
-nassh.agent.Agent.prototype.requestHandlers_ = {};
+Agent.prototype.requestHandlers_ = {};
 
 /**
- * @param {!nassh.agent.Message} request
- * @return {!Promise<!nassh.agent.Message>}
+ * @param {!Message} request
+ * @return {!Promise<!Message>}
  */
-nassh.agent.Agent.prototype.handleRequest_ = function(request) {
+Agent.prototype.handleRequest_ = function(request) {
   if (this.requestHandlers_.hasOwnProperty(request.type)) {
     return this.requestHandlers_[request.type]
         .call(this, request)
         .catch(function(e) {
           console.error(e);
-          return nassh.agent.messages.FAILURE;
+          return FAILURE;
         });
   } else {
     console.error(
         `Agent.handleRequest: message number ${request.type} not supported`);
-    return Promise.resolve(nassh.agent.messages.FAILURE);
+    return Promise.resolve(FAILURE);
   }
 };
 
@@ -165,7 +168,7 @@ nassh.agent.Agent.prototype.handleRequest_ = function(request) {
  * @param {!Uint8Array} keyBlob The raw key blob.
  * @return {string}
  */
-nassh.agent.Agent.keyBlobToAuthorizedKeysFormat = function(keyBlob) {
+export function keyBlobToAuthorizedKeysFormat(keyBlob) {
   const keyBlobBase64 = btoa(lib.codec.codeUnitArrayToString(keyBlob));
   // Extract and prepend key type prefix.
   const dv = new DataView(keyBlob.buffer, keyBlob.byteOffset);
@@ -173,18 +176,17 @@ nassh.agent.Agent.keyBlobToAuthorizedKeysFormat = function(keyBlob) {
   const prefixBlob = keyBlob.slice(4, 4 + prefixLength);
   const prefix = lib.codec.codeUnitArrayToString(prefixBlob);
   return `${prefix} ${keyBlobBase64}`;
-};
+}
 
 /**
  * Handle an AGENTC_REQUEST_IDENTITIES request by responding with an
  * AGENT_IDENTITIES_ANSWER.
  *
- * @this {nassh.agent.Agent}
+ * @this {Agent}
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
- * @return {!Promise<!nassh.agent.Message>}
+ * @return {!Promise<!Message>}
  */
-nassh.agent.Agent.prototype
-    .requestHandlers_[nassh.agent.messages.Numbers.AGENTC_REQUEST_IDENTITIES] =
+Agent.prototype.requestHandlers_[MessageNumbers.AGENTC_REQUEST_IDENTITIES] =
     function() {
   this.identityToBackendID_ = {};
   // Request identities from all backends in "parallel" and concatenate
@@ -194,50 +196,45 @@ nassh.agent.Agent.prototype
   return Promise
       .all(this.backends_.map(
           (backend) => backend.requestIdentities()
-                           .then((backendIdentities) => {
-                             for (const identity of backendIdentities) {
-                               // Turn the key blob into a string to be able to
-                               // use it as a key of an object.
-                               const keyBlobStr =
-                                   new TextDecoder('utf-8').decode(
-                                       identity.keyBlob);
-                               // Print the public key blob (in the format used
-                               // for ~/.authorized_keys) to the console as a
-                               // courtesy to the user.
-                               console.log(
-                                   'Public key to be added as a new line to ' +
-                                   '~/.ssh/authorized_keys on the server:\n' +
-                                   nassh.agent.Agent
-                                   .keyBlobToAuthorizedKeysFormat(
-                                       identity.keyBlob));
-                               // Remember the backend the identity was
-                               // requested from.
-                               this.identityToBackendID_[keyBlobStr] =
-                                   backend.BACKEND_ID;
-                             }
-                             return backendIdentities;
-                           })
-                           .catch(function(e) {
-                             console.error(e);
-                             return [];
-                           })))
+                  .then((backendIdentities) => {
+                    for (const identity of backendIdentities) {
+                      // Turn the key blob into a string to be able to
+                      // use it as a key of an object.
+                      const keyBlobStr =
+                          new TextDecoder('utf-8').decode(identity.keyBlob);
+                      // Print the public key blob (in the format used
+                      // for ~/.authorized_keys) to the console as a
+                      // courtesy to the user.
+                      console.log(
+                          'Public key to be added as a new line to ' +
+                          '~/.ssh/authorized_keys on the server:\n' +
+                          keyBlobToAuthorizedKeysFormat(identity.keyBlob));
+                      // Remember the backend the identity was
+                      // requested from.
+                      this.identityToBackendID_[keyBlobStr] =
+                          backend.BACKEND_ID;
+                    }
+                    return backendIdentities;
+                  })
+                  .catch(function(e) {
+                    console.error(e);
+                    return [];
+                  })))
       .then((arrayOfArrays) => [].concat(...arrayOfArrays))
-      .then(
-          (identities) => nassh.agent.messages.write(
-              nassh.agent.messages.Numbers.AGENT_IDENTITIES_ANSWER,
-              identities));
+      .then((identities) => {
+        return writeMessage(MessageNumbers.AGENT_IDENTITIES_ANSWER, identities);
+      });
 };
 
 /**
  * Handle an AGENTC_SIGN_REQUEST request by responding with an
  * AGENT_SIGN_RESPONSE.
  *
- * @this {nassh.agent.Agent}
- * @param {!nassh.agent.Message} request The request as a Message object.
- * @return {!Promise<!nassh.agent.Message>}
+ * @this {Agent}
+ * @param {!Message} request The request as a Message object.
+ * @return {!Promise<!Message>}
  */
-nassh.agent.Agent.prototype
-    .requestHandlers_[nassh.agent.messages.Numbers.AGENTC_SIGN_REQUEST] =
+Agent.prototype.requestHandlers_[MessageNumbers.AGENTC_SIGN_REQUEST] =
     function(request) {
   const keyBlobStr = new TextDecoder('utf-8').decode(request.fields.keyBlob);
   if (!this.identityToBackendID_.hasOwnProperty(keyBlobStr)) {
@@ -248,9 +245,9 @@ nassh.agent.Agent.prototype
   return this.idToBackend_[backendId]
       .signRequest(
           request.fields.keyBlob, request.fields.data, request.fields.flags)
-      .then(
-          (signature) => nassh.agent.messages.write(
-              nassh.agent.messages.Numbers.AGENT_SIGN_RESPONSE, signature));
+      .then((signature) => {
+        return writeMessage(MessageNumbers.AGENT_SIGN_RESPONSE, signature);
+      });
 };
 
 /**
@@ -259,7 +256,7 @@ nassh.agent.Agent.prototype
  * @param {!hterm.Terminal} term Reference to the current terminal.
  * @constructor
  */
-nassh.agent.Agent.UserIO = function(term) {
+export function UserIO(term) {
   /**
    * Reference to the current terminal.
    *
@@ -267,7 +264,7 @@ nassh.agent.Agent.UserIO = function(term) {
    * @const
    */
   this.term_ = term;
-};
+}
 
 /**
  * Show a message in the terminal window.
@@ -276,7 +273,7 @@ nassh.agent.Agent.UserIO = function(term) {
  *     message.
  * @param {string} message The message to be shown.
  */
-nassh.agent.Agent.UserIO.prototype.showMessage = function(backendID, message) {
+UserIO.prototype.showMessage = function(backendID, message) {
   this.term_.io.println(`[agent '${backendID}'] ${message}`);
 };
 
@@ -289,8 +286,7 @@ nassh.agent.Agent.UserIO.prototype.showMessage = function(backendID, message) {
  *     if the user confirms it by pressing enter; a rejecting promise if the
  *     user cancels the prompt by pressing ESC.
  */
-nassh.agent.Agent.UserIO.prototype.promptUser =
-    async function(backendID, promptMessage) {
+UserIO.prototype.promptUser = async function(backendID, promptMessage) {
   const io = this.term_.io.push();
 
   // Perform common cleanup tasks before exiting the prompt.

@@ -2,14 +2,12 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Code for dealing with the specific message types used in
  * the SSH agent protocol.
  */
 
-nassh.agent.messages = {};
+import {Message} from './nassh_agent_message.js';
 
 /**
  * Types of requests/responses exchanged between client application and SSH
@@ -19,7 +17,7 @@ nassh.agent.messages = {};
  * @readonly
  * @enum {number}
  */
-nassh.agent.messages.Numbers = {
+export const MessageNumbers = {
   AGENT_FAILURE: 5,
   AGENT_SUCCESS: 6,
   AGENTC_REQUEST_IDENTITIES: 11,
@@ -34,33 +32,30 @@ nassh.agent.messages.Numbers = {
  *
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.1
  * @readonly
- * @const {!nassh.agent.Message}
+ * @const {!Message}
  */
-nassh.agent.messages.SUCCESS =
-    new nassh.agent.Message(nassh.agent.messages.Numbers.AGENT_SUCCESS);
-nassh.agent.messages.FAILURE =
-    new nassh.agent.Message(nassh.agent.messages.Numbers.AGENT_FAILURE);
+export const SUCCESS = new Message(MessageNumbers.AGENT_SUCCESS);
+export const FAILURE = new Message(MessageNumbers.AGENT_FAILURE);
 
 /**
  * Map message types to reader function.
  *
- * @type {!Object<!nassh.agent.messages.Numbers,
- *     function(!nassh.agent.Message): !nassh.agent.Message>}
+ * @type {!Object<!MessageNumbers, function(!Message): !Message>}
  * @private
  */
-nassh.agent.messages.readers_ = {};
+const readers = {};
 
 /**
  * Read the contents of a message into fields according to the format specified
  * by its type.
  *
- * @param {!nassh.agent.Message} message
- * @return {?nassh.agent.Message}
+ * @param {!Message} message
+ * @return {?Message}
  */
-nassh.agent.messages.read = function(message) {
-  if (nassh.agent.messages.readers_.hasOwnProperty(message.type)) {
+export function readMessage(message) {
+  if (readers.hasOwnProperty(message.type)) {
     try {
-      return nassh.agent.messages.readers_[message.type](message);
+      return readers[message.type](message);
     } catch (e) {
       console.error(e);
       return null;
@@ -69,19 +64,16 @@ nassh.agent.messages.read = function(message) {
     console.warn(`messages.read: message number ${message.type} not supported`);
     return null;
   }
-};
+}
 
 /**
  * Read an AGENTC_REQUEST_IDENTITIES request.
  *
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
- * @param {!nassh.agent.Message} message A message of type
- *     AGENTC_REQUEST_IDENTITIES.
- * @return {!nassh.agent.Message}
+ * @param {!Message} message A message of type AGENTC_REQUEST_IDENTITIES.
+ * @return {!Message}
  */
-nassh.agent.messages
-    .readers_[nassh.agent.messages.Numbers.AGENTC_REQUEST_IDENTITIES] =
-    function(message) {
+readers[MessageNumbers.AGENTC_REQUEST_IDENTITIES] = function(message) {
   if (!message.eom()) {
     throw new Error(
         'AGENTC_REQUEST_IDENTITIES: message body longer than expected');
@@ -93,12 +85,10 @@ nassh.agent.messages
  * Read an AGENTC_SIGN_REQUEST request.
  *
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.5
- * @param {!nassh.agent.Message} message A message of type AGENTC_SIGN_REQUEST.
- * @return {!nassh.agent.Message}
+ * @param {!Message} message A message of type AGENTC_SIGN_REQUEST.
+ * @return {!Message}
  */
-nassh.agent.messages
-    .readers_[nassh.agent.messages.Numbers.AGENTC_SIGN_REQUEST] = function(
-    message) {
+readers[MessageNumbers.AGENTC_SIGN_REQUEST] = function(message) {
   message.fields.keyBlob = message.readString();
   message.fields.data = message.readString();
   message.fields.flags = message.readUint32();
@@ -113,13 +103,10 @@ nassh.agent.messages
  *
  * This is a Google extension.
  *
- * @param {!nassh.agent.Message} message A message of type
- *     AGENT_PUBLIC_KEY_RESPONSE.
- * @return {!nassh.agent.Message}
+ * @param {!Message} message A message of type AGENT_PUBLIC_KEY_RESPONSE.
+ * @return {!Message}
  */
-nassh.agent.messages
-    .readers_[nassh.agent.messages.Numbers.AGENT_PUBLIC_KEY_RESPONSE] =
-    function(message) {
+readers[MessageNumbers.AGENT_PUBLIC_KEY_RESPONSE] = function(message) {
   // SSH_AGENTC_PUBLIC_KEY_RESPONSE packet format.
   //   byte    code
   //   uint32  num_records
@@ -149,9 +136,9 @@ nassh.agent.messages
         'AGENT_PUBLIC_KEY_RESPONSE: message body longer than expected');
   }
 
-  const pk = new nassh.agent.Message(
+  const pk = new Message(
       // Dummy zero value used.
-      /** @type {!nassh.agent.messages.Numbers} */ (0),
+      /** @type {!MessageNumbers} */ (0),
       message.fields.publicKeyRaw);
   message.fields.publicKeyAlgo =
       lib.codec.codeUnitArrayToString(pk.readString());
@@ -171,33 +158,32 @@ nassh.agent.messages
 /**
  * Map message types to writer function.
  *
- * @type {!Object<!nassh.agent.messages.Numbers, function(...):
- *     !nassh.agent.Message>}
+ * @type {!Object<!MessageNumbers, function(...): !Message>}
  * @private
  */
-nassh.agent.messages.writers_ = {};
+const writers = {};
 
 /**
  * Write a message of a given type.
  *
- * @param {!nassh.agent.messages.Numbers} type
+ * @param {!MessageNumbers} type
  * @param {...*} args Any number of arguments dictated by the type.
- * @return {!nassh.agent.Message} A message of the given type encoding the
+ * @return {!Message} A message of the given type encoding the
  *     supplied arguments.
  */
-nassh.agent.messages.write = function(type, ...args) {
-  if (nassh.agent.messages.writers_.hasOwnProperty(type)) {
+export function writeMessage(type, ...args) {
+  if (writers.hasOwnProperty(type)) {
     try {
-      return nassh.agent.messages.writers_[type](...args);
+      return writers[type](...args);
     } catch (e) {
       console.error(e);
-      return nassh.agent.messages.FAILURE;
+      return FAILURE;
     }
   } else {
     console.warn(`messages.write: message number ${type} not supported`);
-    return nassh.agent.messages.FAILURE;
+    return FAILURE;
   }
-};
+}
 
 /**
  * An SSH identity (public key), containing the wire encoding of the public key
@@ -206,21 +192,17 @@ nassh.agent.messages.write = function(type, ...args) {
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
  * @typedef {{keyBlob: !Uint8Array, comment: !Uint8Array}}
  */
-nassh.agent.messages.Identity;
+export let Identity;
 
 /**
  * Write an AGENT_IDENTITIES_ANSWER response.
  *
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.4
- * @param {!Array<!nassh.agent.messages.Identity>} identities An array of SSH
- *     identities.
- * @return {!nassh.agent.Message}
+ * @param {!Array<!Identity>} identities An array of SSH identities.
+ * @return {!Message}
  */
-nassh.agent.messages
-    .writers_[nassh.agent.messages.Numbers.AGENT_IDENTITIES_ANSWER] = function(
-    identities) {
-  const message = new nassh.agent.Message(
-      nassh.agent.messages.Numbers.AGENT_IDENTITIES_ANSWER);
+writers[MessageNumbers.AGENT_IDENTITIES_ANSWER] = function(identities) {
+  const message = new Message(MessageNumbers.AGENT_IDENTITIES_ANSWER);
   message.writeUint32(identities.length);
   for (const identity of identities) {
     message.writeString(identity.keyBlob);
@@ -234,13 +216,10 @@ nassh.agent.messages
  *
  * @see https://tools.ietf.org/id/draft-miller-ssh-agent-00.html#rfc.section.4.5
  * @param {!Uint8Array} signature The computed signature.
- * @return {!nassh.agent.Message}
+ * @return {!Message}
  */
-nassh.agent.messages
-    .writers_[nassh.agent.messages.Numbers.AGENT_SIGN_RESPONSE] = function(
-    signature) {
-  const message =
-      new nassh.agent.Message(nassh.agent.messages.Numbers.AGENT_SIGN_RESPONSE);
+writers[MessageNumbers.AGENT_SIGN_RESPONSE] = function(signature) {
+  const message = new Message(MessageNumbers.AGENT_SIGN_RESPONSE);
   message.writeString(signature);
   return message;
 };
@@ -252,13 +231,11 @@ nassh.agent.messages
  * @param {!Uint8Array} keyBlob The public key.
  * @param {!Uint8Array} data The data to sign.
  * @param {number=} flags Command flags.
- * @return {!nassh.agent.Message}
+ * @return {!Message}
  */
-nassh.agent.messages
-    .writers_[nassh.agent.messages.Numbers.AGENTC_SIGN_REQUEST] = function(
+writers[MessageNumbers.AGENTC_SIGN_REQUEST] = function(
     keyBlob, data, flags = 0) {
-  const message =
-      new nassh.agent.Message(nassh.agent.messages.Numbers.AGENTC_SIGN_REQUEST);
+  const message = new Message(MessageNumbers.AGENTC_SIGN_REQUEST);
   message.writeString(keyBlob);
   message.writeString(data);
   message.writeUint32(flags);
@@ -271,7 +248,7 @@ nassh.agent.messages
  * @readonly
  * @enum {number}
  */
-nassh.agent.messages.KeyTypes = {
+export const KeyTypes = {
   RSA: 1,
   ECDSA: 19,
   EDDSA: 22,
@@ -285,7 +262,7 @@ nassh.agent.messages.KeyTypes = {
  *     representation is invalid.
  * @see https://docs.microsoft.com/en-us/windows/desktop/SecCertEnroll/about-object-identifier
  */
-nassh.agent.messages.decodeOid = function(asn1Bytes) {
+export function decodeOid(asn1Bytes) {
   if (asn1Bytes.length === 0) {
     return null;
   }
@@ -306,7 +283,7 @@ nassh.agent.messages.decodeOid = function(asn1Bytes) {
     oid += '.' + acc;
   }
   return oid;
-};
+}
 
 /**
  * Information about an elliptic curve required to use it for SSH
@@ -324,17 +301,17 @@ nassh.agent.messages.decodeOid = function(asn1Bytes) {
  *     pivAlgorithmId: string,
  * }}
  */
-nassh.agent.messages.CurveInfo;
+const CurveInfo = undefined;
 
 /**
  * Map OIDs to information about their associated elliptic curve.
  *
- * @type {!Object<string, !nassh.agent.messages.CurveInfo>}
+ * @type {!Object<string, !CurveInfo>}
  * @see https://tools.ietf.org/html/rfc5656
  * @see https://tools.ietf.org/html/draft-ietf-curdle-ssh-ed25519-02
  * @see https://tools.ietf.org/id/draft-koch-eddsa-for-openpgp-03.html#rfc.section.6
  */
-nassh.agent.messages.OidToCurveInfo = {
+export const OidToCurveInfo = {
   '1.2.840.10045.3.1.7': {
     prefix: 'ecdsa-sha2-',
     identifier: 'nistp256',
@@ -380,10 +357,9 @@ nassh.agent.messages.OidToCurveInfo = {
  * @see https://docs.microsoft.com/en-us/windows/desktop/SecCertEnroll/about-object-identifier
  * @see https://crbug.com/1120933#c10:
  */
-nassh.agent.messages.decodeCurveOidWithVendorFixes =
-    function(asn1Bytes, reader) {
-  let curveOid = nassh.agent.messages.decodeOid(asn1Bytes);
-  if (!(curveOid in nassh.agent.messages.OidToCurveInfo) &&
+export function decodeCurveOidWithVendorFixes(asn1Bytes, reader) {
+  let curveOid = decodeOid(asn1Bytes);
+  if (!(curveOid in OidToCurveInfo) &&
       reader != null &&
       reader.toLowerCase().includes('yubikey') &&
       asn1Bytes.length > 0) {
@@ -393,35 +369,34 @@ nassh.agent.messages.decodeCurveOidWithVendorFixes =
     // be ignored. Since there are no curve OIDs that are prefixes of
     // other valid curve OIDs, we get by without detecting the firmware
     // version explicitly.
-    curveOid = nassh.agent.messages.decodeOid(asn1Bytes.slice(0, -1));
+    curveOid = decodeOid(asn1Bytes.slice(0, -1));
   }
   return curveOid;
-};
+}
 
 /**
  * Map key types to generator function.
  *
- * @type {!Object<!nassh.agent.messages.KeyTypes,
- *     function(...): !Uint8Array>}
+ * @type {!Object<!KeyTypes, function(...): !Uint8Array>}
  * @private
  */
-nassh.agent.messages.keyBlobGenerators_ = {};
+const keyBlobGenerators = {};
 
 /**
  * Generate a key blob of a given type.
  *
- * @param {!nassh.agent.messages.KeyTypes} keyType
+ * @param {!KeyTypes} keyType
  * @param {...*} args Any number of arguments dictated by the key blob type.
  * @return {!Uint8Array} A key blob for use in the SSH agent protocol.
  */
-nassh.agent.messages.generateKeyBlob = function(keyType, ...args) {
-  if (nassh.agent.messages.keyBlobGenerators_.hasOwnProperty(keyType)) {
-    return nassh.agent.messages.keyBlobGenerators_[keyType](...args);
+export function generateKeyBlob(keyType, ...args) {
+  if (keyBlobGenerators.hasOwnProperty(keyType)) {
+    return keyBlobGenerators[keyType](...args);
   } else {
     throw new Error(
         `messages.generateKeyBlob: key type ${keyType} not supported`);
   }
-};
+}
 
 /**
  * Encode a byte array as a 'string' on the wire.
@@ -430,13 +405,13 @@ nassh.agent.messages.generateKeyBlob = function(keyType, ...args) {
  * @param {!Uint8Array} bytes Raw bytes.
  * @return {!Uint8Array} Wire encoding as a string.
  */
-nassh.agent.messages.encodeAsWireString = function(bytes) {
+export function encodeAsWireString(bytes) {
   const data = new Uint8Array(4 + bytes.length);
   const view = new DataView(data.buffer);
   view.setUint32(0, bytes.length);
   data.set(bytes, 4);
   return data;
-};
+}
 
 /**
  * Encode an unsigned integer as an 'mpint' on the wire.
@@ -445,7 +420,7 @@ nassh.agent.messages.encodeAsWireString = function(bytes) {
  * @param {!Uint8Array} bytes Raw bytes of an unsigned integer.
  * @return {!Uint8Array} Wire encoding as an mpint.
  */
-nassh.agent.messages.encodeAsWireMpint = function(bytes) {
+export function encodeAsWireMpint(bytes) {
   // Strip leading zeros.
   let pos = 0;
   while (pos < bytes.length && !bytes[pos]) {
@@ -459,8 +434,8 @@ nassh.agent.messages.encodeAsWireMpint = function(bytes) {
     mpint = lib.array.concatTyped(new Uint8Array([0]), mpint);
   }
 
-  return nassh.agent.messages.encodeAsWireString(mpint);
-};
+  return encodeAsWireString(mpint);
+}
 
 /**
  * Generate a key blob for a public key of type 'ssh-rsa'.
@@ -472,13 +447,12 @@ nassh.agent.messages.encodeAsWireMpint = function(bytes) {
  *     endian).
  * @return {!Uint8Array} A key blob for use in the SSH agent protocol.
  */
-nassh.agent.messages.keyBlobGenerators_[nassh.agent.messages.KeyTypes.RSA] =
-    function(exponent, modulus) {
-  const exponentMpint = nassh.agent.messages.encodeAsWireMpint(exponent);
-  const modulusMpint = nassh.agent.messages.encodeAsWireMpint(modulus);
+keyBlobGenerators[KeyTypes.RSA] = function(exponent, modulus) {
+  const exponentMpint = encodeAsWireMpint(exponent);
+  const modulusMpint = encodeAsWireMpint(modulus);
   const BYTES_SSH_RSA = new TextEncoder().encode('ssh-rsa');
   return lib.array.concatTyped(
-      nassh.agent.messages.encodeAsWireString(BYTES_SSH_RSA),
+      encodeAsWireString(BYTES_SSH_RSA),
       exponentMpint,
       modulusMpint,
   );
@@ -493,21 +467,18 @@ nassh.agent.messages.keyBlobGenerators_[nassh.agent.messages.KeyTypes.RSA] =
  * @throws Will throw if curveOid represents an unsupported curve.
  * @see https://tools.ietf.org/html/rfc5656#section-3.1
  */
-nassh.agent.messages.keyBlobGenerators_[nassh.agent.messages.KeyTypes.ECDSA] =
-    function(curveOid, key) {
-  if (!(curveOid in nassh.agent.messages.OidToCurveInfo)) {
+keyBlobGenerators[KeyTypes.ECDSA] = function(curveOid, key) {
+  if (!(curveOid in OidToCurveInfo)) {
     throw new Error(
         `SmartCardManager.fetchKeyInfo: unsupported curve OID: ${curveOid}`);
   }
-  const prefix = new TextEncoder().encode(
-      nassh.agent.messages.OidToCurveInfo[curveOid].prefix);
-  const identifier = new TextEncoder().encode(
-      nassh.agent.messages.OidToCurveInfo[curveOid].identifier);
+  const prefix = new TextEncoder().encode(OidToCurveInfo[curveOid].prefix);
+  const identifier =
+      new TextEncoder().encode(OidToCurveInfo[curveOid].identifier);
   return lib.array.concatTyped(
-      nassh.agent.messages.encodeAsWireString(
-          lib.array.concatTyped(prefix, identifier)),
-      nassh.agent.messages.encodeAsWireString(identifier),
-      nassh.agent.messages.encodeAsWireString(key));
+      encodeAsWireString(lib.array.concatTyped(prefix, identifier)),
+      encodeAsWireString(identifier),
+      encodeAsWireString(key));
 };
 
 /**
@@ -519,15 +490,13 @@ nassh.agent.messages.keyBlobGenerators_[nassh.agent.messages.KeyTypes.ECDSA] =
  * @throws Will throw if curveOid represents an unsupported curve.
  * @see https://tools.ietf.org/html/draft-ietf-curdle-ssh-ed25519-02#section-4
  */
-nassh.agent.messages.keyBlobGenerators_[nassh.agent.messages.KeyTypes.EDDSA] =
-    function(curveOid, key) {
-  if (!(curveOid in nassh.agent.messages.OidToCurveInfo)) {
+keyBlobGenerators[KeyTypes.EDDSA] = function(curveOid, key) {
+  if (!(curveOid in OidToCurveInfo)) {
     throw new Error(
         `SmartCardManager.fetchKeyInfo: unsupported curve OID: ${curveOid}`);
   }
-  const prefix = new TextEncoder().encode(
-      nassh.agent.messages.OidToCurveInfo[curveOid].prefix);
+  const prefix = new TextEncoder().encode(OidToCurveInfo[curveOid].prefix);
   return lib.array.concatTyped(
-      nassh.agent.messages.encodeAsWireString(prefix),
-      nassh.agent.messages.encodeAsWireString(key));
+      encodeAsWireString(prefix),
+      encodeAsWireString(key));
 };

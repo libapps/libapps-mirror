@@ -14,27 +14,32 @@
  */
 
 import {asn1js, pkijs} from './nassh_deps.rollup.js';
+import {UserIO} from './nassh_agent.js';
+import {Backend} from './nassh_agent_backend.js';
+import {
+  decodeCurveOidWithVendorFixes, encodeAsWireMpint, encodeAsWireString,
+  generateKeyBlob, KeyTypes, Identity, OidToCurveInfo,
+} from './nassh_agent_message_types.js';
 
 /**
  * An SSH agent backend that uses the Google Smart Card Connector library to
  * perform SSH authentication using private keys stored on smart cards.
  *
- * @param {!nassh.agent.Agent.UserIO} userIO Reference to object with terminal
- *     IO functions.
+ * @param {!UserIO} userIO Reference to object with terminal IO functions.
  * @param {boolean} isForwarded Whether the agent is being forwarded to the
  *     server.
  * @constructor
- * @extends {nassh.agent.Backend}
+ * @extends {Backend}
  */
-nassh.agent.backends.GSC = function(userIO, isForwarded) {
-  nassh.agent.Backend.apply(this, [userIO]);
+export function GSC(userIO, isForwarded) {
+  Backend.apply(this, [userIO]);
 
   /**
    * Map a string representation of an identity's key blob to the reader that
    * provides it.
    *
    * @member {!Object<string, {reader: string, readerKeyId: !Uint8Array,
-   *     applet: !nassh.agent.backends.GSC.SmartCardManager.CardApplets}>}
+   *     applet: !SmartCardManager.CardApplets}>}
    * @private
    */
   this.keyBlobToReader_ = {};
@@ -49,12 +54,11 @@ nassh.agent.backends.GSC = function(userIO, isForwarded) {
   if (!isForwarded) {
     this.pinCache_.setEnabled(false);
   }
-};
+}
 
-nassh.agent.backends.GSC.prototype =
-    Object.create(nassh.agent.Backend.prototype);
+GSC.prototype = Object.create(Backend.prototype);
 /** @override */
-nassh.agent.backends.GSC.constructor = nassh.agent.backends.GSC;
+GSC.constructor = GSC;
 
 /**
  * The unique ID of the backend.
@@ -62,10 +66,7 @@ nassh.agent.backends.GSC.constructor = nassh.agent.backends.GSC;
  * @const {string}
  * @override
  */
-nassh.agent.backends.GSC.prototype.BACKEND_ID = 'gsc';
-
-// Register the backend for use by nassh.agent.Agent.
-nassh.agent.registerBackend(nassh.agent.backends.GSC);
+GSC.prototype.BACKEND_ID = 'gsc';
 
 /**
  * The title of the app (used for logging purposes by the GSC library).
@@ -73,7 +74,7 @@ nassh.agent.registerBackend(nassh.agent.backends.GSC);
  * @readonly
  * @const {string}
  */
-nassh.agent.backends.GSC.CLIENT_TITLE = chrome.runtime.getManifest().name;
+const CLIENT_TITLE = 'nassh';
 
 /**
  * The ID of the official Google Smart Card Connector app.
@@ -81,7 +82,7 @@ nassh.agent.backends.GSC.CLIENT_TITLE = chrome.runtime.getManifest().name;
  * @readonly
  * @const {string}
  */
-nassh.agent.backends.GSC.SERVER_APP_ID =
+const SERVER_APP_ID =
     GoogleSmartCard.PcscLiteCommon.Constants.SERVER_OFFICIAL_APP_ID;
 
 /**
@@ -89,14 +90,14 @@ nassh.agent.backends.GSC.SERVER_APP_ID =
  *
  * @type {?GoogleSmartCard.PcscLiteClient.API}
  */
-nassh.agent.backends.GSC.API = null;
+GSC.API = null;
 
 /**
  * The context for communication with the Google Smart Card Connector app.
  *
  * @type {?GoogleSmartCard.PcscLiteClient.Context}
  */
-nassh.agent.backends.GSC.APIContext = null;
+GSC.APIContext = null;
 
 // clang-format off
 /**
@@ -109,7 +110,7 @@ nassh.agent.backends.GSC.APIContext = null;
  * @readonly
  * @enum {{name:string, identifier:!Uint8Array, signaturePrefix:!Uint8Array}}
  */
-nassh.agent.backends.GSC.HashAlgorithms = {
+const HashAlgorithms = {
   SHA1: {
     name: 'SHA-1',
     identifier: new Uint8Array([
@@ -152,9 +153,9 @@ nassh.agent.backends.GSC.HashAlgorithms = {
  *     initialization succeeded; a rejecting Promise otherwise.
  * @override
  */
-nassh.agent.backends.GSC.prototype.ping = async function() {
+GSC.prototype.ping = async function() {
   try {
-    await nassh.agent.backends.GSC.initializeAPIContext();
+    await GSC.initializeAPIContext();
   } catch (e) {
     this.showMessage(nassh.msg(
         'SMART_CARD_CONNECTOR_NOT_INSTALLED',
@@ -174,22 +175,22 @@ nassh.agent.backends.GSC.prototype.ping = async function() {
  *
  * @param {!Object<string, {
  *       reader: string, readerKeyId: !Uint8Array,
- *       applet: !nassh.agent.backends.GSC.SmartCardManager.CardApplets}>
+ *       applet: !SmartCardManager.CardApplets}>
  *     } keyBlobToReader Maps SSH identities to the readers and applets they
  *     have been retrieved from for later use by signRequest.
  * @param {string} reader The name of the reader to connect to.
- * @return {!Promise<!Array<!nassh.agent.messages.Identity>>} A Promise
- *     resolving to a list of SSH identities.
+ * @return {!Promise<!Array<!Identity>>} A Promise resolving to a list of SSH
+ *     identities.
  */
-nassh.agent.backends.GSC.prototype.requestReaderIdentities_ =
+GSC.prototype.requestReaderIdentities_ =
     async function(keyBlobToReader, reader) {
-  const manager = new nassh.agent.backends.GSC.SmartCardManager();
+  const manager = new SmartCardManager();
   const identities = [];
   try {
     await manager.establishContext();
     for (const applet
-             of [nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP,
-                 nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV]) {
+             of [SmartCardManager.CardApplets.OPENPGP,
+                 SmartCardManager.CardApplets.PIV]) {
       // Force reconnect to change applet.
       await manager.disconnect();
       await manager.connect(reader);
@@ -236,17 +237,17 @@ nassh.agent.backends.GSC.prototype.requestReaderIdentities_ =
  * readers. Blocked devices will also be skipped. The backend remembers which
  * key blobs were obtained from which reader.
  *
- * @return {!Promise<!Array<!nassh.agent.messages.Identity>>} A Promise
- *     resolving to a list of SSH identities; a rejecting Promise if the
- *     connected readers could not be listed or some other error occurred.
+ * @return {!Promise<!Array<!Identity>>} A Promise resolving to a list of SSH
+ *     identities; a rejecting Promise if the connected readers could not be
+ *     listed or some other error occurred.
  * @override
  */
-nassh.agent.backends.GSC.prototype.requestIdentities = async function() {
+GSC.prototype.requestIdentities = async function() {
   // Written to this.keyBlobToReader_ in the end to prevent asynchronous
   // overwrites from leaving it in an inconsistent state.
   const keyBlobToReader = {};
 
-  const manager = new nassh.agent.backends.GSC.SmartCardManager();
+  const manager = new SmartCardManager();
   let readers;
   try {
     await manager.establishContext();
@@ -278,11 +279,10 @@ nassh.agent.backends.GSC.prototype.requestIdentities = async function() {
  *     entered by the user; a rejecting promise if the user cancelled the PIN
  *     entry.
  */
-nassh.agent.backends.GSC.prototype.requestPIN =
-    async function(reader, readerKeyId, appletName, numTries) {
+GSC.prototype.requestPIN = async function(
+    reader, readerKeyId, appletName, numTries) {
   // Show 8 hex character (4 byte) fingerprint to the user.
-  const shortFingerprint =
-      nassh.agent.backends.GSC.arrayToHexString(readerKeyId.slice(-4));
+  const shortFingerprint = arrayToHexString(readerKeyId.slice(-4));
   return this.promptUser(nassh.msg(
       'REQUEST_PIN_PROMPT', [shortFingerprint, reader, appletName, numTries]));
 };
@@ -291,15 +291,14 @@ nassh.agent.backends.GSC.prototype.requestPIN =
  * Unlock a key on a connected smart card reader and request the PIN from
  * the user (or the cache).
  *
- * @param {!nassh.agent.backends.GSC.SmartCardManager} manager A
- *     SmartCardManager object connected to the reader on which the specified
- *     key resides.
+ * @param {!SmartCardManager} manager A SmartCardManager object connected to the
+ *     reader on which the specified key resides.
  * @param {!Uint8Array} keyId The fingerprint of the key to unlock.
  * @return {!Promise.<void>} A resolving promise if the key has been unlocked;
  *     a rejecting promise if an error occurred.
  * @private
  */
-nassh.agent.backends.GSC.prototype.unlockKey_ = async function(manager, keyId) {
+GSC.prototype.unlockKey_ = async function(manager, keyId) {
   let pinBytes;
   let triedCache = false;
   do {
@@ -360,15 +359,14 @@ nassh.agent.backends.GSC.prototype.unlockKey_ = async function(manager, keyId) {
  *     called or the user cancels the PIN entry.
  * @override
  */
-nassh.agent.backends.GSC.prototype.signRequest =
-    async function(keyBlob, data, flags) {
+GSC.prototype.signRequest = async function(keyBlob, data, flags) {
   const keyBlobStr = new TextDecoder('utf-8').decode(keyBlob);
   if (!this.keyBlobToReader_.hasOwnProperty(keyBlobStr)) {
     throw new Error(`GSC.signRequest: no reader found for key "${keyBlobStr}"`);
   }
 
   const {reader, readerKeyId, applet} = this.keyBlobToReader_[keyBlobStr];
-  const manager = new nassh.agent.backends.GSC.SmartCardManager();
+  const manager = new SmartCardManager();
   try {
     await manager.establishContext();
     await manager.connect(reader);
@@ -378,13 +376,13 @@ nassh.agent.backends.GSC.prototype.signRequest =
     let rsaHashConstants;
     const keyInfo = await manager.fetchKeyInfo();
     switch (keyInfo.type) {
-      case nassh.agent.messages.KeyTypes.RSA: {
+      case KeyTypes.RSA: {
         if (flags === 0) {
-          rsaHashConstants = nassh.agent.backends.GSC.HashAlgorithms.SHA1;
+          rsaHashConstants = HashAlgorithms.SHA1;
         } else if (flags & 0b100) {
-          rsaHashConstants = nassh.agent.backends.GSC.HashAlgorithms.SHA512;
+          rsaHashConstants = HashAlgorithms.SHA512;
         } else if (flags & 0b10) {
-          rsaHashConstants = nassh.agent.backends.GSC.HashAlgorithms.SHA256;
+          rsaHashConstants = HashAlgorithms.SHA256;
         } else {
           throw new Error(
               `GSC.signRequest: unsupported flag value for RSA: ` +
@@ -396,19 +394,19 @@ nassh.agent.backends.GSC.prototype.signRequest =
             rsaHashConstants.identifier, new Uint8Array(hash));
         break;
       }
-      case nassh.agent.messages.KeyTypes.ECDSA: {
+      case KeyTypes.ECDSA: {
         if (flags !== 0) {
           throw new Error(
               `GSC.signRequest: unsupported flag value for ECDSA: ` +
               `0x${flags.toString(16)}`);
         }
-        const hashAlgorithm = nassh.agent.messages.OidToCurveInfo[
-            lib.notNull(keyInfo.curveOid)].hashAlgorithm;
+        const hashAlgorithm =
+            OidToCurveInfo[lib.notNull(keyInfo.curveOid)].hashAlgorithm;
         dataToSign = new Uint8Array(
             await window.crypto.subtle.digest(hashAlgorithm, data));
         break;
       }
-      case nassh.agent.messages.KeyTypes.EDDSA:
+      case KeyTypes.EDDSA:
         if (flags !== 0) {
           throw new Error(
               `GSC.signRequest: unsupported flag value for EdDSA: ` +
@@ -428,32 +426,28 @@ nassh.agent.backends.GSC.prototype.signRequest =
     let prefix;
     const curveOid = lib.notNull(keyInfo.curveOid);
     switch (keyInfo.type) {
-      case nassh.agent.messages.KeyTypes.RSA:
+      case KeyTypes.RSA:
         return lib.array.concatTyped(
-            nassh.agent.messages.encodeAsWireString(
-                rsaHashConstants.signaturePrefix),
-            nassh.agent.messages.encodeAsWireString(rawSignature));
-      case nassh.agent.messages.KeyTypes.ECDSA: {
+            encodeAsWireString(rsaHashConstants.signaturePrefix),
+            encodeAsWireString(rawSignature));
+      case KeyTypes.ECDSA: {
         const rRaw = rawSignature.subarray(0, rawSignature.length / 2);
         const sRaw = rawSignature.subarray(rawSignature.length / 2);
-        const rMpint = nassh.agent.messages.encodeAsWireMpint(rRaw);
-        const sMpint = nassh.agent.messages.encodeAsWireMpint(sRaw);
+        const rMpint = encodeAsWireMpint(rRaw);
+        const sMpint = encodeAsWireMpint(sRaw);
         const signatureBlob = lib.array.concatTyped(rMpint, sMpint);
-        prefix = new TextEncoder().encode(
-            nassh.agent.messages.OidToCurveInfo[curveOid].prefix);
-        const identifier = new TextEncoder().encode(
-            nassh.agent.messages.OidToCurveInfo[curveOid].identifier);
+        prefix = new TextEncoder().encode(OidToCurveInfo[curveOid].prefix);
+        const identifier =
+            new TextEncoder().encode(OidToCurveInfo[curveOid].identifier);
         return lib.array.concatTyped(
-            nassh.agent.messages.encodeAsWireString(
-                lib.array.concatTyped(prefix, identifier)),
-            nassh.agent.messages.encodeAsWireString(signatureBlob));
+            encodeAsWireString(lib.array.concatTyped(prefix, identifier)),
+            encodeAsWireString(signatureBlob));
       }
-      case nassh.agent.messages.KeyTypes.EDDSA:
-        prefix = new TextEncoder().encode(
-            nassh.agent.messages.OidToCurveInfo[curveOid].prefix);
+      case KeyTypes.EDDSA:
+        prefix = new TextEncoder().encode(OidToCurveInfo[curveOid].prefix);
         return lib.array.concatTyped(
-            nassh.agent.messages.encodeAsWireString(prefix),
-            nassh.agent.messages.encodeAsWireString(rawSignature));
+            encodeAsWireString(prefix),
+            encodeAsWireString(rawSignature));
     }
   } finally {
     await manager.disconnect();
@@ -464,10 +458,10 @@ nassh.agent.backends.GSC.prototype.signRequest =
 /**
  * Handler for the apiContextDisposed event.
  */
-nassh.agent.backends.GSC.apiContextDisposedListener = function() {
+GSC.apiContextDisposedListener = function() {
   console.debug('GSC: API context disposed');
-  nassh.agent.backends.GSC.APIContext = null;
-  nassh.agent.backends.GSC.API = null;
+  GSC.APIContext = null;
+  GSC.API = null;
 };
 
 /**
@@ -477,24 +471,20 @@ nassh.agent.backends.GSC.apiContextDisposedListener = function() {
  *  initialization succeeded; a rejecting Promise if the Smart Card Connector
  *  app is not installed or disabled.
  */
-nassh.agent.backends.GSC.initializeAPIContext = async function() {
-  if (!nassh.agent.backends.GSC.API || !nassh.agent.backends.GSC.APIContext) {
-    nassh.agent.backends.GSC.APIContext =
-        new GoogleSmartCard.PcscLiteClient.Context(
-            nassh.agent.backends.GSC.CLIENT_TITLE,
-            nassh.agent.backends.GSC.SERVER_APP_ID);
-    nassh.agent.backends.GSC.API = await new Promise((resolve) => {
-      nassh.agent.backends.GSC.APIContext.addOnInitializedCallback((api) => {
-        nassh.agent.backends.GSC.APIContext.addOnDisposeCallback(
-            nassh.agent.backends.GSC.apiContextDisposedListener);
+GSC.initializeAPIContext = async function() {
+  if (!GSC.API || !GSC.APIContext) {
+    GSC.APIContext = new GoogleSmartCard.PcscLiteClient.Context(
+        CLIENT_TITLE, SERVER_APP_ID);
+    GSC.API = await new Promise((resolve) => {
+      GSC.APIContext.addOnInitializedCallback((api) => {
+        GSC.APIContext.addOnDisposeCallback(GSC.apiContextDisposedListener);
         resolve(api);
       });
-      nassh.agent.backends.GSC.APIContext.addOnDisposeCallback(
-          () => resolve(null));
-      nassh.agent.backends.GSC.APIContext.initialize();
+      GSC.APIContext.addOnDisposeCallback(() => resolve(null));
+      GSC.APIContext.initialize();
     });
   }
-  if (!nassh.agent.backends.GSC.API || !nassh.agent.backends.GSC.APIContext) {
+  if (!GSC.API || !GSC.APIContext) {
     throw new Error(
         'GSC.initializeAPIContext: Smart Card Connector app not ' +
         'installed or disabled.');
@@ -513,13 +503,12 @@ nassh.agent.backends.GSC.initializeAPIContext = async function() {
  *     the error occurred.
  * @return {!Promise<!Error>}
  */
-nassh.agent.backends.GSC.decodePcscError = async function(error, stack) {
+async function decodePcscError(error, stack) {
   stack = stack || '';
   // Numeric error codes signify PC/SC-Lite errors.
   if (typeof error === 'number') {
     try {
-      const errorText =
-          await nassh.agent.backends.GSC.API.pcsc_stringify_error(error);
+      const errorText = await GSC.API.pcsc_stringify_error(error);
       return new Error(`${errorText} (${error})\n${stack}`);
     } catch (e) {
       return new Error(`unknown PC/SC-Lite error (${error})\n${stack}`);
@@ -527,7 +516,7 @@ nassh.agent.backends.GSC.decodePcscError = async function(error, stack) {
   } else {
     return error;
   }
-};
+}
 
 /**
  * Convert an array of bytes into a hex string.
@@ -535,11 +524,11 @@ nassh.agent.backends.GSC.decodePcscError = async function(error, stack) {
  * @param {!Uint8Array} array
  * @return {string}
  */
-nassh.agent.backends.GSC.arrayToHexString = function(array) {
+function arrayToHexString(array) {
   // Always include leading zeros.
   return array.reduce(
       (str, byte) => str + lib.f.zpad(byte.toString(16).toUpperCase(), 2), '');
-};
+}
 
 /**
  * A command APDU as defined in ISO/IEC 7816-4, consisting of a header and
@@ -554,7 +543,7 @@ nassh.agent.backends.GSC.arrayToHexString = function(array) {
  *     smart card.
  * @constructor
  */
-nassh.agent.backends.GSC.CommandAPDU = function(
+function CommandAPDU(
     cla, ins, p1, p2, data = new Uint8Array([]), expectResponse = true) {
   /**
    * The header of an APDU, consisting of the CLA, INS, P1 and P2 byte in order.
@@ -579,7 +568,7 @@ nassh.agent.backends.GSC.CommandAPDU = function(
    * @const
    */
   this.expectResponse_ = expectResponse;
-};
+}
 
 /**
  * Get the raw commands.
@@ -593,7 +582,7 @@ nassh.agent.backends.GSC.CommandAPDU = function(
  *     (Lc and Le) can be used with the card.
  * @return {!Array<!Uint8Array>} The raw response.
  */
-nassh.agent.backends.GSC.CommandAPDU.prototype.commands = function(
+CommandAPDU.prototype.commands = function(
     supportsChaining, supportsExtendedLength) {
   const MAX_LC = 255;
   const MAX_EXTENDED_LC = 65535;
@@ -653,7 +642,7 @@ nassh.agent.backends.GSC.CommandAPDU.prototype.commands = function(
  * @readonly
  * @enum {string}
  */
-nassh.agent.backends.GSC.DATA_OBJECT_TAG = {
+const DATA_OBJECT_TAG = {
   0x5E: 'Login data',
   0x5F50: 'URL to public keys',
 
@@ -691,7 +680,7 @@ nassh.agent.backends.GSC.DATA_OBJECT_TAG = {
  * @readonly
  * @enum {string}
  */
-nassh.agent.backends.GSC.DATA_OBJECT_TAG_CLASS = {
+const DATA_OBJECT_TAG_CLASS = {
   0: 'universal',
   1: 'application',
   2: 'context-specific',
@@ -705,15 +694,15 @@ nassh.agent.backends.GSC.DATA_OBJECT_TAG_CLASS = {
  *
  * @constructor
  */
-nassh.agent.backends.GSC.DataObject = function() {};
+function DataObject() {}
 
 /**
  * @typedef {{
- *     dataObject: ?nassh.agent.backends.GSC.DataObject,
+ *     dataObject: ?DataObject,
  *     index: number
  * }}
  */
-nassh.agent.backends.GSC.DataObjectAndIndex;
+const DataObjectAndIndex = undefined;
 
 /**
  * Recursively parse (a range of) the byte representation of a TLV-encoded data
@@ -721,20 +710,18 @@ nassh.agent.backends.GSC.DataObjectAndIndex;
  *
  * @see https://www.cardwerk.com/smartcards/smartcard_standard_ISO7816-4_annex-d.aspx
  *
- * @constructs nassh.agent.backends.GSC.DataObject
+ * @constructs DataObject
  * @param {!Uint8Array} bytes The raw bytes of the data object.
- * @param {number} [start=0] The position in bytes at which the parsing should
+ * @param {number=} start The position in bytes at which the parsing should
  *     start.
- * @param {number} [end=bytes.length] The position in bytes until which to
- *     parse.
+ * @param {number=} end The position in bytes until which to parse.
  * @throws Will throw if the raw data does not follow the specification for
  *     TLV-encoded data objects.
- * @return {!nassh.agent.backends.GSC.DataObjectAndIndex} A DataObject object
+ * @return {!DataObjectAndIndex} A DataObject object
  *     that is the result of the parsing and an index into the input byte array
  *     which points to the end of the part consumed so far.
  */
-nassh.agent.backends.GSC.DataObject.fromBytesInRange = function(
-    bytes, start = 0, end = bytes.length) {
+DataObject.fromBytesInRange = function(bytes, start = 0, end = bytes.length) {
   let pos = start;
   // Skip 0x00 and 0xFF bytes before and between tags.
   while (pos < end && (bytes[pos] === 0x00 || bytes[pos] === 0xFF)) {
@@ -744,11 +731,10 @@ nassh.agent.backends.GSC.DataObject.fromBytesInRange = function(
     return {dataObject: null, index: start};
   }
 
-  const dataObject = new nassh.agent.backends.GSC.DataObject();
+  const dataObject = new DataObject();
   const tagByte = bytes[pos++];
   dataObject.tagClass = tagByte >>> 6;
-  dataObject.tagClassDescription =
-      nassh.agent.backends.GSC.DATA_OBJECT_TAG_CLASS[dataObject.tagClass];
+  dataObject.tagClassDescription = DATA_OBJECT_TAG_CLASS[dataObject.tagClass];
   const isConstructed = !!(tagByte & (1 << 5));
   dataObject.isConstructed = isConstructed;
 
@@ -770,7 +756,7 @@ nassh.agent.backends.GSC.DataObject.fromBytesInRange = function(
                        .reverse()
                        .reduce((acc, val) => (acc << 8) + val, 0);
   dataObject.tagDescription =
-      nassh.agent.backends.GSC.DATA_OBJECT_TAG[dataObject.tag] ||
+      DATA_OBJECT_TAG[dataObject.tag] ||
       `<unimplemented tag: ${dataObject.tag}>`;
 
   const lengthByte = bytes[pos++];
@@ -795,8 +781,8 @@ nassh.agent.backends.GSC.DataObject.fromBytesInRange = function(
     dataObject.children = [];
     let child;
     do {
-      ({dataObject: child, index: pos} = nassh.agent.backends.GSC.DataObject
-          .fromBytesInRange(bytes, pos, valueEnd));
+      ({dataObject: child, index: pos} =
+           DataObject.fromBytesInRange(bytes, pos, valueEnd));
       if (child) {
         dataObject.children.push(child);
       }
@@ -817,20 +803,18 @@ nassh.agent.backends.GSC.DataObject.fromBytesInRange = function(
  *
  * @see https://www.cardwerk.com/smartcards/smartcard_standard_ISO7816-4_annex-d.aspx
  *
- * @constructs nassh.agent.backends.GSC.DataObject
+ * @constructs DataObject
  * @param {!Uint8Array} bytes The raw bytes of the data object.
  * @throws Will throw if the raw data does not follow the specification for
  *     TLV-encoded data objects.
- * @return {?nassh.agent.backends.GSC.DataObject} A DataObject that is the
- *     result of the parsing.
+ * @return {?DataObject} A DataObject that is the result of the parsing.
  */
-nassh.agent.backends.GSC.DataObject.fromBytes = function(bytes) {
+DataObject.fromBytes = function(bytes) {
   const dataObjects = [];
   let index = 0;
   let dataObject;
   do {
-    ({dataObject, index} = nassh.agent.backends.GSC.DataObject
-        .fromBytesInRange(bytes, index));
+    ({dataObject, index} = DataObject.fromBytesInRange(bytes, index));
     if (dataObject) {
       dataObjects.push(dataObject);
     }
@@ -846,7 +830,7 @@ nassh.agent.backends.GSC.DataObject.fromBytes = function(bytes) {
   // Create an artificial root object under which all tags of a top-level
   // tag list are subsumed. This ensures a consistent structure of replies
   // to GET DATA command among different smart card brands.
-  const artificialRootObject = new nassh.agent.backends.GSC.DataObject();
+  const artificialRootObject = new DataObject();
   artificialRootObject.isConstructed = true;
   artificialRootObject.children = dataObjects;
   return artificialRootObject;
@@ -856,10 +840,9 @@ nassh.agent.backends.GSC.DataObject.fromBytes = function(bytes) {
  * Return a data object with a given tag (depth-first search).
  *
  * @param {number} tag
- * @return {?nassh.agent.backends.GSC.DataObject} The requested data object if
- *     present; null otherwise.
+ * @return {?DataObject} The requested data object if present; null otherwise.
  */
-nassh.agent.backends.GSC.DataObject.prototype.lookup = function(tag) {
+DataObject.prototype.lookup = function(tag) {
   if (this.tag === tag) {
     return this;
   }
@@ -874,14 +857,13 @@ nassh.agent.backends.GSC.DataObject.prototype.lookup = function(tag) {
   return null;
 };
 
-
 /**
  * Representation of status bytes as returned by smart card commands.
  *
  * @param {!Uint8Array} bytes The raw status bytes.
  * @constructor
  */
-nassh.agent.backends.GSC.StatusBytes = function(bytes) {
+function StatusBytes(bytes) {
   /**
    * The raw status bytes.
    *
@@ -889,14 +871,14 @@ nassh.agent.backends.GSC.StatusBytes = function(bytes) {
    * @readonly
    */
   this.bytes = bytes;
-};
+}
 
 /**
  * Calculates the 16-bit value represented by the status bytes.
  *
  * @return {number} The 16-bit value represented by the status bytes.
  */
-nassh.agent.backends.GSC.StatusBytes.prototype.value = function() {
+StatusBytes.prototype.value = function() {
   return (this.bytes[0] << 8) + this.bytes[1];
 };
 
@@ -904,7 +886,7 @@ nassh.agent.backends.GSC.StatusBytes.prototype.value = function() {
  * @return {string}
  * @override
  */
-nassh.agent.backends.GSC.StatusBytes.prototype.toString = function() {
+StatusBytes.prototype.toString = function() {
   return `(0x${this.bytes[0].toString(16)} 0x${this.bytes[1].toString(16)})`;
 };
 
@@ -914,7 +896,7 @@ nassh.agent.backends.GSC.StatusBytes.prototype.toString = function() {
  *
  * @constructor
  */
-nassh.agent.backends.GSC.SmartCardManager = function() {
+function SmartCardManager() {
   /**
    * Whether the manager is connected to a reader.
    *
@@ -958,11 +940,10 @@ nassh.agent.backends.GSC.SmartCardManager = function() {
   /**
    * The smart card applet that has been selected by the manager.
    *
-   * @member {!nassh.agent.backends.GSC.SmartCardManager.CardApplets}
+   * @member {!SmartCardManager.CardApplets}
    * @private
    */
-  this.appletSelected_ =
-      nassh.agent.backends.GSC.SmartCardManager.CardApplets.NONE;
+  this.appletSelected_ = SmartCardManager.CardApplets.NONE;
 
   /**
    * True if the card is known to support command chaining.
@@ -979,14 +960,14 @@ nassh.agent.backends.GSC.SmartCardManager = function() {
    * @private
    */
   this.supportsExtendedLength_ = false;
-};
+}
 
 /**
  * Smart card applets used for SSH authentication.
  *
  * @enum {number}
  */
-nassh.agent.backends.GSC.SmartCardManager.CardApplets = {
+SmartCardManager.CardApplets = {
   NONE: 0,
   OPENPGP: 1,
   PIV: 2,
@@ -1003,7 +984,7 @@ nassh.agent.backends.GSC.SmartCardManager.CardApplets = {
  * @readonly
  * @const {!Array<string>}
  */
-nassh.agent.backends.GSC.SmartCardManager.READER_SHORT_NAMES = [
+SmartCardManager.READER_SHORT_NAMES = [
   'Yubikey NEO-N',
   'Yubikey NEO',
   'Yubikey 4-N',
@@ -1021,7 +1002,7 @@ nassh.agent.backends.GSC.SmartCardManager.READER_SHORT_NAMES = [
  * @readonly
  * @enum {number}
  */
-nassh.agent.backends.GSC.SmartCardManager.StatusValues = {
+SmartCardManager.StatusValues = {
   COMMAND_CORRECT: 0x9000,
   COMMAND_CORRECT_MORE_DATA_1: 0x6100,
   COMMAND_INCORRECT_PARAMETERS: 0x6A80,
@@ -1035,7 +1016,7 @@ nassh.agent.backends.GSC.SmartCardManager.StatusValues = {
  *
  * @return {?string}
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.reader = function() {
+SmartCardManager.prototype.reader = function() {
   return this.reader_;
 };
 
@@ -1046,13 +1027,12 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.reader = function() {
  *
  * @return {?string}
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.readerShort = function() {
+SmartCardManager.prototype.readerShort = function() {
   if (!this.reader_) {
     return null;
   }
 
-  for (const shortName of
-           nassh.agent.backends.GSC.SmartCardManager.READER_SHORT_NAMES) {
+  for (const shortName of SmartCardManager.READER_SHORT_NAMES) {
     if (this.reader_.includes(shortName)) {
       return shortName;
     }
@@ -1065,11 +1045,11 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.readerShort = function() {
  *
  * @return {string}
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.appletName = function() {
+SmartCardManager.prototype.appletName = function() {
   switch (this.appletSelected_) {
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP:
+    case SmartCardManager.CardApplets.OPENPGP:
       return 'OpenPGP';
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV:
+    case SmartCardManager.CardApplets.PIV:
       return 'PIV';
     default:
       return 'None';
@@ -1088,8 +1068,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.appletName = function() {
  *     Error object if an error occurred.
  * @private
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.execute_ = function(
-    sCardPromise) {
+SmartCardManager.prototype.execute_ = function(sCardPromise) {
   // Retain call stack for logging purposes.
   const stack = lib.f.getStack();
   return sCardPromise.then((result) => {
@@ -1098,7 +1077,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.execute_ = function(
             (...args) => args.length > 1 ? resolve(args) : resolve(args[0]),
             reject);
     }).catch((e) => {
-      return nassh.agent.backends.GSC.decodePcscError(
+      return decodePcscError(
           /** @type {number|!Error} */ (e), stack)
           .then((e) => Promise.reject(e));
     });
@@ -1110,12 +1089,10 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.execute_ = function(
  *
  * @return {!Promise<void>}
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.establishContext =
-    async function() {
+SmartCardManager.prototype.establishContext = async function() {
   if (!await this.hasValidContext()) {
-    this.context_ =
-        await this.execute_(nassh.agent.backends.GSC.API.SCardEstablishContext(
-            GoogleSmartCard.PcscLiteClient.API.SCARD_SCOPE_SYSTEM, null, null));
+    this.context_ = await this.execute_(GSC.API.SCardEstablishContext(
+        GoogleSmartCard.PcscLiteClient.API.SCARD_SCOPE_SYSTEM, null, null));
   }
 };
 
@@ -1124,14 +1101,12 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.establishContext =
  *
  * @return {!Promise<boolean>}
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.hasValidContext =
-    async function() {
+SmartCardManager.prototype.hasValidContext = async function() {
   if (!this.context_) {
     return false;
   }
   try {
-    await this.execute_(
-        nassh.agent.backends.GSC.API.SCardIsValidContext(this.context_));
+    await this.execute_(GSC.API.SCardIsValidContext(this.context_));
   } catch (_) {
     return false;
   }
@@ -1145,11 +1120,9 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.hasValidContext =
  * @return {!Promise<!Array<string>>|!Promise<!Error>} A Promise resolving
  *     to a list of readers; a rejecting Promise if the context is invalid.
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.listReaders =
-    async function() {
+SmartCardManager.prototype.listReaders = async function() {
   if (await this.hasValidContext()) {
-    return this.execute_(
-        nassh.agent.backends.GSC.API.SCardListReaders(this.context_, null));
+    return this.execute_(GSC.API.SCardListReaders(this.context_, null));
   } else {
     throw new Error('SmartCardManager.listReaders: invalid context');
   }
@@ -1165,8 +1138,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.listReaders =
  *     initiation of the connection was successful; a rejecting Promise if the
  *     context is invalid or the connection failed.
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.connect =
-    async function(reader) {
+SmartCardManager.prototype.connect = async function(reader) {
   if (!await this.hasValidContext()) {
     throw new Error('SmartCardManager.connect: invalid context');
   }
@@ -1175,7 +1147,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.connect =
   }
   if (await this.hasValidContext() && !this.connected_) {
     [this.cardHandle_, this.activeProtocol_] =
-        await this.execute_(nassh.agent.backends.GSC.API.SCardConnect(
+        await this.execute_(GSC.API.SCardConnect(
             this.context_,
             reader,
             GoogleSmartCard.PcscLiteClient.API.SCARD_SHARE_EXCLUSIVE,
@@ -1190,25 +1162,22 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.connect =
  *
  * Supports command chaining and continued responses.
  *
- * @param {!nassh.agent.backends.GSC.CommandAPDU} commandAPDU
+ * @param {!CommandAPDU} commandAPDU
  * @return {!Promise<!Uint8Array>|
- *    !Promise<!nassh.agent.backends.GSC.StatusBytes>} A Promise resolving to
- *    the response; a rejecting Promise containing the status bytes if they
- *    signal an error.
+ *    !Promise<!StatusBytes>} A Promise resolving to the response; a rejecting
+ *    Promise containing the status bytes if they signal an error.
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.transmit =
-    async function(commandAPDU) {
+SmartCardManager.prototype.transmit = async function(commandAPDU) {
   if (!this.connected_) {
     throw new Error('SmartCardManager.transmit: not connected');
   }
   let data;
   for (const command of commandAPDU.commands(
            this.supportsChaining_, this.supportsExtendedLength_)) {
-    const result =
-        await this.execute_(nassh.agent.backends.GSC.API.SCardTransmit(
-            this.cardHandle_,
-            GoogleSmartCard.PcscLiteClient.API.SCARD_PCI_T1,
-            Array.from(command)));
+    const result = await this.execute_(GSC.API.SCardTransmit(
+        this.cardHandle_,
+        GoogleSmartCard.PcscLiteClient.API.SCARD_PCI_T1,
+        Array.from(command)));
     data = await this.getData_(result);
   }
   return data;
@@ -1223,13 +1192,11 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.transmit =
  * @param {!Uint8Array} rawResult A result array formed using execute_ on the
  *     result returned asynchronously by SCardTransmit.
  * @return {!Promise<!Uint8Array>|
- *    !Promise<!nassh.agent.backends.GSC.StatusBytes>} A Promise resolving to
- *    the response; a rejecting Promise containing the status bytes if they
- *    signal an error.
+ *    !Promise<!StatusBytes>} A Promise resolving to the response; a rejecting
+ *    Promise containing the status bytes if they signal an error.
  * @private
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.getData_ =
-    async function(rawResult) {
+SmartCardManager.prototype.getData_ = async function(rawResult) {
   /**
    * Command APDU for the 'GET RESPONSE' command.
    *
@@ -1237,30 +1204,24 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.getData_ =
    *
    * @see https://g10code.com/docs/openpgp-card-2.0.pdf
    */
-  const GET_RESPONSE_APDU =
-      new nassh.agent.backends.GSC.CommandAPDU(0x00, 0xC0, 0x00, 0x00);
+  const GET_RESPONSE_APDU = new CommandAPDU(0x00, 0xC0, 0x00, 0x00);
   const result = new Uint8Array(rawResult[1]);
   let data = result.slice(0, -2);
-  const statusBytes =
-      new nassh.agent.backends.GSC.StatusBytes(result.slice(-2));
+  const statusBytes = new StatusBytes(result.slice(-2));
   if ((statusBytes.value() & 0xFF00) ===
-      nassh.agent.backends.GSC.SmartCardManager.StatusValues
-          .COMMAND_CORRECT_MORE_DATA_1) {
+      SmartCardManager.StatusValues.COMMAND_CORRECT_MORE_DATA_1) {
     // transmit recursively calls getData_ to assemble the complete response.
     const dataContinued = await this.transmit(GET_RESPONSE_APDU);
     data = lib.array.concatTyped(data, dataContinued);
   } else if (
-      this.appletSelected_ ===
-          nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV &&
+      this.appletSelected_ === SmartCardManager.CardApplets.PIV &&
       (statusBytes.value() & 0xFFF0) ===
-          nassh.agent.backends.GSC.SmartCardManager.StatusValues
-              .PIV_TRIES_LEFT_RESPONSE) {
+          SmartCardManager.StatusValues.PIV_TRIES_LEFT_RESPONSE) {
     // Show no error if special status bytes are returned containing the
     // number of remaining PIN verification tries.
     throw statusBytes;
   } else if (
-      statusBytes.value() !==
-      nassh.agent.backends.GSC.SmartCardManager.StatusValues.COMMAND_CORRECT) {
+      statusBytes.value() !== SmartCardManager.StatusValues.COMMAND_CORRECT) {
     console.warn(
         'SmartCardManager.getData_: operation returned specific status bytes ' +
         statusBytes);
@@ -1272,23 +1233,21 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.getData_ =
 /**
  * Select a specific applet on the smart card.
  *
- * @param {!nassh.agent.backends.GSC.SmartCardManager.CardApplets} applet
+ * @param {!SmartCardManager.CardApplets} applet
  * @return {!Promise<void>|!Promise<!Error>} A Promise resolving to the key
  *     blob; a rejecting Promise if the manager is not connected to a smart
  *     card, an applet has already been selected or the selected applet is not
  *     supported.
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
-    async function(applet) {
+SmartCardManager.prototype.selectApplet = async function(applet) {
   if (!this.connected_) {
     throw new Error('SmartCardManager.selectApplet: not connected');
   }
-  if (this.appletSelected_ !==
-      nassh.agent.backends.GSC.SmartCardManager.CardApplets.NONE) {
+  if (this.appletSelected_ !== SmartCardManager.CardApplets.NONE) {
     throw new Error('SmartCardManager.selectApplet: applet already selected');
   }
   switch (applet) {
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP: {
+    case SmartCardManager.CardApplets.OPENPGP: {
       /**
        * Command APDU for the 'SELECT APPLET' command with the OpenPGP
        * Application Identifier (AID) as data.
@@ -1298,7 +1257,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
        * @see https://g10code.com/docs/openpgp-card-2.0.pdf
        */
       const SELECT_APPLET_OPENPGP_APDU =
-          new nassh.agent.backends.GSC.CommandAPDU(
+          new CommandAPDU(
               0x00,
               0xA4,
               0x04,
@@ -1308,7 +1267,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
       await this.determineOpenPGPCardCapabilities();
       break;
     }
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV: {
+    case SmartCardManager.CardApplets.PIV: {
       /**
        * Command APDU for the 'SELECT APPLET' command with the PIV Application
        * Identifier (AID) as data.
@@ -1318,9 +1277,9 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
        * @see https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-73-4.pdf
        *
        * @readonly
-       * @const {!nassh.agent.backends.GSC.CommandAPDU}
+       * @const {!CommandAPDU}
        */
-      const SELECT_APPLET_PIV_APDU = new nassh.agent.backends.GSC.CommandAPDU(
+      const SELECT_APPLET_PIV_APDU = new CommandAPDU(
           0x00,
           0xA4,
           0x04,
@@ -1336,8 +1295,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
       throw new Error(
           `SmartCardManager.selectApplet: applet ID ${applet} not supported`);
   }
-  if (this.appletSelected_ !==
-      nassh.agent.backends.GSC.SmartCardManager.CardApplets.NONE) {
+  if (this.appletSelected_ !== SmartCardManager.CardApplets.NONE) {
     throw new Error(
         'SmartCardManager.selectApplet: applet already selected (race)');
   }
@@ -1349,24 +1307,22 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.selectApplet =
  * additional data depending on the type.
  *
  * @typedef {{
- *     type: !nassh.agent.messages.KeyTypes,
+ *     type: !KeyTypes,
  *     curveOid: ?string,
  * }}
  */
-nassh.agent.backends.KeyInfo;
+const KeyInfo = undefined;
 
 /**
  * Fetch the key type and additional information from the algorithm attributes
  * of the authentication subkey.
  *
- * @return {!Promise<!nassh.agent.backends.KeyInfo>} A
- *     Promise resolving to a KeyInfo object; a rejecting Promise if no
- *     supported type could be extracted.
+ * @return {!Promise<!KeyInfo>} A Promise resolving to a KeyInfo object; a
+ *     rejecting Promise if no supported type could be extracted.
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
-    async function() {
+SmartCardManager.prototype.fetchKeyInfo = async function() {
   switch (this.appletSelected_) {
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP: {
+    case SmartCardManager.CardApplets.OPENPGP: {
       /**
        * Command APDU for the 'GET DATA' command with the identifier of the
        * 'Application Related Data' data object as data.
@@ -1377,21 +1333,21 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
        * @see https://g10code.com/docs/openpgp-card-2.0.pdf
        */
       const FETCH_APPLICATION_RELATED_DATA_APDU =
-          new nassh.agent.backends.GSC.CommandAPDU(0x00, 0xCA, 0x00, 0x6E);
-      const appRelatedData = nassh.agent.backends.GSC.DataObject.fromBytes(
+          new CommandAPDU(0x00, 0xCA, 0x00, 0x6E);
+      const appRelatedData = DataObject.fromBytes(
           await this.transmit(FETCH_APPLICATION_RELATED_DATA_APDU));
       const type = appRelatedData.lookup(0xC3).value[0];
       let curveOid = null;
       switch (type) {
-        case nassh.agent.messages.KeyTypes.RSA:
+        case KeyTypes.RSA:
           return {type, curveOid};
-        case nassh.agent.messages.KeyTypes.ECDSA:
-        case nassh.agent.messages.KeyTypes.EDDSA: {
+        case KeyTypes.ECDSA:
+        case KeyTypes.EDDSA: {
           // Curve is determined by the subsequent bytes encoding the OID.
           const curveOidBytes = appRelatedData.lookup(0xC3).value.slice(1);
-          curveOid = nassh.agent.messages.decodeCurveOidWithVendorFixes(
-              curveOidBytes, this.reader());
-          if (!(curveOid in nassh.agent.messages.OidToCurveInfo)) {
+          curveOid =
+              decodeCurveOidWithVendorFixes(curveOidBytes, this.reader());
+          if (!(curveOid in OidToCurveInfo)) {
             throw new Error(
                 `SmartCardManager.fetchKeyInfo: unsupported curve OID: ` +
                 `${curveOid}`);
@@ -1404,7 +1360,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
               `${type}`);
       }
     }
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV: {
+    case SmartCardManager.CardApplets.PIV: {
       /**
        * Command APDU for the 'GET DATA' command for the 'X.509 Certificate
        * for PIV Authentication' data object.
@@ -1415,16 +1371,16 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
        * @see https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-73-4.pdf
        */
       const READ_AUTHENTICATION_CERTIFICATE_APDU =
-          new nassh.agent.backends.GSC.CommandAPDU(
+          new CommandAPDU(
               0x00,
               0xCB,
               0x3F,
               0xFF,
               new Uint8Array([0x5C, 0x03, 0x5F, 0xC1, 0x05]));
-      const certificateObject = nassh.agent.backends.GSC.DataObject.fromBytes(
+      const certificateObject = DataObject.fromBytes(
           await this.transmit(READ_AUTHENTICATION_CERTIFICATE_APDU));
       const certificateBytes =
-          nassh.agent.backends.GSC.DataObject
+          DataObject
               .fromBytes(certificateObject.lookup(0x53).value)
               .lookup(0x70)
               .value;
@@ -1436,7 +1392,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
       switch (algorithmId) {
         case '1.2.840.113549.1.1.1':
           // RSA
-          return {type: nassh.agent.messages.KeyTypes.RSA, curveOid: null};
+          return {type: KeyTypes.RSA, curveOid: null};
         case '1.2.840.10045.2.1': {
           // ECDSA
           // We deviate from the PIV spec by allowing curves other than P-256.
@@ -1447,19 +1403,15 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
                 certificate.subjectPublicKeyInfo.algorithm.algorithmParams;
             curveOid = algorithmParams.valueBlock.toJSON().value;
           } catch (e) {
-            return {
-              type: nassh.agent.messages.KeyTypes.ECDSA,
-              curveOid: '1.2.840.10045.3.1.7',
-            };
+            return {type: KeyTypes.ECDSA, curveOid: '1.2.840.10045.3.1.7'};
           }
-          if (!(curveOid in nassh.agent.messages.OidToCurveInfo &&
-                'pivAlgorithmId' in
-                    nassh.agent.messages.OidToCurveInfo[curveOid])) {
+          if (!(curveOid in OidToCurveInfo &&
+                'pivAlgorithmId' in OidToCurveInfo[curveOid])) {
             throw new Error(
                 `SmartCardManager.fetchKeyInfo: unsupported curve OID for ` +
                 `PIV: ${curveOid}`);
           }
-          return {type: nassh.agent.messages.KeyTypes.ECDSA, curveOid};
+          return {type: KeyTypes.ECDSA, curveOid};
         }
         default:
           throw new Error(
@@ -1481,10 +1433,9 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchKeyInfo =
  *     the key blob; a rejecting Promise if the selected applet is not
  *     supported.
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.fetchPublicKeyBlob =
-    async function() {
+SmartCardManager.prototype.fetchPublicKeyBlob = async function() {
   switch (this.appletSelected_) {
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP: {
+    case SmartCardManager.CardApplets.OPENPGP: {
       /**
        * Command APDU for the 'GENERATE ASYMMETRIC KEY PAIR' command in
        * 'reading' mode with the identifier of the authentication subkey as
@@ -1497,23 +1448,20 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchPublicKeyBlob =
        * @see RFC 4253, Section 6.6 and RFC 4251, Section 5.
        */
       const READ_AUTHENTICATION_PUBLIC_KEY_APDU =
-          new nassh.agent.backends.GSC.CommandAPDU(
-              0x00, 0x47, 0x81, 0x00, new Uint8Array([0xA4, 0x00]));
-      const publicKeyTemplate = nassh.agent.backends.GSC.DataObject.fromBytes(
+          new CommandAPDU(0x00, 0x47, 0x81, 0x00, new Uint8Array([0xA4, 0x00]));
+      const publicKeyTemplate = DataObject.fromBytes(
           await this.transmit(READ_AUTHENTICATION_PUBLIC_KEY_APDU));
       const keyInfo = await this.fetchKeyInfo();
       switch (keyInfo.type) {
-        case nassh.agent.messages.KeyTypes.RSA: {
+        case KeyTypes.RSA: {
           const exponent = publicKeyTemplate.lookup(0x82).value;
           const modulus = publicKeyTemplate.lookup(0x81).value;
-          return nassh.agent.messages.generateKeyBlob(
-              keyInfo.type, exponent, modulus);
+          return generateKeyBlob(keyInfo.type, exponent, modulus);
         }
-        case nassh.agent.messages.KeyTypes.ECDSA:
-        case nassh.agent.messages.KeyTypes.EDDSA: {
+        case KeyTypes.ECDSA:
+        case KeyTypes.EDDSA: {
           const key = publicKeyTemplate.lookup(0x86).value;
-          return nassh.agent.messages.generateKeyBlob(
-              keyInfo.type, keyInfo.curveOid, key);
+          return generateKeyBlob(keyInfo.type, keyInfo.curveOid, key);
         }
         default:
           throw new Error(
@@ -1521,7 +1469,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchPublicKeyBlob =
               `${JSON.stringify(keyInfo)}`);
       }
     }
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV: {
+    case SmartCardManager.CardApplets.PIV: {
       /**
        * Command APDU for the 'GET DATA' command for the 'X.509 Certificate
        * for PIV Authentication' data object.
@@ -1532,16 +1480,16 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchPublicKeyBlob =
        * @see https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-73-4.pdf
        */
       const READ_AUTHENTICATION_CERTIFICATE_APDU =
-          new nassh.agent.backends.GSC.CommandAPDU(
+          new CommandAPDU(
               0x00,
               0xCB,
               0x3F,
               0xFF,
               new Uint8Array([0x5C, 0x03, 0x5F, 0xC1, 0x05]));
-      const certificateObject = nassh.agent.backends.GSC.DataObject.fromBytes(
+      const certificateObject = DataObject.fromBytes(
           await this.transmit(READ_AUTHENTICATION_CERTIFICATE_APDU));
       const certificateBytes =
-          nassh.agent.backends.GSC.DataObject
+          DataObject
               .fromBytes(certificateObject.lookup(0x53).value)
               .lookup(0x70)
               .value;
@@ -1552,7 +1500,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchPublicKeyBlob =
           certificate.subjectPublicKeyInfo.subjectPublicKey.valueBlock.valueHex;
       const keyInfo = await this.fetchKeyInfo();
       switch (keyInfo.type) {
-        case nassh.agent.messages.KeyTypes.RSA: {
+        case KeyTypes.RSA: {
           const asn1PublicKey = asn1js.fromBER(rawPublicKey);
           const rsaPublicKey =
               new pkijs.RSAPublicKey({schema: asn1PublicKey.result});
@@ -1560,11 +1508,10 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchPublicKeyBlob =
               new Uint8Array(rsaPublicKey.publicExponent.valueBlock.valueHex);
           const modulus =
               new Uint8Array(rsaPublicKey.modulus.valueBlock.valueHex);
-          return nassh.agent.messages.generateKeyBlob(
-              keyInfo.type, exponent, modulus);
+          return generateKeyBlob(keyInfo.type, exponent, modulus);
         }
-        case nassh.agent.messages.KeyTypes.ECDSA:
-          return nassh.agent.messages.generateKeyBlob(
+        case KeyTypes.ECDSA:
+          return generateKeyBlob(
               keyInfo.type, keyInfo.curveOid, new Uint8Array(rawPublicKey));
         default:
           throw new Error(
@@ -1587,11 +1534,9 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.fetchPublicKeyBlob =
  *     to the fingerprint; a rejecting Promise if the selected applet is not
  *     supported.
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype
-    .fetchAuthenticationPublicKeyId =
-    async function() {
+SmartCardManager.prototype.fetchAuthenticationPublicKeyId = async function() {
   switch (this.appletSelected_) {
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP: {
+    case SmartCardManager.CardApplets.OPENPGP: {
       /**
        * Command APDU for the 'GET DATA' command with the identifier of the
        * 'Application Related Data' data object as data.
@@ -1601,12 +1546,12 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
        * @see https://g10code.com/docs/openpgp-card-2.0.pdf
        */
       const FETCH_APPLICATION_RELATED_DATA_APDU =
-          new nassh.agent.backends.GSC.CommandAPDU(0x00, 0xCA, 0x00, 0x6E);
-      const appRelatedData = nassh.agent.backends.GSC.DataObject.fromBytes(
+          new CommandAPDU(0x00, 0xCA, 0x00, 0x6E);
+      const appRelatedData = DataObject.fromBytes(
           await this.transmit(FETCH_APPLICATION_RELATED_DATA_APDU));
       return appRelatedData.lookup(0xC5).value.subarray(40, 60);
     }
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV: {
+    case SmartCardManager.CardApplets.PIV: {
       /**
        * Command APDU for the 'GET DATA' command for the 'X.509 Certificate
        * for PIV Authentication' data object.
@@ -1617,16 +1562,16 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
        * @see https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-73-4.pdf
        */
       const READ_AUTHENTICATION_CERTIFICATE_PIV_APDU =
-          new nassh.agent.backends.GSC.CommandAPDU(
+          new CommandAPDU(
               0x00,
               0xCB,
               0x3F,
               0xFF,
               new Uint8Array([0x5C, 0x03, 0x5F, 0xC1, 0x05]));
-      const certificateObject = nassh.agent.backends.GSC.DataObject.fromBytes(
+      const certificateObject = DataObject.fromBytes(
           await this.transmit(READ_AUTHENTICATION_CERTIFICATE_PIV_APDU));
       const certificateBytes =
-          nassh.agent.backends.GSC.DataObject
+          DataObject
               .fromBytes(certificateObject.lookup(0x53).value)
               .lookup(0x70)
               .value;
@@ -1652,11 +1597,10 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
  *     number of PIN verification attempts; a rejecting Promise if the selected
  *     applet is not supported.
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype
-    .fetchPINVerificationTriesRemaining =
+SmartCardManager.prototype.fetchPINVerificationTriesRemaining =
     async function() {
   switch (this.appletSelected_) {
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP: {
+    case SmartCardManager.CardApplets.OPENPGP: {
       /**
        * Command APDU for the 'GET DATA' command with the identifier of the
        * 'Application Related Data' data object as data.
@@ -1666,12 +1610,12 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
        * @see https://g10code.com/docs/openpgp-card-2.0.pdf
        */
       const FETCH_APPLICATION_RELATED_DATA_APDU =
-          new nassh.agent.backends.GSC.CommandAPDU(0x00, 0xCA, 0x00, 0x6E);
-      const appRelatedData = nassh.agent.backends.GSC.DataObject.fromBytes(
+          new CommandAPDU(0x00, 0xCA, 0x00, 0x6E);
+      const appRelatedData = DataObject.fromBytes(
           await this.transmit(FETCH_APPLICATION_RELATED_DATA_APDU));
       return appRelatedData.lookup(0xC4).value[4];
     }
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV: {
+    case SmartCardManager.CardApplets.PIV: {
       /**
        * Header bytes of the command APDU for the 'VERIFY PIN' command (PIV).
        *
@@ -1683,14 +1627,13 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
       // The PIV applet returns the number of remaining tries encoded into the
       // status bytes, hence we expect the following command to throw.
       try {
-        await this.transmit(new nassh.agent.backends.GSC.CommandAPDU(
+        await this.transmit(new CommandAPDU(
             ...VERIFY_PIN_PIV_APDU_HEADER,
             [] /* data */,
             false /* expectResponse */));
       } catch (statusBytes) {
         if ((statusBytes.value() & 0xFFF0) ===
-            nassh.agent.backends.GSC.SmartCardManager.StatusValues
-                .PIV_TRIES_LEFT_RESPONSE) {
+            SmartCardManager.StatusValues.PIV_TRIES_LEFT_RESPONSE) {
           return statusBytes.value() & 0xF;
         }
         throw new Error(
@@ -1713,9 +1656,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
  *
  * @return {!Promise.<void>}
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype
-    .determineOpenPGPCardCapabilities =
-    async function() {
+SmartCardManager.prototype.determineOpenPGPCardCapabilities = async function() {
   /**
    * Command APDU for the 'GET DATA' command with the identifier of the
    * 'Historical Bytes' data object as data.
@@ -1725,8 +1666,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
    *
    * @see https://g10code.com/docs/openpgp-card-2.0.pdf
    */
-  const FETCH_HISTORICAL_BYTES_APDU =
-      new nassh.agent.backends.GSC.CommandAPDU(0x00, 0xCA, 0x5F, 0x52);
+  const FETCH_HISTORICAL_BYTES_APDU = new CommandAPDU(0x00, 0xCA, 0x5F, 0x52);
   const historicalBytes = await this.transmit(FETCH_HISTORICAL_BYTES_APDU);
   // Parse data objects in COMPACT-TLV.
   // First byte is assumed to be 0x00, last three bytes are status bytes.
@@ -1764,10 +1704,9 @@ nassh.agent.backends.GSC.SmartCardManager.prototype
  *     blocked or unrecognized status bytes were returned or the selected applet
  *     is not supported.
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.verifyPIN =
-    async function(pinBytes) {
+SmartCardManager.prototype.verifyPIN = async function(pinBytes) {
   switch (this.appletSelected_) {
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP: {
+    case SmartCardManager.CardApplets.OPENPGP: {
       /**
        * Header bytes of the command APDU for the 'VERIFY PIN' command.
        *
@@ -1777,23 +1716,20 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.verifyPIN =
        */
       const VERIFY_PIN_APDU_HEADER_OPENPGP = [0x00, 0x20, 0x00, 0x82];
       try {
-        await this.transmit(new nassh.agent.backends.GSC.CommandAPDU(
+        await this.transmit(new CommandAPDU(
             ...VERIFY_PIN_APDU_HEADER_OPENPGP,
             pinBytes,
             false /* expectResponse */));
         return true;
       } catch (error) {
-        if (error instanceof nassh.agent.backends.GSC.StatusBytes) {
+        if (error instanceof StatusBytes) {
           switch (error.value()) {
-            case nassh.agent.backends.GSC.SmartCardManager.StatusValues
-                .COMMAND_INCORRECT_PARAMETERS:
+            case SmartCardManager.StatusValues.COMMAND_INCORRECT_PARAMETERS:
               // This happens if the PIN entered by the user is too short,
               // e.g. less than six characters long for OpenPGP.
-            case nassh.agent.backends.GSC.SmartCardManager.StatusValues
-                .COMMAND_WRONG_PIN:
+            case SmartCardManager.StatusValues.COMMAND_WRONG_PIN:
               return false;
-            case nassh.agent.backends.GSC.SmartCardManager.StatusValues
-                .COMMAND_BLOCKED_PIN:
+            case SmartCardManager.StatusValues.COMMAND_BLOCKED_PIN:
               throw new Error('SmartCardManager.verifyPIN: device is blocked');
             default:
               throw new Error(
@@ -1804,7 +1740,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.verifyPIN =
         }
       }
     }
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV: {
+    case SmartCardManager.CardApplets.PIV: {
       /**
        * Header bytes of the command APDU for the 'VERIFY PIN' command (PIV).
        *
@@ -1825,20 +1761,18 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.verifyPIN =
           lib.array.concatTyped(pinBytes, new Uint8Array([0xFF, 0xFF]))
               .subarray(0, 8);
       try {
-        await this.transmit(new nassh.agent.backends.GSC.CommandAPDU(
+        await this.transmit(new CommandAPDU(
             ...VERIFY_PIN_APDU_HEADER_PIV,
             paddedPinBytes,
             false /* expectResponse */));
         paddedPinBytes.fill(0);
         return true;
       } catch (error) {
-        if (error instanceof nassh.agent.backends.GSC.StatusBytes) {
+        if (error instanceof StatusBytes) {
           if ((error.value() & 0x6300) === 0x6300) {
             return false;
-          } else if (
-              error.value() ===
-              nassh.agent.backends.GSC.SmartCardManager.StatusValues
-                  .COMMAND_BLOCKED_PIN) {
+          } else if (error.value() ===
+                     SmartCardManager.StatusValues.COMMAND_BLOCKED_PIN) {
             throw new Error('SmartCardManager.verifyPIN: device is blocked');
           } else {
             throw new Error(
@@ -1866,10 +1800,9 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.verifyPIN =
  *     the computed signature; a rejecting Promise if the selected applet is not
  *     supported.
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.authenticate =
-    async function(data) {
+SmartCardManager.prototype.authenticate = async function(data) {
   switch (this.appletSelected_) {
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.OPENPGP: {
+    case SmartCardManager.CardApplets.OPENPGP: {
       /**
        * Header bytes of the command APDU for the 'INTERNAL AUTHENTICATE'
        * command (OpenPGP).
@@ -1880,10 +1813,10 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.authenticate =
        * @see https://g10code.com/docs/openpgp-card-2.0.pdf
        */
       const INTERNAL_AUTHENTICATE_APDU_HEADER = [0x00, 0x88, 0x00, 0x00];
-      return this.transmit(new nassh.agent.backends.GSC.CommandAPDU(
-          ...INTERNAL_AUTHENTICATE_APDU_HEADER, data));
+      return this.transmit(
+          new CommandAPDU(...INTERNAL_AUTHENTICATE_APDU_HEADER, data));
     }
-    case nassh.agent.backends.GSC.SmartCardManager.CardApplets.PIV: {
+    case SmartCardManager.CardApplets.PIV: {
       /**
        * Header bytes of the command APDU for the 'GENERAL AUTHENTICATE'
        * command (PIV), using the RSA-2048 algorithm (0x07) resp. ECC P-256
@@ -1896,7 +1829,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.authenticate =
        */
       const keyInfo = await this.fetchKeyInfo();
       switch (keyInfo.type) {
-        case nassh.agent.messages.KeyTypes.RSA: {
+        case KeyTypes.RSA: {
           const paddedData = lib.array.concatTyped(
               new Uint8Array([0x00, 0x01]),
               new Uint8Array(new Array(256 - 3 - data.length).fill(0xFF)),
@@ -1910,26 +1843,24 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.authenticate =
               paddedData);
           const GENERAL_AUTHENTICATE_RSA_APDU_HEADER = [0x00, 0x87, 0x07, 0x9A];
           const signedAuthTemplate =
-              nassh.agent.backends.GSC.DataObject.fromBytes(
-                  await this.transmit(new nassh.agent.backends.GSC.CommandAPDU(
-                      ...GENERAL_AUTHENTICATE_RSA_APDU_HEADER, authTemplate)));
+              DataObject.fromBytes(await this.transmit(new CommandAPDU(
+                  ...GENERAL_AUTHENTICATE_RSA_APDU_HEADER, authTemplate)));
           return signedAuthTemplate.lookup(0x82).value;
         }
-        case nassh.agent.messages.KeyTypes.ECDSA: {
+        case KeyTypes.ECDSA: {
           // Create Dynamic Authentication Template.
           // @see Section 3.2.4, Table 7 & Table 20 (adapted to ECC)
           const authTemplate = lib.array.concatTyped(
               new Uint8Array(
                   [0x7C, 4 + data.length, 0x82, 0x00, 0x81, data.length]),
               data);
-          const algorithmId = nassh.agent.messages.OidToCurveInfo[
-              lib.notNull(keyInfo.curveOid)].pivAlgorithmId;
+          const algorithmId =
+              OidToCurveInfo[lib.notNull(keyInfo.curveOid)].pivAlgorithmId;
           const GENERAL_AUTHENTICATE_ECC_APDU_HEADER =
               [0x00, 0x87, algorithmId, 0x9A];
           const signedAuthTemplate =
-              nassh.agent.backends.GSC.DataObject.fromBytes(
-                  await this.transmit(new nassh.agent.backends.GSC.CommandAPDU(
-                      ...GENERAL_AUTHENTICATE_ECC_APDU_HEADER, authTemplate)));
+              DataObject.fromBytes(await this.transmit(new CommandAPDU(
+                  ...GENERAL_AUTHENTICATE_ECC_APDU_HEADER, authTemplate)));
           const asn1SignatureBytes = signedAuthTemplate.lookup(0x82).value;
           const asn1Signature = asn1js.fromBER(asn1SignatureBytes.buffer);
           const asn1SequenceBlock = asn1Signature.result.valueBlock;
@@ -1951,17 +1882,15 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.authenticate =
  *
  * @return {!Promise<void>}
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.disconnect =
-    async function() {
+SmartCardManager.prototype.disconnect = async function() {
   if (this.connected_) {
-    await this.execute_(nassh.agent.backends.GSC.API.SCardDisconnect(
+    await this.execute_(GSC.API.SCardDisconnect(
         this.cardHandle_, GoogleSmartCard.PcscLiteClient.API.SCARD_LEAVE_CARD));
     this.connected_ = false;
     this.reader_ = null;
     this.cardHandle_ = null;
     this.activeProtocol_ = null;
-    this.appletSelected_ =
-        nassh.agent.backends.GSC.SmartCardManager.CardApplets.NONE;
+    this.appletSelected_ = SmartCardManager.CardApplets.NONE;
   }
 };
 
@@ -1970,8 +1899,7 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.disconnect =
  *
  * @return {!Promise<void>}
  */
-nassh.agent.backends.GSC.SmartCardManager.prototype.releaseContext =
-    async function() {
+SmartCardManager.prototype.releaseContext = async function() {
   if (!await this.hasValidContext()) {
     this.context_ = null;
     return;
@@ -1979,7 +1907,6 @@ nassh.agent.backends.GSC.SmartCardManager.prototype.releaseContext =
   if (this.connected_) {
     await this.disconnect();
   }
-  await this.execute_(
-      nassh.agent.backends.GSC.API.SCardReleaseContext(this.context_));
+  await this.execute_(GSC.API.SCardReleaseContext(this.context_));
   this.context_ = null;
 };

@@ -2,11 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
- * @fileoverview Test suite for the generic SSH agent in nassh.agent.Agent.
+ * @fileoverview Test suite for the generic SSH agent in Agent.
  */
+
+import {keyBlobToAuthorizedKeysFormat} from './nassh_agent.js';
 
 describe('nassh_agent_tests.js', () => {
 
@@ -20,14 +20,10 @@ it('keyBlobToAuthorizedKeysFormat', () => {
   const keyTypeEd25519 =
       'AAAAC3NzaC1lZDI1NTE5AAAAIKsEa2RL2X0d3L3CA9uwTbqQvJfVjIEEJzH/i8lpWkNq';
 
-  assert.equal(
-      nassh.agent.Agent.keyBlobToAuthorizedKeysFormat(
-          asciiToBinary(keyTypeRsa)),
-      'ssh-rsa ' + keyTypeRsa);
-  assert.equal(
-      nassh.agent.Agent.keyBlobToAuthorizedKeysFormat(
-          asciiToBinary(keyTypeEd25519)),
-      'ssh-ed25519 ' + keyTypeEd25519);
+  assert.equal(keyBlobToAuthorizedKeysFormat(asciiToBinary(keyTypeRsa)),
+               'ssh-rsa ' + keyTypeRsa);
+  assert.equal(keyBlobToAuthorizedKeysFormat(asciiToBinary(keyTypeEd25519)),
+               'ssh-ed25519 ' + keyTypeEd25519);
 });
 
 });

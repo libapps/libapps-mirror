@@ -3,17 +3,18 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview SSH agent implementation using nassh.agent.Agent to relay
- * requests to backends.
+ * @fileoverview SSH agent implementation using Agent to relay requests to
+ *     backends.
  */
 
+import {Agent} from './nassh_agent.js';
 import {Stream} from './nassh_stream.js';
 
 /**
- * Relay ssh-agent messages to an nassh.agent.Agent instance.
+ * Relay ssh-agent messages to an Agent instance.
  *
  * @param {number} fd
- * @param {{authAgent: !nassh.agent.Agent}} args
+ * @param {{authAgent: !Agent}} args
  * @constructor
  * @extends {Stream}
  */

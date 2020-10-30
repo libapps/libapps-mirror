@@ -6,6 +6,9 @@
  * @fileoverview Stream for connecting to a ssh server via a SSH-FE relay.
  */
 
+import {Message} from './nassh_agent_message.js';
+import {MessageNumbers, readMessage,
+        writeMessage} from './nassh_agent_message_types.js';
 import {Stream} from './nassh_stream.js';
 
 /**
@@ -198,13 +201,12 @@ RelaySshfeWsStream.prototype.signChallenge_ = function(challenge) {
     }
 
     // Receive SSH_AGENTC_PUBLIC_KEY_RESPONSE.
-    const response = nassh.agent.messages.read(
-        new nassh.agent.Message(
-            result.data[0], new Uint8Array(result.data.slice(1))));
+    const response = readMessage(new Message(
+        result.data[0], new Uint8Array(result.data.slice(1))));
 
     // Construct a SSH_AGENTC_SIGN_REQUEST.
-    const request = nassh.agent.messages.write(
-        nassh.agent.messages.Numbers.AGENTC_SIGN_REQUEST,
+    const request = writeMessage(
+        MessageNumbers.AGENTC_SIGN_REQUEST,
         new Uint8Array(response.fields.publicKeyRaw),
         lib.codec.stringToCodeUnitArray(challenge));
 
