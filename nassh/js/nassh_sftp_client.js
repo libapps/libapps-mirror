@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {newBuffer} from './nassh_buffer.js';
 import {Packet} from './nassh_sftp_packet.js';
 import {
   AttrsPacket, DataPacket, DiskFreePacket, ExtendedReplyPacket, File, FileAttrs,
@@ -45,7 +46,7 @@ export function Client(basePath = '') {
 
   // The buffered packet data coming from the plugin.
   this.pendingMessageSize_ = null;
-  this.buffer_ = nassh.buffer.new(/* autoack= */ true);
+  this.buffer_ = newBuffer(/* autoack= */ true);
 
   // A map of pending packet requests.
   // Takes a requestId for a key and a Promise as a value.

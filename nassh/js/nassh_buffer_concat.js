@@ -2,16 +2,16 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Basic buffer that concats inputs together.
  */
 
+import {BufferInterface} from './nassh_buffer_interface.js';
+
 /**
  * A very simple buffer that concats inputs together.
  */
-nassh.buffer.Concat = class extends nassh.buffer.Interface {
+export class ConcatBuffer extends BufferInterface {
   /** @inheritDoc */
   constructor(autoack = false) {
     super(autoack);
@@ -42,4 +42,4 @@ nassh.buffer.Concat = class extends nassh.buffer.Interface {
     this.buffer_ = this.buffer_.subarray(length);
     this.readPos_ -= length;
   }
-};
+}

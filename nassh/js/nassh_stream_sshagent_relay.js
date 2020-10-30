@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {newBuffer} from './nassh_buffer.js';
 import {Stream} from './nassh_stream.js';
 
 /**
@@ -17,7 +18,7 @@ export function SshAgentRelayStream(fd) {
   this.authAgentAppID_ = null;
   this.port_ = null;
   this.pendingMessageSize_ = null;
-  this.writeBuffer_ = nassh.buffer.new(/* autoack= */ true);
+  this.writeBuffer_ = newBuffer(/* autoack= */ true);
 }
 
 /**

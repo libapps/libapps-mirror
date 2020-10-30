@@ -6,6 +6,7 @@
  * @fileoverview Stream for connecting to a ssh server via a Websocket relay.
  */
 
+import {newBuffer} from './nassh_buffer.js';
 import {Stream} from './nassh_stream.js';
 
 /**
@@ -33,7 +34,7 @@ export class RelayWebsockifyStream extends Stream {
     this.port_ = null;
 
     // All the data we've queued but not yet sent out.
-    this.writeBuffer_ = nassh.buffer.new();
+    this.writeBuffer_ = newBuffer();
     // Callback function when asyncWrite is used.
     this.onWriteSuccess_ = null;
 

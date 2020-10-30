@@ -9,6 +9,7 @@
 
 import {punycode} from './nassh_deps.rollup.js';
 import {Agent} from './nassh_agent.js';
+import {setDefaultBackend} from './nassh_buffer.js';
 import {Cli as nasftpCli} from './nasftp_cli.js';
 import {gcseRefreshCert, getGnubbyExtension} from './nassh_google.js';
 import {Plugin as NaclPlugin} from './nassh_plugin_nacl.js';
@@ -977,7 +978,7 @@ nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
   }
 
   // First tokenize the options into an object we can work with more easily.
-  let options = {};
+  let /** @type {!Object<string, string>} */ options = {};
   try {
     options = nassh.CommandInstance.tokenizeOptions(params.nasshOptions);
   } catch (e) {
@@ -986,7 +987,7 @@ nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
     return;
   }
 
-  let userOptions = {};
+  let /** @type {!Object<string, string>} */ userOptions = {};
   try {
     userOptions = nassh.CommandInstance.tokenizeOptions(
         params.nasshUserOptions);
@@ -1038,7 +1039,7 @@ nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
   }
 
   if (options['--field-trial-buffer']) {
-    nassh.buffer.backend = options['--field-trial-buffer'];
+    setDefaultBackend(/** @type {string} */ (options['--field-trial-buffer']));
   }
 
   // Start driving non-CrOS people to the extension variant.
@@ -1282,7 +1283,7 @@ nassh.CommandInstance.prototype.connectToFinalize_ = async function(
  * Turn the nassh option string into an object.
  *
  * @param {string=} optionString The set of --long options to parse.
- * @return {!Object} A map of --option to its value.
+ * @return {!Object<string, string>} A map of --option to its value.
  */
 nassh.CommandInstance.tokenizeOptions = function(optionString = '') {
   const rv = {};

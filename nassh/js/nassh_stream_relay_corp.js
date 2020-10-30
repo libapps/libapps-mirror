@@ -6,6 +6,7 @@
  * @fileoverview Stream for connecting to a ssh server via a Corp relay.
  */
 
+import {newBuffer} from './nassh_buffer.js';
 import {Stream} from './nassh_stream.js';
 
 /**
@@ -34,7 +35,7 @@ export function RelayCorpStream(fd) {
   this.backoffMS_ = 0;
   this.backoffTimeout_ = null;
 
-  this.writeBuffer_ = nassh.buffer.new();
+  this.writeBuffer_ = newBuffer();
   // The total byte count we've written during this session.
   this.writeCount_ = 0;
   this.onWriteSuccess_ = null;

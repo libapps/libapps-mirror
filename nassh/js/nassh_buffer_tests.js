@@ -2,20 +2,22 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Common buffer API tests.
  */
+
+import {newBuffer, setDefaultBackend} from './nassh_buffer.js';
+import {ConcatBuffer} from './nassh_buffer_concat.js';
+import {BufferInterface} from './nassh_buffer_interface.js';
 
 /**
  * Helper class for inspecting buffer internals.
  *
  * @abstract
  */
-nassh.buffer.Inspector = class {
+export class BufferInspector {
   /**
-   * @param {!nassh.buffer.Interface} buffer The buffer to inspect.
+   * @param {!BufferInterface} buffer The buffer to inspect.
    */
   constructor(buffer) {
     this.buffer = buffer;
@@ -28,7 +30,7 @@ nassh.buffer.Inspector = class {
    * @return {number}
    */
   getUnackedCount() {}
-};
+}
 
 /**
  * Testsuite for the generic buffer API.
@@ -36,18 +38,18 @@ nassh.buffer.Inspector = class {
  * Each implementation should call this to verify functionality.
  *
  * @param {string} backend The name of the backend to instantiate.
- * @param {!typeof nassh.buffer.Inspector} inspectClass Class for inspecting the
+ * @param {!typeof BufferInspector} inspectClass Class for inspecting the
  *     buffer internals while testing.
  * @suppress {checkTypes} Closure can't figure out abstract class.
  */
-nassh.buffer.ApiTest = function(backend, inspectClass) {
+export function BufferApiTest(backend, inspectClass) {
 
 /**
  * Check behavior of empty buffers.
  */
 it('buffer-empty', () => {
-  nassh.buffer.backend = backend;
-  const buffer = nassh.buffer.new();
+  setDefaultBackend(backend);
+  const buffer = newBuffer();
 
   // No data available.
   assert.equal(0, buffer.getUnreadCount());
@@ -67,8 +69,8 @@ it('buffer-empty', () => {
  * Check autoacking behavior.
  */
 it('buffer-autoack', () => {
-  nassh.buffer.backend = backend;
-  const buffer = nassh.buffer.new(/* autoack= */ true);
+  setDefaultBackend(backend);
+  const buffer = newBuffer(/* autoack= */ true);
   const inspector = new inspectClass(buffer);
 
   // Write some data to the buffer.
@@ -95,8 +97,8 @@ it('buffer-autoack', () => {
  * Check manual acking behavior.
  */
 it('buffer-manual-ack', () => {
-  nassh.buffer.backend = backend;
-  const buffer = nassh.buffer.new();
+  setDefaultBackend(backend);
+  const buffer = newBuffer();
   const inspector = new inspectClass(buffer);
 
   // Write some data to the buffer.
@@ -124,8 +126,8 @@ it('buffer-manual-ack', () => {
  * Check automatic buffer growing.
  */
 it('buffer-grow', () => {
-  nassh.buffer.backend = backend;
-  const buffer = nassh.buffer.new();
+  setDefaultBackend(backend);
+  const buffer = newBuffer();
   const inspector = new inspectClass(buffer);
   const basesize = 1024;
 
@@ -157,7 +159,7 @@ it('buffer-grow', () => {
   assert.equal(0, inspector.getUnackedCount());
 });
 
-};
+}
 
 describe('nassh_buffer_tests.js', () => {
 
@@ -166,13 +168,16 @@ describe('nassh_buffer_tests.js', () => {
  */
 it('new', () => {
   // Default is concat.
-  let ret = nassh.buffer.new();
-  assert.isTrue(ret instanceof nassh.buffer.Concat);
+  let ret = newBuffer();
+  assert.instanceOf(ret, ConcatBuffer);
 
   // Bad config still works.
-  nassh.buffer.backend = 'foooooo';
-  ret = nassh.buffer.new();
-  assert.isTrue(ret instanceof nassh.buffer.Concat);
+  setDefaultBackend('foooooo');
+  ret = newBuffer();
+  assert.instanceOf(ret, ConcatBuffer);
+
+  // Restore good state.
+  setDefaultBackend('concat');
 });
 
 });

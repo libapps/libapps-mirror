@@ -2,11 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Scatter/gather buffer implementation.
  */
+
+import {BufferInterface} from './nassh_buffer_interface.js';
 
 /**
  * A buffer using the scatter/gather pattern.
@@ -15,7 +15,7 @@
  * walking them when reading as if it were one giant linear buffer.  This way
  * we avoid creating new temporary buffers on the fly, and unnecessary memcpys.
  */
-nassh.buffer.ScatGat = class extends nassh.buffer.Interface {
+export class ScatGatBuffer extends BufferInterface {
   /** @inheritDoc */
   constructor(autoack = false) {
     super(autoack);
@@ -144,4 +144,4 @@ nassh.buffer.ScatGat = class extends nassh.buffer.Interface {
       }
     }
   }
-};
+}

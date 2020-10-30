@@ -2,24 +2,26 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
- * @fileoverview nassh.buffer.Concat tests.
+ * @fileoverview ConcatBuffer tests.
  */
+
+import {BufferApiTest, BufferInspector} from './nassh_buffer_tests.js';
+import {ConcatBuffer} from './nassh_buffer_concat.js';
 
 describe('nassh_buffer_concat_tests.js', () => {
 
 /**
  * Internal buffer inspector.
  */
-class BufferInspector extends nassh.buffer.Inspector {
+class Inspector extends BufferInspector {
   /** @inheritDoc */
   getUnackedCount() {
-    return this.buffer.buffer_.length;
+    const buffer = /** @type {!ConcatBuffer} */ (this.buffer);
+    return buffer.buffer_.length;
   }
 }
 
-nassh.buffer.ApiTest('concat', BufferInspector);
+BufferApiTest('concat', Inspector);
 
 });

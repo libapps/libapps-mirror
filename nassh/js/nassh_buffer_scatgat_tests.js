@@ -2,28 +2,30 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
- * @fileoverview nassh.buffer.ScatGat tests.
+ * @fileoverview ScatGatBuffer tests.
  */
+
+import {BufferApiTest, BufferInspector} from './nassh_buffer_tests.js';
+import {ScatGatBuffer} from './nassh_buffer_scatgat.js';
 
 describe('nassh_buffer_scatgat_tests.js', () => {
 
 /**
  * Internal buffer inspector.
  */
-class BufferInspector extends nassh.buffer.Inspector {
+class Inspector extends BufferInspector {
   /** @inheritDoc */
   getUnackedCount() {
-    let ret = this.buffer.getUnreadCount();
-    let pos = this.buffer.ackPos_;
-    let off = this.buffer.ackOffset_;
-    while (pos <= this.buffer.readPos_) {
-      if (pos === this.buffer.readPos_) {
-        ret += (this.buffer.readOffset_ - off);
+    const buffer = /** @type {!ScatGatBuffer} */ (this.buffer);
+    let ret = buffer.getUnreadCount();
+    let pos = buffer.ackPos_;
+    let off = buffer.ackOffset_;
+    while (pos <= buffer.readPos_) {
+      if (pos === buffer.readPos_) {
+        ret += (buffer.readOffset_ - off);
       } else {
-        const curr = this.buffer.queue_[pos];
+        const curr = buffer.queue_[pos];
         ret += (curr.length - off);
         off = 0;
       }
@@ -33,6 +35,6 @@ class BufferInspector extends nassh.buffer.Inspector {
   }
 }
 
-nassh.buffer.ApiTest('scatgat', BufferInspector);
+BufferApiTest('scatgat', Inspector);
 
 });

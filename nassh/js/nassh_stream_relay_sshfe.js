@@ -9,6 +9,7 @@
 import {Message} from './nassh_agent_message.js';
 import {MessageNumbers, readMessage,
         writeMessage} from './nassh_agent_message_types.js';
+import {newBuffer} from './nassh_buffer.js';
 import {Stream} from './nassh_stream.js';
 
 /**
@@ -40,7 +41,7 @@ export function RelaySshfeWsStream(fd) {
   this.sshAgent_ = null;
 
   // All the data we've queued but not yet sent out.
-  this.writeBuffer_ = nassh.buffer.new();
+  this.writeBuffer_ = newBuffer();
   // Callback function when asyncWrite is used.
   this.onWriteSuccess_ = null;
 
