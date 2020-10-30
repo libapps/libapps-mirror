@@ -552,9 +552,12 @@ lib.registerInit('external api', () => {
   });
 });
 
-// Register listeners to receive messages.  We have to do it here so we can
-// handle messages when first launched (but before lib.registerInit finishes).
-chrome.runtime.onMessageExternal.addListener(
-    nassh.External.onMessageExternal_.bind(this));
-chrome.runtime.onMessage.addListener(
-    nassh.External.onMessage_.bind(this));
+/**
+ * Register listeners to receive messages.
+ */
+nassh.External.addListeners = function() {
+  chrome.runtime.onMessageExternal.addListener(
+      nassh.External.onMessageExternal_.bind(this));
+  chrome.runtime.onMessage.addListener(
+      nassh.External.onMessage_.bind(this));
+};

@@ -8,6 +8,10 @@
   let didLaunch = false;
   const onLaunched = () => { didLaunch = true; };
 
+  // We have to turn on listeners here so we can handle messages when first
+  // launched (but before lib.registerInit finishes).
+  nassh.External.addListeners();
+
   // Used to watch for launch events that occur before we're ready to handle
   // them.  We'll clean this up below during init.
   if (nassh.browserAction) {
