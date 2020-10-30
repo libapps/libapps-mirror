@@ -9,6 +9,7 @@
  */
 
 import {Client as sftpClient} from './nassh_sftp_client.js';
+import {StatusError} from './nassh_sftp_status.js';
 
 /**
  * Namespace for the state in here.
@@ -89,7 +90,7 @@ export function onGetMetadataRequested(options, onSuccess, onError) {
     .then(onSuccess)
     .catch((response) => {
         // If file not found
-      if (response instanceof nassh.sftp.StatusError &&
+      if (response instanceof StatusError &&
           response.code == nassh.sftp.packets.StatusCodes.NO_SUCH_FILE) {
         onError(chrome.fileSystemProvider.ProviderError.NOT_FOUND);
         return;
@@ -317,7 +318,7 @@ export function onDeleteEntryRequested(options, onSuccess, onError) {
   return ret.then(onSuccess)
     .catch((response) => {
       // If file not found.
-      if (response instanceof nassh.sftp.StatusError &&
+      if (response instanceof StatusError &&
           response.code == nassh.sftp.packets.StatusCodes.NO_SUCH_FILE) {
         onError(chrome.fileSystemProvider.ProviderError.NOT_FOUND);
         return;

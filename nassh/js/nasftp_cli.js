@@ -17,6 +17,7 @@ import {
   onMoveEntryRequested, onOpenFileRequested, onReadDirectoryRequested,
   onReadFileRequested, onTruncateRequested, onWriteFileRequested,
 } from './nassh_sftp_fsp.js';
+import {StatusError} from './nassh_sftp_status.js';
 
 /**
  * Progress bar helper.
@@ -279,7 +280,7 @@ Cli.prototype.dispatchCommand_ = function(userArgs) {
   try {
     return handler.call(this, args)
       .catch((response) => {
-        if (response instanceof nassh.sftp.StatusError) {
+        if (response instanceof StatusError) {
           this.showSftpStatusError_(response, args.cmd);
         } else if (response !== undefined) {
           showCrash(response);
@@ -323,7 +324,7 @@ Cli.prototype.onInputChar_ = function(ch) {
         resolve();
 
         if (e) {
-          if (e.reason instanceof nassh.sftp.StatusError) {
+          if (e.reason instanceof StatusError) {
             this.showSftpStatusError_(e.reason, data);
           } else {
             this.showError_(nassh.msg('NASFTP_ERROR_INTERNAL', [e.reason]));
@@ -949,7 +950,7 @@ Cli.prototype.showError_ = function(msg) {
 /**
  * Helper to decode SFTP status errors for the user.
  *
- * @param {!nassh.sftp.StatusError} response The status error packet.
+ * @param {!StatusError} response The status error packet.
  * @param {string} cmd The current command we're processing.
  */
 Cli.prototype.showSftpStatusError_ = function(response, cmd) {
@@ -1848,7 +1849,7 @@ Cli.commandList_ = function(args, opts) {
         .finally(() => this.client.closeFile(handle));
       })
       .catch((response) => {
-        if (response instanceof nassh.sftp.StatusError) {
+        if (response instanceof StatusError) {
           // Maybe they tried to list a file.  Synthesize a result.
           if (response.code == nassh.sftp.packets.StatusCodes.NO_SUCH_FILE) {
             return this.client.linkStatus(path)
@@ -2194,7 +2195,7 @@ Cli.commandPut_ = function(args, opts) {
               flags |= nassh.sftp.packets.OpenFlags.APPEND;
             } catch (e) {
               // File doesn't exist, so disable resuming.
-              if (e instanceof nassh.sftp.StatusError) {
+              if (e instanceof StatusError) {
                 resume = false;
               } else {
                 throw e;

@@ -2,25 +2,22 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * The SFTP Status Error extends the Error class. It takes a
  * nassh.sftp.statusPacket and an expectedPacketType and creates an informative
  * Error message while preserving the status code.
- *
- * @param {!Object} statusPacket
- * @param {string} expectedPacketType
- * @constructor
  */
-nassh.sftp.StatusError = function(statusPacket, expectedPacketType) {
-  this.name = 'StatusError';
-  this.code = statusPacket.code;
-  this.message = 'Received StatusPacket error in response to '
-                 + expectedPacketType + ' packet: ' + statusPacket.message;
-  this.stack = lib.f.getStack();
-};
-
-nassh.sftp.StatusError.prototype = Object.create(Error.prototype);
-/** @override */
-nassh.sftp.StatusError.prototype.constructor = nassh.sftp.StatusError;
+export class StatusError {
+  /**
+   * @param {!Object} statusPacket
+   * @param {string} expectedPacketType
+   */
+  constructor(statusPacket, expectedPacketType) {
+    this.name = 'StatusError';
+    this.code = statusPacket.code;
+    this.message =
+        `Received StatusPacket error in response to ${expectedPacketType} ` +
+        `packet: ${statusPacket.message}`;
+    this.stack = lib.f.getStack();
+  }
+}

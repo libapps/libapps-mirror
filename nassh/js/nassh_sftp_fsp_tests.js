@@ -14,6 +14,7 @@ import {
   onReadDirectoryRequested, onReadFileRequested, onTruncateRequested,
   onUnmountRequested, onWriteFileRequested, providerMethods, sanitizeMetadata,
 } from './nassh_sftp_fsp.js';
+import {StatusError} from './nassh_sftp_status.js';
 
 /**
  * A mock SFTP client.
@@ -54,7 +55,7 @@ MockSftpClient.prototype.automock_ = function(method, ...args) {
       return resolve(ret);
     }
 
-    throw new nassh.sftp.StatusError({
+    throw new StatusError({
       'code': nassh.sftp.packets.StatusCodes.NO_SUCH_FILE,
       'message': 'no mock data',
     }, method);

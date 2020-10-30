@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {StatusError} from './nassh_sftp_status.js';
+
 /**
  * @typedef {{
  *     flags: number,
@@ -274,7 +276,7 @@ Client.prototype.sendRequest_ = function(type, data) {
 Client.prototype.isExpectedResponse_ = function(
     responsePacket, expectedPacketType, requestType) {
   if (responsePacket instanceof nassh.sftp.packets.StatusPacket) {
-    throw new nassh.sftp.StatusError(responsePacket, requestType);
+    throw new StatusError(responsePacket, requestType);
   }
 
   if (!(responsePacket instanceof expectedPacketType)) {
@@ -299,7 +301,7 @@ Client.prototype.isSuccessResponse_ = function(responsePacket, requestType) {
   }
 
   if (responsePacket.code != nassh.sftp.packets.StatusCodes.OK) {
-    throw new nassh.sftp.StatusError(responsePacket, requestType);
+    throw new StatusError(responsePacket, requestType);
   }
 
   return responsePacket;
@@ -315,7 +317,7 @@ Client.prototype.isSuccessResponse_ = function(responsePacket, requestType) {
 Client.prototype.isNameResponse_ = function(responsePacket, requestType) {
   if (responsePacket instanceof nassh.sftp.packets.StatusPacket) {
     if (responsePacket.code != nassh.sftp.packets.StatusCodes.EOF) {
-      throw new nassh.sftp.StatusError(responsePacket, requestType);
+      throw new StatusError(responsePacket, requestType);
     }
 
     // EOF
@@ -377,8 +379,7 @@ Client.prototype.init = async function() {
  *
  * @param {string} path The path of the remote file
  * @return {!Promise<!nassh.sftp.FileAttrs>} A Promise that resolves with the
- *     remote file attributes, or rejects (usually with an
- *     nassh.sftp.StatusError)
+ *     remote file attributes, or rejects (usually with a StatusError).
  */
 Client.prototype.fileStatus = function(path) {
   const packet = new nassh.sftp.Packet();
@@ -397,8 +398,7 @@ Client.prototype.fileStatus = function(path) {
  *
  * @param {string} path The path of the remote symlink
  * @return {!Promise<!nassh.sftp.FileAttrs>} A Promise that resolves with the
- *     remote file attributes, or rejects (usually with an
- *     nassh.sftp.StatusError)
+ *     remote file attributes, or rejects (usually with a StatusError).
  */
 Client.prototype.linkStatus = function(path) {
   const packet = new nassh.sftp.Packet();
@@ -416,9 +416,8 @@ Client.prototype.linkStatus = function(path) {
  * Retrieves status information for a remote file handle.
  *
  * @param {string} handle The open file handle
- * @return {!Promise<!nassh.sftp.FileAttrs>} A Promise that resolves  with the
- *     remote file attributes, or rejects (usually with an
- *     nassh.sftp.StatusError)
+ * @return {!Promise<!nassh.sftp.FileAttrs>} A Promise that resolves with the
+ *     remote file attributes, or rejects (usually with a StatusError).
  */
 Client.prototype.fileHandleStatus = function(handle) {
   const packet = new nassh.sftp.Packet();
@@ -439,8 +438,7 @@ Client.prototype.fileHandleStatus = function(handle) {
  * @param {!nassh.sftp.FileAttrs} attrs The file attributes to set (see the
  *     structure nassh.sftp.packets.getFileAttrs sets up)
  * @return {!Promise<!nassh.sftp.packets.AttrsPacket>} A Promise that resolves
- *     with the remote file attributes, or rejects (usually with an
- *     nassh.sftp.StatusError)
+ *     with the remote file attributes, or rejects (usually with a StatusError).
  */
 Client.prototype.setFileStatus = function(path, attrs) {
   const packet = new nassh.sftp.Packet();
@@ -458,8 +456,7 @@ Client.prototype.setFileStatus = function(path, attrs) {
  * @param {!nassh.sftp.FileAttrs} attrs The file attributes to set (see the
  *     structure nassh.sftp.packets.getFileAttrs sets up)
  * @return {!Promise<!nassh.sftp.packets.AttrsPacket>} A Promise that resolves
- *     with the remote file attributes, or rejects (usually with an
- *     nassh.sftp.StatusError)
+ *     with the remote file attributes, or rejects (usually with a StatusError).
  */
 Client.prototype.setFileHandleStatus = function(handle, attrs) {
   const packet = new nassh.sftp.Packet();
@@ -475,7 +472,7 @@ Client.prototype.setFileHandleStatus = function(handle, attrs) {
  *
  * @param {string} path The path of the remote directory
  * @return {!Promise<string>} A Promise that resolves with the remote
- *    directory handle, or rejects (usually with an nassh.sftp.StatusError)
+ *    directory handle, or rejects (usually with a StatusError)
  */
 Client.prototype.openDirectory = function(path) {
   const packet = new nassh.sftp.Packet();
@@ -494,8 +491,8 @@ Client.prototype.openDirectory = function(path) {
  *
  * @param {string} handle The handle of the remote directory
  * @return {!Promise<!nassh.sftp.packets.NamePacket>} A Promise that resolves
- *     with the remote directory contents, or rejects (usually with an
- *     nassh.sftp.StatusError)
+ *     with the remote directory contents, or rejects (usually with a
+ *     StatusError).
  */
 Client.prototype.readDirectory = function(handle) {
   const packet = new nassh.sftp.Packet();
@@ -573,7 +570,7 @@ Client.prototype.scanDirectory = function(handle, filter) {
  * @param {string} path The path of the remote directory
  * @param {boolean=} recursive
  * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
- *     or rejects with a nassh.sftp.StatusError.
+ *     or rejects with a StatusError.
  */
 Client.prototype.removeDirectory = function(path, recursive = false) {
   // Low level directory remove packet.  Only works if the dir is already empty.
@@ -628,7 +625,7 @@ Client.prototype.removeDirectory = function(path, recursive = false) {
  * @param {string} path The path of the remote file
  * @param {number} pflags The open flags for the remote file
  * @return {!Promise<!nassh.sftp.FileHandle>} A Promise that resolves with the
- *     remote file handle, or rejects (usually with an nassh.sftp.StatusError)
+ *     remote file handle, or rejects (usually with a StatusError).
  */
 Client.prototype.openFile = function(path, pflags) {
   const packet = new nassh.sftp.Packet();
@@ -654,7 +651,7 @@ Client.prototype.openFile = function(path, pflags) {
  * @param {number} offset The offset to start reading from
  * @param {number} len The maximum number of bytes to read
  * @return {!Promise<!Uint8Array>} A Promise that resolves with the remote
- *    file data, or rejects (usually with an nassh.sftp.StatusError)
+ *    file data, or rejects (usually with a StatusError)
  */
 Client.prototype.readChunk = function(handle, offset, len) {
   const packet = new nassh.sftp.Packet();
@@ -666,7 +663,7 @@ Client.prototype.readChunk = function(handle, offset, len) {
     .then((response) => {
       if (response instanceof nassh.sftp.packets.StatusPacket) {
         if (response.code != nassh.sftp.packets.StatusCodes.EOF) {
-          throw new nassh.sftp.StatusError(response, 'READ');
+          throw new StatusError(response, 'READ');
         }
         return ''; // EOF, return empty data string
       }
@@ -787,7 +784,7 @@ Client.prototype.readFile = function(
  *
  * @param {string} handle The handle of the remote file
  * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
- *     or rejects with a nassh.sftp.StatusError
+ *     or rejects with a StatusError.
  */
 Client.prototype.closeFile = function(handle) {
   const packet = new nassh.sftp.Packet();
@@ -809,7 +806,7 @@ Client.prototype.closeFile = function(handle) {
  * @param {number=} readOffset Offset into the read handle.
  * @param {number=} writeOffset Offset into the write handle.
  * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
- *     or rejects with a nassh.sftp.StatusError
+ *     or rejects with a StatusError.
  */
 Client.prototype.copyData = function(
     readHandle, writeHandle, length = 0, readOffset = 0, writeOffset = 0) {
@@ -829,7 +826,7 @@ Client.prototype.copyData = function(
  *
  * @param {string} path The handle of the remote file
  * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
- *     or rejects with a nassh.sftp.StatusError
+ *     or rejects with a StatusError.
  */
 Client.prototype.removeFile = function(path) {
   const packet = new nassh.sftp.Packet();
@@ -880,7 +877,7 @@ Client.prototype.queryLimits = function() {
  * @param {string} sourcePath The source path of the remote file
  * @param {string} targetPath The target path of the remote file
  * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
- *     or rejects with a nassh.sftp.StatusError
+ *     or rejects with a StatusError.
  */
 Client.prototype.renameFile = function(sourcePath, targetPath) {
   const packet = new nassh.sftp.Packet();
@@ -908,7 +905,7 @@ Client.prototype.renameFile = function(sourcePath, targetPath) {
  * @param {number} offset The offset to start writing from
  * @param {!Uint8Array} data The data to write
  * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
- *     or rejects with a nassh.sftp.StatusError
+ *     or rejects with a StatusError.
  */
 Client.prototype.writeChunk = function(handle, offset, data) {
   // Accept any typed array form.
@@ -929,8 +926,7 @@ Client.prototype.writeChunk = function(handle, offset, data) {
  *
  * @param {string} path The path of the remote directory
  * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
- *     with the remote handle, or rejects (usually with an
- *     nassh.sftp.StatusError)
+ *     with the remote handle, or rejects (usually with a StatusError).
  */
 Client.prototype.makeDirectory = function(path) {
   const packet = new nassh.sftp.Packet();
@@ -946,7 +942,7 @@ Client.prototype.makeDirectory = function(path) {
  *
  * @param {string} path The path to canonicalize.
  * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
- *     with the remote path, or rejects (usually with an nassh.sftp.StatusError)
+ *     with the remote path, or rejects (usually with a StatusError).
  */
 Client.prototype.realPath = function(path) {
   const packet = new nassh.sftp.Packet();
@@ -961,7 +957,7 @@ Client.prototype.realPath = function(path) {
  *
  * @param {string} path The symlink to read.
  * @return {!Promise<!nassh.sftp.packets.NamePacket>} A Promise that resolves
- *     with the remote path, or rejects (usually with an nassh.sftp.StatusError)
+ *     with the remote path, or rejects (usually with a StatusError).
  */
 Client.prototype.readLink = function(path) {
   const packet = new nassh.sftp.Packet();
@@ -980,7 +976,7 @@ Client.prototype.readLink = function(path) {
  * @param {string} target The target of the symlink.
  * @param {string} path The symlink to create.
  * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
- *     with the remote path, or rejects (usually with an nassh.sftp.StatusError)
+ *     with the remote path, or rejects (usually with a StatusError).
  */
 Client.prototype.symLink = function(target, path) {
   const packet = new nassh.sftp.Packet();
@@ -999,11 +995,11 @@ Client.prototype.symLink = function(target, path) {
  * @param {string} oldpath The existing path to link to.
  * @param {string} newpath The new path to create.
  * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
- *     or rejects with a nassh.sftp.StatusError.
+ *     or rejects with a StatusError.
  */
 Client.prototype.hardLink = function(oldpath, newpath) {
   if (this.protocolServerExtensions['hardlink@openssh.com'] != '1') {
-    throw new nassh.sftp.StatusError({
+    throw new StatusError({
       'code': nassh.sftp.packets.StatusCodes.OP_UNSUPPORTED,
       'message': 'hardlink@openssh.com not supported',
     }, 'HARDLINK');
@@ -1024,11 +1020,11 @@ Client.prototype.hardLink = function(oldpath, newpath) {
  *
  * @param {string} path The path to stat the underlying filesystem.
  * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
- *     or rejects with a nassh.sftp.StatusError.
+ *     or rejects with a StatusError.
  */
 Client.prototype.statvfs = function(path) {
   if (this.protocolServerExtensions['statvfs@openssh.com'] != '2') {
-    throw new nassh.sftp.StatusError({
+    throw new StatusError({
       'code': nassh.sftp.packets.StatusCodes.OP_UNSUPPORTED,
       'message': 'statvfs@openssh.com not supported',
     }, 'STATVFS');
@@ -1052,11 +1048,11 @@ Client.prototype.statvfs = function(path) {
  *
  * @param {string} handle The handle of the remote file.
  * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
- *     or rejects with a nassh.sftp.StatusError.
+ *     or rejects with a StatusError.
  */
 Client.prototype.fsync = function(handle) {
   if (this.protocolServerExtensions['fsync@openssh.com'] != '1') {
-    throw new nassh.sftp.StatusError({
+    throw new StatusError({
       'code': nassh.sftp.packets.StatusCodes.OP_UNSUPPORTED,
       'message': 'fsync@openssh.com not supported',
     }, 'FSYNC');
