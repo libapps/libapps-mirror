@@ -434,11 +434,11 @@ function(request, sender, sendResponse) {
 });
 
 /**
- * Whether we've initialized enough for message handlers.
+ * Whether we've initialized enough to process requests.
  *
  * @private
  */
-let messageHandlersReady = false;
+let handlersReady = false;
 
 /** @typedef {{command:string}} */
 nassh.External.OnMessageRequest;
@@ -455,7 +455,7 @@ nassh.External.OnMessageRequest;
  */
 nassh.External.dispatchMessage_ = (internal, request, sender, sendResponse) => {
   // If we aren't ready yet, reschedule the call.
-  if (!messageHandlersReady) {
+  if (!handlersReady) {
     window.setTimeout(
         nassh.External.dispatchMessage_.bind(
             this, internal, request, sender, sendResponse),
@@ -477,7 +477,7 @@ nassh.External.dispatchMessage_ = (internal, request, sender, sendResponse) => {
   }
   const senderInfo = `[id:${sender.id} internal:${sender.internal} ` +
                      `url:${sender.url} origin:${sender.origin}]`;
-  console.log(`API: ${request.command} from ${senderInfo}`);
+  console.log(`API: message '${request.command}' from ${senderInfo}`);
   try {
     nassh.External.COMMANDS.get(request.command).call(
         this, request, sender, sendResponse);
@@ -493,7 +493,7 @@ nassh.External.dispatchMessage_ = (internal, request, sender, sendResponse) => {
 
 /**
  * Invoked when external app/extension calls chrome.runtime.sendMessage.
- * https://developer.chrome.com/apps/runtime#event-onMessageExternal.
+ * https://developer.chrome.com/extensions/runtime#event-onMessageExternal.
  *
  * @param {*} request
  * @param {!MessageSender} sender chrome.runtime.MessageSender.
@@ -509,7 +509,7 @@ nassh.External.onMessageExternal_ = (request, sender, sendResponse) => {
 
 /**
  * Invoked when internal code calls chrome.runtime.sendMessage.
- * https://developer.chrome.com/apps/runtime#event-onMessage.
+ * https://developer.chrome.com/extensions/runtime#event-onMessage.
  *
  * @param {*} request
  * @param {!MessageSender} sender chrome.runtime.MessageSender.
@@ -521,6 +521,138 @@ nassh.External.onMessage_ = (request, sender, sendResponse) => {
   return nassh.External.dispatchMessage_.call(
       this, true, /** @type {!nassh.External.OnMessageRequest} */ (request),
       sender, /** @type {function(!Object=)} */ (sendResponse));
+};
+
+/**
+ * Commands available.
+ */
+nassh.External.CONNECTIONS = new Map();
+
+nassh.External.CONNECTIONS.set('hello',
+/**
+ * Probe the extension.
+ *
+ * @param {!Port} port The new communication channel.
+ */
+function(port) {
+  const {sender} = port;
+  const responseBase = {error: false, internal: sender.internal, id: sender.id};
+
+  // Post a message.  On failure, just disconnect.
+  const post = (msg) => {
+    try {
+      port.postMessage(msg);
+    } catch (e) {
+      console.log(`API: hello: postMessage failed: ${e}`);
+      port.disconnect();
+    }
+  };
+
+  // Process each incoming message.
+  port.onMessage.addListener((msg) => {
+    switch (msg) {
+      case 'hello':
+        post({...responseBase, message: 'hello indeed'});
+        break;
+      case 'hi':
+        post({...responseBase, message: 'おはよう'});
+        break;
+      case 'bye':
+        post({...responseBase, message: 'tschüß!'});
+        port.disconnect();
+        break;
+      default:
+        post({...responseBase, error: true,
+              message: `sorry, i do not understand "${msg}"`});
+        port.disconnect();
+        break;
+    }
+  });
+});
+
+/**
+ * Common connect dispatcher.
+ *
+ * @param {boolean} internal Whether the sender is this own extension.
+ * @param {!Port} port The new communication channel.
+ * @return {?boolean} Whether we were able to initiate the connection.
+ * @private
+ */
+nassh.External.dispatchConnect_ = (internal, port) => {
+  // If we aren't ready yet, reschedule the call.
+  if (!handlersReady) {
+    window.setTimeout(
+        nassh.External.dispatchConnect_.bind(this, internal, port),
+        100);
+    return null;
+  }
+
+  const {name, sender} = port;
+
+  // Pass the internal setting down so the handler can easily detect.
+  sender.internal = internal;
+
+  // If the requested endpoint doesn't exist, abort.
+  if (!nassh.External.CONNECTIONS.has(name)) {
+    try {
+      postMessage({error: true, message: `unsupported connection '${name}'`});
+    } catch (e) {
+      console.log('API: ignoring error during early disconnect', e);
+    }
+    port.disconnect();
+    return false;
+  }
+
+  const senderInfo = `[id:${sender.id} internal:${sender.internal} ` +
+                     `url:${sender.url} origin:${sender.origin}]`;
+  console.log(`API: connect '${name}' from ${senderInfo}`);
+
+  port.onDisconnect.addListener(() => {
+    const err = lib.f.lastError();
+    if (err) {
+      console.warn(
+          `API: disconnect '${name}' from ${senderInfo} failed: ${err}`);
+    } else {
+      console.log(`API: disconnect '${name}' from ${senderInfo}`);
+    }
+  });
+
+  // Execute specified connection.
+  try {
+    nassh.External.CONNECTIONS.get(name).call(this, port);
+    return true;
+  } catch (e) {
+    console.error(e);
+    try {
+      postMessage({error: true, message: e.message, stack: e.stack});
+    } catch (e) {
+      console.log('API: ignoring error during late disconnect', e);
+    }
+    port.disconnect();
+    return false;
+  }
+};
+
+/**
+ * Invoked when external app/extension calls chrome.runtime.connect.
+ * https://developer.chrome.com/extensions/runtime#event-onConnectExternal.
+ *
+ * @param {!Port} port The new communication channel.
+ * @private
+ */
+nassh.External.onConnectExternal_ = (port) => {
+  nassh.External.dispatchConnect_.call(this, false, port);
+};
+
+/**
+ * Invoked when internal code calls chrome.runtime.connect.
+ * https://developer.chrome.com/extensions/runtime#event-onConnect.
+ *
+ * @param {!Port} port The new communication channel.
+ * @private
+ */
+nassh.External.onConnect_ = (port) => {
+  nassh.External.dispatchConnect_.call(this, true, port);
 };
 
 // Initialize nassh.External.
@@ -547,7 +679,7 @@ lib.registerInit('external api', () => {
           deleteDone);
     }).then(() => {
       // We can start processing messages now.
-      messageHandlersReady = true;
+      handlersReady = true;
     });
   });
 });
@@ -556,6 +688,10 @@ lib.registerInit('external api', () => {
  * Register listeners to receive messages.
  */
 nassh.External.addListeners = function() {
+  chrome.runtime.onConnectExternal.addListener(
+      nassh.External.onConnectExternal_.bind(this));
+  chrome.runtime.onConnect.addListener(
+      nassh.External.onConnect_.bind(this));
   chrome.runtime.onMessageExternal.addListener(
       nassh.External.onMessageExternal_.bind(this));
   chrome.runtime.onMessage.addListener(
