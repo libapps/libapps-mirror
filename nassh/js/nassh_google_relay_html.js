@@ -2,9 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// This file handles the onload event for google_relay.html.  It would have
-// been included inline in the html file if Content Security Policy (CSP) didn't
-// forbid it.
+/**
+ * @fileoverview Handles the onload event for google_relay.html.
+ */
+
+import {base64UrlToBase64} from './nassh.js';
 
 /**
  * Show an error message.
@@ -47,7 +49,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     window.sessionStorage.setItem('googleRelay.relayPort', ary[2] || '');
   } else {
     // URLs not containing '@' are assumed to be v2 URL safe Base64 JSON blobs.
-    const blob = atob(nassh.base64UrlToBase64(hash));
+    const blob = atob(base64UrlToBase64(hash));
     const params = JSON.parse(blob);
 
     if (params['endpoint']) {

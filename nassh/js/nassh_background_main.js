@@ -7,6 +7,7 @@
  * code in here minimal as this cannot be unittested.
  */
 
+import {browserAction, runtimeSendMessage} from './nassh.js';
 import {App} from './nassh_app.js';
 import {importPreferences} from './nassh_background.js';
 import {addListeners as externalAddListeners,
@@ -27,8 +28,8 @@ externalAddListeners();
 
 // Used to watch for launch events that occur before we're ready to handle
 // them.  We'll clean this up below during init.
-if (nassh.browserAction) {
-  nassh.browserAction.onClicked.addListener(onLaunched);
+if (browserAction) {
+  browserAction.onClicked.addListener(onLaunched);
 }
 
 /**
@@ -55,8 +56,8 @@ lib.init(console.log.bind(console)).then(() => {
   app.installFsp();
 
   // If we're running as an extension, finish setup.
-  if (nassh.browserAction) {
-    nassh.browserAction.onClicked.removeListener(onLaunched);
+  if (browserAction) {
+    browserAction.onClicked.removeListener(onLaunched);
     app.installBrowserAction();
   }
 
@@ -105,7 +106,7 @@ chrome.runtime.onInstalled.addListener((details) => {
      */
     const migrate = (srcId, onError = () => {}) => {
       console.log(`Trying to sync prefs from ${srcId}`);
-      nassh.runtimeSendMessage(srcId, {command: 'prefsExport'})
+      runtimeSendMessage(srcId, {command: 'prefsExport'})
         .then((response) => {
           const {prefs} = response;
           return importPreferences(prefs);

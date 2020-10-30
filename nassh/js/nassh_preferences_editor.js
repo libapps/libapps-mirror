@@ -2,12 +2,17 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {
+  isCrOSSystemApp, loadWebFonts, localize, runtimeSendMessage, sendFeedback,
+  setupForWebApp,
+} from './nassh.js';
+
 /**
  * CSP means that we can't kick off the initialization from the html file,
  * so we do it like this instead.
  */
 window.addEventListener('DOMContentLoaded', (event) => {
-  nassh.setupForWebApp();
+  setupForWebApp();
 
   // Support multiple settings subpages.
   document.querySelectorAll('.navigation > .menu > li > a').forEach((ele) => {
@@ -16,18 +21,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   function setupPreferences() {
     const manifest = chrome.runtime.getManifest();
-    const storage = nassh.isCrOSSystemApp() ?
+    const storage = isCrOSSystemApp() ?
         new lib.Storage.TerminalPrivate() :
         new lib.Storage.Chrome(chrome.storage.sync);
 
     // Create a local hterm instance so people can see their changes live.
     const term = new hterm.Terminal({storage});
     term.onTerminalReady = function() {
-        nassh.loadWebFonts(term.getDocument());
+        loadWebFonts(term.getDocument());
         const io = term.io.push();
         io.onVTKeystroke = io.print;
         io.sendString = io.print;
-        io.println('# ' + nassh.msg('WELCOME_VERSION',
+        io.println('# ' + localize('WELCOME_VERSION',
                                     [manifest.name, manifest.version]));
         io.print('$ ./configure && make && make install');
         term.setCursorVisible(true);
@@ -35,9 +40,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
     term.decorate(lib.notNull(document.querySelector('#terminal')));
     term.installKeyboard();
     term.contextMenu.setItems([
-      {name: nassh.msg('TERMINAL_CLEAR_MENU_LABEL'),
+      {name: localize('TERMINAL_CLEAR_MENU_LABEL'),
        action: function() { term.wipeContents(); }},
-      {name: nassh.msg('TERMINAL_RESET_MENU_LABEL'),
+      {name: localize('TERMINAL_RESET_MENU_LABEL'),
        action: function() { term.reset(); }},
     ]);
 
@@ -46,11 +51,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     const params = new URLSearchParams(document.location.search);
     const profileId = params.get('profileId') ??
-        nassh.msg('FIELD_TERMINAL_PROFILE_PLACEHOLDER');
+        localize('FIELD_TERMINAL_PROFILE_PLACEHOLDER');
     const prefsEditor = new PreferencesEditor(storage, profileId);
 
     let a = document.querySelector('#backup');
-    a.download = nassh.msg('PREF_BACKUP_FILENAME');
+    a.download = localize('PREF_BACKUP_FILENAME');
     a.onclick = prefsEditor.onBackupClick.bind(prefsEditor);
     prefsEditor.updateBackupLink();
 
@@ -86,7 +91,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const profile = lib.notNull(document.getElementById('profile'));
     profile.oninput = function() {
         PreferencesEditor.debounce(profile, function(input) {
-            prefsEditor.notify(nassh.msg('LOADING_LABEL'), 500);
+            prefsEditor.notify(localize('LOADING_LABEL'), 500);
             if (input.value.length) {
               prefsEditor.selectProfile(input.value);
             }
@@ -226,7 +231,7 @@ PreferencesEditor.prototype.selectProfile = function(profileId) {
  * @param {?Event} e
  */
 PreferencesEditor.prototype.onFeedbackClick = function(e) {
-  nassh.sendFeedback();
+  sendFeedback();
 
   e.preventDefault();
 };
@@ -277,7 +282,7 @@ PreferencesEditor.prototype.onRestoreClick = function(e) {
     }
 
     const prefs = await input.files[0].text();
-    await nassh.runtimeSendMessage({
+    await runtimeSendMessage({
       command: 'prefsImport',
       asJson: true,
       prefs: prefs,
@@ -298,7 +303,7 @@ PreferencesEditor.prototype.updateBackupLink = async function() {
     URL.revokeObjectURL(a.href);
   }
 
-  const result = await nassh.runtimeSendMessage({
+  const result = await runtimeSendMessage({
     command: 'prefsExport',
     asJson: true,
   });
@@ -376,7 +381,7 @@ PreferencesEditor.prototype.save = function(input) {
       try {
         value = JSON.parse(value);
       } catch (err) {
-        this.notify(nassh.msg('JSON_PARSE_ERROR', [key, err]), 5000);
+        this.notify(localize('JSON_PARSE_ERROR', [key, err]), 5000);
         value = prefs.get(key);
       }
       prefs.set(key, value);
@@ -837,7 +842,7 @@ PreferencesEditor.prototype.resetAll = function() {
   for (let i = 0; i < settings.length; ++i) {
     this.sync(settings[i]);
   }
-  this.notify(nassh.msg('PREFERENCES_RESET'));
+  this.notify(localize('PREFERENCES_RESET'));
 };
 
 /**

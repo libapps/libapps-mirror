@@ -2,17 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
-/**
- * Namespace for the whole nassh project.
- */
-const nassh = {};
-
 /**
  * Non-null if nassh is running as an extension.
  */
-nassh.browserAction =
+export const browserAction =
     window.browser && browser.browserAction ? browser.browserAction :
     window.chrome && chrome.browserAction ? chrome.browserAction :
     null;
@@ -34,19 +27,19 @@ lib.registerInit(
  *
  * @return {boolean}
  */
-nassh.isCrOSSystemApp = function() {
+export function isCrOSSystemApp() {
   return location.href.startsWith('chrome-untrusted://');
-};
+}
 
 /**
  * Modify if nassh is running within Chrome OS Terminal System App. We will
  * use lib.Storage.TerminalPrivate as the default storage, load messages via
  * XHR, and polyfill chrome.runtime.getManifest().
  */
-nassh.setupForWebApp = function() {
+export function setupForWebApp() {
   // Modifications if running as Chrome OS Terminal SWA.
-  if (nassh.isCrOSSystemApp()) {
-    lib.registerInit('messages', nassh.loadMessages);
+  if (isCrOSSystemApp()) {
+    lib.registerInit('messages', loadMessages);
     if (chrome?.runtime && !chrome.runtime.getManifest) {
       chrome.runtime.getManifest = () => {
         return /** @type {!chrome.runtime.Manifest} */ ({
@@ -62,7 +55,7 @@ nassh.setupForWebApp = function() {
       };
     }
   }
-};
+}
 
 /**
  * Add a listener to 'background-color' pref and set it on the outer body.
@@ -70,24 +63,24 @@ nassh.setupForWebApp = function() {
  *
  * @param {!lib.PreferenceManager} prefs The preference manager.
  */
-nassh.watchBackgroundColor = function(prefs) {
+export function watchBackgroundColor(prefs) {
   document.body.style.backgroundColor = prefs.getString('background-color');
   prefs.addObserver('background-color', (color) => {
     document.body.style.backgroundColor = /** @type {string} */ (color);
   });
-};
+}
 
 /**
  * Loads messages for when chrome.i18n is not available.
  *
  * This should only be used in contexts outside of extensions/apps.
  */
-nassh.loadMessages = async function() {
+export async function loadMessages() {
   // Load hterm.messageManager from /_locales/<lang>/messages.json.
   hterm.messageManager.useCrlf = true;
   const url = lib.f.getURL('/_locales/$1/messages.json');
   await hterm.messageManager.findAndLoadMessages(url);
-};
+}
 
 /**
  * Return a formatted message in the current locale.
@@ -96,9 +89,9 @@ nassh.loadMessages = async function() {
  * @param {!Array=} args The message arguments, if required.
  * @return {string} The localized & formatted message.
  */
-nassh.msg = function(name, args) {
+export function localize(name, args) {
   return hterm.messageManager.get(name, args, name);
-};
+}
 
 /**
  * Request the persistent HTML5 filesystem for this extension.
@@ -109,7 +102,7 @@ nassh.msg = function(name, args) {
  *
  * @return {!Promise<!FileSystem>} The root filesystem handle.
  */
-nassh.getFileSystem = function() {
+export function getFileSystem() {
   const requestFS = window.requestFileSystem || window.webkitRequestFileSystem;
 
   return new Promise((resolve, reject) => {
@@ -130,14 +123,14 @@ nassh.getFileSystem = function() {
                 reject(e);
               });
   });
-};
+}
 
 /**
  * Create a new window to the options page for customizing preferences.
  *
  * @param {string=} page The specific options page to navigate to.
  */
-nassh.openOptionsPage = function(page = '') {
+export function openOptionsPage(page = '') {
   const fallback = () => {
     lib.f.openWindow(`/html/nassh_preferences_editor.html#${page}`);
   };
@@ -156,14 +149,14 @@ nassh.openOptionsPage = function(page = '') {
   } else {
     fallback();
   }
-};
+}
 
 /**
  * Trigger the flow for sending feedback.
  */
-nassh.sendFeedback = function() {
+export function sendFeedback() {
   lib.f.openWindow('https://goo.gl/vb94JY');
-};
+}
 
 /**
  * Register this extension to handle URIs like ssh://.
@@ -175,7 +168,7 @@ nassh.sendFeedback = function() {
  *
  * @param {string} proto The protocol name to register.
  */
-nassh.registerProtocolHandler = function(proto) {
+export function registerProtocolHandler(proto) {
   try {
     navigator.registerProtocolHandler(
         proto,
@@ -188,9 +181,9 @@ nassh.registerProtocolHandler = function(proto) {
   // Not all runtimes allow direct registration, so also register with the
   // 'web+' prefix just in case.
   if (!proto.startsWith('web+')) {
-    nassh.registerProtocolHandler(`web+${proto}`);
+    registerProtocolHandler(`web+${proto}`);
   }
-};
+}
 
 /**
  * Disable automatic tab discarding for our windows.
@@ -203,13 +196,13 @@ nassh.registerProtocolHandler = function(proto) {
  * Note: This code updates tab properties asynchronously, but that should be
  * fine for our usage as we don't generally create windows/tabs on the fly.
  */
-nassh.disableTabDiscarding = function() {
+export function disableTabDiscarding() {
   if (window.chrome && chrome.tabs) {
     chrome.tabs.getCurrent((tab) => {
       chrome.tabs.update(tab.id, {autoDiscardable: false});
     });
   }
-};
+}
 
 /**
  * Convert a base64url encoded string to the base64 encoding.
@@ -229,7 +222,7 @@ nassh.disableTabDiscarding = function() {
  * @param {string} data The base64url encoded data.
  * @return {string} The data in base64 encoding.
  */
-nassh.base64UrlToBase64 = function(data) {
+export function base64UrlToBase64(data) {
   const replacements = {'-': '+', '_': '/'};
   let ret = data.replace(/[-_]/g, (ch) => replacements[ch]);
 
@@ -247,22 +240,22 @@ nassh.base64UrlToBase64 = function(data) {
   }
 
   return ret;
-};
+}
 
 /**
  * Convert a base64 encoded string to the base64url encoding.
  *
- * This is the inverse of nassh.base64UrlToBase64.
+ * This is the inverse of base64UrlToBase64.
  *
  * We strip off any = padding characters too.
  *
  * @param {string} data The base64 encoded data.
  * @return {string} The data in base64url encoding.
  */
-nassh.base64ToBase64Url = function(data) {
+export function base64ToBase64Url(data) {
   const replacements = {'+': '-', '/': '_', '=': ''};
   return data.replace(/[+/=]/g, (ch) => replacements[ch]);
-};
+}
 
 /**
  * Generate an SGR escape sequence.
@@ -270,7 +263,7 @@ nassh.base64ToBase64Url = function(data) {
  * @param {!Object=} settings
  * @return {string} The SGR escape sequence.
  */
-nassh.sgrSequence = function(
+export function sgrSequence(
     {bold, faint, italic, underline, blink, fg, bg} = {}) {
   const parts = [];
   if (bold) {
@@ -299,7 +292,7 @@ nassh.sgrSequence = function(
     parts.push(bg);
   }
   return `\x1b[${parts.join(';')}m`;
-};
+}
 
 /**
  * Apply SGR styling to text.
@@ -310,9 +303,9 @@ nassh.sgrSequence = function(
  * @param {!Object=} settings The SGR settings to apply.
  * @return {string} The text wrapped in SGR escape sequences.
  */
-nassh.sgrText = function(text, settings) {
-  return nassh.sgrSequence(settings) + text + nassh.sgrSequence();
-};
+export function sgrText(text, settings) {
+  return sgrSequence(settings) + text + sgrSequence();
+}
 
 /**
  * Generate a hyperlink using OSC-8 escape sequence.
@@ -321,12 +314,12 @@ nassh.sgrText = function(text, settings) {
  * @param {string=} text The user visible text.
  * @return {string} The hyperlink with OSC-8 escape sequences.
  */
-nassh.osc8Link = function(url, text = url) {
+export function osc8Link(url, text = url) {
   if (url.startsWith('/')) {
     url = lib.f.getURL(url);
   }
   return `\x1b]8;;${url}\x07${text}\x1b]8;;\x07`;
-};
+}
 
 /**
  * @typedef {{
@@ -334,10 +327,10 @@ nassh.osc8Link = function(url, text = url) {
  *     isWebFont: boolean,
  * }}
  */
-nassh.Font;
+let Font;
 
-/** @type {!Array<!nassh.Font>} */
-nassh.FONTS = [
+/** @type {!Array<!Font>} */
+const FONTS = [
   {name: 'Noto Sans Mono', isWebFont: false},
   {name: 'Cousine', isWebFont: true},
   {name: 'Inconsolata', isWebFont: true},
@@ -350,10 +343,10 @@ nassh.FONTS = [
  *
  * @param {!Document} document The document to load into.
  */
-nassh.loadWebFonts = function(document) {
+export function loadWebFonts(document) {
   const imports = [];
   const fontFaces = [];
-  for (const font of nassh.FONTS) {
+  for (const font of FONTS) {
     if (font.isWebFont) {
       // Load normal (400) and bold (700).
       imports.push(`@import url('https://fonts.googleapis.com/css2?family=` +
@@ -374,7 +367,7 @@ nassh.loadWebFonts = function(document) {
   const style = document.createElement('style');
   style.textContent = imports.join('\n') + fontFaces.join('');
   document.head.appendChild(style);
-};
+}
 
 /**
  * A Promise wrapper for the chrome.runtime.sendMessage API.
@@ -382,7 +375,7 @@ nassh.loadWebFonts = function(document) {
  * @param {*} args The arguments to sendMessage.
  * @return {!Promise<*>} A promise to resolve with the remote's response.
  */
-nassh.runtimeSendMessage = function(...args) {
+export function runtimeSendMessage(...args) {
   return new Promise((resolve, reject) => {
     chrome.runtime.sendMessage(...args, (response) => {
       // If the remote side doesn't exist (which is normal), Chrome complains
@@ -395,4 +388,4 @@ nassh.runtimeSendMessage = function(...args) {
       }
     });
   });
-};
+}

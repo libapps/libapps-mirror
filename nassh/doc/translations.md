@@ -12,7 +12,7 @@ For Googlers, see the [Translation Console Overview].
 
 ## Overview
 
-The nassh & hterm code use `nassh.msg` & `hterm.msg` to lookup messages.
+The nassh & hterm code use `localize` & `hterm.msg` to lookup messages.
 
 The [en/messages.json] file contains all the original messages.
 We maintain this file directly in this repository.

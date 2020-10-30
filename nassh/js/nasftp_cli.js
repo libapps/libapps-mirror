@@ -8,6 +8,7 @@
  *                only.
  */
 
+import {localize, sgrSequence} from './nassh.js';
 import {CommandInstance, splitCommandLine} from './nassh_command_instance.js';
 import {Client as sftpClient} from './nassh_sftp_client.js';
 // Normally the FSP code is only in the background page, so load it on demand
@@ -109,7 +110,7 @@ ProgressBar.prototype.summarize = function(max) {
   const delta = this.endTime_ - this.startTime_;
   const secs = Math.round(delta) / 1000;
   const rate = Math.round(max / delta * 1000);
-  this.io_.println(nassh.msg(
+  this.io_.println(localize(
       'NASFTP_PROGRESS_SUMMARY', [max, secs, Cli.format_(rate)]));
 };
 
@@ -278,7 +279,7 @@ Cli.prototype.dispatchCommand_ = function(userArgs) {
   const handler = this.commands_[cmd];
 
   const showCrash = (e) => {
-    this.showError_(nassh.msg('NASFTP_ERROR_INTERNAL', [e]));
+    this.showError_(localize('NASFTP_ERROR_INTERNAL', [e]));
     const lines = e.stack.split(/[\r\n]/);
     lines.forEach((line) => this.rawprintln_(line));
   };
@@ -333,7 +334,7 @@ Cli.prototype.onInputChar_ = function(ch) {
           if (e.reason instanceof StatusError) {
             this.showSftpStatusError_(e.reason, data);
           } else {
-            this.showError_(nassh.msg('NASFTP_ERROR_INTERNAL', [e.reason]));
+            this.showError_(localize('NASFTP_ERROR_INTERNAL', [e.reason]));
           }
         }
 
@@ -370,7 +371,7 @@ Cli.prototype.onInputChar_ = function(ch) {
         .catch((cmd) => {
           // Don't warn when the user just hits enter w/out a command.
           if (cmd) {
-            this.showError_(nassh.msg('NASFTP_ERROR_UNKNOWN_CMD', [cmd]));
+            this.showError_(localize('NASFTP_ERROR_UNKNOWN_CMD', [cmd]));
           }
         })
         .finally(finishCommand);
@@ -529,7 +530,7 @@ Cli.prototype.onCtrlWKey_ = function() {
 Cli.prototype.onCtrlBackslashKey_ = function() {
   if (this.holdInput_) {
     if (++this.killCount_ > 2) {
-      this.io.println(nassh.msg('NASFTP_FORCE_QUIT'));
+      this.io.println(localize('NASFTP_FORCE_QUIT'));
       Cli.commandQuit_.call(this, []);
     }
   }
@@ -908,7 +909,7 @@ const defaultColorMap = {
  */
 lib.registerInit('nasftp color cache', () => {
   Object.entries(defaultColorMap).forEach(([key, setting]) => {
-    defaultColorMap[key] = nassh.sgrSequence(setting);
+    defaultColorMap[key] = sgrSequence(setting);
   });
 });
 
@@ -919,7 +920,7 @@ lib.registerInit('nasftp color cache', () => {
  */
 Cli.prototype.showPrompt_ = function() {
   let prompt = this.prompt_;
-  const defaultPrompt = nassh.msg('NASFTP_PROMPT', ['%(cwd)']);
+  const defaultPrompt = localize('NASFTP_PROMPT', ['%(cwd)']);
   if (prompt === undefined) {
     // Normally one should not mess with translation text.  But it's a bit hard
     // to preserve colorization settings.  So hand insert it if possible.
@@ -928,12 +929,12 @@ Cli.prototype.showPrompt_ = function() {
     prompt = defaultPrompt.replace(
         'nasftp',
         '%(bold)' +
-        nassh.sgrSequence({fg: '38:2:51:105:232'}) + 'n' +
-        nassh.sgrSequence({fg: '38:2:213:15:37'}) + 'a' +
-        nassh.sgrSequence({fg: '38:2:238:178:17'}) + 's' +
-        nassh.sgrSequence({fg: '38:2:51:105:232'}) + 'f' +
-        nassh.sgrSequence({fg: '38:2:0:153:37'}) + 't' +
-        nassh.sgrSequence({fg: '38:2:213:15:37'}) + 'p' +
+        sgrSequence({fg: '38:2:51:105:232'}) + 'n' +
+        sgrSequence({fg: '38:2:213:15:37'}) + 'a' +
+        sgrSequence({fg: '38:2:238:178:17'}) + 's' +
+        sgrSequence({fg: '38:2:51:105:232'}) + 'f' +
+        sgrSequence({fg: '38:2:0:153:37'}) + 't' +
+        sgrSequence({fg: '38:2:213:15:37'}) + 'p' +
         '%(reset)');
   }
 
@@ -950,7 +951,7 @@ Cli.prototype.showPrompt_ = function() {
  * @param {string} msg The message to show.
  */
 Cli.prototype.showError_ = function(msg) {
-  this.io.println(nassh.msg('NASFTP_ERROR_MESSAGE', [msg]));
+  this.io.println(localize('NASFTP_ERROR_MESSAGE', [msg]));
 };
 
 /**
@@ -977,7 +978,7 @@ Cli.prototype.showSftpStatusError_ = function(response, cmd) {
       msgArgs.push(response.message);
       break;
   }
-  this.showError_(nassh.msg(msgId, msgArgs));
+  this.showError_(localize(msgId, msgArgs));
 };
 
 /**
@@ -998,7 +999,7 @@ Cli.prototype.parseInt_ = function(
 
   let ret = parseInt(argValue, radix);
   if (!isFinite(ret)) {
-    this.showError_(nassh.msg('NASFTP_ERROR_INVALID_NUMBER', [
+    this.showError_(localize('NASFTP_ERROR_INVALID_NUMBER', [
       cmd, argName, argValue,
     ]));
     return null;
@@ -1021,7 +1022,7 @@ Cli.prototype.parseInt_ = function(
   if (offset !== undefined) {
     const sfx = argValue[argValue.length - offset];
     if (!knownSuffix.includes(sfx)) {
-      this.showError_(nassh.msg('NASFTP_ERROR_INVALID_NUMBER', [
+      this.showError_(localize('NASFTP_ERROR_INVALID_NUMBER', [
         cmd, argName, argValue,
       ]));
       return null;
@@ -1064,7 +1065,7 @@ Cli.prototype.parseOpts_ = function(args, optstring) {
       for (let f = 0; f < flags.length; ++f) {
         const opt = flags[f];
         if (optstring.indexOf(opt) == -1) {
-          this.showError_(nassh.msg(
+          this.showError_(localize(
               'NASFTP_ERROR_UNKNOWN_OPTION', [args.cmd, opt]));
           return null;
         } else {
@@ -1121,14 +1122,14 @@ Cli.prototype.translateCommands = function(commands) {
 
     // If a different translation is available, register it too.
     msgId = `NASFTP_CMD_${upper}`;
-    msg = nassh.msg(msgId);
+    msg = localize(msgId);
     if (msg != msgId) {
       rv[msg] = obj;
     }
 
     // Add the help translation text if available.
     msgId += '_HELP';
-    msg = nassh.msg(msgId);
+    msg = localize(msgId);
     if (msg != msgId) {
       obj.help = msg;
     } else {
@@ -1182,12 +1183,12 @@ Cli.addCommand_ = function(
 
       // Now check the set of arguments.
       if (args.length < minArgs) {
-        this.showError_(nassh.msg('NASFTP_ERROR_NOT_ENOUGH_ARGS', [args.cmd]));
+        this.showError_(localize('NASFTP_ERROR_NOT_ENOUGH_ARGS', [args.cmd]));
         return Promise.resolve();
       }
 
       if (maxArgs !== null && args.length > maxArgs) {
-        this.showError_(nassh.msg('NASFTP_ERROR_TOO_MANY_ARGS', [args.cmd]));
+        this.showError_(localize('NASFTP_ERROR_TOO_MANY_ARGS', [args.cmd]));
         return Promise.resolve();
       }
 
@@ -1476,7 +1477,7 @@ Cli.commandClip_ = function(args) {
   return this.client.readFile(this.makePath_(path), handleChunk, offset, length)
     .then(() => (new Blob(chunks)).text())
     .then((string) => {
-      this.io.println(nassh.msg('NASFTP_CMD_CLIP_SUMMARY', [string.length]));
+      this.io.println(localize('NASFTP_CMD_CLIP_SUMMARY', [string.length]));
       this.terminal.copyStringToClipboard(string);
     });
 };
@@ -1534,7 +1535,7 @@ Cli.commandCopy_ = function(args) {
   const dst = this.makePath_(args.shift());
 
   if (this.client.protocolServerExtensions['copy-data'] === undefined) {
-    this.showError_(nassh.msg(
+    this.showError_(localize(
         'NASFTP_ERROR_MISSING_PROTOCOL_EXTENSION', [args.cmd, 'copy-data']));
     return Promise.resolve();
   }
@@ -1544,7 +1545,7 @@ Cli.commandCopy_ = function(args) {
     .then((attrs) => {
       // Only copy regular files.
       if (attrs.isRegularFile !== true) {
-        this.showError_(nassh.msg(
+        this.showError_(localize(
             'NASFTP_ERROR_NON_REG_FILE', [args.cmd, src]));
         return;
       }
@@ -1647,7 +1648,7 @@ Cli.commandDiskFree_ = function(args, opts) {
           ravail = Math.floor(st.frsize * st.bfree / 1024);
           percent = (st.blocks - st.bfree) / st.blocks;
         }
-        this.io.println(nassh.msg('NASFTP_CMD_DF_SUMMARY', [
+        this.io.println(localize('NASFTP_CMD_DF_SUMMARY', [
           this.escapeString_(fullpath),
           `${st.fsid_hi.toString(16)}${st.fsid_lo.toString(16)}`,
           total,
@@ -1689,7 +1690,7 @@ Cli.commandGet_ = function(args) {
   const dst = args.length == 0 ? this.basename(src) : args.shift();
   a.download = dst;
 
-  this.io.println(nassh.msg('NASFTP_CMD_GET_DOWNLOAD_FILE', [
+  this.io.println(localize('NASFTP_CMD_GET_DOWNLOAD_FILE', [
     this.escapeString_(src),
     this.escapeString_(dst),
   ]));
@@ -1752,7 +1753,7 @@ Cli.addCommand_(['get'], 1, 2, '', '<remote name> [local name]',
  */
 Cli.commandHelp_ = function(args) {
   const lhs = (command) => {
-    return nassh.msg('NASFTP_CMD_HELP_LHS', [command.command, command.usage]);
+    return localize('NASFTP_CMD_HELP_LHS', [command.command, command.usage]);
   };
   let pad = 0;
 
@@ -1764,7 +1765,7 @@ Cli.commandHelp_ = function(args) {
   // Calculate the length of commands to align the final output.
   for (const command of args) {
     if (!this.commands_.hasOwnProperty(command)) {
-      this.showError_(nassh.msg('NASFTP_ERROR_UNKNOWN_CMD', [command]));
+      this.showError_(localize('NASFTP_ERROR_UNKNOWN_CMD', [command]));
       return Promise.resolve();
     }
 
@@ -1780,7 +1781,7 @@ Cli.commandHelp_ = function(args) {
     }
 
     const obj = this.commands_[command];
-    this.io.println(nassh.msg('NASFTP_CMD_HELP_LINE', [
+    this.io.println(localize('NASFTP_CMD_HELP_LINE', [
       lhs(obj).padEnd(pad), obj.help,
     ]));
   }
@@ -2176,7 +2177,7 @@ Cli.commandPut_ = function(args, opts) {
         // If the user specified a name, use it.
         const name = dst === undefined ? file.name : dst;
 
-        this.io.println(nassh.msg('NASFTP_CMD_PUT_UPLOAD_FILE', [
+        this.io.println(localize('NASFTP_CMD_PUT_UPLOAD_FILE', [
           this.escapeString_(file.name),
           this.escapeString_(name),
           Cli.format_(file.size),
@@ -2290,7 +2291,7 @@ Cli.addCommand_(['put', 'reput'], 0, 1, 'af', '[remote name]',
  * @return {!Promise<void>}
  */
 Cli.commandPwd_ = function(_args) {
-  this.io.println(nassh.msg('NASFTP_CMD_PWD_OUTPUT', [
+  this.io.println(localize('NASFTP_CMD_PWD_OUTPUT', [
     this.escapeString_(this.cwd),
   ]));
   return Promise.resolve();
@@ -2504,7 +2505,7 @@ Cli.commandStat_ = function(args) {
   return args.reduce((chain, path) => chain.then(() => {
     return this.client[func](this.makePath_(path))
       .then((attrs) => {
-        this.io.println(nassh.msg('NASFTP_CMD_STAT_SUMMARY', [
+        this.io.println(localize('NASFTP_CMD_STAT_SUMMARY', [
           this.escapeString_(path),
           attrs.size,
           attrs.uid,
@@ -2517,9 +2518,9 @@ Cli.commandStat_ = function(args) {
           `${epochToLocal(attrs.lastModified)})`,
         ]));
         if (attrs.extensions) {
-          this.io.println(nassh.msg('NASFTP_CMD_STAT_EXTENSIONS_HEADER'));
+          this.io.println(localize('NASFTP_CMD_STAT_EXTENSIONS_HEADER'));
           attrs.extensions.forEach((ele) => {
-            this.io.println(nassh.msg('NASFTP_CMD_STAT_EXTENSIONS_LINE', [
+            this.io.println(localize('NASFTP_CMD_STAT_EXTENSIONS_LINE', [
               this.escapeString_(ele.type),
               this.escapeString_(ele.data),
             ]));
@@ -2637,16 +2638,16 @@ Cli.addCommand_(['symlink'], 2, 2, '', '<target> <path>',
  * @return {!Promise<void>}
  */
 Cli.commandVersion_ = function(_args) {
-  this.io.println(nassh.msg('NASFTP_CMD_VERSION_SUMMARY', [
+  this.io.println(localize('NASFTP_CMD_VERSION_SUMMARY', [
     this.client.protocolClientVersion,
     this.client.protocolServerVersion,
   ]));
-  this.io.println(nassh.msg('NASFTP_CMD_VERSION_EXTENSIONS_HEADER'));
+  this.io.println(localize('NASFTP_CMD_VERSION_EXTENSIONS_HEADER'));
 
   const names = Object.keys(this.client.protocolServerExtensions).sort();
   names.forEach((name) => {
     const data = this.client.protocolServerExtensions[name];
-    this.io.println(nassh.msg('NASFTP_CMD_VERSION_EXTENSIONS_LINE', [
+    this.io.println(localize('NASFTP_CMD_VERSION_EXTENSIONS_LINE', [
       name, data,
     ]));
   });

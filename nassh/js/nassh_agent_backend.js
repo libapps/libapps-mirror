@@ -85,7 +85,7 @@ Backend.prototype.signRequest = function(keyBlob, data, flags) {
  * Show a message in the terminal window.
  *
  * @param {string} message The message to be shown. Note: The message should
- *     consist of a localized string obtained via nassh.msg.
+ *     consist of a localized string obtained via localize.
  */
 Backend.prototype.showMessage = function(message) {
   this.userIO_.showMessage(this.BACKEND_ID, message);
@@ -96,7 +96,7 @@ Backend.prototype.showMessage = function(message) {
  *
  * @param {string} promptMessage The message that should precede the prompt.
  *     Note: The message should consist of a localized string obtained via
- *     nassh.msg.
+ *     localize.
  * @return {!Promise<string>|!Promise<void>} A promise resolving to the input
  *     if the user confirms it by pressing enter; a rejecting promise if the
  *     user cancels the prompt by pressing ESC.

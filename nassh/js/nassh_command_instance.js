@@ -7,6 +7,9 @@
  * @suppress {moduleLoad}
  */
 
+import {
+  getFileSystem, isCrOSSystemApp, localize, osc8Link, sgrText,
+} from './nassh.js';
 import {punycode} from './nassh_deps.rollup.js';
 import {Agent} from './nassh_agent.js';
 import {setDefaultBackend} from './nassh_buffer.js';
@@ -140,7 +143,7 @@ CommandInstance.prototype.run = function() {
   // In case something goes horribly wrong, display an error to the user so it's
   // easier for them to copy & paste when reporting issues.
   window.addEventListener('error', (e) => {
-    this.io.println(nassh.msg('UNEXPECTED_ERROR'));
+    this.io.println(localize('UNEXPECTED_ERROR'));
     const lines = e.error.stack.split(/[\r\n]/);
     lines.forEach((line) => this.io.println(line));
   });
@@ -150,7 +153,7 @@ CommandInstance.prototype.run = function() {
     return (err, ...args) => {
       console.error(`${msg}: ${args.join(', ')}`);
 
-      this.io.println(nassh.msg('UNEXPECTED_ERROR'));
+      this.io.println(localize('UNEXPECTED_ERROR'));
       this.io.println(err);
     };
   };
@@ -164,7 +167,7 @@ CommandInstance.prototype.run = function() {
 
     showWelcome();
 
-    nassh.getFileSystem()
+    getFileSystem()
       .then(onFileSystemFound)
       .catch(ferr('FileSystem init failed'));
 
@@ -181,28 +184,28 @@ CommandInstance.prototype.run = function() {
   const showWelcome = () => {
     const style = {bold: true};
 
-    this.io.println(nassh.msg(
+    this.io.println(localize(
         'WELCOME_VERSION',
-        [nassh.sgrText(this.manifest_.name, style),
-         nassh.sgrText(this.manifest_.version, style)]));
+        [sgrText(this.manifest_.name, style),
+         sgrText(this.manifest_.version, style)]));
 
-    this.io.println(nassh.msg(
+    this.io.println(localize(
         'WELCOME_FAQ',
-        [nassh.sgrText('https://goo.gl/muppJj', style)]));
+        [sgrText('https://goo.gl/muppJj', style)]));
 
     if (hterm.windowType != 'popup' && hterm.os != 'mac') {
       this.io.println('');
-      this.io.println(nassh.msg(
+      this.io.println(localize(
           'OPEN_AS_WINDOW_TIP',
-          [nassh.sgrText('https://goo.gl/muppJj', style)]));
+          [sgrText('https://goo.gl/muppJj', style)]));
       this.io.println('');
     }
 
     // Show some release highlights the first couple of runs with a new version.
     // We'll reset the counter when the release notes change.
-    this.io.println(nassh.msg(
+    this.io.println(localize(
         'WELCOME_CHANGELOG',
-        [nassh.sgrText(nassh.osc8Link('/html/changelog.html'), style)]));
+        [sgrText(osc8Link('/html/changelog.html'), style)]));
     const notes = lib.resource.getData('nassh/release/highlights');
     if (this.prefs_.getNumber('welcome/notes-version') != notes.length) {
       // They upgraded, so reset the counters.
@@ -213,7 +216,7 @@ CommandInstance.prototype.run = function() {
     const notesShowCount = this.prefs_.getNumber('welcome/show-count');
     if (notesShowCount < 10) {
       // For new runs, show the highlights directly.
-      this.io.print(nassh.msg('WELCOME_RELEASE_HIGHLIGHTS',
+      this.io.print(localize('WELCOME_RELEASE_HIGHLIGHTS',
                               [lib.resource.getData('nassh/release/lastver')]));
       this.io.println(notes.replace(/%/g, '\r\n \u00A4'));
       this.prefs_.set('welcome/show-count', notesShowCount + 1);
@@ -222,8 +225,8 @@ CommandInstance.prototype.run = function() {
     // Display a random tip every time they launch to advertise features.
     const num = lib.f.randomInt(1, 14);
     this.io.println('');
-    this.io.println(nassh.msg('WELCOME_TIP_OF_DAY',
-                              [num, nassh.msg(`TIP_${num}`)]));
+    this.io.println(localize('WELCOME_TIP_OF_DAY',
+                              [num, localize(`TIP_${num}`)]));
     this.io.println('');
 
     if (this.manifest_.name.match(/\((dev|tot)\)/) ||
@@ -438,7 +441,7 @@ CommandInstance.prototype.commonProfileSetup_ = function(profileID, callback) {
     try {
       prefs = this.prefs_.getProfile(profileID);
     } catch (e) {
-      this.io.println(nassh.msg('GET_PROFILE_ERROR', [profileID, e]));
+      this.io.println(localize('GET_PROFILE_ERROR', [profileID, e]));
       this.exit(EXIT_INTERNAL_ERROR, true);
       return;
     }
@@ -521,10 +524,10 @@ CommandInstance.prototype.mountProfile = function(profileID) {
         // The client has exited (bad), or the mount setup is done (good).
         port.disconnect();
         if (command === 'done') {
-          io.showOverlay(nassh.msg('MOUNTED_MESSAGE') + ' ' +
-                         nassh.msg('CONNECT_OR_EXIT_MESSAGE'), null);
+          io.showOverlay(localize('MOUNTED_MESSAGE') + ' ' +
+                         localize('CONNECT_OR_EXIT_MESSAGE'), null);
         } else {
-          io.showOverlay(nassh.msg('DISCONNECT_MESSAGE', [msg.status]), null);
+          io.showOverlay(localize('DISCONNECT_MESSAGE', [msg.status]), null);
         }
 
         // Put the IO into dummy mode for the most part.
@@ -820,7 +823,7 @@ CommandInstance.prototype.connectToDestination = function(destination) {
 
   const rv = parseDestination(destination);
   if (rv === null) {
-    this.io.println(nassh.msg('BAD_DESTINATION', [destination]));
+    this.io.println(localize('BAD_DESTINATION', [destination]));
     this.exit(EXIT_INTERNAL_ERROR, true);
     return;
   }
@@ -905,7 +908,7 @@ export function splitCommandLine(argstr) {
 CommandInstance.prototype.sftpConnectToDestination = function(destination) {
   const rv = parseDestination(destination);
   if (rv === null) {
-    this.io.println(nassh.msg('BAD_DESTINATION', [destination]));
+    this.io.println(localize('BAD_DESTINATION', [destination]));
     this.exit(EXIT_INTERNAL_ERROR, true);
     return;
   }
@@ -980,7 +983,7 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
   try {
     options = tokenizeOptions(params.nasshOptions);
   } catch (e) {
-    this.io.println(nassh.msg('NASSH_OPTIONS_ERROR', [e]));
+    this.io.println(localize('NASSH_OPTIONS_ERROR', [e]));
     this.exit(EXIT_INTERNAL_ERROR, true);
     return;
   }
@@ -989,7 +992,7 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
   try {
     userOptions = tokenizeOptions(params.nasshUserOptions);
   } catch (e) {
-    this.io.println(nassh.msg('NASSH_OPTIONS_ERROR', [e]));
+    this.io.println(localize('NASSH_OPTIONS_ERROR', [e]));
     this.exit(EXIT_INTERNAL_ERROR, true);
     return;
   }
@@ -1049,10 +1052,10 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
 
     // Display in the terminal as red+bold+blink text.
     this.io.println('');
-    this.io.println(nassh.sgrText(
-        nassh.msg('MIGRATE_TO_EXT', [
-          nassh.osc8Link(extUrl, 'link'),
-          nassh.osc8Link(docUrl, 'link'),
+    this.io.println(sgrText(
+        localize('MIGRATE_TO_EXT', [
+          osc8Link(extUrl, 'link'),
+          osc8Link(docUrl, 'link'),
         ]), {bold: true, blink: true, underline: '3', bg: '41', fg: '37'}));
     this.io.println('');
 
@@ -1061,7 +1064,7 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
     if (showCount < 5) {
       const div = document.createElement('div');
       div.style.whiteSpace = 'pre-wrap';
-      div.innerHTML = nassh.msg('MIGRATE_TO_EXT', [
+      div.innerHTML = localize('MIGRATE_TO_EXT', [
         `<a href="${extUrl}" target=_blank>link</a>`,
         `<a href="${docUrl}" target=_blank>link</a>`,
       ]);
@@ -1078,9 +1081,10 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
     // Do nothing when disabled.  We check this first to avoid excessive
     // indentation or redundant checking of the proxy-host setting below.
   } else if (options['--proxy-mode'] == 'ssh-fe@google.com') {
-      this.relay_ = new RelaySshfe(this.io, options, this.terminalLocation,
-                                   this.sessionStorage, this.localPrefs_);
-    this.io.println(nassh.msg(
+    this.relay_ = new RelaySshfe(
+        this.io, options, this.terminalLocation, this.sessionStorage,
+        this.localPrefs_);
+    this.io.println(localize(
         'FOUND_RELAY',
         [`${this.relay_.proxyHost}:${this.relay_.proxyPort}`]));
     await this.relay_.init();
@@ -1094,7 +1098,7 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
                                     this.sessionStorage, this.localPrefs_);
     }
 
-    this.io.println(nassh.msg(
+    this.io.println(localize(
         'INITIALIZING_RELAY',
         [`${this.relay_.proxyHost}:${this.relay_.proxyPort}`]));
 
@@ -1103,7 +1107,7 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
     } else if (!await this.relay_.init()) {
       // If --relay-method=direct, this is an error.
       if (this.relay_.relayMethod === 'direct') {
-        this.io.println(nassh.msg(
+        this.io.println(localize(
             'RELAY_AUTH_ERROR',
             [`${this.relay_.proxyHost}:${this.relay_.proxyPort}`]));
         this.exit(EXIT_INTERNAL_ERROR, true);
@@ -1129,7 +1133,7 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
     }
   } else if (options['--proxy-mode']) {
     // Unknown proxy mode.
-    this.io.println(nassh.msg('NASSH_OPTIONS_ERROR',
+    this.io.println(localize('NASSH_OPTIONS_ERROR',
                               [`--proxy-mode=${options['--proxy-mode']}`]));
     this.exit(EXIT_INTERNAL_ERROR, true);
     return;
@@ -1163,7 +1167,7 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
     this.sshClientVersion_ = options['--ssh-client-version'];
   }
   if (!this.sshClientVersion_.match(/^[a-zA-Z0-9.-]+$/)) {
-    this.io.println(nassh.msg('UNKNOWN_SSH_CLIENT_VERSION',
+    this.io.println(localize('UNKNOWN_SSH_CLIENT_VERSION',
                               [this.sshClientVersion_]));
     this.exit(127, true);
     return;
@@ -1254,7 +1258,7 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
   this.initPlugin_(argv, async () => {
     this.terminalWindow.addEventListener('beforeunload', this.onBeforeUnload_);
 
-    this.io.println(nassh.msg('CONNECTING',
+    this.io.println(localize('CONNECTING',
                               [`${params.username}@${disp_hostname}`]));
 
     lib.notNull(this.plugin_);
@@ -1266,7 +1270,7 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
         await this.sftpClient.initConnection(this.plugin_);
         this.onSftpInitialised(params.sftpCallback);
       } catch (e) {
-        this.io.println(nassh.msg('NASFTP_ERROR_MESSAGE', [e]));
+        this.io.println(localize('NASFTP_ERROR_MESSAGE', [e]));
         this.exit(EXIT_INTERNAL_ERROR, true);
       }
     }
@@ -1362,7 +1366,7 @@ export function postProcessOptions(options, hostname, username) {
     }, rv);
 
     // Terminal-SSH must use method=direct since it does not allow redirects.
-    if (nassh.isCrOSSystemApp()) {
+    if (isCrOSSystemApp()) {
       rv = Object.assign({
         '--relay-method': 'direct',
       }, rv);
@@ -1460,15 +1464,15 @@ CommandInstance.prototype.initNaclPlugin_ = function(argv, onComplete) {
  * @return {!Promise<void>}
  */
 CommandInstance.prototype.initPlugin_ = async function(argv, onComplete) {
-  this.io.print(nassh.msg('PLUGIN_LOADING', [this.sshClientVersion_]));
+  this.io.print(localize('PLUGIN_LOADING', [this.sshClientVersion_]));
   if (this.sshClientVersion_.startsWith('pnacl')) {
     this.initNaclPlugin_(argv, () => {
-      this.io.println(nassh.msg('PLUGIN_LOADING_COMPLETE'));
+      this.io.println(localize('PLUGIN_LOADING_COMPLETE'));
       onComplete();
     });
   } else {
     await this.initWasmPlugin_(argv.arguments, argv.environment);
-    this.io.println(nassh.msg('PLUGIN_LOADING_COMPLETE'));
+    this.io.println(localize('PLUGIN_LOADING_COMPLETE'));
     this.plugin_.run().then((code) => {
       this.onPluginExit(code);
       this.exit(code, /* noReconnect= */ false);
@@ -1516,13 +1520,13 @@ CommandInstance.prototype.exit = function(code, noReconnect) {
       this.argv_.onExit(code);
     }
 
-    console.log(nassh.msg('DISCONNECT_MESSAGE', [code]));
+    console.log(localize('DISCONNECT_MESSAGE', [code]));
     return;
   }
   const container = document.createElement('div');
-  container.appendChild(new Text(nassh.msg('DISCONNECT_MESSAGE', [code])));
+  container.appendChild(new Text(localize('DISCONNECT_MESSAGE', [code])));
   container.appendChild(document.createElement('br'));
-  container.appendChild(new Text(nassh.msg(
+  container.appendChild(new Text(localize(
       noReconnect ? 'CONNECT_OR_EXIT_MESSAGE' : 'RECONNECT_MESSAGE')));
   this.io.showOverlay(container, null);
 
@@ -1566,7 +1570,7 @@ CommandInstance.prototype.onBeforeUnload_ = function(e) {
     return;
   }
 
-  const msg = nassh.msg('BEFORE_UNLOAD');
+  const msg = localize('BEFORE_UNLOAD');
   e.returnValue = msg;
   return msg;
 };

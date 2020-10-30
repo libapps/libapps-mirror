@@ -6,6 +6,7 @@
  * @fileoverview Runtime SFTP connect dialog.
  */
 
+import {runtimeSendMessage} from './nassh.js';
 import {MountInfo} from './nassh_external_api.js';
 
 /**
@@ -64,7 +65,7 @@ ConfigDialog.prototype.onInputChange_ = function() {
   this.info_.readChunkSize = parseInt(this.fieldReadSize_.value, 10) * 1024;
   this.info_.writeChunkSize = parseInt(this.fieldWriteSize_.value, 10) * 1024;
 
-  nassh.runtimeSendMessage({
+  runtimeSendMessage({
     command: 'setMountInfo', fileSystemId: this.fsId_, info: this.info_,
   })
     .then(({error, message}) => {
@@ -105,7 +106,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const params = new URLSearchParams(document.location.search);
     const profileId = lib.notNull(params.get('profile-id'));
     document.title = `SFTP: ${profileId}`;
-    nassh.runtimeSendMessage({
+    runtimeSendMessage({
       command: 'getMountInfo', fileSystemId: profileId,
     })
       .then(({error, message, info}) => {

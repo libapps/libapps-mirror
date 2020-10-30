@@ -6,6 +6,7 @@
  * @fileoverview Stream for connecting to a ssh server via a SSH-FE relay.
  */
 
+import {base64ToBase64Url, runtimeSendMessage} from './nassh.js';
 import {Message} from './nassh_agent_message.js';
 import {MessageNumbers, readMessage,
         writeMessage} from './nassh_agent_message_types.js';
@@ -91,7 +92,7 @@ RelaySshfeWsStream.prototype.asyncOpen = async function(settings, onComplete) {
       return this.signChallenge_(challenge);
     })
     .then((signature) => {
-      sshFeSignature = nassh.base64ToBase64Url(signature);
+      sshFeSignature = base64ToBase64Url(signature);
       this.connect_(sshFeChallenge, sshFeSignature);
       onComplete(true);
     })
@@ -159,7 +160,7 @@ RelaySshfeWsStream.AgentResponse;
  */
 RelaySshfeWsStream.prototype.sendAgentMessage_ = function(data) {
   return /** @type {!Promise<!RelaySshfeWsStream.AgentResponse>} */ (
-      nassh.runtimeSendMessage(
+      runtimeSendMessage(
           this.sshAgent_, {'type': 'auth-agent@openssh.com', 'data': data}));
 };
 

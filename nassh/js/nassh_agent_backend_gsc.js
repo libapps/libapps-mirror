@@ -13,6 +13,7 @@
  * @suppress {moduleLoad}
  */
 
+import {localize} from './nassh.js';
 import {asn1js, pkijs} from './nassh_deps.rollup.js';
 import {UserIO} from './nassh_agent.js';
 import {Backend} from './nassh_agent_backend.js';
@@ -157,7 +158,7 @@ GSC.prototype.ping = async function() {
   try {
     await GSC.initializeAPIContext();
   } catch (e) {
-    this.showMessage(nassh.msg(
+    this.showMessage(localize(
         'SMART_CARD_CONNECTOR_NOT_INSTALLED',
         ['https://chrome.google.com/webstore/detail/' +
          'khpfeaanjngmcnplbdlpegiifgpfgdco']));
@@ -283,7 +284,7 @@ GSC.prototype.requestPIN = async function(
     reader, readerKeyId, appletName, numTries) {
   // Show 8 hex character (4 byte) fingerprint to the user.
   const shortFingerprint = arrayToHexString(readerKeyId.slice(-4));
-  return this.promptUser(nassh.msg(
+  return this.promptUser(localize(
       'REQUEST_PIN_PROMPT', [shortFingerprint, reader, appletName, numTries]));
 };
 
@@ -330,7 +331,7 @@ GSC.prototype.unlockKey_ = async function(manager, keyId) {
   } while (!await manager.verifyPIN(pinBytes));
 
   if (this.pinCache_.isEnabled() === null) {
-    const reply = await this.promptUser(nassh.msg('CACHE_PIN_PROMPT'));
+    const reply = await this.promptUser(localize('CACHE_PIN_PROMPT'));
     this.pinCache_.setEnabled(reply.toLowerCase() === 'y');
   }
   if (this.pinCache_.isEnabled()) {

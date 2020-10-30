@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {browserAction, localize, sendFeedback} from './nassh.js';
 import {addListeners} from './nassh_sftp_fsp.js';
 
 /**
@@ -44,19 +45,19 @@ App.prototype.installContextMenus = function() {
     {
       'type': 'normal',
       'id': 'connect-dialog',
-      'title': nassh.msg('CONNECTION_DIALOG_NAME'),
+      'title': localize('CONNECTION_DIALOG_NAME'),
       'contexts': ['browser_action'],
     },
     {
       'type': 'normal',
       'id': 'mosh',
-      'title': nassh.msg('MOSH_NAME'),
+      'title': localize('MOSH_NAME'),
       'contexts': ['browser_action'],
     },
     {
       'type': 'normal',
       'id': 'feedback',
-      'title': nassh.msg('SEND_FEEDBACK_LABEL'),
+      'title': localize('SEND_FEEDBACK_LABEL'),
       'contexts': ['browser_action'],
     },
   ];
@@ -83,7 +84,7 @@ App.prototype.onContextMenu_ = function(info, tab = undefined) {
           'scrollbars=yes,width=900,height=600');
       break;
     case 'feedback':
-      nassh.sendFeedback();
+      sendFeedback();
       break;
     default:
       console.error('Unknown menu item', info);
@@ -96,7 +97,7 @@ App.prototype.onContextMenu_ = function(info, tab = undefined) {
  */
 App.prototype.setDefaultOmnibox_ = function() {
   this.omnibox_.setDefaultSuggestion({
-    description: nassh.msg('OMNIBOX_DEFAULT'),
+    description: localize('OMNIBOX_DEFAULT'),
   });
 };
 
@@ -289,11 +290,11 @@ App.prototype.installOmnibox = function(omnibox) {
  * Bind our callbacks to the browser action button (for extensions).
  */
 App.prototype.installBrowserAction = function() {
-  if (!nassh.browserAction) {
+  if (!browserAction) {
     return;
   }
 
-  nassh.browserAction.onClicked.addListener(this.onLaunched.bind(this));
+  browserAction.onClicked.addListener(this.onLaunched.bind(this));
 };
 
 /**

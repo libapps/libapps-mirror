@@ -2,6 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {
+  disableTabDiscarding, loadWebFonts, localize, openOptionsPage,
+  runtimeSendMessage, sendFeedback, setupForWebApp, watchBackgroundColor,
+} from './nassh.js';
 import {CommandInstance} from './nassh_command_instance.js';
 
 /**
@@ -23,7 +27,7 @@ const openNewWindow = function(url) {
     url: url,
     window: true,
   };
-  return nassh.runtimeSendMessage(msg).then((response) => {
+  return runtimeSendMessage(msg).then((response) => {
     if (response && response.error) {
       throw new Error(`request failed: ${response.message}`);
     }
@@ -69,7 +73,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     terminal.decorate(lib.notNull(document.querySelector('#terminal')));
     terminal.installKeyboard();
     const runNassh = function() {
-      terminal.onOpenOptionsPage = nassh.openOptionsPage;
+      terminal.onOpenOptionsPage = openOptionsPage;
       terminal.setCursorPosition(0, 0);
       terminal.setCursorVisible(true);
 
@@ -96,8 +100,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
       nasshCommand.run();
     };
     terminal.onTerminalReady = function() {
-      nassh.watchBackgroundColor(terminal.getPrefs());
-      nassh.loadWebFonts(terminal.getDocument());
+      watchBackgroundColor(terminal.getPrefs());
+      loadWebFonts(terminal.getDocument());
       if (window.chrome && chrome.accessibilityFeatures &&
           chrome.accessibilityFeatures.spokenFeedback) {
         chrome.accessibilityFeatures.spokenFeedback.onChange.addListener(
@@ -112,32 +116,32 @@ window.addEventListener('DOMContentLoaded', (event) => {
     };
 
     terminal.contextMenu.setItems([
-      {name: nassh.msg('TERMINAL_CLEAR_MENU_LABEL'),
+      {name: localize('TERMINAL_CLEAR_MENU_LABEL'),
        action: function() { terminal.wipeContents(); }},
-      {name: nassh.msg('TERMINAL_RESET_MENU_LABEL'),
+      {name: localize('TERMINAL_RESET_MENU_LABEL'),
        action: function() { terminal.reset(); }},
-      {name: nassh.msg('NEW_WINDOW_MENU_LABEL'),
+      {name: localize('NEW_WINDOW_MENU_LABEL'),
        action: function() { openNewWindow(lib.f.getURL('/html/nassh.html')); }},
-      {name: nassh.msg('FAQ_MENU_LABEL'),
+      {name: localize('FAQ_MENU_LABEL'),
        action: function() {
          lib.f.openWindow('https://goo.gl/muppJj', '_blank');
        }},
-      {name: nassh.msg('CLEAR_KNOWN_HOSTS_MENU_LABEL'),
-       action: function() { nassh.openOptionsPage('ssh-files'); }},
-      {name: nassh.msg('HTERM_OPTIONS_BUTTON_LABEL'),
-       action: function() { nassh.openOptionsPage(); }},
-      {name: nassh.msg('SEND_FEEDBACK_LABEL'),
-       action: nassh.sendFeedback},
+      {name: localize('CLEAR_KNOWN_HOSTS_MENU_LABEL'),
+       action: function() { openOptionsPage('ssh-files'); }},
+      {name: localize('HTERM_OPTIONS_BUTTON_LABEL'),
+       action: function() { openOptionsPage(); }},
+      {name: localize('SEND_FEEDBACK_LABEL'),
+       action: sendFeedback},
     ]);
 
     // Useful for console debugging.
     window.term_ = terminal;
-    console.log(nassh.msg(
+    console.log(localize(
         'CONSOLE_NASSH_OPTIONS_NOTICE',
         [lib.f.getURL('/html/nassh_preferences_editor.html')]));
   };
 
-  nassh.disableTabDiscarding();
-  nassh.setupForWebApp();
+  disableTabDiscarding();
+  setupForWebApp();
   lib.init(console.log.bind(console)).then(execNaSSH);
 });

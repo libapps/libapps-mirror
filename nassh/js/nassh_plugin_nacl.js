@@ -7,6 +7,7 @@
  * @suppress {moduleLoad}
  */
 
+import {localize} from './nassh.js';
 import {StreamSet} from './nassh_stream_set.js';
 import {SftpStream} from './nassh_stream_sftp.js';
 import {SshAgentStream} from './nassh_stream_sshagent.js';
@@ -83,7 +84,7 @@ export class Plugin {
     this.plugin_.addEventListener('message', this.onMessage_.bind(this));
 
     const errorHandler = (ev) => {
-      this.io.println(nassh.msg('PLUGIN_LOADING_FAILED'));
+      this.io.println(localize('PLUGIN_LOADING_FAILED'));
       console.error('loading plugin failed', ev);
       this.onExit_(-1 /* CommandInstance.EXIT_INTERNAL_ERROR */);
     };
@@ -306,7 +307,7 @@ export class Plugin {
      */
     const onOpen = (success, error) => {
       if (!success) {
-        this.io.println(nassh.msg('STREAM_OPEN_ERROR', ['socket', error]));
+        this.io.println(localize('STREAM_OPEN_ERROR', ['socket', error]));
       }
       this.send('onOpenSocket', [fd, success, false]);
     };

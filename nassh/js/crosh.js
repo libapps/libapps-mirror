@@ -2,6 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {
+  disableTabDiscarding, loadMessages, loadWebFonts, openOptionsPage, osc8Link,
+  sendFeedback, sgrText,
+} from './nassh.js';
+
 /**
  * CSP means that we can't kick off the initialization from the html file,
  * so we do it like this instead.
@@ -30,11 +35,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
       break;
   }
 
-  nassh.disableTabDiscarding();
+  disableTabDiscarding();
 
   // Modifications if crosh is running as a web app.
   if (Crosh.isWebApp()) {
-    lib.registerInit('messages', nassh.loadMessages);
+    lib.registerInit('messages', loadMessages);
   }
 
   lib.init().then(Crosh.init);
@@ -118,11 +123,11 @@ Crosh.init = function() {
   terminal.installKeyboard();
   const runCrosh = function() {
     terminal.keyboard.bindings.addBinding('Ctrl+Shift+P', function() {
-      nassh.openOptionsPage();
+      openOptionsPage();
       return hterm.Keyboard.KeyActions.CANCEL;
     });
 
-    terminal.onOpenOptionsPage = nassh.openOptionsPage;
+    terminal.onOpenOptionsPage = openOptionsPage;
     terminal.setCursorPosition(0, 0);
     terminal.setCursorVisible(true);
     const crosh = new Crosh({
@@ -133,7 +138,7 @@ Crosh.init = function() {
     crosh.run();
   };
   terminal.onTerminalReady = function() {
-    nassh.loadWebFonts(terminal.getDocument());
+    loadWebFonts(terminal.getDocument());
 
     // TODO(b/223076712): Avoid errors for nassh-crosh running on pre-M101.
     // Can be removed when stable is M101+.
@@ -170,9 +175,9 @@ Crosh.init = function() {
        lib.f.openWindow('https://goo.gl/muppJj', '_blank');
      }},
     {name: Crosh.msg('HTERM_OPTIONS_BUTTON_LABEL'),
-     action: function() { nassh.openOptionsPage(); }},
+     action: function() { openOptionsPage(); }},
     {name: Crosh.msg('SEND_FEEDBACK_LABEL'),
-     action: nassh.sendFeedback},
+     action: sendFeedback},
   ]);
 
   // Useful for console debugging.
@@ -250,7 +255,7 @@ Crosh.prototype.run = function() {
     url.search = params.toString();
     this.io.println(Crosh.msg(
         'OPEN_AS_WINDOW_TIP',
-        [nassh.sgrText(nassh.osc8Link(url.href, '[crosh]'), {bold: true})]));
+        [sgrText(osc8Link(url.href, '[crosh]'), {bold: true})]));
     this.io.println('');
   }
 

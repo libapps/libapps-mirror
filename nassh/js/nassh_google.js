@@ -6,6 +6,8 @@
  * @fileoverview Misc logic for Google-specific integration.
  */
 
+import {localize, runtimeSendMessage} from './nassh.js';
+
 /**
  * The different certificate slots in the gnubby.
  *
@@ -79,7 +81,7 @@ async function findSkeExtension() {
   const check = async (id) => {
     let result;
     try {
-      result = /** @type {!skeResponse} */ (await nassh.runtimeSendMessage(
+      result = /** @type {!skeResponse} */ (await runtimeSendMessage(
           id, {'type': 'HELLO'}));
     } catch (e) {
       return;
@@ -115,17 +117,17 @@ async function findSkeExtension() {
  * @return {!Promise<boolean>} Resolve true if certificate is up-to-date.
  */
 async function skeRefresh(io) {
-  io.print(nassh.msg('SSH_CERT_CHECK_START'));
+  io.print(localize('SSH_CERT_CHECK_START'));
 
   let result;
   try {
-    result = /** @type {!skeResponse} */ (await nassh.runtimeSendMessage(
+    result = /** @type {!skeResponse} */ (await runtimeSendMessage(
         defaultSkeExtension, {
           type: 'cert_status_request',
           slot: gnubbySlot.CORP_NORMAL_CERT_SLOT,
         }));
   } catch (e) {
-    io.println(nassh.msg('SSH_CERT_CHECK_ERROR', [e]));
+    io.println(localize('SSH_CERT_CHECK_ERROR', [e]));
     return false;
   }
 
@@ -142,10 +144,10 @@ async function skeRefresh(io) {
   if (result.type !== 'error_response') {
     // Refresh the certificate if it expires in the next hour.
     const hoursLeft = Math.floor((result.expiry - now) / 60 / 60);
-    io.println(nassh.msg('SSH_CERT_CHECK_RESULT', [hoursLeft]));
+    io.println(localize('SSH_CERT_CHECK_RESULT', [hoursLeft]));
     if (hoursLeft < 1) {
-      io.showOverlay(nassh.msg('SSH_CERT_CHECK_REFRESH'));
-      result = /** @type {!skeResponse} */ (await nassh.runtimeSendMessage(
+      io.showOverlay(localize('SSH_CERT_CHECK_REFRESH'));
+      result = /** @type {!skeResponse} */ (await runtimeSendMessage(
           defaultSkeExtension, {
             type: 'get_new_cert_request',
             slot: gnubbySlot.CORP_NORMAL_CERT_SLOT,
@@ -155,7 +157,7 @@ async function skeRefresh(io) {
   }
 
   if (result.type === 'error_response') {
-    io.println(nassh.msg(
+    io.println(localize(
         'SSH_CERT_CHECK_ERROR',
         [`${result.errorReason} ${result.errorDetail}`]));
     return false;
@@ -207,7 +209,7 @@ function findGnubbyExtension() {
 
   // Ping the extension to see if it's installed/enabled/alive.
   const check = (id) => {
-    return nassh.runtimeSendMessage(id, {'type': 'HELLO'}).then((result) => {
+    return runtimeSendMessage(id, {'type': 'HELLO'}).then((result) => {
       // If the probe worked, return the id, else return nothing so we can
       // clear out all the pending promises.
       if (result !== undefined && result['rc'] == 0) {
@@ -255,7 +257,7 @@ function findGcseExtension() {
   const devId = 'oncenbbimcccjedkmajnncfllmbnmbnp';
 
   // Ping the dev extension to see if it's installed/enabled/alive.
-  nassh.runtimeSendMessage(devId, {'action': 'hello'}).then((result) => {
+  runtimeSendMessage(devId, {'action': 'hello'}).then((result) => {
     // If the probe worked, return the id, else return nothing so we can
     // clear out all the pending promises.  We don't check the value of the
     // status field as it will be "error" which is confusing -- while the
@@ -282,9 +284,9 @@ export async function gcseRefreshCert(io) {
     return;
   }
 
-  io.print(nassh.msg('SSH_CERT_CHECK_START'));
-  return nassh.runtimeSendMessage(defaultGcseExtension,
-                                  {'action': 'certificate_expiry'})
+  io.print(localize('SSH_CERT_CHECK_START'));
+  return runtimeSendMessage(defaultGcseExtension,
+                            {'action': 'certificate_expiry'})
     .then((result) => {
       const now = new Date().getTime() / 1000;
 
@@ -300,18 +302,18 @@ export async function gcseRefreshCert(io) {
       if (result.status === 'OK') {
         // Refresh the certificate if it expires in the next hour.
         const hoursLeft = Math.floor((result.expires - now) / 60 / 60);
-        io.println(nassh.msg('SSH_CERT_CHECK_RESULT', [hoursLeft]));
+        io.println(localize('SSH_CERT_CHECK_RESULT', [hoursLeft]));
         if (hoursLeft < 1) {
-          io.showOverlay(nassh.msg('SSH_CERT_CHECK_REFRESH'));
-          return nassh.runtimeSendMessage(
+          io.showOverlay(localize('SSH_CERT_CHECK_REFRESH'));
+          return runtimeSendMessage(
               defaultGcseExtension,
               {action: 'request_certificate', wait: true});
         }
       } else {
-        io.println(nassh.msg('SSH_CERT_CHECK_ERROR', [result.error]));
+        io.println(localize('SSH_CERT_CHECK_ERROR', [result.error]));
       }
     })
-    .catch((result) => io.println(nassh.msg('SSH_CERT_CHECK_ERROR', [result])));
+    .catch((result) => io.println(localize('SSH_CERT_CHECK_ERROR', [result])));
 }
 
 /**

@@ -6,12 +6,14 @@
  * @fileoverview Protocol registration helper dialog.
  */
 
+import {registerProtocolHandler} from './nassh.js';
+
 /**
  * Attempt to register all the protocols we support.
  */
 function registerProtocols() {
-  nassh.registerProtocolHandler('ssh');
-  nassh.registerProtocolHandler('sftp');
+  registerProtocolHandler('ssh');
+  registerProtocolHandler('sftp');
 }
 
 /**

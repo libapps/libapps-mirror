@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {localize, openOptionsPage, sendFeedback} from './nassh.js';
+
 /**
  * CSP means that we can't kick off the initialization from the html file,
  * so we do it like this instead.
@@ -61,10 +63,10 @@ popup.prototype.openLink_ = function(id, newWindow = true) {
     case 'connect-dialog':
       break;
     case 'options':
-      nassh.openOptionsPage();
+      openOptionsPage();
       return;
     case 'feedback':
-      nassh.sendFeedback();
+      sendFeedback();
       return;
     case 'mosh':
       url = lib.f.getURL('/plugin/mosh/mosh_client.html');
@@ -259,7 +261,7 @@ popup.prototype.populateList_ = function() {
     const id = ids[i];
 
     const link = document.createElement('div');
-    link.title = nassh.msg('POPUP_CONNECT_TOOLTIP');
+    link.title = localize('POPUP_CONNECT_TOOLTIP');
     link.id = id;
     link.tabIndex = i + 1;
     link.className = 'links';
@@ -272,21 +274,21 @@ popup.prototype.populateList_ = function() {
 
     switch (id) {
       case 'connect-dialog':
-        link.textContent = nassh.msg('CONNECTION_DIALOG_NAME');
+        link.textContent = localize('CONNECTION_DIALOG_NAME');
         link.style.textAlign = 'center';
         link.style.borderBottom = 'dashed 1px';
         break;
       case 'mosh':
-        link.textContent = nassh.msg('MOSH_NAME');
+        link.textContent = localize('MOSH_NAME');
         link.style.textAlign = 'center';
         link.style.borderTop = 'dashed 1px';
         break;
       case 'options':
-        link.textContent = nassh.msg('HTERM_OPTIONS_BUTTON_LABEL');
+        link.textContent = localize('HTERM_OPTIONS_BUTTON_LABEL');
         link.style.textAlign = 'center';
         break;
       case 'feedback':
-        link.textContent = nassh.msg('SEND_FEEDBACK_LABEL');
+        link.textContent = localize('SEND_FEEDBACK_LABEL');
         link.style.textAlign = 'center';
         break;
       default: {

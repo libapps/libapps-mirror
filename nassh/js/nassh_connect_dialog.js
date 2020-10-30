@@ -2,6 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {
+  getFileSystem, isCrOSSystemApp, loadWebFonts, localize, openOptionsPage,
+  registerProtocolHandler, runtimeSendMessage, sendFeedback, setupForWebApp,
+} from './nassh.js';
 import {ColumnList} from './nassh_column_list.js';
 import {deleteIdentityFiles, getIdentityFileNames, importIdentityFiles} from
     './nassh_fs.js';
@@ -66,7 +70,7 @@ function ConnectDialog(messagePort) {
   this.feedbackButton_ = lib.notNull(document.querySelector('#feedback'));
 
   // Hide options and feedback for Terminal-SSH.
-  if (nassh.isCrOSSystemApp()) {
+  if (isCrOSSystemApp()) {
     this.optionsButton_.remove();
     this.feedbackButton_.remove();
   }
@@ -85,10 +89,10 @@ ConnectDialog.onWindowMessage = function(e) {
 
   window.removeEventListener('message', ConnectDialog.onWindowMessage);
 
-  nassh.setupForWebApp();
+  setupForWebApp();
   lib.init().then(() => {
     window.dialog_ = new ConnectDialog(e.data.argv[0].messagePort);
-    nassh.loadWebFonts(document);
+    loadWebFonts(document);
   });
 };
 
@@ -122,7 +126,7 @@ ConnectDialog.prototype.onPreferencesReady_ = function() {
   // The shortcut list will eventually do this async, but we want it now...
   this.setCurrentProfileRecord(this.profileList_[profileIndex]);
 
-  nassh.getFileSystem().then(this.onFileSystemFound_.bind(this));
+  getFileSystem().then(this.onFileSystemFound_.bind(this));
 };
 
 /**
@@ -150,7 +154,7 @@ ConnectDialog.ProfileRecord = function(id, prefs, textContent) {
  * @return {string}
  */
 ConnectDialog.prototype.msg = function(name) {
-  return nassh.msg(name.toUpperCase().replace(/-/g, '_'));
+  return localize(name.toUpperCase().replace(/-/g, '_'));
 };
 
 /**
@@ -475,7 +479,7 @@ ConnectDialog.prototype.startup_ = function(message, proto) {
   this.save();
 
   // Since the user has initiated this connection, register the protocol.
-  nassh.registerProtocolHandler(proto);
+  registerProtocolHandler(proto);
 
   this.localPrefs_.set(
       'connectDialog/lastProfileId', this.currentProfileRecord_.id);
@@ -505,7 +509,7 @@ ConnectDialog.prototype.mount = function() {
  * Unmount the SFTP connection.
  */
 ConnectDialog.prototype.unmount = function() {
-  nassh.runtimeSendMessage({
+  runtimeSendMessage({
     command: 'unmount', fileSystemId: this.currentProfileRecord_.id,
   })
     .then(({error, message}) => {
@@ -1133,13 +1137,13 @@ ConnectDialog.prototype.onDeleteClick_ = function(e) {
  * Someone clicked on the options button.
  */
 ConnectDialog.prototype.onOptionsClick_ = function() {
-  nassh.openOptionsPage();
+  openOptionsPage();
 };
 
 /**
  * Someone clicked on the feedback button.
  */
-ConnectDialog.prototype.onFeedbackClick_ = nassh.sendFeedback;
+ConnectDialog.prototype.onFeedbackClick_ = sendFeedback;
 
 /**
  * KeyUp on the form element.

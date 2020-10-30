@@ -8,6 +8,8 @@
  * @suppress {moduleLoad}
  */
 
+import {getFileSystem} from './nassh.js';
+
 import {LitElement, createRef, css, html, ref, unsafeCSS, when} from './lit.js';
 import {SUPPORTED_FONT_SIZES,
   SUPPORTED_LINE_HEIGHT_PADDINGS} from './terminal_common.js';
@@ -54,7 +56,7 @@ export class TerminalSettingsApp extends LitElement {
 
     this.activeCategory_ = 'appearance';
 
-    this.fileSystemPromise_ = nassh.getFileSystem();
+    this.fileSystemPromise_ = getFileSystem();
     this.sshKnownHostEditorRef_ = createRef();
     this.sshConfigEditorRef_ = createRef();
   }

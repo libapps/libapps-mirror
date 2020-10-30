@@ -6,6 +6,7 @@
  * @fileoverview Stream for connecting to a ssh server via a Corp v4 relay.
  */
 
+import {localize} from './nassh.js';
 import {newBuffer} from './nassh_buffer.js';
 import {GoogMetricsReporter} from './nassh_goog_metrics_reporter.js';
 import {Stream} from './nassh_stream.js';
@@ -305,7 +306,7 @@ RelayCorpv4WsStream.prototype.reconnect_ = function() {
   this.connecting_ = true;
 
   if (this.io_) {
-    this.io_.showOverlay(nassh.msg('RELAY_RETRY'), 500);
+    this.io_.showOverlay(localize('RELAY_RETRY'), 500);
   }
 
   const uri = lib.f.replaceVars(this.reconnectTemplate_, {

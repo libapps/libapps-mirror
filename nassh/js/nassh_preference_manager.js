@@ -4,6 +4,8 @@
 
 'use strict';
 
+const nassh = {};
+
 /**
  * PreferenceManager subclass managing global NaSSH preferences.
  *

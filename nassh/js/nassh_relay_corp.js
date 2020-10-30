@@ -6,6 +6,7 @@
  * @fileoverview Implementation for the corp-relay@google.com proxy.
  */
 
+import {localize} from './nassh.js';
 import {Relay} from './nassh_relay.js';
 import {Stream} from './nassh_stream.js';
 import {RelayCorpWsStream,
@@ -124,7 +125,7 @@ export class Corp extends Relay {
     this.storage.removeItem('googleRelay.resumePath');
 
     if (this.relayServer) {
-      this.io_.println(nassh.msg('FOUND_RELAY', [this.relayServer]));
+      this.io_.println(localize('FOUND_RELAY', [this.relayServer]));
       return true;
     }
 
@@ -279,7 +280,7 @@ export class Corp extends Relay {
     // E.g. {"endpoint": "sup-ssh-relay.corp.google.com:8046"}.
     const endpoint = params['endpoint'];
     if (endpoint) {
-      this.io_.println(nassh.msg('FOUND_RELAY', [endpoint]));
+      this.io_.println(localize('FOUND_RELAY', [endpoint]));
       const serverProtocol = this.useSecure ? 'https' : 'http';
       const socketProtocol = this.useSecure ? 'wss' : 'ws';
       this.relayServer = `${serverProtocol}://${endpoint}/`;

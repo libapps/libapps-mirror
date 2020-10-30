@@ -6,6 +6,8 @@
  * @fileoverview SSH file editing helper.
  */
 
+import {getFileSystem} from './nassh.js';
+
 /**
  * A cached handle to the filesystem.
  */
@@ -163,7 +165,7 @@ const watched = {};
  */
 window.addEventListener('DOMContentLoaded', (event) => {
   // Load all the ~/.ssh files into the UI.
-  nassh.getFileSystem().then((fs) => {
+  getFileSystem().then((fs) => {
     filesystem = fs;
     watched.knowHosts = new FileWatcher(
         'ssh-files-known-hosts', '/.ssh/known_hosts');

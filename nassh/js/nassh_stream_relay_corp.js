@@ -6,6 +6,7 @@
  * @fileoverview Stream for connecting to a ssh server via a Corp relay.
  */
 
+import {base64ToBase64Url, base64UrlToBase64, localize} from './nassh.js';
 import {newBuffer} from './nassh_buffer.js';
 import {Stream} from './nassh_stream.js';
 
@@ -197,7 +198,7 @@ RelayCorpStream.prototype.requestError_ = function(isRead) {
     // the risk that a failed retry will redisplay this message just as its
     // fading away.  So we show the retry message for a little longer than we
     // expect to back off.
-    this.io_.showOverlay(nassh.msg('RELAY_RETRY'), this.backoffMS_ + 500);
+    this.io_.showOverlay(localize('RELAY_RETRY'), this.backoffMS_ + 500);
   }
 
   this.backoffTimeout_ =
@@ -282,7 +283,7 @@ RelayCorpXhrStream.prototype.sendWrite_ = function() {
   }
 
   const dataBuffer = this.writeBuffer_.read(this.maxMessageLength);
-  const data = nassh.base64ToBase64Url(btoa(
+  const data = base64ToBase64Url(btoa(
       lib.codec.codeUnitArrayToString(dataBuffer)));
   this.writeRequest_.open(
       'GET',
@@ -320,7 +321,7 @@ RelayCorpXhrStream.prototype.onReadReady_ = function(e) {
 
   this.readCount_ += Math.floor(
       this.readRequest_.responseText.length * 3 / 4);
-  const data = nassh.base64UrlToBase64(this.readRequest_.responseText);
+  const data = base64UrlToBase64(this.readRequest_.responseText);
   this.onDataAvailable(data);
 
   this.requestSuccess_(true);

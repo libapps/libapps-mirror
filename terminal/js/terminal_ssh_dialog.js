@@ -6,6 +6,7 @@
  * @fileoverview Export an element: terminal-ssh-dialog
  */
 
+import {getFileSystem} from './nassh.js';
 import {deleteIdentityFiles, getIdentityFileNames, importIdentityFiles}
     from './nassh_fs.js';
 
@@ -318,7 +319,7 @@ export class TerminalSSHDialog extends LitElement {
     // elements that have internal state (e.g. `terminal-textfield`)).
 
     if (!this.fileSystem_) {
-      this.fileSystem_ = await nassh.getFileSystem();
+      this.fileSystem_ = await getFileSystem();
     }
     this.loadIdentities_();
 
