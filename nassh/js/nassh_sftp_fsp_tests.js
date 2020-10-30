@@ -6,6 +6,7 @@
  * @fileoverview FileSystemProvider tests.
  */
 
+import {Client as sftpClient} from './nassh_sftp_client.js';
 import {
   checkInstanceExists, fsp, onCloseFileRequested, onCopyEntryRequested,
   onCreateDirectoryRequested, onCreateFileRequested, onDeleteEntryRequested,
@@ -25,7 +26,7 @@ export function MockSftpClient() {
   this.protocolServerExtensions = {};
   this.openedFiles = {};
 
-  // Methods in nassh.sftp.Client that we mock.
+  // Methods in sftp client that we mock.
   const methods = [
     'closeFile', 'fileStatus', 'linkStatus', 'makeDirectory', 'openDirectory',
     'openFile', 'readDirectory', 'readLink', 'realPath', 'removeDirectory',
@@ -141,7 +142,7 @@ it('fsp-instance-check', function() {
 
   // Valid ids should pass.
   fsp.sftpInstances['1234'] = {
-    sftpClient: /** @type {!nassh.sftp.Client} */ ({}),
+    sftpClient: /** @type {!sftpClient} */ ({}),
   };
   ret = checkInstanceExists('1234', assert.fail);
   assert.isTrue(ret);
@@ -873,7 +874,7 @@ it('fsp-onUnmount-exit', function() {
   // Create a dummy instance mock that has an exit method.
   let exitStatus;
   fsp.sftpInstances['id'] = {
-    sftpClient: /** @type {!nassh.sftp.Client} */ ({}),
+    sftpClient: /** @type {!sftpClient} */ ({}),
     exit: (status) => exitStatus = status,
   };
 

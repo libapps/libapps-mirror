@@ -17,6 +17,7 @@ import {Corp as RelayCorp} from './nassh_relay_corp.js';
 import {Corpv4 as RelayCorpv4} from './nassh_relay_corpv4.js';
 import {Sshfe as RelaySshfe} from './nassh_relay_sshfe.js';
 import {Websockify as RelayWebsockify} from './nassh_relay_websockify.js';
+import {Client as sftpClient} from './nassh_sftp_client.js';
 import {fsp} from './nassh_sftp_fsp.js';
 
 /**
@@ -64,7 +65,7 @@ nassh.CommandInstance = function({io, ...argv}) {
   this.isSftp = argv.isSftp || false;
 
   // SFTP Client for SFTP instances.
-  this.sftpClient = (this.isSftp) ? new nassh.sftp.Client(argv.basePath) : null;
+  this.sftpClient = (this.isSftp) ? new sftpClient(argv.basePath) : null;
 
   // Whether we're setting up the connection for mounting.
   this.isMount = argv.isMount || false;
@@ -601,7 +602,7 @@ nassh.CommandInstance.prototype.mountProfile = function(profileID) {
 nassh.CommandInstance.prototype.sftpConnectToProfile = function(profileID) {
   const onStartup = (prefs) => {
     this.isSftp = true;
-    this.sftpClient = new nassh.sftp.Client();
+    this.sftpClient = new sftpClient();
 
     this.connectTo(this.prefsToConnectParams_(prefs));
   };
@@ -915,7 +916,7 @@ nassh.CommandInstance.prototype.sftpConnectToDestination = function(
   this.navigate_(destination);
 
   this.isSftp = true;
-  this.sftpClient = new nassh.sftp.Client();
+  this.sftpClient = new sftpClient();
 
   this.connectTo(rv);
 };

@@ -8,6 +8,8 @@
  *                handled by their respective SFTP clients.
  */
 
+import {Client as sftpClient} from './nassh_sftp_client.js';
+
 /**
  * Namespace for the state in here.
  */
@@ -18,7 +20,7 @@ export const fsp = {};
  *
  * @type {!Object<?string, {
  *   exit: (undefined|function(number, boolean)),
- *   sftpClient: !nassh.sftp.Client,
+ *   sftpClient: !sftpClient,
  * }>}
  */
 fsp.sftpInstances = {};
@@ -478,7 +480,7 @@ export function onCopyEntryRequested(options, onSuccess, onError) {
  * @param {string} sourcePath
  * @param {string} targetPath
  * @param {number} size
- * @param {!nassh.sftp.Client} client
+ * @param {!sftpClient} client
  * @return {!Promise}
  */
 function copyFile(sourcePath, targetPath, size, client) {
@@ -538,7 +540,7 @@ function copyFile(sourcePath, targetPath, size, client) {
  *
  * @param {string} sourcePath
  * @param {string} targetPath
- * @param {!nassh.sftp.Client} client
+ * @param {!sftpClient} client
  * @return {!Promise}
  */
 function copyDirectory(sourcePath, targetPath, client) {

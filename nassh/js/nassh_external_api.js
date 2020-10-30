@@ -6,6 +6,7 @@
  * @fileoverview A remote API for external apps/extensions.
  */
 
+import {Client as sftpClient} from './nassh_sftp_client.js';
 import {fsp, onUnmountRequested} from './nassh_sftp_fsp.js';
 
 /**
@@ -145,7 +146,7 @@ function(request, sender, sendResponse) {
  */
 export class MountInfo {
   /**
-   * @param {!nassh.sftp.Client=} client Where to get info from.
+   * @param {!sftpClient=} client Where to get info from.
    */
   constructor(client = undefined) {
     /** @type {string} */
@@ -177,7 +178,7 @@ export class MountInfo {
   /**
    * Extract details from a mount.
    *
-   * @param {!nassh.sftp.Client} client The mount client to read.
+   * @param {!sftpClient} client The mount client to read.
    */
   fromClient(client) {
     this.basePath = client.basePath_;
@@ -197,7 +198,7 @@ export class MountInfo {
    * Update configurable mount settings.
    *
    * @param {!MountInfo} info The settings to update from.
-   * @param {!nassh.sftp.Client} client The mount client to update.
+   * @param {!sftpClient} client The mount client to update.
    */
   static toClient(info, client) {
     if (info.basePath !== undefined) {

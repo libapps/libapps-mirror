@@ -6,13 +6,14 @@
  * @fileoverview Stream for passing binary SFTP data through.
  */
 
+import {Client as sftpClient} from './nassh_sftp_client.js';
 import {Stream} from './nassh_stream.js';
 
 /**
  * The sftp packet stream.
  *
  * @param {number} fd
- * @param {{client: !nassh.sftp.Client}} info
+ * @param {{client: !sftpClient}} info
  * @constructor
  * @extends {Stream}
  */
