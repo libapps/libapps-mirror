@@ -46,13 +46,8 @@
       app.onLaunched();
     }
 
-    // "Public" window.app will be retrieved by individual windows via
-    // chrome.getBackgroundPage().
-    window.app = app;
-
-    // A flag for people who need to load us dynamically to know we're ready.
-    // See nassh.getBackgroundPage for the user.
-    window.loaded = true;
+    // Help with live debugging.
+    window.app_ = app;
   });
 })();
 
