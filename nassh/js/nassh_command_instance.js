@@ -457,39 +457,108 @@ nassh.CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
  * @param {string} profileID Terminal preference profile name.
  */
 nassh.CommandInstance.prototype.mountProfile = function(profileID) {
-  const onBackgroundPage = (bg, prefs) => {
-    if (bg.nassh.sftp.fsp.sftpInstances[prefs.id]) {
-      this.io.println(nassh.msg('ALREADY_MOUNTED_MESSAGE'));
+  const port = chrome.runtime.connect({name: 'mount'});
+
+  // The main event loop -- process messages from the bg page.
+  port.onMessage.addListener((msg) => {
+    const {error, message, command} = msg;
+
+    // Handle all error messages here.
+    if (error) {
+      io.println(message);
+      io.pop();
       this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+      port.disconnect();
       return;
     }
 
-    const args = {
-      argv: {
-        terminalIO: this.io,
-        terminalStorage: this.storage,
-        terminalLocation: this.terminalLocation,
-        terminalWindow: this.terminalWindow,
-        isSftp: true,
-        basePath: prefs.get('mount-path'),
-        isMount: true,
-        // Mount options are passed directly to chrome.fileSystemProvider.mount,
-        // so don't add fields here that would otherwise collide.
-        mountOptions: {
-          fileSystemId: prefs.id,
-          displayName: prefs.get('description'),
-          writable: true,
-        },
-      },
-      connectOptions: this.prefsToConnectParams_(prefs),
-    };
+    switch (command) {
+      case 'write':
+        // Display content to the user.
+        io.print(message);
+        break;
 
-    bg.nassh.sftp.fsp.createSftpInstance(args);
+      case 'overlay':
+        // Display the UI popup.
+        io.showOverlay(message, msg.timeout);
+        break;
+
+      case 'exit':
+      case 'done':
+        // The client has exited (bad), or the mount setup is done (good).
+        port.disconnect();
+        if (command === 'done') {
+          io.showOverlay(nassh.msg('MOUNTED_MESSAGE') + ' ' +
+                         nassh.msg('CONNECT_OR_EXIT_MESSAGE'), null);
+        } else {
+          io.println(nassh.msg('DISCONNECT_MESSAGE', [msg.status]));
+        }
+
+        // Put the IO into dummy mode for the most part.
+        io.onVTKeystroke = (string) => {
+          const ch = string.toLowerCase();
+          switch (ch) {
+            case 'c':
+            case '\x12': // ctrl-r
+              this.terminalLocation.hash = '';
+              this.terminalLocation.reload();
+              break;
+
+            case 'e':
+            case 'x':
+            case '\x1b': // ESC
+            case '\x17': // ctrl-w
+              this.terminalWindow.close();
+          }
+        };
+        io.sendString = () => {};
+        break;
+
+      default:
+        io.println(`internal error: unknown command '${command}'`);
+        port.disconnect();
+        io.pop();
+        break;
+    }
+  });
+
+  // Not sure there's much else to do here.
+  port.onDisconnect.addListener(() => {
+    console.log('disconnect');
+  });
+
+  // Send all user input to the background page.
+  const io = this.io.push();
+  io.onVTKeystroke = io.sendString = (string) => {
+    port.postMessage({command: 'write', data: string});
   };
 
+  // Once we've loaded prefs from storage, kick off the mount in the bg.
   const onStartup = (prefs) => {
-    nassh.getBackgroundPage()
-      .then((bg) => onBackgroundPage(bg, prefs));
+    this.isMount = true;
+    this.isSftp = true;
+    const params = this.prefsToConnectParams_(prefs);
+    this.connectTo(params, () => {
+      if (this.relay_) {
+        params.relayState = this.relay_.saveState();
+      }
+      port.postMessage({
+        command: 'connect',
+        argv: {
+          isSftp: true,
+          basePath: prefs.get('mount-path'),
+          isMount: true,
+          // Mount options are passed directly to Chrome's FSP mount(),
+          // so don't add fields here that would otherwise collide.
+          mountOptions: {
+            fileSystemId: prefs.id,
+            displayName: prefs.get('description'),
+            writable: true,
+          },
+        },
+        connectOptions: params,
+      });
+    });
   };
 
   this.commonProfileSetup_(profileID, onStartup);
@@ -728,38 +797,10 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
  * @param {string} destination A string of the form username@host[:port].
  */
 nassh.CommandInstance.prototype.mountDestination = function(destination) {
-  const rv = nassh.CommandInstance.parseDestination(destination);
-  if (rv === null) {
-    this.io.println(nassh.msg('BAD_DESTINATION', [destination]));
-    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
-    return;
-  }
-
-  // We have to set the url here rather than in connectToArgString, because
-  // some callers may come directly to connectToDestination.
-  this.terminalLocation.hash = destination;
-
-  const args = {
-    argv: {
-      terminalIO: this.io,
-      terminalStorage: this.storage,
-      terminalLocation: this.terminalLocation,
-      terminalWindow: this.terminalWindow,
-      isSftp: true,
-      isMount: true,
-      // Mount options are passed directly to chrome.fileSystemProvider.mount,
-      // so don't add fields here that would otherwise collide.
-      mountOptions: {
-        fileSystemId: rv.username + rv.hostname,
-        displayName: rv.username + rv.hostname,
-        writable: true,
-      },
-    },
-    connectOptions: rv,
-  };
-
-  nassh.getBackgroundPage()
-    .then((bg) => bg.nassh.sftp.fsp.createSftpInstance(args));
+  // This code path should currently be unreachable.  If that ever changes,
+  // we can look at merging with the mountProfile code.
+  this.io.println('Not implemented; please file a bug.');
+  this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
 };
 
 /**
@@ -839,9 +880,11 @@ nassh.CommandInstance.prototype.sftpConnectToDestination = function(
  * Initiate an asynchronous connection to a remote host.
  *
  * @param {!Object} params The various connection settings setup via the
- *    prefsToConnectParams_ helper.
+ *     prefsToConnectParams_ helper.
+ * @param {function(!Object, !Object)=} finalize Call this instead of the
+ *     normal connectToFinalize_.
  */
-nassh.CommandInstance.prototype.connectTo = function(params) {
+nassh.CommandInstance.prototype.connectTo = function(params, finalize) {
   if (!(params.username && params.hostname)) {
     this.io.println(nassh.msg('MISSING_PARAM', ['username/hostname']));
     this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
@@ -980,7 +1023,9 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
         'INITIALIZING_RELAY',
         [this.relay_.proxyHost + ':' + this.relay_.proxyPort]));
 
-    if (!this.relay_.init()) {
+    if (params.relayState !== undefined) {
+      this.relay_.loadState(params.relayState);
+    } else if (!this.relay_.init()) {
       // A false return value means we have to redirect to complete
       // initialization.  Bail out of the connect for now.  We'll resume it
       // when the relay is done with its redirect.
@@ -1011,7 +1056,11 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
       nassh.goog.gcse.refresh(this.io) : Promise.resolve();
   // Even if refreshing went horribly, attempt the connection anyways.
   refresh.finally(() => {
-    this.connectToFinalize_(params, options);
+    if (finalize) {
+      finalize(params, options);
+    } else {
+      this.connectToFinalize_(params, options);
+    }
   });
 };
 
@@ -1136,7 +1185,8 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
     this.sendToPlugin_('startSession', [argv]);
     if (this.isSftp) {
       this.sftpClient.initConnection(this.plugin_);
-      this.sftpClient.onInit = this.onSftpInitialised.bind(this);
+      this.sftpClient.onInit = this.onSftpInitialised.bind(
+          this, params.sftpCallback);
     }
   });
 };
@@ -1438,6 +1488,9 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
     if (nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId]) {
       delete nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId];
     }
+    if (this.argv_.onExit) {
+      this.argv_.onExit(code);
+    }
 
     console.log(nassh.msg('DISCONNECT_MESSAGE', [code]));
     return;
@@ -1710,8 +1763,10 @@ nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
 
 /**
  * SFTP Initialization handler. Mounts the SFTP connection as a file system.
+ *
+ * @param {function()=} callback Callback when initialization finishes.
  */
-nassh.CommandInstance.prototype.onSftpInitialised = function() {
+nassh.CommandInstance.prototype.onSftpInitialised = function(callback) {
   if (this.isMount) {
     // Newer versions of Chrome support this API, but olders will error out.
     if (lib.f.getChromeMilestone() >= 64) {
@@ -1726,32 +1781,16 @@ nassh.CommandInstance.prototype.onSftpInitialised = function() {
       sftpClient: lib.notNull(this.sftpClient),
       exit: this.exit.bind(this),
     };
-
-    this.io.showOverlay(nassh.msg('MOUNTED_MESSAGE') + ' '
-                        + nassh.msg('CONNECT_OR_EXIT_MESSAGE'), null);
-
-    this.io.onVTKeystroke = (string) => {
-      const ch = string.toLowerCase();
-      switch (ch) {
-        case 'c':
-        case '\x12': // ctrl-r
-          this.terminalLocation.hash = '';
-          this.terminalLocation.reload();
-          break;
-
-        case 'e':
-        case 'x':
-        case '\x1b': // ESC
-        case '\x17': // ctrl-w
-          this.terminalWindow.close();
-      }
-    };
   } else {
     // Interactive SFTP client case.
     this.sftpCli_ = new nasftp.Cli(this);
 
     // Useful for console debugging.
     this.terminalWindow.nasftp_ = this.sftpCli_;
+  }
+
+  if (callback) {
+    callback();
   }
 };
 

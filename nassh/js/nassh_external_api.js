@@ -570,6 +570,91 @@ function(port) {
   });
 });
 
+nassh.External.CONNECTIONS.set('mount',
+/**
+ * Performs interactive mount.
+ *
+ * @param {!Port} port The new communication channel.
+ */
+function(port) {
+  // Post a message.  On failure, just disconnect.
+  const post = (msg) => {
+    try {
+      port.postMessage(msg);
+    } catch (e) {
+      console.log(`API: mount: postMessage failed: ${e}`);
+      port.disconnect();
+    }
+  };
+
+  // Not sure we want to open this up to anyone else (yet?).
+  const {sender} = port;
+  if (!sender.internal && !nassh.External.SelfExtIds.has(sender.id)) {
+    post({error: true, message: 'mount: External access not allowed'});
+    port.disconnect();
+    return;
+  }
+
+  // The nassh CommandInstance pokes the terminal a little more than it should.
+  // Until we clean that up, set up a stub object.
+  const stubTerminal = /** @type {!hterm.Terminal} */ ({
+    interpret: (message) => {
+      // SSH wants to send something to the user (terminal).
+      post({error: false, command: 'write', message});
+    },
+    clearHome: () => {},
+    setProfile: () => {},
+    screenSize: {width: 0, height: 0},
+    showOverlay: (message, timeout) => {
+      post({error: false, command: 'overlay', message, timeout});
+    },
+    vt: {characterEncoding: 'utf-8'},
+  });
+  const pipeIo = new hterm.Terminal.IO(stubTerminal);
+  stubTerminal.io = pipeIo;
+
+  let instance;
+
+  // Process each incoming message.
+  port.onMessage.addListener((msg) => {
+    const {command} = msg;
+    switch (command) {
+      case 'connect': {
+        // UI wants us to start a connection.
+        const {argv, connectOptions} = msg;
+        argv.terminalIO = pipeIo;
+        argv.onExit = (status) => {
+          post({error: false, command: 'exit', status});
+          port.disconnect();
+        };
+        connectOptions.sftpCallback = () => {
+          post({error: false, command: 'done'});
+          port.disconnect();
+        };
+        instance = new nassh.CommandInstance(argv);
+        instance.connectTo(connectOptions);
+        break;
+      }
+
+      case 'write': {
+        // UI (probably the user) wants to send something to ssh.
+        if (instance === undefined) {
+          post({error: true, message: 'not connected'});
+          port.disconnect();
+          return;
+        }
+        pipeIo.sendString(msg.data);
+        break;
+      }
+
+      default:
+        post({error: true, message: `unknown command '${command}'`});
+        port.disconnect();
+        break;
+    }
+  });
+});
+
 /**
  * Common connect dispatcher.
  *

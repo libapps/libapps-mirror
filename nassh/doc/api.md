@@ -86,6 +86,9 @@ The response will have these additional fields:
 
 On Chrome OS, trigger a SFTP filesystem mount with the Files app.
 
+This is a one-shot API that does not allow for interactive UI.
+It is meant to automatically set up connections that use key auth only.
+
 | Field name     | Type    | Description |
 |----------------|---------|-------------|
 | `command`      | !string | Must be `mount`. |
@@ -273,6 +276,83 @@ The response will have these additional fields:
 | `message`      | !string | A random friendly response. |
 | `internal`     | bool    | Whether the sender is the same extension. |
 | `id`           | string  | The extension id of the sender. |
+
+### Mount
+
+*** note
+**NB**: This is only available to Secure Shell itself.
+***
+
+On Chrome OS, trigger a SFTP filesystem mount with the Files app.
+
+This API allows for interactive auth, so it's a bit more complicated.
+
+#### Requests
+
+```js
+# Create a new mount connection.
+{
+  command: 'connect',
+  # Arguments to nassh.CommandInstance.
+  argv: {...},
+  # Arguments to nassh.CommandInstance.connectTo.
+  connectOptions: {...},
+}
+```
+
+```js
+# Write data to the connection (e.g. user input).
+{
+  command: 'write',
+  data: '...',
+}
+```
+
+#### Responses
+
+```js
+# An error occurred, usually at the JS level rather than SSH.
+{
+  error: true,
+  message: 'Information about the error',
+}
+```
+
+All other responses will have `error=false`.
+
+```js
+# Write data to the terminal (e.g. ssh client/server messages).
+{
+  command: 'write',
+  message: 'The data to display',
+}
+```
+
+```js
+# Display a message using the terminal overlay UI.
+{
+  command: 'overlay',
+  message: 'The message to display',
+  # How long to display the overlay.
+  timeout: number|null,
+}
+```
+
+```js
+# The process has exited prematurely.
+{
+  command: 'exit',
+  # The process exit status.
+  status: number,
+}
+```
+
+```js
+# The mount has been setup.
+{
+  command: 'done',
+}
+```
 
 
 [Chrome messaging API]: https://developer.chrome.com/extensions/messaging
