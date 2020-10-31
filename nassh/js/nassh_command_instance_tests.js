@@ -65,13 +65,24 @@ describe('parseURI', () => {
     'port': undefined,
     'relayHostname': undefined,
     'relayPort': undefined,
+    'schema': undefined,
   };
 
   // List the fields that each test requires or deviates from the default.
   const data = [
     // Strip off the leading URI schema.
     ['ssh://root@localhost',
-     {'username': 'root', 'hostname': 'localhost', 'uri': 'root@localhost'}],
+     {'username': 'root', 'hostname': 'localhost', 'schema': 'ssh',
+      'uri': 'root@localhost'}],
+    ['web+ssh://root@localhost',
+     {'username': 'root', 'hostname': 'localhost', 'schema': 'ssh',
+      'uri': 'root@localhost'}],
+    ['sftp://root@localhost',
+     {'username': 'root', 'hostname': 'localhost', 'schema': 'sftp',
+      'uri': 'root@localhost'}],
+    ['web+sftp://root@localhost',
+     {'username': 'root', 'hostname': 'localhost', 'schema': 'sftp',
+      'uri': 'root@localhost'}],
 
     // Basic forms.
     ['root@localhost', {'username': 'root', 'hostname': 'localhost'}],
@@ -191,8 +202,25 @@ describe('parseURI', () => {
 it('parseDestination', () => {
   const data = [
     // Registered protocol handler.
-    ['uri:ssh://root@localhost', {'user': 'root', 'host': 'localhost'}],
+    ['uri:ssh://root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'ssh'}],
+    ['uri:web+ssh://root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'ssh'}],
+    ['uri:sftp://root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'sftp'}],
+    ['uri:web+sftp://root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'sftp'}],
     ['uri:root@localhost', null],
+
+    // URL escaped values.
+    ['uri:ssh%3A//root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'ssh'}],
+    ['uri:web+ssh%3A//root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'ssh'}],
+    ['uri:sftp%3A//root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'sftp'}],
+    ['uri:web+sftp%3A//root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'sftp'}],
 
     // For non-URI handler, we'll preserve the prefix.
     ['ssh://root@localhost', {'user': 'ssh://root', 'host': 'localhost'}],
@@ -217,6 +245,7 @@ it('parseDestination', () => {
     } else {
       assert.equal(dataSet[1].user, rv.username, dataSet[0]);
       assert.equal(dataSet[1].host, rv.hostname, dataSet[0]);
+      assert.equal(dataSet[1].schema, rv.schema, dataSet[0]);
       assert.equal(dataSet[1].nasshOptions, rv.nasshOptions, dataSet[0]);
     }
   });

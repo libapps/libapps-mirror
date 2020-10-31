@@ -545,9 +545,20 @@ nassh.CommandInstance.prototype.connectToProfile = function(profileID) {
  */
 nassh.CommandInstance.parseURI = function(uri, stripSchema = true,
                                           decodeComponents = false) {
-  if (stripSchema && uri.startsWith('ssh:')) {
-    // Strip off the "ssh:" prefix.
-    uri = uri.substr(4);
+  let schema;
+  if (stripSchema) {
+    schema = uri.split(':', 1)[0];
+    if (schema === 'ssh' || schema === 'web+ssh' || schema === 'sftp' ||
+        schema === 'web+sftp') {
+      // Strip off the schema prefix.
+      uri = uri.substr(schema.length + 1);
+
+      if (schema.startsWith('web+')) {
+        schema = schema.substr(4);
+      }
+    } else {
+      schema = undefined;
+    }
     // Strip off the "//" if it exists.
     if (uri.startsWith('//')) {
       uri = uri.substr(2);
@@ -623,6 +634,7 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema = true,
     port: port,
     relayHostname: relayHostname,
     relayPort: relayPort,
+    schema: schema,
     uri: uri,
   }, params);
 };
@@ -647,7 +659,9 @@ nassh.CommandInstance.parseDestination = function(destination) {
   if (destination.startsWith('uri:')) {
     // Strip off the "uri:" before decoding it.
     destination = unescape(destination.substr(4));
-    if (!destination.startsWith('ssh:')) {
+    const schema = destination.split(':', 1)[0];
+    if (schema !== 'ssh' && schema !== 'web+ssh' && schema !== 'sftp' &&
+        schema !== 'web+sftp') {
       return null;
     }
 
@@ -694,6 +708,10 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
   if (rv === null) {
     this.io.println(nassh.msg('BAD_DESTINATION', [destination]));
     this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+    return;
+  }
+  if (rv.schema === 'sftp') {
+    this.sftpConnectToDestination(destination);
     return;
   }
 
@@ -811,19 +829,10 @@ nassh.CommandInstance.prototype.sftpConnectToDestination = function(
   // some callers may come directly to connectToDestination.
   this.terminalLocation.hash = destination;
 
-  const args = {
-    argv: {
-      terminalIO: this.io,
-      terminalStorage: this.storage,
-      terminalLocation: this.terminalLocation,
-      terminalWindow: this.terminalWindow,
-      isSftp: true,
-    },
-    connectOptions: rv,
-  };
+  this.isSftp = true;
+  this.sftpClient = new nassh.sftp.Client();
 
-  nassh.getBackgroundPage()
-    .then((bg) => bg.nassh.sftp.fsp.createSftpInstance(args));
+  this.connectTo(rv);
 };
 
 /**
