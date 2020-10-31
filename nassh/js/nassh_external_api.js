@@ -83,25 +83,25 @@ function(request, sender, sendResponse) {
       writeFile(knownHosts, request.knownHosts),
       writeFile(identityFile, request.identityFile),
   ]).then(() => {
-    const args = {
-      argv: {
-        terminalIO: nassh.External.io_,
-        isSftp: true,
-        mountOptions: {
-          fileSystemId: request.fileSystemId,
-          displayName: request.displayName,
-          writable: true,
-        },
-      },
-      connectOptions: {
-        username: request.username,
-        hostname: request.hostname,
-        port: request.port,
-        argstr: `-i${identityFile} -oUserKnownHostsFile=${knownHosts}`,
+    const argv = {
+      terminalIO: nassh.External.io_,
+      isSftp: true,
+      mountOptions: {
+        fileSystemId: request.fileSystemId,
+        displayName: request.displayName,
+        writable: true,
       },
     };
-    const success = nassh.sftp.fsp.createSftpInstance(args);
-    sendResponse({error: !success, message: 'createSftpInstance'});
+    const connectOptions = {
+      username: request.username,
+      hostname: request.hostname,
+      port: request.port,
+      argstr: `-i${identityFile} -oUserKnownHostsFile=${knownHosts}`,
+    };
+    const instance = new nassh.CommandInstance(argv);
+    instance.connectTo(connectOptions);
+    // TODO(vapier): Plumb back up success/failure.
+    sendResponse({error: false, message: 'createSftpInstance'});
   }).catch((e) => {
     console.error(e);
     sendResponse({error: true, message: e.message, stack: e.stack});
