@@ -175,6 +175,7 @@ nassh.relay.Corp.prototype.openSocket = function(fd, host, port, streams,
   const streamClass = this.useWebsocket ? nassh.Stream.RelayCorpWS :
                                           nassh.Stream.RelayCorpXHR;
   const options = {
+    io: this.io,
     relay: this,
     host: host,
     port: port,
