@@ -958,7 +958,8 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     // Do nothing when disabled.  We check this first to avoid excessive
     // indentation or redundant checking of the proxy-host setting below.
   } else if (options['--proxy-mode'] == 'ssh-fe@google.com') {
-    this.relay_ = new nassh.relay.Sshfe(this.io, options);
+    this.relay_ = new nassh.relay.Sshfe(
+        this.io, options, this.terminalLocation, this.storage);
     this.io.println(nassh.msg(
         'FOUND_RELAY',
         [`${this.relay_.proxyHost}:${this.relay_.proxyPort}`]));
