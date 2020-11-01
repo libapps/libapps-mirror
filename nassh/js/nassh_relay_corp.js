@@ -124,6 +124,20 @@ nassh.relay.Corp = class extends nassh.Relay {
   }
 
   /** @inheritDoc */
+  saveState() {
+    return {
+      relayServer: this.relayServer,
+      relayServerSocket: this.relayServerSocket,
+    };
+  }
+
+  /** @inheritDoc */
+  loadState(state) {
+    this.relayServer = state.relayServer;
+    this.relayServerSocket = state.relayServerSocket;
+  }
+
+  /** @inheritDoc */
   openSocket(fd, host, port, streams, onOpen) {
     const streamClass = this.useWebsocket ? nassh.Stream.RelayCorpWS :
                                             nassh.Stream.RelayCorpXHR;

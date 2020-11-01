@@ -99,6 +99,16 @@ nassh.relay.Corpv4 = class extends nassh.Relay {
   }
 
   /** @inheritDoc */
+  saveState() {
+    return {relayServer: this.relayServer};
+  }
+
+  /** @inheritDoc */
+  loadState(state) {
+    this.relayServer = state.relayServer;
+  }
+
+  /** @inheritDoc */
   openSocket(fd, host, port, streams, onOpen) {
     const settings = {
       io: this.io_,

@@ -33,6 +33,12 @@ nassh.relay.Sshfe = class extends nassh.Relay {
   }
 
   /** @inheritDoc */
+  saveState() { return {}; }
+
+  /** @inheritDoc */
+  loadState(state) {}
+
+  /** @inheritDoc */
   openSocket(fd, host, port, streams, onOpen) {
     const settings = {
       io: this.io_,

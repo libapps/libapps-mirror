@@ -77,6 +77,28 @@ nassh.Relay = class {
    * @return {!nassh.Stream}
    */
   openSocket(fd, host, port, streams, onOpen) {}
+
+  /**
+   * Save all the relevant state after a relay has finished initializing.
+   *
+   * This can be used to cache or pass relay information to other pages.
+   * The result is guaranteed to be JSON serializable.
+   *
+   * @abstract
+   * @return {!Object} The relay state.
+   */
+  saveState() {}
+
+  /**
+   * Restore all relevant relay state.
+   *
+   * The data here comes from saveState and is opaque to the caller.
+   * Once restored, we know init() & redirect() have "finished".
+   *
+   * @abstract
+   * @param {!Object} state The relay state.
+   */
+  loadState(state) {}
 };
 
 /**
