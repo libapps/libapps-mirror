@@ -396,7 +396,8 @@ nassh.getBackgroundPage = function() {
  * @param {!Object=} settings
  * @return {string} The SGR escape sequence.
  */
-nassh.sgrSequence = function({bold, faint, italic, underline, fg, bg} = {}) {
+nassh.sgrSequence = function(
+    {bold, faint, italic, underline, blink, fg, bg} = {}) {
   const parts = [];
   if (bold) {
     parts.push('1');
@@ -408,7 +409,14 @@ nassh.sgrSequence = function({bold, faint, italic, underline, fg, bg} = {}) {
     parts.push('3');
   }
   if (underline) {
-    parts.push('4');
+    if (underline === true) {
+      parts.push('4');
+    } else {
+      parts.push(`4:${underline}`);
+    }
+  }
+  if (blink) {
+    parts.push('5');
   }
   if (fg) {
     parts.push(fg);

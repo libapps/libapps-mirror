@@ -151,6 +151,9 @@ nassh.LocalPreferenceManager = function(storage = undefined) {
   this.definePreferences([
     /* The last profile the user selected. */
     ['connectDialog/lastProfileId', ''],
+
+    /* How many times we've shown the migration message. */
+    ['migrate/showCount', 0],
   ]);
 
   this.defineChildren('profile-ids', function(parent, id) {

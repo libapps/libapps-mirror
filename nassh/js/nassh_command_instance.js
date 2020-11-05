@@ -920,12 +920,28 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
         'iodihamcpbpeioajjeobimgagajmlibd';
     const docUrl = 'https://chromium.googlesource.com/apps/libapps/+/HEAD/' +
         'nassh/doc/app-to-ext-migration.md';
+
+    // Display in the terminal as red+bold+blink text.
     this.io.println('');
-    this.io.println(nassh.msg('MIGRATE_TO_EXT', [
-      nassh.osc8Link(extUrl, 'link'),
-      nassh.osc8Link(docUrl, 'link'),
-    ]));
+    this.io.println(nassh.sgrText(
+        nassh.msg('MIGRATE_TO_EXT', [
+          nassh.osc8Link(extUrl, 'link'),
+          nassh.osc8Link(docUrl, 'link'),
+        ]), {bold: true, blink: true, underline: '3', bg: '41', fg: '37'}));
     this.io.println('');
+
+    // Display a popup a few times.
+    const showCount = this.localPrefs_.getNumber('migrate/showCount');
+    if (showCount < 5) {
+      const div = document.createElement('div');
+      div.style.whiteSpace = 'pre-wrap';
+      div.innerHTML = nassh.msg('MIGRATE_TO_EXT', [
+        `<a href="${extUrl}" target=_blank>link</a>`,
+        `<a href="${docUrl}" target=_blank>link</a>`,
+      ]);
+      this.io.showOverlay(div, 10000);
+      this.localPrefs_.set('migrate/showCount', showCount + 1);
+    }
   }
 
   // If the user has requested a proxy relay, load it up.
