@@ -393,7 +393,6 @@ nassh.ConnectDialog.prototype.displayMountButton_ = function(state) {
     }
     this.displayButton_(this.mountButton_, true);
     this.displayButton_(this.unmountButton_, false);
-    this.enableButton_(this.mountButton_, this.form_.checkValidity());
   });
 };
 
@@ -480,6 +479,8 @@ nassh.ConnectDialog.prototype.startup_ = function(message, proto) {
 
   if (this.form_.checkValidity()) {
     this.postMessage(message, [this.currentProfileRecord_.id]);
+  } else {
+    this.form_.reportValidity();
   }
 };
 
@@ -717,9 +718,6 @@ nassh.ConnectDialog.prototype.syncButtons_ = function() {
       this.deleteButton_,
       this.shortcutList_.activeIndex != 0);
 
-  const validForm = this.form_.checkValidity();
-  this.enableButton_(this.connectButton_, validForm);
-  this.enableButton_(this.sftpClientButton_, validForm);
   this.displayMountButton_(this.checkMountable_());
 };
 
