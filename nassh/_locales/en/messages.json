@@ -102,7 +102,7 @@
 		"message": "Connect"
 	},
 	"CONNECT_OR_EXIT_MESSAGE": {
-		"description": "Message displayed after a connection closes and the user cannot reconnect. Do not translate the (C) or (X) fields as they are keyboard shortcuts, although changing case is OK. Placing them after the word is OK like: Exit (X).",
+		"description": "Message displayed after a connection closes and the user cannot reconnect. Do not translate the (C) or (X) fields as they are keyboard shortcuts. Placing them relative to the word is OK as long as it's clear what action will be taken when the keyboard button is pressed. Similarly, using parentheses is not required other than for clarity. Changing case is also OK. There is an additional (E) keyboard shortcut that is the same as (X), so that may be used as an alternative if the translation uses an E but not an X. For example, these are OK: 'Exit (X)' or '[X]Exit' or '(E)xit' or whatever makes the most sense for the language.",
 		"message": "(C)hoose another connection or E(x)it?"
 	},
 	"CONSOLE_CROSH_OPTIONS_NOTICE": {
@@ -1850,7 +1850,7 @@
 		"message": "Read Size (KiB)"
 	},
 	"RECONNECT_MESSAGE": {
-		"description": "Message displayed after a connection closes. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them relative to the word is OK as long as it's clear what action will be taken when the keyboard button is pressed. Similarly, using parentheses is not required other than for clarity. Changing case is also OK. For example, these are OK: 'Exit (X)' or '[X]Exit' or whatever makes the most sense for the language.",
+		"description": "Message displayed after a connection closes. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them relative to the word is OK as long as it's clear what action will be taken when the keyboard button is pressed. Similarly, using parentheses is not required other than for clarity. Changing case is also OK. There is an additional (E) keyboard shortcut that is the same as (X), so that may be used as an alternative if the translation uses an E but not an X. For example, these are OK: 'Exit (X)' or '[X]Exit' or '(E)xit' or whatever makes the most sense for the language.",
 		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
 	},
 	"RELAY_RETRY": {
