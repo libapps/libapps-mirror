@@ -1,3 +1,22 @@
+# 0.36, 2020-11-09, 2020-11-11, OpenSSH 8.4p1, UI tweaks.
+
+* connect: Improve incomplete form UX.
+* command: Make deprecation warning a big angry blinking red block.
+* command: Warn newer CrOS users to migrate too.
+* command: Add a default error handler.
+* api: Move listener init to bg page.
+* fsp: Move listener init to bg page.
+* fsp: Move mount info to the API layer.
+* api: Add an unmount command.
+* util: Inline reloadWindow.
+* buffer: Add a toString method.
+* api: Log more details about the sender.
+* options: Allow users to select the pref text.
+* prefs: Inline global nassh.defaultStorage.
+* ssh_client: upgrade to OpenSSH 8.4p1.
+* util: Unify chrome.runtime.sendMessage promise wrappers.
+* gsc: Workaround Yubikey ECC OID bug.
+
 # 0.35, 2020-09-14, Some bug fixes.
 
 * hterm: Fix scrolling with newer Chrome.
