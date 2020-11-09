@@ -554,12 +554,12 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema = true,
     }
   }
 
-  /* eslint-disable */
+  /* eslint-disable max-len,spaced-comment */
   // Parse the connection string.
-  var ary = uri.match(
+  const ary = uri.match(
       //|user |@| [  ipv6       %zoneid   ]| host |   :port     |@| [  ipv6       %zoneid   ]|relay|   :relay port |
       /^([^@]+)@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:@]+)(?::(\d+))?(?:@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:]+)(?::(\d+))?)?$/);
-  /* eslint-enable */
+  /* eslint-enable max-len,spaced-comment */
 
   if (!ary) {
     return null;
