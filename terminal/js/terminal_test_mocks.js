@@ -224,19 +224,6 @@ MockTerminalPrivate.prototype.onTerminalResize = function(
 };
 
 /**
- * Called from |onProcessOutput| when the event is dispatched to terminal
- * extension. Observing the terminal process output will be paused after
- * |onProcessOutput| is dispatched until this method is called.
- *
- * @param {number} tabId Tab ID from |onProcessOutput| event.
- * @param {string} id The id of the process to which |onProcessOutput| was
- *     dispatched.
- */
-MockTerminalPrivate.prototype.ackOutput = function(tabId, id) {
-  this.notifyObservers_('ackOutput', [tabId, id]);
-};
-
-/**
  * Returns the current a11y status.
  *
  * @param {function(boolean)} callback Callback that will be called
