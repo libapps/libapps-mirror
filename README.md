@@ -1,5 +1,9 @@
 # Hello
 
+*** note
+This branch is for the frozen Chrome App implementation of Secure Shell only.
+***
+
 This repository contains the libdot JavaScript library and some web applications
 that make use of it.
 
