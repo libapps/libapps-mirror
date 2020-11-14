@@ -17,6 +17,3 @@ js/*.rollup.js
 
 # npm related dirs.
 node_modules
-
-# Local dev files.
-/manifest.json
