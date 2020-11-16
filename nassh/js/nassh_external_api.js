@@ -289,30 +289,15 @@ nassh.External.NewWindowSettings;
  */
 nassh.External.newWindow_ = function(
     response, request, sender, sendResponse) {
-  // Set up some default values.
-  request = /** @type {!nassh.External.NewWindowSettings} */ (Object.assign({
-    width: 735,
-    height: 440,
-  }, request));
-
-  const checkNumber = (field) => {
-    const number = request[field];
-    if (typeof number == 'number') {
-      return number;
-    } else {
-      sendResponse(
-          {error: true, message: `${field}: invalid number: ${number}`});
-      return false;
-    }
-  };
-
-  const width = checkNumber('width');
-  if (width === false) {
+  const width = request.width ?? 735;
+  if (typeof width !== 'number') {
+    sendResponse({error: true, message: `width: invalid number: ${width}`});
     return;
   }
 
-  const height = checkNumber('height');
-  if (height === false) {
+  const height = request.height ?? 440;
+  if (typeof height !== 'number') {
+    sendResponse({error: true, message: `height: invalid number: ${height}`});
     return;
   }
 
