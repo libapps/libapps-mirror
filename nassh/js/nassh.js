@@ -6,12 +6,8 @@
 
 /**
  * Namespace for the whole nassh project.
- *
- * We export this with 'var' as we access it across background pages.
- * It's messy and probably should be cleaned up at some point.
  */
-// eslint-disable-next-line no-var
-var nassh = {};
+const nassh = {};
 
 /**
  * Non-null if nassh is running as an extension.
