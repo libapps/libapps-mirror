@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import {terminal} from './terminal.js';
+import {TerminalActiveTracker} from './terminal_active_tracker.js';
 
 /**
  * @fileoverview chrome-untrusted://terminal unit tests.
@@ -12,6 +13,7 @@ describe('terminal_tests.js', () => {
 
 let mockTerminalPrivate;
 let mockTerminalPrivateController;
+let mockTabsController;
 let div;
 
 /**
@@ -27,6 +29,11 @@ beforeEach(function() {
   document.body.appendChild(div);
   mockTerminalPrivateController = MockTerminalPrivate.start();
   mockTerminalPrivate = mockTerminalPrivateController.instance;
+
+  window.localStorage.clear();
+  mockTabsController = new MockTabsController();
+  mockTabsController.start();
+  TerminalActiveTracker.resetInstanceForTesting();
 });
 
 /**
@@ -35,14 +42,32 @@ beforeEach(function() {
 afterEach(function() {
   document.body.removeChild(div);
   mockTerminalPrivateController.stop();
+  mockTabsController.stop();
 });
 
 it('opens-process-in-init', async function() {
+  const tracker = await TerminalActiveTracker.get();
+
   terminal.init(div);
-  const [args] =
+  const [args, pidInit] =
       await mockTerminalPrivateController.on('openVmshellProcess');
   assert.lengthOf(args, 1);
   assert.match(args[0], /^--startup_id=\d+$/);
+
+  pidInit('terminalId-456');
+  assert.equal(tracker.terminalId, 'terminalId-456');
+});
+
+it('opens-process-in-init-with-parent-terminal', async function() {
+  const tracker = await TerminalActiveTracker.get();
+  tracker.parentTerminal = {terminalId: 'terminalId-123', tabId: 1, title: 't'};
+
+  terminal.init(div);
+  const [args] =
+      await mockTerminalPrivateController.on('openVmshellProcess');
+  assert.lengthOf(args, 2);
+  assert.match(args[0], /^--startup_id=\d+$/);
+  assert.equal(args[1], '--cwd=terminal_id:terminalId-123');
 });
 
 [true, false].map((value) => it(`set-a11y-in-init-to-${value}`, async () => {
