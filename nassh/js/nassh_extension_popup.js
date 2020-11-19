@@ -49,9 +49,17 @@ popup.prototype.openLink_ = function(e) {
   const id = e.target.id;
   let profile;
 
+  // We route multiple event types here.
+  if (e.type === 'auxclick') {
+    // Only consume middle mouse.  Leave other buttons for future use.
+    if (e.button != 1) {
+      return;
+    }
+  }
+
   // Figure out whether to open a window or a tab.
   let mode;
-  if (e.ctrlKey) {
+  if (e.ctrlKey || e.type === 'auxclick') {
     mode = 'tab';
   } else if (e.shiftKey) {
     mode = 'window';
@@ -138,8 +146,9 @@ popup.prototype.populateList_ = function() {
     link.title = nassh.msg('POPUP_CONNECT_TOOLTIP');
     link.id = id;
     link.className = 'links';
-    link.addEventListener('click',
-        /** @type {!EventListener} */ (this.openLink_.bind(this)));
+    const openLink = /** @type {!EventListener} */ (this.openLink_.bind(this));
+    link.addEventListener('click', openLink);
+    link.addEventListener('auxclick', openLink);
 
     switch (id) {
       case 'connect-dialog':
