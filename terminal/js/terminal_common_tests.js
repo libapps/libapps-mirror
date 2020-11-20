@@ -7,28 +7,17 @@
  */
 
 import {DEFAULT_BACKGROUND_COLOR, DEFAULT_FONT_SIZE, SUPPORTED_FONT_FAMILIES,
-  SUPPORTED_FONT_SIZES, definePrefs, fontFamilyToCSS,
-  normalizePrefsInPlace, setUpTitleHandler} from './terminal_common.js';
-import {TerminalActiveTracker} from './terminal_active_tracker.js';
+  SUPPORTED_FONT_SIZES, definePrefs, normalizePrefsInPlace, fontFamilyToCSS,
+  setUpTitleCacheHandler} from './terminal_common.js';
 
 const fontFamilies = Array.from(SUPPORTED_FONT_FAMILIES.keys());
 
 describe('terminal_common_tests.js', () => {
   let preferenceManager;
-  const mockTabsController = new MockTabsController();
 
   beforeEach(() => {
-    // Mock chrome.tabs because we will use TerminalActiveTracker.
-    mockTabsController.start();
-    window.localStorage.clear();
-    TerminalActiveTracker.resetInstanceForTesting();
-
     preferenceManager = new lib.PreferenceManager(new lib.Storage.Memory());
     preferenceManager.definePreference('font-family', 'invalid');
-  });
-
-  afterEach(() => {
-    mockTabsController.stop();
   });
 
   it('normalizePrefsInPlace', () => {
@@ -63,67 +52,45 @@ describe('terminal_common_tests.js', () => {
         'background-color', 'rgba(1, 2, 3, 0.5)', '#010203');
   });
 
-  it('setUpTitleHandler-when-no-cache', async () => {
-    window.localStorage.removeItem('cachedInitialTitle');
+  it('setUpTitleCacheHandler-when-no-cache', async () => {
+    window.localStorage.removeItem('cachedTitle');
     document.title = 'test title';
 
-    const tracker = await TerminalActiveTracker.get();
-    let trackerUpdateCount = 0;
-    tracker.maybeUpdateWindowActiveTerminal = () => trackerUpdateCount++;
-
-    const stopHandler = await setUpTitleHandler();
+    setUpTitleCacheHandler();
 
     assert.equal(document.title, 'test title',
         'no cache, title should not change');
-    assert.isNull(window.localStorage.getItem('cachedInitialTitle'));
+    assert.isNull(window.localStorage.getItem('cachedTitle'));
 
     document.title = 'test title 2';
     await Promise.resolve();
-    assert.equal(trackerUpdateCount, 1);
-
-    assert.equal(window.localStorage.getItem('cachedInitialTitle'),
-        'test title 2');
+    assert.equal(window.localStorage.getItem('cachedTitle'), 'test title 2');
 
     document.title = 'test title 3';
     await Promise.resolve();
-    assert.equal(window.localStorage.getItem('cachedInitialTitle'),
-        'test title 2',
+    assert.equal(window.localStorage.getItem('cachedTitle'), 'test title 2',
         'only the first changed title should be written to the cache');
-    assert.equal(trackerUpdateCount, 2);
-
-    stopHandler();
   });
 
-  it('setUpTitleHandler-when-has-cache', async () => {
-    window.localStorage.setItem('cachedInitialTitle', 'cached title');
+  it('setUpTitleCacheHandler-when-has-cache', async () => {
+    window.localStorage.setItem('cachedTitle', 'cached title');
     document.title = 'test title';
 
-    const tracker = await TerminalActiveTracker.get();
-    let trackerUpdateCount = 0;
-    tracker.maybeUpdateWindowActiveTerminal = () => trackerUpdateCount++;
-
-    const stopHandler = await setUpTitleHandler();
+    setUpTitleCacheHandler();
 
     assert.equal(document.title, 'cached title',
         'title should be set to cache');
 
     await Promise.resolve();
-    assert.equal(window.localStorage.getItem('cachedInitialTitle'),
-        'cached title');
+    assert.equal(window.localStorage.getItem('cachedTitle'), 'cached title');
 
     document.title = 'test title 2';
     await Promise.resolve();
-    assert.equal(window.localStorage.getItem('cachedInitialTitle'),
-        'test title 2');
-    assert.equal(trackerUpdateCount, 1);
+    assert.equal(window.localStorage.getItem('cachedTitle'), 'test title 2');
 
     document.title = 'test title 3';
     await Promise.resolve();
-    assert.equal(window.localStorage.getItem('cachedInitialTitle'),
-        'test title 2',
+    assert.equal(window.localStorage.getItem('cachedTitle'), 'test title 2',
         'only the first changed title should be written to the cache');
-    assert.equal(trackerUpdateCount, 2);
-
-    stopHandler();
   });
 });

@@ -4,7 +4,6 @@
 
 import {definePrefs, loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily}
     from './terminal_common.js';
-import {TerminalActiveTracker} from './terminal_active_tracker.js';
 
 export const terminal = {};
 
@@ -19,12 +18,13 @@ window.preferenceManager;
  * use the vmshell process on a Chrome OS machine.
  *
  * @param {{
+     commandName: string,
  *   args: !Array<string>,
- *   io: !hterm.Terminal.IO,
  * }} argv The argument object passed in from the Terminal.
  * @constructor
  */
 terminal.Command = function(argv) {
+  this.commandName = argv.commandName;
   this.argv_ = argv;
   this.io = null;
   this.keyboard_ = null;
@@ -221,15 +221,15 @@ terminal.Command.prototype.run = function() {
       this.onProcessOutput_.bind(this));
   document.body.onunload = this.close_.bind(this);
 
-  const pidInit = (id, activeTerminalTracker) => {
+  const pidInit = (id) => {
     if (id === undefined) {
       this.io.println(
-          `Launching vmshell failed: ${lib.f.lastError('')}`);
+          `Launching ${this.commandName} failed: ${lib.f.lastError('')}`);
       this.exit(1);
       return;
     }
 
-    window.addEventListener('beforeunload', (e) => this.onBeforeUnload_(e));
+    window.onbeforeunload = this.onBeforeUnload_.bind(this);
     this.id_ = id;
     this.isFirstOutput_ = true;
 
@@ -237,19 +237,16 @@ terminal.Command.prototype.run = function() {
     this.onTerminalResize_(
         this.io.terminal_.screenSize.width,
         this.io.terminal_.screenSize.height);
-
-    activeTerminalTracker.terminalId = id;
   };
 
-  TerminalActiveTracker.get().then((tracker) => {
-    const args = [...this.argv_.args];
-    if (tracker.parentTerminal &&
-          !args.some((arg) => arg.startsWith('--cwd='))) {
-      args.push(`--cwd=terminal_id:${tracker.parentTerminal.terminalId}`);
-    }
-    chrome.terminalPrivate.openVmshellProcess(args,
-        (id) => pidInit(id, tracker));
-  });
+  // TODO(crbug.com/1056049): Remove openTerminalProcess once chrome supports
+  // openVmshellProcess on all releases.
+  if (chrome.terminalPrivate.openVmshellProcess) {
+    chrome.terminalPrivate.openVmshellProcess(this.argv_.args, pidInit);
+  } else {
+    chrome.terminalPrivate.openTerminalProcess(
+        this.commandName, this.argv_.args, pidInit);
+  }
 };
 
 /**
