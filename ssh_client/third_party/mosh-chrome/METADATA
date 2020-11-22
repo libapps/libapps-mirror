@@ -1,0 +1,11 @@
+name: "mosh-chrome"
+description: "Mosh (mobile shell) for Chrome"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://github.com/rpwoodbu/mosh-chrome"
+  }
+  version: "0.5.6"
+  last_upgrade_date { year: 2020 month: 8 day: 5 }
+}

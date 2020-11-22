@@ -61,6 +61,7 @@ pkgs=(
 for pkg in "${pkgs[@]}"; do
   ./third_party/${pkg}/build --toolchain pnacl
 done
+./third_party/mosh-chrome/build
 
 ./wassh-libc-sup/build
 # Build the WASM packages.
