@@ -126,14 +126,6 @@ nassh.CommandInstance.prototype.run = function() {
 
   this.io = this.argv_.io.push();
 
-  // In case something goes horribly wrong, display an error to the user so it's
-  // easier for them to copy & paste when reporting issues.
-  window.addEventListener('error', (e) => {
-    this.io.println(nassh.msg('UNEXPECTED_ERROR'));
-    const lines = e.error.stack.split(/[\r\n]/);
-    lines.forEach((line) => this.io.println(line));
-  });
-
   // Similar to lib.fs.err, except this logs to the terminal too.
   const ferr = (msg) => {
     return (err, ...args) => {
