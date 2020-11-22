@@ -33,6 +33,7 @@ pkgs=(
   # Build tools.
   gnuconfig
   mandoc
+  bazel-0.17
 
   # NaCl toolchain.
   naclsdk
