@@ -35,6 +35,9 @@
     // Bind the FSP APIs.
     app.installFsp();
 
+    // Register our context menus.
+    app.installContextMenus();
+
     // If we're running as an extension, finish setup.
     if (nassh.browserAction) {
       nassh.browserAction.onClicked.removeListener(onLaunched);

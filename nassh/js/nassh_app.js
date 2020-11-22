@@ -28,6 +28,69 @@ nassh.App.prototype.installFsp = function() {
 };
 
 /**
+ * Set up context menus.
+ *
+ * NB: We omit "Options" because Chrome takes care of populating that entry.
+ */
+nassh.App.prototype.installContextMenus = function() {
+  // Remove any previous entries.  This comes up when reloading the page.
+  chrome.contextMenus.removeAll();
+
+  chrome.contextMenus.onClicked.addListener(this.onContextMenu_.bind(this));
+
+  /** @type {!Array<!chrome.contextMenus.CreateProperties>} */
+  const entries = [
+    {
+      'type': 'normal',
+      'id': 'connect-dialog',
+      'title': nassh.msg('CONNECTION_DIALOG_NAME'),
+      'contexts': ['browser_action'],
+    },
+    {
+      'type': 'normal',
+      'id': 'mosh',
+      'title': '⸘m🍪sh‽',
+      'contexts': ['browser_action'],
+    },
+    {
+      'type': 'normal',
+      'id': 'feedback',
+      'title': nassh.msg('SEND_FEEDBACK_LABEL'),
+      'contexts': ['browser_action'],
+    },
+  ];
+  entries.forEach((entry) => chrome.contextMenus.create(entry));
+};
+
+/**
+ * Callback from context menu clicks.
+ *
+ * @param {!Object} info The item clicked.
+ * @param {!Tab=} tab When relevant, the active tab.
+ */
+nassh.App.prototype.onContextMenu_ = function(info, tab = undefined) {
+  switch (info.menuItemId) {
+    case 'connect-dialog':
+      lib.f.openWindow(chrome.runtime.getURL('/html/nassh.html'), '',
+                       'chrome=no,close=yes,resize=yes,minimizable=yes,' +
+                       'scrollbars=yes,width=900,height=600');
+      break;
+    case 'mosh':
+      lib.f.openWindow(
+          chrome.runtime.getURL('/plugin/mosh/mosh_client.html'), '',
+          'chrome=no,close=yes,resize=yes,minimizable=yes,' +
+          'scrollbars=yes,width=900,height=600');
+      break;
+    case 'feedback':
+      nassh.sendFeedback();
+      break;
+    default:
+      console.error('Unknown menu item', info);
+      break;
+  }
+};
+
+/**
  * Set the default help text in the omnibox when completing an ssh connection.
  */
 nassh.App.prototype.setDefaultOmnibox_ = function() {
