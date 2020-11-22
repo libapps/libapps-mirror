@@ -1617,6 +1617,20 @@ nassh.CommandInstance.prototype.onPluginMessage_ = function(e) {
 nassh.CommandInstance.prototype.onConnectDialog_ = {};
 
 /**
+ * Sent from the dialog when the user chooses to switch to mosh.
+ *
+ * @this {nassh.CommandInstance}
+ * @param {!hterm.Frame} dialogFrame
+ * @param {string} profileID Terminal preference profile name.
+ */
+nassh.CommandInstance.prototype.onConnectDialog_.mosh = function(
+    dialogFrame, profileID) {
+  dialogFrame.close();
+
+  document.location.replace('/plugin/mosh/mosh_client.html');
+};
+
+/**
  * Sent from the dialog when the user chooses to mount a profile.
  *
  * @this {nassh.CommandInstance}

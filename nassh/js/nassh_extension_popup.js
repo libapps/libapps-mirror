@@ -59,11 +59,15 @@ popup.prototype.openLink_ = function(id, newWindow = true) {
     case 'feedback':
       nassh.sendFeedback();
       return;
+    case 'mosh':
+      url = lib.f.getURL('/plugin/mosh/mosh_client.html');
     default: {
-      profile = this.localPrefs_.getProfile(id);
+      if (id != 'mosh') {
+        profile = this.localPrefs_.getProfile(id);
+      }
       let openas = '';
       if (newWindow) {
-        const state = profile.get('win/state');
+        const state = profile ? profile.get('win/state') : '';
         if (state !== 'normal') {
           openas = `openas=${state}`;
         }
@@ -240,6 +244,7 @@ popup.prototype.populateList_ = function() {
   // Create a copy since we're going to modify it in place below.
   const ids = this.prefs_.get('profile-ids').slice();
   ids.unshift('connect-dialog');
+  ids.push('mosh');
   ids.push('options');
   ids.push('feedback');
 
@@ -261,6 +266,10 @@ popup.prototype.populateList_ = function() {
     switch (id) {
       case 'connect-dialog':
         link.textContent = nassh.msg('CONNECTION_DIALOG_NAME');
+        link.style.textAlign = 'center';
+        break;
+      case 'mosh':
+        link.textContent = '⸘m🍪sh‽';
         link.style.textAlign = 'center';
         break;
       case 'options':
