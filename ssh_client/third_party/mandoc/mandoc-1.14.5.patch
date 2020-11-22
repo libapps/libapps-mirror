@@ -1,0 +1,14 @@
+Newer make is unable to find echo with `env -i`.  We can simply hardcode the
+POSIX `cc` and not worry about it.
+
+--- a/configure
++++ b/configure
+@@ -41,7 +41,7 @@ OSENUM=
+ OSNAME=
+ UTF8_LOCALE=
+ 
+-CC=`printf "all:\\n\\t@echo \\\$(CC)\\n" | env -i make -sf -`
++CC=cc
+ CFLAGS=
+ LDADD=
+ LDFLAGS=
