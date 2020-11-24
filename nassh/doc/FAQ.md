@@ -947,6 +947,30 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   desktop shortcut), you can use the `--app=...` option.  For example:
   `chrome --app=chrome-extension://iodihamcpbpeioajjeobimgagajmlibd/html/nassh.html#profile-id:e431 ...`
 
+### How do I make a desktop icon or shelf shortcut?
+
+If you want to pin the extension to the shelf, taskbar, or dock, you can create
+a shortcut for it. Unfortunately, Chrome does not provide a great flow for this.
+
+Trying to pin the icon for an open window will instead open the extension
+options window: https://crbug.com/1151809.
+
+1.  Click the extension icon in the upper right of Chrome.
+1.  Hold Ctrl while clicking "Connection Dialog" to open it in a tab.
+1.  Open Chrome's ⋮ menu in the upper right (Alt+F shortcut).
+1.  Expand the "More tools" submenu.
+1.  Select the "Create shortcut..." option.
+1.  Check the "Open as window" option to automatically open it as a window.
+1.  Click the "Create" button.
+
+This will create a shortcut in the app launcher menu and automatically pin to
+the shelf on Chrome OS.  On Windows or macOS, you can click the taskbar icon and
+choose "Pin to taskbar" or "Keep in dock".
+
+If you remove the pinned icon it will remain in the app launcher.
+
+If you right click the shortcut and select the "Remove from Chrome" option, this
+will only delete the shortcut, it *won't* uninstall the extension itself.
 
 ### How do I change input methods?
 

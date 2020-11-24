@@ -54,24 +54,10 @@ The trick is to hold Ctrl when clicking the connection.
 
 ### Shelf Interaction
 
-If you want to pin the extension to the shelf, you can create a shortcut for it.
-Unfortunately, Chrome does not provide a great flow for this.
+It's still possible to pin a shortcut to the shelf on Chrome OS (dock on macOS
+or taskbar on Windows).
 
-1.  Click the extension icon in the upper right of Chrome.
-1.  Hold Ctrl while clicking "Connection Dialog" to open it in a tab.
-1.  Open Chrome's ⋮ menu in the upper right (Alt+F shortcut).
-1.  Expand the "More tools" submenu.
-1.  Select the "Create shortcut..." option.
-1.  Check the "Open as window" option to automatically open it as a window.
-1.  Click the "Create" button.
-
-This will create a shortcut in the app launcher menu and automatically pin to
-the shelf.
-You can move it around on the shelf, or remove it entirely if you want (this
-will leave it in the app launcher).
-
-If you right click the shortcut and select the "Remove from Chrome" option, this
-will only delete the shortcut, it *won't* uninstall the extension itself.
+[See the FAQ for detailed instructions](./FAQ.md#how-do-i-make-a-desktop-icon-or-shelf-shortcut).
 
 ### URI & Bookmark Changes
 
