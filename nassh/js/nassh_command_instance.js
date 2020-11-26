@@ -634,6 +634,11 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema = true,
     }
   }
 
+  // For empty URIs, show the connection dialog.
+  if (uri === '') {
+    return {hostname: '>connections'};
+  }
+
   /* eslint-disable max-len,spaced-comment */
   // Parse the connection string.
   const ary = uri.match(
@@ -649,6 +654,13 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema = true,
   let username = ary[1];
   let hostname = ary[2];
   const port = ary[3];
+
+  // If the hostname starts with bad chars, reject it.  We use these internally,
+  // so don't want external links to access them too.  We probably should filter
+  // out more of the ASCII space.
+  if (hostname.startsWith('>')) {
+    return null;
+  }
 
   // If it's IPv6, remove the brackets.
   if (hostname.startsWith('[') && hostname.endsWith(']')) {
@@ -885,16 +897,19 @@ nassh.CommandInstance.prototype.sftpConnectToDestination = function(
  *     normal connectToFinalize_.
  */
 nassh.CommandInstance.prototype.connectTo = function(params, finalize) {
-  if (!(params.username && params.hostname)) {
-    this.io.println(nassh.msg('MISSING_PARAM', ['username/hostname']));
-    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
-    return;
-  }
-
   if (params.hostname == '>crosh') {
     // TODO: This should be done better.
     const template = 'crosh.html?profile=%encodeURIComponent(terminalProfile)';
     this.terminalLocation.href = lib.f.replaceVars(template, params);
+    return;
+  } else if (params.hostname === '>connections') {
+    this.promptForDestination_();
+    return;
+  }
+
+  if (!(params.username && params.hostname)) {
+    this.io.println(nassh.msg('MISSING_PARAM', ['username/hostname']));
+    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
     return;
   }
 

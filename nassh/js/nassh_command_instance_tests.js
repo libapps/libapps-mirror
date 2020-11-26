@@ -135,6 +135,9 @@ describe('parseURI', () => {
     ['u@h%6eg', {'username': 'u', 'hostname': 'h%6eg'}],
     ['u@h:1%302', null],
 
+    // Bad hostnames.
+    ['u@>croash', null],
+
     // Fingerprints.
     ['u;fingerprint=foo@h',
      {'username': 'u', 'hostname': 'h', 'fingerprint': 'foo'}],
@@ -224,6 +227,16 @@ it('parseDestination', () => {
 
     // For non-URI handler, we'll preserve the prefix.
     ['ssh://root@localhost', {'user': 'ssh://root', 'host': 'localhost'}],
+
+    // Blank URIs.
+    ['uri:ssh%3A//', {'host': '>connections'}],
+    ['uri:ssh%3A', {'host': '>connections'}],
+    ['uri:web+ssh%3A//', {'host': '>connections'}],
+    ['uri:web+ssh%3A', {'host': '>connections'}],
+    ['uri:sftp%3A//', {'host': '>connections'}],
+    ['uri:sftp%3A', {'host': '>connections'}],
+    ['uri:web+sftp%3A//', {'host': '>connections'}],
+    ['uri:web+sftp%3A', {'host': '>connections'}],
 
     // Normal form.
     ['root@localhost', {'user': 'root', 'host': 'localhost'}],
