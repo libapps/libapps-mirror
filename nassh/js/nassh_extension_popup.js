@@ -43,30 +43,11 @@ function popup() {
 /**
  * Open a specific connection.
  *
- * @param {!MouseEvent} e The event triggering this.
+ * @param {string} id The profile id to open.
+ * @param {boolean=} newWindow Whether to open in a window or tab.
  */
-popup.prototype.openLink_ = function(e) {
-  const id = e.target.id;
+popup.prototype.openLink_ = function(id, newWindow = true) {
   let profile;
-
-  // We route multiple event types here.
-  if (e.type === 'auxclick') {
-    // Only consume middle mouse.  Leave other buttons for future use.
-    if (e.button != 1) {
-      return;
-    }
-  }
-
-  // Figure out whether to open a window or a tab.
-  let mode;
-  if (e.ctrlKey || e.type === 'auxclick') {
-    mode = 'tab';
-  } else if (e.shiftKey) {
-    mode = 'window';
-  } else {
-    // TODO: Get default from prefs.
-    mode = 'window';
-  }
 
   let url = lib.f.getURL('/html/nassh.html');
   switch (id) {
@@ -81,7 +62,7 @@ popup.prototype.openLink_ = function(e) {
     default: {
       profile = this.localPrefs_.getProfile(id);
       let openas = '';
-      if (mode === 'window') {
+      if (newWindow) {
         const state = profile.get('win/state');
         if (state !== 'normal') {
           openas = `openas=${state}`;
@@ -93,7 +74,7 @@ popup.prototype.openLink_ = function(e) {
   }
 
   // Launch it.
-  if (mode == 'tab') {
+  if (!newWindow) {
     // Should we offer a way to open tabs in the background?
     chrome.tabs.create({url: url, active: true});
   } else {
@@ -130,6 +111,129 @@ popup.prototype.openLink_ = function(e) {
 };
 
 /**
+ * Open a specific connection via mouse clicks.
+ *
+ * @param {!MouseEvent} e The event triggering this.
+ */
+popup.prototype.mouseClickLink_ = function(e) {
+  // We route multiple event types here.
+  if (e.type === 'auxclick') {
+    // Only consume middle mouse.  Leave other buttons for future use.
+    if (e.button != 1) {
+      return;
+    }
+  }
+
+  // Figure out whether to open a window or a tab.
+  let newWindow;
+  if (e.ctrlKey || e.type === 'auxclick') {
+    newWindow = false;
+  } else if (e.shiftKey) {
+    newWindow = true;
+  } else {
+    // TODO: Get default from prefs.
+    newWindow = true;
+  }
+
+  this.openLink_(e.target.id, newWindow);
+};
+
+/**
+ * Open a specific connection via the keyboard.
+ *
+ * @param {!KeyboardEvent} e The event triggering this.
+ */
+popup.prototype.keyupLink_ = function(e) {
+  switch (e.key) {
+    case 'Enter': {
+      // Figure out whether to open a window or a tab.
+      let newWindow;
+      if (e.ctrlKey) {
+        newWindow = false;
+      } else if (e.shiftKey) {
+        newWindow = true;
+      } else {
+        // TODO: Get default from prefs.
+        newWindow = true;
+      }
+
+      this.openLink_(e.target.id, newWindow);
+      e.preventDefault();
+      break;
+    }
+  }
+};
+
+/**
+ * When a key is pressed down.
+ *
+ * @param {!KeyboardEvent} e The event triggering this.
+ */
+popup.prototype.keydownWindow_ = function(e) {
+  // Helper to find the last focusable element.
+  const findLastFocusElement = () => {
+    let ret;
+    document.querySelectorAll('[tabIndex]').forEach((ele) => {
+      if (!ret || ret.tabIndex < ele.tabIndex) {
+        ret = ele;
+      }
+    });
+    return ret;
+  };
+
+  // Helper to find the first focusable element.
+  const findFirstFocusElement = () => {
+    let ret;
+    document.querySelectorAll('[tabIndex]').forEach((ele) => {
+      if (!ret || ret.tabIndex > ele.tabIndex) {
+        ret = ele;
+      }
+    });
+    return ret;
+  };
+
+  switch (e.key) {
+    case 'PageUp':
+    case 'ArrowUp':
+    case 'ArrowLeft': {
+      // Move focus to the previous entry.
+      const tabIndex = e.target.tabIndex - 1;
+      let ele = document.querySelector(`[tabIndex="${tabIndex}"]`);
+      if (ele === null) {
+        ele = findLastFocusElement();
+      }
+      ele.focus();
+      e.preventDefault();
+      break;
+    }
+
+    case 'PageDown':
+    case 'ArrowDown':
+    case 'ArrowRight': {
+      // Move focus to the next entry.
+      const tabIndex = e.target.tabIndex + 1;
+      let ele = document.querySelector(`[tabIndex="${tabIndex}"]`);
+      if (ele === null) {
+        ele = findFirstFocusElement();
+      }
+      ele.focus();
+      e.preventDefault();
+      break;
+    }
+
+    case 'Home':
+      findFirstFocusElement().focus();
+      e.preventDefault();
+      break;
+
+    case 'End':
+      findLastFocusElement().focus();
+      e.preventDefault();
+      break;
+  }
+};
+
+/**
  * Fill the popup with all the connections.
  */
 popup.prototype.populateList_ = function() {
@@ -145,10 +249,14 @@ popup.prototype.populateList_ = function() {
     const link = document.createElement('div');
     link.title = nassh.msg('POPUP_CONNECT_TOOLTIP');
     link.id = id;
+    link.tabIndex = i + 1;
     link.className = 'links';
-    const openLink = /** @type {!EventListener} */ (this.openLink_.bind(this));
-    link.addEventListener('click', openLink);
-    link.addEventListener('auxclick', openLink);
+    const mouseClick = /** @type {!EventListener} */ (
+        this.mouseClickLink_.bind(this));
+    link.addEventListener('click', mouseClick);
+    link.addEventListener('auxclick', mouseClick);
+    link.addEventListener('keyup', /** @type {!EventListener} */ (
+        this.keyupLink_.bind(this)));
 
     switch (id) {
       case 'connect-dialog':
@@ -173,6 +281,9 @@ popup.prototype.populateList_ = function() {
 
     document.body.appendChild(link);
   }
+
+  window.addEventListener('keydown', /** @type {!EventListener} */ (
+      this.keydownWindow_.bind(this)));
 
   // Workaround bugs on Chrome on macOS where the popup renders as a small box
   // due to the body dimenions being unset.  https://crbug.com/428044
