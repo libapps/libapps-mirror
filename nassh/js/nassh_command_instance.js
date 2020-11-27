@@ -1370,7 +1370,7 @@ nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
  */
 nassh.CommandInstance.prototype.removePlugin_ = function() {
   if (this.plugin_) {
-    this.plugin_.parentNode.removeChild(this.plugin_);
+    this.plugin_.remove();
     this.plugin_ = null;
   }
 };

@@ -25,8 +25,7 @@ describe('terminal_slider.js', () => {
   };
 
   afterEach(function() {
-    document.querySelectorAll('terminal-slider')
-        .forEach((el) => el.parentElement.removeChild(el));
+    document.querySelectorAll('terminal-slider').forEach((el) => el.remove());
   });
 
   it('initialises-the-knob-to-the-correct-x-coordinates', async function() {
