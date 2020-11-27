@@ -608,7 +608,6 @@ function(port) {
     showOverlay: (message, timeout) => {
       post({error: false, command: 'overlay', message, timeout});
     },
-    vt: {characterEncoding: 'utf-8'},
   });
   const pipeIo = new hterm.Terminal.IO(stubTerminal);
   stubTerminal.io = pipeIo;
