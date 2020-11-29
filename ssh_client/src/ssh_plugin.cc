@@ -26,6 +26,7 @@ const char kOnCloseMethodId[] = "onClose";
 const char kOnReadReadyMethodId[] = "onReadReady";
 const char kOnResizeMethodId[] = "onResize";
 const char kOnExitAcknowledgeMethodId[] = "onExitAcknowledge";
+const char kOnReadPassMethodId[] = "onReadPass";
 
 // Known startSession attributes.
 const char kUsernameAttr[] = "username";
@@ -48,6 +49,7 @@ const char kOpenSocketMethodId[] = "openSocket";
 const char kWriteMethodId[] = "write";
 const char kReadMethodId[] = "read";
 const char kCloseMethodId[] = "close";
+const char kreadPassMethodId[] = "readPass";
 
 const size_t kDefaultWriteWindow = 64 * 1024;
 
@@ -105,6 +107,8 @@ void SshPluginInstance::Invoke(const std::string& function,
     OnResize(args);
   } else if (function == kOnExitAcknowledgeMethodId) {
     OnExitAcknowledge(args);
+  } else if (function == kOnReadPassMethodId) {
+    OnReadPass(args);
   } else {
     PrintLogImpl(0, function + ": Unknown function");
   }
@@ -211,6 +215,15 @@ bool SshPluginInstance::Close(int fd) {
   call_args.Set(0, fd);
   InvokeJS(kCloseMethodId, call_args);
   return true;
+}
+
+void SshPluginInstance::ReadPass(const char* prompt, size_t size, bool echo) {
+  pp::VarArray call_args;
+  call_args.SetLength(3);
+  call_args.Set(0, prompt);
+  call_args.Set(1, (int32_t)size);
+  call_args.Set(2, echo);
+  InvokeJS(kreadPassMethodId, call_args);
 }
 
 size_t SshPluginInstance::GetWriteWindow() {
@@ -442,6 +455,10 @@ void SshPluginInstance::OnReadReady(const pp::VarArray& args) {
   } else {
     PrintLogImpl(0, "onReadReady: invalid arguments\n");
   }
+}
+
+void SshPluginInstance::OnReadPass(const pp::VarArray& args) {
+  file_system_.ReadPassResult(args.Get(0).AsString());
 }
 
 void SshPluginInstance::OnResize(const pp::VarArray& args) {

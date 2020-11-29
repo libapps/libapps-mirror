@@ -6,6 +6,7 @@
 #include <netdb.h>
 #include <pthread.h>
 #include <pwd.h>
+#include <readpassphrase.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
@@ -615,6 +616,21 @@ int cfsetospeed(struct termios* t, speed_t speed) {
 int cfsetispeed(struct termios* t, speed_t speed) {
   t->c_ispeed = speed;
   return 0;
+}
+
+char* readpassphrase(const char* prompt, char* buf, size_t buf_len, int flags) {
+  LOG_SYSCALL_ENTER();
+  LOG("prompt={%s}, buf=%p, buf_len=%zu, flags=%#x",
+      prompt, buf, buf_len, flags);
+  write(2, prompt, strlen(prompt));
+  FileSystem::GetFileSystem()->readpass(
+      prompt, buf, buf_len, flags & RPP_ECHO_ON);
+  LOG(") = {%s}\n", buf);
+  if (flags & RPP_ECHO_ON) {
+    write(2, buf, strlen(buf));
+  }
+  write(2, "\n", 1);
+  return buf;
 }
 
 }  // extern "C"

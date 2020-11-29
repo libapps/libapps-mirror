@@ -1842,3 +1842,95 @@ nassh.CommandInstance.prototype.onPlugin_.close = function(fd) {
 
   this.streams_.closeStream(fd);
 };
+
+/**
+ * Plugin wants to read a password, or some other secured user input.
+ *
+ * @this {nassh.CommandInstance}
+ * @param {string} prompt The prompt for the user.
+ * @param {number} buf_len Max length of user input.
+ * @param {boolean} echo Whether to echo the user input.
+ */
+nassh.CommandInstance.prototype.onPlugin_.readPass = function(
+    prompt, buf_len, echo) {
+  const io = this.io.push();
+
+  // Perform common cleanup tasks before exiting the prompt.
+  const cleanup = (pass) => {
+    io.hideOverlay();
+    io.pop();
+    this.io.terminal_.focus();
+    this.sendToPlugin_('onReadPass', [pass]);
+  };
+
+  // Strip leading & trailing newlines & random spaces.  Often the prompt is
+  // expected to be displayed inline, so it has to include padding to separate
+  // it from existing output.  That doesn't apply here.
+  prompt = prompt.trim();
+
+  const container = document.createElement('div');
+
+  const header = document.createElement('p');
+  header.style.fontWeight = 'bold';
+  header.style.whiteSpace = 'pre-wrap';
+  header.textContent = prompt;
+  container.appendChild(header);
+
+  const span = document.createElement('span');
+  span.style.whiteSpace = 'nowrap';
+
+  // If echo is disabled, assume it's a password field.  If it's enabled, allow
+  // normal text editing & viewing.
+  const input = document.createElement('input');
+  input.type = echo ? 'text' : 'password';
+  input.maxLength = buf_len - 1;
+  input.style.width = echo ? '100%' : '90%';
+  span.appendChild(input);
+
+  // For password inputs, add a dynamic toggle.
+  if (!echo) {
+    const visibilityUri = lib.resource.getDataUrl('nassh/images/visibility');
+    const visibilityOffUri = lib.resource.getDataUrl(
+        'nassh/images/visibility_off');
+
+    const toggle = document.createElement('img');
+    toggle.src = visibilityUri;
+    toggle.style.cursor = 'pointer';
+    toggle.style.verticalAlign = 'middle';
+    toggle.addEventListener('click', (e) => {
+      if (input.type === 'text') {
+        input.type = 'password';
+        toggle.src = visibilityUri;
+      } else {
+        input.type = 'text';
+        toggle.src = visibilityOffUri;
+      }
+    });
+    span.appendChild(toggle);
+  }
+
+  container.appendChild(span);
+  io.showOverlay(container, null);
+
+  // Force focus after the browser has a chance to render things.
+  setTimeout(() => input.focus());
+
+  // The terminal will eat all key events, so make sure we stop that.
+  input.addEventListener('keyup', (e) => e.stopPropagation(), true);
+  input.addEventListener('keypress', (e) => e.stopPropagation(), true);
+
+  // If the terminal becomes active for some reason, force back to the input.
+  io.onVTKeystroke = io.sendString = (string) => {
+    input.focus();
+  };
+
+  // Keep accepting input until they press Enter or Escape.
+  input.addEventListener('keydown', (e) => {
+    e.stopPropagation();
+    if (e.key === 'Enter') {
+      cleanup(input.value);
+    } else if (e.key === 'Escape') {
+      cleanup('');
+    }
+  }, true);
+};

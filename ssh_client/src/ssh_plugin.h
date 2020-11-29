@@ -37,6 +37,7 @@ class SshPluginInstance : public pp::Instance,
   virtual bool Write(int fd, const char* data, size_t size);
   virtual bool Read(int fd, size_t size);
   virtual bool Close(int fd);
+  virtual void ReadPass(const char* prompt, size_t size, bool echo);
   virtual size_t GetWriteWindow();
   virtual void SendExitCode(int error);
 
@@ -51,6 +52,7 @@ class SshPluginInstance : public pp::Instance,
   void OnReadReady(const pp::VarArray& args);
   void OnResize(const pp::VarArray& args);
   void OnExitAcknowledge(const pp::VarArray& args);
+  void OnReadPass(const pp::VarArray& args);
 
   void SessionThreadImpl();
   static void* SessionThread(void* arg);

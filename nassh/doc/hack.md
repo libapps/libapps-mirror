@@ -361,6 +361,7 @@ The `name` field can be any one of:
 | `onReadReady`        | Notify plugin data is available. | (int `fd`, bool `result`) |
 | `onResize`           | Notify terminal size changes.    | (int `width`, int `height`) |
 | `onExitAcknowledge`  | Used to quit the plugin.         | () |
+| `onReadPass`         | Return the entered password.     | (str `pass`) |
 
 The session object currently has these members:
 
@@ -402,6 +403,7 @@ The `name` field can be any one of:
 | `close`       | Plugin wants to close an fd.      | (int `fd`) |
 | `exit`        | The plugin is exiting.            | (int `code`) |
 | `printLog`    | Send a string to `console.log`.   | (str `str`) |
+| `readPass`    | Plugin wants to read secrets.     | (str `prompt`, int `max_bytes`, bool `echo`) |
 
 # SFTP {#SFTP}
 
