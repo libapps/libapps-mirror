@@ -105,6 +105,8 @@ void SshPluginInstance::Invoke(const std::string& function,
     OnResize(args);
   } else if (function == kOnExitAcknowledgeMethodId) {
     OnExitAcknowledge(args);
+  } else {
+    PrintLogImpl(0, function + ": Unknown function");
   }
 }
 
