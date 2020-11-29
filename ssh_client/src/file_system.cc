@@ -1019,6 +1019,7 @@ void FileSystem::exit(int status) {
 void FileSystem::ExitCodeAcked() {
   Mutex::Lock lock(mutex_);
   exit_code_acked_ = true;
+  cond_.broadcast();
 }
 
 void FileSystem::MakeDirectory(int32_t result, const char* pathname,
