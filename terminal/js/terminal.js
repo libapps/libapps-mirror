@@ -214,12 +214,8 @@ terminal.Command.prototype.run = function() {
     return;
   }
 
-  this.io.onVTKeystroke = this.io.sendString = this.sendString_.bind(this);
-
-  this.io.onTerminalResize = this.onTerminalResize_.bind(this);
   chrome.terminalPrivate.onProcessOutput.addListener(
       this.onProcessOutput_.bind(this));
-  document.body.onunload = this.close_.bind(this);
 
   const pidInit = (id, activeTerminalTracker) => {
     if (id === undefined) {
@@ -232,6 +228,10 @@ terminal.Command.prototype.run = function() {
     window.onbeforeunload = this.onBeforeUnload_.bind(this);
     this.id_ = id;
     this.isFirstOutput_ = true;
+
+    this.io.onVTKeystroke = this.io.sendString = this.sendString_.bind(this);
+    this.io.onTerminalResize = this.onTerminalResize_.bind(this);
+    document.body.onunload = this.close_.bind(this);
 
     // Setup initial window size.
     this.onTerminalResize_(
