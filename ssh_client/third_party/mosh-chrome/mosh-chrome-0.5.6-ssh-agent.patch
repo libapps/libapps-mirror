@@ -35,7 +35,7 @@ TODO(vapier): Merge with the logic in nassh to extract the default on the fly.
    // App ID of an SSH agent.
 -  // TODO: Make this a user setting.
 -  this.agentAppID_ = 'beknehfpfkghjoafdifaflglpjkojoco';
-+  this.agentAppID_ = addr['ssh-agent-id'];
++  this.agentAppID_ = argv.args['ssh-agent-id'];
  };
  
  mosh.CommandInstance.prototype.run = function() {
