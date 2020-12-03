@@ -1,3 +1,10 @@
+# 0.37, 2020-12-07, Slim down.
+
+* Revert "nassh: add a default error handler"
+* extension: Disable build and only build Chrome App.
+* ssh_client: Only build current OpenSSH 8.4p1.
+* ssh_client: Disable experimental WASM builds.
+
 # 0.36, 2020-11-09, 2020-11-11, OpenSSH 8.4p1, UI tweaks.
 
 * connect: Improve incomplete form UX.

@@ -1,4 +1,4 @@
-0.32
+0.34
 
 # The first line tracks the last version that went stable.
 # Only features added since then should be kept here.
@@ -9,9 +9,6 @@
 # The % symbol is used to split lines.
 # Only list significant changes that matter to the user.
 # The more lines that we have here, the more cluttered the output.
-
-# release: 0.33 (stable July 3)
-% Internal Google Cloud VMs default to corp-relay-v4 proxy mode.
 
 # release: 0.35 (stable Sep 11)
 % Enable connection resume for Google corp-relay-v4 users.
