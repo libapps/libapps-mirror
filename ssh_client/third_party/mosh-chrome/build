@@ -26,6 +26,8 @@ PATCHES = (
     '%(p)s-dist-reuse.patch',
     '%(p)s-ssh-agent.patch',
     '%(p)s-libssh-update.patch',
+    '%(p)s-reconnect.patch',
+    '%(p)s-contextmenu.patch',
 )
 
 
