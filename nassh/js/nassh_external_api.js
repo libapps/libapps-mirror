@@ -613,6 +613,7 @@ function(port) {
   stubTerminal.io = pipeIo;
 
   let instance;
+  let inputResolve;
 
   // Process each incoming message.
   port.onMessage.addListener((msg) => {
@@ -631,6 +632,12 @@ function(port) {
           port.disconnect();
         };
         instance = new nassh.CommandInstance(argv);
+        instance.secureInput = (message, buf_len, echo) => {
+          post({error: false, command: 'input', message, echo, buf_len});
+          return new Promise((resolve) => {
+            inputResolve = resolve;
+          });
+        };
         instance.connectTo(connectOptions);
         break;
       }
@@ -643,6 +650,12 @@ function(port) {
           return;
         }
         pipeIo.sendString(msg.data);
+        break;
+      }
+
+      case 'input': {
+        inputResolve(msg.data);
+        inputResolve = null;
         break;
       }
 

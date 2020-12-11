@@ -289,6 +289,8 @@ This API allows for interactive auth, so it's a bit more complicated.
 
 #### Requests
 
+These are messages sent to the background page.
+
 ```js
 # Create a new mount connection.
 {
@@ -308,7 +310,17 @@ This API allows for interactive auth, so it's a bit more complicated.
 }
 ```
 
+```js
+# Return secure user input.
+{
+  command: 'input',
+  data: '...',
+}
+```
+
 #### Responses
+
+These are messages sent to the foreground page.
 
 ```js
 # An error occurred, usually at the JS level rather than SSH.
@@ -335,6 +347,18 @@ All other responses will have `error=false`.
   message: 'The message to display',
   # How long to display the overlay.
   timeout: number|null,
+}
+```
+
+```js
+# Get secure user input from the user.
+{
+  command: 'input',
+  message: 'The prompt to display',
+  # Whether to display user input as they enter it.
+  echo: bool,
+  # The max input we expect.
+  length: number,
 }
 ```
 

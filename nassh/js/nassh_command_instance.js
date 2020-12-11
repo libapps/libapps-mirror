@@ -483,6 +483,13 @@ nassh.CommandInstance.prototype.mountProfile = function(profileID) {
         io.showOverlay(message, msg.timeout);
         break;
 
+      case 'input':
+        // Get secure user input.
+        this.secureInput(message, msg.buf_len, msg.echo).then((data) => {
+          port.postMessage({command: 'input', data});
+        });
+        break;
+
       case 'exit':
       case 'done':
         // The client has exited (bad), or the mount setup is done (good).
@@ -1888,15 +1895,18 @@ nassh.CommandInstance.prototype.onPlugin_.close = function(fd) {
 };
 
 /**
- * Plugin wants to read a password, or some other secured user input.
+ * Get secure input from the user.
  *
- * @this {nassh.CommandInstance}
+ * This internal wrapper is because the Web APIs are callback based, and writing
+ * this with Promises is not easy.  So this can be easily wrapped with Promises.
+ *
  * @param {string} prompt The prompt for the user.
  * @param {number} buf_len Max length of user input.
  * @param {boolean} echo Whether to echo the user input.
+ * @param {function(string)} callback Called with the user's input.
  */
-nassh.CommandInstance.prototype.onPlugin_.readPass = function(
-    prompt, buf_len, echo) {
+nassh.CommandInstance.prototype.secureInput_ = function(
+    prompt, buf_len, echo, callback) {
   const io = this.io.push();
 
   // Perform common cleanup tasks before exiting the prompt.
@@ -1904,7 +1914,7 @@ nassh.CommandInstance.prototype.onPlugin_.readPass = function(
     io.hideOverlay();
     io.pop();
     this.io.terminal_.focus();
-    this.sendToPlugin_('onReadPass', [pass]);
+    callback(pass);
   };
 
   // Strip leading & trailing newlines & random spaces.  Often the prompt is
@@ -1977,4 +1987,33 @@ nassh.CommandInstance.prototype.onPlugin_.readPass = function(
       cleanup('');
     }
   }, true);
+};
+
+/**
+ * Get secure input from the user.
+ *
+ * @param {string} prompt The prompt for the user.
+ * @param {number} buf_len Max length of user input.
+ * @param {boolean} echo Whether to echo the user input.
+ * @return {!Promise<string>} A Promise that resolves to the user's input.
+ */
+nassh.CommandInstance.prototype.secureInput = function(prompt, buf_len, echo) {
+  return new Promise((resolve) => {
+    this.secureInput_(prompt, buf_len, echo, resolve);
+  });
+};
+
+/**
+ * Plugin wants to read a password, or some other secured user input.
+ *
+ * @this {nassh.CommandInstance}
+ * @param {string} prompt The prompt for the user.
+ * @param {number} buf_len Max length of user input.
+ * @param {boolean} echo Whether to echo the user input.
+ */
+nassh.CommandInstance.prototype.onPlugin_.readPass = function(
+    prompt, buf_len, echo) {
+  this.secureInput(prompt, buf_len, echo).then((pass) => {
+    this.sendToPlugin_('onReadPass', [pass]);
+  });
 };
