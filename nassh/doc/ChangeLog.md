@@ -1,3 +1,8 @@
+# 0.38, 2020-12-14, SFTP mount regression fix.
+
+* fsp: Fix mounting after UI rewrite.
+* ssh_client: mosh: Improve UI a bit.
+
 # 0.37, 2020-12-07, SFTP mount rewrite, UI prompts rewrite, and alpha mosh import.
 
 * contextmenu: Add some items to improve discoverability.

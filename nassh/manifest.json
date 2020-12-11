@@ -4,7 +4,7 @@
   "manifest_version": 2,
   "content_security_policy": "script-src 'self'; object-src 'self'",
   "name": "__MSG_nassh_product_name__ (tot)",
-  "version": "0.37",
+  "version": "0.38",
   "default_locale": "en",
   "icons": {
     "128": "images/dev/icon-128.png",
