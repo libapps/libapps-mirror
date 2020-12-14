@@ -266,7 +266,7 @@
 		"message": "Find"
 	},
 	"HTERM_BUTTON_NEXT": {
-		"description": "Button label for moving to the next found entry when finding text in the terminal output.",
+		"description": "Button label for moving to the next result when searching the terminal output. The user might be searching for anything in the log, and there could be many matching results.",
 		"message": "Next"
 	},
 	"HTERM_BUTTON_PAGE_DOWN": {
@@ -278,7 +278,7 @@
 		"message": "Page up"
 	},
 	"HTERM_BUTTON_PREVIOUS": {
-		"description": "Button label for moving to the previous found entry when finding text in the terminal output.",
+		"description": "Button label for moving to the previous result when searching the terminal output. The user might be searching for anything in the log, and there could be may matching results.",
 		"message": "Previous"
 	},
 	"HTERM_FIND_COUNTER_LABEL": {
@@ -1914,7 +1914,7 @@
 		"message": "SSH Arguments"
 	},
 	"SSH_CERT_CHECK_ERROR": {
-		"description": "Error message shown to the user when checking the SSH certificate status failed. The message parameter will come directly from the OS or other programs and might be a translated string itself.",
+		"description": "Error message shown to the user when checking the SSH certificate status failed. It is printed after a translated 'Checking...' message. The MSG parameter will come directly from the OS or other programs and might be a translated string itself.",
 		"message": " failed: $MSG$",
 		"placeholders": {
 			"MSG": {
@@ -1928,7 +1928,7 @@
 		"message": "Refreshing SSH certificate..."
 	},
 	"SSH_CERT_CHECK_RESULT": {
-		"description": "Status message shown to the user after checking the expiration time of the user's SSH certificates (credentials). The ~ indicates the time is a rough approximation. Everything here may be translated or adjusted as makes sense.",
+		"description": "Status message shown to the user after checking the expiration time of the user's SSH certificates (credentials). It is prined after a translated 'Checking...' message. The ~ indicates the time is a rough approximation. Everything here may be translated or adjusted as makes sense.",
 		"message": " ~$HOURS$ hours until expiration",
 		"placeholders": {
 			"HOURS": {
@@ -1938,7 +1938,7 @@
 		}
 	},
 	"SSH_CERT_CHECK_START": {
-		"description": "Status message shown to the user when we start to check the expiration time of the user's SSH certificates (credentials). A status message will be shown independently after this. Everything here may be translated as makes sense.",
+		"description": "Status message shown to the user before we check the expiration time (how 'fresh' they are) of the user's SSH certificates (credentials). A status message will be appended after this message. Everything here may be translated as makes sense.",
 		"message": "Checking SSH certificate freshness..."
 	},
 	"STREAM_OPEN_ERROR": {
