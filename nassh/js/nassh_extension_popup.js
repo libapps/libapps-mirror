@@ -267,10 +267,12 @@ popup.prototype.populateList_ = function() {
       case 'connect-dialog':
         link.textContent = nassh.msg('CONNECTION_DIALOG_NAME');
         link.style.textAlign = 'center';
+        link.style.borderBottom = 'dashed 1px';
         break;
       case 'mosh':
         link.textContent = '⸘m🍪sh‽';
         link.style.textAlign = 'center';
+        link.style.borderTop = 'dashed 1px';
         break;
       case 'options':
         link.textContent = nassh.msg('HTERM_OPTIONS_BUTTON_LABEL');
