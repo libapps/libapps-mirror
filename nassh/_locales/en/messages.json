@@ -2246,8 +2246,8 @@
 		"message": "Display notifications in the browser using hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"TIP_3": {
-		"description": "Helpful tip shown to user advertising features. Do not translate the 'ssh' string. 'profile name' may be translated, but make it clear that the 'profile name' is something the user needs to enter/replace (like the angle brackets do in the English string). It is a user-defined description for their saved connections.",
-		"message": "Connect from the omnibox by typing 'ssh <profile name>': https://goo.gl/V7o8ki"
+		"description": "Helpful tip shown to user advertising features. Do not translate the 'ssh' string. '<Tab>' represents the keyboard Tab key which the user needs to press after typing 'ssh', and may be translaed accordingly. 'profile name' may be translated, but make it clear that the 'profile name' is something the user needs to enter/replace (like the angle brackets do in the English string). It is a user-defined description for their saved connections.",
+		"message": "Connect from the omnibox by typing 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"TIP_4": {
 		"description": "Helpful tip shown to user advertising features. 'SFTP Mount' and 'Connect' refer to button labels and should be translated using the same text as the MOUNT_BUTTON_LABEL and CONNECT_BUTTON_LABEL messages.",
