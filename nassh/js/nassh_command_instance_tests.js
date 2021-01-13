@@ -139,6 +139,13 @@ describe('parseURI', () => {
 
     // Bad hostnames.
     ['u@>croash', null],
+    ['u@[>croash]', null],
+
+    // Various bad forms.
+    ['u@-Q', null],
+    ['u@h@--foo', null],
+    ['u@h@r --foo', null],
+    ['u@h@r\t--foo', null],
 
     // Fingerprints.
     ['u;fingerprint=foo@h',
