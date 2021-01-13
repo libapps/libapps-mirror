@@ -549,8 +549,8 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema = true,
   /* eslint-disable max-len,spaced-comment */
   // Parse the connection string.
   const ary = uri.match(
-      //|user |@| [  ipv6       %zoneid   ]| host |   :port     |@| [  ipv6       %zoneid   ]|relay|   :relay port |
-      /^([^@]+)@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:@]+)(?::(\d+))?(?:@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:]+)(?::(\d+))?)?$/);
+      //|user |@| [  ipv6       %zoneid   ]|  host  |   :port     |@| [  ipv6       %zoneid   ]| relay |   :relay port |
+      /^([^@]+)@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^\s:@]+)(?::(\d+))?(?:@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^\s:]+)(?::(\d+))?)?$/);
   /* eslint-enable max-len,spaced-comment */
 
   if (!ary) {
@@ -567,12 +567,22 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema = true,
     hostname = hostname.substr(1, hostname.length - 2);
   }
 
+  // If the hostname starts with bad chars, reject it.  We use these internally,
+  // so don't want external links to access them too.  We probably should filter
+  // out more of the ASCII space.
+  if (hostname.startsWith('>') || hostname.startsWith('-')) {
+    return null;
+  }
+
   let relayHostname, relayPort;
   if (ary[4]) {
     relayHostname = ary[4];
     // If it's IPv6, remove the brackets.
     if (relayHostname.startsWith('[') && relayHostname.endsWith(']')) {
       relayHostname = relayHostname.substr(1, relayHostname.length - 2);
+    }
+    if (relayHostname.startsWith('-')) {
+      return null;
     }
     if (ary[5]) {
       relayPort = ary[5];
@@ -880,7 +890,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   const userSshOptionsList = nassh.CommandInstance.splitCommandLine(
       params.nasshUserSshOptions).args;
   const safeSshOptions = new Set([
-    '-4', '-6', '-a', '-A', '-C', '-q', '-v', '-V',
+    '-4', '-6', '-a', '-A', '-C', '-q', '-Q', '-v', '-V',
   ]);
   userSshOptionsList.forEach((option) => {
     if (safeSshOptions.has(option)) {
