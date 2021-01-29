@@ -1,3 +1,11 @@
+# 0.39, 2021-02-01, Make URI parsing more robust.
+
+* nassh: Disable iframe usage.
+* uri: Make parsing a bit more robust.
+* l10n: Update omnibox tip.
+* popup: Add border between hosts & non-hosts.
+* l10n: Improve translator tips based on feedback.
+
 # 0.38, 2020-12-14, SFTP mount regression fix.
 
 * fsp: Fix mounting after UI rewrite.
