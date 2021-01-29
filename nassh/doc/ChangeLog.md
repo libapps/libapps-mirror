@@ -1,3 +1,10 @@
+# 0.39, 2021-02-01, Make URI parsing more robust.
+
+* nassh: Disable iframe usage.
+* uri: Make parsing a bit more robust.
+
+# 0.38, skipped
+
 # 0.37, 2020-12-07, Slim down.
 
 * Revert "nassh: add a default error handler"
