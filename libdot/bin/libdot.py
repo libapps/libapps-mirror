@@ -46,11 +46,11 @@ class ColoredFormatter(logging.Formatter):
     def __init__(self, *args, **kwargs):
         """Initialize!"""
         self._use_colors = 'NOCOLOR' not in os.environ
-        super(ColoredFormatter, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def format(self, record):
         """Formats |record| with color."""
-        msg = super(ColoredFormatter, self).format(record)
+        msg = super().format(record)
         color = self._COLOR_MAPPING.get(record.levelname)
         if self._use_colors and color:
             msg = '%s%s%s' % (color, msg, self._RESET)
@@ -97,7 +97,7 @@ class ArgumentParser(argparse.ArgumentParser):
 
     def __init__(self, short_options=True, **kwargs):
         """Initialize!"""
-        super(ArgumentParser, self).__init__(**kwargs)
+        super().__init__(**kwargs)
 
         self.add_common_arguments(short_options=short_options)
 
