@@ -12,44 +12,65 @@ import sys
 import libdot
 
 
+URI_BASE = 'https://chromium.googlesource.com/chromium/src/+/HEAD'
+
+# Where in Chromium's tree they maintain the version.
+# Look for 'node_linux64' here:
+# https://chromium.googlesource.com/chromium/src/+/HEAD/DEPS
+URI_VER = f'{URI_BASE}/DEPS'
+
 # Where in Chromium's tree they maintain their hashes.
-URI_BASE = ('https://chromium.googlesource.com/chromium/src/+/HEAD/'
-            'third_party/node')
-URI_LIN = '/'.join((URI_BASE, 'linux', 'node-linux-x64.tar.gz.sha1'))
-URI_MAC = '/'.join((URI_BASE, 'mac', 'node-darwin-x64.tar.gz.sha1'))
-URI_WIN = '/'.join((URI_BASE, 'win', 'node.exe.sha1'))
+URI_NODE_BASE = f'{URI_BASE}/third_party/node'
+URI_LIN = '/'.join((URI_NODE_BASE, 'linux', 'node-linux-x64.tar.gz.sha1'))
+URI_MAC = '/'.join((URI_NODE_BASE, 'mac', 'node-darwin-x64.tar.gz.sha1'))
+URI_WIN = '/'.join((URI_NODE_BASE, 'win', 'node.exe.sha1'))
 
-# File which records the node hashes.
-HASH_FILE = libdot.BIN_DIR / 'node'
+# File which records the node settings.
+NODE_SCRIPT = libdot.BIN_DIR / 'node'
 
 
-def update(uri, var):
-    """Update |var| in our tree with the hash data from |uri|."""
-    new_hash = fetch_data(uri)
-    logging.info('Updating %s with hash %s', var, new_hash)
-
+def update_file(var, value):
+    """Update |var| in |path| with the new |value|."""
     # Read the current file.
-    lines = HASH_FILE.read_text(encoding='utf-8').splitlines()
+    lines = NODE_SCRIPT.read_text(encoding='utf-8').splitlines()
 
     # Try to update the variable in the file.
     matcher = re.compile(r"%s = '(.*)'" % (var,))
     for i, line in enumerate(lines):
         match = matcher.match(line)
         if match:
-            old_hash = match.group(1)
-            if new_hash != old_hash:
-                logging.info('  Old hash was %s', old_hash)
-                lines[i] = f"{var} = '{new_hash}'"
+            old_value = match.group(1)
+            if value != old_value:
+                logging.info('  Old value was %s', old_value)
+                lines[i] = f"{var} = '{value}'"
                 break
             else:
-                logging.info('  Hash up-to-date already')
+                logging.info('  Value up-to-date already')
                 return
     else:
-        logging.error('Unable to locate %s setting in %s', var, HASH_FILE)
+        logging.error('Unable to locate %s setting in %s', var, NODE_SCRIPT)
         sys.exit(1)
 
     # Write out the new file content.
-    HASH_FILE.write_text('\n'.join(lines) + '\n', encoding='utf-8')
+    NODE_SCRIPT.write_text('\n'.join(lines) + '\n', encoding='utf-8')
+
+
+def update_ver(uri, var):
+    """Update |var| in our tree with the version data from |uri|."""
+    deps = fetch_data(uri)
+    m = re.search(r'chromium-nodejs/([0-9.]+)', deps)
+    if not m:
+        logging.error('Unable to find node version in DEPS:\n%s', uri)
+    new_value = m.group(1)
+    logging.info('Updating %s with version %s', var, new_value)
+    update_file(var, new_value)
+
+
+def update_hash(uri, var):
+    """Update |var| in our tree with the hash data from |uri|."""
+    new_hash = fetch_data(uri)
+    logging.info('Updating %s with hash %s', var, new_hash)
+    update_file(var, new_hash)
 
 
 def fetch_data(uri):
@@ -69,9 +90,10 @@ def main(argv):
     parser = get_parser()
     _opts = parser.parse_args(argv)
 
-    update(URI_LIN, 'NODE_LINUX_HASH')
-    update(URI_MAC, 'NODE_MAC_HASH')
-    update(URI_WIN, 'NODE_WIN_HASH')
+    update_ver(URI_VER, 'NODE_VER')
+    update_hash(URI_LIN, 'NODE_LINUX_HASH')
+    update_hash(URI_MAC, 'NODE_MAC_HASH')
+    update_hash(URI_WIN, 'NODE_WIN_HASH')
 
 
 if __name__ == '__main__':
