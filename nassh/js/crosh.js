@@ -95,6 +95,17 @@ Crosh.msg = function(name, args) {
 };
 
 /**
+ * Create a new window to the options page for customizing preferences.
+ */
+Crosh.openOptionsPage = function() {
+  if (Crosh.isWebApp()) {
+    chrome.terminalPrivate.openOptionsPage(() => {});
+  } else {
+    nassh.openOptionsPage();
+  }
+};
+
+/**
  * Static initializer called from crosh.html.
  *
  * This constructs a new Terminal instance and instructs it to run the Crosh
@@ -118,11 +129,11 @@ Crosh.init = function() {
   terminal.decorate(lib.notNull(document.querySelector('#terminal')));
   const runCrosh = function() {
     terminal.keyboard.bindings.addBinding('Ctrl+Shift+P', function() {
-      nassh.openOptionsPage();
+      Crosh.openOptionsPage();
       return hterm.Keyboard.KeyActions.CANCEL;
     });
 
-    terminal.onOpenOptionsPage = nassh.openOptionsPage;
+    terminal.onOpenOptionsPage = Crosh.openOptionsPage;
     terminal.setCursorPosition(0, 0);
     terminal.setCursorVisible(true);
     terminal.runCommandClass(Crosh, commandName, params.getAll('args[]'));
@@ -171,7 +182,7 @@ Crosh.init = function() {
        lib.f.openWindow('https://goo.gl/muppJj', '_blank');
      }},
     {name: Crosh.msg('HTERM_OPTIONS_BUTTON_LABEL'),
-     action: function() { nassh.openOptionsPage(); }},
+     action: function() { Crosh.openOptionsPage(); }},
     {name: Crosh.msg('SEND_FEEDBACK_LABEL'),
      action: nassh.sendFeedback},
   ]);
