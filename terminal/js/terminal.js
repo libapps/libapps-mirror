@@ -29,7 +29,7 @@ terminal.Command = function(argv) {
   this.io = null;
   this.keyboard_ = null;
   // We pass this ID to chrome to use for startup text which is sent before the
-  // vsh process is created and we receive an ID from openTerminalProcess.
+  // vsh process is created and we receive an ID from openVmShellProcess.
   this.id_ = Math.random().toString().substring(2);
   argv.args.push(`--startup_id=${this.id_}`);
   this.isFirstOutput = false;
@@ -99,6 +99,15 @@ terminal.addBindings = function(term) {
     terminal.openOptionsPage();
     return hterm.Keyboard.KeyActions.CANCEL;
   });
+};
+
+/**
+ * Returns true if this is running as chrome-untrusted://crosh.
+ *
+ * @return {boolean}
+ */
+terminal.isCrosh = function() {
+  return location.href.startsWith('chrome-untrusted://crosh');
 };
 
 /**
@@ -217,7 +226,7 @@ terminal.Command.prototype.run = function() {
   chrome.terminalPrivate.onProcessOutput.addListener(
       this.onProcessOutput_.bind(this));
 
-  const pidInit = (id, activeTerminalTracker) => {
+  const pidInit = (id) => {
     if (id === undefined) {
       this.io.println(
           `Launching vmshell failed: ${lib.f.lastError('')}`);
@@ -237,19 +246,23 @@ terminal.Command.prototype.run = function() {
     this.onTerminalResize_(
         this.io.terminal_.screenSize.width,
         this.io.terminal_.screenSize.height);
-
-    activeTerminalTracker.terminalId = id;
   };
 
-  TerminalActiveTracker.get().then((tracker) => {
-    const args = [...this.argv_.args];
-    if (tracker.parentTerminal &&
+  if (terminal.isCrosh()) {
+    chrome.terminalPrivate.openTerminalProcess('crosh', [], pidInit);
+  } else {
+    TerminalActiveTracker.get().then((tracker) => {
+      const args = [...this.argv_.args];
+      if (tracker.parentTerminal &&
           !args.some((arg) => arg.startsWith('--cwd='))) {
-      args.push(`--cwd=terminal_id:${tracker.parentTerminal.terminalId}`);
-    }
-    chrome.terminalPrivate.openVmshellProcess(args,
-        (id) => pidInit(id, tracker));
-  });
+        args.push(`--cwd=terminal_id:${tracker.parentTerminal.terminalId}`);
+      }
+      chrome.terminalPrivate.openVmshellProcess(args, (id) => {
+        pidInit(id);
+        tracker.terminalId = id;
+      });
+    });
+  }
 };
 
 /**
