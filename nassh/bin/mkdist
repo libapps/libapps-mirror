@@ -17,7 +17,7 @@ import shutil
 import sys
 from typing import Callable
 
-import nassh
+import nassh  # pylint: disable=wrong-import-order
 import libdot
 
 
