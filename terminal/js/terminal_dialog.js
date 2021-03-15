@@ -40,6 +40,7 @@ export class TerminalDialog extends LitElement {
                       0 16px 16px rgba(0, 0, 0, 0.24);
           color: var(--cr-secondary-text-color);
           font: 13px var(--font);
+          overflow: hidden;
           padding: 20px 20px 16px 20px;
         }
 
