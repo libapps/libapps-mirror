@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Gagal meluncurkan $1: $2"
 	},
+	"confirm_button_label": {
+		"message": "Konfirmasi"
+	},
 	"connect_button_label": {
 		"message": "Hubungkan"
 	},
@@ -125,11 +128,26 @@
 	"hterm_button_block": {
 		"message": "Blokir"
 	},
+	"hterm_button_close": {
+		"message": "Tutup"
+	},
+	"hterm_button_find": {
+		"message": "Temukan"
+	},
+	"hterm_button_next": {
+		"message": "Berikutnya"
+	},
 	"hterm_button_page_down": {
 		"message": "Halaman ke bawah"
 	},
 	"hterm_button_page_up": {
 		"message": "Halaman ke atas"
+	},
+	"hterm_button_previous": {
+		"message": "Sebelumnya"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 kecocokan"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Gagal memuat $1"
@@ -242,6 +260,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Variabel lingkungan"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Warna sorotan hasil pencarian"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Warna sorotan hasil pencarian yang dipilih"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Jenis font teks"
 	},
@@ -282,7 +306,7 @@
 		"message": "Perilaku scroll dengan tombol Page Up/Down"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Perilaku beralih tab dengan Alt+1-9"
+		"message": "Perilaku beralih tab/aplikasi dengan Alt+1-9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Perilaku jendela baru dengan Ctrl+N"
@@ -308,8 +332,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Izinkan tarik & lepas untuk menempel"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Terima encoding"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Warna batas layar"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Ukuran batas layar"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Ukuran padding layar"
@@ -352,6 +379,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Penghentian pemilihan otomatis (ke kanan)"
+	},
+	"hterm_notify_copy": {
+		"message": "Disalin"
 	},
 	"hterm_options_button_label": {
 		"message": "Opsi"
@@ -467,6 +497,12 @@
 	"hterm_pref_environment": {
 		"message": "Serangkaian awal variabel lingkungan, sebagai objek."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Warna latar belakang untuk menandai hasil pencarian."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Warna latar belakang untuk menandai hasil pencarian yang dipilih."
+	},
 	"hterm_pref_font_family": {
 		"message": "Jenis font default untuk teks terminal."
 	},
@@ -498,16 +534,16 @@
 		"message": "Mengirim prefiks ESC saat menekan tombol sambil menahan tombol Meta.\n\nMisalnya, jika diaktifkan, tindakan menekan Meta+K akan mengirim ^[k seolah-olah Anda mengetik Escape lalu k. Jika dinonaktifkan, hanya k yang akan dikirim."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Tombol tempel mouse, atau null untuk deteksi otomatis.\n\nUntuk deteksi otomatis, kami akan menggunakan tombol mouse tengah untuk platform non-X11 (termasuk Chrome OS). Di X11, kami akan menggunakan tombol mouse kanan (karena pengelola jendela asli akan melakukan aktivitas tempel melalui tombol mouse tengah).\n\n0 == tombol (utama) kiri.\n1 == tombol (auxiliary) tengah.\n2 == tombol (sekunder) kanan.\n\nOpsi ini terpisah dengan setelan tempel menggunakan klik kanan.\n\nCatatan: Opsi ini akan menangani mouse tangan kiri & kanan dengan tepat."
+		"message": "Tombol mouse untuk menempel.\n\nUntuk deteksi otomatis, kami akan menggunakan tombol tengah mouse untuk platform non-X11 (termasuk Chrome OS). Di X11, kami akan menggunakan tombol kanan mouse (karena pengelola jendela akan menangani penempelan melalui tombol tengah mouse).\n\n0 == tombol kiri (utama).\n1 == tombol tengah (tambahan).\n2 == tombol kanan (sekunder).\n\nOpsi ini tidak bergantung pada setelan tempel dengan klik kanan.\n\nCatatan: Tombol utama & sekunder akan ditangani dengan sesuai tergantung mouse untuk tangan kanan atau kiri."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Melakukan aktivitas tempel dengan mengklik kanan tombol mouse.\n\nOpsi ini berbeda dari setelan \"tombol-tempel-mouse\".\n\nCatatan: Opsi ini akan menangani mouse tangan kiri dan kanan dengan tepat."
+		"message": "Tempel dengan klik kanan tombol mouse.\n\nOpsi ini tidak bergantung pada setelan \"mouse-paste-button\".\n\nCatatan: Tombol utama & sekunder akan ditangani dengan sesuai tergantung mouse untuk tangan kanan atau kiri."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Jika benar, Page Up/Page Down akan mengontrol scroll bar terminal dan Shift+Page Up/Shift+Page Down akan dikirim ke host jarak jauh. Jika salah, Page Up/Page Down akan dikirim ke host jarak jauh dan Shift+Page Up/Shift+Page Down akan men-scroll."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Menentukan apakah Alt+1-9 diteruskan ke browser.\n\nIni berguna saat menjalankan hterm di tab browser, agar Anda tidak kehilangan pintasan keyboard \"beralih ke tab\" di Chrome. Saat tidak berjalan di tab, sebaiknya kirimkan tombol ini ke host agar dapat digunakan di vim atau emacs.\n\nJika benar, Alt+1-9 akan ditangani oleh browser. Jika salah, Alt+1-9 akan dikirimkan ke host. Jika null, deteksi otomatis berdasarkan platform browser dan jenis jendela."
+		"message": "Menentukan apakah Alt+1-9 diteruskan ke browser.\n\nIni berguna saat menjalankan hterm di tab browser, agar Anda tidak kehilangan pintasan keyboard \"beralih ke tab/aplikasi\" di Chrome. Saat tidak berjalan di tab, sebaiknya kirimkan tombol ini ke host agar dapat digunakan di vim atau emacs.\n\nJika benar (true), Alt+1-9 akan ditangani oleh browser. Jika salah (false), Alt+1-9 akan dikirimkan ke host. Jika null, deteksi otomatis akan didasarkan pada platform browser dan jenis jendela."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Menentukan apakah Ctrl+N diteruskan ke browser.\n\nJika benar, Ctrl+N akan ditangani oleh browser sebagai pintasan keyboard \"jendela baru\". Jika salah, Ctrl+N akan dikirimkan ke host."
@@ -533,8 +569,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Jika benar, teks yang ditarik lalu dilepas akan ditempel ke terminal.\nJika salah, teks yang dilepas akan diabaikan."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Menyetel encoding yang diharapkan untuk data yang diterima dari host.\nJika encoding tidak cocok, bug visual kemungkinan akan ditemukan.\n\nNilai yang valid adalah 'utf-8' dan 'raw'."
+	"hterm_pref_screen_border_color": {
+		"message": "Warna batas di sekeliling layar terminal.\n\nIni mengontrol warna batas di sekeliling layar terminal untuk membentuk garis yang mudah dilihat di tepi layar."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Ukuran batas dalam piksel di sekeliling layar terminal.\n\nIni mengontrol ukuran batas di sekeliling layar terminal untuk membentuk garis yang mudah dilihat di tepi layar."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Ukuran padding dalam piksel di sekeliling batas layar terminal.\n\nIni mengontrol ukuran batas di sekeliling layar terminal sehingga pengguna dapat menambahkan beberapa padding yang mudah dilihat ke tepi layar."
@@ -941,6 +980,9 @@
 	"relay_retry": {
 		"message": "Mencoba ulang ..."
 	},
+	"remove_label": {
+		"message": "Hapus"
+	},
 	"request_pin_prompt": {
 		"message": "Masukkan PIN untuk membuka kunci tombol $1 pada $2 ($3)' (Tersisa $4 kali percobaan):"
 	},
@@ -949,6 +991,9 @@
 	},
 	"save_label": {
 		"message": "Simpan"
+	},
+	"select_label": {
+		"message": "Pilih"
 	},
 	"send_feedback_label": {
 		"message": "Kirim Masukan"
@@ -961,6 +1006,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Argumen SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " gagal: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Memperbarui sertifikat SSH ..."
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 jam sampai habis masa berlaku"
+	},
+	"ssh_cert_check_start": {
+		"message": "Memeriksa validitas sertifikat SSH ..."
 	},
 	"stream_open_error": {
 		"message": "Gagal membuka streaming $1: $2"
@@ -1013,8 +1070,11 @@
 	"terminal_settings_about_label": {
 		"message": "Tentang"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Gambar terlalu besar"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL gambar latar. Harus diawali dengan 'http://' atau 'https://'. Biarkan kosong jika tidak ada gambar.\n\nMisalnya:\n  https://goo.gl/anedTK"
+		"message": "Pilih file gambar latar dari komputer."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Otomatis"
@@ -1039,6 +1099,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Gelap"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Senja"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Hutan"
 	},
 	"terminal_theme_light_label": {
 		"message": "Terang"
@@ -1143,7 +1209,7 @@
 		"message": "Tampilkan notifikasi di browser menggunakan hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Hubungkan dari omnibox dengan mengetik 'ssh <profile name>': https://goo.gl/V7o8ki"
+		"message": "Hubungkan dari omnibox dengan mengetik 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS dapat memasang sistem file melalui SFTP dan mencari melalui aplikasi File. Gunakan 'Pasang SFTP', bukan 'Hubungkan'."

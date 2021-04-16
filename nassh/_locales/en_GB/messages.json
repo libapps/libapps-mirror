@@ -56,6 +56,12 @@
 	"hterm_name_pref_enable_bold_as_bright": {
 		"message": "Use bright colours with bold text"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Find results highlight colour"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Find results selected highlight colour"
+	},
 	"hterm_name_pref_foreground_color": {
 		"message": "Text colour"
 	},
@@ -72,7 +78,7 @@
 		"message": "Page Up/Down key scroll behaviour"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Alt+1..9 switch tab behaviour"
+		"message": "Alt+1..9 switch tab/app behaviour"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Ctrl+N new window behaviour"
@@ -97,6 +103,9 @@
 	},
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Allow drag and drop to paste"
+	},
+	"hterm_name_pref_screen_border_color": {
+		"message": "Screen border colour"
 	},
 	"hterm_popup_inline_image": {
 		"message": "Inline images"
@@ -143,6 +152,12 @@
 	"hterm_pref_enable_csi_j_3": {
 		"message": "Whether the 'Erase saved lines' function (mode 3) of the 'Erase display' command (CSI-J) may clear the terminal scrollback buffer.\n\nEnabling this by default is safe."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "The background colour to highlight find results."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "The background colour to highlight the selected find result."
+	},
 	"hterm_pref_foreground_color": {
 		"message": "The foreground colour for text with no other colour attributes."
 	},
@@ -153,13 +168,13 @@
 		"message": "Whether common OS keyboard bindings should be respected instead of always capturing for HTerm's own use."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Mouse paste button, or null to auto-detect.\n\nFor auto-detect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the native window manager should paste via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: This will handle left- & right-handed mice correctly."
+		"message": "The mouse button to use for pasting.\n\nFor auto-detect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the window manager should handle pasting via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: The primary and secondary buttons are handled for you with left- and right-handed mice."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Paste on right mouse button clicks.\n\nThis option is independent of the 'mouse-paste-button' setting.\n\nNote: This will handle left- and right-handed mice correctly."
+		"message": "Paste on right mouse button clicks.\n\nThis option is independent of the 'mouse-paste-button' setting.\n\nNote: The primary and secondary buttons are handled for you with left- and right-handed mice."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Whether Alt+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab' keyboard shortcuts. When not running in a tab, it's better to send these keys to the host so that they can be used in Vim or Emacs.\n\nIf true, Alt+1..9 will be handled by the browser. If false, Alt+1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
+		"message": "Whether Alt+1..9 is passed to the browser.\n\nThis is handy when running hterm in a browser tab, so that you don't lose Chrome's 'switch to tab/app' keyboard shortcuts. When not running in a tab it's better to send these keys to the host so that they can be used in Vim or Emacs.\n\nIf true, Alt+1..9 will be handled by the browser. If false, Alt+1..9 will be sent to the host. If null, auto-detect based on browser platform and window type."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Whether Ctrl+N is passed to the browser.\n\nIf true, Ctrl+N will be handled by the browser as the 'new window' keyboard shortcut. If false, Ctrl+N will be sent to the host."
@@ -181,6 +196,9 @@
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "If true, drag and dropped text will paste into terminal.\nIf false, dropped text will be ignored."
+	},
+	"hterm_pref_screen_border_color": {
+		"message": "The colour for the border around the terminal screen.\n\nThis controls the colour of the border around the terminal screen to create a visible line at the edges of the screen."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "The padding size in pixels around the border of the terminal screen.\n\nThis controls the size of the border around the terminal screen so that the user can add some visible padding to the edges of the screen."
@@ -275,6 +293,15 @@
 	"ssh_argstr_label": {
 		"message": "SSH arguments"
 	},
+	"ssh_cert_check_refresh": {
+		"message": "Refreshing SSH certificate…"
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 hours until expiry"
+	},
+	"ssh_cert_check_start": {
+		"message": "Checking SSH certificate freshness…"
+	},
 	"terminal_clear_menu_label": {
 		"message": "Terminal clear"
 	},
@@ -295,6 +322,9 @@
 	},
 	"terminal_reset_menu_label": {
 		"message": "Terminal reset"
+	},
+	"terminal_settings_background_image_error_size": {
+		"message": "The image is too large"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Are you sure that you want to reset the theme to its defaults?"

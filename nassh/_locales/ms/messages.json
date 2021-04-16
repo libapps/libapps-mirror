@@ -32,6 +32,9 @@
 	"command_startup_failed": {
 		"message": "Pelancaran $1 gagal: $2"
 	},
+	"confirm_button_label": {
+		"message": "Sahkan"
+	},
 	"connect_button_label": {
 		"message": "Sambung"
 	},
@@ -104,6 +107,9 @@
 	"field_username_placeholder": {
 		"message": "nama pengguna"
 	},
+	"file_label": {
+		"message": "Fail"
+	},
 	"found_relay": {
 		"message": "Pelayan geganti dijumpai: $1"
 	},
@@ -122,11 +128,26 @@
 	"hterm_button_block": {
 		"message": "Sekat"
 	},
+	"hterm_button_close": {
+		"message": "Tutup"
+	},
+	"hterm_button_find": {
+		"message": "Cari"
+	},
+	"hterm_button_next": {
+		"message": "Seterusnya"
+	},
 	"hterm_button_page_down": {
 		"message": "Ke bahagian bawah halaman"
 	},
 	"hterm_button_page_up": {
 		"message": "Page up"
+	},
+	"hterm_button_previous": {
+		"message": "Sebelumnya"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 padanan"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "$1 gagal dimuatkan"
@@ -239,6 +260,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Pemboleh ubah persekitaran"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Warna serlahan hasil carian"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Warna serlahan yang dipilih untuk hasil carian"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Keluarga fon teks"
 	},
@@ -279,7 +306,7 @@
 		"message": "Gelagat tatal kekunci Page Up/Down"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Gelagat tukar tab Alt+1..9"
+		"message": "Gelagat tukar tab/apl Alt+1..9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Gelagat tetingkap baharu Ctrl+N"
@@ -305,8 +332,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Benarkan seret & lepas untuk menampal"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Terima pengekodan"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Warna sempadan skrin"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Saiz sempadan skrin"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Saiz pelapik skrin"
@@ -349,6 +379,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Pemberhentian pemilihan automatik (ke kanan)"
+	},
+	"hterm_notify_copy": {
+		"message": "Disalin"
 	},
 	"hterm_options_button_label": {
 		"message": "Pilihan"
@@ -464,6 +497,12 @@
 	"hterm_pref_environment": {
 		"message": "Set awal pemboleh ubah persekitaran, sebagai objek."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Warna latar belakang untuk menyerlahkan hasil carian."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Warna latar belakang untuk menyerlahkan hasil carian yang dipilih."
+	},
 	"hterm_pref_font_family": {
 		"message": "Keluarga fon lalai untuk teks terminal."
 	},
@@ -495,16 +534,16 @@
 		"message": "Hantar awalan ESC apabila menekan kekunci semasa menahan kekunci Meta.\n\nMisalnya, apabila didayakan, tindakan menekan Meta+K akan menghantar ^[k seolah-olah anda menaip Escape kemudian k. Apabila dilumpuhkan, hanya k akan dihantar."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Butang tampal tetikus atau nol untuk autokesan.\n\nUntuk autokesan, kami akan menggunakan butang tengah tetikus untuk platform bukan X11 (termasuk OS Chrome). Pada platform X11, kami akan menggunakan butang kanan tetikus (memandangkan pengurus tetingkap natif harus menampal melalui butang tengah tetikus).\n\n0 == butang kiri (utama).\n1 == butang tengah (tambahan).\n2 == butang kanan (kedua).\n\nPilihan ini bebas daripada tetapan tampal klik kanan.\n\nNota: Pilihan ini akan mengendalikan tetikus tangan kiri & kanan dengan betul."
+		"message": "Butang tetikus yang digunakan untuk membuat penampalan.\n\nUntuk autokesan, kami akan menggunakan butang tengah tetikus bagi platform bukan X11 (termasuk OS Chrome). Pada platform X11, kami akan menggunakan butang kanan tetikus (memandangkan pengurus tetingkap harus mengendalikan penampalan melalui butang tengah tetikus).\n\n0 == butang kiri (utama).\n1 == butang tengah (tambahan).\n2 == butang kanan (kedua).\n\nPilihan ini adalah berasingan daripada tetapan tampal klik kanan.\n\nNota: Butang utama & kedua dikendalikan untuk anda dengan tetikus tangan kiri & kanan."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Tampal pada klikan butang kanan tetikus.\n\nPilihan ini bebas daripada tetapan \"mouse-paste-button\".\n\nNota: Pilihan ini akan mengendalikan tetikus tangan kiri & kanan dengan betul."
+		"message": "Tampal apabila butang kanan tetikus diklik.\n\nPilihan ini bebas daripada tetapan \"mouse-paste-button\".\n\nNota: Butang utama & kedua dikendalikan untuk anda dengan tetikus tangan kiri & kanan."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Jika benar, Page up/Page Down mengawal bar tatal terminal dan Shift+Page Up/Shift+Page Down akan dihantar kepada hos jauh. Jika palsu, maka Page Up/Page Down akan dihantar kepada hos jauh dan Shift+Page Up/Shift+Page Down akan menatal."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Sama ada Alt+1..9 dilepaskan kepada penyemak imbas.\n\nPilihan ini berguna apabila menjalankan hterm dalam tab penyemak imbas, supaya anda tidak kehilangan pintasan papan kekunci \"beralih kepada tab\" Chrome. Apabila tidak dijalankan dalam tab, sebaik-baiknya kunci ini dihantar kepada hos supaya dapat digunakan dalam vim atau emacs.\n\nJika benar, Alt+1..9 akan dikendalikan oleh penyemak imbas. Jika palsu, Alt+1..9 akan dihantar kepada hos. Jika nol, autokesan berdasarkan platform penyemak imbas dan jenis tetingkap."
+		"message": "Sama ada Alt+1..9 dilepaskan kepada penyemak imbas atau tidak.\n\nPilihan ini berguna apabila menjalankan hterm dalam tab penyemak imbas, supaya anda tidak kehilangan pintasan papan kekunci \"beralih kepada tab/apl\" Chrome. Apabila tidak dijalankan dalam tab, sebaik-baiknya kunci ini dihantar kepada hos supaya dapat digunakan dalam vim atau emacs.\n\nJika benar, Alt+1..9 akan dikendalikan oleh penyemak imbas. Jika palsu, Alt+1..9 akan dihantar kepada hos. Jika nol, autokesan berdasarkan platform penyemak imbas dan jenis tetingkap."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Sama ada Ctrl+N dilepaskan kepada penyemak imbas atau tidak.\n\nJika benar, Ctrl+N akan dikendalikan oleh penyemak imbas sebagai pintasan papan kekunci \"tetingkap baharu\". Jika palsu, Ctrl+N akan dihantar kepada hos."
@@ -530,8 +569,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Jika benar, teks yang Diseret dan dilepaskan akan ditampal pada terminal.\nJika palsu, teks yang dilepaskan akan diabaikan."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Tetapkan pengekodan yang dijangkakan untuk data yang diterima daripada hos.\nJika pengekodan tidak sepadan, pepijat visual mungkin akan kelihatan.\n\nNilai sah ialah 'utf-8' dan 'raw'."
+	"hterm_pref_screen_border_color": {
+		"message": "Warna untuk sempadan di sekeliling skrin terminal.\n\nPilihan ini mengawal warna sempadan di sekeliling skrin terminal untuk membuat garis yang dapat dilihat pada pinggir skrin."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Saiz sempadan di sekeliling skrin terminal dalam piksel.\n\nPilihan ini mengawal saiz sempadan di sekeliling skrin terminal untuk membuat garis yang dapat dilihat pada pinggir skrin."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Saiz pelapik di sekeliling sempadan skrin terminal dalam piksel.\n\nPilihan ini mengawal saiz sempadan di sekeliling skrin terminal supaya pengguna dapat menambahkan beberapa pelapik yang dapat dilihat pada pinggir skrin."
@@ -896,6 +938,9 @@
 	"relay_retry": {
 		"message": "Mencuba semula…"
 	},
+	"remove_label": {
+		"message": "Alih keluar"
+	},
 	"request_pin_prompt": {
 		"message": "Masukkan PIN untuk membuka kunci kekunci $1 pada '$2 ($3)' (berbaki $4 percubaan):"
 	},
@@ -904,6 +949,9 @@
 	},
 	"save_label": {
 		"message": "Simpan"
+	},
+	"select_label": {
+		"message": "Pilih"
 	},
 	"send_feedback_label": {
 		"message": "Hantar Maklum Balas"
@@ -916,6 +964,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Argumen SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " gagal: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Memuat semula sijil SSH..."
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 jam hingga tamat tempoh"
+	},
+	"ssh_cert_check_start": {
+		"message": "Menyemak masa tamat sijil SSH..."
 	},
 	"stream_open_error": {
 		"message": "Gagal membuka strim $1: $2"
@@ -974,8 +1034,11 @@
 	"terminal_settings_about_label": {
 		"message": "Perihal"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Imej terlalu besar"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL imej latar belakang. Mesti bermula dengan 'http://' atau 'https://'. Biarkan kosong jika tiada imej.\n\nContohnya:\n  https://goo.gl/anedTK"
+		"message": "Pilih fail imej latar belakang daripada komputer anda."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Lumpuhkan"
@@ -1003,6 +1066,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Gelap"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Senja"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Hutan"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Jerebu"
@@ -1122,7 +1191,7 @@
 		"message": "Paparkan pemberitahuan dalam penyemak imbas dengan menggunakan hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Sambung daripada kotak omni dengan menaip 'ssh <profile name>': https://goo.gl/V7o8ki"
+		"message": "Sambungkan daripada kotak omni dengan menaip 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "OS Chrome boleh melekapkan sistem fail melalui SFTP dan menyemak imbas melalui apl Files. Gunakan 'Lekapan SFTP' dan bukannya 'Sambung'."

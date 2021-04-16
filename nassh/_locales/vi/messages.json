@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Không chạy được $1: $2"
 	},
+	"confirm_button_label": {
+		"message": "Xác nhận"
+	},
 	"connect_button_label": {
 		"message": "Kết nối"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "tên người dùng"
 	},
+	"file_label": {
+		"message": "Tệp"
+	},
 	"found_relay": {
 		"message": "Đã tìm thấy máy chủ chuyển tiếp: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "Chặn"
 	},
+	"hterm_button_close": {
+		"message": "Đóng"
+	},
+	"hterm_button_find": {
+		"message": "Tìm"
+	},
+	"hterm_button_next": {
+		"message": "Tiếp theo"
+	},
 	"hterm_button_page_down": {
 		"message": "Trang dưới"
 	},
 	"hterm_button_page_up": {
 		"message": "Trang trên"
+	},
+	"hterm_button_previous": {
+		"message": "Trước"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 kết quả phù hợp"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Không tải được $1"
@@ -228,7 +249,7 @@
 		"message": "Hiển thị thông báo khi sao chép nội dung"
 	},
 	"hterm_name_pref_enable_clipboard_write": {
-		"message": "Cho phép ghi vào khay nhớ tạm từ xa"
+		"message": "Cho phép ghi vào bảng nhớ tạm từ xa"
 	},
 	"hterm_name_pref_enable_csi_j_3": {
 		"message": "Cho phép xóa vùng đệm cuộn ngược (CSI-J-3)"
@@ -241,6 +262,12 @@
 	},
 	"hterm_name_pref_environment": {
 		"message": "Biến môi trường"
+	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Màu đánh dấu kết quả tìm kiếm"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Màu đánh dấu kết quả tìm kiếm đã chọn"
 	},
 	"hterm_name_pref_font_family": {
 		"message": "Bộ phông chữ cho văn bản"
@@ -282,7 +309,7 @@
 		"message": "Thao tác cuộn bằng phím Page Up/Down"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Thao tác chuyển đổi thẻ bằng tổ hợp phím Alt+1..9"
+		"message": "Thao tác chuyển đổi thẻ/ứng dụng bằng tổ hợp phím Alt+1..9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Thao tác mở cửa sổ mới bằng tổ hợp phím Ctrl+N"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Cho phép kéo và thả để dán"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Nhận dữ liệu mã hóa"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Màu của đường viền màn hình"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Kích thước của đường viền màn hình"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Kích thước khoảng đệm trên màn hình"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Tự động ngừng chọn (về bên phải)"
+	},
+	"hterm_notify_copy": {
+		"message": "Đã sao chép"
 	},
 	"hterm_options_button_label": {
 		"message": "Tùy chọn"
@@ -408,7 +441,7 @@
 		"message": "Ghi đè màu trong bảng màu mặc định.\n\nCó thể chỉ định thao tác này dưới dạng mảng hoặc đối tượng. Khi được chỉ định dưới dạng đối tượng, đối tượng đó sẽ được coi là mảng thưa, trong đó mỗi thuộc tính chính là một chỉ mục dạng số trong bảng màu.\n\nCó thể chỉ định các giá trị như hầu hết các giá trị màu CSS. Giá trị này bao gồm #RGB, #RRGGBB, rgb(...), rgba(...) và bất kỳ tên màu nào cũng nằm trong tệp rgb.txt chuẩn của X11.\n\nBạn có thể sử dụng giá trị 'null' để nêu rõ rằng không được thay đổi giá trị mặc định. Điều này sẽ hữu ích nếu muốn bỏ qua một lượng chỉ mục nhỏ khi chỉ định giá trị này dưới dạng mảng.\n\nChẳng hạn như cả hai giá trị này đặt chỉ mục màu 1 thành màu xanh lam:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
-		"message": "Tự động sao chép vùng chọn bằng chuột vào khay nhớ tạm."
+		"message": "Tự động sao chép vùng chọn bằng chuột vào bảng nhớ tạm."
 	},
 	"hterm_pref_ctrl_c_copy": {
 		"message": "Tổ hợp phím Ctrl+C sẽ sao chép nếu giá trị là true, sẽ gửi ^C đến máy chủ nếu giá trị là false.\nTổ hợp phím Ctrl+Shift+C sẽ gửi ^C đến máy chủ nếu giá trị là true, sẽ sao chép nếu giá trị là false."
@@ -450,10 +483,10 @@
 		"message": "Nếu đặt là true, hãy sử dụng các màu sáng (các màu từ 8 đến 15 trên bảng màu gồm 16 màu) cho mọi văn bản có thuộc tính về độ đậm. Nếu không, đặt là false."
 	},
 	"hterm_pref_enable_clipboard_notice": {
-		"message": "Xác định xem có hiển thị thông báo trên thiết bị đầu cuối khi máy chủ ghi vào khay nhớ tạm hay không."
+		"message": "Xác định xem có hiển thị thông báo trên thiết bị đầu cuối khi máy chủ ghi vào bảng nhớ tạm hay không."
 	},
 	"hterm_pref_enable_clipboard_write": {
-		"message": "Cho phép máy chủ từ xa ghi trực tiếp vào khay nhớ tạm của hệ thống cục bộ.\nTuyệt đối không cấp quyền đọc bất kể tùy chọn cài đặt này là gì.\n\nTùy chọn cài đặt này dùng để kiểm soát quyền truy cập vào các tính năng như OSC-52."
+		"message": "Cho phép máy chủ từ xa ghi trực tiếp vào bảng nhớ tạm của hệ thống cục bộ.\nTuyệt đối không cấp quyền đọc bất kể tùy chọn cài đặt này là gì.\n\nTùy chọn cài đặt này dùng để kiểm soát quyền truy cập vào các tính năng như OSC-52."
 	},
 	"hterm_pref_enable_csi_j_3": {
 		"message": "Xác định xem hàm Xóa các dòng đã lưu (chế độ 3) của lệnh Xóa nội dung hiển thị (CSI-J) có thể xóa vùng đệm cuộn ngược của thiết bị đầu cuối hay không.\n\nViệc bật tùy chọn này theo mặc định là một lựa chọn an toàn."
@@ -466,6 +499,12 @@
 	},
 	"hterm_pref_environment": {
 		"message": "Nhóm các biến môi trường ban đầu, dưới dạng đối tượng."
+	},
+	"hterm_pref_find_result_color": {
+		"message": "Màu nền để đánh dấu kết quả tìm kiếm."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Màu nền để đánh dấu kết quả tìm kiếm đã chọn."
 	},
 	"hterm_pref_font_family": {
 		"message": "Bộ phông chữ mặc định cho văn bản trên thiết bị đầu cuối."
@@ -498,16 +537,16 @@
 		"message": "Gửi tiền tố ESC khi nhấn một phím trong lúc giữ phím Meta.\n\nChẳng hạn, khi đặt thành bật, thao tác nhấn phím Meta+K sẽ gửi ^[k như thể bạn đã nhập phím Escape rồi đến phím k. Khi đặt thành tắt, hệ thống chỉ gửi k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Nút dán của chuột hoặc giá trị rỗng để tự động phát hiện.\n\nĐể tự động phát hiện, chúng tôi sẽ sử dụng nút chuột giữa cho các nền tảng không phải nền tảng X11 (bao gồm cả Chrome OS). Trên nền tảng X11, chúng tôi sẽ sử dụng nút chuột phải (vì trình quản lý cửa sổ gốc sẽ dán bằng nút chuột giữa).\n\n0 == nút trái (chính).\n1 == nút giữa (bổ trợ).\n2 == nút phải (phụ).\n\nTùy chọn này không phụ thuộc vào mục cài đặt cho thao tác dán bằng cách nhấp chuột phải.\n\nLưu ý: Tùy chọn này sẽ xử lý chuột trái và phải một cách chính xác."
+		"message": "Nút chuột dùng để dán.\n\nĐể tự động phát hiện, chúng tôi sẽ dùng nút chuột giữa cho các nền tảng không phải nền tảng X11 (bao gồm cả Chrome OS). Trên nền tảng X11, chúng tôi sẽ dùng nút chuột phải (vì trình quản lý cửa sổ sẽ thực hiện thao tác dán bằng nút chuột giữa).\n\n0 == nút trái (chính).\n1 == nút giữa (bổ trợ).\n2 == nút phải (phụ).\n\nTùy chọn này không phụ thuộc vào cách cài đặt thao tác dán bằng cách nhấp chuột phải.\n\nLưu ý: Các nút chuột chính và phụ sẽ thay đổi tùy theo việc bạn thuận tay trái hay phải."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Dán bằng các lần nhấp vào nút chuột phải.\n\nTùy chọn này không phụ thuộc vào tùy chọn cài đặt \"mouse-paste-button\".\n\nLưu ý: Tùy chọn này sẽ xử lý chuột trái và chuột phải một cách chính xác."
+		"message": "Dán bằng cách nhấp vào nút chuột phải.\n\nTùy chọn này không phụ thuộc vào cách cài đặt thao tác \"mouse-paste-button\".\n\nLưu ý: Các nút chuột chính và phụ sẽ thay đổi tùy theo việc bạn thuận tay trái hay phải."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Nếu đặt là true, thì phím Page Up/Page Down sẽ điều khiển thanh cuộn của thiết bị đầu cuối và thao tác nhấn tổ hợp phím Shift+Page Up/Shift+Page Down sẽ được gửi đến máy chủ từ xa. Nếu đặt là false, thì phím Page Up/Page Down được gửi đến máy chủ từ xa và tổ hợp phím Shift+Page Up/Shift+Page Down sẽ dùng để cuộn."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Xác định xem có chuyển thao tác nhấn tổ hợp phím Alt+1..9 sang trình duyệt hay không.\n\nTùy chọn này hữu ích khi chạy hterm trong thẻ trình duyệt, nhờ đó bạn sẽ không mất các phím tắt \"chuyển đổi thẻ\" trong Chrome. Khi không chạy trong một thẻ, thao tác nhấn các phím này nên được gửi đến máy chủ để dùng trong vim hoặc emacs.\n\nNếu đặt là true, thì thao tác nhấn tổ hợp phím Alt+1..9 sẽ do trình duyệt xử lý. Nếu đặt là false, thì thao tác nhấn tổ hợp phím Alt+1..9 sẽ được gửi đến máy chủ. Nếu đặt là null, thì hệ thống sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
+		"message": "Xác định xem có chuyển thao tác nhấn tổ hợp phím Alt+1..9 sang trình duyệt hay không.\n\nTùy chọn này hữu ích khi chạy hterm trong thẻ trình duyệt, nhờ đó bạn sẽ không mất các phím tắt \"chuyển đổi thẻ/ứng dụng\" trong Chrome. Khi không chạy trong một thẻ, thao tác nhấn các phím này nên được gửi đến máy chủ để dùng trong vim hoặc emacs.\n\nNếu đặt là true, thì thao tác nhấn tổ hợp phím Alt+1..9 sẽ do trình duyệt xử lý. Nếu đặt là false, thì thao tác nhấn tổ hợp phím Alt+1..9 sẽ được gửi đến máy chủ. Nếu đặt là null, thì hệ thống sẽ tự động phát hiện dựa trên nền tảng trình duyệt và loại cửa sổ."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Xác định xem có chuyển thao tác nhấn tổ hợp phím Ctrl+N sang trình duyệt hay không.\n\nNếu đặt là true, thì trình duyệt sẽ xử lý thao tác nhấn tổ hợp phím Ctrl+N như phím tắt \"thêm cửa sổ mới\". Nếu đặt là false, thì hệ thống sẽ gửi thao tác nhấn tổ hợp phím Ctrl+N đến máy chủ."
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Nếu đặt là true, hãy kéo và văn bản đã thả sẽ dán vào thiết bị đầu cuối.\nNếu đặt là false, văn bản đã thả sẽ bị bỏ qua."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Đặt chế độ mã hóa mong muốn cho dữ liệu nhận từ máy chủ.\nNếu chế độ mã hóa không khớp, các lỗi về giao diện người dùng sẽ hiển thị.\n\nCác giá trị hợp lệ là 'utf-8' và 'raw'."
+	"hterm_pref_screen_border_color": {
+		"message": "Màu của đường viền xung quanh màn hình thiết bị đầu cuối.\n\nĐây là tùy chọn điều chỉnh màu của đường viền xung quanh màn hình thiết bị đầu cuối để tạo một đường có thể nhìn thấy tại các cạnh của màn hình."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Kích thước đường viền (tính bằng pixel) xung quanh màn hình thiết bị đầu cuối.\n\nĐây là tùy chọn điều chỉnh kích thước của đường viền xung quanh màn hình thiết bị đầu cuối để tạo một đường có thể nhìn thấy tại các cạnh của màn hình."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Kích thước khoảng đệm (tính bằng pixel) xung quanh đường viền của màn hình thiết bị đầu cuối.\n\nĐây là tùy chọn điều chỉnh kích thước của đường viền xung quanh màn hình thiết bị đầu cuối để người dùng có thể thêm một khoảng đệm có thể nhìn thấy vào các cạnh của màn hình."
@@ -675,10 +717,10 @@
 		"message": "Xóa màn hình hiện tại của thiết bị đầu cuối."
 	},
 	"nasftp_cmd_clip_help": {
-		"message": "Sao chép tệp vào khay nhớ tạm (mặc định: 10 MiB đầu tiên)"
+		"message": "Sao chép tệp vào bảng nhớ tạm (mặc định: 10 MiB đầu tiên)"
 	},
 	"nasftp_cmd_clip_summary": {
-		"message": "Đã sao chép $1 byte vào khay nhớ tạm"
+		"message": "Đã sao chép $1 byte vào bảng nhớ tạm"
 	},
 	"nasftp_cmd_color_help": {
 		"message": "Bật/tắt chế độ sử dụng màu"
@@ -893,6 +935,9 @@
 	"relay_retry": {
 		"message": "Đang thử lại..."
 	},
+	"remove_label": {
+		"message": "Xóa"
+	},
 	"request_pin_prompt": {
 		"message": "Nhập mã PIN để mở khóa phím $1 trên '$2 ($3)' (còn $4 lần thử):"
 	},
@@ -901,6 +946,9 @@
 	},
 	"save_label": {
 		"message": "Lưu"
+	},
+	"select_label": {
+		"message": "Chọn"
 	},
 	"send_feedback_label": {
 		"message": "Gửi phản hồi"
@@ -916,6 +964,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Đối số SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " không thành công: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Đang làm mới chứng chỉ SSH..."
+	},
+	"ssh_cert_check_result": {
+		"message": " Còn khoảng $1 giờ nữa thì hết hạn"
+	},
+	"ssh_cert_check_start": {
+		"message": "Đang kiểm tra thời gian hết hạn của chứng chỉ SSH..."
 	},
 	"stream_open_error": {
 		"message": "Không mở được luồng $1: $2"
@@ -974,8 +1034,11 @@
 	"terminal_settings_about_label": {
 		"message": "Giới thiệu"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Hình ảnh quá lớn"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL của hình nền. Phải bắt đầu bằng 'http://' hoặc 'https://'. Để trống giá trị này nếu bạn không muốn hiển thị hình nền.\n\nVí dụ:\n  https://goo.gl/anedTK"
+		"message": "Chọn một tệp hình nền trên máy tính."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Tự động"
@@ -1006,6 +1069,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Tối"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Hoàng hôn"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Rừng"
 	},
 	"terminal_theme_light_label": {
 		"message": "Sáng"
@@ -1122,7 +1191,7 @@
 		"message": "Hiển thị thông báo trong trình duyệt bằng hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Kết nối từ thanh địa chỉ bằng cách nhập 'ssh <tên hồ sơ>': https://goo.gl/V7o8ki"
+		"message": "Kết nối từ thanh địa chỉ bằng cách nhập 'ssh<Tab><tên hồ sơ>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS có thể kết nối các hệ thống tệp thông qua SFTP và duyệt qua ứng dụng Files. Hãy sử dụng 'Kết nối SFTP' thay vì 'Kết nối'."
@@ -1134,7 +1203,7 @@
 		"message": "Hiển thị màu cho dữ liệu đầu ra/lời nhắc của bạn bằng 16 màu cơ bản và 256 màu cùng với toàn bộ màu 24 bit: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Sao chép vào khay nhớ tạm nội dung từ emacs/vim/v.v. bằng OSC-52: https://goo.gl/XSnyLo"
+		"message": "Sao chép vào bảng nhớ tạm nội dung từ emacs/vim/v.v. bằng OSC-52: https://goo.gl/XSnyLo"
 	},
 	"tip_8": {
 		"message": "Trò chuyện với người dùng hterm/Secure Shell thông qua chromium-hterm@chromium.org: https://goo.gl/RYHiK"

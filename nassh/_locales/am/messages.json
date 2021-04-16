@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "$1ን ማስጀመር አልተሳካም፦ $2"
 	},
+	"confirm_button_label": {
+		"message": "አረጋግጥ"
+	},
 	"connect_button_label": {
 		"message": "ተገናኝ"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "የተጠቃሚ ስም"
 	},
+	"file_label": {
+		"message": "ፋይል"
+	},
 	"found_relay": {
 		"message": "አቀባይ አገልጋይ ተገኝቷል፦ $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "አግድ"
 	},
+	"hterm_button_close": {
+		"message": "ዝጋ"
+	},
+	"hterm_button_find": {
+		"message": "አግኝ"
+	},
+	"hterm_button_next": {
+		"message": "ቀጣይ"
+	},
 	"hterm_button_page_down": {
 		"message": "ገጽ ወደ ታች"
 	},
 	"hterm_button_page_up": {
 		"message": "ገጽ ወደ ላይ"
+	},
+	"hterm_button_previous": {
+		"message": "ቀዳሚ"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 ተዛማጆች"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "$1ን መጫን አልተሳካም"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "የአካባቢ ተለዋዋጮች"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "የውጤቶች ማድመቂያ ቀለም ያግኙ"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "የውጤቶች የተመረጡ ማድመቂያ ቀለም ያግኙ"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "የጽሑፍ ቅርጸ-ቁምፊ ቤተሰብ"
 	},
@@ -282,7 +309,7 @@
 		"message": "ገጽ ወደ ላይ/ታች ቁልፍ መሸብለያ ባህሪ"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Alt+1..9 የመቀየሪያ ትር ባህሪ"
+		"message": "Alt+1..9 የመቀየሪያ ትር/መተግበሪያ ባህሪ"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Ctrl+N አዲስ መስኮት ባህሪ"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "ለመለጠፍ መጎተት እና ጣል ማድረግን ይፍቀዱ"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "ምስጠራን ተቀበል"
+	"hterm_name_pref_screen_border_color": {
+		"message": "የማያ ገጽ ክፈፍ ቀለም"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "የማያ ገጽ ክፈፍ መጠን"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "የማያ ገጽ ድብዳብ መጠን"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "ራስ-ሰር ምርጫ ማስቆም (ወደ ቀኝ በኩል)"
+	},
+	"hterm_notify_copy": {
+		"message": "ተቀድቷል"
 	},
 	"hterm_options_button_label": {
 		"message": "አማራጮች"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "የመጀመሪያዎቹ የአካባቢ ተለዋዋጮች ስብስብ፣ እንደ ነገር።"
 	},
+	"hterm_pref_find_result_color": {
+		"message": "የተገኙ ውጤቶችን ለማጉላት የጀርባው ቀለም።"
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "የተመረጠውን የተገኘ ውጤት ለማጉላት የጀርባው ቀለም።"
+	},
 	"hterm_pref_font_family": {
 		"message": "ለማሳያው ጽሑፍ ነባሪው የቅርጸ-ቁምፊ ቤተሰብ።"
 	},
@@ -498,16 +537,16 @@
 		"message": "የዲበ ቁልፉን ተጭነው ሳለ አንድ ቁልፍ ሲጫኑ የESC ቅድመ-ቅጥያ ይላኩ።\n\nለምሳሌ፣ ሲነቃ Meta+K መጫን ልክ k እንደተየቡ አድርጎ ^[k ይልካል። ሲሰናከል k ብቻ ነው የሚላከው።"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "የመዳፊት ለጥፍ አዝራር፣ ወይም በራስ-ለማግኘት አልቦ።\n\nበራስ-ለማግኘት X-11 ባልሆኑ የመሣሪያ ሥርዓቶች (Chrome OS ጨምሮ) ላይ የመሃል መዳፊት አዝራሩን እንጠቀማለን። በX11 ላይ የቀኝ መዳፊት አዝራሩን ነው የምንጠቀመው (ቤተኛው የመስኮት አስተዳዳሪው በመሃል መዳፊት አዝራሩ መለጠፍ ስላለበት)።\n\n0 == የግራ (ዋና) አዝራር።\n1 == የመሃል (ረዳት) አዝራር።\n2 == የቀኝ (ሁለተኛ) አዝራር።\n\nይህ አማራጭ ከቀኝ-ጠቅታ ለጥፍ ቅንብሩ ነጻ ነው።\n\nማስታወሻ፦ ይህ ባለግራ እና ባለቀኝ እጅ መዳፊትን በትክክል ይይዛል።"
+		"message": "ለመለጠፍ ሥራ ላይ የሚውለው የመዳፊት አዝራር።\n\nበራስ-ሰር ለማግኘት የመሃል መዳፊት አዝራሩን የX11 መሣሪያ ሥርዓቶች ላልሆኑ (Chrome OS ጨምሮ) እንጠቀምበታለን። X11 ላይ የቀኝ መዳፊት አዝራሩን እንጠቀማለን (የመስኮት አቀናባሪ በመሃል መዳፊት አዝራር መያዝ ስላለበት)።\n\n0 == የግራ (ዋና) አዝራር።\n1 == የመሃል (ደጋፊ) አዝራር።\n2 == የቀኝ (ሁለተኛ) አዝራር።\n\nይህ አማራጭ ከቀኝ ጠቅታ መለጠፍ ቅንብሩ የተለየ ነው።\n\nማስታወሻ፦ ዋናዎቹ እና ሁለተኛ ደረጃዎቹ አዝራሮች ከግራ እና ከቀኝ እጅ መዳፊቶች ጋር ለእርስዎ ይስተናገዳሉ።"
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "በቀኝ መዳፊት አዝራር ጠቅታዎች ላይ ይለጥፉ።\n\nይህ አማራጭ ከ«የመዳፊት-ጠቅታ-ለጥፍ» ቅንብሩ ነፃ ነው።\n\nማስታወሻ፦ ይህ ባለግራ እና ባለቀኝ እጅ መዳፊትን በትክክል ይይዛል።"
+		"message": "በቀኝ የመዳፊት አዝራር ጠቅታዎች ላይ ይለጥፉ።\n\nይህ አማራጭ ከ«የመዳፊት-ጠቅታ-ለጥፍ» ቅንብሩ ነፃ ነው።\n\nማስታወሻ፦ ዋናዎቹ እና ሁለተኛ ደረጃዎቹ አዝራሮች ከግራ እና ከቀኝ እጅ መዳፊቶች ጋር ለእርስዎ ይስተናገዳሉ።"
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "እውነት ከሆነ ገጽ ላይ/ታች የተርሚናሉን ማሸብለያ ይቆጣጠራል፣ እና Shift+ገጽ ላይ/Shift-ገጽ ታች ወደ የርቀት አስተናጋጁ ይላካሉ። ሐሰት ከሆነ ገጽ ላይ/ታች ወደ የርቀት አስተናጋጁ ይላኩና Shift+ገጽ ላይ/Shift+ገጽ ታች ያሸበልላል።"
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Meta+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ አቋራጮችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Meta-1..9 በአሳሹ ነው የሚስተናገደው። ሐሰት ከሆነ Meta-1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ አይነት ላይ የተመሠረተ ይሆናል።"
+		"message": "Alt+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ አቋራጮችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Alt+1..9 በአሳሹ ነው የሚስተናገደው። ሐሰት ከሆነ Alt+1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ አይነት ላይ የተመሠረተ ይሆናል።"
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Ctrl+N ወደ አሳሽ መተላለፍ አለመተላለፉ።\n\nእውነት ከሆነ Ctrl+N እንደ «አዲስ ትር» የቁልፍ ሰሌዳ አቋራጭ ሆኖ በአሳሹ ይስተናገዳል። ሐሰት ከሆነ Ctrl+N ወደ ተቆጣጣሪ ይላካል።"
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "እውነት ከሆነ ጎትቶ ጣል ማድረግ ተርሚናሉ ላይ ይለጥፋል።\nሐሰት ከሆነ የተጣለው ጽሑፍ ችላ ይባላል።"
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "ከአስተናጋጁ ለመጣው ውሂብ የተጠበቀው ኮድ ቅየራን ያዋቅራል።\nምሥጠራዎቹ የማይዛመዱ ከሆኑ ምስላዊ ሳንካዎቹ የመታየት ዕድላቸው ከፍ ያለ ነው። \n\nየሚሠሩ እሴቶች «utf-8» እና «raw» ናቸው።"
+	"hterm_pref_screen_border_color": {
+		"message": "በተርሚናል ማያ ገጹ ክፈፍ አካባቢ ያለ ቀለም።\n\nይህ በማያ ገጹ ጫፎች ላይ የሚታዩ መስመሮችን ለመፍጠር በተርሚናል ማያ ገጹ ክፈፍ አካባቢ ያለውን ቀለም ይቆጣጠራል።"
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "በተርሚናል ማያ ገጽ አካባቢ ያለው የክፈፍ መጠን በፒክሴሎች።\n\nይህ በማያ ገጹ ጫፎች ላይ የሚታዩ መስመሮችን ለመፍጠር በተርሚናል ማያ ገጹ ክፈፍ አካባቢ ያለውን መጠን ይቆጣጠራል።"
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "በተርሚናል ማያ ገጹ ጠርዝ ዙሪያ ላይ ያለው የድብዳብ መጠን በፒክሰል።\n\nተጠቃሚው አንዳንድ የሚታይ ድብዳብ በማያ ገጹ ጠርዞች ላይ ማከል እንዲችል ይህ በተርሚናል ማያ ገጹ ዙሪያ ያለውን መጠን ይቆጣጠራል።"
@@ -908,6 +950,9 @@
 	"relay_retry": {
 		"message": "ዳግም በመሞከር ላይ..."
 	},
+	"remove_label": {
+		"message": "አስወግድ"
+	},
 	"request_pin_prompt": {
 		"message": "ቁልፍ $1ን በ«$2 ($3)» ላይ ለመክፈት ፒን ያስገቡ ($4 ሙከራዎች ይቀራሉ)፦"
 	},
@@ -916,6 +961,9 @@
 	},
 	"save_label": {
 		"message": "አስቀምጥ"
+	},
+	"select_label": {
+		"message": "ምረጥ"
 	},
 	"send_feedback_label": {
 		"message": "ግብረመልስ ላክ"
@@ -931,6 +979,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "የSSH ነጋሪ እሴቶች"
+	},
+	"ssh_cert_check_error": {
+		"message": " አልተሳካም፦ $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "SSH የእውቅና ማረጋገጫን በማደስ ላይ..."
+	},
+	"ssh_cert_check_result": {
+		"message": " ጊዜው እስከሚያበቃ ድረስ ~$1 ሰዓታት"
+	},
+	"ssh_cert_check_start": {
+		"message": "የ SSH የእውቅና ማረጋገጫ እድሳት..."
 	},
 	"stream_open_error": {
 		"message": "ዥረት $1ን መክፈት አልተሳካም፦ $2"
@@ -989,8 +1049,11 @@
 	"terminal_settings_about_label": {
 		"message": "ስለ"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "ምስል በጣም ትልቅ ነው"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "የዳራ ምስል ዩአርኤል። በhttp:// ወይም https:// መጀመር አለበት። ምንም ምስል ላለማስቀመጥ ባዶ እንደሆነ ይተዉት።\n\nለምሳሌ፦\n  https://goo.gl/anedTK"
+		"message": "የጀርባ ምስል ፋይል ከኮምፒውተርዎ ይምረጡ።"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ራስ-ሰር"
@@ -1021,6 +1084,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "ጨለማ"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "አመሻሽ"
+	},
+	"terminal_theme_forest_label": {
+		"message": "ደን"
 	},
 	"terminal_theme_haze_label": {
 		"message": "ጭጋግ ሐምራዊ"
@@ -1140,7 +1209,7 @@
 		"message": "hterm-notifyን በመጠቀም ማሳወቂያዎችን በአሳሹ ውስጥ ይታዩ፦ https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "«ssh <profile name>»ን በመተየብ ከኦምኒቦክሱ ሆነው ይገናኙ፦ https://goo.gl/V7o8ki"
+		"message": "«Ssh <Tab> <profile name>» ን በመተየብ ከ ኦምኒቦክስ ይገናኙ፦ https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS በSFTP በኩል የፋይል ሥርዓቶችን ማፈናጠጥ እና በፋይሎች መተግበሪያው በኩል ማሰስ ይችላል። ከ«ተገናኝ» ይልቅ «SFTP ማፈናጠጥ»ን ይጠቀሙ።"
@@ -1168,6 +1237,9 @@
 	},
 	"unmount_button_label": {
 		"message": "SFTPን ንቀል"
+	},
+	"url_label": {
+		"message": "ዩአርኤል"
 	},
 	"welcome_changelog": {
 		"message": "የለውጥ ምዝግብ ማስታወሻ/ልቀት ማስታወሻዎች፦ $1"

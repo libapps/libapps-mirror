@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Kunne ikke starte $1: $2"
 	},
+	"confirm_button_label": {
+		"message": "Bekreft"
+	},
 	"connect_button_label": {
 		"message": "Koble til"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "brukernavn"
 	},
+	"file_label": {
+		"message": "Fil"
+	},
 	"found_relay": {
 		"message": "Fant denne relétjeneren: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "Blokkér"
 	},
+	"hterm_button_close": {
+		"message": "Lukk"
+	},
+	"hterm_button_find": {
+		"message": "Finn"
+	},
+	"hterm_button_next": {
+		"message": "Neste"
+	},
 	"hterm_button_page_down": {
 		"message": "Ned en side"
 	},
 	"hterm_button_page_up": {
 		"message": "Opp en side"
+	},
+	"hterm_button_previous": {
+		"message": "Forrige"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 treff"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Kunne ikke laste inn $1"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Miljøvariabler"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Farge for fremheving av søkeresultater"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Valgt farge for fremheving av søkeresultater"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Skriftfamilie"
 	},
@@ -282,7 +309,7 @@
 		"message": "Atferd for rulling med PageUp/PageDown"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Atferd for bytting av fane med Alt+1..9"
+		"message": "Atferd for bytting av fane/app med Alt+1..9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Atferd for åpning av nytt vindu med Ctrl+N"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Tillat dra-og-slipp for å lime inn"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Motta omgjøring til kode"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Fargen på skjermkantlinjen"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Størrelsen på skjermkantlinjen"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Størrelsen på skjermutfyllingen"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Automatisk stans av merking (til høyre)"
+	},
+	"hterm_notify_copy": {
+		"message": "Kopiert"
 	},
 	"hterm_options_button_label": {
 		"message": "Alternativer"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "Den innledende konfigureringen av miljøvariabler, som et objekt."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Bakgrunnsfarge for fremheving av søkeresultater."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Bakgrunnsfarge for fremheving av de valgte søkeresultatene."
+	},
 	"hterm_pref_font_family": {
 		"message": "Standard skriftfamilie for terminaltekst."
 	},
@@ -498,16 +537,16 @@
 		"message": "Sender et ESC-prefiks når du trykker på en tast samtidig som du holder inne Meta-tasten.\n\nEksempel: Når innstillingen er slått på og du trykker på Meta+K, sendes ^[k som om du hadde trykket på Escape og deretter på K-tasten. Når innstillingen er slått av, sendes bare K-tasten."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Musens innlimingsknapp (null for automatisk gjenkjenning).\n\nVed automatisk gjenkjenning bruker vi den midtre museknappen på ikke-X11-plattformer (inkludert Chrome OS). På X11 bruker vi den høyre museknappen (siden den innebygde vindusbehandleren bør lime inn med den midtre museknappen).\n\n0 == venstre (primær) knapp.\n1 == midtre (ekstra) knapp.\n2 == høyre (sekundær) knapp.\n\nDette alternativet er uavhengig av «right-click-paste»-innstillingen.\n\nMerk: Dette håndterer både høyrehendte og venstrehendte mus riktig."
+		"message": "Museknappen som skal brukes for å lime inn.\n\nVed automatisk gjenkjenning bruker vi den midtre museknappen på ikke-X11-plattformer (inkludert Chrome OS). På X11 bruker vi den høyre museknappen (siden vindusbehandleren bør lime inn med den midtre museknappen).\n\n0 == venstre (primær) knapp.\n1 == midtre (ekstra) knapp.\n2 == høyre (sekundær) knapp.\n\nDette alternativet er uavhengig av «right-click-paste»-innstillingen.\n\nMerk: Primær- og sekundærknappene håndteres for deg med både høyrehendt og venstrehendt mus."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Lim inn med høyreklikk.\n\nDette alternativet er uavhengig av «mouse-paste-button»-innstillingen.\n\nMerk: Dette håndterer både høyrehendte og venstrehendte mus riktig."
+		"message": "Lim inn ved å klikke med høyre museknapp.\n\nDette alternativet er uavhengig av «mouse-paste-button»-innstillingen.\n\nMerk: Primær- og sekundærknappene håndteres for deg med både høyrehendt og venstrehendt mus."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Hvis «true» (sant) er valgt, kontrollerer PageUp/PageDown terminalens rullefelt, og Shift+PageUp/Shift+PageDown sendes til den eksterne verten. Hvis «false» (usant) er valgt, sendes PageUp/PageDown til den eksterne verten, og Shift+PageUp/Shift+PageDown ruller."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Om Alt+1..9 sendes til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sant) er valgt, håndteres Alt+1..9 av nettleseren. Hvis «false» (usant) er valgt, sendes Alt+1..9 til verten. Hvis null er valgt, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
+		"message": "Om Alt+1..9 sendes til nettleseren.\n\nDette er nyttig ved kjøring av hterm i en nettleserfane, slik at du ikke mister «bytt til fane/app»-hurtigtastene i Chrome. Når det ikke kjøres i en fane, er det bedre å sende disse tastene til verten, slik at de kan brukes i vim eller emacs.\n\nHvis «true» (sant) gjelder, håndteres Alt+1..9 av nettleseren. Hvis «false» (usant) gjelder, sendes Alt+1..9 til verten. Hvis null gjelder, baseres automatisk gjenkjenning på nettleserplattformen og vindustypen."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Om Ctrl+N sendes til nettleseren.\n\nHvis «true» (sant) er valgt, håndterer nettleseren Ctrl+N som hurtigtasten for «nytt vindu». Hvis «false» (usant) er valgt, sendes Ctrl+N til verten."
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Hvis «true» (sant) er valgt, kan tekst limes inn i terminalen ved bruk av dra-og-slipp.\nHvis «false» (usant) er valgt, ignoreres tekst som slippes."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Angi forventet koding for data som mottas fra verten.\nHvis kodingene ikke samsvarer, er det sannsynlig at visuelle feil oppstår.\n\nGyldige verdier er «utf-8» og «raw»."
+	"hterm_pref_screen_border_color": {
+		"message": "Fargen på kantlinjen rundt terminalskjermen.\n\nDette kontrollerer fargen på kantlinjen rundt terminalskjermen for å opprette en synlig linje rundt kantene på skjermen."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Størrelsen på kantlinjen i piksler rundt terminalskjermen.\n\nDette kontrollerer størrelsen på kantlinjen rundt terminalskjermen for å opprette en synlig linje rundt kantene på skjermen."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Størrelsen på utfyllingen i piksler rundt kantlinjen på terminalskjermen.\n\nDette kontrollerer størrelsen på kantlinjen rundt terminalskjermen, slik at brukerne kan legge til synlig utfylling i kantene på skjermen."
@@ -893,6 +935,9 @@
 	"relay_retry": {
 		"message": "Prøver igjen …"
 	},
+	"remove_label": {
+		"message": "Fjern"
+	},
 	"request_pin_prompt": {
 		"message": "Skriv inn PIN-koden for å låse opp nøkkelen $1 på «$2 ($3)» ($4 forsøk igjen):"
 	},
@@ -901,6 +946,9 @@
 	},
 	"save_label": {
 		"message": "Lagre"
+	},
+	"select_label": {
+		"message": "Velg"
 	},
 	"send_feedback_label": {
 		"message": "Send tilbakemelding"
@@ -913,6 +961,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH-argumenter"
+	},
+	"ssh_cert_check_error": {
+		"message": " mislyktes: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Laster inn SSH-sertifikatet på nytt …"
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 timer til sertifikatet utløper"
+	},
+	"ssh_cert_check_start": {
+		"message": "Kontrollerer når SSH-sertifikatet utløper …"
 	},
 	"stream_open_error": {
 		"message": "Åpning av strømmen $1 mislyktes: $2"
@@ -968,8 +1028,11 @@
 	"terminal_settings_about_label": {
 		"message": "Info"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Bildet er for stort"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "Nettadressen til bakgrunnsbildet. Må begynne med «http://» eller «https://». La den stå tom hvis du ikke vil bruke noe bilde.\n\nFor eksempel:\n  https://goo.gl/anedTK"
+		"message": "Velg en bakgrunnsbildefil fra datamaskinen."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatisk"
@@ -1000,6 +1063,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Mørkt"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Skumring"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Skog"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Tåke"
@@ -1119,7 +1188,7 @@
 		"message": "Vis varsler i nettleseren med hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Koble til fra multifunksjonsfeltet ved å skrive inn «ssh <profilnavn>»: https://goo.gl/V7o8ki"
+		"message": "Koble til fra multifunksjonsfeltet ved å skrive inn «ssh<Tab><profilnavn>»: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS kan sette inn filsystemer via SFTP og bla gjennom dem via Filer-appen. Bruk «SFTP Mount» i stedet for «Connect»."
@@ -1147,6 +1216,9 @@
 	},
 	"unmount_button_label": {
 		"message": "Koble fra SFTP"
+	},
+	"url_label": {
+		"message": "Nettadresse"
 	},
 	"welcome_changelog": {
 		"message": "Endringslogg/versjonsnotater: $1"

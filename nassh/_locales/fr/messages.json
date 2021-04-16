@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Échec du lancement de la commande $1 : $2"
 	},
+	"confirm_button_label": {
+		"message": "Confirmer"
+	},
 	"connect_button_label": {
 		"message": "Se connecter"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "nom d'utilisateur"
 	},
+	"file_label": {
+		"message": "Fichier"
+	},
 	"found_relay": {
 		"message": "Serveur de relais trouvé : $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "Bloquer"
 	},
+	"hterm_button_close": {
+		"message": "Fermer"
+	},
+	"hterm_button_find": {
+		"message": "Rechercher"
+	},
+	"hterm_button_next": {
+		"message": "Suivant"
+	},
 	"hterm_button_page_down": {
 		"message": "Page suivante"
 	},
 	"hterm_button_page_up": {
 		"message": "Page précédente"
+	},
+	"hterm_button_previous": {
+		"message": "Précédent"
+	},
+	"hterm_find_result_count": {
+		"message": "Résultats : $1"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Échec du chargement de la ressource $1"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Variables d'environnement"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Couleur de mise en surbrillance des résultats de recherche"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Couleur de mise en surbrillance des résultats de recherche sélectionnés"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Famille de polices du texte"
 	},
@@ -282,7 +309,7 @@
 		"message": "Comportement des touches Page précédente/Page suivante (défilement)"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Comportement des raccourcis Alt+[1 à 9] (changer d'onglet)"
+		"message": "Comportement des raccourcis Alt+[1 à 9] (changer d'onglet ou d'application)"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Comportement du raccourci Ctrl+N (ouvrir une nouvelle fenêtre)"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Autoriser l'action Glisser-déposer pour coller"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Recevoir l'encodage"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Couleur de la bordure de l'écran"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Taille de la bordure de l'écran"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Taille de la marge intérieure de l'écran"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Arrêt de la sélection automatique (vers la droite)"
+	},
+	"hterm_notify_copy": {
+		"message": "Copié"
 	},
 	"hterm_options_button_label": {
 		"message": "Options"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "Variables d'environnement initiales, en tant qu'objet."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Couleur d'arrière-plan pour mettre en surbrillance les résultats de recherche."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Couleur d'arrière-plan pour mettre en surbrillance le résultat de recherche sélectionné."
+	},
 	"hterm_pref_font_family": {
 		"message": "Famille de polices par défaut pour le texte du terminal."
 	},
@@ -498,16 +537,16 @@
 		"message": "Permet d'envoyer un préfixe ESC lorsque l'utilisateur appuie sur une touche tout en maintenant la touche Méta enfoncée.\n\nPar exemple, si la préférence est activée, le fait d'appuyer sur Méta+K enverra ^[k comme si vous aviez appuyé sur Échap, puis k. Lorsqu'elle est désactivée, seule la touche k est envoyée."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Bouton de souris pour coller le contenu du presse-papiers ou valeur \"null\" pour activer l'autodétection.\n\nPour l'autodétection, le bouton central de la souris est utilisé pour les plates-formes autres que X11 (dont Chrome OS). Sur les plates-formes X11, c'est le bouton droit de la souris qui est utilisé (puisque le gestionnaire de fenêtre natif devrait coller le contenu du presse-papiers avec le bouton central de la souris).\n\n0 == bouton gauche (primaire)\n1 == bouton central (auxiliaire)\n2 == bouton droit (secondaire)\n\nCette option est indépendante du paramètre de collage par clic droit.\n\nRemarque : Ce paramètre fonctionnera correctement avec les souris pour droitier et pour gaucher."
+		"message": "Bouton de souris pour coller le contenu du presse-papiers.\n\nPour l'autodétection, le bouton central de la souris est utilisé sur les plates-formes autres que X11 (dont Chrome OS). Sur les plates-formes X11, c'est le bouton droit de la souris qui est utilisé (puisque le gestionnaire de fenêtre devrait coller le contenu du presse-papiers avec le bouton central de la souris).\n\n0 == bouton gauche (primaire).\n1 == bouton central (auxiliaire).\n2 == bouton droit (secondaire).\n\nCette option est indépendante du paramètre de collage par clic droit.\n\nRemarque : Ce paramètre fonctionne correctement avec les souris pour droitier et pour gaucher."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Permet de coller le contenu du presse-papiers en cas de clic sur le bouton droit de la souris.\n\nCette option est indépendante du paramètre \"mouse-paste-button\".\n\nRemarque : Ce paramètre fonctionnera correctement avec les souris pour droitier et pour gaucher."
+		"message": "Permet de coller le contenu du presse-papiers en cas de clic sur le bouton droit de la souris.\n\nCette option est indépendante du paramètre \"mouse-paste-button\".\n\nRemarque : Ce paramètre fonctionne correctement avec les souris pour droitier et pour gaucher."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Si la préférence est définie sur \"true\", les touches Page précédente/Page suivante contrôlent la barre de défilement du terminal, et les raccourcis Maj+Page précédente/Maj+Page suivante sont envoyés à l'hôte distant. Si elle est définie sur \"false\", les touches Page précédente/Page suivante sont envoyées à l'hôte distant, et les raccourcis Maj+Page précédente/Maj+Page suivante contrôlent le défilement."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Permet de spécifier si les raccourcis Alt+[1 à 9] sont transmis au navigateur.\n\nCette préférence est utile lorsque le terminal hterm est ouvert dans un onglet du navigateur, car elle permet de conserver les raccourcis clavier de Chrome pour changer d'onglet. Si le terminal n'est pas ouvert dans un onglet, il est préférable d'envoyer ces combinaisons de touches à l'hôte afin qu'elles puissent être utilisées dans vim ou emacs.\n\nSi la préférence est définie sur \"true\", les raccourcis Alt+[1 à 9] sont gérés par le navigateur. Si elle est définie sur \"false\", ils sont envoyés à l'hôte. La valeur \"null\" déclenche la détection automatique, en fonction de la plate-forme de navigateur et du type de fenêtre."
+		"message": "Permet de spécifier si les raccourcis Alt+[1 à 9] sont transmis au navigateur.\n\nCette préférence est utile lorsque le terminal hterm est ouvert dans un onglet du navigateur, car elle permet de conserver les raccourcis clavier de Chrome pour changer d'onglet ou d'application. Si le terminal n'est pas ouvert dans un onglet, il est préférable d'envoyer ces combinaisons de touches à l'hôte afin qu'elles puissent être utilisées dans vim ou emacs.\n\nSi la préférence est définie sur \"true\", les raccourcis Alt+[1 à 9] sont gérés par le navigateur. Si elle est définie sur \"false\", ils sont envoyés à l'hôte. La valeur \"null\" déclenche la détection automatique, en fonction de la plate-forme de navigateur et du type de fenêtre."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Permet de spécifier si le raccourci Ctrl+N est transmis au navigateur.\n\nSi la préférence est définie sur \"true\", le raccourci Ctrl+N est traité par le navigateur comme un raccourci clavier permettant d'ouvrir une nouvelle fenêtre. Si elle est définie sur \"false\", le raccourci Ctrl+N est envoyé à l'hôte."
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Si la préférence est définie sur \"true\", le texte glissé-déposé sera collé dans le terminal.\nSi elle est définie sur \"false\", ce texte sera ignoré."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Permet d'identifier l'encodage des données envoyées par l'hôte.\nSi les encodages ne correspondent pas, des bugs visuels sont susceptibles de survenir.\n\nLes valeurs acceptées sont \"utf-8\" et \"raw\"."
+	"hterm_pref_screen_border_color": {
+		"message": "Couleur de la bordure autour de l'écran du terminal.\n\nCette préférence permet de contrôler la couleur de la bordure autour de l'écran du terminal afin de créer une ligne visible sur les bords de l'écran."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Taille en pixels de la bordure autour de l'écran du terminal.\n\nCette préférence permet de contrôler la taille de la bordure autour de l'écran du terminal afin de créer une ligne visible sur les bords de l'écran."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Taille en pixels de la marge intérieure autour de la bordure de l'écran du terminal.\n\nCette préférence permet de contrôler la taille de la bordure autour de l'écran du terminal afin que l'utilisateur puisse ajouter une marge intérieure visible aux bords de l'écran."
@@ -908,6 +950,9 @@
 	"relay_retry": {
 		"message": "Nouvelle tentative…"
 	},
+	"remove_label": {
+		"message": "Supprimer"
+	},
 	"request_pin_prompt": {
 		"message": "Saisissez le code pour déverrouiller la clé $1 sur \"$2 ($3)\" ($4 essais restants) :"
 	},
@@ -916,6 +961,9 @@
 	},
 	"save_label": {
 		"message": "Enregistrer"
+	},
+	"select_label": {
+		"message": "Sélectionner"
 	},
 	"send_feedback_label": {
 		"message": "Envoyer des commentaires"
@@ -928,6 +976,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Arguments SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " Échec : $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Actualisation du certificat SSH…"
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 heures restantes avant expiration"
+	},
+	"ssh_cert_check_start": {
+		"message": "Vérification de l'ancienneté du certificat SSH…"
 	},
 	"stream_open_error": {
 		"message": "Échec de l'ouverture du flux $1 : $2"
@@ -980,8 +1040,11 @@
 	"terminal_settings_about_label": {
 		"message": "À propos"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Image trop volumineuse"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL de l'image de fond. Elle doit commencer par \"http://\" ou \"https://\". N'indiquez rien s'il n'y a pas d'image.\n\nPar exemple :\n  https://goo.gl/anedTK"
+		"message": "Sélectionnez un fichier d'image de fond sur votre ordinateur."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Désactiver"
@@ -1009,6 +1072,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Sombre"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Crépuscule"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Forêt"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Nuance de violet"
@@ -1128,7 +1197,7 @@
 		"message": "Affichez les notifications dans le navigateur à l'aide de la commande \"hterm-notify\" (https://goo.gl/ZNxGdF)"
 	},
 	"tip_3": {
-		"message": "Connectez-vous à partir de l'omnibox en saisissant \"ssh <nom de profil>\" (https://goo.gl/V7o8ki)"
+		"message": "Connectez-vous à partir de l'omnibox en saisissant \"ssh<Tab><nom de profil>\" (https://goo.gl/V7o8ki)"
 	},
 	"tip_4": {
 		"message": "Chrome OS peut installer des systèmes de fichiers via SFTP et les parcourir via l'application Files. Utilisez \"Installation SFTP\" au lieu de \"Se connecter\"."

@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "$1 を起動できませんでした: $2"
 	},
+	"confirm_button_label": {
+		"message": "確認"
+	},
 	"connect_button_label": {
 		"message": "接続"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "ユーザー名"
 	},
+	"file_label": {
+		"message": "ファイル"
+	},
 	"found_relay": {
 		"message": "中継サーバーが見つかりました: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "ブロック"
 	},
+	"hterm_button_close": {
+		"message": "閉じる"
+	},
+	"hterm_button_find": {
+		"message": "検索"
+	},
+	"hterm_button_next": {
+		"message": "次へ"
+	},
 	"hterm_button_page_down": {
 		"message": "1 ページ分下に移動する"
 	},
 	"hterm_button_page_up": {
 		"message": "1 ページ分上に移動する"
+	},
+	"hterm_button_previous": {
+		"message": "前へ"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 件見つかりました"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "$1 を読み込めませんでした"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "環境変数"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "検索結果のハイライトの色"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "検索結果を選択したハイライトの色"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "テキストのフォント ファミリー"
 	},
@@ -282,7 +309,7 @@
 		"message": "Page Up / Down キーのスクロールの動作"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Alt+1～9 キーのタブの切り替えの動作"
+		"message": "Alt+1～9 キーのタブ / アプリの切り替えの動作"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Ctrl+N キーの新しいウィンドウを開く動作"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "ドラッグ＆ドロップによる貼り付けを許可する"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "エンコードを受信する"
+	"hterm_name_pref_screen_border_color": {
+		"message": "画面の枠の色"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "画面の枠線のサイズ"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "画面のパディング サイズ"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "自動選択停止（右方向）"
+	},
+	"hterm_notify_copy": {
+		"message": "コピーしました"
 	},
 	"hterm_options_button_label": {
 		"message": "オプション"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "オブジェクトとしての環境変数の初期セットです。"
 	},
+	"hterm_pref_find_result_color": {
+		"message": "検索結果のハイライト表示の背景色です。"
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "選択した検索結果のハイライト表示の背景色です。"
+	},
 	"hterm_pref_font_family": {
 		"message": "ターミナルのテキストに使用されるデフォルトのフォント ファミリーです。"
 	},
@@ -498,16 +537,16 @@
 		"message": "Meta キーを押しながらキーを押したときに ESC プレフィックスを送信します。\n\nたとえば、有効にした場合は Meta+K キーを押すと、Esc キー、k キーの順に入力したものとして ^[k を送信します。無効にした場合は k のみ送信します。"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "貼り付けに使用するマウスボタンを指定します。自動検出する場合は null を指定します。\n\n自動検出の場合、X11 以外のプラットフォーム（Chrome OS など）ではマウスの中央ボタンを使用し、X11 ではマウスの右ボタンを使用します（ネイティブのウィンドウ マネージャではマウスの中央ボタンを使って貼り付けるため）。\n\n0 == 左（メイン）ボタン\n1 == 中央（予備）ボタン\n2 == 右（補助）ボタン\n\nこのオプションは、右クリックによる貼り付けの設定に関係なく動作します。\n\n注: 左利き用マウス、右利き用マウスに応じて適切な処理が行われます。"
+		"message": "貼り付けに使用するマウスボタンを指定します。\n\n自動検出の場合、X11 以外のプラットフォーム（Chrome OS など）ではマウスの中央ボタンを使用します。X11 ではマウスの右ボタンを使用します（ウィンドウ マネージャではマウスの中央ボタンを使って貼り付けを処理するため）。\n\n0 == 左（メイン）ボタン\n1 == 中央（予備）ボタン\n2 == 右（補助）ボタン\n\nこのオプションは、右クリックによる貼り付けの設定に関係なく動作します。\n\n注: メインと補助のボタンは、左利き用マウス、右利き用マウスに応じて適切な処理が行われます。"
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "マウスの右ボタンのクリックで貼り付けを行います。\n\nこのオプションは、mouse-paste-button の設定に関係なく動作します。\n\n注: 左利き用マウス、右利き用マウスに応じて適切な処理が行われます。"
+		"message": "マウスの右ボタンのクリックで貼り付けます。\n\nこのオプションは、「mouse-paste-button」の設定に関係なく動作します。\n\n注: メインと補助のボタンは、左利き用マウス、右利き用マウスに応じて適切な処理が行われます。"
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "true の場合は、PageUp / PageDown キーでターミナルのスクロールバーを制御し、Shift+PageUp / Shift+PageDown キーをリモートホストに送信します。false の場合は、PageUp / PageDown キーをリモートホストに送信し、Shift+PageUp / Shift+PageDown キーでスクロールします。"
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Alt+1～9 キーをブラウザに渡すかどうかを設定します。\n\nhterm をブラウザのタブで実行している場合は、これらのキーをブラウザに渡すよう設定すると、Chrome の「タブを切り替え」キーボード ショートカットを引き続き使用できるので便利です。hterm をタブで実行していない場合は、これらのキーをホストに送信して、vim や emacs で使用できるようにすることをおすすめします。\n\ntrue の場合、Alt+1～9 キーはブラウザによって処理されます。false の場合、Alt+1～9 キーはホストに送信されます。null の場合は、ブラウザのプラットフォームやウィンドウの種類に基づく自動検出が行われます。"
+		"message": "Alt+1～9 キーをブラウザに渡すかどうかを設定します。\n\nhterm をブラウザのタブで実行している場合は、これらのキーをブラウザに渡すよう設定すると、Chrome の「タブ / アプリを切り替え」キーボード ショートカットを引き続き使用できるので便利です。hterm をタブで実行していない場合は、これらのキーをホストに送信して、vim や emacs で使用できるようにすることをおすすめします。\n\ntrue の場合、Alt+1～9 キーはブラウザによって処理されます。false の場合、Alt+1～9 キーはホストに送信されます。null の場合は、ブラウザのプラットフォームやウィンドウの種類に基づく自動検出が行われます。"
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Ctrl+N キーをブラウザに渡すかどうかを設定します。\n\ntrue の場合、Ctrl+N キーはブラウザで「新しいウィンドウ」のキーボード ショートカットとして扱われます。false の場合、Ctrl+N キーはホストに送信されます。"
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "true の場合、ドラッグ＆ドロップしたテキストをターミナルに貼り付けます。\nfalse の場合、ドロップしたテキストは無視されます。"
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "ホストからの受信データに対して想定するエンコード方法を設定します。\nエンコード方法が一致しない場合、視覚的なバグが生じる可能性があります。\n\n有効な値は「utf-8」と「raw」（エンコードなし）です。"
+	"hterm_pref_screen_border_color": {
+		"message": "ターミナル画面の周囲の枠の色です。\n\nターミナル画面の周囲の境界線がはっきり見えるように枠の色を指定できます。"
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "ターミナル画面の枠線のサイズ（ピクセル単位）です。\n\nターミナル画面の周囲の境界線がはっきり見えるように枠線のサイズを指定できます。"
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "ターミナル画面の枠のパディング サイズをピクセル単位で指定します。\n\nターミナル画面の周囲の枠のサイズで、ユーザーはこの設定を使用して画面の端にパディングを追加できます。"
@@ -893,6 +935,9 @@
 	"relay_retry": {
 		"message": "再試行しています..."
 	},
+	"remove_label": {
+		"message": "削除"
+	},
 	"request_pin_prompt": {
 		"message": "「$2」（$3）でキー「$1」のロックを解除する PIN を入力してください（あと $4 回入力できます）:"
 	},
@@ -901,6 +946,9 @@
 	},
 	"save_label": {
 		"message": "保存"
+	},
+	"select_label": {
+		"message": "選択"
 	},
 	"send_feedback_label": {
 		"message": "フィードバックを送信"
@@ -913,6 +961,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH 引数"
+	},
+	"ssh_cert_check_error": {
+		"message": " 失敗: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "SSH 証明書を更新しています..."
+	},
+	"ssh_cert_check_result": {
+		"message": " $1 時間以内に有効期限が切れます"
+	},
+	"ssh_cert_check_start": {
+		"message": "SSH 証明書の有効期限をチェックしています..."
 	},
 	"stream_open_error": {
 		"message": "ストリーム $1 を開けませんでした: $2"
@@ -971,8 +1031,11 @@
 	"terminal_settings_about_label": {
 		"message": "アプリ情報"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "画像が大きすぎます"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "背景画像の URLです。「http://」または「https://」から入力する必要があります。画像を使用しない場合は空白のままにします。\n\n例:\n  https://goo.gl/anedTK"
+		"message": "パソコンから背景画像のファイルを選択してください。"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "自動"
@@ -1003,6 +1066,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "ダーク"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "夕暮れ"
+	},
+	"terminal_theme_forest_label": {
+		"message": "森"
 	},
 	"terminal_theme_haze_label": {
 		"message": "もや"
@@ -1122,7 +1191,7 @@
 		"message": "ブラウザに通知を表示するには hterm-notify を使用します: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "アドレスバーから接続するには「ssh <プロファイル名>」と入力します: https://goo.gl/V7o8ki"
+		"message": "アドレスバーから接続するには「ssh<Tab><プロファイル名>」と入力します: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS では、ファイル システムを SFTP 経由でマウントし、ファイルアプリを使って閲覧できます。この方法を使用する場合は、[接続] ではなく [SFTP マウント] を使用してください。"

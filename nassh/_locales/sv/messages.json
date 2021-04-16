@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Det gick inte att starta $1: $2"
 	},
+	"confirm_button_label": {
+		"message": "Bekräfta"
+	},
 	"connect_button_label": {
 		"message": "Anslut"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "användarnamn"
 	},
+	"file_label": {
+		"message": "Fil"
+	},
 	"found_relay": {
 		"message": "Hittad reläserver: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "Blockera"
 	},
+	"hterm_button_close": {
+		"message": "Stäng"
+	},
+	"hterm_button_find": {
+		"message": "Sök"
+	},
+	"hterm_button_next": {
+		"message": "Nästa"
+	},
 	"hterm_button_page_down": {
 		"message": "Nedåt en sida"
 	},
 	"hterm_button_page_up": {
 		"message": "En sida upp"
+	},
+	"hterm_button_previous": {
+		"message": "Föregående"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 träffar"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Det gick inte att läsa in $1"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Miljövariabler"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Markeringsfärg för sökresultat"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Markeringsfärg för valt sökresultat"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Textens teckensnittsfamilj"
 	},
@@ -282,7 +309,7 @@
 		"message": "Inställning för scrollning med Page Up/Page Down"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Inställning för Alt+1–9 (byta flik)"
+		"message": "Inställning för Alt+1–9 (byta flik/tabb)"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Inställning för Ctrl+N (nytt fönster)"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Tillåt klistra in genom att dra och släppa"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Ta emot kodning"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Färg på skärmens kantlinje"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Storlek på skärmens kantlinje"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Skärmens utfyllnadsstorlek"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Automatiskt markeringsstopp (till höger)"
+	},
+	"hterm_notify_copy": {
+		"message": "Kopierat"
 	},
 	"hterm_options_button_label": {
 		"message": "Alternativ"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "Den ursprungliga uppsättningen miljövariabler som ett objekt."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Bakgrundsfärg som markerar var sökresultaten är."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Bakgrundsfärg som markerar det sökresultat som just nu är valt."
+	},
 	"hterm_pref_font_family": {
 		"message": "Teckensnittsfamilj som ska användas som standard för text i terminalfönstret."
 	},
@@ -498,16 +537,16 @@
 		"message": "Skicka ett ESC-prefix när en tangent trycks ned medan Meta-tangenten är nedtryckt.\n\nNär detta är aktiverat skickas till exempel ^[k när du trycker på Meta+K, som om du hade tryckt på Esc följt av k. När detta är inaktiverat skickas bara k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Klistra in med musknappen eller lämna tomt om automatisk identifiering ska användas.\n\nMed automatisk identifiering används musens mittknapp på plattformar som inte har X11 som fönsterhanterare (inklusive Chrome OS). Med X11 används höger musknapp (eftersom musens mittknapp normalt används av systemets fönsterhanterare för att klistra in).\n\n0 == vänster musknapp (primär).\n1 == mittknappen (reserv).\n2 == höger musknapp (sekundär).\n\nAlternativet är oberoende av inställningen för att klistra in med höger musknapp.\n\nObs! Inställningen hanterar vänster- och högerhänta datormöss korrekt."
+		"message": "Den musknapp som ska användas för att klistra in.\n\nMed automatisk identifiering används musens mittknapp på plattformar som inte har X11 som fönsterhanterare (inklusive Chrome OS). Med X11 används höger musknapp (eftersom inklistring med musens mittknapp normalt sköts av fönsterhanteraren).\n\n0 == vänster musknapp (primär).\n1 == mittknappen (reserv).\n2 == höger musknapp (sekundär).\n\nAlternativet är oberoende av inställningen för att klistra in med höger musknapp.\n\nObs! De primära och sekundära knapparna anpassar sig automatiskt efter om du har en vänster- eller högerhänt mus."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Klistra in genom att klicka på höger musknapp.\n\nAlternativet är oberoende av inställningen mouse-paste-button.\n\nObs! Inställningen hanterar vänster- och högerhänta datormöss korrekt."
+		"message": "Klistra in genom att klicka på höger musknapp.\n\nAlternativet är oberoende av inställningen mouse-paste-button.\n\nObs! De primära och sekundära knapparna anpassar sig automatiskt efter om du har en vänster- eller högerhänt mus."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "När detta är inställt på sant styr tangenterna Pgup/Pgdn (Page up/Page down) terminalens rullningslist och tangentsekvenserna Skift + Pgup/Pgdn skickas till den virtuella terminalen. Med inställningen falskt skickas Pgup/Pgdn till fjärrvärden och Skift + Pgup/Pgdn används för att scrolla."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Om Alt+1–9 ska skickas till webbläsaren eller inte.\n\nDetta är praktiskt om du kör hterm på en webbläsarflik så att du kan fortsätta att använda Chromes kortkommandon för att byta flik. Om hterm inte körs på en flik är det bättre att skicka tangenttryckningarna till värden, så de kan användas i vim eller emacs.\n\nNär detta är inställt på sant hanteras Alt+1–9 av webbläsaren. Med inställningen falskt skickas Alt+1–9 till värden. Om inställningen lämnas utan värde används automatisk identifiering utifrån webbläsarplattform och fönstertyp."
+		"message": "Om Alt+1–9 ska skickas till webbläsaren eller inte.\n\nDetta är praktiskt om du kör hterm på en webbläsarflik så att du kan fortsätta att använda Chromes kortkommandon för att byta flik/app. Om hterm inte körs på en flik är det bättre att skicka tangenttryckningarna till värden, så de kan användas i vim eller emacs.\n\nNär detta är inställt på sant hanteras Alt+1–9 av webbläsaren. Med inställningen falskt skickas Alt+1–9 till värden. Om inställningen lämnas utan värde används automatisk identifiering utifrån webbläsarplattform och fönstertyp."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Om Ctrl+N ska skickas till webbläsaren eller inte.\n\nNär detta är inställt på sant hanteras Ctrl+N av webbläsaren som kortkommandot för nytt fönster. När det är inställt på falskt skickas Ctrl+N till värden."
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "När detta är inställt på sant klistras text in i terminalen när du drar och släpper.\nMed inställningen falskt ignoreras texten som släpps."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Ange den förväntade teckenkodningen för data från värden.Om teckenkodningarna inte stämmer överens blir det sannolikt problem med visningen av vissa tecken.\n\nDe giltiga värdena är utf-8 och raw."
+	"hterm_pref_screen_border_color": {
+		"message": "Färgen på terminalskärmens kantlinje.\n\nDetta styr färgen på kanten runt terminalens skärm så att en ram syns runt den."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Storlek i pixlar på terminalskärmens kantlinje.\n\nDetta styr storleken på kanten runt terminalens skärm så att en ram syns runt den."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Utfyllnadsstorlek i pixlar för terminalskärmens kant.\n\nDetta styr kantstorleken för terminalskärmen så att användare kan lägga till synlig utfyllnad i skärmens kanter."
@@ -893,6 +935,9 @@
 	"relay_retry": {
 		"message": "Försöker igen …"
 	},
+	"remove_label": {
+		"message": "Ta bort"
+	},
 	"request_pin_prompt": {
 		"message": "Ange pinkoden för att få åtkomst till $1 i $2 ($3) ($4 försök återstår):"
 	},
@@ -901,6 +946,9 @@
 	},
 	"save_label": {
 		"message": "Spara"
+	},
+	"select_label": {
+		"message": "Välj"
 	},
 	"send_feedback_label": {
 		"message": "Skicka feedback"
@@ -913,6 +961,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH-argument"
+	},
+	"ssh_cert_check_error": {
+		"message": " misslyckades: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Läser in SSH-certifikat på nytt …"
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 timmar till giltigheten löper ut"
+	},
+	"ssh_cert_check_start": {
+		"message": "Kontrollerar giltighet för SSH-certifikat …"
 	},
 	"stream_open_error": {
 		"message": "Det gick inte att öppna strömmen $1: $2"
@@ -971,8 +1031,11 @@
 	"terminal_settings_about_label": {
 		"message": "Om"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Bilden är för stor"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "Webbadress för bakgrundsbild. Måste börja med http:// eller https://. En tom sträng ger ingen bild.\n\nExempel:\n  https://goo.gl/anedTK"
+		"message": "Välj en fil på datorn som bakgrundsbild."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Inaktivera"
@@ -1000,6 +1063,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Mörkt"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Skymning"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Skog"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Purpurdimma"
@@ -1116,7 +1185,7 @@
 		"message": "Du kan visa aviseringar i webbläsaen med hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Du kan ansluta från adressfältet genom att skriva ssh <profile name>: https://goo.gl/V7o8ki"
+		"message": "Du kan ansluta från adressfältet genom att skriva ssh<Tab><profile name>: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "I Chrome OS kan du montera filsystem via SFTP och bläddra via appen Filer. Använd SFTP-montering i stället för Anslut."
@@ -1144,6 +1213,9 @@
 	},
 	"unmount_button_label": {
 		"message": "Avmontera SFTP"
+	},
+	"url_label": {
+		"message": "Webbadress"
 	},
 	"welcome_changelog": {
 		"message": "ChangeLog/viktig information: $1"

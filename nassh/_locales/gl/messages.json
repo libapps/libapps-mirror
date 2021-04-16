@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Produciuse un erro ao lanzar $1: $2"
 	},
+	"confirm_button_label": {
+		"message": "Confirmar"
+	},
 	"connect_button_label": {
 		"message": "Conectar"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "nome de usuario"
 	},
+	"file_label": {
+		"message": "Ficheiro"
+	},
 	"found_relay": {
 		"message": "Atopouse o servidor de retransmisión: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "Bloquear"
 	},
+	"hterm_button_close": {
+		"message": "Pechar"
+	},
+	"hterm_button_find": {
+		"message": "Buscar"
+	},
+	"hterm_button_next": {
+		"message": "Seguinte"
+	},
 	"hterm_button_page_down": {
 		"message": "Avanzar páxina"
 	},
 	"hterm_button_page_up": {
 		"message": "Retroceder páxina"
+	},
+	"hterm_button_previous": {
+		"message": "Anterior"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 resultados"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Produciuse un erro durante a carga de $1"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Variables do ambiente"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Cor coa que se destacan os resultados atopados"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Cor coa que se destacan os resultados atopados seleccionados"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Familia de tipos de letra"
 	},
@@ -282,7 +309,7 @@
 		"message": "Comportamento de desprazamento das teclas Avanzar páxina e Retroceder páxina"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Comportamento de cambio de pestana coa combinación Alt+teclas do 1 ao 9"
+		"message": "Comportamento do cambio de pestana ou aplicación ao usar a combinación Alt+teclas do 1 ao 9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Comportamento de nova ventá con Control+N"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Permitir arrastrar e soltar para pegar contido"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Recibir codificación"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Cor do bordo da pantalla"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Tamaño do bordo da pantalla"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Tamaño de recheo da pantalla"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Deter a selección automática (á dereita)"
+	},
+	"hterm_notify_copy": {
+		"message": "Copiouse o texto"
 	},
 	"hterm_options_button_label": {
 		"message": "Opcións"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "O conxunto inicial de variables do ambiente (como obxecto)."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "A cor de fondo coa que se destacan os resultados atopados."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "A cor de fondo coa que se destaca o resultado atopado seleccionado."
+	},
 	"hterm_pref_font_family": {
 		"message": "Familia de tipos de letra predeterminada para o texto do terminal."
 	},
@@ -497,20 +536,23 @@
 	"hterm_pref_meta_sends_escape": {
 		"message": "Enviar un prefixo ESC ao premer unha tecla mentres se mantén premida a tecla Meta.\n\nPor exemplo, cando se activa, ao premer Meta+K enviarase ^[k como se premeses Escape e despois k. Cando se desactiva, só se enviará k."
 	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "O botón do rato que se utiliza para pegar contido.\n\nPara a detección automática, débese usar o botón central do rato nas plataformas que non sexan X11 (incluídas as plataformas Chrome OS). Nas plataformas X11 débese usar o botón dereito do rato, xa que o xestor de ventás debe utilizar o botón central do rato para pegar contido.\n\n0 == botón esquerdo (principal).\n1 == botón central (auxiliar).\n2 == botón dereito (secundario).\n\nEste valor é independente da opción de configuración para pegar contido co botón dereito.\n\nNota: Os botóns principal e secundario xestiónanse mediante ratos para usuarios destros e zurdos."
+	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Pegar facendo clic co botón dereito do rato.\n\nEsta opción é independente da opción de configuración \"mouse-paste-button\".\n\nNota: Esta preferencia controla os ratos para destros e zurdos correctamente."
+		"message": "Pegar facendo clic co botón dereito do rato.\n\nEsta opción é independente da opción de configuración \"mouse-paste-button\".\n\nNota: Os botóns principal e secundario xestiónanse mediante ratos para usuarios destros e zurdos."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Se se define como true (verdadeiro), as teclas Avanzar páxina e Retroceder páxina controlarán a barra de desprazamento do terminal e as combinacións Maiúsculas+Avanzar páxina ou Retroceder páxina enviaranse ao host remoto. Se se define como false (falso), as teclas Avanzar páxina e Retroceder páxina enviaranse ao host remoto e as combinacións Maiúsculas+Avanzar páxina ou Retroceder páxina controlarán o desprazamento."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Define se a combinación Alt+teclas do 1 ao 9 se transfire ao navegador.\n\nÉ útil ao executar hterm nunha pestana do navegador. Deste xeito non perderás os atallos de teclado para cambiar de pestana de Chrome. Cando non se estea executando nunha pestana, é mellor enviar estas teclas ao host para que se poidan usar en vim ou emacs.\n\nSe se define como true (verdadeiro), o navegador controlará a combinación Alt+teclas do 1 ao 9. Se se define como false (falso), enviarase ao host a combinación Alt+teclas do 1 ao 9. Se se define como null (nulo), activarase a detección automática segundo a plataforma do navegador e o tipo de ventá."
+		"message": "Define se a combinación Alt+teclas do 1 ao 9 se transfire ao navegador.\n\nÉ útil ao executar hterm nunha pestana do navegador. Deste xeito, non perderás os atallos de teclado de Chrome para cambiar de pestana ou aplicación. Cando non se estea executando nunha pestana, é mellor enviar estas teclas ao host para que se poidan usar en vim ou emacs.\n\nSe se define como True (verdadeiro), o navegador controlará a combinación Alt+teclas do 1 ao 9. Se se define como False (falso), enviarase ao host a combinación Alt+teclas do 1 ao 9. Se se define como Null (nulo), activarase a detección automática segundo a plataforma do navegador e o tipo de ventá."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Define se Control+N se transfire ao navegador.\n\nSe se define como true (verdadeiro), o navegador controlará Control+N como o atallo de teclado \"nova ventá\". Se se define como false (falso), enviarase ao host Control+N."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Define se a combinación Control+teclas do 1 ao 9 se transfire ao navegador.\n\nÉ útil ao executar hterm nunha pestana do navegador. Deste xeito non perderás os atallos de teclado para cambiar de pestana de Chrome. Cando non se estea executando nunha pestana, é mellor enviar estas teclas ao host para que se poidan usar en vim ou emacs.\n\nSe se define como true (verdadeiro), o navegador controlará a combinación Control+teclas do 1 ao 9. Se se define como false (falso), enviarase ao host a combinación Control+teclas do 1 ao 9. Se se define como null (nulo), activarase a detección automática segundo a plataforma do navegador e o tipo de ventá."
+		"message": "Define se a combinación Control+teclas do 1 ao 9 se transfire ao navegador.\n\nÉ útil ao executar hterm nunha pestana do navegador. Deste xeito non perderás os atallos de teclado de Chrome para cambiar á pestana. Cando non se estea executando nunha pestana, é mellor enviar estas teclas ao host para que se poidan usar en vim ou emacs.\n\nSe se define como true (verdadeiro), o navegador controlará a combinación Control+teclas do 1 ao 9. Se se define como false (falso), enviarase ao host a combinación Control+teclas do 1 ao 9. Se se define como null (nulo), activarase a detección automática segundo a plataforma do navegador e o tipo de ventá."
 	},
 	"hterm_pref_pass_ctrl_t": {
 		"message": "Define se Control+T se transfire ao navegador.\n\nSe se establece como true (verdadeiro), o navegador controlará Control+T como o atallo de teclado \"nova pestana\". Se se define como false (falso), enviarase ao host Control+T."
@@ -522,7 +564,7 @@
 		"message": "Define se Control+W se transfire ao navegador.\n\nSe se establece como true (verdadeiro), o navegador controlará Control+W como o atallo de teclado \"pechar pestana\". Se se define como false (falso), enviarase ao host Control+W."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Define se a combinación Meta+teclas do 1 ao 9 se transfire ao navegador.\n\nÉ útil ao executar hterm nunha pestana do navegador. Deste xeito non perderás os atallos de teclado para cambiar de pestana de Chrome. Cando non se estea executando nunha pestana, é mellor enviar estas teclas ao host para que se poidan usar en vim ou emacs.\n\nSe se define como true (verdadeiro), o navegador controlará a combinación Meta+teclas do 1 ao 9. Se se define como false (falso), a combinación Meta+teclas do 1 ao 9 enviarase ao host. Se se define como null (nulo), activarase a detección automática segundo a plataforma do navegador e o tipo de ventá."
+		"message": "Define se a combinación Meta+teclas do 1 ao 9 se transfire ao navegador.\n\nÉ útil ao executar hterm nunha pestana do navegador. Deste xeito non perderás os atallos de teclado de Chrome para cambiar á pestana. Cando non se estea executando nunha pestana, é mellor enviar estas teclas ao host para que se poidan usar en vim ou emacs.\n\nSe se define como true (verdadeiro), o navegador controlará a combinación Meta+teclas do 1 ao 9. Se se define como false (falso), a combinación Meta+teclas do 1 ao 9 enviarase ao host. Se se define como null (nulo), activarase a detección automática segundo a plataforma do navegador e o tipo de ventá."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Define se Meta+V se transfire ao navegador.\n\nNalgúns sistemas utilízase para pegar contido."
@@ -530,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Se se define como true (verdadeiro), o texto que se arrastre e solte pegarase no terminal.\nSe se define como false (falso), ignorarase o texto que se solte."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Define a codificación esperada dos datos que se reciben do host.\nSe as codificacións non coinciden, pódense observar erros visuais.\n\nOs valores válidos son utf-8 e raw."
+	"hterm_pref_screen_border_color": {
+		"message": "A cor do bordo da pantalla do terminal.\n\nEsta preferencia controla a cor do bordo da pantalla do terminal para mostrar unha liña visible arredor dela."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "O tamaño en píxeles do bordo da pantalla do terminal.\n\nEsta preferencia controla o tamaño do bordo da pantalla do terminal para mostrar unha liña visible arredor dela."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "O tamaño de recheo en píxeles arredor do bordo da pantalla do terminal.\n\nEsta preferencia controla o tamaño do bordo situado arredor da pantalla do terminal para que o usuario poida engadir recheo visible nos bordos da pantalla."
@@ -893,6 +938,9 @@
 	"relay_retry": {
 		"message": "Tentándoo de novo…"
 	},
+	"remove_label": {
+		"message": "Quitar"
+	},
 	"request_pin_prompt": {
 		"message": "Escribe o PIN para desbloquear a tecla $1 en \"$2 ($3)\" (quédanche $4 intentos):"
 	},
@@ -901,6 +949,9 @@
 	},
 	"save_label": {
 		"message": "Gardar"
+	},
+	"select_label": {
+		"message": "Seleccionar"
 	},
 	"send_feedback_label": {
 		"message": "Enviar comentarios"
@@ -913,6 +964,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Argumentos SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " produciuse un erro: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Actualizando certificado SSH..."
+	},
+	"ssh_cert_check_result": {
+		"message": " Faltan aproximadamente $1 horas para que caduque"
+	},
+	"ssh_cert_check_start": {
+		"message": "Comprobando caducidade do certificado SSH..."
 	},
 	"stream_open_error": {
 		"message": "Produciuse un erro ao abrir a emisión $1: $2"
@@ -968,8 +1031,11 @@
 	"terminal_settings_about_label": {
 		"message": "Acerca de"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "A imaxe é demasiado grande"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL da imaxe de fondo. Debe comezar por http:// ou https://. Débese deixar en branco en caso de non mostrar ningunha imaxe.\n\nPor exemplo:\n  https://goo.gl/anedTK"
+		"message": "Selecciona un ficheiro de imaxe de fondo do teu ordenador."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automático"
@@ -1000,6 +1066,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Escuro"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Luscofusco"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Bosque"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Bruma"
@@ -1116,7 +1188,7 @@
 		"message": "Usa hterm-notify para mostrar notificacións no navegador: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Escribe ssh <nome de perfil> para conectarte desde omnibox: https://goo.gl/V7o8ki"
+		"message": "Escribe ssh<Tab><profile name> para conectarte desde omnibox: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS pode instalar sistemas de ficheiros a través de SFTP e navegar usando a aplicación Ficheiros. Utiliza a opción Instalación de SFTP en lugar de Conectar."

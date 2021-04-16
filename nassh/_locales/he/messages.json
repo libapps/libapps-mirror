@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "פתיחת $1 נכשלה: $2"
 	},
+	"confirm_button_label": {
+		"message": "אישור"
+	},
 	"connect_button_label": {
 		"message": "התחברות"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "שם משתמש"
 	},
+	"file_label": {
+		"message": "קובץ"
+	},
 	"found_relay": {
 		"message": "נמצא שרת ממסר: $1"
 	},
@@ -125,11 +131,29 @@
 	"hterm_button_block": {
 		"message": "חסימה"
 	},
+	"hterm_button_close": {
+		"message": "סגירה"
+	},
+	"hterm_button_find": {
+		"message": "חיפוש"
+	},
+	"hterm_button_next": {
+		"message": "הבא"
+	},
 	"hterm_button_page_down": {
 		"message": "גלילה כלפי מטה"
 	},
 	"hterm_button_page_up": {
 		"message": "גלילה של דף אחד כלפי מעלה"
+	},
+	"hterm_button_previous": {
+		"message": "הקודם"
+	},
+	"hterm_find_counter_label": {
+		"message": "$1 מתוך $2"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 התאמות"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "טעינת $1 נכשלה"
@@ -242,6 +266,12 @@
 	"hterm_name_pref_environment": {
 		"message": "משתני סביבה"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "צבע ההדגשה של תוצאות החיפוש"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "צבע ההדגשה של תוצאת החיפוש הנוכחית שמתמקדים בה"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "משפחת גופני טקסט"
 	},
@@ -282,7 +312,7 @@
 		"message": "התנהגות הגלילה באמצעות המקשים Page Up/Page Down"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "ההתנהגות של החלפת כרטיסיות באמצעות Alt+1..9"
+		"message": "ההתנהגות של החלפת כרטיסיות/אפליקציות באמצעות Alt+1..9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "ההתנהגות של פתיחת חלון חדש באמצעות Ctrl+N"
@@ -308,8 +338,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "מתן אפשרות לגרור ולשחרר כדי להדביק"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "קבלת קידוד"
+	"hterm_name_pref_screen_border_color": {
+		"message": "צבע גבול מסך"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "גודל גבול המסך"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "גודל המרווח הפנימי של המסך"
@@ -352,6 +385,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "עצירת הבחירה האוטומטית (לימין)"
+	},
+	"hterm_notify_copy": {
+		"message": "הטקסט הועתק"
 	},
 	"hterm_options_button_label": {
 		"message": "אפשרויות"
@@ -467,6 +503,12 @@
 	"hterm_pref_environment": {
 		"message": "הקבוצה הראשונה של משתני סביבה, כאובייקט."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "צבע הרקע שמשמש לצורך הדגשת תוצאות החיפוש."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "צבע הרקע שמשמש לצורך הדגשה של תוצאת החיפוש הנוכחית שמתמקדים בה."
+	},
 	"hterm_pref_font_family": {
 		"message": "משפחת גופנים המוגדרת כברירת מחדל בשביל טקסט הטרמינל."
 	},
@@ -498,16 +540,16 @@
 		"message": "שליחה של תחילית ESC כשמקישים על מקש תוך כדי הקשה על מקש ה-Meta.\n\nלדוגמה, אם האפשרות הזו מופעלת, הקשה על Meta+K תשלח ‎^[k – בדומה להקלדת Escape ולאחר מכן k. אם האפשרות מושבתת, ההקשה תשלח רק k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "‏לחצן הדבקה בעכבר, או null לזיהוי אוטומטי.\n\nלזיהוי אוטומטי, נשתמש בלחצן העכבר האמצעי בשביל פלטפורמות שאינן X11 (כולל Chrome OS). ב-X11, נשתמש בלחצן העכבר הימני (כי מנהל החלונות המקורי צריך להדביק באמצעות לחצן העכבר האמצעי).\n\n0 == לחצן שמאלי (ראשי).\n1 == לחצן אמצעי (עזר).\n2 == לחצן ימני (משני).\n\nהאפשרות הזו לא תלויה בהגדרה להדבקה בלחיצה על לחצן העכבר הימני.\n\nהערה: הגדרה זה תתאים את עצמה באופן תקין לעכברים המיועדים לימניים ושמאליים."
+		"message": "לחצן העכבר המשמש להדבקה.\n\nלזיהוי אוטומטי נשתמש בלחצן העכבר האמצעי בפלטפורמות שאינן X11 (כולל Chrome OS). ב-X11 נשתמש בלחצן העכבר הימני (מפני שמנהל החלונות אמור לבצע את ההדבקה באמצעות לחצן העכבר האמצעי).\n\n0 – לחצן שמאלי (ראשי).\n1 – לחצן אמצעי (עזר).\n2 – לחצן ימני (משני).\n\nהאפשרות הזו לא תלויה בהגדרה של הדבקה עם לחיצה ימנית.\n\nהערה: הלחצן הראשי והלחצן המשני משתנים באופן אוטומטי בעכברים לימניים ולשמאליים."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "הדבקה בלחיצות על לחצן העכבר הימני.\n\nהאפשרות הזו לא תלויה בהגדרה \"mouse-paste-button\".\n\nהערה: הגדרה זה תתאים את עצמה באופן תקין לעכברים המיועדים לימניים ושמאליים."
+		"message": "לחיצה על לחצן העכבר הימני מבצעת הדבקה.\n\nהאפשרות הזו לא תלויה בהגדרה \"mouse-paste-button\".\n\nהערה: הלחצן הראשי והלחצן המשני משתנים באופן אוטומטי בעכברים לימניים ולשמאליים."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "אם ההעדפה מקבלת את הערך True, המקשים Page Up או Page Down שולטים בסרגל הגלילה בטרמינל והקשה על Shift+Page Up או Shift+Page Down נשלחת אל המארח המרוחק. אם ההעדפה מקבלת את הערך False, הקשה על Page Up או Page Down נשלחת למארח המרוחק וקיצורי המקשים Shift+Page Up או Shift+Page Down משמשים לצורך גלילה."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "ההעדפה הזו קובעת אם הקשה על Alt+1..9 מועברת לדפדפן.\n\nהאפשרות הזו שימושית כשמפעילים hterm בכרטיסיית דפדפן, כדי לא לאבד את מקשי הקיצור של פעולת ה\"מעבר לכרטיסייה\" ב-Chrome. כאשר לא מתבצעת הפעלה של hterm בכרטיסייה, עדיף לשלוח את ההקשה על המקשים האלה אל המארח כדי שניתן יהיה להשתמש בהם ב-vim או ב-emacs.\n\nאם ההעדפה מקבלת את הערך True, הקשות על המקשים Alt+1..9 עוברות לטיפול הדפדפן. אם ההעדפה מקבלת את הערך False, הקשות על Alt+1..9 נשלחות למארח. אם ההעדפה מקבלת את הערך Null, מתבצע זיהוי אוטומטי בהתאם לפלטפורמת הדפדפן ולסוג החלון."
+		"message": "ההעדפה הזו קובעת אם הקשה על Alt+1..9 מועברת לדפדפן.\n\nהאפשרות הזו שימושית כשמפעילים hterm בכרטיסיית דפדפן, כדי לא לאבד את מקשי הקיצור של פעולת ה\"מעבר לכרטיסייה/אפליקציה\" ב-Chrome. כאשר לא מתבצעת הפעלה של hterm בכרטיסייה, עדיף לשלוח את ההקשה על המקשים האלה אל המארח כדי שניתן יהיה להשתמש בהם ב-vim או ב-emacs.\n\nאם ההעדפה מקבלת את הערך True, הקשות על המקשים Alt+1..9 עוברות לטיפול הדפדפן. אם ההעדפה מקבלת את הערך False, הקשות על Alt+1..9 נשלחות למארח. אם ההעדפה מקבלת את הערך Null, מתבצע זיהוי אוטומטי בהתאם לפלטפורמת הדפדפן ולסוג החלון."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "ההעדפה הזו קובעת אם הקשה על Ctrl+N מועברת לדפדפן.\n\nאם ההעדפה מקבלת את הערך True, הקשה על Ctrl+N תטופל על-ידי הדפדפן כהקשה על מקשי הקיצור של הפעולה \"חלון חדש\". אם ההעדפה מקבלת את הערך False, הקשה על Ctrl+N תישלח למארח."
@@ -533,8 +575,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "אם ההעדפה הזו מקבלת את הערך True, טקסט שגוררים ומשחררים מודבק בטרמינל.\nאם ההעדפה מקבלת את הערך False, המערכת תתעלם מטקסט שישוחרר."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "הגדרת הקידוד הצפוי בשביל נתונים שהתקבלו מהמארח.\nאם הקידודים לא תואמים, ייתכן שיהיו באגים בתצוגה.\n\nהערכים החוקיים הם 'utf-8' ו-'raw'."
+	"hterm_pref_screen_border_color": {
+		"message": "צבע הגבול סביב מסך הטרמינל.\n\nהעדפה זו קובעת את צבע הגבול סביב מסך הטרמינל ומציגה קו בשולי המסך."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "הגודל בפיקסלים של הגבול סביב מסך הטרמינל.\n\nהעדפה זו קובעת את גודל הגבול סביב מסך הטרמינל ומציגה קו בשולי המסך."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "הגודל בפיקסלים של המרווח הפנימי מסביב לשוליים של מסך הטרמינל.\n\nההעדפה הזו שולטת בגודל השוליים שמסביב למסך הטרמינל, כדי שהמשתמשים יוכלו להוסיף מרווח פנימי נראה לעין לקצוות של המסך."
@@ -896,6 +941,9 @@
 	"relay_retry": {
 		"message": "מתבצע ניסיון נוסף..."
 	},
+	"remove_label": {
+		"message": "הסרה"
+	},
 	"request_pin_prompt": {
 		"message": "יש להזין קוד אימות כדי לבטל את הנעילה של המפתח $1 ב-'$2 ($3)' (נותרו $4 ניסיונות):"
 	},
@@ -904,6 +952,9 @@
 	},
 	"save_label": {
 		"message": "שמירה"
+	},
+	"select_label": {
+		"message": "בחירה"
 	},
 	"send_feedback_label": {
 		"message": "שליחת משוב"
@@ -916,6 +967,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "ארגומנטים ל-SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " הפעולה נכשלה: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "מתבצע רענון של אישור SSH…"
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 שעות עד לפקיעת התוקף"
+	},
+	"ssh_cert_check_start": {
+		"message": "מתבצעת בדיקת תפוגה של אישור SSH…"
 	},
 	"stream_open_error": {
 		"message": "פתיחת מקור הנתונים $1 נכשלה: $2"
@@ -974,8 +1037,11 @@
 	"terminal_settings_about_label": {
 		"message": "מידע כללי"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "התמונה גדולה מדי"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "כתובת ה-URL של תמונת הרקע: חייבת להתחיל ב-'‎http://‎' או ב-'https://‎'. יש להשאיר ריקה כדי לא להציג תמונה.\n\nלדוגמה:\n  https://goo.gl/anedTK"
+		"message": "בחירת קובץ של תמונת רקע מהמחשב שלך"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "אוטומטי"
@@ -1006,6 +1072,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "כהה"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "בין ערביים"
+	},
+	"terminal_theme_forest_label": {
+		"message": "יער"
 	},
 	"terminal_theme_light_label": {
 		"message": "בהיר"
@@ -1122,7 +1194,7 @@
 		"message": "אפשר להציג הודעות בדפדפן בעזרת hterm-notify‏: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "כדי להתחבר מסרגל הכתובות יש להקליד 'ssh <שם הפרופיל>': https://goo.gl/V7o8ki"
+		"message": "כדי להתחבר מסרגל הכתובות יש להקליד 'ssh<Tab><שם הפרופיל>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS יכול לטעון מערכות קבצים דרך SFTP ולאפשר עיון דרך האפליקציה 'קבצים'. יש להשתמש ב-'טעינת SFTP' במקום ב'חיבור'."
@@ -1150,6 +1222,9 @@
 	},
 	"unmount_button_label": {
 		"message": "ניתוק SFTP"
+	},
+	"url_label": {
+		"message": "כתובת URL"
 	},
 	"welcome_changelog": {
 		"message": "יומן שינויים/נתוני גרסה: $1"

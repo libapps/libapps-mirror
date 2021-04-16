@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Pokretanje naredbe $1 nije uspjelo: $2"
 	},
+	"confirm_button_label": {
+		"message": "Potvrdi"
+	},
 	"connect_button_label": {
 		"message": "Poveži"
 	},
@@ -101,6 +104,9 @@
 	"field_username_placeholder": {
 		"message": "korisničko ime"
 	},
+	"file_label": {
+		"message": "Datoteka"
+	},
 	"found_relay": {
 		"message": "Pronađeni relejni poslužitelj: $1"
 	},
@@ -119,11 +125,26 @@
 	"hterm_button_block": {
 		"message": "Blokiraj"
 	},
+	"hterm_button_close": {
+		"message": "Zatvori"
+	},
+	"hterm_button_find": {
+		"message": "Potraži"
+	},
+	"hterm_button_next": {
+		"message": "Dalje"
+	},
 	"hterm_button_page_down": {
 		"message": "Stranica prema dolje"
 	},
 	"hterm_button_page_up": {
 		"message": "Stranica prema gore"
+	},
+	"hterm_button_previous": {
+		"message": "Prethodno"
+	},
+	"hterm_find_result_count": {
+		"message": "Podudaranja: $1"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Učitavanje resursa $1 nije uspjelo"
@@ -236,6 +257,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Varijable okruženja"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Boja isticanja za rezultate pretrage"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Boja isticanja odabranog rezultata pretrage"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Skupina fontova teksta"
 	},
@@ -276,7 +303,7 @@
 		"message": "Ponašanje pomicanja tipkom Page Up/Down"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Ponašanje promjene kartice tipkama Alt + 1..9"
+		"message": "Ponašanje promjene kartice/aplikacije tipkama Alt + 1..9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Ponašanje otvaranja novog prozora tipkama Ctrl + N"
@@ -302,8 +329,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Dopusti povlačenje i ispuštanje za lijepljenje"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Primanje kodiranja"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Boja obruba zaslona"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Veličina obruba zaslona"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Veličina udaljenosti od ruba zaslona"
@@ -346,6 +376,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Zaustavljanje automatskog odabira (udesno)"
+	},
+	"hterm_notify_copy": {
+		"message": "Kopirano"
 	},
 	"hterm_options_button_label": {
 		"message": "Opcije"
@@ -461,6 +494,12 @@
 	"hterm_pref_environment": {
 		"message": "Inicijalni set varijabli okruženja, kao objekt."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Boja pozadine za isticanje rezultata pretrage."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Boja pozadine za isticanje odabranog pretrage."
+	},
 	"hterm_pref_font_family": {
 		"message": "Zadana skupina fontova za tekst terminala."
 	},
@@ -491,14 +530,17 @@
 	"hterm_pref_meta_sends_escape": {
 		"message": "Šalje prefiks ESC kada se pritisne tipka dok se drži tipka Meta.\n\nNa primjer, ako je omogućeno, pritiskom tipki Meta + k poslat će se ^[k kao da ste pritisnuli Escape, a zatim k. Ako je onemogućeno, poslat će se samo k."
 	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "Tipka miša koja se koristi za lijepljenje.\n\nZa automatsko otkrivanje koristit ćemo srednju tipku miša na platformama osim X11 (uključujući OS Chrome). Na platformi X11 koristit ćemo desnu tipku miša (jer se u upravitelju prozora srednja tipka miša treba koristiti za lijepljenje).\n\n0 == lijeva tipka (primarna).\n1 == srednja tipka (pomoćna).\n2 == desna tipka (sekundarna).\n\nOva je opcija neovisna o postavci za lijepljenje pomoću desne tipke.\n\nNapomena: primarnim i sekundarnim tipkama rukuje se ovisno o tome radi li se o mišu za ljevoruke/desnoruke."
+	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Lijepljenje desnim klikom miša.\n\nOva je opcija neovisna o postavci \"mouse-paste-button\" (gumb miša za lijepljenje).\n\nNapomena: postavka ispravno funkcionira za miševe za ljevoruke i za desnoruke osobe."
+		"message": "Zalijepi nakon pritiska desne tipke miša.\n\nOva je opcija neovisna o postavci \"mouse-paste-button\".\n\nNapomena: primarnim i sekundarnim tipkama rukuje se ovisno o tome radi li se o mišu za ljevoruke/desnoruke."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Ako se postavi na True, tipke Page Up/Page Down kontroliraju klizač terminala, a Shift + Page Up/Shift + Page Down šalju se udaljenom hostu. Ako se postavi na False, onda se Page Up/Page Down šalju udaljenom hostu, a Shift + Page Up/Shift + Page Down služi za pomicanje."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Određuje hoće li se Alt + 1..9 prosljeđivati pregledniku.\n\nTo je praktično kad se hterm izvodi na kartici preglednika, tako da se ne izgube Chromeovi tipkovni prečaci za prebacivanje na karticu. Kad se ne izvodi na kartici, bolje je te tipke slati hostu kako bi se mogle upotrebljavati u Vimu ili Emacsu.\n\nAko je vrijednost true, preglednik obrađuje Alt + 1..9. Ako je false, Alt + 1..9 šalje se hostu. Ako nije postavljeno, otkrivanje je automatsko na temelju platforme preglednika i vrste prozora."
+		"message": "Određuje hoće li se Alt + 1..9 prosljeđivati pregledniku.\n\nTo je praktično kad se hterm izvodi na kartici preglednika, tako da se ne izgube Chromeovi tipkovni prečaci za prebacivanje na karticu/aplikaciju. Kad se ne izvodi na kartici, te je tipke bolje slati hostu kako bi se mogle upotrebljavati u Vimu ili Emacsu.\n\nAko je vrijednost true, preglednik obrađuje Alt + 1..9. Ako je false, Alt + 1..9 šalje se hostu. Ako nije postavljeno, otkrivanje je automatsko na temelju platforme preglednika i vrste prozora."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Određuje hoće li se Ctrl + N prosljeđivati pregledniku.\n\nAko se postavi na true, preglednik će obrađivati Ctrl + N kao tipkovni prečac za novi prozor. Ako se postavi na false, Ctrl + N slat će se hostu."
@@ -524,8 +566,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Ako je postavljeno na True, povučeni i ispušteni tekst zalijepit će se u terminal.\nAko je postavljeno na False, ispušteni će se tekst zanemariti."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Određuje očekivano kodiranje za podatke primljene s hosta.\nAko se kodiranja ne podudaraju, vjerojatno će biti vidljive vizualne pogreške.\n\nVažeće vrijednosti su \"utf-8\" i \"raw\"."
+	"hterm_pref_screen_border_color": {
+		"message": "Boja za obrub zaslona terminala.\n\nTime se kontrolira boja obruba zaslona terminala kako bi se izradila vidljiva crta na rubovima zaslona."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Veličina obruba zaslona terminala u pikselima.\n\nTime se kontrolira veličina obruba zaslona terminala kako bi se izradila vidljiva crta na rubovima zaslona."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Veličina udaljenosti od ruba zaslona u pikselima oko ruba zaslona terminala.\n\nOvo kontrolira veličinu ruba oko zaslona terminala kako bi korisnik mogao rubovima zaslona dodati vidljivu udaljenost."
@@ -977,6 +1022,9 @@
 	"relay_retry": {
 		"message": "Ponovni pokušaj..."
 	},
+	"remove_label": {
+		"message": "Ukloni"
+	},
 	"request_pin_prompt": {
 		"message": "Unesite PIN za otključavanje ključa $1 na čitaču '$2 ($3)' (preostalih pokušaja: $4):"
 	},
@@ -985,6 +1033,9 @@
 	},
 	"save_label": {
 		"message": "Spremi"
+	},
+	"select_label": {
+		"message": "Odaberite"
 	},
 	"send_feedback_label": {
 		"message": "Pošaljite povratne informacije"
@@ -997,6 +1048,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH argumenti"
+	},
+	"ssh_cert_check_error": {
+		"message": " neuspješno: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Osvježavanje SSH certifikata..."
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 h do isteka roka trajanja"
+	},
+	"ssh_cert_check_start": {
+		"message": "Provjera roka trajanja SSH certifikata..."
 	},
 	"stream_open_error": {
 		"message": "Otvaranje strujanja $1 nije uspjelo: $2"
@@ -1049,8 +1112,11 @@
 	"terminal_settings_about_label": {
 		"message": "O aplikaciji"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Slika je prevelika"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL pozadinske slike. Mora započinjati s \"http://\" ili \"https://\". Neka ostane prazno ako nema slike.\n\nNa primjer:\n  https://goo.gl/anedTK"
+		"message": "Odaberite datoteku pozadinske slike s računala."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatski"
@@ -1081,6 +1147,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Tamno"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Sumrak"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Šuma"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Izmaglica"
@@ -1200,7 +1272,7 @@
 		"message": "Za prikaz obavijesti u pregledniku upotrijebite skriptu hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Za povezivanje iz višenamjenskog okvira unesite \"ssh <profile name>\": https://goo.gl/V7o8ki"
+		"message": "Za povezivanje iz višenamjenskog okvira unesite 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "OS Chrome može učitati datotečne sustave putem SFTP-a i pregledavati ih putem aplikacije Datoteke. Upotrijebite \"Učitavanje SFTP-a\" umjesto \"Poveži\"."

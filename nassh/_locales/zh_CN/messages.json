@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "未能成功启动 $1：$2"
 	},
+	"confirm_button_label": {
+		"message": "确认"
+	},
 	"connect_button_label": {
 		"message": "连接"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "用户名"
 	},
+	"file_label": {
+		"message": "文件"
+	},
 	"found_relay": {
 		"message": "发现了以下中继服务器：$1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "禁用"
 	},
+	"hterm_button_close": {
+		"message": "关闭"
+	},
+	"hterm_button_find": {
+		"message": "查找"
+	},
+	"hterm_button_next": {
+		"message": "下一个"
+	},
 	"hterm_button_page_down": {
 		"message": "向下翻页"
 	},
 	"hterm_button_page_up": {
 		"message": "向上翻页"
+	},
+	"hterm_button_previous": {
+		"message": "上一个"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 条匹配结果"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "未能成功加载 $1"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "环境变量"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "查找结果的突出显示颜色"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "所选查找结果的突出显示颜色"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "文本字体系列"
 	},
@@ -282,7 +309,7 @@
 		"message": "PageUp/PageDown 键的滚动行为"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Alt+1..9 的“切换标签页”行为"
+		"message": "Alt+1..9 的“切换标签页/应用”行为"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Ctrl+N 的“打开新的窗口”行为"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "允许通过拖放进行粘贴"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "接收编码"
+	"hterm_name_pref_screen_border_color": {
+		"message": "屏幕边框颜色"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "屏幕边框尺寸"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "屏幕内边距尺寸"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "自动选择停顿（向右）"
+	},
+	"hterm_notify_copy": {
+		"message": "已复制"
 	},
 	"hterm_options_button_label": {
 		"message": "选项"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "初始的环境变量集，以对象形式指定。"
 	},
+	"hterm_pref_find_result_color": {
+		"message": "用于突出显示查找结果的背景色。"
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "用于突出显示所选查找结果的背景色。"
+	},
 	"hterm_pref_font_family": {
 		"message": "终端文本的默认字体系列。"
 	},
@@ -498,16 +537,16 @@
 		"message": "在按住 Meta 键的同时按某个键会传送 ESC 前缀。\n\n例如：当您启用此设置后，按 Meta+K 会传送 ^[k，这和您依次按 Esc 键和 K 键的效果一样。当您停用此设置后，按 Meta+K 会仅传送 K 键。"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "指定用于执行粘贴操作的鼠标按键，设为 null 时可自动检测。\n\n对于自动检测，我们将在非 X11 平台（包括 Chrome 操作系统）上使用鼠标中键。在 X11 上，我们将使用鼠标右键（因为原生窗口管理器需要通过鼠标中键执行粘贴操作）。\n\n0 == 左键（主要）。\n1 == 中键（辅助）。\n2 == 右键（次要）。\n\n此选项不受“mouse-right-click-paste”这项设置的影响。\n\n注意：此选项会正确处理左手鼠标和右手鼠标。"
+		"message": "指定用于执行粘贴操作的鼠标按键。\n\n自动检测时，我们将在非 X11 平台（包括 Chrome 操作系统）上使用鼠标中键。在 X11 平台上，我们将使用鼠标右键（因为窗口管理器需要使用鼠标中键处理粘贴操作）。\n\n0 == 左键（主要）。\n1 == 中键（辅助）。\n2 == 右键（次要）。\n\n此选项不受“mouse-right-click-paste”设置的影响。\n\n注意：无论您使用的是左手鼠标还是右手鼠标，此选项都能正确处理主要按键和次要按键。"
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "在点击鼠标右键时执行粘贴操作。\n\n此选项不受“mouse-paste-button”这项设置的影响。\n\n注意：此选项会正确处理左手鼠标和右手鼠标。"
+		"message": "点击鼠标右键时执行粘贴操作。\n\n此选项不受“mouse-paste-button”设置的影响。\n\n注意：无论您使用的是左手鼠标还是右手鼠标，此选项都能正确处理主要按键和次要按键。"
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "如果此设置设为 true，PageUp/PageDown 键会控制终端滚动条，Shift+PageUp/Shift+PageDown 会传送到远程主机。如果设为 false，PageUp/PageDown 键会传送到远程主机，Shift+PageUp/Shift+PageDown 会控制滚动。"
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "设定是否将 Alt+1..9 传递给浏览器。\n\n当 hterm 在浏览器标签页中运行时，此设置便于您继续使用 Chrome 的“切换至标签页”键盘快捷键。当 hterm 不在标签页中运行时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果此设置设为 true，Alt+1..9 将会由浏览器处理。如果设为 false，Alt+1..9 将会传送到主机。如果设为 null，系统会根据浏览器平台和窗口类型自动检测。"
+		"message": "设定是否将 Alt+1..9 传递给浏览器。\n\n当 hterm 在浏览器标签页中运行时，此设置会便于您继续使用 Chrome 的“切换至标签页/应用”键盘快捷键。当 hterm 不在标签页中运行时，最好将这些键传送到主机，以便在 vim 或 emacs 中使用它们。\n\n如果此设置设为 true，Alt+1..9 将会由浏览器处理；设为 false，Alt+1..9 将会传送到主机；设为 null，系统会根据浏览器平台和窗口类型自动检测。"
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "设定是否将 Ctrl+N 传递给浏览器。\n\n如果此设置设为 true，Ctrl+N 将会作为“打开新的窗口”键盘快捷键由浏览器处理。如果设为 false，Ctrl+N 将会传送到主机。"
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "如果此设置设为 true，拖放的文本将会粘贴到终端。\n如果设为 false，拖放的文本将会被忽略。"
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "为从主机接收到的数据设定预期编码。\n如果编码不匹配，则可能会出现显而易见的错误。\n\n有效值是“utf-8”和“raw”。"
+	"hterm_pref_screen_border_color": {
+		"message": "终端屏幕边框的颜色。\n\n此设置用于控制终端屏幕边框的颜色，在屏幕边缘创建一条可见的界线。"
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "终端屏幕边框的尺寸（以像素为单位）。\n\n此设置用于控制终端屏幕边框的尺寸，在屏幕边缘创建一条可见的界线。"
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "终端屏幕边框周围的内边距尺寸（以像素为单位）。\n\n此设置用于控制终端屏幕边框的尺寸，以便用户能够向屏幕的边缘添加一些可见内边距。"
@@ -899,6 +941,9 @@
 	"relay_retry": {
 		"message": "正在重试…"
 	},
+	"remove_label": {
+		"message": "移除"
+	},
 	"request_pin_prompt": {
 		"message": "请在“$2 ($3)”上输入 PIN 码以解锁密钥 $1（还可尝试 $4 次）："
 	},
@@ -907,6 +952,9 @@
 	},
 	"save_label": {
 		"message": "保存"
+	},
+	"select_label": {
+		"message": "选择"
 	},
 	"send_feedback_label": {
 		"message": "发送反馈"
@@ -919,6 +967,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH 参数"
+	},
+	"ssh_cert_check_error": {
+		"message": " 失败了：$1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "正在刷新 SSH 证书…"
+	},
+	"ssh_cert_check_result": {
+		"message": " 大约 $1 小时后到期"
+	},
+	"ssh_cert_check_start": {
+		"message": "正在检查 SSH 证书的新鲜度…"
 	},
 	"stream_open_error": {
 		"message": "未能成功打开数据流 $1：$2"
@@ -977,8 +1037,11 @@
 	"terminal_settings_about_label": {
 		"message": "简介"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "图片太大"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "背景图片网址。必须以“http://”或“https://”开头。留空表示无图片。\n\n例如：\n  https://goo.gl/anedTK"
+		"message": "请从您的计算机中选择一个背景图片文件。"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "自动"
@@ -1009,6 +1072,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "深色"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "黄昏"
+	},
+	"terminal_theme_forest_label": {
+		"message": "森林"
 	},
 	"terminal_theme_haze_label": {
 		"message": "紫雾"
@@ -1128,7 +1197,7 @@
 		"message": "借助 hterm-notify 在浏览器中显示通知：https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "通过输入“ssh <配置文件名称>”从多功能框中进行连接：https://goo.gl/V7o8ki"
+		"message": "您可通过在多功能框中输入“ssh<Tab 键><配置文件名称>”来连接到 https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome 操作系统可通过 SFTP 装载文件系统，并通过“文件”应用进行浏览。请使用“装载 SFTP”而非“连接”。"
@@ -1156,6 +1225,9 @@
 	},
 	"unmount_button_label": {
 		"message": "卸载 SFTP"
+	},
+	"url_label": {
+		"message": "网址"
 	},
 	"welcome_changelog": {
 		"message": "更新日志/版本说明：$1"

@@ -15,7 +15,7 @@
 		"message": "Tallennetaanko tämän SSH-käyttökerran PIN-koodi välimuistiin? (y/N):"
 	},
 	"cancel_button_label": {
-		"message": "Peruuta"
+		"message": "Peru"
 	},
 	"changelog": {
 		"message": "Muutosloki"
@@ -34,6 +34,9 @@
 	},
 	"command_startup_failed": {
 		"message": "Komento $1 epäonnistui: $2"
+	},
+	"confirm_button_label": {
+		"message": "Vahvista"
 	},
 	"connect_button_label": {
 		"message": "Yhdistä"
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "käyttäjänimi"
 	},
+	"file_label": {
+		"message": "Tiedosto"
+	},
 	"found_relay": {
 		"message": "Löydetty välityspalvelin: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "Estä"
 	},
+	"hterm_button_close": {
+		"message": "Sulje"
+	},
+	"hterm_button_find": {
+		"message": "Etsi"
+	},
+	"hterm_button_next": {
+		"message": "Seuraava"
+	},
 	"hterm_button_page_down": {
 		"message": "Page down"
 	},
 	"hterm_button_page_up": {
 		"message": "Page up"
+	},
+	"hterm_button_previous": {
+		"message": "Edellinen"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 tulosta"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Lataus epäonnistui: $1"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Ympäristömuuttujat"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Löytyneiden tulosten korostusväri"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Löytyneiden tulosten valittu korostusväri"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Tekstin fonttiperhe"
 	},
@@ -282,7 +309,7 @@
 		"message": "Page Up/Down ‑näppäimen vierityskäyttäytyminen"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Alt+1–9: välilehden vaihtamiskäyttäytyminen"
+		"message": "Alt+1–9: välilehden/sovelluksen vaihtamiskäyttäytyminen"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Ctrl+N: uuden ikkunan käyttäytyminen"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Salli liittäminen vetämällä ja pudottamalla"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Vastaanota merkkijärjestelmä"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Näytön reunuksen väri"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Näytön reunuksen koko"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Näytön täytteiden koko"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Automaattinen valinnan pysäytys (oikealle)"
+	},
+	"hterm_notify_copy": {
+		"message": "Kopioitu"
 	},
 	"hterm_options_button_label": {
 		"message": "Valinnat"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "Ympäristön alkutilan oletusmuuttujat objektina"
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Taustaväri, jolla korostetaan löydetyt tulokset."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Taustaväri, jolla korostetaan valitut löydetyt tulokset."
+	},
 	"hterm_pref_font_family": {
 		"message": "Terminaalitekstin oletusfonttiperhe"
 	},
@@ -498,16 +537,16 @@
 		"message": "Lähetä ESC-etuliite, kun näppäintä painetaan Meta-näppäimen ollessa painettuna.\n\nKun se on päällä, esimerkiksi Meta+K-yhdistelmä lähettää ^[k-yhdistelmän, aivan kuten Esc- ja k-näppäimen painaminen. Jos se on pois päältä, lähetetään vain k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Hiiren liittämispainike. Jos arvo on tyhjä, käytetään automaattista tunnistusta.\n\nJos painike tunnistetaan automaattisesti, muissa kuin X11-käyttöympäristöissä (myös Chrome-käyttöjärjestelmässä) käytetään hiiren keskimmäistä painiketta. X11:ssä käytetään hiiren oikeaa painiketta (sillä ikkunoiden natiivin hallintatoiminnon pitäisi käyttää liittämiseen hiiren keskimmäistä painiketta).\n\n0 == vasen (ensisijainen) painike\n1 == keskimmäinen (täydentävä) painike\n2 == oikea (toissijainen) painike\n\nTämä asetus ei riipu mouse-right-click-paste-asetuksesta.\n\nHuom. Tämä asetus toimii oikein riippumatta siitä, onko hiiri vasen- vai oikeakätinen malli."
+		"message": "Hiiren liittämispainike\n\nJos painike tunnistetaan automaattisesti, muissa kuin X11-käyttöympäristöissä (myös Chrome-käyttöjärjestelmässä) käytetään hiiren keskimmäistä painiketta. X11:ssä käytetään hiiren oikeaa painiketta (sillä ikkunahallinnan pitäisi käyttää liittämiseen hiiren keskimmäistä painiketta).\n\n0 == vasen (ensisijainen) painike\n1 == keskimmäinen (täydentävä) painike\n2 == oikea (toissijainen) painike\n\nTämä asetus ei riipu mouse-right-click-paste-asetuksesta.\n\nHuom. Ensi- ja toissijainen painike toimivat sekä vasen- että oikeakätisellä hiirellä."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Liittäminen hiiren oikean painikkeen painalluksella\n\nTämä asetus ei riipu mouse-paste-button-asetuksesta.\n\nHuom. Tämä asetus toimii oikein riippumatta siitä, onko hiiri vasen- vai oikeakätinen malli."
+		"message": "Liittäminen hiiren oikean painikkeen painalluksella\n\nTämä asetus ei riipu mouse-paste-button-asetuksesta.\n\nHuom. Ensi- ja toissijainen painike toimivat sekä vasen- että oikeakätisellä hiirellä."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Jos tosi, Page Up- ja Page Down ‑näppäimiä käytetään terminaalin vierityspalkin ohjaamiseen ja Vaihto+Page Up / Vaihto+Page Down ‑yhdistelmä lähetetään etäisännälle. Jos epätosi, Page Up ja Page Down ‑painallukset lähetetään etäisännälle ja Vaihto+Page Up / Vaihto+Page Down ‑yhdistelmä vierittää."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Lähetetäänkö Alt+1–9-painallukset selaimelle\n\nTästä on hyötyä htermin toimiessa selaimen välilehdellä, koska voit jatkaa Chromen välilehtien pikanäppäinten käyttöä. Kun hterm ei toimi välilehdellä, näppäinpainallukset kannattaa lähettää isännälle, jotta niitä voidaan käyttää vim- tai emacs-toimintojen kanssa.\n\nJos arvo on tosi, selain käsittelee Alt+1–9-painallukset. Jos arvo on epätosi, Alt+1–9-painallukset lähetetään isännälle. Jos arvo on tyhjä, tunnistus suoritetaan automaattisesti selainympäristön ja ikkunatyypin mukaan."
+		"message": "Lähetetäänkö Alt+1–9-painallukset selaimelle\n\nTästä on hyötyä htermin toimiessa selaimen välilehdellä, koska voit jatkaa Chromen välilehtien/sovellusten pikanäppäinten käyttöä. Kun hterm ei toimi välilehdellä, näppäinpainallukset kannattaa lähettää isännälle, jotta niitä voidaan käyttää vim- tai emacs-toimintojen kanssa.\n\nJos arvo on tosi, selain käsittelee Alt+1–9-painallukset. Jos arvo on epätosi, Alt+1–9-painallukset lähetetään isännälle. Jos arvo on tyhjä, tunnistus suoritetaan automaattisesti selainympäristön ja ikkunatyypin mukaan."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Lähetetäänkö Ctrl+N selaimelle\n\nJos tosi, selain käsittelee Ctrl+N-komennon \"uusi ikkuna\" ‑pikanäppäimenä. Jos epätosi, Ctrl+N lähetetään isännälle."
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Jos tosi, vedetty ja pudotettu teksti liitetään terminaaliin.\nJos epätosi, pudotettu teksti ohitetaan."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Määritä merkkijärjestelmä, jota odotetaan isännän lähettämältä datalta. Jos merkkijärjestelmät eivät täsmää, visuaalisia virheitä voi ilmetä.\n\nKelvollisia arvoja ovat \"utf-8\" ja \"raw\"."
+	"hterm_pref_screen_border_color": {
+		"message": "Terminaalinäyttöä ympäröivän reunuksen väri.\n\nTämä vaikuttaa terminaalinäyttöä ympäröivän reunuksen väriin luoden näkyvän viivan näytön reunoille."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Terminaalinäyttöä ympäröivän reunuksen koko pikseleinä.\n\nTämä vaikuttaa terminaalinäyttöä ympäröivän reunuksen kokoon luoden näkyvän viivan näytön reunoille."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Terminaalinäytön rajoja ympäröivä täyte pikseleinä.\n\nTämä vaikuttaa terminaalinäyttöä ympäröivään rajaan, ja käyttäjä voi lisätä näytön reunoille näkyvää täytettä."
@@ -893,6 +935,9 @@
 	"relay_retry": {
 		"message": "Yritetään uudelleen…"
 	},
+	"remove_label": {
+		"message": "Poista"
+	},
 	"request_pin_prompt": {
 		"message": "Avaa avaimen $1 lukitus ($2, $3) antamalla PIN-koodi ($4 yritystä jäljellä):"
 	},
@@ -901,6 +946,9 @@
 	},
 	"save_label": {
 		"message": "Tallenna"
+	},
+	"select_label": {
+		"message": "Valitse"
 	},
 	"send_feedback_label": {
 		"message": "Lähetä palautetta"
@@ -913,6 +961,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH-argumentit"
+	},
+	"ssh_cert_check_error": {
+		"message": " epäonnistui: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Päivitetään SSH-varmennetta…"
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 tuntia vanhenemiseen"
+	},
+	"ssh_cert_check_start": {
+		"message": "Tarkistetaan SSH-varmenteen voimassaoloa…"
 	},
 	"stream_open_error": {
 		"message": "Striimin $1 avaus ei onnistunut: $2"
@@ -971,8 +1031,11 @@
 	"terminal_settings_about_label": {
 		"message": "Tietoja"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Kuva on liian suuri"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "Taustakuvan URL-osoite (alussa on oltava http:// tai https://). Jätä se tyhjäksi, jos kuvaa ei ole.\n\nEsimerkki:\n  https://goo.gl/anedTK"
+		"message": "Valitse taustakuvatiedosto tietokoneelta."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automaattinen"
@@ -1003,6 +1066,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Tumma"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Auringonlasku"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Metsä"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Usva"
@@ -1122,7 +1191,7 @@
 		"message": "Näytä ilmoituksia selaimessa hterm-notify-ominaisuudella: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Muodosta yhteys omniboxista käsin kirjoittamalla 'ssh <profiilin nimi>': https://goo.gl/V7o8ki"
+		"message": "Muodosta yhteys omniboxista käsin kirjoittamalla 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Voit ottaa tiedostojärjestelmiä käyttöön Chrome-käyttöjärjestelmässä SFTP:llä ja selata niitä Tiedostot-sovelluksella. Valitse SFTP-käyttöönotto Yhdistä-valinnan sijaan."
@@ -1150,6 +1219,9 @@
 	},
 	"unmount_button_label": {
 		"message": "Poista SFTP käytöstä"
+	},
+	"url_label": {
+		"message": "URL-osoite"
 	},
 	"welcome_changelog": {
 		"message": "Muutosloki/julkaisutiedot: $1"

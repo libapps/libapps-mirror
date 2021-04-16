@@ -32,6 +32,9 @@
 	"command_startup_failed": {
 		"message": "ເປີດໃຊ້ $1 ບໍ່ສຳເລັດ: $2"
 	},
+	"confirm_button_label": {
+		"message": "ຢືນຢັນ"
+	},
 	"connect_button_label": {
 		"message": "ເຊື່ອມຕໍ່"
 	},
@@ -101,6 +104,9 @@
 	"field_username_placeholder": {
 		"message": "ຊື່ຜູ້ໃຊ້"
 	},
+	"file_label": {
+		"message": "ໄຟລ໌"
+	},
 	"found_relay": {
 		"message": "ພົບເຊີບເວີການຖ່າຍທອດສັນຍານ: $1"
 	},
@@ -119,11 +125,26 @@
 	"hterm_button_block": {
 		"message": "ບລັອກ"
 	},
+	"hterm_button_close": {
+		"message": "ປິດ"
+	},
+	"hterm_button_find": {
+		"message": "ຊອກຫາ"
+	},
+	"hterm_button_next": {
+		"message": "ຕໍ່ໄປ"
+	},
 	"hterm_button_page_down": {
 		"message": "ເລື່ອນໜ້າລົງ"
 	},
 	"hterm_button_page_up": {
 		"message": "ເລື່ອນໜ້າຂຶ້ນ"
+	},
+	"hterm_button_previous": {
+		"message": "ຜ່ານມາ"
+	},
+	"hterm_find_result_count": {
+		"message": "ຂໍ້ມູນກົງກັນ $1 ລາຍການ"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "ໂຫຼດ $1 ບໍ່ສຳເລັດ"
@@ -236,6 +257,12 @@
 	"hterm_name_pref_environment": {
 		"message": "ຕົວປ່ຽນສະພາບແວດລ້ອມ"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "ສີໄຮໄລຂອງຜົນການຊອກຫາ"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "ສີໄຮໄລທີ່ເລືອກຂອງຜົນການຊອກຫາ"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "ຕະກູນຟອນຂໍ້ຄວາມ"
 	},
@@ -276,7 +303,7 @@
 		"message": "ລັກສະນະການເຮັດວຽກຂອງການເລື່ອນປຸ່ມ Page Up/Down"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "ລັກສະນະການເຮັດວຽກຂອງການປ່ຽນດ້ວຍແຖບ Alt+1..9"
+		"message": "ລັກສະນະການເຮັດວຽກຂອງການປ່ຽນດ້ວຍແຖບ/ແອັບ Alt+1..9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "ລັກສະນະການເຮັດວຽກຂອງການເປີດໜ້າຈໍໃໝ່ດ້ວຍ Ctrl+N"
@@ -302,8 +329,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "ອະນຸຍາດໃຫ້ລາກ ແລະ ວາງເພື່ອວາງເນື້ອຫາ"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "ຮັບການເຂົ້າລະຫັດ"
+	"hterm_name_pref_screen_border_color": {
+		"message": "ສີຂອງເສັ້ນຂອບໜ້າຈໍ"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "ຂະໜາດເສັ້ນຂອບໜ້າຈໍ"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "ຂະໜາດໄລຍະຫ່າງຈາກຂອບໜ້າຈໍ"
@@ -346,6 +376,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "ການຢຸດການເລືອກໂດຍອັດຕະໂນມັດ (ທາງເບື້ອງຂວາ)"
+	},
+	"hterm_notify_copy": {
+		"message": "ສຳເນົາແລ້ວ"
 	},
 	"hterm_options_button_label": {
 		"message": "ຕົວເລືອກ"
@@ -461,6 +494,12 @@
 	"hterm_pref_environment": {
 		"message": "ຊຸດຕົວປ່ຽນຂອງສະພາບແວດລ້ອມເລີ່ມຕົ້ນ, ທີ່ເປັນວັດຖຸ."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "ສີພື້ນຫຼັງເພື່ອໄຮໄລຜົນການຊອກຫາ."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "ສີພື້ນຫຼັງເພື່ອໄຮໄລຜົນການຊອກຫາທີ່ເລືອກ"
+	},
 	"hterm_pref_font_family": {
 		"message": "ຕະກູນຟອນເລີ່ມຕົ້ນສຳລັບຂໍ້ຄວາມປາຍທາງ."
 	},
@@ -491,14 +530,17 @@
 	"hterm_pref_meta_sends_escape": {
 		"message": "ສົ່ງຄຳນຳໜ້າ ESC ໃນເວລາກົດປຸ່ມໃນຂະນະທີ່ກົດປຸ່ມ Meta ຄ້າງໄວ້.\n\nຕົວຢ່າງ: ເມື່ອເປີດການນຳໃຊ້, ການກົດ Meta+K ຈະສົ່ງ ^[k ຄືກັບວ່າທ່ານໄດ້ພິມ Escape ແລ້ວພິມ k. ເມື່ອປິດການນຳໃຊ້, ຈະສົ່ງແຕ່ k ເທົ່ານັ້ນ."
 	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "ປຸ່ມເມົ້າເພື່ອໃຊ້ສຳລັບການວາງ.\n\nສຳລັບການກວດຫາອັດຕະໂນມັດ, ພວກເຮົາຈະໃຊ້ປຸ່ມເມົ້າເຄິ່ງກາງສຳລັບແພລດຟອມທີ່ບໍ່ແມ່ນ X11 (ຮວມທັງ Chrome OS). ໃນ X11, ພວກເຮົາຈະໃຊ້ປຸ່ມເມົ້າຂວາ (ເພາະວ່າຕົວຈັດການໜ້າຈໍຄວນຈັດການການວາງຜ່ານປຸ່ມເມົ້າເຄິ່ງກາງ).\n\n0 == ປຸ່ມຊ້າຍ (ຫຼັກ).\n1 == ປຸ່ມເຄິ່ງກາງ (ຊ່ວຍ).\n2 == ປຸ່ມຂວາ (ສຳຮອງ).\n\nຕົວເລືອກນີ້ບໍ່ຂຶ້ນກັບການຕັ້ງຄ່າສຳລັບການວາງໂດຍໃຊ້ການຄລິກຂວາ.\n\nໝາຍເຫດ: ມີການຈັດການປຸ່ມຫຼັກ ແລະ ປຸ່ມສຳຮອງໃຫ້ທ່ານດ້ວຍເມົ້າຖະໜັດຊ້າຍ ແລະ ຂວາ."
+	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "ການວາງເມື່ອຄລິກຂວາໃສ່ປຸ່ມເມົ້າ.\n\nຕົວເລືອກນີ້ບໍ່ຂຶ້ນກັບການຕັ້ງຄ່າ \"ປຸ່ມວາງໂດຍໃຊ້ເມົ້າ\".\n\nໝາຍເຫດ: ນີ້ຈະຈັດການເມົ້າແບບຖະໜັດຊ້າຍ ແລະ ຂວາຢ່າງຖືກຕ້ອງ."
+		"message": "ການວາງເມື່ອຄລິກຂວາໃສ່ປຸ່ມເມົ້າ.\n\nຕົວເລືອກນີ້ບໍ່ຂຶ້ນກັບການຕັ້ງຄ່າ \"ປຸ່ມວາງໂດຍໃຊ້ເມົ້າ\".\n\nໝາຍເຫດ: ມີການຈັດການປຸ່ມຫຼັກ ແລະ ປຸ່ມສຳຮອງໃຫ້ທ່ານດ້ວຍເມົ້າຖະໜັດຊ້າຍ ແລະ ຂວາ."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "ຖ້າເປັນຖືກ, Page Up/Page Down ຈະຄວບຄຸມແຖບການເລື່ອນເທີມິນອນ ແລະ Shift+Page Up/Shift+Page Down ຈະຖືກສົ່ງໄປຍັງໂຮສທາງໄກ. ຖ້າເປັນຜິດ, Page Up/Page Down ຈະຖືກສົ່ງໄປຍັງໂຣສທາງໄກ ແລະ Shift+Page Up/Shift+Page Down ຈະເປັນການເລື່ອນ."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "ຈະສົ່ງຜ່ານ Alt+1..9 ໄປຍັງໂປຣແກຣມທ່ອງເວັບຫຼືບໍ່.\n\nການຕັ້ງຄ່ານີ້ມີປະໂຫຍດເມື່ອເອີ້ນໃຊ້ hterm ໃນແຖບໂປຣແກຣມທ່ອງເວັບ, ເພື່ອວ່າທ່ານຈະບໍ່ເສຍທາງລັດແປ້ນພິມ \"ປ່ຽນເປັນແຖບ\" ຂອງ Chrome. ເມື່ອບໍ່ໄດ້ເອີ້ນໃຊ້ໃນແທັບ ທ່ານຄວນສົ່ງປຸ່ມເຫຼົ່ານີ້ໄປຍັງໂຮສເພື່ອຈະໄດ້ໃຊ້ພວກມັນໃນ Vim ຫຼື Emacs ໄດ້.\n\nຖ້າເປັນຖືກ Alt+1..9 ຈະຖືກຈັດການໂດຍໂປຣແກຣມທ່ອງເວັບ. ຖ້າເປັນຜິດ, Alt+1..9 ຈະຖືກສົ່ງຫາໂຮສ. ຖ້າເປັນ Null, ການກວດຫາອັດຕະໂນມັດຈະອີງຕາມແພລດຟອມຂອງໂປຣແກຣມທ່ອງເວັບ ແລະ ປະເພດໜ້າຈໍ."
+		"message": "ຈະສົ່ງຜ່ານ Alt+1..9 ໄປຍັງໂປຣແກຣມທ່ອງເວັບຫຼືບໍ່.\n\nການຕັ້ງຄ່ານີ້ມີປະໂຫຍດເມື່ອເອີ້ນໃຊ້ hterm ໃນແຖບໂປຣແກຣມທ່ອງເວັບ, ເພື່ອວ່າທ່ານຈະບໍ່ເສຍທາງລັດແປ້ນພິມ \"ປ່ຽນເປັນແຖບ/ແອັບ\" ຂອງ Chrome. ເມື່ອບໍ່ໄດ້ເອີ້ນໃຊ້ໃນແຖບ ທ່ານຄວນສົ່ງປຸ່ມເຫຼົ່ານີ້ໄປຍັງໂຮສເພື່ອຈະໄດ້ໃຊ້ພວກມັນໃນ Vim ຫຼື Emacs ໄດ້.\n\nຖ້າເປັນຖືກ, Alt+1..9 ຈະຖືກຈັດການໂດຍໂປຣແກຣມທ່ອງເວັບ. ຖ້າເປັນຜິດ, Alt+1..9 ຈະຖືກສົ່ງຫາໂຮສ. ຖ້າເປັນ Null, ການກວດຫາອັດຕະໂນມັດຈະອີງຕາມແພລດຟອມຂອງໂປຣແກຣມທ່ອງເວັບ ແລະ ປະເພດໜ້າຈໍ."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "ກຳນົດວ່າຈະສົ່ງຜ່ານ Ctrl+N ໄປຍັງໂປຣແກຣມທ່ອງເວັບຫຼືບໍ່.\n\nຖ້າເປັນຖືກ, Ctrl+N ຈະຖືກຈັດການໂດຍໂປຣແກຣມທ່ອງເວັບເປັນທາງລັດແປ້ນພິມ \"ໜ້າຈໍໃໝ່\". ຖ້າເປັນຜິດ, Ctrl+N ຈະຖືກສົ່ງໄປຍັງໂຮສ."
@@ -524,8 +566,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "ຖ້າເປັນຖືກ, ລາກ ແລະ ວາງຂໍ້ຄວາມຈະວາງໃສ່ເທີມິນອນ.\nຖ້າເປັນຜິດ, ຂໍ້ຄວາມທີ່ວາງຈະຖືກລະເລີຍ."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "ຕັ້ງຄ່າການເຂົ້າລະຫັດທີ່ຄາດໄວ້ສຳລັບຂໍ້ມູນທີ່ໄດ້ຮັບຈາກໂຮສ.\nຖ້າການເຂົ້າລະຫັດບໍ່ກົງກັນ, ເປັນໄປໄດ້ວ່າຈະສັງເກດເຫັນຂໍ້ຜິດພາດທາງພາບໄດ້.\n\nຄ່າທີ່ຖືກຕ້ອງແມ່ນ 'utf-8' ແລະ 'raw'."
+	"hterm_pref_screen_border_color": {
+		"message": "ສີສຳລັບເສັ້ນຂອບອ້ອມໜ້າຈໍເທີມີນອນ.\n\nນີ້ຄວບຄຸມສີຂອງເສັ້ນຂອບອ້ອມໜ້າຈໍເທີມິນອນເພື່ອສ້າງເສັ້ນທີ່ເບິ່ງເຫັນໄດ້ຢູ່ຂອບຂອງໜ້າຈໍ."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "ຂະໜາດເສັ້ນຂອບເປັນພິກເຊວອ້ອມໜ້າຈໍເທີມີນອນ.\n\nນີ້ຄວບຄຸມຂະໜາດຂອງເສັ້ນຂອບອ້ອມໜ້າຈໍເທີມິນອນເພື່ອສ້າງເສັ້ນທີ່ເບິ່ງເຫັນໄດ້ຢູ່ຂອບຂອງໜ້າຈໍ."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "ຂະໜາດໄລຍະຫ່າງຈາກເສັ້ນຂອບຂອງໜ້າຈໍເທີມິນັລ ເຊິ່ງມີໜ່ວຍເປັນພິກເຊວ.\n\nນີ້ຄວບຄຸມຂະໜາດຂອງເສັ້ນຂອບອ້ອມໜ້າຈໍເທີມິນອນ ເພື່ອໃຫ້ຜູ້ໃຊ້ສາມາດເພີ່ມໄລຍະຫ່າງຈາກຂອບຂອງໜ້າຈໍໄດ້."
@@ -935,6 +980,9 @@
 	"relay_retry": {
 		"message": "ກຳລັງລອງໃໝ່..."
 	},
+	"remove_label": {
+		"message": "ລຶບອອກ"
+	},
 	"request_pin_prompt": {
 		"message": "ປ້ອນ PIN ເພື່ອປົດລັອກປຸ່ມ $1 ໃນ '$2 ($3)' (ລອງໄດ້ອີກ $4 ຄັ້ງ):"
 	},
@@ -943,6 +991,9 @@
 	},
 	"save_label": {
 		"message": "ບັນທຶກ"
+	},
+	"select_label": {
+		"message": "ເລືອກ"
 	},
 	"send_feedback_label": {
 		"message": "ສົ່ງຄຳຕິຊົມ"
@@ -955,6 +1006,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "ອາກິວເມັນ SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " ບໍ່ສຳເລັດ: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "ກຳລັງໂຫຼດຂໍ້ມູນໃບຮັບຮອງ SSH ຄືນໃໝ່..."
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 ຊົ່ວໂມງຈະໝົດອາຍຸ"
+	},
+	"ssh_cert_check_start": {
+		"message": "ກຳລັງກວດສອບເວລາໝົດອາຍຸຂອງໃບຮັບຮອງ SSH..."
 	},
 	"stream_open_error": {
 		"message": "ເປີດການຖ່າຍທອດ $1 ບໍ່ສຳເລັດ: $2"
@@ -1013,8 +1076,11 @@
 	"terminal_settings_about_label": {
 		"message": "ກ່ຽວກັບ"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "ຮູບໃຫຍ່ເກີນໄປ"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL ພາບພື້ນຫລັງ. ຕ້ອງຂຶ້ນຕົ້ນດ້ວຍ 'http://' or 'https://'. ປະຫວ່າງເປົ່າຖ້າບໍ່ມີຮູບ.\n\nຕົວຢ່າງ:\n  https://goo.gl/anedTK"
+		"message": "ເລືອກໄຟລ໌ພາບພື້ນຫລັງຈາກຄອມພິວເຕີຂອງທ່ານ."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ອັດຕະໂນມັດ"
@@ -1045,6 +1111,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "ມືດ"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "ໃກ້ຄໍ່າ"
+	},
+	"terminal_theme_forest_label": {
+		"message": "ປ່າ"
 	},
 	"terminal_theme_light_label": {
 		"message": "ແຈ້ງ"
@@ -1155,7 +1227,7 @@
 		"message": "ສະແດງການແຈ້ງເຕືອນໃນໂປຣແກຣມທ່ອງເວັບໂດຍໃຊ້ hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "ເຊື່ອມຕໍ່ຈາກ omnibox ໂດຍການພິມ 'ssh <profile name>': https://goo.gl/V7o8ki"
+		"message": "ເຊື່ອມຕໍ່ຈາກ omnibox ໂດຍການພິມ 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS ສາມາດເຊື່ອມຕໍ່ລະບົບໄຟລ໌ຜ່ານ SFTP ແລະ ຊອກຫາຜ່ານແອັບ Files ໄດ້. ກະລຸນາໃຊ້ 'ເຊື່ອມຕໍ່ SFTP' ແທນ 'ເຊື່ອມຕໍ່'."

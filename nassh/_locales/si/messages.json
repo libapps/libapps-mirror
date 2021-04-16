@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "$1 දියත් කිරීම අසාර්ථක විය: $2"
 	},
+	"confirm_button_label": {
+		"message": "තහවුරු කරන්න"
+	},
 	"connect_button_label": {
 		"message": "සම්බන්ධ කරන්න"
 	},
@@ -101,6 +104,9 @@
 	"field_username_placeholder": {
 		"message": "පරිශීලක නම"
 	},
+	"file_label": {
+		"message": "ගොනුව"
+	},
 	"found_relay": {
 		"message": "පහත රිලේ සේවාදායකය හමු විය: $1"
 	},
@@ -119,11 +125,26 @@
 	"hterm_button_block": {
 		"message": "අවහිර කරන්න"
 	},
+	"hterm_button_close": {
+		"message": "වසන්න"
+	},
+	"hterm_button_find": {
+		"message": "සොයන්න"
+	},
+	"hterm_button_next": {
+		"message": "ඊළඟ"
+	},
 	"hterm_button_page_down": {
 		"message": "පිටුව පහළට"
 	},
 	"hterm_button_page_up": {
 		"message": "පිටුව ඉහළට"
+	},
+	"hterm_button_previous": {
+		"message": "පෙර"
+	},
+	"hterm_find_result_count": {
+		"message": "ගැළපීම් $1"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "$1 මැකීම අසාර්ථකයි"
@@ -236,6 +257,12 @@
 	"hterm_name_pref_environment": {
 		"message": "පාරිසරික විචල්‍ය"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "ප්‍රතිඵල උද්දීපන වර්ණය සොයන්න"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "ප්‍රතිඵල සොයන්න තෝරා ගත් උද්දීපන වර්ණය"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "පාඨ අකුරු වර්ග පවුල"
 	},
@@ -276,7 +303,7 @@
 		"message": "පිටුව ඉහළට/පහළට යතුර අනුචලන හැසිරීම"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Alt+1..9 පටිති හැසිරීම මාරු කරන්න"
+		"message": "Alt+1..9 ටැබ/යෙදුම් හැසිරීම මාරු කරන්න"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Ctrl+N නව කවුළු හැසිරීම"
@@ -302,8 +329,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "ඇද දැමීමට ඇලවීමට ඉඩ දෙන්න"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "කේතනය ලබා ගන්න"
+	"hterm_name_pref_screen_border_color": {
+		"message": "තිර මායිම් වර්ණය"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "තිර මායිම් තරම"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "පිරවුමේ තරම"
@@ -346,6 +376,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "ස්වයංක්‍රීය තේරීම නැවැත්වීම (දකුණට)"
+	},
+	"hterm_notify_copy": {
+		"message": "පිටපත් කළා"
 	},
 	"hterm_options_button_label": {
 		"message": "විකල්ප"
@@ -461,6 +494,12 @@
 	"hterm_pref_environment": {
 		"message": "වස්තුවක් ලෙස පරිසර විචල්‍යවල මුල් කට්ටලය."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "ප්‍රතිඵල සොයන්න උද්දීපනය කිරීමට පසුබිම් වර්ණය."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "තෝරා ගත් ප්‍රතිඵල සොයන්න උද්දීපනය කිරීමට පසුබිම් වර්ණය."
+	},
 	"hterm_pref_font_family": {
 		"message": "පර්යන්ත පාඨය සඳහා පෙරනිමි අකුරු වර්ග පවුල"
 	},
@@ -491,14 +530,17 @@
 	"hterm_pref_meta_sends_escape": {
 		"message": "Meta යතුර ඔබා ගෙන සිටින අතරතුර යතුරක් ඔබන විට ESC උපසර්ගයක් යවන්න.\n\nඋදාහරණයක් වශයෙන්, සබල කළ විට, Meta+K එබීම ^[k ඔබ Escape සහ පසුව k එබූ ලෙස යවයි. අබල කළ විට, k පවණක් යැවේ."
 	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "ඇලවීම සඳහා භාවිත කරන මූසික බොත්තම.\n\nස්වයං-අනාවරණය සඳහා, අපි X11 නොවන වේදිකා (Chrome OS ඇතුළුව) සඳහා මැද මූසික බොත්තම භාවිත කරමු. X11 මත, අපි දකුණු මූසික බොත්තම භාවිත කරමු (කවුළු කළමනාකරු මැද මූසික බොත්තම හරහා ඇලවීම හසුරුවීම සිදු කළ යුතු බැවින්).\n\n0 == වම් (ප්‍රාථමික) බොත්තම.\n1 == මැද (අතිරේක) බොත්තම.\n2 == දකුණු (ද්විතීයික) බොත්තම.\n\nමෙම විකල්පය දකුණු ක්ලික් කිරීමෙන් ඇලවීම සඳහා වන සැකසීමෙන් ස්වාධීන වෙයි.\n\nසටහන: වමත් සහ දකුණත් මූසික මගින් ඔබට ප්‍රාථමික සහ ද්විතියික බොත්තම් හසුරුවනු ලැබේ."
+	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "දකුණු මූසික බොත්තම් ක්ලික් කිරීම්වලදී අලවන්න.\n\nමෙම විකල්පය \"mouse-paste-button\" සැකසීමෙන් ස්වාධීන වෙයි.\n\nසටහන: මෙය වම් සහ දකුණු අත් මූසික නිවැරදිව පරිහරණ කරයි."
+		"message": "දකුණු මූසික බොත්තම් ක්ලික් කිරීම්වලදී අලවන්න.\n\nමෙම විකල්පය \"mouse-paste-button\" සැකසීමෙන් ස්වාධීන වෙයි.\n\nසටහන: වමත් සහ දකුණත් මූසික මගින් ඔබට ප්‍රාථමික සහ ද්විතියික බොත්තම් හසුරුවනු ලැබේ."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "සත්‍ය නම්, පිටුව ඉහළට/පිටුව පහළට යතුර පර්යන්ත අනුචලන තීරුව පාලන කරන අතර Shift+පිටුව ඉහළට/Shift+පිටුව පහළට දුරස්ථ ධාරකයට යැවේ. අසත්‍ය නම්, එවිට පිටුව ඉහළට/පිටුව පහළට දුරස්ථ ධාරකයට යැවෙන අතර Shift+පිටුව ඉහළට/Shift+පිටුව පහළට අනුචලන කරයි."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Alt+1..9 බ්‍රවුසරයට යොමු කෙරෙන්නේද යනු.\n\nඔබට Chrome හි \"පටිත්තට මාරු කරන්න\" යතුරු පුවරු කෙටිමං අහිමි නොවීමට, hterm එක බ්‍රවුසර පටිත්තක් තුළ ධාවන කරන විට මෙය හස්ත වෙයි. පටිත්තක් තුළ ධාවන නොවන විට, මේවා vim හෝ emacs තුළ භාවිත කළ හැකි වීමට, මෙම යතුරු ධාරකය වෙත යැවීම වඩා හොඳ වෙයි.\n\nසත්‍ය නම්, Alt+1..9 බ්‍රවුසරයෙන් පරිහරණ කෙරේ. අසත්‍ය නම්, Alt+1..9 ධාරකයට යැවේ. නිෂ්ඵල නම්, බ්‍රවුසර වේදිකාවට සහ කවුළු වර්ගයට අනුව ස්වයං-අනාවරණ කරන්න."
+		"message": "Alt+1..9 බ්‍රවුසරයට යොමු කෙරෙන්නේද යනු.\n\nඔබට Chrome හි \"ටැබයට/යෙදුමට මාරු කරන්න\" යතුරු පුවරු කෙටි මං අහිමි නොවීමට, hterm එක බ්‍රවුසර ටැබයක් තුළ ධාවන කරන විට මෙය සුදුසු වෙයි. ටැබයක් තුළ ධාවන නොවන විට, මේවා vim හෝ emacs තුළ භාවිත කළ හැකි වීමට, මෙම යතුරු සංග්‍රාහකය වෙත යැවීම වඩා හොඳ වෙයි.\n\nසත්‍ය නම්, Alt+1..9 බ්‍රවුසරයෙන් හසුරුවනු ලැබේ. අසත්‍ය නම්, Alt+1..9 සංග්‍රාහකයට යවනු ඇත. ශුන්‍ය නම්, බ්‍රවුසර වේදිකාවට සහ කවුළු වර්ගයට අනුව ස්වයං-අනාවරණ කරන්න."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Ctrl+N බ්‍රවුසරයට යොමු කෙරෙන්නේද යනු.\n\nසත්‍ය නම්, Ctrl+N බ්‍රවුසරයෙන් \"නව කවුළු\" යතුරු පුවරු කෙටි මඟ ලෙස පරිහරණ කෙරේ. අසත්‍ය නම්, Ctrl+N ධාරකය වෙත යවනු ලැබේ."
@@ -524,8 +566,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "සත්‍ය නම්, ඇද දැමූ පාඨය පර්යන්තය තුළ ඇලවෙයි.\nඅසත්‍ය නම්, දැමූ පාඨය නොසලකා හරිනු ලැබේ."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "ධාරකයෙන් ලැබෙන දත්ත සඳහා අපේක්ෂිත කේතනය සකසන්න.\nකේතනය නොගැළපෙන්නේ නම්, දෘශ්‍ය දෝෂ නිරීක්ෂණ වීමට ඉඩ ඇත.\n\nවලංගු අගයවල් 'utf-8' සහ 'raw' වේ."
+	"hterm_pref_screen_border_color": {
+		"message": "පර්යන්ත තිරය වටා ඇති මායිම සඳහා වන වර්ණය\n\nතිරයේ දාරවල දෘශ්‍යමාන රේඛාවක් සෑදීමට මෙය පර්යන්ත තිරය වටා ඇති මායිමයේ වර්ණය පාලන කරයි."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "පර්යන්ත තිරය වටා මායිමයේ තරම පික්සල්වලින්.\n\nතිරයේ දාරවල දෘශ්‍යමාන රේඛාවක් සෑදීමට මෙය පර්යන්ත තිරය වටා ඇති මායිමයේ තරම පාලන කරයි."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "පර්යන්ත තිරයේ මායිම වටා පිරවුමේ තරම පික්සල්වලින්.\n\nමෙය පර්යන්ත තිරය වටා ඇති මායිමයේ තරම පාලන කරයි, එබැවින් පරිශීලකයාට තිරයේ දාරවලට යම් දෘශ්‍යමාන පිරවුම් එක් කළ හැක."
@@ -959,6 +1004,9 @@
 	"relay_retry": {
 		"message": "යළි උත්සාහ කෙරේ..."
 	},
+	"remove_label": {
+		"message": "ඉවත් කරන්න"
+	},
 	"request_pin_prompt": {
 		"message": "'$2 ($3)' මත $1 යතු අගුලු හැරීමට රහස් අංකය ඇතුළත් කරන්න (ප්‍රයත්න $4 ක් ඉතුරුයි):"
 	},
@@ -967,6 +1015,9 @@
 	},
 	"save_label": {
 		"message": "සුරකින්න"
+	},
+	"select_label": {
+		"message": "තෝරන්න"
 	},
 	"send_feedback_label": {
 		"message": "ප්‍රතිපෝෂණ යවන්න"
@@ -979,6 +1030,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH විස්තාරක"
+	},
+	"ssh_cert_check_error": {
+		"message": " අසාර්ථකයි: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "SSH සහතිකය නැවුම් කරමින්..."
+	},
+	"ssh_cert_check_result": {
+		"message": " කල් ඉකුත් වීම තෙක් පැය ~$1"
+	},
+	"ssh_cert_check_start": {
+		"message": "SSH සහතිකයෙහි නැවුම් බව පරීක්ෂා කරමින්..."
 	},
 	"stream_open_error": {
 		"message": "$1 ප්‍රවාහය විවෘත කිරීම අසාර්ථකයි: $2"
@@ -1037,8 +1100,11 @@
 	"terminal_settings_about_label": {
 		"message": "පිළිබඳ"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "රූපය විශාල වැඩිය"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "පසුබිම් රූප URL. 'http://' හෝ 'https://' සමඟ ආරම්භ විය යුතුම ය. රූපයක් නැති නම් එය හිස්ව තබන්න.\n\nඋදාහරණයක් වශයෙන්:\n  https://goo.gl/anedTK"
+		"message": "ඔබේ පරිගණකයෙන් පසුබිම් රූප ගොනුවක් තෝරන්න."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ස්වයං"
@@ -1069,6 +1135,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "අඳුරු"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "සන්ධ්‍යාව"
+	},
+	"terminal_theme_forest_label": {
+		"message": "වනාන්තරය"
 	},
 	"terminal_theme_haze_label": {
 		"message": "හීන් මීදුම"
@@ -1188,7 +1260,7 @@
 		"message": "hterm-notify භාවිත කර බ්‍රවුසරය තුළ දැනුම්දීම් සංදර්ශන කරන්න: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "'ssh <profile name>': https://goo.gl/V7o8ki ටයිප් කිරීමෙන් omnibox වෙතින් සම්බන්ධ කරන්න"
+		"message": "'ssh<Tab><profile name>' ටයිප් කිරීමෙන් omnibox වෙතින් සම්බන්ධ වන්න: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS හට SFTP හරහා ගොනු පද්ධති නැංවිමටත් Files යෙදුම හරහා බ්‍රවුස් කිරීමටත් හැකිය. 'සම්බන්ධ කරන්න' වෙනුවට 'SFTP නැංවුම' භාවිත කරන්න."

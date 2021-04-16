@@ -32,6 +32,9 @@
 	"command_startup_failed": {
 		"message": "Kon nie $1 begin nie: $2"
 	},
+	"confirm_button_label": {
+		"message": "Bevestig"
+	},
 	"connect_button_label": {
 		"message": "Koppel"
 	},
@@ -98,6 +101,9 @@
 	"field_username_placeholder": {
 		"message": "gebruikernaam"
 	},
+	"file_label": {
+		"message": "Lêer"
+	},
 	"found_relay": {
 		"message": "Het herleidingbediener gekry: $1"
 	},
@@ -116,11 +122,26 @@
 	"hterm_button_block": {
 		"message": "Blokkeer"
 	},
+	"hterm_button_close": {
+		"message": "Maak toe"
+	},
+	"hterm_button_find": {
+		"message": "Soek"
+	},
+	"hterm_button_next": {
+		"message": "Volgende"
+	},
 	"hterm_button_page_down": {
 		"message": "Blaai af"
 	},
 	"hterm_button_page_up": {
 		"message": "Blaai op"
+	},
+	"hterm_button_previous": {
+		"message": "Vorige"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 passings"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Kon nie $1 laai nie"
@@ -230,6 +251,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Omgewingveranderlikes"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Merkkleur vir soekresultate"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Merkkleur vir geselekteerde soekresultate"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Tekslettertipefamilie"
 	},
@@ -270,7 +297,7 @@
 		"message": "Blaai op-/af-sleutel se rolgedrag"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Alt+1..9 \"wissel oortjie\"-gedrag"
+		"message": "Alt+1..9 \"wissel oortjie/program\"-gedrag"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Ctrl+N \"nuwe venster\"-gedrag"
@@ -296,8 +323,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Laat sleep-en-los om te plak toe"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Ontvang enkodering"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Skermrand se kleur"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Skermrand se grootte"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Grootte van skermopvulling"
@@ -340,6 +370,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Stop outomatiese seleksie (na regs)"
+	},
+	"hterm_notify_copy": {
+		"message": "Gekopieer"
 	},
 	"hterm_options_button_label": {
 		"message": "Opsies"
@@ -455,6 +488,12 @@
 	"hterm_pref_environment": {
 		"message": "Die oorspronklike stel omgewingveranderlikes, as 'n voorwerp."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Die agtergrondkleur om soekresultate te merk."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Die agtergrondkleur om die geselekteerde soekresultaat te merk."
+	},
 	"hterm_pref_font_family": {
 		"message": "Versteklettertipefamilie vir die terminaalteks."
 	},
@@ -485,14 +524,17 @@
 	"hterm_pref_meta_sends_escape": {
 		"message": "Stuur 'n ESC-voorvoegsel wanneer jy 'n sleutel druk terwyl jy die Meta-sleutel hou.\n\nByvoorbeeld, wanneer dit geaktiveer is, sal Meta+K as jy dit druk ^[k stuur asof jy Escape en dan k getik het. Wanneer dit gedeaktiveer is, sal net k gestuur word."
 	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "Die muisknoppie om vir plak te gebruik.\n\nVir outobespeur sal ons die muis se middelknoppie vir nie-X11-platforms (insluitend Chrome-bedryfstelsel) gebruik. Op X11 sal ons die muis se regterknoppie gebruik (omdat die vensterbestuurder plak via die muis se middelknoppie moet hanteer).\n\n0 == linker- (primêre) knoppie.\n1 == middel- (hulp-) knoppie.\n2 == regter- (sekondêre) knoppie.\n\nHierdie opsie is onafhanklik van die regsklik-plak-instelling.\n\nLet wel: Die primêre en sekondêre knoppies word met links- en regshandige muise vir jou gehanteer."
+	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Plak is op muis se regterknoppieklikke.\n\nHierdie opsie is onafhanklik van die \"mouse-paste-button\"-instelling.\n\nLet wel: Dit sal links- en regshandige muise reg hanteer."
+		"message": "Plak is op muis se regterknoppieklikke.\n\nHierdie opsie is onafhanklik van die \"mouse-paste-button\"-instelling.\n\nLet wel: Die primêre en sekondêre knoppies word met links- en regshandige muise vir jou gehanteer."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Indien waar, beheer Blaai op/Blaai af die terminaal se rolbalk en Shift+Blaai op/Shift+Blaai af word na die afstandgasheer gestuur. Indien vals, word Page Up/Page Down na die afstandgasheer gestuur en Shift+Home/Shift+End rollees."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Of Alt+1..9 na die blaaier aangestuur word.\n\nDit is handig wanneer hterm in 'n blaaieroortjie laat loop word, sodat jy nie Chrome se \"wissel na oortjie\"-sleutelbordkortpaaie verloor nie. Wanneer dit nie in 'n oortjie laat loop word nie, is dit beter om hierdie sleutels na die gasheer te stuur sodat hulle in vim of emacs gebruik kan word.\n\nIndien waar, sal Alt+1..9 deur die blaaier hanteer word. Indien vals, sal Alt+1..9 na die gasheer gestuur word. Indien \"null\", is outobespeur gegrond op blaaierplatform en venstertipe."
+		"message": "Of Alt+1..9 na die blaaier aangestuur word.\n\nDit is handig wanneer hterm in 'n blaaieroortjie laat loop word sodat jy nie Chrome se \"wissel na oortjie/program\"-sleutelbordkortpaaie verloor nie. Wanneer dit nie in 'n oortjie laat loop word nie, is dit beter om hierdie sleutels na die gasheer te stuur sodat hulle in vim of emacs gebruik kan word.\n\nIndien waar, sal Alt+1..9 deur die blaaier hanteer word. Indien vals, sal Alt+1..9 na die gasheer gestuur word. Indien \"null\", is outobespeur gegrond op blaaierplatform en venstertipe."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Of Ctrl+N na die blaaier aangestuur word.\n\nIndien waar, sal Ctrl+N deur die blaaier as die \"nuwe venster\"-sleutelbordkortpad hanteer word. Indien vals, sal Ctrl+N na die gasheer gestuur word."
@@ -518,8 +560,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Indien waar, sal sleep-en-los-teks binne-in terminaal geplak word.\nIndien vals, sal teks wat gelos is, geïgnoreer word."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Stel die verwagte enkodering vir data wat van die gasheer af ontvang word.\nAs die enkoderings nie pas nie, sal visuele foute waarskynlik voorkom.\n\nGeldige waardes is \"utf-8\" en \"raw\"."
+	"hterm_pref_screen_border_color": {
+		"message": "Die kleur vir die rand rondom die terminaalskerm.\n\nDit beheer die kleur van die rand rondom die terminaalskerm om 'n sigbare lyn aan die kante van die skerm te skep."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Die randgrootte in pieksels rondom die terminaalskerm.\n\nDit beheer die grootte van die rand rondom die terminaalskerm om 'n sigbare lyn aan die kante van die skerm te skep."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Die opvullinggrootte, in pieksels, rondom die rand van die terminaalskerm.\n\nDit beheer die grootte van die rand rondom die terminaalskerm sodat die gebruiker 'n stukkie sigbare opvulling aan die kante van die skerm kan byvoeg."
@@ -923,6 +968,9 @@
 	"relay_retry": {
 		"message": "Herprobeer tans …"
 	},
+	"remove_label": {
+		"message": "Verwyder"
+	},
 	"request_pin_prompt": {
 		"message": "Voer PIN in om sleutel $1 op \"$2 ($3)\" te ontsluit ($4 pogings oor):"
 	},
@@ -931,6 +979,9 @@
 	},
 	"save_label": {
 		"message": "Stoor"
+	},
+	"select_label": {
+		"message": "Kies"
 	},
 	"send_feedback_label": {
 		"message": "Stuur terugvoer"
@@ -943,6 +994,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH-argumente"
+	},
+	"ssh_cert_check_error": {
+		"message": " het misluk: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Herlaai tans SSH-sertifikaat …"
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 totdat dit verstryk"
+	},
+	"ssh_cert_check_start": {
+		"message": "Kontroleer tans of SSH-sertifikaat herlaai moet word …"
 	},
 	"stream_open_error": {
 		"message": "Kon nie stroom $1 oopmaak nie: $2"
@@ -998,8 +1061,11 @@
 	"terminal_settings_about_label": {
 		"message": "Meer oor"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Prent is te groot"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "Agtergrondprent-URL. Moet begin met http:// of https:// Los dit leeg as daar geen prent is nie.\n\nByvoorbeeld:\n  https://goo.gl/anedTK"
+		"message": "Kies 'n agtergrondprentlêer op jou rekenaar."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Outomaties"
@@ -1030,6 +1096,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Donker"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Skemer"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Woud"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Wasig"
@@ -1149,7 +1221,7 @@
 		"message": "Wys kennisgewings in die blaaier met hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Koppel van die omniboks af deur \"ssh <profielnaam>\": https://goo.gl/V7o8ki in te tik"
+		"message": "Koppel van die omniboks af deur \"ssh<Tab><profile name>\": https://goo.gl/V7o8ki in te tik"
 	},
 	"tip_4": {
 		"message": "Chrome-bedryfstelsel kan lêerstelsels via SFTP monteer en via die Lêers-program deurblaai. Gebruik \"SFTP-monteer\" pleks van \"Koppel\"."

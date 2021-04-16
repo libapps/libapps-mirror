@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Falha ao iniciar o comando $1: $2."
 	},
+	"confirm_button_label": {
+		"message": "Confirmar"
+	},
 	"connect_button_label": {
 		"message": "Ligar"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "nome de utilizador"
 	},
+	"file_label": {
+		"message": "Ficheiro"
+	},
 	"found_relay": {
 		"message": "Servidor de transmissão encontrado: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "Bloquear"
 	},
+	"hterm_button_close": {
+		"message": "Fechar"
+	},
+	"hterm_button_find": {
+		"message": "Localizar"
+	},
+	"hterm_button_next": {
+		"message": "Seguinte"
+	},
 	"hterm_button_page_down": {
 		"message": "Página para baixo"
 	},
 	"hterm_button_page_up": {
 		"message": "Página para cima"
+	},
+	"hterm_button_previous": {
+		"message": "Anterior"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 correspondências"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Falha ao carregar o recurso $1."
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Variáveis de ambiente"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Cor de realce dos resultados de localizar"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Cor de realce dos resultados de localizar selecionados"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Família de tipos de letra do texto"
 	},
@@ -282,7 +309,7 @@
 		"message": "Comportamento de deslocamento das teclas Página para cima/Página para baixo"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Alt+1..9, comportamento de mudança de separador"
+		"message": "Comportamento de mudar para o separador/a app de Alt+1..9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Ctrl+N, comportamento da nova janela"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Permitir arrastar e largar para colar"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Receber codificação"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Cor do limite do ecrã"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Tamanho do limite do ecrã"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Tamanho do preenchimento do ecrã"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Interrupção da seleção automática (à direita)"
+	},
+	"hterm_notify_copy": {
+		"message": "Copiado"
 	},
 	"hterm_options_button_label": {
 		"message": "Opções"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "O conjunto inicial das variáveis de ambiente como um objeto."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "A cor de fundo para realçar os resultados de localizar."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "A cor de fundo para realçar o resultado de localizar selecionado."
+	},
 	"hterm_pref_font_family": {
 		"message": "Família de tipos de letra predefinida para o texto do terminal."
 	},
@@ -498,16 +537,16 @@
 		"message": "Envie um prefixo ESC ao premir uma tecla enquanto mantém premida a tecla Meta.\n\nPor exemplo, se estiver ativado, premir Meta+K envia ^[k como se tivesse digitado Escape, seguido de k. Se estiver desativado, apenas k é enviado."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Botão para colar do rato ou definição nula para a deteção automática.\n\nPara a deteção automática, vamos utilizar o botão do meio do rato para outras plataformas que não o X11 (incluindo o Chrome OS). No X11, vamos utilizar o botão direito do rato (uma vez que o gestor de janela nativo deverá utilizar o botão do meio do rato para colar).\n\n0 == botão esquerdo (principal).\n1 == botão do meio (auxiliar).\n2 == botão direito (secundário).\n\nEsta opção é independente da definição para colar ao clicar no botão direito.\n\nNota: esta opção processa corretamente os ratos para utilizadores canhotos e destros."
+		"message": "O botão do rato a utilizar para colar.\n\nPara a deteção automática, vamos utilizar o botão central do rato para outras plataformas que não o X11 (incluindo o Chrome OS). No X11, vamos utilizar o botão direito do rato (uma vez que o gestor de janela deverá utilizar o botão central do rato para colar).\n\n0 == botão esquerdo (principal).\n1 == botão central (auxiliar).\n2 == botão direito (secundário).\n\nEsta opção é independente da definição para colar ao clicar com o botão direito do rato.\n\nNota: os botões primário e secundário são processados para si com ratos para utilizadores canhotos e destros."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Colar ao clicar no botão do lado direito do rato.\n\nEsta opção é independente da definição \"mouse-paste-button\".\n\nNota: esta opção processa corretamente os ratos para utilizadores canhotos e destros."
+		"message": "Cole ao clicar no botão do lado direito do rato.\n\nEsta opção é independente da definição \"mouse-paste-button\".\n\nNota: os botões primário e secundário são processados para si com ratos para utilizadores canhotos e destros."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Se definido como verdadeiro, as teclas Página para cima/Página para baixo controlam a barra de deslocamento do terminal e o comando Shift+Página para cima/Shift+Página para baixo é enviado para o anfitrião remoto. Se definido como falso, as teclas Página para cima/Página para baixo são enviadas para o anfitrião remoto e o comando Shift+Página para cima/Shift+Página para baixo efetua o deslocamento."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Se devemos atribuir o comando Alt+1..9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os atalhos de teclado \"mudar para o separador\" do Chrome. Quando não estiver a executar num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou Emacs.\n\nSe definido como verdadeiro, o comando Alt+1..9 é processado pelo navegador. Se definido como falso, o comando é enviado ao anfitrião. Se definida como nulo, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
+		"message": "Se devemos atribuir o comando Alt+1..9 ao navegador.\n\nEsta ação é útil ao executar hterm num separador do navegador, para não perder os atalhos de teclado \"mudar para o separador/a app\" do Chrome. Quando não estiver a executar num separador, é melhor enviar estas teclas ao anfitrião para que possam ser utilizadas no Vim ou Emacs.\n\nSe definido como verdadeiro, o comando Alt+1..9 é processado pelo navegador. Se definido como falso, o comando é enviado ao anfitrião. Se definido como nulo, a deteção automática é efetuada com base no tipo de janela e na plataforma do navegador."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Se Ctrl+N é transmitido ao navegador.\n\nSe definido como verdadeiro, Ctrl+N é processado pelo navegador como o atalho de teclado \"nova janela\". Se definido como falso, Ctrl+N é enviado para o anfitrião."
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Se definido como verdadeiro, o texto arrastado e largado é colado no terminal.\nSe definido como falso, o texto largado é ignorado."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Defina a codificação esperada para os dados recebidos do anfitrião.\nSe as codificações não corresponderem, é provável que sejam observados erros visuais.\n\nOs valores válidos são \"utf-8\" e \"raw\"."
+	"hterm_pref_screen_border_color": {
+		"message": "A cor do limite em torno do ecrã do terminal.\n\nIsto controla a cor do limite em torno do ecrã do terminal para criar uma linha visível nas extremidades do ecrã."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "O tamanho do limite em píxeis em torno do ecrã do terminal.\n\nIsto controla o tamanho do limite em torno do ecrã do terminal para criar uma linha visível nas extremidades do ecrã."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "O tamanho do preenchimento em píxeis em torno do limite do ecrã do terminal.\n\nIsto controla o tamanho do limite em torno do ecrã do terminal para que o utilizador possa adicionar algum preenchimento visível às extremidades do ecrã."
@@ -896,6 +938,9 @@
 	"relay_retry": {
 		"message": "A tentar novamente…"
 	},
+	"remove_label": {
+		"message": "Remover"
+	},
 	"request_pin_prompt": {
 		"message": "Introduza o PIN para desbloquear a chave $1 no \"$2 ($3)\" ($4 tentativas restantes):"
 	},
@@ -904,6 +949,9 @@
 	},
 	"save_label": {
 		"message": "Guardar"
+	},
+	"select_label": {
+		"message": "Selecionar"
 	},
 	"send_feedback_label": {
 		"message": "Enviar feedback"
@@ -916,6 +964,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Argumentos SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " Falhou: $1."
+	},
+	"ssh_cert_check_refresh": {
+		"message": "A atualizar o certificado de SSH…"
+	},
+	"ssh_cert_check_result": {
+		"message": " Cerca de $1 horas até expirar"
+	},
+	"ssh_cert_check_start": {
+		"message": "A verificar a validade do certificado de SSH…"
 	},
 	"stream_open_error": {
 		"message": "Falha ao abrir stream $1: $2."
@@ -971,8 +1031,11 @@
 	"terminal_settings_about_label": {
 		"message": "Acerca de"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "A imagem é demasiado grande."
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL da imagem de fundo. Deve começar com \"http://\" ou \"https://\". Deixe-o vazio quando não há imagem.\n\nPor exemplo:\n  https://goo.gl/anedTK"
+		"message": "Selecione um ficheiro de imagem de fundo no computador."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automático"
@@ -1003,6 +1066,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Escuro"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Anoitecer"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Floresta"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Neblina"
@@ -1119,7 +1188,7 @@
 		"message": "Apresente notificações no navegador através de hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Estabeleça ligação a partir da caixa geral ao introduzir \"ssh <nome do perfil>\": https://goo.gl/V7o8ki"
+		"message": "Estabeleça ligação a partir da caixa geral ao introduzir \"ssh<Tab><profile name>\": https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "O Chrome OS pode montar sistemas de ficheiros através de SFTP e procurar através da app Files. Utilize \"Montar SFTP\" em vez de \"Ligar\"."

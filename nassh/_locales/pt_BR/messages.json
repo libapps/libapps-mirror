@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Falha ao iniciar $1: $2"
 	},
+	"confirm_button_label": {
+		"message": "Confirmar"
+	},
 	"connect_button_label": {
 		"message": "Conectar"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "nome de usuário"
 	},
+	"file_label": {
+		"message": "Arquivo"
+	},
 	"found_relay": {
 		"message": "Servidor de redirecionamento encontrado: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "Bloquear"
 	},
+	"hterm_button_close": {
+		"message": "Fechar"
+	},
+	"hterm_button_find": {
+		"message": "Localizar"
+	},
+	"hterm_button_next": {
+		"message": "Próxima"
+	},
 	"hterm_button_page_down": {
 		"message": "Página abaixo"
 	},
 	"hterm_button_page_up": {
 		"message": "Página acima"
+	},
+	"hterm_button_previous": {
+		"message": "Anterior"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 resultados"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Falha ao carregar $1"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Variáveis de ambiente"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Cor de destaque dos resultados de pesquisas"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Cor de destaque dos resultados de pesquisas selecionados"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Família de fontes"
 	},
@@ -282,7 +309,7 @@
 		"message": "Rolar usando as teclas Page Up/Down"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Alternar guia usando Alt+1 a 9"
+		"message": "Comportamento do atalho Alt+1 a 9 para alternar guia/app"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Abrir nova janela usando Ctrl+N"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Permitir arrastar e soltar para colar"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Receber codificação"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Cor da borda da tela"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Tamanho da borda da tela"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Tamanho do padding da tela"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Interrupção automática de seleção (para a direita)"
+	},
+	"hterm_notify_copy": {
+		"message": "Copiado"
 	},
 	"hterm_options_button_label": {
 		"message": "Opções"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "O grupo inicial de variáveis de ambiente, como um objeto."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "A cor do segundo plano para destacar resultados de pesquisas."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "A cor do segundo plano para destacar o resultado de pesquisa selecionado."
+	},
 	"hterm_pref_font_family": {
 		"message": "A família de fontes padrão para o texto do terminal."
 	},
@@ -498,16 +537,16 @@
 		"message": "Envia um prefixo ESC ao pressionar uma tecla mantendo a tecla Meta pressionada.\n\nPor exemplo, quando ativada, pressionar Meta+K enviará ^[k como se você tivesse pressionado Escape e depois k. Quando desativada, apenas k será enviada."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Botão de colar do mouse ou nula para detecção automática.\n\nPara detecção automática, usaremos o botão do meio do mouse para plataformas não X11 (incluindo o Chrome OS). Na plataforma X11, usaremos o botão direito do mouse (visto que o gerenciador de janelas nativo precisa colar usando o botão do meio do mouse).\n\n0 == botão esquerdo (principal).\n1 == botão do meio (auxiliar).\n2 == botão direito (secundário).\n\nEsta opção é independente da configuração de colar usando o botão direito.\n\nObservação: essa opção controlará configurações de mouse destro e canhoto corretamente."
+		"message": "O botão do mouse usado para colar.\n\nPara detecção automática, usaremos o botão do meio em plataformas não X11 (incluindo o Chrome OS). Na plataforma X11, como o gerenciador de janelas precisa colar usando o botão do meio, usaremos o botão direito do mouse.\n\n0 == botão esquerdo (principal).\n1 == botão do meio (auxiliar).\n2 == botão direito (secundário).\n\nEssa opção é independente da configuração de colar usando o botão direito.\n\nObservação: os botões primário e secundário mudam automaticamente de acordo com as configurações de mouse destro e canhoto."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Colar ao clicar com o botão direito do mouse.\n\nEsta opção é independente da configuração \"mouse-paste-button\".\n\nObservação: esta opção controlará configurações de mouse destro e canhoto corretamente."
+		"message": "Colar ao clicar com o botão direito do mouse.\n\nEssa opção é independente da configuração \"mouse-paste-button\".\n\nObservação: os botões primário e secundário mudam automaticamente de acordo com as configurações de mouse destro e canhoto."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Se definida como verdadeira, as teclas Page Up/Page Down controlam a barra de rolagem do terminal e Shift+Page Up/Shift+Page Down são enviadas ao host remoto. Se definida como falsa, as teclas Page Up/Page Down são enviadas ao host remoto e Shift+Page Up/Shift Page+Down rolam a tela."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Define se as teclas Alt+1 a 9 são transmitidas ao navegador.\n\nIsso é útil ao executar o hterm em uma guia do navegador para que você não perca os atalhos \"alternar para guia\" do Chrome. Quando não for executado em uma guia, é melhor enviar essas teclas ao host para que elas possam ser usadas em vim ou emacs.\n\nSe verdadeira, as teclas Alt+1 a 9 serão controladas pelo navegador. Se falsa, essas teclas serão enviadas ao host. Se nula, a detecção será automática, com base na plataforma do navegador e no tipo de janela."
+		"message": "Define se as teclas Alt+1 a 9 são transmitidas ao navegador.\n\nÉ útil ao executar o hterm em uma guia do navegador para que você não perca os atalhos \"alternar para guia/app\" do Chrome. Quando a execução não for em uma guia, é melhor enviar essas teclas ao host para que elas possam ser usadas em vim ou emacs.\n\nSe definida como verdadeira, as teclas Alt+1 a 9 serão controladas pelo navegador. Se definida como falsa, essas teclas serão enviadas ao host. Se for nula, a detecção será automática, com base na plataforma do navegador e no tipo de janela."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Define se as teclas Ctrl+N são transmitidas ao navegador.\n\nSe verdadeira, o comando Ctrl+N será tratado pelo navegador como o atalho \"nova janela\". Se falsa, Ctrl+N será enviado para o host."
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Se definida como verdadeira, o texto arrastado e solto será colado no terminal.\nSe definida como falsa, o texto solto será ignorado."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Define a codificação esperada para os dados recebidos do host.\nSe as codificações não corresponderem, é provável que bugs visuais sejam observados.\n\nOs valores válidos são \"utf-8\" e \"raw\"."
+	"hterm_pref_screen_border_color": {
+		"message": "A cor da borda em torno da tela do terminal.\n\nControla a cor da borda em torno da tela do terminal para criar uma linha visível nos limites da tela."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "O tamanho em pixels da borda em torno da tela do terminal.\n\nControla o tamanho da borda em torno da tela do terminal para criar uma linha visível nos limites da tela."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Tamanho do padding em pixels em torno da borda da tela do terminal.\n\nControla o tamanho dessa borda para que o usuário possa adicionar padding visível aos limites da tela."
@@ -893,6 +935,9 @@
 	"relay_retry": {
 		"message": "Tentando novamente…"
 	},
+	"remove_label": {
+		"message": "Remover"
+	},
 	"request_pin_prompt": {
 		"message": "Digite o PIN para desbloquear a tecla $1 em \"$2 ($3)\" ($4 tentativas restantes):"
 	},
@@ -901,6 +946,9 @@
 	},
 	"save_label": {
 		"message": "Salvar"
+	},
+	"select_label": {
+		"message": "Selecionar"
 	},
 	"send_feedback_label": {
 		"message": "Enviar feedback"
@@ -913,6 +961,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Argumentos SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " houve uma falha: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Atualizando certificado SSH…"
+	},
+	"ssh_cert_check_result": {
+		"message": " Cerca de $1 horas até a expiração"
+	},
+	"ssh_cert_check_start": {
+		"message": "Conferindo validade do certificado SSH…"
 	},
 	"stream_open_error": {
 		"message": "Falha ao abrir stream $1: $2"
@@ -971,8 +1031,11 @@
 	"terminal_settings_about_label": {
 		"message": "Sobre"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "A imagem é grande demais"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL da imagem de plano de fundo. Precisa começar com \"http://\" ou \"https://\". Deixe em branco para não adicionar uma imagem.\n\nPor exemplo:\n  https://goo.gl/anedTK"
+		"message": "Selecione um arquivo de imagem de plano de fundo do seu computador."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automático"
@@ -1003,6 +1066,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Escuro"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Anoitecer"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Floresta"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Névoa"
@@ -1116,7 +1185,7 @@
 		"message": "Exibir notificações no navegador usando hterm-notify: https://goo.gl/ZNxGdF (link em inglês)"
 	},
 	"tip_3": {
-		"message": "Conectar pela omnibox digitando '\"ssh <nome do perfil>\": https://goo.gl/V7o8ki (link em inglês)"
+		"message": "Conectar pela omnibox digitando \"ssh<Tab><profile name>\": https://goo.gl/V7o8ki (link em inglês)"
 	},
 	"tip_4": {
 		"message": "O Chrome OS pode ativar sistemas de arquivos por meio de SFTP e navegar usando o app Arquivos. Utilize \"Ativar SFTP\" em vez de \"Conectar\"."

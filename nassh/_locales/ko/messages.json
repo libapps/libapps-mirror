@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "$1 실행 실패: $2"
 	},
+	"confirm_button_label": {
+		"message": "확인"
+	},
 	"connect_button_label": {
 		"message": "연결"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "사용자 이름"
 	},
+	"file_label": {
+		"message": "파일"
+	},
 	"found_relay": {
 		"message": "발견된 릴레이 서버: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "차단"
 	},
+	"hterm_button_close": {
+		"message": "닫기"
+	},
+	"hterm_button_find": {
+		"message": "찾기"
+	},
+	"hterm_button_next": {
+		"message": "다음"
+	},
 	"hterm_button_page_down": {
 		"message": "페이지 아래로"
 	},
 	"hterm_button_page_up": {
 		"message": "페이지 위로"
+	},
+	"hterm_button_previous": {
+		"message": "이전"
+	},
+	"hterm_find_result_count": {
+		"message": "일치하는 결과 $1개"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "$1을(를) 로드할 수 없습니다."
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "환경 변수"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "검색결과 강조표시 색상"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "선택한 검색결과 강조표시 색상"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "텍스트 글꼴 유형"
 	},
@@ -282,7 +309,7 @@
 		"message": "Page Up/Down 키 스크롤 동작"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Alt + 1~9 탭 전환 동작"
+		"message": "Alt + 1~9 탭/앱 전환 동작"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Ctrl + N 새 창 동작"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "드래그 앤 드롭하여 붙여넣기 허용"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "인코딩 수신"
+	"hterm_name_pref_screen_border_color": {
+		"message": "화면 테두리 색상"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "화면 테두리 크기"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "화면 패딩 크기"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "자동 선택 중지(오른쪽)"
+	},
+	"hterm_notify_copy": {
+		"message": "복사됨"
 	},
 	"hterm_options_button_label": {
 		"message": "옵션"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "객체로서의 환경 변수 초기 세트입니다."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "검색결과를 강조표시할 때 사용할 배경색입니다."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "선택한 검색결과를 강조표시할 때 사용할 배경색입니다."
+	},
 	"hterm_pref_font_family": {
 		"message": "터미널 텍스트의 기본 글꼴 모음입니다."
 	},
@@ -498,16 +537,16 @@
 		"message": "메타 키를 누르고 있는 동안 키를 누르면 ESC 접두어를 전송합니다.\n\n예를 들어 사용 설정된 경우 메타 + K 키를 누르면 Esc와 k를 입력한 것처럼 ^[k가 전송됩니다. 사용 중지된 경우 k만 전송됩니다."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "마우스 붙여넣기 버튼을 지정합니다. Null로 설정하면 자동 감지됩니다.\n\n자동 감지를 사용하는 경우, Chrome OS 등 X11이 아닌 플랫폼에서는 마우스 가운데 버튼을 사용합니다. X11 플랫폼에서는 마우스 오른쪽 버튼을 사용합니다. 기본 창 관리자에서 마우스 가운데 버튼이 붙여넣기에 사용되기 때문입니다.\n\n0 == 왼쪽(기본) 버튼\n1 == 가운데(보조) 버튼\n2 == 오른쪽(예비) 버튼\n\n이 옵션은 '마우스 오른쪽 버튼 클릭으로 붙여넣기' 설정과 관계없이 작동됩니다.\n\n참고: 이 방법으로 왼손잡이용 및 오른손잡이용 마우스를 올바르게 처리할 수 있습니다."
+		"message": "붙여넣기에 사용할 마우스 버튼입니다.\n\n자동 감지의 경우 X11이 아닌 플랫폼(Chrome OS 포함)에서 가운데 마우스 버튼이 사용됩니다. X11에서는 마우스 오른쪽 버튼이 사용됩니다. 창 관리자에서 마우스 가운데 버튼이 붙여넣기에 사용되기 때문입니다.\n\n0 == 왼쪽(기본) 버튼\n1 == 가운데(예비) 버튼\n2 == 오른쪽(보조) 버튼\n\n이 옵션은 마우스 오른쪽 버튼 클릭으로 붙여넣기 설정과 관계없이 작동됩니다.\n\n참고: 왼손잡이용 및 오른손잡이용 마우스에서 기본 버튼과 보조 버튼을 사용할 수 있게 처리됩니다."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "마우스 오른쪽 버튼을 클릭하면 붙여넣기가 실행됩니다.\n\n이 옵션은 '마우스 붙여넣기 버튼' 설정과 관계없이 작동됩니다.\n\n참고: 이 방법으로 왼손잡이용 및 오른손잡이용 마우스를 올바르게 처리할 수 있습니다."
+		"message": "마우스 오른쪽 버튼 클릭으로 붙여넣습니다.\n\n이 옵션은 'mouse-paste-button' 설정과 관계없이 작동됩니다.\n\n참고: 왼손잡이용 및 오른손잡이용 마우스에서 기본 버튼과 보조 버튼을 사용할 수 있게 처리됩니다."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "True인 경우 Page Up/Page Down 키를 사용해 터미널 스크롤바를 제어하고 Shift 키와 Page Up/Page Down 키를 함께 누르면 원격 호스트에 전송됩니다. False인 경우 Page Up/Page Down 키를 누르면 원격 호스트로 전송되고 Shift 키와 Page Up/Page Down 키를 함께 누르면 스크롤됩니다."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Alt + 1~9 키를 브라우저로 전달할지 결정합니다.\n\n브라우저 탭에서 hterm을 실행할 때 Chrome의 '탭으로 전환' 단축키를 계속 사용할 수 있으므로 유용합니다. 탭에서 실행하지 않는 경우에는 이러한 키를 호스트로 전송하여 vim 또는 emacs에서 사용되도록 하는 것이 좋습니다.\n\ntrue인 경우 브라우저에서 Alt + 1~9 키를 처리합니다. false인 경우 Alt + 1~9 키가 호스트로 전송됩니다. null인 경우에는 브라우저 플랫폼 및 창 유형에 따라 자동으로 감지됩니다."
+		"message": "Alt + 1~9 키를 브라우저로 전달할지 설정합니다.\n\n브라우저 탭에서 hterm을 실행할 때 Chrome의 '탭/앱으로 전환' 단축키를 계속 사용할 수 있으므로 유용합니다. 탭에서 실행하지 않는 경우에는 이러한 키를 호스트로 전송하여 vim 또는 emacs에서 사용되도록 하는 것이 좋습니다.\n\nTrue인 경우 브라우저에서 Alt + 1~9 키를 처리합니다. False인 경우 Alt + 1~9 키가 호스트로 전송됩니다. null인 경우에는 브라우저 플랫폼 및 창 유형에 따라 자동으로 감지합니다."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Ctrl + N 키를 브라우저로 전달할지 결정합니다.\n\ntrue인 경우 Ctrl + N 키는 브라우저에서 '새 창' 단축키로 처리됩니다. false인 경우 Ctrl + N 키는 호스트로 전송됩니다."
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "True인 경우 드래그 앤 드롭된 텍스트를 터미널에 붙여넣습니다.\nFalse인 경우 드롭된 텍스트는 무시됩니다."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "호스트에서 받은 데이터에 필요한 인코딩을 설정합니다.\n인코딩이 일치하지 않으면 시각적 버그가 발생할 수 있습니다.\n\n유효한 값은 'utf-8' 및 'raw'입니다."
+	"hterm_pref_screen_border_color": {
+		"message": "모니터 화면 주변의 테두리 색상입니다.\n\n화면 가장자리에 선이 보이도록 모니터 화면 주변의 테두리 색상을 조정합니다."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "픽셀로 표시된 모니터 화면 주변의 테두리 크기입니다.\n\n화면 가장자리에 선이 보이도록 모니터 화면 주변의 테두리 크기를 조정합니다."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "픽셀로 표시된 단말기 화면 테두리 주변의 패딩 크기입니다.\n\n사용자가 화면 가장자리에 눈으로 볼 수 있는 패딩을 추가할 수 있도록 단말기 화면 주변 테두리 크기를 제어합니다."
@@ -893,6 +935,9 @@
 	"relay_retry": {
 		"message": "다시 시도하는 중..."
 	},
+	"remove_label": {
+		"message": "삭제"
+	},
 	"request_pin_prompt": {
 		"message": "‘$2($3)’에서 $1 키를 잠금 해제하려면 PIN을 입력하세요(남은 시도 $4회)."
 	},
@@ -901,6 +946,9 @@
 	},
 	"save_label": {
 		"message": "저장"
+	},
+	"select_label": {
+		"message": "선택"
 	},
 	"send_feedback_label": {
 		"message": "의견 보내기"
@@ -913,6 +961,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH 인수"
+	},
+	"ssh_cert_check_error": {
+		"message": " 실패: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "SSH 인증서 새로고침 중..."
+	},
+	"ssh_cert_check_result": {
+		"message": " 약 $1시간 후 만료"
+	},
+	"ssh_cert_check_start": {
+		"message": "SSH 인증서의 만료 시간 확인 중..."
 	},
 	"stream_open_error": {
 		"message": "스트림 $1을(를) 열지 못함: $2"
@@ -971,8 +1031,11 @@
 	"terminal_settings_about_label": {
 		"message": "정보"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "이미지가 너무 큽니다."
+	},
 	"terminal_settings_background_image_help": {
-		"message": "배경 이미지 URL입니다 'http://' 또는 'https://'로 시작해야 합니다. 이미지가 없으면 비워 둡니다.\n\n예:\n  https://goo.gl/anedTK"
+		"message": "컴퓨터에서 배경 이미지 파일을 선택하세요."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "자동"
@@ -1003,6 +1066,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "어둡게"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "황혼"
+	},
+	"terminal_theme_forest_label": {
+		"message": "숲"
 	},
 	"terminal_theme_haze_label": {
 		"message": "옅은 안개"
@@ -1116,7 +1185,7 @@
 		"message": "hterm-notify를 사용하여 브라우저에 알림을 표시하세요(참고: https://goo.gl/ZNxGdF)."
 	},
 	"tip_3": {
-		"message": "검색주소창에 'ssh <프로필 이름>'을 입력하여 연결하세요(참고: https://goo.gl/V7o8ki)."
+		"message": "검색주소창에 'ssh<Tab><프로필 이름>'을 입력하여 연결하세요(참고: https://goo.gl/V7o8ki)."
 	},
 	"tip_4": {
 		"message": "Chrome OS에서 SFTP를 통해 파일 시스템을 마운트하고 파일 앱을 통해 탐색할 수 있습니다. '연결' 대신 'SFTP 마운트'를 사용하세요."

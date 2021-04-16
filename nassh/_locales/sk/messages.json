@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Príkaz $1 sa nepodarilo spustiť: $2"
 	},
+	"confirm_button_label": {
+		"message": "Potvrdiť"
+	},
 	"connect_button_label": {
 		"message": "Pripojiť"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "používateľské meno"
 	},
+	"file_label": {
+		"message": "Súbor"
+	},
 	"found_relay": {
 		"message": "Nebol nájdený server typu relay: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "Blokovať"
 	},
+	"hterm_button_close": {
+		"message": "Zavrieť"
+	},
+	"hterm_button_find": {
+		"message": "Hľadať"
+	},
+	"hterm_button_next": {
+		"message": "Ďalej"
+	},
 	"hterm_button_page_down": {
 		"message": "Posunúť o stranu nižšie"
 	},
 	"hterm_button_page_up": {
 		"message": "Posunúť o stranu vyššie"
+	},
+	"hterm_button_previous": {
+		"message": "Naspäť"
+	},
+	"hterm_find_result_count": {
+		"message": "Zhody: $1"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "$1 sa nepodarilo načítať"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Premenné prostredia"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Farba zvýraznenia nájdených výsledkov"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Farba zvýraznenia vybraných nájdených výsledkov"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Skupina písiem textu"
 	},
@@ -282,7 +309,7 @@
 		"message": "Správanie posúvania klávesmi Page Up a Page Down"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Správanie prepínania karty kombináciou klávesov Alt+1..9"
+		"message": "Správanie prepínania karty alebo aplikácie kombináciou klávesov Alt+1..9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Správanie nového okna kombináciou klávesov Ctrl+N"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Povolenie prilepenia presunutím"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Príjem kódovania"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Farba orámovania obrazovky"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Veľkosť orámovania obrazovky"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Veľkosť odsadenia obrazovky"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Zastavenie automatického výberu (smerom doprava)"
+	},
+	"hterm_notify_copy": {
+		"message": "Skopírované"
 	},
 	"hterm_options_button_label": {
 		"message": "Možnosti"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "Pôvodná skupina premenných prostredia (objekty)."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Farba pozadia na zvýraznenie nájdených výsledkov."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Farba pozadia za zvýraznenie vybraného nájdeného výsledku."
+	},
 	"hterm_pref_font_family": {
 		"message": "Predvolená skupina písma textu terminálu."
 	},
@@ -498,16 +537,16 @@
 		"message": "Odošle predponu ESC, keď stlačíte kláves a zároveň pridržíte kláves Meta.\n\nKeď túto predvoľbu povolíte, stlačením kombinácie klávesov Meta+K odošlete ^[k, ako keby ste zadali Escape a potom k. Keď ju zakážete, odošle sa iba k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Tlačidlo na prilepenie pomocou myši alebo null na automatické rozpoznávanie.\n\nV prípade automatického rozpoznávania použijeme v platformách iných než X11 (vrátane Chrome OS) stredné tlačidlo myši. V platforme X11 použijeme pravé tlačidlo myši (keďže v natívnom správcovi okien by sa na vloženie malo používať stredné tlačidlo).\n\n0 == ľavé (primárne) tlačidlo.\n1 == stredné (pomocné) tlačidlo.\n2 == pravé (sekundárne) tlačidlo.\n\nTáto možnosť je nezávislá na nastavení mouse-paste-button.\n\nPoznámka: Toto nastavenie bude fungovať správne v prípade myší pre ľavákov i pravákov."
+		"message": "Tlačidlo myši, ktorým sa bude prilepovať.\n\nV prípade automatického rozpoznávania použijeme v platformách iných než X11 (vrátane Chrome OS) stredné tlačidlo myši. V platforme X11 použijeme pravé tlačidlo myši (keďže správca okien by mal spracúvať prilepovanie stredným tlačidlom myši).\n\n0 == ľavé (primárne) tlačidlo.\n1 == stredné (pomocné) tlačidlo.\n2 == pravé (sekundárne) tlačidlo.\n\nTáto možnosť je nezávislá od nastavenia prilepenia pravým tlačidlom myši.\n\nPoznámka: Primárne a sekundárne tlačidlá je možné ovládať myšou pre ľavákov aj pravákov."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Prilepenie po kliknutiach na pravé tlačidlo myši.\n\nTáto možnosť je nezávislá na nastavení mouse-paste-button.\n\nPoznámka: Toto nastavenie bude fungovať správne v prípade myší pre ľavákov i pravákov."
+		"message": "Prilepte kliknutím pravým tlačidlom myši.\n\nTáto možnosť je nezávislá od nastavenia Prilepenie tlačidlom myši.\n\nPoznámka: Primárne a sekundárne tlačidlá je možné ovládať myšou pre ľavákov aj pravákov."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Ak nastavíte hodnotu pravda, ovládacie prvky Page Up a Page Down ovládajú posúvač terminálu a kombinácie klávesov Shift+Page Up a Shift+Page Down sa odošlú vzdialenému hostiteľovi. Ak nastavíte hodnotu nepravda, ovládacie prvky Page Up a Page Down sa odošlú vzdialenému hostiteľovi a kombinácie klávesov Shift+Page Up a Shift+Page Down budú ovládať posúvač."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Určuje, či sa kombinácie klávesov Alt+1..9 odošlú prehliadaču.\n\nToto správanie je užitočné, keď je program hterm spustený na karte prehliadača, pretože tak v Chrome neprídete o klávesové skratky prechodu na konkrétnu kartu. Keď nie je spustený na karte, je lepšie tieto klávesy odosielať hostiteľovi, aby ich bolo možné používať v editore Vim alebo Emacs.\n\nV prípade hodnoty pravda bude kombinácie klávesov Alt+1..9 spracovávať prehliadač. V prípade hodnoty nepravda sa kombinácie klávesov Alt+1..9 budú odosielať hostiteľovi. Ak nie je nastavená žiadna hodnota, správanie sa zistí automaticky podľa platformy prehliadača a typu okna."
+		"message": "Určuje, či sa kombinácie klávesov Alt+1..9 odošlú prehliadaču.\n\nToto správanie je užitočné, keď je program hterm spustený na karte prehliadača, pretože tak v Chrome neprídete o klávesové skratky prepnutia na konkrétnu kartu alebo aplikáciu. Keď nie je spustený na karte, je lepšie tieto klávesy odosielať hostiteľovi, aby ich bolo možné používať v editore Vim alebo Emacs.\n\nV prípade hodnoty pravda bude kombinácie klávesov Alt+1..9 spracovávať prehliadač. V prípade hodnoty nepravda sa kombinácie klávesov Alt+1..9 budú odosielať hostiteľovi. Ak nie je nastavená žiadna hodnota, správanie sa zistí automaticky podľa platformy prehliadača a typu okna."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Určuje, či sa kombinácia klávesov Ctrl+N odošle prehliadaču.\n\nAk nastavíte hodnotu pravda, bude kombináciu klávesov Ctrl+N spracúvať prehliadač ako klávesovú skratku otvorenia nového okna. Ak nastavíte hodnotu nepravda, bude sa kombinácia klávesov Ctrl+N odosielať hostiteľovi."
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Ak je nastavená hodnota pravda, presunutý text sa prilepí do terminálu.\nAk je nastavená hodnota nepravda, presunutý text bude ignorovaný."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Nastavte očakávané kódovanie údajov prijatých od hostiteľa.\nAk sa šifrovania nezhodujú, zrejme dôjde k vizuálnym chybám.\n\nPlatné hodnoty sú utf-8 a raw."
+	"hterm_pref_screen_border_color": {
+		"message": "Farba orámovania obrazovky terminálu.\n\nOvláda farbu orámovania obrazovky terminálu, aby sa pri okrajoch obrazovky vytvorila zreteľná čiara."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Veľkosť orámovania okolo obrazovky terminálu v pixeloch.\n\nOvláda veľkosť orámovania obrazovky terminálu, aby sa pri okrajoch obrazovky vytvorila zreteľná čiara."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Veľkosť odsadenia orámovania obrazovky terminálu v pixeloch.\n\nOvláda veľkosť orámovania obrazovky terminálu, aby mohol používateľ pridať do okrajov obrazovky viditeľné odsadenie."
@@ -893,6 +935,9 @@
 	"relay_retry": {
 		"message": "Pokus sa opakuje..."
 	},
+	"remove_label": {
+		"message": "Odstrániť"
+	},
 	"request_pin_prompt": {
 		"message": "Zadajte kód PIN na odomknutie kľúča $1 v čítačke $2 ($3) (zostávajúce pokusy: $4):"
 	},
@@ -901,6 +946,9 @@
 	},
 	"save_label": {
 		"message": "Uložiť"
+	},
+	"select_label": {
+		"message": "Vybrať"
 	},
 	"send_feedback_label": {
 		"message": "Odoslať spätnú väzbu"
@@ -913,6 +961,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Argumenty SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " neúspešné: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Obnovuje sa certifikát SSH..."
+	},
+	"ssh_cert_check_result": {
+		"message": " Do vypršania platnosti zostáva približne $1 h"
+	},
+	"ssh_cert_check_start": {
+		"message": "Kontroluje sa aktuálnosť certfikátu SSH..."
 	},
 	"stream_open_error": {
 		"message": "Otvorenie streamu $1 zlyhalo: $2"
@@ -971,8 +1031,11 @@
 	"terminal_settings_about_label": {
 		"message": "Informácie"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Obrázok je príliš veľký"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "Webová adresa obrázka na pozadí. Musí sa začínať reťazcom http:// alebo https://. Ak na pozadí žiadny obrázok zobrazovať nechcete, ponechajte túto hodnotu prázdnu.\n\nPríklad:\n  https://goo.gl/anedTK"
+		"message": "Vyberte súbor obrázka na pozadí z počítača."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automaticky"
@@ -1003,6 +1066,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Tmavý"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Súmrak"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Les"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Opar"
@@ -1119,7 +1188,7 @@
 		"message": "Ak chcete zobrazovať upozornenia v prehliadači, použite parameter hterm-notify na https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Pripojte sa zo všeobecného poľa zadaním dopytu „ssh <profile name>“: https://goo.gl/V7o8ki"
+		"message": "Pripojte sa z omniboxu zadaním dopytu „ssh<Tab><profile name>“: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS môže pripájať systémy súborov prostredníctvom protokolu SFTP a prehliadať ich prostredníctvom aplikácie Súbory. Použite „Pripojenie protokolu SFTP“ namiesto „Pripojiť“."
@@ -1147,6 +1216,9 @@
 	},
 	"unmount_button_label": {
 		"message": "Odpojiť protokol SFTP"
+	},
+	"url_label": {
+		"message": "Webová adresa"
 	},
 	"welcome_changelog": {
 		"message": "Denník zmien alebo poznámky k vydaniu: $1"

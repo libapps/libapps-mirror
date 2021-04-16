@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Nie udało się uruchomić $1: $2"
 	},
+	"confirm_button_label": {
+		"message": "Potwierdź"
+	},
 	"connect_button_label": {
 		"message": "Połącz"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "nazwa użytkownika"
 	},
+	"file_label": {
+		"message": "Plik"
+	},
 	"found_relay": {
 		"message": "Znaleziono serwer przekazujący: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "Zablokuj"
 	},
+	"hterm_button_close": {
+		"message": "Zamknij"
+	},
+	"hterm_button_find": {
+		"message": "Znajdź"
+	},
+	"hterm_button_next": {
+		"message": "Dalej"
+	},
 	"hterm_button_page_down": {
 		"message": "Strona w dół"
 	},
 	"hterm_button_page_up": {
 		"message": "Strona w górę"
+	},
+	"hterm_button_previous": {
+		"message": "Wstecz"
+	},
+	"hterm_find_result_count": {
+		"message": "Dopasowania: $1"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Nie udało się załadować zasobu $1"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Zmienne środowiskowe"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Kolor podświetlenia znalezionych wyników"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Kolor podświetlenia zaznaczonych znalezionych wyników"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Rodzina czcionek"
 	},
@@ -282,7 +309,7 @@
 		"message": "Przewijanie za pomocą klawiszy Page Up i Page Down"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Przełączanie kart za pomocą kombinacji Alt+1...9"
+		"message": "Przełączanie kart/aplikacji za pomocą kombinacji Alt+1...9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Otwieranie nowego okna za pomocą kombinacji Ctrl+N"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Zezwalaj na wklejanie za pomocą przeciągania i upuszczania"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Odbierane kodowanie"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Kolor obramowania okna"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Rozmiar obramowania okna"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Rozmiar dopełnienia ekranu"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Automatycznie zatrzymaj zaznaczenie (do prawej)"
+	},
+	"hterm_notify_copy": {
+		"message": "Skopiowano"
 	},
 	"hterm_options_button_label": {
 		"message": "Opcje"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "Początkowy zbiór zmiennych środowiskowych jako obiekt."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Kolor tła do podświetlania znalezionych wyników."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Kolor tła do podświetlania zaznaczonego znalezionego wyniku."
+	},
 	"hterm_pref_font_family": {
 		"message": "Domyślna rodzina czcionek dla tekstu terminala."
 	},
@@ -498,16 +537,16 @@
 		"message": "Wyślij prefiks ESC po naciśnięciu klawisza z przytrzymanym klawiszem Meta.\n\nNa przykład gdy ta opcja jest włączona, naciśnięcie Meta+K spowoduje wysłanie ^[k (jakby naciśnięto Escape, a następnie k). Gdy jest wyłączona, wysłany zostanie tylko znak k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Przycisk myszy używany do wklejania. Opcja null to wykrywanie automatyczne.\n\nW przypadku wykrywania automatycznego na platformach innych niż X11 (w tym w Chrome OS) używany jest środkowy przycisk myszy. Na platformach X11 używany jest prawy przycisk myszy (ponieważ natywny menedżer okien powinien używać środkowego przycisku myszy do wklejania).\n\n0 == lewy (pierwszy) przycisk.\n1 == środkowy (pomocniczy) przycisk.\n2 == prawy (drugi) przycisk.\n\nTo ustawienie jest niezależne od ustawienia wklejania prawym przyciskiem.\n\nUwaga: to ustawienie działa poprawnie z myszą używaną zarówno lewą, jak i prawą ręką."
+		"message": "Przycisk myszy używany do wklejania.\n\nW przypadku wykrywania automatycznego na platformach innych niż X11 (w tym w Chrome OS) używany jest środkowy przycisk myszy. Na platformach X11 używany jest prawy przycisk myszy (ponieważ menedżer okien powinien używać środkowego przycisku myszy do wklejania).\n\n0 == lewy (pierwszy) przycisk.\n1 == środkowy (pomocniczy) przycisk.\n2 == prawy (drugi) przycisk.\n\nTo ustawienie jest niezależne od ustawienia wklejania prawym przyciskiem.\n\nUwaga: przyciski pierwszy i drugi są obsługiwane zarówno w przypadku myszy używanej lewą, jak i prawą ręką."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Wklejanie prawym przyciskiem myszy.\n\nTo ustawienie jest niezależne od „mouse-paste-button”.\n\nUwaga: to ustawienie działa poprawnie z myszą używaną zarówno lewą, jak i prawą ręką."
+		"message": "Wklejanie kliknięciem prawego przycisku myszy.\n\nTa opcja jest niezależna od ustawienia przycisku myszy używanego do wklejania.\n\nUwaga: przyciski pierwszy i drugi są obsługiwane zarówno w przypadku myszy używanej lewą, jak i prawą ręką."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Jeśli wybrano wartość „prawda”, klawisze Page Up/Down przewijają terminal, a kombinacje Shift+Page Up/Down są wysyłane do zdalnego hosta. Jeśli wybrano „fałsz”, klawisze Page Up/Down są wysyłane do zdalnego hosta, a kombinacje Shift+Page Up/Down przewijają."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Określa, czy kombinacje Alt+1…9 mają być przekazywane do przeglądarki.\n\nJest to przydatne podczas używania emulatora hterm na karcie przeglądarki – pozwala nadal używać skrótów umożliwiających przełączanie kart w Chrome. Gdy emulator hterm nie jest uruchomiony na karcie, lepiej wysyłać te kombinacje do hosta, by można było używać ich w edytorach vim czy emacs.\n\nJeśli wybrano wartość „prawda”, kombinacje Alt+1…9 będą obsługiwane przez przeglądarkę. Jeśli wybrano „fałsz”, kombinacje Alt+1…9 będą wysyłane do hosta. Jeśli wybrano „null”, stosowane będzie automatyczne wykrywanie na podstawie typu okna i platformy przeglądarki."
+		"message": "Określa, czy kombinacje Alt+1…9 mają być przekazywane do przeglądarki.\n\nJest to przydatne podczas używania emulatora hterm na karcie przeglądarki – pozwala nadal używać skrótów umożliwiających przełączanie kart lub aplikacji w Chrome. Gdy emulator hterm nie jest uruchomiony na karcie, lepiej wysyłać te kombinacje do hosta, by można było używać ich w edytorach vim lub emacs.\n\nJeśli wybrano wartość prawda, kombinacje Alt+1…9 będą obsługiwane przez przeglądarkę. Jeśli wybrano fałsz, kombinacje Alt+1…9 będą wysyłane do hosta. Jeśli wybrano null, stosowane będzie automatyczne wykrywanie na podstawie typu okna i platformy przeglądarki."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Określa, czy kombinacja Ctrl+N ma być przekazywana do przeglądarki.\n\nJeśli wybrano wartość „prawda”, kombinacja Ctrl+N będzie uznawana przez przeglądarkę za skrót klawiszowy „Nowe okno”. Jeśli wybrano „fałsz”, kombinacja Ctrl+N będzie przesyłana do hosta."
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Jeśli wybrano wartość „prawda”, tekst będzie można wklejać przez przeciąganie i upuszczanie.\nJeśli wybrano „fałsz”, upuszczony tekst będzie ignorowany."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Określa oczekiwane kodowanie danych odbieranych z hosta.\nJeśli używane jest niewłaściwe kodowanie, prawdopodobnie będą widoczne nieprawidłowe znaki.\n\nDozwolone wartości to „utf-8” i „raw”."
+	"hterm_pref_screen_border_color": {
+		"message": "Kolor obramowania wokół okna terminala.\n\nPozwala ustawić kolor obramowania wokół okna terminala, tak by na krawędziach okna była widoczna linia."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Rozmiar obramowania wokół okna terminala w pikselach.\n\nPozwala ustawić rozmiar obramowania wokół okna terminala, tak by na krawędziach okna była widoczna linia."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Rozmiar dopełnienia wokół obramowania okna terminala w pikselach.\n\nOkreśla rozmiar obramowania wokół okna terminala. Użytkownik może dodać widoczne dopełnienie krawędzi okna."
@@ -893,6 +935,9 @@
 	"relay_retry": {
 		"message": "Próbuję ponownie…"
 	},
+	"remove_label": {
+		"message": "Usuń"
+	},
 	"request_pin_prompt": {
 		"message": "Wpisz kod PIN, by odblokować klucz $1 na urządzeniu „$2 ($3)” (pozostało prób: $4):"
 	},
@@ -901,6 +946,9 @@
 	},
 	"save_label": {
 		"message": "Zapisz"
+	},
+	"select_label": {
+		"message": "Wybierz"
 	},
 	"send_feedback_label": {
 		"message": "Prześlij opinię"
@@ -913,6 +961,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Argumenty SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " niepowodzenie: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Odświeżam certyfikat SSH..."
+	},
+	"ssh_cert_check_result": {
+		"message": " Termin ważności upływa za około $1 godz."
+	},
+	"ssh_cert_check_start": {
+		"message": "Sprawdzam aktualność certyfikatów SSH..."
 	},
 	"stream_open_error": {
 		"message": "Nie udało się otworzyć strumienia $1: $2"
@@ -971,8 +1031,11 @@
 	"terminal_settings_about_label": {
 		"message": "Informacje"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Obraz jest za duży"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL obrazu tła. Musi rozpoczynać się od „http://” lub „https://”. Pusty ciąg to brak obrazu.\n\nNa przykład:\n  https://goo.gl/anedTK"
+		"message": "Wybierz obraz tła z komputera."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Wyłącz"
@@ -1000,6 +1063,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Ciemny"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Zmierzch"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Las"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Zamglenie"
@@ -1119,7 +1188,7 @@
 		"message": "Powiadomienia możesz wyświetlać w przeglądarce, korzystając z polecenia hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Aby połączyć się z poziomu omniboksa, wpisz „ssh <nazwa profilu>”: https://goo.gl/V7o8ki"
+		"message": "Aby połączyć się z poziomu omniboksa, wpisz „ssh<Karta><nazwa profilu>”: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS pozwala podłączać systemy plików przez SFTP i przeglądać je w aplikacji Pliki. Użyj polecenia „Podłącz SFTP” zamiast „Połącz”."

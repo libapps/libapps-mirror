@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "無法啟動 $1：$2"
 	},
+	"confirm_button_label": {
+		"message": "確認"
+	},
 	"connect_button_label": {
 		"message": "連線"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "使用者名稱"
 	},
+	"file_label": {
+		"message": "檔案"
+	},
 	"found_relay": {
 		"message": "找到的轉送伺服器：$1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "封鎖"
 	},
+	"hterm_button_close": {
+		"message": "關閉"
+	},
+	"hterm_button_find": {
+		"message": "尋找"
+	},
+	"hterm_button_next": {
+		"message": "下一個"
+	},
 	"hterm_button_page_down": {
 		"message": "下一頁"
 	},
 	"hterm_button_page_up": {
 		"message": "上一頁"
+	},
+	"hterm_button_previous": {
+		"message": "上一個"
+	},
+	"hterm_find_result_count": {
+		"message": "找到 $1 項相符結果"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "無法載入 $1"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "環境變數"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "搜尋結果的醒目顯示顏色"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "所選尋找結果的醒目顯示顏色"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "字型系列"
 	},
@@ -282,7 +309,7 @@
 		"message": "Page Up/Down 鍵的捲動行為"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Alt + 1..9 鍵的切換分頁行為"
+		"message": "Alt + 1..9 鍵的切換分頁/應用程式行為"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Ctrl + N 鍵的開啟新視窗行為"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "允許拖曳貼上"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "接收編碼"
+	"hterm_name_pref_screen_border_color": {
+		"message": "螢幕邊框顏色"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "螢幕邊框大小"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "螢幕邊框間距大小"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "暫停自動選取 (右側)"
+	},
+	"hterm_notify_copy": {
+		"message": "已複製"
 	},
 	"hterm_options_button_label": {
 		"message": "選項"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "初始環境變數集 (做為物件)。"
 	},
+	"hterm_pref_find_result_color": {
+		"message": "醒目顯示搜尋結果所用的背景顏色。"
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "醒目顯示所選搜尋結果所用的背景顏色。"
+	},
 	"hterm_pref_font_family": {
 		"message": "終端機文字的預設字型系列。"
 	},
@@ -498,16 +537,16 @@
 		"message": "按住 Meta 鍵並按下另一個鍵會傳送 ESC 鍵前置詞。\n\n舉例來說，如果已啟用這項設定，按下 Meta + K 鍵就會傳送 ^[k，效果等同於依序按下 Escape 鍵和 K 鍵。如果停用這項設定，則只會傳送 K 鍵。"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "滑鼠的貼上按鈕，如果為 null 則會自動偵測。\n\n在自動偵測情況下，如果是非 X11 平台 (包括 Chrome 作業系統)，我們會使用滑鼠中鍵。在 X11 平台上，則會使用滑鼠右鍵 (因內建視窗管理員會透過滑鼠中鍵執行貼上動作)。\n\n0 == 左 (主要) 鍵。\n1 == 中 (輔助) 鍵。\n2 == 右 (次要) 鍵。\n\n這個選項可獨立啟用，不受點擊右鍵貼上的設定影響。\n\n注意：左/右手用滑鼠皆可正確處理。"
+		"message": "用於執行貼上動作的滑鼠按鍵。\n\n設為自動偵測時，如果不是 X11 平台 (包括 Chrome 作業系統)，我們會使用滑鼠中鍵；如果是 X11 平台，則會使用滑鼠右鍵 (因為視窗管理員需透過滑鼠中鍵處理貼上動作)。\n\n0 == 左鍵 (主要鍵)。\n1 == 中鍵 (輔助鍵)。\n2 == 右鍵 (次要鍵)。\n\n這個選項不會受到使用滑鼠右鍵貼上的設定影響。\n\n注意：這項設定可自動調換左/右手用滑鼠的主要鍵和次要鍵。"
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "按一下滑鼠右鍵時執行貼上動作。\n\n這個選項不會受到「mouse-paste-button」的設定影響。\n\n注意：這項設定可正確處理左/右手用滑鼠。"
+		"message": "按一下滑鼠右鍵時執行貼上動作。\n\n這個選項不會受到「mouse-paste-button」的設定影響。\n\n注意：這項設定可自動調換左/右手用滑鼠的主要鍵和次要鍵。"
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "如果設為 True，Page Up/Page Down 鍵可操控終端機捲軸，且系統會將 Shift + Page Up/Shift + Page Down 鍵傳送至遠端主機。如果設為 False，系統會將 Page Up/Page Down 鍵傳送至遠端主機，且可使用 Shift + Page Up/Shift + Page Down 鍵捲動畫面。"
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "設定是否要將 Alt + 1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，以便繼續使用 Chrome 的「切換至分頁」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 vim 或 emacs 中使用。\n\n如果設為 True，Alt + 1..9 鍵將由瀏覽器處理。如果設為 False，系統會將 Alt + 1..9 鍵傳送至主機。如果設為 Null，系統會根據瀏覽器平台和視窗類型自動偵測。"
+		"message": "設定是否要將 Alt + 1..9 鍵傳送至瀏覽器。\n\n在瀏覽器分頁中執行 hterm 時可善用這項設定，以便繼續使用 Chrome 的「切換至分頁/應用程式」鍵盤快速鍵。如果不是在分頁中執行 hterm，建議將這些按鍵傳送至主機，以便在 vim 或 emacs 中使用。\n\n如果設為 True，Alt + 1..9 鍵將由瀏覽器處理。如果設為 False，系統會將 Alt + 1..9 鍵傳送至主機。如果設為 Null，系統會根據瀏覽器平台和視窗類型自動偵測。"
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "設定是否要將 Ctrl + N 鍵傳送至瀏覽器。\n\n如果設為 True，瀏覽器會將 Ctrl + N 鍵當做「開啟新視窗」的鍵盤快速鍵處理。如果設為 False，系統會將 Ctrl + N 鍵傳送至主機。"
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "如果設為 True，系統會將拖曳的文字貼到終端機。\n如果設為 False，系統會忽略拖曳的文字。"
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "針對從主機接收的資料設定預期的編碼。\n如果編碼不相符，在視覺呈現上可能會出現錯誤。\n\n有效的值為「utf-8」和「raw」。"
+	"hterm_pref_screen_border_color": {
+		"message": "終端機螢幕的邊框顏色。\n\n這項設定可控制終端機螢幕的邊框顏色，在螢幕邊緣顯示框線。"
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "終端機螢幕的邊框大小 (以像素為單位)。\n\n這項設定可控制終端機螢幕的邊框大小，在螢幕邊緣顯示框線。"
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "終端機螢幕的邊框間距大小 (以像素為單位)。\n\n這項設定可控制終端機螢幕的邊框大小，讓使用者能在螢幕邊緣增加可見邊框間距。"
@@ -899,6 +941,9 @@
 	"relay_retry": {
 		"message": "正在重試..."
 	},
+	"remove_label": {
+		"message": "移除"
+	},
 	"request_pin_prompt": {
 		"message": "請在「$2 ($3)」上輸入 PIN 碼來解鎖金鑰 $1 (還可嘗試 $4 次)："
 	},
@@ -907,6 +952,9 @@
 	},
 	"save_label": {
 		"message": "儲存"
+	},
+	"select_label": {
+		"message": "選取"
 	},
 	"send_feedback_label": {
 		"message": "提供意見"
@@ -919,6 +967,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH 引數"
+	},
+	"ssh_cert_check_error": {
+		"message": " 失敗：$1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "正在重新整理 SSH 憑證..."
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 小時後到期"
+	},
+	"ssh_cert_check_start": {
+		"message": "正在檢查 SSH 憑證更新..."
 	},
 	"stream_open_error": {
 		"message": "無法開啟串流 $1：$2"
@@ -977,8 +1037,11 @@
 	"terminal_settings_about_label": {
 		"message": "關於"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "圖片太大"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "背景圖片網址。開頭必須為「http://」或「https://」。留空表示沒有圖片。\n\n例如：\n  https://goo.gl/anedTK"
+		"message": "請從電腦中選取背景圖片檔。"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "自動"
@@ -1009,6 +1072,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "深色"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "黃昏"
+	},
+	"terminal_theme_forest_label": {
+		"message": "森林"
 	},
 	"terminal_theme_light_label": {
 		"message": "淺色"
@@ -1125,7 +1194,7 @@
 		"message": "使用 hterm-notify 在瀏覽器中顯示通知：https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "在網址列輸入「ssh <設定檔名稱>」以連線：https://goo.gl/V7o8ki"
+		"message": "在網址列輸入「ssh<Tab><profile name>」以連線：https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome 作業系統可透過 SFTP 掛接檔案系統，並透過「檔案」應用程式瀏覽。請使用 [SFTP 掛接]，而不要使用 [連線]。"
@@ -1153,6 +1222,9 @@
 	},
 	"unmount_button_label": {
 		"message": "卸載 SFTP"
+	},
+	"url_label": {
+		"message": "網址"
 	},
 	"welcome_changelog": {
 		"message": "變更記錄/版本資訊：$1"

@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Ukuqalisa i-$1 kwehlulekile: $2"
 	},
+	"confirm_button_label": {
+		"message": "Qinisekisa"
+	},
 	"connect_button_label": {
 		"message": "Xhuma"
 	},
@@ -101,6 +104,9 @@
 	"field_username_placeholder": {
 		"message": "igama lomsebenzisi"
 	},
+	"file_label": {
+		"message": "Ifayela"
+	},
 	"found_relay": {
 		"message": "Ithole iseva yokudlulisela: $1"
 	},
@@ -119,11 +125,26 @@
 	"hterm_button_block": {
 		"message": "Vimba"
 	},
+	"hterm_button_close": {
+		"message": "Vala"
+	},
+	"hterm_button_find": {
+		"message": "Thola"
+	},
+	"hterm_button_next": {
+		"message": "Okulandelayo"
+	},
 	"hterm_button_page_down": {
 		"message": "Yehla ekhasini"
 	},
 	"hterm_button_page_up": {
 		"message": "Khuphuka ekhasini"
+	},
+	"hterm_button_previous": {
+		"message": "Okwangaphambilini"
+	},
+	"hterm_find_result_count": {
+		"message": "okufanayo okungu-$1"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Ukulayisha i-$1 kwehlulekile"
@@ -236,6 +257,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Ukwehluka kwendawo"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Thola umbala wokugqamisa imiphumela"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Thola umbala wokugqamisa imiphumela ekhethiwe"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Umndeni wefonti yombhalo"
 	},
@@ -276,7 +303,7 @@
 		"message": "Ukuziphatha kokuskrola kokhiye wokuthi Khuphuka/Yehla Ekhasini"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "U-Alt+1..9 ushintsha ukuziphatha kwethebhu"
+		"message": "U-Alt+1..9 ushintsha ukuziphatha kwethebhu/kohlelo lokusebenza"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "U-Ctrl+N ukuziphatha kwewindi okusha"
@@ -302,8 +329,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Vumela ukuhudula udedele ukunamathisela"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Thola umbhalo wekhodi"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Umbala womngcele wesikrini"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Usayizi womngcele wesikrini"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Usayizi wogqinsi lwesikrini"
@@ -346,6 +376,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Ukuyeka ukukhetha ukunweba ngokuzenzekelayo (ngakwesokudla)"
+	},
+	"hterm_notify_copy": {
+		"message": "Kukopishiwe"
 	},
 	"hterm_options_button_label": {
 		"message": "Izinketho"
@@ -461,6 +494,12 @@
 	"hterm_pref_environment": {
 		"message": "Isethi yokuqalisa yokwehluka kwendawo, njengento."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Umbala wangemuva wokugqamisa imiphumela yokuthola."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Umbala wangemuva wokugqamisa umphumela wokuthola okhethiwe."
+	},
 	"hterm_pref_font_family": {
 		"message": "Umndeni wefonti ozenzakalelayo wombhalo wetheminali."
 	},
@@ -491,14 +530,17 @@
 	"hterm_pref_meta_sends_escape": {
 		"message": "Thumela isiqalo se-ESC lapho ucindezela ukhiye ngenkathi ubambe ukhiye we-Meta.\n\nNgokwesibonelo, lapho kunikwe amandla, ukucindezela u-Meta+K kuzothumela okuthi ^[k sengathi uthayiphe u-Escape no-k. Lapho kukhutshaziwe, u-k kuphela ozothunyelwa."
 	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "Inkinobho yegundane yokusetshenziselwa ukunamathisela.\n\nUkuthola ngokuzenzekelayo, sizosebenzisa inkinobho yegundane ephakathi nendawo ezinkundleni ezingezona eze-X11 (okuhlanganisa i-Chrome OS). Kweze-X11, sizosebenzisa inkinobho yegundane engakwesokudla (njengoba umphathi wewindi kufanele asingathe ukunamathisela ngenkinobho yegundane ephakathi nendawo).\n\n0 == inkinobho (eyinhloko) engakwesokunxele.\n1 == inkinobho (yesikhashana) ephakathi nendawo.\n2 == inkinobho (yesibili) engakwesokudla.\n\nLe nketho ayincikile kwisethingi yokunamathisela kokuchofoza ngakwesokudla.\n\nQaphela: Izinkinobho eziyinhloko nezesibili uphathelwa zona ngegundane eliphathwa ngakwesokunxele nangakwesokudla."
+	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Namathisela ngokuchofoza ngakwesokudla kwinkinobho yegundane .\n\nLe nketho ayisekelwe kwisethingi \"yenkinobho yokunamathisela ngegundane\".\n\nQaphela: Lokhu kuzobamba kahle igundane lesandla esingakwesokunxele nesingakwesokudla."
+		"message": "Namathisela ngokuchofoza ngakwesokudla kwinkinobho yegundane .\n\nLe nketho ayisekelwe kwisethingi \"yenkinobho yokunamathisela ngegundane\".\n\nQaphela: Izinkinobho eziyinhloko nezesibili uphathelwa zona ngegundane eliphathwa ngakwesokunxele nangakwesokudla."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Uma kuyiqiniso, u-Page Up/Page Down ulawula ibha yokuskrola yetheminali futhi u-Shift+Page Up/Shift+Page Down uthunyelwa kumsingathi wokulawula kude. Uma kungamanga, u-Page Up/Page Down uthunyelwa kumsingathi wokulawula kude futhi u-Shift+Page Up/Shift+Page Down uyaskrola."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Ukuthi u-Alt+1..9 udluliselwe yini kwisiphequluli.\n\nLokhu kuwusizo lapho usebenzisa i-hterm kuthebhu yesiphequluli, ukuze ungalahlekelwa izinqamuleli zekhibhodi ze-Chrome zokuthi \"shintshela kwithebhu\". Lapho kungasebenzi kuthebhu kungcono ukuthumela labo khiye kumsingathi ukuze basetshenziswe ku-vim noma ku-emacs.\n\nUma kuyiqiniso, u-Alt+1..9 uzosingathwa isiphequluli. Uma kungamanga, u-Alt+1..9 uzothunyelwa kumsingathi. Uma kuyize, thola ngokuzenzekelayo ngokususelwe kwinkundla yesiphequluli nohlobo lewindi."
+		"message": "Ukuthi u-Alt+1..9 udluliselwe yini kwisiphequluli.\n\nLokhu kuwusizo lapho usebenzisa i-hterm kuthebhu yesiphequluli, ukuze ungalahlekelwa izinqamuleli zekhibhodi ezithi \"shintshela kwithebhu/kuhlelo lokusebenza\" ze-Chrome. Lapho kungasebenzi kuthebhu kungcono ukuthumela labo khiye kumsingathi ukuze basetshenziswe ku-vim noma ku-emacs.\n\nUma kuyiqiniso, u-Alt+1..9 uzosingathwa isiphequluli. Uma kungamanga, u-Alt+1..9 uzothunyelwa kumsingathi. Uma kuyize, thola ngokuzenzekelayo ngokususelwe kwinkundla yesiphequluli nohlobo lewindi."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Ukuthi i-Ctrl+N iyadluliswa yini kwisiphequluli.\n\nUma kuyiqiniso, i-Ctrl+N izobanjwa isiphequluli njengesinqamuleli sekhibhodi \"sewindi elisha\". Uma kungamanga, i-Ctrl+N izothunyelwa kumsingathi."
@@ -524,8 +566,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Uma kuyiqiniso, Umbhalo ohuduliwe wadedelwa uzonamathisela kwitheminali.\nUma kungamanga, umbhalo odedeliwe uzozitshwa."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Setha umbhalo wekhodi olindelekile wedatha etholakele kusuka kumsingathi.\nUma umbhalo wekhodi ungafani, iziphazamisi ezibukwayo zingase zingabonwa.\n\nAmanani avumelekile ngu-utf-8' no-'raw'."
+	"hterm_pref_screen_border_color": {
+		"message": "Umbala womngcele ozungeze isikrini setheminali.\n\nLokhu kulawula umbala womngcele ozungeze isikrini setheminali ukuze udale umugqa obonakalayo emingceleni yesikrini."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Usayizi womngcele kumaphikseli azungeze isikrini setheminali.\n\nLokhu kulawula usayizi womngcele ozungeze isikrini setheminali ukuze udale umugqa obonakalayo emingceleni yesikrini."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Usayizi wogqinsi kuma-pixel ozungeze umngcele wesikrini setheminali.\n\nLokhu kulawula usayizi womngcele ozungeze isikrini setheminali ukuze umsebenzisi akwazi ukwengeza ugqinsi olubonakalayo onqenqemeni lwesikrini."
@@ -920,6 +965,9 @@
 	"relay_retry": {
 		"message": "Izama futhi..."
 	},
+	"remove_label": {
+		"message": "Susa"
+	},
 	"request_pin_prompt": {
 		"message": "Faka i-PIN ukuvula ukhiye$1 ku-'$2 ($3)' (ukuzama okungu-$4 okusele):"
 	},
@@ -928,6 +976,9 @@
 	},
 	"save_label": {
 		"message": "Londoloza"
+	},
+	"select_label": {
+		"message": "Khetha"
 	},
 	"send_feedback_label": {
 		"message": "Thumela Impendulo"
@@ -940,6 +991,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Ukuphikisana kwe-SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " kwehlulekile: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Ivuselela isitifiketi se-SSH..."
+	},
+	"ssh_cert_check_result": {
+		"message": " ~amahora angu-$1 kuze kube ukuphelelwa isikhathi"
+	},
+	"ssh_cert_check_start": {
+		"message": "Ihlola ukuvuselelwa kwesitifiketi se-SSH..."
 	},
 	"stream_open_error": {
 		"message": "Ukuvula ukusakaza $1 kwehlulekile: $2"
@@ -998,8 +1061,11 @@
 	"terminal_settings_about_label": {
 		"message": "Mayelana"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Isithombe sikhulu kakhulu"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "I-URL yomfanekiso ongemuva. Kumele kuqale ngokuthi 'http://' noma 'https://'. Kuyeke kungenaso isithombe.\n\nNgokwesibonelo:\n  https://goo.gl/anedTK"
+		"message": "Khetha ifayela lomfanekiso ongemuva ovela kukhompuyutha yakho."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Okuzenzakalelayo"
@@ -1030,6 +1096,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Okugqwalile"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Ukuhlwa"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Ihlathi"
 	},
 	"terminal_theme_light_label": {
 		"message": "Okukhanyayo"
@@ -1146,7 +1218,7 @@
 		"message": "Bonisa izaziso kwisiphequluli usebenzisa i-hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Xhuma kusuka ku-omnibox ngokuthayipha okuthi 'ssh <profile name>': https://goo.gl/V7o8ki"
+		"message": "Xhumeka kusuka ku-omnibox ngokuthayipha ukuthi 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "I-Chrome OS ingakhweza amasistimu wefayela nge-SFTP futhi iphequlule ngezinhlelo zokusebenza zamafayela. Sebenzisa okuthi 'SFTP Mount' esikhundleni sokuthi 'Xhuma'."
@@ -1174,6 +1246,9 @@
 	},
 	"unmount_button_label": {
 		"message": "Susa ukukhweza i-SFTP"
+	},
+	"url_label": {
+		"message": "I-URL"
 	},
 	"welcome_changelog": {
 		"message": "Shintsha ilogi/khulula amanothi: $1"

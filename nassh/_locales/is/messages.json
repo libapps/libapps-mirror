@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Mistókst að ræsa $1: $2"
 	},
+	"confirm_button_label": {
+		"message": "Staðfesta"
+	},
 	"connect_button_label": {
 		"message": "Tengja"
 	},
@@ -104,6 +107,9 @@
 	"field_username_placeholder": {
 		"message": "notandanafn"
 	},
+	"file_label": {
+		"message": "Skrá"
+	},
 	"found_relay": {
 		"message": "Miðlunarþjónn fannst: $1"
 	},
@@ -122,11 +128,26 @@
 	"hterm_button_block": {
 		"message": "Loka fyrir"
 	},
+	"hterm_button_close": {
+		"message": "Loka"
+	},
+	"hterm_button_find": {
+		"message": "Finna"
+	},
+	"hterm_button_next": {
+		"message": "Áfram"
+	},
 	"hterm_button_page_down": {
 		"message": "Niður um síðu"
 	},
 	"hterm_button_page_up": {
 		"message": "Upp um eina síðu"
+	},
+	"hterm_button_previous": {
+		"message": "Fyrri"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 niðurstöður"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Ekki tókst að hlaða $1"
@@ -239,6 +260,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Færibreytur umhverfis"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Auðkennislitur leitarniðurstaðna"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Auðkennislitur valinna leitarniðurstaðna"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Leturhópur texta"
 	},
@@ -279,7 +306,7 @@
 		"message": "Hegðun flettingar með Page Up/Down-lyklum"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Hegðun skiptingar á milli flipa með Alt+1..9"
+		"message": "Skipting á milli flipa/forrits með Alt+1..9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Hegðun opnunar nýs glugga með Ctrl+N"
@@ -305,8 +332,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Leyfa límingu með því að draga og sleppa"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Taka við kóðun"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Litur gluggaramma"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Stærð gluggaramma"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Spássíustærð á skjá"
@@ -349,6 +379,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Stöðvun sjálfvirks vals (til hægri)"
+	},
+	"hterm_notify_copy": {
+		"message": "Afritað"
 	},
 	"hterm_options_button_label": {
 		"message": "Valkostir"
@@ -464,6 +497,12 @@
 	"hterm_pref_environment": {
 		"message": "Upphaflegt sett af færibreytum umhverfis, sem hlutur."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Bakgrunnslitur til að auðkenna leitarniðurstöður."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Bakgrunnslitur til að auðkenna valdar leitarniðurstöður."
+	},
 	"hterm_pref_font_family": {
 		"message": "Sjálfgefinn leturhópur fyrir texta í skipanaglugga."
 	},
@@ -494,14 +533,17 @@
 	"hterm_pref_meta_sends_escape": {
 		"message": "Senda ESC-forskeyti þegar ýtt er á lykil á meðan ýtt er á Meta-lykilinn.\n\nÞegar kveikt er á þessu og ýtt er á Meta+K er ^[k sent eins og ef ýtt hefði verið á Escape og svo k, svo dæmi sé tekið. Ef slökkt er á þessu verður aðeins k sent."
 	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "Músarhnappur sem á að nota til að líma.\n\nÍ sjálfvirkri greiningu er miðhnappur músarinnar notaður fyrir önnur kerfi en X11 (þar á meðal Chrome OS). Í X11 er hægri músarhnappurinn notaður (þar sem það ætti að vera hægt að líma með miðhnappi músarinnar í gluggastjórnun).\n\n0 == vinstri hnappur (aðalhnappur).\n1 == miðhnappur (aukahnappur).\n2 == hægri hnappur (annar hnappur).\n\nÞessi valkostur er óháður stillingu fyrir límingu með því að hægrismella.\n\nAthugaðu að aðal- og aukahnapparnir eru stilltir eftir því hvort þú notar vinstri- eða hægrihandarmús."
+	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Líma við hægri músarsmell.\n\nÞessi valkostur er óháður stillingunni „mouse-paste-button“\n\nAthugaðu: Þetta meðhöndlar bæði vinstri- og hægrihandarmús rétt."
+		"message": "Líma við hægri músarsmell.\n\nÞessi valkostur er óháður stillingunni „mouse-paste-button“.\n\nAthugaðu að aðal- og aukahnapparnir eru stilltir eftir því hvort þú notar vinstri- eða hægrihandarmús."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Ef rétt þá stjórnar Page Up/Page Down flettistiku skipanaglugga og Shift+Page Up/Shift+Page Down eru send til fjartengds hýsils. Ef rangt eru Page Up/Page Down send til fjartengds hýsils og Shift+Page Up/Shift+Page Down flettir."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Ákvarða hvort Alt+1..9 er sent í vafrann.\n\nÞetta kemur að gagni þegar hterm er keyrt á vafraflipa til að lyklaborðsflýtiskipanir Chrome fyrir „skipta á flipa“ glatist ekki. Þegar ekki er keyrt á flipa er betra að senda þessa lykla beint til hýsils til að hægt sé að nota þá í vim eða emacs.\n\nEf rétt sér vafrinn um Alt+1..9. Ef rangt er Alt+1..9 sent til hýsils. Ef núll er sjálfvirk greining samkvæmt kerfi vafra og gerð glugga."
+		"message": "Ákvarða hvort Alt+1..9 er sent í vafrann.\n\nÞetta kemur að gagni þegar hterm er keyrt á vafraflipa til að lyklaborðsflýtiskipanir Chrome fyrir „skipta á flipa/forrit“ glatist ekki. Þegar ekki er keyrt á flipa er betra að senda þessa lykla beint til hýsils til að hægt sé að nota þá í vim eða emacs.\n\nEf rétt sér vafrinn um Alt+1..9. Ef rangt er Alt+1..9 sent til hýsils. Ef núll er sjálfvirk greining samkvæmt kerfi vafra og gerð glugga."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Ákvarða hvort Ctrl+N er sent í vafrann.\n\nEf rétt þá túlkar vafrinn Ctrl+N sem lyklaborðsflýtiskipun fyrir „nýjan glugga“. Ef rangt þá er Ctrl+N sent til hýsilsins."
@@ -527,8 +569,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Ef rétt þá verður texti sem er dreginn og sleppt límdur inn í skipanaglugga.\nEf rangt þá er slepptur texti hunsaður."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Stilla þá kóðun sem gert er ráð fyrir fyrir gögn sem eru móttekin frá hýsli.\nEf kóðanir passa ekki er líklegt að myndrænar villur komi fram.\n\nTæk gildi eru „utf-8“ og „raw“."
+	"hterm_pref_screen_border_color": {
+		"message": "Litur rammans utan um skipanagluggann.\n\nStjórnar litnum á rammanum utan um skipanagluggann til að búa til sýnilega línu á jaðri gluggans."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Stærð rammans í pixlum utan um skipanagluggann.\n\nStjórnar stærðinni á rammanum utan um skipanagluggann til að búa til sýnilega línu á jaðri gluggans."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Spássíustærðin í pixlum á skjáramma skipanalínu.\n\nÞetta stjórnar stærð rammans utan um skjá skipanagluggans til að notandinn geti sett inn spássíur yst á skjánum."
@@ -947,6 +992,9 @@
 	"relay_retry": {
 		"message": "Reynir aftur..."
 	},
+	"remove_label": {
+		"message": "Fjarlægja"
+	},
 	"request_pin_prompt": {
 		"message": "Sláðu inn PIN-númer til að opna lykilinn $1 í „$2 ($3)“ ($4 tilraunir eftir):"
 	},
@@ -955,6 +1003,9 @@
 	},
 	"save_label": {
 		"message": "Vista"
+	},
+	"select_label": {
+		"message": "Velja"
 	},
 	"send_feedback_label": {
 		"message": "Senda ábendingu"
@@ -967,6 +1018,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH-frumbreytur"
+	},
+	"ssh_cert_check_error": {
+		"message": " mistókst: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Endurnýjar SSH-vottorð..."
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 klst. þar til gildistími rennur út"
+	},
+	"ssh_cert_check_start": {
+		"message": "Athugar gildistíma SSH-vottorðs..."
 	},
 	"stream_open_error": {
 		"message": "Mistókst að opna straum $1: $2"
@@ -1025,8 +1088,11 @@
 	"terminal_settings_about_label": {
 		"message": "Um"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Myndin er of stór"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "Vefslóð bakgrunnsmyndar. Verður að hefjast á „http://“ eða „https://“. Skilið eftir autt til að hafa enga mynd.\n\nDæmi:\nhttps://goo.gl/anedTK"
+		"message": "Veldu skrá með bakgrunnsmynd úr tölvunni þinni."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Sjálfvirkt"
@@ -1057,6 +1123,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Dökkt"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Rökkur"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Skógur"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Mistur"
@@ -1176,7 +1248,7 @@
 		"message": "Birta tilkynningar í vafranum með hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Þú getur tengt úr veffangastiku með því að slá inn „ssh <heiti prófíls>“: https://goo.gl/V7o8ki"
+		"message": "Tengstu af veffangastikunni með því að slá inn 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Stýrikerfi Chrome getur tengt skráakerfi í gegnum SFTP og flett í þeim með forritinu „Skrár“. Notaðu „SFTP-tenging“ í stað „Tengja“."
@@ -1204,6 +1276,9 @@
 	},
 	"unmount_button_label": {
 		"message": "Aftengja SFTP"
+	},
+	"url_label": {
+		"message": "Vefslóð"
 	},
 	"welcome_changelog": {
 		"message": "Breytingaskrá/um útgáfuna: $1"

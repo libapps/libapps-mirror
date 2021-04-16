@@ -32,6 +32,9 @@
 	"command_startup_failed": {
 		"message": "Nepavyko paleisti „$1“: $2"
 	},
+	"confirm_button_label": {
+		"message": "Patvirtinti"
+	},
 	"connect_button_label": {
 		"message": "Susieti"
 	},
@@ -104,6 +107,9 @@
 	"field_username_placeholder": {
 		"message": "naudotojo vardas"
 	},
+	"file_label": {
+		"message": "Failas"
+	},
 	"found_relay": {
 		"message": "Rastas perdavimo serveris: $1"
 	},
@@ -122,11 +128,29 @@
 	"hterm_button_block": {
 		"message": "Blokuoti"
 	},
+	"hterm_button_close": {
+		"message": "Uždaryti"
+	},
+	"hterm_button_find": {
+		"message": "Rasti"
+	},
+	"hterm_button_next": {
+		"message": "Kitas"
+	},
 	"hterm_button_page_down": {
 		"message": "Puslapiu žemyn"
 	},
 	"hterm_button_page_up": {
 		"message": "Puslapiu aukštyn"
+	},
+	"hterm_button_previous": {
+		"message": "Ankstesnis"
+	},
+	"hterm_find_counter_label": {
+		"message": "$1 iš $2"
+	},
+	"hterm_find_result_count": {
+		"message": "Atitikčių: $1"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Nepavyko įkelti $1"
@@ -239,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Aplinkos kintamieji"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Rastų rezultatų paryškinimo spalva"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Paieškos rezultatų pasirinkta paryškinimo spalva"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Teksto šriftų šeima"
 	},
@@ -279,7 +309,7 @@
 		"message": "Elgsena slenkant klavišais „Page Up“ / „Page Down“"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Elgsena perjungiant skirtukus klavišais „Alt“ + 1–9"
+		"message": "Elgsena perjungiant skirtukus / programas klavišais „Alt“ + 1–9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Elgsena atidarant naują langą klavišais „Ctrl“ + N"
@@ -305,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Leisti įklijuoti nuvelkant"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Gauti koduotę"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Ekrano kraštinės spalva"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Ekrano kraštinės dydis"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Ekrano užpildymo dydis"
@@ -349,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Automatinis pasirinkimo stabdymas (į dešinę)"
+	},
+	"hterm_notify_copy": {
+		"message": "Nukopijuota"
 	},
 	"hterm_options_button_label": {
 		"message": "Parinktys"
@@ -464,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "Pradinis aplinkos kintamųjų rinkinys (kaip objektas)."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Fono spalva, kuria būtų galima paryškinti paieškos rezultatus."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Fono spalva, kuria būtų galima paryškinti pasirinktą paieškos rezultatą."
+	},
 	"hterm_pref_font_family": {
 		"message": "Numatytoji terminalo teksto šriftų šeima."
 	},
@@ -495,16 +537,16 @@
 		"message": "Paspaudus klavišą, kai laikomas paspaustas klavišas „Meta“, siunčiamas ESC priešdėlis.\n\nPvz., kai įgalinta, paspaudus klavišą „Meta“ ir klavišą K siunčiama ^[k, kaip paspaudus klavišus „Escape“ ir k. Jei išjungta, siunčiama tik k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Įklijavimo parinktis pelės klavišu arba „Null“, norint aptikti automatiškai.\n\nNorint aptikti automatiškai naudojamas pelės vidurinysis klavišas ne X11 platformose (įskaitant „Chrome“ OS). X11 platformose naudojamas pelės dešinysis klavišas (kadangi naudojant savąją langų tvarkytuvę įklijavimo veiksmas turėtų būti atliekamas viduriniuoju pelės klavišu).\n\n0 == kairysis (pagrindinis) klavišas.\n1 == vidurinysis (pagalbinis) klavišas.\n2 == dešinysis (antrinis) klavišas.\n\nŠi parinktis nustatoma neatsižvelgiant į įklijavimo dešiniuoju pelės klavišu nustatymą.\n\nPastaba: atitinkamai nustatoma naudojant kairiarankiams ir dešiniarankiams pritaikytą pelę."
+		"message": "Pelės klavišas, naudojamas norint įklijuoti.\n\nNorint aptikti automatiškai naudojamas pelės vidurinis klavišas ne X11 platformose (įskaitant „Chrome“ OS). X11 platformose naudojamas dešinysis pelės klavišas (nes naudojant langų tvarkytuvę viduriniu pelės klavišu įklijuojama).\n\n0 == kairysis (pagrindinis) klavišas.\n1 == vidurinis (papildomas) klavišas.\n2 == dešinysis (antrinis) klavišas.\n\nŠi parinktis nustatoma neatsižvelgiant į įklijavimo dešiniuoju pelės klavišu nustatymą.\n\nAtminkite: pagrindinis ir antrinis klavišai nustatomi naudojant kairiarankiams ir dešiniarankiams pritaikytas peles."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Įklijavimas spustelėjus dešiniuoju pelės klavišu.\n\nŠi parinktis nustatoma neatsižvelgiant į nustatymą „mouse-paste-button“.\n\nPastaba: atitinkamai nustatoma naudojant kairiarankiams ir dešiniarankiams pritaikytą pelę."
+		"message": "Įklijuokite spustelėdami dešiniuoju pelės klavišu.\n\nŠi parinktis nustatoma neatsižvelgiant į įklijavimo pelės klavišu nustatymą.\n\nAtminkite: pagrindinis ir antrinis klavišai nustatomi naudojant kairiarankiams ir dešiniarankiams pritaikytas peles."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Nustačius kaip „true“, klavišais „Page Up“ arba „Page Down“ valdoma terminalo slinkimo juosta, o klavišais „Shift“ + „Page Up“ arba „Shift“ + „Page Down“ siunčiama nuotoliniam prieglobos serveriui. Nustačius kaip „false“, klavišais „Page Up“ arba „Page Down“ siunčiama nuotoliniam prieglobos serveriui, o klavišais „Shift“ + „Page Up“ arba „Shift“ + „Page Down“ slenkama."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Ar „Alt“ + 1–9 perduodama naršyklei.\n\nTai naudinga vykdant „hterm“ naršyklės skirtuke, kad neprarastumėte „Chrome“ „perjungimo į skirtuką“ sparčiųjų klavišų. Nevykdant skirtuke geriau siųsti šiuos klavišus prieglobos serveriui, kad juos būtų galima naudoti „Vim“ arba „Emacs“.\n\nNustačius kaip „Tiesa“, naršyklė apdoros „Alt“ + 1–9. Nustačius kaip „Netiesa“, „Alt“ + 1–9 bus siunčiama į prieglobos serverį. Nustačius kaip „Null“, bus automatiškai aptinkama pagal naršyklės platformą ir lango tipą."
+		"message": "Ar „Alt“ + 1–9 perduodama naršyklei.\n\nTai naudinga vykdant „hterm“ naršyklės skirtuke, kad neprarastumėte „Chrome“ „perjungimo į skirtuką / programą“ sparčiųjų klavišų. Nevykdant skirtuke geriau siųsti šiuos klavišus prieglobos serveriui, kad juos būtų galima naudoti „Vim“ arba „Emacs“.\n\nNustačius kaip „True“, naršyklė apdoros „Alt“ + 1–9. Nustačius kaip „False“, „Alt“ + 1–9 bus siunčiama į prieglobos serverį. Nustačius kaip „Null“, bus automatiškai aptinkama pagal naršyklės platformą ir lango tipą."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Ar „Ctrl“ + N perduodama naršyklei.\n\nNustačius kaip „Tiesa“, naršyklė apdoros „Ctrl“ + N kaip „naujo lango“ spartųjį klavišą. Nustačius kaip „Netiesa“, „Ctrl“ + N bus siunčiama prieglobos serveriui."
@@ -530,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Nustačius kaip „true“, nuvilktas tekstas bus įklijuotas į terminalą.\nNustačius kaip „false“, tekstas bus ignoruojamas."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Nustatoma numatoma iš prieglobos serverių gautų duomenų koduotė.\nJei koduotės neatitinka, gali būti vaizdinių riktų.\n\nGaliojančios vertės yra „utf-8“ ir „raw“."
+	"hterm_pref_screen_border_color": {
+		"message": "Kraštinės aplink terminalo ekraną spalva.\n\nValdoma kraštinės aplink terminalo ekraną spalva, kad ekrano kraštuose būtų sukurta matoma linija."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Kraštinės aplink terminalo ekraną dydis pikseliais.\n\nValdomas kraštinės aplink terminalo ekraną dydis, kad ekrano kraštuose būtų sukurta matoma linija."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Terminalo ekrano kraštinės užpildymo dydis pikseliais.\n\nValdomas kraštinės aplink terminalo ekraną dydis pikseliais, kad naudotojas galėtų pridėti matomą ekrano kraštinių užpildymą."
@@ -941,6 +986,9 @@
 	"relay_retry": {
 		"message": "Bandoma iš naujo..."
 	},
+	"remove_label": {
+		"message": "Pašalinti"
+	},
 	"request_pin_prompt": {
 		"message": "Įveskite PIN kodą, kad atrakintumėte „$2 ($3)“ klavišą $1 (liko bandymų: $4):"
 	},
@@ -949,6 +997,9 @@
 	},
 	"save_label": {
 		"message": "Išsaugoti"
+	},
+	"select_label": {
+		"message": "Pasirinkti"
 	},
 	"send_feedback_label": {
 		"message": "Siųsti atsiliepimą"
@@ -961,6 +1012,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH argumentai"
+	},
+	"ssh_cert_check_error": {
+		"message": " nepavyko: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Atnaujinamas SSH sertifikatas..."
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 val. iki galiojimo laiko pabaigos"
+	},
+	"ssh_cert_check_start": {
+		"message": "Tikrinamas SSH sertifikato naujumas..."
 	},
 	"stream_open_error": {
 		"message": "Nepavyko atidaryti srauto $1: $2"
@@ -1019,8 +1082,11 @@
 	"terminal_settings_about_label": {
 		"message": "Apie"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Vaizdas per didelis"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "Fono vaizdo UR. Pradžioje turi būti http:// arba https://. Palikite tuščią, jei nėra vaizdo.\n\nPavyzdžiui:\n  https://goo.gl/anedTK"
+		"message": "Pasirinkite fono vaizdo failą iš kompiuterio."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatinis"
@@ -1051,6 +1117,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Tamsi"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Sutemos"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Miškas"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Migla"
@@ -1170,7 +1242,7 @@
 		"message": "Pateikite pranešimus naršyklėje naudodami „hterm-notify“: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Prisijunkite iš „omnibox“ įvesdami „ssh <profile name>“: https://goo.gl/V7o8ki"
+		"message": "Prisijunkite iš „omnibox“ įvesdami „ssh<Tab><profile name>“: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "„Chrome“ OS gali įdėti failų sistemas per SFTP ir naršyti naudodama Failų programą. Naudokite „SFTP įdėjimas“ vietoje „Prisijungti“."

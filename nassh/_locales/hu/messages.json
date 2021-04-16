@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Nem sikerült a(z) $1 indítása: $2"
 	},
+	"confirm_button_label": {
+		"message": "Megerősítés"
+	},
 	"connect_button_label": {
 		"message": "Csatlakozás"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "felhasználónév"
 	},
+	"file_label": {
+		"message": "Fájl"
+	},
 	"found_relay": {
 		"message": "Megtalált továbbítószerver: $1"
 	},
@@ -125,11 +131,29 @@
 	"hterm_button_block": {
 		"message": "Letiltás"
 	},
+	"hterm_button_close": {
+		"message": "Bezárás"
+	},
+	"hterm_button_find": {
+		"message": "Keresés"
+	},
+	"hterm_button_next": {
+		"message": "Következő"
+	},
 	"hterm_button_page_down": {
 		"message": "Lapozás lefelé"
 	},
 	"hterm_button_page_up": {
 		"message": "Lapozás felfelé"
+	},
+	"hterm_button_previous": {
+		"message": "Előző"
+	},
+	"hterm_find_counter_label": {
+		"message": "$2/$1"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 egyezés"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Nem sikerült a(z) $1 betöltése…"
@@ -242,6 +266,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Környezeti változók"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Keresési találatok kiemelőszíne"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "A kiválasztott keresési találatok kiemelőszíne"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Betűtípuscsalád"
 	},
@@ -282,7 +312,7 @@
 		"message": "Page Up/Down billentyű görgetési viselkedése"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Alt + 1..9 lapváltási viselkedése"
+		"message": "Alt + 1..9 lapváltási/alkalmazásváltási viselkedése"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Ctrl + N új ablak viselkedése"
@@ -308,8 +338,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "A behúzással beillesztés engedélyezése"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Kódolás fogadása"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Képernyőszegély színe"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Képernyőszegély mérete"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Képernyőkitöltési méret"
@@ -352,6 +385,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Automatikus kiválasztási irány (jobbra)"
+	},
+	"hterm_notify_copy": {
+		"message": "Másolva"
 	},
 	"hterm_options_button_label": {
 		"message": "Beállítások"
@@ -467,6 +503,12 @@
 	"hterm_pref_environment": {
 		"message": "A környezeti változók eredeti készlete, objektumként."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "A keresési találatok kiemelésére szolgáló háttérszín."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "A kiválasztott keresési találat kiemelésére szolgáló háttérszín."
+	},
 	"hterm_pref_font_family": {
 		"message": "Alapértelmezett betűtípuscsalád a terminál szövegeihez."
 	},
@@ -498,16 +540,16 @@
 		"message": "ESC-előtag elküldése olyankor, amikor megnyomják valamelyik billentyűt a Meta gomb nyomva tartása közben.\n\nHa engedélyezve van, akkor például a Meta + K elküldi a „^[k” értéket, mintha csak megnyomta volna az Escape, majd a k billentyűket. Letiltása esetén csak a k kerül elküldésre."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Beillesztés gomb az egéren vagy nulla az automatikus felismeréshez.\n\nAz automatikus felismeréshez az egér középső gombját használjuk a nem X11-platformok esetében (beleértve a Chrome OS-t is). X11-en az egér jobb gombját használjuk (mivel a natív ablakkezelő a középső egérgombbal illeszt be).\n\n0 == bal (elsődleges) gomb.\n1 == középső (kiegészítő) gomb.\n2 == jobb (másodlagos) gomb.\n\nEz a beállítás független a jobb egérgombos beillesztés beállításától.\n\nMegjegyzés: A beállítás megfelelően kezeli a jobb- és balkezes egereket."
+		"message": "A beillesztési művelethez használt egérgomb.\n\nAutomatikus észlelés esetén a középső egérgombot használjuk a nem X11-es operációs rendszereknél (ilyen például a Chrome OS). X11-es rendszereken a jobb egérgombot használjuk (mivel az ablakkezelő a középső egérgombbal hajtja végre a beillesztést).\n\n0 == bal (elsődleges) gomb.\n1 == középső (kiegészítő) gomb.\n2 == jobb (másodlagos) gomb.\n\nEz a beállítás független a jobb kattintással való beillesztés beállításától.\n\nMegjegyzés: Az elsődleges és másodlagos gombok a bal- és jobbkezes egereken is előre beállítottak."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Beillesztés jobb egérgombbal való kattintással.\n\nEz a beállítás független a „mouse-paste-button” beállítástól.\n\nMegjegyzés: A beállítás megfelelően kezeli a jobb- és balkezes egereket."
+		"message": "Beillesztés a jobb egérgomb megnyomásával.\n\nEz a beállítás független a „mouse-paste-button” beállítástól.\n\nMegjegyzés: Az elsődleges és másodlagos gombok a bal- és jobbkezes egereken is előre beállítottak."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Ha igaz, a Page Up/Page Down a terminál görgetősávját irányítja, a Shift + Page Up/Shift + Page Down billentyűparancsokat pedig elküldi a szolgáltatás a távoli gazdagépnek. Ha hamis, akkor a Page Up/Down lenyomását küldi el a szolgáltatás a távoli gazdagépnek, míg a Shift + Page Up/Shift + Page Down görget."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Meghatározza, hogy átkerül-e az Alt + 1..9 billentyűparancsok kezelése a böngészőhöz.\n\nEz akkor hasznos, ha a hterm böngészőlapon fut, így nem veszíti el a felhasználó a Chrome „váltás lapra” billentyűparancsát. Ha nem böngészőlapon fut, célszerűbb ezeket a billentyűparancsokat a gazdagépnek küldeni, hogy a vim és az emacs használhassa őket.\n\nHa igaz, az Alt + 1..9 billentyűparancsokat a böngésző kezeli. Ha hamis, az Alt + 1..9 billentyűparancsokat a rendszer elküldi a gazdagépnek. Ha nulla, automatikus észlelés valósul meg a böngészőplatform és az ablaktípus alapján."
+		"message": "Meghatározza, hogy átkerül-e az Alt + 1..9 billentyűparancsok kezelése a böngészőhöz.\n\nEz akkor hasznos, ha a hterm böngészőlapon fut, így nem veszíti el a felhasználó a Chrome „váltás lapra/alkalmazásra” billentyűkombinációját. Ha nem böngészőlapon fut, célszerűbb ezeket a billentyűparancsokat a gazdagépnek küldeni, hogy a vim és az emacs használhassa őket.\n\nHa igaz, az Alt + 1..9 billentyűparancsokat a böngésző kezeli. Ha hamis, az Alt + 1..9 billentyűparancsokat a rendszer elküldi a gazdagépnek. Ha null, automatikus észlelés valósul meg a böngészőplatform és az ablaktípus alapján."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Annak meghatározása, hogy átadásra kerül-e a Ctrl + N a böngészőnek.\n\nHa igaz, a Ctrl + N billentyűparancsot a böngésző kezeli az „új ablak” billentyűparancsaként. Ha hamis, akkor a Ctrl + N a gazdagépnek lesz elküldve."
@@ -533,8 +575,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Ha igaz, a behúzott szöveget beilleszti a rendszer a terminálba.\nHa hamis, figyelmen kívül hagyja a húzást."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Meghatározza a gazdagéptől kapott adatok várható kódolását.\nHa a kódolások nem egyeznek, valószínűleg vizuális hibák lesznek tapasztalhatók.\n\nAz érvényes értékek: „utf-8” és „raw”."
+	"hterm_pref_screen_border_color": {
+		"message": "A terminál képernyőszegélyének színe.\n\nEz a beállítás a terminál képernyőszegélyének színét állítja, ezzel egy látható szegélyt létrehozva a képernyő szélein."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "A terminál képernyőszegélyének mérete pixelben megadva.\n\nEz a beállítás a terminál képernyőszegélyének méretét állítja, ezzel egy látható szegélyt létrehozva a képernyő szélein."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "A terminál képernyőjének szegélye körüli kitöltési méret képpontban megadva.\n\nEz szabályozza a terminál képernyője körüli szegély méretét, így a felhasználók látható kitöltést adhatnak hozzá a képernyő széleinél."
@@ -893,6 +938,9 @@
 	"relay_retry": {
 		"message": "Újrapróbálkozás…"
 	},
+	"remove_label": {
+		"message": "Eltávolítás"
+	},
 	"request_pin_prompt": {
 		"message": "Adja meg a PIN-kódot a(z) $1 kulcs feloldásához a(z) „$2 ($3)” eszközön ($4 próbálkozás van hátra):"
 	},
@@ -901,6 +949,9 @@
 	},
 	"save_label": {
 		"message": "Mentés"
+	},
+	"select_label": {
+		"message": "Kiválasztás"
 	},
 	"send_feedback_label": {
 		"message": "Visszajelzés küldése"
@@ -913,6 +964,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH-argumentumok"
+	},
+	"ssh_cert_check_error": {
+		"message": " sikertelen: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Az SSH-tanúsítvány frissítése…"
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 óra múlva lejár"
+	},
+	"ssh_cert_check_start": {
+		"message": "Az SSH-tanúsítvány frissességének ellenőrzése…"
 	},
 	"stream_open_error": {
 		"message": "Nemsikerült a stream ($1) megnyitása: $2"
@@ -971,8 +1034,11 @@
 	"terminal_settings_about_label": {
 		"message": "Névjegy"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Túl nagy a kép"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "A háttérkép URL-címe. A „http://” vagy „https://” előtaggal kell kezdődnie. Ha nincs kép, hagyja üresen.\n\nPéldául:\n  https://goo.gl/anedTK"
+		"message": "Válasszon a számítógépén található háttérképfájlok közül."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatikus"
@@ -1003,6 +1069,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Sötét"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Szürkület"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Erdő"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Pára"
@@ -1122,7 +1194,7 @@
 		"message": "Értesítések megjelenítése a böngészőben a hterm-notify szkripttel: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Ha a cím- és keresősávból szeretne csatlakozni, írja be az „ssh <profilnév>” parancsot: https://goo.gl/V7o8ki"
+		"message": "Ha a cím- és keresősávból szeretne csatlakozni, írja be az „ssh<Lap><profilnév>” parancsot: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "A Chrome OS képes fájlrendszerek csatolására SFTP használatával, ezt követően pedig a Fájlok alkalmazással lehet tallózni. A „Csatlakozás” gomb helyett használja az „SFTP csatlakoztatása” lehetőséget."

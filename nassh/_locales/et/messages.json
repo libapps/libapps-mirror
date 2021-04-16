@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Käsu $1 käivitamine ebaõnnestus: $2"
 	},
+	"confirm_button_label": {
+		"message": "Kinnita"
+	},
 	"connect_button_label": {
 		"message": "Ühenda"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "kasutajanimi"
 	},
+	"file_label": {
+		"message": "Fail"
+	},
 	"found_relay": {
 		"message": "Leiti vaheserver: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "Blokeeri"
 	},
+	"hterm_button_close": {
+		"message": "Sule"
+	},
+	"hterm_button_find": {
+		"message": "Otsi"
+	},
+	"hterm_button_next": {
+		"message": "Järgmine"
+	},
 	"hterm_button_page_down": {
 		"message": "Lehe võrra alla"
 	},
 	"hterm_button_page_up": {
 		"message": "Lehe võrra üles"
+	},
+	"hterm_button_previous": {
+		"message": "Eelmine"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 vastet"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Ressursi $1 laadimine ebaõnnestus …"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Keskkonna muutujad"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Otsingutulemuste esiletõstmise värv"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Valitud otsingutulemuste esiletõstmise värv"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Teksti fondipere"
 	},
@@ -282,7 +309,7 @@
 		"message": "Klahvidega Page Up / Page Down kerimise käitumine"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Vahelehe vahetamise käskude Alt + 1–9 käitumine"
+		"message": "Vahelehe/rakenduse vahetamise käskude Alt + 1–9 käitumine"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Uue akna avamise käsu Ctrl + N käitumine"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Luba pukseerides kleepimine"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Kodeeringu vastuvõtmine"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Ekraanikuva äärise värv"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Ekraanikuva äärise suurus"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Ekraanikuva täidise suurus"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Valiku automaatne peatamine (paremale)"
+	},
+	"hterm_notify_copy": {
+		"message": "Kopeeritud"
 	},
 	"hterm_options_button_label": {
 		"message": "Valikud"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "Keskkonna muutujate algne komplekt objekti kujul."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Otsingutulemuste esiletõstmiseks kasutatav taustavärv."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Valitud otsingutulemuse esiletõstmiseks kasutatav taustavärv."
+	},
 	"hterm_pref_font_family": {
 		"message": "Terminali teksti vaikefondipere."
 	},
@@ -498,16 +537,16 @@
 		"message": "Võimaldab metaklahvi all hoides ja muud klahvi vajutades saata ESC-eesliite.\n\nNäide: kui seade on lubatud ning vajutate metaklahvi ja klahvi K, saadetakse ^[k – nagu oleksite sisestanud paomärgi ja seejärel tähe k. Kui seade on keelatud, saadetakse ainult täht k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Hiire kleepimisnupp või väärtus „null” automaatseks tuvastamiseks.\n\nAutomaatseks tuvastamiseks kasutame mitte-X11 platvormidel (sh Chrome OS) hiire keskmist nuppu. X11-s kasutame hiire parempoolset nuppu (kuna omaakna haldur peaks kleepima hiire keskmise nupuga).\n\n0 == vasakpoolne (peamine) nupp.\n1 == keskmine (lisa) nupp.\n2 == parempoolne (teisene) nupp.\n\nSee valik ei olene paremklikiga kleepimise seadest.\n\nMärkus. See käsitleb vasaku ja parema käe hiiri õigesti."
+		"message": "Kleepimiseks kasutatav hiirenupp.\n\nAutomaatseks tuvastuseks kasutame mitte-X11 platvormide puhul (sh Chrome OS) keskmist hiirenuppu. X11-s kasutame parempoolset hiirenuppu (kuna aknahaldur peaks kleepimiseks kasutama keskmist hiirenuppu).\n\n0 == vasak (peamine) nupp.\n1 == keskmine (lisa-) nupp.\n2 == parem (teisene) nupp.\n\nSee valik ei olene paremklikiga kleepimise seadest.\n\nMärkus. Peamist ja teisest nuppu saab kasutada nii vasaku- kui ka paremakäehiirte puhul."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Kleebitakse hiire parempoolse nupu klõpsamisel.\n\nSee valik ei olene seadest „mouse-paste-button”.\n\nMärkus. See käsitleb vasaku ja parema käe hiiri õigesti."
+		"message": "Kleepimine parempoolse hiirenupu klõpsamisel.\n\nSee valik sõltub seadest „mouse-paste-button”.\n\nMärkus. Peamist ja teisest nuppu saab kasutada nii vasaku- kui ka paremakäehiirte puhul."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Kui see on tõene, juhivad klahvid Lehe võrra üles / Lehe võrra alla terminali kerimisriba ja kombinatsioon tõstuklahv + klahv Lehe võrra üles / Lehe võrra alla saadetakse kaughostile. Kui see on väär, saadetakse klahvide Lehe võrra üles / Lehe võrra alla vajutused kaughostile ja kombinatsioon tõstuklahv + klahv Lehe võrra üles / Lehe võrra alla võimaldab kerida."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Määrab, kas klahvikombinatsioon Alt + 1–9 edastatakse brauserile.\n\nSee on kasulik htermi käitamisel brauseri vahelehel, et te ei kaotaks Chrome'i klaviatuuri otseteid „lülitu vahelehele”. Kui seda vahelehel ei käitata, soovitame need klahvid saata hostile, et neid saaks kasutada tekstiredaktoris vim või emacs.\n\nKui see on tõene, käsitleb brauser klahvikombinatsioone Alt + 1–9. Kui see on väär, saadetakse klahvikombinatsioonid Alt + 1–9 hostile. Kui väärtus on null, tuvastatakse see automaatselt brauseri platvormi ja akna tüübi järgi."
+		"message": "Määrab, kas klahvikombinatsioon Alt + 1–9 edastatakse brauserile.\n\nSee on kasulik htermi käitamisel brauseri vahelehel, et te ei kaotaks Chrome'i klaviatuuri otseteid „lülitu vahelehele/rakendusele“. Kui seda vahelehel ei käitata, soovitame need klahvid saata hostile, et neid saaks kasutada tekstiredaktoris vim või emacs.\n\nKui see on tõene, käsitleb brauser klahvikombinatsioone Alt + 1–9. Kui see on väär, saadetakse klahvikombinatsioonid Alt + 1–9 hostile. Kui väärtus on null, tuvastatakse see automaatselt brauseri platvormi ja akna tüübi järgi."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Määrab, kas klahvikombinatsioon Ctrl + N edastatakse brauserile.\n\nKui see on tõene, käsitleb brauser klahvikombinatsiooni Ctrl + N klaviatuuri otseteena uue akna avamiseks. Kui see on väär, saadetakse Ctrl + N hostile."
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Kui see on tõene, kleebitakse pukseeritud tekst terminali.\nKui see on väär, eiratakse pukseeritud teksti."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Määratakse eeldatav kodeering hostilt saadud andmetele.\nKui kodeeringud ei kattu, ilmnevad tõenäoliselt visuaalsed vead.\n\nKehtivad väärtused on „utf-8” ja „raw”."
+	"hterm_pref_screen_border_color": {
+		"message": "Terminalikuva ümbritseva äärise värv.\n\nSee haldab terminalikuva ümbritseva äärise värvi, et luua ekraanikuva servadesse nähtav joon."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Terminalikuva ümbritseva äärise suurus pikslites.\n\nSee haldab terminalikuva ümbritseva äärise suurust, et luua ekraanikuva servadesse nähtav joon."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Terminalikuva äärise ümber oleva täidise suurus pikslites.\n\nSee haldab terminalikuva ümbritseva äärise suurust, et kasutaja saaks ekraanikuva servadesse lisada visuaalse täidise."
@@ -893,6 +935,9 @@
 	"relay_retry": {
 		"message": "Uuesti proovimine …"
 	},
+	"remove_label": {
+		"message": "Eemalda"
+	},
 	"request_pin_prompt": {
 		"message": "Sisestage PIN-kood, et avada klahv $1 lugejas „$2 ($3)” (jäänud on $4 katset):"
 	},
@@ -901,6 +946,9 @@
 	},
 	"save_label": {
 		"message": "Salvesta"
+	},
+	"select_label": {
+		"message": "Vali"
 	},
 	"send_feedback_label": {
 		"message": "Tagasiside saatmine"
@@ -913,6 +961,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH argumendid"
+	},
+	"ssh_cert_check_error": {
+		"message": " ebaõnnestus: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "SSH-sertifikaadi värskendamine …"
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 tundi aegumiseni"
+	},
+	"ssh_cert_check_start": {
+		"message": "SSH-sertifikaadi värskuse kontrollimine …"
 	},
 	"stream_open_error": {
 		"message": "Voo $1 avamine ebaõnnestus: $2"
@@ -968,8 +1028,11 @@
 	"terminal_settings_about_label": {
 		"message": "Teave"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Pilt on liiga suur"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "Taustkujutise URL. Peab algama kujul „http://” või „https://”. Kui kujutist ei ole, jätke see tühjaks.\n\nNäide:\n  https://goo.gl/anedTK"
+		"message": "Valige oma arvutist taustkujutise fail."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automaatne"
@@ -997,6 +1060,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Tume"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Eha"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Mets"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Uduvine"
@@ -1110,7 +1179,7 @@
 		"message": "Kuvage märguanded brauseris käsuga hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Looge ühendus omnikastikesest, sisestades käsu „ssh <profile name>”: https://goo.gl/V7o8ki"
+		"message": "Looge ühendus omnikastikesest, sisestades käsu „ssh<Tab><profile name>”: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS saab failisüsteeme ühendada SFTP kaudu ja sirvida rakenduse Failid kaudu. Kasutage käsku „Ühenda SFTP”, mitte „Ühenda”."

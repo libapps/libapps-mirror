@@ -32,6 +32,9 @@
 	"command_startup_failed": {
 		"message": "Komandas $1 palaišana neizdevās: $2"
 	},
+	"confirm_button_label": {
+		"message": "Apstiprināt"
+	},
 	"connect_button_label": {
 		"message": "Izveidot savienojumu"
 	},
@@ -104,6 +107,9 @@
 	"field_username_placeholder": {
 		"message": "lietotājvārds"
 	},
+	"file_label": {
+		"message": "Fails"
+	},
 	"found_relay": {
 		"message": "Atrasts pārraides serveris: $1"
 	},
@@ -122,11 +128,29 @@
 	"hterm_button_block": {
 		"message": "Bloķēt"
 	},
+	"hterm_button_close": {
+		"message": "Aizvērt"
+	},
+	"hterm_button_find": {
+		"message": "Atrast"
+	},
+	"hterm_button_next": {
+		"message": "Nākamais"
+	},
 	"hterm_button_page_down": {
 		"message": "Pāriet par lapu uz leju"
 	},
 	"hterm_button_page_up": {
 		"message": "Pāriet par lapu uz augšu"
+	},
+	"hterm_button_previous": {
+		"message": "Iepriekšējais"
+	},
+	"hterm_find_counter_label": {
+		"message": "$1. no $2"
+	},
+	"hterm_find_result_count": {
+		"message": "Atbilstību skaits: $1"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Neizdevās ielādēt šādu resursu: $1."
@@ -239,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Vides mainīgie"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Krāsa atrasto rezultātu izcelšanai"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Krāsa atlasīto atrasto rezultātu izcelšanai"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Teksta fontu saime"
 	},
@@ -279,7 +309,7 @@
 		"message": "Ritināšana, izmantojot taustiņus Page Up/Page Down"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Ciļņu pārslēgšana, izmantojot taustiņu kombinācijas Alt+1–Alt+9"
+		"message": "Ciļņu/lietotņu pārslēgšana, izmantojot taustiņu kombinācijas Alt+1–Alt+9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Jauna loga atvēršana, izmantojot taustiņu kombināciju Ctrl+N"
@@ -305,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Atļaut vilkt un nomest, lai ielīmētu"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Saņemt kodējumu"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Ekrāna apmales krāsa"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Ekrāna apmales lielums"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Ekrāna apmales lielums"
@@ -349,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Apturēt automātisko atlasi (pa labi)"
+	},
+	"hterm_notify_copy": {
+		"message": "Nokopēts"
 	},
 	"hterm_options_button_label": {
 		"message": "Opcijas"
@@ -464,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "Vides mainīgo sākotnējā kopa, kā objekts"
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Fona krāsa atrasto rezultātu izcelšanai."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Fona krāsa atlasītā atrastā rezultāta izcelšanai."
+	},
 	"hterm_pref_font_family": {
 		"message": "Noklusējuma fontu saime termināļa tekstam"
 	},
@@ -495,16 +537,16 @@
 		"message": "Sūtiet ESC prefiksu, nospiežot taustiņu, kad tiek turēts nospiests taustiņš Meta.\n\nPiemēram, kad šis prefikss ir iespējots, nospiežot taustiņu kombināciju Meta+K, tiks nosūtīts ^[k, it kā būtu nospiests taustiņš Esc un taustiņš k. Ja šis prefikss ir atspējots, tiek nosūtīts tikai taustiņš k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Ielīmēšanai izmantojamā peles poga; vērtība “null” automātiskai noteikšanai.\n\nAutomātiskai noteikšanai platformās, kas nav X11 platformas (tostarp Chrome OS), tiek izmantota peles vidējā poga. X11 platformā tiek izmantota peles labā poga (jo vietējam logu pārvaldniekam ir jāveic ielīmēšana, izmantojot peles vidējo pogu).\n\n0 == kreisā (galvenā) poga.\n1 == vidējā (palīga) poga.\n2 == labā (sekundārā) poga.\n\nŠī opcija ir aktivizēta neatkarīgi no iestatījuma “mouse-right-click-paste”.\n\nPiezīme. Šis iestatījums tiek pareizi lietots kreiļiem un labročiem paredzētām pelēm."
+		"message": "Peles poga ielīmēšanai.\n\nLai veiktu automātisku noteikšanu, platformām, kas nav X11 platformas (tostarp Chrome OS), tiks izmantota peles vidējā poga. Platformā X11 tiks izmantota peles labā poga (jo logu pārvaldniekam jāveic ielīmēšana, izmantojot peles vidējo pogu).\n\n0 == kreisā (galvenā) poga.\n1 == vidējā (palīga) poga.\n2 == labā (sekundārā) poga.\n\nŠī opcija nav atkarīga no labā klikšķa ielīmēšanas iestatījuma.\n\nPiezīme. Galvenā un sekundārā poga tiek lietota kreiļiem un labročiem paredzētām pelēm."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Ielīmēšana, noklikšķinot ar peles labo pogu.\n\nŠī opcija ir aktivizēta neatkarīgi no iestatījuma “mouse-paste-button”.\n\nPiezīme. Šis iestatījums tiek pareizi lietots kreiļiem un labročiem paredzētām pelēm."
+		"message": "Ielīmēšana, noklikšķinot ar peles labo pogu.\n\nŠī opcija ir aktivizēta neatkarīgi no iestatījuma “mouse-paste-button”.\n\nPiezīme. Galvenā un sekundārā poga tiek lietota kreiļiem un labročiem paredzētām pelēm."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Ja ir iestatīta vērtība “true”, ar taustiņiem Page Up/Page Down tiek kontrolēta termināļa ritjosla, bet taustiņu kombinācijas Shift+Page up/Shift+Page down tiek nodotas attālajam saimniekdatoram. Ja ir iestatīta vērtība “false”, taustiņi Page Up/Page Down tiek nodoti attālajam saimniekdatoram, bet ar taustiņu kombinācijām Shift+Page up/Shift+Page down notiek ritināšana."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Norāda, vai taustiņu kombinācijas Alt+1–Alt+9 tiek nodotas pārlūkprogrammai.\n\nŠis iestatījums ir noderīgs, izpildot komandu “hterm” pārlūkprogrammas cilnē, lai nepazaudētu Chrome tastatūras īsinājumtaustiņus ciļņu pārslēgšanai. Ja nenotiek izpildīšana cilnē, vēlams nodot šos taustiņus saimniekdatoram, lai tos varētu izmantot teksta redaktorā “vim” vai “emacs”.\n\nJa ir iestatīta vērtība “true”, taustiņu kombinācijas Alt+1–Alt+9 tiek apstrādātas pārlūkprogrammā. Ja ir iestatīta vērtība “false”, taustiņu kombinācijas Alt+1–Alt+9 tiek nodotas saimniekdatoram. Ja ir iestatīta vērtība “null”, notiek automātiska noteikšana, pamatojoties uz pārlūkprogrammas platformu un loga veidu."
+		"message": "Norāda, vai taustiņu kombinācijas Alt+1–Alt+9 tiek nodotas pārlūkprogrammai.\n\nŠis iestatījums ir noderīgs, izpildot komandu “hterm” pārlūkprogrammas cilnē, lai nezaudētu Chrome īsinājumtaustiņus ciļņu/lietotņu pārslēgšanai. Ja izpilde nenotiek cilnē, vēlams šos taustiņus nodot saimniekdatoram, lai tos varētu izmantot teksta redaktorā “vim” vai “emacs”.\n\nJa ir iestatīta vērtība “true”, taustiņu kombinācijas Alt+1–Alt+9 tiek apstrādātas pārlūkprogrammā. Ja ir iestatīta vērtība “false”, taustiņu kombinācijas Alt+1–Alt+9 tiek nodotas saimniekdatoram. Ja ir iestatīta vērtība “null”, notiek automātiska noteikšana, pamatojoties uz pārlūkprogrammas platformu un loga veidu."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Norāda, vai taustiņu kombinācija Ctrl+N tiek nodota pārlūkprogrammai.\n\nJa vērtība ir “true”, pārlūkprogrammā tiek izmantota taustiņu kombinācija Ctrl+N kā tastatūras īsinājumtaustiņš jaunam logam. Ja vērtība ir “false”, taustiņu kombinācija Ctrl+N tiek nodota saimniekdatoram."
@@ -530,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Ja vērtība ir “true”, vilktais un nomestais teksts tiks ielīmēts terminālī.\nJa vērtība ir “false”, nomestais teksts tiks ignorēts."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Iestatiet paredzamo kodējumu no saimnienkdatora saņemtajiem datiem.\nJa kodējums nesakrīt, iespējams, tiks novērotas vizuālas kļūdas.\n\n\nDerīgas vērtības ir “utf-8” un “raw”."
+	"hterm_pref_screen_border_color": {
+		"message": "Termināļa ekrāna apmales krāsa.\n\nTiek kontrolēta termināļa ekrāna apmales krāsa, lai izveidotu redzamu līniju ekrāna malās."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Termināļa ekrāna apmales lielums pikseļos.\n\nTiek kontrolēts termināļa ekrāna apmales lielums, lai izveidotu redzamu līniju ekrāna malās."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Termināļa ekrāna apmales lielums pikseļos.\n\nTiek kontrolēts termināļa ekrāna apmales lielums, lai lietotājs varētu pievienot redzamu joslu ekrāna malās."
@@ -893,6 +938,9 @@
 	"relay_retry": {
 		"message": "Notiek atkārtots mēģinājums..."
 	},
+	"remove_label": {
+		"message": "Noņemt"
+	},
 	"request_pin_prompt": {
 		"message": "Ievadiet PIN, lai atbloķētu taustiņu $1 šeit: $2 ($3). (Atlikušo mēģinājumu skaits: $4)."
 	},
@@ -901,6 +949,9 @@
 	},
 	"save_label": {
 		"message": "Saglabāt"
+	},
+	"select_label": {
+		"message": "Atlasīt"
 	},
 	"send_feedback_label": {
 		"message": "Sūtīt atsauksmes"
@@ -913,6 +964,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH argumenti"
+	},
+	"ssh_cert_check_error": {
+		"message": " kļūda: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Notiek SSH sertifikāta atsvaidzināšana..."
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 stundas līdz derīguma termiņa beigām"
+	},
+	"ssh_cert_check_start": {
+		"message": "Notiek SSH sertifikāta derīguma pārbaude..."
 	},
 	"stream_open_error": {
 		"message": "Neizdevās atvērt straumi $1: $2"
@@ -971,8 +1034,11 @@
 	"terminal_settings_about_label": {
 		"message": "Par"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Attēls ir pārāk liels."
+	},
 	"terminal_settings_background_image_help": {
-		"message": "Fona attēla URL. Tam ir jāsākas ar: http:// vai https://. Ja nav attēla, atstājiet lauku tukšu.\n\nPiemērs:\n  https://goo.gl/anedTK"
+		"message": "Atlasiet fona attēla failu datorā."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automātiski"
@@ -1003,6 +1069,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Tumšs"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Krēsla"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Mežs"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Viegla migla"
@@ -1122,7 +1194,7 @@
 		"message": "Rādiet paziņojumus pārlūkprogrammā, izmantojot hterm-notify: https://goo.gl/ZNxGdF."
 	},
 	"tip_3": {
-		"message": "Izveidojiet savienojumu no universālā lodziņa, ierakstot “ssh <profila nosaukums>”: https://goo.gl/V7o8ki."
+		"message": "Izveidojiet savienojumu no universālā lodziņa, ierakstot “ssh<Tab><profile name>”: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Operētājsistēmā Chrome OS var iekļaut failu sistēmas, izmantojot SFTP, un veikt pārlūkošanu, izmantojot lietotni Faili. Izmantojiet funkciju “SFTP iekļaušana”, nevis “Savienojuma izveide”."

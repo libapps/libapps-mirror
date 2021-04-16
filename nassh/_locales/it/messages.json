@@ -32,6 +32,9 @@
 	"command_startup_failed": {
 		"message": "Avvio del comando $1 non riuscito: $2"
 	},
+	"confirm_button_label": {
+		"message": "Conferma"
+	},
 	"connect_button_label": {
 		"message": "Connetti"
 	},
@@ -122,11 +125,26 @@
 	"hterm_button_block": {
 		"message": "Blocca"
 	},
+	"hterm_button_close": {
+		"message": "Chiudi"
+	},
+	"hterm_button_find": {
+		"message": "Trova"
+	},
+	"hterm_button_next": {
+		"message": "Avanti"
+	},
 	"hterm_button_page_down": {
 		"message": "Pagina giù"
 	},
 	"hterm_button_page_up": {
 		"message": "Pagina su"
+	},
+	"hterm_button_previous": {
+		"message": "Indietro"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 corrispondenze"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Caricamento di $1 non riuscito"
@@ -239,6 +257,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Variabili di ambiente"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Colore evidenziazione risultati di ricerca"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Colore evidenziazione risultati di ricerca selezionati"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Famiglia di caratteri del testo"
 	},
@@ -279,7 +303,7 @@
 		"message": "Comportamento scorrimento tasti Pagina su/Pagina giù"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Comportamento cambia scheda Alt + 1..9"
+		"message": "Comportamento cambia scheda/app Alt + 1..9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Comportamento nuova finestra Ctrl + N"
@@ -305,8 +329,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Consente di trascinare per incollare"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Ricevi codifica"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Colore bordo schermo"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Dimensioni bordo schermo"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Dimensioni spaziatura interna schermo"
@@ -349,6 +376,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Blocco della selezione automatica (a destra)"
+	},
+	"hterm_notify_copy": {
+		"message": "Copiato"
 	},
 	"hterm_options_button_label": {
 		"message": "Opzioni"
@@ -464,6 +494,12 @@
 	"hterm_pref_environment": {
 		"message": "L'insieme iniziale di variabili di ambiente, specificate come oggetto."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Il colore di sfondo per evidenziare i risultati di ricerca."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Il colore di sfondo per evidenziare il risultato di ricerca selezionato."
+	},
 	"hterm_pref_font_family": {
 		"message": "La famiglia di caratteri predefinita per il testo del terminale."
 	},
@@ -477,7 +513,7 @@
 		"message": "Il colore di primo piano di un testo senza altri attributi di colore."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Consente di stabilire se nascondere o meno automaticamente il puntatore del mouse durante la digitazione. Se questa preferenza viene gestita dalla piattaforma o dal sistema operativo, viene eseguito per impostazione predefinita il rilevamento automatico.\n\nNota: il tuo sistema operativo potrebbe eseguire l'override di questa impostazione, pertanto potresti non riuscire sempre a disattivarla."
+		"message": "Consente di stabilire se nascondere o meno automaticamente il puntatore del mouse durante la digitazione. Per impostazione predefinita, consente di rilevare automaticamente se questa preferenza viene gestita dalla piattaforma o dal sistema operativo.\n\nNota: il tuo sistema operativo potrebbe eseguire l'override di questa impostazione, pertanto potresti non riuscire sempre a disattivarla."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Se il valore è vero, con i tasti Inizio/Fine è possibile controllare la barra di scorrimento del terminale e i tasti Maiusc + Inizio/Maiusc + Fine vengono inviati all'host remoto. Se il valore è falso, i tasti Inizio/Fine vengono inviati all'host remoto, mentre i tasti Maiusc + Inizio/Maiusc + Fine consentono di scorrere."
@@ -495,16 +531,16 @@
 		"message": "Consente di inviare un prefisso Esc quando si preme un tasto tenendo premuto il tasto Meta.\n\nAd esempio, quando questa preferenza è attiva, se premi Meta + K, viene inviato ^[k come se avessi premuto Esc e poi K. Quando la preferenza non è attiva, viene inviato solo K."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Consente di stabilire quale pulsante del mouse usare per incollare oppure di impostare null per attivare il rilevamento automatico.\n\nIn caso di rilevamento automatico verrà usato il pulsante centrale del mouse sulle piattaforme diverse da X11 (incluso Chrome OS). Su X11 verrà usato il pulsante destro del mouse (dato che la funzione nativa per la gestione delle finestre dovrebbe usare il pulsante centrale del mouse per incollare).\n\n0 == pulsante (principale) sinistro.\n1 == pulsante (ausiliario) centrale.\n2 == pulsante (secondario) destro.\n\nQuesta opzione è indipendente dall'impostazione relativa al clic con il pulsante destro del mouse per incollare.\n\nNota: verranno gestiti correttamente tutti i mouse, per utenti destri e mancini."
+		"message": "Consente di stabilire quale pulsante del mouse usare per incollare.\n\nIn caso di rilevamento automatico verrà usato il pulsante centrale del mouse sulle piattaforme diverse da X11 (incluso Chrome OS). Su X11 verrà usato il pulsante destro del mouse (dato che la funzione per la gestione delle finestre dovrebbe usare il pulsante centrale del mouse per incollare).\n\n0 = pulsante sinistro (principale).\n1 = pulsante centrale (ausiliario).\n2 = pulsante destro (secondario).\n\nQuesta opzione è indipendente dall'impostazione relativa al clic con il pulsante destro del mouse per incollare.\n\nNota: i pulsanti principale e secondario vengono gestiti automaticamente in base al tipo di mouse, per utenti destri e mancini."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Consente di incollare facendo clic con il pulsante destro del mouse.\n\nQuesta opzione è indipendente dall'impostazione \"mouse-paste-button\".\n\nNota: verranno gestiti correttamente tutti i mouse, per utenti destri e mancini."
+		"message": "Clic con il pulsante destro del mouse per incollare.\n\nQuesta opzione è indipendente dall'impostazione \"mouse-paste-button\".\n\nNota: i pulsanti principale e secondario vengono gestiti automaticamente in base al tipo di mouse, per utenti destri e mancini."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Se il valore è vero, con i tasti Pagina su/Pagina giù è possibile controllare la barra di scorrimento del terminale e i tasti Maiusc + Pagina su/Maiusc + Pagina giù vengono inviati all'host remoto. Se il valore è falso, i tasti Pagina su/Pagina giù vengono inviati all'host remoto, mentre i tasti Maiusc + Pagina su/Maiusc + Pagina giù consentono di scorrere."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Consente di stabilire se passare o meno la gestione di Alt + 1..9 al browser.\n\nQuesta soluzione è pratica se viene eseguito hterm in una scheda del browser perché non si perdono le scorciatoie da tastiera di Chrome per \"passare alla scheda\". Se non viene eseguito in una scheda, è meglio inviare questi tasti all'host per poterli usare in vim o emacs.\n\nSe il valore è true, la gestione di Alt + 1..9 viene affidata al browser. Se il valore è false, i tasti Alt + 1..9 vengono inviati all'host. Se il valore è null, viene attivato il rilevamento automatico in base al tipo di finestra e alla piattaforma del browser."
+		"message": "Consente di stabilire se passare o meno la gestione di Alt + 1..9 al browser.\n\nQuesta soluzione è pratica se viene eseguito hterm in una scheda del browser perché non si perdono le scorciatoie da tastiera di Chrome per \"passare alla scheda/all'app\". Se non viene eseguito in una scheda, è meglio inviare questi tasti all'host per poterli usare in vim o emacs.\n\nSe il valore è true, la gestione di Alt + 1..9 viene affidata al browser. Se il valore è false, i tasti Alt + 1..9 vengono inviati all'host. Se il valore è null, viene attivato il rilevamento automatico in base al tipo di finestra e alla piattaforma del browser."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Consente di stabilire se passare o meno la gestione di Ctrl + N al browser.\n\nSe il valore è true, Ctrl + N viene gestito dal browser come scorciatoia da tastiera per \"nuova finestra\". Se il valore è false, i tasti Ctrl + N vengono inviati all'host."
@@ -530,8 +566,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Se il valore è vero, il testo trascinato viene incollato nel terminale.\nSe è falso, il testo trascinato viene ignorato."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Consente di impostare la codifica prevista per i dati ricevuti dall'host.\nSe le codifiche non corrispondono, si potrebbero notare dei bug visivi.\n\nI valori validi sono \"utf-8\" e \"raw\"."
+	"hterm_pref_screen_border_color": {
+		"message": "Il colore del bordo intorno allo schermo del terminale.\n\nConsente di stabilire il colore del bordo intorno allo schermo del terminale per creare una linea visibile sui bordi dello schermo."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Le dimensioni in pixel del bordo intorno allo schermo del terminale.\n\nConsente di stabilire le dimensioni del bordo intorno allo schermo del terminale per creare una linea visibile sui bordi dello schermo."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Le dimensioni in pixel della spaziatura interna intorno al bordo dello schermo del terminale.\n\nConsente di regolare le dimensioni del bordo intorno allo schermo del terminale affinché l'utente possa aggiungere spaziatura interna visibile ai bordi dello schermo."
@@ -543,10 +582,10 @@
 		"message": "Consente di stabilire se scorrere o meno fino in fondo nell'output del terminale."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Se viene usato il buffer dello schermo alternativo ed è attiva la funzione DECCKM (tasti cursore applicazione), gli eventi della rotellina emuleranno i tasti freccia.\n\nÈ possibile disattivare temporaneamente la funzionalità tenendo premuto il tasto Maiusc.\n\nAvviene spesso quando vengono usati pager (less), vengono letti editor di testo o pagine man (vi/nano) oppure viene usato screen/tmux."
+		"message": "Se viene usato il buffer dello schermo alternativo ed è attiva la funzione DECCKM (tasti cursore applicazione), gli eventi della rotellina emuleranno i tasti freccia.\n\nÈ possibile disattivare temporaneamente la funzionalità tenendo premuto il tasto Maiusc.\n\nAvviene spesso quando vengono usati pager (less), vengono letti editor di testo o pagine dei manuali (vi/nano) oppure viene usato screen/tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Il moltiplicatore per gli eventi rotellina quando vengono misurati in pixel.\n\nConsente di modificare la velocità di scorrimento della pagina."
+		"message": "Il moltiplicatore per gli eventi correlati alla rotellina del mouse quando viene misurato in pixel.\n\nConsente di modificare la velocità di scorrimento della pagina."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "La modalità verticale della barra di scorrimento."
@@ -893,6 +932,9 @@
 	"relay_retry": {
 		"message": "Nuovo tentativo…"
 	},
+	"remove_label": {
+		"message": "Rimuovi"
+	},
 	"request_pin_prompt": {
 		"message": "Inserisci il PIN per sbloccare la chiave $1 su \"$2 ($3)\" ($4 tentativi ancora a disposizione):"
 	},
@@ -901,6 +943,9 @@
 	},
 	"save_label": {
 		"message": "Salva"
+	},
+	"select_label": {
+		"message": "Seleziona"
 	},
 	"send_feedback_label": {
 		"message": "Invia feedback"
@@ -913,6 +958,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Argomenti SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " non riuscito: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Aggiornamento del certificato SSH in corso…"
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 ore alla scadenza"
+	},
+	"ssh_cert_check_start": {
+		"message": "Controllo dell'aggiornamento del certificato SSH in corso…"
 	},
 	"stream_open_error": {
 		"message": "Impossibile aprire lo stream $1: $2"
@@ -968,8 +1025,11 @@
 	"terminal_settings_about_label": {
 		"message": "Informazioni"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Il file immagine è troppo grande"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL dell'immagine di sfondo. Deve iniziare con \"http://\" o \"https://\". Lascia il campo vuoto se non è presente alcuna immagine.\n\nAd esempio:\n  https://goo.gl/anedTK"
+		"message": "Seleziona un file immagine di sfondo dal computer."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatica"
@@ -1000,6 +1060,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Scuro"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Crepuscolo"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Foresta"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Foschia"
@@ -1116,7 +1182,7 @@
 		"message": "Visualizza le notifiche nel browser utilizzando hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Connettiti dalla omnibox digitando \"ssh <nome profilo>\": https://goo.gl/V7o8ki"
+		"message": "Connettiti dalla omnibox digitando \"ssh<Tab><nome profilo>\": https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS consente di montare file system tramite SFTP e sfogliare tramite l'app File. Utilizza \"Montaggio SFTP\" anziché \"Connetti\"."

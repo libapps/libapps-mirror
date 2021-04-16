@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "$1 konnte nicht gestartet werden: $2"
 	},
+	"confirm_button_label": {
+		"message": "Bestätigen"
+	},
 	"connect_button_label": {
 		"message": "Verbinden"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "Nutzername"
 	},
+	"file_label": {
+		"message": "Datei"
+	},
 	"found_relay": {
 		"message": "Gefundener Relay-Server: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "Blockieren"
 	},
+	"hterm_button_close": {
+		"message": "Schließen"
+	},
+	"hterm_button_find": {
+		"message": "Suchen"
+	},
+	"hterm_button_next": {
+		"message": "Weiter"
+	},
 	"hterm_button_page_down": {
 		"message": "Bildlauf nach unten"
 	},
 	"hterm_button_page_up": {
 		"message": "Bildlauf nach oben"
+	},
+	"hterm_button_previous": {
+		"message": "Zurück"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 Übereinstimmungen"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "$1 konnte nicht geladen werden"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Umgebungsvariablen"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Hervorhebungsfarbe für Suchergebnisse"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Hervorhebungsfarbe für ausgewählte Suchergebnisse"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Schriftfamilie"
 	},
@@ -282,7 +309,7 @@
 		"message": "Verhalten der Bild-auf- und der Bild-ab-Taste beim Scrollen"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Verhalten von Alt + 1 bis 9 beim Tabwechsel"
+		"message": "Verhalten von Alt + 1 bis 9 beim Wechseln von Tabs/Apps"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Verhalten von Strg + N für neues Fenster"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Einfügen per Drag-and-drop zulassen"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Codierung erhalten"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Bildschirmrandfarbe"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Bildschirmrandgröße"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Bildschirmabstand einstellen"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Automatische Auswahl aussetzen (nach rechts)"
+	},
+	"hterm_notify_copy": {
+		"message": "Kopiert"
 	},
 	"hterm_options_button_label": {
 		"message": "Optionen"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "Der erste Satz Umgebungsvariablen als Objekt."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Die Hintergrundfarbe zum Hervorheben von Suchergebnissen."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Die Hintergrundfarbe zum Hervorheben des ausgewählten Suchergebnisses."
+	},
 	"hterm_pref_font_family": {
 		"message": "Standardmäßige Schriftfamilie für den Terminaltext."
 	},
@@ -498,16 +537,16 @@
 		"message": "Ein ESC-Präfix senden, wenn gleichzeitig eine Taste sowie die Meta-Taste gedrückt werden.\n\nWenn diese Option aktiviert ist, wird zum Beispiel beim Drücken der Meta-Taste und der k-Taste \"^[k\" gesendet, als wäre Escape und dann \"k\" gedrückt worden. Ist sie deaktiviert, wird nur \"k\" gesendet."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "\"mouse-paste-button\" oder Null für automatische Erkennung.\n\nFür die automatische Erkennung verwenden wir die mittlere Maustaste in Nicht-X11-Plattformen (einschließlich Chrome OS). Unter X11 verwenden wir die rechte Maustaste (da die mittlere Maustaste vom nativen Fenstermanager zum Einfügen verwendet werden sollte).\n\n0 == linke (primäre) Taste.\n1 == mittlere (Hilfs-)Taste.\n2 == rechte (sekundäre) Taste.\n\nDiese Option ist unabhängig von der Einstellung \"right-click paste\".\n\nHinweis: Damit können Mäuse für Rechts- und Linkshänder korrekt verwendet werden."
+		"message": "Die Maustaste zum Einfügen.\n\nFür die automatische Erkennung verwenden wir auf Nicht-X11-Plattformen, einschließlich Chrome OS, die mittlere Maustaste. Unter X11 verwenden wir die rechte Maustaste, da die mittlere Maustaste vom Fenstermanager zum Einfügen verwendet werden sollte.\n\n0 == linke (primäre) Taste.\n1 == mittlere (Hilfs-)Taste.\n2 == rechte (sekundäre) Taste.\n\nDiese Option ist unabhängig von der Einstellung \"right-click paste\".\n\nHinweis: Funktioniert für primäre und sekundäre Tasten bei Mäusen für Rechts- und Linkshänder."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Einfügen beim Klicken mit der rechten Maustaste.\n\nDiese Option ist unabhängig von der Einstellung \"mouse-paste-button\".\n\nHinweis: Funktioniert für Rechts- und Linkshändermäuse."
+		"message": "Einfügen beim Klicken mit der rechten Maustaste.\n\nDiese Option ist unabhängig von der Einstellung \"mouse-paste-button\".\n\nHinweis: Funktioniert für primäre und sekundäre Tasten bei Mäusen für Rechts- und Linkshänder."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Wenn \"true\" festgelegt ist, wird mit Bild auf/Bild ab die Bildlaufleiste des Terminals gesteuert und Umschalttaste + Bild auf/Bild ab an den Remote-Host gesendet. Bei \"false\" werden Bild auf/Bild ab an den Remote-Host gesendet und mit Umschalttaste + Bild auf/Bild ab wird gescrollt."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Legt fest, ob Alt + 1 bis 9 an den Browser übergeben wird.\n\nDas ist praktisch, wenn HTerm in einem Browsertab ausgeführt wird. So können die Tastenkombinationen zum Wechseln zu Tabs in Chrome weiterhin verwendet werden. Wird HTerm nicht in einem Tab ausgeführt, ist es besser, diese Tasten an den Host zu senden, damit sie in Vim oder Emacs verwendet werden können.\n\nWenn \"true\" festgelegt ist, wird Alt + 1 bis 9 vom Browser verarbeitet. Bei \"false\" wird Alt + 1 bis 9 an den Host gesendet. Wird \"null\" festgelegt, basiert die automatische Erkennung auf der Browserplattform und dem Fenstertyp."
+		"message": "Legt fest, ob Alt + 1 bis 9 an den Browser übergeben wird.\n\nDas ist praktisch, wenn HTerm in einem Browsertab ausgeführt wird. So können die Tastenkombinationen zum Wechseln zu Tabs/Apps in Chrome weiterhin verwendet werden. Wird HTerm nicht in einem Tab ausgeführt, ist es besser, diese Tasten an den Host zu senden, damit sie in Vim oder Emacs verwendet werden können.\n\nWenn \"true\" festgelegt ist, wird Alt + 1 bis 9 vom Browser verarbeitet. Bei \"false\" wird Alt + 1 bis 9 an den Host gesendet. Wird \"null\" festgelegt, basiert die automatische Erkennung auf der Browserplattform und dem Fenstertyp."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Legt fest, ob Strg + N an den Browser übergeben wird.\n\nWenn \"true\" festgelegt ist, wird Strg + N vom Browser als Tastenkombination für \"Neues Fenster\" verarbeitet. Bei \"false\" wird Strg + N an den Host gesendet."
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Wenn \"true\" festgelegt ist, wird Text per Drag-and-drop im Terminal eingefügt.\nBei \"false\" wird per \"Drop\" abgelegter Text ignoriert."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Legt die erwartete Codierung für vom Host empfangene Daten fest.\nSollten die Codierungen nicht übereinstimmen, kommt es wahrscheinlich zu Fehlern bei der Darstellung.\n\nGültige Werte sind \"utf-8\" und \"raw\"."
+	"hterm_pref_screen_border_color": {
+		"message": "Die Farbe für den Rand um den Terminal-Bildschirm.\n\nLegt die Farbe des Rands um den Terminal-Bildschirm fest. So kann eine sichtbare Linie an den Bildschirmrändern erzeugt werden."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Die Randgröße um den Terminal-Bildschirm in Pixeln.\n\nLegt die Größe des Rands um den Terminal-Bildschirm fest. So kann eine sichtbare Linie an den Bildschirmrändern erzeugt werden."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Abstand vom Rand des Terminal-Bildschirms in Pixel.\n\nLegt die Größe des Rands um den Terminal-Bildschirm fest. So können Nutzer an den Rändern Abstand hinzufügen."
@@ -902,6 +944,9 @@
 	"relay_retry": {
 		"message": "Wird noch einmal versucht…"
 	},
+	"remove_label": {
+		"message": "Entfernen"
+	},
 	"request_pin_prompt": {
 		"message": "PIN eingeben, um den Schlüssel $1 auf \"$2 ($3)\" zu entsperren (noch $4 Versuche):"
 	},
@@ -910,6 +955,9 @@
 	},
 	"save_label": {
 		"message": "Speichern"
+	},
+	"select_label": {
+		"message": "Auswählen"
 	},
 	"send_feedback_label": {
 		"message": "Feedback geben"
@@ -922,6 +970,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH-Argumente"
+	},
+	"ssh_cert_check_error": {
+		"message": " fehlgeschlagen: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "SSH-Zertifikat wird aktualisiert..."
+	},
+	"ssh_cert_check_result": {
+		"message": " ca. $1 Stunden bis zum Ablauf"
+	},
+	"ssh_cert_check_start": {
+		"message": "Aktualität des SSH-Zertifikats wird geprüft..."
 	},
 	"stream_open_error": {
 		"message": "Fehler beim Öffnen des Streams $1: $2"
@@ -980,8 +1040,11 @@
 	"terminal_settings_about_label": {
 		"message": "Info"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Das Bild ist zu groß"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL des Hintergrundbilds. Muss mit \"http://\" oder \"https://\" beginnen. Ein leerer String gibt an, dass kein Bild vorhanden ist.\n\nZum Beispiel:\n  https://goo.gl/anedTK"
+		"message": "Wähle als Hintergrundbild eine Datei von deinem Computer aus."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Deaktivieren"
@@ -1009,6 +1072,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Dunkel"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Abenddämmerung"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Wald"
 	},
 	"terminal_theme_light_label": {
 		"message": "Hell"
@@ -1113,7 +1182,7 @@
 		"message": "Benachrichtigungen können mithilfe von \"hterm-notify\" im Browser angezeigt werden: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Es kann eine Verbindung über Omnibox hergestellt werden, indem du \"ssh <Profilname>\" eingibst: https://goo.gl/V7o8ki"
+		"message": "Es kann eine Verbindung über Omnibox hergestellt werden, indem du „ssh<Tab><Profilname>“ eingibst: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS kann Dateisysteme über SFTP bereitstellen und über die App \"Dateien\" suchen. Verwende \"SFTP-Bereitstellung\" statt \"Verbinden\"."

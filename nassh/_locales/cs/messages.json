@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "Spuštění příkazu $1 se nezdařilo: $2"
 	},
+	"confirm_button_label": {
+		"message": "Potvrdit"
+	},
 	"connect_button_label": {
 		"message": "Připojit"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "uživatelské jméno"
 	},
+	"file_label": {
+		"message": "Soubor"
+	},
 	"found_relay": {
 		"message": "Nalezený přenosový server: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "Blokovat"
 	},
+	"hterm_button_close": {
+		"message": "Zavřít"
+	},
+	"hterm_button_find": {
+		"message": "Najít"
+	},
+	"hterm_button_next": {
+		"message": "Další"
+	},
 	"hterm_button_page_down": {
 		"message": "O stránku dolů"
 	},
 	"hterm_button_page_up": {
 		"message": "O stránku nahoru"
+	},
+	"hterm_button_previous": {
+		"message": "Předchozí"
+	},
+	"hterm_find_result_count": {
+		"message": "Shody: $1"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Načtení zdroje $1 se nezdařilo"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Proměnné prostředí"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Barva zvýraznění výsledků vyhledávání"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Barva zvýraznění vybraných výsledků vyhledávání"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Rodina písem textu"
 	},
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Povolit vložení přetažením"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Přijímané kódování"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Barva okraje obrazovky"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Velikost okraje obrazovky"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Velikost odsazení obrazovky"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Automatické zastavování výběru (vpravo)"
+	},
+	"hterm_notify_copy": {
+		"message": "Zkopírováno"
 	},
 	"hterm_options_button_label": {
 		"message": "Možnosti"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "Výchozí sada proměnných prostředí zadaná jako objekt."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Barva pozadí, která slouží ke zvýraznění výsledků vyhledávání."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Barva pozadí, která slouží ke zvýraznění vybraného výsledku vyhledávání."
+	},
 	"hterm_pref_font_family": {
 		"message": "Výchozí rodina písem pro text terminálu."
 	},
@@ -498,7 +537,7 @@
 		"message": "Při stisknutí klávesy s podrženou klávesou Meta odeslat předponu ESC.\n\nPokud je tato možnost zapnutá, při stisknutí Meta+K se například odešle ^[k, jako kdybyste stiskli Escape a potom K. Pokud je vypnutá, odešle se jen K."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Tlačítko k vložení pomocí myši nebo null (zjistit automaticky).\n\nV případě automatické detekce použijeme u platforem jiných než X11 (včetně Chrome OS) prostřední tlačítko myši. Na platformě X11 použijeme pravé tlačítko myši (protože v nativním správci oken by se k vložení mělo používat prostřední tlačítko).\n\n0 == levé (primární) tlačítko.\n1 == prostřední (pomocné) tlačítko.\n2 == pravé (sekundární) tlačítko.\n\nTato volba je nezávislá na nastavení vložení pravým tlačítkem myši.\n\nPoznámka: Toto nastavení bude fungovat správně u myší pro leváky i pro praváky."
+		"message": "Tlačítko myši, které se má používat k vložení.\n\nV případě automatické detekce použijeme u platforem jiných než X11 (včetně Chrome OS) prostřední tlačítko myši. Na platformě X11 použijeme pravé tlačítko myši (protože ve správci oken by se k vložení mělo používat prostřední tlačítko).\n\n0 == levé (primární) tlačítko.\n1 == prostřední (pomocné) tlačítko.\n2 == pravé (sekundární) tlačítko.\n\nTato volba je nezávislá na nastavení vložení pravým tlačítkem myši.\n\nPoznámka: Toto nastavení bude fungovat správně u myší pro leváky i pro praváky."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Vložení kliknutím pravým tlačítkem.\n\nTato možnost je nezávislá na nastavení mouse-paste-button.\n\nPoznámka: Toto nastavení bude fungovat správně u myší pro leváky i pro praváky."
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "V případě hodnoty true se přetažený text vloží do terminálu.\nPři hodnotě false bude přetažený text ignorován."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Nastavuje očekávané kódování pro data přijatá z hostitelského serveru.\nPokud se kódování nebudou shodovat, lze očekávat vizuální chyby.\n\nPlatné hodnoty jsou utf-8 a raw."
+	"hterm_pref_screen_border_color": {
+		"message": "Barva okraje obrazovky terminálu.\n\nOvládá barvu okraje obrazovky terminálu a vytváří viditelné hrany."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Velikost okraje obrazovky terminálu v pixelech.\n\nOvládá velikost okraje obrazovky terminálu a vytváří viditelné hrany."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Velikost odsazení v pixelech kolem okraje obrazovky terminálu.\n\nOvládá velikost okraje obrazovky terminálu, aby uživatel na okraje obrazovky mohl přidat viditelné odsazení."
@@ -893,6 +935,9 @@
 	"relay_retry": {
 		"message": "Další pokus..."
 	},
+	"remove_label": {
+		"message": "Odstranit"
+	},
 	"request_pin_prompt": {
 		"message": "Zadejte PIN k odemknutí klíče $1 na čtečce $2 ($3) (zbývající pokusy: $4):"
 	},
@@ -901,6 +946,9 @@
 	},
 	"save_label": {
 		"message": "Uložit"
+	},
+	"select_label": {
+		"message": "Vybrat"
 	},
 	"send_feedback_label": {
 		"message": "Poslat zpětnou vazbu"
@@ -913,6 +961,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Argumenty SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " neúspěšné: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Obnovování certifikátu SSH…"
+	},
+	"ssh_cert_check_result": {
+		"message": " Do vypršení platnosti zbývá asi $1 h"
+	},
+	"ssh_cert_check_start": {
+		"message": "Kontrola aktuálnosti certifikátu SSH…"
 	},
 	"stream_open_error": {
 		"message": "Otevření streamu $1 se nezdařilo: $2"
@@ -971,8 +1031,11 @@
 	"terminal_settings_about_label": {
 		"message": "O aplikaci"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Obrázek je příliš velký"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "Adresa URL obrázku na pozadí. Musí začínat řetězcem „http://“ nebo „https://“. Pokud na pozadí žádný obrázek zobrazovat nechcete, ponechte tuto hodnotu prázdnou.\n\nPříklad:\n  https://goo.gl/anedTK"
+		"message": "Vyberte soubor obrázku pozadí z počítače."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Zakázat"
@@ -1000,6 +1063,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Tmavý"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Soumrak"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Les"
 	},
 	"terminal_theme_light_label": {
 		"message": "Světlé"
@@ -1113,7 +1182,7 @@
 		"message": "Pomocí funkce hterm-notify můžete v prohlížeči zobrazovat oznámení: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Zadáním adresy „ssh <název profilu>“ se můžete připojit z omniboxu: https://goo.gl/V7o8ki"
+		"message": "Zadáním adresy „ssh<Tab><název profilu>“ se můžete připojit z omniboxu: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS umožňuje připojit systémy souborů pomocí SFTP a procházet je v aplikaci Soubory. Namísto tlačítka „Připojit“ použijte tlačítko „Připojení SFTP“."
@@ -1141,6 +1210,9 @@
 	},
 	"unmount_button_label": {
 		"message": "Odpojit SFTP"
+	},
+	"url_label": {
+		"message": "Adresa URL"
 	},
 	"welcome_changelog": {
 		"message": "ChangeLog / poznámky k vydání: $1"

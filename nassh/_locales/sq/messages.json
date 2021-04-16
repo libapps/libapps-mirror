@@ -32,6 +32,9 @@
 	"command_startup_failed": {
 		"message": "Hapja e $1 dështoi: $2"
 	},
+	"confirm_button_label": {
+		"message": "Konfirmo"
+	},
 	"connect_button_label": {
 		"message": "Lidh"
 	},
@@ -98,6 +101,9 @@
 	"field_username_placeholder": {
 		"message": "emri i përdoruesit"
 	},
+	"file_label": {
+		"message": "Skedar"
+	},
 	"found_relay": {
 		"message": "U gjet serveri i ridrejtimit: $1"
 	},
@@ -116,11 +122,26 @@
 	"hterm_button_block": {
 		"message": "Blloko"
 	},
+	"hterm_button_close": {
+		"message": "Mbyll"
+	},
+	"hterm_button_find": {
+		"message": "Gjej"
+	},
+	"hterm_button_next": {
+		"message": "Para"
+	},
 	"hterm_button_page_down": {
 		"message": "Faqja poshtë"
 	},
 	"hterm_button_page_up": {
 		"message": "Faqja lart"
+	},
+	"hterm_button_previous": {
+		"message": "Prapa"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 rezultate"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Ngarkimi i $1 dështoi"
@@ -233,6 +254,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Ndryshoret e mjedisit"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Ngjyra e theksimit për rezultatet e kërkimit"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Ngjyra e zgjedhur e theksimit për rezultatet e kërkimit"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Familja e fontit të tekstit"
 	},
@@ -273,7 +300,7 @@
 		"message": "Sjellja e lëvizjes së tastit Page Up/Down"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Sjellja e ndërrimit së skedës Alt+1..9"
+		"message": "Sjellja e ndërrimit së skedës/aplikacionit Alt+1..9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Sjellja e dritares së re Ctrl+N"
@@ -299,8 +326,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Lejo zvarritjen dhe lëshimin për të ngjitur"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Merr kodimin"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Ngjyra e bordurës së ekranit"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Madhësia e bordurës së ekranit"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Madhësia e mbushjes së ekranit"
@@ -343,6 +373,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Zbulimi automatik po ndalon (në të djathtë)"
+	},
+	"hterm_notify_copy": {
+		"message": "U kopjua"
 	},
 	"hterm_options_button_label": {
 		"message": "Opsionet"
@@ -458,6 +491,12 @@
 	"hterm_pref_environment": {
 		"message": "Kompleti fillestar i ndryshoreve të mjedisit, si objekt."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Ngjyra e sfondit për të theksuar rezultatet e kërkimit."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Ngjyra e sfondit për të theksuar rezultatin e zgjedhur të kërkimit."
+	},
 	"hterm_pref_font_family": {
 		"message": "Familja e parazgjedhur e fonteve për tekstin e terminalit."
 	},
@@ -488,14 +527,17 @@
 	"hterm_pref_meta_sends_escape": {
 		"message": "Dërgo një parashtesë ESC kur shtyp një tast ndërkohë që mban të shtypur tastin Meta.\n\nPër shembull, kur është aktivizuar, shtypja e Meta+K do të dërgojë ^[k ashtu si kur shtyp Esc dhe më pas k. Kur është çaktivizuar, do të dërgohet vetëm k."
 	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "Butoni i miut për përdorim për ngjitje.\n\nPër zbulimin automatik do të përdorim butonin e mesit të miut për platformat jo X11 (duke përfshirë Chrome OS). Në X11, ne do të përdorim butonin e djathtë të miut (pasi menaxheri i dritares duhet ta menaxhojë ngjitjen nëpërmjet butonit të mesit të miut).\n\n0 == butoni i majtë (parësor).\n1 == butoni i mesit (ndihmës).\n2 == butoni i djathtë (dytësor).\n\nKy opsion është i pavarur nga cilësimi për ngjitjen me klikimin me butonin djathtas.\n\nShënim. Butonat parësorë dhe dytësorë menaxhohen për ty me minjtë e krahut të majtë dhe të djathtë."
+	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Ngjit me klikimet e butonit të djathtë të miut.\n\nKy opsion është i pavarur nga cilësimi i \"mouse-paste-button\".\n\nShënim. Kjo do t'i menaxhojë si duhet minjtë e krahut të majtë dhe të djathtë."
+		"message": "Ngjit me klikimet e butonit të djathtë të miut.\n\nKy opsion është i pavarur nga cilësimi i \"mouse-paste-button\".\n\nShënim. Butonat parësorë dhe dytësorë menaxhohen për ty me minjtë e krahut të majtë dhe të djathtë."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Nëse është e vërtetë, tastet Page Up/Page Down kontrollojnë shiritin e lëvizjes së terminalit dhe Shift+Page Up/Shift+Page Down dërgohen te pritësi në distancë. Nëse nuk është e vërtetë, atëherë Page Up/Page Down dërgohen te pritësi në distancë dhe Shift+Page Up/Shift+Page Down kryejnë lëvizjen."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Nëse Alt+1..9 i kalohet shfletuesit.\n\nKjo është e dobishme kur ekzekutohet hterm në një skedë shfletuesi, në mënyrë që të mos humbësh shkurtoret e tastierës së Chrome \"kalo te skeda\". Kur nuk ekzekutohen në një skedë, është më mirë që të dërgohen këto taste te një pritës në mënyrë që të mund të përdoren në vim ose emacs.\n\nNëse është e vërtetë, Alt+1..9 do të përpunohet nga shfletuesi. Nëse është jo e vërtetë, Alt+1..9 do t'i dërgohet pritësit. Nëse është \"null\", zbulohet automatikisht bazuar në platformën e shfletuesit dhe llojin e dritares."
+		"message": "Nëse Alt+1..9 i kalohet shfletuesit.\n\nKjo është e dobishme kur ekzekutohet hterm në një skedë shfletuesi, në mënyrë që të mos humbësh shkurtoret e tastierës së Chrome \"kalo te skeda/aplikacioni\". Kur nuk ekzekutohen në një skedë, është më mirë që të dërgohen këto taste te një pritës në mënyrë që të mund të përdoren në vim ose emacs.\n\nNëse është e vërtetë, Alt+1..9 do të përpunohet nga shfletuesi. Nëse është jo e vërtetë, Alt+1..9 do t'i dërgohet pritësit. Nëse është \"null\", zbulohet automatikisht bazuar në platformën e shfletuesit dhe llojin e dritares."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Nëse Ctrl+N i kalohet shfletuesit.\n\nNëse është e vërtetë, Ctrl+N do të përpunohet nga shfletuesi si shkurtore tastiere në \"dritare të re\". Nëse është jo e vërtetë, Ctrl+N do t'i dërgohet pritësit."
@@ -521,8 +563,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Nëse është e vërtetë, teksti me zvarritje dhe lëshim do të ngjitet te terminali.\nNëse nuk është e vërtetë, teksti i lëshuar do të shpërfillet."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Cakto kodimin e pritur për të dhënat e marra nga pritësi.\nNëse kodimet nuk përputhen, mund të vihen re gabime vizuale.\n\nVlerat e vlefshme janë \"utf-8\" dhe \"raw\"."
+	"hterm_pref_screen_border_color": {
+		"message": "Ngjyra për bordurën rreth ekranit të terminalit.\n\nKjo kontrollon ngjyrën e bordurës rreth ekranit të terminalit për të krijuar një vijë të dukshme në skajet e ekranit."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Madhësia e bordurës në pikselë rreth ekranit të terminalit.\n\nKjo kontrollon madhësinë e bordurës rreth ekranit të terminalit për të krijuar një vijë të dukshme në skajet e ekranit."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Madhësia e mbushjes në pikselë rrotull bordurës së ekranit të terminalit.\n\nKjo kontrollon madhësinë e bordurës rrotull ekranit të terminalit në mënyrë që përdoruesi të mund të shtojë mbushje të dukshme në skajet e ekranit."
@@ -893,6 +938,9 @@
 	"relay_retry": {
 		"message": "Po riprovon..."
 	},
+	"remove_label": {
+		"message": "Hiq"
+	},
 	"request_pin_prompt": {
 		"message": "Fut kodin PIN për të shkyçur tastin $1 në \"$2 ($3)\" ($4 prova të mbetura):"
 	},
@@ -901,6 +949,9 @@
 	},
 	"save_label": {
 		"message": "Ruaj"
+	},
+	"select_label": {
+		"message": "Zgjidh"
 	},
 	"send_feedback_label": {
 		"message": "Dërgo komente"
@@ -913,6 +964,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Argumentet e protokollit SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " dështoi: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Certifikata SSH po rifreskohet..."
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 orë deri në afatin e skadimit"
+	},
+	"ssh_cert_check_start": {
+		"message": "Po kontrollohet rifreskimi i certifikatës SSH..."
 	},
 	"stream_open_error": {
 		"message": "Hapja e transmetimit $1 dështoi: $2"
@@ -971,8 +1034,11 @@
 	"terminal_settings_about_label": {
 		"message": "Rreth"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Imazhi është tepër i madh"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL-ja e imazhit të sfondit. Duhet të fillojë me \"http://\" ose \"https://\". Lëre bosh kur nuk ka imazh.\n\nPër shembull:\n  https://goo.gl/anedTK"
+		"message": "Zgjidh një skedar të imazhit të sfondit nga kompjuteri yt."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatik"
@@ -1003,6 +1069,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "E errët"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Muzg"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Pyll"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Mjegull"
@@ -1122,7 +1194,7 @@
 		"message": "Shfaq njoftimet në shfletues duke përdorur hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Lidhu nga shiriti omnibox duke shkruar \"ssh <emri i profilit>\": https://goo.gl/V7o8ki"
+		"message": "Lidhu nga shiriti omnibox duke shkruar \"ssh<Tab><emri i profilit>\": https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Sistemi operativ i Chrome mund të montojë sisteme skedarësh përmes SFTP dhe të shfletojë përmes aplikacionit Files. Përdor \"Montimi i protokollit SFTP\" në vend të \"Lidhu\"."

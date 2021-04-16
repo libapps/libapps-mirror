@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "No se pudo ejecutar $1: $2"
 	},
+	"confirm_button_label": {
+		"message": "Confirmar"
+	},
 	"connect_button_label": {
 		"message": "Conectar"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "nombre de usuario"
 	},
+	"file_label": {
+		"message": "Archivo"
+	},
 	"found_relay": {
 		"message": "Servidor de retransmisión encontrado: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "Bloquear"
 	},
+	"hterm_button_close": {
+		"message": "Cerrar"
+	},
+	"hterm_button_find": {
+		"message": "Buscar"
+	},
+	"hterm_button_next": {
+		"message": "Siguiente"
+	},
 	"hterm_button_page_down": {
 		"message": "Av Pág"
 	},
 	"hterm_button_page_up": {
 		"message": "Re Pág"
+	},
+	"hterm_button_previous": {
+		"message": "Anterior"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 coincidencias"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "No se pudo cargar $1"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Variables de entorno"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Color para destacar resultados de búsqueda"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Color para destacar resultados de búsqueda seleccionados"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Familia de fuentes del texto"
 	},
@@ -282,7 +309,7 @@
 		"message": "Comportamiento de desplazamiento con teclas Re Pág y Av Pág"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Comportamiento de cambio de pestaña con combinación de teclas Alt+1..9"
+		"message": "Comportamiento de cambio de pestaña o aplicación con la combinación de teclas Alt+1..9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Comportamiento de nueva ventana con combinación de teclas Ctrl+N"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Permitir la acción arrastrar y soltar para pegar"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Recibir codificación"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Color del borde de pantalla"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Tamaño del borde de pantalla"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Tamaño de padding de pantalla"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Detener la selección automática (a la derecha)"
+	},
+	"hterm_notify_copy": {
+		"message": "Copiado"
 	},
 	"hterm_options_button_label": {
 		"message": "Opciones"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "El conjunto inicial de variables de entorno como un objeto."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "El color de fondo para destacar resultados de búsqueda."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "El color de fondo para destacar el resultado de búsqueda seleccionado."
+	},
 	"hterm_pref_font_family": {
 		"message": "La familia de fuentes predeterminada para el texto de la terminal."
 	},
@@ -498,16 +537,16 @@
 		"message": "Envía un prefijo ESC cuando se presiona una tecla mientras se mantiene presionada la tecla Meta.\n\nPor ejemplo, si se presiona la combinación de teclas Meta+K con la preferencia habilitada, se enviará ^[k como si se hubiese presionado Escape y luego k. Si la preferencia está inhabilitada, solo se enviará k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Establece el botón del mouse para pegar; usa el valor \"null\" para la autodetección.\n\nPara la autodetección, se usa el botón del medio del mouse para las plataformas que no son X11 (lo que incluye el Sistema Operativo Chrome). En las plataformas X11, usaremos el botón derecho del mouse (dado que el administrador de ventanas nativo debe realizar las acciones de pegado con el botón del medio del mouse).\n\n0 == botón izquierdo (principal)\n1 == botón del medio (auxiliar)\n2 == botón derecho (secundario)\n\nEsta opción es independiente de la configuración para pegar con el botón derecho.\n\nNota: Esta preferencia administra mouses para zurdos y diestros correctamente."
+		"message": "El botón del mouse para pegar.\n\nPara la autodetección, se usa el botón del medio del mouse en las plataformas que no son X11 (lo que incluye el Sistema operativo Chrome). En las plataformas X11, se usa el botón derecho del mouse (debido a que el administrador de ventanas controla las acciones de pegado con el botón del medio del mouse).\n\n0 == botón izquierdo (principal)\n1 == botón del medio (auxiliar)\n2 == botón derecho (secundario)\n\nEsta opción es independiente de la configuración para pegar con el botón derecho.\n\nNota: En los mouses para zurdos y diestros, los botones primario y secundario se administran automáticamente."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Realiza la acción de pegado con el botón derecho del mouse.\n\nEsta opción es independiente de la configuración \"mouse-paste-button\".\n\nNota: Esta preferencia administra mouses para zurdos y diestros correctamente."
+		"message": "Realiza la acción de pegado con el botón derecho del mouse.\n\nEsta opción es independiente de la configuración \"mouse-paste-button\".\n\nNota: En los mouses para zurdos y diestros, los botones primario y secundario se administran automáticamente."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Si esta preferencia se establece como \"true\", las teclas Re Pág y Av Pág controlan la barra de desplazamiento de la terminal, y Mayúsculas+Re Pág o Av Pág se envían al host remoto. Si se establece como \"false\", las teclas Re Pág y Av Pág se envían al host remoto, y Mayúsculas+Re Pág o Av Pág controlan el desplazamiento."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Establece si se envía Alt+1..9 al navegador.\n\nEsta opción es práctica cuando se ejecuta hterm en una pestaña del navegador; así, evitas perder las combinaciones de teclas de \"cambiar a pestaña\" en Chrome. Cuando la opción no se ejecuta en una pestaña, es mejor enviar estas teclas al host para que se puedan usar en vim o emacs.\n\nSi esta preferencia se establece como \"true\", el navegador administrará Meta+1..9. Si se establece como \"false\", se enviará Meta+1..9 al host. Si se establece como \"null\", la autodetección se basará en la plataforma del navegador y el tipo de ventana."
+		"message": "Establece si se envía Alt+1..9 al navegador.\n\nEsta opción es útil cuando se ejecuta hterm en una pestaña del navegador; así, evitas perder las combinaciones de teclas de \"cambiar a pestaña o aplicación\" en Chrome. Cuando la opción no se ejecuta en una pestaña, es mejor enviar estas teclas al host para que se puedan usar en vim o emacs.\n\nSi se le asigna un valor verdadero, el navegador administrará Alt+1..9. Si se le asigna un valor falso, se enviará Alt+1..9 al host. Si se le asigna un valor nulo, la autodetección se basará en la plataforma del navegador y el tipo de ventana."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Establece si se envía Ctrl+N al navegador.\n\nSi esta preferencia se establece como \"true\", el navegador administrará Ctrl+N como combinación de teclas para \"nueva ventana\". Si se establece como \"false\", se enviará Ctrl+N al host."
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Si esta preferencia se establece como \"true\", el texto que se arrastre y suelte se pegará en la terminal.\nSi se establece como \"false\", se ignorará el texto que se suelte."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Establece la codificación esperada para los datos que se reciben del host.\nSi las codificaciones no coinciden, es probable que se vean errores visuales.\n\nLos valores válidos son \"utf-8\" y \"raw\"."
+	"hterm_pref_screen_border_color": {
+		"message": "El color del borde alrededor de la pantalla de la terminal.\n\nEste parámetro controla el color del borde que se muestra alrededor de la pantalla de la terminal para crear una línea visible en los límites de la pantalla."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "El tamaño del borde en píxeles alrededor de la pantalla de la terminal.\n\nEste parámetro controla el tamaño del borde que se muestra alrededor de la pantalla de una terminal para crear una línea visible en los límites de la pantalla."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "El tamaño de padding en píxeles alrededor del borde de la pantalla de la terminal.\n\nEsto controla el tamaño del borde que aparece alrededor de la pantalla de la terminal para que el usuario pueda agregar algún padding visible en los límites de la pantalla."
@@ -890,6 +932,9 @@
 	"relay_retry": {
 		"message": "Reintentando…"
 	},
+	"remove_label": {
+		"message": "Quitar"
+	},
 	"request_pin_prompt": {
 		"message": "Ingresa el PIN para desbloquear la clave $1 en \"$2 ($3)\" ($4 intentos restantes):"
 	},
@@ -898,6 +943,9 @@
 	},
 	"save_label": {
 		"message": "Guardar"
+	},
+	"select_label": {
+		"message": "Seleccionar"
 	},
 	"send_feedback_label": {
 		"message": "Enviar comentarios"
@@ -910,6 +958,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Argumentos SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " error: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Actualizando certificado SSH…"
+	},
+	"ssh_cert_check_result": {
+		"message": " Aprox. $1 horas hasta el vencimiento"
+	},
+	"ssh_cert_check_start": {
+		"message": "Verificando el estado de actualización del certificado SSH…"
 	},
 	"stream_open_error": {
 		"message": "No se pudo abrir la transmisión $1: $2"
@@ -962,8 +1022,11 @@
 	"terminal_settings_about_label": {
 		"message": "Información"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "La imagen es demasiado grande"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL de imagen de fondo. Debe comenzar con \"http://\" o \"https://\". Déjalo en blanco si no deseas mostrar una imagen.\n\nPor ejemplo:\n  https://goo.gl/anedTK"
+		"message": "Selecciona un archivo de imagen de fondo de tu computadora."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automático"
@@ -994,6 +1057,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Oscuro"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Anochecer"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Bosque"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Bruma"
@@ -1104,7 +1173,7 @@
 		"message": "Muestra notificaciones en el navegador con hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Para conectarte desde el cuadro multifunción, escribe \"ssh <nombre de perfil>\": https://goo.gl/V7o8ki"
+		"message": "Para conectarte desde el cuadro multifunción, escribe 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "El Sistema operativo Chrome puede activar sistemas de archivos mediante SFTP y navegar mediante la app de Archivos. Usa \"SFTP Mount\" en lugar de \"Connect\"."

@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "S'ha produït un error en l'execució de l'ordre $1: $2"
 	},
+	"confirm_button_label": {
+		"message": "Confirma"
+	},
 	"connect_button_label": {
 		"message": "Connecta"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "nom d'usuari"
 	},
+	"file_label": {
+		"message": "Fitxer"
+	},
 	"found_relay": {
 		"message": "S'ha trobat el servidor de retransmissió: $1"
 	},
@@ -125,11 +131,26 @@
 	"hterm_button_block": {
 		"message": "Bloqueja"
 	},
+	"hterm_button_close": {
+		"message": "Tanca"
+	},
+	"hterm_button_find": {
+		"message": "Cerca"
+	},
+	"hterm_button_next": {
+		"message": "Següent"
+	},
 	"hterm_button_page_down": {
 		"message": "Av Pàg"
 	},
 	"hterm_button_page_up": {
 		"message": "Re Pàg"
+	},
+	"hterm_button_previous": {
+		"message": "Anterior"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 coincidències"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "No s'ha pogut carregar $1"
@@ -242,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Variables de l'entorn"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Color per marcar els resultats de cerca"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Color per marcar el resultat de cerca seleccionat"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Família de tipus de lletra del text"
 	},
@@ -282,7 +309,7 @@
 		"message": "Comportament del desplaçament de les tecles Re Pàg i Av Pàg"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Comportament del canvi de pestanya amb Alt+1…9"
+		"message": "Comportament del canvi de pestanya o aplicació amb Alt+1…9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Comportament de la finestra nova amb Ctrl+N"
@@ -308,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Permet arrossegar i deixar anar per enganxar"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Rep la codificació"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Color de la vora de la pantalla"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Mida de la vora de la pantalla"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Mida del farciment de la pantalla"
@@ -321,10 +351,10 @@
 		"message": "Desplaça't al final després d'una sortida nova"
 	},
 	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Emula les tecles de fletxa amb la roda de desplaçament"
+		"message": "Emula les tecles de fletxa amb la rodeta de desplaçament"
 	},
 	"hterm_name_pref_scroll_wheel_move_multiplier": {
-		"message": "Multiplicador de la roda de desplaçament del ratolí"
+		"message": "Multiplicador de la rodeta de desplaçament del ratolí"
 	},
 	"hterm_name_pref_scrollbar_visible": {
 		"message": "Visibilitat de la barra de desplaçament"
@@ -352,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Parada de la selecció automàtica (a la dreta)"
+	},
+	"hterm_notify_copy": {
+		"message": "S'ha copiat"
 	},
 	"hterm_options_button_label": {
 		"message": "Opcions"
@@ -467,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "Conjunt inicial de variables de l'entorn com a objecte."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Color de fons per marcar els resultats de cerca."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Color de fons per marcar el resultat de cerca seleccionat."
+	},
 	"hterm_pref_font_family": {
 		"message": "Família de tipus de lletra predeterminada per al text del terminal."
 	},
@@ -498,16 +537,16 @@
 		"message": "Envia un prefix Esc en prémer una tecla mentre es manté premuda la tecla Meta.\n\nPer exemple, si s'activa, en prémer Meta+K s'envia ^[k, igual que si escrivissis Esc i després k. Si es desactiva, només s'envia k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Botó del ratolí per enganxar o cap valor per a la detecció automàtica.\n\nPer a la detecció automàtica, s'utilitza el botó central del ratolí per a les plataformes que no són X11 (també Chrome OS). En plataformes X11, s'utilitza el botó dret del ratolí (ja que el gestor natiu de finestres utilitza el botó central del ratolí per enganxar).\n\n0 == botó esquerre (principal).\n1 == botó central (auxiliar).\n2 == botó dret (secundari).\n\nAquesta opció és independent de l'opció per enganxar fent clic amb el botó dret.\n\nNota: aquesta opció s'adapta correctament a ratolins tant per a dretans com per a esquerrans."
+		"message": "Botó del ratolí per enganxar.\n\nPer a la detecció automàtica, s'utilitza el botó central del ratolí per a les plataformes que no són X11 (també Chrome OS). En plataformes X11, s'utilitza el botó dret del ratolí, ja que el gestor de finestres utilitza el botó central del ratolí per enganxar.\n\n0 == botó esquerre (principal).\n1 == botó central (auxiliar).\n2 == botó dret (secundari).\n\nAquesta opció és independent de l'opció per enganxar fent clic amb el botó dret.\n\nNota: els botons principal i secundari s'adapten a ratolins per a dretans i esquerrans."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Enganxa la selecció en fer clic al botó dret del ratolí.\n\nAquesta opció és independent de l'opció \"mouse-paste-button\".\n\nNota: aquesta opció s'adapta correctament a ratolins tant per a dretans com per a esquerrans."
+		"message": "Enganxa fent clic amb el botó dret del ratolí.\n\nAquesta opció és independent de l'opció de configuració \"mouse-paste-button\".\n\nNota: els botons principal i secundari s'adapten a ratolins per a dretans i esquerrans."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Si s'estableix en \"true\", amb les tecles Re Pàg i Av Pàg es controla la barra de desplaçament del terminal, i Maj+Re Pàg i Maj+Av Pàg s'envien a l'amfitrió remot. Si s'estableix en \"false\", les funcions d'aquestes tecles s'intercanvien."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Estableix si s'ha de transmetre Alt+1…9 al navegador.\n\nÉs útil quan s'executa hterm en una pestanya del navegador, ja que així no es perden les tecles de drecera per a \"canvia a la pestanya\" de Chrome. Quan no s'executa en una pestanya, és millor enviar aquestes tecles a l'amfitrió perquè es puguin fer servir a vim o emacs.\n\nSi s'estableix en \"true\", el navegador gestiona Alt+1…9. Si s'estableix en \"false\", s'envia Alt+1…9 a l'amfitrió. \nSi s'estableix en \"null\", es detecta automàticament en funció de la plataforma del navegador i del tipus de finestra."
+		"message": "Estableix si s'ha de transmetre Alt+1…9 al navegador.\n\nÉs útil quan s'executa hterm en una pestanya del navegador, ja que així no es perden les tecles de drecera per a \"canvia a la pestanya o a l'aplicació\" de Chrome. Quan no s'executa en una pestanya, és millor enviar aquestes tecles a l'amfitrió perquè es puguin fer servir a vim o emacs.\n\nSi s'estableix en \"true\", el navegador gestiona Alt+1…9. Si s'estableix en \"false\", s'envia Alt+1…9 a l'amfitrió. Si s'estableix en \"null\", es detecta automàticament en funció de la plataforma del navegador i del tipus de finestra."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Estableix si s'ha de transmetre Ctrl+N al navegador.\n\nSi s'estableix en \"true\", el navegador gestiona Ctrl+N com a tecles de drecera per a \"finestra nova\". Si s'estableix en \"false\", s'envia Ctrl+N a l'amfitrió."
@@ -533,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Si s'estableix en \"true\", el text que s'arrossegui i es deixi anar s'enganxarà al terminal.\nSi s'estableix en \"false\", el text que es deixi anar s'ignorarà."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Estableix la codificació prevista per a les dades que es reben de l'amfitrió.\nSi la codificació no coincideix, és probable que es produeixin errors visuals.\n\nEls valors vàlids són \"utf-8\" i \"raw\"."
+	"hterm_pref_screen_border_color": {
+		"message": "Color de la vora que envolta la pantalla del terminal.\n\nControla el color de la vora que envolta la pantalla del terminal per crear una línia visible a les vores de la pantalla."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Mida en píxels de la vora que envolta la pantalla del terminal.\n\nControla la mida de la vora que envolta la pantalla del terminal per crear una línia visible a les vores de la pantalla."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Mida en píxels del farciment que envolta la vora de la pantalla del terminal.\n\nControla la mida de la vora que envolta la pantalla del terminal perquè l'usuari pugui afegir farciment visible a les vores de la pantalla."
@@ -546,10 +588,10 @@
 		"message": "Estableix si es desplaça a la part inferior la sortida del terminal."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Quan s'utilitza la memòria intermèdia de la pantalla alternativa i DECCKM (les tecles de cursor d'aplicacions) està activa, els esdeveniments de la roda de desplaçament del ratolí emulen les tecles de fletxa.\n\nEs pot mantenir premuda la tecla Maj per desactivar temporalment aquesta preferència.\n\nSe sol donar quan s'utilitzen lectors de pàgina (less), quan es llegeixen manuals o editors de text (vi/nano), o quan s'utilitza Screen o tmux."
+		"message": "Quan s'utilitza la memòria intermèdia de la pantalla alternativa i DECCKM (les tecles de cursor d'aplicacions) està activa, els esdeveniments de la rodeta de desplaçament del ratolí emulen les tecles de fletxa.\n\nEs pot mantenir premuda la tecla Maj per desactivar temporalment aquesta preferència.\n\nSe sol donar quan s'utilitzen lectors de pàgina (less), quan es llegeixen manuals o editors de text (vi/nano), o quan s'utilitza Screen o tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
-		"message": "Multiplicador per a esdeveniments de la roda de desplaçament del ratolí quan es mesuren en píxels.\n\nModifica la rapidesa del desplaçament de la pàgina."
+		"message": "Multiplicador per a esdeveniments de la rodeta de desplaçament del ratolí quan es mesuren en píxels.\n\nModifica la rapidesa del desplaçament de la pàgina."
 	},
 	"hterm_pref_scrollbar_visible": {
 		"message": "El mode de barra de desplaçament vertical."
@@ -890,6 +932,9 @@
 	"relay_retry": {
 		"message": "S'està tornant a provar..."
 	},
+	"remove_label": {
+		"message": "Suprimeix"
+	},
 	"request_pin_prompt": {
 		"message": "Introdueix el PIN per desbloquejar la clau $1 a \"$2 ($3)\" (queden $4 intents):"
 	},
@@ -898,6 +943,9 @@
 	},
 	"save_label": {
 		"message": "Desa"
+	},
+	"select_label": {
+		"message": "Selecciona"
 	},
 	"send_feedback_label": {
 		"message": "Envia suggeriments"
@@ -910,6 +958,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Arguments SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " Error: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "S'està actualitzant el certificat SSH..."
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 hores fins que caduqui"
+	},
+	"ssh_cert_check_start": {
+		"message": "S'està comprovant la freqüència del certificat SSH..."
 	},
 	"stream_open_error": {
 		"message": "No s'ha pogut obrir la reproducció en continu $1: $2"
@@ -962,8 +1022,11 @@
 	"terminal_settings_about_label": {
 		"message": "Informació"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "La imatge és massa gran"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL de la imatge de fons. Ha de començar per \"http://\" o \"https://\". Deixa'l en blanc si no vols que es mostri cap imatge.\n\nPer exemple:\n  https://goo.gl/anedTK"
+		"message": "Selecciona un fitxer d'imatge de fons de l'ordinador."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automàtic"
@@ -994,6 +1057,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Fosc"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Capvespre"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Bosc"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Lila boirós"
@@ -1107,7 +1176,7 @@
 		"message": "Utilitza hterm-notify per mostrar notificacions al navegador: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Escriu \"ssh <nom del perfil>\" per connectar-te des de l'omnibox: https://goo.gl/V7o8ki"
+		"message": "Escriu 'ssh<Tab><profile name>': https://goo.gl/V7o8ki per connectar-te des de l'omnibox"
 	},
 	"tip_4": {
 		"message": "Chrome OS pot activar sistemes de fitxers a través d'SFTP i navegar a través de l'aplicació Fitxers. Utilitza Activació de l'SFTP en lloc de Connecta."

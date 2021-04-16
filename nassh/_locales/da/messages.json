@@ -35,6 +35,9 @@
 	"command_startup_failed": {
 		"message": "$1 blev ikke startet: $2"
 	},
+	"confirm_button_label": {
+		"message": "Bekræft"
+	},
 	"connect_button_label": {
 		"message": "Kontakt"
 	},
@@ -107,6 +110,9 @@
 	"field_username_placeholder": {
 		"message": "brugernavn"
 	},
+	"file_label": {
+		"message": "Fil"
+	},
 	"found_relay": {
 		"message": "Registreret relæserver: $1"
 	},
@@ -125,11 +131,23 @@
 	"hterm_button_block": {
 		"message": "Bloker"
 	},
+	"hterm_button_close": {
+		"message": "Luk"
+	},
+	"hterm_button_next": {
+		"message": "Næste"
+	},
 	"hterm_button_page_down": {
 		"message": "Page Down"
 	},
 	"hterm_button_page_up": {
 		"message": "Page Up"
+	},
+	"hterm_button_previous": {
+		"message": "Forrige"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 resultater"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "$1 blev ikke indlæst"
@@ -141,7 +159,7 @@
 		"message": "Tillad visning af indlejret billede"
 	},
 	"hterm_name_pref_alt_backspace_is_meta_backspace": {
-		"message": "Alt+tilbagetasten er Meta+tilbagetasten"
+		"message": "Alt+Backspace er Meta+Backspace"
 	},
 	"hterm_name_pref_alt_gr_mode": {
 		"message": "Tilstand med AltGr-tasten"
@@ -168,7 +186,7 @@
 		"message": "Størrelse på baggrundsbillede"
 	},
 	"hterm_name_pref_backspace_sends_backspace": {
-		"message": "Adfærd for tilbagetasten"
+		"message": "Adfærd for tasten Backspace"
 	},
 	"hterm_name_pref_character_map_overrides": {
 		"message": "Tilsidesættelse af tilknytning af tegn"
@@ -242,6 +260,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Miljøvariabler"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Fremhævet farve for resultater"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Fremhævet farve for markerede resultater"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Skrifttypefamilie"
 	},
@@ -282,7 +306,7 @@
 		"message": "Rulning med Page Up- og Page Down-tasterne"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Faneskift med Alt+1-9"
+		"message": "Faneskift/appskift med Alt+1-9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Nyt vindue med Ctrl+N"
@@ -294,7 +318,7 @@
 		"message": "Ny fane med Ctrl+T"
 	},
 	"hterm_name_pref_pass_ctrl_tab": {
-		"message": "Faneskift med Ctrl+tabulatortasten"
+		"message": "Faneskift med Ctrl+Tab"
 	},
 	"hterm_name_pref_pass_ctrl_w": {
 		"message": "Fanelukning med Ctrl+W"
@@ -308,8 +332,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Tillad træk og slip for at indsætte"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Modtag kodning"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Farve på skærmens kant"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Skærmens kanttykkelse"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Størrelse på indre skærmmargen"
@@ -353,6 +380,9 @@
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Stop automatisk valg (til højre)"
 	},
+	"hterm_notify_copy": {
+		"message": "Kopieret"
+	},
 	"hterm_options_button_label": {
 		"message": "Valgmuligheder"
 	},
@@ -366,7 +396,7 @@
 		"message": "Angiv, om den eksterne host må vise billeder i terminalen.\n\nVi spørger som standard, indtil der foretages et valg."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Hvis den angives, annulleres Chrome OS-tilknytningen af Alt+tilbagetasten->Slet, så Alt+tilbagetasten faktisk er Alt+tilbagetasten."
+		"message": "Hvis den angives, annulleres Chrome OS-tilknytningen af Alt+Backspace->Slet, så Alt+Backspace faktisk er Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Vælg en registreringsheuristik for AltGr.\n\n\"null\": Registrer automatisk baseret på navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n\"none\": Deaktiver alle AltGr-emuleringer.\n\"ctrl-alt\": Gå ud fra, at Ctrl+Alt er AltGr.\n\"left-alt\": Gå ud fra, at venstre Alt-tast er AltGr.\n\"right-alt\": Gå ud fra, at højre Alt-tast er AltGr."
@@ -393,7 +423,7 @@
 		"message": "CSS-værdi for baggrundsbilledets størrelse."
 	},
 	"hterm_pref_backspace_sends_backspace": {
-		"message": "Hvis den er angivet som Sand, bruges tilbagetasten til at sende BS (\"\\x08\", også kaldet ^H). Hvis ikke den er angivet som Sand, bruges tilbagetasten til at sende \"\\x7f\"."
+		"message": "Hvis den er angivet som Sand, bruges Backspace til at sende BS (\"\\x08\", også kaldet ^H). Hvis ikke den er angivet som Sand, bruges Backspace til at sende \"\\x7f\"."
 	},
 	"hterm_pref_character_map_overrides": {
 		"message": "Denne indstilling er specificeret som et objekt. Den er en sparsematrix, hvor hver egenskab er tegnsættets kode, og værdien er et objekt, som i sig selv er en sparsematrix. I denne sparsematrix er hver egenskab det tegn, der modtages, og værdien er det viste tegn.\n\nEksempel:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
@@ -467,6 +497,12 @@
 	"hterm_pref_environment": {
 		"message": "Det første sæt variabler for miljøet angives som et objekt."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Baggrundsfarven til fremhævning af resultater."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Baggrundsfarven til fremhævning af det markerede resultat."
+	},
 	"hterm_pref_font_family": {
 		"message": "Standardskrifttypefamilie for terminalteksten."
 	},
@@ -498,16 +534,16 @@
 		"message": "Send et ESC-præfiks, når du trykker på en tast, mens du holder metatasten nede.\n\nNår dette er aktiveret, og du f.eks. trykker på Meta-K, sendes ^[k, som om du har tastet Escape og derefter k. Når dette er deaktiveret, sendes kun k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Musens knap til at indsætte. Angiv nul for automatisk registrering.\n\nVed automatisk registrering bruger vi den midterste museknap til platforme, der ikke er X11, (bl.a. Chrome OS). På X11 bruger vi den højre museknap (da den indbyggede vinduesadministrator burde indsætte via den midterste museknap).\n\n0 == venstre (primær) knap.\n1 == midterste (ekstra) knap.\n2 == højre (sekundær) knap.\n\nDenne valgmulighed er aktiv uafhængigt af indstillingen af \"mus-højreklik-indsæt\".\n\nBemærk! Dette sikrer, at musen fungerer korrekt for henholdsvis højre- og venstrehåndede."
+		"message": "Den museknap, der skal bruges til indsætning.\n\nVed automatisk registrering bruger vi den midterste museknap til platforme, der ikke er X11, (bl.a. Chrome OS). På X11 bruger vi den højre museknap (da vinduesadministratoren burde indsætte via den midterste museknap).\n\n0 == venstre (primær) knap.\n1 == midterste (ekstra) knap.\n2 == højre (sekundær) knap.\n\nDenne valgmulighed er uafhængig af indstillingen for indsætning med højreklik.\n\nBemærk! De primære og sekundære knapper justeres, afhængigt af om du bruger venstre eller højre hånd til musen."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Indsæt med klik på højre museknap.\n\nDenne valgmulighed er uafhængig af indstillingen af \"mus-indsæt-knap\".\n\nBemærk! Dette sikrer, at musen fungerer korrekt for henholdsvis højre- og venstrehåndede."
+		"message": "Indsæt med klik på højre museknap.\n\nDenne valgmulighed er uafhængig af indstillingen \"mus-indsæt-knap\".\n\nBemærk! De primære og sekundære knapper justeres, afhængigt af om du bruger venstre eller højre hånd til musen."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Hvis den er angivet som Sand, styrer Page Up og Page Down terminalens rullepanel, og Shift+Page Up og Shift+Page Down sendes til den eksterne host. Hvis den er angivet som Falsk, sendes Page Up og Page Down til den eksterne host, og Shift+Page Up og Shift+Page Down ruller."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Angiv, om Alt+1-9 skal overføres til browseren.\n\nDette er praktisk, når hterm køres i en browserfane, så du ikke mister Chromes \"skift til fane\"-tastaturgenveje. Når den ikke køres i en fane, er det bedre at sende disse taster til hosten, så de kan bruges i vim eller emacs.\n\nHvis den er angivet som Sand, håndteres Alt+1-9 af browseren. Hvis den er angivet som Falsk, sendes Alt+1-9 til hosten. Hvis den er angivet som Nul, baseres automatisk registrering på browserplatformen og vinduestypen."
+		"message": "Angiv, om Alt+1-9 skal overføres til browseren.\n\nDette er praktisk, når hterm køres i en browserfane, så du ikke mister Chromes \"skift til fane/app\"-tastaturgenveje. Når den ikke køres i en fane, er det bedre at sende disse taster til hosten, så de kan bruges i vim eller emacs.\n\nHvis den er angivet som Sand, håndteres Alt+1-9 af browseren. Hvis den er angivet som Falsk, sendes Alt+1-9 til hosten. Hvis den er angivet som Nul, baseres automatisk registrering på browserplatformen og vinduestypen."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Angiv, om Ctrl+N skal overføres til browseren.\n\nHvis den er angivet som Sand, håndteres Ctrl+N af browseren som tastaturgenvejen \"ny fane\". Hvis den er angivet som Falsk, sendes Ctrl+N til hosten."
@@ -519,7 +555,7 @@
 		"message": "Angiv, om Ctrl+T skal overføres til browseren.\n\nHvis den er angivet som Sand, håndteres Ctrl+T af browseren som tastaturgenvejen \"ny fane\". Hvis den er angivet som Falsk, sendes Ctrl+T til hosten."
 	},
 	"hterm_pref_pass_ctrl_tab": {
-		"message": "Angiv, om Ctrl+tabulatortasten og Ctrl+Shift+Tab skal overføres til browseren.\n\nHvis den er angivet som Sand, håndteres Ctrl+Tab og Ctrl+Shift+Tab af browseren som tastaturgenvejen \"næste/forrige fane\". Hvis den er angivet som Falsk, sendes Tab-tasten til hosten uden Ctrl eller Shift."
+		"message": "Angiv, om Ctrl+Tab og Ctrl+Shift+Tab skal overføres til browseren.\n\nHvis den er angivet som Sand, håndteres Ctrl+Tab og Ctrl+Shift+Tab af browseren som tastaturgenvejen \"næste/forrige fane\". Hvis den er angivet som Falsk, sendes Tab-tasten til hosten uden Ctrl eller Shift."
 	},
 	"hterm_pref_pass_ctrl_w": {
 		"message": "Angiv, om Ctrl+W skal overføres til browseren.\n\nHvis den er angivet som Sand, håndteres Ctrl+W af browseren som tastaturgenvejen \"luk fane\". Hvis den er angivet som Falsk, sendes Ctrl+W til hosten."
@@ -533,8 +569,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Hvis den er angivet som Sand, indsættes tekst, der trækkes og slippes, i terminalen.\nHvis den er angivet som falsk, ignoreres sluppet tekst."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Angiv den forventede kodning for data, der modtages fra hosten.\nHvis koderne ikke matcher, kan der sandsynligvis noteres visuelle fejl.\n\nDe gyldige værdier er \"utf-8\" og \"raw\"."
+	"hterm_pref_screen_border_color": {
+		"message": "Farven på kanten på terminalskærmen.\n\nDette angiver farven på kanten på terminalskærmen, så der skabes en synlig linje rundt om skærmen."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Kantens tykkelse i pixels rundt om terminalskærmen.\n\nDette angiver tykkelsen på kanten på terminalskærmen, så der skabes en synlig linje rundt om skærmen."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Størrelsen på den indre margen i pixel i kanten på terminalskærmen.\n\nDette fastsætter størrelsen på kanten på terminalskærmen, så brugeren kan tilføje en synlig indre margen på skærmens kanter."
@@ -735,7 +774,7 @@
 		"message": "luk"
 	},
 	"nasftp_cmd_exit_help": {
-		"message": "Fjern tilknytning"
+		"message": "Afbryd forbindelsen"
 	},
 	"nasftp_cmd_get": {
 		"message": "hent"
@@ -992,6 +1031,9 @@
 	"relay_retry": {
 		"message": "Prøver igen…"
 	},
+	"remove_label": {
+		"message": "Fjern"
+	},
 	"request_pin_prompt": {
 		"message": "Angiv pinkode for at oplåse nøglen $1 på \"$2 ($3)\" ($4 forsøg tilbage):"
 	},
@@ -1000,6 +1042,9 @@
 	},
 	"save_label": {
 		"message": "Gem"
+	},
+	"select_label": {
+		"message": "Vælg"
 	},
 	"send_feedback_label": {
 		"message": "Send feedback"
@@ -1012,6 +1057,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "SSH-argumenter"
+	},
+	"ssh_cert_check_error": {
+		"message": " mislykkedes: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Opdaterer SSH-certifikatet..."
+	},
+	"ssh_cert_check_result": {
+		"message": " Udløber om ~$1 t."
+	},
+	"ssh_cert_check_start": {
+		"message": "Tjekker SSH-certifikatets gyldighed..."
 	},
 	"stream_open_error": {
 		"message": "Strømmen $1 blev ikke åbnet: $2"
@@ -1070,8 +1127,11 @@
 	"terminal_settings_about_label": {
 		"message": "Om"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Billedet er for stort"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "Webadresse for baggrundsbillede (skal starte med \"http://\" eller \"'https://\"). Lad feltet stå tomt, hvis der ikke er noget billede.\n\nEksempel:\n  https://goo.gl/anedTK"
+		"message": "Vælg et baggrundsbillede fra din computer."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatisk"
@@ -1099,6 +1159,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Mørkt"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Skumring"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Skov"
 	},
 	"terminal_theme_haze_label": {
 		"message": "Tågedis"
@@ -1218,7 +1284,7 @@
 		"message": "Vis notifikationer i browseren ved hjælp af hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Opret forbindelse fra omnifeltet ved at skrive \"ssh <profile name>\": https://goo.gl/V7o8ki"
+		"message": "Opret forbindelse via omnifeltet ved at angive 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Chrome OS kan isætte filsystemer via SFTP og gennemse via appen Filer. Brug \"SFTP-isætning\" i stedet for \"Opret forbindelse\"."
@@ -1246,6 +1312,9 @@
 	},
 	"unmount_button_label": {
 		"message": "Demonter SFTP"
+	},
+	"url_label": {
+		"message": "Webadresse"
 	},
 	"welcome_changelog": {
 		"message": "Ændringslogfil/produktbemærkninger: $1"

@@ -32,6 +32,9 @@
 	"command_startup_failed": {
 		"message": "Imeshindwa kuanzisha $1: $2"
 	},
+	"confirm_button_label": {
+		"message": "Thibitisha"
+	},
 	"connect_button_label": {
 		"message": "Unganisha"
 	},
@@ -104,6 +107,9 @@
 	"field_username_placeholder": {
 		"message": "jina la mtumiaji"
 	},
+	"file_label": {
+		"message": "Faili"
+	},
 	"found_relay": {
 		"message": "Umepata seva ya kutuma: $1"
 	},
@@ -122,11 +128,29 @@
 	"hterm_button_block": {
 		"message": "Zuia"
 	},
+	"hterm_button_close": {
+		"message": "Funga"
+	},
+	"hterm_button_find": {
+		"message": "Tafuta"
+	},
+	"hterm_button_next": {
+		"message": "Yanayofuata"
+	},
 	"hterm_button_page_down": {
 		"message": "Page down"
 	},
 	"hterm_button_page_up": {
 		"message": "Page up"
+	},
+	"hterm_button_previous": {
+		"message": "Yaliyotangulia"
+	},
+	"hterm_find_counter_label": {
+		"message": "$1 kati ya $2"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 yanayolingana"
 	},
 	"hterm_loading_resource_failed": {
 		"message": "Imeshindwa kupakia $1"
@@ -239,6 +263,12 @@
 	"hterm_name_pref_environment": {
 		"message": "Vigezo vya mazingira"
 	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Rangi ya kuangazia matokeo ya utafutaji"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Rangi uliyoichagua ya kuangazia matokeo ya utafutaji"
+	},
 	"hterm_name_pref_font_family": {
 		"message": "Jamii ya fonti ya maandishi"
 	},
@@ -279,7 +309,7 @@
 		"message": "Kitendo cha kusogeza ukitumia kitufe cha Page Up au Page Down"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Kitendo cha kubadilisha kichupo ukitumia Alt+1..9"
+		"message": "Kitendo cha kubadilisha kichupo/programu ukitumia Alt+1..9"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Kitendo cha dirisha jipya ukitumia Ctrl+N"
@@ -305,8 +335,11 @@
 	"hterm_name_pref_paste_on_drop": {
 		"message": "Ruhusu hatua ya kuburuta na kudondosha ili ubandike"
 	},
-	"hterm_name_pref_receive_encoding": {
-		"message": "Pokea usimbaji"
+	"hterm_name_pref_screen_border_color": {
+		"message": "Rangi ya mpaka wa skrini"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Ukubwa wa mpaka wa skrini"
 	},
 	"hterm_name_pref_screen_padding_size": {
 		"message": "Ukubwa wa eneo linalozunguka maudhui kwenye skrini"
@@ -349,6 +382,9 @@
 	},
 	"hterm_name_pref_word_break_match_right": {
 		"message": "Kusitisha uteuzi wa kiotomatiki (kuelekea kulia)"
+	},
+	"hterm_notify_copy": {
+		"message": "Yamenakiliwa"
 	},
 	"hterm_options_button_label": {
 		"message": "Chaguo"
@@ -464,6 +500,12 @@
 	"hterm_pref_environment": {
 		"message": "Vigezo vya kwanza vya mazingira, kama kipengee."
 	},
+	"hterm_pref_find_result_color": {
+		"message": "Rangi ya mandharinyuma ya kuangazia matokeo ya utafutaji."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Rangi ya mandharinyuma ya kuangazia tokeo la utafutaji ulilolichagua."
+	},
 	"hterm_pref_font_family": {
 		"message": "Kundi chaguomsingi la sehemu ya maandishi."
 	},
@@ -495,16 +537,16 @@
 		"message": "Tuma kiambishi cha ESC unapobonyeza kitufe huku ukishikilia kitufe cha Meta.\n\nKwa mfano, ikiwashwa, hatua ya kubonyeza Meta+K itatuma ^[k kama kwamba umeandika Escape kisha k. Inapozimwa, itatuma k pekee."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Kitufe cha kubandika kupitia kipanya au kutobandika ili kutambua kiotomatiki.\n\nKwa utambuzi wa kiotomatiki, tutatumia kitufe cha katikati cha kipanya katika mifumo isiyo ya X11 (ikiwemo mfumo wa uendeshaji wa Chrome). Kwenye X11, tutatumia kitufe cha kulia cha kipanya (kwa kuwa ni sharti kidhibiti cha dirisha la mfumo kinapaswa kibandikwe kupitia kitufe cha katikati cha kipanya).\n\n0 == kitufe cha kushoto (cha msingi)\n1 == kitufe cha katikati (kisaidizi).\n2 == kitufe cha kulia (cha upili).\n\nChaguo hili huwashwa bila kuzingatia mipangilio ya kubandika kwa kubofya kipanya kulia.\n\nKumbuka: Hali hii itashughulikia vipanya vya kushoto na kulia kwa njia sahihi."
+		"message": "Kitufe cha kipanya cha kutumia kubandika.\n\nKwa utambuzi wa kiotomatiki, tutatumia kitufe cha katikati cha kipanya katika mifumo isiyo ya X11 (ikiwemo mfumo wa uendeshaji wa Chrome). Kwenye X11, tutatumia kitufe cha kulia cha kipanya (kwa kuwa kidhibiti cha dirisha kinapaswa kubandika kupitia kitufe cha katikati cha kipanya).\n\n0 == kitufe cha kushoto (cha msingi).\n1 == kitufe cha katikati (kisaidizi).\n2 == kitufe cha kulia (tegemezi).\n\nChaguo hili huwashwa bila kuzingatia mipangilio ya kubandika kwa kubofya kipanya kulia.\n\nKumbuka: Vitufe vya msingi na tegemezi hushughulikiwa unapotumia vipanya vya kushoto na kulia."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Bandika kupitia mibofyo ya kitufe cha kulia cha kipanya.\n\nChaguo hili hutumika bila kuzingatia mipangilio ya \"mouse-paste-button\".\n\nKumbuka: Hali hii itashughulikia vipanya vya kushoto na kulia kwa njia sahihi."
+		"message": "Kubandika kupitia mibofyo ya kitufe cha kulia cha kipanya.\n\nChaguo hili hutumika bila kuzingatia mipangilio ya \"mouse-paste-button\".\n\nKumbuka: Vitufe vya msingi na tegemezi hushughulikiwa unapotumia vipanya vya kushoto na kulia."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Ikiwa ndivyo, vitufe vya Page Up au Page Down vitadhibiti sehemu ya mwisho ya upau wa kusogeza na vitufe vya Shift+Page Up au Shift+Page Down vitatumwa kwenye seva pangishi ya mbali. Ikiwa sivyo basi vitufe vya Page Up au Page Down vitatumwa kwenye seva pangishi ya mbali na vitufe vya Shift+Page Up au Shift+Page Down vitatumika kusogeza."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Ikiwa kitendo cha Alt+1..9 kinatekelezwa kwenye kivinjari.\n\nHii ni muhimu inapotumia hterm katika kichupo cha kivinjari, ili usipoteze mikato ya kibodi ya \"tumia kichupo\" kwenye Chrome. Wakati hutumii vitufe katika kichupo ni vyema utume vitufe hivi kwenye seva pangishi ili vitumiwe katika vim au emacs.\n\nIkiwa ndivyo, kitendo cha Alt+1..9 kitashughulikiwa kwenye kivinjari. Ikiwa sivyo, kitendo cha Alt+1..9 kitatumwa kwenye seva pangishi. Kama hujaweka sera hii, itatumia mbinu ya kutambua kiotomatiki kulingana na mfumo wa kivinjari na aina ya dirisha."
+		"message": "Ikiwa kitendo cha Alt+1..9 kinaelekezwa kwenye kivinjari.\n\nHii ni muhimu inapotumia hterm katika kichupo cha kivinjari, ili usipoteze mikato ya kibodi ya \"tumia kichupo/programu\" kwenye Chrome. Wakati hutumii vitufe katika kichupo ni vyema utume vitufe hivi kwenye seva pangishi ili vitumiwe katika vim au emacs.\n\nIkiwa ndivyo, kitendo cha Alt+1..9 kitashughulikiwa kwenye kivinjari. Ikiwa sivyo, kitendo cha Alt+1..9 kitatumwa kwenye seva pangishi. Kama hujaweka sera hii, itatumia mbinu ya kutambua kiotomatiki kulingana na mfumo wa kivinjari na aina ya dirisha."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Ikiwa Ctrl+N inatekelezwa kwenye kivinjari.\n\nIkiwa ndivyo, Ctrl+N itashughulikiwa na kivinjari kama mikato ya kibodi ya \"kichupo kipya\". Ikiwa sivyo, Ctrl+N itatumwa kwenye seva pangishi."
@@ -530,8 +572,11 @@
 	"hterm_pref_paste_on_drop": {
 		"message": "Ikiwa ndivyo, Maandishi uliyoburuta na kudondosha yatabandikwa kwenye sehemu ya mwisho.\nIkiwa sivyo, maandishi uliyodondosha hayatabandikwa."
 	},
-	"hterm_pref_receive_encoding": {
-		"message": "Weka usimbaji unaotarajiwa wa data iliyopokelewa kutoka seva pangishi.\nIkiwa usimbaji haulingani, huenda ukapata hitilafu ya kuonekana.\n\nThamani sahihi ni 'utf-8' na 'raw'."
+	"hterm_pref_screen_border_color": {
+		"message": "Rangi ya mpaka unaozunguka skrini ya sehemu ya mwisho.\n\nKipengele hiki hudhibiti rangi ya mpaka unaozunguka skrini ya sehemu ya mwisho ili kuunda mstari unaoonekana kwenye kingo za skrini."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Ukubwa katika pikseli wa mpaka unaozunguka skrini ya sehemu ya mwisho.\n\nKipengele hiki hudhibiti ukubwa wa mpaka unaozunguka skrini ya sehemu ya mwisho ili kuunda mstari unaoonekana kwenye kingo za skrini."
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "Ukubwa katika pikseli wa eneo linalozunguka mpaka wa skrini ya sehemu ya mwisho.\n\nHii hudhibiti ukubwa wa mpaka unaozunguka skrini ya sehemu ya mwisho ili mtumiaji aweze kuongeza eneo linaloonekana, ambalo linazunguka kingo za skrini."
@@ -962,6 +1007,9 @@
 	"relay_retry": {
 		"message": "Inajaribu tena..."
 	},
+	"remove_label": {
+		"message": "Ondoa"
+	},
 	"request_pin_prompt": {
 		"message": "Weka PIN ili upate ufunguo wa $1 kwenye '$2 ($3)' (zimesalia mara $4 za kujaribu):"
 	},
@@ -970,6 +1018,9 @@
 	},
 	"save_label": {
 		"message": "Hifadhi"
+	},
+	"select_label": {
+		"message": "Chagua"
 	},
 	"send_feedback_label": {
 		"message": "Tuma Maoni"
@@ -982,6 +1033,18 @@
 	},
 	"ssh_argstr_label": {
 		"message": "Hoja za SSH"
+	},
+	"ssh_cert_check_error": {
+		"message": " haijafaulu: $1"
+	},
+	"ssh_cert_check_refresh": {
+		"message": "Inaonyesha upya cheti cha SSH..."
+	},
+	"ssh_cert_check_result": {
+		"message": " Muda wa matumizi utaisha baada ya takriban saa $1"
+	},
+	"ssh_cert_check_start": {
+		"message": "Inakagua muda wa mwisho wa matumizi ya cheti cha SSH..."
 	},
 	"stream_open_error": {
 		"message": "Imeshindwa kufungua mtiririko wa $1: $2"
@@ -1040,8 +1103,11 @@
 	"terminal_settings_about_label": {
 		"message": "Kuhusu"
 	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Picha ni kubwa mno"
+	},
 	"terminal_settings_background_image_help": {
-		"message": "URL ya picha ya mandharinyuma. Lazima ianze kwa 'http://' au 'https://'. Iache wazi iwapo hamna picha.\n\nKwa mfano:\n  https://goo.gl/anedTK"
+		"message": "Chagua faili ya picha ya mandharinyuma kutoka kwenye kompyuta yako."
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Otomatiki"
@@ -1072,6 +1138,12 @@
 	},
 	"terminal_theme_dark_label": {
 		"message": "Meusi"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Machweo"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Msitu"
 	},
 	"terminal_theme_light_label": {
 		"message": "Meupe"
@@ -1188,7 +1260,7 @@
 		"message": "Onyesha arifa katika kivinjari ukitumia hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
-		"message": "Unganisha kutoka sanduku kuu kwa kuandika 'ssh <profile name>': https://goo.gl/V7o8ki"
+		"message": "Unganisha kutoka sanduku kuu kwa kuandika 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
 		"message": "Mfumo wa uendeshaji wa Chrome unaweza kupachika mifumo ya faili kupitia SFTP na kuvinjari kupitia programu ya Faili. Tumia 'Upachikaji wa SFTP ' badala ya 'Kuunganisha'."
