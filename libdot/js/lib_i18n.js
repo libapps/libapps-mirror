@@ -110,16 +110,16 @@ lib.i18n.resolveLanguage = function(language) {
   // Map es-RR other than es-ES to es-419 (Chrome's Latin American
   // Spanish locale).
   if (lang == 'es') {
-    if (region != undefined && region != 'es') {
-      return ['es_419'];
+    if ([undefined, 'es'].includes(region)) {
+      return ['es'];
     }
-    return ['es'];
+    return ['es_419'];
   }
 
   // Map pt-RR other than pt-BR to pt-PT. Note that "pt" by itself maps to
   // pt-BR (logic below).
   if (lang == 'pt') {
-    if (region == 'br' || region == undefined) {
+    if ([undefined, 'br'].includes(region)) {
       return ['pt_BR'];
     }
     return ['pt_PT'];
@@ -127,20 +127,21 @@ lib.i18n.resolveLanguage = function(language) {
 
   // Map zh-HK and zh-MO to zh-TW. Otherwise, zh-FOO is mapped to zh-CN.
   if (lang == 'zh') {
-    if (region == 'tw' || region == 'hk' || region == 'mo') {
+    if (['tw', 'hk', 'mo'].includes(region)) {
       return ['zh_TW'];
     }
     return ['zh_CN'];
   }
 
-  // Map Australian, Canadian, Indian, New Zealand and South African
-  // English to British English for now.
+  // Map Liberian and Filipino English to US English, and everything else to
+  // British English.
   if (lang == 'en') {
-    if (region == 'au' || region == 'ca' || region == 'in' || region == 'nz' ||
-        region == 'za') {
-      return ['en_GB'];
+    if ([undefined, 'us', 'lr', 'ph'].includes(region)) {
+      return ['en'];
     }
-    return ['en'];
+
+    // Our GB translation is not complete, so need to add 'en' as a fallback.
+    return ['en_GB', 'en'];
   }
 
   if (region) {
