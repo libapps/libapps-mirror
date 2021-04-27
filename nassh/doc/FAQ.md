@@ -963,14 +963,17 @@ options window: https://crbug.com/1151809.
 1.  Check the "Open as window" option to automatically open it as a window.
 1.  Click the "Create" button.
 
-This will create a shortcut in the app launcher menu and automatically pin to
-the shelf on Chrome OS.  On Windows or macOS, you can click the taskbar icon and
-choose "Pin to taskbar" or "Keep in dock".
+This will create a shortcut in the app launcher menu.
+If it isn't automatically pinned to the relevant location, locate the new
+shortcut in the app launcher, and select the relevant "pin" or "keep" option.
+The exact phrasing depends on your OS as they are inconsistent: some call it a
+shelf, or a taskbar, or a dock, or maybe something else entirely.
 
 If you remove the pinned icon it will remain in the app launcher.
 
 If you right click the shortcut and select the "Remove from Chrome" option, this
 will only delete the shortcut, it *won't* uninstall the extension itself.
+The prompt makes it sound like it will delete & reset everything, but it won't.
 
 ### How do I change input methods?
 
