@@ -1,3 +1,10 @@
+# 0.40, 2021-05-12, OpenSSH 8.5p1.
+
+* l10n: Update translations.
+* ssh_client: Upgrade to OpenSSH 8.5p1.
+* crosh: Use nassh options page when non-SWA.
+* crosh: Use terminalPrivate.openOptionsPage() if running as SWA.
+
 # 0.39, 2021-02-01, Make URI parsing more robust.
 
 * nassh: Disable iframe usage.
