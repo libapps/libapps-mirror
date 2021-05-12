@@ -1,0 +1,36 @@
+From 71968764217c321fbc8f5c70463c4e17ed22d57f Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier@chromium.org>
+Date: Wed, 12 May 2021 12:39:58 -0400
+Subject: [PATCH] fix transmitting non-ASCII data
+
+Transmit UTF-8 data to the plugin rather than codepoints as the client
+seems to be expecting it that way.
+
+This fixes pasting of non-ASCII data into the terminal.
+---
+ mosh_app/mosh_window.js | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
+
+diff --git a/mosh_app/mosh_window.js b/mosh_app/mosh_window.js
+index c76b75181140..4d5f5ae9c8b9 100644
+--- a/mosh_app/mosh_window.js
++++ b/mosh_app/mosh_window.js
+@@ -231,13 +231,8 @@ mosh.CommandInstance.prototype.onMessage_ = function(e) {
+ 
+ mosh.CommandInstance.prototype.sendKeyboard_ = function(string) {
+   if (this.running_) {
+-    // Convert this to an array of codepoints to avoid any Unicode shenanigans,
+-    // which can interfere with terminal escape sequences.
+-    var codePoints = [];
+-    for (var i = 0; i < string.length; i++) {
+-      codePoints.push(string.codePointAt(i));
+-    }
+-    this.moshNaCl_.postMessage({'keyboard': codePoints});
++    const te = new TextEncoder();
++    this.moshNaCl_.postMessage({'keyboard': Array.from(te.encode(string))});
+   } else if (string == 'x') {
+     window.close();
+   }
+-- 
+2.29.2
+

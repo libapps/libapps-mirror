@@ -28,6 +28,7 @@ PATCHES = (
     '%(p)s-libssh-update.patch',
     '%(p)s-reconnect.patch',
     '%(p)s-contextmenu.patch',
+    '%(p)s-utf8-send.patch',
 )
 
 
