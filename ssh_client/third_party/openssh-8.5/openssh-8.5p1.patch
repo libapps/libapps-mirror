@@ -191,3 +191,26 @@ The pnacl toolchain lacks these standard defines.
  #define	DOLLAR		'$'
  #define	DOT		'.'
  #define	EOS		'\0'
+
+https://crbug.com/1208926
+Our NaCl filesystem emulation is too simple to support the hostkey update logic.
+We stub out stat() & unlink() which makes it fail.  Turn the default back off in
+the newer releases.
+
+--- a/readconf.c
++++ b/readconf.c
+@@ -2392,12 +2392,14 @@
+ 		    xstrdup(_PATH_SSH_SYSTEM_HOSTFILE2);
+ 	}
+ 	if (options->update_hostkeys == -1) {
++#if !defined(__pnacl__) && !defined(__nacl__)
+ 		if (options->verify_host_key_dns <= 0 &&
+ 		    (options->num_user_hostfiles == 0 ||
+ 		    (options->num_user_hostfiles == 1 && strcmp(options->
+ 		    user_hostfiles[0], _PATH_SSH_USER_HOSTFILE) == 0)))
+ 			options->update_hostkeys = SSH_UPDATE_HOSTKEYS_YES;
+ 		else
++#endif
+ 			options->update_hostkeys = SSH_UPDATE_HOSTKEYS_NO;
+ 	}
+ 	if (options->num_user_hostfiles == 0) {
