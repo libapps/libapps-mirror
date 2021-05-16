@@ -259,13 +259,3 @@ int chmod(const char* path, mode_t mode) {
 int fchmod(int fd, mode_t mode) {
   STUB_RETURN(0, "fd=%i mode=%o", fd, mode);
 }
-int chdir(const char* path) {
-  STUB_RETURN(0, "path={%s}", path);
-}
-char* getcwd(char* buf, size_t size) {
-  if (size <= 1)
-    return NULL;
-
-  strcpy(buf, "/");  // NOLINT(runtime/printf)
-  return buf;
-}

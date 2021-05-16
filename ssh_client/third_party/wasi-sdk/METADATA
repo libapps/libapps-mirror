@@ -4,7 +4,7 @@ description: "WASI-enabled C/C++ toolchain"
 third_party {
   url {
     type: HOMEPAGE
-    value: "https://github.com/CraneStation/wasi-sdk"
+    value: "https://github.com/WebAssembly/wasi-sdk"
   }
-  version: "11.0"
+  version: "12.0"
 }
