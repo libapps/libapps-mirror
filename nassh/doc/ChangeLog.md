@@ -1,3 +1,10 @@
+# 0.41, 2021-05-19, OpenSSH 8.6p1.
+
+* ssh_client: wasi-sdk: Update to 12.0 release.
+* ssh_client: openssh: Turn host key updates off by default for nacl.
+* ssh_client: Upgrade to OpenSSH 8.6p1.
+* ssh_client: mosh-chrome: Fix transmitting non-ASCII data.
+
 # 0.40, 2021-05-12, OpenSSH 8.5p1.
 
 * l10n: Update translations.
