@@ -498,7 +498,7 @@ nassh.CommandInstance.prototype.mountProfile = function(profileID) {
           io.showOverlay(nassh.msg('MOUNTED_MESSAGE') + ' ' +
                          nassh.msg('CONNECT_OR_EXIT_MESSAGE'), null);
         } else {
-          io.println(nassh.msg('DISCONNECT_MESSAGE', [msg.status]));
+          io.showOverlay(nassh.msg('DISCONNECT_MESSAGE', [msg.status]), null);
         }
 
         // Put the IO into dummy mode for the most part.
@@ -1409,7 +1409,7 @@ nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
   const errorHandler = (ev) => {
     this.io.println(nassh.msg('PLUGIN_LOADING_FAILED'));
     console.error('loading plugin failed', ev);
-    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, false);
   };
   this.plugin_.addEventListener('crash', errorHandler);
   this.plugin_.addEventListener('error', errorHandler);
@@ -1549,15 +1549,13 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
 
     console.log(nassh.msg('DISCONNECT_MESSAGE', [code]));
     return;
-  } else {
-    this.io.println(nassh.msg('DISCONNECT_MESSAGE', [code]));
   }
-
-  if (noReconnect) {
-    this.io.println(nassh.msg('CONNECT_OR_EXIT_MESSAGE'));
-  } else {
-    this.io.println(nassh.msg('RECONNECT_MESSAGE'));
-  }
+  const container = document.createElement('div');
+  container.appendChild(new Text(nassh.msg('DISCONNECT_MESSAGE', [code])));
+  container.appendChild(document.createElement('br'));
+  container.appendChild(new Text(nassh.msg(
+      noReconnect ? 'CONNECT_OR_EXIT_MESSAGE' : 'RECONNECT_MESSAGE')));
+  this.io.showOverlay(container, null);
 
   this.io.onVTKeystroke = (string) => {
     const ch = string.toLowerCase();
@@ -1572,6 +1570,7 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
       case 'x':
       case '\x1b': // ESC
       case '\x17': // ctrl-w
+        this.io.hideOverlay();
         this.io.pop();
         if (this.argv_.onExit) {
           this.argv_.onExit(code);
@@ -1582,6 +1581,7 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
       case ' ':
       case '\x0d': // enter
         if (!noReconnect) {
+          this.io.hideOverlay();
           this.reconnect(this.terminalLocation.hash.substr(1));
         }
     }
