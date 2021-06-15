@@ -64,15 +64,15 @@ or taskbar on Windows).
 People should be using [`ssh://` URIs](./uri.md) to launch Secure Shell.
 
 If you want to switch the app that handles `ssh://` links, visit the
-chrome://settings/handlers page.
+`chrome://settings/handlers` page.
 
 If you've been using `chrome-extension://pnhechapfaindjhompbnflcldabbghjo`,
 switch to `chrome-extension://iodihamcpbpeioajjeobimgagajmlibd` instead.
 
 ### Omnibox Handler
 
-If you use `ssh` in the omnibox, the extension will should automatically take
-over handling it because it's been installed after the app.
+If you use `ssh` in the omnibox, the extension should automatically take over
+handling it because it's been installed after the app.
 See the
 [FAQ for more details](./FAQ.md#how-do-multiple-extensions_apps-work-with-the-omnibox).
 
