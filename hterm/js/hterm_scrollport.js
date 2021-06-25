@@ -1118,51 +1118,18 @@ hterm.ScrollPort.prototype.getFontSize = function() {
  * @return {!hterm.Size} A new hterm.Size object.
  */
 hterm.ScrollPort.prototype.measureCharacterSize = function(weight = '') {
-  // Number of lines used to average the height of a single character.
-  const numberOfLines = 100;
-  // Number of chars per line used to average the width of a single character.
-  const lineLength = 100;
-
-  if (!this.ruler_) {
-    this.ruler_ = this.document_.createElement('div');
-    this.ruler_.id = 'hterm:ruler-character-size';
-    this.ruler_.style.cssText = (
-        'position: absolute;' +
-        'top: 0;' +
-        'left: 0;' +
-        'visibility: hidden;' +
-        'height: auto !important;' +
-        'width: auto !important;');
-
-    // We need to put the text in a span to make the size calculation
-    // work properly in Firefox
-    this.rulerSpan_ = this.document_.createElement('span');
-    this.rulerSpan_.id = 'hterm:ruler-span-workaround';
-    this.rulerSpan_.innerHTML =
-        ('X'.repeat(lineLength) + '\r').repeat(numberOfLines);
-    this.ruler_.appendChild(this.rulerSpan_);
-
-    this.rulerBaseline_ = this.document_.createElement('span');
-    this.rulerSpan_.id = 'hterm:ruler-baseline';
-    // We want to collapse it on the baseline
-    this.rulerBaseline_.style.fontSize = '0px';
-    this.rulerBaseline_.textContent = 'X';
+  let ruler = this.ruler_;
+  if (!ruler) {
+    ruler = this.ruler_ = this.document_.createElement('canvas');
   }
-
-  this.rulerSpan_.style.fontWeight = weight;
-
-  this.rowNodes_.appendChild(this.ruler_);
-  const rulerSize = this.rulerSpan_.getBoundingClientRect();
-
-  const size = new hterm.Size(rulerSize.width / lineLength,
-                            rulerSize.height / numberOfLines);
-
-  this.ruler_.appendChild(this.rulerBaseline_);
-  this.ruler_.removeChild(this.rulerBaseline_);
-
-  this.rowNodes_.removeChild(this.ruler_);
-
-  return size;
+  const context = ruler.getContext('2d');
+  context.font = `${weight} ${this.getFontSize()}px ${this.getFontFamily()}`;
+  const metrics = context.measureText('\u{2588}');
+  const ascent =
+      metrics.actualBoundingBoxAscent || metrics.fontBoundingBoxAscent;
+  const descent =
+      metrics.actualBoundingBoxDescent || metrics.fontBoundingBoxDescent;
+  return new hterm.Size(metrics.width, ascent + descent);
 };
 
 /**
