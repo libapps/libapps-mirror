@@ -270,7 +270,7 @@ popup.prototype.populateList_ = function() {
         link.style.borderBottom = 'dashed 1px';
         break;
       case 'mosh':
-        link.textContent = '⸘m🍪sh‽';
+        link.textContent = nassh.msg('MOSH_NAME');
         link.style.textAlign = 'center';
         link.style.borderTop = 'dashed 1px';
         break;

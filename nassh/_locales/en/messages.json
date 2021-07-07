@@ -1071,6 +1071,10 @@
 			}
 		}
 	},
+	"MOSH_NAME": {
+		"description": "The name of the 'mosh' program. It may be localized if there is a common localization for the Mosh program (which is short for 'Mobile Shell').",
+		"message": "Mosh"
+	},
 	"MOUNTED_MESSAGE": {
 		"description": "Message displayed after a file system is mounted",
 		"message": "Mounted!"
