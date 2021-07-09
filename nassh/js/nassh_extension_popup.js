@@ -32,6 +32,14 @@ function popup() {
   this.htermPrefs_.readStorage(() => {
     this.updateTheme_();
     this.prefs_.readStorage(() => {
+      // If there aren't any connections yet, pop open the connection dialog
+      // automatically.  This will force users to register one first.
+      const ids = this.prefs_.get('profile-ids');
+      if (ids.length === 0) {
+        this.openLink_('connect-dialog');
+        return;
+      }
+
       this.populateList_();
       this.localPrefs_.readStorage(() => {
         this.localPrefs_.syncProfiles(this.prefs_);
