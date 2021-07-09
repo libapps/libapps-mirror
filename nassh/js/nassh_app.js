@@ -50,7 +50,7 @@ nassh.App.prototype.installContextMenus = function() {
     {
       'type': 'normal',
       'id': 'mosh',
-      'title': '⸘m🍪sh‽',
+      'title': nassh.msg('MOSH_NAME'),
       'contexts': ['browser_action'],
     },
     {
