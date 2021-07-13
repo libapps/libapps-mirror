@@ -312,8 +312,13 @@ hterm.Terminal.prototype.setProfile = function(
     'audible-bell-sound': function(v) {
       const ary = v.match(/^lib-resource:(\S+)/);
       if (ary) {
-        terminal.bellAudio_.setAttribute('src',
-                                         lib.resource.getDataUrl(ary[1]));
+        const name = ary[1];
+        if (lib.resource.get(name) === undefined) {
+          console.warn(`Invalid resource name '${name}'`);
+          terminal.prefs_.reset('audible-bell-sound');
+          return;
+        }
+        terminal.bellAudio_.setAttribute('src', lib.resource.getDataUrl(name));
       } else {
         terminal.bellAudio_.setAttribute('src', v);
       }
