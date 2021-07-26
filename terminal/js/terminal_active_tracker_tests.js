@@ -89,6 +89,17 @@ describe('TerminalActiveTracker', () => {
     // Another window focus some tab, which should have no effect.
     tracker.onTabActivated_({tabId: tabId + 2, windowId: windowId + 1});
     assert.isTrue(tracker.active_);
+
+    // Current tab is moved to another window.
+    const newWindowId = windowId + 2;
+    const oldKey = tracker.key;
+    assert.equal(tracker.tab.windowId, windowId);
+    window.localStorage.removeItem(oldKey);
+    tracker.onTabActivated_({tabId, windowId: newWindowId});
+    assert.equal(tracker.tab.windowId, newWindowId);
+    assert.isTrue(tracker.active_);
+    checkWindowActiveTerminal(tracker, 'terminalId-123');
+    assert.isNull(window.localStorage.getItem(oldKey));
   });
 
   it('onUnload_() clears storage if it stores current tab', async () => {

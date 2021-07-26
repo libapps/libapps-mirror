@@ -121,9 +121,17 @@ export class TerminalActiveTracker {
   }
 
   onTabActivated_({tabId, windowId}) {
-    if (windowId === this.tab.windowId) {
-      this.active_ = tabId === this.tab.id;
+    if (tabId === this.tab.id) {
+      this.active_ = true;
+      if (windowId !== this.tab.windowId) {
+        // This tab has been moved to another window. We don't need to care
+        // about the original window here, because if it still has tabs, one of
+        // them will be activated.
+        this.tab.windowId = windowId;
+      }
       this.maybeUpdateWindowActiveTerminal();
+    } else if (windowId === this.tab.windowId) {
+      this.active_ = false;
     }
   }
 
