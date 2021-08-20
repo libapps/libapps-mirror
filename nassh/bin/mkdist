@@ -32,7 +32,7 @@ INCLUDE_PATTERNS = (
     os.path.join('third_party', '*', '*.js'),
     '_locales',
     '_platform_specific',
-    'plugin',
+    os.path.join('plugin', '*'),
 )
 
 # List of files to be excluded from the zip as fnmatch globs.
@@ -46,31 +46,10 @@ EXCLUDE_PATTERNS = (
 # List of additionall files to be excluded when building crosh archive.
 EXCLUDE_PATTERNS_CROSH = (
     'manifest.json',
-    os.path.join('css', 'nassh_box.css'),
-    os.path.join('css', 'nassh_connect_dialog.css'),
-    os.path.join('css', 'nassh_sftp_fsp_config_dialog.css'),
-    os.path.join('html', 'nassh.html'),
     os.path.join('html', 'nassh_background.html'),
-    os.path.join('html', 'nassh_connect_dialog.html'),
-    os.path.join('html', 'nassh_google_relay.html'),
-    os.path.join('html', 'nassh_popup.html'),
-    os.path.join('html', 'nassh_sftp_fsp_config_dialog.html'),
-    os.path.join('js', 'nasftp*.js'),
-    os.path.join('js', 'nassh_agent*.js'),
-    os.path.join('js', 'nassh_app.js'),
     os.path.join('js', 'nassh_background.js'),
-    os.path.join('js', 'nassh_column_list*.js'),
-    os.path.join('js', 'nassh_command_instance*.js'),
-    os.path.join('js', 'nassh_connect_dialog*.js'),
-    os.path.join('js', 'nassh_extension*.js'),
-    os.path.join('js', 'nassh_external_api.js'),
-    os.path.join('js', 'nassh_google_relay*.js'),
-    os.path.join('js', 'nassh_main.js'),
-    os.path.join('js', 'nassh_relay*.js'),
-    os.path.join('js', 'nassh_sftp*.js'),
-    os.path.join('js', 'nassh_stream*.js'),
-    'plugin',
-    os.path.join('third_party', 'google-smart-card', '*'),
+    os.path.join('plugin', 'pnacl-*'),
+    os.path.join('plugin', 'wasm*'),
     os.path.join('images', '*', 'icon-fullsize.png'),
 )
 

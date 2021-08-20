@@ -115,5 +115,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
   };
 
   nassh.disableTabDiscarding();
+  nassh.setupForWebApp();
   lib.init(console.log.bind(console)).then(execNaSSH);
 });

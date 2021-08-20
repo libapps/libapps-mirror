@@ -15,7 +15,8 @@
  */
 nassh.PreferenceManager = function(storage = undefined) {
   if (!storage) {
-    storage = new lib.Storage.Chrome(chrome.storage.sync);
+    storage =
+        hterm.defaultStorage || new lib.Storage.Chrome(chrome.storage.sync);
   }
   lib.PreferenceManager.call(this, storage, '/nassh/');
 

@@ -66,7 +66,7 @@ lib.f.replaceVars.functions = {
 };
 
 /**
- * Convert a relative path to a fully qulified URI.
+ * Convert a relative path to a fully qualified URI.
  *
  * @param {string} path Relative path
  * @return {string} Fully qualified URI.
@@ -74,6 +74,11 @@ lib.f.replaceVars.functions = {
 lib.f.getURL = function(path) {
   if (lib.f.getURL.chromeSupported()) {
     return chrome.runtime.getURL(path);
+  }
+
+  // Use current location origin if path is absolute.
+  if (path.startsWith('/')) {
+    return window.location.origin + path;
   }
 
   return path;

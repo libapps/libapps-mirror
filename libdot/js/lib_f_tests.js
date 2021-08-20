@@ -31,9 +31,12 @@ it('replaceVars', () => {
 
 it('getURL', () => {
   if (lib.f.getURL.chromeSupported()) {
+    assert.equal(lib.f.getURL('/foo'), chrome.runtime.getURL('/foo'));
     assert.equal(lib.f.getURL('foo'), chrome.runtime.getURL('foo'));
   } else {
-    // We don't have a chrome.runtime and such, so just test pass through.
+    // We don't have a chrome.runtime and such, absolute path should use current
+    // location origin, else pass through.
+    assert.equal(lib.f.getURL('/foo'), window.location.origin + '/foo');
     assert.equal(lib.f.getURL('foo'), 'foo');
   }
 });

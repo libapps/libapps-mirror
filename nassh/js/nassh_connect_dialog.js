@@ -79,6 +79,7 @@ nassh.ConnectDialog.onWindowMessage = function(e) {
 
   window.removeEventListener('message', nassh.ConnectDialog.onWindowMessage);
 
+  nassh.setupForWebApp();
   nassh.loadWebFonts(document);
   lib.init().then(() => {
     window.dialog_ = new nassh.ConnectDialog(e.data.argv[0].messagePort);
