@@ -13,7 +13,7 @@ import json
 import re
 import sys
 
-import nassh  # pylint: disable=unused-import
+import nassh  # pylint: disable=unused-import,wrong-import-order
 import libdot
 
 

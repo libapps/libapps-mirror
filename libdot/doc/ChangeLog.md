@@ -1,3 +1,30 @@
+# 8.0.0, 2020-12-07, Modernizations.
+
+* closure-compiler: Update to v20201102.
+* eslint/closure-compiler: Raise min language version to ES2020.
+* event: Add some tests.
+* concat: Handle missing newlines.
+* load_tests: Increase global timeout to 5 minutes.
+* colors: Delete colorPalette global variable.
+* colors: Rename stockPalette.
+* npm: Add helper API.
+* polyfill: Drop TextEncoder/TextDecoder.
+* pylint: Remove exceptions for modules after container update.
+* headless-chrome: Update to Chrome R86.
+* test: Use a dark theme by default.
+* python: Trim Python 2 boiler plate.
+* node: Convert to pathlib.
+* Change "master" to "HEAD" in most places.
+* fetch: Add nicer error message.
+* closure-compiler: Convert to pathlib.
+* closure-compiler: Update to v20200927.
+* eslint: Enable cache mode.
+* Intl.Segmenter: Avoid use of next().
+* storage: catch and ignore JSON parse failure in local storage change.
+* closure-compiler: Update to v20200719.
+* jsonlint: New tool for checking style.
+* storage: chrome: Support older Chrome <R73 versions.
+
 # 7.0.0, 2020-07-06, ES2018, lint/tooling updates, and rewrite storage & init APIs to Promises.
 
 * tests: storage: Add observer/change event coverage.

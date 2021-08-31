@@ -1,0 +1,66 @@
+Send a signal back up to the JS world for when we're really ready to start
+accepting things.  This allows us to sync the initial terminal resize event.
+
+--- a/mosh_nacl/mosh_nacl.cc
++++ b/mosh_nacl/mosh_nacl.cc
+@@ -418,6 +418,9 @@ void MoshClientInstance::Output(OutputType t, const pp::Var& data) {
+     case TYPE_SSH_AGENT:
+       type = "ssh-agent";
+       break;
++    case TYPE_MOSH_MAIN:
++      type = "mosh-main";
++      break;
+     case TYPE_EXIT:
+       type = "exit";
+       break;
+@@ -621,6 +624,7 @@ void* MoshClientInstance::MoshThread(void* data) {
+ 
+   char* argv[] = {argv0.get(), thiz->addr_.get(), thiz->port_.get()};
+   thiz->Log("Mosh(): Calling mosh_main");
++  thiz->Output(MoshClientInstance::TYPE_MOSH_MAIN, "");
+   mosh_main(sizeof(argv) / sizeof(argv[0]), argv);
+   thiz->Log("Mosh(): mosh_main returned");
+ 
+--- a/mosh_nacl/mosh_nacl.h
++++ b/mosh_nacl/mosh_nacl.h
+@@ -57,6 +57,7 @@ class MoshClientInstance : public pp::Instance {
+     TYPE_GET_KNOWN_HOSTS,
+     TYPE_SET_KNOWN_HOSTS,
+     TYPE_SSH_AGENT,
++    TYPE_MOSH_MAIN,
+     TYPE_EXIT,
+   };
+ 
+--- a/mosh_app/mosh_window.js
++++ b/mosh_app/mosh_window.js
+@@ -71,6 +75,9 @@ mosh.CommandInstance = function(argv) {
+   // Whether the NaCl module is running.
+   this.running_ = false;
+ 
++  // Whether we've made it to mosh-main yet.
++  this.ready_ = false;
++
+   // Port to an SSH agent.
+   this.agentPort_ = null;
+ 
+@@ -222,6 +229,8 @@ mosh.CommandInstance.prototype.onMessage_ = function(e) {
+     chrome.storage.sync.set(param);
+   } else if (type == 'ssh-agent') {
+     this.sendToAgent_(data);
++  } else if (type == 'mosh-main') {
++    this.ready_ = true;
+   } else if (type == 'exit') {
+     this.exit_('Mosh has exited.');
+   } else {
+@@ -244,6 +253,11 @@ mosh.CommandInstance.prototype.sendKeyboard_ = function(string) {
+ };
+ 
+ mosh.CommandInstance.prototype.onTerminalResize_ = function(w, h) {
++  if (!this.ready_) {
++    setTimeout(() => this.onTerminalResize_(w, h), 100);
++    return;
++  }
++
+   // Send new size as an int, with the width as the high 16 bits.
+   this.moshNaCl_.postMessage({'window_change': (w << 16) + h});
+ };

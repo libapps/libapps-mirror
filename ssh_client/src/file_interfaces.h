@@ -103,6 +103,7 @@ class OutputInterface {
   virtual bool Write(int fd, const char* data, size_t size) = 0;
   virtual bool Read(int fd, size_t size) = 0;
   virtual bool Close(int fd) = 0;
+  virtual void ReadPass(const char* prompt, size_t size, bool echo) = 0;
   virtual size_t GetWriteWindow() = 0;
   virtual void SendExitCode(int error) = 0;
 };

@@ -292,34 +292,70 @@ nassh.agent.Agent.UserIO.prototype.showMessage = function(backendID, message) {
 nassh.agent.Agent.UserIO.prototype.promptUser =
     async function(backendID, promptMessage) {
   const io = this.term_.io.push();
-  const leaveIO = () => {
-    io.println('');
-    this.term_.io.pop();
+
+  // Perform common cleanup tasks before exiting the prompt.
+  const cleanup = () => {
+    io.hideOverlay();
+    io.pop();
+    this.term_.focus();
   };
 
-  io.print(`[agent '${backendID}'] ${promptMessage}`);
-  return new Promise(function(resolve, reject) {
-    let input = '';
-    // Allow pasting.
-    io.sendString = (str) => input += str;
-    io.onVTKeystroke = (ch) => {
-      switch (ch) {
-        case '\x1b':  // ESC
-          leaveIO();
-          reject();
-          break;
-        case '\r':  // enter
-          leaveIO();
-          resolve(input);
-          break;
-        case '\b':    // backspace
-        case '\x7F':  // delete
-          input = input.slice(0, -1);
-          break;
-        default:
-          input += ch;
-          break;
+  const container = document.createElement('div');
+  const header = document.createElement('div');
+  header.style.fontWeight = 'bold';
+  header.style.textAlign = 'center';
+  header.textContent = `agent '${backendID}'`;
+  container.appendChild(header);
+  const prompt = document.createElement('div');
+  prompt.textContent = promptMessage;
+  container.appendChild(prompt);
+  const input = document.createElement('input');
+  input.type = 'password';
+  container.appendChild(input);
+
+  const visibilityUri = lib.resource.getDataUrl('nassh/images/visibility');
+  const visibilityOffUri = lib.resource.getDataUrl(
+        'nassh/images/visibility_off');
+  const toggle = document.createElement('img');
+  toggle.src = visibilityUri;
+  toggle.style.cursor = 'pointer';
+  toggle.style.verticalAlign = 'middle';
+  toggle.addEventListener('click', (e) => {
+    if (input.type === 'text') {
+      input.type = 'password';
+      toggle.src = visibilityUri;
+    } else {
+      input.type = 'text';
+      toggle.src = visibilityOffUri;
+    }
+  });
+  container.appendChild(toggle);
+
+  io.showOverlay(container, null);
+
+  // Force focus after the browser has a chance to render things.
+  setTimeout(() => input.focus());
+
+  // The terminal will eat all key events, so make sure we stop that.
+  input.addEventListener('keyup', (e) => e.stopPropagation(), true);
+  input.addEventListener('keypress', (e) => e.stopPropagation(), true);
+
+  // If the terminal becomes active for some reason, force back to the input.
+  io.onVTKeystroke = io.sendString = (string) => {
+    input.focus();
+  };
+
+  return new Promise((resolve, reject) => {
+    // Keep accepting input until they press Enter or Escape.
+    input.addEventListener('keydown', (e) => {
+      e.stopPropagation();
+      if (e.key === 'Enter') {
+        cleanup();
+        resolve(input.value);
+      } else if (e.key === 'Escape') {
+        cleanup();
+        reject();
       }
-    };
+    }, true);
   });
 };

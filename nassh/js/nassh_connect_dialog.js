@@ -56,6 +56,7 @@ nassh.ConnectDialog = function(messagePort) {
 
   // Cached DOM nodes.
   this.form_ = lib.notNull(document.querySelector('form'));
+  this.moshButton_ = lib.notNull(document.querySelector('#mosh'));
   this.mountButton_ = lib.notNull(document.querySelector('#mount'));
   this.unmountButton_ = lib.notNull(document.querySelector('#unmount'));
   this.sftpClientButton_ = lib.notNull(document.querySelector('#sftp-client'));
@@ -222,6 +223,8 @@ nassh.ConnectDialog.prototype.installHandlers_ = function() {
   this.deleteButton_.addEventListener('keypress',
                                       this.onButtonKeypress_.bind(this));
 
+  this.moshButton_.addEventListener('click',
+                                    this.onMoshClick_.bind(this));
   this.mountButton_.addEventListener('click',
                                      this.onMountClick_.bind(this));
   this.unmountButton_.addEventListener('click',
@@ -482,6 +485,13 @@ nassh.ConnectDialog.prototype.startup_ = function(message, proto) {
   } else {
     this.form_.reportValidity();
   }
+};
+
+/**
+ * Switch to mosh mode.
+ */
+nassh.ConnectDialog.prototype.mosh = function() {
+  this.startup_('mosh', 'ssh');
 };
 
 /**
@@ -1125,6 +1135,13 @@ nassh.ConnectDialog.prototype.onButtonKeypress_ = function(e) {
   if (e.charCode == 13 || e.charCode == 32) {
     e.srcElement.click();
   }
+};
+
+/**
+ * Someone clicked on the mosh button.
+ */
+nassh.ConnectDialog.prototype.onMoshClick_ = function() {
+  this.mosh();
 };
 
 /**

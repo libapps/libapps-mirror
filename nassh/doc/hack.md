@@ -74,16 +74,6 @@ testing.  It will use the dev extension id to avoid conflicts with the stable
 extension id, although it will still conflict if you have the dev version
 installed from the Chrome Web Store (CWS).
 
-You will need to manually select the variant you want to work on.  The extension
-is defined by the [manifest_ext.json] file while the app is defined by the
-[manifest_v1.5.json] file.  Simply symlink it to manifest.json:
-
-    nassh$ ln -s manifest_ext.json manifest.json
-
-For details on the different manifests and modes, see the next section (and the
-[FAQ]).  You probably want to start with the extension version if you're not
-going to be hacking on Chrome OS features.
-
 The extension id is controlled by the `key` field in the manifest.json.  See
 the [manifest key docs](https://developer.chrome.com/extensions/manifest/key)
 for more details.
@@ -109,22 +99,7 @@ level/color as legitmate errors.
 
 ## Manifests
 
-There are three manifest files in here currently.  The [manifest_v1.5.json] is
-used to build the Secure Shell App and has been what we've used for the longest
-time, but is largely for Chrome OS only now.  The [manifest_ext.json] is used to
-build the Secure Shell Extension which works on all platforms (but lacks any
-Chrome OS specific features).
-
-The "v1.5" and "v2" app formats should not be confused with the "v1" and "v2"
-manifest formats.  Secure Shell uses the legacy/deprecated "v1.5" app style to
-launch itself rather than the "v2" style.  It means that, in many ways, the
-"v1.5" app behaves more like an extension (e.g. it shares cookies with your main
-browser instance and can run inside a tab) rather than an app (e.g. it doesn't
-get access to many newer `chrome.app.*` APIs).
-
-See the [FAQ] for more details on the differences between the extension & app.
-
-If you're updating these files, you'll sometimes also need to update the
+If you're updating the [manifest.json], you'll sometimes also need to update the
 [manifest][manifest_crosh.json] for [crosh] which lives in the Chromium tree.
 
 ## Whitelisted Permissions
@@ -132,8 +107,7 @@ If you're updating these files, you'll sometimes also need to update the
 Using the dev extension id is necessary in order to access some APIs that are
 whitelisted only for Secure Shell.  If you don't need these features, you can
 get by with using a different id (and delete the settings from the
-[manifest_v1.5.json] for the app to avoid warnings at runtime).  These settings
-are already removed from the [manifest_ext.json] for the extension.
+[manifest.json] to avoid warnings at runtime).
 
 * Access to [crosh] under Chrome OS (`terminalPrivate`).
   [(1)](https://cs.chromium.org/search/?q=terminalPrivate)
@@ -265,8 +239,7 @@ The vast majority of the code here lives under [js/].
 * plugin/: Compiled NaCl & output from [ssh_client]
 * [third_party/]: Various 3rd party code we import.
   * [chrome-bootstrap.css]: Theme code for the extensions options page.
-* [manifest_ext.json]: The Chrome manifest for the extension.
-* [manifest_v1.5.json]: The Chrome manifest for the "v1.5" app.
+* [manifest.json]: The [Chrome extension manifest].
 
 ## JavaScript Source Layout
 
@@ -388,6 +361,7 @@ The `name` field can be any one of:
 | `onReadReady`        | Notify plugin data is available. | (int `fd`, bool `result`) |
 | `onResize`           | Notify terminal size changes.    | (int `width`, int `height`) |
 | `onExitAcknowledge`  | Used to quit the plugin.         | () |
+| `onReadPass`         | Return the entered password.     | (str `pass`) |
 
 The session object currently has these members:
 
@@ -429,6 +403,7 @@ The `name` field can be any one of:
 | `close`       | Plugin wants to close an fd.      | (int `fd`) |
 | `exit`        | The plugin is exiting.            | (int `code`) |
 | `printLog`    | Send a string to `console.log`.   | (str `str`) |
+| `readPass`    | Plugin wants to read secrets.     | (str `prompt`, int `max_bytes`, bool `echo`) |
 
 # SFTP {#SFTP}
 
@@ -519,8 +494,7 @@ Here's a random list of documents which would be useful to people.
 [_locales/]: ../_locales/
 [third_party/]: ../third_party/
 
-[manifest_ext.json]: ../manifest_ext.json
-[manifest_v1.5.json]: ../manifest_v1.5.json
+[manifest.json]: ../manifest.json
 [manifest_crosh.json]: https://cs.chromium.org/chromium/src/chrome/browser/resources/chromeos/crosh_builtin/manifest.json
 
 [chrome-bootstrap.css]: ../third_party/chrome-bootstrap/chrome-bootstrap.css
@@ -571,6 +545,7 @@ Here's a random list of documents which would be useful to people.
 
 [FAQ]: FAQ.md
 
+[Chrome extension manifest]: https://developer.chrome.com/extensions/manifest
 [copy-data]: https://tools.ietf.org/html/draft-ietf-secsh-filexfer-extensions-00#section-7
 [Corp Relay: relay-protocol.md#corp-relay
 [crosh]: chromeos-crosh.md

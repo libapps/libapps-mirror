@@ -190,7 +190,7 @@ Now you're free to start working.  Create a branch to hold your changes...
 Then start hacking and commit your changes.  When you're ready to submit, push
 with...
 
-    $ git push origin HEAD:refs/for/master
+    $ git push origin HEAD:refs/for/main
 
 This will push the current branch to Gerrit for review.  Once the change has
 passed review it will be cherry-picked onto the latest branch of the official
@@ -251,7 +251,7 @@ If the official repository changes, you can fetch the new commits using...
 And then re-base any branches with work-in-progress.
 
     $ git checkout hterm_stuff
-    $ git rebase origin/master
+    $ git rebase origin/main
 
 Sometimes this rebase will fail due to merge conflicts which will have to be
 resolved by hand.

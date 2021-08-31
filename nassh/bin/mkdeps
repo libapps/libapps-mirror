@@ -12,7 +12,7 @@ import os
 import re
 import sys
 
-import nassh
+import nassh  # pylint: disable=wrong-import-order
 import libdot
 
 

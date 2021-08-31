@@ -58,31 +58,14 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 
 ### What's the difference between the Secure Shell App and Extension? {#app-vs-ext}
 
-  [Chrome Apps](https://developer.chrome.com/apps/about_apps)
-  [were launched](https://blog.chromium.org/2013/02/chrome-app-launcher-developer-preview.html)
-  to create applications using web technology that would work like native apps
-  on any platform Chrome runs on.  Secure Shell was built on that technology.
+  Everyone should install & use the extension variant now:
 
-  Fast forward a few years and
-  [Chrome Apps were deprecated](https://blog.chromium.org/2016/08/from-chrome-apps-to-web.html)
-  on all non-Chrome OS platforms.  That means the Secure Shell App would only
-  be available on Chrome OS.
+  https://chrome.google.com/webstore/detail/iodihamcpbpeioajjeobimgagajmlibd
 
-  In order to work on non-Chrome OS platforms, we need to migrate it to an
-  extension.  Unfortunately, doing so means we'd lose access to some APIs that
-  we use on Chrome OS specifically.  The only option we're left with is to
-  maintain both an extension and an app at the same time.
+  As of Dec 2019, the two variants have complete feature parity.
 
-  If you do not care about the Chrome OS specific features, then the two
-  versions are equivalent.  Here are the few features available in the App:
-
-  * SFTP mounting
-  * Access to [crosh](chromeos-crosh.md)
-  * Icon shows up in the chrome://apps list (vs in the extension bar)
-
-  That is why we have a "Secure Shell App" and a "Secure Shell Extension" in
-  the store (as well as "dev" versions of each).  You can safely have any of
-  them installed simultaneously.
+  For more historical details, please see our
+  [Chrome Apps Deprecation guide](./app-to-ext-migration.md).
 
 
 ### How do hterm and Secure Shell differ from existing web terminals?
@@ -964,6 +947,30 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   desktop shortcut), you can use the `--app=...` option.  For example:
   `chrome --app=chrome-extension://iodihamcpbpeioajjeobimgagajmlibd/html/nassh.html#profile-id:e431 ...`
 
+### How do I make a desktop icon or shelf shortcut?
+
+If you want to pin the extension to the shelf, taskbar, or dock, you can create
+a shortcut for it. Unfortunately, Chrome does not provide a great flow for this.
+
+Trying to pin the icon for an open window will instead open the extension
+options window: https://crbug.com/1151809.
+
+1.  Click the extension icon in the upper right of Chrome.
+1.  Hold Ctrl while clicking "Connection Dialog" to open it in a tab.
+1.  Open Chrome's ⋮ menu in the upper right (Alt+F shortcut).
+1.  Expand the "More tools" submenu.
+1.  Select the "Create shortcut..." option.
+1.  Check the "Open as window" option to automatically open it as a window.
+1.  Click the "Create" button.
+
+This will create a shortcut in the app launcher menu and automatically pin to
+the shelf on Chrome OS.  On Windows or macOS, you can click the taskbar icon and
+choose "Pin to taskbar" or "Keep in dock".
+
+If you remove the pinned icon it will remain in the app launcher.
+
+If you right click the shortcut and select the "Remove from Chrome" option, this
+will only delete the shortcut, it *won't* uninstall the extension itself.
 
 ### How do I change input methods?
 

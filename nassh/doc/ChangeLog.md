@@ -1,3 +1,54 @@
+# 0.39, 2021-02-01, Make URI parsing more robust.
+
+* nassh: Disable iframe usage.
+* uri: Make parsing a bit more robust.
+* l10n: Update omnibox tip.
+* popup: Add border between hosts & non-hosts.
+* l10n: Improve translator tips based on feedback.
+
+# 0.38, 2020-12-14, SFTP mount regression fix.
+
+* fsp: Fix mounting after UI rewrite.
+* ssh_client: mosh: Improve UI a bit.
+
+# 0.37, 2020-12-07, SFTP mount rewrite, UI prompts rewrite, and alpha mosh import.
+
+* contextmenu: Add some items to improve discoverability.
+* extension: Integrate mosh-chrome project.
+* ssh_client: mosh-chrome: Update to libssh-0.9.5.
+* ssh_client: mosh-chrome: Integrate mosh-chrome project.
+* agent: Use hterm overlay for user input.
+* uri: Make usernames optional in ssh:// URIs.
+* extension: Support keyboard navigation.
+* nassh/ssh_client: Implement readpassphrase interface.
+* wasi-js-bindings: Require wasm bigint import support.
+* ssh_client: Import bazel-0.17.
+* ssh_client: Add missing exit broadcast.
+* ssh_client: Send a warning back on unknown messages.
+* uri: Show the connection dialog for empty ssh://.
+* prefs: Allow loading specific profiles in the editor.
+* ssh_client: mandoc: Fix building w/newer make.
+* ssh_client: wabt: Fix install.
+* Replace parent{Element,Node}.removeChild() with remove().
+* FAQ: Move shelf interaction here.
+* extension: Have middle clicks open in a tab.
+* nassh: Constify namespace.
+* Require Chrome R86+.
+* fsp: Inline last user of createSftpInstance.
+* bg: Delete getBackgroundPage logic.
+* fsp: Move mounting to API layer.
+* api: Add support for bidirectional connections.
+* eslint/closure-compiler: Raise min language version to ES2020.
+* relay: Add an API to save+restore internal state.
+* relay: Harmonize the different implementations.
+* FAQ: Update the app-vs-ext details.
+* sshfe: Use new nassh.buffer API.
+* Drop building of Chrome App.
+* l10n: Improve translator tips for reconnect dialogs.
+* corp relay: Pass io down to the stream.
+* uri: Fix handling of sftp & web+ssh URIs.
+* google: Automatically check & refresh SSH certificates.
+
 # 0.36, 2020-11-09, 2020-11-11, OpenSSH 8.4p1, UI tweaks.
 
 * connect: Improve incomplete form UX.

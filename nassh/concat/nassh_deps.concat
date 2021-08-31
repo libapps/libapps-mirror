@@ -10,5 +10,8 @@
 @file libdot/js/lib_event.js
 @file libdot/js/lib_fs.js
 
+@resource nassh/images/visibility image/svg+xml;utf8 < ../images/visibility.svg
+@resource nassh/images/visibility_off image/svg+xml;utf8 < ../images/visibility_off.svg
+
 @resource nassh/release/lastver text/plain head -1 release-highlights.txt
 @resource nassh/release/highlights text/plain grep ^% release-highlights.txt

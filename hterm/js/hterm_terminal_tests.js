@@ -416,9 +416,12 @@ it('per-screen-cursor-state', function() {
 it('display-img-disabled', function() {
   this.terminal.allowImagesInline = false;
 
+  let notification;
+  this.terminal.showOverlay = (msg) => {
+    notification = msg;
+  };
   this.terminal.displayImage({uri: ''});
-  const text = this.terminal.getRowsText(0, 1);
-  assert.equal('Inline Images Disabled', text);
+  assert.equal('Inline Images Disabled', notification);
 });
 
 /**
@@ -427,11 +430,15 @@ it('display-img-disabled', function() {
 it('display-img-prompt', function() {
   this.terminal.allowImagesInline = null;
 
-  // Search for the block & allow buttons.
+  // Make sure the notification has some buttons.  Don't probe too deeply so we
+  // don't have tests bound to the exact translations.
+  let notification;
+  this.terminal.showOverlay = (msg) => {
+    notification = msg;
+  };
   this.terminal.displayImage({uri: ''});
-  const text = this.terminal.getRowsText(0, 1);
-  assert.include(text.toLowerCase(), 'block');
-  assert.include(text.toLowerCase(), 'allow');
+  const buttons = notification.querySelectorAll('input');
+  assert.isAtLeast(buttons.length, 3);
 });
 
 /**
@@ -947,6 +954,30 @@ it('scroll-region', function() {
   // The last row of screenC is never touched.
   screenD.push(screenC[this.visibleRowCount - 1]);
   validate(scrollback, screenD);
+});
+
+/**
+ * Test the autoScroll is enabled/disabled when primary mouse button is down.
+ */
+it('auto-scroll-enabled', function() {
+  const s = this.terminal.getScrollPort().selection;
+  assert.isFalse(s.autoScrollEnabled_);
+
+  // Auto scroll should not get enabled from right button down.
+  this.terminal.onMouse_(new MouseEvent('mousedown', {button: 1}));
+  assert.isFalse(s.autoScrollEnabled_);
+
+  // Auto scroll should be enabled from left (primary).
+  this.terminal.onMouse_(new MouseEvent('mousedown', {button: 0}));
+  assert.isTrue(s.autoScrollEnabled_);
+
+  // Auto scroll should not get disabled from right button up.
+  this.terminal.onMouse_(new MouseEvent('mouseup', {button: 1}));
+  assert.isTrue(s.autoScrollEnabled_);
+
+  // Auto scroll should be disabled from left (primary).
+  this.terminal.onMouse_(new MouseEvent('mouseup', {button: 0}));
+  assert.isFalse(s.autoScrollEnabled_);
 });
 
 });

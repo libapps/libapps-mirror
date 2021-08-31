@@ -20,14 +20,12 @@ NODE_MODULES_HASH = '2cd2dd365999ae139b6b0fb62a5a09e2a7fb5ab1c0926cf1968a1dec9b7
 # pylint: enable=line-too-long
 
 # In sync with Chromium's DEPS file because it's easier to use something that
-# already exists than maintain our own.  Look for 'node_linux64' here:
-# https://chromium.googlesource.com/chromium/src/+/HEAD/DEPS
-NODE_VER = '12.14.1'
-
-# Run `./node_sync_with_chromium` to update these hashes.
-NODE_LINUX_HASH = '4572d3801500bcbebafadf203056d6263c840cda'
-NODE_MAC_HASH = '6b9eefd982e255d639234acfa1d772c34a2529cb'
-NODE_WIN_HASH = 'a25b445d6e02de0fdbf426d5cfd193702351989e'
+# already exists than maintain our own.
+# Run `./node_sync_with_chromium` to update these settings.
+NODE_VER = '14.15.4'
+NODE_LINUX_HASH = 'b2e40ddbac04d05baafbb007f203c6663c9d4ca9'
+NODE_MAC_HASH = '17ba7216e09de1bffb9dc80b7ec617a1cee40330'
+NODE_WIN_HASH = '58bca4fea5196d856e41f928c02f6d6af2421865'
 
 # Bucket maintained by Chromium.
 # gsutil ls gs://chromium-nodejs/

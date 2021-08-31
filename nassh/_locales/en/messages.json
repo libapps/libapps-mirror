@@ -102,7 +102,7 @@
 		"message": "Connect"
 	},
 	"CONNECT_OR_EXIT_MESSAGE": {
-		"description": "Message displayed after a connection closes and the user cannot reconnect. Do not translate the (C) or (X) fields as they are keyboard shortcuts, although changing case is OK. Placing them after the word is OK like: Exit (X).",
+		"description": "Message displayed after a connection closes and the user cannot reconnect. Do not translate the (C) or (X) fields as they are keyboard shortcuts. Placing them relative to the word is OK as long as it's clear what action will be taken when the keyboard button is pressed. Similarly, using parentheses is not required other than for clarity. Changing case is also OK. There is an additional (E) keyboard shortcut that is the same as (X), so that may be used as an alternative if the translation uses an E but not an X. For example, these are OK: 'Exit (X)' or '[X]Exit' or '(E)xit' or whatever makes the most sense for the language.",
 		"message": "(C)hoose another connection or E(x)it?"
 	},
 	"CONSOLE_CROSH_OPTIONS_NOTICE": {
@@ -266,7 +266,7 @@
 		"message": "Find"
 	},
 	"HTERM_BUTTON_NEXT": {
-		"description": "Button label for moving to the next found entry when finding text in the terminal output.",
+		"description": "Button label for moving to the next result when searching the terminal output. The user might be searching for anything in the log, and there could be many matching results.",
 		"message": "Next"
 	},
 	"HTERM_BUTTON_PAGE_DOWN": {
@@ -278,7 +278,7 @@
 		"message": "Page up"
 	},
 	"HTERM_BUTTON_PREVIOUS": {
-		"description": "Button label for moving to the previous found entry when finding text in the terminal output.",
+		"description": "Button label for moving to the previous result when searching the terminal output. The user might be searching for anything in the log, and there could be may matching results.",
 		"message": "Previous"
 	},
 	"HTERM_FIND_COUNTER_LABEL": {
@@ -560,10 +560,6 @@
 	"HTERM_NAME_PREF_PASTE_ON_DROP": {
 		"description": "Label text shown for the 'paste-on-drop' preference.",
 		"message": "Allow drag & drop to paste"
-	},
-	"HTERM_NAME_PREF_RECEIVE_ENCODING": {
-		"description": "Label text shown for the 'receive-encoding' preference.",
-		"message": "Receive encoding"
 	},
 	"HTERM_NAME_PREF_SCREEN_BORDER_COLOR": {
 		"description": "Label text shown for the 'screen-border-color' preference.",
@@ -880,10 +876,6 @@
 	"HTERM_PREF_PASTE_ON_DROP": {
 		"description": "Help text shown for the 'paste-on-drop' preference. 'Drag and drop' refers to the operation where users select content, then click on the selection to start a 'drag' operation by 'grabbing' it, then move that text somewhere else and release the mouse button to 'drop' it.",
 		"message": "If true, Drag and dropped text will paste into terminal.\nIf false, dropped text will be ignored."
-	},
-	"HTERM_PREF_RECEIVE_ENCODING": {
-		"description": "Help text shown for the 'receive-encoding' preference. 'utf-8' and 'raw' should not be translated. The quote style may be changed as needed.",
-		"message": "Set the expected encoding for data received from the host.\nIf the encodings do not match, visual bugs are likely to be observed.\n\nValid values are 'utf-8' and 'raw'."
 	},
 	"HTERM_PREF_SCREEN_BORDER_COLOR": {
 		"description": "Help text shown for the 'screen-border-color' preference.",
@@ -1850,7 +1842,7 @@
 		"message": "Read Size (KiB)"
 	},
 	"RECONNECT_MESSAGE": {
-		"description": "Message displayed after a connection closes. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them relative to the word is OK as long as it's clear what action will be taken when the keyboard button is pressed. Similarly, using parentheses is not required other than for clarity. Changing case is also OK. For example, these are OK: 'Exit (X)' or '[X]Exit' or whatever makes the most sense for the language.",
+		"description": "Message displayed after a connection closes. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them relative to the word is OK as long as it's clear what action will be taken when the keyboard button is pressed. Similarly, using parentheses is not required other than for clarity. Changing case is also OK. There is an additional (E) keyboard shortcut that is the same as (X), so that may be used as an alternative if the translation uses an E but not an X. For example, these are OK: 'Exit (X)' or '[X]Exit' or '(E)xit' or whatever makes the most sense for the language.",
 		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
 	},
 	"RELAY_RETRY": {
@@ -1920,6 +1912,34 @@
 	"SSH_ARGSTR_LABEL": {
 		"description": "Label for the optional ssh arguments field. These are command line flags to the ssh program itself.",
 		"message": "SSH Arguments"
+	},
+	"SSH_CERT_CHECK_ERROR": {
+		"description": "Error message shown to the user when checking the SSH certificate status failed. It is printed after a translated 'Checking...' message. The MSG parameter will come directly from the OS or other programs and might be a translated string itself.",
+		"message": " failed: $MSG$",
+		"placeholders": {
+			"MSG": {
+				"content": "$1",
+				"example": "Unable to determine expiry"
+			}
+		}
+	},
+	"SSH_CERT_CHECK_REFRESH": {
+		"description": "Status message shown to the user when we initiate the process to refresh the user's SSH certificates (credentials). This lets them know that other external programs or websites might popup that they need to navigate/approve. This is displayed in an overlay that will automatically hide itself, so no further messages will be shown or appended to it.",
+		"message": "Refreshing SSH certificate..."
+	},
+	"SSH_CERT_CHECK_RESULT": {
+		"description": "Status message shown to the user after checking the expiration time of the user's SSH certificates (credentials). It is prined after a translated 'Checking...' message. The ~ indicates the time is a rough approximation. Everything here may be translated or adjusted as makes sense.",
+		"message": " ~$HOURS$ hours until expiration",
+		"placeholders": {
+			"HOURS": {
+				"content": "$1",
+				"example": "10"
+			}
+		}
+	},
+	"SSH_CERT_CHECK_START": {
+		"description": "Status message shown to the user before we check the expiration time (how 'fresh' they are) of the user's SSH certificates (credentials). A status message will be appended after this message. Everything here may be translated as makes sense.",
+		"message": "Checking SSH certificate freshness..."
 	},
 	"STREAM_OPEN_ERROR": {
 		"description": "Error message displayed when opening a stream (e.g. a file or a network connection) fails. The stream will be a short internal identifier code (always lower case), while the error message will be an error message from the operating system itself (whose translation will be left to the OS if available). Everything may be translated.",
@@ -2226,8 +2246,8 @@
 		"message": "Display notifications in the browser using hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"TIP_3": {
-		"description": "Helpful tip shown to user advertising features. Do not translate the 'ssh' string. 'profile name' may be translated, but make it clear that the 'profile name' is something the user needs to enter/replace (like the angle brackets do in the English string). It is a user-defined description for their saved connections.",
-		"message": "Connect from the omnibox by typing 'ssh <profile name>': https://goo.gl/V7o8ki"
+		"description": "Helpful tip shown to user advertising features. Do not translate the 'ssh' string. '<Tab>' represents the keyboard Tab key which the user needs to press after typing 'ssh', and may be translaed accordingly. 'profile name' may be translated, but make it clear that the 'profile name' is something the user needs to enter/replace (like the angle brackets do in the English string). It is a user-defined description for their saved connections.",
+		"message": "Connect from the omnibox by typing 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"TIP_4": {
 		"description": "Helpful tip shown to user advertising features. 'SFTP Mount' and 'Connect' refer to button labels and should be translated using the same text as the MOUNT_BUTTON_LABEL and CONNECT_BUTTON_LABEL messages.",

@@ -1,0 +1,14 @@
+Fix crash when term_init_string isn't set.
+https://github.com/rpwoodbu/mosh-chrome/pull/209
+
+--- a/mosh_app/mosh_window.js
++++ b/mosh_app/mosh_window.js
+@@ -108,7 +115,7 @@ mosh.CommandInstance.prototype.run = function() {
+ 
+   // Output special text (e.g., ANSI escape sequences) if desired.
+   chrome.storage.sync.get('term_init_string', function(o) {
+-    if (o != null) {
++    if (o && o['term_init_string']) {
+       window.mosh_client_.io.print(o['term_init_string']);
+     }
+   });

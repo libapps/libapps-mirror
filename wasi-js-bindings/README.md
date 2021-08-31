@@ -55,10 +55,12 @@ servicing the syscall requests.
 As [WASI] is still under development, we often require current browser runtimes.
 No attempt is made to provide backwards compatibility or transpiling.
 
-* [WASI SDK] 8.0
+* [WASI SDK] 11.0
 * [ES2020]
 * [Module workers](https://web.dev/module-workers/)
   * Chrome 80+
+* [WebAssembly BigInt Integration](https://www.chromestatus.com/feature/5648655109324800)
+  * Chrome 85+
 * Non-blocking message behavior between main thread & web workers
 
 ## Framework Overview

@@ -12,10 +12,9 @@ doit() {
 }
 
 doit \
-  -o test.wasm.i64 \
+  -o test.wasm.dbg \
   -s \
   -Wl,--allow-undefined-file="${OUT}/wasi-sdk/share/wasi-sysroot/lib/wassh-libc-sup.imports" \
-  -Wl,--allow-undefined-file=<(echo __wassh_test_func) \
   -L"${OUT}/wasi-sdk/share/wasi-sysroot/lib" \
   -lwassh-libc-sup
 
@@ -25,5 +24,4 @@ doit -E -dD -o test.i
 # https://github.com/WebAssembly/binaryen/issues/2273
 export BINARYEN_CORES=1
 wasm-opt -O2 \
-  --legalize-js-interface \
-  test.wasm.i64 -o test.wasm
+  test.wasm.dbg -o test.wasm

@@ -343,24 +343,6 @@ hterm.Keyboard.prototype.onKeyPress_ = function(e) {
 };
 
 /**
- * Prevent default handling for non-ctrl-shifted event.
- *
- * When combined with Chrome permission 'app.window.fullscreen.overrideEsc',
- * and called for both key down and key up events,
- * the ESC key remains usable within fullscreen Chrome app windows.
- *
- * @param {!KeyboardEvent} e The event to process.
- */
-hterm.Keyboard.prototype.preventChromeAppNonCtrlShiftDefault_ = function(e) {
-  if (!window.chrome || !window.chrome.app || !window.chrome.app.window) {
-    return;
-  }
-  if (!e.ctrlKey || !e.shiftKey) {
-    e.preventDefault();
-  }
-};
-
-/**
  * Handle focusout events.
  *
  * @param {!FocusEvent} e The event to process.
@@ -378,10 +360,6 @@ hterm.Keyboard.prototype.onKeyUp_ = function(e) {
   if (e.keyCode == 18) {
     this.altKeyPressed = this.altKeyPressed & ~(1 << (e.location - 1));
   }
-
-  if (e.keyCode == 27) {
-    this.preventChromeAppNonCtrlShiftDefault_(e);
-  }
 };
 
 /**
@@ -394,10 +372,6 @@ hterm.Keyboard.prototype.onKeyDown_ = function(e) {
     this.altKeyPressed = this.altKeyPressed | (1 << (e.location - 1));
   }
 
-  if (e.keyCode == 27) {
-    this.preventChromeAppNonCtrlShiftDefault_(e);
-  }
-
   let keyDef = this.keyMap.keyDefs[e.keyCode];
   if (!keyDef) {
     // If this key hasn't been explicitly registered, fall back to the unknown
@@ -408,14 +382,16 @@ hterm.Keyboard.prototype.onKeyDown_ = function(e) {
     this.keyMap.addKeyDef(e.keyCode, keyDef);
   }
 
-  // The type of action we're going to use.
+  // The type of action we're going to use: control, alt, meta, or normal.
   let resolvedActionType = null;
 
   /**
-   * @param {string} name
+   * Get the default key definition action for the given modifier name.
+   *
+   * @param {string} name 'control', 'alt', 'meta', or 'normal'.
    * @return {!hterm.Keyboard.KeyDefAction}
    */
-  const getAction = (name) => {
+  const getKeyDefAction = (name) => {
     // Get the key action for the given action name.  If the action is a
     // function, dispatch it.  If the action defers to the normal action,
     // resolve that instead.
@@ -428,7 +404,7 @@ hterm.Keyboard.prototype.onKeyDown_ = function(e) {
     }
 
     if (action === DEFAULT && name != 'normal') {
-      action = getAction('normal');
+      action = getKeyDefAction('normal');
     }
 
     return action;
@@ -443,6 +419,7 @@ hterm.Keyboard.prototype.onKeyDown_ = function(e) {
   const STRIP = hterm.Keyboard.KeyActions.STRIP;
 
   let control = e.ctrlKey;
+  let shift = e.shiftKey;
   let alt = this.altIsMeta ? false : e.altKey;
   let meta = this.altIsMeta ? (e.altKey || e.metaKey) : e.metaKey;
 
@@ -474,25 +451,6 @@ hterm.Keyboard.prototype.onKeyDown_ = function(e) {
     break;
   }
 
-  /** @type {?hterm.Keyboard.KeyDefAction} */
-  let action;
-
-  if (control) {
-    action = getAction('control');
-  } else if (alt) {
-    action = getAction('alt');
-  } else if (meta) {
-    action = getAction('meta');
-  } else {
-    action = getAction('normal');
-  }
-
-  // If e.maskShiftKey was set (during getAction) it means the shift key is
-  // already accounted for in the action, and we should not act on it any
-  // further. This is currently only used for Ctrl+Shift+Tab, which should send
-  // "CSI Z", not "CSI 1 ; 2 Z".
-  let shift = !e.maskShiftKey && e.shiftKey;
-
   /** @type {!hterm.Keyboard.KeyDown} */
   const keyDown = {
     keyCode: e.keyCode,
@@ -502,8 +460,11 @@ hterm.Keyboard.prototype.onKeyDown_ = function(e) {
     meta: meta,
   };
 
-  const binding = this.bindings.getBinding(keyDown);
+  /** @type {?hterm.Keyboard.KeyDefAction} */
+  let action;
 
+  // Allow user specified keybindings to override default keyDef.
+  const binding = this.bindings.getBinding(keyDown);
   if (binding) {
     // Clear out the modifier bits so we don't try to munge the sequence
     // further.
@@ -517,6 +478,23 @@ hterm.Keyboard.prototype.onKeyDown_ = function(e) {
     } else {
       action = /** @type {!hterm.Keyboard.KeyAction} */ (binding.action);
     }
+  } else {
+    // No user keybinding, so use default keyDef.
+    if (control) {
+      action = getKeyDefAction('control');
+    } else if (alt) {
+      action = getKeyDefAction('alt');
+    } else if (meta) {
+      action = getKeyDefAction('meta');
+    } else {
+      action = getKeyDefAction('normal');
+    }
+
+    // If e.maskShiftKey was set (during getKeyDefAction) it means the shift key
+    // is already accounted for in the action, and we should not act on it any
+    // further. This is currently only used for Ctrl+Shift+Tab, which should
+    // send "CSI Z", not "CSI 1 ; 2 Z".
+    shift = !e.maskShiftKey && e.shiftKey;
   }
 
   // Call keyDef function now that we have given bindings a chance to override.

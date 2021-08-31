@@ -1,0 +1,40 @@
+Add a right click context menu like in nassh.
+
+--- a/mosh_app/mosh_window.js
++++ b/mosh_app/mosh_window.js
+@@ -41,6 +41,35 @@
+     }
+   };
+ 
++  function msg(name, args) {
++    return hterm.messageManager.get(name, args, name);
++  }
++
++  terminal.contextMenu.setItems([
++    {name: msg('TERMINAL_CLEAR_MENU_LABEL'),
++     action: function() { terminal.wipeContents(); }},
++    {name: msg('TERMINAL_RESET_MENU_LABEL'),
++     action: function() { terminal.reset(); }},
++    {name: msg('NEW_WINDOW_MENU_LABEL'),
++     action: function() {
++       chrome.runtime.sendMessage({
++         command: 'nassh',
++         width: window.innerWidth,
++         height: window.innerHeight,
++         url: '/html/nassh.html',
++         window: true,
++       });
++     }},
++    {name: msg('FAQ_MENU_LABEL'),
++     action: function() {
++       lib.f.openWindow('https://github.com/rpwoodbu/mosh-chrome/wiki/Documentation', '_blank');
++     }},
++    {name: msg('HTERM_OPTIONS_BUTTON_LABEL'),
++     action: function() { lib.f.openWindow(`/html/nassh_preferences_editor.html?profileId=mosh`); }},
++    {name: msg('SEND_FEEDBACK_LABEL'),
++     action: function() { lib.f.openWindow('https://goo.gl/vb94JY'); }},
++  ]);
++
+   // Workaround to return focus to terminal on fullscreen.
+   // See https://code.google.com/p/chromium/issues/detail?id=402340
+ /*

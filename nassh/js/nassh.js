@@ -6,12 +6,8 @@
 
 /**
  * Namespace for the whole nassh project.
- *
- * We export this with 'var' as we access it across background pages.
- * It's messy and probably should be cleaned up at some point.
  */
-// eslint-disable-next-line no-var
-var nassh = {};
+const nassh = {};
 
 /**
  * Non-null if nassh is running as an extension.
@@ -328,66 +324,6 @@ nassh.base64UrlToBase64 = function(data) {
 nassh.base64ToBase64Url = function(data) {
   const replacements = {'+': '-', '/': '_', '=': ''};
   return data.replace(/[+/=]/g, (ch) => replacements[ch]);
-};
-
-/**
- * Workaround missing chrome.runtime in older versions of Chrome.
- *
- * As detailed in https://crbug.com/925118, the chrome.runtime object might be
- * missing when we run.  In order to workaround it, we need to reload the page.
- * While this is fixed in R72+, we unfortunately have EOL Chromebooks that will
- * never be able to upgrade to that version, so we have to keep this around for
- * a long time -- once we update minimum_chrome_version in the manifest to 72+.
- *
- * @return {boolean} True if bug was detected and the caller should halt all
- *     processing.
- */
-nassh.workaroundMissingChromeRuntime = function() {
-  // Chrome has a bug where it sometimes doesn't initialize chrome.runtime.
-  // Try and workaround it by forcing a refresh.  https://crbug.com/924656
-  if (window.chrome && !window.chrome.runtime) {
-    console.warn('chrome.runtime is undefined; reloading to workaround ' +
-                 'https://crbug.com/925118');
-    document.location.reload();
-    return true;
-  }
-
-  return false;
-};
-
-/**
- * Helper to get the background page once it's fully initialized.
- *
- * If the background page doesn't exist yet (fresh startup, or it's gone quiet
- * and Chrome automatically exited it), then the getBackgroundPage helper will
- * create a new instance on the fly and return it.  Unfortunately, we will often
- * then try to call funcs in it directly before it's finished initializing which
- * will cause random failures as it hits race conditions.
- *
- * @return {!Promise<!Window>} A promise resolving to the background page once
- *     it is fully initialized.
- */
-nassh.getBackgroundPage = function() {
-  if (!window.chrome || !chrome.runtime || !chrome.runtime.getBackgroundPage) {
-    return Promise.reject();
-  }
-
-  return new Promise((resolve, reject) => {
-    chrome.runtime.getBackgroundPage((bg) => {
-      if (bg === undefined) {
-        return reject();
-      }
-
-      const checkInitialized = () => {
-        if (bg.loaded) {
-          return resolve(bg);
-        }
-        console.log('Background page not initialized; retrying');
-        setTimeout(checkInitialized, 100);
-      };
-      checkInitialized();
-    });
-  });
 };
 
 /**

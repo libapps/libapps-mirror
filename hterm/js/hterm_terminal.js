@@ -62,6 +62,9 @@ hterm.Terminal = function({profileId} = {}) {
   // The div that contains this terminal.
   this.div_ = null;
 
+  // UI for showing info to the user in a privileged way.
+  this.notifications_ = null;
+
   // The document that contains the scrollPort.  Defaulted to the global
   // document here so that the terminal is functional even if it hasn't been
   // inserted into a document yet, but re-set in decorate().
@@ -602,15 +605,6 @@ hterm.Terminal.prototype.setProfile = function(
 
     'pass-meta-v': function(v) {
       terminal.keyboard.passMetaV = v;
-    },
-
-    'receive-encoding': function(v) {
-       if (!(/^(utf-8|raw)$/).test(v)) {
-         console.warn('Invalid value for "receive-encoding": ' + v);
-         v = 'utf-8';
-       }
-
-       terminal.vt.characterEncoding = v;
     },
 
     'screen-padding-size': function(v) {
@@ -1731,6 +1725,8 @@ hterm.Terminal.prototype.setupScrollPort_ = function() {
   this.document_ = this.scrollPort_.getDocument();
   this.accessibilityReader_.decorate(this.document_);
   this.findBar.decorate(this.document_);
+  this.notifications_ = new hterm.NotificationCenter(
+      lib.notNull(this.document_.body), this.accessibilityReader_);
 
   this.document_.body.oncontextmenu = function() { return false; };
   this.contextMenu.setDocument(this.document_);
@@ -1850,8 +1846,7 @@ width: var(--hterm-charsize-width);
 height: var(--hterm-charsize-height);
 background-color: var(--hterm-cursor-color);
 border-color: var(--hterm-cursor-color);
--webkit-transition: opacity, background-color 100ms linear;
--moz-transition: opacity, background-color 100ms linear;`;
+transition: opacity, background-color 100ms linear;`;
 
   this.setCursorColor();
   this.setCursorBlink(!!this.prefs_.get('cursor-blink'));
@@ -3064,6 +3059,10 @@ hterm.Terminal.prototype.setAlternateMode = function(state) {
     }
   }
 
+  // NB: We specifically do not use realizeSize_ because that's optimized to
+  // elide updates when the size is the same which is the most common scenario
+  // at this point.  We need the other cascading changes from switching the
+  // underlying screen to be processed.
   this.realizeWidth_(this.screenSize.width);
   this.realizeHeight_(this.screenSize.height);
   this.scrollPort_.syncScrollHeight();
@@ -3296,88 +3295,27 @@ hterm.Terminal.prototype.scheduleSyncCursorPosition_ = function() {
 };
 
 /**
- * Show the terminal overlay for a given amount of time.
+ * Show the terminal overlay.
  *
- * The terminal overlay appears in inverse video, centered over the terminal.
- *
- * @param {string|!Node} msg The message to display in the overlay.
- * @param {?number=} timeout The amount of time to wait before fading out
- *     the overlay.  Defaults to 1.5 seconds.  Pass null to have the overlay
- *     stay up forever (or until the next overlay).
+ * @see hterm.NotificationCenter.show
+ * @param {string|!Node} msg The message to display.
+ * @param {?number=} timeout How long to time to wait before hiding.
  */
 hterm.Terminal.prototype.showOverlay = function(msg, timeout = 1500) {
-  const node = typeof msg === 'string' ? new Text(msg) : msg;
-
-  if (!this.ready_ || !this.div_) {
+  if (!this.ready_ || !this.notifications_) {
     return;
   }
 
-  if (!this.overlayNode_) {
-    this.overlayNode_ = this.document_.createElement('div');
-    this.overlayNode_.style.cssText = (
-        'color: rgb(var(--hterm-background-color));' +
-        'background-color: rgb(var(--hterm-foreground-color));' +
-        'border-radius: 12px;' +
-        'font: 500 var(--hterm-font-size) "Noto Sans", sans-serif;' +
-        'opacity: 0.75;' +
-        'padding: 0.923em 1.846em;' +
-        'position: absolute;' +
-        'user-select: none;' +
-        '-webkit-transition: opacity 180ms ease-in;' +
-        '-moz-transition: opacity 180ms ease-in;');
-
-    this.overlayNode_.addEventListener('mousedown', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }, true);
-  }
-
-  this.overlayNode_.textContent = '';  // Remove all children first.
-  this.overlayNode_.appendChild(node);
-
-  if (!this.overlayNode_.parentNode) {
-    this.document_.body.appendChild(this.overlayNode_);
-  }
-
-  const divSize = this.div_.getBoundingClientRect();
-  const overlaySize = this.overlayNode_.getBoundingClientRect();
-
-  this.overlayNode_.style.top =
-      (divSize.height - overlaySize.height) / 2 + 'px';
-  this.overlayNode_.style.left = (divSize.width - overlaySize.width -
-      this.scrollPort_.currentScrollbarWidthPx) / 2 + 'px';
-
-  if (this.overlayTimeout_) {
-    clearTimeout(this.overlayTimeout_);
-  }
-
-  this.accessibilityReader_.assertiveAnnounce(this.overlayNode_.textContent);
-
-  if (timeout === null) {
-    return;
-  }
-
-  this.overlayTimeout_ = setTimeout(() => {
-    this.overlayNode_.style.opacity = '0';
-    this.overlayTimeout_ = setTimeout(() => this.hideOverlay(), 200);
-  }, timeout);
+  this.notifications_.show(msg, {timeout});
 };
 
 /**
  * Hide the terminal overlay immediately.
  *
- * Useful when we show an overlay for an event with an unknown end time.
+ * @see hterm.NotificationCenter.hide
  */
 hterm.Terminal.prototype.hideOverlay = function() {
-  if (this.overlayTimeout_) {
-    clearTimeout(this.overlayTimeout_);
-  }
-  this.overlayTimeout_ = null;
-
-  if (this.overlayNode_.parentNode) {
-    this.overlayNode_.parentNode.removeChild(this.overlayNode_);
-  }
-  this.overlayNode_.style.opacity = '0.75';
+  this.notifications_.hide();
 };
 
 /**
@@ -3491,53 +3429,53 @@ hterm.Terminal.prototype.displayImage = function(options, onLoad, onError) {
 
   // Has the user approved image display yet?
   if (this.allowImagesInline !== true) {
-    this.newLine();
-    const row = this.getRowNode(this.scrollbackRows_.length +
-                                this.getCursorRow() - 1);
-
     if (this.allowImagesInline === false) {
-      row.textContent = hterm.msg('POPUP_INLINE_IMAGE_DISABLED', [],
-                                  'Inline Images Disabled');
+      this.showOverlay(hterm.msg('POPUP_INLINE_IMAGE_DISABLED', [],
+                       'Inline Images Disabled'));
       return;
     }
 
     // Show a prompt.
     let button;
     const span = this.document_.createElement('span');
-    span.innerText = hterm.msg('POPUP_INLINE_IMAGE', [], 'Inline Images');
-    span.style.fontWeight = 'bold';
-    span.style.borderWidth = '1px';
-    span.style.borderStyle = 'dashed';
-    button = this.document_.createElement('span');
-    button.innerText = hterm.msg('BUTTON_BLOCK', [], 'block');
-    button.style.marginLeft = '1em';
-    button.style.borderWidth = '1px';
-    button.style.borderStyle = 'solid';
+
+    const label = this.document_.createElement('p');
+    label.innerText = hterm.msg('POPUP_INLINE_IMAGE', [], 'Inline Images');
+    label.style.textAlign = 'center';
+    span.appendChild(label);
+
+    button = this.document_.createElement('input');
+    button.type = 'button';
+    button.value = hterm.msg('BUTTON_BLOCK', [], 'block');
     button.addEventListener('click', () => {
       this.prefs_.set('allow-images-inline', false);
-    });
-    span.appendChild(button);
-    button = this.document_.createElement('span');
-    button.innerText = hterm.msg('BUTTON_ALLOW_SESSION', [],
-                                 'allow this session');
-    button.style.marginLeft = '1em';
-    button.style.borderWidth = '1px';
-    button.style.borderStyle = 'solid';
-    button.addEventListener('click', () => {
-      this.allowImagesInline = true;
-    });
-    span.appendChild(button);
-    button = this.document_.createElement('span');
-    button.innerText = hterm.msg('BUTTON_ALLOW_ALWAYS', [], 'always allow');
-    button.style.marginLeft = '1em';
-    button.style.borderWidth = '1px';
-    button.style.borderStyle = 'solid';
-    button.addEventListener('click', () => {
-      this.prefs_.set('allow-images-inline', true);
+      this.hideOverlay();
     });
     span.appendChild(button);
 
-    row.appendChild(span);
+    span.appendChild(new Text(' '));
+
+    button = this.document_.createElement('input');
+    button.type = 'button';
+    button.value = hterm.msg('BUTTON_ALLOW_SESSION', [], 'allow this session');
+    button.addEventListener('click', () => {
+      this.allowImagesInline = true;
+      this.hideOverlay();
+    });
+    span.appendChild(button);
+
+    span.appendChild(new Text(' '));
+
+    button = this.document_.createElement('input');
+    button.type = 'button';
+    button.value = hterm.msg('BUTTON_ALLOW_ALWAYS', [], 'always allow');
+    button.addEventListener('click', () => {
+      this.prefs_.set('allow-images-inline', true);
+      this.hideOverlay();
+    });
+    span.appendChild(button);
+
+    this.showOverlay(span, null);
     return;
   }
 
@@ -3713,8 +3651,9 @@ hterm.Terminal.prototype.getSelectionText = function() {
   }
 
   // End offset measures from the end of the line.
-  let endOffset = (hterm.TextAttributes.nodeWidth(selection.endNode) -
-                   selection.endOffset);
+  let endOffset =
+      hterm.TextAttributes.nodeWidth(lib.notNull(selection.endNode)) -
+      selection.endOffset;
   node = selection.endNode;
 
   if (node.nodeName != 'X-ROW') {
@@ -3754,7 +3693,7 @@ hterm.Terminal.prototype.copySelectionToClipboard = function() {
  */
 hterm.Terminal.prototype.overlaySize = function() {
   if (this.prefs_.get('enable-resize-status')) {
-    this.showOverlay(`${this.screenSize.width} x ${this.screenSize.height}`);
+    this.showOverlay(`${this.screenSize.width} × ${this.screenSize.height}`);
   }
 };
 
@@ -3932,6 +3871,11 @@ hterm.Terminal.prototype.onMouse_ = function(e) {
       this.setSelectionEnabled(false);
       e.preventDefault();
     }
+
+    // Primary button 'mousedown'.
+    if (e.button === 0) {
+      this.scrollPort_.selection.setAutoScrollEnabled(true);
+    }
   }
 
   if (!reportMouseEvents) {
@@ -4034,11 +3978,18 @@ hterm.Terminal.prototype.onMouse_ = function(e) {
     this.onMouse(e);
   }
 
-  if (e.type == 'mouseup' && this.document_.getSelection().isCollapsed) {
-    // Restore this on mouseup in case it was temporarily defeated with a
-    // alt-mousedown.  Only do this when the selection is empty so that
-    // we don't immediately kill the users selection.
-    this.defeatMouseReports_ = false;
+  if (e.type == 'mouseup') {
+    if (this.document_.getSelection().isCollapsed) {
+      // Restore this on mouseup in case it was temporarily defeated with a
+      // alt-mousedown.  Only do this when the selection is empty so that
+      // we don't immediately kill the users selection.
+      this.defeatMouseReports_ = false;
+    }
+
+    // Primary button 'mouseup'.
+    if (e.button === 0) {
+      this.scrollPort_.selection.setAutoScrollEnabled(false);
+    }
   }
 };
 

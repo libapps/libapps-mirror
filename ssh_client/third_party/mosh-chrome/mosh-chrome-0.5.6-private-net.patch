@@ -1,0 +1,541 @@
+nassh has access to the private nacl network stack, but not the public one.
+This is a historical wart (nassh was implemented back when only the private
+stack existed).  Convert the mosh-chrome code over to the private stack.
+
+--- a/external_builds/BUILD.nacl_sdk
++++ b/external_builds/BUILD.nacl_sdk
+@@ -45,6 +45,7 @@ cc_library(
+     srcs = [
+         # TODO: Release/Debug should be chosen based on build type.
+         "lib/pnacl/Release/libppapi_cpp.a",
++        "lib/pnacl/Release/libppapi_cpp_private.a",
+         "toolchain/linux_pnacl/le32-nacl/lib/libppapi.a",
+     ],
+     hdrs = glob(["include/**"]),
+--- a/mosh_nacl/pepper_posix.cc
++++ b/mosh_nacl/pepper_posix.cc
+@@ -377,29 +377,29 @@ ssize_t POSIX::RecvMsg(int sockfd, struct msghdr* msg, int flags) {
+   return udp->Receive(msg, flags);
+ }
+ 
+-pp::NetAddress POSIX::MakeAddress(const struct sockaddr* addr,
++PP_NetAddress_Private POSIX::MakeAddress(const struct sockaddr* addr,
+                                   socklen_t addrlen) const {
+   switch (addr->sa_family) {
+     case AF_INET: {
+       assert(addrlen >= sizeof(sockaddr_in));
+-      PP_NetAddress_IPv4 pp_addr;
++      PP_NetAddress_Private pp_addr;
+       const struct sockaddr_in* in_addr = (struct sockaddr_in*)addr;
+       uint32_t a = in_addr->sin_addr.s_addr;
++      uint8_t addr[4];
+       for (int i = 0; i < 4; ++i) {
+-        pp_addr.addr[i] = a & 0xff;
++        addr[i] = a & 0xff;
+         a >>= 8;
+       }
+-      pp_addr.port = in_addr->sin_port;
+-      return pp::NetAddress(instance_handle_, pp_addr);
++      pp::NetAddressPrivate::CreateFromIPv4Address(addr, ntohs(in_addr->sin_port), &pp_addr);
++      return pp_addr;
+     }
+ 
+     case AF_INET6: {
+       assert(addrlen >= sizeof(sockaddr_in6));
+-      PP_NetAddress_IPv6 pp_addr;
++      PP_NetAddress_Private pp_addr;
+       const struct sockaddr_in6* in6_addr = (struct sockaddr_in6*)addr;
+-      memcpy(pp_addr.addr, in6_addr->sin6_addr.s6_addr, sizeof(pp_addr.addr));
+-      pp_addr.port = in6_addr->sin6_port;
+-      return pp::NetAddress(instance_handle_, pp_addr);
++      pp::NetAddressPrivate::CreateFromIPv6Address(in6_addr->sin6_addr.s6_addr, 0, ntohs(in6_addr->sin6_port), &pp_addr);
++      return pp_addr;
+     }
+ 
+     default:
+@@ -409,7 +409,7 @@ pp::NetAddress POSIX::MakeAddress(const struct sockaddr* addr,
+   }
+ 
+   // Should not get here.
+-  return pp::NetAddress();
++  abort();
+ }
+ 
+ ssize_t POSIX::Send(int sockfd, const void* buf, size_t len, int flags) {
+--- a/mosh_nacl/pepper_posix.h
++++ b/mosh_nacl/pepper_posix.h
+@@ -35,7 +35,7 @@
+ 
+ #include "ppapi/c/ppb_net_address.h"
+ #include "ppapi/cpp/instance_handle.h"
+-#include "ppapi/cpp/net_address.h"
++#include "ppapi/cpp/private/net_address_private.h"
+ 
+ // Implement this to plumb logging from Pepper functions to your app.
+ void Log(const char* format, ...);
+@@ -168,8 +168,8 @@ class POSIX {
+   // Returns the next available file descriptor.
+   int NextFileDescriptor();
+ 
+-  // Makes a pp::NetAddress from a sockaddr.
+-  pp::NetAddress MakeAddress(const struct sockaddr* addr,
++  // Makes a pp::NetAddressPrivate from a sockaddr.
++  PP_NetAddress_Private MakeAddress(const struct sockaddr* addr,
+                              socklen_t addrlen) const;
+ 
+   // Map of file descriptors and the File objects they represent.
+--- a/mosh_nacl/pepper_posix_native_tcp.cc
++++ b/mosh_nacl/pepper_posix_native_tcp.cc
+@@ -31,23 +31,23 @@
+ namespace PepperPOSIX {
+ 
+ NativeTCP::NativeTCP(const pp::InstanceHandle& instance_handle)
+-    : socket_(new pp::TCPSocket(instance_handle)), factory_(this) {}
++    : socket_(new pp::TCPSocketPrivate(instance_handle)), factory_(this) {}
+ 
+ NativeTCP::~NativeTCP() {}
+ 
+-int NativeTCP::Bind(const pp::NetAddress& address) {
+-  pp::Var string_address = address.DescribeAsString(true);
++int NativeTCP::Bind(const PP_NetAddress_Private& address) {
++  pp::Var string_address = pp::Var(pp::NetAddressPrivate::Describe(address, true));
+   if (string_address.is_undefined()) {
+     Log("NativeTCP::Bind(): Address is bogus.");
+     return EFAULT;
+   }
+ 
+-  return socket_->Bind(address, pp::CompletionCallback());
++  abort();  // Not sure this is ever used ...
+ }
+ 
+-int NativeTCP::Connect(const pp::NetAddress& address) {
++int NativeTCP::Connect(const PP_NetAddress_Private& address) {
+   address_ = address;
+-  pp::Var string_address = address_.DescribeAsString(true);
++  pp::Var string_address = pp::Var(pp::NetAddressPrivate::Describe(address_, true));
+   if (string_address.is_undefined()) {
+     Log("NativeTCP::Connect(): Address is bogus.");
+     return EFAULT;
+@@ -64,7 +64,7 @@ int NativeTCP::Connect(const pp::NetAddress& address) {
+ // This callback should only be called on the main thread.
+ void NativeTCP::ConnectOnMainThread(__attribute__((unused)) int32_t unused) {
+   int32_t result =
+-      socket_->Connect(address_, factory_.NewCallback(&NativeTCP::Connected));
++      socket_->ConnectWithNetAddress(&address_, factory_.NewCallback(&NativeTCP::Connected));
+   if (result != PP_OK_COMPLETIONPENDING) {
+     Log("NativeTCP::ConnectOnMainThread(): "
+         "socket_->Connect() returned %d",
+--- a/mosh_nacl/pepper_posix_native_tcp.h
++++ b/mosh_nacl/pepper_posix_native_tcp.h
+@@ -23,7 +23,7 @@
+ #include <memory>
+ 
+ #include "ppapi/cpp/instance_handle.h"
+-#include "ppapi/cpp/tcp_socket.h"
++#include "ppapi/cpp/private/tcp_socket_private.h"
+ #include "ppapi/utility/completion_callback_factory.h"
+ 
+ const int TCP_RECEIVE_BUFFER_SIZE = 64 * 1024;  // 64 kB, a decent window size.
+@@ -37,10 +37,10 @@ class NativeTCP : public TCP {
+   ~NativeTCP() override;
+ 
+   // Bind replaces bind().
+-  int Bind(const pp::NetAddress& address) override;
++  int Bind(const PP_NetAddress_Private& address) override;
+ 
+   // Connect replaces connect().
+-  int Connect(const pp::NetAddress& address) override;
++  int Connect(const PP_NetAddress_Private& address) override;
+ 
+   // Send replaces send().
+   ssize_t Send(const void* buf, size_t count, int flags) override;
+@@ -54,10 +54,10 @@ class NativeTCP : public TCP {
+   void StartReceive();
+   void Received(int32_t result);
+ 
+-  std::unique_ptr<pp::TCPSocket> socket_;
++  std::unique_ptr<pp::TCPSocketPrivate> socket_;
+   char receive_buffer_[TCP_RECEIVE_BUFFER_SIZE];
+   pp::CompletionCallbackFactory<NativeTCP> factory_;
+-  pp::NetAddress address_;
++  PP_NetAddress_Private address_;
+ 
+   // Disable copy and assignment.
+   NativeTCP(const NativeTCP&) = delete;
+--- a/mosh_nacl/pepper_posix_native_udp.cc
++++ b/mosh_nacl/pepper_posix_native_udp.cc
+@@ -38,21 +38,21 @@ using std::vector;
+ using util::make_unique;
+ 
+ NativeUDP::NativeUDP(const pp::InstanceHandle instance_handle)
+-    : socket_(new pp::UDPSocket(instance_handle)),
++    : socket_(new pp::UDPSocketPrivate(instance_handle)),
+       instance_handle_(instance_handle),
+       factory_(this) {}
+ 
+ NativeUDP::~NativeUDP() {}
+ 
+-int NativeUDP::Bind(const pp::NetAddress& address) {
+-  pp::Var string_address = address.DescribeAsString(true);
++int NativeUDP::Bind(const PP_NetAddress_Private& address) {
++  pp::Var string_address = pp::Var(pp::NetAddressPrivate::Describe(address, true));
+   if (string_address.is_undefined()) {
+     Log("NativeUDP::Bind() Address is bogus.");
+     // TODO(rpwoodbu): Return something appropriate.
+     return false;
+   }
+ 
+-  int32_t result = socket_->Bind(address, pp::CompletionCallback());
++  int32_t result = socket_->Bind(&address, pp::CompletionCallback());
+   if (result == PP_OK) {
+     bound_ = true;
+     pp::Module::Get()->core()->CallOnMainThread(
+@@ -64,19 +64,23 @@ int NativeUDP::Bind(const pp::NetAddress& address) {
+ 
+ ssize_t NativeUDP::Send(const vector<char>& buf,
+                         __attribute__((unused)) int flags,
+-                        const pp::NetAddress& address) {
++                        const PP_NetAddress_Private& address) {
+   if (!bound_) {
+-    const auto family = address.GetFamily();
++    const auto family = pp::NetAddressPrivate::GetFamily(address);
+     int result;
+ 
+-    if (family == PP_NETADDRESS_FAMILY_IPV4) {
+-      PP_NetAddress_IPv4 any_v4_address;
+-      memset(&any_v4_address, 0, sizeof(any_v4_address));
+-      result = Bind(pp::NetAddress(instance_handle_, any_v4_address));
+-    } else if (family == PP_NETADDRESS_FAMILY_IPV6) {
+-      PP_NetAddress_IPv6 any_v6_address;
+-      memset(&any_v6_address, 0, sizeof(any_v6_address));
+-      result = Bind(pp::NetAddress(instance_handle_, any_v6_address));
++    if (family == PP_NETADDRESSFAMILY_PRIVATE_IPV4) {
++      uint8_t buf[4];
++      memset(&buf, 0, sizeof(buf));
++      PP_NetAddress_Private any_v4_address;
++      pp::NetAddressPrivate::CreateFromIPv4Address(buf, 0, &any_v4_address);
++      result = Bind(any_v4_address);
++    } else if (family == PP_NETADDRESSFAMILY_PRIVATE_IPV6) {
++      uint8_t buf[16];
++      memset(&buf, 0, sizeof(buf));
++      PP_NetAddress_Private any_v6_address;
++      pp::NetAddressPrivate::CreateFromIPv6Address(buf, 0, 0, &any_v6_address);
++      result = Bind(any_v6_address);
+     } else {
+       Log("NativeUDP::Send(): Unknown address family: %d", family);
+       return 0;
+@@ -88,7 +92,7 @@ ssize_t NativeUDP::Send(const vector<char>& buf,
+     }
+   }
+ 
+-  int32_t result = socket_->SendTo(buf.data(), buf.size(), address,
++  int32_t result = socket_->SendTo(buf.data(), buf.size(), &address,
+                                    pp::CompletionCallback());
+   if (result < 0) {
+     switch (result) {
+@@ -110,7 +114,7 @@ ssize_t NativeUDP::Send(const vector<char>& buf,
+ void NativeUDP::StartReceive(__attribute__((unused)) int32_t unused) {
+   int32_t result =
+       socket_->RecvFrom(receive_buffer_, sizeof(receive_buffer_),
+-                        factory_.NewCallbackWithOutput(&NativeUDP::Received));
++                        factory_.NewCallback(&NativeUDP::Received));
+   if (result != PP_OK_COMPLETIONPENDING) {
+     Log("NativeUDP::StartReceive(): RecvFrom returned %d", result);
+     // TODO(rpwoodbu): Perhaps crash here?
+@@ -118,11 +122,13 @@ void NativeUDP::StartReceive(__attribute__((unused)) int32_t unused) {
+ }
+ 
+ // Received is the callback result of StartReceive().
+-void NativeUDP::Received(int32_t result, const pp::NetAddress& address) {
++void NativeUDP::Received(int32_t result) {
+   if (result < 0) {
+     Log("NativeUDP::Received(%d, ...): Negative result; bailing.", result);
+     return;
+   }
++  PP_NetAddress_Private address;
++  socket_->GetRecvFromAddress(&address);
+   AddPacket(make_unique<MsgHdr>(address, result, receive_buffer_));
+   // Await another packet.
+   StartReceive(0);
+--- a/mosh_nacl/pepper_posix_native_udp.h
++++ b/mosh_nacl/pepper_posix_native_udp.h
+@@ -24,7 +24,7 @@
+ #include <vector>
+ 
+ #include "ppapi/cpp/instance_handle.h"
+-#include "ppapi/cpp/udp_socket.h"
++#include "ppapi/cpp/private/udp_socket_private.h"
+ #include "ppapi/utility/completion_callback_factory.h"
+ 
+ const int UDP_RECEIVE_BUFFER_SIZE = 1500;  // Typical MTU.
+@@ -38,20 +38,20 @@ class NativeUDP : public UDP {
+   ~NativeUDP() override;
+ 
+   // Bind replaces bind().
+-  int Bind(const pp::NetAddress& address) override;
++  int Bind(const PP_NetAddress_Private& address) override;
+ 
+   // Send replaces sendto. Usage is similar, but tweaked for C++.
+   ssize_t Send(const std::vector<char>& buf, int flags,
+-               const pp::NetAddress& address) override;
++               const PP_NetAddress_Private& address) override;
+ 
+   // Close replaces close().
+   int Close() override;
+ 
+  private:
+   void StartReceive(int32_t unused);
+-  void Received(int32_t result, const pp::NetAddress& address);
++  void Received(int32_t result);
+ 
+-  std::unique_ptr<pp::UDPSocket> socket_;
++  std::unique_ptr<pp::UDPSocketPrivate> socket_;
+   bool bound_ = false;
+   const pp::InstanceHandle instance_handle_;
+   char receive_buffer_[UDP_RECEIVE_BUFFER_SIZE];
+--- a/mosh_nacl/pepper_posix_tcp.cc
++++ b/mosh_nacl/pepper_posix_tcp.cc
+@@ -87,12 +87,12 @@ void Stream::AddData(const void* buf, size_t count) {
+   target_->UpdateRead(true);
+ }
+ 
+-int StubTCP::Bind(__attribute__((unused)) const pp::NetAddress& address) {
++int StubTCP::Bind(__attribute__((unused)) const PP_NetAddress_Private& address) {
+   Log("StubBind()");
+   return 0;
+ }
+ 
+-int StubTCP::Connect(__attribute__((unused)) const pp::NetAddress& address) {
++int StubTCP::Connect(__attribute__((unused)) const PP_NetAddress_Private& address) {
+   Log("StubConnect()");
+   return 0;
+ }
+--- a/mosh_nacl/pepper_posix_tcp.h
++++ b/mosh_nacl/pepper_posix_tcp.h
+@@ -32,7 +32,7 @@
+ #include "mosh_nacl/pepper_posix_selector.h"
+ #include "mosh_nacl/pthread_locks.h"
+ 
+-#include "ppapi/cpp/net_address.h"
++#include "ppapi/cpp/private/net_address_private.h"
+ 
+ namespace PepperPOSIX {
+ 
+@@ -81,10 +81,10 @@ class Stream : public ReadWriter {
+ class TCP : public Stream {
+  public:
+   // Bind replaces bind().
+-  virtual int Bind(const pp::NetAddress& address) = 0;
++  virtual int Bind(const PP_NetAddress_Private& address) = 0;
+ 
+   // Connect replaces connect().
+-  virtual int Connect(const pp::NetAddress& address) = 0;
++  virtual int Connect(const PP_NetAddress_Private& address) = 0;
+ };
+ 
+ // UnixSocketStream adds to Stream the interfaces specific to Unix domain
+@@ -105,8 +105,8 @@ class StubTCP : public TCP {
+   ~StubTCP() override {}
+ 
+   ssize_t Send(const void* buf, size_t count, int flags) override;
+-  int Bind(const pp::NetAddress& address) override;
+-  int Connect(const pp::NetAddress& address) override;
++  int Bind(const PP_NetAddress_Private& address) override;
++  int Connect(const PP_NetAddress_Private& address) override;
+ 
+  private:
+   // Disable copy and assignment.
+--- a/mosh_nacl/pepper_posix_udp.cc
++++ b/mosh_nacl/pepper_posix_udp.cc
+@@ -32,35 +32,36 @@ namespace PepperPOSIX {
+ using std::unique_ptr;
+ using std::vector;
+ 
+-MsgHdr::MsgHdr(const pp::NetAddress& addr, int32_t size,
++MsgHdr::MsgHdr(const PP_NetAddress_Private& addr, int32_t size,
+                const char* const buf) {
+   memset(this, 0, sizeof(*this));
+ 
+-  switch (addr.GetFamily()) {
+-    case PP_NETADDRESS_FAMILY_IPV4: {
+-      PP_NetAddress_IPv4 ipv4_addr;
+-      assert(addr.DescribeAsIPv4Address(&ipv4_addr));
++  switch (pp::NetAddressPrivate::GetFamily(addr)) {
++    case PP_NETADDRESSFAMILY_PRIVATE_IPV4: {
++      uint8_t buf[4];
++      assert(pp::NetAddressPrivate::GetAddress(addr, buf, sizeof(buf)));
+       struct sockaddr_in* saddr =
+           (struct sockaddr_in*)malloc(sizeof(struct sockaddr_in));
+       saddr->sin_family = AF_INET;
+-      saddr->sin_port = ipv4_addr.port;
++      saddr->sin_port = pp::NetAddressPrivate::GetPort(addr);
+       uint32_t a = 0;
+       for (int i = 0; i < 4; ++i) {
+-        a |= ipv4_addr.addr[i] << (8 * i);
++        a |= buf[i] << (8 * i);
+       }
+       saddr->sin_addr.s_addr = a;
+       msg_name = saddr;
+       msg_namelen = sizeof(*saddr);
+     } break;
+ 
+-    case PP_NETADDRESS_FAMILY_IPV6: {
+-      PP_NetAddress_IPv6 ipv6_addr;
+-      assert(addr.DescribeAsIPv6Address(&ipv6_addr));
++    case PP_NETADDRESSFAMILY_PRIVATE_IPV6: {
++      uint8_t buf[16];
++      assert(pp::NetAddressPrivate::GetAddress(addr, buf, sizeof(buf)));
+       struct sockaddr_in6* saddr =
+           (struct sockaddr_in6*)malloc(sizeof(struct sockaddr_in6));
+       saddr->sin6_family = AF_INET6;
+-      saddr->sin6_port = ipv6_addr.port;
+-      memcpy(saddr->sin6_addr.s6_addr, ipv6_addr.addr,
++      saddr->sin6_port = pp::NetAddressPrivate::GetPort(addr);
++      saddr->sin6_scope_id = pp::NetAddressPrivate::GetScopeID(addr);
++      memcpy(saddr->sin6_addr.s6_addr, buf,
+              sizeof(saddr->sin6_addr.s6_addr));
+       msg_name = saddr;
+       msg_namelen = sizeof(*saddr);
+@@ -145,14 +146,14 @@ void UDP::AddPacket(unique_ptr<MsgHdr> message) {
+ 
+ ssize_t StubUDP::Send(const vector<char>& buf,
+                       __attribute__((unused)) int flags,
+-                      __attribute__((unused)) const pp::NetAddress& addr) {
++                      __attribute__((unused)) const PP_NetAddress_Private& addr) {
+   Log("StubUDP::Send(): size=%d", buf.size());
+   Log("StubUDP::Send(): Pretending we received something.");
+   AddPacket(nullptr);
+   return buf.size();
+ }
+ 
+-int StubUDP::Bind(__attribute__((unused)) const pp::NetAddress& address) {
++int StubUDP::Bind(__attribute__((unused)) const PP_NetAddress_Private& address) {
+   Log("StubBind()");
+   return 0;
+ }
+--- a/mosh_nacl/pepper_posix_udp.h
++++ b/mosh_nacl/pepper_posix_udp.h
+@@ -32,14 +32,14 @@
+ #include "mosh_nacl/pepper_posix_selector.h"
+ #include "mosh_nacl/pthread_locks.h"
+ 
+-#include "ppapi/cpp/net_address.h"
++#include "ppapi/cpp/private/net_address_private.h"
+ 
+ namespace PepperPOSIX {
+ 
+ // Wrapper over struct msghdr, which ensures proper destruction.
+ struct MsgHdr : public ::msghdr {
+   MsgHdr() = delete;
+-  MsgHdr(const pp::NetAddress& addr, int32_t size, const char* const buf);
++  MsgHdr(const PP_NetAddress_Private& addr, int32_t size, const char* const buf);
+   ~MsgHdr();
+ 
+   // Disable copy and assignment.
+@@ -61,11 +61,11 @@ class UDP : public File {
+   ssize_t Receive(struct ::msghdr* message, int flags);
+ 
+   // Bind replaces bind().
+-  virtual int Bind(const pp::NetAddress& address) = 0;
++  virtual int Bind(const PP_NetAddress_Private& address) = 0;
+ 
+   // Send replaces sendto(). Usage is similar, but tweaked for C++.
+   virtual ssize_t Send(const std::vector<char>& buf, int flags,
+-                       const pp::NetAddress& address) = 0;
++                       const PP_NetAddress_Private& address) = 0;
+ 
+  protected:
+   // AddPacket is used by the subclass to add a packet to the incoming queue.
+@@ -86,11 +86,11 @@ class UDP : public File {
+ class StubUDP : public UDP {
+  public:
+   // Bind replaces bind().
+-  int Bind(const pp::NetAddress& address) override;
++  int Bind(const PP_NetAddress_Private& address) override;
+ 
+   // Send replaces sendto. Usage is similar, but tweaked for C++.
+   ssize_t Send(const std::vector<char>& buf, int flags,
+-               const pp::NetAddress& address) override;
++               const PP_NetAddress_Private& address) override;
+ 
+  private:
+   // Disable copy and assignment.
+--- a/mosh_nacl/pepper_resolver.cc
++++ b/mosh_nacl/pepper_resolver.cc
+@@ -22,7 +22,8 @@
+ #include <utility>
+ #include <vector>
+ 
+-#include "ppapi/cpp/host_resolver.h"
++#include "ppapi/cpp/private/host_resolver_private.h"
++#include "ppapi/cpp/private/net_address_private.h"
+ 
+ using std::move;
+ using std::string;
+@@ -31,13 +32,13 @@ using std::vector;
+ void PepperResolver::Resolve(string domain_name, Type type, Callback callback) {
+   CallbackCaller caller(callback);
+ 
+-  PP_HostResolver_Hint hint;
++  PP_HostResolver_Private_Hint hint;
+   switch (type) {
+     case Type::A:
+-      hint = {PP_NETADDRESS_FAMILY_IPV4, 0};
++      hint = {PP_NETADDRESSFAMILY_PRIVATE_IPV4, 0};
+       break;
+     case Type::AAAA:
+-      hint = {PP_NETADDRESS_FAMILY_IPV6, 0};
++      hint = {PP_NETADDRESSFAMILY_PRIVATE_IPV6, 0};
+       break;
+     case Type::SSHFP:
+       caller.Call(Error::TYPE_NOT_SUPPORTED, Authenticity::INSECURE, {});
+@@ -55,7 +56,7 @@ void PepperResolver::Resolve(string domain_name, Type type, Callback callback) {
+ void PepperResolver::ResolveOnMainThread(__attribute__((unused))
+                                          uint32_t unused,
+                                          string domain_name,
+-                                         PP_HostResolver_Hint hint,
++                                         PP_HostResolver_Private_Hint hint,
+                                          Callback callback) {
+   resolver_.Resolve(
+       domain_name.c_str(), 0, hint,
+@@ -74,9 +75,11 @@ void PepperResolver::ResolverCallback(int32_t result, Callback callback) {
+   }
+ 
+   vector<string> results;
+-  for (int i = 0; i < resolver_.GetNetAddressCount(); ++i) {
+-    results.push_back(
+-        resolver_.GetNetAddress(i).DescribeAsString(false).AsString());
++  for (int i = 0; i < resolver_.GetSize(); ++i) {
++    PP_NetAddress_Private address;
++    if (resolver_.GetNetAddress(i, &address)) {
++      results.push_back(pp::NetAddressPrivate::Describe(address, false));
++    }
+   }
+   caller.Call(Error::OK, Authenticity::INSECURE, move(results));
+ }
+--- a/mosh_nacl/pepper_resolver.h
++++ b/mosh_nacl/pepper_resolver.h
+@@ -24,7 +24,7 @@
+ 
+ #include "mosh_nacl/resolver.h"
+ 
+-#include "ppapi/cpp/host_resolver.h"
++#include "ppapi/cpp/private/host_resolver_private.h"
+ #include "ppapi/cpp/instance_handle.h"
+ #include "ppapi/utility/completion_callback_factory.h"
+ 
+@@ -45,12 +45,12 @@ class PepperResolver : public Resolver {
+  private:
+   // Way to call |resolver_| from main thread.
+   void ResolveOnMainThread(uint32_t unused, std::string domain_name,
+-                           PP_HostResolver_Hint hint, Callback callback);
++                           PP_HostResolver_Private_Hint hint, Callback callback);
+ 
+   // Method that |resolver_| will callback.
+   void ResolverCallback(int32_t result, Callback callback);
+ 
+-  pp::HostResolver resolver_;
++  pp::HostResolverPrivate resolver_;
+   pp::CompletionCallbackFactory<PepperResolver> cc_factory_;
+ };
+ 

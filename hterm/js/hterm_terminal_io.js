@@ -40,14 +40,11 @@ hterm.Terminal.IO = function(terminal) {
 };
 
 /**
- * Show the terminal overlay for a given amount of time.
+ * Show the terminal overlay.
  *
- * The terminal overlay appears in inverse video, centered over the terminal.
- *
- * @param {string|!Node} message The message to display in the overlay.
- * @param {number=} timeout The amount of time to wait before fading out
- *     the overlay.  Defaults to 1.5 seconds.  Pass null to have the overlay
- *     stay up forever (or until the next overlay).
+ * @see hterm.NotificationCenter.show
+ * @param {string|!Node} message The message to display.
+ * @param {?number=} timeout How long to time to wait before hiding.
  */
 hterm.Terminal.IO.prototype.showOverlay = function(
     message, timeout = undefined) {
@@ -57,7 +54,7 @@ hterm.Terminal.IO.prototype.showOverlay = function(
 /**
  * Hide the current overlay immediately.
  *
- * Useful when we show an overlay for an event with an unknown end time.
+ * @see hterm.NotificationCenter.hide
  */
 hterm.Terminal.IO.prototype.hideOverlay = function() {
   this.terminal_.hideOverlay();
@@ -186,41 +183,26 @@ hterm.Terminal.IO.prototype.onTerminalResize = function(width, height) {
 };
 
 /**
- * Write a UTF-8 encoded byte string to the terminal.
+ * Write UTF-8 data to the terminal.
  *
- * @param {string|!ArrayBuffer} string The UTF-8 encoded string to print.
+ * @param {!ArrayBuffer|!Array<number>} buffer The UTF-8 data to print.
  */
-hterm.Terminal.IO.prototype.writeUTF8 = function(string) {
-  // We can't use instanceof here on string to see if it's an ArrayBuffer as it
-  // might be constructed in a different runtime context whose ArrayBuffer was
-  // not the same.  See https://crbug.com/930171#5 for more details.
-  if (typeof string == 'string') {
-    if (this.terminal_.vt.characterEncoding != 'raw') {
-      const bytes = lib.codec.stringToCodeUnitArray(string);
-      string = this.textDecoder_.decode(bytes, {stream: true});
-    }
-  } else {
-    // Handle array buffers & typed arrays by normalizing into a typed array.
-    const u8 = new Uint8Array(string);
-    if (this.terminal_.vt.characterEncoding == 'raw') {
-      string = lib.codec.codeUnitArrayToString(u8);
-    } else {
-      string = this.textDecoder_.decode(u8, {stream: true});
-    }
-  }
-
+hterm.Terminal.IO.prototype.writeUTF8 = function(buffer) {
+  // Handle array buffers & typed arrays by normalizing into a typed array.
+  const u8 = new Uint8Array(buffer);
+  const string = this.textDecoder_.decode(u8, {stream: true});
   this.print(string);
 };
 
 /**
- * Write a UTF-8 encoded byte string to the terminal followed by crlf.
+ * Write UTF-8 data to the terminal followed by CRLF.
  *
- * @param {string} string The UTF-8 encoded string to print.
+ * @param {!ArrayBuffer|!Array<number>} buffer The UTF-8 data to print.
  */
-hterm.Terminal.IO.prototype.writelnUTF8 = function(string) {
-  this.writeUTF8(string);
+hterm.Terminal.IO.prototype.writelnUTF8 = function(buffer) {
+  this.writeUTF8(buffer);
   // We need to use writeUTF8 to make sure we flush the decoder state.
-  this.writeUTF8('\r\n');
+  this.writeUTF8([0x0d, 0x0a]);
 };
 
 /**
