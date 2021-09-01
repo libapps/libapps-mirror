@@ -93,8 +93,8 @@ entries in here (see the comments in the file for details).
 See commit [e992bb2c819188421b010a7c4fdc96cfae48db31] and tag [nassh-0.9] as
 examples, but don't create a tag yet!
 
-The version should remain unchanged in the `manifest_*.json` files as we'll
-update that after we create a git tag.
+The version should remain unchanged in the `manifest.json` & `package.json`
+files as we'll update that after we create a git tag.
 
 [e992bb2c819188421b010a7c4fdc96cfae48db31]: https://chromium.googlesource.com/apps/libapps/+/e992bb2c819188421b010a7c4fdc96cfae48db31^!
 [nassh-0.9]: https://chromium.googlesource.com/apps/libapps/+/nassh-0.9
@@ -118,11 +118,11 @@ We don't currently use signed tags.
 ### Update the manifest.json Versions
 
 Now that we've tagged the release and pushed it out, the version should be
-updated in the `manifest_*.json` files to point to the next one.
+updated in the `manifest.json` & `package.json` files to point to the next one.
 
-See commit [ddb21ccd39010f4c537da2a104f1a8869fe1ee6c] as an example.
+See the [nassh-0.34 tag] as an example.
 
-[ddb21ccd39010f4c537da2a104f1a8869fe1ee6c]: https://chromium.googlesource.com/apps/libapps/+/ddb21ccd39010f4c537da2a104f1a8869fe1ee6c^!
+[nassh-0.34 tag]: https://chromium.googlesource.com/apps/libapps/+/refs/tags/nassh-0.34^!
 
 ## Promoting a Stable Release
 

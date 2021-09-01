@@ -1,0 +1,95 @@
+* Disable libapps/hterm since we'll use our own copy.
+* Reuse the naclsdk tarball we already downloaded.
+
+--- a/BUILD
++++ b/BUILD
+@@ -5,10 +5,8 @@ load("//:nacl_sdk/nacl.bzl", "nacl_manifest_js")
+ # Labels needed by all variants of the app package.
+ base_package_srcs = [
+         "//mosh_app:mosh_assets",
+-        "//mosh_app:mosh_css",
+         "//mosh_app:mosh_html",
+         "//mosh_app:mosh_js",
+-        "@libapps//:hterm",
+ ]
+ 
+ # Labels needed by all dev variants of the app package.
+--- a/WORKSPACE
++++ b/WORKSPACE
+@@ -24,7 +24,7 @@ load(
+ )
+ new_http_tar_archive_hardlinks(
+     name = "nacl_sdk",
+-    url = "https://storage.googleapis.com/nativeclient-mirror/nacl/nacl_sdk/49.0.2623.87/naclsdk_linux.tar.bz2",
++    url = "naclsdk_linux-49.0.2623.87.tar.xz",
+     sha256 = "c53c14e5eaf6858e5b4a4e964c84d7774f03490be7986ab07c6792e807e05f14",
+     strip_components = 1,
+     build_file = "//:external_builds/BUILD.nacl_sdk",
+@@ -92,13 +92,6 @@ new_git_repository(
+     build_file = "external_builds/BUILD.mosh",
+ )
+ 
+-new_git_repository(
+-    name = "libapps",
+-    remote = "https://github.com/libapps/libapps-mirror.git",
+-    commit = "2056832f0b287924110849cecbf1e5019c1a51c3", # tag = "hterm-1.80"
+-    build_file = "external_builds/BUILD.libapps",
+-)
+-
+ git_repository(
+     name = "com_google_protobuf",
+     remote = "https://github.com/google/protobuf.git",
+--- a/external_builds/new_http_tar_archive_hardlinks.bzl
++++ b/external_builds/new_http_tar_archive_hardlinks.bzl
+@@ -4,27 +4,17 @@
+ # issue by shelling out to "tar". This is obviously not portable.
+ 
+ def _impl(repository_ctx):
+-    tarball_name = "tarball.tar.bz2"
+-
+-    repository_ctx.download(
+-        repository_ctx.attr.url,
+-        tarball_name,
+-        repository_ctx.attr.sha256,
+-    )
++    tarball_name = repository_ctx.os.environ['DISTDIR'] + '/' + repository_ctx.attr.url
+ 
+     tar_result = repository_ctx.execute([
+         "tar",
+-        "-xjf", tarball_name,
++        "-xf", tarball_name,
+         "--strip-components", str(repository_ctx.attr.strip_components),
+     ])
+     if tar_result.return_code != 0:
+         fail("tar exited {}: {}".format(
+             tar_result.return_code, tar_result.stderr))
+ 
+-    rm_result = repository_ctx.execute(["rm", tarball_name])
+-    if rm_result.return_code != 0:
+-        fail("rm exited {}: {}".format(rm_result.return_code, rm_result.stderr))
+-
+     repository_ctx.symlink(repository_ctx.attr.build_file, "BUILD")
+ 
+ 
+--- a/mosh_app/BUILD
++++ b/mosh_app/BUILD
+@@ -9,7 +9,6 @@ filegroup(
+         "mosh_window.js",
+         "nassh_workarounds.js",
+         "ssh_key.js",
+-        "@libapps//:nassh_preferences_editor",
+     ],
+ )
+ 
+@@ -23,11 +22,6 @@ filegroup(
+     ],
+ )
+ 
+-alias(
+-    name = "mosh_css",
+-    actual = "@libapps//:nassh_preferences_editor_css",
+-)
+-
+ filegroup(
+     name = "mosh_assets",
+     srcs = [

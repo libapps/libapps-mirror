@@ -35,6 +35,9 @@
     // Bind the FSP APIs.
     app.installFsp();
 
+    // Register our context menus.
+    app.installContextMenus();
+
     // If we're running as an extension, finish setup.
     if (nassh.browserAction) {
       nassh.browserAction.onClicked.removeListener(onLaunched);
@@ -46,13 +49,8 @@
       app.onLaunched();
     }
 
-    // "Public" window.app will be retrieved by individual windows via
-    // chrome.getBackgroundPage().
-    window.app = app;
-
-    // A flag for people who need to load us dynamically to know we're ready.
-    // See nassh.getBackgroundPage for the user.
-    window.loaded = true;
+    // Help with live debugging.
+    window.app_ = app;
   });
 })();
 

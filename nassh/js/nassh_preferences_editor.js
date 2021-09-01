@@ -43,7 +43,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // Useful for console debugging.
     window.term_ = term;
 
-    const prefsEditor = new nassh.PreferencesEditor();
+    const params = new URLSearchParams(document.location.search);
+    const profileId = params.get('profileId') ??
+        nassh.msg('FIELD_TERMINAL_PROFILE_PLACEHOLDER');
+    const prefsEditor = new nassh.PreferencesEditor(profileId);
 
     let a = document.querySelector('#backup');
     a.download = nassh.msg('PREF_BACKUP_FILENAME');
@@ -88,7 +91,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
           });
       };
-    profile.value = nassh.msg('FIELD_TERMINAL_PROFILE_PLACEHOLDER');
+    profile.value = profileId;
 
     // Allow people to reset individual fields by pressing escape.
     document.onkeyup = function(e) {

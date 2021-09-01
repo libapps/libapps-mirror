@@ -1,4 +1,4 @@
-0.32
+0.34
 
 # The first line tracks the last version that went stable.
 # Only features added since then should be kept here.
@@ -10,11 +10,11 @@
 # Only list significant changes that matter to the user.
 # The more lines that we have here, the more cluttered the output.
 
-# release: 0.33 (stable July 3)
-% Internal Google Cloud VMs default to corp-relay-v4 proxy mode.
-
 # release: 0.35 (stable Sep 11)
 % Enable connection resume for Google corp-relay-v4 users.
 
 # release: 0.36 (stable Nov 11)
 % \x1b]8;;https://www.openssh.com/txt/release-8.4\x07OpenSSH upgraded to 8.4p1\x1b]8;;\x07.
+
+# release: 0.37
+% Alpha integration of \x1b]8;;https://github.com/rpwoodbu/mosh-chrome\x07Mosh for Chrome\x1b]8;;\x07.

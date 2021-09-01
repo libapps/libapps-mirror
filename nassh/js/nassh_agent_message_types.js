@@ -330,7 +330,6 @@ nassh.agent.messages.CurveInfo;
  * Map OIDs to information about their associated elliptic curve.
  *
  * @type {!Object<string, !nassh.agent.messages.CurveInfo>}
- * @private
  * @see https://tools.ietf.org/html/rfc5656
  * @see https://tools.ietf.org/html/draft-ietf-curdle-ssh-ed25519-02
  * @see https://tools.ietf.org/id/draft-koch-eddsa-for-openpgp-03.html#rfc.section.6

@@ -25,8 +25,4 @@ export class WasshExperimental extends SyscallEntry.Base {
   sys_sock_connect(sock, domain, addr, port) {
     return WASI.errno.ENOSYS;
   }
-
-  sys_test_func(...args) {
-    return WASI.errno.ENOSYS;
-  }
 }

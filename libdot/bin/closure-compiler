@@ -17,7 +17,7 @@ import libdot
 
 # The version we currently run.  Pinned to make sure everyone gets consistent
 # behavior all the time.
-VERSION = '20200927'
+VERSION = '20201102'
 
 # Full path to Google's closure compiler.
 URI = ('https://repo1.maven.org/maven2/com/google/javascript/closure-compiler/'
@@ -190,10 +190,9 @@ def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):
     for extern in externs_paths.glob('*.js'):
         externs += ['--externs', os.path.relpath(extern)]
 
-    argv += [
-        '--checks-only',
-        '--language_in=ECMASCRIPT_2018',
-    ] + externs
+    # Set the language first so projects can override it.
+    argv = (['--language_in=ECMASCRIPT_2020'] + argv + ['--checks-only'] +
+            externs)
     result = run(argv + paths, check=False)
     if result.returncode:
         ret = False

@@ -319,6 +319,31 @@ int FileSystem::stat(const char* pathname, nacl_abi_stat* out) {
   return handler->stat(pathname, out);
 }
 
+void FileSystem::readpass(const char* prompt, char* buf, size_t size,
+                          bool echo) {
+  Mutex::Lock lock(mutex_);
+
+  read_pass_available_ = false;
+  output_->ReadPass(prompt, size, echo);
+  // Wait for the user to respond.
+  while (!read_pass_available_)
+    cond_.wait(mutex_);
+
+  const size_t bytes = std::min(size - 1, read_pass_result_.length());
+  memcpy(buf, read_pass_result_.c_str(), bytes);
+  buf[bytes] = '\0';
+
+  read_pass_result_.clear();
+  read_pass_available_ = false;
+}
+
+void FileSystem::ReadPassResult(const std::string pass) {
+  Mutex::Lock lock(mutex_);
+  read_pass_result_ = pass;
+  read_pass_available_ = true;
+  cond_.broadcast();
+}
+
 int FileSystem::isatty(int fd) {
   Mutex::Lock lock(mutex_);
   FileStream* stream = GetStream(fd);
@@ -1019,6 +1044,7 @@ void FileSystem::exit(int status) {
 void FileSystem::ExitCodeAcked() {
   Mutex::Lock lock(mutex_);
   exit_code_acked_ = true;
+  cond_.broadcast();
 }
 
 void FileSystem::MakeDirectory(int32_t result, const char* pathname,

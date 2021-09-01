@@ -1,0 +1,46 @@
+Tweak hterm APIs to match the latest release and to share code.
+
+--- a/mosh_app/mosh_window.html
++++ b/mosh_app/mosh_window.html
+@@ -16,7 +16,7 @@
+   <title>Mosh</title>
+   <script src="mosh_manifest.js" type="text/javascript"></script>
+   <script src="mosh_window.js" type="text/javascript"></script>
+-  <script src="hterm_all.js" type="text/javascript"></script>
++  <script src="/js/nassh_deps.concat.js" type="text/javascript"></script>
+   <style>
+     body {
+       position: absolute;
+--- a/mosh_app/mosh_window.js
++++ b/mosh_app/mosh_window.js
+@@ -22,7 +22,9 @@
+ //   window.state - The global state object from background.js.
+ 
+ window.onload = function() {
+-  lib.init(execMosh, console.log.bind(console));
++  const params = new URLSearchParams(document.location.search);
++  window.args = JSON.parse(atob(params.get('args')));
++  lib.init(console.log.bind(console)).then(execMosh);
+ };
+ 
+ function execMosh() {
+@@ -31,7 +33,7 @@ function execMosh() {
+   terminal.onTerminalReady = function() {
+     terminal.setCursorPosition(0, 0);
+     terminal.setCursorVisible(true);
+-    terminal.runCommandClass(mosh.CommandInstance, window.args);
++    terminal.runCommandClass(mosh.CommandInstance, 'mosh', window.args);
+   };
+ 
+   // Don't exit fullscreen with ESC.
+@@ -99,8 +106,8 @@ mosh.CommandInstance.prototype.run = function() {
+        'height: 0;');
+   this.moshNaCl_.setAttribute('src', nacl_nmf_file);
+   this.moshNaCl_.setAttribute('type', nacl_mime_type);
+-  for (var k in this.argv_.argString) {
+-    this.moshNaCl_.setAttribute(k, this.argv_.argString[k]);
++  for (var k in this.argv_.args) {
++    this.moshNaCl_.setAttribute(k, this.argv_.args[k]);
+   }
+ 
+   // Delete argv_, as it contains sensitive info.

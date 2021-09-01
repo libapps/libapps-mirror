@@ -98,7 +98,6 @@ nassh.Stream.RelayCorpv4.ClientDataPacket = class {
 nassh.Stream.RelayCorpv4.ClientAckPacket = class {
   /**
    * @param {bigint} ack The ack to packetize.
-   * @suppress {checkTypes} Closure setBigUint64 is buggy.
    */
   constructor(ack) {
     // Space for the tag (2 bytes) & ack (8 bytes).
@@ -385,12 +384,6 @@ nassh.Stream.RelayCorpv4WS.prototype.onSocketData_ = function(e) {
       // Fallthrough.
 
     case nassh.Stream.RelayCorpv4.PacketTag.ACK: {
-      /**
-       * Closure compiler hasn't finished bigint support yet, so this expression
-       * between 2 bigints is unknown.  Disable for now.
-       *
-       * @suppress {strictPrimitiveOperators}
-       */
       const acked = Number(packet.ack - this.writeAckCount_);
       if (acked == 0) {
         // This can come up with reconnects, but should handle it either way.

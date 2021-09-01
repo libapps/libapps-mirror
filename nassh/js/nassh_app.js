@@ -8,10 +8,11 @@
  * The singleton app instance for the nassh packaged app, created by the
  * background page.
  *
+ * @param {!lib.Storage=} storage Storage for sync settings.
  * @constructor
  */
-nassh.App = function() {
-  this.prefs_ = new nassh.PreferenceManager();
+nassh.App = function(storage = undefined) {
+  this.prefs_ = new nassh.PreferenceManager(storage);
   this.localPrefs_ = new nassh.LocalPreferenceManager();
   this.omniMatches_ = [];
   this.omniDefault_ = null;
@@ -25,6 +26,69 @@ nassh.App = function() {
  */
 nassh.App.prototype.installFsp = function() {
   nassh.sftp.fsp.addListeners();
+};
+
+/**
+ * Set up context menus.
+ *
+ * NB: We omit "Options" because Chrome takes care of populating that entry.
+ */
+nassh.App.prototype.installContextMenus = function() {
+  // Remove any previous entries.  This comes up when reloading the page.
+  chrome.contextMenus.removeAll();
+
+  chrome.contextMenus.onClicked.addListener(this.onContextMenu_.bind(this));
+
+  /** @type {!Array<!chrome.contextMenus.CreateProperties>} */
+  const entries = [
+    {
+      'type': 'normal',
+      'id': 'connect-dialog',
+      'title': nassh.msg('CONNECTION_DIALOG_NAME'),
+      'contexts': ['browser_action'],
+    },
+    {
+      'type': 'normal',
+      'id': 'mosh',
+      'title': '⸘m🍪sh‽',
+      'contexts': ['browser_action'],
+    },
+    {
+      'type': 'normal',
+      'id': 'feedback',
+      'title': nassh.msg('SEND_FEEDBACK_LABEL'),
+      'contexts': ['browser_action'],
+    },
+  ];
+  entries.forEach((entry) => chrome.contextMenus.create(entry));
+};
+
+/**
+ * Callback from context menu clicks.
+ *
+ * @param {!Object} info The item clicked.
+ * @param {!Tab=} tab When relevant, the active tab.
+ */
+nassh.App.prototype.onContextMenu_ = function(info, tab = undefined) {
+  switch (info.menuItemId) {
+    case 'connect-dialog':
+      lib.f.openWindow(chrome.runtime.getURL('/html/nassh.html'), '',
+                       'chrome=no,close=yes,resize=yes,minimizable=yes,' +
+                       'scrollbars=yes,width=900,height=600');
+      break;
+    case 'mosh':
+      lib.f.openWindow(
+          chrome.runtime.getURL('/plugin/mosh/mosh_client.html'), '',
+          'chrome=no,close=yes,resize=yes,minimizable=yes,' +
+          'scrollbars=yes,width=900,height=600');
+      break;
+    case 'feedback':
+      nassh.sendFeedback();
+      break;
+    default:
+      console.error('Unknown menu item', info);
+      break;
+  }
 };
 
 /**
@@ -66,8 +130,11 @@ nassh.App.prototype.omniboxOnInputStarted_ = function() {
     this.omniMatches_.push(profileIdToOmni(ids[i]));
   }
 
-  this.omniDefault_ = profileIdToOmni(
-      this.localPrefs_.get('connectDialog/lastProfileId'));
+  // When first installed, there won't be a last profile.
+  const lastProfile = this.localPrefs_.get('connectDialog/lastProfileId');
+  if (lastProfile) {
+    this.omniDefault_ = profileIdToOmni(lastProfile);
+  }
 };
 
 /**

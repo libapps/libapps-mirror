@@ -9,7 +9,7 @@ import os
 import shutil
 import sys
 
-import terminal
+import terminal  # pylint: disable=wrong-import-order
 import libdot
 
 

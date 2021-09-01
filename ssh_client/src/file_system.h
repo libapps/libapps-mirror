@@ -68,6 +68,7 @@ class FileSystem {
   int dup2(int fd, int newfd);
   int fstat(int fd, nacl_abi_stat* out);
   int stat(const char* pathname, nacl_abi_stat* out);
+  void readpass(const char* prompt, char* buf, size_t buf_len, bool echo);
 
   int isatty(int fd);
   int tcgetattr(int fd, struct termios* termios_p);
@@ -104,6 +105,7 @@ class FileSystem {
   void exit(int status);
 
   void ExitCodeAcked();
+  void ReadPassResult(const std::string pass);
 
  private:
   typedef std::map<int, FileStream*> FileStreamMap;
@@ -166,6 +168,8 @@ class FileSystem {
   bool fs_initialized_;
   pp::CompletionCallbackFactory<FileSystem> factory_;
   bool exit_code_acked_;
+  std::string read_pass_result_;
+  bool read_pass_available_;
 
   pp::HostResolverPrivate* host_resolver_;
 

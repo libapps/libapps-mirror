@@ -21,6 +21,7 @@
 nassh.Stream.RelayCorp = function(fd) {
   nassh.Stream.apply(this, [fd]);
 
+  this.io_ = null;
   this.host_ = null;
   this.port_ = null;
   this.relay_ = null;
@@ -56,6 +57,7 @@ nassh.Stream.RelayCorp.constructor = nassh.Stream.RelayCorp;
  * @override
  */
 nassh.Stream.RelayCorp.prototype.asyncOpen = function(settings, onComplete) {
+  this.io_ = settings.io;
   this.relay_ = settings.relay;
   this.host_ = settings.host;
   this.port_ = settings.port;
@@ -187,7 +189,7 @@ nassh.Stream.RelayCorp.prototype.requestError_ = function(isRead) {
     // the risk that a failed retry will redisplay this message just as its
     // fading away.  So we show the retry message for a little longer than we
     // expect to back off.
-    this.relay_.io.showOverlay(nassh.msg('RELAY_RETRY'), this.backoffMS_ + 500);
+    this.io_.showOverlay(nassh.msg('RELAY_RETRY'), this.backoffMS_ + 500);
   }
 
   this.backoffTimeout_ =

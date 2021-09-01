@@ -457,39 +457,115 @@ nassh.CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
  * @param {string} profileID Terminal preference profile name.
  */
 nassh.CommandInstance.prototype.mountProfile = function(profileID) {
-  const onBackgroundPage = (bg, prefs) => {
-    if (bg.nassh.sftp.fsp.sftpInstances[prefs.id]) {
-      this.io.println(nassh.msg('ALREADY_MOUNTED_MESSAGE'));
+  const port = chrome.runtime.connect({name: 'mount'});
+
+  // The main event loop -- process messages from the bg page.
+  port.onMessage.addListener((msg) => {
+    const {error, message, command} = msg;
+
+    // Handle all error messages here.
+    if (error) {
+      io.println(message);
+      io.pop();
       this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+      port.disconnect();
       return;
     }
 
-    const args = {
-      argv: {
-        terminalIO: this.io,
-        terminalStorage: this.storage,
-        terminalLocation: this.terminalLocation,
-        terminalWindow: this.terminalWindow,
-        isSftp: true,
-        basePath: prefs.get('mount-path'),
-        isMount: true,
-        // Mount options are passed directly to chrome.fileSystemProvider.mount,
-        // so don't add fields here that would otherwise collide.
-        mountOptions: {
-          fileSystemId: prefs.id,
-          displayName: prefs.get('description'),
-          writable: true,
-        },
-      },
-      connectOptions: this.prefsToConnectParams_(prefs),
-    };
+    switch (command) {
+      case 'write':
+        // Display content to the user.
+        io.print(message);
+        break;
 
-    bg.nassh.sftp.fsp.createSftpInstance(args);
+      case 'overlay':
+        // Display the UI popup.
+        io.showOverlay(message, msg.timeout);
+        break;
+
+      case 'input':
+        // Get secure user input.
+        this.secureInput(message, msg.buf_len, msg.echo).then((data) => {
+          port.postMessage({command: 'input', data});
+        });
+        break;
+
+      case 'exit':
+      case 'done':
+        // The client has exited (bad), or the mount setup is done (good).
+        port.disconnect();
+        if (command === 'done') {
+          io.showOverlay(nassh.msg('MOUNTED_MESSAGE') + ' ' +
+                         nassh.msg('CONNECT_OR_EXIT_MESSAGE'), null);
+        } else {
+          io.println(nassh.msg('DISCONNECT_MESSAGE', [msg.status]));
+        }
+
+        // Put the IO into dummy mode for the most part.
+        io.onVTKeystroke = (string) => {
+          const ch = string.toLowerCase();
+          switch (ch) {
+            case 'c':
+            case '\x12': // ctrl-r
+              this.terminalLocation.hash = '';
+              this.terminalLocation.reload();
+              break;
+
+            case 'e':
+            case 'x':
+            case '\x1b': // ESC
+            case '\x17': // ctrl-w
+              this.terminalWindow.close();
+          }
+        };
+        io.sendString = () => {};
+        break;
+
+      default:
+        io.println(`internal error: unknown command '${command}'`);
+        port.disconnect();
+        io.pop();
+        break;
+    }
+  });
+
+  // Not sure there's much else to do here.
+  port.onDisconnect.addListener(() => {
+    console.log('disconnect');
+  });
+
+  // Send all user input to the background page.
+  const io = this.io.push();
+  io.onVTKeystroke = io.sendString = (string) => {
+    port.postMessage({command: 'write', data: string});
   };
 
+  // Once we've loaded prefs from storage, kick off the mount in the bg.
   const onStartup = (prefs) => {
-    nassh.getBackgroundPage()
-      .then((bg) => onBackgroundPage(bg, prefs));
+    this.isMount = true;
+    this.isSftp = true;
+    const params = this.prefsToConnectParams_(prefs);
+    this.connectTo(params, () => {
+      if (this.relay_) {
+        params.relayState = this.relay_.saveState();
+      }
+      port.postMessage({
+        command: 'connect',
+        argv: {
+          isSftp: true,
+          basePath: prefs.get('mount-path'),
+          isMount: true,
+          // Mount options are passed directly to Chrome's FSP mount(),
+          // so don't add fields here that would otherwise collide.
+          mountOptions: {
+            fileSystemId: prefs.id,
+            displayName: prefs.get('description'),
+            writable: true,
+          },
+        },
+        connectOptions: params,
+      });
+    });
   };
 
   this.commonProfileSetup_(profileID, onStartup);
@@ -545,20 +621,36 @@ nassh.CommandInstance.prototype.connectToProfile = function(profileID) {
  */
 nassh.CommandInstance.parseURI = function(uri, stripSchema = true,
                                           decodeComponents = false) {
-  if (stripSchema && uri.startsWith('ssh:')) {
-    // Strip off the "ssh:" prefix.
-    uri = uri.substr(4);
+  let schema;
+  if (stripSchema) {
+    schema = uri.split(':', 1)[0];
+    if (schema === 'ssh' || schema === 'web+ssh' || schema === 'sftp' ||
+        schema === 'web+sftp') {
+      // Strip off the schema prefix.
+      uri = uri.substr(schema.length + 1);
+
+      if (schema.startsWith('web+')) {
+        schema = schema.substr(4);
+      }
+    } else {
+      schema = undefined;
+    }
     // Strip off the "//" if it exists.
     if (uri.startsWith('//')) {
       uri = uri.substr(2);
     }
   }
 
+  // For empty URIs, show the connection dialog.
+  if (uri === '') {
+    return {hostname: '>connections'};
+  }
+
   /* eslint-disable max-len,spaced-comment */
   // Parse the connection string.
   const ary = uri.match(
-      //|user |@| [  ipv6       %zoneid   ]| host |   :port     |@| [  ipv6       %zoneid   ]|relay|   :relay port |
-      /^([^@]+)@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:@]+)(?::(\d+))?(?:@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^:]+)(?::(\d+))?)?$/);
+      //|user    |@|   [  ipv6       %zoneid   ]|  host  |   :port     |@| [  ipv6       %zoneid   ]| relay |   :relay port |
+      /^(?:([^@]*)@)?(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^\s:@]+)(?::(\d+))?(?:@(\[[:0-9a-f]+(?:%[^\]]+)?\]|[^\s:]+)(?::(\d+))?)?$/);
   /* eslint-enable max-len,spaced-comment */
 
   if (!ary) {
@@ -575,12 +667,22 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema = true,
     hostname = hostname.substr(1, hostname.length - 2);
   }
 
+  // If the hostname starts with bad chars, reject it.  We use these internally,
+  // so don't want external links to access them too.  We probably should filter
+  // out more of the ASCII space.
+  if (hostname.startsWith('>') || hostname.startsWith('-')) {
+    return null;
+  }
+
   let relayHostname, relayPort;
   if (ary[4]) {
     relayHostname = ary[4];
     // If it's IPv6, remove the brackets.
     if (relayHostname.startsWith('[') && relayHostname.endsWith(']')) {
       relayHostname = relayHostname.substr(1, relayHostname.length - 2);
+    }
+    if (relayHostname.startsWith('-')) {
+      return null;
     }
     if (ary[5]) {
       relayPort = ary[5];
@@ -623,6 +725,7 @@ nassh.CommandInstance.parseURI = function(uri, stripSchema = true,
     port: port,
     relayHostname: relayHostname,
     relayPort: relayPort,
+    schema: schema,
     uri: uri,
   }, params);
 };
@@ -647,7 +750,9 @@ nassh.CommandInstance.parseDestination = function(destination) {
   if (destination.startsWith('uri:')) {
     // Strip off the "uri:" before decoding it.
     destination = unescape(destination.substr(4));
-    if (!destination.startsWith('ssh:')) {
+    const schema = destination.split(':', 1)[0];
+    if (schema !== 'ssh' && schema !== 'web+ssh' && schema !== 'sftp' &&
+        schema !== 'web+sftp') {
       return null;
     }
 
@@ -696,6 +801,10 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
     this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
     return;
   }
+  if (rv.schema === 'sftp') {
+    this.sftpConnectToDestination(destination);
+    return;
+  }
 
   // We have to set the url here rather than in connectToArgString, because
   // some callers may come directly to connectToDestination.
@@ -710,38 +819,10 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
  * @param {string} destination A string of the form username@host[:port].
  */
 nassh.CommandInstance.prototype.mountDestination = function(destination) {
-  const rv = nassh.CommandInstance.parseDestination(destination);
-  if (rv === null) {
-    this.io.println(nassh.msg('BAD_DESTINATION', [destination]));
-    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
-    return;
-  }
-
-  // We have to set the url here rather than in connectToArgString, because
-  // some callers may come directly to connectToDestination.
-  this.terminalLocation.hash = destination;
-
-  const args = {
-    argv: {
-      terminalIO: this.io,
-      terminalStorage: this.storage,
-      terminalLocation: this.terminalLocation,
-      terminalWindow: this.terminalWindow,
-      isSftp: true,
-      isMount: true,
-      // Mount options are passed directly to chrome.fileSystemProvider.mount,
-      // so don't add fields here that would otherwise collide.
-      mountOptions: {
-        fileSystemId: rv.username + rv.hostname,
-        displayName: rv.username + rv.hostname,
-        writable: true,
-      },
-    },
-    connectOptions: rv,
-  };
-
-  nassh.getBackgroundPage()
-    .then((bg) => bg.nassh.sftp.fsp.createSftpInstance(args));
+  // This code path should currently be unreachable.  If that ever changes,
+  // we can look at merging with the mountProfile code.
+  this.io.println('Not implemented; please file a bug.');
+  this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
 };
 
 /**
@@ -811,38 +892,64 @@ nassh.CommandInstance.prototype.sftpConnectToDestination = function(
   // some callers may come directly to connectToDestination.
   this.terminalLocation.hash = destination;
 
-  const args = {
-    argv: {
-      terminalIO: this.io,
-      terminalStorage: this.storage,
-      terminalLocation: this.terminalLocation,
-      terminalWindow: this.terminalWindow,
-      isSftp: true,
-    },
-    connectOptions: rv,
-  };
+  this.isSftp = true;
+  this.sftpClient = new nassh.sftp.Client();
 
-  nassh.getBackgroundPage()
-    .then((bg) => bg.nassh.sftp.fsp.createSftpInstance(args));
+  this.connectTo(rv);
 };
 
 /**
  * Initiate an asynchronous connection to a remote host.
  *
  * @param {!Object} params The various connection settings setup via the
- *    prefsToConnectParams_ helper.
+ *     prefsToConnectParams_ helper.
+ * @param {function(!Object, !Object)=} finalize Call this instead of the
+ *     normal connectToFinalize_.
  */
-nassh.CommandInstance.prototype.connectTo = function(params) {
-  if (!(params.username && params.hostname)) {
-    this.io.println(nassh.msg('MISSING_PARAM', ['username/hostname']));
-    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
-    return;
-  }
-
+nassh.CommandInstance.prototype.connectTo = function(params, finalize) {
   if (params.hostname == '>crosh') {
     // TODO: This should be done better.
     const template = 'crosh.html?profile=%encodeURIComponent(terminalProfile)';
     this.terminalLocation.href = lib.f.replaceVars(template, params);
+    return;
+  } else if (params.hostname === '>connections') {
+    this.promptForDestination_();
+    return;
+  }
+
+  // If no username was specified, prompt the user for one.
+  if (params.username === undefined) {
+    const io = this.io.push();
+
+    const container = document.createElement('div');
+    const prompt = document.createElement('p');
+    prompt.textContent = 'Please enter username:';
+    container.appendChild(prompt);
+    const input = document.createElement('input');
+    container.appendChild(input);
+    io.showOverlay(container, null);
+
+    // Force focus after the browser has a chance to render things.
+    setTimeout(() => input.focus());
+
+    // Keep accepting input until they press Enter.
+    input.addEventListener('keydown', (e) => {
+      e.stopPropagation();
+      if (e.key === 'Enter') {
+        params.username = input.value;
+        io.hideOverlay();
+        io.pop();
+        this.connectTo(params, finalize);
+      }
+    }, true);
+    // The terminal will eat all key events, so make sure we stop that.
+    input.addEventListener('keyup', (e) => e.stopPropagation(), true);
+    input.addEventListener('keypress', (e) => e.stopPropagation(), true);
+
+    // If the terminal becomes active for some reason, force back to the input.
+    io.onVTKeystroke = io.sendString = (string) => {
+      input.focus();
+    };
     return;
   }
 
@@ -888,7 +995,7 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
   const userSshOptionsList = nassh.CommandInstance.splitCommandLine(
       params.nasshUserSshOptions).args;
   const safeSshOptions = new Set([
-    '-4', '-6', '-a', '-A', '-C', '-q', '-v', '-V',
+    '-4', '-6', '-a', '-A', '-C', '-q', '-Q', '-v', '-V',
   ]);
   userSshOptionsList.forEach((option) => {
     if (safeSshOptions.has(option)) {
@@ -949,7 +1056,8 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     // Do nothing when disabled.  We check this first to avoid excessive
     // indentation or redundant checking of the proxy-host setting below.
   } else if (options['--proxy-mode'] == 'ssh-fe@google.com') {
-    this.relay_ = new nassh.relay.Sshfe(this.io, options);
+    this.relay_ = new nassh.relay.Sshfe(
+        this.io, options, this.terminalLocation, this.storage);
     this.io.println(nassh.msg(
         'FOUND_RELAY',
         [`${this.relay_.proxyHost}:${this.relay_.proxyPort}`]));
@@ -970,7 +1078,9 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
         'INITIALIZING_RELAY',
         [this.relay_.proxyHost + ':' + this.relay_.proxyPort]));
 
-    if (!this.relay_.init()) {
+    if (params.relayState !== undefined) {
+      this.relay_.loadState(params.relayState);
+    } else if (!this.relay_.init()) {
       // A false return value means we have to redirect to complete
       // initialization.  Bail out of the connect for now.  We'll resume it
       // when the relay is done with its redirect.
@@ -996,7 +1106,17 @@ nassh.CommandInstance.prototype.connectTo = function(params) {
     return;
   }
 
-  this.connectToFinalize_(params, options);
+  // Attempt to refresh certificates if need be.
+  const refresh = options['cert-refresh'] ?
+      nassh.goog.gcse.refresh(this.io) : Promise.resolve();
+  // Even if refreshing went horribly, attempt the connection anyways.
+  refresh.finally(() => {
+    if (finalize) {
+      finalize(params, options);
+    } else {
+      this.connectToFinalize_(params, options);
+    }
+  });
 };
 
 /**
@@ -1120,7 +1240,8 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
     this.sendToPlugin_('startSession', [argv]);
     if (this.isSftp) {
       this.sftpClient.initConnection(this.plugin_);
-      this.sftpClient.onInit = this.onSftpInitialised.bind(this);
+      this.sftpClient.onInit = this.onSftpInitialised.bind(
+          this, params.sftpCallback);
     }
   });
 };
@@ -1206,6 +1327,7 @@ nassh.CommandInstance.postProcessOptions = function(
       '--report-connect-attempts': true,
       '--relay-protocol': 'v2',
       '--ssh-agent': 'gnubby',
+      'cert-refresh': true,
     }, rv);
 
     // Default enable connection resumption when using newer proxy mode.
@@ -1303,7 +1425,7 @@ nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
  */
 nassh.CommandInstance.prototype.removePlugin_ = function() {
   if (this.plugin_) {
-    this.plugin_.parentNode.removeChild(this.plugin_);
+    this.plugin_.remove();
     this.plugin_ = null;
   }
 };
@@ -1421,6 +1543,9 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
     if (nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId]) {
       delete nassh.sftp.fsp.sftpInstances[this.mountOptions.fileSystemId];
     }
+    if (this.argv_.onExit) {
+      this.argv_.onExit(code);
+    }
 
     console.log(nassh.msg('DISCONNECT_MESSAGE', [code]));
     return;
@@ -1500,6 +1625,20 @@ nassh.CommandInstance.prototype.onPluginMessage_ = function(e) {
  * @suppress {lintChecks} Allow non-primitive prototype property.
  */
 nassh.CommandInstance.prototype.onConnectDialog_ = {};
+
+/**
+ * Sent from the dialog when the user chooses to switch to mosh.
+ *
+ * @this {nassh.CommandInstance}
+ * @param {!hterm.Frame} dialogFrame
+ * @param {string} profileID Terminal preference profile name.
+ */
+nassh.CommandInstance.prototype.onConnectDialog_.mosh = function(
+    dialogFrame, profileID) {
+  dialogFrame.close();
+
+  document.location.replace('/plugin/mosh/mosh_client.html');
+};
 
 /**
  * Sent from the dialog when the user chooses to mount a profile.
@@ -1693,13 +1832,12 @@ nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
 
 /**
  * SFTP Initialization handler. Mounts the SFTP connection as a file system.
+ *
+ * @param {function()=} callback Callback when initialization finishes.
  */
-nassh.CommandInstance.prototype.onSftpInitialised = function() {
+nassh.CommandInstance.prototype.onSftpInitialised = function(callback) {
   if (this.isMount) {
-    // Newer versions of Chrome support this API, but olders will error out.
-    if (lib.f.getChromeMilestone() >= 64) {
-      this.mountOptions['persistent'] = false;
-    }
+    this.mountOptions['persistent'] = false;
 
     // Mount file system.
     chrome.fileSystemProvider.mount(this.mountOptions);
@@ -1709,32 +1847,16 @@ nassh.CommandInstance.prototype.onSftpInitialised = function() {
       sftpClient: lib.notNull(this.sftpClient),
       exit: this.exit.bind(this),
     };
-
-    this.io.showOverlay(nassh.msg('MOUNTED_MESSAGE') + ' '
-                        + nassh.msg('CONNECT_OR_EXIT_MESSAGE'), null);
-
-    this.io.onVTKeystroke = (string) => {
-      const ch = string.toLowerCase();
-      switch (ch) {
-        case 'c':
-        case '\x12': // ctrl-r
-          this.terminalLocation.hash = '';
-          this.terminalLocation.reload();
-          break;
-
-        case 'e':
-        case 'x':
-        case '\x1b': // ESC
-        case '\x17': // ctrl-w
-          this.terminalWindow.close();
-      }
-    };
   } else {
     // Interactive SFTP client case.
     this.sftpCli_ = new nasftp.Cli(this);
 
     // Useful for console debugging.
     this.terminalWindow.nasftp_ = this.sftpCli_;
+  }
+
+  if (callback) {
+    callback();
   }
 };
 
@@ -1773,4 +1895,128 @@ nassh.CommandInstance.prototype.onPlugin_.close = function(fd) {
   }
 
   this.streams_.closeStream(fd);
+};
+
+/**
+ * Get secure input from the user.
+ *
+ * This internal wrapper is because the Web APIs are callback based, and writing
+ * this with Promises is not easy.  So this can be easily wrapped with Promises.
+ *
+ * @param {string} prompt The prompt for the user.
+ * @param {number} buf_len Max length of user input.
+ * @param {boolean} echo Whether to echo the user input.
+ * @param {function(string)} callback Called with the user's input.
+ */
+nassh.CommandInstance.prototype.secureInput_ = function(
+    prompt, buf_len, echo, callback) {
+  const io = this.io.push();
+
+  // Perform common cleanup tasks before exiting the prompt.
+  const cleanup = (pass) => {
+    io.hideOverlay();
+    io.pop();
+    this.io.terminal_.focus();
+    callback(pass);
+  };
+
+  // Strip leading & trailing newlines & random spaces.  Often the prompt is
+  // expected to be displayed inline, so it has to include padding to separate
+  // it from existing output.  That doesn't apply here.
+  prompt = prompt.trim();
+
+  const container = document.createElement('div');
+
+  const header = document.createElement('p');
+  header.style.fontWeight = 'bold';
+  header.style.whiteSpace = 'pre-wrap';
+  header.textContent = prompt;
+  container.appendChild(header);
+
+  const span = document.createElement('span');
+  span.style.whiteSpace = 'nowrap';
+
+  // If echo is disabled, assume it's a password field.  If it's enabled, allow
+  // normal text editing & viewing.
+  const input = document.createElement('input');
+  input.type = echo ? 'text' : 'password';
+  input.maxLength = buf_len - 1;
+  input.style.width = echo ? '100%' : '90%';
+  span.appendChild(input);
+
+  // For password inputs, add a dynamic toggle.
+  if (!echo) {
+    const visibilityUri = lib.resource.getDataUrl('nassh/images/visibility');
+    const visibilityOffUri = lib.resource.getDataUrl(
+        'nassh/images/visibility_off');
+
+    const toggle = document.createElement('img');
+    toggle.src = visibilityUri;
+    toggle.style.cursor = 'pointer';
+    toggle.style.verticalAlign = 'middle';
+    toggle.addEventListener('click', (e) => {
+      if (input.type === 'text') {
+        input.type = 'password';
+        toggle.src = visibilityUri;
+      } else {
+        input.type = 'text';
+        toggle.src = visibilityOffUri;
+      }
+    });
+    span.appendChild(toggle);
+  }
+
+  container.appendChild(span);
+  io.showOverlay(container, null);
+
+  // Force focus after the browser has a chance to render things.
+  setTimeout(() => input.focus());
+
+  // The terminal will eat all key events, so make sure we stop that.
+  input.addEventListener('keyup', (e) => e.stopPropagation(), true);
+  input.addEventListener('keypress', (e) => e.stopPropagation(), true);
+
+  // If the terminal becomes active for some reason, force back to the input.
+  io.onVTKeystroke = io.sendString = (string) => {
+    input.focus();
+  };
+
+  // Keep accepting input until they press Enter or Escape.
+  input.addEventListener('keydown', (e) => {
+    e.stopPropagation();
+    if (e.key === 'Enter') {
+      cleanup(input.value);
+    } else if (e.key === 'Escape') {
+      cleanup('');
+    }
+  }, true);
+};
+
+/**
+ * Get secure input from the user.
+ *
+ * @param {string} prompt The prompt for the user.
+ * @param {number} buf_len Max length of user input.
+ * @param {boolean} echo Whether to echo the user input.
+ * @return {!Promise<string>} A Promise that resolves to the user's input.
+ */
+nassh.CommandInstance.prototype.secureInput = function(prompt, buf_len, echo) {
+  return new Promise((resolve) => {
+    this.secureInput_(prompt, buf_len, echo, resolve);
+  });
+};
+
+/**
+ * Plugin wants to read a password, or some other secured user input.
+ *
+ * @this {nassh.CommandInstance}
+ * @param {string} prompt The prompt for the user.
+ * @param {number} buf_len Max length of user input.
+ * @param {boolean} echo Whether to echo the user input.
+ */
+nassh.CommandInstance.prototype.onPlugin_.readPass = function(
+    prompt, buf_len, echo) {
+  this.secureInput(prompt, buf_len, echo).then((pass) => {
+    this.sendToPlugin_('onReadPass', [pass]);
+  });
 };

@@ -26,8 +26,7 @@ describe('saturation_value_picker.js', () => {
   };
 
   afterEach(function() {
-    document.querySelectorAll(Element.is)
-        .forEach((el) => el.parentElement.removeChild(el));
+    document.querySelectorAll(Element.is).forEach((el) => el.remove());
   });
 
   it('initialises-the-picker-to-the-correct-coordinates', async function() {

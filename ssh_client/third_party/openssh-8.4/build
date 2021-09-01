@@ -91,6 +91,10 @@ def src_configure(metadata):
         'ac_cv_func_rresvport_af=yes',
     ]
 
+    # We provide this API ourselves.  TODO(vapier): Finish WASM port.
+    if tc.chost == 'nacl':
+        EXTRA_CONFIGURE_FLAGS += ['ac_cv_func_readpassphrase=yes']
+
     cmd = [
         './configure',
         '--build=%s' % (tc.cbuild,),

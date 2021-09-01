@@ -65,15 +65,28 @@ describe('parseURI', () => {
     'port': undefined,
     'relayHostname': undefined,
     'relayPort': undefined,
+    'schema': undefined,
+    'username': undefined,
   };
 
   // List the fields that each test requires or deviates from the default.
   const data = [
     // Strip off the leading URI schema.
     ['ssh://root@localhost',
-     {'username': 'root', 'hostname': 'localhost', 'uri': 'root@localhost'}],
+     {'username': 'root', 'hostname': 'localhost', 'schema': 'ssh',
+      'uri': 'root@localhost'}],
+    ['web+ssh://root@localhost',
+     {'username': 'root', 'hostname': 'localhost', 'schema': 'ssh',
+      'uri': 'root@localhost'}],
+    ['sftp://root@localhost',
+     {'username': 'root', 'hostname': 'localhost', 'schema': 'sftp',
+      'uri': 'root@localhost'}],
+    ['web+sftp://root@localhost',
+     {'username': 'root', 'hostname': 'localhost', 'schema': 'sftp',
+      'uri': 'root@localhost'}],
 
     // Basic forms.
+    ['localhost', {'hostname': 'localhost'}],
     ['root@localhost', {'username': 'root', 'hostname': 'localhost'}],
     ['u@h:2222', {'username': 'u', 'hostname': 'h', 'port': '2222'}],
 
@@ -123,6 +136,16 @@ describe('parseURI', () => {
     // Unaccpetable escaped forms.
     ['u@h%6eg', {'username': 'u', 'hostname': 'h%6eg'}],
     ['u@h:1%302', null],
+
+    // Bad hostnames.
+    ['u@>croash', null],
+    ['u@[>croash]', null],
+
+    // Various bad forms.
+    ['u@-Q', null],
+    ['u@h@--foo', null],
+    ['u@h@r --foo', null],
+    ['u@h@r\t--foo', null],
 
     // Fingerprints.
     ['u;fingerprint=foo@h',
@@ -188,14 +211,41 @@ describe('parseURI', () => {
  * Check parsing of Secure Shell destinations.
  * Most test logic is in parseURI, so we focus on the little bit that isn't.
  */
-it('parseDestination', () => {
+describe('parseDestination', () => {
   const data = [
     // Registered protocol handler.
-    ['uri:ssh://root@localhost', {'user': 'root', 'host': 'localhost'}],
+    ['uri:ssh://root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'ssh'}],
+    ['uri:web+ssh://root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'ssh'}],
+    ['uri:sftp://root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'sftp'}],
+    ['uri:web+sftp://root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'sftp'}],
     ['uri:root@localhost', null],
+
+    // URL escaped values.
+    ['uri:ssh%3A//root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'ssh'}],
+    ['uri:web+ssh%3A//root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'ssh'}],
+    ['uri:sftp%3A//root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'sftp'}],
+    ['uri:web+sftp%3A//root@localhost',
+     {'user': 'root', 'host': 'localhost', 'schema': 'sftp'}],
 
     // For non-URI handler, we'll preserve the prefix.
     ['ssh://root@localhost', {'user': 'ssh://root', 'host': 'localhost'}],
+
+    // Blank URIs.
+    ['uri:ssh%3A//', {'host': '>connections'}],
+    ['uri:ssh%3A', {'host': '>connections'}],
+    ['uri:web+ssh%3A//', {'host': '>connections'}],
+    ['uri:web+ssh%3A', {'host': '>connections'}],
+    ['uri:sftp%3A//', {'host': '>connections'}],
+    ['uri:sftp%3A', {'host': '>connections'}],
+    ['uri:web+sftp%3A//', {'host': '>connections'}],
+    ['uri:web+sftp%3A', {'host': '>connections'}],
 
     // Normal form.
     ['root@localhost', {'user': 'root', 'host': 'localhost'}],
@@ -206,19 +256,23 @@ it('parseDestination', () => {
     ['u@h@host:1234', {'user': 'u', 'host': 'h',
                        'nasshOptions': '--proxy-host=host --proxy-port=1234'}],
 
-    // Reject missing usernames.
-    ['localhost', null],
+    // Missing usernames get prompted.
+    ['@localhost', {'user': '', 'host': 'localhost'}],
+    ['localhost', {'host': 'localhost'}],
   ];
 
   data.forEach((dataSet) => {
-    const rv = nassh.CommandInstance.parseDestination(dataSet[0]);
-    if (rv === null) {
-      assert.isNull(dataSet[1], dataSet[0]);
-    } else {
-      assert.equal(dataSet[1].user, rv.username, dataSet[0]);
-      assert.equal(dataSet[1].host, rv.hostname, dataSet[0]);
-      assert.equal(dataSet[1].nasshOptions, rv.nasshOptions, dataSet[0]);
-    }
+    it(dataSet[0], () => {
+      const rv = nassh.CommandInstance.parseDestination(dataSet[0]);
+      if (rv === null) {
+        assert.isNull(dataSet[1], dataSet[0]);
+      } else {
+        assert.equal(dataSet[1].user, rv.username, dataSet[0]);
+        assert.equal(dataSet[1].host, rv.hostname, dataSet[0]);
+        assert.equal(dataSet[1].schema, rv.schema, dataSet[0]);
+        assert.equal(dataSet[1].nasshOptions, rv.nasshOptions, dataSet[0]);
+      }
+    });
   });
 });
 

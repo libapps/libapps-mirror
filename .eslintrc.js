@@ -11,7 +11,7 @@ module.exports = {
   },
   'parserOptions': {
     // This sets the syntax parsing level.
-    'ecmaVersion': 2018,
+    'ecmaVersion': 2020,
     'sourceType': 'module',
   },
 
