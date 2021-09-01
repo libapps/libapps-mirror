@@ -5,11 +5,9 @@
 
 """Download web fonts to bundle with nassh. See ../doc/fonts.md"""
 
-import os
-import shutil
 import sys
 
-import nassh
+import nassh  # pylint: disable=wrong-import-order
 import libdot
 
 
@@ -30,30 +28,8 @@ FONTS_DIR = nassh.DIR / 'fonts'
 
 def fonts_update():
     """Download & update our copy of fonts."""
-    hash_file = FONTS_DIR / '.hash'
-    old_hash = None
-    try:
-        with open(hash_file, 'r', encoding='utf-8') as fp:
-            old_hash = fp.read().strip()
-    except FileNotFoundError:
-        pass
-
-    # In case of an upgrade, nuke existing dir.
-    if old_hash != FONTS_HASH:
-        shutil.rmtree(FONTS_DIR, ignore_errors=True)
-
-    if not os.path.exists(hash_file):
-        # Download & unpack the archive.
-        tar = f'fonts-{FONTS_HASH}.tar.xz'
-        uri = '/'.join((FONTS_BASE_URI, tar))
-        output = nassh.LIBAPPS_DIR / tar
-        libdot.fetch(uri, output)
-        libdot.unpack(output, cwd=nassh.DIR)
-        libdot.unlink(output)
-
-        # Mark the hash of this checkout.
-        with open(hash_file, 'w', encoding='utf-8') as fp:
-            fp.write(FONTS_HASH)
+    libdot.download_tarball(f'fonts-{FONTS_HASH}.tar.xz', FONTS_BASE_URI,
+            FONTS_DIR, FONTS_HASH)
 
 
 def get_parser():

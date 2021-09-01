@@ -48,6 +48,7 @@ EXCLUDE_PATTERNS_CROSH = (
     'manifest.json',
     os.path.join('html', 'nassh_background.html'),
     os.path.join('js', 'nassh_background.js'),
+    os.path.join('plugin', 'mosh'),
     os.path.join('plugin', 'pnacl-*'),
     os.path.join('plugin', 'wasm*'),
     os.path.join('images', '*', 'icon-fullsize.png'),

@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+# Copyright 2021 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Download plugin to bundle with nassh/crosh."""
+
+import sys
+
+import nassh  # pylint: disable=wrong-import-order
+import libdot
+
+
+# The hash of the fonts that we maintain.
+# Allow a long line for easy automated updating.
+# pylint: disable=line-too-long
+PLUGIN_HASH = 'd3f2c65de66cfb785b89de1e857c912897923ffd7205b78f806c5e31650743a1'
+# pylint: enable=line-too-long
+
+# Bucket maintained by us.
+PLUGIN_VERSION=0.41
+PLUGIN_GS_FRAGMENT = 'chromeos-localmirror/secureshell/releases'
+PLUGIN_BASE_URI = f'https://storage.googleapis.com/{PLUGIN_GS_FRAGMENT}'
+
+# The nassh plugin path.
+PLUGIN_DIR = nassh.DIR / 'plugin'
+
+
+def plugin_update():
+    """Download & update our copy of plugin."""
+    # TODO(joelhockey): It would be nicer if plugin files had a prefix such as
+    # plugin-0.47.tar.xz rather than just the version 0.47.tar.xz.
+    libdot.download_tarball(f'{PLUGIN_VERSION}.tar.xz', PLUGIN_BASE_URI,
+            PLUGIN_DIR, PLUGIN_HASH)
+
+
+def get_parser():
+    """Get a command line parser."""
+    parser = libdot.ArgumentParser(description=__doc__)
+    return parser
+
+
+def main(argv):
+    """The main func!"""
+    parser = get_parser()
+    _opts = parser.parse_args(argv)
+
+    plugin_update()
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))

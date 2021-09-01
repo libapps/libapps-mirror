@@ -14,6 +14,7 @@ import logging
 import logging.handlers
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import time
@@ -397,6 +398,39 @@ def fetch(uri, output, b64=False):
         print(' ' * 80, end='\r')
 
     os.rename(tmpfile, output)
+
+
+def download_tarball(tar: str, base_uri: str, tar_dir: Path, latest_hash: str):
+    """Download & update our copy of a tarball.
+
+    Args:
+      tar: tarball filename.
+      base_uri: Will download {base_uri}/{tar} to tar_dir.parent.
+      tar_dir: Root directory of extracted tarball where .hash file is written.
+          tar_dir.name will be extracted from tar at tar_dir.parent
+      latest_hash: Latest hash of tarball. Download and extract is not done
+          if tar_dir/.hash already exists and matches.
+    """
+    hash_file = tar_dir / '.hash'
+    old_hash = None
+    try:
+        old_hash = hash_file.read_text(encoding='utf-8').strip()
+    except FileNotFoundError:
+        pass
+
+    # In case of an upgrade, nuke existing dir.
+    if old_hash != latest_hash:
+        shutil.rmtree(tar_dir, ignore_errors=True)
+
+        # Download & unpack the archive.
+        uri = '/'.join((base_uri, tar))
+        output = tar_dir.parent / tar
+        fetch(uri, output)
+        unpack(output, cwd=tar_dir.parent, files=[tar_dir.name])
+        unlink(output)
+
+        # Mark the hash of this checkout.
+        hash_file.write_text(latest_hash, encoding='utf-8')
 
 
 def node_and_npm_setup():

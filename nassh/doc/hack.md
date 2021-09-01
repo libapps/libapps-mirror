@@ -41,10 +41,9 @@ necessary libdot and hterm source.
 ## The NaCl plugin dependency
 
 Secure Shell depends on a NaCl (Native Client) plugin to function.  This plugin
-is a port of OpenSSH.  You'll have to find or create a version of this plugin,
-and copy it into `libapps/nassh/plugin/`.
-
-Your options are (pick one):
+is a port of OpenSSH.  The latest version of the plugin is copied into
+`libapps/nassh/plugin/` by `nassh/bin/mkdeps`.  You can overwrite this with
+a different version if desired.  Your options are (pick one):
 
 1. Build it yourself from [ssh_client].  This can take some time, but once it's
 finished:
@@ -53,7 +52,7 @@ finished:
 $ cp -a output/hterm/plugin/ ../nassh/
 ```
 
-2. Grab an existing release.  For example:
+2. Grab a different release.  For example:
 ```
 # In the nassh/ directory.
 $ wget https://commondatastorage.googleapis.com/chromeos-localmirror/secureshell/releases/0.27.tar.xz

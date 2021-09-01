@@ -111,28 +111,9 @@ def update():
 
 def modules_update():
     """Download & update our copy of node_modules."""
-    hash_file = NODE_MODULES_DIR / '.hash'
-    old_hash = None
-    try:
-        old_hash = hash_file.read_text(encoding='utf-8').strip()
-    except FileNotFoundError:
-        pass
-
-    # In case of an upgrade, nuke existing dir.
-    if old_hash != NODE_MODULES_HASH:
-        shutil.rmtree(NODE_MODULES_DIR, ignore_errors=True)
-
-    if not hash_file.exists():
-        # Download & unpack the archive.
-        tar = f'node_modules-{NODE_MODULES_HASH}.tar.xz'
-        uri = '/'.join((NODE_MODULES_BASE_URI, tar))
-        output = libdot.LIBAPPS_DIR / tar
-        libdot.fetch(uri, output)
-        libdot.unpack(output, cwd=libdot.LIBAPPS_DIR)
-        libdot.unlink(output)
-
-        # Mark the hash of this checkout.
-        hash_file.write_text(NODE_MODULES_HASH, encoding='utf-8')
+    libdot.download_tarball(f'node_modules-{NODE_MODULES_HASH}.tar.xz',
+                            NODE_MODULES_BASE_URI, NODE_MODULES_DIR,
+                            NODE_MODULES_HASH)
 
 
 def main(argv):
