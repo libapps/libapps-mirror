@@ -27,9 +27,6 @@ nassh.ConnectDialog = function(messagePort) {
     ary[i].setAttribute('spellcheck', 'false');
   }
 
-  // The Message Manager instance, null until the messages have loaded.
-  this.mm_ = null;
-
   // The nassh global pref manager.
   this.prefs_ = new nassh.PreferenceManager();
   this.localPrefs_ = new nassh.LocalPreferenceManager();
@@ -132,25 +129,6 @@ nassh.ConnectDialog.ProfileRecord = function(id, prefs, textContent) {
   this.id = id;
   this.prefs = prefs;
   this.textContent = textContent || prefs.get('description');
-};
-
-/**
- * Get a localized message from the Message Manager.
- *
- * This converts all message name to UPPER_AND_UNDER format, since that's
- * pretty handy in the connect dialog.
- *
- * @this {nassh.ConnectDialog}
- * @param {string} name
- * @param {!Object=} args
- * @return {string}
- */
-nassh.ConnectDialog.prototype.msg = function(name, args) {
-  if (!this.mm_) {
-    return 'loading...';
-  }
-
-  return this.mm_.get(name.toUpperCase().replace(/-/g, '_'), args);
 };
 
 /**
@@ -580,7 +558,7 @@ nassh.ConnectDialog.prototype.maybeCopyPlaceholders_ = function() {
 nassh.ConnectDialog.prototype.maybeCopyPlaceholder_ = function(fieldName) {
   const field = this.$f(fieldName);
   const placeholder = field.getAttribute('placeholder');
-  if (!field.value && placeholder != this.msg('FIELD_' + fieldName +
+  if (!field.value && placeholder != nassh.msg('FIELD_' + fieldName +
                                               '_PLACEHOLDER')) {
     field.value = placeholder;
   }
@@ -628,7 +606,7 @@ nassh.ConnectDialog.prototype.updateDetailPlaceholders_ = function() {
   ].forEach((name) => {
     let value = ary.shift();
     if (!value) {
-      value = this.msg('FIELD_' + name + '_PLACEHOLDER');
+      value = nassh.msg('FIELD_' + name + '_PLACEHOLDER');
     }
 
     this.$f(name, 'placeholder', value);
@@ -641,7 +619,7 @@ nassh.ConnectDialog.prototype.updateDetailPlaceholders_ = function() {
 nassh.ConnectDialog.prototype.updateNasshOptionsPlaceholder_ = function() {
   // Google-specific relay hack.  This feels dirty.  We can revert this once
   // we support managed default configs.  http://b/28205376 & related docs.
-  let value = this.msg('FIELD_NASSH_OPTIONS_PLACEHOLDER');
+  let value = nassh.msg('FIELD_NASSH_OPTIONS_PLACEHOLDER');
   if (!this.$f('nassh-options').value) {
     let hostname = this.$f('hostname').value;
     if (!hostname) {
@@ -679,7 +657,7 @@ nassh.ConnectDialog.prototype.updateDescriptionPlaceholder_ = function() {
       placeholder += ':' + v;
     }
   } else {
-    placeholder = this.msg('FIELD_DESCRIPTION_PLACEHOLDER');
+    placeholder = nassh.msg('FIELD_DESCRIPTION_PLACEHOLDER');
   }
 
   this.$f('description', 'placeholder', placeholder);
@@ -1290,8 +1268,7 @@ nassh.ConnectDialog.prototype.onMessageName_ = {};
  * @param {!Object} info
  */
 nassh.ConnectDialog.prototype.onMessageName_['terminal-info'] = function(info) {
-  this.mm_ = new lib.MessageManager(info.acceptLanguages);
-  this.mm_.processI18nAttributes(document.body);
+  hterm.messageManager.processI18nAttributes(document.body);
   this.updateDetailPlaceholders_();
   this.updateDescriptionPlaceholder_();
 
