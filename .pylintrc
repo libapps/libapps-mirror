@@ -22,6 +22,7 @@ docstring-quote = double
 
 # not-callable throws a lot of false positives with pylint-1.6.
 disable=
+    duplicate-code,
     fixme,
     invalid-name,
     locally-enabled,
