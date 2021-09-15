@@ -74,6 +74,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
           nassh.CommandInstance, 'nassh', [document.location.hash.substr(1)]);
     };
     terminal.onTerminalReady = function() {
+      nassh.watchBackgroundColor(terminal.getPrefs());
       nassh.loadWebFonts(terminal.getDocument());
       if (window.chrome && chrome.accessibilityFeatures &&
           chrome.accessibilityFeatures.spokenFeedback) {

@@ -29,19 +29,31 @@ lib.registerInit(
     });
 
 /**
- * Modify if running in chrome-untrusted://.  We will use
- * lib.Storage.TerminalPrivate as the default storage, load messages via XHR,
- * and polyfill chrome.runtime.getManifest.
+ * Modify if nassh is running within Chrome OS Terminal System App. We will
+ * use lib.Storage.TerminalPrivate as the default storage, and my load messages
+ * via XHR, and polyfill chrome.runtime.getManifest().
  */
 nassh.setupForWebApp = function() {
-  // Modifications if running as a web app.
+  // We can detect that we are running in CrOS Terminal app when
+  // chrome.terminalPrivate API exists, and when window.type is 'app' rather
+  // than 'popup' or 'normal'. If so, use Storage.TerminalPrivate() for prefs.
+  lib.registerInit('terminal-private-storage', () => {
+    if (chrome.terminalPrivate) {
+      return new Promise((resolve) => {
+        chrome.windows.getCurrent((w) => {
+          if (w.type === 'app') {
+            hterm.defaultStorage = new lib.Storage.TerminalPrivate();
+          }
+          resolve();
+        });
+      });
+    }
+  });
+
+  // Only load messages and polyfill chrome.runtime.getManifest() if we are
+  // not running as an extension.
   if (location.href.startsWith('chrome-untrusted://')) {
-    lib.registerInit('terminal-private-storage', () => {
-      hterm.defaultStorage = new lib.Storage.TerminalPrivate();
-    });
     lib.registerInit('messages', nassh.loadMessages);
-    // Polyfill chrome.runtime.getManifest since it is not available when
-    // We require name, version, and icons.
     if (chrome && chrome.runtime && !chrome.runtime.getManifest) {
       chrome.runtime.getManifest = () => {
         return /** @type {!chrome.runtime.Manifest} */ ({
@@ -52,6 +64,19 @@ nassh.setupForWebApp = function() {
       };
     }
   }
+};
+
+/**
+ * Add a listener to 'background-color' pref and set it on the outer body.
+ * to update tab and frame colors.
+ *
+ * @param {!lib.PreferenceManager} prefs The preference manager.
+ */
+nassh.watchBackgroundColor = function(prefs) {
+  document.body.style.backgroundColor = prefs.getString('background-color');
+  prefs.addObserver('background-color', (color) => {
+    document.body.style.backgroundColor = /** @type {string} */ (color);
+  });
 };
 
 /**
