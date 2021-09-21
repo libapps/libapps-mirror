@@ -51,6 +51,12 @@ Even if you use HTTP, the actual ssh session will still be encrypted.
 Use XML HTTP requests (XHR) when communicating with the relay server instead of
 WebSockets.  Use of this depends on your relay server implementation.
 
+## `--relay-method=<js-redirect|direct>`
+
+Authentication mode to use for relay. Default is `js-redirct`, set to `direct`
+to use relay `method=direct`.
+For more details, see the [Relay Protocol] document.
+
 ## `--report-ack-latency`
 
 Report ACK latency to the relay server.

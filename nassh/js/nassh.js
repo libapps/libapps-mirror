@@ -29,6 +29,16 @@ lib.registerInit(
     });
 
 /**
+ * Returns true if this is running as a Chrome OS System App such as Terminal
+ * or crosh at chrome-untrusted://.
+ *
+ * @return {boolean}
+ */
+nassh.isCrOSSystemApp = function() {
+  return location.href.startsWith('chrome-untrusted://');
+};
+
+/**
  * Modify if nassh is running within Chrome OS Terminal System App. We will
  * use lib.Storage.TerminalPrivate as the default storage, and my load messages
  * via XHR, and polyfill chrome.runtime.getManifest().
@@ -52,7 +62,7 @@ nassh.setupForWebApp = function() {
 
   // Only load messages and polyfill chrome.runtime.getManifest() if we are
   // not running as an extension.
-  if (location.href.startsWith('chrome-untrusted://')) {
+  if (nassh.isCrOSSystemApp()) {
     lib.registerInit('messages', nassh.loadMessages);
     if (chrome && chrome.runtime && !chrome.runtime.getManifest) {
       chrome.runtime.getManifest = () => {

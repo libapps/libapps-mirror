@@ -96,16 +96,18 @@ This system could offer other services too which is why the port is not fixed.
 
 The [query string] settings:
 
-*   `ext=EXT_ID` (required): The Chrome extension id that the cookie server
-    should redirect to when it is finished.
-*   `path=PATH` (required): The path under the extension that the cookie server
-    should redirect to when it is finished.
-*   `version=VERSION`: The version of the cookie protocol.  Only `2` is
-    supported.  If `version=` is omitted, then the older version 1 is used
-    (note: `version=1` is not supported!).
 *   `method=METHOD`: The redirection method in the response (only used by
     `version=2`.  See the [method field section](#corp-relay-method) below for
     more details.
+*   `ext=EXT_ID` (required for `method=js-redirect`): The Chrome extension id
+    that the cookie server should redirect to when it is finished.
+*   `path=PATH` (required for `method=js-redirect`): The path under the
+    extension that the cookie server should redirect to when it is finished.
+*   `origin=ORIGIN` (required for `method=close`): The origin sending the
+    request.  This is used for authentication and logging.
+*   `version=VERSION`: The version of the cookie protocol.  Only `2` is
+    supported.  If `version=` is omitted, then the older version 1 is used
+    (note: `version=1` is not supported!).
 
 It responds with an eventual redirect to `chrome://EXT_ID/PATH`.
 The server might trigger intermediate redirects for its own purposes.
@@ -138,17 +140,31 @@ It is up to the client to select the `RELAY_PROTOCOL` themselves.
 #### method field {#corp-relay-method}
 
 The `method` field is used with version `2` only.
-It may be `direct` or `js-redirect`.
+We make use of `direct`, `close` (used with `direct`), and `js-redirect`.
 
-The `direct` method will return a JSON response with an [XSSI header].
-The client is responsible for parsing that response and operating on it (e.g.
-redirecting itself to `chrome://EXT_ID/PATH`).
+The `direct` method will return a JSON response with an [XSSI header] when the
+client possesses a valid SSO ticket. If the client doesn't have a valid ticket,
+this XHR request will fail with a CORS error when the cookie server does a 302
+redirect to a login server. The client must detect this condition and
+then issue a non-cors request which will allow redirects where the SSO ticket
+can be refreshed if the client has a valid master cookie, and then reattempt the
+original `direct` request. This will fail again if the client did not have a
+valid master cookie. The client must detect this condition and then open a popup
+window and use method `close`. The popup will be redirected to the login page
+and then automatically close when it is finished. When the client detects that
+the popup page is closed, it can reattempt the `direct` method.
 
 The `js-redirect` method will generate a HTML document with a `<script>` tag to
-redirect to the `chrome://EXT_ID/PATH` path.
+redirect to the `chrome://EXT_ID/PATH` path.  It performs page redirects to
+the login server as necessary to refresh the ticket from the master cookie, or
+display the login page to users.
 The JSON response is [base64url] encoded in the [URI fragment].
 
-Secure Shell only supports `js-redirect` currently.
+Secure Shell uses `js-redirect` by default, but can be configured to use
+`direct` by setting option `--relay-method=direct`. The `direct` method is used
+by Chrome OS Terminal which embeds Secure Shell. Terminal does not work with the
+`js-redirect` method since Chrome does not allow redirects into its internal
+pages such as chrome-untrusted://terminal.
 
 ### /proxy Protocol {#corp-relay-proxy}
 

@@ -20,6 +20,7 @@ nassh.relay.Corp = class extends nassh.Relay {
     this.reportAckLatency = options['--report-ack-latency'];
     this.reportConnectAttempts = options['--report-connect-attempts'];
     this.relayProtocol = options['--relay-protocol'];
+    this.relayMethod = options['--relay-method'];
     this.relayServer = null;
     this.relayServerSocket = null;
   }
@@ -74,6 +75,10 @@ nassh.relay.Corp = class extends nassh.Relay {
 
   /** @inheritDoc */
   async init() {
+    if (this.relayMethod === 'direct') {
+      return this.authenticateDirect();
+    }
+
     const resumePath = this.location.href.substr(this.location.origin.length);
 
     // This session storage item is created by /html/nassh_google_relay.html
@@ -160,6 +165,136 @@ nassh.relay.Corp = class extends nassh.Relay {
       resume: this.resumeConnection,
     };
     return streams.openStream(this.getStreamClass(), fd, options, onOpen);
+  }
+
+  /**
+   * Authenticates to proxy using fetch with method=direct. Refreshes ticket
+   * from master cookie if possible, else opens a login popup if required.
+   *
+   * @return {!Promise<boolean>} true if authentication succeeded, else false on
+   *     error.
+   */
+  async authenticateDirect() {
+    const protocol = this.useSecure ? 'https' : 'http';
+    const proxyUrl =
+        `${protocol}://${this.proxyHost}:${this.proxyPort}/cookie?version=2`;
+
+    // Since the proxy settings are coming from the user, make sure we catch bad
+    // values (hostnames/etc...) directly.
+    try {
+      // eslint-disable-next-line no-new
+      new URL(proxyUrl);
+    } catch (e) {
+      this.io_.println(e);
+      this.io_.println(proxyUrl);
+      return false;
+    }
+
+    // Query for endpoint. This will fail if ticket or master cookie not set.
+    try {
+      await this.fetchEndpointDirect(proxyUrl);
+      return true;
+    } catch (e) {
+      console.warn('Refresh ticket and query endpoint again', e.message);
+    }
+
+    // Refresh ticket and query for endpoint again.
+    try {
+      await this.refreshTicket(proxyUrl);
+      await this.fetchEndpointDirect(proxyUrl);
+      return true;
+    } catch (e) {
+      console.warn('Login and query endpoint again', e.message);
+    }
+
+    // Show a login popup, then query for endpoint again.
+    try {
+      await this.showLoginPopup(proxyUrl);
+      await this.fetchEndpointDirect(proxyUrl);
+      return true;
+    } catch (e) {
+      console.warn('Error in login and query endpoint', e);
+      return false;
+    }
+  }
+
+  /**
+   * Query proxy using 'method=direct' for endpoint. We must include
+   * credentials (cookies) and cors in order to read the json response.
+   * This fetch request will succeed if we already have a valid ticket.
+   * Otherwise, the proxy server will redirect us to the login server which will
+   * fail with cors issues. In such a case, we will first attempt
+   * refreshTicket(), or finally showLoginPopup() and reattempt this function.
+   *
+   * @param {string} proxy Proxy url to connect to.
+   */
+  async fetchEndpointDirect(proxy) {
+    const url = `${proxy}&method=direct`;
+    const res = await fetch(url, {credentials: 'include'});
+    const text = await res.text();
+    // Skip the XSSI countermeasure.
+    if (!text.startsWith(")]}'\n")) {
+      throw Error(`Unknown response: ${text}`);
+    }
+    const params = JSON.parse(text.slice(5));
+    // Expecting format: {"endpoint": "sup-ssh-relay.corp.google.com:8046"}.
+    const endpoint = params['endpoint'];
+    if (endpoint) {
+      const [host, port] = endpoint.split(':');
+      this.io_.println(nassh.msg('FOUND_RELAY', [endpoint]));
+      const serverProtocol = this.useSecure ? 'https' : 'http';
+      const socketProtocol = this.useSecure ? 'wss' : 'ws';
+      this.relayServer = `${serverProtocol}://${endpoint}/`;
+      this.relayServerSocket = `${socketProtocol}://${endpoint}/`;
+      return;
+    }
+    throw new Error(params['error'] || 'No endpoint from ' + proxy);
+  }
+
+  /**
+   * Fetch from proxy in no-cors in order to allow redirects to
+   * login.corp.google.com where a valid master cookie will be used to issue
+   * a ticket.
+   *
+   * @param {string} proxy Proxy url to connect to.
+   */
+  async refreshTicket(proxy) {
+    const url = `${proxy}&method=direct`;
+    await fetch(url, {credentials: 'include', mode: 'no-cors'});
+  }
+
+  /**
+   * Open a popup window for the proxy with 'method=sendmessage'.  This will
+   * redirect to login.corp.google.com where users can reauthenticate (password,
+   * gnubby), and return back to the proxy with a valid ticket. By using
+   * 'method=sendmessage', the proxy will close the popup, and a subsequent
+   * call to fetchEndpointDirect() should succeed.
+   *
+   * @param {string} proxy Proxy url to connect to.
+   */
+  async showLoginPopup(proxy) {
+    const url = `${proxy}&method=close&origin=${
+        encodeURIComponent(window.location.origin)}`;
+    const width = 1000;
+    const height = 550;
+    const left = (screen.width - width) / 2;
+    const top = (screen.height - height) / 2;
+    const features =
+        `titlebar=no,width=${width},height=${height},top=${top},left=${left}`;
+    const popup = lib.f.openWindow(url, '_blank', features);
+    if (!popup) {
+      throw new Error('Could not create login popup');
+    }
+    // TODO(crbug.com/1253752): Update chrome.windows.onRemoved to work for
+    // non-extensions.
+    await new Promise((resolve) => {
+      const poll = window.setInterval(() => {
+        if (popup.closed) {
+          window.clearInterval(poll);
+          resolve();
+        }
+      }, 500);
+    });
   }
 };
 

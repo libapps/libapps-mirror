@@ -1334,6 +1334,13 @@ nassh.CommandInstance.postProcessOptions = function(
     rv = Object.assign({
       '--resume-connection': rv['--proxy-mode'] === 'corp-relay-v4@google.com',
     }, rv);
+
+    // Terminal-SSH must use method=direct since it does not allow redirects.
+    if (nassh.isCrOSSystemApp()) {
+      rv = Object.assign({
+        '--relay-method': 'direct',
+      }, rv);
+    }
   }
 
   // If the user specified an IPv6 address w/out brackets, add them.  It's not
