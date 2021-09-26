@@ -337,6 +337,21 @@ void _exit(int status) {
   abort();  // Can we chain to the real _exit?
 }
 
+int getgroups(int size, gid_t list[]) {
+  LOG_SYSCALL_STUB(0, "size=%i, list=%p", size, list);
+  return 0;
+}
+
+int setgroups(size_t size, const gid_t *list) {
+  LOG_SYSCALL_STUB(0, "size=%i, list=%p", size, list);
+  return 0;
+}
+
+int initgroups(const char *user, gid_t group) {
+  LOG_SYSCALL_STUB(0, "user=%s, group=%i", user, group);
+  return 0;
+}
+
 int seteuid(uid_t euid) {
   LOG_SYSCALL_STUB(0, "euid=%i", euid);
   return 0;

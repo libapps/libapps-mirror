@@ -28,6 +28,10 @@ pid_t getpgrp(void);
 #define setegid(...) 0
 #define setsid() 0
 
+#define getgroups(...) 0
+#define setgroups(...) 0
+#define initgroups(...) 0
+
 int execl(const char*, const char*, ...);
 int execlp(const char*, const char*, ...);
 int execv(const char*, char *const[]);
