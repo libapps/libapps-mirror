@@ -1,0 +1,216 @@
+--- a/channels.h
++++ b/channels.h
+@@ -196,9 +196,9 @@ struct Channel {
+ 
+ /* default window/packet sizes for tcp/x11-fwd-channel */
+ #define CHAN_SES_PACKET_DEFAULT	(32*1024)
+-#define CHAN_SES_WINDOW_DEFAULT	(64*CHAN_SES_PACKET_DEFAULT)
++#define CHAN_SES_WINDOW_DEFAULT	(4*CHAN_SES_PACKET_DEFAULT)
+ #define CHAN_TCP_PACKET_DEFAULT	(32*1024)
+-#define CHAN_TCP_WINDOW_DEFAULT	(64*CHAN_TCP_PACKET_DEFAULT)
++#define CHAN_TCP_WINDOW_DEFAULT	(4*CHAN_TCP_PACKET_DEFAULT)
+ #define CHAN_X11_PACKET_DEFAULT	(16*1024)
+ #define CHAN_X11_WINDOW_DEFAULT	(4*CHAN_X11_PACKET_DEFAULT)
+ 
+--- a/ssh.c
++++ b/ssh.c
+@@ -631,7 +631,12 @@ ssh_conn_info_free(struct ssh_conn_info *cinfo)
+  * Main program for the ssh client.
+  */
+ int
++#if defined(__pnacl__) || defined(__nacl__)
++ssh_main(int ac, char **av, const char *subsystem)
++#else
++#define subsystem NULL
+ main(int ac, char **av)
++#endif
+ {
+ 	struct ssh *ssh = NULL;
+ 	int i, r, opt, exit_status, use_syslog, direct, timeout_ms;
+@@ -1113,6 +1118,21 @@ main(int ac, char **av)
+ 	if ((command = sshbuf_new()) == NULL)
+ 		fatal("sshbuf_new failed");
+ 
++	if (subsystem) {
++		/*
++		 * Hijack the codeflow now that we're done parsing the command line.
++		 * We want all the flags, but none of the command line.  Unless they
++		 * passed in -s themselves.
++		 */
++		if (options.session_type == -1) {
++			options.session_type = SESSION_TYPE_SUBSYSTEM;
++			av = xcalloc(2, sizeof(*av));
++			av[0] = subsystem;
++			av[1] = NULL;
++			ac = 1;
++		}
++	}
++
+ 	/*
+ 	 * Save the command to execute on the remote host in a buffer. There
+ 	 * is no limit on the length of the command, except by the maximum
+
+We hack the agent code to use a fake IP address which the plugin watches for.
+We should have the plugin deal with AF_UNIX requests instead, then we won't
+have to hack up OpenSSH.
+
+--- a/authfd.c
++++ b/authfd.c
+@@ -90,13 +90,16 @@
+ ssh_get_authentication_socket_path(const char *authsocket, int *fdp)
+ {
+ 	int sock, oerrno;
+-	struct sockaddr_un sunaddr;
++	struct sockaddr_in sunaddr;
++
++	/* Magic value. Keep in sync with //ssh_client/src/file_system.cc */
++	static const int kSshAgentFakeIP = 0x7F010203;
+ 
+ 	memset(&sunaddr, 0, sizeof(sunaddr));
+-	sunaddr.sun_family = AF_UNIX;
+-	strlcpy(sunaddr.sun_path, authsocket, sizeof(sunaddr.sun_path));
++	sunaddr.sin_family = AF_INET;
++	sunaddr.sin_addr.s_addr = htonl(kSshAgentFakeIP);
+ 
+-	if ((sock = socket(AF_UNIX, SOCK_STREAM, 0)) == -1)
++	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) == -1)
+ 		return SSH_ERR_SYSTEM_ERROR;
+ 
+ 	/* close on exec */
+
+the bind_permitted() check doesn't work well in the nacl env.  leave it to the
+host os to do the actual check and deny/permit as makes sense.
+
+daemonized() relies on funcs we don't implement (because we don't need them),
+and this func is only used in sshd.  disable it to avoid link failures.
+
+subprocess() relies on execv funcs we don't implement.
+
+--- a/misc.c
++++ b/misc.c
+@@ -1894,6 +1894,7 @@ forward_equals(const struct Forward *a, const struct Forward *b)
+ 	return 1;
+ }
+ 
++#if !defined(__pnacl__) && !defined(__nacl__)
+ /* returns 1 if process is already daemonized, 0 otherwise */
+ int
+ daemonized(void)
+@@ -1911,6 +1912,7 @@ daemonized(void)
+ 	debug3("already daemonized");
+ 	return 1;
+ }
++#endif
+ 
+ 
+ /*
+@@ -2465,6 +2467,9 @@ opt_array_append(const char *file, const int line, const char *directive,
+ 	opt_array_append2(file, line, directive, array, NULL, lp, s, 0);
+ }
+ 
++#ifndef SA_RESTART
++#define SA_RESTART 0
++#endif
+ sshsig_t
+ ssh_signal(int signum, sshsig_t handler)
+ {
+@@ -2645,10 +2650,12 @@ subprocess(const char *tag, const char *command,
+ 			error("%s: dup2: %s", tag, strerror(errno));
+ 			_exit(1);
+ 		}
++#if !defined(__wasm__) && !defined(__pnacl__) && !defined(__nacl__)
+ 		if (env != NULL)
+ 			execve(av[0], av, env);
+ 		else
+ 			execv(av[0], av);
++#endif
+ 		error("%s %s \"%s\": %s", tag, env == NULL ? "execv" : "execve",
+ 		    command, strerror(errno));
+ 		_exit(127);
+
+add missing include
+https://lists.mindrot.org/pipermail/openssh-unix-dev/2021-March/039187.html
+
+--- a/misc.h
++++ b/misc.h
+@@ -15,6 +15,7 @@
+ #ifndef _MISC_H
+ #define _MISC_H
+ 
++#include <stdio.h>
+ #include <sys/time.h>
+ #include <sys/types.h>
+ #include <sys/socket.h>
+
+The pnacl toolchain doesn't provide realpath(), but does define the prototype.
+This messes up the local replacement logic.
+
+--- a/sftp-realpath.c
++++ b/sftp-realpath.c
+@@ -27,6 +27,8 @@
+  * SUCH DAMAGE.
+  */
+ 
++#define HAVE_REALPATH 1
++
+ #include "includes.h"
+ 
+ #include <sys/types.h>
+
+These statvfs defines might not exist.
+
+--- a/sftp-client.c
++++ b/sftp-client.c
+@@ -384,8 +384,13 @@ get_decode_statvfs(struct sftp_conn *conn, struct sftp_statvfs *st,
+ 	    (r = sshbuf_get_u64(msg, &st->f_namemax)) != 0)
+ 		fatal_fr(r, "parse statvfs");
+ 
++	st->f_flag = 0;
++#ifdef ST_RDONLY
+ 	st->f_flag = (flag & SSH2_FXE_STATVFS_ST_RDONLY) ? ST_RDONLY : 0;
++#endif
++#ifdef ST_NOSUID
+ 	st->f_flag |= (flag & SSH2_FXE_STATVFS_ST_NOSUID) ? ST_NOSUID : 0;
++#endif
+ 
+ 	sshbuf_free(msg);
+ 
+
+The pnacl toolchain lacks these standard defines.
+
+--- a/openbsd-compat/glob.c
++++ b/openbsd-compat/glob.c
+@@ -87,6 +87,10 @@
+ # undef TILDE
+ #endif
+ 
++#ifndef SSIZE_MAX
++#define SSIZE_MAX INT_MAX
++#endif
++
+ #define	DOLLAR		'$'
+ #define	DOT		'.'
+ #define	EOS		'\0'
+
+https://crbug.com/1208926
+Our NaCl filesystem emulation is too simple to support the hostkey update logic.
+We stub out stat() & unlink() which makes it fail.  Turn the default back off in
+the newer releases.
+
+--- a/readconf.c
++++ b/readconf.c
+@@ -2392,12 +2392,14 @@
+ 		    xstrdup(_PATH_SSH_SYSTEM_HOSTFILE2);
+ 	}
+ 	if (options->update_hostkeys == -1) {
++#if !defined(__pnacl__) && !defined(__nacl__)
+ 		if (options->verify_host_key_dns <= 0 &&
+ 		    (options->num_user_hostfiles == 0 ||
+ 		    (options->num_user_hostfiles == 1 && strcmp(options->
+ 		    user_hostfiles[0], _PATH_SSH_USER_HOSTFILE) == 0)))
+ 			options->update_hostkeys = SSH_UPDATE_HOSTKEYS_YES;
+ 		else
++#endif
+ 			options->update_hostkeys = SSH_UPDATE_HOSTKEYS_NO;
+ 	}
+ 	if (options->num_user_hostfiles == 0) {
