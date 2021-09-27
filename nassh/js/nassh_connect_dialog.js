@@ -27,9 +27,6 @@ nassh.ConnectDialog = function(messagePort) {
     ary[i].setAttribute('spellcheck', 'false');
   }
 
-  // The Message Manager instance, null until the messages have loaded.
-  this.mm_ = null;
-
   // The nassh global pref manager.
   this.prefs_ = new nassh.PreferenceManager();
   this.localPrefs_ = new nassh.LocalPreferenceManager();
@@ -140,17 +137,11 @@ nassh.ConnectDialog.ProfileRecord = function(id, prefs, textContent) {
  * This converts all message name to UPPER_AND_UNDER format, since that's
  * pretty handy in the connect dialog.
  *
- * @this {nassh.ConnectDialog}
- * @param {string} name
- * @param {!Object=} args
+ * @param {string} name The name of the message to return.
  * @return {string}
  */
-nassh.ConnectDialog.prototype.msg = function(name, args) {
-  if (!this.mm_) {
-    return 'loading...';
-  }
-
-  return this.mm_.get(name.toUpperCase().replace(/-/g, '_'), args);
+nassh.ConnectDialog.prototype.msg = function(name) {
+  return nassh.msg(name.toUpperCase().replace(/-/g, '_'));
 };
 
 /**
@@ -580,8 +571,8 @@ nassh.ConnectDialog.prototype.maybeCopyPlaceholders_ = function() {
 nassh.ConnectDialog.prototype.maybeCopyPlaceholder_ = function(fieldName) {
   const field = this.$f(fieldName);
   const placeholder = field.getAttribute('placeholder');
-  if (!field.value && placeholder != this.msg('FIELD_' + fieldName +
-                                              '_PLACEHOLDER')) {
+  if (!field.value &&
+      placeholder != this.msg(`FIELD_${fieldName}_PLACEHOLDER`)) {
     field.value = placeholder;
   }
 };
@@ -628,7 +619,7 @@ nassh.ConnectDialog.prototype.updateDetailPlaceholders_ = function() {
   ].forEach((name) => {
     let value = ary.shift();
     if (!value) {
-      value = this.msg('FIELD_' + name + '_PLACEHOLDER');
+      value = this.msg(`FIELD_${name}_PLACEHOLDER`);
     }
 
     this.$f(name, 'placeholder', value);
@@ -1290,8 +1281,7 @@ nassh.ConnectDialog.prototype.onMessageName_ = {};
  * @param {!Object} info
  */
 nassh.ConnectDialog.prototype.onMessageName_['terminal-info'] = function(info) {
-  this.mm_ = new lib.MessageManager(info.acceptLanguages);
-  this.mm_.processI18nAttributes(document.body);
+  hterm.messageManager.processI18nAttributes(document.body);
   this.updateDetailPlaceholders_();
   this.updateDescriptionPlaceholder_();
 
