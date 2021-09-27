@@ -60,9 +60,10 @@ nassh.Relay = class {
    * If we have just come back from the cookie server, then we'll return true.
    *
    * @abstract
-   * @return {boolean} Whether we're ready (true), or we need a redirect.
+   * @return {!Promise<boolean>} Whether we're ready (true), or we need a
+   *     redirect.
    */
-  init() {}
+  async init() {}
 
   /**
    * Return an nassh.Stream object that will handle the socket stream

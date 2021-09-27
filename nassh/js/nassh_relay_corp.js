@@ -73,7 +73,7 @@ nassh.relay.Corp = class extends nassh.Relay {
   }
 
   /** @inheritDoc */
-  init() {
+  async init() {
     const resumePath = this.location.href.substr(this.location.origin.length);
 
     // This session storage item is created by /html/nassh_google_relay.html

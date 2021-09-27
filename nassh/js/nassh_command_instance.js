@@ -906,7 +906,7 @@ nassh.CommandInstance.prototype.sftpConnectToDestination = function(
  * @param {function(!Object, !Object)=} finalize Call this instead of the
  *     normal connectToFinalize_.
  */
-nassh.CommandInstance.prototype.connectTo = function(params, finalize) {
+nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
   if (params.hostname == '>crosh') {
     // TODO: This should be done better.
     const template = 'crosh.html?profile=%encodeURIComponent(terminalProfile)';
@@ -1061,7 +1061,7 @@ nassh.CommandInstance.prototype.connectTo = function(params, finalize) {
     this.io.println(nassh.msg(
         'FOUND_RELAY',
         [`${this.relay_.proxyHost}:${this.relay_.proxyPort}`]));
-    this.relay_.init();
+    await this.relay_.init();
   } else if (options['--proxy-mode'] == 'corp-relay@google.com' ||
              options['--proxy-mode'] == 'corp-relay-v4@google.com') {
     if (options['--proxy-mode'] == 'corp-relay@google.com') {
@@ -1080,7 +1080,7 @@ nassh.CommandInstance.prototype.connectTo = function(params, finalize) {
 
     if (params.relayState !== undefined) {
       this.relay_.loadState(params.relayState);
-    } else if (!this.relay_.init()) {
+    } else if (!await this.relay_.init()) {
       // A false return value means we have to redirect to complete
       // initialization.  Bail out of the connect for now.  We'll resume it
       // when the relay is done with its redirect.

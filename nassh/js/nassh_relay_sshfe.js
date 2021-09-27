@@ -27,7 +27,7 @@ nassh.relay.Sshfe = class extends nassh.Relay {
   }
 
   /** @inheritDoc */
-  init() {
+  async init() {
     // Most init happens in the stream below.
     return true;
   }
