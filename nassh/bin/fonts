@@ -29,7 +29,7 @@ FONTS_DIR = nassh.DIR / 'fonts'
 def fonts_update():
     """Download & update our copy of fonts."""
     libdot.download_tarball(f'fonts-{FONTS_HASH}.tar.xz', FONTS_BASE_URI,
-            FONTS_DIR, FONTS_HASH)
+                            FONTS_DIR, FONTS_HASH)
 
 
 def get_parser():
