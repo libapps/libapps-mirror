@@ -390,6 +390,10 @@ def main(argv):
     parser = get_parser()
     opts = parser.parse_args(argv)
 
+    if opts.action == 'download':
+        download(opts.version)
+        return
+
     prop_db = load_proplist()
     uni_db = load_unicode_data()
     cjk_db = load_east_asian()
@@ -400,9 +404,7 @@ def main(argv):
         ('lib.wc.ambiguous', js_dumps(gen_east_asian_ambiguous(cjk_db))),
     )
 
-    if opts.action == 'download':
-        download(opts.version)
-    elif opts.action == 'print':
+    if opts.action == 'print':
         for name, text in tables:
             print(name + ' = ' + text)
     else:
