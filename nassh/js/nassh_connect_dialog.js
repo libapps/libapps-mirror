@@ -558,9 +558,8 @@ nassh.ConnectDialog.prototype.maybeCopyPlaceholders_ = function() {
 nassh.ConnectDialog.prototype.maybeCopyPlaceholder_ = function(fieldName) {
   const field = this.$f(fieldName);
   const placeholder = field.getAttribute('placeholder');
-  if (!field.value &&
-      placeholder !=
-          nassh.msg(`FIELD_${fieldName.toUpperCase()}_PLACEHOLDER`)) {
+  if (!field.value && placeholder != nassh.msg('FIELD_' + fieldName +
+                                              '_PLACEHOLDER')) {
     field.value = placeholder;
   }
 };
@@ -607,7 +606,7 @@ nassh.ConnectDialog.prototype.updateDetailPlaceholders_ = function() {
   ].forEach((name) => {
     let value = ary.shift();
     if (!value) {
-      value = nassh.msg(`FIELD_${name.toUpperCase()}_PLACEHOLDER`);
+      value = nassh.msg('FIELD_' + name + '_PLACEHOLDER');
     }
 
     this.$f(name, 'placeholder', value);
