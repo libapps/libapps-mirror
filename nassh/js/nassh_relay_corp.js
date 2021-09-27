@@ -137,18 +137,29 @@ nassh.relay.Corp = class extends nassh.Relay {
     this.relayServerSocket = state.relayServerSocket;
   }
 
+  /**
+   * Return nassh.Stream class to use.
+   *
+   * @return {function(new:nassh.Stream, number, ?)}
+   */
+  getStreamClass() {
+    return this.useWebsocket ? nassh.Stream.RelayCorpWS :
+                               nassh.Stream.RelayCorpXHR;
+  }
+
   /** @inheritDoc */
   openSocket(fd, host, port, streams, onOpen) {
-    const streamClass = this.useWebsocket ? nassh.Stream.RelayCorpWS :
-                                            nassh.Stream.RelayCorpXHR;
     const options = {
       io: this.io_,
-      relay: this,
+      relayServer: this.relayServer,
+      relayServerSocket: this.relayServerSocket,
+      reportConnectAttempts: this.reportConnectAttempts,
+      reportAckLatency: this.reportAckLatency,
       host: host,
       port: port,
       resume: this.resumeConnection,
     };
-    return streams.openStream(streamClass, fd, options, onOpen);
+    return streams.openStream(this.getStreamClass(), fd, options, onOpen);
   }
 };
 

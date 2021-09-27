@@ -24,7 +24,10 @@ nassh.Stream.RelayCorp = function(fd) {
   this.io_ = null;
   this.host_ = null;
   this.port_ = null;
-  this.relay_ = null;
+  this.relayServer_ = null;
+  this.relayServerSocket_ = null;
+  this.reportConnectAttempts_ = false;
+  this.reportAckLatency_ = false;
 
   this.sessionID_ = null;
 
@@ -58,7 +61,10 @@ nassh.Stream.RelayCorp.constructor = nassh.Stream.RelayCorp;
  */
 nassh.Stream.RelayCorp.prototype.asyncOpen = function(settings, onComplete) {
   this.io_ = settings.io;
-  this.relay_ = settings.relay;
+  this.relayServer_ = settings.relayServer;
+  this.relayServerSocket_ = settings.relayServerSocket;
+  this.reportConnectAttempts_ = settings.reportConnectAttempts;
+  this.reportAckLatency_ = settings.reportAckLatency;
   this.host_ = settings.host;
   this.port_ = settings.port;
   this.resume_ = settings.resume;
@@ -84,9 +90,10 @@ nassh.Stream.RelayCorp.prototype.asyncOpen = function(settings, onComplete) {
     onComplete(true);
   };
 
-  sessionRequest.open('GET', this.relay_.relayServer +
-                      'proxy?host=' + this.host_ + '&port=' + this.port_,
-                      true);
+  sessionRequest.open(
+      'GET',
+      `${this.relayServer_}proxy?host=${this.host_}&port=${this.port_}`,
+      true);
   sessionRequest.withCredentials = true;  // We need to see cookies for /proxy.
   sessionRequest.onabort = sessionRequest.ontimeout =
       sessionRequest.onerror = onError;
@@ -251,8 +258,10 @@ nassh.Stream.RelayCorpXHR.prototype.resumeRead_ = function() {
     return;
   }
 
-  this.readRequest_.open('GET', this.relay_.relayServer + 'read?sid=' +
-                         this.sessionID_ + '&rcnt=' + this.readCount_, true);
+  this.readRequest_.open(
+      'GET',
+      `${this.relayServer_}read?sid=${this.sessionID_}&rcnt=${this.readCount_}`,
+      true);
   this.readRequest_.send();
 };
 
@@ -275,9 +284,11 @@ nassh.Stream.RelayCorpXHR.prototype.sendWrite_ = function() {
   const dataBuffer = this.writeBuffer_.read(this.maxMessageLength);
   const data = nassh.base64ToBase64Url(btoa(
       lib.codec.codeUnitArrayToString(dataBuffer)));
-  this.writeRequest_.open('GET', this.relay_.relayServer +
-                          'write?sid=' + this.sessionID_ +
-                          '&wcnt=' + this.writeCount_ + '&data=' + data, true);
+  this.writeRequest_.open(
+      'GET',
+      `${this.relayServer_}write?sid=${this.sessionID_}&wcnt=${
+          this.writeCount_}&data=${data}`,
+      true);
   this.writeRequest_.send();
   this.lastWriteSize_ = dataBuffer.length;
 };
@@ -425,11 +436,9 @@ nassh.Stream.RelayCorpWS.prototype.resumeRead_ = function() {
   }
 
   if (this.sessionID_ && !this.socket_) {
-    let uri = this.relay_.relayServerSocket +
-        'connect?sid=' + this.sessionID_ +
-        '&ack=' + (this.readCount_ & 0xffffff) +
-        '&pos=' + (this.writeCount_ & 0xffffff);
-    if (this.relay_.reportConnectAttempts) {
+    let uri = `${this.relayServerSocket_}connect?sid=${this.sessionID_}&ack=${
+        this.readCount_ & 0xffffff}&pos=${this.writeCount_ & 0xffffff}`;
+    if (this.reportConnectAttempts_) {
       uri += '&try=' + ++this.connectCount_;
     }
     this.socket_ = new WebSocket(uri);
@@ -466,7 +475,7 @@ nassh.Stream.RelayCorpWS.prototype.recordAckTime_ = function(deltaTime) {
     }
     average /= this.ackTimes_.length;
 
-    if (this.relay_.reportAckLatency) {
+    if (this.reportAckLatency_) {
       // Report observed average to relay.
       // Send this meta-data as string vs. the normal binary payloads.
       const msg = 'A:' + Math.round(average);
