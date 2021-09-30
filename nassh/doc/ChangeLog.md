@@ -1,3 +1,17 @@
+# 0.42, 2021-10-01, OpenSSH 8.7p1, Unicode 14.0.
+
+* corp relay: Add support for direct relay used by terminal.
+* relays: Change nassh.Relay.init to async.
+* corp relay v4: Remove duplicate logic in nassh_relay_corpv4.js.
+* l10n: Use hterm.messageManager and nassh.msg() in ConnectDialog.
+* ssh_client: Add groups stubs.
+* ssh_client: Update to openssh-8.7.
+* plugin: Download latest plugin from gcs to be used in crosh dist.
+* nassh: Add support to run nassh inside Terminal SWA.
+* popup: Open connection dialog on fresh installs.
+* mosh: Switch label to plain ASCII.
+* Move reconnect dialog to overlay popup.
+
 # 0.41, 2021-05-19, OpenSSH 8.6p1.
 
 * ssh_client: wasi-sdk: Update to 12.0 release.
