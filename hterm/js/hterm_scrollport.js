@@ -1124,12 +1124,13 @@ hterm.ScrollPort.prototype.measureCharacterSize = function(weight = '') {
   }
   const context = ruler.getContext('2d');
   context.font = `${weight} ${this.getFontSize()}px ${this.getFontFamily()}`;
-  const metrics = context.measureText('\u{2588}');
+  const heightBox = context.measureText('X\u{2588}');
   const ascent =
-      metrics.actualBoundingBoxAscent || metrics.fontBoundingBoxAscent;
+      heightBox.actualBoundingBoxAscent || heightBox.fontBoundingBoxAscent;
   const descent =
-      metrics.actualBoundingBoxDescent || metrics.fontBoundingBoxDescent;
-  return new hterm.Size(metrics.width, ascent + descent);
+      heightBox.actualBoundingBoxDescent || heightBox.fontBoundingBoxDescent;
+  const widthBox = context.measureText('X');
+  return new hterm.Size(widthBox.width, ascent + descent);
 };
 
 /**
