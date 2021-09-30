@@ -40,35 +40,21 @@ nassh.isCrOSSystemApp = function() {
 
 /**
  * Modify if nassh is running within Chrome OS Terminal System App. We will
- * use lib.Storage.TerminalPrivate as the default storage, and my load messages
- * via XHR, and polyfill chrome.runtime.getManifest().
+ * use lib.Storage.TerminalPrivate as the default storage, load messages via
+ * XHR, and polyfill chrome.runtime.getManifest().
  */
 nassh.setupForWebApp = function() {
-  // We can detect that we are running in CrOS Terminal app when
-  // chrome.terminalPrivate API exists, and when window.type is 'app' rather
-  // than 'popup' or 'normal'. If so, use Storage.TerminalPrivate() for prefs.
-  lib.registerInit('terminal-private-storage', () => {
-    if (chrome.terminalPrivate) {
-      return new Promise((resolve) => {
-        chrome.windows.getCurrent((w) => {
-          if (w.type === 'app') {
-            hterm.defaultStorage = new lib.Storage.TerminalPrivate();
-          }
-          resolve();
-        });
-      });
-    }
-  });
-
-  // Only load messages and polyfill chrome.runtime.getManifest() if we are
-  // not running as an extension.
+  // Modifications if running as Chrome OS Terminal SWA.
   if (nassh.isCrOSSystemApp()) {
+    lib.registerInit('terminal-private-storage', () => {
+      hterm.defaultStorage = new lib.Storage.TerminalPrivate();
+    });
     lib.registerInit('messages', nassh.loadMessages);
     if (chrome && chrome.runtime && !chrome.runtime.getManifest) {
       chrome.runtime.getManifest = () => {
         return /** @type {!chrome.runtime.Manifest} */ ({
-          'name': 'Terminal',
-          'version': 'system',
+          'name': 'SSH',
+          'version': '',
           'icons': {'192': '/images/dev/crostini-192.png'},
         });
       };
