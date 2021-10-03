@@ -361,7 +361,8 @@ nassh.sftp.Client.prototype.init = async function() {
   packet.setUint8(nassh.sftp.packets.RequestPackets.INIT);
   packet.setUint32(this.protocolClientVersion);
 
-  return new Promise((resolve, reject) => {
+  // Get through the initial init handshake.
+  await new Promise((resolve, reject) => {
     this.pendingRequests_['init'] = (packet) => {
       console.log('init: SFTP');
       this.protocolServerVersion = packet.version;
@@ -373,14 +374,6 @@ nassh.sftp.Client.prototype.init = async function() {
         return;
       }
 
-      // See if the server is OpenSSH.  Checking for this particular protocol
-      // extension isn't an exact match, but should be good enough for now.
-      if (this.protocolServerExtensions['fstatvfs@openssh.com'] == '2') {
-        // See the comments for this class constant for details.
-        this.readChunkSize = 64 * 1024;
-        this.writeChunkSize = 255 * 1024;
-      }
-
       this.isInitialised = true;
 
       resolve();
@@ -388,6 +381,15 @@ nassh.sftp.Client.prototype.init = async function() {
 
     this.sendToPlugin_('onRead', [0, packet.toArrayBuffer()]);
   });
+
+  // See the comments for these class constants for details.
+  const limits = await this.queryLimits();
+  if (limits.maxReadLength) {
+    this.readChunkSize = limits.maxReadLength;
+  }
+  if (limits.maxWriteLength) {
+    this.writeChunkSize = limits.maxWriteLength;
+  }
 };
 
 /**
@@ -864,6 +866,39 @@ nassh.sftp.Client.prototype.removeFile = function(path) {
     .then((response) => this.isSuccessResponse_(response, 'REMOVE'));
 };
 
+/**
+ * Retrieves server limits for the connection.
+ *
+ * @return {!Promise<!nassh.sftp.packets.LimitsPacket>} A Promise that resolves
+ *     with the server limits, or rejects (usually with a
+ *     nassh.sftp.StatusError).
+ */
+nassh.sftp.Client.prototype.queryLimits = function() {
+  if (this.protocolServerExtensions['limits@openssh.com'] !== '1') {
+    // If the extension is not supported, try and guess if it's OpenSSH.  We
+    // probably want to drop this one day (like when OpenSSH 8.5 from Mar 2021
+    // is widely deployed).  Let's say keep it until Mar 2025?
+    if (this.protocolServerExtensions['fstatvfs@openssh.com'] == '2') {
+      // See if the server is OpenSSH.  Checking for this particular protocol
+      // extension isn't an exact match, but should be good enough for now.
+      return Promise.resolve(/** @type {!nassh.sftp.packets.LimitsPacket} */ ({
+        maxReadLength: 64 * 1024,
+        maxWriteLength: 255 * 1024,
+      }));
+    }
+
+    // The caller can figure it out.
+    return Promise.resolve();
+  }
+
+  const packet = new nassh.sftp.Packet();
+  return this.sendRequest_('limits@openssh.com', packet)
+    .then((response) => {
+      return this.isExpectedResponse_(
+          response, nassh.sftp.packets.ExtendedReplyPacket, 'LIMITS');
+    })
+    .then((response) => new nassh.sftp.packets.LimitsPacket(response));
+};
 
 /**
  * Renames the path name of a remote file.

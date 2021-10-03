@@ -145,6 +145,22 @@ nassh.sftp.packets.DiskFreePacket = function(packet) {
 };
 
 /**
+ * SFTP response to limits@openssh.com packets.
+ *
+ * @param {!nassh.sftp.packets.ExtendedReplyPacket} packet The extended reply.
+ * @constructor
+ * @extends {nassh.sftp.Packet}
+ */
+nassh.sftp.packets.LimitsPacket = function(packet) {
+  const p = packet.rawPacket;
+  this.requestId = packet.requestId;
+  this.maxPacketLength = p.getUint64();
+  this.maxReadLength = p.getUint64();
+  this.maxWriteLength = p.getUint64();
+  this.maxOpenHandles = p.getUint64();
+};
+
+/**
  * Make sure the name conforms to the specification.
  *
  * The SFTP RFC defines the extension-name format:

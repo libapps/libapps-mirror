@@ -172,6 +172,34 @@ it('sftpAttrsPacket', () => {
 });
 
 /**
+ * Verify basic LimitsPacket deserialization.
+ */
+it('sftpLimitsPacket', () => {
+  const dataPacket = new nassh.sftp.Packet([
+      // 32-bit request id.
+      0x01, 0x02, 0x03, 0x04,
+      // 64-bit max packet length.
+      0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00,
+      // 64-bit max read length.
+      0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0xfc, 0x00,
+      // 64-bit max write length.
+      0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0xfd, 0x00,
+      // 64-bit max open handles.
+      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0xfb,
+  ]);
+
+  const extPacket = new nassh.sftp.packets.ExtendedReplyPacket(dataPacket);
+  const packet = new nassh.sftp.packets.LimitsPacket(extPacket);
+
+  // Check the fields.
+  assert.equal(0x01020304, packet.requestId);
+  assert.equal(262144, packet.maxPacketLength);
+  assert.equal(261120, packet.maxReadLength);
+  assert.equal(261376, packet.maxWriteLength);
+  assert.equal(1019, packet.maxOpenHandles);
+});
+
+/**
  * Verify basic VersionPacket deserialization.
  */
 it('sftpVersionPacket', () => {
