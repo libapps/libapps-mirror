@@ -218,10 +218,11 @@ nassh.sftp.Client.prototype.onPacket = function(packet) {
  * Initializes SFTP connection.
  *
  * @param {!HTMLEmbedElement} plugin
+ * @return {!Promise<void>} Resolves when connection is ready to use.
  */
-nassh.sftp.Client.prototype.initConnection = function(plugin) {
+nassh.sftp.Client.prototype.initConnection = async function(plugin) {
   this.plugin_ = plugin;
-  this.init();
+  return this.init();
 };
 
 /**
@@ -351,38 +352,37 @@ nassh.sftp.Client.prototype.isNameResponse_ = function(responsePacket,
 
 /**
  * Sends a SFTP init packet.
+ *
+ * @return {!Promise<void>} Resolves when initialization is finished.
  */
-nassh.sftp.Client.prototype.init = function() {
+nassh.sftp.Client.prototype.init = async function() {
   const packet = new nassh.sftp.Packet();
   packet.setUint32(5); // length, 5 bytes for type and version fields
   packet.setUint8(nassh.sftp.packets.RequestPackets.INIT);
   packet.setUint32(this.protocolClientVersion);
 
-  this.pendingRequests_['init'] = (packet) => {
-    console.log('init: SFTP');
-    this.onInit();
-    this.protocolServerVersion = packet.version;
-    this.protocolServerExtensions = packet.extensions;
+  return new Promise((resolve, reject) => {
+    this.pendingRequests_['init'] = (packet) => {
+      console.log('init: SFTP');
+      this.protocolServerVersion = packet.version;
+      this.protocolServerExtensions = packet.extensions;
 
-    // See if the server is OpenSSH.  Checking for this particular protocol
-    // extension isn't an exact match, but should be good enough for now.
-    if (this.protocolServerExtensions['fstatvfs@openssh.com'] == '2') {
-      // See the comments for this class constant for details.
-      this.readChunkSize = 64 * 1024;
-      this.writeChunkSize = 255 * 1024;
-    }
+      // See if the server is OpenSSH.  Checking for this particular protocol
+      // extension isn't an exact match, but should be good enough for now.
+      if (this.protocolServerExtensions['fstatvfs@openssh.com'] == '2') {
+        // See the comments for this class constant for details.
+        this.readChunkSize = 64 * 1024;
+        this.writeChunkSize = 255 * 1024;
+      }
 
-    this.isInitialised = true;
-  };
-  this.sendToPlugin_('onRead', [0, packet.toArrayBuffer()]);
+      this.isInitialised = true;
+
+      resolve();
+    };
+
+    this.sendToPlugin_('onRead', [0, packet.toArrayBuffer()]);
+  });
 };
-
-
-/**
- * Callback for users when we finished initialization.
- */
-nassh.sftp.Client.prototype.onInit = function() {};
-
 
 /**
  * Retrieves status information for a remote file.

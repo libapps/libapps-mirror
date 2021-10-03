@@ -545,7 +545,7 @@ nassh.CommandInstance.prototype.mountProfile = function(profileID) {
     this.isMount = true;
     this.isSftp = true;
     const params = this.prefsToConnectParams_(prefs);
-    this.connectTo(params, () => {
+    this.connectTo(params, async () => {
       if (this.relay_) {
         params.relayState = this.relay_.saveState();
       }
@@ -903,8 +903,8 @@ nassh.CommandInstance.prototype.sftpConnectToDestination = function(
  *
  * @param {!Object} params The various connection settings setup via the
  *     prefsToConnectParams_ helper.
- * @param {function(!Object, !Object)=} finalize Call this instead of the
- *     normal connectToFinalize_.
+ * @param {function(!Object, !Object): !Promise<void>=} finalize Call this
+ *     instead of the normal connectToFinalize_.
  */
 nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
   if (params.hostname == '>crosh') {
@@ -1128,7 +1128,8 @@ nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
  *    prefsToConnectParams_ helper.
  * @param {!Object} options The nassh specific options.
  */
-nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
+nassh.CommandInstance.prototype.connectToFinalize_ = async function(
+    params, options) {
   // Make sure the selected ssh-client version is somewhat valid.
   if (options['--ssh-client-version']) {
     this.sshClientVersion_ = options['--ssh-client-version'];
@@ -1231,7 +1232,7 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
         backendIDs, this.io.terminal_, forwardAgent);
   }
 
-  this.initPlugin_(() => {
+  this.initPlugin_(async () => {
     this.terminalWindow.addEventListener('beforeunload', this.onBeforeUnload_);
 
     this.io.println(nassh.msg('CONNECTING',
@@ -1239,9 +1240,13 @@ nassh.CommandInstance.prototype.connectToFinalize_ = function(params, options) {
 
     this.sendToPlugin_('startSession', [argv]);
     if (this.isSftp) {
-      this.sftpClient.initConnection(this.plugin_);
-      this.sftpClient.onInit = this.onSftpInitialised.bind(
-          this, params.sftpCallback);
+      try {
+        await this.sftpClient.initConnection(this.plugin_);
+        this.onSftpInitialised(params.sftpCallback);
+      } catch (e) {
+        this.io.println(nassh.msg('NASFTP_ERROR_MESSAGE', [e]));
+        this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+      }
     }
   });
 };
