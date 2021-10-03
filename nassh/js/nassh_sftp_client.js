@@ -367,6 +367,12 @@ nassh.sftp.Client.prototype.init = async function() {
       this.protocolServerVersion = packet.version;
       this.protocolServerExtensions = packet.extensions;
 
+      // Make sure the version matches what we support.
+      if (this.protocolServerVersion != this.protocolClientVersion) {
+        reject(`SFTPv${this.protocolServerVersion} not supported`);
+        return;
+      }
+
       // See if the server is OpenSSH.  Checking for this particular protocol
       // extension isn't an exact match, but should be good enough for now.
       if (this.protocolServerExtensions['fstatvfs@openssh.com'] == '2') {
