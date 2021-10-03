@@ -598,10 +598,22 @@ nasftp.Cli.prototype.onTabKey_ = function() {
       // More than one match -- show them all.
       this.terminal.ringBell();
       this.io.println('');
-      matches.forEach((complete) => {
-        this.io.print(`${complete}   `);
+      // Figure out the max width of the matches so we can print them all in
+      // tidy columns.  They're currently sorted left-to-right rather than
+      // top-to-bottom as it's easier (read: lazier) to do it this way.
+      const maxWidth = matches.reduce((a, b) => Math.max(a, b.length), 0) + 3;
+      const perLine = Math.floor(this.terminal.screenSize.width / maxWidth);
+      let lineCount = 0;
+      matches.sort().forEach((complete) => {
+        this.io.print(complete.padEnd(maxWidth));
+        if (++lineCount >= perLine) {
+          this.io.println('');
+          lineCount = 0;
+        }
       });
-      this.io.println('');
+      if (lineCount) {
+        this.io.println('');
+      }
       this.showPrompt_();
       this.io.print(this.stdin_);
       break;
