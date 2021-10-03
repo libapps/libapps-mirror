@@ -1540,7 +1540,7 @@
 				"example": "3"
 			},
 			"SERVERVER": {
-				"content": "$1",
+				"content": "$2",
 				"example": "3"
 			}
 		}
