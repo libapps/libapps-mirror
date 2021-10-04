@@ -19,7 +19,7 @@ PLUGIN_HASH = 'd3f2c65de66cfb785b89de1e857c912897923ffd7205b78f806c5e31650743a1'
 # pylint: enable=line-too-long
 
 # Bucket maintained by us.
-PLUGIN_VERSION = 0.41
+PLUGIN_VERSION = 0.42
 PLUGIN_GS_FRAGMENT = 'chromeos-localmirror/secureshell/releases'
 PLUGIN_BASE_URI = f'https://storage.googleapis.com/{PLUGIN_GS_FRAGMENT}'
 

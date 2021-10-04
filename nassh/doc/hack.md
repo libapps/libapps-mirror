@@ -55,8 +55,8 @@ $ cp -a output/hterm/plugin/ ../nassh/
 2. Grab a different release.  For example:
 ```
 # In the nassh/ directory.
-$ wget https://commondatastorage.googleapis.com/chromeos-localmirror/secureshell/releases/0.27.tar.xz
-$ tar -xvf 0.27.tar.xz plugin/
+$ wget https://commondatastorage.googleapis.com/chromeos-localmirror/secureshell/releases/0.42.tar.xz
+$ tar -xvf 0.42.tar.xz plugin/
 ```
 
 3. Copy the `plugin/` directory from the latest version of Secure Shell.
