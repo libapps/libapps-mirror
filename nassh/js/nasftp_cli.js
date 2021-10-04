@@ -549,6 +549,77 @@ nasftp.Cli.prototype.onBackspaceKey_ = function() {
 };
 
 /**
+ * @typedef {{
+ *   arg: string,
+ *   matches: !Array<string>,
+ *   skip: (number|undefined),
+ * }}
+ */
+nasftp.Cli.Completion;
+
+/**
+ * Complete a CLI command.
+ *
+ * Match partial command names like "he" into "help".
+ *
+ * @param {string} input The argument to complete.
+ * @return {!nasftp.Cli.Completion} The set of commands that matcht he input.
+ */
+nasftp.Cli.prototype.completeCommand_ = function(input) {
+  const matches = [];
+  for (const command in this.commands_) {
+    // Hack: don't expand internal commands unless explicitly requested.
+    if (input.length == 0 && command.startsWith('_')) {
+      continue;
+    }
+
+    // Add commands that match the user's input.
+    if (command.startsWith(input)) {
+      matches.push(command);
+    }
+  }
+  return /** @type {!nasftp.Cli.Completion} */ ({arg: input, matches});
+};
+
+/**
+ * Complete CLI options.
+ *
+ * Display all valid short options for this particular command.  If the option
+ * has already been used, it will not be suggested.  If the arguments include
+ * --, then processing halts and no matches will suggested.  If a non-option
+ * argument is encountered, we also stop processing.
+ *
+ * @param {!Array<string>} args The current command line arguments.
+ * @param {string} opts The valid short options.
+ * @return {?nasftp.Cli.Completion} The short options that match.
+ */
+nasftp.Cli.prototype.completeCommandOptions_ = function(args, opts) {
+  // Walk the args the user has already provided and pull out options.
+  const matches = new Set(opts.split(''));
+
+  for (let i = 1; i < args.length; ++i) {
+    const arg = args[i];
+    // Stop parsing at -- to delimit options from arguments.
+    if (arg == '--') {
+      return null;
+    }
+
+    // If this isn't an option, assume everything remaining is also not.
+    if (arg[0] != '-') {
+      return null;
+    }
+
+    // Record these options so we don't suggest them as completions.
+    arg.substr(1).split('').forEach((c) => matches.delete(c));
+  }
+
+  return /** @type {!nasftp.Cli.Completion} */ ({
+    arg: args[args.length - 1],
+    matches: Array.from(matches).sort().map((opt) => `-${opt}`),
+  });
+};
+
+/**
  * Callback for handling autocomplete matches.
  *
  * @return {!hterm.Keyboard.KeyActions}
@@ -559,26 +630,83 @@ nasftp.Cli.prototype.onTabKey_ = function() {
     return hterm.Keyboard.KeyActions.CANCEL;
   }
 
-  // Autocomplete.  We support the first word only currently.
-  const ary = this.stdin_.split(/\s+/);
-  if (ary.length != 1) {
-    return hterm.Keyboard.KeyActions.CANCEL;
+  // Since hterm does not support async callbacks, we handle it ourselves by
+  // holding any further input until we finish processing.
+  this.holdInput_ = true;
+  this.completeInputBuffer_(this.stdin_)
+    .then(({arg, matches, skip}) => {
+      return this.completeFinishMatches_(arg, matches, skip);
+    })
+    .finally(() => this.holdInput_ = false);
+
+  return hterm.Keyboard.KeyActions.CANCEL;
+};
+
+/**
+ * Find possible completions for a command line.
+ *
+ * This takes care of tokenizing and dispatching to the right subcompleter
+ * depending on what part of the command line the user is completing.
+ *
+ * @param {string} buffer The command line to complete.
+ * @return {!Promise<?nasftp.Cli.Completion>} Completion results.
+ */
+nasftp.Cli.prototype.completeInputBuffer_ = async function(buffer) {
+  // Autocomplete based on the position in the command.
+  const ary = buffer.split(/\s+/);
+  let input;
+  if (ary.length === 1) {
+    // Complete the first arg which is the command.
+    input = ary[0];
+    return this.completeCommand_(input);
   }
 
-  // See what matches are available.
-  const matches = [];
-  const usercmd = ary[0];
-  for (const command in this.commands_) {
-    // Hack: don't expand internal commands unless explicitly requested.
-    if (usercmd.length == 0 && command.startsWith('_')) {
-      continue;
+  // Support completing of command arguments.
+  const cmd = ary[0];
+  if (!this.commands_.hasOwnProperty(cmd)) {
+    // Unknown command.
+    return {arg: cmd, matches: []};
+  }
+
+  // If the command has an option completer, run it.
+  const handler = this.commands_[cmd];
+  if (handler.optstring) {
+    // Try to see if we want to match command line options.
+    const result = this.completeCommandOptions_(ary, handler.optstring);
+    if (result) {
+      return result;
     }
 
-    // Add commands that match the user's input.
-    if (command.startsWith(usercmd)) {
-      matches.push(command);
-    }
+    // completeCommandOptions_ handled option parsing vs arguments, so if we're
+    // still here, we can try completing the argument even if it starts with -.
   }
+
+  // If the command has an argument completer, run it.
+  const completer = handler.complete;
+  if (completer) {
+    return completer.call(this, ary);
+  }
+
+  return {arg: buffer, matches: []};
+};
+
+/**
+ * Process the set of possible completions.
+ *
+ * This takes the set of completions found and updates the UI accordingly.  It
+ * might do the actual completion, or it might show all the possibilities for
+ * the user to refine.
+ *
+ * @param {string} arg The specific argument that is being completed.
+ * @param {!Array<string>} matches All the matching completions.
+ * @param {number=} skip How many leading characters to skip when showing
+ *     completions.  This provides tigher output when the prefix is the same
+ *     among all completions.
+ */
+nasftp.Cli.prototype.completeFinishMatches_ = async function(
+    arg, matches, skip = 0) {
+  // Workaround closure compiler that ignores !undefined assertion.
+  const skip_ = lib.notUndefined(skip);
 
   // Process the matches.
   switch (matches.length) {
@@ -587,13 +715,17 @@ nasftp.Cli.prototype.onTabKey_ = function() {
       this.terminal.ringBell();
       break;
     }
+
     case 1: {
       // Exactly one match -- complete it.
-      const complete = `${matches[0].substr(usercmd.length)} `;
-      this.io.print(complete);
-      this.stdin_ += complete;
+      if (arg) {
+        const complete = `${matches[0].substr(arg.length)} `;
+        this.io.print(complete);
+        this.stdin_ += complete;
+      }
       break;
     }
+
     default: {
       // More than one match -- show them all.
       this.terminal.ringBell();
@@ -601,11 +733,12 @@ nasftp.Cli.prototype.onTabKey_ = function() {
       // Figure out the max width of the matches so we can print them all in
       // tidy columns.  They're currently sorted left-to-right rather than
       // top-to-bottom as it's easier (read: lazier) to do it this way.
-      const maxWidth = matches.reduce((a, b) => Math.max(a, b.length), 0) + 3;
+      const maxWidth = matches.reduce(
+          (a, b) => Math.max(a, b.length - skip_), 0) + 3;
       const perLine = Math.floor(this.terminal.screenSize.width / maxWidth);
       let lineCount = 0;
       matches.sort().forEach((complete) => {
-        this.io.print(complete.padEnd(maxWidth));
+        this.io.print(complete.substr(skip_).padEnd(maxWidth));
         if (++lineCount >= perLine) {
           this.io.println('');
           lineCount = 0;
@@ -619,8 +752,6 @@ nasftp.Cli.prototype.onTabKey_ = function() {
       break;
     }
   }
-
-  return hterm.Keyboard.KeyActions.CANCEL;
 };
 
 /**
@@ -959,9 +1090,11 @@ nasftp.Cli.commands = {};
  * @param {string} usage Example command arguments.
  * @param {function(!Array<string>, !Object)} callback The function to run the
  *     command.
+ * @param {function(!Array<string>)=} completer Helper for completing arguments.
  */
 nasftp.Cli.addCommand_ = function(
-    commands, minArgs, maxArgs, optstring, usage, callback) {
+    commands, minArgs, maxArgs, optstring, usage, callback,
+    completer = undefined) {
   commands.forEach((command) => {
 
     /**
@@ -993,6 +1126,7 @@ nasftp.Cli.addCommand_ = function(
 
     nasftp.Cli.commands[command] = wrapper;
     wrapper.command = command;
+    wrapper.complete = completer;
     wrapper.optstring = optstring;
     wrapper.usage = optstring ? `[-${optstring}] ${usage}` : usage;
     // We'll fill this in later during the translation step.
@@ -1473,8 +1607,19 @@ nasftp.Cli.commandHelp_ = function(args) {
 
   return Promise.resolve();
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<!nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeHelp_ = async function(args) {
+  const input = args[args.length - 1];
+  return this.completeCommand_(input);
+};
 nasftp.Cli.addCommand_(['help', '?'], 0, null, '', '[commands]',
-                       nasftp.Cli.commandHelp_);
+                       nasftp.Cli.commandHelp_, nasftp.Cli.completeHelp_);
 
 /**
  * User command to list information about files/directories.

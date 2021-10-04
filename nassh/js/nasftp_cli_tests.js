@@ -378,4 +378,100 @@ it('nasftp-version', function(done) {
     .then(() => done());
 });
 
+/**
+ * Check command name completion.
+ */
+it('nasftp-complete-command', function() {
+  // Match everything.
+  let result = this.cli.completeCommand_('');
+  assert.deepStrictEqual(result.arg, '');
+  assert.include(result.matches, 'bye');
+
+  // Match one command with one char.
+  result = this.cli.completeCommand_('h');
+  assert.deepStrictEqual({arg: 'h', matches: ['help']}, result);
+
+  // Match multiple commands with two chars.
+  result = this.cli.completeCommand_('re');
+  assert.deepStrictEqual(result.arg, 're');
+  assert.include(result.matches, 'readlink');
+  assert.include(result.matches, 'realpath');
+  assert.include(result.matches, 'reput');
+
+  // Match complete command.
+  result = this.cli.completeCommand_('move');
+  assert.deepStrictEqual({arg: 'move', matches: ['move']}, result);
+});
+
+/**
+ * Check option completion.
+ */
+it('nasftp-complete-options', function() {
+  const data = [
+    // Match nothing due to missing - prefix.
+    ['abLvZ', [''], null],
+
+    // Halt matching due to seeing non-option argument.
+    ['asdf', ['-f', 'foo', '-'], null],
+
+    // Halt matching due to seeing -- marker.
+    ['asdf', ['-f', '--', '-'], null],
+
+    // Match everything.
+    ['abLvZ', ['-'], ['-L', '-Z', '-a', '-b', '-v']],
+    ['abLvZ', ['-x', '-'], ['-L', '-Z', '-a', '-b', '-v']],
+
+    // Match remaining.
+    ['abLvZ', ['-v'], ['-L', '-Z', '-a', '-b']],
+    ['abLvZ', ['-Zv'], ['-L', '-a', '-b']],
+    ['abLvZ', ['-Z', '-v'], ['-L', '-a', '-b']],
+  ];
+
+  data.forEach(([opts, args, matches]) => {
+    args.unshift('cmd');
+    const result = this.cli.completeCommandOptions_(args, opts);
+
+    if (!matches) {
+      assert.isNull(result);
+    } else {
+      assert.deepStrictEqual(result.matches, matches);
+    }
+  });
+});
+
+/**
+ * Check command buffer completion.
+ */
+describe('nasftp-complete-input', () => {
+  const data = [
+    // Command completion matches nothing.
+    ['asdf', {arg: 'asdf', matches: []}],
+
+    // Unknown command matches nothing.
+    ['asdf -', {arg: 'asdf', matches: []}],
+
+    // Stop completing.
+    ['ls -- -', {arg: 'ls -- -', matches: []}],
+    ['ls -- ', {arg: 'ls -- ', matches: []}],
+
+    // Complete known commands.
+    ['hel', {arg: 'hel', matches: ['help']}],
+
+    // Complete known command options.
+    ['truncate -', {arg: '-', matches: ['-s']}],
+
+    // Complete known command arguments.
+    ['help lis', {arg: 'lis', matches: ['list']}],
+    ['help list realp', {arg: 'realp', matches: ['realpath']}],
+  ];
+
+  for (let i = 0; i < data.length; ++i) {
+    const [input, exp] = data[i];
+    it(input, async function() {
+      const result = await this.cli.completeInputBuffer_(input);
+      assert.deepStrictEqual(result, exp);
+    });
+  }
+});
+
 });
