@@ -22,6 +22,13 @@ const MockSftpCommandInstance = function(terminal) {
   this.io = terminal.io;
   this.sftpClient = new MockSftpClient();
   this.exited_ = false;
+
+  // Stub out bell ringing to avoid spamming audio and upsetting Chrome when
+  // we try to play a lot of audio files all at once in the background.
+  this.rang_ = 0;
+  this.terminal.ringBell = () => {
+    this.rang_++;
+  };
 };
 
 /**
@@ -32,6 +39,16 @@ const MockSftpCommandInstance = function(terminal) {
 MockSftpCommandInstance.prototype.exit = function() {
   this.exited_ = true;
 };
+
+/**
+ * Promise wrapper for setTimeout.  Some nasftp APIs don't use promises.
+ *
+ * @param {number=} timeout How long (milliseconds) to wait.
+ * @return {!Promise<void>} Resolve after the timeout.
+ */
+function sleep(timeout = 1) {
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+}
 
 /**
  * Create a new hterm.Terminal object for testing.
@@ -440,6 +457,40 @@ it('nasftp-complete-options', function() {
 });
 
 /**
+ * Helper to mock remote path completion.
+ *
+ * @param {!Array<!nassh.sftp.FileAttrs>=} entries The remote paths.  If none
+ *     are specified, a default set will be used.
+ * @this {nasftp.Cli}
+ */
+function mockCompleteRemotePath(entries = undefined) {
+  if (entries === undefined) {
+    entries = [
+      {filename: '.', isDirectory: true},
+      {filename: '..', isDirectory: true},
+      {filename: '.git', isDirectory: true},
+      {filename: '.vimrc', isDirectory: false},
+      {filename: 'boot', isDirectory: true},
+      {filename: 'etc', isDirectory: true},
+      {filename: 'fsck', isDirectory: false},
+      {filename: 'proc', isDirectory: true},
+      {filename: 'sys', isDirectory: true},
+    ];
+  }
+
+  this.client.openDirectory.return = (path) => {
+    return 'handle';
+  };
+  this.client.scanDirectory.return = (handle, callback) => {
+    assert.equal('handle', handle);
+    return entries.filter(callback);
+  };
+  this.client.closeFile.return = (handle) => {
+    assert.equal('handle', handle);
+  };
+}
+
+/**
  * Check command buffer completion.
  */
 describe('nasftp-complete-input', () => {
@@ -450,9 +501,10 @@ describe('nasftp-complete-input', () => {
     // Unknown command matches nothing.
     ['asdf -', {arg: 'asdf', matches: []}],
 
-    // Stop completing.
-    ['ls -- -', {arg: 'ls -- -', matches: []}],
-    ['ls -- ', {arg: 'ls -- ', matches: []}],
+    // Stop completing options.
+    ['ls -- -', {arg: '-', matches: [], skip: 0}],
+    // But still complete paths.
+    ['ls -- ', {arg: '', matches: ['Desktop/', 'test.c', 'Videos/'], skip: 0}],
 
     // Complete known commands.
     ['hel', {arg: 'hel', matches: ['help']}],
@@ -465,13 +517,377 @@ describe('nasftp-complete-input', () => {
     ['help list realp', {arg: 'realp', matches: ['realpath']}],
   ];
 
+  const entries = [
+    {filename: '.', isDirectory: true},
+    {filename: '..', isDirectory: true},
+    {filename: 'Desktop', isDirectory: true},
+    {filename: 'test.c', isDirectory: false},
+    {filename: 'Videos', isDirectory: true},
+  ];
+
   for (let i = 0; i < data.length; ++i) {
     const [input, exp] = data[i];
     it(input, async function() {
+      mockCompleteRemotePath.call(this, entries);
       const result = await this.cli.completeInputBuffer_(input);
       assert.deepStrictEqual(result, exp);
     });
   }
+});
+
+/**
+ * Check remote path completion.
+ */
+it('nasftp-complete-remote-paths', async function() {
+  mockCompleteRemotePath.call(this);
+
+  const tests = [
+    ['/', ['/boot/', '/etc/', '/fsck', '/proc/', '/sys/']],
+    ['/b', ['boot/']],
+    ['.', ['./', '../', '.git/', '.vimrc']],
+    ['../.', ['./', '../', '.git/', '.vimrc']],
+  ];
+  for (let i = 0; i < tests.length; ++i) {
+    const [arg, exp] = tests[i];
+    const result = await this.cli.completeRemotePath_(arg);
+    assert.deepStrictEqual(result.matches, exp);
+  }
+});
+
+/**
+ * Helper for running subcommand completions.
+ *
+ * @param {!Array<!Array<string>>} tests The tests to run.
+ */
+function completeCommandTests(tests) {
+  for (let i = 0; i < tests.length; ++i) {
+    const [input, exp] = tests[i];
+    it(input, async function() {
+      mockCompleteRemotePath.call(this);
+      this.cli.stdin_ = input;
+      this.cli.onTabKey_();
+      await sleep();
+      assert.equal(this.cli.stdin_, exp);
+    });
+  }
+}
+
+/**
+ * Check cat subcommand completion.
+ */
+describe('nasftp-complete-cat-command', () => {
+  completeCommandTests([
+    // Complete the first arg.
+    ['cat b', 'cat boot/'],
+    // Don't complete the 2nd arg.
+    ['cat b 1', 'cat b 1'],
+  ]);
+});
+
+/**
+ * Check cd subcommand completion.
+ */
+describe('nasftp-complete-cd-command', async function() {
+  completeCommandTests([
+    // Complete the first arg if it's a dir.
+    ['cd b', 'cd boot/'],
+    // Don't complete the first arg if it's a file.
+    ['cd .vim', 'cd .vim'],
+    // Complete . paths.
+    ['cd .g', 'cd .git/'],
+    ['cd ..', 'cd ../'],
+    ['cd ../..', 'cd ../../'],
+    // Don't complete multiple args.
+    ['cd boot/ b', 'cd boot/ b'],
+  ]);
+});
+
+/**
+ * Check chmod subcommand completion.
+ */
+describe('nasftp-complete-chmod-command', async function() {
+  completeCommandTests([
+    // Don't complete the mode.
+    ['chmod 7', 'chmod 7'],
+/*
+    // Complete the remaining directory args.
+    ['chmod 755 b', 'chmod 755 boot/'],
+    ['chmod 755 b b', 'chmod 755 b boot/'],
+    ['chmod 755 b b b', 'chmod 755 b b boot/'],
+    // Complete files -- should auto include a trailing space.
+    ['chmod 644 .vim', 'chmod 644 .vimrc '],
+*/
+  ]);
+});
+
+/**
+ * Check chown subcommand completion.
+ *
+ * This also covers chgrp since they're aliases to each other.
+ */
+describe('nasftp-complete-chown-chgrp-command', async function() {
+  completeCommandTests([
+    // Don't complete the mode.
+    ['chown b', 'chown b'],
+    // Complete the remaining directory args.
+    ['chown user b', 'chown user boot/'],
+    ['chown user b b', 'chown user b boot/'],
+    ['chown user b b b', 'chown user b b boot/'],
+    // Complete files -- should auto include a trailing space.
+    ['chgrp user .vim', 'chgrp user .vimrc '],
+  ]);
+});
+
+/**
+ * Check clip subcommand completion.
+ */
+describe('nasftp-complete-clip-command', async function() {
+  completeCommandTests([
+    // Complete the first path arg.
+    ['clip s', 'clip sys/'],
+    // Don't complete remaining args.
+    ['clip sys/ s', 'clip sys/ s'],
+    ['clip sys/ 1', 'clip sys/ 1'],
+    ['clip sys/ s s', 'clip sys/ s s'],
+    // Complete files -- should auto include a trailing space.
+    ['clip .vim', 'clip .vimrc '],
+  ]);
+});
+
+/**
+ * Check copy subcommand completion.
+ */
+describe('nasftp-complete-copy-command', async function() {
+  completeCommandTests([
+    // Complete the first path arg.
+    ['cp s', 'cp sys/'],
+    // Complete the 2nd path arg.
+    ['cp sys/ s', 'cp sys/ sys/'],
+    // Don't complete remaining args.
+    ['cp sys/ s s', 'cp sys/ s s'],
+    // Complete files -- should auto include a trailing space.
+    ['cp .vim', 'cp .vimrc '],
+  ]);
+});
+
+/**
+ * Check df subcommand completion.
+ */
+describe('nasftp-complete-df-command', async function() {
+  completeCommandTests([
+    // Complete all args as paths.
+    ['df s', 'df sys/'],
+    ['df s s', 'df s sys/'],
+    ['df s s s', 'df s s sys/'],
+    // Complete files -- should auto include a trailing space.
+    ['df .vim', 'df .vimrc '],
+  ]);
+});
+
+/**
+ * Check get subcommand completion.
+ */
+describe('nasftp-complete-get-command', async function() {
+  completeCommandTests([
+    // Complete the first path arg.
+    ['get s', 'get sys/'],
+    // Don't complete remaining args.
+    ['get sys/ s', 'get sys/ s'],
+    ['get sys/ 1', 'get sys/ 1'],
+    ['get sys/ s s', 'get sys/ s s'],
+    // Complete files -- should auto include a trailing space.
+    ['get .vim', 'get .vimrc '],
+  ]);
+});
+
+/**
+ * Check list subcommand completion.
+ */
+describe('nasftp-complete-ls-command', async function() {
+  completeCommandTests([
+    // Complete all args as paths.
+    ['ls s', 'ls sys/'],
+    ['ls s s', 'ls s sys/'],
+    ['ls s s s', 'ls s s sys/'],
+    // Complete files -- should auto include a trailing space.
+    ['ls .vim', 'ls .vimrc '],
+  ]);
+});
+
+/**
+ * Check ln subcommand completion.
+ */
+describe('nasftp-complete-ln-command', async function() {
+  completeCommandTests([
+    // Complete the first path arg.
+    ['ln s', 'ln sys/'],
+    // Complete the 2nd path arg.
+    ['ln sys/ s', 'ln sys/ sys/'],
+    // Don't complete remaining args.
+    ['ln sys/ s s', 'ln sys/ s s'],
+    // Complete files -- should auto include a trailing space.
+    ['ln .vim', 'ln .vimrc '],
+  ]);
+});
+
+/**
+ * Check mkdir subcommand completion.
+ */
+describe('nasftp-complete-mkdir-command', async function() {
+  completeCommandTests([
+    // Complete all args as dirs.
+    ['mkdir s', 'mkdir sys/'],
+    ['mkdir s s', 'mkdir s sys/'],
+    ['mkdir s s s', 'mkdir s s sys/'],
+    // Do not complete files -- can't mkdir them.
+    ['mkdir .vim', 'mkdir .vim'],
+  ]);
+});
+
+/**
+ * Check move subcommand completion.
+ */
+describe('nasftp-complete-mv-command', async function() {
+  completeCommandTests([
+    // Complete the first path arg.
+    ['mv s', 'mv sys/'],
+    // Complete the 2nd path arg.
+    ['mv sys/ s', 'mv sys/ sys/'],
+    // Don't complete remaining args.
+    ['mv sys/ s s', 'mv sys/ s s'],
+    // Complete files -- should auto include a trailing space.
+    ['mv .vim', 'mv .vimrc '],
+  ]);
+});
+
+/**
+ * Check put subcommand completion.
+ */
+describe('nasftp-complete-put-command', async function() {
+  completeCommandTests([
+    // Complete the first path arg.
+    ['put s', 'put sys/'],
+    // Don't complete remaining args.
+    ['put sys/ s', 'put sys/ s'],
+    ['put sys/ 1', 'put sys/ 1'],
+    ['put sys/ s s', 'put sys/ s s'],
+    // Complete files -- should auto include a trailing space.
+    ['put .vim', 'put .vimrc '],
+  ]);
+});
+
+/**
+ * Check readlink subcommand completion.
+ */
+describe('nasftp-complete-readlink-command', async function() {
+  completeCommandTests([
+    // Complete all args as paths.
+    ['readlink s', 'readlink sys/'],
+    ['readlink s s', 'readlink s sys/'],
+    ['readlink s s s', 'readlink s s sys/'],
+    // Complete files -- should auto include a trailing space.
+    ['readlink .vim', 'readlink .vimrc '],
+  ]);
+});
+
+/**
+ * Check realpath subcommand completion.
+ */
+describe('nasftp-complete-realpath-command', async function() {
+  completeCommandTests([
+    // Complete all args as paths.
+    ['realpath s', 'realpath sys/'],
+    ['realpath s s', 'realpath s sys/'],
+    ['realpath s s s', 'realpath s s sys/'],
+    // Complete files -- should auto include a trailing space.
+    ['realpath .vim', 'realpath .vimrc '],
+  ]);
+});
+
+/**
+ * Check remove subcommand completion.
+ */
+describe('nasftp-complete-rm-command', async function() {
+  completeCommandTests([
+    // Complete all args as paths.
+    ['rm s', 'rm sys/'],
+    ['rm s s', 'rm s sys/'],
+    ['rm s s s', 'rm s s sys/'],
+    // Complete files -- should auto include a trailing space.
+    ['rm .vim', 'rm .vimrc '],
+  ]);
+});
+
+/**
+ * Check rmdir subcommand completion.
+ */
+describe('nasftp-complete-rmdir-command', async function() {
+  completeCommandTests([
+    // Complete all args as dirs.
+    ['rmdir s', 'rmdir sys/'],
+    ['rmdir s s', 'rmdir s sys/'],
+    ['rmdir s s s', 'rmdir s s sys/'],
+    // Do not complete files -- can't rmdir them.
+    ['rmdir .vim', 'rmdir .vim'],
+  ]);
+});
+
+/**
+ * Check show subcommand completion.
+ */
+describe('nasftp-complete-show-command', async function() {
+  completeCommandTests([
+    // Complete all args as paths.
+    ['show s', 'show sys/'],
+    ['show s s', 'show s sys/'],
+    ['show s s s', 'show s s sys/'],
+    // Complete files -- should auto include a trailing space.
+    ['show .vim', 'show .vimrc '],
+  ]);
+});
+
+/**
+ * Check stat subcommand completion.
+ */
+describe('nasftp-complete-stat-command', async function() {
+  completeCommandTests([
+    // Complete all args as paths.
+    ['stat s', 'stat sys/'],
+    ['stat s s', 'stat s sys/'],
+    ['stat s s s', 'stat s s sys/'],
+    // Complete files -- should auto include a trailing space.
+    ['stat .vim', 'stat .vimrc '],
+  ]);
+});
+
+/**
+ * Check truncate subcommand completion.
+ */
+describe('nasftp-complete-truncate-command', async function() {
+  completeCommandTests([
+    // Complete all args as paths.
+    ['truncate s', 'truncate sys/'],
+    ['truncate s s', 'truncate s sys/'],
+    ['truncate s s s', 'truncate s s sys/'],
+    // Complete files -- should auto include a trailing space.
+    ['truncate .vim', 'truncate .vimrc '],
+  ]);
+});
+
+/**
+ * Check symlink subcommand completion.
+ */
+describe('nasftp-complete-symlink-command', async function() {
+  completeCommandTests([
+    // Complete the first path arg.
+    ['symlink s', 'symlink sys/'],
+    // Complete the 2nd path arg.
+    ['symlink sys/ s', 'symlink sys/ sys/'],
+    // Don't complete remaining args.
+    ['symlink sys/ s s', 'symlink sys/ s s'],
+    // Complete files -- should auto include a trailing space.
+    ['symlink .vim', 'symlink .vimrc '],
+  ]);
 });
 
 });

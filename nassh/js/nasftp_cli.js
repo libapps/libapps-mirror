@@ -620,6 +620,55 @@ nasftp.Cli.prototype.completeCommandOptions_ = function(args, opts) {
 };
 
 /**
+ * Complete paths against the remote system.
+ *
+ * @param {!Array<string>} args The current command line arguments.
+ * @param {function(!chrome.fileSystemProvider.EntryMetadata)=} filter Optional
+ *     callback to filter possible matches.
+ * @return {!Promise<!nasftp.Cli.Completion>} The remote paths that match.
+ */
+nasftp.Cli.prototype.completeRemotePath_ = async function(
+    args, filter = undefined) {
+  const input = args[args.length - 1];
+  const lastSlash = input.lastIndexOf('/') + 1;
+  const parent = input.substr(0, lastSlash);
+  const lastpath = input.substr(lastSlash);
+
+  const matches = await
+    this.client.openDirectory(this.makePath_(parent))
+      .then((handle) => {
+        // Enumerate all the entries in this path.
+        return this.client.scanDirectory(handle, (entry) => {
+          if (this.userInterrupted_) {
+            return;
+          }
+
+          // Skip dot paths unless input starts with an explicit dot.
+          if (!lastpath && entry.filename[0] === '.') {
+            return false;
+          } else if (!entry.filename.startsWith(lastpath)) {
+            return false;
+          }
+
+          return filter ? filter(entry) : true;
+        })
+        .finally(() => this.client.closeFile(handle));
+      });
+
+  return /** @type {!nasftp.Cli.Completion} */ ({
+    arg: input,
+    matches: matches.map((entry) => {
+      let ret = parent + entry.filename;
+      if (entry.isDirectory) {
+        ret += '/';
+      }
+      return ret;
+    }),
+    skip: parent.length,
+  });
+};
+
+/**
  * Callback for handling autocomplete matches.
  *
  * @return {!hterm.Keyboard.KeyActions}
@@ -634,7 +683,11 @@ nasftp.Cli.prototype.onTabKey_ = function() {
   // holding any further input until we finish processing.
   this.holdInput_ = true;
   this.completeInputBuffer_(this.stdin_)
-    .then(({arg, matches, skip}) => {
+    .then((result) => {
+      if (!result) {
+        result = {arg: this.stdin_, matches: []};
+      }
+      const {arg, matches, skip} = result;
       return this.completeFinishMatches_(arg, matches, skip);
     })
     .finally(() => this.holdInput_ = false);
@@ -687,7 +740,7 @@ nasftp.Cli.prototype.completeInputBuffer_ = async function(buffer) {
     return completer.call(this, ary);
   }
 
-  return {arg: buffer, matches: []};
+  return null;
 };
 
 /**
@@ -719,7 +772,14 @@ nasftp.Cli.prototype.completeFinishMatches_ = async function(
     case 1: {
       // Exactly one match -- complete it.
       if (arg) {
-        const complete = `${matches[0].substr(arg.length)} `;
+        let complete = matches[0].substr(arg.length);
+        // If we're completing a directory, don't finish the argument.  This
+        // allows quick completion of subdirs by pressing Tab multiple times.
+        // This is a bit of a heuristic, but we don't use / for anything else
+        // atm, so it's OK.
+        if (!complete.endsWith('/')) {
+          complete += ' ';
+        }
         this.io.print(complete);
         this.stdin_ += complete;
       }
@@ -1088,9 +1148,11 @@ nasftp.Cli.commands = {};
  *     accepts.
  * @param {string} optstring Supported short options.
  * @param {string} usage Example command arguments.
- * @param {function(!Array<string>, !Object)} callback The function to run the
- *     command.
- * @param {function(!Array<string>)=} completer Helper for completing arguments.
+ * @param {function(!Array<string>, !Object): !Promise<void>} callback The
+ *     function to run the command.
+ * @param {function(!Array<string>):
+ *         !Promise<?nasftp.Cli.Completion>=} completer Helper for completing
+ *     arguments.
  */
 nasftp.Cli.addCommand_ = function(
     commands, minArgs, maxArgs, optstring, usage, callback,
@@ -1196,8 +1258,22 @@ nasftp.Cli.commandCat_ = function(args) {
       }
     });
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<?nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeCat_ = async function(args) {
+  // Only complete the first argument.
+  if (args.length <= 2) {
+    return this.completeRemotePath_(args);
+  }
+  return null;
+};
 nasftp.Cli.addCommand_(['cat'], 1, 3, '', '<path> [offset] [length]',
-                       nasftp.Cli.commandCat_);
+                       nasftp.Cli.commandCat_, nasftp.Cli.completeCat_);
 
 /**
  * User command to change the directory.
@@ -1238,8 +1314,25 @@ nasftp.Cli.commandCd_ = function(args) {
       }
     });
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<?nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeCd_ = async function(args) {
+  // Only complete the first path.
+  if (args.length === 2) {
+    return this.completeRemotePath_(args, (entry) => {
+      // TODO(vapier): Probably should handle symlinks to dirs.
+      return entry.isDirectory;
+    });
+  }
+  return null;
+};
 nasftp.Cli.addCommand_(['chdir', 'cd'], 0, 1, '', '[path]',
-                       nasftp.Cli.commandCd_);
+                       nasftp.Cli.commandCd_, nasftp.Cli.completeCd_);
 
 /**
  * User command to change path permissions.
@@ -1261,8 +1354,22 @@ nasftp.Cli.commandChmod_ = function(args) {
     return this.client.setFileStatus(this.makePath_(path), attrs);
   }), Promise.resolve());
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<?nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeChmod_ = async function(args) {
+  // Only complete the paths.
+  if (args.length > 2) {
+    return this.completeRemotePath_(args);
+  }
+  return null;
+};
 nasftp.Cli.addCommand_(['chmod'], 2, null, '', '<mode> <paths...>',
-                       nasftp.Cli.commandChmod_);
+                       nasftp.Cli.commandChmod_, nasftp.Cli.completeChmod_);
 
 /**
  * User command to change user/group ownership.
@@ -1296,8 +1403,22 @@ nasftp.Cli.commandChown_ = function(args) {
       });
   }), Promise.resolve());
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<?nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeChown_ = async function(args) {
+  // Only complete the paths.
+  if (args.length > 2) {
+    return this.completeRemotePath_(args);
+  }
+  return null;
+};
 nasftp.Cli.addCommand_(['chgrp', 'chown'], 2, null, '', '<account> <paths...>',
-                       nasftp.Cli.commandChown_);
+                       nasftp.Cli.commandChown_, nasftp.Cli.completeChown_);
 
 /**
  * User command to clear the screen.
@@ -1350,9 +1471,23 @@ nasftp.Cli.commandClip_ = function(args) {
       this.terminal.copyStringToClipboard(string);
     });
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<?nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeClip_ = async function(args) {
+  // Only complete the first argument.
+  if (args.length <= 2) {
+    return this.completeRemotePath_(args);
+  }
+  return null;
+};
 nasftp.Cli.addCommand_(['clip', 'clipboard'], 1, 3, '',
                        '<path> [offset] [length]',
-                       nasftp.Cli.commandClip_);
+                       nasftp.Cli.commandClip_, nasftp.Cli.completeClip_);
 
 /**
  * User command to toggle color support.
@@ -1437,8 +1572,22 @@ nasftp.Cli.commandCopy_ = function(args) {
         });
     });
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<?nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeCopy_ = async function(args) {
+  // Only complete the paths.
+  if (args.length <= 3) {
+    return this.completeRemotePath_(args);
+  }
+  return null;
+};
 nasftp.Cli.addCommand_(['copy', 'cp'], 2, 2, '', '<src> <dst>',
-                       nasftp.Cli.commandCopy_);
+                       nasftp.Cli.commandCopy_, nasftp.Cli.completeCopy_);
 
 /**
  * User command to get filesystem information.
@@ -1503,8 +1652,19 @@ nasftp.Cli.commandDiskFree_ = function(args, opts) {
       });
   }), Promise.resolve());
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<!nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeDiskFree_ = async function(args) {
+  return this.completeRemotePath_(args);
+};
 nasftp.Cli.addCommand_(['df'], 0, null, 'hi', '[paths...]',
-                       nasftp.Cli.commandDiskFree_);
+                       nasftp.Cli.commandDiskFree_,
+                       nasftp.Cli.completeDiskFree_);
 
 /**
  * User command to download files.
@@ -1560,8 +1720,22 @@ nasftp.Cli.commandGet_ = function(args) {
       URL.revokeObjectURL(a.href);
     });
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<?nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeGet_ = async function(args) {
+  // Only complete the first argument.
+  if (args.length <= 2) {
+    return this.completeRemotePath_(args);
+  }
+  return null;
+};
 nasftp.Cli.addCommand_(['get'], 1, 2, '', '<remote name> [local name]',
-                       nasftp.Cli.commandGet_);
+                       nasftp.Cli.commandGet_, nasftp.Cli.completeGet_);
 
 /**
  * User command to show help for registered commands.
@@ -1818,8 +1992,18 @@ nasftp.Cli.commandList_ = function(args, opts) {
     return listDir(this.makePath_(path), opts.recursive || args.length > 1);
   }), Promise.resolve());
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<!nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeList_ = async function(args) {
+  return this.completeRemotePath_(args);
+};
 nasftp.Cli.addCommand_(['list', 'ls', 'dir'], 0, null, '1aflrRSt', '[dirs...]',
-                       nasftp.Cli.commandList_);
+                       nasftp.Cli.commandList_, nasftp.Cli.completeList_);
 
 /**
  * User command to create hardlinks & symlinks.
@@ -1838,8 +2022,22 @@ nasftp.Cli.commandLink_ = function(args, opts) {
   const func = opts.symlink ? 'symLink' : 'hardLink';
   return this.client[func](this.makePath_(target), this.makePath_(path));
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<?nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeLink_ = async function(args) {
+  // Only complete the paths.
+  if (args.length <= 3) {
+    return this.completeRemotePath_(args);
+  }
+  return null;
+};
 nasftp.Cli.addCommand_(['ln'], 2, 2, 's', '<target> <path>',
-                       nasftp.Cli.commandLink_);
+                       nasftp.Cli.commandLink_, nasftp.Cli.completeLink_);
 
 /**
  * User command to create directories.
@@ -1854,8 +2052,21 @@ nasftp.Cli.commandMkdir_ = function(args) {
     return this.client.makeDirectory(this.makePath_(path));
   }), Promise.resolve());
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<!nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeMkdir_ = async function(args) {
+  // Can't mkdir files, so only allow completing (through) dirs.
+  return this.completeRemotePath_(args, (entry) => {
+    return entry.isDirectory;
+  });
+};
 nasftp.Cli.addCommand_(['mkdir'], 1, null, '', '<paths...>',
-                       nasftp.Cli.commandMkdir_);
+                       nasftp.Cli.commandMkdir_, nasftp.Cli.completeMkdir_);
 
 /**
  * User command to rename paths.
@@ -1869,8 +2080,22 @@ nasftp.Cli.commandMove_ = function(args) {
   const dst = args.shift();
   return this.client.renameFile(this.makePath_(src), this.makePath_(dst));
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<?nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeMove_ = async function(args) {
+  // Only complete the paths.
+  if (args.length <= 3) {
+    return this.completeRemotePath_(args);
+  }
+  return null;
+};
 nasftp.Cli.addCommand_(['move', 'mv', 'ren', 'rename'], 2, 2, '', '<src> <dst>',
-                       nasftp.Cli.commandMove_);
+                       nasftp.Cli.commandMove_, nasftp.Cli.completeMove_);
 
 /**
  * User command to control the prompt.
@@ -2036,8 +2261,22 @@ nasftp.Cli.commandPut_ = function(args, opts) {
   })
   .finally(() => doc.body.removeChild(input));
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<?nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completePut_ = async function(args) {
+  // Only complete the first argument.
+  if (args.length <= 2) {
+    return this.completeRemotePath_(args);
+  }
+  return null;
+};
 nasftp.Cli.addCommand_(['put', 'reput'], 0, 1, 'af', '[remote name]',
-                       nasftp.Cli.commandPut_);
+                       nasftp.Cli.commandPut_, nasftp.Cli.completePut_);
 
 /**
  * User command to show the active working directory.
@@ -2087,8 +2326,19 @@ nasftp.Cli.commandReadlink_ = function(args) {
       });
   }), Promise.resolve());
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<!nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeReadlink_ = async function(args) {
+  return this.completeRemotePath_(args);
+};
 nasftp.Cli.addCommand_(['readlink'], 1, null, '', '<paths...>',
-                       nasftp.Cli.commandReadlink_);
+                       nasftp.Cli.commandReadlink_,
+                       nasftp.Cli.completeReadlink_);
 
 /**
  * User command to resolve a path remotely.
@@ -2107,8 +2357,19 @@ nasftp.Cli.commandRealpath_ = function(args) {
       });
   }), Promise.resolve());
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<!nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeRealpath_ = async function(args) {
+  return this.completeRemotePath_(args);
+};
 nasftp.Cli.addCommand_(['realpath'], 1, null, '', '<paths...>',
-                       nasftp.Cli.commandRealpath_);
+                       nasftp.Cli.commandRealpath_,
+                       nasftp.Cli.completeRealpath_);
 
 /**
  * User command to remove files.
@@ -2140,8 +2401,18 @@ nasftp.Cli.commandRemove_ = function(args, opts) {
       });
   }), Promise.resolve());
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<!nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeRemove_ = async function(args) {
+  return this.completeRemotePath_(args);
+};
 nasftp.Cli.addCommand_(['rm', 'del'], 1, null, 'rRfv', '<paths...>',
-                       nasftp.Cli.commandRemove_);
+                       nasftp.Cli.commandRemove_, nasftp.Cli.completeRemove_);
 
 /**
  * User command to remove directories.
@@ -2156,8 +2427,21 @@ nasftp.Cli.commandRmdir_ = function(args) {
     return this.client.removeDirectory(this.makePath_(path));
   }), Promise.resolve());
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<!nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeRmdir_ = async function(args) {
+  // Can't rmdir files, so only allow dirs.
+  return this.completeRemotePath_(args, (entry) => {
+    return entry.isDirectory;
+  });
+};
 nasftp.Cli.addCommand_(['rmdir'], 1, null, '', '<paths...>',
-                       nasftp.Cli.commandRmdir_);
+                       nasftp.Cli.commandRmdir_, nasftp.Cli.completeRmdir_);
 
 /**
  * User command to show images.
@@ -2191,8 +2475,18 @@ nasftp.Cli.commandShow_ = function(args) {
       });
   }), Promise.resolve());
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<!nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeShow_ = async function(args) {
+  return this.completeRemotePath_(args);
+};
 nasftp.Cli.addCommand_(['show'], 1, null, '', '<paths...>',
-                       nasftp.Cli.commandShow_);
+                       nasftp.Cli.commandShow_, nasftp.Cli.completeShow_);
 
 /**
  * User command to show path status/details.
@@ -2232,8 +2526,18 @@ nasftp.Cli.commandStat_ = function(args) {
       });
   }), Promise.resolve());
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<!nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeStat_ = async function(args) {
+  return this.completeRemotePath_(args);
+};
 nasftp.Cli.addCommand_(['stat', 'lstat'], 1, null, '', '<paths...>',
-                       nasftp.Cli.commandStat_);
+                       nasftp.Cli.commandStat_, nasftp.Cli.completeStat_);
 
 /**
  * User command to truncate files.
@@ -2280,8 +2584,19 @@ nasftp.Cli.commandTruncate_ = function(args, opts) {
       });
   }), Promise.resolve());
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<!nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeTruncate_ = async function(args) {
+  return this.completeRemotePath_(args);
+};
 nasftp.Cli.addCommand_(['truncate'], 1, null, 's', '[-s <size>] <paths...>',
-                       nasftp.Cli.commandTruncate_);
+                       nasftp.Cli.commandTruncate_,
+                       nasftp.Cli.completeTruncate_);
 
 /**
  * User command to create symlinks.
@@ -2296,8 +2611,22 @@ nasftp.Cli.commandSymlink_ = function(args) {
 
   return this.client.symLink(this.makePath_(target), this.makePath_(path));
 };
+/**
+ * Complete the command.
+ *
+ * @this {nasftp.Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<?nasftp.Cli.Completion>} Possible completions.
+ */
+nasftp.Cli.completeSymlink_ = async function(args) {
+  // Only complete the paths.
+  if (args.length <= 3) {
+    return this.completeRemotePath_(args);
+  }
+  return null;
+};
 nasftp.Cli.addCommand_(['symlink'], 2, 2, '', '<target> <path>',
-                       nasftp.Cli.commandSymlink_);
+                       nasftp.Cli.commandSymlink_, nasftp.Cli.completeSymlink_);
 
 /**
  * User command to show the active SFTP version.
