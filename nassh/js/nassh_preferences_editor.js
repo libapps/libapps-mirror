@@ -116,7 +116,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
  * @param {string=} profileId Profile name to read settings from.
  * @constructor
  */
-nassh.PreferencesEditor = function(profileId = 'default') {
+nassh.PreferencesEditor = function(
+    profileId = hterm.Terminal.DEFAULT_PROFILE_ID) {
   this.selectProfile(profileId);
 };
 

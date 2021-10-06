@@ -26,7 +26,7 @@ function popup() {
   this.prefs_ = new nassh.PreferenceManager();
   this.localPrefs_ = new nassh.LocalPreferenceManager();
   // The hterm pref manager.  We use the 'default' profile to theme.
-  this.htermPrefs_ = new hterm.PreferenceManager('default');
+  this.htermPrefs_ = new hterm.PreferenceManager();
 
   // Load the theme first so the style doesn't flicker.
   this.htermPrefs_.readStorage(() => {

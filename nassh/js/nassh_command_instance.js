@@ -1145,7 +1145,8 @@ nassh.CommandInstance.prototype.connectToFinalize_ = async function(
     params.authAgentAppID = options['--ssh-agent'];
   }
 
-  this.io.setTerminalProfile(params.terminalProfile || 'default');
+  this.io.setTerminalProfile(
+      params.terminalProfile || hterm.Terminal.DEFAULT_PROFILE_ID);
 
   // If they're using an internationalized domain name (IDN), then punycode
   // will return a different ASCII name.  Include that in the display for the
