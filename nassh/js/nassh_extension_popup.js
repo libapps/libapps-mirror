@@ -9,7 +9,6 @@
  * so we do it like this instead.
  */
 window.addEventListener('DOMContentLoaded', (event) => {
-  nassh.loadWebFonts(document);
   lib.init().then(() => {
     // Save a handle for debugging.
     window.popup_ = new popup();
