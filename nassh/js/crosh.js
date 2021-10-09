@@ -131,29 +131,12 @@ Crosh.init = function() {
   };
   terminal.onTerminalReady = function() {
     nassh.loadWebFonts(terminal.getDocument());
-    // TODO(crbug.com/1019034): chrome.terminalPrivate a11y was added in M82.
-    // We can migrate fully to it and remove chrome.accessibilityFeatures once
-    // M82 is stable.
-    if (chrome.terminalPrivate.onA11yStatusChanged &&
-        chrome.terminalPrivate.getA11yStatus) {
-      chrome.terminalPrivate.onA11yStatusChanged.addListener(
-          (enabled) => terminal.setAccessibilityEnabled(enabled));
-      chrome.terminalPrivate.getA11yStatus((enabled) => {
-        terminal.setAccessibilityEnabled(enabled);
-          runCrosh();
-        });
-    } else if (
-        chrome.accessibilityFeatures &&
-        chrome.accessibilityFeatures.spokenFeedback) {
-      chrome.accessibilityFeatures.spokenFeedback.onChange.addListener(
-          (details) => terminal.setAccessibilityEnabled(details.value));
-      chrome.accessibilityFeatures.spokenFeedback.get({}, function(details) {
-        terminal.setAccessibilityEnabled(details.value);
-        runCrosh();
-      });
-    } else {
+    chrome.terminalPrivate.onA11yStatusChanged.addListener(
+        (enabled) => terminal.setAccessibilityEnabled(enabled));
+    chrome.terminalPrivate.getA11yStatus((enabled) => {
+      terminal.setAccessibilityEnabled(enabled);
       runCrosh();
-    }
+    });
   };
 
   terminal.contextMenu.setItems([
