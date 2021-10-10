@@ -125,7 +125,6 @@
 .chrome-bootstrap .frame .view,
 .chrome-bootstrap .frame .content {
   width: 738px;
-  overflow-x: hidden;
 }
 .chrome-bootstrap .frame .content {
   padding-top: 55px;
