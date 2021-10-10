@@ -98,6 +98,11 @@ hterm.ScrollPort = function(rowProvider) {
   this.screenPaddingSize = 0;
 
   /**
+   * Size of line height padding in pixels.
+   */
+  this.lineHeightPaddingSize = 0;
+
+  /**
    * True if the last scroll caused the scrollport to show the final row.
    */
   this.isScrolledEnd = true;
@@ -952,6 +957,12 @@ hterm.ScrollPort.prototype.setScreenPaddingSize = function(size) {
   this.resize();
 };
 
+/** @param {number} size */
+hterm.ScrollPort.prototype.setLineHeightPaddingSize = function(size) {
+  this.lineHeightPaddingSize = size;
+  this.syncCharacterSize();
+};
+
 /** @param {boolean} ctrlVPaste */
 hterm.ScrollPort.prototype.setCtrlVPaste = function(ctrlVPaste) {
   this.ctrlVPaste = ctrlVPaste;
@@ -1130,7 +1141,8 @@ hterm.ScrollPort.prototype.measureCharacterSize = function(weight = '') {
   const descent =
       heightBox.actualBoundingBoxDescent || heightBox.fontBoundingBoxDescent;
   const widthBox = context.measureText('X');
-  return new hterm.Size(widthBox.width, ascent + descent);
+  return new hterm.Size(widthBox.width,
+                        ascent + descent + this.lineHeightPaddingSize);
 };
 
 /**

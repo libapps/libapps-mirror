@@ -549,6 +549,15 @@ hterm.Terminal.prototype.setProfile = function(
       loadKeyBindings(terminal.prefs_.get('keybindings'), v);
     },
 
+    'line-height-padding-size': function(v) {
+      v = parseFloat(v);
+      if (isNaN(v)) {
+        console.error(`Invalid line height padding size: ${v}`);
+        return;
+      }
+      terminal.setLineHeightPaddingSize(v);
+    },
+
     'media-keys-are-fkeys': function(v) {
       terminal.keyboard.mediaKeysAreFKeys = v;
     },
@@ -1222,6 +1231,15 @@ hterm.Terminal.prototype.setCursorShape = function(shape) {
  */
 hterm.Terminal.prototype.getCursorShape = function() {
   return this.cursorShape_;
+};
+
+/**
+ * Set the line height padding size in pixels.
+ *
+ * @param {number} size
+ */
+hterm.Terminal.prototype.setLineHeightPaddingSize = function(size) {
+  this.scrollPort_.setLineHeightPaddingSize(size);
 };
 
 /**

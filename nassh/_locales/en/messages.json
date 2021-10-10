@@ -505,6 +505,10 @@
 		"description": "Label text shown for the 'keybindings-os-defaults' preference.",
 		"message": "Use default OS Keyboard bindings/shortcuts"
 	},
+	"HTERM_NAME_PREF_LINE_HEIGHT_PADDING_SIZE": {
+		"description": "Label text shown for the 'line-height-padding-size' preference.",
+		"message": "Line height padding size"
+	},
 	"HTERM_NAME_PREF_MEDIA_KEYS_ARE_FKEYS": {
 		"description": "Label text shown for the 'media-keys-are-fkeys' preference. 'Media keys' are the keyboard buttons that allow the user to control things like volume & screen brightness. 'Fkeys' refer to function keys which are the keyboard buttons F1/F2/F3/etc... Everything may be translated as makes sense.",
 		"message": "Media keys are Fkeys"
@@ -821,6 +825,10 @@
 		"description": "Help text shown for the 'keybindings-os-defaults' preference. 'OS' is 'operating system' and may be translated accordingly. 'hterm' should not be translated. 'own use' means that the program will capture & process the keyboard shortcuts itself and prevent the OS from doing anything.",
 		"message": "Whether common OS keyboard bindings should be respected instead of always capturing for hterm's own use."
 	},
+	"HTERM_PREF_LINE_HEIGHT_PADDING_SIZE": {
+		"description": "Help text shown for the 'line-height-padding-size' preference. The terminal screen is referring to the terminal emulator's UI which is a text interface. It is made up of rows (lines) of text.",
+		"message": "The padding size in pixels between each row of the terminal screen."
+	},
 	"HTERM_PREF_MEDIA_KEYS_ARE_FKEYS": {
 		"description": "Help text shown for the 'media-keys-are-fkeys' preference. 'Media keys' are the keyboard buttons that allow the user to control things like volume & screen brightness. 'Fkeys' refer to function keys which are the keyboard buttons F1/F2/F3/etc... Everything (including the true/false words) may be translated as makes sense.",
 		"message": "If true, convert media keys to their Fkey equivalent. If false, let the browser handle the keys."
@@ -886,7 +894,7 @@
 		"message": "The border size in pixels around the terminal screen.\n\nThis controls the size of the border around the terminal screen to create a visible line at the edges of the screen."
 	},
 	"HTERM_PREF_SCREEN_PADDING_SIZE": {
-		"description": "Help text shown for the 'padding-size' preference. The terminal screen is referring to the terminal emulator's UI which is a text interface.",
+		"description": "Help text shown for the 'screen-padding-size' preference. The terminal screen is referring to the terminal emulator's UI which is a text interface.",
 		"message": "The padding size in pixels around the border of the terminal screen.\n\nThis controls the size of the border around the terminal screen so the user can add some visible padding to the edges of the screen."
 	},
 	"HTERM_PREF_SCROLLBAR_VISIBLE": {

@@ -481,6 +481,13 @@ hterm.PreferenceManager.defaultPreferences = {
       `CSS font-smoothing property.`,
   ),
 
+  'line-height-padding-size': hterm.PreferenceManager.definePref_(
+      'Line height padding size',
+      hterm.PreferenceManager.Categories.Appearance,
+      0, 'int',
+      `The padding size in pixels between each row of the terminal screen.`,
+  ),
+
   'foreground-color': hterm.PreferenceManager.definePref_(
       'Text color',
       hterm.PreferenceManager.Categories.Appearance,
