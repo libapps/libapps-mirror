@@ -29,6 +29,7 @@ PATCHES = (
     '%(p)s-reconnect.patch',
     '%(p)s-contextmenu.patch',
     '%(p)s-utf8-send.patch',
+    '%(p)s-icon.patch',
 )
 
 

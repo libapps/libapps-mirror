@@ -27,6 +27,7 @@ INCLUDE_PATTERNS = (
     os.path.join('fonts', '*.woff2'),
     os.path.join('html', '*.html'),
     os.path.join('images', '*', '*.png'),
+    os.path.join('images', 'mosh-*.png'),
     os.path.join('js', '*.js'),
     os.path.join('third_party', '*', '*.css'),
     os.path.join('third_party', '*', '*.js'),
