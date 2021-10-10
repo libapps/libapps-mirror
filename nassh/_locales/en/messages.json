@@ -102,7 +102,7 @@
 		"message": "Connect"
 	},
 	"CONNECT_OR_EXIT_MESSAGE": {
-		"description": "Message displayed after a connection closes and the user cannot reconnect. Do not translate the (C) or (X) fields as they are keyboard shortcuts. Placing them relative to the word is OK as long as it's clear what action will be taken when the keyboard button is pressed. Similarly, using parentheses is not required other than for clarity. Changing case is also OK. There is an additional (E) keyboard shortcut that is the same as (X), so that may be used as an alternative if the translation uses an E but not an X. For example, these are OK: 'Exit (X)' or '[X]Exit' or '(E)xit' or whatever makes the most sense for the language.",
+		"description": "Message displayed after a connection closes and the user cannot reconnect. We capitialize 'Choose' and 'Exit' as a hint to the reader that these are the actions they may choose from, but keeping them capitalized as such is not required. Do not translate the (C) or (X) fields as they are keyboard shortcuts. Placing them relative to the word is OK as long as it's clear what action will be taken when the keyboard button is pressed. Similarly, using parentheses is not required other than for clarity. Changing case of the key is also OK. There is an additional (E) keyboard shortcut that is the same as (X), so that may be used as an alternative if the translation uses an E but not an X. For example, these are OK: 'Exit (X)' or '[X]Exit' or '(E)xit' or whatever makes the most sense for the language. There is no default action here if the user presses Enter.",
 		"message": "(C)hoose another connection or E(x)it?"
 	},
 	"CONSOLE_CROSH_OPTIONS_NOTICE": {
@@ -1846,8 +1846,8 @@
 		"message": "Read Size (KiB)"
 	},
 	"RECONNECT_MESSAGE": {
-		"description": "Message displayed after a connection closes. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them relative to the word is OK as long as it's clear what action will be taken when the keyboard button is pressed. Similarly, using parentheses is not required other than for clarity. Changing case is also OK. There is an additional (E) keyboard shortcut that is the same as (X), so that may be used as an alternative if the translation uses an E but not an X. For example, these are OK: 'Exit (X)' or '[X]Exit' or '(E)xit' or whatever makes the most sense for the language.",
-		"message": "(R)econnect, (C)hoose another connection, or E(x)it?"
+		"description": "Message displayed after a connection closes. We capitialize 'Reconnect', 'Choose', and 'Exit' as a hint to the reader that these are the actions they may choose from, but keeping them capitalized as such is not required. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them relative to the word is OK as long as it's clear what action will be taken when the keyboard button is pressed. Similarly, using parentheses is not required other than for clarity. Changing case is also OK. There is an additional (E) keyboard shortcut that is the same as (X), so that may be used as an alternative if the translation uses an E but not an X. For example, these are OK: 'Exit (X)' or '[X]Exit' or '(E)xit' or whatever makes the most sense for the language. The '(default)' text indicates the 'reconnect' action will be taken if the user presses Enter.",
+		"message": "(R)econnect (default), (C)hoose another connection, or E(x)it?"
 	},
 	"RELAY_RETRY": {
 		"description": "Displayed in a text overlay when we experience an error talking to the relay server (which is like a web proxy for connections).",
