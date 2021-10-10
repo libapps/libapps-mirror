@@ -1,5 +1,5 @@
 .chrome-bootstrap {
-  font-family: 'Chrome Droid Sans', 'Droid Sans Fallback', 'Lucida Grande', sans-serif;
+  font-family: 'Roboto', 'Noto Sans UI', 'Segoe UI', 'Chrome Droid Sans', 'Droid Sans Fallback', 'Lucida Grande', 'Tahoma', sans-serif;
   font-size: 12px;
   color: #303942;
   cursor: default;
@@ -409,6 +409,38 @@
 .chrome-bootstrap .highlightable.editable li:hover > .delete {
   opacity: 1;
 }
+.chrome-bootstrap .highlightable.draggable .handle {
+  width: 8px;
+  height: 41px;
+  background-image: linear-gradient(to bottom, #c1c1c1 50%, rgba(255, 255, 255, 0) 0%);
+  background-position: center;
+  background-size: 100% 17%;
+  background-repeat: repeat-y;
+  visibility: hidden;
+  position: absolute;
+  top: 4px;
+  left: 2px;
+}
+.chrome-bootstrap .highlightable.draggable .handle:hover {
+  cursor: move;
+  cursor: -webkit-grab;
+  display: block;
+}
+.chrome-bootstrap .highlightable.draggable .handle:after {
+  margin-left: 3px;
+  width: 2px;
+  height: 41px;
+  background: #F0F6FE;
+  content: "";
+  display: block;
+}
+.chrome-bootstrap .highlightable.draggable li:hover .handle {
+  visibility: visible;
+  z-index: 1;
+}
+.chrome-bootstrap .highlightable.draggable li > .item {
+  padding-left: 20px;
+}
 .chrome-bootstrap .match {
   background: #f2f37b;
   display: inline-block;
@@ -501,6 +533,7 @@
 .chrome-bootstrap input[type='url'],
 .chrome-bootstrap input[type='text'],
 .chrome-bootstrap input[type='number'],
+.chrome-bootstrap input[type='password'],
 .chrome-bootstrap input[type='search'] {
   border: 1px solid #BFBFBF;
   border-radius: 2px;
@@ -515,6 +548,25 @@
 .chrome-bootstrap .radio,
 .chrome-bootstrap .checkbox {
   margin: 0.65em 0;
+}
+.chrome-bootstrap .link-button {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  background: transparent none !important;
+  border: none !important;
+  border-color: transparent !important;
+  color: #1155cc !important;
+  cursor: pointer;
+  font: inherit;
+  margin: 0;
+  padding: 0 4px;
+}
+.chrome-bootstrap .link-button:hover {
+  text-decoration: underline;
+}
+.chrome-bootstrap .link-button:active {
+  color: #052577 !important;
+  text-decoration: underline;
 }
 .chrome-bootstrap select:focus,
 .chrome-bootstrap input[type='checkbox']:focus,
@@ -554,6 +606,7 @@
 }
 .chrome-bootstrap input[type='search']:disabled,
 .chrome-bootstrap input[type='number']:disabled,
+.chrome-bootstrap input[type='password']:disabled,
 .chrome-bootstrap input[type='text']:disabled {
   color: #999;
 }
