@@ -462,7 +462,12 @@ nassh.PreferencesEditor.prototype.sync = function(input) {
       if (prefValue == null) {
         input.value = '';
       } else {
-        input.value = JSON.stringify(prefValue, null, '  ');
+        // Replace raw DEL characters with Unicode escapes.  We expect the
+        // conversion later on when saving the value will turn it back into
+        // the DEL character.  This is because Chrome will insert an actual
+        // DEL character into the text field which tends to be invisible.
+        input.value = JSON.stringify(prefValue, null, '  ').replace(
+            '\x7f', '\\u007f');
       }
       break;
   }
