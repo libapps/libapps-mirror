@@ -1,3 +1,20 @@
+# 0.43, 2021-10-11, OpenSSH 8.8p1, SFTP features, font adjustments.
+
+* prefs: Refresh bootstrap code.
+* prefs: Avoid clipping wide fields.
+* l10n: Improve default reconnect tip.
+* mosh: Add a dedicated icon.
+* crosh: Drop pre-R82 support.
+* fonts: Move nassh.loadWebFonts out of critical path.
+* nasftp: Support tab completion of remote paths.
+* nasftp: Rework command line completion for deeper integration.
+* sftp: Query server limits dynamically.
+* sftp: Abort if server version is not supported.
+* sftp: Make init logic async.
+* nasftp: Clean up autocomplete display.
+* l10n: Fix version typo.
+* ssh_client: Update to openssh-8.8.
+
 # 0.42, 2021-10-01, OpenSSH 8.7p1, Unicode 14.0.
 
 * corp relay: Add support for direct relay used by terminal.
