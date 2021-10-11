@@ -206,6 +206,10 @@ hterm.TextAttributes.prototype.createContainer = function(textContent = '') {
 
   if (this.background != this.DEFAULT_COLOR) {
     style.backgroundColor = this.background.toString();
+    // Make sure the span fills the line when changing the background color.
+    // Otherwise, if the line happens to be taller than this glyph, we won't
+    // fill the color completely leading to visual gaps.
+    style.display = 'inline-block';
   }
 
   if (this.enableBold && this.bold) {
