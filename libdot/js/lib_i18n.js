@@ -39,7 +39,19 @@ lib.i18n.browserSupported = function() {
 lib.i18n.getAcceptLanguages = function() {
   if (lib.i18n.browser_) {
     return new Promise((resolve) => {
-      lib.i18n.browser_.getAcceptLanguages(resolve);
+      lib.i18n.browser_.getAcceptLanguages((languages) => {
+        // Chrome might be in a bad state and not return any languages.  If we
+        // pass this up to the caller who isn't expecting undefined, they'll
+        // probably crash.  Fallback to the default language that we expect all
+        // translations to have.
+        if (!languages) {
+          // Clear the error to avoid throwing an unchecked error.
+          console.error('getAcceptLanguages failed', lib.f.lastError());
+          languages = ['en'];
+        }
+
+        resolve(languages);
+      });
     });
   } else {
     const languages = navigator.languages || [navigator.language];
