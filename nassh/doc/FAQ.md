@@ -313,6 +313,19 @@ have to re-import them.
   See the [OpenSSH legacy options] page for more details.
 
 
+### Are ssh-rsa SHA1 keys supported?
+
+  It is disabled by default at runtime starting with [OpenSSH 8.8].
+  You can enable it by adding `-oHostKeyAlgorithms=+ssh-rsa` to your ssh command
+  line in the connection page.
+
+  However, these key types are insecure.  You should update your server to
+  newer key types like RSA/SHA-256/512 or ED25519.
+  Future support for these key types is not guaranteed.
+
+  See the [OpenSSH legacy options] page for more details.
+
+
 ### Are legacy v00 cert formats supported?
 
   Not anymore.  You'll need to use a different client to connect if those are
@@ -1271,6 +1284,7 @@ The prompt makes it sound like it will delete & reset everything, but it won't.
 [ISO 2022]: https://www.iso.org/standard/22747.html
 [OpenSSH]: https://www.openssh.com/
 [OpenSSH legacy options]: https://www.openssh.com/legacy.html
+[OpenSSH 8.8]: https://www.openssh.com/txt/release-8.8
 [Wayland]: https://wayland.freedesktop.org/
 [X Window System]: https://en.wikipedia.org/wiki/X_Window_System
 [XWayland]: https://wayland.freedesktop.org/xserver.html
