@@ -64,7 +64,7 @@ terminal.openOptionsPage = function() {
 terminal.onCtrlN = function(e, k) {
   if (e.shiftKey || this.keyboard.terminal.passCtrlN) {
     return function(e, k) {
-      chrome.terminalPrivate.openWindow(() => {});
+      chrome.terminalPrivate.openWindow();
       return hterm.Keyboard.KeyActions.CANCEL;
     };
   }

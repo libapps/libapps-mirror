@@ -251,12 +251,11 @@ MockTerminalPrivate.prototype.openOptionsPage = function(callback) {
 /**
  * Open the Terminal tabbed window.
  *
- * @param {function()} callback Callback that will be called when complete.
+ * @param {!Object=} data
  */
-MockTerminalPrivate.prototype.openWindow = function(callback) {
+MockTerminalPrivate.prototype.openWindow = function(data) {
   setTimeout(() => {
-    callback();
-    this.notifyObservers_('openWindow', [callback]);
+    this.notifyObservers_('openWindow', [data]);
   }, 0);
 };
 

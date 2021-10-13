@@ -36,7 +36,7 @@ EXTERNS_DIR = libdot.DIR / 'externs'
 EXTERNS_VERSION = VERSION
 
 # The version of Chrome externs that we pull from Chromium directly.
-CHROME_EXTERNS_VERSION = '18029c0278c7da713fb6b629e84992ceabda7ae2'
+CHROME_EXTERNS_VERSION = 'f49daad22943e4bf291b63ca2768082d83e0a054'
 
 
 # We pick 50 as the mid point as it allows us to easily add files before and
