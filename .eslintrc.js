@@ -28,9 +28,12 @@ module.exports = {
     'arrow-parens': ['error', 'always'],
     'arrow-spacing': ['error', {'before': true, 'after': true}],
     'block-spacing': ['error', 'always'],
+    'brace-style': ['error', '1tbs', {'allowSingleLine': true}],
     'comma-dangle': ['error', 'always-multiline'],
     'comma-spacing': 'error',
     'comma-style': 'error',
+    // We want this on, but the parser is confused by IIFE calls.
+    'consistent-return': 'off',
     'curly': 'error',
     'default-param-last': 'error',
     'eol-last': 'error',
@@ -39,8 +42,16 @@ module.exports = {
     // l/I: Depending on the font, these are hard to distinguish.
     'id-blacklist': ['error', 'l', 'I', 'self'],
     'keyword-spacing': 'error',
+    // We normally want this, but we allow it in a few limited cases, so leave
+    // it up to reviewers to decide for now.
+    'line-comment-position': 'off',
+    'linebreak-style': 'error',
     'lines-between-class-members': 'error',
     'max-len': ['error', {'code': 80, 'ignoreUrls': true}],
+    // We generally like this, but it flags one-lined arrow funcs that we allow.
+    'max-statements-per-line': 'off',
+    // We want this, but we have existing classes to clean up first.
+    'new-cap': 'off',
     'new-parens': 'error',
     'no-alert': 'error',
     'no-case-declarations': 'error',
@@ -61,10 +72,16 @@ module.exports = {
     'no-extra-parens': ['error', 'functions'],
     'no-extra-semi': 'error',
     'no-implied-eval': 'error',
+    // See line-comment-position above.
+    'no-inline-comments': 'off',
     'no-invalid-regexp': 'error',
+    // We want this, but the parser is confused by mocha test style.
+    'no-invalid-this': 'off',
     'no-irregular-whitespace': 'error',
     'no-label-var': 'error',
+    'no-mixed-operators': 'off',
     'no-mixed-spaces-and-tabs': 'error',
+    'no-multi-assign': 'off',
     'no-multi-spaces': ['error', {'ignoreEOLComments': true}],
     'no-multiple-empty-lines': 'error',
     'no-new': 'error',
@@ -74,6 +91,8 @@ module.exports = {
     'no-obj-calls': 'error',
     'no-octal': 'error',
     'no-octal-escape': 'error',
+    // We should turn this on at some point after cleaning up violations.
+    'no-return-assign': 'off',
     'no-return-await': 'error',
     'no-script-url': 'error',
     'no-self-assign': 'error',
@@ -84,9 +103,21 @@ module.exports = {
     'no-template-curly-in-string': 'error',
     'no-throw-literal': 'error',
     'no-trailing-spaces': 'error',
+    'no-unexpected-multiline': 'error',
     'no-unmodified-loop-condition': 'error',
     'no-unneeded-ternary': 'error',
     'no-unreachable': 'error',
+    // Does not play well with closure typedefs.
+    'no-unused-expressions': 'off',
+    // Would be nice to turn this on.
+    'no-unused-vars': [
+      'off', {
+        'argsIgnorePattern': '^_',
+        'caughtErrorsIgnorePattern': '^_',
+      },
+    ],
+    // Probably should turn this on.
+    'no-use-before-define': 'off',
     'no-useless-call': 'error',
     'no-useless-concat': 'error',
     'no-useless-escape': 'error',
@@ -106,11 +137,16 @@ module.exports = {
     'one-var-declaration-per-line': 'error',
     'prefer-const': 'error',
     'prefer-numeric-literals': 'error',
+    // Should turn this on after cleaning up code.
+    'prefer-object-spread': 'off',
     'prefer-rest-params': 'error',
+    // Should turn this on after cleaning up code.
+    'prefer-spread': 'off',
     'quote-props': ['error', 'consistent'],
     'quotes': ['error', 'single',
                {'avoidEscape': true, 'allowTemplateLiterals': true}],
     'radix': 'error',
+    'require-await': 'off',
     'rest-spread-spacing': 'error',
     'semi': ['error', 'always'],
     'semi-spacing': 'error',
