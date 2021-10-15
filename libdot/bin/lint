@@ -60,7 +60,8 @@ def get_known_sources(basedir: Path) -> List[Path]:
     """Get list of committed files that we could possibly lint."""
     return (x for x in get_known_files(basedir)
             if x.suffix not in {
-                '.log', '.jpg', '.ogg', '.patch', '.png', '.webp',
+                '.bz2', '.gz', '.log', '.jpg', '.ogg', '.patch', '.png',
+                '.webp', '.xz',
             })
 
 
