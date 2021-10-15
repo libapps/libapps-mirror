@@ -376,8 +376,9 @@ export class TerminalSettingsThemeElement extends LitElement {
   /** @override */
   render() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
-    const span = (color, text) =>
-        html`<span style="color:${color};font-weight:bold">${text}</span>`;
+    const span = (color, text) => {
+      return html`<span style="color:${color};font-weight:bold">${text}</span>`;
+    };
     return html`
         <div id="themes">${Object.values(THEMES).map((t) => html`
           <div id="${t.id}" class="theme"

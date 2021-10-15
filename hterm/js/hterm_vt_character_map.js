@@ -60,8 +60,8 @@ hterm.VT.CharacterMap.prototype.sync_ = function(glmap = undefined) {
     this.glmap_ = this.glmapBase_;
   }
 
-  const glchars = Object.keys(lib.notNull(this.glmap_)).map((key) =>
-      '\\x' + lib.f.zpad(key.charCodeAt(0).toString(16), 2));
+  const glchars = Object.keys(lib.notNull(this.glmap_)).map(
+      (key) => '\\x' + lib.f.zpad(key.charCodeAt(0).toString(16), 2));
   this.glre_ = new RegExp('[' + glchars.join('') + ']', 'g');
 
   this.GL = (str) => str.replace(this.glre_, (ch) => this.glmap_[ch]);

@@ -42,6 +42,7 @@ module.exports = {
     'generator-star-spacing': ['error', 'after'],
     // l/I: Depending on the font, these are hard to distinguish.
     'id-blacklist': ['error', 'l', 'I', 'self'],
+    'implicit-arrow-linebreak': 'error',
     'keyword-spacing': 'error',
     // We normally want this, but we allow it in a few limited cases, so leave
     // it up to reviewers to decide for now.

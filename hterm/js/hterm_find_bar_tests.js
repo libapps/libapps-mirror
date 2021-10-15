@@ -499,10 +499,10 @@ it('notifies-findbar-when-row-changes', function(done) {
 
   // Rows are added to terminal.
   expectNotifyChanges(1, 'Find Find', 1, 0, 0, 2, [1], true);
-  callbacks.push(() =>
-      expectNotifyChanges(0, 'Find Find', 1, 0, 2, 4, [0, 1], true));
-  callbacks.push(() =>
-      expectNotifyChanges(2, 'Find Find', 1, 0, 2, 6, [0, 1, 2], true));
+  callbacks.push(
+      () => expectNotifyChanges(0, 'Find Find', 1, 0, 2, 4, [0, 1], true));
+  callbacks.push(
+      () => expectNotifyChanges(2, 'Find Find', 1, 0, 2, 6, [0, 1, 2], true));
 
   // Row is modified, selected result is present at starting of row.
   callbacks.push(() => {
@@ -511,12 +511,12 @@ it('notifies-findbar-when-row-changes', function(done) {
   });
 
   // Row is deleted, invalidate the selected result.
-  callbacks.push(() =>
-      expectNotifyChanges(1, '         ', 1, 0, 2, 4, [0, 2], false));
+  callbacks.push(
+      () => expectNotifyChanges(1, '         ', 1, 0, 2, 4, [0, 2], false));
 
   // Row is modified, selected result is present at starting of row.
-  callbacks.push(() =>
-      expectNotifyChanges(1, 'Find     ', 1, 0, 2, 5, [0, 1, 2], true));
+  callbacks.push(
+      () => expectNotifyChanges(1, 'Find     ', 1, 0, 2, 5, [0, 1, 2], true));
 
   callbacks.push(done);
 });

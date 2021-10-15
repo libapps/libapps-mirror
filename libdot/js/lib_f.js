@@ -213,8 +213,9 @@ lib.f.getOs = function() {
 
   // Use the native Chrome API if available.
   if (window.chrome && chrome.runtime && chrome.runtime.getPlatformInfo) {
-    return new Promise((resolve, reject) =>
-        chrome.runtime.getPlatformInfo((info) => resolve(info.os)));
+    return new Promise((resolve, reject) => {
+      return chrome.runtime.getPlatformInfo((info) => resolve(info.os));
+    });
   }
 
   // Fallback logic.  Capture the major OS's.  The rest should support the

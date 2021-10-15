@@ -76,8 +76,9 @@ it('resolveLanguage', () => {
     ['en-RR', ['en_GB', 'en']],
     ['de-DE', ['de_DE', 'de']],
     ['ll-RR', ['ll_RR', 'll']],
-  ].forEach(([input, exp]) =>
-      assert.deepEqual(exp, lib.i18n.resolveLanguage(input)));
+  ].forEach(([input, exp]) => {
+    assert.deepEqual(exp, lib.i18n.resolveLanguage(input));
+  });
 });
 
 });
