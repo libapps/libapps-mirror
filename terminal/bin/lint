@@ -28,7 +28,8 @@ def _get_default_paths(basedir):
     # All files in js/*.js.
     # Use relpath for nicer default output.
     # Sort to ensure consistent order.
-    js_files = sorted(x for x in JS_DIR.glob('terminal*.js'))
+    js_files = sorted(x for x in JS_DIR.glob('*.js')
+                      if not x.name.startswith('nassh_deps'))
 
     return [os.path.relpath(x) for x in most_files + js_files]
 
