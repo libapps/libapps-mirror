@@ -160,6 +160,7 @@ hterm.Terminal.IO.prototype.onVTKeystroke = function(string) {
  * @param {number} height The new terminal height.
  */
 hterm.Terminal.IO.prototype.onTerminalResize_ = function(width, height) {
+  // eslint-disable-next-line consistent-this
   let obj = this;
   while (obj) {
     obj.columnCount = width;

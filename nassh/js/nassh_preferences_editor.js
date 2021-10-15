@@ -209,13 +209,12 @@ nassh.PreferencesEditor.debounce = function(input, callback, timeout = 500) {
  */
 nassh.PreferencesEditor.prototype.selectProfile = function(profileId) {
   window.term_.setProfile(profileId);
-  const prefsEditor = this;
   const prefs = new hterm.PreferenceManager(profileId);
   this.prefs_ = prefs;
-  prefs.readStorage(function() {
-      prefs.notifyAll();
-      prefsEditor.syncPage();
-    });
+  prefs.readStorage(() => {
+    prefs.notifyAll();
+    this.syncPage();
+  });
 };
 
 /**
@@ -625,27 +624,25 @@ nassh.PreferencesEditor.prototype.addInputRow = function(key, parent) {
  * @return {!Element}
  */
 nassh.PreferencesEditor.prototype.createInput = function(key) {
-  const prefsEditor = this;
-
-  const onchangeCursorReset = function() {
-      nassh.PreferencesEditor.debounce(this, function(input) {
-          // Chrome has a bug where it resets cursor position on us when
-          // we debounce the input.  So manually save & restore cursor.
-          const i = input.selectionStart;
-          prefsEditor.onInputChange(input);
-          if (document.activeElement === input) {
-            input.setSelectionRange(i, i);
-          }
-        });
-    };
-  let onchange = function() {
-      nassh.PreferencesEditor.debounce(this, function(input) {
-          prefsEditor.onInputChange(input);
-        });
-    };
+  const onchangeCursorReset = (event) => {
+    nassh.PreferencesEditor.debounce(event.target, (input) => {
+      // Chrome has a bug where it resets cursor position on us when
+      // we debounce the input.  So manually save & restore cursor.
+      const i = input.selectionStart;
+      this.onInputChange(input);
+      if (document.activeElement === input) {
+        input.setSelectionRange(i, i);
+      }
+    });
+  };
+  let onchange = (event) => {
+    nassh.PreferencesEditor.debounce(event.target, (input) => {
+      this.onInputChange(input);
+    });
+  };
   let oninput = null;
 
-  const addOption = function(parent, value) {
+  const addOption = (parent, value) => {
     const option = document.createElement('option');
     option.value = JSON.stringify(value);
     option.innerText = (value === null ? 'auto' : value);

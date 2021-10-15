@@ -243,8 +243,6 @@ hterm.Terminal.prototype.setProfile = function(
     profileId, callback = undefined) {
   this.profileId_ = profileId.replace(/\//g, '');
 
-  const terminal = this;
-
   if (this.prefs_) {
     this.prefs_.deactivate();
   }
@@ -258,8 +256,8 @@ hterm.Terminal.prototype.setProfile = function(
    * @param {*?=} bindings
    * @param {*?=} useOsDefaults
    */
-  function loadKeyBindings(bindings = null, useOsDefaults = false) {
-    terminal.keyboard.bindings.clear();
+  const loadKeyBindings = (bindings = null, useOsDefaults = false) => {
+    this.keyboard.bindings.clear();
 
     // Default to an empty object so we still handle OS defaults.
     if (bindings === null) {
@@ -273,14 +271,14 @@ hterm.Terminal.prototype.setProfile = function(
     }
 
     try {
-      terminal.keyboard.bindings.addBindings(bindings, !!useOsDefaults);
+      this.keyboard.bindings.addBindings(bindings, !!useOsDefaults);
     } catch (ex) {
       console.error('Error in keybindings preference: ' + ex);
     }
-  }
+  };
 
   this.prefs_.addObservers(null, {
-    'alt-gr-mode': function(v) {
+    'alt-gr-mode': (v) => {
       if (v == null) {
         if (navigator.language.toLowerCase() == 'en-us') {
           v = 'none';
@@ -297,45 +295,44 @@ hterm.Terminal.prototype.setProfile = function(
         v = 'none';
       }
 
-      terminal.keyboard.altGrMode = v;
+      this.keyboard.altGrMode = v;
     },
 
-    'alt-backspace-is-meta-backspace': function(v) {
-      terminal.keyboard.altBackspaceIsMetaBackspace = v;
+    'alt-backspace-is-meta-backspace': (v) => {
+      this.keyboard.altBackspaceIsMetaBackspace = v;
     },
 
-    'alt-is-meta': function(v) {
-      terminal.keyboard.altIsMeta = v;
+    'alt-is-meta': (v) => {
+      this.keyboard.altIsMeta = v;
     },
 
-    'alt-sends-what': function(v) {
+    'alt-sends-what': (v) => {
       if (!/^(escape|8-bit|browser-key)$/.test(v)) {
         v = 'escape';
       }
 
-      terminal.keyboard.altSendsWhat = v;
+      this.keyboard.altSendsWhat = v;
     },
 
-    'audible-bell-sound': function(v) {
+    'audible-bell-sound': (v) => {
       const ary = v.match(/^lib-resource:(\S+)/);
       if (ary) {
         const name = ary[1];
         if (lib.resource.get(name) === undefined) {
           console.warn(`Invalid resource name '${name}'`);
-          terminal.prefs_.reset('audible-bell-sound');
+          this.prefs_.reset('audible-bell-sound');
           return;
         }
-        terminal.bellAudio_.setAttribute('src', lib.resource.getDataUrl(name));
+        this.bellAudio_.setAttribute('src', lib.resource.getDataUrl(name));
       } else {
-        terminal.bellAudio_.setAttribute('src', v);
+        this.bellAudio_.setAttribute('src', v);
       }
     },
 
-    'desktop-notification-bell': function(v) {
+    'desktop-notification-bell': (v) => {
       if (v && Notification) {
-        terminal.desktopNotificationBell_ =
-            Notification.permission === 'granted';
-        if (!terminal.desktopNotificationBell_) {
+        this.desktopNotificationBell_ = Notification.permission === 'granted';
+        if (!this.desktopNotificationBell_) {
           // Note: We don't call Notification.requestPermission here because
           // Chrome requires the call be the result of a user action (such as an
           // onclick handler), and pref listeners are run asynchronously.
@@ -346,67 +343,67 @@ hterm.Terminal.prototype.setProfile = function(
                        'permission to display notifications.');
         }
       } else {
-        terminal.desktopNotificationBell_ = false;
+        this.desktopNotificationBell_ = false;
       }
     },
 
-    'background-color': function(v) {
-      terminal.setBackgroundColor(v);
+    'background-color': (v) => {
+      this.setBackgroundColor(v);
     },
 
-    'background-image': function(v) {
-      terminal.scrollPort_.setBackgroundImage(v);
+    'background-image': (v) => {
+      this.scrollPort_.setBackgroundImage(v);
     },
 
-    'background-size': function(v) {
-      terminal.scrollPort_.setBackgroundSize(v);
+    'background-size': (v) => {
+      this.scrollPort_.setBackgroundSize(v);
     },
 
-    'background-position': function(v) {
-      terminal.scrollPort_.setBackgroundPosition(v);
+    'background-position': (v) => {
+      this.scrollPort_.setBackgroundPosition(v);
     },
 
-    'backspace-sends-backspace': function(v) {
-      terminal.keyboard.backspaceSendsBackspace = v;
+    'backspace-sends-backspace': (v) => {
+      this.keyboard.backspaceSendsBackspace = v;
     },
 
-    'character-map-overrides': function(v) {
+    'character-map-overrides': (v) => {
       if (!(v == null || v instanceof Object)) {
         console.warn('Preference character-map-modifications is not an ' +
                      'object: ' + v);
         return;
       }
 
-      terminal.vt.characterMaps.reset();
-      terminal.vt.characterMaps.setOverrides(v);
+      this.vt.characterMaps.reset();
+      this.vt.characterMaps.setOverrides(v);
     },
 
-    'cursor-blink': function(v) {
-      terminal.setCursorBlink(!!v);
+    'cursor-blink': (v) => {
+      this.setCursorBlink(!!v);
     },
 
-    'cursor-shape': function(v) {
-      terminal.setCursorShape(v);
+    'cursor-shape': (v) => {
+      this.setCursorShape(v);
     },
 
-    'cursor-blink-cycle': function(v) {
+    'cursor-blink-cycle': (v) => {
         if (v instanceof Array &&
             typeof v[0] == 'number' &&
             typeof v[1] == 'number') {
-          terminal.cursorBlinkCycle_ = v;
+          this.cursorBlinkCycle_ = v;
         } else if (typeof v == 'number') {
-          terminal.cursorBlinkCycle_ = [v, v];
+          this.cursorBlinkCycle_ = [v, v];
         } else {
           // Fast blink indicates an error.
-          terminal.cursorBlinkCycle_ = [100, 100];
+          this.cursorBlinkCycle_ = [100, 100];
         }
     },
 
-    'cursor-color': function(v) {
-      terminal.setCursorColor(v);
+    'cursor-color': (v) => {
+      this.setCursorColor(v);
     },
 
-    'color-palette-overrides': function(v) {
+    'color-palette-overrides': (v) => {
       if (!(v == null || v instanceof Object || v instanceof Array)) {
         console.warn('Preference color-palette-overrides is not an array or ' +
                      'object: ' + v);
@@ -416,8 +413,8 @@ hterm.Terminal.prototype.setProfile = function(
       // Reset all existing colors first as the new palette override might not
       // have the same mappings.  If the old one set colors the new one doesn't,
       // those old mappings have to get cleared first.
-      lib.colors.stockPalette.forEach((c, i) => terminal.setColorPalette(i, c));
-      terminal.colorPaletteOverrides_.clear();
+      lib.colors.stockPalette.forEach((c, i) => this.setColorPalette(i, c));
+      this.colorPaletteOverrides_.clear();
 
       if (v) {
         for (const key in v) {
@@ -430,279 +427,279 @@ hterm.Terminal.prototype.setProfile = function(
           if (v[i]) {
             const rgb = lib.colors.normalizeCSS(v[i]);
             if (rgb) {
-              terminal.setColorPalette(i, rgb);
-              terminal.colorPaletteOverrides_.set(i, rgb);
+              this.setColorPalette(i, rgb);
+              this.colorPaletteOverrides_.set(i, rgb);
             }
           }
         }
       }
 
-      terminal.primaryScreen_.textAttributes.colorPaletteOverrides = [];
-      terminal.alternateScreen_.textAttributes.colorPaletteOverrides = [];
+      this.primaryScreen_.textAttributes.colorPaletteOverrides = [];
+      this.alternateScreen_.textAttributes.colorPaletteOverrides = [];
     },
 
-    'copy-on-select': function(v) {
-      terminal.copyOnSelect = !!v;
+    'copy-on-select': (v) => {
+      this.copyOnSelect = !!v;
     },
 
-    'use-default-window-copy': function(v) {
-      terminal.useDefaultWindowCopy = !!v;
+    'use-default-window-copy': (v) => {
+      this.useDefaultWindowCopy = !!v;
     },
 
-    'clear-selection-after-copy': function(v) {
-      terminal.clearSelectionAfterCopy = !!v;
+    'clear-selection-after-copy': (v) => {
+      this.clearSelectionAfterCopy = !!v;
     },
 
-    'ctrl-plus-minus-zero-zoom': function(v) {
-      terminal.keyboard.ctrlPlusMinusZeroZoom = v;
+    'ctrl-plus-minus-zero-zoom': (v) => {
+      this.keyboard.ctrlPlusMinusZeroZoom = v;
     },
 
-    'ctrl-c-copy': function(v) {
-      terminal.keyboard.ctrlCCopy = v;
+    'ctrl-c-copy': (v) => {
+      this.keyboard.ctrlCCopy = v;
     },
 
-    'ctrl-v-paste': function(v) {
-      terminal.keyboard.ctrlVPaste = v;
-      terminal.scrollPort_.setCtrlVPaste(v);
+    'ctrl-v-paste': (v) => {
+      this.keyboard.ctrlVPaste = v;
+      this.scrollPort_.setCtrlVPaste(v);
     },
 
-    'paste-on-drop': function(v) {
-      terminal.scrollPort_.setPasteOnDrop(v);
+    'paste-on-drop': (v) => {
+      this.scrollPort_.setPasteOnDrop(v);
     },
 
-    'east-asian-ambiguous-as-two-column': function(v) {
+    'east-asian-ambiguous-as-two-column': (v) => {
       lib.wc.regardCjkAmbiguous = v;
     },
 
-    'enable-8-bit-control': function(v) {
-      terminal.vt.enable8BitControl = !!v;
+    'enable-8-bit-control': (v) => {
+      this.vt.enable8BitControl = !!v;
     },
 
-    'enable-bold': function(v) {
-      terminal.syncBoldSafeState();
+    'enable-bold': (v) => {
+      this.syncBoldSafeState();
     },
 
-    'enable-bold-as-bright': function(v) {
-      terminal.primaryScreen_.textAttributes.enableBoldAsBright = !!v;
-      terminal.alternateScreen_.textAttributes.enableBoldAsBright = !!v;
+    'enable-bold-as-bright': (v) => {
+      this.primaryScreen_.textAttributes.enableBoldAsBright = !!v;
+      this.alternateScreen_.textAttributes.enableBoldAsBright = !!v;
     },
 
-    'enable-blink': function(v) {
-      terminal.setTextBlink(!!v);
+    'enable-blink': (v) => {
+      this.setTextBlink(!!v);
     },
 
-    'enable-clipboard-write': function(v) {
-      terminal.vt.enableClipboardWrite = !!v;
+    'enable-clipboard-write': (v) => {
+      this.vt.enableClipboardWrite = !!v;
     },
 
-    'enable-dec12': function(v) {
-      terminal.vt.enableDec12 = !!v;
+    'enable-dec12': (v) => {
+      this.vt.enableDec12 = !!v;
     },
 
-    'enable-csi-j-3': function(v) {
-      terminal.vt.enableCsiJ3 = !!v;
+    'enable-csi-j-3': (v) => {
+      this.vt.enableCsiJ3 = !!v;
     },
 
-    'find-result-color': function(v) {
-      terminal.findBar.setFindResultColor(v);
+    'find-result-color': (v) => {
+      this.findBar.setFindResultColor(v);
     },
 
-    'find-result-selected-color': function(v) {
-      terminal.findBar.setFindResultSelectedColor(v);
+    'find-result-selected-color': (v) => {
+      this.findBar.setFindResultSelectedColor(v);
     },
 
-    'font-family': function(v) {
-      terminal.syncFontFamily();
+    'font-family': (v) => {
+      this.syncFontFamily();
     },
 
-    'font-size': function(v) {
+    'font-size': (v) => {
       v = parseInt(v, 10);
       if (isNaN(v) || v <= 0) {
         console.error(`Invalid font size: ${v}`);
         return;
       }
 
-      terminal.setFontSize(v);
+      this.setFontSize(v);
     },
 
-    'font-smoothing': function(v) {
-      terminal.syncFontFamily();
+    'font-smoothing': (v) => {
+      this.syncFontFamily();
     },
 
-    'foreground-color': function(v) {
-      terminal.setForegroundColor(v);
+    'foreground-color': (v) => {
+      this.setForegroundColor(v);
     },
 
-    'hide-mouse-while-typing': function(v) {
-      terminal.setAutomaticMouseHiding(v);
+    'hide-mouse-while-typing': (v) => {
+      this.setAutomaticMouseHiding(v);
     },
 
-    'home-keys-scroll': function(v) {
-      terminal.keyboard.homeKeysScroll = v;
+    'home-keys-scroll': (v) => {
+      this.keyboard.homeKeysScroll = v;
     },
 
-    'keybindings': function(v) {
-      loadKeyBindings(v, terminal.prefs_.get('keybindings-os-defaults'));
+    'keybindings': (v) => {
+      loadKeyBindings(v, this.prefs_.get('keybindings-os-defaults'));
     },
 
-    'keybindings-os-defaults': function(v) {
-      loadKeyBindings(terminal.prefs_.get('keybindings'), v);
+    'keybindings-os-defaults': (v) => {
+      loadKeyBindings(this.prefs_.get('keybindings'), v);
     },
 
-    'line-height-padding-size': function(v) {
+    'line-height-padding-size': (v) => {
       v = parseFloat(v);
       if (isNaN(v)) {
         console.error(`Invalid line height padding size: ${v}`);
         return;
       }
-      terminal.setLineHeightPaddingSize(v);
+      this.setLineHeightPaddingSize(v);
     },
 
-    'media-keys-are-fkeys': function(v) {
-      terminal.keyboard.mediaKeysAreFKeys = v;
+    'media-keys-are-fkeys': (v) => {
+      this.keyboard.mediaKeysAreFKeys = v;
     },
 
-    'meta-sends-escape': function(v) {
-      terminal.keyboard.metaSendsEscape = v;
+    'meta-sends-escape': (v) => {
+      this.keyboard.metaSendsEscape = v;
     },
 
-    'mouse-right-click-paste': function(v) {
-      terminal.mouseRightClickPaste = v;
+    'mouse-right-click-paste': (v) => {
+      this.mouseRightClickPaste = v;
     },
 
-    'mouse-paste-button': function(v) {
-      terminal.syncMousePasteButton();
+    'mouse-paste-button': (v) => {
+      this.syncMousePasteButton();
     },
 
-    'page-keys-scroll': function(v) {
-      terminal.keyboard.pageKeysScroll = v;
+    'page-keys-scroll': (v) => {
+      this.keyboard.pageKeysScroll = v;
     },
 
-    'pass-alt-number': function(v) {
+    'pass-alt-number': (v) => {
       if (v == null) {
         // Let Alt+1..9 pass to the browser (to control tab switching) on
         // non-OS X systems, or if hterm is not opened in an app window.
         v = (hterm.os != 'mac' && hterm.windowType != 'popup');
       }
 
-      terminal.passAltNumber = v;
+      this.passAltNumber = v;
     },
 
-    'pass-ctrl-number': function(v) {
+    'pass-ctrl-number': (v) => {
       if (v == null) {
         // Let Ctrl+1..9 pass to the browser (to control tab switching) on
         // non-OS X systems, or if hterm is not opened in an app window.
         v = (hterm.os != 'mac' && hterm.windowType != 'popup');
       }
 
-      terminal.passCtrlNumber = v;
+      this.passCtrlNumber = v;
     },
 
-    'pass-ctrl-n': function(v) {
-      terminal.passCtrlN = v;
+    'pass-ctrl-n': (v) => {
+      this.passCtrlN = v;
     },
 
-    'pass-ctrl-t': function(v) {
-      terminal.passCtrlT = v;
+    'pass-ctrl-t': (v) => {
+      this.passCtrlT = v;
     },
 
-    'pass-ctrl-tab': function(v) {
-      terminal.passCtrlTab = v;
+    'pass-ctrl-tab': (v) => {
+      this.passCtrlTab = v;
     },
 
-    'pass-ctrl-w': function(v) {
-      terminal.passCtrlW = v;
+    'pass-ctrl-w': (v) => {
+      this.passCtrlW = v;
     },
 
-    'pass-meta-number': function(v) {
+    'pass-meta-number': (v) => {
       if (v == null) {
         // Let Meta+1..9 pass to the browser (to control tab switching) on
         // OS X systems, or if hterm is not opened in an app window.
         v = (hterm.os == 'mac' && hterm.windowType != 'popup');
       }
 
-      terminal.passMetaNumber = v;
+      this.passMetaNumber = v;
     },
 
-    'pass-meta-v': function(v) {
-      terminal.keyboard.passMetaV = v;
+    'pass-meta-v': (v) => {
+      this.keyboard.passMetaV = v;
     },
 
-    'screen-padding-size': function(v) {
+    'screen-padding-size': (v) => {
       v = parseInt(v, 10);
       if (isNaN(v) || v < 0) {
         console.error(`Invalid screen padding size: ${v}`);
         return;
       }
-      terminal.setScreenPaddingSize(v);
+      this.setScreenPaddingSize(v);
     },
 
-    'screen-border-size': function(v) {
+    'screen-border-size': (v) => {
       v = parseInt(v, 10);
       if (isNaN(v) || v < 0) {
         console.error(`Invalid screen border size: ${v}`);
         return;
       }
-      terminal.setScreenBorderSize(v);
+      this.setScreenBorderSize(v);
     },
 
-    'screen-border-color': function(v) {
-      terminal.div_.style.borderColor = v;
+    'screen-border-color': (v) => {
+      this.div_.style.borderColor = v;
     },
 
-    'scroll-on-keystroke': function(v) {
-      terminal.scrollOnKeystroke_ = v;
+    'scroll-on-keystroke': (v) => {
+      this.scrollOnKeystroke_ = v;
     },
 
-    'scroll-on-output': function(v) {
-      terminal.scrollOnOutput_ = v;
+    'scroll-on-output': (v) => {
+      this.scrollOnOutput_ = v;
     },
 
-    'scrollbar-visible': function(v) {
-      terminal.setScrollbarVisible(v);
+    'scrollbar-visible': (v) => {
+      this.setScrollbarVisible(v);
     },
 
-    'scroll-wheel-may-send-arrow-keys': function(v) {
-      terminal.scrollWheelArrowKeys_ = v;
+    'scroll-wheel-may-send-arrow-keys': (v) => {
+      this.scrollWheelArrowKeys_ = v;
     },
 
-    'scroll-wheel-move-multiplier': function(v) {
-      terminal.setScrollWheelMoveMultipler(v);
+    'scroll-wheel-move-multiplier': (v) => {
+      this.setScrollWheelMoveMultipler(v);
     },
 
-    'shift-insert-paste': function(v) {
-      terminal.keyboard.shiftInsertPaste = v;
+    'shift-insert-paste': (v) => {
+      this.keyboard.shiftInsertPaste = v;
     },
 
-    'terminal-encoding': function(v) {
-      terminal.vt.setEncoding(v);
+    'terminal-encoding': (v) => {
+      this.vt.setEncoding(v);
     },
 
-    'user-css': function(v) {
-      terminal.scrollPort_.setUserCssUrl(v);
+    'user-css': (v) => {
+      this.scrollPort_.setUserCssUrl(v);
     },
 
-    'user-css-text': function(v) {
-      terminal.scrollPort_.setUserCssText(v);
+    'user-css-text': (v) => {
+      this.scrollPort_.setUserCssText(v);
     },
 
-    'word-break-match-left': function(v) {
-      terminal.primaryScreen_.wordBreakMatchLeft = v;
-      terminal.alternateScreen_.wordBreakMatchLeft = v;
+    'word-break-match-left': (v) => {
+      this.primaryScreen_.wordBreakMatchLeft = v;
+      this.alternateScreen_.wordBreakMatchLeft = v;
     },
 
-    'word-break-match-right': function(v) {
-      terminal.primaryScreen_.wordBreakMatchRight = v;
-      terminal.alternateScreen_.wordBreakMatchRight = v;
+    'word-break-match-right': (v) => {
+      this.primaryScreen_.wordBreakMatchRight = v;
+      this.alternateScreen_.wordBreakMatchRight = v;
     },
 
-    'word-break-match-middle': function(v) {
-      terminal.primaryScreen_.wordBreakMatchMiddle = v;
-      terminal.alternateScreen_.wordBreakMatchMiddle = v;
+    'word-break-match-middle': (v) => {
+      this.primaryScreen_.wordBreakMatchMiddle = v;
+      this.alternateScreen_.wordBreakMatchMiddle = v;
     },
 
-    'allow-images-inline': function(v) {
-      terminal.allowImagesInline = v;
+    'allow-images-inline': (v) => {
+      this.allowImagesInline = v;
     },
   });
 

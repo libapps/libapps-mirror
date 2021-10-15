@@ -34,6 +34,7 @@ module.exports = {
     'comma-style': 'error',
     // We want this on, but the parser is confused by IIFE calls.
     'consistent-return': 'off',
+    'consistent-this': ['error', 'self'],
     'curly': 'error',
     'default-param-last': 'error',
     'eol-last': 'error',
