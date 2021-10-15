@@ -1076,11 +1076,20 @@ nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
 
     this.io.println(nassh.msg(
         'INITIALIZING_RELAY',
-        [this.relay_.proxyHost + ':' + this.relay_.proxyPort]));
+        [`${this.relay_.proxyHost}:${this.relay_.proxyPort}`]));
 
     if (params.relayState !== undefined) {
       this.relay_.loadState(params.relayState);
     } else if (!await this.relay_.init()) {
+      // If --relay-method=direct, this is an error.
+      if (this.relay_.relayMethod === 'direct') {
+        this.io.println(nassh.msg(
+            'RELAY_AUTH_ERROR',
+            [`${this.relay_.proxyHost}:${this.relay_.proxyPort}`]));
+        this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, true);
+        return;
+      }
+
       // A false return value means we have to redirect to complete
       // initialization.  Bail out of the connect for now.  We'll resume it
       // when the relay is done with its redirect.

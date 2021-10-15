@@ -1857,6 +1857,16 @@
 		"description": "Message displayed after a connection closes. We capitialize 'Reconnect', 'Choose', and 'Exit' as a hint to the reader that these are the actions they may choose from, but keeping them capitalized as such is not required. Do not translate the (R), (C), or (X) fields as they are keyboard shortcuts. Placing them relative to the word is OK as long as it's clear what action will be taken when the keyboard button is pressed. Similarly, using parentheses is not required other than for clarity. Changing case is also OK. There is an additional (E) keyboard shortcut that is the same as (X), so that may be used as an alternative if the translation uses an E but not an X. For example, these are OK: 'Exit (X)' or '[X]Exit' or '(E)xit' or whatever makes the most sense for the language. The '(default)' text indicates the 'reconnect' action will be taken if the user presses Enter.",
 		"message": "(R)econnect (default), (C)hoose another connection, or E(x)it?"
 	},
+	"RELAY_AUTH_ERROR": {
+		"description": "Displayed on the screen when we fail to authenticate with the relay server (which is like a web proxy for connections).",
+		"message": "Error authenticating with relay server: $URL$",
+		"placeholders": {
+			"URL": {
+				"content": "$1",
+				"example": "http://proxy.example.com:8023/"
+			}
+		}
+	},
 	"RELAY_RETRY": {
 		"description": "Displayed in a text overlay when we experience an error talking to the relay server (which is like a web proxy for connections).",
 		"message": "Retrying..."
