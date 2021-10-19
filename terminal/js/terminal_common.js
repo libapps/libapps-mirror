@@ -23,6 +23,9 @@ export const SUPPORTED_FONT_FAMILIES = new Map([
 ]);
 export const DEFAULT_FONT_FAMILY = SUPPORTED_FONT_FAMILIES.keys().next().value;
 export const SUPPORTED_FONT_SIZES = [10, 11, 12, 13, 14, 16, 18, 20];
+export const SUPPORTED_LINE_HEIGHT_PADDINGS = [-2, -1.5, -1, -0.5, 0, 0.5, 1,
+  1.5, 2, 3, 4, 5];
+
 // Numeric chrome version (e.g. 78). `null` if fail to detect.
 export const CHROME_VERSION = (function() {
   const matches = navigator.userAgent.match(/Chrome\/(\d+)/);

@@ -9,7 +9,8 @@
  */
 
 import {css, html, LitElement, unsafeCSS} from './lit_element.js';
-import {SUPPORTED_FONT_SIZES} from './terminal_common.js';
+import {SUPPORTED_FONT_SIZES,
+  SUPPORTED_LINE_HEIGHT_PADDINGS} from './terminal_common.js';
 import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_settings_ansi_colors.js';
 import './terminal_settings_app.js';
@@ -266,6 +267,18 @@ export class TerminalSettingsApp extends LitElement {
                 <terminal-settings-ansi-colors
                     preference="color-palette-overrides">
                 </terminal-settings-ansi-colors>
+              </li>
+              <li class="setting-container"
+                  title="${msg('HTERM_PREF_LINE_HEIGHT_PADDING_SIZE')}">
+                <h4>${msg('HTERM_NAME_PREF_LINE_HEIGHT_PADDING_SIZE')}</h4>
+                <!-- TODO(easy): Support text field entry. -->
+                <terminal-settings-dropdown
+                    preference="line-height-padding-size"
+                    title="${msg('HTERM_PREF_FONT_SIZE')}"
+                    .options="${SUPPORTED_LINE_HEIGHT_PADDINGS.map(
+                      (value) => ({value}))}"
+                >
+                </terminal-settings-dropdown>
               </li>
             </ul>
           </section>
