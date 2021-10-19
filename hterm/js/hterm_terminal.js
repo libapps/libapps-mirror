@@ -241,7 +241,15 @@ hterm.Terminal.prototype.tabWidth = 8;
  */
 hterm.Terminal.prototype.setProfile = function(
     profileId, callback = undefined) {
-  this.profileId_ = profileId.replace(/\//g, '');
+  profileId = profileId.replace(/\//g, '');
+  if (this.profileId_ === profileId) {
+    if (callback) {
+      callback();
+    }
+    return;
+  }
+
+  this.profileId_ = profileId;
 
   if (this.prefs_) {
     this.prefs_.deactivate();

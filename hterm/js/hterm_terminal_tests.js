@@ -980,4 +980,20 @@ it('auto-scroll-enabled', function() {
   assert.isFalse(s.autoScrollEnabled_);
 });
 
+/**
+ * Tests changing profile for terminal.
+ */
+it('set-profile', async function() {
+  const prefs = this.terminal.getPrefs();
+  await new Promise((resolve) => {
+    this.terminal.setProfile('default', resolve);
+  });
+  assert.equal(prefs, this.terminal.getPrefs());
+
+  await new Promise((resolve) => {
+    this.terminal.setProfile('not-default', resolve);
+  });
+  assert.notEqual(prefs, this.terminal.getPrefs());
+});
+
 });
