@@ -304,7 +304,7 @@ in the Action column below.
 |  h  |          |                                             | *Ignored (TBD)* |
 |  i  |          |                                             | *Ignored (TBD)* |
 |  j  |          |                                             | *Ignored (TBD)* |
-|  k  |          |                                             | *Ignored (TBD)* |
+|  k  |          | Set tmux window name                        | Supported [**(1)**](#ESC-footer) |
 |  l  |          | Memory lock/unlock                          | Won't support |
 |  m  |          | Memory lock/unlock                          | Won't support |
 |  n  | LS2      | Locking Shift Two                           | Point [GL] to [G2] |
@@ -324,6 +324,11 @@ in the Action column below.
 |&#124;|LS3R     | Locking Shift Three Right                   | *Ignored* (Point [GR] to [G3]) |
 |  }  | LS2R     | Locking Shift Two Right                     | *Ignored* (Point [GR] to [G2]) |
 |  ~  | LS1R     | Locking Shift One Right                     | *Ignored* (Point [GR] to [G1]) |
+
+{#ESC-footer}
+1. This is different from window title. See the [tmux
+   manual](https://man7.org/linux/man-pages/man1/tmux.1.html#NAMES_AND_TITLES).
+   It does nothing by default.
 
 ### ESC+&#35; (DEC) {#DEC}
 

@@ -1164,6 +1164,14 @@ hterm.Terminal.prototype.setWindowTitle = function(title) {
 };
 
 /**
+ * Change the name of the terminal. This is used by tmux, and it is different
+ * from the window title. See the "NAMES AND TITLES" section in `man tmux`.
+ *
+ * @param {string} name The name to set.
+ */
+hterm.Terminal.prototype.setWindowName = function(name) {};
+
+/**
  * Restore a previously saved cursor position.
  *
  * @param {!hterm.RowCol} cursor The position to restore.

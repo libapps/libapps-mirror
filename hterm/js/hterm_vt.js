@@ -1806,6 +1806,33 @@ hterm.VT.ESC['c'] = function() {
 };
 
 /**
+ * Set window name. This is used by tmux (maybe also screen) and it is different
+ * from window title. See the "NAMES AND TITLES" section in `man tmux`.
+ *
+ * @this {!hterm.VT}
+ * @param {!hterm.VT.ParseState} parseState The current parse state.
+ */
+hterm.VT.ESC['k'] = function(parseState) {
+  function parse(parseState) {
+    if (!this.parseUntilStringTerminator_(parseState)) {
+      // The string sequence was too long.
+      return;
+    }
+
+    if (parseState.func === parse) {
+      // We're not done parsing the string yet.
+      return;
+    }
+
+    this.terminal.setWindowName(parseState.args[0]);
+    parseState.resetArguments();
+  }
+
+  parseState.resetArguments();
+  parseState.func = parse;
+};
+
+/**
  * Memory lock/unlock.
  *
  * Will not implement.
