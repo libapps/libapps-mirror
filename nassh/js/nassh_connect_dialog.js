@@ -61,6 +61,12 @@ function ConnectDialog(messagePort) {
   this.deleteButton_ = lib.notNull(document.querySelector('#delete'));
   this.optionsButton_ = lib.notNull(document.querySelector('#options'));
   this.feedbackButton_ = lib.notNull(document.querySelector('#feedback'));
+
+  // Hide options and feedback for Terminal-SSH.
+  if (nassh.isCrOSSystemApp()) {
+    this.optionsButton_.remove();
+    this.feedbackButton_.remove();
+  }
 }
 
 /**
