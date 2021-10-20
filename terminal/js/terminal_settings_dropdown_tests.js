@@ -378,4 +378,20 @@ describe('terminal_settings_dropdown_tests.js', () => {
     await this.el.updateComplete;
     assert.isFalse(isCurrentValueDisabled());
   });
+
+  it('allows-type-coercion-for-value-matching', async function() {
+    window.preferenceManager.definePreference(preference, 1);
+    this.el.options = [
+      {value: 1},
+      {value: 2},
+      {value: 3},
+    ];
+
+    assert.equal(window.preferenceManager.get(preference), 1);
+    assert.equal(this.el.value, 1);
+
+    // Update prefs with a string, and make sure we match the number.
+    await window.preferenceManager.set(preference, '2');
+    assert.equal(this.el.value, 2);
+  });
 });

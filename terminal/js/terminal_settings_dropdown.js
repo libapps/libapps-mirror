@@ -219,7 +219,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
    *     if none are selected.
    */
   findSelectedIndex_() {
-    return this.options.findIndex((option) => option.value === this.value);
+    return this.options.findIndex((option) => option.value == this.value);
   }
 
   selectPrevious_() {
