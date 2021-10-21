@@ -219,6 +219,8 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
    *     if none are selected.
    */
   findSelectedIndex_() {
+    // Use == instead of === so that a preference supplying a string-typed
+    // this.value can match an integer typed option.value.
     return this.options.findIndex((option) => option.value == this.value);
   }
 

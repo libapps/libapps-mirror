@@ -387,11 +387,13 @@ describe('terminal_settings_dropdown_tests.js', () => {
       {value: 3},
     ];
 
-    assert.equal(window.preferenceManager.get(preference), 1);
-    assert.equal(this.el.value, 1);
+    assert.strictEqual(window.preferenceManager.get(preference), 1);
+    assert.strictEqual(this.el.value, 1);
 
-    // Update prefs with a string, and make sure we match the number.
+    // Update prefs with a string, and make sure the current value is updated.
     await window.preferenceManager.set(preference, '2');
-    assert.equal(this.el.value, 2);
+    assert.strictEqual(this.el.value, '2');  // This is still a string.
+    assert.strictEqual(
+        this.el.shadowRoot.querySelector('#current-value').innerText, '2');
   });
 });
