@@ -2,9 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {definePrefs, loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily}
-    from './terminal_common.js';
-import {TerminalActiveTracker} from './terminal_active_tracker.js';
+import {definePrefs, getActiveTrackerAndContainerId, loadPowerlineWebFonts,
+    loadWebFont, normalizeCSSFontFamily} from './terminal_common.js';
 
 export const terminal = {};
 
@@ -251,15 +250,32 @@ terminal.Command.prototype.run = function() {
   if (terminal.isCrosh()) {
     chrome.terminalPrivate.openTerminalProcess('crosh', [], pidInit);
   } else {
-    TerminalActiveTracker.get().then((tracker) => {
-      const args = [...this.argv_.args];
-      if (tracker.parentTerminal &&
-          !args.some((arg) => arg.startsWith('--cwd='))) {
-        args.push(`--cwd=terminal_id:${tracker.parentTerminal.terminalId}`);
+    const args = [...this.argv_.args];
+    getActiveTrackerAndContainerId(args).then((tcid) => {
+      const tracker = tcid.activeTracker;
+      const containerId = tcid.containerId;
+      const isParsedContainerId = tcid.isParsedContainerId;
+      if (tracker.parentTerminal) {
+        const terminalInfo = tracker.parentTerminal.terminalInfo;
+        if (!args.some((arg) => arg.startsWith('--cwd=')) &&
+            terminalInfo.terminalId) {
+          // This may not be desired with the drop-down scenario in the comment
+          // below. For now, we don't check further.
+          args.push(`--cwd=terminal_id:${terminalInfo.terminalId}`);
+        }
+        if (!isParsedContainerId) {
+          if (containerId.vmName) {
+            args.push(`--vm_name=${containerId.vmName}`);
+          }
+          if (containerId.containerName) {
+            args.push(`--target_container=${containerId.containerName}`);
+          }
+        }
       }
+      tracker.updateTerminalInfo({containerId: containerId});
       chrome.terminalPrivate.openVmshellProcess(args, (id) => {
         pidInit(id);
-        tracker.terminalId = id;
+        tracker.updateTerminalInfo({terminalId: id});
       });
     });
   }

@@ -21,11 +21,11 @@ describe('TerminalActiveTracker', () => {
     mockTabsController.stop();
   });
 
-  function checkWindowActiveTerminal(tracker, terminalId) {
+  function checkWindowActiveTerminal(tracker, terminalInfo) {
     assert.deepEqual(tracker.getWindowActiveTerminal(), {
       tabId: mockTabsController.currentTab.id,
-      terminalId,
       title: document.title,
+      terminalInfo: terminalInfo,
     });
   }
 
@@ -42,28 +42,28 @@ describe('TerminalActiveTracker', () => {
     const tracker = await TerminalActiveTracker.get();
     window.localStorage.removeItem(tracker.key);
 
-    tracker.terminalId_ = 'terminalId-123';
     tracker.active_ = false;
+    tracker.terminalInfo_ = {terminalId: 'terminalId-123'};
     tracker.maybeUpdateWindowActiveTerminal();
     assert.isNull(tracker.getWindowActiveTerminal());
 
-    tracker.terminalId_ = null;
+    tracker.terminalInfo_ = {};
     tracker.active_ = true;
     tracker.maybeUpdateWindowActiveTerminal();
     assert.isNull(tracker.getWindowActiveTerminal());
 
-    tracker.terminalId_ = 'terminalId-123';
+    tracker.terminalInfo_ = {terminalId: 'terminalId-123'};
     tracker.active_ = true;
     tracker.maybeUpdateWindowActiveTerminal();
-    checkWindowActiveTerminal(tracker, 'terminalId-123');
+    checkWindowActiveTerminal(tracker, {terminalId: 'terminalId-123'});
   });
 
   it('updates when set terminalId', async () => {
     const tracker = await TerminalActiveTracker.get();
     window.localStorage.removeItem(tracker.key);
 
-    tracker.terminalId = 'terminalId-123';
-    checkWindowActiveTerminal(tracker, 'terminalId-123');
+    tracker.updateTerminalInfo({terminalId: 'terminalId-123'});
+    checkWindowActiveTerminal(tracker, {terminalId: 'terminalId-123'});
   });
 
   it('onTabActivated_()', async () => {
@@ -74,7 +74,7 @@ describe('TerminalActiveTracker', () => {
     const windowId = mockTabsController.currentTab.windowId;
 
     tracker.active_ = true;
-    tracker.terminalId_ = 'terminalId-123';
+    tracker.terminalInfo_ = {terminalId: 'terminalId-123'};
 
     // Current window focus another tab.
     tracker.onTabActivated_({tabId: tabId + 1, windowId});
@@ -84,7 +84,7 @@ describe('TerminalActiveTracker', () => {
     // Current window focus current tab.
     tracker.onTabActivated_({tabId, windowId});
     assert.isTrue(tracker.active_);
-    checkWindowActiveTerminal(tracker, 'terminalId-123');
+    checkWindowActiveTerminal(tracker, {terminalId: 'terminalId-123'});
 
     // Another window focus some tab, which should have no effect.
     tracker.onTabActivated_({tabId: tabId + 2, windowId: windowId + 1});
@@ -98,7 +98,7 @@ describe('TerminalActiveTracker', () => {
     tracker.onTabActivated_({tabId, windowId: newWindowId});
     assert.equal(tracker.tab.windowId, newWindowId);
     assert.isTrue(tracker.active_);
-    checkWindowActiveTerminal(tracker, 'terminalId-123');
+    checkWindowActiveTerminal(tracker, {terminalId: 'terminalId-123'});
     assert.isNull(window.localStorage.getItem(oldKey));
   });
 
@@ -110,8 +110,10 @@ describe('TerminalActiveTracker', () => {
     tracker.onUnload_();
     assert.isNull(tracker.getWindowActiveTerminal());
 
-    window.localStorage.setItem(tracker.key, JSON.stringify(
-        {tabId: tabId + 1}));
+    window.localStorage.setItem(tracker.key, JSON.stringify({
+      tabId: tabId + 1,
+      terminalInfo: {},
+    }));
     tracker.onUnload_();
     assert.isNotNull(tracker.getWindowActiveTerminal());
   });

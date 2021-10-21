@@ -6,7 +6,7 @@
  * @fileoverview Common code for terminal and it settings page.
  */
 
-import {TerminalActiveTracker} from './terminal_active_tracker.js';
+import {ContainerId, TerminalActiveTracker} from './terminal_active_tracker.js';
 
 // The value of an entry is true if it is a web font from fonts.google.com,
 // otherwise it is a local font. Note that the UI shows the fonts in the same
@@ -214,19 +214,87 @@ export function loadPowerlineWebFonts(document) {
 }
 
 /**
+ * @param {!Array<string>} args Arguments passed in the URL
+ * @return {!ContainerId}
+ */
+export function parseContainerId(args) {
+  const containerId = /** @type {!ContainerId} */ ({});
+  args.forEach((arg) => {
+    if (arg.startsWith('--vm_name=')) {
+      containerId.vmName = arg.split('=', 2)[1];
+    } else if (arg.startsWith('--target_container=')) {
+      containerId.containerName = arg.split('=', 2)[1];
+    }
+  });
+  return containerId;
+}
+
+/**
+ * Create a title of the form <>@container:~ or <>@vm:~.
+ *
+ * @param {!ContainerId} containerId
+ * @return {string}
+ */
+export function composeTitle(containerId) {
+  let suffix = (containerId.containerName || containerId.vmName || '');
+  suffix += ':~';
+  return '<>@' + suffix;
+}
+
+/**
+ * Get an active tracker and determine the approriate containerId
+ *
+ * @param {!Array<string>} args Arguments passed in the URL
+ * @return {!Promise<{
+ *    activeTracker: !TerminalActiveTracker,
+ *    containerId: !ContainerId,
+ *    isParsedContainerId: boolean,
+ * }>}
+ */
+export async function getActiveTrackerAndContainerId(args) {
+  const tracker = await TerminalActiveTracker.get();
+  const containerId = parseContainerId(args);
+  const isParsedContainerId = Object.keys(containerId).length > 0;
+  if (!isParsedContainerId && tracker.parentTerminal) {
+    // When we have a parent terminal, we won't have any vmName or
+    // containerName already in the args. Revisit this assumption if we
+    // implement a drop down menu to select a different vm/container from
+    // the active tab.
+    Object.assign(containerId, tracker.parentTerminal.terminalInfo.containerId);
+  }
+  return {
+    activeTracker: tracker,
+    containerId: containerId,
+    isParsedContainerId: isParsedContainerId,
+  };
+}
+
+/**
  * Set up a title handler, which sets a proper document title before the
  * terminal is ready, and caches title for other terminals to use.
  *
+ * @param {?ContainerId=} containerId parsed from URL.
  * @return {!Promise<function()>} return a function to stop the handler. This is
  *     mainly for testing.
  */
-export async function setUpTitleHandler() {
-  const tracker = await TerminalActiveTracker.get();
+export async function setUpTitleHandler(containerId) {
+  const trackerAndContainerId = await getActiveTrackerAndContainerId(
+      new URLSearchParams(document.location.search).getAll('args[]'));
+  const tracker = trackerAndContainerId.activeTracker;
+  containerId = containerId || trackerAndContainerId.containerId;
+  const isNonEmptyContainerId = Object.keys(containerId).length > 0;
+  let key = 'cachedInitialTitle';
+  if (isNonEmptyContainerId) {
+    key += '-' + JSON.stringify(containerId);
+  }
 
   if (tracker.parentTerminal) {
     document.title = tracker.parentTerminal.title;
   } else {
-    const title = window.localStorage.getItem('cachedInitialTitle');
+    let title = window.localStorage.getItem(key);
+    if (title === null && isNonEmptyContainerId) {
+      title = composeTitle(containerId);
+    }
     if (title !== null) {
       document.title = title;
     }
@@ -235,8 +303,7 @@ export async function setUpTitleHandler() {
   let isFirstTitle = true;
   const observer = new MutationObserver(function(mutations, observer) {
     if (isFirstTitle && !tracker.parentTerminal) {
-      window.localStorage.setItem('cachedInitialTitle',
-          mutations[0].target.textContent);
+      window.localStorage.setItem(key, mutations[0].target.textContent);
     }
     isFirstTitle = false;
     tracker.maybeUpdateWindowActiveTerminal();

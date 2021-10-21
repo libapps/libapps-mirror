@@ -55,19 +55,29 @@ it('opens-process-in-init', async function() {
   assert.match(args[0], /^--startup_id=\d+$/);
 
   pidInit('terminalId-456');
-  assert.equal(tracker.terminalId, 'terminalId-456');
+  assert.equal(tracker.terminalInfo_.terminalId, 'terminalId-456');
 });
 
 it('opens-process-in-init-with-parent-terminal', async function() {
   const tracker = await TerminalActiveTracker.get();
-  tracker.parentTerminal = {terminalId: 'terminalId-123', tabId: 1, title: 't'};
+  tracker.parentTerminal = {
+    tabId: 1,
+    title: 't',
+    terminalInfo: {
+      terminalId: 'terminalId-123',
+      containerId: {vmName: 'test-vm', containerName: 'test-container'},
+    },
+  };
 
   terminal.init(div);
   const [args] =
       await mockTerminalPrivateController.on('openVmshellProcess');
-  assert.lengthOf(args, 2);
+
+  assert.lengthOf(args, 4);
   assert.match(args[0], /^--startup_id=\d+$/);
   assert.equal(args[1], '--cwd=terminal_id:terminalId-123');
+  assert.equal(args[2], `--vm_name=test-vm`);
+  assert.equal(args[3], `--target_container=test-container`);
 });
 
 [true, false].map((value) => it(`set-a11y-in-init-to-${value}`, async () => {

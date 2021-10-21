@@ -4,9 +4,25 @@
 
 /**
  * @typedef {{
+ *  vmName: (string|undefined),
+ *  containerName: (string|undefined),
+ * }}
+ */
+export let ContainerId;
+
+/**
+ * @typedef {{
+ *            terminalId: (string|undefined),
+ *            containerId: (!ContainerId|undefined),
+ * }}
+ */
+let TerminalInfo;
+
+/**
+ * @typedef {{
  *            tabId: number,
- *            terminalId: string,
  *            title: string,
+ *            terminalInfo: !TerminalInfo,
  * }}
  */
 let ActiveTerminalInfo;
@@ -56,19 +72,18 @@ export class TerminalActiveTracker {
     /** @public {boolean} */
     this.active_ = this.tab.active;
 
-    /** @public {?string} */
-    this.terminalId_;
+    /** @public {!TerminalInfo} */
+    this.terminalInfo_ = {};
 
     chrome.tabs.onActivated.addListener((e) => this.onTabActivated_(e));
     window.addEventListener('unload', () => this.onUnload_());
   }
 
-  get terminalId() {
-    return this.terminalId_;
-  }
-
-  set terminalId(terminalId) {
-    this.terminalId_ = terminalId;
+  /**
+   * @param {!TerminalInfo} update
+   */
+  updateTerminalInfo(update) {
+    Object.assign(this.terminalInfo_, update);
     this.maybeUpdateWindowActiveTerminal();
   }
 
@@ -87,9 +102,7 @@ export class TerminalActiveTracker {
    * @param {number} windowId
    * @return {string}
    */
-  static getKey(windowId) {
-    return `windowActiveTerminal-${windowId}`;
-  }
+  static getKey(windowId) { return `activeTerminalInfo-${windowId}`; }
 
   /**
    * Get the active terminal info for the current window.
@@ -99,7 +112,13 @@ export class TerminalActiveTracker {
   getWindowActiveTerminal() {
     const data = window.localStorage.getItem(this.key);
     if (data) {
-      return /** @type {!ActiveTerminalInfo} */(JSON.parse(data));
+      const activeTerminalInfo =
+          /** @type {!ActiveTerminalInfo} */(JSON.parse(data));
+      if (activeTerminalInfo.terminalInfo) {
+        return activeTerminalInfo;
+      }
+      // Clean up bad data.
+      window.localStorage.removeItem(this.key);
     }
     return null;
   }
@@ -109,14 +128,12 @@ export class TerminalActiveTracker {
    * active and the terminal id has been set.
    */
   maybeUpdateWindowActiveTerminal() {
-    if (this.terminalId_ && this.active_) {
-      window.localStorage.setItem(
-          this.key,
-          JSON.stringify({
-            tabId: this.tab.id,
-            terminalId: this.terminalId_,
-            title: document.title,
-          }));
+    if (this.active_ && Object.keys(this.terminalInfo_).length) {
+      window.localStorage.setItem(this.key, JSON.stringify({
+        tabId: this.tab.id,
+        title: document.title,
+        terminalInfo: this.terminalInfo_,
+      }));
     }
   }
 

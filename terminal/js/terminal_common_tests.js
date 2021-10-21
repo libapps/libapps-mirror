@@ -6,10 +6,10 @@
  * @fileoverview unit tests for terminal_common.js
  */
 
-import {DEFAULT_BACKGROUND_COLOR, DEFAULT_FONT_SIZE, SUPPORTED_FONT_FAMILIES,
-  SUPPORTED_FONT_SIZES, definePrefs, fontFamilyToCSS,
-  normalizePrefsInPlace, setUpTitleHandler} from './terminal_common.js';
 import {TerminalActiveTracker} from './terminal_active_tracker.js';
+import {DEFAULT_BACKGROUND_COLOR, DEFAULT_FONT_SIZE, definePrefs,
+    fontFamilyToCSS, normalizePrefsInPlace, parseContainerId, setUpTitleHandler,
+    SUPPORTED_FONT_FAMILIES, SUPPORTED_FONT_SIZES} from './terminal_common.js';
 
 const fontFamilies = Array.from(SUPPORTED_FONT_FAMILIES.keys());
 
@@ -120,6 +120,50 @@ describe('terminal_common_tests.js', () => {
     document.title = 'test title 3';
     await Promise.resolve();
     assert.equal(window.localStorage.getItem('cachedInitialTitle'),
+        'test title 2',
+        'only the first changed title should be written to the cache');
+    assert.equal(trackerUpdateCount, 2);
+
+    stopHandler();
+  });
+
+  it('setUpTitleHandler-cache-respects-container-id', async () => {
+    const search = '?command=vmshell&args[]=--vm_name=test-vm' +
+                   '&args[]=--target_container=test-container';
+    const parsedContainerId =
+        parseContainerId(new URLSearchParams(search).getAll('args[]'));
+    assert.equal(parsedContainerId.vmName, 'test-vm');
+    assert.equal(parsedContainerId.containerName, 'test-container');
+
+    document.title = 'test title';
+    const key = 'cachedInitialTitle-' +
+                '{"vmName":"test-vm","containerName":"test-container"}';
+
+    window.localStorage.setItem(key, 'cached title');
+    window.localStorage.setItem('cachedInitialTitle', 'wrong-cached title');
+
+    const tracker = await TerminalActiveTracker.get();
+    let trackerUpdateCount = 0;
+    tracker.maybeUpdateWindowActiveTerminal = () => trackerUpdateCount++;
+
+    document.location.search = search;
+    const stopHandler = await setUpTitleHandler(parsedContainerId);
+
+    assert.equal(
+        document.title, 'cached title', 'title should be set to cache');
+
+    await Promise.resolve();
+    assert.equal(window.localStorage.getItem(key), 'cached title');
+
+    document.title = 'test title 2';
+    await Promise.resolve();
+    assert.equal(window.localStorage.getItem(key), 'test title 2');
+    assert.equal(trackerUpdateCount, 1);
+
+    document.title = 'test title 3';
+    await Promise.resolve();
+    assert.equal(
+        window.localStorage.getItem(key),
         'test title 2',
         'only the first changed title should be written to the cache');
     assert.equal(trackerUpdateCount, 2);
