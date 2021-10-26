@@ -546,7 +546,7 @@ Here's a random list of documents which would be useful to people.
 
 [Chrome extension manifest]: https://developer.chrome.com/extensions/manifest
 [copy-data]: https://tools.ietf.org/html/draft-ietf-secsh-filexfer-extensions-00#section-7
-[Corp Relay: relay-protocol.md#corp-relay
+[Corp Relay]: relay-protocol.md#corp-relay
 [crosh]: chromeos-crosh.md
 [gnubbyd]: https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco
 [NaCl]: https://developer.chrome.com/native-client
