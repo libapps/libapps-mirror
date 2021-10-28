@@ -23,7 +23,7 @@ import {punycode} from './nassh_deps.rollup.js';
  * @param {!Object} argv The argument object passed in from the Terminal.
  * @constructor
  */
-nassh.CommandInstance = function(argv) {
+nassh.CommandInstance = function({io, ...argv}) {
   // Command arguments.
   this.argv_ = argv;
 
@@ -31,7 +31,7 @@ nassh.CommandInstance = function(argv) {
   this.environment_ = argv.environment || {};
 
   // hterm.Terminal.IO instance (can accept another hterm.Terminal.IO instance).
-  this.io = argv.terminalIO || null;
+  this.io = io;
 
   // Relay manager.
   this.relay_ = null;
@@ -123,8 +123,6 @@ nassh.CommandInstance.EXIT_INTERNAL_ERROR = -1;
 nassh.CommandInstance.prototype.run = function() {
   // Useful for console debugging.
   window.nassh_ = this;
-
-  this.io = this.argv_.io.push();
 
   // In case something goes horribly wrong, display an error to the user so it's
   // easier for them to copy & paste when reporting issues.

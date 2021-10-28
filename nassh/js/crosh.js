@@ -51,16 +51,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
  * process on Chrome OS machine.
  *
  * @param {{
-     commandName: string,
+ *   commandName: string,
+ *   terminal: !hterm.Terminal,
  *   args: !Array<string>,
  * }} argv The argument object passed in from the Terminal.
  * @constructor
  */
-function Crosh(argv) {
-  this.commandName = argv.commandName;
-  this.argv_ = argv;
-  this.io = null;
-  this.keyboard_ = null;
+function Crosh({commandName, terminal, args}) {
+  this.commandName = commandName;
+  this.terminal = terminal;
+  this.io = terminal.io;
+  this.args = args;
   this.id_ = null;
 }
 
@@ -114,6 +115,7 @@ Crosh.init = function() {
   window.document.title = commandName;
 
   terminal.decorate(lib.notNull(document.querySelector('#terminal')));
+  terminal.installKeyboard();
   const runCrosh = function() {
     terminal.keyboard.bindings.addBinding('Ctrl+Shift+P', function() {
       nassh.openOptionsPage();
@@ -123,9 +125,12 @@ Crosh.init = function() {
     terminal.onOpenOptionsPage = nassh.openOptionsPage;
     terminal.setCursorPosition(0, 0);
     terminal.setCursorVisible(true);
-    terminal.runCommandClass(Crosh, commandName, params.getAll('args[]'));
-
-    terminal.command.keyboard_ = terminal.keyboard;
+    const crosh = new Crosh({
+      commandName,
+      terminal,
+      args: params.getAll('args[]'),
+    });
+    crosh.run();
   };
   terminal.onTerminalReady = function() {
     nassh.loadWebFonts(terminal.getDocument());
@@ -214,12 +219,8 @@ Crosh.prototype.onProcessOutput_ = function(id, type, text) {
 
 /**
  * Start the crosh command.
- *
- * This is invoked by the terminal as a result of terminal.runCommandClass().
  */
 Crosh.prototype.run = function() {
-  this.io = this.argv_.io.push();
-
   // We're not currently a window, so show a message to the user with a link to
   // open as a new window.
   if (hterm.windowType != 'popup' && !Crosh.isWebApp()) {
@@ -263,7 +264,7 @@ Crosh.prototype.run = function() {
   };
 
   chrome.terminalPrivate.openTerminalProcess(
-      this.commandName, this.argv_.args, pidInit);
+      this.commandName, this.args, pidInit);
 };
 
 /**
@@ -332,11 +333,14 @@ Crosh.prototype.exit = function(code) {
   this.close_();
   window.onbeforeunload = null;
 
-  if (code == 0) {
-    this.io.pop();
-    if (this.argv_.onExit) {
-      this.argv_.onExit(code);
+  const onExit = () => {
+    if (this.terminal.getPrefs().get('close-on-exit')) {
+      window.close();
     }
+  };
+
+  if (code == 0) {
+    onExit();
     return;
   }
 
@@ -357,10 +361,7 @@ Crosh.prototype.exit = function(code) {
 
     if (ch == 'e' || ch == 'x' || ch == '\x1b' /* ESC */ ||
         ch == '\x17' /* C-w */) {
-      this.io.pop();
-      if (this.argv_.onExit) {
-        this.argv_.onExit(code);
-      }
+      onExit();
     }
   };
 };

@@ -233,6 +233,7 @@ hterm.PreferenceManager.defaultPreferences = {
       `  "0": "\\u2588"\n} }`,
   ),
 
+  // TODO(crbug.com/1258487): remove this after all users has migrated.
   'close-on-exit': hterm.PreferenceManager.definePref_(
       'Close window on exit',
       hterm.PreferenceManager.Categories.Miscellaneous,

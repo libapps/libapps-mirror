@@ -64,12 +64,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // permission.
     terminal.alwaysUseLegacyPasting = true;
     terminal.decorate(lib.notNull(document.querySelector('#terminal')));
+    terminal.installKeyboard();
     const runNassh = function() {
       terminal.onOpenOptionsPage = nassh.openOptionsPage;
       terminal.setCursorPosition(0, 0);
       terminal.setCursorVisible(true);
-      terminal.runCommandClass(
-          nassh.CommandInstance, 'nassh', [document.location.hash.substr(1)]);
+
+      let environment = terminal.getPrefs().get('environment');
+      if (typeof environment !== 'object' || environment === null) {
+        environment = {};
+      }
+
+      const nasshCommand = new nassh.CommandInstance({
+        io: terminal.io,
+        args: [document.location.hash.substr(1)],
+        environment: environment,
+        onExit: (code) => {
+          if (terminal.getPrefs().get('close-on-exit')) {
+            window.close();
+          }
+        },
+      });
+      nasshCommand.run();
     };
     terminal.onTerminalReady = function() {
       nassh.watchBackgroundColor(terminal.getPrefs());

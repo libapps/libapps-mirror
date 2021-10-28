@@ -84,7 +84,7 @@ function(request, sender, sendResponse) {
       writeFile(identityFile, request.identityFile),
   ]).then(() => {
     const argv = {
-      terminalIO: nassh.External.io_,
+      io: nassh.External.io_,
       isSftp: true,
       mountOptions: {
         fileSystemId: request.fileSystemId,
@@ -622,7 +622,7 @@ function(port) {
       case 'connect': {
         // UI wants us to start a connection.
         const {argv, connectOptions} = msg;
-        argv.terminalIO = pipeIo;
+        argv.io = pipeIo;
         argv.onExit = (status) => {
           post({error: false, command: 'exit', status});
           port.disconnect();
