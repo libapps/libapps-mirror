@@ -285,15 +285,14 @@ nassh.relay.Corp = class extends nassh.Relay {
     if (!popup) {
       throw new Error('Could not create login popup');
     }
-    // TODO(crbug.com/1253752): Update chrome.windows.onRemoved to work for
-    // non-extensions.
     await new Promise((resolve) => {
-      const poll = window.setInterval(() => {
+      const listener = () => {
         if (popup.closed) {
-          window.clearInterval(poll);
+          chrome.windows.onRemoved.removeListener(listener);
           resolve();
         }
-      }, 500);
+      };
+      chrome.windows.onRemoved.addListener(listener);
     });
   }
 };
