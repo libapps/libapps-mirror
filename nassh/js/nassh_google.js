@@ -137,8 +137,9 @@ nassh.goog.gcse.refresh = function(io) {
         io.println(nassh.msg('SSH_CERT_CHECK_RESULT', [hoursLeft]));
         if (hoursLeft < 1) {
           io.showOverlay(nassh.msg('SSH_CERT_CHECK_REFRESH'));
-          return nassh.runtimeSendMessage(nassh.goog.gcse.defaultExtension,
-                                          {'action': 'request_certificate'});
+          return nassh.runtimeSendMessage(
+              nassh.goog.gcse.defaultExtension,
+              {action: 'request_certificate', wait: true});
         }
       } else {
         io.println(nassh.msg('SSH_CERT_CHECK_ERROR', [result.error]));
