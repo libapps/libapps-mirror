@@ -100,9 +100,12 @@ it('does-not-exit-on-first-output', async function() {
   const pid = 'pid1234';
   mockTerminalPrivate.openVmshellProcessId = pid;
   let exitCalled = false;
-  const term = terminal.init(div);
+  const term = new hterm.Terminal();
+  term.decorate(div);
+  const terminalCommand = new terminal.Command({term, args: []});
+  terminalCommand.run();
   await mockTerminalPrivateController.on('openVmshellProcess');
-  term.command.exit = () => { exitCalled = true; };
+  terminalCommand.exit = () => { exitCalled = true; };
 
   await mockTerminalPrivate.onProcessOutput.dispatch(pid, 'exit', 'text');
   assert.isFalse(exitCalled);

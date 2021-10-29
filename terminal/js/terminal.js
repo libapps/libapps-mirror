@@ -13,24 +13,22 @@ window.preferenceManager;
 /**
  * The Terminal command.
  *
- * This class defines a command that can be run in an hterm.Terminal instance.
  * The Terminal command uses the terminalPrivate extension API to create and
  * use the vmshell process on a Chrome OS machine.
  *
  * @param {{
+ *   term: !hterm.Terminal,
  *   args: !Array<string>,
- *   io: !hterm.Terminal.IO,
- * }} argv The argument object passed in from the Terminal.
+ * }} argv
  * @constructor
  */
-terminal.Command = function(argv) {
-  this.argv_ = argv;
-  this.io = null;
-  this.keyboard_ = null;
+terminal.Command = function({term, args}) {
+  this.term_ = term;
+  this.io_ = this.term_.io;
   // We pass this ID to chrome to use for startup text which is sent before the
   // vsh process is created and we receive an ID from openVmShellProcess.
   this.id_ = Math.random().toString().substring(2);
-  argv.args.push(`--startup_id=${this.id_}`);
+  this.args_ = [...args, `--startup_id=${this.id_}`];
   this.isFirstOutput = false;
 };
 
@@ -123,16 +121,18 @@ terminal.init = function(element) {
   const term = new hterm.Terminal();
 
   term.decorate(element);
+  term.installKeyboard();
   const runTerminal = function() {
     term.onOpenOptionsPage = terminal.openOptionsPage;
     term.keyboard.keyMap.keyDefs[78].control = terminal.onCtrlN;
     terminal.addBindings(term);
     term.setCursorPosition(0, 0);
     term.setCursorVisible(true);
-    term.runCommandClass(
-        terminal.Command, 'vmshell', params.getAll('args[]'));
-
-    term.command.keyboard_ = term.keyboard;
+    const terminalCommand = new terminal.Command({
+      term,
+      args: params.getAll('args[]'),
+    });
+    terminalCommand.run();
   };
   term.onTerminalReady = function() {
     const prefs = term.getPrefs();
@@ -203,20 +203,16 @@ terminal.Command.prototype.onProcessOutput_ = function(id, type, text) {
     this.exit(0);
     return;
   }
-  this.io.print(text);
+  this.io_.print(text);
   this.isFirstOutput_ = false;
 };
 
 /**
  * Start the terminal command.
- *
- * This is invoked by the terminal as a result of terminal.runCommandClass().
  */
 terminal.Command.prototype.run = function() {
-  this.io = this.argv_.io.push();
-
   if (!chrome.terminalPrivate) {
-    this.io.println(
+    this.io_.println(
         'Launching terminal failed: chrome.terminalPrivate not found');
     this.exit(1);
     return;
@@ -227,7 +223,7 @@ terminal.Command.prototype.run = function() {
 
   const pidInit = (id) => {
     if (id === undefined) {
-      this.io.println(
+      this.io_.println(
           `Launching vmshell failed: ${lib.f.lastError('')}`);
       this.exit(1);
       return;
@@ -237,20 +233,20 @@ terminal.Command.prototype.run = function() {
     this.id_ = id;
     this.isFirstOutput_ = true;
 
-    this.io.onVTKeystroke = this.io.sendString = this.sendString_.bind(this);
-    this.io.onTerminalResize = this.onTerminalResize_.bind(this);
+    this.io_.onVTKeystroke = this.io_.sendString = this.sendString_.bind(this);
+    this.io_.onTerminalResize = this.onTerminalResize_.bind(this);
     document.body.onunload = this.close_.bind(this);
 
     // Setup initial window size.
     this.onTerminalResize_(
-        this.io.terminal_.screenSize.width,
-        this.io.terminal_.screenSize.height);
+        this.io_.terminal_.screenSize.width,
+        this.io_.terminal_.screenSize.height);
   };
 
   if (terminal.isCrosh()) {
     chrome.terminalPrivate.openTerminalProcess('crosh', [], pidInit);
   } else {
-    const args = [...this.argv_.args];
+    const args = [...this.args_];
     getActiveTrackerAndContainerId(args).then((tcid) => {
       const tracker = tcid.activeTracker;
       const containerId = tcid.containerId;
@@ -332,11 +328,8 @@ terminal.Command.prototype.exit = function(code) {
   this.close_();
   window.onbeforeunload = null;
 
-  if (code == 0) {
-    this.io.pop();
-    if (this.argv_.onExit) {
-      this.argv_.onExit(code);
-    }
+  if (code === 0 && this.term_.getPrefs().get('close-on-exit')) {
+    window.close();
   }
 };
 
