@@ -271,8 +271,6 @@ nassh.CommandInstance.prototype.reconnect = function(argstr) {
   // Terminal reset.
   this.io.print('\x1b[!p');
 
-  this.io = this.argv_.io.push();
-
   this.removePlugin_();
 
   this.stdoutAcknowledgeCount_ = 0;
@@ -1591,7 +1589,6 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
       case '\x1b': // ESC
       case '\x17': // ctrl-w
         this.io.hideOverlay();
-        this.io.pop();
         if (this.argv_.onExit) {
           this.argv_.onExit(code);
         }
