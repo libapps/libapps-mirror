@@ -445,7 +445,7 @@ lib.colors.rgbxArrayToHslaArray = function(rgbx) {
   const max = Math.max(r, g, b);
   const spread = max - min;
 
-  /* eslint-disable id-blacklist */
+  /* eslint-disable id-denylist */
   const l = (max + min) / 2;
 
   if (spread == 0) {
@@ -467,7 +467,7 @@ lib.colors.rgbxArrayToHslaArray = function(rgbx) {
   const s = spread / (1 - Math.abs(2 * l - 1));
 
   return [h, 100 * s, 100 * l, rgbx[3] !== undefined ? +rgbx[3] : 1];
-  /* eslint-enable id-blacklist */
+  /* eslint-enable id-denylist */
 };
 
 /**
@@ -486,7 +486,7 @@ lib.colors.rgbToHsl = function(rgb) {
     return null;
   }
 
-  /* eslint-disable id-blacklist */
+  /* eslint-disable id-denylist */
   // eslint-disable-next-line prefer-const
   let [h, s, l, a] = lib.colors.rgbxArrayToHslaArray(ary);
   h = Math.round(h);
@@ -494,7 +494,7 @@ lib.colors.rgbToHsl = function(rgb) {
   l = Math.round(l);
 
   return a === 1 ? `hsl(${h}, ${s}%, ${l}%)` : `hsla(${h}, ${s}%, ${l}%, ${a})`;
-  /* eslint-enable id-blacklist */
+  /* eslint-enable id-denylist */
 };
 
 /**

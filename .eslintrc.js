@@ -41,7 +41,7 @@ module.exports = {
     'func-call-spacing': 'error',
     'generator-star-spacing': ['error', 'after'],
     // l/I: Depending on the font, these are hard to distinguish.
-    'id-blacklist': ['error', 'l', 'I', 'self'],
+    'id-denylist': ['error', 'l', 'I'],
     'implicit-arrow-linebreak': 'error',
     'keyword-spacing': 'error',
     // We normally want this, but we allow it in a few limited cases, so leave

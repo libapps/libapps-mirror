@@ -86,7 +86,7 @@ hterm.Parser.identifiers.keyCodes = {
   T: 84,
   Y: 89,
   U: 85,
-  // eslint-disable-next-line id-blacklist
+  // eslint-disable-next-line id-denylist
   I: 73,
   O: 79,
   P: 80,
