@@ -970,6 +970,8 @@ options window: https://crbug.com/1151809.
 
 1.  Click the extension icon in the upper right of Chrome.
 1.  Hold Ctrl while clicking "Connection Dialog" to open it in a tab.
+1.  *(Optional)* Connect to a destination first to have the shortcut autoconnect
+    instead of showing the connection dialog.  It does not need to succeed.
 1.  Open Chrome's ⋮ menu in the upper right (Alt+F shortcut).
 1.  Expand the "More tools" submenu.
 1.  Select the "Create shortcut..." option.
