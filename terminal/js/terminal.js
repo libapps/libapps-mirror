@@ -4,6 +4,8 @@
 
 import {definePrefs, getActiveTrackerAndContainerId, loadPowerlineWebFonts,
     loadWebFont, normalizeCSSFontFamily} from './terminal_common.js';
+import {ClientWindow as TmuxClientWindow, TmuxControllerDriver,
+    TMUX_CHANNEL_URL_PARAM_NAME} from './terminal_tmux.js';
 
 export const terminal = {};
 
@@ -25,6 +27,7 @@ window.preferenceManager;
 terminal.Command = function({term, args}) {
   this.term_ = term;
   this.io_ = this.term_.io;
+  this.tmuxControllerDriver_ = new TmuxControllerDriver(term);
   // We pass this ID to chrome to use for startup text which is sent before the
   // vsh process is created and we receive an ID from openVmShellProcess.
   this.id_ = Math.random().toString().substring(2);
@@ -128,6 +131,19 @@ terminal.init = function(element) {
     terminal.addBindings(term);
     term.setCursorPosition(0, 0);
     term.setCursorVisible(true);
+
+    if (window.enableTmuxIntegration &&
+        params.has(TMUX_CHANNEL_URL_PARAM_NAME)) {
+      /* eslint-disable-next-line no-new */
+      new TmuxClientWindow({
+        channelName: /** @type {string} */(params.get(
+            TMUX_CHANNEL_URL_PARAM_NAME)),
+        term,
+      });
+
+      return;
+    }
+
     const terminalCommand = new terminal.Command({
       term,
       args: params.getAll('args[]'),
@@ -211,6 +227,11 @@ terminal.Command.prototype.onProcessOutput_ = function(id, type, text) {
  * Start the terminal command.
  */
 terminal.Command.prototype.run = function() {
+  // TODO(1252271): use a chrome flag to control this.
+  if (window.enableTmuxIntegration) {
+    this.tmuxControllerDriver_.installHtermTmuxParser();
+  }
+
   if (!chrome.terminalPrivate) {
     this.io_.println(
         'Launching terminal failed: chrome.terminalPrivate not found');
