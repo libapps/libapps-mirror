@@ -26,14 +26,17 @@ supporting stream logic in [nassh_stream_relay_corp.js].
 ### Protocol Overview
 
 ```
- +--------+      Phase I         +---------------+
- |  USER  |  ---(1 /cookie)--->  | COOKIE SERVER |
- +--------+                      +---------------+
- | | |    |
- | | |    |
- | | |  Phase II
- | | |    |
- | | |    `---(3 /proxy)--->  +--------------+
+ +--------+      Phase I           +-----------------+
+ |  USER  |  ---(1 /endpoint)--->  | ENDPOINT SERVER |
+ +--------+                        +-----------------+
+ | | |  | |
+ | | |  | |                      +-----------------+
+ | | |  | `---(2 /cookie)----->  |  COOKIE SERVER  |
+ | | |  |                        +-----------------+
+ | | |  |
+ | | | Phase II
+ | | |  |
+ | | |  `-----(3 /proxy)--->  +--------------+
  | | |                        |              |
 Phase III                     |              |  ----->  +------------+
  | | |                        | RELAY SERVER |          | SSH SERVER |
@@ -44,8 +47,9 @@ Phase III                     |              |  ----->  +------------+
 
 You can think of this as a three phase process:
 
-*   (I) Client talks to a cookie server in order to authenticate the user, and
-    for the cookie server to tell the user which relay server to use.
+*   (I) Client talks to an endpoint server (optional), and a cookie server in
+    order to authenticate the user, and for the cookie server to tell the user
+    which relay server to use.
 *   (II) Client talks to the relay server to establish a new session to the ssh
     server (and allow the relay server to authenticate the user).
 *   (III) Client talks to the ssh server through the relay server using the
@@ -53,12 +57,20 @@ You can think of this as a three phase process:
 
 Across those phases are some major steps:
 
-1.  Connect to the cookie server using [/cookie].
+1.  Connect to the endpoint server using [/endpoint] (optional).
+
+    This is an optional step for clients using XHR or otherwise have CORS
+    restrictions and cannot follow HTTP 302 redirects in [/cookie].
+    This system will return the cookie server `<host[:port]>` to use for
+    [/cookie].  Cookie servers may be geographically distributed with different
+    hostnames.
+
+2.  Connect to the cookie server using [/cookie].
 
     This system may initiate a single-sign-on (SSO) flow if necessary, as well
     as verify client certificates.
 
-2.  When the cookie server is done with authenticating the user, it responds
+    When the cookie server is done with authenticating the user, it responds
     with details for which relay server to talk to in order to connect to the
     actual ssh server.
     Its response format is described below in [/cookie].
@@ -147,16 +159,16 @@ client possesses a valid SSO ticket. If the client doesn't have a valid ticket,
 this XHR request will fail with a CORS error when the cookie server does a 302
 redirect to a login server. The client must detect this condition and
 then issue a non-cors request which will allow redirects where the SSO ticket
-can be refreshed if the client has a valid master cookie, and then reattempt the
+can be refreshed if the client has a valid cookie, and then reattempt the
 original `direct` request. This will fail again if the client did not have a
-valid master cookie. The client must detect this condition and then open a popup
+valid cookie. The client must detect this condition and then open a popup
 window and use method `close`. The popup will be redirected to the login page
 and then automatically close when it is finished. When the client detects that
 the popup page is closed, it can reattempt the `direct` method.
 
 The `js-redirect` method will generate a HTML document with a `<script>` tag to
 redirect to the `chrome://EXT_ID/PATH` path.  It performs page redirects to
-the login server as necessary to refresh the ticket from the master cookie, or
+the login server as necessary to refresh the ticket from the cookie, or
 display the login page to users.
 The JSON response is [base64url] encoded in the [URI fragment].
 

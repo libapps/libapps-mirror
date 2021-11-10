@@ -169,15 +169,15 @@ nassh.relay.Corp = class extends nassh.Relay {
 
   /**
    * Authenticates to proxy using fetch with method=direct. Refreshes ticket
-   * from master cookie if possible, else opens a login popup if required.
+   * from full cookie if possible, else opens a login popup if required.
    *
    * @return {!Promise<boolean>} true if authentication succeeded, else false on
    *     error.
    */
   async authenticateDirect() {
     const protocol = this.useSecure ? 'https' : 'http';
-    const proxyUrl =
-        `${protocol}://${this.proxyHost}:${this.proxyPort}/cookie?version=2`;
+    let endpoint = `${this.proxyHost}:${this.proxyPort}`;
+    let proxyUrl = `${protocol}://${endpoint}/endpoint`;
 
     // Since the proxy settings are coming from the user, make sure we catch bad
     // values (hostnames/etc...) directly.
@@ -190,27 +190,38 @@ nassh.relay.Corp = class extends nassh.Relay {
       return false;
     }
 
-    // Query for endpoint. This will fail if ticket or master cookie not set.
+    // Query for endpoint. On failure we might as well continue and attempt
+    // to connect to /cookie using the default proxy URL. For some proxy
+    // implementations this may work, and there is no harm to try.
     try {
-      await this.fetchEndpointDirect(proxyUrl);
-      return true;
+      endpoint = await this.fetchEndpoint(proxyUrl);
     } catch (e) {
-      console.warn('Refresh ticket and query endpoint again', e.message);
+      console.warn('Query endpoint failed', e);
     }
 
-    // Refresh ticket and query for endpoint again.
+    // Validate cookie. This will fail if ticket or full cookie not set.
+    proxyUrl = `${protocol}://${endpoint}/cookie?version=2`;
+    try {
+      await this.validateCookie(proxyUrl);
+      return true;
+    } catch (e) {
+      console.info(`Refresh ticket and query endpoint again: ${e.message}`);
+    }
+
+    // Refresh ticket and validate ticket again. This will fail if full cookie
+    // not set.
     try {
       await this.refreshTicket(proxyUrl);
-      await this.fetchEndpointDirect(proxyUrl);
+      await this.validateCookie(proxyUrl);
       return true;
     } catch (e) {
-      console.warn('Login and query endpoint again', e.message);
+      console.info(`Login and query endpoint again: ${e.message}`);
     }
 
-    // Show a login popup, then query for endpoint again.
+    // Show a login popup, then validate ticket again.
     try {
       await this.showLoginPopup(proxyUrl);
-      await this.fetchEndpointDirect(proxyUrl);
+      await this.validateCookie(proxyUrl);
       return true;
     } catch (e) {
       console.warn('Error in login and query endpoint', e);
@@ -219,7 +230,30 @@ nassh.relay.Corp = class extends nassh.Relay {
   }
 
   /**
-   * Query proxy using 'method=direct' for endpoint. We must include
+   * Query proxy /endpoint to get relay /cookie host.
+   *
+   * @param {string} proxy Proxy url to connect to.
+   * @return {!Promise<string>}
+   */
+  async fetchEndpoint(proxy) {
+    const res = await fetch(proxy);
+    const text = await res.text();
+    // Skip the XSSI countermeasure.
+    if (!text.startsWith(")]}'\n")) {
+      throw Error(`Unknown response: ${text}`);
+    }
+    const params = JSON.parse(text.slice(5));
+    // Expecting format: {endpoint: <host[:port]>}.  Port is optional.
+    // E.g. {"endpoint": "sup-ssh-relay.corp.google.com:8046"}.
+    const endpoint = params['endpoint'];
+    if (!endpoint) {
+      throw new Error(params['error'] || `No endpoint from ${proxy}`);
+    }
+    return endpoint;
+  }
+
+  /**
+   * Query proxy /cookie using 'method=direct'. We must include
    * credentials (cookies) and cors in order to read the json response.
    * This fetch request will succeed if we already have a valid ticket.
    * Otherwise, the proxy server will redirect us to the login server which will
@@ -228,7 +262,7 @@ nassh.relay.Corp = class extends nassh.Relay {
    *
    * @param {string} proxy Proxy url to connect to.
    */
-  async fetchEndpointDirect(proxy) {
+  async validateCookie(proxy) {
     const url = `${proxy}&method=direct`;
     const res = await fetch(url, {credentials: 'include'});
     const text = await res.text();
@@ -237,10 +271,10 @@ nassh.relay.Corp = class extends nassh.Relay {
       throw Error(`Unknown response: ${text}`);
     }
     const params = JSON.parse(text.slice(5));
-    // Expecting format: {"endpoint": "sup-ssh-relay.corp.google.com:8046"}.
+    // Expecting format: {endpoint: <host[:port]>}.  Port is optional.
+    // E.g. {"endpoint": "sup-ssh-relay.corp.google.com:8046"}.
     const endpoint = params['endpoint'];
     if (endpoint) {
-      const [host, port] = endpoint.split(':');
       this.io_.println(nassh.msg('FOUND_RELAY', [endpoint]));
       const serverProtocol = this.useSecure ? 'https' : 'http';
       const socketProtocol = this.useSecure ? 'wss' : 'ws';
@@ -248,12 +282,12 @@ nassh.relay.Corp = class extends nassh.Relay {
       this.relayServerSocket = `${socketProtocol}://${endpoint}/`;
       return;
     }
-    throw new Error(params['error'] || 'No endpoint from ' + proxy);
+    throw new Error(params['error'] || `No endpoint from ${proxy}`);
   }
 
   /**
    * Fetch from proxy in no-cors in order to allow redirects to
-   * login.corp.google.com where a valid master cookie will be used to issue
+   * login.corp.google.com where a valid full cookie will be used to issue
    * a ticket.
    *
    * @param {string} proxy Proxy url to connect to.
@@ -264,11 +298,11 @@ nassh.relay.Corp = class extends nassh.Relay {
   }
 
   /**
-   * Open a popup window for the proxy with 'method=sendmessage'.  This will
-   * redirect to login.corp.google.com where users can reauthenticate (password,
-   * gnubby), and return back to the proxy with a valid ticket. By using
-   * 'method=sendmessage', the proxy will close the popup, and a subsequent
-   * call to fetchEndpointDirect() should succeed.
+   * Open a popup window for the proxy with 'method=close'.  This will redirect
+   * to login.corp.google.com where users can reauthenticate (password,gnubby),
+   * and return back to the proxy with a valid ticket. By using `method=close',
+   * the proxy will close the popup, and a subsequent call to
+   * validateCookie() should succeed.
    *
    * @param {string} proxy Proxy url to connect to.
    */
