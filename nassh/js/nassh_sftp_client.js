@@ -888,7 +888,8 @@ nassh.sftp.Client.prototype.queryLimits = function() {
     }
 
     // The caller can figure it out.
-    return Promise.resolve();
+    return Promise.resolve(
+        /** @type {!nassh.sftp.packets.LimitsPacket} */ ({}));
   }
 
   const packet = new nassh.sftp.Packet();
