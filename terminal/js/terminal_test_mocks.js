@@ -366,3 +366,114 @@ class MockTabsController {
     chrome.tabs = this.origTabs_;
   }
 }
+
+/**
+ * Mock an object. Note that the instance itself does not mock the properties
+ * and methods. Instead, the "proxy" object does that. See the following
+ * example:
+ *
+ *     const baseObj = {a: 123, b: () => 456};
+ *     const mock = new MockObject(baseObj);
+ *     const proxy = mock.proxy;
+ *
+ *     // Access properties of baseObj.
+ *     assert.equal(proxy.a, 123);
+ *     assert.equal(proxy.b(), 456);
+ *
+ *     // Set properties.
+ *     proxy.a = proxy.c = 789;
+ *     assert.equal(proxy.a, 789);
+ *     assert.equal(proxy.c, 789);
+ *
+ *     // Anything not in `baseObj` are mocked as methods, and the calls are
+ *     // recorded.
+ *     proxy.foo(10, 'hello');
+ *     proxy.foo(20, 'world');
+ *     assert.deepEqual(mock.getMethodHistory('foo'),
+ *         [[10, 'hello'], [20, 'world']]);
+ */
+class MockObject {
+  /**
+   * @param {!Object=} baseObj See the getter `proxy` for details.
+   */
+  constructor(baseObj) {
+    if (baseObj === undefined) {
+      baseObj = {};
+    }
+
+    this.perMethodHistory_ = new Map();
+    this.proxy_ = new Proxy(baseObj, {
+      get: (baseObj, prop) => {
+        if (baseObj.hasOwnProperty(prop)) {
+          return baseObj[prop];
+        }
+        // If the property is not in the baseObj, we mock it as a method.
+        return (...args) => {
+          this.methodCalled(prop, args);
+        };
+      },
+
+      set: (baseObj, prop, value) => {
+        baseObj[prop] = value;
+        return true;
+      },
+    });
+  }
+
+  /**
+   * Return a proxy object.
+   *
+   * `this.proxy.foo` will return `baseObj.foo` if it exists, where `baseObj` is
+   * the argument passed to the constructor. Otherwise, `this.proxy.foo` will
+   * return a function. Calls to the function will be recorded, and you can
+   * access the call history from, for example, `this.getMethodHistory()`.
+   *
+   * `this.proxy.foo = x` will always set `baseObj.foo = x`.
+   *
+   * @return {*} The proxy. Note that we annotate the type as '*' to allow the
+   *     user to cast it to any type they want.
+   */
+  get proxy() {
+    return this.proxy_;
+  }
+
+  /**
+   * (Manually) record a call to a method.
+   *
+   * @param {string} methodName
+   * @param {!Array} args
+   */
+  methodCalled(methodName, args) {
+    if (!this.perMethodHistory_.has(methodName)) {
+      this.perMethodHistory_.set(methodName, []);
+    }
+    this.perMethodHistory_.get(methodName).push(args);
+  }
+
+  /**
+   * Return the call history of a method.
+   *
+   * @param {string} methodName
+   * @return {!Array<!Array>} The list of arguments. One entry per call.
+   */
+  getMethodHistory(methodName) {
+    if (this.perMethodHistory_.has(methodName)) {
+      return this.perMethodHistory_.get(methodName);
+    }
+    return [];
+  }
+
+  /**
+   * Return the arguments of the last call to the method.
+   *
+   * @param {string} methodName
+   * @return {!Array}
+   */
+  getMethodLastArgs(methodName) {
+    const argList = this.getMethodHistory(methodName);
+    if (argList.length === 0) {
+      throw new Error(`method ${methodName} hasn't been called`);
+    }
+    return argList[argList.length - 1];
+  }
+}

@@ -390,6 +390,13 @@ export class Controller {
   }
 
   /**
+   * Send an detach command to tmux.
+   */
+  detach() {
+    this.queueCommand('detach');
+  }
+
+  /**
    * Put a tmux command in the command queue. The controller calls `callback`
    * with the result when it is ready.
    *

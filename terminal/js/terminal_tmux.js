@@ -18,6 +18,98 @@ import * as tmux from './tmux.js';
 export const TMUX_CHANNEL_URL_PARAM_NAME = 'tmuxChannel';
 
 /**
+ * This provides a command line interface for the user to interact with tmux
+ * (e.g. stop tmux and run tmux commands) in control mode.
+ */
+export class PseudoTmuxCommand {
+  /**
+   * @param {!hterm.Terminal} term The terminal to "run" the pseudo command.
+   *     Note that we use `term.print()` instead of `term.io.print()` because
+   *     the latter goes through the `hterm.VT` stack and will interfere with
+   *     the on-going tmux control mode DCS sequence.
+   * @param {!tmux.Controller} controller
+   */
+  constructor(term, controller) {
+    this.term_ = term;
+    this.controller_ = controller;
+    this.buffer_ = '';
+  }
+
+  /**
+   * Start "running" the command.
+   */
+  run() {
+    // TODO(1252271): Consider i18n all the user facing messages.
+    this.term_.print(
+        '(Entered tmux control mode. Input tmux commands or Ctrl-C to detach)');
+    this.term_.newLine();
+    this.prompt_();
+  }
+
+  /**
+   * Print a prompt.
+   */
+  prompt_() {
+    this.term_.print('>>> ');
+  }
+
+  /**
+   * To be called with user input.
+   *
+   * @param {string} string
+   */
+  onUserInput(string) {
+    for (const c of string) {
+      switch (c) {
+        // Ctrl-C & Ctrl-D
+        case '\x03':
+        case '\x04':
+          this.controller_.detach();
+          this.term_.newLine();
+          return;
+        // Backspace.
+        case '\x7f':
+          if (this.buffer_) {
+            this.buffer_ = this.buffer_.slice(0, -1);
+            this.term_.cursorLeft(1);
+            this.term_.print(' ');
+            this.term_.cursorLeft(1);
+          }
+          break;
+        case '\r': {
+          const command = this.buffer_.trim();
+          this.buffer_ = '';
+
+          this.term_.newLine();
+          if (!command) {
+            this.prompt_();
+            continue;
+          }
+
+          this.controller_.queueCommand(command, (lines) => {
+            for (const line of lines) {
+              this.term_.print(line);
+              this.term_.newLine();
+            }
+            this.prompt_();
+          });
+          break;
+        }
+        default:
+          // Only handle printable ASCII character for now.
+          if (c >= ' ' && c <= '~') {
+            this.buffer_ += c;
+            this.term_.print(c);
+            break;
+          }
+          this.term_.ringBell();
+          break;
+      }
+    }
+  }
+}
+
+/**
  * This class connects to the terminal IO and drives a `tmux.Controller`.
  */
 export class TmuxControllerDriver {
@@ -30,6 +122,8 @@ export class TmuxControllerDriver {
     this.term_ = term;
     /** @private {?Object} */
     this.ioPropertyBackup_ = null;
+    /** @private {?PseudoTmuxCommand} */
+    this.pseudoTmuxCommand_ = null;
   }
 
   /**
@@ -116,26 +210,29 @@ export class TmuxControllerDriver {
   onStart_() {
     const io = this.term_.io;
 
-    const sendString = io.sendString.bind(io);
     this.ioPropertyBackup_ = {};
-    // We want to block all user input so that the controller can talk to the
-    // tmux process uninterruptedly. Note that we cannot do `io.push()` instead,
-    // since it causes buffering of tmux's output.
-    //
-    // TODO(1252271): Need to figure out how to make it easy for user to kill
-    // the tmux process (because ctrl-c won't work any more).
-    for (const name of ['onVTKeystroke', 'sendString']) {
-      this.ioPropertyBackup_[name] = io[name];
-      io[name] = () => {};
-    }
-
     this.controller_ = new tmux.Controller({
       openWindow: ({windowId, controller}) => {
         return new ServerWindow({windowId, controller});
       },
-      input: sendString,
+      input: io.sendString.bind(io),
     });
+    this.pseudoTmuxCommand_ = new PseudoTmuxCommand(
+        this.term_,
+        this.controller_,
+    );
+
+    // Backup and overwrite the input methods on the `io` object because we want
+    // our pseudo tmux command to handle user input on the current terminal.
+    // Note that we cannot do `io.push()` instead, since it causes buffering of
+    // tmux process output.
+    for (const name of ['onVTKeystroke', 'sendString']) {
+      this.ioPropertyBackup_[name] = io[name];
+      io[name] = (str) => this.pseudoTmuxCommand_.onUserInput(str);
+    }
+
     this.controller_.start();
+    this.pseudoTmuxCommand_.run();
   }
 
   /**
@@ -143,6 +240,8 @@ export class TmuxControllerDriver {
    */
   onStop_() {
     this.controller_ = null;
+    this.pseudoTmuxCommand_ = null;
+
     for (const name in this.ioPropertyBackup_) {
       this.term_.io[name] = this.ioPropertyBackup_[name];
     }
