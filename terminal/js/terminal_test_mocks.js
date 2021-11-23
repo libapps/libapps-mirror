@@ -2,13 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
-/**
- * @suppress {constantProperty} Allow tests in browsers.
- */
-window.chrome = window.chrome || {};
-
 /**
  * Mock Event.
  *
@@ -56,7 +49,7 @@ MockEvent.prototype.dispatch = function(...args) {
  * @private
  * @constructor
  */
-function MockTerminalPrivate() {
+export function MockTerminalPrivate() {
   /**
    * @private {!Object<string, !Array<function(...*)>>}
    * @const
@@ -331,7 +324,7 @@ MockLocation.prototype.replace = function(url) {
 /**
  * A controller for mocking chrome.tabs.
  */
-class MockTabsController {
+export class MockTabsController {
   constructor() {
     this.origTabs_ = chrome.tabs;
 
@@ -392,7 +385,7 @@ class MockTabsController {
  *     assert.deepEqual(mock.getMethodHistory('foo'),
  *         [[10, 'hello'], [20, 'world']]);
  */
-class MockObject {
+export class MockObject {
   /**
    * @param {!Object=} baseObj See the getter `proxy` for details.
    */

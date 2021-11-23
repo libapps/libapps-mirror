@@ -6,8 +6,9 @@
  * @fileoverview Unit tests for terminal_tmux.js.
  */
 
-import * as tmux from './tmux.js';
+import {MockObject} from './terminal_test_mocks.js';
 import {PseudoTmuxCommand} from './terminal_tmux.js';
+import * as tmux from './tmux.js';
 
 // TODO(crbug.com/1252271): add all the missing tests.
 

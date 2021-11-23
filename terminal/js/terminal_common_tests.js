@@ -10,6 +10,7 @@ import {TerminalActiveTracker} from './terminal_active_tracker.js';
 import {DEFAULT_BACKGROUND_COLOR, DEFAULT_FONT_SIZE, definePrefs,
     fontFamilyToCSS, normalizePrefsInPlace, parseContainerId, setUpTitleHandler,
     SUPPORTED_FONT_FAMILIES, SUPPORTED_FONT_SIZES} from './terminal_common.js';
+import {MockTabsController} from './terminal_test_mocks.js';
 
 const fontFamilies = Array.from(SUPPORTED_FONT_FAMILIES.keys());
 

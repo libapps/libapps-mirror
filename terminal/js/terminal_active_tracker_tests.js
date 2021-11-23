@@ -7,6 +7,7 @@
  */
 
 import {TerminalActiveTracker} from './terminal_active_tracker.js';
+import {MockTabsController} from './terminal_test_mocks.js';
 
 describe('TerminalActiveTracker', () => {
   const mockTabsController = new MockTabsController();

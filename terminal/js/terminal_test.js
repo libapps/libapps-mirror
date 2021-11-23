@@ -63,3 +63,8 @@ window.onload = async function() {
     assert.fail(`uncaught exception detected:\n${earlyError.join('\n')}\n`);
   }
 };
+
+/**
+ * @suppress {constantProperty} Allow tests in all browsers.
+ */
+window.chrome = window.chrome || {};

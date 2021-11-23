@@ -4,6 +4,8 @@
 
 import {terminal} from './terminal.js';
 import {TerminalActiveTracker} from './terminal_active_tracker.js';
+import {MockTabsController, MockTerminalPrivate}
+    from './terminal_test_mocks.js';
 
 /**
  * @fileoverview chrome-untrusted://terminal unit tests.
