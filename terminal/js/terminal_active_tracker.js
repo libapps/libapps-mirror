@@ -102,7 +102,13 @@ export class TerminalActiveTracker {
    * @param {number} windowId
    * @return {string}
    */
-  static getKey(windowId) { return `activeTerminalInfo-${windowId}`; }
+  static getKey(windowId) {
+    // The number after the first '-' is the version number. This is to make
+    // sure stale data in localStorage does not break us when we make breaking
+    // changes. Note that we do clean up localStorage on unload event, but it is
+    // not reliable.
+    return `activeTerminalInfo-1-${windowId}`;
+  }
 
   /**
    * Get the active terminal info for the current window.
@@ -112,13 +118,7 @@ export class TerminalActiveTracker {
   getWindowActiveTerminal() {
     const data = window.localStorage.getItem(this.key);
     if (data) {
-      const activeTerminalInfo =
-          /** @type {!ActiveTerminalInfo} */(JSON.parse(data));
-      if (activeTerminalInfo.terminalInfo) {
-        return activeTerminalInfo;
-      }
-      // Clean up bad data.
-      window.localStorage.removeItem(this.key);
+      return /** @type {!ActiveTerminalInfo} */(JSON.parse(data));
     }
     return null;
   }

@@ -2,8 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {definePrefs, getActiveTrackerAndContainerId, loadPowerlineWebFonts,
-    loadWebFont, normalizeCSSFontFamily} from './terminal_common.js';
+import {definePrefs, getTerminalLaunchInfo, loadPowerlineWebFonts, loadWebFont,
+    normalizeCSSFontFamily} from './terminal_common.js';
+import {TerminalActiveTracker} from './terminal_active_tracker.js';
 import {ClientWindow as TmuxClientWindow, TmuxControllerDriver,
     TMUX_CHANNEL_URL_PARAM_NAME} from './terminal_tmux.js';
 
@@ -18,20 +19,16 @@ window.preferenceManager;
  * The Terminal command uses the terminalPrivate extension API to create and
  * use the vmshell process on a Chrome OS machine.
  *
- * @param {{
- *   term: !hterm.Terminal,
- *   args: !Array<string>,
- * }} argv
+ * @param {!hterm.Terminal} term
  * @constructor
  */
-terminal.Command = function({term, args}) {
+terminal.Command = function(term) {
   this.term_ = term;
   this.io_ = this.term_.io;
   this.tmuxControllerDriver_ = new TmuxControllerDriver(term);
   // We pass this ID to chrome to use for startup text which is sent before the
   // vsh process is created and we receive an ID from openVmShellProcess.
   this.id_ = Math.random().toString().substring(2);
-  this.args_ = [...args, `--startup_id=${this.id_}`];
   this.isFirstOutput = false;
 };
 
@@ -144,10 +141,7 @@ terminal.init = function(element) {
       return;
     }
 
-    const terminalCommand = new terminal.Command({
-      term,
-      args: params.getAll('args[]'),
-    });
+    const terminalCommand = new terminal.Command(term);
     terminalCommand.run();
   };
   term.onTerminalReady = function() {
@@ -267,29 +261,10 @@ terminal.Command.prototype.run = function() {
   if (terminal.isCrosh()) {
     chrome.terminalPrivate.openTerminalProcess('crosh', [], pidInit);
   } else {
-    const args = [...this.args_];
-    getActiveTrackerAndContainerId(args).then((tcid) => {
-      const tracker = tcid.activeTracker;
-      const containerId = tcid.containerId;
-      const isParsedContainerId = tcid.isParsedContainerId;
-      if (tracker.parentTerminal) {
-        const terminalInfo = tracker.parentTerminal.terminalInfo;
-        if (!args.some((arg) => arg.startsWith('--cwd=')) &&
-            terminalInfo.terminalId) {
-          // This may not be desired with the drop-down scenario in the comment
-          // below. For now, we don't check further.
-          args.push(`--cwd=terminal_id:${terminalInfo.terminalId}`);
-        }
-        if (!isParsedContainerId) {
-          if (containerId.vmName) {
-            args.push(`--vm_name=${containerId.vmName}`);
-          }
-          if (containerId.containerName) {
-            args.push(`--target_container=${containerId.containerName}`);
-          }
-        }
-      }
-      tracker.updateTerminalInfo({containerId: containerId});
+    TerminalActiveTracker.get().then((tracker) => {
+      const launchInfo = getTerminalLaunchInfo(tracker);
+      const args = [...launchInfo.args, `--startup_id=${this.id_}`];
+      tracker.updateTerminalInfo({containerId: launchInfo.containerId});
       chrome.terminalPrivate.openVmshellProcess(args, (id) => {
         pidInit(id);
         tracker.updateTerminalInfo({terminalId: id});

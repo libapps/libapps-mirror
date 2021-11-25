@@ -7,38 +7,28 @@
  */
 
 import {TerminalActiveTracker} from './terminal_active_tracker.js';
-import {DEFAULT_BACKGROUND_COLOR, DEFAULT_FONT_SIZE, definePrefs,
-    fontFamilyToCSS, normalizePrefsInPlace, parseContainerId, setUpTitleHandler,
-    SUPPORTED_FONT_FAMILIES, SUPPORTED_FONT_SIZES} from './terminal_common.js';
+import {DEFAULT_BACKGROUND_COLOR, DEFAULT_CONTAINER_NAME, DEFAULT_FONT_SIZE,
+  DEFAULT_VM_NAME, SUPPORTED_FONT_FAMILIES, SUPPORTED_FONT_SIZES, definePrefs,
+  fontFamilyToCSS, getInitialTitleCacheKey, getTerminalLaunchInfo,
+  normalizePrefsInPlace, setUpTitleHandler} from './terminal_common.js';
 import {MockTabsController} from './terminal_test_mocks.js';
 
 const fontFamilies = Array.from(SUPPORTED_FONT_FAMILIES.keys());
 
 describe('terminal_common_tests.js', () => {
-  let preferenceManager;
-  const mockTabsController = new MockTabsController();
-
-  beforeEach(() => {
-    // Mock chrome.tabs because we will use TerminalActiveTracker.
-    mockTabsController.start();
-    window.localStorage.clear();
-    TerminalActiveTracker.resetInstanceForTesting();
-
-    preferenceManager = new lib.PreferenceManager(new lib.Storage.Memory());
-    preferenceManager.definePreference('font-family', 'invalid');
+  beforeEach(function() {
+    this.preferenceManager = new lib.PreferenceManager(
+        new lib.Storage.Memory());
+    this.preferenceManager.definePreference('font-family', 'invalid');
   });
 
-  afterEach(() => {
-    mockTabsController.stop();
-  });
-
-  it('normalizePrefsInPlace', () => {
-    function assertNormalizationResult(pref, before, after) {
-      preferenceManager.set(pref, before);
-      definePrefs(preferenceManager);
-      normalizePrefsInPlace(preferenceManager);
-      assert.equal(preferenceManager.get(pref), after);
-    }
+  it('normalizePrefsInPlace', function() {
+    const assertNormalizationResult = (pref, before, after) => {
+      this.preferenceManager.set(pref, before);
+      definePrefs(this.preferenceManager);
+      normalizePrefsInPlace(this.preferenceManager);
+      assert.equal(this.preferenceManager.get(pref), after);
+    };
 
     assertNormalizationResult('font-family', 'invalid', fontFamilyToCSS(
         fontFamilies[0]));
@@ -64,111 +54,285 @@ describe('terminal_common_tests.js', () => {
         'background-color', 'rgba(1, 2, 3, 0.5)', '#010203');
   });
 
-  it('setUpTitleHandler-when-no-cache', async () => {
-    window.localStorage.removeItem('cachedInitialTitle');
-    document.title = 'test title';
+  describe('setupTitleHandler', function() {
 
-    const tracker = await TerminalActiveTracker.get();
-    let trackerUpdateCount = 0;
-    tracker.maybeUpdateWindowActiveTerminal = () => trackerUpdateCount++;
+    beforeEach(function() {
+      // Mock chrome.tabs because we will use TerminalActiveTracker.
+      this.mockTabsController = new MockTabsController();
+      this.mockTabsController.start();
+      window.localStorage.clear();
+      TerminalActiveTracker.resetInstanceForTesting();
+    });
 
-    const stopHandler = await setUpTitleHandler();
+    afterEach(function() {
+      this.mockTabsController.stop();
+    });
 
-    assert.equal(document.title, 'test title',
-        'no cache, title should not change');
-    assert.isNull(window.localStorage.getItem('cachedInitialTitle'));
+    it('default container with no cache', async function() {
+      const key = getInitialTitleCacheKey({
+        vmName: DEFAULT_VM_NAME,
+        containerName: DEFAULT_CONTAINER_NAME,
+      });
+      window.localStorage.removeItem(key);
+      document.title = 'test title';
 
-    document.title = 'test title 2';
-    await Promise.resolve();
-    assert.equal(trackerUpdateCount, 1);
+      const tracker = await TerminalActiveTracker.get();
+      let trackerUpdateCount = 0;
+      tracker.maybeUpdateWindowActiveTerminal = () => trackerUpdateCount++;
 
-    assert.equal(window.localStorage.getItem('cachedInitialTitle'),
-        'test title 2');
+      const stopHandler = await setUpTitleHandler();
 
-    document.title = 'test title 3';
-    await Promise.resolve();
-    assert.equal(window.localStorage.getItem('cachedInitialTitle'),
-        'test title 2',
-        'only the first changed title should be written to the cache');
-    assert.equal(trackerUpdateCount, 2);
+      assert.equal(document.title, 'test title',
+          'no cache, title should not change');
+      assert.isNull(window.localStorage.getItem(key));
 
-    stopHandler();
+      document.title = 'test title 2';
+      await Promise.resolve();
+      assert.equal(trackerUpdateCount, 1);
+
+      assert.equal(window.localStorage.getItem(key),
+          'test title 2');
+
+      document.title = 'test title 3';
+      await Promise.resolve();
+      assert.equal(window.localStorage.getItem(key),
+          'test title 2',
+          'only the first changed title should be written to the cache');
+      assert.equal(trackerUpdateCount, 2);
+
+      stopHandler();
+    });
+
+    [{
+      vmName: DEFAULT_VM_NAME,
+      containerName: DEFAULT_CONTAINER_NAME,
+    }, {
+      vmName: 'vm0',
+      containerName: 'container0',
+    }].forEach(function(containerId) {
+      it(`has cache (${JSON.stringify(containerId)})`, async function() {
+        const key = getInitialTitleCacheKey(containerId);
+        window.localStorage.setItem(key, 'cached title');
+        document.title = 'test title';
+
+        const tracker = await TerminalActiveTracker.get();
+        let trackerUpdateCount = 0;
+        tracker.maybeUpdateWindowActiveTerminal = () => trackerUpdateCount++;
+
+        const stopHandler = await setUpTitleHandler({
+          containerId,
+          hasCwd: false,
+          // args does not matter.
+          args: [],
+        });
+
+        assert.equal(document.title, 'cached title',
+            'title should be set to cache');
+
+        await Promise.resolve();
+        assert.equal(window.localStorage.getItem(key),
+            'cached title');
+
+        document.title = 'test title 2';
+        await Promise.resolve();
+        assert.equal(window.localStorage.getItem(key),
+            'test title 2');
+        assert.equal(trackerUpdateCount, 1);
+
+        document.title = 'test title 3';
+        await Promise.resolve();
+        assert.equal(window.localStorage.getItem(key),
+            'test title 2',
+            'only the first changed title should be written to the cache');
+        assert.equal(trackerUpdateCount, 2);
+
+        stopHandler();
+      });
+    });
   });
 
-  it('setUpTitleHandler-when-has-cache', async () => {
-    window.localStorage.setItem('cachedInitialTitle', 'cached title');
-    document.title = 'test title';
+  describe('getTerminalLaunchInfo', function() {
+    const emptyActiveTracker = /** @type {!TerminalActiveTracker} */({});
+    const activeTrackerWithoutTerminalId =
+        /** @type {!TerminalActiveTracker} */({
+          parentTerminal: {
+            terminalInfo: {
+              containerId: {
+                vmName: 'vm0',
+                containerName: 'container0',
+              },
+            },
+          },
+        });
+    const activeTrackerWithTerminalId =
+        /** @type {!TerminalActiveTracker} */({
+          parentTerminal: {
+            terminalInfo: {
+              terminalId: 'tid0',
+              containerId: {
+                vmName: 'vm0',
+                containerName: 'container0',
+              },
+            },
+          },
+        });
 
-    const tracker = await TerminalActiveTracker.get();
-    let trackerUpdateCount = 0;
-    tracker.maybeUpdateWindowActiveTerminal = () => trackerUpdateCount++;
+    function assertLaunchInfoEqual(launchInfo0, launchInfo1) {
+      // getTerminalLaunchInfo() might change the order of some args, so we sort
+      // them first.
+      assert.deepEqual(
+          {...launchInfo0, args: [...launchInfo0.args].sort()},
+          {...launchInfo1, args: [...launchInfo1.args].sort()},
+      );
+    }
 
-    const stopHandler = await setUpTitleHandler();
+    describe('containerId', function() {
+      it('always uses args\' if it exists', function() {
+        assertLaunchInfoEqual(
+            getTerminalLaunchInfo(
+                activeTrackerWithoutTerminalId,
+                ['a', 'b', '--vm_name=aaa'],
+            ),
+            {
+              args: ['a', 'b', '--vm_name=aaa'],
+              containerId: {vmName: 'aaa'},
+              hasCwd: false,
+            },
+        );
 
-    assert.equal(document.title, 'cached title',
-        'title should be set to cache');
+        assertLaunchInfoEqual(
+            getTerminalLaunchInfo(
+                activeTrackerWithoutTerminalId,
+                ['a', 'b', '--target_container=bbb'],
+            ),
+            {
+              args: ['a', 'b', '--target_container=bbb'],
+              containerId: {containerName: 'bbb'},
+              hasCwd: false,
+            },
+        );
 
-    await Promise.resolve();
-    assert.equal(window.localStorage.getItem('cachedInitialTitle'),
-        'cached title');
+        assertLaunchInfoEqual(
+            getTerminalLaunchInfo(
+                activeTrackerWithoutTerminalId,
+                ['a', 'b', '--vm_name=aaa', '--target_container=bbb'],
+              ),
+            {
+              args: ['a', 'b', '--vm_name=aaa', '--target_container=bbb'],
+              containerId: {vmName: 'aaa', containerName: 'bbb'},
+              hasCwd: false,
+            },
+        );
+      });
 
-    document.title = 'test title 2';
-    await Promise.resolve();
-    assert.equal(window.localStorage.getItem('cachedInitialTitle'),
-        'test title 2');
-    assert.equal(trackerUpdateCount, 1);
+      it('uses parent\'s if args\' is missing', function() {
+        assertLaunchInfoEqual(
+            getTerminalLaunchInfo(
+                activeTrackerWithoutTerminalId,
+                ['a', 'b'],
+            ),
+            {
+              args: ['a', 'b', '--vm_name=vm0',
+              '--target_container=container0'],
+              containerId: {
+                vmName: 'vm0',
+                containerName: 'container0',
+              },
+              hasCwd: false,
+            },
+        );
+      });
 
-    document.title = 'test title 3';
-    await Promise.resolve();
-    assert.equal(window.localStorage.getItem('cachedInitialTitle'),
-        'test title 2',
-        'only the first changed title should be written to the cache');
-    assert.equal(trackerUpdateCount, 2);
+      it('uses default as a fallback', function() {
+        assertLaunchInfoEqual(
+            getTerminalLaunchInfo(emptyActiveTracker, ['a', 'b']),
+            {
+              args: ['a', 'b', `--vm_name=${DEFAULT_VM_NAME}`,
+                  `--target_container=${DEFAULT_CONTAINER_NAME}`],
+              containerId: {
+                vmName: DEFAULT_VM_NAME,
+                containerName: DEFAULT_CONTAINER_NAME,
+              },
+              hasCwd: false,
+            },
+        );
+      });
+    });
 
-    stopHandler();
-  });
+    describe('cwd', function() {
+      it('always uses args\' if it exists', function() {
+        assertLaunchInfoEqual(
+            getTerminalLaunchInfo(
+                emptyActiveTracker,
+                ['a', 'b', '--cwd=some-cwd'],
+            ),
+            {
+              args: ['a', 'b', `--vm_name=${DEFAULT_VM_NAME}`,
+                  `--target_container=${DEFAULT_CONTAINER_NAME}`,
+                  '--cwd=some-cwd'],
+              containerId: {
+                vmName: DEFAULT_VM_NAME,
+                containerName: DEFAULT_CONTAINER_NAME,
+              },
+              hasCwd: true,
+            },
+        );
 
-  it('setUpTitleHandler-cache-respects-container-id', async () => {
-    const search = '?command=vmshell&args[]=--vm_name=test-vm' +
-                   '&args[]=--target_container=test-container';
-    const parsedContainerId =
-        parseContainerId(new URLSearchParams(search).getAll('args[]'));
-    assert.equal(parsedContainerId.vmName, 'test-vm');
-    assert.equal(parsedContainerId.containerName, 'test-container');
+        assertLaunchInfoEqual(
+            getTerminalLaunchInfo(
+                activeTrackerWithTerminalId,
+                ['a', 'b', '--cwd=some-cwd'],
+            ),
+            {
+              args: ['a', 'b', '--vm_name=vm0',
+                '--target_container=container0', '--cwd=some-cwd'],
+              containerId: {vmName: 'vm0', containerName: 'container0'},
+              hasCwd: true,
+            },
+        );
+      });
 
-    document.title = 'test title';
-    const key = 'cachedInitialTitle-' +
-                '{"vmName":"test-vm","containerName":"test-container"}';
+      it('follows parent\'s if has the same container', function() {
+        assertLaunchInfoEqual(
+            getTerminalLaunchInfo(
+                activeTrackerWithTerminalId,
+                ['a', 'b'],
+            ),
+            {
+              args: ['a', 'b', '--vm_name=vm0',
+                '--target_container=container0', '--cwd=terminal_id:tid0'],
+              containerId: {vmName: 'vm0', containerName: 'container0'},
+              hasCwd: true,
+            },
+        );
 
-    window.localStorage.setItem(key, 'cached title');
-    window.localStorage.setItem('cachedInitialTitle', 'wrong-cached title');
+        assertLaunchInfoEqual(
+            getTerminalLaunchInfo(
+                activeTrackerWithTerminalId,
+                ['a', 'b', '--vm_name=vm0', '--target_container=container0'],
+            ),
+            {
+              args: ['a', 'b', '--vm_name=vm0',
+                '--target_container=container0', '--cwd=terminal_id:tid0'],
+              containerId: {vmName: 'vm0', containerName: 'container0'},
+              hasCwd: true,
+            },
+        );
 
-    const tracker = await TerminalActiveTracker.get();
-    let trackerUpdateCount = 0;
-    tracker.maybeUpdateWindowActiveTerminal = () => trackerUpdateCount++;
-
-    document.location.search = search;
-    const stopHandler = await setUpTitleHandler(parsedContainerId);
-
-    assert.equal(
-        document.title, 'cached title', 'title should be set to cache');
-
-    await Promise.resolve();
-    assert.equal(window.localStorage.getItem(key), 'cached title');
-
-    document.title = 'test title 2';
-    await Promise.resolve();
-    assert.equal(window.localStorage.getItem(key), 'test title 2');
-    assert.equal(trackerUpdateCount, 1);
-
-    document.title = 'test title 3';
-    await Promise.resolve();
-    assert.equal(
-        window.localStorage.getItem(key),
-        'test title 2',
-        'only the first changed title should be written to the cache');
-    assert.equal(trackerUpdateCount, 2);
-
-    stopHandler();
+        // Not the same container.
+        assertLaunchInfoEqual(
+            getTerminalLaunchInfo(
+                activeTrackerWithTerminalId,
+                ['a', 'b', '--vm_name=vm0', '--target_container=container1'],
+            ),
+            {
+              args: ['a', 'b', '--vm_name=vm0',
+                '--target_container=container1'],
+              containerId: {vmName: 'vm0', containerName: 'container1'},
+              hasCwd: false,
+            },
+        );
+      });
+    });
   });
 });

@@ -62,6 +62,9 @@ export const DEFAULT_FONT_SIZE = 13;
 export const DEFAULT_SCREEN_PADDING_SIZE = 8;
 export const DEFAULT_THEME = 'dark';
 
+export const DEFAULT_VM_NAME = 'termina';
+export const DEFAULT_CONTAINER_NAME = 'penguin';
+
 /**
  * Convert a font family to a CSS string.
  *
@@ -213,20 +216,95 @@ export function loadPowerlineWebFonts(document) {
   document.head.appendChild(style);
 }
 
+// Cache the url params at the first opportunity. The url normally should not
+// change, so this is being defensive.
+const URL_PARAMS = new URLSearchParams(document.location.search);
+
 /**
- * @param {!Array<string>} args Arguments passed in the URL
- * @return {!ContainerId}
+ * `hasCwd` indicates whether there is a cwd argument in `args`. The
+ * `containerId` should be canonicalized such that empty container id is
+ * converted to one with the default vm name and container name.
+ *
+ * @typedef {{
+ *  args: !Array<string>,
+ *  containerId: !ContainerId,
+ *  hasCwd: boolean,
+ * }}
  */
-export function parseContainerId(args) {
-  const containerId = /** @type {!ContainerId} */ ({});
-  args.forEach((arg) => {
+export let TerminalLaunchInfo;
+
+/**
+ * This figures out and returns the terminal launch info for the current tab.
+ *
+ * @param {!TerminalActiveTracker} activeTracker The global active tracker.
+ * @param {!Array<string>=} args The launch args before processing. This is for
+ *     testing. Normal user should just use the default value.
+ * @return {!TerminalLaunchInfo}
+ */
+export function getTerminalLaunchInfo(activeTracker,
+    args = URL_PARAMS.getAll('args[]')) {
+  const parentTerminalInfo = activeTracker.parentTerminal?.terminalInfo;
+  const outputArgs = [];
+  let containerId = {};
+  let inputArgsHasCwd = false;
+  let outputArgsHasCwd = false;
+
+  for (const arg of args) {
     if (arg.startsWith('--vm_name=')) {
-      containerId.vmName = arg.split('=', 2)[1];
-    } else if (arg.startsWith('--target_container=')) {
-      containerId.containerName = arg.split('=', 2)[1];
+      const value = arg.split('=', 2)[1];
+      if (value) {
+        containerId.vmName = value;
+      }
+      continue;
     }
-  });
-  return containerId;
+    if (arg.startsWith('--target_container=')) {
+      const value = arg.split('=', 2)[1];
+      if (value) {
+        containerId.containerName = value;
+      }
+      continue;
+    }
+
+    if (arg.startsWith('--cwd=')) {
+      inputArgsHasCwd = outputArgsHasCwd = true;
+    }
+    outputArgs.push(arg);
+  }
+
+  // Parent container id or the default container id.
+  const parentContainerId = parentTerminalInfo?.containerId || {
+    vmName: DEFAULT_VM_NAME,
+    containerName: DEFAULT_CONTAINER_NAME,
+  };
+
+  // Follow parent containerId only if it is not already specified in `args`.
+  if (Object.keys(containerId).length === 0) {
+    containerId = parentContainerId;
+  }
+
+  if (containerId.vmName) {
+    outputArgs.push(`--vm_name=${containerId.vmName}`);
+  }
+  if (containerId.containerName) {
+    outputArgs.push(`--target_container=${containerId.containerName}`);
+  }
+
+  const parentTerminalId = parentTerminalInfo?.terminalId;
+  if (!inputArgsHasCwd &&
+      parentTerminalId &&
+      // It only makes sense to follow parent's CWD if the container id is the
+      // same.
+      containerId.vmName === parentContainerId.vmName &&
+      containerId.containerName === parentContainerId.containerName) {
+    outputArgs.push(`--cwd=terminal_id:${parentTerminalId}`);
+    outputArgsHasCwd = true;
+  }
+
+  return {
+    args: outputArgs,
+    containerId,
+    hasCwd: outputArgsHasCwd,
+  };
 }
 
 /**
@@ -242,57 +320,45 @@ export function composeTitle(containerId) {
 }
 
 /**
- * Get an active tracker and determine the approriate containerId
- *
- * @param {!Array<string>} args Arguments passed in the URL
- * @return {!Promise<{
- *    activeTracker: !TerminalActiveTracker,
- *    containerId: !ContainerId,
- *    isParsedContainerId: boolean,
- * }>}
+ * @param {!ContainerId} containerId The "canonicalized" container id. See type
+ *     TerminalLaunchInfo.
+ * @return {string}
  */
-export async function getActiveTrackerAndContainerId(args) {
-  const tracker = await TerminalActiveTracker.get();
-  const containerId = parseContainerId(args);
-  const isParsedContainerId = Object.keys(containerId).length > 0;
-  if (!isParsedContainerId && tracker.parentTerminal) {
-    // When we have a parent terminal, we won't have any vmName or
-    // containerName already in the args. Revisit this assumption if we
-    // implement a drop down menu to select a different vm/container from
-    // the active tab.
-    Object.assign(containerId, tracker.parentTerminal.terminalInfo.containerId);
-  }
-  return {
-    activeTracker: tracker,
-    containerId: containerId,
-    isParsedContainerId: isParsedContainerId,
-  };
+export function getInitialTitleCacheKey(containerId) {
+  return 'cachedInitialTitle-' + JSON.stringify(
+      containerId,
+      // This is to make sure the order of the properties. This seems to be
+      // documented in the ES5 standard.
+      ['containerName', 'vmName'],
+  );
 }
 
 /**
  * Set up a title handler, which sets a proper document title before the
  * terminal is ready, and caches title for other terminals to use.
  *
- * @param {?ContainerId=} containerId parsed from URL.
+ * @param {!TerminalLaunchInfo=} launchInfo This is for testing. Normal users
+ *     should not specify it.
  * @return {!Promise<function()>} return a function to stop the handler. This is
  *     mainly for testing.
  */
-export async function setUpTitleHandler(containerId) {
-  const trackerAndContainerId = await getActiveTrackerAndContainerId(
-      new URLSearchParams(document.location.search).getAll('args[]'));
-  const tracker = trackerAndContainerId.activeTracker;
-  containerId = containerId || trackerAndContainerId.containerId;
-  const isNonEmptyContainerId = Object.keys(containerId).length > 0;
-  let key = 'cachedInitialTitle';
-  if (isNonEmptyContainerId) {
-    key += '-' + JSON.stringify(containerId);
+export async function setUpTitleHandler(launchInfo) {
+  const tracker = await TerminalActiveTracker.get();
+  if (!launchInfo) {
+    launchInfo = getTerminalLaunchInfo(tracker);
   }
+  const {hasCwd, containerId} = launchInfo;
+
+  const key = getInitialTitleCacheKey(containerId);
 
   if (tracker.parentTerminal) {
     document.title = tracker.parentTerminal.title;
   } else {
     let title = window.localStorage.getItem(key);
-    if (title === null && isNonEmptyContainerId) {
+    // Special title composing logic for non-default vm.
+    if (title === null &&
+        (containerId.vmName !== DEFAULT_VM_NAME ||
+         containerId.containerName !== DEFAULT_CONTAINER_NAME)) {
       title = composeTitle(containerId);
     }
     if (title !== null) {
@@ -302,7 +368,7 @@ export async function setUpTitleHandler(containerId) {
 
   let isFirstTitle = true;
   const observer = new MutationObserver(function(mutations, observer) {
-    if (isFirstTitle && !tracker.parentTerminal) {
+    if (isFirstTitle && !hasCwd) {
       window.localStorage.setItem(key, mutations[0].target.textContent);
     }
     isFirstTitle = false;

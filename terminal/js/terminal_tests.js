@@ -53,33 +53,10 @@ it('opens-process-in-init', async function() {
   terminal.init(div);
   const [args, pidInit] =
       await mockTerminalPrivateController.on('openVmshellProcess');
-  assert.lengthOf(args, 1);
-  assert.match(args[0], /^--startup_id=\d+$/);
+  assert.equal(args.filter((x) => /^--startup_id=\d+$/.test(x)).length, 1);
 
   pidInit('terminalId-456');
   assert.equal(tracker.terminalInfo_.terminalId, 'terminalId-456');
-});
-
-it('opens-process-in-init-with-parent-terminal', async function() {
-  const tracker = await TerminalActiveTracker.get();
-  tracker.parentTerminal = {
-    tabId: 1,
-    title: 't',
-    terminalInfo: {
-      terminalId: 'terminalId-123',
-      containerId: {vmName: 'test-vm', containerName: 'test-container'},
-    },
-  };
-
-  terminal.init(div);
-  const [args] =
-      await mockTerminalPrivateController.on('openVmshellProcess');
-
-  assert.lengthOf(args, 4);
-  assert.match(args[0], /^--startup_id=\d+$/);
-  assert.equal(args[1], '--cwd=terminal_id:terminalId-123');
-  assert.equal(args[2], `--vm_name=test-vm`);
-  assert.equal(args[3], `--target_container=test-container`);
 });
 
 [true, false].map((value) => it(`set-a11y-in-init-to-${value}`, async () => {
@@ -104,7 +81,7 @@ it('does-not-exit-on-first-output', async function() {
   let exitCalled = false;
   const term = new hterm.Terminal();
   term.decorate(div);
-  const terminalCommand = new terminal.Command({term, args: []});
+  const terminalCommand = new terminal.Command(term);
   terminalCommand.run();
   await mockTerminalPrivateController.on('openVmshellProcess');
   terminalCommand.exit = () => { exitCalled = true; };
