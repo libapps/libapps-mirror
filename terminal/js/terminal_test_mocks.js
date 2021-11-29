@@ -470,3 +470,42 @@ export class MockObject {
     return argList[argList.length - 1];
   }
 }
+
+/**
+ * Like MockObject, but for a function. Similarly, the instance itself is not
+ * callable, but `this.proxy` is.
+ */
+export class MockFunction {
+  constructor() {
+    this.mockObject_ = new MockObject();
+    this.name_ = 'foo';
+  }
+
+  /**
+   * Return a function. Calls to the function will be recorded, and you can
+   * access the call history from, for example, `this.getHistory()`.
+   *
+   * @return {function(...*)}
+   */
+  get proxy() {
+    return this.mockObject_.proxy[this.name_];
+  }
+
+  /**
+   * Get call history.
+   *
+   * @return {!Array<!Array>} The list of arguments. One entry per call.
+   */
+  getHistory() {
+    return this.mockObject_.getMethodHistory(this.name_);
+  }
+
+  /**
+   * Return the arguments of the last call.
+   *
+   * @return {!Array}
+   */
+  getLastArgs() {
+    return this.mockObject_.getMethodLastArgs(this.name_);
+  }
+}

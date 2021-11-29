@@ -86,13 +86,15 @@ export class PseudoTmuxCommand {
             continue;
           }
 
-          this.controller_.queueCommand(command, (lines) => {
+          const callback = (lines) => {
             for (const line of lines) {
               this.term_.print(line);
               this.term_.newLine();
             }
             this.prompt_();
-          });
+          };
+
+          this.controller_.queueCommand(command, callback, callback);
           break;
         }
         default:

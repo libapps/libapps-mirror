@@ -6,7 +6,8 @@
  * @fileoverview Unit tests for tmux.js.
  */
 
-import {LayoutType, parseWindowLayout} from './tmux.js';
+import {MockFunction} from './terminal_test_mocks.js';
+import {Controller, LayoutType, parseWindowLayout} from './tmux.js';
 
 // TODO(crbug.com/1252271): add all the missing tests.
 
@@ -78,7 +79,7 @@ const parseWindowLayoutTestData = [{
 }];
 
 
-describe('tmux.js', () => {
+describe('tmux.js', function() {
   parseWindowLayoutTestData.forEach(({str, layout}, i) => it(
       `parseWindowLayout${i}`,
       async function() {
@@ -86,4 +87,97 @@ describe('tmux.js', () => {
             `failed parsing ${str}`);
       },
   ));
+
+  describe('controller', function() {
+    beforeEach(function() {
+      this.openWindowMock = new MockFunction();
+      this.inputMock = new MockFunction();
+      this.controller = new Controller({
+        openWindow: this.openWindowMock.proxy,
+        input: this.inputMock.proxy,
+      });
+
+      this.interpretAllLines = (lines) => {
+        for (const line of lines) {
+          this.controller.interpretLine(line);
+        }
+      };
+
+      // Tmux prints a %begin/%end block at the very beginning.
+      this.interpretAllLines([
+          '%begin 0 0 0',
+          '%end 0 0 0',
+      ]);
+    });
+
+    it('queueCommand() and %begin/%end block', function() {
+      const callbackMock = new MockFunction();
+      this.controller.queueCommand('foo bar', callbackMock.proxy);
+      assert.deepEqual(this.inputMock.getHistory(), [['foo bar\r']]);
+
+      this.interpretAllLines([
+          '%random-tag abc',
+          // Legit %begin tag.
+          '%begin 123 455 1',
+          'hello',
+          // Another %begin tag. This is unusual, but should be treated as
+          // content of the block.
+          '%begin 123 455 1',
+          // A %end tag with unmatched args. This is unusual, but should be
+          // treated as content of the block.
+          '%end 124 455 1',
+          // A %error tag with unmatched args. This is unusual, but should be
+          // treated as content of the block.
+          '%error 124 455 1',
+          // This should just be treated as content of the block.
+          '%random-tag2 abc',
+          // Legit %end tag with matching args.
+          '%end 123 455 1',
+          '%random-tag3 abc',
+      ]);
+
+      assert.deepEqual(callbackMock.getHistory(), [[[
+          'hello',
+          '%begin 123 455 1',
+          '%end 124 455 1',
+          '%error 124 455 1',
+          '%random-tag2 abc',
+      ]]]);
+    });
+
+    // This is basically the same as the `%end` one and only the callback is
+    // different, so we don't repeatedly test the tricky cases.
+    it('queueCommand() and %begin/%error block', function() {
+      const callbackMock = new MockFunction();
+      this.controller.queueCommand('foo bar', () => assert.fail(),
+          callbackMock.proxy);
+      assert.deepEqual(this.inputMock.getHistory(), [['foo bar\r']]);
+
+      this.interpretAllLines([
+          '%random-tag abc',
+          '%begin 123 455 1',
+          'hello',
+          'world',
+          '%error 123 455 1',
+      ]);
+
+      assert.deepEqual(callbackMock.getHistory(), [[[
+          'hello',
+          'world',
+      ]]]);
+    });
+
+    // This test when the tag is not %begin/%end/%error
+    it('interpretLine()', function() {
+      const handlerMock = new MockFunction();
+      this.controller.handlers_['%random-tag'] = handlerMock.proxy;
+
+      this.interpretAllLines([
+          '%random-tag abc',
+          '%random-tag 123 456',
+      ]);
+
+      assert.deepEqual(handlerMock.getHistory(), [['abc'], ['123 456']]);
+    });
+  });
 });

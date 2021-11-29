@@ -167,6 +167,7 @@ export class Controller {
           // TODO(crbug.com/1252271): send ctrl-u to input() to clear input just
           // in case? Or maybe we should require the user to do so.
         },
+        throwUnhandledCommandError,
     );
 
     /**
@@ -218,7 +219,9 @@ export class Controller {
    *                 ending '\r\n'.
    */
   interpretLine(line) {
-    // If there is any error, let's log it and continue.
+    // TODO(crbug.com/1252271): If there is any error, we log it and continue.
+    // We might want to revisit this, since some of the errors might not be
+    // recoverable.
     try {
       this.interpretLine_(line);
     } catch (error) {
@@ -230,21 +233,22 @@ export class Controller {
    * @param {string} line
    */
   interpretLine_(line) {
-    // TODO(crbug.com/1252271): We also need to handle '%exit' and '%error'.
+    // TODO(crbug.com/1252271): We also need to handle '%exit'.
 
     const tagEnd = line.indexOf(' ');
     const tag = tagEnd >= 0 ? line.slice(0, tagEnd) : null;
+    const args = line.slice(tagEnd + 1);
 
-    if (tag === '%end') {
-      if (!this.currentCommand_?.started) {
-        throw new Error(
-            'unexpected %end line: no current command or it hasn\'t started');
+    if (tag === '%end' || tag === '%error') {
+      if (args === this.currentCommand_.beginArgs) {
+        this.currentCommand_.finish(tag === '%end');
+        this.currentCommand_ = null;
+        this.maybeRunNextCommand_();
+        return;
       }
 
-      this.currentCommand_.finish();
-      this.currentCommand_ = null;
-      this.maybeRunNextCommand_();
-      return;
+      console.warn(`encountered %end/%error tag but the args do not match: ` +
+          `${args} !== ${this.currentCommand_.beginArgs}`);
     }
 
     if (this.currentCommand_?.started) {
@@ -256,7 +260,7 @@ export class Controller {
       if (!this.currentCommand_) {
         throw new Error('unexpected %begin line: no current command');
       }
-      this.currentCommand_.start();
+      this.currentCommand_.start(args);
       return;
     }
 
@@ -265,7 +269,7 @@ export class Controller {
     if (tag !== null) {
       const handler = this.handlers_[tag];
       if (handler) {
-        handler(line.slice(tagEnd + 1));
+        handler(args);
       }
     }
   }
@@ -408,10 +412,13 @@ export class Controller {
    *
    * @param {string} command
    * @param {function(!Array<string>)=} callback The argument is an array of
-   *     lines. The lines do not contain the ending '\r\n'
+   *     lines. The lines do not contain the ending '\r\n'.
+   * @param {function(!Array<string>)=} errorCallback Like `callback`, but
+   *     called if an error occurs.
    */
-  queueCommand(command, callback = () => {}) {
-    this.commandQueue_.push([command, new Command(callback)]);
+  queueCommand(command, callback = () => {},
+      errorCallback = throwUnhandledCommandError) {
+    this.commandQueue_.push([command, new Command(callback, errorCallback)]);
     this.maybeRunNextCommand_();
   }
 
@@ -611,21 +618,37 @@ export function parseWindowLayout(layoutStr) {
 class Command {
   /**
    * @param {function(!Array<string>)} callback The callback to invoke when the
-   * command finishes.
+   *     command finishes successfully.
+   * @param {function(!Array<string>)} errorCallback Like `callback`, but called
+   *     if an error occurs
    */
-  constructor(callback) {
+  constructor(callback, errorCallback) {
     this.buffer_ = null;
     this.callback_ = callback;
+    this.errorCallback_ = errorCallback;
+    // The args following the %begin tag.
+    this.beginArgs_ = null;
+  }
+
+  /**
+   * @return {?string} Return the %begin tag args or null if the command hasn't
+   *     started yet.
+   */
+  get beginArgs() {
+    return this.beginArgs_;
   }
 
   /**
    * Called when we receive the corresponding `%begin` notification.
+   *
+   * @param {string} beginArgs
    */
-  start() {
-    if (this.buffer_) {
+  start(beginArgs) {
+    if (this.started) {
       throw new Error('command has already started');
     }
     this.buffer_ = [];
+    this.beginArgs_ = beginArgs;
   }
 
   /**
@@ -647,11 +670,20 @@ class Command {
   /**
    * Finish the command by calling the callback synchronously. This should be
    * called when we received the corresponding `%end` notification.
+   *
+   * @param {boolean} success
    */
-  finish() {
-    this.callback_(/** @type {!Array<string>} */(this.buffer_));
+  finish(success) {
+    const callback = success ? this.callback_ : this.errorCallback_;
+    callback(/** @type {!Array<string>} */(this.buffer_));
+
     this.buffer_ = null;
     this.callback_ = null;
+    this.errorCallback_ = null;
   }
 }
 
+/** @param {!Array<string>} lines */
+function throwUnhandledCommandError(lines) {
+  throw new Error('unhandled command error: ', lines.join('\n'));
+}
