@@ -6,7 +6,7 @@
  * @fileoverview Unit tests for tmux.js.
  */
 
-import {MockFunction} from './terminal_test_mocks.js';
+import {MockFunction, MockObject} from './terminal_test_mocks.js';
 import {Controller, LayoutType, parseWindowLayout} from './tmux.js';
 
 // TODO(crbug.com/1252271): add all the missing tests.
@@ -90,10 +90,26 @@ describe('tmux.js', function() {
 
   describe('controller', function() {
     beforeEach(function() {
+      this.testWindowData = {
+        '@3': {
+          windowMock: new MockObject(),
+          layoutStr: 'd6be,190x79,0,0,1',
+          paneIds: ['%1'],
+        },
+        '@9': {
+          windowMock: new MockObject(),
+          layoutStr: '6f9b,127x79,0,0[127x39,0,0,2,127x39,0,40,10]',
+          paneIds: ['%2', '%10'],
+        },
+      };
+
       this.openWindowMock = new MockFunction();
       this.inputMock = new MockFunction();
       this.controller = new Controller({
-        openWindow: this.openWindowMock.proxy,
+        openWindow: (args) => {
+          this.openWindowMock.called(args);
+          return this.testWindowData[args.windowId].windowMock.proxy;
+        },
         input: this.inputMock.proxy,
       });
 
@@ -103,11 +119,51 @@ describe('tmux.js', function() {
         }
       };
 
-      // Tmux prints a %begin/%end block at the very beginning.
-      this.interpretAllLines([
-          '%begin 0 0 0',
-          '%end 0 0 0',
+      this.interpretBeginEndBlock = (lines) => {
+        this.controller.interpretLine('%begin');
+        this.interpretAllLines(lines);
+        this.controller.interpretLine('%end');
+      };
+
+      // Tmux prints a empty %begin/%end block at the very beginning.
+      this.interpretBeginEndBlock([]);
+    });
+
+    it('start() and internalOpenWindow_()', function() {
+      this.controller.start();
+
+      // Controller first queries the version number.
+      assert.equal(this.inputMock.getHistory().length, 1);
+      this.interpretBeginEndBlock(['3.2a']);
+      assert.deepEqual(this.controller.tmuxVersion_, {major: 3.2, minor: 'a'});
+
+      // Controller list windows. After this, some handlers should be installed.
+      const handlerToBeInstalled = ['%window-add'];
+      assert.equal(this.inputMock.getHistory().length, 2);
+      assert.isFalse(handlerToBeInstalled.some(
+          (handler) => !!this.controller.handlers_[handler]));
+      this.interpretBeginEndBlock([
+          `@3 ${this.testWindowData['@3'].layoutStr}`,
+          `@9 ${this.testWindowData['@9'].layoutStr}`,
       ]);
+      assert.isTrue(handlerToBeInstalled.every(
+          (handler) => !!this.controller.handlers_[handler]));
+      assert.deepEqual(
+          this.openWindowMock.getHistory().map(([{windowId}]) => windowId)
+              .sort(),
+          ['@3', '@9'],
+      );
+      assert.deepEqual(
+          Array.from(this.controller.windows_.keys()).sort(),
+          ['@3', '@9'],
+      );
+      assert.deepEqual(
+          Array.from(this.controller.panes_.keys()).sort(),
+          ['%1', '%10', '%2'],
+      );
+      assert.equal(this.controller.panes_.get('%1').winInfo.id, '@3');
+      assert.equal(this.controller.panes_.get('%10').winInfo.id, '@9');
+      assert.equal(this.controller.panes_.get('%2').winInfo.id, '@9');
     });
 
     it('queueCommand() and %begin/%end block', function() {
@@ -179,5 +235,6 @@ describe('tmux.js', function() {
 
       assert.deepEqual(handlerMock.getHistory(), [['abc'], ['123 456']]);
     });
+
   });
 });

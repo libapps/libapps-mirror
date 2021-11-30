@@ -115,6 +115,11 @@ let PaneInfo;
 let WindowData;
 
 /**
+ * @typedef {{major: number, minor: string}}
+ */
+let TmuxVersion;
+
+/**
  * A Controller object interacts with a tmux process running in control mode.
  * It interprets tmux's output, and also controls tmux by sending commands (e.g.
  * open a new tmux window or resize it).
@@ -194,20 +199,42 @@ export class Controller {
      * @type {!Map<string, !PaneInfo>}
      */
     this.panes_ = new Map();
+
+    /** @private {?TmuxVersion} */
+    this.tmuxVersion_ = null;
   }
 
   /**
    * Start the controller. Call it once at the beginning.
    */
   start() {
+    // Query the tmux process version.
+    this.queueCommand('display-message -p "#{version}"', (lines) => {
+      try {
+        // A version number looks like this: '3.2a'. The number part is the
+        // `major` and whatever follows will be `minor`. This also works for say
+        // '3', '3.0' and '3a'.
+        const match = lines[0].match(/^([0-9]+(?:.[0-9]+)?)(.*)$/);
+        this.tmuxVersion_ = {
+          major: Number.parseFloat(match[1]),
+          minor: match[2],
+        };
+      } catch (error) {
+        console.warn('unable to parse version from ', lines);
+        this.tmuxVersion_ = {major: 0, minor: ''};
+      }
+    });
+
     this.listWindows((windowDataList) => {
       for (const windowData of windowDataList) {
-        this.createWinInfo_(windowData);
+        this.internalOpenWindow_(windowData);
       }
 
-      // TODO(crbug.com/1252271): We should start to handle '%window-add',
-      // '%window-close' and '%unlink-window-close' here (i.e. add the handlers
-      // to `this.handlers_`).
+      // Start handling changes to windows.
+      //
+      // TODO(crbug.com/1252271): Also handle '%window-close' and
+      // '%unlink-window-close' here.
+      this.handlers_['%window-add'] = this.handleWindowAdd_.bind(this);
     });
   }
 
@@ -234,9 +261,11 @@ export class Controller {
    */
   interpretLine_(line) {
     // TODO(crbug.com/1252271): We also need to handle '%exit'.
-
-    const tagEnd = line.indexOf(' ');
-    const tag = tagEnd >= 0 ? line.slice(0, tagEnd) : null;
+    let tagEnd = line.indexOf(' ');
+    if (tagEnd === -1) {
+      tagEnd = line.length;
+    }
+    const tag = line.slice(0, tagEnd);
     const args = line.slice(tagEnd + 1);
 
     if (tag === '%end' || tag === '%error') {
@@ -347,7 +376,38 @@ export class Controller {
    * @param {function(!Array<!WindowData>)} callback
    */
   listWindows(callback) {
-    this.queueCommand('list-windows -F "#{window_id} #{window_layout}"',
+    this.listWindowsImpl_('', callback);
+  }
+
+  /**
+   * List one window.
+   *
+   * @param {string} winId
+   * @param {function(?WindowData)} callback This will be called with the window
+   *     data or null if we cannot find the window.
+   */
+  listWindow(winId, callback) {
+    if (this.checkTmuxMinVersion_({major: 3.2, minor: 'a'})) {
+      // Let tmux filter it by the window id.
+      this.listWindowsImpl_(` -f "#{==:#{window_id},${winId}}"`, (windows) => {
+        callback(windows[0] || null);
+      });
+      return;
+    }
+
+    this.listWindows((windows) => {
+      callback(windows.find((w) => w.id === winId) || null);
+    });
+  }
+
+  /**
+   * @param {string} extra The extra string to be appended to the 'list-windows'
+   *     command.
+   * @param {function(!Array<!WindowData>)} callback
+   */
+  listWindowsImpl_(extra, callback) {
+    const command = 'list-windows -F "#{window_id} #{window_layout}"' + extra;
+    this.queueCommand(command,
         (output) => {
           const windows = [];
           for (const line of output) {
@@ -434,9 +494,24 @@ export class Controller {
   }
 
   /**
+   * Check if tmux process has a version newer or equal to `tmuxVersion`.
+   *
+   * @param {!TmuxVersion} tmuxVersion
+   * @return {boolean}
+   */
+  checkTmuxMinVersion_(tmuxVersion) {
+    if (!this.tmuxVersion_) {
+      throw new Error('version is not available');
+    }
+    const {major, minor} = this.tmuxVersion_;
+    return major > tmuxVersion.major ||
+        (major === tmuxVersion.major && minor >= tmuxVersion.minor);
+  }
+
+  /**
    * @param {!WindowData} windowData
    */
-  createWinInfo_(windowData) {
+  internalOpenWindow_(windowData) {
     if (this.windows_.has(windowData.id)) {
       throw new Error(`duplicate winId=${windowData.id}`);
     }
@@ -486,7 +561,7 @@ export class Controller {
   }
 
   /**
-   * Handler for '%output pane-id value'
+   * Handler for '%output <paneId> <value>'
    *
    * @param {string} text
    */
@@ -507,6 +582,22 @@ export class Controller {
         /\\[01][0-7]{2}/g,
         (x) => String.fromCharCode(parseInt(x.slice(1), 8)));
     pane.winInfo.win.onPaneOutput(paneId, data);
+  }
+
+  /**
+   * Handler for '%window-add <winId>'.
+   *
+   * @param {string} winId
+   */
+  handleWindowAdd_(winId) {
+    checkWindowId(winId);
+    this.listWindow(winId, (windowData) => {
+      if (!windowData) {
+        console.error(`unable to list window ${winId}`);
+        return;
+      }
+      this.internalOpenWindow_(windowData);
+    });
   }
 }
 
@@ -685,5 +776,12 @@ class Command {
 
 /** @param {!Array<string>} lines */
 function throwUnhandledCommandError(lines) {
-  throw new Error('unhandled command error: ', lines.join('\n'));
+  throw new Error(`unhandled command error: ${lines.join('\n')}`);
+}
+
+/** @param {string} winId */
+function checkWindowId(winId) {
+  if (!winId.match(/^(@\d+)$/)) {
+    throw new Error(`incorrrect window id : ${winId}`);
+  }
 }

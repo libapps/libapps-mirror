@@ -402,7 +402,7 @@ export class MockObject {
         }
         // If the property is not in the baseObj, we mock it as a method.
         return (...args) => {
-          this.methodCalled(prop, args);
+          this.methodCalled(prop, ...args);
         };
       },
 
@@ -436,7 +436,7 @@ export class MockObject {
    * @param {string} methodName
    * @param {!Array} args
    */
-  methodCalled(methodName, args) {
+  methodCalled(methodName, ...args) {
     if (!this.perMethodHistory_.has(methodName)) {
       this.perMethodHistory_.set(methodName, []);
     }
@@ -479,6 +479,15 @@ export class MockFunction {
   constructor() {
     this.mockObject_ = new MockObject();
     this.name_ = 'foo';
+  }
+
+  /**
+   * (Manually) record a call.
+   *
+   * @param {!Array} args
+   */
+  called(...args) {
+    this.mockObject_.methodCalled(this.name_, ...args);
   }
 
   /**
