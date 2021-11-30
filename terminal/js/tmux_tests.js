@@ -127,9 +127,25 @@ describe('tmux.js', function() {
 
       // Tmux prints a empty %begin/%end block at the very beginning.
       this.interpretBeginEndBlock([]);
+
+      this.setup = () => {
+        this.controller.start();
+        // Mock results for the version number.
+        this.interpretBeginEndBlock(['3.2a']);
+        // Mock results for listing window.
+        this.interpretBeginEndBlock([
+            `@3 ${this.testWindowData['@3'].layoutStr}`,
+            `@9 ${this.testWindowData['@9'].layoutStr}`,
+        ]);
+
+        this.openWindowMock.popHistory();
+        this.inputMock.popHistory();
+      };
     });
 
     it('start() and internalOpenWindow_()', function() {
+      // Not calling `this.setup()` because we need to test
+      // `this.controller.start()` manually.
       this.controller.start();
 
       // Controller first queries the version number.
@@ -138,7 +154,11 @@ describe('tmux.js', function() {
       assert.deepEqual(this.controller.tmuxVersion_, {major: 3.2, minor: 'a'});
 
       // Controller list windows. After this, some handlers should be installed.
-      const handlerToBeInstalled = ['%window-add'];
+      const handlerToBeInstalled = [
+          '%window-add',
+          '%window-close',
+          '%unlinked-window-close',
+      ];
       assert.equal(this.inputMock.getHistory().length, 2);
       assert.isFalse(handlerToBeInstalled.some(
           (handler) => !!this.controller.handlers_[handler]));
@@ -167,6 +187,7 @@ describe('tmux.js', function() {
     });
 
     it('queueCommand() and %begin/%end block', function() {
+      this.setup();
       const callbackMock = new MockFunction();
       this.controller.queueCommand('foo bar', callbackMock.proxy);
       assert.deepEqual(this.inputMock.getHistory(), [['foo bar\r']]);
@@ -204,6 +225,7 @@ describe('tmux.js', function() {
     // This is basically the same as the `%end` one and only the callback is
     // different, so we don't repeatedly test the tricky cases.
     it('queueCommand() and %begin/%error block', function() {
+      this.setup();
       const callbackMock = new MockFunction();
       this.controller.queueCommand('foo bar', () => assert.fail(),
           callbackMock.proxy);
@@ -225,6 +247,7 @@ describe('tmux.js', function() {
 
     // This test when the tag is not %begin/%end/%error
     it('interpretLine()', function() {
+      this.setup();
       const handlerMock = new MockFunction();
       this.controller.handlers_['%random-tag'] = handlerMock.proxy;
 
@@ -234,6 +257,47 @@ describe('tmux.js', function() {
       ]);
 
       assert.deepEqual(handlerMock.getHistory(), [['abc'], ['123 456']]);
+    });
+
+    it('handleWindowClose_', function() {
+      this.setup();
+      assert.equal(this.controller.windows_.size, 2);
+      assert.equal(this.controller.panes_.size, 3);
+
+      this.controller.handleWindowClose_('@9');
+      assert.equal(
+          this.testWindowData['@9'].windowMock.getMethodHistory('onClose')
+              .length,
+          1,
+      );
+      assert.equal(
+          this.testWindowData['@3'].windowMock.getMethodHistory('onClose')
+              .length,
+          0,
+      );
+      assert.deepEqual(Array.from(this.controller.windows_.keys()), ['@3']);
+      assert.deepEqual(Array.from(this.controller.panes_.keys()), ['%1']);
+    });
+
+    it('handleExit_', function() {
+      this.setup();
+      assert.equal(this.controller.windows_.size, 2);
+      assert.equal(this.controller.panes_.size, 3);
+
+      this.controller.handleExit_();
+
+      assert.equal(
+          this.testWindowData['@9'].windowMock.getMethodHistory('onClose')
+              .length,
+          1,
+      );
+      assert.equal(
+          this.testWindowData['@3'].windowMock.getMethodHistory('onClose')
+              .length,
+          1,
+      );
+      assert.equal(this.controller.windows_.size, 0);
+      assert.equal(this.controller.panes_.size, 0);
     });
 
   });

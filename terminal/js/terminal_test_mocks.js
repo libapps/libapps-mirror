@@ -457,6 +457,18 @@ export class MockObject {
   }
 
   /**
+   * Like getMethodHistory(), but also clear the history.
+   *
+   * @param {string} methodName
+   * @return {!Array<!Array>} The list of arguments. One entry per call.
+   */
+  popMethodHistory(methodName) {
+    const history = this.getMethodHistory(methodName);
+    this.perMethodHistory_.delete(methodName);
+    return history;
+  }
+
+  /**
    * Return the arguments of the last call to the method.
    *
    * @param {string} methodName
@@ -507,6 +519,15 @@ export class MockFunction {
    */
   getHistory() {
     return this.mockObject_.getMethodHistory(this.name_);
+  }
+
+  /**
+   * Like getHistory(), but also clear the history.
+   *
+   * @return {!Array<!Array>} The list of arguments. One entry per call.
+   */
+  popHistory() {
+    return this.mockObject_.popMethodHistory(this.name_);
   }
 
   /**

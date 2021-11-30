@@ -119,13 +119,18 @@ export class TmuxControllerDriver {
    * @param {!hterm.Terminal} term
    */
   constructor(term) {
+    this.term_ = term;
+
     /** @private {?tmux.Controller} */
     this.controller_ = null;
-    this.term_ = term;
     /** @private {?Object} */
     this.ioPropertyBackup_ = null;
     /** @private {?PseudoTmuxCommand} */
     this.pseudoTmuxCommand_ = null;
+    /** @const @private {!Set<!ServerWindow>} */
+    this.serverWindows_ = new Set();
+
+    this.onBeforeUnload_ = this.onBeforeUnload_.bind(this);
   }
 
   /**
@@ -210,12 +215,22 @@ export class TmuxControllerDriver {
    * Start handling tmux control mode.
    */
   onStart_() {
+    window.addEventListener('beforeunload', this.onBeforeUnload_);
+
     const io = this.term_.io;
 
     this.ioPropertyBackup_ = {};
     this.controller_ = new tmux.Controller({
       openWindow: ({windowId, controller}) => {
-        return new ServerWindow({windowId, controller});
+        const serverWindow = new ServerWindow({
+          windowId,
+          controller,
+          onClose: () => {
+            this.serverWindows_.delete(serverWindow);
+          },
+        });
+        this.serverWindows_.add(serverWindow);
+        return serverWindow;
       },
       input: io.sendString.bind(io),
     });
@@ -241,6 +256,8 @@ export class TmuxControllerDriver {
    * Stop handling tmux control mode.
    */
   onStop_() {
+    window.removeEventListener('beforeunload', this.onBeforeUnload_);
+
     this.controller_ = null;
     this.pseudoTmuxCommand_ = null;
 
@@ -248,6 +265,21 @@ export class TmuxControllerDriver {
       this.term_.io[name] = this.ioPropertyBackup_[name];
     }
     this.ioPropertyBackup_ = null;
+    if (this.serverWindows_.size) {
+      // The controller should have received an "%exit" notification and closed
+      // all the windows.
+      console.error(
+          'serverWindows_ is not empty when the tmux process has stopped');
+      this.serverWindows_.clear();
+    }
+  }
+
+  onBeforeUnload_() {
+    // Note that we copy the set to an array first because closing a server
+    // window will affect the set.
+    for (const serverWindow of Array.from(this.serverWindows_)) {
+      serverWindow.onClose();
+    }
   }
 }
 
@@ -308,6 +340,10 @@ function uniqueId() {
  *
  * After setting up the session id, the two channels send each other messages in
  * this format `[sessionId, actualPayload]`.
+ *
+ * TODO(1252271): There are a lot of reasons that the server-client connection
+ * can go wrong. We should implement some heartbeat logic to detect and handle
+ * the issue (e.g. close/re-open window).
  */
 class ServerChannel {
   /**
@@ -425,12 +461,14 @@ class ServerWindow extends tmux.Window {
    * @param {{
    *   windowId: string,
    *   controller: !tmux.Controller,
-   * }} param1
+   *   onClose: function()
+   * }} param1 onClose() will be called when this.onClose() is called.
    */
-  constructor({windowId, controller}) {
+  constructor({windowId, controller, onClose}) {
     super();
     this.windowId_ = windowId;
     this.controller_ = controller;
+    this.onClose_ = onClose;
 
     const channelName = uniqueId();
     this.channel_ = new ServerChannel({
@@ -450,6 +488,8 @@ class ServerWindow extends tmux.Window {
         `${TMUX_CHANNEL_URL_PARAM_NAME}=${encodeURIComponent(channelName)}`;
     chrome.terminalPrivate.openWindow({url});
 
+    // TODO(1252271): We should be able to use something like Proxy to avoid
+    // spelling out the methods.
     for (const method of ['onLayoutUpdate', 'onPaneOutput',
         'onPaneCursorUpdate', 'onPaneSyncStart']) {
       this[method] = this.clientWindowRpc_[method];
@@ -469,9 +509,18 @@ class ServerWindow extends tmux.Window {
     this.clientWindowRpc_.onLayoutUpdate(layout);
   }
 
+  /**
+   * Kill the corresponding window in tmux.
+   */
+  killWindow() {
+    // Tmux should then call `this.onClose()` eventually.
+    this.controller_.killWindow(this.windowId_);
+  }
+
   /** @override */
   onClose() {
-    // TODO(1252271): kill the client window.
+    this.clientWindowRpc_.onClose();
+    this.onClose_();
   }
 
   /**
@@ -510,6 +559,7 @@ export class ClientWindow {
     this.windowId_ = null;
     /** @private {null|string} */
     this.paneId_ = null;
+    this.closed_ = false;
 
     this.channel_ = new ClientChannel({
       channelName,
@@ -531,6 +581,16 @@ export class ClientWindow {
     this.paneSyncStarted_ = false;
 
     this.io_.onVTKeystroke = this.io_.sendString = this.sendString_.bind(this);
+
+    window.addEventListener('beforeunload', () => {
+      // If we have already received a `onClose()` from the server side, there
+      // is no need to kill the window.
+      if (!this.closed_) {
+        // This is a bit more reliable than `this.controllerRpc_.killWindow()`
+        // since it does not need `this.windowId_` to be initialized.
+        this.serverWindowRpc_.killWindow();
+      }
+    });
   }
 
   /**
@@ -605,6 +665,12 @@ export class ClientWindow {
     // TODO(1252271): avoid calling hterm's private function?
     this.term_.scheduleSyncCursorPosition_();
     this.term_.restoreCursor({row: y, column: x});
+  }
+
+  /** @override */
+  onClose() {
+    this.closed_ = true;
+    window.close();
   }
 
   /**

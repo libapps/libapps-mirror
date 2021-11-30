@@ -63,7 +63,9 @@ export class Window {
   onLayoutUpdate(layout) { }
 
   /**
-   * Called when the window is closed.
+   * Called when the window should be closed. This also happens when the tmux
+   * process is exiting. After this is called, the controller will not interact
+   * with this instance any more.
    */
   onClose() { }
 
@@ -183,8 +185,9 @@ export class Controller {
      * @type {!Object<string, function(string)>}
      */
     this.handlers_ = {
-      '%output': this.handleOutput_.bind(this),
+      '%exit': this.handleExit_.bind(this),
       '%layout-change': this.handleLayoutChange_.bind(this),
+      '%output': this.handleOutput_.bind(this),
     };
 
     /**
@@ -231,10 +234,10 @@ export class Controller {
       }
 
       // Start handling changes to windows.
-      //
-      // TODO(crbug.com/1252271): Also handle '%window-close' and
-      // '%unlink-window-close' here.
       this.handlers_['%window-add'] = this.handleWindowAdd_.bind(this);
+      this.handlers_['%window-close'] =
+          this.handlers_['%unlinked-window-close'] =
+          this.handleWindowClose_.bind(this);
     });
   }
 
@@ -260,7 +263,6 @@ export class Controller {
    * @param {string} line
    */
   interpretLine_(line) {
-    // TODO(crbug.com/1252271): We also need to handle '%exit'.
     let tagEnd = line.indexOf(' ');
     if (tagEnd === -1) {
       tagEnd = line.length;
@@ -358,6 +360,15 @@ export class Controller {
    */
   resizeWindow(winId, xSize, ySize) {
     this.queueCommand(`resize-window -t ${winId} -x ${xSize} -y ${ySize}`);
+  }
+
+  /**
+   * Kill a tmux window.
+   *
+   * @param {string} winId
+   */
+  killWindow(winId) {
+    this.queueCommand(`kill-window -t ${winId}`);
   }
 
   /**
@@ -535,6 +546,18 @@ export class Controller {
   }
 
   /**
+   * Delete the window and associated panes.
+   *
+   * @param {!WinInfo} winInfo
+   */
+  deleteWindow_(winInfo) {
+    for (const paneId of iterPaneIds(winInfo.layout)) {
+      this.panes_.delete(paneId);
+    }
+    this.windows_.delete(winInfo.id);
+  }
+
+  /**
    * Handler for '%layout-change window-id window-layout window-visible-layout
    * window-flags'
    *
@@ -598,6 +621,36 @@ export class Controller {
       }
       this.internalOpenWindow_(windowData);
     });
+  }
+
+  /**
+   * The handler for both '%window-close <winId>' and '%unlink-window-close
+   * <winId>'.
+   *
+   * @param {string} winId
+   */
+  handleWindowClose_(winId) {
+    checkWindowId(winId);
+
+    // It seems that tmux currently always uses '%unlink-window-close' no matter
+    // whether the window being closed belonged to the current session or not.
+    // Here we check whether the window is known first to ensure the behavior is
+    // always correct.
+    if (!this.windows_.has(winId)) {
+      return;
+    }
+    const winInfo = this.windows_.get(winId);
+    winInfo.win.onClose();
+    this.deleteWindow_(winInfo);
+  }
+
+  handleExit_(text) {
+    console.log(`tmux is exiting. Reason=${text}`);
+    for (const winInfo of this.windows_.values()) {
+      winInfo.win.onClose();
+    }
+    this.windows_.clear();
+    this.panes_.clear();
   }
 }
 
