@@ -32,6 +32,7 @@ test.listenForPrefChange = function(prefMgr, prefName) {
 // TODO(lxj@google.com): Move preference manager into a module such that it is
 // no longer a global variable.
 mocha.setup({ui: 'bdd', globals: [
+  'enableTmuxIntegration',
   'PreferenceManager',
   'preferenceManager',
   'webFontPromises',

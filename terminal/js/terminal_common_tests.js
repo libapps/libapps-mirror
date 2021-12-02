@@ -158,6 +158,44 @@ describe('terminal_common_tests.js', () => {
     });
   });
 
+  describe('getTerminalLaunchInfo for tmux', function() {
+    beforeEach(function() {
+      window.enableTmuxIntegration = true;
+    });
+
+    afterEach(function() {
+      window.enableTmuxIntegration = false;
+    });
+
+    it('follows parent', function() {
+      const fakeActiveTracker =
+        /** @type {!TerminalActiveTracker} */({
+          parentTerminal: {
+            terminalInfo: {
+              tmuxDriverChannel: 'abcd',
+            },
+          },
+        });
+
+      const url = new URL(location.href);
+      url.search = '';
+
+      // No parent.
+      assert.isUndefined(getTerminalLaunchInfo(
+              /** @type {!TerminalActiveTracker} */({}), url).tmux);
+
+      // Has parent with driver channel.
+      assert.deepEqual(
+          getTerminalLaunchInfo(fakeActiveTracker, url),
+          {tmux: {driverChannelName: 'abcd'}},
+      );
+
+      // Has parent but there is a url param.
+      url.search = '?vm=penguin';
+      assert.isUndefined(getTerminalLaunchInfo(fakeActiveTracker, url).tmux);
+    });
+  });
+
   describe('getTerminalLaunchInfo() for vsh', function() {
     const emptyActiveTracker = /** @type {!TerminalActiveTracker} */({});
     const activeTrackerWithoutTerminalId =

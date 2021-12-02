@@ -224,7 +224,8 @@ const ORIGINAL_URL = new URL(document.location.href);
 
 /**
  * @typedef {{
- *   windowChannelName: string,
+ *   windowChannelName: (string|undefined),
+ *   driverChannelName: string,
  * }}
  */
 export let TmuxLaunchInfo;
@@ -256,12 +257,13 @@ export let TerminalLaunchInfo;
 /**
  * @param {{
  *   windowChannelName: string,
+ *   driverChannelName: string,
  * }} obj
  * @return {string}
  */
-export function composeTmuxUrl({windowChannelName}) {
+export function composeTmuxUrl({windowChannelName, driverChannelName}) {
   const url = new URL(ORIGINAL_URL.toString());
-  const paramValue = JSON.stringify({windowChannelName});
+  const paramValue = JSON.stringify({windowChannelName, driverChannelName});
   url.search = `?${TMUX_PARAM_NAME}=${paramValue}`;
 
   return url.toString();
@@ -287,6 +289,15 @@ export function getTerminalLaunchInfo(activeTracker, url = ORIGINAL_URL) {
     if (urlParams.has(TMUX_PARAM_NAME)) {
       return {tmux: /** @type {!TmuxLaunchInfo} */(JSON.parse(
           /** @type {string} */(urlParams.get(TMUX_PARAM_NAME))))};
+    }
+
+    const urlParamsAreEmpty = urlParams[Symbol.iterator]().next().done;
+
+    if (urlParamsAreEmpty && parentTerminalInfo?.tmuxDriverChannel) {
+      return {tmux: {
+        driverChannelName: /** @type {string} */(
+            parentTerminalInfo.tmuxDriverChannel),
+      }};
     }
   }
 

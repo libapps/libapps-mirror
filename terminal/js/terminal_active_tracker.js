@@ -14,6 +14,7 @@ export let ContainerId;
  * @typedef {{
  *            terminalId: (string|undefined),
  *            containerId: (!ContainerId|undefined),
+ *            tmuxDriverChannel: (string|undefined),
  * }}
  */
 let TerminalInfo;

@@ -32,6 +32,7 @@ terminal.Command = function(term) {
         chrome.terminalPrivate.openWindow({
           url: composeTmuxUrl({
             windowChannelName: channelName,
+            driverChannelName: driver.channelName,
           }),
         });
       },
@@ -133,12 +134,30 @@ terminal.init = function(element) {
     const launchInfo = getTerminalLaunchInfo(tracker);
 
     if (launchInfo.tmux) {
-      const {windowChannelName} = launchInfo.tmux;
-      /* eslint-disable-next-line no-new */
-      new TmuxClientWindow({
-        channelName: windowChannelName,
-        term,
-      });
+      const {windowChannelName, driverChannelName} = launchInfo.tmux;
+      tracker.updateTerminalInfo({tmuxDriverChannel: driverChannelName});
+      if (windowChannelName) {
+        /* eslint-disable-next-line no-new */
+        new TmuxClientWindow({
+          channelName: windowChannelName,
+          term,
+        });
+        return;
+      }
+
+      // There is no window channel name. This happens when we are at a new tab,
+      // and the parent tab is a tmux window. We should open a new tmux window
+      // for the tab.
+      //
+      // TODO(1252271): When we are running vsh, new tab will follow the CWD of
+      // the current tab. We might want to do the same for tmux.
+      try {
+        await TmuxClientWindow.open({driverChannelName, term});
+      } catch (error) {
+        // TODO(1252271): i18n this.
+        term.print(`Failed to connect to the tmux process: ` +
+            error.toString());
+      }
       return;
     }
 
