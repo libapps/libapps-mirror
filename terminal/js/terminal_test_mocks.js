@@ -361,6 +361,17 @@ export class MockTabsController {
 }
 
 /**
+ * @typedef {{
+ *   history: !Array<!Array>,
+ *   waiter: ?{
+ *     times: number,
+ *     resolve: function(!Array<!Array>),
+ *   },
+ * }}
+ */
+let MethodData;
+
+/**
  * Mock an object. Note that the instance itself does not mock the properties
  * and methods. Instead, the "proxy" object does that. See the following
  * example:
@@ -394,7 +405,8 @@ export class MockObject {
       baseObj = {};
     }
 
-    this.perMethodHistory_ = new Map();
+    /** @type {!Map<string, !MethodData>} */
+    this.perMethodData_ = new Map();
     this.proxy_ = new Proxy(baseObj, {
       get: (baseObj, prop) => {
         if (baseObj.hasOwnProperty(prop)) {
@@ -437,10 +449,13 @@ export class MockObject {
    * @param {!Array} args
    */
   methodCalled(methodName, ...args) {
-    if (!this.perMethodHistory_.has(methodName)) {
-      this.perMethodHistory_.set(methodName, []);
+    const methodData = this.getMethodData_(methodName);
+    methodData.history.push(args);
+    if (methodData.waiter &&
+        methodData.waiter.times <= methodData.history.length) {
+      methodData.waiter.resolve(methodData.history);
+      methodData.waiter = null;
     }
-    this.perMethodHistory_.get(methodName).push(args);
   }
 
   /**
@@ -450,10 +465,7 @@ export class MockObject {
    * @return {!Array<!Array>} The list of arguments. One entry per call.
    */
   getMethodHistory(methodName) {
-    if (this.perMethodHistory_.has(methodName)) {
-      return this.perMethodHistory_.get(methodName);
-    }
-    return [];
+    return this.getMethodData_(methodName).history;
   }
 
   /**
@@ -463,8 +475,9 @@ export class MockObject {
    * @return {!Array<!Array>} The list of arguments. One entry per call.
    */
   popMethodHistory(methodName) {
-    const history = this.getMethodHistory(methodName);
-    this.perMethodHistory_.delete(methodName);
+    const methodData = this.getMethodData_(methodName);
+    const history = methodData.history;
+    methodData.history = [];
     return history;
   }
 
@@ -475,12 +488,50 @@ export class MockObject {
    * @return {!Array}
    */
   getMethodLastArgs(methodName) {
-    const argList = this.getMethodHistory(methodName);
-    if (argList.length === 0) {
+    const history = this.getMethodHistory(methodName);
+    if (history.length === 0) {
       throw new Error(`method ${methodName} hasn't been called`);
     }
-    return argList[argList.length - 1];
+    return history[history.length - 1];
   }
+
+  /**
+   * Return the call history when the size of the history is larger or equal to
+   * `times`. You can pop the history before calling this to make sure that it
+   * waits for future calls.
+   *
+   * @param {string} methodName
+   * @param {number=} times
+   * @return {!Promise<!Array<!Array>>}
+   */
+  async whenCalled(methodName, times = 1) {
+    const methodData = this.getMethodData_(methodName);
+
+    if (methodData.history.length >= times) {
+      return methodData.history;
+    }
+
+    if (methodData.waiter) {
+      throw new Error('waiter is not empty');
+    }
+
+    return new Promise((resolve) => {
+      /** @suppress {checkTypes} */
+      methodData.waiter = {times, resolve};
+    });
+  }
+
+  /**
+   * @param {string} methodName
+   * @return {!MethodData}
+   */
+  getMethodData_(methodName) {
+    if (!this.perMethodData_.has(methodName)) {
+      this.perMethodData_.set(methodName, {history: [], waiter: null});
+    }
+    return this.perMethodData_.get(methodName);
+  }
+
 }
 
 /**
@@ -537,5 +588,14 @@ export class MockFunction {
    */
   getLastArgs() {
     return this.mockObject_.getMethodLastArgs(this.name_);
+  }
+
+  /**
+   * See MockObject.whenCalled().
+   *
+   * @param {number=} times
+   */
+  async whenCalled(times = 1) {
+    await this.mockObject_.whenCalled(this.name_, times);
   }
 }

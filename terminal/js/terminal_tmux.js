@@ -8,6 +8,9 @@ import * as tmux from './tmux.js';
  * @fileoverview Tmux integration for hterm. It also provides the
  * infrastructure to support hosting tmux windows in different tabs over
  * broadcast channels.
+ *
+ * TODO(1252271): Better documentation (e.g. description and relation for the
+ * main components, and the two flows of new window).
  */
 
 // TODO(1252271): Opening vim seems to kill the browser process. The
@@ -112,7 +115,98 @@ export class PseudoTmuxCommand {
 }
 
 /**
+ * A channel hosted by TmuxControllerDriver. This allows users to send requests
+ * to the driver remotely.
+ *
+ * This currently is only used by `ClientWindow.open()` to request a tmux
+ * window (and the associated ServerWindow). The protocol is as follows:
+ *
+ * - ClientWindow side sends `{id: '...'}`
+ * - If successful, the driver responds with `{id: '...', windowChannelName:
+ *   '...'}`; otherwise, the driver responds with `{id: '...', error: '...'}`.
+ *   The id here should match the one in the last step.
+ */
+export class DriverChannel {
+  /**
+   * @param {function(string)} onRequestOpenWindow
+   */
+  constructor(onRequestOpenWindow) {
+    this.onRequestOpenWindow_ = onRequestOpenWindow;
+
+    this.channelName_ = uniqueId();
+    this.channel_ = new BroadcastChannel(this.channelName_);
+    this.channel_.onmessage = this.onMessage_.bind(this);
+  }
+
+  /**
+   * Request to open a tmux window and the associated ServerWindow.
+   *
+   * @param {string} driverChannelName The channel name of the DriverChannel to
+   *     which we send the request.
+   * @return {!Promise<string>} The channel name of the newly opened
+   *     ServerWindow.
+   * @throws {!Error}
+   */
+  static async requestOpenWindow(driverChannelName) {
+    return new Promise((resolve, reject) => {
+      const id = uniqueId();
+      const driverChannel = new BroadcastChannel(driverChannelName);
+      driverChannel.onmessage = (ev) => {
+        if (ev.data.id !== id) {
+          return;
+        }
+
+        if (ev.data.error !== undefined) {
+          reject(new Error(ev.data.error));
+        } else {
+          resolve(ev.data.windowChannelName);
+        }
+        driverChannel.close();
+      };
+
+      setTimeout(() => {
+        // This is fine because first resolve/reject wins. See
+        // https://262.ecma-international.org/6.0/#sec-promise-reject-functions
+        reject(new Error('timeout'));
+      }, 5 * 1000);
+
+      driverChannel.postMessage({id});
+    });
+  }
+
+  /**
+   * @return {string} The channel name.
+   */
+  get channelName() {
+    return this.channelName_;
+  }
+
+  /**
+   * Resolve a request for a server window.
+   *
+   * @param {string} id The request id.
+   * @param {(string|undefined)} windowChannelName The channelName for the newly
+   *     opened ServerWindow if it was successful.
+   * @param {(string|undefined)} error The error message if there is one.
+   */
+  resolve(id, windowChannelName, error) {
+    this.channel_.postMessage({id, windowChannelName, error});
+  }
+
+  /**
+   * @param {!MessageEvent} ev
+   */
+  onMessage_(ev) {
+    const {id} = ev.data;
+    this.onRequestOpenWindow_(ev.data.id);
+  }
+}
+
+/**
  * This class connects to the terminal IO and drives a `tmux.Controller`.
+ *
+ * TODO(1252271): We should add a close method. And it should properly close all
+ * the broadcast channel (e.g. DriverChannel and ServerChannel).
  */
 export class TmuxControllerDriver {
   /**
@@ -122,8 +216,9 @@ export class TmuxControllerDriver {
    *   term: !hterm.Terminal,
    *   onOpenWindow: function({driver, channelName}),
    * }} obj onOpenWindow() will be called with `this` and the channel name for
-   *     the new window. The callback should construct a `ClientWindow` with the
-   *     channel name.
+   *     the new window (unless the window is requested by
+   *     `ClientWindow.open()`). The callback should construct a `ClientWindow`
+   *     with the channel name.
    *
    */
   constructor({term, onOpenWindow}) {
@@ -139,7 +234,16 @@ export class TmuxControllerDriver {
     /** @const @private {!Set<!ServerWindow>} */
     this.serverWindows_ = new Set();
 
+    /** @const @private {!Array<string>} */
+    this.pendingOpenWindowRequests_ = [];
+    this.driverChannel_ = new DriverChannel(
+        this.onRequestOpenWindow_.bind(this));
+
     this.onBeforeUnload_ = this.onBeforeUnload_.bind(this);
+  }
+
+  get channelName() {
+    return this.driverChannel_.channelName;
   }
 
   /**
@@ -230,21 +334,7 @@ export class TmuxControllerDriver {
 
     this.ioPropertyBackup_ = {};
     this.controller_ = new tmux.Controller({
-      openWindow: ({windowId, controller}) => {
-        const serverWindow = new ServerWindow({
-          windowId,
-          controller,
-          onClose: () => {
-            this.serverWindows_.delete(serverWindow);
-          },
-        });
-        this.serverWindows_.add(serverWindow);
-        this.onOpenWindow_({
-          driver: this,
-          channelName: serverWindow.channelName,
-        });
-        return serverWindow;
-      },
+      openWindow: this.openWindow_.bind(this),
       input: io.sendString.bind(io),
     });
     this.pseudoTmuxCommand_ = new PseudoTmuxCommand(
@@ -266,10 +356,39 @@ export class TmuxControllerDriver {
   }
 
   /**
+   * @param {{
+   *   windowId: string,
+   *   controller: !tmux.Controller,
+   * }} obj
+   * @return {!ServerWindow}
+   */
+  openWindow_({windowId, controller}) {
+    const serverWindow = new ServerWindow({
+      windowId,
+      controller,
+      onClose: () => {
+        this.serverWindows_.delete(serverWindow);
+      },
+    });
+    this.serverWindows_.add(serverWindow);
+
+    const pendingRequest = this.pendingOpenWindowRequests_.shift();
+    if (pendingRequest) {
+      this.driverChannel_.resolve(pendingRequest, serverWindow.channelName,
+          undefined);
+    } else {
+      this.onOpenWindow_({driver: this, channelName: serverWindow.channelName});
+    }
+
+    return serverWindow;
+  }
+
+  /**
    * Stop handling tmux control mode.
    */
   onStop_() {
     window.removeEventListener('beforeunload', this.onBeforeUnload_);
+    this.cleanUpPendingOpenWindowRequests_('controller has stopped');
 
     this.controller_ = null;
     this.pseudoTmuxCommand_ = null;
@@ -293,6 +412,33 @@ export class TmuxControllerDriver {
     for (const serverWindow of Array.from(this.serverWindows_)) {
       serverWindow.onClose();
     }
+    this.cleanUpPendingOpenWindowRequests_('driver\'s page is unloading');
+  }
+
+  /**
+   * @param {string} reason This will be sent as the error message for the
+   *     requests.
+   */
+  cleanUpPendingOpenWindowRequests_(reason) {
+    for (const id of this.pendingOpenWindowRequests_) {
+      console.warn(`clean up open window request ${id}`);
+      this.driverChannel_.resolve(id, undefined, reason);
+    }
+  }
+
+  /**
+   * @param {string} id
+   */
+  onRequestOpenWindow_(id) {
+    if (!this.controller_) {
+      console.warn(
+          `controller does not exist. Rejecting open window request ${id}`);
+      this.driverChannel_.resolve(id, undefined, 'controller does not exist');
+      return;
+    }
+
+    this.pendingOpenWindowRequests_.push(id);
+    this.controller_.newWindow();
   }
 }
 
@@ -554,8 +700,8 @@ class ServerWindow extends tmux.Window {
 }
 
 /**
- * The window class on the client end. It communicates with ServerWindow running
- * in another tab.
+ * The window class on the client end. It communicates with the corresponding
+ * tmux window / ServerWindow over a broadcast channel.
  *
  * Note that ClientWindow does not actually extend tmux.Window since we don't
  * pass it to tmux.Controller. But it should implement all the methods, so we
@@ -565,9 +711,19 @@ class ServerWindow extends tmux.Window {
  * @extends {tmux.Window}
  */
 export class ClientWindow {
+  /**
+   * Construct a client window (when you already knows the window channel name).
+   * Also see the open() static function in this class.
+   *
+   * @param {{
+   *   channelName: string,
+   *   term: !hterm.Terminal,
+   * }} obj
+   */
   constructor({channelName, term}) {
     this.term_ = term;
     this.io_ = term.io;
+    this.channelName_ = channelName;
 
     this.windowId_ = null;
     /** @private {null|string} */
@@ -604,6 +760,35 @@ export class ClientWindow {
         this.serverWindowRpc_.killWindow();
       }
     });
+  }
+
+  /**
+   * Open a new ClientWindow, a new tmux window / ServerWindow will also open on
+   * the driver side.
+   *
+   * @param {{
+   *   driverChannelName: string,
+   *   term: !hterm.Terminal,
+   * }} obj
+   * @return {!Promise<!ClientWindow>}
+   * @throws {!Error}
+   */
+  static async open({driverChannelName, term}) {
+    console.log('requesting server window from: ', driverChannelName);
+    const channelName = await DriverChannel.requestOpenWindow(
+        driverChannelName);
+    console.log('got channelName: ', channelName);
+    return new ClientWindow({
+      channelName: channelName,
+      term,
+    });
+  }
+
+  /**
+   * @return {string} The channel name.
+   */
+  get channelName() {
+    return this.channelName_;
   }
 
   /**

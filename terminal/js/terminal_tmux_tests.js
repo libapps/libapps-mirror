@@ -6,8 +6,9 @@
  * @fileoverview Unit tests for terminal_tmux.js.
  */
 
-import {MockObject} from './terminal_test_mocks.js';
-import {PseudoTmuxCommand} from './terminal_tmux.js';
+import {MockFunction, MockObject} from './terminal_test_mocks.js';
+import {DriverChannel, PseudoTmuxCommand, TmuxControllerDriver}
+    from './terminal_tmux.js';
 import * as tmux from './tmux.js';
 
 // TODO(crbug.com/1252271): add all the missing tests.
@@ -73,4 +74,101 @@ describe('terminal_tmux.js', function() {
       });
     });
   });
+
+  describe('DriverChannel', function() {
+    beforeEach(function() {
+      this.onRequestOpenWindowMock = new MockFunction();
+      this.driverChannel = new DriverChannel(
+          this.onRequestOpenWindowMock.proxy);
+
+      this.onMessageMock = new MockFunction();
+      this.broadcastChannel = new BroadcastChannel(
+          this.driverChannel.channelName);
+      this.broadcastChannel.onmessage = this.onMessageMock.proxy;
+
+      this.requestOpenWindowWrapper = async function() {
+        try {
+          return {
+            windowChannelName: await DriverChannel.requestOpenWindow(
+                this.driverChannel.channelName),
+          };
+        } catch (error) {
+          return {error: error.message};
+        }
+      };
+    });
+
+    afterEach(function() {
+      this.broadcastChannel.close();
+    });
+
+    [{
+      windowChannelName: 'channel-1',
+    }, {
+      error: 'error-1',
+    }].forEach(function(testData) {
+      it('requestOpenWindow() and resolve()', async function() {
+        assert.equal(this.onMessageMock.getHistory().length, 0);
+
+        const requestPromise = this.requestOpenWindowWrapper();
+        await this.onMessageMock.whenCalled();
+        const id = this.onMessageMock.popHistory()[0][0].data.id;
+
+        this.driverChannel.resolve('wrongid', 'channel-2', undefined);
+        this.driverChannel.resolve(id, testData.windowChannelName,
+            testData.error);
+
+        assert.deepEqual(await requestPromise, testData);
+      });
+    });
+
+  });
+
+  describe('TmuxControllerDriver', function() {
+    beforeEach(function() {
+      this.termMock = new MockObject({io: (new MockObject()).proxy});
+      this.onOpenWindowMock = new MockFunction();
+      this.driver = new TmuxControllerDriver({
+        term: /** @type {!hterm.Terminal} */(this.termMock.proxy),
+        onOpenWindow: this.onOpenWindowMock.proxy,
+      });
+    });
+
+    it('open window', function() {
+      this.driver.onStart_();
+
+      this.driver.openWindow_({windowId: '@123', controller: new MockObject()});
+      const serverWindows = Array.from(this.driver.serverWindows_);
+      assert.equal(serverWindows.length, 1);
+      assert.deepEqual(
+          this.onOpenWindowMock.popHistory().map(
+              ([{driver, channelName}]) => channelName),
+          [serverWindows[0].channelName],
+      );
+
+      this.driver.onStop_();
+    });
+
+    it('open window with pending request', function() {
+      const driverChannelMock = new MockObject();
+      this.driver.driverChannel_ = driverChannelMock.proxy;
+
+      this.driver.onStart_();
+
+      this.driver.onRequestOpenWindow_('abc');
+
+      this.driver.openWindow_({windowId: '@123', controller: new MockObject()});
+      const serverWindows = Array.from(this.driver.serverWindows_);
+      assert.equal(serverWindows.length, 1);
+      // onOpenWindow() shouldn't be called since there is a pending request.
+      assert.equal(this.onOpenWindowMock.popHistory().length, 0);
+
+      assert.deepEqual(driverChannelMock.popMethodHistory('resolve'),
+          [['abc', serverWindows[0].channelName, undefined]]);
+
+      this.driver.onStop_();
+    });
+
+  });
+
 });

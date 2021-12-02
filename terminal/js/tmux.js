@@ -363,6 +363,13 @@ export class Controller {
   }
 
   /**
+   * Create a tmux window.
+   */
+  newWindow() {
+    this.queueCommand(`new-window`);
+  }
+
+  /**
    * Kill a tmux window.
    *
    * @param {string} winId
