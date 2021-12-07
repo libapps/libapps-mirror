@@ -10,10 +10,15 @@ import {TerminalActiveTracker} from './terminal_active_tracker.js';
 import {DEFAULT_BACKGROUND_COLOR, DEFAULT_CONTAINER_NAME, DEFAULT_FONT_SIZE,
   DEFAULT_VM_NAME, SUPPORTED_FONT_FAMILIES, SUPPORTED_FONT_SIZES, definePrefs,
   fontFamilyToCSS, getInitialTitleCacheKey, getTerminalLaunchInfo,
-  normalizePrefsInPlace, setUpTitleHandler} from './terminal_common.js';
+  normalizePrefsInPlace, setUpTitleHandler, TerminalLaunchInfo}
+    from './terminal_common.js';
 import {MockTabsController} from './terminal_test_mocks.js';
 
-const fontFamilies = Array.from(SUPPORTED_FONT_FAMILIES.keys());
+const FONT_FAMILIES = Array.from(SUPPORTED_FONT_FAMILIES.keys());
+const DEFAULT_CONTAINER = {
+  vmName: DEFAULT_VM_NAME,
+  containerName: DEFAULT_CONTAINER_NAME,
+};
 
 describe('terminal_common_tests.js', () => {
   beforeEach(function() {
@@ -31,15 +36,15 @@ describe('terminal_common_tests.js', () => {
     };
 
     assertNormalizationResult('font-family', 'invalid', fontFamilyToCSS(
-        fontFamilies[0]));
-    assertNormalizationResult('font-family', fontFamilies[1],
-        fontFamilyToCSS(fontFamilies[1]));
-    assertNormalizationResult('font-family', fontFamilyToCSS(fontFamilies[1]),
-        fontFamilyToCSS(fontFamilies[1]));
+        FONT_FAMILIES[0]));
+    assertNormalizationResult('font-family', FONT_FAMILIES[1],
+        fontFamilyToCSS(FONT_FAMILIES[1]));
+    assertNormalizationResult('font-family', fontFamilyToCSS(FONT_FAMILIES[1]),
+        fontFamilyToCSS(FONT_FAMILIES[1]));
     // Select first valid font if it is a list
     assertNormalizationResult('font-family',
-        `invalid, ${fontFamilies[1]}, ${fontFamilies[0]}`,
-        fontFamilyToCSS(fontFamilies[1]));
+        `invalid, ${FONT_FAMILIES[1]}, ${FONT_FAMILIES[0]}`,
+        fontFamilyToCSS(FONT_FAMILIES[1]));
 
     assertNormalizationResult('font-size', 1000, DEFAULT_FONT_SIZE);
     assertNormalizationResult('font-size', SUPPORTED_FONT_SIZES[0],
@@ -54,7 +59,7 @@ describe('terminal_common_tests.js', () => {
         'background-color', 'rgba(1, 2, 3, 0.5)', '#010203');
   });
 
-  describe('setupTitleHandler', function() {
+  describe('setupTitleHandler() for vsh', function() {
 
     beforeEach(function() {
       // Mock chrome.tabs because we will use TerminalActiveTracker.
@@ -69,10 +74,7 @@ describe('terminal_common_tests.js', () => {
     });
 
     it('default container with no cache', async function() {
-      const key = getInitialTitleCacheKey({
-        vmName: DEFAULT_VM_NAME,
-        containerName: DEFAULT_CONTAINER_NAME,
-      });
+      const key = getInitialTitleCacheKey(DEFAULT_CONTAINER);
       window.localStorage.removeItem(key);
       document.title = 'test title';
 
@@ -80,7 +82,13 @@ describe('terminal_common_tests.js', () => {
       let trackerUpdateCount = 0;
       tracker.maybeUpdateWindowActiveTerminal = () => trackerUpdateCount++;
 
-      const stopHandler = await setUpTitleHandler();
+      const stopHandler = await setUpTitleHandler({
+        vsh: {
+          args: [],
+          containerId: DEFAULT_CONTAINER,
+          hasCwd: false,
+        },
+      });
 
       assert.equal(document.title, 'test title',
           'no cache, title should not change');
@@ -103,13 +111,10 @@ describe('terminal_common_tests.js', () => {
       stopHandler();
     });
 
-    [{
-      vmName: DEFAULT_VM_NAME,
-      containerName: DEFAULT_CONTAINER_NAME,
-    }, {
-      vmName: 'vm0',
-      containerName: 'container0',
-    }].forEach(function(containerId) {
+    [
+        DEFAULT_CONTAINER,
+        {vmName: 'vm0', containerName: 'container0'},
+    ].forEach(function(containerId) {
       it(`has cache (${JSON.stringify(containerId)})`, async function() {
         const key = getInitialTitleCacheKey(containerId);
         window.localStorage.setItem(key, 'cached title');
@@ -120,10 +125,12 @@ describe('terminal_common_tests.js', () => {
         tracker.maybeUpdateWindowActiveTerminal = () => trackerUpdateCount++;
 
         const stopHandler = await setUpTitleHandler({
-          containerId,
-          hasCwd: false,
-          // args does not matter.
-          args: [],
+          vsh: {
+            containerId,
+            hasCwd: false,
+            // args does not matter.
+            args: [],
+          },
         });
 
         assert.equal(document.title, 'cached title',
@@ -151,7 +158,7 @@ describe('terminal_common_tests.js', () => {
     });
   });
 
-  describe('getTerminalLaunchInfo', function() {
+  describe('getTerminalLaunchInfo() for vsh', function() {
     const emptyActiveTracker = /** @type {!TerminalActiveTracker} */({});
     const activeTrackerWithoutTerminalId =
         /** @type {!TerminalActiveTracker} */({
@@ -177,22 +184,37 @@ describe('terminal_common_tests.js', () => {
           },
         });
 
-    function assertLaunchInfoEqual(launchInfo0, launchInfo1) {
+    /**
+     * A helper function which builds a url from `args` and calls
+     * getTerminalLaunchInfo().
+     *
+     * @param {!TerminalActiveTracker} activeTracker
+     * @param {!Array<string>} args Arguments to be put into url params 'args[]'
+     * @return {!TerminalLaunchInfo}
+     */
+    const getTerminalLaunchInfoWithArgs = (activeTracker, args) => {
+      const url = new URL(location.href);
+      url.search = (new URLSearchParams(args.map((value) => ['args[]', value])))
+          .toString();
+      return getTerminalLaunchInfo(activeTracker, url);
+    };
+
+    function assertVshInfoEqual(vshInfo0, vshInfo1) {
       // getTerminalLaunchInfo() might change the order of some args, so we sort
       // them first.
       assert.deepEqual(
-          {...launchInfo0, args: [...launchInfo0.args].sort()},
-          {...launchInfo1, args: [...launchInfo1.args].sort()},
+          {...vshInfo0, args: [...vshInfo0.args].sort()},
+          {...vshInfo1, args: [...vshInfo1.args].sort()},
       );
     }
 
     describe('containerId', function() {
       it('always uses args\' if it exists', function() {
-        assertLaunchInfoEqual(
-            getTerminalLaunchInfo(
+        assertVshInfoEqual(
+            getTerminalLaunchInfoWithArgs(
                 activeTrackerWithoutTerminalId,
                 ['a', 'b', '--vm_name=aaa'],
-            ),
+            ).vsh,
             {
               args: ['a', 'b', '--vm_name=aaa'],
               containerId: {vmName: 'aaa'},
@@ -200,11 +222,11 @@ describe('terminal_common_tests.js', () => {
             },
         );
 
-        assertLaunchInfoEqual(
-            getTerminalLaunchInfo(
+        assertVshInfoEqual(
+            getTerminalLaunchInfoWithArgs(
                 activeTrackerWithoutTerminalId,
                 ['a', 'b', '--target_container=bbb'],
-            ),
+            ).vsh,
             {
               args: ['a', 'b', '--target_container=bbb'],
               containerId: {containerName: 'bbb'},
@@ -212,11 +234,11 @@ describe('terminal_common_tests.js', () => {
             },
         );
 
-        assertLaunchInfoEqual(
-            getTerminalLaunchInfo(
+        assertVshInfoEqual(
+            getTerminalLaunchInfoWithArgs(
                 activeTrackerWithoutTerminalId,
                 ['a', 'b', '--vm_name=aaa', '--target_container=bbb'],
-              ),
+            ).vsh,
             {
               args: ['a', 'b', '--vm_name=aaa', '--target_container=bbb'],
               containerId: {vmName: 'aaa', containerName: 'bbb'},
@@ -226,11 +248,11 @@ describe('terminal_common_tests.js', () => {
       });
 
       it('uses parent\'s if args\' is missing', function() {
-        assertLaunchInfoEqual(
-            getTerminalLaunchInfo(
+        assertVshInfoEqual(
+            getTerminalLaunchInfoWithArgs(
                 activeTrackerWithoutTerminalId,
                 ['a', 'b'],
-            ),
+            ).vsh,
             {
               args: ['a', 'b', '--vm_name=vm0',
               '--target_container=container0'],
@@ -244,8 +266,8 @@ describe('terminal_common_tests.js', () => {
       });
 
       it('uses default as a fallback', function() {
-        assertLaunchInfoEqual(
-            getTerminalLaunchInfo(emptyActiveTracker, ['a', 'b']),
+        assertVshInfoEqual(
+            getTerminalLaunchInfoWithArgs(emptyActiveTracker, ['a', 'b']).vsh,
             {
               args: ['a', 'b', `--vm_name=${DEFAULT_VM_NAME}`,
                   `--target_container=${DEFAULT_CONTAINER_NAME}`],
@@ -261,11 +283,11 @@ describe('terminal_common_tests.js', () => {
 
     describe('cwd', function() {
       it('always uses args\' if it exists', function() {
-        assertLaunchInfoEqual(
-            getTerminalLaunchInfo(
+        assertVshInfoEqual(
+            getTerminalLaunchInfoWithArgs(
                 emptyActiveTracker,
                 ['a', 'b', '--cwd=some-cwd'],
-            ),
+            ).vsh,
             {
               args: ['a', 'b', `--vm_name=${DEFAULT_VM_NAME}`,
                   `--target_container=${DEFAULT_CONTAINER_NAME}`,
@@ -278,11 +300,11 @@ describe('terminal_common_tests.js', () => {
             },
         );
 
-        assertLaunchInfoEqual(
-            getTerminalLaunchInfo(
+        assertVshInfoEqual(
+            getTerminalLaunchInfoWithArgs(
                 activeTrackerWithTerminalId,
                 ['a', 'b', '--cwd=some-cwd'],
-            ),
+            ).vsh,
             {
               args: ['a', 'b', '--vm_name=vm0',
                 '--target_container=container0', '--cwd=some-cwd'],
@@ -293,11 +315,11 @@ describe('terminal_common_tests.js', () => {
       });
 
       it('follows parent\'s if has the same container', function() {
-        assertLaunchInfoEqual(
-            getTerminalLaunchInfo(
+        assertVshInfoEqual(
+            getTerminalLaunchInfoWithArgs(
                 activeTrackerWithTerminalId,
                 ['a', 'b'],
-            ),
+            ).vsh,
             {
               args: ['a', 'b', '--vm_name=vm0',
                 '--target_container=container0', '--cwd=terminal_id:tid0'],
@@ -306,11 +328,11 @@ describe('terminal_common_tests.js', () => {
             },
         );
 
-        assertLaunchInfoEqual(
-            getTerminalLaunchInfo(
+        assertVshInfoEqual(
+            getTerminalLaunchInfoWithArgs(
                 activeTrackerWithTerminalId,
                 ['a', 'b', '--vm_name=vm0', '--target_container=container0'],
-            ),
+            ).vsh,
             {
               args: ['a', 'b', '--vm_name=vm0',
                 '--target_container=container0', '--cwd=terminal_id:tid0'],
@@ -320,11 +342,11 @@ describe('terminal_common_tests.js', () => {
         );
 
         // Not the same container.
-        assertLaunchInfoEqual(
-            getTerminalLaunchInfo(
+        assertVshInfoEqual(
+            getTerminalLaunchInfoWithArgs(
                 activeTrackerWithTerminalId,
                 ['a', 'b', '--vm_name=vm0', '--target_container=container1'],
-            ),
+            ).vsh,
             {
               args: ['a', 'b', '--vm_name=vm0',
                 '--target_container=container1'],

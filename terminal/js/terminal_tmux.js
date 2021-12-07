@@ -5,7 +5,9 @@
 import * as tmux from './tmux.js';
 
 /**
- * @fileoverview Code to support tmux intergration in the Terminal app.
+ * @fileoverview Tmux integration for hterm. It also provides the
+ * infrastructure to support hosting tmux windows in different tabs over
+ * broadcast channels.
  */
 
 // TODO(1252271): Opening vim seems to kill the browser process. The
@@ -14,8 +16,6 @@ import * as tmux from './tmux.js';
 // TODO(1252271): I think we will want to support nested tmux controllers (i.e.
 // running a tmux controller in a child window controled by another tmux
 // controller). Let's make sure that works.
-
-export const TMUX_CHANNEL_URL_PARAM_NAME = 'tmuxChannel';
 
 /**
  * This provides a command line interface for the user to interact with tmux
@@ -116,10 +116,19 @@ export class PseudoTmuxCommand {
  */
 export class TmuxControllerDriver {
   /**
-   * @param {!hterm.Terminal} term
+   * Construct a tmux controller driver.
+   *
+   * @param {{
+   *   term: !hterm.Terminal,
+   *   onOpenWindow: function({driver, channelName}),
+   * }} obj onOpenWindow() will be called with `this` and the channel name for
+   *     the new window. The callback should construct a `ClientWindow` with the
+   *     channel name.
+   *
    */
-  constructor(term) {
+  constructor({term, onOpenWindow}) {
     this.term_ = term;
+    this.onOpenWindow_ = onOpenWindow;
 
     /** @private {?tmux.Controller} */
     this.controller_ = null;
@@ -230,6 +239,10 @@ export class TmuxControllerDriver {
           },
         });
         this.serverWindows_.add(serverWindow);
+        this.onOpenWindow_({
+          driver: this,
+          channelName: serverWindow.channelName,
+        });
         return serverWindow;
       },
       input: io.sendString.bind(io),
@@ -330,7 +343,7 @@ function uniqueId() {
  * here, the communication is in unicast manner. At the beginning, there is a
  * handshake procedure for the pair to set up a session id.
  *
- * - At the very beginning, ClientChannel sents `['CONNECT', {requestId:
+ * - At the very beginning, ClientChannel sends `['CONNECT', {requestId:
  *   '...'}]` to the BroadcastChannel.
  * - The ServerChannel on the same BroadcastChannel recieves the request, it
  *   'disconnect' any previous connected ClientChannel, and replies
@@ -461,7 +474,7 @@ class ServerWindow extends tmux.Window {
    * @param {{
    *   windowId: string,
    *   controller: !tmux.Controller,
-   *   onClose: function()
+   *   onClose: function(),
    * }} param1 onClose() will be called when this.onClose() is called.
    */
   constructor({windowId, controller, onClose}) {
@@ -470,9 +483,9 @@ class ServerWindow extends tmux.Window {
     this.controller_ = controller;
     this.onClose_ = onClose;
 
-    const channelName = uniqueId();
+    this.channelName_ = uniqueId();
     this.channel_ = new ServerChannel({
-      channelName,
+      channelName: this.channelName_,
       onConnected: this.onConnected_.bind(this),
       onData: this.onData_.bind(this),
     });
@@ -484,16 +497,16 @@ class ServerWindow extends tmux.Window {
     this.clientWindowRpc_ = /** @type {!ClientWindow} */(createMethodProxy(
         (data) => this.channel_.postMessage(data)));
 
-    const url = `${location.origin}/html/terminal.html?` +
-        `${TMUX_CHANNEL_URL_PARAM_NAME}=${encodeURIComponent(channelName)}`;
-    chrome.terminalPrivate.openWindow({url});
-
     // TODO(1252271): We should be able to use something like Proxy to avoid
     // spelling out the methods.
     for (const method of ['onLayoutUpdate', 'onPaneOutput',
         'onPaneCursorUpdate', 'onPaneSyncStart']) {
       this[method] = this.clientWindowRpc_[method];
     }
+  }
+
+  get channelName() {
+    return this.channelName_;
   }
 
   /**
@@ -664,7 +677,7 @@ export class ClientWindow {
   onPaneCursorUpdate(paneId, x, y) {
     // TODO(1252271): avoid calling hterm's private function?
     this.term_.scheduleSyncCursorPosition_();
-    this.term_.restoreCursor({row: y, column: x});
+    this.term_.restoreCursor(new hterm.RowCol(y, x));
   }
 
   /** @override */

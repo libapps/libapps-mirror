@@ -2,11 +2,12 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {definePrefs, getTerminalLaunchInfo, loadPowerlineWebFonts, loadWebFont,
-    normalizeCSSFontFamily} from './terminal_common.js';
+import {TerminalLaunchInfo, composeTmuxUrl, definePrefs, getTerminalLaunchInfo,
+  loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily} from
+  './terminal_common.js';
 import {TerminalActiveTracker} from './terminal_active_tracker.js';
-import {ClientWindow as TmuxClientWindow, TmuxControllerDriver,
-    TMUX_CHANNEL_URL_PARAM_NAME} from './terminal_tmux.js';
+import {ClientWindow as TmuxClientWindow, TmuxControllerDriver}
+    from './terminal_tmux.js';
 
 export const terminal = {};
 
@@ -25,7 +26,16 @@ window.preferenceManager;
 terminal.Command = function(term) {
   this.term_ = term;
   this.io_ = this.term_.io;
-  this.tmuxControllerDriver_ = new TmuxControllerDriver(term);
+  this.tmuxControllerDriver_ = new TmuxControllerDriver({
+      term,
+      onOpenWindow: ({driver, channelName}) => {
+        chrome.terminalPrivate.openWindow({
+          url: composeTmuxUrl({
+            windowChannelName: channelName,
+          }),
+        });
+      },
+  });
   // We pass this ID to chrome to use for startup text which is sent before the
   // vsh process is created and we receive an ID from openVmShellProcess.
   this.id_ = Math.random().toString().substring(2);
@@ -99,15 +109,6 @@ terminal.addBindings = function(term) {
 };
 
 /**
- * Returns true if this is running as chrome-untrusted://crosh.
- *
- * @return {boolean}
- */
-terminal.isCrosh = function() {
-  return location.href.startsWith('chrome-untrusted://crosh');
-};
-
-/**
  * Static initializer.
  *
  * This constructs a new hterm.Terminal instance and instructs it to run
@@ -117,32 +118,32 @@ terminal.isCrosh = function() {
  * @return {!hterm.Terminal} The new hterm.Terminal instance.
  */
 terminal.init = function(element) {
-  const params = new URLSearchParams(document.location.search);
   const term = new hterm.Terminal();
 
   term.decorate(element);
   term.installKeyboard();
-  const runTerminal = function() {
+  const runTerminal = async function() {
     term.onOpenOptionsPage = terminal.openOptionsPage;
     term.keyboard.keyMap.keyDefs[78].control = terminal.onCtrlN;
     terminal.addBindings(term);
     term.setCursorPosition(0, 0);
     term.setCursorVisible(true);
 
-    if (window.enableTmuxIntegration &&
-        params.has(TMUX_CHANNEL_URL_PARAM_NAME)) {
+    const tracker = await TerminalActiveTracker.get();
+    const launchInfo = getTerminalLaunchInfo(tracker);
+
+    if (launchInfo.tmux) {
+      const {windowChannelName} = launchInfo.tmux;
       /* eslint-disable-next-line no-new */
       new TmuxClientWindow({
-        channelName: /** @type {string} */(params.get(
-            TMUX_CHANNEL_URL_PARAM_NAME)),
+        channelName: windowChannelName,
         term,
       });
-
       return;
     }
 
     const terminalCommand = new terminal.Command(term);
-    terminalCommand.run();
+    terminalCommand.run(tracker, launchInfo);
   };
   term.onTerminalReady = function() {
     const prefs = term.getPrefs();
@@ -219,8 +220,11 @@ terminal.Command.prototype.onProcessOutput_ = function(id, type, text) {
 
 /**
  * Start the terminal command.
+ *
+ * @param {!TerminalActiveTracker} tracker
+ * @param {!TerminalLaunchInfo} launchInfo
  */
-terminal.Command.prototype.run = function() {
+terminal.Command.prototype.run = function(tracker, launchInfo) {
   // TODO(1252271): use a chrome flag to control this.
   if (window.enableTmuxIntegration) {
     this.tmuxControllerDriver_.installHtermTmuxParser();
@@ -258,17 +262,14 @@ terminal.Command.prototype.run = function() {
         this.io_.terminal_.screenSize.height);
   };
 
-  if (terminal.isCrosh()) {
+  if (launchInfo.crosh) {
     chrome.terminalPrivate.openTerminalProcess('crosh', [], pidInit);
   } else {
-    TerminalActiveTracker.get().then((tracker) => {
-      const launchInfo = getTerminalLaunchInfo(tracker);
-      const args = [...launchInfo.args, `--startup_id=${this.id_}`];
-      tracker.updateTerminalInfo({containerId: launchInfo.containerId});
-      chrome.terminalPrivate.openVmshellProcess(args, (id) => {
-        pidInit(id);
-        tracker.updateTerminalInfo({terminalId: id});
-      });
+    const args = [...launchInfo.vsh.args, `--startup_id=${this.id_}`];
+    tracker.updateTerminalInfo({containerId: launchInfo.vsh.containerId});
+    chrome.terminalPrivate.openVmshellProcess(args, (id) => {
+      pidInit(id);
+      tracker.updateTerminalInfo({terminalId: id});
     });
   }
 };

@@ -65,6 +65,8 @@ export const DEFAULT_THEME = 'dark';
 export const DEFAULT_VM_NAME = 'termina';
 export const DEFAULT_CONTAINER_NAME = 'penguin';
 
+const TMUX_PARAM_NAME = 'tmux';
+
 /**
  * Convert a font family to a CSS string.
  *
@@ -216,9 +218,16 @@ export function loadPowerlineWebFonts(document) {
   document.head.appendChild(style);
 }
 
-// Cache the url params at the first opportunity. The url normally should not
-// change, so this is being defensive.
-const URL_PARAMS = new URLSearchParams(document.location.search);
+// Cache the url at the first opportunity. The url normally should not change,
+// so this is being defensive.
+const ORIGINAL_URL = new URL(document.location.href);
+
+/**
+ * @typedef {{
+ *   windowChannelName: string,
+ * }}
+ */
+export let TmuxLaunchInfo;
 
 /**
  * `hasCwd` indicates whether there is a cwd argument in `args`. The
@@ -226,24 +235,62 @@ const URL_PARAMS = new URLSearchParams(document.location.search);
  * converted to one with the default vm name and container name.
  *
  * @typedef {{
- *  args: !Array<string>,
- *  containerId: !ContainerId,
- *  hasCwd: boolean,
+ *   args: !Array<string>,
+ *   containerId: !ContainerId,
+ *   hasCwd: boolean,
+ * }}
+ */
+export let VshLaunchInfo;
+
+/**
+ * Only one of the top level properties should exist.
+ *
+ * @typedef {{
+ *   tmux: (!TmuxLaunchInfo|undefined),
+ *   vsh: (!VshLaunchInfo|undefined),
+ *   crosh: (!Object|undefined),
  * }}
  */
 export let TerminalLaunchInfo;
 
 /**
+ * @param {{
+ *   windowChannelName: string,
+ * }} obj
+ * @return {string}
+ */
+export function composeTmuxUrl({windowChannelName}) {
+  const url = new URL(ORIGINAL_URL.toString());
+  const paramValue = JSON.stringify({windowChannelName});
+  url.search = `?${TMUX_PARAM_NAME}=${paramValue}`;
+
+  return url.toString();
+}
+
+/**
  * This figures out and returns the terminal launch info for the current tab.
  *
  * @param {!TerminalActiveTracker} activeTracker The global active tracker.
- * @param {!Array<string>=} args The launch args before processing. This is for
- *     testing. Normal user should just use the default value.
+ * @param {!URL=} url The url of the tab. This is for testing.
+ *     Normal user should just use the default value.
  * @return {!TerminalLaunchInfo}
  */
-export function getTerminalLaunchInfo(activeTracker,
-    args = URL_PARAMS.getAll('args[]')) {
+export function getTerminalLaunchInfo(activeTracker, url = ORIGINAL_URL) {
+  if (url.host === 'crosh') {
+    return {crosh: {}};
+  }
+
+  const urlParams = url.searchParams;
   const parentTerminalInfo = activeTracker.parentTerminal?.terminalInfo;
+
+  if (window.enableTmuxIntegration) {
+    if (urlParams.has(TMUX_PARAM_NAME)) {
+      return {tmux: /** @type {!TmuxLaunchInfo} */(JSON.parse(
+          /** @type {string} */(urlParams.get(TMUX_PARAM_NAME))))};
+    }
+  }
+
+  const args = urlParams.getAll('args[]');
   const outputArgs = [];
   let containerId = {};
   let inputArgsHasCwd = false;
@@ -301,9 +348,11 @@ export function getTerminalLaunchInfo(activeTracker,
   }
 
   return {
-    args: outputArgs,
-    containerId,
-    hasCwd: outputArgsHasCwd,
+    vsh: {
+      args: outputArgs,
+      containerId,
+      hasCwd: outputArgsHasCwd,
+    },
   };
 }
 
@@ -334,20 +383,30 @@ export function getInitialTitleCacheKey(containerId) {
 }
 
 /**
- * Set up a title handler, which sets a proper document title before the
+ * Set up a title handler. For vsh, it sets a proper document title before the
  * terminal is ready, and caches title for other terminals to use.
  *
  * @param {!TerminalLaunchInfo=} launchInfo This is for testing. Normal users
  *     should not specify it.
- * @return {!Promise<function()>} return a function to stop the handler. This is
- *     mainly for testing.
+ * @return {!Promise<(function()|undefined)>} return a function to stop the
+ *     handler for vsh. This is mainly for testing.
  */
 export async function setUpTitleHandler(launchInfo) {
   const tracker = await TerminalActiveTracker.get();
   if (!launchInfo) {
     launchInfo = getTerminalLaunchInfo(tracker);
   }
-  const {hasCwd, containerId} = launchInfo;
+
+  if (launchInfo.crosh) {
+    document.title = 'crosh';
+    return;
+  }
+
+  if (!launchInfo.vsh) {
+    return;
+  }
+
+  const {hasCwd, containerId} = launchInfo.vsh;
 
   const key = getInitialTitleCacheKey(containerId);
 

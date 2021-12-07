@@ -82,7 +82,13 @@ it('does-not-exit-on-first-output', async function() {
   const term = new hterm.Terminal();
   term.decorate(div);
   const terminalCommand = new terminal.Command(term);
-  terminalCommand.run();
+  terminalCommand.run(await TerminalActiveTracker.get(), {
+    vsh: {
+      args: [],
+      containerId: {},
+      hasCwd: false,
+    },
+  });
   await mockTerminalPrivateController.on('openVmshellProcess');
   terminalCommand.exit = () => { exitCalled = true; };
 
