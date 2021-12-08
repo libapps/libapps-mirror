@@ -413,7 +413,8 @@ export async function setUpTitleHandler(launchInfo) {
     return;
   }
 
-  if (!launchInfo.vsh) {
+  if (launchInfo.tmux) {
+    document.title = '[tmux]';
     return;
   }
 
