@@ -146,6 +146,9 @@ let TmuxVersion;
  * methods such as sendPaneInput().
  *
  * TODO(crbug.com/1252271): maybe put some examples here.
+ *
+ * TODO(crbug.com/1252271): If something breaks (e.g. exceptions), we should try
+ * to exit nicely (e.g. detach the tmux session, and inform the user somehow.)
  */
 export class Controller {
   /**
@@ -163,19 +166,37 @@ export class Controller {
     this.openWindow_ = openWindow;
     this.input_ = input;
 
+    this.closed_ = false;
     this.textEncoder_ = new TextEncoder();
 
-    this.commandQueue_ = [];
-    // At the very beginning, tmux always outputs a pair of %begin/%end (just
-    // like when a command is sent to tmux). Set a fake command here to consume
-    // the pair.
-    this.currentCommand_ = new Command(
-        () => {
-          // TODO(crbug.com/1252271): send ctrl-u to input() to clear input just
-          // in case? Or maybe we should require the user to do so.
-        },
-        throwUnhandledCommandError,
-    );
+    /**
+     * Commands that haven't been sent to `this.input_`.
+     *
+     * @type {!Array<!Command>}
+     */
+    this.pendingCommands_ = [];
+    this.sendPendingCommands_ = this.sendPendingCommands_.bind(this);
+    this.sendPendingCommandsScheduled_ = false;
+
+    /**
+     * This stores commands that have been sent to `this.input_` and are waiting
+     * for the results.
+     *
+     * @type {!Array<!Command>}
+     */
+    this.commands_ = [
+        // At the very beginning, tmux always outputs a pair of %begin/%end
+        // (just like when a command is sent to tmux). Put a fake command here
+        // to consume the pair.
+        new Command(
+            '',
+            () => {
+              // TODO(crbug.com/1252271): send ctrl-u to input() to clear input
+              // just in case? Or maybe we should require the user to do so.
+            },
+            throwUnhandledCommandError,
+        ),
+    ];
 
     /**
      * Handlers for tmux notifications. The handler will receive the content of
@@ -270,28 +291,29 @@ export class Controller {
     const tag = line.slice(0, tagEnd);
     const args = line.slice(tagEnd + 1);
 
+    /** @type {!Command|undefined} */
+    const currentCommand = this.commands_[0];
     if (tag === '%end' || tag === '%error') {
-      if (args === this.currentCommand_.beginArgs) {
-        this.currentCommand_.finish(tag === '%end');
-        this.currentCommand_ = null;
-        this.maybeRunNextCommand_();
+      if (args === currentCommand?.beginArgs) {
+        currentCommand.finish(tag === '%end');
+        this.commands_.shift();
         return;
       }
 
       console.warn(`encountered %end/%error tag but the args do not match: ` +
-          `${args} !== ${this.currentCommand_.beginArgs}`);
+          `${args} !== ${currentCommand?.beginArgs}`);
     }
 
-    if (this.currentCommand_?.started) {
-      this.currentCommand_.appendToBuffer(line);
+    if (currentCommand?.started) {
+      currentCommand.appendToBuffer(line);
       return;
     }
 
     if (tag === '%begin') {
-      if (!this.currentCommand_) {
+      if (!currentCommand) {
         throw new Error('unexpected %begin line: no current command');
       }
-      this.currentCommand_.start(args);
+      currentCommand.start(args);
       return;
     }
 
@@ -471,11 +493,12 @@ export class Controller {
    * Put a tmux command in the command queue. The controller calls `callback`
    * with the result when it is ready.
    *
-   * Note that by design, when the result is ready (i.e. when tmux outputs the
-   * corresponding '%end' notification), `this.interpretLine()` will block until
-   * the callback returns. This is to avoid race conditions. It is also the
-   * reason why we use a callback here instead of making the function async.
-   * Callers who don't care about this can make the callback function async.
+   * Note that by design, when the result is ready (i.e. when
+   * `this.interpretLine()` receives the corresponding '%end' notification),
+   * `this.interpretLine()` will block until the callback returns. This is to
+   * avoid race conditions. It is also the reason why we use a callback here
+   * instead of making the function async. Callers who don't care about this can
+   * make the callback function async.
    *
    * @param {string} command
    * @param {function(!Array<string>)=} callback The argument is an array of
@@ -485,19 +508,31 @@ export class Controller {
    */
   queueCommand(command, callback = () => {},
       errorCallback = throwUnhandledCommandError) {
-    this.commandQueue_.push([command, new Command(callback, errorCallback)]);
-    this.maybeRunNextCommand_();
+    this.pendingCommands_.push(new Command(command, callback, errorCallback));
+
+    if (!this.sendPendingCommandsScheduled_) {
+      this.sendPendingCommandsScheduled_ = true;
+      // We send all pending commands together in the next event loop cycle.
+      // This could mitigate some potential race conditions.
+      setTimeout(this.sendPendingCommands_);
+    }
   }
 
-  maybeRunNextCommand_() {
-    if (this.currentCommand_) {
+  sendPendingCommands_() {
+    this.sendPendingCommandsScheduled_ = false;
+    if (this.closed_) {
+      console.warn('tmux is closed. Ignoring all pending commands');
+      this.pendingCommands_.length = 0;
       return;
     }
-    if (this.commandQueue_.length) {
-      let commandStr;
-      [commandStr, this.currentCommand_] = this.commandQueue_.shift();
-      this.input_(commandStr + '\r');
+
+    let joinedCommands = '';
+    for (const command of this.pendingCommands_) {
+      joinedCommands += command.commandStr + '\r';
+      this.commands_.push(command);
     }
+    this.pendingCommands_.length = 0;
+    this.input_(joinedCommands);
   }
 
   /**
@@ -642,6 +677,7 @@ export class Controller {
 
   handleExit_(text) {
     console.log(`tmux is exiting. Reason=${text}`);
+    this.closed_ = true;
     for (const winInfo of this.windows_.values()) {
       winInfo.win.onClose();
     }
@@ -757,17 +793,24 @@ export function parseWindowLayout(layoutStr) {
 
 class Command {
   /**
+   * @param {string} commandStr
    * @param {function(!Array<string>)} callback The callback to invoke when the
    *     command finishes successfully.
    * @param {function(!Array<string>)} errorCallback Like `callback`, but called
    *     if an error occurs
    */
-  constructor(callback, errorCallback) {
+  constructor(commandStr, callback, errorCallback) {
+    this.commandStr_ = commandStr;
     this.buffer_ = null;
     this.callback_ = callback;
     this.errorCallback_ = errorCallback;
     // The args following the %begin tag.
     this.beginArgs_ = null;
+  }
+
+  /** @return {string} */
+  get commandStr() {
+    return this.commandStr_;
   }
 
   /**
