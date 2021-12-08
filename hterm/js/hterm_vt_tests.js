@@ -3536,4 +3536,46 @@ it('dcs-nop', function() {
   assert(terminal.vt.parseState_.isComplete());
 });
 
+/**
+ * Verify tmux DCS sequence works.
+ */
+it('dcs-tmux', function() {
+  const terminal = this.terminal;
+  const tmuxDcs = '\x1bP1000p';
+  const st = '\x1b\\';
+  const data = tmuxDcs + 'hello\r\nworld\r\n' + st;
+
+  // If the handler is not set, all data should be comsumed until ST.
+  this.terminal.interpret(data);
+  assert.equal(0, terminal.getCursorRow());
+  assert.equal(0, terminal.getCursorColumn());
+  assert.equal('', terminal.getRowText(0));
+
+  // Data go to the handler if it is set.
+  const lines = [];
+  this.terminal.onTmuxControlModeLine = (line) => {
+    lines.push(line);
+  };
+  this.terminal.interpret(data);
+  assert.equal(0, terminal.getCursorRow());
+  assert.equal(0, terminal.getCursorColumn());
+  assert.equal('', terminal.getRowText(0));
+  assert.deepEqual(lines, ['hello', 'world', null]);
+
+  // Check that it works well when data comes from multiple interpret() calls.
+  lines.length = 0;
+  this.terminal.interpret(tmuxDcs);
+  this.terminal.interpret('hello\r');
+  this.terminal.interpret('world\r');
+  this.terminal.interpret('\nabc');
+  this.terminal.interpret('\r');
+  this.terminal.interpret('\n');
+  this.terminal.interpret('def\r');
+  this.terminal.interpret('\n' + st[0]);
+  this.terminal.interpret(st[1] + 'other data');
+  assert.deepEqual(lines, ['hello\rworld', 'abc', 'def', null]);
+  assert.equal(0, terminal.getCursorRow());
+  assert.equal('other data', terminal.getRowText(0));
+});
+
 });

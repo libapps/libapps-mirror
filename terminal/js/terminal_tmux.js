@@ -233,6 +233,7 @@ export class TmuxControllerDriver {
     this.pseudoTmuxCommand_ = null;
     /** @const @private {!Set<!ServerWindow>} */
     this.serverWindows_ = new Set();
+    this.started_ = false;
 
     /** @const @private {!Array<string>} */
     this.pendingOpenWindowRequests_ = [];
@@ -247,81 +248,25 @@ export class TmuxControllerDriver {
   }
 
   /**
-   * Tmux in control mode sends a DCS sequence. This function installs a handler
-   * to `hterm.VT.DCS` to handle that.
-   *
-   * TODO(1252271): move the parser to hterm.
+   * Install the driver to the hterm.Terminal object.
    */
-  installHtermTmuxParser() {
-    /**
-     * Parser for the content. This separates lines and passes them to the
-     * controller.
-     *
-     * @param {!hterm.VT.ParseState} parseState
-     */
-    const tmuxContentParser = (parseState) => {
-      const args = parseState.args;
-      if (!args.length) {
-        // This stores the unfinished line.
-        args[0] = '';
-      }
-      // Consume as many lines as possible.
-      while (true) {
-        const buf = parseState.peekRemainingBuf();
-        const lineEnd = buf.indexOf('\r\n');
-        if (lineEnd === -1) {
-          parseState.args[0] += buf;
-          parseState.resetBuf();
-          return;
-        }
-        const line = args[0] + buf.slice(0, lineEnd);
-        args[0] = '';
-        parseState.advance(lineEnd + 2);
-        this.controller_.interpretLine(line);
-        if (line.startsWith('%exit')) {
-          // tmux is exiting.
-          parseState.resetArguments();
-          parseState.func = stParser;
-          this.onStop_();
-          return;
-        }
-      }
-    };
+  install() {
+    this.term_.onTmuxControlModeLine = this.onTmuxControlModeLine_.bind(this);
+  }
 
-    /**
-     * Parser for the ST when the DCS sequence is ending.
-     *
-     * @this {!hterm.VT}
-     * @param {!hterm.VT.ParseState} parseState
-     */
-    function stParser(parseState) {
-      // TODO(1252271): Ideally, we don't use private functions. This will be
-      // removed later when we are able to move the parser to hterm.
-      if (!this.parseUntilStringTerminator_(parseState)) {
-        console.error('failed to parse string terminator');
-        return;
-      }
-
-      if (parseState.func !== stParser) {
-        // Parsing is done!
-        if (parseState.args[0]) {
-          console.error(
-              `extra data before the string terminator: ${parseState.args[0]}`);
-        }
-        parseState.resetArguments();
-      }
+  onTmuxControlModeLine_(line) {
+    if (!this.started_) {
+      this.started_ = true;
+      this.onStart_();
     }
 
-    /** @param {!hterm.VT.ParseState} parseState */
-    hterm.VT.DCS['p'] = (parseState) => {
-      const args = parseState.args;
-      // If it is tmux DCS sequence, we override the parse function.
-      if (args.length === 1 && args[0] === '1000') {
-        parseState.resetArguments();
-        parseState.func = tmuxContentParser;
-        this.onStart_();
-      }
-    };
+    if (line !== null) {
+      this.controller_.interpretLine(line);
+      return;
+    }
+
+    this.started_ = false;
+    this.onStop_();
   }
 
   /**

@@ -246,7 +246,7 @@ terminal.Command.prototype.onProcessOutput_ = function(id, type, text) {
 terminal.Command.prototype.run = function(tracker, launchInfo) {
   // TODO(1252271): use a chrome flag to control this.
   if (window.enableTmuxIntegration) {
-    this.tmuxControllerDriver_.installHtermTmuxParser();
+    this.tmuxControllerDriver_.install();
   }
 
   if (!chrome.terminalPrivate) {

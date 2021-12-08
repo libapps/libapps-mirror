@@ -4240,3 +4240,14 @@ hterm.Terminal.prototype.onOpenOptionsPage = function() {};
 hterm.Terminal.prototype.onOpenOptionsPage_ = function() {
   this.onOpenOptionsPage();
 };
+
+
+/**
+ * Client should override this if they want to handle tmux control mode DCS
+ * sequence (see https://github.com/tmux/tmux/wiki/Control-Mode). We split the
+ * sequence data into lines and call this once per line (the '\r\n' ending will
+ * be stripped). When the sequence ends with ST, we call this once with null.
+ *
+ * @param {?string} line The line or null when the sequence ends.
+ */
+hterm.Terminal.prototype.onTmuxControlModeLine = function(line) {};

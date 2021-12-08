@@ -802,6 +802,52 @@ hterm.VT.prototype.parseDCS_ = function(parseState) {
   parseState.advance(1);
 };
 
+
+/**
+ * Parse tmux control mode data, which is terminated with ST.
+ *
+ * @param {!hterm.VT.ParseState} parseState
+ */
+hterm.VT.prototype.parseTmuxControlModeData_ = function(parseState) {
+  const args = parseState.args;
+  if (!args.length) {
+    // This stores the unfinished line.
+    args[0] = '';
+  }
+  // Consume as many lines as possible.
+  while (true) {
+    const args0InitialLength = args[0].length;
+    const buf = args[0] + parseState.peekRemainingBuf();
+    args[0] = '';
+
+    // Find either ST or line break.
+    // eslint-disable-next-line no-control-regex
+    const index = buf.search(/\x1b\\|\r\n/);
+    if (index === -1) {
+      parseState.args[0] = buf;
+      parseState.resetBuf();
+      return;
+    }
+
+    const data = buf.slice(0, index);
+    parseState.advance(index + 2 - args0InitialLength);
+
+    // Check if buf ends with ST.
+    if (buf[index] === '\x1b') {
+      if (data) {
+        console.error(`unexpected data before ST: ${data}`);
+      }
+      this.terminal.onTmuxControlModeLine(null);
+      parseState.resetArguments();
+      parseState.resetParseFunction();
+      return;
+    }
+
+    // buf ends with line break.
+    this.terminal.onTmuxControlModeLine(data);
+  }
+};
+
 /**
  * Skip over the string until the next String Terminator (ST, 'ESC \') or
  * Bell (BEL, '\x07').
@@ -1893,6 +1939,19 @@ hterm.VT.ESC['}'] = function() {
  */
 hterm.VT.ESC['~'] = function() {
   this.GR = 'G1';
+};
+
+/**
+ * Tmux control mode if the args === ['1000'].
+ *
+ * @this {!hterm.VT}
+ * @param {!hterm.VT.ParseState} parseState The current parse state.
+ */
+hterm.VT.DCS['p'] = function(parseState) {
+  if (parseState.args.length === 1 && parseState.args[0] === '1000') {
+    parseState.resetArguments();
+    parseState.func = this.parseTmuxControlModeData_;
+  }
 };
 
 /**
