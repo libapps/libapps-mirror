@@ -670,10 +670,12 @@ export class ClientWindow {
     this.io_ = term.io;
     this.channelName_ = channelName;
 
+    /** @private {?string} */
     this.windowId_ = null;
-    /** @private {null|string} */
-    this.paneId_ = null;
     this.closed_ = false;
+    /** @private {?tmux.SimpleLayout} */
+    this.layout_ = null;
+    this.isFirstLayoutUpdate_ = true;
 
     this.channel_ = new ClientChannel({
       channelName,
@@ -695,6 +697,7 @@ export class ClientWindow {
     this.paneSyncStarted_ = false;
 
     this.io_.onVTKeystroke = this.io_.sendString = this.sendString_.bind(this);
+    this.io_.onTerminalResize = this.reconcileTmuxWindowSize_.bind(this);
 
     window.addEventListener('beforeunload', () => {
       // If we have already received a `onClose()` from the server side, there
@@ -742,13 +745,14 @@ export class ClientWindow {
    * @param {string} windowId
    */
   init(windowId) {
+    console.log(`ClientWindow inited with windowId=${windowId}`);
     this.windowId_ = windowId;
     this.serverWindowRpc_.requestLayoutUpdate(windowId);
   }
 
   /** @override */
   onPaneOutput(paneId, data) {
-    if (paneId !== this.paneId_) {
+    if (paneId !== this.layout_?.paneId) {
       console.warn(`Unexpected paneId ${paneId}`);
       return;
     }
@@ -759,48 +763,45 @@ export class ClientWindow {
 
   /** @override */
   onPaneSyncStart(paneId) {
-    if (paneId !== this.paneId_) {
+    if (paneId !== this.layout_?.paneId) {
       console.error(`Unexpected paneId ${paneId}`);
       return;
     }
+    console.log('pane sync started');
     this.paneSyncStarted_ = true;
   }
 
   /** @override */
   onLayoutUpdate(layout) {
-    // TODO(1252271): The logic here is temporary. We need to properly handle
-    // resizing, pane id update, and multi-panes...
+    const isFirstLayoutUpdate = this.isFirstLayoutUpdate_;
+    this.isFirstLayoutUpdate_ = false;
 
     if (!layout.paneId) {
       // Layout is a complex layout with multiple panes.
-      this.warn_('multi-pane windows are not supported yet');
-      this.paneId_ = null;
-      return;
-    }
-
-    if (this.paneId_ === null) {
-      this.paneId_ = layout.paneId;
-    } else if (this.paneId_ !== layout.paneId) {
-      this.warn_('changing pane in a window is not supported yet');
-      this.paneId_ = null;
-      return;
-    }
-
-    const screenSize = this.term_.screenSize;
-    if (layout.xSize !== screenSize.width ||
-        layout.ySize !== screenSize.height) {
-      // TODO(1252271): temporary solution for preventing infinate loop if for
-      // some reason tmux refused to resize.
-      if (++this.resizeCount_ > 3) {
-        throw new Error('resized too many times');
+      if (this.layout_ !== null) {
+        this.layout_ = null;
+        this.term_.wipeContents();
       }
-      this.controllerRpc_.resizeWindow(/** @type {string} */(this.windowId_),
-          this.term_.screenSize.width, this.term_.screenSize.height);
+      this.error_('multi-pane windows are not supported yet');
       return;
     }
 
-    this.resizeCount_ = 0;
-    this.controllerRpc_.syncPane(/** @type {string} */(this.paneId_));
+    const oldLayout = this.layout_;
+    this.layout_ = /** @type {!tmux.SimpleLayout}*/(layout);
+
+    // Don't proactively reconcile the size unless this is the first time we
+    // connect to tmux.
+    if (isFirstLayoutUpdate) {
+      this.reconcileTmuxWindowSize_();
+    }
+
+    if (this.layout_.paneId !== oldLayout?.paneId) {
+      console.log(`updating paneId from ${oldLayout?.paneId} ` +
+          `to ${this.layout_.paneId}`);
+      this.term_.wipeContents();
+      this.paneSyncStarted_ = false;
+      this.controllerRpc_.syncPane(this.layout_.paneId);
+    }
   }
 
   /** @override */
@@ -820,18 +821,43 @@ export class ClientWindow {
    * @param {string} text
    */
   sendString_(text) {
-    if (this.paneId_ === null) {
+    if (this.layout_ === null) {
       console.warn('ignore data since pane id has not been initialized');
       return;
     }
-    this.controllerRpc_.sendPaneInput(this.paneId_, text);
+    this.reconcileTmuxWindowSize_();
+    this.controllerRpc_.sendPaneInput(this.layout_.paneId, text);
+  }
+
+  /**
+   * Resize the tmux window to match the terminal window if necessary.
+   */
+  reconcileTmuxWindowSize_() {
+    if (this.layout_ === null) {
+      return;
+    }
+
+    const {width, height} = this.term_.screenSize;
+    if (this.layout_.xSize === width && this.layout_.ySize === height) {
+      return;
+    }
+
+    // TODO(1252271): Calling resize-window causes the window-size option to be
+    // set to manual, and then the regular tmux client will not resize the
+    // window automatically any more. Maybe we should use something like
+    // `refresh-client -C` or just reset the window option afterwards.
+    this.controllerRpc_.queueCommand(
+        `resize-window -t ${this.windowId_} -x ${width} -y ${height}`);
+    // Activate the current window. Otherwise, tmux might not actually resize
+    // it.
+    this.controllerRpc_.queueCommand(`select-window -t ${this.windowId_}`);
   }
 
   /**
    * @param {string} text
    */
-  warn_(text) {
-    console.warn(text);
+  error_(text) {
+    console.error(text);
     this.io_.print(text);
   }
 

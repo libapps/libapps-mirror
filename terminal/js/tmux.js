@@ -31,7 +31,7 @@ export const LayoutType = {
  *            paneId: string,
  *          }}
  */
-let SimpleLayout;
+export let SimpleLayout;
 
 /**
  * A complex layout has multiple children.
@@ -45,10 +45,10 @@ let SimpleLayout;
  *            children: !Array<!Layout>,
  *          }}
  */
-let ComplexLayout;
+export let ComplexLayout;
 
 /** @typedef {!SimpleLayout|!ComplexLayout} */
-let Layout;
+export let Layout;
 
 /**
  * This represents a window in tmux. See the doc for `Controller` for more
@@ -349,17 +349,6 @@ export class Controller {
       command += ` ${x.toString(16)}`;
     }
     this.queueCommand(command);
-  }
-
-  /**
-   * Resize a tmux window.
-   *
-   * @param {string} winId
-   * @param {number} xSize
-   * @param {number} ySize
-   */
-  resizeWindow(winId, xSize, ySize) {
-    this.queueCommand(`resize-window -t ${winId} -x ${xSize} -y ${ySize}`);
   }
 
   /**
