@@ -29,7 +29,7 @@ terminal.Command = function(term) {
   // We pass this ID to chrome to use for startup text which is sent before the
   // vsh process is created and we receive an ID from openVmShellProcess.
   this.id_ = Math.random().toString().substring(2);
-  this.isFirstOutput = false;
+  this.isFirstOutput_ = false;
 };
 
 /**
