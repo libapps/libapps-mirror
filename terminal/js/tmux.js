@@ -339,18 +339,44 @@ export class Controller {
    * such as `onPaneOutput()` for the current content of the pane.
    *
    * @param {string} paneId
+   * @param {number=} history The number of lines before the visible area to
+   *     get. The lines are also sent to `Window.onPaneOutput()`.
    */
-  syncPane(paneId) {
+  syncPane(paneId, history) {
     const pane = this.panes_.get(paneId);
     if (!pane) {
       throw new Error(`unknown pane: ${paneId}`);
     }
     // TODO(crbug.com/1252271): what if the pane is closed or moved to some
     // other window in the middle?
-    this.capturePane(paneId, (output) => {
+
+    // Capture history and visible area of the pane. Note that if there is a
+    // fullscreen process (e.g. vim) running, then tmux does not give us the
+    // history within the visible area.
+    //
+    // TODO(crbug.com/1252271): Try to fix the history in visible area issue.
+    let capturePaneCommand = `capture-pane -peNJt ${paneId}`;
+    if (history) {
+      capturePaneCommand += ` -S -${history}`;
+    }
+    this.queueCommand(capturePaneCommand, (output) => {
       pane.winInfo.win.onPaneSyncStart(paneId);
-      pane.winInfo.win.onPaneOutput(paneId, output);
+      pane.winInfo.win.onPaneOutput(paneId, output.join('\r\n'));
     });
+
+    // Capture and send incomplete escape sequence if there is any.
+    this.queueCommand(`capture-pane -pPt ${paneId}`, (output) => {
+      if (output.length === 0) {
+        return;
+      }
+      if (output.length > 1) {
+        // I don't think this should happen, but let print a warning just in
+        // case.
+        console.warn('multiple lines of incomplete escape sequences');
+      }
+      pane.winInfo.win.onPaneOutput(paneId, output.join('\r\n'));
+    });
+
     this.getPaneCursor(
         paneId,
         ({x, y}) => pane.winInfo.win.onPaneCursorUpdate(paneId, x, y));
@@ -448,24 +474,6 @@ export class Controller {
           }
           callback(windows);
         });
-  }
-
-  /**
-   * Capture a pane and pass the result to `callback`.
-   *
-   * @param {string} paneId
-   * @param {function(string)} callback
-   */
-  capturePane(paneId, callback) {
-    // TODO(crbug.com/1252271): The output of this can contains strings started
-    // with '%end'/..., and this might break `interpertLine()`. We need to find
-    // a way to deal with this.
-    //
-    // TODO(crbug.com/1252271): We might want to follow what iterm2 does:
-    // https://github.com/gnachman/iTerm2/blob/034160e3c67edb2a3c06821e0e022efcdde72daf/sources/TmuxWindowOpener.m#L189
-    this.queueCommand(`capture-pane -peNJt ${paneId}`, (output) => {
-      callback(output.join('\r\n'));
-    });
   }
 
   /**

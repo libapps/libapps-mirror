@@ -644,6 +644,8 @@ class ServerWindow extends tmux.Window {
   }
 }
 
+const SYNC_PANE_HISTORY_SIZE = 1000;
+
 /**
  * The window class on the client end. It communicates with the corresponding
  * tmux window / ServerWindow over a broadcast channel.
@@ -800,7 +802,10 @@ export class ClientWindow {
           `to ${this.layout_.paneId}`);
       this.term_.wipeContents();
       this.paneSyncStarted_ = false;
-      this.controllerRpc_.syncPane(this.layout_.paneId);
+      // TODO(crbug.com/1252271): Ideally, we don't want to just pull in a fixed
+      // amount of history at the beginning. Instead, we want to retrieve
+      // history dynamically when the user scrolls up.
+      this.controllerRpc_.syncPane(this.layout_.paneId, SYNC_PANE_HISTORY_SIZE);
     }
   }
 
