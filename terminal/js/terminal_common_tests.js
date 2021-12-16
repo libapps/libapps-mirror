@@ -159,14 +159,6 @@ describe('terminal_common_tests.js', () => {
   });
 
   describe('getTerminalLaunchInfo for tmux', function() {
-    beforeEach(function() {
-      window.enableTmuxIntegration = true;
-    });
-
-    afterEach(function() {
-      window.enableTmuxIntegration = false;
-    });
-
     it('follows parent', function() {
       const fakeActiveTracker =
         /** @type {!TerminalActiveTracker} */({
@@ -182,17 +174,18 @@ describe('terminal_common_tests.js', () => {
 
       // No parent.
       assert.isUndefined(getTerminalLaunchInfo(
-              /** @type {!TerminalActiveTracker} */({}), url).tmux);
+              /** @type {!TerminalActiveTracker} */({}), true, url).tmux);
 
       // Has parent with driver channel.
       assert.deepEqual(
-          getTerminalLaunchInfo(fakeActiveTracker, url),
+          getTerminalLaunchInfo(fakeActiveTracker, true, url),
           {tmux: {driverChannelName: 'abcd'}},
       );
 
       // Has parent but there is a url param.
       url.search = '?vm=penguin';
-      assert.isUndefined(getTerminalLaunchInfo(fakeActiveTracker, url).tmux);
+      assert.isUndefined(
+          getTerminalLaunchInfo(fakeActiveTracker, true, url).tmux);
     });
   });
 
@@ -234,7 +227,7 @@ describe('terminal_common_tests.js', () => {
       const url = new URL(location.href);
       url.search = (new URLSearchParams(args.map((value) => ['args[]', value])))
           .toString();
-      return getTerminalLaunchInfo(activeTracker, url);
+      return getTerminalLaunchInfo(activeTracker, true, url);
     };
 
     function assertVshInfoEqual(vshInfo0, vshInfo1) {

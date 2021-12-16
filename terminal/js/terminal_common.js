@@ -270,14 +270,30 @@ export function composeTmuxUrl({windowChannelName, driverChannelName}) {
 }
 
 /**
+ * Resolves to true if tmux integration is enabled via chrome://flags.
+ *
+ * @type {!Promise<boolean>}
+ */
+export const getTmuxIntegrationEnabled = new Promise((resolve) => {
+  const getOSInfo = chrome.terminalPrivate?.getOSInfo;
+  if (!getOSInfo) {
+    resolve(false);
+    return;
+  }
+  getOSInfo((info) => resolve(info.tmux_integration));
+});
+
+/**
  * This figures out and returns the terminal launch info for the current tab.
  *
  * @param {!TerminalActiveTracker} activeTracker The global active tracker.
+ * @param {boolean} isTmuxIntegrationEnabled
  * @param {!URL=} url The url of the tab. This is for testing.
  *     Normal user should just use the default value.
  * @return {!TerminalLaunchInfo}
  */
-export function getTerminalLaunchInfo(activeTracker, url = ORIGINAL_URL) {
+export function getTerminalLaunchInfo(activeTracker, isTmuxIntegrationEnabled,
+    url = ORIGINAL_URL) {
   if (url.host === 'crosh') {
     return {crosh: {}};
   }
@@ -285,7 +301,7 @@ export function getTerminalLaunchInfo(activeTracker, url = ORIGINAL_URL) {
   const urlParams = url.searchParams;
   const parentTerminalInfo = activeTracker.parentTerminal?.terminalInfo;
 
-  if (window.enableTmuxIntegration) {
+  if (isTmuxIntegrationEnabled) {
     if (urlParams.has(TMUX_PARAM_NAME)) {
       return {tmux: /** @type {!TmuxLaunchInfo} */(JSON.parse(
           /** @type {string} */(urlParams.get(TMUX_PARAM_NAME))))};
@@ -405,7 +421,8 @@ export function getInitialTitleCacheKey(containerId) {
 export async function setUpTitleHandler(launchInfo) {
   const tracker = await TerminalActiveTracker.get();
   if (!launchInfo) {
-    launchInfo = getTerminalLaunchInfo(tracker);
+    launchInfo = getTerminalLaunchInfo(tracker,
+        await getTmuxIntegrationEnabled);
   }
 
   if (launchInfo.crosh) {

@@ -2,9 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {TerminalLaunchInfo, composeTmuxUrl, definePrefs, getTerminalLaunchInfo,
-  loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily} from
-  './terminal_common.js';
+import {TerminalLaunchInfo, composeTmuxUrl, definePrefs,
+  getTmuxIntegrationEnabled, getTerminalLaunchInfo, loadPowerlineWebFonts,
+  loadWebFont, normalizeCSSFontFamily} from './terminal_common.js';
 import {TerminalActiveTracker} from './terminal_active_tracker.js';
 import {ClientWindow as TmuxClientWindow, TmuxControllerDriver}
     from './terminal_tmux.js';
@@ -26,17 +26,6 @@ window.preferenceManager;
 terminal.Command = function(term) {
   this.term_ = term;
   this.io_ = this.term_.io;
-  this.tmuxControllerDriver_ = new TmuxControllerDriver({
-      term,
-      onOpenWindow: ({driver, channelName}) => {
-        chrome.terminalPrivate.openWindow({
-          url: composeTmuxUrl({
-            windowChannelName: channelName,
-            driverChannelName: driver.channelName,
-          }),
-        });
-      },
-  });
   // We pass this ID to chrome to use for startup text which is sent before the
   // vsh process is created and we receive an ID from openVmShellProcess.
   this.id_ = Math.random().toString().substring(2);
@@ -131,7 +120,22 @@ terminal.init = function(element) {
     term.setCursorVisible(true);
 
     const tracker = await TerminalActiveTracker.get();
-    const launchInfo = getTerminalLaunchInfo(tracker);
+    const isTmuxIntegrationEnabled = await getTmuxIntegrationEnabled;
+    const launchInfo = getTerminalLaunchInfo(tracker, isTmuxIntegrationEnabled);
+
+    if (isTmuxIntegrationEnabled) {
+      (new TmuxControllerDriver({
+        term,
+        onOpenWindow: ({driver, channelName}) => {
+          chrome.terminalPrivate.openWindow({
+            url: composeTmuxUrl({
+              windowChannelName: channelName,
+              driverChannelName: driver.channelName,
+            }),
+          });
+        },
+      })).install();
+    }
 
     if (launchInfo.tmux) {
       const {windowChannelName, driverChannelName} = launchInfo.tmux;
@@ -244,11 +248,6 @@ terminal.Command.prototype.onProcessOutput_ = function(id, type, text) {
  * @param {!TerminalLaunchInfo} launchInfo
  */
 terminal.Command.prototype.run = function(tracker, launchInfo) {
-  // TODO(1252271): use a chrome flag to control this.
-  if (window.enableTmuxIntegration) {
-    this.tmuxControllerDriver_.install();
-  }
-
   if (!chrome.terminalPrivate) {
     this.io_.println(
         'Launching terminal failed: chrome.terminalPrivate not found');
