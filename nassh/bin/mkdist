@@ -195,7 +195,7 @@ def mkzip(manifest_name: str, stable: bool, archive_suffix: str,
         """Careful: not for use with user visible content."""
         return s.replace('__MSG_nassh_product_name__', 'Secure Shell')
 
-    basename = _hack_localize(name).replace(' ', '')
+    basename = _hack_localize(name).replace(' ', '').replace('DEPRECATED', '')
 
     if not stable:
         name += ' (dev)'

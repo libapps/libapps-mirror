@@ -18,8 +18,8 @@
 
 <defs>
   <linearGradient id="bgGradient" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0%" stop-color="#404040" />
-    <stop offset="100%" stop-color="#101010" />
+    <stop offset="0%" stop-color="#cc4040" />
+    <stop offset="100%" stop-color="#331010" />
   </linearGradient>
 </defs>
 
@@ -28,12 +28,9 @@
 <polyline points="60,200 110,245 60,290"
           stroke-width="15" fill="none" stroke="#DB4437" />
 
-<line x1="385" y1="310" x2="452" y2="310" shape-rendering="crispEdges"
-      stroke-width="15" stroke="#FFCD40" />
-
-<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+<text x="25%" y="50%" dominant-baseline="middle"
       class="label">
-<tspan class="blue">S</tspan><tspan class="blue">S</tspan><tspan class="green">H</tspan>
+<tspan class="blue">O</tspan><tspan class="blue">L</tspan><tspan class="green">D</tspan><tspan class="yellow">:(</tspan>
 </text>
 
 </svg>

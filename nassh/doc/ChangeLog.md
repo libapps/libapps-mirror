@@ -1,3 +1,7 @@
+# 0.40, 2021-12-17, Restyle icons.
+
+* manifest & icons: Make them visually different from the extension.
+
 # 0.39, 2021-02-01, Make URI parsing more robust.
 
 * nassh: Disable iframe usage.

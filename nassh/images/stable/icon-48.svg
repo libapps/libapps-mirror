@@ -3,6 +3,12 @@
      version="1.1" xmlns="http://www.w3.org/2000/svg">
 
 <style>
+  .label {
+    font-size: 25px;
+    font-family: Roboto, monospace;
+    fill: white;
+  }
+
   <!-- Chrome colors -->
   .blue { stroke: #4285F4; }
   .red { stroke: #DB4437; }
@@ -12,8 +18,8 @@
 
 <defs>
   <linearGradient id="bgGradient" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0%" stop-color="#404040" />
-    <stop offset="100%" stop-color="#101010" />
+    <stop offset="0%" stop-color="#cc4040" />
+    <stop offset="100%" stop-color="#331010" />
   </linearGradient>
 </defs>
 
@@ -22,7 +28,9 @@
 <polyline points="9,15 18,24 9,33" shape-rendering="crispEdges"
           stroke-width="4" fill="none" class="red" />
 
-<line x1="25" y1="28" x2="40" y2="28" shape-rendering="crispEdges"
-      stroke-width="5" class="yellow" />
+<text x="50%" y="50%" dominant-baseline="middle"
+      class="label">
+<tspan class="yellow">:(</tspan>
+</text>
 
 </svg>

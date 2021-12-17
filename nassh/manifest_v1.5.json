@@ -3,8 +3,8 @@
   "minimum_chrome_version": "57",
   "manifest_version": 2,
   "content_security_policy": "script-src 'self'; object-src 'self'",
-  "name": "__MSG_nassh_product_name__ App (tot)",
-  "version": "0.39",
+  "name": "DEPRECATED __MSG_nassh_product_name__ App (tot)",
+  "version": "0.40",
   "default_locale": "en",
   "icons": {
     "128": "images/dev/icon-128.png",
@@ -13,7 +13,7 @@
     "24": "images/dev/icon-24.png",
     "16": "images/dev/icon-16.png"
   },
-  "description": "Terminal emulator and SSH and SFTP client.",
+  "description": "(DEPRECATED: USE THE EXTENSION)\nTerminal emulator and SSH and SFTP client.",
   "offline_enabled": true,
   "options_page": "html/nassh_preferences_editor.html",
   "incognito": "split",
