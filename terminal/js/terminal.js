@@ -165,9 +165,15 @@ terminal.init = function(element) {
       return;
     }
 
+    if (launchInfo.ssh) {
+      runNassh(term);
+      return;
+    }
+
     const terminalCommand = new terminal.Command(term);
     terminalCommand.run(tracker, launchInfo);
   };
+
   term.onTerminalReady = function() {
     const prefs = term.getPrefs();
     definePrefs(prefs);
@@ -383,3 +389,26 @@ terminal.watchBackgroundImage = function(term) {
     setBackgroundImage(window.localStorage.getItem(key));
   });
 };
+
+/**
+ * @param {!hterm.Terminal} term
+ */
+function runNassh(term) {
+  let environment = term.getPrefs().get('environment');
+  if (typeof environment !== 'object' || environment === null) {
+    environment = {};
+  }
+
+  /** @suppress {undefinedVars|missingProperties} */
+  const nasshCommand = new nassh.CommandInstance({
+    io: term.io,
+    args: [document.location.hash.substr(1)],
+    environment: environment,
+    onExit: (code) => {
+      if (term.getPrefs().get('close-on-exit')) {
+        window.close();
+      }
+    },
+  });
+  nasshCommand.run();
+}

@@ -250,6 +250,7 @@ export let VshLaunchInfo;
  *   tmux: (!TmuxLaunchInfo|undefined),
  *   vsh: (!VshLaunchInfo|undefined),
  *   crosh: (!Object|undefined),
+ *   ssh: (!Object|undefined),
  * }}
  */
 export let TerminalLaunchInfo;
@@ -262,7 +263,9 @@ export let TerminalLaunchInfo;
  * @return {string}
  */
 export function composeTmuxUrl({windowChannelName, driverChannelName}) {
-  const url = new URL(ORIGINAL_URL.toString());
+  const url = new URL(ORIGINAL_URL.origin);
+  url.pathname = '/html/terminal.html';
+
   const paramValue = JSON.stringify({windowChannelName, driverChannelName});
   url.search = `?${TMUX_PARAM_NAME}=${paramValue}`;
 
@@ -296,6 +299,13 @@ export function getTerminalLaunchInfo(activeTracker, isTmuxIntegrationEnabled,
     url = ORIGINAL_URL) {
   if (url.host === 'crosh') {
     return {crosh: {}};
+  }
+
+  if (url.pathname === '/html/terminal_ssh.html' ||
+      // TODO(crbug.com/1283153): Remove this when we stop redirecting this
+      // path to terminal_ssh.html in TerminalSource.
+      url.pathname === '/html/nassh.html') {
+    return {ssh: {}};
   }
 
   const urlParams = url.searchParams;
@@ -432,6 +442,11 @@ export async function setUpTitleHandler(launchInfo) {
 
   if (launchInfo.tmux) {
     document.title = '[tmux]';
+    return;
+  }
+
+  if (launchInfo.ssh) {
+    document.title = 'SSH';
     return;
   }
 

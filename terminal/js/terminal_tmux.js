@@ -701,6 +701,8 @@ export class ClientWindow {
     this.io_.onVTKeystroke = this.io_.sendString = this.sendString_.bind(this);
     this.io_.onTerminalResize = this.reconcileTmuxWindowSize_.bind(this);
 
+    // TODO(crbug.com/1252271): We should check the preference and prompt the
+    // user before closing the window just like terminal.
     window.addEventListener('beforeunload', () => {
       // If we have already received a `onClose()` from the server side, there
       // is no need to kill the window.

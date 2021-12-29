@@ -1,0 +1,16 @@
+body {
+  background-color: $i18n{themeColor};
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+}
+
+#terminal {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
