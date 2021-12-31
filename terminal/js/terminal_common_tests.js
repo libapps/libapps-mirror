@@ -174,18 +174,18 @@ describe('terminal_common_tests.js', () => {
 
       // No parent.
       assert.isUndefined(getTerminalLaunchInfo(
-              /** @type {!TerminalActiveTracker} */({}), true, url).tmux);
+              /** @type {!TerminalActiveTracker} */({}), url).tmux);
 
       // Has parent with driver channel.
       assert.deepEqual(
-          getTerminalLaunchInfo(fakeActiveTracker, true, url),
+          getTerminalLaunchInfo(fakeActiveTracker, url),
           {tmux: {driverChannelName: 'abcd'}},
       );
 
       // Has parent but there is a url param.
       url.search = '?vm=penguin';
       assert.isUndefined(
-          getTerminalLaunchInfo(fakeActiveTracker, true, url).tmux);
+          getTerminalLaunchInfo(fakeActiveTracker, url).tmux);
     });
   });
 
@@ -227,7 +227,7 @@ describe('terminal_common_tests.js', () => {
       const url = new URL(location.href);
       url.search = (new URLSearchParams(args.map((value) => ['args[]', value])))
           .toString();
-      return getTerminalLaunchInfo(activeTracker, true, url);
+      return getTerminalLaunchInfo(activeTracker, url);
     };
 
     function assertVshInfoEqual(vshInfo0, vshInfo1) {

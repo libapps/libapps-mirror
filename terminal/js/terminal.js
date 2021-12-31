@@ -121,7 +121,7 @@ terminal.init = function(element) {
 
     const tracker = await TerminalActiveTracker.get();
     const isTmuxIntegrationEnabled = await getTmuxIntegrationEnabled;
-    const launchInfo = getTerminalLaunchInfo(tracker, isTmuxIntegrationEnabled);
+    const launchInfo = getTerminalLaunchInfo(tracker);
 
     if (isTmuxIntegrationEnabled) {
       (new TmuxControllerDriver({

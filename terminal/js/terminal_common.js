@@ -290,13 +290,11 @@ export const getTmuxIntegrationEnabled = new Promise((resolve) => {
  * This figures out and returns the terminal launch info for the current tab.
  *
  * @param {!TerminalActiveTracker} activeTracker The global active tracker.
- * @param {boolean} isTmuxIntegrationEnabled
  * @param {!URL=} url The url of the tab. This is for testing.
  *     Normal user should just use the default value.
  * @return {!TerminalLaunchInfo}
  */
-export function getTerminalLaunchInfo(activeTracker, isTmuxIntegrationEnabled,
-    url = ORIGINAL_URL) {
+export function getTerminalLaunchInfo(activeTracker, url = ORIGINAL_URL) {
   if (url.host === 'crosh') {
     return {crosh: {}};
   }
@@ -308,26 +306,21 @@ export function getTerminalLaunchInfo(activeTracker, isTmuxIntegrationEnabled,
     return {ssh: {}};
   }
 
-  const urlParams = url.searchParams;
   const parentTerminalInfo = activeTracker.parentTerminal?.terminalInfo;
 
-  if (isTmuxIntegrationEnabled) {
-    if (urlParams.has(TMUX_PARAM_NAME)) {
-      return {tmux: /** @type {!TmuxLaunchInfo} */(JSON.parse(
-          /** @type {string} */(urlParams.get(TMUX_PARAM_NAME))))};
-    }
-
-    const urlParamsAreEmpty = urlParams[Symbol.iterator]().next().done;
-
-    if (urlParamsAreEmpty && parentTerminalInfo?.tmuxDriverChannel) {
-      return {tmux: {
-        driverChannelName: /** @type {string} */(
-            parentTerminalInfo.tmuxDriverChannel),
-      }};
-    }
+  if (url.searchParams.has(TMUX_PARAM_NAME)) {
+    return {tmux: /** @type {!TmuxLaunchInfo} */(JSON.parse(
+        /** @type {string} */(url.searchParams.get(TMUX_PARAM_NAME))))};
   }
 
-  const args = urlParams.getAll('args[]');
+  if (!url.search && parentTerminalInfo?.tmuxDriverChannel) {
+    return {tmux: {
+      driverChannelName: /** @type {string} */(
+          parentTerminalInfo.tmuxDriverChannel),
+    }};
+  }
+
+  const args = url.searchParams.getAll('args[]');
   const outputArgs = [];
   let containerId = {};
   let inputArgsHasCwd = false;
@@ -431,8 +424,7 @@ export function getInitialTitleCacheKey(containerId) {
 export async function setUpTitleHandler(launchInfo) {
   const tracker = await TerminalActiveTracker.get();
   if (!launchInfo) {
-    launchInfo = getTerminalLaunchInfo(tracker,
-        await getTmuxIntegrationEnabled);
+    launchInfo = getTerminalLaunchInfo(tracker);
   }
 
   if (launchInfo.crosh) {
