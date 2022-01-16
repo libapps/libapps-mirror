@@ -6,8 +6,6 @@
  * @fileoverview Common code for terminal and it settings page.
  */
 
-import {ContainerId, TerminalActiveTracker} from './terminal_active_tracker.js';
-
 // The value of an entry is true if it is a web font from fonts.google.com,
 // otherwise it is a local font. Note that the UI shows the fonts in the same
 // order as the entries'.
@@ -224,6 +222,14 @@ const ORIGINAL_URL = new URL(document.location.href);
 
 /**
  * @typedef {{
+ *  vmName: (string|undefined),
+ *  containerName: (string|undefined),
+ * }}
+ */
+export let ContainerId;
+
+/**
+ * @typedef {{
  *   windowChannelName: (string|undefined),
  *   driverChannelName: string,
  * }}
@@ -231,14 +237,17 @@ const ORIGINAL_URL = new URL(document.location.href);
 export let TmuxLaunchInfo;
 
 /**
- * `hasCwd` indicates whether there is a cwd argument in `args`. The
- * `containerId` should be canonicalized such that empty container id is
- * converted to one with the default vm name and container name.
+ * - The `containerId` should be canonicalized such that empty container id is
+ *   converted to one with the default vm name and container name.
+ * - `hasCwd` indicates whether there is a cwd argument in `args`.
+ * - `terminalId` is not set initially. It should be set when we get it from
+ *   chrome.terminalPrivate.openVmShellProcess().
  *
  * @typedef {{
  *   args: !Array<string>,
  *   containerId: !ContainerId,
  *   hasCwd: boolean,
+ *   terminalId: (string|undefined),
  * }}
  */
 export let VshLaunchInfo;
@@ -253,7 +262,16 @@ export let VshLaunchInfo;
  *   ssh: (!Object|undefined),
  * }}
  */
-export let TerminalLaunchInfo;
+export let LaunchInfo;
+
+/**
+ * @typedef {{
+ *   tabId: number,
+ *   title: string,
+ *   launchInfo: !LaunchInfo,
+ * }}
+ */
+export let TerminalInfo;
 
 /**
  * @param {{
@@ -286,15 +304,152 @@ export const getTmuxIntegrationEnabled = new Promise((resolve) => {
   getOSInfo((info) => resolve(info.tmux_integration));
 });
 
+
+/**
+ * TerminalInfoTracker tracks the TerminalInfo for the current tab. It also
+ * communicates with other terminal tabs via a common BroadcastChannel. There
+ * are only two types of messages, and the data types are different:
+ *
+ * - Data is a tab id (i.e. number): This is requesting the tab's TerminalInfo.
+ * - Data is a TerminalInfo object. This is usually sent in response to a
+ *   request.
+ */
+export class TerminalInfoTracker {
+  /**
+   * Normal users should use create() instead of the constructor directly.
+   *
+   * @param {{
+   *   tabId: number,
+   *   channel: !BroadcastChannel,
+   *   launchInfo: !LaunchInfo,
+   *   parentTitle: (string|undefined),
+   * }} args
+   */
+  constructor({tabId, channel, launchInfo, parentTitle}) {
+    this.tabId_ = tabId;
+    this.channel_ = channel;
+    this.launchInfo_ = launchInfo;
+    this.parentTitle_ = parentTitle;
+
+    this.channel_.onmessage = (ev) => {
+      if (ev.data === this.tabId_) {
+        // Respond to a request.
+        this.postInfo_();
+      }
+    };
+    // Post once immedately since we might miss requests before the channel is
+    // set up.
+    this.postInfo_();
+  }
+
+  /**
+   * Create a new TerminalInfoTracker.
+   *
+   * @return {!Promise<!TerminalInfoTracker>}
+   */
+  static async create() {
+    return new Promise((resolve) => {
+      chrome.tabs.getCurrent((tab) => {
+        (async () => {
+          const channel = new BroadcastChannel('terminalInfoTracker');
+          const parentTerminalInfo =
+              await TerminalInfoTracker.requestTerminalInfo(channel,
+                  tab.openerTabId);
+          resolve(new TerminalInfoTracker({
+            tabId: tab.id,
+            channel,
+            launchInfo: resolveLaunchInfo(parentTerminalInfo?.launchInfo),
+            parentTitle: parentTerminalInfo?.title,
+          }));
+        })();
+      });
+    });
+  }
+
+  /** @return {number} */
+  get tabId() {
+    return this.tabId_;
+  }
+
+  /** @return {!LaunchInfo} */
+  get launchInfo() {
+    return this.launchInfo_;
+  }
+
+  /** @return {string|undefined} */
+  get parentTitle() {
+    return this.parentTitle_;
+  }
+
+  postInfo_() {
+    this.channel_.postMessage({
+      tabId: this.tabId_,
+      title: document.title,
+      launchInfo: this.launchInfo_,
+    });
+  }
+
+  /**
+   * Send a request for the TerminalInfo on the channel. Note that
+   * `channel.onmessage` is always overwritten here.
+   *
+   * @param {!BroadcastChannel} channel
+   * @param {?number} tabId
+   * @param {number=} timeout
+   * @return {!Promise<?TerminalInfo>} Resolve to null if there is no response.
+   */
+  static async requestTerminalInfo(channel, tabId, timeout = 1000) {
+    /** @type {?TerminalInfo} */
+    let terminalInfo = null;
+
+    if (tabId !== undefined && tabId !== null) {
+      terminalInfo = await new Promise((resolve) => {
+        const timeoutId = setTimeout(() => {
+          console.warn(`timeout waiting for terminal info (tabId=${tabId})`);
+          resolve(null);
+          channel.onmessage = null;
+        }, timeout);
+
+        channel.onmessage = (ev) => {
+          if (typeof ev.data === 'object' && ev.data.tabId === tabId) {
+            resolve(ev.data);
+            clearTimeout(timeoutId);
+          }
+        };
+
+        channel.postMessage(tabId);
+      });
+    }
+
+    channel.onmessage = null;
+    return terminalInfo;
+  }
+
+}
+
+let terminalInfoTrackerPromise = null;
+
+/**
+ * Get the global TerminalInfoTracker.
+ *
+ * @return {!Promise<!TerminalInfoTracker>}
+ */
+export async function getTerminalInfoTracker() {
+  if (!terminalInfoTrackerPromise) {
+    terminalInfoTrackerPromise = TerminalInfoTracker.create();
+  }
+  return terminalInfoTrackerPromise;
+}
+
 /**
  * This figures out and returns the terminal launch info for the current tab.
  *
- * @param {!TerminalActiveTracker} activeTracker The global active tracker.
+ * @param {!LaunchInfo|undefined} parentLaunchInfo
  * @param {!URL=} url The url of the tab. This is for testing.
  *     Normal user should just use the default value.
- * @return {!TerminalLaunchInfo}
+ * @return {!LaunchInfo}
  */
-export function getTerminalLaunchInfo(activeTracker, url = ORIGINAL_URL) {
+export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
   if (url.host === 'crosh') {
     return {crosh: {}};
   }
@@ -306,17 +461,14 @@ export function getTerminalLaunchInfo(activeTracker, url = ORIGINAL_URL) {
     return {ssh: {}};
   }
 
-  const parentTerminalInfo = activeTracker.parentTerminal?.terminalInfo;
-
   if (url.searchParams.has(TMUX_PARAM_NAME)) {
     return {tmux: /** @type {!TmuxLaunchInfo} */(JSON.parse(
         /** @type {string} */(url.searchParams.get(TMUX_PARAM_NAME))))};
   }
 
-  if (!url.search && parentTerminalInfo?.tmuxDriverChannel) {
+  if (!url.search && parentLaunchInfo?.tmux) {
     return {tmux: {
-      driverChannelName: /** @type {string} */(
-          parentTerminalInfo.tmuxDriverChannel),
+      driverChannelName: parentLaunchInfo.tmux.driverChannelName,
     }};
   }
 
@@ -349,7 +501,7 @@ export function getTerminalLaunchInfo(activeTracker, url = ORIGINAL_URL) {
   }
 
   // Parent container id or the default container id.
-  const parentContainerId = parentTerminalInfo?.containerId || {
+  const parentContainerId = parentLaunchInfo?.vsh?.containerId || {
     vmName: DEFAULT_VM_NAME,
     containerName: DEFAULT_CONTAINER_NAME,
   };
@@ -366,7 +518,7 @@ export function getTerminalLaunchInfo(activeTracker, url = ORIGINAL_URL) {
     outputArgs.push(`--target_container=${containerId.containerName}`);
   }
 
-  const parentTerminalId = parentTerminalInfo?.terminalId;
+  const parentTerminalId = parentLaunchInfo?.vsh?.terminalId;
   if (!inputArgsHasCwd &&
       parentTerminalId &&
       // It only makes sense to follow parent's CWD if the container id is the
@@ -377,13 +529,11 @@ export function getTerminalLaunchInfo(activeTracker, url = ORIGINAL_URL) {
     outputArgsHasCwd = true;
   }
 
-  return {
-    vsh: {
-      args: outputArgs,
-      containerId,
-      hasCwd: outputArgsHasCwd,
-    },
-  };
+  return {vsh: {
+    args: outputArgs,
+    containerId,
+    hasCwd: outputArgsHasCwd,
+  }};
 }
 
 /**
@@ -400,7 +550,7 @@ export function composeTitle(containerId) {
 
 /**
  * @param {!ContainerId} containerId The "canonicalized" container id. See type
- *     TerminalLaunchInfo.
+ *     VshLaunchInfo.
  * @return {string}
  */
 export function getInitialTitleCacheKey(containerId) {
@@ -416,17 +566,10 @@ export function getInitialTitleCacheKey(containerId) {
  * Set up a title handler. For vsh, it sets a proper document title before the
  * terminal is ready, and caches title for other terminals to use.
  *
- * @param {!TerminalLaunchInfo=} launchInfo This is for testing. Normal users
- *     should not specify it.
- * @return {!Promise<(function()|undefined)>} return a function to stop the
- *     handler for vsh. This is mainly for testing.
+ * @param {!TerminalInfoTracker} terminalInfoTracker
  */
-export async function setUpTitleHandler(launchInfo) {
-  const tracker = await TerminalActiveTracker.get();
-  if (!launchInfo) {
-    launchInfo = getTerminalLaunchInfo(tracker);
-  }
-
+export function setUpTitleHandler(terminalInfoTracker) {
+  const launchInfo = terminalInfoTracker.launchInfo;
   if (launchInfo.crosh) {
     document.title = 'crosh';
     return;
@@ -446,8 +589,8 @@ export async function setUpTitleHandler(launchInfo) {
 
   const key = getInitialTitleCacheKey(containerId);
 
-  if (tracker.parentTerminal) {
-    document.title = tracker.parentTerminal.title;
+  if (terminalInfoTracker.parentTitle !== undefined) {
+    document.title = terminalInfoTracker.parentTitle;
   } else {
     let title = window.localStorage.getItem(key);
     // Special title composing logic for non-default vm.
@@ -461,16 +604,14 @@ export async function setUpTitleHandler(launchInfo) {
     }
   }
 
-  let isFirstTitle = true;
-  const observer = new MutationObserver(function(mutations, observer) {
-    if (isFirstTitle && !hasCwd) {
+  if (!hasCwd) {
+    // Set up a one-off observer to cache the initial title.
+    const observer = new MutationObserver((mutations, observer) => {
+      observer.disconnect();
       window.localStorage.setItem(key, mutations[0].target.textContent);
-    }
-    isFirstTitle = false;
-    tracker.maybeUpdateWindowActiveTerminal();
-  });
-  observer.observe(document.querySelector('title'), {childList: true});
-  return () => observer.disconnect();
+    });
+    observer.observe(document.querySelector('title'), {childList: true});
+  }
 }
 
 /**

@@ -7,21 +7,20 @@
  */
 
 import {terminal} from './terminal.js';
-import {TerminalActiveTracker} from './terminal_active_tracker.js';
-import {setUpTitleHandler} from './terminal_common.js';
+import {setUpTitleHandler, getTerminalInfoTracker} from './terminal_common.js';
 
-// This must be called before we initialize the terminal to ensure capturing the
-// first title that hterm sets.
-setUpTitleHandler();
+getTerminalInfoTracker().then((tracker) => {
+  // This must be called before we initialize the terminal to ensure capturing
+  // the first title that hterm sets.
+  setUpTitleHandler(tracker);
 
-window.addEventListener('DOMContentLoaded', () => {
   // TODO(crbug.com/999028): Make sure system web apps are not discarded as
   // part of the lifecycle API.  This fix used by crosh and nassh is not
   // guaranteed to be a long term solution.
-  TerminalActiveTracker.get().then((tracker) => {
-    chrome.tabs.update(tracker.tab.id, {autoDiscardable: false});
-  });
+  chrome.tabs.update(tracker.tabId, {autoDiscardable: false});
+});
 
+window.addEventListener('DOMContentLoaded', () => {
   lib.registerInit('terminal-private-storage', () => {
     hterm.defaultStorage = new lib.Storage.TerminalPrivate();
   });

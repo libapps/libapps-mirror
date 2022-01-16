@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 import {terminal} from './terminal.js';
-import {TerminalActiveTracker} from './terminal_active_tracker.js';
 import {MockTabsController, MockTerminalPrivate}
     from './terminal_test_mocks.js';
 
@@ -17,6 +16,14 @@ let mockTerminalPrivate;
 let mockTerminalPrivateController;
 let mockTabsController;
 let div;
+
+const newFakeLaunchInfo = () => ({
+  vsh: {
+    args: [],
+    containerId: {},
+    hasCwd: false,
+  },
+});
 
 /**
  * Create the #terminal div in the document for testing, and start mocks.
@@ -35,7 +42,6 @@ beforeEach(function() {
   window.localStorage.clear();
   mockTabsController = new MockTabsController();
   mockTabsController.start();
-  TerminalActiveTracker.resetInstanceForTesting();
 });
 
 /**
@@ -48,27 +54,27 @@ afterEach(function() {
 });
 
 it('opens-process-in-init', async function() {
-  const tracker = await TerminalActiveTracker.get();
+  const launchInfo = newFakeLaunchInfo();
 
-  terminal.init(div);
+  terminal.init(div, launchInfo);
   const [args, pidInit] =
       await mockTerminalPrivateController.on('openVmshellProcess');
   assert.equal(args.filter((x) => /^--startup_id=\d+$/.test(x)).length, 1);
 
   pidInit('terminalId-456');
-  assert.equal(tracker.terminalInfo_.terminalId, 'terminalId-456');
+  assert.equal(launchInfo.vsh.terminalId, 'terminalId-456');
 });
 
 [true, false].map((value) => it(`set-a11y-in-init-to-${value}`, async () => {
   mockTerminalPrivate.a11yStatus = value;
-  const term = terminal.init(div);
+  const term = terminal.init(div, newFakeLaunchInfo());
   await mockTerminalPrivateController.on('getA11yStatus');
   assert.equal(term.accessibilityReader_.accessibilityEnabled, value);
 }));
 
 [true, false].map((value) => it(`set-a11y-to-${value}-on-changed`, async () => {
   mockTerminalPrivate.a11yStatus = !value;
-  const term = terminal.init(div);
+  const term = terminal.init(div, newFakeLaunchInfo());
   await mockTerminalPrivateController.on('getA11yStatus');
 
   await mockTerminalPrivate.onA11yStatusChanged.dispatch(value);
@@ -82,13 +88,7 @@ it('does-not-exit-on-first-output', async function() {
   const term = new hterm.Terminal();
   term.decorate(div);
   const terminalCommand = new terminal.Command(term);
-  terminalCommand.run(await TerminalActiveTracker.get(), {
-    vsh: {
-      args: [],
-      containerId: {},
-      hasCwd: false,
-    },
-  });
+  terminalCommand.run(newFakeLaunchInfo());
   await mockTerminalPrivateController.on('openVmshellProcess');
   terminalCommand.exit = () => { exitCalled = true; };
 
@@ -104,7 +104,7 @@ it('overrides-ctrl-n-keymap-and-calls-openWindow', async function() {
     ++callCount;
   });
 
-  const term = terminal.init(div);
+  const term = terminal.init(div, newFakeLaunchInfo());
   await mockTerminalPrivateController.on('openVmshellProcess');
 
   const keyDef = term.keyboard.keyMap.keyDefs[78]; // N.

@@ -2,10 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {TerminalLaunchInfo, composeTmuxUrl, definePrefs,
-  getTmuxIntegrationEnabled, getTerminalLaunchInfo, loadPowerlineWebFonts,
+import {LaunchInfo, composeTmuxUrl, definePrefs, getTerminalInfoTracker,
+  getTmuxIntegrationEnabled, loadPowerlineWebFonts,
   loadWebFont, normalizeCSSFontFamily} from './terminal_common.js';
-import {TerminalActiveTracker} from './terminal_active_tracker.js';
 import {ClientWindow as TmuxClientWindow, TmuxControllerDriver}
     from './terminal_tmux.js';
 
@@ -105,9 +104,11 @@ terminal.addBindings = function(term) {
  * the Terminal command.
  *
  * @param {!Element} element The element that is to be decorated.
+ * @param {!LaunchInfo=} launchInfo This is for testing. It should not be
+ *     specified normally.
  * @return {!hterm.Terminal} The new hterm.Terminal instance.
  */
-terminal.init = function(element) {
+terminal.init = function(element, launchInfo) {
   const term = new hterm.Terminal();
 
   term.decorate(element);
@@ -119,9 +120,10 @@ terminal.init = function(element) {
     term.setCursorPosition(0, 0);
     term.setCursorVisible(true);
 
-    const tracker = await TerminalActiveTracker.get();
     const isTmuxIntegrationEnabled = await getTmuxIntegrationEnabled;
-    const launchInfo = getTerminalLaunchInfo(tracker);
+    if (!launchInfo) {
+      launchInfo = (await getTerminalInfoTracker()).launchInfo;
+    }
 
     if (isTmuxIntegrationEnabled) {
       (new TmuxControllerDriver({
@@ -139,7 +141,6 @@ terminal.init = function(element) {
 
     if (launchInfo.tmux) {
       const {windowChannelName, driverChannelName} = launchInfo.tmux;
-      tracker.updateTerminalInfo({tmuxDriverChannel: driverChannelName});
       if (windowChannelName) {
         /* eslint-disable-next-line no-new */
         new TmuxClientWindow({
@@ -171,7 +172,7 @@ terminal.init = function(element) {
     }
 
     const terminalCommand = new terminal.Command(term);
-    terminalCommand.run(tracker, launchInfo);
+    terminalCommand.run(launchInfo);
   };
 
   term.onTerminalReady = function() {
@@ -250,10 +251,9 @@ terminal.Command.prototype.onProcessOutput_ = function(id, type, text) {
 /**
  * Start the terminal command.
  *
- * @param {!TerminalActiveTracker} tracker
- * @param {!TerminalLaunchInfo} launchInfo
+ * @param {!LaunchInfo} launchInfo
  */
-terminal.Command.prototype.run = function(tracker, launchInfo) {
+terminal.Command.prototype.run = function(launchInfo) {
   if (!chrome.terminalPrivate) {
     this.io_.println(
         'Launching terminal failed: chrome.terminalPrivate not found');
@@ -290,10 +290,9 @@ terminal.Command.prototype.run = function(tracker, launchInfo) {
     chrome.terminalPrivate.openTerminalProcess('crosh', [], pidInit);
   } else {
     const args = [...launchInfo.vsh.args, `--startup_id=${this.id_}`];
-    tracker.updateTerminalInfo({containerId: launchInfo.vsh.containerId});
     chrome.terminalPrivate.openVmshellProcess(args, (id) => {
       pidInit(id);
-      tracker.updateTerminalInfo({terminalId: id});
+      launchInfo.vsh.terminalId = id;
     });
   }
 };

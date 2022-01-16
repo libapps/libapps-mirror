@@ -6,13 +6,12 @@
  * @fileoverview unit tests for terminal_common.js
  */
 
-import {TerminalActiveTracker} from './terminal_active_tracker.js';
 import {DEFAULT_BACKGROUND_COLOR, DEFAULT_CONTAINER_NAME, DEFAULT_FONT_SIZE,
-  DEFAULT_VM_NAME, SUPPORTED_FONT_FAMILIES, SUPPORTED_FONT_SIZES, definePrefs,
-  fontFamilyToCSS, getInitialTitleCacheKey, getTerminalLaunchInfo,
-  normalizePrefsInPlace, setUpTitleHandler, TerminalLaunchInfo}
+  DEFAULT_VM_NAME, LaunchInfo, SUPPORTED_FONT_FAMILIES, SUPPORTED_FONT_SIZES,
+  TerminalInfoTracker, definePrefs, fontFamilyToCSS, getInitialTitleCacheKey,
+  normalizePrefsInPlace, resolveLaunchInfo, setUpTitleHandler}
     from './terminal_common.js';
-import {MockTabsController} from './terminal_test_mocks.js';
+import {MockObject} from './terminal_test_mocks.js';
 
 const FONT_FAMILIES = Array.from(SUPPORTED_FONT_FAMILIES.keys());
 const DEFAULT_CONTAINER = {
@@ -62,15 +61,7 @@ describe('terminal_common_tests.js', () => {
   describe('setupTitleHandler() for vsh', function() {
 
     beforeEach(function() {
-      // Mock chrome.tabs because we will use TerminalActiveTracker.
-      this.mockTabsController = new MockTabsController();
-      this.mockTabsController.start();
       window.localStorage.clear();
-      TerminalActiveTracker.resetInstanceForTesting();
-    });
-
-    afterEach(function() {
-      this.mockTabsController.stop();
     });
 
     it('default container with no cache', async function() {
@@ -78,17 +69,15 @@ describe('terminal_common_tests.js', () => {
       window.localStorage.removeItem(key);
       document.title = 'test title';
 
-      const tracker = await TerminalActiveTracker.get();
-      let trackerUpdateCount = 0;
-      tracker.maybeUpdateWindowActiveTerminal = () => trackerUpdateCount++;
-
-      const stopHandler = await setUpTitleHandler({
-        vsh: {
-          args: [],
-          containerId: DEFAULT_CONTAINER,
-          hasCwd: false,
+      await setUpTitleHandler(/** @type {!TerminalInfoTracker} */({
+        launchInfo: {
+          vsh: {
+            args: [],
+            containerId: DEFAULT_CONTAINER,
+            hasCwd: false,
+          },
         },
-      });
+      }));
 
       assert.equal(document.title, 'test title',
           'no cache, title should not change');
@@ -96,8 +85,6 @@ describe('terminal_common_tests.js', () => {
 
       document.title = 'test title 2';
       await Promise.resolve();
-      assert.equal(trackerUpdateCount, 1);
-
       assert.equal(window.localStorage.getItem(key),
           'test title 2');
 
@@ -106,9 +93,6 @@ describe('terminal_common_tests.js', () => {
       assert.equal(window.localStorage.getItem(key),
           'test title 2',
           'only the first changed title should be written to the cache');
-      assert.equal(trackerUpdateCount, 2);
-
-      stopHandler();
     });
 
     [
@@ -120,18 +104,16 @@ describe('terminal_common_tests.js', () => {
         window.localStorage.setItem(key, 'cached title');
         document.title = 'test title';
 
-        const tracker = await TerminalActiveTracker.get();
-        let trackerUpdateCount = 0;
-        tracker.maybeUpdateWindowActiveTerminal = () => trackerUpdateCount++;
-
-        const stopHandler = await setUpTitleHandler({
-          vsh: {
-            containerId,
-            hasCwd: false,
-            // args does not matter.
-            args: [],
+        await setUpTitleHandler(/** @type {!TerminalInfoTracker} */({
+          launchInfo: {
+            vsh: {
+              containerId,
+              hasCwd: false,
+              // args does not matter.
+              args: [],
+            },
           },
-        });
+        }));
 
         assert.equal(document.title, 'cached title',
             'title should be set to cache');
@@ -144,94 +126,83 @@ describe('terminal_common_tests.js', () => {
         await Promise.resolve();
         assert.equal(window.localStorage.getItem(key),
             'test title 2');
-        assert.equal(trackerUpdateCount, 1);
 
         document.title = 'test title 3';
         await Promise.resolve();
         assert.equal(window.localStorage.getItem(key),
             'test title 2',
             'only the first changed title should be written to the cache');
-        assert.equal(trackerUpdateCount, 2);
-
-        stopHandler();
       });
     });
   });
 
-  describe('getTerminalLaunchInfo for tmux', function() {
+  describe('resolveLaunchInfo for tmux', function() {
     it('follows parent', function() {
-      const fakeActiveTracker =
-        /** @type {!TerminalActiveTracker} */({
-          parentTerminal: {
-            terminalInfo: {
-              tmuxDriverChannel: 'abcd',
-            },
-          },
-        });
+      const parentLaunchInfo = /** @type {!LaunchInfo} */({
+        tmux: {
+          driverChannelName: 'abcd',
+        },
+      });
 
       const url = new URL(location.href);
       url.search = '';
 
       // No parent.
-      assert.isUndefined(getTerminalLaunchInfo(
-              /** @type {!TerminalActiveTracker} */({}), url).tmux);
+      assert.isUndefined(resolveLaunchInfo(/** @type {!LaunchInfo} */({}),
+            url).tmux);
 
       // Has parent with driver channel.
       assert.deepEqual(
-          getTerminalLaunchInfo(fakeActiveTracker, url),
-          {tmux: {driverChannelName: 'abcd'}},
+          resolveLaunchInfo(parentLaunchInfo, url).tmux,
+          {driverChannelName: 'abcd'},
       );
 
       // Has parent but there is a url param.
       url.search = '?vm=penguin';
       assert.isUndefined(
-          getTerminalLaunchInfo(fakeActiveTracker, url).tmux);
+          resolveLaunchInfo(parentLaunchInfo, url).tmux);
     });
   });
 
-  describe('getTerminalLaunchInfo() for vsh', function() {
-    const emptyActiveTracker = /** @type {!TerminalActiveTracker} */({});
-    const activeTrackerWithoutTerminalId =
-        /** @type {!TerminalActiveTracker} */({
-          parentTerminal: {
-            terminalInfo: {
-              containerId: {
-                vmName: 'vm0',
-                containerName: 'container0',
-              },
-            },
-          },
-        });
-    const activeTrackerWithTerminalId =
-        /** @type {!TerminalActiveTracker} */({
-          parentTerminal: {
-            terminalInfo: {
-              terminalId: 'tid0',
-              containerId: {
-                vmName: 'vm0',
-                containerName: 'container0',
-              },
-            },
-          },
-        });
+  describe('resolveLaunchInfo() for vsh', function() {
+    const emptyParent = /** @type {!LaunchInfo} */({});
+    const parentWithoutTerminalId = /** @type {!LaunchInfo} */({
+      vsh: {
+        args: [],
+        containerId: {
+          vmName: 'vm0',
+          containerName: 'container0',
+        },
+      },
+    });
+    const parentWithTerminalId = /** @type {!LaunchInfo} */({
+      vsh: {
+        args: [],
+        terminalId: 'tid0',
+        containerId: {
+          vmName: 'vm0',
+          containerName: 'container0',
+        },
+      },
+    });
 
     /**
      * A helper function which builds a url from `args` and calls
-     * getTerminalLaunchInfo().
+     * resolveLaunchInfo().
      *
-     * @param {!TerminalActiveTracker} activeTracker
+     * @param {!LaunchInfo} parentLaunchInfo
      * @param {!Array<string>} args Arguments to be put into url params 'args[]'
-     * @return {!TerminalLaunchInfo}
+     * @return {!LaunchInfo}
      */
-    const getTerminalLaunchInfoWithArgs = (activeTracker, args) => {
+    const resolveLaunchInfoWithArgs = (parentLaunchInfo, args) => {
       const url = new URL(location.href);
       url.search = (new URLSearchParams(args.map((value) => ['args[]', value])))
           .toString();
-      return getTerminalLaunchInfo(activeTracker, url);
+      return resolveLaunchInfo(parentLaunchInfo, url);
     };
 
     function assertVshInfoEqual(vshInfo0, vshInfo1) {
-      // getTerminalLaunchInfo() might change the order of some args, so we sort
+      // resolveLaunchInfo() might change the order of some args, so we sort
       // them first.
       assert.deepEqual(
           {...vshInfo0, args: [...vshInfo0.args].sort()},
@@ -242,8 +213,8 @@ describe('terminal_common_tests.js', () => {
     describe('containerId', function() {
       it('always uses args\' if it exists', function() {
         assertVshInfoEqual(
-            getTerminalLaunchInfoWithArgs(
-                activeTrackerWithoutTerminalId,
+            resolveLaunchInfoWithArgs(
+                parentWithoutTerminalId,
                 ['a', 'b', '--vm_name=aaa'],
             ).vsh,
             {
@@ -254,8 +225,8 @@ describe('terminal_common_tests.js', () => {
         );
 
         assertVshInfoEqual(
-            getTerminalLaunchInfoWithArgs(
-                activeTrackerWithoutTerminalId,
+            resolveLaunchInfoWithArgs(
+                parentWithoutTerminalId,
                 ['a', 'b', '--target_container=bbb'],
             ).vsh,
             {
@@ -266,8 +237,8 @@ describe('terminal_common_tests.js', () => {
         );
 
         assertVshInfoEqual(
-            getTerminalLaunchInfoWithArgs(
-                activeTrackerWithoutTerminalId,
+            resolveLaunchInfoWithArgs(
+                parentWithoutTerminalId,
                 ['a', 'b', '--vm_name=aaa', '--target_container=bbb'],
             ).vsh,
             {
@@ -280,8 +251,8 @@ describe('terminal_common_tests.js', () => {
 
       it('uses parent\'s if args\' is missing', function() {
         assertVshInfoEqual(
-            getTerminalLaunchInfoWithArgs(
-                activeTrackerWithoutTerminalId,
+            resolveLaunchInfoWithArgs(
+                parentWithoutTerminalId,
                 ['a', 'b'],
             ).vsh,
             {
@@ -298,7 +269,7 @@ describe('terminal_common_tests.js', () => {
 
       it('uses default as a fallback', function() {
         assertVshInfoEqual(
-            getTerminalLaunchInfoWithArgs(emptyActiveTracker, ['a', 'b']).vsh,
+            resolveLaunchInfoWithArgs(emptyParent, ['a', 'b']).vsh,
             {
               args: ['a', 'b', `--vm_name=${DEFAULT_VM_NAME}`,
                   `--target_container=${DEFAULT_CONTAINER_NAME}`],
@@ -315,8 +286,8 @@ describe('terminal_common_tests.js', () => {
     describe('cwd', function() {
       it('always uses args\' if it exists', function() {
         assertVshInfoEqual(
-            getTerminalLaunchInfoWithArgs(
-                emptyActiveTracker,
+            resolveLaunchInfoWithArgs(
+                emptyParent,
                 ['a', 'b', '--cwd=some-cwd'],
             ).vsh,
             {
@@ -332,8 +303,8 @@ describe('terminal_common_tests.js', () => {
         );
 
         assertVshInfoEqual(
-            getTerminalLaunchInfoWithArgs(
-                activeTrackerWithTerminalId,
+            resolveLaunchInfoWithArgs(
+                parentWithTerminalId,
                 ['a', 'b', '--cwd=some-cwd'],
             ).vsh,
             {
@@ -347,8 +318,8 @@ describe('terminal_common_tests.js', () => {
 
       it('follows parent\'s if has the same container', function() {
         assertVshInfoEqual(
-            getTerminalLaunchInfoWithArgs(
-                activeTrackerWithTerminalId,
+            resolveLaunchInfoWithArgs(
+                parentWithTerminalId,
                 ['a', 'b'],
             ).vsh,
             {
@@ -360,8 +331,8 @@ describe('terminal_common_tests.js', () => {
         );
 
         assertVshInfoEqual(
-            getTerminalLaunchInfoWithArgs(
-                activeTrackerWithTerminalId,
+            resolveLaunchInfoWithArgs(
+                parentWithTerminalId,
                 ['a', 'b', '--vm_name=vm0', '--target_container=container0'],
             ).vsh,
             {
@@ -374,8 +345,8 @@ describe('terminal_common_tests.js', () => {
 
         // Not the same container.
         assertVshInfoEqual(
-            getTerminalLaunchInfoWithArgs(
-                activeTrackerWithTerminalId,
+            resolveLaunchInfoWithArgs(
+                parentWithTerminalId,
                 ['a', 'b', '--vm_name=vm0', '--target_container=container1'],
             ).vsh,
             {
@@ -387,5 +358,62 @@ describe('terminal_common_tests.js', () => {
         );
       });
     });
+  });
+
+  describe('TerminalInfoTracker', function() {
+    beforeEach(function() {
+      this.mockChannel = new MockObject({onmessage: null});
+      document.title = 'TerminalInfoTracker';
+      this.newTracker = () => new TerminalInfoTracker({
+        tabId: 123,
+        channel: this.mockChannel.proxy,
+        launchInfo: {crosh: {}},
+        parentTitle: '',
+      });
+    });
+
+    it('postInfo upon construction', function() {
+      this.newTracker();
+      assert.deepEqual(this.mockChannel.getMethodHistory('postMessage'), [[{
+        tabId: 123,
+        title: 'TerminalInfoTracker',
+        launchInfo: {crosh: {}},
+      }]]);
+    });
+
+    it('postInfo upon request', function() {
+      this.newTracker();
+      this.mockChannel.popMethodHistory('postMessage');
+      document.title = 'TerminalInfoTracker 2';
+      this.mockChannel.proxy.onmessage({data: 123});
+      assert.deepEqual(this.mockChannel.getMethodHistory('postMessage'), [[{
+        tabId: 123,
+        title: 'TerminalInfoTracker 2',
+        launchInfo: {crosh: {}},
+      }]]);
+    });
+
+    it('requestTerminalInfo', async function() {
+      assert.isNull(await TerminalInfoTracker.requestTerminalInfo(
+          this.mockChannel.proxy, null));
+      assert.deepEqual(this.mockChannel.popMethodHistory('postMessage'), []);
+
+      const promise =
+          TerminalInfoTracker.requestTerminalInfo(this.mockChannel.proxy, 123);
+      assert.deepEqual(this.mockChannel.popMethodHistory('postMessage'),
+          [[123]]);
+      this.mockChannel.proxy.onmessage({data: 123});
+      this.mockChannel.proxy.onmessage({data: {tabId: 789}});
+      this.mockChannel.proxy.onmessage({data: {tabId: 123}});
+      assert.deepEqual(await promise, {tabId: 123});
+    });
+
+    it('requestTerminalInfo timeout', async function() {
+      const promise = TerminalInfoTracker.requestTerminalInfo(
+              this.mockChannel.proxy, 123, 0);
+      await Promise.resolve();
+      assert.isNull(await promise);
+    });
+
   });
 });
