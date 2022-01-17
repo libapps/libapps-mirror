@@ -10,6 +10,10 @@ import {terminal} from './terminal.js';
 import {setUpTitleHandler, getTerminalInfoTracker} from './terminal_common.js';
 
 getTerminalInfoTracker().then((tracker) => {
+  if (tracker.launchInfo.ssh?.needRedirect) {
+    window.location.pathname = '/html/terminal_ssh.html';
+    return;
+  }
   // This must be called before we initialize the terminal to ensure capturing
   // the first title that hterm sets.
   setUpTitleHandler(tracker);

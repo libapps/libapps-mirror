@@ -167,7 +167,10 @@ terminal.init = function(element, launchInfo) {
     }
 
     if (launchInfo.ssh) {
-      runNassh(term);
+      // We handle the needRedirect case in another place.
+      if (!launchInfo.ssh.needRedirect) {
+        runNassh(term);
+      }
       return;
     }
 

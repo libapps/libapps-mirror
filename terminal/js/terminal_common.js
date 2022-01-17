@@ -253,13 +253,20 @@ export let TmuxLaunchInfo;
 export let VshLaunchInfo;
 
 /**
+ * @typedef {{
+ *   needRedirect: boolean,
+ * }}
+ */
+export let SSHLaunchInfo;
+
+/**
  * Only one of the top level properties should exist.
  *
  * @typedef {{
  *   tmux: (!TmuxLaunchInfo|undefined),
  *   vsh: (!VshLaunchInfo|undefined),
  *   crosh: (!Object|undefined),
- *   ssh: (!Object|undefined),
+ *   ssh: (!SSHLaunchInfo|undefined),
  * }}
  */
 export let LaunchInfo;
@@ -454,22 +461,27 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
     return {crosh: {}};
   }
 
-  if (url.pathname === '/html/terminal_ssh.html' ||
-      // TODO(crbug.com/1283153): Remove this when we stop redirecting this
-      // path to terminal_ssh.html in TerminalSource.
-      url.pathname === '/html/nassh.html') {
-    return {ssh: {}};
+  if (url.pathname === '/html/terminal_ssh.html') {
+    return {ssh: {needRedirect: false}};
+  }
+
+  // We only follow parentLaunchInfo if there is no search params. (The default
+  // url does not have search param.)
+  if (!url.search && parentLaunchInfo) {
+    if (parentLaunchInfo.ssh) {
+      return {ssh: {needRedirect: true}};
+    }
+
+    if (parentLaunchInfo.tmux) {
+      return {tmux: {
+        driverChannelName: parentLaunchInfo.tmux.driverChannelName,
+      }};
+    }
   }
 
   if (url.searchParams.has(TMUX_PARAM_NAME)) {
     return {tmux: /** @type {!TmuxLaunchInfo} */(JSON.parse(
         /** @type {string} */(url.searchParams.get(TMUX_PARAM_NAME))))};
-  }
-
-  if (!url.search && parentLaunchInfo?.tmux) {
-    return {tmux: {
-      driverChannelName: parentLaunchInfo.tmux.driverChannelName,
-    }};
   }
 
   const args = url.searchParams.getAll('args[]');
