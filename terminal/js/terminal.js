@@ -2,9 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {LaunchInfo, composeTmuxUrl, definePrefs, getTerminalInfoTracker,
-  getTmuxIntegrationEnabled, loadPowerlineWebFonts,
-  loadWebFont, normalizeCSSFontFamily} from './terminal_common.js';
+import {composeTmuxUrl, definePrefs, getTmuxIntegrationEnabled,
+  loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily}
+    from './terminal_common.js';
+import {LaunchInfo, getTerminalInfoTracker} from './terminal_info.js';
 import {ClientWindow as TmuxClientWindow, TmuxControllerDriver}
     from './terminal_tmux.js';
 

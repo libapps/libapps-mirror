@@ -7,7 +7,7 @@
  */
 
 import {terminal} from './terminal.js';
-import {setUpTitleHandler, getTerminalInfoTracker} from './terminal_common.js';
+import {getTerminalInfoTracker, setUpTitleHandler} from './terminal_info.js';
 
 getTerminalInfoTracker().then((tracker) => {
   if (tracker.launchInfo.ssh?.needRedirect) {
