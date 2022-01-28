@@ -152,7 +152,12 @@ let TmuxVersion;
  */
 export class Controller {
   /**
-   * See the class doc for details about the parameters.
+   * onStart(errorLines) is called when the controller finished initialization.
+   * If everything is fine, `errorLines` will be null; otherwise, it will
+   * contain the error messages. The user should only call interpretLine() but
+   * not the other methods before onStart() is called.
+   *
+   * See the class doc for details about the other parameters.
    *
    * @param {{
    *   openWindow: function({
@@ -160,11 +165,13 @@ export class Controller {
    *     layout: !Layout,
    *     controller: !Controller}): !Window,
    *   input: function(string),
+   *   onStart: function(?Array<string>),
    * }} param1
    */
-  constructor({openWindow, input}) {
+  constructor({openWindow, input, onStart}) {
     this.openWindow_ = openWindow;
     this.input_ = input;
+    this.onStart_ = onStart;
 
     this.closed_ = false;
     this.textEncoder_ = new TextEncoder();
@@ -185,16 +192,22 @@ export class Controller {
      * @type {!Array<!Command>}
      */
     this.commands_ = [
-        // At the very beginning, tmux always outputs a pair of %begin/%end
-        // (just like when a command is sent to tmux). Put a fake command here
-        // to consume the pair.
+        // At the very beginning, tmux prints either a pair of %begin/%end or
+        // %begin/%error (just like when a command is sent to tmux). Put a fake
+        // command here to process it.
         new Command(
             '',
-            () => {
+            (lines) => {
               // TODO(crbug.com/1252271): send ctrl-u to input() to clear input
               // just in case? Or maybe we should require the user to do so.
+              if (lines.length) {
+                console.warn('unexpected lines when tmux is starting: ', lines);
+              }
+              this.start_();
             },
-            throwUnhandledCommandError,
+            (lines) => {
+              this.onStart_(lines);
+            },
         ),
     ];
 
@@ -231,7 +244,7 @@ export class Controller {
   /**
    * Start the controller. Call it once at the beginning.
    */
-  start() {
+  start_() {
     // Query the tmux process version.
     this.queueCommand('display-message -p "#{version}"', (lines) => {
       try {
@@ -247,18 +260,20 @@ export class Controller {
         console.warn('unable to parse version from ', lines);
         this.tmuxVersion_ = {major: 0, minor: ''};
       }
-    });
 
-    this.listWindows((windowDataList) => {
-      for (const windowData of windowDataList) {
-        this.internalOpenWindow_(windowData);
-      }
+      this.onStart_(null);
 
-      // Start handling changes to windows.
-      this.handlers_['%window-add'] = this.handleWindowAdd_.bind(this);
-      this.handlers_['%window-close'] =
-          this.handlers_['%unlinked-window-close'] =
-          this.handleWindowClose_.bind(this);
+      this.listWindows((windowDataList) => {
+        for (const windowData of windowDataList) {
+          this.internalOpenWindow_(windowData);
+        }
+
+        // Start handling changes to windows.
+        this.handlers_['%window-add'] = this.handleWindowAdd_.bind(this);
+        this.handlers_['%window-close'] =
+            this.handlers_['%unlinked-window-close'] =
+            this.handleWindowClose_.bind(this);
+      });
     });
   }
 

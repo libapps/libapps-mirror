@@ -105,12 +105,14 @@ describe('tmux.js', function() {
 
       this.openWindowMock = new MockFunction();
       this.inputMock = new MockFunction();
+      this.onStartMock = new MockFunction();
       this.controller = new Controller({
         openWindow: (args) => {
           this.openWindowMock.called(args);
           return this.testWindowData[args.windowId].windowMock.proxy;
         },
         input: this.inputMock.proxy,
+        onStart: this.onStartMock.proxy,
       });
 
       this.interpretAllLines = (lines) => {
@@ -125,15 +127,16 @@ describe('tmux.js', function() {
         this.controller.interpretLine('%end');
       };
 
-      // Tmux prints a empty %begin/%end block at the very beginning.
-      this.interpretBeginEndBlock([]);
-
       this.setup = async () => {
-        this.controller.start();
+        // Tmux prints a empty %begin/%end block at the very beginning if
+        // nothing is wrong.
+        this.interpretBeginEndBlock([]);
         await this.inputMock.whenCalled();
         // Mock results for the version number.
         this.interpretBeginEndBlock(['3.2a']);
         // Mock results for listing window.
+        this.inputMock.popHistory();
+        await this.inputMock.whenCalled();
         this.interpretBeginEndBlock([
             `@3 ${this.testWindowData['@3'].layoutStr}`,
             `@9 ${this.testWindowData['@9'].layoutStr}`,
@@ -144,10 +147,20 @@ describe('tmux.js', function() {
       };
     });
 
-    it('start() and internalOpenWindow_()', async function() {
+    it('tmux fails to start', async function() {
+      // When tmux fails to start, it prints an error log at the very beginning.
+      this.interpretAllLines(['%begin', 'no session', '%error']);
+      assert.deepEqual(this.onStartMock.getHistory(), [[['no session']]]);
+      assert.equal(this.inputMock.getHistory().length, 0);
+    });
+
+    it('start_() and internalOpenWindow_()', async function() {
       // Not calling `this.setup()` because we need to test
       // `this.controller.start()` manually.
-      this.controller.start();
+
+      // Tmux prints a empty %begin/%end block at the very beginning if
+      // nothing is wrong.
+      this.interpretBeginEndBlock([]);
 
       // Controller first queries the version number.
       await this.inputMock.whenCalled();
@@ -155,6 +168,8 @@ describe('tmux.js', function() {
       assert.deepEqual(this.controller.tmuxVersion_, {major: 3.2, minor: 'a'});
 
       // Controller list windows. After this, some handlers should be installed.
+      this.inputMock.popHistory();
+      await this.inputMock.whenCalled();
       const handlerToBeInstalled = [
           '%window-add',
           '%window-close',
@@ -184,6 +199,8 @@ describe('tmux.js', function() {
       assert.equal(this.controller.panes_.get('%1').winInfo.id, '@3');
       assert.equal(this.controller.panes_.get('%10').winInfo.id, '@9');
       assert.equal(this.controller.panes_.get('%2').winInfo.id, '@9');
+
+      assert.deepEqual(this.onStartMock.getHistory(), [[null]]);
     });
 
     it('queueCommand() and %begin/%end block', async function() {

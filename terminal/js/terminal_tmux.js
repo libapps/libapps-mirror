@@ -241,6 +241,7 @@ export class TmuxControllerDriver {
         this.onRequestOpenWindow_.bind(this));
 
     this.onBeforeUnload_ = this.onBeforeUnload_.bind(this);
+    this.onUserInput_ = this.onUserInput_.bind(this);
   }
 
   get channelName() {
@@ -281,11 +282,21 @@ export class TmuxControllerDriver {
     this.controller_ = new tmux.Controller({
       openWindow: this.openWindow_.bind(this),
       input: io.sendString.bind(io),
+      onStart: (errorLines) => {
+        if (!errorLines) {
+          // Controller started successfully.
+          this.pseudoTmuxCommand_ = new PseudoTmuxCommand(
+              this.term_, /** @type {!tmux.Controller} */(this.controller_));
+          this.pseudoTmuxCommand_.run();
+          return;
+        }
+
+        for (const line of errorLines) {
+          this.term_.print(line);
+          this.term_.newLine();
+        }
+      },
     });
-    this.pseudoTmuxCommand_ = new PseudoTmuxCommand(
-        this.term_,
-        this.controller_,
-    );
 
     // Backup and overwrite the input methods on the `io` object because we want
     // our pseudo tmux command to handle user input on the current terminal.
@@ -293,11 +304,22 @@ export class TmuxControllerDriver {
     // tmux process output.
     for (const name of ['onVTKeystroke', 'sendString']) {
       this.ioPropertyBackup_[name] = io[name];
-      io[name] = (str) => this.pseudoTmuxCommand_.onUserInput(str);
+      io[name] = this.onUserInput_;
     }
+  }
 
-    this.controller_.start();
-    this.pseudoTmuxCommand_.run();
+  /**
+   * Handle user input when tmux is active.
+   *
+   * @param {string} str
+   */
+  onUserInput_(str) {
+    if (this.pseudoTmuxCommand_) {
+      this.pseudoTmuxCommand_.onUserInput(str);
+      return;
+    }
+    console.warn(
+        'unhandled user input when the controller hasn\'t started: ', str);
   }
 
   /**
