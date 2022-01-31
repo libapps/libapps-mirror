@@ -240,7 +240,7 @@ export class TmuxControllerDriver {
     this.driverChannel_ = new DriverChannel(
         this.onRequestOpenWindow_.bind(this));
 
-    this.onBeforeUnload_ = this.onBeforeUnload_.bind(this);
+    this.onUnload_ = this.onUnload_.bind(this);
     this.onUserInput_ = this.onUserInput_.bind(this);
   }
 
@@ -274,7 +274,7 @@ export class TmuxControllerDriver {
    * Start handling tmux control mode.
    */
   onStart_() {
-    window.addEventListener('beforeunload', this.onBeforeUnload_);
+    window.addEventListener('unload', this.onUnload_);
 
     const io = this.term_.io;
 
@@ -354,7 +354,7 @@ export class TmuxControllerDriver {
    * Stop handling tmux control mode.
    */
   onStop_() {
-    window.removeEventListener('beforeunload', this.onBeforeUnload_);
+    window.removeEventListener('unload', this.onUnload_);
     this.cleanUpPendingOpenWindowRequests_('controller has stopped');
 
     this.controller_ = null;
@@ -373,7 +373,7 @@ export class TmuxControllerDriver {
     }
   }
 
-  onBeforeUnload_() {
+  onUnload_() {
     // Note that we copy the set to an array first because closing a server
     // window will affect the set.
     for (const serverWindow of Array.from(this.serverWindows_)) {
@@ -725,7 +725,7 @@ export class ClientWindow {
 
     // TODO(crbug.com/1252271): We should check the preference and prompt the
     // user before closing the window just like terminal.
-    window.addEventListener('beforeunload', () => {
+    window.addEventListener('unload', () => {
       // If we have already received a `onClose()` from the server side, there
       // is no need to kill the window.
       if (!this.closed_) {
