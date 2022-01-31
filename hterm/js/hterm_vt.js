@@ -360,6 +360,7 @@ hterm.VT.ParseState.prototype.isComplete = function() {
  * Reset the VT back to baseline state.
  */
 hterm.VT.prototype.reset = function() {
+  this.parseState_.reset();
   this.G0 = this.G1 = this.G2 = this.G3 =
       this.characterMaps.getMap('B');
 

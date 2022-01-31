@@ -85,6 +85,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
           }
         },
       });
+      nasshCommand.resetTerminal = () => {
+        terminal.reset();
+        return true;
+      };
       nasshCommand.run();
     };
     terminal.onTerminalReady = function() {

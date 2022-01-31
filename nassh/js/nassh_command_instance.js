@@ -269,7 +269,9 @@ nassh.CommandInstance.prototype.run = function() {
  */
 nassh.CommandInstance.prototype.reconnect = function(argstr) {
   // Terminal reset.
-  this.io.print('\x1b[!p');
+  if (!this.resetTerminal()) {
+    this.io.print('\x1b[!p');
+  }
 
   this.removePlugin_();
 
@@ -1723,6 +1725,7 @@ nassh.CommandInstance.prototype.onPlugin_.printLog = function(str) {
  */
 nassh.CommandInstance.prototype.onPlugin_.exit = function(code) {
   console.log('plugin exit: ' + code);
+  this.onPluginExit(code);
   this.exit(code, /* noReconnect= */ false);
 };
 
@@ -2036,4 +2039,22 @@ nassh.CommandInstance.prototype.onPlugin_.readPass = function(
   this.secureInput(prompt, buf_len, echo).then((pass) => {
     this.sendToPlugin_('onReadPass', [pass]);
   });
+};
+
+/**
+ * A user should override this if they want to get notified when the ssh NaCl
+ * plugin exits.
+ *
+ * @param {number} code The exit code.
+ */
+nassh.CommandInstance.prototype.onPluginExit = function(code) {};
+
+/**
+ * A user should override this if they want to handle resetting the terminal.
+ * Otherwise, this will reset the terminal by sending reset escape code.
+ *
+ * @return {boolean} Return true if the function is able to reset the terminal.
+ */
+nassh.CommandInstance.prototype.resetTerminal = function() {
+  return false;
 };

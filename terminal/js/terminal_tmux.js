@@ -255,9 +255,16 @@ export class TmuxControllerDriver {
     this.term_.onTmuxControlModeLine = this.onTmuxControlModeLine_.bind(this);
   }
 
+  reset() {
+    if (!this.started_) {
+      return;
+    }
+    console.warn('resetting when a tmux session has started');
+    this.onStop_();
+  }
+
   onTmuxControlModeLine_(line) {
     if (!this.started_) {
-      this.started_ = true;
       this.onStart_();
     }
 
@@ -266,7 +273,6 @@ export class TmuxControllerDriver {
       return;
     }
 
-    this.started_ = false;
     this.onStop_();
   }
 
@@ -274,6 +280,8 @@ export class TmuxControllerDriver {
    * Start handling tmux control mode.
    */
   onStart_() {
+    this.started_ = true;
+
     window.addEventListener('unload', this.onUnload_);
 
     const io = this.term_.io;
@@ -354,6 +362,8 @@ export class TmuxControllerDriver {
    * Stop handling tmux control mode.
    */
   onStop_() {
+    this.started_ = false;
+
     window.removeEventListener('unload', this.onUnload_);
     this.cleanUpPendingOpenWindowRequests_('controller has stopped');
 
@@ -367,8 +377,11 @@ export class TmuxControllerDriver {
     if (this.serverWindows_.size) {
       // The controller should have received an "%exit" notification and closed
       // all the windows.
-      console.error(
+      console.warn(
           'serverWindows_ is not empty when the tmux process has stopped');
+      for (const serverWindow of Array.from(this.serverWindows_)) {
+        serverWindow.onClose();
+      }
       this.serverWindows_.clear();
     }
   }

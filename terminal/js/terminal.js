@@ -126,8 +126,11 @@ terminal.init = function(element, launchInfo) {
       launchInfo = (await getTerminalInfoTracker()).launchInfo;
     }
 
+    /** @type {?TmuxControllerDriver} */
+    let tmuxControllerDriver = null;
+
     if (isTmuxIntegrationEnabled) {
-      (new TmuxControllerDriver({
+      tmuxControllerDriver = new TmuxControllerDriver({
         term,
         onOpenWindow: ({driver, channelName}) => {
           chrome.terminalPrivate.openWindow({
@@ -138,7 +141,8 @@ terminal.init = function(element, launchInfo) {
             asTab: true,
           });
         },
-      })).install();
+      });
+      tmuxControllerDriver.install();
     }
 
     if (launchInfo.tmux) {
@@ -171,7 +175,7 @@ terminal.init = function(element, launchInfo) {
     if (launchInfo.ssh) {
       // We handle the needRedirect case in another place.
       if (!launchInfo.ssh.needRedirect) {
-        runNassh(term);
+        runNassh(term, tmuxControllerDriver);
       }
       return;
     }
@@ -396,8 +400,9 @@ terminal.watchBackgroundImage = function(term) {
 
 /**
  * @param {!hterm.Terminal} term
+ * @param {?TmuxControllerDriver} tmuxControllerDriver
  */
-function runNassh(term) {
+function runNassh(term, tmuxControllerDriver) {
   let environment = term.getPrefs().get('environment');
   if (typeof environment !== 'object' || environment === null) {
     environment = {};
@@ -414,5 +419,16 @@ function runNassh(term) {
       }
     },
   });
+
+  nasshCommand.resetTerminal = () => {
+    term.reset();
+    return true;
+  };
+  if (tmuxControllerDriver) {
+    nasshCommand.onPluginExit = () => {
+      tmuxControllerDriver.reset();
+    };
+  }
+
   nasshCommand.run();
 }
