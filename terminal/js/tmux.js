@@ -173,6 +173,7 @@ export class Controller {
     this.input_ = input;
     this.onStart_ = onStart;
 
+    this.waitExit_ = false;
     this.closed_ = false;
     this.textEncoder_ = new TextEncoder();
 
@@ -203,7 +204,7 @@ export class Controller {
               if (lines.length) {
                 console.warn('unexpected lines when tmux is starting: ', lines);
               }
-              this.start_();
+              this.init_();
             },
             (lines) => {
               this.onStart_(lines);
@@ -242,9 +243,9 @@ export class Controller {
   }
 
   /**
-   * Start the controller. Call it once at the beginning.
+   * Init the controller. Call it once at the beginning.
    */
-  start_() {
+  init_() {
     // Query the tmux process version.
     this.queueCommand('display-message -p "#{version}"', (lines) => {
       try {
@@ -256,24 +257,40 @@ export class Controller {
           major: Number.parseFloat(match[1]),
           minor: match[2],
         };
+        console.log(`tmux version: ${JSON.stringify(this.tmuxVersion_)}`);
       } catch (error) {
         console.warn('unable to parse version from ', lines);
         this.tmuxVersion_ = {major: 0, minor: ''};
       }
 
-      this.onStart_(null);
+      const postInit = () => {
+        this.onStart_(null);
 
-      this.listWindows((windowDataList) => {
-        for (const windowData of windowDataList) {
-          this.internalOpenWindow_(windowData);
-        }
+        this.listWindows((windowDataList) => {
+          for (const windowData of windowDataList) {
+            this.internalOpenWindow_(windowData);
+          }
 
-        // Start handling changes to windows.
-        this.handlers_['%window-add'] = this.handleWindowAdd_.bind(this);
-        this.handlers_['%window-close'] =
-            this.handlers_['%unlinked-window-close'] =
-            this.handleWindowClose_.bind(this);
-      });
+          // Start handling changes to windows.
+          this.handlers_['%window-add'] = this.handleWindowAdd_.bind(this);
+          this.handlers_['%window-close'] =
+              this.handlers_['%unlinked-window-close'] =
+              this.handleWindowClose_.bind(this);
+        });
+      };
+
+      if (this.checkTmuxMinVersion_({major: 3.2, minor: 'a'})) {
+        // Set wait-exit so that tmux will wait for an empty line after it
+        // outputs '%exit'. This prevent a race condition where we send tmux
+        // commands after tmux exited.
+        console.info('set wait-exit');
+        this.queueCommand('refresh-client -f wait-exit', () => {
+          this.waitExit_ = true;
+          postInit();
+        });
+      } else {
+        postInit();
+      }
     });
   }
 
@@ -701,6 +718,12 @@ export class Controller {
   handleExit_(text) {
     console.log(`tmux is exiting. Reason=${text}`);
     this.closed_ = true;
+
+    if (this.waitExit_) {
+      this.input_('\r');
+    }
+    this.input_ = () => {};
+
     for (const winInfo of this.windows_.values()) {
       winInfo.win.onClose();
     }

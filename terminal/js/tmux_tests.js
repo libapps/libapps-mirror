@@ -134,6 +134,10 @@ describe('tmux.js', function() {
         await this.inputMock.whenCalled();
         // Mock results for the version number.
         this.interpretBeginEndBlock(['3.2a']);
+        this.inputMock.popHistory();
+        await this.inputMock.whenCalled();
+        // Mock results for refresh-client.
+        this.interpretBeginEndBlock([]);
         // Mock results for listing window.
         this.inputMock.popHistory();
         await this.inputMock.whenCalled();
@@ -154,7 +158,7 @@ describe('tmux.js', function() {
       assert.equal(this.inputMock.getHistory().length, 0);
     });
 
-    it('start_() and internalOpenWindow_()', async function() {
+    it('init_() and internalOpenWindow_()', async function() {
       // Not calling `this.setup()` because we need to test
       // `this.controller.start()` manually.
 
@@ -166,6 +170,14 @@ describe('tmux.js', function() {
       await this.inputMock.whenCalled();
       this.interpretBeginEndBlock(['3.2a']);
       assert.deepEqual(this.controller.tmuxVersion_, {major: 3.2, minor: 'a'});
+
+      // Controller set wait-exit.
+      this.inputMock.popHistory();
+      await this.inputMock.whenCalled();
+      assert.equal(this.inputMock.getHistory().length, 1);
+      assert.isTrue(
+          this.inputMock.getHistory()[0][0].startsWith('refresh-client'));
+      this.interpretBeginEndBlock([]);
 
       // Controller list windows. After this, some handlers should be installed.
       this.inputMock.popHistory();
@@ -304,6 +316,8 @@ describe('tmux.js', function() {
       assert.equal(this.controller.panes_.size, 3);
 
       this.controller.handleExit_();
+      await this.inputMock.whenCalled();
+      assert.deepEqual(this.inputMock.getHistory(), [['\r']]);
 
       assert.equal(
           this.testWindowData['@9'].windowMock.getMethodHistory('onClose')
