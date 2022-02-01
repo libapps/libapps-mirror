@@ -135,6 +135,7 @@ terminal.init = function(element, launchInfo) {
               windowChannelName: channelName,
               driverChannelName: driver.channelName,
             }),
+            asTab: true,
           });
         },
       })).install();
