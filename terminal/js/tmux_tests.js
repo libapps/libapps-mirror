@@ -106,6 +106,7 @@ describe('tmux.js', function() {
       this.openWindowMock = new MockFunction();
       this.inputMock = new MockFunction();
       this.onStartMock = new MockFunction();
+      this.onErrorMock = new MockFunction();
       this.controller = new Controller({
         openWindow: (args) => {
           this.openWindowMock.called(args);
@@ -113,6 +114,7 @@ describe('tmux.js', function() {
         },
         input: this.inputMock.proxy,
         onStart: this.onStartMock.proxy,
+        onError: this.onErrorMock.proxy,
       });
 
       this.interpretAllLines = (lines) => {
@@ -154,7 +156,8 @@ describe('tmux.js', function() {
     it('tmux fails to start', async function() {
       // When tmux fails to start, it prints an error log at the very beginning.
       this.interpretAllLines(['%begin', 'no session', '%error']);
-      assert.deepEqual(this.onStartMock.getHistory(), [[['no session']]]);
+      assert.deepEqual(this.onErrorMock.getHistory(), [['no session']]);
+      assert.deepEqual(this.onStartMock.getHistory(), []);
       assert.equal(this.inputMock.getHistory().length, 0);
     });
 
@@ -212,7 +215,7 @@ describe('tmux.js', function() {
       assert.equal(this.controller.panes_.get('%10').winInfo.id, '@9');
       assert.equal(this.controller.panes_.get('%2').winInfo.id, '@9');
 
-      assert.deepEqual(this.onStartMock.getHistory(), [[null]]);
+      assert.deepEqual(this.onStartMock.getHistory(), [[]]);
     });
 
     it('queueCommand() and %begin/%end block', async function() {
@@ -333,5 +336,23 @@ describe('tmux.js', function() {
       assert.equal(this.controller.panes_.size, 0);
     });
 
+    it('error in interpretLine', async function() {
+      await this.setup();
+      this.controller.queueCommand('invalid command');
+      await this.inputMock.whenCalled();
+      await this.inputMock.popHistory();
+      this.interpretAllLines([
+          '%begin',
+          'unknown command',
+          '%error',
+      ]);
+      await this.inputMock.whenCalled();
+      // The controller should send a '\r' to detach the tmux session.
+      assert.deepEqual(this.inputMock.getHistory(), [['\r']]);
+      await this.onErrorMock.whenCalled();
+      const errorHistory = this.onErrorMock.getHistory();
+      assert.equal(errorHistory.length, 1);
+      assert.isTrue(errorHistory[0][0].includes('unknown command'));
+    });
   });
 });

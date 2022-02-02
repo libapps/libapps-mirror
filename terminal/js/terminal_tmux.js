@@ -90,10 +90,7 @@ export class PseudoTmuxCommand {
           }
 
           const callback = (lines) => {
-            for (const line of lines) {
-              this.term_.print(line);
-              this.term_.newLine();
-            }
+            printLines(this.term_, lines);
             this.prompt_();
           };
 
@@ -290,19 +287,16 @@ export class TmuxControllerDriver {
     this.controller_ = new tmux.Controller({
       openWindow: this.openWindow_.bind(this),
       input: io.sendString.bind(io),
-      onStart: (errorLines) => {
-        if (!errorLines) {
-          // Controller started successfully.
-          this.pseudoTmuxCommand_ = new PseudoTmuxCommand(
-              this.term_, /** @type {!tmux.Controller} */(this.controller_));
-          this.pseudoTmuxCommand_.run();
-          return;
-        }
-
-        for (const line of errorLines) {
-          this.term_.print(line);
-          this.term_.newLine();
-        }
+      onStart: () => {
+        this.pseudoTmuxCommand_ = new PseudoTmuxCommand(
+            this.term_, /** @type {!tmux.Controller} */(this.controller_));
+        this.pseudoTmuxCommand_.run();
+      },
+      onError: (msg) => {
+        printLines(this.term_, [
+          'Tmux controller encountered an error:',
+          ...msg.trim().split('\n'),
+        ]);
       },
     });
 
@@ -908,5 +902,16 @@ export class ClientWindow {
    */
   onData_(data) {
     dispatchMethod(this, data);
+  }
+}
+
+/**
+ * @param {!hterm.Terminal} term
+ * @param {!Array<string>} lines
+ */
+function printLines(term, lines) {
+  for (const line of lines) {
+    term.print(line);
+    term.newLine();
   }
 }

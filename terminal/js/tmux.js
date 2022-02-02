@@ -152,10 +152,13 @@ let TmuxVersion;
  */
 export class Controller {
   /**
-   * onStart(errorLines) is called when the controller finished initialization.
-   * If everything is fine, `errorLines` will be null; otherwise, it will
-   * contain the error messages. The user should only call interpretLine() but
-   * not the other methods before onStart() is called.
+   * onStart() is called once when the controller finished initialization. The
+   * user should only call interpretLine() but not the other methods before
+   * onStart() is called.
+   *
+   * onError() is called with a error message when the controller encounters an
+   * error. The controller will also try to detach the tmux session. The
+   * controller might call this callback multiple times.
    *
    * See the class doc for details about the other parameters.
    *
@@ -165,15 +168,18 @@ export class Controller {
    *     layout: !Layout,
    *     controller: !Controller}): !Window,
    *   input: function(string),
-   *   onStart: function(?Array<string>),
+   *   onStart: function(),
+   *   onError: function(string),
    * }} param1
    */
-  constructor({openWindow, input, onStart}) {
+  constructor({openWindow, input, onStart, onError}) {
     this.openWindow_ = openWindow;
     this.input_ = input;
     this.onStart_ = onStart;
+    this.onError_ = onError;
 
     this.waitExit_ = false;
+    this.hasError_ = false;
     this.closed_ = false;
     this.textEncoder_ = new TextEncoder();
 
@@ -207,7 +213,7 @@ export class Controller {
               this.init_();
             },
             (lines) => {
-              this.onStart_(lines);
+              this.onError_(lines.join('\n'));
             },
         ),
     ];
@@ -264,7 +270,7 @@ export class Controller {
       }
 
       const postInit = () => {
-        this.onStart_(null);
+        this.onStart_();
 
         this.listWindows((windowDataList) => {
           for (const windowData of windowDataList) {
@@ -302,13 +308,19 @@ export class Controller {
    *                 ending '\r\n'.
    */
   interpretLine(line) {
-    // TODO(crbug.com/1252271): If there is any error, we log it and continue.
-    // We might want to revisit this, since some of the errors might not be
-    // recoverable.
     try {
       this.interpretLine_(line);
     } catch (error) {
       console.error(error);
+      setTimeout(this.onError_, 0, error.toString());
+      if (!this.hasError_) {
+        this.hasError_ = true;
+        // Bypass the command queue and directly write to the input. An empty
+        // line should detach the tmux session. And unlike the `detach` command,
+        // it will not trigger a %begin/%end block, which could potentially mess
+        // up the internal state further.
+        this.input_('\r');
+      }
     }
   }
 
@@ -560,8 +572,9 @@ export class Controller {
 
   sendPendingCommands_() {
     this.sendPendingCommandsScheduled_ = false;
-    if (this.closed_) {
-      console.warn('tmux is closed. Ignoring all pending commands');
+    if (this.closed_ || this.hasError_) {
+      console.warn(
+          'tmux is closed or in error mode. Ignoring all pending commands');
       this.pendingCommands_.length = 0;
       return;
     }
