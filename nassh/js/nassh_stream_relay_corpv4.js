@@ -128,6 +128,7 @@ nassh.Stream.RelayCorpv4WS = function(fd) {
   // The relay connection settings.
   this.io_ = null;
   this.relayServerSocket_ = null;
+  this.reportAckLatency_ = false;
 
   // The remote ssh server settings.
   this.host_ = null;
@@ -174,6 +175,18 @@ nassh.Stream.RelayCorpv4WS = function(fd) {
 
   // The actual WebSocket connected to the ssh server.
   this.socket_ = null;
+
+  // Time data was most recently sent.
+  this.timeSent_ = 0;
+
+  // Ack expected from most recently sent data.
+  this.expectedAck_ = 0;
+
+  // Circular list of recently observed ack times.
+  this.ackTimes_ = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+  // Slot to record next ack time in.
+  this.ackTimesIndex_ = 0;
 };
 
 /**
@@ -197,6 +210,7 @@ nassh.Stream.RelayCorpv4WS.prototype.asyncOpen =
   this.resume_ = settings.resume;
   this.host_ = settings.host;
   this.port_ = settings.port;
+  this.reportAckLatency_ = settings.reportAckLatency;
 
   this.openCallback_ = onComplete;
   this.connect_();
@@ -396,6 +410,13 @@ nassh.Stream.RelayCorpv4WS.prototype.onSocketData_ = function(e) {
       // Adjust our write buffer.
       this.writeBuffer_.ack(acked);
       this.writeAckCount_ = packet.ack;
+
+      // Track ACK latency.
+      if (this.timeSent_ !== 0 && packet.ack === BigInt(this.expectedAck_)) {
+        this.recordAckTime_(Date.now() - this.timeSent_);
+        this.timeSent_ = 0;
+      }
+
       break;
     }
 
@@ -446,6 +467,12 @@ nassh.Stream.RelayCorpv4WS.prototype.sendWrite_ = function() {
   this.socket_.send(dataPacket.frame);
   this.writeCount_ += dataPacket.length;
 
+  // Start ack latency measurement.
+  if (this.reportAckLatency_) {
+    this.timeSent_ = Date.now();
+    this.expectedAck_ = this.writeCount_;
+  }
+
   if (this.onWriteSuccess_) {
     // Notify nassh that we are ready to consume more data.
     this.onWriteSuccess_(this.writeCount_);
@@ -455,4 +482,25 @@ nassh.Stream.RelayCorpv4WS.prototype.sendWrite_ = function() {
     // We have more data to send but due to message limit we didn't send it.
     setTimeout(this.sendWrite_.bind(this), 0);
   }
+};
+
+/**
+ * Append ack time to ack times circular array. If array is full, find and send
+ * average.
+ *
+ * @param {number} deltaTime Time elapsed before ack is received.
+ */
+nassh.Stream.RelayCorpv4WS.prototype.recordAckTime_ = function(deltaTime) {
+  this.ackTimes_[this.ackTimesIndex_] = deltaTime;
+  this.ackTimesIndex_ = (this.ackTimesIndex_ + 1) % this.ackTimes_.length;
+
+  /* if (this.ackTimesIndex_ === 0) {
+    // Filled the circular buffer, compute average.
+    const ackTimeSum = this.ackTimes_.reduce(
+        (sum, ackTime) => sum + ackTime, 0);
+    const average = ackTimeSum / this.ackTimes_.length;
+
+    // TODO: Report observed average to relay.
+    // TODO(eizihirwe): Construct payload to send to go/monapi endpoint.
+  } */
 };
