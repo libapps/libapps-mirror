@@ -413,9 +413,13 @@ function runNassh(term, tmuxControllerDriver) {
     io: term.io,
     args: [document.location.hash.substr(1)],
     environment: environment,
-    onExit: (code) => {
+    onExit: async (code) => {
       if (term.getPrefs().get('close-on-exit')) {
-        window.close();
+        // We are not able to use `window.close()` here because 1) nassh
+        // redirect the page and 2) blink forbids `window.close()` when the
+        // history length > 1. See
+        // http://osscs/chromium/chromium/src/+/main:third_party/blink/renderer/core/frame/dom_window.cc;l=405;drc=9e5ff859e6b26ac78137c41178631fac938cf751
+        chrome.tabs.remove((await getTerminalInfoTracker()).tabId);
       }
     },
   });
