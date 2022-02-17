@@ -25,6 +25,8 @@ const newFakeLaunchInfo = () => ({
   },
 });
 
+const encoder = new TextEncoder();
+
 /**
  * Create the #terminal div in the document for testing, and start mocks.
  */
@@ -92,9 +94,11 @@ it('does-not-exit-on-first-output', async function() {
   await mockTerminalPrivateController.on('openVmshellProcess');
   terminalCommand.exit = () => { exitCalled = true; };
 
-  await mockTerminalPrivate.onProcessOutput.dispatch(pid, 'exit', 'text');
+  await mockTerminalPrivate.onProcessOutput.dispatch(pid, 'exit',
+      encoder.encode('text').buffer);
   assert.isFalse(exitCalled);
-  await mockTerminalPrivate.onProcessOutput.dispatch(pid, 'exit', 'text');
+  await mockTerminalPrivate.onProcessOutput.dispatch(pid, 'exit',
+      encoder.encode('text').buffer);
   assert.isTrue(exitCalled);
 });
 

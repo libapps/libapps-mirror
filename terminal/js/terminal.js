@@ -239,9 +239,9 @@ terminal.init = function(element, launchInfo) {
  * @param {string} type Type of the event.
  *             'stdout': Process output detected.
  *             'exit': Process has exited.
- * @param {string} text Text that was detected on process output.
+ * @param {string|!ArrayBuffer} data Data that was detected on process output.
  */
-terminal.Command.prototype.onProcessOutput_ = function(id, type, text) {
+terminal.Command.prototype.onProcessOutput_ = function(id, type, data) {
   if (id !== this.id_) {
     return;
   }
@@ -253,7 +253,15 @@ terminal.Command.prototype.onProcessOutput_ = function(id, type, text) {
     this.exit(0);
     return;
   }
-  this.io_.print(text);
+
+  if (data instanceof ArrayBuffer) {
+    this.io_.writeUTF8(data);
+  } else {
+    // Older version of terminal private api gives strings.
+    //
+    // TODO(1260289): Remove this.
+    this.io_.print(data);
+  }
   this.isFirstOutput_ = false;
 };
 
