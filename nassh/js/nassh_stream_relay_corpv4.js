@@ -266,8 +266,15 @@ nassh.Stream.RelayCorpv4WS.prototype.reconnectTemplate_ =
 
 /**
  * Try to resume the session.
+ *
+ * @return {boolean} returns false if resume is not set for this connection,
+ *     or reconnect already in progress.
  */
 nassh.Stream.RelayCorpv4WS.prototype.reconnect_ = function() {
+  if (!this.resume_ || this.connecting_) {
+    return false;
+  }
+
   if (!this.sid_) {
     throw new Error('stream not yet connected');
   }
@@ -290,6 +297,7 @@ nassh.Stream.RelayCorpv4WS.prototype.reconnect_ = function() {
   this.socket_.onmessage = this.onSocketData_.bind(this);
   this.socket_.onclose = this.onSocketClose_.bind(this);
   this.socket_.onerror = this.onSocketError_.bind(this);
+  return true;
 };
 
 /**
@@ -348,7 +356,11 @@ nassh.Stream.RelayCorpv4WS.prototype.onSocketOpen_ = function(e) {
  * @param {!CloseEvent} e The event details.
  */
 nassh.Stream.RelayCorpv4WS.prototype.onSocketClose_ = function(e) {
-  this.close_(`server closed socket: [${e.code}] ${e.reason}`);
+  // When a socket closes uncleanly, CloseEvent.wasClean is false.
+  // Treat this like an error and possibly reconnect.
+  if (e.wasClean || !this.reconnect_()) {
+    this.close_(`server closed socket: [${e.code}] ${e.reason}`);
+  }
 };
 
 /**
@@ -357,10 +369,7 @@ nassh.Stream.RelayCorpv4WS.prototype.onSocketClose_ = function(e) {
  * @param {!Event} e The event details.
  */
 nassh.Stream.RelayCorpv4WS.prototype.onSocketError_ = function(e) {
-  // If (re)connection is in progress, don't attempt it again.
-  if (!this.connecting_ && this.resume_) {
-    this.reconnect_();
-  } else {
+  if (!this.reconnect_()) {
     this.close_('server sent an error');
   }
 };
