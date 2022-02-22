@@ -1757,13 +1757,12 @@ hterm.VT.ESC['-'] =
 hterm.VT.ESC['.'] =
 hterm.VT.ESC['/'] = function(parseState, code) {
   parseState.func = function(parseState) {
-    const ch = parseState.consumeChar();
-    if (ch == '\x1b') {
+    if (parseState.peekChar() === '\x1b') {
+      // Invalid SCS sequence, treat this ESC as a new sequence starting.
       parseState.resetParseFunction();
-      parseState.func();
       return;
     }
-
+    const ch = parseState.consumeChar();
     const map = this.characterMaps.getMap(ch);
     if (map !== undefined) {
       if (code == '(') {

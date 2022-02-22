@@ -2403,6 +2403,17 @@ it('character-maps', function() {
   });
 
 /**
+ * Test that a broken command to switch character maps is correctly ignored:
+ * ESC /  (missing charset, should be e.g. ESC / A)
+ * ESC 1m (bold, gets processed)
+ * hello  (is echoed)
+ */
+it('escape-during-scs', function() {
+    this.terminal.interpret('\x1b/\x1b[1mhello');
+    assert.equal(this.terminal.getRowText(0), 'hello');
+  });
+
+/**
  * Verify DOCS (encoding) switching behavior.
  */
 it('docs', function() {
