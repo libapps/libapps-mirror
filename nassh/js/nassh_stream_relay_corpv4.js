@@ -149,6 +149,13 @@ nassh.Stream.RelayCorpv4WS = function(fd) {
   this.writeCount_ = 0;
 
   /**
+   * this.writeCount_'s previous value.
+   *
+   * @type {number}
+   */
+   this.previousWriteCount_ = 0;
+
+  /**
    * Data we've read so we can ack it to the server.
    *
    * @type {bigint}
@@ -177,9 +184,6 @@ nassh.Stream.RelayCorpv4WS = function(fd) {
 
   // Time data was most recently sent.
   this.timeSent_ = 0;
-
-  // Ack expected from most recently sent data.
-  this.expectedAck_ = 0;
 
   // Circular list of recently observed ack times.
   this.ackTimes_ = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -428,7 +432,8 @@ nassh.Stream.RelayCorpv4WS.prototype.onSocketData_ = function(e) {
       this.writeAckCount_ = packet.ack;
 
       // Track ACK latency.
-      if (this.timeSent_ !== 0 && packet.ack === BigInt(this.expectedAck_)) {
+      if (this.timeSent_ !== 0 &&
+          this.writeAckCount_ > BigInt(this.previousWriteCount_)) {
         this.recordAckTime_(Date.now() - this.timeSent_);
         this.timeSent_ = 0;
       }
@@ -481,12 +486,12 @@ nassh.Stream.RelayCorpv4WS.prototype.sendWrite_ = function() {
   const readBuffer = this.writeBuffer_.read(this.maxDataWriteLength);
   const dataPacket = new nassh.Stream.RelayCorpv4.ClientDataPacket(readBuffer);
   this.socket_.send(dataPacket.frame);
+  this.previousWriteCount_ = this.writeCount_;
   this.writeCount_ += dataPacket.length;
 
   // Start ack latency measurement.
   if (this.googMetricsReporter_) {
     this.timeSent_ = Date.now();
-    this.expectedAck_ = this.writeCount_;
   }
 
   if (this.onWriteSuccess_) {
