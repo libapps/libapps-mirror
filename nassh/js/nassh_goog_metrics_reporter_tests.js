@@ -2,19 +2,36 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {Distribution, GoogMetricsReporter}
-    from './nassh_goog_metrics_reporter.js';
-
 /**
  * @fileoverview `GoogMetricsReporter` unit tests.
  */
 
+import {Distribution, GoogMetricsReporter}
+    from './nassh_goog_metrics_reporter.js';
+
+/*
+ * Create a new hterm.Terminal instance for testing.
+ *
+ * Called before each test case in this suite.
+ */
+beforeEach(function() {
+  this.terminalIO = new hterm.Terminal.IO(this);
+});
+
 describe('nassh_goog_metrics_reporter_tests.js', () => {
-  describe('reportLatency', () => {
+  describe('GoogMetricsReporter.reportLatency', () => {
     let reporter;
 
-    beforeEach(() => {
-      reporter = new GoogMetricsReporter();
+    beforeEach(function() {
+      reporter = new GoogMetricsReporter(this.terminalIO, '');
+      reporter.metadata = {
+        client_corp_status: '',
+        client_os: '',
+        connection_phase: '',
+        host_zone: '',
+        infra_provider: '',
+        ssh_client: '',
+      };
     });
 
     it('increments underflow bucket for sample less than lower bound', () => {
@@ -79,12 +96,51 @@ describe('nassh_goog_metrics_reporter_tests.js', () => {
       assert.equal(50, reporter.distribution.max);
     });
 
-    it('does nothing for non-finite sample', () => {
+    it('does not update distribution for non-finite sample', () => {
       reporter.reportLatency(NaN);
       reporter.reportLatency(Number.POSITIVE_INFINITY);
       reporter.reportLatency(Number.NEGATIVE_INFINITY);
 
       assert.equal(0, reporter.distribution.count);
+    });
+
+    it('does not update distribution when metadata is not ready', () => {
+      reporter.metadata = null;
+
+      reporter.reportLatency(10);
+
+      assert.equal(0, reporter.distribution.count);
+    });
+  });
+
+  describe('GoogMetricsReporter.findHostInstanceZone_', () => {
+    let reporter;
+
+    beforeEach(function() {
+      reporter = new GoogMetricsReporter(this.terminalIO, 'host');
+    });
+
+    it('returns "unknown" when instances array is undefined', () => {
+      assert.equal(reporter.findHostInstanceZone_(undefined), 'unknown');
+    });
+
+    it('returns "unknown" when instances array is empty', () => {
+      assert.equal(reporter.findHostInstanceZone_([]), 'unknown');
+    });
+
+    it('returns "unknown" when matching instance is not found', () => {
+      const instances = [{primaryFqdn: 'otherHost'}];
+
+      assert.equal(reporter.findHostInstanceZone_(instances), 'unknown');
+    });
+
+    it('returns zone when matching instance is found', () => {
+      const instances = [
+        {primaryFqdn: 'host', location: {zone: {gceZone: 'zone'}}},
+        {primaryFqdn: 'otherHost', location: {zone: {gceZone: 'otherZone'}}},
+      ];
+
+      assert.equal(reporter.findHostInstanceZone_(instances), 'zone');
     });
   });
 

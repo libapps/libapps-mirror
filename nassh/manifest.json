@@ -32,6 +32,10 @@
     "crashReportPrivate",
     "metricsPrivate"
   ],
+  "optional_permissions": [
+    "https://cloudtopmanagement-googleapis.corp.google.com/*",
+    "https://uberproxy-debug.corp.google.com/*"
+  ],
   "sockets": {
     "tcp": {
       "connect": [

@@ -207,7 +207,7 @@ RelayCorpv4WsStream.prototype = Object.create(Stream.prototype);
 RelayCorpv4WsStream.constructor = RelayCorpv4WsStream;
 
 /**
- * Open a relay socket.
+ * Open a relay socket. Setup metrics reporter.
  *
  * @param {!Object} settings
  * @param {function(boolean, ?string=)} onComplete
@@ -220,9 +220,16 @@ RelayCorpv4WsStream.prototype.asyncOpen = async function(settings, onComplete) {
   this.resume_ = settings.resume;
   this.host_ = settings.host;
   this.port_ = settings.port;
+
   if (settings.reportAckLatency) {
-    this.googMetricsReporter_ = new GoogMetricsReporter();
+    this.googMetricsReporter_ = new GoogMetricsReporter(this.io_, this.host_);
+    const hasPermissions = await this.googMetricsReporter_.checkPermissions();
+    if (!hasPermissions) {
+      await this.googMetricsReporter_.requestPermissions();
+    }
+    await this.googMetricsReporter_.initClientMetadata();
   }
+
   this.openCallback_ = onComplete;
   this.connect_();
 };

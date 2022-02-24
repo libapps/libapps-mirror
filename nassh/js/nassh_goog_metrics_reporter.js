@@ -3,28 +3,319 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview Manages and reports Google session metrics.
+ * @fileoverview Manages and reports Google session metrics. The reporter will
+ * only ever be used for internal Google users accessing remote machines through
+ * Corp SSH relays. It will never be used for non-Googlers.
  */
+
+/**
+ * Host and client metadata.
+ *
+ * @typedef {{
+ *     ssh_client: string,
+ *     host_zone: string,
+ *     connection_phase: string,
+ *     client_os: string,
+ *     infra_provider: string,
+ *     client_corp_status: string,
+ * }}
+ */
+let Metadata;
+
+/**
+ * Endpoint used to get Cloudtop instances and their details.
+ *
+ * @const {string}
+ */
+const CLOUDTOP_API_LIST_INSTANCES =
+    'https://cloudtopmanagement-googleapis.corp.google.com/v1/instances:list';
+
+/**
+ * API key for CLOUDTOP_API_LIST_INSTANCES.
+ *
+ * @const {string}
+ */
+const CLOUDTOP_API_KEY = 'AIzaSyAKXdFoyDqSPCGlbQiHz1LHrMFDYVZ0TTU';
+
+/**
+ * Payload sent with requests to CLOUDTOP_API_LIST_INSTANCES.
+ * Indicates that the instances received in the response should be owned by the
+ * current user.
+ *
+ * @const {string}
+ */
+const CLOUDTOP_PAYLOAD =
+    JSON.stringify({instance_filter: {owner: {myself: true}}});
+
+/**
+ * Endpoint used to determine if user is on a Corp network.
+ *
+ * @const {string}
+ */
+const UBERPROXY_DEBUG = 'https://uberproxy-debug.corp.google.com/oncorp';
+
+/**
+ * Origin used to get permmision for CLOUDTOP_API_LIST_INSTANCES.
+ *
+ * @const {string}
+ */
+const CLOUDTOP_API_ORIGIN =
+    'https://cloudtopmanagement-googleapis.corp.google.com/*';
+
+/**
+ * Origin used to get permission for UBERPROXY_DEBUG.
+ *
+ * @const {string}
+ */
+const UBERPROXY_DEBUG_ORIGIN = 'https://uberproxy-debug.corp.google.com/*';
 
 /**
  * Reports Google session metrics.
  */
 export class GoogMetricsReporter {
-  constructor() {
+  /**
+   * @param {!hterm.Terminal.IO} io Interface to display prompts to users.
+   * @param {string} hostname Name of remote host.
+   */
+  constructor(io, hostname) {
+    /**
+     * Contains metadata to attach to each report sent via go/monapi.
+     *
+     * @type {?Metadata}
+     */
+    this.metadata = null;
+
     /** @type {!Distribution} */
     this.distribution = new Distribution();
+
+    // True if at least 1 report has been sent to go/monapi successfuly.
+    this.firstReportIsSent = false;
+
+    this.io = io;
+
+    /**
+     * Name of remote host.
+     *
+     * @type {string}
+     */
+    this.hostname = hostname;
   }
 
   /**
-   * Adds value to distribution.
+   * Check whether all permissions required for the reporter exist.
+   *
+   * @return {!Promise<boolean>}
+   */
+  async checkPermissions() {
+    const permissions = {
+      permissions: [],
+      origins: [CLOUDTOP_API_ORIGIN, UBERPROXY_DEBUG_ORIGIN],
+    };
+    return new Promise((resolve) => {
+      chrome.permissions.contains(permissions, resolve);
+    });
+  }
+
+  /**
+   * Gets permissions to access API endpoints.
+   *
+   * @return {!Promise<void>}
+   */
+  async requestPermissions() {
+    // Construct prompt.
+    const io = this.io.push();
+
+    const container = document.createElement('div');
+    const prompt = document.createElement('p');
+    prompt.style.fontWeight = 'bold';
+    prompt.style.textAlign = 'center';
+    prompt.textContent = this.PERMISSIONS_PROMPT;
+    container.appendChild(prompt);
+
+    const yesButton = document.createElement('button');
+    yesButton.style.marginRight = '10px';
+    yesButton.textContent = 'Yes';
+
+    const noButton = document.createElement('button');
+    noButton.style.marginLeft = '10px';
+    noButton.textContent = 'No';
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.width = 'fit-content';
+    buttonContainer.style.margin = '0 auto';
+    buttonContainer.appendChild(yesButton);
+    buttonContainer.appendChild(noButton);
+    container.append(buttonContainer);
+
+    // Request permissions.
+    io.showOverlay(container, null);
+    return new Promise((resolve) => {
+      yesButton.addEventListener('click', () => {
+        io.hideOverlay();
+        io.pop();
+        const permissions = {
+          permissions: [],
+          origins: [CLOUDTOP_API_ORIGIN, UBERPROXY_DEBUG_ORIGIN],
+        };
+        chrome.permissions.request(permissions, resolve);
+      });
+
+      noButton.addEventListener('click', () => {
+        io.hideOverlay();
+        io.pop();
+        resolve();
+      });
+    });
+  }
+
+  /**
+   * Gathers all metadata associated with the host and client.
+   */
+  async initClientMetadata() {
+    if (this.getInfraProvider_() === 'cloud') {
+      this.metadata = {
+        host_zone: await this.getHostZone_(),
+        client_corp_status: await this.getClientCorpStatus_(),
+        client_os: hterm.os,
+        infra_provider: 'cloud',
+        ssh_client: this.getSshClient_(),
+        connection_phase: this.getConnectionPhase_(),
+      };
+    }
+    // TODO(eizihirwe): Include physical workstations in metric reports.
+  }
+
+  /**
+   * Adds value to distribution, and sends distribution to Monarch every 30s.
+   * If metadata is not ready, incoming latency values will not be reported.
    *
    * @param {number} latency Value to add to distribution.
    */
   reportLatency(latency) {
+    if (this.metadata === null) {
+      return;
+    }
     this.distribution.addSample_(latency);
-    // TODO(eizihirwe): Send distribution with go/monapi every 30s.
+    // TODO(eizihirwe): Once metadata is ready, send samples every 30s.
+  }
+
+  /**
+   * Gets GCE zone where host is located.
+   *
+   * @return {!Promise<string>} GCE zone.
+   */
+  async getHostZone_() {
+    try {
+      const response = await fetch(CLOUDTOP_API_LIST_INSTANCES, {
+        method: 'POST',
+        body: CLOUDTOP_PAYLOAD,
+        headers: {
+          'X-Goog-Api-Key': CLOUDTOP_API_KEY,
+        },
+      });
+      const data = await response.json();
+      return this.findHostInstanceZone_(data['instances']);
+    } catch (error) {
+      console.error(`Looking up host GCE zone failed: ${error}`);
+      return 'unknown';
+    }
+  }
+
+  /**
+   * Finds the GCE zone of the instance with the given hostname.
+   *
+   * @param {!Array<!Object>|undefined} instances Array of instances assigned to
+   *     the user.
+   * @return {string} GCE zone of the instance, 'unknown' if the instance is not
+   *     found.
+   */
+  findHostInstanceZone_(instances) {
+    if (!instances) {
+      return 'unknown';
+    }
+    const hostInstance = instances.filter((instance) => {
+      return instance['primaryFqdn'] === this.hostname;
+    });
+
+    return hostInstance[0]?.['location']?.['zone']?.['gceZone'] ?? 'unknown';
+  }
+
+  /**
+   * Identifies whether the client is on a Corp network.
+   *
+   * @return {!Promise<string>} 'on-corp' if client is on a corp network,
+   *     'off-corp' if not, 'unknown if request is not successful.
+   */
+  async getClientCorpStatus_() {
+    try {
+      const response = await fetch(UBERPROXY_DEBUG, {
+        method: 'GET',
+        credentials: 'include',
+      });
+      // Requests to uberproxy-debug/oncorp redirect to /yes or /no, which both
+      // return a 502. See b/67662002.
+      if (response.status === 502) {
+        return response.url.endsWith('/yes') ? 'on-corp' : 'off-corp';
+      }
+    } catch (error) {
+      console.error(`Looking up client corp status failed: ${error}`);
+    }
+    return 'unknown';
+  }
+
+  /**
+   * Identifies whether host is a physical workstation or a remote workstation.
+   *
+   * @return {string} 'cloud' if host is a remote workstation, 'corp' if not.
+   */
+  getInfraProvider_() {
+    return this.hostname.endsWith('c.googlers.com') ? 'cloud' : 'corp';
+  }
+
+  /**
+   * Identifies which client is currently utilizing nassh.
+   *
+   * @return {string} Client name.
+   */
+  getSshClient_() {
+    const secureShell = 'iodihamcpbpeioajjeobimgagajmlibd';
+    const secureShellDev = 'algkcnfjnajfhgimadimbjhmpaeohhln';
+    const terminal = 'terminal';
+
+    switch (chrome.runtime.id) {
+      case secureShell:
+        return 'secureshell';
+      case secureShellDev:
+        return 'secureshell-dev';
+      case terminal:
+        return 'terminal';
+      default:
+        return 'unknown';
+    }
+  }
+
+  /**
+   * Identifies whether the connection recently started.
+   *
+   * @return {string} 'established' if at least one report has been sent via
+   *     go/monapi, 'setup' if not.
+   */
+  getConnectionPhase_() {
+    return this.firstReportIsSent ? 'established' : 'setup';
   }
 }
+
+/**
+ * Text for prompt.
+ *
+ * @const {string}
+ */
+GoogMetricsReporter.prototype.PERMISSIONS_PROMPT =
+    'Help improve your SSH experience to your Cloudtop/workstation by ' +
+    'sharing latency data with developers. If yes, you will receive a prompt ' +
+    'for additional permissions to ' +
+    'cloudtopmanagement-googleapis.corp.google.com and ' +
+    'uberproxy-debug.corp.google.com';
 
 /**
  * Stores and manages latency data in the form of a distribution.
