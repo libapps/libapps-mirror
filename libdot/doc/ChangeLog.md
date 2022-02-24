@@ -1,3 +1,17 @@
+# 9.0.0, 2022-02-24, Few i18n fixes.
+
+* externs: Update Chrome version.
+* eslintrc: Remove 'self' from id-denylist.
+* eslintrc: Enable implicit-arrow-linebreak.
+* lint: Ignore compressed files.
+* i18n: Handle getAcceptLanguages errors.
+* Drop support for pre-R73 browsers.
+* wcwidth: Update to Unicode 14.
+* npm: Pull in webpack & more rollup packages.
+* externs: Add more Chai APIs.
+* i18n: Update and fix lib.i18n.resolveLanguage().
+* node: Update to newer 14.15.4 version.
+
 # 8.0.0, 2020-12-07, Modernizations.
 
 * closure-compiler: Update to v20201102.
