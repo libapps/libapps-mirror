@@ -128,7 +128,6 @@ nassh.Stream.RelayCorpv4WS = function(fd) {
   // The relay connection settings.
   this.io_ = null;
   this.relayServerSocket_ = null;
-  this.reportAckLatency_ = false;
 
   // The remote ssh server settings.
   this.host_ = null;
@@ -187,6 +186,13 @@ nassh.Stream.RelayCorpv4WS = function(fd) {
 
   // Slot to record next ack time in.
   this.ackTimesIndex_ = 0;
+
+  /**
+   * Sends metrics to designated storage.
+   *
+   * @type {?nassh.goog.GoogMetricsReporter}
+   */
+   this.googMetricsReporter_ = null;
 };
 
 /**
@@ -210,8 +216,9 @@ nassh.Stream.RelayCorpv4WS.prototype.asyncOpen =
   this.resume_ = settings.resume;
   this.host_ = settings.host;
   this.port_ = settings.port;
-  this.reportAckLatency_ = settings.reportAckLatency;
-
+  if (settings.reportAckLatency) {
+    this.googMetricsReporter_ = new nassh.goog.GoogMetricsReporter();
+  }
   this.openCallback_ = onComplete;
   this.connect_();
 };
@@ -477,7 +484,7 @@ nassh.Stream.RelayCorpv4WS.prototype.sendWrite_ = function() {
   this.writeCount_ += dataPacket.length;
 
   // Start ack latency measurement.
-  if (this.reportAckLatency_) {
+  if (this.googMetricsReporter_) {
     this.timeSent_ = Date.now();
     this.expectedAck_ = this.writeCount_;
   }
@@ -503,13 +510,13 @@ nassh.Stream.RelayCorpv4WS.prototype.recordAckTime_ = function(deltaTime) {
   this.ackTimes_[this.ackTimesIndex_] = deltaTime;
   this.ackTimesIndex_ = (this.ackTimesIndex_ + 1) % this.ackTimes_.length;
 
-  /* if (this.ackTimesIndex_ === 0) {
+  if (this.ackTimesIndex_ === 0) {
     // Filled the circular buffer, compute average.
     const ackTimeSum = this.ackTimes_.reduce(
         (sum, ackTime) => sum + ackTime, 0);
     const average = ackTimeSum / this.ackTimes_.length;
 
     // TODO: Report observed average to relay.
-    // TODO(eizihirwe): Construct payload to send to go/monapi endpoint.
-  } */
+    this.googMetricsReporter_.reportLatency(average);
+  }
 };
