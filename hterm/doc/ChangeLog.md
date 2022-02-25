@@ -1,3 +1,23 @@
+# 1.92, 2022-02-24, Tweak text measurement, and add basic DCS support.
+
+* vt: Fix handling of short SCS sequence.
+* vt: Reset parser when resetting.
+* vt: Support tmux DCS sequence.
+* prefs: Deprecate close-on-exit.
+* vt: Support setting tmux window name with ESC k sequence.
+* terminal: Make setProfile(id) a nop if id does not change.
+* vt: Add basic DCS parsing.
+* text: Make sure nodes with background-color set fill the line height.
+* prefs: Add a line height padding option.
+* prefs: Create hterm.Terminal.DEFAULT_PROFILE_ID constant.
+* text: Adjust text measurement again.
+* terminal: Ignore invalid audio-bell-sound lib-resource:// URI.
+* text: Use canvas-based text measurement.
+* scrollport: Auto scroll for selection if mouse moves off rows.
+* keyboard: Override default keymap with user keybindings.
+* keyboard: Add Ctrl+Shift+A to select all rows.
+* scrollport: Keep selection focus on last valid row if it moves to padding.
+
 # 1.91, 2020-12-07, Findbar support, notifications overhaul, and IO cleanups.
 
 * terminal: Move image permission prompt to overlays.
