@@ -1,3 +1,23 @@
+# 0.44, 2022-02-25, Relay improvements and internal cleanups.
+
+* relay: Fix reconnect when socket has unclean close.
+* relay: Add ACK latency measurement to CorpV4 relay.
+* crosh: Support terminalPrivate.onProcessOutput() with binary output.
+* terminal: handle ssh exit and reconnect properly for tmux.
+* sftp: Fix sftp limits packet fallback.
+* relay: Update relay to use /endpoint.
+* api: Tweak default style for new window helper.
+* google: Wait for cert renewal to finish before continuing.
+* hterm: Migrate away from runCommandClass.
+* relay: use chrome.windows.onRemoved rather than poll.
+* column list: Convert to ES6 module.
+* connect: Convert to ES6 module.
+* fsp: Fonvert config page to ES6 module.
+* nassh: Use placeholder for top-level document background-color.
+* nassh/crosh/popup: Convert standalone pages to ES6 module.
+* relay: Show error when --relay-method=direct auth fails.
+* prefs: Add a hack for DEL display.
+
 # 0.43, 2021-10-11, OpenSSH 8.8p1, SFTP features, font adjustments.
 
 * prefs: Refresh bootstrap code.
