@@ -587,7 +587,9 @@ hterm.Terminal.prototype.setProfile = function(
       if (v == null) {
         // Let Alt+1..9 pass to the browser (to control tab switching) on
         // non-OS X systems, or if hterm is not opened in an app window.
-        v = (hterm.os != 'mac' && hterm.windowType != 'popup');
+        v = (hterm.os !== 'mac' &&
+             hterm.windowType !== 'popup' &&
+             hterm.windowType !== 'app');
       }
 
       this.passAltNumber = v;
@@ -597,7 +599,9 @@ hterm.Terminal.prototype.setProfile = function(
       if (v == null) {
         // Let Ctrl+1..9 pass to the browser (to control tab switching) on
         // non-OS X systems, or if hterm is not opened in an app window.
-        v = (hterm.os != 'mac' && hterm.windowType != 'popup');
+        v = (hterm.os !== 'mac' &&
+             hterm.windowType !== 'popup' &&
+             hterm.windowType !== 'app');
       }
 
       this.passCtrlNumber = v;
@@ -623,7 +627,9 @@ hterm.Terminal.prototype.setProfile = function(
       if (v == null) {
         // Let Meta+1..9 pass to the browser (to control tab switching) on
         // OS X systems, or if hterm is not opened in an app window.
-        v = (hterm.os == 'mac' && hterm.windowType != 'popup');
+        v = (hterm.os === 'mac' &&
+             hterm.windowType !== 'popup' &&
+             hterm.windowType !== 'app');
       }
 
       this.passMetaNumber = v;

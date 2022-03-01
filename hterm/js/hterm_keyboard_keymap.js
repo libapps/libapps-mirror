@@ -661,7 +661,8 @@ hterm.Keyboard.KeyMap.prototype.onClear_ = function(e) {
  * @return {symbol|string} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onF11_ = function(e) {
-  if (hterm.windowType != 'popup' && !e.shiftKey) {
+  if (hterm.windowType !== 'popup' && hterm.windowType !== 'app' &&
+      !e.shiftKey) {
     return hterm.Keyboard.KeyActions.PASS;
   } else {
     return '\x1b[23~';
