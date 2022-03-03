@@ -177,7 +177,7 @@ def test_unittests():
     """Run all the unittests."""
     ret = []
     test_args = ['--no-sandbox', '--reporter', 'xunit']
-    for pkg in ('libdot', 'hterm', 'nassh', 'terminal'):
+    for pkg in ('libdot', 'hterm', 'nassh', 'terminal', 'wasi-js-bindings'):
         pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
         if os.path.exists(os.path.join(pkg_dir, 'package.json')):
             cmd = ['npm', 'test', '--'] + test_args
