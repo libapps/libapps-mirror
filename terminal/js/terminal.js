@@ -434,6 +434,8 @@ function runNassh(term, tmuxControllerDriver) {
 
   nasshCommand.resetTerminal = () => {
     term.reset();
+    // This is necessary to get us out of tmux mode if we are in one.
+    term.vt.resetParseState();
     return true;
   };
   if (tmuxControllerDriver) {
