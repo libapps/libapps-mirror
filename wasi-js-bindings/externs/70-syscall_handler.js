@@ -113,7 +113,10 @@ class SyscallHandler {
    * @param {!WASI_t.fd} fd
    * @param {!WASI_t.size} length
    * @param {!WASI_t.filesize} offset
-   * @return {!WASI_t.errno|{buf: !ArrayBufferView, nread: !WASI_t.size}}
+   * @return {!WASI_t.errno|
+   *          {buf: !Uint8Array, nread: !WASI_t.size}|
+   *          {buf: !Uint8Array}|
+   *          {nread: !WASI_t.size}}
    */
   handle_fd_pread(fd, length, offset) {}
 
@@ -131,7 +134,7 @@ class SyscallHandler {
 
   /**
    * @param {!WASI_t.fd} fd
-   * @param {!ArrayBufferView} buf
+   * @param {!TypedArray} buf
    * @param {!WASI_t.filesize} offset
    * @return {!WASI_t.errno|{nwritten: !WASI_t.size}}
    */
@@ -140,7 +143,10 @@ class SyscallHandler {
   /**
    * @param {!WASI_t.fd} fd
    * @param {!WASI_t.size} length
-   * @return {!WASI_t.errno|{buf: !ArrayBufferView, nread: !WASI_t.size}}
+   * @return {!WASI_t.errno|
+   *          {buf: !Uint8Array, nread: !WASI_t.size}|
+   *          {buf: !Uint8Array}|
+   *          {nread: !WASI_t.size}}
    */
   handle_fd_read(fd, length) {}
 
@@ -176,7 +182,7 @@ class SyscallHandler {
 
   /**
    * @param {!WASI_t.fd} fd
-   * @param {!ArrayBufferView} buf
+   * @param {!TypedArray} buf
    * @return {!WASI_t.errno|{nwritten: !WASI_t.size}}
    */
   handle_fd_write(fd, buf) {}
@@ -289,7 +295,7 @@ class SyscallHandler {
   handle_proc_raise(signal) {}
 
   /**
-   * @param {!ArrayBufferView|!SharedArrayBuffer} buf
+   * @param {!TypedArray|!ArrayBuffer|!SharedArrayBuffer} buf
    * @return {!WASI_t.errno}
    */
   handle_random_get(buf) {}

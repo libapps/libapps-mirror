@@ -261,7 +261,8 @@ export class DirectWasiPreview1 extends Base {
       crypto.getRandomValues(temp);
       u8.set(temp);
     } else {
-      crypto.getRandomValues(bytes);
+      const temp = bytes instanceof ArrayBuffer ? new Uint8Array(bytes) : bytes;
+      crypto.getRandomValues(temp);
     }
     return WASI.errno.ESUCCESS;
   }
