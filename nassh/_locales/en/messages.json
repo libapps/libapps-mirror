@@ -129,6 +129,14 @@
 			}
 		}
 	},
+	"CWS_DESCRIPTION": {
+		"description": "Description shown in the Chrome Web Store for the stable extension.",
+		"message": "Secure Shell is an xterm-compatible terminal emulator and stand-alone ssh client for Chrome.  It uses Native-Client to connect directly to ssh servers without the need for external proxies.\n\nA SFTP command line client is included.  On Chrome OS, you can create SFTP mounts and access them from the Files app!\n\nAn alpha build of Mosh is included now too.\n\nIt has been well tested for a couple of years.\n\nPlease read the FAQ, available here: https://hterm.org/x/ssh/faq.\n\nYou can also exchange feedback in the chromium-hterm mailing list, available here: https://hterm.org/x/ssh/contact.\n\nThe changelog is available here: https://hterm.org/x/ssh/changelog"
+	},
+	"CWS_DESCRIPTION_DEV": {
+		"description": "Description shown in the Chrome Web Store for the developer extension",
+		"message": "This is the development version of the Secure Shell extension.\n\nIt contains fixes & features that may not yet be available in the stable version.  Use it at your own risk.  If you're not comfortable running lightly tested code then install the stable version instead: https://chrome.google.com/webstore/detail/iodihamcpbpeioajjeobimgagajmlibd\n\nPlease read the FAQ, available here: https://hterm.org/x/ssh/faq.\n\nYou can also exchange feedback in the chromium-hterm mailing list, available here: https://hterm.org/x/ssh/contact.\n\nThe changelog is available here: https://hterm.org/x/ssh/changelog"
+	},
 	"DELETE_BUTTON_LABEL": {
 		"description": "The label for the delete button. Used to delete a specific SSH connection profile. It should be translated as a general term and not as a keyboard key reference.",
 		"message": "Delete"
