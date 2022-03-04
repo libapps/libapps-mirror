@@ -116,7 +116,8 @@ export class SyscallLock {
       return (typeof value === 'bigint') ?
           BIGINT_MAGIC + value.toString() : value;
     });
-    // encodeInto doesn't support shared array buffers yet.
+    // TODO(crbug.com/1012656): Chrome's encodeInto doesn't support shared array
+    // buffers yet.
     const bytes = te.encode(str);
     this.sabDataArr.set(bytes);
     this.sabArr[this.dataLengthIndex] = bytes.length;
