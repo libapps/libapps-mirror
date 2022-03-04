@@ -9,7 +9,7 @@ OUTPUT ?= $(SRCDIR)/out
 
 CC ?= clang
 CFLAGS ?= -Ofast
-CFLAGS += -Wall -Werror -fvisibility=hidden
+CFLAGS += -Wall -Werror -fvisibility=hidden -std=gnu17
 CFLAGS += -fdebug-prefix-map=$(SRCDIR)=wassh-libc-sup
 CPPFLAGS += -I$(SRCDIR)/../include
 
