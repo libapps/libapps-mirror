@@ -1,3 +1,8 @@
+# 1.92.1, 2022-03-04, Minor bug fixes.
+
+* vt: Don't reset parse state in the normal reset function.
+* Treat window.type "app" as a dedicated window.
+
 # 1.92, 2022-02-24, Tweak text measurement, and add basic DCS support.
 
 * vt: Fix handling of short SCS sequence.
