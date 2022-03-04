@@ -213,7 +213,8 @@ nassh.CommandInstance.prototype.run = function() {
                               [num, nassh.msg(`TIP_${num}`)]));
     this.io.println('');
 
-    if (this.manifest_.name.match(/\((dev|tot)\)/)) {
+    if (this.manifest_.name.match(/\((dev|tot)\)/) ||
+        this.manifest_.version_name === 'ToT') {
       // If we're a development version, show hterm details.
       const htermDate = lib.resource.getData('hterm/concat/date');
       const htermVer = lib.resource.getData('hterm/changelog/version');

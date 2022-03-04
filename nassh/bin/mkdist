@@ -149,7 +149,8 @@ def copyfiles(tmpdir, extra_exclude=()):
 
 
 def mkzip(stable: bool, archive_suffix: str,
-          version_mangle: Callable = lambda x: x):
+          version_mangle: Callable = lambda x: x,
+          version_name: str = ''):
     """Build the nassh extension archive.
 
     Args:
@@ -164,11 +165,16 @@ def mkzip(stable: bool, archive_suffix: str,
     with open(manifest, encoding='utf-8') as fp:
         data = json.load(fp)
 
-    name = re.sub(r' \(tot\)', '', data['name'])
+    name = data['name']
 
     version = data['version']
     version = version_mangle(version)
     data['version'] = version
+
+    if version_name:
+        data['version_name'] = version_name
+    else:
+        data.pop('version_name', None)
 
     # Hack up localized name for the filesystem.
     def _hack_localize(s: str) -> str:
@@ -270,6 +276,9 @@ def get_stamp():
     now = datetime.datetime.now()
     tm = now.timetuple()
 
+    # This will be shown to humans to read.
+    stamp_human = now.strftime('%e %b %Y %H:%M')
+
     # The first field is the date.
     # - last two digits of the year [0..99]
     # - day of the year [1..366] -- we subtract 1 to get [0..365]
@@ -290,7 +299,7 @@ def get_stamp():
     # This is OK because (23 * 60 * 30) + (59 * 30) + 30 = 43200 < 65535.
     stamp_time = (tm.tm_hour * 60 * 30) + (tm.tm_min * 30) + tm.tm_sec // 2
 
-    return (str(stamp_date), str(stamp_time))
+    return (stamp_human, str(stamp_date), str(stamp_time))
 
 
 def get_parser():
@@ -324,8 +333,8 @@ def main(argv):
     if not opts.crosh_only:
         # Build the dev channel variants.
         def _stamp_dev(version):
-            return '.'.join([version] + list(stamps))
-        mkzip(False, '-dev', _stamp_dev)
+            return '.'.join([version] + list(stamps[1:]))
+        mkzip(False, '-dev', _stamp_dev, stamps[0])
         # Build the stable channel variants.
         mkzip(True, '')
         # Build the stable channel rollback variants.
