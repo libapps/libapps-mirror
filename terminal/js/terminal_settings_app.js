@@ -13,7 +13,6 @@ import {SUPPORTED_FONT_SIZES,
   SUPPORTED_LINE_HEIGHT_PADDINGS} from './terminal_common.js';
 import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_settings_ansi_colors.js';
-import './terminal_settings_app.js';
 import './terminal_settings_background_image.js';
 import './terminal_settings_category_selector.js';
 import './terminal_settings_checkbox.js';
