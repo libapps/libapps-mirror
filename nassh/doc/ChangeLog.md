@@ -1,3 +1,9 @@
+# 0.45, 2022-03-04, Minor bug fixes.
+
+* Roll hterm fixes.
+* dev: Utilize version_name for prettier dev info.
+* google: Metrics skeleton reporter.
+
 # 0.44, 2022-02-25, Relay improvements and internal cleanups.
 
 * relay: Fix reconnect when socket has unclean close.
