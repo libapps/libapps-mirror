@@ -7,6 +7,164 @@
  */
 
 /**
+ * The different certificate slots in the gnubby.
+ *
+ * @enum {number}
+ */
+const gnubbySlot = {
+  CORP_NORMAL_CERT_SLOT: 0,
+  PROD_NORMAL_CERT_SLOT: 1,
+  CORP_EMRGCY_CERT_SLOT: 2,
+  PROD_EMRGCY_CERT_SLOT: 3,
+  NON_ROTATING_SLOT: 4,
+  SSO_SLOT: 5,
+  E2E_NO_CONSUME_SLOT: 6,
+  E2E_CONSUME_SLOT: 7,
+};
+
+/**
+ * The different errors SKE can return.
+ *
+ * @enum {string}
+ */
+const gnubbyErrReason = {
+  OTHER_ERROR: 'other error',
+  REQUEST_EXPIRED: 'request expired',
+  ACL_FAIL: 'acl failed',
+  BAD_REQUEST_DATA: 'bad request data',
+  NATIVE_HELPER_ERROR: 'native helper error',
+  NETWORK_ERROR: 'network error',
+  GNUBBY_CERT_NOT_FOUND: 'gnubby SSH cert missing',
+  CANCELLED: 'request is cancelled',
+};
+
+/**
+ * A SKE response.
+ *
+ * @typedef {{
+ *   type: string,
+ *   expiry: number,
+ *   errorReason: !gnubbyErrReason,
+ *   errorDetail: string,
+ * }}
+ */
+let skeResponse;
+
+/**
+ * The default extension id for talking to SKE.
+ *
+ * @type {string}
+ */
+let defaultSkeExtension = '';
+
+/**
+ * Find a usable SKE.
+ *
+ * @return {!Promise<boolean>} Resolve true if SKE was found.
+ */
+async function findSkeExtension() {
+  // If we're not in an extension context, nothing to do.
+  if (!window.chrome || !chrome.runtime) {
+    return false;
+  }
+
+  // The possible extensions.
+  // The order matches the SKE team preferences: https://crbug.com/1275205
+  const extensions = [
+    'ckcendljdlmgnhghiaomidhiiclmapok',  // v3 ext (dev)
+    'lfboplenmmjcmpbkeemecobbadnmpfhi',  // v3 ext (stable)
+  ];
+
+  // Ping the extension to see if it's installed/enabled/alive.
+  const check = async (id) => {
+    let result;
+    try {
+      result = /** @type {!skeResponse} */ (await nassh.runtimeSendMessage(
+          id, {'type': 'HELLO'}));
+    } catch (e) {
+      return;
+    }
+
+    // If the probe worked, return the id, else return nothing so we can
+    // clear out all the pending promises.
+    if (result !== undefined && result.type === 'HELLO') {
+      return id;
+    }
+  };
+
+  return Promise.all(extensions.map(check)).then((results) => {
+    console.log(`ske probe results: ${results}`);
+    for (let i = 0; i < extensions.length; ++i) {
+      const extId = extensions[i];
+      if (results.includes(extId)) {
+        defaultSkeExtension = defaultGnubbyExtension = defaultGcseExtension =
+            extId;
+        return true;
+      }
+    }
+  });
+}
+
+/**
+ * Try to refresh the SSH cert if it's old.
+ *
+ * If the request works, we'll wait for it, otherwise we'll continue on even if
+ * we received an error.  Messages will be logged, but we won't throw errors.
+ *
+ * @param {!hterm.Terminal.IO} io Handle to the terminal for showing status.
+ * @return {!Promise<boolean>} Resolve true if certificate is up-to-date.
+ */
+async function skeRefresh(io) {
+  io.print(nassh.msg('SSH_CERT_CHECK_START'));
+
+  let result;
+  try {
+    result = /** @type {!skeResponse} */ (await nassh.runtimeSendMessage(
+        defaultSkeExtension, {
+          type: 'cert_status_request',
+          slot: gnubbySlot.CORP_NORMAL_CERT_SLOT,
+        }));
+  } catch (e) {
+    io.println(nassh.msg('SSH_CERT_CHECK_ERROR', [e]));
+    return false;
+  }
+
+  const now = new Date().getTime() / 1000;
+
+  // If no certificate exists at all, we still want to refresh, so rewrite the
+  // message as if it was a valid expire of right now.
+  if (result.type === 'error_response' &&
+      result.errorReason === gnubbyErrReason.GNUBBY_CERT_NOT_FOUND) {
+    result.type = 'cert_status_response';
+    result.expiry = now;
+  }
+
+  if (result.type !== 'error_response') {
+    // Refresh the certificate if it expires in the next hour.
+    const hoursLeft = Math.floor((result.expiry - now) / 60 / 60);
+    io.println(nassh.msg('SSH_CERT_CHECK_RESULT', [hoursLeft]));
+    if (hoursLeft < 1) {
+      io.showOverlay(nassh.msg('SSH_CERT_CHECK_REFRESH'));
+      result = /** @type {!skeResponse} */ (await nassh.runtimeSendMessage(
+          defaultSkeExtension, {
+            type: 'get_new_cert_request',
+            slot: gnubbySlot.CORP_NORMAL_CERT_SLOT,
+          }));
+      // Fall thru.
+    }
+  }
+
+  if (result.type === 'error_response') {
+    io.println(nassh.msg(
+        'SSH_CERT_CHECK_ERROR',
+        [`${result.errorReason} ${result.errorDetail}`]));
+    return false;
+  }
+
+  return true;
+}
+
+/**
  * The default extension id for talking to the gnubby.
  *
  * Users can override this if needed on a per-connection basis, but probing
@@ -118,7 +276,12 @@ function findGcseExtension() {
  * @param {!hterm.Terminal.IO} io Handle to the terminal for showing status.
  * @return {!Promise<void>} Resolve once things are in sync.
  */
-export function gcseRefreshCert(io) {
+export async function gcseRefreshCert(io) {
+  if (defaultGcseExtension === defaultSkeExtension) {
+    await skeRefresh(io);
+    return;
+  }
+
   io.print(nassh.msg('SSH_CERT_CHECK_START'));
   return nassh.runtimeSendMessage(defaultGcseExtension,
                                   {'action': 'certificate_expiry'})
@@ -157,7 +320,10 @@ export function gcseRefreshCert(io) {
  * This could take time to resolve, so do it as part of start up.
  * It resolves using promises in the background, so this is OK.
  */
-lib.registerInit('goog init', () => {
-  findGnubbyExtension();
-  findGcseExtension();
+lib.registerInit('goog init', async () => {
+  const ske = await findSkeExtension();
+  if (ske !== true) {
+    findGnubbyExtension();
+    findGcseExtension();
+  }
 });
