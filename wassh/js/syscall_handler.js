@@ -18,10 +18,15 @@ import * as VFS from './vfs.js';
 const kNanosecToMillisec = 1000000;
 
 class Tty extends VFS.FileHandle {
-  constructor(term) {
+  constructor(term, handler) {
     super('/dev/tty', WASI.filetype.CHARACTER_DEVICE);
     this.term = term;
+    this.handler = handler;
     this.td = new TextDecoder();
+    // TODO(vapier): Make this into a stream.
+    this.data = new Uint8Array();
+    this.term.io.onVTKeystroke = this.term.io.sendString =
+        this.onData_.bind(this);
   }
 
   /** @override */
@@ -34,8 +39,29 @@ class Tty extends VFS.FileHandle {
 
   /** @override */
   write(data) {
-    this.term.innerText += this.td.decode(data, {stream: true});
+    this.term.io.print(this.td.decode(data, {stream: true}));
     return {nwritten: data.length};
+  }
+
+  /** @override */
+  read(length) {
+    const buf = Array.from(this.data.slice(0, length));
+    this.data = this.data.subarray(length);
+    return {buf};
+  }
+
+  /** @override */
+  onData_(str) {
+    const te = new TextEncoder();
+    const data = te.encode(str);
+    const u8 = new Uint8Array(data);
+    const newData = new Uint8Array(this.data.length + u8.length);
+    newData.set(this.data);
+    newData.set(u8, this.data.length);
+    this.data = newData;
+    if (this.handler.notify_) {
+      this.handler.notify_();
+    }
   }
 }
 
@@ -53,8 +79,9 @@ export class DirectWasiPreview1 extends SyscallHandler.DirectWasiPreview1 {
  * These may be asynchronous.
  */
 export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
-  constructor(...args) {
-    super(...args);
+  constructor({term} = {}) {
+    super();
+    this.term_ = term;
     this.notify_ = null;
     this.vfs = new VFS.VFS({stdio: false});
     this.socketTcpRecv_ = null;
@@ -63,7 +90,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   }
 
   async init() {
-    const tty = new Tty(document.getElementById('terminal'));
+    const tty = new Tty(this.term_, this);
     this.vfs.initStdio(tty);
 
     const root = new VFS.DirectoryHandler('/');
@@ -348,7 +375,8 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
           } else if (handle.filetype === WASI.filetype.REGULAR_FILE) {
             // If it's a regular file, return right away.
             events.push(eventBase);
-          } else if (handle instanceof Sockets.Socket) {
+          } else if (handle instanceof Sockets.Socket ||
+                     handle instanceof Tty) {
             // If it's a socket, see if any data is available.
             if (subscription.tag === WASI.eventtype.FD_READ &&
                 handle.data.length) {
@@ -474,11 +502,41 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
    * @return {{pass: string}} The user input.
    */
   async handle_readpassphrase(prompt, max_len, echo) {
-    const fh = this.vfs.getFileHandle(1);
-    const te = new TextEncoder();
-    fh.write(te.encode(prompt));
-    // TODO(vapier): Connect this to the terminal's secure input.  See nassh's
-    // secureInput_() API for an example.
-    return {pass: 'yes'};
+    this.term_.io.print(prompt);
+    let pass = '';
+    const node = document.createElement('p');
+    node.textContent = prompt;
+    node.style.whiteSpace = 'pre-wrap';
+    node.style.fontWeight = 'bold';
+    node.style.fontSize = 'larger';
+    const io = this.term_.io.push();
+    io.println(prompt);
+    this.term_.showOverlay(node, null);
+    io.sendString = (str) => {
+      pass += str;
+    };
+    return new Promise((resolve) => {
+      io.onVTKeystroke = (str) => {
+        switch (str) {
+          case '\x7f':
+          case '\x08':
+            pass = pass.slice(0, -1);
+            break;
+          case '\n':
+          case '\r':
+            resolve({pass});
+            io.hideOverlay();
+            io.pop();
+            if (echo) {
+              this.term_.io.print(pass);
+            }
+            this.term_.io.println('');
+            break;
+          default:
+            pass += str;
+            break;
+        }
+      };
+    });
   }
 }

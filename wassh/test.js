@@ -16,6 +16,9 @@ window.onload = async function() {
   window.term_ = term;
 };
 
+/**
+ * Callback by terminal init.
+ */
 const run = async function() {
   const io = this.io.push();
 
@@ -55,7 +58,9 @@ const run = async function() {
     ];
     proc = new Process.Foreground(settings);
   } else {
-    settings.handler = new WasshSyscallHandler.RemoteReceiverWasiPreview1();
+    settings.handler = new WasshSyscallHandler.RemoteReceiverWasiPreview1({
+      term: this,
+    });
     await settings.handler.init();
     proc = new Process.Background('./js/worker.js', settings);
   }
