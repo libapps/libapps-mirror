@@ -25,11 +25,17 @@ PROGS := $(notdir $(C_SRCS:.c=.wasm) $(CXX_SRCS:.cc=.wasm))
 
 all: $(foreach prog,$(PROGS),$(OUTPUT)/$(prog))
 
-%.wasm: %.c
-	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+$(WASI_SDK):
+	../../ssh_client/third_party/wasi-sdk/build
+	../../ssh_client/wassh-libc-sup/build
 
-%.wasm: %.cc
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+$(CC) $(CXX): $(WASI_SDK)
+
+%.wasm: %.c $(CC)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $< -o $@ $(LDLIBS)
+
+%.wasm: %.cc $(CXX)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) $< -o $@ $(LDLIBS)
 
 clean:
 	rm -f $(OUTPUT)/*.wasm
