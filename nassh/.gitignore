@@ -17,3 +17,9 @@ js/*.rollup.js
 
 # npm related dirs.
 node_modules
+
+# wassh related dev paths.
+/nassh
+/ssh_client
+/wasi-js-bindings
+/wassh

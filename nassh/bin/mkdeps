@@ -63,6 +63,27 @@ def mkdeps(rollup=True):
     if rollup:
         libdot.node.run(['rollup', '-c'], cwd=nassh.DIR)
 
+    # Hack up the local tree for wassh integration.
+    # NB: We can't create loops or deep directory trees as loading unpacked
+    # extensions will make Chrome walk the entire tree and be very slow.
+
+    wjb_src = nassh.LIBAPPS_DIR / 'wasi-js-bindings'
+    wjb_dst = nassh.DIR / 'wasi-js-bindings'
+    wjb_dst.mkdir(exist_ok=True)
+    for path in ('index.js', 'js'):
+        libdot.symlink(wjb_src / path, wjb_dst / path)
+
+    wassh_src = nassh.LIBAPPS_DIR / 'wassh'
+    wassh_dst = nassh.DIR / 'wassh'
+    wassh_dst.mkdir(exist_ok=True)
+    for path in ('js', 'test.html', 'test.js', 'test.wasm'):
+        libdot.symlink(wassh_src / path, wassh_dst / path)
+
+    wasm_src = nassh.LIBAPPS_DIR / 'ssh_client' / 'output'
+    wasm_dst = nassh.DIR / 'ssh_client' / 'output'
+    wasm_dst.mkdir(parents=True, exist_ok=True)
+    libdot.symlink(wasm_src / 'plugin', wasm_dst / 'plugin')
+
 
 def concat_third_party_dir(third_party_dir):
     """Concatenate all licenses of |third_party_dir| bundles."""
