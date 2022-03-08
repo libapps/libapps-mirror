@@ -21,8 +21,7 @@ hterm_test_resources.js: Test-specific resources.
 """
 
 import argparse
-import glob
-import os
+from pathlib import Path
 import sys
 
 import hterm
@@ -34,8 +33,8 @@ def get_parser():
     parser = libdot.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('-o', '--output',
-                        default=os.path.join(hterm.DIR, 'dist', 'js'),
+    parser.add_argument('-o', '--output', type=Path,
+                        default=hterm.DIR / 'dist' / 'js',
                         help='Output directory. (default: %(default)s)')
     parser.add_argument('dist_files', nargs='*',
                         help='Only process these concat files.')
@@ -48,16 +47,14 @@ def main(argv):
     opts = parser.parse_args(argv)
 
     if not opts.dist_files:
-        opts.dist_files = glob.glob(
-            os.path.join(hterm.DIR, 'concat', '*.concat'))
+        opts.dist_files = list((hterm.DIR / 'concat').glob('*.concat'))
     else:
-        opts.dist_files = [os.path.abspath(x) for x in opts.dist_files]
+        opts.dist_files = [x.resolve() for x in opts.dist_files]
 
-    os.makedirs(opts.output, exist_ok=True)
+    opts.output.mkdir(parents=True, exist_ok=True)
     for concat_file in opts.dist_files:
-        name = os.path.splitext(os.path.basename(concat_file))[0]
         libdot.concat.concat(concat_file,
-                             os.path.join(opts.output, '%s.js' % name))
+                             opts.output / f'{concat_file.stem}.js')
 
 
 if __name__ == '__main__':

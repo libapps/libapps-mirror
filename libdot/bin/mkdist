@@ -6,7 +6,7 @@
 """Build the library deliverables."""
 
 import argparse
-import os
+from pathlib import Path
 import sys
 
 import libdot
@@ -17,8 +17,8 @@ def get_parser():
     parser = libdot.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('-o', '--output',
-                        default=os.path.join(libdot.DIR, 'js'),
+    parser.add_argument('-o', '--output', type=Path,
+                        default=libdot.DIR / 'js',
                         help='Output directory. (default: %(default)s)')
     return parser
 
@@ -29,10 +29,10 @@ def main(argv):
     opts = parser.parse_args(argv)
 
     # TODO(vapier): Move more logic out of package.json here, maybe?
-    os.makedirs(opts.output, exist_ok=True)
+    opts.output.mkdir(parents=True, exist_ok=True)
     libdot.concat.concat(
-        os.path.join(libdot.DIR, 'concat', 'libdot.concat'),
-        os.path.join(opts.output, 'libdot.js'))
+        libdot.DIR / 'concat' / 'libdot.concat',
+        opts.output / 'libdot.js')
 
 
 if __name__ == '__main__':

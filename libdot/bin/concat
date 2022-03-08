@@ -67,6 +67,7 @@ import base64
 import datetime
 import logging
 import os
+from pathlib import Path
 import re
 import subprocess
 import sys
@@ -133,14 +134,14 @@ def append_resource(name, mime, resource, header_files):
         source = arg
 
         if source.startswith('.'):
-            source = os.path.realpath(source)
+            source = Path(source).resolve()
         else:
-            source = os.path.join(libdot.LIBAPPS_DIR, source)
+            source = libdot.LIBAPPS_DIR / source
 
+        # NB: Use os.path.relpath as it's diff than Path.relative_to.
         header_files.append(os.path.relpath(source, libdot.LIBAPPS_DIR))
 
-        with open(source, 'rb') as f:
-            data = f.read()
+        data = source.read_bytes()
 
         if 'base64' in mime.split(';'):
             data = base64.b64encode(data)
@@ -172,15 +173,15 @@ def append_resource(name, mime, resource, header_files):
 
         key = argv[0]
         if len(argv) == 1:
-            path = '../doc/ChangeLog.md'
+            path = Path('../doc/ChangeLog.md')
         elif len(argv) == 2:
-            path = argv[1]
+            path = Path(argv[1])
         else:
             raise ValueError('Too many args to changelog: %s' % (arg,))
 
         # The first line of a changelog should look like:
         # # 0.8.44.1, 2018-06-22, Extension startup fix.
-        with open(path, encoding='utf-8') as f:
+        with path.open(encoding='utf-8') as f:
             line = f.readline()
         line = line.lstrip('#')
 
@@ -223,12 +224,13 @@ def append_resource(name, mime, resource, header_files):
         if len(argv) != 2:
             raise ValueError('Too many args to head: %s' % (arg,))
         count, path = argv
+        path = Path(path)
 
         # We can expand this if need comes up.
         if count != '-1':
             raise ValueError('Only count==-1 supported currently')
 
-        with open(path, encoding='utf-8') as f:
+        with path.open(encoding='utf-8') as f:
             data = f.readline().strip()
         logging.info('  -> %s', data)
 
@@ -240,8 +242,9 @@ def append_resource(name, mime, resource, header_files):
         if len(argv) != 2:
             raise ValueError('Too many args to grep: %s' % (arg,))
         regex, path = argv
+        path = Path(path)
 
-        with open(path, encoding='utf-8') as f:
+        with path.open(encoding='utf-8') as f:
             lines = [x for x in f.readlines() if re.match(regex, x)]
         data = ''.join(lines)
         logging.info('  -> %s ...', data[:80])
@@ -276,14 +279,14 @@ def process_concat_line(line, seen_files, header_files):
 
     mode, arg = line.split(' ', 1)
     if mode == '@file':
-        path = os.path.realpath(os.path.join(libdot.LIBAPPS_DIR, arg))
+        path = (libdot.LIBAPPS_DIR / arg).resolve()
         if path in seen_files:
             return ''
         seen_files.add(path)
         header_files.append(arg)
 
         ret += '// SOURCE FILE: %s\n' % (arg,)
-        with open(path, encoding='utf-8') as f:
+        with path.open(encoding='utf-8') as f:
             lines = f.readlines()
 
             # Strip out the 'use strict' directive as we add it ourselves and
@@ -313,12 +316,12 @@ def process_concat_line(line, seen_files, header_files):
 
 def process_concat_file(path, seen_files, header_files):
     """Process a concat file specified by absolute path."""
-    oldwd = os.getcwd()
-    os.chdir(os.path.abspath(os.path.dirname(path)))
+    oldwd = Path.cwd()
+    os.chdir(path.resolve().parent)
 
     ret = ''
 
-    with open(path, encoding='utf-8') as f:
+    with path.open(encoding='utf-8') as f:
         lines = f.readlines()
         i = 0
         while i < len(lines):
@@ -339,7 +342,7 @@ def process_concat_file(path, seen_files, header_files):
             if line.startswith('@include '):
                 _, inc_path = line.split(' ', 1)
                 logging.info(inc_path)
-                inc_path = os.path.join(libdot.LIBAPPS_DIR, inc_path)
+                inc_path = libdot.LIBAPPS_DIR / inc_path
                 ret += process_concat_file(inc_path, seen_files, header_files)
             else:
                 ret += process_concat_line(line, seen_files, header_files)
@@ -371,9 +374,9 @@ def get_parser():
     parser = libdot.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('-i', '--input-from', required=True,
+    parser.add_argument('-i', '--input-from', required=True, type=Path,
                         help='File containing a list of files to concatenate.')
-    parser.add_argument('-o', '--output',
+    parser.add_argument('-o', '--output', type=Path,
                         help='The output file.')
     return parser
 
@@ -383,8 +386,8 @@ def main(argv):
     parser = get_parser()
     opts = parser.parse_args(argv)
 
-    input_from = os.path.abspath(opts.input_from)
-    output_to = os.path.abspath(opts.output)
+    input_from = opts.input_from.resolve()
+    output_to = opts.output.resolve()
     concat(input_from, output_to)
 
 

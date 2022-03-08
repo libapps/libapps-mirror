@@ -8,7 +8,6 @@
 import html
 import json
 import logging
-import os
 import re
 import sys
 
@@ -16,8 +15,8 @@ import nassh  # pylint: disable=wrong-import-order
 import libdot
 
 
-LICENSE_FILE = os.path.join(nassh.DIR, 'html', 'licenses.html')
-LICENSE_TEMPLATE = os.path.join(nassh.DIR, 'html', 'licenses.html.in')
+LICENSE_FILE = nassh.DIR / 'html' / 'licenses.html'
+LICENSE_TEMPLATE = nassh.DIR / 'html' / 'licenses.html.in'
 
 # Make sure we keep a handle on what licenses we ship.  This is not the list of
 # licenses that are actually used, just all the ones that we're OK with using.
@@ -59,8 +58,8 @@ assert not BANNED_LICENSES & ALLOWED_LICENSES
 
 def mkdeps(rollup=True):
     """Build the dependencies."""
-    libdot.concat.concat(os.path.join(nassh.DIR, 'concat', 'nassh_deps.concat'),
-                         os.path.join(nassh.DIR, 'js', 'nassh_deps.concat.js'))
+    libdot.concat.concat(nassh.DIR / 'concat' / 'nassh_deps.concat',
+                         nassh.DIR / 'js' / 'nassh_deps.concat.js')
     if rollup:
         libdot.node.run(['rollup', '-c'], cwd=nassh.DIR)
 
@@ -68,14 +67,14 @@ def mkdeps(rollup=True):
 def concat_third_party_dir(third_party_dir):
     """Concatenate all licenses of |third_party_dir| bundles."""
     ret = {}
-    for package in os.listdir(third_party_dir):
+    for package_dir in third_party_dir.glob('*'):
         entry = {}
         version = None
 
-        package_dir = os.path.join(third_party_dir, package)
+        package = package_dir.name
 
-        metadata_file = os.path.join(package_dir, 'METADATA')
-        with open(metadata_file, 'r', encoding='utf-8') as fp:
+        metadata_file = package_dir / 'METADATA'
+        with metadata_file.open(encoding='utf-8') as fp:
             lines = fp.readlines()
             for i, line in enumerate(lines):
                 if 'HOMEPAGE' in line:
@@ -86,12 +85,11 @@ def concat_third_party_dir(third_party_dir):
                     version = m.group(1)
 
         for path in ('LICENSE', 'LICENSE.md'):
-            license_file = os.path.join(package_dir, path)
-            if not os.path.exists(license_file):
+            license_file = package_dir / path
+            if not license_file.exists():
                 continue
             logging.debug('%s: loading %s', package, license_file)
-            with open(license_file, 'r', encoding='utf-8') as fp:
-                entry['data'] = fp.read().strip()
+            entry['data'] = license_file.read_text(encoding='utf-8')
             break
         else:
             raise ValueError('Unable to locate LICENSE for %s' % (package,))
@@ -104,9 +102,9 @@ def concat_third_party_dir(third_party_dir):
 def concat_local_deps():
     """Concatenate all licenses of third_party/ bundles."""
     ret = {}
-    ret.update(concat_third_party_dir(os.path.join(nassh.DIR, 'third_party')))
+    ret.update(concat_third_party_dir(nassh.DIR / 'third_party'))
     ret.update(concat_third_party_dir(
-        os.path.join(libdot.LIBAPPS_DIR, 'ssh_client', 'third_party')))
+        libdot.LIBAPPS_DIR / 'ssh_client' / 'third_party'))
     return ret
 
 
@@ -191,12 +189,12 @@ def main(argv):
         logging.info('Concatenating licenses...')
         # We use nassh's package.json, but reuse libapps' node_modules.
         libdot.symlink(
-            os.path.join(libdot.LIBAPPS_DIR, 'node_modules'),
-            os.path.join(nassh.DIR, 'node_modules'))
+            libdot.LIBAPPS_DIR / 'node_modules',
+            nassh.DIR / 'node_modules')
         try:
             concat_licenses()
         finally:
-            libdot.unlink(os.path.join(nassh.DIR, 'node_modules'))
+            libdot.unlink(nassh.DIR / 'node_modules')
 
 
 if __name__ == '__main__':
