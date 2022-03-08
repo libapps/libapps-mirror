@@ -27,6 +27,8 @@ describe('nassh_goog_metrics_reporter_tests.js', () => {
     beforeEach(function() {
       reporter = new GoogMetricsReporter(this.terminalIO, '', this.localPrefs);
       reporter.metadata = {
+        start_time_ms: 0,
+        host_name: '',
         client_corp_status: '',
         client_os: '',
         connection_phase: '',
@@ -34,11 +36,12 @@ describe('nassh_goog_metrics_reporter_tests.js', () => {
         infra_provider: '',
         ssh_client: '',
       };
+      reporter.firstReportIsSent = true;
     });
 
     it('increments underflow bucket for sample less than lower bound', () => {
-      // Lower boundary is 0, inclusive.
-      reporter.reportLatency(0);
+      // Lower boundary is 10, inclusive.
+      reporter.reportLatency(10);
       reporter.reportLatency(-0.1);
       reporter.reportLatency(-1);
       reporter.reportLatency(-100);
@@ -56,20 +59,20 @@ describe('nassh_goog_metrics_reporter_tests.js', () => {
     });
 
     it('increments bucket array for sample within bounds', () => {
-      reporter.reportLatency(-1); // out of bounds
-      reporter.reportLatency(10); // boundaries[1] = [10, 15)
-      reporter.reportLatency(13); // boundaries[1] = [10, 15)
-      reporter.reportLatency(114); // boundaries[7] = [114, 171)
-      reporter.reportLatency(150); // boundaries[7] = [114, 171)
+      reporter.reportLatency(9); // out of bounds
+      reporter.reportLatency(10); // boundaries[0] = [10, 15)
+      reporter.reportLatency(13); // boundaries[0] = [10, 15)
+      reporter.reportLatency(114); // boundaries[6] = [114, 171)
+      reporter.reportLatency(150); // boundaries[6] = [114, 171)
       reporter.reportLatency(4379); // out of bounds
 
-      assert.equal(2, reporter.distribution.buckets[1]);
-      assert.equal(2, reporter.distribution.buckets[7]);
+      assert.equal(2, reporter.distribution.buckets[0]);
+      assert.equal(2, reporter.distribution.buckets[6]);
     });
 
     it('updates count', () => {
       reporter.reportLatency(-1);
-      reporter.reportLatency(0);
+      reporter.reportLatency(10);
       reporter.reportLatency(4379);
       reporter.reportLatency(5000);
 
@@ -147,6 +150,71 @@ describe('nassh_goog_metrics_reporter_tests.js', () => {
     });
   });
 
+  describe('GoogMetricsReporter.sendDistributionOnATimer_', () => {
+
+    it('sets timer id', function() {
+      const reporter =
+          new GoogMetricsReporter(this.terminalIO, '', this.localPrefs);
+      assert.isNull(reporter.distributionTimerId);
+
+      reporter.sendDistributionOnATimer_();
+      assert.isNotNull(reporter.distributionTimerId);
+    });
+
+    it('throws error if timer already exists', function() {
+      const reporter =
+          new GoogMetricsReporter(this.terminalIO, '', this.localPrefs);
+      reporter.distributionTimerId = 100;
+
+      assert.throws(
+        () => reporter.sendDistributionOnATimer_(),
+        'Attempt to start a timer when one already exists');
+    });
+  });
+
+  describe('GoogMetricsReporter.buildMetricsPayload_', () => {
+    it('sets distribution stats correctly', function() {
+      const reporter =
+          new GoogMetricsReporter(this.terminalIO, '', this.localPrefs);
+      // Needed to build payload.
+      reporter.metadata = {
+        host_name: 'host_name',
+        ssh_client: 'ssh_client',
+        host_zone: 'host_zone',
+        connection_phase: 'connection_phase',
+        client_os: 'client_os',
+        infra_provider: 'infra_provider',
+        client_corp_status: 'client_corp_status',
+        start_time_ms: 0,
+      };
+
+      // Expected
+      reporter.distribution.addSample_(0); // underflow bucket
+      reporter.distribution.addSample_(10); // bucket 1
+      reporter.distribution.addSample_(5000); // overflow bucket
+      const expectedDistributionValue = {
+        count: 3,
+        mean: 1670,
+        sum_of_squared_deviation: 16633400,
+        minimum: 0,
+        maximum: 5000,
+        exponential_buckets: {
+          num_finite_buckets: 15,
+          growth_factor: 1.5,
+          scale: 10,
+        },
+        bucket_count: [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      };
+
+      // Actual
+      const payload = JSON.parse(reporter.buildMetricsPayload_());
+      const metrics_collection = payload['payload']['metrics_collection'];
+      const data = metrics_collection['metrics_data_set']['data'];
+
+      assert.deepEqual(data['distribution_value'], expectedDistributionValue);
+    });
+  });
+
   describe('Distribution.findInsertionIndex', () => {
     let distribution;
 
@@ -155,22 +223,22 @@ describe('nassh_goog_metrics_reporter_tests.js', () => {
     });
 
     it('finds index for value equal to first element', () => {
-      assert.equal(0, distribution.findInsertionIndex_(0));
+      assert.equal(0, distribution.findInsertionIndex_(10));
     });
 
     it('finds index for value equal to last element', () => {
-      assert.equal(15, distribution.findInsertionIndex_(2919));
+      assert.equal(14, distribution.findInsertionIndex_(2919));
     });
 
     it('finds index for value equal to middlemost element', () => {
-      assert.equal(8, distribution.findInsertionIndex_(171));
+      assert.equal(7, distribution.findInsertionIndex_(171));
     });
 
     it('finds insertion index for value not equal to a element', () => {
-      assert.equal(0, distribution.findInsertionIndex_(1));
-      assert.equal(14, distribution.findInsertionIndex_(2918));
-      assert.equal(7, distribution.findInsertionIndex_(170));
-      assert.equal(8, distribution.findInsertionIndex_(172));
+      assert.equal(0, distribution.findInsertionIndex_(11));
+      assert.equal(13, distribution.findInsertionIndex_(2918));
+      assert.equal(6, distribution.findInsertionIndex_(170));
+      assert.equal(7, distribution.findInsertionIndex_(172));
     });
   });
 });

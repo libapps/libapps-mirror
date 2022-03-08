@@ -11,15 +11,17 @@
 import {LocalPreferenceManager} from './nassh_preference_manager.js';
 
 /**
- * Host and client metadata.
+ * Host and client metadata attached to latency values.
  *
  * @typedef {{
+ *     host_name: string,
  *     ssh_client: string,
  *     host_zone: string,
  *     connection_phase: string,
  *     client_os: string,
  *     infra_provider: string,
  *     client_corp_status: string,
+ *     start_time_ms: number,
  * }}
  */
 let Metadata;
@@ -72,6 +74,28 @@ const CLOUDTOP_API_ORIGIN =
 const UBERPROXY_DEBUG_ORIGIN = 'https://uberproxy-debug.corp.google.com/*';
 
 /**
+ * Endpoint used to get metrics into storage.
+ *
+ * @const {string}
+ */
+const MON_API_INSERT = 'https://prodxmon-wbl.corp.googleapis.com/v1:insert';
+
+/**
+ * API key for MON_API_INSERT.
+ *
+ * @const {string}
+ */
+const MON_API_KEY = 'AIzaSyDolxpAuGd-B4aiNmQVQ9XHeXc1lMEYsTs';
+
+/**
+ * Frequency at which to send data. It is ideal for this value to be greater
+ * than or equal to the value here: http://shortn/_uGVlD5zjpS.
+ *
+ * @const {number}
+ */
+const INSERT_FREQUENCY_MS = 30000;
+
+/**
  * Reports Google session metrics.
  */
 export class GoogMetricsReporter {
@@ -105,6 +129,13 @@ export class GoogMetricsReporter {
     this.hostname = hostname;
 
     this.localPrefs = localPrefs;
+
+    /**
+     * Id of timer used to send distributions periodically.
+     *
+     * @type {number|null}
+     */
+     this.distributionTimerId = null;
   }
 
   /**
@@ -200,6 +231,9 @@ export class GoogMetricsReporter {
 
   /**
    * Gathers all metadata associated with the host and client.
+   *
+   * Note: Append timestamp to host_name to maximize uniqueness when multiple
+   * connections to the same host exist simultaneouly.
    */
   async initClientMetadata() {
     if (!await this.checkChromePermissions()) {
@@ -208,7 +242,10 @@ export class GoogMetricsReporter {
     }
 
     if (this.getInfraProvider_() === 'cloud') {
+      const timestamp = Date.now();
       this.metadata = {
+        start_time_ms: timestamp,
+        host_name: `${this.hostname}_${timestamp}`,
         host_zone: await this.getHostZone_(),
         client_corp_status: await this.getClientCorpStatus_(),
         client_os: hterm.os,
@@ -226,12 +263,157 @@ export class GoogMetricsReporter {
    *
    * @param {number} latency Value to add to distribution.
    */
-  reportLatency(latency) {
+  async reportLatency(latency) {
     if (this.metadata === null) {
       return;
     }
-    this.distribution.addSample_(latency);
-    // TODO(eizihirwe): Once metadata is ready, send samples every 30s.
+
+    if (this.firstReportIsSent) {
+      this.distribution.addSample_(latency);
+    } else {
+      // First report has not been sent. Add sample and send immediately.
+      this.distribution.addSample_(latency);
+      const distritutionInserted = await this.sendDistribution_();
+      if (distritutionInserted) {
+        this.firstReportIsSent = true;
+        this.metadata.connection_phase = this.getConnectionPhase_();
+        try {
+          this.sendDistributionOnATimer_();
+        } catch (error) {
+          console.error(`Sending report failed: ${error}`);
+        }
+      }
+    }
+  }
+
+  /**
+   * Sends payload to metric storage.
+   *
+   * @return {!Promise<boolean>} True if request was successful.
+   */
+  async sendDistribution_() {
+    try {
+      const response = await fetch(MON_API_INSERT, {
+        method: 'POST',
+        body: this.buildMetricsPayload_(),
+        headers: {
+          'X-Goog-Api-Key': MON_API_KEY,
+        },
+      });
+      const message = (await response.json())?.['responseStatus']?.['message'];
+      if (response.status === 200 && message === 'OK') {
+        return true;
+      }
+    } catch (error) {
+      console.error(`Sending report failed: ${error}`);
+    }
+    return false;
+  }
+
+  /**
+   * Calls this.sendDistribution_() based on this.INSERT_FREQUENCY_MS.
+   */
+  sendDistributionOnATimer_() {
+    if (!this.distributionTimerId) {
+      this.distributionTimerId = setInterval(() => {
+        this.sendDistribution_();
+      }, INSERT_FREQUENCY_MS);
+    } else {
+      throw new Error('Attempt to start a timer when one already exists.');
+    }
+  }
+
+  /**
+   * Build payload Object to send via go/monapi.
+   *
+   * @return {string} JSON string containing info from this.metadata and
+   *     this.distribution.
+   */
+  buildMetricsPayload_() {
+    return JSON.stringify({payload: {metrics_collection: {metrics_data_set: {
+      metric_name: '/corp/ssh/relay_latency',
+      stream_kind: 'CUMULATIVE',
+      value_type: 'DISTRIBUTION',
+      data: {
+        start_timestamp: this.getTimestampFromMs(this.metadata.start_time_ms),
+        end_timestamp: this.getTimestampFromMs(Date.now()),
+        distribution_value : {
+          count: this.distribution.count,
+          mean: this.distribution.mean,
+          sum_of_squared_deviation: this.distribution.sumOfSquaredDeviation,
+          minimum: this.distribution.min,
+          maximum: this.distribution.max,
+          exponential_buckets: {
+            num_finite_buckets: this.distribution.BOUNDARIES.length,
+            growth_factor: this.distribution.GROWTH_FACTOR,
+            scale: this.distribution.SCALE,
+          },
+          bucket_count : this.distribution.getBucketCounts_(),
+        },
+        field: [
+          {
+            name: 'ssh_client',
+            string_value: this.metadata.ssh_client,
+          },
+          {
+            name: 'host_zone',
+            string_value: this.metadata.host_zone,
+          },
+          {
+            name: 'client_os',
+            string_value: this.metadata.client_os,
+          },
+          {
+            name: 'connection_phase',
+            string_value: this.metadata.connection_phase,
+          },
+          {
+            name: 'infra_provider',
+            string_value: this.metadata.infra_provider,
+          },
+          {
+            name: 'client_corp_status',
+            string_value: this.metadata.client_corp_status,
+          },
+        ],
+      },
+    },
+    root_labels: [
+      {
+        key: 'service_name',
+        string_value: 'nassh',
+      },
+      {
+        key: 'host_name',
+        string_value: this.metadata.host_name,
+      },
+      {
+        key: 'proxy_zone',
+        string_value: 'atl',
+      },
+      {
+        key: 'corp_site',
+        string_value: '',
+      },
+      {
+        key: 'job_name',
+        string_value: '',
+      },
+    ]}}});
+  }
+
+  /**
+   * Converts milliseconds into a timestamp object.
+   *
+   * @param {number} timeMs Time in milliseconds.
+   * @return {{seconds: number, nanos: number}} Timestamp.
+   */
+  getTimestampFromMs(timeMs) {
+    const seconds = Math.trunc(timeMs / 1e3);
+    const nanos = (timeMs * 1e6) - (seconds * 1e9);
+    // Using 'seconds' and 'nanos' to match Timestamp proto and keep
+    // buildMetricsPayload_ as clean as possible. See http://shortn/_SmAbIQqKNM.
+    return {seconds, nanos};
   }
 
   /**
@@ -356,12 +538,23 @@ GoogMetricsReporter.prototype.PERMISSIONS_PROMPT =
 /**
  * Stores and manages latency data in the form of a distribution.
  * Based on this implementation of a distribution: http://shortn/_apyKoGGwAn.
+ * See http://shortn/_PfmqgQc0qq for more details on how underflow and overflow
+ * buckets are calculated.
+ *
+ * This implementation has a growth factor of 1.5 and scale of 10. See
+ * http://shortn/_OxkhhktSIe for how buckets are computed based on these values.
  */
 export class Distribution {
   constructor() {
+    /** @type {number} */
+    this.GROWTH_FACTOR = 1.5;
+
+    /** @type {number} */
+    this.SCALE = 10;
+
     /**
      * Bucket incremented when sample is less than lower bound.
-     * It's boundaries are (-inf, 0).
+     * It's boundaries are (-inf, 10).
      *
      * @type {number}
      */
@@ -376,13 +569,12 @@ export class Distribution {
     this.overflowBucket = 0;
 
     /**
-     * Each index is a bucket (i.e. this.BOUNDARIES[0] is [0, 10)).
+     * Each index is a bucket (i.e. this.BOUNDARIES[0] is [10, 15)).
      * Values computed here: http://shortn/_OxkhhktSIe.
      *
      * @const {!Array<number>}
      */
     this.BOUNDARIES = [
-      0,
       10,
       15,
       23,
@@ -409,11 +601,11 @@ export class Distribution {
 
     /**
      * Array where this.buckets[i] represents number of samples in bucket i.
-     * The number of buckets is 16 and computed here: http://shortn/_OxkhhktSIe.
+     * The number of buckets is 15 and computed here: http://shortn/_OxkhhktSIe.
      *
      * @type {!Array<number>}
      */
-    this.buckets = Array(16).fill(0);
+    this.buckets = Array(this.BOUNDARIES.length).fill(0);
 
     /**
      * Total number of samples in this.underflowBucket, this.overflowBucket, and
@@ -442,6 +634,16 @@ export class Distribution {
      * @type {number}
      */
     this.max = Number.MIN_SAFE_INTEGER;
+  }
+
+  /**
+   * Gets counts associated with each bucket.
+   *
+   * @return {!Array<number>} Array of all bucket counts including underflow and
+   *     overflow.
+   */
+  getBucketCounts_() {
+    return [this.underflowBucket].concat(this.buckets, [this.overflowBucket]);
   }
 
   /**
