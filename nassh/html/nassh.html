@@ -59,12 +59,7 @@
         height: 100%;
         width: 100%;
         overflow: hidden;
-        /* Set background to avoid flicker. First set black, then
-           $i18n{themeColor} placeholder. Terminal-SSH will substitute the value
-           from user prefs via TerminalSource::GetReplacements(), extension will
-           use black. */
         background-color: black;
-        background-color: $i18n{themeColor};
       }
 
       #terminal {
