@@ -7,11 +7,11 @@
 
 import datetime
 import fnmatch
-import glob
 import gzip
 import json
 import logging
 import os
+from pathlib import Path
 import re
 import shutil
 import sys
@@ -23,17 +23,17 @@ import libdot
 
 # List of files to be included in the zip file as globs.
 INCLUDE_PATTERNS = (
-    os.path.join('css', '*.css'),
-    os.path.join('fonts', '*.woff2'),
-    os.path.join('html', '*.html'),
-    os.path.join('images', '*', '*.png'),
-    os.path.join('images', 'mosh-*.png'),
-    os.path.join('js', '*.js'),
-    os.path.join('third_party', '*', '*.css'),
-    os.path.join('third_party', '*', '*.js'),
+    'css/*.css',
+    'fonts/*.woff2',
+    'html/*.html',
+    'images/*/*.png',
+    'images/mosh-*.png',
+    'js/*.js',
+    'third_party/*/*.css',
+    'third_party/*/*.js',
     '_locales',
     '_platform_specific',
-    os.path.join('plugin', '*'),
+    'plugin/*',
 )
 
 # List of files to be excluded from the zip as fnmatch globs.
@@ -41,23 +41,23 @@ EXCLUDE_PATTERNS = (
     '*_test.html',
     '*_test.js',
     '*_tests.js',
-    os.path.join('js', 'nassh_deps_rollup_shim.js'),
+    'js/nassh_deps_rollup_shim.js',
 )
 
 # List of additionall files to be excluded when building crosh archive.
 EXCLUDE_PATTERNS_CROSH = (
     'manifest.json',
-    os.path.join('html', 'nassh_background.html'),
-    os.path.join('js', 'nassh_background.js'),
-    os.path.join('plugin', 'mosh'),
-    os.path.join('plugin', 'pnacl-*'),
-    os.path.join('plugin', 'wasm*'),
-    os.path.join('images', '*', 'icon-fullsize.png'),
+    'html/nassh_background.html',
+    'js/nassh_background.js',
+    'plugin/mosh',
+    'plugin/pnacl-*',
+    'plugin/wasm*',
+    'images/*/icon-fullsize.png',
 )
 
 
-DIST_DIR = os.path.join(nassh.DIR, 'dist')
-TMP_DIR = os.path.join(DIST_DIR, 'tmp')
+DIST_DIR = nassh.DIR / 'dist'
+TMP_DIR = DIST_DIR / 'tmp'
 
 
 def minify_css(path):
@@ -66,8 +66,7 @@ def minify_css(path):
         ['csso', '-i', os.path.relpath(path, nassh.DIR), '--stat'],
         capture_output=True, cwd=nassh.DIR)
     logging.info(ret.stderr.strip().decode('utf-8'))
-    with open(path, 'wb') as fp:
-        fp.write(ret.stdout)
+    path.write_bytes(ret.stdout)
 
 
 def minify_js(path):
@@ -75,19 +74,18 @@ def minify_js(path):
     ret = libdot.node.run(
         ['terser', os.path.relpath(path, nassh.DIR), '--compress', '--mangle'],
         capture_output=True, cwd=nassh.DIR)
-    with open(path, 'wb') as fp:
-        fp.write(ret.stdout)
+    path.write_bytes(ret.stdout)
 
 
 def minify_json_data(data, path):
     """Write JSON |data| as minified output to |path|."""
-    with open(path, 'w', encoding='utf-8') as fp:
+    with path.open('w', encoding='utf-8') as fp:
         json.dump(data, fp, separators=(',', ':'), sort_keys=True)
 
 
 def minify_json(path):
     """Minify JSON |path| in place."""
-    with open(path, encoding='utf-8') as fp:
+    with path.open(encoding='utf-8') as fp:
         data = json.load(fp)
     minify_json_data(data, path)
 
@@ -95,19 +93,20 @@ def minify_json(path):
 def minify_translations(tmpdir):
     """Minimize translation files."""
     libdot.minify_translations.minify_many(
-        glob.glob(os.path.join(tmpdir, '_locales', '*', 'messages.json')), True)
+        (tmpdir / '_locales').glob('*/messages.json'), True)
 
 
 def minify(tmpdir):
     """Run various minification steps."""
     for root, _, files in os.walk(tmpdir):
+        root = Path(root)
         for name in [x for x in files if x != 'messages.json']:
-            path = os.path.join(root, name)
-            if name.endswith('.json'):
+            path = root / name
+            if name.suffix == '.json':
                 minify_json(path)
-            elif name.endswith('.css'):
+            elif name.suffix == '.css':
                 minify_css(path)
-            elif name.endswith('.js'):
+            elif name.suffix == '.js':
                 minify_js(path)
 
     minify_translations(tmpdir)
@@ -116,18 +115,19 @@ def minify(tmpdir):
 def gzip_all(tmpdir):
     """Run gzip on all files."""
     for root, _, files in os.walk(tmpdir):
+        root = Path(root)
         for name in files:
-            path = os.path.join(root, name)
-            with open(path, 'rb') as infp:
-                with gzip.open(path + '.gz', 'wb') as outfp:
+            path = root / name
+            with path.open('rb') as infp:
+                with gzip.open(f'{path}.gz', 'wb') as outfp:
                     shutil.copyfileobj(infp, outfp)
-            os.remove(path)
+            path.unlink()
 
 
 def copyfiles(tmpdir, extra_exclude=()):
     """Copy the files to |tmpdir| so we can minify/gzip them."""
     shutil.rmtree(tmpdir, ignore_errors=True)
-    os.makedirs(tmpdir, exist_ok=True)
+    tmpdir.mkdir(parents=True, exist_ok=True)
 
     def excluded(path):
         """See if |path| should be ignored."""
@@ -137,12 +137,12 @@ def copyfiles(tmpdir, extra_exclude=()):
         return False
 
     for inc in INCLUDE_PATTERNS:
-        for path in glob.glob(os.path.join(nassh.DIR, inc)):
-            subpath = os.path.relpath(path, nassh.DIR)
+        for path in nassh.DIR.glob(inc):
+            subpath = Path(os.path.relpath(path, nassh.DIR))
             if not excluded(subpath):
-                dst = os.path.join(tmpdir, subpath)
-                os.makedirs(os.path.dirname(dst), exist_ok=True)
-                if os.path.isdir(path):
+                dst = tmpdir / subpath
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                if path.is_dir():
                     shutil.copytree(path, dst)
                 else:
                     shutil.copy(path, dst)
@@ -160,9 +160,9 @@ def mkzip(stable: bool, archive_suffix: str,
       version_mangle: Callback to mangle the manifest's version field.
     """
     logging.info('Processing ...')
-    manifest = os.path.join(nassh.DIR, 'manifest.json')
+    manifest = nassh.DIR / 'manifest.json'
 
-    with open(manifest, encoding='utf-8') as fp:
+    with manifest.open(encoding='utf-8') as fp:
         data = json.load(fp)
 
     name = data['name']
@@ -203,29 +203,28 @@ def mkzip(stable: bool, archive_suffix: str,
 
     basename += archive_suffix + '-' + version
     zipfile = '%s.zip' % (basename,)
-    archive = os.path.join(DIST_DIR, zipfile)
+    archive = DIST_DIR / zipfile
 
     logging.info('Name: %s', _hack_localize(name))
     logging.info('Version: %s', version)
     logging.info('Archive: %s', zipfile)
 
-    tmpdir = os.path.join(TMP_DIR, basename)
+    tmpdir = TMP_DIR / basename
     copyfiles(tmpdir)
     minify_translations(tmpdir)
 
     if stable:
         # Point the icons to the stable version.
-        path = os.path.join(tmpdir, 'html', 'nassh.html')
-        if os.path.exists(path):
-            with open(path, 'r', encoding='utf-8') as fp:
-                html = re.sub(r'images/dev/', 'images/stable/', fp.read(),
-                              flags=re.M)
-            with open(path, 'w', encoding='utf-8') as fp:
-                fp.write(html)
+        path = tmpdir / 'html' / 'nassh.html'
+        if path.exists():
+            html = re.sub(r'images/dev/', 'images/stable/',
+                          path.read_text(encoding='utf-8'),
+                          flags=re.M)
+            path.write_text(html, encoding='utf-8')
 
     del data['key']
     del data['platforms']
-    minify_json_data(data, os.path.join(tmpdir, 'manifest.json'))
+    minify_json_data(data, tmpdir / 'manifest.json')
 
     libdot.unlink(archive)
     libdot.run(['zip', '-rq', os.path.relpath(archive, tmpdir), '.'],
@@ -238,19 +237,19 @@ def mkcrosh(enable_minify, enable_gzip):
 
     basename = 'crosh'
     zipfile = '%s.zip' % (basename,)
-    archive = os.path.join(DIST_DIR, zipfile)
+    archive = DIST_DIR / zipfile
     logging.info('Name: %s', basename)
     logging.info('Archive: %s', zipfile)
 
-    tmpdir = os.path.join(TMP_DIR, basename)
+    tmpdir = TMP_DIR / basename
     copyfiles(tmpdir, extra_exclude=EXCLUDE_PATTERNS_CROSH)
 
     # Copy over the Terminal project.
-    terminal = os.path.join(libdot.LIBAPPS_DIR, 'terminal')
+    terminal = libdot.LIBAPPS_DIR / 'terminal'
     for subdir in ('css', 'html', 'js'):
-        for path in glob.glob(os.path.join(terminal, subdir, '*')):
+        for path in (terminal / subdir).glob('*'):
             if not fnmatch.fnmatch(path, '*_test*'):
-                shutil.copy(path, os.path.join(tmpdir, subdir))
+                shutil.copy(path, tmpdir / subdir)
 
     if enable_minify:
         minify(tmpdir)
@@ -323,11 +322,11 @@ def main(argv):
     libdot.node_and_npm_setup()
 
     # Setup source & output paths.
-    os.makedirs(DIST_DIR, exist_ok=True)
-    os.makedirs(TMP_DIR, exist_ok=True)
+    DIST_DIR.mkdir(parents=True, exist_ok=True)
+    TMP_DIR.mkdir(parents=True, exist_ok=True)
 
     if opts.run_mkdeps:
-        libdot.run([os.path.join(nassh.BIN_DIR, 'mkdeps')])
+        libdot.run([str(nassh.BIN_DIR / 'mkdeps')])
 
     stamps = get_stamp()
     if not opts.crosh_only:
