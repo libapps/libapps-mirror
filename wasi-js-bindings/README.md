@@ -55,7 +55,7 @@ servicing the syscall requests.
 As [WASI] is still under development, we often require current browser runtimes.
 No attempt is made to provide backwards compatibility or transpiling.
 
-* [WASI SDK] 11.0
+* [WASI SDK] 12.0
 * [ES2020]
 * [Module workers](https://web.dev/module-workers/)
   * Chrome 80+
@@ -178,7 +178,7 @@ See the common [libapps HACK.md](../HACK.md) for details.
 [emscripten]: https://emscripten.org/
 [ES2020]: https://tc39.es/ecma262/
 [WASI]: https://wasi.dev/
-[WASI API]: https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md
+[WASI API]: https://github.com/WebAssembly/WASI/blob/a206794fea66118945a520f6e0af3754cc51860b/phases/snapshot/docs.md
 [WASI C library]: https://github.com/WebAssembly/wasi-libc
 [WASI SDK]: https://github.com/WebAssembly/wasi-sdk
 [WASM]: https://webassembly.org/
