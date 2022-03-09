@@ -12,6 +12,10 @@ ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 
 DEBUG=0
 
+# pnacl tries to use "python" instead of "python2".
+export PNACLPYTHON=python2
+python2 --version >/dev/null
+
 for i in $@; do
   case $i in
     "--debug")
