@@ -282,13 +282,10 @@ nassh.Stream.RelayCorpv4WS.prototype.reconnectTemplate_ =
  *     or reconnect already in progress.
  */
 nassh.Stream.RelayCorpv4WS.prototype.reconnect_ = function() {
-  if (!this.resume_ || this.connecting_) {
+  if (!this.resume_ || this.connecting_ || !this.sid_) {
     return false;
   }
 
-  if (!this.sid_) {
-    throw new Error('stream not yet connected');
-  }
   this.connecting_ = true;
 
   if (this.io_) {

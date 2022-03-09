@@ -235,4 +235,57 @@ it('RelayCorpv4WS basic', (done) => {
   }, 10);
 });
 
+/**
+ * Receive onSocketError() before completing connect.
+ */
+it('RelayCorpv4WS error in connect', () => {
+  // Initialize state.
+  const stream = new nassh.Stream.RelayCorpv4WS(100);
+  stream.connect_ = () => {};
+  let closeReason;
+  stream.close_ = (reason) => {
+    closeReason = reason;
+  };
+
+  // Start the connection, then get server error.
+  stream.asyncOpen({}, (result) => {});
+  stream.onSocketError_(/** @type {!Event} */ ({}));
+  assert.equal('server sent an error', closeReason);
+});
+
+/**
+ * Reconnect on dirty close.
+ */
+it('RelayCorpv4WS reconnect on dirty close', () => {
+  // Initialize state.
+  const stream = new nassh.Stream.RelayCorpv4WS(100);
+  stream.connect_ = () => {};
+  let closeReason;
+  stream.close_ = (reason) => {
+    closeReason = reason;
+  };
+  let reconnectCalled = false;
+  stream.reconnect_ = () => {
+    reconnectCalled = true;
+    return true;
+  };
+
+  // Start the connection.
+  stream.asyncOpen({}, (result) => {});
+
+  // Clean close - closes with no reconnect.
+  const e = /** @type {!CloseEvent} */(
+      {wasClean: true, code: 'foo', reason: 'bar'});
+  stream.onSocketClose_(e);
+  assert.isFalse(reconnectCalled);
+  assert.equal('server closed socket: [foo] bar', closeReason);
+
+  // Dirty close - reconnects.
+  e.wasClean = false;
+  closeReason = null;
+  stream.onSocketClose_(e);
+  assert.isTrue(reconnectCalled);
+  assert.isNull(closeReason);
+});
+
 });
