@@ -21,6 +21,7 @@ C_SOURCES := \
 	connect.c \
 	dup.c \
 	dup2.c \
+	err.c \
 	getsockopt.c \
 	setsockopt.c \
 	signal.c \
