@@ -113,8 +113,16 @@ export class SyscallLock {
     const te = new TextEncoder();
     /** @suppress {checkTypes} https://github.com/google/closure-compiler/issues/3701 */
     const str = JSON.stringify(obj, (key, value) => {
-      return (typeof value === 'bigint') ?
-          BIGINT_MAGIC + value.toString() : value;
+      switch (typeof value) {
+        case 'bigint':
+          return BIGINT_MAGIC + value.toString();
+        case 'object':
+          if (ArrayBuffer.isView(value)) {
+            return Array.from(value);
+          }
+        default:
+          return value;
+      }
     });
     // TODO(crbug.com/1012656): Chrome's encodeInto doesn't support shared array
     // buffers yet.
