@@ -341,7 +341,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       },
     };
     if (subscriptions.length === 1 && timeout !== undefined) {
-      const delay = timeout - Date.now();
+      const delay = timeout - BigInt(Date.now());
       if (delay > 0) {
         await sleep(delay);
       }
